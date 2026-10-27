@@ -1,0 +1,162 @@
+{
+ "id": "lem-sfb-normalized-kummer-reduction",
+ "kind": "statement",
+ "title": "Integral quotient reduction with normalized unit and positive Kummer target",
+ "statement": "Let l be a prime, T a scheme with l invertible in its global sections, and k the Kummer data of [def-sp-tower-class-systems]. There exist an integral quotient-system Reduction r [def-sp-tower-class-reduction], an R_l(T)-module system M [def-sp-tower-class-coefficients], an isomorphism from its underlying abelian system to the actual positive-exponent roots tower, an isomorphism from r applied to the integer unit to the quotient coefficient unit, and an isomorphism from r applied to the constant units system shifted by one to M shifted by two. The source comparison has adjunct integerGenerator; the target comparison has adjunct the positive Kummer connecting morphism of k, with the displayed exact-single and shift-addition comparisons in targetNormalization. No scalar extension, finite Chern comparison or tensor/Hom twist is asserted.",
+ "stmt_deps": [
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-reduction",
+  "def-sp-tower-class-coefficients"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), simultaneous integral reduction; expanded SmoothPurityTowerClasses proof, steps 3--7"
+ },
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-integral-unit-reduction] to the actual quotient ring system to obtain r, its integer comparison a and sourceNormalization.",
+   "uses": [
+    "lem-sfb-integral-unit-reduction",
+    "def-sp-tower-class-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), simultaneous integral reduction; expanded SmoothPurityTowerClasses proof, steps 3--7"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-normalized-kummer-target] to this same r and k to obtain M, i and the shifted units comparison b satisfying exactly targetNormalization.",
+   "uses": [
+    "lem-sfb-normalized-kummer-target"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), simultaneous integral reduction; expanded SmoothPurityTowerClasses proof, steps 3--7"
+   }
+  },
+  {
+   "text": "Pair the integer-unit normalization with the target normalization for the same r. This is the displayed existential tuple, without changing any comparison or sign.",
+   "uses": [
+    "def-sp-tower-class-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), simultaneous integral reduction; expanded SmoothPurityTowerClasses proof, steps 3--7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-unit-reduction",
+  "def-sp-tower-class-coefficients",
+  "lem-sfb-normalized-kummer-target",
+  "def-sp-tower-class-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), simultaneous integral reduction; expanded SmoothPurityTowerClasses proof, steps 3--7; G8: derive shift compatibility from the normalized adjunction and prove the shift-addition equation in Lean; the proved shifted-target assembly is in NormalizedKummerTarget for the single-file time limit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived reduction modulo l powers of the multiplicative units sheaf is the Kummer roots of unity in degree minus one, compatibly in the tower",
+   "results": "8 hits: restrictRootsOfUnity_coe_apply, mem_rootsOfUnity', mem_rootsOfUnity_prime_pow_mul_iff, mem_rootsOfUnity, mem_rootsOfUnity_iff_mem_nthRoots, modularCyclotomicCharacter.toFun_spec, modularCyclotomicCharacter.toFun, rootsOfUnity",
+   "date": "2026-10-27",
+   "verdict": "No match for this statement on actual ringed systems and its fixed comparison maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer sequence derived tensor quotient ring normalized first Chern class and tensor invertible line sheaf",
+   "results": "8 hits: CommRing.Pic.mk_tensor, Algebra.Extension.tensorCotangentInvFun, tensorKaehlerQuotKerSqEquiv, tensorKaehlerQuotKerSqEquiv_tmul_D, sectionOfRetractionKerToTensorAux, sectionOfRetractionKerToTensor, Algebra.H1Cotangent.δ, tensorKaehlerQuotKerSqEquiv_symm_tmul_D",
+   "date": "2026-10-27",
+   "verdict": "No corresponding theorem for these sheaf-system data and normalization equations."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_normalizedKummerReduction|finiteChernNormalization_of_normalized|nonempty_kummerLineTwisting",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No matching specialized theorem in Mathlib; the project definitions and generic categorical APIs are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceChernTwistExistence",
+  "date": "2026-10-27",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1): simultaneous integral reduction and Kummer identification of the target",
+   "via": [
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedKummerReduction",
+  "file": "lean/Sheaf/Paper/NormalizedKummerReduction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.exists_normalizedKummerReduction",
+  "statement": "theorem exists_normalizedKummerReduction (l : ℕ) [Fact l.Prime]\n    (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤))) (k : Kummer l T) :\n    (fun R : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1} ↦\n    ∃ (r : Reduction T R) (M : Systems T R)\n      (i : r.forget.F.obj M ≅ roots l T)\n      (a : r.derived.obj ((DerivedCategory.singleFunctor (Ab T) 0).obj (integers T)) ≅\n        unit T R)\n      (b : r.derived.obj (((DerivedCategory.singleFunctor (Ab T) 0).obj\n        (units T))⟦(1 : ℤ)⟧) ≅\n        ((DerivedCategory.singleFunctor (Systems T R) 0).obj M)⟦(2 : ℤ)⟧),\n      r.model.sourceNormalization a (integerGenerator T R r.forget) ∧\n      r.model.targetNormalization (ShortComplex.mk k.inclusion k.power k.zero)\n        k.exact b i) (Rrings l T)",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.DiagonalTraceChernTwistExistence",
+  "worker": "stage3",
+  "summary": "Separate a proper step of normalized integral reduction, scalar unit normalization, finite evaluation or line twisting; retain the simultaneous-system argument and fixed signs.",
+  "blueprint": "proof (1): simultaneous integral reduction and Kummer identification of the target",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "K-flat derived tensor on the ringed sequence topos; it does not replace the unit route."
+   },
+   {
+    "node": "lem-pur-torsion-sheaf-constant-module",
+    "why": "Uniqueness of the finite constant-quotient action makes the root comparison linear."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T012844-L-2340165",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261027T034652-L-3672577",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

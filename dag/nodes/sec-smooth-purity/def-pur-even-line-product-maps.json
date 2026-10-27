@@ -1,0 +1,222 @@
+{
+ "id": "def-pur-even-line-product-maps",
+ "kind": "definition",
+ "title": "Concrete positive Tate-line product and permutation maps",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the finite purity coefficient setting [def-pur-conventions], A=O_E/(varpi_E^n), n≥1, and a separated finite-type k-scheme Y. Use the standard iterated affine-line realization of affine spaces [def-sbc-affine-space], the shifted finite Tate line L_Y=A_Y(1)[2] [def-coefficient-twists-detailed], and its canonical pullback comparison [def-pur-affine-space-comparison]. Write Q_0(M)=M and Q_{r+1}(M)=Q_r(M)⊗M, so Q_r has r+1 factors. Put X_r=A_Y^{r+1}, p_r:X_r→Y, T_r=p_r^*Q_r(L_Y), and V_r=Rp_{r!}T_r using the finite constant-coefficient compact-support functor [def-compact-support-direct-image-detailed]. At r=0 use the normalized affine-line compactification; otherwise use the published chosen compactification. Let t:V_0→A_Y be the normalized integration [def-pur-affine-line-purity-comparison], transported by the canonical Tate pullback and unit comparisons.\nFor a,b≥0, split the coordinates of X_{a+b+1} into the first a+1 and last b+1 coordinates. These give a Cartesian square over Y. Use the canonical pullback/tensor comparison and tensor associators to identify the external product T_a⊠T_b with T_{a+b+1}. It has bounded etale origin. Define λ_{a,b}:V_a⊗V_b→V_{a+b+1} to be precisely the chosen-compactification finite forward product [def-pur-finite-product-compactification-data], built from the actual finite exchange, projection and composition maps [def-exchange-projection], followed by that coefficient identification. If λ_{a,b} is invertible, define κ_{a,b} as its inverse. Given invertibility of λ_{r,0} for all r, define κ_0=id and κ_{r+1}=κ_{r,0} followed by κ_r⊗id. A nonempty planar binary tree has index number-of-leaves minus one, a parenthesized tensor of V_0, the canonical associator normalization to Q_r(V_0), and the forward iterate obtained by λ at every internal vertex. The tensor power t^{⊗(r+1)} uses the standard unit constraints. Define the signed tensor permutation using the canonical K-flat derived tensor symmetry [def-pur-finite-site-tensor-projection], associators and the last-factor decomposition of a finite permutation.\nFor σ a permutation of Fin(r+1), s_σ:X_r→X_r is the actual polynomial map pulling coordinate j back to coordinate σ(j). It is an isomorphism over Y and its square over id_Y is Cartesian. Identify s_σ^*T_r with T_r by the actual pullback compositor, since T_r is pulled from Y. Define S_σ on V_r by inverse identity pullback, compact-support exchange for this Cartesian square, the canonical compactification comparison [lem-pur-finite-forward-product-symmetry], and that coefficient identification. For each K in D^b_ctf(Y,A) [def-weil-finite-tor-amplitude], define S_{σ,K} in the same way on Rp_{r!}(p_r^*K⊗T_r), keeping K first and identifying its pullback by the compositor. The Tate objects and these coefficient-first objects, including their coordinate pullbacks, have bounded etale origin. The actual coefficient-first projection map [def-pur-finite-site-tensor-projection] K⊗V_r→Rp_{r!}(p_r^*K⊗T_r) is invertible. For J:V_r→A_Y define its coefficient-first integration as the inverse of that specific projection map followed by id_K⊗J and the right unitor. No six-functor datum, duality or purity is supplied.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sbc-affine-space",
+  "def-coefficient-twists-detailed",
+  "def-pur-affine-line-purity-comparison",
+  "def-compact-support-direct-image-detailed",
+  "def-exchange-projection",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-affine-space-comparison",
+  "def-pur-finite-product-compactification-data",
+  "lem-pur-finite-forward-product-symmetry",
+  "def-pur-finite-site-tensor-projection"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+  "place": "Steps 1--4: ordered coordinate factors, canonical regrouping, and the even signed coordinate permutations; finite compact-support expansion of the item"
+ },
+ "proof": [
+  {
+   "text": "For block_geometry, prove by induction that morphisms to the iterated affine line are determined by their base map and all polynomial coordinates, using AffineSpace.hom_ext at the successor step. The two block maps commute with the base projection by toIteratedAffineLine_proj. Given maps to the two blocks with equal base maps, concatenate their coordinate vectors with Fin.addCases and apply toIteratedAffineLine. The coordinate equations prove both projection identities, and the same extensionality proves uniqueness. IsPullback.mk' gives the Cartesian square. This includes a=b=0 and arbitrary, possibly empty, bases.",
+   "uses": [
+    "def-sbc-affine-space"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For coordinate_geometry, compose the coordinate polynomial map for sigma with that for sigma inverse. Every coordinate and the base map are unchanged, so iterated-affine-line extensionality makes both composites identities. This exhibits the actual map as an isomorphism over Y. The square over id_Y is Cartesian by IsPullback.of_horiz_isIso.",
+   "uses": [
+    "def-sbc-affine-space"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The exponent ell^(level+1) is a unit on every scheme over k by exponentUnit. Apply finite_etale_torsion_twist_line to the finite scalar ring. Transport each localized trivialization across the over-site equivalence to obtain ordinary upperStar trivializations by the tensor unit. Its tensor inverse makes the sheaf finite; local constancy therefore makes it constructible. The flat degree-zero sheaf has Tor interval [0,0], and shift by 2 has interval [-2,-2]. Site comparison preserves bounded constructibility and Tor intervals. Hence shiftedLine is constructible of finite Tor amplitude.",
+   "uses": [
+    "def-pur-affine-space-comparison",
+    "lem-asd-finite-etale-twist-line",
+    "lem-sf-comparison-tor-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reflect a pro-etale finite-Tor bound to an ordinary bounded-constructible origin using the exact faithful monoidal site comparison. Apply the existing fixed-scalar ordinary constructibleFiniteTor_tensor and constructibleFiniteTor_mapDerivedCategory_upperStar theorems, and transport their conclusions by the canonical tensor and pullback comparison isomorphisms. Induction gives constructible finite-Tor positive tensor powers; pullback gives tate. Its bounded-etale-origin property transfers along externalIso, proving external_origin. The same tensor and pullback closure gives both clauses of coordinate_origins.",
+   "uses": [
+    "lem-sf-comparison-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-sf-pullback-tor-amplitude",
+    "def-pur-affine-space-comparison",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing fixed-scalar hasProjectionFormulaOfCompactification_of_constructibleFiniteTor theorem to tate and K for the literal compactification. The coefficient-first projection is precisely the composite of the signed tensor symmetry, this canonical projection component, and compact-support image of the inverse-order symmetry. All three factors are isomorphisms, so their composite is an isomorphism. This is the published finite compact projection reduction before intrinsic-coefficient specialization.",
+   "uses": [
+    "lem-weil-finite-compact-projection-formula",
+    "def-pur-finite-site-tensor-projection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "def-pur-affine-space-comparison",
+  "lem-asd-finite-etale-twist-line",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sf-pullback-tor-amplitude",
+  "def-weil-finite-tor-amplitude",
+  "lem-weil-finite-compact-projection-formula",
+  "def-pur-finite-site-tensor-projection"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/AffineSpace.lean; lean/Sheaf/AlgebraicGeometry/FiniteEtaleTwistLine.lean; lean/WeilConjectures/SixFunctors/Etale/Derived/Stability/OpenImmersion.lean; lean/WeilConjectures/SixFunctors/Etale/Derived/Stability/DirectImage.lean; lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/HomComparison.lean; lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/ProjectionFormula.lean",
+  "place": "V3, 2026-10-26: elementary polynomial-coordinate universal properties; existing proved fixed-scalar finite-Tor tensor, inverse-image and site-comparison APIs; canonical compact-support projection component and its signed conjugation. No new obligations or changes to definitions."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived compact support integration of even Tate line tensor powers and coordinate permutations",
+   "results": "8 hits: AnalyticOn.iteratedFDerivWithin_comp_perm, SymmetricPower.tprod_equiv, SymmetricPower.Rel.casesOn, exteriorPower.toTensorPower_apply_ιMulti, HasCompactSupport.integral_Iic_deriv_eq, SchwartzMap.integral_clm_comp_lineDerivOp_right_eq_neg_left, SymmetricPower.Rel.perm, MultilinearMap.domCoprod_alternization_coe.  No declaration for the concrete positive Tate-power compact-support maps.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*product|compact.*support.*product|coordinate.*permutation",
+   "results": "1 hits: Mathlib/CategoryTheory/Monoidal/Comon_.lean.  No declaration for the concrete positive Tate-power compact-support maps.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, CategoryTheory.NatIso.app",
+   "results": "0 hits: . loogle: unknown identifier 'CategoryTheory.NatIso.app' No declaration for the concrete positive Tate-power compact-support maps.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical finite compact support product maps for positive powers of a shifted Tate line, coefficient-first projection and coordinate action",
+   "results": "8 hits: Profinite.NobelingProof.πs, Profinite.NobelingProof.πJ, Profinite.NobelingProof.factors, Profinite.NobelingProof.πs', HVertexOperator.of_coeff, Profinite.NobelingProof.Linear_CC'₁, Profinite.NobelingProof.Linear_CC'₀, Profinite.NobelingProof.Linear_CC'.  No declaration for the concrete positive Tate-power compact-support maps.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-even-line-product-integration-symmetry",
+  "date": "2026-10-25",
+  "group": "N9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Steps 3--4: concrete positive Tate product, binary parenthesization and coordinate maps used to state integration symmetry",
+   "via": [
+    "lem-pur-even-line-product-integration-symmetry"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "module": "Sheaf.Paper.EvenLineProductIntegrationMaps",
+  "declaration": "AlgebraicGeometry.ProEtale.EvenLineProduct.forward",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.positiveTensorPower",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.appendPower",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.powerTrace",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.ProductTree",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.ProductTree.index",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.ProductTree.tensor",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.ProductTree.normalize",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.lastAdjacent",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.lastSwap",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.permutation",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.signedSymmetry",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.space",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.proj",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.projectionCompactifiable",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.compactification",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.support",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.tate",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.integral",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.first",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.second",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.block_geometry",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.geometry",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.overPullback",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.externalIso",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.external_origin",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.forward",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.trace",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.binaryInverse",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.kappa",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.treeForward",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.coordinate",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.coordinate_geometry",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.coordinateTate",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.coordinate_origins",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.actionOn",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.coordinateAction",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.coefficientAction",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.projection_isIso",
+   "AlgebraicGeometry.ProEtale.EvenLineProduct.coefficientTrace"
+  ],
+  "file": "lean/Sheaf/Paper/EvenLineProductIntegrationMaps.lean",
+  "statement": "def forward (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (a b : ℕ) : integral P Y a ⊗ integral P Y b ⟶ integral P Y (a + b + 1)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0fc73dc21",
+  "group": "N9",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0fc73dc21",
+  "group": "N9",
+  "result": "fix",
+  "note": "Maths and Lean accepted unchanged: all hypotheses (finite setting, sep. f.t. Y, U≅A_Y object iso, ctf V_m, IsIso of the actual forward word, κ recursion, J recursion) and all six clauses (J=t^⊗κ, every tree = normalize≫κ⁻¹, κS=Pκ and JS=J, signed Tate swap = coordinate identification, even sign, coefficient-first counit invariance with K first) match the node. Tate presentation p^*(L^⊗m) is canonical; σ convention irrelevant since P_σ is trivial under U≅1. Postponed theorems true and in the node TeX; no hollow defs. H12/H2 FIX of new node def-pur-even-line-product-maps: stmt_dep lem-pur-finite-product-compactification → def-pur-finite-product-compactification-data (owner of finiteProductChosenForward/FiniteProductGeometry/finiteProductExternal), + def-pur-finite-site-tensor-projection (VectorIntegrationSite.symmetry/projection); TeX brackets updated; lem-pur-finite-forward-product-symmetry kept (finiteForwardCompactificationComparison has no def owner); all on base 7bf54a6. Record-only fix, no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T175943-L-3314412",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,140 @@
+{
+ "id": "lem-sp-diagonal-integral-unit-epi",
+ "kind": "statement",
+ "title": "Integral constant sections generate closed direct images",
+ "status": "split",
+ "statement": "Let $i:Z\\hookrightarrow X$ be any closed immersion of schemes. On the small pro-etale sites, let $\\mathbf Z_Z$ and $\\mathbf Z_X$ denote the constant sheaves of abelian groups with value $\\mathbf Z$. The canonical map $\\mathbf Z_X\\to i_*\\mathbf Z_Z$ of [def-weil-proetale-inverse-image], induced by the same constant integer on every pulled-back chart, is an epimorphism. This applies in particular to the projective-line diagonal used in finite supported normalization. No nonemptiness, noetherian, or coefficient-prime assumption is required.",
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 9, proof of Theorem 9.4, p. 67, exact sequence (*) for the constant integer sheaf; pro-etale realization by Bhatt--Scholze Lemma 4.2.12."
+ },
+ "proof": [
+  {
+   "text": "Use the proved constantSheafToContinuousSheaf isomorphism of WeilConjectures.AlgebraicGeometry.ProEtale.FiniteCoefficientCohomology with discrete coefficient group Z. The sheaf on a chart V is the abelian group of continuous maps from its underlying space to discrete Z, with the specified universe lift. Restriction to the base-changed closed subscheme is precomposition by the pullback projection.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The given morphism is a closed immersion. For a continuous integer-valued function on its closed inverse image in V, choose at each point in the closed image an ambient open whose inverse image is the fibre of that function. Choose the complement of the closed image and value zero at each other point. These opens cover V. Constant functions with these chosen values are local lifts. Hence restriction of continuous functions is locally surjective, including empty V.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The two constant-sheaf comparisons commute with restriction: precompose with the sheafification unit and both sides send an integer to the constant function with that value on the pulled-back chart. The sheafification universal property proves equality. Local surjectivity makes restriction epic, and cancellation of the comparison isomorphism on the target proves that the canonical constant direct-image map is epic.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "p. 67, supported integer source; explicit ambient-open extension argument, using the source-library realization of Bhatt--Scholze Lemma 4.2.12."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant sheaf of integers restriction to a closed immersion is locally surjective",
+   "results": "8 hits: Sheaf.locallySurjective, Sheaf.IsLocallySurjective, IsClosedImmersion.toSurjectiveOnStalks, Scheme.Hom.app_surjective, isClosedImmersion_iff, PresheafOfModules.instIsLocallySurjectiveToSheafify, StructureSheaf.res_const, IsClosedImmersion.isAffine_surjective_of_isAffine.",
+   "date": "2026-10-27",
+   "verdict": "No constant integer direct-image statement; structure-sheaf results have different coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant integer sheaf maps epimorphically to its direct image from a closed subscheme",
+   "results": "8 hits: residue and structure-sheaf epimorphisms, subscheme section surjectivity, SheafedSpace.epi_of_base_surjective_of_stalk_mono, Sheaf.toImage, gluing cover epimorphism, and SheafOfModules.GeneratingSections.ofEpi.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Epi, AlgebraicGeometry.Scheme.proEtaleConstantDirectImageMap",
+   "results": "0 hits; unknown identifier 'Epi'.",
+   "date": "2026-10-27",
+   "verdict": "No usable result from this query."
+  },
+  {
+   "tool": "grep",
+   "query": "proEtaleConstantDirectImageMap.*Epi|integerFunctionsRestriction|diagonalIntegralUnit",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib match; local source search found the continuous-sheaf comparison and a private module-valued version in ProEtaleSupportedConstantPresentation."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search 'closed constant'; search 'constant.*closed|closed.*constant|integer.*diagonal'",
+   "results": "0 blueprint nodes for either query.",
+   "date": "2026-10-27",
+   "verdict": "No existing blueprint statement of this integral diagonal generation lemma."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerClassFiniteDiagonal",
+  "date": "2026-10-27",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-classes",
+   "place": "Classes clause (3), supported finite quotient normalization: constant integer generators on the pulled-back charts.",
+   "via": [
+    "def-sp-tower-class-finite-diagonal"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "module": "Sheaf.Paper.DiagonalIntegralUnitEpi",
+  "file": "lean/Sheaf/Paper/DiagonalIntegralUnitEpi.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.closedIntegralUnit_epi",
+  "statement": "theorem closedIntegralUnit_epi {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :\n    Epi (Scheme.proEtaleConstantDirectImageMap i\n      AddCommGrpCat.{u + 1} (AddCommGrpCat.of (ULift.{u + 1} ℤ)))",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-proetale-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T112353-L-1576509",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T112353-L-1576509",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

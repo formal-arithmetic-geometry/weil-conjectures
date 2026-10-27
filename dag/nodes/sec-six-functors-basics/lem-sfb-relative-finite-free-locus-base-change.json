@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-relative-finite-free-locus-base-change",
+ "kind": "statement",
+ "title": "Relative finite locally free locus commutes with arbitrary base change",
+ "statement": "Let $p:Y\\to T$ be a morphism of schemes [def-pc-scheme] locally of finite presentation [def-sbc-locally-finite-presentation]. Let $F$ be a quasi-coherent $\\mathcal O_Y$-module [pqf-def-coherent] of finite presentation, meaning locally the cokernel of a map $\\mathcal O_Y^m\\to\\mathcal O_Y^n$ for finite $m,n$. Assume $F$ is flat over $T$ [def-pc-scheme-module-flat-over]. Define $W(F)\\subseteq |Y|$ to consist of points with a Zariski open neighbourhood on which $F$ is isomorphic to $\\mathcal O^{\\oplus r}$ for some finite $r\\geq0$ [def-sc-finite-locally-free-sheaf]. Then $W(F)$ is open. For every scheme morphism $v:T_1\\to T$, put $Y_1=Y\\times_TT_1$ with projection $q:Y_1\\to Y$ [def-pc-fibre-product]. For the tensor pullback [def-pc-module-pullback], one has $W(q^*F)=q^{-1}(W(F))$. No flatness or finite-presentation hypothesis is imposed on $v$, no flatness hypothesis is imposed on $p$, and no Noetherian hypothesis is imposed on the schemes.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CZR, lemma-finite-free-open (scheme version of spaces-more-morphisms.tex Tag 0CZT, lemma-finite-free-open, used in quot.tex Tag 0D03)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-coherent",
+  "def-pc-scheme-module-flat-over",
+  "def-sc-finite-locally-free-sheaf",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The set $W(F)$ is the union of the open neighbourhoods on which $F$ is finite free, hence is open. Put $V(F)=\\{y:F_y\\text{ is flat over }\\mathcal O_{Y,y}\\}$. We will identify this set with $W(F)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CZR, lemma-finite-free-open, proof."
+   }
+  },
+  {
+   "text": "For $y\\in W(F)$ its stalk is finite free, hence flat by [lem-sc-affine-standard-cover-finite-free-local-fp-flat]. Conversely, if $y\\in V(F)$, [lem-weil-pbc-finite-presentation-source-stalk] makes $F_y$ finitely presented, hence finitely generated. The ring $\\mathcal O_{Y,y}$ is local, so [lem-weil-pbc-finite-flat-local-free] makes $F_y$ free. A finitely generated free module has a finite basis: express a finite generating family in any basis; the finite union of its supports contains every basis vector. Apply [lem-trf-finite-presentation-stalk-basis-spread] to this basis and $F$ to obtain a finite free neighbourhood of $y$. Thus $V(F)=W(F)$, including the empty basis when $F_y=0$.",
+   "uses": [
+    "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+    "lem-weil-pbc-finite-presentation-source-stalk",
+    "lem-weil-pbc-finite-flat-local-free",
+    "lem-trf-finite-presentation-stalk-basis-spread"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CZR, lemma-finite-free-open, proof."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-relative-module-flat-locus-base-change] with $S=T$, $X=Z=Y$, $p=a$ the given morphism, $f=\\mathrm{id}_Y$, and $\\mathcal M=F$. The hypothesis that $a=p$ is locally of finite type is [lem-a1-map-over-base-finite-presentation] applied with $X=Y$, $Y=S=T$, $q=\\mathrm{id}_T$ (locally of finite type, since the preimage of an affine $\\operatorname{Spec}A$ is itself, finitely generated over $A$) and $h=p$. All remaining hypotheses are precisely those of the item; in particular the flat object is $F$, not $Y$. The base-changed identity is $\\mathrm{id}_{Y_1}$, so for $G=q^*F$ the result is $\\{z:G_z\\text{ flat over }\\mathcal O_{Y_1,z}\\}=q^{-1}(V(F))$.",
+   "uses": [
+    "lem-sfb-relative-module-flat-locus-base-change",
+    "lem-a1-map-over-base-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CZR, lemma-finite-free-open, proof; morphisms.tex Tag 01TW, lemma-finite-presentation-finite-type, for the finite-type hypothesis."
+   }
+  },
+  {
+   "text": "If $z\\in W(G)$, its stalk is finite free and therefore flat by [lem-sc-affine-standard-cover-finite-free-local-fp-flat]. Step 3 and $V(F)=W(F)$ give $q(z)\\in W(F)$. Conversely take $q(z)\\in W(F)$, and choose $U\\ni q(z)$ with $F|_U\\cong\\mathcal O_U^r$. The tensor definition [def-pc-module-pullback] gives $G|_{q^{-1}U}\\cong\\mathcal O_{q^{-1}U}^r$: the coordinate map $a\\otimes(b_i)\\mapsto(ab_i)$ has inverse $(c_i)\\mapsto\\sum_i c_i\\otimes e_i$, compatibly with restrictions. Thus $z\\in W(G)$. The two inclusions give the required equality for arbitrary $v$.",
+   "uses": [
+    "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CZR, lemma-finite-free-open, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+  "lem-sfb-relative-module-flat-locus-base-change",
+  "lem-trf-finite-presentation-stalk-basis-spread",
+  "lem-weil-pbc-finite-flat-local-free",
+  "lem-weil-pbc-finite-presentation-source-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CZR, lemma-finite-free-open, proof. The finite-flat-local-free and stalk-basis-spreading route makes explicit its identification of the free and total-flat loci."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism locally of finite presentation a finitely presented sheaf flat over the base has an open finite locally free locus compatible with arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T13:08:04Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism locally of finite presentation a finitely presented sheaf flat over the base has an open finite locally free locus compatible with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\"], \"digest\": \"88449bd845e1ce7c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: FreeLocus.lean:49-186 gives ring-module free loci, openness, and only forward inclusion for arbitrary extension of scalars (comap_freeLocus_le at line 96); freeLocus_eq_univ assumes flatness over the module ring. None gives the reverse inclusion for a sheaf flat over a separate scheme base. Read the hits and FreeLocus.lean:45-210."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.freeLocus, Module.Flat",
+   "results": "{\"t\": \"2026-10-23T13:08:04Z\", \"tool\": \"loogle\", \"query\": \"Module.freeLocus, Module.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.freeLocus_eq_univ\"], \"digest\": \"c898b94a142536bb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: FreeLocus.lean:49-186 gives ring-module free loci, openness, and only forward inclusion for arbitrary extension of scalars (comap_freeLocus_le at line 96); freeLocus_eq_univ assumes flatness over the module ring. None gives the reverse inclusion for a sheaf flat over a separate scheme base. Read the hits and FreeLocus.lean:45-210."
+  },
+  {
+   "tool": "grep",
+   "query": "freeLocus|finiteFreeLocus|locallyFreeLocus",
+   "results": "{\"t\": \"2026-10-23T13:08:05Z\", \"tool\": \"grep\", \"query\": \"freeLocus|finiteFreeLocus|locallyFreeLocus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"Mathlib/RingTheory/Flat/Rank.lean\"], \"digest\": \"bef97fb3c57d2036\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: FreeLocus.lean:49-186 gives ring-module free loci, openness, and only forward inclusion for arbitrary extension of scalars (comap_freeLocus_le at line 96); freeLocus_eq_univ assumes flatness over the module ring. None gives the reverse inclusion for a sheaf flat over a separate scheme base. Read the hits and FreeLocus.lean:45-210."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The locally free locus of a finitely presented module flat over a scheme base commutes with every base change",
+   "results": "{\"t\": \"2026-10-23T13:08:05Z\", \"tool\": \"leansearch\", \"query\": \"The locally free locus of a finitely presented module flat over a scheme base commutes with every base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.free\", \"Module.Flat.isBaseChange\", \"Module.freeLocus\", \"Module.mem_freeLocus_of_isLocalization\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"Module.FaithfullyFlat.instTensorProduct\", \"Module.freeLocus_eq_univ\", \"Module.mem_freeLocus\"], \"digest\": \"a3580379be531edc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: FreeLocus.lean:49-186 gives ring-module free loci, openness, and only forward inclusion for arbitrary extension of scalars (comap_freeLocus_le at line 96); freeLocus_eq_univ assumes flatness over the module ring. None gives the reverse inclusion for a sheaf flat over a separate scheme base. Read the hits and FreeLocus.lean:45-210."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative flatness detects whether a finitely presented sheaf is free on the fibres and its finite free locus is preserved and reflected after arbitrary change of base",
+   "results": "{\"t\": \"2026-10-23T13:08:55Z\", \"tool\": \"leanfinder\", \"query\": \"Relative flatness detects whether a finitely presented sheaf is free on the fibres and its finite free locus is preserved and reflected after arbitrary change of base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"Module.freeLocus_eq_univ\", \"AlgebraicGeometry.flat_iff\", \"RingHom.Flat.propertyIsLocal\", \"Module.FaithfullyFlat\", \"Module.Flat.tfae_equational_criterion\", \"Module.flat_of_isLocalized_span\"], \"digest\": \"2ebb0024da8711ad\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: FreeLocus.lean:49-186 gives ring-module free loci, openness, and only forward inclusion for arbitrary extension of scalars (comap_freeLocus_le at line 96); freeLocus_eq_univ assumes flatness over the module ring. None gives the reverse inclusion for a sheaf flat over a separate scheme base. Read the hits and FreeLocus.lean:45-210."
+  },
+  {
+   "tool": "grep",
+   "query": "freeLocus|finiteFreeLocus|locallyFreeLocus",
+   "results": "{\"t\": \"2026-10-23T13:56:20Z\", \"tool\": \"grep\", \"query\": \"freeLocus|finiteFreeLocus|locallyFreeLocus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\", \"Mathlib/RingTheory/Localization/Free.lean\", \"Mathlib/RingTheory/Flat/LocallyFree.lean\"], \"digest\": \"9754d91f89e8a7de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read FreeLocus.lean:49-174. comap_freeLocus_le:96 gives only the forward inclusion; freeLocus_eq_univ:160 assumes flatness over the total module ring. IsBaseChange.free preserves free modules, without reflecting relative free loci."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The locally free locus of a finitely presented module flat over a scheme base commutes with every base change",
+   "results": "{\"t\": \"2026-10-23T13:56:20Z\", \"tool\": \"leansearch\", \"query\": \"The locally free locus of a finitely presented module flat over a scheme base commutes with every base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.free\", \"Module.Flat.isBaseChange\", \"Module.freeLocus\", \"Module.mem_freeLocus_of_isLocalization\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"Module.FaithfullyFlat.instTensorProduct\", \"Module.freeLocus_eq_univ\", \"Module.mem_freeLocus\"], \"digest\": \"a3580379be531edc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read FreeLocus.lean:49-174. comap_freeLocus_le:96 gives only the forward inclusion; freeLocus_eq_univ:160 assumes flatness over the total module ring. IsBaseChange.free preserves free modules, without reflecting relative free loci."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.freeLocus, Module.Flat",
+   "results": "{\"t\": \"2026-10-23T13:56:20Z\", \"tool\": \"loogle\", \"query\": \"Module.freeLocus, Module.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.freeLocus_eq_univ\"], \"digest\": \"c898b94a142536bb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read FreeLocus.lean:49-174. comap_freeLocus_le:96 gives only the forward inclusion; freeLocus_eq_univ:160 assumes flatness over the total module ring. IsBaseChange.free preserves free modules, without reflecting relative free loci."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism locally of finite presentation a finitely presented sheaf flat over the base has an open finite locally free locus compatible with arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T13:56:21Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism locally of finite presentation a finitely presented sheaf flat over the base has an open finite locally free locus compatible with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\"], \"digest\": \"88449bd845e1ce7c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read FreeLocus.lean:49-174. comap_freeLocus_le:96 gives only the forward inclusion; freeLocus_eq_univ:160 assumes flatness over the total module ring. IsBaseChange.free preserves free modules, without reflecting relative free loci."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative flatness detects whether a finitely presented sheaf is free on the fibres and its finite free locus is preserved and reflected after arbitrary change of base",
+   "results": "{\"t\": \"2026-10-23T13:56:22Z\", \"tool\": \"leanfinder\", \"query\": \"Relative flatness detects whether a finitely presented sheaf is free on the fibres and its finite free locus is preserved and reflected after arbitrary change of base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"Module.freeLocus_eq_univ\", \"AlgebraicGeometry.flat_iff\", \"RingHom.Flat.propertyIsLocal\", \"Module.FaithfullyFlat\", \"Module.Flat.tfae_equational_criterion\", \"Module.flat_of_isLocalized_span\"], \"digest\": \"2ebb0024da8711ad\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read FreeLocus.lean:49-174. comap_freeLocus_le:96 gives only the forward inclusion; freeLocus_eq_univ:160 assumes flatness over the total module ring. IsBaseChange.free preserves free modules, without reflecting relative free loci."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-invertible-open-in-coherent-stack",
+  "date": "2026-10-23",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve. Supporting stack-of-line-bundles input before passing to isomorphism classes. Algebraicity part: inclusion of line bundles into the ambient coherent stack. Supporting source-local input: Stacks 0D03 proof, the sentence invoking finite-free-open (0CZT); scheme version 0CZR.",
+   "via": [
+    "lem-sfb-invertible-open-in-coherent-stack",
+    "lem-sfb-picard-stack-curve-geometry",
+    "lem-sfb-picard-space-curves-smooth",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-finite-free-locus-base-change",
+  "worker": "stage1",
+  "summary": "Proved openness as a union and identified the finite free locus with the total stalk-flat locus using existing finite-presentation, finite-flat-local-free and basis-spreading nodes. Added the general module theorem 05VJ, which the existing structure-sheaf-only relative flat-locus node does not state, and applied it to the identity. Tensor coordinates give the forward free-locus inclusion; flatness and the original stalk characterization give the reverse. No statement correction.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve. Supporting stack-of-line-bundles input before passing to isomorphism classes. Algebraicity part: inclusion of line bundles into the ambient coherent stack. Supporting source-local input: Stacks 0D03 proof, the sentence invoking finite-free-open (0CZT); scheme version 0CZR. The inherited ancestor is null (confirmed by blueprint_refs.py ancestor); steps realize the source-local 0CZR prerequisite in the recorded Picard-stack/invertible-open branch. Latest unit and chapter read; no higher-level route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-presentation-source-stalk",
+    "why": "Generic module-sheaf finite-presentation stalk theorem; no in-unit statement gives this local module presentation."
+   },
+   {
+    "node": "lem-trf-finite-presentation-stalk-basis-spread",
+    "why": "Generic ringed-space theorem spreading a specified finite stalk basis; not a replacement of a unit step. The in-unit route invokes exactly this local-freeness fact through Stacks 0CZR."
+   },
+   {
+    "node": "lem-a1-map-over-base-finite-presentation",
+    "why": "Generic scheme fact (Stacks 02FV/01TW) that a locally finitely presented morphism is locally of finite type in the every-affine-of-the-target sense of def-weil-finite-type-morphism; no in-unit node states it. Added by the cc reviewer (C2 FIX in step 3)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-presentation-source-stalk",
+  "lem-trf-finite-presentation-stalk-basis-spread",
+  "lem-a1-map-over-base-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-fae3eb6cf",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-fae3eb6cf (reviewer sub-agent of L); spot-checked: Read Stacks 0CZR (more-morphisms 4823-4846), 05VJ (4700-4756), 080Q and 01TW. The item statement is unchanged against the live clone, where it is still unsplit. The new node lem-sfb-relative-module-flat-locus-base-change states exactly 05VJ for an arbitrary finitely presented quasi-coherent M flat over S, with all four hypotheses. It is not a duplicate: lem-sfb-relative-flat-locus-base-change is 05VK, structure sheaf only, and needs p flat, which the item does not have. The other relative-flat nodes cover only the structure sheaf or charts. It does not restate a clause of the parent, and it passes the edge tests: M=0; Spec k into A^1 gives an empty locus; dropping flatness over S gives a counterexample. Step 2 (00NX, 01CP, 00NZ, 0B8J nodes) proves W(F)=V(F) correctly, including rank 0. Step 4 is correct: forward by flat stalk, step 3 and step 2; converse by computing the tensor pullback of O^r. FIX (C2), step 3: 'locally of finite presentation implies locally of finite type' was marked elementary, but def-sbc-lfp is pointwise and def-weil-finite-type-morphism quantifies over every affine of the target (01T2/01TW locality). Step 3 now cites lem-a1-map-over-base-finite-presentation with q=id_T and h=p, the same repair as the earlier one in lem-sfb-groupoid-open-unit-etale. I added it to proof_deps and tool_uses. Batch 5: lem-trf-finite-presentation-stalk-basis-spread is generic ringed-space Modules 0B8J with only generic module deps, outside the trace-formula and Poincaré assumptions, so it is accepted. Accepted tool_uses: 01CP, 0B8J and 02FV/01TW nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeFiniteFreeLocusBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.relative_finiteFreeLocus_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.finiteFreeLocus",
+   "AlgebraicGeometry.Scheme.Modules.relative_finiteFreeLocus_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeFiniteFreeLocusBaseChange.lean",
+  "statement": "theorem relative_finiteFreeLocus_baseChange {Y T : Scheme.{u}} (p : Y ⟶ T) [LocallyOfFinitePresentation p] (F : Y.Modules) [SheafOfModules.IsFinitePresentation.{u} F] (hflat : F.IsFlatOver p) : IsOpen (finiteFreeLocus F) ∧ ∀ (T₁ : Scheme.{u}) (v : T₁ ⟶ T), finiteFreeLocus ((tensorPullback (pullback.fst p v)).obj F) = (pullback.fst p v) ⁻¹' finiteFreeLocus F",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c257c41a0",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Clauses match the node and Stacks 0CZR: Y T : Scheme.{u}, p with LocallyOfFinitePresentation, F with Mathlib IsFinitePresentation (implies IsQuasicoherent by instance; .{u} adds no restriction), hflat : F.IsFlatOver p (recorded affine-local definition). Conclusion: IsOpen (finiteFreeLocus F) ∧ ∀ T₁ (v : T₁ ⟶ T), finiteFreeLocus of tensorPullback (pullback.fst p v) F = (pullback.fst p v) ⁻¹' finiteFreeLocus F. finiteFreeLocus is a real set-builder helper (open U ∋ y, r : ℕ, F.over U ≅ free (ULift (Fin r))); rank may be 0 or vary. Not a duplicate: Module.freeLocus is ring-level, AlgebraicSpace.finiteFreeLocus is the étale-site sibling, IsFiniteLocallyFree is a global class; node lean is null in side-live. No hypotheses on v, no flatness of p, no Noetherian assumption. Edge cases covered: r=0 / zero sheaf, empty schemes, v=id, non-flat p. The node diff from side-live is only the lean field; lean.statement is verbatim; docstrings carry 0CZR, the blueprint id and all 4 proof steps; only proof is sorry; report has Worker report and Second reading sections. No file changed, so no compile."
+ }
+}

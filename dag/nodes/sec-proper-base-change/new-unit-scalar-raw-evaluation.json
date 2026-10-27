@@ -1,0 +1,128 @@
+{
+ "id": "new-unit-scalar-raw-evaluation",
+ "kind": "statement",
+ "title": "Coherent evaluation of structural raw scalar relations",
+ "statement": "Let f:X→S be any scheme morphism, U→S etale and a∈Γ(U,O_U) [def-pc-scheme,def-weil-pbc-etale-site]. Transport raw structural classes to coherent unit classes by the inverse explicit coefficient isomorphism [new-unit-structure-coefficient-iso]. If their restricted derived-cohomology images satisfy the local multiplication relation, their coherent Ext evaluations satisfy Sheaf.H.map of smulHom of the pullback of a. The canonical higher-image class of each transported raw class equals the coefficient map applied to its structural class [def-weil-pbc-coherent-higher-image-classes,lem-weil-pbc-raw-restricted-class-normalization].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "new-unit-structure-coefficient-iso",
+  "def-weil-pbc-coherent-higher-image-classes",
+  "lem-weil-pbc-raw-restricted-class-normalization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images; Tags 03P2, 0096, 0097 and 03DR, normalized unit coefficients and restriction; Tags 03FD and 01FT, Ext evaluation"
+ },
+ "proof": [
+  {
+   "text": "Define transported raw classes by postcomposition with the inverse unit coefficient map. The coefficient naturality part of rawRestrictedClassNormalization, followed by affineRealizationClass_rawEvaluation, gives the canonical class formula. For evaluation, unfold only affineRealizationRawEquiv, apply sheafHToDerived naturality to the coherent restriction and cancel its Ext equivalence inverse. Raw coefficient naturality identifies the result with derived cohomology of unitLocalizedCoefficientIso. Apply sheafHToDerived injectivity, use localized scalar conjugation and functoriality of derived cohomology, and substitute the given raw equality.",
+   "uses": [
+    "new-unit-localized-scalar-conjugation",
+    "new-sheaf-h-derived-naturality",
+    "lem-weil-pbc-raw-restricted-class-normalization",
+    "def-weil-pbc-coherent-higher-image-classes",
+    "new-unit-coherent-raw-evaluation-formula"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-unit-localized-scalar-conjugation",
+  "new-sheaf-h-derived-naturality",
+  "lem-weil-pbc-raw-restricted-class-normalization",
+  "def-weil-pbc-coherent-higher-image-classes",
+  "new-unit-coherent-raw-evaluation-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images; Tags 03P2, 0096, 0097 and 03DR, normalized unit coefficients and restriction; Tags 03FD and 01FT, Ext evaluation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The associated etale sheaf of the unit module is isomorphic to the additive structure sheaf naturally in scalar multiplication",
+   "results": "8 hits, including SheafOfModules.unit, unitHomEquiv and structurePresheafCompForget. None identifies the project tensor-section coefficient or its localized scalar action.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorPullbackObjUnitToUnit\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafHToDerived.*natural|etaleTensorUnit.*Iso|unitRealization.*transport",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of evaluation of Ext classes under a right derived functor with respect to coefficient morphisms",
+   "results": "8 hits: extFunctor, its map formula and generic right-derived naturality. None states naturality of the fixed derivedExtEvaluation composite.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UnitRealizationScalarNormalization",
+  "date": "2026-10-25",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical torsion constructibility input via proper smooth curve structural coefficients; unit coefficient transport and scalar normalization.",
+   "via": [
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "new-unit-realization-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnitScalarRawEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnitScalarRawEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.unitCoherentRawClass_scalar",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.unitCoherentRawClass_class",
+   "AlgebraicGeometry.Scheme.Modules.unitCoherentRawClass_scalar"
+  ],
+  "statement": "theorem unitCoherentRawClass_scalar {X S : Scheme.{u}} (f : X ⟶ S) (U : S.Etale) (a : Γ(U.left, ⊤)) (μ : (Etale.upperStar AddCommGrpCat.{u + 1} (pullback.snd U.hom f)).obj X.etaleAdditiveSheaf ⟶ (Etale.upperStar AddCommGrpCat.{u + 1} (pullback.snd U.hom f)).obj X.etaleAdditiveSheaf) (hμ : ∀ (T : (Limits.pullback U.hom f).Etale) (x : ((Etale.upperStar AddCommGrpCat.{u + 1} (pullback.snd U.hom f)).obj X.etaleAdditiveSheaf).obj.obj (op T)), (((Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} (pullback.snd U.hom f) inferInstance).hom.app X.etaleAdditiveSheaf).hom.app (op T)) (μ.hom.app (op T) x) = ULift.up (@id Γ(T.left, ⊤) ((T.hom ≫ pullback.fst U.hom f).appTop a) * (@id Γ(T.left, ⊤) ((((Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} (pullback.snd U.hom f) inferInstance).hom.app X.etaleAdditiveSheaf).hom.app (op T)) x).down))) (z z' : (Etale.abelianHigherDirectImageRawPresheaf f 1 X.etaleAdditiveSheaf).obj (op U)) (hz : Etale.rawRestrictedCohomologyComparison f 1 X.etaleAdditiveSheaf U z' = (Etale.cohomology AddCommGrpCat.{u + 1} (Limits.pullback U.hom f) (1 : ℤ)).map (DerivedCategory.Q.map ((CochainComplex.singleFunctor _ 0).map μ)) (Etale.rawRestrictedCohomologyComparison f 1 X.etaleAdditiveSheaf U z)) : affineRealizationRawEvaluation f (SheafOfModules.unit X.ringCatSheaf) 1 U (unitCoherentRawClass f 1 U z') = Sheaf.H.map (coherentEtaleMap _ _ ((affineRealizationCoefficient f (SheafOfModules.unit X.ringCatSheaf) U).smulHom ((pullback.fst U.hom f).appTop a))) 1 (affineRealizationRawEvaluation f (SheafOfModules.unit X.ringCatSheaf) 1 U (unitCoherentRawClass f 1 U z))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T123943-L-1920510",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T123943-L-1920510",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

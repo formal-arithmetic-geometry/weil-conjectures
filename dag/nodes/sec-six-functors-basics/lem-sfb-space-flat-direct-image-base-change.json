@@ -1,0 +1,362 @@
+{
+ "id": "lem-sfb-space-flat-direct-image-base-change",
+ "kind": "statement",
+ "title": "Flat base change of quasi-coherent direct image from an algebraic space",
+ "statement": "Let $S,T,T'$ be schemes [def-pc-scheme], let $f:X\\to T$ be a quasi-compact separated morphism from an algebraic space over $S$ [def-trf-algebraic-space, lem-trf-space-qc-separated-etale-local], and let $g:T'\\to T$ be a flat $S$-morphism [def-weil-flat-morphism]. Put $X'=X\\times_TT'$, with projections $h:X'\\to X$ and $f':X'\\to T'$ [lem-trf-space-fibre-products-etale-covers]. Let $M$ be a quasi-coherent module on $(X_{\\mathrm{et}},\\mathcal O_X)$ [def-trf-space-quasi-coherent-module]. Use the canonical ringed etale topoi [lem-trf-space-enlarged-etale-ringed-site-model] and their tensor pullback and direct image functors [def-trf-space-etale-module-functors]. Then the canonical base-change morphism $\\beta_M:g^*f_*M\\to f'_*h^*M$ is an isomorphism. Here $\\beta_M$ is the adjoint, under $f'^*\\dashv f'_*$, of the composite $f'^*g^*f_*M\\simeq h^*f^*f_*M\\xrightarrow{h^*\\epsilon_M}h^*M$, where $\\epsilon_M$ is the pullback/direct-image counit. The comparison is natural in $M$. No finite-presentation, coherence, properness, or Noetherian hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 073K (lemma-flat-base-change-cohomology), clause (1) for i=0, with f separated hence quasi-separated; the canonical map is the ordinary degree-zero adjunction base-change map. The flatness/site comparison used there is spaces-morphisms.tex Tag 073C (lemma-flat-morphism-sites)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-qc-separated-etale-local",
+  "def-weil-flat-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Set $N=f_*M$. It is quasi-coherent by [lem-trf-space-qc-separated-quasi-coherent-pushforward]. Cover $T$ by affine opens $V=\\operatorname{Spec}A$, and each $g^{-1}V$ by affine opens $W=\\operatorname{Spec}B$, using [lem-weil-pbc-affine-opens-basis]. To test the map over $W$, use every affine etale scheme $Z=\\operatorname{Spec}D\\to W$. Such objects cover every object of the small etale site: cover that scheme by affine opens. Thus it suffices to show the component of $\\beta_M$ on each such $Z$ is bijective. This sufficiency is the sheaf axiom: local inverses of a fixed morphism agree on overlaps by uniqueness and glue. The ring map $A\\to B$ is flat by [lem-weil-pbc-flat-morphism-affine-criterion], $B\\to D$ is flat by [lem-weil-pbc-etale-algebra-flat], and hence $A\\to D$ is flat by [lem-weil-pbc-flat-ring-map-comp].",
+   "uses": [
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-ring-map-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073K (lemma-flat-base-change-cohomology), affine-local reduction; morphisms.tex Tag 01U5 (lemma-flat-characterize)."
+   }
+  },
+  {
+   "text": "Fix $V,W,Z$ as above. Write $X_V=X\\times_TV$ and $M_V=M|_{X_V}$. Etale localization [lem-trf-space-etale-module-pushforward-restriction] identifies $N|_V$ with $(f_V)_*M_V$ and identifies etale tensor pullbacks with restrictions. The definition of quasi-compactness in [lem-trf-space-qc-separated-etale-local], applied to $V\\to T$, supplies a quasi-compact scheme atlas of $X_V$; separation is inherited because its diagonal is a scheme test of the closed diagonal of $f$. Refine that atlas by [lem-trf-space-qc-finite-affine-atlas-refinement] to a surjective etale map $p:U\\to X_V$ with $U$ affine. By [lem-trf-space-separated-affine-chart-overlap], $R=U\\times_{X_V}U$ is affine, with etale projections $p_1,p_2$, and the scheme maps $a:U\\to V$ and $b:R\\to V$ are quasi-compact separated.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-qc-separated-etale-local",
+    "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "lem-trf-space-separated-affine-chart-overlap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03M8 (lemma-compute-pushforward), 03M9 (lemma-pushforward), affine atlas and relation; spaces-properties.tex Tag 03H6 (lemma-quasi-compact-affine-cover)."
+   }
+  },
+  {
+   "text": "Put $M_U=p^*M_V$, $M_R=p_1^*M_U$, $P=\\Gamma(U,M_U)$ and $Q=\\Gamma(R,M_R)$. These restrictions are quasi-coherent: etale restriction restricts the local presentations defining quasi-coherence. By [lem-trf-space-pushforward-atlas-equalizer], evaluating its kernel at the final object $V$ gives $N(V)=K:=\\ker(\\delta:P\\to Q)$, where $\\delta(s)=p_1^*s-p_2^*s$ with the canonical descent identification on $R$. Kernels of sheaves of modules are evaluated objectwise: the objectwise kernel satisfies the sheaf axiom since the two compatible families can be glued and equality can be tested locally. Thus this is an equality of the specified $A$-module section maps, not just an abstract identification.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-pushforward-atlas-equalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), displayed kernel sequence and proof."
+   }
+  },
+  {
+   "text": "Base-change the atlas to $X_Z=X_V\\times_VZ$. By [lem-trf-space-fibre-products-etale-covers], $U_D=U\\times_VZ\\to X_Z$ is a surjective etale atlas; its relation is $R_D=R\\times_VZ$ by associativity of fibre products (both represent triples with the same images). The affine-spectrum fibre-product formula [lem-weil-pbc-fibre-product-affine-spectra] makes $U_D$ and $R_D$ affine. Let $M_Z$ be the pullback of $M_V$ to $X_Z$. Pullback preserves quasi-coherence by [lem-sfb-space-module-pullback-quasicoherent]. Applying the atlas equalizer to $M_Z$ now gives $\\Gamma(X_Z,M_Z)=\\ker(\\delta_D:\\Gamma(U_D,M_Z|_{U_D})\\to\\Gamma(R_D,M_Z|_{R_D}))$. Here sections over $X_Z$ mean the canonical compatible chart sections, so the equality is precisely the final-object evaluation of that node.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-trf-space-pushforward-atlas-equalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 after base change; spaces-cohomology.tex Tag 073K, affine base-change setup."
+   }
+  },
+  {
+   "text": "The scheme Zariski/etale equivalence [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identifies $M_U,M_R$ with ordinary quasi-coherent modules, identifies their pullbacks with etale tensor pullback, and is the identity on open sections. Apply [lem-pc-flat-affine-base-change-sections] to the whole affine open $U$ of $U\\to\\operatorname{Spec}A$, and likewise to $R$. It gives isomorphisms $D\\otimes_AP\\simeq\\Gamma(U_D,M_Z|_{U_D})$ and $D\\otimes_AQ\\simeq\\Gamma(R_D,M_Z|_{R_D})$, each sending $d\\otimes s$ to $d\\,q^*s$, where $q$ is the appropriate projection. The identifications of the modules here follow from associativity of tensor pullback in the two cartesian paths: on tensors it sends $c\\otimes(e\\otimes m)$ to $ce\\otimes m$, with inverse $c\\otimes m\\mapsto c\\otimes(1\\otimes m)$. Under these isomorphisms, the two restriction maps agree with $1_D\\otimes p_i^*$: both send $d\\otimes s$ to $d\\,q_R^*(p_i^*s)$. The equality is checked on pure tensors, which generate the tensor product. Consequently $\\delta_D$ is $1_D\\otimes\\delta$.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-pc-flat-affine-base-change-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I9 (lemma-widetilde-pullback) and 01IA (lemma-quasi-coherent-affine); coherent.tex Tag 02KG (lemma-affine-base-change); descent.tex Tag 03LC (proposition-equivalence-quasi-coherent-functorial)."
+   }
+  },
+  {
+   "text": "Tensor the exact sequence $0\\to K\\to P\\xrightarrow{\\delta}Q$ with the flat $A$-algebra $D$. By [lem-weil-pbc-flat-tensor-exact], $D\\otimes_AK\\to D\\otimes_AP$ is injective and its image is exactly $\\ker(1_D\\otimes\\delta)$. Therefore Steps 3--5 give a bijective map $\\theta_D:D\\otimes_AN(V)\\to\\Gamma(X_Z,M_Z)$: the image of $d\\otimes s$ has atlas restriction $d\\,q_U^*(s|_U)$. This proves bijectivity by the actual kernel diagrams; it does not assume that scalar extension commutes with an arbitrary limit.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HD (lemma-flat), exactness of flat tensor; spaces-morphisms.tex Tag 03M8 kernel diagram."
+   }
+  },
+  {
+   "text": "Identify the source component. The Zariski/etale equivalence and its functorial pullback comparison take $N|_V$ to the ordinary quasi-coherent module with the same sections. The affine pullback-section formula [lem-weil-pbc-module-pullback-affine-sections], first for $W\\to V$ and then for $Z\\to W$, gives $(g^*N)(Z)\\simeq D\\otimes_B(B\\otimes_AN(V))\\simeq D\\otimes_AN(V)$. The last isomorphism sends $d\\otimes(b\\otimes s)$ to $db\\otimes s$ and has inverse $d\\otimes s\\mapsto d\\otimes(1\\otimes s)$. Etale direct-image restriction identifies the target component $(f'_*h^*M)(Z)$ with $\\Gamma(X_Z,M_Z)$. These comparisons all use the prescribed adjunction units and the given structure ring maps.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-trf-space-etale-module-pushforward-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03LC (proposition-equivalence-quasi-coherent-functorial), (1),(3); schemes.tex Tag 01I9; spaces-properties.tex Tag 03LX (lemma-pushforward-etale-base-change-modules)."
+   }
+  },
+  {
+   "text": "Under Step 7, the specified mate $\\beta_M$ is $\\theta_D$. Indeed, the counit $f^*f_*M\\to M$ evaluates a direct-image section on its chart: this follows from the chart projections and unit formula in [def-trf-space-etale-module-functors], by the adjunction triangle identity. Thus the adjoint composite in the statement sends $d\\otimes s$, after restriction to $U_D$, to $d\\,q_U^*(s|_U)$. This is exactly the atlas restriction of $\\theta_D(d\\otimes s)$ in Step 6. Restriction from $\\Gamma(X_Z,M_Z)$ to its atlas is injective by the equalizer of Step 4, so the two maps agree on pure tensors and hence agree. All components on the covering affine etale tests are therefore bijective. Their inverses glue as in Step 1, proving that $\\beta_M$ is an isomorphism. For a module map $t:M\\to\\widetilde M$, both paths in the naturality square send $d\\otimes s$ on $U_D$ to $d\\,q_U^*(t_U(s|_U))$; atlas injectivity proves naturality. No finiteness condition on $M$ or on the rings was used.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-trf-space-pushforward-atlas-equalizer"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8, compatible chart sections; spaces-properties.tex Tag 03G8 (lemma-morphism-ringed-topoi); sites-modules.tex Tag 03D7 (lemma-adjoint-pullback-pushforward-modules), counit and triangle identity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-space-etale-module-functors",
+  "def-trf-space-quasi-coherent-module",
+  "lem-pc-flat-affine-base-change-sections",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-pushforward-atlas-equalizer",
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-trf-space-separated-affine-chart-overlap",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03M8 and 03M9 atlas-kernel presentation, combined with affine scalar extension and flat tensor exactness to prove spaces-cohomology.tex Tag 073K in degree zero; this is an explicit atlas proof rather than the all-degree Lazard argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change of quasi coherent module direct image for a quasi compact separated morphism of algebraic spaces",
+   "results": "8 hits: AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Flat, AlgebraicGeometry.Scheme.Modules.pullback",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a cartesian square with flat base map the canonical map g pullback f direct image M to f prime direct image h pullback M is an isomorphism for quasi coherent modules on algebraic spaces",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat base change for direct image of a quasi coherent module on an algebraic space",
+   "results": "8 hits: Module.Flat.isBaseChange, RingHom.Flat.isStableUnderBaseChange, IsSMulRegular.of_flat_of_isBaseChange, Module.FaithfullyFlat.instTensorProduct, RingHom.FaithfullyFlat.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.flat_of_affine_subset",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"baseChange\"",
+   "results": "12 hits: AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk, AlgebraicGeometry.AffineTargetMorphismProperty.isStableUnderBaseChange_of_isStableUnderBaseChangeOnAffine_of_isZariskiLocalAtTarget, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*base.change|base.change.*flat",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean ; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change for the direct image of a quasi coherent module on a quasi compact separated algebraic space",
+   "results": "8 hits: AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.comp",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, module adjunctions and generic tensor functors do not state algebraic-space flat direct-image base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"baseChange\"",
+   "results": "12 hits: AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk, AlgebraicGeometry.AffineTargetMorphismProperty.isStableUnderBaseChange_of_isStableUnderBaseChangeOnAffine_of_isZariskiLocalAtTarget, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, module adjunctions and generic tensor functors do not state algebraic-space flat direct-image base change"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*base.change|base.change.*flat",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, module adjunctions and generic tensor functors do not state algebraic-space flat direct-image base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent sheaf flat base change pushforward on algebraic spaces",
+   "results": "8 hits: SheafOfModules.isQuasicoherent, AlgebraicGeometry.Scheme.Modules.pushforward, RingHom.Flat.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.pushforwardComp",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, module adjunctions and generic tensor functors do not state algebraic-space flat direct-image base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The base change map from pullback of pushforward to pushforward of pullback is an isomorphism for quasi coherent sheaves under flat scalar extension",
+   "results": "8 hits: SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pushforwardNatIso, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, module adjunctions and generic tensor functors do not state algebraic-space flat direct-image base change"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-ampleness-fpqc-descent",
+  "date": "2026-10-23",
+  "group": "Q117"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0D3C: descend geometric-fibre ampleness to the residue field, and glue the relatively ample open pieces including schematicity. The existing etale-only node does not cover inseparable field extensions. Supporting input in the proof of 0D3C: flat base change of the homogeneous direct-image summands, with the counit normalization that identifies evaluations.",
+   "via": [
+    "lem-sfb-space-relative-ampleness-fpqc-descent",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-flat-direct-image-base-change",
+  "worker": "stage1",
+  "summary": "Proved the canonical degree-zero comparison using an affine etale atlas and its affine relation, scalar extension of their section modules, and flat preservation of the resulting kernel. Checked the counit-normalized mate on pure tensors and its naturality. Reused existing DAG statements throughout; no new nodes.",
+  "blueprint": "Supports the inherited direct-image constructibility route through relative ampleness descent: the flat comparison of the homogeneous direct-image summands. Read the current latest sk-thm-sf-ctf-stability-direct-images.proof.md (3). Retained the exact item statement and its inherited provenance; blueprint_refs.py ancestor reports None.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flat-affine-base-change-sections",
+    "why": "Generic pc flat affine base change sections input for the affine atlas/kernel argument; the unit does not supply a replacement for this tool."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic trf scheme zariski etale quasi coherent equivalence input for the affine atlas/kernel argument; the unit does not supply a replacement for this tool."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic trf space etale module pushforward restriction input for the affine atlas/kernel argument; the unit does not supply a replacement for this tool."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic trf space fibre products etale covers input for the affine atlas/kernel argument; the unit does not supply a replacement for this tool."
+   },
+   {
+    "node": "lem-trf-space-pushforward-atlas-equalizer",
+    "why": "Generic trf space pushforward atlas equalizer input for the affine atlas/kernel argument; the unit does not supply a replacement for this tool."
+   },
+   {
+    "node": "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "why": "Generic trf space qc finite affine atlas refinement input for the affine atlas/kernel argument; the unit does not supply a replacement for this tool."
+   },
+   {
+    "node": "lem-trf-space-qc-separated-etale-local",
+    "why": "Generic trf space qc separated etale local input for the affine atlas/kernel argument; the unit does not supply a replacement for this tool."
+   },
+   {
+    "node": "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "why": "Generic trf space qc separated quasi coherent pushforward input for the affine atlas/kernel argument; the unit does not supply a replacement for this tool."
+   },
+   {
+    "node": "lem-trf-space-separated-affine-chart-overlap",
+    "why": "Generic trf space separated affine chart overlap input for the affine atlas/kernel argument; the unit does not supply a replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic weil pbc affine opens basis input for the affine atlas/kernel argument; the unit does not supply a replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic weil pbc module pullback affine sections input for the affine atlas/kernel argument; the unit does not supply a replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-flat-affine-base-change-sections",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-pushforward-atlas-equalizer",
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-trf-space-separated-affine-chart-overlap",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-8e4f10629",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-8e4f10629 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the sources and found nothing to fix; no files changed and no nodes were added or dropped. The item statement is unchanged from base and is Stacks 073K(1) in degree i=0, with f separated (stronger than the source's qcqs) and the ordinary adjunction mate as the base-change map; the coefficients are quasi-coherent O_X-modules on X_et. The 8-step affine-atlas kernel proof follows 03M8/03M9. I checked each step against the statement of every cited node. Step 1: g flat gives A->B flat, then B->D (etale) and A->D are flat; testing on affine etale Z is enough, since injectivity holds everywhere and the local lifts glue. Step 2: X_V is quasi-compact by the affine-test definition; f_V is separated because its diagonal is a base change of the diagonal of f; the chart-overlap node gives affine R with etale projections. Steps 3-4: the atlas equalizer is applied over V and again over Z, with U_D and R_D affine. Step 5: lem-pc-flat-affine-base-change-sections applies with X=U, base Spec A, S=D, which gives delta_D = 1 tensor delta. Step 6: flat-tensor exactness makes theta_D bijective. Step 7: the source and target components are identified correctly. Step 8: the mate is checked on pure tensors through the counit triangle identity, so the elementary flag is acceptable. Edge cases hold (X empty with Spec 0, M=0, g=id, f affine, infinite-rank M). Not duplicates: lem-sfb-flat-space-derived-pushforward-base-change assumes f flat and g arbitrary, and lem-pc-flat-cohomology-separated is for schemes only; there is no cycle. Batch 5: none of the six newly cited trf nodes (zariski-etale-qcoh-equivalence, etale-module-pushforward-restriction, pushforward-atlas-equalizer, qc-finite-affine-atlas-refinement, qc-separated-qcoh-pushforward, separated-affine-chart-overlap) has a closure reaching the trace formula, Poincare duality, sk-thm-trace-transport, batch-4 targets or the nt-assume leaves. They are generic algebraic-space foundations (03LX, 03M8, 03H6, 03M9, 03LC), so they lie outside both assumptions and are accepted. I accept all 11 declared tool_uses as generic foundations; no unit route is replaced. Sources are Stacks only, with no SGA. Live still shows the item unsplit, so the delivery is not superseded. Details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFlatDirectImageBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isIso_moduleBaseChange_of_flat",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.moduleCompositeChart_triangle",
+   "AlgebraicGeometry.AlgebraicSpace.moduleCompositeChart",
+   "AlgebraicGeometry.AlgebraicSpace.moduleTensorComposition_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.moduleTensorComposition",
+   "AlgebraicGeometry.AlgebraicSpace.moduleTensorSquare",
+   "AlgebraicGeometry.AlgebraicSpace.moduleBaseChangeCounit",
+   "AlgebraicGeometry.AlgebraicSpace.moduleBaseChange",
+   "AlgebraicGeometry.AlgebraicSpace.isIso_moduleBaseChange_of_flat"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFlatDirectImageBaseChange.lean",
+  "statement": "theorem isIso_moduleBaseChange_of_flat {T T' : Over S} (g : T' ⟶ T) [Flat g.left] (f : X ⟶ schemeSpace T) (h : X' ⟶ X) (f' : X' ⟶ schemeSpace T') (hp : IsPullback h.hom f'.hom f.hom ((Scheme.fppfTopology.over S).yoneda.map g)) (hqc : IsQuasiCompactPresheafMap f.hom.hom) (hsep : IsSeparatedPresheafMap f.hom.hom) (M : X.Modules) [M.IsQuasicoherent] : IsIso ((moduleBaseChange f (ObjectProperty.homMk ((Scheme.fppfTopology.over S).yoneda.map g) : schemeSpace T' ⟶ schemeSpace T) h f' (ObjectProperty.hom_ext _ hp.w)).app M)",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The canonical base-change transformation is the adjoint, via the prescribed moduleTensorAdjunction, of the tensor-normalized square comparison followed by the prescribed counit. Supporting declarations construct that comparison from uniquely specified tensor associativity, with the actual chart scalar maps. The main theorem states that its component is invertible for a quasi-coherent module, with scheme targets, flat base map and quasi-compact separated source map. A sheaf pullback square with its projections encodes X-prime = X times_T T-prime without choosing an arbitrary comparison map; naturality is built into the transformation. No definition has sorry data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1b945434",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node and Stacks 073K (i=0, f separated as the node chose): Over S schemes, [Flat g.left], recorded hqc/hsep, sheaf IsPullback h f' f (yoneda.map g) with the right orientation, M.IsQuasicoherent. The map is the f'^* ⊣ f'_* mate of the tensor square followed by h^* of the counit, built as a NatTrans so it is natural in M. The composition iso is a Classical.choose of an ∃! normalized by c⊗(d⊗m)↦c·a♯(d)⊗m, which is true and unique; the composite-chart triangle was checked true. No hollow defs, no duplicate (étale-restriction node is étale only; Scheme.Modules.moduleBaseChange is a different namespace), statement field verbatim, all 8 declarations present, docstrings carry source and blueprint, only sorry proofs, universe u only, item not superseded live. The def-trf-algebraic-space snapshot difference is a P1 stage-3 landing missing from the stale clone. Advisory: Mathlib proof-route plain imports. No files changed, so no compile."
+ }
+}

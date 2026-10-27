@@ -60,7 +60,18 @@
   "item": "def-compact-support-direct-image-detailed",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "def-sf-etale-origin-subcategory",
@@ -75,31 +86,33 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.Paper.EtaleOriginDerivedCategory",
-  "declaration": "AlgebraicGeometry.ProEtale.EtaleOriginDerivedCategory",
+  "module": "Sheaf.Paper.FixedEtaleOriginDerivedCategory",
+  "declaration": "AlgebraicGeometry.ProEtale.FixedEtaleOriginDerivedCategory",
   "declarations": [
    "AlgebraicGeometry.ProEtale.EtaleOriginDerivedCategory",
    "AlgebraicGeometry.ProEtale.etaleOriginForgetfulPlus",
    "AlgebraicGeometry.ProEtale.etaleOriginForgetfulPlusFullyFaithful",
    "AlgebraicGeometry.ProEtale.etaleOriginForgetfulPlus_essImage",
    "AlgebraicGeometry.ProEtale.etaleOriginForgetful",
-   "AlgebraicGeometry.ProEtale.restrictToEtaleOrigin"
+   "AlgebraicGeometry.ProEtale.restrictToEtaleOrigin",
+   "AlgebraicGeometry.ProEtale.FixedEtaleOriginDerivedCategory",
+   "AlgebraicGeometry.ProEtale.fixedEtaleOriginForgetful"
   ],
-  "file": "lean/Sheaf/Paper/EtaleOriginDerivedCategory.lean",
-  "statement": "abbrev EtaleOriginDerivedCategory (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]",
-  "branch": "newtargets-dag",
-  "by": "Q19",
-  "date": "2026-10-15",
+  "file": "lean/Sheaf/Paper/FixedEtaleOriginDerivedCategory.lean",
+  "statement": "abbrev FixedEtaleOriginDerivedCategory (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A]",
+  "branch": "sheaf-dag",
+  "by": "Q152",
+  "date": "2026-10-22",
   "existing": false,
-  "note": "Objects are the sigma of the recorded bounded-below pro-etale object and its recorded EtaleOriginWitness; InducedCategory uses the underlying object to define every Hom, identity and composition. The witness is retained as data. The named essential-image clause is postponed with its elementary proof plan. No statement correction."
+  "note": "Section 1(B): the previous recorded EtaleOriginDerivedCategory uses FiniteCoefficientDerivedCategoryPlus, modules over the continuous-function coefficient ring sheaf. The recorded chart Hom chain and sfFiniteExceptionalAt instead have fixed-scalar module-sheaf endpoints. This module retains the old interface by public import and supplies exactly the same triples in the fixed-scalar presentation, using the already-published Scheme.FixedEtaleOriginWitness. All arrows are the underlying derived arrows; the forgetful functor is inducedFunctor followed by Plus.ι. No arbitrary equivalence, selected preimage or new category notion is substituted. H13 repair: lean.declarations is the superset of all six original Q19 declarations and both fixed-scalar declarations. The original EtaleOriginDerivedCategory and its five interfaces are unchanged and public through the existing import, including the interface used by lem-sf-refinement-comparison-witness-comp (F9)."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-dd011f3ef",
-  "group": "Q19",
+  "reviewer": "NT-stage2-cc-6cd5ca9a2",
+  "group": "Q152",
   "result": "pass",
-  "note": "Statement, dependencies, retained witnesses, induced category, edge cases, docstrings, report sections, and per-file compilation all checked successfully."
+  "note": "Re-delivery of the 16525712 RETURN; both Lean modules byte-identical (sha 98c6da53, 89395fc5). F1 fixed: item stmt_deps now cite the new existing:true def-sf-etale-chart-hom-chain (6 EtaleChartAdjointComparison defs; hypotheses and chain order checked against the source) and the landed def-per-site-comparison-pullback-data (lists supportSiteComparisonCoefficientPullbackIso, ProEtaleComparisonId/Comp, EtaleComparisonComp) in place of the two theorem nodes, which stay in proof_deps. F2 fixed: def-sf-etale-origin-subcategory record is a superset (6 Q19 + 2 Fixed* decls) on a module that publicly imports the unchanged old one; old module has no sorry; live record equals base; check_lean_text clean with import resolution. Offline check_new_node/check_existing/check_record clean except a noncomputable note. Item clauses and edge cases (d=0, n=1, empty, non-separated X, non-constructible witnesses, no universe equality) re-verified. Advisories: compositor rightDerivedLowerShriekPlusCompIso owned only by theorem lem-amb-etale-compact-comparisons; Etale.upperStarId owned only by theorem lem-weil-pbc-inverse-image-composition; six chart decls listed by both theorem and def node. No compile (Lean unchanged, no file changed)."
  },
  "reviewed_proof": {
   "date": "2026-10-18",

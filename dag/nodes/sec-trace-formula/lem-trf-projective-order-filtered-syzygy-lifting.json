@@ -1,0 +1,244 @@
+{
+ "id": "lem-trf-projective-order-filtered-syzygy-lifting",
+ "kind": "statement",
+ "title": "One-level lifting of filtered relations among projective order forms",
+ "statement": "Let $k$ be a field [def-weil-field], $r\\ge0$, and $B=k[X_0,\\ldots,X_r]$ with the grading by total degree [def-weil-pbc-mv-polynomial-ring, def-pc-standard-graded-algebra]. Let $\\mathfrak p\\subset k[t_1,\\ldots,t_r]$ be a prime ideal, $L=k[t_1,\\ldots,t_r]_{\\mathfrak p}$, and $N=\\mathfrak pL$ [def-weil-pbc-localization-at-prime]. Write $\\delta(f)=f(1,t_1,\\ldots,t_r)/1$, $U_d=\\{f\\in B_d:\\delta(f)\\in N^d\\}$, and $U=\\bigoplus_{d\\ge0}U_d$. For any ideal $J$, write $\\operatorname{ord}_J(h)=\\sup\\{n:h\\in J^n\\}$, with value $\\infty$ for membership in every power. Let $\\widehat L=\\varprojlim_nL/N^n$ be the completion [def-weil-pbc-adic-completion] and $\\widehat N=N\\widehat L$. Let $b\\ge0$ and let nonzero $\\phi_j\\in U_{e_j}$ have degrees $e_j\\ge1$ for $1\\le j\\le b$; put $\\theta_j=\\delta(\\phi_j)\\in\\widehat L$. For any integer $q\\ge0$ and $u_j\\in\\widehat L$ satisfying\n$$u_j\\in\\widehat N^{\\max(0,q-e_j)}\\quad(1\\le j\\le b),\\qquad \\sum_ju_j\\theta_j\\in\\widehat N^{q+1},$$\nthere exist $v_j\\in\\widehat L$ such that\n$$\\sum_jv_j\\theta_j=0,\\qquad u_j-v_j\\in\\widehat N^{\\max(0,q+1-e_j)}\\quad(1\\le j\\le b).$$\nThe empty family is allowed. Thus the assertion lifts a relation at a single filtration level to an exact relation; its coefficients are in the completion, and are not required to be homogeneous polynomials.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "External source read online: Hironaka, Certain numerical characters of singularities, J. Math. Kyoto Univ. 10-1 (1970), Lemma 17, pp.172-173, exact-relation consequence, with its t-double-prime equal to q and valuation inequalities interpreted integrally. https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf. Archival copy WANTED; the ILO document is the VIII 2.3.13 ancestor motivation only. No Stacks tag states this specialized assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-standard-graded-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-trf-permissible-basis-chart-data"
+ ],
+ "proof": [
+  {
+   "text": "If $b=0$, take the empty tuple. If $q=0$, take every $v_j=0$: since $e_j\\ge1$, every required exponent $\\max(0,1-e_j)$ is zero. Assume $q\\ge1$. Let $A=\\{j:e_j\\le q\\}$. For $j\\notin A$ set $v_j=0$; their approximation condition is again vacuous and $u_j\\theta_j\\in\\widehat N^{e_j}\\subseteq\\widehat N^{q+1}$. Hence $\\sum_{j\\in A}u_j\\theta_j\\in\\widehat N^{q+1}$. If $A$ is empty this already finishes the proof.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent reconstruction of the exact-relation consequence of Hironaka (1970), Lemma 17, pp.172–173, read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival original WANTED. ILO VIII 2.3.13 is ancestor motivation only."
+   }
+  },
+  {
+   "text": "A field is Noetherian: an ideal is zero or, on containing a nonzero $a$, contains $a^{-1}a=1$. By [lem-weil-pbc-finite-type-algebra-noetherian], $k[t_1,\\ldots,t_r]$ is Noetherian, and by [lem-weil-pbc-localization-noetherian] so is $L$. Thus $N$ is finitely generated, by [def-weil-pbc-noetherian-ring]. This verifies the hypothesis for the completion quotient theorem used next.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence"
+   }
+  },
+  {
+   "text": "Write $\\iota:L\\to\\widehat L$. Extension of ideals commutes with products (expand finite sums of products), so $N^m\\widehat L=\\widehat N^m$. By [lem-weil-pbc-adic-completion-mod-power], choose $\\beta_j\\in L$ representing the $(q+1)$-st coordinate of $u_j$ for $j\\in A$. Then $\\iota(\\beta_j)-u_j\\in\\widehat N^{q+1}$. Put $m_j=q-e_j\\ge0$. If $m_j>0$, the $m_j$-th coordinate of $u_j$ is zero, so compatibility of coordinates gives $\\beta_j\\in N^{m_j}$; if $m_j=0$ this holds automatically. Also $s=\\sum_{j\\in A}\\beta_j\\delta(\\phi_j)$ maps into $\\widehat N^{q+1}$. Its $(q+1)$-st coordinate is $s\\bmod N^{q+1}$ by the same cited theorem, whence $s\\in N^{q+1}$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG, lemma-hathat-finitely-generated, part (2)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-projective-order-leading-syzygies] to the finite nonempty family indexed by $A$, with its parameter $e=q$, degrees $d_j=e_j$, and coefficients $\\beta_j$. All degrees lie in $[1,q]$; membership in $U_{e_j}$ is unchanged, and Step 3 verifies both coefficient and sum hypotheses in $L$. Obtain $V,h_v,a_v,C_{vj}$ with $\\sum_{j\\in A}C_{vj}\\phi_j=0$ and $\\beta_j-\\sum_va_v\\delta(C_{vj})\\in N^{q-e_j+1}$ for each $j\\in A$.",
+   "uses": [
+    "lem-trf-projective-order-leading-syzygies"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent reconstruction of the exact-relation consequence of Hironaka (1970), Lemma 17, pp.172–173, read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival original WANTED. ILO VIII 2.3.13 is ancestor motivation only."
+   }
+  },
+  {
+   "text": "For $j\\in A$, define $v_j=\\sum_v\\iota(a_v)\\iota(\\delta(C_{vj}))$. Apply the evaluation homomorphism and then $\\iota$ to each polynomial identity from Step 4; distributing the finite sums gives $\\sum_{j\\in A}v_j\\theta_j=\\sum_v\\iota(a_v)\\iota(\\delta(\\sum_{j\\in A}C_{vj}\\phi_j))=0$. Moreover $u_j-v_j=(u_j-\\iota(\\beta_j))+\\iota(\\beta_j-\\sum_va_v\\delta(C_{vj}))$ lies in $\\widehat N^{q-e_j+1}$, since $q+1\\ge q-e_j+1$. Together with the zero choices outside $A$, these are exactly the asserted equality and all the required congruences.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent reconstruction of the exact-relation consequence of Hironaka (1970), Lemma 17, pp.172–173, read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival original WANTED. ILO VIII 2.3.13 is ancestor motivation only."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-trf-projective-order-leading-syzygies"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent reconstruction of the exact-relation consequence of Hironaka (1970), Lemma 17, pp.172–173, read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival original WANTED. ILO VIII 2.3.13 is ancestor motivation only."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "syzygy|standardBasis|standard_basis|groebner",
+   "results": "{\"t\": \"2026-10-23T21:20:04Z\", \"tool\": \"grep\", \"query\": \"syzygy|standardBasis|standard_basis|groebner\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: service returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ideal\", \"IsAdicComplete\", \"ker\"",
+   "results": "{\"t\": \"2026-10-23T21:20:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"Ideal\\\", \\\"IsAdicComplete\\\", \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: service returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered syzygy lifting for homogeneous maximal order forms at a projective point",
+   "results": "{\"t\": \"2026-10-23T21:20:04Z\", \"tool\": \"leansearch\", \"query\": \"Filtered syzygy lifting for homogeneous maximal order forms at a projective point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.projective_lifting_property\", \"CategoryTheory.Projective.syzygies\", \"CategoryTheory.Projective.instSyzygies\", \"Module.Projective.of_lifting_property\", \"ProjectiveSpectrum.instIsPrimeToIdealNatAsHomogeneousIdeal\", \"ProjectiveSpectrum.as_ideal_lt_as_ideal\", \"ProjectiveSpectrum.vanishingIdeal_singleton\", \"Module.Projective.of_lifting_property'\"], \"digest\": \"55393206de64d464\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read returned signatures. Generic polynomial bases, homogeneous components, power-series weighted orders, division, or abstract projective lifting do not provide this projective-prime coordinate or filtered-relation assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximate relations among maximal order homogeneous forms in a completed local ring lift to exact syzygies",
+   "results": "{\"t\": \"2026-10-23T21:20:07Z\", \"tool\": \"leanfinder\", \"query\": \"Approximate relations among maximal order homogeneous forms in a completed local ring lift to exact syzygies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PreTilt.exists_smodEq_untiltAux\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"PreTilt.untiltAux_smodEq_untiltFun\", \"PowerSeries.weierstrassMod\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.weierstrassDistinguished_mul\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\"], \"digest\": \"81f893839f436fcc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read returned signatures. Generic polynomial bases, homogeneous components, power-series weighted orders, division, or abstract projective lifting do not provide this projective-prime coordinate or filtered-relation assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"LinearMap.ker\"",
+   "results": "{\"t\": \"2026-10-23T21:22:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAdicComplete\\\", \\\"LinearMap.ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: service returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every leading relation of maximal multiplicity homogeneous local polynomials lifts to an exact relation of coefficients",
+   "results": "{\"t\": \"2026-10-23T21:22:16Z\", \"tool\": \"leanfinder\", \"query\": \"Every leading relation of maximal multiplicity homogeneous local polynomials lifts to an exact relation of coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.jacobianRelationsOfHasCoeffs\", \"MonomialOrder.sPolynomial_decomposition\", \"MonomialOrder.span_leadingTerm_eq_span_monomial₀\", \"MonomialOrder.sPolynomial_decomposition'\", \"MonomialOrder.span_leadingTerm_eq_span_monomial\", \"MonomialOrder.div\", \"MonomialOrder.span_leadingTerm_sdiff_singleton_zero\", \"MonomialOrder.div_set\"], \"digest\": \"6ce40a38bf32141c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read returned signatures. Generic polynomial bases, homogeneous components, power-series weighted orders, division, or abstract projective lifting do not provide this projective-prime coordinate or filtered-relation assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "sPolynomial_decomposition|theorem div_set|theorem div ",
+   "results": "{\"t\": \"2026-10-23T21:23:47Z\", \"tool\": \"grep\", \"query\": \"sPolynomial_decomposition|theorem div_set|theorem div \", \"sub\": \"RingTheory/MvPolynomial\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPolynomial/MonomialOrder.lean\", \"Mathlib/RingTheory/MvPolynomial/MonomialOrder.lean\", \"Mathlib/RingTheory/MvPolynomial/MonomialOrder.lean\", \"Mathlib/RingTheory/MvPolynomial/Groebner.lean\", \"Mathlib/RingTheory/MvPolynomial/Groebner.lean\"], \"digest\": \"b874ebf99c1bb588\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Read returned signatures. Generic polynomial bases, homogeneous components, power-series weighted orders, division, or abstract projective lifting do not provide this projective-prime coordinate or filtered-relation assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximate relations among maximal order homogeneous forms in a completed local ring lift to exact syzygies",
+   "results": "{\"t\": \"2026-10-23T22:10:07Z\", \"tool\": \"leanfinder\", \"query\": \"Approximate relations among maximal order homogeneous forms in a completed local ring lift to exact syzygies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PreTilt.exists_smodEq_untiltAux\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"PreTilt.untiltAux_smodEq_untiltFun\", \"PowerSeries.weierstrassMod\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.weierstrassDistinguished_mul\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\"], \"digest\": \"81f893839f436fcc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the reported signatures. Abstract projective lifting and monomial-order division do not assert local-prime order syzygy lifting; the completion approximation lemma assumes surjectivity modulo the ideal and does not supply the required relation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "syzygy|standardBasis|standard_basis|groebner",
+   "results": "{\"t\": \"2026-10-23T22:10:43Z\", \"tool\": \"grep\", \"query\": \"syzygy|standardBasis|standard_basis|groebner\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the reported signatures. Abstract projective lifting and monomial-order division do not assert local-prime order syzygy lifting; the completion approximation lemma assumes surjectivity modulo the ideal and does not supply the required relation theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered syzygy lifting for homogeneous maximal order forms at a projective point",
+   "results": "{\"t\": \"2026-10-23T22:10:43Z\", \"tool\": \"leansearch\", \"query\": \"Filtered syzygy lifting for homogeneous maximal order forms at a projective point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.projective_lifting_property\", \"CategoryTheory.Projective.syzygies\", \"CategoryTheory.Projective.instSyzygies\", \"Module.Projective.of_lifting_property\", \"ProjectiveSpectrum.instIsPrimeToIdealNatAsHomogeneousIdeal\", \"ProjectiveSpectrum.as_ideal_lt_as_ideal\", \"ProjectiveSpectrum.vanishingIdeal_singleton\", \"Module.Projective.of_lifting_property'\"], \"digest\": \"55393206de64d464\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the reported signatures. Abstract projective lifting and monomial-order division do not assert local-prime order syzygy lifting; the completion approximation lemma assumes surjectivity modulo the ideal and does not supply the required relation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"LinearMap.ker\"",
+   "results": "{\"t\": \"2026-10-23T22:10:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAdicComplete\\\", \\\"LinearMap.ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the reported signatures. Abstract projective lifting and monomial-order division do not assert local-prime order syzygy lifting; the completion approximation lemma assumes surjectivity modulo the ideal and does not supply the required relation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every leading relation of maximal multiplicity homogeneous local polynomials lifts to an exact relation of coefficients",
+   "results": "{\"t\": \"2026-10-23T22:11:17Z\", \"tool\": \"leanfinder\", \"query\": \"Every leading relation of maximal multiplicity homogeneous local polynomials lifts to an exact relation of coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.jacobianRelationsOfHasCoeffs\", \"MonomialOrder.sPolynomial_decomposition\", \"MonomialOrder.span_leadingTerm_eq_span_monomial₀\", \"MonomialOrder.sPolynomial_decomposition'\", \"MonomialOrder.span_leadingTerm_eq_span_monomial\", \"MonomialOrder.div\", \"MonomialOrder.span_leadingTerm_sdiff_singleton_zero\", \"MonomialOrder.div_set\"], \"digest\": \"6ce40a38bf32141c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the reported signatures. Abstract projective lifting and monomial-order division do not assert local-prime order syzygy lifting; the completion approximation lemma assumes surjectivity modulo the ideal and does not supply the required relation theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-projective-order-homogeneous-approximation",
+  "date": "2026-10-24",
+  "group": "Q51"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Numerical near-point input: normal-cone equations have generators in the projective-point order algebra. Q103 refinement: Proposition 21(i),(ii), p.181, using the order algebra of section 13, p.168, and the chart convention on p.169; the case of equal degree sequences satisfies its non-strict lexicographic hypothesis. The proposition follows from Lemma 20, pp.175–181; Q63 refinement: the inductive correction of a single index in Hironaka Lemma 20, pp.176–181, used to assemble Proposition 21, p.181. Q33 refinement: Hironaka (1970), Lemma 18, pp.174–175, including its two particular consequences. Q51 refinement: Lemma 17, pp.172-173, exact-relation consequence, with its t-double-prime equal to q and valuation inequalities interpreted integrally.",
+   "via": [
+    "lem-trf-projective-order-homogeneous-approximation",
+    "lem-trf-permissible-standard-basis-one-step",
+    "lem-trf-permissible-adapted-standard-basis",
+    "lem-trf-near-blowup-order-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-projective-order-filtered-syzygy-lifting",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the existing finite-jet leading-syzygies node, together with the completion-mod-power Mathlib leaf and the two Noetherian permanence leaves. Wrote the finite-jet passage from completed coefficients explicitly, including q=0, empty families and degrees above q. No new node and no Lean attachment.",
+  "blueprint": "Checked blueprint/latest: the nearest ancestor lem-trf-local-term-locality now follows contracting correspondences. This item remains the explicitly recorded historical resolution branch of its proof (1)–(2), through homogeneous-approximation; it discharges the lower Hironaka Lemma 17 exact-relation input without changing a chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-3074236b3",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-3074236b3 (reviewer sub-agent of L); spot-checked: Read the item in full. The statement is unchanged and adds no new nodes. Small case r=1, φ1=φ2=X1, q=1 holds. Hironaka 1970 Lemma 17 is not in the local literature, so I could not check it. The proof is marked agent-written and I checked it on its own terms. Step 1: the cases b=0, q=0 and e_j>q are correct (θ_j∈N̂^{e_j} because φ_j∈U_{e_j}). Step 2: finite-type and localization Noetherian Mathlib leaves (Stacks 00FN, algebra.tex:5991), with an inline proof that a field is Noetherian; N is finitely generated. Step 3: adic-completion-mod-power (05GG(2), algebra.tex:22645) is applied with index q+1≥1. The kernel is N^{q+1}L̂=N̂^{q+1}, β_j∈N^{q−e_j} follows by compatibility, and s∈N^{q+1}. Step 4: leading-syzygies (same unit) is applied with e=q≥1 and d_j=e_j∈[1,q]; every hypothesis is checked and only the statement is used. There is no cycle: the node has an empty proof on this base, and the parallel Q52 split does not cite this item. Step 5: ι∘δ is a ring hom, which gives exact relations; the bound on u_j−v_j comes from adding the two pieces, both in N̂^{q−e_j+1}. This matches how homogeneous-approximation uses the item (at q=m). The zero-new-node split is a genuine reduction from completed coefficients to finite jets, not a restatement. There is no re-split note, and the route is unchanged. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ProjectiveOrderFilteredSyzygyLifting",
+  "declaration": "Hironaka.projective_order_filtered_syzygy_lifting",
+  "file": "lean/Sheaf/RingTheory/ProjectiveOrderFilteredSyzygyLifting.lean",
+  "statement": "theorem projective_order_filtered_syzygy_lifting {k : Type u} [Field k] (r b q : ℕ) (p : PrimeSpectrum (MvPolynomial {i : Fin (r + 1) // i ≠ 0} k)) (e : Fin b → ℕ) (φ : Fin b → MvPolynomial (Fin (r + 1)) k) (he : ∀ j : Fin b, 1 ≤ e j) (hφ_ne : ∀ j : Fin b, φ j ≠ 0) (hφ : ∀ j : Fin b, InOrderSpace r p (e j) (φ j)) (u : Fin b → AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal)) (Localization.AtPrime p.asIdeal)) (hu : ∀ j : Fin b, u j ∈ (IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal)).map (algebraMap _ _) ^ (q - e j)) (hsum : (∑ j : Fin b, u j * algebraMap (Localization.AtPrime p.asIdeal) _ (algebraMap _ (Localization.AtPrime p.asIdeal) (MvPolynomial.dehomogenizeX k 0 (φ j)))) ∈ (IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal)).map (algebraMap _ _) ^ (q + 1)) : ∃ v : Fin b → AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal)) (Localization.AtPrime p.asIdeal), (∑ j : Fin b, v j * algebraMap (Localization.AtPrime p.asIdeal) _ (algebraMap _ (Localization.AtPrime p.asIdeal) (MvPolynomial.dehomogenizeX k 0 (φ j)))) = 0 ∧ ∀ j : Fin b, u j - v j ∈ (IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal)).map (algebraMap _ _) ^ (q + 1 - e j)",
+  "branch": "sheaf-dag",
+  "by": "Q18",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c544c33d",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause. L = AtPrime p with N its maximal ideal; δ = dehomogenizeX k 0 then the localization map; U_d = InOrderSpace (body read: homogeneous of degree d and δφ ∈ N^d); completion = AdicCompletion N L with N̂ = N.map algebraMap; ℕ subtraction = max(0,·); `I.map f ^ n` parses as intended; conclusion has the same quantifier order and an unrestricted v. Edge cases b=0, q=0, e_j>q, r=0, p=0 covered, no extra hypotheses. lean.statement verbatim in the file, single sorry, docstrings give source place, blueprint tag and the 5 proof steps. Only node change besides lean: added stmt_dep def-trf-permissible-basis-chart-data, which is on the base and owns the InOrderSpace used. No duplicate declaration; sibling homogeneous-approximation uses the same conventions. Advisory only: GradedAlgebra.Standard public import unused by the statement (H9). No file changed, so no compile."
+ }
+}

@@ -1,0 +1,392 @@
+{
+ "id": "lem-sfb-relative-abel-nonspecial-chart",
+ "kind": "statement",
+ "title": "Relative nonspecial Abel chart with prescribed fibre divisor",
+ "statement": "Let $S$ be locally Noetherian [def-pc-scheme, pqf-def-locnoeth], and let $f:X\\to S$ be flat, finitely presented and projective in the projective-bundle sense, with nonempty geometrically connected reduced nodal fibres [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-trf-projective-bundle-morphism, def-trf-nodal-geometric-fibres]. Suppose the Picard fppf sheaf $P=\\operatorname{Pic}_{X/S}$ is represented by an algebraic space [sk-def-picard-pic, def-trf-algebraic-space]. Let $A\\subseteq P$ be an open subgroup [def-a1-space-open-subspace]. Fix $s\\in S$, a separable closure $k_s$ of $\\kappa(s)$, and an effective divisor $E_s$ consisting of $g=\\dim_{k_s}H^1(X_{k_s},\\mathcal O)$ distinct smooth $k_s$-points with $H^1(X_{k_s},\\mathcal O(E_s))=0$ and $H^0(X_{k_s},\\mathcal O(E_s))=k_s$ [def-pc-divisor-line-bundle, def-sc-sheaf-cohomology-functor]. There is an etale neighbourhood $S'\\to S$ of this geometric point and a relative effective Cartier divisor $E\\subset X_{S'}$ extending $E_s$ [def-weil-etale-morphism, def-pc-relative-effective-cartier]. There is a quasi-compact open subspace $V\\subseteq A_{S'}$ containing the entire identity section, and a scheme $W$, open in the degree-$g$ relative divisor scheme of the smooth locus of $X_{S'}/S'$, with an isomorphism $W\\simeq V$. On test schemes this map sends a divisor $F$ to $[\\mathcal O(F-E)]$. Its inverse sends a class $[L]$ to the zero divisor of the evaluation $f_T^*f_{T,*}(L(E))\\to L(E)$, on the locus where $f_{T,*}(L(E))$ is invertible with arbitrary base change and this evaluation cuts out a relative divisor in the smooth locus. The neighbourhood may be shrunk to be affine Noetherian. The assertions include $g=0$.",
+ "source": {
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Lemma 4.5 and its proof, printed p.143: extension of the smooth fibre divisor, cohomology-and-base-change rank-one locus, and inverse evaluation-divisor construction. Quasi-compactness follows by taking an affine Noetherian neighbourhood and a quasi-compact open around the identity inside the finite-type divisor chart. Primary Numdam PDF read online; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-projective-bundle-morphism",
+  "def-trf-nodal-geometric-fibres",
+  "sk-def-picard-pic",
+  "def-trf-algebraic-space",
+  "def-a1-space-open-subspace",
+  "def-pc-divisor-line-bundle",
+  "def-sc-sheaf-cohomology-functor",
+  "def-weil-etale-morphism",
+  "def-pc-relative-effective-cartier",
+  "def-pc-hilb-functor",
+  "def-pc-zero-scheme",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Restrict first to an affine Noetherian neighbourhood $S_0$ of $s$. By [lem-trf-projective-bundle-proper] $f$ is proper. The structure line on $S_0$ is ample by [def-weil-pbc-ample-invertible-module]: its section $1$ has nonvanishing open $S_0$. Thus [lem-trf-projective-bundle-to-h-projective] gives a closed embedding into a finite projective space over $S_0$. Let $U$ be the relative smooth locus. [lem-sfb-flat-space-smooth-locus] identifies its fibres and all its base changes with the fibre smooth loci. Its relative dimension is one, since the geometric fibres are nodal curves. Each of the finitely many points of $E_s$ has image $x_i\\in U_s$ closed in this fibre, with finite separable residue field over $\\kappa(s)$: its residue field embeds in the algebraic separable extension $k_s$, and is finitely generated over $\\kappa(s)$. Apply [lem-sbc-smooth-separable-point-etale-slice] to $U\\to S_0$ at each $x_i$. The resulting affine etale base maps have lifts to $U$. Their residue fields embed in $k_s$ compatibly with the prescribed $k_s$-points, since they are finite separable extensions. Take their fibre product, pointed by these lifts. The base-change and composition assertions of [lem-sfb-stack-chartwise-smooth-etale-calculus] make this an etale neighbourhood with sections $\\sigma_i$ lifting all points of $E_s$. For $g=0$ take $S_0$ itself and no sections.",
+   "uses": [
+    "lem-trf-projective-bundle-proper",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-sfb-flat-space-smooth-locus",
+    "lem-sbc-smooth-separable-point-etale-slice",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Deligne 4.5, first paragraph: extend the smooth fibre divisor; Stacks 057G, 01WC and smooth-locus calculus"
+   }
+  },
+  {
+   "text": "The sections are closed in $X$ because $f$ is separated: a section is the pullback of the diagonal, and [def-weil-proper-morphism] and [lem-weil-pbc-closed-immersion-base-change] give closedness. For the same reason the equalizer of each pair $\\sigma_i,\\sigma_j$ is closed in the new base. Remove the finitely many equalizers, which miss the prescribed point, and take an affine open neighbourhood there. The sections are now disjoint. Each image is Cartier in $U$ by [lem-trf-smooth-curve-section-cartier]. Their disjoint union $E$ is Cartier in $X$: near its support this is the assertion for the single section present; off the support its ideal is the unit ideal. It is finite locally free of rank $g$ over the base, since it is the disjoint union of $g$ copies of that base, and hence is relative effective Cartier. It restricts to the specified $E_s$. The base can be kept affine Noetherian: the etale affine slices over an affine Noetherian base are finite type, and so are their finite affine fibre products; use [lem-weil-pbc-finite-type-over-noetherian], then [lem-weil-pbc-noetherian-open-subscheme-noetherian] for the open restrictions. Call the resulting neighbourhood $S_1$. For $g=0$, $E=\\varnothing$, whose ideal is $\\mathcal O_X$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-trf-smooth-curve-section-cartier",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Deligne 4.5, extension of D; Stacks 067R, affine Noetherian restriction"
+   }
+  },
+  {
+   "text": "For a line module $L$ on $X_T$ with $T\\to S_1$, put $B=L\\otimes\\mathcal O(E_T)$. The divisor and its line module commute with arbitrary base change by [lem-pc-recd-pullback]. The line $B$ is finitely presented and flat over $T$: on a trivializing open its stalk is the flat stalk of $\\mathcal O_{X_T}$. Therefore [lem-sfb-proper-flat-space-derived-base-change], applied to this scheme as an algebraic space, makes $K_T(B)$ perfect and universally compatible with derived base change, and its degree-zero cohomology $\\epsilon_{T,*}f_{\\mathrm{et},*}B_{\\mathrm{et}}$ is the usual direct image $p_*B$, since the associated etale sheaf has the sections of $B$ over Zariski opens. Apply [lem-pc-perfect-locus] with degree $0$ and rank $1$. It gives a base-change-compatible open of $T$ on which $K_T(B)=N[0]$ for an invertible $N=p_*B$. On this open, for every further base change $h$, the derived comparison has source $h^*N[0]$ because $N$ is locally free. Taking degree zero gives exactly $h^*p_*B\\simeq p'_*B'$. Thus this open has the arbitrary ordinary base-change property required for the evaluation map.",
+   "uses": [
+    "lem-pc-recd-pullback",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-pc-perfect-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Deligne 4.5, rank-one cohomology-and-base-change locus; Stacks 0CTM and 0BDK"
+   }
+  },
+  {
+   "text": "On the rank-one open form the evaluation $p^*N\\to B$. Apply [lem-sfb-section-finite-cartier-open-locus] to this morphism, the smooth open $U_T$ and $d=g$. This gives a further open where its zero scheme $F$ is a relative effective Cartier divisor in $U_T$, finite locally free of rank $g$. These conditions descend to Picard classes. Indeed if $L$ is replaced by $L\\otimes p^*Q$ for a line $Q$ on $T$, then, on an open trivializing $Q$, direct image and evaluation are the previous ones tensored by that trivial line. The transition units of $Q$ give $N'=N\\otimes Q$; the coefficient defining the zero ideal is unchanged when both source and target are tensored. Hence the two opens and the divisor agree. For two local representatives of the same Picard sheaf section this comparison applies after a further fppf cover by the sheafification description [sk-def-picard-pic]. It follows that these opens agree on overlaps of local representatives. Take the scheme coproduct of a small family of fppf-local bundle presentations, using [lem-weil-pbc-scheme-coproduct-family]. Apply [lem-trf-fppf-local-open-subfunctor-descent] to the resulting presentation and its invariant open. This constructs an open subspace $V_1\\subseteq A_{S_1}$, and the preceding rule constructs its evaluation divisor on every test scheme. The divisor is compatible with pullback by [lem-pc-zero-scheme-pullback] and the degree-zero comparison of Step 3; The divisor functor is represented by the scheme of [lem-sfb-projective-smooth-divisor-parameter], hence is an fppf sheaf by [def-trf-scheme-algebraic-space]; the local divisors therefore descend uniquely.",
+   "uses": [
+    "lem-sfb-section-finite-cartier-open-locus",
+    "sk-def-picard-pic",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-trf-fppf-local-open-subfunctor-descent",
+    "lem-pc-zero-scheme-pullback",
+    "lem-sfb-projective-smooth-divisor-parameter",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Deligne 4.5, second open locus and independence of the representative; Stacks 062Y and 02WU"
+   }
+  },
+  {
+   "text": "The identity over the prescribed point belongs to $V_1$. For $L=\\mathcal O$, the hypotheses give $h^0(\\mathcal O(E_s))=1$ and $h^1(\\mathcal O(E_s))=0$. All cohomology above degree one vanishes by [lem-sfb-proper-space-curve-qcoh-bound]; there is no negative cohomology of a sheaf direct image. By the base-change isomorphism of Step 3 the derived fibre of $K(\\mathcal O(E))$ at the geometric point is etale cohomology of $\\mathcal O(E_s)$ on $X_{k_s}$, which [lem-sc-etale-zariski-qcoh-comparison] identifies with the Zariski cohomology of the hypotheses. Step 3 therefore puts this point in the rank-one open. The canonical section $1_{E_s}$ has zero scheme $E_s$ by [lem-sc-canonical-section-zero-scheme]. It is nonzero, since a Cartier divisor cannot equal a nonempty curve; hence it spans the one-dimensional space of sections. Evaluation thus has precisely zero scheme $E_s$, so Step 4 applies there. Pull back the open $V_1$ along the identity section $S_1\\to A_{S_1}$, and replace $S_1$ by an affine open neighbourhood of the specified point inside this inverse image. Its restricted identity section lies entirely in $V_1$. Denote this affine Noetherian etale neighbourhood by $S'$ and the restricted open by $V$.",
+   "uses": [
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sc-etale-zariski-qcoh-comparison",
+    "lem-sc-canonical-section-zero-scheme",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Deligne 4.5: the constructed open contains the zero section, after shrinking the base"
+   }
+  },
+  {
+   "text": "The projective embedding from Step 1 persists on $S'$. The geometric fibres have pure dimension one: they are connected of dimension one, and a zero-dimensional irreducible component of a Noetherian connected scheme lying in no other component would be an open and closed point. Apply [lem-sfb-projective-smooth-divisor-parameter] with $d=g$ to obtain the finite-type divisor scheme $H_g$. Its universal divisor $F_{\\rm univ}$ is relative Cartier and its line commutes with pullback. By [sk-def-picard-pic] it gives the morphism $\\alpha:H_g\\to P_{S'}$, $F\\mapsto[\\mathcal O(F-E)]$. Let $W=\\alpha^{-1}(V)$, an open subscheme of $H_g$. Step 4 gives a natural map $\\beta:V\\to H_g$ by evaluation divisors. For a local representative $L$ with $B=L(E)$ and $N=p_*B$, [lem-pc-zero-scheme-divisor-iso] applied to $p^*N\\to B$ gives $B\\simeq\\mathcal O(F)\\otimes p^*N$. Consequently $[\\mathcal O(F-E)]=[L]$ in the Picard sheaf. These equalities hold fppf-locally for every section and hence hold in that sheaf; thus $\\alpha\\beta=\\mathrm{id}_V$. In particular $\\beta$ factors through $W$.",
+   "uses": [
+    "lem-sfb-projective-smooth-divisor-parameter",
+    "sk-def-picard-pic",
+    "lem-pc-zero-scheme-divisor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Deligne 4.5, final identification with an open divisor scheme; Stacks 01X0"
+   }
+  },
+  {
+   "text": "Conversely take $F\\in W(T)$ and represent $\\alpha(F)$ by $L=\\mathcal O(F-E)$. Then $B=\\mathcal O(F)$ and the rank-one condition gives the line $N=p_*\\mathcal O(F)$ with arbitrary base change. The canonical section $1_F$ of [lem-sc-canonical-section-zero-scheme] induces $c:\\mathcal O_T\\to N$. On every residue-field fibre it is nonzero: [lem-pc-recd-pullback] makes $F_t$ Cartier on the nonempty fibre, and the zero scheme of the canonical section is exactly $F_t$. It cannot be the entire fibre. Since $H^0(\\mathcal O(F_t))$ has dimension one, $c_t$ is an isomorphism. Locally $c$ is multiplication by an element of a local ring; nonzero residue means that element is a unit. Thus $c$ is an isomorphism. With this generator, evaluation is the canonical section and has zero scheme $F$. This proves $\\beta\\alpha=\\mathrm{id}_W$, naturally for arbitrary $T$. Hence $W\\simeq V$ and the two maps have precisely the formulas asserted.",
+   "uses": [
+    "lem-sc-canonical-section-zero-scheme",
+    "lem-pc-recd-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Deligne 4.5, verification of the inverse on test schemes; canonical Cartier section"
+   }
+  },
+  {
+   "text": "The scheme $H_g$ is finite type over the Noetherian $S'$, so is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Its open $W$ is Noetherian and quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The isomorphism makes $V$ quasi-compact as well. When $g=0$ the construction uses the empty divisor and $H_0=S'$. At the prescribed point its canonical section is $1$ with empty zero scheme; Steps 3--7 apply without a section-lifting choice or a positive-degree assumption. Thus this case is included.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Quasi-compact refinement of Deligne 4.5 over an affine Noetherian neighbourhood; degree zero case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-projective-bundle-proper",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-sfb-flat-space-smooth-locus",
+  "lem-sbc-smooth-separable-point-etale-slice",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-trf-smooth-curve-section-cartier",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-pc-recd-pullback",
+  "lem-sfb-proper-flat-space-derived-base-change",
+  "lem-pc-perfect-locus",
+  "lem-sfb-section-finite-cartier-open-locus",
+  "sk-def-picard-pic",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-trf-fppf-local-open-subfunctor-descent",
+  "lem-pc-zero-scheme-pullback",
+  "lem-sfb-projective-smooth-divisor-parameter",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-proper-space-curve-qcoh-bound",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "lem-sc-canonical-section-zero-scheme",
+  "lem-pc-zero-scheme-divisor-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Expansion of Deligne Lemma 4.5 read online, with the local PDF absent (WANTED); Stacks proofs used as specified in individual cited nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative Abel map from effective divisors on the smooth locus of a projective flat reduced curve gives an open scheme chart of its Picard space at a nonspecial divisor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$, a homogeneous element $t \\\\in \\\\mathcal{A}_d$ with $d > 0$, and a global section $x$ such that $f(t) = x$, this morphism constructs a scheme map from the basic open su\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x y : F}\\n  (h : W.Nonsingular x y),\\n  WeierstrassCurve.Affine.Point.toClass (WeierstrassCurve.Affine.Point.some h) =\\n    ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h)\", \"doc\": \"For any commutative domain $ R $, its class group — defined as the quotient of the group of invertible fractional ideals by the subgroup of principal fractional ideals — forms an abelian group under i\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass_apply\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] (P : W.Point),\\n  WeierstrassCurve.Affine.Point.toClass P =\\n    match P with\\n    | WeierstrassCurve.Affine.Point.zero => 0\\n    | WeierstrassCurve.Affine.Point.some h =>\\n      Additive.ofMul (ClassGroup.mk (Weiers\", \"doc\": \"The function maps each point $ P $ on an affine Weierstrass curve $ W $ over a field to an element in the additive class group of $ W $'s coordinate ring. The zero point maps to the additive identity,\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} → [inst_1 : DecidableEq F] → W.Point →+ Additive (ClassGroup W.CoordinateRing)\", \"doc\": \"The function maps each point $ P $ on an affine Weierstrass curve $ W $ over a field to an element in the additive class group of $ W $'s coordinate ring. The zero point maps to the additive identity,\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} →\\n      {x y : F} → W.Nonsingular x y → (FractionalIdeal (nonZeroDivisors W.CoordinateRing) W.FunctionField)ˣ\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, this constructs the unit in the group of invertible fractional ideals of the coordinate ring $W.\\text{CoordinateRin\"}\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; Weierstrass coordinate classes, ring Picard groups, ordinary scheme morphisms and compact topological-group translates do not give this relative algebraic-space statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible sheaf on a relative curve with derived direct image a line bundle in degree zero is locally uniquely represented by a relative effective Cartier divisor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Submodule.unitsQuotEquivRelPic_apply_coe\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A] (a : (Submodule R A)ˣ ⧸ (Units.map ↑(Submodule.spanSingleton R)).range),\\n  ↑((Submodule.unitsQuotEquivRelPic R A) a) =\\n    ↑((QuotientGroup.quotientKerEquivRange (Subm\", \"doc\": \"The quotient group of invertible submodules of an $ R $-module $ A $ by the subgroup of principal invertible submodules is multiplicatively isomorphic to the relative Picard subgroup $ \\\\mathrm{relPic}\"}\n  {\"name\": \"Submodule.unitsQuotEquivRelPic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": (Submodule R A)ˣ ⧸ (Units.map (spanSingleton R).toMonoidHom).range ≃* relPic R A\", \"doc\": \"The quotient group of invertible submodules of an $ R $-module $ A $ by the subgroup of principal invertible submodules (those generated by a single element) is multiplicatively isomorphic to the rela\"}\n  {\"name\": \"CommRing.Pic.AsModule\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(M : Pic R) : Type u\", \"doc\": \"For an element $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $, this returns the corresponding invertible semimodule (module) over $ R $ in the skeleton category, representing the isomorphism class of i\"}\n  {\"name\": \"Submodule.unitsQuotEquivRelPic_symm_apply\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A] (a : ↥(CommRing.relPic R A)),\\n  (Submodule.unitsQuotEquivRelPic R A).symm a =\\n    (QuotientGroup.congr (Submodule.unitsToPic R A).ker (Units.map ↑(Submodule.spanSingle\", \"doc\": \"For commutative semirings $ R $ and $ A $ with a faithful $ R $-algebra structure, the quotient group of invertible submodules of $ A $ by the subgroup of principal invertible submodules (those genera\"}\n  {\"name\": \"CommRing.Pic.instFreeOfSubsingleton\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"[Subsingleton (Pic R)] : Free R M\", \"doc\": \"If the Picard group of a commutative semiring $ R $ is trivial (i.e., has at most one element), then every invertible $ R $-module is a free module. This means that when the group of isomorphism class\"}\n  {\"name\": \"Submodule.range_unitsToPic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": (unitsToPic R A).range = relPic R A\", \"doc\": \"The image of the monoid homomorphism from invertible submodules of an $ R $-module $ A $ to the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the relative Picard subgroup $ \\\\mathrm{relPic}(R, A) $, whi\"}\n  {\"name\": \"AlgebraicGeometry.structureSheafInType\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \": Sheaf (Type u) (PrimeSpectrum.Top R)\", \"doc\": \"The sheaf of types on the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, constructed by sheafifying the local predicate that declares elements to be fractions $r/s$ with $r,s \\\\in R\"}\n  {\"name\": \"Module.Invertible.exists_linearEquiv_ideal\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"[Subsingleton (Pic (FractionRing R))] : ∃ I : Ideal R, Nonempty (M ≃ₗ[R] I)\", \"doc\": \"If the Picard group of the fraction ring of a commutative ring $ R $ is a subsingleton (i.e., trivial), then every invertible $ R $-module $ M $ is isomorphic to an ideal $ I $ of $ R $ as an $ R $-mo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; Weierstrass coordinate classes, ring Picard groups, ordinary scheme morphisms and compact topological-group translates do not give this relative algebraic-space statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"OpenImmersion\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; Weierstrass coordinate classes, ring Picard groups, ordinary scheme morphisms and compact topological-group translates do not give this relative algebraic-space statement"
+  },
+  {
+   "tool": "grep",
+   "query": "picard|abelMap|nonspecial",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"24\", \"text\": \"the special case where `S` is the spectrum of some commutative ring `R` whose Picard group is zero\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"50\", \"text\": \"elliptic curves over the spectrum `Spec(R)` of `R` in the case that `R` has trivial Picard group\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"361\", \"text\": \"accurate for certain rings whose Picard group has trivial 12-torsion, such as a field or a PID. -/\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; Weierstrass coordinate classes, ring Picard groups, ordinary scheme morphisms and compact topological-group translates do not give this relative algebraic-space statement"
+  },
+  {
+   "tool": "grep",
+   "query": "abelMap|nonspecial|relativePicard|PicardFunctor",
+   "results": "OK 0 hits; returned names/files: . Mathlib source subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Weierstrass point classes, ring Picard groups or ordinary scheme open immersions, not the relative Abel chart with its inverse on arbitrary test schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Abel map on effective degree genus divisors is an isomorphism onto the open locus of Picard classes having exactly one section and no higher cohomology whose evaluation section is regular",
+   "results": "OK 8 hits; returned names/files: WeierstrassCurve.Affine.Point.toClass_some, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.basicOpenIsoAway_hom, WeierstrassCurve.Affine.Point.toClass_apply, Submodule.range_unitsToPic, CommRing.relPic, AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen, AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Weierstrass point classes, ring Picard groups or ordinary scheme open immersions, not the relative Abel chart with its inverse on arbitrary test schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Abel Jacobi morphism identifies the nonspecial effective divisors of degree genus with an open subscheme of the relative Picard functor",
+   "results": "OK 8 hits; returned names/files: CommRing.relPic, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsOpenImmersionMapI₀Functor, WeierstrassCurve.Jacobian.nonsingularLift_iff, WeierstrassCurve.Jacobian, WeierstrassCurve.toJacobian, WeierstrassCurve.Jacobian.toAffine, WeierstrassCurve.Jacobian.addMap, WeierstrassCurve.Affine.Point.toJacobian",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Weierstrass point classes, ring Picard groups or ordinary scheme open immersions, not the relative Abel chart with its inverse on arbitrary test schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"OpenImmersion\"",
+   "results": "OK 0 hits; returned names/files: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Weierstrass point classes, ring Picard groups or ordinary scheme open immersions, not the relative Abel chart with its inverse on arbitrary test schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-picard-etale-schematic",
+  "date": "2026-10-23",
+  "group": "Q117"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space. Auxiliary input: Relative nonspecial Abel chart with prescribed fibre divisor.",
+   "via": [
+    "lem-sfb-nodal-picard-etale-schematic",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-abel-nonspecial-chart",
+  "worker": "stage1",
+  "summary": "Read Deligne 4.5 in the primary Numdam PDF and the Stacks supporting arguments. Constructed the etale extension using existing separable-point slices, the two invariant open loci, both inverse identities, and the Noetherian quasi-compact refinement, including degree zero. One new generic zero-divisor open-locus lemma; all other inputs reused. No statement change.",
+  "blueprint": "Inherited supporting branch of det-thm-sf-ctf-stability-direct-images (3), via the listed alteration/stable-Picard inputs: the Abel chart in the final etale-local scheme construction. The latest blueprint direct-images proof (3) is the controlling unit route. The existing created.item chain has no recorded blueprint ancestor (blueprint_refs.py ancestor prints None); its inherited null ancestor is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Generic tool for Projective-bundle morphisms are proper used with its stated hypotheses in the Abel-chart construction; this unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Generic tool for Projective-bundle projectivity over an ample base implies H-projectivity used with its stated hypotheses in the Abel-chart construction; this unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-sbc-smooth-separable-point-etale-slice",
+    "why": "Generic tool for Etale slice through a separable point of a smooth morphism used with its stated hypotheses in the Abel-chart construction; this unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic tool for Base change of a closed immersion is a closed immersion used with its stated hypotheses in the Abel-chart construction; this unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-trf-smooth-curve-section-cartier",
+    "why": "Generic tool for A section of a separated smooth relative curve is Cartier used with its stated hypotheses in the Abel-chart construction; this unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic tool for A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used with its stated hypotheses in the Abel-chart construction; this unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic tool for An open subscheme of a Noetherian scheme is Noetherian used with its stated hypotheses in the Abel-chart construction; this unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-pc-recd-pullback",
+    "why": "Generic tool for Pullback of relative effective Cartier divisors used with its stated hypotheses in the Abel-chart construction; this unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-pc-perfect-locus",
+    "why": "Generic tool for The perfect locus with fixed degree used with its stated hypotheses in the Abel-chart construction; this unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic tool for Coproducts of schemes: open coprojections with disjoint images covering used with its stated hypotheses in the Abel-chart construction; this unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-trf-fppf-local-open-subfunctor-descent",
+    "why": "Generic tool for Descent of open subfunctors along an fppf-local scheme presentation used with its stated hypotheses in the Abel-chart construction; this unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-pc-zero-scheme-pullback",
+    "why": "Generic tool for Pullback compatibility of the zero locus used with its stated hypotheses in the Abel-chart construction; this unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-sc-canonical-section-zero-scheme",
+    "why": "Generic tool for An effective Cartier divisor is the zero scheme of a section of its line bundle used with its stated hypotheses in the Abel-chart construction; this unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-pc-zero-scheme-divisor-iso",
+    "why": "Generic tool for A morphism of invertible modules whose zero scheme is an effective Cartier divisor $D$ gives $\\mathcal N\\cong\\mathcal O_X(D)\\otimes\\mathcal M$ used with its stated hypotheses in the Abel-chart construction; this unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-sc-etale-zariski-qcoh-comparison",
+    "why": "Generic comparison of Zariski and etale cohomology of a quasi-coherent module (unit sk-prop-cd), used in Step 5 to read the Zariski hypotheses h^0=1, h^1=0 on the etale-defined direct image of lem-sfb-proper-flat-space-derived-base-change; this unit has no replacement for this general input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-proper",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-sbc-smooth-separable-point-etale-slice",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-trf-smooth-curve-section-cartier",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-pc-recd-pullback",
+  "lem-pc-perfect-locus",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-trf-fppf-local-open-subfunctor-descent",
+  "lem-pc-zero-scheme-pullback",
+  "lem-sc-canonical-section-zero-scheme",
+  "lem-pc-zero-scheme-divisor-iso",
+  "lem-sc-etale-zariski-qcoh-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-7c626fa00",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-7c626fa00 (reviewer sub-agent of L); spot-checked: Read Deligne, Le lemme de Gabber 4.4-4.5 (Numdam PDF, printed p.141-143; the local PDF is still WANTED). The delivery follows its route: the prescribed divisor is extended over an etale neighbourhood, the rank-one perfect locus plays the role of R^1=0, and the evaluation-divisor open replaces Sym^g. Read all 8 steps and every cited statement. FIX, three repairs. (1) Step 5 used the Zariski hypotheses h^0=1, h^1=0 against the etale-defined K. It now cites lem-sc-etale-zariski-qcoh-comparison, added to uses, proof_deps and tool_uses; that node is generic, in unit sk-prop-cd, with no cycle. (2) Step 3 claimed K is identified with the usual direct image, which the cited node does not state. It now says only that H^0 of K is p_*B, which follows directly from the definition of the associated etale sheaf. (3) Step 6 did not check the pure-dimension-one hypothesis of lem-sfb-projective-smooth-divisor-parameter. An elementary argument is added. Hypotheses of the slices, smooth-curve-section-cartier, perfect-locus, fppf-local-open-subfunctor-descent and zero-scheme-divisor-iso were checked, as were both inverse identities and the g=0 case. New node lem-sfb-section-finite-cartier-open-locus: I proved it true via 062Y (recd-fibre-cartier-local), properness, 02LS and 02KB, and tested it on Z empty with d=0, a vanishing on a component, and a=0. Statement only, B1-B7 met. Not a duplicate of recd-locally-principal, recd-fibre-cartier-local, zero-scheme-recd or pc-f-representable, and not a clause of the item. Batch-5 flags: every listed trf citation, and every closure reaching def-trf-algebraic-space or structural-fibrewise-open-locality, is a generic tool or definition outside the trace-formula and Poincare-duality proofs, so all are accepted. No SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeAbelNonspecialChart",
+  "declaration": "AlgebraicGeometry.RelativeAbelChart.relative_abel_nonspecial_chart",
+  "declarations": [
+   "AlgebraicGeometry.RelativeAbelChart.cohomology",
+   "AlgebraicGeometry.RelativeAbelChart.Divisor",
+   "AlgebraicGeometry.RelativeAbelChart.lineClass",
+   "AlgebraicGeometry.RelativeAbelChart.testDivisor",
+   "AlgebraicGeometry.RelativeAbelChart.testLineClass",
+   "AlgebraicGeometry.RelativeAbelChart.twist",
+   "AlgebraicGeometry.RelativeAbelChart.evaluation",
+   "AlgebraicGeometry.RelativeAbelChart.UniversalBaseChange",
+   "AlgebraicGeometry.RelativeAbelChart.relative_abel_nonspecial_chart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeAbelNonspecialChart.lean",
+  "statement": "theorem relative_abel_nonspecial_chart {X S : Scheme.{u}} (f : X ⟶ S) [IsLocallyNoetherian S] [Flat f] [LocallyOfFinitePresentation f] (hf : IsProjectiveBundle f) (hnodal : HasNodalGeometricFibres f) (P : AlgebraicSpace S) (eP : P.obj.obj ⋙ uliftFunctor.{u + 1, u} ≅ (picardFunctor f).obj) (A : AlgebraicSpace.OpenSubspace P) (hA : ∀ T : Over S, ∃ G : Subgroup ((picardFunctorGrp f).obj (op T)), ∀ x : P.obj.obj.obj (op T), x ∈ A.val.obj (op T) ↔ eP.hom.app (op T) (ULift.up x) ∈ G) (s : S) (K : Type u) [Field K] [Algebra (S.residueField s) K] [IsSepClosure (S.residueField s) K] (q : Spec (.of K) ⟶ S) (hq : q = Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) K)) ≫ S.fromSpecResidueField s) (g : ℕ) (hg : g = Module.finrank K (cohomology (pullback.snd f q) (𝟙_ (pullback f q).Modules) 1)) (Es : (pullback f q).IdealSheafData) (hEs : Es.IsInvertible) (x : Fin g → (Spec (.of K) ⟶ pullback f q)) (hx : Function.Injective x) (hsection : ∀ i : Fin g, x i ≫ pullback.snd f q = 𝟙 _) (hsmooth : ∀ (i : Fin g) (z : Spec (.of K)), x i z ∈ (pullback.snd f q).smoothLocus) (hpoints : Es = ⨅ i : Fin g, (x i).ker) (hH1 : Subsingleton (cohomology (pullback.snd f q) Es.toModulesᵛ 1)) (hH0 : Module.finrank K (cohomology (pullback.snd f q) Es.toModulesᵛ 0) = 1) : ∃ (S' : Scheme.{u}) (h : S' ⟶ S) (q' : Spec (.of K) ⟶ S') (E : (pullback f h).IdealSheafData) (hE : E.IsRelativeEffectiveCartier (pullback.snd f h)) (hq' : q' ≫ h = q), Etale h ∧ IsAffine S' ∧ IsNoetherian S' ∧ E.comap (baseChangeMap f (Over.homMk q' hq' : Over.mk q ⟶ Over.mk h)) = Es ∧ ∃ (H : Over S') (rH : ∀ T : Over S', (T ⟶ H) ≃ Divisor f g ((Over.map h).obj T)) (W : H.left.Opens) (V : Subfunctor ((Over.map h).op ⋙ P.obj.obj)) (eW : yoneda.obj (Over.mk (W.ι ≫ H.hom)) ≅ V.toFunctor), (∀ (T T' : Over S') (a : T' ⟶ T) (b : T ⟶ H), (rH T' (a ≫ b)).val.val = (rH T b).val.val.comap (baseChangeMap f ((Over.map h).map a))) ∧ AlgebraicSpace.IsRepresentableWith (fun _ _ a ↦ IsOpenImmersion a.left) V.ι ∧ (∀ (T : Over S') (y : P.obj.obj.obj (op ((Over.map h).obj T))), y ∈ V.obj (op T) → y ∈ A.val.obj (op ((Over.map h).obj T))) ∧ (∀ T : Over S', (eP.inv.app (op ((Over.map h).obj T)) ((toPicardFunctorHom f ((Over.map h).obj T)) 1)).down ∈ V.obj (op T)) ∧ CompactSpace W.toScheme ∧ (∀ (T : Over S') (a : T ⟶ Over.mk (W.ι ≫ H.hom)), eP.hom.app (op ((Over.map h).obj T)) (ULift.up (eW.hom.app (op T) a).val) = (toPicardFunctorHom f ((Over.map h).obj T)) (@Mul.mul (pullback f (T.hom ≫ h)).Pic inferInstance (lineClass (rH T (a ≫ Over.homMk W.ι)).val.val (rH T (a ≫ Over.homMk W.ι)).property.1) (testLineClass f h E hE T)⁻¹)) ∧ (∀ (T : Over S') (a : T ⟶ Over.mk (W.ι ≫ H.hom)) (L : (pullback f (T.hom ≫ h)).Pic), (toPicardFunctorHom f ((Over.map h).obj T)) L = eP.hom.app (op ((Over.map h).obj T)) (ULift.up (eW.hom.app (op T) a).val) → ((Scheme.Modules.pushforward (pullback.snd f (T.hom ≫ h))).obj (twist f h E T L)).IsInvertible ∧ UniversalBaseChange f ((Over.map h).obj T) (twist f h E T L) ∧ (rH T (a ≫ Over.homMk W.ι)).val.val = (evaluation (pullback.snd f (T.hom ≫ h)) (twist f h E T L)).zeroLocus)",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Full arbitrary-test relative chart. Helpers specialize recorded Hilbert points, divisor lines, module cohomology and normalized tensor-pullback adjunctions; they contain real data. The ULift comparison preserves the existing Picard functor and the small-valued algebraic-space interface."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b94ae590b",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion matches the node; the statement field is verbatim; the three added stmt_deps are definitions the statement uses; the helpers are real, with no duplicate notions found; the only sorry is the main theorem's proof. Advisory: the second reading is a worker self-check, and hEs/hq are redundant without strengthening the statement. No compile, since nothing was changed."
+ }
+}

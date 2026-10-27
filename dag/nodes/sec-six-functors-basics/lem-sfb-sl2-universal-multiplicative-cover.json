@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-sl2-universal-multiplicative-cover",
+ "kind": "statement",
+ "title": "SL2 is the universal multiplicative covering of PGL2",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], with closed subgroup schemes [def-sc-group-scheme-subgroup]. Let $S=\\operatorname{SL}_{2,F}$ and $Q=\\operatorname{PGL}_{2,F}$, and let $q:S\\to Q$ be the scalar quotient homomorphism of [lem-sfb-projective-matrix-central-cover]. Then $S$ is semisimple, its scheme-theoretic centre is $\\mu_2=\\{tI_2:t^2=1\\}$, and $q$ is its universal multiplicative covering of $Q$: for every smooth connected group $E$ and every faithfully flat homomorphism $p:E\\to Q$ with finite central diagonalizable scheme-theoretic kernel, there is a unique homomorphism $u:S\\to E$ with $p\\circ u=q$. Here semisimple means smooth and connected with no nontrivial smooth connected solvable normal subgroup, solvable meaning that iterated commutator subgroup schemes become trivial. A finite diagonalizable group is $D_F(M)=\\operatorname{Spec}F[M]$ for a finite abelian group $M$, with group algebra basis $e_m$, multiplication $e_me_n=e_{m+n}$, and comultiplication $e_m\\mapsto e_m\\otimes e_m$. Smoothness and connectedness are [def-sbc-smooth-morphisms, def-weil-connected-scheme]. This includes characteristic two and does not assert that $\\mu_2$ is reduced.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 20.31, printed p.418; definition of universal covering in 18.7 and the lifting property in Proposition 18.8. The scalar centre is computed by commuting a matrix with the two unit transvections."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-projective-matrix-central-cover",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-projective-matrix-central-cover] with $r=2$. It gives that $S$ and $Q$ are smooth, connected, affine and of finite type, and that $q$ is faithfully flat with finite central kernel $\\mu_2$. Its Hopf algebra $F[t]/(t^2-1)=F[\\mathbf Z/2\\mathbf Z]$ identifies this kernel with the diagonalizable group $D_F(\\mathbf Z/2\\mathbf Z)$. This is a scheme-theoretic assertion even in characteristic two.",
+   "uses": [
+    "lem-sfb-projective-matrix-central-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.31, p.418; scalar quotient as in Example 5.49."
+   }
+  },
+  {
+   "text": "Compute the centre on arbitrary commutative $F$-algebras $A$. Write $g\\in S(A)$ with entries $g_{11}=a$, $g_{12}=b$, $g_{21}=c$, $g_{22}=d$, and let $E_{ij}$ denote the matrix with a single entry $1$ in position $(i,j)$. If $g$ is central, the equation $g(I_2+E_{12})=(I_2+E_{12})g$ gives $c=0$ and $a=d$, and $g(I_2+E_{21})=(I_2+E_{21})g$ gives $b=0$. Thus $g=aI_2$ and $a^2=1$. Conversely these scalars commute with every matrix after every algebra extension. The natural equality of subgroup functors is therefore $Z(S)=\\mu_2$, including nilpotent-valued points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "The centre computation accompanying Proposition 20.31, p.418; direct matrix calculation."
+   }
+  },
+  {
+   "text": "To verify reductivity without rank-one classification, let $U$ be a smooth connected normal unipotent subgroup of $S$. It is normal in $\\operatorname{GL}_2$: for $g\\in\\operatorname{GL}_2(A)$ pass to the faithfully flat free algebra $B=A[t]/(t^2-\\det g)$, in which $t$ is invertible. There $g=t(g/t)$ with $g/t\\in S(B)$, so conjugation by $g$ preserves $U_B$. The equations defining the closed subgroup $U$ descend back to $A$ because $A\\to B$ is injective, also after any further algebra extension. Apply [lem-sfb-general-linear-reductive] to $\\operatorname{GL}_2$ to conclude $U=1$. Thus $S$ is reductive.",
+   "uses": [
+    "lem-sfb-general-linear-reductive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 19.19, p.401; elementary scalar factorization supplies normality in GL2."
+   }
+  },
+  {
+   "text": "Let $N\\subseteq S$ be any smooth connected solvable normal subgroup. The field $F$ is perfect, since it has no proper algebraic field extensions. By [lem-sfb-perfect-solvable-unipotent-torus], its smooth connected unipotent subgroup $N_u$ is normal in $S$, and $N/N_u$ is a torus. Step 3 gives $N_u=1$, so $N$ itself is a torus. Apply [lem-sfb-connected-action-torus-rigidity] to conjugation $S\\times N\\to N$: the action is trivial, hence $N\\subseteq Z(S)=\\mu_2$ by step 2. A torus $\\mathbf G_m^r$ cannot be a closed subgroup of this finite scheme unless $r=0$: its Laurent coordinate ring would otherwise be infinite dimensional, whereas a quotient of $F[t]/(t^2-1)$ has dimension at most two. Thus $N=1$, proving semisimplicity.",
+   "uses": [
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-connected-action-torus-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 19.19, p.401; Corollary 12.37, p.244, and the solvable-group structure used in Corollary 17.62(b), pp.372--373."
+   }
+  },
+  {
+   "text": "Write $X^*(J)=\\operatorname{Hom}(J,\\mathbf G_m)$. The algebraically closed field $F$ is infinite: a finite field would make $\\prod_{c\\in F}(T-c)-1$ a nonconstant polynomial with no root. Choose $a\\ne0$ with $a^2\\ne1$. By [lem-sfb-sl2-field-commutator-generation], $S(F)$ is its own commutator subgroup. Every character $\\chi:S\\to\\mathbf G_m$ therefore has value $1$ at every $F$-point. The coordinate ring of $S$ is reduced by [sbc-lem-smooth-geometrically-reduced], since step 1 gives smoothness over $F$. Apply [lem-wf-affine-nullstellensatz-vanishing] to the regular function $\\chi^*(t)-1$: it is zero. Consequently $X^*(S)=0$ as a group of scheme homomorphisms.",
+   "uses": [
+    "lem-sfb-sl2-field-commutator-generation",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.24, p.416, with its field-size condition made explicit; Example 18.17, p.391."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-special-linear-picard-zero] with $k=F$ and $n=2$ to obtain $\\operatorname{Pic}(S)=0$. Its affine scheme is precisely the determinant-one matrix scheme defining $S$; this uses the scheme Picard group of invertible modules, not a Picard functor of a proper curve.",
+   "uses": [
+    "lem-sfb-special-linear-picard-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.30, p.417; Example 18.20 and the opening sentence of Proposition 20.31 refer to this Picard route."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-connected-group-characters-torsion-free] to any smooth connected affine $F$-group $H$ of finite type: its character group $X^*(H)=\\operatorname{Hom}(H,\\mathbf G_m)$ is torsion-free, i.e. $\\chi^n=1$ with $n\\geq1$ forces $\\chi=1$ as a morphism of group schemes. Its statement has no restriction on the characteristic, so it covers the case where $\\operatorname{char}F$ divides $n$ and $\\mu_n$ is not reduced.",
+   "uses": [
+    "lem-sfb-connected-group-characters-torsion-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "The torsion-freeness assertion in the proof of Proposition 18.19, pp.391--392."
+   }
+  },
+  {
+   "text": "Let $f:H\\to S$ be an arbitrary multiplicative isogeny of smooth connected affine groups, and let $K=\\ker f=D_F(M)$ with $M$ finite. The exact sequence of [lem-sfb-character-picard-isogeny-sequence] contains $0\\to X^*(S)\\to X^*(H)\\to X^*(K)\\to\\operatorname{Pic}(S)$. Steps 5 and 6 therefore make restriction an isomorphism $X^*(H)\\simeq X^*(K)$. By [lem-sfb-multiplicative-character-antiduality], $X^*(K)\\simeq M$, a finite group. Step 7 makes $X^*(H)$ torsion-free, so both groups are zero and antiduality gives $K=1$. A faithfully flat homomorphism with trivial kernel is an isomorphism: faithfully flat local lifts exist, any two coincide because their ratio lies in the kernel, and the unique local lifts glue by the sheaf axiom. This proves multiplicative simple connectedness of $S$.",
+   "uses": [
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.19 and Example 18.20, pp.391--392; the alternative proof explicitly cited by Proposition 20.31, p.418."
+   }
+  },
+  {
+   "text": "Given $p:E\\to Q$ as in the statement, step 1 says that $q:S\\to Q$ is a multiplicative isogeny, and step 8 says that $S$ is multiplicatively simply connected. Apply [lem-sfb-simply-connected-multiplicative-lifting] to these two isogenies. Its hypotheses on the field, smoothness, connectedness, affineness, finite type and the scheme-theoretic kernels are exactly those in force. It gives the required unique $u:S\\to E$ with $p\\circ u=q$. Together with steps 2 and 4 this proves every clause, with no reducedness assumption on $\\mu_2$.",
+   "uses": [
+    "lem-sfb-simply-connected-multiplicative-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 18.7 and Proposition 18.8, p.389; Proposition 20.31, p.418."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-matrix-central-cover",
+  "lem-sfb-general-linear-reductive",
+  "lem-sfb-perfect-solvable-unipotent-torus",
+  "lem-sfb-connected-action-torus-rigidity",
+  "lem-sfb-sl2-field-commutator-generation",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sfb-special-linear-picard-zero",
+  "lem-sfb-connected-group-characters-torsion-free",
+  "lem-sfb-character-picard-isogeny-sequence",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-simply-connected-multiplicative-lifting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 20.31 via its explicitly cited Example 18.20 and Proposition 18.19; Propositions 20.24, 20.30 and 18.8. Semisimplicity follows Example 19.19, expanded through solvable-group structure and torus rigidity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "SL2 is the simply connected universal central covering group of PGL2 over an algebraically closed field in every characteristic",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"OnePoint.exists_mem_SL2\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] (A : Type u_2) [inst_2 : CommRing A] [IsDomain A]\\n  [inst_4 : Algebra A K] [IsFractionRing A K] [IsPrincipalIdealRing A] (c : OnePoint K),\\n  ∃ g, (Matrix.SpecialLinearGroup.mapGL K) g • OnePoint.infty = c\", \"doc\": \"For any commutative domain $ A $ that is a principal ideal ring and its fraction field $ K $, every cusp $ c $ in the one-point compactification $ \\\\text{OnePoint}\\\\, K $ can be represented as $ g \\\\cdot\"}\n  {\"name\": \"MatrixGroups.termPSL(_,_)\", \"module\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup\", \"type\": \"Lean.ParserDescr\", \"doc\": \"The projective special linear group $ \\\\text{PSL}(m, n) $ is defined as the quotient group $ \\\\text{SL}(m, n)/Z(\\\\text{SL}(m, n)) $, where $ Z(\\\\text{SL}(m, n)) $ denotes the center of the special linear \"}\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup\", \"module\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup\", \"type\": \"(n : Type u) → [DecidableEq n] → [Fintype n] → (R : Type v) → [CommRing R] → Type (max (max u v) v u)\", \"doc\": \"The projective special linear group $\\\\text{PSL}(n, R)$ is defined as the quotient of the special linear group $\\\\text{SL}(n, R)$ by its center subgroup, which consists of scalar matrices in $\\\\text{SL}(\"}\n  {\"name\": \"SpecialLinearGroup.SL2Z_generators\", \"module\": \"Mathlib/LinearAlgebra/Matrix/FixedDetMatrices\", \"type\": \"Subgroup.closure {ModularGroup.S, ModularGroup.T} = ⊤\", \"doc\": \"The subgroup generated by the elements $ S = \\\\begin{pmatrix} 0 & -1 \\\\\\\\ 1 & 0 \\\\end{pmatrix} $ and $ T = \\\\begin{pmatrix} 1 & 1 \\\\\\\\ 0 & 1 \\\\end{pmatrix} $ in the special linear group $ \\\\mathrm{SL}(2, \\\\math\"}\n  {\"name\": \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V] [Module.Free R V]\\n  [Module.Finite R V], Module.finrank R V ≤ 1 → Subgroup.center (SpecialLinearGroup R V) = ⊥\", \"doc\": \"If the finite rank of an $ R $-module $ V $ over a commutative ring $ R $ satisfies $ \\\\dim_R(V) \\\\leq 1 $, then the center of the special linear group $ \\\\text{SL}(V) $ is the trivial subgroup containin\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V],\\n  Module.finrank R V ≤ 1 →\\n    ∀ (g : ↥(Subgroup.center (SpecialLinearGroup R V))), SpecialLinearGroup.centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity\", \"module\": \"Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup\", \"type\": \"{n : Type u} →\\n  [inst : DecidableEq n] →\\n    [inst_1 : Fintype n] →\\n      {R : Type v} →\\n        [inst_2 : CommRing R] →\\n          ↥(Subgroup.center (Matrix.SpecialLinearGroup n R)) ≃* ↥(rootsOfUnity (max (Fintype.card n) 1) R)\", \"doc\": \"For a finite type $n$ with cardinality $\\\\#n$ and commutative ring $R$, there is a canonical group isomorphism between the center of the special linear group $\\\\text{SL}(n, R)$ and the group of $\\\\max(\\\\#\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module R V] →\\n          [Module.Free R V] →\\n            [Module.Finite R V] →\\n              ↥(Subgroup.center (SpecialLinearGroup R V)) ≃* ↥(rootsOfUnity (max (Module.finrank R V) 1) R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $, where $ n $ i\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Matrix.SpecialLinearGroup.«term_ᵀ»\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" : Lean.TrailingParserDescr\", \"doc\": \"The transpose of a matrix in `SL(n, R)`\"}\n  {\"name\": \"Matrix.SpecialLinearGroup\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" (n : Type u) [DecidableEq n] [Fintype n] (R : Type v) [CommRing R] : Type (max 0 u v)\", \"doc\": \"`SpecialLinearGroup n R` is the group of `n` by `n` `R`-matrices with determinant equal to 1.\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.hasInv\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Inv (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.hasMul\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Mul (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.hasOne\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : One (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instGroup\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Group (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instInhabited\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Inhabited (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.monoid\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Monoid (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instPowNat\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Pow (Matrix.SpecialLinearGroup n R) ℕ\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instDecidableEq\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] [DecidableEq R] : DecidableEq (Matrix.SpecialLinearGroup n R)\", \"doc\": \"If `R` and `n` have decidable equality then so does `SL(n, R)`.\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instFinite\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] [Finite R] : Finite (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.subsingleton_of_subsingleton\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] [Subsingleton n] : Subsingleton (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "simply.connected|universal.*cover",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"141\", \"text\": \"    rw [IsZariskiLocalAtTarget.iff_of_openCover (P := @UniversallyClosed) Y.affineCover] at H₁\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The universal multiplicative isogeny of algebraic groups SL2 to PGL2 has kernel mu2",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"QuotientGroup.quotientKerEquivRange\", \"module\": \"Mathlib.GroupTheory.QuotientGroup.Basic\", \"type\": \": G ⧸ ker φ ≃* range φ\", \"doc\": \"For any group homomorphism $\\\\varphi: G \\\\to H$, the quotient group $G/\\\\ker(\\\\varphi)$ is isomorphic to the image subgroup $\\\\varphi(G) \\\\subseteq H$. This establishes a canonical multiplicative isomorphis\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \": (Subgroup.center (SpecialLinearGroup R V)) ≃* ↥(rootsOfUnity (max (Module.finrank R V) 1) R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $, where $ n $ i\"}\n  {\"name\": \"MatrixGroups.termPSL(_,_)\", \"module\": \"Mathlib.LinearAlgebra.Matrix.ProjectiveSpecialLinearGroup\", \"type\": \": Lean.ParserDescr✝\", \"doc\": \"The projective special linear group $ \\\\text{PSL}(m, n) $ is defined as the quotient group $ \\\\text{SL}(m, n)/Z(\\\\text{SL}(m, n)) $, where $ Z(\\\\text{SL}(m, n)) $ denotes the center of the special linear \"}\n  {\"name\": \"MulAutMultiplicative\", \"module\": \"Mathlib.Algebra.Group.End\", \"type\": \"[AddGroup G] : MulAut (Multiplicative G) ≃* AddAut G\", \"doc\": \"There is a canonical group isomorphism between the multiplicative automorphism group of $\\\\text{Multiplicative}\\\\ G$ and the additive automorphism group of $G$. This isomorphism is established by conver\"}\n  {\"name\": \"ModularGroup.coe_inj\", \"module\": \"Mathlib.Analysis.Complex.UpperHalfPlane.MoebiusAction\", \"type\": \"(a b : SL(2, ℤ)) : coe a = coe b ↔ a = b\", \"doc\": \"The canonical inclusion map from the modular group $\\\\mathrm{SL}(2, \\\\mathbb{Z})$ to the positive general linear group $\\\\mathrm{GL}^+(2, \\\\mathbb{R})$ is injective, meaning that two matrices in $\\\\mathrm{\"}\n  {\"name\": \"Con.quotientKerEquivOfSurjective\", \"module\": \"Mathlib.GroupTheory.Congruence.Basic\", \"type\": \"(f : M →* P) (hf : Surjective f) : (ker f).Quotient ≃* P\", \"doc\": \"Given a surjective monoid homomorphism $ f : M → P $, this constructs a multiplicative isomorphism between the quotient of $ M $ by the kernel congruence of $ f $ and $ P $. The isomorphism sends each\"}\n  {\"name\": \"IsKleinFour.mulEquiv'\", \"module\": \"Mathlib.GroupTheory.SpecificGroups.KleinFour\", \"type\": \"(e : G₁ ≃ G₂) (he : e 1 = 1) (h : Monoid.exponent G₂ = 2) : G₁ ≃* G₂\", \"doc\": \"Given a group equivalence $ e : G_1 \\\\simeq G_2 $ where $ G_1 $ is the Klein four-group, $ e(1) = 1 $, and $ G_2 $ has exponent 2 (i.e., $ a^2 = 1 $ for all $ a \\\\in G_2 $), then $ e $ is a multiplicati\"}\n  {\"name\": \"IsKleinFour.mulEquiv\", \"module\": \"Mathlib.GroupTheory.SpecificGroups.KleinFour\", \"type\": \"[IsKleinFour G₂] (e : G₁ ≃ G₂) (he : e 1 = 1) : G₁ ≃* G₂\", \"doc\": \"Given a group equivalence $ e : G_1 \\\\simeq G_2 $ where $ G_2 $ is the Klein four-group and $ e(1) = 1 $, then $ e $ is a multiplicative equivalence (group isomorphism) preserving the group operation.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every central multiplicative isogeny to PGL2 from a smooth connected algebraic group admits a unique lift from SL2",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {V : Type u_5} [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] {ι : Type u_6} [inst_5 : Fintype ι] [inst_6 : DecidableEq ι]\\n  (b : Module.Basis ι R V) (g : ↥(Subgroup.center (Matrix.SpecialLinearGroup ι R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module R V] →\\n          [Module.Free R V] →\\n            [Module.Finite R V] →\\n              ↥(Subgroup.center (SpecialLinearGroup R V)) ≃* ↥(rootsOfUnity (max (Module.finrank R V) 1) R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $, where $ n $ i\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (g : ↥(Subgroup.center (SpecialLinearGroup R V))),\\n  ↑↑↑g = SpecialLinearGroup.centerEquivRootsOfUnity g • LinearMap.id\", \"doc\": \"Every element $ g $ in the center of the special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and finite free $ R $-module $ V $ of rank $ n $ satisfies $ g = r \\\\cdot \\\\text{id}_V $, whe\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V],\\n  Module.finrank R V ≤ 1 →\\n    ∀ (g : ↥(Subgroup.center (SpecialLinearGroup R V))), SpecialLinearGroup.centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_invFun\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module R V] →\\n          [Module.Free R V] →\\n            [Module.Finite R V] →\\n              ↥(rootsOfUnity (max (Module.finrank R V) 1) R) → ↥(Subgroup.center (SpecialLinearGroup R V))\", \"doc\": \"The inverse function of the equivalence between the center of the special linear group $\\\\text{SL}(V)$ and the group of $n$-th roots of unity in $R$, where $n$ is the finite rank of the free $R$-module\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (r : ↥(rootsOfUnity (max (Module.finrank R V) 1) R)),\\n  ↑↑↑(SpecialLinearGroup.centerEquivRootsOfUnity.symm r) = r • LinearMap.id\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V] [Module.Free R V]\\n  [Module.Finite R V], Module.finrank R V ≤ 1 → Subgroup.center (SpecialLinearGroup R V) = ⊥\", \"doc\": \"If the finite rank of an $ R $-module $ V $ over a commutative ring $ R $ satisfies $ \\\\dim_R(V) \\\\leq 1 $, then the center of the special linear group $ \\\\text{SL}(V) $ is the trivial subgroup containin\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (g : ↥(Subgroup.center (SpecialLinearGroup R V))) (x : V),\\n  SpecialLinearGroup.centerEquivRootsOfUnity g • x = (fun x => ↑↑g x) x\", \"doc\": \"For any element $ g $ in the center of the special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and any vector $ x \\\\in V $, the isomorphism between the center and the group of $ n $-th \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "SL2 is the universal central multiplicative isogeny covering of the algebraic group PGL2",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup\", \"module\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup\", \"type\": \"(n : Type u) → [DecidableEq n] → [Fintype n] → (R : Type v) → [CommRing R] → Type (max (max u v) v u)\", \"doc\": \"The projective special linear group $\\\\text{PSL}(n, R)$ is defined as the quotient of the special linear group $\\\\text{SL}(n, R)$ by its center subgroup, which consists of scalar matrices in $\\\\text{SL}(\"}\n  {\"name\": \"MatrixGroups.termPSL(_,_)\", \"module\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup\", \"type\": \"Lean.ParserDescr\", \"doc\": \"The projective special linear group $ \\\\text{PSL}(m, n) $ is defined as the quotient group $ \\\\text{SL}(m, n)/Z(\\\\text{SL}(m, n)) $, where $ Z(\\\\text{SL}(m, n)) $ denotes the center of the special linear \"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (g : ↥(Subgroup.center (SpecialLinearGroup R V))),\\n  ↑↑↑g = SpecialLinearGroup.centerEquivRootsOfUnity g • LinearMap.id\", \"doc\": \"Every element $ g $ in the center of the special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and finite free $ R $-module $ V $ of rank $ n $ satisfies $ g = r \\\\cdot \\\\text{id}_V $, whe\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module R V] →\\n          [Module.Free R V] →\\n            [Module.Finite R V] →\\n              ↥(Subgroup.center (SpecialLinearGroup R V)) ≃* ↥(rootsOfUnity (max (Module.finrank R V) 1) R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $, where $ n $ i\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity\", \"module\": \"Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup\", \"type\": \"{n : Type u} →\\n  [inst : DecidableEq n] →\\n    [inst_1 : Fintype n] →\\n      {R : Type v} →\\n        [inst_2 : CommRing R] →\\n          ↥(Subgroup.center (Matrix.SpecialLinearGroup n R)) ≃* ↥(rootsOfUnity (max (Fintype.card n) 1) R)\", \"doc\": \"For a finite type $n$ with cardinality $\\\\#n$ and commutative ring $R$, there is a canonical group isomorphism between the center of the special linear group $\\\\text{SL}(n, R)$ and the group of $\\\\max(\\\\#\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (r : ↥(rootsOfUnity (max (Module.finrank R V) 1) R)),\\n  ↑↑↑(SpecialLinearGroup.centerEquivRootsOfUnity.symm r) = r • LinearMap.id\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_invFun\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module R V] →\\n          [Module.Free R V] →\\n            [Module.Finite R V] →\\n              ↥(rootsOfUnity (max (Module.finrank R V) 1) R) → ↥(Subgroup.center (SpecialLinearGroup R V))\", \"doc\": \"The inverse function of the equivalence between the center of the special linear group $\\\\text{SL}(V)$ and the group of $n$-th roots of unity in $R$, where $n$ is the finite rank of the free $R$-module\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (g : ↥(Subgroup.center (SpecialLinearGroup R V))) (x : V),\\n  SpecialLinearGroup.centerEquivRootsOfUnity g • x = (fun x => ↑↑g x) x\", \"doc\": \"For any element $ g $ in the center of the special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and any vector $ x \\\\in V $, the isomorphism between the center and the group of $ n $-th \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group centre calculations do not prove the semisimplicity and algebraic-group universal covering property"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Matrix.SpecialLinearGroup.«term_ᵀ»\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" : Lean.TrailingParserDescr\", \"doc\": \"The transpose of a matrix in `SL(n, R)`\"}\n  {\"name\": \"Matrix.SpecialLinearGroup\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" (n : Type u) [DecidableEq n] [Fintype n] (R : Type v) [CommRing R] : Type (max 0 u v)\", \"doc\": \"`SpecialLinearGroup n R` is the group of `n` by `n` `R`-matrices with determinant equal to 1.\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.hasInv\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Inv (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.hasMul\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Mul (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.hasOne\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : One (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instGroup\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Group (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instInhabited\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Inhabited (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.monoid\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Monoid (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instPowNat\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Pow (Matrix.SpecialLinearGroup n R) ℕ\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instDecidableEq\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] [DecidableEq R] : DecidableEq (Matrix.SpecialLinearGroup n R)\", \"doc\": \"If `R` and `n` have decidable equality then so does `SL(n, R)`.\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instFinite\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] [Finite R] : Finite (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.subsingleton_of_subsingleton\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] [Subsingleton n] : Subsingleton (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group centre calculations do not prove the semisimplicity and algebraic-group universal covering property"
+  },
+  {
+   "tool": "grep",
+   "query": "simply.connected|multiplicative.isogen|universal.*cover",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"141\", \"text\": \"    rw [IsZariskiLocalAtTarget.iff_of_openCover (P := @UniversallyClosed) Y.affineCover] at H₁\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group centre calculations do not prove the semisimplicity and algebraic-group universal covering property"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A special linear algebraic group has no nontrivial central isogeny covering",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Matrix.SpecialLinearGroup\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \"(n : Type u) → [DecidableEq n] → [Fintype n] → (R : Type v) → [CommRing R] → Type (max 0 u v)\", \"doc\": \"The special linear group of n×n matrices over a commutative ring R, consisting of all invertible matrices with determinant equal to 1.\"}\n  {\"name\": \"SpecialLinearGroup\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"(R : Type u_1) → (V : Type u_2) → [inst : CommRing R] → [inst_1 : AddCommGroup V] → [Module R V] → Type (max 0 u_2)\", \"doc\": \"The special linear group $\\\\text{SL}(V)$ over a commutative ring $ R $, consisting of all invertible linear transformations of the $ R $-module $ V $ with determinant equal to 1. This is the kernel of \"}\n  {\"name\": \"SpecialLinearGroup.instCoeFunForall\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \": CoeFun (SpecialLinearGroup R V) (fun _ ↦ V → V)\", \"doc\": \"The special linear group $ \\text{SL}(V) $ over a commutative ring $ R $ consists of all invertible linear transformations (linear equivalences) of an $ R $-module $ V $ that have determinant equal to 1\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.congr_simp\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \"∀ (n : Type u) {inst : DecidableEq n} [inst_1 : DecidableEq n] [inst_2 : Fintype n] (R : Type v) [inst_3 : CommRing R],\\n  Matrix.SpecialLinearGroup n R = Matrix.SpecialLinearGroup n R\", \"doc\": \"The special linear group of $ n \\\\times n $ matrices over a commutative ring $ R $ is equal to itself, i.e., $ \\\\text{SL}_n(R) = \\\\text{SL}_n(R) $.\"}\n  {\"name\": \"SpecialLinearGroup.mem_center_iff\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"{g : SpecialLinearGroup R V} :\\n  g ∈ Subgroup.center (SpecialLinearGroup R V) ↔\\n    ∃ (r : R), r ^ (Module.finrank R V) = 1 ∧ (g : V →ₗ[R] V) = r • LinearMap.id\", \"doc\": \"An element $g$ of the special linear group $\\\\text{SL}(V)$ over a commutative ring $R$ and $R$-module $V$ lies in the center of $\\\\text{SL}(V)$ if and only if there exists a scalar $r \\\\in R$ such that $\"}\n  {\"name\": \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"(h : Module.finrank R V ≤ 1) : Subgroup.center (SpecialLinearGroup R V) = ⊥\", \"doc\": \"If the finite rank of an $ R $-module $ V $ over a commutative ring $ R $ satisfies $ \\\\dim_R(V) \\\\leq 1 $, then the center of the special linear group $ \\\\text{SL}(V) $ is the trivial subgroup containin\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"(g : Subgroup.center (SpecialLinearGroup R V)) : (g : V →ₗ[R] V) = (centerEquivRootsOfUnity g) • LinearMap.id\", \"doc\": \"Every element $ g $ in the center of the special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and finite free $ R $-module $ V $ of rank $ n $ satisfies $ g = r \\\\cdot \\\\text{id}_V $, whe\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.mem_center_iff\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \"{A : SpecialLinearGroup n R} :\\n  A ∈ center (SpecialLinearGroup n R) ↔ ∃ (r : R), r ^ (Fintype.card n) = 1 ∧ scalar n r = A\", \"doc\": \"An element $ A $ of the special linear group $ \\\\text{SL}(n, R) $ lies in its center if and only if there exists an element $ r \\\\in R $ such that $ r^{|n|} = 1 $ (where $ |n| $ denotes the cardinality \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group centre calculations do not prove the semisimplicity and algebraic-group universal covering property"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-rank-one-classification",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Proposition 20.31, printed p.418; definition of universal covering in 18.7 and the lifting property in Proposition 18.8. The scalar centre is computed by commuting a matrix with the two unit transvections.",
+   "via": [
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sl2-universal-multiplicative-cover",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged, computed the centre on all test algebras, proved semisimplicity without circular rank-one structure results, and used the Picard/character proof cited in Milne 20.31 to establish multiplicative simple connectedness before the general lifting theorem. Created only Picard vanishing and the general lifting prerequisite.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), via the recorded alteration/moduli/Haboush/rank-one chain; this split supplies the 20.31 covering prerequisite in the rank-one classification. Read latest blueprint main-20261024, ef6f9619fdbffa59e88528fb56483d76c70258c8. The ancestor command returns None because the inherited created.item chain ends at a Lean module; retained its null node and full via list.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic vanishing of regular functions on reduced affine finite-type schemes over an algebraically closed field, used to identify a character from its F-points; no theorem of the unit gives this algebraic fact."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smooth-over-field reducedness of S, needed in step 5 to detect a character from its F-points; no root-datum or purity argument is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-ade6838f3",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-ade6838f3 (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 at 18.5–18.8 (pp.388–389), 18.19/18.20 (pp.391–392), 20.30 (p.417) and 20.31 (p.418); the item follows the 18.19 route that 20.31 itself points to, and its statement is unchanged. All steps check. Step 2: both matrix commutator calculations redone by hand, giving centre μ2 over every algebra. Step 3: B=A[t]/(t²−det g) is free of rank 2, so normality descends to GL2 and lem-sfb-general-linear-reductive applies, including char 2. Step 4: the perfect-solvable-unipotent-torus normality clause, step 3 and torus rigidity put N in μ2, so N=1. Step 5: a≠0 with a²≠1 exists because F is infinite; commutator generation, reducedness and the Nullstellensatz then give X*(S)=0. Step 8: the character–Picard sequence and antiduality give a trivial kernel; faithfully flat with trivial kernel gives an isomorphism. Step 9: the lifting node's hypotheses are met. New nodes: Pic(SL_n)=0 is true over every field and for n≥1 (GL_n is a UFD localization and GL_n≅SL_n×G_m). I proved the lifting node myself via the identity component of H×_G E with reduced structure (Milne 18.6(a)/18.8); uniqueness holds because H is reduced and connected. Neither new node duplicates an existing node or a blueprint node, and neither restates a clause of the item. No cited node reaches the item (checked for cycles). FIX: step 7 re-proved inline the existing same-unit node lem-sfb-connected-group-characters-torsion-free (acyclic, no trace-formula/Poincaré nodes in its closure); it now cites that node, which is added to proof_deps, and the tool_uses note is corrected. Batch-5 flags: smooth-fpqc-base-descent, fppf-covering-base-change and projective-exterior-scalar-comparisons are generic commutative-algebra/scheme facts that neither assumption gives; accepted. tool_uses for the Nullstellensatz and smooth⇒reduced accepted.; 1 file(s) fixed by the reviewer"
+ }
+}

@@ -300,7 +300,54 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-2894ddebc (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 8 steps, the new node, the statement of every cited node, the repair note (2026-10-21 re-split: 5449 characters, at least 1 new node, at most 3000 characters, no shortening), the old ND 6-step proof, and Stacks sites.tex Tag 00YV (lines 10433-10470, proof of (2)). Context: Q30's split landed at 11:17 (PASS) and Q79's top-up was RETURNed at 12:08. This delivery is based on 7d7d746, which already contains Q30. Compared field by field with the live sheaf node, only step 6 and proof_deps differ; the statement, stmt_deps, tool_uses and lean fields are byte-identical. Nothing landed is overwritten and Q30's two leaves are kept. Old step 6 asserted without proof that abelian f^{-1} preserves the zero sheaf and binary products with their group laws, and Q30 kept that as an uncited sentence. The new node lem-sfb-internal-abelian-finite-limit-creation states this argument generically, so the delivery moves an old argument into its own node instead of shortening it. Total 2742 characters; longest step 545. Step 6 check: lem-weil-pbc-sheaf-algebraic-structures-objects is an isomorphism of categories over Sh(C). Clause 4 of det-pe-topos-functoriality-inverse-image computes abelian f^{-1} on underlying sets, so it equals F^ab for the set inverse image F. By the new node, F^ab preserves binary products and the terminal (zero) object; zero arrows factor through F0, which is zero. That meets every hypothesis of lem-sfb-products-zero-additive. The new node is true: operations come from unique cone factorizations; joint monicity gives the axioms, uniqueness and the group-morphism property; a limiting group cone is isomorphic to the constructed lift; F^ab with F(m)∘λ^{-1} preserves finite limits. Edge cases checked: empty I (terminal object), singleton I, terminal C. The node is self-contained and statement-only; stmt_deps are def-galois-finite-limits-colimits and def-weil-category-product; the source is Stacks 00YV, honestly marked as agent-extracted; no SGA. It restates no clause of the parent. A DAG search (adjunction-lifts-group-ring-objects, geometric-ring-transport, site-pullback-abelian-underlying and -exact) found no duplicate. Mathlib has only a partial match the worker did not cite: GrpLimits.lean:46-52, CreatesLimitsOfShape J (Grp.forget C), for non-commutative groups and the creation half only. So mathlib_match = null is correct; this is an advisory for the prover. Steps 1-5, 7 and 8 are verbatim Q30 and I re-checked them against the cited statements. Accepted tool_uses: twists detail, lem-sfb-modobj-abelian, det-prop-sfb-module-pullback-exact-lifted, lem-weil-pbc-site-sheaves-enough-injectives, lem-weil-pbc-sheaf-algebraic-structures-objects (generic uses only). Maintainer notes: (1) lem-weil-pbc-site-pullback-abelian-exact could later give steps 6-7 directly; (2) node-level tool_uses still lists the uncited lem-pur-ringed-site-grothendieck-abelian; (3) after this landing, set the repair note to resolved so the item stops being re-issued."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.isIso_condensedPullbackHom",
+    "AlgebraicGeometry.ProEtale.condensedPushforwardHom_id",
+    "AlgebraicGeometry.ProEtale.condensedPushforwardHom_comp"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.isIso_condensedPullbackHom",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      588,
+      590
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.condensedPushforwardHom_id",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      642,
+      648
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.condensedPushforwardHom_comp",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      651,
+      660
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.CartesianCoefficients",
   "declaration": "AlgebraicGeometry.ProEtale.cartesianCoefficients",
@@ -342,5 +389,42 @@
   "landing": "20261021T163817-L-1103184",
   "kind": "interface",
   "note": "independent cc review: new CartesianTwistAssertions (roots IsIso, finite SpSignedComparison ∃β with root-tensor/Kummer pins, adic record with canonical spIntegralComparison and equation-pinned rational/Qbar maps) vs old ∃!-normalized CartesianTwistMaps mates and node clause (1) / plan step 2 = det-prop-sfb-cartesian-coefficients-twists; axioms only sorryAx from cited dep holes; all 38 direct importers compiled against the delivered module"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Because all coefficient sheaves are pulled back from the point, they are compatible with\ninverse image. The same holds for their Tate twists ([sk-def-sp-tate-twist]), and a finite\nextension of coefficient fields gives a finite free extension of coefficient sheaves.\n\nLet $f\\colon X\\to Y$ be a morphism of schemes.\n\n1. For every admissible $\\Lambda$, the canonical map\n   $$\n   f^{-1}\\Lambda_Y\\longrightarrow\\Lambda_X\n   $$\n   is an isomorphism of sheaves of rings on $X_{\\mathrm{proét}}$ (this is the map $\\alpha_f$\n   of [det-def-sfb-coefficient-morphisms]). The same holds for its Tate twists, including the\n   twists of a finite ring $A$.\n2. If $E\\subset F$ is a finite extension, then $\\cO_{F,X}$ is a finite free\n   $\\cO_{E,X}$-module and $F_X$ is a finite free $E_X$-module.\n\nBy (1), the pullback $f^*\\colon\\Mod(Y_{\\mathrm{proét}},\\Lambda)\\to\\Mod(X_{\\mathrm{proét}},\\Lambda)$\nof modules over these sheaves is the exact functor $f^{-1}$.",
+  "proof": [
+   {
+    "text": "(1) For every condensed ring $\\Lambda$, the identity $p_Y\\circ f=p_X$ gives\n$$\nf^{-1}\\Lambda_Y=f^{-1}p_Y^*\\Lambda\\simeq p_X^*\\Lambda=\\Lambda_X,\n$$\nwhich gives the assertion uniformly, including finite $A$. This is [lem-sfb-alpha-iso]:\n$\\alpha_f$ is a component of the natural isomorphism of [det-def-sfb-pullback-from-point-comp].\nIts compatibility with identities and composition, in the adjoint form $\\eta_f$, is\n[lem-sfb-eta-id] and [lem-sfb-eta-comp].",
+    "uses": [
+     "lem-sfb-alpha-iso",
+     "det-def-sfb-pullback-from-point-comp",
+     "lem-sfb-eta-id",
+     "lem-sfb-eta-comp"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The torsion twists $\\mu_{\\ell^n}$ are represented by finite étale group schemes, which commute\nwith base change. Their inverse limit is represented by the inverse limit of these schemes,\nso its inverse image is represented by the base change (\\stacks{09A5}). This gives the\nassertion for $\\cO_E(1)$. For a finite $A$ killed by $\\ell^n$, its twist is obtained by\nextending scalars from $\\mathbf Z/\\ell^n\\mathbf Z$ in the finite-level twist, so inverse image\ncommutes with it as well. Inverting $\\ell$, extending scalars, and taking tensor powers and\nduals gives the other twists. Details: [det-prop-sfb-cartesian-coefficients-twists].",
+    "uses": [
+     "det-prop-sfb-cartesian-coefficients-twists"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(2) An $\\cO_E$-basis of $\\cO_F$ is an isomorphism of topological $\\cO_E$-modules\n$\\cO_F\\cong\\cO_E^{[F:E]}$, hence of condensed modules\n$\\underline{\\cO_F}\\cong\\underline{\\cO_E}^{[F:E]}$. Pull it back along $p_X$, and invert $\\ell$\nfor the fields. Details: [det-prop-sfb-cartesian-coefficients-finite-free] and, for the\nfields, [lem-sfb-subfield-flat].",
+    "uses": [
+     "det-prop-sfb-cartesian-coefficients-finite-free",
+     "lem-sfb-subfield-flat"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,267 @@
+{
+ "id": "lem-sf-etale-unit-tensor-arbitrary-base",
+ "kind": "statement",
+ "title": "Canonical etale exceptional duality and its unit over arbitrary bases",
+ "statement": "Let $A$ be a finite commutative ring, let $e:V\\to W$ be a separated etale morphism of arbitrary schemes [def-weil-etale-morphism, def-weil-proper-morphism], and suppose $e$ admits an open-then-proper factorization as in [lem-sf-etale-ambient-adjoint-projection]. Use the ordinary unbounded etale categories, the compact-support adjunction $F_e\\dashv G_e$, its counit, $\\omega_e=G_eA_W$ and the canonical $\\theta_e$ defined in [lem-sf-etale-ambient-adjoint-projection]. There is a counit-preserving identification $\\rho_e:G_e\\xrightarrow{\\sim}e^*$ obtained from exact etale sum extension [def-weil-pbc-etale-sum-extension] and its evaluation adjunction. Writing $\\eta_e=\\rho_{e,A_W}:\\omega_e\\xrightarrow{\\sim}A_V$ with the pullback unit identification inserted, one has, for every $K\\in D(W_{\\mathrm{et}},A)$,\n$$\\rho_{e,K}\\circ\\theta_{e,K}=\\lambda_{e^*K}\\circ(\\eta_e\\otimes1).$$\nIn particular $\\omega_e\\cong A_V$ and every $\\theta_{e,K}$ is an isomorphism. This includes open immersions without a quasi-compactness assumption.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraphs 2-3, etale adjunction and the evaluation-counit normalization of the tensor mate. This is EtaleSmoothDuality in upstream SmoothDuality/Charts.lean lines 81-90, including the normalization needed in the proof; it is not merely existence of an isomorphism of endpoint functors."
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "lem-sf-etale-ambient-adjoint-projection",
+  "def-weil-pbc-etale-sum-extension"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing exact etale sum/evaluation adjunction. The graph comparison a is invertible, so its conjugate rho is invertible. The Mathlib conjugateEquiv_counit formula gives exactly the required counit equation. Its unit component followed by the specified pullback-unit isomorphism is eta and is invertible.",
+   "uses": [
+    "lem-sf-etale-graph-projection-arbitrary-base",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-pur-etale-exact-pullback-unit-composition-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the canonical natural tensor isomorphism from left-derived pullback to exact termwise pullback. Naturality of its comparison isomorphism transports the proved upstream left-unit law to the exact-model tensor comparison. The generic transport calculation is proved privately in this module; no arbitrary monoidal system is selected.",
+   "uses": [
+    "def-sf-exact-pullback-tensor-comparison",
+    "lem-kun-inverse-image-monoidal",
+    "lem-kun-tensor-unit",
+    "def-pur-etale-exact-pullback-unit-composition-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold the specified ambient theta as the adjunct of inverse projection followed by the compact-support counit and the left unitor, transporting its domain along L(e*) = D(e*). The elementary conjugate/Hom-equivalence formula changes rho theta into the exact-sum adjunct after a. Apply the graph/projection square at omega and K. Naturality in the first tensor variable combines a_omega with the counit.",
+   "uses": [
+    "lem-sf-etale-ambient-adjoint-projection",
+    "lem-sf-etale-graph-projection-arbitrary-base",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an adjunction S adjoint E, the adjunct of projection followed by tensor(f,1) is tensor(adjunct(f),1) followed by the inverse exact tensor comparison. This follows directly from projectionMap_app_app, Hom-equivalence naturality, and naturality of the tensor comparison. For f = a_omega followed by the compact-support counit, its adjunct is rho at the coefficient unit, by the right triangle. The transported left-unit law now identifies the expression with tensor(eta,1) followed by the left unitor, proving the normalization equation.",
+   "uses": [
+    "def-sf-exact-pullback-tensor-comparison",
+    "lem-kun-tensor-unit",
+    "def-pur-etale-exact-pullback-unit-composition-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The normalization identity expresses exact theta followed by invertible rho as tensoring the invertible eta followed by a unitor. Cancel rho, then cancel the invertible exact/left-derived domain transport. This proves invertibility of the original ambient theta without any quasi-compactness or boundedness assumption.",
+   "uses": [
+    "lem-sf-etale-ambient-adjoint-projection"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-etale-graph-projection-arbitrary-base",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-pur-etale-exact-pullback-unit-composition-comparisons",
+  "def-sf-exact-pullback-tensor-comparison",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-tensor-unit",
+  "lem-sf-etale-ambient-adjoint-projection"
+ ],
+ "proof_origin": {
+  "by": "R6",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraphs 2-3; direct Lean calculation from exact sum adjunction, graph/projection comparison, and upstream monoidal left-unit coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For etale compactifiable morphisms exceptional inverse image is ordinary pullback with trivial dualizing complex and canonical tensor map invertible",
+   "results": "AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.IsEtale.of_comp; Hits concern etale scheme geometry and standard etale rings, not the compact-support adjunction or its canonical tensor mate.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right adjoint of exact etale extension by sums is inverse image and its counit is evaluation on the geometric sheets",
+   "results": "StandardEtalePair.homEquiv, StandardEtalePair.homEquiv_symm_apply, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.etaleLocus_eq_compl_support, Condensed.profiniteSolidCounit, StandardEtalePair.homEquiv_apply_coe, StandardEtalePair.instFormallyEtaleRing, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Hits concern etale scheme geometry and standard etale rings, not the compact-support adjunction or its canonical tensor mate.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"etale\", \"Adjunction\"",
+   "results": "No hits; Hits concern etale scheme geometry and standard etale rings, not the compact-support adjunction or its canonical tensor mate.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLowerShriek|EtaleSmoothDuality|dualizingComplexTensorMap",
+   "results": "No hits; Hits concern etale scheme geometry and standard etale rings, not the compact-support adjunction or its canonical tensor mate.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale exceptional inverse image is inverse image with canonical tensor comparison",
+   "results": "AlgebraicGeometry.IsEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, AlgebraicGeometry.Scheme.Etale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp, Algebra.FormallyEtale.instTensorProduct, tensorKaehlerQuotKerSqEquiv_symm_tmul_D, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Hits concern etale scheme geometry and standard etale rings, not the compact-support adjunction or its canonical tensor mate.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"projection\"",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactificationEtaleComparison|etaleLowerShriek|graph.*[Pp]rojection",
+   "results": "Mathlib/Geometry/Manifold/Instances/Sphere.lean; Mathlib/Geometry/Manifold/Instances/Sphere.lean; Mathlib/Geometry/Manifold/Instances/Sphere.lean; Mathlib/Geometry/Manifold/Instances/Sphere.lean; Mathlib/Geometry/Manifold/Instances/Sphere.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale compactification comparison commutes with the canonical tensor projection map",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst; PiTensorProduct.tprodL; Algebra.FormallyEtale.instTensorProduct; TensorProduct.mapOfCompatibleSMul_tmul; PiTensorProduct.lift_tprod; TensorProduct.fromDirectLimit; PiTensorProduct.ext_iff",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism of arbitrary schemes compactified pushforward equals exact extension by sums compatibly with the projection formula",
+   "results": "AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap; AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap; AlgebraicGeometry.Scheme.Hom.normalizationDiagram",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compactification graph comparison between derived etale extension by zero and proper pushforward of open extension preserves tensor action",
+   "results": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; Algebra.Extension.tensorCotangentSpace; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap; Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; KaehlerDifferential.isBaseChange_of_formallyEtale",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-smooth-dualizing-complex-invertible",
+  "date": "2026-10-22",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "sk-prop-sf-rf-shriek-preservation, smooth case (unit step 3), via the current thm-asd-smooth-tensor proof: Paragraphs 2-3, etale adjunction and the evaluation-counit normalization of the tensor mate. This is EtaleSmoothDuality in upstream SmoothDuality/Charts.lean lines 81-90, including the normalization needed in the proof; it is not merely existence of an isomorphism of endpoint functors.",
+   "via": [
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-etale-unit-tensor-arbitrary-base",
+  "worker": "stage1",
+  "group": "NZ",
+  "summary": "Preserved the arbitrary-base statement and gave the normalized right-adjoint mate and tensor-transpose computation. Reused exact sum extension, localization, derived pullback tensor and abstract unit-adjunct tensor laws. Added only the arbitrary-base left graph/projection comparison; the existing normalization statements have Noetherian or quasi-compactness restrictions. No Lean written or compiler invoked.",
+  "blueprint": "sk-prop-sf-rf-shriek-preservation unit step 3, smooth case, via thm-asd-smooth-tensor.proof.md paragraphs 2-3, specifically the etale evaluation counit and its tensor normalization. The inherited created.item chain terminates at a maintainer-created root with no created.item; blueprint_refs.py ancestor therefore returns None, retained faithfully.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Generic exact-sum, localization, derived-pullback or adjunction/tensor tool in the displayed normalization calculation; the preservation unit has no replacement for this categorical or site-level input."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic exact-sum, localization, derived-pullback or adjunction/tensor tool in the displayed normalization calculation; the preservation unit has no replacement for this categorical or site-level input."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic exact-sum, localization, derived-pullback or adjunction/tensor tool in the displayed normalization calculation; the preservation unit has no replacement for this categorical or site-level input."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact-sum, localization, derived-pullback or adjunction/tensor tool in the displayed normalization calculation; the preservation unit has no replacement for this categorical or site-level input."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic exact-sum, localization, derived-pullback or adjunction/tensor tool in the displayed normalization calculation; the preservation unit has no replacement for this categorical or site-level input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic exact-sum, localization, derived-pullback or adjunction/tensor tool in the displayed normalization calculation; the preservation unit has no replacement for this categorical or site-level input."
+   },
+   {
+    "node": "def-pur-etale-exact-pullback-unit-composition-comparisons",
+    "why": "Generic exact-sum, localization, derived-pullback or adjunction/tensor tool in the displayed normalization calculation; the preservation unit has no replacement for this categorical or site-level input."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-conjugate",
+    "why": "Generic exact-sum, localization, derived-pullback or adjunction/tensor tool in the displayed normalization calculation; the preservation unit has no replacement for this categorical or site-level input."
+   },
+   {
+    "node": "lem-pur-unit-adjunct-tensor-action",
+    "why": "Generic exact-sum, localization, derived-pullback or adjunction/tensor tool in the displayed normalization calculation; the preservation unit has no replacement for this categorical or site-level input."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ringed-topos fact that derived pullback with its tensor and unit comparisons is strong monoidal (unit law); needed for the strong-monoidal hypothesis of lem-pur-unit-adjunct-tensor-action and the unit-law step; no node of the preservation unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-etale-exact-pullback-unit-composition-comparisons",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-81f5270f2",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-81f5270f2 (reviewer sub-agent of L); spot-checked: Read the full delivery, every cited statement, blueprint main-20261015 thm-asd-smooth-tensor (proof paragraphs 1-2: transposition, uniqueness of the etale counit), Stacks 0GKF (more-etale l.1808) and 0F4L (etale-cohomology l.11517), and the Lean source lines 160/276. Item is still unsplit in live and side-live, is not in the dropped list, has no re-split note and cites no SGA. The item statement is unchanged from base. Step 2: the conjugate variance is right; rho_K is the S-|E adjunct of eps_K a_GK. Step 3: naturality of a, the defining transpose of theta and the new node's square at M=omega check out. Step 4: kappa naturality and the counit equation of lem-pur-unit-adjunct-tensor-action (J=S, Q=E, F=A_W, N=K) check out. New node lem-sf-etale-graph-projection-arbitrary-base: types of t, u (exchange inverted by torsion-ring proper base change) and a are consistent; sigma is clopen. It is true for non-quasi-compact j: proper base change at a geometric point, and V_w is finite and clopen in the Noetherian Z_w. Edge cases V empty, e=id, open immersion and A=0 hold. It is not a duplicate: existing graph and normalization nodes are quasi-compact, finite type or Noetherian, because def-weil-compactifications-refinements needs finite type. It does not restate the item, which carries the right-adjoint mate calculation. One C4 fault, fixed: the strong-monoidal structure and unit law of D(e^*), needed by lem-pur-unit-adjunct-tensor-action and by Step 4, were cited only to lem-weil-pbc-ringed-topoi-derived-tensor-pullback, which states no coherence. I added lem-sfb-ringed-derived-monoidal-comparisons (split, PASS; no cycle) to item Steps 1 and 4, proof_deps and tool_uses, and to the new node's statement and stmt_deps, with u_e and the transport along Le^*~E. I also added def-weil-open-immersion to the new node. Accepted 10 generic tool_uses.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SfEtaleUnitTensorArbitraryBase",
+  "declaration": "AlgebraicGeometry.Etale.sfEtaleUnitTensorArbitraryBase",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sfEtaleRightAdjointComparison",
+   "AlgebraicGeometry.Etale.sfEtaleRightAdjointUnit",
+   "AlgebraicGeometry.Etale.sfEtaleExactAmbientTensorMap",
+   "AlgebraicGeometry.Etale.sfEtaleUnitTensorArbitraryBase"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SfEtaleUnitTensorArbitraryBase.lean",
+  "statement": "theorem sfEtaleUnitTensorArbitraryBase (A : Type (u + 1)) [CommRing A] [Finite A] {V W : Scheme.{u}} (e : V ⟶ W) [Etale e] [IsSeparated e] (c : Compactification e) (G : DerivedCategoryModule A W ⥤ DerivedCategoryModule A V) (adj : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⊣ G) : IsIso (sfEtaleRightAdjointComparison A e c G adj) ∧ (∀ K : DerivedCategoryModule A W, (etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory.map ((sfEtaleRightAdjointComparison A e c G adj).app K) ≫ (derivedEtaleLowerShriekMapAdjunction (ModuleCat.{u + 1} A) e).counit.app K = (compactificationEtaleComparison A e c).app (G.obj K) ≫ adj.counit.app K) ∧ (∀ K : DerivedCategoryModule A W, sfEtaleExactAmbientTensorMap A e c G adj K ≫ (sfEtaleRightAdjointComparison A e c G adj).app K = ((derivedTensor (ModuleCat.{u + 1} A) V).map (sfEtaleRightAdjointUnit A e c G adj)).app ((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.obj K) ≫ (derivedTensorLeftUnitor (ModuleCat.{u + 1} A) V ((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.obj K)).hom) ∧ IsIso (sfEtaleRightAdjointUnit A e c G adj) ∧ ∀ K : DerivedCategoryModule A W, IsIso (sfEtaleAmbientTensorMap A c G adj K)",
+  "branch": "sheaf-dag",
+  "by": "Q86",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The canonical rho is the adjunction mate of upstream compactificationEtaleComparison under the exact sum/evaluation adjunction. The theorem asserts its invertibility and explicit counit equation, the normalized tensor-map identity, invertibility of the specified eta, and invertibility of the original ambient theta. The exact-model theta helper transports the domain of sfEtaleAmbientTensorMap along leftDerivedUpperStarIsoMapDerivedCategory. Arbitrary schemes and arbitrary open immersions are retained; no quasi-compactness, Noetherian or boundedness assumptions. G and adj select any right adjoint supplied by the ambient theorem; no additional geometric existence hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a07e8ae4",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Read the item, its 4 stmt_deps, proof-dep lem-sf-etale-graph-projection-arbitrary-base and the upstream source. rho = conjugateEquiv adj (derivedEtaleLowerShriekMapAdjunction) compactificationEtaleComparison; variance correct (S⟶F ↦ G⟶E). Upstream a = adjunct of the graph unit composed with inverse proper base change, exactly the graph node's a. isIso_compactificationEtaleComparison holds without qc and without sorry. Counit clause = conjugate counit law, as node Step 2. eta = rho_{A_W} ≫ etaleSumPullbackUnitIso (recorded decl of def-pur-etale-exact-pullback-unit-composition-comparisons). Exact-model theta = ambient sfEtaleAmbientTensorMap ∘ (1 ⊗ (L e^* ≅ D e^*)⁻¹), the same canonical transport used throughout. Tensor identity for all unbounded K in correct order; IsIso eta and IsIso of the ambient theta present. A=0, empty V, e=id, non-qc opens and arbitrary bases admitted; universes = ambient. Node differs from side-live only in lean; statement verbatim; docstrings carry source and all 5 steps; max line 90; no name clashes; only sorry is the theorem's. Advisory: plain import EtaleLowerShriekCompactificationIso is upstream proof material with no node record; etaleSumPullbackUnitIso owner is in proof_deps but not stmt_deps (maintainer note). No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-12d89",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261025T123642-L-1886209",
+  "kind": "interface",
+  "note": "independent cc review: delivered files vs clones/live (only the intended edits; G9 graph proof preserved); moved defs block-diffed verbatim; cycle path verified by import BFS; sandbox compile of 5 delivered modules + 5 direct importers clean; #print axioms of item and helpers"
+ }
+}

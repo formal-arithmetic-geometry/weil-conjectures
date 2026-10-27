@@ -69,7 +69,32 @@
   "def-pc-smooth-projective-curve"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Functor.RepresentableBy.overDescentDatum"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Functor.RepresentableBy.overDescentDatum",
+     "module": "WeilConjectures.CategoryTheory.Comma.Over.DescentDatum",
+     "lines": [
+      262,
+      273
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-prop-jacobian-descent",
  "lean": {
@@ -82,5 +107,34 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $p:X\\to Y$ be a morphism of schemes, let $F$ be a presheaf of sets on\nthe category of schemes over $Y$, and let $V$ be a scheme over $X$ which\nrepresents the restriction of $F$ to schemes over $X$ (a scheme\n$f:T\\to X$ being regarded as the scheme $p\\circ f:T\\to Y$ over $Y$). For\n$f_1,f_2:T\\to X$ with $p\\circ f_1=p\\circ f_2$, let the *transport*\nfrom the $T$-points of $V$ lying over $f_1$ to those lying over $f_2$ send\na point to the point corresponding to the same element of\n$F(T\\xrightarrow{p\\circ f_1}Y)$. These transports are natural in $T$, are\nthe identity when $f_1=f_2$, and satisfy the cocycle condition\n([lem-pd-descent-cocycle]). They form a descent datum on $V$ over $X/Y$ in\nthe transport form of [def-pd-descent-datum], and no choice is involved.\n\nIn particular, let $k$ be a field, $C$ a smooth projective curve over $k$\n([def-pc-smooth-projective-curve]) which is geometrically integral\n([def-pc-geometrically-irreducible]), $k_s$ a separable closure of $k$\n([def-pd-separable-closure]), $C_s=C_{k_s}$ ([def-pc-base-change]), and\n$J_s$ the representing object of $\\operatorname{Pic}^0_{C_s/k_s}$ of\n[thm-pd-geometric-pic0] ([def-sc-jacobian]). Then $J_s$ carries a\ncanonical descent datum over $\\Spec(k_s)/\\Spec(k)$.",
+  "proof": [
+   {
+    "text": "Write $\\theta_f$ for the bijection between the $T$-points of $V$ over\n$f:T\\to X$ and $F(T\\xrightarrow{p\\circ f}Y)$ given by the representation.\nThe transport is $\\theta_{f_2}^{-1}\\circ\\theta_{f_1}$, which makes sense\nbecause $f_1$ and $f_2$ define the same scheme $T$ over $Y$. Naturality in\n$T$ holds because the $\\theta_f$ are natural in $(T,f)$ and $F$ is a\nfunctor. For $f_1=f_2$ the transport is the identity, and the cocycle\ncondition is [lem-pd-descent-cocycle]. So the transports form a descent\ndatum in transport form. By the Yoneda lemma this is the same as an\nisomorphism $\\varphi:\\mathrm{pr}_0^*V\\to\\mathrm{pr}_1^*V$ over\n$X\\times_YX$ satisfying the cocycle condition of [def-pd-descent-datum]\n(Stacks, Tag 023V): $\\varphi$ is the transport for the universal pair\n$\\mathrm{pr}_0,\\mathrm{pr}_1$.",
+    "uses": [
+     "lem-pd-descent-cocycle",
+     "def-pd-descent-datum"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For the special case, take $X=\\Spec(k_s)$, $Y=\\Spec(k)$ and\n$F=\\operatorname{Pic}^0_{C/k}$. By [cor-pd-pic0-base-change] the\nrestriction of $F$ to schemes over $\\Spec(k_s)$ is\n$\\operatorname{Pic}^0_{C_s/k_s}$, which $J_s$ represents by\n[thm-pd-geometric-pic0] and [def-sc-jacobian].",
+    "uses": [
+     "cor-pd-pic0-base-change",
+     "thm-pd-geometric-pic0",
+     "def-sc-jacobian"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

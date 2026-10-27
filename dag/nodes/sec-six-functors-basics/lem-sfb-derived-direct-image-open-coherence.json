@@ -21,66 +21,26 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-sfb-kinjective-direct-image-open-word-model] to the pulled-back coefficient system. Its coefficient-map hypothesis holds by [sk-prop-sfb-cartesian-coefficients], for both $E$ and the specified finite-subextension $\\overline{\\mathbf Q}_\\ell$. Thus every direct image and open restriction in the formulas is computed on one initial K-injective $I$. In [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], choose the identity resolution of $f_*I$. Its normalization identifies the specified $\\kappa_{g,f}$ with the class of $c_{g,f,I}$ from [lem-sfb-module-direct-image-open-pasting]; this identifies the given comparison, rather than choosing one.",
+   "text": "Prove the K-injective normalization of the composition directly from the universal right-derived composition unit and rightDerivedFunctorNatTrans_app_Q_obj. Apply the four independent arguments for associativity, open normalization, successive restrictions and mixed pasting; specialize the common coefficient ring to E and to the condensed algebraic closure.",
    "uses": [
-    "lem-sfb-kinjective-direct-image-open-word-model",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-sfb-module-direct-image-open-pasting"
+    "lem-sfb-derived-direct-image-associativity",
+    "lem-sfb-derived-open-restriction-normalization",
+    "lem-sfb-derived-open-restriction-successive",
+    "lem-sfb-derived-open-restriction-mixed"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
-    "place": "Composition isomorphism and Canonicity and associativity; assembly of the two extracted arguments"
-   }
-  },
-  {
-   "text": "For an open square use $\\beta_{f,j}$ of [lem-sfb-module-direct-image-open-pasting]. Its component is the identity on $I(V\\times_T S)$ after the stated fibre-product identification, and its module actions use the inverse coefficient comparisons. By [lem-sfb-kinjective-direct-image-open-word-model](iii), its degreewise maps descend to a natural isomorphism $\\rho_{f,j}:j^*Rf_*\\cong R(f_U)_*j_S^*$ with precisely that K-injective formula. The transition formula there supplies independence of $I$ and naturality for every derived arrow. This proves clause 2.",
-   "uses": [
-    "lem-sfb-kinjective-direct-image-open-word-model",
-    "lem-sfb-module-direct-image-open-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
-    "place": "Composition isomorphism and Canonicity and associativity; assembly of the two extracted arguments"
-   }
-  },
-  {
-   "text": "Equation (b) of [lem-sfb-module-direct-image-open-pasting] is an equality of transformations between underived words. Apply the diagram-descent assertion of [lem-sfb-kinjective-direct-image-open-word-model] and substitute the identification of $\\kappa$ from step 1. It becomes exactly clause 1, with its canonical associators. Equation (c) descends in the same way, using step 2, and gives successive-open compatibility.",
-   "uses": [
-    "lem-sfb-kinjective-direct-image-open-word-model",
-    "lem-sfb-module-direct-image-open-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
-    "place": "Composition isomorphism and Canonicity and associativity; assembly of the two extracted arguments"
-   }
-  },
-  {
-   "text": "Finally apply the same diagram-descent assertion of [lem-sfb-kinjective-direct-image-open-word-model] to equation (d) of [lem-sfb-module-direct-image-open-pasting]. Each whiskering is computed on a K-injective image of $I$, so its factors are exactly the $\\kappa$ of step 1 and $\\rho$ of step 2. Its source is $j^*R(gf)_*$ and its target is $R(g_U)_*R(f_U)_*j_X^*$, giving the displayed equation of clause 3. The identity constraints of the underived node descend to the asserted identities as well.",
-   "uses": [
-    "lem-sfb-kinjective-direct-image-open-word-model",
-    "lem-sfb-module-direct-image-open-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
-    "place": "Composition isomorphism and Canonicity and associativity; assembly of the two extracted arguments"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sfb-kinjective-direct-image-open-word-model",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-sfb-module-direct-image-open-pasting"
+  "lem-sfb-derived-direct-image-associativity",
+  "lem-sfb-derived-open-restriction-normalization",
+  "lem-sfb-derived-open-restriction-successive",
+  "lem-sfb-derived-open-restriction-mixed"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
-  "place": "Composition isomorphism and Canonicity and associativity, expanded using Stacks 08BJ, 070I, 070Y, 0D6E and the existing general-ring open comparison"
+  "place": "Separate source arguments assembled by conjunction introduction; G9 2026-10-25"
  },
  "mathlib_searches": [
   {
@@ -255,23 +215,6 @@
   "module": "Sheaf.Paper.DerivedDirectImageOpenCoherence",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.derivedDirectImageOpenCoherence",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_preservesKInjectives",
-   "AlgebraicGeometry.ProEtale.CondensedRing.directImageComposition",
-   "AlgebraicGeometry.ProEtale.CondensedRing.openCoherencePullbackSquare",
-   "AlgebraicGeometry.ProEtale.CondensedRing.directImageOpenRestriction",
-   "AlgebraicGeometry.ProEtale.CondensedRing.derivedOpenCoherencePullbackSquare",
-   "AlgebraicGeometry.ProEtale.CondensedRing.derivedDirectImageOpenRestriction",
-   "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_preservesKInjectives",
-   "AlgebraicGeometry.ProEtale.CondensedRing.openCoherenceSectionCoprojection",
-   "AlgebraicGeometry.ProEtale.CondensedRing.openCoherenceSectionArrow",
-   "AlgebraicGeometry.ProEtale.CondensedRing.OpenCoherenceSectionwise",
-   "AlgebraicGeometry.ProEtale.CondensedRing.DirectImageCompositionNormalized",
-   "AlgebraicGeometry.ProEtale.CondensedRing.DirectImageCompositionAssociative",
-   "AlgebraicGeometry.ProEtale.CondensedRing.DirectImageRestrictionNormalized",
-   "AlgebraicGeometry.ProEtale.CondensedRing.openCoherenceRestrictionComp",
-   "AlgebraicGeometry.ProEtale.CondensedRing.DirectImageSuccessiveRestriction",
-   "AlgebraicGeometry.ProEtale.CondensedRing.DirectImageRestrictionComposition",
-   "AlgebraicGeometry.ProEtale.CondensedRing.DirectImageOpenCoherence",
    "AlgebraicGeometry.ProEtale.CondensedRing.derivedDirectImageOpenCoherence"
   ],
   "file": "lean/Sheaf/Paper/DerivedDirectImageOpenCoherence.lean",
@@ -282,5 +225,26 @@
   "existing": false,
   "note": "Canonical maps are real constructions from the published internal-module adjunctions, exact derived pullback, and universal right-derived composition. The assertion includes sectionwise open normalization, the K-injective formulas, associativity and both restriction coherence equations. The closed upstream qbar binding is used with its finite-subextension convention. Statement dependencies gain only the already landed open extension-by-zero interface used in the K-injective preservation instance. Site object composition uses Mathlib MorphismProperty.Over.map directly at all five occurrences; the open-counit theorem remains solely a proof dependency, with a non-public import. This repairs H2 from returned head b91fff144cfc without changing the mathematical statement or replacing a dependency interface."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d4c3a",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261025T162521-L-467981",
+  "kind": "interface",
+  "note": "independent cc review: item module vs clone 5ab8663c (moved defs byte-identical in Data module, item signature unchanged); 4 new sorry statements vs the item's conjuncts (generalized, true); direct importers compiled against sandboxed delivered modules"
+ }
 }

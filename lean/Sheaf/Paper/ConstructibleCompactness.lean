@@ -28,6 +28,7 @@ import Mathlib.CategoryTheory.Limits.FullSubcategory
 import Mathlib.Algebra.DirectSum.Module
 import WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts
 import Mathlib.Algebra.CharP.CharAndCard
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 
 /-!
 # Compactness with rational coefficients
@@ -659,8 +660,8 @@ private theorem uniform_ext_standard
       IsConstantModelConstructible (coefficientHeartRingObj Λ) X N →
       ∀ r : ℕ, d < r →
         Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard _) C N r) := by
-  obtain ⟨d, hd⟩ := (uniformConstructibleExt D ℓ hℓ Λ hΛ D.k
-    (Or.inr ⟨RingEquiv.refl _⟩) X).1 ⟨C, hC⟩
+  obtain ⟨d, hd⟩ := uniformConstructibleExt_exists D ℓ hℓ Λ hΛ D.k
+    (Or.inr ⟨RingEquiv.refl _⟩) X ⟨C, hC⟩
   refine ⟨d, fun N hN r hr ↦ ?_⟩
   exact subsingleton_ext_standard C N r (hd ⟨N, hN⟩ r hr)
 

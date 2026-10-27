@@ -19,18 +19,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.M
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Mathlib.Topology.Algebra.Valued.LocallyCompact
-import Sheaf.Paper.CompletedConstantSheafReduction
-import Sheaf.Algebra.Homology.FlatScalarCyclicResolution
-import Sheaf.CategoryTheory.InternalSectionTensorComparison
-import Sheaf.Paper.SectionDerivedPushpullNormalization
-import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
-import Sheaf.Algebra.Homology.SuccessiveDerivedQuotientNormalization
-import Mathlib.CategoryTheory.Adjunction.Mates
-import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
+import Sheaf.NumberTheory.Padics.IntegersCosetBasis
+import Mathlib.Topology.LocallyConstant.Basic
+import WeilConjectures.CategoryTheory.Sites.MonObj
 
 /-! # Integral quotient scalar comparison for unbounded direct image
 
@@ -123,7 +114,12 @@ theorem reduction_continuous (n : ℕ) :
     @Continuous _ _ (Padic.coefficientExtensionIntegersTopology l E)
       (quotientTopology l E n)
       (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))) := by
-  sorry
+  let := spectralNorm.normedField (Padic l) E
+  apply IsLocallyConstant.continuous
+  apply (IsLocallyConstant.iff_eventually_eq _).mpr
+  intro x
+  exact (Padic.coefficientExtension_integers_coset_basis l E x).mem_of_mem
+    (i := n) trivial
 
 /-- The actual finite projection on condensed coefficients, induced by postcomposition.
 Source: blueprint paragraph (1)
@@ -238,7 +234,36 @@ theorem multiplication_linear (T : Scheme.{u}) (n : ℕ) :
       condensedRingObj (integral l E) T ◁ multiplicationHom l E T n ≫
         γ[condensedRingObj (integral l E) T,
       (Mod.regular (condensedRingObj (integral l E) T)).X] := by
-  sorry
+  let := spectralNorm.normedField (Padic l) E
+  have hp : MonObj.mul ≫ multiplicationPoint l E n =
+      integral l E ◁ multiplicationPoint l E n ≫ MonObj.mul := by
+    let : MonObj (integral l E).obj :=
+      (Profinite.continuousMapRingSheafOfUniverse
+        (Padic.coefficientExtensionIntegers l E)).obj.monObjCompForget₂
+    apply Sheaf.tensor_hom_ext
+    simp only [Functor.map_comp]
+    rw [← Functor.LaxMonoidal.μ_natural_right_assoc]
+    have hR := Sheaf.μ_comp_map_mul (integral l E)
+    simp only [reassoc_of% hR, hR]
+    ext S : 2
+    apply AddCommGrpCat.hom_ext_toIntLinearMap
+    apply TensorProduct.ext'
+    intro a b
+    apply ULift.ext
+    apply ContinuousMap.ext
+    intro s
+    change Padic.coefficientExtensionUniformizer l E ^ (n + 1) *
+        (a.down s * b.down s) =
+      a.down s * (Padic.coefficientExtensionUniformizer l E ^ (n + 1) * b.down s)
+    exact mul_left_comm _ _ _
+  change (Functor.LaxMonoidal.μ (upperStarFromPoint T) _ _ ≫
+      (upperStarFromPoint T).map MonObj.mul) ≫
+        (upperStarFromPoint T).map (multiplicationPoint l E n) =
+    _ ◁ (upperStarFromPoint T).map (multiplicationPoint l E n) ≫
+      Functor.LaxMonoidal.μ (upperStarFromPoint T) _ _ ≫
+        (upperStarFromPoint T).map MonObj.mul
+  rw [Category.assoc, ← Functor.map_comp, hp, Functor.map_comp,
+    ← Functor.LaxMonoidal.μ_natural_right_assoc]
 
 /-- The linear endomorphism of the rank-one free module used in the displayed resolution.
 Source: blueprint paragraph (1)
@@ -267,7 +292,10 @@ theorem projection_linear (T : Scheme.{u}) (n : ℕ) :
       condensedRingObj (integral l E) T ◁ coefficientMap (reduction l E n) T ≫
         γ[condensedRingObj (integral l E) T, ((Mod.comap (coefficientMap (reduction l E n) T)).obj
           (Mod.regular (condensedRingObj (finite l E n) T))).X] := by
-  sorry
+  change MonObj.mul ≫ coefficientMap (reduction l E n) T =
+    _ ◁ coefficientMap (reduction l E n) T ≫
+      coefficientMap (reduction l E n) T ▷ _ ≫ MonObj.mul
+  rw [IsMonHom.mul_hom, tensorHom_def', Category.assoc]
 
 /-- The augmentation in degree zero is the actual finite projection.
 Source: blueprint paragraph (1)
@@ -293,6 +321,14 @@ pi^(m+1). The quotient factor is defined by this equality on quotient generators
 postcomposition of continuous functions preserves the equality. -/
 theorem reduction_comp (n m : ℕ) (h : m ≤ n) :
     reduction l E n ≫ finiteMap l E n m h = reduction l E m := by
-  sorry
+  let := spectralNorm.normedField (Padic l) E
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext S
+  ext x
+  apply ULift.ext
+  apply ContinuousMap.ext
+  intro s
+  rfl
 
 end AlgebraicGeometry.ProEtale.IntegralQuotient

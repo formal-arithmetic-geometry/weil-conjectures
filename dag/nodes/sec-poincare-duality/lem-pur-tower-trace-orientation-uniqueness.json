@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-tower-trace-orientation-uniqueness",
+ "kind": "statement",
+ "title": "Rank-one orientation uniqueness in normalized Stage coordinates",
+ "statement": "Fix the finite-field and coefficient setting $P$ of [def-pur-conventions], with $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, and finite coefficient subfields of a fixed $\\overline{\\mathbf Q}_\\ell$. Let $X,Y$ be separated finite-type $k$-schemes and fix $j:X\\hookrightarrow Z$, $p:Z\\to Y$ with $j$ open, $p$ proper, and $f=p\\circ j$ a $k$-morphism smooth of pure relative dimension $d\\ge0$ [def-weil-compactifications-refinements, def-sbc-smooth-morphisms]. Use the actual complete finite-Tor integral categories, completed pullback and tensor, and the specified compact-support/exceptional adjunctions of [def-weil-derived-complete-integral-detailed, def-weil-finite-tor-amplitude, def-pur-integral-derived-operations, def-weil-exceptional-inverse-image]. Fix $S,M,E,m$ and any Stage $A$ of [def-pur-tower-trace-comparison-data]. For any two arrows $g,h:T_E\\to G_E1$ having PrescribedUnitReductions in that same Stage, $g=h$. Neither arrow is required to be invertible.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "Tower-gamma clause (1), rank-one uniqueness, transferred through the fixed adjunction"
+ },
+ "stmt_deps": [
+  "def-pur-tower-trace-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply integral orientation reduction injectivity to the shifted Tate line and coefficient unit in the realized model. The normalized source and finite exceptional comparison identify its rho evaluations with the prescribed finite reductions. Cancel these isomorphisms; both evaluation families are the fixed finite unit purity family. Injectivity gives equality of full-subcategory arrows and hence of their underlying maps.",
+   "uses": [
+    "lem-pur-integral-orientation-reduction-injectivity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-orientation-reduction-injectivity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "Tower-gamma clause (1), rank-one uniqueness, transferred through the fixed adjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized integral tower purity has unit orientations determined by their finite reductions and is the counit transpose of projection followed by the unit trace",
+   "results": "Algebra.normalizedTrace; NormalizationMonoid.normUnit; Algebra.normalizedTrace_trans; Algebra.normalizedTrace_eq_of_finiteDimensional_apply; Algebra.normalizedTrace_def; Algebra.normalizedTrace_eq_of_fininteDimensional_apply; Algebra.normalizedTrace.congr_simp; normalize_coe_units",
+   "date": "2026-10-26",
+   "verdict": "no geometric purity comparison; field traces and monoid normalization only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv, homEquiv_apply, homEquiv_symm_apply, homEquiv_unit, homEquiv_counit, mkOfHomEquiv_homEquiv, comp_homEquiv and related generic adjunction identities",
+   "date": "2026-10-26",
+   "verdict": "generic adjunction equivalence used in assembly; no coefficient or normalization bridge"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse limit tower smooth purity map equals the adjoint transpose of its unit trace by projection formula",
+   "results": "Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; AdicCompletion.transitionMap_comp_eval; Algebra.Generators.CotangentSpace.compEquiv_symm_inr; AdicCompletion.transitionMap_comp_reduceModIdeal; Algebra.Generators.CotangentSpace.fst_compEquiv; Algebra.FormallySmooth.exists_kerProj_comp_eq_id; AdicCompletion.transitionMap_comp_eval_apply; AdicCompletion.eval_lift",
+   "date": "2026-10-26",
+   "verdict": "no match: adic completion of rings and cotangent spaces, not geometric tower purity"
+  },
+  {
+   "tool": "grep",
+   "query": "adicTranspose|normalized_presentations|prescribed_orientations_unique|canonical_integral_transpose|scalar_counit",
+   "results": "msearch: 0 Mathlib hits. Local Sheaf source: adicTranspose in AdicProjectionShiftData; existing tower transpose and reduction injectivity interfaces inspected. No existing statements in the Stage coordinates.",
+   "date": "2026-10-26",
+   "verdict": "new bridge statements needed; existing constructions are reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerTracePurityComparison",
+  "date": "2026-10-26",
+  "group": "P4"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Proof sentence 3, geometric orientation and trace are equivariant: comparison of the tower construction with the existing rational purity family, before rational Weil equivariance is deduced; Tower-gamma clause (1), rank-one uniqueness, transferred through the fixed adjunction",
+   "via": [
+    "lem-pur-tower-trace-purity-comparison",
+    "lem-pur-rational-weil-naturality-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerTraceOrientationUniqueness",
+  "file": "lean/Sheaf/Paper/TowerTraceOrientationUniqueness.lean",
+  "declaration": "WeilConjectures.TowerTracePurityComparison.prescribed_orientations_unique",
+  "statement": "theorem prescribed_orientations_unique [QuasiCompact (j ≫ p)]\n    (S : ConstructibleExceptionalCoefficients.RingSystem P.coefficients.l P.coefficients.Qbar\n      P.field P.coefficients.different (f := j ≫ p))\n    (M : FieldShriekSystem.Models P) (E : FieldShriekSystem.Index P)\n    (m : FieldExtensionTowers.IntegralModel P M E j p d) (A : Stage P j p d S M E m)\n    (g h : PurUnitTrace.tateUnit P.field P.coefficients E.val d X ⟶\n      ((S.operation (SpTowerGamma.factorization j p) (.integral { carrier := E.val })).G.obj\n        ⟨_, A.core.admissibleY.1⟩).obj)\n    (hg : PrescribedUnitReductions P j p d S M E m A g)\n    (hh : PrescribedUnitReductions P j p d S M E m A h) : g = h",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-808b5",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261026T070501-L-3596498",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-808b5",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261026T070501-L-3596498",
+  "kind": "interface",
+  "note": "independent cc review: Data module vs clone's old item module (verbatim apart from blueprint tags/imports); item proof vs four bridge statements and node proof/proof_deps; bridge statements vs pinned Stage/CoefficientComparison definitions and integralMap"
+ }
+}

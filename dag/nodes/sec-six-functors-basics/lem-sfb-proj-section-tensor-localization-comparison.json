@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-proj-section-tensor-localization-comparison",
+ "kind": "statement",
+ "title": "Tensor-power and Proj-twist section localizations agree",
+ "statement": "Let $S=\\bigoplus_{d\\ge0}S_d$ be a nonnegatively graded commutative ring and $X=\\operatorname{Proj}(S)$ [def-pc-proj]. Assume that $X$ is covered by the standard opens $D_+(f)$ with $f\\in S_1$. Let $\\mathcal F$ be an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category]. Put $\\mathcal O_X(n)=\\widetilde{S(n)}$ [def-weil-pbc-proj-twisting-sheaf], $\\mathcal F(n)=\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal O_X(n)$ [def-pur-sheaf-tensor-product], and $N=\\bigoplus_{n\\in\\mathbf Z}\\Gamma(X,\\mathcal F(n))$, with the $S$-action given by canonical sections and the unital associative twist multiplication maps of [lem-sfb-standard-proj-twist-tensor]. Put $L=\\mathcal O_X(1)$, an invertible module [def-sc-invertible-module], $B=\\bigoplus_{n\\ge0}\\Gamma(X,L^{\\otimes n})$, and $P=\\bigoplus_{n\\in\\mathbf Z}\\Gamma(X,\\mathcal F\\otimes L^{\\otimes n})$, with negative powers interpreted using the dual of $L$. The canonical multiplication identifications $\\beta_n:L^{\\otimes n}\\xrightarrow{\\sim}\\mathcal O_X(n)$, for every $n\\in\\mathbf Z$, identify the graded $S$-module $P$ (by restriction of scalars along the canonical map $S\\to B$) with $N$. For every $f\\in S_1$ let $s\\in\\Gamma(X,L)$ be its canonical section, and define $X_s=\\{x:s\\notin\\mathfrak m_xL_x\\}$. Then $X_s=D_+(f)$, and $s$ freely generates $L|_{D_+(f)}$. The identifications induce an $S_{(f)}$-linear isomorphism $\\theta_f:N_{(f)}\\xrightarrow{\\sim}P_{(s)}$ sending $t/f^a$ to $\\beta_a^{-1}(t)/s^a$ for $a\\ge0$ and $t\\in N_a$, where $\\beta_a^{-1}$ on sections includes the identity on $\\mathcal F$. Here $N_{(f)}$ and $P_{(s)}$ mean the degree-zero parts of the respective homogeneous localizations; equality of two fractions with denominators of exponents $a,b$ is the common-power relation $f^c(f^bt-f^au)=0$ for some $c\\ge0$, transported to the same relation with $s$. Under $X_s=D_+(f)$, restriction followed by division by $s^a$ composed with $\\theta_f$ is exactly $t/f^a\\mapsto t|_{D_+(f)}\\otimes f^{-a}$. No quasi-compactness, quasi-separatedness, or quasi-coherence is assumed in this comparison.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0AG5 (lemma-proj-quasi-coherent), proof: the identification of twisted-section homogeneous localization with invertible-section localization, specialized to d=1; its twist and nonvanishing identifications come from constructions.tex lemma-apply-modules and lemma-principal-open."
+ },
+ "stmt_deps": [
+  "def-pc-proj",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "lem-sfb-standard-proj-twist-tensor",
+  "def-sc-invertible-module",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-standard-proj-twist-tensor] with the given degree-one cover. It supplies invertibility of every $\\mathcal O_X(n)$ and the isomorphisms $\\mu_{a,b}$, including their unit and associativity laws and their fraction multiplication formula. In particular $L=\\mathcal O_X(1)$ is invertible. Use the evaluation isomorphism $L\\otimes L^\\vee\\simeq\\mathcal O_X$ of [lem-pc-tensor-dual-invertible] to interpret negative powers. All tensor associators and unitors below are those of [lem-pc-sheaf-modules-tensor-closed].",
+   "uses": [
+    "lem-sfb-standard-proj-twist-tensor",
+    "lem-pc-tensor-dual-invertible",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01MS (lemma-when-invertible) and 01MT (lemma-apply-modules), multiplication isomorphisms; negative powers use the dual evaluation."
+   }
+  },
+  {
+   "text": "Fix $g\\in S_1$, $U_g=D_+(g)$, and $n\\in\\mathbf Z$. On each positive-degree standard open $V=D_+(h)\\subseteq U_g$, [lem-weil-pbc-proj-standard-open-inclusion] makes $g$ a homogeneous unit in $S_h$. By [def-weil-pbc-proj-twisting-sheaf], the maps $\\mathcal O_X(V)=(S_h)_0\\to(S_h)_n=\\mathcal O_X(n)(V)$, $a\\mapsto ag^n$, and $x\\mapsto g^{-n}x$ are inverse linear maps. Both commute with localization restrictions. These $V$ form a basis of $U_g$, so [lem-weil-pbc-sheaf-morphism-on-basis] extends them to inverse sheaf maps on $U_g$. Denote the resulting frame by $g^n$, also for negative $n$; $g^0=1$. For $n=1$ it is the restriction of the canonical section of $L$, because that section has fractions $g/1$ on every standard open.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-weil-pbc-sheaf-morphism-on-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MS (lemma-when-invertible), proof: multiplication by g^n after inverting g; Tag 01MM canonical homogeneous sections."
+   }
+  },
+  {
+   "text": "Write $E_n=L^{\\otimes n}$, with $E_0=\\mathcal O_X$. The frame $g$ on $U_g$ has dual frame $g^\\vee$ with $g^\\vee(g)=1$. Its tensor powers, or the powers of $g^\\vee$ for $n<0$, give frames $e_{g,n}$ of $E_n|_{U_g}$: tensor the trivialization and its inverse, and use the unitors; for the dual use evaluation. Define $\\beta_{n,g}$ by $ae_{g,n}\\mapsto ag^n$. On $U_g\\cap U_h$, the unit $r=g/h$ satisfies $g=rh$, hence $g^\\vee=r^{-1}h^\\vee$ and $e_{g,n}=r^ne_{h,n}$ for every integer $n$. In the localized graded ring one also has $g^n=r^nh^n$. Thus $\\beta_{n,g}$ and $\\beta_{n,h}$ agree on overlaps. Restrict a section to the cover, apply these maps, and glue; their inverse maps glue by the same equations. This constructs $\\beta_n:E_n\\simeq\\mathcal O_X(n)$ globally. For $n\\ge0$ it is the iterated canonical multiplication map: induction starts with $\\beta_0=1$, $\\beta_1=1$, and the successor sends $e_{g,n}\\otimes g$ to $g^{n+1}$. For $n<0$ it is its dual counterpart, as $g^n g^{-n}=1$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-tensor-dual-invertible",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sfb-standard-proj-twist-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MT (lemma-apply-modules), tensor-power identification; Tag 01MS frames. The overlap and negative-power details are written out here."
+   }
+  },
+  {
+   "text": "The maps $\\beta_n$ respect multiplication in all integer degrees. On any open contained in $U_g$, multiplication of the tensor frames is $e_{g,a}e_{g,b}=e_{g,a+b}$, including mixed signs since evaluation pairs $g$ with $g^\\vee$ to $1$. Multiplication of the twist frames is $g^ag^b=g^{a+b}$ by the fraction formula. Both maps are bilinear between locally free rank-one sheaves, so these equations on their frames prove their equality. The degree-zero map is the unit identification. Consequently $\\phi:S\\to B$ sends $v\\in S_e$ to $\\beta_e^{-1}(v)$ and is a unital graded ring map. Put $\\gamma_n=\\Gamma(X,1_{\\mathcal F}\\otimes\\beta_n):P_n\\simeq N_n$. Locally every section of $\\mathcal F\\otimes E_n$ is uniquely $z\\otimes e_{g,n}$, by the tensor unitor and the frame. If $v|_{U_g}=qg^e$, the two actions on this section both give $qz\\otimes g^{n+e}$. Restriction to the cover and sheaf separation prove $\\gamma_{n+e}(\\phi(v)p)=v\\gamma_n(p)$. Taking direct sums gives the asserted graded $S$-module isomorphism $\\gamma:P\\simeq N$.",
+   "uses": [
+    "lem-sfb-standard-proj-twist-tensor",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MT and equations equation-multiply, equation-multiply-on-sheaf: multiplicativity checked on local frames, also after tensoring an arbitrary module sheaf."
+   }
+  },
+  {
+   "text": "Every $\\mathcal O_X(n)$ is invertible and every $\\mu_{a,b}$ is an isomorphism by step 1. Therefore the open $W_1$ in [lem-trf-proj-twist-section-basic-open] is all of $X$. Apply that node with $A=S$, $d=n=1$, $U=X$, and the given $f\\in S_1$. It gives $X_s=D_+(f)$, with the stated stalk definition of the nonvanishing locus. Step 2 with $g=f$, $n=1$ says that $s=f/1$ freely generates $L$ on this open. In particular its powers are the frames $e_{f,a}$, and $\\beta_a(e_{f,a})=f^a$.",
+   "uses": [
+    "lem-sfb-standard-proj-twist-tensor",
+    "lem-trf-proj-twist-section-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MV (lemma-principal-open), with W_1=X supplied by Tag 01MT. No compactness hypothesis is used."
+   }
+  },
+  {
+   "text": "Let $\\delta_n=\\gamma_n^{-1}$. Step 4 gives $\\delta_{n+1}(ft)=s\\delta_n(t)$, hence by induction $\\delta_{n+c}(f^ct)=s^c\\delta_n(t)$ for $c\\ge0$. Define $\\theta_f(t/f^a)=\\delta_a(t)/s^a$. It is well defined: for $t\\in N_a$, $u\\in N_b$, the relation $f^c(f^bt-f^au)=0$ is sent by the additive isomorphism $\\delta_{a+b+c}$ to $s^c(s^b\\delta_a(t)-s^a\\delta_b(u))=0$. Conversely $\\gamma_{a+b+c}$ takes the latter relation back to the former. Thus the two fraction relations are equivalent, without cancelling any power. The inverse map is $p/s^a\\mapsto\\gamma_a(p)/f^a$. These formulas give a bijection on the degree-zero localizations and are precisely the formula involving $\\beta_a^{-1}$ in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0AG5 (lemma-proj-quasi-coherent), proof: the graded-section localization identification, d=1; the ordinary common-power fraction relation is explicit in the statement of this item."
+   }
+  },
+  {
+   "text": "The bijection is additive: the numerator of $t/f^a+u/f^b$ over $f^{a+b}$ is $f^bt+f^au$, and its image under $\\delta_{a+b}$ is $s^b\\delta_a(t)+s^a\\delta_b(u)$, the numerator of the corresponding sum over $s^{a+b}$. Define the coefficient-ring map $S_{(f)}\\to B_{(s)}$ by $v/f^b\\mapsto\\phi(v)/s^b$ for $v\\in S_b$; the ring-map law and $\\phi(f)=s$ send its common-power relation to that in $B_{(s)}$, so it is well defined. Equip $P_{(s)}$ with this $S_{(f)}$-action. Step 4 gives $\\delta_{a+b}(vt)=\\phi(v)\\delta_a(t)$, whence $\\theta_f((v/f^b)(t/f^a))=(\\phi(v)/s^b)\\theta_f(t/f^a)$. This proves $S_{(f)}$-linearity and makes the inverse linear as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0AG5 (lemma-proj-quasi-coherent), proof: equality as localized modules, with addition and coefficient action written out."
+   }
+  },
+  {
+   "text": "On $U=X_s=D_+(f)$ define division by $s^a$ using the frame $e_{f,a}$: the map $\\mathcal F|_U\\to(\\mathcal F\\otimes E_a)|_U$, $z\\mapsto z\\otimes e_{f,a}$, is an isomorphism. The division map on fractions is well defined, since after restriction to $U$ its common-power relation may be divided by the frame $s^{a+b+c}$. Step 3 gives $\\beta_a(e_{f,a})=f^a$, so dividing $\\delta_a(t)|_U$ by $s^a$ is exactly contracting $t|_U\\in\\Gamma(U,\\mathcal F\\otimes\\mathcal O_X(a))$ against the inverse frame $f^{-a}$. Its value is $t|_U\\otimes f^{-a}$ under the canonical multiplication and unit identification. This proves the final compatibility. No assertion of bijectivity of this restriction-and-division map was used. The construction uses only the degree-one open cover, valid also when it is infinite; it applies to arbitrary $\\mathcal F$, without quasi-coherence, quasi-compactness, or quasi-separatedness.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0AG5 (lemma-proj-quasi-coherent), comparison formula, together with constructions.tex Tag 01MS inverse frames; only the formal comparison part of that proof is used."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-tensor-dual-invertible",
+  "lem-sfb-standard-proj-twist-tensor",
+  "lem-trf-proj-twist-section-basic-open",
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-sheaf-morphism-on-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0AG5 (lemma-proj-quasi-coherent), the formal graded-module localization identification for d=1; constructions.tex Tags 01MS, 01MT and 01MV for frames, twist multiplication and the nonvanishing locus. Explicit fraction and negative-power calculations supplied in the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "GammaStar|sectionModule|fromTilde|twist.*localiz|localiz.*twist",
+   "results": "{\"t\": \"2026-10-22T05:49:26Z\", \"tool\": \"grep\", \"query\": \"GammaStar|sectionModule|fromTilde|twist.*localiz|localiz.*twist\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"9a7935916a0bfc9b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern the Proj structure sheaf or the affine Spec tilde-Gamma counit, not the tensor-power/Proj-twist localization comparison for an arbitrary module sheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, IsLocalization",
+   "results": "{\"t\": \"2026-10-22T05:49:27Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj, IsLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern the Proj structure sheaf or the affine Spec tilde-Gamma counit, not the tensor-power/Proj-twist localization comparison for an arbitrary module sheaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a quasicoherent sheaf on Proj the localization of its graded twisted sections module at f of degree one is the module of sections on D plus f",
+   "results": "{\"t\": \"2026-10-22T05:49:27Z\", \"tool\": \"leansearch\", \"query\": \"For a quasicoherent sheaf on Proj the localization of its graded twisted sections module at f of degree one is the module of sections on D plus f\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isLocalization_atPrime\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen\", \"AlgebraicGeometry.StructureSheaf.basicOpenIso\", \"AlgebraicGeometry.Proj.basicOpenToSpec_app_top\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\"], \"digest\": \"f3b0e054314a4676\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern the Proj structure sheaf or the affine Spec tilde-Gamma counit, not the tensor-power/Proj-twist localization comparison for an arbitrary module sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a quasi compact quasi separated Proj covered by degree one standard opens, degree zero localization of the graded module of twisted global sections at a degree one element is canonically the sections of the sheaf on its standard open",
+   "results": "{\"t\": \"2026-10-22T05:49:28Z\", \"tool\": \"leanfinder\", \"query\": \"On a quasi compact quasi separated Proj covered by degree one standard opens, degree zero localization of the graded module of twisted global sections at a degree one element is canonically the sections of the sheaf on its standard open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.awayToSection\", \"AlgebraicGeometry.sectionInBasicOpen\", \"AlgebraicGeometry.openToLocalization\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\"], \"digest\": \"54f6c0756bfe82eb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern the Proj structure sheaf or the affine Spec tilde-Gamma counit, not the tensor-power/Proj-twist localization comparison for an arbitrary module sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identify Proj twists O(n) with integral tensor powers of O(1), and compare the fraction evaluation t divided by f power with invertible section localization",
+   "results": "{\"t\": \"2026-10-22T05:49:31Z\", \"tool\": \"leanfinder\", \"query\": \"Identify Proj twists O(n) with integral tensor powers of O(1), and compare the fraction evaluation t divided by f power with invertible section localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"AlgebraicGeometry.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.sectionInBasicOpen\"], \"digest\": \"12805b7579733586\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern the Proj structure sheaf or the affine Spec tilde-Gamma counit, not the tensor-power/Proj-twist localization comparison for an arbitrary module sheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "twist.*tensorPow|tensorPow.*twist|GammaStar|sectionModule|twist.*localiz",
+   "results": "{\"t\": \"2026-10-23T12:37:28Z\", \"tool\": \"grep\", \"query\": \"twist.*tensorPow|tensorPow.*twist|GammaStar|sectionModule|twist.*localiz\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Proj declarations describe structure-sheaf localization, and the tensor-product hits concern algebraic tensor powers, not integer twist identifications and localized section modules for arbitrary module sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, LocalizedModule",
+   "results": "{\"t\": \"2026-10-23T12:37:28Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj, LocalizedModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Proj declarations describe structure-sheaf localization, and the tensor-product hits concern algebraic tensor powers, not integer twist identifications and localized section modules for arbitrary module sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The graded module isomorphism between sections of tensor powers of O(1) and Proj twists O(n) induces an isomorphism of degree zero localizations at a degree one section",
+   "results": "{\"t\": \"2026-10-23T12:37:28Z\", \"tool\": \"leansearch\", \"query\": \"The graded module isomorphism between sections of tensor powers of O(1) and Proj twists O(n) induces an isomorphism of degree zero localizations at a degree one section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.stalkIso\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"AlgebraicGeometry.Proj.stalkIso'\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ_ΓToStalk\", \"AlgebraicGeometry.Proj.stalkIso'_symm_mk\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isLocalization_atPrime\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.Proj.basicOpenIsoSpec\"], \"digest\": \"0c3153a62d19bad1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Proj declarations describe structure-sheaf localization, and the tensor-product hits concern algebraic tensor powers, not integer twist identifications and localized section modules for arbitrary module sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identify integral tensor powers of the invertible sheaf O(1) with Proj twists O(n) and compare degree zero localizations of the two graded modules of sections",
+   "results": "{\"t\": \"2026-10-23T12:37:32Z\", \"tool\": \"leanfinder\", \"query\": \"Identify integral tensor powers of the invertible sheaf O(1) with Proj twists O(n) and compare degree zero localizations of the two graded modules of sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\"], \"digest\": \"04f3760552b9fefa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Proj declarations describe structure-sheaf localization, and the tensor-product hits concern algebraic tensor powers, not integer twist identifications and localized section modules for arbitrary module sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPow|twist|section",
+   "results": "{\"t\": \"2026-10-23T12:40:58Z\", \"tool\": \"grep\", \"query\": \"tensorPow|twist|section\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\"], \"digest\": \"2938b68985a2ed63\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Proj declarations describe structure-sheaf localization, and the tensor-product hits concern algebraic tensor powers, not integer twist identifications and localized section modules for arbitrary module sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given compatible isomorphisms from integer tensor powers of a line bundle to a multiplicative family of line bundles, the graded section modules and their homogeneous fractions are identified",
+   "results": "{\"t\": \"2026-10-23T12:41:00Z\", \"tool\": \"leanfinder\", \"query\": \"Given compatible isomorphisms from integer tensor powers of a line bundle to a multiplicative family of line bundles, the graded section modules and their homogeneous fractions are identified\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"GradedTensorProduct.auxEquiv\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"GradedTensorProduct.liftEquiv\", \"TensorPower.gradedMonoid_eq_of_cast\", \"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"HomogeneousLocalization.mk\"], \"digest\": \"dda25a75cf97343f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Proj declarations describe structure-sheaf localization, and the tensor-product hits concern algebraic tensor powers, not integer twist identifications and localized section modules for arbitrary module sheaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proj-section-module-reconstruction",
+  "date": "2026-10-22",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Reconstruction proof, step 2: identify O(1) tensor powers, the nonvanishing locus of f, and the two localized section modules (Stacks 0AG5, d=1); explicit local frames, overlap scalars, and common-power fraction relation.",
+   "via": [
+    "lem-sfb-proj-section-module-reconstruction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proj-section-tensor-localization-comparison",
+  "worker": "stage1",
+  "summary": "Q57: split the formal comparison into eight explicit steps, reusing existing twist, dual-evaluation, sheaf tensor, basis, and nonvanishing statements. No new nodes or statement change. Checked all integer degrees, common-power equality, coefficient-ring action, evaluation compatibility, and empty/nilpotent cases. No compactness or coherence hypothesis is needed.",
+  "blueprint": "Created auxiliary item with blueprint ancestor null (confirmed by blueprint_refs.py ancestor). Realizes reconstruction step 2 on the existing route under sk-thm-sf-ctf-stability: tensor-power/twist comparison, canonical-section locus, homogeneous fraction identification. Latest blueprint searched; no node states this entire comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-tensor-dual-invertible",
+    "why": "Evaluation for invertible modules interprets negative powers; the unit has no generic dual-evaluation statement."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Canonical tensor associators, unitors and bilinearity, used in local frame computations and contraction; a generic sheaf tensor tool."
+   },
+   {
+    "node": "lem-weil-pbc-proj-standard-open-inclusion",
+    "why": "Standard opens form a basis and g is invertible in S_h when D_+(h) lies in D_+(g); a generic chart tool."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-morphism-on-basis",
+    "why": "Compatible maps on the standard basis extend uniquely to sheaf maps; a generic sheaf gluing tool."
+   },
+   {
+    "node": "lem-trf-proj-twist-section-basic-open",
+    "why": "The canonical homogeneous section has nonvanishing locus D_+(f) on W_1=X; this existing general statement avoids a duplicate of Stacks 01MV."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-tensor-dual-invertible",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-sheaf-morphism-on-basis",
+  "lem-trf-proj-twist-section-basic-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-e3b3ff775",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-e3b3ff775 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is one commit: the item plus the Q57 report, no new nodes. The item statement and stmt_deps are byte-identical to the live tree, where the item is still unsplit, and there is no re-split note. Source checks: Stacks 0AG5 (properties.tex, lemma-proj-quasi-coherent) with d=1 gives exactly the localization identification the item states, and the item rightly leaves out the qc/quasi-coherence step that 0AG5 needs afterwards. 01MV (constructions.tex, lemma-principal-open, line 1919) with W=X and d=n=1 matches step 5. The statement is true: steps 2-4 build a graded iso P≅N over the ring map S→B, which sends f to s, so the two degree-zero localizations agree; the common-power relation is the correct one when there is torsion. Step checks: step 2 gets g invertible in S_h from part (1) of proj-standard-open-inclusion and extends to U_g with sheaf-morphism-on-basis. Step 3 glues because the overlap scalar r^n is the same on both sides. I verified step 4's S-linearity myself with v=qg^e. Step 5 uses W_1=X, which step 1 supplies. Steps 6-8 are explicit fraction algebra with nothing cancelled. proof_deps equal the union of the step uses. Edge cases checked: X empty, F=0, f nilpotent, torsion, negative twists, infinite cover. The P^1-only nodes are narrower and the fraction-naturality sibling is about a different map, so no duplicate. No SGA anywhere. Batch-5: lem-trf-proj-twist-section-basic-open is the generic Proj fact 01MV/01MS. Its 115-node closure contains only generic trf Proj chart lemmas and no trace-formula or Poincaré statement, so it is outside both assumptions and accepted. The five generic tool_uses are accepted. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjSectionTensorLocalizationComparison",
+  "declaration": "AlgebraicGeometry.Proj.projSectionTensorLocalizationComparison",
+  "declarations": [
+   "AlgebraicGeometry.Proj.projSectionTensorPower",
+   "AlgebraicGeometry.Proj.projSectionDualContractOne",
+   "AlgebraicGeometry.Proj.projSectionTensorStep",
+   "AlgebraicGeometry.Proj.projSectionTensorContract",
+   "AlgebraicGeometry.Proj.projSectionTensorMultiply",
+   "AlgebraicGeometry.Proj.ProjSectionLocalizedComparison",
+   "AlgebraicGeometry.Proj.ProjSectionTensorComparison",
+   "AlgebraicGeometry.Proj.projSectionTensorLocalizationComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjSectionTensorLocalizationComparison.lean",
+  "statement": "theorem projSectionTensorLocalizationComparison (cover : ∀ x : Proj 𝒜, ∃ f ∈ 𝒜 1, x ∈ basicOpen 𝒜 f) (F : (Proj 𝒜).Modules) : (twist 𝒜 1).IsInvertible ∧ ∀ [(twist 𝒜 1).IsInvertible], ∃ mN : Module S (⨁ n : ℤ, Γ(F ⊗ twist 𝒜 n, ⊤)), @Nonempty (ProjSectionTensorComparison 𝒜 cover F (⨁ n : ℤ, Γ(F ⊗ twist 𝒜 n, ⊤)) (⨁ n : ℤ, Γ(F ⊗ projSectionTensorPower (twist 𝒜 1) n, ⊤)) (fun n ↦ DirectSum.of (fun k : ℤ ↦ Γ(F ⊗ twist 𝒜 k, ⊤)) n) (fun n ↦ DirectSum.of (fun k : ℤ ↦ Γ(F ⊗ projSectionTensorPower (twist 𝒜 1) k, ⊤)) n) (mN := mN))",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of L H3 on returned head 3bcfba40ec18: actionP uses ordinary tensorPowAddIso for nonnegative numerator degrees and explicit contraction built from dualEvaluation for negative degrees, independent of beta or twistTensorIso. scalarQ_fraction multiplies numerator and coefficient sections by the actual tensorPowAddIso, using beta only to identify the homogeneous coefficient section. Thus gamma_linear and theta linearity compare independently specified canonical actions. The four contraction/multiplication helpers contain real morphism data and are recorded in declarations. All other statement clauses and the main theorem signature are retained; only this lean record changes on the DAG node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-700e597d6",
+  "group": "O1",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 3bcfba40ec18 (H3: actionP/scalarQ_fraction were β-transported, so gamma_linear and θ-linearity were vacuous). Diff vs returned head: only 4 new real-data helpers (projSectionDualContractOne/TensorStep/TensorContract/TensorMultiply, with Stacks 01PW/01MT + blueprint docstrings, recorded in lean.declarations), scalarQ_fraction now = sectionFraction(a+b) of (α.hom ≫ F◁tensorPowAddIso.inv)(t ⊗ β_b⁻¹(v-section)), matching mulTensorPowSection/sectionRingGMul conventions, and actionP via tensorPowAddIso (n≥0) / dualEvaluation contraction (n<0), independent of β/twistTensorIso. Traced n=-1,-2 with e=1,2,0. gamma_linear and theta-linearity now carry step-4/7 content. Node: only lean differs from live; statement verbatim; stmt_deps unchanged; dual/dualEvaluation belong to def-sc-invertible-module's dual. One sorry; no qc/qs/qcoh; single universe; edge cases (empty Proj, F=0, nilpotent f, negatives, infinite cover) ok. No compile run (no file changed)."
+ }
+}

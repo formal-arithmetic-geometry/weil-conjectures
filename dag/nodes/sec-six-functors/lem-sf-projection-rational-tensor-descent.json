@@ -1,0 +1,142 @@
+{
+ "id": "lem-sf-projection-rational-tensor-descent",
+ "kind": "statement",
+ "title": "Integral coefficient tensor natural isomorphisms descend uniquely to rational stages",
+ "statement": "Let $D$ be a finite-field datum, $c$ its coefficient datum with prime $\\ell\\ne p$, $T_0$ a separated finite-type scheme over $k_0$, and $T$ its geometric fibre [def-weil-finite-field-fiber]. Let $E$ be a finite coefficient field in $c.\\overline{\\mathbf Q}_\\ell$. Assume $T$ is noetherian, its topological Krull dimension is bounded by a natural number, and $\\ell$ is a unit in every local ring. Let $S$ be a finite-stage coefficient comparison [def-fd-coefficient-comparison-datum], with integral functor $J$ and rational functor $H$. Write $U$ and $U_{\\mathbf Q}$ for the framework integral completed and rational tensor bifunctors [def-weil-derived-pullback-tensor-hom]. Let $R$ be a normalized rational tensor comparison [def-sf-projection-weil-tensor-comparison], with integral ordinary tensor $V$ and rational ordinary tensor $R_{\\rm ord}$. Let $q$ and $Q$ denote the recorded source and target integral-to-rational localization functors. For every natural isomorphism $\\mu:J\\circ U\\simeq V\\circ(J\\times J)$, there is a unique natural isomorphism $d:H\\circ U_{\\mathbf Q}\\simeq R_{\\rm ord}\\circ(H\\times H)$ such that for every pair of integral objects $M,N$, the component $d_{qM,qN}$ is, after the prescribed endpoint identifications, exactly $Q(\\mu_{M,N})$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Field-stage transport and compatibility with scalar extension; the integral-to-rational comparison elaborated in def-sf-projection-tensor-coefficient-comparison, final proof step"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-fd-coefficient-comparison-datum",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-projection-weil-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Write J and H for the integral and rational functors of the recorded finite-stage coefficient comparison S, and q and Q for source and target localization. S.objects identifies H(q(M)) with Q(J(M)); S.tensors with coefficient 1 identifies their morphism actions. Functor heterogeneous extensionality gives q followed by H = J followed by Q.",
+   "uses": [
+    "def-fd-coefficient-comparison-datum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The object and bilinear pure-tensor specification of rationalDerivedTensor, evaluated at coefficients (1,1), identifies its restriction along q times q with integral tensor followed by q. The first equality of R.Normalized identifies the corresponding target tensor restriction. Reassociate these equalities to identify the restrictions of both proposed rational bifunctors with the two integral bifunctors followed by Q.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-sf-projection-weil-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At each unchanged integral pair, transport Q applied to the component of the given integral natural isomorphism mu along the endpoint equalities from the preceding steps. These are isomorphisms and retain their prescribed component maps as heterogeneous equalities. The localization of mu is natural; transporting the two endpoint functor equalities proves naturality of these components on integral arrows.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Source q is a categorical localization by the raw scalar-localization comparison with categorical rationalization. Its product is a localization, and precomposition with this product is fully faithful. Take the preimage isomorphism of the integral natural isomorphism from the preceding step. Its preimage equation gives the required component normalization. Finally every object of the raw rational category is literally an unchanged integral object. Two normalized natural isomorphisms therefore have equal component homs; natural-transformation and isomorphism extensionality prove uniqueness.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "lem-sfb-product-localization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-fd-coefficient-comparison-datum",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-projection-weil-tensor-comparison",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-sfb-product-localization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": "F2, 2026-10-27: elementary coefficient-1 restriction identities and fully faithful product-localization descent, following the recorded integral-to-rational normalization. Fully proved in Lean.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphisms descend uniquely along a localization functor by fully faithful precomposition",
+   "results": "Found Localization.natTrans_ext and Functor.FullyFaithful.preimageIso in Mathlib, together with localization uniqueness lemmas.",
+   "date": "2026-10-27",
+   "verdict": "Reuse fully faithful precomposition and preimageIso; the project coefficient and tensor restriction identities still require verification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between bifunctors descends through scalar localization uniquely from its components on integral objects",
+   "results": "Found Localization.lift₂NatIso, liftNatIso and Lifting₂.iso.",
+   "date": "2026-10-27",
+   "verdict": "The generic categorical descent is available; use fullyFaithfulWhiskeringLeft on the product localization after verifying the exact raw coefficient normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarLocalization.*(natIso|NatIso)|fullyFaithfulWhiskeringLeft",
+   "results": "Found Localization.fullyFaithfulWhiskeringLeft in Mathlib/CategoryTheory/Localization/Predicate.lean. Local source searches also found naturalIso_of_integral and the private semilinearTensorIso_localize; neither directly supplies the recorded arbitrary normalized target tensor R without its restriction equations.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the categorical localization interface and verify these restriction equations explicitly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionTensorCoefficientComparison",
+  "date": "2026-10-27",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Field-stage coefficient transport, elaborated by def-sf-projection-tensor-coefficient-comparison, integral-to-rational normalization",
+   "via": [
+    "def-sf-projection-tensor-coefficient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionRationalTensorDescent",
+  "file": "lean/Sheaf/Paper/ProjectionRationalTensorDescent.lean",
+  "declaration": "WeilConjectures.CompactSupportCoefficientTensor.rationalTensorDescent",
+  "statement": "theorem rationalTensorDescent\n    (R : WfTensorCompletion.RationalComparison D C T₀ E₀)\n    (hR : R.Normalized D C T₀ E₀)\n    (mu :\n      (letI := sfWeilPrimeInvertible D C.l C.different T₀\n       constructibleIntegralTensor C.l (pbcFiniteField C.l C.Qbar E₀)\n         (D.geometricFiber T₀).left) ⋙ S.integral.functor ≅\n      (S.integral.functor.prod S.integral.functor) ⋙\n        WfTensorCompletion.ordinary D C T₀ E₀) :\n    ∃! d :\n      (letI := sfWeilPrimeInvertible D C.l C.different T₀\n       rationalDerivedTensor C.l (pbcFiniteField C.l C.Qbar E₀)\n         (D.geometricFiber T₀).left) ⋙ S.rational.functor ≅\n        (S.rational.functor.prod S.rational.functor) ⋙ R.ordinary,\n      ∀ M N : sfIntegralConstructibleCategory C.l (pbcFiniteField C.l C.Qbar E₀)\n          (D.geometricFiber T₀).left,\n        HEq (d.hom.app\n          ((sfRationalConstructibleLocalization C.l (pbcFiniteField C.l C.Qbar E₀)\n              (D.geometricFiber T₀).left).obj M,\n            (sfRationalConstructibleLocalization C.l (pbcFiniteField C.l C.Qbar E₀)\n              (D.geometricFiber T₀).left).obj N))\n          ((pbcStageLocalization C.l C.Qbar (D.geometricFiber T₀).left E₀).map\n            (mu.hom.app (M, N)))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T222641-L-678247",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T222641-L-678247",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

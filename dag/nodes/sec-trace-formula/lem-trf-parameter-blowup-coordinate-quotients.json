@@ -1,0 +1,286 @@
+{
+ "id": "lem-trf-parameter-blowup-coordinate-quotients",
+ "kind": "statement",
+ "title": "Simultaneous coordinate quotients and parameters in a blowup algebra",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative regular local ring [def-weil-regular-scheme] of dimension $d\\geq1$, and let $t_1,\\ldots,t_d$ be a regular system of parameters [def-weil-pbc-regular-system-of-parameters]. Let $\\varnothing\\ne J\\subseteq\\{1,\\ldots,d\\}$ and $j\\in J$. Write $L=J\\setminus\\{j\\}$ and set $$A=R[u_i\\mid i\\in L]/(t_i-t_j u_i\\mid i\\in L).$$ Coefficients and variables in quotient rings are denoted by the same symbols. Assume that $A$ is regular [def-weil-regular-scheme]. Use the labelled coordinate family $\\mathcal C=(t_j,(u_i)_{i\\in L},(t_k)_{k\\notin J})$; labels remain distinct. For $\\epsilon\\in\\{0,1\\}$, $U\\subseteq L$ and $K\\subseteq\\{1,\\ldots,d\\}\\setminus J$, put $$Q_{\\epsilon,U,K}=\\epsilon(t_j)+(u_i:i\\in U)+(t_k:k\\in K),\\qquad c=\\epsilon+|U|+|K|,$$ where $0(t_j)$ means the zero ideal. Then $A/Q_{\\epsilon,U,K}$ is a regular ring. For every prime ideal $P\\supseteq Q_{\\epsilon,U,K}$, its localization satisfies $$A_P/Q_{\\epsilon,U,K}A_P\\text{ is regular local},\\qquad \\dim A_P=\\dim(A_P/Q_{\\epsilon,U,K}A_P)+c$$ [def-weil-pbc-localization-at-prime, def-weil-pbc-krull-dimension-ring]. At every prime $P\\subset A$, all members of $\\mathcal C$ lying in $P$, with their displayed labels, simultaneously occur as distinct members of one regular system of parameters of $A_P$. Thus a chosen coordinate intersection is empty near $P$ if one chosen coordinate is a unit there, and otherwise its local equations are part of such a system and have codimension $c$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 4.2.9, printed p. 121: the vanishing chart coordinates form part of local regular parameters; all simultaneous coordinate quotients and their codimensions (also Remark 4.2.2(i), printed p. 118)"
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-trf-parameter-blowup-chart-ring"
+ ],
+ "proof": [
+  {
+   "text": "First fix $U,K$ and put $T=U\\cup K$, $R_T=R/(t_h:h\\in T)$, and $D=d-|T|$. Reorder the original regular parameters with the indices in $T$ first. By [lem-weil-pbc-regular-local-generators-regular-sequence], $R_T$ is regular local of dimension $D$. The images of the remaining $D$ parameters generate its maximal ideal, hence form a regular system of parameters by [def-weil-pbc-regular-system-of-parameters]. Here $j\\notin T$, so $D\\ge1$. Put $L'=L\\setminus U$ and $B=R_T[v_i\\mid i\\in L']/(t_i-t_jv_i:i\\in L')$. There is an isomorphism $A/Q_{0,U,K}\\cong B$: send coefficients to their classes in $R_T$, send $u_i$ to zero for $i\\in U$ and to $v_i$ otherwise. The old relations with $i\\in U$ map to $t_i=0$, and the others to the displayed relations. Conversely $R\\to A/Q_{0,U,K}$ kills $t_k$ for $k\\in K$ and $t_i=t_ju_i$ for $i\\in U$, so factors through $R_T$; send each $v_i$ to $u_i$. The composites fix coefficients and variables, so are identities by [def-weil-pbc-mv-polynomial-ring].",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-regular-system-of-parameters",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII, Lemma 4.2.9, printed p.121, coordinate substitutions; algebra.tex Tag 00NQ (lemma-regular-ring-CM)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-parameter-blowup-algebra-regular] to $R_T$ with its remaining parameter list, nonempty centre index set $J\\setminus U$ and distinguished index $j$ (reindex the finite list if necessary). Its chart is precisely $B$ from Step 1. Thus $B$, and hence $A/Q_{0,U,K}$, is Noetherian and regular; multiplication by $t_j$ on $B$ is injective, and $B[1/t_j]\\cong R_T[1/t_j]$ sends $v_i$ to $t_i/t_j$. This includes $L'=\\varnothing$, when $B=R_T$. None of this invokes the coordinate-quotient lemma being proved.",
+   "uses": [
+    "lem-trf-parameter-blowup-algebra-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII, Lemma 4.2.9, printed p.121, the same standard parameter chart over a parameter quotient."
+   }
+  },
+  {
+   "text": "For $\\epsilon=1$ put $C=R/(t_h:h\\in J\\cup K)$. The same reordered-parameter application of [lem-weil-pbc-regular-local-generators-regular-sequence] makes $C$ regular local of dimension $d-|J|-|K|$. We have $A/Q_{1,U,K}\\cong C[v_i:i\\in L\\setminus U]$. Define the forward map by the coefficient quotient, $u_i\\mapsto0$ for $i\\in U$, $u_i\\mapsto v_i$ otherwise. It kills $t_j$, every $t_k$ for $k\\in K$, and every relation $t_i-t_ju_i$. For the inverse, the coefficient map to $A/Q_{1,U,K}$ kills all $t_i=t_ju_i$ with $i\\in L$ as well as $t_j$ and $t_K$, so factors through $C$; take $v_i\\mapsto u_i$. Both composites fix the ring generators by [def-weil-pbc-mv-polynomial-ring]. A regular local ring is regular by [lem-weil-pbc-regular-local-localization]; thus [lem-trf-polynomial-ring-regular-base] makes this polynomial ring regular, including dimension zero and no variables. Together with Step 2 this proves the global regularity assertion for both values of $\\epsilon$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-trf-polynomial-ring-regular-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII, Lemma 4.2.9, printed p.121, exceptional coordinate quotient; Stacks Tags 00NQ and 0AFS; polynomial regularity Mathlib leaf."
+   }
+  },
+  {
+   "text": "We next verify injectivity of each remaining nonexceptional coordinate on $A/Q_{0,U,K}=B$. The injection by $t_j$ from Step 2 implies $B\\to B[1/t_j]$ is injective: the fraction relation in [def-weil-ring-localization-away] says an element mapping to zero is killed by some $t_j^n$, and repeated cancellation gives zero. For $i\\in L\\setminus U$, the element $t_i$ is a nonzerodivisor in $R_T$: put this remaining parameter first and apply [lem-weil-pbc-regular-local-generators-regular-sequence] and [def-weil-pbc-regular-sequence]. It remains a nonzerodivisor in $R_T[1/t_j]$: if $t_i x/t_j^n=0$, then $t_j^m t_i x=0$ in $R_T$ for some $m$, so $t_j^m x=0$ by cancellation of $t_i$, and $x/t_j^n=0$. Multiplication by the unit $t_j^{-1}$ preserves injectivity, so $v_i=t_i/t_j$ is a nonzerodivisor there, and hence on the subring $B$. Exactly the same fraction calculation for a remaining $k\\notin J\\cup K$, putting $t_k$ first in $R_T$, proves multiplication by $t_k$ is injective on $B$.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NQ (lemma-regular-ring-CM); Tag 00CO (definition-localization), fraction relation. Expanded injectivity calculation on every partial coordinate quotient."
+   }
+  },
+  {
+   "text": "Order the chosen $u_U$ and $t_K$ in any order and, if $\\epsilon=1$, append $t_j$ last. After every prefix not containing $t_j$, Step 1 identifies its quotient with the chart associated to exactly the indices already removed. Step 4 proves injectivity of the next nonexceptional coordinate; Step 2 proves injectivity of the final $t_j$ if present. Thus this length-$c$ list is weakly regular, meaning precisely the injectivity condition (1) of [def-weil-pbc-regular-sequence]. Fix $P\\supseteq Q_{\\epsilon,U,K}$. All entries lie in $P$, so [lem-weil-pbc-weakly-regular-sequence-localization-prime] gives a regular sequence of length $c$ in $S=A_P$. By the assumed regularity of $A$, $S$ is Noetherian regular local [def-weil-regular-scheme]. The localization-quotient isomorphism [lem-weil-pbc-localization-at-prime-of-quotient] gives $S/Q_{\\epsilon,U,K}S\\cong(A/Q_{\\epsilon,U,K})_{P/Q_{\\epsilon,U,K}}$. Steps 2-3 and [def-weil-regular-scheme] show this ring is regular local. Applying [lem-trf-regular-sequence-dimension-formula] to the displayed regular sequence in $S$ now gives $\\dim S=\\dim(S/Q_{\\epsilon,U,K}S)+c$. Regular local dimensions are finite, so this is also the ordinary integer equality asserted.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-weakly-regular-sequence-localization-prime",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-trf-regular-sequence-dimension-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT (proposition-localize-quotient); dimension-drop theorem Mathlib/RingTheory/KrullDimension/Regular.lean:210-214; regular-sequence localization Mathlib/RingTheory/Regular/Flat.lean:75-79."
+   }
+  },
+  {
+   "text": "At an arbitrary prime $P$, choose exactly the labels of $\\mathcal C$ whose elements lie in $P$; they determine some $\\epsilon,U,K$ and a list $f_1,\\ldots,f_c\\in\\mathfrak n$, where $(S,\\mathfrak n)=(A_P,PA_P)$. By Step 5, $\\overline S=S/(f_1,\\ldots,f_c)$ is regular local of dimension $e=\\dim S-c$. Choose a regular parameter system $\\bar y_1,\\ldots,\\bar y_e$ in $\\overline S$ and lift it to $y_1,\\ldots,y_e\\in\\mathfrak n$. Then $(f_1,\\ldots,f_c,y_1,\\ldots,y_e)=\\mathfrak n$: for any $z\\in\\mathfrak n$, express its image as $\\sum\\bar a_i\\bar y_i$, lift the coefficients, and note $z-\\sum a_i y_i\\in(f_1,\\ldots,f_c)$. The displayed list has length $c+e=\\dim S$, so is a regular system of parameters by [def-weil-pbc-regular-system-of-parameters], with each chosen label assigned its own first position. For $c=0$ this simply chooses a parameter system of $S$; for $e=0$ no lifts are required.",
+   "uses": [
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NU (lemma-regular-mod-x), proof by lifting maximal-ideal generators; here the dimension equality has already been proved in Step 5."
+   }
+  },
+  {
+   "text": "If a selected coordinate $f$ is outside $P$, it is invertible on the basic open $D(f)$ containing $P$. Indeed in $A[1/f]$ its inverse is $1/f$ by [def-weil-ring-localization-away]; its coordinate ideal there is the unit ideal, so that intersection is empty on this neighbourhood. Otherwise Step 6 puts every selected coordinate into a single regular parameter system, and Step 5 gives its codimension $c$. Keeping all labels throughout Steps 5-6 proves simultaneous containment, rather than making separate choices for different coordinates.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII, Lemma 4.2.9 and Remark 4.2.2(i), printed pp.121 and 118; interpretation of the simultaneous local calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-regular-scheme",
+  "def-weil-ring-localization-away",
+  "lem-trf-parameter-blowup-algebra-regular",
+  "lem-trf-polynomial-ring-regular-base",
+  "lem-trf-regular-sequence-dimension-formula",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-weakly-regular-sequence-localization-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Lemma 4.2.9 and Remark 4.2.2(i), pp.121 and 118. Expanded algebraic proof using existing parameter-chart, parameter-quotient, localization and regular-sequence dimension nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing.IsRegularSystemOfParameters",
+   "results": "loogle: unknown identifier 'IsLocalRing.IsRegularSystemOfParameters'",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a parameter blowup chart the vanishing exceptional coordinate, ratio coordinates and unchanged parameters extend simultaneously to regular local parameters; coordinate quotients are regular of expected codimension",
+   "results": "Algebra.IsSmoothAt.exists_notMem_isStandardSmooth; Algebra.IsSmoothAt.exists_notMem_smooth; Algebra.IsStandardSmoothOfRelativeDimension.localization_away; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway; Algebra.basicOpen_subset_smoothLocus_iff_smooth; Algebra.Smooth.exists_span_eq_top_isStandardSmooth; Algebra.basicOpen_subset_smoothLocus_iff",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent|IsRegularSystemOfParameters|regularSystemOfParameters",
+   "results": "Mathlib/RingTheory/RegularLocalRing/Defs.lean; Mathlib/RingTheory/RegularLocalRing/Defs.lean; Mathlib/RingTheory/RegularLocalRing/Defs.lean; Mathlib/RingTheory/RegularLocalRing/Defs.lean; Mathlib/RingTheory/RegularLocalRing/Defs.lean; source inspected: Rees algebra definition / cotangent dimension criterion only, no parameter-blowup theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "All intersections of exceptional and strict coordinate hyperplanes in a blowup chart of a regular local scheme are regular with codimension equal to the number of equations",
+   "results": "ringKrullDim_quotSMulTop_succ_eq_ringKrullDim; AlgebraicGeometry.Scheme.zeroLocus_iInf; AlgebraicGeometry.Scheme.zeroLocus_inf; ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim; AlgebraicGeometry.Scheme.zeroLocus_def; AlgebraicGeometry.Scheme.zeroLocus_biInf_of_nonempty; AlgebraicGeometry.Scheme.zeroLocus_iInf_of_nonempty; AlgebraicGeometry.Scheme.zeroLocus_biInf; dimension-drop for a regular element only; does not prove the chart coordinates form local parameters.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional equation and ratio variables on a blowup of a coordinate subspace form part of a regular system of parameters at each prime; quotient by any selected coordinates has dimension drop equal to their number",
+   "results": "Algebra.IsSmoothAt.exists_notMem_isStandardSmooth; Algebra.Smooth.exists_span_eq_top_isStandardSmooth; Algebra.IsStandardSmoothOfRelativeDimension; Algebra.IsSmoothAt.exists_notMem_smooth; Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension; PowerSeries.exist_eq_span_eq_ncard_of_X_notMem; Algebra.IsStandardSmoothOfRelativeDimension.localization_away; RingHom.IsStandardSmoothOfRelativeDimension",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a blowup chart of a regular local ring along parameters, every subset of exceptional ratio and remaining coordinate equations is a regular sequence with regular quotient and extends to a regular system of parameters",
+   "results": "RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem; RingTheory.Sequence.IsRegular.cons'; RingTheory.Sequence.isRegular_cons_iff; RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem; RingTheory.Sequence.IsRegular.cons; RingTheory.Sequence.isRegular_cons_iff'; RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev; RingTheory.Sequence.IsRegular.recIterModByRegularWithRing. Read candidates: regular-sequence localization and dimension drop, or standard smoothness and Rees algebra only; none states the simultaneous chart assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|Blowup|IsRegularSystemOfParameters|regularSystemOfParameters",
+   "results": "Mathlib/RingTheory/ReesAlgebra.lean. Read candidates: regular-sequence localization and dimension drop, or standard smoothness and Rees algebra only; none states the simultaneous chart assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coordinate quotients in a blowup chart of a regular local ring are regular of expected codimension and the equations extend to local regular parameters",
+   "results": "ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim; ringKrullDim_quotSMulTop_succ_eq_ringKrullDim; ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors; ringKrullDim_add_length_eq_ringKrullDim_of_isRegular; ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_jacobson; IsLocalRing.basisQuotient_apply; Ideal.Quotient.factorPowSucc; Module.supportDim_quotSMulTop_succ_eq_supportDim. Read candidates: regular-sequence localization and dimension drop, or standard smoothness and Rees algebra only; none states the simultaneous chart assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, MvPolynomial",
+   "results": ". Read candidates: regular-sequence localization and dimension drop, or standard smoothness and Rees algebra only; none states the simultaneous chart assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim_add_length_eq_ringKrullDim_of_isRegular|isRegularRing_of_isRegularRing|isRegular_of_isLocalization_of_mem",
+   "results": "Mathlib/RingTheory/KrullDimension/Regular.lean; Mathlib/RingTheory/RegularLocalRing/Polynomial.lean; Mathlib/RingTheory/RegularLocalRing/Polynomial.lean; Mathlib/RingTheory/RegularLocalRing/Polynomial.lean; Mathlib/RingTheory/RegularLocalRing/Polynomial.lean; Mathlib/RingTheory/Regular/Flat.lean. Read candidates: regular-sequence localization and dimension drop, or standard smoothness and Rees algebra only; none states the simultaneous chart assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular local ring parameter blowup algebra R[u_i]/(t_i-t_j*u_i) has regular quotients by arbitrary subsets of t_j, u_i and the unchanged parameters",
+   "results": "Algebra.IsStandardSmooth; Algebra.SubmersivePresentation.isStandardSmooth; Algebra.IsStandardSmoothOfRelativeDimension; RingHom.isStandardSmooth_holdsForLocalizationAway; Algebra.Smooth.exists_span_eq_top_isStandardSmooth; RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway; Algebra.IsStandardSmoothOfRelativeDimension.localization_away; Algebra.IsSmoothAt.exists_notMem_isStandardSmooth. Read candidates: regular-sequence localization and dimension drop, or standard smoothness and Rees algebra only; none states the simultaneous chart assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-permissible-coordinate-chart",
+  "date": "2026-10-22",
+  "group": "Q02"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Lemma 4.2.9 coordinate-chart proof: choose regular parameters for Y, V and Z; compute the standard blowup charts and the total and strict transforms. Extracted argument: the vanishing chart coordinates form part of local regular parameters; all simultaneous coordinate quotients and their codimensions (also Remark 4.2.2(i), printed p. 118)",
+   "via": [
+    "lem-trf-permissible-coordinate-chart",
+    "lem-trf-permissible-boundary-preservation",
+    "lem-trf-normal-crossings-strictification",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-parameter-blowup-coordinate-quotients",
+  "worker": "stage1",
+  "summary": "Preserved the complete statement. Explicitly computed both coordinate quotient presentations, then used existing parameter-chart regularity on the reduced parameter base. Proved injectivity of every remaining coordinate in each partial quotient using the exceptional localization, obtained a localized regular sequence and its dimension drop, and lifted a parameter system of the regular quotient to obtain simultaneous labelled parameters. No new nodes or new Mathlib leaves. All cited statements read and quotes recorded.",
+  "blueprint": "Realizes the regular-coordinate assertion of VIII Lemma 4.2.9 used under lem-trf-local-term-locality via the existing permissible-coordinate-chart ancestry; current latest blueprint locality proof checked, no change of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic Stacks 00NQ parameter-quotient and regular-sequence theorem used on the coefficient ring and its parameter quotients; no chart statement in this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic Stacks 0AFS fact makes a regular local coefficient quotient a regular ring before applying finite polynomial regularity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-regular-local-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-cad9122cb",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-cad9122cb (reviewer sub-agent of L); spot-checked: I read all 7 steps and every cited statement, and checked them against ILO VIII Lemma 4.2.9 (printed p.121) and Stacks 00NQ, 00NU and 0AFS; I made no fixes. The delivery is a first split. The live node is still unsplit with an identical statement and stmt_deps, and the item has no repair note. The statement and stmt_deps are unchanged and there are no new nodes. proof_deps equals the union of the step uses, all 12 cited ids exist and none is merged, and a DFS shows no cycle. Step 1: the isomorphism A/Q_{0,U,K} ≅ B over R_T = R/(t_{U∪K}) checks in both directions, and D ≥ 1 because j ∉ T. Step 2: lem-trf-parameter-blowup-algebra-regular applied to R_T with centre J∖U gives exactly chart B, B regular, t_j injective, and B[1/t_j] ≅ R_T[1/t_j]. Step 3: the ε=1 quotient is C[u_{L∖U}] with C = R/(t_{J∪K}) regular local, so it is regular by 0AFS and the polynomial-regularity leaf. Step 4: I recomputed the injectivity of v_i and t_k on B through R_T[1/t_j]. Step 5: the prefix induction is explicit; the weakly regular sequence localizes to a regular one, and the quotient-localization isomorphism with the Mathlib dimension formula gives dim A_P = dim(A_P/QA_P) + c. Step 6: lifting a parameter system of S/(f) gives a regular system of parameters of length dim S. Step 7: a coordinate outside P is a unit on D(f). Small cases checked: d=1; R = k[[x,y]] with J = {1,2} at P = (x,u) and at a prime avoiding x; U = K = ∅; K equal to the whole complement of J. No duplicate exists: lem-trf-chart-coordinate-nonzerodivisors handles only one quotient at a time. Accepted tool_uses: lem-weil-pbc-regular-local-generators-regular-sequence (00NQ) and lem-weil-pbc-regular-local-localization (0AFS), both generic algebra. One minor point, not a fault: Step 6 relies on the definition of a regular local ring (def-weil-regular-scheme), which is in proof_deps but not in that step's uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ParameterBlowupCoordinateQuotients",
+  "declaration": "ParameterBlowupCoordinateQuotients.coordinate_quotients_and_parameters",
+  "declarations": [
+   "ParameterBlowupCoordinateQuotients.coordinate",
+   "ParameterBlowupCoordinateQuotients.coordinateIdeal",
+   "ParameterBlowupCoordinateQuotients.coordinate_quotients_and_parameters"
+  ],
+  "file": "lean/Sheaf/RingTheory/ParameterBlowupCoordinateQuotients.lean",
+  "statement": "theorem coordinate_quotients_and_parameters {R : Type u} [CommRing R] [IsRegularLocalRing R] (d : ℕ) (hd : 1 ≤ d) (hdim : ringKrullDim R = (d : WithBot ℕ∞)) (t : Fin d → R) (ht : IsLocalRing.IsRegularSystemOfParameters (List.ofFn t)) (J : Finset (Fin d)) (hJ : J.Nonempty) (j : Fin d) (hj : j ∈ J) [IsRegularRing (traceChartRing t J j)] : (∀ S : Finset (Option ((J.erase j) ⊕ {k : Fin d // k ∉ J})), IsRegularRing (traceChartRing t J j ⧸ coordinateIdeal t J j S) ∧ ∀ p : PrimeSpectrum (traceChartRing t J j), coordinateIdeal t J j S ≤ p.asIdeal → IsRegularLocalRing (Localization.AtPrime p.asIdeal ⧸ (coordinateIdeal t J j S).map (algebraMap (traceChartRing t J j) (Localization.AtPrime p.asIdeal))) ∧ ringKrullDim (Localization.AtPrime p.asIdeal) = ringKrullDim (Localization.AtPrime p.asIdeal ⧸ (coordinateIdeal t J j S).map (algebraMap (traceChartRing t J j) (Localization.AtPrime p.asIdeal))) + (S.card : WithBot ℕ∞)) ∧ (∀ p : PrimeSpectrum (traceChartRing t J j), ∃ s : List (Localization.AtPrime p.asIdeal), IsLocalRing.IsRegularSystemOfParameters s ∧ ∃ f : {a : Option ((J.erase j) ⊕ {k : Fin d // k ∉ J}) // coordinate t J j a ∈ p.asIdeal} → Fin s.length, Function.Injective f ∧ ∀ a, s.get (f a) = algebraMap (traceChartRing t J j) (Localization.AtPrime p.asIdeal) (coordinate t J j a.val)) ∧ (∀ (S : Finset (Option ((J.erase j) ⊕ {k : Fin d // k ∉ J}))) (p : PrimeSpectrum (traceChartRing t J j)), (∃ a ∈ S, coordinate t J j a ∉ p.asIdeal) → ∃ a ∈ S, coordinate t J j a ∉ p.asIdeal ∧ (coordinateIdeal t J j S).map (algebraMap (traceChartRing t J j) (Localization.Away (coordinate t J j a))) = ⊤)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the existing traceChartRing and traceChartCoordinate through the added definition node def-trf-parameter-blowup-chart-ring. The owning module receives only the retained module-mode interface repair under section 1(B). Finsets of the disjoint sum labels are exactly the epsilon,U,K choices, with cardinality epsilon+|U|+|K|; no mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a6e07413",
+  "group": "N9",
+  "result": "pass",
+  "note": "Item lean record and new existing:true def node def-trf-parameter-blowup-chart-ring (traceChartRing family) checked against the node and ILO VIII 4.2.9 p.121. All clauses match: regular local R with an RSOP t; nonempty J with j ∈ J; A = traceChartRing; [IsRegularRing A]; labels Option(L ⊕ {k∉J}) distinct by construction; S ↔ (ε,U,K) with card = c; global regularity of A/Q; regular local A_P/QA_P and dim A_P = dim(A_P/QA_P) + c; one RSOP s with an injective label placement; unit-ideal clause on D(f). Edge cases d=1, singleton/full J, S=∅, all labels, avoiding prime are OK. Both lean.statement fields verbatim. Docstrings, 7-step proof, sorry only. Dry run OK after the separate maintenance landing of the chart module conversion. Maintainer note: the base already has Q118 def-trf-permissible-coordinate-chart-ring for the same ring; its decls live in the downstream lem-trf-permissible-coordinate-chart module (which has this item as a proof_dep), so reuse would be a module cycle. Merge candidate, no new Lean duplicate introduced. No compile (no FIX)."
+ }
+}

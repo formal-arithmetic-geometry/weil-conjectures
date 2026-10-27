@@ -1,0 +1,147 @@
+{
+ "id": "def-trf-bundle-section-orientation-data",
+ "kind": "definition",
+ "title": "Canonical bundle zero-section orientation maps",
+ "statement": "For a finite commutative ring A and a Noetherian scheme S, let pi:E->S and z:S->E be the rank-d bundle projection and zero section [def-asd-vector-bundle-zero-section]. Set omega_pi=pi^times(A_S), using [thm-amb-etale-exceptional-adjoint], and B=z^*omega_pi. For N A=0 let L=A_S(d)[2d], the ordered tensor coefficient in [def-amb-vector-integration]. The section coefficient comparison is z^*pi^*L = L. For a Cartesian square (h,q,p,v) of compactifiable maps and commuting sections (w,z), define the section comparison by the inverse-image compositor followed by w^* of the exceptional base-change mate and of q^times applied to constant-unit pullback. A frame [def-asd-vector-bundle-zero-section] supplies h and its Cartesian square, and w is the unique lift of the zero section. Define its coefficient comparison by affine coefficient descent and the section compositor. Define alpha_p as the adjunct of inverse affine compact-support comparison followed by the actual affine coordinate counit [lem-amb-affine-space-top-trace]. An isomorphism o:B~=L is normalized when v^*(o^-1) followed by the section comparison equals coefficient pullback, inverse chart coefficient comparison, and w^*(alpha_p), for every affine frame and every normalized coefficient datum. At rank zero the identity comparison is the section comparison with the identity bundle, followed by the pullback identity and the counit-preserving right-adjoint comparison with the identity adjunction. Define the unit purity map by the inverse pullback-unit/tensor-unitor comparison followed by the adjunction transpose of inverse coefficient-first projection, tensor with the actual integration trace, and the right unitor [thm-amb-vector-bundle-purity]. Purity compatibility means o^-1 is its zero-section pullback after inverse section coefficient comparison; its projection inverse p is specified by p.inv being the canonical projection map. All definitions are the original canonical composites, including zero coefficients, empty bases and d=0.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4; expanded in lem-trf-finite-ring-bundle-section-orientation, proof Steps 1--10"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-derived-categories",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-asd-vector-bundle-zero-section",
+  "def-asd-compactifiable",
+  "def-sbc-affine-space",
+  "lem-amb-affine-space-top-trace",
+  "thm-amb-vector-bundle-purity",
+  "def-amb-vector-integration"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived category tensor product of flat sheaves concentrated in degree zero is concentrated in degree zero",
+   "results": "Flat tensor exactness results; no zero-section orientation theorem.",
+   "date": "2026-10-25",
+   "verdict": "tool only; no theorem identifying these specified orientation maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized vector-bundle integration induces an orientation of its zero section",
+   "results": "Eight linear algebra orientation hits, unrelated to ordinary etale duality.",
+   "date": "2026-10-25",
+   "verdict": "tool only; no theorem identifying these specified orientation maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "Generic adjunction naturality.",
+   "date": "2026-10-25",
+   "verdict": "tool only; no theorem identifying these specified orientation maps"
+  },
+  {
+   "tool": "grep",
+   "query": "bundleSection|vectorIntegration.*Unit|rankZero",
+   "results": "The original module is the only occurrence of bundleSection; VectorIntegrationMate supplies invertibility, AffineTraceRightNormalForm supplies tensor normal forms.",
+   "date": "2026-10-25",
+   "verdict": "tool only; no theorem identifying these specified orientation maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteRingBundleSectionOrientation",
+  "date": "2026-10-25",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Orientation-charts Step 4; canonical zero-section maps and frame normalization",
+   "via": [
+    "lem-trf-finite-ring-bundle-section-orientation",
+    "lem-trf-finite-ring-section-deformation",
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-trf-nearby-duality-operation-squares",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteRingBundleSectionOrientationData",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRingBundleSectionOrientationData.lean",
+  "declaration": "AlgebraicGeometry.Etale.bundleSectionObject",
+  "statement": "def bundleSectionObject (A : Type (u + 1)) [CommRing A] [Finite A] (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] : DerivedCategoryModule A S",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.Etale.bundleSectionAffine",
+   "AlgebraicGeometry.Etale.bundleSectionFiniteType",
+   "AlgebraicGeometry.Etale.bundleSectionNoetherian",
+   "AlgebraicGeometry.Etale.bundleSectionOpenNoetherian",
+   "AlgebraicGeometry.Etale.bundleSectionOmega",
+   "AlgebraicGeometry.Etale.bundleSectionObject",
+   "AlgebraicGeometry.Etale.bundleSectionCoefficientIso",
+   "AlgebraicGeometry.Etale.bundleSectionPullbackSquare",
+   "AlgebraicGeometry.Etale.bundleSectionComparison",
+   "AlgebraicGeometry.Etale.bundleSectionChartZero",
+   "AlgebraicGeometry.Etale.bundleSectionChartComparison",
+   "AlgebraicGeometry.Etale.bundleSectionAffineAdjunct",
+   "AlgebraicGeometry.Etale.bundleSectionChartCoefficient",
+   "AlgebraicGeometry.Etale.BundleSectionOrientationNormalization",
+   "AlgebraicGeometry.Etale.bundleSectionRankZeroComparison",
+   "AlgebraicGeometry.Etale.bundleSectionPurityUnitIso",
+   "AlgebraicGeometry.Etale.bundleSectionPurityUnitMap",
+   "AlgebraicGeometry.Etale.BundleSectionPurityCompatibility"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb15e",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261025T100811-L-3625154",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb15e",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261025T100811-L-3625154",
+  "kind": "interface",
+  "note": "independent cc review: 18 moved decls in FiniteRingBundleSectionOrientationData vs published item module (byte-identical); 4 item theorem signatures vs published (identical); importer FiniteRingSectionDeformation compiled on delivered modules (exit 0); #print axioms on proved theorems (sorryAx only via the new normalization hole and upstream vectorIntegrationMate_isIso); node proof uses == proof_deps"
+ }
+}

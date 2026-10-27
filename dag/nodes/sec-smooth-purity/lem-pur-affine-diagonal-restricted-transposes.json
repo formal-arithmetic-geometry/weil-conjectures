@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-affine-diagonal-restricted-transposes",
+ "kind": "statement",
+ "title": "Restricted integration transposes agree in geometric affine diagonal coordinates",
+ "statement": "In the finite setting with Y separated finite type over k and ell^(r+1) annihilating the coefficient ring, let X, W, p1, s be the ordered affine diagonal pair. For every normalized Rees comparison q and isomorphisms J,Q whose hom maps are the actual presented integration transposes on W→X in y coordinates and on the actual normal cone→X in homogeneous coordinates [def-pur-affine-diagonal-integration-constructions], the diagonal restriction of J, precomposed with inverse Tate restriction and followed by the geometric source section coordinates, equals the zero restriction of Q, precomposed with inverse Tate restriction and followed by the geometric normal section coordinates [def-pur-affine-diagonal-section-coordinates]. This is an ordinary-etale equation that does not mention a DNC arrow or family trivialization.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: integration transpose, diagonal restriction and normalized standard-pair DNC"
+ },
+ "stmt_deps": [
+  "def-pur-affine-diagonal-integration-constructions",
+  "def-pur-affine-diagonal-section-coordinates",
+  "def-pur-rees-cone-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Translation of the y-coordinate trivial bundle by minus the tautological x-vector preserves the actual normalized affine integration by the affine translation trace theorem. Transpose this equality using the exceptional Hom bijection and its counit mate. Restriction along the diagonal, which is zero in the translated coordinates, gives the standard zero restriction through the geometric source comparison.",
+   "uses": [
+    "lem-pur-affine-translation-trace",
+    "lem-pur-trace-transpose-base-change",
+    "def-pur-affine-diagonal-integration-constructions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normal coordinate map is an isomorphism over X preserving zero. The formula for the presented transpose, functoriality of derived pullback and exceptional-mate pasting identify its zero restriction through the geometric normal comparison with the same standard zero restriction. Canonical Tate pullbacks identify the inputs. Equality of hom maps implies equality of the isomorphisms. Rank zero is the identity tower; the empty base has the same functorial identities.",
+   "uses": [
+    "def-pur-affine-diagonal-section-coordinates",
+    "lem-pur-trace-transpose-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-affine-translation-trace",
+  "lem-pur-trace-transpose-base-change",
+  "def-pur-affine-diagonal-integration-constructions",
+  "def-pur-affine-diagonal-section-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: integration transpose, diagonal restriction and normalized standard-pair DNC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Deformation to the normal cone affine space section invariant normalization",
+   "results": "Eight results concerning scheme normalization and normalized factors; none concerns the DNC section invariant.",
+   "date": "2026-10-26",
+   "verdict": "no match; uses project section geometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deformation to the normal cone standard affine pair section invariant integration transpose two fibre restrictions",
+   "results": "Eight results: affine-space reindexing, homOfVector projection and normalization morphisms. None concerns etale dualizing sections or DNC normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "affineDiagonal.*Coordinates|sectionRestrictionIso|affineDiagonalPresentedTranspose",
+   "results": "msearch grep returned OK 0 hits. Local rg separately found and read AffineDiagonalIntegrationConstructions, PurityDncComparisons, PurityDncInvariance, TraceTransposeBaseChange, AffineTranslationTrace, DiagonalDncChartNormalization and FiniteRingSectionDeformation. No existing declaration gives the two global ordered section-coordinate compatibility equations. Blueprint search for diagonal section coordinates, restricted transposes, and dnc coordinate identity returned no matches.",
+   "date": "2026-10-26",
+   "verdict": "new geometric coordinates and separate compatibility steps needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineDiagonalDncNormalization",
+  "group": "U2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Agreement on the model: integration transpose, diagonal restriction and normalized standard-pair DNC",
+   "via": [
+    "lem-pur-affine-diagonal-dnc-normalization",
+    "lem-pur-affine-diagonal-integration-orientation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineDiagonalRestrictedTransposes",
+  "file": "lean/Sheaf/Paper/AffineDiagonalRestrictedTransposes.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.affineDiagonalRestrictedTransposes",
+  "statement": "theorem affineDiagonalRestrictedTransposes (P : PurityFiniteSetting.{u})\n    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))\n    [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (d r : ℕ) (hA : ((P.coefficients.l ^ (r + 1) : ℕ) : P.Coefficient) = 0) :\n    let p := affineDiagonalProjection Y d\n    let X := affineDiagonalSpace Y d\n    let W := pullback p p\n    let p₁ := pullback.fst p p\n    let s := pullback.diagonal p\n    let aX := p ≫ aY\n    letI := affineDiagonalProjection_smooth Y d\n    letI := SmoothOfRelativeDimension.smooth d p\n    letI := Dnc.compactifiable P p aY\n    letI := Dnc.compactifiable P p₁ aX\n    let L := Etale.affineLinearBaseCoefficient P.Coefficient\n      (P.coefficients.l ^ (r + 1)) hA\n    let F := fun {U B : Scheme.{u}} (f : U ⟶ B) ↦\n      (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).leftDerivedFunctor\n    ∀ (q : s.ker.normalCone ≅ PurityNormalBundle.normalCone s)\n      (hq : Etale.FiniteSmoothPurity.ReesConeNormalized s q),\n      let πN := Scheme.Hom.normalConeProj p₁ s\n      let z := s.normalConeZeroSection\n      letI := Dnc.normalQuasiCompact d p₁ s (pullback.diagonal_fst p)\n      letI := Dnc.normalCompactifiable P d p₁ aX s (pullback.diagonal_fst p)\n      letI := (affineDiagonalNormalCoordinates_spec Y d q hq).1\n      letI := (affineDiagonalProductCoordinates_spec Y d).1\n      ∀ (J : L W d ≅ Etale.dualizingComplex (ModuleCat.{u + 1} P.Coefficient) p₁)\n        (Q : L s.ker.normalCone d ≅\n          Etale.dualizingComplex (ModuleCat.{u + 1} P.Coefficient) πN),\n        J.hom = P.affineDiagonalPresentedTranspose d p₁ aX r hA\n          (asIso (affineDiagonalProductCoordinates Y d))\n          (affineDiagonalProductCoordinates_spec Y d).2 →\n        Q.hom = P.affineDiagonalPresentedTranspose d πN aX r hA\n          (asIso (affineDiagonalNormalCoordinates Y d q))\n          (affineDiagonalNormalCoordinates_spec Y d q hq).2 →\n        ((P.affineDiagonalTateRestriction r hA s (p₁ ≫ aX) d).symm ≪≫\n          (F s).mapIso J) ≪≫ P.affineDiagonalSourceCoordinates Y aY d =\n        ((P.affineDiagonalTateRestriction r hA z (πN ≫ aX) d).symm ≪≫\n          (F z).mapIso Q) ≪≫ P.affineDiagonalNormalSectionCoordinates Y aY d q hq",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T203320-L-2803393",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T203320-L-2803393",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

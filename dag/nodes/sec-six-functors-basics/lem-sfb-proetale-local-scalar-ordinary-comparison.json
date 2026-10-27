@@ -1,0 +1,156 @@
+{
+ "id": "lem-sfb-proetale-local-scalar-ordinary-comparison",
+ "kind": "statement",
+ "title": "Ordinary tensor extension and fixed scalars on a pro-etale slice",
+ "statement": "Let i:Y→X be a scheme morphism [def-pc-scheme], R a commutative ring sheaf on X_proet, B any commutative ring in the coefficient universe, φ:R→constant(B), and U an object of Y_proet. Put R_U=(i⁻¹R)|U and S_U=constant(B)_Y|U. The coefficient morphism R_U→S_U is restriction of i⁻¹φ followed by the canonical constant-ring inverse-image map. There is a natural isomorphism of ordinary module functors from R-modules to fixed B-module sheaves on Y_proet/U: extension along φ, fixed scalar restriction, geometric inverse image and slice restriction is isomorphic to actual-ring module inverse image and slice restriction followed by extension along R_U→S_U and restriction along the constant B-section map. This is an underived functor isomorphism; it has no hypothesis or conclusion involving derived objects or a supplied local isomorphism. The helper definitions LocalScalar.fixed, coefficient, sliceFixed and change specify its ordinary functors explicitly. LocalScalar.changeData and derivedChange only retain the existing universal derived extension used by its consumer. The ring inverse image is [def-weil-proetale-inverse-image], the global extension and fixed scalars are [def-sfb-adic-stratified-perfect-data], local restriction is [lem-weil-pbc-local-derived-restriction-comparisons], and the local extension uses [lem-pur-derived-change-of-rings].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03EL and 03EK, inverse image, scalar extension and tensor; sites-cohomology.tex, lemma-pullback-tensor-product, ordinary comparison in the proof of Tag 06YY."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proetale-inverse-image",
+  "def-sfb-adic-stratified-perfect-data",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-local-derived-restriction-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Identify fixed-scalar restriction on the original pro-etale site with the equivalence between modules over the constant ring sheaf and fixed B-module sheaves. The coefficient-ring forgetful comparison identifies the scalar action with restriction along the original constant-section map. Use the proved restriction and restriction_smul helpers of the constant normalization comparison, not its derived normalization theorem.",
+   "uses": [
+    "lem-cbc-constant-ring-module-sheaves",
+    "lem-weil-pbc-constant-derived-normalization-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let rho be the canonical constant-ring direct-image map. Its defining sheafification adjunction sends every constant b to the same constant b on the base-changed object. Consequently pushforward of constant-ring modules, followed by fixed-scalar restriction, agrees by the identity on sections with fixed-scalar restriction followed by fixed-B sheaf pushforward. Naturality and inverse identities are sectionwise identities.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let psi=i-inverse(phi) followed by the canonical constant-ring inverse-image map. Naturality of the ring adjunction unit and its triangle identity give phi followed by rho = eta_R followed by i-star(psi). Thus constant-ring module pushforward followed by restriction along phi is naturally isomorphic, by identity on sections, to restriction along psi followed by the actual-ring module pushforward. Compose the actual-ring module adjunction and the ordinary tensor/restriction adjunction with the fixed-scalar equivalences. The previous direct-image comparisons identify the resulting right adjoints. Uniqueness of left adjoints gives the global ordinary comparison. The recorded object and map equations identify completedAdicChange with the sheafified tensor functor.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the tensor presheaf along Over.forget U. Its sections and those of the tensor of restricted modules coincide; the pure-tensor restriction formulas prove their identity comparison is natural. Whisker this isomorphism by module sheafification, then use the proved overSheafificationMap, overSheafificationMap_isIso and overSheafificationMap_naturality helpers of localized tensor restriction. This identifies slice restriction of ordinary scalar extension with extension along the restricted coefficient map. Fixed-scalar restriction commutes with the slice by an identity comparison on sections. Finally transport the local extension through ChangeData.obj_eq and ChangeData.map_eq and compose these natural isomorphisms. No new lemma with sorry is required, and no flatness, nonzero-ring or nonempty-slice hypothesis is used.",
+   "uses": [
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-constant-ring-module-sheaves",
+  "lem-weil-pbc-constant-derived-normalization-universal",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-sfb-localized-site-tensor-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D3, 03EL and 03EK: module inverse-image adjunction, ordinary scalar-extension adjunction, and tensor sheafification on the localized site. The proof uses uniqueness of left adjoints for the inverse-image comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of coefficient scalars for sheaves of modules commutes with inverse image and restriction to a localized site, with a fixed constant scalar action",
+   "results": "Eight hits: PresheafOfModules.restrictScalarsObj, restrictScalars, SheafOfModules.restrictScalars, PresheafOfModules.pullback, scheme module map_smul, algebraic localization scalar lemmas and Sheafify.map_smul. None states the natural square of specified fixed-scalar functors.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; use ordinary tensor and inverse-image comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with exact inverse image of sheaves of modules and restriction to a slice site",
+   "results": "Eight results: ordinary module pullback and sheafification comparisons, no fixed-scalar local tensor square.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsLeftDerivedFunctor",
+   "results": "No hits; identifier is not indexed. Repository signatures were inspected directly.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Ss]calar.*[Pp]ull|[Pp]ull.*[Ss]calar.*[Ii]so",
+   "results": "Service returned zero hits. Local search found exists_scalarInverseImageIndependent, which supplies the geometric ordinary step, and localized tensor comparisons. Neither directly states the composite with these specified fixed B-actions.",
+   "date": "2026-10-26",
+   "verdict": "Use these inputs for the remaining ordinary comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleLocalScalarDerivedIso",
+  "date": "2026-10-26",
+  "group": "Z7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-proetale-local-scalar-derived-iso",
+   "place": "The ordinary B-linear tensor comparison in steps 2 and 3, before resolving complexes or localization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleLocalScalarOrdinaryComparison",
+  "file": "lean/Sheaf/Paper/ProEtaleLocalScalarOrdinaryComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.LocalScalar.ordinaryComparison",
+  "statement": "theorem ordinaryComparison :\n    Nonempty (completedAdicChange X φ ⋙ sfbFixedScalarRestriction X B ⋙\n        (ProEtale.upperStar (ModuleCat.{u + 1} B) i ⋙\n          (ProEt.topology Y).overPullback (ModuleCat.{u + 1} B) U) ≅\n      restriction i R U ⋙ change i R B φ U ⋙ sliceFixed B U)",
+  "branch": "sheaf-dag",
+  "by": "Z7",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261026T071628-L-3960546",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261026T091325-L-3332886",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

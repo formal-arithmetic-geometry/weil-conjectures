@@ -1,0 +1,131 @@
+{
+ "id": "lem-zl-contractible-realization-underived-model",
+ "kind": "statement",
+ "title": "An ordinary model for terminal scalar realization",
+ "statement": "For an essentially small site C in Type(u+1) with morphisms in Type u, topology J with monoidal abelian-sheaf local equivalences, a commutative internal sheaf ring O, and a terminal object U, use the fixed section ring A, realization F and ordinary sections E of [def-zl-condensed-lisse-evaluation-model]. There is an additive ordinary functor L: Mod_A → Mod_O(Sh(J,Ab)), preserving flat objects and quasi-isomorphisms between K-flat complexes, with a strong braided structure, an ordinary adjunction L ⊣ E, and a natural isomorphism from its K-flat total left derived functor to the fixed F. No exactness or tensor assumption on E is required.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.1(1), equations (3.1)-(3.2), Remark 3.2"
+ },
+ "stmt_deps": [
+  "def-zl-condensed-lisse-evaluation-model"
+ ],
+ "proof": [
+  {
+   "text": "Define L by sheafifying V ↦ O(V) tensor_A M, using the terminal map V → U for scalars, then applying the fixed inverse section-module equivalence. Tensor and sheafification adjunctions identify maps L(M) → N naturally with A-linear maps M → N(U); the maps send m to 1 tensor m and extend by the O action. This gives additivity and L ⊣ sections.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The balanced map (a tensor x) tensor (b tensor y) ↦ ab tensor (x tensor y), inverse inserting 1, gives strong tensor and unit comparisons. Associativity, both unitors and symmetry agree on generators, hence after sheafification. The internal-section tensor comparison transports these to the internal model. For flat M, tensoring with L(M) is sheafification of tensoring sections with M and is exact. An acyclic K-flat A-complex stays acyclic after tensoring with every O(V), proving preservation of K-flat quasi-isomorphisms.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a flat-term K-flat A-resolution. Constant realization preserves its flatness and K-flatness. The fixed universal extension counit therefore computes F on this resolution and identifies it with the localized L-complex. Both total left derivatives are universal; their counits give a unique natural isomorphism. Exact section reconstruction commutes with localization, including its different localization sizes.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sfb-constant-module-kflat",
+    "lem-sfb-constant-module-flat",
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-constant-module-kflat",
+  "lem-sfb-constant-module-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.1(1), equations (3.1)-(3.2), Remark 3.2",
+  "note": "Ordinary-module and localization details of the cited argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The left derived functor of sheafified scalar extension from modules over global sections is the composition of constant module realization and derived extension of rings",
+   "results": "IsLeftDerivedFunctor.mk, ModuleCat.extendScalars and its adjunction, and sheafification adjunction; no fixed-composite comparison theorem.",
+   "date": "2026-10-25",
+   "verdict": "Reuse ordinary tensor and localization APIs; no exact statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact coproduct preserving sections of module sheaves over global section ring fully faithful unit of left adjoint",
+   "results": "SheafOfModules.unitHomEquiv, freeHomEquiv, PresheafOfModules.sheafificationAdjunction; condensed locally constant adjunctions are special cases.",
+   "date": "2026-10-25",
+   "verdict": "Useful ordinary Hom equivalences; no general ringed-site fixed realization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*tensor|constant.*module.*adjunction|derived.*tensor.*evaluation",
+   "results": "Mathlib presheaf module tensor, Sites.Point.Monoidal and presheaf closed tensor; no internal-section derived comparison.",
+   "date": "2026-10-25",
+   "verdict": "The representative comparison and ordinary unit still require proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ContractibleEvaluationAdjunction",
+  "date": "2026-10-25",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Lemma 4.1(1), equations (3.1)-(3.2), Remark 3.2; ordinary realization, unit, or tensor comparison in Lemma 4.1(1).",
+   "via": [
+    "lem-zl-contractible-realization-adjunction",
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ContractibleRealizationUnderivedModel",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.realization_underived_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/ContractibleRealizationUnderivedModel.lean",
+  "statement": "theorem realization_underived_model\n    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]\n    (J : GrothendieckTopology C) [(J.W (A := Ab.{u + 1})).IsMonoidal]\n    (O : Sheaf J Ab.{u + 1}) [MonObj O] [IsCommMonObj O]\n    (U : C) (hU : IsTerminal U)\n    : ∃ (L : ModuleCat.{u + 1} (A J O U) ⥤ Mod (Sheaf J Ab.{u + 1}) O)\n      (hadd : L.Additive),\n      letI := hadd\n      ∃ (hflat : L.PreservesKFlatQuasiIso) (hpres : L.PreservesFlat)\n        (hbraid : L.Braided),\n        letI := hflat\n        Nonempty (L ⊣ sections J O U) ∧\n          Nonempty (L.leftDerivedFunctor ≅ F J O U hU)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261025T143331-L-983233",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261025T143331-L-983233",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 06YY and 0941; corresponding step of lem-trf-transported-reduction-systems-normalized."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 07A4 and 0941; singleton strict quotient expression followed by a compatible whole-complex comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized derived coefficient sequence preserved by inverse image or coefficient extension",
+   "results": "No specialized match; existing project interfaces are required.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized coefficient sequence inverse image scalar extension",
+   "results": "Only generic derived functor infrastructure.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "IsNormalizedCoefficientSequence.*integralComparisonDerivedSequence",
+   "results": "No existing theorem matching the statement.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TransportedReductionSystemsNormalized",
+  "date": "2026-10-26",
+  "group": "Q5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-transported-reduction-systems-normalized",
+   "place": "The corresponding inverse-image or scalar-extension proof step.",
+   "via": [
+    "lem-trf-effective-quotient-model-descent"
+   ]
+  }
+ },
+ "id": "stage3-trf-transported-pullback-normalized",
+ "title": "Normalization of transported pullback reduction systems",
+ "statement": "Fix l, E, schemes X,Y with l invertible, f : X ⟶ Y, and a coefficient reduction calculus SY over E on Y. For every ambient derived K, the specified whole-system pullback of SY.reduction.obj K is normalized over X.",
+ "proof": [
+  {
+   "text": "Represent K by a complex G, resolve G by a flat-term K-flat complex P, and localize the quasi-isomorphism to obtain Q(P) isomorphic to K. Apply the supplied calculus reductionModel to P to obtain a strict whole-system complex C, its isomorphism from SY.reduction(Q(P)), and compatible ordinary finite quotient identifications.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing simultaneous strict quotient normalization theorem to the singleton list P, the arrow f, and the identity of X. It gives a strict quotient complex N whose generated pullF expression is normalized after localization.",
+   "uses": [
+    "lem-pur-quotient-expression-kflat-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each level identify C with N through their common ordinary scalar extension of P. Their recorded horizontal equations imply compatibility of these level isomorphisms with all actual transitions. Assemble the module-sheaf isomorphism on (n,U) from its level-n component at U, relinearizing along the canonical slice ring isomorphism. Factor every product-site arrow into horizontal and vertical arrows to prove naturality. The level chain equations make these module isomorphisms an isomorphism of whole complexes C and N.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply whole-system pullback to the composite SY.reduction(K) isomorphic to Q(C) isomorphic to Q(N). Exact-derived comparison identifies the pullback of Q(N) with Q(pullF(N)). Naturality of derived transitions transports the universal Hom-set bijections defining normalization along this isomorphism. This proves the stated normalization for arbitrary K.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-quotient-expression-kflat-normalization",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TransportedReductionPullbackNormalized",
+  "file": "lean/Sheaf/Paper/TransportedReductionPullbackNormalized.lean",
+  "declaration": "WeilConjectures.transportedReductionSystems_pullback_normalized",
+  "statement": "theorem transportedReductionSystems_pullback_normalized\n    {X Y : Scheme.{t}} (f : X ⟶ Y)\n    (_hlX : ∀ x : X, IsUnit (l : X.residueField x))\n    (_hlY : ∀ y : Y, IsUnit (l : Y.residueField y))\n    (SY : CoefficientDerivedSystemCalculus l E Y) :\n    ∀ K : DerivedCategory (scalarReductionSource l E Y),\n      IsNormalizedCoefficientSequence l E X\n        ((integralComparisonDerivedSequencePullback l E f).obj (SY.reduction.obj K))",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261026T023832-L-607160",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261026T070508-L-3601880",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

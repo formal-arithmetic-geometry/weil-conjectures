@@ -1,0 +1,283 @@
+{
+ "id": "lem-pod-reindexing-completion-unit-tensor",
+ "kind": "statement",
+ "title": "Projection normalized reindexing of quotient completion and completed tensor",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$, and $B_{W,n}=(\\mathcal O_E/\\varpi^n)_W$, $R_W=\\lim_n B_{W,n}$ for a scheme $W$ [def-weil-l-adic-coefficient-extension, def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients]. Let $g:X\\xrightarrow{\\sim}Y$ be a scheme isomorphism, with $\\ell$ invertible on both schemes [def-weil-scheme-morphism-properties]. Put $F=g^{-1}$, with the coefficient identifications induced by all quotient projections. Use the coefficient-stage derived operations of [def-weil-derived-pullback-tensor-hom].\n\nWrite $\\mathcal R_WK=(K\\otimes^L_{R_W}B_{W,n})_n$ with the strict quotient transitions, $F_\\bullet$ for reindexing strict coefficient systems, and $\\mathcal L_W=R\\lim\\operatorname{Res}$, the total derived limit computed by a K-injective resolution of the strict tower [lem-coef-derived-system-evaluation-calculus, lem-weil-pbc-ringed-strict-tower-homotopy-limit]. There are canonical natural identifications\n$$F_\\bullet\\mathcal R_YK\\cong\\mathcal R_XFK,\\qquad F\\mathcal L_YA\\cong\\mathcal L_XF_\\bullet A.$$\nThey respect every quotient arrow and limit projection and the actual reduction/limit adjunction unit and counit. For derived-complete $K$ the canonical unit $u_K:K\\to\\mathcal L_Y\\mathcal R_YK$ is an isomorphism, and the specified comparison\n$$FK\\xrightarrow{F(u_K)}F\\mathcal L_Y\\mathcal R_YK\\xrightarrow{\\sim}\\mathcal L_XF_\\bullet\\mathcal R_YK=Lg^*K$$\nis a natural isomorphism with all reduction projections fixed. Here completeness and the quotient-unit normalization are those of [lem-weil-finite-free-completed-scalar-comparison] for $L=E$, not just existence of a limit triangle.\n\nFor derived-complete constructible $M,N$ [def-weil-derived-complete-integral-detailed], the ordinary reindexing of the strict tensor-reduction complexes gives an isomorphism\n$$F(M\\widehat\\otimes^L N)\\xrightarrow{\\sim}FM\\widehat\\otimes^L FN.$$\nUnder the preceding pullback identification it equals precisely the canonical comparison of [def-pur-completed-pullback-tensor-comparison]. On a flat-term K-flat representative it reindexes each total-tensor summand; on the fixed Roos realization it reindexes both product coordinates and $1-s$, including the cone shift. Its inverse is reverse reindexing. Coefficient transitions, symmetry, associators, identity and composition of scheme isomorphisms, and signed shifts commute with these identifications on the actual systems and their functorial realizations, with the substitution normalization of [lem-pur-completed-operation-tower-substitution].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5: integral pullback and completed tensor normalization; agent refinement of the quotient and strict-derived-limit models."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-pur-completed-operation-tower-substitution",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-derived-complete",
+  "def-pod-isomorphism-reduction-reindexing",
+  "def-pod-integral-tensor-constraints",
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-tensor-reindex-models",
+  "def-pod-completion-tensor-normalization",
+  "def-pod-completion-reindex-coherence",
+  "def-pod-completion-reindex-coefficient-transition",
+  "def-pod-completion-reindex-shifts",
+  "def-pod-completion-reindex-substitution",
+  "def-pod-scalar-completion-tensor-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "For the ambient declaration combine strict reindexing with its derived localization. Obtain quotient generator and transition formulas from isomorphismReductionTower. Compare primitive completion with the selected adjunction using uniqueness of left adjoints. Derive counit compatibility from unit compatibility and the triangle identities. Normalized reconstruction inverts the actual unit on complete inputs, and the limit and pullback isomorphisms invert the specified ordinary-to-completed map.",
+   "uses": [
+    "lem-pod-reindexing-strict-comparisons",
+    "lem-pod-reindexing-derived-comparisons",
+    "lem-pod-reindexing-completion-normalization",
+    "lem-pod-reindexing-signed-roos-shift",
+    "lem-weil-isomorphism-derived-pullback-reduction-tower",
+    "lem-pur-normalized-actual-reconstruction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each isomorphism choose its normalized completion comparison from the proved ambient assertion. Apply the strict tensor construction to the same datum to obtain its normalized tensor comparison. Assemble these assignments using the family-coherence theorem, which adds only the section-normalized identity and composition isomorphisms and proves all family tensor constraints. These are local choices inside an existence proof; no definition is populated from mere existence.",
+   "uses": [
+    "lem-pod-reindexing-tensor-construction",
+    "lem-pod-reindexing-tensor-family-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every complete input apply podOrdinaryToCompleted_isIso to the complete unit provided by normalized reconstruction. For a constructible input K choose a prime p>l+1, form the finite-field datum over ZMod p, and apply sfDerivedComplete_iff_legacy to K.property.1. This yields IntegralOnSlice.IsComplete, so the same ambient argument proves the constructible-input isomorphism.",
+   "uses": [
+    "lem-pur-normalized-actual-reconstruction-maps",
+    "lem-sf-derived-complete-legacy-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the signed-shift construction to the selected completion and tensor data at g. For each coefficient embedding E→L, construct Dprime with the proved ambient completion theorem at L and extend it to Tprime using the tensor construction theorem. Apply the scalar-transition theorem to these fixed E and L data. Apply normalized substitution to the same original E data. Combine these witnesses with family coherence and the ambient isomorphism assertions. Each imported theorem is strictly one part of the argument, and the final Lean proof combines them without a hole.",
+   "uses": [
+    "lem-pod-reindexing-tensor-construction",
+    "lem-pod-reindexing-tensor-signed-shifts",
+    "lem-pod-reindexing-tensor-coefficient-transition",
+    "lem-pod-reindexing-tensor-substitution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-strict-comparisons",
+  "lem-pod-reindexing-derived-comparisons",
+  "lem-pod-reindexing-completion-normalization",
+  "lem-pod-reindexing-signed-roos-shift",
+  "lem-weil-isomorphism-derived-pullback-reduction-tower",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-pod-reindexing-tensor-construction",
+  "lem-pod-reindexing-tensor-family-coherence",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-pod-reindexing-tensor-signed-shifts",
+  "lem-pod-reindexing-tensor-coefficient-transition",
+  "lem-pod-reindexing-tensor-substitution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "U2 stage-3 decomposition: preserve the ambient completion proof, assemble tensor families, and apply separate signed-shift, scalar and substitution steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact reindexing of pro etale module sheaves commutes with total derived inverse limits reduction units and the canonical completed tensor comparison",
+   "results": "8 hits: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, TensorProduct.directLimitRight, PiTensorProduct.reindex_symm, PiTensorProduct.map_comp_reindex_symm, PiTensorProduct.lift_reindex_symm, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, Module.Basis.coe_reindex",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not supply this derived pro-etale comparison with its representative, coefficient and coherence normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "(derived|completion|limit).*(equiv|reindex)|preservesLimit.*equivalence",
+   "results": "25 hits: Mathlib/ModelTheory/PartialEquiv.lean, Mathlib/ModelTheory/PartialEquiv.lean, Mathlib/ModelTheory/PartialEquiv.lean, Mathlib/ModelTheory/PartialEquiv.lean, Mathlib/ModelTheory/PartialEquiv.lean, Mathlib/ModelTheory/Order.lean, Mathlib/ModelTheory/Order.lean, Mathlib/ModelTheory/DirectLimit.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not supply this derived pro-etale comparison with its representative, coefficient and coherence normalizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.Limits.PreservesLimit",
+   "results": "12 hits: CategoryTheory.Limits.PreservesLimit, CategoryTheory.Limits.preservesLimit_subsingleton, CategoryTheory.Limits.PreservesLimitsOfShape.preservesLimit, CategoryTheory.Limits.PreservesLimitsOfShape.mk, CategoryTheory.Limits.PreservesLimit.mk', CategoryTheory.Limits.instHasLimitCompOfPreservesLimit, CategoryTheory.Limits.reflectsLimit_of_reflectsIsomorphisms, CategoryTheory.Limits.preservesLimit_of_iso_diagram",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not supply this derived pro-etale comparison with its representative, coefficient and coherence normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact reindexing of pro etale module sheaves commutes with total derived inverse limits reduction units and the canonical completed tensor comparison",
+   "results": "8 hits: SheafOfModules.Presentation.map_π_eq, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition, Condensed.profiniteSolidCounit, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition', Condensed.profiniteSolidification",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not supply this derived pro-etale comparison with its representative, coefficient and coherence normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme isomorphism identifies completed pullback with exact inverse image respecting quotient projections and both Roos cone coordinates",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_ι, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_snd, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_fst, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_snd_assoc, AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_fst",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not supply this derived pro-etale comparison with its representative, coefficient and coherence normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image along a scheme isomorphism commutes with derived completion quotient tower adjunction and completed tensor product",
+   "results": "8 hits: AdicCompletion.ofTensorProduct_naturality, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.mk_ofAlgEquiv_symm, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_tmul",
+   "date": "2026-10-22",
+   "verdict": "no match: these concern ordinary adic modules, site equivalences or categorical reindexing, and do not state the combined derived coefficient-system adjunction and completed tensor normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "completion|reindex|Roos",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean, Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean, Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean, Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these concern ordinary adic modules, site equivalences or categorical reindexing, and do not state the combined derived coefficient-system adjunction and completed tensor normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image along an isomorphism commutes with derived completion and completed tensor quotient tower unit",
+   "results": "8 hits: AdicCompletion.congr_symm_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.of_ofLinearEquiv_symm, AdicCompletion.ofLinearEquiv_symm_of, CategoryTheory.Limits.image.compIso_inv_comp_image_ι, AdicCompletion.ofAlgEquiv_symm_of, UniformSpace.Completion.mapRingEquiv_symm_apply, CategoryTheory.PreservesImage.inv_comp_image_ι_map",
+   "date": "2026-10-22",
+   "verdict": "no match: these concern ordinary adic modules, site equivalences or categorical reindexing, and do not state the combined derived coefficient-system adjunction and completed tensor normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Limits.PreservesLimits",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: these concern ordinary adic modules, site equivalences or categorical reindexing, and do not state the combined derived coefficient-system adjunction and completed tensor normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport derived inverse limits and tensor products through an exact equivalence of ringed sites, preserving the adjunction unit and counit",
+   "results": "8 hits: CategoryTheory.Equivalence.transportIsoSheafToPresheaf, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardCongr, CategoryTheory.Equivalence.sheafCongr.counitIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackIso, CategoryTheory.Equivalence.sheafCongr.unitIso, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val",
+   "date": "2026-10-22",
+   "verdict": "no match: these concern ordinary adic modules, site equivalences or categorical reindexing, and do not state the combined derived coefficient-system adjunction and completed tensor normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-derived-automorphism-hom-evaluation",
+  "date": "2026-10-22",
+  "group": "Q122"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1 and 5: integral pullback and completed tensor normalization; agent refinement of the quotient and strict-derived-limit models. Carries original item proof steps 8, 9.",
+   "via": [
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-reindexing-completion-unit-tensor",
+  "worker": "stage1",
+  "summary": "Expanded the quotient-system tensor comparison, exact-product total derived limit comparison, transport of the actual adjunction, quotient-unit completion, and completed tensor/coherence equations. Reused existing generic and same-unit nodes; no new nodes and no statement changes. Checked whole cone maps, not just evaluated projections.",
+  "blueprint": "prop-pod-dual-tate-data-compatibility.proof.md Steps 1 and 5: coefficient-stage automorphism pullback and completed tensor normalization; realizes the quotient/limit enhancement extracted through lem-pod-derived-automorphism-hom-evaluation.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic strict coefficient-system derived adjunction with actual unit/counit; used to normalize reindexing, not to replace a geometric unit step."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic resolution, coefficient completion or tensor-system calculus used as a black box for the automorphism normalization; no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic resolution, coefficient completion or tensor-system calculus used as a black box for the automorphism normalization; no replacement of the unit route."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Generic exact-product functor comparison with total derived limits, retaining both Roos coordinates and augmentations; the unit supplies no such general limit lemma."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic resolution, coefficient completion or tensor-system calculus used as a black box for the automorphism normalization; no replacement of the unit route."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic resolution, coefficient completion or tensor-system calculus used as a black box for the automorphism normalization; no replacement of the unit route."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic resolution, coefficient completion or tensor-system calculus used as a black box for the automorphism normalization; no replacement of the unit route."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Generic resolution, coefficient completion or tensor-system calculus used as a black box for the automorphism normalization; no replacement of the unit route."
+   },
+   {
+    "node": "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "why": "Generic resolution, coefficient completion or tensor-system calculus used as a black box for the automorphism normalization; no replacement of the unit route."
+   },
+   {
+    "node": "lem-pur-completed-operation-tower-substitution",
+    "why": "Generic resolution, coefficient completion or tensor-system calculus used as a black box for the automorphism normalization; no replacement of the unit route."
+   },
+   {
+    "node": "lem-pur-normalized-actual-reconstruction-maps",
+    "why": "Generic resolution, coefficient completion or tensor-system calculus used as a black box for the automorphism normalization; no replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-normalized-actual-reconstruction-maps"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NN-a32d79528",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-a32d79528 (reviewer sub-agent of L); spot-checked: Read the item's statement, all 8 steps and every cited node's statement in full, the blueprint proof of prop-pod-dual-tate-data-compatibility (Steps 1 and 5), and Stacks 07A4 and 0941. This is a first split by NN (still unsplit on live, no re-split note). It creates no new nodes. Statement, stmt_deps and blueprint fields are byte-identical to the base, so no target is weakened. No cycle, no SGA, every step under 2000 characters. Step checks: (1) system equivalence is componentwise from lem-pod-reindexing-hom-resolution-model; K-injectivity is transported by the null-homotopy argument. (2) The reduction system comparison commutes with all quotient transitions. (3) Every hypothesis of lem-cbc-exact-product-functor-strict-limit holds; the Roos sign conventions convert by y↦-y, and the diagonal map and 1-s square are checked. (4) The adjunction bijection is transported on K-flat/K-injective models. (6) The total-tensor (-1)^p differential and transitions are preserved, following Stacks 07A4. (8) Koszul symmetry, associator and Roos shift signs are checked, and the substitution theorem's normalized-input hypothesis is supplied by lem-pur-normalized-actual-reconstruction-maps. Edge cases: empty schemes, g=id, n=1, incomplete K (only ambient claims), doubly unbounded complexes. FIX 1, step 5: the calculus lemma by itself only fixes the level-n composites of the unit, so I cited lem-pur-normalized-actual-reconstruction-maps for invertibility of the actual unit u_K for derived-complete K. FIX 2, step 7 (C4): step 7 relied on the representative description of the finite comparison without citing it; I cited def-pur-finite-pullback-tensor-comparison (totalized module pullback/tensor isomorphism on flat-term K-flat representatives) and added it to proof_deps. Accepted generic tool_uses outside the route: lem-cbc-exact-product-functor-strict-limit, lem-pur-kflat-total-tensor-model, lem-pur-isomorphism-inverse-image-tensor-hom, lem-pur-completed-operation-tower-substitution, lem-pur-normalized-actual-reconstruction-maps. Maintainer note: lem-pur-isomorphism-completed-reduction-reindexing (Q156, unsplit, sk-thm-sf-package) overlaps the first half of the item (R lim reindexing, completed pullback of complete K, reduction-tensor reindexing). It is stated in the PBC framework and has no completed-tensor clause, so it is not a duplicate; it may be worth merging later.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PodReindexingCompletionUnitTensor",
+  "declaration": "WeilConjectures.podReindexingCompletionUnitTensor",
+  "declarations": [
+   "WeilConjectures.podReindexingCompletionUnit",
+   "WeilConjectures.podReindexingCompletionUnitTensor"
+  ],
+  "file": "lean/Sheaf/Paper/PodReindexingCompletionUnitTensor.lean",
+  "statement": "theorem podReindexingCompletionUnitTensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] : ∃ A : PodReindexFamily l E, A.Relabelling l E ∧ A.Identity l E ∧ A.Composition l E ∧ (∀ {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f] [∀ v : V, Invertible (l : V.residueField v)] [∀ w : W, Invertible (l : W.residueField w)], PodCompletionReindex.Laws l E f (A.completion f) ∧ (∀ K : DerivedCategory (scalarReductionSource l E W), IntegralOnSlice.IsComplete l E W none K → IsIso ((podOrdinaryToCompleted l E f (A.completion f)).app K)) ∧ (∀ K : sfIntegralConstructibleCategory l E W, IsIso ((podOrdinaryToCompleted l E f (A.completion f)).app K.obj)) ∧ PodCompletedTensorReindex.Laws l E f (A.completion f) (A.tensor f) ∧ A.TensorConstraints l E f) ∧ (∃ SY : PodTensorSignedShift l E Y, ∃ SX : PodTensorSignedShift l E X, PodReindexSignedShifts l E g (A.completion g) (A.tensor g) SY SX) ∧ (∀ (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L), ∃ D' : PodCompletionReindex l L g, ∃ T' : PodCompletedTensorReindex l L g D', ∃ S : PodReindexCoefficientTransition l E L ι g (A.completion g) D', PodCompletionReindex.Laws l L g D' ∧ PodCompletedTensorReindex.Laws l L g D' T' ∧ S.Laws l E L ι g (A.completion g) D' (A.tensor g) T') ∧ PodReindexSubstitution l E g (A.completion g) (A.tensor g)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair F1–F3: equations use a single selected family, its own reduction/limit/tensor maps, actual scalar transitions and signed shifts; substitution shares its calculi/completion/Roos/pullback/tensor realizations. RestrictedGenerators pins the free restriction comparison. Definition owner nodes replace the two theorem-only plain-definition dependencies."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93bb1f2f8",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Re-delivery after 839c RETURN; F1-F3 repaired. F1: copied canonical-coherence and Fin 3 substitution conjuncts removed; PodReindexFamily with Relabelling (Over.mapId/mapComp section formulas), Identity (reduction/limit/tensor vs integralComparisonSystemUnit), Composition (vs integralComparisonSystemComposition), own TensorConstraints (associator/braiding/unitors; unit iso determined); PodReindexCoefficientTransition.Laws for all L, iota incl. id, with pure-tensor pin and own D/D'/T/T' squares; PodReindexSignedShifts (CommShift of D.reduction/limit, Roos squares, shift generators with (-1)^(pr), Model pins left/right); PodReindexSubstitution ties model C on Bool to D's calculi/Roos/pullback, primitive pullback = D.limit, plus T.Model/Canonical. F2: theorem stmt_deps replaced by existing:true def-pod-isomorphism-reduction-reindexing, def-pod-integral-tensor-constraints, def-pod-scalar-completion-tensor-comparisons; statements verbatim, decls exist, no duplicate owners. F3: RestrictedGenerators pins restricted via the sequence-pullback unit generator along proEtaleIsoCommaArrow, so no sign twist. Statement verbatim; item differs from live only in lean/stmt_deps; no dep records or modules changed; only 2 theorem sorries; docstrings with source/blueprint everywhere; no stronger hypotheses; edge cases (empty schemes, g=id, n=0, incomplete K, all shifts, E=L) fine. No compile (no file changed). Advisories: substitution def node cites theorem lem-pur-completed-operation-tower-substitution instead of def-pur-completed-operation-model-data/-comparison-data; auxiliary evaluation/restriction fields only partly pinned; base-era non-stmt_dep owners; self second reading."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T123949-L-1921632",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

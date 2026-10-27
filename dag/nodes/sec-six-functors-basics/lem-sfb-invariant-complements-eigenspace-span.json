@@ -1,0 +1,87 @@
+{
+ "id": "lem-sfb-invariant-complements-eigenspace-span",
+ "kind": "statement",
+ "title": "Invariant complements imply spanning by eigenspaces over an algebraically closed field",
+ "statement": "Let $K$ be an algebraically closed field [def-weil-algebraic-closure], let $V$ be a finite-dimensional $K$-vector space [def-weil-finite-dimensional-subspace], and let $T:V\\to V$ be $K$-linear. Suppose every $T$-invariant subspace $W\\subseteq V$ has a $T$-invariant complement $W\\prime$, meaning $V=W\\oplus W\\prime$. For $\\lambda\\in K$, put $E_\\lambda=\\{v\\in V:T(v)=\\lambda v\\}$. Then $\\sum_{\\lambda\\in K}E_\\lambda=V$: every vector is a finite sum of eigenvectors (zero summands are allowed).",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Proposition 14.4(b), printed p.62, passage from eigenvalues to the operator, with characteristic-zero semisimplicity for finite-order operators; Mathlib LinearAlgebra/Eigenspace/Semisimple.lean:92-95 and LinearAlgebra/Semisimple.lean:74-76."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over an algebraically closed field the eigenspaces of a semisimple endomorphism span the finite dimensional vector space",
+   "results": "{\"t\": \"2026-10-22T07:26:33Z\", \"tool\": \"leanfinder\", \"query\": \"Over an algebraically closed field the eigenspaces of a semisimple endomorphism span the finite dimensional vector space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.iSup_maxGenEigenspace_eq_top\", \"Module.End.IsSemisimple.isFinitelySemisimple\", \"Module.End.IsFinitelySemisimple.genEigenspace_eq_eigenspace\", \"Module.End.IsFinitelySemisimple.maxGenEigenspace_eq_eigenspace\", \"Module.End.maxGenEigenspace_eq_genEigenspace_finrank\", \"Matrix.iSup_eigenspace_toLin_diagonal_eq_top\", \"Module.End.exists_isNilpotent_isSemisimple\", \"Matrix.iSup_eigenspace_toLin'_diagonal_eq_top\"], \"digest\": \"76b65bae5cebb39e\"}",
+   "date": "2026-10-22",
+   "verdict": "match: the exact declaration is confirmed by Loogle and source; semantic hits give surrounding semisimplicity/generalized-eigenspace results."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.IsSemisimple.iSup_eigenspace_eq_top",
+   "results": "{\"t\": \"2026-10-22T07:26:25Z\", \"tool\": \"loogle\", \"query\": \"Module.End.IsSemisimple.iSup_eigenspace_eq_top\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.End.IsSemisimple.iSup_eigenspace_eq_top\"], \"digest\": \"dd8aeb0bd15e8e8d\"}",
+   "date": "2026-10-22",
+   "verdict": "match: exact eigenspace-span theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over an algebraically closed field the eigenspaces of a semisimple endomorphism span the whole finite dimensional space",
+   "results": "{\"t\": \"2026-10-22T07:26:25Z\", \"tool\": \"leansearch\", \"query\": \"Over an algebraically closed field the eigenspaces of a semisimple endomorphism span the whole finite dimensional space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.iSup_maxGenEigenspace_eq_top\", \"Module.End.IsSemisimple\", \"Module.End.eigenspace\", \"Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute\", \"Module.End.HasUnifEigenvector\", \"Module.End.genEigenspace_restrict_eq_top\", \"Module.End.exists_eigenvalue\", \"Module.End.Eigenvalues\"], \"digest\": \"8e05a7c1f919e599\"}",
+   "date": "2026-10-22",
+   "verdict": "match: exact theorem confirmed by Loogle and source; semantic hits concern generalized eigenspaces and semisimplicity."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma IsSemisimple.iSup_eigenspace_eq_top",
+   "results": "{\"t\": \"2026-10-22T07:26:24Z\", \"tool\": \"grep\", \"query\": \"lemma IsSemisimple.iSup_eigenspace_eq_top\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\"], \"digest\": \"1911d5fe9c60ca23\"}",
+   "date": "2026-10-22",
+   "verdict": "match: Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean:92."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.End.IsSemisimple.iSup_eigenspace_eq_top",
+  "file": "Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean",
+  "line": 92,
+  "how": "specializes in one line: apply Module.End.IsSemisimple.iSup_eigenspace_eq_top (lines 92-95) to Module.End.isSemisimple_iff.mpr of the invariant-complement hypothesis (Mathlib/LinearAlgebra/Semisimple.lean:74-76). The supremum of subspaces is their algebraic sum."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-free-ring-congruence-torsion",
+  "date": "2026-10-22",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Lemma 14.5, printed p.63, and the eigenvalue argument of Proposition 14.4(b), printed p.62: general finite-free-ring formulation using its left regular representation; the finite-order conclusion uses characteristic-zero semisimplicity. Auxiliary linear/arithmetic input: Chapter I, Proposition 14.4(b), printed p.62, passage from eigenvalues to the operator, with characteristic-zero semisimplicity for finite-order operators; Mathlib LinearAlgebra/Eigenspace/Semisimple.lean:92-95 and LinearAlgebra/Semisimple.lean:74-76.",
+   "via": [
+    "lem-sfb-finite-free-ring-congruence-torsion",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

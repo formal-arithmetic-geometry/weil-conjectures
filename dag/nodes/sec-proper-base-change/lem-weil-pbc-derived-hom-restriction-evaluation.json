@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-derived-hom-restriction-evaluation",
+ "kind": "statement",
+ "title": "Derived local Hom evaluation respects coefficient restriction",
+ "statement": "Let X be a scheme, q:R→S a commutative ring map in the fixed coefficient universe, and A,D arbitrary objects of D(X_et,S). For an affine weakly contractible U of X_proet, evaluation of the sheafification and comparison pullback of the restriction map [def-weil-pbc-restriction-hom-presheaf] commutes with coefficient restriction. More precisely, compose the R-valued evaluated morphism on its right with restriction to U of the canonical comparison/coefficient isomorphism at D and the inverse slice/coefficient isomorphism. The result equals the analogous composite at A followed by restriction of scalars of the S-valued evaluated morphism. All maps are the canonical ones of [def-weil-pbc-derived-morphism-sheaf-comparison]; no finiteness or universal-arrow hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 03DA and 098K: coefficient restriction and localization; Tag 0F63: evaluation on weakly contractible affines. Formal functoriality argument adapted from the existing project coefficient-mate proofs."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 03DA, 098K and 0F63; explicit exact-functor mate pasting and naturality of the specified sheafification unit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of derived local Hom sheaves commutes with restriction of scalars and localization of sites",
+   "results": "Eight results concerning SheafOfModules restriction, sheafification Hom equivalences, and module evaluation; none concerns the derived local Hom presheaf or its weakly contractible evaluation.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing exact restriction and derived slice constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"Presheaf\"",
+   "results": "Twelve results about ordinary PresheafOfModules restriction of scalars, limits, colimits and underlying presheaves. No derived local Hom restriction/evaluation.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedLocalFunctor|hom_naturality|restriction_scalars_paste; evaluation.*normalization|normalization.*evaluation",
+   "results": "Project search finds private coefficient pasting in DerivedScalarExtensionLocalSystems and scalar-extension evaluation in DerivedMorphismWeaklyContractibleEvaluation. Both modules reach the assigned item and cannot be imported without a cycle. Generic localization and derived mate pasting remain available in the lower modules.",
+   "date": "2026-10-27",
+   "verdict": "Build the restriction map from the existing derived slice comparisons and prove its evaluation compatibility directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SourceIsomorphismNormalizedPresheafEvaluation",
+  "date": "2026-10-27",
+  "group": "W7"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Functoriality of local Hom evaluation under coefficient restriction, in the normalized-presheaf evaluation argument.",
+   "via": [
+    "lem-weil-pbc-source-isomorphism-normalized-presheaf-evaluation",
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-sections",
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "stmt_deps": [
+  "def-weil-pbc-restriction-hom-presheaf",
+  "def-weil-pbc-derived-morphism-sheaf-comparison",
+  "def-weil-pbc-derived-normalization-arrows",
+  "sk-def-pe-weak-contractible"
+ ],
+ "proof": [
+  {
+   "text": "Compare the coefficient mate on the localized comparison site with the global coefficient mate. Under the comparison slice adjunction both transposes are restriction of the same adjunction unit. Lift this cube of exact functors to the derived categories using derived-square pasting.",
+   "uses": [
+    "def-weil-pbc-derived-morphism-sheaf-comparison",
+    "def-weil-pbc-derived-normalization-arrows"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the cube at A and D and naturality of the local coefficient comparison to identify the two conjugated local Hom maps. Transpose the resulting identity under sheafification and comparison adjunctions. This proves the comparison square for the specified restriction Hom presheaf map.",
+   "uses": [
+    "def-weil-pbc-restriction-hom-presheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of the pro-etale sheafification unit intertwines the restriction Hom map and conjugation by the comparison/coefficient isomorphisms. Apply injectivity of the unit at the weakly contractible affine U; its two inverse-unit equations identify the evaluated morphisms. Compose with the target coefficient isomorphism and cancel the adjacent inverse components.",
+   "uses": [
+    "def-weil-pbc-derived-morphism-sheaf-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-morphism-sheaf-comparison",
+  "def-weil-pbc-derived-normalization-arrows",
+  "def-weil-pbc-restriction-hom-presheaf"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedHomRestrictionEvaluation",
+  "file": "lean/Sheaf/Paper/DerivedHomRestrictionEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.derivedHomEvaluation_restrictScalars",
+  "statement": "theorem derivedHomEvaluation_restrictScalars\n    (X : Scheme.{u}) {R S : Type (u + 1)} [CommRing R] [CommRing S] (q : R →+* S)\n    (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} S)))\n    (U : X.ProEt) [IsAffine U.left]\n    (hw : (ProEt.topology X).IsWeaklyContractible.{u + 1} U)\n    (s : ((comparisonSetUpperStar X).obj\n      (derivedLocalHomSheaf X.smallEtaleTopology S A D)).obj.obj (op U)) :\n    derivedHomEvaluation X R\n        ((normalizationRestrict X.smallEtaleTopology q).obj A)\n        ((normalizationRestrict X.smallEtaleTopology q).obj D) U hw\n        (((comparisonSetUpperStar X).map\n          ((presheafToSheaf X.smallEtaleTopology (Type (u + 1))).map\n            (derivedRestrictionHomPresheaf X.smallEtaleTopology q A D))).hom.app\n              (op U) s) ≫\n      (derivedSliceRestriction (ProEt.topology X) R U).map\n        ((comparisonRestrictScalarsIso X R q).hom.app D) ≫\n      (sliceRestrictScalarsIso (ProEt.topology X) R q U).inv.app\n        ((derivedComparison X S).obj D) =\n    (derivedSliceRestriction (ProEt.topology X) R U).map\n        ((comparisonRestrictScalarsIso X R q).hom.app A) ≫\n      (sliceRestrictScalarsIso (ProEt.topology X) R q U).inv.app\n        ((derivedComparison X S).obj A) ≫\n      (normalizationRestrict ((ProEt.topology X).over U) q).map\n        (derivedHomEvaluation X S A D U hw s)",
+  "branch": "sheaf-dag",
+  "by": "W7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261027T112442-L-1585266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261027T112442-L-1585266",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

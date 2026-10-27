@@ -1,0 +1,360 @@
+{
+ "id": "lem-sfb-smooth-affine-quotient-lift",
+ "kind": "statement",
+ "title": "Smooth affine schemes lift across arbitrary quotient maps of the base ring",
+ "statement": "Let $R\\twoheadrightarrow R_0$ be a surjective homomorphism of commutative rings. Let $T_0$ be an affine scheme [def-pc-scheme] equipped with a smooth morphism $T_0\\to\\operatorname{Spec}R_0$ [def-weil-affine-spectrum, def-sbc-smooth-morphisms]. Then there exist an affine scheme $T$, a smooth morphism $T\\to\\operatorname{Spec}R$, and an $R_0$-isomorphism $a:T\\times_{\\operatorname{Spec}R}\\operatorname{Spec}R_0\\xrightarrow{\\sim}T_0$ [def-pc-fibre-product]. No nilpotence, locality or Noetherian hypothesis is imposed on the base rings. The zero ring and empty affine scheme are allowed.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07M8, proposition-lift-smooth, assertion (2), in affine-scheme form: a smooth R_0-algebra A_0 is A/IA for a smooth R-algebra A. The isomorphism is of R_0-algebras."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine presentation $T_0\\cong\\operatorname{Spec}B_0$. The affine spectrum correspondence gives an $R_0$-algebra structure on $B_0$ inducing the specified structure morphism. Smoothness is invariant under the chosen affine isomorphism, and the affine smoothness equivalence gives that $R_0\\to B_0$ is a smooth ring map. Put $I=\\ker(R\\to R_0)$, so $R/I\\cong R_0$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07M8, proposition-lift-smooth (2), affine translation; Tags 01V6 and 02H6"
+   }
+  },
+  {
+   "text": "The smooth algebra $B_0$ is finitely presented by the definition of a smooth ring map and flat by the smooth-flat theorem. For every prime $\\mathfrak p_0\\subset R_0$, smooth base change makes $\\kappa(\\mathfrak p_0)\\otimes_{R_0}B_0$ smooth over the field $\\kappa(\\mathfrak p_0)$, hence a local complete intersection by the smooth-over-field theorem. Thus $R_0\\to B_0$ is syntomic, with precisely the flatness, finite presentation and fibre conditions required by the syntomic lifting theorem.",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-smooth-over-field-local-complete-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07M8 (2), first sentence; Algebra Tag 00TA, lemma-smooth-syntomic; Tag 00SL, definition-lci"
+   }
+  },
+  {
+   "text": "Apply the syntomic lifting theorem to $R\\twoheadrightarrow R_0$ and $B_0$. Obtain a syntomic $R$-algebra $B$ and an $R_0$-algebra isomorphism $\\beta:B/IB\\xrightarrow{\\sim}B_0$. In particular $B$ is flat and finitely presented over $R$. We will localize $B$ without changing this quotient.",
+   "uses": [
+    "lem-sfb-syntomic-algebra-surjection-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07M8 (1) used in the proof of (2)"
+   }
+  },
+  {
+   "text": "For a prime $\\mathfrak q\\subset B$ containing $IB$, put $\\mathfrak p=\\mathfrak q\\cap R$, so $I\\subset\\mathfrak p$, and let $\\mathfrak p_0\\subset R_0=R/I$ be its image. The fields $\\kappa(\\mathfrak p)$ and $\\kappa(\\mathfrak p_0)$ are identified by sending a fraction of classes modulo $\\mathfrak p$ to the same fraction modulo $\\mathfrak p_0$. The quotient-tensor comparison and $\\beta$ give an isomorphism of fibre algebras $$B\\otimes_R\\kappa(\\mathfrak p)\\cong B_0\\otimes_{R_0}\\kappa(\\mathfrak p_0).$$ Explicitly $b\\otimes\\lambda\\mapsto\\beta(\\bar b)\\otimes\\lambda$, with inverse obtained by lifting $\\beta^{-1}(b_0)$ to $B$; changes of lift lie in $IB$ and tensor to zero. Both maps preserve products on pure tensors. The right side is smooth by smooth base change. Consequently the left side is smooth at the prime corresponding to $\\mathfrak q$ (take localization element $1$). Localized flatness gives $R_{\\mathfrak p}\\to B_{\\mathfrak q}$ flat, while finite presentation allows $g=1$ in the pointwise fibre criterion. That criterion proves that $R\\to B$ is smooth at every $\\mathfrak q\\in V(IB)$.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-pc-affine-flat-module-local-criterion",
+    "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "def-weil-pbc-singular-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07M8 (2), smoothness near V(IB); Algebra Tag 00TF, lemma-flat-fibre-smooth"
+   }
+  },
+  {
+   "text": "Let $H=H_{B/R}$. Its zero locus is the nonsmooth locus, so the preceding step gives $V(H)\\cap V(IB)=\\varnothing$. Therefore $V(H+IB)=\\varnothing=V(B)$. The zero-locus/radical theorem gives $\\sqrt{H+IB}=B$, hence $1\\in H+IB$ (a power of $1$ is still $1$). Choose $h\\in H$ and $j\\in IB$ with $h+j=1$. Thus $h\\equiv1\\pmod {IB}$, and the singular-ideal localization theorem says that $A=B_h$ is smooth over $R$. This is the required single localization; no finiteness of $I$ or nilpotence is used.",
+   "uses": [
+    "def-weil-pbc-singular-ideal",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-weil-pbc-singular-ideal-localization-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07M8 (2), final localization; Smoothing Tag 07C5, definition-singular-ideal; Algebra Tag 00TC, lemma-locally-smooth"
+   }
+  },
+  {
+   "text": "The map $A=B_h\\to B_0$ sending $b/h^n$ to $\\beta(\\bar b)$ is well defined because the image of $h$ is $1$. It kills $IA$ and gives $\\gamma:A/IA\\to B_0$. Conversely send $b_0\\in B_0$ to the class of $b/1$, for any lift $b\\in B$ of $\\beta^{-1}(b_0)$; two lifts differ by $IB$, so give the same class. These maps are ring homomorphisms. Their composites fix $B_0$ and the classes of all $b/1$; they also fix $h^{-1}$ because $h=1$ in $A/IA$. Fractions generate $A$, so the maps are inverse. They fix the image of $R_0$, hence $\\gamma$ is an $R_0$-algebra isomorphism.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07M8 (2), final localization preserves the prescribed quotient"
+   }
+  },
+  {
+   "text": "Set $T=\\operatorname{Spec}A$. The affine smoothness equivalence shows that $T\\to\\operatorname{Spec}R$ is smooth. The affine fibre-product theorem identifies its base change with $\\operatorname{Spec}(A\\otimes_RR_0)$. The quotient-tensor comparison identifies this algebra with $A/IA$; on pure tensors the map is $a\\otimes\\bar r\\mapsto ra\\bmod IA$, so it is multiplicative and respects the $R_0$-structure. Compose with $\\gamma$ to obtain an $R_0$-algebra isomorphism $A\\otimes_RR_0\\cong B_0$. Taking its inverse spectrum morphism and the chosen $\\operatorname{Spec}B_0\\cong T_0$ gives exactly $a:T\\times_{\\operatorname{Spec}R}\\operatorname{Spec}R_0\\cong T_0$ over $R_0$. If $B_0=0$, the prime-indexed arguments are vacuous and the same quotient and localization maps apply; in particular the zero base ring and the empty affine scheme require no exception.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07M8 (2), affine-scheme conclusion; Schemes Tags 01I4 and 01JQ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-over-field-local-complete-intersection",
+  "lem-sfb-syntomic-algebra-surjection-lift",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-pc-affine-flat-module-local-criterion",
+  "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+  "def-weil-pbc-singular-ideal",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-singular-ideal-localization-smooth",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07M8, proposition-lift-smooth, proof of (2), using the existing syntomic lift for (1); final localization and affine translation written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth affine scheme over a quotient ring R modulo I has a smooth affine lift over R with an isomorphism of its reduction",
+   "results": "{\"t\": \"2026-10-23T09:36:47Z\", \"tool\": \"leanfinder\", \"query\": \"Every smooth affine scheme over a quotient ring R modulo I has a smooth affine lift over R with an isomorphism of its reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.formallySmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.isSmooth_iff\", \"Algebra.smoothLocus_eq_univ_iff\", \"Algebra.smooth_iff\", \"RingHom.smooth_def\"], \"digest\": \"056715917ed2e676\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits lift homomorphisms from an already given formally smooth algebra, or characterize smoothness; none constructs a smooth algebra over a larger base with the given quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth algebras lift along surjective ring maps with a prescribed quotient identification",
+   "results": "{\"t\": \"2026-10-23T09:36:48Z\", \"tool\": \"leansearch\", \"query\": \"Smooth algebras lift along surjective ring maps with a prescribed quotient identification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift\", \"RingHom.liftOfSurjective\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth\", \"Algebra.FormallySmooth.iff_comp_surjective\", \"Algebra.FormallySmooth.comp_lift\", \"Algebra.FormallySmooth.liftOfSurjective\"], \"digest\": \"e99d54ab62970d60\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits lift homomorphisms from an already given formally smooth algebra, or characterize smoothness; none constructs a smooth algebra over a larger base with the given quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a smooth algebra B over R/I construct a smooth R algebra C such that C/IC is isomorphic to B",
+   "results": "{\"t\": \"2026-10-23T09:36:56Z\", \"tool\": \"leanfinder\", \"query\": \"Given a smooth algebra B over R/I construct a smooth R algebra C such that C/IC is isomorphic to B\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.of_comp_surjective\", \"Algebra.FormallySmooth.comp_surjective\", \"Algebra.IsSmoothAt\", \"Algebra.Smooth\"], \"digest\": \"e02acaa66f269e08\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits lift homomorphisms from an already given formally smooth algebra, or characterize smoothness; none constructs a smooth algebra over a larger base with the given quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, \"lift\"",
+   "results": "{\"t\": \"2026-10-23T09:41:42Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits lift homomorphisms from an already given formally smooth algebra, or characterize smoothness; none constructs a smooth algebra over a larger base with the given quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "07M8|lift.*[Ss]mooth|[Ss]mooth.*lift",
+   "results": "{\"t\": \"2026-10-23T09:36:48Z\", \"tool\": \"grep\", \"query\": \"07M8|lift.*[Ss]mooth|[Ss]mooth.*lift\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\"], \"digest\": \"2f85bca606c5d4b6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits lift homomorphisms from an already given formally smooth algebra, or characterize smoothness; none constructs a smooth algebra over a larger base with the given quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "07M8|smooth.*algebra.*lift|lift.*smooth.*algebra",
+   "results": "{\"t\": \"2026-10-23T09:41:42Z\", \"tool\": \"grep\", \"query\": \"07M8|smooth.*algebra.*lift|lift.*smooth.*algebra\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits lift homomorphisms from an already given formally smooth algebra, or characterize smoothness; none constructs a smooth algebra over a larger base with the given quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*smooth|smooth.*lift|syntomic",
+   "results": "{\"t\": \"2026-10-23T11:50:34Z\", \"tool\": \"grep\", \"query\": \"lift.*smooth|smooth.*lift|syntomic\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\"], \"digest\": \"1c140439471dcb98\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: object lifting is absent; formal-smoothness hits lift maps with nilpotent kernels, while smoothness/flatness and local-standard-smooth hits do not lift an arbitrary smooth algebra. For syntomicity the complete-intersection input already exists as lem-weil-pbc-smooth-over-field-local-complete-intersection; no new node is needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a smooth affine scheme across an arbitrary surjective ring map",
+   "results": "{\"t\": \"2026-10-23T11:50:35Z\", \"tool\": \"leansearch\", \"query\": \"Lift a smooth affine scheme across an arbitrary surjective ring map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.liftOfSurjective\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.iff_split_surjection\", \"Algebra.FormallySmooth.iff_comp_surjective\", \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"RingHom.liftOfSurjective\", \"Algebra.Smooth.formallySmooth\"], \"digest\": \"724c449d234a950a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: object lifting is absent; formal-smoothness hits lift maps with nilpotent kernels, while smoothness/flatness and local-standard-smooth hits do not lift an arbitrary smooth algebra. For syntomicity the complete-intersection input already exists as lem-weil-pbc-smooth-over-field-local-complete-intersection; no new node is needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, \"lift\"",
+   "results": "{\"t\": \"2026-10-23T11:50:35Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: object lifting is absent; formal-smoothness hits lift maps with nilpotent kernels, while smoothness/flatness and local-standard-smooth hits do not lift an arbitrary smooth algebra. For syntomicity the complete-intersection input already exists as lem-weil-pbc-smooth-over-field-local-complete-intersection; no new node is needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth algebra over a quotient ring R/I is the reduction of a smooth R algebra",
+   "results": "{\"t\": \"2026-10-23T11:50:36Z\", \"tool\": \"leanfinder\", \"query\": \"Every smooth algebra over a quotient ring R/I is the reduction of a smooth R algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth\", \"Algebra.FormallySmooth.comp_surjective\", \"Algebra.FormallySmooth.of_comp_surjective\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.FormallySmooth.iff_comp_surjective\", \"Algebra.Smooth\", \"Algebra.Smooth.formallySmooth\", \"Algebra.instSmoothOfIsStandardSmooth\"], \"digest\": \"77cfbc3d0e6cff01\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: object lifting is absent; formal-smoothness hits lift maps with nilpotent kernels, while smoothness/flatness and local-standard-smooth hits do not lift an arbitrary smooth algebra. For syntomicity the complete-intersection input already exists as lem-weil-pbc-smooth-over-field-local-complete-intersection; no new node is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*quotient.*lift|lift.*smooth.*quotient|07M8",
+   "results": "{\"t\": \"2026-10-23T11:52:05Z\", \"tool\": \"grep\", \"query\": \"smooth.*quotient.*lift|lift.*smooth.*quotient|07M8\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: object lifting is absent; formal-smoothness hits lift maps with nilpotent kernels, while smoothness/flatness and local-standard-smooth hits do not lift an arbitrary smooth algebra. For syntomicity the complete-intersection input already exists as lem-weil-pbc-smooth-over-field-local-complete-intersection; no new node is needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a smooth R0 algebra and a surjection R to R0 there exists a smooth R algebra whose quotient is that algebra",
+   "results": "{\"t\": \"2026-10-23T11:52:06Z\", \"tool\": \"leanfinder\", \"query\": \"Given a smooth R0 algebra and a surjection R to R0 there exists a smooth R algebra whose quotient is that algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.liftOfSurjective\", \"Algebra.FormallySmooth.comp_surjective\", \"Algebra.FormallySmooth.of_comp_surjective\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.FormallySmooth.iff_comp_surjective\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.FormallySmooth.iff_split_surjection\", \"RingHom.Smooth.toAlgebra\"], \"digest\": \"9d3afe2467cea512\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: object lifting is absent; formal-smoothness hits lift maps with nilpotent kernels, while smoothness/flatness and local-standard-smooth hits do not lift an arbitrary smooth algebra. For syntomicity the complete-intersection input already exists as lem-weil-pbc-smooth-over-field-local-complete-intersection; no new node is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "syntomic|complete.intersection",
+   "results": "{\"t\": \"2026-10-23T12:00:47Z\", \"tool\": \"grep\", \"query\": \"syntomic|complete.intersection\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: object lifting is absent; formal-smoothness hits lift maps with nilpotent kernels, while smoothness/flatness and local-standard-smooth hits do not lift an arbitrary smooth algebra. For syntomicity the complete-intersection input already exists as lem-weil-pbc-smooth-over-field-local-complete-intersection; no new node is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "Syntomic|syntomic|IsCompleteIntersection",
+   "results": "{\"t\": \"2026-10-23T12:00:47Z\", \"tool\": \"grep\", \"query\": \"Syntomic|syntomic|IsCompleteIntersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: object lifting is absent; formal-smoothness hits lift maps with nilpotent kernels, while smoothness/flatness and local-standard-smooth hits do not lift an arbitrary smooth algebra. For syntomicity the complete-intersection input already exists as lem-weil-pbc-smooth-over-field-local-complete-intersection; no new node is needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth algebra is syntomic with complete intersection fibres",
+   "results": "{\"t\": \"2026-10-23T12:00:48Z\", \"tool\": \"leansearch\", \"query\": \"A smooth algebra is syntomic with complete intersection fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.Smooth.flat\", \"Algebra.Smooth.finitePresentation\", \"Algebra.Smooth.mk\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.Smooth.formallySmooth\", \"Algebra.IsStandardSmooth.finitePresentation\"], \"digest\": \"cca5310b6f732b58\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: object lifting is absent; formal-smoothness hits lift maps with nilpotent kernels, while smoothness/flatness and local-standard-smooth hits do not lift an arbitrary smooth algebra. For syntomicity the complete-intersection input already exists as lem-weil-pbc-smooth-over-field-local-complete-intersection; no new node is needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, \"syntomic\"",
+   "results": "{\"t\": \"2026-10-23T12:00:48Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, \\\"syntomic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: object lifting is absent; formal-smoothness hits lift maps with nilpotent kernels, while smoothness/flatness and local-standard-smooth hits do not lift an arbitrary smooth algebra. For syntomicity the complete-intersection input already exists as lem-weil-pbc-smooth-over-field-local-complete-intersection; no new node is needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibres of smooth algebras over residue fields are local complete intersection algebras",
+   "results": "{\"t\": \"2026-10-23T12:00:53Z\", \"tool\": \"leanfinder\", \"query\": \"Fibres of smooth algebras over residue fields are local complete intersection algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt\", \"RingHom.Smooth.locally_isStandardSmooth\", \"Algebra.smoothLocus\", \"Algebra.IsStandardSmooth\", \"Algebra.Smooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsEtaleAt\"], \"digest\": \"51f9933518f7ed8a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: object lifting is absent; formal-smoothness hits lift maps with nilpotent kernels, while smoothness/flatness and local-standard-smooth hits do not lift an arbitrary smooth algebra. For syntomicity the complete-intersection input already exists as lem-weil-pbc-smooth-over-field-local-complete-intersection; no new node is needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth ring map is syntomic: flat finitely presented with local complete intersection fibres",
+   "results": "{\"t\": \"2026-10-23T12:00:54Z\", \"tool\": \"leanfinder\", \"query\": \"Every smooth ring map is syntomic: flat finitely presented with local complete intersection fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Smooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"RingHom.IsStandardSmooth.smooth\", \"Algebra.Smooth\", \"RingHom.Smooth.toAlgebra\", \"RingHom.Smooth.locally_isStandardSmooth\", \"RingHom.smooth_def\", \"Algebra.Smooth.flat\"], \"digest\": \"556b269b533360ba\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: object lifting is absent; formal-smoothness hits lift maps with nilpotent kernels, while smoothness/flatness and local-standard-smooth hits do not lift an arbitrary smooth algebra. For syntomicity the complete-intersection input already exists as lem-weil-pbc-smooth-over-field-local-complete-intersection; no new node is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-open-coefficient-lift",
+  "date": "2026-10-23",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Unobstructed deformations of a separated curve with isolated lci singularities. Tag 0DZQ, proof: Tag 0DZN (lemma-glueing-smooth), second assertion, specialized to U_1 smooth; situation-glueing and example-schemes. General coefficient category: section-general and formal-defos.tex, definition-CLambda. Supporting algebraic existence input: lift the smooth affine U-piece across the coefficient quotient, before identifying the overlap.",
+   "via": [
+    "lem-sfb-smooth-open-coefficient-lift",
+    "lem-sfb-isolated-lci-curve-unobstructed",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-affine-quotient-lift",
+  "worker": "stage1",
+  "summary": "Kept the statement and all inherited metadata. Split Stacks 07M8(2) into seven explicit steps using only existing DAG nodes: affine translation, smooth implies syntomic via fibrewise 00T5, syntomic lift, 00TF near the quotient, a singular-ideal element congruent to 1, quotient-compatible localization, and the R_0-linear spectrum comparison. No new nodes; semantic searches and source grep confirm the item is not a Mathlib leaf. Checked all cited statements, all hypotheses and zero/empty edge cases.",
+  "blueprint": "No imported blueprint ancestor: blueprint_refs.py ancestor returns None. Retains the inherited from.place and via chain beneath det-thm-sf-ctf-stability-direct-images proof (3), the smooth affine U-piece in Tag 0DZN as used in 0DZQ. Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3) retains the direct-image route. This supplies the existing algebraic prerequisite without altering that route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic algebra/affine-scheme tool used in the Stacks 07M8(2) syntomic-lift and smooth-localization proof; it supplies A ring map is smooth iff the morphism of spectra is smooth. No change to the constructibility/alteration unit route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-local-complete-intersection",
+    "why": "Generic algebra/affine-scheme tool used in the Stacks 07M8(2) syntomic-lift and smooth-localization proof; it supplies A smooth algebra over a field is a local complete intersection. No change to the constructibility/alteration unit route."
+   },
+   {
+    "node": "lem-pc-affine-flat-module-local-criterion",
+    "why": "Generic algebra/affine-scheme tool used in the Stacks 07M8(2) syntomic-lift and smooth-localization proof; it supplies Flatness localizes at prime localizations. No change to the constructibility/alteration unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "why": "Generic algebra/affine-scheme tool used in the Stacks 07M8(2) syntomic-lift and smooth-localization proof; it supplies Flat at a prime with smooth fibre implies smooth at the prime. No change to the constructibility/alteration unit route."
+   },
+   {
+    "node": "lem-weil-pbc-singular-ideal-localization-smooth",
+    "why": "Generic algebra/affine-scheme tool used in the Stacks 07M8(2) syntomic-lift and smooth-localization proof; it supplies A_f is smooth over R for every f in the singular ideal H_{A/R}. No change to the constructibility/alteration unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-over-field-local-complete-intersection",
+  "lem-pc-affine-flat-module-local-criterion",
+  "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+  "lem-weil-pbc-singular-ideal-localization-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-c03ba9133",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-c03ba9133 (reviewer sub-agent of L); spot-checked: Live and side-live still show the item as unsplit, so no other group has superseded it, and there is no repair note for it. The statement is unchanged and matches Stacks 07M8(2) in smoothing.tex. I read the source proof: smooth implies syntomic, lift by (1), smooth near V(IA) by 00TF, then localize. The seven steps follow this route. Step 1: affine presentation, uniqueness of Spec phi, invariance clause (c), smooth-ring-map-iff-smooth-affine. Step 2: finite presentation, flatness and smooth base-change fibres made lci by the smooth-over-field node; this is exactly the syntomic notion of lem-sfb-syntomic-algebra-surjection-lift. Step 3: that existing unsplit 07M8(1) node gives B and beta. Step 4: tensor-over-quotient (2) with A=kappa(p) and beta identify the fibre over each prime of V(IB); the localized flatness and g=1 hypotheses of flat-smooth-fibre-smooth-at-prime all hold. Step 5: V(H+IB) is empty, the radical lemma gives 1 in H+IB, so h is 1 mod IB and B_h is smooth by the singular-ideal localization node. Step 6: B_h/IB_h is B_0, an elementary fraction check. Step 7: the affine fibre product with the quotient tensor gives the R_0-isomorphism a. Edge cases checked: R=R_0, Z to F_p, R_0=0 with T_0 empty. proof_deps is exactly the union of the step uses, all nodes exist and none is merged. No duplicate in the DAG (rg -L for 07M8 and lift-smooth) and no Mathlib match; all three kinds of Mathlib search are recorded. No SGA. The five declared tool_uses are generic algebra tools and are accepted; the other off-unit citations are Mathlib leaves. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothAffineQuotientLift",
+  "declaration": "AlgebraicGeometry.exists_affine_smooth_lift_of_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothAffineQuotientLift.lean",
+  "statement": "theorem exists_affine_smooth_lift_of_surjective (R R₀ : CommRingCat.{u}) (φ : R ⟶ R₀) (hφ : Function.Surjective φ.hom) (T₀ : Scheme.{u}) [IsAffine T₀] (f₀ : T₀ ⟶ Spec R₀) [Smooth f₀] : ∃ (T : Scheme.{u}) (_ : IsAffine T) (f : T ⟶ Spec R), Smooth f ∧ ∃ a : pullback f (Spec.map φ) ≅ T₀, a.hom ≫ f₀ = pullback.snd f (Spec.map φ)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f6b47f9d",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 07M8(2) clause by clause: arbitrary CommRingCat.{u} R,R0, surjective phi, affine T0 with [Smooth f0]; conclusion exists affine T, smooth f, iso pullback f (Spec.map phi) ≅ T0 over Spec R0 (a.hom ≫ f0 = pullback.snd). No extra hypotheses; edge cases (zero ring, identity, empty T0, non-nilpotent kernel) covered; single universe u is the ambient convention. lean.statement verbatim; node differs from side-live only in lean; no supersession. Smooth is current Mathlib class. No defs, sorry-only proof, docstrings with source place, blueprint tag and 7 steps; report sections present; plain proof-dep imports exist and are module files (unused by statement, advisory only). H4 search: no existing object lift. No compile run, no files changed."
+ }
+}

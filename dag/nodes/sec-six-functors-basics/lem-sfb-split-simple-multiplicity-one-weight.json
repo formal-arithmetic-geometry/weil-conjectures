@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-split-simple-multiplicity-one-weight",
+ "kind": "statement",
+ "title": "A simple rational module of a split semisimple group has a multiplicity-one torus weight",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $G$ be a smooth connected affine group scheme of finite type over $k$ [def-sc-group-scheme] which is semisimple, meaning that after algebraic closure it has no nontrivial smooth connected solvable normal subgroup; solvable means that successive commutator subgroup schemes become trivial. Fix a split maximal torus $T\\subseteq G$: a closed subgroup isomorphic over $k$ to a finite product of $\\mathbf G_m$, maximal among tori after algebraic closure, where $\\mathbf G_m(A)=A^\\times$. Let $V\\ne0$ be a finite-dimensional rational $G$-representation [def-wf-algebraic-representations]. A rational subrepresentation is a $k$-linear subspace preserved by $G(A)$ after extension to every commutative $k$-algebra $A$; simple means that the only such subspaces are $0$ and $V$. Assume that $V$ is simple. For a character $\\lambda:T\\to\\mathbf G_m$, define\n$$V_\\lambda=\\{v\\in V: t(1\\otimes v)=\\lambda(t)(1\\otimes v)\\text{ in }A\\otimes_kV\\text{ for every commutative }k\\text{-algebra }A\\text{ and every }t\\in T(A)\\}.$$\nThere exists a character $\\lambda:T\\to\\mathbf G_m$ for which $\\dim_k V_\\lambda=1$. The field $k$ need not be algebraically closed or of characteristic zero, and $G$ need not be simply connected.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 22.2, printed pp.463--464 (multiplicity-one weight for every simple module of a split reductive group); Theorem 22.18(b), printed p.467. Semisimple is a special case of reductive, Chapter 19a--19b."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-wf-algebraic-representations",
+  "def-sfb-rational-highest-weight-data",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-split-semisimple-borel-pair] to the given $G,T$. The group $G$ is smooth, connected, affine, of finite type and geometrically semisimple, and $T$ is a split torus maximal after algebraic closure, as required. Obtain $B,U,p$ with $B=U\\rtimes T$ and $B$ smooth connected affine, of finite type and split solvable. Apply [lem-sfb-split-solvable-triangular-embedding] to $B$ to get a closed immersion $B\\hookrightarrow B_n$ over $k$. Restrict the rational representation $V$ to $B$. The coaction dictionary [lem-sfb-rational-representation-comodule-dictionary] identifies this restriction with a finite-dimensional rational $B$-comodule. Since $V\\ne0$, [lem-sfb-triangular-group-representation-eigenline] gives a line $L\\subseteq V$ and a character $\\chi:B\\to\\mathbf G_m$ acting on $L$ after every algebra extension. Choose $0\\ne v\\in L$.",
+   "uses": [
+    "lem-sfb-split-semisimple-borel-pair",
+    "lem-sfb-split-solvable-triangular-embedding",
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "lem-sfb-triangular-group-representation-eigenline"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 22.18, first two sentences of the proof, printed p.467; splitness from 21.34 and trigonalizability from 16.52."
+   }
+  },
+  {
+   "text": "Put $\\lambda=\\chi|_T$. The target $\\mathbf G_m$ is of multiplicative type, being a rank-one split torus. The unipotent-to-multiplicative result [lem-sfb-unipotent-to-multiplicative-trivial] applied to $\\chi|_U$ says that it is trivial on every algebra. Thus for $b=ut\\in B(A)$ one has $\\chi(b)=\\chi(u)\\chi(t)=\\lambda(t)=\\lambda(p(b))$. Consequently $v$ is a primitive vector in precisely the form needed by the cyclic weight bound: $b(1\\otimes v)=\\lambda(p(b))(1\\otimes v)$ on every commutative $k$-algebra $A$.",
+   "uses": [
+    "lem-sfb-unipotent-to-multiplicative-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 22.16 and Theorem 22.18, printed p.467; Proposition 14.18, triviality of unipotent characters."
+   }
+  },
+  {
+   "text": "Use the coaction dictionary [lem-sfb-rational-representation-comodule-dictionary] to write $c:V\\to V\\otimes_k C$, $C=k[G]$. Fix a $k$-basis $(a_i)$ of $C$ and write $c(x)=\\sum_i c_i(x)\\otimes a_i$, with finitely many terms for each $x$. A subspace $W$ is a rational submodule exactly when $c_i(W)\\subseteq W$ for every $i$: one implication evaluates at the universal point, and the other evaluates this formula at arbitrary algebra-valued points. Starting with $W_0=kv$, define $W_{j+1}=W_j+\\sum_i c_i(W_j)$. Finite dimension makes this increasing sequence stabilize. Its stable value is a nonzero rational submodule, hence is $V$ by simplicity. For any field extension $F/k$, $(1\\otimes a_i)$ is an $F$-basis of $F\\otimes_k C$, and the coefficient operators are $1\\otimes c_i$. Induction gives the corresponding sequence $F\\otimes_k W_j$. It too reaches $V_F$. Therefore $v_F=1\\otimes v$ generates $V_F$ as a rational $G_F$-module; no assertion of simplicity after extension was used.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 22.18, printed p.467: simplicity makes the primitive vector cyclic. Elementary coefficient-span calculation supplies cyclic generation after scalar extension, without using 22.4."
+   }
+  },
+  {
+   "text": "Choose an algebraic closure $F/k$ using [def-weil-algebraic-closure]. The structural node [lem-sfb-split-semisimple-borel-pair] ensures that $B_F$ is a Borel, $U_F$ its unipotent radical, and $B_F=U_F\\rtimes T_F$ with projection $p_F$. The group $G_F$ is smooth, affine and of finite type, since $k[G]\\to F\\otimes_kk[G]$ is a base change of a smooth ring map [lem-weil-pbc-smooth-ring-map-base-change-composition]; it is connected by [lem-sbc-connected-rational-point-geometrically-connected], applied to the connected $k$-scheme $G$ with the identity section as rational point. Hence $G_F$ is semisimple by hypothesis, and reductive by the last assertion of [lem-sfb-reductive-borel-pair-structure]. Apply [lem-sfb-primitive-cyclic-weight-bound] to $G_F,T_F,B_F,V_F,v_F,\\lambda_F$. Its primitive-vector equality is step 2 after extension; $v_F\\ne0$ by extending a basis containing $v$; finite dimension and cyclic generation are step 3. Its conclusion gives $(V_F)_{\\lambda_F}=Fv_F$. In particular this character space has dimension one over $F$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-sfb-split-semisimple-borel-pair",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-primitive-cyclic-weight-bound",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-sbc-connected-rational-point-geometrically-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 22.17, printed p.467, applied over an algebraic closure to the same cyclic primitive representation; only its multiplicity-one conclusion is used."
+   }
+  },
+  {
+   "text": "Choose $T\\simeq\\mathbf G_m^r$. A character function in $k[\\mathbf Z^r]$ is a monomial $e^m$: in the equations $\\Delta(f)=f\\otimes f$, $\\epsilon(f)=1$, comparison of pairs of distinct monomials leaves just one nonzero coefficient, which equals $1$. By the coaction dictionary, the weight space in the item is the coaction eigenspace $c_T(x)=x\\otimes e^m$: evaluate at the universal point for one direction and at any point for the other. Apply [lem-sfb-relative-torus-bundle-weights] with $A=k$, $A'=F$ and this $m$. The finite-dimensional space $V$ is finite free, so its projectivity hypothesis holds. It identifies $F\\otimes_k V_\\lambda$ with $(V_F)_{\\lambda_F}$. A $k$-basis of $V_\\lambda$ becomes an $F$-basis of its scalar extension. Step 4 therefore gives $\\dim_k V_\\lambda=1$, for the character $\\lambda$ already defined over $k$ in step 2.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "lem-sfb-relative-torus-bundle-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12, printed pp.234--235, character-space decomposition and its elementary scalar-extension form; descent of the multiplicity-one conclusion of 22.18(b)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-semisimple-borel-pair",
+  "lem-sfb-split-solvable-triangular-embedding",
+  "lem-sfb-rational-representation-comodule-dictionary",
+  "lem-sfb-triangular-group-representation-eigenline",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "def-weil-algebraic-closure",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-primitive-cyclic-weight-bound",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sfb-relative-torus-bundle-weights"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 22.18 and Proposition 22.17, p.467. Follows the source primitive-vector route; reuses the algebraically closed cyclic-weight node via an explicit coefficient-span scalar-extension calculation rather than duplicating it over arbitrary fields."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "highest.?weight|weightSpace.*(finrank|rank)|finrank.*weightSpace",
+   "results": "[grep] OK 0 hit(s).  Returned: . Source subdirectory: RepresentationTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie root-space and generalized-weight-space results concern Lie algebra modules, not character spaces of rational representations of split algebraic groups over arbitrary fields. Abstract-group irreducibility does not supply this weight."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplicity one of the highest weight for an irreducible rational representation of a split reductive group",
+   "results": "[leansearch] OK 8 hit(s).  Returned: LieAlgebra.IsKilling.finrank_rootSpace_eq_one, Representation.IsIrreducible, RootPairing.isSimpleModule_weylGroupRootRep, multiplicity_eq_one_of_not_finiteMultiplicity, Representation.IsIrreducible.mk, Representation.irreducible_iff_isSimpleModule_asModule, Representation.IsIrreducible.toIsSimpleOrder, RootPairing.isSimpleModule_weylGroupRootRep_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie root-space and generalized-weight-space results concern Lie algebra modules, not character spaces of rational representations of split algebraic groups over arbitrary fields. Abstract-group irreducibility does not supply this weight."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"weightSpace\", \"finrank\"",
+   "results": "[loogle] OK 1 hit(s).  Returned: LieModule.zero_lt_finrank_genWeightSpace",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie root-space and generalized-weight-space results concern Lie algebra modules, not character spaces of rational representations of split algebraic groups over arbitrary fields. Abstract-group irreducibility does not supply this weight."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero simple rational representation of a split semisimple algebraic group has a torus character weight space of dimension one",
+   "results": "[leanfinder] OK 8 hit(s).  Returned: LieAlgebra.IsKilling.finrank_rootSpace_eq_one, LieModule.zero_lt_finrank_genWeightSpace, LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero, LieAlgebra.IsKilling.chainLength_zero_right, LieAlgebra.IsKilling.chainLength_zero, LieAlgebra.IsKilling.chainLength, LieAlgebra.IsKilling.chainLength_of_isZero, LieAlgebra.rank",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie root-space and generalized-weight-space results concern Lie algebra modules, not character spaces of rational representations of split algebraic groups over arbitrary fields. Abstract-group irreducibility does not supply this weight."
+  },
+  {
+   "tool": "grep",
+   "query": "weightSpace.*(one|eq_one)|highest.?weight.*(one|multiplicity)",
+   "results": "[grep] OK 9 hit(s).  Returned: Mathlib/Algebra/Lie/Weights/Chain.lean, Mathlib/Algebra/Lie/Weights/Chain.lean, Mathlib/Algebra/Lie/Weights/Chain.lean, Mathlib/Algebra/Lie/Weights/Chain.lean, Mathlib/Algebra/Lie/Weights/Chain.lean, Mathlib/Algebra/Lie/Weights/RootSystem.lean, Mathlib/Algebra/Lie/Weights/RootSystem.lean, Mathlib/Algebra/Lie/Weights/RootSystem.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie root-space and generalized-weight-space results concern Lie algebra modules, not character spaces of rational representations of split algebraic groups over arbitrary fields. Abstract-group irreducibility does not supply this weight."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Highest weight multiplicity one for irreducible algebraic group modules over arbitrary fields with a split maximal torus",
+   "results": "[leanfinder] OK 8 hit(s).  Returned: LieAlgebra.IsKilling.chainTopCoeff_zero_right, LieModule.exists_nontrivial_weightSpace_of_lieIdeal, LieModule.iSup_genWeightSpace_eq_top, LieModule.chainTopCoeff, LieModule.genWeightSpace_chainTopCoeff_add_one_nsmul_add, LieModule.zero_lt_finrank_genWeightSpace, LieModule.iSup_genWeightSpace_eq_top', LieModule.exists_nontrivial_weightSpace_of_isNilpotent",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie root-space and generalized-weight-space results concern Lie algebra modules, not character spaces of rational representations of split algebraic groups over arbitrary fields. Abstract-group irreducibility does not supply this weight."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simple rational module of a split semisimple group has a torus character space of dimension one in arbitrary characteristic",
+   "results": "{\"t\": \"2026-10-24T13:58:29Z\", \"tool\": \"leanfinder\", \"query\": \"A simple rational module of a split semisimple group has a torus character space of dimension one in arbitrary characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.simple_iff_end_is_rank_one\", \"FDRep.simple_iff_char_is_norm_one\", \"FDRep.finrank_hom_simple_simple\", \"FDRep.char_one\", \"IsSimpleModule.finrank_eq_one_of_isMulCommutative\", \"simple_of_finrank_eq_one\", \"LieAlgebra.IsKilling.finrank_rootSpace_eq_one\", \"RootPairing.isSimpleModule_weylGroupRootRep\"], \"digest\": \"1881b996140f3e54\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite abstract-group character criteria and Lie root spaces do not assert a multiplicity-one character space in an arbitrary rational representation of a split semisimple algebraic group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Highest weight multiplicity one for irreducible rational representations of split reductive algebraic groups",
+   "results": "{\"t\": \"2026-10-24T13:58:29Z\", \"tool\": \"leansearch\", \"query\": \"Highest weight multiplicity one for irreducible rational representations of split reductive algebraic groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.finrank_rootSpace_eq_one\", \"multiplicity_eq_one_of_not_finiteMultiplicity\", \"LieModule.Weight.mk.sizeOf_spec\", \"LieModule.iSup_genWeightSpace_eq_top\", \"LieModule.iSup_genWeightSpace_eq_top'\", \"LieModule.iSup_genWeightSpaceOf_eq_top\", \"LieModule.iSupIndep_genWeightSpace\", \"RootPairing.isSimpleModule_weylGroupRootRep\"], \"digest\": \"a4cc8aaba2bc3c2e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite abstract-group character criteria and Lie root spaces do not assert a multiplicity-one character space in an arbitrary rational representation of a split semisimple algebraic group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"weightSpace\", \"finrank\"",
+   "results": "{\"t\": \"2026-10-24T13:58:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"weightSpace\\\", \\\"finrank\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"LieModule.zero_lt_finrank_genWeightSpace\"], \"digest\": \"adc9ec9046d5800f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite abstract-group character criteria and Lie root spaces do not assert a multiplicity-one character space in an arbitrary rational representation of a split semisimple algebraic group."
+  },
+  {
+   "tool": "grep",
+   "query": "highest.?weight|weightSpace.*(finrank|rank)|finrank.*weightSpace",
+   "results": "{\"t\": \"2026-10-24T13:58:30Z\", \"tool\": \"grep\", \"query\": \"highest.?weight|weightSpace.*(finrank|rank)|finrank.*weightSpace\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite abstract-group character criteria and Lie root spaces do not assert a multiplicity-one character space in an arbitrary rational representation of a split semisimple algebraic group."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-simple-absolute-irreducibility",
+  "date": "2026-10-24",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorem 22.52 and the definition of J immediately before Theorem 22.50, printed p.480; corrected by the appended errata, Chapter 22, entry for p.480, to characteristic zero. Highest-weight conventions: Chapter 22a and 22.53, printed p.481 (the split Lie/group highest-weight correspondence). Supporting geometric scalar-extension input for the characteristic-zero Weyl character calculation: 22.2--22.4, printed pp.463--464, especially 22.4: End(V(lambda))=k and simplicity after extension; supporting scalar-extension criterion 4.19(b), printed p.90. Supporting input: Milne 22.2 and 22.18(b): obtain a multiplicity-one torus character before the scalar-endomorphism argument of 22.4.",
+   "via": [
+    "lem-sfb-split-simple-absolute-irreducibility",
+    "lem-sfb-split-charzero-weyl-character-identity",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-simple-multiplicity-one-weight",
+  "worker": "stage1",
+  "summary": "Read Milne 22.2, 22.14--22.18, 21.30--21.34, 13.33, and 16.1--16.2,16.52. Preserved the statement. Added split Borel structure and split-solvable triangular embedding as two statement-only inputs. Reused the arbitrary-field triangular eigenline, unipotent character triviality, comodule dictionary, algebraically closed primitive cyclic bound, and weight base change. Wrote the cyclic-generation scalar-extension calculation explicitly to avoid circular use of absolute simplicity.",
+  "blueprint": "The existing from.place/via chain ends in det-thm-sf-ctf-stability-direct-images proof (3); current latest sk-thm-sf-ctf-stability-direct-images.proof.md (3) was read. This realizes the Milne 22.2/22.18 primitive-vector subargument supporting 22.4 in the existing characteristic-zero Weyl-character prerequisite chain. blueprint_refs.py ancestor reports from.node=None; that existing root and via chain are preserved, and new nodes extend it by this item. Searches of the whole blueprint for highest weight, split solvable, invariant line, Borel, primitive, triangular and split Borel found no duplicate of the two structural inputs or this item.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "step 4 needs G_F connected to apply the algebraically closed reductive nodes; this generic Stacks 04KV fact (connected k-scheme with a rational point is geometrically connected, Lean-proved) has no node in the unit sk-thm-sf-ctf-stability"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-connected-rational-point-geometrically-connected"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-2cbc4c491",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-2cbc4c491 (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 Def 16.1, Prop 16.2, Prop 16.52 (p.343), 21.29-21.34 (pp.433-435) and 22.16-22.18 (pp.466-468). The item follows the primitive-vector route of 22.18: Borel B, triangular embedding, B-eigenline, trivial character on U, cyclicity, then 22.17 applied over the algebraic closure through lem-sfb-primitive-cyclic-weight-bound, then descent by lem-sfb-relative-torus-bundle-weights. Every cited statement was read and supports its step. Step 3 (cyclicity after scalar extension via coefficient operators) and the group-like-is-monomial fact in step 5 are genuinely elementary. New node lem-sfb-split-semisimple-borel-pair (Milne 21.30/21.33/21.34, P(lambda)=U(lambda)xT) is true. It was tested on rank 0 and on SL2 over F_p, and is not a duplicate of reductive-borel-pair-structure (algebraically closed only), split-torus-solvable-cocharacter-containment (no Borel or split-solvable conclusion) or split-positive-root-borel (needs pinned data). New node lem-sfb-split-solvable-triangular-embedding (16.52 forward direction plus 16.2(a)=>(c)) is true. It was tested on the trivial group, Ga and Gm, and is not a duplicate of the Lie-Kolchin node, which is algebraically closed only. Both new nodes are statement-only and self-contained, with all three search kinds recorded and blueprint fields set. FIX for E1: step 4 called G_F semisimple 'by hypothesis', but the semisimple=>reductive clause and the cyclic-bound node both need G_F smooth and connected, and the item assumes only that G is connected over k. Added lem-weil-pbc-smooth-ring-map-base-change-composition (Mathlib leaf) for smoothness and lem-sbc-connected-rational-point-geometrically-connected (Stacks 04KV, single step using a proved project declaration) for connectedness via the identity section. The latter is declared in split_report.tool_uses: it is a generic off-unit tool. proof_deps updated to the union of the steps. Batch-5: the flagged closures reach only lem-trf-flat-tensor-preserves-injection, lem-trf-fppf-covering-base-change and lem-trf-smooth-composition. These are generic algebra facts, not the trace formula, Poincare duality or steps of their proofs, so they are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitSimpleMultiplicityOneWeight",
+  "declaration": "AlgebraicGeometry.RationalHighestWeight.split_simple_multiplicity_one_weight",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitSimpleMultiplicityOneWeight.lean",
+  "statement": "theorem split_simple_multiplicity_one_weight {k : Type u} [Field k] (G T : Grp (Over (Spec (.of k)))) [Smooth G.X.hom] [ConnectedSpace G.X.left] [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] (hG : IsSemisimpleGroupScheme ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj G).X) (iT : T ⟶ G) (hclosed : IsClosedSubgroupScheme iT.hom.hom) (hmax : ReductiveTorusCentralizer.IsMaximalTorus ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).map iT)) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus k r)) [IsAffine T.X.left] {V : Type v} [AddCommGroup V] [Module k V] [FiniteDimensional k V] (c : V →ₗ[k] V ⊗[k] coordinateAlgebra G) (hcoassoc : HopfAction.Coassociative k (coordinateAlgebra G) V c) (hcounit : HopfAction.Counital k (coordinateAlgebra G) V c) (hsimple : IsSimple c) : ∃ lam : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative k), Module.finrank k (LinearMap.eqLocus ((coordinateMap iT).toLinearMap.lTensor V ∘ₗ c) ((TensorProduct.mk k V (coordinateAlgebra T)).flip (characterElement lam))) = 1",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed arbitrary-field rational coaction and simplicity definitions. The character space is the equalizer of restricted coaction and tensoring with the pulled-back Laurent character. Geometric semisimplicity and maximality are tested over AlgebraicClosure k; splitness is an isomorphism over k. Affineness of T is automatic from its closed immersion into affine G and is exposed only for the existing coordinateMap interface. No statement correction or new definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b5618f730",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Clause-by-clause match: k field; G smooth/connected/affine/LFT+QC; IsSemisimpleGroupScheme and IsMaximalTorus over AlgebraicClosure k via MultiplicativeType.baseChange (its extra geometric clauses follow from the k-hypotheses); hclosed + hsplit (iso with splitTorus k r, rank 0 included); IsAffine T is automatic from the closed immersion into affine G. Coaction c with Coassociative/Counital on coordinateAlgebra G; IsSimple includes V≠0. Weight space = eqLocus((1⊗i_T^*)c, v↦v⊗characterElement lam), the invariants pattern with the character function, equal to the all-algebras eigenspace; conclusion exists lam over k with finrank 1. Only the item node differs from side-live (stmt_deps adds four landed def nodes, plus lean); statement, proof and proof_deps unchanged; lean.statement verbatim in file. No new definitions or duplicates, docstrings carry source and blueprint, proof sorry only, report sections present. Not recompiled (no file changed). No findings."
+ }
+}

@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-very-ample-finite-type-realization",
+ "kind": "statement",
+ "title": "Finite-type realization of a relatively very ample invertible module over a qcqs base",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] of finite type [def-weil-finite-type-morphism], with $S$ quasi-compact and quasi-separated [def-weil-pbc-quasi-compact-scheme, def-weil-pbc-scheme-conventions]. Let $N$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module] which is relatively very ample over $S$ [def-trf-relatively-very-ample]. Then there exist a quasi-coherent $\\mathcal O_S$-module $E$ of finite type [pqf-def-coherent] and an immersion $r:X\\to\\mathbf P_S(E)$ [def-weil-closed-immersion] over $S$ such that $r^*\\mathcal O_{\\mathbf P_S(E)}(1)\\cong N$. Here $\\pi_E:\\mathbf P_S(E)\\to S$ is the projective-bundle structure morphism [def-trf-projective-bundle-morphism], being over $S$ means $\\pi_E\\circ r=f$, the degree-one twist is the canonical invertible module with its tautological quotient [lem-trf-projective-bundle-quotient-geometry], and $r^*$ is tensor pullback [def-pc-module-pullback]. No properness hypothesis on $f$ and no local-freeness hypothesis on $E$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 07RM (lemma-quasi-projective-open-projective), proof after replacing the relatively ample module by a relatively very ample power: finite-type approximation of f_*N, simultaneous lifting of the finite affine-local sets of immersion sections, and the resulting immersion r_{N,psi_i}. The construction pulls the canonical degree-one twist back to N."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-sc-invertible-module",
+  "def-trf-relatively-very-ample",
+  "pqf-def-coherent",
+  "def-weil-closed-immersion",
+  "def-trf-projective-bundle-morphism",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Since $f$ is of finite type it is quasi-compact by [def-weil-finite-type-morphism]. Apply the final, independent clause of [lem-trf-relative-ample-very-ample] to the quasi-compact morphism $f$ and the relatively very ample $N$: it gives quasi-separatedness of $f$. Invertibility makes $N$ quasi-coherent by [def-sc-invertible-module]. Therefore [pqf-lem-pushforward-qcoh] gives a quasi-coherent module $F=f_*N$ on $S$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-trf-relative-ample-very-ample",
+    "def-sc-invertible-module",
+    "pqf-lem-pushforward-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "07RM, lemma-quasi-projective-open-projective, paragraph defining F; 01VR, lemma-relatively-very-ample, final evaluation clause; Schemes 01LC, lemma-push-forward-quasi-coherent"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-module-directed-colimit-finite-presentation] to the quasi-coherent $F$ on the assumed qcqs scheme $S$. Obtain a nonempty directed set $I$, finitely presented modules $E_i$, maps $c_i:E_i\\to F$, and $F=\\varinjlim_i E_i$. Each $E_i$ is quasi-coherent by clause (0) of [lem-weil-pbc-quasi-coherent-finite-type-affine]. It is of finite type: the local presentation $\\mathcal O^{m}\\to\\mathcal O^{n}\\to E_i\\to0$ includes a surjection $\\mathcal O^n\\twoheadrightarrow E_i$, precisely the finite-type condition in [pqf-def-coherent].",
+   "uses": [
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "01PK, lemma-directed-colimit-finite-presentation; Modules 01BO, lemma-finite-presentation-quasi-coherent; the approximation paragraph of 07RM"
+   }
+  },
+  {
+   "text": "Choose a finite affine open covering $S=\\bigcup_{j=1}^{m}V_j$ by [lem-weil-pbc-qcqs-finite-affine-open-cover], and put $X_j=f^{-1}V_j$ and $N_j=N|_{X_j}$. The restriction $f_j:X_j\\to V_j$ is of finite type directly from the affine-local definition in [def-weil-finite-type-morphism]. Restrict a witness for [def-trf-relatively-very-ample] to $V_j$: its immersion remains an immersion by [lem-weil-pbc-immersion-base-change-lft], its projective bundle and twist restrict as in [lem-trf-projective-bundle-quotient-geometry], and tensor pullback composes as in [def-pc-module-pullback]. Thus $N_j$ is relatively very ample over $V_j$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "def-weil-finite-type-morphism",
+    "def-trf-relatively-very-ample",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "07RM, choice of a finite affine cover; restriction of the defining witness of 01VM"
+   }
+  },
+  {
+   "text": "For each $j$ apply [lem-sfb-very-ample-affine-finite-sections] to $f_j$ and $N_j$. It gives finitely many generating sections $s_{j,0},\\ldots,s_{j,n_j}$ and their quotient-classified immersion $a_j:X_j\\to\\mathbf P^{n_j}_{V_j}$. Regard these sections as elements of $F(V_j)=\\Gamma(X_j,N_j)$, the definition of pushforward in [lem-pc-module-pullback-adjunction].",
+   "uses": [
+    "lem-sfb-very-ample-affine-finite-sections",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "07RM, displayed sections s_{j,0},...,s_{j,n_j}, supplied by 02NP"
+   }
+  },
+  {
+   "text": "For every pair $(j,t)$, [lem-weil-pbc-quasi-coherent-module-colimit-affine-sections] lifts $s_{j,t}\\in F(V_j)$ to some $e'_{j,t}\\in E_{i(j,t)}(V_j)$, since $V_j$ is affine and all stages are quasi-coherent. There are only finitely many such pairs. Starting with any index of the nonempty $I$, successively take upper bounds with the finitely many $i(j,t)$; obtain one index $i$ above them all. Transport $e'_{j,t}$ along the transition maps to $e_{j,t}\\in E_i(V_j)$. The cocone identity gives $c_i(e_{j,t})=s_{j,t}$ for every $0\\le t\\le n_j$. Write $E=E_i$ and $c=c_i$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "07RM, simultaneous lifting of all the finite section families to a common stage"
+   }
+  },
+  {
+   "text": "Let $\\psi:f^*E\\to N$ be the adjoint of $c:E\\to f_*N$ under [lem-pc-module-pullback-adjunction]. In the tensor description its local rule is $a\\otimes e\\mapsto a\\,c(e)$, so on $X_j$ it sends $1\\otimes e_{j,t}$ to $s_{j,t}$. These sections generate $N_j$; hence at every stalk of $X_j$ the image of $\\psi$ is all of the stalk of $N$. The $X_j$ cover $X$, so $\\psi$ is surjective. By [lem-trf-projective-bundle-quotient-geometry] this quotient defines an $S$-morphism $r:X\\to P=\\mathbf P_S(E)$ with $\\pi_E r=f$ and a quotient-compatible isomorphism $r^*\\mathcal O_P(1)\\cong N$.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "07RM, surjectivity of psi_i and construction of r_{L,psi_i}; Constructions 01OA quotient-functor description"
+   }
+  },
+  {
+   "text": "For each $j$, put $P_j=P\\times_SV_j=\\mathbf P_{V_j}(E|_{V_j})$, with projection $p_j$ and tautological quotient $u_j:p_j^*(E|_{V_j})\\twoheadrightarrow\\mathcal O_{P_j}(1)$ from [lem-trf-projective-bundle-quotient-geometry]. The sections $e_{j,t}$ define $b_j:\\mathcal O_{V_j}^{n_j+1}\\to E|_{V_j}$. Let $W_j\\subseteq P_j$ be the locus where $u_jp_j^*b_j$ is surjective. This is open: on a trivialization of the invertible target, write the images of the finitely many basis vectors as functions $h_t$; the locus is $\\bigcup_tD(h_t)$. Changing the trivialization multiplies all $h_t$ by a unit, so these opens agree. On $W_j$ the quotient bijection in the same cited node gives $\\beta_j:W_j\\to\\mathbf P^{n_j}_{V_j}$. This constructs the intermediate projection only on its actual domain of definition.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "07RM, the local factorization through P(E_i)|V_j, with the implicit open domain of its rational projection written out"
+   }
+  },
+  {
+   "text": "The quotient-compatible isomorphism for $r$ and the equalities $c(e_{j,t})=s_{j,t}$ show that the pullback of $u_jp_j^*b_j$ along $r|_{X_j}$ is the surjection with coordinates $s_{j,t}$. Consequently $r(X_j)\\subseteq W_j$. Moreover $r^{-1}(W_j)=X_j$, since $W_j$ lies over $V_j$. Naturality and injectivity of the quotient classification in [lem-trf-projective-bundle-quotient-geometry] identify $\\beta_j\\circ(r|_{X_j})$ with $a_j$: both classify exactly that coordinate quotient onto $N_j$. Since $a_j$ is an immersion, [lem-zl-immersion-cancellation] makes $X_j\\to W_j$ an immersion.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-zl-immersion-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "07RM, local factorization and 07RK, lemma-immersion-permanence (1)"
+   }
+  },
+  {
+   "text": "The $W_j$ are open in $P$, they cover $r(X)$, and $r^{-1}(W_j)\\to W_j$ is an immersion for each $j$. Thus [lem-zl-immersion-near-image-locality] shows that $r:X\\to P$ is an immersion. Together with the finite-type quasi-coherence of $E$ from step 2 and $r^*\\mathcal O_P(1)\\cong N$ from step 6 this proves every assertion. Empty covers cause no exception: if $S$ is empty then $X$ is empty, $I$ is still nonempty, and the image-cover criterion includes the empty family.",
+   "uses": [
+    "lem-zl-immersion-near-image-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "07RM, conclusion that r_{L,psi_i} is an immersion; 0FCZ, lemma-check-immersion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-trf-relatively-very-ample",
+  "def-weil-finite-type-morphism",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sfb-very-ample-affine-finite-sections",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-trf-relative-ample-very-ample",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-module-directed-colimit-finite-presentation",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
+  "lem-zl-immersion-cancellation",
+  "lem-zl-immersion-near-image-locality",
+  "pqf-def-coherent",
+  "pqf-lem-pushforward-qcoh"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 07RM, lemma-quasi-projective-open-projective, finite-type approximation and immersion construction, stopping before compactification; 02NP and the quotient-functor description of Constructions 01OA."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism to a quasi compact quasi separated scheme, a relatively very ample invertible sheaf is realized by an immersion into the projective bundle of a finite type quasi coherent module",
+   "results": "{\"t\": \"2026-10-22T05:06:00Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type morphism to a quasi compact quasi separated scheme, a relatively very ample invertible sheaf is realized by an immersion into the projective bundle of a finite type quasi coherent module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"9be69243c2f4eca6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative very ampleness and its finite-type realization are absent; returned ordinary graded-ring Proj morphisms, quasi-affine immersions, and finite generation of invertible modules do not supply this relative embedding theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"VeryAmple\"",
+   "results": "{\"t\": \"2026-10-22T05:06:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"VeryAmple\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative very ampleness and its finite-type realization are absent; returned ordinary graded-ring Proj morphisms, quasi-affine immersions, and finite generation of invertible modules do not supply this relative embedding theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "very.?ample|relative.?ample|quasi.?projective",
+   "results": "{\"t\": \"2026-10-22T05:06:00Z\", \"tool\": \"grep\", \"query\": \"very.?ample|relative.?ample|quasi.?projective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative very ampleness and its finite-type realization are absent; returned ordinary graded-ring Proj morphisms, quasi-affine immersions, and finite generation of invertible modules do not supply this relative embedding theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relatively very ample line bundle on a finite type scheme over a qcqs base admits an immersion into the projectivization of a finite type quasi coherent module",
+   "results": "{\"t\": \"2026-10-22T05:06:00Z\", \"tool\": \"leansearch\", \"query\": \"A relatively very ample line bundle on a finite type scheme over a qcqs base admits an immersion into the projectivization of a finite type quasi coherent module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.IsImmersion.toIsPreimmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine\", \"AlgebraicGeometry.IsImmersion.mk\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\"], \"digest\": \"176cccf4055216dc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative very ampleness and its finite-type realization are absent; returned ordinary graded-ring Proj morphisms, quasi-affine immersions, and finite generation of invertible modules do not supply this relative embedding theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A very ample invertible module can be embedded using finitely many relative sections over a quasi compact quasi separated base without assuming the pushforward coherent",
+   "results": "{\"t\": \"2026-10-22T05:06:09Z\", \"tool\": \"leansearch\", \"query\": \"A very ample invertible module can be embedded using finitely many relative sections over a quasi compact quasi separated base without assuming the pushforward coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Invertible.instFinite\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"Module.Invertible.instProjective\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiSeparatedMorphismRestrict\"], \"digest\": \"c56c409d308f97ea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative very ampleness and its finite-type realization are absent; returned ordinary graded-ring Proj morphisms, quasi-affine immersions, and finite generation of invertible modules do not supply this relative embedding theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative very ample line bundle for a finite type scheme over a qcqs scheme admits an embedding into Proj of the symmetric algebra of a finitely generated quasi coherent module",
+   "results": "{\"t\": \"2026-10-22T05:06:34Z\", \"tool\": \"leanfinder\", \"query\": \"A relative very ample line bundle for a finite type scheme over a qcqs scheme admits an embedding into Proj of the symmetric algebra of a finitely generated quasi coherent module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\"], \"digest\": \"5e3b886c67f39140\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative very ampleness and its finite-type realization are absent; returned ordinary graded-ring Proj morphisms, quasi-affine immersions, and finite generation of invertible modules do not supply this relative embedding theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "very.?ample|quasi.?projective",
+   "results": "{\"t\": \"2026-10-22T05:23:56Z\", \"tool\": \"grep\", \"query\": \"very.?ample|quasi.?projective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, affine finite-type criteria and immersion criteria do not supply finite sections realizing an arbitrary relatively very ample invertible module"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relatively very ample line bundle admits a finite type quasi coherent module whose projective bundle realizes the same line bundle",
+   "results": "{\"t\": \"2026-10-22T05:23:56Z\", \"tool\": \"leansearch\", \"query\": \"A relatively very ample line bundle admits a finite type quasi coherent module whose projective bundle realizes the same line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFiniteType.mk\", \"Projectivization.finite_iff_of_finite\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"Projectivization\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\"], \"digest\": \"08893c1ee2ec4a05\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, affine finite-type criteria and immersion criteria do not supply finite sections realizing an arbitrary relatively very ample invertible module"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"VeryAmple\"",
+   "results": "{\"t\": \"2026-10-22T05:23:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"VeryAmple\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, affine finite-type criteria and immersion criteria do not supply finite sections realizing an arbitrary relatively very ample invertible module"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relatively very ample invertible sheaf on a finite type scheme over a quasi compact quasi separated base is realized by an immersion into the projective bundle of a finite type quasi coherent module",
+   "results": "{\"t\": \"2026-10-22T05:24:02Z\", \"tool\": \"leanfinder\", \"query\": \"A relatively very ample invertible sheaf on a finite type scheme over a quasi compact quasi separated base is realized by an immersion into the projective bundle of a finite type quasi coherent module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\"], \"digest\": \"805082ad15fa3ead\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, affine finite-type criteria and immersion criteria do not supply finite sections realizing an arbitrary relatively very ample invertible module"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-relative-ample-projective-bundle",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; composition of the normalized-blowup and strictification towers in steps 8, 13 and 15. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Stacks 0C4P, final sentence: proper and quasi-projective implies projective by 0BCL(1); concludes projectivity of composed modification towers. Technical finite-type approximation in Stacks 07RM, proof after replacing the ample sheaf by a relatively very ample power: choose a finite-type quasi-coherent module realizing the same very ample sheaf by an immersion.",
+   "via": [
+    "lem-sfb-proper-relative-ample-projective-bundle",
+    "lem-sfb-projective-bundle-composition",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-very-ample-finite-type-realization",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Followed the finite-type approximation argument of 07RM in nine steps, reusing the existing pushforward, directed-colimit, affine-section and immersion nodes. One new unsplit 02NP node supplies the affine immersion sections for the same line bundle, not a positive power. Made the local projection domain explicit and used quotient naturality before immersion cancellation. No properness, Noetherianity, coherent pushforward or local freeness is assumed.",
+  "blueprint": "The inherited route-pivot place in det-thm-sf-ctf-stability-direct-images (3), via the proper-relative-ample/projective-bundle composition branch, is realized by 07RM: approximation (steps 1-2), affine-local immersion sections (3-4), common-stage lifting (5), and quotient immersion with canonical twist (6-9). blueprint_refs.py ancestor reports None for this preexisting route-pivot ancestry; this split preserves it.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-relative-ample-very-ample",
+    "why": "Its independent final clause gives quasi-separatedness for the already very ample N; no ample-power replacement is used. The six-functor unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "pqf-lem-pushforward-qcoh",
+    "why": "Generic qcqs pushforward of quasi-coherent modules, needed for F=f_*N. The six-functor unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "why": "Generic finite-presentation approximation on the qcqs base, exactly the approximation route of 07RM. The six-functor unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Clause (0) supplies quasi-coherence of the finitely presented stages. The six-functor unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-immersion-base-change-lft",
+    "why": "Generic base change of an immersion, used to restrict the original witness to an affine base open. The six-functor unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Generic projective-bundle quotient classification and open restriction; identifies the canonical twist and all constructed maps. The six-functor unit has no replacement for this scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-relative-ample-very-ample",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-module-directed-colimit-finite-presentation",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-trf-projective-bundle-quotient-geometry"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-ND-e78d097d5",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-e78d097d5 (reviewer sub-agent of L); spot-checked: I read Stacks 07RM (morphisms.tex l.10718ff.) and 02NP (l.9278-9370), with both tags checked against tags/tags. The item's statement and stmt_deps are unchanged from side-live, where the item is unsplit with no repair note. Neither the item nor anything in its created chain is on route-pivot-dropped. The nine steps carry out the 07RM construction once N is already very ample. The step-by-step checks are in review.md. Main points: (1) qs comes from the 01VR clause of lem-trf-relative-ample-very-ample, then 01LC applies. (2) 01PK gives the approximation, and its stages are quasi-coherent and finite type. (3) Very ampleness restricts to each V_j through immersion base change and the open-restriction clause of the quotient node. (4)-(5) Sections come from the new node and lift to one stage via the affine-sections colimit lemma; all t=0..n_j are lifted, while the Stacks source lifts only t=1..n_j. (6) psi is the adjoint of c and is surjective, so it gives r over S with r^*O(1)=N. (7) W_j is written out explicitly as the domain of the projection to P^{n_j}. (8) r^{-1}W_j=X_j and beta_j r=a_j by injectivity of the classification, then 07RK(1). (9) 0FCZ makes r an immersion. The new node lem-sfb-very-ample-affine-finite-sections is true: 02NP's proof gives s_t=alpha^*y_t, which generate L on U(psi), and i=r_psi∘alpha is the morphism they classify, with theta compatible. I tested it on Y empty, on A^1 inside P^1 (an immersion that is not closed) and on S=Y. It is self-contained and statement-only, with 5 searches of 3 kinds. A DAG search turned up no duplicate (ample-very-ample-immersion-affine-base gives L^d, and the trf 01VU node gives the complete evaluation map). It is strictly smaller than the item, so it is not a relabelling. Batch 5: def-trf-relatively-very-ample (01VM) and lem-trf-projective-bundle-quotient-geometry (01OA) are generic and already stmt_deps of the item on base. lem-trf-relative-ample-very-ample (01VU/01VR) is generic and already cited by the reviewed parent lem-sfb-proper-relative-ample-projective-bundle. All three closures contain no nt-assume, trace-transport, trace or Poincaré nodes, only Proj and ampleness foundations, so all three are accepted. The 6 declared tool_uses are generic scheme theory and are accepted. No SGA. No fixes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.VeryAmpleFiniteTypeRealization",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.veryAmple_finiteType_realization",
+  "file": "lean/Sheaf/AlgebraicGeometry/VeryAmpleFiniteTypeRealization.lean",
+  "statement": "theorem veryAmple_finiteType_realization {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] [CompactSpace S] [QuasiSeparatedSpace S] (N : X.Modules) [N.IsInvertible] (hN : IsRelativelyVeryAmple f N) : ∃ (E : S.Modules) (hE : E.IsQuasicoherent), E.IsFiniteType ∧ ∃ (D : @ProjectiveBundleQuotientGeometry.TautologicalQuotient S E hE) (r : X ⟶ (@SymmetricAlgebraSheaf.gradedAlgebraData S E hE).relProj), IsImmersion r ∧ r ≫ (@SymmetricAlgebraSheaf.gradedAlgebraData S E hE).relProjHom = f ∧ Nonempty ((tensorPullback r).obj D.line ≅ N)",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-18d45056a",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Lean = IsRelativelyVeryAmple f N body plus E.IsFiniteType, matching node and Stacks 07RM clause by clause (LOFT+QC f, CompactSpace+QuasiSeparatedSpace S, invertible N, normalized TautologicalQuotient twist, IsImmersion r over S, Nonempty tensor-pullback iso); IsQuasiCoherentFiniteType unfolded only to bind hE, same notion; edge cases (empty S/X, E=0, nonclosed immersion, single universe u) fine; node differs from live only in lean, statement verbatim, sorry-only, docstrings with source/blueprint/9 steps, imports = stmt_dep modules + recorded proof_dep modules, route-pivot shared-module exemption (dropped.txt:1995) covers ProjectiveBundleQuotientGeometry; worker compile clean, no fix compiled. Notes: released stage-1 re-split note keeps the statement, so the proof docstring must be updated later; ProjectiveBundleMorphism public import advisory."
+ }
+}

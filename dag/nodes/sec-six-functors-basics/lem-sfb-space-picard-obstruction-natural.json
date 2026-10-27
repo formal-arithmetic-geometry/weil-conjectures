@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-space-picard-obstruction-natural",
+ "kind": "statement",
+ "title": "Functorial Picard obstruction for square-zero thickenings of algebraic spaces",
+ "statement": "Let $X_0\\hookrightarrow X$ be a closed immersion of algebraic spaces over a scheme, defined by a quasi-coherent ideal $J$ with $J^2=0$ [def-pc-scheme, def-trf-algebraic-space]. Regard $J$ as an $\\mathcal O_{X_0}$-module. Here quasi-coherent means that restriction to every affine etale chart is the sheaf associated with a module. Write $\\operatorname{Pic}(Y)$ for the abelian group of isomorphism classes of line modules on $Y$ under tensor product [def-sc-invertible-module]. Write $H^q(Y,F)$ for the right derived global sections of the additive sheaf underlying the $\\mathcal O_Y$-module $F$ on the small etale site. There is a canonical group homomorphism $\\delta_X:\\operatorname{Pic}(X_0)\\to H^2(X_0,J)$ with $\\ker\\delta_X=\\operatorname{im}(\\operatorname{Pic}(X)\\to\\operatorname{Pic}(X_0))$. For any commutative square of square-zero closed immersions $Y_0\\hookrightarrow Y$ and $X_0\\hookrightarrow X$, with vertical maps $h_0:Y_0\\to X_0$ and $h:Y\\to X$, let $K$ be the ideal on $Y_0$. The structure maps give a coefficient map $h_0^*J\\to K$ and hence $h_0^*:H^2(X_0,J)\\to H^2(Y_0,K)$. For every line module $L$ on $X_0$, one has $\\delta_Y(h_0^*L)=h_0^*\\delta_X(L)$. No cartesianness or flatness of this square is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0DNM, lemma-picard-group-first-order-thickening, exact sequence and proof via a -> 1+a; pullback naturality is the naturality of that units exact sequence and its connecting map."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sc-invertible-module",
+  "def-sfb-space-picard-abelian-pullback",
+  "def-sfb-space-picard-obstruction-data",
+  "def-sfb-space-square-zero-extension-data",
+  "def-sfb-space-square-zero-stalk-data",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-tensor-pullback",
+  "def-sfb-ringed-site-picard-data",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Identify $X_{\\mathrm{et}}$ with $X_{0,\\mathrm{et}}$ using the first-order ringed description. Use the enlarged etale site, whose final object is $X_0$, when evaluating global sections; restriction to scheme charts is a ringed-topos equivalence. Such an equivalence preserves injectives and sections, so it identifies the derived global sections. On this common topos put $R=\\mathcal O_X$ and $A=\\mathcal O_{X_0}$. The ring extension $0\\to J\\to R\\to A\\to0$ gives the short exact sequence of abelian sheaves $S_X:0\\to J\\xrightarrow{j\\mapsto1+j}R^\\times\\to A^\\times\\to0$. Indeed $(1+j)(1+j')=1+j+j'$ and $(1+j)^{-1}=1-j$. Its kernel consists exactly of these elements. A local unit $a$ in $A$ and its inverse lift locally to $r,s$ in $R$; if $rs=1+t$ with $t\\in J$, then $r$ is a unit with inverse $s(1-t)$. Thus surjectivity is sheaf-local, not an assertion about surjectivity on global units.",
+   "uses": [
+    "lem-sfb-space-first-order-ringed-description",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DNM, lemma-picard-group-first-order-thickening, units-sequence argument; Tag 05ZS, lemma-thickening-equivalence"
+   }
+  },
+  {
+   "text": "Abelian sheaves on this small site have enough injectives. Apply the horseshoe delta-functor theorem to the additive left exact functor of global sections and $S_X$. It gives an exact segment $H^1(R^\\times)\\to H^1(A^\\times)\\xrightarrow{\\partial_X}H^2(J)$. Let $c_R,c_A$ be the canonical Picard--$H^1$ isomorphisms and define $\\delta_X=\\partial_Xc_A$. Naturality of those isomorphisms for the quotient ringed-topos morphism identifies $H^1(R^\\times)\\to H^1(A^\\times)$ with restriction $\\operatorname{Pic}(X)\\to\\operatorname{Pic}(X_0)$. Therefore $\\delta_X$ is a group homomorphism and its kernel is exactly the stated image. Independence of horseshoe resolutions makes the boundary canonical; the site equivalence introduces no choice in the transported map. The same construction defines $\\delta_Y$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-horseshoe-delta-functor",
+    "lem-sfb-ringed-site-picard-h1-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 01FT, section-cohomology-sheaves; Tag 040E, lemma-h1-invertible; Tag 0DNM, lemma-picard-group-first-order-thickening"
+   }
+  },
+  {
+   "text": "For the square in the statement, the canonical etale ringed-topos morphisms and their composition comparisons identify the map induced by $h$ on the common topoi with the one induced by $h_0$. Write $q:h_0^{-1}R\\to\\mathcal O_Y$ for its ring map and $\\bar q:h_0^{-1}A\\to\\mathcal O_{Y_0}$ for its quotient. Since the square commutes, $q$ sends $h_0^{-1}J$ into $K$; denote this additive map by $\\alpha$. Its $h_0^{-1}A$-linearity follows because two lifts of a scalar differ by an element mapped into $K$, and $K^2=0$. Thus its extension of scalars is precisely $h_0^*J\\to K$, $a\\otimes j\\mapsto\\widetilde a\\,q(j)$. The equality $q(1+j)=1+\\alpha(j)$ and compatibility with quotient maps give a morphism of short exact sequences $h_0^{-1}S_X\\to S_Y$ with end maps $\\alpha$ and $\\rho:h_0^{-1}A^\\times\\to\\mathcal O_{Y_0}^\\times$. This is a map from inverse images of additive sheaves; no tensor-exactness assertion is needed.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DNM, units-sequence construction, applied functorially to the given square"
+   }
+  },
+  {
+   "text": "The site-cohomology pullback theorem gives $h_0^*\\partial_X=\\partial_{h_0^{-1}S_X}h_0^*$. Here $V=X_0$ is the final object of the enlarged site of $X_0$ and $u(V)=Y_0\\times_{X_0}X_0=Y_0$ is final in that of $Y_0$, so global sections are evaluation at these objects and $\\Gamma(X_0,h_{0*}G)=G(Y_0)$; the defining formula $\\Gamma(V,\\mathcal I^\\bullet)\\xrightarrow{\\eta}\\Gamma(u(V),h_0^{-1}\\mathcal I^\\bullet)\\xrightarrow{\\beta}\\Gamma(u(V),\\mathcal J^\\bullet)$ of this $h_0^*$ is therefore literally the defining formula of the map $h_0^*$ in the Picard--$H^1$ comparison, so the same $h_0^*$ appears in both. Apply naturality of the horseshoe connecting maps on $Y_0$ to the morphism of sequences from step 3: $H^2(\\alpha)\\partial_{h_0^{-1}S_X}=\\partial_YH^1(\\rho)$. Combining these equalities gives $H^2(\\alpha)h_0^*\\partial_X=\\partial_YH^1(\\rho)h_0^*$. The new ringed-site Picard--$H^1$ comparison gives $H^1(\\rho)h_0^*c_A([L])=c_{\\mathcal O_{Y_0}}([h_0^*L])$. Substitution yields $h_0^*\\delta_X([L])=\\delta_Y([h_0^*L])$, where the map on $H^2$ is exactly pullback on abelian sheaves followed by $H^2(\\alpha)$, hence is the coefficient map specified in the statement. All pullbacks used on short exact sequences were inverse images of abelian sheaves, which are exact for every morphism of sites; no cartesianness or flatness was used.",
+   "uses": [
+    "lem-weil-pbc-site-cohomology-pullback",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-horseshoe-delta-functor",
+    "lem-sfb-ringed-site-picard-h1-natural",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J6, remark-before-Leray (cohomology pullback); Tag 01FT, section-cohomology-sheaves (delta-functor naturality); Tag 040E, lemma-h1-invertible"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-first-order-ringed-description",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-sfb-ringed-site-picard-h1-natural",
+  "lem-weil-pbc-site-cohomology-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0DNM, lemma-picard-group-first-order-thickening; naturality by its units sequence and sites-cohomology.tex Tags 01FT, 040E, 08J6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A square zero thickening of algebraic spaces has a Picard obstruction homomorphism to second cohomology of the ideal natural for pullback",
+   "results": "[leanfinder] OK 8 hit(s); hits: Algebra.Extension.H1Cotangent.map, Algebra.H1Cotangent.map, Algebra.Extension.homInfinitesimal, Algebra.Extension.H1Cotangent, Algebra.H1Cotangent, Algebra.Generators.H1Cotangent.δ_map, Algebra.H1Cotangent.δ, Algebra.Extension.h1Cotangentι",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, ring cotangent complexes, sheaf pullback functors and group cohomology do not state this theorem about invertible sheaves or coherent cohomology of abelian algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"Exact\"",
+   "results": "[loogle] OK 3 hit(s); hits: Submodule.mulExact_unitsToPic_mapAlgebra, Submodule.mulExact_unitsMap_spanSingleton_unitsToPic, Path.Homotopic.Quotient.exact",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, ring cotangent complexes, sheaf pullback functors and group cohomology do not state this theorem about invertible sheaves or coherent cohomology of abelian algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|Pic\\.map|h1.*invertible|obstruction",
+   "results": "[grep] OK 3 hit(s); hits: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean:24, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean:50, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean:361",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, ring cotangent complexes, sheaf pullback functors and group cohomology do not state this theorem about invertible sheaves or coherent cohomology of abelian algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extending line bundles over a square zero thickening is controlled by the natural connecting homomorphism H1 units to H2 ideal",
+   "results": "[leansearch] OK 8 hit(s); hits: groupCohomology.δ₁_apply, groupCohomology.δ, Algebra.Generators.H1Cotangent.δ_map, Algebra.Generators.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.Generators.H1Cotangent.δ_eq_δ, Algebra.H1Cotangent.δ, groupHomology.isIso_δ_of_isZero",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, ring cotangent complexes, sheaf pullback functors and group cohomology do not state this theorem about invertible sheaves or coherent cohomology of abelian algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality under pullback of the obstruction to lifting invertible sheaves on ringed sites across square zero ideals",
+   "results": "[leanfinder] OK 8 hit(s); hits: SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.Presentation.map_π_eq, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, ring cotangent complexes, sheaf pullback functors and group cohomology do not state this theorem about invertible sheaves or coherent cohomology of abelian algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The connecting map from Picard group to second cohomology of a square zero ideal commutes with arbitrary morphisms of algebraic space thickenings",
+   "results": "8 hits; Algebra.Extension.H1Cotangent.map_comp, Algebra.Generators.H1Cotangent.δ_map, Algebra.H1Cotangent.map, Algebra.Extension.H1Cotangent.map, Algebra.Generators.H1Cotangent.δ_comp_equiv, Algebra.Generators.H1Cotangent.δ_eq, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp, Algebra.Extension.H1Cotangent.map_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, nonabelian Cech H1, unit sections and free-module pullback do not identify line classes with derived sheaf H1 naturally on arbitrary ringed sites"
+  },
+  {
+   "tool": "grep",
+   "query": "square.?zero.*Pic|Pic.*square.?zero|obstruction",
+   "results": "0 hits;  (directory Mathlib/AlgebraicGeometry/)",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, nonabelian Cech H1, unit sections and free-module pullback do not identify line classes with derived sheaf H1 naturally on arbitrary ringed sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lifting line bundles across nilpotent immersions has functorial obstruction in H2 of the ideal",
+   "results": "8 hits; Algebra.FormallySmooth.exists_lift, AlgebraicGeometry.IsClosedImmersion.lift_fac, AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc, AlgebraicGeometry.IsClosedImmersion.lift, Algebra.FormallySmooth.lift, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, AlgebraicGeometry.IsClosedImmersion.lift.congr_simp",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, nonabelian Cech H1, unit sections and free-module pullback do not identify line classes with derived sheaf H1 naturally on arbitrary ringed sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"Exact\"",
+   "results": "3 hits; Submodule.mulExact_unitsToPic_mapAlgebra, Submodule.mulExact_unitsMap_spanSingleton_unitsToPic, Path.Homotopic.Quotient.exact",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, nonabelian Cech H1, unit sections and free-module pullback do not identify line classes with derived sheaf H1 naturally on arbitrary ringed sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the obstruction to extending invertible modules across square zero ideals via the units exact sequence",
+   "results": "8 hits; Algebra.Extension.H1Cotangent.map_comp, Algebra.Extension.H1Cotangent.map, Submodule.mulExact_unitsToPic_mapAlgebra, ExteriorAlgebra.toTrivSqZeroExt_comp_map, Algebra.Generators.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_eq, Algebra.Generators.H1Cotangent.δ_comp_equiv, KaehlerDifferential.endEquivAuxEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Picard groups, nonabelian Cech H1, unit sections and free-module pullback do not identify line classes with derived sheaf H1 naturally on arbitrary ringed sites"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-picard-infinitesimal-lift",
+  "date": "2026-10-23",
+  "group": "Q140"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Functorial Picard obstruction for square-zero thickenings of algebraic spaces.",
+   "via": [
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-picard-obstruction-natural",
+  "worker": "stage1",
+  "summary": "Constructed the obstruction from the units short exact sequence and proved arbitrary-square naturality by writing the coefficient diagram. Reused the space thickening and enlarged-site nodes and the general horseshoe and site-pullback nodes. Added only the missing general ringed-site Picard--H1 comparison; existing curve and scheme comparisons do not cover algebraic spaces. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Functorial Picard obstruction for square-zero thickenings of algebraic spaces.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Presentation of canonical etale morphisms by enlarged sites with final objects; needed for arbitrary algebraic spaces."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "Enough injectives for abelian sheaves on any small site."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Left exact global sections and derived object cohomology."
+   },
+   {
+    "node": "lem-weil-pbc-horseshoe-delta-functor",
+    "why": "General exact sequence and naturality for horseshoe-derived connecting maps."
+   },
+   {
+    "node": "lem-weil-pbc-site-cohomology-pullback",
+    "why": "Canonical pullback on site cohomology commutes with those same connecting maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-weil-pbc-site-cohomology-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-1d3c0d07f",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-1d3c0d07f (reviewer sub-agent of L); spot-checked: FIX. I read the whole delivery: the item's four steps, the new node, all eleven cited statements, and Stacks 0DNM (spaces-more-morphisms lemma-picard-group-first-order-thickening) and 040E (sites-cohomology lemma-h1-invertible). The item statement is unchanged and agrees with 0DNM's Pic(X)->Pic(X0)->H^2(X0,J) segment, with naturality added. Step 1: the square-zero ideal gives the full support the first-order node needs; units sequence checked: 1+J is the kernel, and rs=1+t gives r^{-1}=s(1-t), so units lift locally. Step 2: horseshoe exactness at H^1(A^x) and c_R/c_A naturality for the identity topos with R->A give ker(delta_X) = im(Pic X). Step 3: composition compatibility identifies h and h0 on the common topoi; alpha is linear because K^2=0, and H^2(alpha) is the statement's coefficient map. Step 4: the diagram chase is correct. Fault (C4/E5), fixed: the new node's inner f^* was only called 'the canonical cohomology map of the geometric morphism', and step 4 silently identified it with the h0^* of lem-weil-pbc-site-cohomology-pullback. The new node now defines f^* as H^1 of Gamma(C,I) ->eta Gamma(D,f^-1 I) ->beta Gamma(D,J), with Gamma = Hom(*,-). Step 4 now notes that at the final objects X0 and u(X0)=Y0 this is literally the site-pullback formula, and adds def-weil-pbc-sites-and-cohomology to its uses. New node lem-sfb-ringed-site-picard-h1-natural: a correct generalization of 040E to any commutative ringed site, since Pic means locally free rank one. Tested on a one-point site, the zero ring and the quotient case. It is not a clause of the item, its searches are recorded, and the DAG scan found only scheme or curve comparisons, so it is no duplicate. Batch-5 flags: lem-sfb-space-first-order-ringed-description and lem-trf-space-enlarged-etale-ringed-site-model are general algebraic-space foundations (the definition and the enlarged etale site), not steps of the trace formula or of Poincare duality, and no assumption leaf is reached: accepted. All 5 tool_uses accepted as generic. No SGA, no cycle. Maintainer notes: lem-sfb-space-square-zero-picard-obstruction (Q57, unsplit) is implied by this item. blueprint.from.node is null, inherited from the parent chain, and left as is.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePicardObstructionNatural",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_picard_obstruction_natural",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.space_picard_obstruction_natural"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePicardObstructionNatural.lean",
+  "statement": "theorem space_picard_obstruction_natural {S : Scheme.{u}} : ∃ c : ∀ X : AlgebraicSpace S, Comparison.{u, u} X.smallStructureSheaf, (∀ (X X' : AlgebraicSpace S) (i : X ⟶ X'), IsSpaceFirstOrderThickening i → ∃ (T : ThickeningSiteModel i) (I : SquareZeroIdeal T), I.obj.IsQuasicoherent ∧ Nonempty (PicardUnitsSequence T I)) ∧ (∀ (X X' : AlgebraicSpace S) (i : X ⟶ X'), IsSpaceFirstOrderThickening i → ∀ (T : ThickeningSiteModel i) (I : SquareZeroIdeal T), I.obj.IsQuasicoherent → Nonempty (PicardUnitsSequence T I)) ∧ (∀ (X X' : AlgebraicSpace S) (i : X ⟶ X'), IsSpaceFirstOrderThickening i → ∀ (T : ThickeningSiteModel i) (I : SquareZeroIdeal T), I.obj.IsQuasicoherent → ∀ (E : PicardUnitsSequence T I) (M : Line X.smallStructureSheaf), E.obstruction (c X) (lineClass M) = 0 ↔ ∃ N : Line X'.smallStructureSheaf, Nonempty ((smallModuleTensorPullback i).obj N.val ≅ M.val)) ∧ ∀ (X X' Y Y' : AlgebraicSpace S) (i : X ⟶ X') (j : Y ⟶ Y'), IsSpaceFirstOrderThickening i → IsSpaceFirstOrderThickening j → ∀ (h : Y ⟶ X) (h' : Y' ⟶ X'), j ≫ h' = h ≫ i → ∀ (T : ThickeningSiteModel i) (W : ThickeningSiteModel j) (I : SquareZeroIdeal T) (K : SquareZeroIdeal W), I.obj.IsQuasicoherent → K.obj.IsQuasicoherent → ∀ (E : PicardUnitsSequence T I) (E' : PicardUnitsSequence W K), (∃! β : (moduleTensorPullback h).obj I.obj ⟶ K.obj, IsPicardModuleIdealMap T W I K h h' β) ∧ ∃ (P : PicardAbInverse h) (α : P.functor.obj (picardIdeal I) ⟶ picardIdeal K), (∀ α' : P.functor.obj (picardIdeal I) ⟶ picardIdeal K, IsPicardIdealMap T W I K h h' P α' ↔ α' = α) ∧ ∀ M : Line X.smallStructureSheaf, ∃ N : Line Y.smallStructureSheaf, Nonempty ((smallModuleTensorPullback h).obj M.val ≅ N.val) ∧ E'.obstruction (c Y) (lineClass N) = Sheaf.H.map α 2 (P.cohomology (picardIdeal I) 2 (E.obstruction (c X) (lineClass M)))",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-c10f4f22e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c10f4f22e",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Read item, report (Worker report + Second reading by NJ present), 3 delivered modules, 2 new def nodes, deps (RingedSitePicardData Comparison/IsComparison/Line/Pic, picard_h1_natural, ThickeningSiteModel, SquareZeroIdeal, IsSpaceFirstOrderThickening, smallModuleTensorPullback, enlarged-site API) and Stacks 0DNM/040E. Every clause matches: QC square-zero ideal, Pic as line quotient with the pinned tensor group, delta = pinned Picard comparison then Yoneda postcomp with the 1+j units-sequence extClass, kernel = image via ordinary tensor pullback, arbitrary square j≫h'=h≫i with no flat/cartesian hypothesis, H^2 pullback = exact inverse image + IsPicardIdealMap coefficient map. New def nodes not hollow (only the named sorried equivalence theorem, as in landed modules); fields ok; no duplicate. Single universe u. Edge cases ok (empty, zero ideal, char 2, non-flat). FINDING H3 (fixed): nested ∃! α inside ∃! β made α unique only among maps also satisfying naturality. FIX: (∃! β, IsPicardModuleIdealMap β) ∧ ∃ P α, (∀ α', IsPicardIdealMap α' ↔ α' = α) ∧ ∀ M …; fixes/SpacePicardObstructionNatural.lean plus item lean-record.json with verbatim statement; nt_compile --json clean for all 3 siblings (8.2/16.4/11.7 s). Advisory: unused proof-dep imports in item module."
+ }
+}

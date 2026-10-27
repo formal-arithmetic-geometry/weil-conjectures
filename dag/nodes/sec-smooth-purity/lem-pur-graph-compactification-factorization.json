@@ -1,0 +1,121 @@
+{
+ "id": "lem-pur-graph-compactification-factorization",
+ "kind": "statement",
+ "title": "Open/proper factorization of the chosen compact-support compositor",
+ "statement": "Let A be a finite commutative ring, f:X to Y separated finite type between Noetherian schemes, and c=(j,q) a compactification with the indicated chosen compactifications. The product of the chosen open comparison [def-pur-graph-chosen-open-comparison], the chosen proper comparison [def-pur-graph-chosen-proper-comparison], and the model-to-chosen map t_c equals the compact-support compositor F_j F_q to F_jq followed by congruence c.comm inverse [lem-amb-unbounded-compact-support-comparisons].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B (proper/quasi-finite interchange), 0F7F (change of base), 0F7I and 0F7J (composition); proper/open tower in parent steps 1–3. Graph normalization: etale-cohomology.tex Tag 0F4L."
+ },
+ "stmt_deps": [
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-pur-graph-chosen-open-comparison",
+  "def-pur-graph-chosen-proper-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the triangle with compactifications ofIsOpenImmersion j, ofIsProper q, and c copied along c.comm inverse. Its middle Cartesian square consists of identities. Apply the every-triangle compositor equation; normalize exchange by the identity-open adjunction law and the open and proper unit laws. Naturality and the refinement cocycle give exactly the stated model-to-chosen comparison. All maps are defined for empty and identity opens.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "def-pur-graph-chosen-open-comparison",
+    "def-pur-graph-chosen-proper-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-pur-graph-chosen-open-comparison",
+  "def-pur-graph-chosen-proper-comparison"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7F, 0F7I, 0F7J; parent proper/open tower expansion.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived proper direct image commutes with etale extension by zero in a Cartesian square, compatibly with graph comparison and composition of compactly supported direct images",
+   "results": "Eight matches: SheafOfModules.pushforwardComp, Scheme.Modules.pushforwardComp, TwoSquare.lanBaseChange and general composition/base-change facts. None identifies the specified graph and compact-support comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No exact result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Cartesian square with proper vertical maps and etale horizontal maps, derived proper direct image interchanges with etale extension by zero as the mate of inverse sum base change",
+   "results": "Eight scheme etale/base-change matches; no comparison theorem for derived proper image and sum extension.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Twelve abstract mate results including mateEquiv_counit. These supply categorical manipulations but no graph/compact-support normalization.",
+   "date": "2026-10-27",
+   "verdict": "Formal tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*[Ee]tale|[Ee]tale.*proper",
+   "results": "General etale morphism and base-change facts, with no stated graph composition comparison. Local searches of both project roots found graph refinement and base-change coherence but not open-first graph composition or the proper/etale interchange.",
+   "date": "2026-10-27",
+   "verdict": "No existing statement for either remaining geometric comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphProperTower",
+  "date": "2026-10-27",
+  "group": "P5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7F (lemma-shriek-proper-and-open-base-change), 0F7J (lemma-shriek-composition), and item (3) in the final paragraph of Tag 0F7L; parent steps 3, 4 and 5. The common-support identification is the sheaf composition used explicitly in the proof of 0F7B.",
+   "via": [
+    "lem-pur-etale-horizontal-support-tower",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-pur-diagonal-section-pasting",
+    "lem-pur-etale-horizontal-support-mate",
+    "lem-pur-etale-graph-proper-tower"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphCompactificationFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphCompactificationFactorization.lean",
+  "declaration": "AlgebraicGeometry.Etale.graph_compactification_factorization",
+  "statement": "theorem graph_compactification_factorization\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    {f : X ⟶ Y} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [HasCompactification f] (c : Compactification f)\n    [QuasiCompact c.i] [HasCompactification c.i] [HasCompactification (c.i ≫ c.g)] :\n    Functor.isoWhiskerRight (graphChosenOpenComparison A c.i)\n        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) c.g) ≪≫\n      Functor.isoWhiskerLeft\n        (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory\n        (graphChosenProperComparison A c.g) ≪≫ rightDerivedLowerShriekIso A c =\n      unboundedEtaleLowerShriekCompIso A c.i c.g ≪≫\n        unboundedEtaleLowerShriekCongr A c.comm.symm",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261027T053010-L-505009",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261027T053010-L-505009",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

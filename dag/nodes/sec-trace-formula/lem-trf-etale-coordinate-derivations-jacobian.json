@@ -1,0 +1,278 @@
+{
+ "id": "lem-trf-etale-coordinate-derivations-jacobian",
+ "kind": "statement",
+ "title": "Coordinate differential basis, regular derivations and Taylor comparison",
+ "statement": "Let $k$ be a field [def-weil-field], $U$ a finite-type $k$-scheme [def-weil-finite-type-morphism], and $x=(x_1,\\ldots,x_n):U\\to\\mathbf A_k^n$ an etale morphism, $n\\ge0$ [def-weil-etale-morphism, def-sbc-affine-space]. For every affine open $V=\\operatorname{Spec}A\\subseteq U$, the differentials $\\mathrm dx_1,\\ldots,\\mathrm dx_n$ are an $A$-basis of $\\Omega_{A/k}$ [def-weil-pbc-kahler-differentials]. For every $A$-module $M$, evaluation on these coordinates is a bijection $\\operatorname{Der}_k(A,M)\\to M^n$, $D\\mapsto(Dx_i)_i$. Consequently there are unique $k$-derivations $D_i:A\\to A$ with $D_i(x_j)=\\delta_{ij}$. They commute, are compatible with restriction to smaller affine opens, and induce derivations on the local rings. Thus iterated coordinate derivatives of regular functions are regular, and $\\mathrm dc=\\sum_iD_i(c)\\,\\mathrm dx_i$ for every $c\\in A$. If $L/k$ is any field extension and $\\tau:A\\to L[[X_1,\\ldots,X_n]]$ is a $k$-algebra homomorphism with $\\tau(x_i)=a_i+X_i$ for constants $a_i\\in L$, then $\\partial_{X_i}\\tau(c)=\\tau(D_ic)$ for every $c\\in A$; the same identity holds on germs wherever $\\tau$ extends, and for every iterated partial derivative. Formal power series and their partial derivatives mean [def-weil-pbc-multivariate-power-series, def-trf-formal-power-series-partial-derivative]. These statements include $n=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 0H93 (lemma-formally-etale-omega, differential isomorphism), 00RX (lemma-differentials-polynomial-ring), and 00RO (lemma-universal-omega). Agent consequence: the dual coordinate derivations, their commuting/restriction laws and comparison with a coordinate-valued formal-series homomorphism. Retained proof steps 1 and 7 of the parent."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-formal-power-series-partial-derivative"
+ ],
+ "proof": [
+  {
+   "text": "On an affine open V with section ring A, let theta:k[T_i] -> Gamma(A^n_k,O) be polynomial evaluation on the standard coordinates with the scalar map induced by the projection. AffineSpace.SpecIso_hom_appTop identifies GammaSpecIso.hom composed with theta with the global-section map of the affine-space spectrum isomorphism; hence theta is a ring isomorphism. The defining affine-local property of the given etale morphism gives that x.appLE(top,V):Gamma(A^n_k,O)->A is etale. Its composite with theta is etale and equals aeval of the restricted coordinate sections: check variables directly and constants using x.IsOver. This gives A its formally etale polynomial-algebra structure compatible with its canonical k-algebra structure. Base-change the polynomial Kahler basis through the formally etale differential isomorphism and reindex ULift(Fin n) by Fin n. The basis vectors are precisely d(x_i|V).",
+   "uses": [
+    "def-sbc-affine-space",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-trf-formally-etale-differentials-base-change",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0H93 and 00RX; morphisms.tex, Tag 02GJ; explicit coordinate/scalar identification written by the agent."
+   }
+  },
+  {
+   "text": "For any A-module M, use the universal derivation equivalence Hom_A(Omega_A/k,M) = Der_k(A,M). Basis extensionality proves injectivity of coordinate evaluation; Basis.constr constructs a preimage of each tuple, proving surjectivity. Define D_i by composing d with the ith basis-coordinate linear map. Their values on x_j are delta_ij by the basis representation equations. The same evaluation injectivity proves uniqueness. The basis expansion of dc is the asserted sum because its ith coefficient is D_i(c). These constructions take values in A, so all finite iterates remain regular.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO; basis linear algebra and coordinate consequences written by the agent."
+   }
+  },
+  {
+   "text": "Use Mathlib Derivation.commutator_apply for the Lie bracket of derivations. Its coordinate values vanish because D_i(x_l) and D_j(x_l) are zero or one. Coordinate evaluation injectivity identifies the commutator with zero, and evaluating at c gives D_i(D_j(c))=D_j(D_i(c)). This argument applies to any algebra whose coordinate differentials are a basis.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO; commutator cancellation and coordinate uniqueness written by the agent."
+   }
+  },
+  {
+   "text": "For each point p choose an affine neighbourhood V. Its germ map A->O_U,p is localization at the corresponding prime. The canonical k-algebra structure on the stalk agrees with composition through A by germ_res. Localization is formally etale, so base-changing the affine differential basis through the formally etale differential isomorphism gives a stalk basis on the germs of the same global coordinate sections. Its ith dual coordinate derivation defines d_p,i; the preceding commutator argument proves its commutation. A general naturality lemma compares a derivation on B composed with a k-algebra map f:A->B with f composed with a derivation on A: both are derivations into B considered as an A-module via f, and equality on coordinates implies equality by the affine evaluation injectivity. Apply this first to restriction of sections, then to every germ map. The coordinate and scalar equalities follow from presheaf map composition and germ_res. This proves compatibility with every affine neighbourhood, independently of the affine open used to construct the stalk basis.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-trf-formally-etale-differentials-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV for stalk localization; algebra.tex Tag 0H93 for differential base change; construction by dual bases written by the agent."
+   }
+  },
+  {
+   "text": "For a k-algebra map tau:A->L[[X]], regard pderiv_L,i as a k-derivation by restriction of scalars. Compare its composite with tau with tau composed with D_i by the naturality/evaluation argument: on x_j the first is the derivative of C(a_j)+X_j, namely delta_ij, and the second is tau(delta_ij), which agrees. The same argument works on the stalk basis: any extending tau_p takes the global coordinate germs to C(a_j)+X_j by compatibility with tau, so the derivative identity follows directly on the entire stalk. Induction on List.foldr proves all iterated comparisons for sections and stalks; the empty list is reflexivity.",
+   "uses": [
+    "def-trf-formal-power-series-partial-derivative",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO; naturality, scalar restriction and word induction written by the agent."
+   }
+  },
+  {
+   "text": "All arguments are uniform in n. For n=0 the empty basis has zero differential module, coordinate evaluation has the unique empty tuple, and differential expansion is the empty sum. For the empty affine open the ring and modules are zero, and all linear algebra remains valid. No characteristic assumption, factorial inverse, or field nontriviality of the section ring is used. The finite-type and quasi-compact hypotheses of the original statement are retained but not needed by this proof.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0H93, 00RX and 00RO; edge-case verification written by the agent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-trf-formally-etale-differentials-base-change",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-trf-formal-power-series-partial-derivative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 0H93, 00RX and 00RO; schemes.tex Tag 01HV. Mathlib affine-space polynomial isomorphism and etale affine-local criterion, dual coordinate derivations, commutator, naturality and Taylor word induction formalized by P5, 2026-10-26. Stalk derivatives constructed by localized differential bases instead of the separate completion-and-localization theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-etale-coordinate-derivations-jacobian: regular commuting coordinate derivations on an etale chart and etaleness after replacing transverse coordinates by functions with invertible Jacobian",
+   "results": "{\"t\": \"2026-10-22T07:04:19Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-etale-coordinate-derivations-jacobian: regular commuting coordinate derivations on an etale chart and etaleness after replacing transverse coordinates by functions with invertible Jacobian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation.toSubmersivePresentation_jacobian\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"Algebra.PreSubmersivePresentation.jacobian_ofAlgEquiv\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"ContMDiff.coordChange\", \"Algebra.PreSubmersivePresentation.baseChange_jacobian\"], \"digest\": \"3f54771d4e73ba44\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: differential base change and standard-smooth basis theorems are inputs; none states commuting regular coordinate derivations with restriction and the stated formal Taylor comparison. The existing DAG differential isomorphism and pointwise etale criterion are reused, not recreated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-etale-coordinate-derivations-jacobian: change coordinates on a smooth finite type scheme using a basis of differentials",
+   "results": "{\"t\": \"2026-10-22T07:04:29Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-etale-coordinate-derivations-jacobian: change coordinates on a smooth finite type scheme using a basis of differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation.toSubmersivePresentation_jacobian\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation.toSubmersivePresentation\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"StandardEtalePresentation\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"StandardEtalePresentation.toPresentation_σ'\"], \"digest\": \"cac1872676cd833e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: differential base change and standard-smooth basis theorems are inputs; none states commuting regular coordinate derivations with restriction and the stated formal Taylor comparison. The existing DAG differential isomorphism and pointwise etale criterion are reused, not recreated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-etale-coordinate-derivations-jacobian: Kahler differentials basis in etale coordinates defines commuting regular derivations and invertible Jacobian gives an etale coordinate chart",
+   "results": "{\"t\": \"2026-10-22T07:04:29Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-etale-coordinate-derivations-jacobian: Kahler differentials basis in etale coordinates defines commuting regular derivations and invertible Jacobian gives an etale coordinate chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.toKaehler_cotangentSpaceBasis\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.Generators.cotangentSpaceBasis_repr_one_tmul\", \"Algebra.Etale.formallyEtale\", \"Algebra.SubmersivePresentation.basisKaehler_apply\", \"Algebra.Generators.cotangentSpaceBasis_apply\"], \"digest\": \"e3b2ea5219c75722\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: differential base change and standard-smooth basis theorems are inputs; none states commuting regular coordinate derivations with restriction and the stated formal Taylor comparison. The existing DAG differential isomorphism and pointwise etale criterion are reused, not recreated."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorKaehlerEquivOfFormallyEtale|of_basis_kaehlerDifferential|exists_etale_mvPolynomial",
+   "results": "{\"t\": \"2026-10-22T07:07:07Z\", \"tool\": \"grep\", \"query\": \"tensorKaehlerEquivOfFormallyEtale|of_basis_kaehlerDifferential|exists_etale_mvPolynomial\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\"], \"digest\": \"b7b197b03e741cee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: differential base change and standard-smooth basis theorems are inputs; none states commuting regular coordinate derivations with restriction and the stated formal Taylor comparison. The existing DAG differential isomorphism and pointwise etale criterion are reused, not recreated."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Algebra.Etale",
+   "results": "{\"t\": \"2026-10-22T07:04:19Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Algebra.Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: differential base change and standard-smooth basis theorems are inputs; none states commuting regular coordinate derivations with restriction and the stated formal Taylor comparison. The existing DAG differential isomorphism and pointwise etale criterion are reused, not recreated."
+  },
+  {
+   "tool": "grep",
+   "query": "coordinate.*deriv|deriv.*[Ee]tale|[Ee]tale.*[Jj]acobian",
+   "results": "{\"t\": \"2026-10-22T07:04:19Z\", \"tool\": \"grep\", \"query\": \"coordinate.*deriv|deriv.*[Ee]tale|[Ee]tale.*[Jj]acobian\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/StandardEtale.lean\"], \"digest\": \"8880fb4110ca0c4a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: differential base change and standard-smooth basis theorems are inputs; none states commuting regular coordinate derivations with restriction and the stated formal Taylor comparison. The existing DAG differential isomorphism and pointwise etale criterion are reused, not recreated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale coordinate chart has a differential basis and unique commuting coordinate derivations compatible with formal power series expansion",
+   "results": "{\"t\": \"2026-10-23T12:24:26Z\", \"tool\": \"leanfinder\", \"query\": \"An etale coordinate chart has a differential basis and unique commuting coordinate derivations compatible with formal power series expansion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation\", \"Algebra.IsStandardEtale\", \"StandardEtalePair\", \"StandardEtalePresentation.P\", \"StandardEtalePresentation.x\", \"StandardEtalePresentation.hasMap\", \"Algebra.instEtaleOfIsStandardEtale\", \"Algebra.instIsStandardEtale\"], \"digest\": \"dc27820fd6ba7368\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give polynomial derivations, standard etale presentations or the already-cited differential base-change theorem, not all clauses of this etale-coordinate and arbitrary formal-series comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorKaehlerEquivOfFormallyEtale|derivation.*[Ee]tale|[Ee]tale.*derivation",
+   "results": "{\"t\": \"2026-10-23T12:24:55Z\", \"tool\": \"grep\", \"query\": \"tensorKaehlerEquivOfFormallyEtale|derivation.*[Ee]tale|[Ee]tale.*derivation\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\"], \"digest\": \"32bbcc0aecf5512c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give polynomial derivations, standard etale presentations or the already-cited differential base-change theorem, not all clauses of this etale-coordinate and arbitrary formal-series comparison statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coordinate derivations on an etale algebra commute and intertwine formal power series partial derivatives",
+   "results": "{\"t\": \"2026-10-23T12:24:55Z\", \"tool\": \"leansearch\", \"query\": \"Coordinate derivations on an etale algebra commute and intertwine formal power series partial derivatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.pderiv\", \"LieRinehartAlgebra.instDerivation\", \"PowerSeries.derivativeFun_smul\", \"PowerSeries.derivative\", \"MvPolynomial.mkDerivation\", \"Derivation.instLieAlgebra\", \"PowerSeries.derivativeFun\", \"Polynomial.derivative'\"], \"digest\": \"36e0ca89b87fe4f6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give polynomial derivations, standard etale presentations or the already-cited differential base-change theorem, not all clauses of this etale-coordinate and arbitrary formal-series comparison statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Algebra.FormallyEtale",
+   "results": "{\"t\": \"2026-10-23T12:24:55Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Algebra.FormallyEtale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"Algebra.FormallyEtale.mk\", \"Algebra.formallyEtale_iff\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\"], \"digest\": \"0b570be6d407c339\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give polynomial derivations, standard etale presentations or the already-cited differential base-change theorem, not all clauses of this etale-coordinate and arbitrary formal-series comparison statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a formally etale algebra over a polynomial ring, evaluation on polynomial variables identifies derivations into any module with tuples; commutators vanish and maps to power series intertwine differentiation",
+   "results": "{\"t\": \"2026-10-23T12:25:25Z\", \"tool\": \"leanfinder\", \"query\": \"For a formally etale algebra over a polynomial ring, evaluation on polynomial variables identifies derivations into any module with tuples; commutators vanish and maps to power series intertwine differentiation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Derivation.apply_aeval_eq\", \"Derivation.compAEval\", \"MvPolynomial.mkDerivationEquiv\", \"Derivation.compAEval_eq\", \"Derivation.apply_eval_eq\", \"Polynomial.mkDerivationEquiv\", \"StandardEtalePair.instFormallyEtaleRing\", \"Derivation.compAEval_apply\"], \"digest\": \"25e08276b1b61a9c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give polynomial derivations, standard etale presentations or the already-cited differential base-change theorem, not all clauses of this etale-coordinate and arbitrary formal-series comparison statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-implicit-taylor-coordinate-calculus",
+  "date": "2026-10-22",
+  "group": "Q62"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Local Hilbert--Samuel presentations and their admissible transforms. Lower input in this split: Regular coefficient data with division and Jacobian conditions; Bierstone--Milman, Invent. Math. 128 (1997), 207--302, conditions (7.1)--(7.2), Theorem 9.6 and its block induction (9.7)--(9.14); Bierstone--Milman--Temkin, arXiv:0905.3580, section 6.2. No Stacks tag states this algebraization theorem. Further local input: Lemma 3.5 and Remarks 3.7, 9.9 and 9.11 (pp.231--232,279--280); faithful-flat Taylor realization at nonclosed points is the algebraic extension using the completed diagonal after residue-field extension; re-split local coordinate-calculus input: Tags 0H93 (lemma-formally-etale-omega, differential isomorphism), 00RX (lemma-differentials-polynomial-ring), and 00RO (lemma-universal-omega). Agent consequence: the dual coordinate derivations, their commuting/restriction laws and comparison with a coordinate-valued formal-series homomorphism. Retained proof steps 1 and 7 of the parent.",
+   "via": [
+    "lem-trf-implicit-taylor-coordinate-calculus",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-etale-coordinate-derivations-jacobian",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused existing affine-etale, formally etale differential comparison, polynomial-basis, universal derivation and localization nodes. Wrote the dual-coordinate construction, commutator cancellation, restriction uniqueness, fraction and Taylor comparisons explicitly. No new nodes; no Lean written or compiled.",
+  "blueprint": "Realizes the coordinate-derivation and Taylor-comparison input retained as steps 1 and 7 of lem-trf-implicit-taylor-coordinate-calculus. The inherited historical ancestry to lem-trf-local-term-locality is preserved; the current latest blueprint removes that older resolution branch, so this delivery refines only the already-dispatched supporting node. Whole-blueprint searches for derivation, coordinate, 00RX and 0H93 found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-derivation-extends",
+    "why": "Only part (2), unique extension of an arbitrary derivation to a ring localization, is used to define local coordinate derivatives; this is a generic algebra tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-c9af162a4",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-c9af162a4 (reviewer sub-agent of L); spot-checked: Read the item, all six steps, every cited node's statement and the Stacks sources: 0H93 algebra.tex l.41291, 00RX, 00RO, 02GJ, 01HV, and 07PE more-algebra l.11754 part (2). The statement is unchanged from base. There are no new nodes and no repair note, and the item is still unsplit live. Step 1: the open-restriction lemma, the affine étale criterion (gives Ω_{A/P}=0 and H1=0), the formally-étale tensor isomorphism and the polynomial basis scalar-extension clause give the basis of dx_i. C1 fault, fixed: identifying x|_V with Spec of the global-sections map P→A, T_i↦x_i (a k-algebra map since x is over k) was uncited. I added the Mathlib leaf lem-weil-pbc-morphism-into-affine-scheme to step 1's text, uses and proof_deps. Step 2: Der=Hom(Ω,M)=M^n, D_i=φ_i∘d, b_i=D_i c; checked. Step 3: the mixed Leibniz terms are symmetric and cancel, E(x_l)=0, so E=0 by uniqueness; checked. Step 4: rD_i=D_i^B r by uniqueness with M=B; the stalk is A_p by the affine-stalk leaf; 07PE(2) gives a unique extension with the quotient formula; independence of the affine neighbourhood and commutation on local rings both follow from uniqueness. Step 5: ∂_{X_i}∘τ and τ∘D_i are k-derivations into Q agreeing on the x_j; the induction on words is set up correctly; the germ quotient rule was checked. Step 6: n=0 and V=∅ checked. Accepted tool_use: lem-weil-pbc-derivation-extends (generic localization algebra, part (2) only). No duplicate found: lem-pur-coordinate-differentials-affine-chart and lem-trf-separable-smooth-cotangent-germ state something else. The report mentions a citations.json that is not in the delivery; this is a report inaccuracy only.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCoordinateDerivations",
+  "declaration": "AlgebraicGeometry.Scheme.hasEtaleCoordinateCalculus",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleCoordinateSectionAlgebra",
+   "AlgebraicGeometry.Scheme.etaleCoordinateStalkAlgebra",
+   "AlgebraicGeometry.Scheme.EtaleCoordinateSectionDerivation",
+   "AlgebraicGeometry.Scheme.EtaleCoordinateStalkDerivation",
+   "AlgebraicGeometry.Scheme.etaleCoordinateSection",
+   "AlgebraicGeometry.Scheme.HasEtaleCoordinateCalculus",
+   "AlgebraicGeometry.Scheme.hasEtaleCoordinateCalculus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoordinateDerivations.lean",
+  "statement": "theorem hasEtaleCoordinateCalculus (k : Type u) [Field k] (U : Scheme.{u}) [U.Over (Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] (n : ℕ) (x : U ⟶ AffineSpace (ULift.{u} (Fin n)) (Spec (.of k))) [x.IsOver (Spec (.of k))] [Etale x] : HasEtaleCoordinateCalculus.{u, v, w} k U n x",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f7ea5991",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Read the node, all 7 stmt_dep records, the module and the report. Every clause matches the node: the Kähler basis; evaluation bijection for every A-module M (k-structure via compHom); unique, commuting D_i with D_i(x_j)=δ_ij; restriction to smaller affine opens via the presheaf maps; one stalk family compatible with every affine neighbourhood, also commuting; dc=ΣD_i(c)dx_i; Taylor comparison for any L/k and any shift a, single and iterated words, sections and germs (the germ clause checked true via unique extension to the localization). x.IsOver is implicit in the node (proof step 1), not a stronger hypothesis. n=0, empty V and any characteristic covered; universes u,v,w general. lean.statement verbatim; item changed only in lean; no name clash (side-live, Mathlib); no hollow def; only sorry is the theorem; docstrings carry source, blueprint and proof steps 1-6; max line 96; plain imports are proof deps. No file changed, so no recompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261026T092220-L-3412390",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

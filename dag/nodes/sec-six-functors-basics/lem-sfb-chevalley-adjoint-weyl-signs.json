@@ -1,0 +1,190 @@
+{
+ "id": "lem-sfb-chevalley-adjoint-weyl-signs",
+ "kind": "statement",
+ "title": "Signed adjoint Weyl operators for a normalized Chevalley basis",
+ "statement": "Let $\\mathfrak g$ be a finite-dimensional split semisimple Lie algebra over $\\mathbf Q$ [def-wf-lie-algebra, def-wf-semisimple-lie-algebra], with a split Cartan subalgebra $\\mathfrak h$, reduced root system $R\\subset\\mathfrak h^\\vee$ and Chevalley basis in the conventions of [lem-sfb-chevalley-root-normalization]. Explicitly $\\mathfrak g=\\mathfrak h\\oplus\\bigoplus_{\\beta\\in R}\\mathbf Qe_\\beta$, $[h,e_\\beta]=\\beta(h)e_\\beta$, $[e_\\beta,e_{-\\beta}]=h_\\beta$ with $\\beta(h_\\beta)=2$, and $[e_\\alpha,e_\\beta]=\\pm(p+1)e_{\\alpha+\\beta}$ when $\\alpha+\\beta$ is a root, where $p=\\max\\{i\\geq0:\\beta-i\\alpha\\in R\\}$; the bracket is zero when $\\alpha+\\beta\\notin R\\cup\\{0\\}$. Put $s_\\alpha(\\beta)=\\beta-\\beta(h_\\alpha)\\alpha$ and\n$$q_\\alpha=\\exp(\\operatorname{ad}e_\\alpha)\\exp(-\\operatorname{ad}e_{-\\alpha})\\exp(\\operatorname{ad}e_\\alpha).$$\nThe exponentials are finite sums of nilpotent adjoint operators. For every $\\alpha,\\beta\\in R$ there is $\\epsilon_{\\alpha,\\beta}\\in\\{1,-1\\}$ such that\n$$q_\\alpha(e_\\beta)=\\epsilon_{\\alpha,\\beta}e_{s_\\alpha(\\beta)},\\qquad q_\\alpha(h)=h-\\alpha(h)h_\\alpha\\quad(h\\in\\mathfrak h).$$\nThe signs depend only on the fixed Chevalley basis. Empty root systems are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, Chevalley bases and Theorem 23.71, pp.508--509. Agent-formulated root-string consequence needed in the omitted details of Theorem 23.72; Theorem 23.71 itself states bracket magnitudes, not this Weyl-operator identity."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra",
+  "lem-sfb-chevalley-root-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Fix $\\alpha\\in R$; if $R$ is empty there is nothing to prove. Apply [lem-sfb-split-semisimple-root-decomposition] to the given splitting Cartan subalgebra. It supplies the finite reduced crystallographic root pairing for evaluation, $R\\cap\\mathbf Q\\alpha=\\{\\alpha,-\\alpha\\}$, and nilpotence of $E=\\operatorname{ad}(e_\\alpha)$ and $F=\\operatorname{ad}(e_{-\\alpha})$. The normalized brackets give $[e_\\alpha,e_{-\\alpha}]=h_\\alpha$, $[h_\\alpha,e_\\alpha]=2e_\\alpha$ and $[h_\\alpha,e_{-\\alpha}]=-2e_{-\\alpha}$. Thus all the exponentials in the statement are finite rational operators.",
+   "uses": [
+    "lem-sfb-split-semisimple-root-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, printed pp.508--509; agent expansion of the signed root-operator input to Theorem 23.72, pp.510--511."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-integrable-sl2-reflection-automorphism] with $L=\\mathfrak g$, $\\mathfrak t=\\mathfrak h$, $e=e_\\alpha$, $f=e_{-\\alpha}$ and $h=h_\\alpha$. The preceding nilpotence implies its local nilpotence hypotheses, and the weight brackets supply its remaining hypotheses. It proves $q_\\alpha(h)=h-\\alpha(h)h_\\alpha$, $q_\\alpha(e_\\alpha)=-e_{-\\alpha}$, $q_\\alpha(e_{-\\alpha})=-e_\\alpha$, and that $q_\\alpha$ carries the $\\beta$ root line isomorphically onto the $s_\\alpha(\\beta)$ root line. Consequently $q_\\alpha(e_\\beta)=c e_{s_\\alpha(\\beta)}$ with a unique nonzero rational $c$. It remains to prove that $c$ is a sign.",
+   "uses": [
+    "lem-sfb-integrable-sl2-reflection-automorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, printed pp.508--509; agent expansion of the signed root-operator input to Theorem 23.72, pp.510--511."
+   }
+  },
+  {
+   "text": "For $\\beta\\ne\\pm\\alpha$, the two roots are independent by reducedness. Apply [lem-sfb-root-string-integer-interval] to the evaluation root pairing from step 1. Write the string as $\\beta-p\\alpha,\\ldots,\\beta+q\\alpha$. At $\\beta+j\\alpha$ its backward endpoint distance is $p+j$. Repeated use of the assumed bracket magnitudes therefore gives, for $0\\le m\\le q$, $$\\frac{E^m}{m!}e_\\beta=\\sigma_m\\binom{p+m}{m}e_{\\beta+m\\alpha},\\qquad\\sigma_m\\in\\{1,-1\\}.$$ Indeed the successive factors have magnitudes $p+1,\\ldots,p+m$, whose product divided by $m!$ is the displayed integer binomial coefficient; for $m=0$ take $\\sigma_0=1$. For $m>q$ the vector is zero, since the next bracket leaves the root system and its weight is nonzero. Apply the same calculation with $-\\alpha$ in place of $\\alpha$ to obtain integer coefficients for $F^m e_\\beta/m!$ as well. This uses only the consecutive-root assertion and the bracket formula already assumed in the item.",
+   "uses": [
+    "lem-sfb-root-string-integer-interval"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, printed pp.508--509; agent expansion of the signed root-operator input to Theorem 23.72, pp.510--511."
+   }
+  },
+  {
+   "text": "Put $L_\\alpha=\\mathbf Z h_\\alpha\\oplus\\bigoplus_{\\gamma\\in R}\\mathbf Z e_\\gamma\\subset\\mathfrak g$. The remaining generators have $E(e_\\alpha)=0$, $E(e_{-\\alpha})=h_\\alpha$, $E^2(e_{-\\alpha})/2!=-e_\\alpha$, and $E(h_\\alpha)=-2e_\\alpha$, with higher terms zero. Similarly $F(e_{-\\alpha})=0$, $F(e_\\alpha)=-h_\\alpha$, $F^2(e_\\alpha)/2!=-e_{-\\alpha}$ and $F(h_\\alpha)=2e_{-\\alpha}$. Together with step 3 these formulas show that $\\exp(\\pm E)$ and $\\exp(\\pm F)$ preserve $L_\\alpha$. Their inverse identities $\\exp(E)\\exp(-E)=1$ and $\\exp(F)\\exp(-F)=1$ follow directly: the coefficient of the $k$th power is $\\sum_{i=0}^k(-1)^i/(i!(k-i)!)$, equal to $0$ for $k>0$ and $1$ for $k=0$ by $(1-1)^k$. Hence $q_\\alpha$ and its inverse both preserve $L_\\alpha$. This is a calculation on the displayed generators, with no assertion that $L_\\alpha$ spans the entire Cartan subalgebra.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, printed pp.508--509; agent expansion of the signed root-operator input to Theorem 23.72, pp.510--511."
+   }
+  },
+  {
+   "text": "For any root $\\gamma$, the direct root decomposition and $h_\\alpha\\ne0$ imply $L_\\alpha\\cap\\mathbf Qe_\\gamma=\\mathbf Ze_\\gamma$: comparing all components makes every coefficient other than that of $e_\\gamma$ vanish. The equality $q_\\alpha(e_\\beta)=c e_{s_\\alpha(\\beta)}$ from step 2 and preservation of $L_\\alpha$ force $c\\in\\mathbf Z$. Applying the inverse to $e_{s_\\alpha(\\beta)}$ gives $c^{-1}e_\\beta\\in L_\\alpha$, hence $c^{-1}\\in\\mathbf Z$. Thus two integers multiply to $1$, so $c=1$ or $c=-1$. Define $\\epsilon_{\\alpha,\\beta}=c$. Uniqueness of the scalar on the nonzero chosen root vector shows that the signs are determined by the fixed basis. The Cartan formula was proved in step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, printed pp.508--509; agent expansion of the signed root-operator input to Theorem 23.72, pp.510--511."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-semisimple-root-decomposition",
+  "lem-sfb-integrable-sl2-reflection-automorphism",
+  "lem-sfb-root-string-integer-interval"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, Theorem 23.71, printed pp.508--509; agent expansion of the signed root-operator input to Theorem 23.72, pp.510--511."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a Chevalley basis the adjoint exponentials exp e alpha exp minus e minus alpha exp e alpha send every root vector to plus or minus its reflected root vector",
+   "results": "{\"t\": \"2026-10-23T22:16:43Z\", \"tool\": \"leanfinder\", \"query\": \"In a Chevalley basis the adjoint exponentials exp e alpha exp minus e minus alpha exp e alpha send every root vector to plus or minus its reflected root vector\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.reflectRoot\", \"RootPairing.weylGroup.ofIdx_smul\", \"RootPairing.rootSpanMem_reflectionPerm_self\", \"RootPairing.reflection_apply_self\", \"RootPairing.reflection_apply_root'\", \"RootPairing.EmbeddedG2.ofPairingInThree_long\", \"RootPairing.chainTopCoeff_reflectionPerm_right\", \"RootPairing.reflection_apply_root\"], \"digest\": \"dadb93f623318db9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the root-system hits are reflections of root indices, without chosen root vectors or their signs. LieAlgebra.Basis has only simple generators and Chevalley-Serre relations; Basis/Basic.lean:25,37 explicitly leaves Chevalley bases undefined. Derivation/Basic.lean:412 concerns exponential preservation of brackets, not signed root vectors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley root strings give integral signed permutations of root vectors under the Weyl operator exp e exp minus f exp e",
+   "results": "{\"t\": \"2026-10-23T22:20:26Z\", \"tool\": \"leanfinder\", \"query\": \"Chevalley root strings give integral signed permutations of root vectors under the Weyl operator exp e exp minus f exp e\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.weylGroup_apply_root\", \"RootPairing.chainTopCoeff_reflectionPerm_right\", \"RootPairing.chainBotCoeff_reflectionPerm_right\", \"LieAlgebra.IsKilling.reflectRoot\", \"RootPairing.chainTopCoeff_reflectionPerm_left\", \"RootPairing.chainBotCoeff_mul_chainTopCoeff\", \"RootPairing.chainBotCoeff_reflectionPerm_left\", \"RootPairing.weylGroupToPerm\"], \"digest\": \"ff82749bd2247cae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the root-system hits are reflections of root indices, without chosen root vectors or their signs. LieAlgebra.Basis has only simple generators and Chevalley-Serre relations; Basis/Basic.lean:25,37 explicitly leaves Chevalley bases undefined. Derivation/Basic.lean:412 concerns exponential preservation of brackets, not signed root vectors."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.Basis",
+   "results": "{\"t\": \"2026-10-23T22:24:49Z\", \"tool\": \"loogle\", \"query\": \"LieAlgebra.Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.Basis\", \"LieAlgebra.Basis.e\", \"LieAlgebra.Basis.f\", \"LieAlgebra.Basis.h\", \"LieAlgebra.Basis.A\", \"LieAlgebra.Basis.symm\", \"LieAlgebra.Basis.nondegen\", \"LieAlgebra.Basis.cartan_eq_lieSpan\"], \"digest\": \"01cba2159de84219\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the root-system hits are reflections of root indices, without chosen root vectors or their signs. LieAlgebra.Basis has only simple generators and Chevalley-Serre relations; Basis/Basic.lean:25,37 explicitly leaves Chevalley bases undefined. Derivation/Basic.lean:412 concerns exponential preservation of brackets, not signed root vectors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjoint Weyl operator of a Chevalley basis sends each root vector to a signed reflected root vector",
+   "results": "{\"t\": \"2026-10-23T22:23:37Z\", \"tool\": \"leansearch\", \"query\": \"The adjoint Weyl operator of a Chevalley basis sends each root vector to a signed reflected root vector\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.weylGroup_apply_root\", \"RootPairing.weylGroup.ofIdx_smul\", \"RootPairing.reflection_apply_root\", \"LieAlgebra.IsKilling.reflectRoot\", \"InnerProduct.term_†\", \"LinearMap.adjoint\", \"ContinuousLinearMap.adjointAux\", \"RootPairing.mem_range_root_of_mem_range_reflection_of_mem_range_root\"], \"digest\": \"f5db0d95d4a8e7fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the root-system hits are reflections of root indices, without chosen root vectors or their signs. LieAlgebra.Basis has only simple generators and Chevalley-Serre relations; Basis/Basic.lean:25,37 explicitly leaves Chevalley bases undefined. Derivation/Basic.lean:412 concerns exponential preservation of brackets, not signed root vectors."
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|exp.*ad|weyl.*sign|signed.*root",
+   "results": "{\"t\": \"2026-10-23T22:23:37Z\", \"tool\": \"grep\", \"query\": \"Chevalley|exp.*ad|weyl.*sign|signed.*root\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Derivation/Basic.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/CartanCriterion.lean\"], \"digest\": \"5953e93fbcf390de\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the root-system hits are reflections of root indices, without chosen root vectors or their signs. LieAlgebra.Basis has only simple generators and Chevalley-Serre relations; Basis/Basic.lean:25,37 explicitly leaves Chevalley bases undefined. Derivation/Basic.lean:412 concerns exponential preservation of brackets, not signed root vectors."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-integral-rank-one",
+  "date": "2026-10-24",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Section 23h, equation (153), Theorem 23.72 proof, pp.510-511: rank-one hypotheses and simple-root generation omitted there; Section 23d and Theorem 23.71 for Weyl signs. These integral rank-one details are an agent-stated supporting lemma, not a quotation of Theorem 23.72. Supporting input: Section 23h, Chevalley bases and Theorem 23.71, pp.508--509. Agent-formulated root-string consequence needed in the omitted details of Theorem 23.72; Theorem 23.71 itself states bracket magnitudes, not this Weyl-operator identity.",
+   "via": [
+    "lem-sfb-chevalley-integral-rank-one",
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-chevalley-adjoint-weyl-signs",
+  "worker": "stage1",
+  "summary": "Q135: retain the statement and inherited Mathlib searches; reuse split root decomposition and locally nilpotent sl2 reflection, add the exact Mathlib root-string interval leaf, and calculate both integral exponential actions on the local root lattice. Integer inverse coefficients force the required signs.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting chain: Chevalley integral rank-one Weyl word, Section 23h, Theorems 23.71--23.72, pp.508--511. This item makes explicit its root-vector sign input without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-664acc6ec",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-664acc6ec (reviewer sub-agent of L); spot-checked: I read the item (statement unchanged, 5 steps), the new Mathlib leaf lem-sfb-root-string-integer-interval and the statements of the cited nodes (split-semisimple-root-decomposition, integrable-sl2-reflection-automorphism, chevalley-root-normalization). I also read Milne iAG §23h pp.508-509 (Thm 23.71, N=±(p+1)) and p.504 (α-string), and Mathlib Chain.lean:35-46, 110-164, 186-192. The leaf is an exact match for RootPairing.root_add_zsmul_mem_range_iff over ℚ: p=chainBotCoeff, q=chainTopCoeff, and the independence hypothesis is stated. I tested it on A2, B2 and G2 (longest string, length 4). The whole-DAG search found no duplicate. Step 2 correctly gets only c∈ℚ^× from the sl2 reflection node, and its hypotheses are checked. Step 3: magnitudes p+j+1 along the unbroken string give C(p+m,m); the vector is zero beyond q by independence. Step 4: I checked the generator formulas by hand (E²e_{-α}/2=-e_α, F²e_α/2=-e_{-α}, E h_α=-2e_α, F h_α=2e_{-α}), and the inverse exponential identity holds via (1-1)^k. Step 5: the direct sum with h_α≠0 gives L_α∩ℚe_γ=ℤe_γ, and c, c^{-1}∈ℤ give c=±1. Coroot injectivity, which the Mathlib leaf needs, follows from the decomposition node's root pairing; s_αs_β being unipotent of finite order also gives it. sl2 sanity check: n E12 n^{-1}=-E21. Same unit, no tool_uses, no SGA, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.ChevalleyAdjointWeylSigns",
+  "declaration": "LieAlgebra.chevalley_adjoint_weyl_signs",
+  "file": "lean/Sheaf/Algebra/Lie/ChevalleyAdjointWeylSigns.lean",
+  "statement": "theorem chevalley_adjoint_weyl_signs (L : Type u) [LieRing L] [LieAlgebra ℚ L] [FiniteDimensional ℚ L] [HasTrivialRadical ℚ L] (H : LieSubalgebra ℚ L) [IsLieAbelian H] (hmax : ∀ K : LieSubalgebra ℚ L, H ≤ K → IsLieAbelian K → K = H) (I : Type v) [Finite I] (P : RootPairing I ℚ (Module.Dual ℚ H) H) [P.IsRootSystem] [P.IsCrystallographic] [P.IsReduced] (heval : ∀ (a : Module.Dual ℚ H) (h : H), P.toLinearMap a h = a h) (hdecomp : DirectSum.IsInternal (Sum.elim (fun _ : Unit ↦ H.toSubmodule) (fun i : I ↦ (LieModule.weightSpace L (P.root i)).toSubmodule))) (hdim : ∀ i : I, Module.finrank ℚ (LieModule.weightSpace L (P.root i)) = 1) (e : I → L) (he : ∀ i : I, e i ∈ LieModule.weightSpace L (P.root i) ∧ e i ≠ 0) (hopp : ∀ i : I, ⁅e i, e (P.reflectionPerm i i)⁆ = (P.coroot i : L)) (hadd : ∀ i j k : I, P.root i + P.root j = P.root k → ∃ ε : ℤ, (ε = 1 ∨ ε = -1) ∧ ⁅e i, e j⁆ = ((ε : ℚ) * (P.chainBotCoeff i j + 1)) • e k) (hzero : ∀ i j : I, P.root i + P.root j ∉ Set.range P.root → P.root i + P.root j ≠ 0 → ⁅e i, e j⁆ = 0) : (∀ i : I, IsNilpotent (ad ℚ L (e i))) ∧ ∀ i : I, (∀ j : I, ∃! ε : ℤ, (ε = 1 ∨ ε = -1) ∧ (IsNilpotent.exp (ad ℚ L (e i)) * IsNilpotent.exp (-ad ℚ L (e (P.reflectionPerm i i))) * IsNilpotent.exp (ad ℚ L (e i))) (e j) = (ε : ℚ) • e (P.reflectionPerm i j)) ∧ ∀ h : H, (IsNilpotent.exp (ad ℚ L (e i)) * IsNilpotent.exp (-ad ℚ L (e (P.reflectionPerm i i))) * IsNilpotent.exp (ad ℚ L (e i))) (h : L) = (h : L) - (P.root i h) • (P.coroot i : L)",
+  "branch": "newtargets-dag",
+  "by": "Q156",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e22bfb80d",
+  "group": "Q156",
+  "result": "pass",
+  "note": "Only change: new module Sheaf.Algebra.Lie.ChevalleyAdjointWeylSigns plus the item's lean record, which matches the file verbatim. Hypotheses are the same as in the recorded ChevalleyRootNormalization dependency; hcoroot is left out but implied by hopp+he. chainBotCoeff i j is the node's p (Chain.lean:115-123); its fallback value is never reached in a reduced root system. Nilpotence is proved, not assumed, so IsNilpotent.exp is the real finite exponential. The operator is exp(ad e_a)exp(-ad e_-a)exp(ad e_a), composed right to left. The sign uses ∃! with ε=±1, the target index is reflectionPerm i j, and the Cartan formula h - α(h)h_α matches. sl2 check: sign -1 and h↦-h. Empty root system allowed; universes u and v independent; no extra conditions. Milne Thm 23.71 (PDF p.520) checked. No duplicate Lean statement in the project. No definitions, proof only sorry, docstrings carry source and blueprint tag, nothing pro-étale. The report has both sections; the second reading was done by the worker, as the report says. Not recompiled, per instructions. Minor: unused SplitSemisimpleRootDecomposition import and open Classical, harmless."
+ }
+}

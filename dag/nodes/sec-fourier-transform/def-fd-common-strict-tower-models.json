@@ -1,0 +1,121 @@
+{
+ "id": "def-fd-common-strict-tower-models",
+ "kind": "definition",
+ "title": "Normalized common strict-tower model data for completed pullbacks",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], and a scheme isomorphism $h:U\\simeq T$ on the small pro-etale sites [def-weil-pbc-proetale-site]. For $n\\geq1$ put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and $R_{E,W}=\\lim_n(A_{E,n})_W$ on these sites; use these completed coefficient rings [def-weil-completed-integral-coefficients], their quotient-normalized coefficient identity [def-fd-coefficient-comparison-datum], the derived categories [def-weil-abstract-derived-category], and the common full integral constructible categories [lem-weil-pbc-integral-stratified-perfect-characterization]. A common strict-tower model is a tuple of the following data, asserting no existence. It records invertibility of the completed coefficient structure map, exactness of ordinary pullback with its transported inverse-image action, and invertibility of its ordinary and strict-tower cochain counits [def-weil-pbc-completed-pullback]. Its strict tower is the actual PBC quotient reduction followed by finite pullback. It supplies a natural whole-tower isomorphism to the framework tower $Q_{h,E}(P)_n=\\operatorname{Res}_n h_n^*(P\\otimes A_{E,n})$ [def-pur-integral-derived-operations], pinned on quotient-unit generators. Its cone isomorphism is pinned by both the unshifted and shifted quotient projections. On flat-term K-flat representatives [def-pc-kflat-complex], it includes the derived tower identification equal to the composite of the defining reduction and pullback cochain counits. The Roos functor [def-weil-strict-roos-model] descends to derived towers, with a natural comparison to actual $R\\lim$. For every K-injective resolution $q:X\\to I$ with injective terms [def-pur-kinjective-complex], the comparison is $[H(q)][\\iota_I]^{-1}$ followed by the canonical right-derived limit comparison, where $\\iota_I$ has the limit tuple in its unshifted coordinate and zero shifted coordinate. Finally the tuple supplies the ambient framework-to-PBC strict-completion comparison [def-weil-derived-pullback-tensor-hom], normalized by this cone and limit comparison, its actual-completion presentation on complete constructible inputs, the source/input/target constructibility witnesses, and its restriction to the full integral constructible categories with the specified ambient lift. The helper maps are the actual strict and derived towers, composite cochain counit, termwise-limit right-derived unit, the two framework quotient projections, and the unit generator. No quotient-level K-flatness is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+  "place": "Opening paragraph, placing the bounded constructible coefficient category inside the actual pro-etale coefficient category; the common strict-tower data underlying this identification are the tuple already specified in lem-fd-pullback-common-strict-tower-models. Supporting Stacks 0941 (lemma-derived-limit-is-ok), 099N(2),(5). This definition packages the data and asserts no existence."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-pc-kflat-complex",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-completed-pullback",
+  "def-fd-coefficient-comparison-datum",
+  "def-weil-strict-roos-model"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Common normalized strict quotient tower models for completed pullback, including their coefficient identity and Roos cone projections",
+   "results": "8 hits: CategoryTheory.CommSq.cocone, Profinite.asLimitCone, Profinite.lim', RingCon.comapQuotientEquivOfSurj, Profinite.lim, Profinite.asLimit, Profinite.asLimit', LightProfinite.asLimitCone.",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match; ordinary cones and profinite limits do not give this completed-pullback model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized common strict tower model for two completed pullbacks with unshifted and shifted Roos projections",
+   "results": "8 hits: CategoryTheory.Functor.commShiftPullback, CategoryTheory.CommShift₂Setup.toTwistShiftData, CategoryTheory.PullbackShift, CategoryTheory.NatTrans.commShiftPullback, AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', AlgebraicGeometry.ExistsHomHomCompEqCompAux.g, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', CategoryTheory.PullbackShift.functor.",
+   "date": "2026-10-24",
+   "verdict": "No matching model."
+  },
+  {
+   "tool": "grep",
+   "query": "FdCommonStrictTowerModels|fdCommonFrameworkProjection|common.*strict.*tower (Mathlib/CategoryTheory); rg same names in lean/WeilConjectures, lean/Sheaf, dag/lean_names_upstream.json; rg -l common strict-tower model in dag/nodes; tools/blueprint_refs.py search common strict tower",
+   "results": "Mathlib: 0 hits. WeilConjectures and upstream names: no hits. Sheaf: PullbackCommonStrictTowerModels.lean defines FdCommonStrictTowerModels and the named helpers. DAG: only the common-tower existence lemma and this item; blueprint search: none.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the existing Sheaf structure and helper declarations; no definition node already owns this notion separately from its existence theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-scalar-pullback-realization-identification",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final coefficient-category identification: normalized strict tower model used by the scalar realization normalization.",
+   "via": [
+    "lem-fd-scalar-pullback-realization-identification",
+    "lem-fd-whole-tower-integral-pullback-comparison",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PullbackCommonStrictTowerModels",
+  "declaration": "WeilConjectures.FdCommonStrictTowerModels",
+  "declarations": [
+   "WeilConjectures.fdCommonStrictTower",
+   "WeilConjectures.fdCommonDerivedTower",
+   "WeilConjectures.fdCommonTowerCounit",
+   "WeilConjectures.fdCommonRlimUnit",
+   "WeilConjectures.fdCommonFrameworkEnd",
+   "WeilConjectures.fdCommonFrameworkProjection",
+   "WeilConjectures.fdCommonFrameworkShiftedProjection",
+   "WeilConjectures.fdCommonStrictGenerator",
+   "WeilConjectures.fdCommonFrameworkCoefficientComparison",
+   "WeilConjectures.fdCommonExpandedTowerCounit",
+   "WeilConjectures.FdCommonStrictTowerModels"
+  ],
+  "statement": "structure FdCommonStrictTowerModels {U T : Scheme.{u}} (h : U ≅ T)",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Owns the already landed common-tower structure and its actual tower, counit, generator and projection helpers. This is data only; the Nonempty existence theorem remains a proof dependency of the item."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9dda3500",
+  "group": "Q49",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9dda3500",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Re-delivery of 832347aa RETURN; delta = target-presentation helpers, rewritten fdScalarAugmentedRealization, stmt_dep swap. H3 repaired: augmentation = const C(F^s(e^-1)≫framework Roos cmp) ≫ const/scalar square^-1 ≫ tower-scalar of [const(ρ_D^-1)≫const⊣Rlim counit] (ρ_D normalized via integralComparisonLimitToRoos: limit tuple, zero shifted coord) ≫ factors ≫ Q(scalarPullbackTower d) ≫ inv fdScalarTargetComparison ≫ Res S_seq F_seq red(e); no λ/μ/χ. Target comparison uses reduction iso pinned by CoefficientReductionPresentation, exact seq-pullback factor, scalar ε, restriction factor, and towerIso pinned on generators by d_n (same pattern as landed IsIntegralComparisonPullbackNormalized); Nonempty concluded, both adjunct equalities stated ∀ M, each with independent content. Mechanical repaired: def-fd-common-strict-tower-models existing:true on unchanged PullbackCommonStrictTowerModels (structure + 10 helpers), check_existing clean, statement = l.205 signature, TeX matches fields, cites = 12 stmt_deps, no cycle; theorem kept in proof_deps and unused in Lean. lean.statement verbatim, declarations = file decls (19), one sorry, docstrings, item not landed live. Unchanged parts passed in 8323 review. Advisory: source_iota_zero is M-independent (choose_spec, redundant); new helper owners (trf sequence-systems/realization-models, coef ringed-sequence-site, pur coefficient-reduction-presentation) outside stmt_deps via public reexport. No FIX, no compile."
+ }
+}

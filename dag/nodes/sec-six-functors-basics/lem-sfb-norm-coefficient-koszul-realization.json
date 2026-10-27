@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-norm-coefficient-koszul-realization",
+ "kind": "statement",
+ "title": "Strict signed Koszul models for norm-topological continuous-section coefficients",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$ with its extended norm topology, and a finite intermediate field $E$. For $F=E,\\Omega$ let $C_F(S)=C(S,F)$ [def-sfb-continuous-map-condensed-ring]. Let $V$ be a finite-dimensional norm-topological $E$-vector space and $A_1,\\ldots,A_r$ pairwise commuting $E$-linear endomorphisms, where $r\\geq0$. Put $V_F(S)=C(S,F\\otimes_E V)$ with the finite-dimensional product norm topology and its internal module structure [sk-def-sfb-module-objects, def-sfb-continuous-representation-condensation], and let $A_{i,F}$ act by pointwise tensor extension.\n\nThere is a cochain complex $\\mathcal K_F(V;A)$ of internal $C_F$-modules [def-pc-cochain-complex-modules], zero outside degrees $0,\\ldots,r$, with specified section coordinates\n$$\\mathcal K_F(V;A)^a(S)\\cong\\bigoplus_{I\\subseteq\\{1,\\ldots,r\\},\\ |I|=a}C(S,F\\otimes_E V).$$\nThe coordinates intertwine pointwise scalars, precomposition restrictions, and the differential\n$$(dx)_J=\\sum_{i\\in J}(-1)^{\\#\\{j\\in J:j<i\\}}A_{i,F}x_{J\\setminus\\{i\\}}.$$\nIn particular these formulas define actual internal morphisms and $d^{a+1}d^a=0$. In increasing-subset coordinates, deletion of $i$ is the exterior position $1+\\#\\{j\\in J:j<i\\}$, so the sign agrees with the usual alternating deletion sign. For $W=\\bigcap_i\\ker A_i$ with its subspace topology, the pointwise inclusion $W_F[0]\\to\\mathcal K_F(V;A)$ is a cochain map and identifies $W_F$ with its degree-zero kernel.\n\nA continuous $E$-linear map $f:V\\to V'$ satisfying $fA_i=A'_if$ induces a cochain map with every subset coordinate given by $1\\otimes f$; identities and compositions are preserved. For $E\\to\\Omega$ [def-sfb-continuous-map-condensed-ring-map], the maps on sections $x_I(s)\\mapsto1\\otimes x_I(s)$ give a cochain map $\\mathcal K_E(V;A)\\to\\operatorname{Res}_{C_E\\to C_\\Omega}\\mathcal K_\\Omega(V;A)$ [sk-def-sfb-change-of-scalars] with exactly those coordinates; it commutes with the kernel inclusions. For $r=0$ the model and its inclusion are $V_F[0]$ and the identity, and for $V=0$ the model is zero. All sections use the norm topology and all continuous maps.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), analytic tame-boundary input below the open-coefficient preservation assertion; former step 4 signed subset construction, the termwise scalar-map assertion of step 6, and the empty and zero models of step 7; agent extraction from the previously delivered proof, not an analytic theorem asserted by the blueprint."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-continuous-representation-condensation",
+  "def-pc-cochain-complex-modules",
+  "sk-def-sfb-change-of-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Work on the coherent site of profinite tests in a fixed universe and take the coefficient universe large enough for its objects and morphisms. The coefficient node gives the commutative ring sheaf $C_F$ with its pointwise operations. Use the internal/section-module equivalence for this site. Its monoidality hypothesis holds for the sheafified tensor: by [sk-def-sfb-sheaf-tensor], sheafification is strong symmetric monoidal; consequently if sheafification inverts $h$, it also inverts $h\\otimes N$ and $N\\otimes h$, since their sheafifications are tensor products of an isomorphism with an identity. Thus equality and construction of internal module morphisms may be checked on their section maps. In particular a sectionwise linear family commuting with restrictions gives an internal morphism, and equal families give equal morphisms. These are consequences of full faithfulness of the stated equivalence, not assertions that epimorphisms are sectionwise surjective.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring",
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), coefficient context; agent expansion of the section-module interpretation, with the existing sheaf tensor and internal-module equivalence."
+   }
+  },
+  {
+   "text": "Choose an $E$-basis of $V$. Its coordinate map $V\\to E^n$ and inverse are continuous by [lem-sfb-finite-dimensional-linear-map-continuous]: $E$ is a finite extension of $\\mathbf Q_\\ell$, hence is one of the complete nontrivially valued fields explicitly covered there, and both domains are finite-dimensional Hausdorff topological vector spaces. For $F=\\Omega$ use $F\\otimes_E V\\cong F^n$ with the stipulated product topology. In these coordinates every $A_{i,F}$ is the original finite matrix with its entries mapped from $E$ to $F$. Its coordinate functions $x\\mapsto\\sum_j a_{kj}x_j$ are continuous by continuity of addition and multiplication in the normed field. The same calculation makes any finite-dimensional $F$-linear coordinate map continuous, including finite products, coordinate injections, projections and changes of basis. No completeness of $\\Omega$ is used in this calculation.",
+   "uses": [
+    "lem-sfb-finite-dimensional-linear-map-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the norm-topological finite-coordinate setup; continuity lemma read in Mathlib/Topology/Algebra/Module/FiniteDimension.lean:283."
+   }
+  },
+  {
+   "text": "For $0\\leq a\\leq r$ let $P_a$ be the finite set of increasing $a$-subsets of $\\{1,\\ldots,r\\}$ and put $U_F^a=\\prod_{I\\in P_a}(F\\otimes_E V)$. Apply [def-sfb-continuous-representation-condensation] to the actual tensor-product spaces in $U_F^a$, with their stated finite-dimensional module topologies, the trivial group and trivial action, and forget that action. Joint continuity is the continuity of the projection to $U_F^a$. Its sections are $C(S,U_F^a)$. The maps $x\\mapsto(\\operatorname{pr}_I\\circ x)_I$ and $(x_I)_I\\mapsto(s\\mapsto(x_I(s))_I)$ are inverse continuous-map identifications. Finite products of section modules are finite direct sums: the coordinate injections and projections satisfy $p_Ij_J=\\delta_{IJ}$ and $\\sum_Ij_Ip_I=1$. These identities also hold internally by step 1, proving the requested direct-sum coordinates with pointwise scalars and precomposition. In every other integer degree choose the zero internal module. Define $D^a:U_F^a\\to U_F^{a+1}$ by the displayed signed sum in the statement. It is a continuous $F$-linear map by step 2. The realization node gives its actual internal postcomposition morphism $d^a$, with exactly that section formula. Boundary differentials to or from a zero degree are zero.",
+   "uses": [
+    "def-sfb-continuous-representation-condensation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), former signed-subset construction of the parent proof, expanded by the existing continuous-section realization."
+   }
+  },
+  {
+   "text": "Write $p_L(i)=\\#\\{j\\in L:j<i\\}$. In the $L$-coordinate of $d^{a+1}d^a x$, pair the two terms indexed by distinct $i<j$ in $L$. Deleting $i$ first and then $j$ gives $(-1)^{p_L(i)+p_L(j)-1}A_{i,F}A_{j,F}x_{L\\setminus\\{i,j\\}}$; deleting $j$ first and then $i$ gives $(-1)^{p_L(j)+p_L(i)}A_{j,F}A_{i,F}x_{L\\setminus\\{i,j\\}}$. Tensor extension preserves the assumed commutation, so these are negatives of one another. Every term has exactly one such partner. Their finite sum is zero, and the boundary cases contain only zero differentials. By step 1 the internal composites vanish, giving the cochain complex of [def-pc-cochain-complex-modules]. In the increasing enumeration of $J$, the position of $i$ is $p_J(i)+1$, so the alternating deletion sign at that position is $(-1)^{p_J(i)}$, exactly the chosen sign.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), former signed-subset construction: agent proof of the two-deletion cancellation and exterior-position normalization."
+   }
+  },
+  {
+   "text": "Let $B:V\\to V^r$ send $v$ to $(A_iv)_i$ and let $j:W\\hookrightarrow V$ be the inclusion. By the definition $W=\\bigcap_i\\ker A_i$, the sequence $0\\to W\\xrightarrow jV\\xrightarrow BV^r$ is exact, with no surjectivity assertion at its last term. The field-module flatness node applies to the $E$-module $F$. Apply [lem-weil-pbc-flat-tensor-exact] with $R=E$, $M=F$ to obtain injectivity of $1\\otimes j$ and exactness at $F\\otimes_E V$. The finite-coordinate identification $F\\otimes_E V^r\\cong(F\\otimes_E V)^r$ sends $c\\otimes(v_i)_i$ to $(c\\otimes v_i)_i$; its inverse is the sum of the maps induced by coordinate injections, and the two composites are identities on pure tensors. Under it $1\\otimes B$ has coordinates $A_{i,F}$. Hence the image of $F\\otimes_E W$ is exactly $\\bigcap_i\\ker A_{i,F}$, including when $r=0$.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HD (algebra-lemma-flat), applied to the combined operator B; agent specialization to the common kernel and the explicit finite-product tensor identification."
+   }
+  },
+  {
+   "text": "Choose a basis of $W$ and extend it to a basis of $V$. The subspace $W$ is finite-dimensional and Hausdorff with continuous vector operations inherited from $V$; [lem-sfb-finite-dimensional-linear-map-continuous] makes its basis coordinates and inverse continuous over $E$. After extension to either $F$, $1\\otimes j$ is the coordinate inclusion $F^{\\dim W}\\to F^{\\dim V}$ in these adapted bases. Its inverse on its image is the first-coordinate projection, continuous by the finite matrix calculation in step 2. Therefore any continuous section $x:S\\to F\\otimes_E V$ killed by every $A_{i,F}$ factors uniquely and continuously through $F\\otimes_E W$, by step 5. This factorization is pointwise linear and commutes with precomposition. For an arbitrary internal module mapping to $V_F$ and annihilated by $d^0$, apply it to every section: the resulting natural linear family is its unique factor through $W_F$, by the section-module equivalence. Thus $W_F\\to\\mathcal K_F^0$ is the internal kernel of $d^0$. Its other components are zero, so it defines the asserted cochain map $W_F[0]\\to\\mathcal K_F$.",
+   "uses": [
+    "lem-sfb-finite-dimensional-linear-map-continuous",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the degree-zero kernel inclusion: adapted-basis topology and sectionwise kernel universal property."
+   }
+  },
+  {
+   "text": "For an intertwiner $f:V\\to V'$ use in degree $a$ the product of copies of $f_F=1\\otimes f$, and the unique zero maps outside the range. Its matrices are finite and hence continuous by step 2. Postcomposition therefore gives internal maps by the realization node. For each $J$ their cochain equation is the equality of $f_F\\sum_{i\\in J}(-1)^{p_J(i)}A_{i,F}x_{J\\setminus i}$ and $\\sum_{i\\in J}(-1)^{p_J(i)}A'_{i,F}f_Fx_{J\\setminus i}$, which follows term by term from $fA_i=A'_if$. Identities and composites act by the identity and composed maps on every coordinate, respectively, so are preserved internally by step 1. Also $f(W)\\subseteq W'$ since $A'_if(w)=f(A_iw)=0$; consequently the coordinate maps commute with the degree-zero inclusions.",
+   "uses": [
+    "def-sfb-continuous-representation-condensation",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent verification of naturality for arbitrary commuting operators, expanding the literal coordinate-map construction."
+   }
+  },
+  {
+   "text": "The inclusion $\\iota:E\\hookrightarrow\\Omega$ is continuous for the extended norm, so [def-sfb-continuous-map-condensed-ring-map] gives exactly the sectionwise ring map $C_E\\to C_\\Omega$. Let $\\eta_V:E\\otimes_E V\\to\\Omega\\otimes_E V$ be $\\eta_V(c\\otimes v)=\\iota(c)\\otimes v$. In the chosen basis it is coordinatewise $\\iota$, hence continuous and $\\iota$-semilinear. Use the normalized scalar-action restriction and semilinear-map clause of [def-sfb-continuous-representation-condensation], with trivial action. They make the finite products of this actual tensor insertion internal maps to restriction of scalars [sk-def-sfb-change-of-scalars] (identity on underlying objects and morphisms, so it carries cochain complexes to cochain complexes), with section formula $x_I(s)\\mapsto\\eta_V(x_I(s))=1\\otimes x_I(s)$ under $E\\otimes_EV\\cong V$. On pure tensors $\\eta_VA_{i,E}=A_{i,\\Omega}\\eta_V$; the same equality holds on finite sums and commutes with signs. Thus the signed differential sums commute term by term, proving the cochain equation. Likewise $\\eta_Vj_E=j_\\Omega\\eta_W$ on pure tensors, proving the required square with the kernel inclusions; this equality is independent of the adapted bases.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring-map",
+    "def-sfb-continuous-representation-condensation",
+    "def-pc-cochain-complex-modules",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), former termwise scalar-map assertion: explicit insertion, signed differential equation, and kernel square."
+   }
+  },
+  {
+   "text": "If $r=0$, $P_0=\\{\\varnothing\\}$ and $P_a$ is empty for $a\\ne0$ in the permitted range. Choose the single degree-zero realization to be $V_F$ itself, so the constructed complex is $V_F[0]$, $W=V$, and the inclusion is its identity. If $V=0$, every space $U_F^a$ is zero and every section module has its single zero element, hence the internal model is zero by step 1. If a test space $S$ is empty, every section formula is the unique map on the zero module of empty functions; all coordinate, scalar and kernel equations still hold. The construction everywhere uses all continuous maps in the stated norm topologies.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), former empty-rank and zero-model normalizations, with the empty profinite test checked explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-finite-dimensional-linear-map-continuous",
+  "def-sfb-continuous-representation-condensation",
+  "def-pc-cochain-complex-modules",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "sk-def-sfb-change-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) supplies the open-coefficient context only. This split supplies the explicit finite-coordinate construction extracted from the parent; algebraic kernel exactness follows Stacks Tag 00HD and continuity uses the existing finite-dimensional linear-map leaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(Koszul|koszul)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern continuous cohomology, ordinary alternating complexes or normed maps, not the strict finite-subset internal continuous-section complex with these scalar maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KoszulComplex\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern continuous cohomology, ordinary alternating complexes or normed maps, not the strict finite-subset internal continuous-section complex with these scalar maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Condensed modules continuous functions on a normed vector space Koszul cochain complex commuting operators",
+   "results": "8 hits: ContinuousMultilinearMap.normedSpace'.congr_simp, ContDiffMapSupportedIn.toBoundedContinuousFunctionCLM_eq_of_scalars, IsCompactOperator.continuous, ContinuousMap.normedSpace, isClosed_setOf_isCompactOperator, ContinuousMultilinearMap.normedSpace', BoundedContinuousFunction.instModule, ContinuousLinearMap.instModuleFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern continuous cohomology, ordinary alternating complexes or normed maps, not the strict finite-subset internal continuous-section complex with these scalar maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional norm topological vector space with commuting linear endomorphisms defines a signed subset indexed Koszul cochain complex of condensed continuous function modules with coefficient inclusion chain maps",
+   "results": "8 hits: ContinuousCohomology.MultiInd.complex, ContinuousCohomology.homogeneousCochains, ContinuousCohomology.MultiInd.d, AlgebraicTopology.AlternatingCofaceMapComplex.obj, inhomogeneousCochains.d, AlgebraicTopology.alternatingCofaceMapComplex, ContinuousCohomology.MultiInd.d_succ, inhomogeneousCochains.d_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern continuous cohomology, ordinary alternating complexes or normed maps, not the strict finite-subset internal continuous-section complex with these scalar maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul complex of commuting endomorphisms in an abelian category with finite biproducts, subset coordinates and differential signs, natural under scalar restriction",
+   "results": "8 hits: ChainComplex.linearYonedaObj_d, HomologicalComplex.alternatingConst, Rep.standardComplex.forget₂ToModuleCat, CategoryTheory.Idempotents.KaroubiHomologicalComplexEquivalence.Functor.obj_d_f, Rep.standardComplex.d_eq, HomologicalComplex.alternatingConst_d, CategoryTheory.Idempotents.karoubiChainComplexEquivalence_functor_obj_d_f, HomologicalComplex.alternatingConst_X",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern continuous cohomology, ordinary alternating complexes or normed maps, not the strict finite-subset internal continuous-section complex with these scalar maps"
+  },
+  {
+   "tool": "grep",
+   "query": "(Koszul|koszul)",
+   "results": "3 comment-only hits in Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean:16, Mathlib/Algebra/Homology/LocalCohomology.lean:45, Mathlib/RingTheory/Regular/RegularSequence.lean:21; no Koszul-complex declaration.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give a signed finite-subset complex of internal C(-,F)-modules with these section, kernel and scalar-insertion normalizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul cochain complex of commuting endomorphisms with continuous sections of norm topological vector spaces",
+   "results": "8 hits: ContinuousCohomology.MultiInd.complex, continuousCohomology, CochainComplex.ConnectData.cochainComplex, ContinuousAlternatingMap.instNormedSpace.congr_simp, ContinuousCohomology.homogeneousCochains, ContinuousAlternatingMap.instNormedSpace, ContinuousLinearMap.toNormedAlgebra, ContinuousLinearMap.toSeminormedRing",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give a signed finite-subset complex of internal C(-,F)-modules with these section, kernel and scalar-insertion normalizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give a signed finite-subset complex of internal C(-,F)-modules with these section, kernel and scalar-insertion normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commuting endomorphisms of a finite dimensional normed vector space define a signed subset Koszul cochain complex of condensed continuous function modules, natural for linear and scalar extension maps",
+   "results": "8 hits: ContinuousCohomology.MultiInd.complex, ContinuousCohomology.homogeneousCochains, inhomogeneousCochains.d, ContinuousCohomology.MultiInd.d, inhomogeneousCochains.d_eq, ContinuousCohomology.MultiInd.d_succ, inhomogeneousCochains.d_hom_apply, Rep.FiniteCyclicGroup.moduleCatCochainComplex",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give a signed finite-subset complex of internal C(-,F)-modules with these section, kernel and scalar-insertion normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite exterior algebra differential for commuting linear operators squares to zero by pairwise cancellation and defines a functorial cochain complex",
+   "results": "8 hits: inhomogeneousCochains.d, ExteriorAlgebra, ExteriorAlgebra.comp_ι_sq_zero, ExteriorAlgebra.ιMulti, inhomogeneousCochains.d_hom_apply, ExteriorAlgebra.liftAlternating, ExteriorAlgebra.liftAlternating_ι_mul, Rep.standardComplex.d",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give a signed finite-subset complex of internal C(-,F)-modules with these section, kernel and scalar-insertion normalizations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tame-inertia-continuous-koszul",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), analytic tame-boundary input below the open-coefficient preservation assertion; former step 4 signed subset construction, the termwise scalar-map assertion of step 6, and the empty and zero models of step 7",
+   "via": [
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-norm-coefficient-koszul-realization",
+  "worker": "stage1",
+  "group": "Q97",
+  "summary": "Preserved the statement. Constructed the strict complex from finite products of continuous-section realizations, wrote the two-deletion sign cancellation and literal naturality/scalar equations, and proved its kernel clause using existing field flatness and tensor exactness plus an adapted-basis topological embedding. No new nodes: all non-elementary tools already exist. All steps are shorter than 2000 characters. No completeness of Omega, local-constancy replacement, derived comparison, SGA route or compiler is used. Repair of returned head 8911a5c9d13: reread every current statement dependency and proof dependency, verified all citation quotes, and aligned steps 3 and 8 explicitly with the current realization node’s actual tensor-product topology and normalized scalar-action restriction clauses; retained the mathematical statement and route.",
+  "blueprint": "Paragraph (3) of det-thm-sf-ctf-stability-direct-images is context for the analytic tame-boundary input. Steps 1-4 supply the former strict signed subset model, steps 5-6 its kernel, steps 7-8 literal linear/scalar maps, and step 9 the empty/zero normalizations. The ancestor command returns None, so the inherited null ancestor and via chain are retained. Whole-blueprint searches for Koszul, commuting endomorphisms and continuous-section found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "The kernel factorization and coordinate constructions require the existing internal/section-module equivalence, which preserves sections and restrictions identically; no analytic tame-boundary node supplies this generic tool."
+   },
+   {
+    "node": "sk-def-sfb-sheaf-tensor",
+    "why": "Its strong monoidal sheafification verifies the monoidal-local-equivalence hypothesis of the generic section-module equivalence on the profinite site."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-sheaf-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-6bba5070b",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-6bba5070b (reviewer sub-agent of L); spot-checked: FIX for one missing definition citation (B3). This re-applies the FIX of the prior run 8911a5c9, which was lost when that head's landing was refused; the mathematics is sound. Delivery: one commit with the item and the report, 0 new nodes, no repair note. The item is still unsplit in clones/live and clones/side-live, so it is not superseded, and every cited statement is identical between the snapshot and live. Against 8911a5c9 the statement is unchanged; only steps 3 and 8 were reworded to name the realization node's tensor-product topology and normalized scalar-action restriction clause. No SGA source (the only 'SGA' string is 'no ... SGA route', which the route-lock regex does not match). Source: main-20261015 sk-thm-sf-ctf-stability-direct-images (3) is context only, and the agent origin is recorded honestly. Checks: step 1, the monoidal-local-equivalence hypothesis follows from strong monoidal sheafification (sk-def-sfb-sheaf-tensor 1), and the internal equivalence gives sectionwise criteria through full faithfulness. Step 2, the finite-dimensional continuity leaf (complete field) is applied only over E; over Omega the step uses finite matrices in the product topology. Step 3, the realization node with trivial group gives C(S,U) sections and postcomposition morphisms, and its C_F is C(-,F). Step 4, I recomputed the signs: outer j/inner i gives p(i)+p(j) and outer i/inner j gives p(i)+p(j)-1, so the terms cancel by commutation. Step 5, F is flat over the field E (no finite degree needed); flat-tensor-exact applies, and r=0 gives W=V. Step 6, an adapted basis gives a continuous projection, continuous factorization and the internal kernel property via the equivalence. Steps 7 and 8, naturality and the iota-semilinear insertion are checked on pure tensors, and the kernel square holds. Edge cases r=0, V=0, empty S, A=0, A invertible, r=2 and diag(0,1) all hold. Not a duplicate: lem-sfb-discrete-lattice-koszul-resolution needs automorphisms and is a derived comparison, and the algebraic Koszul nodes are about ring elements. Tool uses accepted: internal-module equivalence and sheaf tensor. Fix: the statement's Res_{C_E->C_Omega} cited no definition, so sk-def-sfb-change-of-scalars is added to the statement, stmt_deps, the uses of step 8 and proof_deps, with a note in step 8 that Res is the identity on objects and morphisms and so carries cochain complexes to cochain complexes. Meaning unchanged; the dependency closure of sk-def-sfb-change-of-scalars (286 nodes) does not contain the item, so there is no cycle.; 1 file(s) fixed by the reviewer"
+ }
+}

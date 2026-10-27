@@ -1,0 +1,277 @@
+{
+ "id": "lem-trf-module-one-kflat-uncurry-normalization",
+ "kind": "statement",
+ "title": "Ordinary uncurrying represents the derived transpose on one-K-flat pairs",
+ "statement": "Let $R$ be a commutative ring and let $U,V,I$ be arbitrary cochain complexes of $R$-modules, with localization $Q$ to $D(R)$ [def-weil-abstract-derived-category]. Use product total Hom [def-sc-module-total-hom-complex] and direct-sum total tensor [def-pc-tensor-complex-sheaves]. Assume $I$ is K-injective [def-pur-kinjective-complex], and assume at least one of $U,V$ is K-flat [def-pc-module-kflat-complex]. Give $D(R)$ the canonical closed symmetric monoidal structure [lem-sf-ringed-derived-closed-symmetric-monoidal]. Let\n$$c_{U,V}:Q\\operatorname{Tot}(U\\otimes_RV)\\xrightarrow{\\sim}QU\\otimes_R^{\\mathbf L}QV$$\nbe the natural one-K-flat comparison induced by the inverse localization tensorator [lem-sf-ringed-derived-native-tensor], and let\n$$j_{V,I}:Q\\operatorname{Hom}_R^\\bullet(V,I)\\xrightarrow{\\sim}R\\operatorname{Hom}_R(QV,QI)$$\nbe the canonical K-injective representative comparison [def-pur-derived-internal-hom]. Suppose $\\phi:U\\to\\operatorname{Hom}_R^\\bullet(V,I)$ and $\\psi:\\operatorname{Tot}(U\\otimes_RV)\\to I$ are chain maps such that $\\psi(u\\otimes v)=\\phi(u)(v)$ for all homogeneous $u\\in U^p$, $v\\in V^q$, interpreted through the actual Hom product projections. Then their localizations satisfy\n$$\\operatorname{tr}_{QU,QV,QI}\\bigl(Q(\\psi)\\circ c_{U,V}^{-1}\\bigr)=j_{V,I}\\circ Q(\\phi),$$\nwhere $\\operatorname{tr}$ is the right-tensor adjunction bijection $\\operatorname{Hom}(QU\\otimes_R^{\\mathbf L}QV,QI)\\cong\\operatorname{Hom}(QU,R\\operatorname{Hom}_R(QV,QI))$. There is no boundedness, finite-generation or degreewise-flatness assumption.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A65 (lemma-internal-hom), proof and equation-internal-hom: compatibility of the derived adjunction with ordinary tensor-Hom uncurrying. The one-K-flat representative formulation is extracted from this construction."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sc-module-total-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-kinjective-complex",
+  "def-pc-module-kflat-complex",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-ringed-derived-native-tensor",
+  "def-pur-derived-internal-hom",
+  "def-trf-module-hom-complex-derived-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Work on the terminal one-object site with coefficient ring $R$: module sheaves are $R$-modules, and sheaf tensor and product Hom are the actual module constructions. By [lem-pc-kflat-resolution] choose a quasi-isomorphism $q:P\\to V$ with $P$ K-flat and all terms flat; also choose $a:F\\to U$ with $F$ K-flat with flat terms. No boundedness of either resolution is required. Write $T(X,Y)=\\operatorname{Tot}(X\\otimes_RY)$ and $h=Qq$. Localization makes $h$ and $Qa$ isomorphisms.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (lemma-K-flat-resolution), applied on the terminal site."
+   }
+  },
+  {
+   "text": "Let $s=\\operatorname{Hom}^{\\bullet}(q,I)$ be precomposition, put $\\phi_P=s\\circ\\phi$, and put $t=T(1_U,q)$ and $\\psi_P=\\psi\\circ t$. These are chain maps by functoriality of product Hom and total tensor. For $u\\in U^p$ and $z\\in P^q$, actual product projections give $\\phi_P(u)(z)=\\phi(u)(qz)=\\psi(u\\otimes qz)=\\psi_P(u\\otimes z)$. Equality on each pure-tensor summand determines a map out of $T(U,P)$ by [lem-weil-pbc-module-tensor-hom-currying] and the direct-sum universal property. Thus $\\psi_P$ is exactly the ordinary uncurrying of $\\phi_P$, with no factor interchange or extra sign.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-module-tensor-hom-currying"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A65 (lemma-internal-hom), proof and equation-internal-hom; agent extension to one-K-flat representatives by naturality."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-hom-kflat-chain-transpose] with $A=U$, $P=P$, $E=I$, for the closed structure $S$ of $\\operatorname{tr}$ and its K-flat models $T$. Its flat-term hypothesis holds for $P$, and its K-injective hypothesis is exactly the assumption on $I$. By [lem-sf-ringed-derived-tensor-hom-adjunction] the closed structure of $\\operatorname{tr}$ has the native monoidal structure and its K-flat models $T$ are the native simultaneous K-flat comparison; so on the K-flat pair $(F,P)$ the comparison $c^*_{F,P}$ of the theorem is $T(F,P)=c_{F,P}$. Its comparison $c^*_{U,P}$ agrees with inversion of the representative quasi-isomorphism $T(a,1_P)$, and the native comparison is natural [lem-sf-ringed-derived-native-tensor]; for $a:F\\to U$ from step 1 both therefore satisfy $c_{U,P}\\circ Q(T(a,1_P))=(Qa\\otimes1)\\circ c_{F,P}$ with the same right side. The map $T(a,1_P)$ is a quasi-isomorphism since $P$ is K-flat [def-pc-module-kflat-complex], so its localization cancels and $c^*_{U,P}=c_{U,P}$. The Hom comparison in that theorem is the fixed augmentation $I\\to I(I)$ followed by the derived-Hom representative identification, hence is $j_{P,I}$ [def-pur-derived-internal-hom]. The pure-tensor equality in step 2 says that $\\psi_P$ is the chain map $\\widetilde{\\phi_P}$ of that theorem, which therefore yields\n$$\\operatorname{tr}_{QU,QP,QI}\\bigl(Q\\psi_P\\circ c_{U,P}^{-1}\\bigr)=j_{P,I}\\circ Q\\phi_P.$$",
+   "uses": [
+    "lem-sfb-hom-kflat-chain-transpose",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sf-ringed-derived-native-tensor",
+    "def-pc-module-kflat-complex",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A65 (lemma-internal-hom), proof and equation-internal-hom; agent extension to one-K-flat representatives by naturality."
+   }
+  },
+  {
+   "text": "Set $A=Q\\psi\\circ c_{U,V}^{-1}$, $B=j_{V,I}\\circ Q\\phi$, and $H=R\\operatorname{Hom}_R(h,1_{QI})$. Both $c_{U,P}$ and $c_{U,V}$ are invertible: the former because $P$ is K-flat and the latter by the given one-K-flat hypothesis. Naturality of the native comparison gives\n$$c_{U,V}\\circ Qt=(1_{QU}\\otimes h)\\circ c_{U,P},\\qquad Q\\psi_P\\circ c_{U,P}^{-1}=A\\circ(1_{QU}\\otimes h).$$\nFor the Hom representative comparison, functoriality of the localized product Hom gives\n$$j_{P,I}\\circ Qs=H\\circ j_{V,I},\\qquad j_{P,I}\\circ Q\\phi_P=H\\circ B.$$\nHere precomposition by $q$ really is a quasi-isomorphism on Hom representatives: apply [lem-pur-rhom-well-defined] with target map $1_I$ between K-injectives and source map $q$. Thus the displayed comparison is the canonical localized one, and uses no flatness assumption on $V$ or on individual terms of $U$.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A65 (lemma-internal-hom), proof and equation-internal-hom; agent extension to one-K-flat representatives by naturality."
+   }
+  },
+  {
+   "text": "Naturality in the second variable of the canonical right-tensor adjunction [lem-sf-ringed-derived-closed-symmetric-monoidal] says\n$$\\operatorname{tr}_{QU,QP,QI}\\bigl(A\\circ(1_{QU}\\otimes h)\\bigr)=H\\circ\\operatorname{tr}_{QU,QV,QI}(A).$$\nSubstitute both identities of step 4 into step 3 to obtain $H\\circ\\operatorname{tr}(A)=H\\circ B$. The derived internal Hom is a functor, so $H$ is invertible with inverse $R\\operatorname{Hom}_R(h^{-1},1_{QI})$; composing on the left with this inverse gives $\\operatorname{tr}(A)=B$, precisely the asserted equality. This argument handles either K-flat factor without changing the tensor order.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A65 (lemma-internal-hom), proof and equation-internal-hom; agent extension to one-K-flat representatives by naturality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "def-weil-abstract-derived-category",
+  "def-sc-module-total-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-module-tensor-hom-currying",
+  "lem-sfb-hom-kflat-chain-transpose",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-sf-ringed-derived-native-tensor",
+  "def-pc-module-kflat-complex",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A65 (lemma-internal-hom), proof and equation-internal-hom; agent extension to one-K-flat representatives by naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "With either U or V K-flat and I K-injective, localizing a chain map U to Hom(V,I) agrees under derived tensor Hom adjunction with its uncurrying Tot(U tensor V) to I",
+   "results": "8 hits; top=[\"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor'_obj_obj\", 'CategoryTheory.Tor_map', 'CategoryTheory.Tor', 'HomologicalComplex.HasGoodTensor₁₂', 'CategoryTheory.Tor_obj']; subdirectory=; note=; digest=8802109daef546e5",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ordinary cochain, Tor or abstract derived-adjunction infrastructure, not the specified module-valued normalized representative equation. Adjunction.derived requires separate derived-functor and composition hypotheses, so is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"homEquiv\"",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ordinary cochain, Tor or abstract derived-adjunction infrastructure, not the specified module-valued normalized representative equation. Adjunction.derived requires separate derived-functor and composition hypotheses, so is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry|homEquiv|tensor.*[Hh]om|[Hh]om.*tensor",
+   "results": "25 hits; top=['Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Monoidal.lean', 'Mathlib/Algebra/Homology/Monoidal.lean', 'Mathlib/Algebra/Homology/Monoidal.lean', 'Mathlib/Algebra/Homology/Monoidal.lean']; subdirectory=Algebra/Homology; note=; digest=b90ae5c92e4c5e1b",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ordinary cochain, Tor or abstract derived-adjunction infrastructure, not the specified module-valued normalized representative equation. Adjunction.derived requires separate derived-functor and composition hypotheses, so is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor Hom adjunction sends the localization of an ordinary Hom complex chain map to its tensor uncurrying when either tensor factor is K-flat and the target is K-injective",
+   "results": "8 hits; top=[\"CategoryTheory.Adjunction.derived'\", 'CategoryTheory.Adjunction.derived', \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived'_unit\", 'CategoryTheory.Adjunction.derivedε', 'RingHom.Flat.ofLocalizationSpanTarget', 'CategoryTheory.Adjunction.derived_counit', 'CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective']; subdirectory=; note=; digest=7e28eb6642162947",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ordinary cochain, Tor or abstract derived-adjunction infrastructure, not the specified module-valued normalized representative equation. Adjunction.derived requires separate derived-functor and composition hypotheses, so is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A chain map into a product Hom complex has derived transpose equal to its ordinary pure tensor evaluation after localization if the target is K-injective and one tensor factor is K-flat",
+   "results": "8 hits; top=['HomologicalComplex.HasGoodTensor₁₂', \"CategoryTheory.Tor'_map_app\", 'HomologicalComplex.HasGoodTensor₂₃', 'CategoryTheory.Tor_map', \"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor'_obj_obj\", 'HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX']; subdirectory=; note=; digest=2b48b5a9defc0f47",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ordinary cochain, Tor or abstract derived-adjunction infrastructure, not the specified module-valued normalized representative equation. Adjunction.derived requires separate derived-functor and composition hypotheses, so is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry|homEquiv|tensor.*[Hh]om|[Hh]om.*tensor",
+   "results": "25 hits; top=['Mathlib/Algebra/Homology/Monoidal.lean', 'Mathlib/Algebra/Homology/Monoidal.lean', 'Mathlib/Algebra/Homology/Monoidal.lean', 'Mathlib/Algebra/Homology/Monoidal.lean', 'Mathlib/Algebra/Homology/Monoidal.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean', 'Mathlib/Algebra/Homology/Double.lean']; subdirectory=Algebra/Homology; note=; digest=3108b3a94a550149",
+   "date": "2026-10-22",
+   "verdict": "no match: Tor concerns derived functors on objects, MonoidalClosed.uncurry only abstract currying, and Localization.Monoidal.tensorBifunctorIso only localization of an already compatible tensor. Adjunction.derived requires derived-functor and composition hypotheses. None supplies this normalized one-K-flat product-Hom representative identity in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor Hom transpose of the localization of a chain map U to Hom(V,I) equals its ordinary uncurrying when one tensor factor is K-flat and I is K-injective",
+   "results": "8 hits; top=['CategoryTheory.MonoidalClosed.uncurry', 'CategoryTheory.Localization.Monoidal.tensorBifunctorIso', 'IsLocalization.instIsLocalizedModuleTensorProductMap', 'CategoryTheory.Functor.mapDerivedCategoryFactors', 'CategoryTheory.Localization.Monoidal.instLifting₂LocalizedMonoidalToMonoidalCategoryCompFunctorFlipCurriedTensorObjWhiskeringRightTensorBifunctor', 'RingHom.Flat.holdsForLocalizationAway', 'CategoryTheory.Localization.Monoidal.instLifting₂LocalizedMonoidalToMonoidalCategoryCompFunctorCurriedTensorObjWhiskeringRightTensorBifunctor', 'CategoryTheory.Localization.Lifting₂.uncurry']; subdirectory=; note=; digest=727f8e3889c8c2be",
+   "date": "2026-10-22",
+   "verdict": "no match: Tor concerns derived functors on objects, MonoidalClosed.uncurry only abstract currying, and Localization.Monoidal.tensorBifunctorIso only localization of an already compatible tensor. Adjunction.derived requires derived-functor and composition hypotheses. None supplies this normalized one-K-flat product-Hom representative identity in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary complexes U V I of modules with I K-injective and either U or V K-flat, ordinary uncurrying localizes to the canonical derived tensor Hom adjunction with the inverse localization tensorator",
+   "results": "8 hits; top=[\"CategoryTheory.Tor'\", 'CategoryTheory.Tor', \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor'_map_app\", 'CategoryTheory.Tor_map', \"CategoryTheory.Tor'_obj_map\", 'CategoryTheory.Tor_obj', \"CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost_hom_app_app'\"]; subdirectory=; note=; digest=292802fb865da3e8",
+   "date": "2026-10-22",
+   "verdict": "no match: Tor concerns derived functors on objects, MonoidalClosed.uncurry only abstract currying, and Localization.Monoidal.tensorBifunctorIso only localization of an already compatible tensor. Adjunction.derived requires derived-functor and composition hypotheses. None supplies this normalized one-K-flat product-Hom representative identity in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of evaluation of a product Hom complex is the derived adjunction counit on a one K-flat tensor pair",
+   "results": "8 hits; top=[\"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_map_app\", 'CategoryTheory.Tor', \"CategoryTheory.Tor'_obj_obj\", 'CategoryTheory.Adjunction.derivedε_fac_app', 'CategoryTheory.Localization.HasProductsOfShapeAux.adj_counit_app', \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Tor'_obj_map\"]; subdirectory=; note=; digest=8806b612d03bc7e3",
+   "date": "2026-10-22",
+   "verdict": "no match: Tor concerns derived functors on objects, MonoidalClosed.uncurry only abstract currying, and Localization.Monoidal.tensorBifunctorIso only localization of an already compatible tensor. Adjunction.derived requires derived-functor and composition hypotheses. None supplies this normalized one-K-flat product-Hom representative identity in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-double-evaluation-signed-derived-model",
+  "date": "2026-10-22",
+  "group": "Q93"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Canonical unbounded biduality in the second paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Supporting bounded case: Tag 0A68 (2), applied to each pseudo-coherent truncation in the proof of Tag 0A69. Extracted auxiliary argument: Tags 0A60 (lemma-evaluate-and-more, equations alpha and beta), 0A61 (remark-sign-explanation), and 0A67 (lemma-internal-hom-evaluate, representative construction); normalization of the tensor-Hom transpose when only one tensor factor is K-flat.",
+   "via": [
+    "lem-trf-double-evaluation-signed-derived-model",
+    "lem-trf-derived-evaluation-pseudocoherent",
+    "lem-trf-derived-evaluation-finite-injective",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-module-one-kflat-uncurry-normalization",
+  "worker": "stage1",
+  "summary": "Proved the one-K-flat representative identity by a flat-term K-flat resolution of V, the existing one-sided chain-transpose theorem, explicit naturality squares for tensor and product Hom, and cancellation of the derived Hom isomorphism. No new nodes, statement changes or Lean work. Read all cited statements and checked both choices of K-flat factor. Maintainer reader FIX: step 3 now cites lem-sf-ringed-derived-tensor-hom-adjunction for the identification of the chain-transpose theorem's normalized K-flat models with the native simultaneous comparison.",
+  "blueprint": "Auxiliary normalization in the established descent from lem-trf-local-term-locality proof (1)--(2) through coherent biduality and lem-trf-double-evaluation-signed-derived-model; this item supplies the ordinary-uncurrying/derived-transpose equation used there. Same blueprint ancestor and intermediate route retained; whole-blueprint searches for uncurry and internal hom found no identical imported statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Provides flat-term K-flat resolutions of V and U on the terminal ringed site; no statement of this trace-formula unit provides resolutions."
+   },
+   {
+    "node": "lem-sfb-hom-kflat-chain-transpose",
+    "why": "Provides ordinary-chain/derived-transpose normalization with arbitrary first factor and flat-term K-flat second factor; used for the resolution P, not assumed for the original V."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Provides one-K-flat tensorator inverses, their naturality, and agreement with simultaneous K-flat comparisons, needed to descend from P to V."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Provides invariance of the Hom representative under q with K-injective target I; this is a generic homological algebra tool."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Provides naturality in the second argument of the fixed derived right-tensor adjunction, needed for cancellation."
+   },
+   {
+    "node": "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "why": "Identifies the closed structure of tr and its K-flat tensor models with the native monoidal structure and native simultaneous K-flat comparison, so the comparison of lem-sfb-hom-kflat-chain-transpose is the native one; no node of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-sfb-hom-kflat-chain-transpose",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-pur-rhom-well-defined",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-ringed-derived-tensor-hom-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-f38b5291f",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-f38b5291f (reviewer sub-agent of L); spot-checked: Read Stacks more-algebra Tag 0A65 (lemma-internal-hom) and equation-internal-hom. The item extends Stacks' K-flat-L case to either factor K-flat, as the agent's own extension. The statement is unchanged and correct; tested on U=R[0] with V a non-flat module, on U=0 and V=0, and on odd/odd degrees (no swap, no sign). The only citer (double-evaluation step 7) uses the U-K-flat and V-K-flat cases, both covered. Steps 1, 2, 4 and 5 check against the cited statements. Step 1: flat-term K-flat resolutions exist on the punctual site. Step 2 (elementary): Hom(q,I) and 1⊗q carry no sign; uniqueness on generators via tensor-hom currying. Step 4: native-tensor naturality holds on the one-K-flat pairs (U,P) and (U,V), and pre- and post-composition commute in the Hom square. Step 5 (elementary): the adjunction is contravariantly natural in L, and RHom(h,1) is invertible. Fault in step 3, citation gap C1/C4: it equated the comparison of lem-sfb-hom-kflat-chain-transpose with the native one by saying both agree with the simultaneous K-flat comparison. That theorem is stated for an arbitrary closed structure S with normalized models T. The fact that the structure of tr has T equal to the native simultaneous comparison is lem-sf-ringed-derived-tensor-hom-adjunction (Lean closedAdjunction: S.monoidal = native, HEq T.comparison native). FIX: cited that node in step 3, rewrote the step to say this explicitly, added it to proof_deps and split_report.tool_uses, and checked it creates no cycle. No duplicate found: lem-sf-coefficient-tensor-curry-normalization needs both factors K-flat, and lem-sfb-hom-kflat-chain-transpose needs a flat-term second factor. No new nodes. No SGA cited. All six tool uses accepted as generic tools.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ModuleOneKFlatUncurryNormalization",
+  "declaration": "CochainComplex.module_oneKFlat_uncurry_normalization",
+  "file": "lean/Sheaf/Algebra/Homology/ModuleOneKFlatUncurryNormalization.lean",
+  "statement": "theorem module_oneKFlat_uncurry_normalization (R : Type u) [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)] (U V I : CochainComplex (ModuleCat.{u} R) ℤ) [I.IsKInjective] (hflat : (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat U ∨ (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat V) (φ : U ⟶ moduleHomComplex V I) (ψ : U ⊗ V ⟶ I) (huncurry : ∀ (p q : ℤ) (x : U.X p) (y : V.X q), ψ.f (q + p) ((HomologicalComplex.ιTensorObj U V p q (q + p) (Int.add_comm p q)) (x ⊗ₜ[R] y)) = (((φ.f p) x).v q (q + p) rfl) y) : MonoidalClosed.curry ((@id (DerivedCategory.Q.obj V ⊗ DerivedCategory.Q.obj U ≅ DerivedCategory.Q.obj U ⊗ DerivedCategory.Q.obj V) (DerivedMonoidal.braiding' DerivedCategory.Qh (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ)) (DerivedCategory.Q.obj V) (DerivedCategory.Q.obj U))).hom ≫ Functor.LaxMonoidal.μ DerivedCategory.Q U V ≫ DerivedCategory.Q.map ψ) = DerivedCategory.Q.map φ ≫ ModuleCat.moduleHomComplexDerivedComparison V I",
+  "branch": "sheaf-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e11f51197",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Clause-by-clause match: R CommRing at ModuleCat.{u}/HasDerivedCategory.{u}; arbitrary U V I; recorded moduleHomComplex and native total tensor with ιTensorObj; [I.IsKInjective]; hflat disjunction of recorded quasiIso.kFlat with no added flatness or boundedness; huncurry ∀ p q x y uses the real projection .v q (q+p) with no sign; c⁻¹ = μ Q U V; tr = curry after DerivedMonoidal.braiding', the Koszul (-1)^{pq} symmetry of lem-sf; j = new def-node ModuleCat.moduleHomComplexDerivedComparison. Hand sign check: both sides equal curry(μ_{V,U} ≫ Q(…)) sending v⊗u to (-1)^{ab}φ(u)(v), so the statement is consistent and true. New def node def-trf-module-hom-complex-derived-comparison (H2 repair of return 037a): ev is the Classical.choose of the landed projective_hom_evaluation_model, pinned by its hypothesis-free coordinate formula, so it is not hollow; j = curry(μ≫Q ev); names absent in live Lean; source and blueprint docstrings present. Item node differs from live only in lean and the added stmt_dep; lean.statement verbatim; only the theorem is sorry. Edge cases (zero complexes, zero ring, unbounded complexes, odd degrees, either K-flat factor) covered. Not compiled (no change). Advisory: the theorem-owned coinductionHom* helpers duplicate the new node-owned definitions."
+ }
+}

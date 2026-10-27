@@ -42,7 +42,18 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-prop-nagata-sketch-approximation",
  "split_report": {
@@ -80,15 +91,20 @@
   "note": "binders: qcqs S = CompactSpace+QuasiSeparatedSpace (recorded hows), fp f = LFP+QC+QS (convention 01TP); (i) finite IsAffineOpen base with iSup = top; (ii) finite affine charts, chartOver, iSup = f^-1 base a; (iii) Algebra.Presentation Fin n/Fin r for f.appLE algebra; (iv) all ordered chart pairs, finite basicOpen pairs equal and covering U inter U'; (v) RingEquiv of Localization.Away pinned to restriction via isLocalization_basicOpen (restriction algebra instance) and cast along basicAgree; identity/inverse/cocycle equations follow from (v), not fields; empty indices, Fin 0 ok; no Mathlib/source bundle (Scheme.AffineOpenCover lacks presentations/overlaps)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $S$ be qcqs and let $X\\to S$ be of finite presentation. Select a\nfinite affine cover of\n$S$, finite affine covers of its inverse images in $X$, finite\npresentations of all chart algebras over the base chart algebras, finite\nbasic-open presentations of the overlaps, and the two directions of every\noverlap isomorphism. Record these data and their finite identity, inverse,\nand cocycle equations as $\\mathsf R_X$.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(S_\\lambda)$ be a nonempty cofiltered inverse system of schemes with\nlimit $S$, and let $X\\to S$ be a morphism from a quasi-compact scheme. A\n*finite relative affine presentation* of $X$ over $S$ consists of an index\n$\\lambda_0$, finitely many affine opens $V_a\\subseteq S_{\\lambda_0}$, and\naffine opens $W_a\\subseteq X$ covering $X$ such that $W_a$ maps into $V_a$\nunder $X\\to S\\to S_{\\lambda_0}$. The overlaps $W_a\\cap W_b$, regarded as\nopens of $W_a$, together with both directions of the overlap\nidentifications $W_a\\cap W_b\\cong W_b\\cap W_a$, form gluing data along\nopens, with their identity, inverse, and cocycle equations. Select such a\npresentation and call it $\\mathsf R_X$.",
   "proof": [
    {
-    "text": "Quasi-compactness gives finite affine covers and quasi-separatedness makes\noverlaps quasi-compact. Finite presentation supplies finite generators and\nrelations; record both overlap directions and the finite identity and\ncocycle equations as $\\mathsf R_X$.",
+    "text": "Fix any index $\\lambda_0$. The affine opens of $X$ lying over some affine\nopen of $S_{\\lambda_0}$ form a basis of $X$, so quasi-compactness gives\nfinitely many of them covering $X$. The overlaps and their identifications\nare restrictions of the identity of $X$, so the identity, inverse, and\ncocycle equations hold. If $X$ is moreover quasi-separated, every overlap\n$W_a\\cap W_b$ is quasi-compact.",
     "uses": [],
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

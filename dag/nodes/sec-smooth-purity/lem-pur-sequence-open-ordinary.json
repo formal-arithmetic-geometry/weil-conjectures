@@ -1,0 +1,148 @@
+{
+ "id": "lem-pur-sequence-open-ordinary",
+ "kind": "statement",
+ "title": "Ordinary geometric open extension of semilinear systems",
+ "statement": "Let W be a scheme, V an open object of its pro-etale site, and B a strict tower of commutative ring sheaves. Fix any normalized open coefficient datum A [def-pur-sequence-site-open-data]. Then there exists an ordinary geometric sequence open datum O, with O.coefficients=A, satisfying the actual ordinary transition equation for every pair n≤m. All geometric localization, sectionwise restriction, exact adjunction, level comparison and evaluated unit/counit fields are conclusions. No scalar-preservation or derived assertion is part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04GZ, 0791, 04IE, 03DI and 03DJ: original proof steps 1, 2, 5 and 6."
+ },
+ "stmt_deps": [
+  "def-pur-sequence-site-open-data"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal C=W_{\\mathrm{proet}}$, $I=\\mathbf N_{\\ge1}^{\\mathrm{op}}$, and let $\\mathcal T_W$ be the sequence site in [lem-pur-sequence-site-completion-projection]. Put $H=h_V$. By [lem-weil-proetale-weakly-etale-localization], $H(U)=\\operatorname{Hom}_W(U,V)$ has at most one element and $\\mathcal C/H=\\mathcal C/V$ identifies with $V_{\\mathrm{proet}}$, including coverings. By [lem-weil-pbc-diagram-site-realization], the constant diagram $\\Delta H$ is a sheaf on $\\mathcal T_W$. Its element site has objects $(U,n,s:U\\to V)$; an arrow consists of $a:U'\\to U$ and $k\\le n$ with $s'=sa$. Its generating covers are precisely the fixed-index covers over $V$. Thus this element site is $(\\mathcal C/V)\\times\\mathbf N_{\\ge1}$ with the sequence topology. Apply [lem-weil-pbc-ringed-sheaf-slice-adjunction] on $\\mathcal T_W$ at $\\Delta H$: its sheaf topos is $\\operatorname{Sh}(\\mathcal T_W)/\\Delta H$, and restriction is the inverse image of the localization morphism. This identifies that morphism with $\\widetilde j$. The ring restricted to $(U,n,s)$ is $B_n(U)$, exactly $C_n(U\\to V)$. The same section formula on modules is levelwise $j^{-1}$.",
+   "uses": [
+    "lem-pur-sequence-site-completion-projection",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the exact equivalences of [lem-pur-sequence-site-completion-projection] for the two coefficient towers. If small skeleta were chosen, use the induced ringed presentation equivalences of [lem-weil-pbc-ringed-presentation-transport]; the structural ring identifications are the identities $B_n(U)=C_n(U\\to V)$ from step 1. Under these equivalences $\\widetilde j^*$ is the levelwise restriction functor $L$. Write $\\widetilde J$ for module extension by zero on this slice topos, transported to systems. Applying [lem-weil-pbc-ringed-sheaf-slice-adjunction] to the same small sequence site and its ring $B_\\bullet$ gives an exact additive adjunction $\\widetilde J\\dashv L$. This application is at the sheaf $\\Delta H$, not at an asserted representing object of the sequence site.",
+   "uses": [
+    "lem-pur-sequence-site-completion-projection",
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Using the supplied normalized coefficient datum, construct levelwise extension, its actual transitions, and morphisms as in original steps 5 and 6. Coefficient naturality, composition and identity give the strict system laws. Transpose levelwise maps using the fixed open adjunction; the unit and counit coherence equations identify exactly the two system-map conditions. This gives J left adjoint to sectionwise restriction L and the level unit/counit normalization. Uniqueness of left adjoints identifies it with geometric slice extension, giving additivity and exactness.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sequence-site-completion-projection",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-ringed-presentation-transport",
+  "def-coef-semilinear-system-models",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04GZ, 0791, 04IE, 03DI and 03DJ: original proof steps 1, 2, 5 and 6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Open localization of a category of semilinear inverse systems of sheaves of modules has exact extension by zero calculated levelwise, with coherent coefficient comparison",
+   "results": "8 hits: SheafOfModules.instAbelian, SheafOfModules.hasLimit, localization linear instances. No comparison theorem.",
+   "date": "2026-10-24",
+   "verdict": "Use project direct-sum adjunction and localization infrastructure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of coefficient rings commutes coherently with extension by zero on sheaves of modules, preserves scalar endomorphisms, and descends transition equations to derived categories",
+   "results": "8 hits: SheafOfModules.restrictScalars and its object/map/additive formulas; PresheafOfModules.restrictScalars. No normalized open-extension package.",
+   "date": "2026-10-24",
+   "verdict": "The sectionwise formulas support the construction; no complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, SheafOfModules",
+   "results": "8 hits: sheafificationAdjunction, overMapPushforwardAdj, overPushforwardOverAdj, pushforwardPushforwardAdj and pullbackPushforwardAdjunction.",
+   "date": "2026-10-24",
+   "verdict": "These are component adjunctions; use them via the existing project normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|liftNatTrans|mapDerivedCategorySquareIso",
+   "results": "25 hits including Localization.liftNatTrans_app, comp_liftNatTrans, localization of adjunctions. No complete open sequence comparison.",
+   "date": "2026-10-24",
+   "verdict": "Use localization naturality and its standard factorization equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SequenceSiteOpenExtension",
+  "date": "2026-10-24",
+  "group": "C6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-representative-independence",
+   "place": "First proof sentence: the open-extension factor of the coherent strict compact-support reduction tower. Tags 04GZ, 0791, 04IE, 03DI and 03DJ: original proof steps 1, 2, 5 and 6.",
+   "via": [
+    "lem-weil-compact-support-reduction-tower-functor",
+    "lem-pur-sequence-site-open-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SequenceOpenOrdinary",
+  "file": "lean/Sheaf/Paper/SequenceOpenOrdinary.lean",
+  "declaration": "WeilConjectures.SemilinearSections.sequenceOpenOrdinary",
+  "statement": "theorem sequenceOpenOrdinary (W : Scheme.{u}) (V : W.ProEt)\n    [IsOpenImmersion V.hom]\n    (B : ℕ → Sheaf (Scheme.ProEt.topology W) CommRingCat.{max (u + 1) r})\n    (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)\n    (A : SequenceOpenCoefficientData.{u + 1, u, r} (Scheme.ProEt.topology W) V) :\n    ∃ O : SequenceOpenOrdinary.{u + 1, u, r} (Scheme.ProEt.topology W) V B τ,\n      O.coefficients = A ∧ O.Transitions",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-24"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-2408a",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261024T184752-L-3173980",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-2408a",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261024T184752-L-3173980",
+  "kind": "interface",
+  "note": "independent cc review: delivered SequenceSiteOpenData vs clone's SequenceSiteOpenExtension (verbatim move, only blueprint anchors and gen* options differ); item theorem statement vs clone (identical); new node lean records vs delivered modules; 3 direct importers compiled against the delivered modules in a sandbox (all OK); #print axioms: three new theorems axiom-clean, item theorem sorryAx only via sequenceOpenOrdinary"
+ }
+}

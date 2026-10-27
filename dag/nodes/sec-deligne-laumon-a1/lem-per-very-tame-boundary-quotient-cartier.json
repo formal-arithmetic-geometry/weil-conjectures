@@ -2,7 +2,7 @@
  "id": "lem-per-very-tame-boundary-quotient-cartier",
  "kind": "statement",
  "title": "Images of invariant boundary components are Q-Cartier",
- "statement": "Let $X$ be a Noetherian regular scheme [def-weil-regular-scheme], [pqf-def-locnoeth] with an admissible tame action of a finite group $G$: invariant affine opens cover $X$ and each geometric inertia has order invertible at the point. Let $B\\subseteq\\overline B$ be invariant strict normal crossings divisors [def-trf-strict-normal-crossings-boundary] and assume the divisorial log scheme $(X,\\overline B)$ is very tame [def-trf-fs-log-blowup]. Let $q:X\\to Y=X/G$ be the finite quotient. The image $D=q(B)$ is the support of an effective Q-Cartier Weil divisor: etale locally on $Y$ there is a non-zero-divisor $c$ whose zero set is exactly $D$. Here an effective Q-Cartier divisor means an effective Weil divisor some positive multiple of which is locally principal, and a Weil divisor on a normal Noetherian scheme is a finite integral combination of integral codimension-one closed subschemes. If $h:Y'\\to Y$ is a birational modification with $Y'$ regular such that $(h^{-1}q(\\overline B))_{\\rm red}$ is a normal crossings divisor, then $(h^{-1}D)_{\\rm red}$ is a union of its components and is normal crossings. It is strict normal crossings whenever the ambient divisor is strict normal crossings.\n\nAt a strict local point, write $H$ for inertia, $N=|H|$, and suppose the roots of unity of order $N$ have been adjoined. There is a local equation $b$ for $B$ which is an $H$-eigenvector and $b^N$ is invariant. Its image in the invariant local ring cuts out a Cartier divisor with support $D$.",
+ "statement": "Let $X$ be a Noetherian regular scheme [def-weil-regular-scheme], [pqf-def-locnoeth] with an admissible tame action of a finite group $G$: invariant affine opens cover $X$ and each geometric inertia has order invertible at the point. Let $B\\subseteq\\overline B$ be invariant strict normal crossings divisors [def-trf-strict-normal-crossings-boundary] and assume the divisorial log scheme $(X,\\overline B)$ is very tame [def-per-very-tame-divisorial-action], with its fs log structure as in [def-trf-fs-log-blowup]. Let $q:X\\to Y=X/G$ be the finite quotient. The image $D=q(B)$ is the support of an effective Q-Cartier Weil divisor: etale locally on $Y$ there is a non-zero-divisor $c$ whose zero set is exactly $D$. Here an effective Q-Cartier divisor means an effective Weil divisor some positive multiple of which is locally principal, and a Weil divisor on a normal Noetherian scheme is a finite integral combination of integral codimension-one closed subschemes. If $h:Y'\\to Y$ is a birational modification with $Y'$ regular such that $(h^{-1}q(\\overline B))_{\\rm red}$ is a normal crossings divisor, then $(h^{-1}D)_{\\rm red}$ is a union of its components and is normal crossings. It is strict normal crossings whenever the ambient divisor is strict normal crossings.\n\nAt a strict local point, write $H$ for inertia, $N=|H|$, and suppose the roots of unity of order $N$ have been adjoined. There is a local equation $b$ for $B$ which is an $H$-eigenvector and $b^N$ is invariant. Its image in the invariant local ring cuts out a Cartier divisor with support $D$.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "VIII 5.3.8, printed p.125, middle paragraph, using the eigenparameter averaging of Lemma 5.3.5; VIII 5.4.1 identifies the strict local invariant quotient."
@@ -11,11 +11,152 @@
   "def-weil-regular-scheme",
   "pqf-def-locnoeth",
   "def-trf-strict-normal-crossings-boundary",
-  "def-trf-fs-log-blowup"
+  "def-trf-fs-log-blowup",
+  "def-per-very-tame-divisorial-action",
+  "def-per-effective-q-cartier-weil-divisor",
+  "def-per-admissible-finite-scheme-quotient",
+  "def-trf-normal-crossings-divisor",
+  "def-trf-modification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $\\bar y$ and a geometric lift $\\bar x$. Put $H=\\operatorname{Stab}_G(\\bar x)$, $N=|H|$, $A=\\mathcal O_{X,\\bar x}$ and $R=\\mathcal O_{Y,\\bar y}$. The finite quotient and log stalk statement [lem-per-finite-quotient-strict-local-invariants] gives $R=A^H\\hookrightarrow A$, a finite extension, and Noetherian $Y$. By [lem-per-regular-boundary-divisorial-chart] applied to $\\overline B$, the log structure is fs and its sharp monoid at $\\bar x$ is $\\mathbf N^r$, with generators giving regular parameters. Regularity of $A$ follows from [lem-sc-strict-henselization-regular]. Its prime localizations are regular by [lem-weil-pbc-regular-local-localization], so [lem-weil-pbc-regular-ring-normal] makes $A$ normal. If $z\\in\\operatorname{Frac}(R)$ is integral over $R$, it is integral over $A$, hence belongs to $A$; it is $H$-fixed, hence in $R$. Thus $R$ is a normal local domain. The local map $\\mathcal O_{Y,y}\\to R$ is faithfully flat by [lem-sc-strict-henselization-faithfully-flat]; [lem-sfb-faithfully-flat-normal-ring-descent] shows $Y$ normal. Since $\\mathcal O_{Y,y}$ is Noetherian, so is its strict henselization $R$ [lem-sc-strict-henselization-noetherian].",
+   "uses": [
+    "lem-per-finite-quotient-strict-local-invariants",
+    "lem-per-regular-boundary-divisorial-chart",
+    "lem-sc-strict-henselization-regular",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-sfb-faithfully-flat-normal-ring-descent",
+    "lem-sc-strict-henselization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 5.3.8, printed p.125, Q-Cartier paragraph; VI 3.5(a), 3.7(a), printed pp.74–75, for the equivariant chart."
+   }
+  },
+  {
+   "text": "Very tameness means in particular that $N$ is invertible and $H$ fixes the characteristic monoid [def-per-very-tame-divisorial-action]. Apply [lem-per-very-tame-equivariant-sharp-chart] with $Q=\\mathbf N^r$. Write $t_i=a(e_i)$ for the images in $A$ of its generators; compared with the regular-boundary chart of Step 1 these change only by units. Hence they remain regular parameters. Each $t_i$ is an eigenvector $h(t_i)=\\chi_i(h)t_i$ with $\\chi_i(h)^N=1$, and these roots are $H$-fixed. Since $B\\subseteq\\overline B$ is a reduced Cartier divisor, its local equation becomes a unit after inverting $T=\\prod_{i=1}^r t_i$. By [lem-trf-regular-local-ufd-boundary-factorization] that equation is $u\\prod_i t_i^{d_i}$; The ring $A/(\\text{equation})$ is the filtered colimit of the local rings of $B\\times_XW$ over pointed etale neighbourhoods $W$, which are reduced by [lem-trf-etale-reduced-cartier-descent]; so it is reduced, and this forces $d_i\\in\\{0,1\\}$ (a prime power of exponent at least two gives a nonzero nilpotent class). Let $S=\\{i:d_i=1\\}$ and $b=\\prod_{i\\in S}t_i$. Then $b$ generates the ideal of $B$ in $A$, is an eigenvector with character $\\prod_{i\\in S}\\chi_i$, and $b^N\\in R$. Empty $S$ gives $b=1$.",
+   "uses": [
+    "def-per-very-tame-divisorial-action",
+    "lem-per-very-tame-equivariant-sharp-chart",
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "lem-trf-etale-reduced-cartier-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 5.3.8, printed p.125, Q-Cartier paragraph; VI 3.5(a), 3.7(a), printed pp.74–75, for the equivariant chart."
+   }
+  },
+  {
+   "text": "We will compare codimension one upstairs and downstairs. The extension $R\\hookrightarrow A$ is integral by [lem-weil-pbc-finite-algebra-is-integral]. By [lem-weil-pbc-integral-incomparability] contraction sends any strict prime chain in $A$ to a strict chain in $R$. By [lem-weil-pbc-going-down-normal-integral], every chain ending at the contraction of $P\\subset A$ lifts to one ending at $P$. Consequently the two heights agree. Every height-one prime of $R$ has a prime above it by [lem-weil-pbc-integral-injective-lying-over], necessarily of height one. By [rem-pc-regular-normal], normal Noetherian schemes have disjoint open-and-closed integral components. The saturation of a source component under $G$ is clopen, so its orbit-space image is a clopen integral component of $Y$. Restrict source and target to these components when applying the same chain argument on invariant affine quotient charts from [lem-per-admissible-quotient-affine-integral-charts], using normality of $Y$ and $X$: each image of a component of $B$ has codimension one. Thus the reduced image determines the effective Weil divisor $E=\\sum_{Z\\text{ component of }D}[Z]$. Under strict localization its support is the image of $V(b)$, because the geometric fibres are orbits and $B$ is invariant. The pullback convention for $E_R$ is [lem-per-weil-divisor-strict-local-cartier-test].",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-incomparability",
+    "lem-weil-pbc-going-down-normal-integral",
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-per-admissible-quotient-affine-integral-charts",
+    "rem-pc-regular-normal",
+    "lem-per-weil-divisor-strict-local-cartier-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 5.3.8, printed p.125, Q-Cartier paragraph; VI 3.5(a), 3.7(a), printed pp.74–75, for the equivariant chart."
+   }
+  },
+  {
+   "text": "Set $c=b^N\\in R$. This element is nonzero, since $A$ is a domain, and is a non-zero-divisor in the subring $R$. For any prime $\\mathfrak p$ of $R$, choose a prime $P$ of $A$ above it by [lem-weil-pbc-integral-injective-lying-over]. Then $c\\in\\mathfrak p$ if and only if $b^N\\in P$, if and only if $b\\in P$. Thus $V_R(c)$ is exactly the image of $V_A(b)$, the strict-local image of $B$. This proves the last paragraph's Cartier equation and the asserted support. The next step controls coefficients rather than merely support.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-lying-over"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 5.3.8, printed p.125, Q-Cartier paragraph; VI 3.5(a), 3.7(a), printed pp.74–75, for the equivariant chart."
+   }
+  },
+  {
+   "text": "The height-one localizations of the Noetherian normal domains $R,A$ are DVRs by [lem-trf-normal-domain-principal-divisor-kernel]. For $i\\in S$ let $p_i=(t_i)\\cap R$, choose a uniformizer $\\pi_i\\in R_{p_i}$, and put $e_i=v_{(t_i)}(\\pi_i)>0$. The map $R_{p_i}\\to A_{(t_i)}$ is local: a denominator outside $p_i$ is outside $(t_i)$. It sends units to units. Hence writing $z=u\\pi_i^m$ proves $v_{(t_i)}(z)=e_i v_{p_i}(z)$ for every nonzero $z\\in\\operatorname{Frac}(R)$. Now put $f=\\prod_{i\\in S}t_i^{e_i}$ and $c_1=f^N\\in R$, using the characters from Step 2. Its order at $(t_i)$ is $Ne_i$, and its order at every other height-one prime of $A$ is zero, by the prime factorization in [lem-trf-regular-local-ufd-boundary-factorization]. Every height-one prime of $R$ lifts by Step 3. The displayed valuation formula therefore gives $\\operatorname{div}_R(c_1)=N E_R$: the coefficient is $N$ at every component of the image and zero elsewhere. Multiple branches over one prime give the same coefficient $N$.",
+   "uses": [
+    "lem-trf-normal-domain-principal-divisor-kernel",
+    "lem-trf-regular-local-ufd-boundary-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 5.3.8, printed p.125, Q-Cartier paragraph; VI 3.5(a), 3.7(a), printed pp.74–75, for the equivariant chart."
+   }
+  },
+  {
+   "text": "Let $M=|G|$. Partitioning $G$ into left $H$-cosets gives $M=kN$ for a positive integer $k$. Thus $c_1^k$ has divisor $M E_R$ at every strict local point. Apply [lem-per-weil-divisor-strict-local-cartier-test] to the fixed effective Weil divisor $E$ on the normal Noetherian scheme $Y$ and the single global integer $M$. It produces a global effective Cartier divisor $C$ with Weil divisor $ME$, support $D$, and single non-zero-divisor equations on pointed etale neighborhoods. In particular $E$ is effective Q-Cartier; in fact the reduced image divisor itself is Q-Cartier.",
+   "uses": [
+    "lem-per-weil-divisor-strict-local-cartier-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 5.3.8, printed p.125, Q-Cartier paragraph; VI 3.5(a), 3.7(a), printed pp.74–75, for the equivariant chart."
+   }
+  },
+  {
+   "text": "Pull $C$ back along $h$. Locally its equation $c$ is nonzero on every generic component of $Y$. A birational modification identifies dense opens componentwise, so at every generic point of $Y'$ its pullback is still nonzero. At any point of regular $Y'$ the local ring is a domain; injecting it into the function field of that component shows the pulled-back equation is nonzero and hence a non-zero-divisor. Therefore $C'=h^*C$ is effective Cartier and has support $h^{-1}D$. Write $E'=(h^{-1}D)_{\\rm red}$ and $F'=(h^{-1}q(\\overline B))_{\\rm red}$. The containment $E'\\subseteq F'$ is set-theoretic; no claim of equality of nonreduced ideal sheaves is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 5.3.8, printed p.125, Q-Cartier paragraph; VI 3.5(a), 3.7(a), printed pp.74–75, for the equivariant chart."
+   }
+  },
+  {
+   "text": "Use a normal-crossings etale chart at a point of $Y'$ [def-trf-normal-crossings-divisor], where the ideal of $F'$ is $T=t_1\\cdots t_r$. The chart local ring is regular by [lem-sfb-etale-stalk-invariants]. Let $c'$ be the equation of $C'$ there. Since $V(c')\\subseteq V(T)$, some power $T^a$ belongs to $(c')$, so $c'$ is a unit after inverting $T$. By [lem-trf-regular-local-ufd-boundary-factorization], $c'=u\\prod t_i^{n_i}$. Its radical ideal is generated by $\\prod_{n_i>0}t_i$: these are pairwise nonassociate primes. By [lem-trf-etale-reduced-cartier-descent] the pullback of $E'$ to the chart is the reduced induced subscheme on $V(c')$, so its ideal at $w$ is this radical, generated by a non-zero-divisor; a generator of the stalk generates the ideal, as a non-zero-divisor, on a neighbourhood of $w$. These charts cover $Y'$, so the same node makes $E'$ an effective Cartier divisor. Thus $E'$ has the required reduced parameter-product equation and is normal crossings. These equations show that every component of $E'$ is a codimension-one component of $F'$, including the empty-divisor case. If $F'$ is strict normal crossings, retain just those global components. Their intersections are among the regular intersections in [def-trf-strict-normal-crossings-boundary], with the same codimension formula. Hence $E'$ is strict normal crossings as well.",
+   "uses": [
+    "def-trf-normal-crossings-divisor",
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "def-trf-strict-normal-crossings-boundary",
+    "lem-sfb-etale-stalk-invariants",
+    "lem-trf-etale-reduced-cartier-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 5.3.8, printed p.125, Q-Cartier paragraph; VI 3.5(a), 3.7(a), printed pp.74–75, for the equivariant chart."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-very-tame-divisorial-action",
+  "def-trf-normal-crossings-divisor",
+  "def-trf-strict-normal-crossings-boundary",
+  "lem-per-admissible-quotient-affine-integral-charts",
+  "lem-per-finite-quotient-strict-local-invariants",
+  "lem-per-regular-boundary-divisorial-chart",
+  "lem-per-very-tame-equivariant-sharp-chart",
+  "lem-per-weil-divisor-strict-local-cartier-test",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-sfb-etale-stalk-invariants",
+  "lem-sfb-faithfully-flat-normal-ring-descent",
+  "lem-trf-etale-reduced-cartier-descent",
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-going-down-normal-integral",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-ring-normal",
+  "rem-pc-regular-normal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 5.3.8, printed p.125, middle paragraph, with VI 3.5(a) and proof 3.7(a), pp.74–75, for the eigenchart. The valuation-weighting spells out the parenthetical Q-Cartier argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +185,101 @@
    "results": "{\"t\": \"2026-10-18T21:52:15Z\", \"tool\": \"grep\", \"query\": \"veryTame|QCartier|normalCrossing|eigenvector.*divisor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned declarations: none states the logarithmic/geometric assertion.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "QCartier|VeryTame|normalCrossing|normal_crossing",
+   "results": "{\"t\": \"2026-10-24T00:25:02Z\", \"tool\": \"grep\", \"query\": \"QCartier|VeryTame|normalCrossing|normal_crossing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits. No exact match or one-line specialization; ramification hits assume Dedekind domains globally and do not give the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A power of a semi invariant regular parameter defines a Cartier divisor on the invariant ring",
+   "results": "{\"t\": \"2026-10-24T00:25:03Z\", \"tool\": \"leansearch\", \"query\": \"A power of a semi invariant regular parameter defines a Cartier divisor on the invariant ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.isRegular_X_pow\", \"PowerSeries.IsWeierstrassDivisorAt\", \"FractionalIdeal.instPowNat\", \"IsLocalization.Away.instMapRingHomPowersOfCoe\", \"DividedPowers.dpow_one\", \"DividedPowers.IsSubDPIdeal.self\", \"DividedPowers.coe_injective\", \"PowerSeries.instIsDomain\"], \"digest\": \"a22655b7110c772a\"}; Read the returned hits. No exact match or one-line specialization; ramification hits assume Dedekind domains globally and do not give the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cartier\"",
+   "results": "{\"t\": \"2026-10-24T00:25:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cartier\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits. No exact match or one-line specialization; ramification hits assume Dedekind domains globally and do not give the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invariant strict normal crossings boundary for a tame finite group quotient is locally Q Cartier",
+   "results": "{\"t\": \"2026-10-24T00:25:04Z\", \"tool\": \"leanfinder\", \"query\": \"An invariant strict normal crossings boundary for a tame finite group quotient is locally Q Cartier\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Quotient.normal\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization\"], \"digest\": \"fbaa871d4197384e\"}; Read the returned hits. No exact match or one-line specialization; ramification hits assume Dedekind domains globally and do not give the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ramificationIdx.*valuation|valuation.*ramificationIdx|height.*comap|height_comap",
+   "results": "{\"t\": \"2026-10-24T00:30:44Z\", \"tool\": \"grep\", \"query\": \"ramificationIdx.*valuation|valuation.*ramificationIdx|height.*comap|height_comap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/RamificationInertia/Valuation.lean\", \"Mathlib/NumberTheory/RamificationInertia/Valuation.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Extension.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Height.lean\", \"Mathlib/RingTheory/Ideal/Height.lean\", \"Mathlib/RingTheory/Ideal/Height.lean\"], \"digest\": \"ab2809263faf27ab\"}; Read the returned hits. No exact match or one-line specialization; ramification hits assume Dedekind domains globally and do not give the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite inclusion of normal domains preserves height one primes and normalized valuations multiply by the ramification index",
+   "results": "{\"t\": \"2026-10-24T00:30:44Z\", \"tool\": \"leansearch\", \"query\": \"A finite inclusion of normal domains preserves height one primes and normalized valuations multiply by the ramification index\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.intValuation\", \"IsDedekindDomain.HeightOneSpectrum.valuation_def\", \"Ideal.IsDedekindDomain.ramificationIdx_eq_normalizedFactors_count\", \"IsDedekindDomain.HeightOneSpectrum.valuation\", \"IsDedekindDomain.HeightOneSpectrum.intValuation_def\", \"IsDedekindDomain.HeightOneSpectrum.intValuationDef\", \"IsDedekindDomain.HeightOneSpectrum.intValuation_apply\", \"IsDedekindDomain.HeightOneSpectrum.intValuation_le_pow_iff_mem\"], \"digest\": \"0d2fc94d13660e69\"}; Read the returned hits. No exact match or one-line specialization; ramification hits assume Dedekind domains globally and do not give the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilDivisor|Weil.*[Cc]artier|[Cc]artier.*[Hh]ensel",
+   "results": "{\"t\": \"2026-10-24T00:30:45Z\", \"tool\": \"grep\", \"query\": \"WeilDivisor|Weil.*[Cc]artier|[Cc]artier.*[Hh]ensel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits. The Weil-divisor cycle predicates do not supply Cartierness or strict-local testing.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ramificationIdx\"",
+   "results": "{\"t\": \"2026-10-24T00:30:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"ramificationIdx\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Ideal.ramificationIdx'\", \"Ideal.ramificationIdx'_bot\", \"Ideal.ramificationIdx_bot\", \"Ideal.ramificationIdx'_map_eq\", \"Ideal.ramificationIdx_map_eq\", \"Ideal.IsDedekindDomain.ramificationIdx'_ne_zero_of_liesOver\", \"Ideal.IsDedekindDomain.ramificationIdx_ne_zero_of_liesOver\", \"Ideal.ramificationIdx'_of_not_le\"], \"digest\": \"fff6e37205aad779\"}; Read the returned hits. No exact match or one-line specialization; ramification hits assume Dedekind domains globally and do not give the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartierness of a fixed effective Weil divisor can be checked on strict local rings by a principal equation with prescribed orders",
+   "results": "{\"t\": \"2026-10-24T00:30:45Z\", \"tool\": \"leansearch\", \"query\": \"Cartierness of a fixed effective Weil divisor can be checked on strict local rings by a principal equation with prescribed orders\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt\", \"PowerSeries.IsWeierstrassDivisor\", \"PowerSeries.IsWeierstrassDivisor.of_map_ne_zero\", \"PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassDivision\", \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt\", \"PowerSeries.weierstrassDiv\"], \"digest\": \"374e8306800479ed\"}; Read the returned hits. No exact match or one-line specialization; ramification hits assume Dedekind domains globally and do not give the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finite extension of Noetherian normal domains height one prime localizations are discrete valuation rings and valuations restrict by the ramification index",
+   "results": "{\"t\": \"2026-10-24T00:30:45Z\", \"tool\": \"leanfinder\", \"query\": \"In a finite extension of Noetherian normal domains height one prime localizations are discrete valuation rings and valuations restrict by the ramification index\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ramificationIdx_le_finrank\", \"IsDedekindDomain.primesOverEquivPrimesOver_ramificationIdx_eq\", \"IsLocalization.AtPrime.ramificationIdx_map_eq_ramificationIdx\", \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"Ideal.ramificationIdx_eq_one_of_map_localization\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Ideal.ramificationIdxIn_mul_ramificationIdxIn\", \"Ideal.IsDedekindDomain.ramificationIdx_eq_one_iff\"], \"digest\": \"58d41eaf78ea0a1c\"}; Read the returned hits. No exact match or one-line specialization; ramification hits assume Dedekind domains globally and do not give the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilDivisor\"",
+   "results": "{\"t\": \"2026-10-24T00:30:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeilDivisor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor\", \"AlgebraicGeometry.AlgebraicCycle.weilDivisors\", \"AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_zero\", \"AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_single\", \"AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor.neg\", \"AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_neg\", \"AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_iff\", \"AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor.coheight_eq_one\"], \"digest\": \"0fabed86f69e230a\"}; Read the returned hits. The Weil-divisor cycle predicates do not supply Cartierness or strict-local testing.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Weil divisor on a normal Noetherian scheme is Cartier if and only if its pullback to each strict henselian local ring is principal",
+   "results": "{\"t\": \"2026-10-24T00:30:49Z\", \"tool\": \"leanfinder\", \"query\": \"A Weil divisor on a normal Noetherian scheme is Cartier if and only if its pullback to each strict henselian local ring is principal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsDiscreteValuationRing.TFAE\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"IsDedekindDomain.isPrincipalIdealRing_localization_over_prime\"], \"digest\": \"9cb4599ee8adfa95\"}; Read the returned hits. No exact match or one-line specialization; ramification hits assume Dedekind domains globally and do not give the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isWeilDivisor|Cartier|strictHensel",
+   "results": "{\"t\": \"2026-10-24T00:35:50Z\", \"tool\": \"grep\", \"query\": \"isWeilDivisor|Cartier|strictHensel\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits. The Weil-divisor cycle predicates do not supply Cartierness or strict-local testing.",
+   "date": "2026-10-24",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-absolute-equivariant-modification",
@@ -75,5 +307,115 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-very-tame-boundary-quotient-cartier",
+  "worker": "stage1",
+  "summary": "Read ILO VIII 5.3.5, 5.3.8 and VI 3.5(a), 3.7(a). Reused the sharp chart and strict-local invariant quotient; wrote the eigenparameter product, finite-height comparison, multiplicity-weighted invariant equation and subboundary factorization explicitly. One new statement-only node isolates Cartier testing for a fixed Weil multiple. Added the actual very-tame definition citation, without changing hypotheses or conclusions.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve Step 3, regular-pair equivariant modification input, via the existing ancestor chain: VIII 5.3.8 middle paragraph realized by steps 1–6 (Q-Cartier image) and 7–8 (reduced transformed subboundary).",
+  "tool_uses": [
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic faithful flatness of the canonical strict henselization map, needed to descend normality to ordinary local rings."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Generic commutative algebra preserving regularity under strict henselization; no curve-specific conclusion is used."
+   },
+   {
+    "node": "lem-trf-normal-domain-principal-divisor-kernel",
+    "why": "Generic Noetherian normal-domain DVR and normalized-order interface; only its height-one valuations are used."
+   },
+   {
+    "node": "lem-trf-regular-local-ufd-boundary-factorization",
+    "why": "Generic regular-local UFD algebra and localization units; used for boundary subproducts and their radicals, with no trace formula input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic ring algebra used for normality or prime comparison; the unit has no substitute for this standard algebraic input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic ring algebra used for normality or prime comparison; the unit has no substitute for this standard algebraic input."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic decomposition of a Noetherian normal scheme into disjoint integral components, used to apply domain prime-chain results on affine quotient charts."
+   },
+   {
+    "node": "lem-sfb-etale-stalk-invariants",
+    "why": "Generic preservation of regular local rings under etale morphisms, needed for the normal-crossings chart UFD calculation."
+   },
+   {
+    "node": "lem-sfb-faithfully-flat-normal-ring-descent",
+    "why": "Generic descent of normality along the faithfully flat map O_{Y,y} -> R in step 1. It replaces a statement-identical dropped (2026-10-19) per copy; no live node of this unit states it. (Reviewer FIX, Q109 f068e675.)"
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic: the strict henselization of a Noetherian local ring is Noetherian, needed for R in steps 1 and 5. (Reviewer FIX, Q109 f068e675.)"
+   },
+   {
+    "node": "lem-trf-etale-reduced-cartier-descent",
+    "why": "Generic: etale pullback of a reduced induced subscheme is reduced induced, and effective Cartierness descends along etale coverings; used for A/(b) reduced in step 2 and E' Cartier in step 8. (Reviewer FIX, Q109 f068e675.)"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sc-strict-henselization-regular",
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-ring-normal",
+  "rem-pc-regular-normal",
+  "lem-sfb-etale-stalk-invariants",
+  "lem-sfb-faithfully-flat-normal-ring-descent",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-trf-etale-reduced-cartier-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-f068e6756",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-f068e6756 (reviewer sub-agent of L); spot-checked: Read ILO VIII 5.3.5/5.3.7/5.3.8 (pp.124-125: f eigen-equation, f^N fixed, 'NT is Cartier', T' snc) and 5.4.1. The item's 8 steps follow 5.3.8, and Steps 5-6 spell out the Q-Cartier parenthetical with per-branch e_i and M=|G|; I checked these on k[[x,y]] with the sign action, B=(x) (2E Cartier, E not) and on k[[t]] with t->zeta t. Every cited statement matches its use (going-down, incomparability and lying-over hypotheses hold; the sharp-chart hypotheses come from the very-tame definition). The statement change only adds the def-per-very-tame-divisorial-action citation. New node lem-per-weil-divisor-strict-local-cartier-test is true (Stacks 0EBM/0AY6 reflexive O(aE), ind-etale pullback with ramification 1, 00O1 descent, 0BE8). It is statement-only and self-contained, with 4 searches, no duplicate in the DAG, and is not a clause of the item; it is unchanged (advisory: DVR and etale defs not cited). FIX, corrected item in fixes/dag/nodes/sec-deligne-laumon-a1/: (1) Step 1 cited the dropped lem-per-faithfully-flat-normal-ring-descent; replaced by the live lem-sfb-faithfully-flat-normal-ring-descent, which has the same statement and is in the closure. (2) Step 8 never showed E' Cartier, which def-trf-normal-crossings-divisor requires, and Step 2 used reducedness of A/(beta) silently; both now cite lem-trf-etale-reduced-cartier-descent (etale pullback is reduced-induced, and Cartierness descends along etale covers). (3) Step 1 now cites lem-sc-strict-henselization-noetherian for R Noetherian. I added tool_uses for all three; there is no cycle, and proof_deps equals the union of uses. Batch-5: every flagged trf/def citation (and the added trf one) is already in the target closure without the item and adds 0 nodes; all are generic definitions or algebra, not trace-formula or Poincare-duality statements or steps, so accepted. Artin-Gabber 10-19 check: the item itself (drop line 1978) and its citer gabber-absolute-equivariant-modification are dropped, but the BFS reaches them from nt-target-weil-conjectures via lem-sfb-field-log-smooth-gabber-modification (precedent Q36 cab6fa53). admissible-quotient-affine-integral-charts, finite-quotient-strict-local-invariants, regular-boundary-divisorial-chart and very-tame-equivariant-sharp-chart are already reached without the item (0 added), have no live copies and are generic quotient and log-chart geometry, so accepted. No Qbar/adic, middle t-structure, Gabber finiteness, uniformization, alteration or stable reduction is used. Maintainer note: re-admit this subtree or remove the sfb citation of the dropped citer.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.VeryTameBoundaryQuotientCartier",
+  "declaration": "AlgebraicGeometry.veryTame_boundary_quotient_cartier",
+  "declarations": [
+   "AlgebraicGeometry.quotientBoundaryIdeal",
+   "AlgebraicGeometry.boundaryStrictLocalIdeal",
+   "AlgebraicGeometry.boundaryInertiaOrder",
+   "AlgebraicGeometry.boundaryInvariantRing",
+   "AlgebraicGeometry.veryTame_boundary_quotient_cartier"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/VeryTameBoundaryQuotientCartier.lean",
+  "statement": "theorem veryTame_boundary_quotient_cartier {X Y : Scheme.{u}} [IsNoetherian X] (hX : IsRegularScheme X) {G : Type v} [Group G] [Finite G] (a : G →* Aut X) (B Bbar : X.IdealSheafData) (hB : IsStrictNormalCrossingsBoundary B) (hBbar : IsStrictNormalCrossingsBoundary Bbar) (hsub : B.support ≤ Bbar.support) (hBinv : ∀ g : G, B.comap (a g).hom = B) (hBbarinv : ∀ g : G, Bbar.comap (a g).hom = Bbar) (hvery : IsVeryTameDivisorialAction Bbar.support.compl a) (q : X ⟶ Y) (hq : IsAdmissibleFiniteSchemeQuotient a q) : (∃ E : Y.WeilDivisor, E.IsEffectiveQCartier ∧ Scheme.WeilDivisor.support E = q '' (B.support : Set X)) ∧ (∀ y : Y, ∃ (W : Scheme.{u}) (e : W ⟶ Y), Etale e ∧ ∃ (w : W) (_hw : e w = y) (c : Γ(W, ⊤)), c ∈ nonZeroDivisors Γ(W, ⊤) ∧ W.zeroLocus {c} = e ⁻¹' (q '' (B.support : Set X))) ∧ (∀ (Y' : Scheme.{u}) (h : Y' ⟶ Y), SchemeModification h → IsRegularScheme Y' → ((quotientBoundaryIdeal q Bbar).comap h).radical.IsNormalCrossingsDivisor → ((quotientBoundaryIdeal q B).comap h).radical.IsNormalCrossingsDivisor ∧ (∃ S : Finset (irreducibleComponents ((quotientBoundaryIdeal q Bbar).comap h).radical.subscheme), (((quotientBoundaryIdeal q B).comap h).radical.support : Set Y') = ⋃ Z ∈ S, ((quotientBoundaryIdeal q Bbar).comap h).radical.subschemeι '' Z.val) ∧ (IsStrictNormalCrossingsBoundary ((quotientBoundaryIdeal q Bbar).comap h).radical → IsStrictNormalCrossingsBoundary ((quotientBoundaryIdeal q B).comap h).radical)) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X), (∃ ζ : boundaryInvariantRing a t, IsPrimitiveRoot ζ (boundaryInertiaOrder a t)) → ∃ (b : strictLocalRing X t) (χ : ∀ (g : G) (_hg : t ≫ (a g).hom = t), (boundaryInvariantRing a t)ˣ) (c : boundaryInvariantRing a t), b ∈ nonZeroDivisors (strictLocalRing X t) ∧ boundaryStrictLocalIdeal B t = Ideal.span {b} ∧ (∀ (g : G) (hg : t ≫ (a g).hom = t), automorphismStrictLocalMap (a g) t hg b = (χ g hg).val.val * b ∧ (χ g hg) ^ boundaryInertiaOrder a t = 1) ∧ c.val = b ^ boundaryInertiaOrder a t ∧ c ∈ nonZeroDivisors (boundaryInvariantRing a t) ∧ (Ideal.span {c}).radical = (Ideal.comap (boundaryInvariantRing a t).subtype (boundaryStrictLocalIdeal B t)).radical",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01b84c2c4",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Read the item node, the 9 stmt_deps, the new node def-per-effective-q-cartier-weil-divisor and both modules against ILO VIII 5.3.8, 5.3.5 and 5.4.1. All four statement clauses match the node (Q-Cartier support, étale-local equation, regular modification NC/SNC via comap.radical, strict-local eigen-equation with c=b^N a non-zero-divisor in A^H). Hypotheses are no stronger than the node's. Node diff is only stmt_deps (notions used in the statement) and lean; statements verbatim. New Weil/Q-Cartier definitions have real content (finsupp on dim-1 points, Ring.ord local orders, global multiple n>0) and duplicate nothing: pinned Mathlib has only AlgebraicCycle, project has only curve, space and integral-scheme divisors. Helpers are real constructions. Proof is sorry only. Edge cases and universes checked. Advisory: the second reading is a self-review."
+ }
 }

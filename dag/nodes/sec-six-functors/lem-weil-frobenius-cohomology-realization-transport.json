@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-frobenius-cohomology-realization-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "The ordinary and compact-support cohomology complexes in the two displayed Frobenius composites: their canonical coefficient-stage realization and coefficient enlargement.",
+   "via": [
+    "lem-weil-frobenius-cohomology-transport-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Coefficient enlargement preserves the prescribed cohomology arrow",
+ "statement": "With the canonical stage functors R and endpoint comparisons B of [def-weil-frobenius-cohomology-realization-data], take Pair objects K,M, a common stage L and an enlargement L <= N. For every f: K.toStage(L) -> M.toStage(L), the arrow B(K,N).hom ; R_N(tr(f)) ; B(M,N).inv equals B(K,L).hom ; R_L(f) ; B(M,L).inv in D(Omega). Here tr is the specified associator-conjugated transition of [def-weil-pbc-finite-stage-pair-category]. This is an equality of pre-quotient arrows; no descended functor or Frobenius isomorphism is asserted.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.10)-(1.1.14), coefficient localization and transport of cohomology; extracted coefficient-realization step of the parent."
+ },
+ "stmt_deps": [
+  "def-weil-frobenius-cohomology-realization-data",
+  "def-weil-pbc-finite-stage-pair-category"
+ ],
+ "proof": [
+  {
+   "text": "Factor the existing endpoint comparison as p inverse followed by A applied to q, using the explicit canonical factors. Its equality with the original construction is proved componentwise; no realization data is changed. Insert the explicit functor associators between the whiskered factors; their components are identity arrows. Package these specified factors in a constructed private record, so the abstract categorical identities specialize without reopening their geometric constructions. The scalar data are explicitly constructed together with the proved tensor cocycle; the full record then adds the specified rational functors and comparisons.",
+   "uses": [
+    "def-weil-frobenius-cohomology-comparison-factors",
+    "def-weil-frobenius-cohomology-realization-data",
+    "def-weil-frobenius-cohomology-canonical-factors"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the rational cocycle and the scalar-and-size tensor cocycle. Naturality of p inverse moves q past the intermediate coefficient comparison. Map the rational cocycle through A_N; the scalar cocycle cancels the resulting field associator and gives the endpoint tower identity. This categorical pasting is a complete Lean proof in realizedStageComparison_coherence.",
+   "uses": [
+    "lem-weil-frobenius-cohomology-rational-cocycle",
+    "lem-weil-frobenius-cohomology-coefficient-cocycle"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the endpoint tower identity at K and M. Expand tr into inverse source associator, transition of f and target associator. The image associators cancel, naturality of the realized stage comparison moves f past that comparison, and inverse endpoint maps cancel. This proves the original coefficient-enlargement equality without a descended functor.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "def-weil-frobenius-cohomology-comparison-factors"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-frobenius-cohomology-comparison-factors",
+  "def-weil-frobenius-cohomology-realization-data",
+  "def-weil-frobenius-cohomology-canonical-factors",
+  "lem-weil-frobenius-cohomology-rational-cocycle",
+  "lem-weil-frobenius-cohomology-coefficient-cocycle",
+  "def-weil-pbc-finite-stage-pair-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "G1: complete Lean pasting of the rational and scalar-size cocycles, followed by naturality and cancellation on common-stage representatives."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor out of a filtered colimit of categories is uniquely determined by compatible functors on its stages.",
+   "results": "General filtered colimit preservation, Ind.lim and Types.FilteredColimit universal properties; no result about the prescribed operation and point-fibre realization maps.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible scalar extension comparisons, tower identity and invariance at a larger common stage",
+   "results": "ModuleCat.extendScalars_assoc and extendScalarsComp prove the module tensor tower; no match for the specified derived operation and point-fibre composites.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.hom_inv_id_assoc",
+   "results": "Mathlib.CategoryTheory.Iso: cancellation of endpoint comparisons; no coefficient-coherence result.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "NatIso.*(coherence|trans)|scalar.*tower|tower.*scalar",
+   "results": "General scalar-tower lemmas; no specified cohomology representative formula. Local library search found stageBeta_coherence for operation-stage targets, not the point realization in D(Omega).",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FrobeniusCohomologyTransportIso",
+  "date": "2026-10-26",
+  "group": "U9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FrobeniusCohomologyRealizationTransport",
+  "file": "lean/Sheaf/SixFunctors/FrobeniusCohomologyRealizationTransport.lean",
+  "declaration": "WeilConjectures.frobeniusCohomologyRealization_transport",
+  "statement": "theorem frobeniusCohomologyRealization_transport\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]\n    [IsSeparated Y₀.hom]\n    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    (c₀ : Compactification Y₀.hom) (compact : Bool)\n    (K M : generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber Y₀).left)\n    (L N : Index l Ω) (hK : K.stage ≤ L) (hM : M.stage ≤ L) (h : L ≤ N)\n    (f : K.toStage hK ⟶ M.toStage hM) :\n    (frobeniusCohomologyRealizedComparison D l hl Y₀ Ω c₀ compact K N (hK.trans h)).hom ≫\n        (frobeniusCohomologyRealizedStage D l hl Y₀ Ω c₀ compact N).map\n          ((stageSystem l Ω (D.geometricFiber Y₀).left).tr h f) ≫\n        (frobeniusCohomologyRealizedComparison D l hl Y₀ Ω c₀ compact M N\n          (hM.trans h)).inv =\n      (frobeniusCohomologyRealizedComparison D l hl Y₀ Ω c₀ compact K L hK).hom ≫\n        (frobeniusCohomologyRealizedStage D l hl Y₀ Ω c₀ compact L).map f ≫\n        (frobeniusCohomologyRealizedComparison D l hl Y₀ Ω c₀ compact M L hM).inv",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-71887",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261025T203421-L-2813352",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T065722-L-3205845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

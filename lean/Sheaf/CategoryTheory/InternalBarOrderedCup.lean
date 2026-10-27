@@ -9,158 +9,48 @@ public import Sheaf.CategoryTheory.CondensedDerivedInvariantBar
 public import Sheaf.CategoryTheory.CondensedDerivedRestrictionCalculus
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 
-/-! # Ordered character cups in the internal derived bar
+public import Sheaf.CategoryTheory.InternalBarOrderedCupCore
+import Sheaf.CategoryTheory.InternalBarEquivariantCharacterLifts
+import Sheaf.CategoryTheory.InternalBarSmallHomComparison
+import Sheaf.CategoryTheory.InternalBarCupBracketing
 
-Source: main-20261015 blueprint, six-functors direct-images proof, paragraph (3),
-agent-formulated internal bar-diagonal obligation; exact reference wanted
-(blueprint: lem-sfb-internal-bar-ordered-cup).
-The chain maps are specified on all generalized sections. The augmentation is the
-actual resolution-normalized arrow, using the small-Hom localization of the cup calculus.
-No underived bar term is assumed acyclic.
+/-! # Assembly of the ordered character cup comparison
+
+Source: the internal bar normalization argument in paragraph (3) of the
+six-functors direct-image proof (blueprint: lem-sfb-internal-bar-ordered-cup).
 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-universe u v w
+universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open CategoryTheory.CondensedBar CategoryTheory.CondensedDerivedRestriction
 namespace CategoryTheory.CondensedBar.OrderedCup
 
-/-- The regular coefficient in the cup calculus's ordinary derived category.
-Source: paragraph (3) (blueprint: lem-sfb-internal-bar-ordered-cup). -/
-def regularZero (A : CondensedBar.Ring.{u}) :=
-  (DerivedCategory.singleFunctor (Modules A) 0).obj (Mod.regular A.X)
+private lemma sign_mul {a b : ℤ} (ha : a = 1 ∨ a = -1)
+    (hb : b = 1 ∨ b = -1) : a * b = 1 ∨ a * b = -1 := by
+  rcases ha with rfl | rfl <;> rcases hb with rfl | rfl <;> decide
 
-/-- The source A[-q].
-Source: paragraph (3) (blueprint: lem-sfb-internal-bar-ordered-cup). -/
-def degreeSource (A : CondensedBar.Ring.{u}) (q : ℕ) :=
-  (regularZero A)⟦(-(q : ℤ))⟧
+private lemma sign_pow (n : ℕ) : (-1 : ℤ) ^ n = 1 ∨ (-1 : ℤ) ^ n = -1 := by
+  induction n with
+  | zero => exact Or.inl rfl
+  | succ n hn => simpa only [pow_succ] using sign_mul hn (Or.inr rfl)
 
-/-- Multiplication of an object identified with the tensor unit, abstractly.
-Source: paragraph (3) (blueprint: lem-sfb-internal-bar-ordered-cup). -/
-def unitMultiply {C : Type v} [Category.{w} C] [MonoidalCategory C]
-    {U : C} (e : 𝟙_ C ≅ U) : U ⊗ U ≅ U :=
-  tensorIso e.symm (Iso.refl _) ≪≫ λ_ U
+private lemma characterCupSign_sign (t : ℕ → ℕ → ℤ)
+    (ht : ∀ p r : ℕ, t p r = 1 ∨ t p r = -1) (q : ℕ) :
+    characterCupSign t q = 1 ∨ characterCupSign t q = -1 := by
+  induction q with
+  | zero => exact Or.inl rfl
+  | succ q hq =>
+    by_cases h : q = 0
+    · simp [characterCupSign, h]
+    · simpa only [characterCupSign, if_neg h] using sign_mul hq (ht q 1)
 
-/-- Assemble the ordered source convention without unfolding the condensed tensor.
-Source: paragraph (3) (blueprint: lem-sfb-internal-bar-ordered-cup). -/
-def assembleSource {C : Type v} [Category.{w} C] [MonoidalCategory C]
-    (D : ℕ → C) (e : D 0 ≅ 𝟙_ C) (s : ∀ q : ℕ, D (q + 1) ≅ D 1 ⊗ D q) :
-    ∀ q : ℕ, D q ≅ tensorPower (D 1) q
-  | 0 => e
-  | q + 1 => s q ≪≫ tensorIso (Iso.refl _) (assembleSource D e s q)
-
-/-- Assemble the fixed convention in an abstract monoidal category with shifts.
-The supplied two-variable comparison is used without permutations; in length zero
-use the unit and the zero-shift isomorphism.
-Source: paragraph (3) (blueprint: lem-sfb-internal-bar-ordered-cup). -/
-def assembleShiftedSource {D : Type v} [Category.{w} D] [MonoidalCategory D]
-    [HasShift D ℤ] (U : D) (e : 𝟙_ D ≅ U)
-    (s : ∀ a b : ℤ, U⟦a⟧ ⊗ U⟦b⟧ ≅ (U ⊗ U)⟦a + b⟧) (q : ℕ) :
-    U⟦-(q : ℤ)⟧ ≅ tensorPower (U⟦(-1 : ℤ)⟧) q :=
-  assembleSource (fun n : ℕ ↦ U⟦-(n : ℤ)⟧)
-    ((shiftFunctorZero' D (0 : ℤ) rfl).app U ≪≫ e.symm)
-    (fun n ↦
-      (eqToIso (congrArg (fun k : ℤ ↦ U⟦k⟧) (by omega)) :
-        U⟦-((n + 1 : ℕ) : ℤ)⟧ ≅ U⟦(-1 : ℤ) + -(n : ℤ)⟧) ≪≫
-      ((shiftFunctor D ((-1 : ℤ) + -(n : ℤ))).mapIso (unitMultiply e)).symm ≪≫
-      (s (-1 : ℤ) (-(n : ℤ))).symm) q
-
-/-- The fixed right-associated shift convention, including the empty tensor unit.
-Source: paragraph (3) (blueprint: lem-sfb-internal-bar-ordered-cup). -/
-def sourceTensor (A : CondensedBar.Ring.{u}) (q : ℕ) :
-    degreeSource A q ≅ tensorPower (degreeSource A 1) q :=
-  assembleShiftedSource (regularZero A) (baseUnitIso A)
-    (DerivedCategory.shiftTensorShiftIso (Modules A) (regularZero A) (regularZero A)) q
-
-/-- Tensor a list of arrows in order, without unfolding the concrete tensor construction.
-Source: paragraph (3) (blueprint: lem-sfb-internal-bar-ordered-cup). -/
-def tensorList {C : Type v} [Category.{w} C] [MonoidalCategory C] {X Y : C} :
-    ∀ (q : ℕ) (_f : Fin q → (X ⟶ Y)), tensorPower X q ⟶ tensorPower Y q
-  | 0, _ => 𝟙 _
-  | q + 1, f => f 0 ⊗ₘ tensorList q (fun i ↦ f i.succ)
-
-variable {A : CondensedBar.Ring.{u}} {G : Type u} [Group G] [TopologicalSpace G]
-  [IsTopologicalGroup G]
-
-/-- The actual unital ordered derived cup with the fixed shift convention.
-Source: paragraph (3) (blueprint: lem-sfb-internal-bar-ordered-cup). -/
-def characterCup (q : ℕ) (a : Fin q → Character A G) :
-    degreeSource A q ⟶ cohomology A G :=
-  (sourceTensor A q).hom ≫ tensorList q (fun k ↦ characterClass (a k)) ≫
-    orderedProduct (cupUnit (A := A) (G := G)) (cup (A := A) (G := G)) q
-
-variable [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
-
-/-- The underived inhomogeneous bar for the trivial regular coefficient.
-Source: paragraph (3) (blueprint: lem-sfb-internal-bar-ordered-cup). -/
-abbrev underived {F : InternalFunctions A} (B : BarDiagram (G := G) F) :=
-  (cochains B).obj (regularTrivial A G)
-
-/-- The compatible nonnegative derived total on an equivariant injective resolution.
-Source: paragraph (3) (blueprint: lem-sfb-internal-bar-ordered-cup). -/
-abbrev resolved {F : InternalFunctions A} (B : BarDiagram (G := G) F)
-    (I : InjectiveResolution (regularTrivial A G)) :=
-  (totalCochains B).obj I.cocomplex
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-/-- The resolution-normalized augmentation in the cup calculus's small-Hom localization.
-This maps the resolution augmentation, inverts the computation unit on injectives,
-and applies the total augmentation, exactly as `Computation.normalization`.
-Source: paragraph (3) (blueprint: lem-sfb-internal-bar-ordered-cup). -/
-def augmentationArrow {F : InternalFunctions A} {B : BarDiagram (G := G) F}
-    {a : Augmentation (invariants A G) B}
-    (t : TotalAugmentation (invariants A G) B a)
-    (I : InjectiveResolution (regularTrivial A G)) :
-    cohomology A G ⟶ DerivedCategory.Q.obj (extend (resolved B I)) := by
-  letI : QuasiIso I.ι' := inferInstance
-  letI : I.cochainComplex.IsKInjective := by
-    dsimp only [InjectiveResolution.cochainComplex]
-    infer_instance
-  exact (derived A G).map (DerivedCategory.Q.map I.ι') ≫
-    ((invariants A G).functor.rightDerivedFunctorObjQIso I.cochainComplex).hom ≫
-    DerivedCategory.Q.map
-      (HomologicalComplex.mapExtendIso I.cocomplex ComplexShape.embeddingUpNat
-        (invariants A G).functor).hom ≫
-    DerivedCategory.Q.map (HomologicalComplex.extendMap (t.map.app I.cocomplex)
-      ComplexShape.embeddingUpNat)
-
-/-- The canonical total comparison is fixed by the resolution map into bidegree (n,0).
-Source: paragraph (3) (blueprint: lem-sfb-internal-bar-ordered-cup). -/
-def IsUnderivedComparison {F : InternalFunctions A} (B : BarDiagram (G := G) F)
-    (I : InjectiveResolution (regularTrivial A G))
-    (j : underived B ⟶ resolved B I) : Prop :=
-  ∀ n : ℕ, j.f n = (B.diagram.map (I.ι.f 0)).app (SimplexCategory.mk n) ≫
-    (doubleComplex B I.cocomplex).ιTotal (.up ℕ) n 0 n (by simp)
-
-/-- The cocycle formula on every generalized section. Linearity and evaluation at the
-regular unit determine the whole internal map, with empty product 1 for q=0.
-Source: paragraph (3) (blueprint: lem-sfb-internal-bar-ordered-cup). -/
-def IsCharacterCocycle {F : InternalFunctions A} (B : BarDiagram (G := G) F)
-    (q : ℕ) (a : Fin q → Character A G)
-    (c : (HomologicalComplex.single (Modules A) (.up ℤ) (q : ℤ)).obj
-      (Mod.regular A.X) ⟶ extend (underived B)) : Prop :=
-  ∀ (S T : Profinite.{u}) (f : T ⟶ S) (g : Fin q → C(T, G)),
-    (F.evaluate (power G q) S (Mod.regular A.X)
-      (((HomologicalComplex.singleObjXSelf (.up ℤ) (q : ℤ) (Mod.regular A.X)).inv ≫
-        c.f (q : ℤ) ≫ ((underived B).extendXIso ComplexShape.embeddingUpNat rfl).hom ≫
-        (B.term (regularTrivial A G) q).hom).hom.hom.app (op S)
-          (1 : sectionRing A S))).val T f (tupleMap g) =
-      ∏ k : Fin q, (a k).app T (g k)
-
-/-- The actual localized cocycle followed by the actual total comparison, with source A[-q].
-Source: paragraph (3) (blueprint: lem-sfb-internal-bar-ordered-cup). -/
-def cocycleArrow {F : InternalFunctions A} {B : BarDiagram (G := G) F}
-    {I : InjectiveResolution (regularTrivial A G)}
-    (j : underived B ⟶ resolved B I) (q : ℕ)
-    (c : (HomologicalComplex.single (Modules A) (.up ℤ) (q : ℤ)).obj
-      (Mod.regular A.X) ⟶ extend (underived B)) :
-    degreeSource A q ⟶ DerivedCategory.Q.obj (extend (resolved B I)) :=
-  ((DerivedCategory.singleFunctors (Modules A)).shiftIso (-(q : ℤ)) (q : ℤ) 0
-    (by omega)).hom.app (Mod.regular A.X) ≫
-      DerivedCategory.Q.map c ≫
-      DerivedCategory.Q.map (HomologicalComplex.extendMap j ComplexShape.embeddingUpNat)
+private lemma sign_cancel {M : Type*} [AddCommGroup M] {s : ℤ}
+    (hs : s = 1 ∨ s = -1) {x y : M} (h : x = s • y) : y = s • x := by
+  rcases hs with rfl | rfl
+  · simpa using h.symm
+  · simpa using (congrArg Neg.neg h).symm
 
 /-- Ordered character cocycles equal the specified derived cups up to a universal sign.
 The sign is quantified before the ring, group, compatible model, resolution and characters.
@@ -203,6 +93,60 @@ theorem internal_bar_ordered_cup :
               (Mod.regular A.X) ⟶ extend (underived B),
             IsCharacterCocycle B q a c ∧
             cocycleArrow j q c = (ε q) • (characterCup q a ≫ augmentationArrow t I) := by
-  sorry
+  obtain ⟨t, ht, _, _, _, hcup⟩ := internalBarCharacterRoofCup.{u}
+  let U : ℕ → ℤ := fun q ↦ (-1 : ℤ) ^ q * characterCupSign t q
+  let ε : ℕ → ℤ := fun q ↦ (-1 : ℤ) ^ (q * (q + 1) / 2) * U q
+  have hU (q : ℕ) : U q = 1 ∨ U q = -1 :=
+    sign_mul (sign_pow q) (characterCupSign_sign t ht q)
+  refine ⟨ε, fun q ↦ sign_mul (sign_pow _) (hU q), ?_, ?_, ?_⟩
+  · simp [ε, U, characterCupSign]
+  · simp [ε, U, characterCupSign]
+  intro A G _ _ _ _ _ _ F B a tB I
+  obtain ⟨R⟩ := Profinite.CondensedAction.InternalBar.exists_resolution A.toMon G
+  obtain ⟨l⟩ := Profinite.CondensedAction.InternalBarCharacter.exists_lifts R B
+  obtain ⟨e, he, heq, L, hL, haug⟩ := exists_equivariant_character_lifts R B l
+  let : QuasiIso e := he
+  obtain ⟨hiso, j, hj, hcompare⟩ := small_hom_bar_roof_comparison B a tB I R e heq
+  refine ⟨hiso, j, hj, ?_⟩
+  have hlist (as : List (Character A G)) :
+      ∃ c : (HomologicalComplex.single (Modules A) (.up ℤ) (as.length : ℤ)).obj
+          (Mod.regular A.X) ⟶ extend (underived B),
+        IsCharacterCocycle B as.length (fun i ↦ as.get i) c ∧
+        cocycleArrow j as.length c =
+          ε as.length • (characterCup as.length (fun i ↦ as.get i) ≫ augmentationArrow tB I) := by
+    refine ⟨l.cocycle as, ?_, ?_⟩
+    · intro S T f g
+      have hc := l.cocycle_formula as S (1 : sectionRing A S) T f g
+      dsimp only [Profinite.CondensedAction.InternalBarCharacter.cocycleComponent,
+        Profinite.CondensedAction.InternalBar.onSections, underived, regularTrivial,
+        AddCommGrpCat.Hom.hom] at hc ⊢
+      simp only [map_one, one_mul] at hc
+      convert hc using 1
+      rfl
+    · have hc := hcompare as.length
+        (orderedCharacterLift R as.length (fun i ↦ L (as.get i))) (l.cocycle as) (by
+          intro S x
+          rw [haug as]
+          exact l.coordinates as S x)
+      have hprod := ((hcup A G R e heq).2 as.length
+        (fun i ↦ as.get i) (fun i ↦ L (as.get i)) (fun i ↦ hL (as.get i))).2
+      rw [ordered_character_cup_eq] at hprod
+      have hinv : inflationPhi A G as.length
+          (characterRoof R e as.length
+            (orderedCharacterLift R as.length (fun i ↦ L (as.get i)))) =
+          U as.length • characterCup as.length (fun i ↦ as.get i) := by
+        exact sign_cancel (hU as.length) hprod
+      rw [hinv, Preadditive.zsmul_comp, smul_smul] at hc
+      exact hc
+  intro q a
+  let P : (Σ n : ℕ, Fin n → Character A G) → Prop := fun s ↦
+    ∃ c : (HomologicalComplex.single (Modules A) (.up ℤ) (s.1 : ℤ)).obj
+        (Mod.regular A.X) ⟶ extend (underived B),
+      IsCharacterCocycle B s.1 s.2 c ∧
+      cocycleArrow j s.1 c = ε s.1 • (characterCup s.1 s.2 ≫ augmentationArrow tB I)
+  obtain ⟨as, has⟩ := (List.equivSigmaTuple (α := Character A G)).surjective ⟨q, a⟩
+  change P ⟨q, a⟩
+  rw [← has]
+  exact hlist as
 
 end CategoryTheory.CondensedBar.OrderedCup

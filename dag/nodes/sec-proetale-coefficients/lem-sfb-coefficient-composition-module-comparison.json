@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-coefficient-composition-module-comparison",
+ "kind": "statement",
+ "title": "Composition comparison for restricted module transport and its left adjoints",
+ "statement": "Let $\\mathcal C,\\mathcal D,\\mathcal E$ be monoidal categories [def-sfb-monoidal-category], and let $P:\\mathcal C\\to\\mathcal D$, $Q:\\mathcal D\\to\\mathcal E$, $H:\\mathcal C\\to\\mathcal E$ be lax monoidal functors, with tensor maps $\\mu^P,\\mu^Q,\\mu^H$. Give $QP$ its composite lax structure. Let $c:QP\\xrightarrow{\\sim}H$ be a monoidal natural isomorphism, and let $A,B,C$ be monoid objects of $\\mathcal C,\\mathcal D,\\mathcal E$, respectively [sk-def-sfb-ring-object]. Suppose given morphisms of monoid objects\n$$\\psi:B\\to PA,\\qquad\\chi:C\\to QB,\\qquad\\varphi:C\\to HA,\\qquad\\varphi=c_A\\circ Q(\\psi)\\circ\\chi.$$\nUsing module objects, transport and scalar restriction [sk-def-sfb-module-objects, def-sfb-modobj-transport, def-sfb-modobj-restriction], put\n$$T_P=\\operatorname{Res}_{\\psi}\\operatorname{mapMod}(P),\\quad T_Q=\\operatorname{Res}_{\\chi}\\operatorname{mapMod}(Q),\\quad T_H=\\operatorname{Res}_{\\varphi}\\operatorname{mapMod}(H).$$\nFor every $A$-module $M$, write $a_M,b_M$ for the $C$-actions on $T_QT_PM$ and $T_HM$. They are\n$$a_M=Q\\bigl(P(\\gamma_M)\\circ\\mu^P_{A,M}\\circ(\\psi\\otimes1_{PM})\\bigr)\\circ\\mu^Q_{B,PM}\\circ(\\chi\\otimes1_{QPM}),\\qquad b_M=H(\\gamma_M)\\circ\\mu^H_{A,M}\\circ(\\varphi\\otimes1_{HM}).$$\nAssume that every $c_M$ is $C$-linear from $T_QT_PM$ to $T_HM$:\n$$c_M\\circ a_M=b_M\\circ(1_C\\otimes c_M).$$\nThen $c_M^{-1}\\circ b_M=a_M\\circ(1_C\\otimes c_M^{-1})$, for every $A$-linear $t:M\\to N$ one has $H(t)\\circ c_M=c_N\\circ QP(t)$, and there is a unique natural isomorphism $\\delta:T_QT_P\\xrightarrow{\\sim}T_H$ whose component and inverse on underlying objects are $c_M$ and $c_M^{-1}$.\nSuppose in addition that adjunctions $S_P\\dashv T_P$, $S_Q\\dashv T_Q$, $S_H\\dashv T_H$ are given. Let $u_1$ be the unit of $S_H\\dashv T_H$ and $u_2$ the unit of the composite adjunction $S_PS_Q\\dashv T_QT_P$ [def-weil-pbc-composite-adjunction]. There is a unique natural isomorphism $d:S_H\\xrightarrow{\\sim}S_PS_Q$ satisfying, for every $C$-module $M$,\n$$T_H(d_M)\\circ u_{1,M}=\\delta_{S_PS_QM}\\circ u_{2,M}.$$\nIts conjugate is $\\delta$ under these adjunctions, and the conjugate of $d^{-1}$ is $\\delta^{-1}$ [def-weil-pbc-adjunction-conjugate]. No invertibility is required of $\\psi,\\chi,\\varphi$; only $c$ is required to be an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/sk-def-sfb-module-pushforward-pullback.proof.md",
+  "place": "pushforward-composition and final pullback-composition sentences: action comparison, inverse, naturality and adjoint unit characterization (former steps 5–7)"
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-transport",
+  "def-sfb-modobj-restriction",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof": [
+  {
+   "text": "By [def-sfb-modobj-transport], transporting an action along $P$ replaces $\\gamma_M$ by $P(\\gamma_M)\\circ\\mu^P_{A,M}$, and transporting a module map $t$ gives $P(t)$. By [def-sfb-modobj-restriction], restricting along $\\psi$ precomposes this action with $\\psi\\otimes1$ and leaves the underlying objects and maps unchanged. Repeat these two substitutions with $Q,\\chi$, and do the single substitution with $H,\\varphi$. They give exactly the displayed $a_M,b_M$, and the underlying maps of $T_QT_P(t)$ and $T_H(t)$ are $QP(t)$ and $H(t)$. The monoid-morphism hypotheses on the three coefficient maps are precisely those needed for these restrictions.",
+   "uses": [
+    "def-sfb-modobj-transport",
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/sk-def-sfb-module-pushforward-pullback.proof.md",
+    "place": "pushforward-composition sentence; unfold the transport and restriction actions"
+   }
+  },
+  {
+   "text": "Fix $M$. Compose the assumed equation $c_M\\circ a_M=b_M\\circ(1_C\\otimes c_M)$ on the left with $c_M^{-1}$ and on the right with $1_C\\otimes c_M^{-1}$. The bifunctor laws of [def-sfb-monoidal-category] and $c_Mc_M^{-1}=1$ give\n$$a_M\\circ(1_C\\otimes c_M^{-1})=c_M^{-1}\\circ b_M.$$\nThus $c_M^{-1}$ is $C$-linear by the morphism criterion in [sk-def-sfb-module-objects]. The forward map is linear by hypothesis, and their two composites are identity module maps because their underlying composites are identities and a module morphism is just an underlying morphism satisfying the action equation.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/sk-def-sfb-module-pushforward-pullback.proof.md",
+    "place": "pushforward-composition sentence; invert the stipulated linear component"
+   }
+  },
+  {
+   "text": "For an $A$-linear map $t:M\\to N$, naturality of the given natural isomorphism $c:QP\\cong H$ is $H(t)\\circ c_M=c_N\\circ QP(t)$. With the underlying maps identified in step 1, this is precisely the naturality equation for the module isomorphisms of step 2. Explicitly, multiplication by $c_N^{-1}$ on the left and $c_M^{-1}$ on the right gives $QP(t)\\circ c_M^{-1}=c_N^{-1}\\circ H(t)$, so the inverse components are natural as well. By [sk-def-sfb-module-objects] equality and composition of module morphisms are those of their underlying maps; hence these components define $\\delta$ and its inverse. Any other natural isomorphism with the prescribed underlying components has the same module morphisms at every object, proving uniqueness.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/sk-def-sfb-module-pushforward-pullback.proof.md",
+    "place": "pushforward-composition sentence; naturality and uniqueness of the lifted comparison"
+   }
+  },
+  {
+   "text": "Suppose the three adjunctions are given. Form $S_PS_Q\\dashv T_QT_P$ by [def-weil-pbc-composite-adjunction], applying first $S_Q\\dashv T_Q$ and then $S_P\\dashv T_P$; its unit is the specified $u_2$. Apply [lem-weil-pbc-conjugate-iso-unit-equation] with source category $\\Mod_C(\\mathcal E)$, target category $\\Mod_A(\\mathcal C)$, $(L_1,R_1)=(S_H,T_H)$, $(L_2,R_2)=(S_PS_Q,T_QT_P)$ and the natural isomorphism $\\delta:R_2\\cong R_1$ from step 3. All hypotheses are now present. The lemma supplies a unique natural transformation $d:L_1\\to L_2$, makes it an isomorphism, and gives exactly $T_H(d_M)\\circ u_{1,M}=\\delta_{S_PS_QM}\\circ u_{2,M}$. Uniqueness among natural transformations implies the requested uniqueness among natural isomorphisms.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/sk-def-sfb-module-pushforward-pullback.proof.md",
+    "place": "final pullback-composition sentence; uniqueness of left adjoints with the prescribed units (Stacks Tag 0B65, lemma-transformation-between-functors-and-adjoints)"
+   }
+  },
+  {
+   "text": "Write $L_1=S_H$, $R_1=T_H$, $L_2=S_PS_Q$, $R_2=T_QT_P$ and let $\\varepsilon_2$ be the counit of the composite adjunction. By the component formula of [def-weil-pbc-adjunction-conjugate], the conjugate of $d$ at an $A$-module $N$ is\n$$d^c_N=R_1(\\varepsilon_{2,N})\\circ R_1(d_{R_2N})\\circ u_{1,R_2N}.$$\nSubstitute the unit equation of step 4 at $R_2N$, then use naturality of $\\delta$ at $\\varepsilon_{2,N}$ and the right-adjoint triangle identity of the composite adjunction [def-weil-pbc-composite-adjunction]:\n$$d^c_N=R_1(\\varepsilon_{2,N})\\circ\\delta_{L_2R_2N}\\circ u_{2,R_2N}=\\delta_N\\circ R_2(\\varepsilon_{2,N})\\circ u_{2,R_2N}=\\delta_N.$$\nThe inverse clause of [def-weil-pbc-adjunction-conjugate] therefore gives $(d^{-1})^c=\\delta^{-1}$. In every step only $c_M$ was inverted; the coefficient maps were used solely as monoid morphisms for restriction, so none of them has been assumed invertible.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/sk-def-sfb-module-pushforward-pullback.proof.md",
+    "place": "final pullback-composition sentence; identify the conjugate by the unit equation and triangle identity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-modobj-transport",
+  "def-sfb-modobj-restriction",
+  "def-sfb-monoidal-category",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/sk-def-sfb-module-pushforward-pullback.proof.md",
+  "place": "pushforward-composition and final pullback-composition sentences; explicit module calculations and Stacks Tag 0B65 mate calculus"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition of lax monoidal functors transporting modules restriction scalars monoidal natural isomorphism linear comparison and conjugate left adjoints",
+   "results": "ModuleCat.restrictScalarsComp'App_inv_naturality; CategoryTheory.Mod_.scalarRestriction_hom; CommRingCat.moduleCatRestrictScalarsPseudofunctor_mapComp; ModuleCat.restrictScalarsComp'App_inv_naturality_assoc; ModuleCat.restrictScalarsComp'_hom_app; ModuleCat.restrictScalarsComp'_inv_app; ModuleCat.restrictScalarsComp'App; CategoryTheory.Mod_.scalarRestriction",
+   "date": "2026-10-22",
+   "verdict": "no exact match: Mathlib hits give monoid transport, scalar restriction or generic conjugation; none constructs the stated restricted internal-module comparison and its normalized adjoint comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.IsMonoidal",
+   "results": "CategoryTheory.NatTrans.IsMonoidal.id; CategoryTheory.NatTrans.IsMonoidal; CategoryTheory.LaxMonoidalFunctor.Hom.isMonoidal; CategoryTheory.NatTrans.IsMonoidal.instHomFunctorLeftUnitor; CategoryTheory.NatTrans.IsMonoidal.instHomFunctorRightUnitor; CategoryTheory.Functor.Monoidal.natTransIsMonoidal_of_transport; CategoryTheory.Iso.instIsMonoidalInvFunctor; CategoryTheory.LaxMonoidalFunctor.Hom.mk",
+   "date": "2026-10-22",
+   "verdict": "no exact match: Mathlib hits give monoid transport, scalar restriction or generic conjugation; none constructs the stated restricted internal-module comparison and its normalized adjoint comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|comapComp|conjugateIsoEquiv",
+   "results": "Mathlib/Tactic/Translate/ToAdditive.lean; Mathlib/CategoryTheory/GradedObject.lean; Mathlib/CategoryTheory/GradedObject.lean; Mathlib/CategoryTheory/GradedObject.lean; Mathlib/Condensed/Light/Small.lean; Mathlib/Condensed/Light/Small.lean; Mathlib/CategoryTheory/Shift/Adjunction.lean; Mathlib/CategoryTheory/Shift/Adjunction.lean",
+   "date": "2026-10-22",
+   "verdict": "no exact match: Mathlib hits give monoid transport, scalar restriction or generic conjugation; none constructs the stated restricted internal-module comparison and its normalized adjoint comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "monoidal natural isomorphism between composite lax monoidal functors induces comparison of module transport with scalar restriction and adjoint functors",
+   "results": "CategoryTheory.LaxMonoidalFunctor.isoOfComponents; CategoryTheory.Functor.mapMonNatIso; CategoryTheory.NatTrans.IsMonoidal.comp; CategoryTheory.Functor.mapMonCompIso; CategoryTheory.LaxMonoidalFunctor.isoMk; CategoryTheory.NatTrans.IsMonoidal; CategoryTheory.LaxMonoidalFunctor.Hom.isMonoidal; CategoryTheory.NatTrans.IsMonoidal.mk",
+   "date": "2026-10-22",
+   "verdict": "no exact match: Mathlib hits give monoid transport, scalar restriction or generic conjugation; none constructs the stated restricted internal-module comparison and its normalized adjoint comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a monoidal natural isomorphism G F to H to modules over three monoids with coefficient maps psi psi prime phi and obtain its adjoint comparison unit equation",
+   "results": "CategoryTheory.Adjunction.mapMon_unit; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε; CategoryTheory.Adjunction.mapMon_counit; CategoryTheory.Adjunction.unit_app_unit_comp_map_η; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc",
+   "date": "2026-10-22",
+   "verdict": "no exact match: Mathlib hits give monoid transport, scalar restriction or generic conjugation; none constructs the stated restricted internal-module comparison and its normalized adjoint comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "Mod_.*map|map.*Mod_|linear.*adj|adj.*linear",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no exact match: Mathlib hits give monoid transport, scalar restriction or generic conjugation; none constructs the stated restricted internal-module comparison and its normalized adjoint comparison.",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "grep",
+   "query": "mapModCompIso|unit_conjugateEquiv|conjugateIsoEquiv",
+   "results": "{\"t\": \"2026-10-22T06:24:53Z\", \"tool\": \"grep\", \"query\": \"mapModCompIso|unit_conjugateEquiv|conjugateIsoEquiv\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean\", \"Mathlib/CategoryTheory/Comma/Over/Pullback.lean\", \"Mathlib/CategoryTheory/Comma/Over/Pullback.lean\", \"Mathlib/CategoryTheory/Comma/Over/Pullback.lean\", \"Mathlib/CategoryTheory/Comma/Over/Pullback.lean\", \"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"Mathlib/CategoryTheory/Shift/Adjunction.lean\"], \"digest\": \"cbbd07a67399cad9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: the hits concern ordinary modules, constructors for linear maps, or generic conjugation, rather than the complete restricted transport comparison and its normalized left-adjoint comparison.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A linear natural isomorphism of composite internal module transport functors with scalar restriction induces a unique unit compatible isomorphism of their left adjoints",
+   "results": "{\"t\": \"2026-10-22T06:24:54Z\", \"tool\": \"leansearch\", \"query\": \"A linear natural isomorphism of composite internal module transport functors with scalar restriction induces a unique unit compatible isomorphism of their left adjoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.restrictScalarsComp'App_inv_naturality\", \"CategoryTheory.Adjunction.unitAsIsoOfIso\", \"ModuleCat.restrictScalarsCongr\", \"ModuleCat.restrictScalarsId'App_inv_naturality\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"LinearEquiv.restrictScalars\", \"ModuleCat.restrictScalarsComp'\"], \"digest\": \"773f9614a4a56e04\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: the hits concern ordinary modules, constructors for linear maps, or generic conjugation, rather than the complete restricted transport comparison and its normalized left-adjoint comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv, CategoryTheory.Mod",
+   "results": "{\"t\": \"2026-10-22T06:24:54Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.conjugateIsoEquiv, CategoryTheory.Mod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: the hits concern ordinary modules, constructors for linear maps, or generic conjugation, rather than the complete restricted transport comparison and its normalized left-adjoint comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between underlying functors whose components are linear lifts uniquely to module objects, and induces a unit compatible isomorphism of left adjoints",
+   "results": "{\"t\": \"2026-10-22T06:25:04Z\", \"tool\": \"leanfinder\", \"query\": \"A natural isomorphism between underlying functors whose components are linear lifts uniquely to module objects, and induces a unit compatible isomorphism of left adjoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.adj\", \"Rep.counitIso\", \"ModuleCat.adj_homEquiv\", \"PresheafOfModules.freeAdjunction_unit_app\", \"PresheafOfModules.freeAdjunction\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"ModuleCat.ExtendRestrictScalarsAdj.unit_app\", \"PresheafOfModules.freeAdjunction_homEquiv\"], \"digest\": \"8e87db440e3dff05\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: the hits concern ordinary modules, constructors for linear maps, or generic conjugation, rather than the complete restricted transport comparison and its normalized left-adjoint comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "{\"t\": \"2026-10-22T06:25:16Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.conjugateIsoEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateIsoEquiv\", \"CategoryTheory.conjugateIsoEquiv_apply_hom\", \"CategoryTheory.conjugateIsoEquiv_apply_inv\", \"CategoryTheory.conjugateIsoEquiv_symm_apply_hom\", \"CategoryTheory.conjugateIsoEquiv_symm_apply_inv\"], \"digest\": \"0c85ee07eb89de61\"}",
+   "date": "2026-10-22",
+   "verdict": "partial match: the conjugate and inverse clauses are generic Mathlib mate calculus, already represented by def-weil-pbc-adjunction-conjugate and lem-weil-pbc-conjugate-iso-unit-equation; not a match for the module comparison clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift an isomorphism whose forward map respects module actions to an isomorphism in the category of internal modules in a monoidal category",
+   "results": "{\"t\": \"2026-10-22T06:25:26Z\", \"tool\": \"leanfinder\", \"query\": \"Lift an isomorphism whose forward map respects module actions to an isomorphism in the category of internal modules in a monoidal category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsMod_HomInvOfHom\", \"CategoryTheory.Mod_.Hom.mk'_hom\", \"CategoryTheory.Mod_.Hom.mk'\", \"CategoryTheory.Mod_.Hom.mk''_hom\", \"CategoryTheory.Mod_.Hom.mk''\", \"LinearEquiv.toModuleIso\", \"linearEquivIsoModuleIso\", \"LinearEquiv.toFGModuleCatIso_hom\"], \"digest\": \"204835d0e0f15444\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: the hits concern ordinary modules, constructors for linear maps, or generic conjugation, rather than the complete restricted transport comparison and its normalized left-adjoint comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "instIsModHomInvOfHom|isoMk|hom_ext|def mapMod|def comap",
+   "results": "{\"t\": \"2026-10-22T06:26:00Z\", \"tool\": \"grep\", \"query\": \"instIsModHomInvOfHom|isoMk|hom_ext|def mapMod|def comap\", \"sub\": \"CategoryTheory/Monoidal/Mod.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"319\", \"403\", \"433\"], \"digest\": \"4345a1e4a7ec0835\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: the hits concern ordinary modules, constructors for linear maps, or generic conjugation, rather than the complete restricted transport comparison and its normalized left-adjoint comparison.",
+   "subdirectory": "CategoryTheory/Monoidal/Mod.lean"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "sk-def-sfb-module-pushforward-pullback",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-module-pushforward-pullback",
+ "blueprint": {
+  "from": {
+   "node": "sk-def-sfb-module-pushforward-pullback",
+   "place": "pushforward-composition and final pullback-composition sentences: action comparison, inverse, naturality and adjoint unit characterization (former steps 5–7)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-coefficient-composition-module-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement and its coefficient hypotheses unchanged. Expanded the assumed linear comparison into the inverse calculation, underlying naturality, module natural isomorphism and uniqueness. Reused the existing conjugate-iso-unit-equation Mathlib leaf for the left-adjoint comparison and explicitly computed its conjugate using the unit equation. No new nodes, no attachment, no Lean writing or compilation.",
+  "blueprint": "Steps 1–3 realize the pushforward-composition sentence of sk-def-sfb-module-pushforward-pullback.proof.md, at the module comparison level after forward linearity has been assumed. Steps 4–5 realize its final pullback-composition sentence by uniqueness of left adjoints, including the stipulated unit normalization and inverse conjugate. The detailed def-sfb-module-lower-star-comp and def-sfb-module-upper-star-comp are geometric specializations rather than duplicate statements of this general conditional comparison.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-4ec07d211",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-4ec07d211 (reviewer sub-agent of L); spot-checked: I read the item, all five steps and every cited statement. This is a first split with no new nodes. The statement and all metadata are byte-identical to the live item, which is still unsplit there. Neither the item nor any cited node is on the 10-19 drop list, and there is no re-split note. Source: I read main-20261015 sk-def-sfb-module-pushforward-pullback, including the lower-star-comp and upper-star-comp proofs. The item abstracts those proofs: it lifts the monoidal composition iso through mapMod and Res, then takes the conjugate (uniqueness of left adjoints). The parent proves forward linearity separately, in its step 5 via lem-sfb-restricted-transport-comparison-linear. Step 1: unfolding transport (F gamma ∘ mu^F) and restriction (∘ phi⊗1) gives exactly a_M, with mu^Q indexed by B and PM, and gives b_M. Step 2: the inverse is linear, a(1⊗c^-1)=c^-1 b, by the bifunctor law. Step 3: naturality of c holds for every morphism; the inverse naturality is written out, and uniqueness follows because module maps are determined by their underlying maps. Step 4: lem-weil-pbc-conjugate-iso-unit-equation is a Mathlib leaf (unit_conjugateEquiv_symm, Mates.lean:311, checked). It is applied with (L1,R1)=(S_H,T_H), (L2,R2)=(S_P S_Q,T_Q T_P) and delta:R2≅R1, giving d:S_H→S_P S_Q with T_H(d)u1=delta u2. The composite adjunction is F=S_Q, H=S_P. Step 5: d has domain S_H, so d^c has direction T_Q T_P→T_H, the same as delta. The component formula matches def-weil-pbc-adjunction-conjugate, and the unit equation, naturality of delta at eps2 and the triangle identity give d^c=delta. The inverse clause then gives (d^-1)^c=delta^-1. Edge cases checked: identities, a non-invertible coefficient map (Z→Z/2), zero and non-commutative cases; only c is ever inverted. The other-unit nodes used are generic Mathlib-leaf mate-calculus tools. No faults and no fixes. Minor: the report mentions a citations.json that is not on the branch, which is harmless."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModuleObjects.CoefficientCompositionComparison",
+  "declaration": "CategoryTheory.Functor.coefficientCompositionModuleComparison",
+  "declarations": [
+   "CategoryTheory.Functor.restrictedModuleTransport",
+   "CategoryTheory.Functor.coefficientCompositionModuleComparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ModuleObjects/CoefficientCompositionComparison.lean",
+  "statement": "theorem coefficientCompositionModuleComparison (P : C ⥤ D) (Q : D ⥤ E) (H : C ⥤ E) [P.LaxMonoidal] [Q.LaxMonoidal] [H.LaxMonoidal] (c : P ⋙ Q ≅ H) [NatTrans.IsMonoidal c.hom] (A : C) (B : D) (R : E) [MonObj A] [MonObj B] [MonObj R] (ψ : B ⟶ P.obj A) (χ : R ⟶ Q.obj B) (φ : R ⟶ H.obj A) [IsMonHom ψ] [IsMonHom χ] [IsMonHom φ] (hcompat : φ = χ ≫ Q.map ψ ≫ c.hom.app A) (hlinear : ∀ M : Mod C A, Mod.act (((P.restrictedModuleTransport ψ) ⋙ Q.restrictedModuleTransport χ).obj M).X ≫ c.hom.app M.X = R ◁ c.hom.app M.X ≫ Mod.act ((H.restrictedModuleTransport φ).obj M).X) : (∀ M : Mod C A, Mod.act (((P.restrictedModuleTransport ψ) ⋙ Q.restrictedModuleTransport χ).obj M).X = χ ▷ Q.obj (P.obj M.X) ≫ LaxMonoidal.μ Q B (P.obj M.X) ≫ Q.map (ψ ▷ P.obj M.X ≫ LaxMonoidal.μ P A M.X ≫ P.map (Mod.act M.X)) ∧ Mod.act ((H.restrictedModuleTransport φ).obj M).X = φ ▷ H.obj M.X ≫ LaxMonoidal.μ H A M.X ≫ H.map (Mod.act M.X)) ∧ (∀ M : Mod C A, Mod.act ((H.restrictedModuleTransport φ).obj M).X ≫ c.inv.app M.X = R ◁ c.inv.app M.X ≫ Mod.act (((P.restrictedModuleTransport ψ) ⋙ Q.restrictedModuleTransport χ).obj M).X) ∧ (∀ (M N : Mod C A) (t : M ⟶ N), c.hom.app M.X ≫ H.map t.hom = (P ⋙ Q).map t.hom ≫ c.hom.app N.X) ∧ ∃ δ : (P.restrictedModuleTransport ψ ⋙ Q.restrictedModuleTransport χ) ≅ H.restrictedModuleTransport φ, (∀ M : Mod C A, (δ.hom.app M).hom = c.hom.app M.X ∧ (δ.inv.app M).hom = c.inv.app M.X) ∧ (∀ δ' : (P.restrictedModuleTransport ψ ⋙ Q.restrictedModuleTransport χ) ≅ H.restrictedModuleTransport φ, (∀ M : Mod C A, (δ'.hom.app M).hom = c.hom.app M.X ∧ (δ'.inv.app M).hom = c.inv.app M.X) → δ' = δ) ∧ ∀ (S_P : Mod D B ⥤ Mod C A) (S_Q : Mod E R ⥤ Mod D B) (S_H : Mod E R ⥤ Mod C A) (adjP : S_P ⊣ P.restrictedModuleTransport ψ) (adjQ : S_Q ⊣ Q.restrictedModuleTransport χ) (adjH : S_H ⊣ H.restrictedModuleTransport φ), ∃ d : S_H ≅ S_Q ⋙ S_P, (∀ M : Mod E R, adjH.unit.app M ≫ (H.restrictedModuleTransport φ).map (d.hom.app M) = (adjQ.comp adjP).unit.app M ≫ δ.hom.app ((S_Q ⋙ S_P).obj M)) ∧ (∀ d' : S_H ≅ S_Q ⋙ S_P, (∀ M : Mod E R, adjH.unit.app M ≫ (H.restrictedModuleTransport φ).map (d'.hom.app M) = (adjQ.comp adjP).unit.app M ≫ δ.hom.app ((S_Q ⋙ S_P).obj M)) → d' = d) ∧ conjugateEquiv (adjQ.comp adjP) adjH d.hom = δ.hom ∧ conjugateEquiv adjH (adjQ.comp adjP) d.inv = δ.inv",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-99d1c0500",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Node vs live: only lean set; statement verbatim; no competing landing, not dropped. All clauses checked: lax P,Q,H with composite structure on P⋙Q; monoidal c iso; MonObj A,B,R; IsMonHom ψ,χ,φ, no IsIso; hcompat in diagrammatic order; T_* = mapMod ⋙ Mod.comap (recorded decls); a_M/b_M formulas match act_mapMod_obj/act_comap_obj; forward/inverse linearity and naturality correctly oriented; δ exists, unique with both component formulas; adjunctions quantified with correct directions; adjQ.comp adjP = S_PS_Q ⊣ T_QT_P; unit equation and d-uniqueness match; conjugateEquiv argument order matches the def-weil-pbc-adjunction-conjugate record (τ:L2→L1 ↦ R1→R2), both clauses consistent with unit_conjugateEquiv. Universes independent and bound, sorry only on the theorem, docstrings carry source and 5-step proof, helper non-hollow. Upstream modRight needs an adjunction and mapModNatIso differs, so no duplicate. Advisory: the public RingPresheaf import only carries the record. No recompile (no changes)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T143824-L-1403373",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Functor.coefficientCompositionModuleComparison"
+  ],
+  "sorry_after": []
+ }
+}

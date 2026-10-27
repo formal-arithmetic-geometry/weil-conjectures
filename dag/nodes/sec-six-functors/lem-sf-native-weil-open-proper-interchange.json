@@ -1,0 +1,395 @@
+{
+ "id": "lem-sf-native-weil-open-proper-interchange",
+ "kind": "statement",
+ "title": "Proper/open interchange for native bounded constructible Weil complexes",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Use the abelian categories $\\mathcal W_S$ of pro-etale Weil sheaves, their ordinary derived categories, and bounded constructible full subcategories $\\mathrm{WC}^{\\mathrm{der}}(S)$ of [def-sf-native-weil-derived-framework]. Consider a commutative square of finite-type $k_0$-schemes [def-weil-finite-type-morphism]\n$$\\begin{array}{ccc}U'&\\xrightarrow{j'}&X'\\\\\np'\\downarrow&&\\downarrow p\\\\\nU&\\xrightarrow{j}&X\\end{array},\\qquad pj'=jp',$$\nwhere $p,p'$ are proper [def-weil-proper-morphism] and $j,j'$ are quasi-compact open immersions [def-weil-open-immersion]. The square need not be Cartesian and the schemes need not be separated over $k_0$. Write $J_j,J_{j'}$ for termwise equivariant extension by zero on ordinary derived categories and $Rp_*,Rp'_*$ for total right derivation of the actual equivariant sheaf direct images. Then there is a natural isomorphism of functors\n$$J_jRp'_*\\cong Rp_*J_{j'}:\\mathrm{WC}^{\\mathrm{der}}(U')\\longrightarrow D(\\mathcal W_X).$$\nThe components and their inverses are morphisms in $D(\\mathcal W_X)$, so they include Frobenius compatibility in the native derived realization. This assertion concerns only the stated bounded constructible source; it makes no assertion about arbitrary unbounded $B$-module complexes.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, label lemma-shriek-proper-and-open, supplies the proper/open pattern; native bounded-constructible pro-etale Weil-coefficient version formulated by Q18 for the operations of lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean lines 187-200. The Stacks lemma itself concerns torsion etale coefficients and is not claimed to prove this coefficient realization."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Form V=X′×_X U, its open projection b and proper projection q, and the induced map s:U′→V. Since s b=j′ is open and s q=p′ is proper with q separated, s is both open and proper.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-proper-over-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, proper/open pattern; native proof using the existing source-library comparisons and native proper base change"
+   }
+  },
+  {
+   "text": "Lift the existing adic extension-by-zero adjunction to the native IsoAlgebra categories. Localize its termwise exact adjunction to obtain D(j!) ⊣ D(j*), with invertible unit. The unit is degreewise the native sheaf unit.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sfb-adjunction-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, proper/open pattern; native proof using the existing source-library comparisons and native proper base change"
+   }
+  },
+  {
+   "text": "Take the mate of the native direct-image square isomorphism. After forgetting Weil structures it is the existing adic open base-change map, hence invertible for a Cartesian open square. Since open pullback is right adjoint to exact extension by zero, it preserves K-injectives, so this sheaf comparison derives on the unbounded categories.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, proper/open pattern; native proof using the existing source-library comparisons and native proper base change"
+   }
+  },
+  {
+   "text": "Uniqueness of left adjoints gives (s b)!≅s! b!. The invertible open unit then gives b* j′!≅s!. Since s is clopen, its native extension by zero equals its direct image. Combine this with open base change and composition of native right derived direct images to obtain the natural restriction isomorphism (J_j′ Rp*) j*≅Rp′* on all derived inputs.",
+   "uses": [
+    "lem-sf-native-weil-clopen-sheaf-comparison",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, proper/open pattern; native proof using the existing source-library comparisons and native proper base change"
+   }
+  },
+  {
+   "text": "Construct the reduced closed complement i:Z→X of j. On P=X′×_X Z the projection d has image disjoint from j′ because p j′=j p′. Extension by zero therefore has zero d-pullback, first on sheaves and then termwise on derived objects. For a bounded constructible K, exact constructible open extension makes J_j′K a Weil complex. Apply the existing native proper base-change theorem to this Weil complex and the Cartesian square along i. It identifies i* Rp* J_j′K with a proper direct image of zero, so that object vanishes.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-weil-complex-proper-base-change",
+    "lem-sf-native-weil-basic-comparisons",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, proper/open pattern; native proof using the existing source-library comparisons and native proper base change"
+   }
+  },
+  {
+   "text": "For any exact fully faithful open adjunction L⊣R, the counit on an object killed by closed restriction is invertible: its cone is killed by open restriction by the triangle identity and invertible unit, and by closed restriction since both endpoints vanish there. Open and closed pullbacks jointly detect zero objects by cohomology. Apply this criterion to Rp* J_j′K, and combine the counit isomorphism with the natural restriction isomorphism of the preceding step. This assembles J_j Rp′*≅Rp* J_j′ on the bounded constructible full subcategory, as a native natural isomorphism.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "def-sfb-exact-derived-cohomology-comparison",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, proper/open pattern; native proof using the existing source-library comparisons and native proper base change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-proper-over-separated",
+  "def-sf-native-weil-derived-framework",
+  "lem-sfb-adjunction-localization",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "def-sfb-right-derived-functor",
+  "lem-sf-native-weil-clopen-sheaf-comparison",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-weil-complex-proper-base-change",
+  "lem-sf-native-weil-basic-comparisons",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "def-sfb-exact-derived-cohomology-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Q2, 2026-10-25: Tag 0F7B proper/open pattern; shorter native proof using source-library open base change, clopen comparison, localized open adjunction, and native Weil-complex proper base change for closed-boundary vanishing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proper.*open.*(interchange|shriek)|extensionByZero|proper.*base.change",
+   "results": "{\"t\": \"2026-10-22T04:23:36Z\", \"tool\": \"grep\", \"query\": \"proper.*open.*(interchange|shriek)|extensionByZero|proper.*base.change\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\", \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\"], \"digest\": \"453b4a9b0dd5a9cf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic sheaf or derived functors, not these native Frobenius-equivariant locally finite continuous coefficient modules and their specified operations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "{\"t\": \"2026-10-22T04:23:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"extensionByZero\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic sheaf or derived functors, not these native Frobenius-equivariant locally finite continuous coefficient modules and their specified operations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension by zero proper pushforward interchange pro etale adic sheaves with Frobenius",
+   "results": "{\"t\": \"2026-10-22T04:23:37Z\", \"tool\": \"leansearch\", \"query\": \"extension by zero proper pushforward interchange pro etale adic sheaves with Frobenius\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforward_map_val\", \"SheafOfModules.pushforward\", \"PresheafOfModules.pushforward₀\", \"SheafOfModules.pushforward_obj_val\", \"SheafOfModules.pushforwardSections\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"PresheafOfModules.pushforward₀_obj\", \"SheafOfModules.pushforwardSections_unitHomEquiv\"], \"digest\": \"43d500e3ff7d8cbd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic sheaf or derived functors, not these native Frobenius-equivariant locally finite continuous coefficient modules and their specified operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative square of proper vertical scheme morphisms and open horizontal immersions, extension by zero commutes with derived proper direct image on bounded constructible pro etale Weil sheaves",
+   "results": "{\"t\": \"2026-10-22T04:23:47Z\", \"tool\": \"leanfinder\", \"query\": \"For a commutative square of proper vertical scheme morphisms and open horizontal immersions, extension by zero commutes with derived proper direct image on bounded constructible pro etale Weil sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux\", \"AlgebraicGeometry.Scheme.Hom.comp_appIso\", \"AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\", \"AlgebraicGeometry.Scheme.Hom.map_appLE\", \"AlgebraicGeometry.IsOpenImmersion.lift_app\"], \"digest\": \"c54a6a9e3922e40e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic sheaf or derived functors, not these native Frobenius-equivariant locally finite continuous coefficient modules and their specified operations"
+  },
+  {
+   "tool": "grep",
+   "query": "properOpen|proper_open|shriek|extensionByZero",
+   "results": "{\"t\": \"2026-10-22T04:24:34Z\", \"tool\": \"grep\", \"query\": \"properOpen|proper_open|shriek|extensionByZero\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic sheaf or derived functors, not these native Frobenius-equivariant locally finite continuous coefficient modules and their specified operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutation of proper pushforward with extension by zero for open immersions on constructible complexes of locally finite continuous Qlbar module sheaves with Weil structure",
+   "results": "{\"t\": \"2026-10-22T04:24:39Z\", \"tool\": \"leanfinder\", \"query\": \"Commutation of proper pushforward with extension by zero for open immersions on constructible complexes of locally finite continuous Qlbar module sheaves with Weil structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.invApp_app_assoc\"], \"digest\": \"2b36e3c4b6f601c8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern generic sheaf or derived functors, not these native Frobenius-equivariant locally finite continuous coefficient modules and their specified operations"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|openImmersionLowerShriek|properOpenInterchange",
+   "results": "{\"t\": \"2026-10-22T05:05:26Z\", \"tool\": \"grep\", \"query\": \"extensionByZero|openImmersionLowerShriek|properOpenInterchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned ordinary sheaf pushforward, composition and adjunction declarations; none asserts derived proper/open interchange for the native Frobenius-equivariant continuous B-module model"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper pushforward extension by zero interchange constructible Weil sheaves",
+   "results": "{\"t\": \"2026-10-22T05:05:26Z\", \"tool\": \"leansearch\", \"query\": \"proper pushforward extension by zero interchange constructible Weil sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPushforwardContinuous\", \"SheafOfModules.pushforward_map_val\", \"TopCat.Sheaf.pushforward\", \"TopCat.Sheaf.pushforward_sheaf_of_sheaf\", \"SheafOfModules.pushforward\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"SheafOfModules.pushforwardSections\"], \"digest\": \"6a399b4f72631d27\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned ordinary sheaf pushforward, composition and adjunction declarations; none asserts derived proper/open interchange for the native Frobenius-equivariant continuous B-module model"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, CategoryTheory.NatIso",
+   "results": "{\"t\": \"2026-10-22T05:05:26Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pushforward, CategoryTheory.NatIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.NatIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: invalid Loogle identifier; the corrected substring search is recorded separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with proper derived direct image for bounded constructible Frobenius equivariant pro etale module sheaves",
+   "results": "{\"t\": \"2026-10-22T05:05:27Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero commutes with proper derived direct image for bounded constructible Frobenius equivariant pro etale module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforward_map_val\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.pushforwardSections_coe\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"Condensed.profiniteSolid\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"Condensed.lanSheafProfinite\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"04b2e09fb1c14cad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned ordinary sheaf pushforward, composition and adjunction declarations; none asserts derived proper/open interchange for the native Frobenius-equivariant continuous B-module model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image and open extension by zero exchange on derived categories of equivariant sheaves",
+   "results": "{\"t\": \"2026-10-22T05:07:00Z\", \"tool\": \"leanfinder\", \"query\": \"Proper direct image and open extension by zero exchange on derived categories of equivariant sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pushforwardNatIso_hom\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pushforwardNatIso_inv\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"SheafOfModules.pushforwardSections_unitHomEquiv\"], \"digest\": \"f4efa8f659c301bb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned ordinary sheaf pushforward, composition and adjunction declarations; none asserts derived proper/open interchange for the native Frobenius-equivariant continuous B-module model"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\"",
+   "results": "{\"t\": \"2026-10-22T05:07:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"pushforward\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.pushforward₀Obj\", \"PresheafOfModules.pushforward₀_obj\", \"PresheafOfModules.pushforward₀\", \"PresheafOfModules.pushforwardId\", \"PresheafOfModules.pushforward\", \"PresheafOfModules.pushforward₀Obj_obj_carrier\", \"PresheafOfModules.pushforward₀CompToPresheaf\", \"PresheafOfModules.pushforwardCompToPresheaf\"], \"digest\": \"a5f42c6937af584c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned ordinary sheaf pushforward, composition and adjunction declarations; none asserts derived proper/open interchange for the native Frobenius-equivariant continuous B-module model"
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforwardNatIso|def pushforwardComp|def pushforward",
+   "results": "{\"t\": \"2026-10-22T05:07:25Z\", \"tool\": \"grep\", \"query\": \"def pushforwardNatIso|def pushforwardComp|def pushforward\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"44\", \"106\", \"112\", \"139\", \"192\"], \"digest\": \"11e26f6c73287731\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned ordinary sheaf pushforward, composition and adjunction declarations; none asserts derived proper/open interchange for the native Frobenius-equivariant continuous B-module model"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-shriek-composition",
+  "date": "2026-10-22",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "prop-functor-package clause (3), compact-support composition; the compactification/direct-image/open-extension argument of Stacks lemma-shriek-composition, realized in the native category named by LowerShriekFunctoriality.lean lines 187-200. The seeded ancestor chain ends at created.item=null, so blueprint_refs.py ancestor prints None; retain that provenance explicitly.",
+   "via": [
+    "lem-sf-native-weil-shriek-composition",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-weil-open-proper-interchange",
+  "worker": "stage1",
+  "group": "NV",
+  "summary": "Wrote the native proper/open interchange argument with no new nodes: relative properness makes the non-Cartesian open factor clopen; explicit K-injective comparisons construct a natural native morphism; continuous-adic proper base change kills its boundary on constructible sheaves, finite truncations extend this to the stated source, and arbitrary-ring localization plus conservative derived forgetting detect invertibility. The statement and coefficient realization are unchanged.",
+  "blueprint": "Realizes the existing from.place breadcrumb for prop-functor-package compact-support composition, corresponding to clause (4) of current sk-thm-sf-package and its cited proper-base-change route. Existing from.node=null is retained: blueprint_refs.py ancestor reports None for the seeded chain, and whole-blueprint searches found no exact native interchange statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic scheme base-change permanence for the auxiliary open; it is not a derived comparison. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic proper and closed-immersion base-change permanence for the auxiliary squares. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proper-over-separated",
+    "why": "Generic relative properness criterion proves the induced open component proper; no absolute separatedness is added. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proper-immersion-closed",
+    "why": "Generic scheme fact turning the induced proper open immersion into a clopen component. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic finite-type permanence verifies all auxiliary schemes and quasi-compactness. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of an open pro-etale site with a localized site, needed for the ringed-site adjunction. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exact open adjunction over an arbitrary ring sheaf, applied to the actual B rings. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-sfb-adjunction-localization",
+    "why": "Generic descent of the exact open adjunction to ordinary derived categories with its unit. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic arbitrary-ring pro-etale localization identities and short exact sequence for boundary vanishing and detection. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-pur-clopen-ringed-module-gluing",
+    "why": "Generic product description of modules on two clopen components, lifted componentwise to native fixed pairs. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic K-injective preservation by right adjoints of exact functors, used for open restriction and the clopen inclusion. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-functorial-existence",
+    "why": "Generic resolution existence in any Grothendieck abelian category, applied to native sheaves. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic uniqueness of maps into K-injectives and homotopy equivalence of their quasi-isomorphisms; needed for natural open restriction. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic Grothendieck property for the underlying B-module sheaf categories needed by fixed-pair derived forgetting. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic construction of a closed complement with prescribed support. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic triangulated descent of exact functors for the finite truncation argument. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "Generic triangulated right derivation of an additive left exact functor on D+, used for bounded input only. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic successive good-truncation triangle in any abelian derived category; only the triangle clause is used. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic long exact cohomology sequence of a distinguished triangle, used in finite induction. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Generic isomorphism criterion in an abelian derived category, used for zero objects and the final comparison. No statement of the item unit supplies this generic tool; the compact-support/proper-base-change route remains unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-adjunction-localization",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NV-075b7ae3c",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-075b7ae3c (reviewer sub-agent of L); spot-checked: Read the item's 11 steps and the statements of all 28 cited nodes, plus Stacks more-etale.tex Tag 0F7B (lemma-shriek-proper-and-open, line 2460). The delivery has no new nodes. The statement and stmt_deps are byte-identical to the base. The mathematics is correct. Step 1: V=X'×_XU; s is open because bs=j', and proper because qs=p' and q is separated, so U' is a clopen part of V; no absolute separatedness is used. Steps 2-3: the arbitrary-ring open adjunction is lifted to native sheaves and localized; clopen gluing gives s_!=(M,0), and s_!, b^* preserve K-injectives. Steps 4-6: b^*j'_!≅s_! and K-injective homotopy equivalences give r_K; γ is the adjunct of r_K^{-1} and is invertible on U. Step 7: the fixed-pair forget comparison applies with Grothendieck module categories and Frobenius autoequivalences. Steps 8-9: continuous-adic proper base change with h=ī (closed, quasi-compact) and X̄ of finite type over k; d̄^{-1}b̄_!=0 kills the boundary for degree-zero constructible sheaves, and the coefficient ring R matches B. Step 10: finite truncation induction is set up correctly. Step 11: the open-closed sequence on cohomology and conservative derived forgetting give the isomorphism. Edge cases checked: U'=∅, C=∅, j=id, non-Cartesian square, non-separated schemes. No duplicate exists among the etale/trf/cbc interchange nodes or the native-weil nodes. The only citer, lem-sf-native-weil-shriek-composition, uses the item within its hypotheses. Batch-5 flag on lem-sf-continuous-adic-proper-base-change-restriction, which reaches lem-pd-module-ringed-topos-derived-comparison: accepted. That node is a generic comparison between internal module objects and sheaves of modules on a ringed topos (Stacks 07A4/0G7E/07A6/0B56), not a step of the proof of Poincare duality or the trace formula. It is reached through proper base change, which neither assumption provides. The worker's tool_uses for 20 generic scheme, ringed-site and homological tools are accepted. FIX (C1/C4): step 10 applies lem-weil-pbc-derived-direct-image-triangulated, which assumes the source category has enough injectives, but the step neither checked nor cited this. Step 10 now cites lem-sf-native-weil-constructible-abelian and the Mathlib leaf lem-sp-grothendieck-enough-injectives, both also added to proof_deps, with one clause stating the hypothesis. Advisory: the step-2 lift relies on the framework's Frobenius comparisons for j_! and j^* being mates; this holds for the canonical site-level comparisons.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.WeilSheaf.NativeOpenProperInterchange",
+  "declaration": "AlgebraicGeometry.WeilComplex.nonempty_extensionByZero_rightDerivedLowerStar_iso",
+  "file": "lean/Sheaf/WeilSheaf/NativeOpenProperInterchange.lean",
+  "statement": "theorem nonempty_extensionByZero_rightDerivedLowerStar_iso (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {U' X' U X : Scheme.{u}} [U'.Over (Spec (CommRingCat.of k₀))] [X'.Over (Spec (CommRingCat.of k₀))] [U.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (U' ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (U' ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X' ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X' ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] (j' : U' ⟶ X') (p' : U' ⟶ U) (p : X' ⟶ X) (j : U ⟶ X) [j'.IsOver (Spec (CommRingCat.of k₀))] [p'.IsOver (Spec (CommRingCat.of k₀))] [p.IsOver (Spec (CommRingCat.of k₀))] [j.IsOver (Spec (CommRingCat.of k₀))] [IsProper p] [IsProper p'] [IsOpenImmersion j] [QuasiCompact j] [IsOpenImmersion j'] [QuasiCompact j'] (hcomm : j' ≫ p = p' ≫ j) : Nonempty ((WeilComplex.objectProperty k₀ l U').ι ⋙ (ProEtaleWeilSheaf.lowerStar k₀ l p').rightDerivedFunctor ⋙ (ProEtaleWeilSheaf.extensionByZero k₀ l j).mapDerivedCategory ≅ (WeilComplex.objectProperty k₀ l U').ι ⋙ (ProEtaleWeilSheaf.extensionByZero k₀ l j').mapDerivedCategory ⋙ (ProEtaleWeilSheaf.lowerStar k₀ l p).rightDerivedFunctor)",
+  "branch": "sheaf-dag",
+  "by": "Q11",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4caa18710",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Read the item, its 4 stmt_deps and their records, the framework declarations (Category.lean WeilComplex.objectProperty, LowerStar.lean:75 lowerStar, OpenImmersion.lean:50 extensionByZero, LowerShriek.lean:88-93 same pattern) and Stacks 0F7B. Every clause matches: finite field and l≠char; 4 schemes LocallyOfFiniteType+QuasiCompact over k0; IsOver on all maps; hcomm j'≫p=p'≫j (no Cartesian or separatedness assumption); IsProper p,p'; IsOpenImmersion+QuasiCompact j,j'; source WeilComplex ι; ι⋙Rp'_*⋙J_j ≅ ι⋙J_j'⋙Rp_* into D(ProEtaleWeilSheaf X). Nonempty matches the node's existence claim and the only citer (shriek-composition), which uses existence only. No extra assumptions; the universe convention is the framework's. No duplicate in side-live (the ProperOpen* modules use other coefficients). lean.statement verbatim; node differs from side-live only in lean; imports follow convention; sorry only; docstrings with all 11 steps; report sections present. Advisory: \\cong split across a line in step-4 docstring. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261025T022544-L-1742945",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

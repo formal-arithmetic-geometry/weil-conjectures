@@ -16,22 +16,27 @@
   "def-weil-flat-morphism",
   "def-weil-finite-type-morphism",
   "def-weil-closed-immersion",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-per-gabber-modification-data",
+  "def-per-fs-log-smooth-etale",
+  "def-kun-projective",
+  "def-trf-log-regular-pair"
  ],
  "proof": [
   {
-   "text": "Apply [lem-per-trait-semistable-galois-alteration] to $X/S$. Obtain $G$, $S^{\\prime}$, the semistable $X^{\\prime}$, and the projective map $a:X^{\\prime}\\to X$. Keep the nonempty open $U\\subset X$ where $E=a^{-1}U\\to U$ is a connected finite etale $G$-torsor. The log structure on $X^{\\prime}$ is log regular and log smooth over $S^{\\prime}$. The constant-field normalization mentioned at the beginning of XVI 3.7 is included in this semistable input; no arbitrary finite extension is composed with the eventual alteration of $X$.",
+   "text": "Apply [lem-per-trait-semistable-galois-alteration] to the given $X/S$. Obtain $G$, $S^{\\prime}$, $a:X^{\\prime}\\to X$, and a nonempty open $U\\subset X$ with $E=a^{-1}U\\to U$ a connected finite etale $G$-torsor. Retain its $G$-stable divisorial fs log structure: $X^{\\prime}$ is integral, regular, log regular, and log smooth over $S^{\\prime}$. This input already includes normalization of the constants; we do not make an additional arbitrary-degree base change of $X$. Schemes finite type over the Noetherian traits are Noetherian by [lem-weil-pbc-finite-type-over-noetherian].",
    "uses": [
-    "lem-per-trait-semistable-galois-alteration"
+    "lem-per-trait-semistable-galois-alteration",
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI 3.7, first two paragraphs and four bullets, p.254."
+    "place": "XVI 3.7, p.254, normalization of constants and the four bullets for the semistable G-alteration."
    }
   },
   {
-   "text": "By [lem-weil-pbc-sylow-subgroup-prime-index], choose an $\\ell$-Sylow subgroup $H\\le G$; write $\\#H=\\ell^a$ and $d=[G:H]$, so $\\ell\\nmid d$. Apply [lem-per-tame-trait-quotient-log-etale] to $S^{\\prime}/S$ and $H$. Its order is a unit because $\\ell$ is a unit on $S$. This gives a finite dominant complete strictly henselian trait $T\\to S$ and makes $X^{\\prime}\\to T$ log smooth. The action of $H$ on $T$ is trivial by the definition of the invariant ring. The degree of $S^{\\prime}/T$ need only divide $\\#H$, since $H$ need not act faithfully on the trait.",
+   "text": "Choose an $\\ell$-Sylow subgroup $H\\le G$ using [lem-weil-pbc-sylow-subgroup-prime-index]. Thus $\\#H=\\ell^r$ and $d=[G:H]>0$ is prime to $\\ell$. Put $T=\\operatorname{Spec}(\\Gamma(S^{\\prime},\\mathcal O)^H)$. The order of $H$ is invertible on $S$, so [lem-per-tame-trait-quotient-log-etale] makes $T$ a complete strictly henselian trait finite dominant over $S$, and makes $X^{\\prime}\\to T$ log smooth. It is again of mixed characteristic: $\\operatorname{Frac}((R^{\\prime})^H)\\subset\\operatorname{Frac}R^{\\prime}$ has characteristic zero, and the local inclusion $(R^{\\prime})^H\\subset R^{\\prime}$ embeds the residue field of $T$ into that of $S^{\\prime}$, of characteristic $p>0$. Only the degree of $S^{\\prime}\\to T$ divides $\\#H$; the action on the trait need not be faithful.",
    "uses": [
     "lem-weil-pbc-sylow-subgroup-prime-index",
     "lem-per-tame-trait-quotient-log-etale"
@@ -39,118 +44,154 @@
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI 3.7, definition of H and T and the log-etale trait extension, p.254."
+    "place": "XVI 3.7, p.254, the sentences choosing H and passing from S prime to T."
    }
   },
   {
-   "text": "The finite map $T\\to S$ is separated: on an affine chart its diagonal is the closed immersion given by the surjection $B\\otimes_R B\\to B$, $b\\otimes c\\mapsto bc$. For any $S$-scheme $V$ mapping to $T$, its graph into $V\\times_S T$ is therefore closed: it is a base change of that diagonal, by [lem-weil-pbc-closed-immersion-base-change]. If $V$ is quasi-projective over $S$, pull its locally closed embedding into $\\mathbf P^n_S$ back to $T$ and compose with this graph to obtain a locally closed embedding $V\\to\\mathbf P^n_T$. Apply this to $X^{\\prime}$. It is of finite type over $T$: on affine charts, generators of its coordinate algebra over $R$ also generate it over the intervening finite $R$-algebra $B$; quasi-compactness follows from its finite-type $S$-structure. Thus $X^{\\prime}$ is quasi-projective of finite type over $T$.",
+   "text": "The following explicit embeddings supply the quasi-projective hypotheses used below. Since $T\\to S$ is finite, it is proper and separated by [lem-weil-pbc-finite-proper]. The graph $X^{\\prime}\\to X^{\\prime}\\times_S T$ is a section of the separated projection, hence a closed immersion by [lem-weil-pbc-separated-base-change] and [lem-weil-pbc-section-separated-closed-immersion]. Base-changing $X^{\\prime}\\hookrightarrow\\mathbf P^n_S$ and composing gives $X^{\\prime}\\hookrightarrow\\mathbf P^n_T$. It is of finite type over $T$ by [lemma-nagata-finite-type-to-separated-target]. More generally, in every composition below of a projective map $Z\\hookrightarrow\\mathbf P^m_B$ with an immersion $B\\hookrightarrow\\mathbf P^n_D$, base change gives an immersion $\\mathbf P^m_B\\hookrightarrow\\mathbf P^m_D\\times_D\\mathbf P^n_D$, and the Segre embedding gives $Z\\hookrightarrow\\mathbf P^{(m+1)(n+1)-1}_D$. These are just compositions of the cited immersions; [lem-weil-pbc-immersion-base-change-lft], [lem-weil-pbc-proper-fp-permanence](e), and [lem-chow-segre] justify each arrow. In particular the resulting quasi-projectivity has the finite-projective-space meaning of the item.",
    "uses": [
-    "def-weil-finite-integral-morphism",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-closed-immersion-base-change"
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lemma-nagata-finite-type-to-separated-target",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-chow-segre"
    ],
    "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI 3.7, hypotheses of the relative equivariant modification, p.254; elementary graph argument."
+    "place": "XVI 3.7, p.254, quasi-projective models for the modifications and quotients; explicit graph and Segre bookkeeping."
    }
   },
   {
-   "text": "Every geometric-point stabilizer for $H$ has order dividing $\\ell^a$. Residue characteristics on an $S$-scheme are either zero or the residue characteristic $p\\ne\\ell$, so the action is tame. The torsor on $U$ makes it generically free. All hypotheses of [lem-per-gabber-log-smooth-equivariant-modification] hold for $X^{\\prime}\\to T$: log regularity comes from Step 1 and log smoothness from Step 2, and Step 3 supplies quasi-projectivity and finite type. Obtain an $H$-equivariant projective birational $h:W\\to X^{\\prime}$ with $W$ integral and quasi-projective over $T$, and $Q=W/H$ fs log regular and log smooth over $T$. This uses the relative log-smooth theorem, rather than an absolute modification theorem which would not assert preservation of relative log smoothness.",
+   "text": "For every geometric point of $X^{\\prime}$, its $H$-stabilizer has order dividing $\\ell^r$. The residue characteristic is zero or the residue characteristic of $S$, different from $\\ell$; the action is therefore tame. It is generically free since it is free on $E$. All hypotheses of [lem-per-gabber-log-smooth-equivariant-modification] now hold over $T$: integrality and log regularity come from Step 1, relative log smoothness from Step 2, and quasi-projectivity from Step 3. Obtain an $H$-equivariant projective birational $h:W\\to X^{\\prime}$ and the quotient $Q=W/H$ with its fs invariant log structure, log regular and log smooth over $T$. In particular $W$ is integral and quasi-projective of finite type over $T$.",
    "uses": [
     "lem-per-gabber-log-smooth-equivariant-modification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI 3.7, equivariant resolution and quotient, p.254; X Theorem 1.1, p.136."
+    "place": "XVI 3.7, p.254, tame action, equivariant modification X double-prime, and log-smooth quotient."
    }
   },
   {
-   "text": "The composite $W\\xrightarrow h X^{\\prime}\\xrightarrow a X$ is projective by [lem-trf-h-projective-composition]. Apply [lem-per-projective-finite-group-quotient] first over $T$ and then over $X$. Its base hypotheses hold: $T$ is affine Noetherian and $X$ is Noetherian quasi-projective over the affine trait $S$. These applications identify the same quotient, by its categorical uniqueness. They give that $Q$ is integral and quasi-projective of finite type over $T$, and that $q:Q\\to X$ is projective. The quotient map $W\\to Q$ is finite surjective. Since $W\\to X$ is dominant, so is $q$. Here $X$ is locally Noetherian by [def-weil-regular-scheme] and quasi-compact by its finite-type map to affine $S$, hence Noetherian.",
+   "text": "The composite $W\\xrightarrow h X^{\\prime}\\xrightarrow a X$ is projective by [lem-trf-h-projective-composition]. Apply [lem-per-projective-finite-group-quotient] with base $X$: $X$ is Noetherian and quasi-projective over the affine Noetherian $S$, and $W\\to X$ is projective, hence quasi-projective. It gives a finite surjective quotient $q:W\\to Q$, an integral $Q$, and a projective $v:Q\\to X$. The categorical quotient is the same $Q$ as in Step 4 by the two universal properties. Applying the same theorem with base $T$ gives $Q/T$ quasi-projective of finite type. Step 3 makes $W/S$ quasi-projective from $h$ and $X^{\\prime}/S$, so applying the quotient theorem with base $S$ gives $Q/S$ quasi-projective of finite type as well. These are the same scheme quotient and the induced structure maps, by uniqueness of categorical quotients.",
    "uses": [
     "lem-trf-h-projective-composition",
-    "lem-per-projective-finite-group-quotient",
-    "def-weil-regular-scheme",
-    "def-weil-finite-type-morphism"
+    "lem-per-projective-finite-group-quotient"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI 3.7, quotient X double-prime/H and projective map to X, pp.254--255; finite-quotient projectivity as in Rydh 4.4, 4.7, 4.9."
+    "place": "XVI 3.7, p.254, quotient X double-prime/H and its morphism to X."
    }
   },
   {
-   "text": "The ring of $T$ is complete Noetherian local, hence excellent by [lem-per-complete-local-excellence]. Apply [lem-per-log-regular-projective-log-resolution] to $Q$ over this excellent affine base. Step 5 gives integrality, quasi-projectivity and finite type, and Step 4 gives its fs log regularity. Obtain $b:(Y,M_Y)\\to Q$ projective birational with $Y$ integral regular. The same theorem, applied to the log-smooth $Q\\to T$, makes $Y\\to T$ log smooth in the sense of [def-per-fs-log-smooth-etale]. Since $Y$ is regular, hence locally Noetherian, [lem-per-trait-log-smooth-uniformizer-chart] applied to $(Y,M_Y)\\to T$ and a uniformizer of $T$ gives, etale locally on $Y$, charts $\\mathbf N\\to P$ with $P$ fine saturated, $u^{\\rm gp}$ injective, the torsion of its cokernel finite of order invertible on $Y$, and $Y\\to T\\times_{\\operatorname{Spec}\\mathbf Z[\\mathbf N]}\\operatorname{Spec}\\mathbf Z[P]$ smooth. This is exactly the fs chart meaning of log smoothness over the trait $T$ fixed in the statement. Set $f=q\\circ b:Y\\to X$. It is projective by [lem-trf-h-projective-composition] and dominant because both maps are dominant.",
+   "text": "Write $T=\\operatorname{Spec}A$. It is a mixed-characteristic discrete valuation ring, so $\\operatorname{Frac}A$ has characteristic zero. Apply the DVR clause of [lem-per-characteristic-zero-dedekind-excellent] to obtain excellence of $A$. This uses the characteristic-zero Dedekind theorem, not the excluded complete-local excellence interface. The integral fs log-regular $Q$, quasi-projective of finite type over $T$, now meets every hypothesis of [lem-per-log-regular-projective-log-resolution]. Obtain a projective birational saturated log-blowup tower $b:(Y,M_Y)\\to Q$ with $Y$ integral and regular. That statement also says that the composite $Y\\to Q\\to T$ is log smooth. No purity assertion is invoked.",
    "uses": [
-    "lem-per-complete-local-excellence",
-    "lem-per-log-regular-projective-log-resolution",
-    "lem-trf-h-projective-composition",
-    "lem-per-trait-log-smooth-uniformizer-chart",
-    "def-per-fs-log-smooth-etale"
+    "lem-per-characteristic-zero-dedekind-excellent",
+    "lem-per-log-regular-projective-log-resolution"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI 3.7, last geometric resolution before the purity application, pp.254--255; VIII 3.4.9."
+    "place": "XVI 3.7, p.254, projective birational log resolution; excellence supplied by Stacks Tag 07QW(4)."
    }
   },
   {
-   "text": "Shrink $U$ so that $h$ is an isomorphism above $E=a^{-1}U$. Intersect the finitely many $H$-translates of a dense isomorphism open in $X^{\\prime}$, and call its closed complement $C$. The projective map $a$ is proper by [lem-kun-projective-implies-proper], so $a(C)$ is closed by [def-weil-proper-morphism]. It misses the generic point: the generic fibre of $a$ is the single generic point of integral $X^{\\prime}$, which is in the isomorphism open. Remove $a(C)$ from $U$. Since $h$ is an $H$-equivariant isomorphism above $E$, the $H$-invariant open $h^{-1}E\\subset W$ is $E$ with the restricted $H$-action. The quotient restriction in [lem-per-projective-finite-group-quotient] identifies $q^{-1}U$ with the quotient $\\pi:E\\to E/H$ of this restricted action, which is finite, has $\\mathcal O_{E/H}=(\\pi_*\\mathcal O_E)^H$ and is categorical. By [lem-per-torsor-subgroup-quotient-finite-etale], applied to the connected Galois cover $E\\to U$ with group $G$ [def-sbc-normal-dominant-galois] and the subgroup $H$, the map $q^{-1}U=E/H\\to U$ is a connected finite etale cover all of whose geometric fibres have $d=[G:H]$ points. No normality of $H$ is required.",
+   "text": "Set $f=v\\circ b:Y\\to X$. It is projective by [lem-trf-h-projective-composition]. Step 3 applied to $b$ and each of $Q/T$, $Q/S$ gives finite-projective-space immersions of $Y$ over both $T$ and $S$. Finite type follows from [lem-sfb-finite-type-composition-base-change], since a projective embedding over a Noetherian base is finite type. All maps commute over $S$. To use proper images below, projective maps are proper: the projective-space projections are proper by [lemma-nagata-projective-space-base-change-proper], closed immersions are proper and proper maps compose by [lem-weil-pbc-proper-fp-permanence].",
    "uses": [
+    "lem-trf-h-projective-composition",
+    "lem-sfb-finite-type-composition-base-change",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 3.7, pp.254--255, regular log-smooth X triple-prime and the projective morphism to X."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-birational-isomorphism-dense-open] to $h$. Its projectivity gives separatedness, and finite type over the Noetherian models gives local finite presentation by [lem-weil-pbc-finite-type-noetherian-finite-presentation] on affines. Intersect the isomorphism open in $X^{\\prime}$ with its finitely many $H$-translates. Inside the original torsor open, the complement has closed image under the finite $a$ and that image misses the generic point. Remove it and choose a nonempty affine subopen $U_1\\subset U$. Then $W_{U_1}=X^{\\prime}_{U_1}=E_1$ is the connected finite etale $G$-torsor. Quotient restriction in [lem-per-projective-finite-group-quotient] identifies $Q_{U_1}$ with its categorical $H$-quotient. Since $E_1$ is affine, its free $H$-action meets the affine-orbit hypothesis of [lem-sfb-admissible-free-finite-quotient]; that theorem identifies this same quotient with the fppf sheaf $E_1/H$.",
+   "uses": [
+    "lem-sfb-birational-isomorphism-dense-open",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
     "lem-per-projective-finite-group-quotient",
+    "lem-sfb-admissible-free-finite-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 3.7, p.255, generic degree of the quotient morphism; finite constant free quotient: Stacks 07S6 and fpqc descent."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-admissible-free-finite-quotient] also to the $G$-action on the torsor $E=a^{-1}U$ itself. Its hypotheses hold: $E$ is open in $X^{\\prime}$, which is quasi-projective over the affine $S$, hence separated; the action is free since it is simply transitive on geometric fibres of $E\\to U$; and $E\\to U$ is finite, hence affine [def-weil-finite-integral-morphism], so the orbit of a point over $u\\in U$ lies in the affine inverse image of an affine neighbourhood of $u$. The theorem's quotient is categorical, so by the Galois-cover definition [def-sbc-normal-dominant-galois] and uniqueness of categorical quotients it is $U$, and its action-map clause gives $G\\times E\\cong E\\times_UE$. Pulling back along the open $U_1\\subset U$ gives $G\\times E_1\\cong E_1\\times_{U_1}E_1$. Here is an explicit identification after this base change, rather than an assumption that arbitrary categorical quotients commute with it. In the fppf sheaf quotient description from Step 8, write a pair over $U_1$ uniquely as $(ge,e)$. Send its $H$-orbit to $(Hg,e)$. Conversely $(Hg,e)$ gives the class of $(ge,e)$; changing the representative $g$ changes only the $H$-orbit. These formulas are inverse on local sections and glue, so the representing schemes satisfy $Q_{U_1}\\times_{U_1}E_1\\cong(H\\backslash G)\\times E_1$. This has $d=[G:H]$ sheets over $E_1$. The cover $E_1\\to U_1$ is fpqc by [def-weil-pbc-fpqc-covering]: it is finite affine, surjective and flat, with flatness part of [def-weil-etale-morphism]. Apply [lem-weil-pbc-fpqc-descend-finite] and [lem-galois-fpqc-descend-etale] to conclude that $Q_{U_1}\\to U_1$ is finite etale. At the generic point set $K=k(U_1)$ and $L=k(E_1)$. The finite generic $K$-algebra $B$ satisfies $B\\otimes_K L\\cong L^d$. A $K$-basis of $B$ tensors to an $L$-basis, so $\\dim_K B=d$.",
+   "uses": [
+    "lem-sfb-admissible-free-finite-quotient",
     "def-sbc-normal-dominant-galois",
-    "lem-kun-projective-implies-proper",
-    "def-weil-proper-morphism",
-    "lem-per-torsor-subgroup-quotient-finite-etale"
+    "def-weil-pbc-fpqc-covering",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-fpqc-descend-finite",
+    "lem-galois-fpqc-descend-etale",
+    "def-weil-finite-integral-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI 3.7, prime-to-ell generic degree, pp.254--255; expand the subgroup quotient on the original G-torsor."
+    "place": "XVI 3.7, p.255, generic degree of the quotient morphism; finite constant free quotient: Stacks 07S6 and fpqc descent."
    }
   },
   {
-   "text": "Let $D\\subset Q$ be the closed complement of a dense open where $b$ is an isomorphism. Since $q$ is projective, it is proper by [lem-kun-projective-implies-proper], and $q(D)$ is closed by [def-weil-proper-morphism]. Over the open from Step 7, the generic fibre of $Q\\to X$ is the single generic point of the integral finite etale cover. It is outside $D$, so $q(D)$ misses the generic point of $X$. Remove $q(D)$ from $U$. Now $f^{-1}U\\to U$ is that same finite etale cover of degree $d>0$ prime to $\\ell$; in particular $[k(Y):k(X)]=d$. Finally write $Y\\hookrightarrow\\mathbf P^m_X$ for the projective factorization of $f$ and $X\\hookrightarrow\\mathbf P^n_S$ for the given locally closed embedding. Their product followed by [lem-chow-segre] embeds $Y$ locally closed in $\\mathbf P^{(m+1)(n+1)-1}_S$. The analogous construction using $b$ and the embedding of $Q$ over $T$ proves quasi-projectivity over $T$. Projective maps are finite type by properness; [lem-sfb-finite-type-composition-base-change] gives finite type over $S$ and over $T$. These are every clause of the required geometric alteration.",
+   "text": "Apply [lem-sfb-birational-isomorphism-dense-open] to $b$, with local finite presentation checked on the same Noetherian affine charts as in Step 8. Obtain a dense open $V\\subset Q$ over which $b$ is an isomorphism. The projective map $v$ is closed, so $v(Q\\setminus V)$ is closed. It misses the generic point of $X$: Step 9 identifies the generic fibre of $Q/X$ with the spectrum of its function field, so its only point is the generic point of $Q$, which lies in $V$. Remove this closed image from $U_1$ to obtain a nonempty open $U_2$. Then $Y_{U_2}=Q_{U_2}$, so $f$ is finite etale of degree $d$ over $U_2$. Since $Y$ and $X$ are integral, its generic finite algebra is the field $k(Y)$, and its dimension over $k(X)$ is $d$: after the faithfully flat torsor extension in Step 9 it becomes $d$ copies of the base field. Hence $[k(Y):k(X)]=d>0$, $f$ is dominant, and $\\ell\\nmid d$ by Step 2. Together with Steps 6--7 this gives every clause of the item, without asserting punctual purity.",
    "uses": [
-    "lem-kun-projective-implies-proper",
-    "def-weil-proper-morphism",
-    "lem-chow-segre",
-    "lem-sfb-finite-type-composition-base-change"
+    "lem-sfb-birational-isomorphism-dense-open",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-weil-proper-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "XVI 3.7, conclusion of the geometric construction, p.255; elementary shrinking and projective embeddings, using the cited general geometry."
+    "place": "XVI 3.7, p.255, geometric conclusion preceding the purity application."
    }
   }
  ],
  "proof_deps": [
-  "def-per-fs-log-smooth-etale",
   "def-sbc-normal-dominant-galois",
+  "def-weil-etale-morphism",
   "def-weil-finite-integral-morphism",
-  "def-weil-finite-type-morphism",
+  "def-weil-pbc-fpqc-covering",
   "def-weil-proper-morphism",
-  "def-weil-regular-scheme",
   "lem-chow-segre",
-  "lem-kun-projective-implies-proper",
-  "lem-per-complete-local-excellence",
+  "lem-galois-fpqc-descend-etale",
+  "lem-per-characteristic-zero-dedekind-excellent",
   "lem-per-gabber-log-smooth-equivariant-modification",
   "lem-per-log-regular-projective-log-resolution",
   "lem-per-projective-finite-group-quotient",
   "lem-per-tame-trait-quotient-log-etale",
-  "lem-per-torsor-subgroup-quotient-finite-etale",
-  "lem-per-trait-log-smooth-uniformizer-chart",
   "lem-per-trait-semistable-galois-alteration",
+  "lem-sfb-admissible-free-finite-quotient",
+  "lem-sfb-birational-isomorphism-dense-open",
   "lem-sfb-finite-type-composition-base-change",
   "lem-trf-h-projective-composition",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-sylow-subgroup-prime-index"
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-sylow-subgroup-prime-index",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lemma-nagata-projective-space-base-change-proper"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "Expose XVI 3.7, pp.254--255, geometric construction only; intermediate theorems X 1.1 and VIII 3.4.9 and elementary open shrinking made explicit."
+  "place": "Expose XVI 3.7, printed pp.254--255, geometric alteration construction before Theorem 3.6.2 / Proposition 3.5.7; graph/Segre, quotient descent, and removal of exceptional images written explicitly using the cited Stacks inputs."
  },
  "mathlib_searches": [
   {
@@ -215,79 +256,89 @@
   "same_as": [],
   "is": null
  },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "item": "lem-per-trait-prime-to-ell-log-alteration",
   "worker": "stage1",
-  "summary": "Expanded the geometric construction of ILO XVI 3.7 into eight steps, with genuine intermediate inputs for semistable Galois alteration, tame trait change, relative equivariant modification, log resolution and finite scheme quotients. Reused the existing Sylow, subgroup-torsor and scheme-geometric tools. No purity theorem is used. Statement unchanged. Six new statement/definition nodes, none a Mathlib match.",
-  "blueprint": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Gabber purity for a regular Noetherian closed pair. More precisely: Expose XVI, section 3.7 second paragraph through its last paragraph, printed pp.254--255: semistable G-alteration, ell-Sylow H, tame equivariant modification, quotient over T=S prime/H, and log resolution. Geometric construction only, before applying Theorem 3.6.2 and Proposition 3.5.7; preliminary finite extension to normalize constants in the first paragraph. The geometric alteration input is precisely XVI 3.7 before applying purity: Steps 1--2 semistable G and Sylow trait; Steps 3--5 equivariant modification and quotient; Step 6 logarithmic resolution; Steps 7--8 generic degree, projectivity and finite type.",
+  "summary": "Reconstructed ILO XVI 3.7 using the five interfaces re-admitted by maintenance Q108, with no historical proof restored. Wrote explicit relative quasi-projective embeddings, checked tame/nonfaithful actions, reconstructed generic quotient degree by free quotient plus fpqc descent, and removed both exceptional images. One new statement-only characteristic-zero Dedekind excellence theorem supplies the log-resolution base hypothesis without using an excluded complete-local theorem. Preserved statement, source, stmt_deps, searches, creation and blueprint provenance. Repair continuation: separated the exceptional-open construction from the quotient trivialization; derived the torsor identity from the free-quotient action-map clause and wrote inverse maps on fppf local sections to count the sheets.",
+  "blueprint": "The preserved ancestor is lem-per-artin-gabber-affine-curve, historical Proof Step 3 finite-coefficient regular local-model input, via the recorded provenance chain. These ten steps realize only its ILO XVI 3.7 geometric alteration subargument, not its discarded Artin-Gabber/adic-duality proof. Whole-blueprint semistable/log-smooth/Dedekind searches found no equivalent blueprint theorem.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-sylow-subgroup-prime-index",
-    "why": "Finite-group Sylow existence and prime-to-ell index in the explicit Sylow step of XVI 3.7. No node of the perverse-curve unit states this generic tool."
+    "node": "lem-chow-segre",
+    "why": "Generic scheme/finite-group tool used for the explicit graph/Segre, proper-image, Noetherian, or fpqc-descent bookkeeping in the ILO geometric argument; it does not replace a step of the unit route."
    },
    {
-    "node": "lem-weil-pbc-closed-immersion-base-change",
-    "why": "General scheme graph construction, to check quasi-projectivity over the intermediate trait. No node of the perverse-curve unit states this generic tool."
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Generic scheme/finite-group tool used for the explicit graph/Segre, proper-image, Noetherian, or fpqc-descent bookkeeping in the ILO geometric argument; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-sfb-admissible-free-finite-quotient",
+    "why": "Generic scheme/finite-group tool used for the explicit graph/Segre, proper-image, Noetherian, or fpqc-descent bookkeeping in the ILO geometric argument; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-sfb-birational-isomorphism-dense-open",
+    "why": "Generic scheme/finite-group tool used for the explicit graph/Segre, proper-image, Noetherian, or fpqc-descent bookkeeping in the ILO geometric argument; it does not replace a step of the unit route."
    },
    {
     "node": "lem-trf-h-projective-composition",
-    "why": "General projectivity permanence, needed to retain the finite-projective-space convention. No node of the perverse-curve unit states this generic tool."
+    "why": "Generic scheme/finite-group tool used for the explicit graph/Segre, proper-image, Noetherian, or fpqc-descent bookkeeping in the ILO geometric argument; it does not replace a step of the unit route."
    },
    {
-    "node": "lem-kun-projective-implies-proper",
-    "why": "General properness of projective maps allows removal of the image of the non-isomorphism locus. No node of the perverse-curve unit states this generic tool."
+    "node": "lem-weil-pbc-fpqc-descend-finite",
+    "why": "Generic scheme/finite-group tool used for the explicit graph/Segre, proper-image, Noetherian, or fpqc-descent bookkeeping in the ILO geometric argument; it does not replace a step of the unit route."
    },
    {
-    "node": "lem-chow-segre",
-    "why": "General Segre embedding combines the two explicit projective-space embeddings over each trait. No node of the perverse-curve unit states this generic tool."
-   },
-   {
-    "node": "lem-sfb-finite-type-composition-base-change",
-    "why": "General finite-type permanence for the composite structural maps. No node of the perverse-curve unit states this generic tool."
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic scheme/finite-group tool used for the explicit graph/Segre, proper-image, Noetherian, or fpqc-descent bookkeeping in the ILO geometric argument; it does not replace a step of the unit route."
    }
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-sylow-subgroup-prime-index",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-trf-h-projective-composition",
-  "lem-kun-projective-implies-proper",
   "lem-chow-segre",
-  "lem-sfb-finite-type-composition-base-change"
+  "lem-galois-fpqc-descend-etale",
+  "lem-sfb-admissible-free-finite-quotient",
+  "lem-sfb-birational-isomorphism-dense-open",
+  "lem-trf-h-projective-composition",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lemma-nagata-projective-space-base-change-proper"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-cc-Q53-a378f4d67",
-  "group": "Q53",
+  "reviewer": "NT-cc-Q108-42bb887c4",
+  "group": "Q108",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-a378f4d67 (reviewer sub-agent of L); spot-checked: FIX, not RETURN: I read the whole delivery and found three repairable faults, all fixed in fixes/dag/nodes/sec-deligne-laumon-a1/. Sources read: ILO XVI 3.7 pp.254-255, XVI 3.6.2-3.6.5, X 1.1 with Remark 1.1.1, X 3.3-3.4 and VIII 3.4.1-3.4.9. The item statement is unchanged and matches the source. The source's preliminary trait extension leaves X unchanged: X is normal, so X->S factors through Spec of the integral closure of R in k(X). The degree prime to ell is therefore a degree over the original X. Steps 1-5 and 8 are correct, and I checked every hypothesis: tameness via ell-group stabilizers with p different from ell, generic freeness on the torsor, quasi-projectivity from the Step 3 graph argument, excellence of T, and the base hypotheses of the quotient node. The six new nodes are true (tested on trivial H, a non-faithful trait action, r=1, a length-zero tower and the affine quotient) and are not duplicates of lem-trf-de-jong-geometrically-irreducible-tower, lem-per-tame-log-quotient-modification, lem-per-noetherian-log-pair-strict-resolution, lem-exc-finite-dvr-tame-inertia or the torsor and invariant-ring nodes. Fault (1), C1/C4: Step 6 obtains log smoothness of Y->T in the sense of the new def-per-fs-log-smooth-etale (any base charts, finite kernel). The item and its consumer lem-per-log-smooth-trait-punctual-purity require the fixed uniformizer chart N->P with an injective group map. Bridging the two is Kato's change of charts (ILO XVI Prop. 3.6.3 with Q=N), which no node carried. Repair: new statement-only node lem-per-trait-log-smooth-uniformizer-chart, cited in Step 6. Fault (2), C3/C4: in Step 7, lem-weil-pbc-connected-torsor-subgroup-quotient gives only some H-torsor Y_H with an isomorphism to Y; its statement does not say that isomorphism respects the restricted H-action, so it does not identify q^{-1}U with E/H. Repair: new statement-only node lem-per-torsor-subgroup-quotient-finite-etale (the finite categorical quotient of a connected Galois cover by a subgroup is connected finite etale with geometric fibres of [G:H] points; Stacks 03BK(3) after etale trivialization). Step 7 now cites it, and the old torsor tool is removed from uses and tool_uses. Fault (3): the delivery added def-per-fs-log-smooth-etale to the item's stmt_deps although the statement never cites it; removed. Batch-5 flags: def-trf-fs-log-blowup is a general definition, lem-per-complete-local-excellence reaches only regular-ring commutative algebra, and lem-trf-h-projective-composition is generic composition of projective morphisms. None belongs to the trace formula or Poincare duality or their proofs, so all are accepted. The remaining declared tool uses are generic and accepted. No SGA is cited. The two new nodes record grep searches that were actually run; LeanSearch and Loogle could not be reached from this machine and are recorded as unavailable.; 3 file(s) fixed by the reviewer; 2 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-42bb887c4 (reviewer sub-agent of L); spot-checked: Read in full. Admissible: live item is unsplit with proof [], and the released Q108 note (keep_plan=false) and coord/changes/20261024-Q108-log-alteration-inputs.md re-admit exactly the five geometric inputs cited. None of their old proofs is restored. Only split-owned fields differ from side-live. No cited node is on route-pivot-dropped, the excluded lem-per-complete-local-excellence is not cited, and no SGA source is used. Source ILO XVI 3.7, printed pp.254-255: Vidal G-alteration, ell-Sylow H, T=S'/H log etale, equivariant resolution, quotient log smooth, log blowup, then generically etale of degree prime to ell. Steps 1, 2, 4, 5 and 6 follow it in order. Steps 3 and 7-10 correctly write out quasi-projectivity via graph and Segre, properness, the exceptional opens and the degree [G:H] via free quotient and fpqc descent. All hypotheses checked: tame since the ell-group stabilizers meet residue characteristics 0 or p != ell; generically free on E; quotient applied over X, T and S; T excellent for the log resolution. Small cases: H=1, H=G, nonfaithful action on S', empty closed fibre, length-0 tower. New node lem-per-characteristic-zero-dedekind-excellent matches Stacks 07QW(4) plus (1) for fields; the DVR clause holds; five actual searches; no duplicate (trf-integers-excellent covers Z only, exc-fields-excellent fields only, complete-local-excellence is dropped). Batch-5 flags: lem-trf-h-projective-composition (composition of projective morphisms, closure 72 nodes, no other trf node) and lem-sfb-admissible-free-finite-quotient (free finite-group fppf quotient; its trf closure is algebraic-space and descent infrastructure). Both are general scheme facts that neither the trace-formula nor the Poincare-duality leaf gives, so I treat them as generic tools, not steps of either proof; the 7 tool_uses are accepted. FIX in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-trait-prime-to-ell-log-alteration.json (2 C4/E5-type repairs): (1) Step 2 attributed T's mixed characteristic to the tame-trait node, which does not state it; the elementary argument is now written out. (2) Step 9 got G x E_1 = E_1 x_{U_1} E_1 by claiming the quotient of E_1 is U_1 'by the Galois-cover definition', which only covers E->U. It now applies the free-quotient theorem to E->U with hypotheses checked, then pulls back to U_1; def-weil-finite-integral-morphism added to the step's uses and proof_deps. Statement, stmt_deps and the new node are unchanged.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.TraitPrimeToEllLogAlteration",
   "declaration": "AlgebraicGeometry.exists_trait_primeToEll_log_alteration",
-  "declarations": [
-   "AlgebraicGeometry.uniformizerLogChartGroupMap",
-   "AlgebraicGeometry.TraitUniformizerLogChart",
-   "AlgebraicGeometry.exists_trait_primeToEll_log_alteration"
-  ],
   "file": "lean/Sheaf/AlgebraicGeometry/TraitPrimeToEllLogAlteration.lean",
-  "statement": "theorem exists_trait_primeToEll_log_alteration (R : CommRingCat.{u}) [IsDomain R] [IsDiscreteValuationRing R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] [IsStrictlyHenselianLocalRing R] [CharZero (FractionRing R)] (hchar : ∃ p : ℕ, p.Prime ∧ CharP (IsLocalRing.ResidueField R) p) (ell : ℕ) (hell : ell.Prime) (hinv : IsUnit (ell : R)) (X : Scheme.{u}) [IsIntegral X] (hreg : IsRegularScheme X) (s : X ⟶ Spec R) [Flat s] [LocallyOfFiniteType s] [QuasiCompact s] (hqp : ∃ (N : ℕ) (i : X ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec R)), IsImmersion i ∧ i ≫ ℙ(ULift.{u} (Fin (N + 1)); Spec R) ↘ Spec R = s) : ∃ (A : CommRingCat.{u}) (hA : IsDomain A) (_ : @IsDiscreteValuationRing A inferInstance hA) (t : Spec A ⟶ Spec R) (Y : FineSaturatedLogScheme.{u}) (q : Y.scheme ⟶ Spec A) (f : Y.scheme ⟶ X) (d : ℕ) (π : A) (b : Multiplicative (ULift.{u} ℕ) →* Y.logStructure.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 Y.scheme)))), IsFinite t ∧ IsDominant t ∧ IsIntegral Y.scheme ∧ IsRegularScheme Y.scheme ∧ LocallyOfFiniteType q ∧ QuasiCompact q ∧ LocallyOfFiniteType (q ≫ t) ∧ QuasiCompact (q ≫ t) ∧ (∃ (N : ℕ) (i : Y.scheme ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec A)), IsImmersion i ∧ i ≫ ℙ(ULift.{u} (Fin (N + 1)); Spec A) ↘ Spec A = q) ∧ (∃ (N : ℕ) (i : Y.scheme ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec R)), IsImmersion i ∧ i ≫ ℙ(ULift.{u} (Fin (N + 1)); Spec R) ↘ Spec R = q ≫ t) ∧ f ≫ s = q ≫ t ∧ IsHProjective f ∧ IsDominant f ∧ 0 < d ∧ ¬ell ∣ d ∧ (∃ U : X.Opens, Nonempty U ∧ IsFinite (f ∣_ U) ∧ Etale (f ∣_ U)) ∧ f.fiberDegree (genericPoint X) = d ∧ Irreducible π ∧ (∀ n : Multiplicative (ULift.{u} ℕ), Y.logStructure.alpha.app (op (Scheme.Etale.mk (𝟙 Y.scheme))) (b n) = q.appTop ((Scheme.ΓSpecIso A).inv (π ^ n.toAdd.down))) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (z : Spec (.of Ω) ⟶ Y.scheme), ∃ c : TraitUniformizerLogChart Y.scheme Y.logStructure A q π b, Nonempty ((Scheme.pointSmallEtale z).fiber.obj c.V))",
+  "statement": "theorem exists_trait_primeToEll_log_alteration (ell : ℕ) [Fact ell.Prime] (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] [HenselianLocalRing R] [IsSepClosed (IsLocalRing.ResidueField R)] [CharZero (FractionRing R)] (p : ℕ) [Fact p.Prime] [CharP (IsLocalRing.ResidueField R) p] (hell : IsUnit (ell : R)) (X : Scheme.{u}) [IsIntegral X] (hregular : IsRegularScheme X) (s : X ⟶ Spec (.of R)) [Flat s] [LocallyOfFiniteType s] [QuasiCompact s] (hqp : GabberModification.QuasiProjective s) : ∃ (A : Type u) (_ : CommRing A) (_ : IsDomain A) (_ : IsDiscreteValuationRing A) (t : Spec (.of A) ⟶ Spec (.of R)), IsFinite t ∧ IsDominant t ∧ ∃ (π : A), IsLocalRing.maximalIdeal A = Ideal.span {π} ∧ ∃ (M : EtaleLogStructure (Spec (.of A))) (hfs : M.IsFineSaturated), (∃ e : M.monoidSheaf.obj ≅ divisorialLogPresheaf ((Spec (.of A)).basicOpen ((Scheme.ΓSpecIso (.of A)).inv π)).ι, e.hom ≫ divisorialStructuralMap ((Spec (.of A)).basicOpen ((Scheme.ΓSpecIso (.of A)).inv π)).ι = M.alpha) ∧ ∃ (Y : FineSaturatedLogScheme.{u}) (_ : IsIntegral Y.scheme) (g : EtaleLogHom Y ⟨Spec (.of A), inferInstance, M, hfs⟩) (f : Y.scheme ⟶ X), IsRegularScheme Y.scheme ∧ LocallyOfFiniteType g.base ∧ QuasiCompact g.base ∧ LocallyOfFiniteType (g.base ≫ t) ∧ QuasiCompact (g.base ≫ t) ∧ GabberModification.QuasiProjective g.base ∧ GabberModification.QuasiProjective (g.base ≫ t) ∧ f ≫ s = g.base ≫ t ∧ IsHProjective f ∧ IsDominant f ∧ (∀ y : Y.scheme, ∃ c : FSLogChart g, y ∈ Set.range c.V.hom ∧ ∃ e : c.P ≃* Multiplicative (ULift.{u} ℕ), (∀ a : c.P, M.alpha.app (op c.W) (c.chartY a) = c.W.hom.appTop ((Scheme.ΓSpecIso (.of A)).inv π) ^ (e a).toAdd.down) ∧ Function.Injective c.groupMap ∧ Finite (CommGroup.torsion c.cokernel) ∧ (∀ v : c.V.left, IsUnit (Nat.card (CommGroup.torsion c.cokernel) : c.V.left.presheaf.stalk v)) ∧ Smooth c.comparison) ∧ ∃ (U : X.Opens) (d : ℕ), Nonempty U ∧ IsFinite (f ∣_ U) ∧ Etale (f ∣_ U) ∧ 0 < d ∧ ¬ ell ∣ d ∧ f.residueDegree (genericPoint Y.scheme) = d",
   "branch": "newtargets-dag",
-  "by": "Q06",
-  "date": "2026-10-18",
+  "by": "Q05",
+  "date": "2026-10-24",
   "existing": false,
-  "fixed_by": "NT-stage2-cc-7fd8499a9",
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.TraitPrimeToEllLogAlteration deleted (dead: no target reaches it); this node is not reached either."
+  "note": "States the unchanged node after its accepted Q108 stage-1 reconstruction. Uses GabberModification.QuasiProjective for the existing finite-projective-space relative notion, canonical divisorial generic-open log structure, and FSLogChart with base N, injective group map and finite invertible torsion cokernel. At the generic point the canonical residue degree is the function-field degree. The four added statement dependencies already have landed Lean declarations; no geometric input withdrawn by Q108 is restored."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-7fd8499a9",
-  "group": "Q06",
-  "result": "fix",
-  "note": "Statement matches node and ILO XVI 3.7 clause by clause: complete strictly henselian mixed-char DVR, ell unit; X integral regular flat lft qc with immersion into P^N; finite dominant DVR extension; Y integral regular, qproj+finite type over T and S; f IsHProjective dominant S-morphism, finite etale over nonempty U; d>0, ell∤d, fiberDegree at generic point = [k(Y):k(X)] (probe: fiberDegree takes no IsAffineHom argument); canonical trait log morphism via uniformizer pi and global b with alpha(b n)=q*(pi^n); log smoothness by TraitUniformizerLogChart at every geometric point (fs P, real IsChart, pinned x/y/comparison, gp-injective, finite torsion with unit card, Smooth). Node unchanged except lean; lean.statement verbatim; no hollow defs, sorry only, docstrings OK, single universe u. Helpers are the item's inline fixed-chart notion, not a duplicate of def-per-fs-log-smooth-etale. Fault (H9, stages/2 §3 rule 7): proof-route imports missing despite the report saying they were restored; FIX adds plain imports of FSLogSmoothEtale, NormalScheme, ProjectiveImpliesProper, HProjectiveComposition, CompleteLocalExcellent, Mathlib Morphisms.FiniteType and Morphisms.Proper. nt_compile --json: delivered clean 4.5 s; fixed clean 4.2 s (CompleteLocalExcellent side override 2.2 s)."
- },
- "lean_audit": {}
+  "reviewer": "NT-stage2-cc-54c019446",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Re-delivery of the H2 return on cd238e76: def-trf-log-regular-pair (landed by Q116; owns divisorialLogPresheaf/divisorialStructuralMap) is added to stmt_deps, with public import Sheaf.AlgebraicGeometry.LogRegularPair. diff -r against the returned snapshot shows only that change, the lean.note wording and the report repair section; signature and 10-step docstring are byte-identical. Snapshot nodes equal side-live except the item (lean, stmt_deps). Item not landed elsewhere. lean.statement verbatim in file. Re-read FSLogChart (P is the trait chart, so ≃ ULift N with uniformizer powers is right; fineQ; injective groupMap; finite invertible torsion; canonical comparison) and divisorial* on D(π).ι = canonical trait log structure. All clauses and edge cases as accepted before. No defs, sorry only, docstrings with source and blueprint. Report has Worker report and Second reading sections. No compile run (no file changed)."
+ }
 }

@@ -1,0 +1,331 @@
+{
+ "id": "lem-trf-embedded-to-intrinsic-smooth-resolution",
+ "kind": "statement",
+ "title": "From synchronized embedded resolution to intrinsic smooth comparison on embeddable schemes",
+ "statement": "Fix a totally ordered set $L$ and a synchronized embedded resolution assignment $E$ with labels in $L$ [def-trf-labeled-embedded-resolution]. Work over $\\mathbf Q$. Let $\\mathcal C$ consist of the reduced finite-type schemes $X$ admitting a closed immersion into a smooth separated finite-type $\\mathbf Q$-scheme [def-pc-reduced-scheme, def-weil-finite-type-morphism, def-weil-closed-immersion, def-sbc-smooth-morphisms, def-weil-proper-morphism]. This class includes all affine finite-type inputs and their finite disjoint unions.\n\nThere is an intrinsic assignment $A$ on $\\mathcal C$: $A(X)$ is a finite ordinary blowup tower with a finite strictly increasing list of labels in $L$, coherent ideal centers, nonempty nowhere dense regular centers, and regular final scheme [def-trf-ordinary-resolution-rule, def-nagata-global-blowup, pqf-def-coherent, def-weil-regular-scheme]. Nowhere dense means that the center's underlying closed set has empty interior. The tower for an empty or regular input has length zero. For every embedding $X\\hookrightarrow P$ as above, its labeled ordinary tower, including the center ideals on its levels, is canonically identified with the strict-transform tower assigned by $E$; these identifications agree for different embeddings and satisfy the change-of-embedding cocycle.\n\nFor every smooth $h:Y\\to X$ between members of $\\mathcal C$, $A(Y)$ is canonically the contracted cartesian pullback of $A(X)$: at each retained label the ideal is the extended ideal [def-nagata-extended-ideal], and a label is absent exactly when that ideal is the unit ideal. All level squares over $h$ are cartesian [def-pc-fibre-product]. Labels remain in their original order. The comparison restricts to the canonical embedded comparison wherever $h$ extends to a smooth map of ambient schemes in a cartesian square of embedded pairs; in particular this holds for every open restriction [def-weil-open-immersion]. The ideals and level comparisons are determined by these restrictions, independently of standard-smooth charts and their lifts. There is no separatedness requirement on $h$ and no constant-relative-dimension requirement.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.3(ii), 2.1.9, 2.3.11--2.3.13, printed pp.87--88,93--94. Conditional embedded-to-intrinsic reduction; retained old proof Steps 1--3, including standard-smooth quotient lifting and comparison of ideal sheaves on a cover. This reduction is supplied by agent, not a separate theorem quoted by ILO."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "def-trf-ordinary-resolution-rule",
+  "def-nagata-global-blowup",
+  "def-weil-regular-scheme",
+  "pqf-def-coherent",
+  "def-nagata-extended-ideal",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-trf-labeled-embedded-resolution",
+  "def-trf-intrinsic-labeled-resolution"
+ ],
+ "proof": [
+  {
+   "text": "For an affine rational input, apply the proved source theorem exists_isClosedImmersion_affineSpace_of_isAffine to its finite-type structure map. The finite affine-space projection is smooth by [sbc-lem-affine-space-smooth], affine hence separated and quasi-compact, and locally of finite type. Keep the input itself as the embedded closed scheme and use the identity initial isomorphism. For a finite coproduct of affine inputs, Mathlib instIsAffineSigmaObjScheme makes the canonical coproduct affine. Transport this property along the isomorphism from the supplied colimiting cofan, then apply the affine embedding construction. This also treats the empty coproduct. These two helpers are completely proved in Lean.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each embeddable input S choose one of its permitted embeddings p. Apply [lem-trf-embedded-resolution-ordinary-tower] to E.tower(p) to obtain an ordinary tower and its identification at p. These choices are made only inside the existence proof, not in a definition of data from an unproved existence theorem.",
+   "uses": [
+    "lem-trf-embedded-resolution-ordinary-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any other embedding q compose the chosen identification with E.intrinsic(p.iso.symm followed by q.iso). The initial identity follows by cancellation of p.iso and its inverse. Label equality and comap_comp prove the label and center fields. E.intrinsicComp, associativity and cancellation of each intermediate embedding isomorphism give the required cocycle. The helpers change_embedding and change_embedding_cocycle prove these transports in Lean.",
+   "uses": [
+    "def-trf-labeled-embedded-resolution",
+    "def-trf-intrinsic-labeled-resolution"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each smooth rational map between embeddable inputs, apply [lem-trf-intrinsic-resolution-smooth-comparison] to the two chosen ordinary towers and their identifications for all embeddings. Choose a resulting cartesian comparison and keep its supplied ambient compatibility proof.",
+   "uses": [
+    "lem-trf-intrinsic-resolution-smooth-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Fill the unique field using [lem-trf-intrinsic-resolution-pullback-rigidity]. Fill ambient with the compatibility proof of the chosen comparison. Together with the proved embedding helpers and the change-of-embedding cocycle these are exactly all fields of IntrinsicResolutionOfEmbedded, so package them to obtain the unchanged conjunction.",
+   "uses": [
+    "lem-trf-intrinsic-resolution-pullback-rigidity",
+    "def-trf-intrinsic-labeled-resolution"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-trf-embedded-resolution-ordinary-tower",
+  "def-trf-labeled-embedded-resolution",
+  "def-trf-intrinsic-labeled-resolution",
+  "lem-trf-intrinsic-resolution-smooth-comparison",
+  "lem-trf-intrinsic-resolution-pullback-rigidity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.1--2.1.9, 2.3.1, 2.3.4--2.3.5, 2.3.11--2.3.13, printed pp.86--88,91--94. Agent expansion of the conditional embedded-to-intrinsic argument, not a separately quoted ILO theorem.",
+  "note": "W4: proved the affine and finite-coproduct embedding constructions, change-of-embedding transport and cocycle, and assembly; three named lower obligations retain the ordinary-tower conversion, chart/gluing comparison argument, and rigidity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "embedded.*resolution|resolution.*ambient|desingulari[sz].*smooth",
+   "results": "[grep] OK 0 hit(s).  Returned: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned smoothness, gluing, open-cover and base-change declarations do not state this conditional theorem for finite synchronized ordinary blowup towers with their ideal centers and ordered contractions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-embedded-to-intrinsic-smooth-resolution: A synchronized embedded resolution algorithm induces ambient independent ordinary blowup resolution on embeddable rational schemes compatible with arbitrary smooth morphisms",
+   "results": "[leanfinder] OK 8 hit(s).  Returned: AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.instIsSmoothOfIsOpenImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned smoothness, gluing, open-cover and base-change declarations do not state this conditional theorem for finite synchronized ordinary blowup towers with their ideal centers and ordered contractions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-embedded-to-intrinsic-smooth-resolution: Convert embedded desingularization into intrinsic blowup resolution and compare it along smooth maps by lifting standard smooth presentations",
+   "results": "[leansearch] OK 8 hit(s).  Returned: Manifold.isSmoothEmbedding_iff, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.casesOn, Manifold.IsSmoothEmbedding.isEmbedding, Manifold.IsSmoothEmbedding.mk, AlgebraicGeometry.IsSmooth.recOn, Manifold.IsSmoothEmbedding.isImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned smoothness, gluing, open-cover and base-change declarations do not state this conditional theorem for finite synchronized ordinary blowup towers with their ideal centers and ordered contractions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"desingular\"",
+   "results": "[loogle] OK 0 hit(s).  Returned: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned smoothness, gluing, open-cover and base-change declarations do not state this conditional theorem for finite synchronized ordinary blowup towers with their ideal centers and ordered contractions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intrinsic resolution of singularities by ordinary blowup towers induced by an embedding independent smooth functorial embedded resolution algorithm",
+   "results": "OK 8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.instIsSmoothOfIsOpenImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern smooth charts, smooth composition, or manifolds; none states an embedding-independent ordinary resolution tower with labeled center ideals."
+  },
+  {
+   "tool": "grep",
+   "query": "desingulari[sz]|resolution.*blow|blow.*resolution",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern smooth charts, smooth composition, or manifolds; none states an embedding-independent ordinary resolution tower with labeled center ideals."
+  },
+  {
+   "tool": "grep",
+   "query": "embedded.*resolution|resolution.*ambient|intrinsic.*resolution",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern smooth charts, smooth composition, or manifolds; none states an embedding-independent ordinary resolution tower with labeled center ideals."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth functorial embedded resolution of singularities induces an intrinsic resolution tower of ordinary blowups independent of the embedding",
+   "results": "OK 8 hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth, Manifold.IsSmoothEmbedding.casesOn, Algebra.smoothLocus, LibraryNote.Design_choices_about_smooth_algebraic_structures, AlgebraicGeometry.isSmooth_comp, AlgebraicGeometry.IsSmoothOfRelativeDimension.casesOn",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern smooth charts, smooth composition, or manifolds; none states an embedding-independent ordinary resolution tower with labeled center ideals."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern smooth charts, smooth composition, or manifolds; none states an embedding-independent ordinary resolution tower with labeled center ideals."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Embedding independent desingularization algorithm commutes with arbitrary smooth pullback after deleting empty centers",
+   "results": "OK 8 hits: SingularManifold.comap_f, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.isStandardSmooth_stableUnderComposition, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, RingHom.IsStandardSmoothOfRelativeDimension.comp",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern smooth charts, smooth composition, or manifolds; none states an embedding-independent ordinary resolution tower with labeled center ideals."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-functorial-ordinary-resolution",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Re-split task: VIII 2.1.3(ii), 2.1.9, 2.3.11--2.3.13, printed pp.87--88,93--94. Conditional embedded-to-intrinsic reduction; retained old proof Steps 1--3, including standard-smooth quotient lifting and comparison of ideal sheaves on a cover. This reduction is supplied by agent, not a separate theorem quoted by ILO.",
+   "via": [
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-embedded-to-intrinsic-smooth-resolution",
+  "worker": "stage1",
+  "summary": "Nine-step conditional proof using existing DAG nodes only: intrinsic strict-transform tower, blowup rigidity, open restrictions, standard-smooth affine charts and quotient lifts, local embedded comparisons, induction on equality of center ideals, flat blowup base change, and uniqueness/coherence. No new nodes and no statement change.",
+  "blueprint": "Preserves the historical alteration branch of lem-trf-local-term-locality recorded by blueprint.from, through lem-trf-smooth-functorial-ordinary-resolution. This item realizes its extracted old Steps 1--3 (ordinary strict transforms and standard-smooth lifting). Read the current latest locality proof and sk-i-curve-zero: their contracting-correspondence route is unchanged; no new claim is made that current locality requires resolution.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-strict-transform-ambient-closed",
+    "why": "Generic algebraic-geometric tool used only for the stated strict-transform, affine-chart, smoothness or ordinary-blowup operation; the resolution unit supplies no replacement for this operation."
+   },
+   {
+    "node": "thm-nagata-blowup-principalizes-center",
+    "why": "Generic algebraic-geometric tool used only for the stated strict-transform, affine-chart, smoothness or ordinary-blowup operation; the resolution unit supplies no replacement for this operation."
+   },
+   {
+    "node": "thm-nagata-blowup-universal-property",
+    "why": "Generic algebraic-geometric tool used only for the stated strict-transform, affine-chart, smoothness or ordinary-blowup operation; the resolution unit supplies no replacement for this operation."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic algebraic-geometric tool used only for the stated strict-transform, affine-chart, smoothness or ordinary-blowup operation; the resolution unit supplies no replacement for this operation."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic algebraic-geometric tool used only for the stated strict-transform, affine-chart, smoothness or ordinary-blowup operation; the resolution unit supplies no replacement for this operation."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-locally-standard-smooth",
+    "why": "Generic algebraic-geometric tool used only for the stated strict-transform, affine-chart, smoothness or ordinary-blowup operation; the resolution unit supplies no replacement for this operation."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Generic algebraic-geometric tool used only for the stated strict-transform, affine-chart, smoothness or ordinary-blowup operation; the resolution unit supplies no replacement for this operation."
+   },
+   {
+    "node": "lem-weil-pbc-standard-smooth-quotient-lift",
+    "why": "Generic algebraic-geometric tool used only for the stated strict-transform, affine-chart, smoothness or ordinary-blowup operation; the resolution unit supplies no replacement for this operation."
+   },
+   {
+    "node": "lem-weil-pbc-standard-smooth-is-smooth",
+    "why": "Generic algebraic-geometric tool used only for the stated strict-transform, affine-chart, smoothness or ordinary-blowup operation; the resolution unit supplies no replacement for this operation."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic algebraic-geometric tool used only for the stated strict-transform, affine-chart, smoothness or ordinary-blowup operation; the resolution unit supplies no replacement for this operation."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Generic algebraic-geometric tool used only for the stated strict-transform, affine-chart, smoothness or ordinary-blowup operation; the resolution unit supplies no replacement for this operation."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Generic algebraic-geometric tool used only for the stated strict-transform, affine-chart, smoothness or ordinary-blowup operation; the resolution unit supplies no replacement for this operation."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic permanence tool for Noetherian open ambients or smooth base change; no replacement is supplied by the resolution unit."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic permanence tool for Noetherian open ambients or smooth base change; no replacement is supplied by the resolution unit."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic algebraic-geometric tool used only for the smoothness of an ambient open immersion in Step 3; the resolution unit supplies no replacement for this operation."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic algebraic-geometric tool used only for the smoothness of an ambient open immersion in Step 3; the resolution unit supplies no replacement for this operation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lft-affine-pairs"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-daf273e68",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-daf273e68 (reviewer sub-agent of L); spot-checked: FIX for this split. I read in full the 9-step proof (no new nodes, statement unchanged), all 18 cited statements, def-trf-labeled-embedded-resolution and def-trf-ordinary-resolution-rule. I compared old Steps 1-3 of the parent (Q27 report) with the new proof: each argument is carried, except one that old Step 2 had and the delivery dropped (polynomial ring standard smooth with c=0, so Spec Q[t] is smooth over Q). New Step 5 still relies on it when it says Q is smooth over Q by composition. Sources checked in the ILO PDF text: VIII 2.1.1 (only X-automorphism of a blowup is the identity; universal property), 2.1.3(ii) (strict transform = blowup), 2.1.9 (flat pullback), 2.3.11-2.3.13 (pp.93-94). Steps 1, 2 (rigidity from the uniqueness in the universal property plus principalization), 6, 7 (stated induction, ideal equality local on chart covers, labels of A(Y) inside labels of A(X)), 8 (base change of smooth is smooth, smooth implies flat, flat blowup base change, unit ideal gives the identity) and 9 are correct. Edge cases checked: empty or regular inputs, opens missing every center, non-surjective h, charts of different dimension, c=0, non-nilpotent I. Three C1 faults, repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-embedded-to-intrinsic-smooth-resolution.json: (1) Step 3: smoothness of the ambient open immersion O->P, which E's smooth comparison needs, was uncited; now cites lem-weil-pbc-open-immersion-etale and lem-weil-pbc-etale-smooth-zero-dimensional-fibres. (2) Step 3: finite type of O over Q relied on an uncited composition of finite-type morphisms; now derived from quasi-compactness plus lem-weil-pbc-lft-affine-pairs, and the no-longer-cited lem-weil-pbc-qc-open-immersion-finite-type is removed. (3) Steps 4-5: the argument that P=Spec Q[t] is a smooth ambient is restored (def-weil-pbc-standard-smooth-algebra with c=0, standard-smooth-is-smooth, smooth-ring-map-iff-smooth-affine), and Step 5 now names it in the composition. proof_deps is the union of the uses, and tool_uses are updated (the two new generic sk-thm-p1 tools are added). Advisory: the inherited statement clause about h extending to a smooth ambient map only makes sense for cartesian ambient squares; I read it that way. thm-nagata-blowup-universal-property's statement refers to itself, but its final-object clause is usable. No SGA, no duplicates.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EmbeddedToIntrinsicSmoothResolution",
+  "declaration": "AlgebraicGeometry.exists_intrinsic_resolution_of_embedded",
+  "declarations": [
+   "AlgebraicGeometry.exists_intrinsic_resolution_of_embedded"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EmbeddedToIntrinsicSmoothResolution.lean",
+  "statement": "theorem exists_intrinsic_resolution_of_embedded (L : Type w) [LinearOrder L] (E : SynchronizedEmbeddedResolution.{u, w} L) : (∀ (S : RationalResolutionInput.{u}) [IsAffine S.scheme], Nonempty (RationalResolutionEmbedding S)) ∧ (∀ (n : ℕ) (S : Fin n → RationalResolutionInput.{u}) (_affine : ∀ i, IsAffine (S i).scheme) (T : RationalResolutionInput.{u}) (j : ∀ i, (S i).scheme ⟶ T.scheme) (_disjointUnion : IsColimit (Cofan.mk T.scheme j)), Nonempty (RationalResolutionEmbedding T)) ∧ Nonempty (IntrinsicResolutionOfEmbedded L E)",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ddab4a940",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Read item node and live copy (old_statement equals live statement), new def node + IntrinsicLabeledResolution.lean, item module, OrdinaryResolutionRule and LabeledEmbeddedResolution dependency modules, Mathlib IdealSheafData.comap, 01BV coherence predicate. Clause match: L/E specified data; C = EmbeddableResolutionInput property subtype over the existing EmbeddedResolutionPair; affine and Fin-n coproduct (incl. n=0) embeddings; IntrinsicLabeledOrdinaryTower = OrdinaryBlowupTower + IsRegularResolution + strictly increasing labels + cut index/stage naturality + actual and unit ideals + coherence + empty/regular length 0; identifications with E's whole intrinsic diagram preserve kernel ideals and labels; cocycle via E.intrinsic; comparison for every smooth Q-morphism, no separatedness, cartesian at all cuts, extended (comap) ideals, retained iff nonunit; unique and ambient both provable by blowup rigidity. §1(C) adds the cartesian ambient square: correct (E.pullback needs IsPullback; A1/A2 counterexample valid); citer audit complete (only lem-trf-smooth-functorial-ordinary-resolution, holds). New node absent elsewhere, no parallel landing, real data, docstrings, stmt_deps complete. lean.statement verbatim in both files; one sorry; universes u,w bound; imports exist. Advisory: existence of an ambient open for open restrictions is left to the proof (Step 3).",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q56 stage 2",
+  "old_statement": "Fix a totally ordered set $L$ and a synchronized embedded resolution assignment $E$ with labels in $L$ [def-trf-labeled-embedded-resolution]. Work over $\\mathbf Q$. Let $\\mathcal C$ consist of the reduced finite-type schemes $X$ admitting a closed immersion into a smooth separated finite-type $\\mathbf Q$-scheme [def-pc-reduced-scheme, def-weil-finite-type-morphism, def-weil-closed-immersion, def-sbc-smooth-morphisms, def-weil-proper-morphism]. This class includes all affine finite-type inputs and their finite disjoint unions.\n\nThere is an intrinsic assignment $A$ on $\\mathcal C$: $A(X)$ is a finite ordinary blowup tower with a finite strictly increasing list of labels in $L$, coherent ideal centers, nonempty nowhere dense regular centers, and regular final scheme [def-trf-ordinary-resolution-rule, def-nagata-global-blowup, pqf-def-coherent, def-weil-regular-scheme]. Nowhere dense means that the center's underlying closed set has empty interior. The tower for an empty or regular input has length zero. For every embedding $X\\hookrightarrow P$ as above, its labeled ordinary tower, including the center ideals on its levels, is canonically identified with the strict-transform tower assigned by $E$; these identifications agree for different embeddings and satisfy the change-of-embedding cocycle.\n\nFor every smooth $h:Y\\to X$ between members of $\\mathcal C$, $A(Y)$ is canonically the contracted cartesian pullback of $A(X)$: at each retained label the ideal is the extended ideal [def-nagata-extended-ideal], and a label is absent exactly when that ideal is the unit ideal. All level squares over $h$ are cartesian [def-pc-fibre-product]. Labels remain in their original order. The comparison restricts to the canonical embedded comparison wherever $h$ extends to a smooth map of ambient schemes; in particular this holds for every open restriction [def-weil-open-immersion]. The ideals and level comparisons are determined by these restrictions, independently of standard-smooth charts and their lifts. There is no separatedness requirement on $h$ and no constant-relative-dimension requirement.",
+  "what": "The supplied embedded comparison is defined only for a cartesian square of embedded pairs. A mere smooth ambient extension does not provide one: the identity of a point embedded at the origin in A^1 and A^2 extends along the smooth projection A^2 to A^1, but the inverse image of the first point is A^1, not the second point. Specify the cartesian ambient square, as already required in E and the stage-1 reviewer advisory; the intrinsic comparison for arbitrary smooth h is unchanged.",
+  "source": {
+   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+   "place": "VIII 2.1.9, 2.3.4--2.3.5, pp.88,91--92: comparisons for base-change towers; def-trf-labeled-embedded-resolution smooth comparisons lift cartesian smooth ambient maps."
+  },
+  "citers": [
+   {
+    "id": "lem-trf-smooth-functorial-ordinary-resolution",
+    "holds": true,
+    "note": "Step 1 needs the intrinsic assignment on embeddable inputs and its arbitrary smooth/open comparisons; all are retained. The embedded chart comparisons in the reduction are cartesian by quotient lifting."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-reduced-scheme",
+   "def-weil-finite-type-morphism",
+   "def-trf-ordinary-resolution-rule",
+   "def-nagata-global-blowup",
+   "def-weil-regular-scheme",
+   "pqf-def-coherent",
+   "def-nagata-extended-ideal",
+   "def-weil-open-immersion",
+   "def-pc-fibre-product",
+   "def-weil-closed-immersion",
+   "def-sbc-smooth-morphisms",
+   "def-weil-proper-morphism",
+   "def-trf-labeled-embedded-resolution"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261026T083424-L-2349368",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

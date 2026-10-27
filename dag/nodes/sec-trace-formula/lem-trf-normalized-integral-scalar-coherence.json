@@ -1,0 +1,122 @@
+{
+ "id": "lem-trf-normalized-integral-scalar-coherence",
+ "kind": "statement",
+ "title": "NormalizedIntegralScalarCoherence",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "statement": "The normalized mixed comparison respects scheme and coefficient units and towers. For every fixed ambient normalized system D, with exactly the hypotheses and conclusions in the Lean attachment.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0D6D and 0941; NormalizedIntegralScalarCoherence"
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof": [
+  {
+   "text": "Expand lambda and mu once. Their inverse cancellation gives the mixed realization square. Transpose it under the actual reduction/limit adjunction to obtain reduction(a);c_U;U(c_S)=c_S;S(c_U);kappa. This step uses only naturality of the counit, not separate finite evaluation.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the scheme identity derive kappa;geometricUnit=scalar(geometricUnit) from the quotient mixed-composition square at two identities and geometric right unit laws. The identity pullback on systems is faithful because its specified unitor identifies it with identity. The completed geometric unit is defined by b;limit(systemUnit);eta inverse, whose mate is c_U;systemUnit. Invert the mixed square, paste both unit mate equations, and cancel the scalar counit. Reduction detects the resulting equality since the reconstruction unit at its constructible target is invertible.",
+   "uses": [
+    "lem-trf-quotient-system-mixed-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the scalar counit multiplication and associator normalizations. Paste the unit equation with the mixed square and the quotient scalar-unit equation. For towers paste the two mixed squares; move the second scalar counit through the first mixed arrow by naturality, and move kappa through the first scalar counit. The quotient scalar-tower equation identifies the middle path, and naturality of its associator moves it past the pullback counit. The two scalar associator mate equations identify the outer paths. Cancel the common composite of invertible pullback and scalar counits. Finally reduction detects equality because the actual reconstruction unit at the constructible target is invertible.",
+   "uses": [
+    "lem-trf-integral-scalar-counit-normalization",
+    "lem-trf-quotient-system-mixed-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "lem-trf-quotient-system-mixed-coherence",
+  "lem-trf-integral-scalar-counit-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "06YY and 0941; explicit mate calculus and mixed-square pasting by S5, 2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Associativity and units of completed pullback comparisons transported by normalized whole-system derived limit counits",
+   "results": "8 hits: CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc, CategoryTheory.Limits.map_lift_pullbackComparison_assoc, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom_assoc, CategoryTheory.Limits.pullbackComparison_comp_snd_assoc, CategoryTheory.Limits.pullbackComparison_comp_fst_assoc, CategoryTheory.Limits.map_lift_pullbackComparison, CategoryTheory.Limits.CategoricalPullback.mkNatIso",
+   "date": "2026-10-25",
+   "verdict": "no match: generic adjunction and ordinary pullback lemmas supply elementary cancellation, but not the specified completed strict quotient comparison equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.left_triangle_components",
+   "results": "1 hits: CategoryTheory.Adjunction.left_triangle_components",
+   "date": "2026-10-25",
+   "verdict": "no match: generic adjunction and ordinary pullback lemmas supply elementary cancellation, but not the specified completed strict quotient comparison equations"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*(assoc|coher)|scalar.*pullback.*comp",
+   "results": "25 hits: Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean, Mathlib/CategoryTheory/CatCommSq.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+   "date": "2026-10-25",
+   "verdict": "no match: generic adjunction and ordinary pullback lemmas supply elementary cancellation, but not the specified completed strict quotient comparison equations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SimultaneousIntegralPullbackComparisons",
+  "date": "2026-10-25",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Tags 06YY, 0D6D and 0941; NormalizedIntegralScalarCoherence",
+   "via": [
+    "lem-trf-integral-pullback-comparison-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedIntegralScalarCoherence",
+  "file": "lean/Sheaf/Paper/NormalizedIntegralScalarCoherence.lean",
+  "declaration": "WeilConjectures.normalizedIntegralScalarCoherence",
+  "statement": "theorem normalizedIntegralScalarCoherence\n    (l : ℕ) [Fact l.Prime] (D : IntegralComparisonSystem.{u} l)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L) :\n    (∀ (X : Scheme.{u})\n    [∀ x : X, Invertible (l : X.residueField x)]\n    (K : sfIntegralConstructibleCategory l E X),\n    (integralComparisonScalar l E L ι D (𝟙 X) K).hom ≫\n        (integralComparisonUnit l L D X\n          ((integralComparisonConstructibleScalar l E L ι X).obj K)).hom =\n      (integralScalarExtension l E L ι X).map (integralComparisonUnit l E D X K).hom) ∧\n    (∀ {X Y : Scheme.{u}}\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (f : X ⟶ Y) (K : sfIntegralConstructibleCategory l E Y),\n    (integralComparisonScalar l E E (AlgHom.id ℚ_[l] E) D f K).hom ≫\n        (integralDerivedPullback l E f).map (integralComparisonScalarUnit l E Y K).hom =\n      (integralComparisonScalarUnit l E X ((constructibleIntegralPullback l E f).obj K)).hom) ∧\n    (∀ (M : Type u) [Field M] [Algebra ℚ_[l] M]\n    [FiniteDimensional ℚ_[l] M] (j : L →ₐ[ℚ_[l]] M) {X Y : Scheme.{u}}\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (f : X ⟶ Y) (K : sfIntegralConstructibleCategory l E Y),\n    (integralScalarExtension l L M j X).map (integralComparisonScalar l E L ι D f K).hom ≫\n        (integralComparisonScalar l L M j D f\n          ((integralComparisonConstructibleScalar l E L ι Y).obj K)).hom ≫\n        (integralDerivedPullback l M f).map\n          (integralComparisonScalarAssociator l E L ι M j Y K).hom =\n      (integralComparisonScalarAssociator l E L ι M j X\n        ((constructibleIntegralPullback l E f).obj K)).hom ≫\n        (integralComparisonScalar l E M (j.comp ι) D f K).hom)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261025T162139-L-324177",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261027T094515-L-236295",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

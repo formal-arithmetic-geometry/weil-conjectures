@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-affine-transpose-exponent-transition",
+ "kind": "statement",
+ "title": "Root-power naturality of the ordinary affine integration transpose",
+ "statement": "Fix the finite purity setting [def-pur-conventions], a separated finite-type k-scheme T, and d >= 0. For r <= s whose positive powers ell^(r+1), ell^(s+1) kill the coefficient ring, the comparison image of the factorwise root transition baseExponentComparison [def-pur-finite-site-coordinates], followed by affineTranspose at r [lem-pur-affine-unit-transpose-coordinates], equals affineTranspose at s. This statement involves only the ordinary ordered affine trace, its fixed exceptional adjunction and site comparison; it involves no vector bundle, frame, restricted global integration or purity comparison. It includes rank zero and empty bases.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Final exponent-independence clause; ordinary ordered-affine counit transition of lem-pur-integration-exponent-transpose-transport Steps 6--9, followed by source naturality of adjunction in Step 11."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "lem-pur-affine-unit-transpose-coordinates",
+  "def-pur-finite-site-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordinary affine clause of IntegrationAffineEquations in the existing exponent-transport theorem. Its trace comparison hypothesis is the equality of the actual vector integrations given for each exponent by vectorIntegrationSiteComparison. The theorem provides the ordered counit transition, with integrationTowerTransition defined by conjugating baseExponentComparison by affineLinearCoefficientDescent.",
+   "uses": [
+    "lem-pur-integration-exponent-transpose-transport",
+    "lem-pur-vector-integration-site-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the canonical coefficient pullback identifies this tower transition, after descent to the coefficient on the affine tower itself, with baseExponentComparison there. The compact-support adjunction is fixed independently of exponent. Apply source naturality of its Hom bijection, followed by comparison.map_comp. Transport by the HEq specification of affineTranspose. At rank zero the transition is identity; all equalities hold on empty schemes and need no flatness over the Kummer coefficient ring.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-affine-unit-transpose-coordinates",
+    "def-pur-finite-site-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integration-exponent-transpose-transport",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-affine-unit-transpose-coordinates",
+  "def-pur-finite-site-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Second paragraph: restriction to a trivializing open is the adjunct of the affine-space counit. Expanded using the canonical definitions and stated adjunction comparison lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The adjoint transpose of vector bundle integration restricts on a linear chart to the ordered affine line purity comparison",
+   "results": "8 hits: hom_chart, inCoordinates_apply_eq₂, VectorBundleCore.inCoordinates_eq, ContinuousLinearMap.inCoordinates_eq, inTangentCoordinates_eq, ContinuousLinearMap.inCoordinates, Pretrivialization.continuousLinearMap, TangentBundle.continuousLinearMapAt_trivializationAt_eq_core",
+   "date": "2026-10-25",
+   "verdict": "No exact match: general adjunction identities or topological bundles do not state this finite-coefficient scheme comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.homEquiv_naturality_left\"",
+   "results": "5 hits: CategoryTheory.Adjunction.homEquiv_naturality_left, CategoryTheory.Adjunction.homEquiv_naturality_left_symm, CategoryTheory.Adjunction.homEquiv_naturality_left_square, CategoryTheory.Adjunction.homEquiv_naturality_left_square_iff, CategoryTheory.Adjunction.homEquiv_naturality_left_square_assoc",
+   "date": "2026-10-25",
+   "verdict": "No exact match: general adjunction identities or topological bundles do not state this finite-coefficient scheme comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "vectorBundle.*(purity|integration)|affineSpace.*(trace|purity)|TateTwist",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No exact match: general adjunction identities or topological bundles do not state this finite-coefficient scheme comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordinary affine integration adjunction transpose agrees with the bounded site transpose at the coefficient unit, and commutes with root power exponent transitions",
+   "results": "8 hits: CategoryTheory.Adjunction.shift_unit_app, TopCat.Presheaf.pushforwardToOfIso, CategoryTheory.Adjunction.toCat_unit_toNatTrans, AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine, CategoryTheory.Adjunction.commShift_op, CategoryTheory.Adjunction.CommShift.commShift_unit, CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso, CategoryTheory.Adjunction.unit_app_commShiftIso_hom_app",
+   "date": "2026-10-25",
+   "verdict": "No exact match: general adjunction identities or topological bundles do not state this finite-coefficient scheme comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VectorIntegrationChartComparison",
+  "date": "2026-10-25",
+  "group": "A3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-coefficient-smooth-purity",
+   "place": "Final exponent-independence clause; ordinary ordered-affine counit transition of lem-pur-integration-exponent-transpose-transport Steps 6--9, followed by source naturality of adjunction in Step 11.",
+   "via": [
+    "lem-pur-vector-integration-chart-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineIntegrationExponentTransition",
+  "file": "lean/Sheaf/Paper/AffineIntegrationExponentTransition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationChart.affineTranspose_exponent_transition",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VectorIntegrationChart.affineTranspose_exponent_transition"
+  ],
+  "statement": "theorem affineTranspose_exponent_transition (P : WeilConjectures.PurityFiniteSetting.{u})\n    (T : Scheme.{u}) [IsNoetherian T] (aT : T ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aT] [QuasiCompact aT] [IsSeparated aT]\n    (d r r' : ℕ) (h : r ≤ r')\n    (hA : ((P.coefficients.l ^ (r + 1) : ℕ) : Ring P) = 0)\n    (hA' : ((P.coefficients.l ^ (r' + 1) : ℕ) : Ring P) = 0) :\n    (comparison (Ring P) (iteratedAffineLine T d)).map\n        (baseExponentComparison P.coefficients.l P.extension (P.level - 1)\n          (iteratedAffineLine T d) (primeUnit P _ (towerBase aT d))\n          r r' h hA hA' d).hom ≫\n      affineTranspose P T aT d r hA = affineTranspose P T aT d r' hA'",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5e63f",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261025T122442-L-1772857",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5e63f",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261025T122442-L-1772857",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-pur-vector-integration-chart-comparison and 3 new sorry statements vs Coordinates extraction (verbatim diff vs clone), existsUnique_vectorIntegrationGluing, ordinaryTraceRaw/integrationTranspose, IntegrationAffineEquations; node stmt refs vs stmt_deps"
+ }
+}

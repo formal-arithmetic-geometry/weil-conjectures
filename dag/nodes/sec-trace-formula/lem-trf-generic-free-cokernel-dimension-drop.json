@@ -1,0 +1,250 @@
+{
+ "id": "lem-trf-generic-free-cokernel-dimension-drop",
+ "kind": "statement",
+ "title": "A generic free submodule with flat cokernel of smaller closed-fibre support",
+ "statement": "Let $(A,\\mathfrak m)$ be a commutative local ring and $A\\to B$ a flat finitely presented homomorphism [def-weil-pbc-flat-ring-map, def-weil-pbc-finitely-presented-algebra]. Assume every fibre is geometrically integral, meaning that $B\\otimes_A\\kappa(\\mathfrak a)$ is a nonzero integral domain after every field extension of $\\kappa(\\mathfrak a)$ for every prime $\\mathfrak a\\subset A$. Suppose the closed fibre $\\operatorname{Spec}(B/\\mathfrak mB)$ has Krull dimension $n<\\infty$ [def-kun-dimension]. Let $\\mathfrak q\\subset B$ lie over $\\mathfrak m$ and let $N$ be a finite $B$-module [def-weil-finitely-generated-module] with $N_{\\mathfrak q}$ flat over $A$. Put $\\mathfrak p=\\mathfrak mB$. Then $\\mathfrak p$ is prime and there exist $r\\geq0$ and a $B$-linear map $\\alpha:B^r\\to N$ for which $\\alpha\\otimes_B\\kappa(\\mathfrak p)$ is an isomorphism. The $r$ basis vectors may be sent to elements of any specified finite generating list of $N$; $r=0$ is allowed. For $Q=\\operatorname{coker}\\alpha$, the module $Q$ is finite, $\\alpha$ is $A$-universally injective (for every $A$-module $L$, $L\\otimes_A\\alpha$ is injective), $Q_{\\mathfrak q}$ is $A$-flat, and $0\\to B^r\\to N\\to Q\\to0$ remains exact after every base change of $A$. The support $\\{\\mathfrak r\\in\\operatorname{Spec}(B/\\mathfrak mB):(Q/\\mathfrak mQ)_{\\mathfrak r}\\ne0\\}$ is a proper closed subset of the integral closed fibre and does not contain its generic point $\\mathfrak p/\\mathfrak mB$. If nonempty its Krull dimension is strictly less than $n$; in particular its dimension at $\\mathfrak q$ is $<n$ whenever $\\mathfrak q$ lies in it. If $n=0$ the support is empty. Localization, spectra, residue fields and tensor products mean [def-weil-pbc-module-localization, def-weil-affine-spectrum, def-weil-residue-field, def-weil-pbc-module-tensor-product]; a cokernel here is the quotient $N/\\operatorname{im}\\alpha$.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05I5, proposition-finite-type-flat-at-point, first proof, choice of alpha and strict drop of the support of its cokernel; returned steps 5, 6 and 7"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-kun-dimension",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=B/\\mathfrak mB$. Since $A$ is local, $C=B\\otimes_A\\kappa(\\mathfrak m)$; the maps $b\\otimes\\bar a\\mapsto\\overline{ab}$ and $\\bar b\\mapsto b\\otimes1$ are inverse. The fibre hypothesis makes $C$ a nonzero domain, so $\\mathfrak p=\\mathfrak mB$ is prime. Set $K=\\kappa(\\mathfrak p)=\\operatorname{Frac}(C)$, using the residue-field definition and localization at $\\mathfrak p$. The point $(0)$ of $\\operatorname{Spec}C$ belongs to every nonempty basic open $D(c)$, since then $c\\ne0$; it is the generic point and the closed fibre is irreducible.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I3 (lemma-induction-step), choice of alpha and implication (1) to (2); Tag 05I5 (proposition-finite-type-flat-at-point), first proof, induction step"
+   }
+  },
+  {
+   "text": "Fix the specified generators $x_1,\\ldots,x_t$ of $N$. Their images $x_i\\otimes1$ span $V=N\\otimes_B K$: expand the $N$ entry of each pure tensor in these generators. Scan this finite list, retaining a vector exactly when it is outside the span of those retained so far. The retained list is independent by construction and spans every scanned vector, hence is a basis of $V$. If it has length $r$, send the standard basis of $B^r$ to the corresponding $x_i$. This defines $\\alpha$ and makes $\\alpha\\otimes_B K$ an isomorphism. If $V=0$, retain the empty list and use $r=0$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I3 (lemma-induction-step), choice of alpha and implication (1) to (2); Tag 05I5 (proposition-finite-type-flat-at-point), first proof, induction step"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-local-generic-basis-universal-injective] to $R=A$, $S=B$, $q=\\mathfrak q$, $\\xi=\\mathfrak p$, and the map just chosen. The ring map is flat and finitely presented, all its fibres are geometrically integral, $\\mathfrak q$ lies over the maximal ideal, $N$ is finite, $N_{\\mathfrak q}$ is $A$-flat, and the generic residue-field map is an isomorphism. Thus $\\alpha$ is $A$-universally injective and $Q_{\\mathfrak q}$ is $A$-flat for $Q=N/\\operatorname{im}\\alpha$.",
+   "uses": [
+    "lem-trf-local-generic-basis-universal-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I3 (lemma-induction-step), choice of alpha and implication (1) to (2); Tag 05I5 (proposition-finite-type-flat-at-point), first proof, induction step"
+   }
+  },
+  {
+   "text": "The images of $x_1,\\ldots,x_t$ generate $Q$, so $Q$ is finite. Universal injectivity, evaluated on $L=A$, makes $\\alpha$ injective. For every $A$-module $L$, tensor right exactness gives exactness at the last two terms of $L\\otimes_A B^r\\to L\\otimes_A N\\to L\\otimes_A Q\\to0$, and step 3 gives injectivity at the first term. In particular take $L=A\\prime$ for any $A$-algebra $A\\prime$: this proves the asserted short exact sequence after every base change.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I3 (lemma-induction-step), choice of alpha and implication (1) to (2); Tag 05I5 (proposition-finite-type-flat-at-point), first proof, induction step"
+   }
+  },
+  {
+   "text": "Let $T=Q/\\mathfrak mQ$, finite over $C$ via the same generators. Tensor the defining cokernel sequence with $K$ over $B$. Tensor right exactness and the isomorphism $\\alpha\\otimes_B K$ give $Q\\otimes_B K=0$. This is $T_{(0)}$: explicitly $q\\otimes(\\bar b/\\bar s)\\mapsto\\bar b\\bar q/\\bar s$, with inverse $\\bar q/\\bar s\\mapsto q\\otimes1/\\bar s$, where $s\\notin\\mathfrak p$. The tensor relations kill $\\mathfrak mQ$ and give well-defined mutually inverse maps. By [lem-weil-pbc-finite-module-support-annihilator], $Z=\\operatorname{Supp}_C(T)=V(\\operatorname{Ann}_C(T))$ is closed. Since $T_{(0)}=0$, it misses the generic point, and hence is proper.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-finite-module-support-annihilator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I3 (lemma-induction-step), choice of alpha and implication (1) to (2); Tag 05I5 (proposition-finite-type-flat-at-point), first proof, induction step"
+   }
+  },
+  {
+   "text": "Apply [new-node-irreducible-open-complement-dimension] to the irreducible space $X=\\operatorname{Spec}C$, $d=n$, and the nonempty open $U=X\\setminus Z$. It gives either $Z=\\varnothing$, or $\\dim Z\\le e<n$ for some natural number $e$. At a point of $Z$, its dimension is at most $\\dim Z$: the whole $Z$ is one of the open neighbourhoods in the defining minimum. Thus the dimension at $\\mathfrak q$ is $<n$ whenever $\\mathfrak q/\\mathfrak mB\\in Z$. For $n=0$ the alternative $e<n$ is impossible, so $Z$ is empty.",
+   "uses": [
+    "new-node-irreducible-open-complement-dimension",
+    "def-kun-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I3 (lemma-induction-step), choice of alpha and implication (1) to (2); Tag 05I5 (proposition-finite-type-flat-at-point), first proof, induction step"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-residue-field",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-affine-spectrum",
+  "def-weil-finitely-generated-module",
+  "lem-trf-local-generic-basis-universal-injective",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "new-node-irreducible-open-complement-dimension",
+  "def-kun-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05I3 (lemma-induction-step), choice of alpha and implication (1) to (2); Tag 05I5 (proposition-finite-type-flat-at-point), first proof, induction step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "flat finitely presented algebra geometrically integral fibers finite module flat at point choose generic basis universally injective free map cokernel smaller fiber support dimension",
+   "results": "[leanfinder] OK 8 hit(s). Algebra.quasiFinite_iff; Algebra.HasGoingDown.of_flat; Algebra.Smooth.flat_of_isNoetherianRing; Algebra.Smooth.exists_finiteType; Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg; Algebra.Smooth.flat; exists_integral_inj_algHom_of_fg; Algebra.Smooth.exists_subalgebra_fg. The hits give smooth algebras are flat, the definition of supportDim, and rank results assuming module flatness over its own ring. None constructs the universally injective generic free map under base-flatness at one point and proves the cokernel support-dimension drop.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.Finite, Ideal.IsPrime",
+   "results": "[loogle] OK 12 hit(s). Module.rankAtStalk_eq_of_le_of_finite_of_flat'; Ideal.finrank_fiber_eq_rankAtStalk; Ideal.finrank_fiber_eq_finrank; Ideal.ramificationIdx'_above_le; Ideal.ramificationIdx'_below_le; Ideal.ramificationIdx_above_le; Ideal.ramificationIdx_below_le; Ideal.sum_ramification_inertia_eq_finrank; Ideal.sum_ramification_inertia_eq_card; Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn; Ideal.card_inertia_eq_ramificationIdxIn; Ideal.card_stabilizer_eq. The hits give smooth algebras are flat, the definition of supportDim, and rank results assuming module flatness over its own ring. None constructs the universally injective generic free map under base-flatness at one point and proves the cokernel support-dimension drop.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*basis|support.*(dim|krull)|cokernel.*flat|universally.*inject",
+   "results": "[grep] OK 10 hit(s). Mathlib/RingTheory/KrullDimension/Regular.lean:19; Mathlib/RingTheory/KrullDimension/Regular.lean:43; Mathlib/RingTheory/KrullDimension/Regular.lean:44; Mathlib/RingTheory/KrullDimension/Regular.lean:56; Mathlib/RingTheory/KrullDimension/Regular.lean:57; Mathlib/RingTheory/KrullDimension/Module.lean:15; Mathlib/RingTheory/KrullDimension/Module.lean:16; Mathlib/RingTheory/KrullDimension/Module.lean:32; Mathlib/RingTheory/KrullDimension/Module.lean:36; Mathlib/RingTheory/KrullDimension/Module.lean:37. The hits give smooth algebras are flat, the definition of supportDim, and rank results assuming module flatness over its own ring. None constructs the universally injective generic free map under base-flatness at one point and proves the cokernel support-dimension drop.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite module over smooth algebra over local ring generic free submodule quotient flat at point support dimension drops in integral closed fiber",
+   "results": "[leansearch] OK 8 hit(s). Module.free_of_flat_of_isLocalRing; IsLocalRing.finrank_quotient_map; Module.free_of_flat_of_finrank_eq; Module.supportDim; Module.Finite.quotient; Module.supportDim_le_supportDim_quotSMulTop_succ; Algebra.Smooth.flat; Module.supportDim_quotSMulTop_succ_eq_supportDim. The hits give smooth algebras are flat, the definition of supportDim, and rank results assuming module flatness over its own ring. None constructs the universally injective generic free map under base-flatness at one point and proves the cokernel support-dimension drop.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "generic fiber basis gives universally injective map from finite free module and cokernel misses generic point of closed fiber",
+   "results": "[leanfinder] OK 8 hit(s). PrimeSpectrum.exists_image_comap_of_finite_of_free; AlgebraicGeometry.universallyInjective_isZariskiLocalAtTarget; AlgebraicGeometry.UniversallyInjective; Algebra.quasiFinite_iff; AlgebraicGeometry.instIsGermInjectiveOfIsIntegral; AlgebraicGeometry.finite_appTop_of_universallyClosed; Algebra.isOpen_unramifiedLocus; AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType. The hits give smooth algebras are flat, the definition of supportDim, and rank results assuming module flatness over its own ring. None constructs the universally injective generic free map under base-flatness at one point and proves the cokernel support-dimension drop.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*basis|cokernel.*flat|universally.*inject",
+   "results": "OK 13 hits; Mathlib/AlgebraicGeometry/RelativeGluing.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean. Hits concern universally injective morphisms of schemes, which differs from universal injectivity of a module map; no match for this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "generic free submodule finite module quotient flat smaller closed fiber support",
+   "results": "OK 8 hits; Submodule.finiteQuotientOfFreeOfRankEq, Module.Flat.finsupp, Module.Finite.quotient, Module.free_of_flat_of_finrank_eq, Module.isClosed_support, Module.Flat.of_free, FGModuleRepr.repr, Module.Flat.iff_forall_exists_factorization. Finite quotients and closed support cover individual elementary clauses only; the flat/free hits require global flatness over the module ring and do not give the item. No match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.Finite, Ideal.IsPrime",
+   "results": "OK 12 hits; Module.rankAtStalk_eq_of_le_of_finite_of_flat', Ideal.finrank_fiber_eq_rankAtStalk, Ideal.finrank_fiber_eq_finrank, Ideal.ramificationIdx'_above_le, Ideal.ramificationIdx'_below_le, Ideal.ramificationIdx_above_le, Ideal.ramificationIdx_below_le, Ideal.sum_ramification_inertia_eq_finrank. The rank-at-stalk hits assume a finite module flat over its own coefficient ring. Here only N_q is flat over A, not N flat over B. The ramification hits do not construct the generic-basis map or control its cokernel support. No match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite module over flat finitely presented algebra geometrically integral fibers generic basis universally injective cokernel smaller support dimension",
+   "results": "OK 8 hits; Algebra.IsStandardSmoothOfRelativeDimension.out, Module.nonempty_basis_of_flat_of_finrank_eq, Module.free_of_flat_of_finrank_eq, Algebra.HasGoingDown.of_flat, Algebra.Smooth.exists_finiteType, Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg, Module.freeLocus_eq_univ, exists_integral_inj_algHom_of_fg. Free-locus and flat/free results impose flatness over the module ring; finite-presentation spreading results impose finite presentation of N, absent here. Smooth algebra and going-down results give neither the module map nor its flat cokernel/support bound. No match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "choose free submodule from generators over integral closed fiber with universally exact sequence and quotient support avoiding generic point",
+   "results": "OK 8 hits; Module.freeLocus, PrimeSpectrum.exists_image_comap_of_finite_of_free, Algebra.ZariskisMainProperty, Module.mem_freeLocus, Module.FinitePresentation.exists_free_localizedModule_powers, Module.FinitePresentation.exists_notMem_bijective, Ideal.FinrankQuotientMap.span_eq_top, Module.exists_basis_of_basis_baseChange. Free-locus and flat/free results impose flatness over the module ring; finite-presentation spreading results impose finite presentation of N, absent here. Smooth algebra and going-down results give neither the module map nor its flat cokernel/support bound. No match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-type-flat-etale-neighborhood",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting Tag 05I7 -> Proposition 05I5 algebra branch: first proof, choice of alpha and strict drop of the support of its cokernel; returned steps 5, 6 and 7",
+   "via": [
+    "lem-trf-finite-type-flat-etale-neighborhood",
+    "lem-trf-flat-finite-type-flat-point-local"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-generic-free-cokernel-dimension-drop",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed the generic-basis map from a prescribed generating list, reused the existing 05I3 implication for universal injectivity and flat cokernel, proved universal exactness with tensor right exactness, and applied finite-module support closedness and the existing irreducible-space dimension bound. No new nodes. Checked all citations and the zero-rank and zero-dimensional cases.",
+  "blueprint": "Supports the algebraic 05I5 induction branch below lem-trf-local-term-locality: choice of alpha, flat cokernel, and strict support-dimension drop in the supporting flat-point lemma. The latest blueprint locality proof itself cites the contracting-correspondence theorem; this delivery changes no unit route.",
+  "tool_uses": [
+   {
+    "node": "new-node-irreducible-open-complement-dimension",
+    "why": "Generic topological dimension bound for a proper closed subset of an irreducible finite-dimensional space, used as a black box in the 05I5 support induction; no node of this unit gives this general dimension statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "new-node-irreducible-open-complement-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-98ea9655e",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-98ea9655e (reviewer sub-agent of L); spot-checked: I read the item's statement and all six steps against Stacks flat.tex Tag 05I3 (lemma-induction-step: how α is chosen and the implication (1)⇒(2)) and Tag 05I5 (first proof, induction step). The statement is unchanged from live, which still has the item unsplit, and there is no repair note for this item. It has no new nodes. Step 1: C=B/mB≅B⊗κ(m), so p=mB is prime, κ(p)=Frac C and (0) is the generic point. This is elementary and correct. Step 2: the images of the prescribed generators span N⊗K, a greedy scan picks out a basis, and the r=0 case is covered. Step 3 cites lem-trf-local-generic-basis-universal-injective (live: split and reviewed pass, same unit). Its hypotheses match one by one and its conclusion (R-universally injective α, flat (coker α)_q) is used as stated. That node is strictly smaller than the item, so this is not a relabelling. Step 4: right exactness of the tensor product plus universal injectivity gives injectivity with L=A and exactness after every base change with L=A′. No flatness of N or Q is assumed. Step 5: Q⊗K=0 and Q⊗K≅T_(0) with T=Q/mQ (explicit inverse maps). The Mathlib leaf Supp=V(Ann) then makes the support closed, and it misses the generic point. Step 6 uses new-node-irreducible-open-complement-dimension, which I re-proved independently, and the minimum in def-kun-dimension; with n=0 the support is empty. Edge cases tested: A=k, B=k[t], N=B/(t) gives support of dimension 0<1; N=B gives Q=0; B=A (n=0) gives empty support; N=0 gives r=0. proof_deps equals the union of the step uses, nothing cited is merged, there is no cycle, and the parent's step 3 uses exactly the delivered clauses. The declared tool use of new-node-irreducible-open-complement-dimension (unit sk-thm-curveestimate) is accepted: it is a generic point-set dimension bound, the content 05I5 calls 'certainly', and it replaces no step of the unit's route. There is no SGA reference. Only cosmetic point: step 4 writes A\\prime."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.GenericFreeCokernelDimensionDrop",
+  "declaration": "RingHom.generic_free_cokernel_dimension_drop",
+  "file": "lean/Sheaf/TraceFormula/GenericFreeCokernelDimensionDrop.lean",
+  "statement": "theorem generic_free_cokernel_dimension_drop {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B] [IsLocalRing A] (hflat : RingHom.Flat (algebraMap A B)) (hfp : Algebra.FinitePresentation A B) (hgeom : ∀ (a : PrimeSpectrum A) (K : Type (max u v w)) [Field K] [Algebra A K] (ι : a.asIdeal.ResidueField →+* K), algebraMap A K = ι.comp (algebraMap A a.asIdeal.ResidueField) → IsDomain (K ⊗[A] B)) (n : ℕ) (hdim : topologicalKrullDim (PrimeSpectrum (B ⧸ Ideal.map (algebraMap A B) (IsLocalRing.maximalIdeal A))) = (n : WithBot ℕ∞)) (q : PrimeSpectrum B) (hq : q.asIdeal.comap (algebraMap A B) = IsLocalRing.maximalIdeal A) (N : Type t) [AddCommGroup N] [Module B N] [Module A N] [IsScalarTower A B N] [Module.Finite B N] (hNq : @Module.Flat A (LocalizedModule q.asIdeal.primeCompl N) _ _ (Module.compHom (LocalizedModule q.asIdeal.primeCompl N) (algebraMap A B))) : ∃ hp : (Ideal.map (algebraMap A B) (IsLocalRing.maximalIdeal A)).IsPrime, ∀ (s : ℕ) (x : Fin s → N) (_hx : Submodule.span B (Set.range x) = ⊤), ∃ (r : ℕ) (α : (Fin r → B) →ₗ[B] N) (j : Fin r ↪ Fin s) (Z : Set (PrimeSpectrum (B ⧸ Ideal.map (algebraMap A B) (IsLocalRing.maximalIdeal A)))), (∀ i : Fin r, α (Pi.single i 1) = x (j i)) ∧ Function.Bijective (LinearMap.lTensor (@Ideal.ResidueField B _ (Ideal.map (algebraMap A B) (IsLocalRing.maximalIdeal A)) hp) α) ∧ Module.Finite B (N ⧸ LinearMap.range α) ∧ (∀ (L : Type z) [AddCommGroup L] [Module A L], Function.Injective (LinearMap.lTensor L (α.restrictScalars A))) ∧ @Module.Flat A (LocalizedModule q.asIdeal.primeCompl (N ⧸ LinearMap.range α)) _ _ (Module.compHom (LocalizedModule q.asIdeal.primeCompl (N ⧸ LinearMap.range α)) (algebraMap A B)) ∧ (∀ (A' : Type y) [CommRing A'] [Algebra A A'], Function.Injective (LinearMap.lTensor A' (α.restrictScalars A)) ∧ Function.Exact (LinearMap.lTensor A' (α.restrictScalars A)) (LinearMap.lTensor A' ((LinearMap.range α).mkQ.restrictScalars A)) ∧ Function.Surjective (LinearMap.lTensor A' ((LinearMap.range α).mkQ.restrictScalars A))) ∧ Z = Module.support (B ⧸ Ideal.map (algebraMap A B) (IsLocalRing.maximalIdeal A)) ((B ⧸ Ideal.map (algebraMap A B) (IsLocalRing.maximalIdeal A)) ⊗[B] (N ⧸ LinearMap.range α)) ∧ IsClosed Z ∧ Z ≠ Set.univ ∧ (∀ ξ, PrimeSpectrum.comap (Ideal.Quotient.mk (Ideal.map (algebraMap A B) (IsLocalRing.maximalIdeal A))) ξ = ⟨Ideal.map (algebraMap A B) (IsLocalRing.maximalIdeal A), hp⟩ → ξ ∉ Z) ∧ (Z.Nonempty → topologicalKrullDim Z < (n : WithBot ℕ∞)) ∧ (∀ ξ : Z, PrimeSpectrum.comap (Ideal.Quotient.mk (Ideal.map (algebraMap A B) (IsLocalRing.maximalIdeal A))) ξ.val = q → topologicalKrullDimAt ξ < (n : WithBot ℕ∞)) ∧ (n = 0 → Z = ∅)",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cba30f762",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 05I3/05I5 clause by clause: local A, RingHom.Flat + FinitePresentation, hgeom identical to the LocalGenericBasisUniversalInjective interface, hdim on PrimeSpectrum(B/mB), local flatness hNq via compHom. Conclusions: ∃ hp prime, ∀ generating list ∃ r α j Z with basis→list, κ(p)-bijective, finite cokernel, universal injectivity ∀L:Type z, Q_q flat, base-change exactness, Z = actual Module.support of (B/mB)⊗Q, closed, proper, generic point excluded, dim Z<n, dim_ξ Z<n at q, n=0→Z=∅. lean.statement verbatim; node differs from live only in lean (live null); stmt_deps cover the notions used; proof-only imports private; sorry only; docstrings OK. Edge cases r=0, N=0, n=0, k[t]/(t) fine. No changes and no compile."
+ }
+}

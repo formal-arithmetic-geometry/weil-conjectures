@@ -1,0 +1,121 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Lemma 6.5.5, pp. 22 and 49–50, canonical augmented tensor quotient tower; proved extraction of the parent construction."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Lemma 6.5.5, pp. 22 and 49–50, canonical augmented tensor quotient tower; proved extraction of the parent construction."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ConstructibleTensorCompletion",
+  "date": "2026-10-27",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": the ordinary-to-completed integral tensor comparison for evaluation.",
+   "via": [
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "id": "lem-fix-constructible-tensor-completion-chain",
+ "title": "Canonical tensor-completion chain map and its normalized components",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell [def-weil-l-adic-coefficient-extension], and a scheme W [def-pc-scheme]. Use the completed coefficient sheaf on the small pro-etale site [def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients], its unbounded derived category [def-weil-abstract-derived-category], and signed total tensor on two arbitrary cochain complexes [def-pc-tensor-complex-sheaves, lem-fix-constructible-tensor-completion-presentation]. The canonical Roos augmentation composed with Roos of the normalized strict tensor-tower isomorphism gives a natural chain map from ordinary total tensor to the completed tensor representative [def-pur-integral-derived-operations, lem-pur-integral-ambient-operation-models]. Its component on P,Q is exactly the normalized tensor operation unit, with the native representative as target. No boundedness, constructibility or residue-field invertibility hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-fix-constructible-tensor-completion-presentation"
+ ],
+ "proof": [
+  {
+   "text": "For functors F,U,V,R, a natural transformation from the identity to U followed by R and a natural isomorphism F followed by U to V give a natural transformation from F to V followed by R. Define its component by the two actual maps. Its naturality follows from their naturality equations, functoriality and associativity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply this construction to signed total tensor, the strict quotient tower, the finite tensor tower, and the Roos functor. The component is definitionally the actual tensorOperationUnit. The required Roos unit naturality is the existing proved sliceRoosUnit_natural.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-pur-integral-ambient-operation-models",
+    "lem-fix-constructible-tensor-completion-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "lem-fix-constructible-tensor-completion-presentation",
+  "lem-pur-integral-ambient-operation-models"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleTensorCompletionChain",
+  "file": "lean/Sheaf/Paper/ConstructibleTensorCompletionChain.lean",
+  "declaration": "WeilConjectures.ConstructibleTensorModel.tensorCompletionChain_app",
+  "statement": "theorem tensorCompletionChain_app\n    (P Q : CochainComplex (integralTowerModules l E W) ℤ) :\n    (tensorCompletionChain l E W).app (P, Q) = tensorCompletionUnitMap l E W P Q",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Roos augmentation into a mapping fiber has quotient maps as its product coordinates and zero shifted coordinates",
+   "results": "Simplicial augmentation and alternating-face-map complex results.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement. The existing project construction is used with the indicated elementary categorical glue."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Pi.map_π, CategoryTheory.Limits.Pi.lift_π_assoc",
+   "results": "No results for the combined projection-law query.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement. The existing project construction is used with the indicated elementary categorical glue."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone.*fst|mappingCocone.*snd|Pi.lift_π_assoc",
+   "results": "6 mappingCocone matches in Mathlib; no coefficient quotient coordinate formula. Pi projection laws are used as elementary categorical glue.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement. The existing project construction is used with the indicated elementary categorical glue."
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fa5ac",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T222635-L-676636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fa5ac",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T222635-L-676636",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs node lem-fix-constructible-tensor-completion (signature unchanged, proof via 6 proved helpers + 1 true local sorry projectiveTensorChartComplete); removed unit import IntrinsicFiniteTorsionConstructibility vs unit sk-rem-sf-pf-done realized (empty; node realized only in sk-def-sf-setting, still in public import closure); 18 direct importers compiled OK in sandbox"
+ }
+}

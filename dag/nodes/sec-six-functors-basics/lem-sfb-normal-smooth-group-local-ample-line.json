@@ -1,0 +1,302 @@
+{
+ "id": "lem-sfb-normal-smooth-group-local-ample-line",
+ "kind": "statement",
+ "title": "Local relative ampleness on a smooth group scheme",
+ "statement": "Let $S$ be a normal locally Noetherian scheme [def-pc-scheme] [pqf-def-locnoeth] [def-weil-pbc-normal-ring] and $H\\to S$ a smooth separated group scheme of finite presentation [def-sbc-smooth-morphisms] [def-sbc-locally-finite-presentation] [def-sc-group-scheme] with connected fibres [def-weil-connected-scheme]. There are an affine open covering $S=\\bigcup_iW_i$ and, on each $H_{W_i}=H\\times_SW_i$, an ample invertible module $R_i$ [def-sc-invertible-module] [def-weil-pbc-ample-invertible-module]; since $W_i$ is affine, $R_i$ is relatively ample over $W_i$.",
+ "source": {
+  "document": "literature/raynaud-faisceaux-amples-schemas-groupes.pdf",
+  "place": "Corollaire VI 2.4: a smooth group scheme is locally quasi-projective over a normal locally Noetherian base; choose a relatively ample invertible module."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-connected-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-normal-ring",
+  "def-sc-group-scheme",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Fix $s\\in S$ and an affine open neighbourhood $T\\subseteq S$. Its open-subscheme local rings are those of $S$, so $T$ is normal; it is locally Noetherian by [pqf-def-locnoeth]. Put $H_T=H\\times_ST$. The base-change statements [lem-pc-proper-base-change](2), [lem-weil-pbc-separated-base-change] and [lem-weil-pbc-qcqs-morphism-permanence](3) make $H_T\\to T$ smooth, separated and finitely presented. The group operations restrict to $H_T$, because their identities remain equalities after the fibre-product construction [def-sc-group-scheme]. Choose an affine open $V\\subseteq H_T$ containing $e(s)$. The open $e^{-1}(V)\\subseteq T=\\operatorname{Spec}C$ contains $s$, so choose a basic open $W=D(a)$ with $s\\in W\\subseteq e^{-1}(V)$. Put $X=H_W$ and $U=V\\cap X$. On $V$, the inverse image of $D(a)$ is the principal open of the pulled-back function $p^*a$, hence $U$ is affine by [lem-weil-pbc-affine-ideals-closed-subscheme](0). The same statement makes $W$ affine; $W$ is normal locally Noetherian and $e(W)\\subseteq U$. All three morphism properties restrict once more to $X\\to W$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Corollary 6.13 proof, choice of affine opens; the explicit basic-open restriction uses Stacks affine principal opens."
+   }
+  },
+  {
+   "text": "For each $t\\in W$, the fibre $X_t$ is a connected finite-type group scheme over the field $\\kappa(t)$; its identity belongs to $U_t$, so $U_t\\neq\\varnothing$. Finite presentation implies finite type by forgetting the finite relations in an affine presentation. Thus [lem-weil-pbc-finite-type-over-noetherian], over the Noetherian scheme $\\operatorname{Spec}\\kappa(t)$, makes $X_t$ Noetherian, and [lem-sc-noetherian-closed-subset-finite-components] gives finitely many irreducible components. By [lem-sfb-group-local-minimal-prime] every local ring of $X_t$ has a unique minimal prime. The irreducible components through a point correspond to the minimal primes of its local ring, so two distinct components cannot meet. Being a finite disjoint covering by closed subsets, they are also open; connectedness and nonemptiness force exactly one. Therefore $X_t$ is irreducible, and the nonempty open $U_t$ is dense (two nonempty opens of an irreducible space intersect).",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sfb-group-local-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Corollary 6.13, fibrewise density; Stacks groupoids Tag 047M, lemma-group-scheme-field-geometrically-irreducible, and the elementary finite-component argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-normal-affine-boundary-cartier] to $X\\to W$ and $U$. Its base is affine normal locally Noetherian by step 1; the morphism is smooth separated finitely presented by step 1; $U$ is affine by step 1 and dense in every fibre by step 2. It gives an effective Cartier divisor $D=(X\\setminus U)_{\\mathrm{red}}$, including the empty divisor when $U=X$.",
+   "uses": [
+    "lem-sfb-smooth-normal-affine-boundary-cartier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 3.3(iii) implies (ii), printed pp.5--6, for the reduced affine boundary."
+   }
+  },
+  {
+   "text": "Let $\\mathcal I_D\\subseteq\\mathcal O_X$ be its ideal and set $R=\\mathcal I_D^\\vee=\\mathcal O_X(D)$ [def-pc-divisor-line-bundle]. The ideal is invertible by [lemma-nagata-effective-cartier-is-invertible]; its dual is invertible by [def-sc-invertible-module]. The inclusion $\\mathcal I_D\\hookrightarrow\\mathcal O_X$, viewed as a section of $R=\\mathcal Hom(\\mathcal I_D,\\mathcal O_X)$, defines $\\sigma\\in\\Gamma(X,R)$. On an open where $\\mathcal I_D=f\\mathcal O_X$ for a non-zero-divisor $f$, the dual frame takes $f$ to $1$, so the coefficient of $\\sigma$ is $f$. Consequently its nonvanishing locus is exactly $X_\\sigma=X\\setminus|D|=U$. These local sections agree because they all describe the same inclusion.",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "lemma-nagata-effective-cartier-is-invertible",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Theorem 6.8, step 3, canonical section; Stacks Divisors Tag 01X0, lemma-characterize-OD, with its local formula written here."
+   }
+  },
+  {
+   "text": "The supplied-section criterion [lem-sfb-group-affine-section-ampleness] applies to $X\\to W$, the line $R$, exponent $n=1$, and the section $\\sigma$. Step 1 supplies the smooth separated finitely presented group over an affine normal locally Noetherian base; its fibres are the given connected fibres of $H$. Steps 1 and 4 give the affine locus $X_\\sigma=U$, and $e(W)\\subseteq U$ makes that locus meet every fibre. Thus $R$ is absolutely ample on $X$. This applies even if $D$ is empty.",
+   "uses": [
+    "lem-sfb-group-affine-section-ampleness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 5.9 and Corollary 6.6(ii), supplied-line criterion for translation."
+   }
+  },
+  {
+   "text": "The morphism $X\\to W$ is quasi-compact because it is finitely presented. Since $W$ is affine, [lem-trf-affine-base-ample-canonical-data] says that the absolutely ample $R$ remains ample on the inverse image of every affine open of $W$. This is precisely relative ampleness over $W$. Perform the construction for every $s\\in S$ and take the affine opens $W_s$ and the resulting $R_s$. Each $W_s$ contains $s$, so they cover $S$. If $S$ is empty use the empty covering.",
+   "uses": [
+    "lem-trf-affine-base-ample-canonical-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Assembly and affine-base absolute/relative ampleness; Stacks Morphisms Tag 01VJ, lemma-characterize-relatively-ample."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sfb-group-local-minimal-prime",
+  "lem-sfb-smooth-normal-affine-boundary-cartier",
+  "def-pc-divisor-line-bundle",
+  "lemma-nagata-effective-cartier-is-invertible",
+  "def-sc-invertible-module",
+  "lem-sfb-group-affine-section-ampleness",
+  "lem-trf-affine-base-ample-canonical-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "place": "Agent assembly of the affine-boundary and supplied-line inputs; Guo Proposition 3.3, Proposition 5.9 and Corollary 6.6(ii), read online. The cited Raynaud VI 2.4 original is locally WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated group scheme of finite presentation with connected fibres over a normal locally Noetherian scheme is locally quasi projective over its base",
+   "results": "General scheme limits, pullback, Picard-group, or tensor declarations; no proposed geometric theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth group scheme with connected fibres over a normal scheme admits a relatively ample line bundle locally on the base",
+   "results": "General algebraic geometry, tensor-power, or abstract-group declarations; no proposed geometric theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAmple\"",
+   "results": "0 hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(groupScheme|group scheme).*(ample|projective)|(ample|projective).*(groupScheme|group scheme)",
+   "results": "No relevant Mathlib declarations; incidental references were read and rejected.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated group scheme with connected fibres over a normal locally Noetherian base admits an ample invertible module locally on the base",
+   "results": "Hits read: AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource. No declaration states the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(groupScheme|group scheme).*(ample|projective)|(ample|projective).*(groupScheme|group scheme)",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth group scheme over a normal scheme is Zariski locally quasi projective",
+   "results": "Hits read: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth. No declaration states the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAmple\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected smooth group over a normal base scheme is locally quasi projective and has a relatively ample line bundle",
+   "results": "Hits read: AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.IsQuasiAffine, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass. No declaration states the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-symmetric-line-power-prolongation",
+  "date": "2026-10-24",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Local ample line on H_W used in lem-sfb-symmetric-line-power-prolongation, proof step 3; auxiliary to the stable Picard theta ampleness route below admissible direct image. No nearest imported ancestor was found by blueprint_refs.py ancestor.",
+   "via": [
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-smooth-group-local-ample-line",
+  "worker": "stage1",
+  "summary": "NJ: constructed an affine neighbourhood of each identity section, proved fibrewise density using existing group-local minimal-prime and finite-component statements, and separated the normal-base Cartier-boundary theorem from the supplied-line ampleness criterion. Statement unchanged; two new statement-only nodes; no Mathlib match or project attachment. Missing Raynaud original and online Guo source recorded WANTED in report.",
+  "blueprint": "blueprint_refs.py ancestor returns None for this auxiliary chain; preserve its from.node=null and via. The split realizes the local-ample-line input in lem-sfb-symmetric-line-power-prolongation step 3. The current latest sk-thm-sf-ctf-stability unit is the upstream six-functor context, not a statement of either new geometric lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Smooth base-change permanence only; the local group is the pullback to an affine base open."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Separated base-change permanence only, for the same base restriction."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Finite-presentation base-change permanence only; no finite-type base assumption is added."
+   },
+   {
+    "node": "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "why": "Part (0) gives affineness of basic opens in both the base and the chosen affine open of H."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Makes the finite-type residue-field fibre Noetherian; not a geometric substitute for the group route."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "Finiteness of the irreducible components of a residue-field fibre."
+   },
+   {
+    "node": "lemma-nagata-effective-cartier-is-invertible",
+    "why": "The general invertibility of an effective Cartier ideal, needed for the constructed line."
+   },
+   {
+    "node": "lem-trf-affine-base-ample-canonical-data",
+    "why": "Only its first assertion is used: absolute ampleness over an affine base implies ampleness over each affine base open."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lemma-nagata-effective-cartier-is-invertible",
+  "lem-trf-affine-base-ample-canonical-data"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-4222be9c0",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-4222be9c0 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement. Base check: the live and side-live item is still unsplit with an identical statement and stmt_deps, so the statement is unchanged and no other group has split it. No SGA is cited. Sources: Raynaud VI 2.4, Guo and EGA IV4 are not available locally; this is recorded as WANTED, with proof_origin.by=agent on the item. I could not open these sources, so I checked both statements mathematically against the known theorems. Node 1 (smooth-normal-affine-boundary-cartier) is Ramanujam-Samuel (EGA IV 21.14.3). The complement of an affine open has codimension one (EGA IV 21.12.7, from separatedness). Fibre density plus the flat dimension formula puts every generic point of the complement over a generic point of the base, so the boundary is Cartier. The field case is 0BCW, and the density hypothesis is needed (cone counterexample without it). Node 2 (group-affine-section-ampleness) is Raynaud's section criterion: a power of L with the square property, whose translated sections have affine loci gG_σ∩g^{-1}G_σ. Edge cases checked: G affine with σ=1, an elliptic curve with σ=1 (correctly excluded), the zero section, and empty T. Duplicate searches found no existing node stating either new node; the existing field and semiabelian/cubical variants are special cases or different statements. Steps 1-6 checked against the statements they cite. Step 1: U=V_{p^*a} is affine by affine-ideals(0), and e(W)⊆U. Step 2: the fibres are irreducible via the unique minimal prime plus finitely many disjoint components, so U_t is dense. Steps 3-5: every hypothesis of the new nodes is verified. Step 4: the frame calculation gives X_σ=U. Step 6: the first assertion of lem-trf-affine-base-ample-canonical-data. Batch-5 flag: that node is generic scheme theory (Stacks 01VJ/01VI/0892). Its trf closure is algebraic-space and line-module infrastructure only, with no trace-formula or Poincaré proof steps, so I accept it. FIX (B3/B2): node 2 cited def-sc-group-scheme, which only defines group schemes over a field, for a group over T, and never said what a fibre is. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-group-affine-section-ampleness.json, with an inline relative group-scheme definition and G_t=G×_T Spec κ(t); def-pc-fibre-product and def-weil-residue-field added to stmt_deps. The mathematical content is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalSmoothGroupLocalAmpleLine",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affine_cover_isAmple_of_normal_smooth_group",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalSmoothGroupLocalAmpleLine.lean",
+  "statement": "theorem exists_affine_cover_isAmple_of_normal_smooth_group (S : Scheme.{u}) [IsLocallyNoetherian S] (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (H : Over S) [GrpObj H] [Smooth H.hom] [IsSeparated H.hom] [LocallyOfFinitePresentation H.hom] [QuasiCompact H.hom] (hconnected : ∀ s : S, ConnectedSpace (H.hom.fiber s)) : ∃ (I : Type u) (W : I → S.Opens), (∀ s : S, ∃ i : I, s ∈ W i) ∧ ∀ i : I, IsAffineOpen (W i) ∧ ∃ (R : (H.hom ⁻¹ᵁ W i).toScheme.Modules) (hR : R.IsInvertible), @IsAmple (H.hom ⁻¹ᵁ W i).toScheme R hR ∧ ∀ V : (W i).toScheme.Opens, IsAffineOpen V → ∃ h : ((tensorPullback (((H.hom ∣_ W i) ⁻¹ᵁ V).ι)).obj R).IsInvertible, @IsAmple ((H.hom ∣_ W i) ⁻¹ᵁ V).toScheme ((tensorPullback (((H.hom ∣_ W i) ⁻¹ᵁ V).ι)).obj R) h",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25a444cad",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Read item node, all 10 stmt_dep records (identical to live), module and report. Node diff vs live = new lean record + stmt_dep def-pc-module-pullback (landed NO 10-17, used by the tensorPullback relative-ample clause). Clauses: IsLocallyNoetherian; stalkwise IsDomain∧IsIntegrallyClosed normality (recorded inline form; IsNormalScheme would add IsIntegral); GrpObj on Over S; Smooth, IsSeparated, LocallyOfFinitePresentation+QuasiCompact = f.p.; ConnectedSpace of Mathlib's residue-field fibre; ∃ I:Type u affine open cover; on H⁻¹W_i an invertible R that is absolutely IsAmple and IsAmple after tensorPullback to the preimage of every affine V (same R; convention of scheme_relative_ample_affine_cover). No extra hypotheses; edge cases empty S, infinite cover, empty V, affine group covered. lean.statement verbatim; docstrings carry source and blueprint tags and all 6 proof steps; sorry only; no defs; both report sections present. No recompile (no change); worker compile clean."
+ }
+}

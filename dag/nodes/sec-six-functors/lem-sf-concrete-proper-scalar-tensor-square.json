@@ -1,0 +1,113 @@
+{
+ "id": "lem-sf-concrete-proper-scalar-tensor-square",
+ "kind": "statement",
+ "title": "Proper scalar and tensor square",
+ "statement": "For any normalized scalar/tensor models and choices [def-sp-open-scalar-tensor-data], finite commutative coefficient rings A,B, coefficient map φ:A→B, scheme morphism g:Z→Y, and arbitrary unbounded M over Z and L over Y, use the proper factor maps [def-sf-concrete-projection-factors]. Scalar extension of the A counit projection, followed by properScalar on M tensor Lg*L and proper image of the inputComparison [def-sf-concrete-projection-reduction-data], equals the scalar tensorator followed by tensor(properScalar M, identity) and the B counit projection on scalar M and scalar L. This is equality of the specified B-linear arrows; neither properScalar nor the proper projection is asserted invertible.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6, 0D6D, 0E48; more-etale.tex Tags 0GL1 and 0GL6. Concrete proper/open argument of fix-prop-projection-formula, proof sentence 2."
+ },
+ "stmt_deps": [
+  "def-sf-concrete-projection-factors"
+ ],
+ "proof": [
+  {
+   "text": "The scalar counit equation in lem-sp-proper-scalar-counit-square identifies the scalar-adjunction mate properComparison with directImageScalarComparison: apply the scalar Hom bijection and the inverse mates equivalence. Transport through the specified scalarIso factors; naturality of the geometric unit and scalar presentation identifies properScalar with the geometric mate of lambda.",
+   "uses": [
+    "lem-sp-proper-scalar-counit-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the universe-polymorphic tensor_mate_coherence calculation of lem-weil-pbc-ringed-exchange-tensor-coherence to the actual geometric adjunctions, scalar tensorators and restriction tensorators. Its tensor-square hypothesis is exactly lem-sf-scalar-pullback-tensor-coherence. The resulting arrows are definitionally properProjection and inputComparison.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-sf-scalar-pullback-tensor-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-proper-scalar-counit-square",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-sf-scalar-pullback-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Concrete finite coefficient-reduction square, proof sentence 2; implemented by the normalized scalar counit equation and the tensor-mate calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback and extension of scalar coefficients commute with tensor product and adjunction counit projection formula",
+   "results": "Ordinary ModuleCat unit/counit and Presheaf.pullbackComp hits; no normalized unbounded constant-ring proper/open square.",
+   "verdict": "No exact match.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"counit\"",
+   "results": "Eleven generic adjunction APIs; use Hom-equivalence naturality and mate equations.",
+   "verdict": "Useful generic glue, no exact scalar comparison.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(scalar|coefficient)|(scalar|coefficient).*projection",
+   "results": "One unrelated CStarProjection hit. Local rg located normalized scalar tensor, proper/open and compact-support comparisons used here.",
+   "verdict": "Use the stated library comparisons.",
+   "date": "2026-10-25"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConcreteProjectionReductionSquare",
+  "date": "2026-10-25",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-concrete-projection-reduction-square",
+   "place": "Normalized concrete proper/open coefficient square, its components and coefficient cocycles."
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConcreteProperScalarTensorSquare",
+  "file": "lean/Sheaf/Paper/ConcreteProperScalarTensorSquare.lean",
+  "declaration": "WeilConjectures.ConcreteProjectionReduction.proper_scalar_tensor_square",
+  "declarations": [
+   "WeilConjectures.ConcreteProjectionReduction.proper_scalar_tensor_square"
+  ],
+  "statement": "theorem proper_scalar_tensor_square\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {Z Y : Scheme.{u}} (g : Z ⟶ Y)\n    (M : proEtaleDerivedCategory Z A) (L : proEtaleDerivedCategory Y A) :\n    (scalar m φ Y).map (properProjection m A g M L) ≫\n      (properScalar m φ g).app (input m A g M L) ≫\n      (properImage B g).map (inputComparison m choices φ g M L).hom =\n    (choices.scalarTensor φ Y).iso.hom.app ((properImage A g).obj M, L) ≫\n      (tensor m B Y).map (Prod.mkHom ((properScalar m φ g).app M) (𝟙 _)) ≫\n      properProjection m B g ((scalar m φ Z).obj M) ((scalar m φ Y).obj L)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a9b01",
+  "group": "D7",
+  "result": "fix",
+  "landing": "20261025T201645-L-2595850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a9b01",
+  "group": "D7",
+  "result": "fix",
+  "landing": "20261025T201645-L-2595850",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-sf-concrete-projection-reduction-square + 6 new/2 changed nodes vs delivered Lean (compiled set + 8 copied OpenScalarTensorData importers in sandbox, axioms printed); change records vs Lean diffs; claims lock of IntegralCompactSupportCoefficientComparison (F8)"
+ }
+}

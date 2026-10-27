@@ -26,32 +26,27 @@
  ],
  "proof": [
   {
-   "text": "For $M\\in\\Mod_{\\Lambda_X}$, take the functor of [def-sfb-module-lower-star]. Its underlying object is $f^{\\Ab}_*M$ and its action is the composite $\\Lambda_Y\\otimes f^{\\Ab}_*M\\xrightarrow{\\eta_f\\otimes1}f^{\\Ab}_*\\Lambda_X\\otimes f^{\\Ab}_*M\\xrightarrow{\\mu}f^{\\Ab}_*(\\Lambda_X\\otimes M)\\xrightarrow{f^{\\Ab}_*\\gamma_M}f^{\\Ab}_*M$. Thus it is precisely transport followed by restriction along $\\eta_f$, on morphisms as well as objects. The same cited statement supplies additivity and left exactness for arbitrary $f$ and commutative condensed $\\Lambda$. This defines the first functor and its asserted properties.",
+   "text": "Take $f_*$ from [def-sfb-module-lower-star]: its action on $f_*^{\\Ab}M$ is $f_*^{\\Ab}(\\gamma_M)\\mu(\\eta_f\\otimes1)$, and it is additive and left exact. Take $f^*$ from [def-sfb-module-upper-star], giving $\\Lambda_X\\otimes_{f^*\\Lambda_Y}f^*_{\\Ab}M$. Both definitions act on morphisms as transport followed by the indicated scalar change, with the forward $\\alpha_f$.",
    "uses": [
-    "def-sfb-module-lower-star"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/sk-def-sfb-module-pushforward-pullback.proof.md",
-    "place": "first sentence: pushforward and left exactness"
-   }
-  },
-  {
-   "text": "Take the functor of [def-sfb-module-upper-star]. It first transports $M\\in\\Mod_{\\Lambda_Y}$ to an $f^*_{\\Ab}\\Lambda_Y$-module and then extends scalars along $\\alpha_f$, giving $\\Lambda_X\\otimes_{f^*\\Lambda_Y}f^*_{\\Ab}M$. This is the displayed pullback functor, with the target and tensor formula stated there. The construction uses the morphism $\\alpha_f$ in extension of scalars, rather than an inverse of that morphism.",
-   "uses": [
+    "def-sfb-module-lower-star",
     "def-sfb-module-upper-star"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/sk-def-sfb-module-pushforward-pullback.proof.md",
-    "place": "first sentence: pullback"
+    "place": "first sentence: the two functors"
    }
   },
   {
-   "text": "Use the adjunction specified by [def-sfb-module-upper-lower-adjunction], for the functors constructed in steps 1 and 2. Its natural Hom bijection identifies a $\\Lambda_X$-linear map $\\Lambda_X\\otimes_{f^*\\Lambda_Y}f^*_{\\Ab}M\\to N$ first with an $f^*\\Lambda_Y$-linear map from $f^*_{\\Ab}M$ to the restriction of $N$, and then with a $\\Lambda_Y$-linear map $M\\to f_*N$. The same statement specifies the lifted monoidal adjunction followed by extension/restriction of scalars. The coefficient relation needed to identify its right adjoint with step 1 is exactly $\\eta_f=f^{\\Ab}_*(\\alpha_f)\\circ u_{\\Lambda_Y}$. In [sk-def-sfb-coefficient-morphisms], the named adjunction is the abelian-sheaf pullback/pushforward adjunction on sheaves, not the module adjunction being constructed. Specializing its coefficient category to $\\Ab$, $u_{\\Lambda_Y}$ has type $\\Lambda_Y\\to f^{\\Ab}_*f^*_{\\Ab}\\Lambda_Y$, and $f^{\\Ab}_*(\\alpha_f)$ then has target $f^{\\Ab}_*\\Lambda_X$. Thus this is the same coefficient map used by the module pushforward in step 1, before any module change of scalars. Hence the adjunction here is the required one.",
+   "text": "Apply [lem-sfb-coefficient-mate-module-hom-comparison] with $F=f^*_{\\Ab}$, $G=f_*^{\\Ab}$, $B=\\Lambda_Y$, $A=\\Lambda_X$, $\\alpha=\\alpha_f$. Use the sheaf adjunction [def-sfb-finite-upper-lower-star-adjunction] with mate monoidal structures [def-sfb-finite-upper-star-monoidal], [def-sfb-finite-lower-star-lax-monoidal], and the scalar adjunction [sk-def-sfb-change-of-scalars]. The mate formula in [sk-def-sfb-coefficient-morphisms] is $\\eta_f=G(\\alpha_f)u_B$. Thus the lemma identifies the composite right adjoint with step 1 by the identity on underlying sheaves and gives exactly the required natural Hom bijection. This is the construction of [def-sfb-module-upper-lower-adjunction].",
    "uses": [
+    "lem-sfb-coefficient-mate-module-hom-comparison",
+    "sk-def-sfb-coefficient-morphisms",
     "def-sfb-module-upper-lower-adjunction",
-    "sk-def-sfb-coefficient-morphisms"
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "def-sfb-finite-upper-star-monoidal",
+    "def-sfb-finite-lower-star-lax-monoidal",
+    "sk-def-sfb-change-of-scalars"
    ],
    "elementary": false,
    "source": {
@@ -60,7 +55,7 @@
    }
   },
   {
-   "text": "Fix $f:X\\to Y$, $g:Y\\to Z$, and set $P=f_*^{\\Ab}$, $Q=g_*^{\\Ab}$, $H=(g\\circ f)_*^{\\Ab}$. Let $c:QP\\cong H$ be [lem-sfb-pushforward-comp-monoidal]. The canonical coefficient maps satisfy $\\eta_{g\\circ f}=c_{\\Lambda_X}\\circ Q(\\eta_f)\\circ\\eta_g$ by [lem-sfb-eta-comp]. Its explicit coefficient construction agrees with the present one: [def-sfb-finite-upper-star-comp] defines the forward pullback comparison as the conjugate of $c$; [def-sfb-pullback-from-point-comp-iso] uses its inverse at $(h,\\pi_B)$, precomposed with the inverse image from the point; and [def-sfb-alpha] takes its component at $\\Lambda$. These are precisely $m_{h,\\pi_B}$ and $\\alpha_h$ in the cited eta lemma. Thus that lemma applies to the coefficient maps in the unchanged statement, without an extra hypothesis.",
+   "text": "For $f:X\\to Y$, $g:Y\\to Z$, let $P=f_*^{\\Ab}$, $Q=g_*^{\\Ab}$, $H=(gf)_*^{\\Ab}$. Their composition comparison $c:QP\\cong H$ is monoidal by [lem-sfb-pushforward-comp-monoidal]. Apply [lem-sfb-eta-comp] to obtain $\\eta_{gf}=c_{\\Lambda_X}Q(\\eta_f)\\eta_g$. Its conventions apply: [def-sfb-finite-upper-star-comp] is the conjugate of $c$; [def-sfb-pullback-from-point-comp-iso] takes its inverse at $(h,\\pi_B)$ and precomposes with $p^*$; [def-sfb-alpha] evaluates at $\\Lambda$. These are precisely the $m_{h,\\pi_B}$ and $\\alpha_h$ used by the eta lemma.",
    "uses": [
     "lem-sfb-pushforward-comp-monoidal",
     "lem-sfb-eta-comp",
@@ -71,85 +66,60 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/sk-def-sfb-module-pushforward-pullback.proof.md",
-    "place": "Pushforward-composition sentence; extraction of the former long step 4"
+    "place": "pushforward composition: canonical coefficient convention"
    }
   },
   {
-   "text": "Apply [lem-sfb-restricted-transport-comparison-linear] with the three categories of abelian pro-étale sheaves on $X,Y,Z$, $F=P$, $G=Q$, the above $H$, $e=c$, $A=\\Lambda_X$, $B=\\Lambda_Y$, $B'=\\Lambda_Z$, $\\psi=\\eta_f$, $\\psi'=\\eta_g$, and $\\varphi=\\eta_{g\\circ f}$. The pushforwards are lax monoidal and $c$ is monoidal by [lem-sfb-pushforward-comp-monoidal]; all coefficient maps are ring morphisms by [sk-def-sfb-coefficient-morphisms]; the compatibility hypothesis is the identity just obtained from [lem-sfb-eta-comp]. By the definition [def-sfb-module-lower-star], the lemma's $L(M)$ is $g_*f_*M$ and its $R(M)$ is $(g\\circ f)_*M$. Its conclusion therefore makes $c_M$ a $\\Lambda_Z$-linear map, with exactly the given underlying sheaf comparison.",
+   "text": "Apply [lem-sfb-restricted-transport-comparison-linear] with $F=P$, $G=Q$, $H$, $e=c$, $A=\\Lambda_X$, $B=\\Lambda_Y$, $B'=\\Lambda_Z$, $\\psi=\\eta_f$, $\\psi'=\\eta_g$, $\\varphi=\\eta_{gf}$: $c$ is monoidal and $\\varphi=c_AQ(\\psi)\\psi'$ by step 3, and [sk-def-sfb-coefficient-morphisms] supplies ring morphisms; so each $c_M$ is $\\Lambda_Z$-linear. Then apply [lem-sfb-coefficient-composition-module-comparison] with these $P,Q,H,c$, $A,B,C=\\Lambda_X,\\Lambda_Y,\\Lambda_Z$ and $(\\psi,\\chi,\\varphi)=(\\eta_f,\\eta_g,\\eta_{gf})$; its linearity hypothesis is the one just obtained. Step 1 identifies $T_P,T_Q,T_H$ with the module pushforwards. The lemma yields their natural module isomorphism with underlying $c_M,c_M^{-1}$. With the adjunctions of step 2, it also gives $(gf)^*\\cong f^*g^*$, with conjugate $\\delta$ and the stated unit equation.",
    "uses": [
     "lem-sfb-restricted-transport-comparison-linear",
-    "lem-sfb-pushforward-comp-monoidal",
-    "sk-def-sfb-coefficient-morphisms",
-    "lem-sfb-eta-comp",
-    "def-sfb-module-lower-star"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/sk-def-sfb-module-pushforward-pullback.proof.md",
-    "place": "Pushforward-composition sentence; extraction of the former long step 4"
-   }
-  },
-  {
-   "text": "Write $a_M,b_M$ for the two module actions. The preceding linearity equation is $c_Ma_M=b_M(1\\otimes c_M)$. Precompose with $1\\otimes c_M^{-1}$ and postcompose with $c_M^{-1}$ to obtain $c_M^{-1}b_M=a_M(1\\otimes c_M^{-1})$; hence the inverse is linear too by [sk-def-sfb-module-objects]. For a module map $u:M\\to N$, naturality of $c$ from [lem-sfb-pushforward-comp-monoidal] gives $H(u)c_M=c_NQP(u)$. These are also the module functors' underlying maps by [def-sfb-module-lower-star]. The forgetful functor is faithful since module morphisms are underlying maps satisfying the linearity equation [sk-def-sfb-module-objects]. Thus the components and inverses form a natural module isomorphism, and their underlying maps are $c_M$ and $c_M^{-1}$. This is the lifting specified by [def-sfb-module-lower-star-comp].",
-   "uses": [
-    "sk-def-sfb-module-objects",
-    "lem-sfb-pushforward-comp-monoidal",
-    "def-sfb-module-lower-star",
-    "def-sfb-module-lower-star-comp"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/sk-def-sfb-module-pushforward-pullback.proof.md",
-    "place": "Pushforward-composition sentence; extraction of the former long step 4"
-   }
-  },
-  {
-   "text": "Let $L_1=(g\\circ f)^*$, $R_1=(g\\circ f)_*$, $L_2=f^*\\circ g^*$, and $R_2=g_*\\circ f_*$. The adjunction of [def-sfb-module-upper-lower-adjunction] for $g\\circ f$ gives $L_1\\dashv R_1$. Applied to $g$ and $f$, and composed using [def-weil-pbc-composite-adjunction], it gives $L_2\\dashv R_2$. Let $\\delta:R_2\\xrightarrow{\\sim}R_1$ be steps 4–6. Apply [lem-weil-pbc-conjugate-iso-unit-equation] to these two adjunctions and $\\delta$. It gives the unique natural isomorphism $a:L_1\\xrightarrow{\\sim}L_2$ satisfying $R_1(a_M)\\circ u_{1,M}=\\delta_{L_2M}\\circ u_{2,M}$. Define the required pullback-composition isomorphism $(g\\circ f)^*\\cong f^*\\circ g^*$ to be this $a$. Its hom is conjugate to $\\delta$, equivalently it is the inverse of the conjugate of $\\delta^{-1}$. This is the comparison of [def-sfb-module-upper-star-comp]: its defining conjugate is $\\delta$, and the inverse comparison has conjugate $\\delta^{-1}$. The current component statement explicitly distinguishes these directions and agrees with the displayed unit equation. This is exactly uniqueness of left adjoints and requires no invertibility assumption on $\\alpha_f$.",
-   "uses": [
-    "def-sfb-module-upper-lower-adjunction",
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-sfb-module-upper-star-comp"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/sk-def-sfb-module-pushforward-pullback.proof.md",
-    "place": "last sentence: pullback composition"
-   }
-  },
-  {
-   "text": "Finally [sk-def-sfb-coefficient-morphisms] states that $\\alpha_f$ underlies an isomorphism of ring objects. This justifies the assertion in the statement that $\\alpha_f$ is invertible. Steps 1 and 2 use only its given ring morphism and its mate $\\eta_f$, step 3 uses the mate relation, and steps 4–7 use their canonical composition comparisons. None of these definitions replaces extension of scalars by restriction along a chosen inverse. Thus the definitions apply uniformly to general commutative condensed $\\Lambda$, with the indicated coefficient rings as specializations.",
-   "uses": [
+    "lem-sfb-coefficient-composition-module-comparison",
     "sk-def-sfb-coefficient-morphisms"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/_section.md",
-    "place": "statement, pullback clause and final paragraph"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/sk-def-sfb-module-pushforward-pullback.proof.md",
+    "place": "composition sentences: action lift and left adjoints"
+   }
+  },
+  {
+   "text": "These comparisons are [def-sfb-module-lower-star-comp] and [def-sfb-module-upper-star-comp], respectively, by their specified underlying comparison and conjugate. Finally [sk-def-sfb-coefficient-morphisms] gives invertibility of $\\alpha_f$; neither extracted lemma assumes it. Extension along the forward morphism is therefore retained uniformly for all commutative condensed $\\Lambda$.",
+   "uses": [
+    "def-sfb-module-lower-star-comp",
+    "def-sfb-module-upper-star-comp",
+    "sk-def-sfb-coefficient-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/sk-def-sfb-module-pushforward-pullback.proof.md",
+    "place": "comparison identification and final coefficient paragraph"
    }
   }
  ],
  "proof_deps": [
   "def-sfb-module-lower-star",
   "def-sfb-module-upper-star",
-  "def-sfb-module-upper-lower-adjunction",
+  "lem-sfb-coefficient-mate-module-hom-comparison",
   "sk-def-sfb-coefficient-morphisms",
+  "def-sfb-module-upper-lower-adjunction",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-finite-lower-star-lax-monoidal",
+  "sk-def-sfb-change-of-scalars",
   "lem-sfb-pushforward-comp-monoidal",
   "lem-sfb-eta-comp",
   "def-sfb-finite-upper-star-comp",
   "def-sfb-pullback-from-point-comp-iso",
   "def-sfb-alpha",
   "lem-sfb-restricted-transport-comparison-linear",
-  "sk-def-sfb-module-objects",
+  "lem-sfb-coefficient-composition-module-comparison",
   "def-sfb-module-lower-star-comp",
-  "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
   "def-sfb-module-upper-star-comp"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/sk-def-sfb-module-pushforward-pullback.proof.md",
-  "place": "entire proof, with explicit construction checks and the exact eta-composition statement"
+  "place": "entire proof, retaining the coefficient convention check and extracting the scalar-mate and composition comparison arguments"
  },
  "mathlib_searches": [
   {
@@ -294,23 +264,15 @@
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-module-pushforward-pullback",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "sk-def-sfb-module-pushforward-pullback",
   "worker": "stage1",
-  "summary": "Q115 repair of the human long-step return: preserve the statement, Lean record and route. Extract the generic iterated-transport linearity argument into one statement-only node with an exact sorry-free project attachment candidate. Replace former step 4 by the existing canonical coefficient identification, an explicit application of that linearity criterion, and a short inverse/naturality calculation. Preserve the other proof steps and all prior searches.",
-  "blueprint": "Steps 1–3 realize the first sentence of the blueprint proof; steps 4–6 realize pushforward composition, with the hidden generic linearity lemma extracted from former step 4; step 7 realizes the final pullback-composition sentence; step 8 retains the invertibility check in the statement. No unit route change.",
+  "summary": "Repair the explicit 2026-10-21/22 re-split return: keep the statement and all maintainer metadata, extract two independent statement-only comparison lemmas, and assemble the original functors, adjunction and composition comparisons in fewer than 3000 proof characters. Preserve the complete previous eight-step argument and an extraction map in report.md. New nodes have self-contained generic hypotheses, action and Hom equations, recorded searches, no proofs, and status unsplit.",
+  "blueprint": "Step 1 realizes the two functor clauses; step 2 the first-sentence adjunction; step 3 retains the canonical eta-composition convention; steps 4–5 realize both composition sentences and the final invertibility check. Both new nodes originate at this blueprint unit; no route change.",
   "tool_uses": [
    {
-    "node": "def-weil-pbc-composite-adjunction",
-    "why": "Generic adjunction composition constructs the composite of the two module adjunctions; the same-unit component prose uses this formal operation without a separate general statement."
-   },
-   {
-    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
-    "why": "Generic adjunction conjugation gives the explicit unit equation for the canonical pullback-composition comparison of the corrected same-unit component."
-   },
-   {
     "node": "lem-sfb-eta-comp",
-    "why": "The unit proof explicitly requests eta compatibility for the canonical coefficient maps. This coefficient-unit lemma supplies precisely that identity as a generic compatibility tool; it does not replace the module-object route."
+    "why": "The unit explicitly calls for compatibility of canonical coefficient maps with composition; this is its exact coefficient-tool statement."
    }
   ]
  },
@@ -320,14 +282,193 @@
   "lem-sfb-eta-comp"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q115-ea12e941c",
-  "group": "Q115",
+  "reviewer": "NT-cc-NA-8a8ce679e",
+  "group": "NA",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-ea12e941c (reviewer sub-agent of L); spot-checked: Read everything in full: the item, all 8 steps, the new node lem-sfb-restricted-transport-comparison-linear, the statement of every cited node, the blueprint main-20261015 _section.md (order 867), sk-def-sfb-module-pushforward-pullback.proof.md and def-sfb-module-lower-star-comp.proof.md, the unit record, and slopmaster2 Mod.lean:140-260 and 404-450. The item statement is unchanged from the accepted version and matches the blueprint clause by clause: general commutative Λ, Ab-valued pro-étale sheaves, forward α_f, nothing weakened. Step 4: the m_{a,b} and α_h of lem-sfb-eta-comp equal the comparisons of def-sfb-finite-upper-star-comp, def-sfb-pullback-from-point-comp-iso and def-sfb-alpha. Conjugation reverses direction and respects inverses (conj(m)=c^{-1}, so conj(m^{-1})=c), so the step is rightly marked elementary. Step 5: every hypothesis of the new lemma is matched (F=f_*, G=g_*, H=(gf)_*, e=c with the composite lax structure, ψ=η_f, ψ'=η_g, φ=η_{gf}); the compatibility is the eta-comp identity, and L(M)=g_*f_*M, R(M)=(gf)_*M by def-sfb-module-lower-star. Step 6 is a short, genuinely elementary inverse and naturality argument. Step 7: I checked by hand, through η1-naturality and the triangle identity, that the unit equation of lem-weil-pbc-conjugate-iso-unit-equation characterises the conjugate, giving b:h^*→f^*g^* with conjugate c as in def-sfb-module-upper-star-comp. New node: I proved it by hand (naturality of μ^G and e, then the tensor half of monoidality) and tested it with identity functors and e=id, M=0, non-invertible e and zero rings. It is statement-only, self-contained, single-escaped TeX, and cites nodes that define every notion it uses. It is not a restatement of a clause of the item, and an rg duplicate search over all of dag/nodes found nothing equivalent (nearest: det-def-sfb-ring-object-transport, def-sfb-modobj-transport-adjunction, lem-sfb-monoidal-adjunction-unit-counit). It matches CategoryTheory.Functor.act_comp_app_of_isMonoidal (Mod.lean:416-432) exactly; the 7d675a26 sorry map records s=false, ts=false. The lean_candidates record is accurate and lean_audit is correctly left to the maintainer. Accepted tool_uses: def-weil-pbc-composite-adjunction and lem-weil-pbc-conjugate-iso-unit-equation (Mathlib leaves); lem-sfb-eta-comp (unit sk-prop-sfb-cartesian-coefficients, which the blueprint proof cites for η compatibility). No SGA. Observation, not a fault: steps 4-6 re-derive the existing def-sfb-module-lower-star-comp through the new lemma; this is correct and is what the long-step return asked for. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-8a8ce679e (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, together with the repair note (human re-split, 2026-10-22: at least 2 comparable new nodes, proof at most 3000 characters) and the blueprint main-20261015 proof.md. The live item is still the 8-step base proof, so the delivery is not superseded. The statement, stmt_deps, source and lean are unchanged. Steps were redistributed as follows. Old step 3 became the new node lem-sfb-coefficient-mate-module-hom-comparison. I checked: eta=G(alpha)u_B is a monoid map; the action identity follows from naturality of mu^G; the Hom bijection t->G(t~)u_M has inverse s->(v_N F s)#; alpha is never inverted. Small cases: F=G=id with alpha Z->Z/2, and alpha=1. Old steps 6–7 became the new node lem-sfb-coefficient-composition-module-comparison. I checked the a_M/b_M formulas, inverse linearity, naturality, uniqueness through the faithful forgetful functor, and the conjugate direction (L1=S_H, R2=T_QT_P, delta:R2->R1, with the conjugate formula checked against the unit equation). This matches def-sfb-module-upper-star-comp. Old step 4 stays as parent step 3; the m_{a,b} conventions of eta-comp agree with def-sfb-finite-upper-star-comp. The two new statements are 2280 and 2212 characters, which is comparable, and neither restates the item. Fault 1: theta in node 1 is a special case of def-sfb-comap-mapmod-square (G, phi_Y=1_B, phi_X=alpha, eta_R=u_B, eta_S=eta). FIX: theta is pinned to that node and it is added to stmt_deps; this creates no cycle. Fault 2: node 2 restated lem-sfb-restricted-transport-comparison-linear (the Q115 node of this same item), and the parent dropped its citation, which left that node uncited anywhere in the DAG (rg -L over the snapshot and live). FIX: forward linearity is now a hypothesis of node 2, and parent step 4 first applies the existing lemma with F=P, G=Q, e=c, psi=eta_f, psi'=eta_g, phi=eta_gf. That restores old step 5. The parent proof is 2819 characters after the fix. Fixes are under fixes/dag/nodes/sec-proetale-coefficients/ (both new nodes and the item). No SGA is used, and the new nodes cite only generic category-theory nodes. Maintainer note: the blueprint proof is a pure assembly of existing component nodes; the new nodes are generic forms of what def-sfb-module-upper-lower-adjunction and lower/upper-star-comp state in the pro-étale case.; 3 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar",
+    "AlgebraicGeometry.ProEtale.CondensedRing.preservesFiniteLimits_lowerStar",
+    "AlgebraicGeometry.ProEtale.CondensedRing.upperStar",
+    "AlgebraicGeometry.ProEtale.CondensedRing.upperStarLowerStarAdjunction",
+    "AlgebraicGeometry.ProEtale.isMonoidal_lowerStarComp",
+    "AlgebraicGeometry.ProEtale.CondensedRing.lowerStarComp",
+    "AlgebraicGeometry.ProEtale.CondensedRing.upperStarComp",
+    "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_comp_forget",
+    "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_obj_X",
+    "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_obj_smul",
+    "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_additive",
+    "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_comp_forget",
+    "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_obj",
+    "AlgebraicGeometry.ProEtale.CondensedRing.comapPullbackHomCompIso",
+    "AlgebraicGeometry.ProEtale.CondensedRing.comapCondensedPushforwardHomComp"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      85,
+      91
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.preservesFiniteLimits_lowerStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      121,
+      125
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.upperStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      133,
+      139
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.upperStarLowerStarAdjunction",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      213,
+      220
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.isMonoidal_lowerStarComp",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal",
+     "lines": [
+      120,
+      124
+     ],
+     "kind": "theorem",
+     "sorry": true
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.lowerStarComp",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      279,
+      295
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.upperStarComp",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      297,
+      303
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_comp_forget",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      97,
+      100
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_obj_X",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      103,
+      105
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_obj_smul",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      108,
+      115
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_additive",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      117,
+      119
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_comp_forget",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      144,
+      149
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_obj",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      151,
+      154
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.comapPullbackHomCompIso",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      202,
+      211
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.comapCondensedPushforwardHomComp",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      263,
+      277
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar",

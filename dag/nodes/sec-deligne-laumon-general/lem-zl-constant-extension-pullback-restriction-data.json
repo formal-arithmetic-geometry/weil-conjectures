@@ -1,0 +1,136 @@
+{
+ "id": "lem-zl-constant-extension-pullback-restriction-data",
+ "kind": "statement",
+ "title": "Restriction data from the constant-extension sheet equivalence",
+ "statement": "For the fixed constant extension, there exists an equivalence e between the original-model and extension-model common-stage Weil sheaf categories such that its restriction functor has ConstantExtensionRestrictionSpec, preserves finite limits and finite colimits, and its composite with e.inverse is naturally isomorphic to zlWeilPull along the constant-extension projection.",
+ "stmt_deps": [
+  "lem-zl-constant-extension-sheet-heart-coordinates",
+  "def-zl-constant-extension-restriction-local-data"
+ ],
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7)--(1.1.10), pp.150--152; restriction, exactness, and inverse comparison before direct image."
+ },
+ "proof": [
+  {
+   "text": "Apply sheetReturnExactFunctor to obtain a sheet-return functor T with ConstantExtensionSheetSpec and T.IsEquivalence. Let e=T.asEquivalence. Construct the carrier comparison by whiskering the SheetSpec comparison and composing with the inverse of the prescribed sheet/projection compositor. Substitute pullbackSheetReturnComparison in the SheetSpec structure equation to obtain ConstantExtensionRestrictionSpec for actual inverse image followed by T.",
+   "uses": [
+    "lem-zl-sheet-return-exact-functor",
+    "lem-zl-pullback-sheet-return-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The already proved source theorem PadicAlgCl.nonempty_ringEquiv_complex applies Mathlib's classification IsAlgClosed.ringEquiv_of_equiv_of_charZero to the canonical p-adic algebraic closure and ℂ: their cardinalities are continuum, both are algebraically closed of characteristic zero, and continuum is uncountable. Transport the resulting field isomorphism along algebraic-closure uniqueness (IsAlgClosure.equiv) to choose Ω ≃+* ℂ. Only these closed field/cardinality facts are needed, not any weight theorem or the stronger extension-of-embeddings statement. This parameter lets zlWeilHeartLocalizationExact supply carrier-heart kernel and cokernel creation data. Its forgetful functors are additive, preserve kernels and cokernels, hence preserve finite limits and colimits; they also reflect isomorphisms, hence reflect these finite universal properties. The actual heart inverse image is exact by constructible_pullback_t_exact, and its composite with carrier forgetting is definitionally the composite of Weil inverse image with carrier forgetting. Reflect finite limits and colimits to obtain exactness of Weil inverse image. The constant-extension original model is separated because its structure map is the composite of the base change of the separated structure morphism with a morphism of affine spectra. Compose with the equivalence T to obtain the two exactness clauses.",
+   "uses": [
+    "lem-zl-weil-heart-localization-exact",
+    "lem-a1-constructible-pullback-t-exact",
+    "def-dl-a1-constant-extension-data",
+    "def-zl-weil-ind-sheaf-category",
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-weil-padic-algebraic-closure-cardinality",
+    "lem-weil-complex-cardinality",
+    "lem-weil-complex-algebraically-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any equivalence e, restriction followed by e.inverse is actual inverse image followed by e.functor followed by e.inverse. The associator, the inverse of e.unitIso whiskered by actual inverse image, and the right unitor give the required natural isomorphism. No local-operator or weight clause of the parent constant-extension theorem is used.",
+   "uses": [
+    "def-zl-constant-extension-restriction-local-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-sheet-return-exact-functor",
+  "lem-zl-pullback-sheet-return-comparison",
+  "lem-zl-weil-heart-localization-exact",
+  "lem-a1-constructible-pullback-t-exact",
+  "def-dl-a1-constant-extension-data",
+  "def-zl-weil-ind-sheaf-category",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-weil-padic-algebraic-closure-cardinality",
+  "lem-weil-complex-cardinality",
+  "lem-weil-complex-algebraically-closed",
+  "def-zl-constant-extension-restriction-local-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Paragraph after (1.1.10), p.152; reuse the existing sheet-return equivalence and prove the carrier-isomorphism and finite-limit glue directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "equivalence of cyclic fixed-pair categories with exact restriction functor",
+   "results": "No exact generic theorem; project sheet-coordinate declarations provide the data.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact equivalence of Weil sheaf categories under finite constant extension",
+   "results": "No exact generic theorem; project-specific declarations are required.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "constantExtensionSheetHeartCoordinates ConstantExtensionRestrictionSpec",
+   "results": "Found the project coordinate and restriction-data declarations.",
+   "verdict": "project declarations used",
+   "date": "2026-10-26"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantExtensionPullbackReturnResidue",
+  "date": "2026-10-26",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-constant-extension-sheet-heart-coordinates",
+   "place": "Restriction functor, exactness, and inverse comparison clauses.",
+   "via": [
+    "lem-zl-constant-extension-sheet-heart-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantExtensionPullbackReturnResidue",
+  "file": "lean/Sheaf/Paper/ConstantExtensionPullbackReturnResidue.lean",
+  "declaration": "WeilConjectures.constantExtensionRestriction_data",
+  "statement": "theorem constantExtensionRestriction_data : ∃ e : sfCommonStageWeilSheaf D l hl (constantExtensionOriginalModel D m hm X₀) Ω ≌ sfCommonStageWeilSheaf (constantExtensionDatum D m hm) l hl (constantExtensionModel D m hm X₀) Ω, ConstantExtensionRestrictionSpec D m hm X₀ l hl Ω (constantExtensionRestriction D m hm X₀ l hl Ω e) ∧ PreservesFiniteLimits (constantExtensionRestriction D m hm X₀ l hl Ω e) ∧ PreservesFiniteColimits (constantExtensionRestriction D m hm X₀ l hl Ω e) ∧ Nonempty (constantExtensionRestriction D m hm X₀ l hl Ω e ⋙ e.inverse ≅ zlWeilPull D l hl Ω (constantExtensionProjection D m hm X₀))",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261025T210734-L-3577143",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261026T071247-L-3907111",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

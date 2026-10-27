@@ -1,0 +1,254 @@
+{
+ "id": "lem-weil-pbc-open-relative-line-principal-geometry",
+ "kind": "statement",
+ "title": "Principal-open geometry of an open relative affine line",
+ "statement": "Let $Y=\\operatorname{Spec}R$ be a Noetherian affine scheme [def-pc-scheme], where Noetherian means locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. Put $A=\\mathbf A^1_Y=\\operatorname{Spec}R[t]$ [def-nagata-relative-affine-space]. For $s\\in R[t]$ write $D(s)=\\{\\mathfrak p:s\\notin\\mathfrak p\\}$ with its open subscheme structure. For every open subscheme $U\\subseteq A$, the schemes $A,U$ are Noetherian and quasi-separated, the restricted projection $U\\to Y$ is separated of finite type [def-weil-pbc-scheme-conventions], and there are $r\\geq0$ and $s_1,\\ldots,s_r\\in R[t]$ with $D(s_i)\\subseteq U$ and $U=\\bigcup_iD(s_i)$. Every nonempty finite intersection of this family is $D(s_{i_1}\\cdots s_{i_k})$ and is affine; its projection to $Y$ is affine, separated, of finite type, and smooth of relative dimension one [pqf-def-affine-morphism] [def-sbc-smooth-morphisms]. More generally, these properties hold for $D(s)\\to Y$ for every $s\\in R[t]$. If $g:T\\to D(s)$ is finite etale and $T'\\subseteq T$ is open and closed, then $T'$ is affine and Noetherian and the composite $T'\\to D(s)\\to Y$ is affine, separated, of finite type, and smooth of relative dimension one. Empty opens, the empty cover when $U=\\varnothing$, and empty $T'$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01T6 (lemma-finite-type-noetherian), 01VC (lemma-open-immersion-smooth), 02NL (lemma-composition-relative-dimension-d); Schemes Tag 01I3 (lemma-standard-open-affine). Principal-cover expansion of the Noetherian-open reduction in more-etale.tex, lemma-loc-constant-shriek-rel-dim-1."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-nagata-relative-affine-space",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For p = Spec(Polynomial.C), prove SmoothOfRelativeDimension 1 directly on the specified polynomial chart: transport MvPolynomial.isStandardSmoothOfRelativeDimension for the singleton variable type Unit through MvPolynomial.uniqueAlgEquiv, then use RingHom.locally_of and HasRingHomProperty.Spec_iff. This avoids identifying Spec R[t] with the separately constructed relative affine space. SmoothOfRelativeDimension.smooth gives Smooth p and the existing smooth/finite-presentation instances give LocallyOfFiniteType p. Since the source and target are affine, p is affine and separated.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equivalence isLocallyNoetherian_Spec makes R Noetherian. Hilbert basis and the Spec instance make Spec R[t] Noetherian. The open U is locally Noetherian by restriction and compact because every subset of a Noetherian space is compact, hence Noetherian. Local Noetherianity gives quasi-separatedness. The restricted projection U -> Spec R is separated and locally of finite type by the open-immersion and composition instances, and quasi-compact because its source has Noetherian topology.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-immersion-base-change-lft"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Index the basic opens D(s) contained in U by the subtype B of such polynomials. The basis theorem covers U by this family. Apply IsCompact.elim_finite_subcover to obtain a finite subset t of B. The equivalence (Fintype.equivFin t).symm enumerates its elements by Fin (card t). The subset conditions and the finite-subcover equality give the required finite principal cover, including the empty case.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every finite subset J of indices, pass to underlying sets using Opens.coe_iInf (the indexing subtype is finite). Membership in the intersection means that no indexed polynomial belongs to the prime. Ideal.IsPrime.prod_mem_iff says exactly that the finite product belongs to the prime iff some factor does. Thus the intersection is the basic open of the product. IsAffineOpen.Spec_basicOpen makes it affine. The calculation even holds when J is empty.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary polynomial s, use IsAffineOpen.Spec_basicOpen to make D(s) affine. Its open inclusion has SmoothOfRelativeDimension 0 directly by Mathlib; compose with p using smoothOfRelativeDimension_comp to obtain relative dimension 0+1=1. Smoothness gives local finite presentation and local finite type. A map between affine schemes is affine, hence separated and quasi-compact. No nonemptiness is required.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-sbc-smooth-morphisms",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let g:T -> D(s) be finite etale and V an open and closed subscheme of T. The finite map makes T affine. The inclusion V -> T has inducing underlying map and closed range (Scheme.Opens.range_ι), so Mathlib isAffineHom_of_isInducing makes it affine directly, without constructing a closed immersion. Hence V is affine. Etale g has relative dimension zero directly in Mathlib. Compose g with D(s) -> Spec R, and then the open inclusion V -> T, to obtain relative dimension one. Its smoothness gives local finite type. Its affine source and target give affineness, separatedness and quasi-compactness. LocallyOfFiniteType.isLocallyNoetherian makes V locally Noetherian; affineness supplies compactness, so V is Noetherian. All arguments apply to empty V and empty D(s).",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-trf-closed-embedding-affine",
+    "def-sbc-smooth-morphisms",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-trf-closed-embedding-affine",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKY Noetherian-open reduction, with polynomial standard smoothness (00T6, 00T7), principal-open affineness (01I3), composition of relative dimensions (02NL), finite-type Noetherianity (01T6), and the shorter closed-embedding affineness argument (04DE); implemented by C4 from Mathlib and the proved source polynomial-presentation instance."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An open subscheme of the affine line over a noetherian affine scheme has a finite principal open cover with all intersections affine smooth of relative dimension one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} [Finite ι] {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$ and a finite family of affine open subsets $\\\\{S_i\\\\}$ whose union is $X$, $X$ is Noetherian if and only if the ring of sections $\\\\Gamma(X, S_i)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {𝒰 : X.OpenCover} [Finite 𝒰.I₀] [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)],\\n  AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing ↑((𝒰.X i).presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For a scheme $X$ with a finite affine open cover $\\\\{U_i\\\\}$, $X$ is Noetherian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(R : CommRingCat) → (AlgebraicGeometry.Spec R).OpenCover\", \"doc\": \"For any commutative ring $ R $, this constructs the open cover of the scheme $ \\\\operatorname{Spec}(R) $ by the standard affine open immersions $ \\\\operatorname{Spec}(R_r) \\\\to \\\\operatorname{Spec}(R) $, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{R : CommRingCat} →\\n  {ι : Type u_1} → (s : ι → ↑R) → Ideal.span (Set.range s) = ⊤ → (AlgebraicGeometry.Spec R).AffineOpenCover\", \"doc\": \"Given a commutative ring $ R $ and a set of elements $\\\\{s_i\\\\}$ whose ideal span is the unit ideal (i.e., $\\\\langle s_i \\\\rangle = R$), the localization morphisms $\\\\operatorname{Spec}(R_{s_i}) \\\\to \\\\opera\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$, if a family of affine open subsets $\\\\{S_i\\\\}$ covers $X$ (i.e., $\\\\bigcup_i S_i = X$), then $X$ is locally Noetherian if and only if the ring of global sections $\\\\Gamma(X, S_i)$ is a N\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)],\\n  AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing ↑((𝒰.X i).presheaf.obj (Opposite.op ⊤))\", \"doc\": \"A scheme $X$ is locally Noetherian if and only if, for every affine open cover $\\\\{U_i\\\\}$ of $X$, the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for each index $i$.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i)))) → AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $ X $ admits an affine open cover $ \\\\{S_i\\\\} $ such that the union of all $ S_i $ is $ X $ and each ring of global sections $ \\\\Gamma(S_i) $ is Noetherian, then $ X $ is a locally Noetherian\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match: returned general affine-cover, Noetherian and smoothness tools do not give the finite principal-cover geometry and finite-etale component conclusion in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale cover of a principal affine open in the relative affine line is affine separated of finite type and smooth of relative dimension one over the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any scheme $ S $ and type $ n $, the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an affine morphism of schemes. This follows from the construction of $ \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match: returned general affine-cover, Noetherian and smoothness tools do not give the finite principal-cover geometry and finite-etale component conclusion in one specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"IsAffine\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match: returned general affine-cover, Noetherian and smoothness tools do not give the finite principal-cover geometry and finite-etale component conclusion in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "principal.*[Ss]mooth|[Ss]mooth.*principal|[Nn]oetherian.*[Aa]ffineSpace|[Aa]ffineSpace.*[Nn]oetherian",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match: returned general affine-cover, Noetherian and smoothness tools do not give the finite principal-cover geometry and finite-etale component conclusion in one specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open relative affine line over a noetherian ring finite principal cover smooth relative dimension one",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{n : ℕ} →\\n  {X Y : AlgebraicGeometry.Scheme} →\\n    {f : X ⟶ Y} →\\n      {motive : AlgebraicGeometry.IsSmoothOfRelativeDimension n f → Sort u_1} →\\n        (t : AlgebraicGeometry.IsSmoothOfRelativeDimension n f) →\\n          ((exists_isStandardSmoothOfRelativeDimension :\\n                ∀ (x : ↥X),\\n    \", \"doc\": \"A recursor for the proposition that a morphism of schemes is smooth of relative dimension $n$. It allows proving properties about smooth morphisms by reducing to the case where the morphism is locally\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(X : Scheme.{u}) : OpenCover X\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineOpenCover.openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝒰 : X.AffineOpenCover) : X.OpenCover\", \"doc\": \"Given an affine open cover $\\\\mathcal{U}$ of a scheme $X$, this function constructs the corresponding open cover of $X$ by considering the same collection of affine open immersions as an open cover in \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(X : Scheme.{u}) : X.AffineOpenCover\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{𝒰 : Scheme.OpenCover.{v, u} X} [Finite 𝒰.I₀] [∀ i, IsAffine (𝒰.X i)] :\\n  IsNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing Γ(𝒰.X i, ⊤)\", \"doc\": \"For a scheme $X$ with a finite affine open cover $\\\\{U_i\\\\}$, $X$ is Noetherian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.openCover_affineOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(X : Scheme.{u}) : X.affineOpenCover.openCover = X.affineCover\", \"doc\": \"For any scheme $X$, the open cover constructed from the affine open cover of $X$ is equal to the affine cover of $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsOpenImmersion f] : IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match: returned general affine-cover, Noetherian and smoothness tools do not give the finite principal-cover geometry and finite-etale component conclusion in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open subscheme of the affine line over a Noetherian affine scheme has a finite principal open cover, and its finite etale covers are smooth of relative dimension one",
+   "results": "8 hits; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Etale, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero. ",
+   "date": "2026-10-22",
+   "verdict": "no exact match: general smoothness and affine-cover declarations do not state the conjunction or its finite-etale clopen-piece clause"
+  },
+  {
+   "tool": "grep",
+   "query": "principal.*[Ss]mooth|[Ss]mooth.*principal|[Nn]oetherian.*[Aa]ffineSpace|[Aa]ffineSpace.*[Nn]oetherian",
+   "results": "0 hits; . ",
+   "date": "2026-10-22",
+   "verdict": "no exact match: general smoothness and affine-cover declarations do not state the conjunction or its finite-etale clopen-piece clause"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite etale cover of a principal open in the affine line over a Noetherian affine scheme is affine and smooth of relative dimension one",
+   "results": "8 hits; AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion, AlgebraicGeometry.instIsAffineXSchemeAffineCover, AlgebraicGeometry.Scheme.AffineCover.ctorIdx, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.isAffine_affineOpenCover, AlgebraicGeometry.Scheme.affineCover. ",
+   "date": "2026-10-22",
+   "verdict": "no exact match: general smoothness and affine-cover declarations do not state the conjunction or its finite-etale clopen-piece clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmoothOfRelativeDimension\", \"IsNoetherian\"",
+   "results": "0 hits; . ",
+   "date": "2026-10-22",
+   "verdict": "no exact match: general smoothness and affine-cover declarations do not state the conjunction or its finite-etale clopen-piece clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite principal-open coverings of open subsets of affine Noetherian schemes with affine intersections and relative dimension one finite etale covers",
+   "results": "8 hits; AlgebraicGeometry.Scheme.AffineCover, AlgebraicGeometry.Scheme.affineBasisCover, AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover, AlgebraicGeometry.Scheme.OpenCover.affineRefinement, AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.Scheme.AffineOpenCover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.affineOpenCover. ",
+   "date": "2026-10-22",
+   "verdict": "no exact match: general smoothness and affine-cover declarations do not state the conjunction or its finite-etale clopen-piece clause"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+  "date": "2026-10-22",
+  "group": "Q16"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical constructibility input of thm-weil-pbc-direct-image-finiteness-proper: affine-cover expansion of the 0GKY Noetherian-open reduction and verification of the affine smooth dimension-one hypotheses of 0GKX (old item steps 1 and 5).",
+   "via": [
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-open-relative-line-principal-geometry",
+  "worker": "stage1",
+  "summary": "Expanded into eight steps using only existing DAG nodes: affine smooth projection, Noetherianity, restricted finite-type separated projection, finite principal cover, arbitrary principal-open smooth geometry, product intersections, affine clopen pieces of finite covers, and dimension-one smooth finite-type Noetherian composite. No new nodes and no statement change.",
+  "blueprint": "The classical constructibility input of thm-weil-pbc-direct-image-finiteness-proper, reached via etale-proper finiteness and open-relative-line constructibility: realizes the Noetherian-open reduction in 0GKY and the affine smooth dimension-one hypotheses required by 0GKX; the cover/intersection refinement is the immediate parent's steps 1 and 5.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic polynomial-space smoothness and relative dimension, used with n=1; the proper-base-change unit has no separate affine-space smoothness theorem."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic composition with an etale map preserves relative dimension; needed to check the smooth dimension-one hypotheses in the existing proper-base-change constructibility route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-relative-dimension-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-e0487d13e",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-e0487d13e (reviewer sub-agent of L); spot-checked: Read the item's statement and all 8 steps, every cited statement, Stacks 0GKY (more-etale.tex l.4612) and the parent's use of the item (parent steps 1, 3, 5, 8). No new nodes, the statement is unchanged, and no SGA is cited. Stacks tags checked against tags/tags: 01T6, 01VC, 02NL, 01I3, 01T3, 01WH, 035C, 02GP, 02GN, 01VA, 01SH, 01S7, 01TQ. Steps 1-4, 6 and 7 are correct as cited: the A^1 identification via def-nagata = def-sbc affine space; finite type via lfp -> affine-pair presentations -> lft + qc; Noetherianity, quasi-separatedness and quasi-compactness from the right nodes; finite principal subcover with r=0 for U empty; product-intersection identity; clopen inclusion is a closed immersion directly from the definition via the sheaf product on W; T and T' affine via finite-morphism permanence (b). One C4 fault, repaired: steps 5 and 8 take étale in the sense of def-weil-etale-morphism (from etale-composition-cancellation) and feed it into lem-sbc-smooth-relative-dimension-permanence(2), which needs smooth of relative dimension 0 in the def-sbc sense. That node's 'etale has m=0' is the sbc definition of étale, not a bridge. FIX: cite the on-route lem-weil-pbc-etale-smooth-zero-dimensional-fibres (sk-thm-p1, reviewed pass) in steps 5 and 8 and in proof_deps; no cycle. Edge cases tested: R=0, s nilpotent, s=1, U empty, T' empty, Y=Spec k with U=A^1 minus 0. No duplicate in the DAG. Accepted tool_uses: sbc-lem-affine-space-smooth and lem-sbc-smooth-relative-dimension-permanence, both generic, with no on-route equivalent.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenRelativeLinePrincipalGeometry",
+  "declaration": "AlgebraicGeometry.openRelativeLine_principal_geometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenRelativeLinePrincipalGeometry.lean",
+  "statement": "theorem openRelativeLine_principal_geometry (R : CommRingCat.{u}) [IsNoetherian (Spec R)] (U : (Spec (.of (Polynomial R))).Opens) : IsNoetherian (Spec (.of (Polynomial R))) ∧ QuasiSeparatedSpace (Spec (.of (Polynomial R))) ∧ IsNoetherian U.toScheme ∧ QuasiSeparatedSpace U.toScheme ∧ IsSeparated (U.ι ≫ Spec.map (CommRingCat.ofHom (Polynomial.C : R →+* Polynomial R))) ∧ LocallyOfFiniteType (U.ι ≫ Spec.map (CommRingCat.ofHom (Polynomial.C : R →+* Polynomial R))) ∧ QuasiCompact (U.ι ≫ Spec.map (CommRingCat.ofHom (Polynomial.C : R →+* Polynomial R))) ∧ (∃ (r : ℕ) (s : Fin r → Polynomial R), (∀ i : Fin r, PrimeSpectrum.basicOpen (s i) ≤ U) ∧ U = ⨆ i : Fin r, PrimeSpectrum.basicOpen (s i) ∧ ∀ J : Finset (Fin r), J.Nonempty → (⨅ i : J, PrimeSpectrum.basicOpen (s i.val)) = PrimeSpectrum.basicOpen (∏ i ∈ J, s i) ∧ IsAffineOpen (⨅ i : J, PrimeSpectrum.basicOpen (s i.val) : (Spec (.of (Polynomial R))).Opens)) ∧ (∀ s : Polynomial R, IsAffineOpen (X := Spec (.of (Polynomial R))) (PrimeSpectrum.basicOpen s) ∧ IsAffineHom (Scheme.Opens.ι (X := Spec (.of (Polynomial R))) (PrimeSpectrum.basicOpen s) ≫ Spec.map (CommRingCat.ofHom (Polynomial.C : R →+* Polynomial R))) ∧ IsSeparated (Scheme.Opens.ι (X := Spec (.of (Polynomial R))) (PrimeSpectrum.basicOpen s) ≫ Spec.map (CommRingCat.ofHom (Polynomial.C : R →+* Polynomial R))) ∧ LocallyOfFiniteType (Scheme.Opens.ι (X := Spec (.of (Polynomial R))) (PrimeSpectrum.basicOpen s) ≫ Spec.map (CommRingCat.ofHom (Polynomial.C : R →+* Polynomial R))) ∧ QuasiCompact (Scheme.Opens.ι (X := Spec (.of (Polynomial R))) (PrimeSpectrum.basicOpen s) ≫ Spec.map (CommRingCat.ofHom (Polynomial.C : R →+* Polynomial R))) ∧ SmoothOfRelativeDimension 1 (Scheme.Opens.ι (X := Spec (.of (Polynomial R))) (PrimeSpectrum.basicOpen s) ≫ Spec.map (CommRingCat.ofHom (Polynomial.C : R →+* Polynomial R)))) ∧ (∀ (s : Polynomial R) (T : Scheme.{u}) (g : T ⟶ Scheme.Opens.toScheme (X := Spec (.of (Polynomial R))) (PrimeSpectrum.basicOpen s)), IsFinite g → Etale g → ∀ V : T.Opens, IsClosed (V : Set T) → IsAffine V.toScheme ∧ IsNoetherian V.toScheme ∧ IsAffineHom (V.ι ≫ g ≫ Scheme.Opens.ι (X := Spec (.of (Polynomial R))) (PrimeSpectrum.basicOpen s) ≫ Spec.map (CommRingCat.ofHom (Polynomial.C : R →+* Polynomial R))) ∧ IsSeparated (V.ι ≫ g ≫ Scheme.Opens.ι (X := Spec (.of (Polynomial R))) (PrimeSpectrum.basicOpen s) ≫ Spec.map (CommRingCat.ofHom (Polynomial.C : R →+* Polynomial R))) ∧ LocallyOfFiniteType (V.ι ≫ g ≫ Scheme.Opens.ι (X := Spec (.of (Polynomial R))) (PrimeSpectrum.basicOpen s) ≫ Spec.map (CommRingCat.ofHom (Polynomial.C : R →+* Polynomial R))) ∧ QuasiCompact (V.ι ≫ g ≫ Scheme.Opens.ι (X := Spec (.of (Polynomial R))) (PrimeSpectrum.basicOpen s) ≫ Spec.map (CommRingCat.ofHom (Polynomial.C : R →+* Polynomial R))) ∧ SmoothOfRelativeDimension 1 (V.ι ≫ g ≫ Scheme.Opens.ι (X := Spec (.of (Polynomial R))) (PrimeSpectrum.basicOpen s) ≫ Spec.map (CommRingCat.ofHom (Polynomial.C : R →+* Polynomial R))))",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2699e276",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Single sorry'd theorem openRelativeLine_principal_geometry; item changed only in lean, dep nodes identical to side-live, statement verbatim. Every clause matches the node: Noetherian base via IsNoetherian (Spec R); A, U Noetherian and quasi-separated; U->Y separated, LocallyOfFiniteType and QuasiCompact; finite principal cover Fin r (r=0 allowed); nonempty Finset intersections = basicOpen of product and affine; for all s, D(s)->Y IsAffineHom/IsSeparated/LFT/QC/SmoothOfRelativeDimension 1; finite etale g with clopen V: affine, Noetherian, same five properties. Dependencies use their recorded Mathlib declarations; edge cases (R=0, U empty, s nilpotent or 1, empty T') covered; docstrings with source, blueprint and 8 proof steps; no lines over 100 chars; not on the dropped list; no compile needed (no changes, worker compile clean). Advisory: Spec R[t]/Polynomial.C model is faithful because the node names Spec R[t], but citer lisse-open-relative-line-constructibility uses AffineSpace (ULift (Fin 1)) (Spec R), so stage 3 needs AffineSpace.SpecIso transport; AffineSpace public import redundant."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261022T113903-L-369706",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -14,41 +14,41 @@
  },
  "proof": [
   {
-   "text": "Write B=B_X|U and T=B tensor_A P. The bounded finite-projective dual P^vee has degree-i term Hom_A(P^(-i),A) and differential (-1)^(i+1) times precomposition. Put H=(B tensor_A P^vee) tensor_B^L M. Finite-projective terms are idempotent summands of finite free terms; hence they are flat, and their tensor commutes with products and kernels. Boundedness makes the total dual complex K-flat and gives finite sums in every degree. Tensor the quotient-completion Roos triangle of M with this dual. Its products commute with this tensor, so H is the derived limit of its normalized reductions H_n=T_n^vee tensor^L M_n and is complete. Restriction to constant coefficients preserves those units and reductions. The individually given isomorphisms M_n isomorphic to T_n make each H_n a constant perfect complex. No compatibility of those isomorphisms is needed.",
+   "text": "For a triple t >= m >= n choose a single isomorphism e_t:R_t(T)≅R_t(M). Define e_m and e_n by reduction using adicResidueHomTower. The prescribed successor maps preserve identity and composition, by cancellation of the normalized reassociation and its inverse. Induction gives these identities for arbitrary transition arrows. Thus reduction of e_t and its inverse is an isomorphism at every lower level. The maps x↦x≫e_i.inv are bijective at the three levels and intertwine the arrow m→n and the composite t→n. This is a finite-triple range comparison with the endomorphism tower of T. No compatibility of the original markings and no completeness is used.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the quotient Hom/cohomology comparison with Q=P. Its successor compatibility extends to all arrows by induction, giving a finite-triple comparison of the endomorphism tower of T with constant-module sections of H^0 of the actual quotients of moduleHomComplex(P,P).",
    "uses": [
-    "lem-pc-kflat-closure",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-pur-derived-change-of-rings"
+    "lem-sfb-adic-perfect-hom-cohomology-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Weak contractibility makes evaluation on the slice exact. A free coefficient sheaf is projective there because its Hom is evaluation, and its finite direct summands are projective. The bounded projective complex T_n is K-projective. The derived-Hom bijection and finite-projective evaluation formula lambda tensor m sent to (p sent to lambda(p)m) identify H^0(U,H_n) with Hom(T_n,M_n). The dual signs and the tensor balancing formula commute with quotient maps, so the identifications respect the actual successor transitions in the statement, including both scalar-reassociation conjugations. Apply the constant-reductions Mittag-Leffler theorem to the complete restriction of H to constant A-coefficients: its residue constant value is perfect, and every reduction is independently constant. Transfer its Mittag-Leffler conclusion through those transition-compatible Hom identifications.",
+   "text": "The degree-one term of moduleHomComplex(P,P) is finite. Restriction to the finite support interval [c,d] embeds its cochains into the finite product Hom_A(P^i,P^(i+1)); outside that interval the source is zero. Over the Noetherian ring these Hom modules are finite, and an injective linear map into a finite module has finite source. Apply the Artin-Rees short-complex cohomology theorem to (moduleHomComplex P P).sc 0. Exact constant-module sections preserve the stabilized images.",
    "uses": [
-    "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
-    "lem-sc-bounded-above-projective-kprojective",
-    "lem-coef-kprojective-derived-hom-bijection",
-    "lem-sfb-wcontractible-constant-reductions-ml",
-    "lem-weil-pbc-constant-completion-equivalence"
+    "lem-sfb-adic-short-complex-cohomology-ml"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transfer Mittag-Leffler first to the endomorphism tower and then to the desired Hom tower using the two finite-triple comparisons. This completes the original statement without its completeness or affine hypotheses, whose binders are retained verbatim.",
+   "uses": [
+    "lem-sfb-finite-triple-range-ml-transfer"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-coef-kprojective-derived-hom-bijection",
-  "lem-pc-kflat-closure",
-  "lem-pur-derived-change-of-rings",
-  "lem-sc-bounded-above-projective-kprojective",
-  "lem-sfb-wcontractible-constant-reductions-ml",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "lem-sfb-adic-perfect-hom-cohomology-comparison",
+  "lem-sfb-adic-short-complex-cohomology-ml",
+  "lem-sfb-finite-triple-range-ml-transfer"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 09C5 and 09C6, dual-perfect tensor calculation and exact sections on each affine weakly contractible covering object."
+  "place": "Tags 09C5 and 09C6: finite-triple markings and fixed perfect Hom calculation, followed by Artin-Rees. The Hom tower is compared directly to the fixed model; no complete internal-Hom object is needed."
  },
  "mathlib_searches": [
   {
@@ -127,14 +127,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-9a1f0",
-  "group": "C4",
+  "reviewer": "COMPILER",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261021T022430-L-2846381",
+  "landing": "20261025T204757-L-3007874",
   "kind": "interface",
-  "note": "independent cc review: item theorem and 6 moved defs vs quarantine/Sheaf/Paper/AdicResidueLissePerfectLift.lean (byte-identical); 4 new sorry statements vs Stacks 09C6/09C5/099M/0940; --all compile of 7 modules clean; #print axioms checked"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

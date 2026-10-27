@@ -1,0 +1,31 @@
+{
+ "id": "sk-cor-tf-functional-equation",
+ "kind": "unit",
+ "chapter": "sec-trace-formula",
+ "title": "Functional equation",
+ "lean": [],
+ "uses": [
+  "sk-cor-tf-point-counting",
+  "sk-thm-derived-duality",
+  "sk-thm-frobenius",
+  "sk-thm-poincare-duality"
+ ],
+ "statement": "Let $X_0/\\mathbf F_q$ be smooth and proper of pure dimension $d$, and let\n$\\ell\\nmid q$. Put $H^i=H^i(X_{\\mathrm{pro\\acute et}},\\Ql)$, let $F_i$ be the\nendomorphism of $H^i$ induced by the geometric Frobenius\n$\\operatorname{Frob}_{X,\\Lambda_X}$ of [sk-cor-tf-point-counting] for\n$\\Lambda=\\Ql$, and put\n\n$$\n b_i=\\dim_{\\Ql}H^i,\\qquad \\chi=\\sum_i(-1)^ib_i,\\qquad\n D=\\prod_i\\det(F_i)^{(-1)^i}.\n$$\n\nThen $D^2=q^{d\\chi}$, and in $\\Ql(T)$ we have\n\n$$\n Z\\!\\left(X_0,\\frac1{q^dT}\\right)=(-1)^{\\chi}D\\,T^{\\chi}\\,Z(X_0,T).\n$$\n\n*Complement.* The proof gives $b_{2d-i}=b_i$, the eigenvalues of $F_{2d-i}$\nare the $q^d/\\alpha$ for the eigenvalues $\\alpha$ of $F_i$, with\nmultiplicities, and $\\det F_i\\cdot\\det F_{2d-i}=q^{db_i}$. Moreover $d\\chi$\nis even, so that $D=\\varepsilon q^{d\\chi/2}$ with $\\varepsilon=\\pm1$: for odd\n$d$ the middle pairing on $H^d$ is perfect and alternating, so $b_d$ is\neven, and $\\chi\\equiv b_d\\pmod 2$ because $b_{2d-i}=b_i$.",
+ "steps": [
+  {
+   "text": "By [sk-thm-derived-duality] and [sk-thm-frobenius] with $K=\\Ql$ and $X$\nproper, cup product and the trace define a perfect pairing\n$H^i\\times H^{2d-i}\\to\\Ql(-d)$ with\n$\\langle F_ix,F_{2d-i}y\\rangle=q^d\\langle x,y\\rangle$. Hence $F_{2d-i}$\nis $q^d$ times the inverse transpose of $F_i$. Consequently $b_{2d-i}=b_i$, the\neigenvalues of $F_{2d-i}$ are the $q^d/\\alpha$ for the eigenvalues\n$\\alpha$ of $F_i$, with multiplicities, and\n$\\det F_i\\cdot\\det F_{2d-i}=q^{db_i}$. Since $(-1)^i=(-1)^{2d-i}$,\n\n$$\n D^2=\\prod_i\\bigl(\\det F_i\\cdot\\det F_{2d-i}\\bigr)^{(-1)^i}\n =q^{d\\chi}.\n$$\n\nSince $F_i$ is invertible, its eigenvalues $\\alpha$ are nonzero, and\n\n$$\n \\det\\bigl(1-q^{-d}T^{-1}F_i\\bigr)\n =\\prod_\\alpha\\Bigl(-\\frac{\\alpha}{q^dT}\\Bigr)\\Bigl(1-\\frac{q^d}{\\alpha}T\\Bigr)\n =(-1)^{b_i}\\frac{\\det F_i}{(q^dT)^{b_i}}\\det\\bigl(1-TF_{2d-i}\\bigr).\n$$\n\n[sk-cor-tf-point-counting], with $H^i_c=H^i$ since $X_0$ is\nproper, expresses $Z(X_0,T)$ as the product of the\n$\\det(1-TF_i)^{(-1)^{i+1}}$. We substitute $1/(q^dT)$ for $T$ and apply\nthe last display to each factor. Since $(-1)^i=(-1)^{2d-i}$, the factors\n$\\det(1-TF_{2d-i})^{(-1)^{i+1}}$ multiply to $Z(X_0,T)$, and the scalar\nfactors multiply to\n\n$$\n (-1)^{\\chi}D^{-1}(q^dT)^{\\chi}=(-1)^{\\chi}D\\,T^{\\chi},\n$$\n\nby $D^2=q^{d\\chi}$."
+  },
+  {
+   "text": "For the complement, the first three assertions were shown above. For odd\n$d$, graded commutativity of the cup product makes the perfect pairing on\n$H^d$ alternating ([sk-thm-poincare-duality] (3), applied on each connected\ncomponent of $X$, which is defined over a finite extension of\n$\\mathbf F_q$). A nondegenerate alternating form over a field of\ncharacteristic $\\neq2$ lives on a space of even dimension, so $b_d$ is even.\nPairing $i$ with $2d-i$ gives $\\chi=2\\sum_{i<d}(-1)^ib_i+(-1)^db_d$, hence\n$\\chi\\equiv b_d\\pmod2$ and $d\\chi$ is even in both cases. Then\n$\\varepsilon=Dq^{-d\\chi/2}$ satisfies $\\varepsilon^2=1$."
+  }
+ ],
+ "source": "literature/blueprint/main-20261023-1620/blueprint/sec-trace-formula/sk-cor-tf-functional-equation/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

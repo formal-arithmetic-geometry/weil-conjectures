@@ -1,0 +1,377 @@
+{
+ "id": "lem-sfb-finite-flat-affine-groupoid-moduli",
+ "kind": "statement",
+ "title": "Moduli morphism of a finite locally free affine groupoid",
+ "statement": "Let $k$ be a field, $U=\\operatorname{Spec}E$ and $R=\\operatorname{Spec}L$ affine $k$-schemes, and $(U,R,s,t,e,i,c)$ a groupoid over $k$ with $s,t$ finite locally free. Put $C=\\{a\\in E:s^\\sharp(a)=t^\\sharp(a)\\}$, $M=\\operatorname{Spec}C$, and $\\mathcal Z=[U/R]$. The invariant inclusion $C\\hookrightarrow E$ induces a canonical morphism $f:\\mathcal Z\\to M$. This morphism is uniform categorical, quasi-compact, quasi-separated and a universal homeomorphism. For every algebraically closed extension $\\Omega/k$, the induced map $\\pi_0(\\mathcal Z(\\Omega))\\to M(\\Omega)$ is bijective. Moreover $\\mathcal O_M\\to f_*\\mathcal O_{\\mathcal Z}$ is an isomorphism. More explicitly, for every flat map $\\operatorname{Spec}C'\\to\\operatorname{Spec}C$, the equalizer of the two maps $E\\otimes_C C'\\rightrightarrows L\\otimes_C C'$ is exactly $C'$, and this is the ring of global functions on $\\mathcal Z\\times_M\\operatorname{Spec}C'$. These assertions allow empty schemes and variable rank. Algebraic stacks and quasi-coherent sheaves have the meanings in [def-sfb-adequate-moduli-space], and algebraic spaces have the meaning in [def-trf-algebraic-space]. A 2-fibre product retains the specified isomorphism between the two images of an object. For an affine groupoid $(U,R,s,t,e,i,c)$, the groupoid laws are those of [def-a1-scheme-groupoid-laws]; $[U/R]$ denotes the fppf stackification of the groupoid with objects $U(T)$ and arrows $R(T)$ on test schemes $T$. The point space of an algebraic stack consists of field-valued objects up to isomorphism and common field extension, with topology detected by a smooth surjective scheme atlas. A morphism is a universal homeomorphism if every base change by an algebraic stack induces a homeomorphism of these point spaces. Quasi-compact means quasi-compact inverse images of affine scheme tests, and quasi-separated means quasi-compact relative diagonal, both on scheme charts. A morphism $f:\\mathcal Z\\to M$ to an algebraic space is uniform categorical if, for every flat algebraic-space map $M'\\to M$ and every algebraic space $T/k$, composition with $f_{M'}$ is a bijection from $\\operatorname{Mor}_k(M',T)$ to $\\operatorname{Mor}_k(\\mathcal Z\\times_M M',T)$. Flatness is tested on scheme charts using [def-weil-flat-morphism].",
+ "source": {
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tags 0DUM (lemma-well-nigh-affine), 0DUP (lemma-well-nigh-affine-moduli-space) and 0DUR (lemma-moduli-space-finite-affine); the flat equalizer assertion is groupoids.tex Tag 03BK (lemma-invariants-base-change), and geometric points are lemma-points (Tag 03BL)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-adequate-moduli-space",
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-a1-scheme-groupoid-laws",
+  "def-pc-finite-locally-free",
+  "def-pc-fppf-site",
+  "def-weil-flat-morphism",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-algebraic-closure",
+  "def-sfb-scheme-groupoid-quotient-presentation",
+  "def-sfb-stack-point-topological-space",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "By the flat groupoid quotient/open-presentation theorem, $\\mathcal Z$ is algebraic, $a:U\\to\\mathcal Z$ is representable finite locally free and surjective, and $R=U\\times_{\\mathcal Z}U$. For maps into an algebraic space, viewed as a discrete stack, a functor from the groupoid is just a map from $U$ equalizing $s,t$: compatibility on arrows is equality and all coherence is unique. The stackification universal property extends this functor; uniqueness is checked locally on $U$ because every object locally lifts and the target is a sheaf. Thus maps out of the quotient are exactly invariant maps. The map $U\\to M$ induced by $C\\hookrightarrow E$ equalizes $s,t$, hence descends uniquely to $f:\\mathcal Z\\to M$. For an affine $k$-scheme $T=\\operatorname{Spec}B$, a map $\\mathcal Z\\to T$ is an invariant map $U\\to T$. By the affine spectrum correspondence it is exactly a $k$-algebra map $B\\to E$ landing in $C$, equivalently a unique map $M\\to T$. This proves the categorical property for affine targets, for every groupoid under the hypotheses of the item, without assuming any moduli theorem.",
+   "uses": [
+    "lem-sfb-flat-groupoid-quotient-open-presentation",
+    "def-weil-affine-spectrum",
+    "lem-sfb-groupoid-stackification-local-description",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUP (lemma-well-nigh-affine-moduli-space), first paragraph; Tag 0DUH (lemma-quotient-compare)."
+   }
+  },
+  {
+   "text": "Let $C\\to D$ be flat. The affine flatness criterion identifies this condition with flatness of $\\operatorname{Spec}D\\to M$. As $C$-modules, $0\\to C\\to E\\xrightarrow{s^\\sharp-t^\\sharp}L$ is exact. Flat tensor exactness gives $0\\to D\\to E\\otimes_CD\\rightrightarrows L\\otimes_CD$ as an equalizer, so the invariants of the base-changed groupoid are exactly $D$, under $d\\mapsto1\\otimes d$. The affine fibre-product formula identifies its atlas and arrows with $U_D,R_D$. The pulled-back atlas covers the algebraic stack $\\mathcal Z_D$, with self-relation $R_D$ by associativity of $2$-fibre products. Part (2) of the fppf-presentation theorem therefore identifies $[U_D/R_D]$ with $\\mathcal Z_D$. Apply quasi-coherent algebra descent to its structure algebra: its global sections are this invariant ring, hence $\\Gamma(\\mathcal Z_D,\\mathcal O)=D$, with the indicated structural map. On affine etale tests of $M$ this is exactly the value of $\\mathcal O_M\\to f_*\\mathcal O_{\\mathcal Z}$ by the definition of direct image. These identifications commute with restriction because every map is induced by the structural ring maps. Therefore the canonical sheaf map is an isomorphism. Step 1 also gives affine-target categoricity after this flat affine base change.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-flat-groupoid-quotient-open-presentation",
+    "lem-sfb-affine-groupoid-quasicoherent-algebra-descent",
+    "def-sfb-stack-quasi-coherent-algebra",
+    "lem-sfb-fppf-groupoid-stack-presentations",
+    "lem-sfb-algebraic-stack-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BK (lemma-invariants-base-change), flat case; global sections by groupoid descent."
+   }
+  },
+  {
+   "text": "For algebraically closed $\\Omega/k$, every object $z\\in\\mathcal Z(\\Omega)$ lifts to $U(\\Omega)$: the scheme $U\\times_{\\mathcal Z}\\operatorname{Spec}\\Omega$ is nonempty finite locally free over $\\Omega$. Its nonzero finite-dimensional coordinate algebra has a maximal ideal, whose residue field is finite over $\\Omega$ and therefore equals $\\Omega$ (each element satisfies a polynomial, which splits over $\\Omega$). Such a point includes the isomorphism to $z$. For $u,v\\in U(\\Omega)$, the identification $R=U\\times_{\\mathcal Z}U$ identifies their isomorphisms in $\\mathcal Z(\\Omega)$ with arrows of $R(\\Omega)$. The existing orbit-fibre lemma says precisely $U(\\Omega)/R(\\Omega)=M(\\Omega)$. Hence $\\pi_0(\\mathcal Z(\\Omega))\\to M(\\Omega)$ is bijective. This argument includes nonreduced finite covers and uses no etaleness of $s,t$.",
+   "uses": [
+    "lem-sfb-flat-groupoid-quotient-open-presentation",
+    "lem-a1-affine-groupoid-orbit-fibres",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 03BL (lemma-points), geometric points; finite atlas from Tag 0DUM."
+   }
+  },
+  {
+   "text": "The invariant-integrality lemma gives $E$ integral over $C$, so $U\\to M$ is integral, hence universally closed by the integral/affine/universally-closed equivalence. For any affine scheme $T\\to M$, write $U_T=U\\times_MT$. The map $U_T\\to\\mathcal Z_T$ is surjective. If $D\\subseteq|\\mathcal Z_T|$ is closed, its inverse image in $|U_T|$ is closed, and its image under the closed map $|U_T|\\to|T|$ is exactly $f_T(D)$. Thus $f_T$ is closed. Step 3, applied to algebraically closed fields over residue fields of $T$, shows that $f_T$ is bijective on point spaces: two representatives over the same point can be compared over a common algebraically closed extension and then are isomorphic. Therefore $f_T$ is a homeomorphism. For arbitrary algebraic-stack $T\\to M$, choose a smooth surjective scheme atlas and cover it by affine opens. The same geometric-point argument gives bijectivity. Images of closed subsets pull back to images under the already proved affine-test homeomorphisms, by surjectivity of points of $2$-fibre products. They are closed on the atlas and therefore closed in $|T|$. Continuity follows from stack point topology. Hence $f_T$ is a homeomorphism for every algebraic-stack $T$.",
+   "uses": [
+    "lem-a1-affine-groupoid-integral-invariants",
+    "pqf-lem-integral-univclosed",
+    "lem-sfb-flat-groupoid-quotient-open-presentation",
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "lem-sfb-algebraic-stack-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUP (lemma-well-nigh-affine-moduli-space), universally closed and universally bijective paragraphs; geometric-fibre argument using Tag 03BL."
+   }
+  },
+  {
+   "text": "For an affine test $T\\to M$, $U_T$ is affine by the affine fibre-product formula, hence quasi-compact. Its continuous surjection to $|\\mathcal Z_T|$ makes that space quasi-compact: pull back any open cover, take a finite subcover, and use surjectivity. Thus $f$ is quasi-compact by the stated affine-test definition. The relative diagonal is representable because $\\mathcal Z$ is algebraic. Its base change by the surjective flat locally finitely presented scheme cover $U\\times_M U\\to\\mathcal Z\\times_M\\mathcal Z$ is $R\\to U\\times_M U$. Both schemes are affine, so this map is affine. The representable fppf-locality lemma, applied to $\\Delta_f$ and property affine, makes $\\Delta_f$ affine. An affine map is quasi-compact and separated by affine-morphism permanence, hence has quasi-compact diagonal. Consequently $f$ is quasi-separated: its relative diagonal is quasi-compact and quasi-separated. Covering and representability are preserved under the indicated base changes; the cover here is the product of two base changes of the finite locally free atlas.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-affine-spectrum",
+    "lem-sfb-representable-stack-fppf-locality",
+    "lem-sfb-smooth-presentation-closed-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUP, quasi-compactness paragraph; Tag 04XD (lemma-check-property-covering), relative affine diagonal."
+   }
+  },
+  {
+   "text": "We prove uniqueness for maps to any algebraic space $Y/k$. Suppose $h_1,h_2:M\\to Y$ have equal composites with $f$. Their equalizer $H=M\\times_{(h_1,h_2),Y\\times_kY,\\Delta_Y}Y$ is a scheme because the diagonal of $Y$ is representable. Its map $e:H\\to M$ is a monomorphism and $f$ factors through $H$. After every scheme base change of $M$, $e$ is injective on points and surjective, the latter because $f$ is surjective. Also $\\mathcal Z\\to H$ is surjective on points. For every closed subset $F$ of such a base change of $H$, its inverse image in the corresponding base change of $\\mathcal Z$ is closed; its image in the base change of $M$ equals $e(F)$ and is closed by step 4. Thus $|e|$ is a homeomorphism. The closed-embedding-affine lemma makes $e$ affine, so $H$ is affine. The affine-target property in step 1 supplies $r:M\\to H$ with $rf$ the given factorization. Uniqueness for the affine target $M$ gives $er=1_M$; monicity then gives $re=1_H$. Hence $e$ is an isomorphism and $h_1=h_2$. This proof applies after every flat affine base change, by step 2.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "lem-trf-closed-embedding-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUR (lemma-moduli-space-finite-affine), Uniqueness paragraph."
+   }
+  },
+  {
+   "text": "Let $g:\\mathcal Z\\to Y$ and $p\\in M$. The affine etale-neighbourhood lemma applied to $U\\to Y$ gives an affine $V$ etale over $Y$ such that $W=U\\times_YV$ is a scheme and $W\\to U$ is surjective, separated, etale and locally quasi-finite. Pull back the groupoid to $V$, obtaining arrows $R_W=R\\times_YV$ over $W$, with finite locally free source and target. Choose $w\\in W$ mapping to $p$. Its orbit is finite because the source is finite, and the finite-set-affine lemma puts that orbit in an affine open of $W$. The existing locally-free-groupoid invariant-affine lemma gives an invariant affine open $O$ containing the orbit of $w$. Its arrow scheme $R_O=s^{-1}(O)=t^{-1}(O)$ is finite over affine $O$ and therefore affine. Write $N=\\operatorname{Spec}\\{b\\in\\Gamma(O,\\mathcal O):s^*b=t^*b\\}$. The morphism $(O,R_O)\\to(U,R)$ has cartesian source and target squares: before restriction they are the base-change squares over $V\\to Y$, and restriction to $O$ preserves them because $O$ is invariant. Its stabilizer square is cartesian as well: an automorphism of a lifted object is exactly an automorphism of its image, since $Y,V$ have no nonidentity arrows. The invariant etale-comparison lemma gives $N\\to M$ etale and $O\\simeq U\\times_MN$. The source cartesian square then identifies $R_O\\simeq R\\times_MN$. Now $O=U\\times_MN$ is the pulled-back atlas with self-relation $R_O$; part (2) of the fppf-presentation theorem gives $[O/R_O]\\simeq\\mathcal Z\\times_MN$, and $p$ lies in the image of $N$.",
+   "uses": [
+    "lem-a1-qc-map-affine-etale-neighbourhood",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-sfb-separated-lqf-affine-finite-set",
+    "lem-sfb-locally-free-groupoid-invariant-affine",
+    "lem-sfb-affine-groupoid-etale-invariant-comparison",
+    "lem-sfb-flat-groupoid-quotient-open-presentation",
+    "def-a1-scheme-groupoid-laws",
+    "lem-sfb-fppf-groupoid-stack-presentations",
+    "lem-sfb-algebraic-stack-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUR, Existence and final two paragraphs, with Tags 07S0, 03JE and 0DT9."
+   }
+  },
+  {
+   "text": "The map $O\\to V$ in step 7 is invariant. As $O,V$ are affine, its ring map lands in the invariant subring defining $N$ and hence gives $N\\to V$. This induces $h_N:N\\to Y$ with $h_N f_N=g_N$ under the cartesian quotient equivalence. Repeating for every $p$ gives an etale covering of $M$ by affine schemes $N$. On an overlap $N_1\\times_MN_2$, cover by affine opens. Each of these is flat over $M$, and step 2 gives the affine-target property for its pulled-back quotient. Step 4 and step 6, applied there, give uniqueness for target $Y$, so the two local maps agree on the overlap. Since an algebraic space is an fppf sheaf, the maps glue uniquely to $h:M\\to Y$. The equality $hf=g$ can be checked on the pulled-back covering of $\\mathcal Z$, or after the atlas $U\\to\\mathcal Z$; its restrictions are exactly the equalities just constructed. Thus $f$ is categorical for algebraic-space targets.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUR, Existence paragraph and final paragraph, spelling out the omitted gluing detail."
+   }
+  },
+  {
+   "text": "For a flat affine $M_1\\to M$, step 2 identifies its ring with the invariants of the base-changed finite locally free affine groupoid. Steps 1 and 3--8 apply to this groupoid and prove categoricity of $f_{M_1}$ for every algebraic-space target. For a flat algebraic-space map $B\\to M$, choose an affine etale covering $B_i\\to B$. Each $B_i\\to M$ is flat. The just-proved property gives a unique $B_i\\to Y$ for any given $\\mathcal Z_B\\to Y$. On affine etale covers of $B_i\\times_BB_j$ uniqueness gives equality of the two maps. The sheaf property of $Y$ glues them to $B\\to Y$, whose factorization identity and uniqueness are checked on the same covering. This is the required uniform categorical property, including all flat algebraic-space base changes. All prior arguments allow the zero ring and variable finite locally free ranks; the only nonempty finite cover used was the fibre over an object, where surjectivity guarantees nonemptiness.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-weil-pbc-flat-morphism-affine-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUJ (lemma-check-uniform-categorical-quotient-on-affines), proof, following Tag 0DUR."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-scheme-groupoid-laws",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-weil-algebraic-closure",
+  "lem-a1-affine-groupoid-integral-invariants",
+  "lem-a1-affine-groupoid-orbit-fibres",
+  "lem-a1-qc-map-affine-etale-neighbourhood",
+  "lem-sfb-affine-groupoid-etale-invariant-comparison",
+  "lem-sfb-affine-groupoid-quasicoherent-algebra-descent",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-flat-groupoid-quotient-open-presentation",
+  "lem-sfb-fppf-groupoid-stack-presentations",
+  "lem-sfb-groupoid-stackification-local-description",
+  "lem-sfb-locally-free-groupoid-invariant-affine",
+  "lem-sfb-representable-stack-fppf-locality",
+  "lem-sfb-separated-lqf-affine-finite-set",
+  "lem-sfb-smooth-presentation-closed-subsets",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-closed-embedding-affine",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact",
+  "pqf-lem-integral-univclosed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tags 0DUP and 0DUR, invariant-spectrum construction and etale local factorization; structure sheaf by groupoids.tex Tag 03BK and quasicoherent groupoid descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Affine groupoid with finite locally free source and target has affine categorical quotient the spectrum of invariant functions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.isAffine_affineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.AffineScheme), AlgebraicGeometry.IsAffine X.obj\", \"doc\": \"The category of affine schemes is the full subcategory of the category of schemes consisting of schemes isomorphic to the prime spectrum of a commutative ring. This subcategory is the essential image \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of schemes consisting of those isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, forming the essential image of the contravariant Spec functor f\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any scheme $ S $ and type $ n $, the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an affine morphism of schemes. This follows from the construction of $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine S],\\n  AlgebraicGeometry.IsAffine (AlgebraicGeometry.AffineSpace n S)\", \"doc\": \"If $ S $ is an affine scheme, then the affine space $ \\\\mathbb{A}^n_S $ over $ S $ is also affine. This instance asserts that when the base scheme $ S $ satisfies the affineness condition, the construc\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient stack of a finite flat affine groupoid has uniform coarse moduli space and universal homeomorphism to invariant spectrum",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.Spec_essSurj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.AffineScheme.Spec.EssSurj\", \"doc\": \"The contravariant Spec functor from the category of commutative rings to affine schemes is essentially surjective, meaning every affine scheme is isomorphic to the prime spectrum $\\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of schemes consisting of those isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, forming the essential image of the contravariant Spec functor f\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instCategoryAffineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"CategoryTheory.Category.{u_1, u_1 + 1} AlgebraicGeometry.AffineScheme\", \"doc\": \"The category whose objects are affine schemes (schemes isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$) and whose morphisms are morphisms of schemes between them. T\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Spec\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"Quiver.FreeGroupoid.lift_spec\", \"module\": \"Mathlib.CategoryTheory.Groupoid.FreeGroupoid\", \"type\": \" {V : Type u} [Quiver V] {V' : Type u'} [CategoryTheory.Groupoid V'] (φ : V ⥤q V') : Quiver.FreeGroupoid.of V ⋙q (Quiver.FreeGroupoid.lift φ).toPrefunctor = φ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.FreeGroupoid.lift_spec\", \"module\": \"Mathlib.CategoryTheory.Groupoid.FreeGroupoidOfCategory\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {G : Type u₁} [CategoryTheory.Groupoid G] (φ : CategoryTheory.Functor C G) : (CategoryTheory.FreeGroupoid.of C).comp (CategoryTheory.FreeGroupoid.lift φ) = φ\", \"doc\": \"\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.section_spec\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Basic\", \"type\": \" {H : Type u_1} [TopologicalSpace H] {H' : Type u_2} [TopologicalSpace H'] {G : StructureGroupoid H} {G' : StructureGroupoid H'} {P : (H → H') → Set H → H → Prop} (M : Type u) [TopologicalSpace M] [ChartedSpace H M] (M' : Type u) [TopologicalSpace M'] [ChartedSpace H' M'] (hG : G.LocalInvariantProp \", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*quotient|categorical.moduli|invariant.*spectrum",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/FreeGroupoid.lean\", \"line\": \"172\", \"text\": \"    change Φ.map (Groupoid.inv ((Quotient.functor redStep).toPrefunctor.map f.toPath)) =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/FreeGroupoid.lean\", \"line\": \"173\", \"text\": \"      Groupoid.inv (Φ.map ((Quotient.functor redStep).toPrefunctor.map f.toPath))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean\", \"line\": \"66\", \"text\": \"def FreeGroupoid := Quotient (FreeGroupoid.homRel C)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean\", \"line\": \"78\", \"text\": \"  __ := Quiver.FreeGroupoid.of C ⋙q (Quotient.functor (FreeGroupoid.homRel C)).toPrefunctor\"}\n  {\"file\": \"Mathlib/CategoryTheory/Quotient.lean\", \"line\": \"183\", \"text\": \"instance groupoid : Groupoid (Quotient r) where\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally free affine groupoid coarse moduli invariant ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": HasAffineProperty @IsFinite (fun X _ f _ ↦ IsAffine X ∧ RingHom.Finite (f.appTop).hom)\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"Algebra.IsInvariant.isIntegral\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[Finite G] : Algebra.IsIntegral A B\", \"doc\": \"If $ G $ is a finite group acting invariantly on the algebra $ A $ over $ B $, then $ A $ is integral over $ B $. In other words, every element of $ A $ satisfies a monic polynomial equation with coef\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \": HasRingHomProperty (@LocallyOfFiniteType) RingHom.FiniteType\", \"doc\": \"For any commutative rings $ R $ and $ S $, and a ring homomorphism $ f : R \\to S $, the induced morphism of schemes is locally of finite type if and only if $ f $ is a finite type ring homomorphism (i.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \": HasRingHomProperty (@LocallyQuasiFinite) RingHom.QuasiFinite\", \"doc\": \"A morphism of schemes is locally quasi-finite if and only if the corresponding ring homomorphism is quasi-finite, meaning the target ring is finitely generated as a module over the source ring.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \": HasRingHomProperty (@LocallyOfFinitePresentation) RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"CommRing.Pic.subsingleton_iff\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"{R : Type u} [CommRing R] :\\n  Subsingleton (Pic R) ↔ ∀ (M : Type u) [AddCommGroup M] [Module R M], Module.Invertible R M → Free R M\", \"doc\": \"For a commutative ring $ R $, the Picard group $ \\\\operatorname{Pic}(R) $ is trivial (a subsingleton) if and only if every invertible $ R $-module is free.\"}\n  {\"name\": \"CommRing.Pic.mk_eq_one_iff_free\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Pic.mk R M = 1 ↔ Free R M\", \"doc\": \"For a commutative semiring $ R $ and an invertible $ R $-semimodule $ M $, the class of $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the identity element if and only if $ M $ is a free $ \"}\n  {\"name\": \"CommRing.Pic.instFreeOfSubsingleton\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"[Subsingleton (Pic R)] : Free R M\", \"doc\": \"If the Picard group of a commutative semiring $ R $ is trivial (i.e., has at most one element), then every invertible $ R $-module is a free module. This means that when the group of isomorphism class\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free affine groupoid quotient stack has uniform categorical moduli invariant spectrum",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.ContainsIdentities @AlgebraicGeometry.IsFinite\", \"doc\": \"For any scheme $X$, the identity morphism $\\\\text{id}_X : X \\\\to X$ is a finite morphism. This instance asserts that the class of finite morphisms between schemes satisfies the property of containing id\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of schemes consisting of those isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, forming the essential image of the contravariant Spec functor f\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isAffine_affineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.AffineScheme), AlgebraicGeometry.IsAffine X.obj\", \"doc\": \"The category of affine schemes is the full subcategory of the category of schemes consisting of schemes isomorphic to the prime spectrum of a commutative ring. This subcategory is the essential image \"}\n  {\"name\": \"AlgebraicGeometry.instCategoryAffineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"CategoryTheory.Category.{u_1, u_1 + 1} AlgebraicGeometry.AffineScheme\", \"doc\": \"The category whose objects are affine schemes (schemes isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$) and whose morphisms are morphisms of schemes between them. T\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, ordinary groupoids, ring invariants or affine neighbourhoods alone do not state this result for scheme groupoids and algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coarse moduli space finite flat affine groupoid universal homeomorphism and invariant global functions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    {X : AlgebraicGeometry.Scheme} →\\n      [inst : X.Over S] → { f // AlgebraicGeometry.Scheme.Hom.IsOver f S } ≃ (n → ↑(X.presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"For any scheme $ S $ and any scheme $ X $ over $ S $, there is a natural equivalence between morphisms from $ X $ to the affine space $ \\\\mathbb{A}^n_S $ over $ S $ and $ n $-tuples of global sections \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOverEquiv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) {X : AlgebraicGeometry.Scheme} [inst : X.Over S]\\n  (f : { f // AlgebraicGeometry.Scheme.Hom.IsOver f S }) (i : n),\\n  (AlgebraicGeometry.AffineSpace.homOverEquiv S) f i =\\n    (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop ↑f))\\n \", \"doc\": \"For any scheme $ S $ and any scheme $ X $ over $ S $, there is a natural bijection between morphisms from $ X $ to the affine space $ \\\\mathbb{A}^n_S $ over $ S $ and $ n $-tuples of global sections of\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  {X : AlgebraicGeometry.Scheme} →\\n    (X ⟶\\n        AlgebraicGeometry.Spec\\n          { carrier := MvPolynomial n (ULift.{u, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial }) ≃\\n      (n → ↑(X.presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"There is a natural equivalence between the set of morphisms from a scheme $ X $ to the affine space $ \\\\mathbb{A}^n_\\\\mathbb{Z} $ (realized as $ \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\dots, x_n]) $) and t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.homOfVector f v)\\n      (AlgebraicGeometry.AffineSpace.toSpecMvPoly n S) =\\n    (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEqu\", \"doc\": \"For a scheme $ S $ and index set $ n $, the composition of the morphism $ \\\\text{homOfVector}(f, v) $ with the projection $ \\\\mathbb{A}^n_S \\\\to \\\\mathbb{A}^n_\\\\mathbb{Z} $ equals the inverse equivalence $\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, ordinary groupoids, ring invariants or affine neighbourhoods alone do not state this result for scheme groupoids and algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Spec\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"Quiver.FreeGroupoid.lift_spec\", \"module\": \"Mathlib.CategoryTheory.Groupoid.FreeGroupoid\", \"type\": \" {V : Type u} [Quiver V] {V' : Type u'} [CategoryTheory.Groupoid V'] (φ : V ⥤q V') : Quiver.FreeGroupoid.of V ⋙q (Quiver.FreeGroupoid.lift φ).toPrefunctor = φ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.FreeGroupoid.lift_spec\", \"module\": \"Mathlib.CategoryTheory.Groupoid.FreeGroupoidOfCategory\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {G : Type u₁} [CategoryTheory.Groupoid G] (φ : CategoryTheory.Functor C G) : (CategoryTheory.FreeGroupoid.of C).comp (CategoryTheory.FreeGroupoid.lift φ) = φ\", \"doc\": \"\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.section_spec\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Basic\", \"type\": \" {H : Type u_1} [TopologicalSpace H] {H' : Type u_2} [TopologicalSpace H'] {G : StructureGroupoid H} {G' : StructureGroupoid H'} {P : (H → H') → Set H → H → Prop} (M : Type u) [TopologicalSpace M] [ChartedSpace H M] (M' : Type u) [TopologicalSpace M'] [ChartedSpace H' M'] (hG : G.LocalInvariantProp \", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, ordinary groupoids, ring invariants or affine neighbourhoods alone do not state this result for scheme groupoids and algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*moduli|categorical.moduli|invariant.*spectrum",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, ordinary groupoids, ring invariants or affine neighbourhoods alone do not state this result for scheme groupoids and algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant spectrum uniform categorical quotient finite flat affine groupoid",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Rep.quotientToInvariantsFunctor_map_hom\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"∀ (k : Type u) {G : Type u} [inst : CommRing k] [inst_1 : Group G] (S : Subgroup G) [inst_2 : S.Normal] {X Y : Rep k G}\\n  (f : X ⟶ Y),\\n  ((Rep.quotientToInvariantsFunctor k S).map f).hom =\\n    (Rep.invariantsFunctor k ↥S).map ((Action.res (ModuleCat k) S.subtype).map f)\", \"doc\": \"For any commutative ring $k$, group $G$, normal subgroup $S \\trianglelefteq G$, and morphism $f : X \\to Y$ between $G$-representations, the action of the quotient-to-invariants functor on $f$ is equal t\"}\n  {\"name\": \"Rep.quotientToInvariantsFunctor_obj_V\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"∀ (k : Type u) {G : Type u} [inst : CommRing k] [inst_1 : Group G] (S : Subgroup G) [inst_2 : S.Normal] (X : Rep k G),\\n  ((Rep.quotientToInvariantsFunctor k S).obj X).V =\\n    ModuleCat.of k ↥(Representation.invariants (MonoidHom.comp X.ρ S.subtype))\", \"doc\": \"For a commutative ring $k$, group $G$, normal subgroup $S \\trianglelefteq G$, and a $k$-linear representation $X$ of $G$, the underlying module of the quotient-to-invariants functor applied to $X$ is t\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp.rec\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"{H : Type u_1} →\\n  {H' : Type u_3} →\\n    [inst : TopologicalSpace H] →\\n      [inst_1 : TopologicalSpace H'] →\\n        {G : StructureGroupoid H} →\\n          {G' : StructureGroupoid H'} →\\n            {P : (H → H') → Set H → H → Prop} →\\n              {motive : G.LocalInvariantProp G' P → Sort u} →\\n    \", \"doc\": \"Given a type family over local invariant properties and proofs of four conditions (locality, right invariance, congruence, left invariance), this recursor constructs a term of the target type by decom\"}\n  {\"name\": \"CategoryTheory.Quotient.groupoid\", \"module\": \"Mathlib.CategoryTheory.Quotient\", \"type\": \": Groupoid (Quotient r)\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a binary relation $R$ on each hom-set $\\\\text{Hom}(X, Y)$, the quotient category $\\\\mathcal{C}/R$ forms a groupoid. This means every morphism $f: X \\\\to Y$ in $\\\\mathcal\"}\n  {\"name\": \"Algebra.IsInvariant.isIntegral\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[Finite G] : Algebra.IsIntegral A B\", \"doc\": \"If $ G $ is a finite group acting invariantly on the algebra $ A $ over $ B $, then $ A $ is integral over $ B $. In other words, every element of $ A $ satisfies a monic polynomial equation with coef\"}\n  {\"name\": \"CategoryTheory.Quotient.inv_mk\", \"module\": \"Mathlib.CategoryTheory.Quotient\", \"type\": \"{X Y : Quotient r} (f : X.as ⟶ Y.as) : Quotient.inv r (Quot.mk _ f) = Quot.mk _ (Groupoid.inv f)\", \"doc\": \"In a quotient groupoid formed by a hom-set relation $ R $, the inverse of a morphism $ f: X \\to Y $ is defined as the equivalence class of the inverse of any representative morphism in the original cat\"}\n  {\"name\": \"Representation.quotientToInvariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{k : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : CommSemiring k] →\\n      [inst_1 : Group G] →\\n        {V : Type u_4} →\\n          [inst_2 : AddCommMonoid V] →\\n            [inst_3 : Module k V] →\\n              (ρ : Representation k G V) →\\n                (S : Subgroup G) →\\n                  [inst_4 : S\", \"doc\": \"Given a commutative semiring $k$, group $G$, $k$-module $V$ with representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, and a normal subgroup $S \\\\trianglelefteq G$, this constructs the representation of the \"}\n  {\"name\": \"spectrum.units_conjugate'\", \"module\": \"Mathlib.Algebra.Algebra.Spectrum.Basic\", \"type\": \"{a : A} {u : Aˣ} : spectrum R (u⁻¹ * a * u) = spectrum R a\", \"doc\": \"For any element $ a $ in an algebra $ A $ over a commutative semiring $ R $, and for any unit $ u $ in $ A $, the spectrum of the conjugate $ u^{-1} a u $ over $ R $ is equal to the spectrum of $ a $ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, ordinary groupoids, ring invariants or affine neighbourhoods alone do not state this result for scheme groupoids and algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-inertia-adequate-coarse-space",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The local quotient by the invariant subring, before gluing. The structure-sheaf assertion is recorded explicitly for the later adequacy check. The inherited created.item chain has no machine-resolvable blueprint ancestor (blueprint_refs.py ancestor returns None); the explicit current-blueprint anchor remains det-thm-sf-ctf-stability-direct-images, proof (3), the alteration/moduli prerequisite.",
+   "via": [
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-flat-affine-groupoid-moduli",
+  "worker": "stage1",
+  "group": "Q63",
+  "summary": "All clauses proved using existing finite-flat groupoid presentations, flat tensor exactness, integrality and orbit fibres, invariant affine neighbourhoods and etale invariant-spectrum comparison, with explicit gluing to arbitrary algebraic-space targets and flat bases. The supporting 07S0 and 0DT9 nodes became available during dry runs and were reused. No new nodes and no statement changes.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli prerequisite under Rj_* preservation; inherited ancestry has node=null and is explained in report.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-affine-groupoid-integral-invariants",
+    "why": "Generic Integrality over affine groupoid invariants used as a foundational tool; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-a1-affine-groupoid-orbit-fibres",
+    "why": "Generic Fibres of the affine groupoid invariant spectrum are orbits used as a foundational tool; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-a1-qc-map-affine-etale-neighbourhood",
+    "why": "Generic Affine etale neighbourhood of the image of a quasi-compact scheme used as a foundational tool; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic Fibre products of algebraic spaces and pullback of etale coverings used as a foundational tool; this six-functor unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-affine-groupoid-integral-invariants",
+  "lem-a1-affine-groupoid-orbit-fibres",
+  "lem-a1-qc-map-affine-etale-neighbourhood",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-00e1e5cad",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-00e1e5cad (reviewer sub-agent of L); spot-checked: Read Stacks stacks-more-morphisms.tex 0DUM/0DUP/0DUR (lines 3110-3470), the item and the statements of all 27 cited nodes. The delivery is the item JSON plus the report. It has no new nodes, and its statement is identical to live and side-live, where the item is still unsplit, so no other group has superseded it. The three added stmt_deps (algebraic stack, stack qcoh algebra/direct image, algebraic closure) are notions the statement uses. Step uses equal proof_deps, the closure is acyclic and nothing cites SGA. The proof follows 0DUP and 0DUR. Step 1: invariant map, descended by stackification with Y as a discrete fppf sheaf. Step 2: 0->C->E->L is exact, flat tensor gives the equalizer D, fppf-presentation (2) gives Z_D=[U_D/R_D], and qcoh-algebra descent gives Gamma=D; etale tests are flat by definition. Step 3: the finite nonempty fibre over Omega has a rational point, then orbit fibres. Step 4: integral, hence universally closed, then images via the surjective atlas; bijectivity over a common algebraically closed field (M is discrete); arbitrary stacks via the |AxC|->|A|x|C| surjectivity. Step 5: Delta_f is affine by fppf locality along UxU->ZxZ, which pulls it back to R->UxU. Step 6: the equalizer H is a closed homeomorphism onto M, hence affine by the mathlib leaf closed-embedding-affine (Stacks uses the universal-homeomorphism lemma instead), so it is an iso; no separation of Y is assumed. Step 7: hypotheses of 03HL-type, 07S0, invariant-affine and 0DT9 checked. Hand checks: R_W=Rx_{s,U}W=Rx_{t,U}W, and G_O=Gx_UO because s_W=t_W iff s=t; p lies in the image. Steps 8-9: etale gluing that Stacks omits, then flat algebraic-space bases. Edge cases: empty, trivial groupoid, BG, mu_p in characteristic p, variable rank. Batch-5: the listed citations are general definitions and foundational space/stack lemmas, neither proved by nor given by the trace formula or Poincare duality, so accepted. Tool uses for the a1 integral-invariants/orbit-fibres/qc-affine-etale-neighbourhood and trf space-fibre-products nodes accepted as generic. Advisory for the maintainer: the existing NP node lem-sfb-finite-flat-affine-stack-invariant-quotient states 0DUP+0DUR only for DM stacks, so it does not specialize to this item; possible merge or citation. from.node null is inherited and explained in the report."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFlatAffineGroupoidModuli",
+  "declaration": "AlgebraicGeometry.finiteFlatAffineGroupoid_moduli",
+  "declarations": [
+   "AlgebraicGeometry.affineGroupoidModuliBase",
+   "AlgebraicGeometry.affineGroupoidModuliAtlasMap",
+   "AlgebraicGeometry.affineGroupoidInvariantArrowAlgebra",
+   "AlgebraicGeometry.affineGroupoidInvariantSource",
+   "AlgebraicGeometry.affineGroupoidInvariantTarget",
+   "AlgebraicGeometry.affineGroupoidModuliChart",
+   "AlgebraicGeometry.affineGroupoidModuliChartMap",
+   "AlgebraicGeometry.affineGroupoidModuliBaseChange",
+   "AlgebraicGeometry.moduliAffineFunctionValue",
+   "AlgebraicGeometry.finiteFlatAffineGroupoid_moduli"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFlatAffineGroupoidModuli.lean",
+  "statement": "theorem finiteFlatAffineGroupoid_moduli (k E L : Type u) [Field k] [CommRing E] [CommRing L] [Algebra k E] [Algebra k L] (σ τ : E →ₐ[k] L) (e : Spec (.of E) ⟶ Spec (.of L)) (i : Spec (.of L) ⟶ Spec (.of L)) (c : pullback (Spec.map (CommRingCat.ofHom σ.toRingHom)) (Spec.map (CommRingCat.ofHom τ.toRingHom)) ⟶ Spec (.of L)) [(Spec.map (CommRingCat.ofHom σ.toRingHom)).IsFiniteLocallyFree] [(Spec.map (CommRingCat.ofHom τ.toRingHom)).IsFiniteLocallyFree] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (a : BasedFunctor (discreteModuli (yoneda.obj ((Spec (.of E)).asOver (Spec (.of k))))) F) (P : SchemeGroupoidQuotientPresentation ((Spec.map (CommRingCat.ofHom σ.toRingHom)).asOver (Spec (.of k))) ((Spec.map (CommRingCat.ofHom τ.toRingHom)).asOver (Spec (.of k))) e i c F a) : ∃ hF : IsAlgebraicModuliStack F, ∃ f : BasedFunctor F (discreteModuli (yoneda.obj (affineGroupoidModuliBase σ τ))), a.comp f = discreteModuliMap (yoneda.map (affineGroupoidModuliAtlasMap σ τ)) ∧ IsQuasiCompactAlgebraicModuliMap.{u, v, w, u, u + 1, 0, 0} f ∧ IsQuasiSeparatedAlgebraicModuliMap f ∧ (∀ (B : AlgebraicSpace (Spec (.of k))) (b : B.obj.obj ⟶ yoneda.obj (affineGroupoidModuliBase σ τ)), (∀ (T : Over (Spec (.of k))) (h : yoneda.obj T ⟶ B.obj.obj), AlgebraicSpace.IsEtale h → Flat (yoneda.preimage (h ≫ b)).left) → ∀ Y : AlgebraicSpace (Spec (.of k)), Function.Bijective (fun h : B.obj.obj ⟶ Y.obj.obj ↦ (moduliTwoFiberFst (discreteModuliMap b) f).comp (discreteModuliMap h))) ∧ (∀ (Z : BasedCategory.{max u v v', max (u + 1) w w'} (Over (Spec (.of k)))) (g : BasedFunctor Z (discreteModuli (yoneda.obj (affineGroupoidModuliBase σ τ)))), IsAlgebraicModuliStack Z → IsHomeomorph (moduliPointMap (moduliTwoFiberFst g f))) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (j : k →+* Ω), Function.Bijective ((moduliFiberMap f (Over.mk (Spec.map (CommRingCat.ofHom j)))).mapSkeleton.obj)) ∧ IsIso (moduliStructureMap hF.1.1 (AlgebraicSpace.schemeSpace (affineGroupoidModuliBase σ τ)) f) ∧ ∀ (D : Type u) [CommRing D] [Algebra (AlgHom.equalizer σ τ) D] [Module.Flat (AlgHom.equalizer σ τ) D], Function.Injective (Algebra.TensorProduct.includeRight : D →ₐ[AlgHom.equalizer σ τ] E ⊗[AlgHom.equalizer σ τ] D) ∧ (∀ x : E ⊗[AlgHom.equalizer σ τ] D, Algebra.TensorProduct.map (affineGroupoidInvariantSource σ τ) (AlgHom.id (AlgHom.equalizer σ τ) D) x = Algebra.TensorProduct.map (affineGroupoidInvariantTarget σ τ) (AlgHom.id (AlgHom.equalizer σ τ) D) x ↔ ∃ d : D, Algebra.TensorProduct.includeRight d = x) ∧ ∀ s : RingCat.sectionsSubring (moduliStructurePresheaf (affineGroupoidModuliBaseChange σ τ f D) ⋙ forget₂ CommRingCat RingCat), ∃! d : D, ∀ x : (affineGroupoidModuliBaseChange σ τ f D).obj, s.val (op x) = moduliAffineFunctionValue (moduliTwoFiberFst (discreteModuliMap (yoneda.map (affineGroupoidModuliChartMap σ τ D))) f) d x",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The quotient is given by its fppf presentation, characterized by local lifts and the original arrows and composition. Algebraicity is a conclusion. Uniform categoricity and universal homeomorphism are expanded for all flat space bases and algebraic-stack bases. Global functions are actual compatible section families, normalized by structural pullback."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-88c54d8bb",
+  "group": "Q50",
+  "result": "fix",
+  "note": "Item statement checked clause by clause against node and Stacks 0DUM/0DUP/0DUR/03BK/03BL; no missing or extra hypotheses or conclusions. Checked: groupoid laws and c orientation (snd first, as in IsGroupoid.source_comp), finite locally free s,t, algebraicity as a conclusion, canonical f, qcqs with the adequate-moduli universes, uniform categorical over flat space bases and all space targets, universal homeomorphism with the smooth-atlas topology, geometric-point skeleton bijection, O_M≅f_*O_Z, flat equalizer, global functions as unique structural pullbacks. Edge cases (empty, R=U, BG, mu_p, variable rank, D=0) are allowed. Dependency nodes are unchanged; the item is still unstated live. New node def-sfb-scheme-groupoid-quotient-presentation is mathematically right; there is no general groupoid prestack, so a presentation is appropriate. H4/H12 finding: its fibred+descent fields copied the body of the landed IsFppfModuliStack (def-sfb-fppf-stackification, Q27, 2026-10-23). FIX: fixes/SchemeGroupoidQuotientPresentation.lean uses `stack : IsFppfModuliStack F` and imports SiteStackification; the header and lean.statement are unchanged and the field is definitionally equal. fixes/def-sfb-scheme-groupoid-quotient-presentation.json cites def-sfb-fppf-stackification in its statement and stmt_deps. Compiled the fix with the unchanged item module via nt_compile --json: exit 0, clean. Advisory: the public import Mathlib.AlgebraicGeometry.Group.Affine looks unneeded."
+ }
+}

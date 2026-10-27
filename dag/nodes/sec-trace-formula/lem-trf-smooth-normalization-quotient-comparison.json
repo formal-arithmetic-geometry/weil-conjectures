@@ -1,0 +1,392 @@
+{
+ "id": "lem-trf-smooth-normalization-quotient-comparison",
+ "kind": "statement",
+ "title": "Smooth pullback of the finite normalization quotient sequence",
+ "statement": "Let $S$ be a reduced scheme of finite type over $\\mathbf Q$ [def-pc-reduced-scheme, def-weil-finite-type-morphism], and let $h:T\\to S$ be a quasi-compact smooth morphism [def-sbc-smooth-morphisms]. Write $\\nu_X:X^\\nu\\to X$ for the componentwise normalization of a scheme $X$ [def-weil-pbc-reduced-normalization] and $C_X=\\operatorname{coker}(\\mathcal O_X\\to\\nu_{X,*}\\mathcal O_{X^\\nu})$ [def-trf-conductor-cokernel]. Then $T$ is reduced and of finite type over $\\mathbf Q$, and there is a canonical isomorphism of $T$-schemes\n$$\\theta_h:T^\\nu\\xrightarrow{\\sim}S^\\nu\\times_S T,$$\nwhere the map on the right to $T$ is the second projection [def-pc-fibre-product]. With module pullback as in [def-pc-module-pullback], there are canonical isomorphisms\n$$\\alpha_h:h^*(\\nu_{S,*}\\mathcal O_{S^\\nu})\\xrightarrow{\\sim}\\nu_{T,*}\\mathcal O_{T^\\nu},\\qquad \\beta_h:h^*C_S\\xrightarrow{\\sim}C_T.$$\nTogether with $h^*\\mathcal O_S\\cong\\mathcal O_T$, these identify the pullback of the short exact normalization sequence on $S$ with the short exact normalization sequence on $T$, including its structure-sheaf inclusion and quotient map. Explicitly, for affine opens $U=\\operatorname{Spec}A\\subseteq S$ and $V=\\operatorname{Spec}B\\subseteq T$ with $h(V)\\subseteq U$, put $N=\\Gamma(\\nu_S^{-1}(U),\\mathcal O_{S^\\nu})$. The ring map $A\\to B$ is flat [def-weil-pbc-flat-ring-map]. The isomorphism $\\alpha_h$ on $V$ is the finite-algebra comparison $N\\otimes_A B\\cong\\Gamma(\\nu_T^{-1}(V),\\mathcal O_{T^\\nu})$, and $\\beta_h$ is the induced quotient comparison\n$$(N/A)\\otimes_A B\\xrightarrow{\\sim}(N\\otimes_A B)/B,$$\nwhere $B$ is embedded by $b\\mapsto1\\otimes b$. These comparisons restrict compatibly to smaller opens and respect identities and composition under the canonical pullback composition isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 07TD, lemma-normalization-and-smooth; finite-algebra and cokernel comparison is the agent affine deduction detailed in report.md. The retained normalized-blowup route is ILO Expose VIII, 2.2.1--2.2.4 and Lemma 2.2.9, printed pp.90--91 (literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf), specialized to the unit ideal."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-reduced-normalization",
+  "def-trf-conductor-cokernel",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "A field is Noetherian since its only ideals are zero and one. Thus S is Noetherian by finite-type permanence. Smoothness makes h flat and locally of finite presentation. A finitely presented algebra is finitely generated, so h is locally of finite type; quasi-compactness makes it finite type. Finite-type composition gives T of finite type over Q, hence Noetherian by the same permanence theorem. Smooth reduced ascent gives reduced T.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pc-smooth-flat",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-trf-smooth-reduced-dense-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian), 01T3 (lemma-composition-finite-type), 01VF (lemma-smooth-flat); descent.tex Tag 034E (lemma-reduced-local-smooth)."
+   }
+  },
+  {
+   "text": "Apply reduced algebraic normalization over the field Q to S and T: both componentwise normalization morphisms are finite. The finite-normalization quotient lemma now gives both short exact sequences, and on every affine U=Spec A the finite algebra N and the quotient module N/A representing C_S. The same applies to affine opens of T.",
+   "uses": [
+    "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+    "lem-trf-finite-normalization-quotient-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR (lemma-normalization-locally-algebraic); morphisms.tex Tag 035P (lemma-description-normalization), finite-normalization quotient specialization."
+   }
+  },
+  {
+   "text": "The unit ideal O_S is quasi-coherent of finite type (locally it is the free module of rank one), hence coherent on the locally Noetherian S. Its zero scheme is empty. Apply normalized-blowup calculus with J=O_S. Its unit-ideal identification B_{O_S}(S)=S^nu and its smooth comparison give theta_h:T^nu ≅ S^nu ×_S T over T. This also supplies identity and composition compatibility of theta_h, retaining the normalized-blowup route.",
+   "uses": [
+    "pqf-def-coherent",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-trf-normalized-blowup-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 2.2.1--2.2.4 and Lemma 2.2.9, printed pp.90--91, unit-ideal specialization; coherent.tex Tag 01XZ (lemma-coherent-Noetherian)."
+   }
+  },
+  {
+   "text": "A finite morphism is affine by definition. Apply affine pushforward base change, clause (2), to nu_S and its structure sheaf, and identify the base-changed scheme with T^nu using theta_h. This defines the algebra isomorphism alpha_h. On V=Spec B above U=Spec A it is the finite-algebra comparison N tensor_A B with the normalization algebra on V (switching tensor factors in the cited formula). Since it is a unital B-algebra comparison, it carries 1 tensor b to the image of b. The structure-sheaf pullback isomorphism therefore makes its square with the normalization inclusions commute.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KG (lemma-affine-base-change), applied to the structure sheaf, with its affine tensor formula."
+   }
+  },
+  {
+   "text": "Flat pullback is exact, so pulling back the short exact sequence from step 2 is short exact. The commuting square from step 4 identifies its first two arrows with those for T; taking cokernels gives the unique isomorphism beta_h commuting with quotient maps. For the affine formula, h is flat, hence A to B is flat by the affine criterion. Affine pullback sections and the quotient lemma identify the pulled-back quotient with (N/A) tensor_A B. Flat tensor exactness and tensor right exactness identify this with (N tensor_A B)/B: explicitly [n] tensor b maps to [n tensor b]. The submodule is exactly the image of A tensor_A B=B, embedded by b mapping to 1 tensor b; flatness ensures this embedding is injective.",
+   "uses": [
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-trf-finite-normalization-quotient-local-criterion",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 02N4 (lemma-pullback-flat); morphisms.tex Tag 01U5 (lemma-flat-characterize); schemes.tex Tag 01I9 (lemma-widetilde-pullback); algebra.tex Tags 00HD (lemma-flat) and 00DF (lemma-tensor-product-exact)."
+   }
+  },
+  {
+   "text": "The comparisons just constructed are global sheaf maps. Their affine descriptions thus commute with restrictions, and the sheaf-on-a-basis lemma also checks their equality on arbitrary opens. Let h':U'→T be a further quasi-compact smooth morphism. The composite h h' is smooth by smooth composition; h' is of finite type as in step 1 (applied to T), so h h' is of finite type by finite-type composition, in particular quasi-compact, and the item applies to h h'. Then theta agrees with the iterated comparison by normalized-blowup calculus; alpha agrees by clause (3) of affine pushforward base change. In coordinates A to B to D, tensor reassociation sends (n tensor b) tensor c to n tensor (b c), with b acting through B to D; both quotient comparisons send ([n] tensor b) tensor c to [n tensor (b c)]. Equivalently, the two beta maps agree after the epimorphic pulled-back quotient map, hence agree. For the identity the formula is n tensor a mapping to an and its quotient. These are precisely the canonical pullback compositors and prove all asserted identity and composition compatibilities.",
+   "uses": [
+    "lem-weil-pbc-sheaf-morphism-on-basis",
+    "lem-trf-normalized-blowup-calculus",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "def-pc-module-pullback",
+    "lem-trf-smooth-composition",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KG affine tensor formula; ILO Expose VIII 2.2.2 and Lemma 2.2.9; elementary tensor reassociation and cokernel uniqueness from the preceding steps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-pc-smooth-flat",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-finite-normalization-quotient-local-criterion",
+  "lem-trf-normalized-blowup-calculus",
+  "lem-trf-smooth-composition",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+  "lem-weil-pbc-sheaf-morphism-on-basis",
+  "lem-weil-pbc-tensor-right-exact",
+  "pqf-def-coherent",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02KG with modules.tex Tag 02N4 and algebra.tex Tags 00HD/00DF; explicit quotient and composition deduction. Normalization follows retained ILO Expose VIII 2.2.1--2.2.4 and Lemma 2.2.9 via unit-ideal normalized-blowup calculus."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth pullback of a reduced finite type rational scheme canonically identifies the normalization cokernel sheaf with the pullback of the original normalization cokernel, compatibly with the short exact normalization sequence",
+   "results": "[leanfinder] OK 8 hit(s); hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc; These are relative-normalization/general ring results, not the finite componentwise normalization quotient theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization, CategoryTheory.Limits.cokernel",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationPullback|normalization.*baseChange|baseChange.*normalization",
+   "results": "[grep] OK 7 hit(s); hits: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:164, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:184, Mathlib/AlgebraicGeometry/Normalization.lean:588, Mathlib/AlgebraicGeometry/Normalization.lean:595, Mathlib/AlgebraicGeometry/Normalization.lean:596, Mathlib/AlgebraicGeometry/Normalization.lean:601, Mathlib/AlgebraicGeometry/Normalization.lean:602; These are relative-normalization/general ring results, not the finite componentwise normalization quotient theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth base change of the short exact sequence from the structure sheaf to its finite normalization pushforward gives the normalization quotient sequence on the new scheme",
+   "results": "[leansearch] OK 8 hit(s); hits: AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, RingHom.Smooth.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.toNormalization, RingHom.isStandardSmooth_isStableUnderBaseChange, Algebra.Smooth.baseChange; These are relative-normalization/general ring results, not the finite componentwise normalization quotient theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite normalization quotients commute with smooth pullback: the natural map from the pulled back structure sheaf to the finite algebra pushforward is the normalization map and their cokernels are canonically isomorphic",
+   "results": "[leanfinder] OK 8 hit(s); hits: AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.fromNormalization; These are relative-normalization/general ring results, not the finite componentwise normalization quotient theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"cokernel\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalizationPullback\"",
+   "results": "[loogle] OK 7 hit(s); hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback, AlgebraicGeometry.Scheme.Hom.normalizationPullback, AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth, AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst, AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst_assoc; These are relative-normalization/general ring results, not the finite componentwise normalization quotient theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationPullback|reducedNormalization.*[Bb]ase|[Bb]ase.*reducedNormalization",
+   "results": "7 hits: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean.  Source of normalizationPullback read at Mathlib/AlgebraicGeometry/Normalization.lean:588--614: this is relative normalization for a qcqs morphism (03GV), not the absolute finite normalization quotient with all clauses. Other hits are relative normalization formulas or smoothness permanence.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalization cokernel of a reduced scheme commutes with smooth base change",
+   "results": "8 hits: RingHom.Smooth.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.ker_toNormalization, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization.  Source of normalizationPullback read at Mathlib/AlgebraicGeometry/Normalization.lean:588--614: this is relative normalization for a qcqs morphism (03GV), not the absolute finite normalization quotient with all clauses. Other hits are relative normalization formulas or smoothness permanence.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalizationPullback\"",
+   "results": "7 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback, AlgebraicGeometry.Scheme.Hom.normalizationPullback, AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth, AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst, AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst_assoc.  Source of normalizationPullback read at Mathlib/AlgebraicGeometry/Normalization.lean:588--614: this is relative normalization for a qcqs morphism (03GV), not the absolute finite normalization quotient with all clauses. Other hits are relative normalization formulas or smoothness permanence.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth pullback identifies the componentwise normalization algebra and its structure sheaf quotient with the pullbacks, naturally under composition",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc.  Source of normalizationPullback read at Mathlib/AlgebraicGeometry/Normalization.lean:588--614: this is relative normalization for a qcqs morphism (03GV), not the absolute finite normalization quotient with all clauses. Other hits are relative normalization formulas or smoothness permanence.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a finite normalization short exact sequence along a smooth map gives an isomorphic short exact sequence and an isomorphism of normalization quotient modules",
+   "results": "8 hits: RingHom.isStandardSmooth_isStableUnderBaseChange, RingHom.Smooth.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv, AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom.  Source of normalizationPullback read at Mathlib/AlgebraicGeometry/Normalization.lean:588--614: this is relative normalization for a qcqs morphism (03GV), not the absolute finite normalization quotient with all clauses. Other hits are relative normalization formulas or smoothness permanence.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-conductor-smooth-base-change",
+  "date": "2026-10-22",
+  "group": "NW"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical conductor refinement of lem-trf-local-term-locality, through lem-trf-conductor-smooth-base-change: returned proof step 4, finite-type smooth charts, unit-ideal specialization of the normalized-blowup comparison, uniqueness on overlaps, finite-algebra pushforward comparison and flat exact quotient.",
+   "via": [
+    "lem-trf-conductor-smooth-base-change",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-smooth-normalization-quotient-comparison",
+  "worker": "stage1",
+  "summary": "Split all clauses using existing DAG statements; no new nodes. Retained the normalized-blowup route with the unit ideal, checked finite-type and reduced hypotheses, applied the existing algebra-valued affine pushforward comparison, and wrote the exact quotient map and tensor composition formula. The statement and statement dependencies are unchanged. Relative normalization in Mathlib is not confused with absolute componentwise normalization.",
+  "blueprint": "Historical conductor refinement in the inherited lem-trf-local-term-locality ancestry, specifically lem-trf-conductor-smooth-base-change step 4. The latest blueprint local-term proof uses contracting correspondences and contains no normalization quotient duplicate. This split realizes the existing historical auxiliary obligation without changing that unit route.",
+  "tool_uses": [
+   {
+    "node": "def-pc-module-pullback",
+    "why": "Only the module pullback definition and its canonical identity and composition identifications are used. No node of the local-term unit gives this generic input."
+   },
+   {
+    "node": "def-sbc-locally-finite-presentation",
+    "why": "Definition used only to forget relations and see finite generation. No node of the local-term unit gives this generic input."
+   },
+   {
+    "node": "def-weil-finite-integral-morphism",
+    "why": "Definition supplies that finite normalization is affine. No node of the local-term unit gives this generic input."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Definition used with the given quasi-compactness to obtain finite type. No node of the local-term unit gives this generic input."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic smooth implies flat and locally finitely presented theorem; needed before exact module pullback. No node of the local-term unit gives this generic input."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic finite-type composition, to verify T is finite type over Q. No node of the local-term unit gives this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Generic algebra-valued affine base change and composition clauses construct alpha; no local-term theorem is replaced. No node of the local-term unit gives this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian permanence over a field, needed for the finite normalization and coherence inputs. No node of the local-term unit gives this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "why": "Only exactness of Zariski O-module pullback under a flat scheme map is used. No node of the local-term unit gives this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic affine criterion verifies flatness of A to B on the stated arbitrary affine pair. No node of the local-term unit gives this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic flat tensor exactness identifies the embedded copy of B and kernel of the quotient map. No node of the local-term unit gives this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic natural affine section formula identifies h^*C_S with (N/A) tensor B. No node of the local-term unit gives this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-structure-sheaf",
+    "why": "Generic canonical pullback unit isomorphism fixes the normalization inclusion square. No node of the local-term unit gives this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+    "why": "Only finite normalization for reduced finite-type Q-schemes is used, not its field-change clause. No node of the local-term unit gives this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-morphism-on-basis",
+    "why": "Generic sheaf basis equality test for the already constructed comparisons. No node of the local-term unit gives this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-right-exact",
+    "why": "Generic tensor right exactness supplies the surjective affine quotient comparison. No node of the local-term unit gives this generic input."
+   },
+   {
+    "node": "pqf-def-coherent",
+    "why": "Only the definitions of quasi-coherent and finite type are used for the rank-one unit ideal. No node of the local-term unit gives this generic input."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic coherence criterion verifies the unit ideal hypothesis of normalized-blowup calculus. No node of the local-term unit gives this generic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-module-pullback",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-pc-smooth-flat",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+  "lem-weil-pbc-sheaf-morphism-on-basis",
+  "lem-weil-pbc-tensor-right-exact",
+  "pqf-def-coherent",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-a018225cc",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-a018225cc (reviewer sub-agent of L); spot-checked: Repaired fault C1 in step 6: the composition clause applies the item to h∘h' but nothing showed that h∘h' still meets the item's hypotheses (smooth and quasi-compact). Step 6 now cites lem-trf-smooth-composition (same unit sk-i-curve-zero, Mathlib smooth_comp) and lem-sfb-finite-type-composition-base-change: h' is of finite type as in step 1, so h∘h' is of finite type and therefore quasi-compact. lem-trf-smooth-composition is added to proof_deps. The fixed item is fixes/dag/nodes/sec-trace-formula/lem-trf-smooth-normalization-quotient-comparison.json. Checks: statement and stmt_deps are unchanged from live (live is still unsplit; no repair note; no other group has split it). There are no new nodes and no cycle (transitive closure of every proof_dep computed; lem-trf-normalized-blowup-calculus does not reach the item). Stacks 07TD read; it matches θ_h. Step 1: Spec Q is Noetherian, so S is Noetherian (01T6); smooth gives flat and lfp; lfp→lft taken as definitional (advisory); finite-type composition makes T of finite type over Q; the smooth-reduced node gives T reduced. Step 2: 0BXR gives finite ν, then the finite-normalization quotient lemma gives the short exact sequence and C|_U=(N/A)~. Step 3: J=O_S is coherent by 01XZ and its zero set is empty, so normalized-blowup calculus gives B_{O_S}(S)=S^ν and θ_h with identity/composition compatibility (keeps the ILO route). Step 4: 02KG clause (2) is an O_T-algebra iso whose unit runs through the structure-sheaf pullback node, so the inclusion square commutes, and the affine formula is N⊗_A B. Step 5: flat pullback is exact; the affine flatness criterion and the naturality of c_G identify (N/A)⊗_A B with (N⊗_A B)/B; flatness makes B→N⊗B injective. Step 6: composition via 02KG clause (3) and the epi argument, both correct. Tested on the node xy=0 (gives Q[t]), the cusp, normal S, empty S or T, and open immersions. The off-unit tool_uses are generic and accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SmoothNormalizationQuotientComparison",
+  "declaration": "AlgebraicGeometry.SmoothNormalizationQuotient.smooth_normalization_quotient_comparison",
+  "declarations": [
+   "AlgebraicGeometry.SmoothNormalizationQuotient.algebra",
+   "AlgebraicGeometry.SmoothNormalizationQuotient.inclusion",
+   "AlgebraicGeometry.SmoothNormalizationQuotient.quotient",
+   "AlgebraicGeometry.SmoothNormalizationQuotient.sequence",
+   "AlgebraicGeometry.SmoothNormalizationQuotient.Comparison",
+   "AlgebraicGeometry.SmoothNormalizationQuotient.Comparison.normalizationMap",
+   "AlgebraicGeometry.SmoothNormalizationQuotient.chartSection",
+   "AlgebraicGeometry.SmoothNormalizationQuotient.AffineFormula",
+   "AlgebraicGeometry.SmoothNormalizationQuotient.Canonical",
+   "AlgebraicGeometry.SmoothNormalizationQuotient.smooth_normalization_quotient_comparison"
+  ],
+  "file": "lean/Sheaf/TraceFormula/SmoothNormalizationQuotientComparison.lean",
+  "statement": "theorem smooth_normalization_quotient_comparison (S : Scheme.{u}) [IsReduced S] (q : S ⟶ Spec (.of (ULift.{u} ℚ))) [LocallyOfFiniteType q] [QuasiCompact q] (T : Scheme.{u}) (h : T ⟶ S) [Smooth h] [QuasiCompact h] : IsReduced T ∧ LocallyOfFiniteType (h ≫ q) ∧ QuasiCompact (h ≫ q) ∧ IsFinite S.fromReducedNormalization ∧ IsFinite T.fromReducedNormalization ∧ (∃! d : Comparison h, Canonical d) ∧ (∀ d : Comparison (𝟙 S), Canonical d → d.normalizationMap = 𝟙 S.reducedNormalization ∧ d.alpha.hom = (Scheme.Modules.tensorPullbackSectionId S).hom.app (algebra S) ∧ d.beta.hom = (Scheme.Modules.tensorPullbackSectionId S).hom.app (conductorCokernel S)) ∧ (∀ (U : Scheme.{u}) (g : U ⟶ T) [Smooth g] [QuasiCompact g] (dh : Comparison h) (dg : Comparison g) (dgh : Comparison (g ≫ h)), Canonical dh → Canonical dg → Canonical dgh → dgh.normalizationMap = dg.normalizationMap ≫ dh.normalizationMap ∧ dgh.alpha.hom = (Scheme.Modules.tensorPullbackSectionComp g h).hom.app (algebra S) ≫ (Scheme.Modules.tensorPullback g).map dh.alpha.hom ≫ dg.alpha.hom ∧ dgh.beta.hom = (Scheme.Modules.tensorPullbackSectionComp g h).hom.app (conductorCokernel S) ≫ (Scheme.Modules.tensorPullback g).map dh.beta.hom ≫ dg.beta.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7df604dc9",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Node unchanged except lean; statement verbatim; 10 declarations recorded. All clauses matched: reduced/finite-type S over ULift ℚ; qc smooth h; T reduced and finite type; both normalizations finite; θ over T via pullback.snd; α pinned to moduleBaseChangeMap of the θ-square ≫ ν_T*(tensorPullbackObjUnitToUnit); β pinned by the quotient square (h^*π epi); inclusion square and both ShortExact; flat appLE; affine eN/eQ pinned on pure tensors, multiplicative and unital, exact presentations of N/A and (N⊗B)/B with B injective; identity/composition via tensorPullbackSectionId/Comp (same normalized adjunction as choose exists_tensorPullbackAdjunction). ∃! true (θ unique over T by birationality). Edge cases empty/normal/node/cusp OK; single universe u. Docstrings with source, blueprint and 6 proof steps; only the theorem is sorry. Advisory: moduleBaseChangeMap and tensorPullbackObjUnitToUnit are theorem-owned plain defs not in stmt_deps (S1 stmt_deps unchanged) → maintainer note for an existing:true def owner."
+ }
+}

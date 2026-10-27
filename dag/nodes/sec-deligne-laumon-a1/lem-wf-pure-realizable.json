@@ -49,7 +49,57 @@
   "def-wf-iota-real"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.isReal_biprod_constantTwist_dual",
+    "AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.isRealizable",
+    "FrobeniusModule.IsPureOfWeight.isReal_prod_rescale_dual"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.isReal_biprod_constantTwist_dual",
+     "module": "WeilConjectures.WeilSheaf.Realizable",
+     "lines": [
+      59,
+      76
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.isRealizable",
+     "module": "WeilConjectures.WeilSheaf.Realizable",
+     "lines": [
+      78,
+      86
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "FrobeniusModule.IsPureOfWeight.isReal_prod_rescale_dual",
+     "module": "WeilConjectures.ZetaLinearAlgebra.FrobeniusModule",
+     "lines": [
+      410,
+      513
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.IsPunctuallyPureOfWeight.isReal_biprod_constantTwist_dual",
+    "AlgebraicGeometry.LAdicWeilSheaf.IsPunctuallyPureOfWeight.isRealizable"
+   ],
+   "open": []
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-p-dl-a1-middle",
  "lean": {
@@ -64,5 +114,25 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\mathcal F$ be a lisse Weil sheaf which is punctually\n$\\iota$-pure of weight $w$, let $c\\in\\Qlb^\\times$ satisfy\n$\\iota(c)=q^{w}$, and put\n\n$$\n\\mathcal R(\\mathcal F)=\\mathcal F\\oplus\n\\bigl(\\mathcal F^\\vee\\otimes\\mathcal B_c\\bigr),\n$$\n\nthe second summand being the constant\nWeil twist of the linear dual.\nThen $\\mathcal R(\\mathcal F)$ is $\\iota$-real in the sense of\n[def-wf-iota-real]; consequently $\\mathcal F$ is\n$\\iota$-realizable. Since $\\iota$ is only a field embedding, such a $c$\nexists exactly when $q^w\\in\\iota(\\Qlb)$; this holds for instance when\n$w\\in\\mathbf Q$, because $\\iota(\\Qlb)$ is an algebraically closed\nsubfield of $\\mathbf C$ and therefore contains every complex number\nalgebraic over $\\mathbf Q$, such as $q^w$.",
+  "proof": [
+   {
+    "text": "At a closed point $y$ of degree $m$, let $\\alpha$ be a Frobenius\neigenvalue of $\\mathcal F$. Purity of weight $w$ in\n[def-weil-punctual-weights] gives\n$|\\iota(\\alpha)|^2=q^{mw}=q_y^{w}$. The corresponding eigenvalue of\nthe second summand is $c^m\\alpha^{-1}$ by\n[def-wf-constant-weil-twist], and hence\n\n$$\n\\iota\\bigl(c^m\\alpha^{-1}\\bigr)\n=\\frac{q^{mw}}{\\iota(\\alpha)}\n=\\overline{\\iota(\\alpha)},\n$$\n\nbecause $q^{mw}=|\\iota(\\alpha)|^2=\\iota(\\alpha)\\overline{\\iota(\\alpha)}$.\nSince this holds for every eigenvalue and every degree, and is\ninvolutionary, the local eigenvalue multiset of $\\mathcal R(\\mathcal F)$\nis conjugation-stable at every closed point; by\n[def-wf-iota-real] the sheaf $\\mathcal R(\\mathcal F)$ is\n$\\iota$-real. The\nprojection onto the first summand gives the realizability of\n$\\mathcal F$.",
+    "uses": [
+     "def-weil-punctual-weights",
+     "def-wf-constant-weil-twist",
+     "def-wf-iota-real"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -1,0 +1,331 @@
+{
+ "id": "lem-sp-proetale-projection-mate-identification",
+ "kind": "statement",
+ "title": "Identify the prescribed pro-etale scalar/direct-image mate with the ringed-topos mate",
+ "statement": "Fix a prime $\\ell$, a unital map $\\varphi:A\\to B$ of finite commutative rings killed by powers of $\\ell$, and an arbitrary morphism of schemes $q:Z\\to Y$. Use the ordinary unbounded constant-ring module derived categories [def-weil-pbc-proetale-modules] and exactly the geometric adjunctions $P_R=q_R^*\\dashv G_R=Rq_{*,R}$ for $R=A,B$ [def-weil-pbc-proetale-operations], with counits $\\varepsilon^R$. Set $T_T^{A,B}=(-)\\otimes^L_{A_T}B_T$ [det-sp-scalar-extension-functor]. Let $\\lambda_q:P_BT_Y^{A,B}\\xrightarrow{\\sim}T_Z^{A,B}P_A$ and $\\gamma_q:T_Y^{A,B}G_A\\to G_BT_Z^{A,B}$ be the balanced K-flat pullback isomorphism and its specified counit mate [def-sp-reduction-direct-image-comparison].\n\nPut $u=q_{\\mathrm{proet}}$. On $Z$ first use the literal ring sheaves $u^{-1}A_Y,u^{-1}B_Y$ with ring map $u^{-1}(\\varphi_Y)$. Let $\\widetilde\\lambda$ be their canonical inverse-image/tensor comparison and $\\chi_\\varphi$ its counit mate, with exactly the conventions of [lem-pur-ringed-coefficient-projection-cocycle]. Transport their module actions, functors, and transformations through the canonical ring isomorphisms $c_R:u^{-1}R_Y\\xrightarrow{\\sim}R_Z$ adjoint to constant sections [def-weil-proetale-inverse-image, lem-pur-proetale-constant-coefficient-comparison]. The transported geometric adjunctions agree with the normalized $P_R\\dashv G_R$, including their counits, and the transported $\\widetilde\\lambda$ equals $\\lambda_q$ as a natural transformation. On K-flat representatives their ordinary maps both take the inverse image of $x\\otimes b$ to the inverse image of $x$ tensor $b$.\n\nConsequently the transported $\\chi_\\varphi$ equals $\\gamma_q$ as a natural transformation, with the following common, unique counit-transpose characterization for every $E\\in D(Z_{\\mathrm{proet}},A)$:\n$$\\varepsilon^B_{T_Z^{A,B}E}\\circ P_B(\\gamma_{q,E})=T_Z^{A,B}(\\varepsilon^A_E)\\circ\\lambda_{q,G_AE}.$$\nAll identifications are natural in $E$, and the assertions hold for arbitrary $q$ and arbitrary unbounded $E$, without flatness, finite projective dimension, or invertibility of the direct-image comparison. No different choice of geometric adjunction or of coefficient comparison is allowed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A7 (remark-base-change), the displayed counit-transpose construction; agent extraction of returned proof step 3 and its naturality clause, comparing the specified constant-coefficient and literal inverse-image ring presentations."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations",
+  "det-sp-scalar-extension-functor",
+  "def-sp-reduction-direct-image-comparison",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-proetale-constant-coefficient-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\widehat R=u^{-1}R_Y$ for $R=A,B$. The canonical maps $c_R:\\widehat R\\to R_Z$ are ring isomorphisms by [lem-pur-proetale-constant-coefficient-comparison]. They respect the specified coefficient homomorphism:\n$$c_B\\circ u^{-1}(\\varphi_Y)=\\varphi_Z\\circ c_A.$$\nIndeed, under the ring-sheaf adjunction of [def-weil-proetale-inverse-image], the adjuncts of both sides are the map $A_Y\\to u_*B_Z$ sending a constant section $a$ to the constant section $\\varphi(a)$. They agree before sheafification and hence on the constant sheaf. Injectivity of the adjunction bijection proves the equality. Thus every change of action below uses the given $\\varphi$, not a separately selected identification.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-pur-proetale-constant-coefficient-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J (example-constant-sheaf); the constant-section maps of def-weil-proetale-inverse-image"
+   }
+  },
+  {
+   "text": "For a $\\widehat R$-module $N$, let $J_RN$ be the same abelian sheaf with $R_Z$-action $r n=c_R^{-1}(r)n$; the inverse equivalence restricts the action along $c_R$. These functors leave maps, kernels and cokernels unchanged. The tensor presentation of [def-weil-pbc-proetale-operations] is identified with $J_Ru^{-1}F$ by\n$$u^{-1}F\\otimes_{\\widehat R,c_R}R_Z\\longrightarrow J_Ru^{-1}F,\\qquad m\\otimes r\\longmapsto c_R^{-1}(r)m,$$\nwith inverse $m\\mapsto m\\otimes1$. Balancing proves both composite identities, and the formulas commute with restriction. On direct image the action of $R_Y$ is through the adjunct of $c_R$, namely the map $\\rho_R$ defining [def-weil-proetale-inverse-image]. Thus the transported literal direct image is exactly the specified ordinary direct image. The module Hom bijection in [def-weil-pbc-proetale-operations] is the underlying sheaf Hom bijection in both presentations; consequently these identifications preserve its unit and evaluation counit, not merely its functors.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-proetale-inverse-image",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3 (lemma-adjoint-push-pull-modules); transport along an invertible structural ring map"
+   }
+  },
+  {
+   "text": "First compare the two definitions of the literal derived adjunction. With coefficients $(R_Y,\\widehat R)$ and structural map $1_{\\widehat R}$, [def-weil-pbc-proetale-operations] has the same exact ordinary inverse image and K-injective right-derived direct image as the canonical ringed adjunction of [lem-weil-pbc-ringed-projection-mate-exact]. Their canonical derived Hom bijections agree: if $I$ is K-injective, then $u_*I$ is K-injective, since for an acyclic $L$ the termwise adjunction gives $\\operatorname{Hom}_K(L,u_*I)=\\operatorname{Hom}_K(u^{-1}L,I)=0$ by exactness of $u^{-1}$. Hence [lem-weil-pbc-kinjective-hom-derived] identifies both derived Hom sets with their homotopy Hom sets. Both canonical bijections are the ordinary termwise adjunction there, by the representing-fraction formula of [lem-pc-pre-derived-adjoint-functors-general] (take the identity resolution maps at $I$ and at a homotopy representative of the source). Every target has a K-injective resolution by the constructions in the cited operations. Their naturality therefore identifies the bijections on every target, including the image of its identity morphism, which is its counit.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint); derived.tex Tags 070I (lemma-K-injective) and 0FND (lemma-pre-derived-adjoint-functors-general), with the canonical pre-derived Hom formula"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ring-sheaf-change-adjunction] separately for $R=A,B$. In its notation take $R_V=S_V=R_Y$, $R_U=\\widehat R$, $S_U=R_Z$, $a_V=1$, $a_U=c_R$, and structural isomorphisms $c_{\\rm old}=1_{\\widehat R}$ and $c_{\\rm new}=c_R$. Its required compatibility is $c_R\\circ1=c_R\\circ u^{-1}(1)$. Its $r_U$ is the inverse of $J_R$ from step 2 and $r_V$ is the identity. The theorem gives natural derived pullback and direct-image comparisons and says explicitly that they preserve adjuncts. By step 3 the old adjunction is the literal ringed one. By step 2 the new one is precisely the prescribed constant-ring adjunction of [def-weil-pbc-proetale-operations]. To see the counit normalization directly in the theorem's formula, take $M=G_R E$, $N=E$ and $t=\\varepsilon^R_E$. Its adjunct is $1_{G_RE}$; the displayed compatibility says that the old counit becomes $\\varepsilon^R_E$ after the specified comparisons. Thus these are identifications of the normalized adjunctions, including counits, on the entire unbounded categories.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), and 07A6 (lemma-adjoint), invertible coefficient-change specialization"
+   }
+  },
+  {
+   "text": "For an $A_Y$-module $F$, [lem-pur-proetale-inverse-image-tensor-comparison] gives the unique ordinary inverse-image tensor comparison\n$$u^{-1}(F\\otimes_{A_Y}B_Y)\\longrightarrow u^{-1}F\\otimes_{\\widehat A}\\widehat B,\\qquad u^{-1}(x\\otimes b)\\longmapsto u^{-1}x\\otimes u^{-1}b.$$\nAfter step 2's action identifications, the right side is identified with $q_A^*F\\otimes_{A_Z}B_Z$ by $m\\otimes b'\\mapsto m\\otimes c_B(b')$. This is balanced: the relation $(a'm)\\otimes b'=m\\otimes u^{-1}\\varphi_Y(a')b'$ becomes $(c_A(a')m)\\otimes c_B(b')=m\\otimes\\varphi_Z(c_A(a'))c_B(b')$ by step 1. Its inverse uses $c_B^{-1}$. The same formulas on the left identify its transported sheaf with $q_B^*(F\\otimes_{A_Y}B_Y)$. Thus the resulting comparison sends the inverse image of $x\\otimes b$ to $q_A^*x\\otimes c_B(u^{-1}b)$; in particular a constant $b$ is sent to the same constant $b$. This is exactly the ordinary balanced map prescribed in [def-sp-reduction-direct-image-comparison]. The cited uniqueness proves equality of sheaf maps, as opposed to merely equality of their induced cohomology maps.",
+   "uses": [
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "def-pur-sheaf-tensor-product",
+    "def-sp-reduction-direct-image-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback), with the pure-tensor and coefficient-naturality normalization"
+   }
+  },
+  {
+   "text": "For any $K\\in D(Y_{\\mathrm{proet}},A)$ choose a K-flat representative $P$ with flat terms using [lem-pc-kflat-resolution]. Scalar extension is represented by $P\\otimes_{A_Y}B_Y$ by [det-sp-scalar-extension-functor]. Applying [lem-weil-pbc-ringed-topos-kflat-pullback] to the literal geometric morphism, its identified-coefficient version, and the identity-topos coefficient morphism shows that $u^{-1}P$, $q_A^*P$, and $P\\otimes_{A_Y}B_Y$ have the required K-flat, flat-term models over their respective rings. Both geometric pullbacks are exact by [def-weil-pbc-proetale-operations]. Consequently the two composite derived functors in the comparison are represented by the two sides of step 5 applied termwise to $P$; this involves no flatness of $B$ over $A$. The equality of their ordinary maps in each degree is compatible with differentials and chain maps, since its formula is natural in $F$. It therefore gives equality after localization. The K-flat localization equivalence of [lem-weil-pbc-site-derived-tensor-descent] shows that this is equality of natural transformations on the whole derived category, independent of the representative. In particular the transported $\\widetilde\\lambda$ equals the specified $\\lambda_q$, with its $B_Z$-action.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "det-sp-scalar-extension-functor",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 0G7E (lemma-pullback-K-flat), and 07A4 (lemma-pullback-tensor-product); K-flat localization"
+   }
+  },
+  {
+   "text": "Denote the transported $\\chi_\\varphi$ by $h:T_Y^{A,B}G_A\\to G_BT_Z^{A,B}$. Use the definition of $\\chi$ in [lem-pur-ringed-coefficient-projection-cocycle], with coefficient chain $A_Y\\xrightarrow{\\varphi_Y}B_Y\\xrightarrow{1}B_Y$. Step 4 identifies its counits and step 6 identifies its inverse-image/tensor comparison, so its defining adjunct is\n$$v_E=T_Z^{A,B}(\\varepsilon^A_E)\\circ\\lambda_{q,G_AE}.$$\nBy [def-sp-reduction-direct-image-comparison], $\\gamma_{q,E}$ has this same adjunct. Explicitly, for $X=T_Y^{A,B}G_AE$, $Y=T_Z^{A,B}E$, the adjunction bijection sends $k:X\\to G_BY$ to $\\varepsilon^B_Y\\circ P_B(k)$, and its inverse sends $v:P_BX\\to Y$ to $G_B(v)\\circ\\eta^B_X$. The two triangle identities make these inverse functions. Thus $h_E=\\gamma_{q,E}$ and both satisfy the displayed counit identity, which also characterizes them uniquely. All preceding comparisons and $v_E$ are natural, so this equality is an equality of natural transformations. K-flat and K-injective resolutions used above exist for arbitrary unbounded complexes; no step uses properness of $q$, finite projective dimension, or invertibility of $h_E$.",
+   "uses": [
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "def-sp-reduction-direct-image-comparison",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 (remark-base-change), its displayed counit-transpose construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-pur-proetale-constant-coefficient-comparison",
+  "def-weil-pbc-proetale-operations",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "def-sp-reduction-direct-image-comparison",
+  "lem-pc-kflat-resolution",
+  "det-sp-scalar-extension-functor",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-ringed-coefficient-projection-cocycle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A7, 07A6, 0D6D, 0D6E; explicit presentation-normalization argument using sites-modules.tex Tags 03D3 and 03EL"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mateEquiv|conjugateEquiv_pullbackComp|derived.*counit",
+   "results": "OK: 23 hits; Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; directory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mateEquiv and underived sheaf pullback conjugacy do not establish the equality of these particular unbounded derived geometric adjunctions, K-flat maps and counit mates after constant-ring transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": "OK: 12 hits; CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mateEquiv and underived sheaf pullback conjugacy do not establish the equality of these particular unbounded derived geometric adjunctions, K-flat maps and counit mates after constant-ring transport."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pro etale derived direct image scalar comparison is the specified ringed topos counit mate under coefficient identifications",
+   "results": "OK: 8 hits; ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.counit_app, PresheafOfModules.instIsRightAdjointPushforward, ModuleCat.RestrictionCoextensionAdj.counit'_app, PresheafOfModules.pushforward_obj_obj",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mateEquiv and underived sheaf pullback conjugacy do not establish the equality of these particular unbounded derived geometric adjunctions, K-flat maps and counit mates after constant-ring transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized counit mate of scalar extension and pro etale direct image equals the ringed topos base change map",
+   "results": "OK: 8 hits; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.ΓSpec.adjunction_counit_app'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mateEquiv and underived sheaf pullback conjugacy do not establish the equality of these particular unbounded derived geometric adjunctions, K-flat maps and counit mates after constant-ring transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identify the derived tensor pullback comparison and its counit transpose after changing constant coefficient ring presentations",
+   "results": "OK: 8 hits; Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul, Algebra.Presentation.tensorModelOfHasCoeffsEquiv, Algebra.Presentation.tensorModelOfHasCoeffsInv, Algebra.Presentation.algebraTensorAlgEquiv_symm_relation, Algebra.Presentation.baseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mateEquiv and underived sheaf pullback conjugacy do not establish the equality of these particular unbounded derived geometric adjunctions, K-flat maps and counit mates after constant-ring transport."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|extendScalars_assoc|conjugateEquiv_pullbackComp",
+   "results": "OK: 8 hits; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; directory Algebra/Category/ModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mateEquiv and underived sheaf pullback conjugacy do not establish the equality of these particular unbounded derived geometric adjunctions, K-flat maps and counit mates after constant-ring transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical unbounded pro etale scalar direct image mate agrees with the ringed topos mate after constant ring identification",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_homEquiv_apply', AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic mates or ordinary sheaf pullback/scalar adjunctions, not this equality of the specified unbounded derived coefficient presentations and their counits."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_pullbackComp|mateEquiv_counit|derived.*counit",
+   "results": "OK: 7 hits; Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; directory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic mates or ordinary sheaf pullback/scalar adjunctions, not this equality of the specified unbounded derived coefficient presentations and their counits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor inverse image commutes with coefficient ring isomorphisms and preserves canonical adjunction counits",
+   "results": "OK: 8 hits; CategoryTheory.Adjunction.counitAsIsoOfIso, AlgebraicGeometry.ΓSpec.adjunction_counit_app, ModuleCat.RestrictionCoextensionAdj.counit', Algebra.TensorProduct.liftEquiv_symm_apply_coe, CategoryTheory.Adjunction.inv_counit_map, TensorProduct.directLimitRight_symm_of_tmul, CommRingCat.coyonedaAdj, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic mates or ordinary sheaf pullback/scalar adjunctions, not this equality of the specified unbounded derived coefficient presentations and their counits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical pullback tensor comparison after transport of sheaf modules along an isomorphism of coefficient ring sheaves",
+   "results": "OK: 8 hits; SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic mates or ordinary sheaf pullback/scalar adjunctions, not this equality of the specified unbounded derived coefficient presentations and their counits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-proetale-direct-image-scalar-cocycle",
+  "date": "2026-10-22",
+  "group": "Q09"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-direct-image",
+   "place": "Proof Step 4: \"the projection maps of Step 1 compose under the associativity isomorphism\"; Tag 07A7 (remark-base-change), the displayed counit-transpose construction; agent extraction of returned proof step 3 and its naturality clause, comparing the specified constant-coefficient and literal inverse-image ring presentations.",
+   "via": [
+    "lem-sp-proetale-direct-image-scalar-cocycle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-proetale-projection-mate-identification",
+  "worker": "stage1",
+  "summary": "Seven-step proof without new nodes. Checked canonical constant-ring square, the actual ordinary actions and evaluation counits, canonical unbounded derived adjunction normalization, and equality of the balanced tensor maps on flat-term K-flat models; finish by the explicit inverse adjunction bijection. Statement unchanged; all citations read and quoted in citations.json.",
+  "blueprint": "det-sp-reduction-direct-image proof Step 1 (the specified projection map is a counit transpose) and Step 4 (the projection maps of Step 1 compose under associativity): this item identifies that same prescribed map with the ringed-topos mate before the cocycle is applied.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-proetale-constant-coefficient-comparison",
+    "why": "Step 1 uses invertibility of the canonical constant-ring map for arbitrary schemes; the unit needs this sheaf-theoretic tool to compare its coefficient presentations."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Step 3 uses the canonical unbounded ringed-topos adjunction computed on K-injectives, not its projection-formula conclusion."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Step 3 uses its explicit canonical Hom formula to identify the normalization of the literal derived adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Step 4 uses its normalized derived adjunction compatibility under the specified ring isomorphism."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-tensor-comparison",
+    "why": "Step 5 uses the unique pure-tensor normalized ordinary inverse-image comparison; it does not replace the coefficient-comparison route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Step 6 needs flat-term K-flat representatives for arbitrary unbounded objects."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Step 6 needs preservation of flat-term K-flat representatives by geometric and scalar pullback."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Step 6 needs the K-flat localization equivalence to conclude equality of derived natural transformations."
+   },
+   {
+    "node": "lem-pur-ringed-coefficient-projection-cocycle",
+    "why": "Step 7 uses only the stated definition of the literal counit mate, not the cocycle conclusion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-proetale-constant-coefficient-comparison",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-ringed-coefficient-projection-cocycle"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-97e0af799",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-97e0af799 (reviewer sub-agent of L); spot-checked: Read the item, its seven steps and every cited statement in full. There are no new nodes, and the statement is unchanged; it is a fresh leaf from Q09 that its parent lem-sp-proetale-direct-image-scalar-cocycle cites in step 2. Source: Stacks 07A7 (sites-cohomology.tex l.4033) builds the base-change map as the adjunct of the counit after the pullback identification, with the same direction as def-sp-reduction-direct-image-comparison and the cocycle node's chi. Step 1: the c_R square follows by taking adjuncts of rho (c is defined as the adjunct of rho). Step 2: the unitor and the action identification are stated inside def-weil-pbc-proetale-operations. Step 3: u_*I is K-injective because Hom_K(L,u_*I)=Hom_K(u^-1 L,I)=0; together with the K-injective Hom leaf and the fraction formula of lem-pc-pre-derived-adjoint-functors-general, the literal adjunction is the ringed one. Step 4: the instantiation of lem-weil-pbc-ring-sheaf-change-adjunction is checked (R_V=S_V=R_Y, R_U=u^-1R_Y, S_U=R_Z, a_U=c_R; the compatibility becomes c_R=c_R); with t=counit its adjunct clause gives the counit correspondence. Step 5: uniqueness of sigma, with balancing given by step 1. Step 6: flat-term K-flat models via ringed-topos-kflat-pullback (any ring map, so no flatness of B over A is needed) and tensor-descent localization uniqueness; the extra application to P tensor B_Y is left implicit but is harmless. Step 7: explicit inverse adjunction bijection. Small cases tested: q=id, phi=id, E=0, empty Z, zero ring, and the non-flat Z/l^2 to Z/l. The duplicate search (rg -L for counit mate/transpose and the citers of the definition and cocycle nodes) read 7 candidates; none states this identification. No cycle. I accept all nine declared generic tool_uses. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ProEtaleProjectionMateIdentification",
+  "declaration": "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.proEtale_projection_mate_identification",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.inverseRing",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.literalPull",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.literalAdj",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.literalPush",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.restrict",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.inverseMap",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.literalTensor",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.literalMate",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.RingTransport",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.RingTransport.ordinary",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.RingTransport.direct",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.RingTransport.pullback",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.ScalarTransport",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.ScalarTransport.ordinary",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.ScalarTransport.derived",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.TensorModel",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.Data",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.Data.Identifies",
+   "AlgebraicGeometry.ProEtale.ProjectionMateIdentification.proEtale_projection_mate_identification"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/ProEtaleProjectionMateIdentification.lean",
+  "statement": "theorem proEtale_projection_mate_identification (ℓ : ℕ) [Fact ℓ.Prime] {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (_hA : ∃ n : ℕ, (ℓ : A) ^ n = 0) (_hB : ∃ n : ℕ, (ℓ : B) ^ n = 0) (φ : A →+* B) {X Y : Scheme.{u}} (q : X ⟶ Y) : (∃! d : Data q φ, d.Identifies) ∧ ∀ E : proEtaleDerivedCategory X A, ∀ k : (scalarExtensionFunctor φ Y).obj ((directImageConstantPush A q).obj E) ⟶ (directImageConstantPush B q).obj ((scalarExtensionFunctor φ X).obj E), (proEtaleConstantRingDerivedPullback B q).map k ≫ (directImageConstantAdjunction B q).counit.app ((scalarExtensionFunctor φ X).obj E) = (directImageScalarPullbackIso φ q).hom.app ((directImageConstantPush A q).obj E) ≫ (scalarExtensionFunctor φ X).map ((directImageConstantAdjunction A q).counit.app E) ↔ k = (directImageScalarComparison φ q).app E",
+  "branch": "sheaf-dag",
+  "by": "NG",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e11fa6dd",
+  "group": "NG",
+  "result": "pass",
+  "note": "Statement field verbatim; only the item node's lean record and one new module delivered, dep records unchanged. Clause-by-clause match to node/Stacks 07A7: the literal mate is mateEquiv of proEtaleReductionPullbackIso (c=refl) under the canonical proEtaleRingDerivedAdjunction, the same counit-mate convention as RingedCoefficientProjection.comparison. Transports are pinned (unit sections, homEquiv at the counit, pure tensors, flat-term K-flat representatives), so the ∃! Data is genuine. Identifies types checked by hand; the final iff gives the unique counit-transpose characterization of directImageScalarComparison for every E and k. No extra hypotheses, edge cases covered, only the theorem is sorry, docstrings with source/blueprint/7 steps, report sections present (second reading is a self-audit). Advisory: λ_q/γ_q owned by def node def-sp-constant-scalar-pullback-comparison (re-exported by the stmt_dep module ReductionDirectImageComparison) and base-era proEtaleRing*/reduction* defs used outside stmt_deps. No recompile (no changes)."
+ }
+}

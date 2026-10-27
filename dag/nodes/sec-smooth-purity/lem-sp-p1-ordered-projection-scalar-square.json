@@ -1,0 +1,294 @@
+{
+ "id": "lem-sp-p1-ordered-projection-scalar-square",
+ "kind": "statement",
+ "title": "Ordered projective-line projection square for the fixed scalar coefficient map",
+ "statement": "Fix a field $k$ of characteristic $p>0$ and a prime $\\ell\\ne p$. All schemes below are separated and finite type over $k$, and all maps are $k$-morphisms [sk-def-sfb-dc-setting]. Let $A\\to B$ be a unital map of finite commutative rings killed by powers of $\\ell$, and choose $N=\\ell^n\\geq1$ annihilating both. On small ordinary etale sites use constant-ring module derived categories [def-weil-pbc-derived-categories] and $T_T=(-)_B=-\\otimes^L_{A_T}B_T$ [lem-pur-derived-change-of-rings]. Write $D^b_{ctf}$ for bounded constructible complexes of finite Tor amplitude, as in [det-sp-et-proet-adjunction-transfer], and $R_T(1)=\\mu_{N,T}\\otimes_{(\\mathbf Z/N)_T}R_T$ for $R=A,B$ [lem-asd-finite-etale-twist-line]. For a standing base $S$, put $P=\\mathbf P^1_S$, $q:P\\to S$, $F_R=Rq_{*,R}$, $L_R=R_P(1)[2]$, $H_R=F_RL_R$ and $G_RK=q_R^*K\\otimes_R^LL_R$. Give $q_R^*\\dashv F_R$ its canonical geometric derived adjunction [def-kun-projection-formula-map]. Let $\\beta_q:T_SF_A\\to F_BT_P$ be the specified proper counit-transpose coefficient map [lem-sp-et-proet-coefficient-compatibility]. Write $m_{U,V}:T_S(U\\otimes_A^LV)\\xrightarrow{\\sim}T_SU\\otimes_B^LT_SV$ for the canonical scalar tensor comparison [def-pur-exceptional-coefficient-normalizations]. Let $\\lambda:T_PL_A\\xrightarrow{\\sim}L_B$ be the balanced twist comparison, shifted by $[2]$, whose unshifted ordinary representative sends $(z\\otimes a)\\otimes b$ to $z\\otimes\\varphi(a)b$. Let $a_K:T_PG_AK\\xrightarrow{\\sim}G_BT_SK$ be the canonical scalar tensor comparison followed by the canonical inverse-image/scalar comparison on the first factor and $\\lambda$ on the second [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Set $b=F_B(\\lambda)\\circ\\beta_q(L_A)$. Define the ordered projection map by\n$$\\pi_{R,K}=F_R(\\sigma)\\circ\\mathrm{PF}_q(L_R,K)\\circ\\sigma:K\\otimes_R^LH_R\\longrightarrow F_RG_RK,$$\nwhere $\\mathrm{PF}$ is the geometric counit-transpose map [def-kun-projection-formula-map] and $\\sigma$ is derived tensor symmetry [lem-sfb-ringed-derived-monoidal-comparisons]. Then, naturally for every $K\\in D^b_{ctf}(S_{et},A)$, the following equality holds in $D(S_{et},B)$:\n$$F_B(a_K)\\circ\\beta_q(G_AK)\\circ T_S(\\pi_{A,K})=\\pi_{B,T_SK}\\circ(1_{T_SK}\\otimes b)\\circ m_{K,H_A}.$$\nNo flatness or finite projective dimension of $B$ over $A$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts paragraph; extracted normalization argument in returned lem-sp-p1-counit-scalar steps 1-3. Stacks Tag 0E48 (sites-cohomology.tex, remark-compatible-with-diagram); the fixed coefficient/twist and ordered-symmetry normalization is agent-stated."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "det-sp-et-proet-adjunction-transfer",
+  "lem-asd-finite-etale-twist-line",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-kun-projection-formula-map",
+  "def-pur-exceptional-coefficient-normalizations",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-pur-finite-smooth-coefficient-arrows"
+ ],
+ "proof": [
+  {
+   "text": "View coefficient change as a square of ringed topoi. Its upper corners are $(P_{et},A_P)$ and $(P_{et},B_P)$, its lower corners $(S_{et},A_S)$ and $(S_{et},B_S)$. The vertical morphisms are $q_A,q_B$ and the horizontal morphisms are the identity geometric morphisms with structural maps $A_T\\to B_T$. These are ringed morphisms by [def-weil-pbc-ringed-topos-morphism]; the square commutes since inverse image carries the constant coefficient homomorphism on $S$ to that on $P$. The horizontal derived pullbacks are exactly $T_P,T_S$ by [lem-pur-derived-change-of-rings]. Denote the canonical comparison by $c_K:q_B^*T_SK\\xrightarrow{\\sim}T_Pq_A^*K$. The composition and 2-isomorphism clauses of [lem-sfb-ringed-derived-monoidal-comparisons] give this comparison with the canonical tensor normalizations. The exchange of this square has adjunct $T_P(\\varepsilon_{A,E})\\circ c_{F_AE}$ by [def-weil-pbc-adjunction-mate]. This is also the defining adjunct of the specified proper coefficient map in [lem-sp-et-proet-coefficient-compatibility]. The adjunction Hom bijection therefore identifies the exchange with the actual $\\beta_q(E)$, rather than just an isomorphism with the same source and target.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-pur-derived-change-of-rings",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-weil-pbc-adjunction-mate",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram; Tag 0B56, equation-projection-formula-map. Agent-written specialization to coefficient change and ordered symmetry."
+   }
+  },
+  {
+   "text": "Write $p_R(E,K)=\\mathrm{PF}_q(E,K)$, and let $m^P$ denote the scalar tensor comparison on $P$. Put $d_{E,K}=(1\\otimes c_K^{-1})\\circ m^P_{E,q_A^*K}$. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the ringed square of step 1. The vertical projection maps there are exactly $p_R$ because their adjunct is counit tensor identity, the definition in [def-kun-projection-formula-map]. Its equality reads\n$$F_B(d_{E,K})\\circ\\beta_q(E\\otimes q_A^*K)\\circ T_S(p_A(E,K))=p_B(T_PE,T_SK)\\circ(\\beta_q(E)\\otimes1)\\circ m_{F_AE,K}.$$\nThe general lemma imposes no cartesianness assumption, so it applies to this coefficient square. Its tensors and comparisons are the canonical ones. In particular the scalar tensor comparison is the specified balanced comparison of [def-pur-exceptional-coefficient-normalizations], since scalar extension is the horizontal derived pullback. No inversion of $\\beta_q$ or of a projection morphism occurs.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "def-kun-projection-formula-map",
+    "def-pur-exceptional-coefficient-normalizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram; Tag 0B56, equation-projection-formula-map. Agent-written specialization to coefficient change and ordered symmetry."
+   }
+  },
+  {
+   "text": "For $E,K$ with $R$-coefficients define $o_R(E,K)=F_R(\\sigma_{E,q_R^*K})\\circ p_R(E,K)\\circ\\sigma_{K,F_RE}$. Put $e_{K,E}=(c_K^{-1}\\otimes1)\\circ m^P_{q_A^*K,E}$. Scalar pullback is symmetric monoidal by [lem-sfb-ringed-derived-monoidal-comparisons], so\n$$m_{F_AE,K}\\,T_S(\\sigma_{K,F_AE})=\\sigma_{T_SK,T_SF_AE}\\,m_{K,F_AE},$$\n$$e_{K,E}\\,T_P(\\sigma_{E,q_A^*K})=\\sigma_{T_PE,q_B^*T_SK}\\,d_{E,K}.$$\nPrecompose step 2 by $T_S(\\sigma_{K,F_AE})$ and postcompose by $F_B(\\sigma_{T_PE,q_B^*T_SK})$. Naturality of $\\beta_q$ moves $T_SF_A(\\sigma)$ to $F_BT_P(\\sigma)$; naturality of symmetry moves $\\beta_q(E)\\otimes1$ to $1\\otimes\\beta_q(E)$. Substituting the two displayed identities yields\n$$F_B(e_{K,E})\\circ\\beta_q(q_A^*K\\otimes E)\\circ T_S(o_A(E,K))=o_B(T_PE,T_SK)\\circ(1\\otimes\\beta_q(E))\\circ m_{K,F_AE}.$$\nThis is substitution of naturality and the two symmetric-monoidal identities, with no new geometric claim.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram; Tag 0B56, equation-projection-formula-map. Agent-written specialization to coefficient change and ordered symmetry."
+   }
+  },
+  {
+   "text": "Take $E=L_A$. Then $o_A(L_A,K)=\\pi_{A,K}$. Postcompose step 3 with $F_B(1_{q_B^*T_SK}\\otimes\\lambda)$. The ordered projection morphism is natural in $E$: for $u:E\\to E'$,\n$$F_B(1\\otimes u)\\circ o_B(E,T_SK)=o_B(E',T_SK)\\circ(1\\otimes F_B(u)).$$\nIndeed, expanding $o_B$ by [def-kun-projection-formula-map], this is counit naturality for $u$, naturality of the tensor comparison, and naturality of the two symmetries [lem-sfb-ringed-derived-monoidal-comparisons]. Apply this identity to $u=\\lambda:T_PL_A\\to L_B$. On the left, $(1\\otimes\\lambda)\\circ e_{K,L_A}$ is exactly $a_K$ by its defining ordered tensor/pullback construction. On the right, $F_B(\\lambda)\\circ\\beta_q(L_A)=b$ and $o_B(L_B,T_SK)=\\pi_{B,T_SK}$. Functoriality of $F_B$ and of tensor therefore gives\n$$F_B(a_K)\\circ\\beta_q(G_AK)\\circ T_S(\\pi_{A,K})=\\pi_{B,T_SK}\\circ(1\\otimes b)\\circ m_{K,H_A}.$$\nThe argument uses the specified $\\lambda$, including its shift; it never replaces it by an arbitrary trivialization of the twist.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram; Tag 0B56, equation-projection-formula-map. Agent-written specialization to coefficient change and ordered symmetry."
+   }
+  },
+  {
+   "text": "All maps used above are natural in $K$: the geometric adjunction and its projection map are natural by their explicit unit/counit formula [def-kun-projection-formula-map], the coefficient map is natural by [lem-sp-et-proet-coefficient-compatibility], and the scalar/pullback and symmetry comparisons are natural by [lem-sfb-ringed-derived-monoidal-comparisons]. Thus the equality restricts naturally to the stated $D^b_{ctf}$ inputs. The calculation took place in the ambient ordinary unbounded derived categories; the ringed exchange coherence has no cartesianness condition and scalar extension is everywhere defined without flatness by [lem-pur-derived-change-of-rings]. Accordingly no finite projective dimension of $B$ or bounded free resolution of $B$ was used.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-sp-et-proet-coefficient-compatibility",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram; Tag 0B56, equation-projection-formula-map. Agent-written specialization to coefficient change and ordered symmetry."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "def-kun-projection-formula-map",
+  "def-pur-exceptional-coefficient-normalizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E48, remark-compatible-with-diagram; Tag 0B56, equation-projection-formula-map. Agent-written specialization to coefficient change and ordered symmetry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projectionFormula|rightAdjointProjectionMap|ProjectionMap",
+   "results": "{\"t\": \"2026-10-22T05:56:50Z\", \"tool\": \"grep\", \"query\": \"projectionFormula|rightAdjointProjectionMap|ProjectionMap\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction/monoidal tools or etale algebras do not state the named geometric coefficient/projection square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived etale coefficient extension ordered projection formula compatibility square",
+   "results": "{\"t\": \"2026-10-22T05:56:50Z\", \"tool\": \"leansearch\", \"query\": \"Derived etale coefficient extension ordered projection formula compatibility square\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointProjectionMap",
+   "results": "{\"t\": \"2026-10-22T05:56:50Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.rightAdjointProjectionMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Adjunction.rightAdjointProjectionMap'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction/monoidal tools or etale algebras do not state the named geometric coefficient/projection square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor projection formula square is compatible with change of finite coefficient rings without flatness, using strong monoidal pullback and adjunction mates",
+   "results": "{\"t\": \"2026-10-22T05:57:13Z\", \"tool\": \"leanfinder\", \"query\": \"The tensor projection formula square is compatible with change of finite coefficient rings without flatness, using strong monoidal pullback and adjunction mates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"CategoryTheory.tensorLeftHomEquiv_tensor\", \"CategoryTheory.tensorRightHomEquiv_tensor\", \"ModuleCat.extendScalarsComp_hom_app_one_tmul\", \"lTensor.inverse_of_rightInverse_comp_lTensor\", \"id_tensor_π_preserves_coequalizer_inv_desc\"], \"digest\": \"a43891dc961c57c2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction/monoidal tools or etale algebras do not state the named geometric coefficient/projection square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient extension commutes with the ordered derived etale projection formula morphism for a proper map and the counit mate of scalar pullback",
+   "results": "{\"t\": \"2026-10-22T05:57:14Z\", \"tool\": \"leanfinder\", \"query\": \"Coefficient extension commutes with the ordered derived etale projection formula morphism for a proper map and the counit mate of scalar pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.HasMap.map\", \"StandardEtalePair.homEquiv_apply_coe\", \"StandardEtalePresentation.toPresentation_algebra_algebraMap_apply\", \"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePair.homEquiv\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation.toPresentation_algebra_smul\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\"], \"digest\": \"778b8027c47d1b1f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction/monoidal tools or etale algebras do not state the named geometric coefficient/projection square"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|projection",
+   "results": "{\"t\": \"2026-10-22T05:57:55Z\", \"tool\": \"grep\", \"query\": \"mateEquiv|projection\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Ring.lean\"], \"digest\": \"4f8abb3ecdc75600\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction/monoidal tools or etale algebras do not state the named geometric coefficient/projection square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit",
+   "results": "{\"t\": \"2026-10-22T05:57:57Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.counit\", \"CategoryTheory.Adjunction.mk'_counit\", \"CategoryTheory.Adjunction.mkOfUnitCounit_counit\", \"CategoryTheory.Equivalence.toAdjunction_counit\", \"CategoryTheory.Adjunction.ext_counit\", \"CategoryTheory.Adjunction.id_counit\", \"CategoryTheory.Adjunction.toEquivalence\", \"CategoryTheory.Adjunction.toEquivalence_functor\"], \"digest\": \"525089b2615389d4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction/monoidal tools or etale algebras do not state the named geometric coefficient/projection square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula morphism commutes with change of rings in derived categories of etale sheaves",
+   "results": "{\"t\": \"2026-10-22T06:54:06Z\", \"tool\": \"leansearch\", \"query\": \"The projection formula morphism commutes with change of rings in derived categories of etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"SheafOfModules.pushforwardNatTrans_app_val_app\", \"SheafOfModules.pushforward\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange\", \"SheafOfModules.sheafificationCompPullback\", \"AlgebraicGeometry.Spec.sheafedSpaceMap\"], \"digest\": \"baea03c6208f5165\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract monoidal adjunctions, ordinary module scalar comparison, cartesian-closed Frobenius mates or unrelated results; none states this derived etale ordered coefficient square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "{\"t\": \"2026-10-22T06:54:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointOplaxMonoidal\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.IsMonoidal\", \"CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal_1\", \"CategoryTheory.Adjunction.isMonoidal_comp\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε\"], \"digest\": \"ec73ed347580c9e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract monoidal adjunctions, ordinary module scalar comparison, cartesian-closed Frobenius mates or unrelated results; none states this derived etale ordered coefficient square"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projectionMap|ProjectionMap",
+   "results": "{\"t\": \"2026-10-22T06:54:06Z\", \"tool\": \"grep\", \"query\": \"projectionFormula|projectionMap|ProjectionMap\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract monoidal adjunctions, ordinary module scalar comparison, cartesian-closed Frobenius mates or unrelated results; none states this derived etale ordered coefficient square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension commutes with the ordered projection formula morphism for a projective line, using the direct image counit mate",
+   "results": "{\"t\": \"2026-10-22T06:54:16Z\", \"tool\": \"leanfinder\", \"query\": \"Derived scalar extension commutes with the ordered projection formula morphism for a projective line, using the direct image counit mate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints_symm_comp\", \"Profinite.NobelingProof.GoodProducts.square_commutes\", \"ModuleCat.homEquiv_extendScalarsComp\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\"], \"digest\": \"fdcd6906b823f49d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract monoidal adjunctions, ordinary module scalar comparison, cartesian-closed Frobenius mates or unrelated results; none states this derived etale ordered coefficient square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal pullback square makes the counit-mate direct image exchange compatible with the tensor projection morphism",
+   "results": "{\"t\": \"2026-10-22T06:54:47Z\", \"tool\": \"leanfinder\", \"query\": \"A monoidal pullback square makes the counit-mate direct image exchange compatible with the tensor projection morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.frobeniusMorphism_mate\", \"CategoryTheory.ExponentiableMorphism.ev_coev\", \"CategoryTheory.ExponentiableMorphism.ev_coev_assoc\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit\", \"CategoryTheory.ExponentiableMorphism.coev_ev\", \"CategoryTheory.ExponentiableMorphism.ev_naturality_assoc\"], \"digest\": \"a1a6aaeb3825260f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract monoidal adjunctions, ordinary module scalar comparison, cartesian-closed Frobenius mates or unrelated results; none states this derived etale ordered coefficient square"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusMorphism_mate|lemma.*[Mm]ate|theorem.*[Mm]ate",
+   "results": "{\"t\": \"2026-10-22T06:56:45Z\", \"tool\": \"grep\", \"query\": \"frobeniusMorphism_mate|lemma.*[Mm]ate|theorem.*[Mm]ate\", \"sub\": \"CategoryTheory/Monoidal/Closed/Functor.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"139\", \"174\", \"183\"], \"digest\": \"b4cb5feb3903d0da\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract monoidal adjunctions, ordinary module scalar comparison, cartesian-closed Frobenius mates or unrelated results; none states this derived etale ordered coefficient square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-p1-counit-scalar",
+  "date": "2026-10-22",
+  "group": "Q06"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts: compatibility of iterated projective-line integration; tensor/pullback identification and ordered projection square (returned counit proof steps 2-3)",
+   "via": [
+    "lem-sp-p1-counit-scalar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-p1-ordered-projection-scalar-square",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Five steps specialize existing ringed exchange/projection coherence to coefficient change, identify the actual counit mate, conjugate by the two tensor symmetries and postcompose by the fixed twist comparison. No new nodes or Mathlib leaves. Every step citation was read and quoted in citations.json.",
+  "blueprint": "det-sp-reduction-exceptional, Charts paragraph: expands the ordered projective-line projection compatibility needed for coefficient compatibility of iterated integration; steps 1-2 identify the coefficient square, step 3 orders its tensors, step 4 inserts the fixed twist, step 5 records naturality.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-ringed-topos-morphism",
+    "why": "Defines the coefficient square as ringed topoi; a generic definition, not a change to the chart route."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Identifies horizontal derived pullback with the everywhere-defined scalar extension; no bounded resolution assumption."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Supplies canonical composition, tensor and symmetry compatibility for the coefficient square."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Identifies the specified coefficient map by its adjunct."
+   },
+   {
+    "node": "lem-sp-et-proet-coefficient-compatibility",
+    "why": "Supplies the actual normalized proper coefficient mate and its naturality, already fixed in the item statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "General projection/exchange equality for a commutative ringed-topos square, specialized to the coefficient square; no same-unit result supplies this general tool."
+   },
+   {
+    "node": "def-kun-projection-formula-map",
+    "why": "Fixes the exact geometric projection map and counit transpose used in the chart argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "def-kun-projection-formula-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NG-1396c7ade",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-1396c7ade (reviewer sub-agent of L); spot-checked: The statement is unchanged, the split adds 5 steps and no new nodes, and every step is correct. Step 1: the coefficient change is a ringed square whose horizontal maps are id with A->B, and derived pullback along them is T by lem-pur-derived-change-of-rings. Theta comes from the comparisons in lem-sfb-ringed-derived-monoidal-comparisons. The mate's transpose T_P(eps_A) after c equals the defining clause of beta_q in lem-sp-et-proet-coefficient-compatibility (for proper q the extension-by-zero step is trivial), and only that clause is used. Step 2: I substituted into the full statement of lem-weil-pbc-ringed-exchange-tensor-coherence, which needs no cartesian square. Ex = beta_q, its pi_u is PF_q of def-kun-projection-formula-map, and d = (1 (x) c^-1) m^P is the target identification. Its scalar tensor comparison is the one from def-pur-exceptional-coefficient-normalizations, which is unique. Step 3: I recomputed the two symmetry conjugations using naturality of beta and the symmetric-monoidal clause, with Koszul signs; they are consistent. Step 4: naturality of PF in E, and (1 (x) lambda) e = a_K and F_B(lambda) beta(L_A) = b, give the item. Step 5: the work is done in the ambient unbounded categories with no flatness or boundedness input. Small cases: A=B reduces to pi_A = pi_A, K=0 is trivial, and nonflat Z/ell^2 -> Z/ell needs no flatness anywhere. Lambda is valid because A_P(1) is A-flat (lem-asd-finite-etale-twist-line, ell != p). Sources read: main-20261015 sk-lem-sp-reduction-exceptional Charts paragraph (lines 20-36) and Stacks Tag 0E48 (sites-cohomology.tex line 13715). No SGA is cited. Not duplicated by lem-weil-pbc-ringed-exchange-tensor-coherence (unordered and untwisted), lem-sfb-coefficient-projection-square (condensed, assumes exact scalar extension), lem-sp-categorical-projection-mate-square (conditional), lem-asd-proper-finite-coefficient-extension or lem-pur-etale-scalar-mate-projection (both identify beta with PF(-,B)), or lem-pur-etale-direct-image-scalar-exchange (cartesian base change). The generic tool_uses are accepted; none is trf or SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.P1OrderedProjectionScalarSquare",
+  "declaration": "AlgebraicGeometry.Etale.p1_ordered_projection_scalar_square",
+  "file": "lean/Sheaf/Paper/P1OrderedProjectionScalarSquare.lean",
+  "statement": "theorem p1_ordered_projection_scalar_square (ell p n : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell) (k : Type u) [Field k] [CharP k p] {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (hA : ((ell ^ n : ℕ) : A) = 0) (hB : ((ell ^ n : ℕ) : B) = 0) (S : Scheme.{u}) [S.Over (Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] : ∃ e : FiniteSmoothPurity.CoefficientLineComparison φ (ell ^ n) (ell ^ n) hA hB (ProjectiveLine S), ∀ (K : DerivedCategoryModule A S) (_hK : ProEtale.AdjunctionTransfer.etaleProperty A S K), (scalarExtension φ S).map (ordinaryFiniteProjection A (ProjectiveLine S ↘ S) ((ordinaryFiniteLine A (ell ^ n) hA (ProjectiveLine S))⟦(2 : ℤ)⟧) K) ≫ (scalarMate φ (ProjectiveLine S ↘ S)).app ((ordinaryFiniteP1Right A (ell ^ n) hA S).obj K) ≫ (ordinaryFinitePushforward B (ProjectiveLine S ↘ S)).map ((ExceptionalCoefficients.tensorIso φ (ProjectiveLine S)).app ((ordinaryFinitePullback A (ProjectiveLine S ↘ S)).obj K, (ordinaryFiniteLine A (ell ^ n) hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≪≫ (Functor.uncurry.obj (ordinaryFiniteTensor B (ProjectiveLine S))).mapIso (Iso.prod ((scalarPullbackIso φ (ProjectiveLine S ↘ S)).app K).symm ((FiniteSmoothPurity.scalarShiftIso φ (ProjectiveLine S) (2 : ℤ)).app _ ≪≫ (shiftFunctor _ (2 : ℤ)).mapIso e.derivedIso))).hom = (ExceptionalCoefficients.tensorIso φ S).hom.app (K, (ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj ((ordinaryFiniteLine A (ell ^ n) hA (ProjectiveLine S))⟦(2 : ℤ)⟧)) ≫ ((ordinaryFiniteTensor B S).obj ((scalarExtension φ S).obj K)).map ((scalarMate φ (ProjectiveLine S ↘ S)).app ((ordinaryFiniteLine A (ell ^ n) hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≫ (ordinaryFinitePushforward B (ProjectiveLine S ↘ S)).map (((FiniteSmoothPurity.scalarShiftIso φ (ProjectiveLine S) (2 : ℤ)).app _ ≪≫ (shiftFunctor _ (2 : ℤ)).mapIso e.derivedIso).hom)) ≫ ordinaryFiniteProjection B (ProjectiveLine S ↘ S) ((ordinaryFiniteLine B (ell ^ n) hB (ProjectiveLine S))⟦(2 : ℤ)⟧) ((scalarExtension φ S).obj K)",
+  "branch": "sheaf-dag",
+  "by": "Q141",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the published ordinary ordered projection, geometric counit-transpose scalarMate, and same-annihilator CoefficientLineComparison normalized both on generators and on the derived scalar counit. The existential packages the canonical balanced line comparison, rather than assuming an arbitrary twist isomorphism. All original hypotheses and the entire ordered square are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b5ee0d50",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: k char p>0, ℓ≠p, finite A→B killed by ℓ^n (hA,hB), S separated finite type over k; P=ProjectiveLine S; D^b_ctf = etaleProperty; G_R = ordinaryFiniteP1Right with L=ordinaryFiniteLine⟦2⟧; π = ordinaryFiniteProjection (σ, rightDerivedLowerStarProjectionMap, F(σ)); β_q = scalarMate (mateEquiv on scalarPullbackIso.hom, the proper factor of etaleCoefficientMap); m = ExceptionalCoefficients.tensorIso; a_K = tensorIso_P then (scalarPullbackIso.app K).symm (= c_K^{-1}, direction checked via ordinaryPullbackMap) ⊗ λ; λ = scalarShiftIso then shift(e.derivedIso); b = scalarMate(L_A) then F_B(λ); equation in correct ≫ order in D(S,B); no flatness. ∃ e CoefficientLineComparison(N=N) is unique (roots=id from roots_power and ι mono, generators, derived_normalization), same pattern as landed p1_counit_scalar (PASS). Item changes only lean and stmt_deps (+2 existing def nodes owning used decls, acyclic); statement verbatim; one sorry, no defs; docstrings with source, blueprint and 5 steps; ≤100 cols; universes per convention; edge cases n=0, K=0, A=B, nonflat ℤ/ℓ²→ℤ/ℓ fine; no duplicate. Advisory: scalarMate/scalarPullbackIso are owned by lem-pur-etale-scalar-mate-projection, not in stmt_deps (an S2 fix cannot add it); same object as the cited β_q. Not compiled by the reviewer (no file changed); worker reports a clean compile in 4.5 s / 4.6 s."
+ }
+}

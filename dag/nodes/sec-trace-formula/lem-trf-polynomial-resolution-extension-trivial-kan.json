@@ -1,0 +1,222 @@
+{
+ "id": "lem-trf-polynomial-resolution-extension-trivial-kan",
+ "kind": "statement",
+ "title": "Polynomial extension of an augmented simplicial ring resolution is a trivial Kan fibration",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings, let $E$ be any set, and let $P_\\bullet\\to\\operatorname{const} B$ be an augmented simplicial commutative $A$-algebra [def-weil-pbc-simplicial-object]. Assume every $P_n\\to B$ is surjective and the augmentation $s(P_\\bullet)\\to B[0]$ is a quasi-isomorphism, where $s(M)^{-n}=M_n$ with differential $\\sum_{i=0}^n(-1)^id_i$ for $n>0$ and zero positive terms [def-weil-pbc-module-chain-complex-homology, def-weil-abstract-derived-category]. Form $P_\\bullet[E]$ by adjoining polynomial variables indexed by $E$ [def-weil-pbc-mv-polynomial-ring], with every simplicial operator fixing the variables and acting on coefficients. Then every $P_n[E]\\to B[E]$ is surjective, and $s(P_\\bullet[E])\\to B[E][0]$ is a quasi-isomorphism. Both maps of underlying simplicial sets $P_\\bullet\\to\\operatorname{const} B$ and $P_\\bullet[E]\\to\\operatorname{const}(B[E])$ are trivial Kan fibrations [def-weil-pbc-trivial-kan-fibration]. No finiteness assumption on $E$ or polynomiality assumption on the individual $P_n$ is required.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QV (lemma-polynomial-on-top), last paragraph; Tag 08QI (remark-resolution); simplicial.tex Tag 08P1 (lemma-qis-simplicial-abelian-groups). Polynomial extension expanded via finite-support monomial coefficients."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-trivial-kan-fibration"
+ ],
+ "proof": [
+  {
+   "text": "Put $I=\\{\\alpha:E\\to\\mathbf Z_{\\geq0}:\\alpha\\text{ has finite support}\\}$. By [def-weil-pbc-mv-polynomial-ring], each element of $R[E]$ is uniquely a finite sum $\\sum_{\\alpha\\in I}r_\\alpha x^\\alpha$. Every simplicial operator $\\theta$ of $P_\\bullet[E]$ acts by $\\sum r_\\alpha x^\\alpha\\mapsto\\sum\\theta(r_\\alpha)x^\\alpha$: this is the algebra map prescribed by its coefficient action and its values on variables. Composition and the augmentation identities follow coefficientwise from those for $P_\\bullet$ [def-weil-pbc-simplicial-object]. Thus the alternating differential is $d(\\sum r_\\alpha x^\\alpha)=\\sum d(r_\\alpha)x^\\alpha$ in every negative cochain degree, and the augmentation in degree zero acts on coefficients. For $b=\\sum_{\\alpha\\in S}b_\\alpha x^\\alpha\\in B[E]$, with $S$ finite, choose $p_\\alpha\\in P_n$ mapping to $b_\\alpha$. Then $\\sum_{\\alpha\\in S}p_\\alpha x^\\alpha$ maps to $b$, proving surjectivity for each $n$, including $n=0$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QV (lemma-polynomial-on-top), last paragraph; finite-support monomial coefficient expansion."
+   }
+  },
+  {
+   "text": "For $r=-n<0$, let $z=\\sum_{\\alpha\\in S}z_\\alpha x^\\alpha$ be a cycle in $s(P_\\bullet[E])^r$, with $S$ finite. Step 1 and uniqueness of coefficients give $d(z_\\alpha)=0$ for every $\\alpha$. The assumed quasi-isomorphism $s(P_\\bullet)\\to B[0]$ gives $H^r(s(P_\\bullet))=0$ [def-weil-abstract-derived-category]. Hence for each $\\alpha\\in S$ choose $w_\\alpha\\in P_{n+1}$ with $d(w_\\alpha)=z_\\alpha$. Step 1 gives $d(\\sum_{\\alpha\\in S}w_\\alpha x^\\alpha)=z$. Thus every negative-degree cycle is a boundary. The argument uses only the finitely many coefficients of this particular $z$ and makes no finiteness assumption on $E$. Positive-degree cohomology vanishes because all positive terms are zero.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QV (lemma-polynomial-on-top), last paragraph; finite-support monomial coefficient expansion."
+   }
+  },
+  {
+   "text": "In degree zero every element of $P_0[E]$ is a cycle. The degree-zero augmentation onto $B[E]$ is surjective by Step 1, so its induced map on $H^0$ is surjective. If $z=\\sum_{\\alpha\\in S}z_\\alpha x^\\alpha\\in P_0[E]$ maps to zero, uniqueness of coefficients says that each $z_\\alpha$ maps to zero in $B$. The hypothesis that $H^0(s(P_\\bullet))\\to B$ is an isomorphism says precisely that $\\ker(P_0\\to B)=\\operatorname{im}(d:P_1\\to P_0)$ [def-weil-abstract-derived-category]. Choose $w_\\alpha\\in P_1$ with $d(w_\\alpha)=z_\\alpha$ for each $\\alpha\\in S$; their polynomial sum has differential $z$ by Step 1. Thus the induced $H^0$ map is injective as well. Steps 2 and 3 prove that $s(P_\\bullet[E])\\to B[E][0]$ is a quasi-isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QV (lemma-polynomial-on-top), last paragraph; finite-support monomial coefficient expansion."
+   }
+  },
+  {
+   "text": "Apply the general augmentation criterion in [lem-trf-polynomial-augmentation-boundary], namely its assertion for an arbitrary augmented simplicial $A$-algebra $Q_\\bullet$ with degreewise surjective augmentation and a quasi-isomorphism $s(Q_\\bullet)\\to B[0]$. First use $Q_\\bullet=P_\\bullet$ with target $B$, for which both hypotheses are assumptions. Next use $Q_\\bullet=P_\\bullet[E]$ with target $B[E]$; the same base ring $A$ acts through the coefficients. Step 1 verifies the augmented simplicial algebra structure and degreewise surjectivity; Steps 2 and 3 verify the quasi-isomorphism with exactly the nonpositive indexing in that criterion. Its conclusion gives both trivial Kan fibrations, including vertex lifting. The criterion assumes no polynomiality of the terms, and the coefficient arguments used arbitrary finite polynomial supports, so neither polynomiality of $P_n$ nor finiteness of $E$ has been introduced.",
+   "uses": [
+    "lem-trf-polynomial-augmentation-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QI (remark-resolution), quasi-isomorphism criterion; simplicial.tex Tag 08P1 (lemma-qis-simplicial-abelian-groups), via the existing general augmentation criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-abstract-derived-category",
+  "lem-trf-polynomial-augmentation-boundary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QV (lemma-polynomial-on-top), last paragraph; direct finite-support coefficient proof of the polynomial-extension assertion, followed by the existing Tag 08QI/08P1 augmentation criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A degreewise surjective augmented simplicial commutative ring resolving B remains a trivial Kan fibration after adjoining any set of polynomial variables",
+   "results": "{\"t\": \"2026-10-22T06:44:00Z\", \"tool\": \"leanfinder\", \"query\": \"A degreewise surjective augmented simplicial commutative ring resolving B remains a trivial Kan fibration after adjoining any set of polynomial variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\", \"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\", \"CategoryTheory.SimplicialObject.cosk\", \"SimplicialObject.Splitting\", \"classifyingSpaceUniversalCover.compForgetAugmented\", \"CategoryTheory.SimplicialObject.IsCoskeletal\", \"AlgebraicTopology.DoldKan.Γ₀'_obj\"], \"digest\": \"f0427d261b5d2683\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: projective resolutions, split simplicial objects, monoid classifying-space resolutions and ordinary polynomial algebra do not give preservation of this augmented simplicial-ring resolution under arbitrary polynomial extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"QuasiIso\"",
+   "results": "{\"t\": \"2026-10-22T06:43:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"QuasiIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: projective resolutions, split simplicial objects, monoid classifying-space resolutions and ordinary polynomial algebra do not give preservation of this augmented simplicial-ring resolution under arbitrary polynomial extension."
+  },
+  {
+   "tool": "grep",
+   "query": "MvPolynomial.*(Trivial|Kan|QuasiIso)|[Pp]olynomial.*[Ss]implicial",
+   "results": "{\"t\": \"2026-10-22T06:43:49Z\", \"tool\": \"grep\", \"query\": \"MvPolynomial.*(Trivial|Kan|QuasiIso)|[Pp]olynomial.*[Ss]implicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/MvPolynomial.lean\", \"Mathlib/Algebra/MvPolynomial/NoZeroDivisors.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean\", \"Mathlib/RingTheory/MvPolynomial/IrreducibleQuadratic.lean\"], \"digest\": \"2194a75cbcb761d4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: projective resolutions, split simplicial objects, monoid classifying-space resolutions and ordinary polynomial algebra do not give preservation of this augmented simplicial-ring resolution under arbitrary polynomial extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial ring resolution stays a surjective quasi-isomorphism and trivial Kan fibration after adjoining polynomial variables",
+   "results": "{\"t\": \"2026-10-22T06:43:50Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial ring resolution stays a surjective quasi-isomorphism and trivial Kan fibration after adjoining polynomial variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\", \"CategoryTheory.ProjectiveResolution.quasiIso\", \"AdjoinRoot.mk_surjective\", \"ModuleCat.projectiveResolution\", \"IsAdjoinRoot.mk.noConfusion\", \"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"Algebra.FinitePresentation.polynomial\", \"AdjoinRoot.isAdjoinRoot\"], \"digest\": \"c4c01b66dc0474a5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: projective resolutions, split simplicial objects, monoid classifying-space resolutions and ordinary polynomial algebra do not give preservation of this augmented simplicial-ring resolution under arbitrary polynomial extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining arbitrary polynomial indeterminates preserves acyclic augmented simplicial ring resolutions by the monomial direct sum decomposition",
+   "results": "{\"t\": \"2026-10-22T06:44:12Z\", \"tool\": \"leanfinder\", \"query\": \"Adjoining arbitrary polynomial indeterminates preserves acyclic augmented simplicial ring resolutions by the monomial direct sum decomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"SimplicialObject.Splitting.nondegComplex\", \"classifyingSpaceUniversalCover.compForgetAugmented.toModule\", \"Rep.barResolution_complex\", \"Rep.standardComplex.x_projective\", \"AlgebraicTopology.DoldKan.Γ₀'_obj\", \"AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_succ\", \"Rep.FiniteCyclicGroup.resolution\"], \"digest\": \"152b6f76b4de86d6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: projective resolutions, split simplicial objects, monoid classifying-space resolutions and ordinary polynomial algebra do not give preservation of this augmented simplicial-ring resolution under arbitrary polynomial extension."
+  },
+  {
+   "tool": "grep",
+   "query": "MvPolynomial.*(Trivial|Kan|QuasiIso)|[Pp]olynomial.*[Ss]implicial",
+   "results": "{\"t\": \"2026-10-23T14:56:51Z\", \"tool\": \"grep\", \"query\": \"MvPolynomial.*(Trivial|Kan|QuasiIso)|[Pp]olynomial.*[Ss]implicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/MvPolynomial.lean\", \"Mathlib/Algebra/MvPolynomial/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPolynomial/IrreducibleQuadratic.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean\"], \"digest\": \"09e0af4306e5ed1e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned types. The resolution and extra-degeneracy constructions concern other objects; the polynomial algebra hits do not prove preservation of this augmented simplicial-ring resolution. No result combines the polynomial coefficient argument with the trivial Kan conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial ring resolution stays a surjective quasi-isomorphism and trivial Kan fibration after adjoining polynomial variables",
+   "results": "{\"t\": \"2026-10-23T14:56:51Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial ring resolution stays a surjective quasi-isomorphism and trivial Kan fibration after adjoining polynomial variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\", \"CategoryTheory.ProjectiveResolution.quasiIso\", \"AdjoinRoot.mk_surjective\", \"ModuleCat.projectiveResolution\", \"IsAdjoinRoot.mk.noConfusion\", \"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"Algebra.FinitePresentation.polynomial\", \"AdjoinRoot.isAdjoinRoot\"], \"digest\": \"c4c01b66dc0474a5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned types. The resolution and extra-degeneracy constructions concern other objects; the polynomial algebra hits do not prove preservation of this augmented simplicial-ring resolution. No result combines the polynomial coefficient argument with the trivial Kan conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"QuasiIso\"",
+   "results": "{\"t\": \"2026-10-23T14:56:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"QuasiIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned types. The resolution and extra-degeneracy constructions concern other objects; the polynomial algebra hits do not prove preservation of this augmented simplicial-ring resolution. No result combines the polynomial coefficient argument with the trivial Kan conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A degreewise surjective augmented simplicial commutative ring resolving B remains a trivial Kan fibration after adjoining any set of polynomial variables",
+   "results": "{\"t\": \"2026-10-23T14:56:58Z\", \"tool\": \"leanfinder\", \"query\": \"A degreewise surjective augmented simplicial commutative ring resolving B remains a trivial Kan fibration after adjoining any set of polynomial variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\", \"classifyingSpaceUniversalCover.compForgetAugmented.toModule\", \"classifyingSpaceUniversalCover.compForgetAugmented\", \"HomotopicalAlgebra.FibrantObject.mk_surjective\", \"CategoryTheory.SimplicialObject.Augmented\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\"], \"digest\": \"3b6a030749c8b366\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned types. The resolution and extra-degeneracy constructions concern other objects; the polynomial algebra hits do not prove preservation of this augmented simplicial-ring resolution. No result combines the polynomial coefficient argument with the trivial Kan conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining arbitrary polynomial indeterminates preserves acyclic augmented simplicial ring resolutions by the monomial direct sum decomposition",
+   "results": "{\"t\": \"2026-10-23T14:57:00Z\", \"tool\": \"leanfinder\", \"query\": \"Adjoining arbitrary polynomial indeterminates preserves acyclic augmented simplicial ring resolutions by the monomial direct sum decomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover.compForgetAugmented.toModule\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"AlgebraicTopology.DoldKan.Γ₀'_obj\", \"Rep.barResolution_complex\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\", \"Rep.standardComplex.compForgetAugmentedIso\", \"Rep.standardComplex.x_projective\"], \"digest\": \"b33dc20773b7e63e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned types. The resolution and extra-degeneracy constructions concern other objects; the polynomial algebra hits do not prove preservation of this augmented simplicial-ring resolution. No result combines the polynomial coefficient argument with the trivial Kan conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-lower-shriek-polynomial-top",
+  "date": "2026-10-22",
+  "group": "Q01"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Auxiliary computation of the polynomial-presentation lower-shriek counits (Stacks 08QW), used for the three homology comparisons in the transitivity triangle. Polynomial-top auxiliary computation in the supporting cotangent lower-shriek counits: Stacks 08QV, last paragraph, polynomial extension of a resolution; returned polynomial-top proof Steps 2 and 3.",
+   "via": [
+    "lem-trf-cotangent-lower-shriek-polynomial-top",
+    "lem-trf-cotangent-lower-shriek",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-polynomial-resolution-extension-trivial-kan",
+  "worker": "stage1",
+  "summary": "No new nodes. Expanded polynomial extension through finite-support monomial coefficients, lifting coefficients for surjectivity and primitives for negative cohomology and degree-zero augmentation kernels. Reused the existing general augmentation-to-trivial-Kan criterion. Checked the arbitrary-set and arbitrary-term hypotheses, all cited statements, source tags, blueprint duplicates, and project/Mathlib searches. Statement unchanged.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Auxiliary computation of the polynomial-presentation lower-shriek counits (Stacks 08QW), used for the three homology comparisons in the transitivity triangle. Polynomial-top auxiliary computation in the supporting cotangent lower-shriek counits: Stacks 08QV, last paragraph, polynomial extension of a resolution; returned polynomial-top proof Steps 2 and 3. This split supplies the arbitrary-variable coefficient argument and then applies the existing augmentation criterion."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-82baad365",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-82baad365 (reviewer sub-agent of L); spot-checked: Read the item in full. It has no new nodes, and its statement and stmt_deps are identical to the live clone, where it is unsplit with an empty proof. There is no repair note, so the 2026-10-21 re-split rule does not apply. Source checks: Stacks cotangent.tex 08QV lemma-polynomial-on-top, last paragraph (l.1271-1287, the filtered-colimit trivial-Kan argument); 08QI remark-resolution (l.667ff); simplicial 08P1. The proof takes a different route from Stacks, recorded honestly as proof_origin agent. Steps 1-3 are elementary coefficientwise arguments from the uniqueness of finite-support coefficients and the universal property in def-weil-pbc-mv-polynomial-ring: the simplicial operators of P[E] act coefficientwise; surjectivity comes from lifting finitely many coefficients; negative-degree cycles get coefficientwise primitives from H^{-n}(s(P))=0; on H^0, ker(P_0->B)=im(d_0-d_1) gives injectivity. All three are correct. Step 4 uses only the statement of lem-trf-polynomial-augmentation-boundary (same unit sk-i-curve-zero): an arbitrary augmented simplicial A-algebra with degreewise surjective augmentation and s(Q)->B[0] a quasi-iso is a trivial Kan fibration, including dimension 0, with no polynomiality hypothesis and the same indexing. It is applied correctly to P and to P[E] over A. Dependency closure of that node checked: no cycle. proof_deps equal the union of the step uses. Edge cases tested: E empty, E infinite, B=0, constant P. Route-pivot points: def-weil-pbc-trivial-kan-fibration is a base stmt_dep of the unchanged target. It is the classical Stacks 08NL simplicial-set notion (status mathlib), not infinity-category machinery, and Step 4 justifies its use. The phrase 'simplicial set' is the same classical notion in the target statement. Both accepted. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.PolynomialResolutionExtension",
+  "declaration": "AlgebraicTopology.PolynomialResolutionExtension.polynomial_resolution_extension_trivial_kan",
+  "declarations": [
+   "AlgebraicTopology.PolynomialResolutionExtension.polynomialFunctor",
+   "AlgebraicTopology.PolynomialResolutionExtension.polynomialExtension",
+   "AlgebraicTopology.PolynomialResolutionExtension.additiveAugmentation",
+   "AlgebraicTopology.PolynomialResolutionExtension.underlyingAugmentation",
+   "AlgebraicTopology.PolynomialResolutionExtension.polynomial_resolution_extension_trivial_kan"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/PolynomialResolutionExtension.lean",
+  "statement": "theorem polynomial_resolution_extension_trivial_kan {A : Type u} [CommRing A] (P : SimplicialObject.Augmented (CommAlgCat.{v} A)) (E : Type w) (h_surj : ∀ n : ℕ, Function.Surjective (P.hom.app (op ⦋n⦌))) (h_qis : QuasiIso (additiveAugmentation P)) : (∀ n : ℕ, Function.Surjective ((polynomialExtension P E).hom.app (op ⦋n⦌))) ∧ QuasiIso (additiveAugmentation (polynomialExtension P E)) ∧ SSet.Enhanced.trivialKanFibration (underlyingAugmentation P) ∧ SSet.Enhanced.trivialKanFibration (underlyingAugmentation (polynomialExtension P E))",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Explicit canonical helpers assemble MvPolynomial.mapAlgHom, augmented whiskering, and the extended alternating-face augmentation. Independent base, algebra-carrier, and variable universes; no termwise polynomiality hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50835b080",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Clause-by-clause match. A is a CommRing; B = P.right in CommAlgCat A; E : Type w with no Finite/Nonempty; h_surj covers n=0; h_qis = QuasiIso of AlternatingFaceMapComplex.ε (unnormalized, degree-0 = P.hom) extended along embeddingDownNat (n↦−n) to B[0]; P[E] = Augmented.whiskeringObj of a real MvPolynomial.mapAlgHom functor (fixes variables, maps coefficients, also on the augmentation); four conclusions in node order, trivial Kan = SSet.Enhanced.trivialKanFibration = modelCategoryQuillen.I.rlp (n=0 included); underlying map via whiskering by forget. Universes u,v,w independent; no extra instances; one sorry (main theorem); docstrings carry source and blueprint; lean.statement verbatim; node statement and stmt_deps unchanged. Edge cases E empty/infinite, n=0, zero ring ok. Note: def-trf-cotangent-resolution-data already has CotangentResolution.additiveAugmentation (Arrow CommRingCat, one universe); the item does not cite it and S2 cannot add stmt_deps, so the inline helper built from cited notions is accepted, PASS+note; downstream users will need a transport. No compile (no changes)."
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-quotient-expression-kflat-models",
+ "kind": "statement",
+ "title": "K-flat finite models for strict quotient expressions",
+ "statement": "theorem quotientExpressionKFlatModels {Z X Y : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y) (hlZ : ∀ x : Z, IsUnit (l : Z.residueField x)) (hlX : ∀ x : X, IsUnit (l : X.residueField x)) (hlY : ∀ x : Y, IsUnit (l : Y.residueField x)) (r : ℕ) (P : Fin r → CochainComplex (scalarReductionSource l E Y) ℤ) (hP : ∀ i : Fin r, CochainComplex.IsKFlatIndependentCoefficients (R := completedIntegralCommRingSheafUnrestricted l E Y) (P i)) (hflat : ∀ (i : Fin r) (k : ℤ), SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology Y) (R := completedIntegralCommRingSheafUnrestricted l E Y) ((P i).X k)) : ∃ (N : Fin r → Complex l E Y) (κ : ∀ (i : Fin r) (n : ℕ), level l E (N i) n ≅ ((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).obj (P i)), (∀ (i : Fin r) {m n : ℕ} (hmn : n ≤ m), transition l E (N i) hmn ≫ ((normalizedDVRModuleRes l E Y hmn).mapHomologicalComplex (.up ℤ)).map (κ i n).hom = (κ i m).hom ≫ (NatTrans.mapHomologicalComplex (coefficientOrdinaryQuotient l E Y hmn) (.up ℤ)).app (P i)) ∧ (∀ (i : Fin r) (n : ℕ), ∃ e : (coefficientFiniteDerivedExtension l E Y n).obj (DerivedCategory.Q.obj (P i)) ≅ DerivedCategory.Q.obj (level l E (N i) n), e.hom = (coefficientFiniteReductionModel l E Y (P i) (hP i) n).hom ≫ DerivedCategory.Q.map (κ i n).inv) ∧ ∀ (W : Scheme.{t}) (K : Complex l E W), Generated l E h f N W K → ∀ n : ℕ, Good l E K n",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E, 07A2, 07A4 and 07A6; extracted strict-expression normalization argument."
+ },
+ "stmt_deps": [
+  "lem-pur-quotient-expression-strict-kflat-towers"
+ ],
+ "proof": [
+  {
+   "text": "Apply the strict quotient-expression tower construction and then perform structural induction on the finite expression constructors. The remaining tensor and pullback identities are transported through the normalized scalar adjunctions.",
+   "uses": [
+    "lem-pur-quotient-expression-strict-kflat-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E, 07A2, 07A4 and 07A6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-quotient-expression-strict-kflat-towers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E, 07A2, 07A4 and 07A6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quotient expression K-flat normalized tower",
+   "results": "No exact match in Mathlib or existing Sheaf modules.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat quotient expression derived transition adjoint",
+   "results": "Only generic flatness and change-of-rings lemmas; no exact match.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict quotient expression tensor pullback normalization",
+   "results": "Only generic module flatness results; no exact match.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientExpressionKFlatNormalization",
+  "date": "2026-10-26",
+  "group": "M4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-quotient-expression-kflat-normalization",
+   "place": "Strict K-flat model and operation-normalization subargument.",
+   "via": [
+    "lem-pur-quotient-expression-kflat-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QuotientExpressionKFlatModels",
+  "declaration": "WeilConjectures.StrictQuotient.quotientExpressionKFlatModels",
+  "declarations": [
+   "WeilConjectures.StrictQuotient.quotientExpressionKFlatModels"
+  ],
+  "file": "lean/Sheaf/Paper/QuotientExpressionKFlatModels.lean",
+  "statement": "theorem quotientExpressionKFlatModels {Z X Y : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y) (hlZ : ∀ x : Z, IsUnit (l : Z.residueField x)) (hlX : ∀ x : X, IsUnit (l : X.residueField x)) (hlY : ∀ x : Y, IsUnit (l : Y.residueField x)) (r : ℕ) (P : Fin r → CochainComplex (scalarReductionSource l E Y) ℤ) (hP : ∀ i : Fin r, CochainComplex.IsKFlatIndependentCoefficients (R := completedIntegralCommRingSheafUnrestricted l E Y) (P i)) (hflat : ∀ (i : Fin r) (k : ℤ), SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology Y) (R := completedIntegralCommRingSheafUnrestricted l E Y) ((P i).X k)) : ∃ (N : Fin r → Complex l E Y) (κ : ∀ (i : Fin r) (n : ℕ), level l E (N i) n ≅ ((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).obj (P i)), (∀ (i : Fin r) {m n : ℕ} (hmn : n ≤ m), transition l E (N i) hmn ≫ ((normalizedDVRModuleRes l E Y hmn).mapHomologicalComplex (.up ℤ)).map (κ i n).hom = (κ i m).hom ≫ (NatTrans.mapHomologicalComplex (coefficientOrdinaryQuotient l E Y hmn) (.up ℤ)).app (P i)) ∧ (∀ (i : Fin r) (n : ℕ), ∃ e : (coefficientFiniteDerivedExtension l E Y n).obj (DerivedCategory.Q.obj (P i)) ≅ DerivedCategory.Q.obj (level l E (N i) n), e.hom = (coefficientFiniteReductionModel l E Y (P i) (hP i) n).hom ≫ DerivedCategory.Q.map (κ i n).inv) ∧ ∀ (W : Scheme.{t}) (K : Complex l E W), Generated l E h f N W K → ∀ n : ℕ, Good l E K n",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T023531-L-574447",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T023531-L-574447",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

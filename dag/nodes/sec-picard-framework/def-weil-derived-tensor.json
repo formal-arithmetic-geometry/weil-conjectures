@@ -75,7 +75,95 @@
  "blueprint_uses": [
   "def-weil-pbc-proetale-site"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.derivedTensor",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Derived.Tensor",
+     "lines": [
+      80,
+      88
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution",
+     "lines": [
+      19,
+      25
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sfb-grothendieck-k-injective",
+      "sk-def-sfb-derived-categories"
+     ],
+     "below": false
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution",
+     "lines": [
+      164,
+      170
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-weil-pbc-sheaf-flat-separator"
+     ],
+     "below": false
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+     "lines": [
+      39,
+      49
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "DerivedCategory.hasDerivedMonoidalCategory",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory",
+     "lines": [
+      70,
+      76
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sfb-derived-monoidal",
+      "sk-def-sfb-derived-tensor-hom"
+     ],
+     "below": false
+    }
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.derivedTensor",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor",
+     "lines": [
+      80,
+      95
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "def-weil-derived-tensor",
@@ -106,5 +194,25 @@
   "group": "NE",
   "result": "fix",
   "note": "Read check-brief2, packet, prior review of 4bdcb3da4004, snapshot module and report, node diffs, upstream and side declarations. Prior F1 (def-exchange-projection narrowed) resolved: the commit touches only the report, the item node, def-weil-derived-tensor and the module; the module is byte-identical to the accepted one. Clause by clause correct: FiniteFieldDatum, l prime and l≠p, finite E, level n+1, finite-type X,Y over k, f separated of finite type, fixed c, fixed-ring P/S/delta/e, PF^c = projectionMapOfCompactification (direction PM⊗B→P(M⊗SB) checked), pi = beta∘PF^-1∘P(beta), exactly four IsIso hypotheses, M D^b_c and B,B' ctf via the recorded intrinsic predicates, unit and assoc equations in the node's order, all domain memberships true. Edge cases and universes ok; no hollow definitions; one sorry; docstrings present; statement verbatim. nt_compile rc 0 in 4.8 s, no errors; axioms propext, choice, Quot.sound. FIX F1: the report wrongly said the recorded compact-support interface is rightDerivedLowerShriekOfCompactification; on the base Q13 recorded sfIntrinsicCompactSupport. The complete lean.note override and report now document the fixed-ring vs intrinsic presentation and the stage-3 transport. FIX F2: the placeholder Second reading by NE section is replaced by a real clause-by-clause reading. Observations: the def-weil-derived-tensor record flips again (seventh time), accepted as the same notion and not revertible by a stage-2 fix; the added stmt_dep def-pur-finite-pullback-tensor-comparison is harmless."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal A$ be a closed symmetric monoidal Grothendieck abelian category whose tensor\nproduct is additive and which has functorial flat resolutions, and let $Y$ be a scheme with\nsmall pro-étale site $Y_{\\mathrm{proét}}$ [def-weil-pbc-proetale-site]. The *derived tensor\nproduct*\n\n$$\n-\\otimes^{\\mathrm L}-\\colon D(Y_{\\mathrm{proét}},\\mathcal A)\\times D(Y_{\\mathrm{proét}},\\mathcal A)\\to D(Y_{\\mathrm{proét}},\\mathcal A)\n$$\n\nis the tensor product of the monoidal structure of [lem-sfb-derived-monoidal] on the\nderived category of $\\Sh(Y_{\\mathrm{proét}},\\mathcal A)$, equipped with the sheaf tensor\nproduct of [det-def-sfb-sheaf-tensor-structure].\n\nConcretely, a complex $P$ of sheaves is *K-flat* if tensoring it with every acyclic complex\npreserves acyclicity. For complexes $K_1,K_2$, choose a quasi-isomorphism $P\\to K_1$ with\n$P$ K-flat; then\n\n$$\n K_1\\otimes^{\\mathrm L} K_2=P\\otimes K_2 .\n$$\n\nFor $\\mathcal A$ the category of modules over a commutative ring $A$ (so that complexes are\ncomplexes of $A_Y$-modules) this is written $K_1\\otimes_A^{\\mathrm L}K_2$ in\n$D(Y_{\\mathrm{proét}},A)$. For a ring map $A\\to B$ and a complex $K_1$, write\n$K_1\\otimes_A^{\\mathrm L} B$ for the derived tensor product with the constant $B_Y$-module.",
+  "proof": [
+   {
+    "text": "The small pro-étale site is essentially small, so $\\Sh(Y_{\\mathrm{proét}},\\mathcal A)$ is a\nGrothendieck abelian category, and with the sheaf tensor product it is closed symmetric\nmonoidal [det-def-sfb-sheaf-tensor-closed]. It has functorial flat resolutions because\n$\\mathcal A$ does: the sheafified free objects on representables, tensored with a flat\nseparator of $\\mathcal A$, form a flat separator. Hence [lem-sfb-derived-monoidal] applies,\nand its derived tensor product is computed by replacing either argument by a K-flat\nresolution, which gives the concrete description.",
+    "uses": [
+     "det-def-sfb-sheaf-tensor-closed",
+     "lem-sfb-derived-monoidal"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

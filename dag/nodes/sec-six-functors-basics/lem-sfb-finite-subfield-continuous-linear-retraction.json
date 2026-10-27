@@ -13,13 +13,11 @@
  ],
  "proof": [
   {
-   "text": "The restriction of the given absolute value to $E$ is its extending $\\ell$-adic absolute value by [lem-weil-l-adic-extension-absolute-value]. It is nonarchimedean by that same node, and $E$ is complete by [lem-weil-l-adic-extension-complete]. By [def-weil-l-adic-numbers], $0<|\\ell|_E=\\ell^{-1}<1$. By [lem-weil-l-adic-extension-proper], every closed ball in $E$ is compact. The absolute value on $\\Omega$ is also nonarchimedean: for $x,y\\in\\Omega$, [def-weil-finite-subextension-directed-set] puts both in a common finite intermediate field $L$, and [lem-weil-l-adic-extension-absolute-value] applies to the restriction on $L$. Thus $\\Omega$, with $\\|x\\|=|x|$, is an ultrametric normed $E$-vector space; scalar homogeneity is the multiplicativity of its given absolute value. Restrictions of that absolute value induce exactly the stated topologies on $E$ and $F$.",
+   "text": "The induced norm on E is compatible with the given normed Q_l-algebra structure. It is nontrivial because Q_l is nontrivially normed [def-weil-l-adic-numbers], by Mathlib's intermediate-field nontrivially normed field instance. Since E is finite-dimensional over the complete proper field Q_l, FiniteDimensional.complete and FiniteDimensional.proper give completeness [lem-weil-l-adic-extension-complete] and properness [lem-weil-l-adic-extension-proper] for this actual induced norm. IsUltrametricDist.of_normedAlgebra transfers ultrametricity directly from Q_l to both E and Omega. Define the normed E-algebra structure on Omega using norm multiplicativity and the induced norm on E. No algebraic-closure exhaustion or uniqueness-of-absolute-value argument is needed.",
    "uses": [
-    "lem-weil-l-adic-extension-absolute-value",
-    "lem-weil-l-adic-extension-complete",
     "def-weil-l-adic-numbers",
-    "lem-weil-l-adic-extension-proper",
-    "def-weil-finite-subextension-directed-set"
+    "lem-weil-l-adic-extension-complete",
+    "lem-weil-l-adic-extension-proper"
    ],
    "elementary": false,
    "source": {
@@ -28,9 +26,8 @@
    }
   },
   {
-   "text": "Since $E\\subseteq F$ are finite intermediate fields, $F$ is finite-dimensional over $E$ by the final assertion of [def-weil-finite-subextension-directed-set]. Choose an $E$-basis $b_1,\\ldots,b_d$ and let $\\lambda_i:F\\to E$ be its coordinate linear maps, so $a=\\sum_{i=1}^d\\lambda_i(a)b_i$ for $a\\in F$. The norm topology on $F$ makes it a Hausdorff topological $E$-vector space: addition and scalar multiplication are continuous by the norm inequalities and multiplicativity. Since $E$ is complete and nontrivially normed by step 1, [lem-sfb-finite-dimensional-linear-map-continuous] says that every $\\lambda_i$ is continuous. The domain topology is the subspace topology from $\\Omega$, since both use the same absolute value.",
+   "text": "Module.Finite.of_restrictScalars_finite gives finite-dimensionality of F over E from finite-dimensionality over Q_l and the canonical scalar tower. Let W be the E-submodule of Omega underlying F; the carriers, scalar actions and induced topologies of W and F agree definitionally. Choose the finite basis b=Module.finBasis E F. For every index i, turn b.coord i into f_i:W to E as a continuous E-linear map by LinearMap.toContinuousLinearMap, using [lem-sfb-finite-dimensional-linear-map-continuous] and completeness and nontriviality of E from step 1.",
    "uses": [
-    "def-weil-finite-subextension-directed-set",
     "lem-sfb-finite-dimensional-linear-map-continuous"
    ],
    "elementary": false,
@@ -40,7 +37,7 @@
    }
   },
   {
-   "text": "Apply [lem-sfb-proper-ultrametric-scalar-extension] to $K=E$, $V=\\Omega$, $W=F$ and $f=\\lambda_i$, separately for each $1\\leq i\\leq d$. Step 1 verifies nontriviality, the strong triangle inequalities, scalar homogeneity and compactness of every scalar closed ball; step 2 verifies continuity on the induced subspace. Obtain continuous $E$-linear maps $\\widetilde\\lambda_i:\\Omega\\to E$ satisfying $\\widetilde\\lambda_i|_F=\\lambda_i$. This extension theorem has no completeness hypothesis on $V$, so none is imposed on $\\Omega$.",
+   "text": "For each basis index, apply [lem-sfb-proper-ultrametric-scalar-extension] with K=E, V=Omega, W the submodule from step 2 and f=f_i. Step 1 supplies the normed-space, ultrametric and proper-space hypotheses, and NormedField.exists_norm_lt_one E supplies the nontrivial scalar. Choose g_i:Omega to E continuous and E-linear with g_i(w)=f_i(w) on W. Neither this step nor the cited extension theorem requires completeness of Omega.",
    "uses": [
     "lem-sfb-proper-ultrametric-scalar-extension"
    ],
@@ -51,7 +48,7 @@
    }
   },
   {
-   "text": "Define $p_F(x)=\\sum_{i=1}^d\\widetilde\\lambda_i(x)b_i\\in F$. Each summand is continuous as a map to $F$: it is the composite of the continuous $\\widetilde\\lambda_i$ with $E\\to F$, $c\\mapsto cb_i$, whose norm difference is $|b_i||c-c'|$. A finite sum is continuous by the triangle inequality. Additivity and $E$-homogeneity hold termwise. For $a\\in F$, step 3 and the basis expansion in step 2 give $p_F(a)=\\sum_i\\lambda_i(a)b_i=a$. This proves all required clauses; the construction makes no assertion about multiplicativity, Galois equivariance or an operator norm bound.",
+   "text": "Set p to the finite sum of ContinuousLinearMap.smulRight (g_i) (b_i). This is a continuous E-linear map Omega to F by construction. For a in F, sum_apply and smulRight_apply express p(a) as the sum of g_i(a) times b_i. The extension identities replace each g_i(a) by (b.coord i)(a), and Basis.sum_repr identifies the result with a. This proves the unchanged retraction statement.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -61,18 +58,16 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-absolute-value",
-  "lem-weil-l-adic-extension-complete",
   "def-weil-l-adic-numbers",
+  "lem-weil-l-adic-extension-complete",
   "lem-weil-l-adic-extension-proper",
-  "def-weil-finite-subextension-directed-set",
   "lem-sfb-finite-dimensional-linear-map-continuous",
   "lem-sfb-proper-ultrametric-scalar-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-  "place": "Paragraph (3), arithmetic coefficient-topology expansion: the scalar-functional extension input for the continuous retraction used in finite-field boundary detection; agent argument, absent from the blueprint proof itself. The blueprint supplies the direct-image use, not the functional-analytic proof."
+  "place": "Paragraph (3), arithmetic coefficient-topology expansion. Lean proof by group Z6, 2026-10-23: finite-coordinate extension and sum; induced norm compatibility, completeness, properness and ultrametricity are supplied directly by Mathlib. The extension input remains the existing scalar-functional extension node."
  },
  "mathlib_searches": [
   {
@@ -397,5 +392,27 @@
   "group": "NO",
   "result": "pass",
   "note": "Item node identical to side-live except lean; statement verbatim in file; record complete. Clause match: (l:ℕ)[Fact l.Prime], Padic l, Ω NormedField+NormedAlgebra (Padic l)+IsAlgClosure = closure with extended abs value (no completeness; PadicAlgCl instantiates), E IntermediateField finite over Q_ℓ, F : IntermediateField E Ω finite over Q_ℓ (nesting encodes E⊆F, equivalent finiteness), ∃ p : Ω →L[E] F with p a = a on F. No extra hypotheses, universe u free, autoImplicit off. Edge cases E=Q_ℓ, F=E, ℓ=2, non-complete Ω covered; statement true via Ingleton Hahn–Banach. No duplicate in Mathlib (RCLike-only HB) or project. Docstrings carry source place, blueprint tag and 4 proof steps; sorry only. Advisory: proof-only imports unused by the statement; second reading done in the worker session but clause-by-clause. No file changed, no compile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261023T132548-L-2300670",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

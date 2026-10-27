@@ -1,0 +1,116 @@
+{
+ "id": "lem-coef-semilinear-tensor-comparison-cochain-square",
+ "kind": "statement",
+ "title": "Ordinary tensor squares commute on total cochain tensor complexes",
+ "statement": "variable {C₀ C₁ C₂ C₃ : Type c}\n  [Category.{v} C₀] [Category.{v} C₁] [Category.{v} C₂] [Category.{v} C₃]\n  [EssentiallySmall.{max c v r} C₀] [EssentiallySmall.{max c v r} C₁]\n  [EssentiallySmall.{max c v r} C₂] [EssentiallySmall.{max c v r} C₃]\n  (J₀ : GrothendieckTopology C₀) (J₁ : GrothendieckTopology C₁)\n  (J₂ : GrothendieckTopology C₂) (J₃ : GrothendieckTopology C₃)\n  (R₀ : Sheaf J₀ CommRingCat.{max c v r}) (R₁ : Sheaf J₁ CommRingCat.{max c v r})\n  (R₂ : Sheaf J₂ CommRingCat.{max c v r}) (R₃ : Sheaf J₃ CommRingCat.{max c v r})\n  (F : Mod.{c, v, max c v r} J₀ R₀ ⥤ Mod.{c, v, max c v r} J₁ R₁)\n  (G : Mod.{c, v, max c v r} J₁ R₁ ⥤ Mod.{c, v, max c v r} J₃ R₃)\n  (H : Mod.{c, v, max c v r} J₀ R₀ ⥤ Mod.{c, v, max c v r} J₂ R₂)\n  (I : Mod.{c, v, max c v r} J₂ R₂ ⥤ Mod.{c, v, max c v r} J₃ R₃)\n  [F.Additive] [G.Additive] [H.Additive] [I.Additive]\n  [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n  [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n  [PreservesFiniteLimits H] [PreservesFiniteColimits H]\n  [PreservesFiniteLimits I] [PreservesFiniteColimits I]\n  (S₀ : Closed.{c, v, r} J₀ R₀) (S₁ : Closed.{c, v, r} J₁ R₁)\n  (S₂ : Closed.{c, v, r} J₂ R₂) (S₃ : Closed.{c, v, r} J₃ R₃)\n  (T₀ : Models.{c, v, r} J₀ R₀ S₀) (T₁ : Models.{c, v, r} J₁ R₁ S₁)\n  (T₂ : Models.{c, v, r} J₂ R₂ S₂) (T₃ : Models.{c, v, r} J₃ R₃ S₃)\n  (μF : S₀.tensor ⋙ F.mapDerivedCategory ≅\n    (F.mapDerivedCategory.prod F.mapDerivedCategory) ⋙ S₁.tensor)\n  (μG : S₁.tensor ⋙ G.mapDerivedCategory ≅\n    (G.mapDerivedCategory.prod G.mapDerivedCategory) ⋙ S₃.tensor)\n  (μH : S₀.tensor ⋙ H.mapDerivedCategory ≅\n    (H.mapDerivedCategory.prod H.mapDerivedCategory) ⋙ S₂.tensor)\n  (μI : S₂.tensor ⋙ I.mapDerivedCategory ≅\n    (I.mapDerivedCategory.prod I.mapDerivedCategory) ⋙ S₃.tensor)\n  (tF : TensorComparisonModel.{c, v, r} J₀ J₁ R₀ R₁ F S₀ S₁ T₀ T₁ μF)\n  (tG : TensorComparisonModel.{c, v, r} J₁ J₃ R₁ R₃ G S₁ S₃ T₁ T₃ μG)\n  (tH : TensorComparisonModel.{c, v, r} J₀ J₂ R₀ R₂ H S₀ S₂ T₀ T₂ μH)\n  (tI : TensorComparisonModel.{c, v, r} J₂ J₃ R₂ R₃ I S₂ S₃ T₂ T₃ μI)\n  (θ : F ⋙ G ≅ H ⋙ I)\n  (ho : ∀ M N,\n    G.map (tF.ordinary M N).hom ≫ (tG.ordinary (F.obj M) (F.obj N)).hom ≫\n      ordinaryTensorHom.{c, v, r} J₃ R₃ (θ.hom.app M) (θ.hom.app N) =\n    θ.hom.app (ordinaryTensor.{c, v, r} J₀ R₀ M N) ≫\n      I.map (tH.ordinary M N).hom ≫ (tI.ordinary (H.obj M) (H.obj N)).hom)\n\n\ntheorem tensorComparisonCochainSquare\n    (P Q : CochainComplex (Mod.{c, v, max c v r} J₀ R₀) ℤ) :\n    tG.chain ((F.mapHomologicalComplex (.up ℤ)).obj P)\n        ((F.mapHomologicalComplex (.up ℤ)).obj Q) ≫\n      (G.mapHomologicalComplex (.up ℤ)).map (tF.chain P Q) ≫\n      (NatTrans.mapHomologicalComplex θ.hom (.up ℤ)).app\n        ((totalTensor.{c, v, r} J₀ R₀).obj (P, Q)) =\n    (totalTensor.{c, v, r} J₃ R₃).map\n        (Prod.mkHom ((NatTrans.mapHomologicalComplex θ.hom (.up ℤ)).app P)\n          ((NatTrans.mapHomologicalComplex θ.hom (.up ℤ)).app Q)) ≫\n      tI.chain ((H.mapHomologicalComplex (.up ℤ)).obj P)\n        ((H.mapHomologicalComplex (.up ℤ)).obj Q) ≫\n      (I.mapHomologicalComplex (.up ℤ)).map (tH.chain P Q) ",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, final signed total-complex comparison, applied to the ordinary evaluation square of Zheng Construction 4.1."
+ },
+ "proof_origin": {
+  "by": "G4",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, final signed total-complex comparison, applied to the ordinary evaluation square of Zheng Construction 4.1."
+ },
+ "proof": [
+  {
+   "text": "Apply HomologicalComplex.hom_ext in degree k and mapBifunctor.hom_ext on each summand p+q=k. Substitute the model.summand formulas for G and F on the first route and for I and H on the second route; tensorSummand_map identifies the tensor of the θ component maps. Naturality of θ moves the source summand inclusion across θ. Let u be G.mapIso of the ordinary F comparison composed with the ordinary G comparison, and let w be the analogous ordinary H,I composite. The assumed square says u.hom composed with the tensor of θ equals θ on the tensor composed with w.hom. Iso.inv_comp_eq and Iso.eq_comp_inv invert it to u.inv composed with θ equals the tensor of θ composed with w.inv. Postcompose with I.map(H.map of the source summand inclusion). This is exactly the desired summand equation. The maps were already morphisms of cochain complexes, hence their equality on components suffices.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-pur-system-cochain-tensor-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, final signed total-complex comparison, applied to the ordinary evaluation square of Zheng Construction 4.1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-pur-system-cochain-tensor-reduction"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GeometricTensorEvaluation",
+  "date": "2026-10-26",
+  "group": "G4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite coefficient-level derived adjunctions before R lim; geometric inverse image and direct image on the normalized ordinary semilinear system calculus. Normalized tensor localization for fixed ordinary geometric operations. Substep: Ordinary evaluation compatibility descends for normalized tensor models. Proved cochain summand comparison used in geometric tensor evaluation.",
+   "via": [
+    "lem-coef-semilinear-geometric-tensor-evaluation",
+    "lem-coef-semilinear-geometric-tensor-localization",
+    "lem-coef-semilinear-geometric-operations-base-existence",
+    "lem-coef-semilinear-geometric-operations",
+    "lem-coef-semilinear-operations-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An ordinary tensor comparison square for four exact additive functors implies equality of the induced comparisons on total tensor cochain complexes, by checking every tensor summand",
+   "results": "Eight hits about HasGoodTensor, HasTensor, tensorObj and ιTensorObj, with no four-model square.",
+   "date": "2026-10-26",
+   "verdict": "Use the total tensor extensionality API; supply the four-model calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctor.hom_ext\"",
+   "results": "HomologicalComplex.mapBifunctor.hom_ext and hom_ext_iff; a cokernel bifunctor extensionality lemma.",
+   "date": "2026-10-26",
+   "verdict": "Use HomologicalComplex.mapBifunctor.hom_ext for the summand reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorComparisonModel|tensorSummand_map",
+   "results": "No Mathlib hits. Local library has tensorSummand_map in SystemCochainTensorReduction.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing proved summand-map helper; the four-model equality is the new proved lemma."
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TensorComparisonCochainSquare",
+  "file": "lean/Sheaf/Paper/TensorComparisonCochainSquare.lean",
+  "declaration": "WeilConjectures.SemilinearSections.tensorComparisonCochainSquare",
+  "statement": "theorem tensorComparisonCochainSquare\n    (P Q : CochainComplex (Mod.{c, v, max c v r} J₀ R₀) ℤ) :\n    tG.chain ((F.mapHomologicalComplex (.up ℤ)).obj P)\n        ((F.mapHomologicalComplex (.up ℤ)).obj Q) ≫\n      (G.mapHomologicalComplex (.up ℤ)).map (tF.chain P Q) ≫\n      (NatTrans.mapHomologicalComplex θ.hom (.up ℤ)).app\n        ((totalTensor.{c, v, r} J₀ R₀).obj (P, Q)) =\n    (totalTensor.{c, v, r} J₃ R₃).map\n        (Prod.mkHom ((NatTrans.mapHomologicalComplex θ.hom (.up ℤ)).app P)\n          ((NatTrans.mapHomologicalComplex θ.hom (.up ℤ)).app Q)) ≫\n      tI.chain ((H.mapHomologicalComplex (.up ℤ)).obj P)\n        ((H.mapHomologicalComplex (.up ℤ)).obj Q) ≫\n      (I.mapHomologicalComplex (.up ℤ)).map (tH.chain P Q) ",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T111846-L-1755297",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T111846-L-1755297",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

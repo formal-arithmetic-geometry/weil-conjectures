@@ -1,0 +1,258 @@
+{
+ "id": "lem-pur-etale-sum-composition-counit",
+ "kind": "statement",
+ "title": "Summand evaluation and composition of exact derived etale sum adjunctions",
+ "statement": "Let $A$ be a finite commutative ring. Let $U\\xrightarrow e X\\xrightarrow v T$ be separated etale finite-type morphisms of Noetherian schemes (schemes admitting finite affine covers by spectra of Noetherian rings) [def-pc-scheme] [def-weil-pbc-noetherian-ring] [def-weil-scheme-morphism-properties] [def-weil-etale-morphism]. Use constant-$A$ module sheaves on small etale sites and their ordinary unbounded derived categories $D(Y_{\\mathrm{et}},A)$ [def-weil-pbc-derived-categories]. For $a=e,v,ve$, let $L_a=a_{\\Sigma!}$ be the sheafification of the presheaf $W\\mapsto\\bigoplus_{s:W\\to\\operatorname{source}(a)}M(W,s)$ [def-weil-pbc-etale-sum-extension] [def-weil-presheaf-modules-sheafification], and put $S_a=D(L_a)$. Use the exact sum/restriction adjunction $S_a\\dashv a^*$ [lem-amb-etale-adjoint-locality], with counit $\\operatorname{ev}_a$ and exact inverse image [prop-weil-pbc-inverse-image-modules-exact]. Its counit on sheaves is induced on the presenting presheaf by $i_s(x)\\mapsto x$, for $x\\in(a^*N)(W,s)=N(W)$ under the restriction identification [lem-weil-pbc-etale-inverse-image-restriction]. On every unbounded complex its counit is the localization of this map applied in each degree [def-weil-abstract-derived-category].\n\nLet $\\sigma:S_vS_e\\xrightarrow{\\sim}S_{ve}$ be the degreewise sum-composition comparison induced by sending a nested summand indexed by $W\\to X$ and its lift $W\\to U$ to the summand for $W\\to U$, as specified in [lem-sfb-quasifinite-compact-support-exact]. Let $\\kappa:(ve)^*\\xrightarrow{\\sim}e^*v^*$ be the canonical pullback-composition identification, i.e. the comparison $c_{e,v}:D((ve)^*)\\xrightarrow{\\sim}D(e^*)D(v^*)$ descended termwise from the sheaf comparison [def-pur-etale-exact-pullback-unit-composition-comparisons]. For every $K\\in D(T_{\\mathrm{et}},A)$ the following equality of derived counits holds:\n$$\\operatorname{ev}_{ve,K}\\circ\\sigma_{(ve)^*K}=\\operatorname{ev}_{v,K}\\circ S_v(\\operatorname{ev}_{e,v^*K})\\circ S_vS_e(\\kappa_K).$$\nFor the composite adjunction $S_vS_e\\dashv e^*v^*$ [def-weil-pbc-composite-adjunction], the adjunction conjugate of $\\sigma$ [def-weil-pbc-adjunction-conjugate] is $\\kappa:(ve)^*\\to e^*v^*$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S3 (definition-extension-zero, equation-j-p-shriek, exercise-jshriek-direct), 03S5 (proposition-describe-jshriek); sum/evaluation calculation; more-etale.tex Tag 0F50 (lemma-f-shriek-composition)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-amb-etale-adjoint-locality",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "def-pur-etale-exact-pullback-unit-composition-comparisons",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof": [
+  {
+   "text": "Use the defining homEquiv_leftAdjointUniq_hom_app of the sum compositor. Undo ofNatIsoRight with the literal restriction compositor, evaluate at the small-etale object W, and expand sheafPushforwardContinuous. This proves etaleSumSheafCompIso_summand, including the inverse Over.mapComp transport. The fold formula etaleSumCounit_summand is the right triangle identity of the sum/pullback adjunction transported through upperStarIsoLocalizationRestriction, evaluated at W. No claim about global generators of a sheafification is used.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the sheaf composition equation, leftAdjointUniq_hom_app_counit identifies the sum compositor followed by the composite-map counit with the counit of the composite restriction adjunction transported by the literal restriction compositor. Naturality moves the inverse-image/restriction isomorphism past the sum compositor. The proved upstream upperStarComp_hom_comp_upperStarIsoLocalizationRestriction identifies canonical pullback composition with literal restriction composition. Composition of transported adjunctions is transport of the composite adjunction by the whiskered isomorphisms, as checked on units in comp_ofNatIsoRight; two successive transports combine by ofNatIsoRight_trans. These identities and cancellation of the restriction isomorphism prove sheaf_composition_counit.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The derived etale adjunction is defined as localization of the degreewise sheaf adjunction. Mathlib Adjunction.localization_counit_app gives etaleSumCounit_localization directly. The private cell_counit identifies localization of the counit cell in the exact-derived pasting calculus with this localized adjunction counit: expand liftNatTrans_app, use the derived identity-comparison formula and the exact composition factorization, and cancel inverse comparisons. Encode the sheaf equality of the preceding step as two finite pasting expressions on the three module-sheaf categories. Apply exact_derived_transformation_pasting to their ordinary equality. The invertible cells are precisely the specified derivedEtaleSumCompIso and unboundedEtaleUpperStarCompIso, and the noninvertible cells are the three localized counits. Evaluation at any derived object therefore gives the required counit equation, on ordinary unbounded derived categories.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sp-exact-derived-transformation-pasting",
+    "lem-pur-exact-restriction-composition",
+    "lem-sc-localization-nested-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand conjugateEquiv_apply_app, combine the two right-adjoint images into the image of the counit composite, and substitute the derived counit equality. Naturality of the composite unit moves kappa to the front, and the right triangle identity cancels the remaining unit/counit pair. Thus the conjugate equals kappa in the specified direction. This is the private generic conjugate_of_counit lemma applied to the three derived adjunctions.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sum-extension",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sp-exact-derived-transformation-pasting",
+  "lem-pur-exact-restriction-composition",
+  "lem-sc-localization-nested-adjunction-mate",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S3, equation-j-p-shriek and exercise-jshriek-direct; adjoint uniqueness and canonical restriction composition, followed by exact-derived transformation pasting (Tag 015F) and the adjunction triangle identity; Lean proof by F3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For separated etale morphisms the exact sum extension adjunction on unbounded derived categories has the summand fold counit and the nested sum composition preserves the counit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derived'_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, localization functors $L_1: \\\\mathcal{C}_1 \\\\to\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_2$ in category $\\\\mathcal{C}_2$, the composition of $G'$ applied to $\\\\beta_{X_2}$ with the derived counit $\\\\varepsilon'$ evaluated at $L_2(X_2)$ equals the composition of $\\\\alpha_{F(X\"}\n  {\"name\": \"CategoryTheory.Idempotents.DoldKan.η\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.IsIdempotentComplete C] →\\n        [inst_3 : CategoryTheory.Limits.HasFiniteCoproducts C] →\\n          CategoryTheory.Idempotents.DoldKan.Γ.comp CategoryTheor\", \"doc\": \"In a preadditive, idempotent-complete category $\\\\mathcal{C}$ with finite coproducts, the composition of the $\\\\Gamma$ functor (mapping chain complexes to simplicial objects) with the normalized chain c\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G, F$ forming an adjunction $G \\\\dashv F$, with localizations $L_1, L_2$ respecting a morphism property $W_2$\"}\n  {\"name\": \"CategoryTheory.Idempotents.DoldKan.η_hom_app_f\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.IsIdempotentComplete C] [inst_3 : CategoryTheory.Limits.HasFiniteCoproducts C]\\n  (X : ChainComplex C ℕ) (i : ℕ),\\n  (CategoryTheory.Idempotents.DoldKan.η.hom.app X).f i =\\n\", \"doc\": \"In a preadditive, idempotent-complete category $\\\\mathcal{C}$ with finite coproducts, for any chain complex $X$ over $\\\\mathcal{C}$ and index $i \\\\in \\\\mathbb{N}$, the component $\\\\eta_X(i)$ of the natural\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/derived-functor or scheme-module tools and unrelated algebra results do not identify these specified small-etale sum/compact-support transformations; not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The conjugate of composition of etale extension by zero sum functors is the canonical composition of restriction pullback functors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n        [inst_1 : AlgebraicGeometry.IsOpenImmersion g] →\\n          AlgebraicGeometry.Scheme.Modules.restrictFunctor (CategoryTheory.CategoryStruct.comp f g) ≅\\n            (Alge\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"Algebra.Etale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.Etale R A]\\n  [Algebra.Etale A B], Algebra.Etale R B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings. If $ R \\to A $ and $ A \\to B $ are étale algebras and the scalar actions satisfy the tower condition $ R \\to A \\to B $, then the composite algebra $ R \\to \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"Algebra.FormallyEtale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.FormallyEtale R A]\\n  [Algebra.FormallyEtale A B], Algebra.FormallyEtale R B\", \"doc\": \"If $ A $ is a formally étale algebra over a commutative ring $ R $, and $ B $ is a formally étale algebra over $ A $, then $ B $ is a formally étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z),\\n  (CategoryTheory.conjugateEquiv\\n        ((AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction g).comp\\n          (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f))\\n        (AlgebraicGeometry.Scheme.Modules.pull\", \"doc\": \"For schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the conjugate equivalence between the composition of pullback-pushforward adjunctions $ (g_\\\\ast \\\\dashv g^\\\\ast) \\\\circ (f_\\\\ast \\\\dashv f^\"}\n  {\"name\": \"Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ B $ is a formally étale $ R $-algebra, then $ B $ is a formally étale $ A $-algebra.\"}\n  {\"name\": \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings with $ A $ and $ B $ as $ R $-algebras, and $ B $ as an $ A $-algebra satisfying the scalar tower condition $ R \\to A \\to B $. If $ A $ is formally unram\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/derived-functor or scheme-module tools and unrelated algebra results do not identify these specified small-etale sum/compact-support transformations; not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.conjugateEquiv",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.conjugateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) : (L₂ ⟶ L₁) ≃ (R₁ ⟶ R₂)\", \"doc\": \"Given two adjunctions `L₁ ⊣ R₁` and `L₂ ⊣ R₂` both between categories `C`, `D`, there is a\\nbijection between natural transformations `L₂ ⟶ L₁` and natural transformations `R₁ ⟶ R₂`. This is\\ndefined as\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_id\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ : CategoryTheory.Functor C D} {R₁ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) : (CategoryTheory.conjugateEquiv adj₁ adj₁) (CategoryTheory.CategoryStruct.id L₁) = CategoryTheory.CategoryStruc\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_iso\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : L₂ ⟶ L₁) [CategoryTheory.IsIso α] : CategoryTheory.IsIso ((CategoryTheory.conjugateE\", \"doc\": \"If `α` is an isomorphism between left adjoints, then its conjugate transformation is an\\nisomorphism. The converse is given in `conjugateEquiv_of_iso`.\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_of_iso\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : L₂ ⟶ L₁) [CategoryTheory.IsIso ((CategoryTheory.conjugateEquiv adj₁ adj₂) α)] : Cate\", \"doc\": \"If `α` is a natural transformation between left adjoints whose conjugate natural transformation\\nis an isomorphism, then `α` is an isomorphism. The converse is given in `conjugateEquiv_iso`.\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_symm_id\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ : CategoryTheory.Functor C D} {R₁ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) : (CategoryTheory.conjugateEquiv adj₁ adj₁).symm (CategoryTheory.CategoryStruct.id R₁) = CategoryTheory.Category\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_symm_iso\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : R₁ ⟶ R₂) [CategoryTheory.IsIso α] : CategoryTheory.IsIso ((CategoryTheory.conjugateE\", \"doc\": \"If `α` is an isomorphism between right adjoints, then its conjugate transformation is an\\nisomorphism. The converse is given in `conjugateEquiv_symm_of_iso`.\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_symm_of_iso\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : R₁ ⟶ R₂) [CategoryTheory.IsIso ((CategoryTheory.conjugateEquiv adj₁ adj₂).symm α)] :\", \"doc\": \"If `α` is a natural transformation between right adjoints whose conjugate natural transformation is\\nan isomorphism, then `α` is an isomorphism. The converse is given in `conjugateEquiv_symm_iso`.\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_adjunction_id\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {L R : CategoryTheory.Functor C C} (adj : L ⊣ R) (α : CategoryTheory.Functor.id C ⟶ L) (c : C) : ((CategoryTheory.conjugateEquiv adj CategoryTheory.Adjunction.id) α).app c = CategoryTheory.CategoryStruct.comp (α.app (R.obj c)) (adj.counit.app c)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_adjunction_id_symm\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {L R : CategoryTheory.Functor C C} (adj : L ⊣ R) (α : R ⟶ CategoryTheory.Functor.id C) (c : C) : ((CategoryTheory.conjugateEquiv adj CategoryTheory.Adjunction.id).symm α).app c = CategoryTheory.CategoryStruct.comp (adj.unit.app c) (α.app (L.obj c))\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_leftUnitor_hom\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] {L : CategoryTheory.Functor A B} {R : CategoryTheory.Functor B A} (adj : L ⊣ R) : (CategoryTheory.conjugateEquiv adj (CategoryTheory.Adjunction.id.comp adj)) L.leftUnitor.hom = R.rightUnitor.inv\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_rightUnitor_hom\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] {L : CategoryTheory.Functor A B} {R : CategoryTheory.Functor B A} (adj : L ⊣ R) : (CategoryTheory.conjugateEquiv adj (adj.comp CategoryTheory.Adjunction.id)) L.rightUnitor.hom = R.leftUnitor.inv\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateIsoEquiv_apply_hom\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : L₂ ≅ L₁) : ((CategoryTheory.conjugateIsoEquiv adj₁ adj₂) α).hom = (CategoryTheory.co\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/derived-functor or scheme-module tools and unrelated algebra results do not identify these specified small-etale sum/compact-support transformations; not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(counit|composition)|sum.*extension|shriek.*comp",
+   "results": "[grep] OK 17 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/MDifferentiable.lean\", \"line\": \"45\", \"text\": \"lemma eisSummand_extension_differentiableOn (k : ℤ) (a : Fin 2 → ℤ) :\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/MDifferentiable.lean\", \"line\": \"63\", \"text\": \"    fun _ _ ↦ eisSummand_extension_differentiableOn _ _) isOpen_upperHalfPlaneSet\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"line\": \"17\", \"text\": \"Assume `B / A` is a finite extension of Dedekind domains, `K` is the fraction ring of `A`,\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"line\": \"35\", \"text\": \"  `Ideal.sum_ramification_inertia` in the case of Galois extension.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"64\", \"text\": \"  HasRingHomProperty.isMultiplicative RingHom.Etale.stableUnderComposition\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"70\", \"text\": \"the assumption `anodyneExtensions f` can be spelled as\"}\n  {\"file\": \"Mathlib/RingTheory/IsGaloisGroup/Defs.lean\", \"line\": \"16\", \"text\": \"we do not assume that `L` is an algebraic extension of `K`.\"}\n  {\"file\": \"Mathlib/RingTheory/IsGaloisGroup/Defs.lean\", \"line\": \"46\", \"text\": \"In particular, we do not assume that `L` is an algebraic extension of `K`.\"}\n  {\"file\": \"Mathlib/RingTheory/Trace/Defs.lean\", \"line\": \"33\", \"text\": \"The definition is as general as possible and the assumption that the extension is finite\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Etale.lean\", \"line\": \"79\", \"text\": \"lemma Etale.stableUnderComposition : StableUnderComposition Etale := by\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"line\": \"17\", \"text\": \"This file proves that the sum of ramification times inertia equals the degree of the extension.\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"line\": \"28\", \"text\": \"* `Ideal.sum_ramification_inertia_eq_card`: Let `S/R` be a finite flat extension of domains,\"}\n  {\"file\": \"Mathlib/Analysis/LocallyConvex/WeakOperatorTopology.lean\", \"line\": \"501\", \"text\": \"this without any assumption on `σ₂₃` (in particular, on the dimension of the extension of `𝕜₃` over\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"line\": \"455\", \"text\": \"-- We first assume that the extension is finite and normal\"}\n  {\"file\": \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"line\": \"416\", \"text\": \"  -- Assume Q₂ has positive degree, take a root in an algebraic extension\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"line\": \"1348\", \"text\": \"/-- Under suitable assumptions on existence of relevant Kan extensions and preservation\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Kan/HasKan.lean\", \"line\": \"16\", \"text\": \"the definition of left Kan extensions. Under the assumption that `HasLeftKanExtension f g`,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/derived-functor or scheme-module tools and unrelated algebra results do not identify these specified small-etale sum/compact-support transformations; not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived etale sum extension composition is compatible with the evaluation counit for restriction",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \": coextendScalars f ⋙ restrictScalars f ⟶ 𝟭 (ModuleCat R)\", \"doc\": \"The counit of the adjunction between coextension of scalars and restriction of scalars functors, which provides a natural transformation from the composition $\\\\operatorname{Coext}_f \\\\circ \\\\operatornam\"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S) (X : ModuleCat R),\\n  (ModuleCat.RestrictionCoextensionAdj.counit' f).app X =\\n    ModuleCat.ofHom { toFun := fun g => g.toFun 1, map_add' := ⋯, map_smul' := ⋯ }\", \"doc\": \"Let $R$ and $S$ be rings, and let $f: R \\\\to S$ be a ring homomorphism. The restriction of scalars functor $\\\\mathrm{Res}_f: \\\\mathrm{Mod}_S \\\\to \\\\mathrm{Mod}_R$ is left adjoint to the coextension of scal\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) (x : ModuleCat S),\\n  (ModuleCat.ExtendRestrictScalarsAdj.counit f).app x = ModuleCat.ExtendRestrictScalarsAdj.Counit.map f\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit of the adjunction between extending scalars from $ R $ to $ S $ and restricting scalar\"}\n  {\"name\": \"CategoryTheory.evaluationAdjunctionRight_counit_app_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  [inst_2 : ∀ (a b : C), CategoryTheory.Limits.HasCoproductsOfShape (a ⟶ b) D] (c : C) (Y : CategoryTheory.Functor C D)\\n  (x : C),\\n  ((CategoryTheory.evaluationAdjunctionRight D c)\", \"doc\": \"For a fixed object $ c $ in category $ \\\\mathcal{C} $, if $ \\\\mathcal{D} $ admits coproducts indexed by hom-sets $ \\\\mathrm{Hom}_{\\\\mathcal{C}}(c, t) $, then the counit of the adjunction between the evalu\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \": F' ⋙ G' ⟶ 𝟭 D₂\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}\n  {\"name\": \"CompHausLike.LocallyConstant.counit\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"[HasExplicitFiniteCoproducts.{u} P] :\\n  haveI := CompHausLike.preregular hs\\n  (sheafSections _ _).obj ⟨CompHausLike.of P PUnit.{u + 1}⟩ ⋙ functor.{u, w} P hs ⟶\\n    𝟭 (Sheaf (coherentTopology (CompHausLike.{u} P)) (Type (max u w)))\", \"doc\": \"A natural transformation from the composition of the sheaf sections functor (evaluated at the terminal object PUnit) with a finite-product-preserving functor to the identity functor on sheaves over co\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} →\\n              S →\\n                (X ⟶ (ModuleCat.restrictScalars f).obj Y) →\\n                  have this := Module.compHom \", \"doc\": \"Given a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, this function evaluates the natural bijection between $ S $-linear maps $ X \\to Y $ (viewed as an $ R $-modul\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) → {Y : ModuleCat S} → ((ModuleCat.restrictScalars f).comp (ModuleCat.extendScalars f)).obj Y ⟶ Y\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, and an $ S $-module $ Y $, this is the counit morphism of the adjunction between extending and restricting scalars. It provid\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/derived-functor or scheme-module tools and unrelated algebra results do not identify these specified small-etale sum/compact-support transformations; not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(counit|composition)|sum.*extension|shriek.*comp",
+   "results": "{\"t\": \"2026-10-22T12:00:39Z\", \"tool\": \"grep\", \"query\": \"etale.*(counit|composition)|sum.*extension|shriek.*comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/ModularForms/EisensteinSeries/MDifferentiable.lean\", \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/MDifferentiable.lean\", \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"Mathlib/RingTheory/IsGaloisGroup/Defs.lean\", \"Mathlib/RingTheory/IsGaloisGroup/Defs.lean\", \"Mathlib/RingTheory/RingHom/Etale.lean\"], \"digest\": \"3bd011fd074bc97e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected generic conjugate/derived-counit tools and scheme structure-sheaf module comparisons; none identifies the specified constant-coefficient small-etale sum compositor with its fold counits in one specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived etale sum extension composition is compatible with the evaluation counit for restriction",
+   "results": "{\"t\": \"2026-10-22T12:00:39Z\", \"tool\": \"leansearch\", \"query\": \"The derived etale sum extension composition is compatible with the evaluation counit for restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"CategoryTheory.evaluationAdjunctionRight_counit_app_app\", \"CategoryTheory.Adjunction.derivedε\", \"CompHausLike.LocallyConstant.counit\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\"], \"digest\": \"13097749e780bb75\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected generic conjugate/derived-counit tools and scheme structure-sheaf module comparisons; none identifies the specified constant-coefficient small-etale sum compositor with its fold counits in one specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "{\"t\": \"2026-10-22T12:00:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.conjugateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateEquiv\", \"CategoryTheory.conjugateEquiv_id\", \"CategoryTheory.conjugateEquiv_iso\", \"CategoryTheory.conjugateEquiv_of_iso\", \"CategoryTheory.conjugateEquiv_symm_id\", \"CategoryTheory.conjugateEquiv_symm_iso\", \"CategoryTheory.conjugateEquiv_symm_of_iso\", \"CategoryTheory.conjugateEquiv_adjunction_id\"], \"digest\": \"ba8c03cd98cda1e3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected generic conjugate/derived-counit tools and scheme structure-sheaf module comparisons; none identifies the specified constant-coefficient small-etale sum compositor with its fold counits in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For separated etale morphisms the exact sum extension adjunction on unbounded derived categories has the summand fold counit and the nested sum composition preserves the counit",
+   "results": "{\"t\": \"2026-10-22T12:00:50Z\", \"tool\": \"leanfinder\", \"query\": \"For separated etale morphisms the exact sum extension adjunction on unbounded derived categories has the summand fold counit and the nested sum composition preserves the counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\"], \"digest\": \"f4785e8d83d109f9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected generic conjugate/derived-counit tools and scheme structure-sheaf module comparisons; none identifies the specified constant-coefficient small-etale sum compositor with its fold counits in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The conjugate of composition of etale extension by zero sum functors is the canonical composition of restriction pullback functors",
+   "results": "{\"t\": \"2026-10-22T12:01:15Z\", \"tool\": \"leanfinder\", \"query\": \"The conjugate of composition of etale extension by zero sum functors is the canonical composition of restriction pullback functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"Algebra.Etale.comp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"Algebra.FormallyEtale.comp\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"AlgebraicGeometry.Scheme.Etale.forget\"], \"digest\": \"12c39c1d01875ba1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected generic conjugate/derived-counit tools and scheme structure-sheaf module comparisons; none identifies the specified constant-coefficient small-etale sum compositor with its fold counits in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFunctorComp|conjugateEquiv_pullbackComp_inv",
+   "results": "{\"t\": \"2026-10-22T12:07:15Z\", \"tool\": \"grep\", \"query\": \"restrictFunctorComp|conjugateEquiv_pullbackComp_inv\", \"sub\": \"AlgebraicGeometry/Modules/Sheaf.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"265\", \"269\", \"320\", \"478\", \"484\"], \"digest\": \"904c5f7ac7357b09\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected Sheaf.lean:265 and :478; these are structure-sheaf module pullbacks on scheme open sites, not the specified constant-coefficient small-etale sum-extension adjunction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-sum-right-adjoint-coherence",
+  "date": "2026-10-22",
+  "group": "Q97"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "thm-pur-composition-coherence proof Step 1: etale local normal forms; expanded by lem-pur-co-smooth-etale-locality proof Step 1: natural etale normalization; returned proof Steps 1 and 3, summand evaluation and composition",
+   "via": [
+    "lem-pur-etale-sum-right-adjoint-coherence",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-pur-diagonal-section-pasting"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-etale-sum-composition-counit",
+  "worker": "stage1",
+  "summary": "Computed the sum-adjunction hom bijection and fold counit, checked both nested-summand evaluations using the specified compositor and sheafification universal properties, localized the exact degreewise equality on all unbounded complexes, and calculated its conjugate with the composite triangle identity. No statement change or new nodes.",
+  "blueprint": "thm-pur-composition-coherence proof Step 1, etale local normal forms and compatibility with etale localization; expanded in lem-pur-co-smooth-etale-locality proof Step 1, natural etale normalization. This item supplies its sum/evaluation composition calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Only its exact sum-extension and whole unbounded sum/restriction adjunction assertion is used; this is the ordinary-etale tool underlying the unit's etale normalization."
+   },
+   {
+    "node": "lem-sfb-quasifinite-compact-support-exact",
+    "why": "Only the explicit nested-summand normalization of its etale sum compositor is used, as prescribed in the item statement; the smooth-purity unit does not construct this compositor."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Its restriction and unit formulas identify the specified inverse images and canonical composition map in the sum calculation."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Its constant-ring module identification and exactness justify module-valued restriction and termwise localization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-b6d147a2b",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-b6d147a2b (reviewer sub-agent of L); spot-checked: S1 one-level split with four steps and no new nodes. The statement is byte-identical to the Q97 re-split snapshots (e14b, cf3d), whose reviews mapped parent base steps 1+3 to this node. Source checked: Stacks etale-cohomology.tex 11361-11425 (equation-j-p-shriek, the j_! hom adjunction), which matches def-weil-pbc-etale-sum-extension; no SGA. Step 1: sheafification plus the direct-sum universal property plus restriction-lemma clauses (1)/(2) with prop-inverse-image clause (2) give the hom bijection; the identity of a^*N corresponds to the fold i_s(x)->x; kappa is the identity on N(W). Step 2: I recomputed both sides on i_t(i_s(x)); both give x. Uniqueness goes by transposing along L_v -| v^* and then testing on the presheaf generators of L_e, which is valid. Step 3: the exact termwise factorization phi, the degreewise equality and localization clause (3) give the result for all unbounded K. Step 4: sigma: S_vS_e -> S_ve has conjugate (ve)^* -> e^*v^*; Step 3, naturality of eta and the triangle identity give kappa. All hypotheses hold: A finite, Noetherian, separated etale finite type implies quasi-finite for the lem-sfb clause. Edge cases: identity arrows, U empty, U = X disjoint-union X. Not a duplicate of lem-sfb-etale-support-nested-summands (unit inclusions) or lem-pur-etale-sum-right-adjoint-tensor. FIX (B3/C4): kappa, 'the canonical pullback-composition identification', cited no node, yet Step 3 relied on it being the termwise-descended sheaf comparison. Same-unit def-pur-etale-exact-pullback-unit-composition-comparisons clause (2) defines exactly this comparison (c_{e,v}). It is now cited in the statement and in Step 3 and added to stmt_deps, the step's uses and proof_deps; this adds a reference and weakens nothing. The worker's split_report tool_uses are accepted as genuine ordinary-etale infrastructure.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSumCompositionCounit",
+  "declaration": "AlgebraicGeometry.Etale.etaleSumCompositionCounit",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleSumRestrictionCompIso",
+   "AlgebraicGeometry.Etale.etaleSumSheafCompIso",
+   "AlgebraicGeometry.Etale.etaleSumSheafCompIso_summand",
+   "AlgebraicGeometry.Etale.derivedEtaleSumCompIso",
+   "AlgebraicGeometry.Etale.etaleSumCounit_summand",
+   "AlgebraicGeometry.Etale.etaleSumCounit_localization",
+   "AlgebraicGeometry.Etale.etaleSumCompositionCounit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSumCompositionCounit.lean",
+  "statement": "theorem etaleSumCompositionCounit (A : Type (u + 1)) [CommRing A] [Finite A] {U X T : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian T] (e : U ⟶ X) (v : X ⟶ T) [Etale e] [Etale v] [IsSeparated e] [IsSeparated v] [QuasiCompact e] [QuasiCompact v] : (∀ K : DerivedCategoryModule A T, (derivedEtaleSumCompIso A e v).hom.app ((upperStar (ModuleCat.{u + 1} A) (e ≫ v)).mapDerivedCategory.obj K) ≫ (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) (e ≫ v) inferInstance).counit.app K = ((etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory ⋙ (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategory).map ((unboundedEtaleUpperStarCompIso A e v).hom.app K) ≫ (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategory.map ((derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance).counit.app ((upperStar (ModuleCat.{u + 1} A) v).mapDerivedCategory.obj K)) ≫ (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance).counit.app K) ∧ conjugateEquiv (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) (e ≫ v) inferInstance) ((derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance).comp (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance)) (derivedEtaleSumCompIso A e v).hom = (unboundedEtaleUpperStarCompIso A e v).hom",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main theorem states the counit equation on every unbounded derived object and equality of its adjunction conjugate with the canonical pullback compositor. Additional statements give the nested-summand normalization, the fold evaluation, and the degreewise-localization formula. The helper comparisons are actual constructions from literal small-site restriction and sheaf sum adjunctions, followed by exact derived descent; no compactification, arbitrary transformation, or choice from an existence theorem is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f5d3c7936",
+  "group": "Q84",
+  "result": "pass",
+  "note": "All hypotheses (finite A at the u+1 convention, Noetherian, étale, separated, quasi-compact) match the node with nothing stronger. The counit equation and conjugateEquiv argument order and directions check out (σ: S_e⋙S_v ⟶ S_ve; conjugate (ve)^* ⟶ v^*⋙e^* = κ.hom). σ is a canonical leftAdjointUniq construction from the Over.mapComp restriction compositor; its summand normalization is lem-sfb's étale clause with o=id. Not a tautology: κ = upperStarComp descended, independent of σ. Existing dependency declarations are reused (etaleLowerShriek, derivedEtaleLowerShriekUpperStarAdjunction, unboundedEtaleUpperStarCompIso); no existing compositor for general étale maps (only etaleLowerShriekRestrictOpenIso for open immersions). Statement field verbatim, 7 declarations present, every proof is sorry, docstrings carry source and blueprint id, node otherwise identical to live, not superseded. Advisory: the FiniteEtale import may be unused."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261024T185154-L-3462785",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

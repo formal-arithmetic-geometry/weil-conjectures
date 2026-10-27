@@ -1,0 +1,403 @@
+{
+ "id": "lem-pur-relative-kummer-normalized-stalks",
+ "kind": "statement",
+ "title": "Canonical line-family stalk identification normalized on global classes",
+ "statement": "Let $k$ be an algebraically closed field, $\\ell$ a prime invertible in $k$, $N\\geq1$, $r=\\ell^N$, and $A$ a finite free commutative $\\mathbf Z/r\\mathbf Z$-algebra. Fix a primitive $r$-th root $\\zeta\\in k$. Put $L_T=\\mu_{r,T}\\otimes_{\\mathbf Z/r}A_T$ for every $k$-scheme $T$, on its small etale site [def-sc-kummer-sequence], [def-pur-sheaf-tensor-product], [def-weil-pbc-etale-sheaves]. Let $B$ be any $k$-scheme, let $C$ be either $\\mathbf A^1_k$ or $\\mathbf G_{m,k}$, and write $a_B:C_B=C\\times_k B\\to B$ [def-pc-fibre-product], [def-sbc-affine-space]. For a geometric point $\\bar b:\\operatorname{Spec}\\Omega\\to B$, let $S=B_{(\\bar b)}=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{B,\\bar b}$ be the strict localization [def-weil-geometric-point], [def-weil-pbc-strict-henselization-limit]. Write $v:C_S\\to C_B$ and $h:C_S\\to C$ for the projections.\n\nThere is a canonical isomorphism in $D^+(A\\text{-}\\mathrm{Mod})$\n$$\\Phi_{B,\\bar b}: (Ra_{B,*}L_{C_B})_{\\bar b}\\xrightarrow{\\sim}R\\Gamma(C,L_C),$$\nspecified as the strict-local derived stalk isomorphism to $R\\Gamma(C_S,L_{C_S})$ followed by the inverse of the canonical derived pullback $h^*$. Derived stalk means the exact geometric stalk functor applied to the derived object [def-weil-pbc-derived-categories], [def-weil-derived-cohomology-sheaves].\n\nFor every $q\\geq0$ and $x\\in H^q(C_B,L_{C_B})$, let $e_B^q(x)\\in\\Gamma(B,R^qa_{B,*}L_{C_B})$ be its Leray edge section: a global cocycle is sent to its class in the cohomology sheaf of the direct-image complex. Then\n$$H^q(\\Phi_{B,\\bar b})\\bigl(e_B^q(x)_{\\bar b}\\bigr)=(h^*)^{-1}(v^*x).$$\nIn degree zero this identifies the stalk of the unit with the constant-section map $A\\to H^0(C,L_C)$, $a\\mapsto\\zeta\\otimes a$. For $C=\\mathbf G_{m,k}$ it sends the germ of $e_B^1(\\kappa_{C_B,A}(t))$ to $\\kappa_{C,A}(t)$; here, for a $k$-scheme $T$ and a unit $w\\in\\Gamma(T,\\mathcal O_T)^\\times$, $\\kappa_{T,A}(w)=H^1(z\\mapsto z\\otimes1_A)(\\delta_T(w))\\in H^1(T,L_T)$, where $\\delta_T$ is the connecting map of the ordinary exact $r$-Kummer sequence $0\\to\\mu_{r,T}\\to\\mathbf G_{m,T}\\xrightarrow{r}\\mathbf G_{m,T}\\to0$ [def-sc-kummer-sequence]. Consequently whenever the absolute constant-section and Kummer-generator maps are isomorphisms and the remaining absolute cohomology groups vanish, the corresponding relative unit and generator maps are isomorphisms and the remaining relative cohomology sheaves vanish. For the line this includes both the twisted derived unit $L_B\\to Ra_{B,*}L_{C_B}$ and, through $\\zeta$, the untwisted unit. Restriction from the line to its punctured complement sends the pulled-back constant to that same constant. No arbitrary geometric-fibre base-change theorem is assumed in the definition of $\\Phi$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+  "place": "Step 2: strict-henselization stalk formula, compatibility with global edge sections, and conservative-stalk conclusion. Old steps 6 and 9. Stacks Tags 03Q8 and 03Q9, etale-cohomology.tex, lemma-higher-direct-images and theorem-higher-direct-images."
+ },
+ "stmt_deps": [
+  "def-sc-kummer-sequence",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-etale-sheaves",
+  "def-pc-fibre-product",
+  "def-sbc-affine-space",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-derived-categories",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-cohomology-pullback",
+  "def-asd-etale-roots-of-unity",
+  "def-asd-finite-etale-tate-twist",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-direct-image",
+  "def-pur-normalized-kummer-global-arrows",
+  "def-pur-normalized-kummer-cohomology-arrows",
+  "def-pur-normalized-kummer-generator-arrows",
+  "def-pur-relative-kummer-canonical-arrows",
+  "def-pur-kummer-exchange-class-arrows",
+  "def-pur-module-strict-local-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Write $g:S\\to B$ and $a_S:C_S\\to S$. The two possible projections $a_B$ are affine: over an affine $\\operatorname{Spec}R\\subset B$ their inverse images are $\\operatorname{Spec}R[t]$ and $\\operatorname{Spec}R[t,t^{-1}]$. Thus they are quasi-compact and quasi-separated by lem-weil-pbc-affine-morphism-permanence. The chosen strict localization is strictly henselian by lem-weil-pbc-strict-henselization-local-structure, and its global sections are exact by lem-weil-pbc-strict-henselization-scheme-sections-exact. These assertions impose no Noetherian or finite-type condition on $B$. The canonical identifications $v^{-1}L_{C_B}=L_{C_S}=h^{-1}L_C=a_S^{-1}L_S$ are the finite-twist pullback identifications of lem-asd-etale-finite-twist-pullback with $m=r$.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-weil-pbc-strict-henselization-scheme-sections-exact",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+    "place": "Step 2: strict-local reduction and normalization"
+   }
+  },
+  {
+   "text": "Here is the specified module-valued strict-local map $\\theta:(Ra_{B,*}L_{C_B})_{\\bar b}\\to R\\Gamma(C_S,L_{C_S})$. First take the germ-restriction map to $\\Gamma(S,g^{-1}Ra_{B,*}L_{C_B})$, degreewise on a representative, then apply global sections of the module-derived exchange $g^{-1}Ra_{B,*}\\to Ra_{S,*}v^{-1}$, and then the Leray composition comparison. Germ restriction is defined by the inverse-image unit and the pointed-neighbourhood limit legs, as in def-weil-pbc-strict-henselization-restriction. All these arrows are $A$-linear. Exactness of stalks and of strict-local sections makes their termwise functors descend to derived categories and commute with cohomology. On forgetting scalars, the direct-image and exchange comparisons of lem-weil-pbc-exchange-forget-coefficients identify this construction with the canonical restriction map in prop-weil-pbc-strict-henselization-stalk-formula; for global sections use lem-coef-derived-sections-scalar-coherence, and for the Leray arrow use lem-weil-derived-direct-image-composition, clause (5). That stalk theorem applies because the coefficient sheaf is killed by $r$ and $a_B$ is qcqs. It makes the forgotten $\\theta$ an isomorphism. An $A$-linear map of modules is invertible when its underlying group map is, and exact scalar forgetting identifies its cohomology; hence the derived cohomology criterion makes $\\theta$ an isomorphism in $D^+(A\\text{-}\\mathrm{Mod})$.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-restriction",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-coef-derived-sections-scalar-coherence",
+    "lem-weil-derived-direct-image-composition",
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+    "place": "Step 2: strict-local reduction and normalization"
+   }
+  },
+  {
+   "text": "Apply lem-pur-relative-kummer-strict-local-invariance to this strictly henselian local $k$-scheme $S$. It gives the isomorphism of the actual canonical pullback $h^*:R\\Gamma(C,L_C)\\to R\\Gamma(C_S,L_{C_S})$, including its normalization on constants and, for the punctured line, on the Kummer class. Define $\\Phi=(h^*)^{-1}\\circ\\theta$. Both factors are specified canonical arrows; taking their inverse and composite gives the asserted canonical isomorphism, without a geometric-fibre base-change assertion.",
+   "uses": [
+    "lem-pur-relative-kummer-strict-local-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+    "place": "Step 2: strict-local reduction and normalization"
+   }
+  },
+  {
+   "text": "We check the global-class formula for $\\theta$. A global cocycle representing $x$ gives the edge section by its class in the direct-image complex. Germ restriction therefore takes $e_B^q(x)_{\\bar b}$ to $g^*e_B^q(x)$ on $S$: on every pointed neighbourhood this is the inverse-image unit applied to that same section. Apply the edge-section identity of lem-pur-relative-kummer-exchange-generators to the square $(a_B,a_S,g,v)$ and $L=L_B$. It says that $\\mathcal H^q$ of exchange takes this section to $e_S^q(v^*x)$. Because sections on $S$ are exact, the canonical Leray identification identifies $e_S^q(y)$ with $y$ itself, by def-weil-pbc-exact-global-sections-leray. The abelian construction there applies to modules by the canonical scalar-forgetting comparisons already used in step 2. Thus $H^q(\\theta)(e_B^q(x)_{\\bar b})=v^*x$. Composing with $H^q(h^*)^{-1}$ gives exactly the displayed formula for every $q$ and every $x$.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-restriction",
+    "lem-pur-relative-kummer-exchange-generators",
+    "def-weil-pbc-exact-global-sections-leray",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-coef-derived-sections-scalar-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+    "place": "Step 2: strict-local reduction and normalization"
+   }
+  },
+  {
+   "text": "The chosen primitive root gives $A_T\\cong L_T$ for every $k$-scheme $T$, by $a\\mapsto\\zeta\\otimes a$. Indeed $X^r-1=\\prod_{i=0}^{r-1}(X-\\zeta^i)$ and every difference of distinct factors' roots is a nonzero element of $k$, hence a unit after every $k$-base change; its root scheme is the disjoint union of these $r$ constant sections. Tensoring the resulting $(\\mathbf Z/r)_T\\cong\\mu_{r,T}$ with $A_T$ gives the stated map, and pullback preserves each labeled root. The unit part of lem-pur-relative-kummer-exchange-generators identifies the strict-local unit with the unit of $a_S$. In degree zero that unit pulls back sections, so it takes $a$ to $\\zeta\\otimes a$. By the constants clause of lem-pur-relative-kummer-strict-local-invariance, $(h^*)^{-1}$ takes this to the same constant on $C$. This proves the claimed unit normalization, with the twisted and untwisted units identified through $\\zeta$.",
+   "uses": [
+    "lem-pur-relative-kummer-exchange-generators",
+    "lem-pur-relative-kummer-strict-local-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+    "place": "Step 2: strict-local reduction and normalization"
+   }
+  },
+  {
+   "text": "For clarity the Kummer class is formed before extending coefficients. The exact sequences on $C_B$ and $C_S$ exist by lem-amb-kummer-any-base, since $r$ is a unit. Pullback of units gives a morphism from the inverse image of the first sequence to the second: it preserves powers and roots. The root comparison is the canonical one of lem-asd-etale-finite-twist-pullback. The pullback ladder and naturality of connecting maps for a morphism of short exact sequences give $v^*\\delta_{C_B}(t)=\\delta_{C_S}(v^*t)$. The former assertion is lem-weil-pbc-pullback-cohomology-long-exact-ladder, whose connecting maps are those of the distinguished triangle of a short exact sequence. The latter is the naturality assertion of lem-weil-pbc-horseshoe-delta-functor for $\\Gamma(C_S,-)$, which concerns horseshoe connecting maps; lem-sc-p1-right-derived-triangle-connecting identifies these with the triangle connecting maps used by the ladder, so the two assertions compose. Naturality of cohomology pullback with respect to $z\\mapsto z\\otimes1_A$ then gives $v^*\\kappa_{C_B,A}(t)=\\kappa_{C_S,A}(t)$. Here $v^*t$ is precisely the coordinate $t$, and no module structure on $\\mathbf G_m$ was used. The Kummer clause of lem-pur-relative-kummer-strict-local-invariance identifies this class with $h^*\\kappa_{C,A}(t)$. In the formula of step 4, take $q=1$ and $x=\\kappa_{C_B,A}(t)$; cancellation of $h^*$ proves the required normalized image.",
+   "uses": [
+    "lem-amb-kummer-any-base",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "lem-weil-pbc-horseshoe-delta-functor",
+    "lem-sc-p1-right-derived-triangle-connecting",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-pur-relative-kummer-strict-local-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+    "place": "Step 2: strict-local reduction and normalization"
+   }
+  },
+  {
+   "text": "Suppose the absolute maps in the statement are isomorphisms and its other absolute cohomology groups vanish. Steps 4--6 identify the stalk of each specified relative map with that absolute map; the source constant sheaf has stalk $A$, with its $\\zeta$-trivialization in the twisted case. Hence these stalk maps are isomorphisms. The same $\\Phi$ makes the stalks of every remaining relative cohomology sheaf zero. Apply lemma-weil-pbc-geometric-stalk-conservative to those maps and to the maps from the zero sheaf, forgetting scalars if necessary. This proves all claimed sheaf isomorphisms and vanishings. For the line, negative cohomology is zero since a right derived direct image of a sheaf is connective; thus its unit is an isomorphism by lem-weil-pbc-derived-plus-iso-on-cohomology. Twisting through $\\zeta$ gives both forms of that unit. Finally the ring restriction $R[t]\\to R[t,t^{-1}]$ fixes each element of $k$, so restriction of the constant root section $\\zeta$ is $\\zeta$, and tensor restriction fixes $a$; therefore restriction carries the pulled-back constant to the same constant.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+    "place": "Step 2: strict-local reduction and normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strict-henselization-scheme-sections-exact",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-weil-pbc-strict-henselization-restriction",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-coef-derived-sections-scalar-coherence",
+  "lem-weil-derived-direct-image-composition",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
+  "lem-pur-relative-kummer-strict-local-invariance",
+  "lem-pur-relative-kummer-exchange-generators",
+  "def-weil-pbc-exact-global-sections-leray",
+  "lem-amb-kummer-any-base",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-sc-p1-right-derived-triangle-connecting",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-dplus-injective-representative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+  "place": "Step 2; expanded using Stacks 03Q9 (theorem-higher-direct-images), 03PL (lemma-kummer-sequence), and the existing canonical exchange interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical strict henselization stalk formula for a constant family of affine or punctured lines identifies the germ of a global Kummer edge section with its restricted class",
+   "results": "{\"t\": \"2026-10-22T06:44:17Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical strict henselization stalk formula for a constant family of affine or punctured lines identifies the germ of a global Kummer edge section with its restricted class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo\", \"AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom_germ\", \"AlgebraicGeometry.stalkToFiberRingHom_germ\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec\", \"AlgebraicGeometry.StructureSheaf.germ_toOpen\", \"AlgebraicGeometry.StructureSheaf.germ_comp_stalkToFiberRingHom\", \"AlgebraicGeometry.Scheme.fromSpecStalk_appTop\"], \"digest\": \"7f960cb85a33056e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-22T06:44:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"stalk\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(cohom|[Dd]erived)|[Ee]dge.*[Ss]ection",
+   "results": "{\"t\": \"2026-10-22T06:44:05Z\", \"tool\": \"grep\", \"query\": \"stalk.*(cohom|[Dd]erived)|[Ee]dge.*[Ss]ection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical strict henselization stalk formula for a constant family of affine or punctured lines identifies the germ of a global Kummer edge section with its restricted class",
+   "results": "{\"t\": \"2026-10-22T06:44:06Z\", \"tool\": \"leansearch\", \"query\": \"Canonical strict henselization stalk formula for a constant family of affine or punctured lines identifies the germ of a global Kummer edge section with its restricted class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ_apply\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ_apply\", \"ModuleCat.Tilde.stalkToFiberLinearMap_germ\", \"TopCat.Presheaf.Γgerm\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ\", \"AlgebraicGeometry.StructureSheaf.germ_toOpen\", \"ModuleCat.Tilde.toOpen_germ_apply\"], \"digest\": \"9dec6ee1b70f4c63\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image geometric stalks of split line families are absolute model cohomology preserving units and Kummer generators",
+   "results": "{\"t\": \"2026-10-22T06:44:19Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct image geometric stalks of split line families are absolute model cohomology preserving units and Kummer generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.spread_out_of_isGermInjective\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"], \"digest\": \"3e432ad04f7138c9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image geometric stalk strict henselization canonical cohomology restriction of global classes",
+   "results": "{\"t\": \"2026-10-22T07:59:09Z\", \"tool\": \"leanfinder\", \"query\": \"Derived direct image geometric stalk strict henselization canonical cohomology restriction of global classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo\", \"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app\", \"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app\", \"AlgebraicGeometry.Scheme.stalkMap_germ_apply\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"ModuleCat.Tilde.toOpen_germ\", \"AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply\", \"AlgebraicGeometry.Scheme.fromSpecStalk_app\"], \"digest\": \"339582c5d288e745\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern structure-sheaf stalks or general sheafification; none states the specified etale derived stalk comparison with Kummer normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-22T07:59:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"stalk\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern structure-sheaf stalks or general sheafification; none states the specified etale derived stalk comparison with Kummer normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(cohom|[Dd]erived)|[Ee]dge.*[Ss]ection",
+   "results": "{\"t\": \"2026-10-22T07:59:10Z\", \"tool\": \"grep\", \"query\": \"stalk.*(cohom|[Dd]erived)|[Ee]dge.*[Ss]ection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern structure-sheaf stalks or general sheafification; none states the specified etale derived stalk comparison with Kummer normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image geometric stalk strict henselization canonical cohomology restriction of global classes",
+   "results": "{\"t\": \"2026-10-22T07:59:10Z\", \"tool\": \"leansearch\", \"query\": \"Derived direct image geometric stalk strict henselization canonical cohomology restriction of global classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.StructureSheaf.toOpen_Γgerm_apply\", \"AlgebraicGeometry.Scheme.Hom.resLEStalkMap\", \"AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_ofRestrict\", \"AlgebraicGeometry.Scheme.fromSpecStalk_appTop\", \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ_apply\"], \"digest\": \"2917878b621abab0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern structure-sheaf stalks or general sheafification; none states the specified etale derived stalk comparison with Kummer normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image as sheafification of local cohomology presheaf compatibility with global cocycles and geometric stalk restriction",
+   "results": "{\"t\": \"2026-10-22T08:01:35Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct image as sheafification of local cohomology presheaf compatibility with global cocycles and geometric stalk restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.toPresheaf_map_toSheafify\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective\", \"PresheafOfModules.toSheafify_app_apply'\", \"TopCat.Presheaf.sheafifyStalkIso\", \"StalkSkyscraperPresheafAdjunctionAuxs.toSkyscraperPresheaf_app\", \"TopCat.Presheaf.map_germ_eq_Γgerm_assoc\", \"CategoryTheory.Sheaf.sheafifyCocone_ι_app_val_assoc\"], \"digest\": \"8643612546eacf4b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern structure-sheaf stalks or general sheafification; none states the specified etale derived stalk comparison with Kummer normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-pur-gm-relative-kummer",
+  "date": "2026-10-22",
+  "group": "Q160"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-gm-relative-kummer",
+   "place": "Step 2: strict-henselization stalk formula, compatibility with global edge sections, and conservative-stalk conclusion. Old steps 6 and 9. Stacks Tags 03Q8 and 03Q9, etale-cohomology.tex, lemma-higher-direct-images and theorem-higher-direct-images.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-relative-kummer-normalized-stalks",
+  "worker": "stage1",
+  "summary": "Reused existing strict-local invariance, canonical module exchange, scalar-forgetting, and stalk interfaces. Constructed the derived A-linear comparison, checked edge sections and actual Kummer generators, then used conservative stalks. No new nodes.",
+  "blueprint": "prop-pur-gm-relative-kummer, Step 2: strict-henselization reduction, specified h pullback, constants, global Kummer class, conservative-stalk conclusion; also the line case of Step 1.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Affineness gives qcqs for the two projections, as required by the stalk formula. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-local-structure",
+    "why": "The chosen strict-local coordinate ring is strictly henselian without Noetherian assumptions. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-scheme-sections-exact",
+    "why": "Exact sections on the actual strict-local model are used for the canonical Leray arrow. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "The canonical root and tensor pullback comparison works for arbitrary schemes and coefficient rings. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "def-weil-pbc-strict-henselization-restriction",
+    "why": "Defines the particular germ restriction and mate, rather than an arbitrary isomorphism. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Exactness commutes stalks with derived cohomology. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Exact stalk, sections and forgetting functors commute with cohomology. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "The specified module exchange forgets to the specified abelian exchange. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "lem-coef-derived-sections-scalar-coherence",
+    "why": "Canonical global-sections scalar comparison is an isomorphism on resolutions. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Clause (5) supplies canonical ordinary etale module Leray composition. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "The qcqs strict-local stalk theorem is exactly the source reduction, not geometric-fibre base change. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-derived-plus-iso-on-cohomology",
+    "why": "General cohomological criterion for derived invertibility. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "def-weil-pbc-exact-global-sections-leray",
+    "why": "Identifies the strict-local edge section with its global class. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "Kummer exactness is needed on arbitrary bases, not only curves. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "why": "Naturality of canonical cohomology pullback with the Kummer boundary. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-horseshoe-delta-functor",
+    "why": "Naturality of the connecting map under the morphism to the target Kummer sequence. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "lem-sc-p1-right-derived-triangle-connecting",
+    "why": "Identifies horseshoe connecting maps with the triangle connecting maps of the pullback ladder, so the naturality of the Kummer boundary under the morphism of Kummer sequences composes with the pullback ladder. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "Naturality with the coefficient insertion map. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Reflects sheaf isomorphisms and vanishing from geometric stalks. This is a generic tool; no specialized node of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "A degree-zero sheaf has a nonnegative injective representative, ensuring connectivity. This is a generic tool; no specialized node of this unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strict-henselization-scheme-sections-exact",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-weil-pbc-strict-henselization-restriction",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-coef-derived-sections-scalar-coherence",
+  "lem-weil-derived-direct-image-composition",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
+  "def-weil-pbc-exact-global-sections-leray",
+  "lem-amb-kummer-any-base",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-sc-p1-right-derived-triangle-connecting",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-dplus-injective-representative"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-9f203e545",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-9f203e545 (reviewer sub-agent of L); spot-checked: I read all of it: the item's statement and its 7 steps against every cited statement (no new nodes), blueprint main-20261015 prop-pur-gm-relative-kummer Step 2, and Stacks 03Q8/03Q9 (etale-cohomology.tex lines 7510 and 8015). This is a first split of a node Q160 created today, not a 2026-10-21 re-split; the statement is unchanged and nothing uses SGA. The item covers the stalk formula, edge-class compatibility and the conservative-stalk conclusion of Step 2; the sibling lem-pur-relative-kummer-strict-local-invariance covers the smooth-base-change part. Step 1: affine gives qcqs, the chosen strict localization is strictly henselian with exact sections, and the finite-twist pullback applies with m=r. Step 2: theta is the same composite (germ restriction, mate, Leray) as the canonical map of prop-weil-pbc-strict-henselization-stalk-formula, whose hypotheses hold (qcqs, r-torsion coefficients). Forgetting scalars uses exchange-forget-coefficients (1)-(3), lem-coef-derived-sections-scalar-coherence and composition clause (5). No node states that the A-linear and abelian Leray comparisons agree after forgetting; I accept this as a routine coherence of canonical comparisons, not a gap. Steps 3 and 5: the sibling's constants and Kummer clauses plus the exchange-generators unit identity; the zeta trivialization is elementary because differences of roots are units of k. Step 4: the edge identity of exchange-generators with L=L_B, and the Leray identification sends the edge section of y to y. Step 7: conservative stalks, connectivity from a nonnegative injective representative, then the derived cohomology criterion. Small cases tested: B empty, B a point, nonreduced or non-Noetherian B, residue field different from k, A=0. Duplicate search (gm-strict-henselization-stalk-formula, lem-pur-a1-direct-image, the curve Kummer naturality nodes, all citers of the stalk formula, edge-section nodes) found nothing that states this item. No cycle. FIX (C3/C4, step 6): the pullback ladder's connecting maps come from distinguished triangles, but naturality for the morphism of Kummer sequences was cited from lem-weil-pbc-horseshoe-delta-functor, which is about horseshoe connecting maps and disclaims any relation to the triangle ones. I added lem-sc-p1-right-derived-triangle-connecting (horseshoe delta = triangle delta of Rv) to step 6's text, its uses, proof_deps and split_report.tool_uses. I accept the 19 generic tool_uses. Fix file: fixes/dag/nodes/sec-smooth-purity/lem-pur-relative-kummer-normalized-stalks.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeKummerNormalizedStalks",
+  "declaration": "AlgebraicGeometry.Etale.relativeKummer_normalized_stalks",
+  "declarations": [
+   "AlgebraicGeometry.Etale.normalizedKummerStrictFamily",
+   "AlgebraicGeometry.Etale.normalizedKummerStrictV",
+   "AlgebraicGeometry.Etale.normalizedKummerStrictH",
+   "AlgebraicGeometry.Etale.normalizedKummerStrictStructure",
+   "AlgebraicGeometry.Etale.normalizedKummerH",
+   "AlgebraicGeometry.Etale.normalizedKummerV",
+   "AlgebraicGeometry.Etale.normalizedKummerTheta",
+   "AlgebraicGeometry.Etale.RelativeKummerNormalizedStalk",
+   "AlgebraicGeometry.Etale.relativeKummer_normalized_stalks"
+  ],
+  "statement": "theorem relativeKummer_normalized_stalks (k : Type u) [Field k] [IsAlgClosed k] (ℓ N : ℕ) (hℓ : ℓ.Prime) (_hN : 1 ≤ N) (hℓk : IsUnit (ℓ : k)) (A : Type (u + 1)) [CommRing A] [Algebra (ZMod (ℓ ^ N)) A] [Module.Free (ZMod (ℓ ^ N)) A] [Module.Finite (ZMod (ℓ ^ N)) A] (ζ : k) (hζ : IsPrimitiveRoot ζ (ℓ ^ N)) (B : Scheme.{u}) (p : B ⟶ Spec (.of k)) : let m := ℓ ^ N let hm := relativeKummerPositive ℓ N hℓ let hA := relativeKummerAnnihilator A m let hmk := relativeKummerFieldExponentUnit ℓ N hℓk let hB := relativeKummerExponentUnit m hmk B p let hC := fun b => relativeKummerExponentUnit m hmk _ (KummerLine.structureMap k b) let hCB := fun b => relativeKummerExponentUnit m hmk _ (normalizedKummerStructure p b) let abs0 := fun b => (DerivedCategory.Plus.homologyFunctor _ 0).map (normalizedKummerGlobalSection A m hA _ (normalizedKummerConstantMap A m hm hA hζ _ (KummerLine.structureMap k b))) let rel0 := fun b => (DerivedCategory.Plus.homologyFunctor _ 0).map (normalizedKummerUntwistedUnit A m hm hA hζ p (normalizedKummerProjection p b) hB (hCB b)) (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ B), ∀ b : Bool, RelativeKummerNormalizedStalk A m hm hA hmk hζ p b s) ∧ ((IsIso (abs0 false) ∧ (∀ q : ℕ, q ≠ 0 → IsZero ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj (normalizedKummerGlobal A m hA (KummerLine.curve k false))))) → IsIso (relativeKummerUnit A m hm hA (normalizedKummerProjection p false) hB (hCB false)) ∧ IsIso (normalizedKummerUntwistedUnit A m hm hA hζ p (normalizedKummerProjection p false) hB (hCB false)) ∧ IsIso (rel0 false) ∧ (∀ q : ℕ, q ≠ 0 → IsZero ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj (normalizedKummerImage A m hA (normalizedKummerProjection p false))))) ∧ ((IsIso (abs0 true) ∧ IsIso (normalizedKummerGeneratorMap A m hA _ (hC true) (KummerLine.coordinateUnit k)) ∧ (∀ q : ℕ, q ≠ 0 → q ≠ 1 → IsZero ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj (normalizedKummerGlobal A m hA (KummerLine.curve k true))))) → IsIso (rel0 true) ∧ IsIso (normalizedKummerRelativeGenerator A m hA p (hCB true)) ∧ (∀ q : ℕ, q ≠ 0 → q ≠ 1 → IsZero ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj (normalizedKummerImage A m hA (normalizedKummerProjection p true))))) ∧ (∀ a : A, relativeKummerCohomologyPullback A m hm hA (normalizedKummerInclusion p) (hCB false) (hCB true) 0 (relativeKummerConstant A m hm hA hζ _ (normalizedKummerStructure p false) a) = relativeKummerConstant A m hm hA hζ _ (normalizedKummerStructure p true) a)",
+  "branch": "sheaf-dag",
+  "by": "Q152",
+  "date": "2026-10-24",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeKummerNormalizedStalks.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a815deb3",
+  "group": "Q152",
+  "result": "pass",
+  "note": "Re-delivery of 5915004d, which was reviewed PASS but refused at landing because the new theorem nodes lem-pur-kummer-line-inclusion-over and lem-pur-module-strict-local-restriction-properties had status 'split'. A git diff of all 19 files between the two heads shows only those two status fields changed to 'unsplit' plus a report section; the 8 Lean modules and the other 8 records are byte-identical. Unsplit with mathlib_match null is what review_split.py requires for new statement nodes. Independent re-reading: Φ is pinned by IsIso h* ∧ ∃Φ, Φ≫h*=θ (θ = moduleStrictLocalTheta: germ restriction, derivedBaseChangeMapPlus, moduleLerayPlus, canonical coefficient iso); the all-q edge identity H^q(edgeGerm)≫H^q(Φ)≫H^q(h*)=H^q(v*); the unit sends a to ζ⊗a; for b=true the generatorPlus_{C_B}(t)≫H¹(edgeGerm)≫H¹(Φ)=generatorPlus_C(t) clause uses the unique ordinaryFiniteClass preimage; the line and G_m conservative consequences include both units; the constant-restriction clause holds. Hypotheses match the node with no extra instances. Edge cases covered: empty or non-Noetherian B, A=0, N=1, degrees, universes. The item statement text equals the base. Every lean.statement is verbatim in its file, including both existing:true attachments (17 plain decls, no .choose of a theorem) checked against the live sources. No hollow defs; sorry only in 3 theorems; no live id or name clashes. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-affine-group-centre-base-change",
+ "kind": "statement",
+ "title": "Representability and field base change for the scheme-theoretic centre",
+ "statement": "Let $k$ be a field [def-weil-field]. All group schemes below are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$, and all subgroup schemes are closed [def-sc-group-scheme-subgroup]. Smoothness is as in [def-sbc-smooth-morphisms], and connectedness as in [def-weil-connected-scheme]; geometrically connected means connected after extension to an algebraic closure $\\bar k$ of $k$. The centre $Z(G)$ denotes the subgroup functor whose $A$-points commute with every element of $G(A')$ for every commutative $A$-algebra $A'$. For every such $G$, this functor is represented by a closed normal commutative subgroup scheme $Z(G)\\subseteq G$. For every field extension $K/k$, the natural equality $Z(G)_K=Z(G_K)$ holds as closed subgroup schemes of $G_K$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 1.92 and the following paragraph, printed pp.33--34, taking the centralizer of the whole group."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-tori-multiplicative-type",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=\\operatorname{Spec}B$. Morphisms from any scheme $T$ to an affine scheme $\\operatorname{Spec}R$ are ring maps $R\\to\\Gamma(T,\\mathcal O_T)$ [lem-weil-pbc-morphism-into-affine-scheme, def-weil-affine-spectrum]; with the fibre-product universal property [def-pc-fibre-product] this identifies $G\\times_kG$ with $\\operatorname{Spec}(B\\otimes_kB)$, since $k$-algebra maps from the tensor product are precisely pairs of $k$-algebra maps. More generally $\\operatorname{Spec}R_1\\times_{\\operatorname{Spec}R}\\operatorname{Spec}R_2=\\operatorname{Spec}(R_1\\otimes_RR_2)$. Since $B$ is finitely generated over $k$, generators $b_i\\otimes1$ and $1\\otimes b_i$ generate $B\\otimes_kB$; thus this product is affine of finite type [def-weil-finite-type-morphism]. The diagonal corresponds to the surjection $B\\otimes_kB\\to B$, $b\\otimes c\\mapsto bc$, so it is a closed immersion by [def-weil-closed-immersion]. This also proves that $G$ is separated, and the identical argument with $B\\otimes_kB$ proves that the product is separated [def-weil-proper-morphism].",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.92, printed p.33, closedness of the diagonal; affine verification of its hypotheses."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-constant-source-closed-factorization-locus] with $Y=G$, $S=G$, $X=G\\times_kG$, $W=\\Delta_G(G)$ and $f(h,g)=(h,ghg^{-1})$. Multiplication and inverse make this a morphism [def-sc-group-scheme]. Step 1 verifies the separated finite-type hypotheses and the closed immersion $W\\hookrightarrow X$. We obtain a closed subscheme $L\\hookrightarrow G$ such that a map $g:T\\to G$ factors through $L$ exactly when $h\\mapsto(h,ghg^{-1})$ on $G\\times_kT$ factors through the diagonal, equivalently when conjugation by $g$ is the identity of $G\\times_kT$.",
+   "uses": [
+    "lem-sfb-constant-source-closed-factorization-locus",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.79 and 1.92, printed pp.30,33; Theorem 1.105, printed pp.37–38."
+   }
+  },
+  {
+   "text": "For $T=\\operatorname{Spec}A$, equality of this conjugation morphism with the identity implies $ghg^{-1}=h$ for all $h\\in G(A')$ and every commutative $A$-algebra $A'$. Conversely, these equalities apply to $A'=A\\otimes_kB$ and the universal point of $G_A=\\operatorname{Spec}(A\\otimes_kB)$. They say the conjugation morphism equals the identity on the universal point, so their coordinate-algebra maps agree [def-weil-affine-spectrum]. Consequently $L(A)$ is exactly the centre functor in the statement, naturally in $A$. This uses all algebra points, not merely field-valued points.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.92 and following paragraph, printed pp.33–34; explicit universal-point verification."
+   }
+  },
+  {
+   "text": "For every $A$, the identity lies in $L(A)$; if $z,w\\in L(A)$, their images commute with every $h\\in G(A')$ for every $A'$ over $A$, so $(zw)h=h(zw)$ and $z^{-1}h=hz^{-1}$. These identities make $L(A)$ a subgroup. In particular $zw=wz$ by taking $A'=A$ and $h=w$. For $g\\in G(A)$, centrality gives $gzg^{-1}=z$, so the subgroup is normal. Thus the closed subscheme $L$ is a closed normal subgroup scheme by [def-sc-group-scheme-subgroup]. Its multiplication is commutative by [def-sc-group-scheme]: evaluate it on the universal pair on the affine scheme $L\\times_kL$, where the displayed commutation identity gives equality of the multiplication and its swap. Here $L$ is affine because it is closed in $\\operatorname{Spec}B$, hence is $\\operatorname{Spec}(B/I)$ [def-weil-closed-immersion].",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "def-sc-group-scheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.92, printed p.33, subgroup assertion; following paragraph, definition of the centre."
+   }
+  },
+  {
+   "text": "Let $K/k$ be any field extension. The base-change clause of [lem-sfb-constant-source-closed-factorization-locus], with $S'=G_K\\to G$, gives $L_K=L\\times_GG_K$ representing the same factorization condition for every $T\\to G_K$. Writing $G_K=\\operatorname{Spec}C$ with $C=B\\otimes_kK$ and $L=\\operatorname{Spec}(B/I_0)$ (step 4), the affine fibre-product description of step 1 [lem-weil-pbc-morphism-into-affine-scheme] gives $L_K=\\operatorname{Spec}(C/I_0C)$, a closed subscheme of $G_K$. By the fibre-product universal property [def-pc-fibre-product], $G\\times_kT=G_K\\times_KT$ for a $K$-scheme $T$, and the pulled-back conjugation and diagonal are the conjugation and diagonal of $G_K$. For a $K$-algebra $A$, its $A$-algebra extensions carry the induced $K$-structure; hence step 3 identifies this condition exactly with $Z(G_K)(A)$. Equality is scheme-theoretic: two closed subschemes with the same factorization condition have ideals $I,J$ with $J\\subseteq I$ by testing $C\\to C/I$, and $I\\subseteq J$ by testing $C\\to C/J$ [def-weil-closed-immersion]. Thus $L_K=Z(G_K)$ as closed subgroup schemes of $G_K$.",
+   "uses": [
+    "lem-sfb-constant-source-closed-factorization-locus",
+    "def-pc-fibre-product",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Paragraph following Proposition 1.92, printed p.34, field base change; explicit verification using Theorem 1.105."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "lem-sfb-constant-source-closed-factorization-locus",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "lem-weil-pbc-morphism-into-affine-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 1.79 and 1.92 and following paragraph; Theorem 1.105. The affine hypothesis checks and universal-point/base-change verifications are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The scheme theoretic centre of an affine algebraic group is represented by a closed subgroup and commutes with field extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Subgroup.center\", \"module\": \"Mathlib/GroupTheory/Subgroup/Center\", \"type\": \"(G : Type u_1) → [inst : Group G] → Subgroup G\", \"doc\": \"The subgroup of a group $G$ consisting of all elements that commute with every element of $G$. It is constructed by taking the submonoid of commuting elements and verifying closure under inverses, ens\"}\n  {\"name\": \"Subgroup.coe_center\", \"module\": \"Mathlib/GroupTheory/Subgroup/Center\", \"type\": \"∀ (G : Type u_1) [inst : Group G], ↑(Subgroup.center G) = Set.center G\", \"doc\": \"The underlying set of the center subgroup of a group $ G $, obtained via the canonical coercion, is equal to the set $ \\\\{ z \\\\in G \\\\mid zg = gz \\\\text{ for all } g \\\\in G \\\\} $ consisting of all elements \"}\n  {\"name\": \"ConjAct.fixedPoints_eq_center\", \"module\": \"Mathlib/GroupTheory/GroupAction/ConjAct\", \"type\": \"∀ {G : Type u_3} [inst : Group G], MulAction.fixedPoints (ConjAct G) G = ↑(Subgroup.center G)\", \"doc\": \"The set of fixed points of the conjugation action of a group $ G $ on itself is equal to the center of $ G $, i.e., the subgroup consisting of all elements that commute with every element of $ G $.\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module R V] →\\n          [Module.Free R V] →\\n            [Module.Finite R V] →\\n              ↥(Subgroup.center (SpecialLinearGroup R V)) ≃* ↥(rootsOfUnity (max (Module.finrank R V) 1) R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $, where $ n $ i\"}\n  {\"name\": \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {V : Type u_5} [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] {ι : Type u_6} [inst_5 : Fintype ι] [inst_6 : DecidableEq ι]\\n  (b : Module.Basis ι R V) (g : ↥(Subgroup.center (Matrix.SpecialLinearGroup ι R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V],\\n  Module.finrank R V ≤ 1 →\\n    ∀ (g : ↥(Subgroup.center (SpecialLinearGroup R V))), SpecialLinearGroup.centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"Subgroup.center.isMulCommutative\", \"module\": \"Mathlib/GroupTheory/Subgroup/Center\", \"type\": \"∀ (G : Type u_1) [inst : Group G], IsMulCommutative ↥(Subgroup.center G)\", \"doc\": \"For any group $ G $, the center of $ G $ is an abelian group under the group operation.\"}\n  {\"name\": \"Subgroup.centralizer_univ\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G], Subgroup.centralizer Set.univ = Subgroup.center G\", \"doc\": \"The centralizer of the universal set (i.e., the entire group $ G $) in a group $ G $ is equal to the center of $ G $, which consists of all elements that commute with every element of $ G $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract centres and algebra tensor-product centralizers do not represent the group-scheme centre or its field base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Centralizers of closed subgroup schemes of algebraic groups commute with extension of scalars",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Subalgebra.centralizer_coe_map_includeLeft_eq_center_tensorProduct\", \"module\": \"Mathlib/Algebra/Algebra/Subalgebra/Centralizer\", \"type\": \"∀ (R : Type u_1) [inst : CommSemiring R] (A : Type u_2) [inst_1 : Semiring A] [inst_2 : Algebra R A] (B : Type u_3)\\n  [inst_3 : Semiring B] [inst_4 : Algebra R B] (S : Subalgebra R A) [Module.Free R B],\\n  Subalgebra.centralizer R ↑(Subalgebra.map Algebra.TensorProduct.includeLeft S) =\\n    (Algebra.T\", \"doc\": \"For a subalgebra $ S $ of an $ R $-algebra $ A $ and a free $ R $-module $ B $, the centralizer of the image of $ S $ under the canonical inclusion $ A \\\\to A \\\\otimes_R B $ is equal to the image of the\"}\n  {\"name\": \"Subalgebra.centralizer_coe_image_includeLeft_eq_center_tensorProduct\", \"module\": \"Mathlib/Algebra/Algebra/Subalgebra/Centralizer\", \"type\": \"∀ (R : Type u_1) [inst : CommSemiring R] (A : Type u_2) [inst_1 : Semiring A] [inst_2 : Algebra R A] (B : Type u_3)\\n  [inst_3 : Semiring B] [inst_4 : Algebra R B] (S : Set A) [Module.Free R B],\\n  Subalgebra.centralizer R (⇑Algebra.TensorProduct.includeLeft '' S) =\\n    (Algebra.TensorProduct.map (Sub\", \"doc\": \"For a subset $ S $ of an $ R $-algebra $ A $ and a free $ R $-module $ B $, the centralizer subalgebra of the image of $ S $ under the canonical embedding $ A \\\\to A \\\\otimes_R B $ in the tensor product\"}\n  {\"name\": \"Subalgebra.centralizer_coe_map_includeRight_eq_center_tensorProduct\", \"module\": \"Mathlib/Algebra/Algebra/Subalgebra/Centralizer\", \"type\": \"∀ (R : Type u_1) [inst : CommSemiring R] (A : Type u_2) [inst_1 : Semiring A] [inst_2 : Algebra R A] (B : Type u_3)\\n  [inst_3 : Semiring B] [inst_4 : Algebra R B] (S : Subalgebra R B) [Module.Free R A],\\n  Subalgebra.centralizer R ↑(Subalgebra.map Algebra.TensorProduct.includeRight S) =\\n    (Algebra.\", \"doc\": \"For a commutative semiring $ R $, an $ R $-algebra $ A $, and a subalgebra $ S $ of an $ R $-algebra $ B $, the centralizer of the image of $ S $ under the right inclusion map $ B \\\\to A \\\\otimes_R B $ \"}\n  {\"name\": \"Subalgebra.centralizer_coe_image_includeRight_eq_center_tensorProduct\", \"module\": \"Mathlib/Algebra/Algebra/Subalgebra/Centralizer\", \"type\": \"∀ (R : Type u_1) [inst : CommSemiring R] (A : Type u_2) [inst_1 : Semiring A] [inst_2 : Algebra R A] (B : Type u_3)\\n  [inst_3 : Semiring B] [inst_4 : Algebra R B] (S : Set B) [Module.Free R A],\\n  Subalgebra.centralizer R (⇑Algebra.TensorProduct.includeRight '' S) =\\n    (Algebra.TensorProduct.map (Al\", \"doc\": \"For a commutative semiring $ R $, $ R $-algebras $ A $ and $ B $, and a subset $ S \\\\subseteq B $, if $ A $ is a free $ R $-module, then the centralizer of the image of $ S $ under the right inclusion \"}\n  {\"name\": \"Subalgebra.centralizer_coe_range_includeLeft_eq_center_tensorProduct\", \"module\": \"Mathlib/Algebra/Algebra/Subalgebra/Centralizer\", \"type\": \"∀ (R : Type u_1) [inst : CommSemiring R] (A : Type u_2) [inst_1 : Semiring A] [inst_2 : Algebra R A] (B : Type u_3)\\n  [inst_3 : Semiring B] [inst_4 : Algebra R B] [Module.Free R B],\\n  Subalgebra.centralizer R ↑Algebra.TensorProduct.includeLeft.range =\\n    (Algebra.TensorProduct.map (Subalgebra.cente\", \"doc\": \"The centralizer of the image of $ A $ under the left inclusion map into the tensor product $ A \\\\otimes_R B $ is equal to the image of the tensor product of the center of $ A $ with $ B $. This equalit\"}\n  {\"name\": \"Subalgebra.centralizer_tensorProduct_eq_center_tensorProduct_left\", \"module\": \"Mathlib/Algebra/Algebra/Subalgebra/Centralizer\", \"type\": \"∀ (R : Type u_1) [inst : CommSemiring R] (A : Type u_2) [inst_1 : Semiring A] [inst_2 : Algebra R A] (B : Type u_3)\\n  [inst_3 : Semiring B] [inst_4 : Algebra R B] [Module.Free R B],\\n  Subalgebra.centralizer R ↑(Algebra.TensorProduct.map (AlgHom.id R A) (Algebra.ofId R B)).range =\\n    (Algebra.Tensor\", \"doc\": \"For a free $ R $-module $ B $, the centralizer of the image of the tensor product map $ A \\\\otimes_R R \\\\to A \\\\otimes_R B $ (induced by the identity on $ A $ and the canonical inclusion $ R \\\\to B $) in \"}\n  {\"name\": \"Subgroup.centralizer_closure\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (s : Set G), Subgroup.centralizer ↑(Subgroup.closure s) = Subgroup.centralizer s\", \"doc\": \"For any subset $ S $ of a group $ G $, the centralizer of the subgroup generated by $ S $ is equal to the centralizer of $ S $ itself, i.e., $ C_G(\\\\langle S \\\\rangle) = C_G(S) $.\"}\n  {\"name\": \"Subalgebra.centralizer_tensorProduct_eq_center_tensorProduct_right\", \"module\": \"Mathlib/Algebra/Algebra/Subalgebra/Centralizer\", \"type\": \"∀ (R : Type u_1) [inst : CommSemiring R] (A : Type u_2) [inst_1 : Semiring A] [inst_2 : Algebra R A] (B : Type u_3)\\n  [inst_3 : Semiring B] [inst_4 : Algebra R B] [Module.Free R A],\\n  Subalgebra.centralizer R ↑(Algebra.TensorProduct.map (Algebra.ofId R A) (AlgHom.id R B)).range =\\n    (Algebra.Tensor\", \"doc\": \"If $ A $ is a free $ R $-module, then the centralizer of the subalgebra generated by $ A $ and $ B $ in their tensor product $ A \\\\otimes_R B $ is equal to the tensor product of $ A $ with the center o\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract centres and algebra tensor-product centralizers do not represent the group-scheme centre or its field base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"centralizer\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract centres and algebra tensor-product centralizers do not represent the group-scheme centre or its field base change"
+  },
+  {
+   "tool": "grep",
+   "query": "centralizer|centre|center",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Util/FormatTable.lean\", \"line\": \"20\", \"text\": \"/-- Possible alignment modes for each table item: left-aligned, right-aligned and centered. -/\"}\n  {\"file\": \"Mathlib/Util/FormatTable.lean\", \"line\": \"24\", \"text\": \"  | center\"}\n  {\"file\": \"Mathlib/Util/FormatTable.lean\", \"line\": \"27\", \"text\": \"/-- Align a `String` `s` to the left, right, or center within a field of width `width`. -/\"}\n  {\"file\": \"Mathlib/Util/FormatTable.lean\", \"line\": \"32\", \"text\": \"  | Alignment.center =>\"}\n  {\"file\": \"Mathlib/Util/FormatTable.lean\", \"line\": \"71\", \"text\": \"              | _ + 2, Alignment.center => \\\":\\\" ++ String.replicate (w-2) '-' ++ \\\":\\\"\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Intertwining.lean\", \"line\": \"583\", \"text\": \"theorem isIntertwiningMap_of_mem_center (g : G) (hg : g ∈ Submonoid.center G) :\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Intertwining.lean\", \"line\": \"587\", \"text\": \"  rw [Submonoid.mem_center_iff] at hg\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Intertwining.lean\", \"line\": \"592\", \"text\": \"def centralMul (g : G) (hg : g ∈ Submonoid.center G) : IntertwiningMap ρ ρ where\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Intertwining.lean\", \"line\": \"594\", \"text\": \"  isIntertwining' x := LinearMap.ext <| (isIntertwiningMap_of_mem_center ρ g hg).isIntertwining x\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Intertwining.lean\", \"line\": \"598\", \"text\": \"noncomputable def centralAlgebraMul {z : A[G]} (hz : z ∈ Submonoid.center A[G]) :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Valued/ValuationTopology.lean\", \"line\": \"231\", \"text\": \"/-- An open ball centred at the origin in a valued ring is open. -/\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Valued/ValuationTopology.lean\", \"line\": \"243\", \"text\": \"/-- An open ball centred at the origin in a valued ring is closed. -/\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Valued/ValuationTopology.lean\", \"line\": \"251\", \"text\": \"/-- An open ball centred at the origin in a valued ring is clopen. -/\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Valued/ValuationTopology.lean\", \"line\": \"256\", \"text\": \"/-- A closed ball centred at the origin in a valued ring is open. -/\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Valued/ValuationTopology.lean\", \"line\": \"267\", \"text\": \"/-- A closed ball centred at the origin in a valued ring is closed. -/\"}\n  {\"file\": \"Mathlib/Dynamics/TopologicalEntropy/NetEntropy.lean\", \"line\": \"34\", \"text\": \"- `IsDynNetIn`: property that dynamical balls centered on a subset `s` of `F` are disjoint.\"}\n  {\"file\": \"Mathlib/Topology/Algebra/PontryaginDual.lean\", \"line\": \"42\", \"text\": \"  let Vn : ℕ → Set Circle := fun n ↦ Circle.centeredArc (π / 2 ^ (n + 1))\"}\n  {\"file\": \"Mathlib/Topology/Algebra/PontryaginDual.lean\", \"line\": \"44\", \"text\": \"    fun n x ↦ Circle.mem_centeredArc (z := x)\"}\n  {\"file\": \"Mathlib/Topology/Algebra/PontryaginDual.lean\", \"line\": \"56\", \"text\": \"  · simpa [Vn] using Circle.hasBasis_centeredArc_div_two_pow\"}\n  {\"file\": \"Mathlib/Topology/Algebra/PontryaginDual.lean\", \"line\": \"85\", \"text\": \"  let V : Set (PontryaginDual A) := {ψ | Set.MapsTo ψ Set.univ (Circle.centeredArc (π / 2))}\"}\n  {\"file\": \"Mathlib/Topology/Algebra/PontryaginDual.lean\", \"line\": \"89\", \"text\": \"      (Circle.isOpen_centeredArc (π / 2)))\"}\n  {\"file\": \"Mathlib/Dynamics/TopologicalEntropy/CoverEntropy.lean\", \"line\": \"33\", \"text\": \"- `IsDynCoverOf`: property that dynamical balls centered on a subset `s` cover a subset `F`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean\", \"line\": \"16\", \"text\": \"In this file we define `Matrix.ProjGenLinGroup n R` as the quotient of `GL n R` by its center.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean\", \"line\": \"40\", \"text\": \"defined as the quotient of the general linear group by its center. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean\", \"line\": \"42\", \"text\": \"  GL n R ⧸ Subgroup.center (GL n R)\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract centres and algebra tensor-product centralizers do not represent the group-scheme centre or its field base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scheme theoretic centre of an affine algebraic group is represented by a closed subgroup and commutes with field extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subgroup.center\", \"module\": \"Mathlib.GroupTheory.Subgroup.Center\", \"type\": \": Subgroup G\", \"doc\": \"The subgroup of a group $G$ consisting of all elements that commute with every element of $G$. It is constructed by taking the submonoid of commuting elements and verifying closure under inverses, ens\"}\n  {\"name\": \"Subgroup.center.isMulCommutative\", \"module\": \"Mathlib.GroupTheory.Subgroup.Center\", \"type\": \": IsMulCommutative (center G)\", \"doc\": \"For any group $ G $, the center of $ G $ is an abelian group under the group operation.\"}\n  {\"name\": \"Subsemigroup.center\", \"module\": \"Mathlib.GroupTheory.Subsemigroup.Center\", \"type\": \": Subsemigroup M\", \"doc\": \"The subsemigroup of a semigroup $ M $ consisting of all elements that commute with every element of $ M $. This subsemigroup is closed under multiplication because the product of any two central eleme\"}\n  {\"name\": \"AddSubgroup.center\", \"module\": \"Mathlib.GroupTheory.Subgroup.Center\", \"type\": \"(G : Type u_1) → [inst : AddGroup G] → AddSubgroup G\", \"doc\": \"The function returns the additive subgroup of $ G $ consisting of all elements that commute with every element of $ G $ under addition, i.e., the set $ \\\\{ m \\\\in G \\\\mid m + n = n + m \\\\text{ for all } n\"}\n  {\"name\": \"Subgroup.instNormalCenter\", \"module\": \"Mathlib.GroupTheory.Subgroup.Center\", \"type\": \": (center G).Normal\", \"doc\": \"For any group $ G $, the center of $ G $ is a normal subgroup. This means that every element in the center commutes with all elements of $ G $, and conjugation by any element of $ G $ leaves the cente\"}\n  {\"name\": \"Subgroup.center.smulCommClass_right\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Actions\", \"type\": \": SMulCommClass G (center G) G\", \"doc\": \"The scalar multiplications of a group $G$ and its center $Z(G)$ commute, meaning for all $g \\\\in G$, $z \\\\in Z(G)$, and $h \\\\in G$, we have $g \\\\cdot (z \\\\cdot h) = z \\\\cdot (g \\\\cdot h)$.\"}\n  {\"name\": \"AddSubgroup.centerCharacteristic\", \"module\": \"Mathlib.GroupTheory.Subgroup.Center\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G], (AddSubgroup.center G).Characteristic\", \"doc\": \"For any additive group $G$, the center subgroup of $G$ (the set of elements commuting with all elements of $G$ under addition) is a characteristic subgroup, meaning it is invariant under all automorph\"}\n  {\"name\": \"Subgroup.centerCongr\", \"module\": \"Mathlib.GroupTheory.Subgroup.Center\", \"type\": \"{H} [Group H] (e : G ≃* H) : center G ≃* center H\", \"doc\": \"Given a group isomorphism $ e : G \\\\simeq^* H $ between groups $ G $ and $ H $, this constructs an induced group isomorphism $ \\\\text{center}(G) \\\\simeq^* \\\\text{center}(H) $ between their centers. The ce\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract centres and algebra tensor-product centralizers do not represent the group-scheme centre or its field base change"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|reductive|torus|centralizer|solvable|groupScheme|GroupScheme",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract centres and algebra tensor-product centralizers do not represent the group-scheme centre or its field base change"
+  },
+  {
+   "tool": "grep",
+   "query": "centralizer|centre|center",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group centres, representation invariants, affine spaces and general morphism base-change properties do not state representability and field base change of the universal scheme-theoretic centre"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability and field base change of the scheme theoretic centre of an affine algebraic group",
+   "results": "8 hits; AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk, IsBaseChange.basis_repr_comp_apply, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange, AlgebraicGeometry.affineAnd_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group centres, representation invariants, affine spaces and general morphism base-change properties do not state representability and field base change of the universal scheme-theoretic centre"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"center\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group centres, representation invariants, affine spaces and general morphism base-change properties do not state representability and field base change of the universal scheme-theoretic centre"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The centre of an affine algebraic group scheme is a closed subgroup scheme and commutes with extension of the base field",
+   "results": "8 hits; Subgroup.center, ConjAct.fixedPoints_eq_center, Subgroup.center.isMulCommutative, IntermediateField.fixingSubgroup_isClosed, AlgebraicGeometry.IsClosedImmersion.hasAffineProperty, InfiniteGalois.fixingSubgroup_isClosed, Subgroup.center_eq_infi', AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group centres, representation invariants, affine spaces and general morphism base-change properties do not state representability and field base change of the universal scheme-theoretic centre"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"center\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group centres, representation invariants, affine spaces and general morphism base-change properties do not state representability and field base change of the universal scheme-theoretic centre"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fixed point functor for a conjugation action on an affine group scheme is represented by a closed subscheme",
+   "results": "8 hits; Rep.invariantsFunctor_obj_carrier, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.functor_obj_obj, AlgebraicGeometry.AffineSpace.homOverEquiv, IsGalois.map_fixingSubgroup, FixedPoints.toAlgHomEquiv, AlgebraicGeometry.AffineSpace.homOverEquiv_apply, TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group centres, representation invariants, affine spaces and general morphism base-change properties do not state representability and field base change of the universal scheme-theoretic centre"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-radical-quotient",
+  "date": "2026-10-23",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Representability and field base change for the scheme-theoretic centre.",
+   "via": [
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-group-centre-base-change",
+  "worker": "stage1",
+  "summary": "Read Milne Proposition 1.92 and its transporter proof. Reused the existing constant-source closed-factorization-locus theorem instead of duplicating centralizer representability. Wrote the affine diagonal hypothesis check, universal algebra-point identification, subgroup/normality/commutativity identities, and scheme-theoretic field-base-change verification. No new nodes or statement changes.",
+  "blueprint": "The inherited ancestry place supports det-thm-sf-ctf-stability-direct-images proof (3), via the reductive-radical quotient prerequisite. Current latest blueprint direct-image proof (3) was read; its route is unchanged. The item is an auxiliary with blueprint.from.node null as returned by blueprint_refs.py ancestor, and no blueprint node states its arbitrary-characteristic universal centre statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-0075c5f08",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-0075c5f08 (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 Prop. 1.92 and the paragraph after it (pp.33-34; transporter route via 1.79/1.105) and the cited lem-sfb-constant-source-closed-factorization-locus (same unit, unsplit, includes the clause for any base change S'->S). The statement is identical to live/side-live (unsplit there), not weakened, and takes H=G with all A' as Milne does. Steps 2-4 are correct: lemma hypotheses checked (Y=S=G, X=GxG, W=diagonal); the identification with the centre uses the universal point of Spec(A⊗B); subgroup, normality and m∘s=m are checked on the universal pair over LxL. Step 5 is valid for any K/k since the base-change clause allows non-finite-type S'=G_K, and the closed subschemes are compared by testing C->C/I and C->C/J. One fault (C1/C4): Spec(B⊗B)=GxG in step 1 and the closedness of L_K in step 5 need Mor(T,Spec R)=Hom(R,Γ(T,O_T)) for arbitrary T. def-weil-affine-spectrum only covers maps between affine schemes. FIX: cite the existing Mathlib leaf lem-weil-pbc-morphism-into-affine-scheme in steps 1 and 5 (and proof_deps), state the general affine fibre-product formula, and add L_K=Spec(C/I_0C). No new nodes. No duplicate found: lem-ag-lie-centre is about Q̄_ℓ matrix groups, and the sibling Q02 nodes only use Z(G). Edge cases checked: trivial group, commutative group, constant nonabelian group, μ_p in characteristic p, inseparable K. tool_uses: none.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupCentreBaseChange",
+  "declaration": "AlgebraicGeometry.exists_affine_group_centre_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupCentreBaseChange.lean",
+  "statement": "theorem exists_affine_group_centre_baseChange {k : Type u} [Field k] (G : Grp (Over (Spec (.of k)))) (hG : SolvableGroupStructure.IsAlgebraic G) : ∃ (Z : Grp (Over (Spec (.of k)))) (i : Z ⟶ G), SolvableGroupStructure.IsAlgebraic Z ∧ IsClosedSubgroupScheme i.hom.hom ∧ IsNormalSubgroupScheme i.hom.hom ∧ IsCommMonObj Z.X ∧ (∀ (A : Type u) [CommRing A] [Algebra k A], ReductiveTorusCentralizer.centralizerPoints (𝟙 G) A = Set.range (fun z : StandardGroupSchemes.affine k A ⟶ Z.X ↦ z ≫ i.hom.hom)) ∧ ∀ (K : Type u) [Field K] [Algebra k K], IsClosedSubgroupScheme ((MultiplicativeType.baseChange (K := K)).map i).hom.hom ∧ IsNormalSubgroupScheme ((MultiplicativeType.baseChange (K := K)).map i).hom.hom ∧ IsCommMonObj ((MultiplicativeType.baseChange (K := K)).obj Z).X ∧ ∀ (A : Type u) [CommRing A] [Algebra K A], ReductiveTorusCentralizer.centralizerPoints (𝟙 ((MultiplicativeType.baseChange (K := K)).obj G)) A = Set.range (fun z : StandardGroupSchemes.affine K A ⟶ ((MultiplicativeType.baseChange (K := K)).obj Z).X ↦ z ≫ ((MultiplicativeType.baseChange (K := K)).map i).hom.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses centralizerPoints (identity G) for the universal centre condition, IsAlgebraic for affine finite type, and the actual baseChange functor. The two equalities are equality of the represented image subfunctors on all commutative algebras, hence equality as closed subgroup schemes, including nilpotents."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9eb055660",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Read the node, Milne iAG2017 Prop. 1.92 and the following paragraph (pp.33-34), the module, report.md and the declarations used (centralizerPoints, IsAlgebraic, MultiplicativeType.baseChange, StandardGroupSchemes.affine/map, Is{Closed,Normal}SubgroupScheme). Every clause matches: affine finite type is the only hypothesis (no smoothness or connectedness); the centre is centralizerPoints (𝟙 G), tested on all algebras including nonreduced ones; representation is the image of the actual inclusion i, which is closed, normal and commutative; the base-change clause uses the mapped inclusion (baseChange).map i and its image equals the centre of G_K on every K-algebra, so Z(G)_K = Z(G_K) as subschemes. Edge cases (trivial group, μ_p in SL_p in char p, zero algebra, inseparable or transcendental K) are covered; the single universe is the recorded baseChange convention. Only lean and stmt_deps differ from side-live; the four added definition stmt_deps own the used declarations; lean.statement is verbatim. No new definitions, only sorry, docstrings and proof steps present. Advisory H9: unused imports (GammaSpecAdjunction, Proper; Smooth and Connected are terminology-only). No compile run: no file changed."
+ }
+}

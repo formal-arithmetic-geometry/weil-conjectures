@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-dc-hom-devissage",
+ "kind": "statement",
+ "title": "Two-variable finite truncation induction for internal Hom",
+ "statement": "Let k be a field, X a finite-type k-scheme, ell a natural number, and Λ an ell-adic finiteness coefficient as in [sk-def-sfb-condensed-ring]. Assume ringChar(k) ≠ ell. Assume RHom(F[0],G[0]) is bounded constructible for every pair of constructible Λ_X-modules F,G. Then the bounded constructible object property [sk-def-sfb-bounded-constructible] is closed under the native derived internal Hom [sk-def-sfb-derived-tensor-hom]. The conclusion is the existing IsMonoidalClosed structure; both finite truncation inductions are performed explicitly.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.11(3) and Remark 6.8.15; finite truncation devissage in each variable of native derived internal Hom. Degree-zero constructible internal-Hom finiteness is assumed in this conditional lemma."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-condensed-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put R=Λ_X, C=Mod_R(Sh(X_proet,Ab)), D=D(C), and P=boundedConstructible R. The spectrum of a field is Noetherian (its only prime is zero and the field is a Noetherian ring); finite type over this base makes X Noetherian by lem-weil-pbc-finite-type-over-noetherian. By lem-weil-pbc-noetherian-scheme-closed-subsets-minimal every nonempty family of closed subsets of the underlying space of X has a minimal member, so that space is Noetherian. Thus lem-sfb-dc-ell-adic-triangulated applies to the given finiteness coefficient and makes P triangulated. The isomorphism invariance clause of lem-sfb-dc-module-devissage makes P isomorphism closed. No separatedness or positive-characteristic assumption is needed here.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-dc-ell-adic-triangulated",
+    "lem-sfb-dc-module-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), finite cohomological truncation devissage; Remark 6.8.15"
+   }
+  },
+  {
+   "text": "Verify the ambient hypotheses before applying native exactness. By sk-def-sfb-sheaf-tensor, Ab with its tensor product over Z, unit Z and Hom groups is a Grothendieck abelian category with a closed symmetric monoidal structure (additive in each variable, since each tensor functor is a left adjoint), and the small pro-etale site of X is essentially small relative to the size of these Hom groups. Hence lem-weil-pbc-sheaf-tensor-closed applies to that site with coefficients Ab: abelian sheaves carry the additive closed symmetric tensor and are Grothendieck abelian. The free-abelian flat-cover theorem and the sheaf flat-resolution theorem give functorial flat resolutions of these sheaves. Applying the module-object Grothendieck and flat-resolution theorems to their commutative ring object R makes C Grothendieck abelian with functorial flat resolutions. The relative module tensor is symmetric and closed by def-sfb-modobj-internal-hom; it is additive since its defining coequalizer of additive tensor functors is additive. These are precisely the hypotheses on C in the native contravariant exactness theorem.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-sfb-abelian-functorial-flat-resolution",
+    "lem-sfb-sheaf-functorial-flat-resolution",
+    "lem-sfb-modobj-grothendieck",
+    "lem-sfb-modobj-flat-resolutions",
+    "def-sfb-modobj-internal-hom",
+    "def-sfb-modobj-relative-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-hom-preserves.md",
+    "place": "Ambient module-object setup for the internal-Hom preservation assertion; generic categorical prerequisites"
+   }
+  },
+  {
+   "text": "For any K in D choose a K-flat homotopy representative S with Q_h(S) isomorphic to K, using lem-sfb-kflat-derivability. Its hypotheses hold by step 2: Grothendieck exact colimits exist, and closedness makes tensor preserve colimits. The K-flat tensor-left theorem gives coherent integer-shift comparisons and triangulatedness for Q_h(S) tensor-derived -. Transport these along Q_h(S)≅K to obtain the same for T_K=K tensor-derived -. This is the fixed native tensor: sk-def-sfb-derived-tensor-hom defines it by this K-flat construction, so there is no comparison with a different derived tensor model.",
+   "uses": [
+    "lem-sfb-kflat-derivability",
+    "lem-sc-source-kflat-tensor-left-triangulated",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-hom-preserves.md",
+    "place": "Native K-flat tensor in the internal-Hom assertion; source library Monoidal/Shift.lean, tensor-left shift and triangulated structure"
+   }
+  },
+  {
+   "text": "Let H_K=RHom(K,-). The defining native adjunction T_K ⊣ H_K is supplied by sk-def-sfb-derived-tensor-hom. Apply clause (iii) of lem-weil-pbc-adjunction-shift-compatibility-unique to the coherent shift structure of T_K from step 3: it supplies a coherent shift structure on H_K with both unit and counit shift-compatible. All hypotheses of lem-sf-triangulated-right-adjoint now hold, so H_K preserves distinguished triangles. In particular this argument proves covariant exactness for the actual right adjoint used in the item, without identifying it with ringed-site sheaf Hom.",
+   "uses": [
+    "sk-def-sfb-derived-tensor-hom",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8D, lemma-adjoint-is-exact; coherent mate version supplied by the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "Fix K in D and define Q_K(L):=P(RHom(K,L)). Since H_K is triangulated, and P is triangulated and isomorphism closed by step 1, Q_K has these same closure properties: it holds at zero, shift comparisons carry its values to shifts of values of P, and the image of a distinguished triangle is distinguished, so closure under two known vertices gives the third. A functor carries an isomorphism to an isomorphism, which gives isomorphism closure. The module devissage lemma therefore reduces Q_K(L) for bounded constructible L to Q_K(G[0]) for all constructible G.",
+   "uses": [
+    "lem-sfb-dc-module-devissage"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), finite cohomological truncation devissage; Remark 6.8.15"
+   }
+  },
+  {
+   "text": "Spell out this first finite induction. For cohomology supported in [a,b], use the triangle τ≤b−1 L → L → H^b(L)[−b] → (τ≤b−1 L)[1]. The empty interval is zero. For a single nonzero degree the complex is isomorphic to H^a(L)[−a], so the required assertion follows from the degree-zero obligation Q_K(H^a(L)[0]) and shift closure. In the induction step the lower truncation has support [a,b−1] and the same constructible lower cohomology; its assertion follows by induction, and the shifted top cohomology satisfies Q_K by that obligation. Applying H_K to the triangle and using P on its two outer vertices proves the middle vertex. This is exactly the finite induction furnished by lem-sfb-dc-module-devissage. It leaves, for each constructible G, the obligation P(RHom(K,G[0])).",
+   "uses": [
+    "lem-sfb-dc-module-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), finite cohomological truncation devissage; Remark 6.8.15"
+   }
+  },
+  {
+   "text": "Fix such a G and put V=G[0]. Apply lem-weil-native-internal-hom-contravariant-exact to C from step 2 and W=V. It equips F_V=RHom(-,V):D^op → D with coherent opposite shifts and a triangulated structure. Thus Q^G(K):=P(F_V(op K)) is an isomorphism-closed triangulated property on D. Indeed op(K[m])=(op K)[−m], so F_V(op(K[m]))≅F_V(op K)[−m]. A distinguished triangle A→B→C→A[1] becomes the reversed distinguished triangle op C→op B→op A→(op C)[1]; applying F_V and the closure of P proves the required two-out-of-three property for Q^G. Zero and isomorphisms are handled as in step 5.",
+   "uses": [
+    "lem-weil-native-internal-hom-contravariant-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC, lemma-RHom-triangulated; cited native exactness theorem supplies the coherent opposite shifts"
+   }
+  },
+  {
+   "text": "Apply lem-sfb-dc-module-devissage to Q^G. Its degree-zero condition is Q^G(F[0])=P(RHom(F[0],G[0])), exactly the hypothesis of the item for every constructible F. Explicitly, induct on the finite cohomology interval of K: the empty interval gives zero, a singleton gives a shift of its constructible homology, and the triangle τ≤b−1 K→K→H^b(K)[−b] gives, after contravariant Hom into V, a distinguished triangle with first two terms RHom(H^b(K)[−b],V) and RHom(K,V), and third term RHom(τ≤b−1 K,V). The first term is RHom(H^b(K)[0],V)[b], covered by the hypothesis and shift closure; the third is covered by induction. Closure of P proves the middle. Consequently every bounded constructible K satisfies Q^G, for every constructible G. This discharges all obligations of the first induction and yields P(RHom(K,L)) whenever P(K) and P(L).",
+   "uses": [
+    "lem-sfb-dc-module-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), finite cohomological truncation devissage; Remark 6.8.15"
+   }
+  },
+  {
+   "text": "The native internal Hom is the ihom of the fixed closed monoidal structure by sk-def-sfb-derived-tensor-hom. Therefore the result of step 8 is exactly the field prop_ihom(K,L): P(K) → P(L) → P(ihom(K,L)) of ObjectProperty.IsMonoidalClosed. Supplying this field proves the stated structure, with no monoidal-unit or tensor-closure assertion required.",
+   "uses": [
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-hom-preserves.md",
+    "place": "Conclusion: native internal-Hom preservation, expressed by IsMonoidalClosed.prop_ihom"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-dc-ell-adic-triangulated",
+  "lem-sfb-dc-module-devissage",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-abelian-functorial-flat-resolution",
+  "lem-sfb-sheaf-functorial-flat-resolution",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sfb-modobj-flat-resolutions",
+  "def-sfb-modobj-internal-hom",
+  "def-sfb-modobj-relative-tensor",
+  "lem-sfb-kflat-derivability",
+  "lem-sc-source-kflat-tensor-left-triangulated",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-sf-triangulated-right-adjoint",
+  "lem-weil-native-internal-hom-contravariant-exact",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "sk-def-sfb-sheaf-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q02",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.11(3), Remark 6.8.15; two-variable native internal-Hom assembly using existing DAG exactness and finite truncation lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundedConstructible.*hom_single|constructible.*ihom",
+   "date": "2026-10-23",
+   "results": "No matching declaration.",
+   "verdict": "No Mathlib theorem for the degree-zero constructible internal-Hom assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructibleModuleObject\", \"singleFunctor\"",
+   "date": "2026-10-23",
+   "results": "No matching declaration.",
+   "verdict": "No Mathlib theorem for the degree-zero constructible internal-Hom assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of two constructible sheaves placed in degree zero is bounded constructible for ell adic coefficients",
+   "date": "2026-10-23",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.H, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, instAbelianLightCondMod, instAbelianCondensedMod, CondensedMod.ofSheafCompHaus",
+   "verdict": "No Mathlib theorem for the degree-zero constructible internal-Hom assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom of constructible sheaves in degree zero is bounded constructible and triangulated devissage extends it to bounded constructible complexes",
+   "date": "2026-10-24",
+   "results": "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, HomologicalComplex.locallySmall, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic, HomologicalComplex.Hom, HomologicalComplex.instHasZeroObject, CategoryTheory.ShortComplex.ShortExact.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoX₃CochainComplexMapSingleFunctorOfNatX₁, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh",
+   "verdict": "No geometric constructible internal-Hom finiteness or its two-variable truncation induction. Use the project exactness and truncation APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A triangulated subcategory of bounded complexes closed under internal Hom on heart objects is closed under internal Hom on all its objects",
+   "results": "CategoryTheory.ObjectProperty.ihom_obj, CategoryTheory.ObjectProperty.IsTriangulated.mk, CategoryTheory.Triangulated.Subcategory, CategoryTheory.Triangulated.TStructure.mk, CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated, CategoryTheory.ObjectProperty.IsTriangulatedClosed₁, CategoryTheory.Triangulated.TStructure.ge_isClosedUnderIsomorphisms, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-24",
+   "verdict": "No match: hits concern generic shifts, boundedness or internal-Hom closure definitions, not this constructible two-variable assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsMonoidalClosed, DerivedCategory",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "No match: hits concern generic shifts, boundedness or internal-Hom closure definitions, not this constructible two-variable assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If derived internal Hom of constructible sheaves is bounded constructible then the same holds for bounded constructible complexes by truncation in both variables",
+   "results": "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.IsGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-24",
+   "verdict": "No match: hits concern generic shifts, boundedness or internal-Hom closure definitions, not this constructible two-variable assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(ihom|derivedHom)|IsMonoidalClosed",
+   "results": "Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/Algebra/Category/FGModuleCat/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "No match: hits concern generic shifts, boundedness or internal-Hom closure definitions, not this constructible two-variable assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Postnikov truncation induction in each variable extends internal Hom closure from constructible heart objects to bounded complexes",
+   "results": "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.IsGE, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, DerivedCategory.IsLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.TStructure.t",
+   "date": "2026-10-24",
+   "verdict": "No match: hits concern generic shifts, boundedness or internal-Hom closure definitions, not this constructible two-variable assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible",
+  "date": "2026-10-23",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "The assertion that native derived internal Hom of two bounded constructible complexes is bounded constructible: two finite truncation reductions to the constructible degree-zero case.",
+   "via": [
+    "lem-sfb-dc-hom-small-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundedConstructibleHomPreservation",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedConstructibleHomPreservation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_hom_closure",
+  "statement": "theorem boundedConstructible_hom_closure\n    {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)]\n    (hsingle : ∀ (F G : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})\n      (condensedRingObj Λ X.left)),\n      IsConstructibleModuleObject (condensedRingObj Λ X.left) F →\n      IsConstructibleModuleObject (condensedRingObj Λ X.left) G →\n      boundedConstructible (condensedRingObj Λ X.left)\n        (((derivedHom Λ X.left).obj\n          (op ((DerivedCategory.singleFunctor _ 0).obj F))).obj\n          ((DerivedCategory.singleFunctor _ 0).obj G))) :\n    (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidalClosed",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-23"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dc-hom-devissage",
+  "worker": "stage1",
+  "summary": "Expanded the inherited three-step sketch into a proof with checked ambient module hypotheses, native tensor/right-adjoint exactness, coherent opposite shifts, and explicit finite truncation inductions in each variable. Reused existing DAG statements; no new nodes. The proof uses only permitted sources; the irrelevant prohibited citation in the maintainer-owned source field needs maintainer correction before the route-lock gate can pass. Statement and Lean record retained.",
+  "blueprint": "Realizes the internal-Hom preservation assertion of current blueprint lem-sfb-dc-hom-preserves, under the degree-zero hypothesis isolated by lem-sfb-dc-hom-small-coefficients. This is an assembly lemma in the restricted-functor route; the unit and chapter are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Supplies the ambient closed additive symmetric Grothendieck sheaf category; it is a generic categorical prerequisite, not a replacement finiteness route."
+   },
+   {
+    "node": "lem-sfb-abelian-functorial-flat-resolution",
+    "why": "Supplies free-abelian flat covers for the coefficient category Ab in the sheaf-resolution theorem."
+   },
+   {
+    "node": "lem-sfb-sheaf-functorial-flat-resolution",
+    "why": "Transfers functorial flat covers from Ab to abelian pro-etale sheaves."
+   },
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Supplies Grothendieck abelianness of internal modules before native exactness can be used."
+   },
+   {
+    "node": "lem-sfb-modobj-flat-resolutions",
+    "why": "Supplies functorial flat covers of internal modules for K-flat derivability and native exactness."
+   },
+   {
+    "node": "lem-sfb-kflat-derivability",
+    "why": "Supplies the native K-flat representative and its derivability structure for arbitrary K."
+   },
+   {
+    "node": "lem-sc-source-kflat-tensor-left-triangulated",
+    "why": "Supplies exactness of native tensoring with the chosen K-flat representative; the restricted-functor unit does not assert this structural theorem."
+   },
+   {
+    "node": "lem-weil-native-internal-hom-contravariant-exact",
+    "why": "Supplies exactness with coherent opposite shifts for the actual native Hom, rather than an etale ringed-site replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-abelian-functorial-flat-resolution",
+  "lem-sfb-sheaf-functorial-flat-resolution",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sfb-modobj-flat-resolutions",
+  "lem-sfb-kflat-derivability",
+  "lem-sc-source-kflat-tensor-left-triangulated",
+  "lem-weil-native-internal-hom-contravariant-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-7851b804e",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-7851b804e (reviewer sub-agent of L); spot-checked: Read in full: the item, all 16 cited statements, Bhatt–Scholze pp. 60–62 (Prop. 6.8.11(3), q−p truncation induction; Rem. 6.8.15) and Mathlib ObjectProperty.IsMonoidalClosed (Subcategory.lean:69–71, only field prop_ihom). The delivery changes only the item: no new nodes, statement, source and Lean record unchanged, no SGA, no repair note. The 3 base steps become 9 with nothing dropped (1→1–2, 2→3–6, 3→7–9). The math is correct: the covariant variable uses the K-flat tensor shifts and triangles (kflat-derivability + source-kflat-tensor-left), then adjunction-shift clause (iii), then the triangulated right-adjoint lemma; the contravariant variable uses native-internal-hom-contravariant-exact with op shift reversal; both are applied through module-devissage. The degree-zero case is exactly the item's hypothesis, and the shift bookkeeping RHom(H^b[−b],V)=RHom(H^b[0],V)[b] checks out. Edge cases checked: empty X, zero inputs, single and negative degrees. Reverse-reachability over the snapshot shows no cycle. FIX of two missing citations (C1): step 1 used 'Noetherian scheme ⇒ noetherian underlying space', needed by ell-adic-triangulated, without a node; it now cites the mathlib leaf lem-weil-pbc-noetherian-scheme-closed-subsets-minimal. Step 2 used that Ab is Grothendieck, closed symmetric and additive and that X_proet is essentially small, needed by sheaf-tensor-closed, without a node; it now cites sk-def-sfb-sheaf-tensor. proof_deps now equals the union of the uses. Tool uses accepted as generic categorical black boxes: sheaf-tensor-closed, the flat-resolution nodes, the modobj nodes, kflat-derivability, source-kflat-tensor-left-triangulated, native contravariant exactness, triangulated-right-adjoint.; 1 file(s) fixed by the reviewer"
+ }
+}

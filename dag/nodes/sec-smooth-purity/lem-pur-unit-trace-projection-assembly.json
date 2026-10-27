@@ -1,0 +1,211 @@
+{
+ "id": "lem-pur-unit-trace-projection-assembly",
+ "kind": "statement",
+ "title": "Projection and scalar assembly from a normalized base trace",
+ "statement": "Fix D,C,f,d,S as in def-pur-unit-trace-construction, any finite intermediate coefficient field E, and a completed unit pullback core0 over E0=⊥. Let t0:P_0(T_0)→1_0,Y be an actual morphism satisfying HasTraceReductions for core0 at every positive exponent. Then Construction D C E f d S t0 is nonempty. In particular the scalar trace is the specified ordinary extension with its normalized Tate/unit/support comparisons; the transformation is its actual projection/adjunction transpose, has every prescribed finite reduction and invertible components, and retains all linearity and cofinal trace equations. This statement assumes the base trace and its reductions, and constructs no reconstructed base-field purity lift.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 2-4; explicit unit-trace assembly, parent proof Steps 1-8"
+ },
+ "stmt_deps": [
+  "def-pur-unit-trace-construction",
+  "def-pur-unit-trace-scalar-data",
+  "def-pur-unit-trace-tensor-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Fix $E$ and $r\\ge1$, and write $B=\\mathcal O_E/\\varpi_E^{er}=\\mathcal O_E/\\ell^r\\mathcal O_E$. The finite-free completed scalar comparison identifies ordinary coefficient tensor with the strict-tower model. Reduction of ordinary scalar extension is tensor associativity: $(M\\otimes^L_{R_0}R_E)\\otimes^L_{R_E}B=M\\otimes^L_{R_0}B=(M_r)\\otimes^L_A B$. The unit comparison $\\theta_E$ reduces to $T_A\\otimes_A B\\cong T_B$: on the Tate line it sends a root tensor a coefficient to the same root tensor its image, then rebrackets its $d$ tensor factors and applies the unchanged shift. The compact-support coefficient-comparison lemma identifies $(c_{E/0})_{er}$ with the finite-free compact-support comparison. Thus reducing the displayed definition of $t_E$ gives, with these unit identifications,\n$$(t_E)_{er}=((t_0)_r\\otimes_A1_B)c_{B/A,T_A}^{-1}=t_B.$$\nThe second equality is precisely finite universal smooth-trace compatibility. It includes ramified $E$, since the ideals $(\\ell^r)$ and $(\\varpi_E^{er})$ agree; no equality of their generators is used.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-coefficient-twists-detailed",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-finite-universal-smooth-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1-4, integral reconstruction and coefficient normalization; explicit unit-trace assembly by Q34"
+   }
+  },
+  {
+   "text": "To obtain every index $m$, choose $r$ with $er\\ge m$ and take the further derived quotient $B=A_{E,er}\\to D=A_{E,m}$. The purity maps of the finite comparison lemma use the general-ring diagonal/DNC orientation; for $R=A_{E,n}$ it agrees with the orientation obtained by running the diagonal construction directly with $R$-coefficients, which is the $\\Pi_f$ of the finite smooth purity map, and its tensor map is the transpose of the inverse projection map followed by $1\\otimes\\varepsilon$, i.e. $\\theta$ of the co-smoothness definition [det-sp-finite-general-ring]. So the $\\gamma_{f,R}$ there are the maps of [def-pur-smooth-purity-map]. Finite reduction of purity and the counit-characterized exceptional coefficient comparison give\n$$\\gamma_{f,D_Y}=c_{B,D}(B_Y)(\\gamma_{f,B_Y})_D,\\qquad\n\\epsilon_D P_D(c_{B,D})=(\\epsilon_B)_D b_{B,D}^{-1}.$$\nSubstitute these into $t_D=\\epsilon_D P_D(\\gamma_{f,D_Y})$ and use naturality of $b_{B,D}$ to obtain $t_D=(t_B)_D b_{B,D,T_B}^{-1}$. The integral compact-support comparisons commute with successive reductions, so reducing the equality of Step 3 along this quotient says exactly $(t_E)_m=t_D$. All comparisons retain the quotient coefficient action. Neither this argument nor the finite comparison requires $D$ flat over $B$.",
+   "uses": [
+    "det-sp-reduction-compatibilities",
+    "sk-lem-sp-reduction",
+    "def-pur-smooth-trace",
+    "lem-coef-integral-compact-support",
+    "det-sp-finite-general-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1-4, integral reconstruction and coefficient normalization; explicit unit-trace assembly by Q34"
+   }
+  },
+  {
+   "text": "The projection formula is invertible on the stated finite-Tor domain. Consequently the formulas in the statement define actual morphisms $u_{E,K}$ and $\\gamma_{E,K}$, rather than a selection from levelwise Hom sets. For $h:K\\to K'$ its naturality gives\n$$h\\,u_{E,K}=u_{E,K'}P_E(1_{T_E}\\widehat\\otimes L_Eh).$$\nThe inverse exceptional Hom bijection sends $z:A\\to G_EK$ to $\\epsilon_{E,K}P_E(z)$. Apply it to $G_E(h)\\operatorname{adj}_E(u_{E,K})$ and $\\operatorname{adj}_E(u_{E,K'})(1\\widehat\\otimes L_Eh)$; counit naturality and the displayed equality give the same map. Bijectivity and naturality of $j$ yield $G_E(h)\\gamma_{E,K}=\\gamma_{E,K'}H_E(h)$. All maps are $\\mathcal O_E$-module morphisms and the functors and Hom bijections are $\\mathcal O_E$-linear, so this is a natural transformation in the stated linear categories.",
+   "uses": [
+    "fix-prop-projection-formula",
+    "lem-pur-adic-operation-domains-source-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1-4, integral reconstruction and coefficient normalization; explicit unit-trace assembly by Q34"
+   }
+  },
+  {
+   "text": "Fix $m$ and put $A=A_{E,m}$, $K_m=K\\otimes^L A$. Completed tensor reduction, source reduction and the Tate-line comparison identify the reduction of $j_{E,K}$ with the canonical finite $j_{A,K_m}$. Projection-formula compatibility with finite reduction, together with Step 4, identifies $(u_{E,K})_m$ with\n$$u_{A,K_m}=(t_A\\otimes1_{K_m})\\operatorname{PF}_{T_A,K_m}^{-1}.$$\nReduction also commutes with transposition for these specified comparisons: reduce $\\epsilon_{E,K}P_E(\\operatorname{adj}_E(u_{E,K}))=u_{E,K}$, insert the compact-support reduction map, and use the reduced counit identity from Step 2 (now over $E$). The result is\n$$\\epsilon_{A,K_m}P_A\\bigl(v_m(\\operatorname{adj}_E(u_{E,K}))_m\\bigr)=u_{A,K_m}.$$\nBijectivity of the finite exceptional Hom map identifies its argument with $\\operatorname{adj}_A(u_{A,K_m})$. Hence $(\\gamma_{E,K})_m=\\operatorname{adj}_A(u_{A,K_m})j_{A,K_m}$. This is an equality in the finite coefficient derived category, not just after forgetting coefficients.",
+   "uses": [
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-pur-adic-source-finiteness-reductions",
+    "lem-pur-integral-line-reduction-restriction",
+    "fix-prop-projection-formula",
+    "prop-coef-integral-exceptional-adjoint",
+    "lem-coef-integral-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1-4, integral reconstruction and coefficient normalization; explicit unit-trace assembly by Q34"
+   }
+  },
+  {
+   "text": "Apply the finite tensor-trace-transpose lemma with $L=T_A$, $t=t_A$ and $P=\\gamma_{f,A_Y}$, its transpose by the definition of smooth trace. Its projection hypotheses hold by the projection formula. At the coefficient unit the canonical tensor map $\\theta_{f,A_Y}$ is the identity of $\\omega_f$ under unit constraints: the inverse projection map at the coefficient unit is the unitor by the unit equation of [lem-pur-projection-formula-coefficient-coherence], so its defining transpose is the counit, whose transpose is identity by the adjunction identities. The definition of finite smooth purity therefore identifies $P$ with $\\Pi_f^{-1}$. The tensor-trace-transpose equality now identifies $\\operatorname{adj}_A(u_{A,K_m})j_{A,K_m}$ with\n$$\\theta_{f,K_m}(1_{Lf_A^*K_m}\\otimes\\Pi_f^{-1})\\tau_{f,K_m}=\\gamma_{f,K_m}.$$\nHere the two symmetries convert $T_A\\otimes Lf_A^*K_m$ to $Lf_A^*K_m\\otimes T_A$; $j$ is precisely that symmetry after $\\tau$. The shift is $[2d]$, so crossing it introduces the trivial sign $(-1)^{2d}=1$. Combined with Step 6 this proves every prescribed finite reduction, with the diagonal/DNC normalization.",
+   "uses": [
+    "lem-pur-tensor-trace-transpose",
+    "def-pur-smooth-trace",
+    "def-pur-smooth-purity-map",
+    "def-pur-co-smoothness",
+    "fix-prop-projection-formula",
+    "lem-pur-projection-formula-coefficient-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1-4, integral reconstruction and coefficient normalization; explicit unit-trace assembly by Q34"
+   }
+  },
+  {
+   "text": "Both $H_EK$ and $G_EK$ are derived complete by the integral operation-domain lemma. The first reduction of $\\gamma_{E,K}$ is the finite smooth-purity map by Steps 6-7, and is an isomorphism by finite-coefficient smooth purity. Derived Nakayama consequently makes $\\gamma_{E,K}$ itself an isomorphism. This proves invertibility of the particular morphisms already constructed; it asserts no uniqueness of an arbitrary lift with the same reductions. The construction works also for $d=0$, $K=0$, empty schemes, $E=\\mathbf Q_\\ell$, and $m=1$; every chosen cofinal index is positive.",
+   "uses": [
+    "lem-pur-adic-operation-domains-source-comparison",
+    "thm-pur-finite-coefficient-smooth-purity",
+    "sk-lem-pe-derived-nakayama"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1-4, integral reconstruction and coefficient normalization; explicit unit-trace assembly by Q34"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-coefficient-twists-detailed",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-pur-finite-universal-smooth-trace",
+  "det-sp-reduction-compatibilities",
+  "sk-lem-sp-reduction",
+  "def-pur-smooth-trace",
+  "lem-coef-integral-compact-support",
+  "det-sp-finite-general-ring",
+  "fix-prop-projection-formula",
+  "lem-pur-adic-operation-domains-source-comparison",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-adic-source-finiteness-reductions",
+  "lem-pur-integral-line-reduction-restriction",
+  "prop-coef-integral-exceptional-adjoint",
+  "lem-pur-tensor-trace-transpose",
+  "def-pur-smooth-purity-map",
+  "def-pur-co-smoothness",
+  "lem-pur-projection-formula-coefficient-coherence",
+  "thm-pur-finite-coefficient-smooth-purity",
+  "sk-lem-pe-derived-nakayama"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 2-4; explicit unit-trace assembly, parent proof Steps 1-8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An integral smooth trace obtained from purity on the coefficient unit extended to coefficient fields gives natural purity by projection and exceptional adjunction",
+   "results": "8 hits on algebraic field traces only; no sheaf-theoretic trace or exceptional adjunction compatibility.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 ordinary adjunction interface hits; homEquiv, homEquiv_symm_apply and their naturality are useful categorical ingredients.",
+   "date": "2026-10-25",
+   "verdict": "no exact match for normalized coefficient reductions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A counit preserving isomorphism between right adjoints is compatible with derived coefficient reduction",
+   "results": "8 hits, including rightAdjointUniq_hom_app_counit; none supplies integral/finite coefficient realizations.",
+   "date": "2026-10-25",
+   "verdict": "ordinary uniqueness is an ingredient, not the required coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "purAdicTarget|finiteRight; unitTrace|HasTraceReductions|Construction; Mathlib CategoryTheory/Adjunction",
+   "results": "Project search finds the existing data and reconstruction declarations, but no theorem proving the required compatibility. Mathlib has ordinary adjunction uniqueness only. Blueprint search for unit trace finds two unrelated affine integration nodes. Direct Mathlib searches for trace/reduction and exceptional/coefficient in Adjunction and ModuleCat/Sheaf returned no matching interface.",
+   "date": "2026-10-25",
+   "verdict": "no duplicate"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicUnitTraceTransposeReductions",
+  "date": "2026-10-25",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Steps 2-4; explicit unit-trace assembly, parent proof Steps 1-8",
+   "via": [
+    "lem-pur-adic-unit-trace-transpose-reductions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicUnitTraceProjectionAssembly",
+  "file": "lean/Sheaf/Paper/AdicUnitTraceProjectionAssembly.lean",
+  "declaration": "WeilConjectures.PurUnitTrace.unit_trace_projection_assembly",
+  "statement": "theorem unit_trace_projection_assembly\n    (core0 : CompletedUnitPullback.Core C.l (baseField D C) f)\n    (t0 : (PurCompactSupport.image (PurCompactSupport.completed C.l (baseField D C))\n      (integralExceptionalCompactification D f)).obj (tateUnit D C (baseField D C) d X) ⟶\n        coefficientUnit D C (baseField D C) Y)\n    (ht0 : HasTraceReductions D C (baseField D C) f d core0 t0) :\n    Nonempty (Construction D C E f d S t0)",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8fb3b",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T094910-L-3270971",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8fb3b",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T094910-L-3270971",
+  "kind": "interface",
+  "note": "independent cc review: item proof (core, target normalization, reconstruction, finite-Tor transport, counit lemma, assembly) against node lem-pur-adic-unit-trace-transpose-reductions; three new sorry statements against RingSystem/Comparison/QNormalized/FiniteRightNormalization/Core/coefficientValuedSmoothTrace/Construction defs; unit sk-thm-sf-compatibility realized empty"
+ }
+}

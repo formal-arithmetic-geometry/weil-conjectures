@@ -22,39 +22,38 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-pur-line-unbounded-derived-tensor] to $P$ over $R$ and to the rank-one $P_n$ over $R_n$. These degree-zero lines are K-flat, ordinary tensor computes their unbounded derived tensor, and their cohomology functors are ordinary tensor on cohomology sheaves. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the identity topos with ring map $R\\to R_n$. It gives $(K\\otimes_R^LP)_n\\cong K_n\\otimes_{R_n}^L(P\\otimes_RR_n)$, then compose with the given normalized ordinary power comparison b. On a K-flat representative $U$ with flat terms its degree-$j$ map is the balancing identification $(U^j\\otimes_RP)\\otimes_RR_n\\cong(U^j\\otimes_RR_n)\\otimes_{R_n}P_n$. Its inverse multiplies the two quotient scalars. Consequently these comparisons are compatible with the strict quotient transitions as well as natural in $K$.",
+   "text": "Obtain d and its full representative and transition normalization from the normalized derived-comparison theorem. Retain the same d for the support assertion.",
    "uses": [
-    "lem-pur-line-unbounded-derived-tensor",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-pur-integral-line-normalized-derived-comparisons"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YU (definition-derived-tor), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 07A4 (lemma-pullback-tensor-product)"
+    "place": "Tag 07A4"
    }
   },
   {
-   "text": "For every $n$ and $i$, the preceding derived reduction comparison and [lem-pur-line-unbounded-derived-tensor] over $R_n$ give $\\mathcal H^i((K\\otimes_R^LP)_n)\\cong\\mathcal H^i(K_n)\\otimes_{R_n}P_n$. If $i\\notin[a,b]$, the right hand side is zero whenever $\\mathcal H^i(K_n)=0$. Thus any common interval $[a,b]$ remains a common interval, with exactly the same endpoints, in the meaning of [def-weil-cohomological-support]. This argument uses cohomological support, not Tor amplitude or a boundedness assumption on the original unbounded representative.",
+   "text": "Fix m,K,a,z,n and a degree i in the support of the reduced ordinary twist. The component (d m n).app K identifies this object with finiteOrdinary applied to the derived reduction of K. Map that isomorphism through H^i. If the latter cohomology were zero, IsZero.of_iso would make the former zero, contradicting membership in support. Apply finite_ordinary_support_subset and then the given inclusion of the support of the nth reduction of K into Icc a z. The endpoints and all original quantifiers are unchanged.",
    "uses": [
-    "lem-pur-line-unbounded-derived-tensor",
+    "lem-pur-integral-line-support-preservation",
     "def-weil-cohomological-support"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3), final derived-tensor sentence: preservation of the uniform cohomological bounds"
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU; original proof step 2, preservation of uniform cohomological bounds"
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-line-unbounded-derived-tensor",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-integral-line-normalized-derived-comparisons",
+  "lem-pur-integral-line-support-preservation",
   "def-weil-cohomological-support"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-  "place": "Proof (3), the corresponding signed-line reduction/restriction steps; isolated from lem-pur-integral-line-reduction-restriction"
+  "document": "lean/Sheaf/Paper/IntegralLineDerivedComparisons.lean",
+  "place": "U9: normalized comparison clause isolated, finite signed-line support proved via exact tensor and K-flat models, and interval preservation assembled by cohomology transport."
  },
  "mathlib_searches": [
   {
@@ -147,13 +146,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-3b4c6",
-  "group": "J8",
+  "reviewer": "COMPILER",
+  "group": "U9",
   "result": "pass",
-  "landing": "20261021T152321-L-1870640",
+  "landing": "20261025T101537-L-3706933",
   "kind": "interface",
-  "note": "independent cc review: item theorem signature vs clone (identical); moved defs vs old item module (verbatim except power/finitePower, bridged by proved power_eq_coefficient/finitePower_eq_coefficient); two sorry halves vs item node statement; axioms probed in scratch sandbox"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

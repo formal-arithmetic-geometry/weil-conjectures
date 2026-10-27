@@ -190,25 +190,30 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-4d1149a9a (reviewer sub-agent of L); spot-checked: Read in full: the item, all 14 cited statements (including the main-20261015 blueprint_update of finite-direct-image-exact and of geometric-stalk-conservative), and the Stacks source at Prop 04CA (proposition-closed-immersion-pushforward) and section-cohomology-support / Lemma 09XQ (lemma-sections-with-support-acyclic) with its Hom identity. The statement matches 09XQ+04CA: an arbitrary closed immersion and Ab(X_et), with no quasi-compact or torsion hypothesis. That generality is correct on the étale site because geometric points off Z factor through O and stalks are conservative. It is unlike the pro-étale def-pur-flasque-support and det-lem-formal-closed-support-adjunction, which need quasi-compact j and work with different coefficients. Step checks: (1) closed immersion is finite, then f_* is exact on Ab. (2) Kernel functoriality, j^{-1} exact, invertible open counit plus the triangle identity give j^{-1}P_Z=0. (3) Stalk-germ comparison, factoring through O and conservativity give the stalk criterion; lem-kun-04ca's essential-image clause gives P_Z F≅i_*B and j^{-1}i_*G=0. (4) Invertible closed counit (prop-openclosed-lowerstar-fully-faithful; its coefficient category includes Ab), triangle identity and naturality show the canonical unit is iso. (5) Open adjunction plus kernel universal property. (6) Composition with the 04CA full faithfulness; explicit inverses check out. Edge cases Z=X, Z=∅, nonreduced Z and injective F all work. No new nodes. The duplicate search over dag/nodes (09XQ, H_Z, ker(F→j_*j^{-1}F), support adjunctions) found no étale abelian duplicate. Acyclic; the only citer, lem-pur-relative-support-bottom-descent Step 4, uses exactly this. Route: the off-route, non-closed citations are lem-kun-04ca and the underived counit of lem-kun-open-immersion-restriction, both declared tool_uses, which I accept. The other citations are on route, closed, Mathlib leaves or definitions. No SGA. No fixes written. Minor: the item has no lean_audit field; this comes from the earlier NC creation and is maintainer metadata, not a fault of this split."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.EtaleSupportedKernelAdjunction",
-  "declaration": "AlgebraicGeometry.Etale.supportedKernel_closedAdjunction",
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.ClosedImmersionUpperShriek",
+  "declaration": "AlgebraicGeometry.Etale.lowerStarClosedUpperShriekAdjunction",
   "declarations": [
-   "AlgebraicGeometry.Etale.supportedKernel_closedAdjunction"
+   "AlgebraicGeometry.Etale.lowerStarClosedUpperShriekAdjunction",
+   "AlgebraicGeometry.Etale.lowerStarClosedUpperShriekHomEquiv",
+   "AlgebraicGeometry.Etale.isIso_upperStarLowerStarAdjunction_unit_app_of_isZero",
+   "AlgebraicGeometry.Etale.isZero_upperStar_sectionsWithSupport",
+   "AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar",
+   "AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite"
   ],
-  "statement": "theorem supportedKernel_closedAdjunction {Z O X : Scheme.{u}} (i : Z ⟶ X) (j : O ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] (hcompl : IsCompl (Set.range i.base) (Set.range j.base)) : IsIso (Functor.whiskerLeft (supportedKernel j) (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit) ∧ PreservesFiniteLimits (lowerStar AddCommGrpCat.{u + 1} i) ∧ PreservesFiniteColimits (lowerStar AddCommGrpCat.{u + 1} i) ∧ Nonempty (lowerStar AddCommGrpCat.{u + 1} i ⊣ supportedClosedInverseImage i j)",
-  "branch": "newtargets-dag",
-  "by": "Q72",
-  "date": "2026-10-18",
-  "existing": true,
-  "note": "Published dependency module is reused unchanged; this delivery only reclassifies its definitions as separate existing definition nodes."
+  "statement": "def lowerStarClosedUpperShriekAdjunction\n    (hij : Set.range i.base = (Set.range j.base)ᶜ) :\n    (i)_*[A] ⊣ closedUpperShriek A i j",
+  "note": "§1(B) repair requested in the return of 3977feaf3409: the former supportedKernel_closedAdjunction attachment provides only an AddCommGrpCat-specific Nonempty adjunction and does not expose the canonical module-valued adjunction whose derived counit defines the consumer. The existing upstream lowerStarClosedUpperShriekAdjunction supplies the actual canonical sheaf-level adjunction for arbitrary Grothendieck abelian coefficients, including AddCommGrpCat and ModuleCat. Its Hom equivalence is lowerStarClosedUpperShriekHomEquiv. The other clauses are retained through the listed published declarations: sectionsWithSupport restricts to zero on the complementary open, hence isIso_upperStarLowerStarAdjunction_unit_app_of_isZero gives the canonical supported closed unit isomorphism; closed direct image preserves finite limits and finite colimits since closed immersions are finite. The source section binds (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]. The complementary range equality is equivalent to the old IsCompl hypothesis. No node statement or construction is changed.",
+  "branch": "slopmaster2",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": true
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-0582b0b15",
-  "group": "Q72",
+  "reviewer": "NT-stage2-cc-80e179293",
+  "group": "Q14",
   "result": "pass",
-  "note": "Re-delivery after d22a5c0338c1 (PASS, landing failed because two proof_deps were in no step's uses). Diffed the full snapshot against d22a: the only changes are Step 6 citing lem-sp-grothendieck-edge-maps (its left edge R^n(GF)->G R^nF is the grothendieckLeftEdgeMap used in relativeSupportEdge), Step 8 citing lem-weil-pbc-module-abelian-derived-direct-image-comparison (holds for any f and any Lambda, so it applies to the open complement), the matching uses, statement_change.old_proof plus an extended 'what', and two docstring lines in the module (no signature change). proof_deps now equals the union of uses exactly; steps are under 2000 chars; old_proof/old_statement/old_stmt_deps/old_proof_deps equal the live/side base exactly; both citers hold, statement mathematically unchanged. Re-checked hypotheses (frame = Ideal.span of the c functions via IsPullback, ringKrullDim codimension, smooth/etale/closed immersion) and all six clauses against the node; edge cases c=0, empty cover, negative r, no universe restriction. Statement verbatim, 36 declarations match, 16/16 proofs sorry, docstrings ok. nt_compile --json exit 0 in 16.4 s, no diagnostics."
+  "note": "Re-delivery after return 3977feaf3409. Item record changes only lean and stmt_deps (six landed nodes added). Lean module unchanged. Two §1(B) lean-only rebinds: def-pur-etale-supported-kernel → upstream sectionsWithSupport/closedUpperShriek (iso to old supportedKernel at AddCommGrpCat, general coefficients); lem-pur-etale-supported-kernel-adjunction → lowerStarClosedUpperShriekAdjunction plus HomEquiv/unit-iso/exactness declarations. Both correct with notes. Statement matches node clause by clause: finite A at Type(u+1); IsNoetherian T,T'; IsAffineHom g plus IndEtaleAcrossUniverses on affine charts; IsPullback h i' i g; explicit complements; D⁺ of ModuleCat-valued small-étale sheaves; β = mateEquiv of c⁻¹ (asIso finite baseChangeMap) under derivedPlus support adjunctions, variance checked; IsIso, CommShift ℤ (canonical rightDerivedFunctorPlus instance), counit equation c≫i'_*β≫ε'=g^*ε, paste_horiz composition with upperStarCompDerivedPlus, identity law; no constructibility. Edge cases allowed; universes bound; only sorry is the theorem body; docstrings carry source and blueprint. Mechanical finding on theorem-node stmt_deps judged genuine (finite-exchange IsIso builds c; derivedPlus is the adjunction; compositors have no def owner; closed adjunction data) → PASS on that point. Advisory: def-per-closed-support-plus-adjunction closedSupportPlus is the same R⁺ functor with canonical complement; no H4 duplicate. No file changed, so no compile."
  },
  "reviewed_proof": {
   "date": "2026-10-19",
@@ -220,5 +225,16 @@
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

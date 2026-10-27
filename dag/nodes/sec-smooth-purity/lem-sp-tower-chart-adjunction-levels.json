@@ -1,0 +1,146 @@
+{
+ "id": "lem-sp-tower-chart-adjunction-levels",
+ "kind": "statement",
+ "title": "Finite compatibility of a normalized smooth tower adjunction",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, a prime p different from ell and a field k of characteristic p, with b,o,q as in [def-sp-coefficient-tower-shriek-interfaces]. Let f:X -> Y be a smooth pure relative-dimension-d map of separated finite-type k-schemes. For its fixed compactificationOverField let hF assert compact-support preservation of the unnormalized uniformly constructible finite-Tor tower categories. Suppose G is a right adjoint of the restricted compact-support functor with adjunction adj, and suppose Charts for this G,adj: the local comparisons preserve exactly the normalized coordinate counits. Then Levels for hF,G,adj is inhabited. Explicitly, finite compact support preserves each finite ctf category, its finite right adjunction admits the reduction-exceptional realization, the actual tower compact support has its specified evaluations, and G has natural finite evaluation comparisons matching both counits and units. Scalar extension preserves finite ctf on X,Y. The direct-image coefficient comparisons and their specified counit mates are invertible for every finite input. The reduction of G(K) equals the coefficient counit mate followed by the finite right adjoint of the reduction of K under these same comparisons. Equal and triple reductions use the recorded scalar unitors and associators. This statement does not assert existence of G, adj, or Charts.",
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sbc-smooth-morphisms",
+  "sk-def-sp-coefficient-towers",
+  "sk-def-sp-normalized-towers",
+  "det-sp-tower-shriek-levels",
+  "def-coefficient-twists-detailed",
+  "det-sp-reduction-exceptional",
+  "def-sp-coefficient-tower-shriek-interfaces",
+  "def-amb-affine-trace-tower",
+  "def-sp-chart-tate-tower-data",
+  "def-sp-tower-p1-adjunction-data",
+  "def-sp-normalized-coordinate-construction",
+  "def-sp-coordinate-adjunction-categories",
+  "def-sp-varying-ring-graph-comparison",
+  "def-sp-semilinear-constant-ring-operations",
+  "def-sp-tower-gluing-interfaces"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Levels, both sentences"
+ },
+ "proof": [
+  {
+   "text": "The finite reduction-exceptional adjunctions provide right functors and their realizations; the canonical compact-support calculus supplies their fixed evaluations and scalar-preservation/direct-image comparisons.",
+   "uses": [
+    "det-sp-reduction-exceptional",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the finite admissible chart cover. Given Charts supplies the hypotheses of evaluated representability. Its comparisons of evaluated counits with finite counits are natural by finite Hom injectivity, and the evaluated tower triangle gives the finite unit equation.",
+   "uses": [
+    "lem-sp-tower-evaluated-representability",
+    "lem-sp-smooth-admissible-coordinate-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reduction-exceptional makes the specified counit mates invertible on every finite input. Reduction-transpose identifies the actual reductions on tower objects with those same mates followed by finite right-adjoint reductions; cancel the comparison inverse to get the displayed Levels.reduction. All fields are bundled using the same chosen adjunctions and comparisons.",
+   "uses": [
+    "lem-sp-tower-reduction-transpose",
+    "det-sp-reduction-exceptional"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-reduction-exceptional",
+  "lem-sp-coefficient-tower-shriek-calculus",
+  "lem-sp-tower-evaluated-representability",
+  "lem-sp-smooth-admissible-coordinate-cover",
+  "lem-sp-tower-reduction-transpose"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Levels, both sentences; assembly of the existing declared dependency interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Gluing local representing pairs into a right adjoint to compactly supported pushforward of constructible coefficient towers",
+   "results": "8 hits, including TopCat.Sheaf.instIsRightAdjointPushforward and AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward.",
+   "date": "2026-10-25",
+   "verdict": "Ordinary sheaf adjunctions, not smooth compact-support tower adjunctions or finite exceptional evaluation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits, including homEquiv, homEquiv_counit and mkOfHomEquiv_homEquiv.",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction infrastructure supplies the categorical uniqueness proof, but not chart descent or its finite compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "tower.*gluing|gluing.*tower",
+   "results": "msearch Mathlib grep: 0 hits. Local Sheaf/WeilConjectures search found the original tower_gluing and its existing coordinate, binary, evaluation and reduction dependencies.",
+   "date": "2026-10-25",
+   "verdict": "No existing statement packages the global chart descent or the full finite compatibility assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor has a right adjoint if each functor Hom F X Y is representable",
+   "results": "8 hits, including Functor.isLeftAdjoint_iff_rightAdjointObjIsDefined_eq_top, and Functor.rightAdjointObjIsDefined_iff.",
+   "date": "2026-10-25",
+   "verdict": "Generic construction from representability, not the geometric local-to-global assertion or coefficient compatibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerGluing",
+  "date": "2026-10-25",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Levels, both sentences",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityTowerChartAdjunctionLevels",
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerChartAdjunctionLevels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerGluing.tower_chart_adjunction_levels",
+  "statement": "theorem tower_chart_adjunction_levels\n    (pchar : ℕ) [Fact pchar.Prime]\n    (k : Type u) [Field k] [CharP k pchar] (hne : pchar ≠ l)\n    (X Y : Over (Spec (CommRingCat.of k)))\n    [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n    [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]\n    (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f.left]\n    (hF : ∀ M : SpTowerCalculus.C l E b q X.left,\n      spConstructibleTorTowers l E Y.left (q.abelian Y.left)\n        ((SpTowerCalculus.F l E b o q\n          (CondensedRing.compactificationOverField f)).obj M.obj))\n    (G : SpTowerCalculus.C l E b q Y.left ⥤ SpTowerCalculus.C l E b q X.left)\n    (adj : support l E b o q (CondensedRing.compactificationOverField f) hF ⊣ G)\n    (charts : Charts l E b o q k X Y\n      ⟨inferInstance, inferInstance, inferInstance⟩ f d\n      (CondensedRing.compactificationOverField f) hF G adj) :\n    Nonempty (Levels l E b o q (CondensedRing.compactificationOverField f) hF G adj)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3a1ce",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261025T162329-L-425972",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3a1ce",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261025T162329-L-425972",
+  "kind": "interface",
+  "note": "independent cc review: SmoothPurityTowerGluingData vs clone item (moved block byte-identical); tower_gluing signature vs clone; the two new sorry statements against the original Charts/Levels conjuncts (global = weakening; levels = Levels clause, invariant under change of adjunction); 4 delivered modules + 10 direct importers compiled exit 0 in /tmp/f3rev_3a1c; #print axioms tower_gluing = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-split-torus-no-invariants-unipotence",
+ "kind": "statement",
+ "title": "A split torus action without invariant tangent vectors forces split unipotence",
+ "statement": "Let $k$ be a field [def-weil-field]. Group schemes and homomorphisms are as in [def-sc-group-scheme], closed subgroups as in [def-sc-group-scheme-subgroup], finite type as in [def-weil-finite-type-morphism], and smoothness and connectedness as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Let $H$ be a smooth geometrically connected affine $k$-group scheme of finite type, and let $S\\simeq\\mathbf G_{m,k}^r$, $r\\geq0$, act on $H$ by group-scheme automorphisms. Here $\\mathbf G_m$ and $\\mathbf G_a$ are [def-sc-gm-ga]; an action is a morphism $S\\times_kH\\to H$ satisfying the identity and associativity laws and preserving multiplication in $H$. Let $\\mathfrak h$ be the tangent space of $H$ at the identity [def-sc-scheme-tangent-space], with the differentiated $S$-action. Assume $\\mathfrak h^S=0$, where the invariant subspace consists of vectors fixed after every commutative $k$-algebra extension by every point of $S$. Then $H$ is split unipotent: there is a finite series $H=H_0\\supset H_1\\supset\\cdots\\supset H_m=1$ of smooth geometrically connected closed $k$-subgroups, each normal in its predecessor, whose fppf quotient sheaves $H_i/H_{i+1}$ are represented by $\\mathbf G_a$. Fppf quotient means sheafification of the right-coset functor for flat finitely presented jointly surjective coverings. In particular $H$ has a faithful finite-dimensional matrix representation in which every geometric point $h$ satisfies $(h-I)^N=0$ for some $N\\geq1$. The action is an algebraic torus action, not merely an action of $S(k)$ or its Lie algebra; no perfection or characteristic restriction on $k$ is imposed, and $H=1$ and $r=0$ are allowed. The unipotence and represented-quotient conventions agree with [def-sfb-solvable-group-structure].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 16.63, printed p.347; Proposition 16.62 and Theorem 16.58, printed pp.345,347; split-series convention in Section 16g. This general automorphism-action criterion is the input used in the proof of Proposition 17.60, printed p.372."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sc-scheme-tangent-space",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-torus-character-tangent-weights",
+  "def-sc-dual-numbers",
+  "def-wf-lie-algebra-derivation"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-split-torus-representation-weight-decomposition] to the differentiated action on $\\mathfrak h$. Its zero-character space is precisely the invariant subspace in the hypothesis, so every occurring character is nonzero. After choosing $S\\simeq\\mathbf G_m^r$, write the finitely many characters as nonzero integer vectors $b$. Choose $v\\in\\mathbf Z^r$ with $b\\cdot v\\ne0$ for all of them: for $r>0$ take $v=(1,M,\\ldots,M^{r-1})$ with the integer $M$ avoiding the finitely many roots of the nonzero polynomials $\\sum b_iM^{i-1}$. The resulting cocharacter $\\lambda(t)=(t^{v_1},\\ldots,t^{v_r})$ gives no zero weight on $\\mathfrak h$. If the weight set is empty take the trivial cocharacter, also when $r=0$. The direct-sum description shows after every field extension that $\\mathfrak h^S=0$ still holds; tangent base extension here is the dual of base extension of the finite-dimensional cotangent space at the rational identity.",
+   "uses": [
+    "lem-sfb-split-torus-representation-weight-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.62, first paragraph, p.347; integer cocharacter choice supplied explicitly by the worker."
+   }
+  },
+  {
+   "text": "Over $F=\\bar k$ form $J=H_F\\rtimes S_F$ with underlying affine scheme $H_F\\times_FS_F$ and multiplication $(h,s)(h',s')=(h\\,a(s,h'),ss')$. The action axioms give a group scheme and make $H_F$ a closed normal subgroup; projection has section $s\\mapsto(1,s)$. Both factors are smooth and geometrically connected. Smoothness of this product follows by base change and composition [lem-pc-proper-base-change, lem-trf-smooth-composition]; connectedness follows from [lem-weil-pbc-geometrically-connected-product-components]. Thus $J$ is a smooth connected affine algebraic group, with no reductivity assumption.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "lem-weil-pbc-geometrically-connected-product-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.62, first paragraph, p.347: semidirect product and maximal tori."
+   }
+  },
+  {
+   "text": "Choose a maximal torus $T$ of $J$ containing $S_F$: enlarge $S_F$ until the dimension is maximal, which terminates since torus ranks are bounded by $\\dim J$ and a proper inclusion of tori raises rank. By [lem-sfb-normal-subgroup-maximal-torus-intersection], $K=((H_F\\cap T)_{\\mathrm{red}})^\\circ$ is a maximal torus of $H_F$. Since $S_F\\subseteq T$ and $T$ is commutative, $S_F$ fixes $K$ pointwise. The tangent map of its closed immersion is injective (apply its surjective coordinate-ring map to dual-number points), so $\\operatorname{Lie}K\\subseteq(\\mathfrak h_F)^{S_F}=0$. A torus of rank $d$ has tangent dimension $d$, directly from $F[z_1^{\\pm1},\\ldots,z_d^{\\pm1}]$ at $z_i=1$; hence $K=1$. Every torus lies in a maximal one by the same rank argument, and maximal tori of $H_F$ are conjugate [lem-sfb-borel-maximal-torus-conjugacy]. Therefore $H_F$ has no nontrivial torus. A nontrivial $k$-torus would remain such over $F$, so $H$ has none. Apply [lem-sfb-torus-free-implies-unipotent-arbitrary-field] over $k$ to obtain a faithful upper-unitriangular closed representation of $H$. In particular the matrix clause of the item already follows.",
+   "uses": [
+    "lem-sfb-normal-subgroup-maximal-torus-intersection",
+    "lem-sfb-borel-maximal-torus-conjugacy",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.62, first paragraph, p.347; its unipotence argument, using maximal-torus intersection to avoid any descent assumption on a chosen torus."
+   }
+  },
+  {
+   "text": "Restrict the action to $\\lambda$ from step 1. By [lem-sfb-gm-action-attracting-subgroup-big-cell] the subgroups $U_-$ and $U_+$ are smooth geometrically connected affine $k$-groups, and multiplication is a dense open immersion $U_-\\times_kU_+\\to H$. The $\\lambda$-action on $\\operatorname{Lie}U_+$ has strictly positive integer weights. On $U_-$ use $t\\mapsto\\lambda(t^{-1})$, which negates its strictly negative weights. Apply [lem-sfb-positive-weight-affine-space-arbitrary-field] to the rational fixed identity in each group. This gives $k$-scheme isomorphisms $U_\\pm\\simeq\\mathbf A_k^{d_\\pm}$, including a point for dimension zero, and hence a dense open immersion $\\mathbf A_k^N\\to H$ with $N=d_-+d_+$. Restrict to the dense open $D(T_1\\cdots T_N)\\simeq(\\mathbf G_m)^N$ of $\\mathbf A^N$; its image remains dense in $H$. Algebraically its coordinate map is the injection for the dense affine chart followed by $k[T_1,\\ldots,T_N]\\hookrightarrow k[T_1^{\\pm1},\\ldots,T_N^{\\pm1}]$. For $N=0$ use the identity localization.",
+   "uses": [
+    "lem-sfb-gm-action-attracting-subgroup-big-cell",
+    "lem-sfb-positive-weight-affine-space-arbitrary-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33 and Theorem 13.41, pp.265-270; corrected replacement for the invalid strict-definiteness inference in Proposition 16.62 and the proof of Proposition 16.63, p.347."
+   }
+  },
+  {
+   "text": "The representation of step 3 proves that $H$ is unipotent over $k$, so [lem-sfb-smooth-unipotent-solvable] gives solvability over this same field, without assuming it perfect. Apply [lem-sfb-rosenlicht-split-solvable-criterion] to the dominant scheme morphism $(\\mathbf G_m)^N\\to H$ from step 4. Its unipotent clause gives a finite series of smooth geometrically connected closed $k$-subgroups, normal in their predecessors, with represented fppf quotients $\\mathbf G_a$. This is exactly the required series. The faithful representation from step 3 supplies the additional matrix assertion; in an $n$-dimensional upper-unitriangular representation $(h-I)^n=0$. If $H=1$ the series may be empty and a one-dimensional trivial representation is faithful. No step uses rational-point weights in place of algebraic characters.",
+   "uses": [
+    "lem-sfb-smooth-unipotent-solvable",
+    "lem-sfb-rosenlicht-split-solvable-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.58, p.345, and the split-unipotent conclusion of Proposition 16.63, p.347."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-torus-representation-weight-decomposition",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "lem-sfb-normal-subgroup-maximal-torus-intersection",
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+  "lem-sfb-gm-action-attracting-subgroup-big-cell",
+  "lem-sfb-positive-weight-affine-space-arbitrary-field",
+  "lem-sfb-smooth-unipotent-solvable",
+  "lem-sfb-rosenlicht-split-solvable-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 16.62-16.63, p.347, with an explicit correction of the false strict-definiteness assertion; Theorems 13.33,13.41 and16.58 supply the replacement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine group with a split torus acting without invariant tangent vectors is split unipotent",
+   "results": "{\"t\": \"2026-10-24T04:20:06Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected affine group with a split torus acting without invariant tangent vectors is split unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instLieAddGroupOfNatWithTopENat\", \"instLieAddGroupOfNatWithTopENatOfIsTopologicalAddGroup\", \"instLieAddGroupOfTopWithTopENat\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"instLieAddGroupOfSomeENatTopOfLEInfty\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.zero_rootSpace_eq_top_of_nilpotent\"], \"digest\": \"b43c219ca751fe05\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern smooth algebras, Lie algebra weights, differential Lie groups or categorical unipotent matrices; none concerns split unipotent group schemes under an algebraic torus action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unipotent\"",
+   "results": "{\"t\": \"2026-10-24T04:20:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"Unipotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.Biprod.unipotentLower\", \"CategoryTheory.Biprod.unipotentUpper\", \"CategoryTheory.Biprod.unipotentLower_hom\", \"CategoryTheory.Biprod.unipotentUpper_hom\", \"CategoryTheory.Biprod.unipotentLower_inv\", \"CategoryTheory.Biprod.unipotentUpper_inv\"], \"digest\": \"0b525c109db5567d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern smooth algebras, Lie algebra weights, differential Lie groups or categorical unipotent matrices; none concerns split unipotent group schemes under an algebraic torus action."
+  },
+  {
+   "tool": "grep",
+   "query": "splitUnipotent|SplitUnipotent|unipotent.*torus|torus.*unipotent",
+   "results": "{\"t\": \"2026-10-24T04:20:04Z\", \"tool\": \"grep\", \"query\": \"splitUnipotent|SplitUnipotent|unipotent.*torus|torus.*unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern smooth algebras, Lie algebra weights, differential Lie groups or categorical unipotent matrices; none concerns split unipotent group schemes under an algebraic torus action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic group with a split torus action whose Lie algebra has no zero weight has a series with additive group quotients",
+   "results": "{\"t\": \"2026-10-24T04:20:05Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic group with a split torus action whose Lie algebra has no zero weight has a series with additive group quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.Weight.isZero_neg\", \"LieAlgebra.IsKilling.corootSpace_eq_bot_iff\", \"LieAlgebra.instNontrivialSubtypeMemLieSubmoduleLieSubalgebraGenWeightSpaceOfNatForall\", \"LieAlgebra.IsKilling.coroot_zero\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"LieModule.chainTop_isNonZero\", \"LieAlgebra.IsSolvable.solvable_int\", \"LieModule.iSup_ucs_eq_genWeightSpace_zero\"], \"digest\": \"61be8e2ece8f573b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern smooth algebras, Lie algebra weights, differential Lie groups or categorical unipotent matrices; none concerns split unipotent group schemes under an algebraic torus action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth affine algebraic group admitting a multiplicative group action with strictly positive tangent weights is split unipotent",
+   "results": "{\"t\": \"2026-10-24T04:20:51Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth affine algebraic group admitting a multiplicative group action with strictly positive tangent weights is split unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"Algebra.Extension.formallySmooth_iff_split_injection\", \"Algebra.FormallySmooth.iff_split_injection\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"Algebra.FormallySmooth.of_split\", \"RootPairing.GeckConstruction.isNilpotent_e\", \"RootPairing.GeckConstruction.isNilpotent_f\", \"LieAlgebra.exists_isCartanSubalgebra_engel\"], \"digest\": \"dfa2c8d8f66469c4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern smooth algebras, Lie algebra weights, differential Lie groups or categorical unipotent matrices; none concerns split unipotent group schemes under an algebraic torus action."
+  },
+  {
+   "tool": "grep",
+   "query": "splitUnipotent|SplitUnipotent|unipotent.*torus|torus.*unipotent",
+   "results": "{\"t\": \"2026-10-24T05:02:01Z\", \"tool\": \"grep\", \"query\": \"splitUnipotent|SplitUnipotent|unipotent.*torus|torus.*unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unipotent\"",
+   "results": "{\"t\": \"2026-10-24T05:02:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"Unipotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.Biprod.unipotentLower\", \"CategoryTheory.Biprod.unipotentUpper\", \"CategoryTheory.Biprod.unipotentLower_hom\", \"CategoryTheory.Biprod.unipotentUpper_hom\", \"CategoryTheory.Biprod.unipotentLower_inv\", \"CategoryTheory.Biprod.unipotentUpper_inv\"], \"digest\": \"0b525c109db5567d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic group with no invariant tangent vectors under a split torus has a series with additive group quotients",
+   "results": "{\"t\": \"2026-10-24T05:02:02Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic group with no invariant tangent vectors under a split torus has a series with additive group quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instAddCommGroupTangentSpace\", \"derivedSeries\", \"QuotientAddGroup.Quotient.addGroup\", \"GroupLieAlgebra\", \"derivedSeries_zero\", \"QuotientAddGroup.instHasQuotientAddSubgroup\", \"contMDiffAt_addInvariantVectorField\", \"addInvariantVectorField\"], \"digest\": \"0a63438532920e0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine group with a split torus action without fixed tangent vectors is split unipotent",
+   "results": "{\"t\": \"2026-10-24T05:02:12Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected affine group with a split torus action without fixed tangent vectors is split unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instLieAddGroupOfNatWithTopENat\", \"instLieAddGroupOfNatWithTopENatOfIsTopologicalAddGroup\", \"instLieAddGroupOfTopWithTopENat\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"instLieAddGroupOfSomeENatTopOfLEInfty\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"RootPairing.GeckConstruction.instHasTrivialRadical\"], \"digest\": \"cd5939c50a849792\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "No zero weight in a split torus action on a smooth connected algebraic group implies split unipotence",
+   "results": "{\"t\": \"2026-10-24T05:02:12Z\", \"tool\": \"leanfinder\", \"query\": \"No zero weight in a split torus action on a smooth connected algebraic group implies split unipotence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.exists_nontrivial_weightSpace_of_isSolvable\", \"LieModule.exists_nontrivial_weightSpace_of_isNilpotent\", \"LieModule.zero_genWeightSpace_eq_top_of_nilpotent'\", \"LieModule.zero_genWeightSpace_eq_top_of_nilpotent\", \"LieAlgebra.zero_rootSpace_eq_top_of_nilpotent\", \"LieModule.exists_forall_lie_eq_smul\", \"LieModule.exists_nontrivial_weightSpace_of_lieIdeal\", \"LieAlgebra.instNontrivialSubtypeMemLieSubmoduleLieSubalgebraGenWeightSpaceOfNatForall\"], \"digest\": \"9e0c254f5924ab3c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-cocharacter-parabolic-geometry",
+  "date": "2026-10-24",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 13.33(a)-(e), printed pp.265-266; Proposition 17.60, p.372 (split unipotent kernel); Theorem 25.1, p.544 (parabolic quotient), with Theorems 5.28 and 8.43-8.44, pp.105,161 (represented, quasi-projective quotient, hence projective when proper). Regular centralizer: proof of Proposition 21.29, pp.433-434. Smooth integral geometry: Corollary 5.26, Proposition 7.15 and Propositions 1.34-1.35. The field-extension clauses use the defining functors and quotient sheaf. Supporting proof input: Proposition 16.63, printed p.347; Proposition 16.62 and Theorem 16.58, printed pp.345,347; split-series convention in Section 16g. This general automorphism-action criterion is the input used in the proof of Proposition 17.60, printed p.372.",
+   "via": [
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-torus-no-invariants-unipotence",
+  "worker": "stage1",
+  "group": "Q154",
+  "summary": "Kept the target statement, normalized doubled TeX escapes, proved unipotence through maximal tori in the semidirect product, and obtained a dominant split-torus chart from positive and negative attracting subgroups before applying Rosenlicht. Source error: the strict-definiteness assertion of Milne 16.62 is false for G_a^2 with weights +1 and -1; it is not used. Three genuinely smaller supporting statements remain unsplit, searched with all required services.",
+  "blueprint": "The recorded ancestry has no imported blueprint ancestor (blueprint_refs ancestor prints None); this supplies the recorded Milne 16.63 prerequisite of reductive cocharacter parabolic geometry in the alteration chain of det-thm-sf-ctf-stability-direct-images, proof (3). The current latest blueprint was read. Its unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Smooth base change supplies scalar extensions and the projection of the semidirect-product scheme; no group-specific route is replaced."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Smoothness of a product follows by composing its smooth projection with the smooth structure map."
+   },
+   {
+    "node": "lem-weil-pbc-geometrically-connected-product-components",
+    "why": "Connectedness of the semidirect product uses its underlying product scheme."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-geometrically-connected-product-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-53dbbf172",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-53dbbf172 (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 13.33 (pp.265-266), 13.40-13.41 (pp.269-270), 6.33/16g (p.343), 16.52-16.54, 16.58 (p.345) and 16.62-16.63 (p.347). Item statement unchanged from base except one appended conventions sentence; base had no proof, so this is not a re-split. Confirmed the reported source error: 16.62's strictly-definite claim fails for G_a^2 with weights (1,-1), and the delivered route uses a generic cocharacter, both attracting subgroups and the 13.41 argument on each, avoiding it. Step 1: weight decomposition plus integer-polynomial choice of v; r=0 and empty weight set covered. Step 2: J=H_F⋊S_F is smooth via base change and composition, connected via the component bijection. Step 3: maximal torus T contains S_F; the normal-subgroup node gives a maximal torus K of H_F; S_F fixes K pointwise, so Lie K ⊆ h^S=0 and K=1; conjugacy then leaves no nontrivial torus; the torus-free node over k gives unitriangularity. Step 4: attracting node and positive-weight node applied twice give a dense open A^N→H, then G_m^N. Step 5: unipotent implies solvable over any field, then the Rosenlicht unipotent clause gives the G_a series; H=1 handled. New nodes all true: attracting = 13.33 applied to H⋊G_m (Z_H connected and étale, hence trivial, when h_0=0); positive-weight checked independently via Krull intersection plus graded Nakayama; Rosenlicht = 16.58, and quotients of a unipotent group cannot be G_m. No duplicates (checked against cocharacter-limit, positive-weight-luna, positive-graded-regular-polynomial, split-solvable-torsors, perfect-unipotent-additive-series), no cycle, statements only, searches recorded, no doubled TeX. Batch 5: lem-trf-smooth-composition is generic; the closures reach generic fpqc smoothness descent and a cover-descent definition, none part of the trace formula or Poincaré duality, so OK. tool_uses accepted (smooth base change, smooth composition, product components). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SplitTorusNoInvariantsUnipotence",
+  "declaration": "AlgebraicGeometry.splitTorus_noInvariants_splitUnipotent",
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitTorusNoInvariantsUnipotence.lean",
+  "statement": "theorem splitTorus_noInvariants_splitUnipotent (k : Type u) [Field k] (H S : Grp (Over (Spec (.of k)))) [IsAffine H.X.left] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] [Smooth H.X.hom] [GeometricallyConnected H.X.hom] (r : ℕ) (hS : Nonempty (S ≅ MultiplicativeType.splitTorus k r)) [ModObj S.X H.X] (hAut : TorusCharacterTangent.ActsByGroupAutomorphisms S H) (hInv : ∀ v : GrpObj.Lie H.X, (∀ (R : Type u) [CommRing R] [Algebra k R] (s : points S.X R), points.map S.X (TrivSqZeroExt.inlAlgHom k R R) s • points.map H.X (DualNumber.lift ⟨(Algebra.ofId k (DualNumber R), DualNumber.eps), DualNumber.eps_mul_eps, fun _ ↦ Commute.all _ _⟩) (GrpObj.tangentPoint v) = points.map H.X (DualNumber.lift ⟨(Algebra.ofId k (DualNumber R), DualNumber.eps), DualNumber.eps_mul_eps, fun _ ↦ Commute.all _ _⟩) (GrpObj.tangentPoint v)) → v = 0) : (∃ (m : ℕ) (U : Fin (m + 1) → Grp (Over (Spec (.of k)))), Nonempty (U 0 ≅ H) ∧ Nonempty (U (Fin.last m) ≅ Grp.trivial _) ∧ (∀ a : Fin (m + 1), Smooth (U a).X.hom ∧ GeometricallyConnected (U a).X.hom) ∧ ∀ a : Fin m, ∃ (i : U a.succ ⟶ U a.castSucc) (q : U a.castSucc ⟶ Grp.mk (StandardGroupSchemes.additive k)), IsClosedSubgroupScheme i.hom.hom ∧ IsNormalSubgroupScheme i.hom.hom ∧ SolvableGroupStructure.IsFppfQuotient i.hom.hom q) ∧ SolvableGroupStructure.IsUnipotent H",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of 205b632f0e5: coefficient extension is inlined using Mathlib DualNumber.lift (def-sc-dual-numbers), not an unowned helper of a theorem node. def-wf-lie-algebra-derivation owns the canonical Lie space and tangent points. The algebraic fixed-vector condition, geometric additive series, and matrix-unipotence conclusion are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f156154e",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery of 205b RETURN. F1 fixed: dualMap from the theorem lem-sfb-affine-group-dual-number-calculus replaced by Mathlib DualNumber.lift ⟨(Algebra.ofId k R[ε], ε), eps_mul_eps, Commute.all⟩, which gives the same map a+bε↦a+bε; theorem removed from stmt_deps and def-sc-dual-numbers cited. F2 fixed: def-wf-lie-algebra-derivation cited, Lie.Bracket imported; both dep records identical to live. F3 fixed: real second reading. Against base only stmt_deps (all def nodes) and lean differ; statement/proof/proof_deps unchanged (no H7). lean.statement verbatim. Clause table and edge cases (r=0, H=1, R=0, char p, single universe u) re-checked. No new defs, sorry only, docstrings with Milne 16.58/16.62-16.63 and blueprint tag. Advisory: inline series instead of SplitUnipotentLength, previously accepted. No compile run (no file changed)."
+ }
+}

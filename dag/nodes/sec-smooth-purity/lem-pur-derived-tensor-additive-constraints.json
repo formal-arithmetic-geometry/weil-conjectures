@@ -20,11 +20,12 @@
  ],
  "proof": [
   {
-   "text": "First check that all iterated models used below are resolving. By [lem-pur-kflat-total-tensor-model], $T(E,F)$ is K-flat with flat terms for $E,F\\in\\mathcal P$. By [lem-weil-pbc-kflat-fixed-tensor-triangulated], every $E[a]$ is in $\\mathcal P$. By [lem-pc-kflat-closure], K-flat complexes and flat sheaves are closed under countable direct sums, hence finite sums (extend the finite family by zero objects). The same lemma puts every flat sheaf $P[0]$ in $\\mathcal P$. Apply the total-tensor model theorem to $P[0],Q[0]$: its degree-zero term $P\\otimes_{\\mathcal O}Q$ is flat, and all other terms are zero. The specified representative comparison $r$ therefore gives $P[0]\\otimes^LQ[0]\\cong(P\\otimes_{\\mathcal O}Q)[0]$.",
+   "text": "Tensor and shifts preserve the resolving property by lem-pur-kflat-total-tensor-model and lem-weil-pbc-kflat-fixed-tensor-triangulated. For a finite family E, tensor with any acyclic complex preserves its coproduct; homology is additive and hence preserves this finite coproduct. Each summand has zero homology, so the coproduct is K-flat. Its terms are flat: the finite coproduct is canonically a finite product, evaluation preserves this product, and categorical flatness is closed under finite products. Translate between categorical and site flatness by the tensor comparison of lem-weil-pbc-independent-sheaf-tensor-colimits. A flat sheaf in degree zero has flat terms (the other terms vanish), and lem-weil-pbc-independent-bounded-flat-kflat proves its K-flatness. Categorical flatness is closed under tensor. Compose the source-library single-first-factor tensor isomorphism with singleMapHomologicalComplex to obtain the required degree-zero chain comparison; its summand formula is the identity by the defining total inclusion. Compose its localization with the inverse of the published representative comparison for the derived comparison.",
    "uses": [
     "lem-pur-kflat-total-tensor-model",
     "lem-weil-pbc-kflat-fixed-tensor-triangulated",
-    "lem-pc-kflat-closure",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
     "lem-weil-pbc-site-derived-tensor-descent"
    ],
    "elementary": false,
@@ -47,10 +48,21 @@
    }
   },
   {
-   "text": "Use the natural chain isomorphisms of [lem-pur-total-tensor-signed-coherence]: $t^{\\rm Ch}_{a,b}$ multiplies the shifted bidegree $(p,q)$ by $(-1)^{bp}$, $\\alpha^{\\rm Ch}$ reassociates without a sign, and $\\sigma^{\\rm Ch}$ has sign $(-1)^{pq}$. Their inverses are given there as well. Localize these maps and insert $r$ and the localization shift comparisons of [def-weil-abstract-derived-category]. Naturality on $\\mathcal P$ follows from chain naturality: every homotopy-category morphism is a homotopy class of a chain map, and the given tensor and $r$ are natural on those homotopy classes by [lem-weil-pbc-site-derived-tensor-descent]. Step 1 ensures that shifted and iterated arguments of $r$ are in its stated domain. The next two steps spell out the resulting representative transformations before extending them by Step 2.",
+   "text": "The published TensorPresentation packages the homotopy tensor, derived tensor, and their natural comparison isomorphisms. Restrict its homotopy comparison to resolving chain models, map it to the derived category, invert it, and compose with the restricted resolving comparison. The native tensor and total tensor agree on objects; their morphism formulas agree by the defining tensorHom formula. A generic component calculation identifies this composite with exactly the published representative isomorphism. Thus that representative map is natural jointly in both resolving complexes, without choosing fixed-variable witnesses. Construct the chain associator as the native monoidal associator, symmetry as the native Koszul braiding, and the shift comparison from the two native tensor-shift natural isomorphisms. These are exactly the prescribed maps, so no separate summand-coherence theorem is required. Tensor and shift closure ensure all representative components exist.",
    "uses": [
-    "lem-pur-total-tensor-signed-coherence",
     "def-weil-abstract-derived-category",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), details omitted there, using Tag 06YU (definition-derived-tor) and Tag 07A2 (lemma-tensor-product-K-flat); agent-written normalized localization argument."
+   }
+  },
+  {
+   "text": "For a resolving triple define comparisons, with composition read right to left,\n$$A_L=(r_{E,F}\\otimes^L1_{qG})\\circ r_{T(E,F),G},\\qquad A_R=(1_{qE}\\otimes^Lr_{F,G})\\circ r_{E,T(F,G)}.$$\nTheir targets are $(qE\\otimes^LqF)\\otimes^LqG$ and $qE\\otimes^L(qF\\otimes^LqG)$, respectively. Thus the representative associator is exactly\n$$A_R\\circ q(\\alpha^{\\rm Ch}_{E,F,G})\\circ A_L^{-1}.$$\nAll factors are natural isomorphisms by [lem-weil-pbc-site-derived-tensor-descent] and the native chain natural isomorphisms. Apply Step 2 for three variables to this transformation and its inverse. This constructs a derived natural isomorphism $\\alpha$ with precisely the required square; faithfulness makes it the unique such natural isomorphism.",
+   "uses": [
     "lem-weil-pbc-site-derived-tensor-descent"
    ],
    "elementary": false,
@@ -60,23 +72,10 @@
    }
   },
   {
-   "text": "For a resolving triple define comparisons, with composition read right to left,\n$$A_L=(r_{E,F}\\otimes^L1_{qG})\\circ r_{T(E,F),G},\\qquad A_R=(1_{qE}\\otimes^Lr_{F,G})\\circ r_{E,T(F,G)}.$$\nTheir targets are $(qE\\otimes^LqF)\\otimes^LqG$ and $qE\\otimes^L(qF\\otimes^LqG)$, respectively. Thus the representative associator is exactly\n$$A_R\\circ q(\\alpha^{\\rm Ch}_{E,F,G})\\circ A_L^{-1}.$$\nAll factors are natural isomorphisms by [lem-weil-pbc-site-derived-tensor-descent] and [lem-pur-total-tensor-signed-coherence]. Apply Step 2 for three variables to this transformation and its inverse. This constructs a derived natural isomorphism $\\alpha$ with precisely the required square; faithfulness makes it the unique such natural isomorphism.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pur-total-tensor-signed-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), details omitted there, using Tag 06YU (definition-derived-tor) and Tag 07A2 (lemma-tensor-product-K-flat); agent-written normalized localization argument."
-   }
-  },
-  {
-   "text": "Write $e_{E,a}:q(E[a])\\xrightarrow{\\sim}(qE)[a]$ for the fixed localization shift comparison of [def-weil-abstract-derived-category]. On resolving pairs form\n$$t_{a,b}=r_{E,F}[a+b]\\circ e_{T(E,F),a+b}\\circ q(t^{\\rm Ch}_{a,b})\\circ r_{E[a],F[b]}^{-1}\\circ(e_{E,a}^{-1}\\otimes^Le_{F,b}^{-1}),$$\nThis is a map $(qE)[a]\\otimes^L(qF)[b]\\to(qE\\otimes^LqF)[a+b]$. Similarly the representative symmetry is\n$$r_{F,E}\\circ q(\\sigma^{\\rm Ch}_{E,F})\\circ r_{E,F}^{-1}.$$\nThe comparisons $r$ are those of [lem-weil-pbc-site-derived-tensor-descent], and the chain maps and their inverses are those of [lem-pur-total-tensor-signed-coherence]. These formulas are natural isomorphisms between the restrictions of the desired derived functors. Step 2 for two variables extends each and its inverse uniquely. They give the asserted $t_{a,b}$ and $\\sigma$ with their fixed signs; uniqueness is relative to the displayed comparisons, as required.",
+   "text": "Write $e_{E,a}:q(E[a])\\xrightarrow{\\sim}(qE)[a]$ for the fixed localization shift comparison of [def-weil-abstract-derived-category]. On resolving pairs form\n$$t_{a,b}=r_{E,F}[a+b]\\circ e_{T(E,F),a+b}\\circ q(t^{\\rm Ch}_{a,b})\\circ r_{E[a],F[b]}^{-1}\\circ(e_{E,a}^{-1}\\otimes^Le_{F,b}^{-1}),$$\nThis is a map $(qE)[a]\\otimes^L(qF)[b]\\to(qE\\otimes^LqF)[a+b]$. Similarly the representative symmetry is\n$$r_{F,E}\\circ q(\\sigma^{\\rm Ch}_{E,F})\\circ r_{E,F}^{-1}.$$\nThe comparisons $r$ are those of [lem-weil-pbc-site-derived-tensor-descent], and the chain maps and their inverses are the native chain isomorphisms. These formulas are natural isomorphisms between the restrictions of the desired derived functors. Step 2 for two variables extends each and its inverse uniquely. They give the asserted $t_{a,b}$ and $\\sigma$ with their fixed signs; uniqueness is relative to the displayed comparisons, as required.",
    "uses": [
     "def-weil-abstract-derived-category",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pur-total-tensor-signed-coherence"
+    "lem-weil-pbc-site-derived-tensor-descent"
    ],
    "elementary": false,
    "source": {
@@ -119,18 +118,18 @@
  "proof_deps": [
   "lem-pur-kflat-total-tensor-model",
   "lem-weil-pbc-kflat-fixed-tensor-triangulated",
-  "lem-pc-kflat-closure",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-localization-universal-property",
   "lem-sfb-product-localization",
-  "lem-pur-total-tensor-signed-coherence",
   "def-weil-abstract-derived-category",
   "def-weil-triangulated-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), details omitted there, using Tag 06YU (definition-derived-tor) and Tag 07A2 (lemma-tensor-product-K-flat); agent-written normalized localization argument."
+  "place": "Tag 0FPT, using native chain natural isomorphisms, finite biproduct preservation, independent-coefficient bounded-flat criterion, and the published resolving localization; Lean proof by P3, 2026-10-22."
  },
  "mathlib_searches": [
   {
@@ -254,8 +253,7 @@
  "tool_uses": [
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-pur-kflat-total-tensor-model",
-  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
-  "lem-pc-kflat-closure"
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -271,6 +269,8 @@
   "declarations": [
    "SheafOfModules.DerivedTensorConstraints.Modules",
    "SheafOfModules.DerivedTensorConstraints.Complex",
+   "SheafOfModules.DerivedTensorConstraints.complexMonoidalStruct",
+   "SheafOfModules.DerivedTensorConstraints.complexMonoidal",
    "SheafOfModules.DerivedTensorConstraints.resolvingComplex",
    "SheafOfModules.DerivedTensorConstraints.Model",
    "SheafOfModules.DerivedTensorConstraints.resolvingHomotopy",
@@ -298,10 +298,10 @@
   "file": "lean/Sheaf/Algebra/Homology/DerivedTensorAdditiveConstraints.lean",
   "statement": "theorem existsUnique_derived_tensor_constraints : ∃! s : (∀ a b : ℤ, shiftedSource R a b ≅ shiftedTarget R a b) × (leftAssociated R ≅ rightAssociated R) × (tensor R ≅ swapped R), IsNormalized R s.1 s.2.1 s.2.2",
   "branch": "newtargets-dag",
-  "by": "Q104",
-  "date": "2026-10-21",
+  "by": "P3",
+  "date": "2026-10-22",
   "existing": false,
-  "note": "Four sorry-only statements jointly render every clause: resolving model closure and normalized degree-zero comparison; unique derived natural shift, reassociation and Koszul-symmetry constraints; full faithfulness and equality detection for every finite product of resolving homotopy localizations; separate additivity, actual biproduct diagram preservation and both map-add identities. Helper definitions reuse the published tensor, its actual representativeIso, Mathlib signed shifts, chain associator and upstream Koszul braiding. All site, coefficient, localization, finite-index and target-category universes remain independent."
+  "note": "Four statements jointly render every clause: resolving model closure and normalized degree-zero comparison; unique derived natural shift, reassociation and Koszul-symmetry constraints; full faithfulness and equality detection for every finite product of resolving homotopy localizations; separate additivity, actual biproduct diagram preservation and both map-add identities. Transparent dictionary abbreviations and helper definitions reuse the published tensor, its actual representativeIso, Mathlib signed shifts, chain associator and upstream Koszul braiding. All site, coefficient, localization, finite-index and target-category universes remain independent."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -310,5 +310,27 @@
   "group": "Q104",
   "result": "pass",
   "note": "Read node, all 9 stmt_dep records, module, report and dependency declarations (KFlatFixedTensor representativeIso/derivedTensor/kFlat_fixed_tensor_triangulated, siteDerivedTensorIndependentCoefficients, upstream braiding, Mathlib BifunctorShift and associator). Every clause matches: EssentiallySmall.{r} ringed site in CommRingCat with independent universes; P = recorded K-flat plus termwise flat; tensor and r are the published ones, not new choices; closure under tensor, every shift and Fin n sums including n=0; flat P[0] in P; P⊗Q flat with unsigned degree-zero chain iso c pinned and derived iso = r^-1 then Q(c); chainShift sign (-1)^(bp) from mapBifunctorShift₂Iso's (n₁*y).negOnePow, shift₁ and shiftFunctorAdd unsigned; shiftRepresentative equals the step-5 formula factor by factor; alpha = A_L^-1 then Q(unsigned associator) then A_R; sigma uses braiding with (-1)^(pq); ∃! over natural isos; restriction fully faithful for any Finite I (empty included) and any category; additivity, bilimit preservation and both map-add identities with no boundedness or flatness. Only the item lean field changed, statement verbatim, no stmt_deps added; theorem-module defs are .choose-built; plain imports are proof-dep modules; docstrings and line lengths OK; no duplicate found. Not recompiled (no file changed). Advisory: the ∃ d = r^-1 then Q(c) clause is tautological (content is c); full faithfulness is stated on Pi categories I→D, so prod-shaped uses need transport."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261022T032609-L-2043010",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

@@ -1,0 +1,284 @@
+{
+ "id": "lem-pd-ringed-kflat-native-model-identification",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "kind": "statement",
+ "title": "Ringed and abstract native K-flat tensor models with localization transformations",
+ "statement": "Let $(C,J)$ be a site small relative to its module universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], $R$ a sheaf of commutative rings, and $\\mathcal M=\\operatorname{Mod}(R)$ [def-weil-sheaf-of-modules-category], with its closed symmetric sheaf tensor [def-pur-sheaf-tensor-product]. Suppose a functor from $\\mathcal M$ to its flat objects and a natural epimorphism from that functor to the identity have been fixed (functorial flat resolutions). Use unbounded integer cochain complexes, the homotopy category $K(R)$, and its quasi-isomorphism localization $q:K(R)\\to D(R)$ [def-weil-abstract-derived-category]. All tensor complexes are signed direct-sum totals [def-pc-tensor-complex-sheaves]. Call a complex acyclic when all its cohomology sheaves vanish. Use acyclic-test K-flatness [def-pc-kflat-complex] and two-sided quasi-isomorphism-test K-flatness [def-sfb-preserves-kflat-quasi-iso]. Let $\\mathcal P$ be the full homotopy subcategory of acyclic-test K-flat complexes with flat terms [def-pc-flat-sheaf-modules].\nLet $B_R$ be the independently constructed ringed-site K-flat derived tensor, with model maps $r^R_{P,Q}:q\\operatorname{Tot}(P\\otimes_R Q)\\cong B_R(qP,qQ)$ for $P,Q\\in\\mathcal P$ [lem-weil-pbc-site-derived-tensor-descent]. Give it the associator and both unitors induced from unsigned cochain reassociation and the regular degree-zero complex [lem-sf-ringed-derived-closed-symmetric-monoidal]. Let $B_a$ be the native tensor of the abstract derived monoidal construction [lem-sfb-derived-monoidal], using two-sided K-flat complexes, with its canonical model maps $r^a$ and its constraints induced from complexes. Write $\\varepsilon^R_{U,V}:B_R(qU,qV)\\to q\\operatorname{Tot}(U\\otimes_R V)$ and $\\varepsilon^a$ for the canonical derived-to-ordinary transformations obtained from the respective K-flat resolution constructions; these are the inverses of the model maps on resolving pairs.\nThe two tests for K-flatness are equivalent for every complex of $R$-module sheaves, including those without flat terms. There is a unique natural isomorphism $w:B_a\\cong B_R$ with\n$$w_{qP,qQ}\\,r^a_{P,Q}=r^R_{P,Q}\\qquad(P,Q\\in\\mathcal P).$$\nFor every pair of complexes $U,V$ it satisfies\n$$\\varepsilon^R_{U,V}\\,w_{qU,qV}=\\varepsilon^a_{U,V}.$$\nEach localization transformation is invertible whenever either $U$ or $V$ is K-flat, even if it has nonflat terms; on every K-flat pair the same normalization $w\\,r^a=r^R$ holds for the corresponding model maps. With unit comparison the identity of $q(R[0])$, $w$ identifies the two associators and both unitors on all derived objects. Thus a comparison normalized using the ringed model and compatible with its localization transformation on all complex pairs is normalized also in the abstract native model on every K-flat pair. No boundedness assumption or identification of site object and morphism universes is imposed. Composition is read right to left.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent extraction of original lem-pd-section-kflat-tensor-comparison Step 6; Tags 06YP (lemma-K-flat-quasi-isomorphism), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YU (definition-derived-tor), 0FPQ (lemma-symmetric-monoidal-cat-complexes), 0FPT (lemma-symmetric-monoidal-derived)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-derived-monoidal",
+  "lem-sf-ringed-derived-native-tensor",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the native kFlat theorem and Mathlib kFlat_quotient_obj_iff to turn acyclic-test K-flatness into the two-sided quasi-isomorphism test. Conversely apply the right tensor test to the quasi-isomorphism from the zero complex to an acyclic complex; tensor sends the zero complex to zero, so its target is acyclic. No flat-term condition enters either implication.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-sfb-preserves-kflat-quasi-iso",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YP, 06YS, 06YU, 0FPQ and 0FPT; comparison by localization and naturality, expanded by F5."
+   }
+  },
+  {
+   "text": "The proved kFlatLocalization helper of RingedDerivedTensorHomAdjunction says that the inclusion of all acyclic-test K-flat complexes followed by Q is a localization. On its product with itself compose the inverse native comparison with T.comparison and use Localization.liftNatIso. Its restriction is the prescribed comparison on every K-flat pair. To detect equality on flat-term resolving pairs, choose the existing K-flat resolutions of arbitrary complex inputs, use naturality and cancel the images of the quasi-isomorphism augmentations. Localization.natTrans_ext then detects equality on arbitrary derived inputs.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sf-ringed-derived-native-tensor",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YP, 06YS, 06YU, 0FPQ and 0FPT; comparison by localization and naturality, expanded by F5."
+   }
+  },
+  {
+   "text": "Assemble the native localization tensorator as a natural transformation and compose it with the inverse comparison to construct the ringed localization transformation. On resolving pairs it equals the inverse ringed model map. Resolve arbitrary pairs and cancel the ringed tensor of the augmentation isomorphisms to show uniqueness of a transformation with this normalization. This proves the all-complex equation. Native isIso_mu proves invertibility whenever either factor is K-flat, and the comparison transfers it to the ringed transformation. For the one-K-flat representative normalization, resolve both inputs and combine the naturality squares of the two model maps and the comparison; invertibility of the native model maps and the derived augmentation tensors makes the localized ordinary tensor map cancellable.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-pc-kflat-resolution",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YP, 06YS, 06YU, 0FPQ and 0FPT; comparison by localization and naturality, expanded by F5."
+   }
+  },
+  {
+   "text": "Identify the cochain associator and unitor maps in hc with the native complex constraints. Reuse the proved ordinaryAssociator_unique and ordinaryRightUnitor_unique helpers from RingedOrdinaryEvaluationLocalization for those two identities; degreewise tensor-generator extensionality proves the left unitor identity, with nonzero unit degrees vanishing. On triples of K-flat representatives substitute the model comparison equations into the two associator squares, use naturality to commute the comparison past the inner model maps, and cancel the outer and inner native model isomorphisms. The outer pairs require only one K-flat factor, so tensor-closure of flat-term resolutions is unnecessary. Equality of the two natural transformations extends along the triple product of the K-flat localization. The same argument, using one-K-flat unit pairs and cancelling their native model maps, proves both unitor equations on K-flat representatives and extends along the localization to all objects.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-ringed-tensor-constraint-completion",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sfb-ringed-ordinary-evaluation-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YP, 06YS, 06YU, 0FPQ and 0FPT; comparison by localization and naturality, expanded by F5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ringed-tensor-constraint-completion",
+  "lem-sfb-ringed-ordinary-evaluation-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YP, 06YS, 06YU, 0FPQ and 0FPT; comparison by localization and naturality, expanded by F5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The ringed site derived tensor constructed on flat term K-flat resolutions is canonically monoidally isomorphic to the native derived tensor with the same comparison on all K-flat pairs and all complex localization maps",
+   "results": "{\"t\": \"2026-10-24T13:24:55Z\", \"tool\": \"leanfinder\", \"query\": \"The ringed site derived tensor constructed on flat term K-flat resolutions is canonically monoidally isomorphic to the native derived tensor with the same comparison on all K-flat pairs and all complex localization maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor_obj\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor_map\", \"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'_obj_map\"], \"digest\": \"ae4000f238aee886\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Tor computes individual derived module functors using projective resolutions; monoidal localization assumes stability of the morphism class under tensor. Neither compares the acyclic-test ringed tensor and abstract two-sided K-flat tensor with their all-complex localization transformations and constraints."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compare the native monoidal derived category tensor with ringed site K-flat tensor preserving associators unitors and resolution counits",
+   "results": "{\"t\": \"2026-10-24T13:24:56Z\", \"tool\": \"leansearch\", \"query\": \"Compare the native monoidal derived category tensor with ringed site K-flat tensor preserving associators unitors and resolution counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.monoidalCategoryStruct\", \"PresheafOfModules.monoidalCategory\", \"CategoryTheory.Mon.mon\", \"ModuleCat.hom_tensorHom\", \"ModuleCat.MonoidalCategory.tensorHom_def\", \"CategoryTheory.MonoidalCategoryStruct.noConfusionType\", \"AlgCat.instMonoidalCategoryStruct\", \"CategoryTheory.MonoidalCategoryStruct.mk\"], \"digest\": \"bc5b594c0847cb14\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Tor computes individual derived module functors using projective resolutions; monoidal localization assumes stability of the morphism class under tensor. Neither compares the acyclic-test ringed tensor and abstract two-sided K-flat tensor with their all-complex localization transformations and constraints."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal",
+   "results": "{\"t\": \"2026-10-24T13:27:04Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.Monoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.instId\", \"CategoryTheory.Functor.Monoidal\", \"CategoryTheory.Equivalence.instMonoidalFunctorRefl\", \"CategoryTheory.Equivalence.instMonoidalInverseRefl\", \"CategoryTheory.Functor.instMonoidalProdDiag\", \"CategoryTheory.Functor.CoreMonoidal.toMonoidal\", \"CategoryTheory.Functor.Monoidal.toLaxMonoidal\", \"CategoryTheory.Functor.Monoidal.toOplaxMonoidal\"], \"digest\": \"b94f9462ce410f2b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Tor computes individual derived module functors using projective resolutions; monoidal localization assumes stability of the morphism class under tensor. Neither compares the acyclic-test ringed tensor and abstract two-sided K-flat tensor with their all-complex localization transformations and constraints."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|[Dd]erived.*[Tt]ensor|[Tt]ensor.*[Dd]erived",
+   "results": "{\"t\": \"2026-10-24T13:26:00Z\", \"tool\": \"grep\", \"query\": \"KFlat|[Dd]erived.*[Tt]ensor|[Tt]ensor.*[Dd]erived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\"], \"digest\": \"ac25ea8a01109eb0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Tor computes individual derived module functors using projective resolutions; monoidal localization assumes stability of the morphism class under tensor. Neither compares the acyclic-test ringed tensor and abstract two-sided K-flat tensor with their all-complex localization transformations and constraints."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorBifunctorIso|IsMonoidal|KFlat",
+   "results": "{\"t\": \"2026-10-24T13:29:11Z\", \"tool\": \"grep\", \"query\": \"tensorBifunctorIso|IsMonoidal|KFlat\", \"sub\": \"CategoryTheory/Localization/Monoidal\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\"], \"digest\": \"377a41827425a5b5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Tor computes individual derived module functors using projective resolutions; monoidal localization assumes stability of the morphism class under tensor. Neither compares the acyclic-test ringed tensor and abstract two-sided K-flat tensor with their all-complex localization transformations and constraints."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two K-flat derived tensor constructions on ringed sites admit a unique comparison preserving resolution model maps and derived-to-ordinary transformations",
+   "results": "{\"t\": \"2026-10-24T13:57:50Z\", \"tool\": \"leanfinder\", \"query\": \"Two K-flat derived tensor constructions on ringed sites admit a unique comparison preserving resolution model maps and derived-to-ordinary transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.compatiblePreservingOfFlat\", \"IsTensorProduct.map_injective_of_flat_right_left\", \"CategoryTheory.Tor'_obj_obj\", \"PresheafOfModules.Derivation.Universal.fac\", \"CategoryTheory.Tor'_map_app\", \"PresheafOfModules.Derivation.Universal.mk.inj\", \"CategoryTheory.Tor_obj\", \"Module.Flat.of_flat_tensorProduct\"], \"digest\": \"0c35452689616af5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary flat modules, projective-resolution Tor, abstract left-derived uniqueness, or monoidal localization assuming tensor-stable arrows; none supplies both specified ringed and abstract K-flat models, their all-complex augmentation maps, and monoidal normalization in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Acyclic tensor test K-flatness agrees with tensor preserving quasi-isomorphisms and K-flat derived tensor models are uniquely isomorphic",
+   "results": "{\"t\": \"2026-10-24T13:58:32Z\", \"tool\": \"leansearch\", \"query\": \"Acyclic tensor test K-flatness agrees with tensor preserving quasi-isomorphisms and K-flat derived tensor models are uniquely isomorphic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_exact\", \"Module.Flat.iff_lTensor_preserves_injective_linearMap\", \"Module.Flat.iff_flat_tensorProduct\", \"Module.Flat.iff_rTensor_preserves_injective_linearMapₛ\", \"HomologicalComplex.Acyclic\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_injective_linearMapₛ\"], \"digest\": \"9f64cec70611941b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary flat modules, projective-resolution Tor, abstract left-derived uniqueness, or monoidal localization assuming tensor-stable arrows; none supplies both specified ringed and abstract K-flat models, their all-complex augmentation maps, and monoidal normalization in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.Monoidal.tensorBifunctorIso",
+   "results": "{\"t\": \"2026-10-24T13:59:14Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\"], \"digest\": \"522e68eeb67cedb5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary flat modules, projective-resolution Tor, abstract left-derived uniqueness, or monoidal localization assuming tensor-stable arrows; none supplies both specified ringed and abstract K-flat models, their all-complex augmentation maps, and monoidal normalization in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|derivedTensor|tensorBifunctorIso",
+   "results": "{\"t\": \"2026-10-24T13:59:33Z\", \"tool\": \"grep\", \"query\": \"KFlat|kFlat|derivedTensor|tensorBifunctorIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\"], \"digest\": \"82a386d919bfdcc4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary flat modules, projective-resolution Tor, abstract left-derived uniqueness, or monoidal localization assuming tensor-stable arrows; none supplies both specified ringed and abstract K-flat models, their all-complex augmentation maps, and monoidal normalization in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of natural isomorphisms between two total left derived bifunctors compatible with their counits on K-flat resolutions",
+   "results": "{\"t\": \"2026-10-24T13:59:35Z\", \"tool\": \"leanfinder\", \"query\": \"Uniqueness of natural isomorphisms between two total left derived bifunctors compatible with their counits on K-flat resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftDerivedNatIso\", \"CategoryTheory.Functor.leftDerivedUnique\", \"CategoryTheory.Functor.leftDerivedNatIso_hom\", \"CategoryTheory.Functor.leftDerivedNatIso_inv\", \"CategoryTheory.Functor.leftDerived_ext\", \"CategoryTheory.Functor.rightDerivedNatIso\", \"CategoryTheory.Functor.rightDerivedUnique\", \"CategoryTheory.Functor.leftDerivedNatTrans_fac\"], \"digest\": \"f774deba73b78fc6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary flat modules, projective-resolution Tor, abstract left-derived uniqueness, or monoidal localization assuming tensor-stable arrows; none supplies both specified ringed and abstract K-flat models, their all-complex augmentation maps, and monoidal normalization in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pd-section-kflat-tensor-comparison",
+  "date": "2026-10-24",
+  "group": "NO"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Seeded nt-target-poincare-isiso Step 2, via lem-pd-module-ringed-topos-derived-comparison Step 3 and lem-pd-section-derived-tensor-normalization Step 1: internal/section K-flat tensor identification with specified representative map, unit and constraints. Re-split original Step 6: acyclic-test versus two-sided K-flat models, all-complex localization transformations, and compatibility of native constraints.",
+   "via": [
+    "lem-pd-section-kflat-tensor-comparison",
+    "lem-pd-section-derived-tensor-normalization",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-pd-ringed-kflat-native-model-identification",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved equivalence of the K-flat tests, descended the explicitly normalized comparison, checked its arbitrary-pair augmentation equation, deduced the one-K-flat case by two factorizations, and verified associator and unit diagrams on resolving representatives. Reused all needed lemmas; no new nodes. Each citation was read and quoted in citations.json.",
+  "blueprint": "Realizes the seeded nt-target-poincare-isiso Step 2 via the module-ringed-topos comparison Step 3, section tensor normalization Step 1 and original section K-flat tensor comparison Step 6; no imported blueprint node states this independent-model identification.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+    "why": "Generic ringed-site signed tensor lemma supplies quasi-isomorphism preservation with arbitrary endpoints; no Verdier-exchange unit lemma states it."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site resolving-subcategory localization supplies extension and uniqueness of the comparison and its objectwise detection."
+   },
+   {
+    "node": "lem-sfb-derived-monoidal",
+    "why": "The abstract tensor model and its constraints are explicitly part of the item; this generic construction supplies their resolving computation."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic unbounded flat-term K-flat replacements provide the two arbitrary-input augmentations."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic module-sheaf Grothendieck property checks the native flat-term tensor theorem hypotheses without restricting the ring sheaf."
+   },
+   {
+    "node": "lem-pur-flat-term-kflat-tensor-native",
+    "why": "Generic closure under total tensor keeps intermediate resolving models termwise flat."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "The independently specified ringed-site tensor constraints are part of the item and are computed by this generic monoidal theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-712d4353f",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-712d4353f (reviewer sub-agent of L); spot-checked: PASS. This delivery adds no new nodes. Its statement and stmt_deps are byte-identical to the base copy, so nothing is weakened. A dependency search over all 33,277 snapshot nodes finds no cycle back to the item. Sources: Stacks 06YP, 06YS, 06YT, 06YU, 07A2, 0FPQ and 0FPT match their labels in tags/tags. 0FPT (lemma-symmetric-monoidal-derived) has its proof omitted, so proof_origin by agent is correct. No SGA source is used. Step 1: the cone-signs lemma gives preservation of quasi-isomorphisms on both sides with arbitrary endpoints. The converse via 0→F is right, and def-pc puts the acyclic complex in the left factor. Step 2: e=r^R(r^a)^{-1} is natural on P×P, and the extension-and-uniqueness clause of site-descent applied to e and e^{-1} gives an inverse. Step 3: I recomputed ε^R w D_a=T(r^a)^{-1}=ε^a D_a; T is never inverted. Step 4: both factorizations check, with Q, U, P and V K-flat as stated. Step 5: the native theorem's hypotheses hold (Grothendieck, closed symmetric, K-flat by Step 1, flat terms), so T(P,Q) and R[0] lie in P. Step 6: I recomputed B_R(w,1)w C^a_L=C^R_L and derived the associator equation by cancelling C^a_L. It extends to all triples by essential surjectivity and naturality. Step 7: unitors by the same cancellation; the final clause follows from ε^a=ε^R w. Small cases: Z/2[0] (not K-flat; Step 3 does not invert T), a contractible complex with nonflat terms, and the zero ring. I accept the 7 cross-unit tool_uses as necessary."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedKFlatNativeModelIdentification",
+  "declaration": "CategoryTheory.RingedKFlatModel.ringed_kFlat_native_model_identification",
+  "declarations": [
+   "CategoryTheory.RingedKFlatModel.nativeTensor",
+   "CategoryTheory.RingedKFlatModel.nativeLocalization",
+   "CategoryTheory.RingedKFlatModel.Normalized",
+   "CategoryTheory.RingedKFlatModel.Localization",
+   "CategoryTheory.RingedKFlatModel.LocalizationNormalized",
+   "CategoryTheory.RingedKFlatModel.Constraints",
+   "CategoryTheory.RingedKFlatModel.ringed_kFlat_native_model_identification"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedKFlatNativeModelIdentification.lean",
+  "statement": "theorem ringed_kFlat_native_model_identification (_flatResolution : Abelian.LeftResolution (ObjectProperty.flat.ι : _ ⥤ RingedTensorModules.{c, v, u} J R)) (β : @SymmetricCategory (DerivedCategory (RingedTensorModules.{c, v, u} J R)) _ S.monoidal) (hc : RingedDerivedTensorCoherence.{c, v, u, w} J R S T β) : (∀ P : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ, P.IsKFlatIndependentCoefficients ↔ P.IsKFlatForTotalTensor) ∧ (∃! ε : Localization.{c, v, u, w} J R S, LocalizationNormalized.{c, v, u, w} J R S T ε) ∧ ∀ ε : Localization.{c, v, u, w} J R S, LocalizationNormalized.{c, v, u, w} J R S T ε → ∃ e : nativeTensor.{c, v, u, w} J R ≅ S.tensor, Normalized.{c, v, u, w} J R S T e ∧ (∀ e' : nativeTensor.{c, v, u, w} J R ≅ S.tensor, Normalized.{c, v, u, w} J R S T e' → e' = e) ∧ (∀ U V : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ, e.hom.app (DerivedCategory.Q.obj U, DerivedCategory.Q.obj V) ≫ ε.app (U, V) = nativeLocalization.{c, v, u, w} J R U V) ∧ (∀ U V : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ, (U.IsKFlatIndependentCoefficients ∨ V.IsKFlatIndependentCoefficients) → IsIso (ε.app (U, V)) ∧ IsIso (nativeLocalization.{c, v, u, w} J R U V)) ∧ (∀ (U V : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ) (hU : U.IsKFlatIndependentCoefficients) (hV : V.IsKFlatIndependentCoefficients), (RingedDerivedNative.tensorIso.{c, v, u, w} J R U V (Or.inl hU)).hom ≫ e.hom.app (DerivedCategory.Q.obj U, DerivedCategory.Q.obj V) = (hc.tensorIso U V (Or.inl hU)).hom) ∧ Constraints (RingedDerivedNative.monoidal.{c, v, u, w} J R) S.monoidal (DerivedCategory.Q.obj (ringedTensorUnitComplex.{c, v, u} J R)) (RingedDerivedNative.unitIso.{c, v, u, w} J R) hc.unitIso e",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The arbitrary coherent ringed tensor S and its recorded natural models T are retained as inputs. The all-complex ringed localization transformation is uniquely characterized by its resolving normalization; no arbitrary counit or independent tensor is chosen. The native tensor and its tensorator are the existing RingedDerivedNative construction of the abstract K-flat localization. Constraints are expressed with the two recorded unit identifications to q(R[0]), so the common unit comparison is the identity."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6043628bb",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Lean and node record correct; report only. The 'Second reading by NJ' section was a same-worker self-check (H11), replaced in fixes/lem-pd-ringed-kflat-native-model-identification.report.md (Worker report verbatim plus an independent clause-by-clause reading). Checked: the two K-flat tests are equivalent for every P; exactly one ε^R equals (r^R)^-1 on resolving pairs (asserted); ∃ e native≅S.tensor normalized on resolving pairs and unique; e≫ε^R=ε^a on all pairs; both transformations IsIso when either input is K-flat; normalization on all K-flat pairs including nonflat terms; Constraints = monoidal-functor axioms for id with μ=e^-1 and shared unit Q(R[0]). Arbitrary S/T/β/hc covers the ∃ in lem-sf-ringed-derived-closed-symmetric-monoidal. Universes c,v,u,w independent; statement verbatim; one sorry; helpers have real data and docstrings. Theorem stmt_dep lem-sf-ringed-derived-native-tensor is genuine (tensorIso/unitIso built via isIso_mu/isIso_ε): PASS point. Added stmt_deps already landed. Advisory: unused _flatResolution; 'Thus' corollary implied, not stated. No compile (no Lean change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261025T003315-L-3226485",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

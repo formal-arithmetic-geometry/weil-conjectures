@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-dvr-reductive-linear-affine-quotient",
+ "kind": "statement",
+ "title": "A reductive DVR group embeds linearly with affine homogeneous quotient",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring]. An $A$-group scheme is a group object in schemes over $\\operatorname{Spec}A$, with the diagrams of [def-sc-group-scheme] over this base. Let $H$ be a smooth affine finite-type $A$-group scheme [def-sbc-smooth-morphisms, pqf-def-affine-morphism, def-weil-finite-type-morphism]. Suppose its geometric fibres are connected [def-weil-connected-scheme] and have no nontrivial smooth connected normal unipotent subgroup; unipotent means consisting of unipotent matrices in a faithful representation over the geometric residue field. There exist $n\\geq1$ and a homomorphism $i:H\\hookrightarrow L=\\operatorname{GL}_{n,A}$ which is a closed immersion [def-weil-closed-immersion]. Here $\\operatorname{GL}_{n,A}=\\operatorname{Spec}A[x_{ab},d]/(d\\det(x_{ab})-1)$, with multiplication of invertible matrices. The fppf sheaf quotient $Q=L/H$ is represented by an affine $A$-scheme, and its quotient map $q:L\\to Q$ is a represented right $H$-torsor [def-sfb-split-solvable-right-torsors]. The sheaf quotient is the sheafification of the presheaf of right cosets on the big fppf site [def-pc-fppf-site, def-weil-pbc-sheafification]. Both its representation and its torsor map commute with every base change of $A$-schemes. No splitness, completeness, or perfection of the residue field is assumed.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces.pdf",
+  "place": "WANTED locally; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf, Corollary 9.7.7, printed p.528 (affineness). Embedding: Milne, Basic Theory of Affine Group Schemes, VIII, Aside 9.4, printed pp.125--126, Dedekind-domain paragraph, read https://www.jmilne.org/math/CourseNotes/AGS.pdf. These are the two structural inputs in Alper--Halpern-Leistner--Heinloth Section 2, Claim 2."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-sfb-split-solvable-right-torsors",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=\\Gamma(H,\\mathcal O_H)$. Smoothness gives flatness and local finite presentation by sbc-lem-smooth-criterion; affineness makes $H\\to\\operatorname{Spec}A$ quasi-compact and quasi-separated, hence finitely presented. The affine flatness criterion makes $B$ a flat $A$-module. Multiplication, identity and inverse give $B$ its coordinate Hopf $A$-algebra structure $\\Delta$, $\\epsilon$, $S_B$ [def-sfb-affine-coordinate-hopf-algebra]. The affine fibre-product lemma identifies $H\\times_AH$ with $\\operatorname{Spec}(B\\otimes_AB)$, and likewise the triple product with $\\operatorname{Spec}(B\\otimes_AB\\otimes_AB)$, with projections induced by the tensor inclusions; by the affine spectrum dictionary and the tensor pushout universal property, morphisms between these spectra are exactly algebra maps between the tensor products, so the group diagrams are precisely the Hopf identities. Choose algebra generators $b_1,\\ldots,b_r$ of $B$. Apply the finite-free lattice node to the regular coaction $\\Delta:B\\to B\\otimes_AB$ and $T=\\{1,b_1,\\ldots,b_r\\}$. Flatness over the domain $A$ implies torsion-freeness: tensor the injection $A\\xrightarrow{a}A$ for $a\\ne0$. We obtain a finite free stable submodule $V\\subseteq B$ containing $T$. Since $\\epsilon(1)=1$, its rank $n$ is at least one.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-sfb-dvr-comodule-finite-free-lattice",
+    "def-sfb-affine-coordinate-hopf-algebra",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-basic-affine-group-schemes.pdf",
+    "place": "VIII, Aside 9.4, pp.125--126; Aside 4.7, p.117; affine Hopf construction in II and III."
+   }
+  },
+  {
+   "text": "Choose a basis $e_1,\\ldots,e_n$ of $V$ and write $\\Delta(e_j)=\\sum_i e_i\\otimes c_{ij}$. Coassociativity and the counit, by applying the coordinate maps of this finite free basis, give $\\Delta(c_{ij})=\\sum_kc_{ik}\\otimes c_{kj}$ and $\\epsilon(c_{ij})=\\delta_{ij}$. Applying the antipode identities to these equations gives $\\sum_kc_{ik}S_B(c_{kj})=\\delta_{ij}=\\sum_kS_B(c_{ik})c_{kj}$. Thus the matrix $C=(c_{ij})$ is invertible over $B$, and $x_{ij}\\mapsto c_{ij}$, $d\\mapsto\\det(C)^{-1}$ defines an algebra map $A[x_{ij},d]/(d\\det(x)-1)\\to B$. Since $\\operatorname{GL}_{n,A}\\times_A\\operatorname{GL}_{n,A}=\\operatorname{Spec}$ of the tensor square of its coordinate ring by the affine fibre-product lemma, on which matrix multiplication is $x_{ij}\\mapsto\\sum_kx_{ik}\\otimes x_{kj}$, the displayed comultiplication and counit identities say its spectrum map $i:H\\to\\operatorname{GL}_{n,A}$ respects multiplication and identity; inverse compatibility follows from uniqueness of an inverse. Moreover $e_j=(\\epsilon\\otimes1)\\Delta(e_j)=\\sum_i\\epsilon(e_i)c_{ij}$. Its image therefore contains $V$, hence every generator $b_j$; the map is surjective. The affine quotient criterion in def-weil-closed-immersion makes $i$ a closed immersion. This constructs a scheme-theoretic embedding, not just an injection on geometric points.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-basic-affine-group-schemes.pdf",
+    "place": "VIII, Theorem 9.1 proof, p.125, coefficient calculation; Aside 9.4, pp.125--126."
+   }
+  },
+  {
+   "text": "For $L=\\operatorname{GL}_{n,A}$ use the left $H$-action $h\\cdot l=l\\,i(h)^{-1}$. Its orbits are the right cosets, and it is free on every test scheme: cancellation gives $i(h)=1$, and $i$ is injective on all test points: writing $P=A[x_{ij},d]/(d\\det(x)-1)$, the affine fibre-product lemma gives $H\\times_LH=\\operatorname{Spec}(B\\otimes_PB)$, and $B\\otimes_PB=B$ because $P\\to B$ is surjective, so the diagonal of $i$ is an isomorphism and $i$ is a monomorphism. Apply the free-flat-group-space-quotient node with $B=S=\\operatorname{Spec}A$ and $Z=L$. The flatness and local finite presentation were checked in step 1. It supplies an algebraic space $Q$, a flat surjective locally finitely presented map $q:L\\to Q$, fppf local sections, and the sheaf isomorphism $L\\times_AH\\simeq L\\times_QL$, $(l,h)\\mapsto(l,l\\,i(h))$, after changing the order of the factors and replacing $h$ by $h^{-1}$.",
+   "uses": [
+    "lem-sfb-free-flat-group-space-quotient",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 06PH, lemma-quotient-free-action."
+   }
+  },
+  {
+   "text": "The fibre assumptions of the item are exactly those of the reductive-ring-invariant-power-lifting node, which applies to $H$ using the finite presentation from step 1. It gives universal invariant power lifting for arbitrary equivariant algebra quotients over every $A$-algebra. Apply the power-reductive-free-affine-quotient node with $R=A$, $G=H$, $X=L$ and $Y=Q$. Here $L$ is affine by its displayed spectrum, the action is free by step 3, and the required algebraic space, local sections and torsor identity are all furnished there. Consequently $Q$ is an affine $A$-scheme and $q$ is affine finitely presented. Together with its flatness, surjectivity and right action, the identity in step 3 is exactly the represented right torsor definition.",
+   "uses": [
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-power-reductive-free-affine-quotient",
+    "def-sfb-split-solvable-right-torsors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Theorem 9.7.5, Lemma 9.2.5(3), Proposition 9.7.8; compare Corollary 9.7.7."
+   }
+  },
+  {
+   "text": "Let $T\\to\\operatorname{Spec}A$ be arbitrary. On $T$-schemes there is a natural map from the right-orbit presheaf of $L_T$ to $Q_T$. Every section of $Q_T$ lifts fppf locally to $L_T$: apply the local sections of $q$ to the composite test scheme $U\\to Q_T\\to Q$. If two local lifts have the same image, the sheaf isomorphism of step 3 gives a unique local $h\\in H_T$ carrying one to the other. Thus this map becomes surjective and injective after sheafification and identifies the quotient sheaf with $Q_T$. The torsor identity itself pulls back to $L_T\\times_TH_T\\simeq L_T\\times_{Q_T}L_T$ because its two maps and inverse are defined by the same functorial group operations on every test scheme. This identifies the base-changed quotient map as well as the representing object; the identifications are canonical by the sheaf universal property. No assertion about arbitrary base change of invariant coordinate rings is used.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 06PH, lemma-quotient-free-action; explicit sheaf argument for arbitrary base change."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-smooth-criterion",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-dvr-comodule-finite-free-lattice",
+  "def-sfb-affine-coordinate-hopf-algebra",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-closed-immersion",
+  "lem-sfb-free-flat-group-space-quotient",
+  "lem-sfb-reductive-ring-invariant-power-lifting",
+  "lem-sfb-power-reductive-free-affine-quotient",
+  "def-sfb-split-solvable-right-torsors",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces.pdf",
+  "place": "Assembly of Milne VIII 9.1/9.4, Stacks 06PH and Alper 9.7.5/9.7.8; source PDFs WANTED locally, read online; explicit matrix and sheaf calculations by N8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reductive group over a discrete valuation ring admits a faithful finite free representation whose homogeneous general linear quotient is affine",
+   "results": "8 hits: FDRep.instFaithfulRepForget₂, FDRep.instFiniteCarrierVFGModuleCat, FDRep.instFiniteDimensionalCarrierVFGModuleCat, Rep.instProjective, FDRep.of, Rep.instInjective, FDRep.instHasFiniteLimits, FDRep.instProjectiveOfNeZeroCastCard",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern ordinary representations, topological bundles, valuations, or basic scheme morphisms, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat affine group scheme of finite type over a discrete valuation ring is a closed subgroup of a general linear group; a reductive subgroup has affine quotient",
+   "results": "8 hits: Matrix.SpecialLinearGroup.isClosedEmbedding_toGL, Matrix.SpecialLinearGroup.isClosedEmbedding_mapGLInt, Subgroup.IsArithmetic, Subgroup.IsArithmetic.discreteTopology, instDiscreteTopologySubtypeGeneralLinearGroupMemSubgroupAdjoinNegOneOfIsTopologicalRingOfT2Space, Matrix.SpecialLinearGroup.discreteSpecialLinearGroupIntRange, Subgroup.instDiscreteTopStrictPeriods, ValuationSubring.inertiaSubgroup",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern ordinary representations, topological bundles, valuations, or basic scheme morphisms, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeneralLinearGroup\"",
+   "results": "12 hits: LinearMap.GeneralLinearGroup, LinearMap.GeneralLinearGroup.ofLinearEquiv, LinearMap.GeneralLinearGroup.toLinearEquiv, LinearMap.GeneralLinearGroup.congrLinearEquiv, LinearMap.GeneralLinearGroup.congrLinearEquiv_refl, LinearMap.GeneralLinearGroup.coe_toLinearEquiv, LinearMap.GeneralLinearGroup.coe_ofLinearEquiv, LinearMap.GeneralLinearGroup.generalLinearEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: The named structures and their basic operations do not state this extension, quotient, or equivalence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|homogeneous.*quotient|closed.*subgroup.*GL",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: No declaration gives this assertion; the few keyword hits concern other notions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reductive group scheme over a discrete valuation ring embeds into GL n with affine quotient",
+   "results": "8 hits: Matrix.SpecialLinearGroup.isEmbedding_toGL, Matrix.SpecialLinearGroup.isClosedEmbedding_toGL, Matrix.SpecialLinearGroup.isClosedEmbedding_mapGLInt, AlgebraicGeometry.AffineScheme, WeierstrassCurve.isGoodReduction_iff, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.isReduced_of_isAffine_isReduced, AlgebraicGeometry.isReduced_of_isReduced_stalk",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned sheaf, scheme, flatness, or abstract group declarations do not give this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|homogeneous.*quotient|closed.*subgroup.*GL",
+   "results": "{\"t\": \"2026-10-24T05:00:12Z\", \"tool\": \"grep\", \"query\": \"reductive|homogeneous.*quotient|closed.*subgroup.*GL\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\", \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean\"], \"digest\": \"cedb877181fb51c1\"}; The hits concern Lie algebras, topological matrix subgroups or homogeneous localization, not group schemes over a DVR with affine homogeneous quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeneralLinearGroup\"",
+   "results": "{\"t\": \"2026-10-24T05:00:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"GeneralLinearGroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LinearMap.GeneralLinearGroup\", \"LinearMap.GeneralLinearGroup.ofLinearEquiv\", \"LinearMap.GeneralLinearGroup.toLinearEquiv\", \"LinearMap.GeneralLinearGroup.congrLinearEquiv\", \"LinearMap.GeneralLinearGroup.congrLinearEquiv_refl\", \"LinearMap.GeneralLinearGroup.coe_toLinearEquiv\", \"LinearMap.GeneralLinearGroup.coe_ofLinearEquiv\", \"LinearMap.GeneralLinearGroup.generalLinearEquiv\"], \"digest\": \"323b3f759ce61bcb\"}; The hits concern Lie algebras, topological matrix subgroups or homogeneous localization, not group schemes over a DVR with affine homogeneous quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive group over a discrete valuation ring embeds as a closed subgroup of GL n with affine homogeneous fppf quotient",
+   "results": "{\"t\": \"2026-10-24T05:00:15Z\", \"tool\": \"leanfinder\", \"query\": \"A reductive group over a discrete valuation ring embeds as a closed subgroup of GL n with affine homogeneous fppf quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.isClosedEmbedding_toGL\", \"Matrix.SpecialLinearGroup.isClosedEmbedding_mapGLInt\", \"Matrix.SpecialLinearGroup.discreteSpecialLinearGroupIntRange\", \"Subgroup.IsArithmetic.discreteTopology\", \"instDiscreteTopologySubtypeGeneralLinearGroupMemSubgroupAdjoinNegOneOfIsTopologicalRingOfT2Space\", \"Subgroup.instDiscreteTopStrictPeriods\", \"CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\"], \"digest\": \"bc8b4b969f6e660d\"}; The hits concern Lie algebras, topological matrix subgroups or homogeneous localization, not group schemes over a DVR with affine homogeneous quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+  "date": "2026-10-24",
+  "group": "Q118"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine.",
+   "via": [
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dvr-reductive-linear-affine-quotient",
+  "worker": "stage1",
+  "summary": "Constructed the embedding from a finite free regular subcomodule by explicit matrix coefficients, then used the existing free quotient theorem and separated reductive power lifting from the general free affine quotient criterion. Checked arbitrary base change by fppf local lifts. Three statement-only inputs, no new definitions or Mathlib leaves, no statement correction.",
+  "blueprint": "Realizes the inherited linear embedding and affine homogeneous quotient prerequisite in Claim 2, below det-thm-sf-ctf-stability-direct-images (3). The latest blueprint direct-image proof now uses compactification and coefficient preservation; the historical supporting chain is retained exactly. ancestor prints None; new nodes retain the inherited null from.node and prepend the item to via.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Generic smooth morphism flatness and local finite presentation used over the DVR."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic affine chart criterion converts flatness of H to module flatness of its coordinate algebra."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic affine-product algebra universal property, not an alternative geometric proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-criterion",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N8-c14693a0c",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-c14693a0c (reviewer sub-agent of L); spot-checked: I read the item, its five steps and the three new statement-only nodes in full, together with every cited statement. Alper's paper is not in literature/, so I fetched it from the URL the node gives and read Def 3.1.1, Thm 4.3.1, Thm 9.1.4, Lemma 9.2.5, Prop 9.3.1(i), Thm 9.7.5 with its proof, Cor 9.7.7 and Prop 9.7.8. All three new nodes are true. (1) dvr-comodule-finite-free-lattice: with C flat over a Noetherian ring, Serre's argument works: take M'=ρ^{-1}(N⊗C), where N is spanned by the left factors of ρ(m); this M' is a finitely generated subcomodule containing m, and a torsion-free finitely generated module over a DVR is free. The empty set, M=0 and M=K all behave. (2) reductive-ring-invariant-power-lifting follows from Thm 9.7.5, then Prop 9.3.1(i), then Lemma 9.2.5 (2)⇒(3), with no Noetherian or finite-generation hypothesis. (3) power-reductive-free-affine-quotient: the hypothesis is Lemma 9.2.5(3), which makes G geometrically reductive; Prop 9.7.8 (with Thm 4.3.1) then makes Y affine, and q is affine and f.p. by fppf descent from the trivial torsor. A DAG-wide search found no duplicate: the existing nodes are over a field, for PGL, or for split tori over a Noetherian base. No new node restates a clause of the item. Steps 2, 4 and 5 check out: the coefficient matrix is invertible via the antipode and its image contains the generators; the left action h·l = l i(h)^{-1} and the torsor isomorphism are right; the represented-right-torsor clause of def-sfb-split-solvable-right-torsors applies over an arbitrary base; fppf base change works. FIX for missing citations (C4/C5/C1). Step 1 attributed H×_AH=Spec(B⊗B) to def-weil-affine-spectrum plus the tensor-pushout lemma, which give only Spec-to-Spec maps; it also introduced the coordinate Hopf structure without citing the existing same-unit def-sfb-affine-coordinate-hopf-algebra. Step 2 used the same affine fibre-product fact for GL_n×GL_n. Step 3 claimed i is a monomorphism with no node behind it. The fix cites lem-weil-pbc-fibre-product-affine-spectra (a Mathlib leaf, pullbackSpecIso) in steps 1–3 and def-sfb-affine-coordinate-hopf-algebra in step 1. Step 3 now proves the monomorphism property: H×_LH=Spec(B⊗_PB)=Spec B because P→B is surjective. proof_deps is recomputed; the statement and new nodes are unchanged, and there is no cycle. I accept the declared tool_uses (smooth criterion, flat-affine criterion, tensor pushout) as generic. Batch 5: lem-sfb-free-flat-group-space-quotient's closure reaches only foundational sec-trace-formula/sec-poincare-duality nodes (algebraic spaces, fppf descent, projective bundles, module lemmas). It reaches no nt-assume leaf, no trace-transport node, no batch-4 target and no step of the trace formula or Poincaré duality proofs. def-trf-algebraic-space is a general definition. Both citations are accepted as outside the assumed statements.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.DvrReductiveLinearAffineQuotient",
+  "declaration": "AlgebraicGeometry.exists_dvr_reductive_linear_affine_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/DvrReductiveLinearAffineQuotient.lean",
+  "statement": "theorem exists_dvr_reductive_linear_affine_quotient (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (H : Grp (Over (Spec (.of A)))) [Smooth H.X.hom] [IsAffineHom H.X.hom] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] (hred : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (f : A →+* Ω), ReductiveTorusCentralizer.IsReductive ((Over.pullback (Spec.map (CommRingCat.ofHom f))).mapGrp.obj H)) : ∃ (n : ℕ) (_ : 1 ≤ n) (i : H ⟶ Grp.mk (GeneralLinearGroup (ULift.{u} (Fin n)) A)), IsClosedImmersion i.hom.hom.left ∧ ∃ (Q : Over (Spec (.of A))) (P : RepresentedRightTorsor H Q) (e : P.space ≅ GeneralLinearGroup (ULift.{u} (Fin n)) A), IsAffineHom Q.hom ∧ (∀ (R : Over (Spec (.of A))) (p : R ⟶ P.space) (h : R ⟶ H.X), lift p h ≫ P.action ≫ e.hom = (p ≫ e.hom) * (h ≫ i.hom.hom)) ∧ ∀ (T : Scheme.{u}) (f : T ⟶ Spec (.of A)), Flat ((Over.pullback f).map P.projection).left ∧ Surjective ((Over.pullback f).map P.projection).left ∧ LocallyOfFinitePresentation ((Over.pullback f).map P.projection).left ∧ QuasiCompact ((Over.pullback f).map P.projection).left ∧ QuasiSeparated ((Over.pullback f).map P.projection).left ∧ IsPullback ((Over.pullback f).map (fst P.space H.X)) ((Over.pullback f).map P.action) ((Over.pullback f).map P.projection) ((Over.pullback f).map P.projection) ∧ Presheaf.IsSheaf (Scheme.fppfTopology.over T) (yoneda.obj ((Over.pullback f).obj Q)) ∧ ∃ eta : coequalizer (yoneda.map ((Over.pullback f).map (fst P.space H.X))) (yoneda.map ((Over.pullback f).map P.action)) ⟶ yoneda.obj ((Over.pullback f).obj Q), coequalizer.π _ _ ≫ eta = yoneda.map ((Over.pullback f).map P.projection) ∧ ∀ Z : Sheaf (Scheme.fppfTopology.over T) (Type u), Function.Bijective (fun g : yoneda.obj ((Over.pullback f).obj Q) ⟶ Z.obj ↦ eta ≫ g)",
+  "branch": "sheaf-dag",
+  "by": "Q123",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-946d2ced6",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Clause-by-clause match. Hypotheses: DVR (IsDomain is required by Mathlib's class); H : Grp (Over Spec A) Smooth/IsAffineHom/LFT+QC (LFT is implied by Smooth, harmless); hred = IsReductive of every geometric fibre (A→+*Ω, Ω alg. closed in Type u), equivalent to the node's condition. Conclusion: ∃ n≥1 and a closed-immersion group hom i into the upstream GeneralLinearGroup (localization at det, matrix group law); affine Q over Spec A; RepresentedRightTorsor P with e : P.space ≅ GL, action pinned to right multiplication by i on all test points; for every T→Spec A the Over.pullback images of projection/action keep flat/surj/lfp/qc/qs and the IsPullback torsor square, yoneda(Q_T) is an fppf sheaf, and eta from the coset coequalizer has the sheafification universal property for Type u sheaves. Edge cases (trivial H, n=0 excluded, empty/identity/non-affine T, characteristics, universe u) ok. H4: IsFppfQuotient/IsFppfGroupQuotient are group-quotient notions and groupSpaceQuotient is owned by a theorem node, so there is no duplicate. Node diff vs side-live: lean record plus one added landed stmt_dep (def-sfb-reductive-torus-centralizer-terminology), which the rules allow; lean.statement verbatim; sorry-only; docstrings carry source, blueprint and 5 steps; Worker report and Second reading sections present. No file changed, no compile run."
+ }
+}

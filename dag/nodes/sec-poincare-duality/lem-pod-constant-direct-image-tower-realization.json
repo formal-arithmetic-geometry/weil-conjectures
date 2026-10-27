@@ -1,0 +1,348 @@
+{
+ "id": "lem-pod-constant-direct-image-tower-realization",
+ "kind": "statement",
+ "title": "Realization of the completed constant direct-image tower with its maps",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ of [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $V=\\mathcal O_E$, uniformizer $\\varpi$, and $A_n=V/\\varpi^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. Let $Y$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties], put $s=\\operatorname{Spec}k$ and $f:Y\\to s$, and use the small pro-etale sites [def-weil-pbc-proetale-site]. Put $F_n=(A_n)_Y$ [def-weil-pbc-constant-sheaf], $\\widehat V_Y=\\varprojlim_nF_n$ [def-weil-completed-integral-coefficients], $B_n=\\operatorname{Res}_n Rf_{*,n}(F_n[0])$ and $B=Rf_*\\widehat V_Y$ [def-weil-derived-direct-image]. In these expressions identify the derived reductions of $\\widehat V_Y$ with $F_n[0]$ by the canonical projection-induced maps of [lem-weil-constant-coefficient-objects-constructible]. All $B_n$ are thus objects of the same derived category of $\\widehat V_s$-modules. Write $C_n=\\Gamma(s,B_n)$ and $C=\\Gamma(s,B)$, forgetting to abelian groups by exact point sections [lem-weil-point-proetale-sections-exact]. Then applying point sections to the specified derived-limit triangle defining $B$ gives a derived-limit triangle for $(C_n)$ in $D(\\operatorname{Ab})$, with the actual projection maps $C\\to C_n$ [def-weil-derived-limit]. The degree-zero maps induced by these projections, after finite-reduction and identity-on-sections restriction comparisons [def-trf-point-reduction-units], are exactly the maps $P_n:H^0(Y,V)\\to H^0(Y,A_n)$ of ordinary cohomology [def-weil-ordinary-compact-cohomology]. The degree-zero transition induced by the specified $\\mathrm{sfDirectImageTransition}$, under the augmentation identifications $H^0(C_n)=F_n(Y)$, is exactly $F_{n+1}(Y)\\to F_n(Y)$ induced by $A_{n+1}\\twoheadrightarrow A_n$; with the same comparisons it is $Q_n$. In particular $Q_nP_{n+1}=P_n$. This statement assumes neither connectedness nor finiteness of higher cohomology.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6K, lemma-RGamma-commutes-with-Rlim; derived.tex Tag 05TD, lemma-left-exact-higher-derived, with the coefficient-restriction square of lem-pod-constant-tower-transition and the specified point-reduction comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-direct-image",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-derived-limit",
+  "def-trf-point-reduction-units",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=\\widehat V_Y[0]$. By [lem-weil-constant-coefficient-objects-constructible], $K$ is an admissible derived-complete integral coefficient object and its canonical reductions are $F_n[0]$. Apply [lem-weil-constant-scalar-strict-unit] with $L=E$: multiplication $r\\otimes z\\mapsto\\pi_n(r)z$ identifies the reduction unit with $\\pi_n$ and commutes with every quotient transition. Thus the reduction transition is the actual quotient $r_n:F_{n+1}\\to F_n$, after restriction to completed coefficients. By [def-weil-derived-direct-image], $B$ comes with the specified Roos triangle of the restricted finite images $B_n$; denote its first map by $p:B\\to\\prod_nB_n$, its coordinate projections by $p_n$, and its tower transitions by $t_n$. No direct-image finite-reduction isomorphism is asserted or needed.",
+   "uses": [
+    "lem-weil-constant-coefficient-objects-constructible",
+    "lem-weil-constant-scalar-strict-unit",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-direct-image.md",
+    "place": "Canonical quotient tower in def-weil-derived-direct-image; regular-module reduction normalization in lem-weil-constant-scalar-strict-unit."
+   }
+  },
+  {
+   "text": "Apply [lem-kun-site-rgamma-derived-limit] on the small ringed site $s_{\\mathrm{proet}}$ with ring sheaf $\\widehat V_s$ and object $s$ to this very triangle (reindex its sequence starting at $1$). It identifies $R\\Gamma(s,\\prod_nB_n)$ with $\\prod_nR\\Gamma(s,B_n)$ by the maps $R\\Gamma(s,\\mathrm{pr}_n)$ and retains each projection $R\\Gamma(s,p_n)$. Since $k$ is algebraically closed, [lem-weil-point-proetale-sections-exact] identifies this derived sections functor with termwise sections, naturally on objects and maps: sections carries a resolution quasi-isomorphism to a quasi-isomorphism. Consequently the image triangle is $C\\to\\prod_nC_n\\xrightarrow{1-s_C}\\prod_nC_n\\to C[1]$ in $D(\\operatorname{Ab})$, with transitions $\\Gamma(s,t_n)$ and projections $\\Gamma(s,p_n)$. This proves the triangle assertion including its maps.",
+   "uses": [
+    "lem-kun-site-rgamma-derived-limit",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6K, lemma-RGamma-commutes-with-Rlim, applied to the target point ringed site."
+   }
+  },
+  {
+   "text": "Write $M_n=Rf_{*,n}(F_n[0])$ and let $\\rho_n:B\\otimes^L_{\\widehat V_s}(A_n)_s\\to M_n$ be the finite-reduction comparison. By [def-weil-derived-direct-image] it is the adjunct of $p_n$. The unit of [lem-weil-derived-scalar-extension-restriction-adjunction] therefore satisfies $\\operatorname{Res}_n(\\rho_n)\\eta_B=p_n$. Apply sections and the restriction comparison $e$ of [def-trf-point-reduction-units], which is the identity on underlying sections. The composite $e\\,\\Gamma(s,\\operatorname{Res}_n(\\rho_n))\\,\\Gamma(s,\\eta_B)$ is exactly $\\Gamma(s,p_n)$, with target written as $\\Gamma(s,M_n)$. By [def-weil-ordinary-compact-cohomology], $H^0(C)=H^0(Y,V)$ and $H^0(\\Gamma(s,M_n))=H^0(Y,A_n)$. Taking $H^0$ gives precisely the specified $P_n$. This uses the sheaf reduction comparison and its adjunction equation, without replacing it by an arbitrary isomorphism or invoking any ordinary-module tensor comparison for $B$.",
+   "uses": [
+    "def-weil-derived-direct-image",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "def-trf-point-reduction-units",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint; finite comparison defined as adjunct of the specified projection."
+   }
+  },
+  {
+   "text": "For clarity track the completed-coefficient comparisons in the actual $\\mathrm{sfDirectImageTransition}$. Write $G$ for underived direct image over completed coefficients and $R_n$ for restriction from $(A_n)_Y$-modules. Choose nonnegative injective resolutions $a_n:F_n[0]\\to I_n$ over $(A_n)_Y$ and $b_n:R_nF_n[0]\\to J_n$ over $\\widehat V_Y$. Module-sheaf categories have enough injectives by [prop-pur-kinjective-resolutions-exist]; [lem-weil-pbc-left-exact-injective-resolution-degree-zero] supplies these nonnegative resolutions, and [lem-weil-pbc-bounded-below-injectives-kinjective] makes them K-injective. The functor $G$ is left exact by the sectionwise kernel calculation: on a target object $U$, direct image evaluates the underlying sheaf at $Y\\times_sU$, while coefficient restriction changes only its action. Hence [lem-weil-pbc-left-exact-injective-resolution-degree-zero] identifies $H^0(GJ_n)$ with $G(R_nF_n)$. At finite level [lem-pod-finite-sheaf-h0-augmentation] gives exactly the specified natural augmentation $F_n(Y)\\cong H^0(C_n)$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-pod-finite-sheaf-h0-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K and 05TD, nonnegative resolutions and left-exact degree-zero augmentation; Tag 070J, bounded-below injective complexes."
+   }
+  },
+  {
+   "text": "Exact restriction makes $R_n(a_n)$ a quasi-isomorphism. By [lem-weil-pbc-kinjective-hom-derived], the derived morphism $b_n\\,R_n(a_n)^{-1}$ is represented by a chain map $j_n:R_nI_n\\to J_n$ with $j_nR_n(a_n)$ homotopic to $b_n$; $j_n$ is a quasi-isomorphism. In [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], apply the resolution normalization to the two factorizations through finite and completed coefficients of the same ringed-topos morphism. It says that the canonical comparison $c_n:RG(R_nF_n[0])\\to\\operatorname{Res}_nM_n$ is the inverse of $G(j_n)$, using the sectionwise equality $GR_n=\\operatorname{Res}_nf_{*,n}$. The preceding augmentation equation therefore implies that $c_n$ carries the completed direct-image augmentation to the restricted finite augmentation. By the exact-postcomposition clause of [lem-kun-right-derived-single-h0], taking $H^0$ conjugates $c_n$ to the identity of $f_*F_n$, with its restricted action. Thus the two completed-coefficient comparison factors preserve the actual section elements.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-kun-right-derived-single-h0"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I and 0D6E (sites-cohomology.tex, lemma-derived-pushforward-composition); Tag 05TD, augmentation comparison."
+   }
+  },
+  {
+   "text": "Under the quotient identifications of Step 1, the actual transition is $t_n=c_n\\,RG(r_n[0])\\,c_{n+1}^{-1}$. The middle map is natural on the direct-image augmentation; [lem-kun-right-derived-single-h0] identifies its degree-zero map with $G(r_n)$. Step 5 identifies both outer factors with the identity on the same sections. After exact point sections this gives the section map $r_n(Y):F_{n+1}(Y)\\to F_n(Y)$. Equivalently, apply [lem-pod-constant-tower-transition] to $A_{n+1}\\twoheadrightarrow A_n$, $F=F_{n+1}$, $G=F_n$ and $u=r_n$; its finite-restriction augmentation square gives this same section map. With [def-trf-point-reduction-units], restriction/sections comparisons again act as the identity on these elements, and [def-weil-ordinary-compact-cohomology] identifies the two degree-zero groups with the ordinary finite-coefficient cohomology groups. The resulting map is exactly $Q_n$. No flatness of $A_n$ over $A_{n+1}$ is used.",
+   "uses": [
+    "lem-kun-right-derived-single-h0",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-pod-constant-tower-transition",
+    "def-trf-point-reduction-units",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TD, canonical natural degree-zero comparison, and the coefficient-restriction square of lem-pod-constant-tower-transition."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-hom-into-triangle-exact](i), consecutive maps of the image Roos triangle compose to zero. Therefore $(1-s_C)\\Gamma(s,p)=0$. Composing with its $n$-th product projection and using the formula in [def-weil-derived-limit] gives $\\Gamma(s,p_n)-\\Gamma(s,t_n)\\Gamma(s,p_{n+1})=0$. Apply the functor $H^0$ and substitute Steps 3 and 6 to get $P_n-Q_nP_{n+1}=0$. Thus $Q_nP_{n+1}=P_n$. All calculations hold for the empty scheme and for disconnected schemes as well; neither constant sections being all sections nor finiteness of any higher cohomology group has entered.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0146, lemma-composition-zero; Roos transition endomorphism of Tag 08TC."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-constant-scalar-strict-unit",
+  "def-weil-derived-direct-image",
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-trf-point-reduction-units",
+  "def-weil-ordinary-compact-cohomology",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-pod-finite-sheaf-h0-augmentation",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-kun-right-derived-single-h0",
+  "lem-pod-constant-tower-transition",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-weil-derived-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6K, lemma-RGamma-commutes-with-Rlim; the explicit finite-reduction adjunct and completed-coefficient augmentation calculations refine the blueprint Step 7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completed integral pro-etale coefficient derived direct image inverse limit global sections H0 canonical projections and finite reduction maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"PreTilt.mk_comp_untilt_eq_coeff_zero\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [inst_3 : IsAdicComplete (Ideal.span {↑p}) O],\\n  ⇑(Ideal.Quotient.mk (Ideal.span {↑p})) ∘ ⇑PreTilt.untilt = ⇑(PreTilt.coeff 0)\", \"doc\": \"The composition of the canonical quotient ring homomorphism from $ O $ to $ O/(p) $ with the untilt homomorphism from the pretilt $ \\\\mathrm{PreTilt}(O, p) $ to $ O $ is equal to the 0th coefficient ho\"}\n  {\"name\": \"StandardEtalePair.hasMap_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : StandardEtalePair R}, P.HasMap P.X\", \"doc\": \"In the standard étale ring extension $ R[X,Y]/(f, Yg - 1) $, the image of the indeterminate $ X $ satisfies $ f(X) = 0 $ and $ g(X) $ is invertible (a unit) in the ring.\"}\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}\n  {\"name\": \"StandardEtalePresentation.toPresentation_σ'\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S) (x : S), P.toPresentation.σ' x = ⋯.choose\", \"doc\": \"For any commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, and a standard étale presentation $ P $ of $ S $ over $ R $, the function $ \\\\sigma' $ associated to the presentation\"}\n  {\"name\": \"StandardEtalePresentation.hasMap\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (self : StandardEtalePresentation R S), self.HasMap self.x\", \"doc\": \"For any commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, and a standard étale presentation of $ S $ over $ R $, the element $ x $ in $ S $ corresponding to the polynomial va\"}\n  {\"name\": \"StandardEtalePair.lift_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : S) (h : P.HasMap x), (P.lift x h) P.X = x\", \"doc\": \"Given a standard étale pair $ P = (f, g) $ over a commutative ring $ R $, an element $ x $ in a ring $ S $ satisfying $ f(x) = 0 $ and $ g(x) $ invertible in $ S $, and the canonical ring homomorphism\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit, CategoryTheory.DerivedCategory",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.DerivedCategory'",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[rR]lim|[rR]Lim|Mittag|[dD]erived.*[lL]imit|sfDirectImageTransition",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean\", \"line\": \"55\", \"text\": \"    let h' := (Types.equalizerLimit (g := F.map f) (h := F.map g)).isLimit\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"line\": \"82\", \"text\": \"    W.isLocal.IsClosedUnderLimitsOfShape J where\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"line\": \"30\", \"text\": \"`P.IsClosedUnderLimitsOfShape J`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"line\": \"191\", \"text\": \"/-- A property of objects satisfies `P.IsClosedUnderLimitsOfShape J` if it\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"line\": \"194\", \"text\": \"class IsClosedUnderLimitsOfShape (P : ObjectProperty C) (J : Type u') [Category.{v'} J] where\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"line\": \"198\", \"text\": \"lemma IsClosedUnderLimitsOfShape.mk' [P.IsClosedUnderIsomorphisms]\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"line\": \"200\", \"text\": \"    P.IsClosedUnderLimitsOfShape J where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"line\": \"205\", \"text\": \"instance : (Over.isMono X).IsClosedUnderLimitsOfShape J where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"line\": \"214\", \"text\": \"  hasLimit_of_closedUnderLimits _ _ _\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"line\": \"135\", \"text\": \"private lemma ind_pi_of_ind {ι : Type w} [P.IsClosedUnderLimitsOfShape (Discrete ι)]\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"line\": \"143\", \"text\": \"instance isClosedUnderLimitsOfShape_ind_discrete {ι : Type*} [Small.{w} ι]\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"line\": \"144\", \"text\": \"    [P.IsClosedUnderLimitsOfShape (Discrete ι)] [HasProductsOfShape ι C] [IsIPCOfShape.{w} ι C] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"line\": \"145\", \"text\": \"    (ind.{w} P).IsClosedUnderLimitsOfShape (Discrete ι) := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"line\": \"151\", \"text\": \"  have : P.IsClosedUnderLimitsOfShape (Discrete (Shrink.{w} ι)) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Injective/InjectiveObject.lean\", \"line\": \"33\", \"text\": \"    ObjectProperty.IsClosedUnderLimitsOfShape (isInjective C) (Discrete J) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"line\": \"22\", \"text\": \"`P.IsClosedUnderLimitsOfShape (Discrete.{0} PEmpty)` and that `C`\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"line\": \"39\", \"text\": \"  P.IsClosedUnderLimitsOfShape (Discrete WalkingPair)\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"line\": \"51\", \"text\": \"lemma prop_of_isTerminal [P.IsClosedUnderLimitsOfShape (Discrete.{0} PEmpty)]\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"line\": \"56\", \"text\": \"lemma prop_terminal [P.IsClosedUnderLimitsOfShape (Discrete.{0} PEmpty)] [HasTerminal C] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"line\": \"61\", \"text\": \"instance (priority := 100) [P.IsClosedUnderLimitsOfShape (Discrete.{0} PEmpty)] [HasTerminal C] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"63\", \"text\": \"lemma HasPointwiseRightDerivedFunctorAt.hasColimit\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"64\", \"text\": \"lemma HasPointwiseLeftDerivedFunctorAt.hasLimit\"}\n  {\"file\": \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"line\": \"21\", \"text\": \"* `F.IsMittagLeffler` states that the functor `F` satisfies the Mittag-Leffler\"}\n  {\"file\": \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"line\": \"26\", \"text\": \"  cofiltered, then it is Mittag-Leffler if `F` is, see `IsMittagLeffler.toPreimages`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"line\": \"34\", \"text\": \"* `isMittagLeffler_of_exists_finite_range` shows that if `J` is cofiltered and for all `j`,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Degree zero integral adic cohomology inverse limit finite coefficient cohomology canonical projections",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"groupCohomology.π_comp_H0Iso_hom_apply\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G)\\n  (x : CategoryTheory.ToType (groupCohomology.cocycles A 0)),\\n  (CategoryTheory.ConcreteCategory.hom (groupCohomology.H0Iso A).hom)\\n      ((CategoryTheory.ConcreteCategory.hom (groupCohomology.π A 0)) x) =\\n    (CategoryTheory.Conc\", \"doc\": \"For any commutative ring $k$, group $G$, and $G$-representation $A$ over $k$, the composition of the projection from the 0-cocycles to the zeroth group cohomology module $H^0(G, A)$ followed by the is\"}\n  {\"name\": \"ProfiniteGrp.isIso_toLimit\", \"module\": \"Mathlib.Topology.Algebra.Category.ProfiniteGrp.Limits\", \"type\": \"(P : ProfiniteGrp.{u}) : IsIso (toLimit P)\", \"doc\": \"For any profinite group $P$, the canonical continuous group homomorphism from $P$ to the inverse limit of its finite quotient groups (indexed by open normal subgroups) is an isomorphism. This establis\"}\n  {\"name\": \"AdicCompletion.coe_eval\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"(n : ℕ) : (eval I M n : AdicCompletion I M → M ⧸ (I ^ n • ⊤ : Submodule R M)) = fun f => f.1 n\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $ with additive commutative group structure, the coercion of the evaluation map $ \\\\text{eval}_{I,M,n} $ from the $ I $-adic comple\"}\n  {\"name\": \"ProfiniteGrp.isoLimittoFiniteQuotientFunctor\", \"module\": \"Mathlib.Topology.Algebra.Category.ProfiniteGrp.Limits\", \"type\": \"(P : ProfiniteGrp.{u}) : P ≅ (limit (toFiniteQuotientFunctor P ⋙ forget₂ FiniteGrp ProfiniteGrp))\", \"doc\": \"The canonical isomorphism from a profinite group $ P $ to the inverse limit of its finite quotient groups $ P/H $ (for open normal subgroups $ H $), which is also a homeomorphism. This equivalence map\"}\n  {\"name\": \"Profinite.lim\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": Limits.LimitCone X.diagram\", \"doc\": \"The profinite space $ X $ is canonically isomorphic to the projective limit of its discrete quotient spaces in the category of profinite spaces, established by showing its limit cone is isomorphic to \"}\n  {\"name\": \"Profinite.asLimit\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": CategoryTheory.Limits.IsLimit X.asLimitCone\", \"doc\": \"The profinite space $X$ is canonically isomorphic to the projective limit of its discrete quotient spaces in the category of profinite spaces, established by showing its limit cone is isomorphic to th\"}\n  {\"name\": \"Profinite.asLimitCone\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": CategoryTheory.Limits.Cone X.diagram\", \"doc\": \"The cone with apex $X$ and components given by the continuous projection maps from the profinite space $X$ to each of its discrete quotients, forming the structure that exhibits $X$ as the inverse lim\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of completed constant sheaf equals derived inverse limit of finite coefficient direct images with restriction of scalars",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}\n  {\"name\": \"CondensedMod.ofSheafProfinite\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\text{Profinite}^\\\\text{op} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructs the correspondi\"}\n  {\"name\": \"Condensed.profiniteFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the composition of the canonical inclusion functor from profinite spaces to condensed sets and \"}\n  {\"name\": \"CondensedMod.ofSheafCompHaus\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor CompHausᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\\\mathrm{CompHaus}^{\\\\mathrm{op}} \\\\to \\\\mathrm{ModuleCat}\\\\, R $ that preserves finite products and satisfies the equalizer condition for the regular topology, $ F $ defines a sheaf w\"}\n  {\"name\": \"CondensedMod.LocallyConstant.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor (ModuleCat R) (CondensedMod R)\", \"doc\": \"A functor from the category of $ R $-modules to the category of condensed modules over $ R $, which assigns to each $ R $-module $ X $ the sheaf that maps a compact Hausdorff-like space $ S $ to the $\"}\n  {\"name\": \"LightCondMod.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → LightCondMod R\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructor form\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"LightCondAb.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat ℤ)) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] → CategoryTheory.regularTopology.EqualizerCondition F → LightCondAb\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, \\\\mathbb{Z} $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constru\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.Limits.limit",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyLimit\"",
+   "results": "Actual msearch result: 0 hits; . ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sfDirectImageTransition|SfIntegralDirectImage|RGamma|homotopyLimit|Roos",
+   "results": "Actual msearch result: 0 hits; . ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zeroth sheaf cohomology derived direct image of completed adic coefficients projection to finite quotient coefficients",
+   "results": "Actual msearch result: 8 hits; groupCohomology.π_comp_H0Iso_hom_apply, groupCohomology.π_comp_H0Iso_hom, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq, groupCohomology.H0Iso, groupHomology.H0π, AdicCompletion.evalOneₐ, CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, AdicCompletion.coe_eval. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections carries a homotopy inverse limit Roos triangle to a homotopy limit triangle preserving its projection maps",
+   "results": "Actual msearch result: 8 hits; CochainComplex.mappingCone.mapTrianglehIso, DerivedCategory.triangleOfSESIso, CochainComplex.mappingConeCompTriangleh_comm₁, CochainComplex.mappingCone.mapTriangleIso, CochainComplex.mappingCone.trianglehRotateIsoTrianglehOfDegreewiseSplit, HomotopyCategory.spectralObjectMappingCone, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₁, CochainComplex.trianglehOfDegreewiseSplitRotateRotateIso. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical zeroth derived direct image isomorphism identifies coefficient quotient morphisms with actual maps on sheaf sections",
+   "results": "Actual msearch result: 8 hits; SheafOfModules.Presentation.map_π_eq, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_comp_apply, AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom_apply, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-connected-constant-h0",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "prop-cohomological-finiteness",
+   "place": "Proof, Step 7, final paragraph: connected constant coefficients; completed direct-image limit and transition comparison (old steps 5-6)",
+   "via": [
+    "lem-pod-connected-constant-h0"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-constant-direct-image-tower-realization",
+  "worker": "stage1",
+  "summary": "Split into seven steps using existing DAG nodes only: canonical constant reductions, sections of the specified Roos triangle, adjunct identification of P_n, explicit completed-coefficient augmentation comparison, actual transition identification with Q_n, and compatibility from the zero composite. Statement unchanged; no connectedness, higher-cohomology finiteness or finite-reduction isomorphism assumed.",
+  "blueprint": "prop-cohomological-finiteness, Proof Step 7 final paragraph: integral constant-coefficient realization and actual projection/transition maps used by lem-pod-connected-constant-h0.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-constant-coefficient-objects-constructible",
+    "why": "Generic The constant coefficient objects are bounded constructible tool for the explicit coefficient/derived-limit calculation; the finiteness unit does not supply this general statement."
+   },
+   {
+    "node": "lem-weil-constant-scalar-strict-unit",
+    "why": "Generic Normalized strict scalar unit for the regular completed coefficient complex tool for the explicit coefficient/derived-limit calculation; the finiteness unit does not supply this general statement."
+   },
+   {
+    "node": "lem-kun-site-rgamma-derived-limit",
+    "why": "General ringed-site sections/Roos-triangle tool preserving actual projections; this unit has no general derived-limit/sections theorem."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic Sections over an algebraically closed point are exact on the pro-etale site tool for the explicit coefficient/derived-limit calculation; the finiteness unit does not supply this general statement."
+   },
+   {
+    "node": "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "why": "Generic Derived reduction modulo varpi^n is left adjoint to restriction of scalars tool for the explicit coefficient/derived-limit calculation; the finiteness unit does not supply this general statement."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Existence of K-injective resolutions of sheaves of modules tool for the explicit coefficient/derived-limit calculation; the finiteness unit does not supply this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "why": "Generic Injective resolutions exist, and a left exact functor is recovered in degree zero tool for the explicit coefficient/derived-limit calculation; the finiteness unit does not supply this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Generic Bounded-below complexes of injectives are K-injective tool for the explicit coefficient/derived-limit calculation; the finiteness unit does not supply this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic Morphisms into a K-injective complex are computed in the homotopy category tool for the explicit coefficient/derived-limit calculation; the finiteness unit does not supply this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic resolution-normalized ringed-topos coefficient comparison, needed for completed coefficient rings; no such general statement in this unit."
+   },
+   {
+    "node": "lem-kun-right-derived-single-h0",
+    "why": "Generic natural H0 augmentation normalization, including exact postcomposition, used to read actual coefficient maps on sections."
+   },
+   {
+    "node": "lem-weil-pbc-hom-into-triangle-exact",
+    "why": "Generic Hom(W,-) applied to a distinguished triangle: zero composite and exactness at the middle and at X[1] tool for the explicit coefficient/derived-limit calculation; the finiteness unit does not supply this general statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-constant-scalar-strict-unit",
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-kun-right-derived-single-h0",
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-6db895854",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-6db895854 (reviewer sub-agent of L); spot-checked: Read the item's 7 steps in full against every cited statement; the delivery has no new nodes and changes no statement or stmt_deps. Live node is still unsplit and there is no repair note. Graph checks: proof_deps equals the union of uses; no cycle (BFS over 12586 reached nodes); no SGA. Lean SfDerivedDirectImage.lean (read only): sfDirectImageTransition = c_{n+1}^{-1}·RG(reduction transition)·c_n, and the uniqueness clause of sfDerivedRestrictionComparison gives c_n = G(j_n)^{-1}, matching Step 5. The reduction comparison is homEquiv.symm(projection≫π_n), matching Step 3 (Res(ρ_n)η=p_n). Step-by-step: (1) constant-coefficient-objects-constructible(2) plus strict-unit u_m identify the reduction transition with the quotient r_n. (2) kun-site-rgamma-derived-limit (Stacks 0D6K, ringed site, U=s) plus exact point sections (k=F̄_q) transport the Roos triangle and its projections. (3) is the adjunct identity plus identity-on-sections e; P_n is defined by exactly these data in the parent. (4)-(5) use injective/K-injective resolutions, j_n from the K-injective Hom lemma, the κ normalization of ringed-topoi-derived-pushforward-composition with restriction as an identity-topos ringed morphism, and the last clause of kun-right-derived-single-h0, giving H^0(c_n)=id. (6) Naturality of the augmentation gives H^0(t_n)=r_n(Y)=Q_n; the cross-check through pod-constant-tower-transition is redundant but true. (7) (1-s)p=0 gives P_n=Q_nP_{n+1}. Edge cases Y=∅, Y=s, disconnected Y and n=1 with non-flat A_2→A_1 all hold. Blueprint main-20261015 prop-cohomological-finiteness Step 7 read; the unit route is kept. Accepted the 12 generic off-unit tool_uses declared in split_report. Maintainer note: the item statement names the Lean declaration sfDirectImageTransition, as the parent does."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantDirectImageTowerRealization",
+  "declaration": "WeilConjectures.constantDirectImageTowerRealization",
+  "declarations": [
+   "WeilConjectures.constantTowerForget",
+   "WeilConjectures.constantTowerForgetColimits",
+   "WeilConjectures.constantTowerAbSections",
+   "WeilConjectures.constantTowerFiniteProjection",
+   "WeilConjectures.constantDirectImageTowerRealization"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantDirectImageTowerRealization.lean",
+  "statement": "theorem constantDirectImageTowerRealization [HasDerivedCategory.{w} AddCommGrpCat.{u + 1}] : ∃ e : (constantTowerAbSections D l E).obj (∏ᶜ (sfDirectImageTerm l E (Y ↘ Spec (.of D.k)) (integralCohomologyCoefficient D l hl E Y).obj)) ≅ ∏ᶜ (fun n : ℕ ↦ (constantTowerAbSections D l E).obj (sfDirectImageTerm l E (Y ↘ Spec (.of D.k)) (integralCohomologyCoefficient D l hl E Y).obj n)), (∀ n : ℕ, e.hom ≫ Pi.π _ n = (constantTowerAbSections D l E).map (Pi.π (sfDirectImageTerm l E (Y ↘ Spec (.of D.k)) (integralCohomologyCoefficient D l hl E Y).obj) n)) ∧ IsDerivedLimitTriangle (fun n ↦ (constantTowerAbSections D l E).map (sfDirectImageTransition l E (Y ↘ Spec (.of D.k)) (integralCohomologyCoefficient D l hl E Y).obj n)) ((constantTowerAbSections D l E).obj (connectedIntegralImage D l hl E Y).obj) ((constantTowerAbSections D l E).map (connectedIntegralImage D l hl E Y).projection ≫ e.hom) (e.inv ≫ (constantTowerAbSections D l E).map (connectedIntegralImage D l hl E Y).boundary ≫ ((constantTowerAbSections D l E).commShiftIso (1 : ℤ)).hom.app (connectedIntegralImage D l hl E Y).obj) ∧ (∀ n : ℕ, (constantTowerAbSections D l E).map (connectedIntegralImage D l hl E Y).projection ≫ e.hom ≫ Pi.π _ n = (constantTowerAbSections D l E).map ((connectedIntegralImage D l hl E Y).projection ≫ Pi.π (sfDirectImageTerm l E (Y ↘ Spec (.of D.k)) (integralCohomologyCoefficient D l hl E Y).obj) n)) ∧ (∀ n : ℕ, constantTowerFiniteProjection D l hl E Y n = (pointFibreIntegralAmbient D l E).map ((connectedIntegralImage D l hl E Y).projection ≫ Pi.π (sfDirectImageTerm l E (Y ↘ Spec (.of D.k)) (integralCohomologyCoefficient D l hl E Y).obj) n) ≫ (connectedFiniteTowerIso D l hl E Y n).hom) ∧ (∀ (n : ℕ) (x : integralOrdinaryCohomology D l hl E Y (integralCohomologyCoefficient D l hl E Y) 0), ((Functor.mapDerivedCategoryHomologyFunctorIso.{_, _, _, _, u + 2, u + 1} (pointUnitIntegralRestriction l E n) 0).symm.app (finiteOrdinarySections D l E Y (n + 1) (by omega) (finiteCohomologyCoefficient l E Y (n + 1) (by omega)))).hom ((DerivedCategory.homologyFunctor.{u + 1} _ 0).map (constantTowerFiniteProjection D l hl E Y n) x) = P D l hl E Y n x) ∧ (∀ (n : ℕ) (x : finiteOrdinaryCohomology D l E Y (n + 2) (by omega) (finiteCohomologyCoefficient l E Y (n + 2) (by omega)) 0), (connectedFiniteH0SectionsIso D l E Y n).hom (Q D l hl E Y n x) = (integralCoefficientSheafTransition l E Y n).hom.app ((proEtaleBaseChange (Y ↘ Spec (.of D.k))).op.obj (op (ProEt.mk (𝟙 (Spec (.of D.k)))))) ((connectedFiniteH0SectionsIso D l E Y (n + 1)).hom x)) ∧ (∀ (n : ℕ) (x : integralOrdinaryCohomology D l hl E Y (integralCohomologyCoefficient D l hl E Y) 0), Q D l hl E Y n (P D l hl E Y (n + 1) x) = P D l hl E Y n x)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-525b4a233",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Hypotheses exact (D, l≠p, E/Q_l finite, Y over k LocallyOfFiniteType+QuasiCompact+IsSeparated, level n+1 so n>=1 covered); no Connected/Nonempty/finiteness/flatness; only extra binder is HasDerivedCategory.{w} Ab. Triangle: ∃ e pinned by product coordinates, IsDerivedLimitTriangle of Γ(sfDirectImageTransition) with Γp≫e, e⁻¹≫Γδ≫commShift; connectedIntegralImage is defeq the choice used by integralImage (the specified triangle). P: constantTowerFiniteProjection (Γη, ΓRes ρ_n, finite-tower iso) = Γ(p≫π_n)≫iso (adjunct equation), H0 = P. Q: transported by connectedFiniteH0SectionsIso it is integralCoefficientSheafTransition at Y; Q(P(n+1)x)=P n x. Edge cases empty/disconnected/n=1/non-flat covered. Only item lean changed; statement verbatim; docstrings with 7 steps; sorry only. M1: item imports parent lem-pod-connected-constant-h0's module for plain P/Q/connected* helpers; parent proof cites item, so import cycle; rule-7 exclusion listed in report (Q58/Q101 precedent, advisory); move helpers to a def node before parent's stage 3. M2: scalarReductionDerivedRestriction/Source owner def-sf-scalar-reduction-categories-restriction absent from closure (inherited from def-weil-derived-direct-image). M3: proof-only Mathlib imports harmless; FiniteSheafH0Augmentation proof import for maintainer. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,218 @@
+{
+ "id": "lem-sfb-space-inverse-modules-near-special-fibre",
+ "kind": "statement",
+ "title": "Finite-presentation realization near the infinitesimal locus",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum], algebraic spaces [def-trf-algebraic-space], and the universes of [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Separated, finite type and proper morphisms use [def-sfb-space-morphism-properties]. Finite presentation means quasi-compact, quasi-separated and locally finitely presented on etale scheme charts. Use quasi-coherent modules on the small etale ringed sites [def-trf-space-quasi-coherent-module] and tensor pullback and direct image [def-trf-space-etale-module-functors]. A module is finitely presented if etale locally it has a presentation $\\mathcal O^r\\to\\mathcal O^s\\to F\\to0$ with $r,s$ finite. Base-flatness means flatness of stalks on etale scheme charts over the corresponding local rings of the base [def-pc-scheme-module-flat-over]. Proper support means there exist a closed immersion $i:Z\\hookrightarrow X$ with $Z$ proper over the base and a finite type quasi-coherent module $G$ on $Z$ such that $i_*G\\simeq F$ [def-sfb-space-proper-quot-functor]. Let $(A_n)_{n\\geq1}$ be an inverse sequence of commutative rings with surjective transition maps whose kernels are locally nilpotent, meaning every element of each kernel is nilpotent, and set $A=\\varprojlim_n A_n$. Let $X\\to\\operatorname{Spec}A$ be separated and finitely presented, put $X_n=X\\times_A\\operatorname{Spec}A_n$, and put $X_0=|X_1|\\subseteq|X|$, the common underlying closed subset of all the $X_n$. For every $n\\geq1$ let $M_n$ be a finitely presented quasi-coherent $\\mathcal O_{X_n}$-module, flat over $A_n$, with support proper over $A_n$, with specified isomorphisms $M_n\\otimes_{A_n}A_{n-1}\\simeq M_{n-1}$ for $n\\geq2$. There exist an open subspace $W\\subseteq X$ containing $X_0$, a finitely presented quasi-coherent $\\mathcal O_W$-module $F$, and isomorphisms $F\\otimes_A A_n\\simeq M_n$ for all $n$, compatible with the specified transition isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tags 0CX4 (situation-existence), 0CX5 (lemma-compute-what-it-should-be) through 0CX9 (lemma-finitely-presented); existence consequence of 0CX9, with its canonical projection maps."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "def-weil-affine-spectrum",
+  "def-sfb-space-inverse-module-tower-tests",
+  "def-sfb-space-module-tensor-composition"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-inverse-module-derived-limit] to the specified tower. Obtain the bounded quasi-coherent object $K$ with $H^i(K)=0$ for $i<0$ and projection maps $q_n:K\\to M_n$ satisfying $q_{n-1}=t_nq_n$. Set $F_*=H^0(K)$ and let $a_n=H^0(q_n):F_*\\to M_n$. We will restrict this single quasi-coherent module; hence no gluing of independently chosen modules or isomorphisms will be needed.",
+   "uses": [
+    "lem-sfb-space-inverse-module-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX5 and Tag 0CX9, first paragraph."
+   }
+  },
+  {
+   "text": "Fix $x\\in X_0$. Choose an affine etale chart $U=\\operatorname{Spec}B\\to X$ and $u\\in U$ above $x$ with $B$ finitely presented over $A$; such charts exist by the stated chartwise finite-presentation hypothesis. Choose generators of $B$ and a polynomial surjection $P=A[T_1,\\ldots,T_r]\\twoheadrightarrow B$. By [lem-sfb-space-inverse-module-polynomial-model], take a bounded-above finite-free $P$-complex $E^\\bullet$ representing $R\\Gamma(U,K)$, also after principal localization. By [lem-sfb-space-inverse-module-affine-base-change] and its K-flat calculation, $E^\\bullet\\otimes_A A_n$ has cohomology only in degree zero, where the projection-induced identification is $\\Gamma(U_n,M_n)$. Here affine etale realization [lem-sfb-affine-etale-derived-module-realization] applies to $U_n$ and to $U$: it identifies module cohomology with sheaf cohomology and detects zero objects. In particular $R\\Gamma(U,K)$ has no negative cohomology. All these assertions hold again on a principal open of $U$, using the same cited localized model and base-change theorem.",
+   "uses": [
+    "lem-sfb-space-inverse-module-polynomial-model",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-affine-etale-derived-module-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tags 0CX7, 0CX8 and 0CX9, choice of affine chart and polynomial model."
+   }
+  },
+  {
+   "text": "We now remove positive terms by finite downward induction on an upper bound $t$ for $E^\\bullet$. If $t\\leq0$ there is nothing to remove. If $t>0$ and $E^t\\ne0$, then $\\operatorname{coker}(E^{t-1}\\to E^t)\\otimes_A A_1=0$, since it is the top cohomology of the reduced complex. The prime of $P$ corresponding to $u$ contains $\\ker(A\\to A_1)P$, so the matrix of this differential is surjective over its residue field. Some maximal minor is therefore nonzero there. Invert its determinant, retaining $u$. Reorder its columns and multiply the corresponding square block by its inverse: the differential becomes $[I\\ D]$. The change of coordinates $(v,w)\\mapsto(v-Dw,w)$ makes it $[I\\ 0]$, with a free complementary kernel. Since consecutive differentials compose to zero, the preceding differential lands in that kernel. Thus an identity two-term complex splits off in degrees $t-1,t$, and deleting it is a chain homotopy equivalence, also after tensoring with every $A_n$. Replace $t$ by $t-1$ and repeat. Finitely many such steps yield a principal neighborhood $U^\\prime\\subset U$ of $u$ and a bounded-above finite-free complex $G^\\bullet$ over a principal localization $P^\\prime$ of $P$, with $G^i=0$ for $i>0$, representing the restriction of $K$ and all its derived reductions. Zero top ranks are simply omitted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX9, maximal-rank argument and induction; explicit invertible-block cancellation."
+   }
+  },
+  {
+   "text": "Put $B^\\prime=\\Gamma(U^\\prime,\\mathcal O)$ and $C=H^0(G^\\bullet)=\\operatorname{coker}(G^{-1}\\to G^0)$. This is finitely presented over $P^\\prime$. Its action factors through $P^\\prime\\twoheadrightarrow B^\\prime$, because it is $H^0(R\\Gamma(U^\\prime,K))$. Tensoring this finite presentation with $B^\\prime$ gives a finite presentation of $C$ over $B^\\prime$, since $C\\otimes_{P^\\prime}B^\\prime=C$. Affine realization [lem-sfb-affine-etale-derived-module-realization] identifies the associated sheaf of $C$ with $F_*|_{U^\\prime}$. Since $G^{>0}=0$, right exactness of tensor identifies $H^0(G^\\bullet\\otimes_A A_n)=C\\otimes_A A_n$. The projection-induced base-change isomorphism [lem-sfb-space-inverse-module-affine-base-change] therefore identifies $a_n$ on this chart with an isomorphism $C\\otimes_A A_n\\simeq\\Gamma(U_n^\\prime,M_n)$. This proves finite presentation and every required reduction on the chart.",
+   "uses": [
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-space-inverse-module-affine-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX9, the case with highest degree at most zero and its canonical projection maps."
+   }
+  },
+  {
+   "text": "By [lem-a1-space-etale-open-image], the image $W_x$ of $U^\\prime\\to X$ is an open subspace containing $x$, and $U^\\prime\\to W_x$ is surjective etale. Let $W=\\bigcup_{x\\in X_0}W_x$ and set $F=F_*|_W$. On the etale covering family $U^\\prime\\to W$, step 4 gives a finite presentation, so $F$ is finitely presented by the etale-local definition in the statement. Every $X_n\\to X$ factors through $W$ because its underlying image is $X_0\\subset W$. The maps $a_n$ induce $F\\otimes_A A_n\\to M_n$ there. Their restrictions to the covering charts are the isomorphisms of step 4, so they are isomorphisms (local inverses agree on overlaps by uniqueness). Finally $a_{n-1}=H^0(t_n)a_n$; on a tensor $m\\otimes b$, both transition composites send it to $b\\,a_{n-1}(m)$. The isomorphisms therefore respect the specified transitions, not just the underlying isomorphism classes. If $X_0$ is empty, take $W=\\varnothing$ and $F=0$; all $X_n$ are empty.",
+   "uses": [
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX9, passage from affine etale neighborhoods to an open neighborhood of X_0; canonical maps in its first paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-inverse-module-derived-limit",
+  "lem-sfb-space-inverse-module-polynomial-model",
+  "lem-sfb-space-inverse-module-affine-base-change",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-a1-space-etale-open-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tags 0CX5, 0CX7, 0CX8, and especially 0CX9 (lemma-finitely-presented), with its local maximal-minor cancellation written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible flat finitely presented sheaves with proper support on nilpotent inverse ring quotients extend to a finitely presented module on an open neighborhood of the special fibre of an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For any sheaf of modules $ \\\\mathcal{M} $ over a ring sheaf $ \\\\mathcal{R} $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if $ \\\\mathcal{M} $ is of finite presentation (i.e., locally t\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits define finite presentations of sheaf modules or concern ordinary flat modules; none constructs a local realization of an inverse system on an algebraic space"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local algebraization near the special fibre of a compatible inverse system of flat modules on algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"Module.free_of_flat_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.Finite R P] [Flat R P] : Free R P\", \"doc\": \"Let $ R $ be a local ring and $ P $ a finitely generated flat $ R $-module. Then $ P $ is a free $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": PropertyIsLocal Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"Module.Flat.localizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) : Flat (Localization S) (LocalizedModule S M)\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $, then for any submonoid $ S $ of $ R $, the localized module $ M_S $ is flat over the localization $ R_S $ of $ R $ at $ S $. This asserts t\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra\", \"type\": \"[IsLocalRing A] [IsLocalRing B] [Flat A B] [IsLocalHom (algebraMap A B)] : Module.FaithfullyFlat A B\", \"doc\": \"Let $ A $ and $ B $ be local rings. If $ A $ is flat as a $ B $-module and the algebra map $ B \\to A $ is a local homomorphism, then $ A $ is faithfully flat over $ B $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits define finite presentations of sheaf modules or concern ordinary flat modules; none constructs a local realization of an inverse system on an algebraic space"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"algebraization\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits define finite presentations of sheaf modules or concern ordinary flat modules; none constructs a local realization of an inverse system on an algebraic space"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraiz|Grothendieck.*existence|inverse.*quasi.?coherent",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Tactic.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Tactic.Algebraize\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"1160\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"1185\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"1228\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean\", \"line\": \"37\", \"text\": \"  algebraize [(Subalgebra.inclusion le).toRingHom]\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/Basic.lean\", \"line\": \"224\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/Basic.lean\", \"line\": \"502\", \"text\": \"  algebraize [f, IsLocalization.map (S := Rᵣ) Sᵣ f M.le_comap_map,\"}\n  {\"file\": \"Mathlib/RingTheory/AdjoinRoot.lean\", \"line\": \"1110\", \"text\": \"  algebraize [(algebraMap (AdjoinRoot p) S).comp (algebraMap R (AdjoinRoot p))]\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/Exactness.lean\", \"line\": \"301\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/Exactness.lean\", \"line\": \"315\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/RingTheory/PicardGroup.lean\", \"line\": \"591\", \"text\": \"  algebraize [f, g, g.comp f]\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Ideal.lean\", \"line\": \"52\", \"text\": \"  algebraize [f]\"}\n  {\"file\": \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"line\": \"237\", \"text\": \"  algebraize [φ.toRingHom]\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Basic.lean\", \"line\": \"474\", \"text\": \"  algebraize [f, g, g.comp f]\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Basic.lean\", \"line\": \"478\", \"text\": \"  algebraize [f, g, g.comp f]\"}\n  {\"file\": \"Mathlib/RingTheory/Jacobson/Ring.lean\", \"line\": \"695\", \"text\": \"    by intro; algebraize [f]; exact finite_of_finite_type_of_isJacobsonRing R S⟩\"}\n  {\"file\": \"Mathlib/RingTheory/Jacobson/Ring.lean\", \"line\": \"718\", \"text\": \"  algebraize [f, (g.comp f)]\"}\n  {\"file\": \"Mathlib/RingTheory/NoetherNormalization.lean\", \"line\": \"293\", \"text\": \"    algebraize [g.toRingHom]\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Norm/RelNorm.lean\", \"line\": \"121\", \"text\": \"  algebraize [f, g, (algebraMap K L).comp f]\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation.lean\", \"line\": \"59\", \"text\": \"    algebraize [f.toRingHom]\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Defs.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.Tactic.Algebraize\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Defs.lean\", \"line\": \"169\", \"text\": \"@[algebraize Module.Finite, stacks 0563]\"}\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"169\", \"text\": \"    algebraize [RingHom.snd S U]\"}\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"192\", \"text\": \"    algebraize [(algebraMap S V).comp (algebraMap R S)]\"}\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/IsIntegral/Defs.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Tactic.Algebraize\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits define finite presentations of sheaf modules or concern ordinary flat modules; none constructs a local realization of an inverse system on an algebraic space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation of the zeroth cohomology of a derived inverse limit of flat proper support quasi coherent modules near the closed fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a site $(\\\\mathcal{C}, J)$ has finite presentation, then its local generators data satisfies the finite type condition under th\"}\n  {\"name\": \"SheafOfModules.Presentation.IsFinite\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits define finite presentations of sheaf modules or concern ordinary flat modules; none constructs a local realization of an inverse system on an algebraic space"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-flat-proper-support-inverse-effectivity",
+  "date": "2026-10-24",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CX4 (situation-existence), 0CX5 (lemma-compute-what-it-should-be) through 0CX9 (lemma-finitely-presented); existence consequence of 0CX9, with its canonical projection maps.",
+   "via": [
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-inverse-modules-near-special-fibre",
+  "worker": "stage1",
+  "summary": "Read 0CX4--0CX9, checked all source hypotheses and the canonical projection maps, searched the DAG, current blueprint and project Lean, and separated bounded derived-limit existence, polynomial finite-free models and affine derived base change into three statement-only inputs. Expanded the invertible-minor induction and used one global H^0(K) so the reduction isomorphisms have the specified compatibility. No statement change or Noetherian hypothesis.",
+  "blueprint": "Supports proof (3) of the current det-thm-sf-ctf-stability-direct-images through the inherited coherent-family/Quot effectivity prerequisite chain. The ancestor command returns None as on the live item; retained its null ancestor and via list. Realizes the local finite-presentation portion of 0CXB via 0CX9.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-affine-etale-derived-module-realization",
+    "why": "Generic affine etale QCoh derived equivalence identifies H^0 and detects vanishing on the scheme charts; this does not replace the unit route."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic openness of representable etale chart images assembles the local neighborhoods; no different six-functor argument is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-a1-space-etale-open-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-c4b172bc2",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-c4b172bc2 (reviewer sub-agent of L); spot-checked: I read Stacks spaces-flat 0CX4 to 0CXB and spaces-perfect 0CST. The item statement is unchanged and agrees with 0CX4 and 0CX9 (2)+(3), with the φ_n compatibility. Three new statement-only nodes: derived-limit (0CX5 via 0CST; holds since X is qcqs and DQ_X commutes with products), polynomial-model (0CX7 relative pseudo-coherence gives a bounded-above finite-free P-model, stated in derived form; localizations follow from B_f = B⊗_P P_f; K-flat over A because P is flat) and affine-base-change (0CX8; the map is the projection-induced one, from the R lim N_n⊗A_n ≅ N_n of 0CX6, in D(A_n) as in the source). Each new node states one source lemma, strictly smaller than the item. The item's steps carry the 0CX9 argument itself, so this is not a relabelling. Grep for 0CX*, coherator, R lim and maximal minor found no duplicate. Step 3's minor/[I D] cancellation is fully written and I checked it: A→A_1 is surjective, κ(𝔭) is an A_1-algebra, and the contractible summand stays contractible after ⊗A_n. Steps 4 and 5 are correct: C⊗_{P'}B'=C, H^0(G⊗A_n)=C⊗A_n, the étale-local isomorphism, and m⊗b ↦ b·a_{n-1}(m) from q_{n-1}=t_n q_n; the empty X_0 case works. Tool use lem-a1-space-etale-open-image is generic topology of algebraic spaces and is accepted. The batch-5 flags are general algebraic-space definitions and foundations already in the item's base stmt_deps, not trace-formula or Poincaré-duality steps; accepted. No SGA citation; searches recorded; proof_deps equals the union of uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceInverseModulesNearSpecialFibre",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_inverseModule_nearSpecialFibre",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceInverseModulesNearSpecialFibre.lean",
+  "statement": "theorem exists_inverseModule_nearSpecialFibre (A : ℕ → CommRingCat.{u}) (r : ∀ n : ℕ, A (n + 1) ⟶ A n) (hsurj : ∀ n : ℕ, Function.Surjective (r n)) (hnil : ∀ (n : ℕ) (a : A (n + 1)), (r n) a = 0 → IsNilpotent a) (c : Cone (Functor.ofOpSequence r)) (hc : IsLimit c) (X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (f : X ⟶ schemeSpace (inverseModuleSpec c.pt)) (hsep : MapIsSeparated f) (hfp : ProperQuotFinitePresentation f) (M : ∀ n : ℕ, (properQuotFibre f (inverseModuleTest c n)).Modules) (hqc : ∀ n : ℕ, (M n).IsQuasicoherent) (hfin : ∀ n : ℕ, (M n).IsFinitePresentation) (hflat : ∀ (n : ℕ) (U : (properQuotFibre f (inverseModuleTest c n)).EtaleSite), ((schemeRestriction _ U).obj (M n)).IsFlatOver (yoneda.preimage (U.obj.hom ≫ (properQuotSnd f (inverseModuleTest c n)).hom.hom)).left) (hsupp : ∀ n : ℕ, ∃ (Z : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (i : Z ⟶ properQuotFibre f (inverseModuleTest c n)), IsRepresentableWith (fun _ _ a ↦ IsClosedImmersion a.left) i.hom.hom ∧ MapIsProper (i ≫ properQuotSnd f (inverseModuleTest c n)) ∧ ∃ G : Z.Modules, G.IsQuasicoherent ∧ G.IsFiniteType ∧ Nonempty ((moduleDirectImage i).obj G ≅ M n)) (e : ∀ n : ℕ, (moduleTensorPullback (properQuotFibreMap f (inverseModuleTestMap c n))).obj (M (n + 1)) ≅ M n) : ∃ (W : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (j : W ⟶ X), IsRepresentableWith (fun _ _ a ↦ IsOpenImmersion a.left) j.hom.hom ∧ ∃ (k : ∀ n : ℕ, properQuotFibre f (inverseModuleTest c n) ⟶ W), (∀ n : ℕ, k n ≫ j = properQuotFst f (inverseModuleTest c n)) ∧ ∃ (hk : ∀ n : ℕ, properQuotFibreMap f (inverseModuleTestMap c n) ≫ k (n + 1) = k n) (F : W.Modules), F.IsQuasicoherent ∧ F.IsFinitePresentation ∧ ∃ α : ∀ n : ℕ, (moduleTensorPullback (k n)).obj F ≅ M n, ∀ n : ℕ, (moduleTensorComposition (properQuotFibreMap f (inverseModuleTestMap c n)) (k (n + 1))).hom.app F ≫ (eqToIso (congrArg (fun a ↦ (moduleTensorPullback a).obj F) (hk n))).hom ≫ (α n).hom = (moduleTensorPullback (properQuotFibreMap f (inverseModuleTestMap c n))).map (α (n + 1)).hom ≫ (e n).hom",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned e0ab53609e92, H2/B3: the statement depends on definitions, recorded by def-sfb-space-inverse-module-tower-tests (existing inverseModuleSpec, inverseModuleSpecMap, inverseModuleTest, inverseModuleTestMap_w, inverseModuleTestMap) and the existing def-sfb-space-module-tensor-composition. Neither owning module theorem is a statement dependency. H7 repair of returned 3c06c6130d83: proof_deps is exactly the five-element base list; the flat-direct-image-base-change theorem is not added, because no proof step uses it. The Lean module and signature are unchanged; W, k, hk and the final tensor-normalized compatibility equation retain their reviewed meanings."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e2deb2f8",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Re-delivery of 3c06 H7 return. Lean module and both def-node records byte-identical to the reviewed 3c06/e0ab delivery; item proof_deps now equals the live base list exactly (flat-direct-image-base-change removed). node_fields.correction_fields/check_statement_change(base, head) = [], so merge refusal resolved; only lean + two def stmt_deps (tower-tests existing:true owner of inverseModuleSpec/SpecMap/Test/TestMap_w/TestMap, landed module-tensor-composition) differ from base. Live has no competing owner or lean record. Statement clauses re-read vs Stacks 0CX4/0CX9 (index shift, hnil elementwise, limit cone, real Spec(π_n) fibres, hflat/hsupp, open W via factorizations k, F fp/qc, α, compatibility square with the given e via moduleTensorComposition); edge cases fine; gates hold; report sections present; no compile needed (no file changed)."
+ }
+}

@@ -1,0 +1,339 @@
+{
+ "id": "lem-trf-cotangent-augmentation-localization",
+ "kind": "statement",
+ "title": "Localization of standard cotangent differential augmentations",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings, $T\\subseteq B$ a multiplicative subset, and $C=T^{-1}B$, with its induced $A$-algebra structure. Use the standard complexes $L_{B/A}$ and $L_{C/A}$ of [def-trf-cotangent-resolution-data] in the derived categories of [def-weil-abstract-derived-category], and universal differentials [def-weil-pbc-kahler-differentials]. For $R=B,C$, let $a_R:L_{R/A}\\to\\Omega^1_{R/A}[0]$ be the differential augmentation: on degree-zero standard-resolution generators it sends $\\mathrm dq\\otimes r$ to $r\\,\\mathrm d(\\epsilon(q))$, and all other components vanish. For every $B$-module $N$, the canonical tensor/localization identification $N\\otimes_B C\\cong T^{-1}N$ is given by the mutually inverse maps $n\\otimes(b/t)\\mapsto bn/t$ and $n/t\\mapsto n\\otimes(1/t)$. These identifications commute with module maps, and for every cochain complex $K$ of $B$-modules they give $H^i(K\\otimes_B C)\\cong T^{-1}H^i(K)$ for all integers $i$, naturally in chain maps; in particular degreewise tensor with $C$ preserves quasi-isomorphisms. Let $\\lambda:L_{B/A}\\otimes_B C\\to L_{C/A}$ be the canonical cotangent localization map induced by $B\\to C$ and the identity of $A$, and let $\\kappa:T^{-1}\\Omega^1_{B/A}\\to\\Omega^1_{C/A}$ send $\\mathrm db/t$ to $t^{-1}\\mathrm d(b/1)$. Then $\\lambda$ is a quasi-isomorphism, $\\kappa$ is an isomorphism, and in $D(C)$ one has $a_C\\lambda=\\kappa[0](a_B\\otimes_B C)$, using the displayed tensor/localization identification. On every degree-zero generator $\\mathrm dq\\otimes(b/t)$ of the localized standard differential complex, both composites in this equality have value $(b/t)\\,\\mathrm d(\\epsilon(q)/1)$. Consequently, if $a_B$ is a quasi-isomorphism, then the canonical map $\\kappa^{-1}[0]a_C:L_{C/A}\\to(T^{-1}\\Omega^1_{B/A})[0]$ is a quasi-isomorphism as well. No nonzero-ring, finite-generation or principal-localization hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08SF (lemma-localize), together with algebra.tex Tags 00CS (proposition-localization-exact), 00DK (lemma-tensor-localization), and 00RT (lemma-differentials-localize), part (2): localization of the specified differential augmentation, returned Step 4."
+ },
+ "stmt_deps": [
+  "def-trf-cotangent-resolution-data",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "def-trf-standard-differential-augmentation"
+ ],
+ "proof": [
+  {
+   "text": "Define $f_N:N\\otimes_B C\\to T^{-1}N$ by $f_N(n\\otimes b/t)=bn/t$, using tensor bilinearity and the fraction relation in the two cited definitions. Define $g_N(n/t)=n\\otimes1/t$. This is independent of fractions: if $u(t'n-tn')=0$, then $n\\otimes1/t-n'\\otimes1/t'=(t'n-tn')\\otimes1/(tt')=u(t'n-tn')\\otimes1/(utt')=0$. The same common-denominator formula proves additivity, and moving scalars between tensor factors proves $C$-linearity. Now $f_Ng_N(n/t)=n/t$, while $g_Nf_N(n\\otimes b/t)=bn\\otimes1/t=n\\otimes b/t$. Thus they are inverse. For a $B$-linear $v:N\\to N'$, both routes on $n\\otimes b/t$ give $bv(n)/t$, proving naturality. Applied degreewise, these maps commute with every differential and chain map.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK (lemma-tensor-localization), explicit mutually inverse maps with the tensor factors interchanged."
+   }
+  },
+  {
+   "text": "For a complex $K$, put $Z^i=\\ker d^i$, $I^i=\\operatorname{im}d^{i-1}$. Apply exact localization to $0\\to Z^i\\to K^i\\to K^{i+1}$, to $K^{i-1}\\to I^i\\to0$, and to $0\\to I^i\\to Z^i\\to H^i(K)\\to0$. The first identifies the localized cycles with $T^{-1}Z^i$, the second identifies the localized boundaries with $T^{-1}I^i$, and the third identifies their quotient with $T^{-1}H^i(K)$. With step 1 this gives $H^i(K\\otimes_B C)\\cong T^{-1}H^i(K)$. A chain map sends $z/t$ to its image divided by $t$ at each stage, so the isomorphism is natural. If the chain map is a quasi-isomorphism, its localized cohomology map has inverse obtained by localizing its cohomology inverse; hence termwise tensor preserves quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CS (proposition-localization-exact), applied to cycles, boundaries and their quotient."
+   }
+  },
+  {
+   "text": "Let $P^R_\\bullet\\to R$ be the standard resolution for $R=B,C$. The universal derivation and the augmentation give an $R$-linear map $\\Omega^1_{P^R_0/A}\\otimes_{P^R_0}R\\to\\Omega^1_{R/A}$ by $\\mathrm dq\\otimes r\\mapsto r\\,\\mathrm d\\epsilon_R(q)$. The two faces out of $P^R_1$ have equal composites with $\\epsilon_R$, so on $\\mathrm dx\\otimes r$ their difference maps to $r\\,\\mathrm d(\\epsilon_Rd_0x)-r\\,\\mathrm d(\\epsilon_Rd_1x)=0$. Thus this map, with all other components zero, is a chain map $a_R$. In all other degrees the chain-map equation is zero on both sides, since the target is concentrated in degree zero.",
+   "uses": [
+    "def-trf-cotangent-resolution-data",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PN (definition-cotangent-complex-ring-map), augmented differential complex; Tag 08QL (section-functoriality)."
+   }
+  },
+  {
+   "text": "The localization-vanishing lemma applied to $B\\to C$ gives $L_{C/B}=0$. The retract lemma, applied to $j=r=\\mathrm{id}_A$, gives $L_{A/A}=0$ for the identity of $A$. The map $B\\to C$ is flat by the localization-flatness lemma. Apply the zero-relative-square lemma to the square with lower map $A\\xrightarrow{1}A$ and upper map $B\\to C$. Its last clause identifies the canonical derived comparison with the actual standard chain map $\\lambda:L_{B/A}\\otimes_B C\\to L_{C/A}$ and states that this chain map is a quasi-isomorphism. In particular it applies to arbitrary $T$, including $0\\in T$, without a tensor-pushout assumption.",
+   "uses": [
+    "lem-trf-localization-cotangent-vanishing",
+    "lem-trf-cotangent-retract-transitivity-vanishing",
+    "lem-weil-pbc-localization-flat",
+    "lem-trf-cotangent-zero-relative-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08R2 (lemma-when-zero), case (3), and 08SF (lemma-localize), using the canonical-map form recorded by the zero-relative-square node."
+   }
+  },
+  {
+   "text": "The differential-localization lemma gives precisely the isomorphism $\\kappa$ in the statement. Let $h:P^B_\\bullet\\to P^C_\\bullet$ be the standard map. Its augmentation equation is $\\epsilon_C h(q)=\\epsilon_B(q)/1$, and its differential map sends $\\mathrm dq\\otimes(b/t)$ to $\\mathrm d(h(q))\\otimes(b/t)$. Therefore $a_C\\lambda$ sends this generator to $(b/t)\\,\\mathrm d(\\epsilon_B(q)/1)$. The other route first sends it to $\\mathrm d\\epsilon_B(q)\\otimes(b/t)$, which step 1 identifies with $b\\,\\mathrm d\\epsilon_B(q)/t$; applying $\\kappa$ gives the same value. Universal differentials generate their modules, and pure tensors generate tensor products, so the degree-zero maps agree. In every other degree both maps to $\\Omega^1_{C/A}[0]$ vanish. This proves equality of chain maps, hence the asserted equality in $D(C)$.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-localization",
+    "def-trf-cotangent-resolution-data",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), standard map on differential generators; algebra.tex Tag 00RT (lemma-differentials-localize), part (2)."
+   }
+  },
+  {
+   "text": "If $a_B$ is a quasi-isomorphism, step 2 makes $a_B\\otimes_B C$ a quasi-isomorphism. Step 5 says $(\\kappa^{-1}[0]a_C)\\lambda=a_B\\otimes_B C$. On each cohomology module, step 4 makes $H^i(\\lambda)$ invertible, so $H^i(\\kappa^{-1}[0]a_C)=H^i(a_B\\otimes_B C)H^i(\\lambda)^{-1}$ is invertible. This is the required quasi-isomorphism. If $0\\in T$, then $C$ and all its modules are zero and all displayed maps are the unique isomorphisms; no cancellation by a nonzero element was used. For $T=\\{1\\}$ the same formulas give identity localization, and nothing in the argument assumes finite generation or a single denominator generating $T$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SF (lemma-localize), consequence for the specified augmentation, using the explicit square of the preceding step."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-localization-module-exact",
+  "def-weil-abstract-derived-category",
+  "def-trf-cotangent-resolution-data",
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-localization-cotangent-vanishing",
+  "lem-trf-cotangent-retract-transitivity-vanishing",
+  "lem-weil-pbc-localization-flat",
+  "lem-trf-cotangent-zero-relative-square",
+  "lem-weil-pbc-kahler-differentials-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08PN, 08QL, 08SF; supplemented by algebra.tex Tags 00DK, 00CS, 00HT and 00RT. The augmentation square is checked on its standard differential generators."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "localization of cotangent complex canonical augmentation commutes with localization of Kahler differentials",
+   "results": "{\"t\": \"2026-10-22T06:43:38Z\", \"tool\": \"leanfinder\", \"query\": \"localization of cotangent complex canonical augmentation commutes with localization of Kahler differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.cotangentCompLocalizationAwayEquiv\", \"Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv\", \"Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_comp_inl\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inl\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inr\", \"Algebra.Generators.map_comp_cotangentCompAwaySec\", \"Algebra.tensorH1CotangentOfIsLocalization\"], \"digest\": \"7f4ad16e2cdeae8d\"}; Full returned signatures in repair-search-05.txt. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65, 83-100, Etale/Kaehler.lean:30-70, and the returned types. Presentation cotangent maps, H1 localization and ordinary differentials do not give the full standard derived complex and its augmentation square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "localization preserves cotangent augmentation quasi isomorphism and localized differential module",
+   "results": "{\"t\": \"2026-10-22T06:43:28Z\", \"tool\": \"leansearch\", \"query\": \"localization preserves cotangent augmentation quasi isomorphism and localized differential module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localizedModuleIsLocalizedModule\", \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv.congr_simp\", \"KaehlerDifferential.isLocalizedModule\", \"KaehlerDifferential.isLocalizedModule_map\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv\", \"Algebra.tensorH1CotangentOfIsLocalization\", \"Algebra.H1Cotangent.isLocalizedModule\"], \"digest\": \"abe5fba5a3984cc9\"}; Full returned signatures in repair-search-06.txt. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65, 83-100, Etale/Kaehler.lean:30-70, and the returned types. Presentation cotangent maps, H1 localization and ordinary differentials do not give the full standard derived complex and its augmentation square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangentComplex\", \"localization\"",
+   "results": "{\"t\": \"2026-10-22T06:43:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"cotangentComplex\\\", \\\"localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Full returned signatures in repair-search-07.txt. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65, 83-100, Etale/Kaehler.lean:30-70, and the returned types. Presentation cotangent maps, H1 localization and ordinary differentials do not give the full standard derived complex and its augmentation square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentComplexBaseChange|tensorKaehlerEquivOfFormallyEtale|localiz.*quasiIso",
+   "results": "{\"t\": \"2026-10-22T06:43:28Z\", \"tool\": \"grep\", \"query\": \"cotangentComplexBaseChange|tensorKaehlerEquivOfFormallyEtale|localiz.*quasiIso\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\"], \"digest\": \"0c6cc0d394945fa3\"}; Full returned signatures in repair-search-08.txt. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65, 83-100, Etale/Kaehler.lean:30-70, and the returned types. Presentation cotangent maps, H1 localization and ordinary differentials do not give the full standard derived complex and its augmentation square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact localization of cochain complexes preserves quasi isomorphisms differential augmentation naturality",
+   "results": "{\"t\": \"2026-10-22T06:43:40Z\", \"tool\": \"leanfinder\", \"query\": \"exact localization of cochain complexes preserves quasi isomorphisms differential augmentation naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"CochainComplex.mappingCone.quasiIso_descShortComplex\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"DerivedCategory.instIsIsoMapCochainComplexIntQ\"], \"digest\": \"8bca9e9ec4d43984\"}; Full returned signatures in repair-search-09.txt. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-65, 83-100, Etale/Kaehler.lean:30-70, and the returned types. Presentation cotangent maps, H1 localization and ordinary differentials do not give the full standard derived complex and its augmentation square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentComplex.*[Ll]ocal|augmentation.*[Ll]ocal",
+   "results": {
+    "t": "2026-10-23T04:30:56Z",
+    "tool": "grep",
+    "query": "cotangentComplex.*[Ll]ocal|augmentation.*[Ll]ocal",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "full cotangent complex localization quasi isomorphism natural augmentation Kahler differentials",
+   "results": {
+    "t": "2026-10-23T04:30:57Z",
+    "tool": "leansearch",
+    "query": "full cotangent complex localization quasi isomorphism natural augmentation Kahler differentials",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso",
+     "KaehlerDifferential.isLocalizedModule_map",
+     "DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso",
+     "KaehlerDifferential.isLocalizedModule",
+     "HomologicalComplexUpToQuasiIso.instIsLocalizationHomologicalComplexCompHomotopyCategoryQuotientQhQuasiIso",
+     "DerivedCategory.isIso_Q_map_iff_quasiIso",
+     "HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso",
+     "DerivedCategory.instIsIsoMapCochainComplexIntQ"
+    ],
+    "digest": "d36eb98c16822440"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangentComplex\", \"localization\"",
+   "results": {
+    "t": "2026-10-23T04:30:58Z",
+    "tool": "loogle",
+    "query": "\"cotangentComplex\", \"localization\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization of standard cotangent complex commutes with differential augmentation",
+   "results": {
+    "t": "2026-10-23T04:30:59Z",
+    "tool": "leanfinder",
+    "query": "localization of standard cotangent complex commutes with differential augmentation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_comp_inl",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inr",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inl",
+     "Algebra.Generators.map_comp_cotangentCompAwaySec",
+     "Algebra.Generators.cotangentCompAwaySec_apply"
+    ],
+    "digest": "e8de5ea40dc54be1"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived cotangent complex base change localization standard simplicial polynomial resolution",
+   "results": {
+    "t": "2026-10-23T04:32:08Z",
+    "tool": "leanfinder",
+    "query": "derived cotangent complex base change localization standard simplicial polynomial resolution",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv",
+     "KaehlerDifferential.cotangentComplexBaseChange",
+     "Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_comp_inl",
+     "Algebra.Generators.map_comp_cotangentCompAwaySec",
+     "KaehlerDifferential.cotangentComplexBaseChange_tmul",
+     "Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange"
+    ],
+    "digest": "5cb6c5b8daeac2a2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-cotangent-identification",
+  "date": "2026-10-22",
+  "group": "Q08"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Cotangent complex and differential basis for a polynomial algebra. Returned polynomial cotangent proof Step 4: exact localization of the differential augmentation and the commuting generator formula.",
+   "via": [
+    "lem-trf-smooth-cotangent-identification",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cotangent-augmentation-localization",
+  "worker": "stage1",
+  "summary": "Expanded all localization and augmentation clauses into six steps. Reused existing general zero-relative-square, localization-vanishing, flatness, exactness and differential-localization nodes; no new nodes. Explicit fraction inverses, homology naturality and chain-level augmentation square retain the zero-ring case.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality, proof (1)--(2), specialization/nearby-cycle branch, through the recorded marked semistable dualizing/lci ancestry. This split realizes returned polynomial cotangent identification Step 4, exact localization of its specified augmentation; it changes no unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-52e4aa077",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-52e4aa077 (reviewer sub-agent of L); spot-checked: Read the item in full; it has 6 steps and no new nodes. The statement is byte-identical to live (where the item is still unsplit; there is no repair note), and the added stmt_deps (module-localization, module-tensor) are used by the statement. Source checks: Stacks 08SF lemma-localize (cotangent.tex:1660) with S={1}, and 00RT lemma-differentials-localize (algebra.tex:34078) through the leaf lem-weil-pbc-kahler-differentials-localization, which gives the same κ formula. No SGA. Step 1: the fraction/tensor inverses check, including well-definedness via u(t'n-tn')=0. Step 2: localization-module-exact is applied to the cycle, boundary and quotient sequences, which gives the H^i formula and preservation of quasi-isomorphisms. Step 3: a_R is a chain map because εd0=εd1 kills the degree -1 component. Step 4: L_{C/B}=0 from the vanishing lemma, B→C flat, and the flat clause of zero-relative-square says the canonical chain map λ is a quasi-isomorphism. Step 5: both routes give (b/t)d(ε(q)/1) on generators, using the standard map h's augmentation and differential-map formulas from def-trf-cotangent-resolution-data. Step 6: H^i cancellation. Edge cases checked: T={1}, 0∈T, arbitrary T, characteristic 2. No cycle. Every cited lemma is same-unit or a mathlib leaf. Citer smooth-cotangent-identification step 3 uses exactly the conditional clause and the generator formula. No duplicate: cotangent-flat-base-change does not apply, and localized-polynomial-resolution-model is broader. FIX (C4/E5): step 4 got L_{A/A}=0 by treating the ring of fractions {1}^{-1}A as literally A, which needs an uncited transport. Replaced by a citation of the existing same-unit node lem-trf-cotangent-retract-transitivity-vanishing (L_{R/R}=0 for the identity, with j=r=id). Its dependencies do not reach the item, so no cycle. Step-4 uses and proof_deps are updated; the fixed file is fixes/dag/nodes/sec-trace-formula/lem-trf-cotangent-augmentation-localization.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CotangentAugmentationLocalization",
+  "declaration": "Algebra.CotangentResolution.cotangent_augmentation_localization",
+  "declarations": [
+   "Algebra.CotangentResolution.localizationTensor",
+   "Algebra.CotangentResolution.localizationTensorIso",
+   "Algebra.CotangentResolution.tensorFractionIso",
+   "Algebra.CotangentResolution.fractionMap",
+   "Algebra.CotangentResolution.standardDifferentialComplex",
+   "Algebra.CotangentResolution.standardLocalizationSquare",
+   "Algebra.CotangentResolution.localizedDifferentialsIso",
+   "Algebra.CotangentResolution.tensorDifferentialAugmentation",
+   "Algebra.CotangentResolution.cotangent_augmentation_localization"
+  ],
+  "file": "lean/Sheaf/RingTheory/CotangentAugmentationLocalization.lean",
+  "statement": "theorem cotangent_augmentation_localization [∀ R : CommRingCat.{u}, HasDerivedCategory.{u + 1} (ModuleCat.{u} R)] (D : Coherence.{u}) (A B : Type u) [CommRing A] [CommRing B] [Algebra A B] (T : Submonoid B) : (∀ (N : ModuleCat.{u} B) (n : N) (b : B) (t : T), (tensorFractionIso T N).hom (Localization.mk b t ⊗ₜ[B, algebraMap B (Localization T)] n) = LocalizedModule.mk (b • n) t) ∧ (∀ (N : ModuleCat.{u} B) (n : N) (t : T), (tensorFractionIso T N).inv (LocalizedModule.mk n t) = Localization.mk 1 t ⊗ₜ[B, algebraMap B (Localization T)] n) ∧ (∀ {M N : ModuleCat.{u} B} (v : M ⟶ N), (localizationTensor T).map v ≫ (tensorFractionIso T N).hom = (tensorFractionIso T M).hom ≫ fractionMap T v) ∧ (∃ H : ∀ (K : CochainComplex (ModuleCat.{u} B) ℤ) (i : ℤ), (((localizationTensor T).mapHomologicalComplex (ComplexShape.up ℤ)).obj K).homology i ≅ ModuleCat.of (Localization T) (LocalizedModule T (K.homology i)), (∀ (K : CochainComplex (ModuleCat.{u} B) ℤ) (i : ℤ) (z : K.cycles i) (t : T), ∃ z' : (((localizationTensor T).mapHomologicalComplex (ComplexShape.up ℤ)).obj K).cycles i, (((localizationTensor T).mapHomologicalComplex (ComplexShape.up ℤ)).obj K).iCycles i z' = Localization.mk 1 t ⊗ₜ[B, algebraMap B (Localization T)] K.iCycles i z ∧ (H K i).hom ((((localizationTensor T).mapHomologicalComplex (ComplexShape.up ℤ)).obj K).homologyπ i z') = LocalizedModule.mk (K.homologyπ i z) t) ∧ ∀ {K L : CochainComplex (ModuleCat.{u} B) ℤ} (v : K ⟶ L) (i : ℤ), HomologicalComplex.homologyMap (((localizationTensor T).mapHomologicalComplex (ComplexShape.up ℤ)).map v) i ≫ (H L i).hom = (H K i).hom ≫ fractionMap T (HomologicalComplex.homologyMap v i)) ∧ (∀ {K L : CochainComplex (ModuleCat.{u} B) ℤ} (v : K ⟶ L), QuasiIso v → QuasiIso (((localizationTensor T).mapHomologicalComplex (ComplexShape.up ℤ)).map v)) ∧ (∀ (b : B) (t : T), (localizedDifferentialsIso A B T).hom (LocalizedModule.mk (CommRingCat.KaehlerDifferential.d b) t) = Localization.mk 1 t • CommRingCat.KaehlerDifferential.d (algebraMap B (Localization T) b)) ∧ ∃ (aB : DifferentialAugmentation D (Arrow.mk (CommRingCat.ofHom (algebraMap A B)))) (aC : DifferentialAugmentation D (Arrow.mk (CommRingCat.ofHom (algebraMap A (Localization T))))) (lam : (((localizationTensor T).mapHomologicalComplex (ComplexShape.up ℤ)).obj (standardDifferentialComplex D A B)) ⟶ standardDifferentialComplex D A (Localization T)), (∀ (n : ℕ) (c : Localization T) (x : (D.standard (Arrow.mk (CommRingCat.ofHom (algebraMap A B)))).algebra.obj (op ⦋n⦌)), lam.f (-(n : ℤ)) (c ⊗ₜ[B, algebraMap B (Localization T)] complexGenerator (D.differentials (D.standard (Arrow.mk (CommRingCat.ofHom (algebraMap A B))))) n 1 x) = c • complexGenerator (D.differentials (D.standard (Arrow.mk (CommRingCat.ofHom (algebraMap A (Localization T)))))) n 1 ((D.standardMap (standardLocalizationSquare A B T)).map.app (op ⦋n⦌) x)) ∧ QuasiIso lam ∧ (DerivedCategory.Q (C := ModuleCat.{u} (CommRingCat.of (Localization T)))).map (lam ≫ aC.map) = (DerivedCategory.Q (C := ModuleCat.{u} (CommRingCat.of (Localization T)))).map (tensorDifferentialAugmentation T aB ≫ (HomologicalComplex.single (ModuleCat.{u} (Localization T)) (ComplexShape.up ℤ) 0).map (localizedDifferentialsIso A B T).hom) ∧ (∀ (b : B) (t : T) (x : (D.standard (Arrow.mk (CommRingCat.ofHom (algebraMap A B)))).algebra.obj (op ⦋0⦌)), (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 (CommRingCat.KaehlerDifferential (CommRingCat.ofHom (algebraMap A (Localization T))))).hom ((lam ≫ aC.map).f 0 (Localization.mk b t ⊗ₜ[B, algebraMap B (Localization T)] complexGenerator (D.differentials (D.standard (Arrow.mk (CommRingCat.ofHom (algebraMap A B))))) 0 1 x)) = Localization.mk b t • CommRingCat.KaehlerDifferential.d (algebraMap B (Localization T) ((D.standard (Arrow.mk (CommRingCat.ofHom (algebraMap A B)))).augmentation.app (op ⦋0⦌) x))) ∧ (∀ (b : B) (t : T) (x : (D.standard (Arrow.mk (CommRingCat.ofHom (algebraMap A B)))).algebra.obj (op ⦋0⦌)), (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 (CommRingCat.KaehlerDifferential (CommRingCat.ofHom (algebraMap A (Localization T))))).hom ((tensorDifferentialAugmentation T aB ≫ (HomologicalComplex.single (ModuleCat.{u} (Localization T)) (ComplexShape.up ℤ) 0).map (localizedDifferentialsIso A B T).hom).f 0 (Localization.mk b t ⊗ₜ[B, algebraMap B (Localization T)] complexGenerator (D.differentials (D.standard (Arrow.mk (CommRingCat.ofHom (algebraMap A B))))) 0 1 x)) = Localization.mk b t • CommRingCat.KaehlerDifferential.d (algebraMap B (Localization T) ((D.standard (Arrow.mk (CommRingCat.ofHom (algebraMap A B)))).augmentation.app (op ⦋0⦌) x))) ∧ (QuasiIso aB.map → QuasiIso (aC.map ≫ (HomologicalComplex.single (ModuleCat.{u} (Localization T)) (ComplexShape.up ℤ) 0).map (localizedDifferentialsIso A B T).inv))",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00b27208d",
+  "group": "Q09",
+  "result": "fix",
+  "note": "Mathematics correct clause by clause: aB/aC exist but only one DifferentialAugmentation can exist (degree-0 generators span, other target degrees zero); lam fixed on c⊗gen_n(1,x) in all degrees via standardMap of the square (id_A, B→C); H fixed on (1/t)⊗z cycle classes, which are all cycles; κ canonical and fixed by κ(db/t)=(1/t)d(b/1); tensor/fraction formulas in the 00DK factor order, naturality, QuasiIso preservation, D(C) equality, two non-tautological generator clauses, final conditional; no extra hypotheses or universe restriction; 0∈T, T={1}, infinite T covered; statement/proof unchanged vs live. F1 (H11): Second reading was a self-audit, so FIX by fixes/<item>.report.md (worker report verbatim plus a real second reading); no Lean change, no compile. F2 maintainer note: DifferentialAugmentation and kahlerAlgebraMapIso live in PolynomialCotangentIdentification, whose theorem lem-trf-smooth-cotangent-identification has this item in proof_deps, so the stage-3 import would cycle; the group cannot move them (owner outside closure). Move both to a def-node module for def-trf-standard-differential-augmentation, re-imported by the parent (Q134 precedent)."
+ }
+}

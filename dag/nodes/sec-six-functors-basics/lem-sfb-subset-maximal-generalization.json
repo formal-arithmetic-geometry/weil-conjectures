@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-subset-maximal-generalization",
+ "kind": "statement",
+ "title": "Maximal generalizations inside an arbitrary subset of a Noetherian scheme",
+ "statement": "Let $U$ be a Noetherian scheme [def-pc-scheme], meaning a quasi-compact [def-weil-pbc-quasi-compact-scheme] locally Noetherian scheme [pqf-def-locnoeth]. For every subset $T\\subseteq |U|$ and every $t\\in T$, there exists $m\\in T$ such that $t\\in\\overline{\\{m\\}}$ and, for every $s\\in T$, the implication $m\\in\\overline{\\{s\\}}\\Longrightarrow s=m$ holds. The bar denotes closure in $|U|$; thus the assertion chooses a generalization of $t$ which has no proper generalization in $T$. No closedness or constructibility of $T$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0G2R, lemma-maximal-points, assertion (b), with the definition of T_0 in its statement; the undefined T' there is read as T, as required by the proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "For each $x\\in U$, choose from the locally Noetherian affine cover an affine neighbourhood $V$ with Noetherian ring $A=\\mathcal O_U(V)$. By [lem-weil-pbc-affine-open-stalk-localization], the germ map $A\\to\\mathcal O_{U,x}$ is a localization at the prime of $x$. Thus [lem-weil-pbc-localization-noetherian] makes $\\mathcal O_{U,x}$ Noetherian. It is a local ring since $U$ is a scheme. Apply [lem-weil-pbc-noetherian-local-finite-krull-dimension] to obtain a natural number $d(x)=\\dim\\mathcal O_{U,x}$ for each $x$. No bound independent of $x$ is asserted.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-pc-scheme",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0G2R, lemma-maximal-points, proof of assertion (b)"
+   }
+  },
+  {
+   "text": "By [lem-sc-scheme-stalk-dimension-generalization-chains], $d(x)$ is the supremum of lengths of strict generalization chains starting at $x$. These lengths contain $0$ and are natural numbers bounded by the finite integer $d(x)$; hence their supremum is attained. If $y\\ne x$ and $x\\in\\overline{\\{y\\}}$, prepend $x$ to a chain of length $d(y)$ starting at $y$. This is a strict generalization chain of length $d(y)+1$ starting at $x$, so $d(y)+1\\le d(x)$. Consequently every proper generalization strictly decreases $d$.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0G2R, lemma-maximal-points, proof of assertion (b)"
+   }
+  },
+  {
+   "text": "Fix $t\\in T$ and set $G=\\{x\\in T:t\\in\\overline{\\{x\\}}\\}$. Reflexivity of singleton closure gives $t\\in G$. The nonempty subset $\\{d(x):x\\in G\\}\\subseteq\\mathbf N$ has a least element; choose $m\\in G$ realizing it. Thus $m\\in T$ and $t\\in\\overline{\\{m\\}}$, and $d(m)\\le d(x)$ for all $x\\in G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0G2R, lemma-maximal-points, proof of assertion (b)"
+   }
+  },
+  {
+   "text": "Let $s\\in T$ satisfy $m\\in\\overline{\\{s\\}}$. Singleton-closure specialization is transitive: since $\\overline{\\{m\\}}\\subseteq\\overline{\\{s\\}}$, we have $t\\in\\overline{\\{s\\}}$ and hence $s\\in G$. If $s\\ne m$, step 2 gives $d(s)<d(m)$, contradicting the minimality in step 3. Therefore $s=m$, giving the required maximality in $T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0G2R, lemma-maximal-points, proof of assertion (b)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-sc-scheme-stalk-dimension-generalization-chains"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0G2R, lemma-maximal-points, proof of assertion (b)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every point in a subset of a locally Noetherian scheme specializes from a point maximal for generalization in that subset",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsGenericPoint.specializes\", \"module\": \"Mathlib/Topology/Sober\", \"type\": \"∀ {α : Type u_1} [inst : TopologicalSpace α] {x y : α} {S : Set α}, IsGenericPoint x S → y ∈ S → x ⤳ y\", \"doc\": \"If $ x $ is a generic point of the set $ S $ (i.e., the closure of $\\\\{x\\\\}$ equals $ S $) and $ y \\\\in S $, then $ x $ specializes to $ y $, denoted $ x \\\\rightsquigarrow y $.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X], QuasiSeparatedSpace ↥X\", \"doc\": \"Every locally Noetherian scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is quasi-compact.\"}\n  {\"name\": \"IsGenericPoint.specializes_iff_mem\", \"module\": \"Mathlib/Topology/Sober\", \"type\": \"∀ {α : Type u_1} [inst : TopologicalSpace α] {x y : α} {S : Set α}, IsGenericPoint x S → (x ⤳ y ↔ y ∈ S)\", \"doc\": \"If $x$ is a generic point of a set $S$ in a topological space, then $x$ specializes to a point $y$ if and only if $y$ belongs to $S$. This equivalence follows from the definition of a generic point, w\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"genericPoint_specializes\", \"module\": \"Mathlib/Topology/Sober\", \"type\": \"∀ {α : Type u_1} [inst : TopologicalSpace α] [inst_1 : QuasiSober α] [inst_2 : IrreducibleSpace α] (x : α),\\n  genericPoint α ⤳ x\", \"doc\": \"In a quasi-sober irreducible topological space, the unique generic point specializes to every point $x$ in the space. This means that every neighborhood of $x$ is also a neighborhood of the generic po\"}\n  {\"name\": \"isGenericPoint_iff_specializes\", \"module\": \"Mathlib/Topology/Sober\", \"type\": \"∀ {α : Type u_1} [inst : TopologicalSpace α] {x : α} {S : Set α}, IsGenericPoint x S ↔ ∀ (y : α), x ⤳ y ↔ y ∈ S\", \"doc\": \"A point $x$ is a generic point of the set $S$ if and only if for every point $y$, $x$ specializes to $y$ if and only if $y$ belongs to $S$.\"}\n  {\"name\": \"IsLocalRing.specializes_closedPoint\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] [inst_1 : IsLocalRing R] (x : PrimeSpectrum R), x ⤳ IsLocalRing.closedPoint R\", \"doc\": \"In the Zariski topology on the prime spectrum of a local ring $ R $, every prime ideal specializes to the unique closed point corresponding to the maximal ideal of $ R $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: generic points of whole irreducible closed subsets, minimal primes of the whole spectrum, and NoetherianSpace instances do not assert existence of a maximal generalization inside an arbitrary subset; no well-founded generalization declaration was found"
+  },
+  {
+   "tool": "loogle",
+   "query": "Specializes, Minimal",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: generic points of whole irreducible closed subsets, minimal primes of the whole spectrum, and NoetherianSpace instances do not assert existence of a maximal generalization inside an arbitrary subset; no well-founded generalization declaration was found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A subset of a Noetherian scheme has maximal points which generalize all its points",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MaximalSpectrum.toPrimeSpectrum_range\", \"module\": \"Mathlib.RingTheory.Spectrum.Maximal.Topology\", \"type\": \": Set.range (@toPrimeSpectrum R _) = {x | IsClosed ({ x } : Set <| PrimeSpectrum R)}\", \"doc\": \"The image of the maximal spectrum under the inclusion into the prime spectrum coincides with the set of closed points in the Zariski topology on the prime spectrum. In other words, a prime ideal belon\"}\n  {\"name\": \"MaximalSpectrum.isMaximal\", \"module\": \"Mathlib.RingTheory.Spectrum.Maximal.Defs\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (self : MaximalSpectrum R), self.asIdeal.IsMaximal\", \"doc\": \"For any commutative semiring $ R $, every element of the maximal spectrum of $ R $ corresponds to a maximal ideal in $ R $. Specifically, the ideal associated to any point in $ \\\\operatorname{MaxSpec}(\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.primeIdealOf_isMaximal_of_isClosed\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(x : U) (hx : IsClosed {(x : X)}) : (hU.primeIdealOf x).asIdeal.IsMaximal\", \"doc\": \"If a point $ x $ in an affine open subset $ U $ of a scheme $ X $ satisfies the condition that the singleton set $ \\\\{x\\\\} $ is closed in $ X $, then the prime ideal $ \\\\mathfrak{p}_x $ associated with $\"}\n  {\"name\": \"genericPoints\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \": Set α\", \"doc\": \"The set of points $ x $ in a topological space $ \\\\alpha $ such that the closure of the singleton set $ \\\\{x\\\\} $ is an irreducible component of $ \\\\alpha $, i.e., a maximal irreducible closed subset of $\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsNoetherian X] : NoetherianSpace X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n  {\"name\": \"irreducibleComponents_eq_maximals_closed\", \"module\": \"Mathlib.Topology.Irreducible\", \"type\": \"(X : Type*) [TopologicalSpace X] : irreducibleComponents X = {s | Maximal (fun x ↦ IsClosed x ∧ IsIrreducible x) s}\", \"doc\": \"In a topological space $ X $, the irreducible components are precisely the maximal subsets that are both closed and irreducible. That is, the irreducible components coincide with the maximal elements \"}\n  {\"name\": \"PrimeSpectrum.instNoetherianSpace\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Noetherian\", \"type\": \": NoetherianSpace (PrimeSpectrum R)\", \"doc\": \"For any Noetherian ring $ R $, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Noetherian topological space. This means that every descending chain of Zariski-clo\"}\n  {\"name\": \"AlgebraicGeometry.noetherianSpace_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsAffine X] [IsNoetherianRing Γ(X, ⊤)] : NoetherianSpace X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a Noetherian ring, then the underlying topological space of $X$ is a Noetherian topological space (i.e., every \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: generic points of whole irreducible closed subsets, minimal primes of the whole spectrum, and NoetherianSpace instances do not assert existence of a maximal generalization inside an arbitrary subset; no well-founded generalization declaration was found"
+  },
+  {
+   "tool": "grep",
+   "query": "[Mm]inimal.*[Ss]pecializ|[Ss]pecializ.*[Mm]inimal|[Ww]ell[Ff]ounded.*[Ss]pecializ",
+   "sub": "",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: generic points of whole irreducible closed subsets, minimal primes of the whole spectrum, and NoetherianSpace instances do not assert existence of a maximal generalization inside an arbitrary subset; no well-founded generalization declaration was found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Noetherian scheme each nonempty set of generalizations of a fixed point has a point with no proper generalization in that set",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"genericPoint_specializes\", \"module\": \"Mathlib/Topology/Sober\", \"type\": \"∀ {α : Type u_1} [inst : TopologicalSpace α] [inst_1 : QuasiSober α] [inst_2 : IrreducibleSpace α] (x : α),\\n  genericPoint α ⤳ x\", \"doc\": \"In a quasi-sober irreducible topological space, the unique generic point specializes to every point $x$ in the space. This means that every neighborhood of $x$ is also a neighborhood of the generic po\"}\n  {\"name\": \"PrimeSpectrum.stableUnderGeneralization_singleton\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {x : PrimeSpectrum R},\\n  StableUnderGeneralization {x} ↔ x.asIdeal ∈ minimalPrimes R\", \"doc\": \"For a commutative semiring $ R $, the singleton set $ \\\\{x\\\\} $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is stable under generalization if and only if the ideal $ x $ is a minimal prime ideal of\"}\n  {\"name\": \"TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent\", \"module\": \"Mathlib/Topology/NoetherianSpace\", \"type\": \"∀ {α : Type u_1} [inst : TopologicalSpace α] [TopologicalSpace.NoetherianSpace α],\\n  ∀ Z ∈ irreducibleComponents α, ∃ o, IsOpen o ∧ o.Nonempty ∧ o ⊆ Z\", \"doc\": \"In a Noetherian topological space, every irreducible component contains a non-empty open subset, i.e., for any irreducible component $Z$ of the space, there exists an open set $o$ such that $o$ is non\"}\n  {\"name\": \"TopologicalSpace.NoetherianSpace.exists_open_ne_empty_le_irreducibleComponent\", \"module\": \"Mathlib/Topology/NoetherianSpace\", \"type\": \"∀ {α : Type u_1} [inst : TopologicalSpace α] [TopologicalSpace.NoetherianSpace α],\\n  ∀ Z ∈ irreducibleComponents α, ∃ o, IsOpen o ∧ o.Nonempty ∧ o ≤ Z\", \"doc\": \"In a Noetherian topological space $\\\\alpha$, every irreducible component $Z$ contains a non-empty open subset $o$ (i.e., there exists an open set $o \\\\subseteq Z$ such that $o \\\\neq \\\\emptyset$).\"}\n  {\"name\": \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], (irreducibleComponents ↥X).Finite\", \"doc\": \"If $ X $ is a Noetherian scheme, then the set of its irreducible components is finite.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X], QuasiSeparatedSpace ↥X\", \"doc\": \"Every locally Noetherian scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is quasi-compact.\"}\n  {\"name\": \"StableUnderGeneralization\", \"module\": \"Mathlib/Topology/Inseparable\", \"type\": \"{X : Type u_1} → [TopologicalSpace X] → Set X → Prop\", \"doc\": \"A set $ s $ is stable under generalization if for any points $ x $ and $ y $, whenever $ y $ specializes to $ x $ (i.e., every neighborhood of $ x $ is a neighborhood of $ y $) and $ x \\\\in s $, then $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: generic points of whole irreducible closed subsets, minimal primes of the whole spectrum, and NoetherianSpace instances do not assert existence of a maximal generalization inside an arbitrary subset; no well-founded generalization declaration was found"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ountable|[Aa]ntichain|[Mm]inimal|[Ww]ell[Ff]ounded",
+   "sub": "AlgebraicGeometry/Noetherian.lean",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: generic points of whole irreducible closed subsets, minimal primes of the whole spectrum, and NoetherianSpace instances do not assert existence of a maximal generalization inside an arbitrary subset; no well-founded generalization declaration was found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The specialization order on the points of a Noetherian scheme is well founded in the direction of generalization",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.instNoetherianSpace\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Noetherian\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] [IsNoetherianRing R], TopologicalSpace.NoetherianSpace (PrimeSpectrum R)\", \"doc\": \"For any Noetherian ring $ R $, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Noetherian topological space. This means that every descending chain of Zariski-clo\"}\n  {\"name\": \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], TopologicalSpace.NoetherianSpace ↥(AlgebraicGeometry.Spec R)\", \"doc\": \"For any Noetherian commutative ring $ R $, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Noetherian topological space. This means that every descending chain of\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme.isNoetherianScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsArtinianScheme X], AlgebraicGeometry.IsNoetherian X\", \"doc\": \"Every Artinian scheme is a Noetherian scheme. This follows from the fact that the descending chain condition on closed subsets (Artinian) implies the ascending chain condition (Noetherian).\"}\n  {\"name\": \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], (irreducibleComponents ↥X).Finite\", \"doc\": \"If $ X $ is a Noetherian scheme, then the set of its irreducible components is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is Artinian\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_Spec\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat}, AlgebraicGeometry.IsNoetherian (AlgebraicGeometry.Spec R) ↔ IsNoetherianRing ↑R\", \"doc\": \"For a commutative ring $ R $, the scheme $ \\\\operatorname{Spec}(R) $ is Noetherian if and only if $ R $ is a Noetherian ring.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: generic points of whole irreducible closed subsets, minimal primes of the whole spectrum, and NoetherianSpace instances do not assert existence of a maximal generalization inside an arbitrary subset; no well-founded generalization declaration was found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every point of an arbitrary subset of a Noetherian scheme is a specialization of a point with no proper generalization in that subset",
+   "sub": "",
+   "results": "AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat; IsGenericPoint.specializes; AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian; AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace; isGenericPoint_iff_specializes; AlgebraicGeometry.Scheme.le_iff_specializes; IsGenericPoint.specializes_iff_mem; genericPoint_specializes",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: these results give only closed subsets, generic points, Noetherian instances, or order tools; the rank-minimization argument is still required"
+  },
+  {
+   "tool": "grep",
+   "query": "[Mm]aximal.*[Ss]pecializ|[Ss]pecializ.*[Mm]aximal|[Ww]ell[Ff]ounded.*[Ss]pecializ",
+   "sub": "",
+   "results": "Mathlib/Order/Zorn.lean; Mathlib/RingTheory/Spectrum/Prime/Topology.lean; Mathlib/RingTheory/Spectrum/Prime/Topology.lean; Mathlib/LinearAlgebra/LinearIndependent/Lemmas.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: these results give only closed subsets, generic points, Noetherian instances, or order tools; the rank-minimization argument is still required"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every point in a subset of a Noetherian scheme has a maximal generalization in that subset",
+   "sub": "",
+   "results": "AlgebraicGeometry.IsAffineOpen.primeIdealOf_isMaximal_of_isClosed; MaximalSpectrum.isMaximal; isGenericPoint_iff_specializes; PrimeSpectrum.stableUnderSpecialization_singleton; AlgebraicGeometry.IsNoetherian.noetherianSpace; MaximalSpectrum.toPrimeSpectrum_range; StableUnderGeneralization; IsLocalRing.specializes_closedPoint",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: these results give only closed subsets, generic points, Noetherian instances, or order tools; the rank-minimization argument is still required"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally Noetherian scheme has a natural number valued rank of points strictly decreasing under proper generalization",
+   "sub": "",
+   "results": "AlgebraicGeometry.IsLocallyNoetherian; AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian; AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian; AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero; AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace; AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian; AlgebraicGeometry.Scheme.height_of_isClosed; AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: these results give only closed subsets, generic points, Noetherian instances, or order tools; the rank-minimization argument is still required"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the structure sheaf at any point of a locally Noetherian scheme is a Noetherian ring",
+   "sub": "",
+   "results": "AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian; AlgebraicGeometry.IsLocallyNoetherian.component_noetherian; AlgebraicGeometry.IsLocallyNoetherian; AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian; AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier; AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian; AlgebraicGeometry.isLocallyNoetherian_Spec; AlgebraicGeometry.instIsLocallyNoetherianToScheme",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: these results give only closed subsets, generic points, Noetherian instances, or order tools; the rank-minimization argument is still required"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-countable-antichain",
+  "date": "2026-10-23",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, first paragraph: extract E prime with the same closure and remove specializations using Properties Lemmas 0G2F and 0G2R. Supporting input: Properties Tag 0G2R, assertion (b): each point of an arbitrary subset is a specialization of a point having no proper generalization within that subset.",
+   "via": [
+    "lem-sfb-noetherian-countable-antichain",
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-subset-maximal-generalization",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0G2R against arbitrary subsets; supplied the Noetherian stalk and finite local dimension inputs through existing Mathlib leaves, derived strict dimension decrease by prepending a generalization chain, then minimized the natural-number rank. No new nodes or statement changes.",
+  "blueprint": "Realizes the existing blueprint.from.place supporting input to det-thm-sf-ctf-stability-direct-images (3): Properties 0G2R (b) within the 0CXU openness-of-versality prerequisite. Read the current latest sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3). The inherited blueprint.from.node is null; blueprint_refs.py ancestor confirms None, so no new ancestor is invented."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-86bfdc3e3",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-86bfdc3e3 (reviewer sub-agent of L); spot-checked: Read Stacks properties.tex Tag 0G2R (lemma-maximal-points) in full; the delivery reads its typos T' as T and O_{T,t'} as O_{S,t'}, which is correct. The statement is unchanged and is assertion (b) of the source, with nothing weakened or strengthened. Step 1: pqf-def-locnoeth gives an affine V with Noetherian ring A. Clause (c) of affine-open-stalk-localization (Mathlib isLocalization_stalk) gives exactly the hypotheses (a)-(c) of localization-noetherian at A minus p_x, so the stalk is Noetherian. It is local because a scheme is a locally ringed space, so noetherian-local-finite-krull-dimension (KrullsHeightTheorem:276) gives d(x) in N. All cited nodes are Mathlib leaves or definitions, so there is no route issue and no tool_uses is needed. Step 2: the cited node lem-sc-scheme-stalk-dimension-generalization-chains (ringKrullDim_stalk_eq_coheight) defines dim O_{X,x} as the supremum of chain lengths. The supremum is attained, and I checked that putting x in front of a chain starting at y gives d(y)+1 <= d(x), so the orientation is right. Steps 3 and 4: G = {x in T : t in cl{x}} contains t, a minimizer of d over G is m, and transitivity of specialization puts any generalization s of m in G, so s = m. This makes explicit the restriction to T that the source leaves implicit. Edge cases checked: empty T, singleton T, a field, a DVR with T = {eta, s} or {s}, infinite sets of closed points. Quasi-compactness is unused, which is harmless. Duplicate scan over 0G2R, maximal-points and maximal-generalization wording found no duplicate; the parent lem-sfb-noetherian-countable-antichain uses the item exactly as delivered. proof_deps equals the union of the steps' uses, there are no new nodes and no SGA citations. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SubsetMaximalGeneralization",
+  "declaration": "AlgebraicGeometry.Scheme.exists_maximal_generalization_in_subset",
+  "file": "lean/Sheaf/AlgebraicGeometry/SubsetMaximalGeneralization.lean",
+  "statement": "theorem exists_maximal_generalization_in_subset (U : Scheme.{u}) [CompactSpace U] [IsLocallyNoetherian U] (T : Set U) (t : U) (ht : t ∈ T) : ∃ m ∈ T, t ∈ closure ({m} : Set U) ∧ ∀ s ∈ T, m ∈ closure ({s} : Set U) → s = m",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53f273a1d",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Only the item lean record and a new module SubsetMaximalGeneralization.lean were delivered. exists_maximal_generalization_in_subset (U : Scheme.{u}) [CompactSpace U] [IsLocallyNoetherian U] (T : Set U) (t) (ht : t ∈ T) : ∃ m ∈ T, t ∈ closure {m} ∧ ∀ s ∈ T, m ∈ closure {s} → s = m matches the node and Stacks 0G2R(b) clause by clause: the hypotheses are exactly the recorded deps (Scheme, CompactSpace, IsLocallyNoetherian), T is arbitrary, closure and equality orientation are correct, and the statement field is verbatim. No duplicate: the only near match, IsClosed.exists_maximal_specializes, needs a closed set. Docstrings give the source place, blueprint tag and the four proof steps; the proof is sorry only and there are no definitions. The report has both required sections. Edge cases checked: empty T, singleton T, T without generic points, no uniform dimension bound. No files changed and no compile run."
+ }
+}

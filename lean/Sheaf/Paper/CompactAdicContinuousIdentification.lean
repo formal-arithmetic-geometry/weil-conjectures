@@ -10,6 +10,10 @@ public import Sheaf.Paper.AdicLisseModule
 public import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
 public import Mathlib.Order.Filter.Bases.Basic
 import all Sheaf.AlgebraicGeometry.ContinuousCoefficientCompletion
+public import Mathlib.Order.CompletePartialOrder
+import all Sheaf.Paper.ContinuousRingUniverseRealization
+import all Sheaf.Paper.FiniteDiscreteCoefficientTerminal
+import Sheaf.Paper.ContinuousCoefficientModuleEncoding
 
 /-! # Normalized completion of compact adic continuous coefficients
 
@@ -323,6 +327,262 @@ private def continuousCompletionIso (A : Type (u + 1)) [CommRing A]
     (limit.isLimit (Scheme.adicLisseRingSystem T (Ideal.span ({p} : Set A))))
     (e.symm ≪≫ quotientTowerConstantIso A p T)
 
+section ConstantUnit
+variable {C D B : Type*} [Category C] [Category D] [Category B]
+  (F : C ⥤ D) (J : GrothendieckTopology C) (K : GrothendieckTopology D)
+  [HasWeakSheafify J B] [HasWeakSheafify K B] [F.IsContinuous J K]
+  [∀ P : Cᵒᵖ ⥤ B, F.op.HasPointwiseLeftKanExtension P]
+
+private theorem constantPullback_unit_all {W : C} (hW : IsTerminal W)
+    (hFW : IsTerminal (F.obj W)) (M : B) (G : Sheaf J B)
+    (a : (constantSheaf J B).obj M ⟶ G) (V : C) :
+    ((toSheafify K ((Functor.const Dᵒᵖ).obj M)) ≫
+      ((constantPullbackMonoidalIso F J K hW hFW).hom.app M ≫
+        (Functor.sheafPullbackConstruction.sheafPullback F B J K).map a).hom).app
+          (op (F.obj V)) =
+      ((toSheafify J ((Functor.const Cᵒᵖ).obj M)).app (op V) ≫ a.hom.app (op V)) ≫
+        ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous F B J K).unit.app G).hom.app
+          (op V) := by
+  let q := toSheafify K ((Functor.const Dᵒᵖ).obj M) ≫
+    ((constantPullbackMonoidalIso F J K hW hFW).hom.app M ≫
+      (Functor.sheafPullbackConstruction.sheafPullback F B J K).map a).hom
+  let r := (toSheafify J ((Functor.const Cᵒᵖ).obj M) ≫ a.hom) ≫
+    ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous F B J K).unit.app G).hom
+  have h := constantPullback_unit_map F J K hW hFW M G a
+  change q.app (op (F.obj W)) = r.app (op W) at h
+  have hq := constant_naturality q (F.map (hW.from V)).op
+  have hr := constant_naturality r (hW.from V).op
+  change q.app (op (F.obj V)) = r.app (op V)
+  rw [← hq, h]
+  exact hr
+end ConstantUnit
+
+
+
+private theorem canonicalAbelianMap_unit (X : Scheme.{u})
+    (B : Type u) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
+    (S : Profinite.{u}) (b : ULift.{u + 1} B) :
+    (FiniteDiscreteOrdinary.canonicalAbelianMap B X).hom.app
+        (op ((profiniteToProEtOf X).obj S))
+        ((toSheafify (D := Ab.{u + 1}) (Scheme.ProEt.topology X)
+          ((Functor.const X.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} B)))).app
+            (op ((profiniteToProEtOf X).obj S)) b) =
+      ((pointUpperStarLowerStarAdjunction.comp
+        (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))).unit.app
+          (FiniteDiscreteOrdinary.coefficient B)).hom.app
+        (op S) (ULift.up (ContinuousMap.const S b.down)) := by
+  let M : Ab.{u + 1} := AddCommGrpCat.of (ULift.{u + 1} B)
+  let R := FiniteDiscreteOrdinary.coefficient B
+  let e : (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).obj M ⟶ R :=
+    ((sheafificationAdjunction (coherentTopology Profinite.{u}) Ab.{u + 1}).homEquiv
+      _ R).symm (FiniteDiscreteOrdinary.pointConstants B)
+  let a := constantPointIso.hom.app M ≫ pointUpperStar.map e
+  have h₁ := constantPullback_unit_all
+    (MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ X))
+    (Scheme.ProEt.topology specZ.{u}) (Scheme.ProEt.topology X)
+    (proEtIsTerminal (proEtTerminal specZ.{u}))
+    (proEtIsTerminal ((MorphismProperty.Over.pullback @WeaklyEtale ⊤
+      (toSpecZ X)).obj (proEtTerminal specZ.{u}))) M (pointUpperStar.obj R) a
+        (profiniteToProEt.obj S)
+  have h₂ := constantPullback_unit_all profiniteToProEt
+    (coherentTopology Profinite.{u}) (Scheme.ProEt.topology specZ.{u})
+    (terminalIsTerminal (C := Profinite.{u}))
+    ((terminalIsTerminal (C := Profinite.{u})).isTerminalObj profiniteToProEt)
+    M R e S
+  have he := (sheafificationAdjunction (coherentTopology Profinite.{u}) Ab.{u + 1}).homEquiv
+    _ R |>.apply_symm_apply (FiniteDiscreteOrdinary.pointConstants B)
+  rw [Adjunction.homEquiv_unit] at he
+  change toSheafify (coherentTopology Profinite.{u})
+    ((Functor.const Profinite.{u}ᵒᵖ).obj M) ≫ e.hom = _ at he
+  have h₃ := congrArg (fun f ↦ f.app (op S)) he
+  simp only [NatTrans.comp_app] at h₃
+  rw [h₃] at h₂
+  change (toSheafify (Scheme.ProEt.topology specZ.{u})
+    ((Functor.const specZ.{u}.ProEtᵒᵖ).obj M)).app (op (profiniteToProEt.obj S)) ≫
+      a.hom.app (op (profiniteToProEt.obj S)) = _ at h₂
+  have h₄ := congrArg (fun f ↦ f ≫
+    ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ X)) Ab.{u + 1}
+      (Scheme.ProEt.topology specZ.{u}) (Scheme.ProEt.topology X)).unit.app
+        (pointUpperStar.obj R)).hom.app (op (profiniteToProEt.obj S))) h₂
+  have h := congrArg (fun f : M ⟶ _ ↦ f b) (h₁.trans h₄)
+  dsimp only [M, R, e] at h
+  simp only [FiniteDiscreteOrdinary.canonicalAbelianMap, constantSchemeIso,
+    Iso.trans_hom, Functor.isoWhiskerRight_hom,
+    NatTrans.comp_app, ObjectProperty.FullSubcategory.comp_hom,
+    Functor.associator_hom_app, Functor.whiskerRight_app,
+    a, M, R, e, upperStarFromPoint, upperStarLowerStarAdjunction, Adjunction.comp_unit_app,
+    Adjunction.comp_unit_app, Functor.comp_map, Functor.map_comp, Category.assoc,
+    Category.comp_id,
+    CategoryTheory.comp_apply, FiniteDiscreteOrdinary.pointConstants,
+    pointUpperStarLowerStarAdjunction, pointLowerStar,
+    Functor.sheafPushforwardContinuous_map_hom_app] at h ⊢
+  exact h
+
+
+private theorem comparison_constants
+    (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
+    (T : Scheme.{u}) (U : T.ProEtᵒᵖ) (a : A) :
+    (ContinuousRingUniverse.comparison T A).hom.app U
+      ((FiniteDiscreteOrdinary.canonicalAbelianMap A T).hom.app U
+        ((toSheafify (D := Ab.{u + 1}) (Scheme.ProEt.topology T)
+          ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} A)))).app U
+            (ULift.up a))) = ULift.up (ContinuousMap.const U.unop.left a) := by
+  let M := AddCommGrpCat.of (ULift.{u + 1} A)
+  let H := ((sheafCompose (Scheme.ProEt.topology T)
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (continuousCoefficientRingSheaf T A)).obj
+  let q : (Functor.const T.ProEtᵒᵖ).obj M ⟶ H :=
+    toSheafify (Scheme.ProEt.topology T) ((Functor.const T.ProEtᵒᵖ).obj M) ≫
+      (FiniteDiscreteOrdinary.canonicalAbelianMap A T).hom ≫
+        (ContinuousRingUniverse.comparison T A).hom
+  let S := ⊤_ Profinite.{u}
+  have ht : IsTerminal ((profiniteToProEtOf T).obj S) := by
+    let F := MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ T)
+    let hS := (terminalIsTerminal (C := Profinite.{u})).isTerminalObj profiniteToProEt
+    let e := F.mapIso (hS.uniqueUpToIso (proEtIsTerminal (proEtTerminal specZ.{u})))
+    exact (proEtIsTerminal (F.obj (proEtTerminal specZ.{u}))).ofIso e.symm
+  have hq : q.app (op ((profiniteToProEtOf T).obj S)) (ULift.up a) =
+      ULift.up (ContinuousMap.const ((profiniteToProEtOf T).obj S).left a) := by
+    dsimp only [q, NatTrans.comp_app]
+    simp only [CategoryTheory.comp_apply]
+    dsimp only [M]
+    erw [canonicalAbelianMap_unit T A S (ULift.up a)]
+    have h := ContinuousRingUniverse.comparison_eq T A S (ContinuousMap.const S a)
+    rw [Adjunction.homEquiv_unit] at h
+    exact h
+  have hn := ConcreteCategory.congr_hom
+    (constant_naturality q (ht.from U.unop).op) (ULift.up a)
+  change q.app U (ULift.up a) = _
+  have hn' : H.map (ht.from U.unop).op (q.app (op ((profiniteToProEtOf T).obj S))
+      (ULift.up a)) = q.app U (ULift.up a) := hn
+  rw [← hn', hq]
+  rfl
+
+private def continuousLiftRingIso
+    (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
+    (T : Scheme.{u}) : continuousCoefficientRingSheaf T A ≅
+      (sheafCompose (Scheme.ProEt.topology T)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+          (Scheme.continuousCoefficientSheaf T (ULift.{u + 1} A)) := by
+  apply (fullyFaithfulSheafToPresheaf _ _).preimageIso
+  refine NatIso.ofComponents (fun U ↦ ?_) (fun f ↦ ?_)
+  · change RingCat.of (ULift.{u + 1} C(U.unop.left, A)) ≅
+      RingCat.of C(U.unop.left, ULift.{u + 1} A)
+    exact RingEquiv.toRingCatIso
+      { toFun := fun f ↦ ⟨fun x ↦ ULift.up (f.down x),
+          continuous_uliftUp.comp f.down.continuous⟩
+        invFun := fun f ↦ ULift.up ⟨fun x ↦ (f x).down,
+          continuous_uliftDown.comp f.continuous⟩
+        left_inv := fun _ ↦ rfl
+        right_inv := fun _ ↦ rfl
+        map_add' := fun _ _ ↦ rfl
+        map_mul' := fun _ _ ↦ rfl }
+  · apply RingCat.hom_ext
+    apply RingHom.ext
+    intro f
+    apply ContinuousMap.ext
+    intro x
+    rfl
+
+private def continuousRealizationIso
+    (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
+    [TotallyDisconnectedSpace A] (T : Scheme.{u}) :
+    InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+      (Scheme.ProEt.topology T)
+      (condensedRingObj (Profinite.continuousCoefficientRingObj A) T) ≅
+        Scheme.continuousCoefficientSheaf T (ULift.{u + 1} A) := by
+  let J := Scheme.ProEt.topology T
+  let R : Sheaf J Ab.{u + 1} :=
+    condensedRingObj (Profinite.continuousCoefficientRingObj A) T
+  let Q : Sheaf J RingCat.{u + 1} := continuousCoefficientRingSheaf T A
+  let B : Sheaf J Ab.{u + 1} :=
+    (sheafCompose J (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Q
+  let : IsCommMonObj B := Sheaf.isCommMonObj_sheafCompose_obj J Q
+    (fun U (a b : ULift.{u + 1} C(U.unop.left, A)) ↦ mul_comm a b)
+  let b : R ≅ B := by
+    have := ContinuousRingUniverse.comparison_isIso T A
+    exact asIso (ContinuousRingUniverse.comparison T A)
+  let : IsMonHom b.hom := ContinuousRingUniverse.comparison_isMonHom T A
+  let : IsMonHom b.inv := inferInstance
+  let c : InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} J R ≅
+      InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} J B :=
+    { hom := CondensedRing.sectionRingMap T b.hom
+      inv := CondensedRing.sectionRingMap T b.inv
+      hom_inv_id := by
+        ext V x
+        exact congrArg (fun f : R ⟶ R ↦ f.hom.app V x) b.hom_inv_id
+      inv_hom_id := by
+        ext V x
+        exact congrArg (fun f : B ⟶ B ↦ f.hom.app V x) b.inv_hom_id }
+  let F := sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
+  let hF : F.FullyFaithful := fullyFaithfulSheafCompose J
+    CommRingCat.fullyFaithfulForget₂ToRingCat.{u + 1}
+  exact hF.preimageIso
+    (X := InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} J R)
+    (Y := Scheme.continuousCoefficientSheaf T (ULift.{u + 1} A))
+    (F.mapIso c ≪≫ CondensedRing.reconstructedRingIso T Q ≪≫ continuousLiftRingIso A T)
+
+private theorem continuousRealizationIso_constants
+    (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
+    [TotallyDisconnectedSpace A] (T : Scheme.{u}) (U : T.ProEtᵒᵖ) (a : A) :
+    (continuousRealizationIso A T).hom.hom.app U
+      ((FiniteDiscreteOrdinary.canonicalAbelianMap A T).hom.app U
+        ((toSheafify (D := Ab.{u + 1}) (Scheme.ProEt.topology T)
+          ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} A)))).app U
+            (ULift.up a))) = ContinuousMap.const U.unop.left (ULift.up a) := by
+  change (⟨fun x ↦ ULift.up (((ContinuousRingUniverse.comparison T A).hom.app U
+    ((FiniteDiscreteOrdinary.canonicalAbelianMap A T).hom.app U
+      ((toSheafify (D := Ab.{u + 1}) (Scheme.ProEt.topology T)
+        ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} A)))).app U
+          (ULift.up a)))).down x),
+      continuous_uliftUp.comp (ContinuousMap.continuous _)⟩ :
+        C(U.unop.left, ULift.{u + 1} A)) = _
+  rw [comparison_constants]
+  rfl
+
+private theorem continuousCompletionIso_constants
+    (A : Type (u + 1)) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
+    [CompactSpace A] [T2Space A] (p : A)
+    (hb : ∀ x : A, (𝓝 x).HasBasis (fun _ : ℕ ↦ True) (fun n ↦
+      {y | Ideal.Quotient.mk (Ideal.span ({p} : Set A) ^ (n + 1)) y =
+        Ideal.Quotient.mk (Ideal.span ({p} : Set A) ^ (n + 1)) x}))
+    (T : Scheme.{u}) (U : T.ProEtᵒᵖ) (a : A) (n : ℕ) :
+    (limit.π (Scheme.adicLisseRingSystem T (Ideal.span ({p} : Set A))) (op n)).hom.app U
+      ((continuousCompletionIso A p hb T).hom.hom.app U (ContinuousMap.const _ a)) =
+    (toSheafify (Scheme.ProEt.topology T) ((Functor.const T.ProEtᵒᵖ).obj
+      (CommRingCat.of (A ⧸ Ideal.span ({p} : Set A) ^ (n + 1))))).app U
+        (Ideal.Quotient.mk _ a) := by
+  let Q := A ⧸ Ideal.span ({p} : Set A) ^ (n + 1)
+  let : TopologicalSpace Q := ⊥
+  let : DiscreteTopology Q := ⟨rfl⟩
+  have : IsIso (Scheme.continuousCoefficientConstantComparison T Q) :=
+    Scheme.continuousCoefficientConstantComparison_isIso T Q
+  apply (ConcreteCategory.bijective_of_isIso
+    ((Scheme.continuousCoefficientConstantComparison T Q).hom.app U)).1
+  have h := (continuousResidueCone_isLimit A p hb T).conePointsIsoOfNatIso_hom_comp
+    (limit.isLimit (Scheme.adicLisseRingSystem T (Ideal.span ({p} : Set A))))
+    ((Functor.isoWhiskerLeft (quotientTower A p)
+      (Scheme.discreteContinuousCoefficientIso T)).symm ≪≫ quotientTowerConstantIso A p T)
+        (op n)
+  have h' := congrArg (fun f ↦ f ≫ Scheme.continuousCoefficientConstantComparison T Q) h
+  have hu := Scheme.continuousCoefficientConstantComparison_unit T Q
+  have hv := ConcreteCategory.congr_hom (congr_app hu U) (Ideal.Quotient.mk
+    (Ideal.span ({p} : Set A) ^ (n + 1)) a)
+  dsimp only [continuousCompletionIso] at *
+  simp only [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom,
+    Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, quotientTowerConstantIso,
+    asIso_hom, NatTrans.ofOpSequence_app, Category.comp_id,
+    Scheme.discreteContinuousCoefficientIso, NatIso.ofComponents_inv_app,
+    asIso_inv, Category.assoc, Category.comp_id] at h'
+  change _ = (continuousResidueCone A p hb T).π.app (op n) ≫
+    inv (Scheme.continuousCoefficientConstantComparison T Q) ≫
+      Scheme.continuousCoefficientConstantComparison T Q at h'
+  rw [IsIso.inv_hom_id, Category.comp_id] at h'
+  have hh := congrArg
+    (fun f : Scheme.continuousCoefficientSheaf T A ⟶
+      Scheme.continuousCoefficientSheaf T Q ↦ f.hom.app U (ContinuousMap.const _ a)) h'
+  exact hh.trans hv.symm
+
 /-- A compact separated principal-adic domain is realized by its positive finite quotient
 constant sheaves, uniquely with the prescribed constant scalars.
 
@@ -375,6 +635,85 @@ theorem compact_adic_continuous_identification
           (Ideal.Quotient.mk
             ((Ideal.span ({ULift.up p} : Set (ULift.{u + 1} A))) ^ (n + 1))
             (ULift.up a))) := by
-  sorry
+  classical
+  have _ := hf
+  let B := ULift.{u + 1} A
+  let : IsDomain B := MulEquiv.isDomain A ULift.ringEquiv.toMulEquiv
+  let b : B := ULift.up p
+  have hb' := ulift_basis A p hb
+  let : TotallyDisconnectedSpace A := totallyDisconnected_of_basis A p hb
+  let r := continuousRealizationIso A T
+  let c := continuousCompletionIso B b hb' T
+  let e := r ≪≫ c
+  have he : ∀ (U : T.ProEtᵒᵖ) (a : A) (n : ℕ),
+      (limit.π (Scheme.adicLisseRingSystem T (Ideal.span ({b} : Set B))) (op n)).hom.app U
+        (e.hom.hom.app U ((FiniteDiscreteOrdinary.canonicalAbelianMap A T).hom.app U
+          ((toSheafify (D := Ab.{u + 1}) (Scheme.ProEt.topology T)
+            ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of B))).app U (ULift.up a)))) =
+      (toSheafify (Scheme.ProEt.topology T) ((Functor.const T.ProEtᵒᵖ).obj
+        (CommRingCat.of (B ⧸ Ideal.span ({b} : Set B) ^ (n + 1))))).app U
+          (Ideal.Quotient.mk _ (ULift.up a)) := by
+    intro U a n
+    change (limit.π (Scheme.adicLisseRingSystem T (Ideal.span ({b} : Set B)))
+      (op n)).hom.app U
+      (c.hom.hom.app U (r.hom.hom.app U _)) = _
+    rw [continuousRealizationIso_constants]
+    exact continuousCompletionIso_constants B b hb' T U (ULift.up a) n
+  refine ⟨e, he, ?_⟩
+  intro d hd
+  have hr (U : T.ProEtᵒᵖ) (a : B) :
+      r.inv.hom.app U (ContinuousMap.const U.unop.left a) =
+        (FiniteDiscreteOrdinary.canonicalAbelianMap A T).hom.app U
+          ((toSheafify (D := Ab.{u + 1}) (Scheme.ProEt.topology T)
+            ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of B))).app U a) := by
+    have h := congrArg (fun f ↦ f.hom.app U
+      ((FiniteDiscreteOrdinary.canonicalAbelianMap A T).hom.app U
+        ((toSheafify (D := Ab.{u + 1}) (Scheme.ProEt.topology T)
+          ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of B))).app U a))) r.hom_inv_id
+    change r.inv.hom.app U (r.hom.hom.app U _) = _ at h
+    rw [continuousRealizationIso_constants A T U a.down] at h
+    exact h
+  apply Iso.ext
+  apply (cancel_epi r.inv).mp
+  apply limit.hom_ext
+  intro n
+  let φ := r.inv ≫ d.hom ≫ limit.π
+    (Scheme.adicLisseRingSystem T (Ideal.span ({b} : Set B))) n
+  let ψ := c.hom ≫ limit.π
+    (Scheme.adicLisseRingSystem T (Ideal.span ({b} : Set B))) n
+  have hs : ∀ (U : T.ProEtᵒᵖ) (a : B),
+      φ.hom.app U (ContinuousMap.const U.unop.left a) =
+        ψ.hom.app U (ContinuousMap.const U.unop.left a) := by
+    intro U a
+    change (limit.π (Scheme.adicLisseRingSystem T (Ideal.span ({b} : Set B))) n).hom.app U
+      (d.hom.hom.app U
+      (r.inv.hom.app U (ContinuousMap.const U.unop.left a))) = _
+    rw [hr]
+    exact (hd U a.down n.unop).trans
+      (continuousCompletionIso_constants B b hb' T U a n.unop).symm
+  have hk : ∀ U : T.ProEtᵒᵖ,
+      φ.hom.app U (ContinuousMap.const U.unop.left b) ^ (n.unop + 1) = 0 := by
+    intro U
+    rw [hs]
+    have h := continuousCompletionIso_constants B b hb' T U b n.unop
+    change ψ.hom.app U (ContinuousMap.const U.unop.left b) = _ at h
+    rw [h]
+    change ((toSheafify (Scheme.ProEt.topology T) ((Functor.const T.ProEtᵒᵖ).obj
+      (CommRingCat.of (B ⧸ Ideal.span ({b} : Set B) ^ (n.unop + 1))))).app U)
+        (Ideal.Quotient.mk _ b) ^ (n.unop + 1) = 0
+    rw [← map_pow]
+    have hz : Ideal.Quotient.mk (Ideal.span ({b} : Set B) ^ (n.unop + 1))
+        (b ^ (n.unop + 1)) = 0 := by
+      apply Ideal.Quotient.eq_zero_iff_mem.mpr
+      rw [Ideal.span_singleton_pow]
+      exact Ideal.subset_span (Set.mem_singleton _)
+    have hpow := map_pow
+      (Ideal.Quotient.mk (Ideal.span ({b} : Set B) ^ (n.unop + 1))) b (n.unop + 1)
+    rw [← hpow, hz, map_zero]
+  have h := continuousFiniteQuotientHom_ext B b
+    (by exact fun h ↦ hp (congrArg ULift.down h)) hb' T n.unop _ φ ψ hs hk
+  change r.inv ≫ d.hom ≫ limit.π _ n = r.inv ≫ e.hom ≫ limit.π _ n
+  rw [← Category.assoc r.inv e.hom, show r.inv ≫ e.hom = c.hom by simp [e]]
+  exact h
 
 end AlgebraicGeometry.ProEtale

@@ -7,13 +7,12 @@ module
 
 public import Sheaf.Paper.PullbackTensorCanonicalShiftUnit
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.Algebra.Homology.KFlatTotalTensorModel
+import Sheaf.Algebra.Homology.ResolvingTensorSignedCoherence
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
 import Sheaf.Paper.KFlatRingedToposPullback
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Exact pullback and the normalized signed derived tensor comparison
 
@@ -31,7 +30,7 @@ mentioned in the statement, on that same tensor; it does not choose another tens
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
 
 universe uC vC uD vD r wR wS
@@ -52,6 +51,9 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
   {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r})
   [HasDerivedCategory.{wR} (Modules R)]
 
+local instance (priority := 20000) : J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}) :=
+  inferInstance
+
 attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 /-- Evaluation of the existing K-flat-derived tensor, without changing its data.
 Source: Stacks 06YU (blueprint: lem-pur-exact-pullback-signed-comparison). -/
@@ -60,7 +62,8 @@ abbrev tensor (A B : DerivedCategory (Modules R)) := ((derivedTensor R).obj A).o
 attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 /-- The existing derived bifunctor applied to a pair of morphisms.
 Source: Stacks 06YU (blueprint: lem-pur-exact-pullback-signed-comparison). -/
-abbrev tensorMap {A A' B B' : DerivedCategory (Modules R)} (a : A ⟶ A') (b : B ⟶ B') :=
+def tensorMap {A A' B B' : DerivedCategory (Modules R)} (a : A ⟶ A') (b : B ⟶ B') :
+    tensor R A B ⟶ tensor R A' B' :=
   (Functor.uncurry.obj (derivedTensor R)).map (Prod.mkHom a b)
 
 attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
@@ -75,6 +78,63 @@ def tensorShift [(derivedTensor R).CommShift₂Int]
   (((derivedTensor R).flip.obj (B⟦b⟧)).commShiftIso a).app A ≪≫
     (shiftFunctor _ a).mapIso (((derivedTensor R).obj A).commShiftIso b |>.app B) ≪≫
     ((shiftFunctorAdd' _ b a (a + b) (add_comm b a)).app (tensor R A B)).symm
+
+attribute [local irreducible] tensorMap
+
+set_option backward.defeqAttrib.useBackward true
+attribute [local implicit_reducible] CategoryTheory.Functor.map₂HomologicalComplex
+attribute [local instance 2000] SheafOfModules.KFlatFixedTensor.tensorAdditive
+  SheafOfModules.KFlatFixedTensor.tensorObjAdditive
+  SheafOfModules.KFlatFixedTensor.tensorHasMapBifunctor
+attribute [local instance 2000] HomologicalComplex.monoidalCategoryStruct
+  HomologicalComplex.monoidalCategory SheafOfModules.cochainModulesMonoidal
+attribute [local instance 4001] DerivedTensorConstraints.complexMonoidal
+  DerivedTensorConstraints.complexMonoidalStruct
+attribute [local irreducible] DerivedCategory.Q DerivedCategory.Qh
+  Functor.mapHomologicalComplex Functor.mapBifunctorHomologicalComplex HomologicalComplex₂.total
+  CochainComplex.Monoidal.braiding
+
+attribute [local irreducible] IsFlatOnSite CochainComplex.IsKFlatIndependentCoefficients
+
+attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
+/-- The prescribed symmetry equation on resolving total-complex representatives.
+Source: Stacks 07A4 (blueprint: lem-pur-exact-pullback-signed-comparison). -/
+def IsSymmetryModel
+    (sigma : ∀ A B : DerivedCategory (Modules R), tensor R A B ≅ tensor R B A) : Prop :=
+  ∀ (P Q : CochainComplex (Modules R) ℤ)
+    (hp : P.IsKFlatIndependentCoefficients) (hq : Q.IsKFlatIndependentCoefficients)
+    (hf : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n))
+    (hg : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (Q.X n)),
+    (representativeIso R P Q hp hq hf hg).hom ≫
+        (sigma (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom =
+      DerivedCategory.Q.map (CochainComplex.Monoidal.braiding P Q).hom ≫
+        (representativeIso R Q P hq hp hg hf).hom
+
+attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
+/-- The prescribed reassociation equation on resolving total-complex representatives.
+Source: Stacks 07A4 (blueprint: lem-pur-exact-pullback-signed-comparison). -/
+def IsAssociativityModel
+    (alpha : ∀ A B N : DerivedCategory (Modules R),
+      tensor R (tensor R A B) N ≅ tensor R A (tensor R B N)) : Prop :=
+  ∀ (P Q N : CochainComplex (Modules R) ℤ)
+    (hp : P.IsKFlatIndependentCoefficients) (hq : Q.IsKFlatIndependentCoefficients)
+    (hn : N.IsKFlatIndependentCoefficients)
+    (hf : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n))
+    (hg : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (Q.X n))
+    (hi : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (N.X n)),
+    ∃ (hpq : CochainComplex.IsKFlatIndependentCoefficients (((totalTensor R).obj P).obj Q))
+      (hqn : CochainComplex.IsKFlatIndependentCoefficients (((totalTensor R).obj Q).obj N))
+      (hfpq : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R)
+        ((((totalTensor R).obj P).obj Q).X n))
+      (hfqn : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R)
+        ((((totalTensor R).obj Q).obj N).X n)),
+      (representativeIso R (((totalTensor R).obj P).obj Q) N hpq hn hfpq hi).hom ≫
+          tensorMap R (representativeIso R P Q hp hq hf hg).hom (𝟙 _) ≫
+          (alpha (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)
+            (DerivedCategory.Q.obj N)).hom =
+        DerivedCategory.Q.map (HomologicalComplex.associator P Q N).hom ≫
+          (representativeIso R P (((totalTensor R).obj Q).obj N) hp hqn hf hfqn).hom ≫
+          tensorMap R (𝟙 _) (representativeIso R Q N hq hn hg hi).hom
 
 set_option genSizeOf false in
 set_option genCtorIdx false in
@@ -95,33 +155,77 @@ structure TensorConstraints where
     (a : A ⟶ A') (b : B ⟶ B') (n : N ⟶ N'),
     tensorMap R (tensorMap R a b) n ≫ (alpha A' B' N').hom =
       (alpha A B N).hom ≫ tensorMap R a (tensorMap R b n)
-  sigma_model : ∀ (P Q : CochainComplex (Modules R) ℤ)
-    (hp : P.IsKFlatIndependentCoefficients) (hq : Q.IsKFlatIndependentCoefficients)
-    (hf : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n))
-    (hg : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (Q.X n)),
-    (representativeIso R P Q hp hq hf hg).hom ≫
-        (sigma (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom =
-      DerivedCategory.Q.map (CochainComplex.Monoidal.braiding P Q).hom ≫
-        (representativeIso R Q P hq hp hg hf).hom
-  alpha_model : ∀ (P Q N : CochainComplex (Modules R) ℤ)
-    (hp : P.IsKFlatIndependentCoefficients) (hq : Q.IsKFlatIndependentCoefficients)
-    (hn : N.IsKFlatIndependentCoefficients)
-    (hf : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n))
-    (hg : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (Q.X n))
-    (hi : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (N.X n)),
-    ∃ (hpq : CochainComplex.IsKFlatIndependentCoefficients (((totalTensor R).obj P).obj Q))
-      (hqn : CochainComplex.IsKFlatIndependentCoefficients (((totalTensor R).obj Q).obj N))
-      (hfpq : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R)
-        ((((totalTensor R).obj P).obj Q).X n))
-      (hfqn : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R)
-        ((((totalTensor R).obj Q).obj N).X n)),
-      (representativeIso R (((totalTensor R).obj P).obj Q) N hpq hn hfpq hi).hom ≫
-          tensorMap R (representativeIso R P Q hp hq hf hg).hom (𝟙 _) ≫
-          (alpha (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)
-            (DerivedCategory.Q.obj N)).hom =
-        DerivedCategory.Q.map (HomologicalComplex.associator P Q N).hom ≫
-          (representativeIso R P (((totalTensor R).obj Q).obj N) hp hqn hf hfqn).hom ≫
-          tensorMap R (𝟙 _) (representativeIso R Q N hq hn hg hi).hom
+  sigma_model : IsSymmetryModel R sigma
+  alpha_model : IsAssociativityModel R alpha
+
+attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
+private theorem tensorMap_eq {A A' B B' : DerivedCategory (Modules R)}
+    (a : A ⟶ A') (b : B ⟶ B') :
+    tensorMap R a b = (DerivedTensorConstraints.tensor R).map (Prod.mkHom a b) := by
+  unfold tensorMap derivedTensor
+  change (DerivedTensorConstraints.tensor R).map (Prod.mkHom a (𝟙 B)) ≫
+    (DerivedTensorConstraints.tensor R).map (Prod.mkHom (𝟙 A') b) = _
+  simpa only [CategoryTheory.prod_comp, Prod.mkHom, Category.comp_id, Category.id_comp] using
+    ((DerivedTensorConstraints.tensor R).map_comp
+      (Prod.mkHom a (𝟙 B)) (Prod.mkHom (𝟙 A') b)).symm
+
+attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
+private theorem symmetryModelOfNormalized
+    (a : DerivedTensorConstraints.leftAssociated R ≅ DerivedTensorConstraints.rightAssociated R)
+    (s : DerivedTensorConstraints.tensor R ≅ DerivedTensorConstraints.swapped R)
+    (h : ∃ t, DerivedTensorConstraints.IsNormalized R t a s) :
+    IsSymmetryModel R (fun A B ↦ s.app (A, B)) := by
+  intro P Q hp hq hf hg
+  obtain ⟨t, ht, ha, hs⟩ := h
+  have h := congrArg (fun m ↦ (DerivedTensorConstraints.representative R
+      ⟨P, hp, hf⟩ ⟨Q, hq, hg⟩).hom ≫ m)
+    (congrArg Iso.hom (hs ⟨P, hp, hf⟩ ⟨Q, hq, hg⟩))
+  set_option backward.isDefEq.respectTransparency false in
+    simpa only [Iso.app_hom, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
+      Category.assoc, Iso.hom_inv_id_assoc, DerivedTensorConstraints.representative] using h
+
+attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
+private theorem associativityModelOfNormalized
+    (a : DerivedTensorConstraints.leftAssociated R ≅ DerivedTensorConstraints.rightAssociated R)
+    (s : DerivedTensorConstraints.tensor R ≅ DerivedTensorConstraints.swapped R)
+    (h : ∃ t, DerivedTensorConstraints.IsNormalized R t a s) :
+    IsAssociativityModel R (fun A B N ↦ a.app ((A, B), N)) := by
+  intro P Q N hp hq hn hf hg hi
+  obtain ⟨t, ht, ha, hs⟩ := h
+  let p : DerivedTensorConstraints.Model R := ⟨P, hp, hf⟩
+  let q : DerivedTensorConstraints.Model R := ⟨Q, hq, hg⟩
+  let n : DerivedTensorConstraints.Model R := ⟨N, hn, hi⟩
+  let pq := DerivedTensorConstraints.totalModel R p q
+  let qn := DerivedTensorConstraints.totalModel R q n
+  refine ⟨pq.property.1, qn.property.1, pq.property.2, qn.property.2, ?_⟩
+  have h := congrArg (fun m ↦ (DerivedTensorConstraints.leftRepresentative R p q n).hom ≫ m)
+    (congrArg Iso.hom (ha p q n))
+  simp only [Iso.app_hom, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
+    Iso.hom_inv_id_assoc] at h
+  simp only [tensorMap_eq, DerivedTensorConstraints.leftRepresentative,
+    DerivedTensorConstraints.rightRepresentative, DerivedTensorConstraints.representative,
+    DerivedTensorConstraints.totalModel, p, q, n, Iso.app_hom, Iso.trans_hom,
+    Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom, Category.assoc] at h ⊢
+  with_unfolding_all exact h
+
+attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
+private def constraintsOfNormalized
+    (a : DerivedTensorConstraints.leftAssociated R ≅ DerivedTensorConstraints.rightAssociated R)
+    (s : DerivedTensorConstraints.tensor R ≅ DerivedTensorConstraints.swapped R)
+    (h : ∃ t, DerivedTensorConstraints.IsNormalized R t a s) : TensorConstraints R := by
+  refine
+    { sigma := fun A B ↦ s.app (A, B)
+      sigma_natural := ?_
+      alpha := fun A B N ↦ a.app ((A, B), N)
+      alpha_natural := ?_
+      sigma_model := symmetryModelOfNormalized R a s h
+      alpha_model := associativityModelOfNormalized R a s h }
+  · intro A A' B B' x y
+    simp only [tensorMap_eq]
+    exact s.hom.naturality (Prod.mkHom x y)
+  · intro A A' B B' N N' x y z
+    simp only [tensorMap_eq]
+    exact a.hom.naturality (Prod.mkHom (Prod.mkHom x y) z)
 
 variable {R}
   {D : Type uD} [Category.{vD} D] [EssentiallySmall.{r} D]
@@ -130,6 +234,9 @@ variable {R}
   (f : RingedPullback.{r, uC, vC, uD, vD} R S)
   (k : Comparison.{r, uC, vC, uD, vD} f)
   [PreservesFiniteLimits f.L] [PreservesFiniteColimits f.L]
+
+local instance (priority := 20000) : K.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}) :=
+  inferInstance
 
 attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 /-- The exact derived functor, with both derived-category universes fixed by its type.
@@ -255,6 +362,86 @@ theorem exact_pullback_signed_comparison
                 tensorMap S (mu.hom.app (A, B)) (𝟙 _) ≫
                 (cS.alpha ((exactDerivedFunctor f).obj A) ((exactDerivedFunctor f).obj B)
                   ((exactDerivedFunctor f).obj N)).hom) := by
-  sorry
+  classical
+  obtain ⟨sL, sR, sS, _, hcR, hcS, _, muL, hmuL, _⟩ :=
+    pullback_tensor_canonical_shift_unit f k L epsilon hL
+  let : (derivedTensor R).CommShift₂Int := sR
+  let : (derivedTensor S).CommShift₂Int := sS
+  let W := HomologicalComplex.quasiIso (Modules R) (.up ℤ)
+  let U := exactDerivedFunctor f
+  let kap := exactFactorization f
+  let : U.IsLeftDerivedFunctor kap.hom W :=
+    Functor.isLeftDerivedFunctor_of_inverts W U kap
+  let : L.IsLeftDerivedFunctor epsilon W := hL
+  let eta : L ≅ U := Functor.leftDerivedUnique U L epsilon kap.hom W
+  have heta (P : CochainComplex (Modules R) ℤ) :
+      eta.hom.app (DerivedCategory.Q.obj P) ≫ kap.hom.app P = epsilon.app P := by
+    simp only [eta, Functor.leftDerivedUnique, Functor.leftDerivedNatIso_hom,
+      Functor.leftDerivedNatTrans_app, Iso.refl_hom, NatTrans.id_app, Category.comp_id]
+  let : L.CommShift ℤ := Functor.CommShift.ofIso eta.symm ℤ
+  let : NatTrans.CommShift eta.symm.hom ℤ :=
+    Functor.CommShift.ofIso_compatibility eta.symm ℤ
+  have : NatTrans.CommShift eta.hom ℤ := NatTrans.CommShift.of_iso_inv eta.symm ℤ
+  have heps : epsilon = Functor.whiskerLeft DerivedCategory.Q eta.hom ≫ kap.hom := by
+    ext P
+    exact (heta P).symm
+  have : NatTrans.CommShift epsilon ℤ := by
+    rw [heps]
+    infer_instance
+  let : PreservesFiniteLimits f.uInv := f.finiteLimits
+  have hres := isKFlat_ringedToposPullback f.uInv f.uPush f.adj f.I f.coefficient
+    f.L f.hobj f.hmap
+  have hflat (M : Modules R) (hm : IsFlatOnSite (J := J) (R := R) M) :
+      IsFlatOnSite (J := K) (R := S) (f.L.obj M) := by
+    let P := (HomologicalComplex.single (Modules R) (.up ℤ) 0).obj M
+    obtain ⟨hp, hf⟩ := (DerivedTensorConstraints.derived_tensor_model_closure R).2.2.2.1 M hm
+    simpa only [Functor.mapHomologicalComplex_obj_X, P,
+      HomologicalComplex.single_obj_X_self] using (hres P hp hf).2 0
+  let : PreservesColimitsOfSize.{r, r} f.L := f.moduleAdj.leftAdjoint_preservesColimits
+  have hsums (I : Type r) : PreservesColimitsOfShape (Discrete I) f.L := inferInstance
+  refine ⟨inferInstance, sR, sS, inferInstance, hcR, hcS, hsums,
+    (fun _ _ _ _ ↦ f.L.map_zsmul), hflat, hres, eta, ?_, ?_, inferInstance, ?_, ?_⟩
+  · unfold IsNormalizedIdentification
+    exact fun P _ _ ↦ heta P
+  · intro eta' heta'
+    unfold IsNormalizedIdentification at heta'
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    let A := DerivedCategory.Q.objPreimage M
+    obtain ⟨P, p, hp, hf, hq, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients A
+    have hflatP : ∀ n, IsFlatOnSite (J := J) (R := R) (P.X n) := by
+      intro n
+      unfold IsFlatOnSite
+      exact (exactFunctor _ _).prop_of_iso (siteSheafTensorRightIso R (P.X n)).symm (hf n)
+    let := hq
+    let e := asIso (DerivedCategory.Q.map p) ≪≫ DerivedCategory.Q.objObjPreimageIso M
+    apply (cancel_epi (L.map e.hom)).1
+    rw [eta'.hom.naturality, eta.hom.naturality]
+    have hcomp := (heta' P hp hflatP).trans (heta P).symm
+    have happ := (cancel_mono (kap.hom.app P)).1 hcomp
+    rw [happ]
+  · exact fun M ↦ heta ((CochainComplex.singleFunctor (Modules R) 0).obj M)
+  · obtain ⟨⟨tR, aR, bR⟩, hnR, _⟩ :=
+      DerivedTensorConstraints.existsUnique_derived_tensor_constraints R
+    obtain ⟨⟨tS, aS, bS⟩, hnS, _⟩ :=
+      DerivedTensorConstraints.existsUnique_derived_tensor_constraints S
+    let cR := constraintsOfNormalized R aR bR ⟨tR, hnR⟩
+    let cS := constraintsOfNormalized S aS bS ⟨tS, hnS⟩
+    let mu := ResolvingTensorSigned.transportedComparison f L muL eta
+    obtain ⟨hn, hu, hshift, hsym, hassoc⟩ :=
+      ResolvingTensorSigned.resolving_tensor_signed_coherence f L k epsilon hL
+        hcR hcS hflat hres hsums eta (fun P _ _ ↦ heta P) muL hmuL
+        aR bR ⟨tR, hnR⟩ aS bS ⟨tS, hnS⟩
+    refine ⟨cR, cS, mu, hn, hu, ⟨muL, hmuL, ?_⟩, ?_, ?_, ?_⟩
+    · intro A B
+      unfold tensorMap
+      rfl
+    · intro a b A B
+      simpa only [tensorMap, tensorShift, Iso.trans_hom, NatTrans.comp_app, Functor.mapIso_hom,
+        Iso.symm_hom, Iso.app_hom, Iso.app_inv, Category.assoc] using hshift a b A B
+    · exact hsym
+    · with_unfolding_all exact hassoc
 
 end SheafOfModules.ExactPullbackSigned

@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-integral-open-finite-evaluation",
+ "kind": "statement",
+ "title": "Finite evaluation of the open reduction mate",
+ "statement": "Fix a prime l, a finite extension E/Q_l, Operations o and a RealizationModel model [def-sf-integral-system-canonical-bridge] and [def-sf-integral-system-operations], an open immersion j:X→Y, an arbitrary integral derived object K on X, and n≥0. Define openFiniteReduction(j,n) from scalar reduction of completed-ring extension by zero to finite constant-ring extension by zero of scalar reduction by the composite: finiteReductionIso(Y,n) inverse, PurCompactSupport.openComparison for reduction modulo exponent n+1, the localization of finiteOpenIso(j,n), and finite extension by zero of finiteReductionIso(X,n) [lem-pur-compact-support-integral-coefficient-comparison]. Evaluation at n of model.openReduction(j)_K, followed by reductionEvaluation(n) at the completed open extension of K, followed by openFiniteReduction(j,n)_K, equals the specified o.openEvaluation at the reduction of K followed by finite extension by zero of reductionEvaluation(n)_K. No proper image, total limit, inverse reconstruction unit or constructibility is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient comparisons of evaluation and adjunction units/counits; open evaluation component of the original node plan, Step 2; Lean split from lean/Sheaf/SixFunctors/IntegralSupportProjectionTransport.lean, original proof docstring lines 28–45"
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-integral-system-operations",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Use integralReductionPullFiniteSquare to identify the evaluated whole-system pullback comparison with the scalar/pullback comparison. Use integralOpenScalarUnitSquare for the actual integral and finite open units. The private assemble lemma proves the resulting open mate equality: cancel the inverse open evaluation isomorphism, transpose under finiteOpenAdj, substitute both inverse-mate unit equations, use naturality of pullback evaluation and reductionEvaluation, and finally the scalar unit equation. The finite open-unit naturality equation closes the transpose. This uses no faithfulness of derived evaluation and no inverse limit.",
+   "uses": [
+    "lem-sf-integral-reduction-pull-finite-square",
+    "lem-sf-integral-open-scalar-unit-square",
+    "def-sf-integral-system-canonical-bridge",
+    "def-sf-integral-system-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons of evaluation and adjunction units/counits; open evaluation component of the original node plan, Step 2; Lean split from lean/Sheaf/SixFunctors/IntegralSupportProjectionTransport.lean, original proof docstring lines 28–45"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-reduction-pull-finite-square",
+  "lem-sf-integral-open-scalar-unit-square",
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-integral-system-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Assembly in Lean by two inverse-mate unit identities and naturality, from the separately stated pullback evaluation and scalar open-unit equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient evaluation of an adjunction mate for proper direct image and open extension",
+   "results": "{\"t\": \"2026-10-27T01:47:23Z\", \"tool\": \"leansearch\", \"query\": \"Derived coefficient evaluation of an adjunction mate for proper direct image and open extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived\", \"CategoryTheory.rightAdjointMate_comp_evaluation\", \"CategoryTheory.Adjunction.derived\\u03b5\", \"CategoryTheory.evaluationAdjunctionRight_counit_app_app\", \"CategoryTheory.rightAdjointMate_comp_evaluation_assoc\", \"CategoryTheory.Adjunction.derived\\u03b5.congr_simp\", \"CategoryTheory.Adjunction.derived\\u03b7\", \"Topology.IsInducing.adjunction\"], \"digest\": \"ecb84607325d937c\"}",
+   "date": "2026-10-27",
+   "verdict": "No theorem for this normalized coefficient-system square; the returned general adjunction results do not supply its geometric normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "{\"t\": \"2026-10-27T01:47:24Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv_naturality_left\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv_naturality_left\"], \"digest\": \"e5336c4ff17a2a39\"}",
+   "date": "2026-10-27",
+   "verdict": "The generic adjunction naturality lemma is used in assembly, but does not identify the normalized geometric comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "properFiniteReduction|openFiniteReduction|integralProperFiniteProjection|integralOpenFiniteEvaluation",
+   "results": "{\"t\": \"2026-10-27T01:47:24Z\", \"tool\": \"grep\", \"query\": \"properFiniteReduction|openFiniteReduction|integralProperFiniteProjection|integralOpenFiniteEvaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No theorem for this normalized coefficient-system square; the returned general adjunction results do not supply its geometric normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralSupportProjectionTransport",
+  "date": "2026-10-27",
+  "group": "C7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Preservation of coefficient comparisons for evaluation and adjunction units/counits; open extension factor",
+   "via": [
+    "lem-sf-integral-support-projection-transport",
+    "lem-sf-integral-support-tower-normalization",
+    "lem-sf-integral-basic-realization",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralOpenFiniteEvaluation",
+  "file": "lean/Sheaf/SixFunctors/IntegralOpenFiniteEvaluation.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralOpenFiniteEvaluation",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.openFiniteReduction",
+   "WeilConjectures.IntegralSystemRealization.integralOpenFiniteEvaluation"
+  ],
+  "statement": "theorem integralOpenFiniteEvaluation (o : Operations l E)\n    (model : RealizationModel l E o) {X Y : Scheme.{u}} (j : X ⟶ Y)\n    [IsOpenImmersion j] (K : Integral l E X) (n : ℕ) :\n    (coefficientSequenceDerivedEvaluation l E Y n).map ((model.openReduction l E j).app K) ≫\n      ((calculus l E Y).reductionEvaluation n).hom.app ((ringedOpen l E j).obj K) ≫\n      (openFiniteReduction l E j n).app K =\n    ((o.openEvaluation j).evaluation n).hom.app ((calculus l E X).reduction.obj K) ≫\n      (sfIntrinsicExtensionByZero j\n        (Padic.coefficientExtensionRing l E (n + 1))).mapDerivedCategory.map\n          (((calculus l E X).reductionEvaluation n).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261027T034625-L-3666864",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261027T084509-L-3686393",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

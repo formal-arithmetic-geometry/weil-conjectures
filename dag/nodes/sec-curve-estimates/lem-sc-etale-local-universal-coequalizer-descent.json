@@ -1,0 +1,250 @@
+{
+ "id": "lem-sc-etale-local-universal-coequalizer-descent",
+ "kind": "statement",
+ "title": "Descent of etale-local universal coequalizers with finite etale targets",
+ "statement": "Let $Y$ be a scheme, let $a,b:Z\\rightrightarrows P$ be morphisms of $Y$-schemes, and let $(u_i:U_i\\to Y)_{i\\in I}$ be a set-indexed family of etale morphisms whose images cover $Y$. For a $Y$-scheme $T$ and $V\\to Y$ write $T_V=T\\times_YV$ [def-pc-fibre-product]. Suppose that for each $i$ there are a finite etale $U_i$-scheme $Q_i$ [def-weil-pbc-finite-etale-category] and a $U_i$-morphism $q_i:P_{U_i}\\to Q_i$ with $q_i\\circ a_{U_i}=q_i\\circ b_{U_i}$. For a $U_i$-scheme $W$ and a morphism $V\\to U_i$ write $W_V=W\\times_{U_i}V$; thus $P_V=P\\times_YV=(P_{U_i})_V$, $a_V,b_V$ are the base changes of $a_{U_i},b_{U_i}$, and $(q_i)_V=q_i\\times_{U_i}V:P_V\\to(Q_i)_V$. Assume the following universal property: for every $V\\to U_i$, every $V$-scheme $H$, and every $V$-morphism $h:P_V\\to H$ satisfying $h\\circ a_V=h\\circ b_V$, there is exactly one $V$-morphism $k:(Q_i)_V\\to H$ with $k\\circ(q_i)_V=h$.\nThen there are a finite etale $Y$-scheme $Q$ and a $Y$-morphism $q:P\\to Q$ with $q\\circ a=q\\circ b$, and isomorphisms of $U_i$-schemes $\\theta_i:Q_{U_i}\\xrightarrow{\\sim}Q_i$ with $\\theta_i\\circ q_{U_i}=q_i$. Moreover, for every morphism $g:Y'\\to Y$, every $Y'$-scheme $H$, and every $Y'$-morphism $h:P_{Y'}\\to H$ with $h\\circ a_{Y'}=h\\circ b_{Y'}$, there is exactly one $Y'$-morphism $k:Q_{Y'}\\to H$ with $k\\circ q_{Y'}=h$. Neither $P$ nor $Z$ is assumed finite etale; only the local quotient targets $Q_i$ are.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits, finite colimits proof: etale-local construction of the quotient and omitted compatibility with base change; conditional descent lemma making that argument explicit"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "We will use representable-sheaf gluing in the following precise form. If $(B_i\\to B)$ is an etale cover and $X,H$ are arbitrary $B$-schemes, then compatible $B_i$-maps $X_{B_i}\\to H_{B_i}$ glue uniquely to a $B$-map $X\\to H$. Indeed $(X_{B_i}\\to X)$ is an etale cover by covering base change. Apply the representable-sheaf lemma on $X_{\\mathrm{Et}}$ to the $X$-scheme $X\\times_BH$: its sections on $X_{B_i}$ are exactly these maps, by the fibre-product universal property. The uniqueness assertion also detects equality of two $B$-maps after this cover.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03O3 (lemma-representable-sheaf-fpqc) and 03O4 (remark-fpqc-finest); Morphisms Tags 02GO (lemma-base-change-etale) and 01S1 (lemma-base-change-surjective)"
+   }
+  },
+  {
+   "text": "Put $U_{ij}=U_i\\times_YU_j$. Over $U_{ij}$ the pullbacks $q_i^{ij}$ and $q_j^{ij}$ are coequalizers of the same pair, by the stated universal properties with $V=U_{ij}$. Applying the first to $h=q_j^{ij}$ gives a unique $\\varphi_{ij}:(Q_i)_{U_{ij}}\\to(Q_j)_{U_{ij}}$ with $\\varphi_{ij}q_i^{ij}=q_j^{ij}$. Reversing $i,j$ gives its inverse: both inverse composites and the identities have the same composite with the appropriate quotient map, so uniqueness makes them equal. This construction pulls back to every $W\\to U_{ij}$, since the pulled-back comparison still satisfies the defining equation and both pulled-back quotient maps still have the assumed universal property. On $U_i\\times_YU_j\\times_YU_k$, the maps $\\varphi_{jk}\\varphi_{ij}$ and $\\varphi_{ik}$ therefore both compose with $q_i$ to $q_k$; uniqueness gives the cocycle equation.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN9 (lemma-finite-etale-covers-limits-colimits), local quotient construction: explicit uniqueness argument for overlap comparisons and arbitrary further pullbacks"
+   }
+  },
+  {
+   "text": "Form $U=\\coprod_iU_i$ and $R=\\coprod_iQ_i$, with their induced maps $u:U\\to Y$ and $r:R\\to U$. The coproduct lemma gives pairwise disjoint open-and-closed summands covering each scheme. Each $Q_i\\to R\\to U$ is the finite etale structure map $Q_i\\to U_i$ followed by the open immersion $U_i\\to U$, hence is etale by composition and the open-immersion case. Source locality gives that $r$ is etale, and similarly that $u$ is etale. On the target open $U_i$ the restriction of $r$ is exactly $Q_i\\to U_i$: its inverse image consists of the $i$th summand, since every other summand maps to a disjoint $U_j$. Target locality of finiteness thus makes $r$ finite. The map $u$ is surjective because the original family covers $Y$. In particular $R$ is finite etale over $U$. Pulling the summand open coverings back preserves open immersions and coverings; the fibre-product universal property identifies the resulting pieces of $U\\times_YU$ and of $U\\times_YU\\times_YU$ with $U_{ij}$ and $U_i\\times_YU_j\\times_YU_k$, respectively.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-local-on-source",
+    "lem-weil-pbc-closed-finite-etale-zariski-local",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), 01JY (lemma-base-change-immersion); Morphisms Tag 02GJ (lemma-etale-characterize); target locality as recorded by lem-weil-pbc-closed-finite-etale-zariski-local"
+   }
+  },
+  {
+   "text": "Let $p_1,p_2:U\\times_YU\\to U$. On the component $U_{ij}$ the two pullbacks $p_1^*R,p_2^*R$ restrict to $(Q_i)_{U_{ij}},(Q_j)_{U_{ij}}$. These components are open immersions into $U\\times_YU$ (step 3), hence etale by the open-immersion case of the composition lemma, and they cover it; so they form an etale cover. Use step 1 for this disjoint open covering by the components to glue the maps $\\varphi_{ij}$ to a map $\\varphi:p_1^*R\\to p_2^*R$; the inverse maps glue too and their composites are identities by the equality part of step 1. On the triple product the cocycle equality holds on every component by step 2, hence globally by step 1. Thus $(R,\\varphi)$ is a finite etale descent datum for the surjective etale morphism $u$, in the stated definition. Apply the equivalence of finite etale descent to obtain a finite etale $Y$-scheme $Q$ and a datum-compatible isomorphism $\\psi:Q_U\\xrightarrow{\\sim}R$. Its restrictions give $\\theta_i:Q_{U_i}\\xrightarrow{\\sim}Q_i$, with $\\varphi_{ij}(\\theta_i)_{U_{ij}}=(\\theta_j)_{U_{ij}}$ under the canonical pullback identifications.",
+   "uses": [
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-pc-fibre-product",
+    "def-pd-descent-datum",
+    "lem-galois-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023V (definition-descent-datum), Tag 0245 (lemma-affine), Tag 02LA (lemma-descending-property-finite), Tag 02VN (lemma-descending-property-etale); packaged by lem-galois-descent"
+   }
+  },
+  {
+   "text": "The $U_i$-maps $\\theta_i^{-1}q_i:P_{U_i}\\to Q_{U_i}$ agree on overlaps: after composing the $i$th map with $(\\theta_j)_{U_{ij}}=\\varphi_{ij}(\\theta_i)_{U_{ij}}$, its value is $\\varphi_{ij}q_i^{ij}=q_j^{ij}$. Step 1 with $X=P,H=Q,B=Y$ therefore glues them uniquely to $q:P\\to Q$. The equation $\\theta_iq_{U_i}=q_i$ holds by construction. Since the $q_i$ equalize the local arrows, $(qa)_{U_i}=(qb)_{U_i}$ for all $i$. The equality part of step 1, now with $X=Z,H=Q$, gives $qa=qb$. Neither use of gluing asks that $P$ or $Z$ be etale.",
+   "uses": [
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03O3 (lemma-representable-sheaf-fpqc) and 03O4 (remark-fpqc-finest); Morphisms Tags 02GO (lemma-base-change-etale) and 01S1 (lemma-base-change-surjective)"
+   }
+  },
+  {
+   "text": "Fix $Y'\\to Y$, a $Y'$-scheme $H$ and an equalizing map $h:P_{Y'}\\to H$. Put $W_i=Y'\\times_YU_i$; these form an etale cover of $Y'$. The original universal property, applied to $W_i\\to U_i$ and $h_{W_i}$, gives a unique map $(Q_i)_{W_i}\\to H_{W_i}$ factoring $h_{W_i}$. Composing with the pulled-back $\\theta_i$ gives $k_i:Q_{W_i}\\to H_{W_i}$ with $k_iq_{W_i}=h_{W_i}$. On $W_i\\times_{Y'}W_j$, the restrictions of $k_i,k_j$ agree: both have composite $h$ with $q$, and the original universal property for $q_i$ over that overlap, transported by $\\theta_i$, says there is exactly one such map. Step 1 with $B=Y',X=Q_{Y'},H=H$ glues the $k_i$ to $k:Q_{Y'}\\to H$. Checking on the cover of $P_{Y'}$ gives $kq_{Y'}=h$. Any other factor has restriction $k_i$ by local uniqueness, hence equals $k$ by the equality assertion of step 1 on $Q_{Y'}$. This proves the universal property for every $Y'\\to Y$.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03O3 (lemma-representable-sheaf-fpqc) and 03O4 (remark-fpqc-finest); Morphisms Tags 02GO (lemma-base-change-etale) and 01S1 (lemma-base-change-surjective)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-closed-finite-etale-zariski-local",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-pd-descent-datum",
+  "lem-galois-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BN9 (lemma-finite-etale-covers-limits-colimits), etale-local quotient argument and omitted arbitrary-base-change verification, expanded using effective finite etale descent (0245, 02LA, 02VN) and representable sheaf gluing (03O3, 03O4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Universal coequalizers of schemes with finite etale local targets descend along a jointly surjective etale covering family",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀; AlgebraicGeometry.Scheme.Cover.fromGlued; AlgebraicGeometry.Scheme.Cover.glueMorphisms; AlgebraicGeometry.instSurjectiveDescI₀SchemeF; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.GlueData.ι_jointly_surjective; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram",
+   "date": "2026-10-22",
+   "verdict": "no match: topological coverings, scheme open gluing, finite/etale stability and locally ringed space colimits do not state this lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit, AlgebraicGeometry.Scheme",
+   "results": "AlgebraicGeometry.Scheme.IsLocallyDirected.isColimit; AlgebraicGeometry.Scheme.IsLocallyDirected.isColimitForgetToLocallyRingedSpace; AlgebraicGeometry.nonempty_isColimit_binaryCofanMk_of_isCompl; AlgebraicGeometry.nonempty_isColimit_cofanMk_of; AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone; AlgebraicGeometry.Scheme.OpenCover.isColimitCoconeOfLocallyDirected; AlgebraicGeometry.Scheme.Cover.ColimitGluingData.isColimit; AlgebraicGeometry.Scheme.Cover.ColimitGluingData.isColimitGluedCocone",
+   "date": "2026-10-22",
+   "verdict": "no match: topological coverings, scheme open gluing, finite/etale stability and locally ringed space colimits do not state this lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "coequalizer|Coequalizer",
+   "results": "Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; Mathlib/AlgebraicGeometry/Gluing.lean (Mathlib/AlgebraicGeometry searched)",
+   "date": "2026-10-22",
+   "verdict": "no match: topological coverings, scheme open gluing, finite/etale stability and locally ringed space colimits do not state this lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale local coequalizer maps with finite etale targets glue to a universal coequalizer over the base scheme",
+   "results": "AlgebraicGeometry.LocallyRingedSpace.coequalizer; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.toBase; AlgebraicGeometry.LocallyRingedSpace.instHasCoequalizers; AlgebraicGeometry.Scheme.Cover.glueMorphisms; AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOfLocallyDirected; AlgebraicGeometry.LocallyRingedSpace.coequalizerCofork; AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.coequalizer_π_app_isLocalHom; AlgebraicGeometry.LocallyRingedSpace.coequalizerCoforkIsColimit",
+   "date": "2026-10-22",
+   "verdict": "no match: topological coverings, scheme open gluing, finite/etale stability and locally ringed space colimits do not state this lemma"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal coequalizers of schemes with finite etale targets descend along a jointly surjective etale covering family",
+   "results": "AlgebraicGeometry.instSurjectiveDescI₀SchemeF; AlgebraicGeometry.Scheme.GlueData.ι_jointly_surjective; AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram; AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f; AlgebraicGeometry.Scheme.Cover.glueMorphisms; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀; AlgebraicGeometry.Scheme.Cover.fromGlued",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme open-cover gluing and locally ringed space coequalizers do not give effective etale descent of finite etale quotient targets and arbitrary-base-change universality"
+  },
+  {
+   "tool": "grep",
+   "query": "coequalizer|Coequalizer",
+   "results": "Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Gluing.lean; Mathlib/AlgebraicGeometry/Gluing.lean; Mathlib/AlgebraicGeometry/Gluing.lean; subdirectory AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme open-cover gluing and locally ringed space coequalizers do not give effective etale descent of finite etale quotient targets and arbitrary-base-change universality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale local coequalizer maps with finite etale targets glue to a universal coequalizer over the base scheme",
+   "results": "AlgebraicGeometry.LocallyRingedSpace.coequalizer; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.toBase; AlgebraicGeometry.LocallyRingedSpace.instHasCoequalizers; AlgebraicGeometry.Scheme.Cover.glueMorphisms; AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOfLocallyDirected; AlgebraicGeometry.LocallyRingedSpace.coequalizerCofork; AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.coequalizer_π_app_isLocalHom; AlgebraicGeometry.LocallyRingedSpace.coequalizerCoforkIsColimit",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme open-cover gluing and locally ringed space coequalizers do not give effective etale descent of finite etale quotient targets and arbitrary-base-change universality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit, AlgebraicGeometry.Scheme",
+   "results": "AlgebraicGeometry.Scheme.IsLocallyDirected.isColimit; AlgebraicGeometry.Scheme.IsLocallyDirected.isColimitForgetToLocallyRingedSpace; AlgebraicGeometry.nonempty_isColimit_binaryCofanMk_of_isCompl; AlgebraicGeometry.nonempty_isColimit_cofanMk_of; AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone; AlgebraicGeometry.Scheme.OpenCover.isColimitCoconeOfLocallyDirected; AlgebraicGeometry.Scheme.Cover.ColimitGluingData.isColimit; AlgebraicGeometry.Scheme.Cover.ColimitGluingData.isColimitGluedCocone",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme open-cover gluing and locally ringed space coequalizers do not give effective etale descent of finite etale quotient targets and arbitrary-base-change universality"
+  },
+  {
+   "tool": "grep",
+   "query": "descent|isColimitGluedCocone",
+   "results": "236; 302; subdirectory AlgebraicGeometry/ColimitsOver.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme open-cover gluing and locally ringed space coequalizers do not give effective etale descent of finite etale quotient targets and arbitrary-base-change universality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coequalizers in schemes stable under arbitrary base change can be glued by effective descent of their finite etale quotient objects",
+   "results": "AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram; AlgebraicGeometry.Scheme.GlueData.toGlueData; AlgebraicGeometry.Scheme.GlueData.glued; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued; AlgebraicGeometry.Scheme.GlueData.gluedScheme; AlgebraicGeometry.Scheme.Cover.gluedCover; AlgebraicGeometry.Scheme.Cover.glueMorphisms; AlgebraicGeometry.Scheme.Pullback.gluing",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme open-cover gluing and locally ringed space coequalizers do not give effective etale descent of finite etale quotient targets and arbitrary-base-change universality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fet-finite-limits",
+  "date": "2026-10-22",
+  "group": "Q72"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "blueprint": {
+  "from": {
+   "node": "lem-fet-finite-limits",
+   "place": "Current blueprint (main-20261015) lem-fet-finite-limits proof, Step 2: 'because the existence of a coequalizer which is finite etale is a statement local on the target for the etale topology' and 'base change commutes with the construction, so base change is right exact'; this conditional descent lemma makes that etale-local reduction and the base-change compatibility explicit for the 0BN9 coequalizer route of the parent split (step 6). The newer blueprint snapshot moves the parent to sk-thm-br and replaces coequalizers by finite-group quotients (its Step 3 gluing).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sc-etale-local-universal-coequalizer-descent",
+  "worker": "stage1",
+  "summary": "Preserve the full conditional statement, including arbitrary P and Z, a set-indexed etale cover and arbitrary base change. Prove comparison-isomorphism coherence from the local universal properties, package the family using existing coproduct and locality nodes, apply existing finite etale descent, and glue maps by representable-sheaf descent on arbitrary source schemes. Reuse every non-elementary fact from the existing DAG; create no nodes. Six genuinely logged searches give no exact Mathlib match. No Lean edits or compiles.",
+  "blueprint": "main-20261015 lem-fet-finite-limits proof Step 2 (etale-local existence of a finite etale coequalizer and its compatibility with base change): steps 1 and 3-5 supply the effective etale descent of the local quotients, steps 2 and 6 the comparison coherence and the universal property after arbitrary base change. This is the conditional tool called by the existing parent split step 6. (Newer snapshots replace the finite-colimit statement by finite-group quotients, Step 3; the descent tool also serves that gluing.)",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "Representable sheaf gluing on the arbitrary source scheme descends the quotient and factoring morphisms; finite etale object descent alone does not cover morphisms with arbitrary P, Z or H."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-ND-6b2f33966",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-6b2f33966 (reviewer sub-agent of L); spot-checked: Read Stacks 0BN9 (pione.tex lemma-finite-etale-covers-limits-colimits, around lines 967-1030), the item and the statement of every cited node. The statement and stmt_deps are identical to live (unsplit, no proof), and there is no repair note for this item. The statement is true and is not a restatement of the parent: it combines étale descent of the finite étale object (lem-galois-descent) with étale descent of morphisms into arbitrary schemes. Tested: I empty, unbounded local ranks, a base change Y'->Y that does not factor through any U_i, and P, Z, H arbitrary. Step 1 applies the representable-sheaf lemma on X_Et to X x_B H, which is valid for an arbitrary X->T. Step 2 (comparison maps phi_ij, their inverses and the cocycle φ_ik = φ_jk φ_ij) is correct, and its orientation matches def-pd-descent-datum and lem-galois-descent. Step 3: r^{-1}(U_i) is exactly Q_i, so target locality gives finiteness; no finite-index lemma is used. Step 5: θ_j^{-1}q_j = θ_i^{-1}q_i on overlaps. Step 6: local uniqueness on W_i x W_j through U_i, transported by θ_i. No cycle: the closure has 114 nodes and does not reach the item. Accepted tool_use: lem-weil-pbc-small-etale-representable-presheaf-sheaf. The in-unit alternative lem-galois-fpqc-morphisms-descend would also need an 'étale surjective ⇒ fpqc' citation. The other off-unit citations are Mathlib leaves. Two repairs (C1 and B9): (1) step 4 glues over the open components of U x_Y U through step 1, which needs an étale cover, but it did not cite why open immersions are étale; I added lem-weil-pbc-etale-composition-cancellation (1), already in proof_deps. (2) blueprint.from.place and split_report.blueprint cited Step 3 (finite-group quotients) of the newer main-20261024 snapshot. They now cite the current main-20261015 Step 2, the étale-local finite étale coequalizer and its base change. Everything else is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleLocalUniversalCoequalizerDescent",
+  "declaration": "AlgebraicGeometry.etaleLocalUniversalCoequalizerDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLocalUniversalCoequalizerDescent.lean",
+  "statement": "theorem etaleLocalUniversalCoequalizerDescent (Y : Scheme.{u}) (Z P : Over Y) (a b : Z ⟶ P) (I : Type w) (U : I → Scheme.{u}) (ι : ∀ i : I, U i ⟶ Y) (hι : ∀ i : I, Etale (ι i)) (hcover : ∀ y : Y, ∃ (i : I) (x : U i), ι i x = y) (Q : ∀ i : I, MorphismProperty.Over (@IsFinite ⊓ @Etale) ⊤ (U i)) (q : ∀ i : I, (Over.pullback (ι i)).obj P ⟶ Over.mk (Q i).hom) (heq : ∀ i : I, (Over.pullback (ι i)).map a ≫ q i = (Over.pullback (ι i)).map b ≫ q i) (hlocal : ∀ (i : I) (V : Scheme.{u}) (v : V ⟶ U i) (H : Over V) (h : (Over.pullback v).obj ((Over.pullback (ι i)).obj P) ⟶ H), (Over.pullback v).map ((Over.pullback (ι i)).map a) ≫ h = (Over.pullback v).map ((Over.pullback (ι i)).map b) ≫ h → ∃! k : (Over.pullback v).obj (Over.mk (Q i).hom) ⟶ H, (Over.pullback v).map (q i) ≫ k = h) : ∃ (Q₀ : MorphismProperty.Over (@IsFinite ⊓ @Etale) ⊤ Y) (q₀ : P ⟶ Over.mk Q₀.hom), a ≫ q₀ = b ≫ q₀ ∧ (∀ i : I, ∃ θ : (Over.pullback (ι i)).obj (Over.mk Q₀.hom) ≅ Over.mk (Q i).hom, (Over.pullback (ι i)).map q₀ ≫ θ.hom = q i) ∧ ∀ (Y' : Scheme.{u}) (g : Y' ⟶ Y) (H : Over Y') (h : (Over.pullback g).obj P ⟶ H), (Over.pullback g).map a ≫ h = (Over.pullback g).map b ≫ h → ∃! k : (Over.pullback g).obj (Over.mk Q₀.hom) ⟶ H, (Over.pullback g).map q₀ ≫ k = h",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76f81b5b5",
+  "group": "NA",
+  "result": "pass",
+  "note": "Only the lean field differs from live; the three stmt_deps are identical; lean.statement is verbatim in the file. Clause check: arbitrary P,Z over Y; I : Type w with no Small or Nonempty assumption; Etale family with images covering Y via hcover; Q_i in (IsFinite ⊓ Etale).Over ⊤ (the dep's mathlib_match); q_i and heq are U_i-morphisms in the right order; hlocal quantifies all V, v : V ⟶ U_i and arbitrary H : Over V with ∃! over iterated pullbacks, as the node's W_V convention says; conclusion gives Q₀ finite étale, q₀ equalizing, θ_i isos in Over (U i) with q₀ ≫ θ = q_i, and ∃! factorization for all Y', g, H : Over Y'. Edge cases: empty I, w > u, empty pieces, Y' not factoring through any U_i, same-universe test schemes. No definitions; single sorry; source and blueprint docstrings with the 6-step proof; autoImplicit false; proof-only side imports exist and are used by landed modules. No duplicate found. Report has Worker report and Second reading by NA (self-reading, substantive). No compile: no change made."
+ }
+}

@@ -1,0 +1,163 @@
+{
+ "id": "lem-qcqs-compact-support-torsion-input-detection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Adic density/naturality on the strict resolving category in the parent rigidity plan; source ancestor: def-weil-integral-rational-qbar-compact-support",
+   "via": [
+    "lem-qcqs-compact-support-reduction-rigidity",
+    "lem-qcqs-compact-support-normalized-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite-coefficient inputs detect natural compact-support comparisons",
+ "statement": "Let l,E,k,X,Y,f,c and the two compact-support functors be as in [def-weil-derived-complete-integral-detailed], [def-compact-support-direct-image-detailed] and [def-weil-compact-support-finite-action]. Suppose two natural transformations between the actual completed proper/open functor restricted to integral constructible inputs and the recorded integral compact-support functor followed by ambient inclusion agree at every constructible integral input which is isomorphic to the restriction of a derived complex over one positive finite quotient of the completed coefficient ring [def-weil-integral-derived-reduction]. Then the natural transformations agree. No finite scalar-reduction equality is assumed in this statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-prop-scalar-six-compact-support.proof.md",
+  "place": "Adic density/naturality on the strict resolving category in the parent rigidity plan; Bhatt--Scholze 6.7.6--6.7.7; Stacks 0941, 0F7J",
+  "note": "Agent-formulated step of the original rigidity argument; not a verbatim assertion of the cited paper."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-compactifications-refinements",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-compact-support-finite-action",
+  "def-sf-open-reduction-coefficient-mate",
+  "def-pur-finite-compact-support-scalar-data",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "PROVED PART: finite-coefficient-input agreement is equivalent to agreement after every finite derived scalar extension, by lem-qcqs-compact-support-torsion-input-finite-evaluation. The forward implication makes the restricted quotient input constructible using the principal reduction triangle, then cancels the scalar-adjunction unit after transporting its explicit retraction through the natural compact-support reduction isomorphism. The converse uses the proved torsion coefficient action and injectivity of the scalar Hom transpose into a restricted target. The assigned assertion still needs the same natural-transformation rigidity in either formulation.",
+   "uses": [
+    "lem-qcqs-compact-support-torsion-input-finite-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "PROVED ADDITIONAL CASE (H2): finite shifted Hom groups in the output reduction towers imply detection by the Milnor injection. The generic finite-coefficient etale Hom proof gives this finiteness over any algebraically closed base field, not just the algebraic closure of a finite field. Thus the original detection statement is now proved with the additional hypothesis IsAlgClosed k. The arbitrary-field theorem and its existing hole are unchanged.",
+   "uses": [
+    "lem-qcqs-compact-support-torsion-input-finite-hom",
+    "lem-qcqs-compact-support-torsion-input-alg-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "UNCOMPLETED PLAN (the coherent-lift objection below remains): Use augmented strict quotient-tensor systems of complete inputs and simultaneous flat-term K-flat resolutions. Each restricted finite quotient is a constructible integral input, so the hypothesis identifies the comparisons on those resolving inputs. Naturality along augmentation and resolution comparison maps identifies their universal counit comparisons before evaluation. The reduction/total-limit Hom transpose is unique; descend its equality through the resolving localization and conjugate by the recorded projection-normalized gamma. No ordinary categorical limit universal property or joint monicity of derived evaluations is asserted.",
+   "uses": [
+    "lem-weil-compact-support-reduction-tower-functor",
+    "lem-weil-compact-support-representative-independence",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-integral-open-reduction-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-qcqs-compact-support-torsion-input-finite-evaluation",
+  "lem-qcqs-compact-support-torsion-input-finite-hom",
+  "lem-qcqs-compact-support-torsion-input-alg-closed",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-weil-compact-support-representative-independence",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-integral-open-reduction-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E2",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-prop-scalar-six-compact-support.proof.md",
+  "place": "Formalized the quotient-input and finite-evaluation portion; retained the disputed coherent-system finish without a new sorry or changed statement",
+  "review_by": "Q7",
+  "review_note": "STATEMENT-DISPUTED: the proposed strict resolving-diagram argument requires a coherent lift of arbitrary ordinary natural transformations, not supplied by the stated hypotheses or cited declarations. The scalar adjunction only detects whole derived-system maps. The finite-field Milnor injection has additional base-field hypotheses. No counterexample is claimed; the statement and existing hole are retained for independent mathematical review.",
+  "formalized_part": "lem-qcqs-compact-support-torsion-input-finite-evaluation",
+  "remaining": "The torsion-input and finite-evaluation agreement hypotheses have been proved equivalent. Equality of the original natural transformations remains unproved over an arbitrary base field; changing between these two hypotheses does not reduce that remaining rigidity obligation.",
+  "additional_formalized_parts": [
+   "lem-qcqs-compact-support-torsion-input-finite-hom",
+   "lem-sf-integral-reduction-shifted-hom-finite-alg-closed",
+   "lem-qcqs-compact-support-torsion-input-alg-closed"
+  ],
+  "additional_note": "H2 proves the actual detection conclusion over every algebraically closed original base field, with no new holes. The existing arbitrary-field assertion and coherent-lift dispute remain; no equivalence of hypotheses is split off again."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "natural transformations between derived complete functors determined by torsion inputs",
+   "results": "CategoryTheory.Functor.rightDerivedNatTrans_app and rightDerivedNatTrans construct transformations from already given underived transformations; they do not identify arbitrary natural comparisons from torsion inputs.",
+   "date": "2026-10-27",
+   "verdict": "no matching geometric theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural transformations between derived complete functors determined by restriction to torsion objects",
+   "results": "CategoryTheory.Functor.leftDerived_ext, rightDerived_ext and mapDerivedCategoryFactors: generic localization/derived extension calculus, not torsion-input detection.",
+   "date": "2026-10-27",
+   "verdict": "no matching geometric theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*(detect|dense)|compactSupport.*[Rr]estriction|homEquiv_symm_apply",
+   "results": "Mathlib Adjunction.Basic has homEquiv_symm_apply. No compact-support or torsion-density match. Local source search finds IntegralReductionJointFaithfulness, whose FiniteFieldDatum hypotheses do not match the arbitrary base field here.",
+   "date": "2026-10-27",
+   "verdict": "no matching geometric theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsCompactSupportReductionRigidity",
+  "date": "2026-10-27",
+  "group": "B9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QcqsCompactSupportTorsionInputDetection",
+  "file": "lean/Sheaf/Paper/QcqsCompactSupportTorsionInputDetection.lean",
+  "declaration": "WeilConjectures.sfQcqsCompactSupport_torsion_input_ext",
+  "statement": "theorem sfQcqsCompactSupport_torsion_input_ext\n    (τ τ' : (sfIntegralConstructible l E X).ι ⋙ image (completed l E) c ⟶\n      sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙\n        (sfIntegralConstructible l E Y).ι)\n    (h : ∀ (n : ℕ) (K : sfIntegralConstructibleCategory l E X),\n      (scalarReductionDerivedRestriction l E X n).essImage K.obj →\n        τ.app K = τ'.app K) : τ = τ'",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261027T012813-L-2333489",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261027T094415-L-223111",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

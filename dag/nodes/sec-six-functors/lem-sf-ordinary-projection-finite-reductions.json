@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-ordinary-projection-finite-reductions",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-pf-proetale",
+   "place": "Integral paragraph: apply the direct completed-coefficient adic projection argument, finite reduction and conservativity steps.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite reductions of the ordinary integral projection",
+ "statement": "In the finite-field setting [sk-def-sf-setting], for any separated finite-type morphism f:X→Y between finite-type schemes and any supplied compactification c, any supplied representative-normalized tensor models on X, c.Z and Y, and integral constructible K,L [def-weil-derived-complete-integral-detailed], each finite scalar reduction [def-weil-integral-derived-reduction] of the ordinary proper-counit/open-extension projection [def-exchange-projection] over the completed coefficient sheaf [def-pur-integral-compact-support-coefficient-data] is invertible. This asserts invertibility after reduction only.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic.proof.md",
+  "place": "Finite reduction of the canonical completed-coefficient projection and conservativity of derived-complete objects."
+ },
+ "stmt_deps": [
+  "sk-def-sf-setting",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-exchange-projection",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof": [
+  {
+   "text": "For each integral input, finiteRing_constructibleDerived_origin gives a bounded constructible etale origin of its intrinsic finite reduction. The derived constant-scalar equivalence and comparison composition carry this to bounded constructibility of the inverse realization. The integral predicate supplies the common support interval directly.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient prime is invertible in the base field, hence in every residue field of Y. Integral residue Tor gives a Tor interval for the reduction of L. Transport its tensor-vanishing tests through the constant-scalar realization counit and apply intrinsic Tor amplitude transport to get the fixed-scalar Tor interval.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-exc-intrinsic-tor-amplitude-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the published pro-etale finite-coefficient compactification projection formula to the two inverse realizations, using bounded constructibility and the Tor interval from the preceding steps. Realization preserves invertibility. The reduction-arrow comparison identifies its arrow with the reduction of the ordinary integral projection. Use the arrow square and its invertible endpoints to express the latter as a conjugate, which is invertible.",
+   "uses": [
+    "lem-weil-finite-compact-projection-formula",
+    "lem-sf-ordinary-projection-reduction-arrow-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-coef-integral-residue-tor",
+  "lem-exc-intrinsic-tor-amplitude-transport",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-sf-ordinary-projection-reduction-arrow-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic.proof.md",
+  "place": "Finite reduction proof: intrinsic etale origins and residue Tor, published finite projection formula, and the separate normalization of arrows."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite reduction detects isomorphisms of derived complete complexes projection formula",
+   "results": "8 hits: HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, ShortComplex.HomologyData.ofIso_left_π, HomologicalComplex.isIso_pOpcycles, pOpcyclesIso, CochainComplex.isKProjective_of_iso, pOpcyclesIso_hom_inv_id, pOpcyclesIso.congr_simp, pOpcyclesIso_hom_inv_id_assoc. These are generic localization or homology facts, not finite scalar reduction conservativity for the completed sheaf.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived compact support projection formula pro etale finite coefficients completed integral coefficients",
+   "results": "Eight hits inspected; generic algebraic etale and period-ring results, no map for these completed coefficient sheaves.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"IsIso\"",
+   "results": "Zero hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMapOfCompactification|completedAdic_levelwise_isomorphism_cones",
+   "results": "Mathlib search zero hits. Local source search found the finite-coefficient pro-etale projection theorem, and found the older adic theorem uses discrete etale coefficients.",
+   "date": "2026-10-25",
+   "verdict": "no completed-coefficient match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfProEtaleProjectionFormula",
+  "date": "2026-10-25",
+  "group": "D2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-pf-proetale",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralOrdinaryProjectionReduction",
+  "file": "lean/Sheaf/Paper/IntegralOrdinaryProjectionReduction.lean",
+  "declaration": "WeilConjectures.integralOrdinaryProjection_finiteReductions",
+  "statement": "theorem integralOrdinaryProjection_finiteReductions\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f]\n    [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f)\n    (aX : ProEtaleTensorModel X ((PurCompactSupport.completed l E).ring X))\n    (aZ : ProEtaleTensorModel c.Z ((PurCompactSupport.completed l E).ring c.Z))\n    (aY : ProEtaleTensorModel Y ((PurCompactSupport.completed l E).ring Y))\n    (K : sfIntegralConstructibleCategory l E X)\n    (L : sfIntegralConstructibleCategory l E Y) (n : ℕ) :\n    IsIso ((scalarReductionDerivedExtension l E Y n).map\n      (((PurCompactSupport.projectionMap (PurCompactSupport.completed l E) c aX aZ aY\n        (PurCompactSupport.completedPull_comp l E c.i c.g)).app K.obj).app L.obj))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261026T023016-L-513324",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261027T012950-L-2352919",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

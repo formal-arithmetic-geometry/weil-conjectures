@@ -1,0 +1,234 @@
+{
+ "id": "lem-sf-kunneth-first-open-substitution",
+ "kind": "statement",
+ "title": "First-open substitution for the specified relative product",
+ "statement": "Fix distinct primes $p_0,\\ell$, integers $d,n\\geq1$, $k=\\overline{\\mathbf F_{p_0^d}}$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $\\Lambda=\\mathcal O_E/\\varpi_E^n$. Work with a six-functor datum [def-sf-datum] and the specified canonical exchange and projection maps [def-exchange-projection, def-sf-pf]. All schemes are separated finite-type $k$-schemes and all morphisms are separated of finite type. Write $P_h=Lh^*$, $S_h=Rh_!$ and $J_i=i_!$ for an open immersion; for proper $h$ use $S_h=Rh_*$. All tensors are derived over $\\Lambda$, and $\\sigma$ is the signed symmetry. Use the canonical composition comparisons $\\alpha_{h,e}:S_hS_e\\cong S_{he}$ of [thm-sf-comp-composition], on the bounded constructible etale-origin domain identified by [lem-sf-proetale-constructible-origin]. For $A$ on the target of $h$ and $N$ on its source, put $\\Theta_h(A,N)=S_h(\\sigma)\\operatorname{PF}_{h,N,A}\\sigma:A\\otimes S_hN\\to S_h(P_hA\\otimes N)$. For $h:V\\to B$, $z:Z\\to B$, projections $r_0:V\\times_BZ\\to V$, $s_0:V\\times_BZ\\to Z$, and $C\\in D^b_{ctf}(V,\\Lambda)$, $N\\in D^b_{ctf}(Z,\\Lambda)$, define the specified map\n$$\\lambda_{h,z}(C,N)=\\alpha_{z,s_0}\\,S_z\\bigl(\\operatorname{PF}_{s_0,P_{r_0}C,N}(\\operatorname{Ex}_{h,z}(C)\\otimes1)\\bigr)\\Theta_z(S_hC,N).$$\nJuxtaposition composes right to left, with the canonical pullback and tensor associators inserted. Let $j:X\\hookrightarrow\\bar X$ be open, $a:\\bar X\\to B$ proper and $g:Y\\to B$ any such morphism. Put $f=aj$, $T=X\\times_BY$, $U=\\bar X\\times_BY$, with projections $p:T\\to X$, $q:T\\to Y$, $r:U\\to\\bar X$, $s:U\\to Y$, and $v=j\\times_B1_Y:T\\hookrightarrow U$. For $K\\in D^b_{ctf}(X,\\Lambda)$ and $L\\in D^b_{ctf}(Y,\\Lambda)$, put $D=P_pK\\otimes P_qL$. Let $\\beta:P_rJ_jK\\xrightarrow{\\sim}J_vP_pK$ be the open-unit-normalized base-change map of [lem-sf-open-tensor-normalization], and define\n$$e_1=\\operatorname{PF}_{v,P_pK,P_sL}(\\beta\\otimes1):P_rJ_jK\\otimes P_sL\\xrightarrow{\\sim}J_vD.$$\nThis is the one-open external tensor map of [lem-sf-open-external-tensor-normalization]. Under $S_{aj}\\cong S_aJ_j$ and $S_q\\cong S_sJ_v$, one has the identities of specified morphisms\n$$\\operatorname{Ex}_{aj,g}(K)=S_s(\\beta)\\operatorname{Ex}_{a,g}(J_jK),\\qquad\n\\lambda_{aj,g}(K,L)=S_gS_s(e_1)\\lambda_{a,g}(J_jK,L).$$\nThe latter target is identified with $S_{gq}D$ by the indicated composition comparisons.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph, expanded compactification reduction; Returned proof steps 1, 3, 4: vertical exchange pasting, first open-factor projection pentagon and normalized one-open tensor map. Agent-formulated identity; the proof-coherence paragraph supplies the canonical projection and exchange route."
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-exchange-projection",
+  "def-sf-pf",
+  "thm-sf-comp-composition",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-open-external-tensor-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Work at the fixed finite coefficient ring. By [lem-sf-proetale-constructible-origin], the bounded constructible inputs have etale-origin witnesses, so the composition comparisons of [thm-sf-comp-composition] apply on the stipulated domain. Put $M=P_pK$, $F=P_rJ_jK$, $H=P_sL$ and $E=\\operatorname{Ex}_{a,g}(J_jK)$. The normalized open base change of [lem-sf-open-tensor-normalization] is $\\beta:F\\to J_vM$. Its open tensor map is $\\operatorname{PF}_{v,M,H}:J_vM\\otimes H\\to J_v(M\\otimes P_vH)$. Since $sv=q$, the specified pullback comparison identifies $P_vH=P_qL$. Thus the composite $\\operatorname{PF}_{v,M,H}(\\beta\\otimes1)$ is exactly $e_1$, including its open-unit normalization, by [lem-sf-open-external-tensor-normalization] with its second open immersion equal to the identity.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "thm-sf-comp-composition",
+    "lem-sf-open-tensor-normalization",
+    "lem-sf-open-external-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph: reduction to proper f,g by independence of compactification; explicit first-open exchange and projection calculation (agent expansion)."
+   }
+  },
+  {
+   "text": "Paste vertically the open Cartesian square $(p,v,j,r)$ and the proper Cartesian square $(r,s,a,g)$. Clause 2 of [fix-lem-exchanges] gives, through the composition comparisons, $\\operatorname{Ex}_{aj,g}(K)=S_s(\\operatorname{Ex}_{j,r}(K))E$. In [def-exchange-projection], choose the compactification of the open $j$ whose proper factor is the identity. Its proper factor is the direct-image exchange of [def-exchange-projection] for the square $(1,1,r,r)$ whose vertical arrows are identities: there $\\eta_{1}$ and $\\varepsilon_{1}$ are identities and $\\theta$ is the canonical comparison for $r\\circ1=1\\circ r$, so this factor is the identity under the canonical identity-functor comparisons. Hence the compactification formula identifies $\\operatorname{Ex}_{j,r}(K)$ with the canonical open base-change map. For our constant finite ring this is precisely $\\beta$ by [lem-sf-open-tensor-normalization]. Clause 4 of [fix-lem-exchanges] ensures this identification uses the canonical compact-support comparisons. We obtain the first claimed identity, not merely an unspecified isomorphism.",
+   "uses": [
+    "fix-lem-exchanges",
+    "def-exchange-projection",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph: reduction to proper f,g by independence of compactification; explicit first-open exchange and projection calculation (agent expansion)."
+   }
+  },
+  {
+   "text": "Apply the composition pentagon of [prop-sf-pf-coherence] to $T\\xrightarrow{v}U\\xrightarrow{s}Y$ and the inputs $(M,L)$. Its explicit equality is\n$$\\operatorname{PF}_{q,M,L}(\\alpha_{s,v,M}\\otimes1)=\\alpha_{s,v,D}\\,S_s(\\operatorname{PF}_{v,M,H})\\operatorname{PF}_{s,J_vM,L}.$$\nNaturality in the first input, applied to $\\beta:F\\to J_vM$, also gives\n$$\\operatorname{PF}_{s,J_vM,L}(S_s\\beta\\otimes1)=S_s(\\beta\\otimes1)\\operatorname{PF}_{s,F,L}.$$\nThe first identity of step 2, before suppressing composition comparisons, reads $\\operatorname{Ex}_{aj,g}(K)=\\alpha_{s,v,M}S_s(\\beta)E$. Substitute this and the naturality equality into the pentagon, and combine the two factors inside $S_s$ using its functoriality and the definition of $e_1$. This yields\n$$\\operatorname{PF}_{q,M,L}(\\operatorname{Ex}_{aj,g}(K)\\otimes1)=\\alpha_{s,v,D}\\,S_s(e_1)\\operatorname{PF}_{s,F,L}(E\\otimes1).$$\nBoth sides start at $P_gS_{aj}K\\otimes L$, read as $P_gS_aJ_jK\\otimes L$.",
+   "uses": [
+    "prop-sf-pf-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph: reduction to proper f,g by independence of compactification; explicit first-open exchange and projection calculation (agent expansion)."
+   }
+  },
+  {
+   "text": "Expand the definition of $\\lambda_{aj,g}$ from the statement and substitute step 3 inside $S_g$. Naturality of the projection transformation, asserted by [prop-sf-pf-coherence], and naturality of the signed symmetry identify its first factor $\\Theta_g(S_{aj}K,L)$ with $\\Theta_g(S_aJ_jK,L)$ under $\\alpha_{a,j,K}$. For the last factor use the associativity clause of [thm-sf-comp-composition]:\n$$\\alpha_{g,q,D}\\,S_g(\\alpha_{s,v,D})=\\alpha_{gs,v,D}\\,(\\alpha_{g,s,J_vD}).$$\nNaturality of $\\alpha_{g,s}$ moves $S_gS_s(e_1)$ across this comparison. The remaining factors are exactly $\\alpha_{g,s}S_g(\\operatorname{PF}_{s,F,L}(E\\otimes1))\\Theta_g(S_aJ_jK,L)=\\lambda_{a,g}(J_jK,L)$. Hence, with the target comparison stipulated in the statement,\n$$\\lambda_{aj,g}(K,L)=S_gS_s(e_1)\\lambda_{a,g}(J_jK,L).$$\nThe calculation neither interchanges tensor factors nor introduces an additional symmetry, so the signs are precisely those already present in $\\Theta_g$.",
+   "uses": [
+    "prop-sf-pf-coherence",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph: reduction to proper f,g by independence of compactification; explicit first-open exchange and projection calculation (agent expansion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-comp-composition",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-open-external-tensor-normalization",
+  "fix-lem-exchanges",
+  "def-exchange-projection",
+  "prop-sf-pf-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph: reduction to proper f,g by independence of compactification; explicit first-open exchange and projection calculation (agent expansion)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "kunneth|externalProduct|lowerShriek|extensionByZero",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean.  The hits concern ordinary scheme-module compositors, over-category adjunctions, diagram external products or condensed projectivity; none states this equality of derived shriek exchange/projection maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Replacing the first morphism by an open proper factorization in the compact support Kunneth morphism gives the proper-factor morphism followed by the normalized open external tensor comparison",
+   "results": "0 hits: . service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"} The hits concern ordinary scheme-module compositors, over-category adjunctions, diagram external products or condensed projectivity; none states this equality of derived shriek exchange/projection maps.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\", \"comp\"",
+   "results": "0 hits: .  The hits concern ordinary scheme-module compositors, over-category adjunctions, diagram external products or condensed projectivity; none states this equality of derived shriek exchange/projection maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical shriek external product defined by exchange and projection is compatible with extension by zero in the first variable under an open immersion followed by a proper map",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, CategoryTheory.ExponentiableMorphism.comp_pushforward, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, CategoryTheory.ExponentiableMorphism.pushforwardComp, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp.  The hits concern ordinary scheme-module compositors, over-category adjunctions, diagram external products or condensed projectivity; none states this equality of derived shriek exchange/projection maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley vertical pasting and projection formula pentagon give equality of the external tensor shriek map after extending the first input by zero",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.coev_ev_assoc, LightCondensed.ihomPoints_symm_comp, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.ExponentiableMorphism.coev_naturality.  The hits concern ordinary scheme-module compositors, over-category adjunctions, diagram external products or condensed projectivity; none states this equality of derived shriek exchange/projection maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|externalProduct|lowerShriek|extensionByZero",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean.  No hit gives both specified finite-coefficient shriek exchange and lambda substitution identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical compact support Kunneth morphism respects extension by zero in its first variable by exchange pasting and the projection formula composition identity",
+   "results": "8 hits: HasCompactSupport.extend_zero, HasCompactSupport.comp₂_left, HasCompactSupport.tsupport_extend_zero, hasCompactSupport_comp_left, CategoryTheory.ShortComplex.LeftHomologyData.f'_π, HasCompactSupport.comp_left, HasCompactSupport.comp_isClosedEmbedding, HomologicalComplex.cylinder.ι₀_π.  No hit gives both specified finite-coefficient shriek exchange and lambda substitution identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\", \"comp\"",
+   "results": "0 hits: .  No hit gives both specified finite-coefficient shriek exchange and lambda substitution identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compact support external tensor morphism is compatible with factoring the first morphism as an open immersion followed by a proper morphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo.  No hit gives both specified finite-coefficient shriek exchange and lambda substitution identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|baseChange.*paste|lowerShriek",
+   "results": "0 hits: .  No hit gives both specified finite-coefficient shriek exchange and lambda substitution identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley vertical pasting and the projection formula composition pentagon identify the derived shriek Kunneth map after extension by zero in the first input",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.coev_ev_assoc, LightCondensed.ihomPoints_symm_comp, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc.  No hit gives both specified finite-coefficient shriek exchange and lambda substitution identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-product-compactification-identity",
+  "date": "2026-10-22",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "blueprint": {
+  "from": {
+   "node": "lem-sf-kunneth-coherence",
+   "place": "Symmetry paragraph: 'after reduction to proper f,g by the independence of the compactification'; Returned proof steps 1, 3, 4: vertical exchange pasting, first open-factor projection pentagon and normalized one-open tensor map",
+   "via": [
+    "lem-sf-product-compactification-identity"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-kunneth-first-open-substitution",
+  "worker": "stage1",
+  "summary": "Expanded the first-open compactification substitution into normalized open exchange, vertical pasting, the projection composition pentagon with its naturality square, and explicit substitution in lambda. Reused existing nodes throughout; unchanged statement and no new nodes. Checked the finite etale-origin domains and the associativity comparison at the final target.",
+  "blueprint": "lem-sf-kunneth-coherence, symmetry paragraph: the reduction to proper f,g by independence of compactification; steps 1–2 give the first open exchange and steps 3–4 give its specified external tensor morphism substitution.",
+  "tool_uses": [
+   {
+    "node": "fix-lem-exchanges",
+    "why": "Generic vertical exchange pasting, identity-square normalization and independence of compactification; these are the canonical exchange tools required by the unit coherence route, not a replacement of its relative product argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-lem-exchanges"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-1a97d1716",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-1a97d1716 (reviewer sub-agent of L); spot-checked: Verdict FIX: one sentence of step 2 rewritten (C4, minor); statement unchanged, no nodes added or dropped. I read the item, all 9 cited statements and the main-20261015 lem-sf-kunneth-coherence.proof.md (the paragraph on (i), 'after reduction to proper f,g by the independence of the compactification'). The item is still unsplit live and has no repair note of its own; the re-split note is the parent's. No cycle: the only citer is the parent lem-sf-product-compactification-identity, which uses the λ identity. Step-by-step checks. Step 1: étale-origin witnesses via lem-sf-proetale-constructible-origin. β is the constant-finite canonical map of lem-sf-open-tensor-normalization. e_1 is lem-sf-open-external-tensor-normalization with k=id (then j_1=v, k_1=id). q=sv. Step 2: vertical pasting from fix-lem-exchanges cl. 2 with f=a, e=j, f'=s gives Ex_{aj}=S_s(Ex_{j,r})Ex_{a,g}J_j. Compactification (j,id) of def-exchange-projection gives β; cl. 4 covers compactification independence. C4 fault: the step cited cl. 2's identity clause for a square whose vertical arrows are identities, but cl. 2 covers an identity base change. Fixed by deriving it from def-exchange-projection (η_id and ε_id are identities, θ is canonical). Step 3: retyped the PF composition equation (s,v) and the naturality square for β, and recomputed α S_s(e_1)PF_{s,F,L}(E⊗1). Step 4: α associativity checks (gsv=gq), α_{g,s} naturality moves S_gS_s(e_1), and Θ_g moves along α_{a,j}; marking it elementary is accurate and no sign is lost. Edge cases checked: j=id, K=0, L=0, X empty. No duplicates found by rg. Batch-5 check: prop-sf-pf-coherence is the projection-formula coherence (A3), cited by the blueprint proof and by the parent and sibling in this unit. Its path into sec-poincare-duality ends at lem-pod-derived-exact-square-composition, a general lemma about derived functors of exact functors between abelian categories. That is neither PD's statement nor a PD-only proof step, so the citation is accepted. Accepted tool use: fix-lem-exchanges (sk-prop-sf-cbc, on the unit's uses).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.KunnethFirstOpenSubstitution",
+  "declaration": "AlgebraicGeometry.ProEtale.KunnethFirstOpen.first_open_substitution",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.KunnethFirstOpen.properExchange",
+   "AlgebraicGeometry.ProEtale.KunnethFirstOpen.properFirstChain",
+   "AlgebraicGeometry.ProEtale.KunnethFirstOpen.Assertion",
+   "AlgebraicGeometry.ProEtale.KunnethFirstOpen.first_open_substitution"
+  ],
+  "file": "lean/Sheaf/SixFunctors/KunnethFirstOpenSubstitution.lean",
+  "statement": "theorem first_open_substitution {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum} {E : Type u} [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n} (S : SixFunctorDatum D C E n hn) {B X Xb Y : SixFunctorSpace D} [IsSeparated B.obj.hom] [IsSeparated X.obj.hom] [IsSeparated Xb.obj.hom] [IsSeparated Y.obj.hom] (j : X ⟶ Xb) [IsOpenImmersion j.hom.left] (a : Xb ⟶ B) [IsProper a.hom.left] (g : Y ⟶ B) [IsSeparated g.hom.left] [LocallyOfFiniteType g.hom.left] [QuasiCompact g.hom.left] {T : Scheme.{u}} (p : T ⟶ X.obj.left) (q : T ⟶ Y.obj.left) (sq : IsPullback p q (j.hom.left ≫ a.hom.left) g.hom.left) (cg : Compactification g.hom.left) (K : finiteTorConstructibleCategory C.l E n hn X.obj.left) (L : finiteTorConstructibleCategory C.l E n hn Y.obj.left) : Assertion S j a g p q sq cg K L",
+  "branch": "sheaf-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Both equations use the actual finite-coefficient operations in their canonical fixed-scalar presentation. The lambda equation is written after identifying S_aj=R_a J_j and S_q=R_s J_v, before the common final origin compositor; cancelling that isomorphism is equivalent to the displayed specified lambda identity. No arbitrary comparisons or map hypotheses are supplied."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1678cea6",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Both equations faithful to the node. Ex_{aj,g}=S_s(β)Ex_{a,g}(J_jK) is ex = properExchange(of_hasPullback a g) J ≫ Rs.map beta, with ex the compactification base-change map for cx conjugated by exact/derived pullback isos. The λ equation is Θ_g, Ex⊗1, PF_q(cq) = properFirstChain ≫ S_gS_s(e₁); α_{g,q} is cancelled on both sides, which is equivalent because S_q = R s_* v_! literally for cq = cx.ofIsPullback sq. Checked: β = ordinaryOpenExtensionBaseChangeIso (= finiteBetaCanonical), e₁ = (β⊗1)≫gamma_v≫J_v(1⊗composeEq v s q), cq gives U = pullback a g with r = fst, s = snd, v = lift and the open square (p,v,j,r); the datum's finiteExchangeProjection uses exactly these Ex/PF maps, so the unused S is OK. Hypotheses: separated finite type, j open, a proper, g sep+LFT+QC, any cg, any pullback cone T, D^b_ctf inputs. Edge cases j=id, X empty, K/L=0, n=1, g identity or non-proper all allowed. Gates: docstrings with source place and blueprint id, theorem docstring has steps 1–4, only sorry is the theorem, no hollow defs, lines ≤100, lean.statement verbatim, node changed only in lean, imports = stmt_dep modules. Advisories: FiniteOpenProduct.* (owner def-sf-finite-open-tensor-operations) and derived pullback/projection/base-change helpers are not in stmt_deps; properFirstChain and the inline ex overlap ProductCompactification.chain/exchange, which cannot be imported because the parent cites this item as a proof_dep (stage-3 cycle). No compile: no fix file."
+ }
+}

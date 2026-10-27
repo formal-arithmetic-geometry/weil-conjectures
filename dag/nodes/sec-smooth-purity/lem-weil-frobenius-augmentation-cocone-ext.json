@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-frobenius-augmentation-cocone-ext",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Expanded DAG clause 4, generic augmentation and normalized descent.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Incoming mapping-cocone coordinate extensionality",
+ "statement": "In an abelian category, two chain maps M→mappingCocone(phi) are equal if their composites with the first chain-map projection agree and all their degreewise composites with the second cochain projection agree.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Expanded DAG clause 4, existing generic augmentation/localization proof; Mathlib mappingCocone.id_X and Localization.fullyFaithfulWhiskeringLeft."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Insert mappingCocone.id_X degreewise. Distribute composition over the two summands and use the hypotheses. HomologicalComplex.hom_ext gives equality of chain maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Expanded DAG clause 4, existing generic augmentation/localization proof; Mathlib mappingCocone.id_X and Localization.fullyFaithfulWhiskeringLeft."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B9",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Expanded DAG clause 4, existing generic augmentation/localization proof; Mathlib mappingCocone.id_X and Localization.fullyFaithfulWhiskeringLeft."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism into a mapping cocone is determined by its two component maps, and an isomorphism descends uniquely from a localization",
+   "results": "Mapping-cone coordinate extensionality and general localization lemmas were returned. Use the existing cocone identity and the existing full-faithfulness argument.",
+   "date": "2026-10-27",
+   "verdict": "extract already proved generic argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.id_X",
+   "results": "The exact identity decomposition is in Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone.",
+   "date": "2026-10-27",
+   "verdict": "use id_X"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone.*ext|fullyFaithfulWhiskeringLeft",
+   "results": "Localization.Predicate defines the fully faithful whiskering functor. Local library search finds the complete generic proof already in the assigned module.",
+   "date": "2026-10-27",
+   "verdict": "extract and preserve proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FrobeniusCoefficientTwistsCanonical",
+  "date": "2026-10-27",
+  "group": "B9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FrobeniusAugmentationGeneric",
+  "file": "lean/Sheaf/Paper/FrobeniusAugmentationGeneric.lean",
+  "declaration": "WeilConjectures.FrobeniusCoefficientTwists.augmentationCocone_ext",
+  "statement": "theorem augmentationCocone_ext {K L M : CochainComplex A ℤ} (phi : K ⟶ L)\n    {f g : M ⟶ CochainComplex.mappingCocone phi}\n    (hfst : f ≫ CochainComplex.mappingCocone.fst phi =\n      g ≫ CochainComplex.mappingCocone.fst phi)\n    (hsnd : ∀ i : ℤ, f.f i ≫ (CochainComplex.mappingCocone.snd phi).v\n        i (i - 1) (by omega) =\n      g.f i ≫ (CochainComplex.mappingCocone.snd phi).v i (i - 1) (by omega)) : f = g",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-weil-frobenius-augmentation-cocone-ext",
+  "worker": "stage3",
+  "summary": "Existing proved generic helper extracted without adding a hole.",
+  "blueprint": "Expanded DAG clause 4, generic augmentation and normalized descent.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261026T222559-L-669977",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261026T222559-L-669977",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

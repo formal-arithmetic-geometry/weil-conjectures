@@ -1,0 +1,230 @@
+{
+ "id": "lem-sf-exact-adjoint-forget-derived-detection",
+ "kind": "statement",
+ "title": "Exact adjoint forgetting: injectives and derived detection",
+ "statement": "Let $\\mathcal B,\\mathcal A$ be abelian categories [def-sp-abelian] in compatible chosen universes, and let $A:\\mathcal A\\to\\mathcal B$ and $U:\\mathcal B\\to\\mathcal A$ be additive exact functors with $A\\dashv U$. Assume $U$ is conservative. Then $U$ preserves injective objects and K-injective complexes, where K-injective means that every map from an acyclic complex is null-homotopic [def-sfb-right-derived-functor]. On ordinary unbounded derived categories [def-weil-abstract-derived-category], termwise $U$ induces a conservative triangulated functor $D(U):D(\\mathcal B)\\to D(\\mathcal A)$. For every $r\\in\\mathbf Z$ it has the natural cohomology comparison $H^rD(U)\\cong UH^r$, compatible with the kernel-modulo-image formula on representative complexes, chain maps, homotopies and localization at quasi-isomorphisms. In particular, if $D(U)(f)$ is invertible, every $U(H^r(f))$ and then every $H^r(f)$ is invertible, and $f$ is invertible. For any object $M$ and integer $r$, the canonical single-degree comparison is $D(U)(M[r])\\cong U(M)[r]$.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/IsoAlgebraComp.lean",
+  "place": "isIso_of_isIso_forget_mapDerivedCategory_map, lines 102-113, generalized exact adjunction; Stacks homology.tex Tag 015Z lemma-adjoint-preserve-injectives and derived.tex Tag 08BJ lemma-adjoint-preserve-K-injectives; returned item steps 7-8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sp-right-adjoint-preserves-injectives] to the exact left adjoint $A$ and its right adjoint $U$. Thus $U$ preserves injective objects. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] with its $u=U$, $v=A$, and its source category equal to $\\mathcal B$. Its two hypotheses are exactly the given additive adjunction and exactness of $A$, so $U$ also preserves K-injective complexes.",
+   "uses": [
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 015Z (homology.tex, lemma-adjoint-preserve-injectives) and 08BJ (derived.tex, lemma-adjoint-preserve-K-injectives)"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-exact-functor-derived-triangulated] with $F=U$. Exactness and additivity of $U$ give the termwise induced triangulated functor $D(U):D(\\mathcal B)\\to D(\\mathcal A)$, commuting with shifts. This construction needs neither injective resolutions nor boundedness. The same cited statement gives the canonical comparison $D(U)(M[r])\\cong U(M)[r]$ for every object $M$ of $\\mathcal B$ and integer $r$.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; termwise construction and single-degree comparison"
+   }
+  },
+  {
+   "text": "Use the existing proved natural isomorphism U.mapDerivedCategoryHomologyFunctorIso r, and take its inverse as chi. Its hom_app_Q theorem is exactly the required representative formula. Naturality for all derived morphisms is part of this natural isomorphism, so no compositor coherence theorem is needed. Termwise homotopy preservation is the proved additive-functor construction U.mapHomotopy. All of these constructions apply to arbitrary unbounded complexes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+    "place": "mapDerivedCategoryHomologyFunctorIso and mapDerivedCategoryHomologyFunctorIso_hom_app_Q; Mathlib/Algebra/Homology/Homotopy.lean: Functor.mapHomotopy; Stacks derived.tex Tag 015F"
+   }
+  },
+  {
+   "text": "For every derived morphism f with D(U)(f) invertible, apply NatIso.isIso_map_iff to U.mapDerivedCategoryHomologyFunctorIso r. Since H^r sends D(U)(f) to an isomorphism, U(H^r(f)) is an isomorphism. Reflect it through U to obtain invertibility of every H^r(f), and apply [lem-weil-pbc-unbounded-derived-iso-cohomology] (DerivedCategory.isIso_iff B f). Package this same detection argument as D(U).ReflectsIsomorphisms and as the explicit chain of implications. Assemble these results with steps 1-3 and mapDerivedCategorySingleFunctor.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT, lemma-acyclic; the cohomology detection argument of IsoAlgebraComp.lean:105-113 generalized to U"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+  "place": "H1 Lean assembly, 2026-10-24: normalized homology comparison and hom_app_Q; NatIso.isIso_map_iff; DerivedCategory.isIso_iff. Injective and K-injective preservation use the existing adjunction lemmas (Stacks 015Z and 08BJ), triangulation and single-degree comparison use Mathlib (Stacks 015F). This replaces the unnecessary compositor-coherence dependency of the original plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact conservative additive right adjoint with exact left adjoint preserves injectives and K-injective complexes and induces a conservative functor of unbounded derived categories",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.isHomological_of_localization",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology commutes with an exact conservative functor and detects isomorphisms in its unbounded derived functor",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.isHomological_of_localization",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.mapDerivedCategoryIdIso; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomologyFunctorIso|preservesKInjective|reflectsIsomorphisms.*mapDerived",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact conservative additive right adjoint with exact left adjoint preserves injectives and K-injective complexes and induces a conservative functor of unbounded derived categories",
+   "results": "CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms; CategoryTheory.Injective.injective_of_adjoint; CategoryTheory.Adjunction.map_injective; CategoryTheory.Functor.PreservesInjectiveObjects; CategoryTheory.exactFunctor; CategoryTheory.Functor.PreservesInjectiveObjects.mk; CategoryTheory.Functor.preservesMonomorphisms_of_adjunction_of_preservesInjectiveObjects; CategoryTheory.Functor.preservesMonomorphisms_of_isRightAdjoint",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomologyFunctorIso|preservesKInjective|reflectsIsomorphisms.*mapDerived",
+   "results": "No hits. Read exact derived functor construction, shifts, triangulated instance and singleFunctor comparison in Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:36-118; injective preservation in Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean:49-52. These supply individual ingredients, not the full combined statement.",
+   "date": "2026-10-22",
+   "verdict": "no match: no full match or one-line specialization for this combined item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact conservative functor induces conservative unbounded derived functor and preserves K-injectives as right adjoint",
+   "results": "CategoryTheory.Functor.preservesMonomorphisms_of_isRightAdjoint; CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms; CategoryTheory.Injective.injective_of_adjoint; CategoryTheory.Adjunction.map_injective; CategoryTheory.Functor.instPreservesLimitsOfSizeOfIsRightAdjoint; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.preservesMonomorphisms_of_adjunction_of_preservesInjectiveObjects; CategoryTheory.Functor.injective_obj_of_injective. Read exact derived functor construction, shifts, triangulated instance and singleFunctor comparison in Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:36-118; injective preservation in Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean:49-52. These supply individual ingredients, not the full combined statement.",
+   "date": "2026-10-22",
+   "verdict": "no match: no full match or one-line specialization for this combined item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.mapDerivedCategoryIdIso; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId. Read exact derived functor construction, shifts, triangulated instance and singleFunctor comparison in Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:36-118; injective preservation in Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean:49-52. These supply individual ingredients, not the full combined statement.",
+   "date": "2026-10-22",
+   "verdict": "no match: no full match or one-line specialization for this combined item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact conservative right adjoint with exact left adjoint preserves injectives and K-injective complexes and its derived functor is conservative",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ; CategoryTheory.Functor.exact_tfae; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategory. Read exact derived functor construction, shifts, triangulated instance and singleFunctor comparison in Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:36-118; injective preservation in Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean:49-52. These supply individual ingredients, not the full combined statement.",
+   "date": "2026-10-22",
+   "verdict": "no match: no full match or one-line specialization for this combined item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology commutes with exact functors and detects isomorphisms after a conservative functor of unbounded derived categories",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt. Read exact derived functor construction, shifts, triangulated instance and singleFunctor comparison in Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:36-118; injective preservation in Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean:49-52. These supply individual ingredients, not the full combined statement.",
+   "date": "2026-10-22",
+   "verdict": "no match: no full match or one-line specialization for this combined item"
+  },
+  {
+   "tool": "grep",
+   "query": "def mapDerivedCategory|mapDerivedCategorySingleFunctor|instance.*IsTriangulated|preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms",
+   "results": "Mathlib/CategoryTheory/Localization/Triangulated.lean; Mathlib/CategoryTheory/Localization/Triangulated.lean; Mathlib/CategoryTheory/Localization/Triangulated.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean. Read exact derived functor construction, shifts, triangulated instance and singleFunctor comparison in Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:36-118; injective preservation in Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean:49-52. These supply individual ingredients, not the full combined statement.",
+   "date": "2026-10-22",
+   "verdict": "no match: no full match or one-line specialization for this combined item"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|mapDerivedCategorySingleFunctor",
+   "results": "16; 36; 39; 41; 42. Read exact derived functor construction, shifts, triangulated instance and singleFunctor comparison in Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean:36-118; injective preservation in Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean:49-52. These supply individual ingredients, not the full combined statement.",
+   "date": "2026-10-22",
+   "verdict": "no match: no full match or one-line specialization for this combined item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-fixed-pair-derived-forget-comparison",
+  "date": "2026-10-22",
+  "group": "Q125"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited package clause (2), open-immersion compactification comparison: parent lem-sf-fixed-pair-derived-forget-comparison, former proof steps 7-8 (exact adjoint forgetting and derived detection). The created.item chain terminates at a maintainer-created item; blueprint_refs.py ancestor returns None.",
+   "via": [
+    "lem-sf-fixed-pair-derived-forget-comparison",
+    "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-exact-adjoint-forget-derived-detection",
+  "worker": "stage1",
+  "summary": "Preserved the full statement and split it into four assembly steps using five existing theorem nodes. Read Stacks 015Z, 08BJ, 015F and 05RT and project exact-functor source; normalized cohomology comparison is taken from the existing general coherence node. Wrote the naturality conjugation proving derived conservativity. No new nodes or Lean changes.",
+  "blueprint": "Package clause (2), inherited open-immersion compactification comparison; realizes parent returned steps 7-8 without changing the unit route. Inherited null ancestor is retained: created.item stops at a maintainer-created item.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-exact-derived-cohomology-coherence",
+    "why": "Uses only the generic normalized cohomology isomorphism for an exact functor, natural on the unbounded derived category and fixed on representatives; no node of this unit states that normalization. This supplies a category-theoretic tool for the existing forgetful comparison route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-4b9ac0175",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-4b9ac0175 (reviewer sub-agent of L); spot-checked: Read the item and all five cited node statements, plus Stacks 08BJ (derived.tex 9857), 015Z (homology.tex 7270), 015F (derived.tex 5884) and Mathlib ExactFunctor.lean / DerivedCategory.isIso_iff. The statement is verbatim the same as Q125's unsplit node. The only stmt_deps change adds def-sp-injective-resolutions, which is legitimate. There are no new nodes, no repair note, no SGA citation and no cycle (96 reachable nodes checked). Step 1: the variance is correct for both citations (A exact left adjoint, U = u; additive adjunction + exact v is exactly Stacks 08BJ). Step 2: the exact-functor leaf gives the triangulated termwise D(U), shift compatibility and A[n] ↦ F(A)[n]. Step 3: the coherence node with F = U, G = id gives the natural θ, equal on representatives to the inverse of the kernel/image comparison; χ = θ⁻¹ has the item's direction. sk-thm-smooth-purity is directly in the uses of sk-thm-sf-package, so this is on route; the worker's tool_uses entry is redundant but harmless. Step 4: the conjugation U(H^r f) = χ_L ∘ H^r(D(U) f) ∘ χ_K⁻¹ is checked; then U conservative, then isIso_iff over all integers. Each hypothesis is used at the right place. Edge cases checked: identity adjunction, zero category, zero functor excluded by conservativity. No duplicate in the DAG; the complex-level leaf lem-weil-pbc-exact-functor-complex-cohomology lacks derived naturality, so the heavier coherence node is the right citation."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactAdjointForgetDerivedDetection",
+  "declaration": "CategoryTheory.Functor.exactAdjointForgetDerivedDetection",
+  "file": "lean/Sheaf/CategoryTheory/ExactAdjointForgetDerivedDetection.lean",
+  "statement": "theorem exactAdjointForgetDerivedDetection {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A] {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B] (F : A ⥤ B) (U : B ⥤ A) [F.Additive] [U.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] [PreservesFiniteLimits U] [PreservesFiniteColimits U] (_adj : F ⊣ U) [U.ReflectsIsomorphisms] : U.PreservesInjectiveObjects ∧ U.PreservesKInjectiveComplexes ∧ U.mapDerivedCategory.IsTriangulated ∧ U.mapDerivedCategory.ReflectsIsomorphisms ∧ (∀ r : ℤ, ∃ chi : U.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor A r ≅ DerivedCategory.homologyFunctor B r ⋙ U, chi = (U.mapDerivedCategoryHomologyFunctorIso r).symm ∧ ∀ K : CochainComplex B ℤ, chi.inv.app (DerivedCategory.Q.obj K) = U.map ((DerivedCategory.homologyFunctorFactors B r).hom.app K) ≫ (U.mapHomologicalComplexHomologyIso (.up ℤ) r).inv.app K ≫ (DerivedCategory.homologyFunctorFactors A r).inv.app ((U.mapHomologicalComplex (.up ℤ)).obj K) ≫ (DerivedCategory.homologyFunctor A r).map (U.mapDerivedCategoryFactors.inv.app K)) ∧ (∀ (K L : CochainComplex B ℤ) (f g : K ⟶ L), Homotopy f g → Nonempty (Homotopy ((U.mapHomologicalComplex (.up ℤ)).map f) ((U.mapHomologicalComplex (.up ℤ)).map g))) ∧ (∀ (K L : DerivedCategory B) (f : K ⟶ L), IsIso (U.mapDerivedCategory.map f) → (∀ r : ℤ, IsIso (U.map ((DerivedCategory.homologyFunctor B r).map f))) ∧ (∀ r : ℤ, IsIso ((DerivedCategory.homologyFunctor B r).map f)) ∧ IsIso f) ∧ (∀ r : ℤ, ∃ sigma : DerivedCategory.singleFunctor B r ⋙ U.mapDerivedCategory ≅ U ⋙ DerivedCategory.singleFunctor A r, sigma = U.mapDerivedCategorySingleFunctor r)",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d55b24381",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Item node changes only in lean; lean.statement is verbatim in the file; stmt_dep nodes identical to live. Every clause matches the node: independent universes, F,U additive exact, F ⊣ U, U ReflectsIsomorphisms; PreservesInjectiveObjects; PreservesKInjectiveComplexes over Mathlib IsKInjective; mapDerivedCategory IsTriangulated + ReflectsIsomorphisms; chi pinned = (mapDerivedCategoryHomologyFunctorIso r).symm with representative formula = upstream _hom_app_Q (checked); homotopy clause; detection chain U(H^r f) -> H^r f -> f; sigma = mapDerivedCategorySingleFunctor r for all r. No extra hypotheses, no defs, one sorry, docstrings with source/blueprint/proof plan, lines <=100. Edge cases (zero, identity adjunction, all degrees, universes) fine. Advisories only: landed def owner def-sfb-preserves-kinjective-complexes and owners of mapDerivedCategoryHomologyFunctorIso/mapDerivedCategory not in stmt_deps; stmt_dep record import unused by the statement. No fixes; no compile run (nothing changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261024T185905-L-3751706",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

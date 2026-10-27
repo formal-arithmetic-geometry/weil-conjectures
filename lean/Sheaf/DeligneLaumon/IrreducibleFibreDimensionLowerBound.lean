@@ -3,8 +3,9 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import WeilConjectures.AlgebraicGeometry.FibreProductPointResidueField
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
+import WeilConjectures.PointCount
 import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
 import WeilConjectures.AlgebraicGeometry.DimensionLocallyAlgebraic
 import Sheaf.AlgebraicGeometry.LocalFibreDimensionOpen
@@ -27,6 +28,33 @@ open AlgebraicGeometry
 universe u
 
 namespace AlgebraicGeometry
+
+/-- The fibre inclusion is surjective on stalks, hence on residue fields. -/
+private theorem fibre_residue_iso {X Y : Scheme.{u}} (f : X ⟶ Y) (x : X) :
+    IsIso ((f.fiberι (f x)).residueFieldMap (f.asFiber x)) := by
+  let i := f.fiberι (f x)
+  let z := f.asFiber x
+  apply (ConcreteCategory.isIso_iff_bijective _).mpr
+  refine ⟨RingHom.injective _, ?_⟩
+  intro b
+  obtain ⟨a, rfl⟩ := (f.fiber (f x)).residue_surjective z b
+  obtain ⟨c, rfl⟩ := i.stalkMap_surjective z a
+  exact ⟨X.residue (i z) c, rfl⟩
+
+/-- The scalar map of a fibre agrees with the original residue-field map. -/
+private theorem fibre_scalar {X Y : Scheme.{u}} (f : X ⟶ Y) (x : X) :
+    CommRingCat.ofHom
+        ((f.fiberToSpecResidueField (f x)).residueFieldAlgebraMap (f.asFiber x)) =
+      f.residueFieldMap x ≫ (X.residueFieldCongr (f.fiberι_asFiber x)).inv ≫
+        (f.fiberι (f x)).residueFieldMap (f.asFiber x) := by
+  apply Spec.map_injective
+  rw [Scheme.Hom.specMap_residueFieldAlgebraMap]
+  apply (cancel_mono (Y.fromSpecResidueField (f x))).mp
+  simp only [Spec.map_comp, Category.assoc,
+    Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField,
+    Scheme.residueFieldCongr_inv, Scheme.residueFieldCongr_fromSpecResidueField_assoc]
+  rw [← f.fiber_fac]
+  simp only [Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField_assoc]
 
 /-- Stacks Project, varieties.tex, Tag 0B2L, parts (2)(a) and (2)(b)
 (blueprint: lem-zl-irreducible-fibre-dimension-lower-bound).
@@ -90,7 +118,107 @@ theorem irreducible_fibre_dimension_lower_bound
       (∀ x : X, (r : WithBot ℕ∞) ≤ topologicalKrullDimAt (f.asFiber x)) ∧
       Dense {x : X | topologicalKrullDimAt (f.asFiber x) = (r : WithBot ℕ∞)} ∧
       IsOpen {x : X | topologicalKrullDimAt (f.asFiber x) = (r : WithBot ℕ∞)} := by
-  sorry
+  classical
+  have hcomp : f ≫ (Y ↘ Spec (.of k)) = (X ↘ Spec (.of k)) :=
+    comp_over f _
+  have : LocallyOfFiniteType (f ≫ (Y ↘ Spec (.of k))) := hcomp ▸ inferInstance
+  have : LocallyOfFiniteType f := locallyOfFiniteType_of_comp f (Y ↘ Spec (.of k))
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsNoetherian X := ⟨⟩
+  let η := genericPoint X
+  let ξ := f η
+  let F := f.fiber ξ
+  let z : F := f.asFiber η
+  let p := f.fiberToSpecResidueField ξ
+  let : F.Over (Spec (Y.residueField ξ)) := f.fiberOverSpecResidueField ξ
+  have : LocallyOfFiniteType (F ↘ Spec (Y.residueField ξ)) :=
+    show LocallyOfFiniteType (CategoryTheory.Limits.pullback.snd f
+      (Y.fromSpecResidueField ξ)) from inferInstance
+  have : QuasiCompact (F ↘ Spec (Y.residueField ξ)) :=
+    show QuasiCompact (CategoryTheory.Limits.pullback.snd f
+      (Y.fromSpecResidueField ξ)) from inferInstance
+  have hz : IsGenericPoint z (Set.univ : Set F) := by
+    rw [isGenericPoint_iff_specializes]
+    intro w
+    simp only [Set.mem_univ, iff_true]
+    apply (f.fiberι ξ).isEmbedding.isInducing.specializes_iff.mp
+    change (f.fiberι (f η)) (f.asFiber η) ⤳ (f.fiberι ξ) w
+    rw [f.fiberι_asFiber]
+    exact genericPoint_specializes _
+  have : IrreducibleSpace F := (irreducibleSpace_def F).mpr hz.isIrreducible
+  have hξ : IsGenericPoint ξ (closure (Set.range f.base)) := by
+    simpa only [Set.image_univ] using (genericPoint_spec X).image f.continuous
+  obtain ⟨dX, hdX, htX⟩ := topologicalKrullDim_closed_irreducible_eq_trdeg
+    (K := k) (Set.univ : Set X) isClosed_univ
+    (IrreducibleSpace.isIrreducible_univ X) η (Set.mem_univ _) (genericPoint_closure X)
+  have hdX' : topologicalKrullDim X = (dX : WithBot ℕ∞) := by
+    simpa only [(Homeomorph.Set.univ X).isHomeomorph.topologicalKrullDim_eq] using hdX
+  obtain ⟨dZ, hdZ, htZ⟩ := topologicalKrullDim_closed_irreducible_eq_trdeg
+    (K := k) (closure (Set.range f.base)) isClosed_closure hξ.isIrreducible ξ hξ.mem hξ
+  obtain ⟨r, hdF, htF⟩ := topologicalKrullDim_closed_irreducible_eq_trdeg
+    (K := Y.residueField ξ) (Set.univ : Set F) isClosed_univ hz.isIrreducible z
+    (Set.mem_univ _) hz
+  have hdF' : topologicalKrullDim F = (r : WithBot ℕ∞) := by
+    simpa only [(Homeomorph.Set.univ F).isHomeomorph.topologicalKrullDim_eq] using hdF
+  let : Algebra k (Y.residueField ξ) :=
+    ((Y ↘ Spec (.of k)).residueFieldAlgebraMap ξ).toAlgebra
+  let : Algebra k (X.residueField η) :=
+    ((X ↘ Spec (.of k)).residueFieldAlgebraMap η).toAlgebra
+  let : Algebra (Y.residueField ξ) (X.residueField η) :=
+    (f.residueFieldMap η).hom.toAlgebra
+  have : IsScalarTower k (Y.residueField ξ) (X.residueField η) :=
+    IsScalarTower.of_algebraMap_eq' (by
+      change _ = (f.residueFieldMap η).hom.comp
+        ((Y ↘ Spec (.of k)).residueFieldAlgebraMap ξ)
+      rw [← Scheme.Hom.residueFieldAlgebraMap_comp, hcomp]
+      rfl)
+  let : Algebra (Y.residueField ξ) (F.residueField z) :=
+    (p.residueFieldAlgebraMap z).toAlgebra
+  have : IsIso ((f.fiberι ξ).residueFieldMap z) := fibre_residue_iso f η
+  let e : X.residueField η ≃ₐ[Y.residueField ξ] F.residueField z :=
+    { ((X.residueFieldCongr (f.fiberι_asFiber η)).symm ≪≫
+        asIso ((f.fiberι ξ).residueFieldMap z)).commRingCatIsoToRingEquiv with
+      commutes' c := (ConcreteCategory.congr_hom (fibre_scalar f η) c).symm }
+  have htr : Algebra.trdeg (Y.residueField ξ) (X.residueField η) = (r : Cardinal) :=
+    e.trdeg_eq.trans htF
+  have hsum : dZ + r = dX := by
+    have h := trdeg_add_eq k (Y.residueField ξ) (A := X.residueField η)
+    rw [htZ, htr, htX, ← Nat.cast_add] at h
+    exact_mod_cast h
+  have hzdim : topologicalKrullDimAt (f.asFiber η) = (r : WithBot ℕ∞) :=
+    ((dimension_locally_algebraic (k := Y.residueField ξ) F).2 z).trans hdF'
+  have hlower (x : X) : (r : WithBot ℕ∞) ≤ topologicalKrullDimAt (f.asFiber x) := by
+    have hnonneg : 0 ≤ topologicalKrullDimAt (f.asFiber x) := by
+      refine le_iInf₂ fun U hxU ↦ ?_
+      apply Order.krullDim_nonneg_iff.mpr
+      exact ⟨⟨closure {⟨f.asFiber x, hxU⟩}, isIrreducible_singleton.closure,
+        isClosed_closure⟩⟩
+    generalize hd : topologicalKrullDimAt (f.asFiber x) = d at hnonneg ⊢
+    induction d using WithBot.recBotCoe with
+    | bot => exact False.elim ((not_le_of_gt (by decide : (⊥ : WithBot ℕ∞) < 0)) hnonneg)
+    | coe d =>
+      induction d using ENat.recTopCoe with
+      | top => exact le_top
+      | coe n =>
+        have hηmem := (genericPoint_spec X).mem_open_set_iff
+          (isOpen_localFibreDimension_le f n)
+        have hn : topologicalKrullDimAt (f.asFiber η) ≤ (n : WithBot ℕ∞) :=
+          hηmem.mpr ⟨x, Set.mem_univ _, hd.le⟩
+        exact hzdim ▸ hn
+  have heq : {x : X | topologicalKrullDimAt (f.asFiber x) = (r : WithBot ℕ∞)} =
+      {x : X | topologicalKrullDimAt (f.asFiber x) ≤ (r : WithBot ℕ∞)} := by
+    ext x
+    exact ⟨fun h ↦ h.le, fun h ↦ le_antisymm h (hlower x)⟩
+  refine ⟨r, ?_, hlower, ?_, ?_⟩
+  · rw [hdX', hdZ, ← Nat.cast_add, hsum]
+  · apply Dense.mono (s₁ := {η}) (s₂ := _)
+    · intro x hx
+      exact (Set.mem_singleton_iff.mp hx) ▸ hzdim
+    · exact dense_iff_closure_eq.mpr (genericPoint_closure X)
+  · rw [heq]
+    exact isOpen_localFibreDimension_le f r
 
 end AlgebraicGeometry
 

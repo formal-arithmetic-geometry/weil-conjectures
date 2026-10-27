@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-profinite-internal-module-evaluation-comparison",
+ "kind": "statement",
+ "title": "Arbitrary internal profinite module resolutions compute abelian derived evaluation",
+ "statement": "Let R be any commutative monoid in abelian sheaves on the coherent site of u-small profinite sets, with coefficients in universe u+1. For any internal R-module M, any injective resolution I of M [def-sp-injective-resolutions], any profinite V, and any positive natural degree q, the homology in degree q of the complex obtained by forgetting the R-action and evaluating I on V is isomorphic to the q-th right derived abelian evaluation of M.X. Use the internal/sectionwise equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. No assumption that forgetting preserves injectives is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), second displayed equality, and its proof; internal-to-sectionwise resolution transport supplied by lem-sfb-profinite-free-hom-resolution-evaluation."
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Transport the arbitrary given resolution by the internal-to-sectionwise equivalence. An equivalence of abelian categories is exact and preserves injectives. Its sections and maps agree with the original underlying abelian sheaf, so its section complex agrees with the complex in the conclusion.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ringed-site module/abelian evaluation comparison to the transported resolution. To use its common-universe small-site interface, lift the hom sets to u+1 and transfer the topology, sheaves and resolutions along the canonical site equivalence. Derived evaluation is invariant under that exact equivalence. Compose the resulting comparison with the identity of the underlying section complex. The comparison applies to every positive degree and every resolution, and does not assert injectivity of the underlying abelian sheaves.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), second displayed equality, and its proof; internal-to-sectionwise resolution transport supplied by lem-sfb-profinite-free-hom-resolution-evaluation.",
+  "by": "agent",
+  "group": "C7",
+  "date": "2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite Cech cohomology of continuous p-adic functions on profinite spaces vanishes in positive degrees",
+   "results": "Profinite.lim, Condensed.lanSheafProfinite, Profinite.asLimitConeIso, mahler, Condensed.isSheafProfinite, Profinite.hasColimits, Profinite.exists_locallyConstant_fin_two, profiniteToCondensed. None states the required finite-family vanishing or module-resolution comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct result; use the existing project primitive and categorical criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of an injective sheaf of modules resolution after evaluation is the right derived sections of its underlying abelian sheaf",
+   "results": "Sheaf.cohomologyPresheaf, Sheaf.H, CochainComplex.cm5b.I_X, Functor.isZero_rightDerived_obj_injective_succ, Sheaf.cohomologyPresheafFunctor, CochainComplex.cm5b.I, InjectiveResolution.ofCocomplex, InjectiveResolution.instIsKInjectiveCochainComplex. These give formal ingredients, not the required comparison after forgetting module structure.",
+   "date": "2026-10-26",
+   "verdict": "No direct result. Existing project ModuleAbelianEvaluationComparison is the mathematical input, with a site-universe transport still required."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InjectiveResolution\", \"Exact\"",
+   "results": "InjectiveResolution.cocomplex_exactAt_succ, exact_succ, ofCocomplex_exactAt_succ and exact₀. These assert exactness before evaluation; evaluation is only left exact, so they do not imply positive evaluated exactness.",
+   "date": "2026-10-26",
+   "verdict": "Use the kernel universal property for the augmentation; positive exactness needs the derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*Cech|Cech.*vanishing|injective.*module.*acyclic",
+   "results": "Mathlib/AlgebraicTopology/CechNerve.lean only in msearch. Local project searches found NormedScalarProfiniteCechExact, CategoricalFiniteCechCriterion, SiteCechMathlibComparison, InternalAbelianSheafModuleEquivalence, ModuleAbelianEvaluationComparison. The last two general-site comparison interfaces have more restrictive universe binders than this profinite application.",
+   "date": "2026-10-26",
+   "verdict": "Reuse project declarations; prove the categorical finite criterion application with a private universe-generalized product comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.FiniteNormedScalarSectionAcyclicity",
+  "date": "2026-10-26",
+  "group": "C7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image, finite E scalar input; Arbitrary internal profinite module resolutions compute abelian derived evaluation.",
+   "via": [
+    "lem-sfb-finite-normed-scalar-section-acyclicity",
+    "lem-sfb-normed-scalar-profinite-hom-acyclic",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ProfiniteInternalModuleEvaluationComparison",
+  "file": "lean/Sheaf/Topology/ProfiniteInternalModuleEvaluationComparison.lean",
+  "declaration": "Profinite.nonempty_internalModule_eval_homology_iso",
+  "statement": "theorem nonempty_internalModule_eval_homology_iso\n    (R : CommMon (Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}))\n    (M : Mod (Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}) R.X)\n    (I : InjectiveResolution M) (V : Profinite.{u}) (q : ℕ) (hq : 0 < q) :\n    Nonempty\n      (((((Mod.forget R.X ⋙\n        sheafToPresheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1} ⋙\n          (evaluation Profinite.{u}ᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)).mapHomologicalComplex\n            (.up ℕ)).obj I.cocomplex).homology q) ≅\n        (((sheafToPresheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1} ⋙\n          (evaluation Profinite.{u}ᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)).rightDerived q).obj\n            M.X))",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261026T081310-L-1913135",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261026T081310-L-1913135",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

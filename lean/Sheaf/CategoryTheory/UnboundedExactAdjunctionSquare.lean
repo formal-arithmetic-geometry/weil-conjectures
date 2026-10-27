@@ -535,6 +535,33 @@ private theorem localized_mate_cochain (a : F ⊣ G) (a' : F' ⊣ G')
   ext n
   exact (mateEquiv_counit a a' (TwoSquare.mk _ _ _ _ θ.hom) (I.X n)).symm
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+omit [HasDerivedCategory (ℕᵒᵖ ⥤ A)] [HasDerivedCategory (ℕᵒᵖ ⥤ B)]
+  [HasDerivedCategory (ℕᵒᵖ ⥤ A')] [HasDerivedCategory (ℕᵒᵖ ⥤ B')]
+  [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)]
+  [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A')] in
+/-- The canonical derived square mate is represented by the ordinary mate on complexes.
+Source: Stacks 070I, 08BJ and 07A7
+(blueprint: lem-sbc-unbounded-exact-adjunction-square).
+
+Transpose by the derived adjunction, apply its counit normalization, and use the
+localization factorization of the inverse-image square. The ordinary mate counit
+identity in each degree gives the resulting equality. -/
+theorem localized_mate_cochain_normalization (a : F ⊣ G) (a' : F' ⊣ G')
+    (θ : g ⋙ F' ≅ F ⋙ h) (I : CochainComplex A ℤ) :
+    g.mapDerivedCategoryFactors.inv.app ((G.mapHomologicalComplex (.up ℤ)).obj I) ≫
+        g.mapDerivedCategory.map (cochainUnit G I) ≫
+        (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
+          a'.mapDerivedCategoryRightDerivedAdjunction
+          (TwoSquare.mk _ _ _ _ (localizedSquare F F' g h θ).hom)).app
+            (DerivedCategory.Q.obj I) ≫
+        G'.rightDerivedFunctor.map (h.mapDerivedCategoryFactors.hom.app I) =
+      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+        (mateEquiv a a' (TwoSquare.mk _ _ _ _ θ.hom)).natTrans (.up ℤ)).app I) ≫
+        cochainUnit G' ((h.mapHomologicalComplex (.up ℤ)).obj I) := by
+  exact localized_mate_cochain a a' θ I
+
 /-- Equality of the actual ordinary and tower square mates after constants and evaluation.
 Neither equality requires the mate to be invertible or derived evaluation to be faithful.
 Source: Stacks 07A7 and the explicit counit-transpose calculation

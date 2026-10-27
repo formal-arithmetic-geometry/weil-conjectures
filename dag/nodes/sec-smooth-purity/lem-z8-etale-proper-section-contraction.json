@@ -1,0 +1,110 @@
+{
+ "id": "lem-z8-etale-proper-section-contraction",
+ "kind": "statement",
+ "title": "Tensor contraction of a proper section integral",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ntheorem properSection_contraction\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (s : X ⟶ Y) (p : Y ⟶ X)\n    [IsProper s] [IsProper p] (h : s ≫ p = 𝟙 X)\n    (M : DerivedCategoryModule A X) (V : DerivedCategoryModule A Y)\n    (δ : (ordinaryFinitePushforward A s).obj (ordinaryFiniteUnit A X) ⟶ V)\n    (τ : (ordinaryFinitePushforward A p).obj V ⟶ ordinaryFiniteUnit A X) :\n    let l := leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A) s p h\n    let a := derivedSectionPushIso (ModuleCat.{u + 1} A) s p h\n    let q := CoordinateTrace.orderedProjectionIso A s\n      ((ordinaryFinitePullback A p).obj M) (ordinaryFiniteUnit A X) ≪≫\n        (ordinaryFinitePushforward A s).mapIso\n          (((derivedTensor (ModuleCat.{u + 1} A) X).mapIso (l.app M)).app\n            (ordinaryFiniteUnit A X) ≪≫ (singleUnitor A X).app M)\n    a.hom.app (ordinaryFiniteUnit A X) ≫\n        (ordinaryFinitePushforward A p).map δ ≫ τ = 𝟙 _ →\n    a.hom.app M ≫ (ordinaryFinitePushforward A p).map q.inv ≫\n        (ordinaryFinitePushforward A p).map\n          (((ordinaryFiniteTensor A Y).obj ((ordinaryFinitePullback A p).obj M)).map δ) ≫\n        (CoordinateTrace.orderedProjectionIso A p M V).inv ≫\n        ((ordinaryFiniteTensor A X).obj M).map τ ≫ (singleUnitor A X).hom.app M = 𝟙 M",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "lem-z8-etale-supported-diagonal-unit"
+ ],
+ "proof": [
+  {
+   "text": "Apply the generic section integral tensor identity. Identify the conjugate section unit with the derived section pushforward comparison; identify both ordered projection mates and their inverses. The canonical single-complex unitor equation gives exactly the asserted tensor contraction. This is the former complete proof of properSection_contraction, compiled separately from the unit construction after profiling.",
+   "uses": [
+    "lem-z8-etale-supported-diagonal-unit",
+    "lem-z8-etale-ordered-projection-comparison",
+    "lem-z8-etale-tensor-trace-base-change",
+    "lem-z8-etale-diagonal-section-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-z8-etale-supported-diagonal-unit",
+  "lem-z8-etale-ordered-projection-comparison",
+  "lem-z8-etale-tensor-trace-base-change",
+  "lem-z8-etale-diagonal-section-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleProperSectionContraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleProperSectionContraction.lean",
+  "declaration": "AlgebraicGeometry.Etale.properSection_contraction",
+  "declarations": [
+   "AlgebraicGeometry.Etale.properSection_contraction"
+  ],
+  "statement": "theorem properSection_contraction\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (s : X ⟶ Y) (p : Y ⟶ X)\n    [IsProper s] [IsProper p] (h : s ≫ p = 𝟙 X)\n    (M : DerivedCategoryModule A X) (V : DerivedCategoryModule A Y)\n    (δ : (ordinaryFinitePushforward A s).obj (ordinaryFiniteUnit A X) ⟶ V)\n    (τ : (ordinaryFinitePushforward A p).obj V ⟶ ordinaryFiniteUnit A X) :\n    let l := leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A) s p h\n    let a := derivedSectionPushIso (ModuleCat.{u + 1} A) s p h\n    let q := CoordinateTrace.orderedProjectionIso A s\n      ((ordinaryFinitePullback A p).obj M) (ordinaryFiniteUnit A X) ≪≫\n        (ordinaryFinitePushforward A s).mapIso\n          (((derivedTensor (ModuleCat.{u + 1} A) X).mapIso (l.app M)).app\n            (ordinaryFiniteUnit A X) ≪≫ (singleUnitor A X).app M)\n    a.hom.app (ordinaryFiniteUnit A X) ≫\n        (ordinaryFinitePushforward A p).map δ ≫ τ = 𝟙 _ →\n    a.hom.app M ≫ (ordinaryFinitePushforward A p).map q.inv ≫\n        (ordinaryFinitePushforward A p).map\n          (((ordinaryFiniteTensor A Y).obj ((ordinaryFinitePullback A p).obj M)).map δ) ≫\n        (CoordinateTrace.orderedProjectionIso A p M V).inv ≫\n        ((ordinaryFiniteTensor A X).obj M).map τ ≫ (singleUnitor A X).hom.app M = 𝟙 M",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-supported-cup-comparison-coherence",
+ "kind": "statement",
+ "title": "Pullback, cup, Kummer and boundary comparison coherence",
+ "statement": "For the same native operations, etale-to-pro-etale comparison commutes with supported, ordinary and open pullback, preserves the prescribed cup and Kummer classes, and respects the actual localization boundary. These are the six comparison clauses not supplied by the three Hom bijections and the two source-arrow equations.",
+ "stmt_deps": [
+  "def-pur-supported-cup-functoriality-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPM, lemma-cup-product-commutative (and Tag 0FPL, associativity); supported refinement formulated by the agent from the tensor-morphism construction in def-pur-supported-cup, Stacks Tag 09XP localization, Tag 03PL Kummer sequence, and Tag 0G78 supported functoriality (cohomology.tex). Pro-etale comparison compatibility is part of this auxiliary statement, not an assertion that 0FPM alone states it."
+ },
+ "proof": [
+  {
+   "text": "The pseudofunctorial pullback square for the exact comparison inverse image respects the constant coefficient unit. The closed-source exchange is uniquely determined by its epic restriction map, while the open-source exchange is uniquely determined by its monic inclusion. Their two composites in the comparison/pullback square therefore agree. The signed Tate pullback comparison is its defining mate. Apply the exact-functor single and shift comparison equations to these three endpoint squares. Conjugating the derived Hom maps gives the supported, ordinary and open pullback equalities. For cup compatibility, the same restriction of local constant sections identifies the closed coefficient multiplications. Normalized primitive roots identify the Tate multiplications. Flat degree-zero tensor comparison identifies the corresponding derived coefficient maps, and naturality of the shifted tensor comparison identifies their cup composites, with the identical integral-degree sign on both sites. The root coefficient map in the prescribed Kummer extension is the comparison root map. Naturality of that exact power sequence therefore identifies its connecting class, including the full-support direct-image unitor. Finally, the normalized closed-source and open-source comparisons form an isomorphism from the comparison image of the actual short exact coefficient sequence to the pro-etale sequence. Apply naturality of its single-delta triangle, then compose with the class and use exact inverse image compatibility with shifted composition. This is precisely the asserted boundary equation, with the actual single-delta sign. All steps respect empty and full support, zero coefficients, and negative cohomological degrees.",
+   "uses": [
+    "lem-pur-closed-source-site-tensor-comparison",
+    "lem-pur-signed-twist-site-transport",
+    "lem-pur-unit-kummer-two-site-normalization",
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-exact-functor-ses-triangle-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-closed-source-site-tensor-comparison",
+  "lem-pur-signed-twist-site-transport",
+  "lem-pur-unit-kummer-two-site-normalization",
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-exact-functor-ses-triangle-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Native-model refinement of lem-pur-supported-cup-functoriality"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedCupFunctoriality",
+  "date": "2026-10-26",
+  "group": "Q8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Steps 6--8: operation coherence",
+   "via": [
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportedCupComparisonCoherence",
+  "file": "lean/Sheaf/Paper/SupportedCupComparisonCoherence.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.supportedCupComparisonCoherence",
+  "statement": "theorem supportedCupComparisonCoherence (P : PurityFiniteSetting.{u}) :\n    P.FunctorialCupComparisonPullback ∧ P.FunctorialCupComparisonOrdinaryPullback ∧\n      P.FunctorialCupComparisonOpenPullback ∧ P.FunctorialCupComparisonCup ∧\n      P.FunctorialCupComparisonKummer ∧ P.FunctorialCupComparisonBoundary",
+  "branch": "sheaf-dag",
+  "by": "Q8",
+  "date": "2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "supported cup product graded associativity symmetry pullback localization etale proetale comparison",
+   "results": "Eight projective-spectrum pullback results; none is a supported cohomology cup law.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShiftedHom.comp",
+   "results": "Unknown identifier in search index; source search used instead.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedCup|cupComposite|mapShiftedHom_singleδ",
+   "results": "Mathlib.Algebra.Homology.DerivedCategory.Ext.Map.ShortComplex.ShortExact.mapShiftedHom_singleδ gives the exact-functor boundary formula. No complete supported-cup calculus.",
+   "date": "2026-10-26",
+   "verdict": "partial match: used for localization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image preserves the connecting morphism of a short exact sequence and cup product associativity",
+   "results": "Eight results include CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁ and preservation of images; none states the complete native supported cup calculus. Exact single-delta functoriality is supplied by the separately located Mathlib Ext.Map lemma.",
+   "date": "2026-10-26",
+   "verdict": "partial match for localization only"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-40b06",
+  "group": "Q8",
+  "result": "fix",
+  "landing": "20261026T002320-L-75804",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-40b06",
+  "group": "Q8",
+  "result": "fix",
+  "landing": "20261026T002320-L-75804",
+  "kind": "interface",
+  "note": "independent cc review: supportedCupFunctoriality and the 7 delivered modules vs the published SupportedCupFunctoriality (every moved declaration compared; defeq rfl checks of the instances); 59 importers/users compiled against the sandbox build; nodes vs Lean"
+ }
+}

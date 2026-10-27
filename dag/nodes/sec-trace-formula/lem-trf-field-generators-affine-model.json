@@ -1,0 +1,289 @@
+{
+ "id": "lem-trf-field-generators-affine-model",
+ "kind": "statement",
+ "title": "Affine model from field generators, with dimension and generic stalk",
+ "statement": "Let $k\\subseteq E$ be fields [def-weil-field, def-pc-field-extension], let $r\\ge0$, and let $e_1,\\ldots,e_r\\in E$ satisfy $E=k(e_1,\\ldots,e_r)$, meaning that no proper subfield of $E$ contains $k$ and all $e_i$. Put $A=k[e_1,\\ldots,e_r]\\subseteq E$, the subring of polynomial expressions in these elements with coefficients in $k$, and put $U=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Then $A$ is an integral domain of finite type over $k$ [def-weil-pbc-finite-type-algebra], and the inclusion $A\\subseteq E$ exhibits $E$ as its fraction field: every element of $E$ is $a/b$ for $a,b\\in A$ with $b\\ne0$. The scheme $U$ is integral and of finite type over $k$ [def-pc-integral-scheme, def-weil-finite-type-morphism]. Its generic point is the zero prime, and the inclusion of $A$ in $E$ induces a $k$-isomorphism $\\theta:k(U)\\xrightarrow{\\sim}E$, where $k(U)$ is the generic stalk [def-sc-function-field]. Its finite topological Krull dimension is $\\dim U=\\operatorname{trdeg}_k E$ [def-kun-topological-krull-dimension, def-kun-transcendence-degree]. The surjection $k[T_1,\\ldots,T_r]\\to A$, $T_i\\mapsto e_i$ [def-weil-pbc-mv-polynomial-ring], induces a closed immersion $U\\hookrightarrow\\mathbb A^r_k$ over $k$ [def-weil-closed-immersion, def-nagata-relative-affine-space].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BXN (theorem-varieties-rational-maps), proof, essential-surjectivity paragraph constructing Spec(A) for a finite-type subalgebra A of the finitely generated field; dimension computation: literature/stacks-project/algebra.tex, Tag 00P0 (lemma-dimension-prime-polynomial-ring)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finite-type-algebra",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-function-field",
+  "def-kun-topological-krull-dimension",
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-closed-immersion",
+  "def-nagata-relative-affine-space"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation $\\varepsilon:k[T_1,\\ldots,T_r]\\to A$, $T_i\\mapsto e_i$, exists by [def-weil-pbc-mv-polynomial-ring]. Its image consists of all polynomial expressions in the $e_i$, hence is exactly $A$ by the definition of $A$ in the statement. Thus $\\varepsilon$ is surjective, and [def-weil-pbc-finite-type-algebra] gives finite type. Since $A\\subseteq E$ is a subring containing $1$, one has $0\\ne1$ in $A$, and $ab=0$ in $A$ implies $a=0$ or $b=0$ by the field property in $E$. Thus $A$ is a domain.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXN (theorem-varieties-rational-maps), essential-surjectivity paragraph, explicit construction of its finite type subalgebra"
+   }
+  },
+  {
+   "text": "Inside $E$, put $F=\\{a/b:a,b\\in A,\\ b\\ne0\\}$. This contains $k$ and each $e_i$, using denominator $1$. It is a subfield: $(a/b)+(c/d)=(ad+bc)/(bd)$, $(a/b)(c/d)=ac/(bd)$, $-(a/b)=(-a)/b$, and a nonzero $a/b$ has inverse $b/a$. The denominators are nonzero since $A$ is a domain; in the inverse formula $a\\ne0$. The field-generation hypothesis therefore gives $F=E$. The inclusion is injective and every element of $E$ is such a fraction, exactly the required fraction-field assertion.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXN (theorem-varieties-rational-maps), essential-surjectivity paragraph, fraction-field assertion expanded"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-spec-domain-stalks-function-field] (2) to the domain $R=A$ with its fraction field $K=E$ from step 2. It gives that $U=\\operatorname{Spec}A$ is integral, that its generic point is $(0)$, and an $A$-algebra isomorphism $\\mathcal O_{U,(0)}\\xrightarrow{\\sim}E$. By [def-sc-function-field] this stalk is $k(U)$. The isomorphism fixes $A$, and hence $k$, so it is the claimed $k$-isomorphism $\\theta$. It is induced by the inclusion: on a fraction represented by $a/b$ it must send that fraction to $ab^{-1}$ in $E$, which also makes it unique.",
+   "uses": [
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-sc-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), stalk clause; properties.tex Tag 01ON (lemma-characterize-integral); morphisms.tex Tag 01RW (definition-function-field)"
+   }
+  },
+  {
+   "text": "The structure map $U\\to\\operatorname{Spec}k$ is of finite type by [def-weil-finite-type-morphism]: the only nonempty open of the one-point scheme $\\operatorname{Spec}k$ is the whole scheme, and its preimage has the single affine chart $\\operatorname{Spec}A$, whose coordinate algebra is finite type by step 1. The empty open has the empty affine cover. These are finite covers, as required by the equivalent finite-cover formulation of that definition; [def-weil-affine-spectrum] identifies the coordinate rings and the map on them.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T0, finite type; definition-finite-type, and the affine-cover characterization"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-domain-dimension-trdeg] with the field $k$, the finite type domain $A$ from step 1, and fraction field $E$ from step 2. It says that $\\dim A=\\operatorname{trdeg}_k E$ is finite. Here the fraction field in that statement may be identified with $E$ over $A$; algebraic independence is unchanged under a $k$-isomorphism because polynomial evaluation commutes with it and the isomorphism is injective [def-kun-transcendence-degree]. Finally [lem-weil-pbc-spec-topological-krull-dimension-ring] applied to $R=A$ gives $\\dim U=\\dim A$, proving the asserted finite topological dimension.",
+   "uses": [
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "def-kun-transcendence-degree",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P0 (lemma-dimension-prime-polynomial-ring), statement; Tag 00KE (definition-Krull)"
+   }
+  },
+  {
+   "text": "Use the surjective $k$-algebra homomorphism $\\varepsilon$ constructed in step 1, and let $h=\\operatorname{Spec}\\varepsilon:\\operatorname{Spec}A\\to\\operatorname{Spec}k[T_1,\\ldots,T_r]$ [def-weil-affine-spectrum]. Take the one-member affine cover of the target by $V=\\operatorname{Spec}k[T_1,\\ldots,T_r]$ itself. Then $h^{-1}(V)=\\operatorname{Spec}A$ is affine, and by [def-weil-affine-spectrum] (global sections $A$ and $k[T_1,\\ldots,T_r]$, and $\\operatorname{Spec}\\varepsilon$ induces $\\varepsilon$ on them) the map $h^\\sharp_V$ is $\\varepsilon$, which is surjective. Hence $h$ is a closed immersion [def-weil-closed-immersion] by clause (2) of [lem-weil-pbc-closed-immersion-affine-cover-criterion]. By the affine chart formula in [def-nagata-relative-affine-space] for $S=V=\\operatorname{Spec}k$, the target is $\\mathbb A^r_k$ over $\\operatorname{Spec}k$. It is over $k$: $\\varepsilon$ fixes constants, so the composite $k\\to k[T_1,\\ldots,T_r]\\xrightarrow{\\varepsilon}A$ is the original coefficient inclusion $k\\to A$, and contravariant functoriality [def-weil-affine-spectrum] gives the commutative triangle over $\\operatorname{Spec}k$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-nagata-relative-affine-space",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IG (example-closed-immersion-affines); equivalent affine criterion in morphisms.tex Tag 01QO"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-field",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "def-sc-function-field",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "def-kun-transcendence-degree",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "def-nagata-relative-affine-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BXN (theorem-varieties-rational-maps), essential-surjectivity paragraph, expanded using explicit fractions and existing DAG results 01HV/01ON/01RW, 00P0 and 00KE; polynomial embedding by 01IG/01QO"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finrank.*(ringKrullDim|krullDim)|ringKrullDim.*trdeg|exists.*[Ff]raction.*[Ff]initeType",
+   "results": "{\"t\": \"2026-10-22T07:35:23Z\", \"tool\": \"grep\", \"query\": \"finrank.*(ringKrullDim|krullDim)|ringKrullDim.*trdeg|exists.*[Ff]raction.*[Ff]initeType\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\"], \"digest\": \"dd7ce9ca2b6d6f84\"}; No full match: IntermediateField.fg_top_iff and algebraAdjoinAdjoin supply the algebra/fraction-field part; Scheme.functionField gives the generic stalk. None of the hits constructs the stated affine model with its dimension comparison and polynomial closed immersion. Read IntermediateField/Adjoin/Algebra.lean:29-122 and AlgebraicGeometry/FunctionField.lean:31-122.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The affine spectrum of the algebra generated by finitely many field generators has that field as its function field and dimension equal to transcendence degree",
+   "results": "{\"t\": \"2026-10-22T07:35:23Z\", \"tool\": \"leansearch\", \"query\": \"The affine spectrum of the algebra generated by finitely many field generators has that field as its function field and dimension equal to transcendence degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.isAffine_Spec\", \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"trdeg_lt_aleph0\", \"AlgebraicGeometry.Scheme.functionField\", \"functionField_iff\", \"Algebra.trdeg\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\"], \"digest\": \"f962c6c5ca2bda85\"}; No full match: IntermediateField.fg_top_iff and algebraAdjoinAdjoin supply the algebra/fraction-field part; Scheme.functionField gives the generic stalk. None of the hits constructs the stated affine model with its dimension comparison and polynomial closed immersion. Read IntermediateField/Adjoin/Algebra.lean:29-122 and AlgebraicGeometry/FunctionField.lean:31-122.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FiniteType, Algebra.trdeg",
+   "results": "{\"t\": \"2026-10-22T07:35:23Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FiniteType, Algebra.trdeg\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"trdeg_lt_aleph0_of_finiteType\"], \"digest\": \"daebd038561b2639\"}; No full match: IntermediateField.fg_top_iff and algebraAdjoinAdjoin supply the algebra/fraction-field part; Scheme.functionField gives the generic stalk. None of the hits constructs the stated affine model with its dimension comparison and polynomial closed immersion. Read IntermediateField/Adjoin/Algebra.lean:29-122 and AlgebraicGeometry/FunctionField.lean:31-122.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a finitely generated field extension E of k, the algebra generated by field generators is an integral affine finite type model with fraction field E and dimension equal to transcendence degree",
+   "results": "{\"t\": \"2026-10-22T07:35:30Z\", \"tool\": \"leanfinder\", \"query\": \"Given a finitely generated field extension E of k, the algebra generated by field generators is an integral affine finite type model with fraction field E and dimension equal to transcendence degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.fg_top\", \"IntermediateField.essFiniteType_iff\", \"IntermediateField.fg_top_iff\", \"IntermediateField.finite_of_fg_of_isAlgebraic\", \"Algebra.finite_of_essFiniteType_of_isAlgebraic\", \"IntermediateField.finiteDimensional_adjoin\", \"exists_integral_inj_algHom_of_fg\", \"IntermediateField.fg_of_fg_toSubalgebra\"], \"digest\": \"6edb38889e17f0f0\"}; No full match: IntermediateField.fg_top_iff and algebraAdjoinAdjoin supply the algebra/fraction-field part; Scheme.functionField gives the generic stalk. None of the hits constructs the stated affine model with its dimension comparison and polynomial closed immersion. Read IntermediateField/Adjoin/Algebra.lean:29-122 and AlgebraicGeometry/FunctionField.lean:31-122.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adjoin.*(fraction|Fraction)|[Ff]raction.*adjoin|essFiniteType_iff|ringKrullDim_eq",
+   "results": "{\"t\": \"2026-10-22T07:36:30Z\", \"tool\": \"grep\", \"query\": \"adjoin.*(fraction|Fraction)|[Ff]raction.*adjoin|essFiniteType_iff|ringKrullDim_eq\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/FinTrdeg.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\"], \"digest\": \"3d3088f96d5e6c81\"}; No full match: IntermediateField.fg_top_iff and algebraAdjoinAdjoin supply the algebra/fraction-field part; Scheme.functionField gives the generic stalk. None of the hits constructs the stated affine model with its dimension comparison and polynomial closed immersion. Read IntermediateField/Adjoin/Algebra.lean:29-122 and AlgebraicGeometry/FunctionField.lean:31-122.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field of finite type as a field is the function field of an affine integral variety whose dimension is its transcendence degree",
+   "results": "{\"t\": \"2026-10-22T07:36:32Z\", \"tool\": \"leanfinder\", \"query\": \"A field of finite type as a field is the function field of an affine integral variety whose dimension is its transcendence degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"functionField_iff\", \"FunctionField\", \"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"WeierstrassCurve.Affine.FunctionField\", \"AlgebraicGeometry.Scheme.functionField\", \"FunctionField.ringOfIntegers.instIsFractionRingSubtypeMemSubalgebraPolynomial\"], \"digest\": \"e4a1c885cc79e2d6\"}; No full match: IntermediateField.fg_top_iff and algebraAdjoinAdjoin supply the algebra/fraction-field part; Scheme.functionField gives the generic stalk. None of the hits constructs the stated affine model with its dimension comparison and polynomial closed immersion. Read IntermediateField/Adjoin/Algebra.lean:29-122 and AlgebraicGeometry/FunctionField.lean:31-122.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg|transcendence",
+   "results": "{\"t\": \"2026-10-22T07:42:29Z\", \"tool\": \"grep\", \"query\": \"trdeg|transcendence\", \"sub\": \"RingTheory/KrullDimension\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No full match: IntermediateField.fg_top_iff and algebraAdjoinAdjoin supply the algebra/fraction-field part; Scheme.functionField gives the generic stalk. None of the hits constructs the stated affine model with its dimension comparison and polynomial closed immersion. Read IntermediateField/Adjoin/Algebra.lean:29-122 and AlgebraicGeometry/FunctionField.lean:31-122.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FiniteType, Algebra.trdeg",
+   "results": "{\"t\": \"2026-10-23T09:33:50Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FiniteType, Algebra.trdeg\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"trdeg_lt_aleph0_of_finiteType\"], \"digest\": \"daebd038561b2639\"}; Read Mathlib/AlgebraicGeometry/FunctionField.lean:31-122, Properties.lean:331-335 and FieldTheory/IntermediateField/Adjoin/Algebra.lean:29-63. Hits give component facts already represented in the DAG, not the entire affine-model statement with dimension and embedding.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated field extension, the subalgebra generated by field generators is an integral affine model with function field the extension and dimension its transcendence degree",
+   "results": "{\"t\": \"2026-10-23T09:34:00Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely generated field extension, the subalgebra generated by field generators is an integral affine model with function field the extension and dimension its transcendence degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"functionField_iff\", \"FunctionField.ringOfIntegers.instIsNoetherianPolynomialSubtypeMemSubalgebraOfIsSeparableRatFunc\", \"exists_integral_inj_algHom_of_fg\", \"Algebra.finite_of_essFiniteType_of_isAlgebraic\", \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"FunctionField.ringOfIntegers.instIsIntegralClosureSubtypeMemSubalgebraPolynomial\", \"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\", \"IsIntegralClosure.isFractionRing_of_finite_extension\"], \"digest\": \"d37e3eb92c24bf79\"}; Read Mathlib/AlgebraicGeometry/FunctionField.lean:31-122, Properties.lean:331-335 and FieldTheory/IntermediateField/Adjoin/Algebra.lean:29-63. Hits give component facts already represented in the DAG, not the entire affine-model statement with dimension and embedding.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraAdjoinAdjoin|functionField_isFractionRing_of_affine|topologicalKrullDim_eq_ringKrullDim|isIntegral_Spec|finiteType.*Spec",
+   "results": "{\"t\": \"2026-10-23T09:36:38Z\", \"tool\": \"grep\", \"query\": \"algebraAdjoinAdjoin|functionField_isFractionRing_of_affine|topologicalKrullDim_eq_ringKrullDim|isIntegral_Spec|finiteType.*Spec\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\", \"Mathlib/FieldTheory/RatFunc/IntermediateField.lean\", \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"Mathlib/FieldTheory/RatFunc/AsPolynomial.lean\", \"Mathlib/FieldTheory/SeparablyGenerated.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\"], \"digest\": \"1343f1cd356dc7e9\"}; Read Mathlib/AlgebraicGeometry/FunctionField.lean:31-122, Properties.lean:331-335 and FieldTheory/IntermediateField/Adjoin/Algebra.lean:29-63. Hits give component facts already represented in the DAG, not the entire affine-model statement with dimension and embedding.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The spectrum of an algebra generated by finitely many field generators has that field as its fraction field and function field and has dimension equal to transcendence degree",
+   "results": "{\"t\": \"2026-10-23T09:36:39Z\", \"tool\": \"leansearch\", \"query\": \"The spectrum of an algebra generated by finitely many field generators has that field as its fraction field and function field and has dimension equal to transcendence degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FunctionField.ringOfIntegers.instIsFractionRingSubtypeMemSubalgebraPolynomial\", \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"trdeg_lt_aleph0\", \"spectrum.scalar_eq\", \"spectrum.nonempty_of_isAlgClosed_of_finiteDimensional\", \"AlgebraicIndependent.aevalEquivField\", \"functionField_iff\", \"Subalgebra.FG\"], \"digest\": \"e90fdc187af967e7\"}; Read Mathlib/AlgebraicGeometry/FunctionField.lean:31-122, Properties.lean:331-335 and FieldTheory/IntermediateField/Adjoin/Algebra.lean:29-63. Hits give component facts already represented in the DAG, not the entire affine-model statement with dimension and embedding.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegral_Spec|isIntegral_of_isDomain|isIntegral_iff|isIntegral.*[Ss]pec",
+   "results": "{\"t\": \"2026-10-23T09:42:44Z\", \"tool\": \"grep\", \"query\": \"isIntegral_Spec|isIntegral_of_isDomain|isIntegral_iff|isIntegral.*[Ss]pec\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\"], \"digest\": \"ac6829707512f32e\"}; Read Mathlib/AlgebraicGeometry/FunctionField.lean:31-122, Properties.lean:331-335 and FieldTheory/IntermediateField/Adjoin/Algebra.lean:29-63. Hits give component facts already represented in the DAG, not the entire affine-model statement with dimension and embedding.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral affine scheme Spec A has function field equal to the fraction field of A and generic point the zero prime",
+   "results": "{\"t\": \"2026-10-23T09:42:53Z\", \"tool\": \"leanfinder\", \"query\": \"An integral affine scheme Spec A has function field equal to the fraction field of A and generic point the zero prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.genericPoint_eq_bot_of_affine\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\"], \"digest\": \"ba5a36cb125febf7\"}; Read Mathlib/AlgebraicGeometry/FunctionField.lean:31-122, Properties.lean:331-335 and FieldTheory/IntermediateField/Adjoin/Algebra.lean:29-63. Hits give component facts already represented in the DAG, not the entire affine-model statement with dimension and embedding.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algclosed-curve-model",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting input to lem-trf-local-term-locality in the inherited Temkin branch: old steps 1--2 of lem-trf-algclosed-curve-model, choose field generators, construct A=k[e_i] and U=Spec(A), identify the generic stalk and compute dimension.",
+   "via": [
+    "lem-trf-algclosed-curve-model",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-field-generators-affine-model",
+  "worker": "stage1",
+  "summary": "Expanded the field-generator construction into evaluation, explicit fraction-subfield argument, affine generic-stalk identification, finite-type structure map, dimension comparison and closed immersion. Reused all required geometric and dimension results; no new nodes and no statement change. Searched project Lean and Mathlib; no exact project attachment or full Mathlib match.",
+  "blueprint": "Realizes the inherited supporting input recorded in blueprint.from.place: the affine-model construction in old steps 1--2 of lem-trf-algclosed-curve-model, below lem-trf-local-term-locality. Read the current latest ancestor and unit; this is a generic algebraic tool within the existing inherited branch, and does not replace the current unit route. Whole-blueprint searches for field generators, fraction field, finite type domain, generic stalk and transcendence degree gave no exact blueprint duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "why": "General finite-type domain dimension theorem 00P0 used as a black box after constructing A and its fraction field; this unit has no dimension theorem of its own."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-5f2d47df6",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-5f2d47df6 (reviewer sub-agent of L); spot-checked: One commit, no new nodes, no SGA citation. Statement and stmt_deps are identical to live, where the item is still unsplit. The source matches Stacks 0BXN (varieties.tex, theorem-varieties-rational-maps), whose last proof paragraph says a finite-type A ⊂ K has fraction field K. Steps 1-5 check out: evaluation is surjective onto A, so A is of finite type and a domain inside E. The explicit fraction subfield F contains k and every e_i, so F=E by minimality. lem-weil-pbc-spec-domain-stalks-function-field (2) gives integrality, generic point (0) and the R-algebra stalk iso, and the general integral-scheme sentence of def-sc-function-field identifies that stalk with k(U). Finite type follows from the finite-cover form of def-weil-finite-type-morphism over the one-point Spec k. The dimension comes from 00P0 (lem-weil-pbc-finite-type-domain-dimension-trdeg, accepted as the declared tool from another unit) together with the topological/ring dimension node. Edge cases r=0, k(t) and inseparable E all behave correctly. FIX (C4): step 6 got a closed immersion from one global surjective chart by citing the clause of def-weil-closed-immersion that quantifies over every affine open of the target, which that clause does not give. I added clause (2) of the existing Mathlib leaf lem-weil-pbc-closed-immersion-affine-cover-criterion (01QO), applied to the one-member cover V=Spec k[T] with h^♯_V=ε. It is added to the step's uses and to proof_deps; its deps do not reach the item, so there is no cycle. The full corrected item is in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldGeneratorsAffineModel",
+  "declaration": "AlgebraicGeometry.fieldGeneratorsAffineModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldGeneratorsAffineModel.lean",
+  "statement": "theorem fieldGeneratorsAffineModel (k E : Type u) [Field k] [Field E] [Algebra k E] (r : ℕ) (e : Fin r → E) (he : IntermediateField.adjoin k (Set.range e) = ⊤) : IsDomain (Algebra.adjoin k (Set.range e)) ∧ RingHom.FiniteType (algebraMap k (Algebra.adjoin k (Set.range e))) ∧ IsFractionRing (Algebra.adjoin k (Set.range e)) E ∧ IsIntegral (Spec (.of (Algebra.adjoin k (Set.range e)))) ∧ LocallyOfFiniteType (Spec.map (CommRingCat.ofHom (algebraMap k (Algebra.adjoin k (Set.range e))))) ∧ QuasiCompact (Spec.map (CommRingCat.ofHom (algebraMap k (Algebra.adjoin k (Set.range e))))) ∧ genericPoint (Spec (.of (Algebra.adjoin k (Set.range e)))) = (⊥ : PrimeSpectrum (Algebra.adjoin k (Set.range e))) ∧ (∃ θ : (Spec (.of (Algebra.adjoin k (Set.range e)))).functionField ≃+* E, ∀ a : Algebra.adjoin k (Set.range e), θ (StructureSheaf.toStalk (Algebra.adjoin k (Set.range e)) (genericPoint (Spec (.of (Algebra.adjoin k (Set.range e))))) a) = (a : E)) ∧ (∃ d : ℕ, topologicalKrullDim (Spec (.of (Algebra.adjoin k (Set.range e)))) = (d : WithBot ℕ∞) ∧ Algebra.trdeg k E = (d : Cardinal)) ∧ ∃ ε : MvPolynomial (ULift.{u} (Fin r)) k →ₐ[k] Algebra.adjoin k (Set.range e), (∀ i : ULift.{u} (Fin r), (ε (MvPolynomial.X i) : E) = e i.down) ∧ Function.Surjective ε ∧ IsClosedImmersion (Spec.map (CommRingCat.ofHom ε.toRingHom) ≫ (AffineSpace.SpecIso (ULift.{u} (Fin r)) (.of k)).inv) ∧ (Spec.map (CommRingCat.ofHom ε.toRingHom) ≫ (AffineSpace.SpecIso (ULift.{u} (Fin r)) (.of k)).inv) ≫ (AffineSpace (ULift.{u} (Fin r)) (Spec (.of k)) ↘ Spec (.of k)) = Spec.map (CommRingCat.ofHom (algebraMap k (Algebra.adjoin k (Set.range e))))",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical polynomial evaluation is uniquely specified by its values on all variables. The generic-stalk ring equivalence fixes A via StructureSheaf.toStalk, expressing precisely the isomorphism induced by the inclusion A ⊆ E and hence its k-linearity. ULift (Fin r) supplies the universe of the relative affine-space index without changing its finite set of variables."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39b9f96d1",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Node unchanged apart from the new lean record; lean.statement matches the file verbatim. All clauses match the node: field generation as IntermediateField.adjoin = ⊤; A = Algebra.adjoin; IsDomain; RingHom.FiniteType; IsFractionRing A E; IsIntegral; LocallyOfFiniteType ∧ QuasiCompact; generic point = ⊥; θ pinned by θ∘toStalk = inclusion (so k-linear); ∃ d : ℕ for dim = trdeg; ε pinned on the X_i and surjective; closed immersion via AffineSpace.SpecIso over k. All 12 stmt_dep records match. Edge cases r = 0 and any characteristic covered; common universe u is the project convention. Only sorry, no definitions; docstrings carry source places and blueprint id; report has both sections; no duplicate. No compile run (no fixes)."
+ }
+}

@@ -1,0 +1,149 @@
+{
+ "id": "lem-sfb-compactification-sheaf-refinement",
+ "kind": "statement",
+ "title": "Sheaf refinement transport preserves the monic inclusion into direct image",
+ "statement": "Let A be a commutative ring, X,Y schemes, f:X→Y a morphism, c,d compactifications of f [def-weil-compactifications-refinements], and r:c→d a refinement whose square over X is cartesian. Write O_c=(c.i)!, P_c=(c.g)* on sheaves of A-modules on the small etale sites [def-weil-pbc-etale-sheaves, def-weil-pbc-extension-by-zero, def-weil-pbc-direct-image]. Let β:O_c≅O_d⋙(r.hom)^* be inverse-image open base change and η the unit of (r.hom)^*⊣(r.hom)_*. Define t_r:O_d⋙P_d→O_c⋙P_c by the unit at O_d, then direct image of β inverse, then the canonical composition of direct images. For the compactification inclusions ι_c,ι_d [def-asd-compact-support-graph-comparison], t_r followed by ι_c equals ι_d. Every component of ι_c is a monomorphism. No invertibility of t_r is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B (lemma-shriek-proper-and-open) and 0F7I (lemma-shriek-well-defined); sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition)"
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-direct-image",
+  "def-asd-compact-support-graph-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the open comparison through inverse image/direct image. The mate identity for open base change, together with the two open-adjunction triangle identities, gives that the adjunct of inverse open base change followed by the finer open inclusion and direct-image composition equals the coarser open inclusion. All maps are the existing open base-change and adjunction constructions.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open) and 0F7I (lemma-shriek-well-defined); sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition)"
+   }
+  },
+  {
+   "text": "Whisker the preceding equality by the coarser proper direct image. Naturality and associativity of the ordinary direct-image compositor identify the result with t_r;ι_c=ι_d.",
+   "uses": [
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open) and 0F7I (lemma-shriek-well-defined); sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition)"
+   }
+  },
+  {
+   "text": "The open inclusion is invertible on the open and has zero source on its closed complement. Exactness and joint conservativity of these restrictions imply its kernel vanishes. Apply the left-exact proper direct image and then the invertible compositor to obtain monicity of ι_c. This is the open/closed monomorphism argument already used in UnboundedEtaleCompactSupportComparisons.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open) and 0F7I (lemma-shriek-well-defined); sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "def-weil-pbc-direct-image",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B (lemma-shriek-proper-and-open) and 0F7I (lemma-shriek-well-defined); sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along open immersion followed by proper pushforward is independent of compactification as a subsheaf of direct image",
+   "results": "Eight hits, including Scheme.Modules.restrictAdjunction, restrictFunctorAdjCounitIso, and instFullPushforward. These concern sheaves on the Zariski space, not the specified small-etale extension-by-zero comparison.",
+   "date": "2026-10-27",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit of a right derived functor is compatible with composition and an adjunction with exact left adjoint",
+   "results": "Eight hits, including Adjunction.derived_unit, derivedη, Functor.totalRightDerivedUnit, and Adjunction.comp_unit. These give the generic unit identities used in the proof, but no etale compactification refinement formula.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryCompIso_fach\"",
+   "results": "0 hits in Mathlib; the exact-derived compositor API is in the adopted source.",
+   "date": "2026-10-27",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactificationSheafRefinement|compactificationRefinement_homotopyUnit|rightDerivedFunctorCompIso",
+   "results": "msearch.py: 0 Mathlib hits. Local source search found rightDerivedFunctorCompIso and rightDerivedFunctorCompUnit in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp and mapDerivedCategoryTriangleIso_hom_app_Qh_obj in WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate.",
+   "date": "2026-10-27",
+   "verdict": "use generic source APIs; no existing geometric statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExactCompactificationUnitRefinement",
+  "date": "2026-10-27",
+  "group": "G8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-affine-local",
+   "place": "Proof (2), the canonical compact-support composition identification used in the Hom bijections, via the compactification-independence normalization.",
+   "via": [
+    "lem-sfb-exact-compactification-unit-refinement",
+    "lem-sfb-quasifinite-compact-support-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompactificationSheafRefinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactificationSheafRefinement.lean",
+  "declaration": "AlgebraicGeometry.Etale.compactificationSheafRefinement_properties",
+  "statement": "theorem compactificationSheafRefinement_properties :\n    compactificationSheafRefinement A r hcart ≫ compactificationSheafToDirectImage A c =\n      compactificationSheafToDirectImage A d ∧\n    ∀ M, Mono ((compactificationSheafToDirectImage A c).app M)",
+  "branch": "sheaf-dag",
+  "by": "G8",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Etale.compactificationSheafRefinement",
+   "AlgebraicGeometry.Etale.compactificationSheafRefinement_properties"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261027T050603-L-240707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261027T050603-L-240707",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

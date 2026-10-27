@@ -1,0 +1,335 @@
+{
+ "id": "lem-fd-pullback-common-strict-tower-models",
+ "kind": "statement",
+ "title": "Common strict-tower models and descent for the two completed pullbacks",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega/\\mathbf Q_\\ell$. All schemes $W$ below are noetherian and finite dimensional with $\\ell$ invertible, with the meaning and the common full integral constructible categories of [lem-weil-pbc-integral-stratified-perfect-characterization]. For finite $E\\subset\\Omega$ over $\\mathbf Q_\\ell$, put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$, $R_{E,W}=\\lim_{n\\geq1}(A_{E,n})_W$ on the small pro-etale site, and use framework and PBC completed pullbacks $F^s_{h,E},F^p_{h,E}$ of [def-weil-derived-pullback-tensor-hom, def-weil-pbc-completed-pullback]. Write $I_{W,E}$ for restriction along the quotient-normalized coefficient identity, giving the integral identity equivalence. All equalities below use these fixed identity transports; we suppress $I$ when source and target already have the same module presentation. For a scheme isomorphism $h:U\\simeq T$, let $G_{h,E}$ be ordinary derived module pullback on the completed rings. For a flat-term K-flat representative $P$ over $R_{E,T}$ set\n$$Q_{h,E}(P)_n=\\operatorname{Res}_n h_n^*(P\\otimes_{R_{E,T}}(A_{E,n})_T),\\qquad H(Q)=\\operatorname{Cone}(1-s_Q)[-1],$$\nwith the actual quotient transitions and $s_Q((x_n)_n)=(t_nx_{n+1})_n$ [def-pur-integral-derived-operations].\nThe quotient-defined ring map $h^{-1}R_{E,T}\\to R_{E,U}$ is an isomorphism, and $G_{h,E}$ is exact inverse image with this transported action. Both completed pullback constructions are realizations of the identical strict tower $Q_{h,E}(P)$, including every quotient transition: the framework realization is $H(Q)$ and the PBC realization is $R\\lim Q$. With a K-injective tower resolution $q:Q\\to I_\\bullet$ with injective terms, the arrow\n$$[\\iota_I]^{-1}[H(q)]:H(Q)\\longrightarrow\\lim I_\\bullet,\\qquad \\iota_I(z)=(0,z),$$\nis a natural isomorphism on ambient derived categories. It is independent of $P$, $q$ and common refinements under the canonical defining resolution comparisons, and natural for all derived morphisms. It restricts to a natural integral constructible isomorphism $b^{\\rm int}_{h,E}:I_{U,E}F^s_{h,E}\\xrightarrow{\\sim}F^p_{h,E}I_{T,E}$, with ambient lift $b^{\\rm amb}_{h,E}$. These assertions concern entire strict towers, and impose no K-flatness over the completed ring on their individual quotient complexes.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence; agent-written extraction of returned lem-fd-whole-tower-integral-pullback-comparison proof steps 1, 2, 3. Exact arguments retained in report.md. Supporting Stacks sources: Tag 099N, proetale.tex, lemma-pushforward-Noetherian-case (2),(5); Tag 0941, sites-cohomology.tex, lemma-derived-limit-is-ok"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-pc-kflat-complex",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-completed-pullback",
+  "def-fd-coefficient-comparison-datum",
+  "def-weil-strict-roos-model"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-proetale-isomorphism-inverse-image], $h^{-1}$ is an exact equivalence, preserves the coefficient limit, and its finite coefficient isomorphisms commute with every quotient homomorphism. Consequently the composite\n$h^{-1}R_{E,T}\\cong\\lim_n h^{-1}(A_{E,n})_T\\cong\\lim_n(A_{E,n})_U=R_{E,U}$\nis invertible. Its $n$-th projection is $c_{A_{E,n}}^h h^{-1}(\\pi_{T,n})$, so it is precisely the quotient-defined structure map, by the uniqueness part of the limit. The same projection calculation gives compatibility with $A_{E,n+1}\\to A_{E,n}$. Under the fixed identity transports $I_{W,E}$, the finite component $h^{-1}(A_{E,n})_T\\to(A_{E,n})_U$ used by the coefficient map $c_h$ of [def-weil-pbc-completed-pullback] is this same $c^h_{A_{E,n}}$, by the final clause of [prop-weil-pbc-proetale-constant-ring-map]; hence the map above is also the PBC coefficient map $c_h$. By [lem-weil-sheaf-scalar-extension-ring-iso], ordinary module pullback along this map is inverse image with transported action: the tensor map sends $m\\otimes a$ to $c^{-1}(a)m$, with inverse $m\\mapsto m\\otimes1$. It is therefore exact. The exact-functor results [lem-weil-pbc-exact-functor-derived-factorization, lem-weil-pbc-exact-functor-derived-functor] identify its ordinary derived functor $G_{h,E}$ with this termwise functor on every ambient complex.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; projection calculation for the coefficient limit, agent-written"
+   }
+  },
+  {
+   "text": "Fix a flat-term K-flat $P$ representing $K$ and use all its reductions simultaneously. By [def-pur-integral-derived-operations, def-weil-derived-pullback-tensor-hom] the framework functor is represented by $H(Q_{h,E}(P))$. This is its actual construction, not a selection of an object from a distinguished triangle. In particular the transition is the image of $1_P\\otimes\\rho_n$ under finite inverse image and restriction of scalars. At finite level the tensor description of module inverse image agrees with inverse image with transported action, by [lem-weil-sheaf-scalar-extension-ring-iso] for the ring-sheaf isomorphism $c^h_{A_{E,n}}$ of [lem-weil-proetale-isomorphism-inverse-image], clause 3: $h^{-1}(x\\otimes a)\\otimes b$ maps to $b\\,h^{-1}(x\\otimes a)$, and the inverse inserts $1$. Both composites are identities by tensor balancing. Applying the transition before or after this map gives $b\\,h^{-1}(x\\otimes\\rho_n(a))$ in either case, with the coefficient actions identified by step 1. Thus the framework model retains precisely the specified strict quotient transitions.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison of the two coefficient-category pullbacks, common strict quotient-tower computation"
+   }
+  },
+  {
+   "text": "The PBC reduction functor of [def-weil-pbc-adic-coefficient-datum] is computed on the same $P$ by the strict tower $P_n=P\\otimes_{R_{E,T}}(A_{E,n})_T$, restricted to $R_{E,T}$, with transition $1\\otimes\\rho_n$. Apply the module functor of step 1 levelwise to towers. This is exact since kernels and cokernels of towers are levelwise [lem-weil-tower-category-levelwise-abelian]. By [lem-weil-pbc-exact-functor-derived-factorization, lem-weil-pbc-exact-functor-derived-functor], its left derived functor is computed on EVERY tower complex by that exact levelwise functor. In particular, any resolving-class replacement used in [def-weil-pbc-completed-pullback] maps by a quasi-isomorphism to the direct image of the displayed reduction tower. At level $n$ this direct image is canonically $\\operatorname{Res}_n h_n^*P_n$: multiplication identifies the transported module action, and the coefficient projection square in step 1 identifies the restricted completed-ring actions. The calculation in step 2 identifies each transition. Thus the whole PBC derived tower, including its canonical resolution comparison, is $Q_{h,E}(P)$, and its realization is $R\\lim Q_{h,E}(P)$. No level of this tower is asserted K-flat over $R_{E,T}$ or $R_{E,U}$.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (2),(5), with the completed-ring strict-tower definition and exact-isomorphism specialization"
+   }
+  },
+  {
+   "text": "Countable products of $R_{E,U}$-module sheaves on $U_{\\mathrm{proet}}$ are exact by [lem-weil-proetale-countable-products-exact]. Apply [lem-weil-strict-roos-comparison] with this ring sheaf and with the entire strict tower $Q=Q_{h,E}(P)$. Its natural comparison is\n$\\rho_Q=[\\iota_I]^{-1}[H(q)]:H(Q)\\xrightarrow{\\sim}\\lim I_\\bullet$,\nwhere $q:Q\\to I_\\bullet$ is a K-injective tower resolution with injective terms and $\\iota_I(z)=(0,z)$. The cited comparison states that both arrows of this zigzag are quasi-isomorphisms, fixes the zero shifted-product component, and states naturality in $D(\\operatorname{Tow}(\\operatorname{Mod}(R_{E,U})))$ and independence of resolution. Thus it supplies exactly the required normalized map between the realizations from steps 2 and 3.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, proof; normalized functorial strict-cone refinement in lem-weil-strict-roos-comparison"
+   }
+  },
+  {
+   "text": "Use the actual reduction functor into the derived category of strict towers supplied by [def-weil-pbc-adic-coefficient-datum], followed by the exact derived levelwise functor of step 3. This gives an ambient derived functor $B_{h,E}$ with canonical computation $B_{h,E}(K)\\cong Q_{h,E}(P)$. The canonical framework computation comparisons are those of [lem-pur-integral-operations-well-defined]; the PBC comparisons are those in its definition, identified in step 3. Whiskering the natural isomorphism $\\rho:H\\Rightarrow R\\lim$ of [lem-weil-strict-roos-comparison] by $B_{h,E}$ therefore gives $b^{\\rm amb}_{h,E}$. For a derived arrow $f:K\\to L$ its naturality equation is\n$R\\lim(B_{h,E}f)\\,\\rho_{B_{h,E}K}=\\rho_{B_{h,E}L}\\,H(B_{h,E}f)$.\nThis equation holds for all derived arrows, not merely levelwise families. On a different representative or common refinement the two computation isomorphisms conjugate this same component of $\\rho$; naturality gives equality after those specified comparisons. Independence of $q$ is already part of step 4. Hence neither choices of $P$ nor of tower resolutions add any further choice to the comparison.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: descent of the common strict-tower comparison, agent-written assembly using the cited functoriality statements"
+   }
+  },
+  {
+   "text": "By [lem-pur-integral-operations-preserve-constructible], the framework completed pullback sends the full integral constructible category on $T$ into that on $U$. By [lem-weil-pbc-integral-stratified-perfect-characterization], these are the same full subcategories as the PBC categories under the fixed coefficient identity transports $I_{W,E}$. The ambient isomorphism from step 5 consequently places its PBC target in the same integral category as its framework source. Fullness restricts both $b^{\\rm amb}_{h,E}$ and its inverse and restricts their naturality identities. Restoring the fixed transports gives\n$b^{\\rm int}_{h,E}:I_{U,E}F^s_{h,E}\\xrightarrow{\\sim}F^p_{h,E}I_{T,E}$.\nThis restriction changes none of the strict-tower models or comparison maps; its ambient lift is the component already constructed. The assertions hold for each finite coefficient field $E$, without imposing any additional hypothesis on its quotient complexes.",
+   "uses": [
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.5.1 and Lemma 6.5.9(5); full-subcategory identification from the cited characterization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-tower-category-levelwise-abelian",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence, common strict-tower realization of the two completed pullbacks; assembled from Stacks 015F, 0941, 099N and the existing normalization and constructibility nodes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The normalized Roos comparison identifies product cone and K-injective derived limit models of completed pro-etale pullback along a scheme isomorphism, naturally independent of K-flat representatives",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.g, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compare the product cone and derived inverse limit models of completed pullback on pro-etale sheaves",
+   "results": "8 hits: CategoryTheory.Limits.productIsProduct, Profinite.lim', CategoryTheory.Limits.pullbackIsPullback, AlgebraicGeometry.SheafedSpace.GlueData.vPullbackConeIsLimit, TopCat.Sheaf.interUnionPullbackCone, AlgebraicGeometry.PresheafedSpace.GlueData.vPullbackConeIsLimit, Profinite.asLimitCone, CategoryTheory.Limits.Types.pullbackLimitCone",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|completedPullback|completed_pullback|strict.*tower",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "results": "12 hits: CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_hom_app, CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app_assoc, CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app_mapDerivedCategoryFactors_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison from the homotopy inverse limit cone of a strict tower of module complexes to the K-injective derived inverse limit, preserving its augmentation",
+   "results": "8 hits: CochainComplex.cm5b, CochainComplex.cm5b.i_f_comp_assoc, HomologicalComplex.coneOfHasLimitEval_pt_d, CochainComplex.cm5b.i_f_comp, CochainComplex.cm5b.instQuasiIsoIntP, HomologicalComplex.coneOfHasLimitEval, CochainComplex.cm5b.fac, DerivedCategory.right_fac_of_isStrictlyLE",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|fullyFaithfulWhiskeringLeft",
+   "results": "15 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "results": "12 hits: CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_hom_app, CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app_assoc, CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app_mapDerivedCategoryFactors_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are generic exact-functor, module-pullback, or ordinary-limit facts, not the specified completed pro-etale strict-tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|completedPullback|completed_pullback|strict.*tower",
+   "results": "25 hits: Mathlib/NumberTheory/RamificationInertia/Basic.lean, Mathlib/FieldTheory/SeparableClosure.lean, Mathlib/FieldTheory/SeparableClosure.lean, Mathlib/FieldTheory/SeparableClosure.lean, Mathlib/FieldTheory/Normal/Defs.lean, Mathlib/FieldTheory/PolynomialGaloisGroup.lean, Mathlib/FieldTheory/AlgebraicClosure.lean, Mathlib/FieldTheory/AlgebraicClosure.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are generic exact-functor, module-pullback, or ordinary-limit facts, not the specified completed pro-etale strict-tower comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cone of one minus shift on the product of a tower computes its derived inverse limit naturally",
+   "results": "8 hits: CategoryTheory.Limits.limit.isoLimitCone_inv_π_assoc, Profinite.limitCone, CategoryTheory.Limits.SequentialProduct.isLimit, Profinite.asLimitCone, CategoryTheory.Limits.limit.isoLimitCone_inv_π, Profinite.asLimitindexConeIso, Profinite.lim', Profinite.asLimitConeIso",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are generic exact-functor, module-pullback, or ordinary-limit facts, not the specified completed pro-etale strict-tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed pullback on pro-etale module sheaves computed from one strict quotient tower, with natural Roos cone to derived inverse limit comparison",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', BDeRhamPlus, AlgebraicGeometry.Scheme.instHasPullbacksEtale, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, PresheafOfModules.pullbackObjIsDefined",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are generic exact-functor, module-pullback, or ordinary-limit facts, not the specified completed pro-etale strict-tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact inverse image equivalence of ringed sites identifies derived pullback with termwise inverse image and preserves quotient towers",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso, SheafOfModules.pullbackComp, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are generic exact-functor, module-pullback, or ordinary-limit facts, not the specified completed pro-etale strict-tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|homotopyLimit|derivedLimit|derivedInverseLimit|completedPullback",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are generic exact-functor, module-pullback, or ordinary-limit facts, not the specified completed pro-etale strict-tower comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-whole-tower-integral-pullback-comparison",
+  "date": "2026-10-22",
+  "group": "Q60"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final sentence assigning the local Frobenius operator to the PBC Qbar coefficient category; old proof steps 7–8: identity on entire quotient towers and normalized integral coherence; returned whole-tower proof steps 1, 2, 3",
+   "via": [
+    "lem-fd-whole-tower-integral-pullback-comparison",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-fd-pullback-common-strict-tower-models",
+  "worker": "stage1",
+  "summary": "Q16: proved the coefficient ring map is the projection-normalized isomorphism; exact tower pullback computes the PBC derived tower on the same reductions without completed-ring K-flatness of quotient levels; reused the existing natural strict Roos comparison and constructible preservation. Six steps, no new nodes, no statement change.",
+  "blueprint": "def-fd-trace-function, final sentence specifying the PBC coefficient category: realizes the common-model/descent portion extracted as this item from whole-tower comparison steps 1–3.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Site-equivalence tool: preserves the coefficient limit and identifies every finite coefficient map with its quotient compatibility. No node of sk-def-trace supplies this foundational statement."
+   },
+   {
+    "node": "lem-weil-sheaf-scalar-extension-ring-iso",
+    "why": "Algebraic module tool: extension along a ring-sheaf isomorphism is transported action by the stated multiplication map. No node of sk-def-trace supplies this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic derived-functor tool: exact module and tower pullback can be computed on arbitrary complexes. No node of sk-def-trace supplies this foundational statement."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic strict-tower tool: supplies the natural normalized product-cone/derived-limit comparison, not a comparison assumed from the Fourier item. No node of sk-def-trace supplies this foundational statement."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Pro-etale module-sheaf tool: verifies the exact countable-products hypothesis of strict Roos comparison. No node of sk-def-trace supplies this foundational statement."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Generic framework-operation tool: canonical resolution comparisons identify its actual cone construction on ambient derived categories. No node of sk-def-trace supplies this foundational statement."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic operation-preservation tool: ensures the framework source is in the full integral constructible category. No node of sk-def-trace supplies this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Coefficient-category tool: identifies the same full subcategories under the prescribed integral identity transports. No node of sk-def-trace supplies this foundational statement."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Identifies the PBC finite coefficient structure map on the Cont(pi_0,-) coefficient sheaves with the constant-sheaf structure map c^h used by the framework (step 1); no node of sk-def-trace gives this identification. Added by the maintainer reader Q16 review."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-8cd312a9e",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-8cd312a9e (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, along with the statement of every cited node and the sources at their labels: Stacks 015F, 099N(2),(5), 0941 and the def-fd-trace-function final sentence of main-20261015. No SGA is used. There are no new nodes and the statement is unchanged against live, where the node is still unsplit. Every argument of Q60's old steps 1-3 survives: old 1 becomes steps 1-3, old 2 becomes step 4, old 3 becomes steps 5-6. The mathematics checks out. (1) The completed coefficient map is invertible, with n-th projection c^h_{A_n} h^{-1}(pi_n). (2) The framework realization is literally H(Q) from def-pur-integral-derived-operations. (3) Lg^*_Tow is computed termwise because h^* is exact and tower exactness is levelwise; the level-n identification goes through the projection square; no K-flatness of quotient levels is used. (4) Countable products are exact for any ring sheaf, so lem-weil-strict-roos-comparison applies with zero shifted coordinate, consistent with Cone[-1]^n = B^{n-1} + A^n. (5) Whiskering by B plus the roof/common-refinement conjugation is adequate. (6) Preserve-constructible and the stratified characterization cover noetherian, finite-dimensional, l-invertible schemes. Edge cases checked: h=id, K=0, empty schemes, unbounded K. FIX, two C1/C3 citation gaps. (a) Step 1 identified the PBC c_g, built on Cont(pi_0)-coefficient sheaves, with the constant-sheaf c^h without citing the final clause of prop-weil-pbc-proetale-constant-ring-map. I added it and def-weil-pbc-completed-pullback, re-unioned proof_deps and declared the tool use. (b) Step 2 used the finite-level tensor/transported-action iso without citing it. I added lem-weil-sheaf-scalar-extension-ring-iso and lem-weil-proetale-isomorphism-inverse-image (clause 3). The corrected file is fixes/dag/nodes/sec-fourier-transform/lem-fd-pullback-common-strict-tower-models.json and the full checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PullbackCommonStrictTowerModels",
+  "declaration": "WeilConjectures.fdPullbackCommonStrictTowerModels",
+  "declarations": [
+   "WeilConjectures.fdCommonStrictTower",
+   "WeilConjectures.fdCommonDerivedTower",
+   "WeilConjectures.fdCommonTowerCounit",
+   "WeilConjectures.fdCommonRlimUnit",
+   "WeilConjectures.fdCommonFrameworkEnd",
+   "WeilConjectures.fdCommonFrameworkProjection",
+   "WeilConjectures.fdCommonFrameworkShiftedProjection",
+   "WeilConjectures.fdCommonStrictGenerator",
+   "WeilConjectures.fdCommonFrameworkCoefficientComparison",
+   "WeilConjectures.fdCommonExpandedTowerCounit",
+   "WeilConjectures.FdCommonStrictTowerModels",
+   "WeilConjectures.fdPullbackCommonStrictTowerModels"
+  ],
+  "file": "lean/Sheaf/Paper/PullbackCommonStrictTowerModels.lean",
+  "statement": "theorem fdPullbackCommonStrictTowerModels {U T : Scheme.{u}} [AlgebraicGeometry.IsNoetherian U] [AlgebraicGeometry.IsNoetherian T] (_hdimU : ∃ n : ℕ, topologicalKrullDim U ≤ n) (_hdimT : ∃ n : ℕ, topologicalKrullDim T ≤ n) (_hinvU : ∀ x : U, IsUnit (l : U.presheaf.stalk x)) (_hinvT : ∀ x : T, IsUnit (l : T.presheaf.stalk x)) (h : U ≅ T) : Nonempty (FdCommonStrictTowerModels l E (U := U) (T := T) h)",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The helper definitions construct the actual strict reduction tower, canonical derived counits and cone projections. The theorem packages the normalized strict-tower, ambient and integral comparisons; no quotient-level K-flatness hypothesis is imposed. Added existing statement dependencies for the fixed coefficient transport and explicit Roos model."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22158bfc2",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Read the node, all 12 stmt_dep records (identical to live), the report and the module; the item changed only in lean and stmt_deps, lean.statement is verbatim, 1 sorry. Hypotheses match exactly (prime l, finite E/Q_l, noetherian, finite dimension, l a stalk unit; empty scheme and dimension 0 allowed). FdCommonStrictTowerModels pins every comparison: tower by unit generators (the HEq hypothesis is satisfiable; the scalar unit is the ∃-formula sheafify(1⊗x)); cone by both coordinates, sign checked (roosF = mappingCocone(roosU), roosProj = fst, snd.v(p+1,p) = roosχ≫biprod.fst with sign +); roosDescent≫rho by resolution for every K-injective q, with e = Q(roosι) and d fixed by lim.rightDerivedFunctorUnit; derived_tower by the actual counit composite; ambient by normalization on good P; integral via the ∃! pbcActualCompletedPullback_tower and lift. No quotient-level K-flatness is imposed. Edge cases: h = id, empty schemes, K = 0, unbounded K, any E. Advisories: the ordinary-level `action` iso is unpinned (no citer uses it); statement decls come from non-stmt_dep owners (adic-coefficient-datum, IntegralOperationsWellDefined incl. theorem-only GoodLocalization/PullbackOnGood, sfIntegralConstructible, proetale inverse image, coef evaluation-calculus theorem module); the added stmt_deps are landed def nodes, not new ones; the second reading is a self-reread. No file changed, no compile."
+ }
+}

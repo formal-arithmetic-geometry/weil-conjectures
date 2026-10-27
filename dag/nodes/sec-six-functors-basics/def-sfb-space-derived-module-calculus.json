@@ -1,0 +1,199 @@
+{
+ "id": "def-sfb-space-derived-module-calculus",
+ "kind": "definition",
+ "title": "Canonical derived module calculus on algebraic spaces",
+ "status": "split",
+ "import_flags": [],
+ "statement": "For an algebraic space X over a scheme S [def-trf-algebraic-space], use the small ringed model and its specified restriction equivalence [def-sfb-space-small-ringed-model], module sheaves [def-weil-sheaf-of-modules-category] and unbounded derived categories [def-weil-abstract-derived-category]. Define D(O_X) using this equivalent small ringed model, with arbitrary localization morphism universe w. Define D_QCoh as the full subcategory whose cohomology, transported back along the module equivalence, is quasi-coherent [def-trf-space-quasi-coherent-module]. The structure sheaf in degree zero belongs to D_QCoh. For a morphism f, conjugate the canonical compatible-chart direct image [def-trf-space-etale-module-functors] by the two module equivalences and take its unbounded right derived functor. The conjugated functor is additive and these module categories have K-injective resolutions, so this is computed by K-injectives. A QCoh direct-image presentation is a functor on these full subcategories with a natural isomorphism to this fixed ambient Rf_*. For each etale scheme chart, compose the inverse model equivalence with restriction to Zariski opens [def-trf-space-module-scheme-restriction]; this is additive, and its right derived functor is the derived chart restriction, allowing an independent localization universe for the scheme. For maps to a scheme represented as an algebraic space by its representable sheaf [def-trf-scheme-algebraic-space], define the chart structure morphism by Yoneda preimage. The internal derived Hom is the existing K-injective Hom [def-pur-derived-internal-hom] on the equivalent small site. Use the normalized closed tensor-Hom and ordinary-unit model [lem-sfb-ringed-site-duality-maps] to define the scalar endomorphism map as the transpose of O_X tensor K to K. No invertibility or perfection is imposed by these definitions.",
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-sfb-space-small-ringed-model",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-trf-space-module-scheme-restriction",
+  "def-trf-scheme-algebraic-space",
+  "def-pur-derived-internal-hom",
+  "lem-sfb-ringed-site-duality-maps"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-duality.tex",
+  "place": "Tags 0E58 and 0E5V; sites-cohomology.tex Tags 079V, 08J7 and 0A98; spaces-properties.tex Tags 03G7 and 03M0"
+ },
+ "proof": [
+  {
+   "text": "Compute the cohomology of the degree-zero structure sheaf using the single-functor homology isomorphism in degree zero and the vanishing of single-complex homology in every other degree. The small-module restriction takes the original structure module to the small structure module, so the equivalence unit identifies its inverse image with the original unit. On every original chart, present this unit by one generator and no relations. Present any zero module by empty generators and empty relations; the source free module is zero by its free-Hom universal property, so the kernel is zero. These presentations prove quasi-coherence, including on the empty space.",
+   "uses": [
+    "def-sfb-space-small-ringed-model",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The inverse small-model equivalence preserves binary products and zero maps and hence is additive. The original module direct image is a right adjoint, so it too preserves binary products and zero maps and is additive. Small-model restriction acts sectionwise on morphisms, hence preserves sums definitionally. Their composite is additive.",
+   "uses": [
+    "def-sfb-space-small-ringed-model",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing proved SheafOfModules.isGrothendieckAbelian theorem to the actual small-model ring sheaf. The site, ring sections, and module carriers all lie in universe u, as required by that theorem. Apply the Grothendieck-abelian K-injective-resolution theorem [lem-sfb-grothendieck-k-injective].",
+   "uses": [
+    "def-sfb-space-small-ringed-model",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Zariski scheme-chart restriction is the existing continuous pushforward of module sheaves. Its action on morphisms is sectionwise, so preservation of addition is definitional. Compose it with the additive inverse small-model equivalence. The resulting additivity is the required smallSchemeRestriction_additive instance.",
+   "uses": [
+    "def-sfb-space-small-ringed-model",
+    "def-trf-space-module-scheme-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-small-ringed-model",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "lem-sfb-grothendieck-k-injective",
+  "def-trf-space-module-scheme-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Derived functors (Tags 079V and 08J7), with spaces-perfect.tex definition-derived-quasi-coherent and spaces-properties.tex Tags 03G7 and 03M0; implemented using the existing single-complex, continuous restriction, right-adjoint and Grothendieck-abelian APIs."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Small affine etale site of an algebraic space equivalence module sheaves derived tensor internal Hom",
+   "results": "8 hits: Scheme.smallEtaleTopology, Scheme.AffineZariskiSite.sheafEquiv, sheafHom, Scheme.smallEtalePretopology, Equivalence.sheafCongr, Sheaf.isGrothendieckAbelian_of_essentiallySmall, Scheme.Modules.instCategory, SheafOfModules.instCategory. General pieces only; no algebraic-space derived calculus.",
+   "date": "2026-10-23",
+   "verdict": "no exact match; reuse the general pieces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper flat finitely presented algebraic space affine base right adjoint of structure sheaf is relatively perfect and scalar derived endomorphism map is an isomorphism",
+   "results": "8 hits concerning scheme Flat, UniversallyOpen.of_flat, HasAffineProperty and FormallyUnramified; none states algebraic-space derived duality.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AlgebraicSpace, DerivedCategory",
+   "results": "OK 0 hits; unknown identifier AlgebraicGeometry.AlgebraicSpace",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "affineAdjoint|relativeDualizing|relativelyPerfect|semidualizing; IsPerfectRelative|SmallEtaleModel|smallModuleRestriction|QCohDirectImagePresentation; Mathlib/AlgebraicGeometry, WeilConjectures/AlgebraicGeometry, Sheaf/AlgebraicGeometry; DAG and blueprint_refs searches",
+   "results": "Mathlib grep 0 hits for first query. Project has scheme/algebra relative dualizing-pair comparisons but no algebraic-space relative perfectness or small-model calculus. DAG definition-title/statement search gives no matching node; blueprint_refs search gives 0 for relative perfect, derived module calculus and small affine etale derived module calculus.",
+   "date": "2026-10-23",
+   "verdict": "no duplicate; use recorded scheme and general ringed-site APIs"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-adjoint-unit-properties",
+  "date": "2026-10-23",
+  "group": "Q115"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Canonical derived-module and relative-perfectness notions used by Stacks 0E5V clauses (1)-(3), in the affine adjoint-unit construction.",
+   "via": [
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceDerivedModules",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.derivedDirectImage",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.DerivedModules",
+   "AlgebraicGeometry.AlgebraicSpace.derivedQCohProperty",
+   "AlgebraicGeometry.AlgebraicSpace.DerivedQCoh",
+   "AlgebraicGeometry.AlgebraicSpace.derivedStructure",
+   "AlgebraicGeometry.AlgebraicSpace.derivedStructure_quasiCoherent",
+   "AlgebraicGeometry.AlgebraicSpace.derivedQCohStructure",
+   "AlgebraicGeometry.AlgebraicSpace.smallModuleDirectImage",
+   "AlgebraicGeometry.AlgebraicSpace.smallModuleDirectImage_additive",
+   "AlgebraicGeometry.AlgebraicSpace.smallModules_hasKInjectiveResolutions",
+   "AlgebraicGeometry.AlgebraicSpace.derivedDirectImage",
+   "AlgebraicGeometry.AlgebraicSpace.QCohDirectImagePresentation",
+   "AlgebraicGeometry.AlgebraicSpace.smallSchemeRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.smallSchemeRestriction_additive",
+   "AlgebraicGeometry.AlgebraicSpace.derivedSchemeRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.chartToScheme",
+   "AlgebraicGeometry.AlgebraicSpace.derivedHom",
+   "AlgebraicGeometry.AlgebraicSpace.derivedDualityModel",
+   "AlgebraicGeometry.AlgebraicSpace.derivedScalarEndomorphism"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceDerivedModules.lean",
+  "statement": "def derivedDirectImage {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) [HasDerivedCategory.{w} X.SmallModules] [HasDerivedCategory.{w} Y.SmallModules] : X.DerivedModules ⥤ Y.DerivedModules",
+  "branch": "sheaf-dag",
+  "by": "Q115",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f0f35306",
+  "group": "Q115",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f0f35306",
+  "group": "Q115",
+  "result": "fix",
+  "note": "Item matches node and Stacks 0E5V clause by clause: affine Y; proper, flat, locally finitely presented f (finite presentation via proper ⇒ qcqs); Rf_* on D_QCoh pinned by an iso to the canonical K-injective direct image; arbitrary right adjoint. (1) Y-perfect = 0DKN by the affine-chart criterion with V=Y; (2) cohomology sheaves of Rf_*W vanish for i>0; (3) IsIso of the actual scalar map, pinned by the duality model's uncurry/unit/symmetry formulas. Three new def nodes are not duplicates (none in side-live/live; runs dir has only stage-1 sibling splits, no competing stage-2 delivery); data real; 7 sorry'd obligations true and stated in the nodes; dependency records identical to side-live; no recompile, as instructed. FIX: theorem stmt_dep lem-trf-space-enlarged-etale-ringed-site-model, used only for the plain def schemeSpace, replaced by its def owner def-trf-scheme-algebraic-space in fixes/def-sfb-space-derived-module-calculus.json; the same citation added in fixes/def-sfb-space-relative-perfect.json. JSON only. lem-sfb-ringed-site-duality-maps kept (Classical.choice of the theorem)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261026T092239-L-3416690",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

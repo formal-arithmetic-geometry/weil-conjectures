@@ -347,6 +347,104 @@ variable {X S T Y : Scheme.{u}} {f : X ⟶ S} {g : T ⟶ S} {h : Y ⟶ X} {e : Y
   [iY : Fact (∀ x : Y, IsUnit (l : Y.presheaf.stalk x))]
   (sq : ChosenCartesianSquare h e f g)
 
+/-- The left raw composite clause, named without changing its equation.
+Source: sketch32, lines 1218--1228 and 1291--1321
+(blueprint: def-sbc-finite-stage-rational-exchange-data). -/
+def RawLeftComposite
+    (cf_rPull : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω S)
+    (pbcAmbientCompleteRawSystem l Ω X))
+    (cg_rPush : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω T)
+    (pbcAmbientCompleteRawSystem l Ω S))
+    (rawF : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω T)
+    (pbcAmbientCompleteRawSystem l Ω X))
+    : Prop :=
+  ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M)
+      (K : pbcAmbientCompleteStage l Ω T E),
+    HEq ((rawF.β a).hom.app K)
+      ((cf_rPull.β a).hom.app ((cg_rPush.Φ E).obj K) ≫
+        (cf_rPull.Φ M).map ((cg_rPush.β a).hom.app K))
+
+/-- The right raw composite clause, named without changing its equation.
+Source: sketch32, lines 1218--1228 and 1291--1321
+(blueprint: def-sbc-finite-stage-rational-exchange-data). -/
+def RawRightComposite
+    (ch_rPush : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω Y)
+    (pbcAmbientCompleteRawSystem l Ω X))
+    (ce_rPull : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω T)
+    (pbcAmbientCompleteRawSystem l Ω Y))
+    (rawG : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω T)
+    (pbcAmbientCompleteRawSystem l Ω X))
+    : Prop :=
+  ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M)
+      (K : pbcAmbientCompleteStage l Ω T E),
+    HEq ((rawG.β a).hom.app K)
+      ((ch_rPush.β a).hom.app ((ce_rPull.Φ E).obj K) ≫
+        (ch_rPush.Φ M).map ((ce_rPull.β a).hom.app K))
+
+/-- The left raw normalization clause, named without changing its equation.
+Source: sketch32, lines 1218--1228 and 1291--1321
+(blueprint: def-sbc-finite-stage-rational-exchange-data). -/
+def RawLeftNormalization
+    (cf_pPull : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),
+    sbcPull l (pbcFiniteField.{u} l Ω E) f ⋙
+        pbcAmbientCompleteIntegralTransition l Ω X a ≅
+      pbcAmbientCompleteIntegralTransition l Ω S a ⋙
+        sbcPull l (pbcFiniteField.{u} l Ω M) f)
+    (cg_pPush : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),
+    sbcPush l (pbcFiniteField.{u} l Ω E) g ⋙
+        pbcAmbientCompleteIntegralTransition l Ω S a ≅
+      pbcAmbientCompleteIntegralTransition l Ω T a ⋙
+        sbcPush l (pbcFiniteField.{u} l Ω M) g)
+    (rawF : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω T)
+    (pbcAmbientCompleteRawSystem l Ω X))
+    : Prop :=
+  ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M)
+      (K : PbcComplete l (pbcFiniteField.{u} l Ω E) T),
+    HEq ((rawF.β a).hom.app ((pbcAmbientCompleteLocalization l Ω T E).obj K))
+      ((pbcAmbientCompleteIntegralComparison l Ω X a).hom.app
+          ((sbcPull l (pbcFiniteField.{u} l Ω E) f).obj
+            ((sbcPush l (pbcFiniteField.{u} l Ω E) g).obj K)) ≫
+        (pbcAmbientCompleteLocalization l Ω X M).map
+          ((cf_pPull a).hom.app
+              ((sbcPush l (pbcFiniteField.{u} l Ω E) g).obj K) ≫
+            (sbcPull l (pbcFiniteField.{u} l Ω M) f).map
+              ((cg_pPush a).hom.app K)) ≫
+        (sbcRationalLeft l (pbcFiniteField.{u} l Ω M)
+          (f := f) (g := g)).map
+          ((pbcAmbientCompleteIntegralComparison l Ω T a).inv.app K))
+
+/-- The right raw normalization clause, named without changing its equation.
+Source: sketch32, lines 1218--1228 and 1291--1321
+(blueprint: def-sbc-finite-stage-rational-exchange-data). -/
+def RawRightNormalization
+    (ch_pPush : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),
+    sbcPush l (pbcFiniteField.{u} l Ω E) h ⋙
+        pbcAmbientCompleteIntegralTransition l Ω X a ≅
+      pbcAmbientCompleteIntegralTransition l Ω Y a ⋙
+        sbcPush l (pbcFiniteField.{u} l Ω M) h)
+    (ce_pPull : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M),
+    sbcPull l (pbcFiniteField.{u} l Ω E) e ⋙
+        pbcAmbientCompleteIntegralTransition l Ω Y a ≅
+      pbcAmbientCompleteIntegralTransition l Ω T a ⋙
+        sbcPull l (pbcFiniteField.{u} l Ω M) e)
+    (rawG : StageSystem.Morphism (pbcAmbientCompleteRawSystem l Ω T)
+    (pbcAmbientCompleteRawSystem l Ω X))
+    : Prop :=
+  ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M)
+      (K : PbcComplete l (pbcFiniteField.{u} l Ω E) T),
+    HEq ((rawG.β a).hom.app ((pbcAmbientCompleteLocalization l Ω T E).obj K))
+      ((pbcAmbientCompleteIntegralComparison l Ω X a).hom.app
+          ((sbcPush l (pbcFiniteField.{u} l Ω E) h).obj
+            ((sbcPull l (pbcFiniteField.{u} l Ω E) e).obj K)) ≫
+        (pbcAmbientCompleteLocalization l Ω X M).map
+          ((ch_pPush a).hom.app
+              ((sbcPull l (pbcFiniteField.{u} l Ω E) e).obj K) ≫
+            (sbcPush l (pbcFiniteField.{u} l Ω M) h).map
+              ((ce_pPull a).hom.app K)) ≫
+        (sbcRationalRight l (pbcFiniteField.{u} l Ω M)
+          (h := h) (e := e)).map
+          ((pbcAmbientCompleteIntegralComparison l Ω T a).inv.app K))
+
 /-- The complete finite-stage rational and Karoubi exchange coherence conclusion.
 Prefixes cf, cg, ch, ce refer respectively to f, g, h, e. The operation predicate
 is asserted for each of the four morphisms before specifying the composite comparisons.
@@ -427,44 +525,10 @@ def HasCoherence : Prop :=
     HEq (rawF.β (le_refl E)) (Iso.refl (rawF.Φ E))),
   ∃ (_rawG_unit : ∀ (E : Padic.FiniteCoefficientFields l Ω),
     HEq (rawG.β (le_refl E)) (Iso.refl (rawG.Φ E))),
-  ∃ (_rawF_composite : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M)
-      (K : pbcAmbientCompleteStage l Ω T E),
-    HEq ((rawF.β a).hom.app K)
-      ((cf_rPull.β a).hom.app ((cg_rPush.Φ E).obj K) ≫
-        (cf_rPull.Φ M).map ((cg_rPush.β a).hom.app K))),
-  ∃ (_rawG_composite : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M)
-      (K : pbcAmbientCompleteStage l Ω T E),
-    HEq ((rawG.β a).hom.app K)
-      ((ch_rPush.β a).hom.app ((ce_rPull.Φ E).obj K) ≫
-        (ch_rPush.Φ M).map ((ce_rPull.β a).hom.app K))),
-  ∃ (_rawF_normalization : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M)
-      (K : PbcComplete l (pbcFiniteField.{u} l Ω E) T),
-    HEq ((rawF.β a).hom.app ((pbcAmbientCompleteLocalization l Ω T E).obj K))
-      ((pbcAmbientCompleteIntegralComparison l Ω X a).hom.app
-          ((sbcPull l (pbcFiniteField.{u} l Ω E) f).obj
-            ((sbcPush l (pbcFiniteField.{u} l Ω E) g).obj K)) ≫
-        (pbcAmbientCompleteLocalization l Ω X M).map
-          ((cf_pPull a).hom.app
-              ((sbcPush l (pbcFiniteField.{u} l Ω E) g).obj K) ≫
-            (sbcPull l (pbcFiniteField.{u} l Ω M) f).map
-              ((cg_pPush a).hom.app K)) ≫
-        (sbcRationalLeft l (pbcFiniteField.{u} l Ω M)
-          (f := f) (g := g)).map
-          ((pbcAmbientCompleteIntegralComparison l Ω T a).inv.app K))),
-  ∃ (_rawG_normalization : ∀ {E M : Padic.FiniteCoefficientFields l Ω} (a : E ≤ M)
-      (K : PbcComplete l (pbcFiniteField.{u} l Ω E) T),
-    HEq ((rawG.β a).hom.app ((pbcAmbientCompleteLocalization l Ω T E).obj K))
-      ((pbcAmbientCompleteIntegralComparison l Ω X a).hom.app
-          ((sbcPush l (pbcFiniteField.{u} l Ω E) h).obj
-            ((sbcPull l (pbcFiniteField.{u} l Ω E) e).obj K)) ≫
-        (pbcAmbientCompleteLocalization l Ω X M).map
-          ((ch_pPush a).hom.app
-              ((sbcPull l (pbcFiniteField.{u} l Ω E) e).obj K) ≫
-            (sbcPush l (pbcFiniteField.{u} l Ω M) h).map
-              ((ce_pPull a).hom.app K)) ≫
-        (sbcRationalRight l (pbcFiniteField.{u} l Ω M)
-          (h := h) (e := e)).map
-          ((pbcAmbientCompleteIntegralComparison l Ω T a).inv.app K))),
+  ∃ (_rawF_composite : RawLeftComposite l Ω cf_rPull cg_rPush rawF),
+  ∃ (_rawG_composite : RawRightComposite l Ω ch_rPush ce_rPull rawG),
+  ∃ (_rawF_normalization : RawLeftNormalization l Ω cf_pPull cg_pPush rawF),
+  ∃ (_rawG_normalization : RawRightNormalization l Ω ch_pPush ce_pPull rawG),
   ∃ (rawAlpha : StageSystem.Morphism.Hom rawF rawG),
   ∃ (_rawAlpha_eq : ∀ (E : Padic.FiniteCoefficientFields l Ω), HEq (rawAlpha.τ E)
     (sbcRationalExchange l (pbcFiniteField.{u} l Ω E) sq)),

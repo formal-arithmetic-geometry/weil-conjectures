@@ -1,0 +1,140 @@
+{
+ "kind": "definition",
+ "status": "split",
+ "import_flags": [],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+  "place": "Final compatibility sentence, ordinary strict-system realization and coefficient-mate expansion"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-verdier-exchange",
+   "place": "Final compatibility sentence: actual system and coefficient realization data",
+   "via": [
+    "lem-sf-adic-exceptional-compositor-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "id": "def-coef-system-compact-support-compositor",
+ "title": "Canonical strict-system compact support and graph-refinement compositor",
+ "statement": "Let C be a tower of commutative coefficient rings with adjacent transition maps. Use the actual semilinear system operations [def-sp-semilinear-constant-ring-operations] and their unit/counit-normalized comparisons [def-sf-semilinear-proper-open-comparisons], [def-coef-semilinear-proper-open-mate]. For a compactification c=(j,p) [def-weil-compactifications-refinements], define support C τ c to be J_j followed by R_p. Define refinement by the open-unit gamma and proper compositor. Define change between compactifications using the canonical graph common refinement, inverting the second refinement on its isomorphism domain. Define triangleWord by proper/open interchange and the open and proper compositors of a compatible compactification triangle. For composable quasi-compact maps and compactifications cf,cg,cfg, compositor is change to the canonical compactification triangle, triangleWord, then change back to cfg, on each actual derived system object. These are specified maps before finite evaluation or inverse limit.",
+ "stmt_deps": [
+  "def-sp-semilinear-constant-ring-operations",
+  "def-sf-semilinear-proper-open-comparisons",
+  "def-coef-semilinear-proper-open-mate",
+  "def-weil-compactifications-refinements"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphism for compact support composition on adic coefficient systems normalized by reconstruction counit",
+   "results": "CategoryTheory.Adjunction.counitAsIsoOfIso; CategoryTheory.Endofunctor.Adjunction.AlgCoalgEquiv.counitIso; CategoryTheory.Adjunction.compCoyonedaIso; CategoryTheory.OverPresheafAux.counit; CategoryTheory.Mat_.embeddingLiftIso; CategoryTheory.Cokleisli.Adjunction.toCokleisliCompFromCokleisliIsoSelf; localCohomology.diagramComp; CompHausLike.LocallyConstant.counit",
+   "date": "2026-10-24",
+   "verdict": "Generic categorical constructions only; reuse exact published project definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical compact support compositor on strict coefficient systems and coefficient compatible left compositors",
+   "results": "FormalMultilinearSeries.compAlongComposition; CompactlySupportedContinuousMap.compLeft; HasCompactSupport.comp_left; HVertexOperator.compHahnSeries; CompactlySupportedContinuousMap.coe_compLeft; FormalMultilinearSeries.comp; FormalMultilinearSeries.compAlongComposition_apply; hasCompactSupport_comp_left",
+   "date": "2026-10-24",
+   "verdict": "No exact sheaf/system notion in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq and its refl, inv_app, hom_counit, unit_leftAdjointUniq_hom, trans, hom_app_counit, unit_leftAdjointUniq_hom_app and assoc variants (12 hits)",
+   "date": "2026-10-24",
+   "verdict": "Use canonical adjunction-uniqueness comparisons rather than free isomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "LeftCompositors|supportPresentation|systemLeft|systemRight",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib notion."
+  },
+  {
+   "tool": "rg; grep; blueprint_refs.py",
+   "query": "LeftCompositors|directIdentification|FiniteFreeCompactComposition.support|FiniteFreeCompactComposition.compositor in lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search compositor",
+   "results": "Exact definitions in ConstructibleExceptionalCompositor.lean, IntegralCompactificationComparisonBridge.lean, FiniteFreeCompactComposition.lean. No upstream WeilConjectures matches. Definition def-sf-finite-exceptional-compositor-maps owns finiteAlpha and exceptionalIso; no definition owner of LeftCompositors, integralAlpha, directIdentification or system support/compositor. Blueprint search: cor-pur-vector-bundle-purity, det-sp-composition-comparisons, det-sp-composition-factors, lem-trf-trace-map-from-external-duality.",
+   "date": "2026-10-24",
+   "verdict": "Create existing:true definition ownership records only for the uncovered published definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-exceptional-compositor-coefficients",
+  "date": "2026-10-24",
+  "group": "NG"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFreeCompactComposition",
+  "declaration": "WeilConjectures.FiniteFreeCompactComposition.compositor",
+  "declarations": [
+   "WeilConjectures.FiniteFreeCompactComposition.support",
+   "WeilConjectures.FiniteFreeCompactComposition.refinement",
+   "WeilConjectures.FiniteFreeCompactComposition.change",
+   "WeilConjectures.FiniteFreeCompactComposition.triangleWord",
+   "WeilConjectures.FiniteFreeCompactComposition.compositor"
+  ],
+  "statement": "def compositor {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}\n    [QuasiCompact f] [QuasiCompact g]\n    (cf : Compactification f) (cg : Compactification g) (cfg : Compactification (f ≫ g))\n    (M : Derived C τ X) :\n    (support C τ cg).obj ((support C τ cf).obj M) ⟶ (support C τ cfg).obj M",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 ownership repair: these are the existing published definitions, reused verbatim, without using the containing theorem existential conclusion and without duplicating a Lean declaration."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc11fa891",
+  "group": "NG",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc11fa891",
+  "group": "NG",
+  "result": "fix",
+  "note": "Re-delivery after ee56 RETURN H2+H3; both repaired. H2: item keeps base 7 stmt_deps plus 4 new def nodes and drops the theorem edge. New existing:true owners def-sf-exceptional-compositor-coefficient-data (LeftCompositors/integralAlpha/integralLeft/LeftCoefficientEquation), def-coef-system-compact-support-compositor (FiniteFreeCompactComposition.*) and def-sf-integral-compact-support-realization-map (directIdentification); before this delivery each was recorded only by a theorem node. H3: OperationNormalization pins U.F/U.G (equal to cartesian.F/G), adj unit/counit (HEq), U.left = cartesian.supportIso ≫ canonical supportPresentation (leftAdjointUniq/rightAdjointUniq), finiteLeft/finiteRight via cartesian.supportEvaluation/exceptionalEvaluation with P.ring.left/finiteImageIso/P.ring.finiteRight, and integralLeft = lim U.left ≫ inverse operationSupportPresentation ≫ inverse reconstruction counit ≫ directIdentification. integralRight is unique by integralCounit. The −α counterexample no longer changes the statement. SystemScalar is pinned by actual_eq/eqToIso/limit_canonical; SystemComparison left/right are determined by leftLimit/rightLimit. Clauses, edge cases (ℕ+, e=1, identities, empty schemes), universes, docstrings and the sorry-only proof are OK; lean.statement is verbatim. FIX H4/H12: new existing:true def-pur-finite-compact-support-realization-map duplicates PurCompactSupport.finiteImageIso, already owned by landed def-pur-finite-compact-support-scalar-data (N6, on base). Fix: drop it, and in fixes/def-sf-adic-exceptional-compositor-realization-data.json repoint its stmt_dep and citation to def-pur-finite-compact-support-scalar-data, adding the direct owners def-weil-exceptional-inverse-image and def-sf-finite-exceptional-compositor-maps with citations. fixes/def-sf-ramified-system-scalar-realization-data.json adds def-pur-finite-compact-support-scalar-data (Ramification/finiteChange). Citations equal stmt_deps; no cycle; the item closure does not grow. No Lean change, no compile. Advisory: H11 self-audit second reading.; dropped duplicate new node(s) def-pur-finite-compact-support-realization-map (--drop-nodes; not merged, the item points at the landed declaration)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T070557-L-3620943",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.FiniteFreeCompactComposition.openRestrictionInv_isIso",
+   "WeilConjectures.FiniteFreeCompactComposition.pullRestrictionInv_isIso",
+   "WeilConjectures.FiniteFreeCompactComposition.pushRestriction_isIso",
+   "WeilConjectures.FiniteFreeCompactComposition.systemComposition"
+  ],
+  "sorry_after": [
+   "WeilConjectures.FiniteFreeCompactComposition.openRestrictionInv_isIso",
+   "WeilConjectures.FiniteFreeCompactComposition.pushRestriction_isIso",
+   "WeilConjectures.FiniteFreeCompactComposition.systemComposition"
+  ]
+ }
+}

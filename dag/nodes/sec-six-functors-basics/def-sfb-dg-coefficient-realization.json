@@ -1,0 +1,155 @@
+{
+ "id": "def-sfb-dg-coefficient-realization",
+ "kind": "definition",
+ "title": "Sheaf dg coefficient realizations and normalized arrows",
+ "statement": "Let $D\\to A$ be a map of commutative rings and let $Y\\to\\operatorname{Spec}D$ be a scheme [def-pc-scheme]. For each commutative $D$-algebra $E$ with a specified $D$-algebra map $E\\to A$, put $Y_E=Y\\times_D\\operatorname{Spec}E$, $p_E:Y_E\\to Y$, and $\\pi_E:Y_A\\to Y_E$ [def-pc-fibre-product]. Define $R_E$ to be normalization, with its shuffle product, of the standard polynomial simplicial resolution of $E/D$ [def-trf-cotangent-resolution-data, lem-trf-cotangent-resolution-coherence], normalized by [lem-sfb-simplicial-algebra-shuffle-normalization], with its evaluation augmentation $R_E\\to E$ and the functorial maps $R_E\\to R_A$; at $E=D$ use the constant resolution $R_D=D$. The underlying polynomial resolution is augmented quasi-isomorphically to $E$ and its normalization has flat $D$-module terms, hence is $D$-K-flat by the ordinary-module case [lem-pc-module-bounded-flat-kflat]. The underlying complex has zero positive terms, and dg multiplication and actions satisfy the signed Leibniz rule [def-sfb-dg-derived-category]. Set $\\mathcal B=\\mathcal O_Y\\otimes_D R_A$, with total differential and multiplication.\n\nUse the sheaf dg module conventions and localization of [def-sfb-sheaf-dg-module-localization] on the Zariski space of $Y$. A left sheaf dg $\\mathcal B$-module is an integer-graded sheaf with differential $d$ and a unital associative action satisfying $d(bx)=d(b)x+(-1)^{|b|}b\\,d(x)$. Let $D_{\\mathrm{QCoh}}(\\mathcal B)$ be its homotopy category localized at maps inducing isomorphisms on underlying cohomology sheaves, restricted to objects whose underlying $\\mathcal O_Y$-cohomology is quasi-coherent [pqf-def-coherent]. Shifts and cones use [def-sfb-sheaf-dg-module-localization, def-weil-triangulated-category]; in particular a homogeneous $b$ acts on the shifted module $M[k]$ by $(-1)^{k|b|}b$, and the cone is $N\\oplus M[1]$ with that shifted action. Write $U$ for forgetting the dg action to $D(\\mathcal O_Y)$ [def-pc-derived-category]. An object is called perfect over $\\mathcal B$ if locally on $Y$ it belongs to the smallest full subcategory containing $\\mathcal B$ and closed under finite sums, shifts, cones and direct summands.\n\nFor $G\\in D(\\mathcal O_{Y_E})$ define its coefficient realization by the relative derived tensor\n$$\\Phi_E(G)=R_A\\otimes_{R_E}^{\\mathbf L}Rp_{E*}G,$$\nretaining the commuting $\\mathcal O_Y$-action, and using $R_E\\to E$ for the action on $Rp_{E*}G$. The tensor is the two-sided derived tensor over the constant dg algebra $R_E$; it is computed by the $D$-relative flat bar construction [lem-sfb-sheaf-dg-relative-flat-bar-extension], applied with $\\mathcal S=\\mathcal O_Y$, $P=R_E$, $Q=R_A$, without requiring $G$ to be $D$-flat. The affine direct image and all tensors are derived [def-pc-derived-direct-image, def-pc-module-kflat-complex]. For $E=D$ this is $R_A\\otimes_D^{\\mathbf L}G=\\mathcal B\\otimes_{\\mathcal O_Y}^{\\mathbf L}G$.\n\nFor $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_{Y_A})$, let $\\widehat K$ be $R\\pi_{D*}K$ with dg action induced by $R_A\\to A$ and the given $A$-action on $K$. Here derived direct images are formed in the coefficient-linear sheaf module categories before forgetting scalars, so the $E$- and $A$-actions are retained. Thus $Rp_{E*}$ is the derived direct image [def-pc-ringed-spaces-derived-direct-image] along the ringed-space morphism $(Y_E,\\mathcal O_{Y_E})\\to(Y,p_{E*}\\mathcal O_{Y_E})=(Y,\\mathcal O_Y\\otimes_DE)$, and $R\\pi_{D*}$ the one along $(Y_A,\\mathcal O_{Y_A})\\to(Y,\\mathcal O_Y\\otimes_DA)$. Use the canonical composition identification $Rp_{E*}R\\pi_{E*}K\\simeq R\\pi_{D*}K$ in $D(\\mathcal O_Y\\otimes_DE)$, with $R\\pi_{D*}K$ restricted along $\\mathcal O_Y\\otimes_DE\\to\\mathcal O_Y\\otimes_DA$: it is [lem-pc-ringed-spaces-derived-direct-image-composition] applied to $(Y_A,\\mathcal O_{Y_A})\\to(Y_E,\\mathcal O_{Y_E})\\to(Y,\\mathcal O_Y\\otimes_DE)$ and to $(Y_A,\\mathcal O_{Y_A})\\to(Y,\\mathcal O_Y\\otimes_DA)\\to(Y,\\mathcal O_Y\\otimes_DE)$, whose composites agree because the base triangle commutes; the second map has identity underlying space, so its direct image is the exact restriction of scalars. After further restriction along $\\mathcal O_Y\\otimes_DR_E\\to\\mathcal O_Y\\otimes_DE$ it is an isomorphism of sheaf dg modules over $\\mathcal O_Y\\otimes_DR_E$. Given $\\gamma:G\\to R\\pi_{E*}K$, define $\\nu_E(\\gamma):\\Phi_E(G)\\to\\widehat K$ by derived extension of $Rp_{E*}\\gamma$ followed by the action counit of [lem-sfb-sheaf-dg-relative-flat-bar-extension] $R_A\\otimes_{R_E}^{\\mathbf L}R\\pi_{D*}K\\to R\\pi_{D*}K$. This specifies the actual counit map, not an arbitrary map with the same cohomology.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tags 0FRF (definition-dga), 0FRI (definition-dgm), 0FT5 (definition-derived-category), 0FS5 (definition-cone), 0FTF (lemma-derived-tensor-product). Standard coefficient resolutions: cotangent.tex Tag 08PM (definition-standard-resolution). The particular coefficient-realization notation is agent-defined."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-trf-cotangent-resolution-data",
+  "def-sfb-dg-derived-category",
+  "pqf-def-coherent",
+  "def-weil-triangulated-category",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-module-kflat-complex",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-sfb-simplicial-algebra-shuffle-normalization",
+  "lem-pc-module-bounded-flat-kflat",
+  "def-sfb-sheaf-dg-module-localization",
+  "lem-sfb-sheaf-dg-relative-flat-bar-extension",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pc-ringed-spaces-derived-direct-image-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient algebra on a scheme via a nonpositive flat differential graded resolution of the coefficient ring and normalized scalar action maps",
+   "results": "{\"t\": \"2026-10-24T01:39:32Z\", \"tool\": \"leanfinder\", \"query\": \"Derived coefficient algebra on a scheme via a nonpositive flat differential graded resolution of the coefficient ring and normalized scalar action maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"PresheafOfModules.DifferentialsConstruction.derivation'\", \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"PresheafOfModules.Derivation'.Universal.mk\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"CommRingCat.KaehlerDifferential.D\", \"PresheafOfModules.Derivation'.d_app\"], \"digest\": \"6c3f46186c8d096c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: PresheafOfModules.DifferentialsConstruction.instHasDifferentials, PresheafOfModules.DifferentialsConstruction.derivation', PresheafOfModules.DifferentialsConstruction.isUniversal', PresheafOfModules.Derivation'.Universal.mk, PresheafOfModules.DifferentialsConstruction.relativeDifferentials', PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj, CommRingCat.KaehlerDifferential.D, PresheafOfModules.Derivation'.d_app; these concern ordinary modules, ordinary scheme pullbacks, fractions, differentials or smooth algebra descent, not the stated sheaf dg coefficient model or finite-stage arrow realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DifferentialGradedAlgebra\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-24T01:39:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"DifferentialGradedAlgebra\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ; these concern ordinary modules, ordinary scheme pullbacks, fractions, differentials or smooth algebra descent, not the stated sheaf dg coefficient model or finite-stage arrow realization"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*coefficient|differential.*graded|dg.*module",
+   "results": "{\"t\": \"2026-10-24T01:39:31Z\", \"tool\": \"grep\", \"query\": \"derived.*coefficient|differential.*graded|dg.*module\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ; these concern ordinary modules, ordinary scheme pullbacks, fractions, differentials or smooth algebra descent, not the stated sheaf dg coefficient model or finite-stage arrow realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived fibre product coefficient algebra and perfect modules on a scheme",
+   "results": "{\"t\": \"2026-10-24T01:39:31Z\", \"tool\": \"leansearch\", \"query\": \"Derived fibre product coefficient algebra and perfect modules on a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pullbackSpecIso\", \"Perfection.coeff\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.Flat.instFstScheme\", \"Algebra.QuasiFinite.finite_fiber\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.SpecOfPoint\"], \"digest\": \"36340b6ab0e6cac5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.pullbackSpecIso, Perfection.coeff, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.Flat.instFstScheme, Algebra.QuasiFinite.finite_fiber, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, AlgebraicGeometry.Scheme.Pullback.SpecOfPoint; these concern ordinary modules, ordinary scheme pullbacks, fractions, differentials or smooth algebra descent, not the stated sheaf dg coefficient model or finite-stage arrow realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of differential graded modules over the derived tensor product of a scheme structure ring with a coefficient algebra",
+   "results": "{\"t\": \"2026-10-24T01:39:57Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves of differential graded modules over the derived tensor product of a scheme structure ring with a coefficient algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules\", \"ModuleCat.tilde\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"AlgebraicGeometry.Scheme.Modules.instCategory\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"AlgebraicGeometry.Scheme.PresheafOfModules\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"AlgebraicGeometry.Scheme.Modules.isSheaf\"], \"digest\": \"6ab877ae8c7af389\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Scheme.Modules, ModuleCat.tilde, PresheafOfModules.DifferentialsConstruction.relativeDifferentials', AlgebraicGeometry.Scheme.Modules.instCategory, PresheafOfModules.DifferentialsConstruction.instHasDifferentials, AlgebraicGeometry.Scheme.PresheafOfModules, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj, AlgebraicGeometry.Scheme.Modules.isSheaf; these concern ordinary modules, ordinary scheme pullbacks, fractions, differentials or smooth algebra descent, not the stated sheaf dg coefficient model or finite-stage arrow realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of differential graded modules and derived extension of scalars over a polynomial simplicial resolution of a ring",
+   "results": "{\"t\": \"2026-10-24T03:07:22Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves of differential graded modules and derived extension of scalars over a polynomial simplicial resolution of a ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ext\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"DerivedCategory.instLinearCochainComplexIntQ\", \"PresheafOfModules.DifferentialsConstruction.derivation'\", \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"PresheafOfModules.HasDifferentials\"], \"digest\": \"579536a3e44f06af\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration supplies this coefficient realization and its normalized action counit; related hits only concern ordinary module extension and additive normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DifferentialGradedAlgebra\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-24T03:08:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"DifferentialGradedAlgebra\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration supplies this coefficient realization and its normalized action counit; related hits only concern ordinary module extension and additive normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "shuffle|DifferentialGraded|dgModule",
+   "results": "{\"t\": \"2026-10-24T03:08:27Z\", \"tool\": \"grep\", \"query\": \"shuffle|DifferentialGraded|dgModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Alternating/DomCoprod.lean\", \"Mathlib/LinearAlgebra/Alternating/DomCoprod.lean\", \"Mathlib/LinearAlgebra/Alternating/DomCoprod.lean\", \"Mathlib/CategoryTheory/Monoidal/Comon_.lean\", \"Mathlib/Topology/OpenPartialHomeomorph/Composition.lean\", \"Mathlib/Data/Nat/Totient.lean\", \"Mathlib/Data/Nat/Totient.lean\"], \"digest\": \"4282b901cf6729f2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration supplies this coefficient realization and its normalized action counit; related hits only concern ordinary module extension and additive normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension for sheaves of differential graded modules",
+   "results": "{\"t\": \"2026-10-24T03:08:27Z\", \"tool\": \"leansearch\", \"query\": \"Derived scalar extension for sheaves of differential graded modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.obj'\", \"ModuleCat.extendRestrictScalarsAdj\", \"AlgHom.extendScalars\", \"Derivation.coe_restrictScalars\", \"SheafOfModules.restrictScalars\", \"ModuleCat.CoextendScalars.isModule\", \"PresheafOfModules.Derivation\", \"LinearMap.extendScalarsOfSurjective\"], \"digest\": \"1973af93c973100e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration supplies this coefficient realization and its normalized action counit; related hits only concern ordinary module extension and additive normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-global-witness-one-degree-binary-patching",
+  "date": "2026-10-24",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: Sheaf dg coefficient realizations and normalized arrows.",
+   "via": [
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "def-sfb-dg-coefficient-realization",
+  "worker": "stage1",
+  "summary": "Split this definition by exposing generic sheaf dg module localization, shuffle normalization, and a D-relative bar computation with its actual action counit. Reused the existing polynomial resolution theorem and bounded-above flat module K-flat theorem. Kept all coefficient realization formulas and hypotheses; made the left shift sign and coefficient-linear pushforward interpretation explicit. New prerequisites are statement-only and no Lean was written. Repaired the literal unspecified-ring-map ambiguity by requiring E to A to be a D-algebra map; the failing noncommutative base triangle is documented as STATEMENT-DISPUTED in the report.",
+  "blueprint": "Serves the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain, at the global single-degree witness patching coefficient-model definition; no change to the unit route. Generic normalization and relative flat bar are below that definition. The inherited blueprint ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-335b400c1",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-335b400c1 (reviewer sub-agent of L); spot-checked: FIX: one citation fault in the item (C4); the three new nodes are accepted unchanged. Live and side-live still have the item unsplit with no repair note, and none of the new ids exists live. (1) The item's composition step Rp_{E*}Rπ_{E*}K ≃ Rπ_{D*}K cited lem-pc-derived-direct-image-composition. That node gives the isomorphism only in D(O) of schemes, but ν_E needs it R_E-linearly, in the coefficient-linear categories the item itself names. Repaired in fixes/dag/nodes/sec-six-functors-basics/def-sfb-dg-coefficient-realization.json: the item now cites def-pc-ringed-spaces-derived-direct-image and lem-pc-ringed-spaces-derived-direct-image-composition. That lemma is applied to (Y_A,O)→(Y_E,O)→(Y,O_Y⊗E) and to (Y_A,O)→(Y,O_Y⊗A)→(Y,O_Y⊗E); the second map has identity underlying space, so its direct image is exact restriction. The two composites agree because E→A is now a D-algebra map. The unused scheme lemma was removed from stmt_deps; no cycle. (2) Checked the changes against base. The repair to 'D-algebra map' is correct: with D=E=A=Z[t] and t↦0, π_E is not over Y. Citers use D→E→A, so they are consistent. lem-trf-cotangent-resolution-coherence correctly supplies the resolution and the augmentation-compatible maps R_E→R_A, which def-trf-cotangent-resolution-data does not assert. lem-pc-module-bounded-flat-kflat gives D-K-flatness of the direct-summand-of-polynomial terms. (3) Shuffle normalization: checked against Stacks 017V/019A/019C (D(U)=J, quotient quasi-iso, D-direct summand). The EZ shuffle formula was tested at p=q=1 (s_1x s_0y−s_0x s_1y, graded-commutative), plus the unit, constant D and the augmentation quasi-iso. (4) Sheaf dg localization def: matches sdga 0FRF/0FRI/0FS5/0FT5 with left modules. Hand-checked the Leibniz rule for the shift (−1)^{k|a|}, the cone with the shifted action, and the linearity of dh+hd. It is not a duplicate of def-sfb-dg-derived-category (right modules, Z, no sheaves). (5) Relative flat bar lemma: existence and adjunction are sdga 0FTF/0FTR with the identity topos. The bar representative is true. d² cancels with the (−1)^n convention. B(Q,P,−) preserves quasi-isos via the bar filtration, using K-flat P and Q over D. The left-deformation argument works because the cone of B(Q,P,P)→Q is acyclic and K-flat over D. The counit is a chain map, and the P=D clause holds. It is not a duplicate of lem-coef-dg-two-sided-bar-derived-tensor (Z dg categories, no S-action). (6) Batch 5: lem-trf-cotangent-resolution-coherence is generic commutative algebra (standard resolution, Stacks 08PM). Its 562-node closure contains no trace-formula or Poincaré theorem and no nt-assume leaf. It is already a common tool, and def-trf data was cited at base. Accepted as outside both assumptions. The item is a definition with no proof steps, so there are no route or tool_uses issues. No SGA.; 1 file(s) fixed by the reviewer"
+ }
+}

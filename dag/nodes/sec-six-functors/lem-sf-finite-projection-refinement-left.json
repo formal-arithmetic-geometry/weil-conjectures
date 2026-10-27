@@ -1,0 +1,199 @@
+{
+ "id": "lem-sf-finite-projection-refinement-left",
+ "kind": "statement",
+ "title": "Witnessed refinement intertwining for the first finite diamond route",
+ "statement": "Fix a finite-field datum D, its coefficient datum C with prime ell, a finite extension E of Q_ell, and n>=1. Write A=ULift(O_E/t^n), with the discrete topology, and use the actual fixed-scalar operations of [def-sf-finite-projection-exchange-coordinates]. Let X,Y,Yprime be SixFunctorSpace D, and f:X->Y, g:Yprime->Y morphisms whose underlying scheme maps are separated, locally of finite type and quasi-compact. Let Xprime be any scheme with maps a:Xprime->X and fprime:Xprime->Yprime forming a cartesian square with f and g. Let K in D(X_proet,A) satisfy finiteBC and let L in D(Y_proet,A) satisfy finiteCTF (bounded constructible of finite Tor amplitude). For every pair c,d of compactifications of f and refinement r:c->d, and every supplied etale-origin presentation O of K and OT of a*K tensor fprime*g*L, diamondLeft(s,c,K,L) followed by the base-changed witnessed rho_OT equals g*(rho_O tensor 1) followed by diamondLeft(s,d,K,L). No finite Tor amplitude of K and no absolute separatedness of X,Y,Yprime is required.",
+ "stmt_deps": [
+  "def-sf-finite-projection-exchange-coordinates"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Original item proof steps 6, 7"
+ },
+ "proof": [
+  {
+   "text": "write T=K tensor f*L. Pullback preserves L's finite Tor interval and bounded\nconstructibility; tensoring with K preserves bounded constructibility. Pullback of\narbitrary bounded constructible K preserves its cohomological interval, without a\nTor hypothesis on K. Constructible origin supplies witnesses for T and a*T, and\nnaturality transports the comparison to each supplied witness e and eT.\nFor a refinement r, projection compatibility gives PF_c followed by rho_T equal to\nrho_K tensor 1 followed by PF_d. Exchange compatibility gives Ex_c followed by the\nbase-changed rho at a*T equal to g*rho_T followed by Ex_d. Naturality of the\nbase-changed comparison with respect to the canonical target map identifies this\nwith rho at a*K tensor f'*g*L. Substitute the projection and exchange equations into\ndiamondLeft and use functoriality of g*. The intermediate rho_T cancels, leaving\nexactly the displayed equality. The comparison cocycle identifies the single-refinement\nmap with the common-refinement composite in the projection-comparison theorem.\nThe coefficient hypotheses for arbitrary-K pullback follow from the coefficient DVR:\nits residue field and all positive uniformizer quotients are finite, and each quotient\nis perfect by its two-term free resolution. No finite Tor hypothesis on K is used.",
+   "uses": [
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-sf-proetale-constructible-origin",
+    "lem-weil-pbc-pullback-preserves-bounded-constructible",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-fix-projection-compactification-comparison",
+    "fix-lem-exchanges",
+    "prop-compactification-coherence-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Original item proof steps 6, 7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-pbc-pullback-preserves-bounded-constructible",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-fix-projection-compactification-comparison",
+  "fix-lem-exchanges",
+  "prop-compactification-coherence-detailed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Expanded fixed-scalar form of original steps 6, 7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Projection formula base change compatibility adjunction mates monoidal natural transformation",
+   "results": {
+    "t": "2026-10-25T09:46:12Z",
+    "tool": "leansearch",
+    "query": "Projection formula base change compatibility adjunction mates monoidal natural transformation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.NatTrans.IsMonoidal.mk",
+     "CategoryTheory.NatTrans.IsMonoidal.tensor",
+     "CategoryTheory.NatTrans.IsMonoidal.of_cartesianMonoidalCategory",
+     "CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit",
+     "CategoryTheory.leftAdjointMate",
+     "CategoryTheory.NatTrans.IsMonoidal",
+     "CategoryTheory.rightAdjointMate",
+     "CategoryTheory.frobeniusMorphism_mate"
+    ],
+    "digest": "b4966417fc368ec8"
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact fixed-scalar pro-etale coherence statement; generic categorical APIs are used in the parent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"homEquiv\"",
+   "results": {
+    "t": "2026-10-25T09:35:43Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Adjunction, \"homEquiv\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.mkOfHomEquiv",
+     "CategoryTheory.Adjunction.homEquiv",
+     "CategoryTheory.Adjunction.homEquiv'",
+     "CategoryTheory.Adjunction.corepresentableBy_homEquiv",
+     "CategoryTheory.Adjunction.representableBy_homEquiv",
+     "CategoryTheory.Adjunction.comp_homEquiv",
+     "CategoryTheory.Adjunction.homEquiv_apply",
+     "CategoryTheory.Adjunction.homEquiv_unit"
+    ],
+    "digest": "d4686c3e2e7585d2"
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact fixed-scalar pro-etale coherence statement; generic categorical APIs are used in the parent."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*projection",
+   "results": {
+    "t": "2026-10-25T09:35:42Z",
+    "tool": "grep",
+    "query": "projection.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*projection",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact fixed-scalar pro-etale coherence statement; generic categorical APIs are used in the parent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support projection commutes with refinement comparison isomorphism",
+   "results": {
+    "t": "2026-10-25T10:27:22Z",
+    "tool": "leanfinder",
+    "query": "Compact support projection commutes with refinement comparison isomorphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.proj_eq_of_subset",
+     "Profinite.NobelingProof.projRestricts_eq_comp",
+     "Profinite.NobelingProof.ProjRestricts",
+     "Profinite.NobelingProof.GoodProducts.smaller_factorization",
+     "Profinite.IndexFunctor.map_comp_π_app",
+     "Profinite.NobelingProof.proj_comp_of_subset",
+     "Profinite.NobelingProof.projRestricts_comp_projRestrict",
+     "Profinite.NobelingProof.coe_πs'"
+    ],
+    "digest": "b4c70a7af4f03d54"
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match; the returned generic or unrelated declarations do not state this fixed-scalar normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProjectionExchangeTransposes",
+  "date": "2026-10-25",
+  "group": "C9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Projection diamonds sentence, via finite open/proper factor calculation",
+   "via": [
+    "lem-sf-finite-projection-exchange-transposes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProjectionRefinementLeft",
+  "file": "lean/Sheaf/Paper/FiniteProjectionRefinementLeft.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteProjectionExchange.refinement_left",
+  "statement": "theorem refinement_left (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n) : letI := Padic.finite_coefficientExtensionRing C.l E n hn letI : TopologicalSpace (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)) := ⊥ letI : DiscreteTopology (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)) := discreteTopology_bot _ ∀ (X Y Y' : SixFunctorSpace D) (f : X ⟶ Y) (g : Y' ⟶ Y) [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] [IsSeparated g.hom.left] [LocallyOfFiniteType g.hom.left] [QuasiCompact g.hom.left] (X' : Scheme.{u}) (a : X' ⟶ X.obj.left) (f' : X' ⟶ Y'.obj.left) (s : IsPullback a f' f.hom.left g.hom.left) (K : Dcat (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)) X.obj.left) (L : Dcat (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)) Y.obj.left), finiteBC C.l E n hn X.obj.left K → finiteCTF C.l E n hn Y.obj.left L → ∀ (c d : Compactification f.hom.left) (r : c.Refinement d) (O : EtaleOriginDerivedCategory X.obj.left (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n))) (e : refinementFixedObject X.obj.left _ O ≅ K) (OT : EtaleOriginDerivedCategory X' (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n))) (eT : refinementFixedObject X' _ OT ≅ tensor _ X' ((pull _ a).obj K) ((pull _ f').obj ((pull _ g.hom.left).obj L))), diamondLeft _ s c K L ≫ (rho _ (baseRefinement s r) _ OT eT).hom = (pull _ g.hom.left).map (tensorMap _ (rho _ r K O e).hom (𝟙 L)) ≫ diamondLeft _ s d K L",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteProjectionExchange.refinement_left"
+  ],
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-97c08",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261025T122658-L-1795676",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-97c08",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261025T122658-L-1795676",
+  "kind": "interface",
+  "note": "independent cc review: item module + new FiniteProjectionExchangeData vs clone item (moved block identical modulo blueprint tags); four new sorry statements vs item SquareLaw/RefinementLaw/IdentityLaw clauses and canonical defs of theta/mu/upperStarId; node fields vs Lean proof; unit realized empty"
+ }
+}

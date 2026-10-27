@@ -1,0 +1,134 @@
+{
+ "id": "lem-sp-integral-tower-image-reconstruction",
+ "kind": "statement",
+ "title": "Normalized compact-support towers, their Tor bounds, and canonical integral reconstruction.",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, and the integral coefficient, reduction, and strict tower constructions of [def-sp-integral-direct-image-tower-data]. Normalized compact-support towers, their Tor bounds, and canonical integral reconstruction. The precise quantifiers, domains and canonical arrows are the Lean statement below.\n\ntheorem image_reconstruction (s : Presentation l E)\n    (q : ReductionGeometry l E s) (hq : OpenReductionIsIso l E s q)\n    (L : ∀ T : Scheme.{u}, Limit l E s T) :\n    ∀ (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]\n      (X Y : Scheme.{u}) [X.Over (Spec (.of k))]\n      [Y.Over (Spec (.of k))]\n      [LocallyOfFiniteType (X ↘ Spec (.of k))]\n      [QuasiCompact (X ↘ Spec (.of k))]\n      [IsSeparated (X ↘ Spec (.of k))]\n      [LocallyOfFiniteType (Y ↘ Spec (.of k))]\n      [QuasiCompact (Y ↘ Spec (.of k))]\n      [IsSeparated (Y ↘ Spec (.of k))]\n      (f : X ⟶ Y) [f.IsOver (Spec (.of k))]\n      (d : ℕ) [SmoothOfRelativeDimension d f],\n    ∀ c : Compactification f,\n      Nonempty (CanonicalTowerComparison l E s q hq c) ∧\n      ∀ M : Constructible l E X,\n        spNormalizedConstructibleTorTowers l E Y (s.towers Y)\n          (imageTower l E s c M.obj) ∧\n        (∀ a b : ℤ,\n          DerivedCategory.torAmplitudeIn _ a b M.obj → ∀ n : ℕ,\n          Scheme.HasProEtaleTorAmplitude Y (SpTowerShriek.R l E n)\n            (imageLevel l E s c M.obj n) a (b + 2 * d)) ∧\n        constantModelBoundedConstructible (spIntegralCondensed l E) Y\n          ((shriek l E c).obj M.obj) ∧\n        constantModelBoundedConstructible (spIntegralCondensed l E) Y\n          ((lim l E s Y (L Y)).obj\n            (imageTower l E s c M.obj)) ∧\n        IsIso (reconstruction l E s c (L Y) q hq M)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraphs (1)-(3)"
+ },
+ "stmt_deps": [
+  "def-sp-integral-direct-image-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "reduce M using the normalized reduction theorem. Tower shriek levels and the uniform\nbound theorem give finite constructibility and widen each Tor interval by 2d. Each transition\nis the finite coefficient direct-image comparison composed with direct image of the input\ntransition, hence invertible. Complete compactification/limit realization commutes the two\nseparately derived factors with the scalar-restricted strict inverse limit: the proper factor\nis a right adjoint and quasi-compact open extension is exact and preserves products. The\ninput is complete by the integral-model criterion. Tower reconstruction gives integral\nconstructibility of the limit. The normalized equivalence identifies its reduction with\nthe original normalized strict tower. The actual ordinary and derived adjunction\nnormalizations identify this isomorphism with the constructed proper/open mate, rather than\nonly its evaluations. Its inverse limit after the completion unit is reconstruction, hence\ninvertible. Transport constructibility across that isomorphism. The empty-source image and\nthe zero input are zero, so all assertions and arbitrary Tor-interval bounds remain valid.",
+   "uses": [
+    "det-sp-reduction-tower-normalized",
+    "det-sp-tower-shriek-levels",
+    "det-sp-tower-bound-uniform",
+    "lem-sp-shriek-normalized-transition-comparison",
+    "det-sp-reduction-direct-image",
+    "lemma-nagata-open-immersion-qc-over-separated-target",
+    "lem-sp-complete-compactification-limit-realization",
+    "sk-lem-sp-tower",
+    "det-sp-normalized-equivalence",
+    "sk-lem-integral-models",
+    "sk-prop-sfb-qlbar-colimit-x"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-reduction-tower-normalized",
+  "det-sp-tower-shriek-levels",
+  "det-sp-tower-bound-uniform",
+  "lem-sp-shriek-normalized-transition-comparison",
+  "det-sp-reduction-direct-image",
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "lem-sp-complete-compactification-limit-realization",
+  "sk-lem-sp-tower",
+  "det-sp-normalized-equivalence",
+  "sk-lem-integral-models",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraphs (1)-(3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized strict tower of finite coefficient sheaves has derived inverse limit reconstructing an integral compact support direct image",
+   "results": "SheafOfModules.hasLimitsOfShape; SheafOfModules.hasLimit; CategoryTheory.Sheaf.ΓNatIsoLim; CategoryTheory.Sheaf.createsLimitsOfShape and generic sheaf limits.",
+   "date": "2026-10-25",
+   "verdict": "No match: none provides the specialized normalized integral strict tower comparisons or projection mates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"comp\"",
+   "results": "CategoryTheory.Adjunction.comp; comp_homEquiv; triangle component identities.",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction tools only; not this sheaf/tower comparison statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported integral adic sheaf pushforward reconstructs from normalized finite quotient systems with uniform Tor amplitude and satisfies projection formula",
+   "results": "localCohomology.diagram; localCohomology.ofDiagram; AdicCompletion.eval_comp_of; IsAdicComplete.StrictMono.mkQ_comp_lift; AdicCompletion.of_apply.",
+   "date": "2026-10-25",
+   "verdict": "No match: these are scalar algebraic completions or local cohomology, not the unbounded strict system derived functors."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport|derivedComplete|normalizedTower",
+   "results": "msearch returned unrelated compact support in analysis; local algebraic-geometry site search has no integral compact-support tower theorem.",
+   "date": "2026-10-25",
+   "verdict": "No matching Mathlib theorem. Existing project dependencies require transports between their independently specified presentations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralDirectImageTower",
+  "date": "2026-10-25",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-direct-image-tower",
+   "place": "Proof paragraphs (1) and (2), normalization, Tor bounds and reconstruction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralTowerImageReconstruction",
+  "file": "lean/Sheaf/Paper/IntegralTowerImageReconstruction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralDirectImageTower.image_reconstruction",
+  "statement": "theorem image_reconstruction (s : Presentation l E) (q : ReductionGeometry l E s) (hq : OpenReductionIsIso l E s q) (L : ∀ T : Scheme.{u}, Limit l E s T) : ∀ (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] (d : ℕ) [SmoothOfRelativeDimension d f], ∀ c : Compactification f, Nonempty (CanonicalTowerComparison l E s q hq c) ∧ ∀ M : Constructible l E X, spNormalizedConstructibleTorTowers l E Y (s.towers Y) (imageTower l E s c M.obj) ∧ (∀ a b : ℤ, DerivedCategory.torAmplitudeIn _ a b M.obj → ∀ n : ℕ, Scheme.HasProEtaleTorAmplitude Y (SpTowerShriek.R l E n) (imageLevel l E s c M.obj n) a (b + 2 * d)) ∧ constantModelBoundedConstructible (spIntegralCondensed l E) Y ((shriek l E c).obj M.obj) ∧ constantModelBoundedConstructible (spIntegralCondensed l E) Y ((lim l E s Y (L Y)).obj (imageTower l E s c M.obj)) ∧ IsIso (reconstruction l E s c (L Y) q hq M)",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "blueprint": "Exact component of the original proof, with the original unit route retained. Search of the whole imported blueprint found finite-coefficient coherence but no duplicate of this integral normalized comparison.",
+  "note": "Existing dependency statements are used through coordinate transport; this lemma isolates that transport and its specified canonical maps."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0fa3a",
+  "group": "B8",
+  "result": "fix",
+  "landing": "20261025T162022-L-206552",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0fa3a",
+  "group": "B8",
+  "result": "fix",
+  "landing": "20261025T162022-L-206552",
+  "kind": "interface",
+  "note": "independent cc review: integral_direct_image_tower signature vs clone a25e16ef939 (byte-identical); IntegralDirectImageTowerData vs old interface (identical decls, only plain imports and respectTransparency options changed); five split sorry statements vs item clauses and node pinning; new node statement fields vs Lean signatures"
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-integral-closed-kernel-roos",
+ "kind": "statement",
+ "title": "Ordinary closed localization vertex is the integral direct-image Roos vertex",
+ "statement": "Fix a prime l and a finite extension E of Q_l. Let i:Z→X be a closed immersion with X noetherian. For a complex K of completed integral coefficient sheaves on X, assume K and its recorded integral pullback i*K are derived complete [def-weil-derived-complete]. The derived ordinary closed composite from [def-sf-recollement-presentation-data] at K is isomorphic to the vertex of a recorded SfIntegralDirectImage i (i*K) [def-weil-derived-direct-image], with countable products supplied by the recorded integral-operations instance. No constructibility, open complement, finite-type over a field, or linearity assertion is made.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "The triangle, integral coefficient case; Constructibility, first paragraph"
+ },
+ "stmt_deps": [
+  "def-sf-recollement-presentation-data",
+  "def-weil-derived-complete",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Compare ordinary exact closed restriction of complete K with the completed integral pullback, through the completion unit and normalized finite quotient maps. The closed composite uses exactly the inverse-image map specified in the presentation.",
+   "uses": [
+    "def-sf-recollement-presentation-data",
+    "lem-sf-immersion-completed-pullback-comparison",
+    "lem-a1-integral-pullback-completed-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Closed direct image is exact, so its termwise derived functor is its total right derived functor. As a right adjoint the latter preserves countable products and sends the augmented reduction Roos triangle of the complete pullback to a distinguished Roos triangle.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "prop-weil-pbc-direct-image-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized restriction/direct-image comparisons identify the image terms with sfDirectImageTerm and all arrows with sfDirectImageTransition. Transport the triangle, its projection, and its boundary to construct SfIntegralDirectImage with vertex isomorphic to the ordinary closed composite. Use the completed direct-image reduction proof for these coefficient transports. Zero K and empty Z are included.",
+   "uses": [
+    "lem-sf-complete-direct-image-reduction",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-recollement-presentation-data",
+  "lem-sf-immersion-completed-pullback-comparison",
+  "lem-a1-integral-pullback-completed-comparison",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-sf-complete-direct-image-reduction",
+  "def-weil-derived-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "The triangle, integral coefficient case; Constructibility, first paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A complete complex pushed forward by a closed immersion is the derived inverse limit of its finite coefficient images",
+   "results": "HomologicalComplex.instHasLimit, IsClosedImmersion iff finite mono, and Scheme.Modules.instFullPushforward; no completed-coefficient Roos comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact closed immersion direct image of a complete complex is the derived inverse limit of its finite reduction direct images",
+   "results": "AdicCompletion.map_exact, condensed exact limits, and affine transition limits; no sheaf comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use the project geometric and Roos comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*[Cc]losed|[Cc]losed.*kernel|derived.*[Ll]imit.*[Pp]ush|[Pp]ush.*derived.*[Ll]imit",
+   "results": "Mathlib algebraic geometry, sheaves, and derived-category searches find closed-immersion ideals, not the needed kernel or completed direct-image comparison. Whole-blueprint searches for ordinary open kernel compact support and closed direct image Roos both returned zero.",
+   "date": "2026-10-25",
+   "verdict": "A new comparison step is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfIntegralKernelRealization",
+  "date": "2026-10-25",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "The triangle: identify the ordinary closed term i*i* with the completed integral direct-image value.",
+   "via": [
+    "lem-sf-integral-kernel-operation-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfIntegralClosedKernelRoos",
+  "file": "lean/Sheaf/Paper/SfIntegralClosedKernelRoos.lean",
+  "declaration": "WeilConjectures.sfIntegralClosedKernel_roos",
+  "statement": "theorem sfIntegralClosedKernel_roos\n    {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] [IsNoetherian X]\n    (K : DerivedCategory (scalarReductionSource.{u, u} l E X))\n    (hK : IsSfDerivedComplete l E X K)\n    (hiK : IsSfDerivedComplete l E Z ((integralDerivedPullback l E i).obj K)) :\n    letI : HasCountableProducts (DerivedCategory (scalarReductionSource.{u, u} l E X)) :=\n      integralOperationsDerivedCountableProducts l E X\n    ∃ L : SfIntegralDirectImage l E i ((integralDerivedPullback l E i).obj K),\n      Nonempty ((sfRecollementModuleClosed l E i).mapDerivedCategory.obj K ≅ L.obj)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261025T100900-L-3633754",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261025T100900-L-3633754",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

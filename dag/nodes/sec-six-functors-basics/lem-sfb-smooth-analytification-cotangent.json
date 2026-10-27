@@ -1,0 +1,334 @@
+{
+ "id": "lem-sfb-smooth-analytification-cotangent",
+ "kind": "statement",
+ "title": "Analytification of smooth schemes and their cotangent sheaves",
+ "statement": "Let $X$ be a separated scheme (its diagonal is a closed immersion) of finite type over $\\mathbf C$ [def-pc-scheme, def-weil-finite-type-morphism, def-weil-closed-immersion], smooth over $\\mathbf C$ [def-sbc-smooth-morphisms]. Its analytification $M=X^{\\mathrm{an}}$ is the space of complex points with the analytic topology and the holomorphic charts obtained from smooth affine presentations. It is a Hausdorff second-countable complex manifold, allowing the dimension to vary between components. There is a canonical morphism of ringed spaces [def-weil-locally-ringed-space-morphism] $\\pi:(M,\\mathcal O_M)\\to(X,\\mathcal O_X)$, whose map $\\mathcal O_X(U)\\to\\mathcal O_M(\\pi^{-1}U)$ sends a regular function to the same holomorphic function. A closed immersion $X\\hookrightarrow Y$ into a smooth separated finite-type $\\mathbf C$-scheme induces a closed holomorphic embedding of these manifolds. Write $\\Omega^1_{X/\\mathbf C}$ for the sheaf obtained by gluing algebraic Kähler differentials [def-weil-pbc-kahler-differentials], and define $F^{\\mathrm{an}}=\\mathcal O_M\\otimes_{\\pi^{-1}\\mathcal O_X}\\pi^{-1}F$ for an algebraic module sheaf $F$. There are canonical isomorphisms $(\\mathcal O_X)^{\\mathrm{an}}\\cong\\mathcal O_M$, $h\\otimes f\\mapsto h\\,f^{\\mathrm{an}}$, and $(\\Omega^1_{X/\\mathbf C})^{\\mathrm{an}}\\cong\\Omega_M^1$, where $\\Omega_M^1$ is the sheaf of holomorphic one-forms. The latter isomorphism sends $1\\otimes d_X f$ to $d_{\\mathrm{hol}}(f^{\\mathrm{an}})$ for every local regular function $f$, where $d_{\\mathrm{hol}}$ is holomorphic exterior differentiation.",
+ "source": {
+  "document": "literature/serre-gaga.pdf",
+  "place": "WANTED locally: Serre, Géométrie algébrique et géométrie analytique, §§4--6 (analytic local rings, analytification), §9 (analytified modules). Read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf. Cotangent identification is the smooth-coordinate consequence of these constructions, not an additional theorem asserted verbatim by Serre."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-locally-ringed-space-morphism",
+  "def-sc-relative-differential-sheaf",
+  "def-sfb-smooth-analytic-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite affine cover $X=\\bigcup U_i$, $U_i=\\operatorname{Spec}A_i$, with $A_i$ finitely generated over $\\mathbf C$, using finite type. Restriction of the smooth structure morphism to each $U_i$ is smooth by [lem-pc-open-immersion-smooth-composition]; [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] makes $\\mathbf C\\to A_i$ a smooth ring map. At every prime choose a principal neighbourhood whose algebra is standard smooth by [lem-weil-pbc-smooth-ring-map-locally-standard-smooth]. Quasi-compactness gives finitely many such neighbourhoods covering $X$. Denote any of them by $U=\\operatorname{Spec}A$ and choose its presentation $A=\\mathbf C[z_1,\\ldots,z_n]/(f_1,\\ldots,f_c)$ with invertible first $c$-variable Jacobian, as in [def-weil-pbc-standard-smooth-algebra]. Complex points of $U$ are precisely tuples $z$ with $f_j(z)=0$: maps out of this quotient are determined by the images of the $z_i$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-ring-map-locally-standard-smooth",
+    "def-weil-pbc-standard-smooth-algebra",
+    "def-weil-affine-spectrum",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TA (lemma-smooth-syntomic); Tag 00T6 (definition-standard-smooth); affine comparison Tag 02H6; principal opens as in Schemes Tag 01HR"
+   }
+  },
+  {
+   "text": "On this zero set at a point $a$, apply [lem-sfb-complex-analytic-inverse-toolkit] to $H(z)=(f_1(z),\\ldots,f_c(z),z_{c+1},\\ldots,z_n)$. Polynomial evaluation is analytic by [lem-sfb-complex-analytic-function-operations]. Its derivative is the block matrix $\\left(\\begin{smallmatrix}J&*\\\\0&1\\end{smallmatrix}\\right)$ by the sum/product rules of [lem-sfb-complex-analytic-derivative-rules], with $J$ invertible at $a$, since evaluation carries units to nonzero complex numbers. Thus $H$ has a local inverse analytic at $H(a)$; shrink its open source and target so the inverse is analytic on the target neighbourhood, using clause (4) of the same inverse-tool node. The equations $f=0$ become the first $c$ coordinates being zero. Consequently the last $n-c$ original coordinates give a holomorphic chart on the zero set near $a$, with holomorphic inverse $t\\mapsto H^{-1}(0,t)$. This argument also covers $c=0$ and $n=c$, with the empty determinant equal to one.",
+   "uses": [
+    "lem-sfb-complex-analytic-inverse-toolkit",
+    "lem-sfb-complex-analytic-function-operations",
+    "lem-sfb-complex-analytic-derivative-rules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "Serre no.4, printed p.6 (simple points); explicit implicit-function proof using the Mathlib inverse theorem"
+   }
+  },
+  {
+   "text": "For any finite-type affine $\\operatorname{Spec}B$, choose algebra generators and identify its complex points with the common zero set of their polynomial relations in $\\mathbf C^N$, with the subspace topology. A section on a principal open is a fraction $b/g^m$ by [lem-weil-pbc-affine-open-section-vanishing-prime]; on complex points it is the function $b(z)/g(z)^m$. Hence principal opens are analytically open and regular functions on them are analytic by [lem-sfb-complex-analytic-function-operations]. The topology and analytic functions do not depend on generators: two sets of generators express each other polynomially. On arbitrary affine overlaps, refine around each point by principal opens in each chart; the coordinate functions of the identity and of its inverse are regular fractions. They therefore identify the induced analytic structures. Give $X(\\mathbf C)$ the topology in which a set is open iff its intersections with the affine point sets are open; define its holomorphic functions by being holomorphic in the charts of step 2. The preceding overlap calculation proves that these charts are homeomorphisms and have holomorphic transition functions in both directions. The chain rule of [lem-sfb-complex-analytic-derivative-rules] makes the transition derivatives inverse linear maps, so overlapping chart dimensions agree. This constructs the manifold atlas, with dimension locally constant and unrestricted across components.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-sfb-complex-analytic-function-operations",
+    "lem-sfb-complex-analytic-derivative-rules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "Serre, GAGA, no.5 Proposition 2, printed pp.7--9, read online; agent expansion to schemes"
+   }
+  },
+  {
+   "text": "The separatedness hypothesis makes the diagonal a closed immersion. For affine opens $U=\\operatorname{Spec}A$ and $V=\\operatorname{Spec}B$ of $X$, [lem-weil-pbc-fibre-product-affine-spectra] identifies $U\\times_{\\mathbf C}V$ with $\\operatorname{Spec}(A\\otimes_{\\mathbf C}B)$. By the affine description of a closed immersion, its intersection with the diagonal is cut out by an ideal $I\\subseteq A\\otimes B$. On $U(\\mathbf C)\\times V(\\mathbf C)$ its equations are the continuous functions $\\sum a_j(u)b_j(v)$ for elements $\\sum a_j\\otimes b_j\\in I$. Their common zero set is precisely the pairs representing the same complex point of $X$, by the universal property of the diagonal. It is closed. Thus the diagonal of the constructed topological space is closed on every product of open affine point sets, hence closed globally. For distinct points the complement of the diagonal contains a product neighbourhood; its two factors are disjoint neighbourhoods. This proves Hausdorffness. Each affine point set is a subspace of a finite-dimensional complex space, whose rational-centred rational-radius balls give a countable base. Intersect those balls with the point set; the union of these bases for the finite affine cover is a countable base of $M$. This proves second countability without any compactness or projectivity hypothesis.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-complex-analytic-function-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "Serre, GAGA, no.5 Proposition 2, printed pp.7--9, read online; agent expansion to schemes"
+   }
+  },
+  {
+   "text": "Send a complex point $x:\\operatorname{Spec}\\mathbf C\\to X$ to its underlying scheme point to define $\\pi$. Every Zariski open pulls back to an analytic open: this was checked on principal opens in step 3, and these form a basis. For $f\\in\\mathcal O_X(W)$, use its local regular-fraction representatives to define $f^{\\mathrm{an}}$ on $\\pi^{-1}W$. Equal representatives have equal evaluations, so they glue to a holomorphic function. Addition, multiplication, the unit and restriction are preserved pointwise. These maps are exactly a morphism of ringed spaces by [def-weil-locally-ringed-space-morphism]. In fact the stalk map is local: germs in the maximal ideal at $\\pi(x)$ are precisely those whose evaluation at $x$ is zero, and they map to holomorphic germs vanishing at $x$. Thus the claimed $\\pi$ is canonical, since every local regular function has its prescribed evaluation.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-sfb-complex-analytic-function-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "Serre nos.5--6, printed pp.9--10 (regular functions and the local map); no completion or flatness assertion needed"
+   }
+  },
+  {
+   "text": "Define the holomorphic one-form sheaf in each chart $t_1,\\ldots,t_d$ as expressions $\\sum h_j\\,dt_j$ with holomorphic $h_j$, transforming by the transpose Jacobian on overlaps. The derivative and chain rules of [lem-sfb-complex-analytic-derivative-rules] say these matrices are holomorphic, have inverse matrices on inverse charts, and satisfy the cocycle identity on triple overlaps. Compatible such expressions on a chart cover, with componentwise restrictions, therefore define a sheaf, denoted $\\Omega_M^1$. In these coordinates put $d_{\\mathrm{hol}}h=\\sum_j(\\partial h/\\partial t_j)dt_j$. The same chain rule makes this independent of chart; the sum, product and constant rules make it a $\\mathbf C$-linear derivation. In particular $f\\mapsto d_{\\mathrm{hol}}(f^{\\mathrm{an}})$ is a derivation on local algebraic functions with values in holomorphic one-forms. The universal property of Kähler differentials gives the unique local map $\\Omega^1_{X/\\mathbf C}\\to\\pi_*\\Omega_M^1$ carrying $d_Xf$ to $d_{\\mathrm{hol}}(f^{\\mathrm{an}})$. Uniqueness on differential generators and compatibility of derivations with restrictions make these local maps agree; [def-sc-relative-differential-sheaf] identifies their algebraic domains with the sheaf in the question.",
+   "uses": [
+    "lem-sfb-complex-analytic-derivative-rules",
+    "def-weil-pbc-kahler-differentials",
+    "def-sc-relative-differential-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "Serre no.9, printed pp.16--17 (module analytification); agent cotangent construction by coordinate covectors and universal derivations"
+   }
+  },
+  {
+   "text": "Extend this map $\\mathcal O_M$-linearly to $\\beta:(\\Omega^1_{X/\\mathbf C})^{\\mathrm{an}}\\to\\Omega_M^1$, $h\\otimes\\omega\\mapsto h\\beta(\\omega)$. The balancing relation holds because the original map is linear over evaluation of regular functions. On a standard smooth affine chart, [lem-weil-pbc-standard-smooth-kahler-basis] says that the algebraic differentials of the last $n-c$ coordinates freely generate $\\Omega_{A/\\mathbf C}$. They give a frame of its associated sheaf by [def-sc-relative-differential-sheaf]. On each smaller analytic chart of step 2 these same coordinates are $t_1,\\ldots,t_{n-c}$. Scalar extension of the displayed algebraic frame has basis $1\\otimes d_Xt_j$: explicitly $h\\otimes\\sum a_je_j\\mapsto(h a_j^{\\mathrm{an}})_j$, with inverse $(h_j)_j\\mapsto\\sum h_j\\otimes e_j$. The map $\\beta$ takes this basis to $dt_j$, the holomorphic frame just defined. Its local inverse takes $\\sum h_jdt_j$ to $\\sum h_j\\otimes d_Xt_j$. On overlaps these inverses agree because they invert the same map $\\beta$; applying the sheaf condition gives a global inverse. Hence $\\beta$ is the required canonical isomorphism, with its specified formula for every regular $f$, including fractions on smaller opens.",
+   "uses": [
+    "lem-weil-pbc-standard-smooth-kahler-basis",
+    "def-sc-relative-differential-sheaf",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "Serre no.9, printed pp.16--17; Stacks Tag 00T7 (lemma-standard-smooth), part (2), supplies the exact algebraic frame"
+   }
+  },
+  {
+   "text": "For the structure sheaf the multiplication map $h\\otimes f\\mapsto h f^{\\mathrm{an}}$ has inverse $h\\mapsto h\\otimes1$. Indeed the balancing relation gives $h f^{\\mathrm{an}}\\otimes1=h\\otimes f$, and the other composite fixes $h$. The formulas commute with restriction, so they give $(\\mathcal O_X)^{\\mathrm{an}}\\cong\\mathcal O_M$ as sheaves.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "Serre no.9, printed pp.16--17; elementary tensor-unit identity"
+   }
+  },
+  {
+   "text": "Let $i:X\\hookrightarrow Y$ be the closed immersion in the statement. On an affine open $V=\\operatorname{Spec}B$ of $Y$, [def-weil-closed-immersion] writes $i^{-1}V=\\operatorname{Spec}(B/I)$. Using any finite algebra generating set of $B$, complex points of this quotient are the subset of $V(\\mathbf C)$ on which all functions of $I$ vanish. They form a closed subset, and the quotient images of the generators show its topology is the induced topology. These affine checks prove that $i(\\mathbf C)$ is globally closed and $i$ identifies $X(\\mathbf C)$ homeomorphically with it. The map is holomorphic: every target chart coordinate is a regular function, whose pullback is regular and hence holomorphic by step 3. Near $x\\in X(\\mathbf C)$ choose the regular coordinate functions $t_1,\\ldots,t_d$ of a source chart. On $i^{-1}V$, their germs are fractions in $B/I$; lifting numerators and denominators to $B$ extends each to a regular function $g_j$ on an open neighbourhood of $i(x)$ (denominators remain nonzero there). Then $(g_1,\\ldots,g_d)\\circ i=(t_1,\\ldots,t_d)$ locally. Its derivative is the identity in source coordinates by [lem-sfb-complex-analytic-derivative-rules]. Thus the derivative of $i$ is injective, including when $d=0$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-sfb-complex-analytic-function-operations",
+    "lem-sfb-complex-analytic-derivative-rules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "Serre no.5, printed p.9 (closed subspaces and regular maps); agent local-coordinate verification of immersion"
+   }
+  },
+  {
+   "text": "For completeness this immersion is a submanifold embedding in local holomorphic coordinates. In target coordinates $y\\in\\mathbf C^e$ and source coordinates $t\\in\\mathbf C^d$, select $d$ target coordinates whose derivative on $i(t)$ is invertible (injectivity just proved). Apply [lem-sfb-complex-analytic-inverse-toolkit] to the resulting $d$-coordinate map on the source, shrinking around $x$. Reparameterizing the source by these coordinates writes its image as $(u,\\phi(u))$, with holomorphic $\\phi$ by [lem-sfb-complex-analytic-function-operations]. Since $i$ is already a homeomorphism onto its image, shrink the target neighbourhood so all its image points come from this selected source neighbourhood. Intersect it with the inverse image of the open domain of $u$. The holomorphic coordinate change $(u,v)\\mapsto(u,v-\\phi(u))$, with inverse $(u,w)\\mapsto(u,w+\\phi(u))$, identifies the image with $w=0$. Thus $i$ is a closed holomorphic embedding. All constructions are local, allow different dimensions on different components, and give the empty manifold and the unique sheaf isomorphisms when $X$ is empty.",
+   "uses": [
+    "lem-sfb-complex-analytic-inverse-toolkit",
+    "lem-sfb-complex-analytic-function-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "Serre no.5, printed p.9; agent graph proof from the cited inverse theorem, with the topological embedding already established"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-ring-map-locally-standard-smooth",
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-complex-analytic-inverse-toolkit",
+  "lem-sfb-complex-analytic-function-operations",
+  "lem-sfb-complex-analytic-derivative-rules",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-kahler-differentials",
+  "def-sc-relative-differential-sheaf",
+  "lem-weil-pbc-standard-smooth-kahler-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/serre-gaga.pdf",
+  "place": "WANTED locally; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf: nos.4--6 (printed pp.6--11), no.9 (printed pp.16--17). Explicit smooth-coordinate expansion using Stacks 00TA/00T7 and the recorded Mathlib analytic tools. No GAGA cohomology comparison is invoked."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "analytification|Fubini.Study|holomorphic.*cotangent|cotangent.*holomorphic",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth algebraic differential modules and real Riemannian metrics do not construct analytification or its holomorphic cotangent comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Analytification of a smooth projective complex variety has the restricted Fubini Study Kahler metric and holomorphic cotangent bundle",
+   "results": "OK 8 hits: Algebra.FormallySmooth.iff_subsingleton_and_projective, Algebra.FormallySmooth.projective_kaehlerDifferential, Bundle.ContMDiffRiemannianMetric.contMDiff, Complex.analyticOn_univ_iff_differentiable, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, Algebra.formallySmooth_iff, Bundle.ContMDiffRiemannianMetric.mk.noConfusion, Bundle.ContMDiffRiemannianMetric.mk. ",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth algebraic differential modules and real Riemannian metrics do not construct analytification or its holomorphic cotangent comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"analytification\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth algebraic differential modules and real Riemannian metrics do not construct analytification or its holomorphic cotangent comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth projective complex scheme analytifies to a compact Kahler manifold with holomorphic cotangent bundle the analytification of algebraic Kahler differentials",
+   "results": "OK 8 hits: Algebra.FormallySmooth.projective_kaehlerDifferential, Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential, AlgebraicGeometry.IsSmooth, Algebra.smoothLocus_eq_compl_support_inter, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsEtale.instIsSmooth. ",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth algebraic differential modules and real Riemannian metrics do not construct analytification or its holomorphic cotangent comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth algebraic varieties over the complex numbers have complex manifolds of complex points and their algebraic cotangent sheaves become holomorphic differential forms",
+   "results": "OK 8 hits: Algebra.smoothLocus_eq_compl_support_inter, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.IsStandardSmooth.free_kaehlerDifferential, Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential, Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Algebra.Extension.toKaehler, Algebra.IsStandardSmooth.of_basis_kaehlerDifferential. ",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth algebraic differential modules and real Riemannian metrics do not construct analytification or its holomorphic cotangent comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth finite type complex scheme analytifies to a complex manifold and algebraic Kahler differentials give holomorphic one forms",
+   "results": "OK 8 hits: Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential, Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, Algebra.IsStandardSmooth.free_kaehlerDifferential, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Algebra.IsStandardSmooth.of_basis_kaehlerDifferential, Algebra.smoothLocus_eq_compl_support_inter, AlgebraicGeometry.IsSmooth. ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic smooth differential bases and generic manifold sheaves are ingredients, not an analytification construction or its cotangent comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Analytification of a smooth complex algebraic variety and its sheaf of algebraic differential forms",
+   "results": "OK 8 hits: IsManifold.locallyRingedSpace, Algebra.IsStandardSmooth.free_kaehlerDifferential, smoothSheafCommRing.ι_forgetStalk_hom, smoothSheafCommRing.ι_forgetStalk_inv, smoothSheafCommRing.ι_forgetStalk_hom_apply, smoothSheafCommRing.ι_forgetStalk_inv_apply, PresheafOfModules.DifferentialsConstruction.instHasDifferentials, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj. ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic smooth differential bases and generic manifold sheaves are ingredients, not an analytification construction or its cotangent comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"analytification\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic smooth differential bases and generic manifold sheaves are ingredients, not an analytification construction or its cotangent comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "analytification|holomorphic.*cotangent|cotangent.*holomorphic",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic smooth differential bases and generic manifold sheaves are ingredients, not an analytification construction or its cotangent comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth complex algebraic schemes have holomorphic cotangent sheaves after analytification",
+   "results": "OK 8 hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallySmooth.iff_subsingleton_and_projective, AlgebraicGeometry.IsSmooth.recOn, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, Algebra.FormallySmooth.subsingleton_h1Cotangent, Algebra.Extension.formallySmooth_iff_split_injection. ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic smooth differential bases and generic manifold sheaves are ingredients, not an analytification construction or its cotangent comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-dolbeault-derivative-comparison",
+  "date": "2026-10-24",
+  "group": "Q20"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Analytification of smooth schemes and their cotangent sheaves.",
+   "via": [
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-analytification-cotangent",
+  "worker": "stage1",
+  "summary": "Constructed analytification by standard smooth charts and explicit regular-fraction transitions. Proved separation from the algebraic diagonal, second countability from a finite affine cover, the ringed-space map by evaluation, and both tensor comparisons by frames. Verified the closed-embedding clause by lifted regular source coordinates and a holomorphic graph argument. Added three Mathlib tool leaves, no restated analytification clauses; statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Analytification of smooth schemes and their cotangent sheaves. Realizes the analytic/cotangent prerequisite below the Popa-Kodaira characteristic-zero branch; latest direct-images proof paragraph (3), not a replacement of the unit route. The supporting assertion has no independent blueprint node (ancestor command returns None).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic comparison between affine scheme smoothness and smooth ring maps, needed to apply the existing standard-smooth localization theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-904655406",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-904655406 (reviewer sub-agent of L); spot-checked: PASS. I read all 10 steps and the 3 new nodes in full. The item's statement is unchanged from the side-live base; the only stmt_deps change adds def-sc-relative-differential-sheaf, the glued sheaf the statement already describes. No repair note applies and no other group has split the item (live and side-live still unsplit). Steps 1-10, checked against the cited statements: 1) finite cover by standard smooth principal opens via the smooth ring-map comparison, 00TA and the 00T6 unit minor; C-points are the zero set, using def-weil-affine-spectrum. 2) H=(f,z'') has block derivative [[J,*],[0,1]]; inverse-toolkit (1)-(4) give an analytic local inverse, and t↦H^{-1}(0,t) is the chart; c=0 and n=c work. 3) Principal opens are analytic opens and sections are b/g^m (section-vanishing-prime (b)); transitions between charts are analytic, and the chain rule gives equal dimensions. 4) The diagonal ideal in A⊗B (fibre-product node plus the affine form of a closed immersion) gives a closed diagonal, hence Hausdorff; rational balls over a finite cover give second countability. U×V open in X×X is left implicit but standard. 5) π is defined by evaluation and is continuous on the principal-open basis. 6) Ω_M^1 is glued along transpose Jacobians; the Kähler universal property gives the map, compatible by uniqueness on df. 7) The 00T7 basis dz_{c+1..n} goes to dt_j, an explicit frame isomorphism with no flatness needed. 8) The tensor-unit identity gives (O_X)^an ≅ O_M. 9) The closed immersion gives a closed topological embedding, and lifted fractions g with g∘i=t show Di is injective. 10) An invertible minor, the inverse theorem and the graph coordinate change give the holomorphic embedding. Small cases tested: empty scheme, a point, A^n, a point disjoint from A^1, xy=1 (excluded cases: doubled origin, C[ε]). New nodes: every Mathlib declaration and line was checked in the tree (analyticAt_const:54, AnalyticAt.add:106/.mul:639/.inv:1020 with f x≠0/.pi:560, comp Composition:859, continuousAt Basic:1046, CLM.analyticAt Linear:61; AnalyticOnNhd.fderiv_of_isOpen:401, HasFDerivAt.add/mul/comp, const/id/CLM/pi; AnalyticAt.hasStrictFDerivAt:141, toOpenPartialHomeomorph IFT:115/127/131, analyticAt_symm':414, exists_ball_analyticOnNhd ChangeOrigin:387). All are exact matches. The statements are self-contained with no proofs, and an rg -L search found no duplicates. They are generic tools, not restated clauses. Accepted tool_use: lem-weil-pbc-smooth-ring-map-iff-smooth-affine, a generic comparison of affine and ring-map smoothness. No SGA is cited. Serre GAGA is absent from literature/, so proof_origin is agent, as the rules require."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothAnalytificationCotangent",
+  "declaration": "AlgebraicGeometry.exists_smoothAnalytification_cotangent",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothAnalytificationCotangent.lean",
+  "statement": "theorem exists_smoothAnalytification_cotangent {X : Scheme.{u}} (f : X ⟶ Spec (.of (ULift.{u} ℂ))) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [Smooth f] : ∃ D : SmoothAnalytic.Data f, T2Space D.space ∧ SecondCountableTopology D.space ∧ ∃ (e0 : SmoothAnalytic.analytify D (SheafOfModules.unit X.ringCatSheaf) ≅ SheafOfModules.unit (moduleRings D.space)) (e1 : SmoothAnalytic.analytify D f.relativeDifferentials ≅ D.cotangent.omega), (∀ (U : X.Opens) (h : D.space.presheaf.obj (op ((Opens.map D.pi.hom.base).obj U))) (a : Γ(X, U)), e0.hom.val.app _ (SmoothAnalytic.tensorSection D (SheafOfModules.unit X.ringCatSheaf) U h a) = @Mul.mul (D.space.presheaf.obj (op ((Opens.map D.pi.hom.base).obj U))) inferInstance h (D.pi.hom.c.app (op U) a)) ∧ (∀ (U : X.Opens) (a : Γ(X, U)), e1.hom.val.app _ (SmoothAnalytic.tensorSection D f.relativeDifferentials U 1 (f.relativeDifferentialsDerivation.d a)) = D.cotangent.d _ (D.pi.hom.c.app (op U) a)) ∧ (∀ (Y : Scheme.{u}) (g : Y ⟶ Spec (.of (ULift.{u} ℂ))), IsSeparated g → LocallyOfFiniteType g → QuasiCompact g → Smooth g → ∀ (E : SmoothAnalytic.Data g) (i : Over.mk f ⟶ Over.mk g), IsClosedImmersion i.left → SmoothAnalytic.IsClosedHolomorphicEmbedding D.atlas E.atlas (SmoothAnalytic.mapPoints D E i))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a5033fb61",
+  "group": "Q13",
+  "result": "pass",
+  "note": "First S2 delivery. Item Lean matches node clause by clause. Separated + LocallyOfFiniteType + QuasiCompact + Smooth over Spec ULift ℂ; ∃ D : Data f; T2 ∧ SecondCountable; e0 with h⊗a ↦ h·π#a and e1 with 1⊗d_X a ↦ d_hol(π#a), both O_M-linear and so determined by these formulas; closed immersion over ℂ ⇒ closed embedding, analytic in coordinates with injective derivative, via mapPoints = composition. New def node def-sfb-smooth-analytic-data is fully pinned: the point topology is the analytic topology; regular-coordinate charts are forced biholomorphic (invariance of domain plus injective holomorphic map); FunctionSheaf and Cotangent are fixed by their section ranges, with correct transition law w_c = w_d∘D(d∘c⁻¹) and d_repr = fderiv; π is fixed by support and evaluation; analytify = changeOfRings(adjunct of π.c) applied to inverseImageModule. Not hollow; Mathlib's single-model manifolds don't cover varying dimension and no project duplicate was found, so H4 is fine. Statement field verbatim; only stmt_deps change vs side-live is the new def node. Edge cases covered: empty scheme, dimension 0, varying dimension. Advisories: tensorPullbackRingMap and moduleRings are theorem-owned plain defs not in stmt_deps; unused stage-3 Mathlib imports; the second reading was the same worker's reread. No file changed, nothing compiled; the worker reports a clean compile."
+ }
+}

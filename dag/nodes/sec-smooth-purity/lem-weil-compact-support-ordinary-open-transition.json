@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-compact-support-ordinary-open-transition",
+ "kind": "statement",
+ "title": "Ordinary open evaluation respects horizontal coefficient maps",
+ "statement": "Let $l$ be prime and $E/\\mathbf Q_l$ a finite field extension [def-weil-l-adic-coefficient-extension]. Write $A_k=\\mathcal O_E/\\mathfrak m_E^{k+1}$ for the specified positive coefficient rings [def-weil-compact-support-reduction-tower-data]. Let $j:X\\hookrightarrow Z$ be an open immersion [def-weil-open-immersion] and use the small pro-etale sites [def-weil-pbc-proetale-site]. Let $\\mathscr S_W$ be the module-sheaf category on the coefficient sequence site [def-coef-ringed-sequence-site], $e_k^W$ its ordinary evaluation, and $J_j:\\mathscr S_X\\to\\mathscr S_Z$ the ordinary native extension by zero, with adjunction $J_j\\dashv j^*_{\\bullet}$ [def-sp-varying-ring-operations]. Define $\\epsilon_k:J_j;e_k^Z\\cong e_k^X;j_!^{A_k}$ as the inverse mate of the specified ordinary restriction evaluation moduleEvalG, followed by compactSupportOpenModel [def-weil-compact-support-native-system-evaluation]. For $n\\le m$ put $q:A_m\\to A_n$ equal to the direct quotient. Let $\\tau^W_{m,n}:e_m^W\\to e_n^W;\\operatorname{Res}_q$ be compactSupportOrdinaryCoefficientTransition, the actual horizontal section map [lem-weil-compact-support-coefficient-transition], and let $\\chi_q:j_!^{A_m}\\operatorname{Res}_q\\cong\\operatorname{Res}_qj_!^{A_n}$ be the specified sfOpenRestriction [lem-sf-compact-support-restriction-of-scalars]. Then for every ordinary coefficient system $M\\in\\mathscr S_X$, $\\tau^Z_{m,n,J_jM};\\operatorname{Res}_q(\\epsilon_{n,M})=\\epsilon_{m,M};j_!^{A_m}(\\tau^X_{m,n,M});\\chi_{q,e_n^XM}$. Here semicolon denotes composition in the written order. No derived category, boundedness, flatness, or cartesian-system assumption is involved; equality of indices and empty schemes are allowed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DI, lemma-extension-by-zero; Tags 03DA and 0941; ordinary-module part (steps 1 and 2) of lem-weil-compact-support-native-open-transition."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-compact-support-reduction-tower-data",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-coef-ringed-sequence-site",
+  "def-sp-varying-ring-operations",
+  "def-weil-compact-support-native-system-evaluation",
+  "lem-weil-compact-support-coefficient-transition",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Use compactSupportOrdinaryPullbackTransition, whose direct-image section calculation and inverse-image transpose give the horizontal square for moduleEvalG.",
+   "uses": [
+    "lem-weil-compact-support-ordinary-pullback-transition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply horizontalOpenMate to the system open adjunction and the two single-level open adjunctions. The inverse-mate unit identity normalizes native open evaluation. The scalar pullback comparison is invertible by the ring-sheaf change-of-coefficients theorem. The tensor-to-literal scalar comparison of the new node and the unit-preserving compactSupportOpenModel transport the published sfOpenRestriction normalization to the native open adjunctions.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-weil-compact-support-native-system-evaluation",
+    "lem-sf-open-extension-scalar-restriction-coherence",
+    "lem-sf-compact-support-restriction-of-scalars",
+    "lem-weil-compact-support-open-restriction-scalar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the native open square with the target compactSupportOpenModel. Cancel the model and its inverse in the scalar comparison, and use naturality of the source compactSupportOpenModel on the horizontal morphism. Expanding the unchanged ordinary evaluation definition gives exactly the claimed equation.",
+   "uses": [
+    "def-weil-compact-support-native-system-evaluation",
+    "lem-weil-compact-support-coefficient-transition",
+    "lem-sf-compact-support-restriction-of-scalars"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-compact-support-ordinary-pullback-transition",
+  "def-sp-varying-ring-operations",
+  "def-weil-compact-support-native-system-evaluation",
+  "lem-sf-open-extension-scalar-restriction-coherence",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-weil-compact-support-open-restriction-scalar",
+  "lem-weil-compact-support-coefficient-transition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 and 03DI: direct-image section naturality, two adjunction transpositions, and the single-level scalar coordinate normalization isolated below."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of module sheaves commutes with evaluation and coefficient restriction in a sequence site",
+   "results": "8 hits, including SheafOfModules.evaluation and SheafOfModules.over. None states horizontal compatibility of the sequence-site open extension.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact extension by zero evaluation commutes with horizontal coefficient transitions",
+   "results": "8 hits on Profinite.Nobeling and HomologicalComplex.extend. No sequence-site module statement.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits, including mateEquiv, its unit equations and composition lemmas. These give generic mate calculus, not the geometric coefficient square.",
+   "date": "2026-10-27",
+   "verdict": "Generic infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "evalJ.*[Tt]ransition|moduleEvalG.*naturality|[Tt]ransition.*[Oo]pen",
+   "results": "3 Mathlib hits: Gluing.lean, FiberBundle/Basic.lean and OpenPartialHomeomorph/Constructions.lean. None concerns module-sheaf evaluation. Local project search finds the assigned derived statement and different-coordinate transition statements, but no ordinary native theorem.",
+   "date": "2026-10-27",
+   "verdict": "No matching ordinary theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportNativeOpenTransition",
+  "date": "2026-10-27",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-representative-independence",
+   "place": "Construct the strict compact-support tower; ordinary open-extension compatibility before localization (native open-transition proof steps 1 and 2).",
+   "via": [
+    "lem-weil-compact-support-native-open-transition",
+    "lem-weil-compact-support-native-system-transition",
+    "lem-weil-compact-support-reduction-tower-functor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportOrdinaryOpenTransition",
+  "file": "lean/Sheaf/Paper/CompactSupportOrdinaryOpenTransition.lean",
+  "declaration": "WeilConjectures.compactSupportOrdinaryOpenTransition",
+  "declarations": [
+   "WeilConjectures.compactSupportOrdinaryOpenMate_isIso",
+   "WeilConjectures.compactSupportOrdinaryOpenEvaluation",
+   "WeilConjectures.compactSupportOrdinaryOpenTransition"
+  ],
+  "statement": "theorem compactSupportOrdinaryOpenTransition\n    {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]\n    {m n : ℕ} (h : n ≤ m) (M : coefficientSequenceModules.{u, u} l E X) :\n    (compactSupportOrdinaryCoefficientTransition l E Z h).app\n        ((ProEtale.VaryingRing.extension (compactSupportSystemLevel l E)\n          (compactSupportSystemQuotient l E) j).obj M) ≫\n      (proEtaleCoefficientRestrictScalars Z\n        (compactSupportLevelQuotient l E m n h)).map\n          ((compactSupportOrdinaryOpenEvaluation l E j n).hom.app M) =\n    (compactSupportOrdinaryOpenEvaluation l E j m).hom.app M ≫\n      (sfIntrinsicExtensionByZero j\n        (Padic.coefficientExtensionRing l E (m + 1))).map\n          ((compactSupportOrdinaryCoefficientTransition l E X h).app M) ≫\n      (sfOpenRestriction j (compactSupportLevelQuotient l E m n h)).hom.app\n        ((coefficientSequenceEvaluation l E X n).obj M)",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261027T021309-L-2754254",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T112419-L-1581712",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

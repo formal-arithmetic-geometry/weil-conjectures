@@ -20,7 +20,7 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-a1-proetale-local-system-representability] to $X$ and $F$. Its locally Noetherian hypothesis is part of the assumed Noetherianity; its local-constancy hypothesis is exactly the specified covering by constant sheaves of sets. Obtain an etale $q:Z\\to X$, with the unique valuation lifting property, and natural bijections $\\theta_U:F(U)\\simeq\\operatorname{Hom}_X(U,Z)$. Neither normality nor local nonemptiness is used at this stage.",
+   "text": "Restrict the given cover to a u+1-small covering subfamily. Composition of weakly etale maps is left adjoint to base change; uniqueness of left adjoints and sheafification identify the stated inverse image with sectionwise restriction. The cover gives CoversTop at the identity object. Apply [lem-a1-proetale-local-system-representability], obtaining Z in universe u+1, an etale q:Z→X↑ with unique valuation lifting, and the natural functor-of-points isomorphism on the original site.",
    "uses": [
     "lem-a1-proetale-local-system-representability"
    ],
@@ -31,10 +31,11 @@
    }
   },
   {
-   "text": "The scheme $Z$ is nonempty. Indeed, choose a point $x\\in X$. The covering $\\{V_j\\to X\\}_j$ in the local-nonemptiness assumption is jointly surjective by the covering definition in [def-weil-pbc-proetale-site], so some $V_j$ has a point $v$ above $x$. Choose the given $s_j\\in F(V_j)$. Under the bijection of [lem-a1-proetale-local-system-representability], $s_j$ gives an $X$-morphism $f_j:V_j\\to Z$. Its image contains the point $z=f_j(v)$; hence $|Z|$ is nonempty.",
+   "text": "Choose x in X and a point v of a member V of the local-nonemptiness cover above x. Its given section maps, under the representing isomorphism, to a map V↑→Z. The lifted scheme V↑ is nonempty: a residue-field affine test object at v has nonempty lifted spectrum, and its colimit leg lands in V↑. Applying the map to this point proves Z nonempty.",
    "uses": [
     "lem-a1-proetale-local-system-representability",
-    "def-weil-pbc-proetale-site"
+    "def-weil-pbc-proetale-site",
+    "def-trf-scheme-universe-enlargement"
    ],
    "elementary": true,
    "source": {
@@ -43,9 +44,9 @@
    }
   },
   {
-   "text": "Apply [lem-a1-normal-geometric-cover-components] to $q:Z\\to X$. The base is nonempty, connected, locally Noetherian and quasi-compact by the hypotheses; its local rings are integrally closed domains by the stated normality assumption. The morphism is etale and has the required unique valuation lifting property by step 1. The cited lemma makes the connected component of $z$ into an open and closed subscheme $Y\\subseteq Z$ and says that its structural morphism $p=q|_Y:Y\\to X$ is finite etale and surjective. Its nonemptiness follows from $z\\in Y$. Only this component is taken, even if $Z$ has infinitely many components.",
+   "text": "Apply [lem-a1-normal-geometric-cover-universe-descent] to the etale geometric covering q of X↑ and the point just obtained. All normal-base hypotheses are exactly those of the item. Obtain a finite etale surjective p:Y→X in the original universe and a morphism Y↑→Z over X↑. The cited lemma retains [lem-a1-normal-geometric-cover-components] and adds only the necessary universe transport and small finite-algebra gluing.",
    "uses": [
-    "lem-a1-normal-geometric-cover-components"
+    "lem-a1-normal-geometric-cover-universe-descent"
    ],
    "elementary": false,
    "source": {
@@ -54,10 +55,10 @@
    }
   },
   {
-   "text": "The inclusion of etale $X$-schemes into the pro-etale site in [def-weil-pbc-site-comparison-morphism] makes $Y\\to X$ a site object. The inclusion $i:Y\\hookrightarrow Z$ is an element of $\\operatorname{Hom}_X(Y,Z)$. The bijection $\\theta_Y$ of [lem-a1-proetale-local-system-representability] therefore sends the element $\\theta_Y^{-1}(i)$ of $F(Y)$ to $i$. This explicitly supplies a section, so $F(Y)\\ne\\varnothing$, and $p$ has all the required properties.",
+   "text": "Etaleness implies weak etaleness, so p defines Y as an object of the original pro-etale site directly via ProEt.mk. Bundle the morphism Y↑→Z over X↑ as an arrow in the over category. Evaluate the inverse representing isomorphism on this arrow to obtain a section of F(Y). The finite, etale and surjective properties are those of p.",
    "uses": [
     "lem-a1-proetale-local-system-representability",
-    "def-weil-pbc-site-comparison-morphism"
+    "def-weil-pbc-proetale-site"
    ],
    "elementary": true,
    "source": {
@@ -69,13 +70,14 @@
  "proof_deps": [
   "lem-a1-proetale-local-system-representability",
   "def-weil-pbc-proetale-site",
-  "lem-a1-normal-geometric-cover-components",
-  "def-weil-pbc-site-comparison-morphism"
+  "def-trf-scheme-universe-enlargement",
+  "lem-a1-normal-geometric-cover-universe-descent"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 7.3.9 and proof of Lemma 7.4.10; take one nonempty connected component of the representing geometric covering"
+  "by": "agent",
+  "group": "S8",
+  "date": "2026-10-23",
+  "reason": "Lean implementation of the existing Bhatt--Scholze 7.3.9 and 7.4.10 route, with explicit universe transport after representability was changed to return an enlarged scheme."
  },
  "mathlib_searches": [
   {
@@ -212,5 +214,26 @@
   "result": "pass",
   "note": "Every clause of the node matches the Lean with nothing missing and nothing stronger: nonempty/connected/locally Noetherian/quasi-compact instances, stalkwise domain plus integrally closed, F a Type (u+1)-valued sheaf on Scheme.ProEt.topology X, local constancy via sheafPullback along Over.pullback plus constantSheaf over a proetalePrecoverage cover, local nonemptiness over a second cover, conclusion a Y : ProEt X with IsFinite, Etale and Surjective structure map and a section. The hand-written pullback is literally the body of ProEtale.upperStar, which cannot be used because it needs Abelian coefficients (checked: Abelian (Type (u+1)) does not synthesize), so it is not a duplicate notion. Supported by Bhatt-Scholze Lemma 7.3.9 and the proof of Lemma 7.4.10. lean.statement equals the file signature verbatim; source and blueprint docstrings present; proof is sorry only, axioms are sorryAx plus the standard ones; report has the Worker report and Second reading by NC sections. nt_compile.py --json compiled the file cleanly in 1.6 s. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-6060b",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261023T135343-L-2877310",
+  "kind": "interface",
+  "note": "independent cc review: 6060b15f files vs PASSed head a06011f4 (diff: only `set_option warn.sorry false` removed + change record + report text); live deps unchanged; sandbox compile of both delivered modules and both direct importers (exit 0), #print axioms"
+ }
 }

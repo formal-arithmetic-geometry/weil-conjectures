@@ -5,7 +5,7 @@ Authors: SHEAF group E4
 -/
 module
 
-public import Sheaf.Paper.CompletedTowerPullback
+public import Sheaf.Paper.CompletedReductionUnit
 public import Sheaf.Paper.ConstantCompletionEquivalence
 public import Sheaf.Paper.WeilCompletedKoszulRoosComparison
 import all Sheaf.Paper.CompletedConstantAlgebraFlatQuotients

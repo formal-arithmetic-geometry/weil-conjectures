@@ -1,0 +1,110 @@
+{
+ "id": "lem-pur-clopen-scalar-unit-normalization",
+ "kind": "statement",
+ "title": "Canonical scalar identity units",
+ "statement": "For any scheme Z, any family p of the existing scalar extension presentations on Z, and any successive normalization n of p, there exists a family Units(p). Concretely, E_id ≅ Id sends the sheafified pure tensor s⊗x to sx. There is also L E_id ≅ Id whose component at QP, for every flat-term K-flat P, equals the canonical computation c_id(P) followed by Q of the degreewise multiplication isomorphism. The ordinary and derived maps are natural isomorphisms, in the fixed independent universes of [def-pur-clopen-derived-scalar-comparison-data].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0D6D and 0G7E; sites-modules.tex Tag 03EK and 05V4; indicated part of parent proof."
+ },
+ "stmt_deps": [
+  "def-pur-clopen-derived-scalar-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "scalar restriction along the identity is naturally the identity, section by\nsection. Uniqueness of left adjoints therefore identifies ordinary extension with\nthe identity. The adjunction unit is 1 tensor x, so linearity gives s tensor x maps\nto sx. Pass multiplication to complexes and homotopy categories. Its inverse,\nfollowed by Qh, makes the identity derived functor a left derived functor. Uniqueness\nof left derived functors identifies the recorded presentation with this functor.\nThe defining counit equation gives the asserted representative formula after\nconjugating by the canonical quotient-to-derived comparison.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Parent restriction/scalar proof, separated into independently reusable mathematical assertions by P8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between derived functors extends uniquely from flat K-flat complexes and respects composition and identity",
+   "results": "Generic leftDerivedNatTrans and mapDerivedCategoryFactors hits; no theorem states the clopen scalar comparison or its normalized coherence.",
+   "date": "2026-10-24",
+   "verdict": "Use generic universal-derived and localization APIs; no complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "One exact hit in Mathlib.CategoryTheory.Functor.Derived.LeftDerived.",
+   "date": "2026-10-24",
+   "verdict": "Used for the scalar identity unit; does not itself provide comparison descent or coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallyInjective_whisker|liftNatIso|mapHomologicalComplexIdIso",
+   "results": "Mathlib.CategoryTheory.Sites.PreservesLocallyBijective and Mathlib.CategoryTheory.Localization.Predicate contain generic tools.",
+   "date": "2026-10-24",
+   "verdict": "Ordinary sheafification and derived localization tools exist; their application and coherence remain explicit work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism on flat K-flat models descends to derived module sheaves and is compatible with scalar composition",
+   "results": "Generic localization and derived functor search; precise comparison and explicit coherence remain stated separately.",
+   "date": "2026-10-24",
+   "verdict": "No full match for the new assertions; use existing generic tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleClopenDerivedScalarCompositor",
+  "date": "2026-10-24",
+  "group": "P8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-clopen-derived-scalar-compositor",
+   "place": "Canonical scalar identity units"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenDerivedScalarUnits",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenDerivedScalarUnits.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.clopen_scalar_unit_normalization",
+  "statement": "theorem clopen_scalar_unit_normalization {Z : Scheme.{t}} {p : Presentations.{t, u} Z}\n    (n : Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}\n      (C := Z.ProEt) (J := topology Z) (hD := derived.{t, u} Z) @p) :\n    Nonempty (Units.{t, u} @p)",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-52d07",
+  "group": "P8",
+  "result": "fix",
+  "landing": "20261024T190624-L-4164674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-52d07",
+  "group": "P8",
+  "result": "fix",
+  "landing": "20261024T190624-L-4164674",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs live (identical); Data module vs the live item's interface declarations (verbatim except blueprint ids); new sorry statements vs their nodes and the pinning laws of Normalization, Units and Comparison; #print axioms of the 6 modules compiled in a sandbox"
+ }
+}

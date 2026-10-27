@@ -14,31 +14,11 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatib
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.Topology.Defs.Filter
-import Sheaf.Paper.ModuleObjectRingedSiteDerivedComparison
-import Sheaf.CategoryTheory.InternalSectionTensorComparison
-import Sheaf.Paper.PadicIntegersInvertEll
-import Sheaf.Paper.FiniteConstantModelResolution
-import Sheaf.AlgebraicGeometry.CoefficientTorFlatModel
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.SixFunctors.ConstructibleOpenClosedRefinement
-import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import Sheaf.Paper.CoefficientFiniteDescentLisse
-import Sheaf.Paper.StratifiedLatticeRank
-import WeilConjectures.AlgebraicGeometry.EtaleStratifiedFinite
-import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
-import Sheaf.Paper.ContinuousLatticeSum
-import Sheaf.Paper.ContinuousCoefficientRealizations
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.AlgebraicGeometry.ProEtaleTorIntervalLocalDetection
-import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedDetection
-import WeilConjectures.CategoryTheory.TruncationTriangle
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.Topology.Constructible
+import all Sheaf.SixFunctors.IntegralModelsGenerators
+import Sheaf.Paper.QcqsIntegralScalarExtensionCTF
+import Sheaf.Paper.QcqsLatticeTreeReconstruction
+import Sheaf.Paper.QcqsConstructibleIntegralLeafModels
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Integral generators for qcqs rational constructible complexes
 
@@ -54,13 +34,42 @@ Both conclusions take place in the ordinary unbounded module-object derived cate
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
+set_option backward.defeqAttrib.useBackward true
 
 universe u
 
 open CategoryTheory CategoryTheory.Limits
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Obj ZeroObject
 
 namespace AlgebraicGeometry.ProEtale
+
+attribute [-instance] WeilConjectures.SixFunctors.integralModel_coefficientMonObj
+
+attribute [local irreducible] upperStarFromPoint
+  Functor.leftDerivedFunctor Functor.mapDerivedCategory
+  Mod.extendScalars CondensedRing.upperStar
+  HasDerivedCategory.ofIsGrothendieckAbelian HasDerivedCategory.ofHasKInjectiveResolutions
+  monoidal_upperStarFromPoint monoidal_pointUpperStar oplaxMonoidal_pointUpperStar
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+attribute [local instance 20000]
+  CategoryTheory.Limits.PreservesColimitsOfShape.preservesColimit
+  CategoryTheory.Limits.PreservesColimitsOfSize.preservesColimitsOfShape
+
+set_option maxSynthPendingDepth 0
+
+attribute [local instance 2000] CategoryTheory.Sheaf.instHasColimitsOfSize
+  CategoryTheory.Sheaf.instHasColimitsOfShape CategoryTheory.Sheaf.instHasFiniteColimits
+  CategoryTheory.Sheaf.hasLimitsOfSize CategoryTheory.Sheaf.instHasFiniteLimits
+  CategoryTheory.Mod.monoidalCategory AlgebraicGeometry.ProEtale.sheafMonoidalCategory
+  CategoryTheory.Mod.monoidalClosed CategoryTheory.Mod.hasFunctorialFlatResolution
+  AlgebraicGeometry.ProEtale.sheafMonoidalClosed
+  AlgebraicGeometry.ProEtale.hasFunctorialFlatResolution_sheaf
+
+attribute [local irreducible] Mod.monoidalClosed Mod.monoidalCategory
+  Mod.monoidalCategoryStruct
 
 /-- The integral scalar-extension generators for the single coefficient field E.
 The existential is closed under ambient isomorphisms, with no restriction on morphisms.
@@ -87,6 +96,144 @@ def algClIntegralGenerators (ℓ : ℕ) [Fact ℓ.Prime] (V : Scheme.{u}) :
     (J : ConstantModelConstructibleFiniteTor (Profinite.padicIntegersRingObj ℓ F) V),
     Nonempty (((Mod.extendScalars (padicIntegersToPadicSubfield V ℓ F ≫
       padicSubfieldRingObjToPadicAlgCl V ℓ F)).leftDerivedFunctor).obj J.obj ≅ K)
+
+private theorem generator_derived_coeff_iso
+    (A B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj A] [IsCommMonObj A] [MonObj B] [IsCommMonObj B]
+    (V : Scheme.{u})
+    (a b : condensedRingObj A V ⟶ condensedRingObj B V) [IsMonHom a] [IsMonHom b]
+    (h : a = b) (J : DerivedCategory (LatticeTree.Modules A V)) :
+    Nonempty (((Mod.extendScalars a).leftDerivedFunctor).obj J ≅
+      ((Mod.extendScalars b).leftDerivedFunctor).obj J) := by
+  subst b
+  exact ⟨Iso.refl _⟩
+
+private theorem generator_finite_model_iso
+    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (V : Scheme.{u}) {M N : LatticeTree.Modules R V} (e : M ≅ N)
+    (hM : HasFiniteConstantLocalModel R V M) : HasFiniteConstantLocalModel R V N := by
+  obtain ⟨U, hU⟩ := hM
+  refine ⟨U, fun a ↦ ?_⟩
+  obtain ⟨P, hP, ⟨eP⟩⟩ := hU a
+  exact ⟨P, hP, ⟨((CondensedRing.upperStar R (U.f a)).mapIso e.symm) ≪≫ eP⟩⟩
+
+private theorem generator_model_iso
+    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (V : Scheme.{u}) {M N : LatticeTree.Modules R V} (e : M ≅ N)
+    (hM : IsConstantModelConstructible R V M) : IsConstantModelConstructible R V N := by
+  classical
+  unfold IsConstantModelConstructible at hM ⊢
+  split_ifs at hM ⊢
+  · obtain ⟨S, hS⟩ := hM
+    exact ⟨S, fun i ↦ generator_finite_model_iso R _
+      ((CondensedRing.upperStar R (S.immersion i)).mapIso e) (hS i)⟩
+  · intro U hU
+    obtain ⟨S, hS⟩ := hM U hU
+    exact ⟨S, fun i ↦ generator_finite_model_iso R _
+      ((CondensedRing.upperStar R (S.immersion i)).mapIso
+        ((CondensedRing.upperStar R U.ι).mapIso e)) (hS i)⟩
+
+private theorem generator_ctf_iso
+    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (V : Scheme.{u}) {K L : DerivedCategory (LatticeTree.Modules R V)} (e : K ≅ L)
+    (hK : constantModelBoundedConstructible R V K ∧ _root_.DerivedCategory.finiteTorAmplitude _ K) :
+    constantModelBoundedConstructible R V L ∧ _root_.DerivedCategory.finiteTorAmplitude _ L := by
+  exact ⟨⟨DerivedCategory.TStructure.t.bounded.prop_of_iso e hK.1.1,
+    fun q ↦ generator_model_iso R V ((DerivedCategory.homologyFunctor _ q).mapIso e)
+      (hK.1.2 q)⟩, (_root_.DerivedCategory.finiteTorAmplitude _).prop_of_iso e hK.2⟩
+
+private theorem generator_iter_iso
+    {C : Type*} [Category C] [HasShift C ℤ] [Preadditive C] [HasZeroObject C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (P : ObjectProperty C) [P.IsClosedUnderIsomorphisms] (n : ℕ) :
+    (P.extensionProductIter n).IsClosedUnderIsomorphisms := by
+  cases n with
+  | zero => rw [ObjectProperty.extensionProductIter_zero]; infer_instance
+  | succ n => rw [ObjectProperty.extensionProductIter_succ]; infer_instance
+
+private theorem generator_finite_to_localizing
+    {C : Type*} [Category C] [HasShift C ℤ] [Preadditive C] [HasZeroObject C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
+    (G : ObjectProperty C) {K : C}
+    (hK : ∃ n, (G.shiftClosure ℤ).extensionProductIter n K) : localizingClosure G K := by
+  intro P hP hG
+  let := hP.1
+  let := hP.2.1
+  obtain ⟨n, hn⟩ := hK
+  exact ObjectProperty.extensionProductIter_le_of_isTriangulatedClosed₂ (G.shiftClosure ℤ)
+    ((ObjectProperty.shiftClosure_le_iff G P).mpr hG) n K hn
+
+private theorem generator_bounded
+    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (V : Scheme.{u}) (G : ObjectProperty (DerivedCategory (LatticeTree.Modules R V)))
+    (hgen : ∀ M : LatticeTree.Modules R V, IsConstantModelConstructible R V M →
+      ∃ n, (G.shiftClosure ℤ).extensionProductIter n (LatticeTree.single R V M))
+    (K : DerivedCategory (LatticeTree.Modules R V))
+    (hK : constantModelBoundedConstructible R V K) :
+    ∃ n, (G.shiftClosure ℤ).extensionProductIter n K := by
+  let P := G.shiftClosure ℤ
+  let Q : ObjectProperty (DerivedCategory (LatticeTree.Modules R V)) :=
+    fun K ↦ ∃ n, P.extensionProductIter n K
+  have (n : ℕ) : (P.extensionProductIter n).IsClosedUnderIsomorphisms :=
+    generator_iter_iso P n
+  have : Q.IsClosedUnderIsomorphisms := ⟨by
+    rintro K L e ⟨n, hn⟩
+    exact ⟨n, (P.extensionProductIter n).prop_of_iso e hn⟩⟩
+  let H : ObjectProperty (LatticeTree.Modules R V) := IsConstantModelConstructible R V
+  have : H.IsClosedUnderIsomorphisms := ⟨generator_model_iso R V⟩
+  apply DerivedCategory.prop_of_bounded_of_degreewise Q ?_ ?_ (fun _ ↦ H) ?_ K hK.1 hK.2
+  · intro M hM
+    obtain ⟨n, hn⟩ := hgen 0
+      (constantModelConstructible_of_isZero R V 0 (isZero_zero _))
+    exact ⟨n, (P.extensionProductIter n).prop_of_iso
+      (((DerivedCategory.singleFunctor _ 0).map_isZero (isZero_zero _)).iso hM) hn⟩
+  · intro T hT h₁ h₃
+    obtain ⟨n, hn⟩ := h₁
+    obtain ⟨m, hm⟩ := h₃
+    refine ⟨n + 1 + m, ?_⟩
+    rw [ObjectProperty.extensionProductIter_add P rfl]
+    exact ⟨T.obj₁, T.obj₃, T.mor₁, T.mor₂, T.mor₃, hT, hn, hm⟩
+  · intro q M hM
+    obtain ⟨n, hn⟩ := hgen M hM
+    exact ⟨n, (P.extensionProductIter n).prop_of_iso
+      (((DerivedCategory.singleFunctors _).shiftIso (-q) q 0 (by omega)).app M)
+      ((P.extensionProductIter n).le_shift (-q) _ hn)⟩
+
+private theorem generator_path_qcqs {V W : Scheme.{u}} {t : QcqsOpenClosedTree V}
+    (p : t.Path W) : CompactSpace W ∧ QuasiSeparatedSpace W := by
+  induction p with
+  | root t => cases t <;> exact ⟨inferInstance, inferInstance⟩
+  | openBranch _ _ _ _ _ _ ih => exact ih
+  | closedBranch _ _ _ _ _ _ ih => exact ih
+
+private theorem generator_sheaf
+    (ℓ : ℕ) [Fact ℓ.Prime] {I : Type}
+    (F : I → PadicAlgCl.FiniteIntermediateField ℓ)
+    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (a : ∀ i : I, Profinite.padicIntegersRingObj.{u} ℓ (F i).1 ⟶ R)
+    [∀ i : I, IsMonHom (a i)] (V : Scheme.{u})
+    (G : ObjectProperty (DerivedCategory (LatticeTree.Modules R V)))
+    (hG : ∀ (i : I) (J : ConstantModelConstructibleFiniteTor
+        (Profinite.padicIntegersRingObj ℓ (F i).1) V) (K),
+      Nonempty ((((Mod.extendScalars (coefficientMap (a i) V)).leftDerivedFunctor).obj
+        J.obj) ≅ K) → G K)
+    (hrec : LatticeTree.Reconstruction ℓ I F R a)
+    (hflat : ∀ (W : Scheme.{u}) [CompactSpace W] [QuasiSeparatedSpace W] (i : I),
+      PreservesFiniteLimits (Mod.extendScalars (coefficientMap (a i) W)))
+    (M : LatticeTree.Modules R V) (t : QcqsOpenClosedTree V)
+    (d : LatticeTree.LeafModels ℓ I F R a t M) :
+    ∃ n, (G.shiftClosure ℤ).extensionProductIter n (LatticeTree.single R V M) := by
+  have hfl (W : Scheme.{u}) (p : t.Path W) (i : I) :
+      PreservesFiniteLimits (Mod.extendScalars (coefficientMap (a i) W)) := by
+    let := (generator_path_qcqs p).1
+    let := (generator_path_qcqs p).2
+    exact hflat W i
+  obtain ⟨hbranch, n, hn⟩ := (hrec V t hfl).2 M d
+  refine ⟨n, ObjectProperty.monotone_extensionProductIter ?_ n _ hn⟩
+  rintro K ⟨w, ⟨e⟩⟩
+  obtain ⟨hc, ht, _, ⟨es⟩⟩ := hbranch w
+  apply ObjectProperty.le_shiftClosure
+  exact hG (d.fieldIndex w) ⟨_, hc, ht⟩ K ⟨es ≪≫ e.symm⟩
 
 /-- Integral scalar extensions are constructible of finite Tor amplitude, and every
 bounded constructible finite-Tor complex is in their ambient localizing hull. In fact it
@@ -228,12 +375,30 @@ theorem qcqs_rational_integral_localizing_generators
     (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V] :
     (∀ K, rationalIntegralGenerators ℓ E V K →
       constantModelBoundedConstructible (Profinite.continuousMapRingObj E) V K ∧
-        DerivedCategory.finiteTorAmplitude _ K) ∧
+        _root_.DerivedCategory.finiteTorAmplitude _ K) ∧
     (∀ K : ConstantModelConstructibleFiniteTor (Profinite.continuousMapRingObj E) V,
       CategoryTheory.localizingClosure (rationalIntegralGenerators ℓ E V) K.obj ∧
         ∃ n : ℕ,
           ((rationalIntegralGenerators ℓ E V).shiftClosure ℤ).extensionProductIter n K.obj) := by
-  sorry
+  constructor
+  · rintro K ⟨J, ⟨e⟩⟩
+    obtain ⟨a, b, hab⟩ := J.property.2
+    have h := (CondensedRing.qcqs_integral_scalar_extension_ctf ℓ E V).1
+    obtain ⟨_, _, _, _, _, hctf, _⟩ := h
+    exact generator_ctf_iso _ V e (hctf J a b hab).1
+  · intro K
+    have hfinite : ∃ n, ((rationalIntegralGenerators ℓ E V).shiftClosure ℤ).extensionProductIter
+         n K.obj := by
+      apply generator_bounded _ V _ ?_ K.obj K.property.1
+      intro M hM
+      obtain ⟨t, ⟨d⟩⟩ := (qcqs_constructible_integral_leaf_models ℓ E V).1 M hM
+      apply generator_sheaf ℓ (fun _ : Unit ↦ E) _
+        (fun _ ↦ padicIntegersRingObjToContinuousMapRingObj ℓ E) V _
+        (fun _ J K h ↦ ⟨J, h⟩)
+        ((LatticeTree.qcqs_lattice_tree_reconstruction ℓ).1 E) ?_ M t d
+      intro W _ _ _
+      exact (CondensedRing.qcqs_integral_scalar_extension_ctf ℓ E W).1.choose
+    exact ⟨generator_finite_to_localizing _ hfinite, hfinite⟩
 
 /-- Integral scalar extensions are constructible of finite Tor amplitude, and every
 bounded constructible finite-Tor complex is in their ambient localizing hull. In fact it
@@ -374,10 +539,42 @@ theorem qcqs_algCl_integral_localizing_generators
     (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V] :
     (∀ K, algClIntegralGenerators ℓ V K →
       constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) V K ∧
-        DerivedCategory.finiteTorAmplitude _ K) ∧
+        _root_.DerivedCategory.finiteTorAmplitude _ K) ∧
     (∀ K : ConstantModelConstructibleFiniteTor (Profinite.padicAlgClRingObj ℓ) V,
       CategoryTheory.localizingClosure (algClIntegralGenerators ℓ V) K.obj ∧
         ∃ n : ℕ, ((algClIntegralGenerators ℓ V).shiftClosure ℤ).extensionProductIter n K.obj) := by
-  sorry
+  constructor
+  · rintro K ⟨F, J, ⟨e⟩⟩
+    obtain ⟨a, b, hab⟩ := J.property.2
+    have h := (CondensedRing.qcqs_integral_scalar_extension_ctf ℓ F V).2
+    obtain ⟨hflat, _, _, _, _, hctf, _⟩ := h
+    have hφ : coefficientMap (CondensedRing.integralScalarMap ℓ F ≫
+        Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) V =
+        padicIntegersToPadicSubfield V ℓ F ≫ padicSubfieldRingObjToPadicAlgCl V ℓ F :=
+      coefficientMap_comp _ _ V
+    obtain ⟨ed⟩ := generator_derived_coeff_iso _ _ V _ _ hφ J.obj
+    exact generator_ctf_iso _ V (ed ≪≫ e) (hctf J a b hab).1
+  · intro K
+    have hfinite : ∃ n, ((algClIntegralGenerators ℓ V).shiftClosure ℤ).extensionProductIter
+         n K.obj := by
+      apply generator_bounded _ V _ ?_ K.obj K.property.1
+      intro M hM
+      let E : PadicAlgCl.FiniteIntermediateField ℓ := ⟨⊥, inferInstance⟩
+      obtain ⟨t, ⟨d⟩⟩ := (qcqs_constructible_integral_leaf_models ℓ E V).2 M hM
+      apply generator_sheaf ℓ (fun F : PadicAlgCl.FiniteIntermediateField ℓ ↦ F) _
+        (fun F ↦ padicIntegersRingObjToContinuousMapRingObj ℓ F ≫
+          Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) V _ ?_
+        (LatticeTree.qcqs_lattice_tree_reconstruction ℓ).2 ?_ M t d
+      · intro F J K h
+        obtain ⟨e⟩ := h
+        have hφ : coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ F ≫
+            Profinite.padicSubfieldRingObjToPadicAlgCl ℓ F) V =
+            padicIntegersToPadicSubfield V ℓ F ≫ padicSubfieldRingObjToPadicAlgCl V ℓ F :=
+          coefficientMap_comp _ _ V
+        obtain ⟨ed⟩ := generator_derived_coeff_iso _ _ V _ _ hφ J.obj
+        exact ⟨F, J, ⟨ed.symm ≪≫ e⟩⟩
+      · intro W _ _ F
+        exact (CondensedRing.qcqs_integral_scalar_extension_ctf ℓ F W).2.choose
+    exact ⟨generator_finite_to_localizing _ hfinite, hfinite⟩
 
 end AlgebraicGeometry.ProEtale

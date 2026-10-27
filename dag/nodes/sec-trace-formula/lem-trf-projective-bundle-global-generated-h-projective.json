@@ -18,11 +18,10 @@
  ],
  "proof": [
   {
-   "text": "Choose a finite generating family $s_0,\\ldots,s_r\\in\\Gamma(S,\\mathcal E)$ ($r\\geq0$; for $\\mathcal E=0$ take $r=0$, $s_0=0$). By [def-weil-pbc-generating-sections], its evaluation map $\\varepsilon:\\mathcal O_S^{\\oplus(r+1)}\\twoheadrightarrow\\mathcal E$ is surjective as a map of sheaves. Clause (a) of [lem-weil-pbc-quasi-coherent-symmetric-algebra] gives the induced algebra map $\\operatorname{Sym}(\\varepsilon):\\operatorname{Sym}(\\mathcal O_S^{\\oplus(r+1)})\\to\\operatorname{Sym}(\\mathcal E)$ with $\\operatorname{Sym}(\\varepsilon)\\circ j=j\\circ\\varepsilon$; on an affine open $U$ with $R=\\mathcal O_S(U)$, clause (b) identifies it with the $R$-algebra map $\\operatorname{Sym}_R(R^{\\oplus(r+1)})\\to\\operatorname{Sym}_R(\\mathcal E(U))$ sending $\\iota(e_i)$ to $\\iota(s_i|_U)$. Since $\\operatorname{Sym}^n_R$ is spanned by products of $n$ degree-one elements and is the degree-$n$ summand [lem-weil-pbc-symmetric-algebra-graded], this map is degree-preserving and is the identity of $R$ in degree $0$. Surjectivity as a map of sheaves in each degree $n$: a section of $\\operatorname{Sym}^n(\\mathcal E)$ over an affine $U$ is a finite sum of products $\\iota(t_1)\\cdots\\iota(t_n)$ with $t_k\\in\\mathcal E(U)$; by the definition of generation each $t_k$ is, on the members of an open cover, an $\\mathcal O$-linear combination of the $s_i$, and on a common refinement by affine opens (finitely many $t_k$) each product, hence the sum, is the image of a polynomial expression in the $\\iota(e_i)$. Thus $\\operatorname{Sym}(\\varepsilon)$ is a degree-preserving graded algebra map, surjective as a map of sheaves.",
+   "text": "Choose a finite generating family $s_0,\\ldots,s_r\\in\\Gamma(S,\\mathcal E)$ with $r\\geq0$, padding an empty family by the zero section. By [def-weil-pbc-generating-sections] its evaluation map $\\varepsilon:\\mathcal O_S^{\\oplus(r+1)}\\to\\mathcal E$, $(f_i)\\mapsto\\sum_i f_i s_i$, is surjective as a map of sheaves. Apply [lem-trf-symmetric-sheaf-map-degreewise-surjective] to this map: it gives a degree-preserving morphism $\\operatorname{Sym}(\\varepsilon)$, identity in degree zero and surjective as a map of sheaves in each degree. The source is the symmetric algebra of the standard finite free sheaf.",
    "uses": [
     "def-weil-pbc-generating-sections",
-    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
-    "lem-weil-pbc-symmetric-algebra-graded"
+    "lem-trf-symmetric-sheaf-map-degreewise-surjective"
    ],
    "elementary": false,
    "source": {
@@ -31,10 +30,9 @@
    }
   },
   {
-   "text": "By the surjective-graded-map clause (3) of [prop-nagata-relative-proj-functoriality] (whose proof treats a graded map surjective as a map of sheaves), the map of Step 1 induces a closed immersion $\\iota:\\mathbf P_S(\\mathcal E)=\\operatorname{Proj}_S(\\operatorname{Sym}\\mathcal E)\\hookrightarrow\\operatorname{Proj}_S(\\operatorname{Sym}(\\mathcal O_S^{\\oplus(r+1)}))$ over $S$, i.e. compatible with the structural maps of [def-nagata-relative-proj]. By [def-nagata-relative-projective-space] the target, with its structural map, is the relative projective space $\\mathbf P^r_S\\to S$ of the relative-Proj interface. Thus $\\pi=p\\circ\\iota$ with $p:\\mathbf P^r_S\\to S$ the relative-Proj structural map.",
+   "text": "Clause (3) of [prop-nagata-relative-proj-functoriality] applied to $\\operatorname{Sym}(\\varepsilon)$ gives a closed immersion $\\iota:\\mathbf P_S(\\mathcal E)\\hookrightarrow\\operatorname{Proj}_S(\\operatorname{Sym}(\\mathcal O_S^{\\oplus(r+1)}))$ over $S$. With $p$ the target's relative-Proj structural morphism [def-nagata-relative-proj], this says $\\pi=p\\circ\\iota$.",
    "uses": [
     "prop-nagata-relative-proj-functoriality",
-    "def-nagata-relative-projective-space",
     "def-nagata-relative-proj"
    ],
    "elementary": false,
@@ -44,19 +42,11 @@
    }
   },
   {
-   "text": "The relative-Proj $\\mathbf P^r_S$ is identified over $S$ with $\\mathbf P(\\{0,\\ldots,r\\};S)=S\\times_{\\operatorname{Spec}\\mathbf Z}\\operatorname{Proj}\\mathbf Z[T_0,\\ldots,T_r]$ of [def-nagata-projective-space-base-change], the projective space used in [def-kun-projective]. Let $\\mathcal A_{\\mathbf Z}=\\operatorname{Sym}(\\mathcal O^{\\oplus(r+1)})$ on $\\operatorname{Spec}\\mathbf Z$. By clause (b) of [lem-weil-pbc-quasi-coherent-symmetric-algebra] and [lem-weil-pbc-symmetric-algebra-free-module-polynomial] (index the basis $e_0,\\ldots,e_r$), $\\Gamma(\\operatorname{Spec}\\mathbf Z,\\mathcal A_{\\mathbf Z})\\cong\\mathbf Z[T_0,\\ldots,T_r]$, $\\iota(e_i)\\mapsto T_i$; it preserves degree since both degree-$n$ pieces are spanned by products of $n$ degree-one elements [lem-weil-pbc-symmetric-algebra-graded]. By [lemma-nagata-relative-proj-exists] applied to the affine open $\\operatorname{Spec}\\mathbf Z$ itself, $\\operatorname{Proj}_{\\operatorname{Spec}\\mathbf Z}(\\mathcal A_{\\mathbf Z})\\cong\\operatorname{Proj}\\mathbf Z[T_0,\\ldots,T_r]$ over $\\operatorname{Spec}\\mathbf Z$ (an isomorphism of graded rings induces one of the Mathlib Proj schemes [def-nagata-affine-proj]). Let $g:S\\to\\operatorname{Spec}\\mathbf Z$ be the unique map. The algebra $\\mathcal B=\\operatorname{Sym}(\\mathcal O_S^{\\oplus(r+1)})$ is identified with the coefficientwise pullback $g^*\\mathcal A_{\\mathbf Z}$ in the sense of [def-nagata-graded-algebra-pullback-data]: for an affine $U'=\\operatorname{Spec}R\\subseteq S$ take $\\alpha:\\mathbf Z[T_0,\\ldots,T_r]\\to\\mathcal B(U')\\cong R[T_0,\\ldots,T_r]$ (clause (b) and the polynomial leaf over $R$), $T_i\\mapsto T_i$; in degree $n$, $R\\otimes_{\\mathbf Z}\\mathbf Z[T]_n\\to R[T]_n$ is an isomorphism of free $R$-modules on the degree-$n$ monomials, and these maps commute with restriction because restriction is coefficientwise and fixes each $j(e_i)$. Hence [lemma-nagata-relative-proj-base-change-arbitrary] gives an isomorphism $\\mathbf P^r_S=\\operatorname{Proj}_S(\\mathcal B)\\cong S\\times_{\\operatorname{Spec}\\mathbf Z}\\operatorname{Proj}_{\\operatorname{Spec}\\mathbf Z}(\\mathcal A_{\\mathbf Z})\\cong\\mathbf P(\\{0,\\ldots,r\\};S)$ under which $p$ becomes the first projection [def-pc-fibre-product]. Composing $\\iota$ of Step 2 with this isomorphism gives a closed immersion $i:\\mathbf P_S(\\mathcal E)\\hookrightarrow\\mathbf P(\\{0,\\ldots,r\\};S)$ (a closed immersion followed by an isomorphism, directly from [def-weil-closed-immersion]) with $\\pi=\\mathrm{pr}_1\\circ i$. This is exactly the data of [def-kun-projective] with $N=r$, so $\\pi$ is H-projective.",
+   "text": "Apply [lem-trf-free-projective-bundle-base-change-space] with this $r$. It gives an isomorphism $\\theta$ from the target of $\\iota$ to $\\mathbf P(\\{0,\\ldots,r\\};S)$ with $q\\circ\\theta=p$, where $q$ is the first projection. Set $i=\\theta\\circ\\iota$. An isomorphism preserves closed subsets and identifies the structure sheaves, so the defining closed-immersion conditions [def-weil-closed-immersion] for $\\iota$ also hold for $i$. Then $q\\circ i=p\\circ\\iota=\\pi$. This is the finite-projective-space factorization of [def-kun-projective], with $N=r$, proving the claim.",
    "uses": [
-    "def-nagata-projective-space-base-change",
-    "def-kun-projective",
-    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
-    "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
-    "lem-weil-pbc-symmetric-algebra-graded",
-    "lemma-nagata-relative-proj-exists",
-    "def-nagata-affine-proj",
-    "def-nagata-graded-algebra-pullback-data",
-    "lemma-nagata-relative-proj-base-change-arbitrary",
-    "def-pc-fibre-product",
-    "def-weil-closed-immersion"
+    "lem-trf-free-projective-bundle-base-change-space",
+    "def-weil-closed-immersion",
+    "def-kun-projective"
    ],
    "elementary": false,
    "source": {
@@ -67,19 +57,11 @@
  ],
  "proof_deps": [
   "def-kun-projective",
-  "def-nagata-affine-proj",
-  "def-nagata-graded-algebra-pullback-data",
-  "def-nagata-projective-space-base-change",
   "def-nagata-relative-proj",
-  "def-nagata-relative-projective-space",
-  "def-pc-fibre-product",
   "def-weil-closed-immersion",
   "def-weil-pbc-generating-sections",
-  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
-  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
-  "lem-weil-pbc-symmetric-algebra-graded",
-  "lemma-nagata-relative-proj-base-change-arbitrary",
-  "lemma-nagata-relative-proj-exists",
+  "lem-trf-free-projective-bundle-base-change-space",
+  "lem-trf-symmetric-sheaf-map-degreewise-surjective",
   "prop-nagata-relative-proj-functoriality"
  ],
  "proof_origin": {
@@ -144,19 +126,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-projective-bundle-global-generated-h-projective",
   "worker": "stage1",
-  "summary": "Split the globally generated case of Stacks Tag 087S into three proof steps. Finite global generators give a sheaf epimorphism from a finite free module; the induced symmetric-algebra map is degree-preserving and surjective as a map of sheaves (local argument in Step 1). Relative-Proj functoriality gives a closed immersion into the relative-Proj projective space of the free module, and the relative-Proj base change along $S\\to\\operatorname{Spec}\\mathbf Z$ identifies that with the base-change projective space used by the H-projective definition. No new nodes; item statement unchanged. (Maintainer reader Q60: Step 3 added for the identification $\\mathbf P(\\mathcal O_S^{\\oplus(r+1)})=\\mathbf P^r_S$ against [def-nagata-projective-space-base-change], which the delivery omitted.)",
-  "blueprint": "The steps realize the Tag 087S paragraph beginning “If $\\mathcal{E}$ is generated by finitely many global sections”: the surjection $\\mathcal O_S^{\\oplus n}\\to\\mathcal E$ (Step 1), the induced closed immersion $\\mathbf P(\\mathcal E)\\to\\mathbf P(\\mathcal O_S^{\\oplus n})$ (Step 2), and the identification $\\mathbf P(\\mathcal O_S^{\\oplus n})=\\mathbf P^{n-1}_S$ (Step 3).",
+  "summary": "Repair of the 2026-10-22 workload return: replace the long symmetric-sheaf lifting argument and free-relative-Proj/base-change comparison by two independent, statement-only unsplit nodes. Preserve the item statement and the full returned arguments in report.md, assigning each argument to its new worker item. Parent proof is only their short assembly with relative-Proj functoriality; no Lean written or compiled.",
+  "blueprint": "The steps realize the Tag 087S paragraph beginning “If $\\mathcal{E}$ is generated by finitely many global sections”: the surjection $\\mathcal O_S^{\\oplus n}\\to\\mathcal E$ (Step 1), the induced closed immersion $\\mathbf P(\\mathcal E)\\to\\mathbf P(\\mathcal O_S^{\\oplus n})$ (Step 2), and the identification $\\mathbf P(\\mathcal O_S^{\\oplus n})=\\mathbf P^{n-1}_S$ (Step 3). Work is now distributed: returned Step 1 to lem-trf-symmetric-sheaf-map-degreewise-surjective and returned Step 3 comparison to lem-trf-free-projective-bundle-base-change-space; the relative-Proj closed immersion and final H-projective factorization remain here.",
   "tool_uses": [
    {
     "node": "prop-nagata-relative-proj-functoriality",
-    "why": "Step 2 takes clause (3), closed immersion of relative Proj induced by a surjective graded map; generic relative-Proj geometry that no node of sk-i-curve-zero's route provides."
-   },
-   {
-    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra",
-    "why": "Steps 1 and 3 take the universal property and affine sections of the quasi-coherent symmetric algebra; a generic construction outside the trace-formula unit route."
+    "why": "Clause (3) supplies the generic closed immersion induced by a surjective graded algebra map; the trace-formula unit supplies no replacement."
    }
   ]
  },
@@ -165,12 +143,12 @@
   "lem-weil-pbc-quasi-coherent-symmetric-algebra"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q60-bad9e6448",
-  "group": "Q60",
+  "reviewer": "NT-cc-Q72-9b4acbf84",
+  "group": "Q72",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-bad9e6448 (reviewer sub-agent of L); spot-checked: Read Stacks morphisms.tex Tag 087S, the paragraph beginning 'If E is generated by finitely many global sections', the item, every cited node statement, the proof of clause (3) of prop-nagata-relative-proj-functoriality, the parent and the unit sk-i-curve-zero. The statement is the exact globally generated sub-case and is not weakened. Edge cases E=0 (P(E) is empty) and r=0 both hold. Step 1 is correct: the symmetric-algebra map is surjective as a map of sheaves, and clause (3) is proved from that input. I added lem-weil-pbc-symmetric-algebra-graded to Step 1 to justify that the map preserves degree. Gap (E1/C4): the last sentence of Step 2 identified the relative-Proj P^r_S of def-nagata-relative-projective-space with the P^N_Y of def-kun-projective without proof. def-kun-projective uses def-nagata-projective-space-base-change, S x_Z Proj Z[T], and def-nagata-relative-projective-space says it is not that definition. This is the step P(O^n)=P^{n-1}_S in the source. I repaired it with a new Step 3: lemma-nagata-relative-proj-exists and the polynomial leaf give Proj_Z(Sym Z^{r+1}) = Proj Z[T]; def-nagata-graded-algebra-pullback-data identifies Sym O_S^{r+1} with g^*A_Z; lemma-nagata-relative-proj-base-change-arbitrary (closed) gives P^r_S = P({0..r};S). The repair creates no cycle. prop-nagata-relative-proj-functoriality and lem-weil-pbc-quasi-coherent-symmetric-algebra are off-unit, non-closed statements that were used without being declared. I accepted both as generic tools and declared them in split_report.tool_uses. I also corrected a split_report summary that named a lemma no step cites. There are no new nodes, and the duplicate search (rg for global generation with closed immersion, and for 087S) found none. Corrected item is in fixes/; details are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-9b4acbf84 (reviewer sub-agent of L); spot-checked: This answers the human re-split note of 2026-10-21/22, which asked for at least 2 new nodes and a short assembly; the base proof was 4862 chars. Live is not superseded: the base item there is still the 3-step proof and neither new id exists, and the item is not in the 10-19 dropped list. The delivered parent is 1532 chars. Old Step 1 (Sym functoriality, degree preservation, degree-0 identity, degreewise sheaf surjectivity by common refinement) is now the statement of lem-trf-symmetric-sheaf-map-degreewise-surjective, generalized to any sheaf-surjective u between quasi-coherent modules. Old Step 2 stays as the clause (3) closed immersion of prop-nagata-relative-proj-functoriality; I read the proof of that clause and it uses sheaf surjectivity, which the new node supplies. The comparison in old Step 3 (integral model, affine Proj, coefficientwise pullback, arbitrary base change, first projection) is now the statement of lem-trf-free-projective-bundle-base-change-space. Only the composition with an isomorphism and the def-kun-projective check stay in the parent. Nothing is dropped, the two nodes are of comparable size (about 1.6k and 2.4k chars of argument), and neither restates the item or depends on it. Both new statements are true and tested: degree 0, E=0 (used when the generating family is empty), r=0, empty base, and nonflat F_p coefficients. Sources check out: Stacks 087S at morphisms.tex line 10866, 01CJ lemma-presentation-sym-exterior, 01NF definition-projective-space with the 01O3 paragraph after it. Duplicate search over the DAG found no theorem stating either node. def-nagata-projective-space-base-change only asserts the sameness inside a definition. lem-pur-projective-bundle-tautological-geometry is a possible proof tool for the free-bundle node, not a duplicate (advisory). Searches cover three kinds, with leansearch recorded as unavailable. tool_uses is unchanged from base (prop-nagata-relative-proj-functoriality). Maintainer note: the inherited item statement has a broken JSON escape '\\to' (tab followed by 'o'); I left it because the statement is kept by rule and has a Lean binding. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -190,5 +168,16 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

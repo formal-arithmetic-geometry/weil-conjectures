@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-soft-kernel-closed-sections",
+ "kind": "statement",
+ "title": "Soft kernels give lifting over closed subsets and soft quotients",
+ "statement": "Let $X$ be a paracompact Hausdorff topological space, meaning that every open cover has a locally finite open refinement, and let $0\\to A\\to B\\xrightarrow{p}C\\to0$ be a short exact sequence in the abelian category of sheaves of abelian groups on its open-subset site [def-weil-pbc-sites-and-cohomology]. For a closed subset $S\\subseteq X$ write $F|_S=i_S^{-1}F$, where $i_S:S\\hookrightarrow X$ is inclusion with the subspace topology: sections of $F|_S$ are families of germs of $F$ along $S$ locally represented by sections on open subsets of $X$. Call $F$ soft if $\\Gamma(X,F)\\to\\Gamma(S,F|_S)$ is surjective for every closed $S\\subseteq X$. If $A$ is soft, then $\\Gamma(S,B|_S)\\xrightarrow{p|_S}\\Gamma(S,C|_S)$ is surjective for every closed $S\\subseteq X$, including $S=X$. If $A$ and $B$ are soft, then $C$ is soft.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf. IV §4, Proposition (4.14), printed p.205, with Definition (4.9) and the standing paracompact Hausdorff hypothesis of §4.B."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Write $j:A\\to B$ for the first arrow. Fix a closed $S\\subseteq X$ and $c\\in\\Gamma(S,C|_S)$. The case $S=\\varnothing$ has its unique lift, so assume otherwise. By [lem-sc-abelian-sheaf-short-exact-stalkwise], $0\\to A_x\\xrightarrow{j_x}B_x\\xrightarrow{p_x}C_x\\to0$ is exact for every $x$. At each $x\\in S$ choose a germ $b_x\\in B_x$ with $p_x(b_x)=c_x$. Represent $c$ and $b_x$ by ambient sections near $x$. Equality of their image germs lets us shrink to an open $O_x$ on which the representatives have the same image. Thus there is $h_x\\in B(O_x)$ with $p(h_x)|_{S\\cap O_x}=c|_{S\\cap O_x}$. Only this local lifting, not surjectivity of sections on an arbitrary open, has been used.",
+   "uses": [
+    "lem-sc-abelian-sheaf-short-exact-stalkwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01AG, lemma-abelian; sheaves.tex Section 007S (section-exactness-points); Demailly IV (4.14), local lifting as in (4.3)"
+   }
+  },
+  {
+   "text": "The opens $O_x$ together with $X\\setminus S$ cover $X$. By the defining paracompactness assumption choose a locally finite open refinement $(U_i)_{i\\in I}$ covering $X$, and assign to each $U_i$ an original cover member containing it. If that member is $O_x$, restrict $h_x$ to obtain $h_i\\in B(U_i)$; if it is $X\\setminus S$, take $h_i=0$. The cover $(U_i)$ is point-finite: a point has an open neighborhood meeting only finitely many $U_i$, so it lies in only finitely many. Apply [lem-sfb-paracompact-point-finite-shrinking] to the closed subset $X$ of $X$ and the open cover $(U_i)$: there are opens $V_i$ with $\\bigcup_iV_i=X$ and $\\overline{V_i}\\subseteq U_i$. Put $K_i=\\overline{V_i}$, closed in $X$, so $K_i\\subseteq U_i$ and $\\bigcup_iK_i=X$. Put $D_i=S\\cap K_i$ and $b_i=h_i|_{D_i}$. Then $p(b_i)=c|_{D_i}$. The $D_i$ cover $S$ and form a locally finite family of closed subsets of $X$, since $D_i\\subseteq U_i$.",
+   "uses": [
+    "lem-sfb-paracompact-point-finite-shrinking"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Demailly IV §4.B, Proposition (4.14), printed p.205; details of the closed-cover induction indicated there and in Proposition (4.13), printed p.204"
+   }
+  },
+  {
+   "text": "The elementary pasting fact needed below follows directly from locally represented germs. For any locally finite family of closed sets $(E_i)$, every subfamily union $E_J$ is closed: near a point outside it, only finitely many $E_i$ occur, and their closedness lets us avoid all of them. Compatible sections along the $E_i$ give a well-defined germ family on their union. At a point $x$ of the union, take a neighborhood meeting finitely many $E_i$, discard those not containing $x$ by shrinking, and choose ambient representatives near $x$ for the finitely many remaining sections. Their germs at $x$ agree, so another finite shrinking makes all these representatives equal. The resulting single representative represents the pasted germ family on the union near $x$. This proves that the pasted family is a section; uniqueness is pointwise equality of germs. The same argument applies to two closed subsets. The open gluing and uniqueness used for representatives are the sheaf condition of [def-weil-pbc-sites-and-cohomology].",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Demailly IV §4.B, Proposition (4.14), printed p.205; details of the closed-cover induction indicated there and in Proposition (4.13), printed p.204"
+   }
+  },
+  {
+   "text": "Consider partial lifts $(J,b)$, where $J\\subseteq I$, $F_J=\\bigcup_{i\\in J}D_i$ and $b\\in\\Gamma(F_J,B|_{F_J})$ satisfies $p(b)=c|_{F_J}$. Order them by extension: $J\\subseteq J^{\\prime}$ and $b^{\\prime}|_{F_J}=b$. The empty partial lift exists. A chain has an upper bound on $J_*=\\bigcup J$: for each $i\\in J_*$ choose a chain member containing $i$ and restrict its lift to $D_i$. Any two chosen lifts agree wherever both are defined, since the chain members are comparable. Step 3 pastes these compatible sections on the fixed locally finite closed family $(D_i)_{i\\in J_*}$; their image is $c$. To apply the subset version [lem-weil-pbc-zorn-lemma], encode $(J,b)$ by $J$ as markers and the graph of its germ family, a subset of $I\\sqcup\\coprod_{x\\in S}B_x$. Inclusion of these codes is precisely the extension order. Thus the cited lemma supplies a maximal partial lift $(J,b)$.",
+   "uses": [
+    "lem-weil-pbc-zorn-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Demailly IV §4.B, Proposition (4.14), printed p.205; details of the closed-cover induction indicated there and in Proposition (4.13), printed p.204"
+   }
+  },
+  {
+   "text": "If $i\\notin J$, set $T=F_J\\cap D_i$, closed in $X$ by Step 3. On $T$ the difference $d=b|_T-b_i|_T$ has image zero under $p$. By the stalk exactness of [lem-sc-abelian-sheaf-short-exact-stalkwise], each $d_x$ has a unique preimage $a_x\\in A_x$. These preimages are locally represented along $T$: choose an ambient representative $\\beta$ of $d$ near $x$ and a representative $\\alpha$ of $a_x$; the equality $j_x(a_x)=d_x$ allows shrinking until $j(\\alpha)=\\beta$. At nearby points of $T$, uniqueness of the kernel preimage identifies the germ of $\\alpha$ with the chosen $a_y$. Hence $(a_x)$ is a section $a\\in\\Gamma(T,A|_T)$. Softness of $A$ gives $\\widetilde a\\in\\Gamma(X,A)$ restricting to $a$. Replace $b_i$ on $D_i$ by $b_i+j(\\widetilde a)|_{D_i}$. It still maps to $c$ and now agrees with $b$ on $T$. Step 3 pastes the two sections over $F_J\\cup D_i$, giving a strictly larger partial lift because its index set is $J\\cup\\{i\\}$. This contradicts maximality.",
+   "uses": [
+    "lem-sc-abelian-sheaf-short-exact-stalkwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Demailly IV §4.B, Proposition (4.14), printed p.205; details of the closed-cover induction indicated there and in Proposition (4.13), printed p.204"
+   }
+  },
+  {
+   "text": "Therefore the maximal index set is $I$. Its domain is $F_I=S$, and its section $b$ maps to $c$. This proves the asserted surjectivity for every closed $S$, and in particular for $S=X$, which is closed in itself.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Demailly IV §4.B, Proposition (4.14), printed p.205; details of the closed-cover induction indicated there and in Proposition (4.13), printed p.204"
+   }
+  },
+  {
+   "text": "Finally suppose $B$ is also soft. Given a closed $S\\subseteq X$ and $c\\in\\Gamma(S,C|_S)$, Step 6 gives a lift $b\\in\\Gamma(S,B|_S)$. Extend $b$ to $\\widetilde b\\in\\Gamma(X,B)$ by softness of $B$. The global section $p(\\widetilde b)$ restricts to $c$, since a sheaf morphism commutes with restriction of germs. Thus $C$ is soft.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Demailly IV §4.B, Proposition (4.14), printed p.205; details of the closed-cover induction indicated there and in Proposition (4.13), printed p.204"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-abelian-sheaf-short-exact-stalkwise",
+  "lem-sfb-paracompact-point-finite-shrinking",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-zorn-lemma"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "IV §4.B (4.14), printed p.205, whose omitted details are supplied using the locally finite closed-cover method of (4.13). Source read online 2026-10-24; local PDF remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "\\bsoft\\b|soft.*(quotient|exact)|(?:quotient|exact).*soft",
+   "results": "OK 2 hits: Mathlib/Tactic/Linter/Style.lean, Mathlib/RingTheory/LocalRing/Quotient.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic sheaf epimorphisms give only local lifts; none of the hits states lifting over closed subsets with a soft kernel or softness of the quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A short exact sequence with soft kernel is surjective on sections over closed subsets and quotients of soft sheaves by soft subsheaves are soft",
+   "results": "OK 8 hits: CategoryTheory.ShortComplex.exact_of_f_is_kernel, TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective, CategoryTheory.ShortComplex.ShortExact.exact, CategoryTheory.ShortComplex.exact_iff_epi_kernel_lift, CategoryTheory.ShortComplex.ShortExact, CategoryTheory.Sheaf.locallySurjective, CategoryTheory.ShortComplex.ShortExact.mk, CategoryTheory.Sheaf.epi_of_isLocallySurjective'. ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic sheaf epimorphisms give only local lifts; none of the hits states lifting over closed subsets with a soft kernel or softness of the quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"surjective\"",
+   "results": "OK 12 hits: PresheafOfModules.epi_of_surjective, PresheafOfModules.surjective_of_epi, PresheafOfModules.epi_iff_surjective, PresheafOfModules.mono_iff_surjective, PresheafOfModules.ModuleColimit.ιR_jointly_surjective, PresheafOfModules.ModuleColimit.ιM_jointly_surjective, PresheafOfModules.ModuleColimit.jointly_surjective₂, PresheafOfModules.ModuleColimit.jointly_surjective₃. ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic sheaf epimorphisms give only local lifts; none of the hits states lifting over closed subsets with a soft kernel or softness of the quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For soft sheaves A and B on a paracompact space the cokernel sheaf is soft and the map from sections of B onto sections of the cokernel is surjective",
+   "results": "OK 8 hits: SheafOfModules.relationsOfIsCokernelFree_s, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.generatorsOfIsCokernelFree_π, SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.relationsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.Presentation.isColimit, SheafOfModules.relationsOfIsCokernelFree. ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic sheaf epimorphisms give only local lifts; none of the hits states lifting over closed subsets with a soft kernel or softness of the quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a short exact sequence of abelian sheaves on a paracompact Hausdorff space with soft kernel sections over every closed subset lift and the quotient is soft if the middle sheaf is soft",
+   "results": "OK 8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, Profinite.NobelingProof.succ_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex, LightCondensed.instIsGrothendieckAbelianLightCondMod. ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic sheaf epimorphisms give only local lifts; none of the hits states lifting over closed subsets with a soft kernel or softness of the quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a short exact sequence of abelian sheaves on a paracompact Hausdorff space a soft kernel makes sections surjective on every closed subset",
+   "results": "OK 8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, Profinite.NobelingProof.succ_exact, CategoryTheory.ShortComplex.ShortExact.surjective_g, CondensedMod.epi_iff_locallySurjective_on_compHaus, CategoryTheory.coherentTopology.isLocallySurjective_iff, TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective. ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic local sheaf lifting and presheaf surjectivity do not give soft-kernel lifting on closed subsets"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"surjective\"",
+   "results": "OK 12 hits: PresheafOfModules.epi_of_surjective, PresheafOfModules.surjective_of_epi, PresheafOfModules.epi_iff_surjective, PresheafOfModules.mono_iff_surjective, PresheafOfModules.ModuleColimit.ιR_jointly_surjective, PresheafOfModules.ModuleColimit.ιM_jointly_surjective, PresheafOfModules.ModuleColimit.jointly_surjective₂, PresheafOfModules.ModuleColimit.jointly_surjective₃. ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic local sheaf lifting and presheaf surjectivity do not give soft-kernel lifting on closed subsets"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bsoft\\b|[Ss]oftSheaf|[Ss]oft_sheaf",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic local sheaf lifting and presheaf surjectivity do not give soft-kernel lifting on closed subsets"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Soft kernel sheaves imply lifting sections over closed subsets and soft quotients on paracompact Hausdorff spaces",
+   "results": "OK 8 hits: TopCat.Sheaf.forget, TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective, TopCat.Presheaf.section_ext, CategoryTheory.IsKernelPair.lift', TopCat.Sheaf.interUnionPullbackConeLift_left, TopCat.Presheaf.sheafify, ClosedSubmodule.instCanLiftSubmoduleToSubmoduleIsClosedCoe, TopologicalSpace.Closeds.instCanLiftSetCoeIsClosed. ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic local sheaf lifting and presheaf surjectivity do not give soft-kernel lifting on closed subsets"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-soft-abelian-sheaf-acyclic",
+  "date": "2026-10-24",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Dolbeault complexes are acyclic resolutions. Supporting input: IV §4, discussion following Definition (4.4), printed p.203 (locally compact spaces with countable base are paracompact); Example (4.12), Theorem (4.15), Lemma (4.18), Corollary (4.19), printed pp.204--205. The soft-ring argument applies to the sheaf of complex-valued smooth functions and does not use a uniform dimension bound. Supporting input for smooth-module acyclicity: IV §4, Definition (4.9), Proposition (4.14), Theorem (4.15), printed pp.204--205, applied to the closed subset X itself. Proof of soft-sheaf acyclicity: Demailly IV Proposition (4.14), soft-kernel lifting over closed subsets and softness of the quotient.",
+   "via": [
+    "lem-sfb-soft-abelian-sheaf-acyclic",
+    "lem-sfb-smooth-function-modules-acyclic",
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-soft-kernel-closed-sections",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Read Demailly IV (4.13)--(4.14) online and expanded the omitted induction, checking local lifting via stalk exactness, locally finite closed shrinking, closed-union pasting, chain upper bounds, and the soft-kernel correction on each closed overlap. No new node: the closed shrinking is the existing Mathlib leaf lem-sfb-paracompact-point-finite-shrinking applied to the closed subset X (reviewer FIX dropped the duplicate new closed-shrinking leaf); reused the existing stalkwise short-exactness and subset-Zorn nodes.",
+  "blueprint": "Supporting input to det-thm-sf-ctf-stability-direct-images proof (3), through the recorded alteration/moduli/Kempf/Kodaira/Dolbeault/smooth-module-acyclicity chain. This split supplies Demailly IV Proposition (4.14), the soft-kernel lifting prerequisite of lem-sfb-soft-abelian-sheaf-acyclic. Current latest blueprint proof read; no unit-level change. The inherited created.item chain has no mechanically recognized blueprint ancestor (ancestor command returns None), retained consistently in the item and new node.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-abelian-sheaf-short-exact-stalkwise",
+    "why": "Generic short exactness on topological stalks supplies local lifts and unique kernel germs; the item unit has no replacement and this does not change its proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-abelian-sheaf-short-exact-stalkwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-c0799a49a",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-c0799a49a (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is identical to live and side-live, where the item is still unsplit. There is no repair note, so this is not a re-split. I read all 7 steps, the full statements of the cited nodes, the parent lem-sfb-soft-abelian-sheaf-acyclic (its step 4 uses both clauses, which this delivery does not weaken), and the Mathlib ShrinkingLemma.lean lines 216-257, Paracompact.lean line 299 and LocallyFinite.lean lines 37-39. Demailly IV 4.B (4.9)/(4.13)/(4.14) is not under literature/ (the worker marked it WANTED with proof_origin agent), and network access is blocked here, so I could not read the source pages. I checked the proof independently instead, and every step holds: local lifts from stalk exactness; a locally finite closed cover D_i=S∩K_i; pasting over locally finite closed families (step 3, elementary, correct); a Zorn coding by marker set plus germ graph that matches zorn_subset, including the chain bound and the empty chain; the step 5 kernel correction (the kernel germs are locally represented, softness is applied to the closed set T, and b_i+j(ã) equals b on T and still maps to c); and steps 6-7. I tested X empty, S empty, a one-point X, an infinite discrete X, A=0, B=0 and empty D_i. The coefficient category is abelian sheaves on the open-subset site throughout; nothing is circular and there are no SGA citations. I accept the tool_use of the generic stalkwise criterion lem-sc-abelian-sheaf-short-exact-stalkwise. One fault (C5 duplicate, stages/1-dag §3.4): the new Mathlib leaf lem-sfb-paracompact-closed-shrinking (exists_iUnion_eq_closed_subset) is the S=X case of the existing base leaf lem-sfb-paracompact-point-finite-shrinking (Q58, same unit, exists_subset_iUnion_closure_subset), taking K_i to be the closure of V_i, because locally finite implies point-finite. In Mathlib, exists_iUnion_eq_closed_subset is itself the one-line s=univ corollary. The report's not-duplicates section missed this node. FIX: step 2 now applies the existing leaf to the closed set X, with uses and proof_deps updated and the split_report summary adjusted; the new node is dropped and nothing cites it any more. The statement, stmt_deps and blueprint fields are unchanged. The corrected item is at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-soft-kernel-closed-sections.json, and the review is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SoftKernelClosedSections",
+  "declaration": "TopCat.Sheaf.surjective_closedSections_and_soft_of_soft_kernel",
+  "file": "lean/Sheaf/Topology/SoftKernelClosedSections.lean",
+  "statement": "theorem surjective_closedSections_and_soft_of_soft_kernel {X : TopCat.{u}} [ParacompactSpace X] [T2Space X] (K : ShortComplex (X.Sheaf AddCommGrpCat.{u})) (hK : K.ShortExact) (hA : ∀ (S : Set X), IsClosed S → Function.Surjective (((pullbackPushforwardAdjunction AddCommGrpCat.{u} (TopCat.ofHom ⟨(Subtype.val : S → X), continuous_subtype_val⟩)).unit.app K.X₁).hom.app (op (⊤ : Opens X)))) : (∀ (S : Set X), IsClosed S → Function.Surjective (((pullback AddCommGrpCat.{u} (TopCat.ofHom ⟨(Subtype.val : S → X), continuous_subtype_val⟩)).map K.g).hom.app (op (⊤ : Opens S)))) ∧ ((∀ (S : Set X), IsClosed S → Function.Surjective (((pullbackPushforwardAdjunction AddCommGrpCat.{u} (TopCat.ofHom ⟨(Subtype.val : S → X), continuous_subtype_val⟩)).unit.app K.X₂).hom.app (op (⊤ : Opens X)))) → ∀ (S : Set X), IsClosed S → Function.Surjective (((pullbackPushforwardAdjunction AddCommGrpCat.{u} (TopCat.ofHom ⟨(Subtype.val : S → X), continuous_subtype_val⟩)).unit.app K.X₃).hom.app (op (⊤ : Opens X))))",
+  "branch": "sheaf-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00b336beb",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: ParacompactSpace+T2Space X; K ShortExact in X.Sheaf AddCommGrpCat.{u}; F|_S = Mathlib TopCat.Sheaf.pullback along the subtype inclusion; softness = surjectivity of the pullbackPushforwardAdjunction unit at op ⊤ for closed S. Clause 1 (lift over every closed S) assumes only A soft; clause 2 (B soft → C soft) is an implication. S=∅, S=X and empty X are covered. The universe equality is forced by Mathlib's pullback and is the convention of the landed consumer subsingleton_H'_top_of_soft, whose softness hypothesis hG is identical. No new predicate and no name collision. lean.statement is verbatim. Only the node's lean field changed versus side-live. stmt_dep imported publicly, proof deps privately. Docstrings carry source and blueprint, and the theorem docstring has all 7 proof steps. No definitions, proof is sorry. Not checked: the Demailly PDF is absent, so I read against the node text. Not recompiled (no file changed). Note: the Second reading section is the author's self-check, not an independent reader."
+ }
+}

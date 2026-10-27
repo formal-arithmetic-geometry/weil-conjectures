@@ -255,7 +255,43 @@
  "uses_not_cited": [
   "def-weil-pbc-henselian-terminology"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Hom.isFinite_steinFactorizationBase",
+    "AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.isFinite_steinFactorizationBase",
+     "module": "WeilConjectures.AlgebraicGeometry.HenselianConnectedness",
+     "lines": [
+      64,
+      98
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus",
+     "module": "WeilConjectures.AlgebraicGeometry.HenselianConnectedness",
+     "lines": [
+      116,
+      221
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-iff",
  "lead_note": "2026-10-10 L: unreached from the target since 11:31: E1's proof of lemma-weil-pbc-etale-degree-zero follows Stacks 0A0C through the Gabber node 09ZF and no longer uses the Stein / spectral-restriction route of the imported proof. Flagged unreachable; it leaves the queue. Reached again if a citer appears.",
@@ -329,5 +365,35 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-3219d5ad3 (reviewer sub-agent of L); spot-checked: Read the complete item, all 29 cited node statements, unit/chapter route, delivery report, and Stacks sources. Steps 1–9 are mathematically supported with correct hypotheses, base-change morphism, and sets-valued Zariski sheaf coefficient category. The corrected Noetherian finiteness qualification is justified by the square-zero counterexample and Tags 03H2, 02O5, and 02O6. No new nodes, duplicates, circularity, or repairs found. Review written to review.md."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $A$ be a commutative ring, $S=\\operatorname{Spec}A$, and let $p:Y\\to S$ be\nproper [def-weil-pbc-scheme-conventions], with Stein factorization\n$Y\\to\\operatorname{Spec}B\\to S$, $B=H^0(Y,\\mathcal O_Y)$\n[def-weil-pbc-stein-factorization].\n\n- (i) *Finiteness.* If $A$ is Noetherian, then $A\\to B$ is finite, i.e. the\n  second map $\\operatorname{Spec}B\\to S$ of the Stein factorization is finite.\n- (ii) *Connectedness.* If $(A,I)$ is a henselian pair\n  [def-weil-pbc-henselian-terminology], then every irreducible closed subset\n  $C$ of $Y$ meets the closed fibre $Y_0=p^{-1}(V(I))$ in a nonempty connected\n  subset.",
+  "proof": [
+   {
+    "text": "*(i)* For $A$ Noetherian and $p$ proper, $p_*\\mathcal O_Y$ is a coherent\n$\\mathcal O_S$-module (Stacks Project, Tag 02O5), so its global sections $B$\nform a finite $A$-module.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*(ii) Nonemptiness.* The image $p(C)$ is closed and nonempty, so it contains a\nclosed point of $S$, a maximal ideal; it contains $I$, because $I$ lies in the\nJacobson radical of $A$ for a henselian pair. So $C\\cap Y_0\\neq\\emptyset$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*(ii) Connectedness.* Give $C$ its reduced induced closed subscheme structure\n$Z$; then $g:Z\\to S$ is proper, $Z\\cong C$ is irreducible, hence connected, and\n$Z_0=Z\\times_SV(I)$ is nonempty with image $C\\cap Y_0$ in $Y$. Let\n$Z\\xrightarrow{q}\\operatorname{Spec}B\\to S$ be the Stein factorization of $g$,\n$B=\\Gamma(Z,\\mathcal O_Z)$ [def-weil-pbc-stein-factorization]. For proper $g$\nover an affine base (Stacks Project, Tag 03H2), $A\\to B$ is integral, and $q$\nis proper and surjective with connected fibres.\n\nSince $B$ is integral over $A$, the pair $(B,IB)$ is henselian\n[def-weil-pbc-henselian-terminology]: $IB$ lies in the Jacobson radical, and\nidempotents of $B/IB$ lift uniquely to $B$, because every finite subset of $B$\nlies in a finite $A$-subalgebra, over which idempotents lift uniquely. As $Z$\nis connected, $B\\neq0$ has no idempotents other than $0$ and $1$, so neither\nhas $B/IB$, which is nonzero because $IB$ lies in the Jacobson radical of\n$B\\neq0$. Hence $V(IB)\\subseteq\\operatorname{Spec}B$ is nonempty and connected.\n\nFinally $q$ is closed and surjective, hence a quotient map, with connected\nfibres, so the preimage $q^{-1}(V(IB))$ of the closed connected set $V(IB)$ is\nconnected. This preimage is $g^{-1}(V(I))$, the image of $Z_0$ in $Z$, because\nthe preimage of $V(I)$ under $\\operatorname{Spec}B\\to S$ is $V(IB)$. Its image\n$C\\cap Y_0$ in $Y$ is therefore connected.",
+    "uses": [
+     "def-weil-pbc-stein-factorization",
+     "def-weil-pbc-henselian-terminology"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

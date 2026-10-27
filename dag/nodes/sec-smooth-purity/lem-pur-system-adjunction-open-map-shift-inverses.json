@@ -1,0 +1,104 @@
+{
+ "id": "lem-pur-system-adjunction-open-map-shift-inverses",
+ "kind": "statement",
+ "title": "System adjunction/open-map shift inverses",
+ "statement": "The component statement of the system adjunction/open-map shift theorem for inverses.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "cancellation of the shift square for an isomorphism"
+ },
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-integral-compactification-system-realization",
+  "def-pur-integral-operation-shift-data",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "lem-pur-system-primitive-comparison-shift",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Apply the corresponding shift compatibility, mate, whiskering and cancellation calculations from the listed dependencies on the simultaneous system site.",
+   "uses": [
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-commshift-nattrans-comp-whisker"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "cancellation of the shift square for an isomorphism"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "system adjunction shift compatibility inverses",
+   "result": "No existing declaration found."
+  },
+  {
+   "tool": "loogle",
+   "query": "SystemAdjunctionOpenShift inverses",
+   "result": "No existing declaration found."
+  },
+  {
+   "tool": "grep",
+   "query": "systemAdjunctionOpenMapShift_inverses",
+   "result": "Only this split declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.SystemAdjunctionOpenMapShift",
+  "date": "2026-10-27",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-system-adjunction-open-map-shift",
+   "place": "cancellation of the shift square for an isomorphism",
+   "via": [
+    "lem-pur-system-adjunction-open-map-shift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.SystemAdjunctionOpenMapShift",
+  "file": "lean/Sheaf/SixFunctors/SystemAdjunctionOpenMapShift.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.systemAdjunctionOpenMapShift_inverses",
+  "statement": "theorem systemAdjunctionOpenMapShift_inverses (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (o : Operations l E) (c : Compositors l E o) (a : OpenComparisons l E o c) : ∀ {A B : SystemShiftCorner D} (F G : SystemShiftFunctor l E A B) (τ : F.functor ≅ G.functor) (M : A.category l E) (r : ℤ), A.good l E M → B.good l E (F.functor.obj M) → B.good l E (G.functor.obj M) → F.square l E G (fun P ↦ τ.hom.app P) M r → G.square l E F (fun P ↦ τ.inv.app P) M r",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T012816-L-2333801",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T012816-L-2333801",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

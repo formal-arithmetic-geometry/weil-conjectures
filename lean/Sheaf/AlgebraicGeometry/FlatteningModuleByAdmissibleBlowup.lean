@@ -16,35 +16,17 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
-import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportPullback
-import WeilConjectures.AlgebraicGeometry.FinitePushforwardFiniteType
-import Mathlib.RingTheory.FiniteStability
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
-import Mathlib.Algebra.Module.FinitePresentation
-import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import Mathlib.RingTheory.Smooth.Flat
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.RingTheory.Unramified.Basic
-import Mathlib.RingTheory.Unramified.Finite
-import WeilConjectures.AlgebraicGeometry.AffineChartRelativeFlatCriterion
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import WeilConjectures.AlgebraicGeometry.DimensionBaseChange
-import Mathlib.RingTheory.Spectrum.Prime.Chevalley
-import WeilConjectures.AlgebraicGeometry.ModuleFinitePresentationCokernel
-import Sheaf.AlgebraicGeometry.GenericFreeBlowup
+import Sheaf.AlgebraicGeometry.FlatteningSmoothAffineReduction
+import Sheaf.AlgebraicGeometry.FlatteningSmoothSupportInduction
+import Sheaf.AlgebraicGeometry.FlatModulePresentationAfterBoundaryBlowup
 import Sheaf.AlgebraicGeometry.ModuleAdmissibleBlowupCalculus
-import Sheaf.AlgebraicGeometry.ModuleStrictTransformAffinePushforward
-import Sheaf.AlgebraicGeometry.ModuleStrictTransformUniversalExact
-import Sheaf.AlgebraicGeometry.NagataBoundaryDivisorCartier
-import Sheaf.AlgebraicGeometry.UnramifiedMorphism
-import Sheaf.RingTheory.FreeSubtractionFlatness
-import Sheaf.TraceFormula.ElementaryModuleDevissage
-import Sheaf.TraceFormula.EtaleFlatteningDescent
-import Sheaf.TraceFormula.FlatFiniteTypeDensePresentation
-import Sheaf.Paper.DerivedHomMayerVietoris
+import Sheaf.AlgebraicGeometry.PullbackModelFlatnessComparison
+import WeilConjectures.AlgebraicGeometry.RelativelyFlatModulePullback
+import WeilConjectures.AlgebraicGeometry.RelativeFlatModuleStalk
+import WeilConjectures.AlgebraicGeometry.TensorPullbackOpenSquare
+import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 
 /-!
 # Flattening a module by an admissible blowup
@@ -62,6 +44,91 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
+
+private theorem ideal_ofFiniteType_of_module {S : Scheme.{u}} (I : S.IdealSheafData)
+    [I.toModules.IsFiniteType] : I.ofFiniteType := by
+  have := SheafOfModules.isQuasicoherent_unit (R := I.subscheme.ringCatSheaf)
+  have := SheafOfModules.isQuasicoherent_unit (R := S.ringCatSheaf)
+  have : SheafOfModules.IsQuasicoherent (R := S.ringCatSheaf)
+      ((SheafOfModules.pushforward I.subschemeι.toRingCatSheafHom).obj
+        (SheafOfModules.unit I.subscheme.ringCatSheaf)) :=
+    Scheme.Modules.isQuasicoherent_pushforward_of_isClosedImmersion I.subschemeι _
+  have : I.toModules.IsQuasicoherent :=
+    Scheme.Modules.isQuasicoherent_kernel I.toPushforwardSubscheme
+  intro V _
+  have := Scheme.Modules.finite_sections_of_finiteType I.toModules V.2
+  let l : Γ(I.toModules, V.1) →ₗ[Γ(S, V.1)] Γ(S, V.1) :=
+    (I.toModulesι.val.app (Opposite.op V.1)).hom
+  have hrange : LinearMap.range l = I.ideal V := by
+    apply SetLike.coe_injective
+    exact I.range_toModulesι_app V
+  rw [← hrange]
+  exact Submodule.fg_range l
+
+private theorem strictTransform_restrict_finitePresentation
+    {S X : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S]
+    (f : X ⟶ S) (F : X.Modules) [F.IsQuasicoherent]
+    (U : S.Opens) (hU : IsCompact (U : Set S))
+    (hfp : (F.restrict (f ⁻¹ᵁ U).ι).IsFinitePresentation) (B : IsAdmissible S U) :
+    ((@Scheme.Modules.moduleStrictTransform X S f B.I
+      (B.I.isFiniteType_toModules_sheaf B.finiteType) F inferInstance).restrict
+        ((pullback.snd f B.I.blowupMap) ⁻¹ᵁ (B.I.blowupMap ⁻¹ᵁ U)).ι).IsFinitePresentation := by
+  open Scheme.Modules in
+  classical
+  let := B.I.isFiniteType_toModules_sheaf B.finiteType
+  let p := pullback.fst f B.I.blowupMap
+  let q := pullback.snd f B.I.blowupMap
+  let P := (tensorPullback p).obj F
+  let M := moduleStrictTransform f B.I F
+  let V := f ⁻¹ᵁ U
+  let W := q ⁻¹ᵁ (B.I.blowupMap ⁻¹ᵁ U)
+  have hW : W = p ⁻¹ᵁ V := by
+    change (q ≫ B.I.blowupMap) ⁻¹ᵁ U = (p ≫ f) ⁻¹ᵁ U
+    rw [pullback.condition]
+  obtain ⟨_, _, _, hquot, _⟩ := moduleAdmissibleBlowupPermanence U hU f F B
+  let φ : P ⟶ M := moduleStrictTransformQuotient f B.I F
+  have : IsIso ((SheafOfModules.overFunctor _ W).map φ) := hquot
+  have hcomp : IsIso ((overEquiv W).functor.map
+      ((SheafOfModules.overFunctor _ W).map φ)) := inferInstance
+  have : IsIso ((restrictFunctor W.ι).map φ) :=
+    (NatIso.isIso_map_iff (overFunctorEquiv W) φ).mp hcomp
+  have hP : (P.restrict W.ι).IsFinitePresentation := by
+    rw [hW]
+    obtain ⟨e, _⟩ := exists_tensorPullback_openSquare (p ⁻¹ᵁ V).ι p V (p ∣_ V)
+      (by simp) (morphismRestrict_ι p V).symm F
+    have : (F.restrict V.ι).IsFinitePresentation := hfp
+    have := isFinitePresentation_tensorPullback (p ∣_ V) (F.restrict V.ι)
+    exact isFinitePresentation_of_iso e.symm
+  have := hP
+  exact isFinitePresentation_of_iso (asIso ((restrictFunctor W.ι).map φ))
+
+private theorem flat_finitePresentation_of_iso_square
+    {P Q T R : Scheme.{u}} (m : P ⟶ Q) [IsIso m] (e : T ≅ R)
+    (p : P ⟶ T) (q : Q ⟶ R) (hcomm : m ≫ q = p ≫ e.hom)
+    (M : Q.Modules) [M.IsQuasicoherent] (N : P.Modules) [N.IsQuasicoherent]
+    (a : N ≅ (Scheme.Modules.tensorPullback m).obj M)
+    (hflat : N.IsFlatOver p) (hfp : N.IsFinitePresentation) :
+    M.IsFlatOver q ∧ M.IsFinitePresentation := by
+  open Scheme.Modules in
+  classical
+  have hinv : inv m ≫ p = q ≫ e.inv := by
+    apply (cancel_mono e.hom).mp
+    simp only [Category.assoc, e.inv_hom_id, Category.comp_id]
+    rw [← hcomm, IsIso.inv_hom_id_assoc]
+  have hp : IsPullback (inv m) q p e.inv := IsPullback.of_horiz_isIso ⟨hinv⟩
+  have hbase := relativelyFlat_module_pullback p e.inv N hflat
+  have hlocal : ((tensorPullback (inv m)).obj N).IsFlatOver q :=
+    (isFlatOver_tensorPullback_iff_of_isPullback hp
+      (IsPullback.of_hasPullback p e.inv) N).mpr hbase
+  obtain ⟨comp⟩ := nonempty_tensorPullbackComp (inv m) m
+  obtain ⟨id⟩ := nonempty_tensorPullbackId Q
+  let cancel : (tensorPullback m ⋙ tensorPullback (inv m)) ≅ 𝟭 Q.Modules :=
+    comp.symm ≪≫ eqToIso (congrArg tensorPullback (IsIso.inv_hom_id m)) ≪≫ id
+  let a' : (tensorPullback (inv m)).obj N ≅ M :=
+    (tensorPullback (inv m)).mapIso a ≪≫ cancel.app M
+  have := hfp
+  have := isFinitePresentation_tensorPullback (inv m) N
+  exact ⟨flatOver_of_iso q a'.symm hlocal, isFinitePresentation_of_iso a'⟩
 
 /-- A finite-type quasi-coherent module, finitely presented and flat over the preserved
 quasi-compact open, becomes flat and finitely presented after an admissible base blowup.
@@ -139,6 +206,85 @@ theorem exists_flat_finitePresentation_moduleStrictTransform_admissibleBlowup
                   (B.I.isFiniteType_toModules_sheaf B.finiteType) F inferInstance)))) ∧
       (@Scheme.Modules.moduleStrictTransform X S f B.I
         (B.I.isFiniteType_toModules_sheaf B.finiteType) F inferInstance).IsFinitePresentation := by
-  sorry
+  classical
+  open Scheme.Modules in
+  have hbounded : ∀ d : ℕ,
+      ∀ (S X : Scheme.{u}) [CompactSpace S] [QuasiSeparatedSpace S]
+        (f : X ⟶ S) [QuasiCompact f] [LocallyOfFinitePresentation f]
+        (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType]
+        (U : S.Opens), IsCompact (U : Set S) →
+        (F.restrict (f ⁻¹ᵁ U).ι).IsFinitePresentation →
+        (∀ x : X, f x ∈ U → Module.Flat (S.presheaf.stalk (f x))
+          ((ModuleCat.restrictScalars (f.stalkMap x).hom).obj
+            ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F))) →
+        (∀ s : S, topologicalKrullDim {x : f.fiber s |
+          ¬ Subsingleton (((tensorPullback (f.fiberι s)).obj F).presheaf.stalk x)} <
+            (d : WithBot ℕ∞)) →
+        ∃ B : IsAdmissible S U,
+          (@moduleStrictTransform _ _ f B.I
+            (B.I.isFiniteType_toModules_sheaf B.finiteType) F inferInstance).IsFlatOver
+              (pullback.snd f B.I.blowupMap) := by
+    intro d
+    induction d using Nat.strong_induction_on with
+    | h d ih =>
+      intro S X _ _ f _ _ F _ _ U hU hfp hflat hdim
+      apply exists_flat_moduleStrictTransform_of_smooth_affine d ?_ f F U hU hfp hflat hdim
+      intro n hn S X _ f _ _ _ F _ _ U hU hfp hflat
+      exact exists_flat_moduleStrictTransform_smooth_of_lower_support n
+        (ih n hn) f F U hU hfp hflat
+  obtain ⟨d, hd⟩ := exists_fibre_dimension_bound f
+  have hdim : ∀ s : S, topologicalKrullDim {x : f.fiber s |
+      ¬ Subsingleton (((Scheme.Modules.tensorPullback (f.fiberι s)).obj F).presheaf.stalk x)} <
+        ((d + 1 : ℕ) : WithBot ℕ∞) := by
+    intro s
+    exact (topologicalKrullDim_subspace_le (f.fiber s) _).trans_lt
+      ((hd s).trans_lt (by exact_mod_cast Nat.lt_succ_self d))
+  obtain ⟨B, hBflat⟩ := hbounded (d + 1) S X f F U hU hfp hflat hdim
+  let := B.I.isFiniteType_toModules_sheaf B.finiteType
+  let f₁ := pullback.snd f B.I.blowupMap
+  let F₁ := Scheme.Modules.moduleStrictTransform f B.I F
+  let U₁ := B.I.blowupMap ⁻¹ᵁ U
+  obtain ⟨_, hF₁qc, _, _, hF₁ft, _, hcompact, hqs⟩ :=
+    Scheme.Modules.moduleAdmissibleBlowupPermanence U hU f F B
+  let : F₁.IsQuasicoherent := hF₁qc
+  let : F₁.IsFiniteType := hF₁ft inferInstance
+  let : CompactSpace B.I.blowup := hcompact
+  let : QuasiSeparatedSpace B.I.blowup := hqs
+  have hU₁ : IsCompact (U₁ : Set B.I.blowup) := by
+    have := B.isProper_blowupMap
+    exact B.I.blowupMap.isCompact_preimage hU
+  have hfp₁ := strictTransform_restrict_finitePresentation f F U hU hfp B
+  obtain ⟨⟨I, hI, hsupport⟩, hboundary⟩ :=
+    Scheme.Modules.flatModulePresentationAfterBoundaryBlowup f₁ F₁ hBflat U₁ hU₁ hfp₁
+  obtain ⟨⟨C, hCI⟩, _, _, _, _, _, _, hCflat, hCfp⟩ := hboundary I hI hsupport
+  subst I
+  obtain ⟨_, _, hqc, K, hK, hKsupport, e, m, hm, he, hmq, hmiso, a, ha, _⟩ :=
+    Scheme.Modules.moduleAdmissibleBlowupCalculus U hU f F B C
+  let := hK
+  let D : IsAdmissible S U :=
+    { I := K
+      finiteType := ideal_ofFiniteType_of_module K
+      disjoint_support := by
+        apply Set.disjoint_left.mpr
+        intro s hs hKs
+        rw [hKsupport] at hKs
+        rcases hKs with hsB | ⟨t, ht, rfl⟩
+        · exact Set.disjoint_left.mp B.disjoint_support hs hsB
+        · exact Set.disjoint_left.mp C.disjoint_support hs ht }
+  obtain ⟨_, hNqc, _⟩ :=
+    Scheme.Modules.moduleAdmissibleBlowupPermanence U₁ hU₁ f₁ F₁ C
+  obtain ⟨_, hMqc, _⟩ :=
+    Scheme.Modules.moduleAdmissibleBlowupPermanence U hU f F D
+  let := hmiso
+  let := ha.1
+  let := hNqc
+  let := hMqc
+  obtain ⟨hflatD, hfpD⟩ := flat_finitePresentation_of_iso_square m e
+    (pullback.snd f₁ C.I.blowupMap) (pullback.snd f K.blowupMap) hmq
+    _ _ (asIso a) hCflat hCfp
+  refine ⟨D, ?_, hfpD⟩
+  intro x
+  let := ((pullback.snd f K.blowupMap).stalkMap x).hom.toAlgebra
+  exact relative_flat_module_stalk _ _ hflatD x rfl
 
 end AlgebraicGeometry

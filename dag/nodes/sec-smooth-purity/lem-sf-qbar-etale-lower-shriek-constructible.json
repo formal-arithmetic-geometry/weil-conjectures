@@ -1,0 +1,302 @@
+{
+ "id": "lem-sf-qbar-etale-lower-shriek-constructible",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Integral-limit, rationalization and common-stage formulas of def-weil-integral-rational-qbar-compact-support; objectwise finiteness of its algebraically closed coefficient value, with the discrete-etale import corrected to the adic source meaning",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Compactly supported direct image preserves D^b_c with Q̄_ℓ coefficients (étale)",
+ "statement": "Let $k$ be a field, $\\ell$ a prime invertible in $k$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$ an algebraic closure of the field of $\\ell$-adic numbers [def-weil-l-adic-numbers, def-weil-algebraic-closure]. Let $X,Y$ be finite-type $k$-schemes and $f:X\\to Y$ a separated finite-type $k$-morphism [def-weil-scheme-morphism-properties], with a chosen compactification $c=(j,p)$ [def-weil-compactifications-refinements]. Use the adic coefficient constructions: $D^b_c(T,\\mathcal O_E)$ is the derived-complete integral category with uniformly bounded constructible finite reductions [def-weil-derived-complete-integral-detailed], $D^b_c(T,E)=D^b_c(T,\\mathcal O_E)[1/\\varpi_E]$ is its raw scalar localization with the same objects [def-weil-rationalization-karoubi], and $D^b_c(T,\\Omega)$ is the common-stage category of pairs $(E,K_E)$ over finite subextensions $E/\\mathbf Q_\\ell$ in $\\Omega$ [def-weil-algebraically-closed-coefficients]. These object constructions are used over $k$; they do not require $k$ to be the algebraic closure of a finite field.\n\nFor $K=(E,K_E)\\in D^b_c(X,\\Omega)$ let $L\\in D^b_c(X,\\mathcal O_E)$ be an integral representative of $K_E$. Put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension], $L_n=L\\otimes^L_{\\mathcal O_E}A_{E,n}$ [def-weil-integral-derived-reduction] and $F_n=Rp_{*,n}j_!=Rf_{!,n}^c$ [def-weil-compact-support-candidate]. Let $\\operatorname{Res}_n$ denote restriction of scalars from $A_{E,n}$ to the completed integral coefficient sheaf [def-weil-completed-integral-coefficients]. Form the tower $M_n=\\operatorname{Res}_n F_nL_n$: its transition is $F_{n+1}$ of the reduction map followed by the restriction-of-scalars comparison [lem-sf-compact-support-restriction-of-scalars]. Then the compact-support value represented by\n$$\\left(E,\\left[R\\varprojlim_n M_n\\right][1/\\varpi_E]\\right)$$\nis an object of $D^b_c(Y,\\Omega)$ for every such representative and compactification; $R\\varprojlim$ is the derived limit [def-weil-derived-limit]. Thus the integral-limit, rationalization and common-stage compact-support construction preserves bounded constructibility. This is its objectwise finiteness assertion; independence and coherence of the representative choices are separate assertions.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-integral-rational-qbar-compact-support.md",
+  "place": "def-weil-integral-rational-qbar-compact-support: the Q̄_ℓ compact-support functor is well defined on D^b_c (finiteness of Rf_!, sk-prop-sf-finiteness); Lean: upstream file lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/DirectImage.lean, declaration AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek_padicAlgCl (module WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage, lines 556-566, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-integral-derived-reduction",
+  "def-weil-compact-support-candidate",
+  "def-weil-completed-integral-coefficients",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Write $K=(E,K_E)$ by the common-stage definition, and choose its integral object $L$ by the same-object definition of raw rationalization. The compactification has $p:V\\to Y$ proper and hence finite type; composing finite affine covers and algebra generators shows $V$ is finite type over $k$. Thus $X,Y,V$ are Noetherian. Opens of a Noetherian scheme are quasi-compact, so $j$ is quasi-compact. Choose its reduced closed complement.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-rationalization-karoubi",
+    "def-weil-compactifications-refinements",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-closed-subset-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/def-weil-integral-rational-qbar-compact-support.md",
+    "place": "Integral, rational and common-stage compact-support formulas"
+   }
+  },
+  {
+   "text": "Put $B=j_!L$ for completed ringed-site extension by zero. The integral open-reduction comparison applies since $j$ is quasi-compact and $L$ derived complete. It says $B$ is derived complete, and gives $B_n\\cong j_!L_n$, commuting with every strict quotient transition. The coefficient identification on the open is included in that statement.",
+   "uses": [
+    "lem-sf-integral-open-reduction-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor); the strict complete version is the cited integral open-reduction comparison"
+   }
+  },
+  {
+   "text": "The input reductions $L_n$ have constructible cohomology in one interval $[a,b]$. Ringed extension by zero is exact, so the exact-functor cohomology isomorphism gives $H^r(B_n)\\cong j_!H^r(L_n)$ and zero outside $[a,b]$. Extend a finite constructible locally closed stratification of each $H^r(L_n)$ by the reduced closed complement $Z=V\\setminus X$. Its strata remain locally closed and constructible in the Noetherian $V$: an open of $X$ is open in $V$, a closed subset of $X$ is the intersection with a closed subset of $V$, and all these opens are quasi-compact. On strata in $X$, $j^{-1}j_!$ is identity, so the restrictions retain their finite locally constant module models; on $Z$, $i^{-1}j_!=0$, so the restriction is zero. This is exactly finite-torsion constructibility. Together with completeness from step 2 and the unchanged interval, the integral-category definition gives $B\\in D^b_c(V,\\mathcal O_E)$.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-finite-torsion-constructibility",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.7.6 and Lemma 6.7.7; explicit stratification argument for its open factor"
+   }
+  },
+  {
+   "text": "Apply integral direct-image constructibility to $p:V\\to Y$ and $B$. Step 1 supplies finite-type schemes over $k$, and $\\ell$ is invertible because they are $k$-schemes. It gives $T=Rp_*B\\in D^b_c(Y,\\mathcal O_E)$, which by the definition of the integral derived direct image is a derived limit of $N_n=\\operatorname{Res}_nRp_{*,n}B_n$ whose transitions are $\\operatorname{Res}_{n+1}$ of $Rp_{*,n+1}$ of the quotient reduction $B_{n+1}\\to\\operatorname{Res}^{A_{E,n+1}}_{A_{E,n}}B_n$ followed by the restriction-of-scalars identification for $Rp_*$, i.e. exactly the transitions of $N_\\bullet$ in the tower comparison below. The compact-support proper-image tower comparison applies to the same $j,p,L$ and the canonical comparisons of step 2: its maps $N_n\\cong M_n$ form an isomorphism of inverse systems with exactly the transition maps in the statement.",
+   "uses": [
+    "lem-sf-integral-direct-image-constructible",
+    "lem-sf-compact-support-proper-image-tower",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.7.2 and 6.7.7; proper-image and strict tower comparisons as stated by the cited nodes"
+   }
+  },
+  {
+   "text": "Exact countable products of completed-coefficient module sheaves and parts (2), (1) of derived-limit existence supply a derived limit $M$ of $M_\\bullet$. The system isomorphism of step 4 extends to a morphism of the Roos triangles for $T$ and $M$ by the derived-limit morphism lemma. The levelwise-isomorphism lemma makes $T\\to M$ invertible. Isomorphism closure of the integral constructible category gives $M\\in D^b_c(Y,\\mathcal O_E)$; the same argument works for every derived limit in the displayed formula.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence",
+    "lem-weil-derived-limit-morphism",
+    "lem-weil-derived-limit-levelwise-iso",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC (Roos triangle); existence and isomorphism lemmas explicitly cited"
+   }
+  },
+  {
+   "text": "The same object $M$ is an object $M_E$ of the raw localization $D^b_c(Y,E)$, since localization changes Hom groups and not objects. Hence $(E,M_E)$ is an object of the common-stage category $D^b_c(Y,\\Omega)$, exactly the displayed compact-support value. This proves membership for each representative and compactification; coefficient coherence and independence are separate assertions.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/def-weil-integral-rational-qbar-compact-support.md",
+    "place": "Integral, rational and common-stage compact-support formulas"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "def-weil-compactifications-refinements",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-sf-integral-open-reduction-comparison",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-torsion-constructibility",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-compact-support-proper-image-tower",
+  "def-weil-derived-direct-image",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-derived-limit-morphism",
+  "lem-weil-derived-limit-levelwise-iso",
+  "lem-weil-integral-constructible-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/def-weil-integral-rational-qbar-compact-support.md",
+  "place": "Explicit open/proper factorization, integral finiteness, Roos comparison and coefficient-category assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived direct image along a proper morphism preserves bounded constructible l-adic complexes",
+   "results": "Scheme.Hom.isLocallyConstructible_image, IsProper fields: constructible sets only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pushforward along proper morphism preserves bounded constructible complexes of l-adic sheaves",
+   "results": "SheafOfModules.pushforward_* (Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous): underived pushforward only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'smallEtaleTopology|PadicAlgCl|IsConstructible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "Mathlib/AlgebraicGeometry/Sites/{Etale,EtalePoint,AffineEtale}.lean (the site only), NumberTheory/Padics/Complex.lean; no compact support direct image",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compactly supported direct image preserves bounded constructible complexes of discrete rational etale sheaves",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, HomologicalComplex.map_isStrictlySupported, Topology.IsConstructible.image_of_isOpenEmbedding, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CompHausLike.LocallyConstantModule.functor, CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, Topology.isConstructible_preimage_iff_of_isOpenEmbedding",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, DerivedCategory, IsConstructible",
+   "results": "none; loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-23",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriek|boundedConstructible|PadicAlgCl",
+   "results": "none (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compactly supported direct image of constructible adic complexes is bounded constructible",
+   "results": "CompactlySupported.term_→C_c_, CompactlySupportedContinuousMap.toBoundedContinuousFunction, Continuous.bddAbove_range_of_hasCompactSupport, HasCompactSupport.exists_bound_of_continuous, mem_compactlySupported, HomologicalComplex.instIsSupportedOfIsStrictlySupported, ofCompactSupport_mem, Continuous.bounded_above_of_compact_support",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finiteness theorem for compact support cohomology of l-adic sheaves via integral lattices and rationalization",
+   "results": "SheafOfModules.GeneratingSections.IsFiniteType.finite, CompHausLike.LocallyConstantModule.functor, SheafOfModules.IsFiniteType, Condensed.finFree, Profinite.NobelingProof.Nobeling_aux, LightCondAb.ofSheafLightProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LocallyConstant.freeOfProfinite",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\"",
+   "results": "HasDerivedCategory, HasDerivedCategory.standard, DerivedCategory, instCategoryDerivedCategory, DerivedCategory.instHasZeroObject, DerivedCategory.instPreadditive, DerivedCategory.instHasShiftInt, DerivedCategory.singleFunctor",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration in a batch target's import closure without a DAG node (maintainer audit of dag/lean_audit.json with_sorry_and_no_node, 2026-10-22, the human's order); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek_padicAlgCl"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek_padicAlgCl",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage",
+     "lines": [
+      547,
+      566
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage",
+  "file": "lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/DirectImage.lean",
+  "declaration": "AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek_padicAlgCl",
+  "declarations": [
+   "AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek_padicAlgCl"
+  ],
+  "statement": "theorem boundedConstructible_rightDerivedLowerShriek_padicAlgCl (l : ℕ) [Fact l.Prime]\n    (hl : ringChar k ≠ l) (f : X ⟶ Y) [HasCompactification f] (aX : X ⟶ Spec (.of k))\n    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [LocallyOfFiniteType aY]\n    (hf : f ≫ aY = aX)\n    (K : _root_.DerivedCategory\n      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l)))))\n    (hK : DerivedCategory.boundedConstructible\n      (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l))) X K) :\n    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l))) Y\n      ((R(f)_![ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l))]).obj K) :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; no node recorded it before 2026-10-22; the blueprint deduces it from the finite-coefficient case (boundedConstructible_rightDerivedLowerShriek) by passing to the limit over Z/ℓ^n and inverting ℓ"
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sf-qbar-etale-lower-shriek-constructible",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the imported finite-ring constructibility reference cannot define discrete Qbar_l constructibility. Corrected to the blueprint adic categories and finite-type hypotheses. Six steps choose an integral representative, extend by zero with its strict reductions, check finite stratifications, apply integral proper-image constructibility and tower comparison, transfer membership along derived-limit isomorphisms, then rationalize and form the common-stage pair. No new nodes. The tempting integral compact-support citation was replaced after the server found it reaches this item through a trace-formula cycle. Upstream Lean remains a differently typed sorried statement.",
+  "blueprint": "Realizes the integral-limit, rationalization and common-stage formulas of def-weil-integral-rational-qbar-compact-support; follows its source coefficient categories rather than the ill-typed imported discrete-etale gloss.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-integral-open-reduction-comparison",
+    "why": "The completed open factor needs this strict coefficient-reduction and completeness theorem; no node of this unit gives its simultaneous comparison without the circular integral compact-support path."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic geometry or homological-algebra tool used in the explicit compactification and integral-limit construction; no alternate unit route is substituted."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Generic geometry or homological-algebra tool used in the explicit compactification and integral-limit construction; no alternate unit route is substituted."
+   },
+   {
+    "node": "lem-weil-derived-limit-morphism",
+    "why": "Generic lifting of a system map to a map of its Roos triangles."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-weil-derived-limit-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NE-16bb980a1",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-16bb980a1 (reviewer sub-agent of L); spot-checked: Read the item in full; it has no new nodes. Read every cited statement, the main-20261015 def-weil-integral-rational-qbar-compact-support, Bhatt–Scholze 6.7.6 and 6.7.7, Stacks 0GL1 and 08TC, and the upstream Lean declaration with its constructibility definitions. The statement correction (E7) is accepted. The upstream declaration is about discrete PadicAlgCl sheaves on the étale site, with Y only locally of finite type and not quasi-compact. Its own docstring derives the result by a limit over Z/ℓ^n and inverting ℓ, which is the adic construction. The imported DAG statement cited a finite-ring definition for Q̄_ℓ, which does not type-check. The declaration is also false even with discrete coefficients: take Y = ⊔ Spec k and X_n = the union of the n+2 coordinate hyperplanes in P^{n+1}; then H^n(X_n, Q) = H^n(S^n) ≠ 0, so the direct image is unbounded. The corrected adic statement keeps all hypotheses of the source (finite type, separated f, ℓ invertible, chosen compactification) and is exactly what the citing definition needs. Steps checked: step 1 is the Noetherian geometry and quasi-compactness of j, as in the reviewed integral node. Step 2 is the open-reduction comparison (completeness and strict α_n). Step 3 is the elementary stratification extension (j^{-1}j_! = id, i^{-1}j_! = 0, exact cohomology), the same content as lem-sf-open-finite-constructibility-interval; that node cannot be cited because it would close a cycle through lem-trf-open-ctf. Step 4 is integral Rp_* finiteness plus the tower lemma β_n. Step 5 is Roos-triangle morphism, levelwise isomorphism and isomorphism closure. Step 6 is definitional. The node duplicates lem-sf-integral-compact-support-constructible in substance, but citing that node would create a cycle (path confirmed by BFS), so reproving it is justified. FIX (C3): step 4 relies on the transition maps of Rp_*B, which are specified in def-weil-derived-direct-image, not in the cited lemma. I added that citation to the step's uses and to proof_deps (no cycle) and wrote out the transition; corrected file at fixes/dag/nodes/sec-smooth-purity/lem-sf-qbar-etale-lower-shriek-constructible.json. All four declared tool_uses are accepted. Small cases checked: K = 0, X empty, j = id, f = id, E = Q_ℓ. Maintainer notes: (1) the item's existing:true lean record names the false discrete declaration and must not be bound at stage 2; (2) the base already has a cycle def-weil-integral-rational-qbar-compact-support → lem-sf-integral-compact-support-constructible → … → def-weil-ordinary-compact-cohomology → def; the local check_dag does not see it because rglob skips the symlinked chapter directories.; 1 file(s) fixed by the reviewer"
+ }
+}

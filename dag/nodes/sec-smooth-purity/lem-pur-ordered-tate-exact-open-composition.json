@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-ordered-tate-exact-open-composition",
+ "kind": "statement",
+ "title": "Composition of exact ordinary restriction on the ordered finite Tate coefficient",
+ "statement": "Let A be a commutative coefficient ring annihilated by N, and t the normalized ordinary finite twist transport of [def-asd-ordinary-finite-p1-arrows]. Let X be a scheme on which N is invertible, and U ⊆ V opens (with N invertible on V). For the ordered shifted Tate coefficient K_X(d) of [def-amb-vector-integration-charts], define τ_j as the inverse of the exact-to-left-derived pullback comparison followed by vectorIntegrationBaseCoefficientPullback. If c:R_i R_j ≅ R_k is the exact ordinary open compositor of [lem-pur-degree-zero-derived-map-gluing], where j:V→X, i:U→V and k:U→X, then c(K_X(d)) ≪≫ τ_k = R_i(τ_j) ≪≫ τ_i. The order of the Tate tensor factors is unchanged. This statement concerns only ordinary coefficient pullback and requires no dualizing object or site comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Combining/canonicity paragraph, ordinary finite Tate coefficient factors under nested open restriction"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-amb-vector-integration-charts",
+  "lem-pur-degree-zero-derived-map-gluing"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the ordered tensor degree. In degree zero apply ordinaryFiniteUnitPullback_comp, the proved composition equation for the actual constant-object comparison.",
+   "uses": [
+    "def-amb-vector-integration-charts",
+    "def-asd-ordinary-finite-p1-arrows",
+    "lem-amb-ordinary-finite-unit-pullback-comp"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify each normalized roots map with the canonical roots pullback by cancellation of its monomorphic inclusion. Use the sheafification and scalar-extension adjunctions to identify maps from the finite Tate line with maps from roots into the underlying abelian sheaf. The line normalization identifies the adjoint of each line map on generators. The pullback adjunction composition equation and canonical roots composition therefore prove the line composition equation. Apply the degree-zero pullback comparison and shift compatibility. At each successor use the derived tensor pullback composition and naturality equations, the induction hypothesis, and this shifted-line equation.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-arrows",
+    "def-amb-vector-integration-charts",
+    "lem-kun-derived-pullback-composition-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate by the exact-to-left-derived comparison. Its naturality gives the exact ordinary derived compositor. Substitute homOfLE_ι to identify the composite open immersion and obtain openComp. This includes d=0, empty opens and zero coefficients.",
+   "uses": [
+    "lem-pur-degree-zero-derived-map-gluing"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-integration-charts",
+  "def-asd-ordinary-finite-p1-arrows",
+  "lem-amb-ordinary-finite-unit-pullback-comp",
+  "lem-kun-derived-pullback-composition-monoidal",
+  "lem-pur-degree-zero-derived-map-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Ordered tensor induction; private normalization, degree-zero, shift, tensor and exact-comparison calculations in OrderedTateExactOpenComposition.lean. Degree-zero and tensor compatibility use the proved source-library comparison equations.",
+  "group": "H4",
+  "date": "2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical ordered shifted finite Tate coefficient pullback composition nested open immersions",
+   "results": "Eight results about scheme restriction maps and generic functors; no ordered finite Tate transport composition.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; use the explicit ordered tensor induction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategorySquareIso",
+   "results": "Zero Mathlib results. Project rg found the proved generic exact-square pasting theorem; it handles the site comparison, but not this ordinary Tate coefficient calculation.",
+   "date": "2026-10-26",
+   "verdict": "Separate the coefficient identity from the already proved square pasting."
+  },
+  {
+   "tool": "grep",
+   "query": "orderedTateExactOpenComposition|mapDerivedCategoryComparisonUpperStarCompUpperStarIso",
+   "results": "Zero Mathlib matches. Project rg found normalized finite-line pullback and section-only Tate comparison, but no nested-open ordered coefficient composition statement.",
+   "date": "2026-10-26",
+   "verdict": "The section-only comparison requires a retraction and does not apply here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalOrdinaryRealizeRestriction",
+  "date": "2026-10-26",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Combining/canonicity paragraph, ordinary finite Tate coefficient factors under nested open restriction",
+   "via": [
+    "lem-pur-diagonal-ordinary-realize-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrderedTateExactOpenComposition",
+  "file": "lean/Sheaf/Paper/OrderedTateExactOpenComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.orderedTateExactOpenComposition",
+  "declarations": [
+   "AlgebraicGeometry.Etale.orderedTateExactPullback",
+   "AlgebraicGeometry.Etale.orderedTateExactOpenComposition"
+  ],
+  "statement": "theorem orderedTateExactOpenComposition (A : Type (u + 1)) [CommRing A] (N : ℕ)\n    (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    (X : Scheme.{u}) (hX : IsUnit (N : Γ(X, ⊤))) (d : ℕ)\n    {U V : X.Opens} (h : U ≤ V) (hV : IsUnit (N : Γ(V.toScheme, ⊤))) :\n    let c := DegreeZeroMapGluing.openComp\n      (fun T : Scheme.{u} ↦ Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))\n      (fun {_ _} j ↦ upperStar (ModuleCat.{u + 1} A) j)\n      (fun {_ _ _} i j ↦ upperStarComp (ModuleCat.{u + 1} A) i j) X h\n    c.app (affineLinearBaseCoefficient A N hA X d) ≪≫\n        orderedTateExactPullback A N hA t U.ι hX d =\n      (upperStar (ModuleCat.{u + 1} A) (X.homOfLE h)).mapDerivedCategory.mapIso\n          (orderedTateExactPullback A N hA t V.ι hX d) ≪≫\n        orderedTateExactPullback A N hA t (X.homOfLE h) hV d",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261026T070529-L-3606021",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T182540-L-3567780",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

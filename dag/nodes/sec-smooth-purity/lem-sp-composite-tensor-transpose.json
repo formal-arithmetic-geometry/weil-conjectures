@@ -1,0 +1,274 @@
+{
+ "id": "lem-sp-composite-tensor-transpose",
+ "kind": "statement",
+ "title": "Composite dualizing tensor maps have the same counit transpose",
+ "statement": "Let $\\mathcal C_X,\\mathcal C_Y,\\mathcal C_Z$ be symmetric monoidal categories [def-sfb-monoidal-category]; symmetry means a natural interchange isomorphism satisfying the usual hexagon and involution equations. Let $P_f:\\mathcal C_Y\\to\\mathcal C_X$, $P_g:\\mathcal C_Z\\to\\mathcal C_Y$, $P_h:\\mathcal C_Z\\to\\mathcal C_X$ be symmetric monoidal functors: strong monoidal [def-sfb-strong-monoidal-functor], and under their tensor isomorphisms $P(\\mathrm{sym}_{L,L'})$ corresponds to $\\mathrm{sym}_{PL,PL'}$. Identify $P_h=P_fP_g$ as symmetric monoidal functors. Let $F_u\\dashv G_u$ for $u=f,g,h$ be adjunctions, meaning specified natural Hom bijections with units and counits $\\varepsilon_u$ [def-weil-pbc-adjunction-mate]. Let $\\alpha:F_gF_f\\simeq F_h$ and $c:G_h\\simeq G_fG_g$ be natural isomorphisms with\n$$\\varepsilon^{\\mathrm{comp}}_K F_gF_f(c_K)=\\varepsilon_{h,K}\\alpha_{G_hK},\\qquad \\varepsilon^{\\mathrm{comp}}_K=\\varepsilon_{g,K}F_g(\\varepsilon_{f,G_gK}).$$\nAssume natural invertible projections $\\pi_{u,M,L}:F_uM\\otimes L\\simeq F_u(M\\otimes P_uL)$, unital and associative in $L$, such that\n$$\\pi_{h,M,L}(\\alpha_M\\otimes1)=\\alpha_{M\\otimes P_fP_gL}F_g(\\pi_{f,M,P_gL})\\pi_{g,F_fM,L}.$$\nFor the coefficient units $\\mathbf1_T$ put $\\Omega_u=G_u\\mathbf1_{\\mathrm{target}(u)}$. Define\n$$q_{u,L}:F_u(P_uL\\otimes\\Omega_u)\\xrightarrow{\\mathrm{sym}}F_u(\\Omega_u\\otimes P_uL)\\xrightarrow{\\pi^{-1}}F_u\\Omega_u\\otimes L\\xrightarrow{\\varepsilon_{u,1}\\otimes1}\\mathbf1\\otimes L\\simeq L,$$\nand let $t_{u,L}$ be its adjoint transpose. Suppose $\\rho=t_{f,\\Omega_g}$ is invertible; set $W=P_f\\Omega_g\\otimes\\Omega_f$, $\\mu=\\rho^{-1}c_1$, and $s=\\varepsilon_{g,1}F_g(q_{f,\\Omega_g})$. For every $K\\in\\mathcal C_Z$, the two arrows\n$$c_Kt_{h,K}(1\\otimes\\mu^{-1}),\\qquad t_{f,G_gK}(P_f(t_{g,K})\\otimes1)$$\nfrom $P_hK\\otimes W$ to $G_fG_gK$, with canonical reassociation, both have composite-adjunction transpose\n$$F_gF_f(P_hK\\otimes W)\\xrightarrow{\\mathrm{sym},\\pi_{\\mathrm{comp}}^{-1}}F_gF_fW\\otimes K\\xrightarrow{s\\otimes1}\\mathbf1_Z\\otimes K\\simeq K,$$\nwhere $\\pi_{\\mathrm{comp}}=F_g(\\pi_{f,W,P_gK})\\pi_{g,F_fW,K}$. In particular these arrows are equal. The same hypotheses give $t_{u,1}$ equal to the canonical unit identification and $t_{u,L}$ natural in $L$. No orientation, smooth scheme, derived evaluation, or finite-coefficient restriction is part of this assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "proof (2), the two counit transposes agree; former Step 3 and the unit/naturality portions of Steps 7 and 10"
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Write composition in functional order. Put $R_{u,M,L}=\\pi_{u,M,L}^{-1}$ and $\\sigma=\\mathrm{sym}$. In formulas suppress only the specified associators, unitors and tensorators of $P_u$; their directions are determined by the displayed sources and targets. By [lem-weil-pbc-adjunction-of-natural-bijection], the inverse Hom bijection for $F_u\\dashv G_u$ sends $a:A\\to G_uB$ to $\\varepsilon_{u,B}F_u(a)$. In particular\n$$\\varepsilon_{u,L}F_u(t_{u,L})=q_{u,L}.$$\nIterating the two given Hom bijections is a bijection $\\operatorname{Hom}(F_gF_fA,K)\\simeq\\operatorname{Hom}(A,G_fG_gK)$ whose inverse sends $a$ to\n$$S(a)=\\varepsilon_{g,K}F_g(\\varepsilon_{f,G_gK})F_gF_f(a).$$\nThis follows by substituting the inverse formula twice, and is precisely the composite adjunction with the counit specified in the statement.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "proof (2): transpose the tensor maps under the composite adjunction"
+   }
+  },
+  {
+   "text": "The defining formula for $q_{u,L}$ is natural in $L$: for $a:L\\to L'$ the naturality of $\\sigma$ and of $R$ moves $F_u(P_u(a)\\otimes1)$ across the first two arrows; naturality of the left unitor moves $a$ across the last arrow. The middle arrow $\\varepsilon_{u,1}\\otimes1$ commutes with $1\\otimes a$ by tensor bifunctoriality. Thus\n$$q_{u,L'}F_u(P_u(a)\\otimes1)=a q_{u,L}.$$\nUse [lem-sfb-adjunction-transpose-square] with $f=P_u(a)\\otimes1$, $s=t_{u,L'}$, $t=t_{u,L}$ and $k=a$. Its left equality is the equality just obtained, so its right equality gives\n$$t_{u,L'}(P_u(a)\\otimes1)=G_u(a)t_{u,L}.$$\nThis proves the requested naturality, including at noninvertible $a$.",
+   "uses": [
+    "lem-sfb-adjunction-transpose-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "proof (2): transpose the tensor maps under the composite adjunction"
+   }
+  },
+  {
+   "text": "For the tensor calculation put $B=P_gK$, $C=\\Omega_g$, $D=\\Omega_f$, $W=P_fC\\otimes D$, and $Q_L=q_{f,L}$. Directly expanding the projection associativity assumption gives\n$$Q_{B\\otimes C}=\\sigma_{C,B}(Q_C\\otimes1_B)R_{f,W,B}F_f(\\sigma_{P_fB,W}).\\tag{*}$$\nHere the source of both sides is $F_f(P_fB\\otimes(P_fC\\otimes D))$, using the tensorator on the left. To check the expansion, expand $Q_C$ on the right. Naturality of $R$ in its first variable moves $F_f(\\sigma_{P_fC,D})$ past $R_{f,W,B}$, replacing $W$ by $D\\otimes P_fC$. Inverse projection associativity then replaces\n$$(R_{f,D,C}\\otimes1_B)R_{f,D\\otimes P_fC,B}$$\nby $R_{f,D,C\\otimes B}$, with the tensorator of $P_f$. Naturality in the second variable moves $\\sigma_{C,B}$ inside as $P_f(\\sigma_{C,B})$. Preservation of symmetry by $P_f$ and the hexagon identify the resulting permutation\n$P_fB,P_fC,D\\mapsto P_fC,D,P_fB\\mapsto D,P_fC,P_fB\\mapsto D,P_fB,P_fC$\nwith $\\sigma_{P_f(B\\otimes C),D}$. Finally tensor bifunctoriality moves the unchanged $\\varepsilon_{f,1}$ through the outside interchange and the unitor. The result is exactly the expansion of $Q_{B\\otimes C}$. These are substitutions of the assumed associativity and naturality equations and the defining tensorator axioms [def-sfb-monoidal-category, def-sfb-strong-monoidal-functor], not an additional projection compatibility.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "proof (2): transpose the tensor maps under the composite adjunction"
+   }
+  },
+  {
+   "text": "Let $a_2=t_{f,G_gK}(P_f(t_{g,K})\\otimes1_D)$, with the displayed reassociation. Substitute in $S$ from step 1. The defining transpose equation for $t_f$ and the naturality formula for $q_f$ in step 2, applied to $t_{g,K}:B\\otimes C\\to G_gK$, give\n$$S(a_2)=\\varepsilon_{g,K}F_g\\bigl(q_{f,G_gK}F_f(P_f(t_{g,K})\\otimes1_D)\\bigr)\n=\\varepsilon_{g,K}F_g(t_{g,K})F_g(Q_{B\\otimes C})\n=q_{g,K}F_g(Q_{B\\otimes C}).$$\nEvery intermediate target is explicit: the $f$-transpose lands in $G_gK$, its rewrite factors through $B\\otimes C$, and the $g$-counit lands in $K$. The final equality uses $\\varepsilon_{g,K}F_g(t_{g,K})=q_{g,K}$ from [lem-weil-pbc-adjunction-of-natural-bijection].",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "proof (2): transpose the tensor maps under the composite adjunction"
+   }
+  },
+  {
+   "text": "Expand $q_{g,K}$ in the last expression and insert (*) from step 3. The consecutive factors $F_g(\\sigma_{B,C})$ and $F_g(\\sigma_{C,B})$ cancel by involutivity. Naturality of the inverse projection in its first variable, for $Q_C:F_fW\\to C$, says\n$$R_{g,C,K}F_g(Q_C\\otimes1_K)=(F_g(Q_C)\\otimes1_K)R_{g,F_fW,K}.$$\nConsequently\n$$S(a_2)=\\lambda_K(s\\otimes1_K)R_{g,F_fW,K}F_g(R_{f,W,P_gK})F_gF_f(\\sigma_{P_hK,W})=:T_K,$$\nwhere $s=\\varepsilon_{g,1}F_g(Q_C)$ and $\\lambda$ is the left unitor. Since the inverse of $\\pi_{\\mathrm{comp}}=F_g(\\pi_{f,W,P_gK})\\pi_{g,F_fW,K}$ is $R_{g,F_fW,K}F_g(R_{f,W,P_gK})$, this is the claimed transpose. This step uses only inverse naturality, the assumed symmetry involution, functoriality and the unitors; no exactness or geometric input is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "proof (2): transpose the tensor maps under the composite adjunction"
+   }
+  },
+  {
+   "text": "Set $j=\\mu^{-1}:W\\to\\Omega_h$. Since $\\mu=\\rho^{-1}c_1$, we have $c_1j=\\rho$. The given compatibility of counits, naturality of $\\alpha$, and the defining transpose of $\\rho=t_{f,C}$ yield\n$$\\begin{aligned}\n\\varepsilon_{h,1}\\alpha_{\\Omega_h}F_gF_f(j)\n&=\\varepsilon^{\\mathrm{comp}}_1F_gF_f(c_1j)\\\\\n&=\\varepsilon_{g,1}F_g\\bigl(\\varepsilon_{f,C}F_f(\\rho)\\bigr)\\\\\n&=\\varepsilon_{g,1}F_g(Q_C)=s.\n\\end{aligned}$$\nThus the coefficient morphism used by the direct tensor map is exactly the coefficient morphism already used in $T_K$. Only $\\rho$ and $c_1$ are inverted; no $t_{f,L}$ for arbitrary $L$ is inverted.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "proof (2): transpose the tensor maps under the composite adjunction"
+   }
+  },
+  {
+   "text": "For $a_1=c_Kt_{h,K}(1\\otimes j)$, substitute the assumed counit comparison in $S(a_1)$ and use naturality of $\\alpha$ on $t_{h,K}$. The result is\n$$S(a_1)=q_{h,K}\\alpha_{P_hK\\otimes\\Omega_h}F_gF_f(1\\otimes j).$$\nExpand $q_{h,K}$. Naturality of symmetry moves $j$ to the first factor; naturality of $\\alpha$ moves the interchange through $\\alpha$. Inverting the assumed projection comparison gives\n$$R_{h,M,K}\\alpha_{M\\otimes P_hK}=(\\alpha_M\\otimes1_K)\\pi_{\\mathrm{comp},M,K}^{-1}.$$\nUse it with $M=\\Omega_h$. Naturality of the two inverse projections then moves $j$ past $\\pi_{\\mathrm{comp}}^{-1}$, replacing $M$ by $W$. Therefore\n$$S(a_1)=\\lambda_K\\bigl((\\varepsilon_{h,1}\\alpha_{\\Omega_h}F_gF_f(j))\\otimes1_K\\bigr)\\pi_{\\mathrm{comp},W,K}^{-1}F_gF_f(\\sigma_{P_hK,W})=T_K,$$\nby step 6. This explicitly accounts for both comparison isomorphisms and their directions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "proof (2): transpose the tensor maps under the composite adjunction"
+   }
+  },
+  {
+   "text": "Steps 5 and 7 show that $a_1$ and $a_2$ have the stated common transpose $T_K$. The composite of the two Hom bijections in step 1 is injective, hence $a_1=a_2$. This uses only bijectivity, not that $t_{u,K}$ itself is invertible. For the unit clause, let $v:P_u\\mathbf1\\otimes\\Omega_u\\simeq\\Omega_u$ be the identification formed from the inverse unit tensorator and the left unitor. For the symmetry-unit equation, the hexagon at $(\\mathbf1,\\mathbf1,\\Omega_u)$ gives $b=b^2$ after unit identification, where $b$ is the normalized interchange; cancellation gives $b=1$. Projection unitality at $L=\\mathbf1$ and naturality of the unitors now reduce the definition to $q_{u,1}=\\varepsilon_{u,1}F_u(v)$. By [lem-weil-pbc-adjunction-of-natural-bijection] the transpose of this expression is $v$ (the transpose of the counit is the identity, and the Hom bijection is natural in its first variable). Thus $t_{u,1}=v$. Together with step 2 this proves every clause.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "proof (2): transpose the tensor maps under the composite adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-sfb-adjunction-transpose-square",
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "proof (2), expanded as a formal calculation with the hypotheses of this categorical lemma"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor maps defined by projection formula and adjunction counit compose under a composite adjunction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [inst_\", \"doc\": \"For objects $X, Y$ in category $\\\\mathcal{D}$, the composition of $F$ applied to the lax monoidal coherence morphism $\\\\mu_{G,X,Y}$ followed by the counit $\\\\epsilon_{X \\\\otimes Y}$ of the adjunction $F \\\\\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [inst_\", \"doc\": \"For monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an adjunction $F \\\\dashv G$ where $F$ is oplax monoidal and $G$ is lax monoidal, and objects $X,Y,Z \\\\in \\\\mathcal{D}$, the composition of $F$'s a\"}\n  {\"name\": \"CategoryTheory.Adjunction.ε_comp_map_ε\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [inst_\", \"doc\": \"For an adjunction $F \\\\dashv G$ between categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, the composition of the counit $\\\\epsilon_G : G \\\\circ F \\\\to 1_\\\\mathcal{C}$ with the functor $G$ applied to the counit $\"}\n  {\"name\": \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [inst_\", \"doc\": \"For any objects $X$ and $Y$ in category $\\\\mathcal{C}$, the composition of the unit of the adjunction $F \\\\dashv G$ applied to $X \\\\otimes Y$ followed by the image under $G$ of the oplax monoidal coheren\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.compTranspose\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      (x y z : C) →\\n        [inst_2 : CategoryTheory.Closed x] →\\n          [inst_3 : CategoryTheory.Closed y] →\\n            CategoryTheory.MonoidalCategoryStruct.tensorObj x\\n              \", \"doc\": \"In a closed monoidal category $\\\\mathcal{C}$, for objects $x, y, z$ where $x$ is closed, this morphism composes the inverse associator isomorphism $(x \\\\otimes [x, y]) \\\\otimes [y, z] \\\\cong x \\\\otimes ([x\"}\n  {\"name\": \"CategoryTheory.Adjunction.ε_comp_map_ε_assoc\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [inst_\", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an adjunction $F \\\\dashv G$ where $F$ is monoidal and $G$ is lax monoidal, and the unit $\\\\eta: 1_\\\\mathcal{C} \\\\Rightarrow G \\\\circ F$ of the adj\"}\n  {\"name\": \"CategoryTheory.frobeniusMorphism\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u'} →\\n      [inst_1 : CategoryTheory.Category.{v, u'} D] →\\n        [inst_2 : CategoryTheory.CartesianMonoidalCategory C] →\\n          [inst_3 : CategoryTheory.CartesianMonoidalCategory D] →\\n            (F : CategoryTheory.Func\", \"doc\": \"Given an adjunction `h` where `L: \\\\mathcal{D} \\\\to \\\\mathcal{C}` is the left adjoint to `F: \\\\mathcal{C} \\\\to \\\\mathcal{D}`, and an object `A` in `\\\\mathcal{C}`, the Frobenius morphism is a natural transfor\"}\n  {\"name\": \"CategoryTheory.coev_app_comp_pre_app\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Cartesian\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.MonoidalCategory C] {A B : C} (X : C)\\n  [inst_2 : CategoryTheory.Closed A] [inst_3 : CategoryTheory.Closed B] (f : B ⟶ A),\\n  CategoryTheory.CategoryStruct.comp ((CategoryTheory.ihom.coev A).app X)\\n      ((CategoryTheor\", \"doc\": \"In a monoidal closed category $\\\\mathcal{C}$, for objects $A,B,X$ and morphism $f:B\\\\to A$, the composition of the coevaluation map $\\\\eta_A:X\\\\to [A,A\\\\otimes X]$ with the morphism $[A,f\\\\otimes X]:[A,A\\\\ot\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.homEquiv",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.comp_homEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {H : CategoryTheory.Functor D E} {I : CategoryTheory.Functor E D} (adj₁ : F ⊣ G)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*mate.*comp|projection.*counit|homEquiv.*comp.*tensor",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"137\", \"text\": \"/-- The projection of the counit. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"line\": \"93\", \"text\": \"      simp only [eHomEquiv_comp, tensorHom_def_assoc, MonoidalCategory.whiskerRight_id,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"line\": \"96\", \"text\": \"      simp only [← NatTrans.naturality, eHomEquiv_comp, tensorHom_def', id_whiskerLeft,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"line\": \"104\", \"text\": \"    HomEquiv ((f₁.tensor f₂).comp (g₁.tensor g₂)) ((f₁.comp g₁).tensor (f₂.comp g₂))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/CommMon_.lean\", \"line\": \"33\", \"text\": \"    Equiv.apply_symm_apply, map_mul, ← α.homEquiv'_comp, op_tensorObj,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean\", \"line\": \"64\", \"text\": \"            simp [tensorHom_def, leftAdjointMate_comp_evaluation] }\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The exceptional pullback tensor morphism of a composite is the iterated tensor morphism by equality of counit transposes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.pullbackPullbackRightIsPullback\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.Assoc\", \"type\": \"[HasPullback f₁ (g₃ ≫ f₂)] : IsLimit (PullbackCone.mk l₁' l₂' (show l₁' ≫ g₂ = l₂' ≫ g₃ from pullback.lift_snd _ _ _))\", \"doc\": \"Given morphisms $f_1: X_1 \\to Y_1$, $f_2: X_2 \\to Y_1$, $f_3: X_2 \\to Y_2$, and $f_4: X_3 \\to Y_2$ in a category $\\\\mathcal{C}$ with pullbacks, the iterated pullback construction $X_1 \\times_{Y_1} (X_2 \\time\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"Let `C` be a category with chosen pullbacks. Let `f: I → J` and `g: J → K` be composable morphisms such that `f`, `g`, and their composition `g ∘ f` are all exponentiable. Let `(g ∘ f)^*` and `(g ∘ f)\"}\n  {\"name\": \"CategoryTheory.Functor.IsFibered.pullbackPullbackIso\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Fibered\", \"type\": \"{p : 𝒳 ⥤ 𝒮} [IsFibered p] {R S T : 𝒮} {a : 𝒳} (ha : p.obj a = S) (f : R ⟶ S) (g : T ⟶ R) :\\n  pullbackObj ha (g ≫ f) ≅ pullbackObj (pullbackObj_proj ha f) g\", \"doc\": \"For a fibered functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, given composable morphisms $ f : R \\\\to S $ and $ g : T \\\\to R $ in $ \\\\mathcal{S} $, and an object $ a \\\\in \\\\mathcal{X} $ with $ p(a) = S $, the\"}\n  {\"name\": \"CategoryTheory.Over.pullbackComp\", \"module\": \"Mathlib.CategoryTheory.Comma.Over.Pullback\", \"type\": \"{X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z) [HasPullbacksAlong f] [HasPullbacksAlong g] :\\n  pullback (f ≫ g) ≅ pullback g ⋙ pullback f\", \"doc\": \"Let $f: X \\\\to Y$ and $g: Y \\\\to Z$ be composable morphisms in a category $\\\\mathcal{C}$ which has pullbacks along $f$ and $g$. For a morphism $h: A \\\\to B$, the pullback functor $\\\\text{pullback } h$ maps\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ExponentiableMorphism\", \"type\": \"{I J K : C} (f : I ⟶ J) (g : J ⟶ K) [ChosenPullbacksAlong f] [ChosenPullbacksAlong g] [ChosenPullbacksAlong (f ≫ g)]\\n  [ExponentiableMorphism f] [ExponentiableMorphism g] [ExponentiableMorphism (f ≫ g)] :\\n  Functor.whiskerRight (pushforwardComp f g).hom (pullback (f ≫ g)) ≫ (comp f g).pullbackPushfo\", \"doc\": \"For composed exponentiable morphisms $f: I \\\\to J$ and $g: J \\\\to K$ in a category $\\\\mathcal{C}$, the whiskered composition of the pushforward functors' hom transformation with the pullback along $f \\\\ci\"}\n  {\"name\": \"CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ChosenPullbacksAlong\", \"type\": \"{X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z) [ChosenPullbacksAlong f] [ChosenPullbacksAlong g] [ChosenPullbacksAlong (f ≫ g)] :\\n  Functor.whiskerRight (pullbackComp f g).hom (Over.map (f ≫ g)) ≫ (comp f g).mapPullbackAdj.counit =\\n    (mapPullbackAdj (f ≫ g)).counit\", \"doc\": \"For morphisms $f: X \\to Y$ and $g: Y \\to Z$ in a category $\\\\mathcal{C}$ with chosen pullbacks, the composition of the whiskered hom functor $\\\\text{whiskerRight}(\\\\text{pullbackComp}(f,g).\\\\text{hom}, \\\\tex\"}\n  {\"name\": \"CategoryTheory.ChosenPullbacksAlong.pullbackComp\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ChosenPullbacksAlong\", \"type\": \"{X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z) [ChosenPullbacksAlong f] [ChosenPullbacksAlong g] [ChosenPullbacksAlong (f ≫ g)] :\\n  pullback (f ≫ g) ≅ pullback g ⋙ pullback f\", \"doc\": \"For composable morphisms $f: X \\\\to Y$ and $g: Y \\\\to Z$ in a category $\\\\mathcal{C}$ that has chosen pullbacks along $f$, $g$, and their composition $g \\\\circ f$, the pullback functor along the composite\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ExponentiableMorphism\", \"type\": \"{I J K : C} (f : I ⟶ J) (g : J ⟶ K) [ChosenPullbacksAlong f] [ChosenPullbacksAlong g] [ChosenPullbacksAlong (f ≫ g)]\\n  [ExponentiableMorphism f] [ExponentiableMorphism g] [ExponentiableMorphism (f ≫ g)] :\\n  (pullbackPushforwardAdj (f ≫ g)).unit ≫ (pullback (f ≫ g)).whiskerLeft (pushforwardComp f g).\", \"doc\": \"For exponentiable morphisms $f: I \\\\to J$ and $g: J \\\\to K$ in a category $\\\\mathcal{C}$, the unit of the pullback-pushforward adjunction for the composite $f \\\\circ g$ satisfies a naturality condition: t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two successive inverse projection and counit transposes equal the single composite transpose in monoidal categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.MonoidalClosed.compTranspose_eq\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.MonoidalCategory C] (x y z : C)\\n  [inst_2 : CategoryTheory.Closed x] [inst_3 : CategoryTheory.Closed y],\\n  CategoryTheory.MonoidalClosed.compTranspose x y z =\\n    CategoryTheory.CategoryStruct.comp\\n      (CategoryTheor\", \"doc\": \"In a closed monoidal category $\\\\mathcal{C}$, for objects $x, y, z$ where $x$ is closed, the morphism $\\\\text{compTranspose}(x, y, z)$ is constructed by composing the inverse associator isomorphism $(x \"}\n  {\"name\": \"CategoryTheory.ExactPairing.coevaluation_evaluation\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] (X Y : C)\\n  [inst_2 : CategoryTheory.ExactPairing X Y],\\n  CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerLeft Y (η_ X Y))\\n      (CategoryTheory.CategoryStruct.co\", \"doc\": \"In a monoidal category $\\\\mathcal{C}$ with dual objects $X$ and $Y$, the composition of the coevaluation map $\\\\eta: I \\\\to X \\\\otimes Y$, followed by the inverse associator isomorphism $\\\\alpha^{-1}: (X \\\\\"}\n  {\"name\": \"CategoryTheory.ExactPairing.coevaluation_evaluation'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {inst_1 : CategoryTheory.MonoidalCategory C} {X Y : C}\\n  [self : CategoryTheory.ExactPairing X Y],\\n  CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.MonoidalCategoryStruct.whiskerLeft Y CategoryTheory.ExactPairing.coevaluation')\\n  \", \"doc\": \"In a monoidal category $\\\\mathcal{C}$, for dual objects $X$ and $Y$ with coevaluation $I \\\\to X \\\\otimes Y$ and evaluation $Y \\\\otimes X \\\\to I$, the composition of coevaluation whiskered with $Y$, the inv\"}\n  {\"name\": \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {Y Y' Z : C}\\n  [inst_2 : CategoryTheory.ExactPairing Y Y'] (f : Y ⟶ Z),\\n  (CategoryTheory.tensorRightHomEquiv (CategoryTheory.MonoidalCategoryStruct.tensorUnit C) Y Y' Z).symm\\n      (CategoryTheo\", \"doc\": \"For dual objects $Y$ and $Y'$ in a monoidal category $\\\\mathcal{C}$, the symmetric tensor-hom equivalence maps the composition of the coevaluation morphism $\\\\eta_{Y,Y'}: I \\\\to Y \\\\otimes Y'$ and the rig\"}\n  {\"name\": \"CategoryTheory.ExactPairing.coevaluation_evaluation''\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] (X Y : C)\\n  [inst_2 : CategoryTheory.ExactPairing X Y],\\n  CategoryTheory.monoidalComp (CategoryTheory.MonoidalCategoryStruct.whiskerLeft Y (η_ X Y))\\n      (CategoryTheory.MonoidalCategoryStruct.w\", \"doc\": \"In a rigid monoidal category, for dual objects $X$ and $Y$, the composition of the coevaluation morphism $\\\\eta: I \\\\to X \\\\otimes Y$ and the evaluation morphism $\\\\varepsilon: Y \\\\otimes X \\\\to I$ satisfie\"}\n  {\"name\": \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {Y Y' Z : C}\\n  [inst_2 : CategoryTheory.ExactPairing Y Y'] (f : Y' ⟶ Z),\\n  (CategoryTheory.tensorLeftHomEquiv (CategoryTheory.MonoidalCategoryStruct.tensorUnit C) Y Y' Z).symm\\n      (CategoryTheo\", \"doc\": \"In a rigid monoidal category $\\\\mathcal{C}$, for dual objects $Y, Y'$ with an exact pairing and any morphism $f : Y' \\\\to Z$, the composition of the coevaluation map $\\\\eta : I \\\\to Y' \\\\otimes Y$ with the\"}\n  {\"name\": \"CategoryTheory.ExactPairing.evaluation_coevaluation''\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] (X Y : C)\\n  [inst_2 : CategoryTheory.ExactPairing X Y],\\n  CategoryTheory.monoidalComp (CategoryTheory.MonoidalCategoryStruct.whiskerRight (η_ X Y) X)\\n      (CategoryTheory.MonoidalCategoryStruct.\", \"doc\": \"In a monoidal category with exact pairings, the composition of the coevaluation morphism $\\\\eta_X : I \\\\to X \\\\otimes X^*$, the tensor product with $X$, and the evaluation morphism $\\\\varepsilon_X : X^* \\\\\"}\n  {\"name\": \"CategoryTheory.ExactPairing.evaluation_coevaluation\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] (X Y : C)\\n  [inst_2 : CategoryTheory.ExactPairing X Y],\\n  CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerRight (η_ X Y) X)\\n      (CategoryTheory.CategoryStruct.c\", \"doc\": \"In a monoidal category $\\\\mathcal{C}$, for objects $X$ and $Y$ equipped with an exact pairing (duality), the composition of the coevaluation morphism $\\\\eta_X: I \\\\to X \\\\otimes Y$, the associator isomorp\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*counit|tensor.*transpose|comp_homEquiv",
+   "results": "10 hits; Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean; Mathlib/CategoryTheory/Yoneda.lean; Mathlib/CategoryTheory/Yoneda.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean; Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean. These concern ordinary tensor maps, rigid duals, internal Hom, or component adjunction rules; none states this module projection identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.homEquiv",
+   "results": "1 hits; CategoryTheory.Adjunction.comp_homEquiv. Read Adjunction/Basic.lean:584: comp_homEquiv only composes Hom bijections; it contains no projection/tensor compatibility.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of dualizing tensor maps from projection isomorphisms and counits of composite adjunctions",
+   "results": "8 hits; CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation; CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation; CategoryTheory.leftAdjointMate_comp_evaluation; CategoryTheory.rightAdjointMate_comp_evaluation; CategoryTheory.coevaluation_comp_rightAdjointMate_assoc; CategoryTheory.comp_rightAdjointMate; CategoryTheory.tensorRightHomEquiv_tensor; CategoryTheory.comp_leftAdjointMate. These concern ordinary tensor maps, rigid duals, internal Hom, or component adjunction rules; none states this module projection identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of tensor action maps of right adjoints using an invertible projection formula",
+   "results": "8 hits; TensorProduct.AlgebraTensorModule.rTensor_comp; Algebra.TensorProduct.map_comp; LinearMap.rTensor_comp_map; LinearMap.map_rTensor; LinearMap.lTensor_comp_apply; PiTensorProduct.map_comp; LinearMap.lTensor_comp_rTensor; lTensor.inverse_comp_lTensor. These concern ordinary tensor maps, rigid duals, internal Hom, or component adjunction rules; none states this module projection identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module functor projection formula induces tensor maps into its right adjoint compatible with composition and units",
+   "results": "8 hits; ModuleCat.ihom_ev_app; ModuleCat.ihom_coev_app; ModuleCat.monoidalClosedHomEquiv; ModuleCat.monoidalClosed_pre_app; ModuleCat.instMonoidalClosed; ModuleCat.instIsRightAdjointCoextendScalars; CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj; ModuleCat.monoidalClosed_uncurry. These concern ordinary tensor maps, rigid duals, internal Hom, or component adjunction rules; none states this module projection identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_leftAdjointMate|tensorLeftHomEquiv_whiskerRight_comp_evaluation",
+   "results": "8 hits; Mathlib/CategoryTheory/Monoidal/Rigid/Functor.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean. These concern ordinary tensor maps, rigid duals, internal Hom, or component adjunction rules; none states this module projection identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ihom_ev_app|ihom_coev_app|monoidalClosedHomEquiv|monoidalClosed_uncurry",
+   "results": "5 hits; Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean. These concern ordinary tensor maps, rigid duals, internal Hom, or component adjunction rules; none states this module projection identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-composition-factors",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-composition-factors",
+   "place": "proof (2), the two counit transposes agree; former Step 3 and the unit/naturality portions of Steps 7 and 10",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-composite-tensor-transpose",
+  "worker": "stage1",
+  "summary": "Expanded both composite-adjunction counit transposes, derived the needed tensor interchange directly from the assumed projection associativity and symmetry, checked the coefficient identification, and proved naturality and the unit clause. Reused two existing Mathlib adjunction nodes; no new nodes and no statement change. Existing search records retained and the logged Q105 searches appended.",
+  "blueprint": "det-sp-composition-factors, current proof (2): all of its transpose comparison, including the two projection factors and composite counit; naturality in the final paragraph. The unit normalization is the accompanying categorical normalization recorded in the imported item."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-25e4c2933",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-25e4c2933 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 8 steps against the cited statements (adjunction-of-natural-bijection Ψ⁻¹(b)=εF(b), adjunction-transpose-square, def-sfb-monoidal-category, def-sfb-strong-monoidal-functor, which has no symmetry), the source sk-prop-sp-composition-factors.proof.md proof (2) (identical in main-20261015 and latest), the unit sk-prop-sp-composition, and the parent det-sp-composition-factors steps 2 and 6. The statement and stmt_deps are byte-identical to live, where the item is still unsplit; this is its first split with no repair note, so nothing superseded it. I recomputed every step. Step 1: the composite inverse bijection S(a)=ε_gF_g(ε_f)F_gF_f(a). Step 2: q-naturality, then the square lemma with f=P(a)⊗1, s=t_{L'}, t=t_L, k=a. Step 3: (*) via R-naturality in M, inverse associativity, P_f(σ)=σ, symmetric coherence (1⊗σ)(σ⊗1)σ=σ_{PB⊗PC,D}, and bifunctoriality. Step 4: S(a_2)=q_gF_g(Q_{B⊗C}). Step 5: σσ=1 and R_g-naturality give T_K, with π_comp⁻¹=R_gF_g(R_f). Step 6: c_1j=ρ and the counit hypothesis at K=1 give ε_hαF_gF_f(j)=s. Step 7: π_h(α⊗1)=απ_comp, inverted, gives S(a_1)=T_K. Step 8: injectivity gives the equality, and the unit clause follows from projection unitality plus ρσ_{1,X}=λ_X (hexagon, b=b²) and Ψ⁻¹(v)=εF(v). Small cases checked: identity functors, K=1, g=id and zero functors. proof_deps equals the union of the uses, all cites are definitions or Mathlib leaves (no route break, no tool_uses), and there is no SGA. Advisory 1: the report says no comparable node exists, but the NH parent reviewer named lem-pur-composite-tensor-transpose (Q39), the strict α=c=1 case in another projection convention. Steps 3–5 reprove it inline. That is correct and duplicates no node; citing it would need a σ-convention translation. Advisory 2: \"unital and associative in L\" in the unchanged statement is not displayed and has no definition cite. No fixes were made; review.md is written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SmoothPurityCompositeTensorTranspose",
+  "declaration": "CategoryTheory.spCompositeTensorTranspose_eq",
+  "declarations": [
+   "CategoryTheory.spTensorCounit",
+   "CategoryTheory.spTensorCounitMate",
+   "CategoryTheory.spCompositeCoefficientIso",
+   "CategoryTheory.spCompositeTensorDirect",
+   "CategoryTheory.spCompositeTensorIterated",
+   "CategoryTheory.spCompositeTensorTranspose",
+   "CategoryTheory.spCompositeTensorTranspose_eq"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SmoothPurityCompositeTensorTranspose.lean",
+  "statement": "theorem spCompositeTensorTranspose_eq [Pf.Braided] [Pg.Braided] (α : Ff ⋙ Fg ≅ Fh) (hc : ∀ K : Z, (Ff ⋙ Fg).map (c.hom.app K) ≫ (af.comp ag).counit.app K = α.hom.app (Gh.obj K) ≫ ah.counit.app K) (hf_natural : ∀ (M M' : X) (L L' : Y) (m : M ⟶ M') (l : L ⟶ L'), (Ff.map m ⊗ₘ l) ≫ (πf M' L').hom = (πf M L).hom ≫ Ff.map (m ⊗ₘ Pf.map l)) (hf_unit : ∀ M : X, (ρ_ (Ff.obj M)).hom = (πf M (𝟙_ Y)).hom ≫ Ff.map ((M ◁ Functor.OplaxMonoidal.η Pf) ≫ (ρ_ M).hom)) (hf_assoc : ∀ (M : X) (L L' : Y), (α_ (Ff.obj M) L L').hom ≫ (πf M (L ⊗ L')).hom ≫ Ff.map ((M ◁ Functor.OplaxMonoidal.δ Pf L L') ≫ (α_ M (Pf.obj L) (Pf.obj L')).inv) = ((πf M L).hom ▷ L') ≫ (πf (M ⊗ Pf.obj L) L').hom) (hg_natural : ∀ (M M' : Y) (L L' : Z) (m : M ⟶ M') (l : L ⟶ L'), (Fg.map m ⊗ₘ l) ≫ (πg M' L').hom = (πg M L).hom ≫ Fg.map (m ⊗ₘ Pg.map l)) (hg_unit : ∀ M : Y, (ρ_ (Fg.obj M)).hom = (πg M (𝟙_ Z)).hom ≫ Fg.map ((M ◁ Functor.OplaxMonoidal.η Pg) ≫ (ρ_ M).hom)) (hg_assoc : ∀ (M : Y) (L L' : Z), (α_ (Fg.obj M) L L').hom ≫ (πg M (L ⊗ L')).hom ≫ Fg.map ((M ◁ Functor.OplaxMonoidal.δ Pg L L') ≫ (α_ M (Pg.obj L) (Pg.obj L')).inv) = ((πg M L).hom ▷ L') ≫ (πg (M ⊗ Pg.obj L) L').hom) (hh_natural : ∀ (M M' : X) (L L' : Z) (m : M ⟶ M') (l : L ⟶ L'), (Fh.map m ⊗ₘ l) ≫ (πh M' L').hom = (πh M L).hom ≫ Fh.map (m ⊗ₘ (Pg ⋙ Pf).map l)) (hh_unit : ∀ M : X, (ρ_ (Fh.obj M)).hom = (πh M (𝟙_ Z)).hom ≫ Fh.map ((M ◁ Functor.OplaxMonoidal.η (Pg ⋙ Pf)) ≫ (ρ_ M).hom)) (hh_assoc : ∀ (M : X) (L L' : Z), (α_ (Fh.obj M) L L').hom ≫ (πh M (L ⊗ L')).hom ≫ Fh.map ((M ◁ Functor.OplaxMonoidal.δ (Pg ⋙ Pf) L L') ≫ (α_ M ((Pg ⋙ Pf).obj L) ((Pg ⋙ Pf).obj L')).inv) = ((πh M L).hom ▷ L') ≫ (πh (M ⊗ (Pg ⋙ Pf).obj L) L').hom) (hπ : ∀ (M : X) (L : Z), (α.hom.app M ▷ L) ≫ (πh M L).hom = (πg (Ff.obj M) L).hom ≫ Fg.map (πf M (Pg.obj L)).hom ≫ α.hom.app (M ⊗ (Pg ⋙ Pf).obj L)) [IsIso (spTensorCounitMate Pf Ff Gf af πf (Gg.obj (𝟙_ Z)))] : (∀ K : Z, ((af.comp ag).homEquiv _ K).symm (spCompositeTensorDirect Pf Pg Ff Fh Gf Gg Gh af ah πf πh c K) = spCompositeTensorTranspose Pf Pg Ff Fg Gf Gg af ag πf πg K ∧ ((af.comp ag).homEquiv _ K).symm (spCompositeTensorIterated Pf Pg Ff Fg Gf Gg af ag πf πg K) = spCompositeTensorTranspose Pf Pg Ff Fg Gf Gg af ag πf πg K ∧ spCompositeTensorDirect Pf Pg Ff Fh Gf Gg Gh af ah πf πh c K = spCompositeTensorIterated Pf Pg Ff Fg Gf Gg af ag πf πg K) ∧ (spTensorCounitMate Pf Ff Gf af πf (𝟙_ Y) = (Functor.OplaxMonoidal.η Pf ▷ Gf.obj (𝟙_ Y)) ≫ (λ_ (Gf.obj (𝟙_ Y))).hom) ∧ (∀ (L L' : Y) (l : L ⟶ L'), (Pf.map l ▷ Gf.obj (𝟙_ Y)) ≫ spTensorCounitMate Pf Ff Gf af πf L' = spTensorCounitMate Pf Ff Gf af πf L ≫ Gf.map l) ∧ (spTensorCounitMate Pg Fg Gg ag πg (𝟙_ Z) = (Functor.OplaxMonoidal.η Pg ▷ Gg.obj (𝟙_ Z)) ≫ (λ_ (Gg.obj (𝟙_ Z))).hom) ∧ (∀ (L L' : Z) (l : L ⟶ L'), (Pg.map l ▷ Gg.obj (𝟙_ Z)) ≫ spTensorCounitMate Pg Fg Gg ag πg L' = spTensorCounitMate Pg Fg Gg ag πg L ≫ Gg.map l) ∧ (spTensorCounitMate (Pg ⋙ Pf) Fh Gh ah πh (𝟙_ Z) = (Functor.OplaxMonoidal.η (Pg ⋙ Pf) ▷ Gh.obj (𝟙_ Z)) ≫ (λ_ (Gh.obj (𝟙_ Z))).hom) ∧ (∀ (L L' : Z) (l : L ⟶ L'), ((Pg ⋙ Pf).map l ▷ Gh.obj (𝟙_ Z)) ≫ spTensorCounitMate (Pg ⋙ Pf) Fh Gh ah πh L' = spTensorCounitMate (Pg ⋙ Pf) Fh Gh ah πh L ≫ Gh.map l)",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-04720e8a8",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Read node, source place, the 3 stmt_dep records, module, report and node diff (only the lean record was added). Every hypothesis matches the node: symmetric monoidal X,Y,Z; Braided Pf,Pg with Ph=Pg⋙Pf; adjunctions af,ag,ah; α and c; hc against Mathlib Adjunction.comp counit εg∘Fg(εf); π naturality, unitality and associativity with explicit η/δ; hπ in the correct order; sole IsIso on ρ=t_{f,Ωg}. Helpers q, t, μ=c_1≪≫ρ⁻¹, direct arrow, iterated arrow (associator and tensorator) and common transpose (β, π_comp⁻¹, s▷K, λ) are real data. Conclusions: both transposes and equality for all K, plus t_1=(η▷Ω)≫λ and naturality for f,g,h. Re-derived steps 6-7 and the unit clause: true. Six independent universes; no extra assumptions; proof only sorry; docstrings with source place, blueprint id and 8 steps; lean.statement verbatim; no line over 100 chars. No H4: Adjunction.comp is the mathlib_match of def-weil-pbc-composite-adjunction, and lem-pur composite_tensor_transpose is the strict alpha=c=1 case. Advisory: the node could cite def-weil-pbc-composite-adjunction. No compile run, per instructions."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261025T203730-L-2849999",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.spCompositeTensorTranspose_eq"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-pointed-limit-finite-splitting",
+ "kind": "statement",
+ "title": "Finite-cover splittings and functorial deck action on pointed limits",
+ "statement": "Let $X$ be a nonempty connected quasi-compact quasi-separated scheme [def-pc-scheme, def-weil-connected-scheme, def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism], $x:\\operatorname{Spec}\\Omega\\to X$ a geometric point [def-weil-geometric-point], and $\\Pi=\\pi_1^{\\mathrm{et}}(X,x)$ with its profinite topology and left action on finite geometric fibres [def-galois-fibre-functor]. Finite etale covers are objects of [def-weil-pbc-finite-etale-category]. For every open normal subgroup $N\\triangleleft\\Pi$, let $(Y_N,y_N)$ be a pointed connected finite etale cover identified on its geometric fibre with $(\\Pi/N,N)$, with pointed transition $Y_M\\to Y_N$ inducing $aM\\mapsto aN$ for $M\\subseteq N$. Work in compatible universes and small indexing systems [def-weil-size-convention].\nLet $(T,(p_N),t)$ be a limit of this system in schemes over $X$, with the compatible marked point, and assume $T$ is connected. For every finite etale $X$-scheme $Y$, write $E=Y_x$. There are unique $X$-maps $f_s:T\\to Y$ for $s\\in E$ with $f_s(t)=s$, and the map\n$$\\coprod_{s\\in E}T\\longrightarrow T\\times_XY,\\qquad z\\text{ in summand }s\\longmapsto(z,f_s(z))$$\nis an isomorphism [def-pc-fibre-product]. This includes $E=\\varnothing$. For every $N$ acting trivially on $E$, $f_s$ factors as $f_{s,N}p_N$, where $f_{s,N}:Y_N\\to Y$ is the unique finite-etale map with fibre formula $aN\\mapsto as$. These maps are compatible with every refinement $M\\subseteq N$; they are independent of such $N$, and for every finite-etale $X$-map $b:Y\\to Z$ they satisfy $bf_s=f_{b(s)}$.\nThere are unique automorphisms $d_g:T\\to T$ over $X$, for $g\\in\\Pi$, such that $p_Nd_g=f_{gN}$ for every $N$. They satisfy $f_sd_g=f_{gs}$, $d_1=1$, and $d_hd_g=d_{gh}$; thus $z\\cdot g=d_g(z)$ is a right action normalized by the left monodromy on finite fibres.\nFor any pointed morphism $f:(X',x')\\to(X,x)$ with the same hypotheses, a connected pointed limit $T'$ of the corresponding system, and $\\Pi'=\\pi_1^{\\mathrm{et}}(X',x')$, there is a unique map $F:T'\\to T$ over $f$ carrying $t'$ to $t$. If $\\tau_Y:(f^*Y)_{x'}\\simeq Y_x$ is the base-change fibre bijection, then $f_sF$ is the composite $T'\\xrightarrow{f'_{\\tau_Y^{-1}(s)}}f^*Y\\to Y$. For the induced continuous homomorphism $f_*:\\Pi'\\to\\Pi$, one has $Fd'_h=d_{f_*(h)}F$ for every $h\\in\\Pi'$. These pointed maps respect identities and composition.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BND, theorem-fundamental-group (1), (3); agent finite-coset splitting, normalized action and pointed naturality arguments (old steps 7–9 and 16 of lem-sfb-pointed-finite-etale-limit-cover)."
+ },
+ "stmt_deps": [
+  "def-galois-fibre-functor",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-connected-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-size-convention",
+  "def-galois-finite-coproduct"
+ ],
+ "proof": [
+  {
+   "text": "Finite-stage maps. By [def-galois-fibre-functor], E is a finite continuous left Pi-set. The kernel K of its permutation action is open and normal: it is the intersection of the stabilizers of the finitely many elements, each open by continuity, and is a kernel. This also gives K=Pi for E empty. For any open normal N contained in K and s in E, the formula aN ↦ as is well-defined and Pi-equivariant. By the equivalence of [thm-galois-fundamental] it gives a unique X-map f_{s,N}:Y_N→Y. Every equivariant map Pi/N→E is determined by N, since aN=a·N, so this is precisely the unique finite-etale map carrying y_N to s. Put f_s=f_{s,N}∘p_N for the moment; it carries t to s.",
+   "uses": [
+    "thm-galois-fundamental",
+    "def-galois-fibre-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND, theorem-fundamental-group (1), (3); explicit finite-coset and limit-universal-property argument by Q86."
+   }
+  },
+  {
+   "text": "Graph splitting on the connected limit. The finite-stage formula supplies an X-map f_s for each geometric fibre point s. Regard the graph coproduct and T×_X Y as finite etale T-schemes. At the point t their geometric fibres are both E: every geometric point of the coproduct factors through one summand, whose map to T forces its first component to equal t, and the graph has second component s. Thus the graph map is bijective on this fibre. The finite-etale fibre functor reflects isomorphisms by [thm-galois-fundamental], so the graph cofan is colimiting. This argument applies unchanged for empty E and avoids a separate finite-stage coproduct and its pullback.",
+   "uses": [
+    "thm-galois-fundamental",
+    "def-pc-fibre-product",
+    "def-galois-finite-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND, theorem-fundamental-group (1), (3); explicit finite-coset and limit-universal-property argument by Q86."
+   }
+  },
+  {
+   "text": "Pointwise uniqueness on any connected source. Pull Y back to the connected source T. Two X-maps T→Y agreeing at t give two maps from the identity cover of T to this finite-etale pullback, with equal evaluations at t. The identity cover is connected; evaluation on maps out of a connected object is injective in the Galois category supplied by [thm-galois-fundamental]. The two pullback lifts agree, hence their projections to Y agree. This proves marked-point uniqueness directly, without factoring arbitrary maps through a finite stage or first using the splitting. Composing with limit projections gives the analogous uniqueness for maps into any specified pointed coset limit.",
+   "uses": [
+    "thm-galois-fundamental"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND, theorem-fundamental-group (1), (3); explicit finite-coset and limit-universal-property argument by Q86."
+   }
+  },
+  {
+   "text": "Refinements, independence and cover naturality. For M contained in N, the fibre formulas for f_{s,N} followed after the pointed transition Y_M→Y_N and for f_{s,M} are both aM ↦ as, hence their maps agree by faithfulness in [thm-galois-fundamental]. After composition with p_M this gives the same map on T. For two subgroups killing E use their intersection to compare both maps, so the temporary definition of f_s in step 1 is independent of N and factors through every such N. Alternatively both maps agree at t and step 3 applies. For b:Y→Z finite etale over X, b∘f_s is an X-map taking t to b(s), hence equals f_{b(s)} by step 3. These arguments give exactly the stated transition and naturality formulas.",
+   "uses": [
+    "thm-galois-fundamental"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND, theorem-fundamental-group (1), (3); explicit finite-coset and limit-universal-property argument by Q86."
+   }
+  },
+  {
+   "text": "Deck maps and their order. For g in Pi, the maps f_{gN}:T→Y_N are a compatible cone: under Y_M→Y_N their labels gM become gN by step 4 (the transition's fibre formula is part of the hypotheses). The universal property of the given limit supplies a unique X-map d_g with p_N∘d_g=f_{gN}. Fix Y,s and choose N killing its fibre E. Naturality in step 4 for f_{s,N}:Y_N→Y gives\nf_s∘d_g=f_{s,N}∘p_N∘d_g=f_{s,N}∘f_{gN}=f_{gs}.\nThe last label follows from the equivariant finite-stage formula aN ↦ as established using [thm-galois-fundamental]. For g=1, f_N=p_N by step 3, so all projections give d_1=id. Moreover\np_N∘d_h∘d_g=f_{hN}∘d_g=f_{ghN}=p_N∘d_{gh}.\nEquality of all limit legs gives d_h∘d_g=d_{gh}. Taking h=g^{-1} and then g=h^{-1} shows that d_{g^{-1}} is a two-sided inverse to d_g. The uniqueness of each d_g is already the uniqueness of the limit lift. Thus z·g=d_g(z) is the normalized right action with exactly the convention in the statement.",
+   "uses": [
+    "thm-galois-fundamental"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND, theorem-fundamental-group (1), (3); explicit finite-coset and limit-universal-property argument by Q86."
+   }
+  },
+  {
+   "text": "Pointed maps of limits. Write f:X'→X and q_Y:f^*Y→Y for the projection. By [lem-galois-pi1-functoriality] the base-change fibre bijections are tau_Y(z)=q_Y∘z, natural in Y, and there is a continuous homomorphism f_* with f_*(h)tau_Y(z)=tau_Y(hz); this is the base-change clause of [thm-galois-fundamental] with the bijection made explicit. For each N put r_N=tau_{Y_N}^{-1}(N), and define u_N=q_{Y_N}∘f'_{r_N}:T'→Y_N. The primed form of step 4 and naturality of tau show compatibility under every transition Y_M→Y_N. Also u_N(t')=q_{Y_N}∘r_N=tau_{Y_N}(r_N)=y_N, by the explicit formula for tau. The universal property of the X-limit supplies F:T'→T over f with p_N∘F=u_N; equality of all projected points gives F(t')=t. If G:T'→T is any other such pointed map, the pair (T'→X',p_N∘G) gives a map T'→f^*Y_N by [def-pc-fibre-product], taking t' to r_N. Primed step 3 makes it f'_{r_N}. Thus p_N∘G=u_N for every N and G=F. For arbitrary Y and s, the same fibre-product construction applied to f_s∘F takes t' to tau_Y^{-1}(s); primed step 3 gives\nf_s∘F=q_Y∘f'_{tau_Y^{-1}(s)}.\nThis establishes existence, uniqueness and the full finite-cover comparison formula.",
+   "uses": [
+    "thm-galois-fundamental",
+    "def-pc-fibre-product",
+    "lem-galois-pi1-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND, theorem-fundamental-group (1), (3); explicit finite-coset and limit-universal-property argument by Q86."
+   }
+  },
+  {
+   "text": "Equivariance and functoriality. Fix h in Pi', Y and s in E, and put r=tau_Y^{-1}(s). The equivariance of [lem-galois-pi1-functoriality] (the base-change clause of [thm-galois-fundamental]) reads tau_Y(hr)=f_*(h)s. Steps 5 and 6, first on X' and then on X, now give\nf_s∘F∘d'_h=q_Y∘f'_r∘d'_h=q_Y∘f'_{hr}=f_{f_*(h)s}∘F=f_s∘d_{f_*(h)}∘F.\nIn particular take Y=Y_N and s=N, for which f_s=p_N. Equality on all limit legs proves F∘d'_h=d_{f_*(h)}∘F. The identity of T is a pointed lift over id_X, so uniqueness in step 6 makes it the identity comparison. For composable pointed morphisms the composite comparison is over the composite base morphism and sends the marked point to the marked point; the same uniqueness makes it the comparison for the composite. This proves all the stated functoriality clauses.",
+   "uses": [
+    "thm-galois-fundamental",
+    "lem-galois-pi1-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND, theorem-fundamental-group (1), (3); explicit finite-coset and limit-universal-property argument by Q86."
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-galois-fundamental",
+  "def-galois-fibre-functor",
+  "def-pc-fibre-product",
+  "def-galois-finite-coproduct",
+  "lem-galois-pi1-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BND, theorem-fundamental-group (1), (3); explicit finite-coset and limit-universal-property argument by Q86. G9 stage 3: direct evaluation-injectivity on connected sources and fibrewise verification of the graph coproduct; all deck and comparison clauses follow the stated finite-coset argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale covers split canonically over the pointed universal covering scheme naturally in covers and pointed base change with a normalized right deck action",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.ulift_f\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X) (x : ↥X), 𝒰.ulift.f x = 𝒰.f (𝒰.idx x)\", \"doc\": \"For any scheme $X$, morphism property $P$, and cover $\\\\mathcal{U}$ of $X$ defined by the precoverage generated by $P$, the morphism $f$ in the universe-lifted cover $\\\\mathcal{U}^{\\\\uparrow}$ evaluated \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.ulift_X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X) (x : ↥X), 𝒰.ulift.X x = 𝒰.X (𝒰.idx x)\", \"doc\": \"For any scheme $X$, morphism property $P$, and cover $\\\\mathcal{U}$ of $X$ defined by the precoverage generated by $P$, the object assigned by the universe-lifted cover $\\\\mathcal{U}.\\\\text{ulift}$ at a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Directed\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X : AlgebraicGeometry.Scheme}\\n  (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X)\\n  [inst : CategoryTheory.Category.{v_1, u_1} 𝒰.I₀] [inst_1 : 𝒰.LocallyDirected] {i j : 𝒰.I₀} (xi : ↥(𝒰.X i))\\n  (xj : ↥(𝒰.X\", \"doc\": \"For any locally directed cover $\\\\mathcal{U}$ of a scheme $X$, if two elements $x_i \\\\in \\\\mathcal{U}.X(i)$ and $x_j \\\\in \\\\mathcal{U}.X(j)$ satisfy $\\\\mathcal{U}.f(i)(x_i) = \\\\mathcal{U}.f(j)(x_j)$ in $X$, \"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.toSigma_s₀\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Sigma\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {S : AlgebraicGeometry.Scheme}\\n  [inst : AlgebraicGeometry.IsZariskiLocalAtSource P] [inst_1 : UnivLE.{v, u}]\\n  (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) S) (x : 𝒰.I₀), 𝒰.toSigma.s₀ x = default\", \"doc\": \"For any element $x$ in the zeroth component $\\\\mathcal{U}.I_0$ of a scheme cover $\\\\mathcal{U}$, the zeroth component map of the canonical morphism from $\\\\mathcal{U}$ to its sigma construction $\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            (self : AlgebraicGeometry.ExistsHomHomCom\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this function construc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.sigma_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Sigma\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {S : AlgebraicGeometry.Scheme}\\n  [inst : AlgebraicGeometry.IsZariskiLocalAtSource P] [inst_1 : UnivLE.{v, u}]\\n  (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) S), 𝒰.sigma.I₀ = PUnit.{v + 1}\", \"doc\": \"For a cover $\\\\mathcal{U}$ of a scheme $S$ under the precoverage combining jointly surjective families and a Zariski-local morphism property $P$, the zeroth component $I_0$ of the sigma construction's \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract pointed Galois prorepresentability and finite split algebras do not state the scheme splitting together with normalized deck action and pointed functoriality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FiniteEtale\", \"coproduct\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract pointed Galois prorepresentability and finite split algebras do not state the scheme splitting together with normalized deck action and pointed functoriality"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteSplit|bijective_fiber|UniversalCover|PointedGalois",
+   "results": "[grep] OK 19 hit(s)\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"24\", \"text\": \"- `Algebra.IsFiniteSplit.exists_tensorProduct_of_etale`: If `S` is finite étale over `R` of\"}\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"37\", \"text\": \"class Algebra.IsFiniteSplit (R S : Type*) [CommRing R] [CommRing S] [Algebra R S] : Prop where\"}\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"40\", \"text\": \"namespace Algebra.IsFiniteSplit\"}\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"44\", \"text\": \"instance {T : Type*} [CommRing T] [Algebra R T] [IsFiniteSplit R S] :\"}\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"45\", \"text\": \"    IsFiniteSplit T (T ⊗[R] S) := by\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"58\", \"text\": \"* `classifyingSpaceUniversalCover`\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"87\", \"text\": \"def classifyingSpaceUniversalCover [Monoid G] :\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"96\", \"text\": \"namespace classifyingSpaceUniversalCover\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"106\", \"text\": \"    classifyingSpaceUniversalCover G :=\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"116\", \"text\": \"    cechNerveTerminalFrom G ≅ classifyingSpaceUniversalCover G ⋙ forget _ := by\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Finite.lean\", \"line\": \"146\", \"text\": \"    fun R ↦ FintypeCat.equivEquivIso (Algebra.IsFiniteSplit.algHomEquivPrimeSpectrum _ _)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Topology.lean\", \"line\": \"202\", \"text\": \"    (fun X : PointedGaloisObject F ↦ MulAction.stabilizer (Aut F) X.pt) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"line\": \"25\", \"text\": \"- `PointedGaloisObject`: the category of pointed Galois objects\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"line\": \"26\", \"text\": \"- `PointedGaloisObject.cocone`: a cocone on `(PointedGaloisObject.incl F).op ≫ coyoneda` with\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"line\": \"32\", \"text\": \"- `PointedGaloisObject.isColimit`: the cocone `PointedGaloisObject.cocone` is a colimit cocone.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"line\": \"71\", \"text\": \"structure PointedGaloisObject (F : C ⥤ FintypeCat.{w}) : Type (max u₁ u₂ w) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"line\": \"79\", \"text\": \"namespace PointedGaloisObject\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean\", \"line\": \"183\", \"text\": \"  choose gi hgi using (fun X : PointedGaloisObject F ↦ toAut_surjective_isGalois F G t X)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean\", \"line\": \"184\", \"text\": \"  let cl (X : PointedGaloisObject F) : Set G := gi X • MulAction.stabilizer G X.pt\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract pointed Galois prorepresentability and finite split algebras do not state the scheme splitting together with normalized deck action and pointed functoriality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal finite etale cover maps to a finite etale scheme are classified by its geometric fibre and intertwine monodromy under pointed morphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsCoveringMap.monodromy\", \"module\": \"Mathlib.Topology.Homotopy.Lifting\", \"type\": \"{x y : X} (γ : Path.Homotopic.Quotient x y) : p ⁻¹' { x } → p ⁻¹' { y }\", \"doc\": \"Given a covering map $ p : E \\to X $ and a homotopy class $[\\\\gamma]$ of paths from $ x $ to $ y $ in $ X $, this function maps each point $ e $ in the fiber $ p^{-1}(\\\\{x\\\\}) $ to the endpoint of the uni\"}\n  {\"name\": \"IsCoveringMap.monodromyFunctor\", \"module\": \"Mathlib.Topology.Homotopy.Lifting\", \"type\": \": FundamentalGroupoid X ⥤ Type _\", \"doc\": \"The functor from the fundamental groupoid of $X$ to the category of types, defined by mapping each point $x$ to the fiber $p^{-1}(\\\\{x\\\\})$ and each homotopy class of paths $[\\\\gamma]$ from $x$ to $y$ to\"}\n  {\"name\": \"IsCoveringMap.monodromyFunctor_obj\", \"module\": \"Mathlib.Topology.Homotopy.Lifting\", \"type\": \"∀ {E : Type u_1} {X : Type u_2} [inst : TopologicalSpace E] [inst_1 : TopologicalSpace X] {p : E → X}\\n  (cov : IsCoveringMap p) (x : FundamentalGroupoid X), cov.monodromyFunctor.obj x = ↑(p ⁻¹' {x.as})\", \"doc\": \"For a covering map $ p : E \\\\to X $, the monodromy functor maps each point $ x \\\\in X $ (as an object in the fundamental groupoid of $ X $) to the fiber $ p^{-1}(\\\\{x\\\\}) $, which is the set of all points\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"IsCoveringMap.monodromy_bijective\", \"module\": \"Mathlib.Topology.Homotopy.Lifting\", \"type\": \"{x y : X} (γ : Path.Homotopic.Quotient x y) : (cov.monodromy γ).Bijective\", \"doc\": \"For a covering map $ p : E \\to X $ and any homotopy class $[\\\\gamma]$ of paths from $ x $ to $ y $ in $ X $, the monodromy action $ p^{-1}(\\\\{x\\\\}) \\to p^{-1}(\\\\{y\\\\}) $ defined by lifting $[\\\\gamma]$ is a bi\"}\n  {\"name\": \"IsCoveringMap.monodromy_map\", \"module\": \"Mathlib.Topology.Homotopy.Lifting\", \"type\": \"{x y : E} (γ : Path.Homotopic.Quotient x y) : cov.monodromy (γ.map ⟨p, cov.continuous⟩) ⟨x, rfl⟩ = ⟨y, rfl⟩\", \"doc\": \"For a covering map $ p : E \\to X $, the composition of the monodromy action on fibers with the induced map on homotopy classes of paths (via $ p $) acts as the identity map on the fibers of $ p $. Spec\"}\n  {\"name\": \"IsCoveringMap.monodromy.congr_simp\", \"module\": \"Mathlib.Topology.Homotopy.Lifting\", \"type\": \"∀ {E : Type u_1} {X : Type u_2} [inst : TopologicalSpace E] [inst_1 : TopologicalSpace X] {p : E → X}\\n  (cov : IsCoveringMap p) {x y : X} (γ γ_1 : Path.Homotopic.Quotient x y),\\n  γ = γ_1 → ∀ (a a_1 : ↑(p ⁻¹' {x})), a = a_1 → cov.monodromy γ a = cov.monodromy γ_1 a_1\", \"doc\": \"If two paths $\\\\gamma$ and $\\\\gamma_1$ from $x$ to $y$ are equal, and two points $a$ and $a_1$ in the fiber $p^{-1}(\\\\{x\\\\})$ are equal, then their images under the monodromy action are equal, i.e., $\\\\tex\"}\n  {\"name\": \"IsCoveringMap.monodromy_refl\", \"module\": \"Mathlib.Topology.Homotopy.Lifting\", \"type\": \"{x : X} : cov.monodromy (.refl x) = id\", \"doc\": \"For a covering map $ p : E \\\\to X $, the monodromy action induced by the homotopy class of the constant path at a point $ x \\\\in X $ acts as the identity map on the fiber $ p^{-1}(\\\\{x\\\\}) $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract pointed Galois prorepresentability and finite split algebras do not state the scheme splitting together with normalized deck action and pointed functoriality"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Ss]plit|[Ss]plit.*finite|UniversalCover",
+   "results": "25 hits; Mathlib/Data/Seq/Defs.lean; Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean; Mathlib/LinearAlgebra/Finsupp/Pi.lean; Mathlib/LinearAlgebra/Finsupp/Pi.lean; Mathlib/LinearAlgebra/Finsupp/Pi.lean; Mathlib/LinearAlgebra/Finsupp/Pi.lean; Mathlib/LinearAlgebra/Finsupp/Pi.lean; Mathlib/LinearAlgebra/Finsupp/LSum.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Galois-category results or etale algebras over fields do not state the finite-cover scheme splitting, normalized deck action and pointed naturality; source declarations read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale covers split over the universal profinite etale cover with deck action",
+   "results": "8 hits; Algebra.FormallyEtale.iff_exists_algEquiv_prod; Algebra.etaleLocus_eq_univ_iff; IsCoveringMap.monodromy; AlgebraicGeometry.Scheme.etaleTopology; Algebra.Etale.iff_exists_algEquiv_prod; CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat; Algebra.etaleLocus_eq_univ_iff_etale; IsCoveringMap.isCoveringMapOn",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Galois-category results or etale algebras over fields do not state the finite-cover scheme splitting, normalized deck action and pointed naturality; source declarations read"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FiniteEtale\", \"IsLimit\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Galois-category results or etale algebras over fields do not state the finite-cover scheme splitting, normalized deck action and pointed naturality; source declarations read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale covers split over the inverse limit of pointed connected finite Galois covers with functorial right deck group action",
+   "results": "8 hits; CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family; CategoryTheory.PreGaloisCategory.PointedGaloisObject.isGalois; CategoryTheory.PreGaloisCategory.AutGalois.π; CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_fiber; CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat; CategoryTheory.PreGaloisCategory.endEquivAutGalois_π; CategoryTheory.PreGaloisCategory.has_decomp_connected_components; InfiniteGalois.algEquivToLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Galois-category results or etale algebras over fields do not state the finite-cover scheme splitting, normalized deck action and pointed naturality; source declarations read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from the inverse limit of pointed Galois covers to finite etale covers are classified by geometric fibre points, compatibly with monodromy",
+   "results": "8 hits; CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_fiber; CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_symm_fiber; InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj; CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_fiber_nonempty; CategoryTheory.PreGaloisCategory.PointedGaloisObject.Hom; CategoryTheory.PreGaloisCategory.endEquivSectionsFibers_π; CategoryTheory.PreGaloisCategory.autIsoFibers_inv_app; InfiniteGalois.limitToAlgEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Galois-category results or etale algebras over fields do not state the finite-cover scheme splitting, normalized deck action and pointed naturality; source declarations read"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit|colimitIso|evaluation.*[Ii]njective|PointedGaloisObject.isColimit",
+   "results": "25 hits; Mathlib/CategoryTheory/Galois/Examples.lean; Mathlib/CategoryTheory/Galois/Examples.lean; Mathlib/CategoryTheory/Galois/Decomposition.lean; Mathlib/CategoryTheory/Galois/Decomposition.lean; Mathlib/CategoryTheory/Galois/Decomposition.lean; Mathlib/CategoryTheory/Galois/Decomposition.lean; Mathlib/CategoryTheory/Galois/Decomposition.lean; Mathlib/CategoryTheory/Galois/GaloisObjects.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Galois-category results or etale algebras over fields do not state the finite-cover scheme splitting, normalized deck action and pointed naturality; source declarations read"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pointed-finite-etale-limit-cover",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Complete topological group torsors on a normal scheme; Lemma 7.4.3, p. 69 (cofiltered-limit compatibility for profinite groups), Construction 7.4.4, and the finite-cover fibre functor underlying Lemma 7.4.10. Agent expansion into the pointed finite-etale inverse limit and its Cech coordinates. Upstream reference implementation: lean/WeilConjectures/AlgebraicGeometry/FundamentalGroup/UniversalCoverConstruction.lean, cover/proj/pt, bijective_fiber, transport, loop and continuous_loop, lines 129–164, 305–314, 356–376, 783–852; the full Cech statement here is not asserted to be an already finished Lean declaration.; re-split argument: old item steps [7, 8, 9, 16].",
+   "via": [
+    "lem-sfb-pointed-finite-etale-limit-cover",
+    "lem-sfb-complete-group-torsor-monodromy",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-pointed-limit-finite-splitting",
+  "worker": "stage1",
+  "summary": "Q86 supplied the finite-coset splitting and connected-section uniqueness argument, then constructed normalized deck maps and pointed naturality by the limit universal property. Reuses the existing fundamental-group classification; no new nodes and no statement change.",
+  "blueprint": "The inherited from.place identifies the finite-cover fibre functor in the all-continuous monodromy obligation, through lem-sfb-pointed-finite-etale-limit-cover: this proof realizes its old steps 7–9 and 16 without replacing the unit route. The inherited ancestor is null, as confirmed by blueprint_refs.py ancestor; retained unchanged.",
+  "tool_uses": [
+   {
+    "node": "thm-galois-fundamental",
+    "why": "Generic finite-etale fibre-functor classification (Stacks 0BND), finite limits and colimits, and pointed base-change naturality. This is the finite-cover tool explicitly used in the inherited monodromy route; no node of this unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-galois-fundamental"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-02d20d303",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-02d20d303 (reviewer sub-agent of L); spot-checked: I read all seven steps against Stacks 0BND (pione.tex l.1216-1250, connected schemes only, no Noetherian hypothesis) and against the statements of thm-galois-fundamental, def-galois-fibre-functor, def-galois-finite-coproduct and def-pc-fibre-product. The item is node B of ND's re-split; old parent steps 7-9 and 16 are fully carried forward and none was shortened. There are no new nodes and the statement is unchanged. Checks: the kernel of the action on E is open normal (Pi when E is empty); the coset maps (aN,s)->(aN,as) and its inverse are well defined and equivariant; base change along p_N keeps the coproduct; step 3 applies the theorem to connected T at t, giving Hom_X(T,Y)=E; cone compatibility tau_MN f_gM = f_gN; f_s d_g = f_gs; d_h d_g = d_gh, a right action (order checked on an S3 quotient); step 6 pairs into f*Y_N for uniqueness; step 7 tests on Y_N with s=N. Edge cases E empty, Pi trivial and f_* not surjective all hold. FIX (C4): steps 6-7 use the explicit tau_Y(z)=q_Y∘z (for u_N(t')=y_N, and for the pairing taking t' to tau^-1(s)) and the equivariance of tau, but cited only thm-galois-fundamental, whose base-change clause is an abstract natural bijection. I added lem-galois-pi1-functoriality, which old step 16 cited, to steps 6 and 7 and to proof_deps, and wrote out u_N(t')=tau(r_N)=y_N. That node is Lean-closed in slopmaster2 and in the same unit sk-prop-h2 as the declared tool; its 369-node closure contains no sfb node, so there is no cycle. Duplicate search (rg -L for 0BND) found no node stating the limit splitting, deck action or pointed naturality. The tool_uses entry for thm-galois-fundamental is accepted. Maintainer note: the item statement's 'base-change fibre bijection tau_Y' and 'induced f_*' cite no node; [lem-galois-pi1-functoriality] could be added to the statement on a later edit.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.PointedLimitFiniteSplitting",
+  "declaration": "AlgebraicGeometry.Scheme.exists_pointedLimitSplitting",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteEtaleOver",
+   "AlgebraicGeometry.Scheme.PointedCosetSystem",
+   "AlgebraicGeometry.Scheme.PointedCosetLimit",
+   "AlgebraicGeometry.Scheme.PointedLimitSplitting",
+   "AlgebraicGeometry.Scheme.exists_pointedLimitSplitting",
+   "AlgebraicGeometry.Scheme.PointedLimitComparison",
+   "AlgebraicGeometry.Scheme.exists_unique_pointedLimitComparison",
+   "AlgebraicGeometry.Scheme.pointedLimitComparison_id",
+   "AlgebraicGeometry.Scheme.pointedLimitComparison_comp"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/PointedLimitFiniteSplitting.lean",
+  "statement": "theorem exists_pointedLimitSplitting [ConnectedSpace X] [CompactSpace X] [QuasiSeparatedSpace X] [IsFundamentalGroup (FiniteEtale.fiber x) G] : Nonempty (PointedLimitSplitting L)",
+  "branch": "sheaf-dag",
+  "by": "NG",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The node is a bundled statement: exists_pointedLimitSplitting supplies the finite-cover splittings, finite-stage factorizations, refinements, naturality and normalized right deck action; exists_unique_pointedLimitComparison supplies pointed base-change naturality and equivariance; pointedLimitComparison_id and pointedLimitComparison_comp state the identity and composition clauses. The input/output structures in this owning module package exactly the node hypotheses and conclusions, using existing finite-etale fibres, fundamental-group models, limits, pullbacks and coproduct cofans. No statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-29c23b3a3",
+  "group": "NG",
+  "result": "pass",
+  "note": "Item lean record only change; statement verbatim, lines ≤100, report sections present. Hypotheses: ConnectedSpace/CompactSpace/QuasiSeparatedSpace X, inline alg-closed geometric point, small ProfiniteGrp model with IsFundamentalGroup on FiniteEtale.fiber (same convention as Restriction/PointedLimitCech), arbitrary PointedCosetSystem (equivariant labels G/N ≃ fibre, transitions aM↦aN, connected stages) and given connected pointed limit in Over X. Conclusions all present and pinned: unique f_s with f_s(t)=s; IsColimit graph cofan into pullback T×_X Y (E=∅ included); finiteStage formula/unique, factor, refinement, natural; unique deck automorphisms with p_N d_g=f_gN, f_s d_g=f_gs, d_1=1, d_g≫d_h=d_gh (order verified); unique pointed comparison over x'≫f with f_sF=pullback.fst∘f'_{τ⁻¹s} (τ=pullbackFiberIso) and F d'_h=d_{f_*h}F (f_*=fundamentalGroupMap), id/comp. No hollow defs, sorry-only theorems, docstrings OK, proof-dep import per brief, no H4 duplicate (PointedLimitCech is cover-x specific). Not recompiled per policy. Advisories: pullbackFiberIso/fundamentalGroupMap owned by non-stmt_dep theorem lem-galois-pi1-functoriality; three mathlib-status deps lack lean records; QuasiSeparatedSpace vs QuasiSeparated class (equivalent)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-d7808",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261023T123544-L-1209773",
+  "kind": "proof",
+  "note": "independent cc review: delivered PointedLimitFiniteSplitting.lean and node vs clones/live: only plain FiberEquivalence import removed, 7 private helpers, 4 sorries closed (axioms clean); node changes only proof/proof_origin; unit sk-thm-sf-ctf-stability realized empty, 0 importers"
+ }
+}

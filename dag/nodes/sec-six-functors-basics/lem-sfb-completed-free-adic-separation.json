@@ -1,0 +1,177 @@
+{
+ "id": "lem-sfb-completed-free-adic-separation",
+ "kind": "statement",
+ "title": "Adic separation of sheafified free representables",
+ "statement": "Let l be prime and X a scheme with its small pro-etale site [def-weil-pbc-proetale-site]. Let R be purTwistRing of the positive finite-ring limit purTwistZlCompletion [def-pur-twist-coefficient-rings]. For U in X.ProEt whose structure morphism is proAffineEtale, that is a small cofiltered limit of absolutely affine etale X-schemes [sk-def-pe-morphisms], let P be the module sheafification of the free R-presheaf on the universe-lifted representable of U [def-weil-presheaf-modules-sheafification]. If x in P(V) is locally divisible by l^(n+1) for every natural n, then x=0. Precisely, for every n the image sieve of multiplication by l^(n+1) on the underlying abelian sheaf, evaluated at x, is covering. This asserts separation of this explicit target, with no source module, coefficient comparison, or additive map.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-pur-twist-coefficient-rings",
+  "def-weil-presheaf-modules-sheafification",
+  "sk-def-pe-morphisms"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "proof step 2 of lem-sfb-diagonal-completed-free-generator; local generator argument in coefficient identification paragraph (1)"
+ },
+ "proof": [
+  {
+   "text": "Each finite coefficient ring sheaf is killed by l^(n+1): its canonical map from the constant Z/l^(n+1) presheaf preserves the corresponding zero natural-number scalar. Thus any locally l^(n+1)-divisible coefficient section has zero n-th projection, by naturality and sheaf separatedness. Evaluation preserves the limit defining the completed ring, so all projections jointly detect zero. These are finiteCoefficient_nsmul and coefficient_adicSeparated in Lean.",
+   "uses": [
+    "def-pur-twist-coefficient-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A local R-linear functional on the slice over W sends the restriction of x to a locally infinitely l-divisible coefficient. Pull back each given image cover along W to V, apply the functional to its explicit divisibility witnesses and use its naturality and linearity. The preceding coefficient argument kills its value. This is localDual_zero in Lean.",
+   "uses": [
+    "def-pur-twist-coefficient-rings"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply local-dual detection for the free sheaf on the pro-affine etale representable. All tests vanish by the preceding step, so x=0.",
+   "uses": [
+    "lem-sfb-completed-affine-free-local-dual"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-twist-coefficient-rings",
+  "lem-sfb-completed-affine-free-local-dual"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), corrected finite-support local generator argument",
+  "note": "The original unrestricted statement is false. Restriction to the cover-dense pro-affine etale generators is propagated through automatic linearity; the unchanged section-action theorem descends from that basis. No countable intersection of covering sieves is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive homomorphism to a p adically separated module over p adic integers is linear; sheafification of free modules is p adically separated",
+   "results": "AdicCompletion.map, AdicCompletion.of, Hausdorffification.lift and related algebraic completion maps. None treats sheafification or the local divisibility hypotheses.",
+   "date": "2026-10-27",
+   "verdict": "No whole-statement match; use the existing sheaf and coefficient quotient APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map_zsmul\"",
+   "results": "map_zsmul and AddMonoidHom.map_zsmul preserve integer multiples. These give the algebraic part, not local integer approximation or free-sheaf separation.",
+   "date": "2026-10-27",
+   "verdict": "Use integer-multiple preservation in the combination argument."
+  },
+  {
+   "tool": "grep",
+   "query": "free.*separated|separated.*free|linearMapOfTendsto",
+   "results": "No relevant Mathlib free-sheaf separation theorem. Source PadicIntSheafLinear provides the action-defect criterion; PadicIntLatticeLisse applies it only to finite free targets. Local searches of Sheaf found no local-integer or free-adic-separation statement.",
+   "date": "2026-10-27",
+   "verdict": "The needed coefficient and target assertions are not duplicates of existing statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientFreeGenerator",
+  "date": "2026-10-27",
+  "group": "P9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-diagonal-completed-free-generator",
+   "place": "proof step 2 of lem-sfb-diagonal-completed-free-generator; local generator argument in coefficient identification paragraph (1)",
+   "via": [
+    "lem-sfb-diagonal-completed-free-generator"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedFreeAdicSeparation",
+  "file": "lean/Sheaf/Paper/CompletedFreeAdicSeparation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedFree_adicSeparated",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedFree_adicSeparated"
+  ],
+  "statement": "theorem completedFree_adicSeparated (l : ℕ) [Fact l.Prime]\n    (X : Scheme.{u}) (U : X.ProEtᵒᵖ) (hU : proAffineEtale U.unop.hom) :\n    let R := Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l)\n    let P := (PresheafOfModules.sheafification (𝟙 R.obj)).obj\n      ((PresheafOfModules.free R.obj).obj (uliftYoneda.{u + 1}.obj U.unop))\n    ∀ (V : X.ProEtᵒᵖ) (x : P.val.obj V),\n      (∀ n : ℕ, Presheaf.imageSieve\n        ((l ^ (n + 1) • 𝟙 ((SheafOfModules.toSheaf R).obj P)).hom) x ∈\n          Scheme.ProEt.topology X V.unop) → x = 0",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261027T012919-L-2346904",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4e5d7",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T034636-L-3668862",
+  "kind": "interface",
+  "note": "independent cc review: item/free-generator/section-action Lean vs their DAG nodes, change record and 3b importer compile; old statement checked false (doubled convergent sequence); new local-dual sorry read as true; public section_action signature unchanged against the clone"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "F2 stage 2",
+  "old_statement": "Let l be prime and X a scheme with its small pro-etale site [def-weil-pbc-proetale-site]. Let R be purTwistRing of the positive finite-ring limit purTwistZlCompletion [def-pur-twist-coefficient-rings]. For U in X.ProEt, let P be the module sheafification of the free R-presheaf on the universe-lifted representable of U [def-weil-presheaf-modules-sheafification]. If x in P(V) is locally divisible by l^(n+1) for every natural n, then x=0. Precisely, for every n the image sieve of multiplication by l^(n+1) on the underlying abelian sheaf, evaluated at x, is covering. This asserts separation of this explicit target, with no source module, coefficient comparison, or additive map.",
+  "what": "The unrestricted statement is false for the non-quasi-separated etale object obtained by doubling a Boolean convergent-sequence spectrum along its isolated points. Restrict to pro-affine etale generators. Adapt the sole consumer and descend its parent along the existing covering basis; no target or parent section-action statement changes. See coord/changes/F2-completed-free-pro-affine-generators.md",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+   "place": "paragraph (1), corrected finite-support local generator argument"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-diagonal-completed-free-generator",
+    "holds": true,
+    "note": "Corrected in the same packet to pro-affine etale U; its parent still treats arbitrary U by cover-density."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-proetale-site",
+   "def-pur-twist-coefficient-rings",
+   "def-weil-presheaf-modules-sheafification"
+  ],
+  "old_proof": [
+   {
+    "text": "Locally lift x through the unit of module sheafification. Such a lift has finite support in the free presheaf. For each positive exponent, refine the cover to represent the asserted divisibility and the equality in sheafification by an equality in the free presheaf.",
+    "uses": [
+     "def-weil-presheaf-modules-sheafification"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Use repleteness of the pro-etale topos and the pro-etale covering refinements in its proof to obtain a common covering refinement carrying the countable compatible sequence of representatives and equalities. After restriction there, all equalities hold in the free presheaf with the fixed representative of x.",
+    "uses": [
+     "det-pe-replete-epimorphism"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "In this free module group identical basis vectors. Every coefficient of the fixed finite support is divisible by every positive l-power, so its images under all finite coefficient projections vanish. These projections jointly detect zero in the specified limit R. Thus all the coefficients vanish, and the local representative of x is zero. The separatedness axiom for the module sheaf descends this equality to V.",
+    "uses": [
+     "def-pur-twist-coefficient-rings"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-presheaf-modules-sheafification",
+   "det-pe-replete-epimorphism",
+   "def-pur-twist-coefficient-rings"
+  ]
+ }
+}

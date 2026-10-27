@@ -16,7 +16,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 @[expose] public section
 
-universe u
+universe u v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
@@ -46,23 +46,26 @@ private theorem lowerStarCompGlobalSectionsIso_comp_comp
   congr 2
   exact ((terminalIsTerminal.isTerminalObj g.Etale).isTerminalObj f.Etale).hom_ext _ _
 
-private lemma derived_comp_eq {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y) :
-    (rightDerivedLowerStarComp AddCommGrpCat.{u + 1} g f).hom =
+/-- The canonical derived direct-image compositor is the right-derived comparison. -/
+lemma derived_comp_eq (A : Type v) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y) :
+    (rightDerivedLowerStarComp A g f).hom =
       (Functor.rightDerivedFunctorCompIso'
-        (lowerStar AddCommGrpCat.{u + 1} g) (lowerStar AddCommGrpCat.{u + 1} f)
-        (lowerStarComp AddCommGrpCat.{u + 1} g f)).hom := by
+        (lowerStar A g) (lowerStar A f)
+        (lowerStarComp A g f)).hom := by
   rw [Adjunction.rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv
-    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g)
-    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f)
-    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (g ≫ f))
-    _ (upperStarComp AddCommGrpCat.{u + 1} g f) (by
+    (upperStarLowerStarAdjunction A g)
+    (upperStarLowerStarAdjunction A f)
+    (upperStarLowerStarAdjunction A (g ≫ f))
+    _ (upperStarComp A g f) (by
       exact (congrArg Iso.hom
-        (conjugateIsoEquiv_upperStarComp AddCommGrpCat.{u + 1} g f)).symm)]
+        (conjugateIsoEquiv_upperStarComp A g f)).symm)]
   simp only [rightDerivedLowerStarComp, Iso.symm_hom, conjugateIsoEquiv_apply_inv,
     Iso.symm_inv]
   rfl
 
-private lemma comp_fac
+/-- Unit factorization for the right-derived comparison with an underived composite. -/
+lemma comp_fac
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
     [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
@@ -86,7 +89,8 @@ private lemma comp_fac
   exact Functor.rightDerivedNatTrans_fac _ _ _ _
     (HomotopyCategory.quasiIso C (.up ℤ)) _
 
-private lemma comp_unit_app
+/-- The unit of a composite right-derived functor, evaluated on a homotopy complex. -/
+lemma comp_unit_app
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
     [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
@@ -149,7 +153,7 @@ private lemma derived_leray_composition {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : 
     (Functor.isRightDerivedFunctor_iff_of_iso
       (Functor.rightDerivedFunctorCompUnit (F ⋙ G) H) α
       (HomotopyCategory.quasiIso _ (.up ℤ)) i rfl).mp inferInstance
-  rw [derived_comp_eq]
+  rw [derived_comp_eq AddCommGrpCat.{u + 1}]
   refine Functor.rightDerived_ext _ α (HomotopyCategory.quasiIso _ (.up ℤ)) _ _ _ ?_
   ext T : 2
   have hα : α.app T =

@@ -70,7 +70,18 @@
  "uses_not_cited": [
   "def-galois-fibre-functor"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "mathlib_candidate": {
@@ -121,9 +132,13 @@
   "note": "lead item, worker W-gal0508; the Stacks Tag 0BMY axioms as a structure on F : C ⥤ Type w (finite limits/colimits, finite coproducts of PreGaloisCategory.IsConnected objects, finite fibres, exact and reflecting isos); Mathlib GaloisCategory is a different axiomatization (SGA1 G1-G6) with no equivalence theorem, so a separate predicate; the Aut(F) topology paragraph is a construction realized by Mathlib instTopologicalSpaceAutFunctorFintypeCat (docstring); landed 05:08 UTC"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $\\mathcal C$ be a category and $F:\\mathcal C\\to\\mathbf{Sets}$ a\nfunctor. The pair $(\\mathcal C,F)$ is a *Galois category* if\n\n1. $\\mathcal C$ has finite limits and finite colimits;\n1. every object of $\\mathcal C$ is a finite coproduct of\n*connected* objects, where $X$ is connected if it is not initial and\nevery monomorphism $Y\\to X$ is either an isomorphism or has initial\nsource;\n1. $F(X)$ is finite for every object $X$;\n1. $F$ is exact (it commutes with finite limits and finite colimits)\nand reflects isomorphisms (if $F(f)$ is bijective then $f$ is an\nisomorphism).\n\nFor a functor with all $F(X)$ finite, $\\operatorname{Aut}(F)$ is\nidentified with the subgroup of\n$\\prod_X\\operatorname{Aut}(F(X))$ formed by the tuples induced by the\nnatural automorphisms of $F$, and carries the topology induced from the\nproduct of the discrete topologies.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "A category $\\mathcal C$ is a *pre-Galois category* if\n\n1. $\\mathcal C$ has a final object and fibre products (hence all finite\nlimits);\n1. $\\mathcal C$ has finite coproducts and quotients $X/G$ of objects by\nfinite groups $G$ acting on them (colimits of the diagram $G\\to\\mathcal\nC$ with one object);\n1. every monomorphism $X\\to Y$ is the inclusion of a direct summand:\nthere is $Z\\to Y$ such that $Y=X\\amalg Z$ via the two maps.\n\nA functor $F:\\mathcal C\\to(\\text{finite sets})$ on a pre-Galois category\nis a *fibre functor* if\n\n4. $F$ preserves the final object and fibre products;\n4. $F$ preserves finite coproducts, epimorphisms and quotients by finite\ngroups;\n4. $F$ reflects isomorphisms (if $F(f)$ is bijective then $f$ is an\nisomorphism).\n\nA *Galois category* is a pre-Galois category admitting a fibre functor,\nand we write $(\\mathcal C,F)$ for a Galois category with a chosen fibre\nfunctor. An object $X$ is *connected* if it is not initial and every\nmonomorphism $Y\\to X$ with $Y$ not initial is an isomorphism.\n\nFor a functor $F$ with all $F(X)$ finite, $\\operatorname{Aut}(F)$ is\nidentified, by evaluation $\\gamma\\mapsto(\\gamma_X)_X$, with the subgroup\nof $\\prod_X\\operatorname{Aut}(F(X))$ formed by the tuples induced by the\nnatural automorphisms of $F$, and carries the topology induced from the\nproduct of the discrete topologies.",
   "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

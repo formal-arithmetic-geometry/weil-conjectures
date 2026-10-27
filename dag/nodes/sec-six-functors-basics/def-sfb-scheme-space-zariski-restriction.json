@@ -1,0 +1,124 @@
+{
+ "id": "def-sfb-scheme-space-zariski-restriction",
+ "kind": "definition",
+ "title": "Zariski restriction of modules on a representable algebraic space",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $T$ be a scheme over $S$, and let $h_T$ be its representable algebraic space [def-trf-algebraic-space] [lem-trf-space-enlarged-etale-ringed-site-model]. Its identity map $h_T\\to h_T$ is an object $e_T$ of its small etale site, using the representable etale scheme tests [lem-trf-space-representable-etale-scheme-tests]. Define the canonical Zariski restriction functor $R_T:\\operatorname{Mod}(h_{T,\\mathrm{et}},\\mathcal O_{h_T})\\to\\operatorname{Mod}(T_{\\mathrm{Zar}},\\mathcal O_T)$ by applying the existing scheme-chart restriction [def-trf-space-module-scheme-restriction] at $e_T$. Thus $(R_TM)(U)=M(U\\to T\\xrightarrow{\\mathrm{id}}h_T)$ on each Zariski open $U\\subseteq T$, with the original module restriction maps and restriction of scalars by the canonical identification of regular functions on $U$ with those on its open subscheme. This defines the functor on all module sheaves, with no quasi-coherence hypothesis and no choice of a comparison module.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-trf-space-module-scheme-restriction",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 03DX (proposition-equivalence-quasi-coherent) and 03FH (remark-change-topologies-ringed-sites): inverse restriction to Zariski opens, presented on the representable-space small etale site."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction from modules on the small etale site of a representable algebraic space to Zariski modules on the representing scheme",
+   "results": "{\"t\": \"2026-10-24T11:26:53Z\", \"tool\": \"leansearch\", \"query\": \"Restriction from modules on the small etale site of a representable algebraic space to Zariski modules on the representing scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"ModuleCat.Tilde.toOpen\", \"PresheafOfModules.restrictScalarsObj\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"ModuleCat.Tilde.res_apply\"], \"digest\": \"8d2a2ca0cb9b863b\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the project chart restriction at the representing scheme identity chart."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical restriction of module sheaves from the etale site of a scheme to its Zariski site",
+   "results": "{\"t\": \"2026-10-24T11:26:54Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical restriction of module sheaves from the etale site of a scheme to its Zariski site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.toPresheafOfModules\", \"ModuleCat.tilde\", \"AlgebraicGeometry.Scheme.Modules\", \"AlgebraicGeometry.Scheme.Modules.toPresheaf\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Modules.toPresheaf_obj\", \"AlgebraicGeometry.Scheme.Modules.presheaf\", \"AlgebraicGeometry.Scheme.Modules.restrict\"], \"digest\": \"ae4c843f2e415792\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the project chart restriction at the representing scheme identity chart."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationZariskiRestriction|evaluationEtaleRestriction|Zariski.*Restriction",
+   "results": "{\"t\": \"2026-10-24T11:26:54Z\", \"tool\": \"grep\", \"query\": \"evaluationZariskiRestriction|evaluationEtaleRestriction|Zariski.*Restriction\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the project chart restriction at the representing scheme identity chart."
+  },
+  {
+   "tool": "grep",
+   "query": "rg evaluationZariskiRestriction|evaluationEtaleRestriction lean/WeilConjectures lean/Sheaf; rg -l evaluationZariskiRestriction|evaluationEtaleRestriction|ZariskiEtaleModuleContext dag/nodes --glob def-*.json; blueprint_refs.py search Zariski restriction",
+   "results": "No WeilConjectures match. Sheaf.TraceFormula.GradedEvaluationZariskiEtaleComparison gives the functor but no definition node owns it. def-sfb-scheme-zariski-etale-module-constructions owns ordinary small-etale contexts, not restriction from the representable-space site. def-trf-space-module-scheme-restriction owns restriction at a supplied etale chart; this node specializes that existing construction to the identity chart, with no new underlying module construction. blueprint search only returned the unrelated lemma-weil-pbc-spectral-restriction.",
+   "date": "2026-10-24",
+   "verdict": "Add the requested definition node and a small module specializing the existing chart restriction; no duplicate of the existing chart restriction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-ampleness-fpqc-descent",
+  "date": "2026-10-24",
+  "group": "Q10"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0D3C: descend geometric-fibre ampleness to the residue field, and glue the relatively ample open pieces including schematicity. The existing etale-only node does not cover inseparable field extensions. Canonical Zariski restriction interprets the line module on a representing scheme when stating fpqc ampleness descent.",
+   "via": [
+    "lem-sfb-space-relative-ampleness-fpqc-descent",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeSpaceZariskiRestriction",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.schemeSpaceZariskiRestriction",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.schemeSpaceIdentityEtale",
+   "AlgebraicGeometry.AlgebraicSpace.schemeSpaceZariskiRestriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeSpaceZariskiRestriction.lean",
+  "statement": "def schemeSpaceZariskiRestriction {S : Scheme.{u}} (T : Over S) : (schemeSpace T).Modules ⥤ T.left.Modules",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3abb631d",
+  "group": "Q10",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3abb631d",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 8458eb5d. New def node def-sfb-scheme-space-zariski-restriction: schemeSpaceZariskiRestriction = schemeRestriction (owned by def-trf-space-module-scheme-restriction) at the identity Yoneda chart; étaleness from clause 8 of representable_etale_scheme_tests. Real data, same sections and ring map as the old evaluationZariskiRestriction, no duplicate in side-live, record fields complete. Item cites the new node and def-trf-space-etale-module-functors in stmt_deps; graded-evaluation theorem moved to proof_deps; statement text unchanged; lean.statement verbatim. Clauses match 0D3C/0D32: IsIso plus compatibility on the left, IsPullback representing X×_T Tᵢ on the right, affine-open IsAmple with Prop-valued IsInvertible argument, any fpqc index type, no extra hypotheses. Edge cases and universes fine; only sorry is the theorem's; docstrings present; imports exist on base. Advisory: second reading was in-thread."
+ }
+}

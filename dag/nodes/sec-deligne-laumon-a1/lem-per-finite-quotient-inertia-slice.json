@@ -1,0 +1,427 @@
+{
+ "id": "lem-per-finite-quotient-inertia-slice",
+ "kind": "statement",
+ "title": "Etale inertia slices of finite generically free normal quotients",
+ "statement": "Let $Y$ be a regular Noetherian scheme [def-weil-regular-scheme, pqf-def-locnoeth], let $X$ be a normal Noetherian scheme (all its local rings are integrally closed domains [def-weil-pbc-normal-ring]), and let a finite group $G$ act on $X$. Suppose $q:X\\to Y$ is a finite surjective quotient with invariant structure sheaf and orbit geometric fibres [def-weil-finite-integral-morphism], and the action is generically free (free on a dense invariant open). Fix a geometric point $\\bar x$ above $\\bar y$ [def-weil-geometric-point] and put $H=\\operatorname{Stab}_G(\\bar x)$. For every prescribed pointed etale neighbourhood $T_0\\to Y$ there are a pointed affine etale refinement $T\\to T_0$, an affine normal integral Noetherian scheme $V$ [def-pc-integral-scheme], an $H$-action on $V$, and an $H$-equivariant pointed etale map $v:V\\to X$, with a finite surjective morphism $p:V\\to T$ satisfying $qv=(T\\to Y)p$. The scheme $T$ is integral regular Noetherian, and $p$ has invariant structure sheaf and orbit geometric fibres for $H$. The action of $H$ on $V$ is faithful. For every dense open $U\\subseteq Y$ over which $q$ is etale, the map $V\\times_YU\\to T\\times_YU$ is a connected finite etale $H$-torsor (the action is simply transitive on every geometric fibre) [def-sbc-normal-dominant-galois, def-pc-fibre-product, def-weil-etale-morphism]. If $|H|$ is invertible in $\\kappa(x)$, $T$ can be chosen so that $|H|$ is invertible on $T$.\n\nPut $R=\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$ and $C=\\mathcal O^{\\mathrm{sh}}_{X,\\bar x}$ [def-weil-pbc-strict-henselization-limit]. The pointed maps identify these with the strict local rings of $T$ and $V$, respectively. The ring $C$ is a finite normal local $R$-algebra, its induced $H$-action is faithful, and the canonical map identifies $R=C^H$. Here $C^H=\\{c:h(c)=c\\text{ for every }h\\in H\\}$. No normal crossings boundary, regularity of $X$, excellence, or invertibility of $|G|$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BST (lemma-inertia-invariants-etale), proof: etale-local product decomposition permuted by G and identification of the selected component invariants with the base. Normal generically free finite-scheme specialization, with further pointed etale refinement and strict localization; compare ILO VI paragraph following 3.5, printed p.74."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-geometric-point",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-pointed-etale-neighbourhoods"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open $Y_a=\\operatorname{Spec}A$ containing $y$, and an affine open $T_a=\\operatorname{Spec}A_0$ of the prescribed $T_0\\times_Y Y_a$ containing its pointing. Open immersions and compositions are etale [lem-weil-pbc-etale-composition-cancellation]. Write $X_a=q^{-1}Y_a=\\operatorname{Spec}D$; finiteness and this affineness follow from [lem-weil-pbc-finite-morphism-permanence]. The quotient hypothesis gives $A=D^G$. The ring $A$ is Noetherian by [pqf-lem-affine-open-locnoeth]. The etale algebra $A_0$ is finitely presented by [lem-weil-pbc-etale-algebra-finite-presentation-localization], hence Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Set $D_0=A_0\\otimes_A D$, a finite $A_0$-module (tensor the given finite generating family). Etale flatness and flat base change of invariants give $A_0=D_0^G$ [lem-weil-pbc-etale-algebra-flat, lem-dl-a1-flat-base-change-finite-invariants]. All points and maps retain the original algebraically closed field $\\Omega$.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-dl-a1-flat-base-change-finite-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST (lemma-inertia-invariants-etale), first etale-base-change reduction; affine preparation and the prescribed neighbourhood"
+   }
+  },
+  {
+   "text": "Apply [lem-dl-a1-geometric-point-etale-idempotents] to the finite algebra $D_0/A_0$ and the given point $A_0\\to\\Omega$. It gives a pointed etale algebra $B$ and orthogonal idempotents in $S=B\\otimes_{A_0}D_0$, one for each lift $t:D_0\\to\\Omega$, separating exactly those lifts. There is at least one lift, the prescribed $\\bar x$. The composite $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale, so $B$ is Noetherian by finite presentation and [lem-weil-pbc-finite-type-algebra-noetherian]. Apply [lem-sbc-etale-regular-divisor-base-change] with auxiliary element $g=1$: $A$ is regular, multiplication by $1$ is injective and $A/(1)=0$ is regular (its spectrum is empty). Thus $B$ is regular. By [rem-pc-regular-normal], its finitely many irreducible components are open and closed and normal integral. Replace $\\operatorname{Spec}B$ by the component containing the pointing. This remains affine, regular and Noetherian, and its ring $B$ is a domain. Restrict the idempotents and $S$ accordingly. Flat base change again gives $S^G=B$ [lem-weil-pbc-etale-algebra-flat, lem-dl-a1-flat-base-change-finite-invariants].",
+   "uses": [
+    "lem-dl-a1-geometric-point-etale-idempotents",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sbc-etale-regular-divisor-base-change",
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-dl-a1-flat-base-change-finite-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00UJ/00UL, pointed finite-algebra splitting; Tag 07NF regularity under etale maps; properties.tex Tag 033M, normal components"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p=\\ker(B\\to\\Omega)$. Each idempotent factor has exactly one $\\Omega$-valued point above the given point of $B$, by its separating evaluation formula. The map $B\\to S$ is finite, hence integral [lem-weil-pbc-finite-algebra-is-integral]; this also holds for each quotient factor. Every prime of a factor above $\\mathfrak p$ admits such an $\\Omega$-valued lift by [lem-dl-a1-integral-geometric-point-existence], so each factor has exactly one prime over $\\mathfrak p$. Its residue extension is purely inseparable by [lem-dl-a1-unique-geometric-point-pure-residue]. Apply [lem-dl-a1-equivariant-fibre-product-refinement] to this product decomposition. After a principal localization $B\\to B_b$, $b\\notin\\mathfrak p$, there is a product $S=\\prod_j S_j$ permuted by $G$, each factor having exactly one prime over $\\mathfrak p$, with purely inseparable residue extension. Relabel the chosen point into $S_1$. In this paragraph replace $B,S$ by their indicated localizations. The base stays an affine regular Noetherian domain. Flat base change of invariants still gives $S^G=B$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-dl-a1-integral-geometric-point-existence",
+    "lem-dl-a1-unique-geometric-point-pure-residue",
+    "lem-dl-a1-equivariant-fibre-product-refinement",
+    "lem-dl-a1-flat-base-change-finite-invariants",
+    "lem-weil-pbc-etale-algebra-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST (lemma-inertia-invariants-etale), geometric-point splitting and equivariant refinement paragraphs; Tag 0BRH flat invariants"
+   }
+  },
+  {
+   "text": "Apply [lem-dl-a1-transitive-product-inertia-component] to this product, $B=S^G$ and $\\mathfrak p$. It says that the inertia subgroup $I$ at the selected prime is the stabilizer of $S_1$, that the factors form a transitive $G$-set, and that projection identifies $B\\simeq S_1^I$. Here $I=H$: a geometric point is a prime together with an embedding of its residue field into $\\Omega$, so fixing that geometric point means stabilizing the prime and inducing the identity on its residue field. A lift to $X\\times_Y\\operatorname{Spec}B$ is fixed by $g$ exactly when its projection to $X$ is fixed, because $g$ is the identity on $B$. Define $T=\\operatorname{Spec}B$, $V=\\operatorname{Spec}S_1$ and $p:V\\to T$. The factor is an open and closed subscheme of $X\\times_YT$, so $v:V\\to X$ is pointed etale and $H$-equivariant [lem-weil-pbc-etale-scheme-base-change, lem-weil-pbc-etale-composition-cancellation]. The projection of a finite module onto a direct factor is finite (project a generating family), so $p$ is finite. Its square with $q$ commutes by construction.",
+   "uses": [
+    "lem-dl-a1-transitive-product-inertia-component",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST (lemma-inertia-invariants-etale), final paragraph: selected component and its invariant base"
+   }
+  },
+  {
+   "text": "The affine scheme $X_a$ is normal Noetherian, hence a finite disjoint union of normal integral components by [rem-pc-regular-normal]. The scheme $X_a\\times_{Y_a}T$ is Noetherian: its ring $S$ is finite over the Noetherian $B$, and a finite module algebra is of finite type, so [lem-weil-pbc-finite-type-algebra-noetherian] applies. On each of the preceding components its projection is etale; [lem-fin-etale-normal-components] therefore makes it a finite union of normal integral open-and-closed schemes. Thus $V$ is normal Noetherian, with finitely many integral clopen components. Let $W$ be the component containing its unique point over $\\mathfrak p$. Every $h\\in H$ fixes this point, hence preserves $W$. The idempotent of $W$ is consequently in $S_1^H=B$ and is nonzero. Since $B$ is a domain it is $1$. Hence $V=W$ is integral. The map $v$ has nonempty open image by [lem-weil-pbc-etale-morphism-open-map]; that image meets the given dense free open of $X$. An element acting identically on $V$ fixes a geometric point in this intersection and is therefore $1$. This proves faithfulness on $V$.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-fin-etale-normal-components",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 033M (normal Noetherian components); more-algebra.tex/algebra.tex Tag 033C for etale normal ascent; morphisms.tex Tag 03WT (etale maps are open)"
+   }
+  },
+  {
+   "text": "For surjectivity, $B=S_1^H\\hookrightarrow S_1$ is injective and integral by [lem-dl-a1-finite-invariant-prime-orbits-residues], so [lem-weil-pbc-integral-injective-lying-over] makes $p$ surjective. For every principal open $D(c)\\subset T$, the localization $B_c$ is etale and flat over $B$ [lem-weil-pbc-etale-algebra-finite-presentation-localization, lem-weil-pbc-etale-algebra-flat]. Flat invariants give $(S_1\\otimes_B B_c)^H=B_c$ [lem-dl-a1-flat-base-change-finite-invariants]. These principal opens form a basis, so $\\mathcal O_T=(p_*\\mathcal O_V)^H$. Fix any algebraically closed geometric point of $T$ and two geometric lifts in $V$. Their projections to $X$ lie in one $G$-orbit by the hypothesis on $q$; the element carrying one to the other also carries the lifted points in $X\\times_YT$, since it fixes the base coordinate. It must preserve the factor $V$, because the factors are disjoint. Its stabilizer is exactly $H$ by Step 4. Thus the geometric fibres of $p$ are precisely the $H$-orbits.",
+   "uses": [
+    "lem-dl-a1-finite-invariant-prime-orbits-residues",
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-dl-a1-flat-base-change-finite-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST selected-component quotient; algebra.tex Tag 00GQ (lying over); more-algebra.tex Tag 0BRH (flat invariants)"
+   }
+  },
+  {
+   "text": "Let $U\\subseteq Y$ be any dense open over which $q$ is etale. The nonempty integral $T$ maps etale to $Y$ and hence openly by [lem-weil-pbc-etale-morphism-open-map], so $T_U=T\\times_YU$ is nonempty. It is an open subscheme of integral $T$, hence integral and connected. Surjectivity gives $V_U\\ne\\varnothing$; it too is open in integral $V$, hence connected. The pullback of $q|_U$ to $T_U$ is finite etale [lem-weil-pbc-finite-morphism-permanence, lem-weil-pbc-etale-scheme-base-change]. Its clopen restriction $p_U:V_U\\to T_U$ is finite etale by [lem-weil-pbc-finite-etale-clopen-restriction-rank]. Its rank is constant on connected $T_U$ by [lem-weil-pbc-finite-flat-rank-iso]. Finite etale local splitting [lem-weil-pbc-finite-etale-etale-local-split] identifies this rank with the number of geometric points in each fibre. The inverse image in $V_U$ of the dense free open of $X$ is a nonempty open: $v$ is open and its restriction to the nonempty open $V_U$ is open. Choose a geometric point there. Its $H$-stabilizer is trivial, and Step 6 identifies its entire fibre with its $H$-orbit, so that fibre has $|H|$ elements. Every fibre therefore has $|H|$ elements and is a transitive $H$-set; the orbit-stabilizer formula makes every stabilizer trivial. Thus $p_U$ is the asserted connected finite etale $H$-torsor, in the explicit fibrewise sense in the statement.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-finite-etale-clopen-restriction-rank",
+    "lem-weil-pbc-finite-flat-rank-iso",
+    "lem-weil-pbc-finite-etale-etale-local-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 04MH (finite locally free rank), and etale.tex Tag 04HN (finite etale local splitting); generic freeness plus constant rank"
+   }
+  },
+  {
+   "text": "If $n=|H|$ is invertible in $\\kappa(x)$, it is nonzero in that field and therefore nonzero in the subfield $\\kappa(y)$. Thus $n\\notin\\mathfrak p$ in $B$. Replace $T$ by $D(n)$ and $V$ by its inverse image. This is a pointed affine etale refinement, $n$ is invertible on it, and both schemes remain nonempty normal integral Noetherian (their rings are localizations). The finite quotient, invariant-sheaf, orbit and torsor conclusions restrict to this open by their formulas in Steps 4--7; in particular the actions remain faithful by the same dense-free-point argument. If the invertibility condition is absent, make no such replacement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, permissible principal localization; elementary unit-locus restriction"
+   }
+  },
+  {
+   "text": "Put $R=\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$ and $C=\\mathcal O^{\\mathrm{sh}}_{X,\\bar x}$. The pointed etale maps $T\\to Y$ and $V\\to X$ identify their strict local rings with $R$ and $C$, respectively, by [lem-trf-ind-etale-strict-local-invariance]. The chosen geometric fibre of $p$ has a single point: Step 3 gave a single prime with purely inseparable residue extension. Apply [lem-trf-finite-base-strict-localization] to $p$ at the pointing of $T$. There is only one summand, giving the canonical identification $\\operatorname{Spec}C=V\\times_T\\operatorname{Spec}R$, with $C$ finite local over $R$. It is $H$-equivariant, since $H$ fixes the selected geometric point and the decomposition maps are the structural pointed maps. The structural map $B\\to R$ is flat by [lem-sbc-affine-strict-henselization-structural-flat]. With $S_1^H=B$, flat invariants [lem-dl-a1-flat-base-change-finite-invariants] give\n$$C^H=(R\\otimes_B S_1)^H=R\\otimes_B S_1^H=R.$$\nThese are the canonical structural maps, rather than an abstract isomorphism of rings.",
+   "uses": [
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-trf-finite-base-strict-localization",
+    "lem-sbc-affine-strict-henselization-structural-flat",
+    "lem-dl-a1-flat-base-change-finite-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05WR and 0GIP (finite strict localization and etale invariance); more-algebra.tex Tag 0BRH (flat invariants); ILO VI p.74 after 3.5"
+   }
+  },
+  {
+   "text": "Finally write $E=\\Gamma(V,\\mathcal O_V)=S_1$, a normal domain by Step 5. The strict local ring $C$ is its filtered pointed-etale colimit and is local [def-weil-pbc-strict-henselization-limit, lem-weil-pbc-strict-henselization-functoriality]. Apply [lem-weil-pbc-etale-colimit-normal-local-domain]: $C$ is a normal domain and $E\\to C$ is injective. If $h\\in H$ acts identically on $C$, equivariance of this injection gives $h(e)=e$ for every $e\\in E$. Thus $h$ acts identically on $V$ and is $1$ by Step 5. This proves strict-local faithfulness as well as normality. All constructions were pointed refinements of $T_0$; the regularity used was that of $Y$, and neither tameness nor excellence entered the construction.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06DI (lemma-henselization-normal), together with the injective-colimit formulation and pointed functoriality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-dl-a1-equivariant-fibre-product-refinement",
+  "lem-dl-a1-finite-invariant-prime-orbits-residues",
+  "lem-dl-a1-flat-base-change-finite-invariants",
+  "lem-dl-a1-geometric-point-etale-idempotents",
+  "lem-dl-a1-integral-geometric-point-existence",
+  "lem-dl-a1-transitive-product-inertia-component",
+  "lem-dl-a1-unique-geometric-point-pure-residue",
+  "lem-fin-etale-normal-components",
+  "lem-sbc-affine-strict-henselization-structural-flat",
+  "lem-sbc-etale-regular-divisor-base-change",
+  "lem-trf-finite-base-strict-localization",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-etale-clopen-restriction-rank",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-finite-flat-rank-iso",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "pqf-lem-affine-open-locnoeth",
+  "rem-pc-regular-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BST (lemma-inertia-invariants-etale), pointed finite-normal quotient specialization of its product-and-invariants argument; ILO VI paragraph after 3.5, printed p.74, for strict local invariants. Integrality and the arbitrary etale-locus torsor clause are expanded here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "inertia|inertial|etale.*slice",
+   "results": "{\"t\": \"2026-10-24T01:32:28Z\", \"tool\": \"grep\", \"query\": \"inertia|inertial|etale.*slice\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: inertia-degree formulas, ordinary etale morphisms, prime transitivity and idempotent splitting do not give an inertia-equivariant normal slice or its strict-local quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match: inertia-degree formulas, ordinary etale morphisms, prime transitivity and idempotent splitting do not give an inertia-equivariant normal slice or its strict-local quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite quotient of normal Noetherian schemes is etale locally induced from the stabilizer of a geometric point",
+   "results": "{\"t\": \"2026-10-24T01:32:28Z\", \"tool\": \"leansearch\", \"query\": \"A finite quotient of normal Noetherian schemes is etale locally induced from the stabilizer of a geometric point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\"], \"digest\": \"26706e1e757ef027\"}; no match: inertia-degree formulas, ordinary etale morphisms, prime transitivity and idempotent splitting do not give an inertia-equivariant normal slice or its strict-local quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match: inertia-degree formulas, ordinary etale morphisms, prime transitivity and idempotent splitting do not give an inertia-equivariant normal slice or its strict-local quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inertia\"",
+   "results": "{\"t\": \"2026-10-24T01:32:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"inertia\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddSubgroup.inertia\", \"AddSubgroup.inertia_top\", \"AddSubgroup.inertia_bot\", \"AddSubgroup.inertia_mono\", \"AddSubgroup.mem_inertia\", \"AddSubgroup.subgroupOf_inertia\", \"AddSubgroup.inertia_map_subtype\", \"AddSubgroup.coe_mem_inertia\"], \"digest\": \"00683f043ff65916\"}; no match: inertia-degree formulas, ordinary etale morphisms, prime transitivity and idempotent splitting do not give an inertia-equivariant normal slice or its strict-local quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match: inertia-degree formulas, ordinary etale morphisms, prime transitivity and idempotent splitting do not give an inertia-equivariant normal slice or its strict-local quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite group quotients have an etale local slice for the geometric inertia subgroup with a finite normal branch over an etale base",
+   "results": "{\"t\": \"2026-10-24T01:32:29Z\", \"tool\": \"leanfinder\", \"query\": \"Finite group quotients have an etale local slice for the geometric inertia subgroup with a finite normal branch over an etale base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"arithFrobAt\", \"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"IsArithFrobAt.arithFrobAt\", \"Ideal.inertiaDegIn_ne_zero\", \"Ideal.card_inertia_eq_ramificationIdxIn\", \"IsArithFrobAt.exists_of_isInvariant\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"], \"digest\": \"9797ce0cf67846ea\"}; no match: inertia-degree formulas, ordinary etale morphisms, prime transitivity and idempotent splitting do not give an inertia-equivariant normal slice or its strict-local quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match: inertia-degree formulas, ordinary etale morphisms, prime transitivity and idempotent splitting do not give an inertia-equivariant normal slice or its strict-local quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite algebra with finite group action splits etale locally into components permuted transitively, and the selected component is the quotient by its inertia subgroup",
+   "results": "{\"t\": \"2026-10-24T01:33:05Z\", \"tool\": \"leanfinder\", \"query\": \"A finite algebra with finite group action splits etale locally into components permuted transitively, and the selected component is the quotient by its inertia subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"arithFrobAt\", \"IsArithFrobAt.exists_of_isInvariant\", \"IsArithFrobAt.arithFrobAt\", \"Ideal.Quotient.exists_algEquiv_fixedPoint_quotient_under\", \"Ideal.isPretransitive_of_isGaloisGroup\", \"IsArithFrobAt.exists_primesOver_isConj\", \"Ideal.isPretransitive_of_isGalois\", \"Ideal.Quotient.exists_algHom_fixedPoint_quotient_under\"], \"digest\": \"a35082c6ad6dc182\"}; no match: inertia-degree formulas, ordinary etale morphisms, prime transitivity and idempotent splitting do not give an inertia-equivariant normal slice or its strict-local quotient.",
+   "date": "2026-10-24",
+   "verdict": "no match: inertia-degree formulas, ordinary etale morphisms, prime transitivity and idempotent splitting do not give an inertia-equivariant normal slice or its strict-local quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "inertia|inertial|etale.*slice",
+   "results": "{\"t\": \"2026-10-24T02:26:25Z\", \"tool\": \"grep\", \"query\": \"inertia|inertial|etale.*slice\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary etale, inertia-subgroup, prime-splitting and Frobenius facts do not give the full pointed equivariant slice and strict-local conclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale local slice of a finite generically free normal scheme quotient for the geometric point stabilizer",
+   "results": "{\"t\": \"2026-10-24T02:26:25Z\", \"tool\": \"leansearch\", \"query\": \"Etale local slice of a finite generically free normal scheme quotient for the geometric point stabilizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.Etale.of_isLocalizationAway\", \"AlgebraicGeometry.IsEtale\", \"Algebra.exists_etale_of_isEtaleAt\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"RingHom.Etale.ofLocalizationSpan\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"4038371782e0324d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary etale, inertia-subgroup, prime-splitting and Frobenius facts do not give the full pointed equivariant slice and strict-local conclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inertia\"",
+   "results": "{\"t\": \"2026-10-24T02:26:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"inertia\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddSubgroup.inertia\", \"AddSubgroup.inertia_top\", \"AddSubgroup.inertia_bot\", \"AddSubgroup.inertia_mono\", \"AddSubgroup.mem_inertia\", \"AddSubgroup.subgroupOf_inertia\", \"AddSubgroup.inertia_map_subtype\", \"AddSubgroup.coe_mem_inertia\"], \"digest\": \"00683f043ff65916\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary etale, inertia-subgroup, prime-splitting and Frobenius facts do not give the full pointed equivariant slice and strict-local conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale localization splits a finite algebra into geometric fibre branches whose stabilizer invariants equal the base ring",
+   "results": "{\"t\": \"2026-10-24T02:26:27Z\", \"tool\": \"leanfinder\", \"query\": \"Etale localization splits a finite algebra into geometric fibre branches whose stabilizer invariants equal the base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.etaleLocus\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.Etale.of_isLocalizationAway\"], \"digest\": \"043a977718493b30\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary etale, inertia-subgroup, prime-splitting and Frobenius facts do not give the full pointed equivariant slice and strict-local conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite group action on a normal Noetherian scheme has a pointed etale inertia slice that is a finite quotient over an etale base",
+   "results": "{\"t\": \"2026-10-24T02:26:28Z\", \"tool\": \"leanfinder\", \"query\": \"Finite group action on a normal Noetherian scheme has a pointed etale inertia slice that is a finite quotient over an etale base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"arithFrobAt\", \"IsArithFrobAt.exists_of_isInvariant\", \"IsArithFrobAt.arithFrobAt\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"IsArithFrobAt.mul_inv_mem_inertia\", \"instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"Algebra.Etale.finitePresentation\", \"Ideal.Quotient.finite_of_isInvariant\"], \"digest\": \"5d99047a59abcfb6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary etale, inertia-subgroup, prime-splitting and Frobenius facts do not give the full pointed equivariant slice and strict-local conclusions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-tame-inertia-snc-root-quotient",
+  "date": "2026-10-24",
+  "group": "Q48"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular-pair purity geometry through the absolute equivariant modification; ILO IX 2.1 local parameter-root normal form: Etale inertia slices of finite generically free normal quotients",
+   "via": [
+    "lem-per-tame-inertia-snc-root-quotient",
+    "lem-per-kummer-boundary-restriction",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-finite-quotient-inertia-slice",
+  "worker": "stage1",
+  "summary": "Q12 keeps the full statement and supplies a ten-step proof from the pointed geometric-fibre idempotent split, equivariant refinement and transitive product invariants. Proves integrality using the invariant component idempotent, freeness on every etale locus using constant finite-etale rank, and strict-local faithfulness using the injective normal-domain colimit. Reuses existing nodes throughout; no new nodes.",
+  "blueprint": "The inherited ancestor lem-per-artin-gabber-affine-curve Step 3 legacy regular-pair branch is served through lem-per-tame-inertia-snc-root-quotient: the finite normal quotient is replaced by its geometric-inertia component, exactly the local geometric input in the inherited from.place. Searched the current latest/main-20261024 blueprint for inertia, normal components and finite group quotient; no blueprint statement is this slice. The latest ancestor now has a different perverse-exchange proof; no unit or chapter is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-dl-a1-equivariant-fibre-product-refinement",
+    "why": "Generic algebraic/geometric tool: Equivariant refinement of a fibre-separating product after principal localization. Used only in the finite quotient slice construction; this unit supplies no replacement for that statement."
+   },
+   {
+    "node": "lem-dl-a1-flat-base-change-finite-invariants",
+    "why": "Generic algebraic/geometric tool: Flat base change of finite-group invariants. Used only in the finite quotient slice construction; this unit supplies no replacement for that statement."
+   },
+   {
+    "node": "lem-dl-a1-geometric-point-etale-idempotents",
+    "why": "Generic algebraic/geometric tool: Etale splitting of a finite algebra at a geometric point. Used only in the finite quotient slice construction; this unit supplies no replacement for that statement."
+   },
+   {
+    "node": "lem-dl-a1-integral-geometric-point-existence",
+    "why": "Generic algebraic/geometric tool: Primes of an integral algebra lift a geometric point. Used only in the finite quotient slice construction; this unit supplies no replacement for that statement."
+   },
+   {
+    "node": "lem-dl-a1-transitive-product-inertia-component",
+    "why": "Generic algebraic/geometric tool: The inertia component of an equivariant product with purely inseparable residues. Used only in the finite quotient slice construction; this unit supplies no replacement for that statement."
+   },
+   {
+    "node": "lem-dl-a1-unique-geometric-point-pure-residue",
+    "why": "Generic algebraic/geometric tool: A unique geometric point at a prime has purely inseparable residue extension. Used only in the finite quotient slice construction; this unit supplies no replacement for that statement."
+   },
+   {
+    "node": "lem-fin-etale-normal-components",
+    "why": "Generic algebraic/geometric tool: Normal components after etale pullback. Used only in the finite quotient slice construction; this unit supplies no replacement for that statement."
+   },
+   {
+    "node": "lem-sbc-affine-strict-henselization-structural-flat",
+    "why": "Generic algebraic/geometric tool: Flatness of the canonical affine strict henselization structural ring map. Used only in the finite quotient slice construction; this unit supplies no replacement for that statement."
+   },
+   {
+    "node": "lem-sbc-etale-regular-divisor-base-change",
+    "why": "Generic algebraic/geometric tool: Regular divisor under etale base change. Used only in the finite quotient slice construction; this unit supplies no replacement for that statement."
+   },
+   {
+    "node": "lem-trf-finite-base-strict-localization",
+    "why": "Generic algebraic/geometric tool: Finite base change of strict localizations along a finite morphism. Used only in the finite quotient slice construction; this unit supplies no replacement for that statement."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Generic algebraic/geometric tool: Strict localizations are invariant under ind-etale morphisms. Used only in the finite quotient slice construction; this unit supplies no replacement for that statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "why": "Generic algebraic/geometric tool: A local filtered colimit of etale algebras over a normal domain is a normal domain. Used only in the finite quotient slice construction; this unit supplies no replacement for that statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-etale-clopen-restriction-rank",
+    "why": "Generic algebraic/geometric tool: Rank compatibility for clopen restrictions of finite etale morphisms. Used only in the finite quotient slice construction; this unit supplies no replacement for that statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-etale-etale-local-split",
+    "why": "Generic algebraic/geometric tool: A finite etale morphism is etale locally a finite disjoint union of copies of the base. Used only in the finite quotient slice construction; this unit supplies no replacement for that statement."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic algebraic/geometric tool: Strict henselizations at a geometric point and their functoriality. Used only in the finite quotient slice construction; this unit supplies no replacement for that statement."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic algebraic/geometric tool: Regular schemes are normal; the normal decomposition. Used only in the finite quotient slice construction; this unit supplies no replacement for that statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-dl-a1-equivariant-fibre-product-refinement",
+  "lem-dl-a1-flat-base-change-finite-invariants",
+  "lem-dl-a1-geometric-point-etale-idempotents",
+  "lem-dl-a1-integral-geometric-point-existence",
+  "lem-dl-a1-transitive-product-inertia-component",
+  "lem-dl-a1-unique-geometric-point-pure-residue",
+  "lem-fin-etale-normal-components",
+  "lem-sbc-affine-strict-henselization-structural-flat",
+  "lem-sbc-etale-regular-divisor-base-change",
+  "lem-trf-finite-base-strict-localization",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-finite-etale-clopen-restriction-rank",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "rem-pc-regular-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-4a081f202",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-4a081f202 (reviewer sub-agent of L); spot-checked: I read the whole split (ten steps, no new nodes) against Stacks pione.tex Tag 0BST (lemma-inertia-invariants-etale) and against the statement of every cited node; details are in review.md. Live, the item is still unsplit and has no repair note. The statement is kept in full; the only stmt_deps change adds pointed-etale-neighbourhoods, which the statement uses. Steps 1-4 follow 0BST in order: flat invariants, the geometric-point idempotent split, one prime per factor with purely inseparable residue field, the equivariant refinement after principal localization, and the transitive-product inertia factor. I checked I=Stab_G(x̄) through the Ω-point t∘g=t. Step 5: integrality via the H-invariant component idempotent lying in S_1^H=B (a domain, so the idempotent is 1); faithfulness via the open image of v meeting the dense free locus. Step 6: lying-over, the invariant sheaf on principal opens, and fibres as H-orbits. Step 7: the torsor from constant finite étale rank plus one free fibre. Step 8: n∉𝔭. Step 9: Spec C = V×_T Spec R through the one-point fibre, and C^H=R by flat invariants. Step 10: C is a normal domain and S_1→C is injective, which gives faithfulness. Step 2 uses the regular-divisor base change with g=1; this is valid because the zero ring is regular vacuously. Small cases tested: ℤ[i]/ℤ at 3 (the geometric stabilizer H=1 while the decomposition group is Z/2) and at 2 (wild ramification, |H| not invertible); μ_n on k[t]; free translation; U empty. Batch 5: lem-trf-ind-etale-strict-local-invariance (Stacks 05WR/0GIP(2)) and lem-trf-finite-base-strict-localization (05WR/0GIP(1)/04GH) are generic strict-henselization algebra. Neither assumption leaf gives them, they are not steps specific to the trace formula, and the same-unit parent already cites the first. Accepted. I accept all 16 declared tool_uses as generic tools. No duplicate: lem-per-finite-quotient-strict-local-invariants gives only C^H=R."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteQuotientInertiaSlice",
+  "declaration": "AlgebraicGeometry.finiteQuotient_exists_pointedEtale_inertiaSlice",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteQuotientInertiaSlice.lean",
+  "statement": "theorem finiteQuotient_exists_pointedEtale_inertiaSlice {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (hY : IsRegularScheme Y) (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) {G : Type v} [Group G] [Finite G] (a : G →* Aut X) (q : X ⟶ Y) [IsFinite q] [Surjective q] (hinvariant : ∀ g : G, (a g).hom ≫ q = q) (hgeometric : ∀ (K : Type u) [Field K] [IsAlgClosed K] (z w : Spec (.of K) ⟶ X), z ≫ q = w ≫ q → ∃ g : G, z ≫ (a g).hom = w) (hsheaf : ∀ U : Y.Opens, Function.Injective (q.app U).hom ∧ ∀ s : Γ(X, q ⁻¹ᵁ U), (s ∈ Set.range (q.app U).hom ↔ ∀ (g : G) (W : X.Opens) (hW : W ≤ q ⁻¹ᵁ U) (hWg : W ≤ (a g).hom ⁻¹ᵁ (q ⁻¹ᵁ U)), ((a g).hom.appLE (q ⁻¹ᵁ U) W hWg).hom s = (X.presheaf.map (homOfLE hW).op).hom s)) (hfree : ∃ U : X.Opens, Dense (U : Set X) ∧ (∀ g : G, (a g).hom ⁻¹ᵁ U = U) ∧ ∀ (K : Type u) [Field K] [IsAlgClosed K] (z : Spec (.of K) ⟶ U.toScheme) (g : G), z ≫ U.ι ≫ (a g).hom = z ≫ U.ι → g = 1) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barX : Spec (.of Ω) ⟶ X) (H : Subgroup G) (hH : ∀ g : G, g ∈ H ↔ barX ≫ (a g).hom = barX) (T₀ : Scheme.PointedEtaleNeighborhood (barX ≫ q)) : ∃ (T V : Scheme.{u}) (r : T ⟶ T₀.1.left) (p : V ⟶ T) (v : V ⟶ X) (barT : Spec (.of Ω) ⟶ T) (barV : Spec (.of Ω) ⟶ V) (b : H →* Aut V), IsAffine T ∧ IsIntegral T ∧ IsRegularScheme T ∧ IsNoetherian T ∧ Etale r ∧ barT ≫ r = T₀.2.left ∧ IsAffine V ∧ IsNormalScheme V ∧ IsNoetherian V ∧ Etale v ∧ barV ≫ v = barX ∧ barV ≫ p = barT ∧ v ≫ q = p ≫ r ≫ T₀.1.hom ∧ IsFinite p ∧ Surjective p ∧ (∀ h : H, (b h).hom ≫ v = v ≫ (a h.val).hom) ∧ (∀ h : H, (b h).hom ≫ p = p) ∧ Function.Injective b ∧ (∀ (K : Type u) [Field K] [IsAlgClosed K] (z w : Spec (.of K) ⟶ V), z ≫ p = w ≫ p → ∃ h : H, z ≫ (b h).hom = w) ∧ (∀ U : T.Opens, Function.Injective (p.app U).hom ∧ ∀ s : Γ(V, p ⁻¹ᵁ U), (s ∈ Set.range (p.app U).hom ↔ ∀ (h : H) (W : V.Opens) (hW : W ≤ p ⁻¹ᵁ U) (hWh : W ≤ (b h).hom ⁻¹ᵁ (p ⁻¹ᵁ U)), ((b h).hom.appLE (p ⁻¹ᵁ U) W hWh).hom s = (V.presheaf.map (homOfLE hW).op).hom s)) ∧ (∀ U : Y.Opens, Dense (U : Set Y) → Etale (pullback.snd q U.ι) → ∃ (c : Scheme.GaloisCoverAction H (pullback (r ≫ T₀.1.hom) U.ι)) (e : c.Z ≅ pullback p (pullback.fst (r ≫ T₀.1.hom) U.ι)), ConnectedSpace c.Z ∧ c.π = e.hom ≫ pullback.snd p (pullback.fst (r ≫ T₀.1.hom) U.ι) ∧ ∀ h : H, c.smul h ≫ e.hom ≫ pullback.fst p (pullback.fst (r ≫ T₀.1.hom) U.ι) = e.hom ≫ pullback.fst p (pullback.fst (r ≫ T₀.1.hom) U.ι) ≫ (b h).hom) ∧ (IsUnit (Nat.card H : X.residueField (barX (IsLocalRing.closedPoint Ω))) → IsUnit (Nat.card H : Γ(T, ⊤))) ∧ IsIso (Scheme.strictHenselizationMap (r ≫ T₀.1.hom) barT) ∧ IsIso (Scheme.strictHenselizationMap v barV) ∧ ∃ (_ : IsLocalRing (Scheme.strictHenselizationRing (barX ≫ q))) (_ : IsLocalRing (Scheme.strictHenselizationRing barX)) (β : H →* (Scheme.strictHenselizationRing barX ≃+* Scheme.strictHenselizationRing barX)), IsDomain (Scheme.strictHenselizationRing barX) ∧ IsIntegrallyClosed (Scheme.strictHenselizationRing barX) ∧ (strictHenselizationRingMap q barX).Finite ∧ IsLocalHom (strictHenselizationRingMap q barX) ∧ Function.Injective β ∧ (∀ h : H, (β h).toRingHom = strictHenselizationRingMapEq (a (h⁻¹).val).hom barX ((hH (h⁻¹).val).mp (h⁻¹).property)) ∧ Function.Injective (strictHenselizationRingMap q barX) ∧ ∀ c : Scheme.strictHenselizationRing barX, (c ∈ Set.range (strictHenselizationRingMap q barX) ↔ ∀ h : H, β h c = c)",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f367c2ef6",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Every hypothesis matches the node: Y regular Noetherian, X stalkwise normal Noetherian and not assumed integral, q finite surjective and invariant with invariant sheaf and orbit geometric fibres, free at geometric points of a dense invariant open, H pinned to Stab(x̄) by hH. Every conclusion matches: T affine integral regular Noetherian pointed étale refinement of T₀; V affine normal (with integral) Noetherian; v H-equivariant pointed étale; p finite surjective H-quotient; H faithful on V; torsor clause on the actual cover V×_T(T×_Y U) with its projection and action pinned; |H|-unit implication; IsIso of the strict-henselization maps for T and V; C local, domain, integrally closed and finite over R by the canonical local map; faithful β = (a h⁻¹)^*, homomorphism order checked; R = C^H through the canonical map. Edge cases (empty schemes, H=1, disconnected X, ℤ[i]/ℤ at 3 and 2, empty U) and universes checked. One sorry, docstrings with all ten steps, statement verbatim, only the item's lean field changed, stmt_deps unchanged, dependency nodes identical to live. Not compiled because no file changed. Advisory only: strictHenselizationMap and strictHenselizationRingMap/RingMapEq are used without their owner nodes in stmt_deps, which an S2 delivery cannot add; the name AlgebraicGeometry.strictHenselizationRingMap is declared in two modules (TensorFinite and SmoothGeometricStalkAlgebra)."
+ }
+}

@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-finite-inertia-etale-affine-charts",
+ "kind": "statement",
+ "title": "Finite-inertia stacks have stabilizer-preserving finite-flat affine charts",
+ "statement": "Let $k$ be a field and $\\mathcal X$ an algebraic stack over $k$. Suppose $I_{\\mathcal X}\\to\\mathcal X$ is finite, where $I_{\\mathcal X}(T)$ consists of pairs $(x,\\alpha)$ with $x\\in\\mathcal X(T)$ and $\\alpha\\in\\operatorname{Aut}(x)$. Finiteness means that every scheme base change is a finite scheme morphism [def-weil-finite-integral-morphism]. There are a small set $J$ and algebraic stacks $\\mathcal X_j/k$, with jointly surjective morphisms $g_j:\\mathcal X_j\\to\\mathcal X$, such that each $g_j$ is representable by algebraic spaces, separated and etale, and induces an isomorphism $I_{\\mathcal X_j}\\simeq\\mathcal X_j\\times_{\\mathcal X}I_{\\mathcal X}$. Here etale is tested on scheme charts [def-weil-etale-morphism] and separated for a stack morphism means proper relative diagonal, using properness on scheme charts [def-weil-proper-morphism]. Each $\\mathcal X_j$ has a representable surjective finite flat finitely presented map $U_j\\to\\mathcal X_j$ from an affine scheme. In particular $R_j=U_j\\times_{\\mathcal X_j}U_j$ is affine, its two projections to $U_j$ are finite locally free [def-pc-finite-locally-free], and $\\mathcal X_j\\simeq[U_j/R_j]$. No Deligne--Mumford or smooth-inertia hypothesis is imposed. Algebraic stacks and quasi-coherent sheaves have the meanings in [def-sfb-adequate-moduli-space], and algebraic spaces have the meaning in [def-trf-algebraic-space]. A 2-fibre product retains the specified isomorphism between the two images of an object. For an affine groupoid $(U,R,s,t,e,i,c)$, the groupoid laws are those of [def-a1-scheme-groupoid-laws]; $[U/R]$ denotes the fppf stackification of the groupoid with objects $U(T)$ and arrows $R(T)$ on test schemes $T$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUE (lemma-etale-local-finite-inertia), all four conclusions; Tags 0DUL (definition-well-nigh-affine) and 0DUM (lemma-well-nigh-affine), finite-flat affine presentation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-adequate-moduli-space",
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-a1-scheme-groupoid-laws",
+  "def-pc-finite-locally-free",
+  "def-pc-fppf-site",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "def-sfb-algebraic-moduli-stack",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-moduli-inertia",
+  "def-sfb-finite-stack-scheme-tests",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-scheme-groupoid-quotient-presentation",
+  "def-sfb-scheme-stack-diagonal-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in|\\mathcal X|$. Apply the pointwise chart theorem to obtain $h:\\mathcal V=[U/R]\\to\\mathcal X$ and $v\\mapsto x$, with $U,R$ affine, $s,t$ finite locally free and the stabilizer group schemes identified at $v$. This input applies to finite inertia itself; it requires neither a Deligne--Mumford hypothesis nor smooth inertia.",
+   "uses": [
+    "lem-sfb-finite-inertia-pointwise-groupoid-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUE (lemma-etale-local-finite-inertia), first sentence, using Tag 0DU4"
+   }
+  },
+  {
+   "text": "Apply the open-locus theorem to $h$. Its finite-inertia etale special case gives an open substack $\\mathcal V^\\circ\\subseteq\\mathcal V$ containing $v$ on which $I_{\\mathcal V^\\circ}\\simeq\\mathcal V^\\circ\\times_{\\mathcal X}I_{\\mathcal X}$. Pull it back to the invariant open $U^\\circ\\subseteq U$ using the flat-groupoid presentation theorem, and lift $v$ to a point $u\\in U^\\circ$. The whole orbit $E=t(s^{-1}(\\{u\\}))$ lies in $U^\\circ$. It is finite because the finite map $s$ has finite fibres.",
+   "uses": [
+    "lem-sfb-proper-inertia-stabilizer-preserving-open",
+    "lem-sfb-flat-groupoid-quotient-open-presentation",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUE (lemma-etale-local-finite-inertia), second sentence and choice of u′"
+   }
+  },
+  {
+   "text": "Write $U=\\operatorname{Spec}A$. View it as $\\operatorname{Proj}A[T]$ with $T$ of degree one: all homogeneous primes avoid $T$, and the sole chart $D_+(T)$ has degree-zero coordinate ring $A$. Thus $U^\\circ$ is an open subscheme of this Proj. Apply the locally-closed-Proj finite-set lemma with $X=O=U^\\circ$ and identity closed immersion to find an affine open in $U^\\circ$ containing $E$. Apply the invariant-affine lemma to the restricted groupoid on $U^\\circ$ to obtain an invariant affine open $W$ containing $E$. Its restricted arrow scheme is $R_W=s^{-1}(W)=t^{-1}(W)$; its projections are finite locally free by the presentation theorem.",
+   "uses": [
+    "def-pc-proj",
+    "lem-sfb-locally-closed-proj-finite-affine",
+    "lem-sfb-locally-free-groupoid-invariant-affine",
+    "lem-sfb-flat-groupoid-quotient-open-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUE (lemma-etale-local-finite-inertia), invariant affine shrinking, Tags 01ZY and 03JE"
+   }
+  },
+  {
+   "text": "Set $\\mathcal X_x=[W/R_W]$. The quotient-open theorem identifies it with an open substack of $\\mathcal V^\\circ$ containing $v$, and supplies the representable surjective finite flat finitely presented map $W\\to\\mathcal X_x$. The composite $g_x:\\mathcal X_x\\to\\mathcal X$ is representable etale by restricting $h$. Restricting the inertia isomorphism preserves it: an open substack is full, so the automorphism sheaf of any object in it is unchanged. Thus $g_x$ preserves inertia. Since $R_W\\to W$ is finite and $W$ affine, $R_W$ is affine; it is canonically $W\\times_{\\mathcal X_x}W$.",
+   "uses": [
+    "lem-sfb-flat-groupoid-quotient-open-presentation",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUE (lemma-etale-local-finite-inertia), construction of the open quotient and its finite-flat affine cover"
+   }
+  },
+  {
+   "text": "The finite-flat affine groupoid diagonal theorem makes $\\mathcal X_x$ separated over $k$. Apply separated-source cancellation with target $\\mathcal X$, whose inertia is finite, to conclude that $g_x$ is separated. This checks relative separatedness; no separatedness of $\\mathcal X$ over $k$ is assumed.",
+   "uses": [
+    "lem-sfb-finite-flat-affine-groupoid-separated",
+    "lem-sfb-separated-source-finite-inertia-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUE (lemma-etale-local-finite-inertia), last paragraph, Tags 0DUM, 0CL0(1), 050M(3)"
+   }
+  },
+  {
+   "text": "Take one such choice for each $x\\in|\\mathcal X|$ and let $J=|\\mathcal X|$, a small set in the stipulated universes. Each $g_x$ has a point over $x$, so the family is jointly surjective. The finite flat presentations, affine kernel pairs, finite locally free projections and quotient equivalences are exactly those constructed above. If $\\mathcal X$ is empty take $J=\\varnothing$.",
+   "uses": [
+    "lem-sfb-stack-point-topology",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUE (lemma-etale-local-finite-inertia), final sentence: x was arbitrary"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-inertia-pointwise-groupoid-chart",
+  "lem-sfb-proper-inertia-stabilizer-preserving-open",
+  "lem-sfb-flat-groupoid-quotient-open-presentation",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "def-pc-proj",
+  "lem-sfb-locally-closed-proj-finite-affine",
+  "lem-sfb-locally-free-groupoid-invariant-affine",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-sfb-finite-flat-affine-groupoid-separated",
+  "lem-sfb-separated-source-finite-inertia-target",
+  "lem-sfb-stack-point-topology",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUE (lemma-etale-local-finite-inertia), entire proof; Tag 0DUM for the finite-flat affine presentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack with finite inertia admits stabilizer preserving separated etale charts with a finite flat affine scheme cover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite inertia stack etale locally is a quotient of an affine finite locally free groupoid",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"AlgebraicGeometry\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "well.nigh|finite.inertia|stabilizer.preserving",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite inertia algebraic stack admits etale finite flat affine charts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is a finite morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the ring of sections $\\\\mathcal{O}_X(f^{-1\"}\n  {\"name\": \"Algebra.Etale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property of an algebra $ A $ over a commutative ring $ R $ being étale.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-inertia-adequate-coarse-space",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The stabilizer-preserving etale cover preceding the local invariant-ring quotients.",
+   "via": [
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-inertia-etale-affine-charts",
+  "worker": "stage1",
+  "summary": "Followed 0DUE point by point, reusing invariant-affine shrinking and the locally-closed-Proj common-affine theorem. Added five statement-only general inputs for pointwise charts, the proper-inertia open locus, flat-groupoid presentations, quotient diagonals and separated-source cancellation. No statement change, no Lean attachment and no Mathlib match.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md (of=det-thm-sf-ctf-stability-direct-images), clause (3), direct-image finiteness supporting moduli prerequisite. Retained the inherited null ancestry returned by blueprint_refs.py; realizes the specific finite-inertia chart input via Stacks 0DUE rather than altering any unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "General finite-scheme finite-fibre theorem, used only to count one orbit; no algebraic-stack chart assertion."
+   },
+   {
+    "node": "def-pc-proj",
+    "why": "Proj definition used for the single-chart identification Spec A = Proj A[T]."
+   },
+   {
+    "node": "lem-sfb-locally-closed-proj-finite-affine",
+    "why": "Generic finite-set common-affine lemma, used only for the orbit inside the open U circle."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic affine-source consequence of a finite scheme morphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "def-pc-proj",
+  "lem-sfb-locally-closed-proj-finite-affine",
+  "lem-weil-pbc-finite-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-e44b71c85",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-e44b71c85 (reviewer sub-agent of L); spot-checked: Item = Stacks 0DUE (1)-(4) with well-nigh affine spelled out via 0DUM over a field; statement unchanged. I read the 0DUE/0DUM proofs and checked each step against 0DU4, 0DUA, 0CL0, 050M and 0DTY in stacks-morphisms.tex; tags checked in tags/tags. Steps: 1 = pointwise chart (0DU4 specialised; finite inertia gives lqf + separated inertia and a finite G_x). 2 = 0DUA open locus via etale=>unramified and finite=>proper; invariant open U° and lift u from the presentation node; orbit finite by finite-fibres(2). 3 = Spec A = Proj A[T] (checked), 01ZY node with X=O=U° and j=id, then 03JE node on the restricted finite-locally-free groupoid gives invariant affine W ⊇ E. 4 = open substack [W/R_W] ⊆ V°, finite flat fp cover, R_W = W×W, inertia restricts since the substack is full, R_W affine by permanence (b). 5 = 0DTY(6) node gives X_x separated, then 050M(3)+0CL0(1) node gives g_x separated. 6 = elementary assembly, J = |X| small, empty case covered. All five new nodes are true, statement-only, self-contained and not restatements; the -L DAG grep for every tag/label found no duplicates (the DM-only local-affine-covers node, smooth-atlas descent nodes and moduli nodes differ). No SGA. Batch-5 flags (def-sfb-algebraic-moduli-stack, def-trf-algebraic-space, def-sfb-stable-pointed-moduli-groupoids, stack-chartwise calculus) are general definitions or generic lemmas outside the trace-formula and Poincaré proofs: accepted. split_report tool_uses accepted. FIX: in pointwise-groupoid-chart and in the 'in particular' clause of proper-inertia-stabilizer-preserving-open, 'representable etale' becomes 'representable by algebraic spaces and etale'. This matches 0DU4/0DUA; read as 'by schemes' the claim fails for non-quasi-separated targets. Corrected files are in fixes/dag/nodes/sec-six-functors-basics/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteInertiaEtaleAffineCharts",
+  "declaration": "CategoryTheory.finite_inertia_etale_affine_charts",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteInertiaEtaleAffineCharts.lean",
+  "statement": "theorem finite_inertia_etale_affine_charts (k : Type u) [Field k] (F : BasedCategory.{v, w} (Over (Spec (CommRingCat.of k)))) (hF : IsAlgebraicModuliStack F) (hI : IsRepresentableFiniteModuliMap (moduliInertiaProjection F)) : ∃ (J : Type (max u w)) (X : J → BasedCategory.{max u v, max (u + 1) w} (Over (Spec (CommRingCat.of k)))) (g : ∀ j : J, BasedFunctor (X j) F), (∀ x : ModuliPoints F, ∃ (j : J) (y : ModuliPoints (X j)), moduliPointMap (g j) y = x) ∧ ∀ j : J, IsAlgebraicModuliStack (X j) ∧ IsRepresentableByAlgebraicSpaces (g j) ∧ ModuliSpaceTest (@Etale) (g j) ∧ ModuliSchemeTest (@IsProper) (moduliRelativeDiagonal (g j)) ∧ (∀ (T : Over (Spec (CommRingCat.of k))) (x : Functor.Fiber (X j).p T), Function.Bijective (fun α : x ≅ x ↦ (moduliFiberMap (g j) T).mapIso α)) ∧ ∃ (U : Over (Spec (CommRingCat.of k))) (a : BasedFunctor (discreteModuli (yoneda.obj U)) (X j)), IsAffine U.left ∧ ModuliSchemeTest (fun _ _ f ↦ IsFinite f ∧ Flat f ∧ LocallyOfFinitePresentation f ∧ Surjective f) a ∧ ∃ (R : Over (Spec (CommRingCat.of k))) (s t : R ⟶ U) (e : U.left ⟶ R.left) (i : R.left ⟶ R.left) (c : pullback s.left t.left ⟶ R.left), IsAffine R.left ∧ s.left.IsFiniteLocallyFree ∧ t.left.IsFiniteLocallyFree ∧ IsSchemeStackDiagonalPresentation a a s t ∧ Nonempty (SchemeGroupoidQuotientPresentation s t e i c (X j) a)",
+  "branch": "newtargets-dag",
+  "by": "Q156",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical inertia preservation is expressed by bijectivity of the actual map on automorphisms in every scheme fibre, including all nonreduced tests. Both kernel-pair projections and the fppf quotient presentation are retained. Reuses the five landed owning definition nodes added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-70fd9114f",
+  "group": "Q156",
+  "result": "pass",
+  "note": "Diff vs live: only the new module FiniteInertiaEtaleAffineCharts (one sorry theorem, no defs) plus the item's lean record and 5 landed stmt_deps additions (moduli-inertia, finite-stack-scheme-tests, dm-stack-morphism-properties, scheme-groupoid-quotient-presentation, scheme-stack-diagonal-presentation), all with live lean records. Checked against Stacks 0DUE/0DUL/0DUM (stacks-more-morphisms.tex 3109-3150, 3580-3640): general IsAlgebraicModuliStack; finite inertia via IsRepresentableFiniteModuliMap of moduliInertiaProjection; point surjectivity via moduliPointMap; representable by spaces; etale via ModuliSpaceTest @Etale; relative separatedness via ModuliSchemeTest IsProper of moduliRelativeDiagonal (Δ_g representable by schemes since g is representable by spaces); canonical inertia iso via bijective mapIso on vertical automorphisms for all T; affine U with representable finite flat lfp surjective map; affine R with both projections finite locally free; IsSchemeStackDiagonalPresentation + SchemeGroupoidQuotientPresentation (groupoid laws, fppf stackification). Universes: J : max u w holds ModuliPoints; existential chart universes are not restrictive. Edge cases: empty stack, char p, nonreduced stabilizers. Statement verbatim, docstrings with source/blueprint/proof steps, no hollow defs. No recompile (no file changed)."
+ }
+}

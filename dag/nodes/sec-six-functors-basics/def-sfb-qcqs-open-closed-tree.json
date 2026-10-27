@@ -1,0 +1,121 @@
+{
+ "id": "def-sfb-qcqs-open-closed-tree",
+ "kind": "definition",
+ "title": "Finite qcqs open–closed scheme trees and module branch composites",
+ "status": "split",
+ "statement": "A finite qcqs open–closed tree with root $X$ is inductively a single qcqs scheme $X$, or a qcqs scheme $X$ with two such trees rooted at $U$ and $Z$ and complementary quasi-compact open and closed immersions $j:U\\to X$ and $i:Z\\to X$. Schemes and morphisms are those of [def-pc-scheme], quasi-compactness is [def-weil-pbc-quasi-compact-scheme], quasi-separatedness is [def-weil-quasi-separated-morphism], open and closed immersions are [def-weil-open-immersion] and [def-weil-closed-immersion], and quasi-compact morphisms are [def-weil-finite-type-morphism]. Both empty schemes and one-vertex trees are permitted. A vertex path is either the root path or a path in one child followed by its edge; its map to $X$ is the actual composite of these scheme morphisms. A leaf path ends at a one-vertex subtree. For a commutative condensed ring $R$ and its pulled-back rings $R_T$ [sk-def-sfb-pulled-back-coefficients], let $e_p^R:\\operatorname{Mod}_{R_W}\\to\\operatorname{Mod}_{R_X}$ be the path composite on module objects [sk-def-sfb-module-objects]: the root path gives the identity, an open step appends $j_!$ [def-sfb-module-open-lower-shriek], and a closed step appends $i_*$ [sk-def-sfb-module-pushforward-pullback]. These are the exact edge functors of [lem-weil-pbc-proetale-ringed-open-closed].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-module-open-lower-shriek",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open, iterated along the finite rooted binary trees in lem-sfb-qcqs-lattice-tree-reconstruction; finite-tree argument supporting det-sf-comp-coherence-cocycle refinement isomorphisms (2)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite rooted binary tree of schemes with complementary quasi compact open and closed children",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isCompl_opensRange_inl_inr\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \": IsCompl (coprod.inl : X ⟶ X ⨿ Y).opensRange (coprod.inr : Y ⟶ X ⨿ Y).opensRange\", \"doc\": \"For schemes $X$ and $Y$, the open subsets of their coproduct $X ⨿ Y$ corresponding to the images of the left and right inclusions $X \\to X ⨿ Y$ and $Y \\to X ⨿ Y$ are complements in the lattice of open s\"}\n  {\"name\": \"RootedTree\", \"module\": \"Mathlib.Order.SuccPred.Tree\", \"type\": \"Type (u_2 + 1)\", \"doc\": \"The inductive type RootedTree represents a rooted tree structure, typically constructed with a root node and a collection of child subtrees.\"}\n  {\"name\": \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{U : X.Opens} : IsCompact (X := X) U ↔ ∃ s : Set X.affineOpens, s.Finite ∧ U = ⨆ i ∈ s, (i : X.Opens)\", \"doc\": \"An open subset $ U $ of a scheme $ X $ is quasi-compact if and only if there exists a finite set $ S $ of affine open subsets of $ X $ such that $ U $ equals the union of all elements in $ S $.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(X : Scheme) : QuasiSeparatedSpace X ↔ QuasiSeparated (terminal.from X)\", \"doc\": \"A scheme $X$ has a quasi-separated underlying topological space (i.e., the intersection of any two quasi-compact open subsets is quasi-compact) if and only if the unique morphism from $X$ to the termi\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_affine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, QuasiSeparatedSpace ↥X ↔ ∀ (U V : ↑X.affineOpens), IsCompact (↑↑U ∩ ↑↑V)\", \"doc\": \"A scheme $X$ has a quasi-separated underlying topological space if and only if the intersection of any two affine open subsets $U$ and $V$ of $X$ is a compact set.\"}\n  {\"name\": \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{U : Set X} : IsCompact U ∧ IsOpen U ↔ ∃ s : Set X.affineOpens, s.Finite ∧ U = ⋃ i ∈ s, i\", \"doc\": \"A subset $ U $ of a scheme $ X $ is both quasi-compact and open if and only if there exists a finite collection $ s $ of affine open subsets of $ X $ such that $ U $ is the union of all elements in $ \"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X : Scheme} : QuasiSeparatedSpace X ↔ ∀ U V : X.affineOpens, IsCompact (U ∩ V : Set X)\", \"doc\": \"A scheme $X$ is quasi-separated if and only if for every pair of affine open subsets $U$ and $V$ of $X$, their intersection $U \\\\cap V$ is a quasi-compact subset of $X$.\"}\n  {\"name\": \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : Set ↥X}, IsCompact U ∧ IsOpen U ↔ ∃ s, s.Finite ∧ U = ⋃ i ∈ s, ↑↑i\", \"doc\": \"A subset $ U $ of a scheme $ X $ is both compact and open if and only if there exists a finite set $ s $ of affine open subsets of $ X $ such that $ U $ is the union of these affine open subsets.\"}",
+   "date": "2026-10-22",
+   "verdict": "No matching definition: quasi-compact covers and abstract rooted trees have no scheme-valued complementary open/closed edges or their module branch composites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite rooted binary tree of schemes with complementary quasi compact open and closed children",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"{S : AlgebraicGeometry.Scheme} → CategoryTheory.PreZeroHypercover S → Prop\", \"doc\": \"A predicate that determines whether a given pre-zero hypercover of a scheme $ S $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"(S : AlgebraicGeometry.Scheme) → CategoryTheory.ObjectProperty (CategoryTheory.PreZeroHypercover S)\", \"doc\": \"For a scheme $ S $, this defines the predicate on pre-zero hypercovers of $ S $ that determines whether a given pre-zero hypercover is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, PrespectralSpace ↥X\", \"doc\": \"Every scheme, when considered as a topological space, is a prespectral space, meaning it satisfies the inductive conditions related to compactness and a basis of compact open sets specified by the pre\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {K : CategoryTheory.Precoverage AlgebraicGeometry.Scheme}\\n  {𝒰 : AlgebraicGeometry.Scheme.Cover K S} [AlgebraicGeometry.Scheme.JointlySurjective K]\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.QuasiCompact (𝒰.f i)] [Finite 𝒰.I₀],\\n  AlgebraicGeometry.QuasiCompactCover 𝒰.toPreZe\", \"doc\": \"A pre-zero hypercover of a scheme is quasi-compact if it arises from a finite family of quasi-compact morphisms whose images cover the scheme, under a jointly surjective precoverage.\"}\n  {\"name\": \"AlgebraicGeometry.isCompl_opensRange_inl_inr\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ (X Y : AlgebraicGeometry.Scheme),\\n  IsCompl (AlgebraicGeometry.Scheme.Hom.opensRange CategoryTheory.Limits.coprod.inl)\\n    (AlgebraicGeometry.Scheme.Hom.opensRange CategoryTheory.Limits.coprod.inr)\", \"doc\": \"For schemes $X$ and $Y$, the open subsets of their coproduct $X ⨿ Y$ corresponding to the images of the left and right inclusions $X \\to X ⨿ Y$ and $Y \\to X ⨿ Y$ are complements in the lattice of open s\"}\n  {\"name\": \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofilteredOrEmpty I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (Z \", \"doc\": \"Given a cofiltered diagram of schemes where each transition morphism is affine, and for each scheme in the diagram a closed, non-empty, compact subset $ Z_i $ that is compatible with the morphisms, th\"}",
+   "date": "2026-10-22",
+   "verdict": "No matching definition: quasi-compact covers and abstract rooted trees have no scheme-valued complementary open/closed edges or their module branch composites."
+  },
+  {
+   "tool": "grep",
+   "query": "OpenClosedTree|open.closed.tree|rooted binary tree (Mathlib/AlgebraicGeometry)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No matching definition: quasi-compact covers and abstract rooted trees have no scheme-valued complementary open/closed edges or their module branch composites."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n OpenClosedTree|lattice.*[Tt]ree|[Tt]ree.*[Rr]econstruct lean/WeilConjectures lean/Sheaf; rg -l rooted binary|finite rooted|OpenClosedTree|openClosedTree dag/nodes; python3 tools/blueprint_refs.py search \"open closed tree\"",
+   "results": "No declaration in WeilConjectures or Sheaf. DAG hits include lem-fix-constructible-open-closed-refinement and lem-fix-constructible-open-closed-refinement-tree: their Lean conclusions quantify over raw finite arrays; neither defines a scheme-tree type, paths, leaf paths or path extension functors. Other DAG hits concern existence/refinement/reconstruction of trees, or unrelated field extensions, and do not define this notion. blueprint_refs.py: 0 blueprint nodes match open closed tree.",
+   "date": "2026-10-22",
+   "verdict": "Missing definition; reuse all existing scheme, coefficient and edge-functor notions, and introduce only their finite-tree packaging."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-lattice-tree-reconstruction",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms (2), closed-complement generator calculation: finite open–closed trees and exact module branch composites.",
+   "via": [
+    "lem-sfb-qcqs-lattice-tree-reconstruction",
+    "lem-sfb-qcqs-rational-integral-localizing-generators",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "module": "Sheaf.Paper.QcqsOpenClosedTree",
+  "declaration": "AlgebraicGeometry.ProEtale.QcqsOpenClosedTree",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QcqsOpenClosedTree",
+   "AlgebraicGeometry.ProEtale.QcqsOpenClosedTree.Path",
+   "AlgebraicGeometry.ProEtale.QcqsOpenClosedTree.Path.toRoot",
+   "AlgebraicGeometry.ProEtale.QcqsOpenClosedTree.Path.IsLeaf",
+   "AlgebraicGeometry.ProEtale.QcqsOpenClosedTree.Path.extension"
+  ],
+  "file": "lean/Sheaf/Paper/QcqsOpenClosedTree.lean",
+  "statement": "inductive QcqsOpenClosedTree : Scheme.{u} → Type (u + 1)",
+  "branch": "sheaf-dag",
+  "by": "Q33",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-731ffbf92",
+  "group": "Q33",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-731ffbf92",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Re-delivery after the a88b2559 RETURN (H2/H4/H12). Diff vs that snapshot: item module only swaps the import ContinuousLocallyFreePullback→CoefficientHeartStratificationDefs and LeafModels.lisse to IsLisseCoefficientModule (padicIntegersRingObj ℓ (F (fieldIndex w)).1) (model w); item stmt_deps swap the theorem node for the landed def node def-sfb-lisse-coefficient-module (record identical to side-live, existing:true); tree def node and module unchanged. IsLisseCoefficientModule = pro-étale cover with Mod.IsFree (∃ n, ≅ finiteFree n) upperStar pullbacks: finite rank, rank 0 and varying ranks allowed, matching the item's lisse leaves. Re-confirmed: canonical coefficient inclusions in both cases, qcqs tree with quasi-compact complementary open/closed edges, vertexwise flatness, leaf D_ctf/Tor[0,0]/derived iso, preservation and scalarComparison IsIso for all B, extensionProductIter reconstruction (iter 0 = P), edge cases, universes, statement verbatim, single sorry, docstrings. Item not yet landed live (no supersession). Advisory only: the tree node cites theorem lem-weil-pbc-proetale-ringed-open-closed as a reference, as accepted before. No compile (no file changed); worker reports clean compiles and a passing dry run."
+ }
+}

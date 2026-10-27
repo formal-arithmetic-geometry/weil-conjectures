@@ -1,0 +1,176 @@
+{
+ "id": "lem-weil-ramified-finite-scalar-composition",
+ "kind": "statement",
+ "title": "Finite scalar-extension composition factor",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "statement": "Fix the setting of the ramified module comparison, a scheme morphism g:X→Y, e,j, source Coefficients on Y and a level n. Extension along the finite coefficient map j_X of g*_E(reduce_E M) is isomorphic, for every completed E-module M on Y, to g*_L(reduce_L(extend_source M)). The forward map sends c tensor (b·g*_E(a tensor p)) to (c·j_X(b))·g*_L(j_Y(a) tensor (1 tensor p)). There is no completed coefficient map or coefficient isomorphism on X in this statement. The pure tensors and pullback generators are the existing normalized scalar, reduction and pullback adjunction units.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proetale-inverse-image",
+  "def-pur-integral-derived-operations",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-integral-scalar-extension",
+  "def-weil-ramified-pullback-tower-data",
+  "lem-pur-integral-operations-well-defined",
+  "def-weil-integral-reduction-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CZ, 03EK (section-tensor-product) and 03EL (lemma-tensor-product-pullback); balanced scalar base change and composition of the extension/restriction and pullback/direct-image adjunctions."
+ },
+ "proof": [
+  {
+   "text": "The source ramified_projection square identifies the composites of the two scalar restrictions. Compose the reduction and scalar adjunctions along either path and use uniqueness of left adjoints to obtain reductionSquareIso. Its unit equation sends 1 tensor (1 tensor p) to 1 tensor (1 tensor p). Linearity gives the formula with arbitrary inner finite coefficient a.",
+   "uses": [
+    "def-weil-ramified-pullback-tower-data",
+    "def-weil-integral-reduction-tower",
+    "lem-weil-ramified-finite-tensor-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CZ, 03EK (section-tensor-product) and 03EL (lemma-tensor-product-pullback); balanced scalar base change and composition of the extension/restriction and pullback/direct-image adjunctions."
+   }
+  },
+  {
+   "text": "The finite constant-coefficient square commutes by naturality of the canonical constant-section direct ring map in j. The two composites of restriction and module direct image are therefore isomorphic, with identity action on underlying sections. Compose their scalar and geometric pullback adjunctions and use uniqueness of left adjoints to obtain finitePullbackSquareIso, normalized by its composite-unit equation.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-ramified-finite-tensor-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CZ, 03EK (section-tensor-product) and 03EL (lemma-tensor-product-pullback); balanced scalar base change and composition of the extension/restriction and pullback/direct-image adjunctions."
+   }
+  },
+  {
+   "text": "Compose finitePullbackSquareIso with geometric pullback of reductionSquareIso. Naturality of the pullback unit proves the generator formula for outer coefficients 1,1. Source balancing and target linearity of the scalar tensor, then linearity of the composite, yield the formula for arbitrary b and c. This entire argument is implemented in Lean without new holes.",
+   "uses": [
+    "lem-weil-ramified-finite-tensor-sections",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CZ, 03EK (section-tensor-product) and 03EL (lemma-tensor-product-pullback); balanced scalar base change and composition of the extension/restriction and pullback/direct-image adjunctions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-ramified-pullback-tower-data",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-integral-operations-well-defined",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-ramified-finite-tensor-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CZ, 03EK (section-tensor-product) and 03EL (lemma-tensor-product-pullback); balanced scalar base change and composition of the extension/restriction and pullback/direct-image adjunctions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with sheaf module pullback over quotient coefficients with pure tensor formula",
+   "results": "Eight hits including SheafOfModules.pullbackIso, pullbackObjFreeIso, and freeFunctorCompPullbackIso. Read Mathlib sheaf PullbackContinuous and project scalar adjunction APIs.",
+   "date": "2026-10-27",
+   "verdict": "Composition is supplied by uniqueness of left adjoints, but restriction followed by scalar extension needs a separate coefficient base-change calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"tensor\"",
+   "results": "Twelve affine scheme tensor-pullback hits, no sheaf scalar/restriction base-change theorem.",
+   "date": "2026-10-27",
+   "verdict": "No direct specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules over a commutative square of ring sheaves, if the coefficient tensor map is an isomorphism then scalar extension commutes with restriction of scalars for every module.",
+   "results": "Eight hits: sheaf/presheaf restrictScalars and module extension/restriction Hom equivalence, unit and counit.",
+   "date": "2026-10-27",
+   "verdict": "These provide scalar adjunctions, not the asserted coefficient-normalized base change."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Ii]so|scalar.*[Tt]ensor.*[Ii]so|[Pp]ullback.*[Cc]omparison; exists_changeOfRings_tensorCancellation",
+   "results": "Read Mathlib pullbackComp, project scalar presentations, independent-coefficient tensor cancellation and tensorPushoutAction. Cancellation identifies sheaf tensors; tensorPushoutAction requires sectionwise ring tensor isomorphisms, whereas Coefficients supplies a sheafified module isomorphism.",
+   "date": "2026-10-27",
+   "verdict": "Use adjunction uniqueness for the composition factor. The remaining coefficient base-change factor is strictly on one site and contains no geometric pullback."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RamifiedFiniteModuleComparison",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "Finite scalar-extension composition factor; steps 1 and 2 of the objectwise finite module comparison.",
+   "via": [
+    "lem-weil-ramified-finite-module-comparison",
+    "lem-weil-ramified-finite-pullback-comparison",
+    "lem-weil-ramified-pullback-tower-identification",
+    "lem-weil-specified-pullback-comparison-alpha",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RamifiedFiniteScalarComposition",
+  "file": "lean/Sheaf/Paper/RamifiedFiniteScalarComposition.lean",
+  "declaration": "WeilConjectures.RamifiedPullback.finiteScalarComposition_exists",
+  "statement": "theorem finiteScalarComposition_exists {X Y : Scheme.{t}} (g : X ⟶ Y)\n    (e : ℕ)\n    (j : ∀ n : ℕ, Padic.coefficientExtensionRing l E (n + 1) →+*\n      Padic.coefficientExtensionRing l L (index e n + 1))\n    (source : Coefficients l E L ι e j Y) (n : ℕ) :\n    ∃ d : ∀ M : integralTowerModules l E Y,\n      (scalar.{t, u} (ramifiedMap l E L X e n (j n))).obj\n          ((integralOperationsLevelPullback l E g n).obj\n            ((unrestrictedIntegralReductionFunctor l E Y n).obj M)) ≅\n        (integralOperationsLevelPullback l L g (index e n)).obj\n          ((unrestrictedIntegralReductionFunctor l L Y (index e n)).obj\n            ((scalar.{t, u} source.completedMap).obj M)),\n      ∀ (M : integralTowerModules l E Y) (V : Y.ProEt)\n        (a : (integralCoefficientCommRingSheaf l E Y n).obj.obj (op V))\n        (b : (integralCoefficientCommRingSheaf l E X n).obj.obj\n          (op ((Scheme.proEtaleBaseChange g).obj V)))\n        (c : (integralCoefficientCommRingSheaf l L X (index e n)).obj.obj\n          (op ((Scheme.proEtaleBaseChange g).obj V))) (p : M.val.obj (op V)),\n        (d M).hom.val.app _\n          (tensor.{t, u} (ramifiedMap l E L X e n (j n)) _ _ c\n            (b • @id (((integralOperationsLevelPullback l E g n).obj\n              ((unrestrictedIntegralReductionFunctor l E Y n).obj M)).val.obj\n                (op ((Scheme.proEtaleBaseChange g).obj V)))\n              (integralOperationsPullbackGenerator l E g n _ V\n                (unrestrictedIntegralTensorSection l E Y n M (op V) a p)))) =\n          (c * (ramifiedMap l E L X e n (j n)).hom.app _ b) •\n            @id (((integralOperationsLevelPullback l L g (index e n)).obj\n              ((unrestrictedIntegralReductionFunctor l L Y (index e n)).obj\n                ((scalar.{t, u} source.completedMap).obj M))).val.obj\n                  (op ((Scheme.proEtaleBaseChange g).obj V)))\n              (integralOperationsPullbackGenerator l L g (index e n) _ V\n                (unrestrictedIntegralTensorSection l L Y (index e n)\n                  ((scalar.{t, u} source.completedMap).obj M) (op V)\n                  ((ramifiedMap l E L Y e n (j n)).hom.app (op V) a)\n                  (tensor.{t, u} source.completedMap M (op V) 1 p)))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T135103-L-3665630",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T135103-L-3665630",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

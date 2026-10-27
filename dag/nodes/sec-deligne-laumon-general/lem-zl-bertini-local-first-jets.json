@@ -1,0 +1,165 @@
+{
+ "id": "lem-zl-bertini-local-first-jets",
+ "kind": "statement",
+ "title": "Spanning local first-jet columns of an immersive generating system",
+ "statement": "Let k be a field, f:Y -> Spec k smooth, L invertible, and s_0,...,s_r global sections generating L whose classified projective morphism is an immersion [def-weil-pbc-morphism-to-projective-space-by-sections]. For an open U with smooth relative dimension d and a point z in U, set K=kappa_U(z). Let Omega be the actual relative differential stalk fibre of U -> Spec k, as in [lem-pur-conormal-sequence-smooth-immersion]. There exist an open W of Y containing U.ι(z), a free generator e of L on W [def-sc-local-free-generator], and a K-linear equivalence Omega -> K^d. Write s_i|W=a_i e. Then the columns (a_i(z), da_i(z)) span K plus Omega. Values and differentials are taken after restriction along U.ι to U.ι^{-1}(W), using the actual universal relative derivation [def-sc-relative-differential-sheaf]. Invertibility uses [def-sc-invertible-module]. No universal hypersurface or singular fibre is asserted.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD6, lemma-bertini, final paragraph; supplemented by Morphisms Tag 02G1 and Algebra Tag 00T7"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-sc-local-free-generator",
+  "def-sc-invertible-module",
+  "def-sc-relative-differential-sheaf",
+  "lem-pur-conormal-sequence-smooth-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Use generatingSections_pair from lem-pc-complete-linear-system-closed and the standard projective chart cover to choose an index i whose chart contains the image of U.ι(z). Set W equal to its inverse image. The section-preserving isomorphism makes s_i restricted to W a free generator e. The coefficient a_j in this frame is exactly the pullback of the chart coordinate T_j/T_i, by map_eq_coordRatio_smul_of_twistRestrict_iso and coeff_eq_iff. In particular a_i=1. This constructs the frame directly; a separate fibre-generation criterion is unnecessary.",
+   "uses": [
+    "lem-pc-complete-linear-system-closed",
+    "def-sc-local-free-generator",
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "lem-weil-pbc-projective-space-standard-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the immersive projective morphism with U.ι. Both morphisms are surjective on stalks. The standard chart ring is generated as a k-algebra by its coordinate ratios: use closure_range_appLE_union_range_coordRatio and GammaSpecIso, putting constants and variables in the polynomial-evaluation range. Lift a source-stalk element to the projective stalk, express it as a fraction of chart sections by affine stalk localization, and lift the numerator and denominator to polynomials. The denominator remains a unit. The projective projection identity identifies the constant coefficients with the structure map on U; germ_stalkMap_apply and the coefficient identity identify all variable germs with the specified restricted a_j.",
+   "uses": [
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-zl-differential-fibre-local-fractions to the restricted coefficient functions on U. Its proved polynomial-and-Leibniz argument shows their actual relative differential germs span the cotangent fibre, at the arbitrary residue-field point z. This replaces the local closed-immersion factorization and conormal exact-sequence argument.",
+   "uses": [
+    "lem-zl-differential-fibre-local-fractions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved isFiniteLocallyFreeOfRank_relativeDifferentials to U.ι ≫ f of smooth relative dimension d. Choose a local free trivialization and take its basis germs at z, using exists_basis_stalk_of_over_iso_free. Reindex from ULift(Fin d) to Fin d and apply Basis.baseChange to the actual identity-stalk residue algebra. The resulting basis.equivFun is the required equivalence of the differential fibre with kappa(z)^d. Empty bases handle d=0.",
+   "uses": [
+    "lem-sc-smooth-omega-finite-locally-free",
+    "def-amb-finite-locally-free-module",
+    "def-sc-relative-differential-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The i-th first-jet column is (1,0), since a_i=1 and d(1)=0. In the span P of all columns, scaling gives every (a,0). Subtract (a_j(z),0) from column j to get (0,da_j(z)). Span induction on the already spanning differential family gives every (0,m), and addition gives every pair (a,m). Reindexing the range from ULift(Fin(r+1)) to Fin(r+1) changes no generators.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-sc-local-free-generator",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-pc-complete-linear-system-closed",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-zl-differential-fibre-local-fractions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD6, lemma-bertini, final paragraph; direct polynomial-fraction and Leibniz expansion of the omitted first-jet detail, using Constructions 01NE/01NF, Algebra 00RM/00RT and Morphisms 02G1. K1 proves the expansion without any new proof holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a smooth scheme immersed by globally generating sections into projective space, their values and relative differentials span the direct sum of the residue field and cotangent fibre at any point",
+   "results": "Scheme.residueField; Algebra.FormallySmooth.iff_injective_lTensor_residueField; Scheme.evaluation; IsLocalRing.CotangentSpace.span_image_eq_top_iff; open immersion residue field isomorphisms",
+   "date": "2026-10-26",
+   "verdict": "Only general differential and affine-fibre infrastructure; no theorem about the specified local section coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective immersion given by generating sections has surjective first jet evaluation and singular universal hyperplanes vanish under the value and differential equations",
+   "results": "Proj.fromOfGlobalSections; Proj.instIsOpenImmersionAwayι; Proj; Proj.pullbackAwayιIso; Proj.valuativeCriterion_existence; Proj.instIsSeparated; Proj.fromOfGlobalSections_toSpecZero",
+   "date": "2026-10-26",
+   "verdict": "Projective-space infrastructure only; no local first-jet or singular-fibre equation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Derivation\", \"span\"",
+   "results": "KaehlerDifferential.span_range_derivation; KaehlerDifferential.span_range_map_derivation_of_isLocalization",
+   "date": "2026-10-26",
+   "verdict": "Useful algebraic infrastructure; does not state the geometric conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "homOfGeneratingSections|relativeDifferentialsStalkFibre|bertini|singular.*[Ff]ibre|firstJet (Mathlib/AlgebraicGeometry and Mathlib/LinearAlgebra)",
+   "results": "No matches. Library search found immersiveSystem_source_first_jets, restricted to closed points over an algebraically closed field, and the current unsolved parent. Blueprint search for first jet and singular fibre returned zero matching blueprint nodes.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate of this arbitrary-residue-field statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniSingularFibreEquations",
+  "date": "2026-10-26",
+  "group": "M7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Smooth Bertini input, Tag 0FD6: Spanning local first-jet columns of an immersive generating system",
+   "via": [
+    "lem-zl-bertini-singular-fibre-equations",
+    "lem-zl-bertini-singular-first-order-model",
+    "lem-zl-bertini-singular-locus-dimension",
+    "lem-zl-bertini-smooth-member"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BertiniLocalFirstJets",
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniLocalFirstJets.lean",
+  "declaration": "AlgebraicGeometry.exists_bertiniLocalFirstJets",
+  "declarations": [
+   "AlgebraicGeometry.exists_bertiniLocalFirstJets",
+   "AlgebraicGeometry.bertiniCotangentFibre",
+   "AlgebraicGeometry.bertiniLocalFirstJet"
+  ],
+  "statement": "theorem exists_bertiniLocalFirstJets\n    {k : Type u} [Field k] {Y : Scheme.{u}}\n    (f : Y ⟶ Spec (.of k)) [Smooth f]\n    (L : Y.Modules) [L.IsInvertible] (r : ℕ)\n    (s : ULift.{u} (Fin (r + 1)) → Γ(L, ⊤))\n    (hgen : Epi (L.freeHomEquiv.symm (fun i ↦\n      (SheafOfModules.unitHomEquiv L) (Scheme.Modules.homOfGlobalSection L (s i)))))\n    [IsImmersion (ProjectiveSpace.homOfGeneratingSections (ULift.{u} (Fin (r + 1))) f L\n      (fun i ↦ (SheafOfModules.unitHomEquiv L)\n        (Scheme.Modules.homOfGlobalSection L (s i))) hgen)]\n    (U : Y.Opens) (d : ℕ) [SmoothOfRelativeDimension d (U.ι ≫ f)] (z : U) :\n    ∃ (W : Y.Opens) (hz : U.ι z ∈ W) (e : Γ(L, W))\n      (he : Scheme.Modules.IsFreeGenerator e)\n      (b : bertiniCotangentFibre f U z ≃ₗ[(U : Scheme).residueField z]\n        (Fin d → (U : Scheme).residueField z)),\n      Submodule.span ((U : Scheme).residueField z)\n        (Set.range (fun i : Fin (r + 1) ↦ bertiniLocalFirstJet f U z W hz\n          (he.coeff (L.presheaf.map (homOfLE (le_top : W ≤ ⊤)).op (s ⟨i⟩))))) = ⊤",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261026T092039-L-3397452",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T104445-L-826766",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

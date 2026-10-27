@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-abelian-field-extension",
+ "kind": "statement",
+ "title": "Abelian varieties and their dimension survive field extension",
+ "statement": "Let $k$ be a field [def-weil-field], let $K/k$ be a field extension [def-pc-field-extension], and let $A/k$ be an abelian variety [def-sc-abelian-variety]. Give the base change $A_K=A\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ [def-pc-base-change] the group operations obtained by base changing those of $A$ [def-sc-group-scheme]. Then $A_K$ is an abelian variety over $K$, and $\\dim A_K=\\dim A$ [def-pc-dimension].",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0BFB (lemma-abelian-variety-change-field). Dimension: morphisms.tex, Tag 02FY (lemma-dimension-fibre-after-base-change), part (1), for the structure map to Spec k."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-sc-abelian-variety",
+  "def-pc-base-change",
+  "def-sc-group-scheme",
+  "def-pc-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Write $f:A\\to\\operatorname{Spec}k$. Base change gives $m_K,i_K,e_K$ on $A_K$. For any $K$-scheme $T$, the fibre-product universal property identifies $A_K(T)$ with $A(T)$, where $T$ is regarded as a $k$-scheme. The maps $m_K,i_K,e_K$ therefore satisfy the same group identities on every $T$, and hence as morphisms. In particular $e_K$ is a section of $A_K\\to\\operatorname{Spec}K$. The original identity $e$ is a section of $f$, so $A$ is nonempty.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0BFB (lemma-abelian-variety-change-field), omitted group-structure verification by the fibre-product universal property."
+   }
+  },
+  {
+   "text": "By the definition of an abelian variety, $f$ is proper and smooth and $A$ is connected. Apply both clauses of [lem-pc-proper-base-change] to $f$ and $\\operatorname{Spec}K\\to\\operatorname{Spec}k$. The structure map $A_K\\to\\operatorname{Spec}K$ is proper and smooth.",
+   "uses": [
+    "def-sc-abelian-variety",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W4 (lemma-base-change-proper) and 01VB (lemma-base-change-smooth)."
+   }
+  },
+  {
+   "text": "The connected scheme $A$ has the $k$-rational section $e$ supplied by its group structure. Apply [lem-sbc-connected-rational-point-geometrically-connected] with $X=A$ and the given field extension $K/k$: $A_K$ is connected. Together with steps 1 and 2, this is exactly the proper, smooth, connected group-scheme definition of an abelian variety over $K$.",
+   "uses": [
+    "def-sc-abelian-variety",
+    "def-sc-group-scheme",
+    "lem-sbc-connected-rational-point-geometrically-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KV (lemma-geometrically-connected-if-connected-and-point), rational-point clause; groupoids.tex Tag 0BFB."
+   }
+  },
+  {
+   "text": "Properness includes finite type, so $A$ is locally of finite type over $k$. Since $A$ is nonempty, [lem-pc-dim-base-change-affine-covers] supplies matching affine open covers $U_i\\cong\\operatorname{Spec}R_i$ of $A$ and $V_i\\cong\\operatorname{Spec}(R_i\\otimes_kK)$ of $A_K$, with every $R_i$ a finite type $k$-algebra. It also supplies nonemptiness of $A_K$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-pc-dim-base-change-affine-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product), 01JQ (lemma-fibre-product-affines); morphisms.tex Tag 01T0, finite-type affine charts."
+   }
+  },
+  {
+   "text": "The affine assertion of [lem-pc-dim-base-change] applies separately to each $R_i$ and gives $\\dim(R_i\\otimes_kK)=\\dim R_i$. Apply [lem-pc-dimension-affine-open-cover] to both nonempty schemes and their covers from step 4. Thus $\\dim A_K=\\sup_i\\dim(R_i\\otimes_kK)=\\sup_i\\dim R_i=\\dim A$. This computes the supremum of local-ring dimensions used by [def-pc-dimension], without identifying it with the dimension of a local ring at a chosen point.",
+   "uses": [
+    "lem-pc-dim-base-change",
+    "lem-pc-dimension-affine-open-cover",
+    "def-pc-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P3 (lemma-dimension-preserved-field-extension); properties.tex Tag 04MU (lemma-dimension)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-pc-base-change",
+  "def-sc-abelian-variety",
+  "lem-pc-proper-base-change",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "def-weil-proper-morphism",
+  "lem-pc-dim-base-change-affine-covers",
+  "lem-pc-dim-base-change",
+  "lem-pc-dimension-affine-open-cover",
+  "def-pc-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0BFB omits the proof; group operations are checked by the universal property, proper/smooth base change by 01W4/01VB, connectedness by 04KV, and dimension by matching affine covers, 00P3 and 04MU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsAbelianVariety|[Aa]belian[Vv]ariety|abelian variety",
+   "results": "0 hits; ; Mathlib subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme base-change lemmas cover individual properties, not the abelian-variety theorem including geometric connectedness and dimension; Weierstrass equations are different objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian variety remains proper smooth connected and of the same dimension after extending the ground field",
+   "results": "8 hits; Algebra.Smooth.baseChange, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, Algebra.Unramified.baseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme base-change lemmas cover individual properties, not the abelian-variety theorem including geometric connectedness and dimension; Weierstrass equations are different objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAbelianVariety\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme base-change lemmas cover individual properties, not the abelian-variety theorem including geometric connectedness and dimension; Weierstrass equations are different objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of a proper smooth connected group scheme with identity section is connected and preserves its dimension",
+   "results": "8 hits; AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.Smooth.isStableUnderBaseChange, RingHom.isStandardSmooth_isStableUnderBaseChange, RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, Algebra.IsStandardSmoothOfRelativeDimension.baseChange, AlgebraicGeometry.IsSmoothOfRelativeDimension",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme base-change lemmas cover individual properties, not the abelian-variety theorem including geometric connectedness and dimension; Weierstrass equations are different objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The base change of an abelian variety along any field extension is an abelian variety of the same dimension",
+   "results": "8 hits; WeierstrassCurve.baseChange, WeierstrassCurve.Affine.Point.baseChange, WeierstrassCurve.Jacobian.Equation.baseChange, WeierstrassCurve.map_baseChange, WeierstrassCurve.Affine.Point.map_baseChange, WeierstrassCurve.Jacobian.baseChange_nonsingular, WeierstrassCurve.VariableChange.baseChange, WeierstrassCurve.Projective.Equation.baseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: the scheme base-change lemmas cover individual properties, not the abelian-variety theorem including geometric connectedness and dimension; Weierstrass equations are different objects"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAbelianVariety|[Aa]belian[Vv]ariety|abelian variety",
+   "results": "0 hits; ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: no abelian-variety theorem in Mathlib; hits concern individual base-change properties or Weierstrass curves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian variety remains an abelian variety of the same dimension under extension of its ground field",
+   "results": "8 hits; Subfield.expChar, IsAbelianGalois.tower_top, Algebra.Unramified.baseChange, IsAbelianGalois, Algebra.isInvariant_of_isGalois', IsAbelianGalois.tower_bot, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: no abelian-variety theorem in Mathlib; hits concern individual base-change properties or Weierstrass curves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAbelianVariety\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no abelian-variety theorem in Mathlib; hits concern individual base-change properties or Weierstrass curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The base change of an abelian variety along a field extension is an abelian variety and has the same dimension",
+   "results": "8 hits; WeierstrassCurve.baseChange, WeierstrassCurve.Affine.Point.baseChange, WeierstrassCurve.Jacobian.Equation.baseChange, WeierstrassCurve.Affine.Point.map_baseChange, WeierstrassCurve.map_baseChange, WeierstrassCurve.VariableChange.baseChange, WeierstrassCurve.Jacobian.baseChange_equation, WeierstrassCurve.baseChange_integralModel_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: no abelian-variety theorem in Mathlib; hits concern individual base-change properties or Weierstrass curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper smooth connected group schemes with identity section stay connected after scalar extension and dimension is invariant",
+   "results": "8 hits; RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.isStandardSmooth_isStableUnderBaseChange, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.id, RingHom.Smooth.isStableUnderBaseChange, Algebra.IsStandardSmoothOfRelativeDimension.baseChange, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: no abelian-variety theorem in Mathlib; hits concern individual base-change properties or Weierstrass curves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-tate-action-saturation",
+  "date": "2026-10-23",
+  "group": "Q146"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Remark 7.3, printed p.34; Proposition 10.5 and Lemma 10.6, printed p.45; Lemma 10.16, printed p.49 (over the original field k). Supporting input: Milne I Proposition 10.5: extension to the algebraic closure before the rank calculation.",
+   "via": [
+    "lem-sfb-abelian-tate-action-saturation",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-field-extension",
+  "worker": "stage1",
+  "summary": "Split with no new nodes. Proper/smooth base change, the connected rational-point criterion, matching affine covers, the existing affine dimension theorem, and the affine-cover dimension formula supply every non-elementary ingredient. The group identities are checked functorially. The statement and all inherited fields are retained. Mathlib search found only ingredients or Weierstrass-curve results, not the full item.",
+  "blueprint": "The inherited from.place traces the auxiliary scalar-extension input in the abelian Tate-action saturation/rank argument, descending from det-thm-sf-ctf-stability-direct-images (3). Steps 1-3 establish preservation of abelian varieties and steps 4-5 preserve the dimension used in that rank calculation. The latest blueprint direct-image proof was read; no replacement of its unit route is made. The ancestor tool reports null, retained as imported.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic preservation of properness and smoothness under the field base change; no abelian-specific result in the unit supplies this."
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Generic connected rational-point criterion applied to the identity section; supplies connectedness after arbitrary field extension."
+   },
+   {
+    "node": "lem-pc-dim-base-change-affine-covers",
+    "why": "Generic scalar-extension affine covers; supplies the finite-type coordinate rings used in the dimension calculation."
+   },
+   {
+    "node": "lem-pc-dim-base-change",
+    "why": "Only its affine finite-type algebra clause is used, not its curve clause; supplies equality of the dimensions of matching chart rings."
+   },
+   {
+    "node": "lem-pc-dimension-affine-open-cover",
+    "why": "Generic dimension formula in the exact local-ring convention of the item; assembles equal chart dimensions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-pc-dim-base-change-affine-covers",
+  "lem-pc-dim-base-change",
+  "lem-pc-dimension-affine-open-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-47091d06d",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-47091d06d (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full; the delivery adds no new nodes, the statement is unchanged and there is no re-split note. Step 1 checks the group identities via functor of points and the induced section; this is elementary and correct. Step 2 uses lem-pc-proper-base-change (1)+(2), which needs no condition on the base change map. Step 3 uses lem-sbc-connected-rational-point-geometrically-connected with s=e; its source, 04KV varieties.tex:1082, is the 'In particular' clause. Step 4: proper includes finite type, so lem-pc-dim-base-change-affine-covers gives matching covers with finite type rings A_i and Y nonempty. Step 5 uses the affine clause of lem-pc-dim-base-change together with lem-pc-dimension-affine-open-cover on both schemes, in the local-ring convention of def-pc-dimension; empty charts give -inf on both sides. 0BFB (groupoids.tex:1620, proof omitted) still holds under the project's connected+rational-point definition. Edge cases K=k, A=Spec k and inseparable or transcendental K are fine. proof_deps equal the union of the step citations, there is no cycle and no SGA, and the tags were checked against tags/tags. The rg -L search found no duplicate (isogeny-facts and mult-n-finite-kernel are unrelated). The five tool_uses are all generic and accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.FieldExtension",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.fieldExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/FieldExtension.lean",
+  "statement": "theorem IsAbelianVariety.fieldExtension {k K : Type u} [Field k] [Field K] [Algebra k K] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] : IsAbelianVariety (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).mapGrp.obj (Grp.mk A)).X) ∧ (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).mapGrp.obj (Grp.mk A)).X).left.dim = A.left.dim",
+  "branch": "sheaf-dag",
+  "by": "Q97",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30858359e",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: arbitrary field k and extension K/k (Algebra k K), A an abelian variety over k ([GrpObj A] [IsAbelianVariety A]), A_K with group operations given canonically by (Over.pullback g).mapGrp.obj (Grp.mk A), conclusion IsAbelianVariety of A_K and Scheme.dim equality (the recorded supremum of local-ring dimensions). Checked against the source places groupoids.tex:1620 (0BFB) and morphisms.tex:5425 (02FY). Statement field verbatim; node unchanged apart from lean; no parallel delivery. Edge cases K=k, A=Spec k, inseparable or transcendental K, any characteristic covered; empty scheme excluded by the node's own hypotheses; shared universe u is the standard Spec convention. Existing IsAbelianVariety.pullback lacks the dimension clause, so a new theorem is correct; advisory: stage 3 can close the first conjunct with it. No definitions, sorry only, docstrings carry source place, blueprint tag and proof steps 1-5, imports supply the cited proof deps, report has both required sections. No compile run because no file changed; the worker reports compile and dry run OK."
+ }
+}

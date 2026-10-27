@@ -1,0 +1,415 @@
+{
+ "id": "lem-trf-degree-filtration-rank-asymptotic",
+ "kind": "statement",
+ "title": "Degree-filtration growth of a polynomial normalization",
+ "statement": "Let $F$ be any field [def-weil-field], $n\\ge1$, $A=F[X_1,\\ldots,X_n]$ [def-weil-pbc-mv-polynomial-ring], and $Q=\\operatorname{Frac}(A)$. Define $|0|_t=0$ and $|f/g|_t=\\exp(\\deg f-\\deg g)$ for nonzero polynomials, where $\\deg$ is total degree. Let $M$ be a nonzero commutative finite-dimensional reduced $Q$-algebra: reduced means that it has no nonzero nilpotent. For $z\\in M$ its minimal polynomial is the monic polynomial of least degree annihilating $z$. If it is $Z^r+\\sum_{i=1}^r a_iZ^{r-i}$, put $s_t(z)=\\max_i |a_i|_t^{1/i}$. Let $B$ be the integral closure of $A$ in $M$ [def-weil-pbc-integral-closure], and set $B(\\nu)=\\{z\\in B:s_t(z)\\le\\exp(\\nu)\\}$ for $\\nu\\in\\mathbf N$. These are finite-dimensional $F$-linear spaces, and $$\\dim_Q M=n!\\lim_{\\nu\\to\\infty}\\nu^{-n}\\dim_F B(\\nu).$$ The limit is along positive integers. No separability or assumption that $M$ is a field is required.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Lemma 5.3.3/4 and its proof, printed pp.216–218 (scan PDF pp.222–224). Primary scan read online 2026-10-24; local archival copy WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finite-dim-algebra-artinian] to $M$ over $Q$, then [lem-sfb-reduced-artinian-residue-product] to its reduced underlying ring. Thus $M\\cong\\prod_{j\\in I}L_j$, with $I$ finite and nonempty and each $L_j$ a field quotient of $M$. Give these quotients their induced $Q$-algebra structures. Each quotient is spanned by the images of a finite $Q$-basis of $M$, so $L_j/Q$ is finite; the structural map is injective because it is unital between fields. The ring isomorphism is $Q$-linear, since its coordinates are precisely the quotient maps. Write $B_j$ for the integral closure of $A$ in $L_j$.",
+   "uses": [
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-sfb-reduced-artinian-residue-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proof of Lemma 5.3.3/4, printed p.217, first paragraph; Stacks Tags 00J6 (lemma-finite-dimensional-algebra), 00J7 and 00JB (lemma-artinian-finite-length)."
+   }
+  },
+  {
+   "text": "By [lem-trf-degree-valuation-orthogonal-basis], $|\\cdot|_t$ is a well-defined multiplicative nonarchimedean real absolute value on $Q$, so the spectral-norm statements below apply over $(Q,|\\cdot|_t)$. The product isomorphism carries $B$ onto $\\prod_j B_j$. One inclusion follows by applying a coordinate map to a monic annihilating polynomial. Conversely, if each $z_j$ is annihilated by a monic $p_j\\in A[Z]$, then the monic polynomial $\\prod_jp_j$ annihilates the tuple, since in coordinate $j$ one factor is zero. By [lem-trf-product-minpoly-spectral-maximum], $s_t((z_j))=\\max_j s_{t,j}(z_j)$: minimal polynomials are preserved by the $Q$-algebra isomorphism, since exactly the same polynomials annihilate corresponding elements. Consequently $B(\\nu)\\cong\\prod_jB_j(\\nu)$. The field spectral norms satisfy the ultrametric inequality and $F$-homogeneity by [lem-trf-incomplete-spectral-algebra-norm], since every nonzero constant has total-degree norm $1$. Hence each $B_j(\\nu)$, and therefore $B(\\nu)$, is an $F$-linear subspace. It remains to prove the field case and sum its limits.",
+   "uses": [
+    "lem-trf-product-minpoly-spectral-maximum",
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "def-weil-pbc-integral-closure",
+    "lem-trf-degree-valuation-orthogonal-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proof of Lemma 5.3.3/4, printed p.217, product reduction."
+   }
+  },
+  {
+   "text": "Fix a field factor $L/Q$, put $r=[L:Q]$, let $D$ be the integral closure of $A$ in $L$, and write $D(\\nu)=\\{z\\in D:s(z)\\le e^\\nu\\}$. Choose a $Q$-basis $v_1,\\ldots,v_r$. For each $v_i$, write a monic equation $v_i^{d_i}+\\sum_{h=1}^{d_i}c_{ih}v_i^{d_i-h}=0$ over $Q$. Choose $0\\ne q_i\\in A$ divisible by the denominators of all $c_{ih}$. Multiplying by $q_i^{d_i}$ gives a monic equation for $a_i=q_iv_i$ whose coefficients $q_i^h c_{ih}$ lie in $A$. Thus $a_i\\in D$ by [def-weil-pbc-integral-closure]; they still form a $Q$-basis. Choose $v_0\\in\\mathbf N$ such that $s(a_i)\\le e^{v_0}$ for all $i$, possible because this is a finite family of real numbers.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proof of Lemma 5.3.3/4, printed p.217, integral basis and constant before inequality (1); denominator-clearing written explicitly."
+   }
+  },
+  {
+   "text": "For $m\\ge0$ let $V_m\\subset A$ be the polynomials of total degree at most $m$, and let $N(m)$ be the number of monomials $X^\\alpha$ with $|\\alpha|\\le m$. The polynomial definition [def-weil-pbc-mv-polynomial-ring] makes these monomials an $F$-basis of $V_m$. For $\\nu\\ge v_0$, the $F$-linear map $V_{\\nu-v_0}^{\\,r}\\to L$, $(f_i)\\mapsto\\sum_i f_ia_i$, is injective by $Q$-linear independence of the $a_i$. Its image lies in $D$, since $D$ is an $A$-subalgebra, and [lem-trf-incomplete-spectral-algebra-norm] gives $s(\\sum_i f_ia_i)\\le\\max_i |f_i|_t s(a_i)\\le e^{\\nu-v_0}e^{v_0}=e^\\nu$. Thus it lands in $D(\\nu)$ and gives the lower bound $rN(\\nu-v_0)\\le\\dim_F D(\\nu)$ once finiteness is established below.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proof of Lemma 5.3.3/4, printed p.217, inequality (1)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-field-integral-closure-finite] to the polynomial domain $A/F$, its fraction field $Q$, and $L/Q$. The finite-type hypothesis holds because the $n$ variables generate $A$ over $F$. It gives finite $A$-module generators $b_1,\\ldots,b_h$ of $D$, without a separability assumption. By [lem-trf-degree-valuation-orthogonal-basis], choose an orthogonal $Q$-basis $u_1,\\ldots,u_r$ of $L$. Write $b_\\ell=\\sum_i c_{i\\ell}u_i$ and choose one nonzero polynomial $q\\in A$ divisible by the denominators of the finitely many $c_{i\\ell}$. Set $m_i=u_i/q$. Then $b_\\ell=\\sum_i(qc_{i\\ell})m_i$, so $D\\subseteq\\sum_i A m_i$. This rescaled family is still orthogonal: for any $t_i\\in Q$, scalar homogeneity gives $s(\\sum_i t_im_i)=|q|_t^{-1}\\max_i|t_i|_ts(u_i)=\\max_i|t_i|_ts(m_i)$. Since all $s(m_i)>0$, choose $v_1\\in\\mathbf N$ with $e^{-v_1}\\le\\min_i s(m_i)$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-field-integral-closure-finite",
+    "lem-trf-degree-valuation-orthogonal-basis",
+    "lem-trf-incomplete-spectral-algebra-norm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proof of Lemma 5.3.3/4, printed pp.217–218, orthogonal basis containing the normalization; finite-normalization input also Stacks Tag 0335 (proposition-ubiquity-nagata)."
+   }
+  },
+  {
+   "text": "If $z\\in D(\\nu)$, the containment in step 5 gives unique $f_i\\in A$ with $z=\\sum_i f_im_i$. Orthogonality gives $|f_i|_t s(m_i)\\le s(z)\\le e^\\nu$. For $f_i\\ne0$, therefore, $e^{\\deg f_i}=|f_i|_t\\le e^{\\nu+v_1}$, so $\\deg f_i\\le\\nu+v_1$; zero coefficients already lie in $V_{\\nu+v_1}$. Thus the coordinate map injects $D(\\nu)$ into $V_{\\nu+v_1}^{\\,r}$. This proves finiteness for every $\\nu\\ge0$ and the bound $\\dim_FD(\\nu)\\le rN(\\nu+v_1)$. Together with step 4, for $\\nu\\ge v_0$ we have $$rN(\\nu-v_0)\\le\\dim_FD(\\nu)\\le rN(\\nu+v_1).$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proof of Lemma 5.3.3/4, printed p.218, inequality (2)."
+   }
+  },
+  {
+   "text": "For $m\\ge0$, the exponent tuples $(\\alpha_1,\\ldots,\\alpha_n)$ with sum at most $m$ correspond bijectively to strings of $m$ ones and $n$ zeros: put $\\alpha_i$ ones before the $i$th zero and put the remaining $m-\\sum_i\\alpha_i$ ones after the last zero. The inverse reads the block lengths, so $N(m)=\\binom{m+n}{n}=(m+1)\\cdots(m+n)/n!$. For a fixed integer $c$ and positive integers $\\nu$ sufficiently large that $\\nu+c\\ge0$, $$\\nu^{-n}N(\\nu+c)=\\frac1{n!}\\prod_{i=1}^n\\left(1+\\frac{c+i}{\\nu}\\right)\\longrightarrow\\frac1{n!}.$$ Each factor tends to $1$; multiplication of finitely many real limits gives the displayed limit. Apply this for $c=-v_0$ and $c=v_1$ to the inequalities in step 6. The squeeze theorem gives $\\lim_{\\nu\\to\\infty}\\nu^{-n}\\dim_FD(\\nu)=r/n!$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proof of Lemma 5.3.3/4, printed p.218, monomial count and inequality (3); the shifted-binomial limit is written as a finite product."
+   }
+  },
+  {
+   "text": "Apply the field-case conclusion separately to every $L_j$ from step 1. Step 2 gives a finite product of finite-dimensional $F$-spaces, so $\\dim_FB(\\nu)=\\sum_j\\dim_FB_j(\\nu)$ for every $\\nu\\ge0$. Similarly $\\dim_QM=\\sum_j[L_j:Q]$. Taking the limit of this finite sum yields $$n!\\lim_{\\nu\\to\\infty}\\nu^{-n}\\dim_FB(\\nu)=\\sum_j[L_j:Q]=\\dim_QM.$$ All limits are along positive integers. None of the field-case arguments assumed separability, so this also proves the final clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proof of Lemma 5.3.3/4, printed p.217, finite-sum reduction, and p.218, conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-sfb-reduced-artinian-residue-product",
+  "lem-trf-product-minpoly-spectral-maximum",
+  "lem-trf-incomplete-spectral-algebra-norm",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-finite-type-field-integral-closure-finite",
+  "lem-trf-degree-valuation-orthogonal-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proof of Lemma 5.3.3/4, printed pp.217–218 (scan PDF pp.223–224), read directly from the primary scan; archival source absent from literature/, WANTED in report. Detailed denominator clearing, polynomial-coordinate bounds and limits written by N8 following that proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Dimension of a finite reduced algebra over F(X) equals n factorial times the asymptotic dimension of degree bounded elements in its integral closure over F[X]",
+   "results": {
+    "t": "2026-10-24T15:47:15Z",
+    "tool": "leanfinder",
+    "query": "Dimension of a finite reduced algebra over F(X) equals n factorial times the asymptotic dimension of degree bounded elements in its integral closure over F[X]",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsIntegralClosure.rank",
+     "NumberField.hermiteTheorem.rankOfDiscrBdd",
+     "finrank_quotient_span_eq_natDegree_norm",
+     "Algebra.IsAlgebraic.rank_fractionRing_polynomial",
+     "NumberField.hermiteTheorem.natDegree_le_rankOfDiscrBdd",
+     "Algebra.adjoin.powerBasis'_dim",
+     "Algebra.IsAlgebraic.rank_fractionRing_mvPolynomial",
+     "PowerBasis.ofGenMemAdjoin'_dim"
+    ],
+    "digest": "22735c7a3cecc08c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsIntegralClosure.rank concerns module rank, not this total-degree spectral filtration or its growth; integralNormalization is an operation on a polynomial, not normalization of an algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"finrank\"",
+   "results": {
+    "t": "2026-10-24T15:47:15Z",
+    "tool": "loogle",
+    "query": "\"integralClosure\", \"finrank\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsIntegralClosure.rank concerns module rank, not this total-degree spectral filtration or its growth; integralNormalization is an operation on a polynomial, not normalization of an algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure.*(asymptotic|degree)|spectral.*totalDegree",
+   "results": {
+    "t": "2026-10-24T15:47:16Z",
+    "tool": "grep",
+    "query": "integralClosure.*(asymptotic|degree)|spectral.*totalDegree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsIntegralClosure.rank concerns module rank, not this total-degree spectral filtration or its growth; integralNormalization is an operation on a polynomial, not normalization of an algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension of a finite reduced algebra over F(X) equals n factorial times the asymptotic dimension of degree bounded elements in its integral closure over F[X]",
+   "results": {
+    "t": "2026-10-24T15:47:16Z",
+    "tool": "leansearch",
+    "query": "Dimension of a finite reduced algebra over F(X) equals n factorial times the asymptotic dimension of degree bounded elements in its integral closure over F[X]",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FunctionField.ringOfIntegers",
+     "completeIntegralClosure",
+     "FiniteDimensional.finiteDimensional_subalgebra",
+     "IntermediateField.adjoin.finiteDimensional",
+     "Algebra.adjoin.powerBasis'_dim",
+     "PowerBasis.ofGenMemAdjoin'_dim",
+     "IsAdjoinRootMonic.powerBasis_dim",
+     "IntermediateField.adjoin.powerBasis_dim"
+    ],
+    "digest": "5f5d9b70b4ec8324"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsIntegralClosure.rank concerns module rank, not this total-degree spectral filtration or its growth; integralNormalization is an operation on a polynomial, not normalization of an algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert growth of normalization of a polynomial ring measured by the total degree spectral valuation",
+   "results": {
+    "t": "2026-10-24T15:52:05Z",
+    "tool": "leanfinder",
+    "query": "Hilbert growth of normalization of a polynomial ring measured by the total degree spectral valuation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Polynomial.gaussNorm",
+     "spectralValueTerms",
+     "Polynomial.integralNormalization_degree",
+     "Polynomial.degree_integralNormalization",
+     "Polynomial.gaussNorm_intAdicAbv_le_one",
+     "Polynomial.natDegree_integralNormalization",
+     "Polynomial.instNormalizationMonoid",
+     "FunctionField.inftyValuation.polynomial"
+    ],
+    "digest": "089ffa9b10682d22"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: IsIntegralClosure.rank concerns module rank, not this total-degree spectral filtration or its growth; integralNormalization is an operation on a polynomial, not normalization of an algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension growth of the integral closure of a multivariable polynomial ring under the total degree spectral norm equals its generic rank divided by factorial",
+   "results": {
+    "t": "2026-10-24T16:27:03Z",
+    "tool": "leanfinder",
+    "query": "Dimension growth of the integral closure of a multivariable polynomial ring under the total degree spectral norm equals its generic rank divided by factorial",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ChevalleyThm.MvPolynomialC.degBound",
+     "ChevalleyThm.MvPolynomialC.numBound",
+     "ChevalleyThm.MvPolynomialC.numBound_succ",
+     "ChevalleyThm.MvPolynomialC.degBound_succ",
+     "IsIntegralClosure.rank",
+     "MvPolynomial.rank_R",
+     "Algebra.IsAlgebraic.rank_fractionRing_mvPolynomial",
+     "MvPolynomial.finrank_R"
+    ],
+    "digest": "2e959ca9eeb149c3"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: module rank and Hilbert polynomials do not identify the total-degree spectral filtration on a normalization. Polynomial.integralNormalization normalizes one polynomial, not the integral closure of an algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"finrank\"",
+   "results": {
+    "t": "2026-10-24T16:27:04Z",
+    "tool": "loogle",
+    "query": "\"integralClosure\", \"finrank\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: module rank and Hilbert polynomials do not identify the total-degree spectral filtration on a normalization. Polynomial.integralNormalization normalizes one polynomial, not the integral closure of an algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure.*(asymptotic|degree)|spectral.*totalDegree",
+   "results": {
+    "t": "2026-10-24T16:27:04Z",
+    "tool": "grep",
+    "query": "integralClosure.*(asymptotic|degree)|spectral.*totalDegree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: module rank and Hilbert polynomials do not identify the total-degree spectral filtration on a normalization. Polynomial.integralNormalization normalizes one polynomial, not the integral closure of an algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert growth of integral closure under total degree spectral filtration",
+   "results": {
+    "t": "2026-10-24T16:27:04Z",
+    "tool": "leansearch",
+    "query": "Hilbert growth of integral closure under total degree spectral filtration",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "integralClosure.isIntegralClosure",
+     "integralClosure",
+     "IsIntegralClosure.of_isIntegrallyClosed",
+     "completeIntegralClosure",
+     "Ring.instIsIntegrallyClosedNormalClosure",
+     "instIsIntegrallyClosedInSubtypeMemSubringToSubringIntegralClosure",
+     "Ring.NormalClosure",
+     "IsIntegrallyClosed.instIsIntegralClosure"
+    ],
+    "digest": "bb0b762beb46267d"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: module rank and Hilbert polynomials do not identify the total-degree spectral filtration on a normalization. Polynomial.integralNormalization normalizes one polynomial, not the integral closure of an algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral normalization polynomial ring Hilbert filtration dimension has leading coefficient rank over n factorial",
+   "results": {
+    "t": "2026-10-24T16:29:46Z",
+    "tool": "leanfinder",
+    "query": "Integral normalization polynomial ring Hilbert filtration dimension has leading coefficient rank over n factorial",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Polynomial.hilbertPoly",
+     "Polynomial.integralNormalization_degree",
+     "Polynomial.degree_integralNormalization",
+     "Polynomial.natDegree_integralNormalization",
+     "Polynomial.hilbertPoly_X_pow_succ",
+     "Polynomial.natDegree_hilbertPoly_of_ne_zero",
+     "Polynomial.natDegree_preHilbertPoly",
+     "Polynomial.ringKrullDim_le"
+    ],
+    "digest": "2884a4a42472191b"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: module rank and Hilbert polynomials do not identify the total-degree spectral filtration on a normalization. Polynomial.integralNormalization normalizes one polynomial, not the integral closure of an algebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-gauss-rational-function-stability",
+  "date": "2026-10-24",
+  "group": "Q58"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Sections 5.3.3–5.3.4, especially Proposition 5.3.3/3 and the conclusion of Section 5.3.4, printed pp.215 and 218–220 (scan PDF pp.221 and 224–226); Section 5.3.4 removes the divisible-value-group restriction. Supporting input for the present split: Lemma 5.3.3/4 and its proof, printed pp.216–218 (scan PDF pp.222–224).",
+   "via": [
+    "lem-trf-gauss-rational-function-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-degree-filtration-rank-asymptotic",
+  "worker": "stage1",
+  "summary": "Read BGR 5.3.3/4 and its full proof. Kept the statement unchanged. Reused reduced Artinian decomposition, incomplete spectral norm axioms and arbitrary finite-extension normalization. Added exactly two statement-only inputs: total-degree orthogonal bases and finite-product minimal-polynomial spectral maximum. Wrote both polynomial dimension bounds, denominator clearings, monomial count, shifted-binomial limit and finite-sum assembly explicitly.",
+  "blueprint": "Latest blueprint lem-trf-local-term-locality and sk-i-curve-zero read: the inherited analytic branch is historical auxiliary support only. These steps realize BGR Lemma 5.3.3/4 underneath the historical normalization chain recorded in blueprint.from; they do not replace any contracting-correspondence unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-field-integral-closure-finite",
+    "why": "Generic algebraic finite-normalization theorem applied to the polynomial domain and one finite field extension; no node of sk-i-curve-zero gives this commutative algebra input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-field-integral-closure-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N8-a07f27184",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-a07f27184 (reviewer sub-agent of L); spot-checked: Read all eight steps of the item, both new nodes and every cited statement. The mathematics is correct and the item statement is unchanged; I repaired one citation. BGR itself is not in literature/ (the report marks it WANTED) and the network is blocked for this reviewer, so I could not compare against the source text. I checked the mathematics independently instead. Steps: 1 (finite-dim => Artinian, reduced Artinian => finite product of fields, index set nonempty because M is nonzero), 2 (B is the product of the B_j via the product of monic annihilators, s_t is the max of the coordinates via the product node, B(nu) is F-linear by the ultrametric inequality and |c|_t=1), 3 (denominator clearing), 4 (injective lower bound using Q-homogeneity), 5 (finite normalization tool use; rescaling the orthogonal basis by 1/q keeps it orthogonal, checked), 6 (degree bound deg f_i <= nu+v_1), 7 (stars and bars and the product limit, checked), 8 (finite sum). Small cases: M=Q gives 1, Q x Q gives 2, inseparable t^p=X gives p. lem-trf-degree-valuation-orthogonal-basis is stability of (F(X),|.|_t); it is true because the total-degree valuation is the discrete valuation of the hyperplane at infinity, whose local ring is Japanese. It is not a duplicate: the existing stability nodes are Gauss-valued, complete-base or transfer criteria. lem-trf-product-minpoly-spectral-maximum is true because the minimal polynomial is the lcm and the spectral value is the max of the root absolute values. It is not a duplicate of tate-root-spectral-formula or weak-spectral-completion-product. Both new nodes are statement only with five searches each. I accept the declared tool_use of the finite-type normalization node. FIX: step 2 applied the spectral-norm nodes without citing anything for |.|_t being an absolute value; I added a sentence citing lem-trf-degree-valuation-orthogonal-basis and added that id to the step's uses.; 1 file(s) fixed by the reviewer"
+ }
+}

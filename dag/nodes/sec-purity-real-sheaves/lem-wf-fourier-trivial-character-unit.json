@@ -1,0 +1,127 @@
+{
+ "kind": "statement",
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-i-real-boundary",
+ "status": "split",
+ "merged_into": null,
+ "mathlib_match": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonStageCurveWeilMiddleExtension",
+  "date": "2026-10-26",
+  "group": "J6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The Artin Schreier sheaf for the trivial character is the tensor unit, and tensoring with its shift is the shift functor",
+   "results": "8 hits: shiftFunctorZero, Sheaf.tensorUnit_isSheaf, HasShift.Induced.zero, shiftFunctorZero', MonoidalCategory.tensorUnitLeft, Sheaf.cartesianMonoidalCategory, AddChar.mulShift_unit_eq_one_iff, DifferentialObject.shiftZero. None supplies the completed common-stage comparison.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor with the tensor unit shifted by one is naturally isomorphic to the shift functor in a monoidal derived category",
+   "results": "8 hits, including HomologicalComplex.rightUnitor and rightUnitor' and DerivedCategory.instCommShiftCochainComplexIntQ. These give cochain or localization ingredients, not the completed common-stage statement.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "artinSchreierSheaf|rightUnitorNatIso|mapBifunctorShift₂Iso",
+   "results": "20 hits, including Mathlib/Algebra/Homology/BifunctorShift.lean:156 mapBifunctorShift₂Iso and Mathlib/CategoryTheory/Monoidal/Category.lean:863 rightUnitorNatIso. No completed adic Artin--Schreier or common-stage shifted-unit comparison.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "id": "lem-wf-fourier-trivial-character-unit",
+ "title": "The completed trivial-character Fourier line is the common-stage unit",
+ "statement": "Let F be a Fourier setting [def-fourier-set]: finite-field characteristic p, coefficient prime l different from p, a chosen algebraic closure Omega of Q_l and a finite coefficient stage containing the pth roots of unity. Let X be a Noetherian scheme of characteristic p on global functions, with l invertible in every residue field. Form the degree-zero completed Artin--Schreier object for the trivial prime-field character and zero function by [def-fd-adic-fourier-realization], rationalize at the Fourier coefficient stage and regard it as an actual common-stage pair [def-weil-algebraically-closed-coefficients]. This pair is isomorphic to the specified common-stage coefficient unit of [lem-pur-derived-pullback-tensor-iso]. No shift, geometric pullback, tensor functor or Weil structure is asserted here.",
+ "stmt_deps": [
+  "def-fourier-set",
+  "def-fd-adic-fourier-realization",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof": [
+  {
+   "text": "The integral lift of the trivial character is trivial: the coefficient embedding is injective and its values are prescribed by fourierIntegralCharacter_existsUnique. The prime-field realization is artinSchreierSheafOf over the lifted prime field. Apply the existing trivial-character isomorphism nonempty_iso_artinSchreierSheafOf_one from [lem-fd-as-characters]; it identifies the invariant summand with constant regular sections.",
+   "uses": [
+    "lem-fd-as-characters",
+    "def-fd-adic-fourier-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Comparison inverse image and the fixed-ring/constant-ring module equivalence take this regular sheaf to the constant regular pro-etale module. Completed scalar extension takes it to the completed ring acting on itself: multiplication is the forward map and m mapped to 1 tensor m is the inverse, with the scalar balancing relation giving both inverse identities. Apply the degree-zero single functor. The quotient projections give exactly the coherent ring-unit system. The reduction/limit adjunction and completeness identify the completed regular module with the prescribed reconstructed integral unit of [lem-pur-derived-pullback-tensor-iso].",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-fd-adic-fourier-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rationalize the integral isomorphism at the Fourier coefficient stage. The least finite coefficient field lies in that stage. The common-unit scalar comparison pullbackTensorCommonUnitStage identifies the transition of the least-stage unit with the unit there; compose with the pair-category isomorphism to a larger stage, in the appropriate direction. This yields the displayed common-stage isomorphism and also applies to the empty scheme.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fd-as-characters",
+  "def-fd-adic-fourier-realization",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-characters.md",
+  "place": "Trivial summand clause L_0=1; completed realization via Bhatt--Scholze Lemma 6.8.2(1) and the unit construction of lem-pur-derived-pullback-tensor-iso."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-characters.md",
+  "place": "Trivial summand clause L_0=1; completed realization via Bhatt--Scholze Lemma 6.8.2(1) and the unit construction of lem-pur-derived-pullback-tensor-iso."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-middle-extension",
+   "place": "The cohomological-shift convention, applied to the explicit arithmetic constant line: identify the unshifted trivial-character projector with the coefficient unit before applying pullback or shift.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FourierTrivialCharacterUnit",
+  "file": "lean/Sheaf/Paper/FourierTrivialCharacterUnit.lean",
+  "declaration": "WeilConjectures.fourierTrivialCharacter_unit",
+  "statement": "theorem fourierTrivialCharacter_unit (F : FourierSetting.{u}) (X : Scheme.{u})\n    [IsNoetherian X] [CharP Γ(X, ⊤) F.field.p]\n    [∀ x : X, Invertible (F.coefficients.l : X.residueField x)] :\n    Nonempty ((⟨fourierCoefficientStage F,\n      (sfRationalConstructibleLocalization F.coefficients.l (fourierCoefficient F) X).obj\n        ⟨fourierAdicArtinSchreier F X 1 0, fourierAdicArtinSchreier_mem F X 1 0⟩⟩ :\n          generalAlgebraicallyClosedConstructibleCategory F.coefficients.l F.coefficients.Qbar X)\n      ≅ pullbackTensorCommonUnit F.coefficients.l F.coefficients.Qbar X)",
+  "branch": "sheaf-dag",
+  "by": "J6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261025T202304-L-2702660",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261025T202304-L-2702660",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

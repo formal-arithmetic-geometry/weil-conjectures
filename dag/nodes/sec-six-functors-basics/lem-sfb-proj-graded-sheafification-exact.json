@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-proj-graded-sheafification-exact",
+ "kind": "statement",
+ "title": "Exactness of associated graded-module sheaves on Proj",
+ "statement": "Let $S=\\bigoplus_{a\\geq0}S_a$ be a nonnegatively graded commutative ring and let $X=\\operatorname{Proj}(S)$ [def-pc-proj]. Let $M_j=\\bigoplus_{b\\in\\mathbf Z}(M_j)_b$, for $j=0,1,2$, be graded $S$-modules, with $S_a(M_j)_b\\subseteq(M_j)_{a+b}$. Suppose $u:M_0\\to M_1$ and $v:M_1\\to M_2$ are degree-preserving $S$-linear maps and $0\\to M_0\\xrightarrow{u}M_1\\xrightarrow{v}M_2\\to0$ is exact as a sequence of $S$-modules. Then the associated module sheaves [def-weil-pbc-proj-twisting-sheaf] and the induced sheaf morphisms [lem-sc-p1-proj-tilde-functorial] form a short exact sequence of $\\mathcal O_X$-modules: $0\\to\\widetilde M_0\\xrightarrow{\\widetilde u}\\widetilde M_1\\xrightarrow{\\widetilde v}\\widetilde M_2\\to0$. No generation-in-degree-one, Noetherian, or field hypothesis on $S$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01M7, label lemma-proj-sheaves, final assertion: the associated sheaf functor on graded modules is exact."
+ },
+ "stmt_deps": [
+  "def-pc-proj",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-sc-p1-proj-tilde-functorial"
+ ],
+ "proof": [
+  {
+   "text": "Let $B$ consist of all $D_+(f)$ with $f$ homogeneous of positive degree. By [lem-weil-pbc-proj-standard-open-inclusion] (0), $B$ is a basis of $X$. By [def-weil-pbc-proj-twisting-sheaf] (1), the sections of $\\widetilde M_j$ on $D_+(f)$ are $(M_j)_{(f)}$, the fractions $m/f^r$ with $m\\in(M_j)_{r\\deg f}$. By [lem-sc-p1-proj-tilde-functorial], the maps on these sections are $u_{(f)}(m/f^r)=u(m)/f^r$ and $v_{(f)}(m/f^r)=v(m)/f^r$. Thus the chart maps to be tested are precisely the degree-zero localized maps of the given graded maps.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-sc-p1-proj-tilde-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M7, label lemma-proj-sheaves (2),(3) and functoriality; Section 01M3, label section-proj, standard-open basis; Tag 01M4, label lemma-standard-open."
+   }
+  },
+  {
+   "text": "Extend the grading of $S$ to $\\mathbf Z$ by $S_a=0$ for $a<0$. This is a direct-sum grading of the same ring, and it acts on each $M_j$ with the required degree rule: negative-degree scalars are zero and the nonnegative-degree rule is a hypothesis. Fix a homogeneous $f$ of positive degree. Apply [lem-sc-graded-localization-exact] with $A=S$ and $s=f$ to each of the exact triples $0\\to M_0\\xrightarrow{u}M_1$, $M_0\\xrightarrow{u}M_1\\xrightarrow{v}M_2$, and $M_1\\xrightarrow{v}M_2\\to0$. All maps, including the maps involving zero, preserve degree. The lemma gives exactness of their degree-zero localized triples, with the fraction maps of step 1. The localization of the zero module is zero, since every fraction has zero numerator. Consequently $u_{(f)}$ has zero kernel and hence is injective, $\\operatorname{im}u_{(f)}=\\ker v_{(f)}$, and $\\operatorname{im}v_{(f)}=\\ker((M_2)_{(f)}\\to0)=(M_2)_{(f)}$, so $v_{(f)}$ is surjective. These are exact sequences of $S_{(f)}$-modules and, on forgetting scalars, of additive abelian groups.",
+   "uses": [
+    "lem-sc-graded-localization-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CS, label proposition-localization-exact, and the homogeneous degree-zero restriction supplied by lem-sc-graded-localization-exact; applied to standard-open fractions in Constructions Tag 01M7, label lemma-proj-sheaves."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-p1-module-basis-exactness] to the scheme $X$, the basis $B$ of step 1, and the module-sheaf morphisms $\\widetilde u,\\widetilde v$. Despite its id, this lemma is stated for any scheme and any basis. Step 2 verifies all its hypotheses on every member of $B$: injectivity of the first section map, equality of its image with the kernel of the second, and surjectivity of the second. It follows that $\\widetilde v\\circ\\widetilde u=0$, $\\widetilde u$ is monic, $\\widetilde v$ is epic, and the resulting short complex is exact. This is the asserted short exact sequence of $\\mathcal O_X$-modules.",
+   "uses": [
+    "lem-sc-p1-module-basis-exactness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01AG, label lemma-abelian, and the preceding kernel/cokernel constructions in Section 01AF, label section-kernels. The basis criterion is the local-section version of this stalk criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-sc-p1-proj-tilde-functorial",
+  "lem-sc-graded-localization-exact",
+  "lem-sc-p1-module-basis-exactness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01M7, label lemma-proj-sheaves, exactness assertion: standard-chart variant of its localization-and-local-exactness proof, using the existing graded-localization and basis-exactness nodes rather than adding a homogeneous-prime localization lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(proj|graded|tilde).*(shortExact|exact)|(shortExact|exact).*(proj|graded|tilde)",
+   "results": "7 hits; inspected: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module localization exactness and general sheafification exist, but neither states exactness of the associated graded-module sheaf functor on Proj; the homogeneous degree-zero and sheaf comparisons are additional theorems"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFiniteLimits|PreservesFiniteColimits|ShortExact|exact|tilde",
+   "results": "24 hits; inspected: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module localization exactness and general sheafification exist, but neither states exactness of the associated graded-module sheaf functor on Proj; the homogeneous degree-zero and sheaf comparisons are additional theorems"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of a short exact sequence of graded modules on projective spectrum is short exact",
+   "results": "8 hits; inspected: PresheafOfModules.sheafify, PresheafOfModules.toSheafify, PresheafOfModules.sheafifyMap, CategoryTheory.GrothendieckTopology.isoSheafify, PresheafOfModules.sheafification, PresheafOfModules.toSheafify_app_apply', PresheafOfModules.sheafifyMap.congr_simp, PresheafOfModules.sheafification_map",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module localization exactness and general sheafification exist, but neither states exactness of the associated graded-module sheaf functor on Proj; the homogeneous degree-zero and sheaf comparisons are additional theorems"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"Exact\"",
+   "results": "12 hits; inspected: CategoryTheory.ShortComplex.Exact.liftFromProjective, CategoryTheory.ShortComplex.Exact.liftFromProjective_comp, CategoryTheory.ShortComplex.Exact.liftFromProjective_comp_assoc, CategoryTheory.ShortComplex.ShortExact.splittingOfProjective, ModuleCat.shortExact_projectiveShortComplex, CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₂, CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₁, CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₃_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module localization exactness and general sheafification exist, but neither states exactness of the associated graded-module sheaf functor on Proj; the homogeneous degree-zero and sheaf comparisons are additional theorems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a graded module at a homogeneous prime and taking degree zero is an exact functor",
+   "results": "8 hits; inspected: ModuleCat.localizedModule_functor_map_exact, AlgebraicGeometry.ProjectiveSpectrum.Proj.isLocalization_atPrime, LocalizedModule.map_exact, IsLocalizedModule.map_exact, HomogeneousLocalization.AtPrime, exact_of_isLocalized_span, exact_of_isLocalized_maximal, exact_of_localized_maximal",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module localization exactness and general sheafification exist, but neither states exactness of the associated graded-module sheaf functor on Proj; the homogeneous degree-zero and sheaf comparisons are additional theorems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated sheaf functor from integer graded modules over a nonnegatively graded commutative ring to modules on Proj is exact and preserves short exact sequences",
+   "results": "8 hits; inspected: instAbelianLightCondMod, ModuleCat.localizedModule_functor_map_exact, AlgebraicGeometry.Scheme.Modules.instAbelian, LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB4StarCondensedMod, instAbelianCondensedMod, Condensed.instAB4CondensedMod, SheafOfModules.instAbelian",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module localization exactness and general sheafification exist, but neither states exactness of the associated graded-module sheaf functor on Proj; the homogeneous degree-zero and sheaf comparisons are additional theorems"
+  },
+  {
+   "tool": "grep",
+   "query": "(graded|tilde|sheaf).*(exact|Exact)|(exact|Exact).*(graded|tilde|sheaf)",
+   "results": "5 hits in Mathlib/AlgebraicGeometry/ProjectiveSpectrum: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary localization exactness, structure sheaves of Proj, and general module-sheaf exactness do not state exactness of the associated sheaf functor for arbitrary graded modules on Proj"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exactness of sheaves associated to graded modules over a nonnegatively graded commutative ring on its projective spectrum",
+   "results": "8 hits: ProjectiveSpectrum, AlgebraicGeometry.Spec.structureSheaf, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.sectionInBasicOpen, AlgebraicGeometry.Proj, ProjectiveSpectrum.mk, AlgebraicGeometry.Proj.toSheafedSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary localization exactness, structure sheaves of Proj, and general module-sheaf exactness do not state exactness of the associated sheaf functor for arbitrary graded modules on Proj"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"Exact\"",
+   "results": "12 hits: CategoryTheory.ShortComplex.Exact.liftFromProjective, CategoryTheory.ShortComplex.Exact.liftFromProjective_comp, CategoryTheory.ShortComplex.Exact.liftFromProjective_comp_assoc, CategoryTheory.ShortComplex.ShortExact.splittingOfProjective, ModuleCat.shortExact_projectiveShortComplex, CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₂, CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₁, CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₃_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary localization exactness, structure sheaves of Proj, and general module-sheaf exactness do not state exactness of the associated sheaf functor for arbitrary graded modules on Proj"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated sheaf functor from graded modules to module sheaves on Proj preserves short exact sequences",
+   "results": "8 hits: ModuleCat.localizedModule_functor_map_exact, SheafOfModules.instAbelian, AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, Condensed.instAB4StarCondensedMod, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianCondensedMod",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary localization exactness, structure sheaves of Proj, and general module-sheaf exactness do not state exactness of the associated sheaf functor for arbitrary graded modules on Proj"
+  },
+  {
+   "tool": "grep",
+   "query": "map_exact|functor_map_exact",
+   "results": "0 hits in Mathlib/RingTheory/Localization: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary localization exactness, structure sheaves of Proj, and general module-sheaf exactness do not state exactness of the associated sheaf functor for arbitrary graded modules on Proj"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing an exact sequence of graded modules at a homogeneous element and taking degree zero preserves exactness",
+   "results": "8 hits: LocalizedModule.map_exact, IsLocalizedModule.map_exact, exact_of_isLocalized_span, exact_of_localized_span, ModuleCat.localizedModule_functor_map_exact, exact_of_localized_maximal, exact_of_isLocalized_maximal, Profinite.NobelingProof.succ_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary localization exactness, structure sheaves of Proj, and general module-sheaf exactness do not state exactness of the associated sheaf functor for arbitrary graded modules on Proj"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-plane-hypersurface-cohomology",
+  "date": "2026-10-22",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607, the cover C_i; explicit Fermat realization and genus computation from Stacks Tags 0BYA (curves-section-plane-curves) and 0BYD (curves-lemma-genus-plane-curve), literature/stacks-project/curves.tex. Local de Jong PDF WANTED; publisher PDF read.; Fermat geometric-fibre genus: the structure-sheaf cohomology calculation for a general plane hypersurface, Stacks 0BYD. In the Stacks 0BYD proof: applying the exact functor associated to a graded module, using Constructions 01M7.",
+   "via": [
+    "lem-sfb-plane-hypersurface-cohomology",
+    "lem-sfb-fermat-kummer-relative-curve",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-proj-graded-sheafification-exact",
+  "worker": "stage1",
+  "summary": "Proved exactness on positive homogeneous standard opens by extending the ring grading by zero in negative degrees and applying the existing general graded-localization exactness node to three exact triples, including zero at the endpoints. The existing general basis-sections criterion then gives short exactness of module sheaves. Statement unchanged; no new nodes, no attachment, no Mathlib match. Read each cited statement and checked its generality; the p1-named functoriality and basis lemmas are general, whereas the p1 sheafification theorem requires a field and two variables.",
+  "blueprint": "Inherited from.place identifies the plane-hypersurface cohomology calculation in Stacks 0BYD, specifically its application of the exact graded-module associated sheaf functor from Constructions 01M7. This split realizes that prerequisite. blueprint_refs ancestor returns null for this inherited non-blueprint chain; retained its existing ancestry unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-graded-localization-exact",
+    "why": "General algebraic exactness of degree-zero localization is a tool for standard-open sections; the item unit has no replacement for this algebraic fact."
+   },
+   {
+    "node": "lem-sc-p1-module-basis-exactness",
+    "why": "Its statement treats arbitrary schemes and bases and transfers the verified chart exactness to module sheaves; this generic local criterion does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proj-standard-open-inclusion",
+    "why": "Its clause (0) supplies the positive homogeneous standard-open basis for arbitrary Proj; it is a generic topology tool."
+   },
+   {
+    "node": "lem-sc-p1-proj-tilde-functorial",
+    "why": "Its statement gives the sectionwise fraction formula for induced sheaf morphisms over any graded ring, identifying the maps to which the algebra tool applies."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-graded-localization-exact",
+  "lem-sc-p1-module-basis-exactness",
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-sc-p1-proj-tilde-functorial"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-9873c5711",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-9873c5711 (reviewer sub-agent of L); spot-checked: Read the item, all 5 cited nodes and the source in full. The delivery adds 0 new nodes and leaves the statement and stmt_deps unchanged. Source: Stacks constructions.tex, Tag 01M7 (lemma-proj-sheaves); its final assertion is exactly the item, for N-graded S and Z-graded M with no finiteness or degree-one hypothesis. Stacks proves it on stalks; the delivery's standard-chart route is equivalent and correctly marked by=agent. Step 1: lem-weil-pbc-proj-standard-open-inclusion (0) gives the basis of positive-degree standard opens for any N-graded S. def-weil-pbc-proj-twisting-sheaf (1) gives sections M_(f) on D_+(f). lem-sc-p1-proj-tilde-functorial is general despite its id and gives the chart map formula. Step 2: extending the grading of S by zero in negative degrees meets the hypotheses of lem-sc-graded-localization-exact (Z-graded A, s of degree d>=0, same M_(s)). Applying it to the three triples with zero endpoints gives injective, exact and surjective chart maps. Step 3: lem-sc-p1-module-basis-exactness holds for any scheme and any basis and gives the short exact sequence of O_X-modules. Edge cases checked: empty Proj, nilpotent f, modules killed by S_+, variables of degree 2. Not a duplicate: lem-sc-p1-proj-sheafification-exact is only the special case of a field and two variables. The 4 generic tool_uses are accepted. No SGA source, no repair note for this item, not dropped. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjGradedSheafificationExact",
+  "declaration": "AlgebraicGeometry.Proj.graded_sheafification_shortExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjGradedSheafificationExact.lean",
+  "statement": "theorem graded_sheafification_shortExact {S : Type u} [CommRing S] (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜] (M : Fin 3 → Type u) [∀ j, AddCommGroup (M j)] [∀ j, Module S (M j)] (𝓜 : ∀ j, ℤ → AddSubgroup (M j)) (h𝓜 : ∀ j, DirectSum.IsInternal (𝓜 j)) (hsmul : ∀ (j : Fin 3) (n : ℕ) (z : ℤ) (a : S) (y : M j), a ∈ 𝒜 n → y ∈ 𝓜 j z → a • y ∈ 𝓜 j (n + z)) (F : Fin 3 → (Proj 𝒜).Modules) (alpha : ∀ (j : Fin 3) (f : S) (d : ℕ), 0 < d → f ∈ 𝒜 d → (F j).val.obj (op (basicOpen 𝒜 f)) →+ LocalizedModule.Away f (M j)) (halpha : ∀ (j : Fin 3) (f : S) (d : ℕ) (hd : 0 < d) (hf : f ∈ 𝒜 d), Function.Injective (alpha j f d hd hf) ∧ Set.range (alpha j f d hd hf) = degreeZeroFractions (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 j n : Set (M j))) (Submonoid.powers f)) (hscalar : ∀ (j : Fin 3) (f : S) (d : ℕ) (hd : 0 < d) (hf : f ∈ 𝒜 d) (r : HomogeneousLocalization.Away 𝒜 f) (s : (F j).val.obj (op (basicOpen 𝒜 f))), alpha j f d hd hf (awayToSection 𝒜 f r • s) = algebraMap (HomogeneousLocalization.Away 𝒜 f) (Localization.Away f) r • alpha j f d hd hf s) (hres : ∀ (j : Fin 3) (f g : S) (d b : ℕ) (hd : 0 < d) (hb : 0 < b) (hf : f ∈ 𝒜 d) (hg : g ∈ 𝒜 b) (inc : basicOpen 𝒜 g ≤ basicOpen 𝒜 f) (e k : ℕ) (a : S), 0 < e → a ∈ 𝒜 k → g ^ e = a * f → ∀ (m : ℕ) (y : M j) (s : (F j).val.obj (op (basicOpen 𝒜 f))), alpha j f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) → alpha j g b hb hg ((F j).val.map (homOfLE inc).op s) = mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g)) (phi : M 0 →ₗ[S] M 1) (psi : M 1 →ₗ[S] M 2) (hphi : ∀ (z : ℤ) (y : M 0), y ∈ 𝓜 0 z → phi y ∈ 𝓜 1 z) (hpsi : ∀ (z : ℤ) (y : M 1), y ∈ 𝓜 1 z → psi y ∈ 𝓜 2 z) (hinj : Function.Injective phi) (hexact : Function.Exact phi psi) (hsurj : Function.Surjective psi) (i : F 0 ⟶ F 1) (q : F 1 ⟶ F 2) (hi : ∀ (f : S) (d : ℕ) (hd : 0 < d) (hf : f ∈ 𝒜 d) (m : ℕ) (y : M 0) (s : (F 0).val.obj (op (basicOpen 𝒜 f))), alpha 0 f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) → alpha 1 f d hd hf (i.val.app (op (basicOpen 𝒜 f)) s) = mk (phi y) (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f)) (hq : ∀ (f : S) (d : ℕ) (hd : 0 < d) (hf : f ∈ 𝒜 d) (m : ℕ) (y : M 1) (s : (F 1).val.obj (op (basicOpen 𝒜 f))), alpha 1 f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) → alpha 2 f d hd hf (q.val.app (op (basicOpen 𝒜 f)) s) = mk (psi y) (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f)) : ∃ h : i ≫ q = 0, (ShortComplex.mk i q h).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed73fd34b",
+  "group": "NW",
+  "result": "pass",
+  "note": "Node differs from live only by the added lean record (repairs the H1/H2/H11 return of 8f11cc56); report has Worker report and Second reading by NW. graded_sheafification_shortExact matches the node and Stacks 01M7: N-graded CommRing with GradedRing 𝒜 and no field/Noetherian/degree-one hypothesis; Fin 3 Z-graded modules with hsmul; degree-preserving phi/psi with injective/exact/surjective; associated sheaves given by exactly the chart/scalar/restriction clauses of gradedModuleSheaf_exists (unique up to iso, not vacuous, same interface as tilde_functorial and the landed proj_sheafification_shortExact); i/q pinned by tilde_functorial's fraction formula; conclusion ∃ h, ShortExact (exact, mono, epi). Edge cases (empty Proj, nilpotent f, zero modules, negative degrees, weighted gradings) covered; shared universe u is forced by the recorded interfaces. Provable: general-ring version of the proved P^1 case via graded_localization_exact. Recorded lean statement verbatim; public imports are the stmt_dep modules, plain imports the three proof_dep modules; docstrings carry source and proof steps; sorry-only, no defs, max line 89. No compile (no FIX). Advisory: Twist.Modules public import is unused by the signature."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -131,7 +131,18 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-prop-nagata-sketch-approximation",
  "split_report": {
@@ -183,16 +194,24 @@
   "note": "headless review: I directed nonempty preorder in Type u; D affine-transition inverse system with limit c/hc; i0 with qcqs base; p,q locally fp+qc+qs (finite presentation); X_λ,Y_λ,X,Y = baseChangeDiagram/baseChangeCone; phi+limitOver = S-morphism; finite affine covers T_j, V_jk over T_j with Algebra.Presentation (finite generators+relations); W_jk = phi^-1(V_jk x S) compact; openSelected = nagataQCOpenDescent; U_jkl affine cover of descended ∩ preimage of T_j; generator lifts, relation stage, localMap fixed uniquely by localGenerators/localOver; F0, prime = directedFiniteUpperBound i0 d r F0; unionStage = nagataQCOpenEqualityStage(unionOpen, top) at base prime; overlapStage = nagataMorphismEqualityStage on overlap opens; stages = F0 ∪ {prime, unionStage} ∪ overlap stages, stage = u(F); glueMorphisms output bundled as Over-morphism at stage ≥ i0; no sorry in data; compile clean"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $X_{\\lambda_0},Y_{\\lambda_0}$ be of finite presentation over\n$S_{\\lambda_0}$, write\n$X_{\\lambda_0,S}=X_{\\lambda_0}\\times_{S_{\\lambda_0}}S$ and\n$Y_{\\lambda_0,S}=Y_{\\lambda_0}\\times_{S_{\\lambda_0}}S$, and let\n$\\varphi\\colon X_{\\lambda_0,S}\\to Y_{\\lambda_0,S}$ be an $S$-morphism.\nChoose a finite affine target cover, descend its quasi-compact inverse-image\nopens, choose finite affine covers of those opens, and descend each affine\nring map using its finite generator-and-relation data. Include the finitely\nmany pairwise-overlap equality stages in one selected upper bound\n$\\lambda_\\varphi$, and define\n\n$$\n\\varphi_{\\lambda_\\varphi}\\colon\nX_{\\lambda_\\varphi}\\longrightarrow Y_{\\lambda_\\varphi}\n$$\n\nby gluing the descended affine maps.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(S_\\lambda)$ be a cofiltered inverse system of quasi-compact\nquasi-separated schemes with affine transition morphisms and limit $S$. Let\n$X_{\\lambda_0},Y_{\\lambda_0}$ be of finite presentation over\n$S_{\\lambda_0}$, write $X_\\lambda=X_{\\lambda_0}\\times_{S_{\\lambda_0}}S_\\lambda$,\n$Y_\\lambda=Y_{\\lambda_0}\\times_{S_{\\lambda_0}}S_\\lambda$,\n$X_{\\lambda_0,S}=X_{\\lambda_0}\\times_{S_{\\lambda_0}}S$ and\n$Y_{\\lambda_0,S}=Y_{\\lambda_0}\\times_{S_{\\lambda_0}}S$, and let\n$\\varphi\\colon X_{\\lambda_0,S}\\to Y_{\\lambda_0,S}$ be an $S$-morphism.\nDefine $\\lambda_\\varphi\\geq\\lambda_0$ and\n\n$$\n\\varphi_{\\lambda_\\varphi}\\colon\nX_{\\lambda_\\varphi}\\longrightarrow Y_{\\lambda_\\varphi}\n$$\n\nto be a selected stage and a selected $S_{\\lambda_\\varphi}$-morphism whose\nbase change to $S$ is $\\varphi$.",
   "proof": [
    {
-    "text": "Retain comparison isomorphisms for each descended open, transport every\naffine map through them, and include the finitely many overlap equalities in\nthe common upper bound; the transported maps glue at the selected stage.",
-    "uses": [],
-    "elementary": null
+    "text": "We show that such a stage and morphism exist. Choose a finite affine cover\nof $Y_{\\lambda_0}$, descend the quasi-compact inverse images under\n$\\varphi$ of its base changes to quasi-compact opens of some $X_\\lambda$\n([def-nagata-qc-open-descent]), choose finite affine covers of those opens,\nand descend each affine ring map using its finite generator-and-relation\ndata and [lemma-nagata-filtered-colimit-finite-data]. Retain the\ncomparison isomorphisms for each descended open, transport every affine map\nthrough them, and include the finitely many stages at which the local maps\nagree on pairwise overlaps in one common upper bound; the transported maps\nglue there to an $S_\\lambda$-morphism whose base change to $S$ is\n$\\varphi$.",
+    "uses": [
+     "def-nagata-qc-open-descent",
+     "lemma-nagata-filtered-colimit-finite-data"
+    ],
+    "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  },
  "reviewed_proof": {
   "date": "2026-10-18",

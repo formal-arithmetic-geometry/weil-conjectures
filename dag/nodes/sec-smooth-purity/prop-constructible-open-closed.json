@@ -84,15 +84,56 @@
   "def-constructible-stratification"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Stratification.openClosed",
+    "AlgebraicGeometry.Scheme.isConstructibleSheaf_iff_upperStar"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Stratification.openClosed",
+     "module": "WeilConjectures.ConstructibleSheaf.OpenClosed",
+     "lines": [
+      188,
+      255
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.isConstructibleSheaf_iff_upperStar",
+     "module": "WeilConjectures.ConstructibleSheaf.OpenClosed",
+     "lines": [
+      263,
+      287
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $j\\colon U\\to X$ be an open immersion and $i\\colon Z\\to X$ a closed\nimmersion whose range is the complement of the range of $j$. Stratifications\nof $U$ and of $Z$ concatenate to a stratification of $X$, whose strata are the\nimages of the strata of $U$ and of $Z$. A sheaf $\\mathcal F\\in\\shv{\\et X}$\nis constructible if and only if $j^*\\mathcal F$ and $i^*\\mathcal F$ are\nconstructible.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $j\\colon U\\to X$ be a quasi-compact open immersion and $i\\colon Z\\to X$\na closed immersion whose range is the complement of the range of $j$. Stratifications\nof $U$ and of $Z$ concatenate to a stratification of $X$, whose strata are the\nimages of the strata of $U$ and of $Z$. A sheaf $\\mathcal F\\in\\shv{\\et X}$\nis constructible if and only if $j^*\\mathcal F$ and $i^*\\mathcal F$ are\nconstructible.",
   "proof": [
    {
-    "text": "``Only if'' is [prop-constructible-pullback]. Conversely let\n$(\\kappa_l\\colon W_l\\to U)_{l<m}$ and $(\\lambda_k\\colon V_k\\to Z)_{k<n}$ be\nstratifications witnessing the constructibility of $j^*\\mathcal F$ and\n$i^*\\mathcal F$. The family of the $j\\circ\\kappa_l$ and the\n$i\\circ\\lambda_k$ is a stratification of $X$ with $m+n$ strata: each\ncomposite is an immersion; the images $j(U_l)$ are locally closed in $X$,\nbeing locally closed in the open $U$; the images $i(Z_k)$ are locally\nclosed in $X$, being locally closed in the closed $Z$; and the images are\npairwise disjoint and cover $X$ because the $U_l$ partition $U$, the $Z_k$\npartition $Z$, and $X=U\\sqcup Z$. Finally\n$(j\\circ\\kappa_l)^*\\mathcal F\\cong\\kappa_l^*j^*\\mathcal F$ and\n$(i\\circ\\lambda_k)^*\\mathcal F\\cong\\lambda_k^*i^*\\mathcal F$ are finite\nlocally constant by construction and [lemma-constructible-iso-invariance].",
+    "text": "``Only if'' is [prop-constructible-pullback]. Conversely let\n$(\\kappa_l\\colon W_l\\to U)_{l<m}$ and $(\\lambda_k\\colon V_k\\to Z)_{k<n}$ be\nstratifications witnessing the constructibility of $j^*\\mathcal F$ and\n$i^*\\mathcal F$. The family of the $j\\circ\\kappa_l$ and the\n$i\\circ\\lambda_k$ is a stratification of $X$ with $m+n$ strata: each\ncomposite is an immersion; the images $j(U_l)$ are locally closed in $X$,\nbeing locally closed in the open $U$, and constructible in $X$ because $j$\nis quasi-compact (the image of a constructible subset under a quasi-compact\nopen immersion is constructible); the images $i(Z_k)$ are locally\nclosed and constructible in $X$, being so in the closed $Z$; and the images are\npairwise disjoint and cover $X$ because the $U_l$ partition $U$, the $Z_k$\npartition $Z$, and $X=U\\sqcup Z$. Finally\n$(j\\circ\\kappa_l)^*\\mathcal F\\cong\\kappa_l^*j^*\\mathcal F$ and\n$(i\\circ\\lambda_k)^*\\mathcal F\\cong\\lambda_k^*i^*\\mathcal F$ are finite\nlocally constant by construction and [lemma-constructible-iso-invariance].",
     "uses": [
      "prop-constructible-pullback",
      "lemma-constructible-iso-invariance"
@@ -100,6 +141,6 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

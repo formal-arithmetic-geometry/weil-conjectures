@@ -1,0 +1,220 @@
+{
+ "id": "lem-a1-representable-etale-kernel-relation",
+ "kind": "statement",
+ "title": "The represented kernel relation of a surjective etale scheme map to an fppf sheaf",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $F$ a sheaf of sets on the big fppf site of $S$ [def-pc-fppf-site]. For an $S$-scheme $W$, write $h_W(T)=\\operatorname{Mor}_S(T,W)$. Let $U$ be an $S$-scheme and let $p:h_U\\to F$ be representable, surjective and etale, in the scheme-test sense of [def-trf-algebraic-space]. Let $R$ be any $S$-scheme with maps $s,t:R\\to U$ such that $(h_R,h_s,h_t)$ represents the sheaf fibre product $h_U\\times_Fh_U$. Then for every $S$-scheme $T$, the map $r\\mapsto(s\\circ r,t\\circ r)$ is a bijection\n$$R(T)\\xrightarrow{\\sim}\\{(a,b)\\in U(T)^2:p_T(a)=p_T(b)\\}.$$\nThese bijections commute with restriction in $T$. In particular $(s,t):R\\to U\\times_SU$ [def-pc-fibre-product] is a monomorphism and its image on $T$-points is an equivalence relation on $U(T)$. Both $s$ and $t$ are surjective etale morphisms of schemes [def-weil-etale-morphism]. The diagonal $U\\to R$ has both composites with $s,t$ equal to $1_U$, and the factor interchange induces an involution $R\\to R$ interchanging $s$ and $t$. No representability of the diagonal of $F$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0262 (lemma-space-presentation), first paragraph of proof, generalized to any fppf sheaf with a representable surjective etale scheme map; Sites Tag 00W2 (lemma-limit-sheaf) in sites.tex supplies the sectionwise pullback."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The Lean hypothesis already gives a pullback of presheaves. Apply IsPullback.map to evaluation at each S-scheme T; evaluation preserves limits in the functor category. Mathlib PullbackCone.IsLimit.equivPullbackObj identifies the evaluated pullback with the subtype of pairs of maps into U whose p-images agree. Its two projection equations give beta_T(r)=(r >> s,r >> t). Associativity proves compatibility with precomposition. No additional sheaf-limit theorem is required for this hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00W2 (lemma-limit-sheaf), applied to the finite pullback diagram; spaces.tex Tag 0262 (lemma-space-presentation), first paragraph of proof"
+   }
+  },
+  {
+   "text": "Use the sectionwise equivalence to prove that a pair (a,b) is in the image of (s,t) exactly when p_T(a)=p_T(b). Equality is an equivalence relation, so this proves reflexivity, symmetry and transitivity. For the map j:R->U times_S U from [def-pc-fibre-product], regard the target as an object over S. Equality after j implies equality after each projection, and injectivity of beta_T implies equality of maps to R. Thus j is mono in Over S; Over.mono_left_of_mono gives the claimed monomorphism of underlying schemes.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0262 (lemma-space-presentation), first paragraph of proof: the pointwise equality relation"
+   }
+  },
+  {
+   "text": "For a scheme morphism property P respecting isomorphisms, any given representing pullback inherits P from the scheme-test definition [def-trf-algebraic-space]. Choose a scheme test W->T; uniqueness of the two pullbacks gives an isomorphism of their representing presheaves. The fully faithful Yoneda embedding [lem-pc-representable-unique] lifts it to e:V~=W with e.hom >> w=v. Then P(v) follows from P(w) by precomposition with an isomorphism. Apply this proved private lemma with P=Surjective and P=Etale to hR and hR.flip. This proves both geometric properties of both projections, using no diagonal condition.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-pc-representable-unique"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0262 (lemma-space-presentation), first paragraph of proof, and definition-relative-representable-property: apply the property to the test map p"
+   }
+  },
+  {
+   "text": "The image characterization applied at T=U to the identity pair (id_U,id_U) gives d:U->R with d >> s=id_U and d >> t=id_U. The beta formula and associativity also identify its restriction with the diagonal pair at every T.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0262 (lemma-space-presentation), equality relation in the first proof paragraph: explicit diagonal"
+   }
+  },
+  {
+   "text": "The identity of R exhibits (s,t) in the relation, hence p_R(s)=p_R(t). Symmetry of this equality and the image characterization produce i:R->R with i >> s=t and i >> t=s. The beta formula, these two equations and associativity give beta_R(i >> i)=beta_R(id_R). Injectivity of beta_R gives i >> i=id_R. Precomposition and associativity give factor interchange on all test sections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0262 (lemma-space-presentation), equality relation in the first proof paragraph: explicit factor interchange"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "lem-pc-representable-unique"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0262 (lemma-space-presentation), first paragraph of proof, and relative representable properties; formalized directly from the presheaf pullback using Mathlib evaluation and Types pullback equivalence, Yoneda uniqueness, and the scheme-test definitions. Diagonal and interchange are constructed from the pointwise image characterization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a representable surjective etale morphism from a scheme to an fppf sheaf, the represented kernel pair is a sectionwise equivalence relation with surjective etale projections",
+   "results": "{\"t\": \"2026-10-22T07:55:11Z\", \"tool\": \"leanfinder\", \"query\": \"For a representable surjective etale morphism from a scheme to an fppf sheaf, the represented kernel pair is a sectionwise equivalence relation with surjective etale projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective\", \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\"], \"digest\": \"6dfa9b1b3ff856f8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ring kernels, scheme-only etale categories, or Zariski representability; none combines a represented sheaf kernel relation with scheme-test etale/surjective projections. General IsKernelPair does not supply the geometric property."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|IsRepresentableWith|etale.*kernel.*relation|kernel.*relation.*etale",
+   "results": "{\"t\": \"2026-10-22T07:57:06Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|IsRepresentableWith|etale.*kernel.*relation|kernel.*relation.*etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ring kernels, scheme-only etale categories, or Zariski representability; none combines a represented sheaf kernel relation with scheme-test etale/surjective projections. General IsKernelPair does not supply the geometric property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a representable surjective etale map from a scheme to an fppf sheaf the kernel relation is represented and its two projections are surjective etale",
+   "results": "{\"t\": \"2026-10-22T07:57:06Z\", \"tool\": \"leansearch\", \"query\": \"For a representable surjective etale map from a scheme to an fppf sheaf the kernel relation is represented and its two projections are surjective etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.iff_of_surjective\", \"Algebra.FormallyEtale.Algebra.FormallyEtale.iff_of_surjective\", \"AlgebraicGeometry.Scheme.Hom.ker\", \"AlgebraicGeometry.IsEtale\", \"Module.Finite.kerRepr\", \"AlgebraicGeometry.Surjective\", \"CategoryTheory.IsKernelPair\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\"], \"digest\": \"e76754ec372eb809\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ring kernels, scheme-only etale categories, or Zariski representability; none combines a represented sheaf kernel relation with scheme-test etale/surjective projections. General IsKernelPair does not supply the geometric property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPullback\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-22T07:57:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPullback\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ring kernels, scheme-only etale categories, or Zariski representability; none combines a represented sheaf kernel relation with scheme-test etale/surjective projections. General IsKernelPair does not supply the geometric property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The two scheme projections from U times F U for a representable etale surjection U to an fppf sheaf F are etale surjective and sections are pairs with equal images",
+   "results": "{\"t\": \"2026-10-22T07:57:17Z\", \"tool\": \"leanfinder\", \"query\": \"The two scheme projections from U times F U for a representable etale surjection U to an fppf sheaf F are etale surjective and sections are pairs with equal images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f\"], \"digest\": \"c91006eb79aa0b7e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ring kernels, scheme-only etale categories, or Zariski representability; none combines a represented sheaf kernel relation with scheme-test etale/surjective projections. General IsKernelPair does not supply the geometric property."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKernelPair|representable.*etale|etale.*representable",
+   "results": "{\"t\": \"2026-10-23T04:09:58Z\", \"tool\": \"grep\", \"query\": \"IsKernelPair|representable.*etale|etale.*representable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/CategoryTheory/EquivalenceRelation.lean\", \"Mathlib/CategoryTheory/EquivalenceRelation.lean\", \"Mathlib/CategoryTheory/EquivalenceRelation.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/CategoryTheory/Galois/Basic.lean\", \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\"], \"digest\": \"6ab36385a7bb9296\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic IsKernelPair and scheme-only etale or Zariski representability results do not state the scheme-test geometric clauses for an fppf sheaf; IsKernelPair.equivalenceRelation supplies only the categorical relation part"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKernelPair\"",
+   "results": "{\"t\": \"2026-10-23T04:09:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsKernelPair\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsKernelPair\", \"CategoryTheory.IsKernelPair.id_of_mono\", \"CategoryTheory.IsKernelPair.mono_of_eq_fst_snd'\", \"CategoryTheory.IsKernelPair.instInhabitedIdOfMono\", \"CategoryTheory.IsKernelPair.instSubsingleton\", \"CategoryTheory.IsKernelPair.of_isIso_of_mono\", \"CategoryTheory.IsKernelPair.isIso_of_mono\", \"CategoryTheory.IsKernelPair.mono_of_isIso_fst\"], \"digest\": \"3df00f670a07520d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic IsKernelPair and scheme-only etale or Zariski representability results do not state the scheme-test geometric clauses for an fppf sheaf; IsKernelPair.equivalenceRelation supplies only the categorical relation part"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel pair of a representable etale surjection from a scheme to a sheaf has etale surjective projections and sections are pairs with equal images",
+   "results": "{\"t\": \"2026-10-23T04:09:58Z\", \"tool\": \"leansearch\", \"query\": \"The kernel pair of a representable etale surjection from a scheme to a sheaf has etale surjective projections and sections are pairs with equal images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsKernelPair\", \"CategoryTheory.Limits.pullback.diagonal_isKernelPair\", \"CategoryTheory.Regular.instHasCoequalizerFstSnd\", \"CategoryTheory.IsKernelPair.mono_of_eq_fst_snd'\", \"CategoryTheory.IsKernelPair.of_hasPullback\", \"CategoryTheory.IsKernelPair.isReflexivePair\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"CategoryTheory.regularEpiOfKernelPair\"], \"digest\": \"b0934c2aaf5b16dc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic IsKernelPair and scheme-only etale or Zariski representability results do not state the scheme-test geometric clauses for an fppf sheaf; IsKernelPair.equivalenceRelation supplies only the categorical relation part"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a representable surjective etale morphism from a scheme to an fppf sheaf the represented kernel pair is a pointwise equivalence relation with surjective etale projections",
+   "results": "{\"t\": \"2026-10-23T04:10:05Z\", \"tool\": \"leanfinder\", \"query\": \"For a representable surjective etale morphism from a scheme to an fppf sheaf the represented kernel pair is a pointwise equivalence relation with surjective etale projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite\", \"AlgebraicGeometry.Scheme.Hom.cover_I₀\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.instCategoryEtale\"], \"digest\": \"37504a29e64d01b0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic IsKernelPair and scheme-only etale or Zariski representability results do not state the scheme-test geometric clauses for an fppf sheaf; IsKernelPair.equivalenceRelation supplies only the categorical relation part"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme representing U times F U is a monomorphic equivalence relation on U with etale surjective source and target",
+   "results": "{\"t\": \"2026-10-23T04:10:06Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme representing U times F U is a monomorphic equivalence relation on U with etale surjective source and target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.Rel\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetMonomorphismsScheme\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.IsPreimmersion.instMonoScheme\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.instMonoObjWalkingSpanCompSchemeSpanForgetNoneWalkingPairSomeMapInitOfIsOpenImmersion\"], \"digest\": \"a040ab8c477dbea2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic IsKernelPair and scheme-only etale or Zariski representability results do not state the scheme-test geometric clauses for an fppf sheaf; IsKernelPair.equivalenceRelation supplies only the categorical relation part"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-etale-atlas-presentation",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Old presentation steps 1-2: sectionwise represented kernel relation, equality equivalence relation, and the two scheme-test projections; auxiliary U/R presentation in the 03BZ/03XW branch of lem-a1-affine-hc0.",
+   "via": [
+    "lem-a1-etale-atlas-presentation",
+    "lem-a1-space-etale-open-image",
+    "lem-a1-etale-quasi-affine-image-scheme",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-representable-etale-kernel-relation",
+  "worker": "stage1",
+  "summary": "Expanded the sectionwise kernel-pair identification, cancellation and equality-relation proof, scheme-test projection argument, and explicit diagonal and involution. Reused the existing sectionwise sheaf-limits Mathlib leaf and the defining scheme-test property; no new nodes or statement changes. Generic kernel-pair and Yoneda declarations do not state the entire item.",
+  "blueprint": "Realizes the auxiliary U/R presentation in the 03BZ/03XW branch under lem-a1-affine-hc0, specifically the old presentation steps 1-2 named in blueprint.from.place: the represented kernel relation and its surjective etale projections. The current blueprint ancestor is the compact-support vanishing node; no change to its unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-568b91601",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-568b91601 (reviewer sub-agent of L); spot-checked: Read the item's 5 steps in full; the statement is unchanged against live. Sources read: Stacks Tag 0262 (spaces.tex l.1171-1211, the first paragraph of the proof) and Tag 00W2 (sites.tex l.1680). The delivery generalises that paragraph to any fppf sheaf with a representable surjective etale map p and a given representing scheme R; no diagonal is assumed and none is needed. Step 1 uses clause (2) of the sectionwise sheaf-limits leaf correctly. Steps 2, 4 and 5 (mono, equivalence relation, diagonal, involution) are elementary and correct. Step 3 applies the scheme-test definition in def-trf-algebraic-space to p tested against itself; with the factors swapped this also gives t. Missing citation (C1/C4): the step treats the given R as the definition's representing scheme, which needs uniqueness of the representing object compatible with the projections. FIX: cited lem-pc-representable-unique (a Lean-closed Mathlib leaf) in step 3 with s=s'∘φ, and added it to proof_deps. Small cases checked: U empty, p an isomorphism, F=h_X with an open cover. No duplicate found (grep for 0262, space-presentation, kernel relation): the parent lem-a1-etale-atlas-presentation cites this item and keeps the quotient part, so the split is not a relabelling. 0 new nodes, no SGA reference, no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RepresentableEtaleKernelRelation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.representable_etale_kernel_relation",
+  "file": "lean/Sheaf/AlgebraicGeometry/RepresentableEtaleKernelRelation.lean",
+  "statement": "theorem representable_etale_kernel_relation {S : Scheme.{u}} (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (U : Over S) (p : yoneda.obj U ⟶ F.obj) (hrep : IsRepresentable p) (hsur : IsSurjective p) (het : IsEtale p) (R : Over S) (s t : R ⟶ U) (hR : IsPullback (yoneda.map s) (yoneda.map t) p p) : (∃ β : ∀ T : Over S, (T ⟶ R) ≃ {ab : (T ⟶ U) × (T ⟶ U) | p.app (op T) ab.1 = p.app (op T) ab.2}, (∀ (T : Over S) (r : T ⟶ R), (β T r).val = (r ≫ s, r ≫ t)) ∧ ∀ (T T' : Over S) (g : T' ⟶ T) (r : T ⟶ R), (β T' (g ≫ r)).val = (g ≫ (β T r).val.1, g ≫ (β T r).val.2)) ∧ Mono (pullback.lift s.left t.left (s.w.trans t.w.symm)) ∧ (∀ T : Over S, Equivalence (fun a b : T ⟶ U ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b)) ∧ Surjective s.left ∧ Etale s.left ∧ Surjective t.left ∧ Etale t.left ∧ (∃ d : U ⟶ R, d ≫ s = 𝟙 U ∧ d ≫ t = 𝟙 U) ∧ ∃ i : R ⟶ R, i ≫ s = t ∧ i ≫ t = s ∧ i ≫ i = 𝟙 R",
+  "branch": "sheaf-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e94e5e3a2",
+  "group": "Q40",
+  "result": "pass",
+  "note": "First S2 delivery (live lean null); snapshot node differs from live only in lean; 5 stmt_dep records byte-identical to live; lean.statement verbatim; one sorry, no defs. Clauses checked: F fppf sheaf, p IsRepresentable/IsSurjective/IsEtale (exact dep predicates, no diagonal hypothesis), hR presheaf IsPullback (= sheaf pullback; same interface as landed RepresentableEtaleQuotientPresentation), β pinned to (r≫s,r≫t) with restriction law, Mono of pullback.lift into U.hom×U.hom, Equivalence of the image relation, Surjective/Etale for s.left and t.left, diagonal d, involution i with i≫i=𝟙. Provable via Yoneda uniqueness of representing squares. Edge cases (empty U, p iso, universes) ok. No duplicate in live lean. Plain imports serve proof_deps. Advisory: no copyright header; second reading is a self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261026T081521-L-1992447",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-algcl-small-escaping-sequence",
+ "kind": "statement",
+ "title": "Small elements escaping a sequence of finite p-adic subfields",
+ "statement": "Fix a prime $\\ell$, the normed field $\\mathbf Q_\\ell$ [def-weil-l-adic-numbers], and an algebraic closure $\\Omega/\\mathbf Q_\\ell$ [def-weil-algebraic-closure] with an absolute value extending $|\\cdot|_\\ell$ and its induced topology. Let $(F_k)_{k\\geq0}$ be any sequence of intermediate fields $\\mathbf Q_\\ell\\subseteq F_k\\subseteq\\Omega$, each finite-dimensional over $\\mathbf Q_\\ell$. There exist elements $a_k\\in\\Omega\\setminus F_k$ with $|a_k|\\leq\\ell^{-k}$ for all $k\\geq0$. In particular $a_k\\to0$ in $\\Omega$. No nesting or exhaustion assumption on the fields $F_k$, and no completeness of $\\Omega$, is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: agent-created analytic auxiliary; the blueprint motivates but does not state the noncomplete Cech assertion. Arithmetic argument formerly in step 3: square roots of finite-field uniformizers and scaling by powers of ell."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "For each $k$, restrict the given absolute value of $\\Omega$ to $F_k$. It extends $|\\cdot|_\\ell$, and $F_k/\\mathbf Q_\\ell$ is finite-dimensional by hypothesis. Apply [lem-weil-l-adic-extension-integers-dvr] to this restriction. Clause 4 supplies a nonzero uniformizer $\\pi_k$ in $\\mathfrak m_{F_k}$, so $\\rho_k=|\\pi_k|$ satisfies $0<\\rho_k<1$. Clauses 1 and 5 give, for every $x\\in F_k^\\times$, a factorization $x=u\\pi_k^m$ with $|u|=1$ and $m\\in\\mathbf Z$. All these norms are restrictions of the original norm on $\\Omega$.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written arithmetic auxiliary for the noncomplete algebraic-closure coefficient obstruction; uniformizer and scaling argument made explicit."
+   }
+  },
+  {
+   "text": "By algebraic closedness [def-weil-algebraic-closure], the nonconstant polynomial $X^2-\\pi_k$ has a root $b_k\\in\\Omega$. Thus $b_k^2=\\pi_k$ and $|b_k|^2=\\rho_k$, so $0<|b_k|<1$. If $b_k\\in F_k$, its factorization from [lem-weil-l-adic-extension-integers-dvr] would give $|b_k|=\\rho_k^m$. For $m\\leq0$ this is at least $1$, a contradiction. For $m\\geq1$ it gives $\\rho_k=\\rho_k^{2m}\\leq\\rho_k^2<\\rho_k$, again a contradiction. These cases exhaust the integers. Hence $b_k\\notin F_k$. Choose these roots for all $k$ by classical choice.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written arithmetic auxiliary for the noncomplete algebraic-closure coefficient obstruction; uniformizer and scaling argument made explicit."
+   }
+  },
+  {
+   "text": "Set $a_k=\\ell^k b_k$. The factor $\\ell^k$ is nonzero in $\\mathbf Q_\\ell\\subseteq F_k$, so $a_k\\in F_k$ would give $b_k=\\ell^{-k}a_k\\in F_k$, impossible. By [def-weil-l-adic-numbers], $|a_k|=\\ell^{-k}|b_k|<\\ell^{-k}$, giving the weak bound also at $k=0$. For convergence, $\\ell^0=1$ and, if $\\ell^k\\geq k+1$, then $\\ell^{k+1}\\geq2(k+1)\\geq k+2$, since $\\ell\\geq2$. Thus $\\ell^k\\geq k+1$ by induction. Given $\\varepsilon>0$, choose an integer $N\\geq0$ with $N+1>1/\\varepsilon$. For $k\\geq N$, $|a_k|\\leq\\ell^{-k}\\leq(k+1)^{-1}\\leq(N+1)^{-1}<\\varepsilon$. This is convergence to $0$ for the given absolute value. Each $F_k$ was treated separately; no nesting, exhaustion or completeness was used.",
+   "uses": [
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written arithmetic auxiliary for the noncomplete algebraic-closure coefficient obstruction; uniformizer and scaling argument made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-numbers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: agent-written arithmetic auxiliary for the noncomplete algebraic-closure coefficient obstruction; uniformizer and scaling argument made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an algebraic closure of Qp, for a sequence of finite intermediate fields F n, choose elements outside F n of norm at most p to the minus n",
+   "results": {
+    "t": "2026-10-22T06:03:29Z",
+    "tool": "leanfinder",
+    "query": "In an algebraic closure of Qp, for a sequence of finite intermediate fields F n, choose elements outside F n of norm at most p to the minus n",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Valued.integer.exists_norm_lt_one",
+     "Valued.integer.exists_nnnorm_lt_one",
+     "Valued.integer.exists_norm_coe_lt_one",
+     "Padic.rat_dense'",
+     "padicNormE.defn",
+     "ClassGroup.exists_mem_finset_approx'",
+     "Padic.rat_dense",
+     "PadicInt.exists_mem_range_of_norm_rat_le_one"
+    ],
+    "digest": "ce6fa3f61477cdad"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: norm-small elements, density in Q_p and the algebraic-closure instances do not give an element outside each specified finite intermediate field. The nonsquare-uniformizer construction still has to be proved."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite extension of Qp in its algebraic closure omits arbitrarily small elements; a square root of a uniformizer is not in the field",
+   "results": {
+    "t": "2026-10-22T06:03:41Z",
+    "tool": "leanfinder",
+    "query": "Every finite extension of Qp in its algebraic closure omits arbitrarily small elements; a square root of a uniformizer is not in the field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicAlgCl.isAlgebraic",
+     "PadicAlgCl",
+     "Padic.rat_dense'",
+     "Padic.rat_dense",
+     "PadicAlgCl.instRankOneNNRealV",
+     "PadicComplex.instRankOneNNRealV",
+     "Padic.instNontriviallyNormedField",
+     "Padic.field"
+    ],
+    "digest": "52970be5a45548e9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: norm-small elements, density in Q_p and the algebraic-closure instances do not give an element outside each specified finite intermediate field. The nonsquare-uniformizer construction still has to be proved."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosure, \"norm\"",
+   "results": {
+    "t": "2026-10-22T06:03:41Z",
+    "tool": "loogle",
+    "query": "IsAlgClosure, \"norm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "IsAlgClosure.normal"
+    ],
+    "digest": "8f6769398ee6e035"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: norm-small elements, density in Q_p and the algebraic-closure instances do not give an element outside each specified finite intermediate field. The nonsquare-uniformizer construction still has to be proved."
+  },
+  {
+   "tool": "leansearch",
+   "query": "There are arbitrarily small elements of the algebraic closure of the p adic numbers outside each finite extension",
+   "results": {
+    "t": "2026-10-22T06:03:42Z",
+    "tool": "leansearch",
+    "query": "There are arbitrarily small elements of the algebraic closure of the p adic numbers outside each finite extension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicAlgCl",
+     "PadicComplex",
+     "PadicAlgCl.isAlgebraic",
+     "PadicAlgCl.instCoePadic",
+     "PadicAlgCl.valuation_p",
+     "algebraicClosure.isAlgebraic",
+     "mem_algebraicClosure_iff'",
+     "algebraicClosure"
+    ],
+    "digest": "d4f3413e26dff7b1"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: norm-small elements, density in Q_p and the algebraic-closure instances do not give an element outside each specified finite intermediate field. The nonsquare-uniformizer construction still has to be proved."
+  },
+  {
+   "tool": "grep",
+   "query": "(exists|arbitrarily|small).*(not_mem|outside)|uniformizer.*(sqrt|square)|sqrt.*uniformizer",
+   "results": {
+    "t": "2026-10-22T06:03:42Z",
+    "tool": "grep",
+    "query": "(exists|arbitrarily|small).*(not_mem|outside)|uniformizer.*(sqrt|square)|sqrt.*uniformizer",
+    "sub": "NumberTheory/Padics",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: norm-small elements, density in Q_p and the algebraic-closure instances do not give an element outside each specified finite intermediate field. The nonsquare-uniformizer construction still has to be proved."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-norm-algcl-profinite-cech-exact",
+  "date": "2026-10-22",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: agent-created analytic auxiliary; the blueprint motivates but does not state the noncomplete Cech assertion. Arithmetic argument formerly in step 3: square roots of finite-field uniformizers and scaling by powers of ell.",
+   "via": [
+    "lem-sfb-norm-algcl-profinite-cech-exact",
+    "lem-sfb-norm-algcl-bar-augmentation",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-algcl-small-escaping-sequence",
+  "worker": "stage1",
+  "summary": "Rebased the retained Q121 split after the side-completion promotion refusal onto the current unsplit DAG node. Re-read all three current dependency statements and verified all four verbatim citation quotes. Kept the statement, creation metadata and all five prior search records. Clarified that the chosen uniformizers lie in the maximal ideals and that all norms are restrictions of the original absolute value; wrote the base and induction step of the convergence estimate explicitly. Reused the existing finite-extension valuation-ring theorem; no new nodes.",
+  "blueprint": "Paragraph (3) of the main-20261015 direct-images proof motivates the coefficient obstruction. This agent-created auxiliary supplies small escaping elements used in step 2 of lem-sfb-norm-algcl-profinite-cech-exact; the blueprint does not itself state the auxiliary. The inherited creation chain has no imported ancestor (blueprint_refs.py ancestor returns None); the existing from.node and via are retained, and same_as=[] was confirmed by whole-blueprint searches for escaping and small elements.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic finite p-adic extension valuation-ring theorem, used for its uniformizer, unit-norm and integer-power factorization clauses. The constructibility unit supplies no arithmetic replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-b247a8275",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-b247a8275 (reviewer sub-agent of L); spot-checked: Re-delivery after a landing refusal: the earlier PASS head ad4d36d34275 was refused because the side completion was not promoted. Compared with ad4d, only the wording of steps 1 and 3 and the split_report summary changed. Compared with the live node, which is still unsplit, only proof, proof_deps, proof_origin, status and split_report differ; the statement, stmt_deps, source, blueprint, created and searches are unchanged. No repair note exists and no other group has split the item. Read the item in full; the full statements of lem-weil-l-adic-extension-integers-dvr (clauses 1-5), def-weil-algebraic-closure and def-weil-l-adic-numbers; the parent lem-sfb-norm-algcl-profinite-cech-exact clause-(1) step, which uses only a_k∉F_k, |a_k|≤ℓ^{-k} and a_k→0; and main-20261015 direct-images paragraph (3), which motivates but does not state this auxiliary (correctly marked as written by an agent). Step 1: the restricted absolute value meets the dvr lemma's hypotheses exactly. Clause 4 gives π≠0 with πO=m, so 0<ρ<1; clause 1 gives units of norm 1 and clause 5 gives x=uπ^m. Step 2 (elementary): X²−π has a root b in Ω, also for ℓ=2. If b∈F then |b|=ρ^m; m≤0 gives |b|≥1 and m≥1 gives ρ=ρ^{2m}≤ρ²<ρ, so every integer is covered. Step 3: ℓ^k∈Q_ℓ^×⊆F_k and |ℓ^k|=ℓ^{-k}; the induction ℓ^{k+1}≥2(k+1)≥k+2 and the ε-N choice are correct, and completeness of Ω is not needed. Tested k=0 with F=Q_ℓ, ℓ=2 with F=Q_2(√2), and repeated or non-nested F_k. No new nodes; a DAG grep found no duplicate; proof_deps is the union of the step uses; no cycle and no SGA. Accepted tool_use: lem-weil-l-adic-extension-integers-dvr, a generic valuation-ring theorem that replaces no step of sk-thm-sf-ctf-stability. No changes."
+ }
+}

@@ -1,0 +1,41 @@
+## Worker report
+
+1. Files written: `dag/nodes/sec-six-functors-basics/lem-sfb-dyadic-height-relation-isolation.json` (statement; split by six elementary steps; no exact Mathlib match), `citations.json` (empty list, since no proof step cites another node), and this report. The search command wrote `searches.jsonl`.
+2. Attachments: none. Searches in the live `lean/WeilConjectures/` for the exact blueprint tag and for height-gap terminology found no declaration of the item. The algebraic ideal-height and unrelated dyadic torsion results do not state it.
+3. WANTED: an external reference for this agent-formulated topology auxiliary, in the context of paragraph (3) of `literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md`. No missing reference is used as a proof dependency; the elementary argument is written in full.
+4. The original item had no proof. Its statement is correct, including arbitrary Hausdorff T rather than metrizable/profinite T, and was retained verbatim. The blueprint paragraph concerns open direct image and does not assert this auxiliary. The source and inherited blueprint provenance already say that; the proof is honestly marked agent-written. The ancestor command returns `None`, matching the inherited null ancestor; no ancestor has been invented. No unit or chapter route was changed.
+5. Nothing remains unfinished at this split level. No Lean file, compiler, Lake tool, repository write, direct git command, or agent delegation was used.
+
+## New nodes
+
+None: 0 new nodes and 0 new Mathlib leaves. The fibre case distinction, inequalities for natural powers of 2, product height windows, and coordinate separation are each elementary arguments, so making them nodes would violate B1 and the elementary-node rule.
+
+## Searches and sources read
+
+Read the worker brief, stage-1 contract, GOAL.md, the three levels and tool-use rules of SETUP.md, delivery-errors B–E, the chapter/unit records, the latest blueprint direct-images proof, the item's full JSON, and the parent `lem-sfb-countable-split-profinite-cover`. The latter's Step 3 needs exactly the unchanged height-isolation statement; its proof cannot be a dependency here because it already depends on this item.
+
+Whole-DAG searches for dyadic and height-gap terminology found this item, its parent, and unrelated torsion/partition nodes. Whole-blueprint searches `height isolation` and `dyadic` both returned zero nodes; `blueprint_refs.py ancestor` returned null. No new node was proposed and there is no same-tag pair requiring a Not duplicates section.
+
+Ran and read five fresh logged searches: LeanFinder with two distinct formulations of dyadic-height pair isolation; Loogle `IsClopen, Set.singleton` (zero hits); grep `dyadic.*(isolat|clopen)|height.*relation|isOpen_singleton_iff` in Topology; and LeanSearch on two-point fibres and separated height gaps. All services answered. Retained the inherited item searches without re-labelling them as Q132 searches. The exact queries and actual summaries are preserved in the node and searches.jsonl.
+
+Read Mathlib/Topology/Neighborhoods.lean lines 269–274 and Mathlib/Topology/MetricSpace/Pseudo/Defs.lean lines 924–927: these characterize an already isolated singleton, rather than constructing a window from dyadic gaps. Read the introduction/definitions context of Mathlib/Topology/SeparatedMap.lean: separating points in the source fibre and diagonal embeddings do not supply the conclusion here. LeanFinder's compact totally disconnected clopen-approximation hits add hypotheses absent from T; the second phrasing returned Liouville, intermediate-value, Hofer and rotation-number facts, none a match. LeanSearch's evenly-covered fibre result assumes a covering condition absent here. Thus the whole item is not a Mathlib leaf or a one-line specialization.
+
+## Review by Q132
+
+I checked the six-step proof against the unchanged statement and the latest source paragraph. Since the blueprint is only contextual and has no proof of this auxiliary, every argument is given directly; no claim is attributed to an unquoted source. There are no new nodes to review and no cited proof-node statements to quote. The citations list is empty for that precise reason. The size convention remains the statement's existing dependency, not an extra topological theorem.
+
+Step 1 uses the exact two-point fibre identity and the at-most-one-point hypothesis off the enumerated image, both in the item's statement. Nonzero positive height gaps ensure the two listed points are distinct. The non-diagonal classification follows by a two-case membership check in a two-element set, not by a classification theorem. Repetition of a fibre index is excluded by the stated distinctness of v, although the window argument does not need to invoke it separately.
+
+Step 2 uses only the definition a_j=2^{-j-2}. I wrote both j>k and j<k using the positive integer r, and supplied the induction establishing 2^r>=2. The gap interval is strictly between the nearest smaller value a/2 and the nearest larger value 2a. Zero and all negative gaps are excluded because a>0. This is elementary arithmetic, not a new lemma stated under a new name.
+
+Step 3 uses continuity in its definition as openness of interval preimages, then the definitions of product and subspace topologies. The radius a/8 is strictly positive; the specified points belong to their windows. No assertion about subtraction of continuous maps, preservation of separation axioms under products, or openness of the quotient q is invoked.
+
+Step 4 computes the forward difference explicitly as a+f-e, with each error less than a/8. The resulting strict error is a/4. Combining the case distinction of Step 1 with the numerical exclusion of Step 2 forces exactly the forward pair at index k. The converse membership uses the given fibre identity, so the open rectangle intersection is the singleton, not merely a subset of it.
+
+Step 5 repeats the actual calculation for the reverse rectangle: H(x)-H(y)=a+e-f. Symmetry of the equality q(x)=q(y) lets Step 1 be applied to (y,x). This writes out what a vague appeal to transport or symmetry could otherwise conceal.
+
+Step 6 uses the Hausdorff definition only: any distinct pair differs in one coordinate, and disjoint open neighbourhoods of those coordinate values give an open cylinder excluding the designated pair. Intersecting with R is open by the subspace definition; taking their union gives the full singleton complement. This proves both required closedness claims without an uncited product/subspace Hausdorff theorem. It also does not require V to be Hausdorff or R to be closed in T².
+
+I checked B1–B10: the statement remains self-contained and unchanged, no extra definitions or duplicate nodes are created, TeX uses single logical backslashes, the source is not falsely assigned a Stacks tag, no Mathlib leaf is claimed without an exact match, and blueprint search/provenance is explicit. For C1–C8, all six uses lists are empty because every step is a short direct calculation from the item's own hypotheses or topological definitions; no black-box theorem, hidden source-proof construction, off-unit tool, or back edge to the parent occurs. For D1–D5 the argument stays in the item, with no clause moved to a child and no omitted “standard” argument. Every step is at most 460 characters, well below the long-step threshold.
+
+For E1–E7 I tested k=0 (the j<k case is empty), j=k+1 (gap a/2), and k>0 with j=k-1 (gap 2a); all are outside the open gap interval. Arbitrarily late indices may accumulate at height gap zero but cannot enter the fixed positive interval. Diagonal points are excluded even when H has other equal values; fibres outside the image may be empty, which does not affect Step 1. The asserted fibre identities guarantee membership in R for both target pairs. No compactness, metric, surjectivity, local injectivity, closedness of R, or separatedness of V was added. There was no false statement or source error to correct; the repair consisted of supplying the missing elementary proof and fresh logged searches. I retained the original statement, citations/search history, source and provenance.

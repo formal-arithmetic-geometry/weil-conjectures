@@ -1,0 +1,201 @@
+{
+ "id": "lem-route-sp-integral-twist-level-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "via": [
+    "lem-pur-native-integral-tate-finite-representation",
+    "lem-pur-native-integral-tate-tower-limit"
+   ],
+   "place": "Integral twist paragraph: (O_E/ell^r)_X(1) = mu_(ell^r,X) tensor_(Z/ell^r) (O_E/ell^r)_X; comparison with the actual free-tensor native integral level, at r=n+1."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The finite-level twist is the displayed constant-ring scalar extension.",
+ "statement": "Let $X$ be any scheme, let $\\ell$ be prime, fix an algebraic closure $\\overline{\\mathbf Q}_\\ell$, and let $E\\subseteq\\overline{\\mathbf Q}_\\ell$ be a finite intermediate extension. Write $O_E$ for its ring of integers with the topology restricted from the fixed algebraic closure [def-weil-l-adic-coefficient-extension, sk-def-sfb-condensed-ring]. Work on the small pro-etale site of $X$, small relative to abelian sheaves [def-weil-pbc-proetale-site, def-weil-size-convention]. For $n\\geq0$, put $N=\\ell^{n+1}$ and $B=O_E/(N)$, with the discrete topology. Write $\\widetilde B=\\operatorname{ULift}(B)$ for the universe lift used in constant coefficient sheaves. Let $C=p_X^*\\underline B$ and $R=p_X^*\\underline{O_E}$ be the pulled-back continuous-function ring objects [sk-def-sfb-pulled-back-coefficients], with $\\rho:R\\to C$ induced by reduction. Let $M=\\mu_{N,X}$ be the actual roots-of-unity abelian sheaf with its specified constant $(\\mathbf Z/N)_X$-action [def-pur-roots-of-unity-sheaf].\n\nIn the tensor category of abelian sheaves [det-def-sfb-sheaf-tensor-structure], let $F_C(M)$ denote the internal $C$-module with underlying object $C\\otimes_{\\mathbf Z}M$ and action given by multiplication on the first factor [sk-def-sfb-module-objects]. The native integral level is $Q_{E,n}=\\operatorname{Res}_{\\rho}F_C(M)$, namely the construction `spIntegralTwistLevel X ℓ E n`. For a unital map $a:\\mathbf Z/N\\to\\widetilde B$, let $L_a=\\widetilde B_X\\otimes_{(\\mathbf Z/N)_X}M$ be the finite Tate line [def-pur-finite-tate-line-signed-comparison], namely `Scheme.tateFiniteLine X ℓ (ULift B) n a`.\n\nThere exists a unital ring map $a:\\mathbf Z/N\\to\\widetilde B$ and an isomorphism of abelian sheaves\n$$U(Q_{E,n})\\cong U(L_a),$$\nwhere $U$ forgets the respective coefficient actions. No invertibility assumption on $\\ell$ on $X$ is needed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "lem-pur-native-integral-tate-finite-representation: the Lean of this node (its declaration uses) reaches AlgebraicGeometry.ProEtale.spIntegralTwistLevel_comparison, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/Paper/ProEtaleTateTwists.lean, declaration AlgebraicGeometry.ProEtale.spIntegralTwistLevel_comparison (module Sheaf.Paper.ProEtaleTateTwists, lines 344-361, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-pur-roots-of-unity-sheaf",
+  "det-def-sfb-sheaf-tensor-structure",
+  "sk-def-sfb-module-objects",
+  "def-pur-finite-tate-line-signed-comparison",
+  "lem-sp-ell-quotient-finite-discrete"
+ ],
+ "proof": [
+  {
+   "text": "The generator ell^(n+1) lies in the ideal defining B=O_E/(ell^(n+1)); therefore its image is zero in B and in ULift B. The usual ZMod cast homomorphism gives the required a:ZMod(ell^(n+1))->ULift B. Equip B with the discrete topology; its finiteness is spEllQuotient_finite_continuous, with no invertibility assumption on X.",
+   "uses": [
+    "lem-sp-ell-quotient-finite-discrete"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply finiteDiscreteCondensedRing_constant to B, then finiteDiscreteSchemeRing_constant to its ring-object isomorphism. This identifies the underlying pulled-back finite coefficient sheaf with the constant additive sheaf of ULift B on X. Tensor the inverse coefficient identification with the identity of the actual roots-of-unity sheaf.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply constantZMod_scalarTensor to the actual root module and a. It identifies the constant ULift B sheaf tensored over the integers with the underlying root sheaf with the underlying ordinary scalar extension along a, which is by definition tateFiniteLine. Compose with the tensor isomorphism of the preceding step. Restriction of scalars in spIntegralTwistLevel changes only the action, so its underlying object is definitionally the source of this composite. This constructs the requested a and isomorphism directly.",
+   "uses": [
+    "lem-sp-constant-zmod-scalar-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-ell-quotient-finite-discrete",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "lem-sp-constant-zmod-scalar-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral twist paragraph at exponent n+1. H4 constructs the quotient scalar map and composes the finite-discrete coefficient comparison with the proved constant-cyclic-ring tensor comparison. The existing finite Tate universal-property module cannot be imported here because its imports reach this module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'spIntegralTwistLevel_comparison' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-26",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme the finite condensed coefficient tensor roots of unity is the constant finite ring extension of scalars of the roots of unity module",
+   "results": "8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, Condensed.finFree, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod",
+   "date": "2026-10-26",
+   "verdict": "no match: none states the native finite-level comparison or a one-line specialization; generic tensor/monoidal APIs and field-theoretic roots are insufficient."
+  },
+  {
+   "tool": "loogle",
+   "query": "ZMod.castHom, CategoryTheory.Sheaf",
+   "results": "0 hits: none",
+   "date": "2026-10-26",
+   "verdict": "no match: none states the native finite-level comparison or a one-line specialization; generic tensor/monoidal APIs and field-theoretic roots are insufficient."
+  },
+  {
+   "tool": "grep",
+   "query": "tateFiniteLine|RootsOfUnity.*[Tt]ensor|[Tt]ensor.*RootsOfUnity",
+   "results": "0 hits: none",
+   "date": "2026-10-26",
+   "verdict": "no match: none states the native finite-level comparison or a one-line specialization; generic tensor/monoidal APIs and field-theoretic roots are insufficient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient Tate twist as extension of scalars from roots of unity",
+   "results": "8 hits: modularCyclotomicCharacter.toFun, IsCyclotomicExtension.finite_of_singleton, CyclotomicRing.isCyclotomicExtension, isCyclotomicExtension_iff, IsCyclotomicExtension.iff_singleton, IsCyclotomicExtension.finite, CyclotomicField.instIsCyclotomicExtensionSingletonNatSetOfCharZero, IsCyclotomicExtension",
+   "date": "2026-10-26",
+   "verdict": "no match: none states the native finite-level comparison or a one-line specialization; generic tensor/monoidal APIs and field-theoretic roots are insufficient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product of a sheaf killed by N with a constant ring killed by N over integers agrees with tensor product over the constant sheaf ZMod N",
+   "results": "8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.monoidalCategoryStruct, PresheafOfModules.monoidalCategory, PresheafOfModules.Monoidal.tensorObj_obj",
+   "date": "2026-10-26",
+   "verdict": "no match: none states the native finite-level comparison or a one-line specialization; generic tensor/monoidal APIs and field-theoretic roots are insufficient."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Zz][Mm]od|[Zz][Mm]od.*tensor",
+   "results": "0 hits: none",
+   "date": "2026-10-26",
+   "verdict": "no match: none states the native finite-level comparison or a one-line specialization; generic tensor/monoidal APIs and field-theoretic roots are insufficient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"changeOfRings\"",
+   "results": "0 hits: none",
+   "date": "2026-10-26",
+   "verdict": "no match: none states the native finite-level comparison or a one-line specialization; generic tensor/monoidal APIs and field-theoretic roots are insufficient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-pur-native-integral-tate-finite-representation",
+  "date": "2026-10-26",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ProEtaleTateTwistLevels",
+  "file": "lean/Sheaf/Paper/ProEtaleTateTwistLevels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spIntegralTwistLevel_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spIntegralTwistLevel_comparison"
+  ],
+  "statement": "theorem spIntegralTwistLevel_comparison (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :\n    ∃ a : ZMod (ℓ ^ (n + 1)) →+* ULift.{u + 1} (spEllQuotient ℓ E n),\n      Nonempty ((spIntegralTwistLevel X ℓ E n).X ≅\n        (SheafOfModules.toSheaf _).obj\n          (Scheme.tateFiniteLine X ℓ (ULift.{u + 1} (spEllQuotient ℓ E n)) n a)) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-26",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-route-sp-integral-twist-level-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the provisional Lean signature into an exact arbitrary-scheme statement. The quotient gives the scalar map; the existing finite-discrete point and scheme comparisons give the coefficient isomorphism. Explicit free-module Hom formulas and the existing finite Tate line universal property construct inverse maps. No new nodes; no invertibility, finite-etale representability, transition or local-freeness claim is imported.",
+  "blueprint": "det-prop-sfb-cartesian-coefficients-twists, Integral twist paragraph, the displayed finite-level formula at exponent n+1. sk-def-sp-tate-twist supplies the blueprint formula; no use of its invertibility-dependent local-generator assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-ell-quotient-finite-discrete",
+    "why": "Finite discrete quotient and continuous reduction needed by the native construction; no unit-local statement gives finiteness."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "why": "Generic identification of finite discrete condensed rings with constant rings at the point."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "why": "Generic monoidal constant-ring pullback comparison for arbitrary schemes."
+   },
+   {
+    "node": "lem-sp-finite-tate-line-universal",
+    "why": "Generic Hom universal property of the already constructed finite scalar extension, used without replacing any geometric purity argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-ell-quotient-finite-discrete",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NB-b80461a06",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-b80461a06 (reviewer sub-agent of L); spot-checked: Read the item in full. There are no new nodes. The statement matches the Lean spIntegralTwistLevel_comparison exactly: exponent n+1, ideal (ell^(n+1)) not (pi^(n+1)), Mod.comap rho (Mod.free C mu), tateFiniteLine over ULift B, and an iso of underlying abelian sheaves. It needs no invertibility of ell and the target is not weakened. It is the r=n+1 case of the latest blueprint sk-prop-sfb-cartesian-coefficients-twists proof, lines 13-15. Step 1: lem-sp-ell-quotient-finite-discrete gives finiteness and continuity (the topologies agree by spIntegers_eq). Step 2: the condensed ring-constant lemma (finite discrete B) gives a ring-object iso that is IsMonHom. The scheme ring-constant lemma then gives the monoidal iso to condensedRingObj = C for any X. The internal/ordinary module equivalence keeps underlying sheaves. Implicit: the CommRingCat constant sheaf equals the sheafified constant ring presheaf, which is bookkeeping, not a gap. Step 3: the free internal module universal property follows from the unit and associativity axioms in a few lines, so elementary:true is fine; I found no existing node stating it. Step 4: lem-sp-finite-tate-line-universal covers any T and B, its roots sheaf is mu_{ell^(n+1)} of def-pur-roots-of-unity-sheaf, and it gives naturality under postcomposition. The inverse-map calculation v j = Psi_P(v) = i, uv = 1, vu = 1 checks. Small cases checked: n=0, ramified E, X empty, characteristic ell. No cycle in the transitive closure of stmt_deps and proof_deps. No duplicates: the spIntegralTwistLevel hits are the transition-uniqueness, finite-etale representability and local-freeness nodes. Declared tool_uses accepted. Bhatt-Scholze Lemma 4.2.12 checked in the PDF, and the report is right that Prop 5.3.2 is the wrong reference. Stacks 03EK and 03CY tags are correct. No SGA cited. No changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a7a45",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T200332-L-3306344",
+  "kind": "interface",
+  "note": "independent cc review: delivered Levels+Constructions+item concatenation vs published ProEtaleTateTwists.lean (verbatim, only headers + commonCover proof); new sorry lemmas vs node statements and tateTwist_finite_locallyFree clauses; 14 moved node lean.module/file vs physical location; 7 direct importers compiled OK against delivered set"
+ }
+}

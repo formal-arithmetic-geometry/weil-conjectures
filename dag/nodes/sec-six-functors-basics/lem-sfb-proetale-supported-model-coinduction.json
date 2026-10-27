@@ -1,0 +1,349 @@
+{
+ "id": "lem-sfb-proetale-supported-model-coinduction",
+ "kind": "statement",
+ "title": "Pro-etale coinduction of supported finite scalar models",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$, a finite subextension $E/\\mathbf Q_\\ell$, and a finite commutative ring $A$ killed by a power of $\\ell$. Let $\\Lambda\\in\\{A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E\\}$, with discrete topology for $A$ and the induced $\\ell$-adic topology otherwise [sk-def-localizing-closure]. Its condensed ring on profinite sets is $P\\mapsto C(P,\\Lambda)$, using all continuous maps. On each scheme $V$, put $\\Lambda_V=p_V^*\\Lambda$ and $\\mathcal A_V=\\operatorname{Mod}_{\\Lambda_V}$, with ordinary uncompleted module-object derived categories and actual module-derived global sections to abelian groups [sk-def-sfb-module-derived-pushpull, def-sfb-condensed-module-sections]. Use the small sites and indexing universe of [def-weil-pbc-etale-site, def-weil-pbc-proetale-site, def-weil-size-convention].\nFor each quasi-compact quasi-separated scheme $V$ [def-pc-scheme, def-weil-pbc-scheme-conventions], a support chain is a finite chain $W=V_s\\to\\cdots\\to V_0=V$, each arrow a quasi-compact open immersion or a closed immersion with quasi-compact open complement [def-weil-open-immersion, def-weil-closed-immersion, def-weil-finite-type-morphism]. Let $J$ be the composite of ordinary $a_!$ on open arrows and ordinary $a_*$ on closed arrows, with the identity for the empty chain [def-sfb-module-open-lower-shriek, def-sfb-module-lower-star]. A finite scalar local model on $W$ is a module locally on a pro-étale cover isomorphic to $\\Lambda_W\\otimes_{\\underline\\Lambda}\\underline P$ for a finitely presented scalar $\\Lambda$-module $P$, where both underlines denote discrete constant sheaves and $P$ may vary with the cover member [sk-def-sfb-constructible]. Let $\\mathcal G_V$ be the intersection of all full replete classes in $D(\\mathcal A_V)$ containing $JL[0]$ for all such chains and models $L$ and satisfying the following conditions. They contain zero and are closed under isomorphisms, all integer shifts, distinguished-triangle extensions, and retracts [def-weil-triangulated-subcategory]. A retract of $K$ is given by maps $K\\xrightarrow{i}L\\xrightarrow{p}K$ with $pi=1_K$. They are closed under all small products in the ordinary derived category [def-weil-category-product]. If $I$ is a small filtered category and $C_i^\\bullet$ is a strict diagram of module-sheaf complexes with a common termwise lower bound, and all $Q(C_i^\\bullet)$ belong to the class, then $Q(\\varinjlim_i C_i^\\bullet)$ belongs to the class. Here the colimit is termwise in module sheaves and $Q$ is localization at quasi-isomorphisms [def-weil-pbc-category-colimit, def-weil-abstract-derived-category].\n\nLet $U,V$ be quasi-compact quasi-separated schemes and let $b:U\\to V$ be an object of the small pro-étale site of $V$ (thus a weakly étale morphism), also quasi-compact and quasi-separated [sk-def-pe-morphisms, def-weil-quasi-separated-morphism]. No surjectivity or weak contractibility is assumed. For every support chain $W\\to\\cdots\\to U$, its ordinary supported extension functor $J$, and every finite scalar local model $L$ on $W$ as defined above, the actual ordinary module-derived direct image satisfies\n$$ Rb_*\\bigl((JL)[0]\\bigr)\\in\\mathcal G_V. $$\nHere $Rb_*$ is the total right derived functor of the actual coefficient-compatible module direct image, not a completed or solidified direct image. The conclusion concerns these explicit supported generators, rather than an arbitrary object satisfying local hull-membership. The empty chain, empty schemes, zero coefficients and zero models are included. No Noetherian, finite-type or cohomological-dimension hypothesis is imposed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Agent-formulated generator-level coinduction obligation for the structural supported hull. Sections 3-4 specify the ambient category and Lemma 5.3(1) supplies bounded continuity only; neither Corollary 4.7 nor Lemma 5.3 asserts this generator statement. Exact coinduction reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-condensed-module-sections",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "sk-def-sfb-constructible",
+  "def-weil-triangulated-subcategory",
+  "def-weil-category-product",
+  "def-weil-pbc-category-colimit",
+  "def-weil-abstract-derived-category",
+  "sk-def-pe-morphisms",
+  "def-weil-quasi-separated-morphism",
+  "def-sfb-supported-model-hull"
+ ],
+ "proof": [
+  {
+   "text": "Use the etale coinduction theorem for the fixed coefficient to obtain its quantified etale property on all qcqs schemes. Substituting it into conditional ind-etale continuity shows that every qcqs map locally admitting the specified finite affine ind-etale charts sends supported finite scalar generators into the target hull. This substitution does not assume descent of a local model to one etale stage.",
+   "uses": [
+    "lem-sfb-etale-supported-model-coinduction",
+    "lem-sfb-indetale-supported-hull-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms paragraph, via refinement (2): supported-hull coinduction input; agent assembly using the released repair route of 2026-10-25."
+   }
+  },
+  {
+   "text": "Choose the finite cover $q_a:D_a\\to U$ supplied by the ind-etale Cech refinement theorem. Every iterated fibre product $D_{a_0\\ldots a_n}$ is qcqs and its map to $V$ has exactly the finite affine ind-etale charts required in step 1. These are source covers, so no assertion of descent of hull-membership on $V$ is being used. Empty $U$ gives zero throughout and can be discarded.",
+   "uses": [
+    "lem-sfb-weakly-etale-indetale-cech-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms paragraph, via refinement (2): supported-hull coinduction input; agent assembly using the released repair route of 2026-10-25."
+   }
+  },
+  {
+   "text": "Put $N=JL$. Along any Cech projection $r:D_{a_0\\ldots a_n}\\to U$, base-change the entire support chain. The open and closed module base-change isomorphisms, iterated one edge at a time and transported through the exact internal/section-module equivalences, give $r^*JL\\cong J' r_W^*L$. Quasi-compactness and quasi-separatedness survive base change; the complementary open is the base change of the original complementary open. Restrict the cover trivializing $L$: on that cover the same constant presentation for the scalar module $P$ gives $\\Lambda\\otimes_{\\underline\\Lambda}\\underline P$ after inverse image. Thus $r_W^*L$ is a finite scalar local model and $r^*N$ is a supported generator on the intersection. Step 1 now puts $R(b r)_*(r^*N[0])$ in $\\mathcal G_V$.",
+   "uses": [
+    "lem-sf-ring-sheaf-base-change-mates",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms paragraph, via refinement (2): supported-hull coinduction input; agent assembly using the released repair route of 2026-10-25."
+   }
+  },
+  {
+   "text": "The finite covering family defines an epimorphism $D=\\coprod_a h_{D_a}\\to1$ in $U_{\\mathrm{proét}}$. Apply the coherent Cech pushforward-model theorem with $f=b$ and the module $N$. It gives a nonnegative double complex $B^{n,q}$ on $V$, an isomorphism $Rb_*N[0]\\cong Q\\operatorname{Tot}B$, and column isomorphisms $QB^{n,\\bullet}\\cong R(bv_n)_*(N_n[0])$. Finite-family site geometry identifies $D^{n+1}$ with the finite disjoint union of the fibre products in step 2. Sections on a finite disjoint union are the product of the component sections, so its module direct image is the product of the component direct images; compatible finite products of injective resolutions compute their derived product. Slice localization identifies each component with its own pro-etale site, and exact module transport retains the pulled-back coefficient. Hence the column is a finite product of the objects in step 3 and belongs to $\\mathcal G_V$. The augmentation is the actual derived restriction augmentation.",
+   "uses": [
+    "lem-sfb-cech-pushforward-augmented-model",
+    "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "lem-weil-pbc-finite-product-injective-resolutions",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms paragraph, via refinement (2): supported-hull coinduction input; agent assembly using the released repair route of 2026-10-25."
+   }
+  },
+  {
+   "text": "Let $T_m$ be the total of columns $0,\\ldots,m$, with the outgoing horizontal differential discarded. Projection $T_m\\to T_{m-1}$ is a chain map whose kernel is $B^{m,\\bullet}[-m]$ with the signed vertical differential. The degreewise short exact sequence gives a distinguished triangle. Starting at $T_0=B^{0,\\bullet}$ and using step 4, shift and triangle-extension closure gives $QT_m\\in\\mathcal G_V$ for all $m\\ge0$. These truncations are quotient complexes; no spurious inclusion as subcomplexes is used.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms paragraph, via refinement (2): supported-hull coinduction input; agent assembly using the released repair route of 2026-10-25."
+   }
+  },
+  {
+   "text": "The projections $T_{m+1}\\to T_m$ split on graded modules by insertion of a zero column. For $T=\\operatorname{Tot}B$ there is a degreewise short exact sequence\n$0\\to T\\to\\prod_{m\\ge0}T_m\\xrightarrow{1-s}\\prod_{m\\ge0}T_m\\to0$,\nwhere $(sx)_m$ is the projection of $x_{m+1}$. Indeed the kernel is the compatible sequences, and in degree $r$ the tower stabilizes once $m\\ge r$, identifying its limit with $T^r$. For surjectivity, given $(y_m)$ set $x_0=0$ and recursively lift $x_m-y_m$ to $x_{m+1}$ using the graded splitting. This is a morphism of degree-$r$ sheaves, so it proves epimorphy without choosing objectwise preimages. Termwise products represent derived products. By step 5 both products lie in $\\mathcal G_V$, and the short-exact-sequence triangle, rotation and shift closure put $QT$ there. The augmented-total isomorphism from step 4 proves the asserted membership of $Rb_*JL[0]$. All constructions retain zero models, zero rings and identity support chains.",
+   "uses": [
+    "det-pe-products-derived",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms paragraph, via refinement (2): supported-hull coinduction input; agent assembly using the released repair route of 2026-10-25."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-etale-supported-model-coinduction",
+  "lem-sfb-indetale-supported-hull-continuity",
+  "lem-sfb-weakly-etale-indetale-cech-refinement",
+  "lem-sf-ring-sheaf-base-change-mates",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "sk-def-sfb-constructible",
+  "lem-sfb-cech-pushforward-augmented-model",
+  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+  "lem-weil-pbc-finite-product-injective-resolutions",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-complex-ses-triangle",
+  "det-pe-products-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+  "place": "Refinement isomorphisms paragraph, via refinement (2): supported-hull coinduction input; agent assembly using the released repair route of 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward of a supported finite scalar local model along a quasi compact quasi separated pro etale morphism belongs to the product and bounded filtered colimit hull of supported scalar models",
+   "results": "{\"t\": \"2026-10-24T10:14:24Z\", \"tool\": \"leanfinder\", \"query\": \"Derived pushforward of a supported finite scalar local model along a quasi compact quasi separated pro etale morphism belongs to the product and bounded filtered colimit hull of supported scalar models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"SheafOfModules.isFinitePresentation\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.IsFinitePresentation\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"], \"digest\": \"506c091248ab1556\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar presentation, presheaf pushforward, qcqs geometry and the definition of profiniteSolid do not imply supported-generator coinduction for these module derived categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"pushforward\"",
+   "results": "{\"t\": \"2026-10-24T10:16:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"pushforward\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.pushforward₀Obj\", \"PresheafOfModules.pushforward₀_obj\", \"PresheafOfModules.pushforward₀\", \"PresheafOfModules.pushforwardId\", \"PresheafOfModules.pushforward\", \"PresheafOfModules.pushforward₀Obj_obj_carrier\", \"PresheafOfModules.pushforward₀CompToPresheaf\", \"PresheafOfModules.pushforwardCompToPresheaf\"], \"digest\": \"a5f42c6937af584c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar presentation, presheaf pushforward, qcqs geometry and the definition of profiniteSolid do not imply supported-generator coinduction for these module derived categories"
+  },
+  {
+   "tool": "grep",
+   "query": "(pro[Ee]tale|[Pp]roetale|[Pp]roEtale).*(hull|generat)|(hull|generat).*(pro[Ee]tale|[Pp]roetale|[Pp]roEtale)",
+   "results": "{\"t\": \"2026-10-24T10:16:38Z\", \"tool\": \"grep\", \"query\": \"(pro[Ee]tale|[Pp]roetale|[Pp]roEtale).*(hull|generat)|(hull|generat).*(pro[Ee]tale|[Pp]roetale|[Pp]roEtale)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar presentation, presheaf pushforward, qcqs geometry and the definition of profiniteSolid do not imply supported-generator coinduction for these module derived categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image along a quasi compact pro etale scheme map carries a finite scalar local system extended by zero on a locally closed subset into the subcategory generated by supported finite scalar models under products and bounded filtered colimits",
+   "results": "{\"t\": \"2026-10-24T10:21:30Z\", \"tool\": \"leansearch\", \"query\": \"Derived direct image along a quasi compact pro etale scheme map carries a finite scalar local system extended by zero on a locally closed subset into the subcategory generated by supported finite scalar models under products and bounded filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompact\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.quasiCompact_comp\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"Condensed.lanCondensedSet\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact_1\", \"AlgebraicGeometry.QuasiCompactCover.instPullback₁Scheme\", \"Condensed.lanSheafProfinite\"], \"digest\": \"71daa0985e63aa9c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar presentation, presheaf pushforward, qcqs geometry and the definition of profiniteSolid do not imply supported-generator coinduction for these module derived categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pro etale coinduction preserves the derived subcategory generated by constructible scalar models using products and filtered colimits",
+   "results": "{\"t\": \"2026-10-24T10:21:32Z\", \"tool\": \"leanfinder\", \"query\": \"Pro etale coinduction preserves the derived subcategory generated by constructible scalar models using products and filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolid\", \"Condensed.profiniteSolidification\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Condensed.profiniteFree\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\"], \"digest\": \"fc560f4b7d333544\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar presentation, presheaf pushforward, qcqs geometry and the definition of profiniteSolid do not imply supported-generator coinduction for these module derived categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"profiniteSolid\"",
+   "results": "{\"t\": \"2026-10-24T10:24:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"profiniteSolid\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Condensed.profiniteSolid\", \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"Condensed.profiniteSolidIsPointwiseRightKanExtension\", \"Condensed.profiniteSolidification\", \"Condensed.profiniteSolidCounit\"], \"digest\": \"81a7f5828ccf1ad3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar presentation, presheaf pushforward, qcqs geometry and the definition of profiniteSolid do not imply supported-generator coinduction for these module derived categories"
+  },
+  {
+   "tool": "grep",
+   "query": "(coinduc|pushforward|direct.image).*(constructible|scalar.model)|(constructible|scalar.model).*(coinduc|pushforward|direct.image)",
+   "results": "{\"t\": \"2026-10-24T10:24:19Z\", \"tool\": \"grep\", \"query\": \"(coinduc|pushforward|direct.image).*(constructible|scalar.model)|(constructible|scalar.model).*(coinduc|pushforward|direct.image)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar presentation, presheaf pushforward, qcqs geometry and the definition of profiniteSolid do not imply supported-generator coinduction for these module derived categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image of supported finite scalar local systems along a quasi compact pro etale morphism lies in the subcategory generated by supported scalar models under products and bounded below filtered colimits",
+   "results": "{\"t\": \"2026-10-25T10:52:00Z\", \"tool\": \"leanfinder\", \"query\": \"Derived direct image of supported finite scalar local systems along a quasi compact pro etale morphism lies in the subcategory generated by supported scalar models under products and bounded below filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Condensed.profiniteSolid\", \"CondensedMod.IsSolid\", \"Condensed.lanSheafProfinite\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"CondensedMod.ofSheafCompHaus\"], \"digest\": \"61f44e58cf27297e\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern sheaf or scheme infrastructure, finite-presentation geometry, or solid condensed objects; none states this ordinary geometric hull/refinement theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "(pro[Ee]tale|[Pp]roetale|[Pp]roEtale).*(hull|generat)|(hull|generat).*(pro[Ee]tale|[Pp]roetale|[Pp]roEtale)",
+   "results": "{\"t\": \"2026-10-25T10:57:55Z\", \"tool\": \"grep\", \"query\": \"(pro[Ee]tale|[Pp]roetale|[Pp]roEtale).*(hull|generat)|(hull|generat).*(pro[Ee]tale|[Pp]roetale|[Pp]roEtale)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern sheaf or scheme infrastructure, finite-presentation geometry, or solid condensed objects; none states this ordinary geometric hull/refinement theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded below pro etale pushforward preserves the product and filtered colimit hull generated by finite local scalar models with constructible support",
+   "results": "{\"t\": \"2026-10-25T10:57:55Z\", \"tool\": \"leansearch\", \"query\": \"Bounded below pro etale pushforward preserves the product and filtered colimit hull generated by finite local scalar models with constructible support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsSifted.colim_preservesFiniteProducts_of_isSifted\", \"Algebra.FormallyEtale.of_restrictScalars\", \"CategoryTheory.Limits.pointwiseProductCompEvaluation\", \"CategoryTheory.Limits.coconePointwiseProduct\", \"CategoryTheory.instPreservesFiniteProductsFunctorColimOfPreadditive\", \"Algebra.FormallyEtale.instTensorProduct\", \"CategoryTheory.IsSifted.colim_preservesLimits_pair_of_sSifted\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\"], \"digest\": \"b534f7ef5054ebb9\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern sheaf or scheme infrastructure, finite-presentation geometry, or solid condensed objects; none states this ordinary geometric hull/refinement theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"pushforward\"",
+   "results": "{\"t\": \"2026-10-25T10:57:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"pushforward\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.pushforward₀Obj\", \"PresheafOfModules.pushforward₀_obj\", \"PresheafOfModules.pushforward₀\", \"PresheafOfModules.pushforwardId\", \"PresheafOfModules.pushforward\", \"PresheafOfModules.pushforward₀Obj_obj_carrier\", \"PresheafOfModules.pushforward₀CompToPresheaf\", \"PresheafOfModules.pushforwardCompToPresheaf\"], \"digest\": \"a5f42c6937af584c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern sheaf or scheme infrastructure, finite-presentation geometry, or solid condensed objects; none states this ordinary geometric hull/refinement theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "(coinduc|pushforward|direct.image).*(constructible|scalar.model)|(constructible|scalar.model).*(coinduc|pushforward|direct.image)",
+   "results": "{\"t\": \"2026-10-25T11:01:12Z\", \"tool\": \"grep\", \"query\": \"(coinduc|pushforward|direct.image).*(constructible|scalar.model)|(constructible|scalar.model).*(coinduc|pushforward|direct.image)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern sheaf or scheme infrastructure, finite-presentation geometry, or solid condensed objects; none states this ordinary geometric hull/refinement theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pro etale coinduction of finite local systems and ind etale inverse limit continuity with adic and rational coefficients",
+   "results": "{\"t\": \"2026-10-25T11:01:13Z\", \"tool\": \"leanfinder\", \"query\": \"Pro etale coinduction of finite local systems and ind etale inverse limit continuity with adic and rational coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"Condensed.profiniteSolid\", \"Condensed.profiniteSolidCounit\", \"Condensed.profiniteFree\", \"Condensed.profiniteSolidification\", \"CondensedMod.ofSheafProfinite\", \"Algebra.FormallyEtale.instForallOfFinite\", \"Algebra.Etale.comp\"], \"digest\": \"ccfbddc533910424\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern sheaf or scheme infrastructure, finite-presentation geometry, or solid condensed objects; none states this ordinary geometric hull/refinement theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "(etale|étale).*(constructible|supported).*(push|direct)|(pushforward|direct.image).*(local.system|finite.scalar)",
+   "results": "{\"t\": \"2026-10-25T11:19:58Z\", \"tool\": \"grep\", \"query\": \"(etale|étale).*(constructible|supported).*(push|direct)|(pushforward|direct.image).*(local.system|finite.scalar)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: inspected hits concern sheaf or scheme infrastructure, finite-presentation geometry, or solid condensed objects; none states this ordinary geometric hull/refinement theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-supported-hull-proetale-descent",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph: descendant closed-fibre heart comparison; descent of the structural supported generation class before applying closed-pair restriction. Generator-level coinduction input for the Cech descent of the structural supported hull.",
+   "via": [
+    "lem-sfb-supported-hull-proetale-descent",
+    "lem-sfb-supported-image-bounded-derived-generation",
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "L maintenance (coefficient removal, follow-up of 66b1ce0e791)",
+  "old_statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$, a finite subextension $E/\\mathbf Q_\\ell$, and a finite commutative ring $A$ killed by a power of $\\ell$. Let $\\Lambda\\in\\{A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\Omega\\}$, with discrete topology for $A$ and the induced $\\ell$-adic topology otherwise [sk-def-localizing-closure]. Its condensed ring on profinite sets is $P\\mapsto C(P,\\Lambda)$, using all continuous maps, also for $\\Omega$. On each scheme $V$, put $\\Lambda_V=p_V^*\\Lambda$ and $\\mathcal A_V=\\operatorname{Mod}_{\\Lambda_V}$, with ordinary uncompleted module-object derived categories and actual module-derived global sections to abelian groups [sk-def-sfb-module-derived-pushpull, def-sfb-condensed-module-sections]. Use the small sites and indexing universe of [def-weil-pbc-etale-site, def-weil-pbc-proetale-site, def-weil-size-convention].\nFor each quasi-compact quasi-separated scheme $V$ [def-pc-scheme, def-weil-pbc-scheme-conventions], a support chain is a finite chain $W=V_s\\to\\cdots\\to V_0=V$, each arrow a quasi-compact open immersion or a closed immersion with quasi-compact open complement [def-weil-open-immersion, def-weil-closed-immersion, def-weil-finite-type-morphism]. Let $J$ be the composite of ordinary $a_!$ on open arrows and ordinary $a_*$ on closed arrows, with the identity for the empty chain [def-sfb-module-open-lower-shriek, def-sfb-module-lower-star]. A finite scalar local model on $W$ is a module locally on a pro-étale cover isomorphic to $\\Lambda_W\\otimes_{\\underline\\Lambda}\\underline P$ for a finitely presented scalar $\\Lambda$-module $P$, where both underlines denote discrete constant sheaves and $P$ may vary with the cover member [sk-def-sfb-constructible]. Let $\\mathcal G_V$ be the intersection of all full replete classes in $D(\\mathcal A_V)$ containing $JL[0]$ for all such chains and models $L$ and satisfying the following conditions. They contain zero and are closed under isomorphisms, all integer shifts, distinguished-triangle extensions, and retracts [def-weil-triangulated-subcategory]. A retract of $K$ is given by maps $K\\xrightarrow{i}L\\xrightarrow{p}K$ with $pi=1_K$. They are closed under all small products in the ordinary derived category [def-weil-category-product]. If $I$ is a small filtered category and $C_i^\\bullet$ is a strict diagram of module-sheaf complexes with a common termwise lower bound, and all $Q(C_i^\\bullet)$ belong to the class, then $Q(\\varinjlim_i C_i^\\bullet)$ belongs to the class. Here the colimit is termwise in module sheaves and $Q$ is localization at quasi-isomorphisms [def-weil-pbc-category-colimit, def-weil-abstract-derived-category].\n\nLet $U,V$ be quasi-compact quasi-separated schemes and let $b:U\\to V$ be an object of the small pro-étale site of $V$ (thus a weakly étale morphism), also quasi-compact and quasi-separated [sk-def-pe-morphisms, def-weil-quasi-separated-morphism]. No surjectivity or weak contractibility is assumed. For every support chain $W\\to\\cdots\\to U$, its ordinary supported extension functor $J$, and every finite scalar local model $L$ on $W$ as defined above, the actual ordinary module-derived direct image satisfies\n$$ Rb_*\\bigl((JL)[0]\\bigr)\\in\\mathcal G_V. $$\nHere $Rb_*$ is the total right derived functor of the actual coefficient-compatible module direct image, not a completed or solidified direct image. The conclusion concerns these explicit supported generators, rather than an arbitrary object satisfying local hull-membership. The empty chain, empty schemes, zero coefficients and zero models are included. No Noetherian, finite-type or cohomological-dimension hypothesis is imposed.",
+  "what": "Decision of the human, 2026-10-25: the ring of all continuous maps to the algebraic closure (continuousMapRingObj (PadicAlgCl l)) is no longer an admissible coefficient (commit 66b1ce0e791, coord/changes/L-coefficient-allcontinuous-removal.md). That commit narrowed the roots of this chain (weak-Serre generation, torsion-cd Serre transfer) to A, Z_l, O_E, Q_l, E, but this statement still listed the all-continuous case. It is dropped here and from the Lean hypothesis (landing L 20261025T093525); the remaining coefficients are unchanged. No citer uses the dropped case.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/_section.md",
+   "place": "coefficient list A, Z_l, O_E, Q_l, E, Qbar_l, with Qbar_l read as sk-def-sfb-qlbar-condensed"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-supported-hull-proetale-descent",
+    "holds": true,
+    "note": "cites it only for A, Z_l, O_E, Q_l, E; the all-continuous algebraic-closure coefficient is not admissible any more"
+   }
+  ]
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sfb-proetale-supported-model-coinduction",
+  "worker": "stage1",
+  "summary": "Replanned the released five-coefficient obligation. Separate etale coinduction and conditional affine ind-etale continuity from the weakly etale Cech refinement geometry, then assemble using supported pullback and the actual nonnegative Cech model, finite-column triangles and the split tower product sequence. No parent hull-locality or generator coinduction is assumed in the dependencies.",
+  "blueprint": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph: descendant closed-fibre heart comparison; descent of the structural supported generation class before applying closed-pair restriction. Generator-level coinduction input for the Cech descent of the structural supported hull.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-ring-sheaf-base-change-mates",
+    "why": "Generic Canonical open and closed base-change mates for arbitrary ring sheaves used with its stated hypotheses in the Cech assembly; the unit gives no replacement for this site/module or derived-category tool."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic Internal and sectionwise module operations agree used with its stated hypotheses in the Cech assembly; the unit gives no replacement for this site/module or derived-category tool."
+   },
+   {
+    "node": "lem-sfb-cech-pushforward-augmented-model",
+    "why": "Generic Adjunction-normalized augmented Cech model after derived pushforward used with its stated hypotheses in the Cech assembly; the unit gives no replacement for this site/module or derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+    "why": "Generic Geometry of the qcqs finite-cover pro-etale subsite used with its stated hypotheses in the Cech assembly; the unit gives no replacement for this site/module or derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-product-injective-resolutions",
+    "why": "Generic Finite products of abelian categories with enough injectives used with its stated hypotheses in the Cech assembly; the unit gives no replacement for this site/module or derived-category tool."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic The small pro-etale site of a weakly etale X-scheme is the localization of X_proet used with its stated hypotheses in the Cech assembly; the unit gives no replacement for this site/module or derived-category tool."
+   },
+   {
+    "node": "det-pe-products-derived",
+    "why": "Generic Products in the derived category are termwise used with its stated hypotheses in the Cech assembly; the unit gives no replacement for this site/module or derived-category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-ring-sheaf-base-change-mates",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-cech-pushforward-augmented-model",
+  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
+  "lem-weil-pbc-finite-product-injective-resolutions",
+  "lem-weil-proetale-weakly-etale-localization",
+  "det-pe-products-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-ND-eaacb8dc5",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-eaacb8dc5 (reviewer sub-agent of L); spot-checked: I read the item and the 3 new nodes in full, every cited statement, the parent lem-sfb-supported-hull-proetale-descent (no cycle), BS Prop 2.3.3, Thm 2.3.4/2.3.5, Rem 4.1.3 and HRS Cor 4.7, Lemma 5.3. The item statement is unchanged from live (5 coefficients after 66b1ce0, uncompleted D(Mod_{Λ_V}), actual Rb_*). The new nodes use the same coefficients and the same hull as def-sfb-supported-model-hull. Steps 1-6 hold. Step 1 substitutes the étale node verbatim into the continuity hypothesis. In step 2 the geometry node supplies exactly the charts the continuity node needs. Step 3 base-changes the support chain using the open/closed mates (qcqs stages), transport and a pulled-back trivialising cover. Step 4 uses the Cech model with f=b (b^* exact) and finite products from the finite-family geometry. Step 5 builds quotient totals T_m (kernel B^{m,•}[-m]) with triangle/shift closure. Step 6 uses T = lim T_m (degreewise stabilisation), the Milnor sequence with a sheaf-map lift, termwise derived products and rotation. The étale node is the base case of the BS route, strictly smaller than the item, so it is not D1. The continuity node is a conditional special case of the item. The geometry node is true by BS 2.3.4 plus a flat-diagonal argument: a pure closed immersion gives R/I=(1+I)^{-1}R, which is ind-Zariski. Small case checked: j:G_m→A^1, where Rj_*F_ℓ is an extension of j_!F_ℓ and i_*(F_ℓ⊕F_ℓ[-1]), so it lies in the hull. The DAG duplicate search found no node already stating any of the three. I accept the 7 declared generic tool_uses (the same tools the parent uses). FIX: the geometry node's source.place cited BS 'Lemma 2.3.3', which is Proposition 2.3.3. I corrected it and added Remark 4.1.3 in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-weakly-etale-indetale-cech-refinement.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProetaleSupportedModelCoinduction",
+  "declaration": "AlgebraicGeometry.ProEtale.proetale_supported_model_coinduction",
+  "file": "lean/Sheaf/Paper/ProetaleSupportedModelCoinduction.lean",
+  "statement": "theorem proetale_supported_model_coinduction (ℓ : ℕ) [Fact ℓ.Prime] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A) (_ : DiscreteTopology A) (_ : IsTopologicalRing A), Finite A ∧ (∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) ∧ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)))) (U V : Scheme.{u}) [CompactSpace U] [QuasiSeparatedSpace U] [CompactSpace V] [QuasiSeparatedSpace V] (b : U ⟶ V) [WeaklyEtale b] [QuasiCompact b] [QuasiSeparated b] (W : Scheme.{u}) (p : ScalarModelSupportChain U W) (L : Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)) (hL : HasFiniteConstantLocalModel Λ W L) : supportedModelHull Λ V ((CondensedRing.moduleObjectDerivedPushforward Λ b).obj ((DerivedCategory.singleFunctor _ 0).obj ((p.extension Λ).obj L)))",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80bdfeeeb",
+  "group": "NL",
+  "result": "fix",
+  "note": "Statement exact: hΛ identical to landed parent supportedModelHull_proetale_descent (5 coefficients, no all-continuous Qbar_l); qcqs U,V; b WeaklyEtale+QuasiCompact+QuasiSeparated, nothing stronger; ScalarModelSupportChain/extension/supportedModelHull from owner def-sfb-supported-model-hull match node (nil=identity, qc open, closed with compact complement, triangulated/replete/retract/products/bounded strict filtered colimits); HasFiniteConstantLocalModel = hull generator predicate; moduleObjectDerivedPushforward = (lowerStar Λ b).rightDerivedFunctor. Edge cases (empty chain/schemes, zero ring, zero model) covered; node json diff only lean + added stmt_dep; statement verbatim; sorry only; docstrings complete. Sole fault H11: 'Second reading by NL' self-declared non-independent → FIX fixes/lem-sfb-proetale-supported-model-coinduction.report.md (worker report verbatim + independent clause-by-clause reading). No Lean changed, no compile run."
+ }
+}

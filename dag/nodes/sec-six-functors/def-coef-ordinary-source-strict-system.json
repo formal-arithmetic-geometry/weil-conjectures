@@ -1,0 +1,140 @@
+{
+ "id": "def-coef-ordinary-source-strict-system",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, coefficient-level operations on ordinary semilinear systems: extract the source system using the actual evaluation and transition functors before applying inverse image levelwise.",
+   "via": [
+    "lem-coef-ordinary-inverse-system",
+    "lem-coef-semilinear-ordinary-geometric-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Strict extraction with the prescribed ordinary evaluations",
+ "statement": "Let J be an essentially small site in a chosen coefficient universe and let B_n be commutative ring sheaves with adjacent maps τ_n : B_(n+1) → B_n [def-coef-semilinear-system-models]. Define a functor from Systems J B τ to StrictRingSystem (rings J B τ) [def-pur-system-level-left-extension-basic] by taking its level n to be exactly (evaluation J B τ n).obj M and its transition for n≤m to be exactly (transition J B τ h).app M. On a system morphism f its level n is exactly (evaluation J B τ n).map f. The identity and composition laws are the sectionwise laws of the source presheaf. No epimorphism or normalization condition is imposed on transitions. These literal choices avoid applying arbitrary coefficient inverse images to an additional change-of-coefficient identification.",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "def-pur-system-level-left-extension-basic"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21: module systems, their evaluations, and horizontal restriction maps; the generic site model is def-coef-semilinear-system-models."
+ },
+ "proof": [
+  {
+   "text": "Use the already constructed evaluation module sheaves as the levels and the already constructed semilinear horizontal maps as transitions. The defining section formula of transition identifies its underlying function with the original source-presheaf horizontal restriction. For an identity index, the horizontal arrow is the identity of the product category, so the presheaf identity law proves the required section equation. For l≤m≤n, the horizontal arrow for l≤n is the composite of the other two horizontal arrows, so the presheaf composition law gives exactly the required strict composition equation.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-pur-system-level-left-extension-basic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21: module systems, their evaluations, and horizontal restriction maps; the generic site model is def-coef-semilinear-system-models."
+   }
+  },
+  {
+   "text": "A morphism is sent to its evaluation at each index. The naturality square of the existing transition transformation is precisely the required strict-system morphism square. Evaluation preserves identities and compositions, and strict-system morphism extensionality checks these laws componentwise. This is the explicit sourceStrictFunctor construction, with all auxiliary laws proved.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-pur-system-level-left-extension-basic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21: module systems, their evaluations, and horizontal restriction maps; the generic site model is def-coef-semilinear-system-models."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "def-pur-system-level-left-extension-basic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; complete Lean construction from the existing generic sequence-site evaluations and transition section formula, H2, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of modules on a sequence site gives a strict semilinear inverse system with its original evaluation modules and horizontal restriction maps",
+   "results": "SheafOfModules.sections; SheafOfModules; SheafOfModules.mk; SheafOfModules.evaluation; PresheafOfModules.sheafify; SheafOfModules.hasLimitsOfShape. The evaluation API is in Mathlib.Algebra.Category.ModuleCat.Sheaf.",
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary sheaf evaluation does not construct the project-specific semilinear sequence-site strict system with these literal coefficient transports."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pushforward\"",
+   "results": "PresheafOfModules.pushforward₀Obj, pushforward₀, pushforward, pushforwardId, pushforward₀Obj_obj_carrier, pushforwardCompToPresheaf, pushforwardComp in Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward.",
+   "date": "2026-10-26",
+   "verdict": "no match: these describe presheaf pushforward and its underlying carrier, not the simultaneous semilinear source-system construction."
+  },
+  {
+   "tool": "grep",
+   "query": "StrictRingSystem|sequenceToStrictSystem|sequenceSystemTransition in Mathlib",
+   "results": "No Mathlib hits. Project search finds sequenceToStrictSystem in Sheaf.CategoryTheory.SystemRingedSequenceSite; its levels use systemSequenceEvaluation, while the present definition uses exactly SemilinearSections.evaluation and transition. Blueprint search for strict systems found no matching blueprint node.",
+   "date": "2026-10-26",
+   "verdict": "no match: existing project equivalence uses a different coefficient-map presentation; the present extraction supplies the literal normalizations needed before an arbitrary inverse-image functor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearOrdinaryInverseSystem",
+  "date": "2026-10-26",
+  "group": "H2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearOrdinarySourceStrictSystem",
+  "file": "lean/Sheaf/Paper/SemilinearOrdinarySourceStrictSystem.lean",
+  "declaration": "WeilConjectures.SemilinearSections.OrdinarySource.sourceStrictFunctor",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.OrdinarySource.sourceSection",
+   "WeilConjectures.SemilinearSections.OrdinarySource.sourceStrict_identity",
+   "WeilConjectures.SemilinearSections.OrdinarySource.sourceStrict_compose",
+   "WeilConjectures.SemilinearSections.OrdinarySource.sourceStrictObject",
+   "WeilConjectures.SemilinearSections.OrdinarySource.sourceStrictFunctor"
+  ],
+  "statement": "def sourceStrictFunctor : Systems.{c, v, max c v r} J B τ ⥤\n    SheafOfModules.StrictRingSystem.{c, v, max c v r} (rings J B τ)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261026T111850-L-1757456",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261026T111850-L-1757456",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

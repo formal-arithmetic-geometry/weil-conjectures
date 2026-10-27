@@ -1,0 +1,137 @@
+{
+ "id": "lem-sf-pbc-rational-automorphism-coherence",
+ "kind": "lemma",
+ "title": "Rational automorphism transport commutes with scalar association",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime and $\\Omega$ an algebraic closure of $\\mathbf Q_\\ell$. Let $T$ be a noetherian finite-dimensional scheme on which $\\ell$ is invertible, and $e:T\\cong T$ an automorphism. For finite intermediate coefficient fields $E\\subseteq F\\subseteq G$, let $B_h,B_k,B_{hk}$ be rational scalar extension and $P_E,P_F,P_G$ the automorphism transports [def-wf-automorphism-completed-transport]. Let $c_h:B_hP_F\\cong P_EB_h$ denote their canonical comparison (functor-composition notation), and $a:B_hB_k\\cong B_{hk}$ the normalized scalar associator [def-weil-pbc-finite-stage-pair-category]. For every object $K$ of the raw rational coefficient category at $E$, the square $P_G(a_K)\\,;\\,c_{hk,K}=c_{k,B_hK}\\,;\\,B_k(c_{h,K})\\,;\\,a_{P_EK}$ commutes. Repeated coefficient fields are included. No Weil structure is assumed.",
+ "stmt_deps": [
+  "def-wf-automorphism-completed-transport",
+  "def-weil-pbc-finite-stage-pair-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-weil-sheaf-complex.proof.md",
+  "place": "Extension of scalars paragraph and preserved parent DAG proof step 4: joint compatibility required to induce the scalar associator on Weil pairs."
+ },
+ "proof": [
+  {
+   "text": "At the ordinary module level, the right comparisons between coefficient restriction and automorphism direct image are identity on sections. Composing two restrictions agrees with direct restriction under the section-normalized compositor. Thus the right-comparison square commutes. Take left mates under scalar extension and site transport. Composition and whiskering laws for mates yield the ordinary tensor-associator square.",
+   "uses": [
+    "def-wf-automorphism-completed-transport",
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply this square to complexes. The complex-counit normalizations of the ambient comparisons and the derived scalar adjunction identify both resulting derived composites with the ordinary square. Localization at quasi-isomorphisms is essentially surjective, giving the ambient square on all derived objects. Restrict along the faithful full inclusions of the integral bounded constructible complete categories. Their defining equations identify the restricted arrows with the integral scalar associator and integral automorphism comparisons.",
+   "uses": [
+    "def-wf-automorphism-completed-transport",
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the integral square by the scalar/localization comparisons b_h,b_k,b_hk and the transport/localization comparisons q_E,q_F,q_G. The defining normalization equations give c_h Q_E ; B_h(q_E) ; b_h P_E = P_F(b_h) ; q_F I_h ; Q_F(c_h^int), and a Q_E ; b_hk = B_k(b_h) ; b_k I_h ; Q_G(a^int), and similarly for k and hk. Postcompose both desired composites by the invertible B_hk(q_E) ; b_hk I_E. Rewrite using these equations. Naturality of q_G, b_k, c_k and a moves the intermediate factors across. The integral square makes the resulting composites equal. Cancel the invertible final factors. Every raw rational object is represented by an integral object, so this proves the displayed equation for every K.",
+   "uses": [
+    "def-wf-automorphism-completed-transport",
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-wf-automorphism-completed-transport",
+  "def-weil-pbc-finite-stage-pair-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-weil-sheaf-complex.proof.md",
+  "place": "Parent Weil associator proof step 4, expanded through ordinary mates, integral inclusion and conjugation by localization comparisons. W3 restores the recorded Lean interface after the original source disappeared; the statement, proof steps and coefficient compatibility obligation are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The scalar extension associator commutes with the inverse image scalar extension comparison for an automorphism",
+   "results": "ModuleCat.extendScalars_assoc' gives ordinary module associativity; other seven results concern algebra and linear equivalences. None concerns the normalized PBC ambient transport comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift natural isomorphism between functors to endofunctor algebras when structure maps commute",
+   "results": "Algebra.isoMk is used for the parent categorical lift. Other results are algebra functoriality and monad algebra transport. No ambient PBC scalar/automorphism square.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pbcIsoAmbientScalarComparison_comp; pbcIso.*(coher|Coher|Associat|associat); conjugateEquiv.*(comp|whisker)",
+   "results": "No existing PBC ambient square in Sheaf or adopted source. Mathlib Adjunction.Mates gives generic composition and whiskering laws, not their normalized completed-coefficient specialization. DAG and whole-blueprint search automorphism.*scalar|scalar.*automorphism|scalar.*transport.*coher found no duplicate statement.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcWeilCategory",
+  "date": "2026-10-25",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-weil-category",
+   "place": "Parent proof step 4: the normalized scalar associator must commute with automorphism comparison before it lifts to Weil pairs.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PbcRationalAutomorphismScalarCoherence",
+  "file": "lean/Sheaf/Paper/PbcRationalAutomorphismScalarCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbcIsoRationalScalarComparison_comp",
+  "statement": "theorem pbcIsoRationalScalarComparison_comp (h : E ≤ F) (k : F ≤ G)\n    (K : pbcStageCategory l Ω T E) :\n    (pbcRationalIsoPullback e (pbcStageDatum.{u} l Ω G)\n        (pbcStageUniformizer.{u} l Ω G)).map\n        ((pbcScalarAssociator l Ω T hdim hl h k).hom.app K) ≫\n      (pbcIsoRationalScalarComparison l Ω e hdim hl (h.trans k)).hom.app K =\n    (pbcIsoRationalScalarComparison l Ω e hdim hl k).hom.app\n        ((pbcScalarExtension l Ω T hdim hl h).obj K) ≫\n      (pbcScalarExtension l Ω T hdim hl k).map\n        ((pbcIsoRationalScalarComparison l Ω e hdim hl h).hom.app K) ≫\n      (pbcScalarAssociator l Ω T hdim hl h k).hom.app\n        ((pbcRationalIsoPullback e (pbcStageDatum.{u} l Ω E)\n          (pbcStageUniformizer.{u} l Ω E)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T201921-L-2649018",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T070057-L-3367353",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.pbcIsoRationalScalarComparison_comp"
+  ],
+  "sorry_after": []
+ }
+}

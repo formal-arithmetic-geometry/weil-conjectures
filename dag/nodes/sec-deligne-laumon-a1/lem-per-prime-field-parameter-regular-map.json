@@ -1,0 +1,148 @@
+{
+ "id": "lem-per-prime-field-parameter-regular-map",
+ "kind": "statement",
+ "title": "Regularity of the polynomial parameter map over a prime field",
+ "statement": "Let k be a field isomorphic to Q or F_p, p prime, and B a commutative regular local k-algebra. Let d be a natural number equal to the Krull dimension of B and t:Fin d→B generate the maximal ideal. Then evaluation k[X_i]→B sending X_i to t_i is a regular ring map [def-weil-pbc-g-ring]. Completeness of B is not assumed. This includes d=0.",
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-g-ring"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex; literature/stacks-project/divisors.tex",
+  "place": "Algebra, Tag 07DY; More on Algebra, Tags 07PS, 07PV, 0H7U, 07C0; original node steps 2–4."
+ },
+ "proof": [
+  {
+   "text": "Localize the polynomial ring at the origin ideal. The origin is maximal with residue field k, and its localization is regular local of dimension d with the coordinate variables as generators. The parameter evaluation contracts the maximal ideal of B to the origin, so it extends to a local map A→B.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-origin-regular-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A minimal generating list of the regular local target B is regular. Apply the regular-parameter flatness criterion to A→B, with the polynomial coordinates in A. Its closed fibre is B/n over k.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-flat-over-regular"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The prime field k is complete at its zero maximal ideal and is therefore a G-ring. Its polynomial ring is a finite-type G-ring, so the completion map of A is regular. Finite purely inseparable extensions of k are trivial: characteristic zero fields are perfect, and Frobenius is bijective on F_p. Thus every finite purely inseparable base change of the field B/n is isomorphic to B/n and is regular Noetherian.",
+   "uses": [
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "def-weil-pbc-g-ring",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The local closed-fibre regularity criterion now makes A→B regular. The target B has one maximal ideal and localization there is B itself. Its contraction is the origin. Apply the maximal-local criterion to conclude that the polynomial parameter map is regular. The zero-dimensional case has empty parameters and field target.",
+   "uses": [
+    "lem-per-g-ring-local-closed-fibre-criterion",
+    "lem-weil-pbc-regular-local-maximal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-polynomial-ring-origin-regular-local",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-flat-over-regular",
+  "lem-weil-pbc-complete-local-g-ring",
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-per-g-ring-local-closed-fibre-criterion",
+  "lem-weil-pbc-regular-local-maximal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex; literature/stacks-project/divisors.tex",
+  "place": "Algebra, Tag 07DY; More on Algebra, Tags 07PS, 07PV, 0H7U, 07C0; original node steps 2–4."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PrimeLocalSmoothParameterModels",
+  "date": "2026-10-26",
+  "group": "M4"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof of lem-per-prime-local-smooth-parameter-models: Algebra, Tag 07DY; More on Algebra, Tags 07PS, 07PV, 0H7U, 07C0; original node steps 2–4.",
+   "via": [
+    "lem-per-prime-local-smooth-parameter-models",
+    "lem-per-trait-test-prime-field-local-input",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Polynomial parameter map from a prime field into a regular local ring is regular",
+   "results": "Only monic-polynomial regular elements, smooth polynomials, and weak regular sequences under localization were found; no regular parameter-map theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact packaged result; reuse the listed algebraic and categorical primitives."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation from a polynomial ring over a perfect field at a regular system of parameters in a regular local ring is a regular ring homomorphism",
+   "results": "Found standard smoothness and regular-sequence localization, not regularity of the map.",
+   "date": "2026-10-26",
+   "verdict": "No exact packaged result; reuse the listed algebraic and categorical primitives."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Rr]egular.*[Pp]arameter; parameter.*map.*regular",
+   "results": "No Mathlib packaged result. Project PolynomialOriginRegularLocal, FlatOverRegular, LocalClosedFibreCriterion and RegularLocalMaximal supply the separate criteria.",
+   "date": "2026-10-26",
+   "verdict": "No exact packaged result; reuse the listed algebraic and categorical primitives."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PrimeFieldParameterRegularMap",
+  "file": "lean/Sheaf/RingTheory/PrimeFieldParameterRegularMap.lean",
+  "declaration": "IsLocalRing.prime_field_parameter_map_isRegular",
+  "statement": "theorem prime_field_parameter_map_isRegular (k B : Type u) [Field k] [CommRing B] [Algebra k B] (hprime : Nonempty (k ≃+* ℚ) ∨ ∃ p : ℕ, p.Prime ∧ Nonempty (k ≃+* ZMod p)) [IsRegularLocalRing B] (d : ℕ) (hdim : ringKrullDim B = (d : WithBot ℕ∞)) (t : Fin d → B) (hgen : Ideal.span (Set.range t) = maximalIdeal B) : (MvPolynomial.aeval (R := k) t).toRingHom.IsRegular",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T082508-L-2182808",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T082508-L-2182808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -120,12 +120,64 @@
    ]
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProjectiveSpace.exists_isClosedImmersion_pi",
+    "AlgebraicGeometry.ProjectiveSpace.isClosedImmersion_segre",
+    "AlgebraicGeometry.ProjectiveSpace.isProper_pi_hom"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProjectiveSpace.exists_isClosedImmersion_pi",
+     "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Product",
+     "lines": [
+      75,
+      120
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProjectiveSpace.isClosedImmersion_segre",
+     "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Segre",
+     "lines": [
+      605,
+      609
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProjectiveSpace.isProper_pi_hom",
+     "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Product",
+     "lines": [
+      122,
+      127
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-symmetric-ample",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "The binary Segre embedding\n$s:\\mathbf P^{n}_S\\times_S\\mathbf P^{m}_S\\to\\mathbf P^{n\\times m}_S$ of\n[def-chow-segre] is a closed immersion, for arbitrary index sets $n,m$.\nConsequently, for finitely many finite index sets $n_1,\\dots,n_m$ there are a\nfinite index set $N$ and a closed immersion of $S$-schemes\n\n$$\n\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S\n\\longrightarrow\\mathbf P^{N}_S .\n$$\n\nMoreover, $\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S\\to S$ is\nproper.\n\nIn particular, the composite of a closed immersion\n$X\\hookrightarrow\\mathbf P^{n}_S\\times_S\\mathbf P^{m}_S$ with the Segre\nembedding is a closed immersion of $X$ into a single projective space, and\n$\\mathcal O(1)\\boxtimes\\mathcal O(1)=s^*\\mathcal O(1)$ is very ample on\n$\\mathbf P^{n}_S\\times_S\\mathbf P^{m}_S$.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "The binary Segre embedding\n$s:\\mathbf P^{n}_S\\times_S\\mathbf P^{m}_S\\to\\mathbf P^{n\\times m}_S$ of\n[def-chow-segre] is a closed immersion, for arbitrary index sets $n,m$.\nConsequently, for finitely many finite index sets $n_1,\\dots,n_m$ there are a\nfinite index set $N$ and a closed immersion of $S$-schemes\n\n$$\n\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S\n\\longrightarrow\\mathbf P^{N}_S .\n$$\n\nMoreover, $\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S\\to S$ is\nproper.\n\nFor arbitrary index sets $n,m$, writing $p_1,p_2$ for the two projections of\n$\\mathbf P^{n}_S\\times_S\\mathbf P^{m}_S$, there is an isomorphism\n\n$$\ns^*\\mathcal O(1)\\cong p_1^*\\mathcal O(1)\\otimes p_2^*\\mathcal O(1)\n=\\mathcal O(1)\\boxtimes\\mathcal O(1).\n$$\n\nIn particular, let $f\\colon X\\to S$ be a morphism of schemes and let\n$\\mathcal M,\\mathcal N$ be $\\mathcal O_X$-modules with\n$\\mathcal M\\cong i^*\\mathcal O(1)$ and $\\mathcal N\\cong j^*\\mathcal O(1)$ for\nclosed immersions $i\\colon X\\to\\mathbf P^{n}_S$ and $j\\colon X\\to\\mathbf P^{m}_S$\nover $S$, with $n,m$ finite. Then $s\\circ(i,j)\\colon X\\to\\mathbf P^{n\\times m}_S$\nis a closed immersion over $S$ and\n$(s\\circ(i,j))^*\\mathcal O(1)\\cong\\mathcal M\\otimes\\mathcal N$.",
   "proof": [
    {
     "text": "*Reference: Stacks Project, Constructions of Schemes, Lemma 27.13.6,\n[Tag 01WD](https://stacks.math.columbia.edu/tag/01WD).*",
@@ -148,11 +200,20 @@
     "elementary": null
    },
    {
-    "text": "**The consequences.** A composite of closed immersions is a closed\nimmersion. On $\\mathbf P^{n}_S\\times_S\\mathbf P^{m}_S$ one has\n$s^*\\mathcal O(1)=\\mathcal O(1)\\boxtimes\\mathcal O(1)$, since\n$s^*X_{(k,l)}=x_ky_l$ is a section of bidegree $(1,1)$; as $s$ is a closed\nimmersion, $\\mathcal O(1)\\boxtimes\\mathcal O(1)$ is very ample.",
+    "text": "**The pullback of $\\mathcal O(1)$.** The opens\n$s^{-1}\\bigl(D_+(X_{(k,l)})\\bigr)=D_+(x_k)\\times_SD_+(y_l)$, $(k,l)\\in n\\times m$,\ncover $\\mathbf P^{n}_S\\times_S\\mathbf P^{m}_S$, and on each of them both\n$s^*\\mathcal O(1)$ and $p_1^*\\mathcal O(1)\\otimes p_2^*\\mathcal O(1)$ are free\nof rank one, with generators $s^*X_{(k,l)}$ and $p_1^*x_k\\otimes p_2^*y_l$\nrespectively. On the overlap of the charts for $(k,l)$ and $(k',l')$ the\ntransition functions agree, because $s$ pulls\n$X_{(k,l)}/X_{(k',l')}$ back to $(x_k/x_{k'})\\cdot(y_l/y_{l'})$. Hence the\nlocal isomorphisms sending one generator to the other glue to an isomorphism\n$s^*\\mathcal O(1)\\cong p_1^*\\mathcal O(1)\\otimes p_2^*\\mathcal O(1)$.",
     "uses": [],
     "elementary": null
+   },
+   {
+    "text": "**Tensor products.** Let $f,\\mathcal M,\\mathcal N,i,j$ be as in the statement\nand let $(i,j)\\colon X\\to\\mathbf P^{n}_S\\times_S\\mathbf P^{m}_S$ be the induced\nmorphism over $S$. The projection $p_1$ is a base change of\n$\\mathbf P^{m}_S\\to S$, which is proper, hence separated, for finite $m$\n[lemma-nagata-projective-space-base-change-proper]; so $p_1$ is separated, and\nsince $p_1\\circ(i,j)=i$ is a closed immersion, so is $(i,j)$\n[lem-weil-pbc-closed-immersion-from-composite]. By the binary case and\n[lem-weil-pbc-closed-immersion-products], $s\\circ(i,j)$ is a closed immersion,\nand it lies over $S$ because $i$ does. Since pullback commutes with tensor\nproducts and $p_1\\circ(i,j)=i$, $p_2\\circ(i,j)=j$,\n\n$$\n(s\\circ(i,j))^*\\mathcal O(1)\\cong(i,j)^*\\bigl(p_1^*\\mathcal O(1)\\otimes\np_2^*\\mathcal O(1)\\bigr)\\cong i^*\\mathcal O(1)\\otimes j^*\\mathcal O(1)\n\\cong\\mathcal M\\otimes\\mathcal N .\n$$",
+    "uses": [
+     "lemma-nagata-projective-space-base-change-proper",
+     "lem-weil-pbc-closed-immersion-from-composite",
+     "lem-weil-pbc-closed-immersion-products"
+    ],
+    "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

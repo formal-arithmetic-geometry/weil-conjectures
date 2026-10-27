@@ -520,10 +520,10 @@
   "file": "lean/Sheaf/Paper/GeneralCondensedWeilRealization.lean",
   "statement": "theorem general_condensed_weil_realization (c₀ : Compactification Y₀.hom) : ∃ A : CondensedPointSupertraceData D.k l E, Nonempty (@Data D l _ hl E Y₀ _ _ _ (characteristicPrime D) (characteristicDifferent D l hl) c₀ A)",
   "branch": "newtargets-dag",
-  "by": "Q122",
-  "date": "2026-10-18",
+  "by": "Z5",
+  "date": "2026-10-25",
   "existing": false,
-  "note": "The Source uses the canonical FieldModel universe lift and fdEquivalence of the recorded point-realization dependency. The final theorem supplies the characteristic structures from the finite-field datum; it assumes none beyond the node. Data packages all specified comparisons, actual global/local operators, all compatible embeddings, fixed-point indexing and right duals. A compactification is only a presentation of the recorded compact cohomology. The field-presentation Frobenius helper belongs to this module and is listed here; the landed GlobalGeometricFrobenius module and its dependency record are retained unchanged."
+  "note": "The Source uses the canonical FieldModel universe lift and fdEquivalence of the recorded point-realization dependency. The final theorem supplies the characteristic structures from the finite-field datum; it assumes none beyond the node. Data packages all specified comparisons, actual global/local operators, all compatible embeddings, fixed-point indexing and right duals. A compactification is only a presentation of the recorded compact cohomology. The field-presentation Frobenius helper belongs to this module and is listed here; the landed GlobalGeometricFrobenius module and its dependency record are retained unchanged. Z5 rework restoration (2026-10-25): restore the quarantined module; Target uses the current upstream WeilBoundedConstructible name for the same endomorphism IsoAlgebra category. Public imports of CompactCohomology and Stalk expose the actual globalOperator and stalkFrobenius used in Data. All archived declarations, hypotheses, operators, comparisons, and the one theorem hole remain; no proof route or dependency is withdrawn."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -533,5 +533,26 @@
   "result": "pass",
   "note": "Re-delivery after the H13/H4 RETURN of f875ab5b9068 makes correction (a) exactly. The separate GlobalGeometricFrobeniusForField module is deleted; the helper moved verbatim into the item module with a source/blueprint docstring and is listed in lean.declarations; the import is now Sheaf.Paper.GlobalGeometricFrobenius. The def-weil-global-geometric-frobenius record is back to NZ's base version and does not overwrite Q127's later live superset record. Against live, the item node differs only in lean. Snapshot diff: no other change, so the earlier clause-by-clause reading holds (characteristic derived not assumed, natural comparisons, global and local intertwining at every lift, fixedIndex pinned, right duals, no trace identity). Helper is not an H4 duplicate: the live Q-bar variants are for an algebraically closed Omega. lean.statement is verbatim, one sorry, longest line 91 characters. nt_compile --json clean in 20.7 s against an overlay that includes the Q127 GlobalGeometricFrobenius module. Advisories only: FieldModel/fdEquivalence/fibre are plain defs with no owning def node; PointRealizationCoefficientComparison compiles near the 60 s limit."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T124526-L-2053502",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,146 @@
+{
+ "id": "def-sfb-fibre-coefficient-quotient",
+ "kind": "definition",
+ "title": "Coefficient quotient of a vector-space-valued functor",
+ "statement": "Let $k$ be a field [def-weil-field], $S$ a small category and $F:S\\to\\operatorname{Mod}_k$ a functor to $k$-vector spaces. Use tensor products [def-weil-pbc-module-tensor-product]. Put $T_V=\\operatorname{Hom}_k(F(V),k)\\otimes_k F(V)$ and $T=\\bigoplus_{V\\in S}T_V$, with its canonical linear inclusions $j_V$. Define $N\\subseteq T$ as the linear span of all $j_W(\\psi\\otimes F(f)v)-j_V((\\psi\\circ F(f))\\otimes v)$ for $f:V\\to W$, $v\\in F(V)$ and $\\psi\\in\\operatorname{Hom}_k(F(W),k)$. The coefficient quotient is $B(F)=T/N$, with $c_V(\\phi,v)$ the quotient image of $j_V(\\phi\\otimes v)$. Given an equivalence $e:S\\simeq\\mathcal A$ with counit $a_V:e(e^{-1}V)\\simeq V$ and $G:\\mathcal A\\to\\operatorname{Mod}_k$, define $c_V^e(\\phi,v)=c_{e^{-1}V}(\\phi\\circ G(a_V),G(a_V^{-1})v)$ in $B(G\\circ e)$. All sums lie in a fixed containing universe. No finite dimension or exactness is needed for this quotient definition.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "§9(d), pp.174–178; the explicit coefficient presentation of lem-sfb-exact-fibre-coalgebra-reconstruction."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The coefficient coend quotient and finite dimensional right comodules of a coalgebra reconstructed from a vector space functor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.coend\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.End\", \"type\": \": C\", \"doc\": \"The coend of a functor $ F : \\\\mathcal{J}^\\\\text{op} \\\\to \\\\text{Functors}(\\\\mathcal{J}, \\\\mathcal{C}) $ is defined as the colimit (specifically the multicoequalizer) of the diagram in $ \\\\mathcal{C} $ const\"}\n  {\"name\": \"CategoryTheory.Endofunctor.Coalgebra.mk\", \"module\": \"Mathlib.CategoryTheory.Endofunctor.Algebra\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {F : CategoryTheory.Functor C C} → (V : C) → (V ⟶ F.obj V) → CategoryTheory.Endofunctor.Coalgebra F\", \"doc\": \"Given a category $\\\\mathcal{C}$, an endofunctor $F : \\\\mathcal{C} \\\\to \\\\mathcal{C}$, an object $V$ in $\\\\mathcal{C}$, and a morphism $V \\\\to F(V)$, this constructor creates a coalgebra for $F$ consisting o\"}\n  {\"name\": \"CoalgCat.ofComonObj\", \"module\": \"Mathlib.Algebra.Category.CoalgCat.ComonEquivalence\", \"type\": \"{R : Type u} → [inst : CommRing R] → (X : ModuleCat R) → [CategoryTheory.ComonObj X] → CoalgCat R\", \"doc\": \"Given a commutative ring $ R $, a left $ R $-module $ X $, and a comonoid structure on $ X $ in the monoidal category of $ R $-modules, this function constructs the corresponding coalgebra over $ R $ \"}\n  {\"name\": \"CategoryTheory.Comonad.ComonadicityInternal.rightAdjointComparison\", \"module\": \"Mathlib.CategoryTheory.Monad.Comonadicity\", \"type\": \"[∀ A : adj.toComonad.Coalgebra, HasEqualizer (G.map A.a) (adj.unit.app (G.obj A.A))] : adj.toComonad.Coalgebra ⥤ C\", \"doc\": \"Given adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, this constructs the right adjoint to the comparison functor from the Eilenberg-Moore category of $ G\"}\n  {\"name\": \"Coalgebra.Repr.mk\", \"module\": \"Mathlib.RingTheory.Coalgebra.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : AddCommMonoid A] →\\n        [inst_2 : Module R A] →\\n          [inst_3 : CoalgebraStruct R A] →\\n            {a : A} →\\n              {ι : Type u_1} →\\n                (index : Finset ι) →\\n                  (left right : ι → A)\", \"doc\": \"Let $A$ be a coalgebra over a commutative semiring $R$ with comultiplication $\\\\Delta : A \\\\to A \\\\otimes_R A$. For any element $a \\\\in A$, this constructor builds a term of type `Coalgebra.Repr R a` from\"}\n  {\"name\": \"CoalgCat.ofComonObjCoalgebraStruct\", \"module\": \"Mathlib.Algebra.Category.CoalgCat.ComonEquivalence\", \"type\": \"{R : Type u} → [inst : CommRing R] → (X : ModuleCat R) → [CategoryTheory.ComonObj X] → CoalgebraStruct R ↑X\", \"doc\": \"Given a commutative ring $ R $, a left $ R $-module $ X $, and a comonoid structure on $ X $ in the monoidal category of $ R $-modules, this function constructs the corresponding coalgebra structure o\"}\n  {\"name\": \"Coalgebra.Repr.recOn\", \"module\": \"Mathlib.RingTheory.Coalgebra.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : AddCommMonoid A] →\\n        [inst_2 : Module R A] →\\n          [inst_3 : CoalgebraStruct R A] →\\n            {a : A} →\\n              {motive : Coalgebra.Repr R a → Sort u_2} →\\n                (t : Coalgebra.Repr R a) →\\n      \", \"doc\": \"Given a coalgebra element $ a $ over a commutative semiring $ R $, this recursor allows defining functions on the coalgebra representation of $ a $ by specifying how to handle any decomposition of $ a\"}\n  {\"name\": \"CoalgCat.counit_def\", \"module\": \"Mathlib.Algebra.Category.CoalgCat.ComonEquivalence\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (X : CoalgCat R),\\n  CategoryTheory.ComonObj.counit = ModuleCat.ofHom CoalgebraStruct.counit\", \"doc\": \"For any commutative ring $ R $ and coalgebra $ X $ over $ R $, the counit morphism of the comonoid structure on $ X $ in the monoidal category of $ R $-modules coincides with the counit map $ \\\\epsilon\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coefficient coend quotient and finite dimensional right comodules of a coalgebra reconstructed from a vector space functor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Coalgebra.Repr.ι\", \"module\": \"Mathlib/RingTheory/Coalgebra/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : AddCommMonoid A] →\\n        [inst_2 : Module R A] → [inst_3 : CoalgebraStruct R A] → {a : A} → Coalgebra.Repr R a → Type u_1\", \"doc\": \"The function associates to each element $ a $ of the $ R $-module $ A $ and its coalgebra representation a type constructed via the comultiplication $ \\\\Delta: A \\\\to A \\\\otimes A $ and counit $ \\\\epsilon\"}\n  {\"name\": \"CoalgCat.instComonObjModuleCatOfCarrier\", \"module\": \"Mathlib/Algebra/Category/CoalgCat/ComonEquivalence\", \"type\": \"{R : Type u} → [inst : CommRing R] → (X : CoalgCat R) → CategoryTheory.ComonObj (ModuleCat.of R ↑X.toModuleCat)\", \"doc\": \"Given a commutative ring $ R $ and a coalgebra $ X $ over $ R $, this constructs the comonoid structure on the underlying $ R $-module of $ X $ in the monoidal category of $ R $-modules. The comultipl\"}\n  {\"name\": \"Coalgebra.Repr.arbitrary\", \"module\": \"Mathlib/RingTheory/Coalgebra/Basic\", \"type\": \"(R : Type u) →\\n  {A : Type v} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : AddCommMonoid A] → [inst_2 : Module R A] → [inst_3 : CoalgebraStruct R A] → (a : A) → Coalgebra.Repr R a\", \"doc\": \"For any element $ a $ in a coalgebra $ A $ over a commutative semiring $ R $, there exists a finite set $ S $ such that the comultiplication $ \\\\Delta(a) $ can be expressed as the finite sum $ \\\\sum_{i \"}\n  {\"name\": \"Pi.counit_comp_finsuppLcoeFun\", \"module\": \"Mathlib/RingTheory/Coalgebra/Basic\", \"type\": \"∀ {R : Type u_1} {n : Type u_2} [inst : CommSemiring R] [inst_1 : Fintype n] [inst_2 : DecidableEq n] {M : Type u_4}\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : CoalgebraStruct R M],\\n  CoalgebraStruct.counit ∘ₗ Finsupp.lcoeFun = CoalgebraStruct.counit\", \"doc\": \"For a commutative semiring $ R $, an index type $ \\\\iota $, and an $ R $-module $ A $ equipped with a coalgebra structure, the space of finite support functions $ \\\\iota \\\\to_0 A $ forms a coalgebra over\"}\n  {\"name\": \"Coalgebra.Repr.right\", \"module\": \"Mathlib/RingTheory/Coalgebra/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : AddCommMonoid A] →\\n        [inst_2 : Module R A] → [inst_3 : CoalgebraStruct R A] → {a : A} → (self : Coalgebra.Repr R a) → self.ι → A\", \"doc\": \"Given a coalgebra representation over a commutative semiring $ R $, this function maps elements of the representation's constructed type (via comultiplication $ \\\\Delta: A \\\\to A \\\\otimes A $) to the ori\"}\n  {\"name\": \"CoalgCat.comonEquivalence\", \"module\": \"Mathlib/Algebra/Category/CoalgCat/ComonEquivalence\", \"type\": \"(R : Type u) → [inst : CommRing R] → CoalgCat R ≌ CategoryTheory.Comon (ModuleCat R)\", \"doc\": \"For any commutative ring $ R $, this defines an equivalence of categories between the category of coalgebras over $ R $ and the category of comonads on the monoidal category of left $ R $-modules. The\"}\n  {\"name\": \"CoalgCat.moduleCat_of_toModuleCat\", \"module\": \"Mathlib/Algebra/Category/CoalgCat/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (X : CoalgCat R), ModuleCat.of R ↑X.toModuleCat = X.toModuleCat\", \"doc\": \"For any coalgebra $ X $ over a commutative ring $ R $, applying the module object constructor to the underlying $ R $-module of $ X $ (obtained via the forgetful functor) yields the same underlying $ \"}\n  {\"name\": \"Coalgebra.Repr\", \"module\": \"Mathlib/RingTheory/Coalgebra/Basic\", \"type\": \"(R : Type u) →\\n  {A : Type v} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : AddCommMonoid A] → [inst_2 : Module R A] → [CoalgebraStruct R A] → A → Type (max (u_1 + 1) v)\", \"doc\": \"A representation of a coalgebra over a commutative semiring $ R $, associating each element of the $ R $-module $ A $ with a type constructed using the coalgebra structure (comultiplication and counit\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coendomorphism|coend.*[Cc]oalgebra|[Cc]oalgebra.*coend|Comodule",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-exact-fibre-coalgebra-reconstruction",
+  "date": "2026-10-24",
+  "group": "Q10"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The coefficient quotient B and its canonical coefficients in the reconstruction statement.",
+   "via": [
+    "lem-sfb-exact-fibre-coalgebra-reconstruction",
+    "lem-sfb-neutral-tensor-envelope",
+    "lem-sfb-split-charzero-lie-group-integration",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FibreCoefficientQuotient",
+  "declaration": "CategoryTheory.FibreReconstruction.CoefficientQuotient",
+  "declarations": [
+   "CategoryTheory.FibreReconstruction.CoefficientSummand",
+   "CategoryTheory.FibreReconstruction.CoefficientSum",
+   "CategoryTheory.FibreReconstruction.coefficientInSum",
+   "CategoryTheory.FibreReconstruction.coefficientRelations",
+   "CategoryTheory.FibreReconstruction.coefficientMap",
+   "CategoryTheory.FibreReconstruction.coefficient",
+   "CategoryTheory.FibreReconstruction.coefficientAt"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FibreCoefficientQuotient.lean",
+  "statement": "abbrev CoefficientQuotient",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b9570d6c",
+  "group": "Q10",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b9570d6c",
+  "group": "Q10",
+  "result": "fix",
+  "note": "Lean and records correct: item changes only lean + stmt_deps (+2 new def nodes, §1(A)); hypotheses exact (Field, Abelian, Linear k, Faithful, finite limits/colimits, Additive/Linear, FiniteDimensional) with the small skeleton S/Skeletal/e as quantified data in containing universe max u w; B = direct sum of Dual⊗F over S modulo exactly the node's relations; coefficientAt uses the counit representative; ∃ Coalgebra with Δ for every finite basis (n=0 included) and ε = evaluation; ∃ A ≌ FiniteRightComodule d with literal functor equality to F and coaction formula for every basis (coassoc/counit checked by hand); FiniteRightComodule = full subcategory of Endofunctor.Coalgebra of the real (−)⊗B functor with finite dim + both coaction laws; no hollow defs, only sorry is the theorem proof, docstrings present; no existing comodule category or coefficient quotient in Mathlib, side-live or DAG. Sole fault H11: the second reading was the worker's self-audit, so fixes/lem-sfb-exact-fibre-coalgebra-reconstruction.report.md = worker report + New nodes verbatim + independent clause-by-clause second reading. No Lean changed, no compile."
+ }
+}

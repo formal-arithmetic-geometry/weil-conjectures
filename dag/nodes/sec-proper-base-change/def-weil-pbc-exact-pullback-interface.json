@@ -1,0 +1,140 @@
+{
+ "id": "def-weil-pbc-exact-pullback-interface",
+ "kind": "definition",
+ "title": "Exact constant and pullback interface for strict completed-coefficient towers",
+ "statement": "For an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], use the canonical coefficient identifications and exact module pullback F of [def-weil-pbc-four-corners]. The constant strict tower functor is exact; its induced derived functor is left adjoint to completed Rlim [def-pur-completed-rlim-functor]. The normalized reduction augmentation [def-weil-pbc-reduction-augmentation] defines the quotient completion unit by composition with this adjunction unit. Whiskering right with F applies F to every level and transition of a strict tower and preserves finite limits and colimits. Its exact induced derived functor commutes with constant towers via the comparison induced by identity component maps. No identification with intrinsic completion is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 099N, 079P"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-reduction-augmentation",
+  "def-pur-completed-rlim-functor"
+ ],
+ "proof": [
+  {
+   "text": "Keep the existing constant and Rlim constructions and apply the exact/right-derived adjunction theorem. Compose its unit with Rlim of the normalized reduction augmentation.",
+   "uses": [
+    "def-weil-pbc-reduction-augmentation",
+    "def-pur-completed-rlim-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exactness of ringed module pullback follows from the canonical coefficient isomorphism. Whiskering right preserves finite limits and colimits pointwise. Apply the exact derived-functor construction, and derive the componentwise identity constant-tower comparison.",
+   "uses": [
+    "def-weil-pbc-four-corners",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-reduction-augmentation",
+  "def-pur-completed-rlim-functor",
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Existing project declarations",
+  "place": "Relocation without changing signatures or bodies, extracted from def-weil-pbc-completed-pullback to make its completion comparison acyclic."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.compConstIso",
+   "results": "{\"top\": [\"CategoryTheory.Functor.compConstIso\", \"CategoryTheory.Functor.compConstIso_hom_app_app\", \"CategoryTheory.Functor.compConstIso_inv_app_app\", \"CategoryTheory.Localization.HasProductsOfShapeAux.adj_counit_app\"], \"n_hits\": 4, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "Generic Mathlib APIs found and used; the published normalized completed-ring constructions are project-specific."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant functor into a category of inverse systems is exact and left adjoint to the limit functor, so its derived functor has a derived right adjoint",
+   "results": "{\"top\": [\"CategoryTheory.Limits.instIsRightAdjointFunctorLim\", \"CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.hasLimit'\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.hasExactLimitsOfShape\", \"CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.hasLimit\", \"CategoryTheory.Limits.hasLimitsOfShape_iff_isLeftAdjoint_const\", \"Condensed.hasExactLimitsOfShape\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "Generic Mathlib APIs found and used; the published normalized completed-ring constructions are project-specific."
+  },
+  {
+   "tool": "grep",
+   "query": "constLimAdj|leftDerivedNatTrans_fac|whiskeringRight",
+   "results": "{\"top\": [\"Mathlib/AlgebraicTopology/SingularHomology/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean\", \"Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean\", \"Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean\"], \"n_hits\": 25, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "Generic Mathlib APIs found and used; the published normalized completed-ring constructions are project-specific."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The exact constant functor into inverse systems commutes with exact termwise pullback and has limit as its right adjoint",
+   "results": "{\"top\": [\"CategoryTheory.Limits.constLimAdj\", \"CategoryTheory.Limits.colimConstAdj\", \"CategoryTheory.Localization.HasProductsOfShapeAux.adj\", \"CategoryTheory.Limits.instIsRightAdjointFunctorLim\", \"CategoryTheory.Limits.hasColimitsOfShape_iff_isRightAdjoint_const\", \"CategoryTheory.leftExactFunctor\", \"CategoryTheory.Limits.isLimitConeOfAdj\", \"CategoryTheory.Limits.IsColimit.pullbackOfHasExactColimitsOfShape\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "Generic constant/limit adjunction APIs found and used; the normalized completed-ring quotient construction and exact pullback interface are project-specific."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedTowerPullback",
+  "date": "2026-10-22",
+  "group": "A4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Comparison paragraph: quotient maps give a strict morphism from the constant tower; apply tower pullback and Rlim.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackInterface",
+  "file": "lean/Sheaf/Paper/CompletedPullbackInterface.lean",
+  "declaration": "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerModulePull_exact",
+  "statement": "theorem AdicCoefficientDatum.towerModulePull_exact {U V : Scheme.{t}} (f : U ⟶ V) :\n    PreservesFiniteLimits (d.towerModulePull f) ∧\n      PreservesFiniteColimits (d.towerModulePull f)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-22",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.constantTower",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.derivedConstantTower",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.constantRlimAdjunction",
+   "AlgebraicGeometry.Scheme.completedReductionAugmentation",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completionUnit",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.TowerComplete",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerModulePull",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerModulePull_exact",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerModulePull_finiteLimits",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerModulePull_finiteColimits",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerModulePull_additive",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerPull",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.constantPullbackIso",
+   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.derivedConstantPullbackIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-ceb87",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T113806-L-249289",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-ceb87",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T113806-L-249289",
+  "kind": "interface",
+  "note": "independent cc review: ceb877bf vs PASSed head 3303661f (9 Lean modules sha256-identical, packet diffs hash-identical, nodes differ only in lean_audit = live); Users table vs 66 computed users + the 4 landing-gate users; prior /tmp/a4sb importer compiles (38 direct importers, sources still = live, no new importers)"
+ }
+}

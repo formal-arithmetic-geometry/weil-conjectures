@@ -1,0 +1,293 @@
+{
+ "id": "lem-trf-nagata-normalization-dvr-branches",
+ "kind": "statement",
+ "title": "Finite normalization and DVR branches of a reduced Nagata curve ring",
+ "statement": "Let $(A,\\mathfrak m)$ be a reduced commutative local Nagata ring [def-weil-pbc-nagata-ring] of Krull dimension $1$ [def-weil-pbc-krull-dimension-ring]. Reduced means that $a^n=0$, $n\\geq1$, implies $a=0$, and local means that $\\mathfrak m$ is the unique maximal ideal. For any ring $T$, write $Q(T)=S_T^{-1}T$, where $S_T$ consists of the non-zero-divisors $s$ (those satisfying $sx=0\\Rightarrow x=0$). Let $B\\subset Q(A)$ be the integral closure of $A$ [def-weil-pbc-integral-closure]. Then $A$ has finitely many minimal prime ideals $\\mathfrak p_1,\\ldots,\\mathfrak p_t$. Put $D_i=A/\\mathfrak p_i$ and $K_i=A_{\\mathfrak p_i}$, with localization at a prime as in [def-weil-pbc-localization-at-prime]. Each $D_i$ is a one-dimensional Noetherian local Nagata domain, and the canonical map identifies $K_i$ with its fraction field. Here a domain is a nonzero ring without zero divisors, and Noetherian is as in [def-weil-pbc-noetherian-ring]. Let $E_i\\subset K_i$ be the integral closure of $D_i$. Each $E_i$ is finite as a $D_i$-module [def-weil-finitely-generated-module] and is a Dedekind domain, meaning a Noetherian domain of dimension $1$ integrally closed in its fraction field. The canonical isomorphism $Q(A)\\cong\\prod_iK_i$ identifies $B$ with $\\prod_iE_i$, and $B$ is finite as an $A$-module. For every prime $\\mathfrak q\\subset B$ contracting to $\\mathfrak m$, there is a unique factor $E_i$ and a nonzero maximal prime $\\mathfrak r\\subset E_i$ over $\\mathfrak m/\\mathfrak p_i$ such that the canonical localization isomorphism is $B_{\\mathfrak q}\\cong(E_i)_{\\mathfrak r}$. In particular every such $B_{\\mathfrak q}$ is a discrete valuation ring [def-sc-discrete-valuation-ring].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0C3S (lemma-pre-delta-invariant) and 0C3V (lemma-normalization-same-after-completion), component normalization and local DVR input; no completion conclusion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-sc-discrete-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-nagata-ring], $A$ is Noetherian. Apply [lem-weil-pbc-noetherian-finitely-many-minimal-primes] to enumerate its distinct minimal primes $\\mathfrak p_1,\\ldots,\\mathfrak p_t$. None equals $\\mathfrak m$: if the unique maximal ideal were minimal, every prime, being contained in it, would equal it, contrary to $\\dim A=1$. For each $i$, $D_i=A/\\mathfrak p_i$ is a nonzero domain, and [lem-weil-pbc-surjective-image-noetherian] makes it Noetherian. Ideals of $D_i$ correspond to ideals of $A$ containing $\\mathfrak p_i$, by inverse image and $J\\mapsto J/\\mathfrak p_i$; these operations preserve and reflect primality and inclusion. Thus $D_i$ is local with maximal ideal $\\mathfrak m/\\mathfrak p_i$, and has dimension exactly one: $(0)\\subsetneq\\mathfrak m/\\mathfrak p_i$ is a prime chain and any longer chain would lift to one in $A$. For every prime $\\mathfrak a/\\mathfrak p_i$ of $D_i$, its quotient is $A/\\mathfrak a$, which is N-2 by the Nagata hypothesis. This and Noetherianity verify directly that $D_i$ is Nagata.",
+   "uses": [
+    "def-weil-pbc-nagata-ring",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032R (definition-nagata), 00FR (lemma-Noetherian-irreducible-components), 00FN (lemma-Noetherian-permanence), and 00KE (definition-Krull); quotient ideal correspondence written out."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-reduced-noetherian-total-ring-fractions] to $A$. It gives the canonical isomorphism $Q(A)\\simeq\\prod_iK_i$, each $K_i$ a field with $\\mathfrak p_iK_i=0$. The kernel of $A\\to K_i$ is exactly $\\mathfrak p_i$: elements of that ideal vanish, while every element outside it becomes a unit in this nonzero field. Thus $D_i\\hookrightarrow K_i$. Every element of $K_i=A_{\\mathfrak p_i}$ is $a/s$ with $s\\notin\\mathfrak p_i$, hence is the quotient of the images of $\\bar a,\\bar s\\in D_i$ with $\\bar s\\ne0$. This identifies $K_i$ canonically with $\\operatorname{Frac}(D_i)$.",
+   "uses": [
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 02LX (lemma-total-ring-fractions-no-embedded-points), 00EU (lemma-minimal-prime-reduced-ring), 00EW (lemma-reduced-ring-sub-product-fields)."
+   }
+  },
+  {
+   "text": "For each $i$, [def-weil-pbc-nagata-ring] applied to the prime $\\mathfrak p_i$ says that $D_i$ is N-2. Specialize [def-weil-pbc-japanese-domain] to the degree-one field extension $K_i/K_i$: its integral closure $E_i$ is finite over $D_i$. By [lem-weil-pbc-finite-algebra-noetherian], $E_i$ is Noetherian. Apply [lem-weil-pbc-integral-closure-finite-extension-normal] with base $D_i$ and $F=L=K_i$: $E_i$ is an integrally closed domain with fraction field $K_i$. Its inclusion $D_i\\hookrightarrow E_i$ is injective and integral, by the definition of integral closure, so [lem-weil-pbc-integral-injective-dimension-equal] gives $\\dim E_i=\\dim D_i=1$. These are precisely the stated Dedekind properties.",
+   "uses": [
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-integral-injective-dimension-equal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032R (definition-nagata), 032F (definition-N), 00FN (lemma-Noetherian-permanence), 034L (lemma-integral-closure-in-normal), and 00OK (lemma-integral-sub-dim-equal)."
+   }
+  },
+  {
+   "text": "Under Step 2, an element of $B$ gives a tuple $(x_i)$ with $x_i\\in E_i$: project a monic equation over $A$ to $K_i$, where its coefficients map through $D_i$. Conversely, for $(x_i)\\in\\prod_iE_i$, choose a monic equation $f_i(x_i)=0$ with $f_i\\in D_i[T]$, and lift all coefficients to a monic $\\widetilde f_i\\in A[T]$. The monic polynomial $F=\\prod_i\\widetilde f_i$ annihilates $(x_i)$, since in coordinate $i$ its $i$-th factor vanishes. Thus the tuple is integral over $A$. Both implications use only [def-weil-pbc-integral-closure], and prove that the canonical isomorphism restricts to $B\\simeq\\prod_iE_i$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GI (definition-integral), 00GP (definition-integral-closure); coordinatewise monic-equation argument for the component normalization used in varieties.tex Tag 0C3S (lemma-pre-delta-invariant)."
+   }
+  },
+  {
+   "text": "For each $i$ take finitely many $D_i$-module generators $e_{ij}$ of $E_i$. Embed each $e_{ij}$ as the tuple supported only in factor $i$. These finitely many tuples generate $\\prod_iE_i$ over $A$: express each coordinate in its chosen generators, lift its coefficients from $D_i=A/\\mathfrak p_i$ to $A$, and sum the resulting supported tuples. By Step 4 they therefore generate $B$, proving that $B$ is finite over $A$.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032F (definition-N), and varieties.tex Tag 0C3S (lemma-pre-delta-invariant); explicit finite family of generators."
+   }
+  },
+  {
+   "text": "Identify $B$ with $\\prod_iE_i$ and let $e_i$ be the tuple equal to $1$ in factor $i$ and $0$ elsewhere. Since $\\sum_i e_i=1$, at least one $e_i$ is outside the proper prime $\\mathfrak q$. At most one is outside: $e_ie_j=0\\in\\mathfrak q$ for $i\\ne j$. For this unique $i$, every $e_j$ with $j\\ne i$ belongs to $\\mathfrak q$, so the kernel of the projection $\\pi_i:B\\to E_i$ lies in $\\mathfrak q$. Put $\\mathfrak r=\\pi_i(\\mathfrak q)$; the quotient $B/\\mathfrak q\\simeq E_i/\\mathfrak r$ shows that $\\mathfrak r$ is prime and $\\mathfrak q=\\pi_i^{-1}(\\mathfrak r)$. Its contraction to $D_i$ is $\\mathfrak m/\\mathfrak p_i$ because $\\mathfrak q\\cap A=\\mathfrak m$. The fraction map $b/s\\mapsto b_i/s_i$ defines $B_{\\mathfrak q}\\to(E_i)_{\\mathfrak r}$, since $s\\notin\\mathfrak q$ iff $s_i\\notin\\mathfrak r$. In $B_{\\mathfrak q}$ the idempotent $e_i$ is a unit, hence equals $1$, and $1-e_i=0$. The map $E_i\\to B_{\\mathfrak q}$ sending $x$ to its supported tuple divided by $1$ is therefore unital; it sends every $x\\notin\\mathfrak r$ to a unit. It extends to $(E_i)_{\\mathfrak r}$, and the two fraction maps are inverse because all other coordinates vanish. This proves the canonical localization isomorphism and uniqueness of its factor and prime.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO (definition-localization); finite-product idempotent and fraction argument written out."
+   }
+  },
+  {
+   "text": "The inclusion $D_i\\hookrightarrow E_i$ is integral. Since $\\mathfrak r\\cap D_i=\\mathfrak m/\\mathfrak p_i$ is maximal, [lem-weil-pbc-integral-prime-over-maximal-maximal] makes $\\mathfrak r$ maximal. Moreover $\\mathfrak m/\\mathfrak p_i\\ne0$ by Step 1, and $D_i\\hookrightarrow E_i$ is injective, so $\\mathfrak r\\ne0$. Apply [lem-sc-dedekind-localization-dvr] to the Dedekind domain $E_i$ of Step 3 and its maximal ideal $\\mathfrak r$. It gives that $(E_i)_{\\mathfrak r}$, and hence the canonically isomorphic $B_{\\mathfrak q}$ of Step 6, is a discrete valuation ring.",
+   "uses": [
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "lem-sc-dedekind-localization-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GS (lemma-integral-over-field), 034X (lemma-characterize-Dedekind), and 00PD (lemma-characterize-dvr); the local-ring input used in varieties.tex Tag 0C3V (lemma-normalization-same-after-completion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-nagata-ring",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-sc-dedekind-localization-dvr"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0C3S (lemma-pre-delta-invariant) and 0C3V (lemma-normalization-same-after-completion): component normalization and DVR input; expanded using Algebra Tags 032R, 032F, 02LX, 034L, 00OK, 034X. Explicit monic-polynomial, finite-generator and product-localization assembly by Q42."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(Nagata|IsNagata).*([Nn]ormal|[Dd]edekind)|([Nn]ormal|[Dd]edekind).*(Nagata|IsNagata)",
+   "results": "{\"t\": \"2026-10-22T06:05:01Z\", \"tool\": \"grep\", \"query\": \"(Nagata|IsNagata).*([Nn]ormal|[Dd]edekind)|([Nn]ormal|[Dd]edekind).*(Nagata|IsNagata)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/NoetherNormalization.lean\"], \"digest\": \"2836c866e340fdf5\"}; No match. Dedekind localization results assume an already Dedekind domain and do not give the reduced normalization product or its finiteness. integralClosure.isDedekindDomain (IntegralClosure.lean:234) and its fractionRing instance (:246) require an already Dedekind base and a separable finite field extension, not a reduced Nagata ring. Ring.DimensionLEOne.integralClosure gives only an upper dimension bound. The grep hit on NoetherNormalization.lean:14 is historical attribution, not Nagata-ring normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The integral closure of a reduced one dimensional Nagata local ring has finite module generators and discrete valuation local branches",
+   "results": "{\"t\": \"2026-10-22T06:05:01Z\", \"tool\": \"leansearch\", \"query\": \"The integral closure of a reduced one dimensional Nagata local ring has finite module generators and discrete valuation local branches\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDedekindDomain, integralClosure",
+   "results": "{\"t\": \"2026-10-22T06:05:01Z\", \"tool\": \"loogle\", \"query\": \"IsDedekindDomain, integralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"integralClosure.isDedekindDomain\", \"integralClosure.isDedekindDomain_fractionRing\"], \"digest\": \"72a192ac701ad3c9\"}; No match. Dedekind localization results assume an already Dedekind domain and do not give the reduced normalization product or its finiteness. integralClosure.isDedekindDomain (IntegralClosure.lean:234) and its fractionRing instance (:246) require an already Dedekind base and a separable finite field extension, not a reduced Nagata ring. Ring.DimensionLEOne.integralClosure gives only an upper dimension bound. The grep hit on NoetherNormalization.lean:14 is historical attribution, not Nagata-ring normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite normalization of a reduced one dimensional Nagata local ring is a product of Dedekind domains and its localizations over the maximal ideal are discrete valuation rings",
+   "results": "{\"t\": \"2026-10-22T06:05:12Z\", \"tool\": \"leanfinder\", \"query\": \"Finite normalization of a reduced one dimensional Nagata local ring is a product of Dedekind domains and its localizations over the maximal ideal are discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.isDedekindDomainDvr\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsDedekindDomainDvr.isDedekindDomain\", \"IsDedekindDomainDvr\", \"IsDedekindDomainDvr.is_dvr_at_nonzero_prime\", \"IsLocalization.AtPrime.isDedekindDomain\", \"IsDiscreteValuationRing.TFAE\"], \"digest\": \"bdb957de9e641be0\"}; No match. Dedekind localization results assume an already Dedekind domain and do not give the reduced normalization product or its finiteness. integralClosure.isDedekindDomain (IntegralClosure.lean:234) and its fractionRing instance (:246) require an already Dedekind base and a separable finite field extension, not a reduced Nagata ring. Ring.DimensionLEOne.integralClosure gives only an upper dimension bound. The grep hit on NoetherNormalization.lean:14 is historical attribution, not Nagata-ring normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isDedekindDomain|isDiscreteValuationRing_of_dedekind_domain",
+   "results": "{\"t\": \"2026-10-22T06:06:19Z\", \"tool\": \"grep\", \"query\": \"isDedekindDomain|isDiscreteValuationRing_of_dedekind_domain\", \"sub\": \"RingTheory/DedekindDomain\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/GaussLemma.lean\", \"Mathlib/RingTheory/DedekindDomain/GaussLemma.lean\", \"Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean\"], \"digest\": \"52f7881eec7024d9\"}; searched subdirectory Mathlib/RingTheory/DedekindDomain; No match. Dedekind localization results assume an already Dedekind domain and do not give the reduced normalization product or its finiteness. integralClosure.isDedekindDomain (IntegralClosure.lean:234) and its fractionRing instance (:246) require an already Dedekind base and a separable finite field extension, not a reduced Nagata ring. Ring.DimensionLEOne.integralClosure gives only an upper dimension bound. The grep hit on NoetherNormalization.lean:14 is historical attribution, not Nagata-ring normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure of a reduced local Nagata ring splits into the normalizations of its minimal prime quotients, each a one dimensional Dedekind domain",
+   "results": "{\"t\": \"2026-10-22T06:06:31Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure of a reduced local Nagata ring splits into the normalizations of its minimal prime quotients, each a one dimensional Dedekind domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.isDedekindDomain\", \"IsIntegrallyClosed.of_localization_maximal\", \"IsIntegrallyClosed.of_isLocalization_maximal\", \"instIsDedekindDomainLocalizationAlgebraMapSubmonoidPrimeCompl\", \"Localization.AtPrime.isDedekindDomain\", \"IsIntegrallyClosed.of_localization\", \"Ring.DimensionLEOne.integralClosure\", \"Algebra.ZariskisMainProperty\"], \"digest\": \"cda259e890f61eaa\"}; No match. Dedekind localization results assume an already Dedekind domain and do not give the reduced normalization product or its finiteness. integralClosure.isDedekindDomain (IntegralClosure.lean:234) and its fractionRing instance (:246) require an already Dedekind base and a separable finite field extension, not a reduced Nagata ring. Ring.DimensionLEOne.integralClosure gives only an upper dimension bound. The grep hit on NoetherNormalization.lean:14 is historical attribution, not Nagata-ring normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDedekindDomain, integralClosure",
+   "results": "{\"t\": \"2026-10-23T04:14:45Z\", \"tool\": \"loogle\", \"query\": \"IsDedekindDomain, integralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"integralClosure.isDedekindDomain\", \"integralClosure.isDedekindDomain_fractionRing\"], \"digest\": \"72a192ac701ad3c9\"}; No match for the whole item: DVR-localization results assume a Dedekind base; integralClosure.isDedekindDomain (IntegralClosure.lean:234) assumes the base already Dedekind (with separability), and supplies neither Nagata finiteness nor the reduced total-quotient decomposition. The Nagata grep hit is historical attribution in NoetherNormalization.lean:14. NormalClosure and KummerDedekind hits have stronger field or Dedekind hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(Nagata|IsNagata|IsN2).*([Nn]ormal|integralClosure)|([Nn]ormal|integralClosure).*(Nagata|IsNagata|IsN2)",
+   "results": "{\"t\": \"2026-10-23T04:14:45Z\", \"tool\": \"grep\", \"query\": \"(Nagata|IsNagata|IsN2).*([Nn]ormal|integralClosure)|([Nn]ormal|integralClosure).*(Nagata|IsNagata|IsN2)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/NoetherNormalization.lean\"], \"digest\": \"2836c866e340fdf5\"}; No match for the whole item: DVR-localization results assume a Dedekind base; integralClosure.isDedekindDomain (IntegralClosure.lean:234) assumes the base already Dedekind (with separability), and supplies neither Nagata finiteness nor the reduced total-quotient decomposition. The Nagata grep hit is historical attribution in NoetherNormalization.lean:14. NormalClosure and KummerDedekind hits have stronger field or Dedekind hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalization of a reduced one dimensional Nagata local ring is module finite and its local branches are discrete valuation rings",
+   "results": "{\"t\": \"2026-10-23T04:14:46Z\", \"tool\": \"leansearch\", \"query\": \"The normalization of a reduced one dimensional Nagata local ring is module finite and its local branches are discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.TFAE\", \"IsDiscreteValuationRing.mk\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"IsDiscreteValuationRing.toIsLocalRing\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"IsDedekindDomain.isDedekindDomainDvr\", \"IsDedekindDomainDvr.ring_dimensionLEOne\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"f414a13a2fa3b1e5\"}; No match for the whole item: DVR-localization results assume a Dedekind base; integralClosure.isDedekindDomain (IntegralClosure.lean:234) assumes the base already Dedekind (with separability), and supplies neither Nagata finiteness nor the reduced total-quotient decomposition. The Nagata grep hit is historical attribution in NoetherNormalization.lean:14. NormalClosure and KummerDedekind hits have stronger field or Dedekind hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite normalization of a reduced one dimensional Nagata local ring is a product of Dedekind domains with DVR localizations",
+   "results": "{\"t\": \"2026-10-23T04:14:47Z\", \"tool\": \"leanfinder\", \"query\": \"Finite normalization of a reduced one dimensional Nagata local ring is a product of Dedekind domains with DVR localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomainDvr\", \"IsDedekindDomain.isDedekindDomainDvr\", \"IsDedekindDomainDvr.isDedekindDomain\", \"IsDedekindDomainDvr.ring_dimensionLEOne\", \"IsLocalization.AtPrime.isDedekindDomain\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsDedekindRing\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\"], \"digest\": \"b2441fdacb15407c\"}; No match for the whole item: DVR-localization results assume a Dedekind base; integralClosure.isDedekindDomain (IntegralClosure.lean:234) assumes the base already Dedekind (with separability), and supplies neither Nagata finiteness nor the reduced total-quotient decomposition. The Nagata grep hit is historical attribution in NoetherNormalization.lean:14. NormalClosure and KummerDedekind hits have stronger field or Dedekind hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure of a reduced Noetherian ring in its total quotient ring decomposes into the normalizations of the quotients by minimal primes",
+   "results": "{\"t\": \"2026-10-23T04:15:30Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure of a reduced Noetherian ring in its total quotient ring decomposes into the normalizations of the quotients by minimal primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"completeIntegralClosure_eq_integralClosure\", \"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span\", \"Algebra.ZariskisMainProperty.of_isIntegral\", \"Ring.instIsDedekindDomainNormalClosure\", \"IsIntegralClosure.isDedekindDomain\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map\"], \"digest\": \"9f6c626912d40a32\"}; No match for the whole item: DVR-localization results assume a Dedekind base; integralClosure.isDedekindDomain (IntegralClosure.lean:234) assumes the base already Dedekind (with separability), and supplies neither Nagata finiteness nor the reduced total-quotient decomposition. The Nagata grep hit is historical attribution in NoetherNormalization.lean:14. NormalClosure and KummerDedekind hits have stronger field or Dedekind hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isDedekindDomain|isDiscreteValuationRing_of_dedekind_domain",
+   "results": "{\"t\": \"2026-10-23T04:16:24Z\", \"tool\": \"grep\", \"query\": \"isDedekindDomain|isDiscreteValuationRing_of_dedekind_domain\", \"sub\": \"RingTheory/DedekindDomain\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/Factorization.lean\", \"Mathlib/RingTheory/DedekindDomain/PID.lean\", \"Mathlib/RingTheory/DedekindDomain/PID.lean\", \"Mathlib/RingTheory/DedekindDomain/PID.lean\"], \"digest\": \"ba350aad878fc097\"}; No match for the whole item: DVR-localization results assume a Dedekind base; integralClosure.isDedekindDomain (IntegralClosure.lean:234) assumes the base already Dedekind (with separability), and supplies neither Nagata finiteness nor the reduced total-quotient decomposition. The Nagata grep hit is historical attribution in NoetherNormalization.lean:14. NormalClosure and KummerDedekind hits have stronger field or Dedekind hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-curve-normalization-completion",
+  "date": "2026-10-22",
+  "group": "Q72"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Local input: Normalization of the completed local nodal branches, before the simple-pole calculation. Re-split argument: Finite normalization and DVR branches of a reduced Nagata curve ring.",
+   "via": [
+    "lem-trf-curve-normalization-completion",
+    "lem-trf-nodal-normalization-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-nagata-normalization-dvr-branches",
+  "worker": "stage1",
+  "summary": "Expanded into seven steps using existing DAG inputs only: minimal components and fraction fields, Japanese finiteness and normality with dimension preservation, explicit lifted monic equations for the product normalization, supported finite generators, idempotent classification and fraction maps for localizations, and the nonzero maximal-ideal DVR conclusion. Statement unchanged; no new nodes. Mathlib and project searches found no attachment for all clauses.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Local input: Normalization of the completed local nodal branches, before the simple-pole calculation. Re-split argument: Finite normalization and DVR branches of a reduced Nagata curve ring.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "Generic commutative-algebra identification of Q(A) with the minimal-prime localizations, needed for the component normalization in 0C3S; this unit has no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-dimension-equal",
+    "why": "Generic preservation of Krull dimension under injective integral ring extensions; used only for D_i inside its integral closure, not as a replacement for a geometric unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-integral-injective-dimension-equal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-4c5f27fa3",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-4c5f27fa3 (reviewer sub-agent of L); spot-checked: I read the delivery in full and every step is correct; no fixes are needed. This is the first split of lem-trf-nagata-normalization-dvr-branches. It adds no new nodes and keeps the statement, stmt_deps, source, created and blueprint fields unchanged. proof_deps equals the union of the step uses. Source: I read Stacks varieties.tex 0C3S lemma-pre-delta-invariant (l.8293) and 0C3V lemma-normalization-same-after-completion (l.8346). The item's hypotheses (reduced, local, Nagata, dimension 1) and its finiteness and local-DVR content agree with them, and it adds no completion clause. The only citer, curve-normalization-completion, uses the clauses 'B finite over A' and 'B_q is a DVR'. Both are proved. I read every cited statement. Step 1: p_i is not m because dim A = 1; D_i is local of dimension exactly 1 and Nagata, since D_i/(a/p_i) = A/a is N-2. Step 2: the total-fractions node gives K_i a field with p_iK_i = 0, so the kernel of A to K_i is p_i and K_i = Frac(D_i). Step 3: D_i is N-2, which with L = K_i makes E_i finite over D_i. The finite-algebra, finite-extension-normal (F = L = K_i) and integral-dimension nodes then give a Noetherian integrally closed domain of dimension 1. Step 4: the forward direction projects a monic equation; the reverse uses the product of lifted monic polynomials. Step 5: the supported generators with lifted coefficients generate B. Step 6: exactly one idempotent e_i lies outside q, the projection kernel lies in q, and q is the preimage of r. The contraction of r is m/p_i, and I checked that both fraction maps are well defined and inverse to each other. Uniqueness holds because e_i maps to 0 in every other factor. Step 7: r is maximal by the integral-over-maximal node and nonzero because m/p_i is nonzero, so the Dedekind localization node gives a DVR. Steps 4-6 are genuinely elementary. Duplicate search: a recursive grep of the whole DAG for 0C3S/0C3V/Nagata/normalization found no node stating this item. There is no cycle and no SGA. I accept both tool_uses, the sk-thm-p1 nodes reduced-noetherian-total-ring-fractions and integral-injective-dimension-equal: both are generic algebra that the unit sk-i-curve-zero lacks. Small cases checked: a DVR, the node xy, the cusp, and a branch-splitting irreducible point; fields and zero rings are excluded by dimension 1. The LeanSearch entry hit a rate limit and is recorded as unavailable, not as no match."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NagataNormalizationDVRBranches",
+  "declaration": "nagata_normalization_dvr_branches",
+  "file": "lean/Sheaf/RingTheory/NagataNormalizationDVRBranches.lean",
+  "statement": "theorem nagata_normalization_dvr_branches (A : Type u) [CommRing A] [IsLocalRing A] [IsReduced A] (hA : IsNagataRing A) (hdim : ringKrullDim A = 1) : ∃ t : ℕ, ∃ p : Fin t ≃ {p : PrimeSpectrum A // p.asIdeal ∈ minimalPrimes A}, ∃ f : ∀ i : Fin t, (A ⧸ (p i).val.asIdeal) →+* Localization.AtPrime (p i).val.asIdeal, ∃ E : ∀ i : Fin t, @Subalgebra (A ⧸ (p i).val.asIdeal) (Localization.AtPrime (p i).val.asIdeal) _ _ (f i).toAlgebra, ∃ eQ : FractionRing A ≃ₐ[A] (∀ i : Fin t, Localization.AtPrime (p i).val.asIdeal), ∃ eB : integralClosure A (FractionRing A) ≃+* (∀ i : Fin t, E i), (∀ i : Fin t, (f i).comp (Ideal.Quotient.mk (p i).val.asIdeal) = algebraMap A (Localization.AtPrime (p i).val.asIdeal)) ∧ (∀ i : Fin t, E i = @integralClosure (A ⧸ (p i).val.asIdeal) (Localization.AtPrime (p i).val.asIdeal) _ _ (f i).toAlgebra) ∧ (∀ i : Fin t, IsDomain (A ⧸ (p i).val.asIdeal) ∧ IsNoetherianRing (A ⧸ (p i).val.asIdeal) ∧ IsLocalRing (A ⧸ (p i).val.asIdeal) ∧ IsNagataRing (A ⧸ (p i).val.asIdeal) ∧ ringKrullDim (A ⧸ (p i).val.asIdeal) = 1 ∧ IsField (Localization.AtPrime (p i).val.asIdeal) ∧ @IsFractionRing (A ⧸ (p i).val.asIdeal) _ (Localization.AtPrime (p i).val.asIdeal) _ (f i).toAlgebra) ∧ (∀ i : Fin t, Module.Finite (A ⧸ (p i).val.asIdeal) (E i) ∧ IsDomain (E i) ∧ IsNoetherianRing (E i) ∧ IsIntegrallyClosed (E i) ∧ ringKrullDim (E i) = 1) ∧ (∀ (b : integralClosure A (FractionRing A)) (i : Fin t), (eB b i : Localization.AtPrime (p i).val.asIdeal) = eQ b.val i) ∧ Module.Finite A (integralClosure A (FractionRing A)) ∧ (∀ q : PrimeSpectrum (integralClosure A (FractionRing A)), q.asIdeal.comap (algebraMap A (integralClosure A (FractionRing A))) = IsLocalRing.maximalIdeal A → (∃! z : Σ i : Fin t, PrimeSpectrum (E i), q.asIdeal = z.2.asIdeal.comap ((Pi.evalRingHom (fun i ↦ E i) z.1).comp eB.toRingHom) ∧ z.2.asIdeal.IsMaximal ∧ z.2.asIdeal ≠ ⊥ ∧ z.2.asIdeal.comap (algebraMap (A ⧸ (p z.1).val.asIdeal) (E z.1)) = (IsLocalRing.maximalIdeal A).map (Ideal.Quotient.mk (p z.1).val.asIdeal) ∧ ∃ e : Localization.AtPrime q.asIdeal ≃+* Localization.AtPrime z.2.asIdeal, e.toRingHom.comp (algebraMap _ (Localization.AtPrime q.asIdeal)) = (algebraMap (E z.1) (Localization.AtPrime z.2.asIdeal)).comp ((Pi.evalRingHom (fun i ↦ E i) z.1).comp eB.toRingHom)) ∧ ∃ hq : IsDomain (Localization.AtPrime q.asIdeal), @IsDiscreteValuationRing (Localization.AtPrime q.asIdeal) _ hq)",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-789b9bee5",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Single sorried theorem nagata_normalization_dvr_branches; only the node's lean field changed, and lean.statement is verbatim the file signature. Hypotheses (CommRing, IsLocalRing, IsReduced, IsNagataRing, ringKrullDim = 1) are exactly those of Stacks 0C3S/0C3V, with no domain, Noetherian or characteristic assumption added. Checked every clause: Fin t ≃ minimal primes; D_i and K_i are the literal quotient and localization; each f_i is pinned by f_i ∘ mk = algebraMap, with IsField and IsFractionRing via f_i; E_i is pinned to the integral closure, finite, a domain, Noetherian, integrally closed, dim = 1; eQ is an A-algebra equivalence (hence canonical) and eB its restriction; Module.Finite A B; ∃! over Σ (factor, prime) with q = π_i⁻¹ r, maximal, nonzero, contraction m/p_i, and the localization isomorphism pinned by commuting with the projection; DVR clause outside the ∃!. Edge cases (dim 1 excludes fields, the zero ring and t = 0; xy node, cusp, split branches) and universe u are fine. No duplicate: punctured_curve_has_dvr_branches has different hypotheses and conclusion. Docstrings carry the source tags, blueprint id and seven proof steps; report has both required sections. No change made, so no compile run. def-sc-discrete-valuation-ring has no lean record in live (Mathlib match IsDiscreteValuationRing); outside this delivery."
+ }
+}

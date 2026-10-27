@@ -1,0 +1,126 @@
+{
+ "id": "lem-sp-semilinear-coefficient-pullback-composition",
+ "kind": "statement",
+ "title": "Composition of normalized inverse-image coefficient squares",
+ "statement": "Let A be a semilinear derived calculus on ring sheaves B_n over J [def-coef-semilinear-derived-calculus], and let G be normalized geometric data over a morphism of topoi from J to J-prime [def-coef-semilinear-geometry-derived]. For s >= m >= n and P in D_J(B_s), inverse image at n of A.scalarComposition(h,k) followed by G.coefficientPullback(h.trans k) equals G.coefficientPullback(h) at scalar(k)P, then target scalar(h) of G.coefficientPullback(k), then the target scalar associator at inverse image at s of P. This is only a left-adjoint coefficient square equation; no geometric direct-image mate or strict-tower realization is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "(2), transposes of the units and counits, tensor associativity, and evaluation to finite maps"
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-derived-calculus",
+  "def-coef-semilinear-geometry-derived"
+ ],
+ "proof": [
+  {
+   "text": "Compose the ordinary restrictionPullback squares. The section-identity characterization in restrictionComposition_existsUnique gives identity underlying maps for both ordinary restriction associators. Apply the faithful underlying-sheaf functor, postcompose by the inverse-image moduleUnderlying isomorphism, and use restrictionPullback_underlying and naturality of moduleUnderlying to prove the ordinary square. This is ordinary_restriction_composition in the Lean proof.",
+   "uses": [
+    "def-coef-semilinear-geometry-derived",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the ordinary square. The private square_fac and composition_fac lemmas express the localized comparisons on Q of a cochain complex. Localization.natTrans_ext reduces the equation to these objects; naturality and cancellation of the factorization isomorphisms reduce it degreewise to the ordinary square. This is localized_composition, using the existing exact mapDerivedCategory comparisons.",
+   "uses": [
+    "def-coef-semilinear-geometry-derived",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the private mate_composition calculation to the source and target scalar adjunctions and their actual scalarComposition isomorphisms. Apply successively the target h and k hom-equivalences to the inverse coefficient square. Substitute coefficientPullback_transpose, use naturality to move the source units through the restriction comparisons, and apply scalarComposition_transpose to the source identity morphism. The localized restriction square cancels the two restriction associators. Finally cancel the invertible coefficient comparisons to recover the stated hom equation. Equal indices and nonflat coefficient maps require no separate assumptions.",
+   "uses": [
+    "def-coef-semilinear-geometry-derived",
+    "def-coef-semilinear-derived-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-geometry-derived",
+  "def-coef-semilinear-system-models",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "(2), transposes of the units and counits, tensor associativity, and evaluation to finite maps",
+  "note": "D6: explicit ordinary faithful-forgetful proof, exact localization factorization, and hom-equivalence calculation; no new holes or changed signatures."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image commutes with restriction of scalars coefficient extension comparison composition adjunction mate",
+   "results": "LeanFinder found ModuleCat.homEquiv_extendScalarsComp and restriction-scalar adjunction tools, not the normalized sheaf-derived square.",
+   "date": "2026-10-27",
+   "verdict": "No statement match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherence of inverse image coefficient scalar extension squares under composition of ring homomorphisms",
+   "results": "LeanSearch found ModuleCat.homEquiv_extendScalarsComp, extendScalars_assoc and ordinary restriction pseudofunctor laws; none states this derived inverse-image coefficient square.",
+   "date": "2026-10-27",
+   "verdict": "No statement match."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensor.*[Cc]omposition|coefficientMate.*[Cc]omposition; coefficientPullback.*compos; strict.*coordinates",
+   "results": "No matching theorem in Mathlib or the adopted source library. SemilinearDerivedCalculus and SemilinearGeometryDerived expose the needed representative/transpose laws, but not these composition assertions. Whole-blueprint searches for coefficient scalar tensor composition, coefficient pullback composition, and strict quotient coordinates returned zero matching blueprint nodes.",
+   "date": "2026-10-27",
+   "verdict": "New step needed; existing definitions and actual maps are reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityStrictSystemGeometricRealization",
+  "date": "2026-10-27",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-shriek-levels",
+   "place": "(2), transposes of the units and counits, tensor associativity, and evaluation to finite maps",
+   "via": [
+    "lem-sp-strict-system-geometric-realization",
+    "lem-sp-strict-compactification-comparison-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-bound",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearCoefficientPullbackComposition",
+  "file": "lean/Sheaf/Paper/SemilinearCoefficientPullbackComposition.lean",
+  "declaration": "WeilConjectures.SemilinearSections.Geometry.coefficientPullback_composition",
+  "statement": "theorem Geometry.coefficientPullback_composition\n    (G : Geometry.{c, v, r} J B τ A J' uInv uPush adjSet)\n    {s m n : ℕ} (h : n ≤ m) (k : m ≤ s)\n    (P : D.{c, v, max c v r} J (B s)) :\n    (derivedExact.{c, v, max c v r, c, v} J J' (B n)\n        (G.coefficients n) (G.inverseImage n).modules).map\n          ((A.scalarComposition h k).hom.app P) ≫\n        (G.coefficientPullback (h.trans k)).hom.app P =\n      (G.coefficientPullback h).hom.app ((A.scalar k).T.obj P) ≫\n        (G.target.scalar h).T.map ((G.coefficientPullback k).hom.app P) ≫\n        (G.target.scalarComposition h k).hom.app\n          ((derivedExact.{c, v, max c v r, c, v} J J' (B s)\n            (G.coefficients s) (G.inverseImage s).modules).obj P)",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z8",
+  "result": "pass",
+  "landing": "20261027T034819-L-3689166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261027T050547-L-237771",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

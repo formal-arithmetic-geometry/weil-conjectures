@@ -1,0 +1,128 @@
+{
+ "id": "def-sf-integral-projection-local-factors",
+ "kind": "definition",
+ "title": "Local open arrow and one-input support identification",
+ "statement": "Let D be a finite-field datum, B a family of coefficient categories on its six-functor spaces, S a push stage, T its curried tensors, Q a compactified square, and A a SixFunctorExchangeData S T Q [def-sf-operation-stages]. For K in B(Q.X) and L in B(Q.Y), define openMap(A,K,L) from tensorBar(openExtension K,properPull L) to openExtension(T_X(K,S.pull Q.f L)) as the given openProjection component followed by openExtension of the equality transport from A.tensorX and A.pull. Define supportMap(A,K) from properPush(openExtension K) to S.support(Q.f,Q.compactification)(K) as inverse compactSupportIdentification followed by the equality transport from A.compactSupport. Both are explicit composites. Naturality of the inverse support identification gives second(A,K,L) [def-sf-integral-projection-factor-data] = properPush.map(openMap(A,K,L)) followed by supportMap(A,T_X(K,S.pull Q.f L)).",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence: compatibility of individual refinement maps with counits and j_!, before the projection square is deduced. Integral-system realization steps 1 and 3 of lem-sf-integral-projection-refinement-square."
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-integral-projection-factor-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the two maps by the displayed composites of the supplied projection and support maps and equality transports. For the identity second_via_openMap, use naturality of inverse compactSupportIdentification on the input equality transport. Apply properPush functoriality, then combine equality transports by eqToHom_map and eqToHom_trans. This gives exactly the original second, including its final transport. This construction is independent of coefficient reduction and introduces no chosen witness.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-sf-integral-projection-factor-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-operation-stages",
+  "def-sf-integral-projection-factor-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compatibility with counits and j_!, together with naturality; explicit generic factorization before coefficient change, U9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension commutes with open extension by zero and their adjunction units and counits",
+   "results": "Eight ModuleCat scalar extension/restriction facts (unit, counit and Hom equivalence) and unrelated Unitization result. No normalized geometric coefficient square.",
+   "date": "2026-10-27",
+   "verdict": "General scalar adjunction tools only; no matching statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatibility of projection formula open immersion with scalar reduction adjunction mates",
+   "results": "Eight scheme/projective spectrum/restriction facts; no completed open tensor coefficient normalization. Loogle CategoryTheory.Adjunction.homEquiv additionally found generic Hom naturality used in the assembly.",
+   "date": "2026-10-27",
+   "verdict": "No theorem for the prescribed completed/system coordinates."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Rr]eduction|[Rr]eduction.*[Pp]rojection",
+   "results": "msearch Mathlib: zero hits. Local library inspection found GeneratorReductionStatement and OpenTensorReductionSquare in ordinary/completed expression coordinates, plus IntegralSupportReductionNormalization (invertibility and refinement only), none with these local endpoint maps. Blueprint search open tensor reduction and support factorization: zero exact blueprint matches.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate. The ordinary generator theorem is a proof dependency, not an identification of these datum coordinates."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProjectionOpenFactorReduction",
+  "date": "2026-10-27",
+  "group": "U9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"the projection transformation of [def-exchange-projection] is a composite of precisely these tensor and counit maps, hence is equivariant as well\": the Frobenius-transported compactification differs from the chosen one, so the two projection composites must be compared through the refinement comparison. Individual-arrow integral system realization of these tensor and counit maps, before their compactification comparison square is deduced. The single-compactification projection-generator square, without the refinement assertions. Separate proper counit factor and open tensor factor. The actual open arrow and final support identification, before coefficient reduction.",
+   "via": [
+    "lem-sf-integral-projection-open-factor-reduction",
+    "lem-sf-integral-projection-reduction-normalization",
+    "lem-sf-integral-projection-system-coordinates",
+    "lem-sf-integral-projection-refinement-square",
+    "lem-fix-projection-compactification-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralProjectionLocalFactors",
+  "file": "lean/Sheaf/Paper/IntegralProjectionLocalFactors.lean",
+  "declaration": "WeilConjectures.FixProjectionCompactification.ProjectionFactors.openMap",
+  "declarations": [
+   "WeilConjectures.FixProjectionCompactification.ProjectionFactors.openMap",
+   "WeilConjectures.FixProjectionCompactification.ProjectionFactors.supportMap",
+   "WeilConjectures.FixProjectionCompactification.ProjectionFactors.second_via_openMap"
+  ],
+  "statement": "def openMap (K : B Q.X) (L : B Q.Y) :\n    ((A.stage.tensorBar.obj (A.stage.openExtension.obj K)).obj\n      (A.stage.properPull.obj L)) ⟶\n      A.stage.openExtension.obj (((T Q.X).obj K).obj ((S.pull Q.f).obj L))",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "summary": "Explicit generic local factors and their proved relation with the existing second. No new hole.",
+  "blueprint": "Open/proper factor and naturality calculations of the same compactification proof."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261027T012953-L-2353578",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261027T012953-L-2353578",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

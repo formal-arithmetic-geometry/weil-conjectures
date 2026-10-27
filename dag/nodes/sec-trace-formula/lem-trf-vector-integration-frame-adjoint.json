@@ -1,0 +1,117 @@
+{
+ "kind": "statement",
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRingSectionDeformation",
+  "date": "2026-10-27",
+  "group": "H4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "id": "lem-trf-vector-integration-frame-adjoint",
+ "title": "Frame normalization of the integration adjunct before section restriction",
+ "statement": "For every finite commutative coefficient ring A annihilated by the positive integer N, every Noetherian base S with N invertible, every rank-d locally free module M on S, every Noetherian open W and every linear frame e on W, the inverse-image of the actual integration adjunct along the inverse frame, followed by the canonical exceptional base-change map, equals the canonical affine coefficient comparison followed by the ordered coordinate-tower counit adjunct. This statement is on the total affine bundle chart, before restriction to any section; no chosen orientation or new normalization hypothesis is an input. The definitions and canonical comparisons are those of [def-amb-vector-integration], [def-trf-coordinate-counit-arrows], [def-weil-pbc-derived-categories], [def-weil-pbc-inverse-image], [thm-amb-vector-bundle-purity]. The chart coefficient comparison is written with the projection compositor whose common composite is the bundle-chart projection, indexed by the given Cartesian-square equality; compositor coherence identifies this with the equality-transport presentation of vectorIntegrationChartCoefficient.",
+ "stmt_deps": [
+  "def-amb-vector-integration",
+  "def-trf-coordinate-counit-arrows",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "thm-amb-vector-bundle-purity"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4, frame integration transpose and restriction along the zero section; parent proof Step 7."
+ },
+ "proof": [
+  {
+   "text": "The defining VectorIntegrationNormalization equation holds on W, including non-affine W. Inverse compact-support exchange exists by open base change. Cancel exchange in that equation. The naturality identity for adjunction Hom equivalences transposes it; by definition the transpose of inverse compact-support exchange is the exceptional base-change map. Naturality in the coefficient object composes with constant-unit pullback on the other side of the Hom equivalence. The source-library singleFunctorObjUnitIso inverse is identity, and its pullback-unit square identifies constant-complex unit pullback with monoidal unit pullback. After these identity factors cancel, the affine transpose is exactly CoordinateCounitArrows.towerAdjoint. Rank zero, empty opens, and the zero ring use the identical unit equations. Finally compositor coherence expresses the chart coefficient isomorphism with the common composite indexed by the given projection square, giving the displayed equation.",
+   "uses": [
+    "lem-amb-vector-integration-mate",
+    "def-amb-vector-integration",
+    "lem-kun-derived-pullback-composition-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-vector-integration-mate",
+  "def-amb-vector-integration",
+  "lem-kun-derived-pullback-composition-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4, frame integration transpose and restriction along the zero section; parent proof Step 7."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (2), the normalized smooth-section normal-cone comparison: orientation-charts Step 4, transpose of the integration normalization followed by restriction to zero.",
+   "via": [
+    "lem-trf-finite-ring-section-deformation",
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-trf-nearby-duality-operation-squares",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image compositor naturality along compatible sections of scheme morphisms",
+   "results": "Eight scheme presheaf appLE and naturality lemmas; none states derived section restriction.",
+   "verdict": "Use existing source-library adjunction mates and derived pullback section-compositor laws.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.map_comp\", \"naturality\"",
+   "results": "Zero hits.",
+   "verdict": "No specialized Mathlib match.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionRestrictionIso|leftDerivedUpperStar_map_comp_compSectionIso|mate_naturality",
+   "results": "Zero Mathlib hits. Local source search finds the exact proved derived section-pasting law in UpperStarIdCoherence and the proved abstract mate-naturality lemma in VectorIntegrationMate.",
+   "verdict": "Reuse those proved laws; remaining issue is specializing and pasting their concrete comparisons.",
+   "date": "2026-10-27"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorIntegrationFrameAdjoint",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorIntegrationFrameAdjoint.lean",
+  "declaration": "AlgebraicGeometry.Etale.vectorIntegration_frameAdjoint",
+  "statement": "theorem vectorIntegration_frameAdjoint (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),\n      OrdinaryFiniteP1Datum A N hA t T hT)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)\n    (M : SheafOfModules.{u} S.ringCatSheaf) [M.IsFiniteLocallyFreeOfRank d] (W : S.Opens)\n    [IsNoetherian W.toScheme] (e : VectorBundleZeroSection.Trivialization S d M W) :\n    letI : IsAffineHom (VectorBundleZeroSection.π S d M) :=\n      (vectorIntegration_geometry S d M).1\n    letI : LocallyOfFiniteType (VectorBundleZeroSection.π S d M) :=\n      (vectorIntegration_geometry S d M).2.1\n    (ordinaryFinitePullback A (vectorIntegrationChart S d M W e)).map\n        ((vectorBundlePurityAdjunction A S d M).homEquiv _ _\n          (vectorBundleIntegration N hN A hA S hS d M)) ≫\n      dualizingComplexBaseChangeMap A (vectorIntegrationChart_isPullback S d M W e) =\n    (leftDerivedUpperStarComp (ModuleCat.{u + 1} A)\n      (vectorIntegrationChart S d M W e) (VectorBundleZeroSection.π S d M)).inv.app\n        (affineLinearBaseCoefficient A N hA S d) ≫\n      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) (affineTraceProjection W.toScheme d)\n        W.ι (vectorIntegrationChart S d M W e ≫ VectorBundleZeroSection.π S d M)\n        (vectorIntegrationChart_isPullback S d M W e).w).hom.app\n          (affineLinearBaseCoefficient A N hA S d) ≫\n      (ordinaryFinitePullback A (affineTraceProjection W.toScheme d)).map\n        (vectorIntegrationBaseCoefficientPullback A N hA t W.ι hS d).hom ≫\n      (affineLinearCoefficientDescent A N hA t W.toScheme\n        (affineTracePullbackInvertible N W.ι hS) d).inv ≫\n      CoordinateCounitArrows.towerAdjoint N hN A hA t D W.toScheme\n        (affineTracePullbackInvertible N W.ι hS) d",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T222710-L-683827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T222710-L-683827",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

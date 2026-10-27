@@ -1,0 +1,116 @@
+{
+ "id": "lem-pur-derived-resolving-pair-restriction",
+ "kind": "statement",
+ "title": "Derived bifunctor restriction to resolving cochain pairs",
+ "statement": "Let $A$ be an abelian category with its unbounded derived category $D(A)$ [def-weil-abstract-derived-category], let $B$ be any category, and let $P$ be a predicate on cochain complexes in $A$. Assume every cochain complex $K$ receives a quasi-isomorphism $L\\to K$ with $P(L)$. If $i:P\\hookrightarrow C(A)$ is the full subcategory inclusion and $Q:C(A)\\to D(A)$ is localization, then precomposition by $(iQ)\\times(iQ)$ is fully faithful from functors $D(A)\\times D(A)\\to B$ to functors $P\\times P\\to B$. No closure hypothesis on $P$ is required.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Localization universal property, Tags 04VI--04VK; cochain specialization of lem-weil-pbc-resolving-representative-whiskering."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "On the homotopy category put H(K)=P(K.as). Choose a resolving quasi-isomorphism to each underlying cochain complex. Its image under the homotopy quotient is a quasi-isomorphism with source in H; the quotient-map quasi-isomorphism characterization gives precisely this assertion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the general resolving-representative fully faithful whiskering theorem to the full, surjective homotopy quotient and the derived localization with its right calculus of fractions. The compatibility of the two predicates is definitional.",
+   "uses": [
+    "lem-weil-pbc-resolving-representative-whiskering"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In both variables transport the resulting fully faithful functor along quotientCompQhIso. Whiskering this product natural isomorphism identifies the resulting precomposition with the stated precomposition by the direct cochain localization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-resolving-representative-whiskering"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Existing private resolving_restriction argument in the assigned item; extracted and proved once to avoid repeated elaboration and kernel checking."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of natural transformations to resolving cochain complexes is fully faithful on derived bifunctors",
+   "results": "8 hits, including toRightDerivedZero, restricted adjunction lemmas and derived natural transformations. None states restriction to pairs of arbitrary resolving cochain representatives.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.fullyFaithfulWhiskeringLeft",
+   "results": "1 hit: CategoryTheory.Localization.fullyFaithfulWhiskeringLeft, the generic localization precomposition theorem. The project resolving-representative theorem supplies the needed restriction and product.",
+   "date": "2026-10-26",
+   "verdict": "generic API only"
+  },
+  {
+   "tool": "grep",
+   "query": "resolving.*FullyFaithful|resolving_restriction",
+   "results": "msearch grep returned zero hits. Repository reading found the existing private resolving_restriction in the item and the generic project resolvingRepresentativesFullyFaithfulWhiskering; this theorem factors that specialization.",
+   "date": "2026-10-26",
+   "verdict": "existing private specialization extracted"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDerivedComparisonNormalization",
+  "date": "2026-10-26",
+  "group": "Q1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Compatibility with finite reduction and scalar extension: fully faithful resolving-pair restriction in the parent normalization and coefficient-square proofs.",
+   "via": [
+    "lem-pur-finite-derived-comparison-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedResolvingPairRestriction",
+  "file": "lean/Sheaf/Paper/DerivedResolvingPairRestriction.lean",
+  "declaration": "CategoryTheory.derivedResolvingPairRestriction",
+  "statement": "theorem derivedResolvingPairRestriction\n    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]\n    (B : Type*) [Category B] (P : ObjectProperty (CochainComplex A ℤ))\n    (res : ∀ K : CochainComplex A ℤ,\n      ∃ (L : CochainComplex A ℤ) (a : L ⟶ K), P L ∧ QuasiIso a) :\n    Nonempty (((Functor.whiskeringLeft (P.FullSubcategory × P.FullSubcategory)\n      (DerivedCategory A × DerivedCategory A) B).obj\n        ((P.ι ⋙ DerivedCategory.Q).prod (P.ι ⋙ DerivedCategory.Q))).FullyFaithful)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261026T114211-L-2273300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261026T114211-L-2273300",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

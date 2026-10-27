@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-tower-trace-scalar-counit",
+ "kind": "statement",
+ "title": "Ordinary scalar extension of the tower unit counit trace",
+ "statement": "Fix the finite-field and coefficient setting $P$ of [def-pur-conventions], with $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, and finite coefficient subfields of a fixed $\\overline{\\mathbf Q}_\\ell$. Let $X,Y$ be separated finite-type $k$-schemes and fix $j:X\\hookrightarrow Z$, $p:Z\\to Y$ with $j$ open, $p$ proper, and $f=p\\circ j$ a $k$-morphism smooth of pure relative dimension $d\\ge0$ [def-weil-compactifications-refinements, def-sbc-smooth-morphisms]. Use the actual complete finite-Tor integral categories, completed pullback and tensor, and the specified compact-support/exceptional adjunctions of [def-weil-derived-complete-integral-detailed, def-weil-finite-tor-amplitude, def-pur-integral-derived-operations, def-weil-exceptional-inverse-image]. Fix a ring system $S$, models $M$, a field-extension result $R$, and Stages $A_E$ for all finite coefficient fields as in [def-pur-tower-trace-comparison-data, det-sp-field-extension-towers]. Suppose all their unit orientations have the prescribed finite reductions. Then for every finite field $E$, $C_E(\\tau_0(a^T_0))=\\tau_E(a^T_E)$, where $0=\\mathbf Q_\\ell$, $\\tau$ is counitTrace and $C_E$ is extendedTrace, with their specified inverse compact-support/twist and coefficient-unit comparisons.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "Clause (2), scalar compatibility of purity and counits"
+ },
+ "stmt_deps": [
+  "def-pur-tower-trace-comparison-data",
+  "det-sp-field-extension-towers"
+ ],
+ "proof": [
+  {
+   "text": "Use the integral purity and counit squares from the base inclusion to E. Transport the specified adjunctions by right-adjoint uniqueness; prescribed unit reductions identify the unit orientations by rank-one injectivity. Substitute the normalized ordinary coefficient multiplication and support comparison. Naturality moves the base orientation through the inverse support comparison; the purity and counit squares then cancel the twist and support comparisons, leaving the E counit trace. Finite freeness identifies the ordinary and strict scalar constructions.",
+   "uses": [
+    "det-sp-field-extension-towers",
+    "lem-pur-integral-orientation-reduction-injectivity",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-field-extension-towers",
+  "lem-pur-integral-orientation-reduction-injectivity",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "Clause (2), scalar compatibility of purity and counits"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized integral tower purity has unit orientations determined by their finite reductions and is the counit transpose of projection followed by the unit trace",
+   "results": "Algebra.normalizedTrace; NormalizationMonoid.normUnit; Algebra.normalizedTrace_trans; Algebra.normalizedTrace_eq_of_finiteDimensional_apply; Algebra.normalizedTrace_def; Algebra.normalizedTrace_eq_of_fininteDimensional_apply; Algebra.normalizedTrace.congr_simp; normalize_coe_units",
+   "date": "2026-10-26",
+   "verdict": "no geometric purity comparison; field traces and monoid normalization only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv, homEquiv_apply, homEquiv_symm_apply, homEquiv_unit, homEquiv_counit, mkOfHomEquiv_homEquiv, comp_homEquiv and related generic adjunction identities",
+   "date": "2026-10-26",
+   "verdict": "generic adjunction equivalence used in assembly; no coefficient or normalization bridge"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse limit tower smooth purity map equals the adjoint transpose of its unit trace by projection formula",
+   "results": "Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; AdicCompletion.transitionMap_comp_eval; Algebra.Generators.CotangentSpace.compEquiv_symm_inr; AdicCompletion.transitionMap_comp_reduceModIdeal; Algebra.Generators.CotangentSpace.fst_compEquiv; Algebra.FormallySmooth.exists_kerProj_comp_eq_id; AdicCompletion.transitionMap_comp_eval_apply; AdicCompletion.eval_lift",
+   "date": "2026-10-26",
+   "verdict": "no match: adic completion of rings and cotangent spaces, not geometric tower purity"
+  },
+  {
+   "tool": "grep",
+   "query": "adicTranspose|normalized_presentations|prescribed_orientations_unique|canonical_integral_transpose|scalar_counit",
+   "results": "msearch: 0 Mathlib hits. Local Sheaf source: adicTranspose in AdicProjectionShiftData; existing tower transpose and reduction injectivity interfaces inspected. No existing statements in the Stage coordinates.",
+   "date": "2026-10-26",
+   "verdict": "new bridge statements needed; existing constructions are reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerTracePurityComparison",
+  "date": "2026-10-26",
+  "group": "P4"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Proof sentence 3, geometric orientation and trace are equivariant: comparison of the tower construction with the existing rational purity family, before rational Weil equivariance is deduced; Clause (2), scalar compatibility of purity and counits",
+   "via": [
+    "lem-pur-tower-trace-purity-comparison",
+    "lem-pur-rational-weil-naturality-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerTraceScalarCounit",
+  "file": "lean/Sheaf/Paper/TowerTraceScalarCounit.lean",
+  "declaration": "WeilConjectures.TowerTracePurityComparison.scalar_counit",
+  "statement": "theorem scalar_counit [QuasiCompact (j ≫ p)]\n    [CompactSpace X] [QuasiSeparatedSpace Y]\n    (S : ConstructibleExceptionalCoefficients.RingSystem P.coefficients.l P.coefficients.Qbar\n      P.field P.coefficients.different (f := j ≫ p))\n    (M : FieldShriekSystem.Models P) (R : FieldExtensionTowers.Result P M j p d)\n    (A : ∀ E : FieldShriekSystem.Index P, Stage P j p d S M E (R.model E))\n    (hA : ∀ E : FieldShriekSystem.Index P,\n      PrescribedUnitReductions P j p d S M E (R.model E) (A E)\n        (orientation P j p d S M E (R.model E) (A E)))\n    (E : FieldShriekSystem.Index P) :\n    extendedTrace P j p d S M E (R.model E) (A E)\n        (counitTrace P j p d S M (base P) (R.model (base P)) (A (base P))\n          (orientation P j p d S M (base P) (R.model (base P)) (A (base P)))) =\n      counitTrace P j p d S M E (R.model E) (A E)\n        (orientation P j p d S M E (R.model E) (A E))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-808b5",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261026T070501-L-3596498",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-808b5",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261026T070501-L-3596498",
+  "kind": "interface",
+  "note": "independent cc review: Data module vs clone's old item module (verbatim apart from blueprint tags/imports); item proof vs four bridge statements and node proof/proof_deps; bridge statements vs pinned Stage/CoefficientComparison definitions and integralMap"
+ }
+}

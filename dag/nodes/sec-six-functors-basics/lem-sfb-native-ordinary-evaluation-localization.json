@@ -1,0 +1,189 @@
+{
+ "id": "lem-sfb-native-ordinary-evaluation-localization",
+ "kind": "statement",
+ "title": "Native derived localization of a specified ordinary evaluation",
+ "statement": "Let T,D be arbitrary native module complexes on a scheme with condensed coefficients. Suppose a specified kappa identifies section D with ordinary Hom(section T,B[0]), and specified natural chain isomorphisms epsilon for every target factor through the normalized ordinary evaluation. Assume D is K-flat and ordinary Hom(section T,-) sends every quasi-isomorphism to a quasi-isomorphism. Fix any native/ringed-site derived comparison S,M,t,theta satisfying the displayed evaluation counit compatibility. Then there exists delta:QD≅native RHom(QT,unit) such that the native localization tensor comparison is invertible for every target and the displayed localization equation with epsilon holds. The result does not construct the comparison data, assert invertibility of the evaluation transpose, or involve scalar modules, finite freeness, bounds or basis inverses. The exact quantifiers and equation follow in lean.statement.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JH and 08JJ; finite-free dual calculation and evaluation localization."
+ },
+ "stmt_deps": [
+  "def-sfb-finite-free-dual-chain-models",
+  "def-sfb-ringed-ordinary-evaluation-models",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Write E for the exact section equivalence and L=ET, D-section=ED. Full quasi-isomorphism invariance of ordinary Hom(L,-) applies to the fixed K-injective augmentation of every target, including the coefficient unit complex. Therefore the specified ordinary-to-derived Hom comparisons are isomorphisms. Compose localized kappa with the unit Hom comparison to identify Q(ED) with RHom(QL,B).",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-sfb-ringed-ordinary-evaluation-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a flat-term K-flat resolution Q→EF, the ordinary evaluation localization theorem applies to L,Q and the given ordinary evaluation formula. Its uniqueness clause identifies its canonical evaluation with the aEF in the hypothesis. K-flatness is transported from native D through the section equivalence. The localized tensor comparison for the resolution and D identifies the resulting map with the closed transpose of evaluation into the coefficient unit, followed by the target unit constraint.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sfb-ringed-ordinary-evaluation-localization",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the original unbounded target, naturality of epsilon and Hom invariance imply that tensoring the resolution arrow with D is a quasi-isomorphism: the square has isomorphic horizontal arrows and a quasi-isomorphism on the Hom side. Naturality of the localization comparison then implies it is invertible on the original target, and naturality of the evaluation transpose carries the equality from the resolution to that target. No termwise flatness of D is needed: D and the resolution are K-flat.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sfb-ringed-ordinary-evaluation-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the supplied evaluation counit compatibility of S,M,t,theta. Adjunction transposition identifies the derived transpose computed by the preceding steps with the native two-braiding evaluationTranspose. Transport the section dual isomorphism through the derived equivalence to obtain delta. The tensor comparison and localization isomorphisms give exactly the stated map equation for every original target. This step uses the fixed native adjunction; it does not choose a different tensor or assert invertibility of the evaluation transpose.",
+   "uses": [
+    "def-sfb-internal-section-derived-tensor-comparison",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-sfb-ringed-ordinary-evaluation-models",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-ringed-ordinary-evaluation-localization",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-sfb-internal-section-derived-tensor-comparison",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof_origin": {
+  "by": "E5 stage 3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JH and 08JJ, parent proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded finite free complex sheaf tensor dual internal Hom chain evaluation isomorphism",
+   "results": "['LightCondensed.ihomPoints', 'LightCondensed.ihomPoints_symm_comp', 'LightCondensed.ihomPoints_symm_apply', 'SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply', 'ModuleCat.ihom_ev_app', 'SheafOfModules.freeHomEquiv_symm_comp', 'LightCondensed.ihomPoints_apply', 'LightCondensed.free_internallyProjective_iff_tensor_condition']; digest 9c012544b2a256da",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Dual\", \"TensorProduct\"",
+   "results": "['TensorProduct.AlgebraTensorModule.dualDistrib', 'TensorProduct.AlgebraTensorModule.dualDistrib_apply']; digest 4bdfe90b540ff384",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorHomEquiv|evaluationTranspose|finiteFreeDualChainComparison",
+   "results": "['Mathlib/RepresentationTheory/Intertwining.lean', 'Mathlib/RepresentationTheory/FDRep.lean', 'Mathlib/RepresentationTheory/FDRep.lean', 'Mathlib/LinearAlgebra/TensorProduct/Associator.lean', 'Mathlib/LinearAlgebra/Trace.lean', 'Mathlib/LinearAlgebra/Trace.lean', 'Mathlib/LinearAlgebra/Trace.lean', 'Mathlib/LinearAlgebra/Trace.lean']; digest 6fb8893bf6333529",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite free scalar extension functor is additive and bounded finite free complex tensor dual internal Hom evaluation comparison",
+   "results": "['ModuleCat.ihom_ev_app', 'LightCondensed.free_internallyProjective_iff_tensor_condition', \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", 'FGModuleCat.FGModuleCatEvaluation', \"FGModuleCat.FGModuleCatEvaluation_apply'\", 'FGModuleCat.FGModuleCatEvaluation_apply', 'CategoryTheory.IsGrothendieckAbelian.tensorObj', 'ModuleCat.ihom_coev_app']; digest 4d82feb4a37a36ad",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Additive",
+   "results": "['CategoryTheory.Functor.instAdditiveId', 'CategoryTheory.Functor.Additive', 'CategoryTheory.Functor.hasZeroObject_of_additive', 'CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive', 'CategoryTheory.Functor.preservesFiniteProductsOfAdditive', 'CategoryTheory.AdditiveFunctor.of', 'CategoryTheory.Functor.fullSubcategoryInclusion_additive', 'CategoryTheory.Functor.inducedFunctor_additive']; digest 8e280f0dc00ec864",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*dual.*(comparison|evaluation)|evaluation.*finite.*free",
+   "results": "[]; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinary.*[Ee]valuation.*[Ll]ocalization|[Ff]inite.*[Ff]ree.*[Cc]hain",
+   "results": "[]; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homComplex\", \"tensor\"",
+   "results": "[]; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localize a natural ordinary tensor dual evaluation isomorphism into the native derived tensor Hom adjunction preserving the evaluation counit",
+   "results": "['CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation', 'CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation', 'ModuleCat.ihom_ev_app', 'CategoryTheory.tensorLeftHomEquiv', 'CategoryTheory.tensorRightHomEquiv_tensor', 'CategoryTheory.tensorLeftHomEquiv_tensor', 'CategoryTheory.tensorRightHomEquiv', 'CategoryTheory.tensorLeftHomEquiv_whiskerLeft_comp_evaluation']; digest 0d18f9e1ff340c9d",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a bounded finite free sheaf complex tensor with its signed dual is the ordinary Hom complex with finite basis inverse",
+   "results": "['dualTensorHomEquivOfBasis', 'dualTensorHomEquiv', 'lTensorHomEquivHomLTensor', 'Module.dual_free', 'PiTensorProduct.dualDistribEquivOfBasis', 'HomologicalComplex.tensorObj', 'PiTensorProduct.dualDistribInvOfBasis', 'PiTensorProduct.dualDistribEquiv']; digest f0094a621a922225",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeDualChainComparison",
+  "date": "2026-10-24",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-tensor-product",
+   "place": "First paragraph: finite-free local evaluation calculation; Native derived localization of a specified ordinary evaluation",
+   "via": [
+    "lem-sfb-finite-free-dual-chain-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOrdinaryEvaluationLocalization",
+  "file": "lean/Sheaf/Paper/NativeOrdinaryEvaluationLocalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteFreeDualComparison.nativeOrdinaryEvaluationLocalization",
+  "statement": "theorem nativeOrdinaryEvaluationLocalization\n    (T D : CochainComplex (Internal Λ X) ℤ)\n    (κ : (complexForward Λ X).obj D ≅\n        homComplex.{u + 1, u, u + 1, u + 1} (R := ring Λ X) ((complexForward Λ X).obj T)\n          (ringedTensorUnitComplex.{u + 1, u, u} (Scheme.ProEt.topology X) (ring Λ X)))\n    (ε : ∀ F : CochainComplex (Internal Λ X) ℤ,\n        (complexForward Λ X).obj\n            (internalTotalTensor Λ X F D) ≅\n          homComplex.{u + 1, u, u + 1, u + 1} (R := ring Λ X) ((complexForward Λ X).obj T)\n            ((complexForward Λ X).obj F))\n    (hevaluation : ∀ F : CochainComplex (Internal Λ X) ℤ,\n      ∃ aEF : (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology X) (ring Λ X)).obj\n          ((complexForward Λ X).obj F,\n            homComplex.{u + 1, u, u + 1, u + 1} (R := ring Λ X) ((complexForward Λ X).obj T)\n              (ringedTensorUnitComplex.{u + 1, u, u} (Scheme.ProEt.topology X) (ring Λ X))) ⟶\n            homComplex.{u + 1, u, u + 1, u + 1} (R := ring Λ X) ((complexForward Λ X).obj T)\n              ((complexForward Λ X).obj F),\n        RingedOrdinaryEvaluationFormula.{u + 1, u, u} (Scheme.ProEt.topology X) (ring Λ X)\n          ((complexForward Λ X).obj T) ((complexForward Λ X).obj F) aEF ∧\n        (ε F).hom = (totalComparison Λ X F D).hom ≫\n          (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology X) (ring Λ X)).map\n            (𝟙 ((complexForward Λ X).obj F), κ.hom) ≫ aEF)\n    (hnatural : ∀ {F G : CochainComplex (Internal Λ X) ℤ} (f : F ⟶ G),\n      (complexForward Λ X).map ((@tensorRight _ _ (internalComplexMonoidal Λ X) D).map f) ≫\n        (ε G).hom =\n        (ε F).hom ≫ ((homComplexFunctor.{u + 1, u, u + 1, u + 1} (R := ring Λ X)).obj\n          (op ((complexForward Λ X).obj T))).map\n            ((complexForward Λ X).map f))\n    (hkflat : ∀ Z : CochainComplex (Internal Λ X) ℤ, Z.Acyclic →\n      (internalTotalTensor Λ X Z D).Acyclic)\n    (hhom : ∀ (F G : CochainComplex (Modules Λ X) ℤ) (f : F ⟶ G),\n      QuasiIso f → QuasiIso (((homComplexFunctor (R := ring Λ X)).obj\n        (op ((complexForward Λ X).obj T))).map f))\n    (S : CoefficientClosedStructure (hom Λ X))\n      (M : CoefficientTensorModels.{u, u + 1, u, u + 1}\n        (Scheme.ProEt.topology X) (ring Λ X) S)\n      (t : TensorComparison Λ X S M)\n      (θ : Functor.uncurry.obj (CondensedRing.derivedHom Λ X) ⋙ forward Λ X ≅\n        ((forward Λ X).op.prod (forward Λ X)) ⋙ hom Λ X)\n    (hcounit : ∀ K N : DerivedCategory.{u + 1} (Internal Λ X),\n        (forward Λ X).map\n          ((@BraidedCategory.braiding _ _ _ (internalBraiding Λ X)\n              (((CondensedRing.derivedHom Λ X).obj (op K)).obj N) K).hom ≫\n            (CondensedRing.derivedTensorHomAdjunction Λ K).counit.app N) =\n          (t.iso.hom.app (((CondensedRing.derivedHom Λ X).obj (op K)).obj N, K)) ≫\n            S.tensor.map\n              (X := ((forward Λ X).obj (((CondensedRing.derivedHom Λ X).obj (op K)).obj N),\n                (forward Λ X).obj K))\n              (Y := ((hom Λ X).obj (op ((forward Λ X).obj K), (forward Λ X).obj N),\n                (forward Λ X).obj K))\n              (θ.hom.app (op K, N), 𝟙 ((forward Λ X).obj K)) ≫\n            S.evaluation ((forward Λ X).obj K) ((forward Λ X).obj N)) :\n    ∃ δ : DerivedCategory.Q.{u + 1}.obj D ≅\n        ((CondensedRing.derivedHom Λ X).obj\n          (op (DerivedCategory.Q.{u + 1}.obj T))).obj\n            (nativeUnit Λ X),\n    ∀ F : CochainComplex (Internal Λ X) ℤ,\n      IsIso (localizationTensorMap Λ X F D) ∧\n      (forward Λ X).map\n          ((((CondensedRing.derivedTensor Λ X).obj (DerivedCategory.Q.{u + 1}.obj F)).map\n            δ.hom) ≫\n            evaluationTranspose Λ X (DerivedCategory.Q.{u + 1}.obj T)\n              (DerivedCategory.Q.{u + 1}.obj F)) ≫\n          sectionDerivedHomMap Λ X θ T F =\n        (forward Λ X).map\n            (localizationTensorMap Λ X F D) ≫\n          (localizationIso Λ X).hom.app\n            (internalTotalTensor Λ X F D) ≫\n          DerivedCategory.Q.{u + 1}.map (ε F).hom ≫\n          ringedOrdinaryHomComparison.{u + 1, u, u, u + 1} (Scheme.ProEt.topology X) (ring Λ X)\n            ((complexForward Λ X).obj T) ((complexForward Λ X).obj F)",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-8d2b4",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261023T230956-L-3523151",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-8d2b4",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261023T230956-L-3523151",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs live clone (identical); relocated 12 defs vs live item block (verbatim, realization_additive now proved); new sorry statements vs RingedOrdinaryEvaluationFormula signs and the parent conclusion clauses; node lean.statement vs Lean text"
+ }
+}

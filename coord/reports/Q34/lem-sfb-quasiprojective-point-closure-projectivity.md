@@ -1,0 +1,39 @@
+## Worker report
+
+Files written: dag/nodes/sec-six-functors-basics/lem-sfb-quasiprojective-point-closure-projectivity.json (item, statement, split). Also citations.json and this report. No new nodes and no new Mathlib leaves.
+
+Attachments: none. I searched lean/WeilConjectures for the exact blueprint id and for point-closure, reduced-closure, valuative and proper-immersion notions. The generic DVR closure theorem is not a completed project declaration. The existing valuation-factor-closed node does have a closed project declaration; it is reused, not reattached as the item.
+
+WANTED: none for this split. The proof is an agent assembly of available Stacks statements, not a claim to have read de Jong's paper, which is not present in the literature listing on this machine.
+
+The original statement is unchanged. Its source annotation proposes lem-sbc-generic-fibre-iso-spread-base-open, but that node's statement assumes X, Y and S affine; the present R need not be affine. I first checked the general 01ZM descent formulation, then found the existing same-unit lem-sfb-birational-isomorphism-dense-open. Its statement applies directly and keeps the closure/projectivity/dense-base-open route. Nothing is left unfinished.
+
+## New nodes
+
+None. Whole-DAG searches by tags 0208, proper immersion, generic-fibre isomorphism, factorization through closed subschemes, projectivity and birational opens found all the required existing lemmas. Blueprint searches with tools/blueprint_refs.py for DVR, 0208, proper immersion, reduced closure, projective proper, generic fibre isomorphism, quasi-projective and birational found no exact duplicate of the item. The ancestor command returns None, as in the inherited blueprint record; I retained that record and filled its place with the exact assembly. The item is a deep created prerequisite, not the unit's key node, so no unit realized fields were edited.
+
+## Not duplicates
+
+No new-node pairs. In particular, lem-sfb-generic-dvr-properness-criterion is cited rather than recreated; the same is true of lemma-nagata-valuation-factor-closed, lem-weil-pbc-proper-immersion-closed and lem-sfb-birational-isomorphism-dense-open. The two existing sfb/per birational-open nodes have identical statements; I use the one in the item's own unit.
+
+## Mathlib searches
+
+The five Q34 queries in searches.jsonl were actually run and their results read, and are copied exactly into the item in addition to its retained historical searches. LeanFinder was tried in two different formulations; Loogle, LeanSearch and Mathlib grep were also run. All services answered. The Proj valuative-existence results concern a different morphism; IsProper.of_valuativeCriterion assumes all valuation-ring squares, not just generic DVR subrings. I read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, especially its future-project note about the missing Noetherian DVR criterion. No hit proves the entire item. Mathlib leaves already recorded in the DAG are reused without asserting that the whole item is a leaf.
+
+## Review by Q34
+
+I read Stacks limits.tex Tag 0208, label lemma-Noetherian-dvr-valuative-proper, statement (4) and its proof, and morphisms.tex Tags 01W6 (lemma-image-proper-scheme-closed), 01WC (lemma-locally-projective-proper), 0BAJ (lemma-birational-isomorphism-over-dense-open), plus the H-projective definition. I also read schemes.tex Tag 01J3's reduced induced closed-subscheme construction. There are no new-node sources to review. No SGA source is used.
+
+Step 1 uses the actual statements of def-pc-integral-scheme and def-sc-function-field, including the latter's general-integral-scheme clause, not merely its curve clause. The image point is generic by the defining closure, and the assumed generic-fibre identification localizes an affine domain B to K. The inclusion B into that localization is injective; it contains the base domain C and consequently has fraction field K. This checks that the induced generic local-ring map is the specified identity, rather than an unspecified field automorphism. This is the elementary identification needed for both the DVR criterion and birationality.
+
+Step 2 uses def-sc-discrete-valuation-ring (including the valuation-ring characterization), lemma-nagata-valuation-factor-closed and def-weil-closed-immersion. I opened all three statements. The factorization lemma explicitly gives a factor through the supplied closed subscheme when the fraction-field restriction factors; it is not a statement about images alone. Its closed project declaration is AlgebraicGeometry.IsClosedImmersion.exists_lift_of_isFractionRing in WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean, whose source I read. The uniqueness missing from that lemma's conclusion is proved here from the surjective affine quotient description of a closed immersion. The factor is over b and has generic restriction a by composition and this uniqueness. Thus no unproved inference from set-theoretic image containment is used.
+
+Step 3 uses exactly the statement of lem-sfb-generic-dvr-properness-criterion, which I read. It asks for locally Noetherian S, separated finite-type f, integral R and all discrete valuation subrings of its function field, not arbitrary field extensions. All these are provided. Step 1 identifies k(R)=K and its canonical map; step 2 supplies the required extensions. Its uniqueness clause is not silently taken from existence alone.
+
+Step 4 uses def-weil-closed-immersion for the definition of immersion as closed followed by open; lem-kun-projective-implies-proper for the ambient H/S (H-projective in def-kun-projective's convention); lem-weil-pbc-proper-over-separated with X=R, Y=H and q=H/S; and lem-weil-pbc-proper-immersion-closed for j. I read their full statements: proper-over-separated requires no properness of M/S and no affineness, and its q is separated because it is proper. The last two are already Mathlib leaves. The off-unit generic theorem lem-kun-projective-implies-proper is declared in split_report.tool_uses because it is the general projectivity permanence tool required here; no same-unit node gives it.
+
+Step 5 uses def-kun-projective, whose statement supplies an actual closed embedding of H in finite projective space, and the exact statement of lem-weil-pbc-closed-immersion-comp. Composing with the closed j from step 4 gives the embedding of R, so this clause is proved by composing constructions, not moved into a newly named theorem.
+
+Step 6 uses the full statement of lem-sfb-birational-isomorphism-dense-open. I checked separatedness and local finite presentation against the item's assumptions, the finite-component condition from integrality, and the generic-point/local-ring conditions from step 1. Its conclusion concerns the whole f^{-1}(U), as required; merely isomorphic dense source and target opens would not suffice. This corrected the tempting use of the affine-only spreading lemma.
+
+For small cases I checked S=Spec K: no nonfield DVR subring with fraction field K need exist, but R_eta=Spec K already forces R=Spec K, so vacuity causes no issue. Empty S or R are excluded by integrality. A nonnormal integral base is allowed throughout; neither normalization nor normality of S is invoked. Higher-dimensional S and R are allowed, and no curve, Hom-representability or no-rational-curves property appears. The DVR is not assumed excellent or finite type. A blowup or a singular integral base does not affect the generic-point argument. All proof steps are below 2000 characters, no non-elementary sublemma is hidden in a long step, proof_deps is exactly the union of uses, and every cited statement is reproduced verbatim in citations.json for the delivery gate. No compiler, Lake, Lean writing, repository mutation, launcher mutation or agent delegation was used.

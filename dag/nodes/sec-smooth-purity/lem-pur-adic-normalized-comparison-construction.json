@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-adic-normalized-comparison-construction",
+ "kind": "statement",
+ "title": "Normalized purity transposes with their scalar square and shifts",
+ "statement": "Under the geometric and coefficient hypotheses of [def-pur-adic-purity-scalar-naturality-data], there exist a normalized exceptional coefficient System S and ComparisonData P for it such that its gamma, a and b satisfy the purity scalar square and gamma is compatible with the recorded source and exceptional shifts. This constructs natural invertible transposes with their exact finite reductions and coefficient-mate normalization; it does not assert the source or exceptional unit, associativity, or scalar-comparison shift equations.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Integral coefficient transport and compatibility; extracted assembly below lem-pur-adic-purity-scalar-naturality"
+ },
+ "stmt_deps": [
+  "def-pur-adic-purity-scalar-naturality-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the coefficient System and restrict the actual operations to the uniform finite-Tor domains. Transport source and compact-support scalar comparisons by their ordinary/completed realization comparisons, retaining component normalizations. The finite right realization is pinned by the fixed-scalar Hom-transpose equation independently of gamma.",
+   "uses": [
+    "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "lem-pur-adic-operation-domains-source-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reconstruct a base-field unit orientation, form its trace, and extend that same trace to each finite coefficient field. The unit-trace construction gives natural invertible transposes, coefficient linearity and every prescribed finite reduction. Its normalized realization produces targetRealizationReductions and finiteReductions, without asserting uniqueness of arbitrary lifts.",
+   "uses": [
+    "lem-pur-adic-unit-trace-transpose-reductions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar coherence for extensions of this one trace and the conditional coefficient calculus give the purity scalar square after transport through the canonical source and scalar coordinates. The recorded counit transpose gives bMate.",
+   "uses": [
+    "lem-pur-adic-scalar-trace-coherence",
+    "lem-pur-adic-trace-transpose-coefficient-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply projection shift coherence to the same shifted unit and trace. Transport its two shift identities through the canonical source reassociation, whose crossing sign is (-1)^(2d)=1. The shift calculus gives gamma compatibility with the recorded source and exceptional shifts.",
+   "uses": [
+    "lem-pur-adic-projection-shift-coherence",
+    "lem-pur-adic-trace-transpose-coefficient-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-pur-adic-operation-domains-source-comparison",
+  "lem-pur-adic-unit-trace-transpose-reductions",
+  "lem-pur-adic-scalar-trace-coherence",
+  "lem-pur-adic-trace-transpose-coefficient-calculus",
+  "lem-pur-adic-projection-shift-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Integral coefficient transport and compatibility; extracted assembly below lem-pur-adic-purity-scalar-naturality"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicPurityScalarNaturality",
+  "date": "2026-10-25",
+  "group": "R2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Integral coefficient transport: normalized natural comparisons and their unit, composition and shift equations",
+   "via": [
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural smooth purity isomorphism for integral adic constructible complexes compatible with extension of coefficient fields",
+   "results": "Eight hits concerning BDeRham, smooth algebras, local cohomology and adic completion.",
+   "date": "2026-10-25",
+   "verdict": "No match for normalized adic purity or its coefficient equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"homEquiv\"",
+   "results": "Adjunction.homEquiv and constructors for adjunctions.",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction bijections support the argument, but do not construct adic purity comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "adicPurity|purity.*scalar|scalar.*purity",
+   "results": "msearch: zero Mathlib hits; local rg found the existing item and its five planned dependencies.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate of the extracted interface transport statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral smooth cohomological purity is compatible with finite extensions of coefficient fields and ordinary tensor associators",
+   "results": "Eight hits including Algebra.Smooth.baseChange and ModuleCat.extendScalars_assoc′.",
+   "date": "2026-10-25",
+   "verdict": "Generic algebra smoothness and module scalar associators; no normalized constructible adic purity statement."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPurityNormalizedComparisonConstruction",
+  "file": "lean/Sheaf/Paper/AdicPurityNormalizedComparisonConstruction.lean",
+  "declaration": "WeilConjectures.AdicPurityScalarNaturality.normalizedComparisonConstruction",
+  "declarations": [
+   "WeilConjectures.AdicPurityScalarNaturality.normalizedComparisonConstruction"
+  ],
+  "statement": "theorem normalizedComparisonConstruction :\n    ∃ (S : ConstructibleExceptionalCoefficients.System C.l C.Qbar D C.different (f := f))\n      (P : ComparisonData D C f d S),\n    (∀ (E F : Field D C) (h : E ≤ F) (K : Cat D C E Y),\n    (scalar D C P.scalarClosed E F h true).map ((P.gamma E).hom.app K) ≫\n        (P.b E F h).hom.app K =\n      (P.a E F h).hom.app K ≫\n        (P.gamma F).hom.app ((scalar D C P.scalarClosed E F h false).obj K)) ∧\n    (∀ (E : Field D C),\n    ShiftCompatibility (source D C f d E) (target D C f S E)\n      (sourceShift D C f d E) (targetShift D C f S E) (P.gamma E))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-adcfc",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T143842-L-1091556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-adcfc",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T143842-L-1091556",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs old item module (verbatim apart from the declared Coherence expose, OperationData regrouping and transparency options); the two new sorry statements vs the old item statement (each follows from it, neither restates it); 4 direct importers compiled against the delivered modules"
+ }
+}

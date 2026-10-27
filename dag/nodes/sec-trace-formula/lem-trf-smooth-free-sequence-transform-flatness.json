@@ -1,0 +1,305 @@
+{
+ "id": "lem-trf-smooth-free-sequence-transform-flatness",
+ "kind": "statement",
+ "title": "Strict-transform flatness comparison for a generically free exact sequence",
+ "statement": "Let $S$ be an affine scheme and $f:X\\to S$ an affine smooth morphism [def-sbc-smooth-morphisms] with geometrically integral fibres, meaning integral after every residue-field extension. Let $U\\subset S$ be a quasi-compact open and let $\\mathcal F$ be a finite-type quasi-coherent $\\mathcal O_X$-module. Suppose $r\\geq0$, $\\alpha:\\mathcal O_X^{\\oplus r}\\to\\mathcal F$, and an open $W\\subset X$ are given, $W\\to S$ is surjective, and $\\alpha|_W$ is an isomorphism. Put $\\mathcal H=\\operatorname{coker}\\alpha$ and assume $0\\to\\mathcal O_X^{\\oplus r}\\xrightarrow{\\alpha}\\mathcal F\\to\\mathcal H\\to0$ remains exact after pullback along every morphism $T\\to S$. For every $U$-admissible blowup $b:S^b\\to S$, put $X^b=X\\times_SS^b$ and $W^b=W\\times_SS^b$. There is an induced short exact sequence of module strict transforms $0\\to\\mathcal O_{X^b}^{\\oplus r}\\xrightarrow{\\alpha^b}\\mathcal F^b\\to\\mathcal H^b\\to0$, compatible with the quotient maps from ordinary pullbacks; in particular the strict transform of $\\mathcal O_X^{\\oplus r}$ is its ordinary pullback. The open $W^b$ surjects onto $S^b$ and $\\alpha^b|_{W^b}$ is an isomorphism. For every $y\\in X^b$ with image $t\\in S^b$, the stalk $\\mathcal F^b_y$ is flat over $\\mathcal O_{S^b,t}$ if and only if $\\mathcal H^b_y$ is flat over $\\mathcal O_{S^b,t}$. Thus $\\mathcal H^b$ is flat over $S^b$ if and only if $\\mathcal F^b$ is flat over $S^b$. Fibre products and module pullback are as in [def-pc-fibre-product, def-pc-module-pullback]. Schemes and quasi-compactness conventions are as in [def-weil-pbc-scheme-conventions, def-weil-quasi-separated-morphism], quasi-coherence and finite type as in [pqf-def-coherent], finite presentation of module sheaves as in [def-weil-pbc-module-finite-type-presentation], and relative flatness as in [def-pc-scheme-module-flat-over]. Admissible blowups retain their finite-type centre ideals [def-nagata-admissible-blowup], and all module strict transforms use those specified ideals [def-trf-module-strict-transform].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0815, theorem-flatten-module, proof paragraph 3, displayed sequence of strict transforms and flatness equivalence; Tag 05I3, lemma-induction-step; divisors.tex Tag 080W, lemma-strict-transform-universally-injective."
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-quasi-separated-morphism",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-scheme-module-flat-over",
+  "def-nagata-admissible-blowup",
+  "def-trf-module-strict-transform",
+  "def-pc-geometrically-irreducible",
+  "def-pc-module-stalk-functor",
+  "def-trf-tensor-pullback-free-basis-iso"
+ ],
+ "proof": [
+  {
+   "text": "The cokernel $\\mathcal H$ is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-cokernel-closure]. It is finite type: compose each local finite free surjection onto $\\mathcal F$ with $\\mathcal F\\twoheadrightarrow\\mathcal H$. By [sbc-lem-smooth-criterion], $f$ is flat. Thus $\\mathcal O_X^{\\oplus r}$ is flat over $S$: its stalk is a finite direct sum of flat base modules, and tensoring it with an injection is the direct sum of the corresponding injections. Apply [lem-trf-module-admissible-blowup-calculus](2) to this free module and the specified blowup centre. Its strict-transform quotient map is an isomorphism, identifying $(\\mathcal O_X^{\\oplus r})^b$ with $p^*(\\mathcal O_X^{\\oplus r})=\\mathcal O_{X^b}^{\\oplus r}$, where $p:X^b\\to X$. The last equality sends $c\\otimes(a_i)$ to $(ca_i)$ [def-pc-module-pullback]. The same calculus makes $\\mathcal F^b$ and $\\mathcal H^b$ quasi-coherent of finite type.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "sbc-lem-smooth-criterion",
+    "lem-trf-module-admissible-blowup-calculus",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, theorem-flatten-module, paragraph 3; divisors.tex Tag 080F, lemma-strict-transform-flat, and Tag 080D, definition-strict-transform."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-strict-transform-universal-exact] to the assumed universally exact sequence and to the finite-type ideal supplied by [def-nagata-admissible-blowup]. Substitute the free-term identification of Step 1. This gives $0\\to\\mathcal O_{X^b}^{\\oplus r}\\xrightarrow{\\alpha^b}\\mathcal F^b\\to\\mathcal H^b\\to0$. For compatibility, a pulled-back module map sends a section supported on the inverse image of the exceptional divisor to a section with the same support condition. Consequently it induces the map on the quotients defining strict transform [def-trf-module-strict-transform]. If $\\pi_i$ are the quotient maps, the induced maps satisfy $\\alpha^b\\pi_1=\\pi_2p^*\\alpha$ and $h^b\\pi_2=\\pi_3p^*h$ by their definition on quotient classes; these equalities uniquely determine them since each $\\pi_i$ is surjective.",
+   "uses": [
+    "lem-trf-strict-transform-universal-exact",
+    "def-nagata-admissible-blowup",
+    "def-trf-module-strict-transform"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080W, lemma-strict-transform-universally-injective; Tag 080D, definition-strict-transform."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-surjective-base-change], $W^b\\to S^b$ is surjective. The pullback of the inverse of $\\alpha|_W$ is an inverse to $(p^*\\alpha)|_{W^b}$ [def-pc-module-pullback]. On this open the two ordinary pullbacks are therefore isomorphic. That isomorphism identifies their subsheaves of exceptional-supported sections [def-trf-module-strict-transform], because both it and its inverse commute with restriction. Their quotients are isomorphic, and Step 2 identifies this quotient isomorphism with $\\alpha^b|_{W^b}$. In particular $\\mathcal F^b|_{W^b}=\\mathcal O_{W^b}^{\\oplus r}$ via $\\alpha^b$.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "def-pc-module-pullback",
+    "def-trf-module-strict-transform"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, theorem-flatten-module, paragraph 3, preservation of the generic basis under blowup."
+   }
+  },
+  {
+   "text": "Fix an affine open $V=\\operatorname{Spec}R\\subset S^b$. By [lem-weil-pbc-affine-morphism-permanence](1),(2), its full inverse image $Y=X\\times_SV$ is affine, say $Y=\\operatorname{Spec}A$. By [lem-pc-proper-base-change](2), $Y\\to V$ is smooth; [sbc-lem-smooth-criterion] gives flatness and local finite presentation. The ring map $R\\to A$ is finitely presented by [lem-weil-pbc-lfp-affine-opens-finite-presentation]. It is flat by [def-pc-scheme-module-flat-over], applied to the structure sheaf (whose stalk flatness is exactly flatness of the morphism). Its fibres are geometrically integral: for $v\\in V$ mapping to $s\\in S$, the universal property [def-pc-fibre-product] identifies $Y_v$ with $X_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(v)$. After any further field extension it is still the corresponding extension of $X_s$, hence integral by hypothesis. These identifications are the unique maps commuting with the projections, so require no hypothesis on the blowup base.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-pc-proper-base-change",
+    "sbc-lem-smooth-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-pc-scheme-module-flat-over",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, theorem-flatten-module, application of Tag 05I3 after blowup; morphisms.tex Tags 01VB, 01VE, 01VF, 01TQ."
+   }
+  },
+  {
+   "text": "Put $N=\\Gamma(Y,\\mathcal F^b)$ and let $\\beta:A^{\\oplus r}\\to N$ correspond to $\\alpha^b|_Y$. The counit and unit of [lem-weil-pbc-affine-tilde-gamma-adjunction] identify $\\mathcal F^b|_Y$ with $\\widetilde N$ and the sheaf map with $\\widetilde\\beta$; its preservation of colimits identifies $\\mathcal H^b|_Y$ with $\\widetilde Q$ for $Q=\\operatorname{coker}\\beta$, using Step 2. The module $N$ is finite by [lem-weil-pbc-quasi-coherent-finite-type-affine](a), since Step 1 supplied finite type. The stalks of these sheaves at a prime $\\mathfrak q\\subset A$ are $N_{\\mathfrak q}$ and $Q_{\\mathfrak q}$ by [lem-sbc-affine-module-germ-localization]. For each $\\mathfrak p\\subset R$, the open $W^b\\cap Y_{\\mathfrak p}$ is nonempty by Step 3. An open containing a point of an integral fibre contains its generic point: in a domain every nonempty basic open contains the zero prime. Therefore its generic point $\\xi_{\\mathfrak p}$ lies in $W^b$. At that point Step 3 identifies $N_{\\xi_{\\mathfrak p}}$ with $A_{\\xi_{\\mathfrak p}}^{\\oplus r}$, which is $R_{\\mathfrak p}$-flat since $Y\\to V$ is flat. It also makes $\\beta\\otimes_A\\kappa(\\xi_{\\mathfrak p})$ an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-sbc-affine-module-germ-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, theorem-flatten-module, paragraph 3; Tag 05I3, lemma-induction-step, generic-basis hypotheses."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-free-subtraction-flatness] to $R\\to A$, $N$, $\\beta$ and $Q$. Step 4 verifies flat finite presentation and geometric integrality of every fibre; Step 5 verifies finiteness, generic flatness and the residue-field basis condition for every base prime. For a point $y\\in Y$ corresponding to $\\mathfrak q\\subset A$ and image $t\\in V$ corresponding to $\\mathfrak p$, it gives $N_{\\mathfrak q}$ flat over $R_{\\mathfrak p}$ if and only if $Q_{\\mathfrak q}$ is flat over $R_{\\mathfrak p}$. By the stalk identifications of Step 5 these are exactly $\\mathcal F^b_y$, $\\mathcal H^b_y$ and $\\mathcal O_{S^b,t}$. Every $t\\in S^b$ has an affine neighbourhood by [lem-weil-pbc-affine-opens-basis], so this proves the equivalence at every $y$. Taking all stalks gives the equivalence of relative flatness in [def-pc-scheme-module-flat-over].",
+   "uses": [
+    "lem-trf-free-subtraction-flatness",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pc-scheme-module-flat-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, theorem-flatten-module, paragraph 3, flatness equivalence by Tag 05I3, lemma-induction-step."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "sbc-lem-smooth-criterion",
+  "lem-trf-module-admissible-blowup-calculus",
+  "def-pc-module-pullback",
+  "lem-trf-strict-transform-universal-exact",
+  "def-nagata-admissible-blowup",
+  "def-trf-module-strict-transform",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-sbc-affine-module-germ-localization",
+  "lem-trf-free-subtraction-flatness",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0815, theorem-flatten-module, paragraph 3, displayed strict-transform exact sequence and flatness comparison; divisors.tex Tags 080F and 080W; flat.tex Tag 05I3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict.transform|universally.*injective",
+   "results": "13 hits.  Candidates: Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/RelativeGluing.lean. Tensor exactness and module bases do not compare strict transforms with generic-basis control.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"strictTransform\"",
+   "results": "0 hits. loogle: unknown identifier 'AlgebraicGeometry'. Tensor exactness and module bases do not compare strict transforms with generic-basis control.",
+   "date": "2026-10-22",
+   "verdict": "invalid query: loogle: unknown identifier 'AlgebraicGeometry'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Admissible blowup preserves generic bases in a finite free submodule and reflects flatness from its quotient strict transform",
+   "results": "8 hits.  Candidates: Module.exists_basis_of_span_of_flat, Module.nonempty_basis_of_flat_of_finrank_eq, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Module.IsLocalRing.linearCombination_bijective_of_flat, Module.flat_of_localized_span, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.Smooth.flat_of_isNoetherianRing, Algebra.Smooth.flat. Tensor exactness and module bases do not compare strict transforms with generic-basis control.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict transforms of a universally exact sequence with finite free submodule in a smooth integral fibre family remain exact and the other two terms have the same relative flat locus",
+   "results": "8 hits.  Candidates: KaehlerDifferential.exact_mapBaseChange_map, Algebra.Generators.Cotangent.exact, Algebra.Generators.CotangentSpace.exact, KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange, Module.FaithfullyFlat.range_le_ker_of_exact_rTensor, Algebra.Smooth.flat, Module.FaithfullyFlat.lTensor_exact_iff_exact, Module.FaithfullyFlat.rTensor_exact_iff_exact. Tensor exactness and module bases do not compare strict transforms with generic-basis control.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict transforms of a universally exact sequence with finite free submodule in a smooth integral fibre family remain exact and the other two terms have the same relative flat locus",
+   "results": "8 hits.  Candidates: Module.Flat.rTensor_exact, Module.FaithfullyFlat.rTensor_reflects_exact, IsLocalizedModule.map_exact, Module.Flat.lTensor_exact, RingHom.Flat, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact. Tensor exactness and module bases do not compare strict transforms with generic-basis control.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "0 hits. . Tensor exactness and module bases do not compare strict transforms with generic-basis control.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict transforms of a universally exact sequence with a finite free submodule in a smooth integral fibre family have the same flat locus for the middle and quotient terms",
+   "results": "8 hits: Algebra.Smooth.flat, Algebra.smoothLocus_eq_compl_support_inter, Algebra.Smooth.flat_of_isNoetherianRing, Module.flat_of_isLocalized_span, Module.FaithfullyFlat.range_le_ker_of_exact_rTensor, Algebra.smoothLocus_comap_of_isLocalization, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, RingHom.Flat.ofLocalizationSpanTarget. Tensor exactness, ring smoothness and ordinary flat base change do not state module strict-transform generic-basis flatness comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|moduleStrictTransform",
+   "results": "0 hits: . Tensor exactness, ring smoothness and ordinary flat base change do not state module strict-transform generic-basis flatness comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict transform of modules under a blowup and comparison of relative flatness in a generically free exact sequence",
+   "results": "8 hits: RingHom.Flat, Module.Flat.isBaseChange, Module.Flat.iff_lTensor_exact, Module.Flat.rTensor_exact, Algebra.FormallyUnramified.flat_of_restrictScalars, Module.Flat.iff_rTensor_exact', Module.Flat.iff_rTensor_exact, Module.Flat.of_flat_tensorProduct. Tensor exactness, ring smoothness and ordinary flat base change do not state module strict-transform generic-basis flatness comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "0 hits: . Tensor exactness, ring smoothness and ordinary flat base change do not state module strict-transform generic-basis flatness comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact sequence with a generically isomorphic finite free submodule stays exact on blowup strict transforms and the quotient detects relative flatness",
+   "results": "8 hits: Module.Flat.iff_rTensor_exact', Module.Flat.iff_rTensor_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_lTensor_exact, Module.FaithfullyFlat.rTensor_reflects_exact, Module.FaithfullyFlat.lTensor_reflects_exact, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact, Module.FaithfullyFlat.lTensor_exact_iff_exact. Tensor exactness, ring smoothness and ordinary flat base change do not state module strict-transform generic-basis flatness comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flattening-module-by-admissible-blowup",
+  "date": "2026-10-22",
+  "group": "Q148"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Expansion of Stacks 0815: Tag 0815, theorem-flatten-module, proof paragraph 3, displayed sequence of strict transforms and flatness equivalence; Tag 05I3, lemma-induction-step; divisors.tex Tag 080W, lemma-strict-transform-universally-injective.",
+   "via": [
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-smooth-free-sequence-transform-flatness",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses verbatim. Reused existing strict-transform exactness, flat-transform calculus and generic-basis flatness nodes. Wrote the quotient-map compatibilities, preservation of the isomorphism on the surjective open, and all affine hypotheses of the flatness criterion explicitly. No new nodes or Mathlib leaves. No exact project attachment was found.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Expansion of Stacks 0815: Tag 0815, theorem-flatten-module, proof paragraph 3, displayed sequence of strict transforms and flatness equivalence; Tag 05I3, lemma-induction-step; divisors.tex Tag 080W, lemma-strict-transform-universally-injective.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "why": "Quasi-coherence of H is needed to apply the module strict-transform results."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Smoothness supplies relative flatness and local finite presentation; this is a generic scheme tool, not a replacement of the flattening route."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), arbitrary base change of smoothness, is used for the affine chart of the blowup family."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Converts the finite-type strict transform to a finite coordinate module required by the existing 05I3 criterion."
+   },
+   {
+    "node": "lem-sbc-affine-module-germ-localization",
+    "why": "Identifies the two quasi-coherent stalks with localizations of their coordinate modules."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "sbc-lem-smooth-criterion",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-sbc-affine-module-germ-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-83242108a",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-83242108a (reviewer sub-agent of L); spot-checked: I read the whole item. Shape (A): one commit containing the item and a report with its review section; no new nodes. The item is still unsplit with no repair note in the live and side-live clones, so no other delivery has superseded it. Its statement and stmt_deps are identical to live, proof_deps equals the union of the step uses, and no SGA source is cited. Source checks in Stacks: flat.tex 0815 paragraph 3 (the choice of alpha, W->S surjective, H=Coker alpha, the strict-transform sequence and the flatness equivalence), 05I3 statement and proof, and divisors.tex 080W and 080F(2). The item is exactly this step, and the parent lem-trf-flattening-module-by-admissible-blowup step 3 cites it in this form. Step 1: cokernel-closure plus elementary finite type; smooth-criterion gives flatness; module-admissible-blowup-calculus(2) applies (S affine so qcqs, U quasi-compact, O^r flat), giving the strict transform of O^r as its ordinary pullback and F^b, H^b quasi-coherent of finite type. Step 2: the hypotheses of strict-transform-universal-exact match the item's exactly; the ideal is the finite-type one kept by def-nagata-admissible-blowup; the quotient compatibilities are written out. Step 3: W^b->S^b is surjective by base change; the iso on W^b preserves the exceptional-supported subsheaf, so alpha^b|W^b is an iso, even where W^b meets the exceptional divisor. Step 4: affine-permanence (1),(2) make the full inverse image Y affine; smoothness base-changes by proper-base-change(2); R->A is finitely presented and flat; geometric integrality of the fibres passes to Y over V. Step 5: the tilde-Gamma counit, unit and colimit clauses give N, beta and Q; N is finite and its stalks are localizations. Every fibre meets W^b, and a nonempty open of an integral fibre contains its generic point xi_p, so N at xi_p is A^r there, R_p-flat, and beta tensor kappa(xi_p) is an iso. These are all the hypotheses of free-subtraction-flatness. Step 6: free-subtraction-flatness, the stalk identifications, the affine basis and the flatness definition give the stated equivalence. Edge cases checked: r=0, U=S (identity blowup), empty S, non-Noetherian bases. No duplicate of the item in the DAG. Accepted tool_uses: cokernel-closure, smooth-criterion, proper-base-change(2), qc-finite-type-affine, affine-module-germ-localization. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothFreeSequenceTransformFlatness",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.smoothFreeSequence_transform_flatness",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothFreeSequenceTransformFlatness.lean",
+  "statement": "theorem smoothFreeSequence_transform_flatness {S X : Scheme.{u}} [IsAffine S] (f : X ⟶ S) [IsAffineHom f] [Smooth f] [GeometricallyIntegral f] (U : S.Opens) (hU : IsCompact (U : Set S)) (F : X.Modules) [hF : F.IsQuasicoherent] [F.IsFiniteType] (r : ℕ) (α : SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin r)) ⟶ F) (W : X.Opens) (hW : Surjective (W.ι ≫ f)) (hαW : IsIso ((restrictFunctor W.ι).map α)) (hα : Mono α) (hbase : ∀ (T : Scheme.{u}) (t : T ⟶ S), ∃ w : (tensorPullback (pullback.fst f t)).map α ≫ (tensorPullback (pullback.fst f t)).map (cokernel.π α) = 0, (ShortComplex.mk ((tensorPullback (pullback.fst f t)).map α) ((tensorPullback (pullback.fst f t)).map (cokernel.π α)) w).ShortExact) : ∃ (hfree : (SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin r))).IsQuasicoherent) (hH : (cokernel α).IsQuasicoherent), ∀ B : IsAdmissible S U, ∃ hI : B.I.toModules.IsFiniteType, IsIso (cokernel.π (kernel.ι (moduleStrictTransformRestriction f B.I (SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin r)))))) ∧ ∃ (αb : SheafOfModules.free (R := (Limits.pullback f B.I.blowupMap).ringCatSheaf) (ULift.{u} (Fin r)) ⟶ @moduleStrictTransform X S f B.I hI F hF) (βb : @moduleStrictTransform X S f B.I hI F hF ⟶ @moduleStrictTransform X S f B.I hI (cokernel α) hH) (w : αb ≫ βb = 0), (ShortComplex.mk αb βb w).ShortExact ∧ (tensorPullbackFreeBasisIso (pullback.fst f B.I.blowupMap) (ULift.{u} (Fin r))).hom ≫ αb = (tensorPullback (pullback.fst f B.I.blowupMap)).map α ≫ cokernel.π (kernel.ι (moduleStrictTransformRestriction f B.I F)) ∧ cokernel.π (kernel.ι (moduleStrictTransformRestriction f B.I F)) ≫ βb = (tensorPullback (pullback.fst f B.I.blowupMap)).map (cokernel.π α) ≫ cokernel.π (kernel.ι (moduleStrictTransformRestriction f B.I (cokernel α))) ∧ Surjective (((pullback.fst f B.I.blowupMap) ⁻¹ᵁ W).ι ≫ pullback.snd f B.I.blowupMap) ∧ IsIso ((restrictFunctor ((pullback.fst f B.I.blowupMap) ⁻¹ᵁ W).ι).map αb) ∧ (∀ y : (Limits.pullback f B.I.blowupMap : Scheme.{u}), Module.Flat (B.I.blowup.presheaf.stalk ((pullback.snd f B.I.blowupMap) y)) ((ModuleCat.restrictScalars ((pullback.snd f B.I.blowupMap).stalkMap y).hom).obj ((RingedSpace.moduleStalkFunctor (Limits.pullback f B.I.blowupMap).toRingedSpace y).obj (@moduleStrictTransform X S f B.I hI F hF))) ↔ Module.Flat (B.I.blowup.presheaf.stalk ((pullback.snd f B.I.blowupMap) y)) ((ModuleCat.restrictScalars ((pullback.snd f B.I.blowupMap).stalkMap y).hom).obj ((RingedSpace.moduleStalkFunctor (Limits.pullback f B.I.blowupMap).toRingedSpace y).obj (@moduleStrictTransform X S f B.I hI (cokernel α) hH)))) ∧ ((@moduleStrictTransform X S f B.I hI (cokernel α) hH).IsFlatOver (pullback.snd f B.I.blowupMap) ↔ (@moduleStrictTransform X S f B.I hI F hF).IsFlatOver (pullback.snd f B.I.blowupMap))",
+  "branch": "sheaf-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repairs H2 of immutable head 2f2ba59f814d. Removed theorem nodes lem-sc-picard-tensor-frame-map and lem-trf-module-admissible-blowup-calculus from statement dependencies. Quotients are literal cokernel.π (kernel.ι (moduleStrictTransformRestriction ...)); the free comparison is owned by the new definition node def-trf-tensor-pullback-free-basis-iso. The blowup calculus remains a proof-only import. All mathematical hypotheses and conclusions are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-56925d25d",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Re-delivery of 2f2ba59f814d repairs H2: theorem stmt_deps lem-sc-picard-tensor-frame-map and lem-trf-module-admissible-blowup-calculus removed; the strict-transform quotient is inlined as cokernel.π (kernel.ι (moduleStrictTransformRestriction ...)) (def-trf-module-strict-transform); the free comparison is now the new def node def-trf-tensor-pullback-free-basis-iso (tensorPullbackFreeBasisIso = (mapFreeIso (tensorPullback g) I (asIso ε_g).symm).symm, so g^*ι_i ≫ c = ε_g ≫ ι_i for all I incl. empty; real data; sources Tags 0096/01C8; no competing def node). Diff vs 2f2b: only imports and names, so the earlier clause-by-clause check (0815 ¶3, 05I3, 080W) and edge cases r=0, empty S, U=S, U=∅ stand. Item JSON differs from live only in lean/stmt_deps; both lean.statement fields verbatim; both report sections present; single sorry, docstring proof steps. Advisories: the new def body uses Prop-only theorem facts (tensorPullbackObjUnitToUnit_isIso, IsLeftAdjoint via choose of exists_tensorPullbackAdjunction) that its node does not cite; picardTensorFreeIso could later become an abbrev of it. No compile run (no changes)."
+ }
+}

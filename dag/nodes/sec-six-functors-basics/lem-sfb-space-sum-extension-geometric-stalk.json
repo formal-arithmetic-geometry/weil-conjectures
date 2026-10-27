@@ -1,0 +1,466 @@
+{
+ "id": "lem-sfb-space-sum-extension-geometric-stalk",
+ "kind": "statement",
+ "title": "Geometric stalks of structure-module etale sum extension",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $j:Z\\to X$ be a representable etale morphism of algebraic spaces over $S$ with their small etale structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Let $M$ be a sheaf of $\\mathcal O_Z$-modules [def-weil-sheaf-of-modules-category]. Let $j_!M$ be module sheafification [def-weil-presheaf-modules-sheafification] of the presheaf on etale scheme objects $W\\to X$ given by $\\bigoplus_{a:W\\to Z\\text{ over }X}M(W,a)$, with restrictions sending the $a$-summand to the restricted lift summand. For a geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to X$, where $\\Omega$ is algebraically closed, stalks are colimits over pointed etale scheme neighbourhoods. For each lift $\\bar z:\\operatorname{Spec}\\Omega\\to Z$ with $j\\bar z=\\bar x$, the structural map $\\mathcal O_{X,\\bar x}\\to\\mathcal O_{Z,\\bar z}$ is an isomorphism. Regarding $M_{\\bar z}$ as an $\\mathcal O_{X,\\bar x}$-module through this map, there is a canonical natural isomorphism\n$$(j_!M)_{\\bar x}\\cong\\bigoplus_{\\bar z:\\,j\\bar z=\\bar x}M_{\\bar z}.$$\nFor a pointed etale scheme neighbourhood $(W,\\bar w)$ of $\\bar x$, a lift $a:W\\to Z$, and $m\\in M(W,a)$, this isomorphism sends the germ of $m$ in the $a$-summand to the germ of $m$ in the summand indexed by $a\\bar w$. This formula is natural in $M$. No finiteness or nonemptiness of the set of lifts, separation, or quasi-compactness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08GU (equation-stalk-j-shriek), together with the preceding equation-stalk-restriction and its structure-ring instance; the displayed sentence has a typographical O_X-module in place of O_Z-module. General localized module formula: sites-modules.tex Tag 0710 (lemma-stalk-j-shriek), including its germ-to-summand construction in the proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sfb-space-structure-module-sum-extension",
+  "def-sfb-space-geometric-stalk-models"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-space-enlarged-etale-ringed-site-model], etale $j$ is localization of ringed sites, so $j^{-1}\\mathcal O_X=\\mathcal O_Z$ with the canonical structural identification. Apply [lem-sfb-space-geometric-points-conservative] to $j$ and the ring sheaf $\\mathcal O_X$: $(j^{-1}\\mathcal O_X)_{\\bar z}\\cong\\mathcal O_{X,\\bar x}$ compatibly with the canonical stalk-ring map and ring operations. Consequently that structural map $\\mathcal O_{X,\\bar x}\\to\\mathcal O_{Z,\\bar z}$ is an isomorphism. Use it throughout to restrict the scalars of $M_{\\bar z}$ to $\\mathcal O_{X,\\bar x}$.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-sfb-space-geometric-points-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0710 (lemma-stalk-j-shriek), proof on representatives; spaces-perfect.tex Tag 08GU (equation-stalk-j-shriek) and preceding equation-stalk-restriction."
+   }
+  },
+  {
+   "text": "Write $P(W)=\\bigoplus_{a:W\\to Z/X}M(W,a)$ for the presheaf in the statement. Every such $a$ is etale by [lem-trf-space-chartwise-etale-permanence], since $W$ and $Z$ are etale over $X$. Its summands therefore are values on the small etale site of $Z$. Restrictions are semilinear and satisfy the presheaf identities by those of $M$, including when several lift summands merge. The category of pointed etale scheme neighbourhoods is small and cofiltered by [lem-sfb-space-pointed-etale-neighbourhoods-cofiltered]. Coverings lift their geometric point by [lem-weil-pbc-etale-cover-geometric-point-lift], applied to the covering of the scheme $W$. Hence $u(W)=\\operatorname{Hom}_X(\\bar x,W)$ satisfies the site-point axioms of [lem-sfb-site-point-abelian-sheafification-fibre]. That lemma applied to the underlying abelian presheaf gives $P_{\\bar x}\\cong(j_!M)_{\\bar x}$, induced by sheafification. By [def-weil-presheaf-modules-sheafification] the unit is module-linear, so its stalk is linear over $\\mathcal O_{X,\\bar x}$ as well.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-sfb-site-point-abelian-sheafification-fibre",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0710 (lemma-stalk-j-shriek), proof on representatives; spaces-perfect.tex Tag 08GU (equation-stalk-j-shriek) and preceding equation-stalk-restriction."
+   }
+  },
+  {
+   "text": "For $(W,\\bar w)$ define an additive map $P(W)\\to\\bigoplus_{j\\bar z=\\bar x}M_{\\bar z}$ on the $a$-summand by $m\\mapsto\\iota_{a\\bar w}[W,a,\\bar w,m]$. Restricting along a pointed arrow $r:(V,\\bar v)\\to(W,\\bar w)$ changes $a$ to $ar$ and $m$ to $m|_V$, but $(ar)\\bar v=a\\bar w$ and these sections have the same germ in $M_{a\\bar w}$. Thus the maps are compatible, also for sums with merged indices. The colimit universal property [def-weil-pbc-category-colimit] gives a homomorphism $\\Phi:P_{\\bar x}\\to\\bigoplus_{j\\bar z=\\bar x}M_{\\bar z}$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0710 (lemma-stalk-j-shriek), proof on representatives; spaces-perfect.tex Tag 08GU (equation-stalk-j-shriek) and preceding equation-stalk-restriction."
+   }
+  },
+  {
+   "text": "Fix a lift $\\bar z$. For every pointed etale scheme neighbourhood $(V\\xrightarrow{b}Z,\\bar v)$ of $\\bar z$, composition with $j$ is an etale scheme neighbourhood of $\\bar x$ by [lem-trf-space-chartwise-etale-permanence]. Send $m\\in M(V,b)$ to its $b$-summand in $P(V)$ and then to $P_{\\bar x}$. This is compatible with every pointed arrow over $Z$, by the defining restrictions of $P$. The colimit universal property [def-weil-pbc-category-colimit] gives $\\Psi_{\\bar z}:M_{\\bar z}\\to P_{\\bar x}$. Taking the sum of these homomorphisms gives $\\Psi:\\bigoplus_{j\\bar z=\\bar x}M_{\\bar z}\\to P_{\\bar x}$.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0710 (lemma-stalk-j-shriek), proof on representatives; spaces-perfect.tex Tag 08GU (equation-stalk-j-shriek) and preceding equation-stalk-restriction."
+   }
+  },
+  {
+   "text": "On the germ of a section $m\\in M(W,a)$ in an $a$-summand, $\\Psi\\Phi$ returns precisely that germ in $P_{\\bar x}$. On a section germ in the $\\bar z$-summand, $\\Phi\\Psi$ returns precisely the same germ in that summand. These identities imply identities of the homomorphisms: maps out of a colimit are determined on its cocone maps [def-weil-pbc-category-colimit], and maps out of a direct sum are determined on its summands. For linearity, represent a scalar germ and a section germ on one common pointed neighbourhood, using cofilteredness [lem-sfb-space-pointed-etale-neighbourhoods-cofiltered]; every germ has a section representative by [lem-weil-pbc-filtered-colimit-modules-elementwise] with $R=\\mathbf Z$ on the underlying abelian diagrams. On that neighbourhood the formula for $\\Phi$ commutes with multiplication by the scalar, by the module germ action and the stalk-ring identifications of step 1. Thus $\\Phi$, and hence its inverse, are $\\mathcal O_{X,\\bar x}$-linear. A module map $M\\to N$ commutes with each section-to-germ map, so the same formula commutes with it on every summand, proving naturality. Combining with step 2 gives the stated isomorphism and its exact germ formula. Empty sets of lifts give the zero direct sum; arbitrary lift sets cause no problem because every section of a direct sum has finite support.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-sfb-space-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0710 (lemma-stalk-j-shriek), proof on representatives; spaces-perfect.tex Tag 08GU (equation-stalk-j-shriek) and preceding equation-stalk-restriction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-sfb-space-geometric-points-conservative",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-space-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-sfb-site-point-abelian-sheafification-fibre",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0710 (lemma-stalk-j-shriek), with the inverse to the displayed decomposition written using its colimit cocones; algebraic-space specialization in spaces-perfect.tex Tag 08GU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Stalk of extension by zero on a localized ringed site is the direct sum over lifts of the point",
+   "results": {
+    "t": "2026-10-23T16:05:42Z",
+    "tool": "leanfinder",
+    "query": "Stalk of extension by zero on a localized ringed site is the direct sum over lifts of the point",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.Tilde.toStalk",
+     "ModuleCat.Tilde.localizationToStalk",
+     "ModuleCat.Tilde.localizationToStalk_mk",
+     "ModuleCat.Tilde.stalkToFiberLinearMap",
+     "ModuleCat.Tilde.stalkIso",
+     "ModuleCat.Tilde.stalkIso_inv",
+     "AlgebraicGeometry.StructureSheaf.localizationToStalk_mk'",
+     "ModuleCat.Tilde.stalkToFiberLinearMap_toStalk"
+    ],
+    "digest": "93a2a7a33a408e1a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological stalks, affine tilde modules, or the general point fibre functor; none states the direct-sum stalk formula for localized modules or algebraic-space structure modules"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*[Ss]talk|[Ss]talk.*extensionByZero|localiz.*[Ss]talk|[Ss]talk.*localiz",
+   "results": {
+    "t": "2026-10-23T16:06:14Z",
+    "tool": "grep",
+    "query": "extensionByZero.*[Ss]talk|[Ss]talk.*extensionByZero|localiz.*[Ss]talk|[Ss]talk.*localiz",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological stalks, affine tilde modules, or the general point fibre functor; none states the direct-sum stalk formula for localized modules or algebraic-space structure modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stalk of sheafified direct sum extension of modules from a slice site is the direct sum of stalks at lifted points",
+   "results": {
+    "t": "2026-10-23T16:06:15Z",
+    "tool": "leansearch",
+    "query": "Stalk of sheafified direct sum extension of modules from a slice site is the direct sum of stalks at lifted points",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TopCat.Presheaf.stalk",
+     "ModuleCat.Tilde.toOpen_germ_apply",
+     "TopCat.Presheaf.stalkFunctor",
+     "TopCat.Presheaf.sheafifyStalkIso",
+     "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
+     "ModuleCat.Tilde.toStalk",
+     "TopCat.Presheaf.stalkToFiber_surjective",
+     "ModuleCat.Tilde.stalkToFiberLinearMap_toStalk"
+    ],
+    "digest": "7c5bc94a188ab3d2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological stalks, affine tilde modules, or the general point fibre functor; none states the direct-sum stalk formula for localized modules or algebraic-space structure modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"stalk\"",
+   "results": {
+    "t": "2026-10-23T16:06:15Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules\", \"stalk\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "PresheafOfModules.instModuleCarrierStalkRingCatCarrierAbPresheafOpensCarrier",
+     "PresheafOfModules.instModuleCarrierStalkCommRingCatCarrierAbPresheafOpensCarrier"
+    ],
+    "digest": "c093ed217b3ec0b2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological stalks, affine tilde modules, or the general point fibre functor; none states the direct-sum stalk formula for localized modules or algebraic-space structure modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of modules on a slice Grothendieck site the stalk of its left adjoint extension is the coproduct over the fibre of the represented sheaf",
+   "results": {
+    "t": "2026-10-23T16:06:16Z",
+    "tool": "leanfinder",
+    "query": "For a sheaf of modules on a slice Grothendieck site the stalk of its left adjoint extension is the coproduct over the fibre of the represented sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.GrothendieckTopology.Point.sheafFiber",
+     "stalkSkyscraperSheafAdjunction",
+     "instIsLeftAdjointPresheafStalkFunctor",
+     "StalkSkyscraperPresheafAdjunctionAuxs.unit_app",
+     "StalkSkyscraperPresheafAdjunctionAuxs.fromStalk",
+     "StalkSkyscraperPresheafAdjunctionAuxs.fromStalk_to_skyscraper",
+     "StalkSkyscraperPresheafAdjunctionAuxs.counit_app",
+     "StalkSkyscraperPresheafAdjunctionAuxs.unit"
+    ],
+    "digest": "86d95c356086f3b5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological stalks, affine tilde modules, or the general point fibre functor; none states the direct-sum stalk formula for localized modules or algebraic-space structure modules"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*[Ss]talk|[Ss]talk.*extensionByZero|localiz.*[Ss]talk|[Ss]talk.*localiz",
+   "results": {
+    "t": "2026-10-23T16:07:46Z",
+    "tool": "grep",
+    "query": "extensionByZero.*[Ss]talk|[Ss]talk.*extensionByZero|localiz.*[Ss]talk|[Ss]talk.*localiz",
+    "sub": "Algebra/Category",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological stalks, affine tilde modules, or the general point fibre functor; none states the direct-sum stalk formula for localized modules or algebraic-space structure modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric stalk of etale extension by zero of structure sheaf modules on algebraic spaces is a direct sum indexed by the geometric fibre",
+   "results": {
+    "t": "2026-10-23T16:10:24Z",
+    "tool": "leansearch",
+    "query": "Geometric stalk of etale extension by zero of structure sheaf modules on algebraic spaces is a direct sum indexed by the geometric fibre",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.LocallyRingedSpace.𝒪",
+     "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
+     "AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatStalkToFiberRingHom",
+     "AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf",
+     "AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk",
+     "AlgebraicGeometry.stalkClosedPointIso",
+     "AlgebraicGeometry.Scheme.instFieldCarrierResidueField",
+     "AlgebraicGeometry.stalkToFiberRingHom_germ"
+    ],
+    "digest": "e9c84822fa7c3b66"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological stalks, affine tilde modules, or the general point fibre functor; none states the direct-sum stalk formula for localized modules or algebraic-space structure modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism of algebraic spaces the geometric stalk of structure module extension by zero is the direct sum of module stalks over all geometric lifts",
+   "results": {
+    "t": "2026-10-23T16:10:25Z",
+    "tool": "leanfinder",
+    "query": "For an etale morphism of algebraic spaces the geometric stalk of structure module extension by zero is the direct sum of module stalks over all geometric lifts",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.Tilde.stalkIso_hom",
+     "ModuleCat.Tilde.toStalk",
+     "ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap",
+     "ModuleCat.Tilde.stalkToFiberLinearMap_toStalk",
+     "ModuleCat.Tilde.stalkToFiberLinearMap",
+     "AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux",
+     "ModuleCat.Tilde.stalkToFiberLinearMap_germ",
+     "ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap"
+    ],
+    "digest": "acd4d7174d699e25"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern topological stalks, affine tilde modules, or the general point fibre functor; none states the direct-sum stalk formula for localized modules or algebraic-space structure modules"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*[Ss]talk|[Ss]talk.*extensionByZero|[Ss]talk.*[Ss]um|[Ss]um.*[Ss]talk",
+   "results": {
+    "t": "2026-10-23T19:51:09Z",
+    "tool": "grep",
+    "query": "extensionByZero.*[Ss]talk|[Ss]talk.*extensionByZero|[Ss]talk.*[Ss]um|[Ss]um.*[Ss]talk",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: results concern topological stalks or affine tilde-module stalks. None gives the etale direct-sum extension formula for structure modules on algebraic spaces. The more general sheafification comparison is separately recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalk of a sheafified sum extension of modules on an etale site is the direct sum of stalks indexed by lifts of the geometric point",
+   "results": {
+    "t": "2026-10-23T19:51:09Z",
+    "tool": "leansearch",
+    "query": "The stalk of a sheafified sum extension of modules on an etale site is the direct sum of stalks indexed by lifts of the geometric point",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TopCat.Presheaf.stalk",
+     "ModuleCat.Tilde.toOpen_germ_apply",
+     "TopCat.Presheaf.sheafifyStalkIso",
+     "ModuleCat.Tilde.toStalk",
+     "TopCat.Presheaf.stalkToFiber_surjective",
+     "ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk",
+     "TopCat.Presheaf.stalkToFiber",
+     "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso"
+    ],
+    "digest": "e2b127cfddc84963"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: results concern topological stalks or affine tilde-module stalks. None gives the etale direct-sum extension formula for structure modules on algebraic spaces. The more general sheafification comparison is separately recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"stalk\"",
+   "results": {
+    "t": "2026-10-23T19:51:09Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules\", \"stalk\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "PresheafOfModules.instModuleCarrierStalkRingCatCarrierAbPresheafOpensCarrier",
+     "PresheafOfModules.instModuleCarrierStalkCommRingCatCarrierAbPresheafOpensCarrier"
+    ],
+    "digest": "c093ed217b3ec0b2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: results concern topological stalks or affine tilde-module stalks. None gives the etale direct-sum extension formula for structure modules on algebraic spaces. The more general sheafification comparison is separately recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalk of extension by zero of modules along an etale morphism of algebraic spaces is the direct sum of stalks over geometric lifts",
+   "results": {
+    "t": "2026-10-23T19:51:10Z",
+    "tool": "leanfinder",
+    "query": "Geometric stalk of extension by zero of modules along an etale morphism of algebraic spaces is the direct sum of stalks over geometric lifts",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.Tilde.toStalk",
+     "ModuleCat.Tilde.stalkIso_hom",
+     "ModuleCat.Tilde.stalkToFiberLinearMap_toStalk",
+     "ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap",
+     "ModuleCat.Tilde.stalkToFiberLinearMap",
+     "ModuleCat.Tilde.stalkIso",
+     "ModuleCat.Tilde.stalkToFiberLinearMap_germ",
+     "ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap"
+    ],
+    "digest": "a093a0bd3ba42c68"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: results concern topological stalks or affine tilde-module stalks. None gives the etale direct-sum extension formula for structure modules on algebraic spaces. The more general sheafification comparison is separately recorded as a Mathlib leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-etale-sum-pullback",
+  "date": "2026-10-24",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1K (lemma-base-change-tensor), statement and precise canonical map in the proof; sites-cohomology.tex Tags 07A6 (lemma-adjoint) and 07A7 (remark-base-change). Supporting input to 0A1K: Tag 0DKH (lemma-single-complex-base-change), with condition (1) of Tag 0DKG (lemma-single-complex-base-change-condition) and equation-bc immediately before it; the canonical exchange is the map specified there and explicitly defined in the statement. Supporting input: Tag 0DKH induction step: canonical commutative relative Mayer–Vietoris triangle diagram, before applying third-isomorphism-triangle. Supporting input: Base-changed elementary-square left resolution used to identify the fixed canonical arrows in the Tag 0DKH triangle diagram. Supporting input: geometric stalks of the sheafified etale sum extension, before tensoring along the base-change stalk ring map.",
+   "via": [
+    "lem-sfb-space-etale-sum-pullback",
+    "lem-sfb-space-relative-mv-exchange-triangles",
+    "lem-sfb-space-single-complex-base-change",
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-sum-extension-geometric-stalk",
+  "worker": "stage1",
+  "summary": "Q23 checked 08GU and the entire 0710 stalk argument. The proof now constructs both inverse maps on section germs, uses the existing etale ringed-site/point comparisons for the stalk rings, and isolates only the genuinely general abelian sheafification comparison as a Mathlib leaf. The statement is unchanged. No finiteness, separation, or constant-coefficient assumption is introduced.",
+  "blueprint": "Supporting geometric stalk calculation beneath det-thm-sf-ctf-stability-direct-images, proof (3), on the inherited alteration/base-change route; more precisely the existing from.place ends with geometric stalks of the sheafified etale sum extension. The current latest blueprint unit sk-thm-sf-ctf-stability is read; no identical blueprint formula was found. The ancestor tool returns null, retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Identifies etale restriction of the structure ring with the structure ring on the source, including the actual canonical ringed-topos map; a generic site presentation tool, not an alternative direct-image route."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Composition and cancellation for etale algebraic-space charts make exactly the required neighbourhoods and section values legal; a geometric site tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "why": "Verifies the covering-lift axiom for the scheme objects of the space etale site; it is a generic fact about etale covers of a scheme."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-etale-cover-geometric-point-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-bcf553ab7",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-bcf553ab7 (reviewer sub-agent of L); spot-checked: Ordinary first split; no repair note. Live and side-live still have the item unsplit, with the same statement and stmt_deps. The proof follows Stacks 0710 (sites-modules l.7142): step 2 sheafifies the summed presheaf P; steps 3-5 build the germ maps Φ and Ψ, prove they are inverse on generators, then prove linearity (common refinement, elementwise representatives with R=Z) and naturality. Step 1 gets O_{X,x̄}≅O_{Z,z̄} from the localization clause of lem-trf-space-enlarged-etale-ringed-site-model and the (h^{-1}F)_t̄≅F_{ht̄} clause of lem-sfb-space-geometric-points-conservative. The site-point axioms hold: N_x̄ is cofiltered by lem-sfb-space-pointed-etale-neighbourhoods-cofiltered, and coverings lift x̄ by lem-weil-pbc-etale-cover-geometric-point-lift on scheme covers. The new leaf lem-sfb-site-point-abelian-sheafification-fibre is Stacks 04EP(3) and equals Mathlib Point.presheafToSheafCompSheafFiberIso (Skyscraper.lean:281, IsIso instance at 272-275) with A=AddCommGrpCat; a covering family lifting gives the sieve lifting Mathlib requires. It is not a duplicate: lem-weil-pbc-(sets-)sheafification-geometric-stalk cover only the étale site of a scheme, and lem-trf-site-point-fibre needs finite limits and constant coefficients. It restates no clause of the item. Small cases checked: P=0, no lifts, j=id, infinite disjoint unions, non-separated j. Batch-5 flags: the two trf nodes and the two sfb nodes reaching def-trf-algebraic-space have closures made only of algebraic-space foundations (22/13/29/9 trf nodes, no trace-formula, Poincaré-duality or nt- nodes) and are outside both assumptions, so all four citations are legitimate. No cycle, no SGA citation. The three tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSumExtensionGeometricStalk",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.spaceSumExtension_geometricStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSumExtensionGeometricStalk.lean",
+  "statement": "theorem spaceSumExtension_geometricStalk (j : Z ⟶ X) (hj : IsEtale j.hom.hom) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (x : yoneda.obj (Over.mk s) ⟶ X.obj.obj) : (∀ a : SumLift j x, Function.Bijective (spaceSumStalkScalar j s x a)) ∧ ∃! e : ∀ M : Z.Modules, (SingleComplex.stalkModel s x).modules.obj (spaceSumExtension j hj M) ≃ₗ[ SingleComplex.stalkRing s x] DirectSum (SumLift j x) (fun a ↦ spaceSumStalkPiece j s x M a), (∀ (M : Z.Modules) (W : X.PointedEtale x) (a : SumLift j W.right.obj.hom) (m : M.val.obj (op (sumLiftChart j hj W.right a))), e M (spaceChartGerm s x (spaceSumExtension j hj M) W (spaceSumGenerator j hj M W.right a m)) = DirectSum.of (fun b ↦ spaceSumStalkPiece j s x M b) (spaceSumPointLift j x W a) (spaceChartGerm s (yonedaEquiv.symm (spaceSumPointLift j x W a).val) M (spaceSumLiftPointed j hj x W a) m)) ∧ (∀ (M N : Z.Modules) (f : M ⟶ N) (v : (SingleComplex.stalkModel s x).modules.obj (spaceSumExtension j hj M)), e N ((SingleComplex.stalkModel s x).modules.map (spaceSumExtensionHom j hj f) v) = DirectSum.lmap (fun a ↦ ((ModuleCat.restrictScalars (spaceSumStalkScalar j s x a)).map ((SingleComplex.stalkModel s (yonedaEquiv.symm a.val)).modules.map f)).hom) (e M v))",
+  "branch": "sheaf-dag",
+  "by": "Q160",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4614a6ec",
+  "group": "Q160",
+  "result": "pass",
+  "note": "The item states both node clauses: the structural map O_{X,x̄}→O_{Z,z̄} is bijective for every lift, and there is a unique family of O_{X,x̄}-linear isomorphisms (j_!M)_x̄ ≅ ⊕_{SumLift} restrictScalars(M_z̄), normalized on every pointed scheme-chart germ (a-summand ↦ a w̄ summand) and natural in M. No extra hypotheses; universe u throughout. New def node def-sfb-space-structure-module-sum-extension: literal direct-sum presheaf over Yoneda section lifts with merging restriction, O_X(W)=Γ(W)=O_Z(W,a) action, Mathlib PresheafOfModules.sheafification with the landed comm-algebra-sheaf instances, and a chart germ pinned by a true ∃! over the cofinal affine basis; data real, theorems sorry, fields per §5. Not a duplicate: extensionByZeroPresheaf needs a slice over a site object; etaleModuleShriek is a theorem-node Functor.leftAdjoint choice. Item changed only in lean/stmt_deps (+new node, +landed geometric-stalk-models); both lean.statement fields verbatim; dep node files identical to side-live; report sections present. Advisory: PointedEtale owner reaches the item only via the new def node's stmt_deps. No recompile (worker compile and dry run OK); no files changed."
+ }
+}

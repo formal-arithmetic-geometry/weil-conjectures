@@ -1,0 +1,142 @@
+{
+ "id": "lem-sfb-open-moduli-diagonal-restriction",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Full open restriction of an unramified moduli diagonal.",
+   "via": [
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Full open restriction of an unramified moduli diagonal",
+ "statement": "Let S be a scheme [def-pc-scheme], F a category over S-schemes, and U,V full open substacks of F [def-sfb-open-moduli-substack]. If U is contained in V and V has unramified relative diagonal over S [def-weil-unramified-morphism], then U has unramified relative diagonal over S. The diagonal is tested with both scheme projections retained, as in [def-sfb-open-moduli-substack].",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06N3, full open restriction of the diagonal"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-open-moduli-substack",
+  "def-weil-unramified-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For scheme-valued functors a,b into U, compose them with the full inclusion into V. The iso-comma categories defining their two-fibre products are equivalent over the base: the inverse lifts each comparison isomorphism through the full inclusion. Full faithfulness lifts each commuting square, and identities and compositions are unchanged. Use the shared fullModuli_isHomLift lemma from the open-substack algebraicity module to preserve and reflect the condition of lying over the identity base arrow.",
+   "uses": [
+    "def-sfb-open-moduli-substack",
+    "lem-sfb-full-open-substack-algebraicity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N3, full open restriction of the diagonal"
+   }
+  },
+  {
+   "text": "Compose the space equivalence for the diagonal of V with this inverse equivalence. The representing space Z, its map to the product of the two test schemes, and its unramifiedness are unchanged. The first and second projections of the inverse comparison functor are definitionally the original projections, so both required 2-isomorphisms are retained.",
+   "uses": [
+    "def-sfb-open-moduli-substack"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06N3, full open restriction of the diagonal"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-open-moduli-substack",
+  "lem-sfb-full-open-substack-algebraicity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06N3, full open restriction of the diagonal"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The diagonal of a full open substack of an algebraic stack with unramified diagonal is unramified",
+   "results": "AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme; AlgebraicGeometry.FormallyUnramified.casesOn; AlgebraicGeometry.FormallyUnramified.recOn; AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal; AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover; AlgebraicGeometry.FormallyUnramified; AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE; AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme and group-action results, not the project full-substack/curve comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal of a full substack is obtained by restricting the diagonal of the stack, so an unramified diagonal restricts to a full open substack",
+   "results": "AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal; AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme; AlgebraicGeometry.instIsZariskiLocalAtSourceDiagonalSchemeOfHasOfPostcompPropertyOfRespectsRightIsOpenImmersion; AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal; AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset; AlgebraicGeometry.AffineTargetMorphismProperty.diagonal; AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange; AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme",
+   "date": "2026-10-23",
+   "verdict": "no match for the project moduli interface"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.ιOfLE",
+   "results": "CategoryTheory.ObjectProperty.ιOfLE; CategoryTheory.ObjectProperty.faithful_ιOfLE; CategoryTheory.ObjectProperty.full_ιOfLE; CategoryTheory.ObjectProperty.fullyFaithfulιOfLE; CategoryTheory.ObjectProperty.ιOfLE_obj_obj; CategoryTheory.ObjectProperty.ιOfLECompιIso; CategoryTheory.ObjectProperty.liftCompιOfLEIso; CategoryTheory.ObjectProperty.ιOfLE_map",
+   "date": "2026-10-23",
+   "verdict": "no match; general scheme/category API does not state the project moduli comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAlgebraicModuliStack|IsModuliAutomorphismSpace|ProperCurveFamily",
+   "results": "[grep] OK 0 hit(s). Direct rg also checked OpenModuliSubstack in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory/FiberedCategory, with no hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CurveStackInfinitesimalDmLocus",
+  "date": "2026-10-23",
+  "group": "S5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenModuliDiagonalRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenModuliDiagonalRestriction.lean",
+  "declaration": "CategoryTheory.OpenModuliSubstack.hasUnramifiedDiagonal_of_contained",
+  "statement": "theorem OpenModuliSubstack.hasUnramifiedDiagonal_of_contained {S : Scheme.{u}}\n    {F : BasedCategory.{v, w} (Over S)} (U V : OpenModuliSubstack F)\n    (h : U.IsContainedIn V) (hV : HasUnramifiedModuliDiagonal V.category) :\n    HasUnramifiedModuliDiagonal U.category",
+  "branch": "sheaf-dag",
+  "by": "S5",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261024T020437-L-2604731",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261024T020437-L-2604731",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

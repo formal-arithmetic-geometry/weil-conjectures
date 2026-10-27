@@ -1,0 +1,276 @@
+{
+ "id": "lem-trf-fibre-embedding-lifted-coordinates",
+ "kind": "statement",
+ "title": "Lifted coordinates for a closed immersion of an ample proper fibre",
+ "statement": "Let $f:Z\\to S$ be a proper morphism [def-weil-proper-morphism] of schemes [def-pc-scheme], let $s\\in S$, and let $Z_s$ be its scheme-theoretic fibre [def-pc-scheme-fibre]. Assume $S$ is Noetherian, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. Let $L$ be an invertible $\\mathcal O_Z$-module [def-sc-invertible-module] whose pullback $L_s$ [def-pc-module-pullback] is ample [def-weil-pbc-ample-invertible-module], and assume $Z_s\\ne\\varnothing$. There exist integers $d\\geq1$, $r\\geq0$, an affine open neighbourhood $U\\subseteq S$ of $s$, and sections $u_0,\\ldots,u_r\\in\\Gamma(Z_U,L^{\\otimes d}|_{Z_U})$, where $Z_U=f^{-1}(U)$ and tensor powers are as in [def-weil-pbc-ample-invertible-module], such that their fibre pullbacks $t_j\\in\\Gamma(Z_s,L_s^{\\otimes d})$ generate $L_s^{\\otimes d}$ [def-weil-pbc-generating-sections]. The fibre morphism $i_s:Z_s\\to\\mathbf P^r_{\\kappa(s)}$ defined by $(t_0,\\ldots,t_r)$ [def-weil-pbc-morphism-to-projective-space-by-sections] is a closed immersion [def-weil-closed-immersion], with a quotient-compatible isomorphism $i_s^*\\mathcal O(1)\\cong L_s^{\\otimes d}$; here projective space and its twist have the meanings of [def-nagata-projective-space-base-change] and [def-pc-projective-space-twist]. The fibre pullbacks use the natural identification $(L^{\\otimes d})|_{Z_s}\\cong L_s^{\\otimes d}$ of [lem-weil-pbc-invertible-pullback-tensor], iterated over the tensor factors, namely the comparison $p_j(L,d)$ of [def-sc-tensor-pullback-power-comparison] for the fibre projection $j:Z_s\\to Z$. No generation by the $u_j$ away from $Z_s$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0D2N, lemma-ample-in-neighbourhood, first paragraph through lifting all projective coordinates, using lemma-ample-on-fibre."
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-pc-scheme",
+  "def-pc-scheme-fibre",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-weil-closed-immersion",
+  "def-nagata-projective-space-base-change",
+  "def-pc-projective-space-twist",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-sc-tensor-pullback-power-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-ample-fibre-section-lifting] to $f,L,s$ and choose its bound $a$. The fibre structural map $g:Z_s\\to\\operatorname{Spec}\\kappa(s)$ is proper by [lem-pc-proper-base-change](1), hence of finite type by [def-weil-proper-morphism]. The fibre line bundle $L_s$ is invertible by [lem-weil-pbc-invertible-pullback-tensor](1) and ample by hypothesis. Apply [lem-trf-affine-eventual-power-immersion] over the field $\\kappa(s)$ and choose its bound $b\\geq1$. Set $d=\\max(a,b)$. That lemma supplies $r\\geq0$, an immersion $i:Z_s\\to\\mathbf P^r_{\\kappa(s)}$ over the field, and an isomorphism $\\alpha:i^*\\mathcal O(1)\\xrightarrow{\\sim}L_s^{\\otimes d}$. In particular $d\\geq1$ and the section-lifting lemma applies to every section of this power.",
+   "uses": [
+    "lem-trf-ample-fibre-section-lifting",
+    "lem-pc-proper-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-trf-affine-eventual-power-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0D2N, lemma-ample-in-neighbourhood, first paragraph; Tag 0D2M, lemma-ample-on-fibre; Morphisms Tag 01VT, lemma-finite-type-over-affine-ample-very-ample (1) implies (6)."
+   }
+  },
+  {
+   "text": "The target $\\mathbf P^r_{\\kappa(s)}$ is separated over $\\kappa(s)$ by [lem-weil-pbc-projective-space-proj-separated]. Since $i$ is over the field and $g$ is proper, [lem-weil-pbc-proper-to-separated] makes $i$ proper. It is an immersion, so [lem-weil-pbc-proper-immersion-closed] makes it a closed immersion.",
+   "uses": [
+    "lem-weil-pbc-projective-space-proj-separated",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W6, lemma-image-proper-scheme-closed; as invoked by Coherent Tag 0D2N. Constructions Tag 01NH (1)."
+   }
+  },
+  {
+   "text": "Let $T_0,\\ldots,T_r$ be the homogeneous coordinate sections and put $t_j=\\alpha(i^*T_j)$. In the standard chart $D_+(T_k)$ of [def-nagata-relative-projective-space], the twist of [def-pc-projective-space-twist] has basis $e_k$, and $T_j=(T_j/T_k)e_k$, in particular $T_k=e_k$. These formulas agree with the pullback of the integral projective twist: both have transition $e_l=(T_l/T_k)e_k$. Thus on $i^{-1}D_+(T_k)$ the section $t_k$ is a basis; these opens cover $Z_s$, so the $t_j$ generate in the precise sheaf-surjectivity sense of [def-weil-pbc-generating-sections]. Let $\\theta:\\mathbf P^r_{\\kappa(s)}\\xrightarrow{\\sim}\\mathbf P(\\{0,\\ldots,r\\};\\kappa(s))=\\operatorname{Spec}\\kappa(s)\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^r_{\\mathbf Z}$ be the canonical isomorphism over $\\kappa(s)$ of [lem-trf-free-projective-bundle-base-change-space]; on the affine base it is the Proj comparison fixing every $T_j$, so $\\mathrm{pr}_2\\circ\\theta$ is given on $D_+(T_k)$ by the coefficient map $\\mathbf Z[T]_{(T_k)}\\to\\kappa(s)[T]_{(T_k)}$ and pulls the integral frames $e_k$ and coordinates $T_j$ back to those of the chart. Apply [lem-weil-pbc-projective-space-functor-of-points] to $\\psi=\\mathrm{pr}_2\\circ\\theta\\circ i:Z_s\\to\\mathbf P^r_{\\mathbf Z}$. Its generating pair is exactly $(L_s^{\\otimes d},(t_j))$, using the displayed transition formulas and $\\alpha$. Uniqueness there and the fibre-product definition of [def-weil-pbc-morphism-to-projective-space-by-sections] (both projections of $\\theta\\circ i$ agree with $g$ and $\\psi$) show that the morphism $i_s$ defined by these sections is $\\theta\\circ i$; it is a closed immersion by Step 2, since $\\theta$ is an isomorphism. The isomorphism $\\alpha$ sends every pulled-back coordinate to $t_j$, hence is quotient-compatible.",
+   "uses": [
+    "lem-trf-free-projective-bundle-base-change-space",
+    "def-nagata-relative-projective-space",
+    "def-pc-projective-space-twist",
+    "def-weil-pbc-generating-sections",
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "def-weil-pbc-morphism-to-projective-space-by-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NE, lemma-projective-space, and the description after Definition 01NF; standard coordinate frames of the twist."
+   }
+  },
+  {
+   "text": "For each of the finitely many $j=0,\\ldots,r$, use the lifting lemma with this same $d\\geq a$ and $t_j$. Obtain $s\\in U_j\\subseteq S$ and $v_j\\in\\Gamma(f^{-1}(U_j),L^{\\otimes d})$ with fibre pullback $t_j$. Its hypotheses are exactly those of the item and do not require flatness or generation away from the fibre. The comparison used by the lifting statement is the tensor pullback identification of [lem-weil-pbc-invertible-pullback-tensor](2); its iterated comparison on $d$ factors is $p_j(L,d)$ of [def-sc-tensor-pullback-power-comparison]. On a tensor of local sections it sends $1\\otimes(\\ell_1\\otimes\\cdots\\otimes\\ell_d)$ to $(1\\otimes\\ell_1)\\otimes\\cdots\\otimes(1\\otimes\\ell_d)$, by its recursive definition and the normalized unit $\\ell\\mapsto1\\otimes\\ell$. This is precisely the natural identification specified in the item, with no arbitrary scalar rescaling.",
+   "uses": [
+    "lem-trf-ample-fibre-section-lifting",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-sc-tensor-pullback-power-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0D2N, first paragraph, lifting the coordinates via 0D2M; normalized pullback and tensor comparison as specified in the item."
+   }
+  },
+  {
+   "text": "The finite intersection $W=\\bigcap_{j=0}^r U_j$ is an open neighbourhood of $s$. By [lem-weil-pbc-affine-opens-basis], choose an affine open $s\\in U\\subseteq W$. Restrict $v_j$ to $Z_U=f^{-1}(U)$ and call it $u_j$. Restriction followed by fibre pullback equals the original fibre pullback: on local sections both maps are $v\\mapsto1\\otimes v$, as in the pullback convention of [lem-weil-pbc-invertible-pullback-tensor]. Consequently every $u_j$ pulls back to $t_j$ through the comparison fixed in Step 4. Steps 2 and 3 show that these fibre sections generate and define the closed immersion $i$ with its quotient-compatible twist isomorphism. Together with $d\\geq1$, $r\\geq0$ and affine $U$, these are all the requested data.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IT, lemma-basis-affine-opens; Coherent Tag 0D2N, first paragraph, common neighbourhood for finitely many lifts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-ample-fibre-section-lifting",
+  "lem-pc-proper-base-change",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-trf-affine-eventual-power-immersion",
+  "lem-weil-pbc-projective-space-proj-separated",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "def-nagata-relative-projective-space",
+  "def-pc-projective-space-twist",
+  "def-weil-pbc-generating-sections",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-sc-tensor-pullback-power-comparison",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-trf-free-projective-bundle-base-change-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0D2N, lemma-ample-in-neighbourhood, first paragraph through lifting coordinates; Tag 0D2M; Morphisms 01VT and 01W6; Constructions 01NE."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle ample on a fibre of a proper noetherian family admits a power with fibre embedding coordinates lifting to sections near the base point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (s : ↑(X.presheaf.obj (Opposite.op U))) (𝒰 : X.OpenCover) [Finite 𝒰.I₀],\\n  (∀ (i : 𝒰.I₀), IsNilpotent ((CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.f i) U)) s)) →\\n    IsNilpotent s\", \"doc\": \"Let $ X $ be a scheme, $ U $ an open subset of $ X $, and $ s $ a section of the structure sheaf of $ X $ over $ U $. If there exists a finite open cover $ \\\\mathcal{U} $ of $ X $ such that for every o\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: structure-sheaf section localization and basic-open power identities do not give a line-bundle fibre embedding with liftable coordinates; no ampleness declarations found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift the finitely many sections defining a closed immersion of the fibre of a proper scheme into projective space",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsAmple\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: structure-sheaf section localization and basic-open power identities do not give a line-bundle fibre embedding with liftable coordinates; no ampleness declarations found."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(IsAmple|IsVeryAmple|[Aa]mpleness)\\b",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: structure-sheaf section localization and basic-open power identities do not give a line-bundle fibre embedding with liftable coordinates; no ampleness declarations found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample invertible sheaf on a proper fibre has an arbitrarily high very ample power with coordinates extending over an open base neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.basicOpen_pow\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens} (f : ↑(X.presheaf.obj (Opposite.op U))) {n : ℕ},\\n  0 < n → X.basicOpen (f ^ n) = X.basicOpen f\", \"doc\": \"For any positive integer $n$ and section $f$ over an open subset $U$ of a scheme $X$, the basic open set defined by $f^n$ coincides with the basic open set defined by $f$, i.e., $X.\\text{basicOpen}(f^n\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (consisting of elements with zero zeroth homogeneous component) is contained in the ideal generated b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: structure-sheaf section localization and basic-open power identities do not give a line-bundle fibre embedding with liftable coordinates; no ampleness declarations found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper family with a line bundle ample on a fibre admits high power projective embedding coordinates on that fibre that lift over a base neighbourhood",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.openCoverOfISupEqTop, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop. Returned Proj construction, chart and localization identities, and valuative criterion; none supplies high-power line-bundle coordinates with fibre section lifting.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(IsAmple|IsVeryAmple|[Aa]mpleness)\\b",
+   "results": "0 hits: . No Mathlib ampleness or very-ampleness declaration was found.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsAmple\"",
+   "results": "0 hits: . No joint proper/ample match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift sections of a high tensor power of a line bundle ample on a proper scheme fibre to a neighbourhood of the base point",
+   "results": "8 hits: AlgebraicGeometry.exists_lift_of_germInjective_aux, AlgebraicGeometry.Proj.pow_apply, AlgebraicGeometry.exists_lift_of_germInjective, TensorProduct.lift.tmul, PolynomialLaw.exists_lift, LinearMap.liftBaseChange_tmul, AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι_assoc, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen. Returned ring-valued germ lifting, polynomial-law and tensor-map lifting, and Proj structure-sheaf operations; these do not lift sections of arbitrary invertible modules on proper fibres.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample invertible sheaf on a proper fibre has arbitrarily high very ample powers with finitely many coordinate sections extending locally on the base",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.Proj.affineOpenCover. Returned Proj construction, chart and localization identities, and valuative criterion; none supplies high-power line-bundle coordinates with fibre section lifting.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-noetherian-fibre-ample-neighbourhood",
+  "date": "2026-10-22",
+  "group": "Q157"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Fibrewise ampleness-to-projectivity input below lem-trf-local-term-locality: 0D2S applies the Noetherian-base cohomological lemma 0D2N after descending fibre ampleness. Re-split of the Noetherian input: Tag 0D2N, lemma-ample-in-neighbourhood, first paragraph through lifting all projective coordinates, using lemma-ample-on-fibre.",
+   "via": [
+    "lem-trf-noetherian-fibre-ample-neighbourhood",
+    "lem-trf-ample-neighbourhood",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-fibre-embedding-lifted-coordinates",
+  "worker": "stage1",
+  "summary": "Split the first paragraph of Stacks 0D2N using existing eventual-power immersion, properness and section-lifting nodes. Chose a common exponent, proved closedness of the fibre immersion, read off quotient-compatible coordinates, lifted each, and restricted them to a single affine neighbourhood. No new nodes, no statement changes, no Lean writing or compilation.",
+  "blueprint": "Fibrewise ampleness-to-projectivity input below lem-trf-local-term-locality: 0D2S applies the Noetherian-base cohomological lemma 0D2N after descending fibre ampleness. Re-split of the Noetherian input: Tag 0D2N, lemma-ample-in-neighbourhood, first paragraph through lifting all projective coordinates, using lemma-ample-on-fibre. Steps 1--5 realize the first paragraph of Stacks 0D2N in this auxiliary fibrewise-ampleness branch; the chapter and unit routes are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Properness is stable under the ordinary residue-field base change; this generic scheme theorem supplies only properness of the fibre, not any replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Tensor pullback preserves invertibility and has normalized section and tensor comparisons, needed for the fibre line bundle and compatibility of restrictions. No sk-i-curve-zero statement supplies this generic module tool."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-functor-of-points",
+    "why": "The universal property identifies an existing immersion with the morphism defined by its pulled-back coordinate sections, including the quotient isomorphism. It is used only as a generic projective-space tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-projective-space-functor-of-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-75fc22cce",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-75fc22cce (reviewer sub-agent of L); spot-checked: Read the item's 5 steps in full. There are no new nodes and the statement is unchanged; the item had no proof on the base. I checked every cited statement and Stacks coherent.tex 0D2N (first paragraph), together with 0D2M, 01VT, 01W6 and 01NE. Step 1: the hypotheses of lem-trf-ample-fibre-section-lifting are identical to the item's; lem-pc-proper-base-change(1) gives a proper fibre, hence of finite type; lem-trf-affine-eventual-power-immersion over kappa(s) gives b>=1; so d=max(a,b) works. Step 2: the separated, proper and immersion-closed citations are correct. Step 4: p_j(L,d) is the item's comparison and has no free scalar. Step 5: the affine-basis lemma gives U inside the finite intersection, and restriction is compatible with pullback. Fault, now fixed: in Step 3 the immersion i lands in the relative-Proj model (def-nagata-relative-projective-space), but the item's i_s goes into the base-change model Spec k x_Z P^r_Z. The step used an uncited map P^r_k -> P^r_Z to identify the two. Step 3 now cites the existing same-unit node lem-trf-free-projective-bundle-base-change-space (the isomorphism theta, which fixes the T_j on affine charts), applies the functor of points to pr2.theta.i, and concludes i_s = theta.i, a closed immersion. The node is added to the Step 3 uses and to proof_deps, and the step is 1783 characters. Edge cases checked: r=0, non-closed s, imperfect residue field, nonreduced fibre, lifting bound 0. No duplicate was found: the Q157 siblings (fibre-generators, finite-near-fibre) cover the later parts of 0D2N. The tool_uses for proper base change, tensor pullback and the functor of points are accepted as generic tools. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibreEmbeddingLiftedCoordinates",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_fiber_embedding_lifted_coordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/FibreEmbeddingLiftedCoordinates.lean",
+  "statement": "theorem exists_fiber_embedding_lifted_coordinates {Z S : Scheme.{u}} (f : Z ⟶ S) [IsProper f] [IsLocallyNoetherian S] [CompactSpace S] (L : Z.Modules) [L.IsInvertible] (s : S) [Nonempty (f.fiber s)] (hL : @IsAmple (f.fiber s) ((tensorPullback (f.fiberι s)).obj L) ((invertible_pullback_tensor (f.fiberι s)).1 L).2) : ∃ d r : ℕ, 0 < d ∧ ∃ U : S.Opens, IsAffineOpen U ∧ ∃ hs : s ∈ U, ∃ (u : ULift.{u} (Fin (r + 1)) → Γ(L.tensorPow d, f ⁻¹ᵁ U)) (t : ULift.{u} (Fin (r + 1)) → (((tensorPullback (f.fiberι s)).obj L).tensorPow d).sections), (∀ k : ULift.{u} (Fin (r + 1)), (boundaryPullbackPowIso (f.fiberι s) L d).hom.app ⊤ (((tensorPullback (f.fiberι s)).obj (L.tensorPow d)).val.map (homOfLE (fun x _ ↦ Eq.mpr (congrArg (fun y : S ↦ y ∈ U) (f.fiberHomeo s x).property) hs)).op (tensorPullbackSection (f.fiberι s) (L.tensorPow d) (f ⁻¹ᵁ U) (u k))) = (t k).val (op ⊤)) ∧ ∃ ht : Epi ((((tensorPullback (f.fiberι s)).obj L).tensorPow d).freeHomEquiv.symm t), ∃ i : f.fiber s ⟶ ProjectiveSpace (ULift.{u} (Fin (r + 1))) (Spec (S.residueField s)), i = @ProjectiveSpace.homOfGeneratingSections (ULift.{u} (Fin (r + 1))) inferInstance (f.fiber s) (Spec (S.residueField s)) (f.fiberToSpecResidueField s) (((tensorPullback (f.fiberι s)).obj L).tensorPow d) (@IsInvertible.tensorPow (f.fiber s) ((tensorPullback (f.fiberι s)).obj L) ((invertible_pullback_tensor (f.fiberι s)).1 L).2 d) t ht ∧ IsClosedImmersion i ∧ ∃ e : (tensorPullback i).obj (ProjectiveSpace.twist (ULift.{u} (Fin (r + 1))) (Spec (S.residueField s)) 1) ≅ ((tensorPullback (f.fiberι s)).obj L).tensorPow d, ∀ k : ULift.{u} (Fin (r + 1)), e.hom.app ⊤ (((Classical.choose (exists_tensorPullbackAdjunction i)).unit.app (ProjectiveSpace.twist (ULift.{u} (Fin (r + 1))) (Spec (S.residueField s)) 1)).val.app (op ⊤) (ProjectiveSpace.twistOneSection (ULift.{u} (Fin (r + 1))) (Spec (S.residueField s)) k)) = (t k).val (op ⊤)",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-279ab7f35",
+  "group": "Q60",
+  "result": "pass",
+  "note": "All node clauses match the recorded owners: IsProper; IsLocallyNoetherian+CompactSpace; fiber/fiberι/fiberToSpecResidueField; tensorPullback; absolute IsAmple on L_s with derived invertibility; Nonempty fibre; 0<d and r≥0 via ULift (Fin (r+1)); affine U∋s; lifts u over f⁻¹U with fibre values through the recorded boundaryPullbackPowIso (p_j(L,d)) and normalized tensorPullbackSection (same as sibling AmpleFibreSectionLifting); Epi freeHomEquiv generation; i = homOfGeneratingSections into the base-change ProjectiveSpace over Spec κ(s); IsClosedImmersion; existential e with per-coordinate quotient compatibility. The unit from Classical.choose of exists_tensorPullbackAdjunction is pinned (unit prescribed), and e is existential anyway. Node is unchanged except the lean record; statement verbatim; no new defs or duplicates; docstrings carry the source and 5 proof steps; sorry only. Second reading was done by the same worker per the dispatcher; it is substantive. No compile run (no file changed)."
+ }
+}

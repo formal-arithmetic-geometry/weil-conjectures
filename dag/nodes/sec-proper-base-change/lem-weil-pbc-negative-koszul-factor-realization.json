@@ -1,0 +1,174 @@
+{
+ "id": "lem-weil-pbc-negative-koszul-factor-realization",
+ "kind": "statement",
+ "title": "Realization of one exterior negative Koszul factor",
+ "statement": "Let X be a scheme, A a commutative ring, d an adic coefficient datum and a in A. Let Q be completed constant extension followed by intrinsic-presentation restriction and the canonical small-site equivalence [def-weil-pbc-intrinsic-completion, def-weil-pbc-completed-cech-site-transport], and let H be its termwise action on cochain complexes. For each m, H of the rank-one exterior Koszul complex on a^(m+1) is isomorphic to the explicit negative two-term factor [def-cbc-signed-koszul-completion-model]. These isomorphisms intertwine the exterior generator transitions with the two-term transitions (a,1) [def-weil-pbc-ringed-negative-koszul-transitions]. The specified regular coefficient unit followed by Q of the exterior degree-zero unit [def-weil-pbc-finite-negative-koszul-tensor] maps to the specified degree-zero factor basis inclusion. There is no assertion about tensors of several factors.",
+ "stmt_deps": [
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-completed-cech-site-transport",
+  "def-cbc-signed-koszul-completion-model",
+  "def-weil-pbc-ringed-negative-koszul-transitions",
+  "def-weil-pbc-finite-negative-koszul-tensor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, the finite free negative Koszul complex and its dual identification; Modules on Sites Tags 03D8, 03EK and 0GMW for coefficient realization."
+ },
+ "proof": [
+  {
+   "text": "Use exteriorPower.oneEquiv and Finsupp.uniqueLinearEquiv to identify exterior degree one with A, and exteriorPower.zeroEquiv in degree zero. Extend these across the cohomological reindexing. For all other degrees, exterior powers have an empty subset basis, or the degree is outside the embedding image, so the terms are zero. Compute contraction on the rank-one basis to obtain multiplication by a^(m+1). Exterior naturality gives multiplication by a in degree -1 for the transition, and the identity in degree zero. The exterior degree-zero unit is inverse to the degree-zero identification. These calculations are proved directly in Lean, including zero coefficients.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-pbc-finite-negative-koszul-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the regular-module normalization to Q and c. Its scalar equation for a implies the scalar equation for a^n by induction on n, using the powers of multiplication endomorphisms. Construct a map from the explicit negative double complex to the termwise image of the exterior complex: its degree -1 and degree-zero maps are c followed by Q of the inverse exterior coordinates. The contraction equation gives the only nonzero chain square. In other degrees both terms vanish. Every component is invertible, so invert this chain map to obtain e.",
+   "uses": [
+    "lem-weil-pbc-completed-realization-regular",
+    "def-cbc-signed-koszul-completion-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel these isomorphisms to check transition compatibility on their inverses. A map out of the double complex is determined by degrees -1 and zero; the computed exterior transition formulas and scalar normalization give exactly the explicit transition (b,1). For the degree-zero unit cancel the inverse chain component and use the exterior unit identity and the specified double basis.",
+   "uses": [
+    "def-weil-pbc-ringed-negative-koszul-transitions",
+    "def-weil-pbc-finite-negative-koszul-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exterior-power-free-basis",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-finite-negative-koszul-tensor",
+  "lem-weil-pbc-completed-realization-regular",
+  "def-cbc-signed-koszul-completion-model",
+  "def-weil-pbc-ringed-negative-koszul-transitions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, the finite free negative Koszul complex and its dual identification; Modules on Sites Tags 03D8, 03EK and 0GMW for coefficient realization. The exterior and categorical assembly is formalized by B4; only regular-module scalar normalization is split off."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex.*[Mm]onoidal|mapTensor|mapBifunctor.*[Ii]so",
+   "results": "25 hits: Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/LinearAlgebra/TensorProduct/Opposite.lean, Mathlib/LinearAlgebra/TensorProduct/Opposite.lean, Mathlib/RingTheory/Regular/Flat.lean, Mathlib/RingTheory/PolynomialAlgebra.lean, Mathlib/RingTheory/PolynomialAlgebra.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean",
+   "date": "2026-10-26",
+   "verdict": "The general tensor/sheafification and single-complex APIs do not state the normalized comparisons for the present coefficient functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive monoidal functor preserves total tensor products of cochain complexes",
+   "results": "8 hits: HomologicalComplex.monoidalCategory, HomologicalComplex.monoidalCategoryStruct, HomologicalComplex.ιTensorObj, HomologicalComplex.HasTensor, HomologicalComplex.tensorObj, HomologicalComplex.instHasTensorOfHasTensorX, HomologicalComplex.tensorHom, HomologicalComplex.HasGoodTensor₁₂",
+   "date": "2026-10-26",
+   "verdict": "The general tensor/sheafification and single-complex APIs do not state the normalized comparisons for the present coefficient functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleMapHomologicalComplex\"",
+   "results": "11 hits: HomologicalComplex.singleMapHomologicalComplex, HomologicalComplex.singleMapHomologicalComplex_hom_app_self, HomologicalComplex.singleMapHomologicalComplex_inv_app_self, HomologicalComplex.singleMapHomologicalComplex_hom_app_ne, HomologicalComplex.singleMapHomologicalComplex_inv_app_ne, HomologicalComplex.singleMapHomologicalComplex_id_hom_app, HomologicalComplex.singleMapHomologicalComplex_id_inv_app, HomologicalComplex.singleMapHomologicalComplex_comp_inv_app",
+   "date": "2026-10-26",
+   "verdict": "The general tensor/sheafification and single-complex APIs do not state the normalized comparisons for the present coefficient functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Koszul complex on one generator is isomorphic to a two term complex",
+   "results": "8 hits: HomologicalComplex.singleObjOpcyclesSelfIso, CategoryTheory.ShortComplex.QuasiIso.isIso, CategoryTheory.Abelian.LeftResolution.chainComplexXOneIso, CategoryTheory.ShortComplex.Exact.isIso_imageToKernel, HomologicalComplex.pOpcyclesIso, CategoryTheory.ShortComplex.Exact.isIso_imageToKernel', groupCohomology.isoShortComplexH1, CategoryTheory.ShortComplex.quasiIso_of_isIso",
+   "date": "2026-10-26",
+   "verdict": "The general tensor/sheafification and single-complex APIs do not state the normalized comparisons for the present coefficient functor."
+  },
+  {
+   "tool": "grep",
+   "query": "koszulComplex",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "The general tensor/sheafification and single-complex APIs do not state the normalized comparisons for the present coefficient functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification commutes with tensor products of modules",
+   "results": "8 hits: CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, PresheafOfModules.sheafifyMap, CategoryTheory.Sheaf.tensorProd_isSheaf, PresheafOfModules.Sheafify.SMulCandidate.h, PresheafOfModules.sheafification, PresheafOfModules.toSheafify, PresheafOfModules.sheafify",
+   "date": "2026-10-26",
+   "verdict": "The general tensor/sheafification and single-complex APIs do not state the normalized comparisons for the present coefficient functor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilNegativeKoszulTensorRealization",
+  "date": "2026-10-26",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "The finite negative Koszul complexes and the unit in the derived-inverse-limit formula of def-weil-pbc-completed-pullback: Realize algebraic negative exterior factors as negative two-term sheaf factors. Step 1: one exterior factor and its scalar realization.",
+   "via": [
+    "lem-weil-pbc-negative-koszul-tensor-realization",
+    "lem-weil-pbc-negative-koszul-tensor-dual-transport",
+    "lem-weil-pbc-completed-koszul-coefficient-comparison",
+    "lem-weil-pbc-completed-fiber-roos-comparison",
+    "lem-weil-pbc-completed-koszul-product-comparison",
+    "lem-weil-pbc-completed-fiber-roos-representative-comparison",
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-weil-pbc-completed-fiber-cech-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilNegativeKoszulFactorRealization",
+  "file": "lean/Sheaf/Paper/WeilNegativeKoszulFactorRealization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.negativeKoszulFactorRealization",
+  "statement": "theorem negativeKoszulFactorRealization\n    (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    (a : A) :\n    let F := intrinsicPresentationModulesBack X d ⋙ (completedCechModulesEquiv X d).functor\n    let G := completedKoszulConstant X (intrinsicPresentationDatum d)\n    let Q := G ⋙ F\n    let H := Q.mapHomologicalComplex (.up ℤ)\n    let O := completedCechRing X d\n    let b := completedCechScalar X d a\n    ∃ e : ∀ m : ℕ, H.obj (completedKoszulPower (A := A) 1 (fun _ ↦ a) m) ≅\n        ringedNegativeKoszulFactor O b m,\n      (∀ m, H.map (completedKoszulTransition (A := A) 1 (fun _ ↦ a) m) ≫\n        (e m).hom = (e (m + 1)).hom ≫ ringedNegativeKoszulFactorTransition O b m) ∧\n      (∀ m, completedCechCoefficientUnit X d ≫ F.map (completedKoszulOne X\n          (intrinsicPresentationDatum d)) ≫ Q.map\n            (finiteKoszulExteriorUnitZero 1 (fun _ ↦ a) m) ≫ (e m).hom.f 0 =\n        ringedNegativeKoszulFactorBasis O b m 0)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-26"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261026T022911-L-498593",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T065224-L-2755238",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

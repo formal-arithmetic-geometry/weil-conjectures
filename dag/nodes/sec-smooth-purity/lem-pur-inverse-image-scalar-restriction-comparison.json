@@ -1,0 +1,110 @@
+{
+ "id": "lem-pur-inverse-image-scalar-restriction-comparison",
+ "kind": "statement",
+ "title": "Restriction of scalars commutes with algebraic inverse image",
+ "statement": "For a compatible square of commutative ring sheaves and specified algebraic inverse images [def-weil-pbc-algebraic-inverse-image], scalar restriction commutes with inverse image by a natural isomorphism whose underlying map is the identity after the specified underlying isomorphisms. No flatness assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Inverse image of modules and compatibility with restriction of scalars (Tags 03D2 and 03DA); the proof uses the algebraic inverse-image graph equations to identify the transported underlying map."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Transport the identity of underlying inverse-image sheaves through the two\nspecified underlying isomorphisms. To verify additivity, apply the two graph equations\nto the product of the underlying module sheaf with itself, using preservation of this\nproduct by inverse image. For scalar multiplication use the product of the underlying\nring sheaf and module sheaf; compatibility of the ring square identifies the scalar\non the two sides. The resulting section maps are linear and natural. Their underlying\nmaps are isomorphisms, so reflection of isomorphisms by the underlying-sheaf functor\ngives a natural isomorphism. Cancelling the second underlying isomorphism gives the\nasserted normalization.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Adjunction transposition and derived composition; explicit argument in Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars commutes with algebraic inverse image of sheaves of modules",
+   "results": "restrictScalars_obj_val and restrictScalars_map_val describe restriction; no general inverse-image comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "mateEquiv_counit",
+   "results": "Unknown identifier in search index. Local Mathlib adjunction mates supply counit identities.",
+   "date": "2026-10-25",
+   "verdict": "local generic tool used"
+  },
+  {
+   "tool": "grep",
+   "query": "derived_mate_factorsh",
+   "results": "msearch index no match; rg locates derivedExact_mateEquiv_app_fac and library private normalization helpers.",
+   "date": "2026-10-25",
+   "verdict": "generic resolution normalization available; no whole item duplicate"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemEvaluationScalarRestrictionNormalization",
+  "date": "2026-10-25",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "via": [
+    "lem-pur-system-evaluation-scalar-restriction-normalization",
+    "lem-pur-quotient-diagram-projection-evaluation",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ],
+   "place": "Proof Step 2 of thm-pur-rational-and-qbar-purity: independence of finite coefficient extension; sk-thm-sf-compatibility clause (7). Extracted from quotient-diagram-projection-evaluation, old proof steps 3–4 and 9, actual evaluated counit, restriction/direct-image normalization and lower-level transitions.; this auxiliary supplies Restriction of scalars commutes with algebraic inverse image."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InverseImageScalarRestrictionComparison",
+  "file": "lean/Sheaf/CategoryTheory/InverseImageScalarRestrictionComparison.lean",
+  "declaration": "SheafOfModules.InverseImageScalarRestriction.exists_comparison",
+  "statement": "theorem exists_comparison\n    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]\n    [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n    [K.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n    {L : Sheaf J (Type w) ⥤ Sheaf K (Type w)} [PreservesFiniteLimits L]\n    {R S : Sheaf J CommRingCat.{w}} {RU SU : Sheaf K CommRingCat.{w}}\n    (A : AlgebraicInverseImage L R RU) (B : AlgebraicInverseImage L S SU)\n    (a : R ⟶ S) (b : RU ⟶ SU)\n    (hc : L.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{w})).map a) ≫\n        B.ringUnderlying.hom =\n      A.ringUnderlying.hom ≫ (sheafCompose K (CategoryTheory.forget CommRingCat.{w})).map b) :\n    ∃ ρ : B.modules ⋙ restrictScalars\n          ((sheafCompose K (forget₂ CommRingCat.{w} RingCat.{w})).map b) ≅\n        restrictScalars ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map a) ⋙ A.modules,\n      ∀ M : SheafOfModules.{w}\n        ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj S),\n        (toSheaf _ ⋙ sheafCompose K (CategoryTheory.forget AddCommGrpCat.{w})).map (ρ.hom.app M) ≫\n            A.moduleUnderlying.hom.app ((restrictScalars\n              ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map a)).obj M) =\n          B.moduleUnderlying.hom.app M",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2c595",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261025T143323-L-980706",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2c595",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261025T143323-L-980706",
+  "kind": "interface",
+  "note": "independent cc review: item stmt + 12 moved decls byte-identical to live clone; new sorried statements read against SystemGeometricInverseImageData/SystemSingletonGeometricComparisons; 5 direct importers of the adapted SystemSingleDerivedExtension compiled against the delivered module"
+ }
+}

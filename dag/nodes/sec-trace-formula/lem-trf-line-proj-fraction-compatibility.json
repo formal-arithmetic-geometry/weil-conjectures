@@ -1,0 +1,232 @@
+{
+ "id": "lem-trf-line-proj-fraction-compatibility",
+ "kind": "statement",
+ "title": "Fraction charts agree on overlaps and affine base refinements",
+ "statement": "Let f:W→T be a scheme morphism, A a quasi-coherent graded commutative O_T-algebra, L an invertible O_W-module, and psi_n:f^*A_n→L^n preserve the tensor unit and products. Suppose for every affine V, positive d and a in A_d(V) a chart q_(V,d,a):G_(V,d,a)→Spec A(V)_(a),0 satisfies the homogeneous fraction equation of [def-trf-line-proj-fraction-chart-data]. The chart maps composed to relative Proj agree on pairwise intersections, including unequal positive degrees and different affine base opens. For every affine C contained in V, G_(C,d,a|C)=G_(V,d,a) intersect f^{-1}C, and the two local Proj maps on this source agree under (gradeIso C)^(-1) followed by localTransition(C,V) followed by gradeIso V. Thus the given family satisfies LineProjBaseRefinement without any special choice of its charts.",
+ "stmt_deps": [
+  "def-trf-line-proj-fraction-chart-data",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-nagata-relative-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-pc-scheme"
+ ],
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+ },
+ "proof": [
+  {
+   "text": "On a local frame open B inside f^{-1}V, the coefficient construction gives a ring map phi:A(V) to O(B). If psi(a) generates then phi(a) is a unit and the image of the irrelevant ideal is the unit ideal. Mathlib constructs a morphism B to Proj A(V). Its restriction to the a-chart pulls back b/a^m to the scalar satisfying rho(b/a^m)phi(a)^m=phi(b), as follows from the localization relation and the standard chart description. Cancel the tensor-power frame to identify this with the given chart using fraction uniqueness. Every pair of charts over V therefore agrees locally with the same Proj morphism, for arbitrary positive degrees.",
+   "uses": [
+    "lem-trf-line-proj-fraction-coefficient-hom",
+    "def-pc-proj",
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+   }
+  },
+  {
+   "text": "For affine C contained in V, naturality of the normalized tensor-pullback adjunction and of psi identifies image restrictions. The germ-basis criterion identifies G_{a|C} with G_a intersect f^{-1}C. The graded restriction A(V) to A(C) induces a homogeneous-localization homomorphism carrying b/a^m to b|C/(a|C)^m. Compose its Spec map with q_{C,a|C}; the transported fraction equation is exactly that of q_{V,a} on the smaller open. Fraction uniqueness proves equality. Standard away-chart naturality proves equality after inclusion into Proj A(V); gradeIso_naturality gives the specified localTransition expression.",
+   "uses": [
+    "lem-trf-line-proj-fraction-coefficient-hom",
+    "lem-trf-line-proj-generation-locus",
+    "def-pc-module-pullback",
+    "def-nagata-relative-proj",
+    "def-pc-proj",
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+   }
+  },
+  {
+   "text": "At any point of an arbitrary-base overlap choose an affine C inside V intersect V'. Restrict both homogeneous sections to C. The base-refinement equalities identify the original relative chart maps with these C-charts, and the same-base result identifies the C-charts on their intersection. Scheme morphisms agree locally, hence on the whole overlap. Empty opens and exponent zero require no exceptions.",
+   "uses": [
+    "def-pc-scheme",
+    "def-nagata-relative-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-line-proj-fraction-coefficient-hom",
+  "def-pc-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-sc-invertible-module",
+  "lem-trf-line-proj-generation-locus",
+  "def-pc-module-pullback",
+  "def-nagata-relative-proj",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fromOfGlobalSections|Away.map_mk|exists_tensorPullback_stalk_iso",
+   "results": {
+    "t": "2026-10-23T14:42:03Z",
+    "tool": "grep",
+    "query": "fromOfGlobalSections|Away.map_mk|exists_tensorPullback_stalk_iso",
+    "sub": "",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean"
+    ],
+    "digest": "e61a3817b6acdf83"
+   },
+   "date": "2026-10-23",
+   "verdict": "No theorem for arbitrary graded line-module maps. Reuse the displayed localization and Proj tools locally; prove the sheaf and transition argument in Lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous fraction chart morphisms of an invertible sheaf agree on overlaps and are natural under affine base restriction",
+   "results": {
+    "t": "2026-10-23T14:43:01Z",
+    "tool": "leansearch",
+    "query": "Homogeneous fraction chart morphisms of an invertible sheaf agree on overlaps and are natural under affine base restriction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.add_mem'",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.neg_mem'",
+     "AlgebraicGeometry.Scheme.Modules.hom_ext",
+     "AlgebraicGeometry.StructureSheaf.comap.congr_simp",
+     "AlgebraicGeometry.Proj.mul_apply",
+     "TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst",
+     "AlgebraicGeometry.Scheme.Modules.Hom"
+    ],
+    "digest": "9e035cc2e00361de"
+   },
+   "date": "2026-10-23",
+   "verdict": "No theorem for arbitrary graded line-module maps. Reuse the displayed localization and Proj tools locally; prove the sheaf and transition argument in Lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A graded map into tensor powers of a line bundle induces unique degree zero homogeneous fraction maps to functions on generating opens compatible with local trivializations",
+   "results": {
+    "t": "2026-10-23T14:43:05Z",
+    "tool": "leanfinder",
+    "query": "A graded map into tensor powers of a line bundle induces unique degree zero homogeneous fraction maps to functions on generating opens compatible with local trivializations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction",
+     "AlgebraicGeometry.Proj.awayToSection",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection",
+     "AlgebraicGeometry.openToLocalization",
+     "AlgebraicGeometry.Proj.awayMap_awayToSection",
+     "AlgebraicGeometry.sectionInBasicOpen",
+     "AlgebraicGeometry.Proj.awayMap_awayToSection_assoc"
+    ],
+    "digest": "3e0ffb520b071352"
+   },
+   "date": "2026-10-23",
+   "verdict": "No theorem for arbitrary graded line-module maps. Reuse the displayed localization and Proj tools locally; prove the sheaf and transition argument in Lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.LineProjAffineChartAtlas",
+  "date": "2026-10-23",
+  "group": "S4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Local homogeneous-fraction construction and gluing of the graded line-module relative-Proj map in the polarized-descent argument.",
+   "via": [
+    "lem-trf-line-proj-affine-chart-atlas",
+    "lem-trf-space-line-module-proj-map",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.LineProjFractionCompatibility",
+  "file": "lean/Sheaf/TraceFormula/LineProjFractionCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.lineProj_fraction_compatibility",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.lineProj_fraction_compatibility"
+  ],
+  "statement": "theorem lineProj_fraction_compatibility {W T : Scheme.{u}} (f : W ⟶ T)\n    (A : RelativeProjAlgebra T) (L : W.Modules) [L.IsInvertible]\n    (ψ : ∀ n : ℕ, (tensorPullback f).obj (A.piece n) ⟶ L.tensorPow n)\n    (hunit : ∀ (V : T.Opens) (r : Γ(T, V)),\n      lineProjImage f A L ψ V 0 (A.graded.unit.val.app (op V) (unitSectionsEquiv V r)) =\n        unitSectionsEquiv (f ⁻¹ᵁ V) (f.app V r))\n    (hmul : ∀ (V : T.Opens) (m n : ℕ) (a : Γ(A.piece m, V))\n        (b : Γ(A.piece n, V)),\n      lineProjImage f A L ψ V (m + n) (A.graded.mul m n V a b) =\n        (L.tensorPowAddIso m n).inv.app (f ⁻¹ᵁ V)\n          (tmulSection (lineProjImage f A L ψ V m a) (lineProjImage f A L ψ V n b)))\n    (q : ∀ (V : T.affineOpens) (d : ℕ) (_hd : 0 < d) (a : Γ(A.piece d, V.1)),\n      LineProjChart f A L ψ V d a)\n    (hq : ∀ (V : T.affineOpens) (d : ℕ) (hd : 0 < d) (a : Γ(A.piece d, V.1)),\n      LineProjFractionFormula f A L ψ V d a\n        (lineProjGeneratorOpen f A L ψ V d a) inf_le_left (q V d hd a)) :\n    (∀ (V V' : T.affineOpens) (d e : ℕ) (hd : 0 < d) (he : 0 < e)\n        (a : Γ(A.piece d, V.1)) (b : Γ(A.piece e, V'.1)),\n        W.homOfLE (inf_le_left :\n            lineProjGeneratorOpen f A L ψ V d a ⊓ lineProjGeneratorOpen f A L ψ V' e b ≤\n              lineProjGeneratorOpen f A L ψ V d a) ≫\n            lineProjChartToRelative f A L ψ V d hd a (q V d hd a) =\n          W.homOfLE inf_le_right ≫\n            lineProjChartToRelative f A L ψ V' e he b (q V' e he b)) ∧\n      LineProjBaseRefinement f A L ψ q",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-60ed0",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261024T191024-L-221297",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-60ed0",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261024T191024-L-221297",
+  "kind": "interface",
+  "note": "independent cc review: 13 moved chart defs byte-identical to clone base; item statement unchanged; 3 new proved modules vs their nodes' lean.statement; importer LineProjChartPullback compiled against delivered modules; #print axioms traced sorryAx to pre-existing RelativeProjAlgebra.gradeRing"
+ }
+}

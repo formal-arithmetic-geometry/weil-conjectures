@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-condensed-integral-endpoints",
+ "kind": "statement",
+ "title": "Normalized integral encodings and operation endpoints",
+ "statement": "Fix the finite-field and coefficient setting $P$ of [def-pur-conventions], so $k=\\overline{\\mathbf F}_q$ and $\\ell\\ne\\operatorname{char}k$. Let $X,Y$ be separated finite-type $k$-schemes, and let $j:X\\hookrightarrow Z$, $p:Z\\to Y$ be an open/proper factorization of a $k$-morphism. Fix $d\\in\\mathbb N$, a field-shriek model system $D$, a finite coefficient subfield $E$, and an integral model $m$ of [def-sp-field-extension-integral-models]. Use the integral and condensed full finite-Tor constructible subcategories, their inclusions, and the literal restricted ambient compact-support and twisted-pullback functors of [def-pur-integral-counit-realization-data]. There exist equivalences $e_X,e_Y$ from the integral to the condensed categories whose composites with the inclusions are naturally isomorphic to inclusion followed by the specified normalized internalization. Both the literal condensed compact-support functor and the literal pullback/Tate-tensor/$[2d]$ functor preserve those full subcategories. For their restrictions $F,J$ there are natural isomorphisms $F_m e_Y\\simeq e_X F$ and $J_m e_X\\simeq e_Y J$. No adjunction or unit/counit comparison is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2, identification of the integral and condensed categories and of the same ambient left and explicit right functors"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sp-field-extension-integral-models",
+  "def-pur-integral-counit-realization-data",
+  "def-pur-integral-smooth-adjunction-presentation",
+  "det-sp-integral-direct-image-tower",
+  "def-weil-derived-complete-integral-detailed",
+  "def-sp-reduction-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the normalized ordinary/internal coefficient equivalences to the full integral constructible finite-Tor categories. The integral-model criterion identifies membership in both directions, including derived completeness; the resulting inclusion comparisons are the specified internalizations.",
+   "uses": [
+    "sk-lem-integral-models",
+    "det-sp-normalized-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual proper/open direct-image comparison and the pullback/tensor comparison intertwine the ambient operations under these equivalences. Restrict them to the full subcategories. Preservation by the recorded integral operations gives condensed membership, and the restricted comparisons give the two endpoint isomorphisms.",
+   "uses": [
+    "det-sp-integral-direct-image-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-lem-integral-models",
+  "det-sp-normalized-equivalence",
+  "det-sp-integral-direct-image-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2, identification of the integral and condensed categories and of the same ambient left and explicit right functors; expansion of normalized realization and counit transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restrict a derived equivalence to constructible finite Tor integral complexes and compare compact support and twisted pullback functors",
+   "results": "Scheme.Modules.restrictFunctorIsoPullback, triangulated equivalences and generic exact-functor localization; no integral endpoint comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport an adjunction through equivalences of full subcategories with specified functor comparison isomorphisms",
+   "results": "Adjunction.restrictFullyFaithful and Equivalence.congrFullSubcategory; useful generic tools but no geometric membership or normalized operation comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "condensed_integral_endpoints|condensedRestriction|congrFullSubcategory",
+   "results": "Mathlib ObjectProperty/Equivalence.lean:congrFullSubcategory; local TransportIntegralCounitData defines the required endpoints but asserts no inhabitance.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TransportIntegralCounitRealization",
+  "date": "2026-10-27",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Step 2, identification of the integral and condensed categories and of the same ambient left and explicit right functors",
+   "via": [
+    "lem-pur-transport-integral-counit-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedIntegralEndpoints",
+  "file": "lean/Sheaf/Paper/CondensedIntegralEndpoints.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.TransportIntegralCounit.condensed_integral_endpoints",
+  "statement": "theorem condensed_integral_endpoints (E : FieldShriekSystem.Index P)\n    (m : FieldExtensionTowers.IntegralModel P D E j p d) :\n    ∃ (eX : FieldExtensionTowers.Integral P E X ≌ Condensed P E X)\n      (eY : FieldExtensionTowers.Integral P E Y ≌ Condensed P E Y),\n      Nonempty (eX.functor ⋙ condensedInclusion P E X ≅\n        (sfIntegralConstructible P.coefficients.l E.val X).ι ⋙\n          (RationalizedSmoothAdjunction.internalization P.coefficients.l E.val X\n            ((D.coordinates E).abelian X) m.reductionX).functor) ∧\n      Nonempty (eY.functor ⋙ condensedInclusion P E Y ≅\n        (sfIntegralConstructible P.coefficients.l E.val Y).ι ⋙\n          (RationalizedSmoothAdjunction.internalization P.coefficients.l E.val Y\n            ((D.coordinates E).abelian Y) m.reductionY).functor) ∧\n      ∃ (hF : ∀ M : Condensed P E X,\n          (constantModelBoundedConstructible (spIntegralCondensed P.coefficients.l E.val) Y ⊓\n            fun K ↦ _root_.DerivedCategory.finiteTorAmplitude _ K)\n            ((IntegralDirectImageTower.shriek P.coefficients.l E.val\n              (SpTowerGamma.factorization j p)).obj ((condensedInclusion P E X).obj M)))\n        (hJ : ∀ K : Condensed P E Y,\n          (constantModelBoundedConstructible (spIntegralCondensed P.coefficients.l E.val) X ⊓\n            fun L ↦ _root_.DerivedCategory.finiteTorAmplitude _ L)\n            ((condensedSource P D j p d E m).obj ((condensedInclusion P E Y).obj K))),\n        Nonempty (FieldExtensionTowers.support P D j p d m ⋙ eY.functor ≅\n          eX.functor ⋙ condensedRestriction P E\n            (IntegralDirectImageTower.shriek P.coefficients.l E.val\n              (SpTowerGamma.factorization j p)) hF) ∧\n        Nonempty (FieldExtensionTowers.puritySource P D j p d m ⋙ eX.functor ≅\n          eY.functor ⋙ condensedRestriction P E (condensedSource P D j p d E m) hJ)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules against clone main (integral_counit_realization statement identical; relocated decls same names/namespaces/variable binders; item public-imports them; 0 importers); new holes against CondensedStage fields, tower_gluing and FiniteNormalization"
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "def-sfb-qlbar-coefficient-module-cocone",
+ "kind": "definition",
+ "title": "Canonical finite-field coefficient module diagram and closure cocone",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime, $\\Omega=\\overline{\\mathbf Q}_\\ell$ with the finite-subextension-valued condensed convention [sk-def-sfb-qlbar-condensed], $E\\subseteq\\Omega$ a finite intermediate field, and $X$ a scheme. Use the reconstructed section-ring module categories and their fixed termwise section-action equivalence [def-sfb-internal-section-total-comparison]. Let $I_E=\\operatorname{AsSmall}(E\\downarrow\\mathrm{FinInt}(\\Omega))$ in coefficient universe $u+1$, and let $H_E:I_E\\to\\mathrm{FinInt}(\\Omega)$ be the inverse small-equivalence followed by the forgetful functor. For the regular $E_X$-module in degree zero, take the canonical scalar-inclusion complex diagram and its specified closure cocone [def-weil-pbc-condensed-coefficient-complex-diagram], with both structure inclusions $E\\subseteq H_E(i)$ given by the object of the under-category. Define the coefficient module diagram by applying the fixed termwise section-action equivalence and evaluating at degree zero. Define its coefficient cocone by applying the same functors to that specified complex cocone. Thus its stage is the scalar extension of the regular $E_X$-module to $H_E(i)_X$, restricted back to $E_X$ and transported to section modules; its vertex is the analogous extension to $\\Omega_X$. Its transitions and legs are the actual scalar-inclusion maps supplied by that complex diagram and cocone. This defines the index projection, module diagram and cocone only, and asserts no colimit, freeness or flatness property.",
+ "stmt_deps": [
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-internal-section-total-comparison",
+  "def-weil-pbc-condensed-coefficient-complex-diagram"
+ ],
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Paragraph preceding Lemma 5.6, coefficient union; canonical module-diagram specialization of the finite-coefficient complexes, as implemented in QlbarInternalHomCoefficientComparison lines 172-205."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite intermediate field coefficient module diagram regular module extension scalars cocone sheaves",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.colimitCocone\", \"ModuleCat.HasColimit.colimitCocone\", \"finiteExts\", \"IntermediateField.module'.congr_simp\", \"IntermediateField.extendScalars\", \"IntermediateField.FG.of_restrictScalars\", \"ModuleCat.directLimitCocone\", \"IntermediateField.essFiniteType_iff\"]}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib coefficient-tail cocone. Reuse the existing project definitions with existing:true ownership."
+  },
+  {
+   "tool": "loogle",
+   "query": "Cocone, Under, ModuleCat",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Cocone'\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib coefficient-tail cocone. Reuse the existing project definitions with existing:true ownership."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientComplexDiagram|QlbarInternalHom|coefficientCocone",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib coefficient-tail cocone. Reuse the existing project definitions with existing:true ownership."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l QlbarInternalHom\\.(fields|coefficients|coefficientCocone) dag/nodes --glob def-*.json; rg -n QlbarInternalHom|coefficientComplexDiagram|coefficientCocone lean/WeilConjectures lean/Sheaf",
+   "results": "No definition node owns these three declarations. No upstream WeilConjectures match. Sheaf.Paper.QlbarInternalHomCoefficientComparison lines 172-205 contains the exact definitions. The general coefficientComplexDiagram/Cocone are owned by def-weil-pbc-condensed-coefficient-complex-diagram. def-sfb-qlbar-tail-module-objects owns restricted regular objects only, not this scalar-extension diagram and its maps.",
+   "date": "2026-10-22",
+   "verdict": "Add definition ownership for the existing specialization, without copying or removing any Lean declaration."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "search 'coefficient module'; ancestor lem-sfb-qlbar-bounded-tensor-colimit",
+   "results": "27 blueprint matches for coefficient module; none owns these exact specialized definitions. Ancestor is lem-sfb-dc-lower-star-preserves.",
+   "date": "2026-10-22",
+   "verdict": "New ownership node serves the finite-extension paragraph in the inherited blueprint proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cocone\", \"ModuleCat\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ModuleCat.directLimitCocone\", \"ModuleCat.directLimitCocone_pt_carrier\", \"ModuleCat.directLimitCocone_ι_app\", \"ModuleCat.finsuppCocone\", \"ModuleCat.finsuppCoconeIsColimit\", \"ModuleCat.HasColimit.colimitCocone\", \"ModuleCat.HasColimit.isColimitColimitCocone\", \"ModuleCat.HasColimit.colimitCocone_pt_carrier\"]}",
+   "date": "2026-10-22",
+   "verdict": "General ModuleCat colimit cocones only, not the specified pro-etale coefficient-tail scalar-extension cocone. Reuse the existing specialized project definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qlbar-bounded-tensor-colimit",
+  "date": "2026-10-22",
+  "group": "NN"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "Finite-extension and algebraic-closure paragraph: the actual finite-field tensor diagram and closure inclusion legs.",
+   "via": [
+    "lem-sfb-qlbar-bounded-tensor-colimit",
+    "lem-sfb-qlbar-direct-image-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "lean": {
+  "module": "Sheaf.Paper.QlbarInternalHomCoefficientData",
+  "declaration": "AlgebraicGeometry.ProEtale.QlbarInternalHom.coefficients",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QlbarInternalHom.fields",
+   "AlgebraicGeometry.ProEtale.QlbarInternalHom.coefficients",
+   "AlgebraicGeometry.ProEtale.QlbarInternalHom.coefficientCocone"
+  ],
+  "statement": "def coefficients (E : PadicAlgCl.FiniteIntermediateField ℓ) :\n    AsSmall.{u + 1} (Under E) ⥤ Modules (Profinite.continuousMapRingObj E) X",
+  "branch": "sheaf-dag",
+  "by": "NN",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Ownership of the three existing plain definitions only, as requested by the immutable-head cb44c158f32b return. Their bodies are the small tail projection, coefficientComplexDiagram/Cocone of the degree-zero regular module, complexForward, and evaluation at zero. No theorem witness is chosen. All three definition bodies are retained verbatim; no definition is deleted. Variables X : Scheme.{u}, ell : Nat and [Fact ell.Prime] are bound in the source section. P4 support extraction: the three definitions move verbatim to QlbarInternalHomCoefficientData and remain publicly re-exported by QlbarInternalHomCoefficientComparison.",
+  "file": "lean/Sheaf/Paper/QlbarInternalHomCoefficientData.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eddf8afee",
+  "group": "NN",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eddf8afee",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery of the cb44c158f32b return. Lean module byte-identical to cb44, whose full clause audit still holds. stmt_deps now: removed lem-sfb-qlbar-internal-hom-coefficient-comparison and lem-sfb-qlbar-tail-module-colimit, added def-sfb-qlbar-coefficient-module-cocone, as the return required. New def node: existing:true owner of the live plain defs QlbarInternalHom.fields/coefficients/coefficientCocone (live l.172-205); statement verbatim live signature; NL text matches the bodies (coefficientComplexDiagram/Cocone of degree-zero regular module, complexForward, eval 0); no other owner in live or runs. Item lean.statement verbatim. Mechanical finding: lem-weil-pbc-site-derived-tensor-descent genuine, since derivedTensor = siteDerivedTensorIndependentCoefficients = .choose of the theorem's construction -> PASS on this point. No hollow defs, sorry only, docstrings with source/blueprint and proof steps, no pro-etale substitute. No compile (no file changed). Advisory: owned defs' docstrings still name the internal-Hom node; padicSubfieldRingObj owner only transitive."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-154e1",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T070455-L-3593981",
+  "kind": "interface",
+  "note": "independent cc review: delivered item, Data and StrictFiniteFree modules against the published item (clone ad190c2) by diff, nodes lem-sfb-qlbar-internal-hom-coefficient-comparison/def-sfb-qlbar-coefficient-module-cocone/lem-sfb-strict-finite-free-hom-colimit-formula against the Lean, 3 direct importers compiled against the delivered files, #print axioms"
+ }
+}

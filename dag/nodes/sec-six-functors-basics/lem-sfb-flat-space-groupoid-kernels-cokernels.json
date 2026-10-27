@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-flat-space-groupoid-kernels-cokernels",
+ "kind": "statement",
+ "title": "Kernels and cokernels of modules on a flat algebraic-space groupoid",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and let $(U,R,s,t,e,i,c)$ be a groupoid in algebraic spaces over $S$ [def-trf-algebraic-space]: its test-scheme points form groupoids, naturally in the test scheme, with source $s$, target $t$, identity $e$, inverse $i$, and composition $c:R\\times_{s,U,t}R\\to R$, first the second arrow and then the first. Suppose $s,t$ are flat, meaning flat on etale scheme charts [def-weil-flat-morphism]. Modules on an algebraic space are on its small etale ringed site [def-weil-sheaf-of-modules-category], with quasi-coherence as in [def-trf-space-quasi-coherent-module] and tensor pullback along maps of algebraic spaces as in [def-trf-space-etale-module-functors], [def-pc-module-pullback]. Define $\\mathcal C$ to have objects $(M,\\alpha)$ with $M$ a quasi-coherent module on $U$ and $\\alpha:t^*M\\xrightarrow{\\sim}s^*M$, satisfying $e^*\\alpha=1$ and $c^*\\alpha=\\operatorname{pr}_1^*\\alpha\\circ\\operatorname{pr}_0^*\\alpha$ under the canonical pullback identifications. A morphism $v:(M,\\alpha)\\to(N,\\beta)$ is a module map with $s^*v\\circ\\alpha=\\beta\\circ t^*v$. Then $\\mathcal C$ is abelian [def-sp-abelian]. Its forgetful functor to quasi-coherent modules on $U$ is additive and faithful, reflects isomorphisms, and computes kernels and cokernels as the ordinary small-etale module-sheaf kernels and cokernels on $U$, endowed with their induced groupoid isomorphisms. In particular these underlying kernels and cokernels are quasi-coherent. No quasi-compactness, finite-presentation, separation or Noetherian hypothesis on the spaces or their maps is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "Tag 06VZ (lemma-abelian), statement and proof: the induced kernel and cokernel isomorphisms; additivity, faithfulness and reflection of isomorphisms from the displayed definition of morphisms."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-module-pullback",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "The ambient category of module sheaves on $U_{\\mathrm{et}}$ is abelian by [lem-pur-ringed-site-module-category-abelian]. Sums and negatives of equivariant maps remain equivariant, by linearity of tensor pullback. The zero module with its unique descent is a zero object. The module $M\\oplus N$ is quasi-coherent by [lem-sfb-space-qcoh-kernels-colimits]; its descent is $\\alpha\\oplus\\beta$, with the pullback identifications obtained from $b\\otimes(m,n)\\mapsto(b\\otimes m,b\\otimes n)$. Its inclusions and projections are equivariant and satisfy the biproduct equations. Thus $\\mathcal C$ is additive. The forgetful functor is additive and faithful by its definition on morphisms. If $v$ is an underlying isomorphism, multiply $s^*v\\,\\alpha=\\beta\\,t^*v$ by its inverses to obtain $s^*(v^{-1})\\,\\beta=\\alpha\\,t^*(v^{-1})$. It therefore reflects isomorphisms.",
+   "uses": [
+    "lem-pur-ringed-site-module-category-abelian",
+    "lem-sfb-space-qcoh-kernels-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 06VZ (lemma-abelian), expanded proof."
+   }
+  },
+  {
+   "text": "For an equivariant $v:(M,\\alpha)\\to(N,\\beta)$ put $j:K=\\ker v\\to M$ and $q:N\\to Q=\\operatorname{coker}v$ in all module sheaves. Both $K,Q$ are quasi-coherent by [lem-sfb-space-qcoh-kernels-colimits]. For each flat algebraic-space map $h$, [lem-sfb-space-flat-etale-ringed-comparison] says that its structural ring sheaf is flat over the inverse-image ring; [lem-sfb-flat-ringed-topos-pullback-exact] then makes the ringed tensor pullback $L_h=\\mathcal O\\otimes_{h^{-1}\\mathcal O}h^{-1}(-)$ exact, and the natural isomorphism $\\tau_h:h^*\\simeq L_h$ of [lem-trf-space-chart-adjunction-tensor-realization] transfers exactness to the chart tensor pullback $h^*$. In particular $s^*j,t^*j$ are kernels of $s^*v,t^*v$, while $s^*q,t^*q$ are their cokernels. The isomorphisms $\\alpha,\\beta$ identify these two arrow diagrams. Kernel and cokernel universal properties give unique maps $\\kappa:t^*K\\to s^*K$ and $\\lambda:t^*Q\\to s^*Q$ with $s^*j\\,\\kappa=\\alpha\\,t^*j$ and $\\lambda\\,t^*q=s^*q\\,\\beta$. Applying the same construction to $\\alpha^{-1},\\beta^{-1}$ gives inverses: the composites are identities by uniqueness in those universal properties.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-space-flat-etale-ringed-comparison",
+    "lem-sfb-flat-ringed-topos-pullback-exact",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 06VZ (lemma-abelian), expanded proof."
+   }
+  },
+  {
+   "text": "Use the canonical composition comparisons of [lem-trf-space-chart-adjunction-tensor-realization]. Their coherence follows on local iterated tensors: both reassociations send $a\\otimes(b\\otimes(c\\otimes m))$ to $a\\,h^\\sharp(b)\\,(kh)^\\sharp(c)\\otimes m$; the identity comparison sends $a\\otimes m$ to $am$. These local formulas determine the sheaf maps. Pull back $s^*j\\,\\kappa=\\alpha\\,t^*j$ by $e$. Since $se=te=1_U$ and $e^*\\alpha=1$, this gives $j\\,e^*\\kappa=j$; cancel the monomorphism $j$. Pulling back $\\lambda\\,t^*q=s^*q\\,\\beta$ gives $e^*\\lambda\\,q=q$; cancel the epimorphism $q$. Thus the identity laws hold without requiring $e$ to be flat.",
+   "uses": [
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 06VZ (lemma-abelian), expanded proof."
+   }
+  },
+  {
+   "text": "Put $P=R\\times_{s,U,t}R$, with projections $p_0,p_1$. They are base changes of $t,s$, respectively. Flatness is stable under base change and composition by [lem-sfb-stack-chartwise-smooth-etale-calculus], applied to algebraic spaces. Thus $sc=sp_1$ and $tc=tp_0$ are flat. By the flat-pullback conclusion of step 2, $(sc)^*j$ is monic and $(tc)^*q$ is epic. Under the coherent identifications of step 3 the defining equations of $\\kappa$ give\n$$(sc)^*j\\,c^*\\kappa=c^*\\alpha\\,(tc)^*j,$$\n$$ (sc)^*j\\,(p_1^*\\kappa\\circ p_0^*\\kappa)=(p_1^*\\alpha\\circ p_0^*\\alpha)\\,(tc)^*j.$$\nThe right sides agree by the cocycle law for $\\alpha$, so cancellation proves the law for $\\kappa$. For $\\lambda$ its defining equation gives\n$$c^*\\lambda\\,(tc)^*q=(sc)^*q\\,c^*\\beta,$$\n$$ (p_1^*\\lambda\\circ p_0^*\\lambda)\\,(tc)^*q=(sc)^*q\\,(p_1^*\\beta\\circ p_0^*\\beta).$$\nCancel $(tc)^*q$ and use the law for $\\beta$. Consequently $(K,\\kappa)$ and $(Q,\\lambda)$ are objects of $\\mathcal C$, and $j,q$ are equivariant.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 06VZ (lemma-abelian), expanded proof."
+   }
+  },
+  {
+   "text": "Let $(L,\\delta)$ be any object and $a:L\\to M$ equivariant with $va=0$. There is a unique underlying $b:L\\to K$ with $jb=a$. To check equivariance compare $s^*b\\,\\delta$ and $\\kappa\\,t^*b$ after the monomorphism $s^*j$: both composites equal $\\alpha\\,t^*a$ by the equations for $a,j$. Hence $b$ is equivariant, and uniqueness is inherited from module sheaves. This proves the kernel universal property in $\\mathcal C$. Dually, for an equivariant $a:N\\to L$ with $av=0$, let $b:Q\\to L$ satisfy $bq=a$. Compare $s^*b\\,\\lambda$ and $\\delta\\,t^*b$ after precomposition with the epimorphism $t^*q$: both are $\\delta\\,t^*a$. This proves equivariance and the cokernel universal property. Thus the forgetful functor computes both constructions as claimed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 06VZ (lemma-abelian), expanded proof."
+   }
+  },
+  {
+   "text": "For any $v$, form $\\operatorname{Coim}v=\\operatorname{coker}(\\ker v\\to M)$ and $\\operatorname{Im}v=\\ker(N\\to\\operatorname{coker}v)$ inside $\\mathcal C$. Their canonical comparison is equivariant by the kernel and cokernel factorizations of step 5. Under forgetting it is the usual coimage-to-image isomorphism in the ambient abelian module category, hence is an isomorphism by step 1. If $v$ is monic in $\\mathcal C$, its kernel inclusion is zero (cancel $v$), hence its kernel object is zero; its coimage is $M$. The comparison consequently identifies $v$ with the kernel of its cokernel. Dually every epic $v$ is the cokernel of its kernel. Together with additivity and the kernels and cokernels already constructed this is precisely [def-sp-abelian]. No finiteness or separation hypothesis entered any step.",
+   "uses": [
+    "lem-pur-ringed-site-module-category-abelian",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 06VZ (lemma-abelian), expanded proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-module-category-abelian",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sfb-space-flat-etale-ringed-comparison",
+  "lem-sfb-flat-ringed-topos-pullback-exact",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "Tag 06VZ (lemma-abelian), expanded proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "groupoid.*(module|abelian)|equivariant.*[Qq]uasi|[Qq]uasi.*[Gg]roupoid",
+   "results": "0 hits: . Read the returned signatures; the candidates concern ambient module sheaves, presentations, or categorical subgroupoids, not equivariant quasi-coherent modules on algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kernels and cokernels of equivariant quasi coherent sheaves on a flat algebraic space groupoid are computed on the object space",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.ker, SheafOfModules.QuasicoherentData.I, AlgebraicGeometry.LocallyRingedSpace.coequalizer, SheafOfModules.QuasicoherentData.presentation, CategoryTheory.Subgroupoid.ker, SheafOfModules.relationsOfIsCokernelFree_s, SheafOfModules.QuasicoherentData.ctorIdx, AlgebraicGeometry.LocallyRingedSpace.instHasCoequalizers. Read the returned signatures; the candidates concern ambient module sheaves, presentations, or categorical subgroupoids, not equivariant quasi-coherent modules on algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"kernel\"",
+   "results": "0 hits: . Read the returned signatures; the candidates concern ambient module sheaves, presentations, or categorical subgroupoids, not equivariant quasi-coherent modules on algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat groupoid in algebraic spaces the category of equivariant quasi coherent modules is abelian and the forgetful functor computes kernels and cokernels",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, instAbelianLightCondMod, instAbelianCondensedMod, AlgebraicGeometry.Scheme.Modules.instCategory, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.instAbelian, PresheafOfModules.instAbelian, AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj. Read the returned signatures; the candidates concern ambient module sheaves, presentations, or categorical subgroupoids, not equivariant quasi-coherent modules on algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from descent data for quasi coherent modules along two flat maps of algebraic spaces preserves finite limits and colimits",
+   "results": "8 hits: SheafOfModules.Finite.forgetPreservesFiniteLimits, AlgebraicGeometry.SheafedSpace.instPreservesColimitsTopCatForgetOfHasLimits, AlgebraicGeometry.SheafedSpace.instPreservesColimitsOfShapeTopCatForgetOfSmallOfHasLimitsOfShapeOpposite, AlgebraicGeometry.Scheme.Modules.instPreservesLimitsPresheafAbCarrierCommRingCatToPresheaf, AlgebraicGeometry.LocallyRingedSpace.GlueData.instPreservesLimitSheafedSpaceCommRingCatWalkingCospanCospanFForgetToSheafedSpace, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.sheafedSpace_forgetPreserves_of_left, SheafOfModules.forgetPreservesLimitsOfShape, SheafOfModules.forgetPreservesLimitsOfSize. Read the returned signatures; the candidates concern ambient module sheaves, presentations, or categorical subgroupoids, not equivariant quasi-coherent modules on algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat groupoid in algebraic spaces the category of equivariant quasi coherent modules is abelian with kernels and cokernels on the object space",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, instAbelianLightCondMod, instAbelianCondensedMod, AlgebraicGeometry.Scheme.Modules.instCategory, SheafOfModules.instAbelian, LightCondensed.instIsGrothendieckAbelianLightCondMod, PresheafOfModules.instAbelian, CategoryTheory.Sheaf.instIsGrothendieckAbelian.  Read the returned signatures and relevant source definitions.",
+   "date": "2026-10-24",
+   "verdict": "no match: ambient sheaf modules and ordinary descent-free quasi-coherent data do not state the flat algebraic-space groupoid theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"kernel\"",
+   "results": "0 hits: .  Read the returned signatures and relevant source definitions.",
+   "date": "2026-10-24",
+   "verdict": "no match: ambient sheaf modules and ordinary descent-free quasi-coherent data do not state the flat algebraic-space groupoid theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(module|abelian)|equivariant.*[Qq]uasi|[Qq]uasi.*[Gg]roupoid",
+   "results": "0 hits: .  Read the returned signatures and relevant source definitions.",
+   "date": "2026-10-24",
+   "verdict": "no match: ambient sheaf modules and ordinary descent-free quasi-coherent data do not state the flat algebraic-space groupoid theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant quasi coherent modules over a flat algebraic space groupoid form an abelian category",
+   "results": "8 hits: SheafOfModules.instAbelian, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent.mk, PresheafOfModules.instAbelian, instAbelianCondensedMod, SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.QuasicoherentData.I.  Read the returned signatures and relevant source definitions.",
+   "date": "2026-10-24",
+   "verdict": "no match: ambient sheaf modules and ordinary descent-free quasi-coherent data do not state the flat algebraic-space groupoid theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of descent data for quasi coherent sheaves along flat maps has kernels and cokernels created by the forgetful functor",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.I, instAbelianCondensedMod, SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, LightCondensed.instIsGrothendieckAbelianLightCondMod.  Read the returned signatures and relevant source definitions.",
+   "date": "2026-10-24",
+   "verdict": "no match: ambient sheaf modules and ordinary descent-free quasi-coherent data do not state the flat algebraic-space groupoid theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-smooth-qcoh-exact",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1), proof first sentence: follows from Lemma 4.1.7, applied to g and the universally adequate map f_*A to f_*B; Quasi-coherent algebra image factorization on smooth tests; module prerequisite: Exact smooth pullback of quasi-coherent modules on algebraic stacks; Q23 split, atlas exactness: underlying kernels and cokernels in flat algebraic-space groupoid modules (06VZ).",
+   "via": [
+    "lem-sfb-stack-smooth-qcoh-exact",
+    "lem-sfb-stack-algebra-smooth-image",
+    "lem-sfb-adequate-algebra-pushforward",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-space-groupoid-kernels-cokernels",
+  "worker": "stage1",
+  "summary": "Expanded 06VZ into underlying kernels and cokernels, exact flat pullback, induced descent isomorphisms, explicit identity and cocycle cancellations, equivariant universal properties, and normal monos/epis. Reused algebraic-space quasi-coherent closure and chart-flat comparison. One new statement-only generic input: 04JC. Statement unchanged.",
+  "blueprint": "Retains the recorded ancestry through det-thm-sf-ctf-stability-direct-images proof (3) and the adequate-moduli algebra-image prerequisite. Realizes the supporting 06VZ input used in the faithful exact atlas restriction of lem-sfb-stack-smooth-qcoh-exact.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Generic normalized tensor pullback comparison for algebraic spaces: identifies the chart tensor pullback with ringed tensor pullback (step 2, to apply flat exactness) and interprets the groupoid equations coherently (step 3)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-chart-adjunction-tensor-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-b36001aba",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-b36001aba (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, Stacks 06VZ with definition-groupoid-module, and 04JC with definition-flat-morphism. The item statement is unchanged; its hypotheses and conclusions match 06VZ, and requiring α to be an iso with e^*α=1 gives the same category as Stacks' definition. I re-derived steps 1-6. In step 4, p0 and p1 are base changes of t and s, sc=sp1 and tc=tp0 are flat, and both cocycle equations cancel after the monic (sc)^*j and the epic (tc)^*q. In step 3 the identity laws cancel j and q without needing e to be flat. Step 5 proves the universal properties after s^*j and before t^*q. Step 6 gives the coimage/image comparison and normal monos and epis, which is def-sp-abelian. One fault (C3/C4): step 2 went from exactness of the ringed tensor pullback L_h (new node plus the flat comparison iff) to the item's chart left adjoint h^* without citing the identification P_h≅L_h. FIX: step 2 now cites τ_h from lem-trf-space-chart-adjunction-tensor-realization, which was already in proof_deps, and the tool_uses why names steps 2 and 3. The new node lem-sfb-flat-ringed-topos-pullback-exact is exactly the second assertion of 04JC. It is not a duplicate: lem-trf-geometric-inverse-image-exact and lem-weil-pbc-site-pullback-abelian-exact give only the abelian inverse-image assertion, and the other hits are constant-coefficient cases. It is a real lemma, smaller than the item; small cases checked (identity; flat B→A; Z/2 counterexample without flatness). lem-sfb-flat-space-groupoid-abelian is a citer of the item, not a competitor. Batch 5: the three sfb citations reach sec-trace-formula only through the definition def-trf-algebraic-space, and the trf tensor-realization node is a generic tensor-pullback comparison. None of them is the trace formula, Poincaré duality, or a step of their proofs, so all are accepted. The tool use is accepted. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+ }
+}

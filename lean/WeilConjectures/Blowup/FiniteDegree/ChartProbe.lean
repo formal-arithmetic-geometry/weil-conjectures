@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Blowup.FiniteDegree.Algebra
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Compactification.FiniteTypeExtension
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 
 /-!
 # Chart probes of the blow-up and their pulled-back ideals
@@ -93,13 +94,6 @@ lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.blowupChart_comp_blowupMap_
   le_of_le_of_eq (top_le_preimage_specMap_fromSpec V _)
     (congrArg (fun f : Spec _ ⟶ X ↦ f ⁻¹ᵁ V.1)
       (I.blowupChart_comp_blowupMap V ha)).symm
-
-/-- Rewriting `appLE` along an equality of morphisms. -/
-lemma _root_.AlgebraicGeometry.Scheme.Hom.appLE_eq_of_eq {T T' : Scheme.{u}}
-    {f g : T ⟶ T'} (hfg : f = g) (U : T'.Opens) (V' : T.Opens) (e : V' ≤ f ⁻¹ᵁ U) :
-    f.appLE U V' e = g.appLE U V' (hfg ▸ e) := by
-  subst hfg
-  rfl
 
 /-- The `appLE` of the chart probe over `V` is the chart section map. -/
 lemma _root_.AlgebraicGeometry.Scheme.IdealSheafData.appLE_blowupChart_comp_blowupMap

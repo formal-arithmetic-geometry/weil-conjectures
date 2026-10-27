@@ -11,15 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
 public import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 public import Sheaf.AlgebraicGeometry.CoherentFiniteType
-import Mathlib.AlgebraicGeometry.QuasiAffine
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
-import Mathlib.AlgebraicGeometry.Gluing
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
-import WeilConjectures.AlgebraicGeometry.AffineAlgebraLocalMaps
+import Sheaf.AlgebraicGeometry.QcqsRelativeAffinizationMap
+import Sheaf.AlgebraicGeometry.CanonicalAffineChartsQcOpenImmersion
 
 /-!
 # Quasi-affine morphisms as open subschemes of relative spectra
@@ -85,6 +79,43 @@ theorem isQuasiAffineHom_iff_exists_relativeSpec_embedding
           Nonempty (A ≅ Under.mk (⟨π.c⟩ : S.sheaf ⟶
             (TopCat.Sheaf.pushforward CommRingCat.{u} π.base).obj Y.sheaf)) ∧
           ∃ i : X ⟶ Y, IsOpenImmersion i ∧ QuasiCompact i ∧ i ≫ π = f := by
-  sorry
+  constructor
+  · intro hf
+    let : IsQuasiAffineHom f := hf
+    have hqa (U : S.Opens) (hU : IsAffineOpen U) := hU.isQuasiAffine_preimage f
+    have : QuasiCompact f := by
+      apply quasiCompact_iff_forall_isAffineOpen.mpr
+      intro U hU
+      have := hqa U hU
+      change IsCompact (f ⁻¹ᵁ U : Set X)
+      exact isCompact_iff_compactSpace.mpr
+        (show CompactSpace (f ⁻¹ᵁ U).toScheme from inferInstance)
+    have : QuasiSeparated f := by
+      rw [HasAffineProperty.eq_targetAffineLocally (P := @QuasiSeparated)]
+      intro U
+      have := hqa U.1 U.2
+      exact inferInstance
+    obtain ⟨hA, Y, π, hπ, a, c, hc, hcharts⟩ := qcqs_relative_affinization_map f
+    let : IsAffineHom π := hπ
+    have hci := isOpenImmersion_and_quasiCompact_of_canonical_affine_charts
+      f π c hc hqa (by
+        intro U hU
+        obtain ⟨hiso, hchart⟩ := hcharts U hU
+        let := hiso
+        refine ⟨asIso ((π ⁻¹ᵁ U).toSpecΓ ≫
+          Spec.map (a.hom.right.hom.app (Opposite.op U))) ≪≫
+            Scheme.Spec.mapIso (f ⁻¹ᵁ U).topIso.op, ?_⟩
+        change c.resLE _ _ _ ≫
+          ((π ⁻¹ᵁ U).toSpecΓ ≫ Spec.map (a.hom.right.hom.app (Opposite.op U))) ≫
+            Spec.map (f ⁻¹ᵁ U).topIso.hom = _
+        rw [← Category.assoc, hchart]
+        rw [Scheme.Opens.toSpecΓ, Category.assoc, ← Spec.map_comp,
+          Iso.hom_inv_id, Spec.map_id, Category.comp_id])
+    exact ⟨_, hA, Y, π, hπ, ⟨a⟩, c, hci.1, hci.2, hc⟩
+  · rintro ⟨A, hA, Y, π, hπ, ha, i, hi, hqc, rfl⟩
+    let : IsAffineHom π := hπ
+    let : IsOpenImmersion i := hi
+    let : QuasiCompact i := hqc
+    infer_instance
 
 end AlgebraicGeometry

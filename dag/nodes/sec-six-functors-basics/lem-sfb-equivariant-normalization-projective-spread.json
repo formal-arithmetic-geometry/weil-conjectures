@@ -1,0 +1,469 @@
+{
+ "id": "lem-sfb-equivariant-normalization-projective-spread",
+ "kind": "statement",
+ "title": "Equivariant projective spreading of a generic normalization",
+ "statement": "Let $k$ be a field, let $Y$ be a normal integral projective finite-type $k$-scheme, and let $g:C\\to Y$ be a proper dominant morphism, with $C$ integral of finite type over $k$ and geometrically integral generic fibre of dimension one. Put $K=k(Y)$ and $F=k(C)$. Let a finite group $H$ act compatibly on $k,C,Y,g$. Let $K_0/K$ be a finite purely inseparable extension with an extending $H$-action. Put $F_0=F\\otimes_KK_0$, suppose it is a field, and let $N$ be the normalization of $(C\\times_Y\\operatorname{Spec}K_0)_{\\mathrm{red}}$. Assume $N$ is smooth and geometrically integral over $K_0$. Let $D\\subset N$ be an $H$-stable finite etale closed subscheme, possibly empty. Let $S_0$ and $C_0$ be the normalizations of $Y$ in $K_0$ and of $C$ in $F_0$, respectively. They are normal integral excellent Noetherian finite-type $k$-schemes with the specified function fields, their maps to $Y,C$ are finite and dominant, and $S_0$ is projective over $k$. There is a canonical proper $H$-equivariant map $C_0\\to S_0$ making the square with $g$ commute, and its generic fibre is canonically $N$ over $C$ and $K_0$. The actions on $k,Y,C,K_0,F_0$ extend to $S_0,C_0$. There exists an integral excellent Noetherian finite-type $k$-scheme $T$ with a compatible $H$-action and an equivariant proper birational morphism $q:T\\to C_0$, such that $T/k$, $q$, and $T\\to S_0$ are H-projective. Its generic fibre over $S_0$ maps isomorphically to $N$. If $L\\subset T$ is the schematic closure of $D$ through this isomorphism, then $L$ is $H$-stable, $L_\\eta=D$, and all these generic identifications are over $C$ and $K_0$. Birational means an isomorphism between dense open subschemes. Excellence means excellence of affine coordinate rings, and Noetherian means quasi-compact and locally Noetherian.\n\nAll group actions are by automorphisms, may be nonfaithful, and commute with the displayed maps; they may act on the ground field. H-projective means admitting a closed immersion into a finite-dimensional projective space over the target, independently of the name of the acting group. Normal means that all local rings are integrally closed domains. Schematic closure is the closed subscheme defined by the kernel of restriction of functions to the specified subscheme.\n\nNotions used: [def-weil-field], [def-pc-integral-scheme], [def-kun-projective], [def-weil-finite-type-morphism], [def-weil-proper-morphism], [def-sc-function-field], [def-pc-field-extension], [def-pc-field-tower], [def-weil-pbc-reduced-normalization], [def-fin-normalization-extension], [def-pc-geometrically-irreducible], [def-kun-topological-krull-dimension], [def-sbc-smooth-morphisms], [def-weil-etale-morphism], [def-weil-finite-integral-morphism], [def-weil-closed-immersion], [def-pc-fibre-product], [def-exc-excellent-ring], [pqf-def-locnoeth].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0200 (lemma-chow-Noetherian), combined with normalization in finite function-field extensions and de Jong (1997), §§2.9–2.10, pp.604–605. Integral closure localization and the generic normal-curve comparison are expanded in the retained parent proof, Steps 5–7."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-kun-projective",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-weil-pbc-reduced-normalization",
+  "def-fin-normalization-extension",
+  "def-pc-geometrically-irreducible",
+  "def-kun-topological-krull-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-exc-excellent-ring",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [
+  {
+   "text": "The map $F\\to F_0$, $x\\mapsto x\\otimes1$, is injective: extend $1\\in K_0$ to a $K$-basis. The tensors with this finite basis span $F_0$ over $F$, so $F_0/F$ is finite. Apply [lem-sfb-finite-normalization-model-functoriality] to $(Y,K_0)$ and $(C,F_0)$. This gives the specified normal integral finite-type models $S_0,C_0$, their finite surjective maps, their specified function fields, and their compatible semilinear $H$-actions. The field action on $F_0$ is $h(x\\otimes a)=h(x)\\otimes h(a)$; the tensor relations hold because the two actions agree on $K$. It preserves products and identities and satisfies the group law. Thus the functoriality theorem applies even when $H$ acts on $k$.",
+   "uses": [
+    "lem-sfb-finite-normalization-model-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 034L (lemma-integral-closure-in-normal), 0307 (lemma-integral-closure-localize), 00GQ (lemma-integral-overring-surjective); varieties.tex Tag 0BXR (lemma-normalization-locally-algebraic)."
+   }
+  },
+  {
+   "text": "Apply [lem-fin-finite-over-projective] to $S_0\\to Y\\to\\operatorname{Spec}k$. Its base is affine Noetherian (a field has only the ideals $(0),(1)$), so its final clause gives an actual finite-projective-space embedding of $S_0$ over $k$. In particular $S_0/k$ and $Y/k$ are proper and separated by [lem-pc-projective-proper]. Since $g$ is proper, [lem-weil-pbc-proper-fp-permanence](a) makes $C/k$ proper. Then [lem-weil-pbc-finite-morphism-permanence](c) makes $C_0/k$ proper.",
+   "uses": [
+    "lem-fin-finite-over-projective",
+    "lem-pc-projective-proper",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 0B3I (lemma-finite-projective), 087S (lemma-projective-over-quasi-projective-is-H-projective), 01WC (lemma-locally-projective-proper), 01W3 (lemma-composition-proper)."
+   }
+  },
+  {
+   "text": "For $V=\\operatorname{Spec}A\\subset Y$ and $U=\\operatorname{Spec}B\\subset g^{-1}V$, write $A'\\subset K_0$ and $B'\\subset F_0$ for the integral closures defining the two normalizations [def-fin-normalization-extension]. Every $a\\in A'$ satisfies a monic equation over $A$, hence the same equation over $B$; thus $A'\\subset B'$. These inclusions define $\\operatorname{Spec}B'\\to\\operatorname{Spec}A'$. By [lem-weil-pbc-integral-closure-commutes-localization], the maps restrict to the same inclusions on principal opens; since principal opens form a basis in each affine chart, they glue to $f_0:C_0\\to S_0$. The commutative square is exactly the inclusions $A\\to A'\\to B'$ and $A\\to B\\to B'$. Applying $h$ to these inclusions gives the corresponding inclusions on the translated charts, so $f_0$ is equivariant. Since $C_0/k$ is proper and $S_0/k$ is separated, [lem-weil-pbc-proper-to-separated] makes $f_0$ proper.",
+   "uses": [
+    "def-fin-normalization-extension",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-proper-to-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0307 (lemma-integral-closure-localize); morphisms.tex Tag 01W6 (lemma-image-proper-scheme-closed), proper-to-separated graph argument."
+   }
+  },
+  {
+   "text": "Here is the affine generic-fibre calculation, retaining both structural maps. Fix $A,B,A',B'$ as above and put $S=A\\setminus\\{0\\}$. The ring $S^{-1}A'$ is a domain finite-dimensional over $K$, since $A'/A$ is finite. By [lem-weil-pbc-finite-dimensional-domain-is-field] it is a field, and its fraction field is $K_0$, so $S^{-1}A'=K_0$. Consequently $B'\\otimes_{A'}K_0=S^{-1}B'$. By [lem-weil-pbc-integral-closure-commutes-localization], this is the integral closure of $B_K=S^{-1}B$ in $F_0$. The ring $B_K\\otimes_KK_0$ embeds into $F\\otimes_KK_0=F_0$: tensoring the inclusion $B_K\\subset F$ preserves injectivity, as follows by extending a basis of a vector subspace to a basis. It is a domain with fraction field $F_0$, since localizing it at $B_K\\setminus\\{0\\}$ gives the field $F_0$.",
+   "uses": [
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0307 (lemma-integral-closure-localize); finite-dimensional domain argument of Tag 00GS (lemma-integral-over-field)."
+   }
+  },
+  {
+   "text": "The ring $B_K\\otimes_KK_0$ is finite over $B_K$, with spanning set the tensors of a finite $K$-basis of $K_0$. Therefore it is integral over $B_K$ by [lem-weil-pbc-finite-algebra-is-integral]. Their integral closures in $F_0$ coincide: one inclusion follows by keeping a monic equation over $B_K$, and the other follows by [lem-weil-pbc-integral-transitive] applied to the intermediate finite algebra and the algebra generated by an integral element. Thus the ring in Step 4 is exactly the normalization ring of $B_K\\otimes_KK_0$. These equalities are equalities of subrings of the specified $F_0$, compatible with localization by [lem-weil-pbc-integral-closure-commutes-localization]. They glue to the canonical isomorphism $(C_0)_{\\eta_0}\\simeq N$, where $\\eta_0=\\operatorname{Spec}K_0$ is the generic point of $S_0$. They fix $B$ and $K_0$, hence the isomorphism is over both $C$ and $K_0$ and is equivariant. The reduction in the definition of $N$ changes nothing: the displayed affine generic base-change rings are domains.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-transitive",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GK (lemma-finite-is-integral), 00GN (lemma-integral-transitive), 0307 (lemma-integral-closure-localize)."
+   }
+  },
+  {
+   "text": "The curve $C_\\eta\\times_KK_0$ has dimension one by [lem-pc-dim-base-change]. It is integral by the affine domain calculation above (all nonempty affine generic charts have the same generic point). Apply [lem-sc-normalization-exists] over the field $K_0$: $N$ is proper, integral, one-dimensional, and has function field $F_0$. Properness of the unnormalized curve follows by base change of $g$ using [lem-weil-pbc-proper-fp-permanence](b). Normality is part of its normalization; smoothness and geometric integrality are the hypotheses of the item.",
+   "uses": [
+    "lem-pc-dim-base-change",
+    "lem-sc-normalization-exists",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P3 (lemma-dimension-preserved-field-extension); varieties.tex Tag 0BXR (lemma-normalization-locally-algebraic); morphisms.tex Tag 01W4 (lemma-base-change-proper)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-semilinear-equivariant-chow-modification] to the proper integral finite-type $k$-scheme $C_0$ with its action. It gives integral finite-type $T$, the compatible action, and equivariant proper birational $q:T\\to C_0$, with both $T/k$ and $q$ H-projective and with the induced identification $k(T)=F_0$. Compose with $f_0$. Since $S_0/k$ is separated, apply [lem-sfb-finite-constant-projective-graph] with the identity finite extension $k/k$, $R=T$, $S=S_0$, and $c=f_0q$. Its closed graph embedding proves that $T\\to S_0$ is H-projective in precisely the finite-projective-space convention of the item.",
+   "uses": [
+    "lem-sfb-semilinear-equivariant-chow-modification",
+    "lem-sfb-finite-constant-projective-graph"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0200 (lemma-chow-Noetherian), finite semilinear translates; morphisms.tex Tag 0C4Q (lemma-projective-permanence), closed graph."
+   }
+  },
+  {
+   "text": "The generic fibre $T_{\\eta_0}$ is integral: each nonempty affine chart above an affine open of $S_0$ is the spectrum of a localization of a domain, by [lem-weil-pbc-generic-fibre-localization-domain-irreducible]. The maps from the base domains are injective since $T\\to C_0\\to S_0$ induces the inclusion $K_0\\subset F_0$. These charts all contain the generic point of $T$; their fraction field remains $F_0$, with its fixed $K_0$-structure [lem-sc-integral-function-field-affine-fraction]. The map $q_{\\eta_0}:T_{\\eta_0}\\to N$ is proper by [lem-weil-pbc-proper-fp-permanence](b), dominant, and induces the identity on $F_0$. Both source and target are finite type and separated over $K_0$ (the source is H-projective). By [lem-sc-closed-irreducible-dimension-trdeg] applied to each whole underlying space, their dimensions are equal since their generic residue fields are the same $K_0$-field $F_0$. The target has dimension one by Step 6. Hence [lem-trf-proper-birational-normal-curve-iso] applies and makes $q_{\\eta_0}$ an isomorphism. It is the isomorphism induced by $q$, so it retains the maps to $C$ and $\\operatorname{Spec}K_0$ and the actions.",
+   "uses": [
+    "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-trf-proper-birational-normal-curve-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0B1C (item-dimension-irreducible-trdeg), 0AB7 (lemma-finite-in-codim-1), 0BFP (lemma-modification-normal-iso-over-codimension-1); morphisms.tex Tag 01RV (lemma-integral-scheme-rational-functions)."
+   }
+  },
+  {
+   "text": "The schemes $S_0,C_0,T$ are finite type over $k$, so they are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. For excellence, [lem-exc-fields-excellent] gives excellence of $k$, and [lem-exc-finite-type-localization-excellent] gives excellence of the finite-type coordinate algebras on a finite affine cover of each scheme. By [lem-trf-excellent-scheme-affine-cover] all their affine coordinate rings are excellent. This proves exactly the excellence and Noetherian conventions required in the statement, without adding a normality requirement on $T$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-exc-fields-excellent",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-trf-excellent-scheme-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07QW (proposition-ubiquity-excellent), 07QU (lemma-finite-type-over-excellent); morphisms.tex Tags 01T6 (lemma-finite-type-noetherian), 0HAB (lemma-locally-excellent)."
+   }
+  },
+  {
+   "text": "View $D$ inside $T_{\\eta_0}$ by the isomorphism of Step 8 and let $j:D\\to T$ be the composite. The scheme $D$ is quasi-compact because it is finite over a field. The target $T$ is separated, hence quasi-separated. Thus [lem-weil-pbc-qcqs-morphism-permanence](1) makes $j$ quasi-compact. By [lem-weil-pbc-scheme-image-qc-kernel], its scheme-theoretic image $L\\subset T$ exists and is defined on every affine open by the kernel of restriction to $D$. This is the schematic closure specified in the item. Every $h$ carries the restriction map to the restriction map on the translated open, because $D$ and its map are invariant. It therefore carries each kernel to the translated kernel. These invariant ideals give the induced $H$-action on $L$, and its group law is inherited by restriction from $T$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-scheme-image-qc-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R8 (lemma-quasi-compact-scheme-theoretic-image); schemes.tex Tag 03GI (lemma-quasi-compact-permanence)."
+   }
+  },
+  {
+   "text": "Finally fix an affine $\\operatorname{Spec}A'\\subset S_0$ and $\\operatorname{Spec}R\\subset T$ above it, and set $S=A'\\setminus\\{0\\}$. The closed subscheme $D$ of $T_{\\eta_0}$ has an ideal $J\\subset S^{-1}R$ on this generic affine chart. The kernel defining $L$ is its contraction $I\\subset R$. For any $r/s\\in J$, $r/1=s(r/s)\\in J$, so $r\\in I$; conversely $I$ maps into $J$. Thus $S^{-1}I=J$ and $(R/I)\\otimes_{A'}K_0=(S^{-1}R)/J$. These identities on affine charts identify $L_{\\eta_0}$ with $D$ as closed subschemes under the specified generic isomorphism. If $D$ is empty, $J=S^{-1}R$, $I=R$, and $L$ is empty as well. The calculation fixes $K_0$ and the structural maps to $C$, so all the asserted generic identifications are the specified ones.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R8 (lemma-quasi-compact-scheme-theoretic-image), affine kernel definition; elementary extension/contraction under localization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-normalization-model-functoriality",
+  "lem-fin-finite-over-projective",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-fin-normalization-extension",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-transitive",
+  "lem-pc-dim-base-change",
+  "lem-sc-normalization-exists",
+  "lem-sfb-semilinear-equivariant-chow-modification",
+  "lem-sfb-finite-constant-projective-graph",
+  "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-trf-proper-birational-normal-curve-iso",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-image-qc-kernel"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Affine integral-closure calculation using Tags 0307 and 00GN; assembly of the existing normalization, semilinear Chow, graph and curve-isomorphism nodes. Retains parent flat-curve preparation Steps 5–7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ee]quivariant.*[Cc]how|[Ss]emilinear.*[Nn]ormali|normalization.*functionField",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.IsProjective",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.IsProjective'; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant normalization of a proper curve family and projective birational model with fixed generic fibre",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.Scheme.Hom.ker_toNormalization",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial semilinear integral closures and equivariant Chow modification spread a smooth generic normalization over a normal projective base.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize a projective integral base and a proper curve family in finite purely inseparable function field extensions and find an equivariant projective birational model preserving the normalized generic curve.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, WeierstrassCurve.IsIntegral.integral, WeierstrassCurve.Affine.Point.map_some, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.IsIntegralHom",
+   "results": "9 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize a proper curve family in a finite purely inseparable extension of its function field and spread its smooth generic normalization to an equivariant projective model",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage",
+   "date": "2026-10-23",
+   "verdict": "no match: relative normalization universal properties do not give the equivariant projective modification or the generic normal curve and marking identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]quivariant.*[Cc]how|normalization.*generic|normalizationDesc",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: relative normalization universal properties do not give the equivariant projective modification or the generic normal curve and marking identifications"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant projective modification of the normalization of a proper family of curves preserving its smooth generic fibre",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap",
+   "date": "2026-10-23",
+   "verdict": "no match: relative normalization universal properties do not give the equivariant projective modification or the generic normal curve and marking identifications"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.IsIntegralHom",
+   "results": "9 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: relative normalization universal properties do not give the equivariant projective modification or the generic normal curve and marking identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite normalization over a normal base and a projective birational modification which is an isomorphism on the generic smooth curve",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization",
+   "date": "2026-10-23",
+   "verdict": "no match: relative normalization universal properties do not give the equivariant projective modification or the generic normal curve and marking identifications"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-flat-curve-preparation",
+  "date": "2026-10-22",
+  "group": "Q123"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong, Families of curves and alterations (1997), §§2.7--2.10, printed pp.603--605: invariant purely inseparable generic normalization, equivariant Chow preparation and simultaneous flattening. The marking flattening is also ILO X Theorem 3.4 Step 2, p.160. Retained flat-curve preparation Steps 5–7: canonical integral closures, properness and excellence, graph projectivity and equivariant Chow model preserving the generic curve.",
+   "via": [
+    "lem-sfb-equivariant-flat-curve-preparation",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-equivariant-normalization-projective-spread",
+  "worker": "stage1",
+  "group": "NP",
+  "summary": "Eleven-step split of retained parent Steps 5–7, reusing existing normalization functoriality, semilinear Chow modification, closed graph and normal-curve comparison. Affine localization and transitivity identify the generic normalization over both C and K0; contraction ideals recover the marking. No new nodes and no statement correction.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong, Families of curves and alterations (1997), §§2.7--2.10, printed pp.603--605: invariant purely inseparable generic normalization, equivariant Chow preparation and simultaneous flattening. The marking flattening is also ILO X Theorem 3.4 Step 2, p.160. Retained flat-curve preparation Steps 5–7: canonical integral closures, properness and excellence, graph projectivity and equivariant Chow model preserving the generic curve.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-finite-over-projective",
+    "why": "Generic tool in Step 2: Finite covers of projective schemes are projective. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic tool in Step 2: Projective morphisms are proper. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic tool in Step 2: Permanence of proper, separated, finite type, finitely presented morphisms and of immersions. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic tool in Step 2: Base change, affineness and properness for finite morphisms. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-commutes-localization",
+    "why": "Generic tool in Step 3: Integral closure commutes with localization (Stacks 0307). It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-weil-pbc-proper-to-separated",
+    "why": "Generic tool in Step 3: Proper to a separated target. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "why": "Generic tool in Step 4: A finite-dimensional domain over a field is a field. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-is-integral",
+    "why": "Generic tool in Step 5: A finite algebra is integral. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-weil-pbc-integral-transitive",
+    "why": "Generic tool in Step 5: A composition of integral ring maps is integral. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-pc-dim-base-change",
+    "why": "Generic tool in Step 6: Dimension is unchanged under base change along field extensions. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-sc-normalization-exists",
+    "why": "Generic tool in Step 6: Existence and finiteness of the normalization. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+    "why": "Generic tool in Step 8: The generic fibre of a domain over a domain is an irreducible spectrum. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Generic tool in Step 8: Function field of an integral scheme is the fraction field of an affine open. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Generic tool in Step 8: Dimension of an irreducible closed subset from its generic residue field. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-trf-proper-birational-normal-curve-iso",
+    "why": "Generic tool in Step 8: A proper birational morphism to a normal integral curve is an isomorphism. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic tool in Step 9: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-exc-fields-excellent",
+    "why": "Generic tool in Step 9: Fields are excellent. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic tool in Step 9: Excellence is preserved by finite type algebras and localization. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-trf-excellent-scheme-affine-cover",
+    "why": "Generic tool in Step 9: Excellence of a scheme is detected on an affine open cover. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic tool in Step 10: Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-image-qc-kernel",
+    "why": "Generic tool in Step 10: Scheme-theoretic image of a quasi-compact morphism: affine kernels and universal property. It supplies this auxiliary normalization, properness, projectivity, dimension or finiteness fact; the unit route supplies no replacement and is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-finite-over-projective",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-transitive",
+  "lem-pc-dim-base-change",
+  "lem-sc-normalization-exists",
+  "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-trf-proper-birational-normal-curve-iso",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-image-qc-kernel"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NP-5323659d0",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-5323659d0 (reviewer sub-agent of L); spot-checked: I read the item and all 25 cited statements in full. The statement is byte-identical to the Q123 parent-split copy; the only stmt_dep added is def-weil-pbc-finite-purely-inseparable-extension. There are no new nodes and no repair note, so this is a first split, not a re-split. The item is still unsplit in live and side-live, so it is not superseded. Step checks: (1) F0/F is finite; functoriality gives S0 and C0 with the semilinear action h(x⊗a)=h(x)⊗h(a). (2) Finite-over-projective over Spec k gives S0↪P^N_k; Y is quasi-compact, so it meets the pc-projective convention; C/k and C0/k are proper. (3) A'⊂B' by carrying the monic equation, the affine maps glue, and f0 is proper by proper-to-separated. (4)-(5) S^{-1}A'=K0, S^{-1}B' is the integral closure of B_K in F0 and equals the normalization of B_K⊗_K K0 by integrality and transitivity, so (C0)_{η0}≅N over C and K0. (6) dim 1 and properness of N. (7) The Chow node and the projective-graph node with F=k give T/k, q and T→S0 H-projective, and q is birational because T is integral. (8) T_{η0} is integral of dim trdeg_{K0}F0=1, and the normal-curve-iso node needs only the target normal (checked against Stacks 0BFP). (9) Excellence and Noetherianity via 07QU, 0HAB, 01T6. (10)-(11) The scheme image of the quasi-compact map j gives L, which is H-stable, and the contraction ideal gives L_η=D, nilpotents included; empty D gives empty L. Edge cases Y=Spec k, K0=K, D empty and H nonfaithful or acting on k all work. Stacks tags 0200, 0307, 0BFP, 0AB7, 0HAB, 01R8, 0C4Q, 0BXR, 07QU and 0B3I are present with the stated labels. No SGA is cited. De Jong is absent from literature/ and correctly marked WANTED. lem-trf-projective-inseparable-spread-normalization and lem-trf-dejong-relative-marked-semistable are non-equivariant analogues with no canonical S0, Chow model or marking, so they overlap but are not duplicates. Batch-5: all six flagged citations are generic algebraic geometry or commutative algebra (056B reduced scheme image, the projective-bundle definition, 0AB7/0BFP normal-curve isomorphism, fields excellent, 07QU, 0HAB) and none is the trace formula, Poincaré duality or a step of their proofs, so all six are accepted. All 21 tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EquivariantNormalizationProjectiveSpread",
+  "declaration": "AlgebraicGeometry.exists_equivariant_normalization_projective_spread",
+  "declarations": [
+   "AlgebraicGeometry.NormalizationProjectiveSpread.genericNormalization",
+   "AlgebraicGeometry.NormalizationProjectiveSpread.toCurve",
+   "AlgebraicGeometry.NormalizationProjectiveSpread.toField",
+   "AlgebraicGeometry.exists_equivariant_normalization_projective_spread"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EquivariantNormalizationProjectiveSpread.lean",
+  "statement": "theorem exists_equivariant_normalization_projective_spread (k : Type u) [Field k] (Y C : Scheme.{u}) [IsIntegral Y] [IsIntegral C] (pY : Y ⟶ Spec (.of k)) [IsHProjective pY] [LocallyOfFiniteType pY] [QuasiCompact pY] (g : C ⟶ Y) [IsProper g] [IsDominant g] [LocallyOfFiniteType (g ≫ pY)] [QuasiCompact (g ≫ pY)] (hnormal : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y)) [GeometricallyIntegral (pullback.snd g Y.fromSpecFunctionField)] (hdim : topologicalKrullDim (pullback (C := Scheme.{u}) g Y.fromSpecFunctionField) = 1) [Algebra Y.functionField C.functionField] (hK : Spec.map (CommRingCat.ofHom (algebraMap Y.functionField C.functionField)) ≫ Y.fromSpecFunctionField = C.fromSpecFunctionField ≫ g) (H : Type v) [Group H] [Finite H] (σk : H →* (k ≃+* k)) (σY : H →* Aut Y) (σC : H →* Aut C) (hY : ∀ h : H, (σY h).hom ≫ pY = pY ≫ Spec.map (CommRingCat.ofHom (σk h⁻¹).toRingHom)) (hC : ∀ h : H, (σC h).hom ≫ g ≫ pY = (g ≫ pY) ≫ Spec.map (CommRingCat.ofHom (σk h⁻¹).toRingHom)) (hg : ∀ h : H, (σC h).hom ≫ g = g ≫ (σY h).hom) (K₀ : Type u) [Field K₀] [Algebra Y.functionField K₀] [Module.Finite Y.functionField K₀] [IsPurelyInseparable Y.functionField K₀] (σK₀ : H →* (K₀ ≃+* K₀)) (hK₀ : ∀ h : H, Spec.map (CommRingCat.ofHom (σK₀ h⁻¹).toRingHom) ≫ Y.fromSpecOfAlgebraFunctionField K₀ = Y.fromSpecOfAlgebraFunctionField K₀ ≫ (σY h).hom) (F₀ : Type u) [Field F₀] [Algebra C.functionField F₀] [Algebra K₀ F₀] (eF : TensorProduct Y.functionField C.functionField K₀ ≃+* F₀) (heF : ∀ (x : C.functionField) (a : K₀), eF (TensorProduct.tmul Y.functionField x a) = algebraMap C.functionField F₀ x * algebraMap K₀ F₀ a) (σF₀ : H →* (F₀ ≃+* F₀)) (hF₀ : ∀ h : H, Spec.map (CommRingCat.ofHom (σF₀ h⁻¹).toRingHom) ≫ C.fromSpecOfAlgebraFunctionField F₀ = C.fromSpecOfAlgebraFunctionField F₀ ≫ (σC h).hom) (hσF₀ : ∀ (h : H) (a : K₀), σF₀ h (algebraMap K₀ F₀ a) = algebraMap K₀ F₀ (σK₀ h a)) [Smooth (toField g K₀)] [GeometricallyIntegral (toField g K₀)] (σN : H →* Aut (genericNormalization g K₀)) (hNC : ∀ h : H, (σN h).hom ≫ toCurve g K₀ = toCurve g K₀ ≫ (σC h).hom) (hNK : ∀ h : H, (σN h).hom ≫ toField g K₀ = toField g K₀ ≫ Spec.map (CommRingCat.ofHom (σK₀ h⁻¹).toRingHom)) (D : Scheme.{u}) (d : D ⟶ genericNormalization g K₀) [IsClosedImmersion d] [IsFinite (d ≫ toField g K₀)] [Etale (d ≫ toField g K₀)] (σD : H →* Aut D) (hD : ∀ h : H, (σD h).hom ≫ d = d ≫ (σN h).hom) : (∀ s : Y.normalizationIn K₀, IsDomain ((Y.normalizationIn K₀).presheaf.stalk s) ∧ IsIntegrallyClosed ((Y.normalizationIn K₀).presheaf.stalk s)) ∧ IsIntegral (Y.normalizationIn K₀) ∧ IsNoetherian (Y.normalizationIn K₀) ∧ (∀ U : (Y.normalizationIn K₀).affineOpens, IsExcellent Γ(Y.normalizationIn K₀, U)) ∧ LocallyOfFiniteType (Y.fromNormalizationIn K₀ ≫ pY) ∧ QuasiCompact (Y.fromNormalizationIn K₀ ≫ pY) ∧ IsFinite (Y.fromNormalizationIn K₀) ∧ IsDominant (Y.fromNormalizationIn K₀) ∧ IsHProjective (Y.fromNormalizationIn K₀ ≫ pY) ∧ (∃ e : Spec (.of K₀) ≅ Spec (Y.normalizationIn K₀).functionField, e.hom ≫ (Y.normalizationIn K₀).fromSpecFunctionField = (Y.fromSpecOfAlgebraFunctionField K₀).toNormalization) ∧ (∀ c : C.normalizationIn F₀, IsDomain ((C.normalizationIn F₀).presheaf.stalk c) ∧ IsIntegrallyClosed ((C.normalizationIn F₀).presheaf.stalk c)) ∧ IsIntegral (C.normalizationIn F₀) ∧ IsNoetherian (C.normalizationIn F₀) ∧ (∀ U : (C.normalizationIn F₀).affineOpens, IsExcellent Γ(C.normalizationIn F₀, U)) ∧ LocallyOfFiniteType (C.fromNormalizationIn F₀ ≫ g ≫ pY) ∧ QuasiCompact (C.fromNormalizationIn F₀ ≫ g ≫ pY) ∧ IsFinite (C.fromNormalizationIn F₀) ∧ IsDominant (C.fromNormalizationIn F₀) ∧ (∃ e : Spec (.of F₀) ≅ Spec (C.normalizationIn F₀).functionField, e.hom ≫ (C.normalizationIn F₀).fromSpecFunctionField = (C.fromSpecOfAlgebraFunctionField F₀).toNormalization) ∧ ∃ (f₀ : C.normalizationIn F₀ ⟶ Y.normalizationIn K₀) (σS₀ : H →* Aut (Y.normalizationIn K₀)) (σC₀ : H →* Aut (C.normalizationIn F₀)), IsProper f₀ ∧ f₀ ≫ Y.fromNormalizationIn K₀ = C.fromNormalizationIn F₀ ≫ g ∧ (C.fromSpecOfAlgebraFunctionField F₀).toNormalization ≫ f₀ = Spec.map (CommRingCat.ofHom (algebraMap K₀ F₀)) ≫ (Y.fromSpecOfAlgebraFunctionField K₀).toNormalization ∧ (∀ h : H, (σS₀ h).hom ≫ Y.fromNormalizationIn K₀ = Y.fromNormalizationIn K₀ ≫ (σY h).hom) ∧ (∀ h : H, (σC₀ h).hom ≫ C.fromNormalizationIn F₀ = C.fromNormalizationIn F₀ ≫ (σC h).hom) ∧ (∀ h : H, Spec.map (CommRingCat.ofHom (σK₀ h⁻¹).toRingHom) ≫ (Y.fromSpecOfAlgebraFunctionField K₀).toNormalization = (Y.fromSpecOfAlgebraFunctionField K₀).toNormalization ≫ (σS₀ h).hom) ∧ (∀ h : H, Spec.map (CommRingCat.ofHom (σF₀ h⁻¹).toRingHom) ≫ (C.fromSpecOfAlgebraFunctionField F₀).toNormalization = (C.fromSpecOfAlgebraFunctionField F₀).toNormalization ≫ (σC₀ h).hom) ∧ (∀ h : H, (σC₀ h).hom ≫ f₀ = f₀ ≫ (σS₀ h).hom) ∧ ∃ j₀ : genericNormalization g K₀ ⟶ C.normalizationIn F₀, IsPullback j₀ (toField g K₀) f₀ (Y.fromSpecOfAlgebraFunctionField K₀).toNormalization ∧ j₀ ≫ C.fromNormalizationIn F₀ = toCurve g K₀ ∧ (∀ h : H, (σN h).hom ≫ j₀ = j₀ ≫ (σC₀ h).hom) ∧ ∃ (T : Scheme.{u}) (_ : IsIntegral T) (q : T ⟶ C.normalizationIn F₀) (σT : H →* Aut T) (jT : genericNormalization g K₀ ⟶ T), IsNoetherian T ∧ (∀ U : T.affineOpens, IsExcellent Γ(T, U)) ∧ LocallyOfFiniteType (q ≫ C.fromNormalizationIn F₀ ≫ g ≫ pY) ∧ QuasiCompact (q ≫ C.fromNormalizationIn F₀ ≫ g ≫ pY) ∧ IsProper q ∧ (∃ U : (C.normalizationIn F₀).Opens, Dense (U : Set (C.normalizationIn F₀)) ∧ IsIso (q ∣_ U) ∧ Dense ((q ⁻¹ᵁ U) : Set T)) ∧ IsHProjective (q ≫ C.fromNormalizationIn F₀ ≫ g ≫ pY) ∧ IsHProjective q ∧ IsHProjective (q ≫ f₀) ∧ (∀ h : H, (σT h).hom ≫ q = q ≫ (σC₀ h).hom) ∧ IsPullback jT (toField g K₀) (q ≫ f₀) (Y.fromSpecOfAlgebraFunctionField K₀).toNormalization ∧ jT ≫ q = j₀ ∧ (∀ h : H, (σN h).hom ≫ jT = jT ≫ (σT h).hom) ∧ ∃ (L : Scheme.{u}) (iL : L ⟶ T) (dL : D ⟶ L) (σL : H →* Aut L), IsClosedImmersion iL ∧ (∀ U : T.affineOpens, RingHom.ker (iL.app U).hom = RingHom.ker ((d ≫ jT).app U).hom) ∧ (∀ h : H, (σL h).hom ≫ iL = iL ≫ (σT h).hom) ∧ (∀ h : H, (σD h).hom ≫ dL = dL ≫ (σL h).hom) ∧ dL ≫ iL = d ≫ jT ∧ IsPullback dL (d ≫ toField g K₀) (iL ≫ q ≫ f₀) (Y.fromSpecOfAlgebraFunctionField K₀).toNormalization",
+  "branch": "sheaf-dag",
+  "by": "Q152",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4b27e479",
+  "group": "Q152",
+  "result": "pass",
+  "note": "First S2 delivery; only the item lean field and the new module changed, all 20 dep records match side-live; statement verbatim with by sorry. Clause check passed: Y normal integral H-projective finite type; g proper dominant; generic fibre geometrically integral of dim 1; K→F pinned by hK; semilinear H-actions consistent (h↦Spec σ(h⁻¹)); K0 finite purely inseparable; F0 pinned by eF/heF and the hF0/hσF0 tensor action; N = reducedNormalization of C×_Y Spec K0 (= normalization of P_red since P is irreducible); σN/σD supplied as data, uniquely determined and always existing, so no stronger assumption. Conclusions: S0/C0 normal, integral, Noetherian, excellent, finite type, finite dominant, specified function fields, S0 H-projective; f0 proper, square with g, generic map, equivariant; j0 Cartesian over C and K0; T integral Noetherian excellent finite type, q proper birational (dense open iso), H-projective T/k, q, T→S0; jT Cartesian with jT≫q=j0; L by affine kernels, H-stable, L_η=D Cartesian. Edge cases (trivial/nonfaithful H, action on k, K0=K, char 0, empty D) allowed; universes forced by Spec, H free. Helpers are real constructions; docstrings carry source place, blueprint tag and 11 proof steps; proof-plan imports exist. Non-blocking: def-pc-field-tower import unused; redundant hC and QC pY."
+ }
+}

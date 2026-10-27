@@ -46,7 +46,32 @@
   "lem-pc-cech-exact"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Modules.exactAt_cechComplex_basicOpen"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exactAt_cechComplex_basicOpen",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech",
+     "lines": [
+      193,
+      236
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-lem-picard-affine",
  "lean": {
@@ -59,5 +84,22 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed); Lean refresh 7d675a26 (L): moved from WeilConjectures.AlgebraicGeometry.Cohomology.Affine:231"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a scheme, $\\mathcal F$ a quasi-coherent $\\mathcal O_X$-module,\n$V\\subseteq X$ an affine open and $f_1,\\dots,f_n\\in\\Gamma(V,\\mathcal O_X)$\nwith $V=D(f_1)\\cup\\dots\\cup D(f_n)$. Then the Cech complex of $\\mathcal F$\nfor the covering $\\{D(f_i)\\}$ of $V$,\n\n$$\n\\prod_{i}\\mathcal F(D(f_i))\n\\longrightarrow\\prod_{i,j}\\mathcal F(D(f_if_j))\\longrightarrow\\cdots,\n$$\n\nis exact in every positive degree. In terms of $V=\\operatorname{Spec}(A)$\nand $M=\\mathcal F(V)$: the $f_i$ generate the unit ideal of $A$, and\n$\\mathcal F(D(f_{i_0}\\cdots f_{i_p}))=M_{f_{i_0}\\cdots f_{i_p}}$.",
+  "proof": [
+   {
+    "text": "Write $V=\\operatorname{Spec}(A)$ and $M=\\mathcal F(V)$, so that\n$\\mathcal F|_V=\\widetilde M$, the $f_i$ generate the unit ideal of $A$, and\nthe complex of the statement is the Cech complex of the modules\n$M_{f_{i_0}\\cdots f_{i_p}}$. Its cohomology agrees with that of the\nalternating Cech complex, and we show that even the augmented alternating\ncomplex\n\n$$\n0\\to M\\longrightarrow\\prod_{i}M_{f_i}\n\\longrightarrow\\prod_{i<j}M_{f_if_j}\\longrightarrow\\cdots\n$$\n\nis exact, which gives exactness in positive degrees.\nLocalize this complex at $f_j$. The corresponding cover\ncontains $D(f_j)_{f_j}=\\operatorname{Spec}(A_{f_j})$.\nWrite alternating cochains using all ordered index tuples, with\nrepeated indices giving zero and permutations acting by their signs.\nInsertion of the index $j$ in the first slot defines a contraction:\n$(hc)_{i_0\\ldots i_{q-1}}=c_{j i_0\\ldots i_{q-1}}$.\nThe usual restriction to the additional intersection is an\nisomorphism after localizing at $f_j$. Expanding the alternating\ndifferential gives $dh+hd=1$, because the term deleting the added\n$j$ is the identity and all other terms cancel in pairs.\nConsequently the localized complex is exact for every $j$.\nLocalization is exact, so every cohomology module $N$ satisfies\n$N_{f_j}=0$ for all $j$. For $v\\in N$, choose exponents $a_j$\nwith $f_j^{a_j}v=0$. The elements $f_j^{a_j}$ still generate the\nunit ideal (no prime contains them all), hence $v=0$.\nThus every cohomology module is zero.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

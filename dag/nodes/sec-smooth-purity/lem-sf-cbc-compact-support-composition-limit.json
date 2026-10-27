@@ -25,94 +25,51 @@
  ],
  "proof": [
   {
-   "text": "Realize strict towers on the diagram site. Their category is abelian with exact evaluations. Its derived limit $\\mathcal L=R\\lim$ is exact, and the completion adjunction gives $C=\\mathcal L\\mathcal R$ with unit $\\eta$.",
+   "text": "Apply the Noetherian small-site reduced-unit theorem to every sfCbcSite T over ULift(A), with the mapped ideal. Noetherianity transports across ULift.ringEquiv. This proves hunit; all inverse reduced units in q are the unique inverses of those specified maps.",
    "uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-sp-completed-pullback-adjunction"
+    "lem-sf-cbc-small-site-reduced-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-    "place": "Proof Step 5, strict-diagram setup"
-   }
+   "elementary": false
   },
   {
-   "text": "For $M=Lu^*K$, the completed-pullback-unit-tower lemma gives invertible $\\mathcal R(\\eta_M)$ and the strict pullback/tensor isomorphism $\\tau_{u,K}$. Its inverse reduced unit is adjoint to the limit projections. Thus $q_{u,K}=\\tau_{u,K}\\circ\\mathcal R(\\eta_M)^{-1}$ is the specified natural tower isomorphism, with every quotient transition. Part (iii) identifies its evaluations with the projection-induced finite maps; no completeness of ordinary $u^*K$ is used.",
+   "text": "Each completed pullback and completed open extension has complete output by the completion reflector. Direct image preserves completeness. The pullback q is a composite of inverse reduced unit and reductionPullIso, hence invertible. The open q uses inverse reduced unit and the specified tensor-comparison isomorphism. Expanding the direct-image q identifies it with towerProjection; the small-site direct-image theorem gives its invertibility on complete inputs.",
    "uses": [
-    "lem-sf-cbc-completed-pullback-unit-tower"
+    "lem-sp-completion-mate-comparison",
+    "lem-sf-cbc-extension-zero-completion",
+    "lem-sf-cbc-small-site-direct-image-reconstruction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-    "place": "Proof Step 5, completed inverse-image letter"
-   }
+   "elementary": false
   },
   {
-   "text": "For direct image take $q_{u,K}=h_{u,K}$ of the strict direct-image reduction-unit lemma. It is exactly the diagram-site counit-tensor projection map, using $\\chi$ to identify the constant source, and is invertible for complete $K$. Its evaluation is the canonical perfect-coefficient projection comparison.",
+   "text": "Induct on the indexed word. The empty completed functor is identity, q is the unitor identity, and a is eta. At a snoc step, apply the letter comparison at the preceding complete output and apply the strict letter functor to the preceding q. Their composite is invertible, and the completed output is complete. Therefore eta followed by derived limit of q is invertible.",
    "uses": [
-    "lem-sf-cbc-direct-image-reduction-unit"
+    "lem-sp-completion-mate-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-    "place": "Proof Step 5, derived direct-image letter"
-   }
+   "elementary": true
   },
   {
-   "text": "For open extension take the natural strict isomorphism $q_{j,K}$ of the extension-zero completion lemma. It satisfies $q_{j,K}\\mathcal R(\\eta_{J_jK})=q^{\\rm tens}_{j,K}$ and gives $J_j^cK\\cong\\mathcal L(J_j\\mathcal R K)$, including all transitions.",
-   "uses": [
-    "lem-sf-cbc-extension-zero-completion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-    "place": "Proof Steps 1–2, completed open letter"
-   }
+   "text": "Induct on the second word to prove the stated concatenation equation for the actual recursive q. Expand appendCompleteIso and appendStrictIso, use preservation of composition and naturality of the last letter q, and reassociate. Induct on binary expressions for the strict parenthesization equation; move the flattening maps through q by naturality. Apply derived limit to this equality and use naturality of eta for the reconstruction parenthesization equation. All equations are before evaluation and hold on ambient objects.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Apply the categorical word lemma with index set $S$ the finitely many schemes occurring in the words considered, edges their letters, $\\mathcal D_T=D(T,A)$, the lemma's second categories $D(\\mathcal T_T)$, $\\mathcal E_T=D_{\\rm comp}(T,A)$, $R_T=\\mathcal R_T$, $L_T=\\mathcal L_T$ and the preceding one-letter maps. Completed letters preserve completeness by the reflector construction; $Ru_*$ does so by the completed adjunction lemma. Hence the unit is invertible at every intermediate object. The word lemma gives $q_{VW}=(\\widetilde Vq_W)q_{V,W_cK}$ and $a_W=\\mathcal L(q_W)\\eta_{W_cK}$, with empty maps $1$ and $\\eta$, naturality, and both parenthesization equations.",
+   "text": "For the one-letter direct-image word, the empty q and functor unitors simplify away. Its reconstruction is exactly eta followed by derived limit of towerProjection. The unit equation from the small-site direct-image reconstruction theorem is therefore the stated directImage equality with the canonical directLimitIso.",
    "uses": [
-    "lem-sf-cbc-word-reconstruction-coherence",
-    "lem-sp-completed-pullback-adjunction"
+    "lem-sf-cbc-small-site-direct-image-reconstruction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-    "place": "Proof Step 5, finite words and reconstruction"
-   }
-  },
-  {
-   "text": "For successive pullbacks use the canonical K-flat pullback-composition comparison termwise; for successive direct images use the canonical ringed-topos derived-composition comparison termwise and through $\\chi$. Finally the strict direct-image reduction-unit lemma gives $\\mathcal L(h_{u,K})\\eta_{Ru_*K}=b_{u,\\mathcal R K}Ru_*(\\eta_K)$, so the constructed $a$ is the stipulated direct-image/limit map. All equalities concern actual derived towers and impose no uniform bounds.",
-   "uses": [
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-sf-cbc-direct-image-reduction-unit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-    "place": "Proof Step 5, homogeneous composites and direct-image normalization"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-weil-tower-category-levelwise-abelian",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-sp-completed-pullback-adjunction",
-  "lem-sf-cbc-completed-pullback-unit-tower",
-  "lem-sf-cbc-direct-image-reduction-unit",
+  "lem-sf-cbc-small-site-reduced-unit",
+  "lem-sp-completion-mate-comparison",
   "lem-sf-cbc-extension-zero-completion",
-  "lem-sf-cbc-word-reconstruction-coherence",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+  "lem-sf-cbc-small-site-direct-image-reconstruction"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-  "place": "Proof Step 5, strict-diagram reconstruction; re-split into independent direct-image normalization and categorical word-coherence arguments."
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099M, 099N; direct recursive word assembly for the assigned fix-lem-exchanges Step 5 strict-diagram refinement, M4 2026-10-25."
  },
  "mathlib_searches": [
   {
@@ -211,7 +168,18 @@
   "is": null
  },
  "merged_into": null,
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-21",
   "item": "lem-sf-cbc-compact-support-composition-limit",
@@ -249,11 +217,7 @@
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-diagram-site-realization",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lemma-weil-pbc-completed-pullback-reduction",
   "lem-weil-tower-category-levelwise-abelian",
   "lem-weil-pbc-ringed-projection-mate-exact"
  ],
@@ -321,5 +285,15 @@
   "group": "Q32",
   "result": "pass",
   "note": "Read item node, all 12 stmt_deps, fix-lem-exchanges Step 5 / Stacks 099M/099N/0941 ingredients, report, full module and the upstream AdicSites/SfCbcExtensionZeroCompletion/InverseImageData/CompleteCoefficientDatum declarations. Hypotheses match (CompleteCoefficientDatum + Finite of every A/I^(n+1), as in the extension-zero dep). Letters carry only scheme maps or open immersions; completed functors are C_U u^*, K-injective Ru_*, C_V J_j; strict functors are towerPull, towerPush, the termwise extension. One-letter q: tau∘R(eta)^-1, towerProjection (= homEquiv of the counit-tensor), normalized q^tens∘R(eta)^-1 (∃! choice). Recursive q/a satisfy the stipulated concatenation; concatenation and parenthesization equations hand-checked true; q/a isIso on complete K with no bounds; directImage clause equals rho·eta = Ru_*(eta) via the canonical directLimitIso. The ∃hunit conclusion (R(eta) invertible) is true (099M) and used only for the unique inverse. Edge cases (empty word, empty scheme, I=A, A=0) fine. Universes as in the landed deps (A : Type t, Scheme.{t}; model enlarges Homs only). One sorry on the theorem; all docstrings with source/blueprint; record statement verbatim (whitespace-normalized); declarations set equal; only lean changed. nt_compile of the snapshot: rc 0, 10.5 s/13.6 s, no errors or warnings. Notes: AdicSites reached through the dep's public imports; the delivery's own second reading is a self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f1c28",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T123324-L-1858071",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 2 new modules/nodes against the clone (statement byte-identical, plain-import swap only), new sorry hole smallSiteDirectImageReconstruction against completionMateComparison/Stacks 0B54-0B56 projection formula (true, not a duplicate), unit realized lists (empty for sk-prop-sf-cbc; ringed-tower node kept via the split node's proof_deps); sandbox compile with #print axioms (sorryAx only from upstream sorried statements) and all 7 direct importers compile"
  }
 }

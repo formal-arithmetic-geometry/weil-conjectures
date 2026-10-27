@@ -1,0 +1,129 @@
+{
+ "id": "lem-per-continuous-mixed-ordinary-balance",
+ "kind": "statement",
+ "title": "Integral and rational scalar balancing cube before completion",
+ "statement": "Let l be prime, E and F finite extensions of Q_l, i:E→F a Q_l-algebra embedding, g:X→Y between noetherian finite-dimensional l-invertible schemes, and aXE,aYE,aXF,aYF,agE,agF,bX,bY normalized continuous realization, pullback and scalar data [def-per-continuous-rational-realization-data]. Let m be an AmbientMixed comparison [lem-per-continuous-ambient-mixed-coherence]. Put eWE=aWE.integralIso.hom≫aWE.inclusion and similarly eWF, S_W=pbcEmbeddingAmbientTensor(i,W), B_W=pbcDerivedExtend(bW.coefficient), and P_E=derivedPull(g,agE.coefficient), P_F=derivedPull(g,agF.coefficient). Let c_W(K):extend(eWF)(S_W(K))≅B_W(extend(eWE)(K)) be the composite of the two specified pbcReductionNormalization isomorphisms, using bW.square, namely integralBalance. Let o:S_Y⋙actualDerivedPull_F≅actualDerivedPull_E⋙S_X be pbcScalarOrdinaryPullIso [lem-pbc-scalar-ambient-operation-comparisons]. For EVERY ambient integral derived object K over the completed E-coefficients on Y, without completeness, boundedness or constructibility assumptions, P_F(c_Y(K))≫m.ambient(extend(eYE)(K))≫B_X(agE.ambient(K)) = agF.ambient(S_Y(K))≫extend(eXF)(o(K))≫c_X(actualDerivedPull_E(K)). This is an equation before completion, independent of the raw functors and all realization comparisons.",
+ "stmt_deps": [
+  "def-per-continuous-rational-realization-data",
+  "lem-per-continuous-ambient-mixed-coherence",
+  "lem-pbc-scalar-ambient-operation-comparisons"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, p. 62, explicit ringed pullback formula; Stacks sites-cohomology.tex, lemma-derived-pullback-composition (Tag 0D6D). The generator calculation is the second step of lem-per-continuous-mixed-integral-component."
+ },
+ "proof": [
+  {
+   "text": "On ordinary modules, use the all-scalar section equations of Along.balance and AmbientMixed.ordinary and the normalized integral scalar/pullback comparison. The two scalar associators flatten a rational coefficient, an integral coefficient and a pulled generator to the product of their two images times the same pulled generator. The coefficient squares identify the products. Tensor balancing and sheafification extend this equality from generators to all sections.",
+   "uses": [
+    "def-per-continuous-rational-realization-data",
+    "lem-per-continuous-ambient-mixed-coherence",
+    "lem-pbc-scalar-ambient-operation-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve an arbitrary integral complex by a flat-term K-flat complex. Ringed pullback and extension of scalars preserve that resolving class. Apply the ordinary equality degreewise, and substitute Along.ambient_normalization, AmbientMixed.ambient_normalization, the integral derived scalar/pullback normalization, and the derived tensor associators. Cancel the computation counits, which are invertible on these representatives. Naturality across the resolving quasi-isomorphism gives the asserted equality for every ambient K.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pbc-scalar-ambient-operation-comparisons",
+    "def-per-continuous-rational-realization-data",
+    "lem-per-continuous-ambient-mixed-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-per-continuous-rational-realization-data",
+  "lem-per-continuous-ambient-mixed-coherence",
+  "lem-pbc-scalar-ambient-operation-comparisons",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, p. 62, explicit ringed pullback formula; Stacks sites-cohomology.tex, lemma-derived-pullback-composition (Tag 0D6D). The generator calculation is the second step of lem-per-continuous-mixed-integral-component."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension and completed pullback commute with integral realization and completion units",
+   "results": "8 hits on ordinary adic completion, including AdicCompletion.ofTensorProduct_naturality and IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion; none gives the normalized derived sheaf balancing cube.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "1 hit: CategoryTheory.Functor.leftDerivedUnique, Mathlib.CategoryTheory.Functor.Derived.LeftDerived. This gives generic uniqueness, not the normalized coefficient/pullback cube.",
+   "date": "2026-10-27",
+   "verdict": "Proof tool only."
+  },
+  {
+   "tool": "grep",
+   "query": "pbcScalarCompletedPullIso|AmbientMixed|pbcReductionNormalization",
+   "results": "0 Mathlib hits. Repository search finds the specified integral ordinary and completed comparisons in PbcScalarAmbientOperations and the supplied ambient record in ContinuousAmbientMixedCoherence. Neither states their ordinary cube with the integral-to-rational tensor associators.",
+   "date": "2026-10-27",
+   "verdict": "No existing exact statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousMixedIntegralComponent",
+  "date": "2026-10-27",
+  "group": "U5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph: cohomology sheaves of pullback are pullbacks, via the continuous rational realization and its normalized scheme/coefficient comparisons. Ordinary tensor-balancing step of the integral mixed component calculation.",
+   "via": [
+    "lem-per-continuous-mixed-integral-component",
+    "lem-per-rational-continuous-comparison-coherence",
+    "lem-per-continuous-rational-derived-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousMixedOrdinaryBalance",
+  "file": "lean/Sheaf/Paper/ContinuousMixedOrdinaryBalance.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.continuousMixedOrdinaryBalance",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ContinuousRational.FieldChange.integralBalance",
+   "AlgebraicGeometry.Scheme.ContinuousRational.continuousMixedOrdinaryBalance"
+  ],
+  "statement": "theorem continuousMixedOrdinaryBalance (i : E →ₐ[ℚ_[l]] F)\n    {X Y : Base.{u} l} (g : X.scheme ⟶ Y.scheme)\n    (aXE : At l E X) (aYE : At l E Y) (aXF : At l F X) (aYF : At l F Y)\n    (agE : Along l E g aXE aYE) (agF : Along l F g aXF aYF)\n    (bX : FieldChange l E F i X aXE aXF) (bY : FieldChange l E F i Y aYE aYF)\n    (m : AmbientMixed l E F i g aXE aYE aXF aYF agE agF bX bY)\n    (K : PbcCompletedDerived Y.scheme (pbcIntegralDatum l E)) :\n    (derivedPull g agF.coefficient).map\n        (bY.integralBalance l E F i Y aYE aYF K).hom ≫\n        m.ambient.hom.app ((pbcDerivedExtend (aYE.integralIso.hom ≫ aYE.inclusion)).obj K) ≫\n        (pbcDerivedExtend bX.coefficient).map (agE.ambient.hom.app K) =\n      agF.ambient.hom.app ((pbcEmbeddingAmbientTensor l E F i Y.scheme).obj K) ≫\n        (pbcDerivedExtend (aXF.integralIso.hom ≫ aXF.inclusion)).map\n          ((pbcScalarOrdinaryPullIso l E F i g).hom.app K) ≫\n        (bX.integralBalance l E F i X aXE aXF\n          ((pbcActualDerivedPull g (pbcIntegralDatum l E)).obj K)).hom",
+  "branch": "sheaf-dag",
+  "by": "U5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261027T112437-L-1583956",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261027T112437-L-1583956",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,283 @@
+{
+ "id": "lem-sf-derived-coefficient-sequence-realization",
+ "kind": "statement",
+ "title": "Derived scalar realization of sequences of varying coefficient modules",
+ "statement": "Let $\\mathcal T$ be a small site [def-weil-pbc-sites-and-cohomology], and let $R,B_n$ for $n\\ge1$ be sheaves of commutative rings on it, with maps $q_n:B_{n+1}\\to B_n$ and $\\pi_n:R\\to B_n$ satisfying $q_n\\pi_{n+1}=\\pi_n$. Use sheaves of modules [def-weil-sheaf-of-modules-category] and their ordinary unbounded derived categories [def-weil-abstract-derived-category], in a universe containing the site and the module categories. Restriction of scalars [def-pc-sheaf-restrict-scalars], applied termwise and localized at quasi-isomorphisms, gives functors $S_n:D(B_n)\\to D(B_{n+1})$ along $q_n$ and $Q_n:D(B_n)\\to D(R)$ along $\\pi_n$. There are canonical natural isomorphisms\n$$\\gamma_n:Q_{n+1}S_n\\xrightarrow{\\sim}Q_n,$$\ninduced on complexes by the identity on the underlying abelian sheaves: in each degree, for every site object $U$, $r\\in R(U)$ acts on both sides through $\\pi_n(r)=q_n(\\pi_{n+1}(r))$. For $m\\ge n$ the analogous comparison for $B_m\\to B_n$ is the iterated composite of the $\\gamma_i$ with the intervening restrictions; for $m=n$ it is the identity, and these comparisons satisfy composition through every intermediate level.\n\nLet $\\mathscr E$ have objects $M=(M_n,d_n)$ with $M_n\\in D(B_n)$ and $d_n:M_{n+1}\\to S_nM_n$. Its morphisms $a:M\\to N=(N_n,e_n)$ are families $a_n:M_n\\to N_n$ satisfying $S_n(a_n)d_n=e_na_{n+1}$, with componentwise identities and composition. There is a functor\n$$\\mathcal U:\\mathscr E\\longrightarrow\\operatorname{Fun}(\\mathbf Z_{\\ge1}^{\\mathrm{op}},D(R))$$\n[def-weil-inverse-system], whose levels are $Q_nM_n$, consecutive transitions are $t_n^M=\\gamma_n(M_n)\\circ Q_{n+1}(d_n)$, and whose value on $a$ has components $Q_n(a_n)$. These transitions determine every longer transition by composition and the length-zero transition by identity. Explicitly,\n$$Q_n(a_n)t_n^M=t_n^NQ_{n+1}(a_{n+1}).$$\nIf every $a_n$ is invertible, $\\mathcal U(a)$ is an isomorphism with inverse components $Q_n(a_n^{-1})$ satisfying\n$$t_n^M Q_{n+1}(a_{n+1}^{-1})=Q_n(a_n^{-1})t_n^N.$$\nIts two composites are the componentwise identities. Objects and arrows of $\\mathscr E$ are specified in the individual derived categories; no simultaneous complex representative, flatness of $q_n$, completeness, or boundedness is required.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0030 (definition-system-over-poset) for the inverse-sequence convention only. Agent-formulated extraction from lem-sf-compact-support-proper-image-tower, original proof Step 4: composition of scalar restrictions on objects and arrows, ordinary inverse-system assembly and its specified inverse; the tag does not assert this varying-category construction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-inverse-system"
+ ],
+ "proof": [
+  {
+   "text": "For each map of ring sheaves in the statement, restriction of scalars is additive and preserves finite limits and finite colimits by [lem-pur-sheaf-ring-coefficient-ordinary-adjunction]. The site is small in the specified module universe, so its sheafification hypotheses hold. Apply [lem-weil-pbc-exact-functor-derived-factorization] to each restriction functor: the termwise functor preserves quasi-isomorphisms and factors through the ordinary unbounded derived category. This gives the functors $S_n$ and $Q_n$ with their comparison isomorphisms to termwise restriction after cochain localization. The same applies to restriction along every composite $q_{n,m}=q_n\\circ\\cdots\\circ q_{m-1}:B_m\\to B_n$ ($q_{n,n}=1$).",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), with sites-modules.tex Tag 03DA (lemma-abelian) for exact scalar restriction"
+   }
+  },
+  {
+   "text": "Write $\\rho_f$ for ordinary restriction along a ring-sheaf map $f$. By [def-pc-sheaf-restrict-scalars], for a $B_n$-module sheaf $H$, the identity of its underlying abelian sheaf is an isomorphism $\\rho_{\\pi_{n+1}}\\rho_{q_n}H\\to\\rho_{\\pi_n}H$: at $U$, its source action is $r\\cdot h=q_n(\\pi_{n+1}(r))h=\\pi_n(r)h$, the target action. It commutes with restrictions in $U$ and with every module map because those underlying maps are unchanged. Applying these identity maps in every degree gives a natural isomorphism of cochain functors, since the differentials are also unchanged. More generally the same identity construction compares iterated restriction along any finite chain with restriction along its composite. Both ways of composing such comparisons are identities on each underlying group, so agree; the empty chain gives the identity.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CV (definition-sheaf-modules); agent-written sectionwise calculation from the definition of scalar restriction"
+   }
+  },
+  {
+   "text": "Use the factorization isomorphisms of Step 1 to regard $Q_{n+1}S_n$ and $Q_n$, after precomposition with the localization of $B_n$-complexes, as lifts of the two cochain functors of Step 2 followed by $R$-cochain localization. These cochain functors invert quasi-isomorphisms by Step 1. Clause (2) of [lem-weil-pbc-localization-universal-property] uniquely lifts their identity-on-underlying-sheaves natural isomorphism to $\\gamma_n:Q_{n+1}S_n\\xrightarrow{\\sim}Q_n$. Its normalization on localized complexes is precisely the Step 2 identity conjugated by the factorization isomorphisms, as specified by that clause. Apply the same construction to each finite chain to obtain the analogous derived composition comparisons. This constructs natural transformations on all derived arrows, rather than only on maps with a selected cochain representative. In Lean, comparison is the inverse exact-functor compositor followed by mapDerivedCategoryNatIso of the normalized ordinary comparison. The existing mapDerivedCategoryNatIso_fac and mapDerivedCategoryCompIso_hom_app_factors formulas prove the normalization after cancellation of the compositor.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG (lemma-properties-left-localization), with fully faithful precomposition on natural transformations as stated in the cited localization node"
+   }
+  },
+  {
+   "text": "For a finite chain, compare its direct restriction comparison with the iterated adjacent comparisons, inserting the termwise factorization isomorphisms. On precomposition with the cochain localization the inserted isomorphisms cancel in adjacent pairs, leaving in both cases the identity of the underlying complex from Step 2. Clause (3) of [lem-weil-pbc-localization-universal-property] therefore makes the two derived natural transformations equal. The same calculation for a chain cut at any intermediate index gives the claimed composition law, and for a chain of length zero gives the identity. This verifies coherence in each individual source derived category; it does not select representatives for a sequence of objects or arrows. The Lean proof reuses the already proved localization coherence API in WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate: preservation of composition and whiskering by mapDerivedCategoryNatIso, associativity of mapDerivedCategoryCompIso, and its identity law. Ordinary comparison inverses are identities on sections, so their two composites agree by sectionwise extensionality. These API identities transfer this equality to comparison_assoc. For finite_comparison, the zero case cancels the derived identity comparison; the successor case uses comparison_assoc, naturality of the adjacent comparison, and the induction hypothesis. projection_chain is a separate induction using the compatibility of the coefficient projections.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG (lemma-properties-left-localization); agent-written equality check using the natural-transformation uniqueness in the cited node"
+   }
+  },
+  {
+   "text": "The displayed objects and arrows of $\\mathscr E$ form a category: identity families satisfy the compatibility equation by functoriality of $S_n$, and if $a:M\\to N$ and $b:N\\to P$ satisfy it, then $S_n(b_na_n)d_n=S_n(b_n)e_na_{n+1}=f_nb_{n+1}a_{n+1}$, where $f_n$ is the transition of $P$. Associativity and units hold componentwise. For $M$, put $T_n=Q_nM_n$ and $t_n=\\gamma_n(M_n)Q_{n+1}(d_n)$. Define $T_{m,n}=t_n\\cdots t_{m-1}$ for $m>n$ and $T_{n,n}=1$. Associativity gives $T_{m,n}T_{k,m}=T_{k,n}$ for $k\\ge m\\ge n$, including equality cases. Thus these are inverse systems exactly as defined in [def-weil-inverse-system].",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0030 (definition-system-over-poset); componentwise category laws and finite composites"
+   }
+  },
+  {
+   "text": "For $a:M\\to N$, naturality of $\\gamma_n$ and then the defining equation of $a$ give\n$$Q_n(a_n)\\gamma_n(M_n)Q_{n+1}(d_n)=\\gamma_n(N_n)Q_{n+1}(S_n(a_n)d_n)=\\gamma_n(N_n)Q_{n+1}(e_na_{n+1})=t_n^NQ_{n+1}(a_{n+1}).$$\nFor a transition of length zero the compatibility is the identity equation. Inductively, compatibility for a composite of $r+1$ consecutive transitions follows by substituting the consecutive equation and then the length-$r$ equation. Hence the components $Q_n(a_n)$ form a morphism of the inverse systems by [def-weil-inverse-system]. Since each $Q_n$ preserves identity and composition, these assignments preserve componentwise identities and composition, and define $\\mathcal U$.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0030 (definition-system-over-poset); agent-written naturality calculation and induction on transition length"
+   }
+  },
+  {
+   "text": "Suppose every $a_n$ is invertible. Starting with the consecutive equation in Step 6, compose on the left with $Q_n(a_n^{-1})$ and on the right with $Q_{n+1}(a_{n+1}^{-1})$. The inverse identities and functoriality give\n$$t_n^M Q_{n+1}(a_{n+1}^{-1})=Q_n(a_n^{-1})t_n^N.$$\nThus the proposed inverse components are a morphism of inverse systems by [def-weil-inverse-system] (the longer equations follow by the same induction). Their composites with $\\mathcal U(a)$ have components $Q_n(a_n^{-1}a_n)=1$ and $Q_n(a_na_n^{-1})=1$, respectively. They are therefore the identity morphisms of the towers. Steps 5–7 took place entirely in the individual derived categories and used only functoriality, naturality and finite composition. Step 1 required exact scalar restriction, which holds for arbitrary ring-sheaf maps; no flatness, completeness or boundedness enters.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0030 (definition-system-over-poset); agent-written two-sided inverse calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-inverse-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/def-weil-integral-rational-qbar-compact-support.md",
+  "place": "Integral formula R lim Res_n Rf_{!,n}K_n, expanded into scalar-restriction composition, coherence, ordinary derived towers, morphisms and component inverses; Stacks Tags 03DA, 015F, 04VG and 0030 supply the general inputs and convention. Lean implementation by K7 uses the existing exact-functor localization coherence API for Step 4, and induction for finite chains; no new mathematical dependency or statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(restrictScalars.*[Cc]omp|[Cc]omp.*restrictScalars|mapDerivedCategory.*[Cc]omp|ofOpSequence|ofComponents)",
+   "results": "25 hits: Mathlib/CategoryTheory/PathCategory/Basic.lean, Mathlib/CategoryTheory/PathCategory/Basic.lean, Mathlib/CategoryTheory/PathCategory/Basic.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/PUnit.lean, Mathlib/CategoryTheory/PUnit.lean, Mathlib/CategoryTheory/PUnit.lean, Mathlib/CategoryTheory/PUnit.lean.  The hits provide ordinary module/sheaf scalar restriction, ring-module restriction composition, or fixed-category tower constructors. None states the derived ring-sheaf comparison with coherent coefficient projections and its functor on arbitrary sequences of derived objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for a compatible tower of sheaves of rings defines a functor from semilinear sequences in derived categories to inverse sequences in a fixed derived category",
+   "results": "8 hits: ModuleCat.restrictScalars, RestrictScalars, ModuleCat.RestrictScalars.obj', PresheafOfModules.restrictScalarsObj, PresheafOfModules.restrictScalars, LinearMap.restrictScalars, RingCat.moduleCatRestrictScalarsPseudofunctor, ModuleCat.RestrictScalars.map'.  The hits provide ordinary module/sheaf scalar restriction, ring-module restriction composition, or fixed-category tower constructors. None states the derived ring-sheaf comparison with coherent coefficient projections and its functor on arbitrary sequences of derived objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"comp\"",
+   "results": "12 hits: LinearMap.restrictScalars_comp, Submodule.isCompl_restrictScalars_iff, Algebra.TensorProduct.map_restrictScalars_comp_includeRight, AlgCat.restrictScalarsComp', AlgCat.restrictScalarsComp'_hom_app_hom_apply, AlgCat.restrictScalarsComp'_inv_app_hom_apply, ModuleCat.restrictScalarsComp, ModuleCat.restrictScalarsComp'.  The hits provide ordinary module/sheaf scalar restriction, ring-module restriction composition, or fixed-category tower constructors. None states the derived ring-sheaf comparison with coherent coefficient projections and its functor on arbitrary sequences of derived objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tower of derived modules with varying sheaves of coefficient rings is realized by restriction of scalars as an inverse sequence over one sheaf of rings, and compatible component isomorphisms have componentwise inverses",
+   "results": "8 hits: SheafOfModules.restrictScalars, SheafOfModules.restrictScalars_obj_val, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.instAdditiveRestrictScalars, ModuleCat.restrictScalarsComp'_inv_app, SheafOfModules.restrictScalars_map_val, PresheafOfModules.restrictScalarsCompToPresheaf, SheafOfModules.ιFree_mapFree_inv_assoc.  The hits provide ordinary module/sheaf scalar restriction, ring-module restriction composition, or fixed-category tower constructors. None states the derived ring-sheaf comparison with coherent coefficient projections and its functor on arbitrary sequences of derived objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composing termwise derived restriction of scalars along compatible coefficient projections gives ordinary inverse towers; a levelwise isomorphism respecting semilinear transitions induces a tower isomorphism",
+   "results": "8 hits: ModuleCat.restrictScalarsComp'_inv_app, ModuleCat.restrictScalarsComp', ModuleCat.restrictScalarsComp'App_inv_naturality, ModuleCat.restrictScalarsComp'App_inv_apply, ModuleCat.restrictScalarsComp, ModuleCat.restrictScalarsComp'App, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc, ModuleCat.restrictScalarsComp'_hom_app.  The hits provide ordinary module/sheaf scalar restriction, ring-module restriction composition, or fixed-category tower constructors. None states the derived ring-sheaf comparison with coherent coefficient projections and its functor on arbitrary sequences of derived objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def restrictScalars|restrictScalarsComp|restrictScalars.*[Ee]xact",
+   "results": "3 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean.  The hits provide ordinary module/sheaf scalar restriction, ring-module restriction composition, or fixed-category tower constructors. None states the derived ring-sheaf comparison with coherent coefficient projections and its functor on arbitrary sequences of derived objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalarsComp|ofOpSequence|mapDerivedCategoryNatIso",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/Condensed/Light/Epi.lean, Mathlib/Condensed/Light/Epi.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean. Ordinary scalar-restriction compositors or fixed-category tower constructors are partial inputs, not the full varying-ring derived construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars on derived categories of sheaves of modules along compatible ring projections gives a functor to inverse sequences",
+   "results": "8 hits: RestrictScalars, ModuleCat.RestrictScalars.obj', RingCat.moduleCatRestrictScalarsPseudofunctor, ModuleCat.restrictScalars, SheafOfModules.restrictScalars, PresheafOfModules.restrictScalars, PresheafOfModules.restrictScalarsObj, ModuleCat.RestrictScalars.map'. Ordinary scalar-restriction compositors or fixed-category tower constructors are partial inputs, not the full varying-ring derived construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"comp\"",
+   "results": "12 hits: LinearMap.restrictScalars_comp, Submodule.isCompl_restrictScalars_iff, Algebra.TensorProduct.map_restrictScalars_comp_includeRight, AlgCat.restrictScalarsComp', AlgCat.restrictScalarsComp'_hom_app_hom_apply, AlgCat.restrictScalarsComp'_inv_app_hom_apply, ModuleCat.restrictScalarsComp, ModuleCat.restrictScalarsComp'. Ordinary scalar-restriction compositors or fixed-category tower constructors are partial inputs, not the full varying-ring derived construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for a tower of sheaves of rings induces coherent functors on unbounded derived categories and realizes compatible derived module sequences as inverse systems",
+   "results": "8 hits: CondensedMod.ofSheafProfinite, CondensedMod, CondensedMod.ofSheafCompHaus, LightCondMod.ofSheafLightProfinite, localCohomology.diagram, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, instAbelianCondensedMod, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf. The returned condensed-module and local-cohomology declarations do not state this varying-ring derived tower realization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition comparison for exact functors localized at quasi-isomorphisms, with naturality producing maps of inverse sequences and componentwise inverse isomorphisms",
+   "results": "8 hits: CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh. Exact-functor localization factors are relevant inputs, already covered by the existing factorization node, but do not assert the varying-ring tower functor and its comparison coherence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-compact-support-proper-image-tower",
+  "date": "2026-10-22",
+  "group": "Q20"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "original proof Step 4: composition of scalar restrictions on objects and arrows, ordinary inverse-system assembly and its specified inverse",
+   "via": [
+    "lem-sf-compact-support-proper-image-tower",
+    "lem-sf-integral-compact-support-constructible"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-derived-coefficient-sequence-realization",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused exact sheaf scalar restriction, exact-functor derived factorization and the natural-transformation localization universal property. Wrote the sectionwise scalar identity, all derived coherence comparisons, the category and tower construction, the explicit naturality equation and the inverse equation. No new nodes are needed.",
+  "blueprint": "Ancestor integral compact-support formula, main-20261015 order 1849: the Res_n objects form a tower. This item realizes original proper-image-tower Step 4, including scalar composition on objects and arrows and its specified componentwise inverse."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-d2745b115",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-d2745b115 (reviewer sub-agent of L); spot-checked: Read in full the item's 7 steps and the statement of each cited node. The statement is unchanged and there are no new nodes. No re-split note exists for this item, and no SGA is cited. Step 1 holds: lem-pur-sheaf-ring-coefficient-ordinary-adjunction (same unit) gives exactness of restriction for any map of ring sheaves, and the universe hypothesis of def-weil-sheaf-of-modules-category is met by the item's universe; this matches Stacks 03DA at sites-modules l.1337. lem-weil-pbc-exact-functor-derived-factorization gives S_n, Q_n and phi (Stacks 015F(4)). Step 2 is a correct sectionwise identity: q_n pi_{n+1} = pi_n. Step 3: the hypotheses of clause (2) of lem-weil-pbc-localization-universal-property hold, because phi_1 is a composite of the factorization isomorphisms, so gamma_n is natural on all derived arrows. Step 4: after evaluation at L(K) the factorization isomorphisms cancel, clause (3) gives equality, and this covers intermediate cuts and length 0. Steps 5-7: I checked the compatibility of composites in E, the source and target of t_n, the naturality chain, the induction over longer transitions and both inverse composites. Edge cases tested: identity ring maps, n=m, the non-flat maps Z/4->Z/2 and Z->Z/2, unbounded complexes; none of them breaks a step. There is no cycle (closure of 123 nodes). Possible duplicates def-coef-system-derived-transition, def-coef-semilinear-system-models, lem-sf-semilinear-scalar-ordinary-comparison and lem-pur-coefficient-system-ordinary-images all concern strict or ordinary systems, not sequences of objects in separate derived categories. One cosmetic point: step 2 cites the section tag 03CV, while the definition itself is 03CW."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCoefficientSequenceRealization",
+  "declaration": "CategoryTheory.DerivedCoefficientSequence.derivedCoefficientSequenceRealization",
+  "declarations": [
+   "CategoryTheory.DerivedCoefficientSequence.Modules",
+   "CategoryTheory.DerivedCoefficientSequence.restriction",
+   "CategoryTheory.DerivedCoefficientSequence.restrictionFiniteLimits",
+   "CategoryTheory.DerivedCoefficientSequence.restrictionFiniteColimits",
+   "CategoryTheory.DerivedCoefficientSequence.existsUnique_ordinaryComparison",
+   "CategoryTheory.DerivedCoefficientSequence.ordinaryComparison",
+   "CategoryTheory.DerivedCoefficientSequence.derivedRestriction",
+   "CategoryTheory.DerivedCoefficientSequence.comparison",
+   "CategoryTheory.DerivedCoefficientSequence.comparison_localized",
+   "CategoryTheory.DerivedCoefficientSequence.comparison_assoc",
+   "CategoryTheory.DerivedCoefficientSequence.derivedIdentity",
+   "CategoryTheory.DerivedCoefficientSequence.Sequence",
+   "CategoryTheory.DerivedCoefficientSequence.Sequence.Hom",
+   "CategoryTheory.DerivedCoefficientSequence.sequenceCategory",
+   "CategoryTheory.DerivedCoefficientSequence.iteratedRestriction",
+   "CategoryTheory.DerivedCoefficientSequence.iteratedComparison",
+   "CategoryTheory.DerivedCoefficientSequence.step",
+   "CategoryTheory.DerivedCoefficientSequence.tower",
+   "CategoryTheory.DerivedCoefficientSequence.step_naturality",
+   "CategoryTheory.DerivedCoefficientSequence.towerMap",
+   "CategoryTheory.DerivedCoefficientSequence.realization",
+   "CategoryTheory.DerivedCoefficientSequence.inverse_step",
+   "CategoryTheory.DerivedCoefficientSequence.realization_isIso",
+   "CategoryTheory.DerivedCoefficientSequence.derivedCoefficientSequenceRealization",
+   "CategoryTheory.DerivedCoefficientSequence.chainMap",
+   "CategoryTheory.DerivedCoefficientSequence.projection_chain",
+   "CategoryTheory.DerivedCoefficientSequence.chainComparison",
+   "CategoryTheory.DerivedCoefficientSequence.finite_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedCoefficientSequenceRealization.lean",
+  "statement": "def derivedCoefficientSequenceRealization : Sequence (fun n ↦ DerivedCategory (Modules (B n))) (fun n ↦ derivedRestriction (q n)) ⥤ (ℕᵒᵖ ⥤ DerivedCategory (Modules R))",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f7479ddc",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Node diff vs live: only lean added; statement verbatim. Clauses match: R,B,q,π,hπ (ℕ index = level n+1 per ofOpSequence convention); Modules=ringedSiteModules.{r}, restriction=SheafOfModules.restrictScalars, exactness from proved Prop theorem; γ_n=comparison pinned by ∃! identity-on-sections ordinaryComparison, comparison_localized follows from mapDerivedCategoryNatIso_fac/CompIso_fac; finite_comparison (incl. k=0) + comparison_assoc give m≥n coherence; Sequence/Hom/step/tower/towerMap/realization match t_n and Q_n(a_n); step_naturality and inverse_step are the displayed equations; realization_isIso pins inverse components and both composites. No extra hypotheses (site universes free, sheafify/HasDerivedCategory standard), no hollow defs, docstrings ok, report sections present. Advisories: unused Localization.Predicate import; GrothendieckTopology generalizes IsSiteForCoverings. No compile needed (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261022T145621-L-2027289",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

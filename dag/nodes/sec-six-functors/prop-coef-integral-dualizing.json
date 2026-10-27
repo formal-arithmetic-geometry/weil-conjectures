@@ -33,221 +33,48 @@
  ],
  "proof": [
   {
-   "text": "For $m\\ge n$ take the isomorphism $u_{m,n}:\\omega_{X,m}\\otimes^L_{A_m}A_n\\to\\omega_{X,n}$ of [lem-coef-finite-dualizing], transported to the pro-etale site as its statement specifies. Define $\\tau_{m,n}:\\omega_{X,m}\\to\\operatorname{Res}_{m,n}\\omega_{X,n}$ as its adjunct under tensor-restriction. The unit and cocycle of that lemma give the unit and cocycle of these transitions. To supply the strict-tower datum required by [def-coef-normalized-dvr-tower], choose a complex $Q_1$ representing $\\omega_{X,1}$. Given $Q_n$, the prescribed morphism $\\omega_{X,n+1}\\to\\operatorname{Res}_{n+1,n}Q_n$ is represented by a roof $C_{n+1}\\leftarrow Q_{n+1}\\to\\operatorname{Res}_{n+1,n}Q_n$ whose left arrow is a quasi-isomorphism, by [lem-pc-quasi-isomorphisms-multiplicative-system]. Keep this $Q_{n+1}$ and its right chain map, and define all longer chain transitions by composition. After restriction to $R_X$ these form a strict tower complex realizing every $\\tau_{m,n}$. Thus the dualizing objects satisfy exactly the normalization data, not merely an uncategorified list of finite objects.",
+   "text": "Construct a strict normalized finite-dualizing tower T, its isomorphisms e_n and its published-limit Roos triangle using lem-coef-integral-dualizing-roos-model. Set M equal to the value of integralDualizingLimit on T.",
    "uses": [
-    "lem-coef-finite-dualizing",
-    "def-coef-normalized-dvr-tower",
-    "lem-pc-quasi-isomorphisms-multiplicative-system"
+    "lem-coef-integral-dualizing-roos-model"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof, paragraph 1: coherent finite comparisons make a normalized tower; strictification expanded"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply the total derived inverse-limit functor of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] to this strict tower and call its value $\\omega_{X,R}$. Apply [lem-coef-normalized-dvr-effectivity] to the normalized tower just constructed. Its canonical counit comparisons are the asserted coherent reduction isomorphisms, and its last sentence gives derived completeness. Functorial K-injective tower resolutions fix the limit comparisons; no canonical cone is inferred from the bare triangulated definition of a derived limit.",
+   "text": "Apply normalizedDVRTower_effectivity to the supplied Roos maps. It gives invertible canonical reduction counits, their coherence for every quotient, and legacy derived completeness. The existing sfDerivedComplete_iff_legacy transports completeness to IsSfDerivedComplete.",
    "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-coef-normalized-dvr-effectivity"
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-sf-derived-complete-legacy-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof, paragraph 1: effectivity, displayed reductions and completeness"
-   }
+   "elementary": true
   },
   {
-   "text": "The constant etale input $(A_n)_X$ is locally constant with finite stalks on the single stratum $X$, hence is bounded constructible in degree zero by [def-weil-pbc-constructible-complexes]. It is flat, with Tor interval $[0,0]$, because tensoring with the coefficient unit is the identity. Its pro-etale counterpart is constructible by [lem-weil-constant-coefficient-objects-constructible]. Apply [lem-weil-verdier-preservation-strata] to it: $R\\mathcal Hom_{A_n}((A_n)_X,\\omega_{X,n,\\mathrm{et}})=\\omega_{X,n,\\mathrm{et}}$ lies in $D^b_{ctf}$ with Tor interval $[-2d,0]$, independent of $n$. The equality follows by evaluation at $1$ in the coefficient unit. The dualizing comparison and transport of finite duality in [lem-weil-finite-duality-site-comparison] give the same assertions on the pro-etale site. Through step 2 these are precisely the reductions of $\\omega_{X,R}$. Taking the test module to be $(A_n)_X$ in the Tor condition also bounds their cohomological supports in $[-2d,0]$. Together with completeness, this checks every condition in [def-weil-derived-complete-integral-detailed], and proves membership and the asserted uniform reduction Tor bound.",
+   "text": "For each n compose the counit isomorphism M tensor^L A_n ≅ T.M_n with e_n. Apply lem-coef-integral-dualizing-finite-bounds. These give the single support interval [-2d,0] for every constructible reduction, proving sfIntegralConstructible M, and the asserted uniform reduction Tor interval.",
    "uses": [
-    "lem-weil-verdier-preservation-strata",
-    "lem-weil-finite-duality-site-comparison",
-    "def-weil-derived-complete-integral-detailed",
-    "lem-weil-constant-coefficient-objects-constructible",
-    "def-weil-pbc-constructible-complexes"
+    "lem-coef-integral-dualizing-finite-bounds",
+    "def-weil-derived-complete-integral-detailed"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof, paragraph 1: constant-input preservation and constructibility"
-   }
+   "elementary": true
   },
   {
-   "text": "Fix $K\\in D^b_c(X,R)$. Choose $a\\le b$ bounding the cohomology of $K_1$. By [lem-coef-integral-residue-tor] all $K_n$ have Tor amplitude in this same $[a,b]$. Hence [lem-coef-integral-compact-support] applies and gives $N=Ra_!K\\in D^b_c(s,R)$ with $N\\otimes^L_{R_s}(A_n)_s\\cong Ra_{!,n}K_n$. Put $C=\\Gamma(s,N)$ and $C_n=\\Gamma(s,Ra_{!,n}K_n)$. Applying [lem-pod-point-sections-derived-reduction] gives canonical isomorphisms $C\\otimes_R^LA_n\\cong C_n$. This use of compact-support reduction is justified for every bounded constructible integral $K$, rather than silently assuming finite Tor amplitude in addition.",
+   "text": "Bundle M with this membership proof, and apply lem-coef-integral-dualizing-mapping-limit with the same T, e and coherent presentation. Return the pointwise isomorphisms e_n, their given transition equation, the identity comparison of M to the published limit, the presentation, the Tor bounds and both mapping adjunctions.",
    "uses": [
-    "lem-coef-integral-residue-tor",
-    "lem-coef-integral-compact-support",
-    "lem-pod-point-sections-derived-reduction"
+    "lem-coef-integral-dualizing-mapping-limit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof, paragraph 2 (agent expansion of the imported argument)"
-   }
-  },
-  {
-   "text": "We will use the following elementary mapping-complex form of scalar adjunction. For a map $u:\\mathcal O\\to\\mathcal S$ of ring sheaves over $R$, ordinary tensor-restriction adjunction is $f\\mapsto(x\\otimes s\\mapsto s f(x))$, inverse $g\\mapsto(x\\mapsto g(x\\otimes1))$. Restriction leaves underlying abelian sheaves, kernels and cokernels unchanged by [def-pc-sheaf-restrict-scalars], so it is exact, and derived tensor is everywhere defined by [lem-pur-derived-change-of-rings], so [lem-pc-pre-derived-adjoint-functors-general] gives $-\\otimes^L_{\\mathcal O}\\mathcal S\\dashv\\operatorname{Res}_u$. The restriction-and-unit map on global derived Hom complexes (formed on the functorial resolutions of [def-pur-derived-internal-hom]) induces this bijection on every $H^i$, by [lem-pur-rhom-global-sections] applied after shifting the target. It is therefore an isomorphism in $D(R)$:\n$$\\mathbf R\\operatorname{Hom}_{\\mathcal S}(K\\otimes^L_{\\mathcal O}\\mathcal S,M)\\xrightarrow{\\sim}\\mathbf R\\operatorname{Hom}_{\\mathcal O}(K,\\operatorname{Res}_uM).$$\nIts compatibility with composition and evaluation follows from the unit formula: successive units send $x$ to $(x\\otimes1)\\otimes1$, identified with $x\\otimes1$, and successive adjoint evaluations send $(x\\otimes s)\\otimes v$ to $v s f(x)$. These identities hold on the tensor/Hom complexes before localization, hence on the derived comparisons. The assertion includes ordinary rings and modules by taking the one-object trivial site.",
-   "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "def-pur-derived-internal-hom",
-    "lem-pur-rhom-global-sections"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint), derived scalar change in Section 06YV, and Tag 08JA (lemma-section-RHom-over-U); derived.tex Tag 0DVC (lemma-pre-derived-adjoint-functors). Agent-written enrichment by the specified unit map and shifted Hom groups."
-   }
-  },
-  {
-   "text": "Here is also the elementary limit calculation needed below, for a small ringed site $(\\mathcal C,\\mathcal O)$ with final object $U$, an $R$-algebra sheaf $\\mathcal O$, a fixed $K\\in D(\\mathcal O)$ and a strict derived tower $L_\\bullet$. Write $H(K,-)=R\\mathcal Hom_{\\mathcal O}(K,-)$. The tensor-Hom identity of [lem-weil-pbc-ringed-internal-hom-exact-restriction], followed by [lem-pur-rhom-global-sections], gives, for every $V\\in D(\\mathcal O)$ and derived product $P=\\prod_n^D L_n$,\n$$\\operatorname{Hom}(V,H(K,P))\\cong\\operatorname{Hom}(V\\otimes^L K,P)\\cong\\prod_n\\operatorname{Hom}(V\\otimes^L K,L_n)\\cong\\operatorname{Hom}(V,\\prod_n^D H(K,L_n)).$$\nThus the projection-defined map $H(K,P)\\to\\prod_n^D H(K,L_n)$ is an isomorphism. The same internal-Hom node gives exactness and shifts; [lem-kun-site-rgamma-derived-limit], with $U$ final, says derived sections preserve these products and Roos triangles. These comparisons retain the $R$-actions: their underlying abelian-group comparisons are isomorphisms, so their cones have zero cohomology as $R$-modules. Consequently applying $F=R\\Gamma(U,H(K,-))$ to the natural Roos triangle of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] gives the Roos triangle of the strict mapping tower, since its product comparison intertwines $F(1-s)$ and $1-s'$. On the fixed functorial resolutions of [def-pur-derived-internal-hom], the mapping-tower chain maps and their cone maps specify this comparison; the product isomorphisms make its third map an isomorphism. Hence\n$$\\mathbf R\\operatorname{Hom}_{\\mathcal O}(K,R\\lim L_\\bullet)\\cong R\\lim_n\\mathbf R\\operatorname{Hom}_{\\mathcal O}(K,L_n).$$\nAll maps used are the projection and Hom-complex maps, so this comparison is natural in the strict derived tower and contravariantly in $K$. Products are derived products throughout.",
-   "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pur-rhom-global-sections",
-    "lem-kun-site-rgamma-derived-limit",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9 (lemma-internal-hom), 08JA (lemma-section-RHom-over-U), 0941 (lemma-derived-limit-is-ok), and 0D6K (lemma-RGamma-commutes-with-Rlim); agent expansion for the fixed tower."
-   }
-  },
-  {
-   "text": "At finite level, the bounded-below etale comparison, ordinary exceptional adjunction, and point-fibre identification give the natural mapping-complex isomorphism $\\gamma_n$ of [lem-coef-finite-mapping-adjunction].",
-   "uses": [
-    "lem-coef-finite-mapping-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof, paragraph 2: finite mapping-complex adjunction"
-   }
-  },
-  {
-   "text": "The counit-defined dualizing comparison and compact-support coefficient comparison make the finite maps $\\gamma_n$ compatible with every quotient transition, naturally in $K$, by [lem-coef-finite-adjunction-transition].",
-   "uses": [
-    "lem-coef-finite-adjunction-transition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof, paragraph 2: finite counit transition compatibility"
-   }
-  },
-  {
-   "text": "The dualizing compact-support tower $B_\\omega$ has the compatible finite counits $\\epsilon_n$ supplied by [lem-coef-tower-trace-rectification]. Apply [lem-weil-pbc-sequential-tower-evaluation-full] on the one-object trivial site with ring $R$, source $B_\\omega$ and target the quotient tower $A_\\bullet$. Fix one resulting trace $t:B_\\omega\\to A_\\bullet$. Its choice involves only the dualizing tower and its counits, so is independent of $K$; no uniqueness from its evaluations is needed.",
-   "uses": [
-    "lem-coef-tower-trace-rectification",
-    "lem-weil-pbc-sequential-tower-evaluation-full"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof, paragraph 2: fixed trace and homotopy rectification"
-   }
-  },
-  {
-   "text": "The ringed tower-site scalar adjunction, projection morphisms, and evaluation maps assemble into the natural tower pairing $\\beta_K$ of [lem-coef-tower-evaluation-pairing].",
-   "uses": [
-    "lem-coef-tower-evaluation-pairing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof, paragraph 2: natural tower evaluation/projection pairing"
-   }
-  },
-  {
-   "text": "The compact-support limit gives the natural coaugmentation in [lem-coef-tower-coaugmentation]; composing it with $\\beta_K$ and the fixed trace and currying yields the natural derived-tower isomorphism $\\Gamma_K$ of [lem-coef-tower-natural-currying].",
-   "uses": [
-    "lem-coef-tower-coaugmentation",
-    "lem-coef-tower-natural-currying"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof, paragraph 2: compact-support limit, currying and levelwise isomorphism"
-   }
-  },
-  {
-   "text": "Apply step 6 to the particular strict dualizing tower of steps 1--2 and its mapping-tower functor $\\mathsf H(K)$ of step 10. This gives\n$$\\mathbf R\\operatorname{Hom}_X(K,\\omega_{X,R})\\cong R\\lim\\mathsf H(K).$$\nHere $R\\lim$ is the total derived inverse-limit functor on $D(\\operatorname{Tow}(\\operatorname{Mod}(R)))$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The construction of $\\mathsf H(K)$ uses a K-injective tower resolution of this very dualizing tower, so the projection maps are those of step 6. In particular no independent strict realization of the finite mapping complexes is substituted. Step 5 identifies its evaluations with the left finite mapping complexes used to recognize $\\Gamma_K$ in step 11.",
-   "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof, paragraph 2 (agent expansion of the imported argument)"
-   }
-  },
-  {
-   "text": "The right tower is the specific object $\\mathsf J(C)=\\mathbf R\\operatorname{Hom}_R(C,A_\\bullet)$ constructed in step 11, rather than a new realization of its evaluated finite Hom complexes. By [lem-weil-l-adic-extension-integers-dvr], $R$ is a DVR with finite residue field and $0<|\\varpi|_E<1$. By [lem-weil-l-adic-extension-complete], $E$ is complete for its extending absolute value. If $(\\bar x_n)_n$ is a compatible system in $A_n$, choose representatives $x_n\\in R$; for $m\\ge n$ one has $|x_m-x_n|_E\\le|\\varpi|_E^n$. Thus $(x_n)$ is Cauchy, its limit $x$ lies in the closed unit ball $R$, and $x-x_n\\in\\varpi^n R$ by the same norm bound. Uniqueness follows from $|x-y|_E\\le|\\varpi|_E^n$ for every $n$. This proves $R\\cong\\varprojlim_n A_n$. The quotient transitions are surjective by [lem-weil-valued-dvr-finite-quotients]. In the category of modules the two-term product map $1-s$ is surjective (for a prescribed $(b_n)$ choose $x_1=0$ and lift $x_n-b_n$ to $x_{n+1}$ along $A_{n+1}\\twoheadrightarrow A_n$; then $x_n-q_{n+1,n}(x_{n+1})=b_n$), with kernel $R$, so its Roos complex is quasi-isomorphic to $R[0]$. Consequently $R\\lim_n A_n\\cong R$. Applying step 6 on the one-object trivial site, with $\\mathcal O=R$, first argument $C$, and tower $L_n=A_n$ with its quotient transitions, gives\n$$R\\lim\\mathsf J(C)\\cong R\\lim_n\\mathbf R\\operatorname{Hom}_R(C,A_n)\\cong\\mathbf R\\operatorname{Hom}_R(C,R).$$\nNo inverse-limit/cohomology interchange occurs.",
-   "uses": [
-    "lem-weil-l-adic-extension-complete",
-    "lem-weil-valued-dvr-finite-quotients",
-    "lem-weil-l-adic-extension-integers-dvr"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof, paragraph 2 (agent expansion of the imported argument)"
-   }
-  },
-  {
-   "text": "The tower morphism $\\Gamma_K:\\mathsf H(K)\\to\\mathsf J(C)$ constructed in step 11 is an isomorphism in $D(\\operatorname{Tow}(\\operatorname{Mod}(R)))$. Apply the exact functor $R\\lim:D(\\operatorname{Tow}(\\operatorname{Mod}(R)))\\to D(R)$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. It gives a canonical isomorphism $R\\lim\\mathsf H(K)\\xrightarrow{\\sim}R\\lim\\mathsf J(C)$, which is the derived-limit image of the tower morphism rather than an inference from unrelated levelwise isomorphisms. Compose this map with the identifications of steps 12 and 13 to obtain the asserted natural isomorphism of mapping complexes. Taking $H^0$ uses [lem-pur-rhom-global-sections] on $X$. At the coefficient point, $Ra_!K$ and $R_s$ are constructible (the latter by [lem-weil-constant-coefficient-objects-constructible]); [lem-weil-point-fibre-equivalence] identifies their Hom group with $\\operatorname{Hom}_{D(R)}(C,R)$. Hence $\\omega_{X,R}$ represents the right-adjoint value at $R_s$, and representing objects with their natural bijections are unique up to the unique isomorphism preserving those bijections. This is the canonical meaning of the object and adjunction claimed here; arbitrary choices of unrelated Roos cones have not been declared canonical. Explicitly, the two representation bijections send the identity of each representing object to maps in the two directions; naturality says their composites correspond to the identities, so the bijections force both composites to be identities.",
-   "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-pur-rhom-global-sections",
-    "lem-weil-constant-coefficient-objects-constructible",
-    "lem-weil-point-fibre-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof, paragraph 2 (agent expansion of the imported argument)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-coef-normalized-dvr-tower",
-  "def-pc-sheaf-restrict-scalars",
-  "def-pur-derived-internal-hom",
   "def-weil-derived-complete-integral-detailed",
-  "def-weil-pbc-constructible-complexes",
-  "lem-coef-finite-adjunction-transition",
-  "lem-coef-finite-dualizing",
-  "lem-coef-finite-mapping-adjunction",
-  "lem-coef-integral-compact-support",
-  "lem-coef-integral-residue-tor",
+  "lem-coef-integral-dualizing-finite-bounds",
+  "lem-coef-integral-dualizing-mapping-limit",
+  "lem-coef-integral-dualizing-roos-model",
   "lem-coef-normalized-dvr-effectivity",
-  "lem-coef-tower-coaugmentation",
-  "lem-coef-tower-evaluation-pairing",
-  "lem-coef-tower-natural-currying",
-  "lem-coef-tower-trace-rectification",
-  "lem-kun-site-rgamma-derived-limit",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-pc-quasi-isomorphisms-multiplicative-system",
-  "lem-pod-point-sections-derived-reduction",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-rhom-global-sections",
-  "lem-weil-constant-coefficient-objects-constructible",
-  "lem-weil-finite-duality-site-comparison",
-  "lem-weil-l-adic-extension-complete",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-sequential-tower-evaluation-full",
-  "lem-weil-point-fibre-equivalence",
-  "lem-weil-valued-dvr-finite-quotients",
-  "lem-weil-verdier-preservation-strata"
+  "lem-sf-derived-complete-legacy-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-  "place": "Proof paragraphs 1--2, expanded along the same finite-adjunction and derived-limit route. The same proof is present in the current blueprint at literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md (the accompanying .md contains the statement). Supporting local Stacks sites-cohomology.tex: Tags 0940 (section-derived-limits), 0941 (lemma-derived-limit-is-ok), 0A07 (lemma-Rf-commutes-with-Rlim), 08J9 (lemma-internal-hom), 08JA (lemma-section-RHom-over-U), and 0B56 (equation-projection-formula-map)."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "First paragraph: finite reductions and uniform interval; second paragraph: retained inverse-limit mapping adjunction. Z6 formal assembly from three strict subarguments and the existing normalized effectivity/completeness comparisons."
  },
  "mathlib_searches": [
   {
@@ -305,7 +132,18 @@
   "latex:proposition"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
@@ -526,18 +364,6 @@
   "module": "Sheaf.SixFunctors.IntegralDualizing",
   "declaration": "WeilConjectures.prop_coef_integral_dualizing",
   "declarations": [
-   "WeilConjectures.integralDualizingRingSheafify",
-   "WeilConjectures.integralDualizingCoefficients",
-   "WeilConjectures.integralDualizingScalar",
-   "WeilConjectures.integralDualizingSections",
-   "WeilConjectures.integralDualizingSections_additive",
-   "WeilConjectures.integralDualizingDerivedSections",
-   "WeilConjectures.integralDualizingGlobalHom",
-   "WeilConjectures.integralDualizingLimit",
-   "WeilConjectures.integralDualizingCompactification",
-   "WeilConjectures.integralDualizingCompactTower",
-   "WeilConjectures.integralDualizingCompactSections",
-   "WeilConjectures.IntegralDualizingLimitPresentation",
    "WeilConjectures.prop_coef_integral_dualizing"
   ],
   "file": "lean/Sheaf/SixFunctors/IntegralDualizing.lean",
@@ -555,5 +381,46 @@
   "group": "Q117",
   "result": "pass",
   "note": "All statement clauses, dependencies, universes, edge cases, route-pivot constraints, docstrings, report sections, and compiler evidence checked; no errors found."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $R=\\mathcal O_E$ and $A_n=A_{E,n}$. Write $a:X\\to\\operatorname{Spec}k$,\n$\\dim X\\leq d$, $\\omega_{X,n}=Ra_n^!A_n$, and\n\n$$\n\\omega_{X,R}=Ra^!_R R\\in D^b_c(X,R),\n$$\n\nthe value at $R$ of the right adjoint of $Ra_!$ on $D^b_c(-,R)$\n([sk-thm-existence], [sk-prop-sf-existence]). Then\n\n$$\n\\omega_{X,R}\\otimes_R^L A_n\\cong\\omega_{X,n},\n\\qquad\n\\omega_{X,R}\\cong R\\varprojlim_n\\omega_{X,n},\n$$\n\nand $\\omega_{X,R}$ has uniform reduction Tor interval $[-2d,0]$. For\n$K\\in D^b_c(X,R)$ there is a natural isomorphism of derived mapping complexes\n\n$$\nR\\operatorname{Hom}_X(K,\\omega_{X,R})\n\\cong R\\operatorname{Hom}_R(Ra_!K,R).\n$$",
+  "proof": [
+   {
+    "text": "By [sk-thm-existence], (3) and (4), $Ra^!_R$ exists and sends\n$D^b_c(\\operatorname{Spec}k,R)$ into $D^b_c(X,R)$, so $\\omega_{X,R}\\in D^b_c(X,R)$.\nThe coefficient comparison for the exceptional inverse image along\n$R\\to A_n$ is an isomorphism $\\omega_{X,R}\\otimes^{\\mathbf L}_RA_n\\cong\\omega_{X,n}$\n([sk-prop-scalar-six]), compatible with the reductions $A_n\\to A_m$ and with the\ncomparisons of [lem-coef-finite-dualizing]. Objects of $D^b_c(X,R)$ are\nderived complete ([def-pe-derived-complete], [sk-prop-integral-criterion]), so\n$\\omega_{X,R}\\cong R\\varprojlim_n\\omega_{X,R}\\otimes^{\\mathbf L}_RA_n\n\\cong R\\varprojlim_n\\omega_{X,n}$. The Tor interval is read off on the\nreductions. The finite preservation bound of\n[lem-weil-verdier-preservation-strata], transported by\n[lem-weil-finite-duality-site-comparison], gives $[-2d,0]$ for $\\omega_{X,n}$,\nby taking the constant input.",
+    "uses": [
+     "sk-thm-existence",
+     "lem-coef-finite-dualizing",
+     "def-pe-derived-complete",
+     "lem-weil-verdier-preservation-strata",
+     "lem-weil-finite-duality-site-comparison"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For the adjunction, the map\n\n$$\nR\\operatorname{Hom}_X(K,\\omega_{X,R})\\xrightarrow{Ra_!}\nR\\operatorname{Hom}(Ra_!K,Ra_!\\omega_{X,R})\\xrightarrow{\\varepsilon}\nR\\operatorname{Hom}_R(Ra_!K,R)\n$$\n\ninduces on $H^i$ the adjunction bijection\n$\\operatorname{Hom}(K,\\omega_{X,R}[i])\\cong\\operatorname{Hom}(Ra_!K,R[i])$ of\n$Ra_!\\dashv Ra^!_R$, so it is an isomorphism. As a consequence, it agrees with\nthe limit of the finite adjunctions. The finite exceptional adjoints of\n[thm-sf-ambient-adjoint-class] and the compact-support reduction\n[lem-coef-integral-compact-support] give, by derived extension and restriction of\nscalars,\n\n$$\n\\begin{aligned}\nR\\operatorname{Hom}_X(K,\\omega_{X,R})\n&\\cong R\\varprojlim_n R\\operatorname{Hom}_{X,A_n}(K_n,\\omega_{X,n})\\\\\n&\\cong R\\varprojlim_n R\\operatorname{Hom}_{A_n}(Ra_{!,n}K_n,A_n)\n\\cong R\\operatorname{Hom}_R(Ra_!K,R).\n\\end{aligned}\n$$\n\nHere the middle isomorphism is the finite adjunction on derived mapping\ncomplexes: it is [prop-asd-internal-adjunction] on the étale site, transported by\nthe finite site comparisons. The counits are compatible with reduction\n([sk-prop-scalar-six]), so the two descriptions agree.",
+    "uses": [
+     "thm-sf-ambient-adjoint-class",
+     "lem-coef-integral-compact-support",
+     "prop-asd-internal-adjunction"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-58c4e",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261025T124537-L-2065790",
+  "kind": "interface",
+  "note": "independent cc review: delivered 4 modules + 4 node files vs live clone: verbatim def move (diff), item stmt byte-identical, 10 importers compiled rc 0, axioms probe, FiniteBounds import-deletion variants, sorry statements vs ringedStrictTowerHomotopyLimit spec and item conclusions"
  }
 }

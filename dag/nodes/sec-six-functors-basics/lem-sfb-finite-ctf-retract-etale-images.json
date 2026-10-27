@@ -1,0 +1,477 @@
+{
+ "id": "lem-sfb-finite-ctf-retract-etale-images",
+ "kind": "statement",
+ "title": "Étale cohomology images of finite-coefficient derived retracts",
+ "statement": "Let $X$ be a quasi-compact quasi-separated scheme [def-pc-scheme, def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism], and let $B$ be a finite discrete commutative ring, regarded as a condensed ring [sk-def-sfb-condensed-ring]. Identify its pulled-back coefficient ring $B_X=p_X^*B$ with the constant ring on the small pro-étale site, and write $\\nu_X:X_{\\mathrm{proét}}\\to X_{\\mathrm{ét}}$ for the site comparison [sk-def-sfb-pulled-back-coefficients, sk-def-pe-site, def-weil-pbc-etale-site, def-weil-pbc-site-comparison-morphism]. Use module sheaves and their ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $C\\in\\Dctf(X,B)$ [det-def-sfb-constructible-tor-amplitude], and let $J\\xrightarrow{i}C\\xrightarrow{r}J$ in the ambient derived category satisfy $ri=1_J$.\n\nThere exist $C_0\\in D^b_c(X_{\\mathrm{ét}},B)$ of finite Tor amplitude, an isomorphism $\\nu_X^*C_0\\simeq C$, and, for every $q$, a unique idempotent $e_q$ on $H^q(C_0)$ whose image under exact $\\nu_X^*$ is the endomorphism $H^q(i)H^q(r)$ under that isomorphism. Its image $I_q=\\operatorname{im}(e_q)$ is a constructible étale $B$-module sheaf [def-weil-pbc-etale-constructible-sheaf] and\n$$H^q(J)\\simeq\\nu_X^*I_q.$$\nThese sheaves are constructible in the pro-étale finite-constant-model sense. Every cohomological interval bounding $C$ also bounds $J$, and every Tor interval $[a,b]$ for $C$ is a Tor interval for $J$. In particular $J\\in\\Dctf(X,B)$. ",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+  "place": "(3), thickness of finite coefficients through étale images of cohomology idempotents; original step 11"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-pe-site",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "det-def-sfb-constructible-tor-amplitude",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-pe-finite-discrete-presentation-encoding",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Choose the normalized finite discrete encoding E. Its proved encoding_constructibility theorem [lem-sf-finite-discrete-encoding-constructibility] transports bounded constructibility of C to fixed scalar module sheaves. On a qcqs scheme, ordinaryConstructible and the source IsConstructible predicate differ only by the universe size of the covering index: enlarge the small index by ULift in one direction and restrictIndexOfSmall in the other. Descend every constructible cohomology sheaf by [lem-weil-pbc-fixed-module-constructible-origin] and then the bounded complex by [lem-weil-pbc-fixed-module-bounded-constructible-origin]. This gives C0 and alpha without descent of J. Convert its etale constructibility by [lem-weil-pbc-constructible-etale-module-sheaf-comparison]. Widen a chosen Tor interval to [min a b,b], transfer it by encoding_tensor_tor [lem-sf-finite-discrete-encoding-tensor-tor], and reflect it along alpha by the proved source fixed-module torAmplitudeIn_mapDerivedCategory_iff underlying [lem-exc-comparison-tor-interval].",
+   "uses": [
+    "lem-sf-finite-discrete-encoding-constructibility",
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-sf-finite-discrete-encoding-tensor-tor",
+    "lem-exc-comparison-tor-interval"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical exact-functor homology isomorphism [lem-sf-comparison-pullback-exact] followed by homology of alpha identifies nu* Hq(C0) with Hq(E C). Set e to the preimage under the fully faithful sheaf comparison [det-pe-classical-sheaves-modules] of alpha_q.hom followed by Hq(r), Hq(i), alpha_q.inv. Faithfulness and i followed by r equal to identity prove e squared equals e. Cancelling alpha_q.hom and applying faithfulness proves uniqueness, even among all endomorphisms satisfying the commuting equation.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "det-pe-classical-sheaves-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an idempotent e, write s:V -> image(e) and k:image(e) -> V for the canonical image factorization. Cancel the epimorphism s in e squared equals e to obtain k followed by e equals k; cancel the monomorphism k to obtain k followed by s equals identity. Thus image(e) is a retract of V. The proved source IsConstructibleSheaf.of_retract, obtained as the kernel of the complementary idempotent by [thm-constructible-serre], makes image(e) constructible. Apply [lem-weil-pbc-constructible-etale-module-sheaf-comparison] in both directions to use precisely the finite-value convention of the statement.",
+   "uses": [
+    "thm-constructible-serre",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use explicit inverse maps Hq(i) alpha_q.inv nu*(s) and nu*(k) alpha_q.hom Hq(r). Functoriality, s followed by k equals e, k followed by s equals identity and the retraction equation prove both composites equal identity. This identifies Hq(E J) with nu* image(e), without requiring preservation of arbitrary images. The proved source isConstructible_comparisonUpperStar_obj (the forward direction of [lem-weil-pbc-fixed-module-constructible-origin]) gives constructibility on the same finite stratification; resizing cover indices gives ordinaryConstructible. Boundedness is stable under retracts, and [lem-sf-finite-discrete-encoding-constructibility] then transports bounded constructibility back to J, including each intrinsic cohomology sheaf.",
+   "uses": [
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-sf-finite-discrete-encoding-constructibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply each homology functor to the retraction J -> C -> J. The first map is split monic, so if Hq(C) is zero then Hq(J) is zero. Apply the existing generic DerivedCategory.torAmplitudeIn and finiteTorAmplitude retract-stability instances, the direct-summand clauses recorded in [det-def-sfb-constructible-tor-amplitude], to preserve every Tor interval and finite Tor amplitude. Combine the latter with bounded constructibility from the preceding step to conclude J belongs to Dctf.",
+   "uses": [
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-discrete-encoding-constructibility",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-sf-finite-discrete-encoding-tensor-tor",
+  "lem-exc-comparison-tor-interval",
+  "lem-sf-comparison-pullback-exact",
+  "det-pe-classical-sheaves-modules",
+  "thm-constructible-serre",
+  "det-def-sfb-constructible-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+  "place": "(3), finite-coefficient retracts; K1 Lean proof using existing fixed-module bounded descent, normalized encoding and explicit image splittings, 2026-10-26. Source geometric comparison lemmas follow Stacks Tags 09AK, 09AL and 03RZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A retract of a finite coefficient constructible pro-etale derived complex has constructible cohomology obtained by pulling back the images of etale cohomology idempotents and retains the Tor interval",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+      "module": "Mathlib/RingTheory/Etale/QuasiFinite",
+      "type": "∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\n  ∃ R' x x_1,\n    ∃ (_ : Algebra.Etale R R'),\n      ∃ P,\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\n ",
+      "doc": "Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal "
+     },
+     {
+      "name": "Algebra.etaleLocus_eq_compl_support",
+      "module": "Mathlib/RingTheory/Etale/Locus",
+      "type": "∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ",
+      "doc": "The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\Omega_{A/R} $ and the first cotangent cohomology modu"
+     },
+     {
+      "name": "Algebra.FormallyEtale.instForallOfFinite",
+      "module": "Mathlib/RingTheory/Etale/Pi",
+      "type": "∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\n  Algebra.FormallyEtale R ((i : I) → A i)",
+      "doc": "If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\prod_{i \\in I} A_i $ is also formally étale over $ R $."
+     },
+     {
+      "name": "Algebra.FormallyEtale.comp",
+      "module": "Mathlib/RingTheory/Etale/Basic",
+      "type": "∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.FormallyEtale R A]\n  [Algebra.FormallyEtale A B], Algebra.FormallyEtale R B",
+      "doc": "If $ A $ is a formally étale algebra over a commutative ring $ R $, and $ B $ is a formally étale algebra over $ A $, then $ B $ is a formally étale algebra over $ R $."
+     },
+     {
+      "name": "Algebra.FormallyEtale.of_restrictScalars",
+      "module": "Mathlib/RingTheory/Etale/Basic",
+      "type": "∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B",
+      "doc": "If $ A $ is a formally unramified $ R $-algebra and $ B $ is a formally étale $ R $-algebra, then $ B $ is a formally étale $ A $-algebra."
+     },
+     {
+      "name": "Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars",
+      "module": "Mathlib/RingTheory/Etale/Basic",
+      "type": "∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B",
+      "doc": "Let $ R $, $ A $, and $ B $ be commutative rings with $ A $ and $ B $ as $ R $-algebras, and $ B $ as an $ A $-algebra satisfying the scalar tower condition $ R \to A \to B $. If $ A $ is formally unram"
+     },
+     {
+      "name": "AlgebraicGeometry.IsEtale.of_comp",
+      "module": "Mathlib/AlgebraicGeometry/Morphisms/Etale",
+      "type": "∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f",
+      "doc": "If the composition of a morphism $ f: X \to Y $ with a morphism $ g: Y \to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism."
+     },
+     {
+      "name": "Algebra.FormallyEtale.pi_iff",
+      "module": "Mathlib/RingTheory/Etale/Pi",
+      "type": "∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I],\n  Algebra.FormallyEtale R ((i : I) → A i) ↔ ∀ (i : I), Algebra.FormallyEtale R (A i)",
+      "doc": "Given a finite index set $ I $ and a commutative ring $ R $, the product algebra $ \\prod_{i \\in I} A_i $ over $ R $ is formally étale if and only if each component algebra $ A_i $ is formally étale ov"
+     }
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern etale algebras or fully faithful category embeddings; none identifies constructible cohomology images of a pro-etale derived retract or its Tor bounds."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"retract\"",
+   "results": {
+    "summary": "[loogle] OK 0 hit(s)",
+    "hits": []
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern etale algebras or fully faithful category embeddings; none identifies constructible cohomology images of a pro-etale derived retract or its Tor bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]onstructible.*([Rr]etract|[Ii]dempoten)|([Rr]etract|[Ii]dempoten).*[Cc]onstructible",
+   "results": {
+    "summary": "[grep] OK 0 hit(s)",
+    "hits": []
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern etale algebras or fully faithful category embeddings; none identifies constructible cohomology images of a pro-etale derived retract or its Tor bounds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact fully faithful etale to proetale comparison lifts cohomology idempotents and preserves their constructible images",
+   "results": {
+    "summary": "[leansearch] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+      "module": "Mathlib.AlgebraicGeometry.Morphisms.Etale",
+      "type": ": (Etale.forget X).FullyFaithful",
+      "doc": "The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects."
+     },
+     {
+      "name": "CondensedSet.LocallyConstant.functorFullyFaithful",
+      "module": "Mathlib.Condensed.Discrete.LocallyConstant",
+      "type": ": functor.FullyFaithful",
+      "doc": "The functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces is fully faithful. This follows from the fact that its adjunction unit is an isomorphism, ensuring th"
+     },
+     {
+      "name": "lightToProfiniteFullyFaithful",
+      "module": "Mathlib.Topology.Category.LightProfinite.Basic",
+      "type": ": lightToProfinite.FullyFaithful",
+      "doc": "The canonical inclusion functor from the category of compact Hausdorff totally disconnected second-countable topological spaces (light profinite spaces) to the category of compact Hausdorff totally di"
+     },
+     {
+      "name": "FintypeCat.toLightProfiniteFullyFaithful",
+      "module": "Mathlib.Topology.Category.LightProfinite.Basic",
+      "type": ": toLightProfinite.FullyFaithful",
+      "doc": "The functor from the category of finite types (equipped with the discrete topology) to the category of light profinite spaces is fully faithful. This means that for any finite types $X$ and $Y$, the c"
+     },
+     {
+      "name": "FGAlgCat.fullyFaithfulUliftFunctor",
+      "module": "Mathlib.Algebra.Category.CommAlgCat.FiniteType",
+      "type": ": (FGAlgCat.uliftFunctor R).FullyFaithful",
+      "doc": "The ULift functor on the category of finitely generated commutative $ R $-algebras is fully faithful, meaning it induces a bijection between hom-sets of original and universe-lifted algebras while pre"
+     },
+     {
+      "name": "FintypeCat.toProfiniteFullyFaithful",
+      "module": "Mathlib.Topology.Category.Profinite.Basic",
+      "type": ": toProfinite.FullyFaithful",
+      "doc": "The functor embedding the category of finite types into the category of profinite spaces is fully faithful, meaning it induces a bijection between the set of morphisms (functions) between any two fini"
+     },
+     {
+      "name": "AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget",
+      "module": "Mathlib.AlgebraicGeometry.Morphisms.Etale",
+      "type": ": (Etale.forget X).Faithful",
+      "doc": "The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is faithful. This means that for any two étale morphisms $f, g : Y \to X$ and any morphism $h : "
+     },
+     {
+      "name": "AlgebraicGeometry.Scheme.Etale",
+      "module": "Mathlib.AlgebraicGeometry.Morphisms.Etale",
+      "type": "(X : Scheme.{u}) : Type _",
+      "doc": "The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$."
+     }
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern etale algebras or fully faithful category embeddings; none identifies constructible cohomology images of a pro-etale derived retract or its Tor bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite noetherian coefficient sheaves: retracts of bounded constructible finite Tor pro-etale complexes preserve the same cohomological and Tor bounds",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "Algebra.etaleLocus_eq_compl_support",
+      "module": "Mathlib/RingTheory/Etale/Locus",
+      "type": "∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ",
+      "doc": "The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\Omega_{A/R} $ and the first cotangent cohomology modu"
+     },
+     {
+      "name": "AlgebraicGeometry.IsEtale.of_comp",
+      "module": "Mathlib/AlgebraicGeometry/Morphisms/Etale",
+      "type": "∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f",
+      "doc": "If the composition of a morphism $ f: X \to Y $ with a morphism $ g: Y \to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism."
+     },
+     {
+      "name": "Algebra.FormallyEtale.instForallOfFinite",
+      "module": "Mathlib/RingTheory/Etale/Pi",
+      "type": "∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\n  Algebra.FormallyEtale R ((i : I) → A i)",
+      "doc": "If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\prod_{i \\in I} A_i $ is also formally étale over $ R $."
+     },
+     {
+      "name": "Algebra.Etale.exists_subalgebra_fg",
+      "module": "Mathlib/RingTheory/Smooth/NoetherianDescent",
+      "type": "∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)",
+      "doc": "For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra"
+     },
+     {
+      "name": "Algebra.FormallyEtale.comp",
+      "module": "Mathlib/RingTheory/Etale/Basic",
+      "type": "∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.FormallyEtale R A]\n  [Algebra.FormallyEtale A B], Algebra.FormallyEtale R B",
+      "doc": "If $ A $ is a formally étale algebra over a commutative ring $ R $, and $ B $ is a formally étale algebra over $ A $, then $ B $ is a formally étale algebra over $ R $."
+     },
+     {
+      "name": "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+      "module": "Mathlib/AlgebraicGeometry/Morphisms/Etale",
+      "type": "CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)",
+      "doc": "For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper"
+     },
+     {
+      "name": "CochainComplex.cm5b",
+      "module": "Mathlib/Algebra/Homology/Factorizations/CM5b",
+      "type": "∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\n  [CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ} (f : K ⟶ L) (n : ℤ) [K.IsStrictlyGE (n + 1)]\n  [L.IsStrictlyGE n],\n  ∃ L',\n    ∃ (_ : L'.IsStrictlyGE n),\n      ∃ i p,\n        ∃ (_ : Ca",
+      "doc": "Given cochain complexes $ K $ and $ L $ in an abelian category $ \\mathcal{C} $ with $ K $ strictly supported in degrees $ \\geq n+1 $ and $ L $ strictly supported in degrees $ \\geq n $, there exists a "
+     },
+     {
+      "name": "Algebra.FormallyEtale.of_restrictScalars",
+      "module": "Mathlib/RingTheory/Etale/Basic",
+      "type": "∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B",
+      "doc": "If $ A $ is a formally unramified $ R $-algebra and $ B $ is a formally étale $ R $-algebra, then $ B $ is a formally étale $ A $-algebra."
+     }
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern etale algebras or fully faithful category embeddings; none identifies constructible cohomology images of a pro-etale derived retract or its Tor bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(retract|idempoten)|(retract|idempoten).*constructible",
+   "results": {
+    "summary": "0 hits; ",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: retrieved derived t-structure, projectivity, sheaf inclusion, and condensed-discrete results do not state the finite-coefficient etale-image retract assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"retract\"",
+   "results": {
+    "summary": "0 hits; ",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: retrieved derived t-structure, projectivity, sheaf inclusion, and condensed-discrete results do not state the finite-coefficient etale-image retract assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived retract of a bounded constructible finite coefficient proetale complex has constructible cohomology given by images of unique etale idempotents and preserves Tor amplitude",
+   "results": {
+    "summary": "8 hits; ",
+    "top": [
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "CochainComplex.IsKProjective",
+     "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+     "CochainComplex.isKProjective_of_projective",
+     "CochainComplex.isKProjective_iff_leftOrthogonal",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "CochainComplex.IsKProjective.leftOrthogonal"
+    ],
+    "digest": "a5472f72fbd69196"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: retrieved derived t-structure, projectivity, sheaf inclusion, and condensed-discrete results do not state the finite-coefficient etale-image retract assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact fully faithful inverse image from etale to proetale sheaves lifts idempotents of constructible cohomology",
+   "results": {
+    "summary": "8 hits; ",
+    "top": [
+     "LightCondSet.LocallyConstant.functorFullyFaithful",
+     "CondensedSet.LocallyConstant.functorFullyFaithful",
+     "CategoryTheory.fullyFaithfulSheafToPresheaf_preimage_val",
+     "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+     "CategoryTheory.GrothendieckTopology.isoSheafify_inv",
+     "CategoryTheory.fullyFaithfulSheafToPresheaf",
+     "Condensed.lanCondensedSet",
+     "Condensed.lanSheafProfinite"
+    ],
+    "digest": "0a87bc2f7de705af"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: retrieved derived t-structure, projectivity, sheaf inclusion, and condensed-discrete results do not state the finite-coefficient etale-image retract assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A direct summand of a constructible complex of sheaves over a finite ring has finite Tor amplitude and constructible cohomology",
+   "results": {
+    "summary": "8 hits; ",
+    "top": [
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "DerivedCategory.instIsGEObjSingleFunctor",
+     "DerivedCategory.IsGE"
+    ],
+    "digest": "63dfd288ae23e974"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: retrieved derived t-structure, projectivity, sheaf inclusion, and condensed-discrete results do not state the finite-coefficient etale-image retract assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-scalar-six-ctf",
+  "date": "2026-10-24",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-ctf",
+   "place": "(3), sentence: a direct summand of a constructible sheaf is the image of an idempotent, hence constructible; finite-ring thickness argument.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-ctf-retract-etale-images",
+  "worker": "stage1",
+  "summary": "Expanded the finite-ring summand argument through a bounded finite-Tor etale model, unique sheaf-level idempotent lifts, constructible kernels of 1-e, and explicit inverse maps identifying the cohomology image. Retained every cohomological and Tor interval; reused existing comparison and weak-Serre nodes, with no new nodes. Reviewer FIX: steps 3-4 cite lem-weil-pbc-constructible-qcqs-affine-local for the two constructibility conventions; step 5 writes the retract argument.",
+  "blueprint": "Realizes det-prop-scalar-six-ctf proof (3), finite-coefficient thickness and direct summands; no change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Provides the etale finite-Tor model for a qcqs scheme and finite (hence Noetherian) coefficients; no coefficient-comparison generator theorem of this unit supplies it."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic exact inverse image and cohomology comparison, needed to identify the cohomology projector on the actual module sheaves."
+   },
+   {
+    "node": "det-pe-classical-sheaves-modules",
+    "why": "Generic exact and fully faithful comparison on module sheaves supplies precisely the unique lift of each cohomology idempotent."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic etale kernel closure for finite coefficients supplies constructibility of ker(1-e); this is the weak-Serre input explicitly called for by the blueprint."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "Generic abelian-category exact-functor image preservation identifies the pulled-back image."
+   },
+   {
+    "node": "sk-thm-pe-constructible-comparison",
+    "why": "Generic constructible-sheaf comparison supplies the finite constant-model property of each pulled-back etale image."
+   },
+   {
+    "node": "det-def-sfb-constructible-tor-amplitude",
+    "why": "The well-definedness theorem explicitly asserts retention of each Tor interval under direct summands and defines Dctf."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-qcqs-affine-local",
+    "why": "Converts between the affine-local constructibility of the etale D^b_c model and the global finite-stratification notion of def-weil-pbc-etale-constructible-sheaf used by thm-constructible-serre; no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-comparison-pullback-exact",
+  "det-pe-classical-sheaves-modules",
+  "thm-constructible-serre",
+  "det-def-sfb-constructible-tor-amplitude"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N6-f209ece1b",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-f209ece1b (reviewer sub-agent of L); spot-checked: Live item is still unsplit; the statement and stmt_deps are unchanged and the delivery adds no new nodes. I read det-prop-scalar-six-ctf paragraph (3) and Stacks 03RZ (etale-cohomology.tex l.11828, lemma-constructible-abelian) and 09AK (proetale.tex l.5239). Step 1 (det-pe-finite-tor-comparison-noetherian: X qcqs, B finite so Noetherian; lem-sf-comparison-pullback-exact (3)), step 2 (full faithfulness lifts a unique idempotent) and step 4 (both inverse composites checked; Cons of sk-thm-pe-constructible-comparison is sk-def-sfb-constructible, the same convention as det-def-sfb) are correct. Fault (C4/E1): steps 3 and 4 apply thm-constructible-serre and def-weil-pbc-etale-constructible-sheaf (one global finite stratification, finite values) to H^q(C_0), which is only affine-locally constructible with finitely generated values (def-pe-etale-constructible-module), and step 4 converts back without a citation. FIX: steps 3 and 4 now cite the existing reviewed node lem-weil-pbc-constructible-qcqs-affine-local, (1)<=>(3) for qcqs X, added to tool_uses; I checked that it creates no cycle. Step 5 equated retract with direct summand without comment; it now writes out that H^q(J⊗^L N) is a retract of H^q(C⊗^L N). Edge cases B=0, X empty, J=0, e=0,1 and B=Z/4 behave as expected. I searched for duplicates: det-ctf-finite-compact-generators is thickness only for ℓ-primary rings and is not a duplicate; blueprint same_as is empty. The 7 declared tool uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteCtfRetractEtaleImages",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCtfRetractEtaleImages",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteCtfComparisonHomologyIso",
+   "AlgebraicGeometry.ProEtale.finiteCtfRetractEtaleImages"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteCtfRetractEtaleImages.lean",
+  "statement": "theorem finiteCtfRetractEtaleImages (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (B : Type u) [CommRing B] [Finite B] [TopologicalSpace B] [DiscreteTopology B] (C J : DerivedCategory (FiniteDiscreteOrdinary.Internal B X)) (hC : (constantModelBoundedConstructible (FiniteDiscreteOrdinary.coefficient B) X ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K) C) (i : J ⟶ C) (r : C ⟶ J) (hri : i ≫ r = 𝟙 J) : (∃ E : FiniteDiscreteOrdinary.Encoding B X, ∃ C₀ : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} B))), Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1} B) X C₀ ∧ (∃ a b : ℤ, a ≤ b ∧ Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} B) X a b C₀) ∧ ∃ α : (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) X).mapDerivedCategory.obj C₀ ≅ E.fixedDerived.functor.obj C, ∀ q : ℤ, ∃ e : End ((DerivedCategory.homologyFunctor _ q).obj C₀), e ≫ e = e ∧ (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) X).map e ≫ (finiteCtfComparisonHomologyIso X B C₀ _ α q).hom = (finiteCtfComparisonHomologyIso X B C₀ _ α q).hom ≫ (DerivedCategory.homologyFunctor _ q).map (E.fixedDerived.functor.map r) ≫ (DerivedCategory.homologyFunctor _ q).map (E.fixedDerived.functor.map i) ∧ (∀ e' : End ((DerivedCategory.homologyFunctor _ q).obj C₀), e' ≫ e' = e' → (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) X).map e' ≫ (finiteCtfComparisonHomologyIso X B C₀ _ α q).hom = (finiteCtfComparisonHomologyIso X B C₀ _ α q).hom ≫ (DerivedCategory.homologyFunctor _ q).map (E.fixedDerived.functor.map r) ≫ (DerivedCategory.homologyFunctor _ q).map (E.fixedDerived.functor.map i) → e' = e) ∧ Scheme.IsConstructibleEtaleModuleSheaf (image e) ∧ Nonempty ((DerivedCategory.homologyFunctor _ q).obj (E.fixedDerived.functor.obj J) ≅ (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) X).obj (image e))) ∧ (∀ q : ℤ, IsConstantModelConstructible (FiniteDiscreteOrdinary.coefficient B) X ((DerivedCategory.homologyFunctor _ q).obj J)) ∧ (∀ a b : ℤ, (∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj C)) → ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj J)) ∧ (∀ a b : ℤ, a ≤ b → DerivedCategory.torAmplitudeIn _ a b C → DerivedCategory.torAmplitudeIn _ a b J) ∧ (constantModelBoundedConstructible (FiniteDiscreteOrdinary.coefficient B) X ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K) J",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The normalized Encoding identifies the actual pulled-back condensed finite coefficient ring with the constant ring. Its derived functor is the existing termwise localization, not an arbitrary comparison. The existential encoding is conclusion data, not an extra hypothesis. The helper is the canonical exact-functor homology isomorphism composed with H^q of the specified comparison isomorphism. Internal and ordinary coordinates are related by this same encoding throughout."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-242a6cf96",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 (9e7f). Lean byte-identical (sha 9f20061b…). The only node change: stmt_dep lem-sf-finite-discrete-normalized-encoding (theorem) → def-pe-finite-discrete-presentation-encoding (Q05 def node, existing:true, owns FiniteDiscreteOrdinary.coefficient/Internal/Encoding/fixedDerived; encoding_exists is proof-only since E is existential). Other stmt_deps are def owners (isBoundedConstructible, hasTorAmplitudeIn, constant-model Dbc/Tor, IsConstructibleEtaleModuleSheaf). Item still split in live with no lean record, so no race. Maths re-checked clause by clause (qcqs, finite discrete B, C∈Dctf, r∘i=1, derived α, unique idempotent conjugate to H^q(i)H^q(r), constructible image, H^q(J)≅ν^*I_q, interval/Tor retention, J∈Dctf); universes ok; no hollow def; sorry only; docstrings ok; edge cases ok. Worker report and Second reading sections present. No compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-73621",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261025T202338-L-2709209",
+  "kind": "interface",
+  "note": "independent cc review: delivered finiteCtfRetractEtaleImages vs published: type's used constants and hash are identical (only _root_ qualification added); axioms propext/Classical.choice/Quot.sound; node proof_deps vs the lemmas used in the Lean"
+ }
+}

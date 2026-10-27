@@ -1,0 +1,170 @@
+{
+ "id": "lem-cbc-single-level-finite-proper-open-transport",
+ "kind": "statement",
+ "title": "Finite coefficient realization of the single-level proper/open mate",
+ "statement": "Let $B$ and $\\Lambda$ be commutative rings, with $\\Lambda$ finite and discrete, and let $\\varphi:B\\to\\Lambda$ be a unital ring map. Let $V,W,S,T$ be schemes [def-pc-scheme], $k:V\\hookrightarrow W$ and $i:S\\hookrightarrow T$ quasi-compact open immersions [def-weil-open-immersion, def-weil-finite-type-morphism], and $r:V\\to S$ and $p:W\\to T$ proper [def-weil-proper-morphism], with $k\\gg p=r\\gg i$. Use $HD_X:D^+(X_{\\mathrm{et}},\\Lambda)\\to D(\\operatorname{Mod}(\\underline B_X))$ and the specified comparisons $hJ,hR$ of [def-cbc-finite-constant-coefficient-transport]. Write $J_i,R_p$ for the single-level exact open extension and total derived direct image on constant-ring modules, and $\\Gamma$ for the single-level derived clopen proper/open mate of [lem-cbc-tower-mate-evaluation-scalars]; write $J_i^{\\mathrm{et}},R_p^{\\mathrm{et}}$ for the corresponding bounded-below etale functors. Let $\\gamma^{\\mathrm{et}}$ be the specified normalizedComparison of [def-cbc-etale-clopen-mate-normalization-data]. For every $L\\in D^+(V_{\\mathrm{et}},\\Lambda)$,\n$$\n\\Gamma_{HD_VL}\\circ J_i((hR_r)_L)\\circ(hJ_i)_{R_r^{\\mathrm{et}}L}\n=\nR_p((hJ_k)_L)\\circ(hR_p)_{J_k^{\\mathrm{et}}L}\\circ HD_T((\\gamma^{\\mathrm{et}})_L).\n$$\nThese are maps from $HD_T(J_i^{\\mathrm{et}}R_r^{\\mathrm{et}}L)$ to $R_pJ_kHD_V(L)$. Every comparison is the specified canonical one. No strict tower, derived evaluation, etale-origin witness, flatness hypothesis or uniform cohomological bound is involved.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099R (section-comparison) and 09AF (lemma-jshriek-comparison), with sites-modules.tex Tag 03DA and sites-cohomology.tex Tag 07A7; coefficient-realization part of parent calculus steps 4--5"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-cbc-finite-constant-coefficient-transport",
+  "lem-cbc-tower-mate-evaluation-scalars",
+  "def-cbc-etale-clopen-mate-normalization-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply finiteCoefficientClopenAlpha to obtain the ordinary sheaf alpha equation. This is only original steps 1--2; it involves neither complexes nor proper mates. The exact pullback and open comparison isomorphisms are hPullbackPlus and hOpenPlus, defined by their canonical exact composition isomorphisms.",
+   "uses": [
+    "lem-cbc-finite-coefficient-clopen-alpha",
+    "def-cbc-finite-constant-coefficient-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099R (section-comparison) and 09AF (lemma-jshriek-comparison), with sites-modules.tex Tag 03DA and sites-cohomology.tex Tag 07A7; coefficient-realization part of parent calculus steps 4--5"
+   }
+  },
+  {
+   "text": "The private coefficientClopenAlphaPlus proves exact descent by specializing the fully proved exactAlphaCube. This categorical calculation takes the twelve exact functors as parameters, so it does not unfold the concrete sheafification and left-adjoint constructions. Form both natural-transformation routes in D+. Use localization extensionality at the bounded-below homotopy localization. Postcompose with the common product of the exact functor factorization isomorphisms. The factorization equations of clopenLocalizedSquarePlus and of exactComparison_factorsh, and naturality of the comparisons, reduce both routes to the localization of the two ordinary alpha routes. Their equality follows by applying mapHomotopyCategoryPlus and then Qh.map to the ordinary equation. Cancel the common factorization isomorphisms.",
+   "uses": [
+    "lem-cbc-finite-coefficient-clopen-alpha",
+    "lem-cbc-etale-clopen-mate-normalization",
+    "lem-weil-pbc-right-derived-plus-cube"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 015F and 070K, exact localization and factorization; generic proved exactComparison_factorsh helper in the right-derived-cube module"
+   }
+  },
+  {
+   "text": "For each proper map f, coefficientPlusCounit proves the derived counit equation. The underived hPullbackInv is the inverse mate of hDirect, so mateEquiv.apply_symm_apply identifies its forward mate with hDirect. The proved generic derived_mate_eq identifies the derived base change of hDirect with the mate of hPullbackPlus. Substitute mateEquiv_counit, then cancel the hom/inv pair of hPullbackPlus. Apply the proved generic transport_mate calculation with these two counit equations and the alpha equation from the preceding step. Etale clopen normalization replaces its etale derived mate by the specified normalizedComparison.",
+   "uses": [
+    "def-cbc-finite-constant-coefficient-transport",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-finite-clopen-mate-site-transport",
+    "lem-cbc-etale-clopen-mate-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099R (section-comparison) and 09AF (lemma-jshriek-comparison), with sites-modules.tex Tag 03DA and sites-cohomology.tex Tag 07A7; coefficient-realization part of parent calculus steps 4--5"
+   }
+  },
+  {
+   "text": "Apply the bounded-below inclusion to this mate equality and postcompose with the target direct-image compatibility isomorphism. The generic proved mate_ambient identity moves the constant-ring mate to the unbounded category, where it is exactly singleDerivedGamma after unfolding the specified exact localization. Naturality of the direct-image compatibility moves the open comparison to its unbounded direct-image image. Expand hJ and hR, cancel the identity exact-functor compatibility maps, and reassociate. This is the required equation, with its original statement unchanged.",
+   "uses": [
+    "def-cbc-finite-constant-coefficient-transport",
+    "lem-cbc-tower-mate-evaluation-scalars",
+    "lem-cbc-etale-clopen-mate-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099R (section-comparison) and 09AF (lemma-jshriek-comparison), with sites-modules.tex Tag 03DA and sites-cohomology.tex Tag 07A7; coefficient-realization part of parent calculus steps 4--5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-finite-coefficient-clopen-alpha",
+  "def-cbc-finite-constant-coefficient-transport",
+  "lem-cbc-etale-clopen-mate-normalization",
+  "lem-weil-pbc-right-derived-plus-cube",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-cbc-finite-clopen-mate-site-transport",
+  "lem-cbc-tower-mate-evaluation-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099R and 09AF, with sites-cohomology.tex Tags 015F, 070K and 07A7. F3: ordinary-alpha reduction, proved exact localization, derived counit normalization, proper-mate transport and bounded-below inclusion compatibility. Generic proved private helpers are used as category-theoretic tools, not to replace the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction of scalars preserves proper open interchange under etale proetale site comparison",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj, SheafOfModules.restrictScalars, PresheafOfModules.restrictScalars, AlgebraicGeometry.IsProper.instMorphismRestrict, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars_map_val, Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-23",
+   "verdict": "Generic scalar restriction or mate results; none states the normalized coefficient-realization square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_square",
+   "results": "1 hits: CategoryTheory.mateEquiv_square",
+   "date": "2026-10-23",
+   "verdict": "Generic scalar restriction or mate results; none states the normalized coefficient-realization square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized realization of finite constant coefficients and etale proetale comparison preserves the proper adjunction mate of clopen open extension",
+   "results": "8 hits: CompHausLike.LocallyConstant.adjunction_left_triangle, CompHausLike.LocallyConstant.adjunction_counit, CompHausLike.LocallyConstant.adjunction_unit, CompHausLike.LocallyConstant.counit_app_val, CompHausLike.LocallyConstant.adjunction, CompHausLike.LocallyConstant.incl_of_counitAppApp, CompHausLike.LocallyConstant.counitApp_app, Condensed.profiniteSolidCounit",
+   "date": "2026-10-23",
+   "verdict": "Generic scalar restriction or mate results; none states the normalized coefficient-realization square."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*mate|properOpen|finiteCoefficientRealization|hDirect",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "Generic scalar restriction or mate results; none states the normalized coefficient-realization square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus",
+  "date": "2026-10-23",
+  "group": "A2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof, displayed factorization of Ex^c_!: the canonical proper and open exchange factors; coefficient realization of the proper/open comparison used by the existing strict-tower refinement (parent calculus proof steps 4--5).",
+   "via": [
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleLevelFiniteProperOpenTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleLevelFiniteProperOpenTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.singleLevelFiniteProperOpenTransport",
+  "statement": "theorem singleLevelFiniteProperOpenTransport\n    (B Λ : Type (u + 1)) [CommRing B] [CommRing Λ] [Finite Λ]\n    [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ)\n    {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)\n    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]\n    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i)\n    (L : DerivedCategory.Plus (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :\n    (hJ B i Λ φ).hom.app\n        ((Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) r).obj L) ≫\n      (moduleJ B i).mapDerivedCategory.map ((hR B r Λ φ).app L) ≫\n      (MateEvaluationScalars.singleDerivedGamma B k r p i h).app\n        ((HD B V Λ φ).obj L) =\n    (HD B T Λ φ).map\n        ((Etale.ClopenMateNormalization.normalizedComparison Λ k r p i h).hom.app L) ≫\n      (hR B p Λ φ).app\n        ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.obj L) ≫\n      (moduleDirectImage B p).rightDerivedFunctor.map ((hJ B k Λ φ).hom.app L)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261023T230259-L-3403299",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T001435-L-4193104",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

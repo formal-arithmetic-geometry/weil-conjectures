@@ -14,67 +14,69 @@
  ],
  "proof": [
   {
-   "text": "For a good complex P, changeOfRings_isKFlat_of_flat_terms gives K-flat reductions. Successive quotient extension identifies (P tensor B_m) tensor over B_m B_n with P tensor B_n, by (x tensor a) tensor b sent to x tensor ab. The formula and its inverse descend through sheafification, commute with differentials, and satisfy the quotient cocycle on pure tensors.",
+   "text": "For a good completed-coefficient complex, use the simultaneous K-flat reduction model in coefficientDerivedSystemEvaluationCalculus. It supplies a normalized derived coefficient sequence, a strict representative C, finite evaluation isomorphisms, and compatibility with all actual coefficientOrdinaryQuotient maps. A generic adjunction argument identifies the restricted ordinary quotient with unrestrictedIntegralTransition degreewise: restriction along a completion projection is full, and integralUnit_step says that both maps carry the larger tensor unit to the smaller tensor unit. The restriction composition comparison is the identity followed by the equality of completed projections.",
    "uses": [
-    "lem-pur-kflat-change-of-rings",
-    "def-pur-integral-derived-operations"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Exact finite pullback commutes with tensor and the canonical constant coefficient identifications. Thus it carries the preceding reduction identifications to normalized pullback towers. For tensor towers, reassociate the two K-flat reductions and their quotient extension; totalization uses direct sums and both signed differential terms commute with the coefficient maps. These identifications agree with the actual pure-tensor transitions recorded by IntegralOperationsWellDefined.",
-   "uses": [
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "prop-weil-pbc-proetale-constant-exact",
-    "def-pur-integral-derived-operations"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Restrict the strict finite complexes to the completed coefficient ring. Localization of this strict diagram is a coherent object in the derived category of towers. Its evaluation isomorphisms are the inverse restriction factorization comparisons. Lift its finite transitions before restriction, using the semilinear coefficient maps. Their identity and cocycle follow from the pure-tensor formulas. The finite scalar-extension isomorphisms above and the tensor/restriction adjunction give exactly the Hom bijections required by NormalizedDVRTower.normalization. Use the unrestricted reduction-tower interface for the exact restriction and its canonical derived factorization.",
-   "uses": [
-    "def-coef-normalized-dvr-tower",
-    "lem-weil-derived-scalar-extension-restriction-adjunction",
-    "lem-weil-integral-reduction-tower-well-defined"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The proved private strictRoosTriangle helper uses exact countable products to identify the two product vertices of the localized mapping-cocone triangle, preserving the actual projections. Construct the coherent normalized tower from the preceding steps and apply normalizedDVRTower_effectivity to that triangle. The normalized counit is the adjoint of mappingCocone.fst followed by Pi.π and the inverse restriction factorization, hence precisely the displayed morphism. Effectivity gives completeness; sfDerivedComplete_iff_legacy converts it to IsSfDerivedComplete.",
-   "uses": [
-    "lem-coef-normalized-dvr-effectivity",
-    "lem-sf-derived-complete-legacy-comparison",
-    "lem-weil-derived-limit-products-core"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transport the vertex of the distinguished Roos triangle through e. Naturality of the reduction units identifies the transported canonical augmentation. Under adjunction the displayed map is the original counit precomposed by derived reduction of e.hom; both factors are invertible. This establishes the stated form for arbitrary isomorphic vertices and for both operation towers. No boundedness or constructibility enters any step.",
-   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-normalized-dvr-kflat-transition",
     "lem-weil-derived-scalar-extension-restriction-adjunction"
    ],
-   "elementary": true
+   "elementary": false
+  },
+  {
+   "text": "Restrict C to the completed ring. Use literal component maps for evaluation, quotient transition and restriction comparison. Prove their evaluation square directly from the sectionwise characterization of coefficientSequenceRestriction and coefficientSequenceTransition: scalar restriction and its composition comparison leave the underlying section maps unchanged. This avoids transporting a functor-composition object through the completed scalar action. Naturality of the restriction comparison, compatibility of the finite model isomorphisms and the preceding quotient identification give the successor squares. NatTrans.ofOpSequence assembles these squares into an isomorphism with the ordinary reduction tower. Compose this tower isomorphism with pullTowerIso or tensorTowerIso, using pull_good or tensor_good for the completed-coefficient operation representative. Scalar restriction by each completion projection is full and faithful because that projection is locally surjective; lift the resulting level isomorphisms to finite-linear complex isomorphisms. Form the ordinary tower using unrestrictedTowerComplex and unrestrictedTowerTransition, whose types directly expose scalar extension followed by restriction. Compare its functor presentation with the operation tower only after verifying unit compatibility.",
+   "uses": [
+    "lem-coef-sequence-roos-model",
+    "lem-pur-integral-ambient-operation-models",
+    "lem-pur-integral-operations-well-defined",
+    "lem-pe-successive-quotient-flat-tensor-sequence",
+    "def-pur-integral-derived-operations",
+    "def-sf-unrestricted-reduction-complex-constructions",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any normalized coefficient sequence, coefficientSequence_roosModel presents its limit by a normalized DVR tower with exactly the coefficientSequenceProjection maps. Transport the distinguished triangle along the given vertex isomorphism, leaving its product vertices fixed. Apply normalizedDVRTower_effectivity for completeness and normalizedDVRRoos_finite_reduction for the adjoints of these projections. Naturality of adjunction and cancellation of the finite evaluation isomorphisms give the chosen scalar-extension adjoints; sfDerivedComplete_iff_legacy gives IsSfDerivedComplete. Choose a prime different from l only to instantiate the legacy interface; no geometric characteristic assumption is used.",
+   "uses": [
+    "lem-coef-sequence-roos-model",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-coef-normalized-dvr-roos-finite-reduction",
+    "lem-sf-derived-complete-legacy-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical constant-tower Roos comparison identifies the limit of C with its strict mapping cocone and preserves every actual projection. Naturality of the Roos functor along the strict tower isomorphism identifies this with the operation Roos complex. The restriction-evaluation factorization and naturality of coefficientSequenceProjection compute the resulting finite maps exactly. Transport the normalized-limit result along this isomorphism; adjunction naturality identifies each required morphism with the normalized comparison followed by the finite evaluation isomorphism.",
+   "uses": [
+    "stage3-pur-canonical-tower-roos-comparison",
+    "stage3-pur-extension-representative-roos",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-coef-normalized-dvr-tower",
+  "def-coef-ringed-sequence-site",
   "def-pur-integral-derived-operations",
+  "def-sf-unrestricted-reduction-complex-constructions",
+  "lem-coef-derived-system-evaluation-calculus",
   "lem-coef-normalized-dvr-effectivity",
-  "lem-pur-kflat-change-of-rings",
+  "lem-coef-normalized-dvr-kflat-transition",
+  "lem-coef-normalized-dvr-roos-finite-reduction",
+  "lem-coef-sequence-roos-model",
+  "lem-pe-successive-quotient-flat-tensor-sequence",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-pur-integral-operations-well-defined",
   "lem-sf-derived-complete-legacy-comparison",
-  "lem-weil-derived-limit-products-core",
   "lem-weil-derived-scalar-extension-restriction-adjunction",
-  "lem-weil-integral-reduction-tower-well-defined",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "prop-weil-pbc-proetale-constant-exact"
+  "stage3-pur-canonical-tower-roos-comparison",
+  "stage3-pur-extension-representative-roos"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "T5",
+  "group": "W2",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 099M and 099N(5); normalization, exact countable products, and the existing normalized DVR effectivity theorem."
+  "place": "Tags 099M and 099N(5); use simultaneous ordinary reduction and projection-preserving strict Roos comparisons before normalized DVR effectivity."
  },
  "mathlib_searches": [
   {
@@ -152,14 +154,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-fb9aa",
-  "group": "T5",
-  "result": "pass",
-  "landing": "20261020T221352-L-4178773",
+  "reviewer": "C-43df8",
+  "group": "W2",
+  "result": "fix",
+  "landing": "20261026T102415-L-355579",
   "kind": "interface",
-  "note": "independent cc review: delivered IntegralOperationsPreserveConstructible + new IntegralOperationRoosEffectivity vs clones/live, nodes lem-pur-integral-operations-preserve-constructible / lem-pur-integral-operation-roos-effectivity, all 26 direct importers compiled against the delivered modules"
+  "note": "independent cc review: lem-pur-integral-operation-roos-effectivity node (statement verbatim, new proof/proof_deps) with the delivered proof; 4 unclaimed adapted modules (abbrev→@[reducible] def, shared scalarReductionExistence witness) with their change records, compiled against delivered oleans: IRTWDU, IntegralOperationsWellDefined, IsomorphismReductionTower, IntegralScalarExtensionWellDefined, IntegralTensorTransitionCompatibility, IntegralTensorReductionTowerComparison, CompletedPerfectScalarPullback+AdicScalarFlatReductionModel, CoefDerivedSystemEvaluationCalculus, CoefficientSequenceRoosModel, IntegralOperationsPreserveConstructible, NormalizedDVREffectivity, NormalizedDVRKFlatTransition, SemilinearSystemModels all OK; item 54 s; axioms propext/sorryAx(cited library holes)/choice/Quot.sound"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-connected-group-extension",
+ "kind": "statement",
+ "title": "Connectedness of extensions of affine algebraic groups",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G,Q$ be affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and let $p:G\\to Q$ be a faithfully flat homomorphism, meaning flat [def-weil-flat-morphism] and surjective on underlying spaces. Let $L=G\\times_{Q,p,e_Q}\\operatorname{Spec}k$ be its scheme-theoretic kernel [def-pc-fibre-product]. If $L$ and $Q$ are connected [def-weil-connected-scheme], then $G$ is connected. No smoothness, reducedness, commutativity or separability hypothesis is imposed on any of these group schemes or on $p$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 5.59(a), printed p.114, exact sequence of algebraic groups, with Proposition 5.45 and Section 5(j) for faithful-flat exactness. In Lemma 16.39, printed p.338, it is applied to a connected kernel which need not be reduced."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-finite-constant-component-quotient] to $G$. Write $c:G\\to P_k$ for the resulting surjective homomorphism to the finite constant group scheme. Its topological fibres are exactly the connected components of $G$. This construction applies to the given finite-type affine $G$ without reducedness or smoothness.",
+   "uses": [
+    "lem-sfb-finite-constant-component-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.59(a), first sentence of the proof, printed p.114; component quotient from Proposition 2.37(b),(d), printed pp.51-52."
+   }
+  },
+  {
+   "text": "Let $i:L\\to G$ be the kernel inclusion. The inverse images under $ci$ of the summands $\\operatorname{Spec}k\\subset P_k$ form a finite disjoint open-and-closed covering of $L$. Connectedness [def-weil-connected-scheme] makes exactly one nonempty. It is the identity summand since $ci$ preserves the identity. Thus $ci$ factors through that open subscheme: restrict the morphism and its sheaf map to the inverse image, which is all of $L$ [def-weil-open-immersion]. The resulting $k$-morphism $L\\to\\operatorname{Spec}k$ is its structural map. Hence $ci=e_{P_k}\\circ(L\\to\\operatorname{Spec}k)$ as scheme morphisms, including on nonreduced test algebras.",
+   "uses": [
+    "def-weil-connected-scheme",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.59(a), proof: the connected kernel maps to the identity in the component group, printed p.114; explicit open-summand argument."
+   }
+  },
+  {
+   "text": "Under the affine-spectrum correspondence [def-weil-affine-spectrum], put $A=k[Q]$, $B=k[G]$ and let $\\varphi=p^*:A\\to B$. Flatness of $p$ gives flatness of $\\varphi$ by [lem-weil-pbc-flat-ring-map-iff-flat-affine]. Surjectivity of $p$ is surjectivity of $\\operatorname{Spec}B\\to\\operatorname{Spec}A$, so [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] makes $\\varphi$ faithfully flat in the module sense. Apply [lem-sfb-faithfully-flat-group-quotient-universal] to $p$ and $u=c$. Its three groups $G,Q,P_k$ are affine of finite type, its kernel is the given $L$, and step 2 is precisely its required equality on that scheme-theoretic kernel. Obtain a homomorphism $v:Q\\to P_k$ with $c=vp$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "lem-sfb-faithfully-flat-group-quotient-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.59(a), factorization through $Q$, printed p.114; Theorem 5.13, printed p.101. Affine flatness comparison: Stacks Tag 01U5 (morphisms-lemma-flat-characterize); faithful flatness: Tag 00HQ (algebra-lemma-ff-rings)."
+   }
+  },
+  {
+   "text": "Apply the open-and-closed inverse-image argument of step 2 to $v:Q\\to P_k$. Connectedness of $Q$ and preservation of the identity show that $v$ factors through the identity summand as a scheme morphism. Thus $c=vp$ has topological image $\\{1\\}$. Since $c$ is surjective, $P=\\{1\\}$. Its sole fibre is all of $G$, and step 1 identifies that fibre with a connected component. Consequently $G$ is connected [def-weil-connected-scheme]; it is nonempty since it has its identity section.",
+   "uses": [
+    "def-weil-connected-scheme",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.59(a), final factorization through the trivial component quotient of the connected $Q$, printed p.114; the finite discrete target argument is written out directly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-constant-component-quotient",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-sfb-faithfully-flat-group-quotient-universal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 5.59(a), printed p.114, with Proposition 2.37(b),(d), printed pp.51-52, and Theorem 5.13, printed p.101. Connected maps to the finite constant target are checked by their open-and-closed summands."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact sequence of algebraic group schemes with connected kernel and connected quotient has connected middle group, including non smooth infinitesimal kernels",
+   "results": "8 hits: CategoryTheory.TwoSquare.GuitartExact.isConnected_rightwards, CategoryTheory.TwoSquare.instIsConnectedStructuredArrowCostructuredArrowObjCostructuredArrowRightwardsOfGuitartExact, CategoryTheory.TwoSquare.instIsConnectedCostructuredArrowStructuredArrowObjStructuredArrowDownwardsOfGuitartExact, CategoryTheory.PreGaloisCategory.IsGalois.toIsConnected, Algebra.H1Cotangent.exact_map_δ, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected, Algebra.Generators.H1Cotangent.exact_map_δ', Algebra.Generators.H1Cotangent.exact_δ_map.  Logged digest b1fcafe05317e0d4.",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract GroupExtension constructors, categorical connectedness, faithful-flat/open scheme maps and geometric connectedness of individual morphisms do not state this extension theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "(connected|preconnected).*(kernel|exact)|(kernel|exact).*(connected|preconnected)",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean.  Logged digest 173eef4aa025bfd0. Searched Mathlib/AlgebraicGeometry/.",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract GroupExtension constructors, categorical connectedness, faithful-flat/open scheme maps and geometric connectedness of individual morphisms do not state this extension theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConnected\", \"ker\"",
+   "results": "0 hits: none.  Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract GroupExtension constructors, categorical connectedness, faithful-flat/open scheme maps and geometric connectedness of individual morphisms do not state this extension theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An extension of connected algebraic group schemes by a connected kernel is connected without smoothness assumptions",
+   "results": "8 hits: GroupExtension.mk.inj, GroupExtension.noConfusion, GroupExtension.casesOn, GroupExtension.mk.noConfusion, GroupExtension.mk.injEq, GroupExtension.rec, AddGroupExtension.mk.inj, AddGroupExtension.recOn.  Logged digest ad60895d5829448e.",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract GroupExtension constructors, categorical connectedness, faithful-flat/open scheme maps and geometric connectedness of individual morphisms do not state this extension theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat morphism of affine algebraic groups with connected scheme theoretic kernel and connected target has connected source",
+   "results": "8 hits: AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.Flat, AlgebraicGeometry.flat_and_surjective_SpecMap_iff, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.isIso_of_surjective_of_mono, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, PrimeSpectrum.comap_surjective_of_faithfullyFlat, AlgebraicGeometry.UniversallyOpen.of_flat.  Logged digest 445293c33fdc3fbb.",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract GroupExtension constructors, categorical connectedness, faithful-flat/open scheme maps and geometric connectedness of individual morphisms do not state this extension theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "connected|preconnected|component",
+   "results": "0 hits: none.  Logged digest 4f53cda18c2baa0c. Searched Mathlib/AlgebraicGeometry/Group/.",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract GroupExtension constructors, categorical connectedness, faithful-flat/open scheme maps and geometric connectedness of individual morphisms do not state this extension theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ConnectedSpace\", \"GroupScheme\"",
+   "results": "0 hits: none.  Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract GroupExtension constructors, categorical connectedness, faithful-flat/open scheme maps and geometric connectedness of individual morphisms do not state this extension theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "(connected|preconnected).*(kernel|exact)|(kernel|exact).*(connected|preconnected)",
+   "results": "{\"t\": \"2026-10-23T22:37:39Z\", \"tool\": \"grep\", \"query\": \"(connected|preconnected).*(kernel|exact)|(kernel|exact).*(connected|preconnected)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\"], \"digest\": \"173eef4aa025bfd0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give abstract group extensions, categorical connectedness, flatness criteria or connected fibres for an already geometrically connected morphism; none proves connectedness of an affine group-scheme extension from its kernel and quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An extension of connected algebraic group schemes by a connected kernel is connected even when the kernel is nonreduced",
+   "results": "{\"t\": \"2026-10-23T22:37:39Z\", \"tool\": \"leansearch\", \"query\": \"An extension of connected algebraic group schemes by a connected kernel is connected even when the kernel is nonreduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension.mk.noConfusion\", \"AddGroupExtension.recOn\", \"GroupExtension.mk.injEq\", \"GroupExtension.casesOn\", \"AddGroupExtension.casesOn\", \"Algebra.Extension.ker_infinitesimal\", \"AddGroupExtension\", \"GroupExtension.recOn\"], \"digest\": \"825e87c1fd0cacdb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give abstract group extensions, categorical connectedness, flatness criteria or connected fibres for an already geometrically connected morphism; none proves connectedness of an affine group-scheme extension from its kernel and quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ConnectedSpace\", \"ker\"",
+   "results": "{\"t\": \"2026-10-23T22:37:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"ConnectedSpace\\\", \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give abstract group extensions, categorical connectedness, flatness criteria or connected fibres for an already geometrically connected morphism; none proves connectedness of an affine group-scheme extension from its kernel and quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithfully flat homomorphism of affine finite type group schemes with connected kernel and connected target has connected source",
+   "results": "{\"t\": \"2026-10-23T22:37:40Z\", \"tool\": \"leanfinder\", \"query\": \"A faithfully flat homomorphism of affine finite type group schemes with connected kernel and connected target has connected source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"PrimeSpectrum.comap_surjective_of_faithfullyFlat\", \"PrimeSpectrum.specComap_surjective_of_faithfullyFlat\"], \"digest\": \"581e96350b46bd99\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give abstract group extensions, categorical connectedness, flatness criteria or connected fibres for an already geometrically connected morphism; none proves connectedness of an affine group-scheme extension from its kernel and quotient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-commutative-unipotent-commutator",
+  "date": "2026-10-24",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Theorem 16.40, printed pp.338–339, connectedness assertion; the proof is induction using Lemma 16.39 and the quotient sequence. The extra unipotent-factor assertion of the theorem is not needed. Supporting input for Milne 16.40: Lemma 16.39, printed p.338. The rational-point decomposition is the rational-point consequence of its surjective morphism $N\times C_N(s)\to N$ over an algebraically closed field. Supporting input: Proposition 5.59(a), printed p.114, exact sequence of algebraic groups, with Proposition 5.45 and Section 5(j) for faithful-flat exactness. In Lemma 16.39, printed p.338, it is applied to a connected kernel which need not be reduced.",
+   "via": [
+    "lem-sfb-semisimple-commutative-unipotent-commutator",
+    "lem-sfb-solvable-semisimple-centralizer-connected",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-connected-group-extension",
+  "worker": "stage1",
+  "summary": "Q91 checked Milne Proposition 5.59(a) and follows its component-group/quotient argument. Isolated the finite constant component quotient for possibly nonreduced affine groups, reused the existing faithfully-flat quotient universal property, and explicitly checked scheme-level triviality on the connected kernel and quotient. Converted the scheme faithful-flatness hypotheses to the coordinate-algebra version using existing Mathlib leaves. Statement unchanged. No Lean writing or compilation.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration route through Milne 16.39 and 5.59(a). The latest blueprint direct-images proof (3) supplies that outer route; this auxiliary component-group argument is below the unit level. The inherited blueprint.from.node=null matches the ancestor command and is retained; from.place is already specific. Whole-blueprint searches found no equivalent scheme-level component quotient for arbitrary nonreduced affine groups."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-2eb11a2ed",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-2eb11a2ed (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, checked every cited statement, and read Milne iAG2017 Prop 5.59(a) (p.114) and §2(g)/Prop 2.37(b),(d) and Rem 2.39 (pp.51-52) in the PDF. No repair note exists, so this is a first split. The item statement is unchanged and not weakened; Frobenius with kernel α_p (nonreduced) is covered. New node lem-sfb-finite-constant-component-quotient: Milne's π0 construction over algebraically closed k, a surjection G→P_k whose fibres are the components. It is true; I tested G=1, P_k, α_p/μ_p and D_n⋊S_n. It is self-contained, not a clause of the parent, and not a duplicate: neutral-component-translates, affine-normal-quotient-geometry, wf-algebraic-component-cosets and continuous-connected-component-lift give no group-scheme π0 quotient. Proof steps: 1 applies the new node. 2 is an elementary clopen-summand argument giving c∘i trivial as scheme morphisms. 3 turns flat+surjective into faithfully flat (Stacks 01U5, 00HQ), then applies faithfully-flat-group-quotient-universal (hypotheses match) to get v with c=vp. 4 repeats the argument for connected Q, so P=1 and G is connected. Both connectedness hypotheses are needed. No SGA, no tool_uses, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ConnectedExtension",
+  "declaration": "AlgebraicGeometry.connectedSpace_of_connected_kernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ConnectedExtension.lean",
+  "statement": "theorem connectedSpace_of_connected_kernel {k : Type u} [Field k] [IsAlgClosed k] (G Q : Over (Spec (.of k))) [GrpObj G] [GrpObj Q] [IsAffine G.left] [IsAffine Q.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [LocallyOfFiniteType Q.hom] [QuasiCompact Q.hom] (p : G ⟶ Q) [IsMonHom p] [Flat p.left] [Surjective p.left] [ConnectedSpace (GrpObj.ker p).left] [ConnectedSpace Q.left] : ConnectedSpace G.left",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df7f9dde3",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: IsAlgClosed field; Over (Spec k) GrpObj G,Q affine, LOFT+QC (finite type record); IsMonHom p with Flat p.left and Surjective p.left; kernel = GrpObj.ker p = pullback p η[Q], the scheme-theoretic fibre product (nonreduced kernels such as α_p covered); ConnectedSpace for kernel and Q; conclusion ConnectedSpace G.left. No extra smoothness/reducedness/commutativity, explicit universe u, no auto-bound variables, lean.statement verbatim in file, docstrings carry source/blueprint/4 proof steps. Node copy differs from live only by the lean record; no duplicate in side-live. Report has Worker report and Second reading by Q25 sections (self second-reading, advisory). Advisory H9: plain import RingHom.FaithfullyFlat redundant via Morphisms.Flat. Not recompiled (no change)."
+ }
+}

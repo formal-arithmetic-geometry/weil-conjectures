@@ -1,0 +1,355 @@
+{
+ "id": "lem-sfb-locally-algebraic-group-identity-component",
+ "kind": "statement",
+ "title": "The identity component and smooth reduction of a locally algebraic group",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $G$ be a group scheme locally of finite type over $k$ [def-sc-group-scheme, def-weil-finite-type-morphism]. Let $G^0$ denote the connected component of the identity in $|G|$ (a connected component is a maximal connected subset) [def-weil-connected-scheme]. Then $G^0$ is open and closed in $G$; with its open-subscheme structure [def-weil-open-immersion], it is a subgroup scheme, is geometrically irreducible [def-pc-geometrically-irreducible], and is of finite type over $k$. Formation of $G^0$ commutes with extension of the base field. Moreover $(G^0)_{\\mathrm{red}}$, the closed subscheme obtained by quotienting the structure sheaf by its nilradical [def-weil-pbc-scheme-reduction, def-pc-reduced-scheme], is a smooth connected integral separated group scheme of finite type over $k$ [def-sbc-smooth-morphisms, def-pc-integral-scheme, def-weil-proper-morphism]. It has the same underlying topological space as $G^0$.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0B7R (proposition-connected-component: geometrically irreducible quasi-compact closed identity subgroup); openness for locally Noetherian schemes; Tag 047R (lemma-reduced-subgroup-scheme-perfect), Tag 047P (lemma-reduced-group-scheme-prefect-field-characteristic-p-smooth) and characteristic-zero Tag 047N (lemma-group-scheme-characteristic-zero-smooth). Separatedness: Tag 047L (lemma-group-scheme-over-field-separated)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-pc-reduced-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-pc-geometrically-irreducible",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "proof": [
+  {
+   "text": "By pqf-lem-locnoeth-lft, $G$ is locally Noetherian, since a field is Noetherian. Apply lem-sfb-group-local-minimal-prime at each point $x$. On an affine neighbourhood $U=\\operatorname{Spec}A$ of $x$, write $x=\\mathfrak p$. The components of $U$ through $x$ are the $V(\\mathfrak q)$ for minimal primes $\\mathfrak q\\subseteq\\mathfrak p$. The inclusion-preserving prime correspondence for $A\\to A_{\\mathfrak p}=\\mathcal O_{G,x}$ identifies these primes with the minimal primes of that local ring: a prime strictly below one remains below $\\mathfrak p$, so minimality is preserved in both directions. Thus precisely one component of $U$ contains $x$. Components of $G$ meeting $U$ inject into those of $U$ by intersection, so at most one component of $G$ contains $x$. Every point lies in some component; hence distinct components of $G$ are disjoint.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-group-local-minimal-prime",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-primes-of-localization",
+    "lem-sc-components-open-injection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047M, lemma-group-scheme-field-geometrically-irreducible; local prime correspondence and affine component description"
+   }
+  },
+  {
+   "text": "The components are locally finite by lem-sc-locnoeth-components-locally-finite. Fix a component $Z$ and $x\\in Z$. Choose a neighbourhood meeting only finitely many components and remove the other components meeting that neighbourhood; they are closed and none contains $x$. The remaining neighbourhood lies in $Z$. Thus all components are open, as well as closed. An irreducible component is connected, while a connected subset meeting a clopen component cannot leave it. Therefore the neutral irreducible component $Z$ is precisely $G^0$. Let $C$ be its open subscheme. Its reduction is the reduced induced closed scheme on $Z$: on an affine chart the clopen restriction followed by quotient by the nilradical gives exactly the reduced structure on that subset. By lem-sfb-group-local-minimal-prime this reduced scheme is geometrically irreducible. The reduction map $C_{\\mathrm{red}}\\to C$ is a universal homeomorphism, so after every field extension its source and target have homeomorphic underlying spaces. Hence $C$ itself is geometrically irreducible.",
+   "uses": [
+    "lem-sc-locnoeth-components-locally-finite",
+    "lem-sfb-group-local-minimal-prime",
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047M and proof of Tag 0B7R, proposition-connected-component; local finiteness supplies openness in the locally Noetherian case"
+   }
+  },
+  {
+   "text": "The product $C\\times_k C$ is irreducible by lem-sc-irreducible-product-over-field. Its multiplication image is connected and contains $e$, hence lies in $C=G^0$. Inversion sends the connected set $C$ to a connected subset containing $e$, so its image also lies in $C$. The identity section has image $e\\in C$. Factor these three morphisms uniquely through the open subscheme $C$ using lem-weil-pbc-morphism-factors-through-open-subscheme. These factorizations satisfy every group identity: composing the two sides of each identity with $C\\hookrightarrow G$ gives the identity in $G$, and uniqueness of factorization through this open immersion makes the sides equal. Thus $C$ is a subgroup scheme, with its open structure, without having assumed reducedness.",
+   "uses": [
+    "lem-sc-irreducible-product-over-field",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R, proposition-connected-component, proof: unit, inversion and multiplication factor through the neutral component"
+   }
+  },
+  {
+   "text": "Apply lem-sfb-irreducible-group-quasi-compact to the group scheme $C$, which is irreducible by step 2. It is quasi-compact. As an open subscheme of $G$, it is locally of finite type over $k$: at each point restrict to an affine finite-type chart lying in that open, obtained by taking a principal affine neighbourhood in a finite-type affine chart of $G$; localization $A_f$ is generated over $k$ by generators for $A$ and $f^{-1}$. Quasi-compactness chooses finitely many of these charts. Equivalently, locally of finite type plus quasi-compact is finite type, so $C/k$ is of finite type.",
+   "uses": [
+    "lem-sfb-irreducible-group-quasi-compact",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7P, lemma-irreducible-group-scheme-over-field-qc; Tag 0B7R, conclusion (4)"
+   }
+  },
+  {
+   "text": "Let $K/k$ be any field extension. Base change of the clopen decomposition $G=C\\amalg(G\\setminus C)$ gives the clopen decomposition $G_K=C_K\\amalg(G\\setminus C)_K$, with the pullback open-subscheme structures. Since $C$ is geometrically irreducible, $C_K$ is irreducible and therefore connected, and it contains the identity $e_K$. Consequently $C_K$ lies in the connected component of $e_K$ in $G_K$. Conversely that connected component cannot meet both pieces of the clopen decomposition, so it lies in $C_K$. This proves equality of the underlying components. Their open-subscheme structures agree, being the restriction of the same structure sheaf of $G_K$. Thus $(G^0)_K=(G_K)^0$ canonically as open subgroup schemes.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "def-pc-base-change",
+    "def-weil-open-immersion",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R, geometric irreducibility assertion, with the clopen identity-component construction"
+   }
+  },
+  {
+   "text": "Put $R=C_{\\mathrm{red}}$ and $j:R\\hookrightarrow C$. Reduction is a homeomorphism and $R$ is reduced. Therefore $R$ is connected and irreducible, hence integral by def-pc-integral-scheme. It is of finite type: the finite affine cover of $C$ induces a finite cover with rings $A/\\sqrt{0}$, still finitely generated over $k$. An algebraically closed field is perfect (in characteristic $p$, every element has a root of $T^p-a$). On affine charts of $R\\times_kR$ the rings are tensor products of reduced $k$-algebras, hence are reduced by lem-weil-pbc-perfect-reduced-tensor. Thus $R$, $R\\times_kR$ and $\\operatorname{Spec}k$ are reduced. Apply lem-weil-pbc-reduced-source-factors-through-closed-subscheme to the inverse, multiplication and unit maps into $C$ to factor them through $j$. Factorizations are unique because a closed immersion is a monomorphism; after composition with $j$ their group identities are those of $C$. Hence $R$ is a closed subgroup scheme of $C$.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "def-weil-pbc-scheme-reduction",
+    "def-pc-integral-scheme",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-perfect-reduced-tensor",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047R, lemma-reduced-subgroup-scheme-perfect, including its omitted factorization argument; Tag 00I4 for reduced tensor products"
+   }
+  },
+  {
+   "text": "The finite-type reduced scheme $R$ over the perfect field $k$ is geometrically reduced by lem-kun-geometric-reduced-perfect. All hypotheses of lem-sfb-geometrically-reduced-group-smooth now hold: $R$ is a group scheme by step 6, is locally of finite type, and is geometrically reduced. Hence $R/k$ is smooth. Apply lem-sc-group-scheme-separated-field to $R$ to obtain separatedness. Together with step 6 this gives smoothness, connectedness, integrality, separatedness and finite type, and the reduction homeomorphism gives exactly the same underlying space as $G^0$.",
+   "uses": [
+    "lem-kun-geometric-reduced-perfect",
+    "lem-sfb-geometrically-reduced-group-smooth",
+    "lem-sc-group-scheme-separated-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 047P and 047N (smoothness over a perfect field), Tag 047L (separatedness)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-locnoeth-lft",
+  "lem-sfb-group-local-minimal-prime",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-sc-components-open-injection",
+  "lem-sc-locnoeth-components-locally-finite",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "def-weil-pbc-scheme-reduction",
+  "lem-sc-irreducible-product-over-field",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-sc-group-scheme",
+  "lem-sfb-irreducible-group-quasi-compact",
+  "def-weil-finite-type-morphism",
+  "def-pc-geometrically-irreducible",
+  "def-pc-base-change",
+  "def-weil-open-immersion",
+  "def-weil-connected-scheme",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-perfect-reduced-tensor",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-weil-closed-immersion",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-sc-group-scheme-separated-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0B7R proof, using Tag 047M and Tag 0B7P; Tag 047R and its reduced-product hint; Tags 047P, 047N and 047L. Local Noetherian specialization and field-extension compatibility written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The connected component of the identity of a locally finite type group scheme is open closed quasi compact geometrically irreducible and its reduction over a perfect field is smooth",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], IrreducibleSpace ↥X\", \"doc\": \"Every integral scheme has an irreducible underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsIntegral X ↔ IrreducibleSpace ↥X ∧ AlgebraicGeometry.IsReduced X\", \"doc\": \"A scheme $X$ is integral if and only if it is irreducible as a topological space and reduced (i.e., all its local rings have no nonzero nilpotent elements).\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsReduced X] [H : IrreducibleSpace ↥X],\\n  AlgebraicGeometry.IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], AlgebraicGeometry.IsReduced X\", \"doc\": \"Every integral scheme is a reduced scheme. That is, if a scheme $X$ is integral (meaning it is both irreducible and reduced), then it necessarily satisfies the condition of being reduced (all its loca\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral.nonempty\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsIntegral X], Nonempty ↥X\", \"doc\": \"Every integral scheme has a non-empty underlying topological space.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: topological group components and scheme finiteness lemmas do not establish the group-scheme component and smooth-reduction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group scheme locally of finite type over a field has a finite type open and closed identity subgroup; reduced groups over perfect fields are smooth",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [Subsingleton ↥X] [AlgebraicGeometry.IsReduced X] [JacobsonSpace ↥Y],\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $X$ is a reduced scheme with a single point (subsingleton) and $Y$ is a Jacobson space, then a morphism $f : X \\\\to Y$ is finite if and only if it is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [JacobsonSpace ↥X] {x : ↥X},\\n  IsClosed {x} ↔ AlgebraicGeometry.LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"For a Jacobson scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(x)$ is the resid\"}\n  {\"name\": \"Algebra.FormallyUnramified.isReduced_of_field\", \"module\": \"Mathlib/RingTheory/Unramified/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u_2) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A]\\n  [Algebra.FormallyUnramified K A] [Algebra.EssFiniteType K A], IsReduced A\", \"doc\": \"If $ A $ is a formally unramified algebra over a field $ R $, then $ A $ is a reduced ring, meaning it contains no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme.finite\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsArtinianScheme X], Finite ↥X\", \"doc\": \"Every Artinian scheme is a finite scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], AlgebraicGeometry.IsReduced X\", \"doc\": \"Every integral scheme is a reduced scheme. That is, if a scheme $X$ is integral (meaning it is both irreducible and reduced), then it necessarily satisfies the condition of being reduced (all its loca\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: topological group components and scheme finiteness lemmas do not establish the group-scheme component and smooth-reduction theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Identity component of locally algebraic group scheme is finite type open closed geometrically irreducible",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subgroup.connectedComponentOfOne\", \"module\": \"Mathlib.Topology.Algebra.Group.Basic\", \"type\": \"(G : Type*) [TopologicalSpace G] [Group G] [IsTopologicalGroup G] : Subgroup G\", \"doc\": \"The subgroup of a topological group $G$ consisting of all elements in the connected component of the identity element $1$. This is the maximal preconnected subset containing $1$, and it forms a subgro\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"[IsOpenImmersion f] : LocallyOfFiniteType f\", \"doc\": \"Any open immersion between schemes is locally of finite type.\"}\n  {\"name\": \"OpenNormalSubgroup.pathComponentOne\", \"module\": \"Mathlib.Topology.Connected.PathComponentOne\", \"type\": \"[Group G] [IsTopologicalGroup G] [LocPathConnectedSpace G] : OpenNormalSubgroup G\", \"doc\": \"In a locally path-connected topological group $ G $, the subgroup consisting of all elements path-connected to the identity element $ 1 $ forms an open normal subgroup. This follows from the local pat\"}\n  {\"name\": \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsNoetherian X] : (irreducibleComponents X).Finite\", \"doc\": \"If $ X $ is a Noetherian scheme, then the set of its irreducible components is finite.\"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X : Scheme.{u}} [JacobsonSpace X] {x : X} : IsClosed { x } ↔ LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"For a Jacobson scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(x)$ is the resid\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [h : IsClosedImmersion f] : LocallyOfFiniteType f\", \"doc\": \"Every closed immersion of schemes is locally of finite type. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with surjective \"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeCoverOfIsIsoIsOpenImmersionId\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X} [IsAffine X] (i) : IsAffine ((Scheme.coverOfIsIso (P := @IsOpenImmersion) (𝟙 X)).X i)\", \"doc\": \"For any affine scheme $X$, the components of the scheme cover constructed from the identity morphism $\\\\text{id}_X$ (viewed as an open immersion) are affine schemes. Specifically, if $X$ is affine, the\"}\n  {\"name\": \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsIntegral X] : IrreducibleSpace X\", \"doc\": \"Every integral scheme has an irreducible underlying topological space.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: topological group components and scheme finiteness lemmas do not establish the group-scheme component and smooth-reduction theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommGrpObj\", \"connectedComponent\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: topological group components and scheme finiteness lemmas do not establish the group-scheme component and smooth-reduction theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "identityComponent|connectedComponent.*[Gg]roup|[Gg]roup.*connectedComponent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: topological group components and scheme finiteness lemmas do not establish the group-scheme component and smooth-reduction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The connected component of the identity of a group scheme locally of finite type over an algebraically closed field is finite type and geometrically irreducible and its reduction is a smooth subgroup",
+   "results": "msearch leanfinder: OK, 8 hits. Recorded hit names/files: Subgroup.connectedComponentOfOne, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected, AlgebraicGeometry.IsIntegral. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits were read; topological identity components and general scheme properties do not establish the locally finite type group-scheme assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Identity component of a locally finite type group scheme is open closed finite type with smooth reduced subgroup",
+   "results": "msearch leansearch: OK, 8 hits. Recorded hit names/files: Subgroup.connectedComponentOfOne, Subgroup.pathComponentOne, OpenNormalSubgroup.pathComponentOne_carrier, OpenNormalSubgroup.pathComponentOne, AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, Subgroup.isOpen_of_one_mem_interior, AlgebraicGeometry.instIsAffineXSchemeCoverOfIsIsoIsOpenImmersionId, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits were read; topological identity components and general scheme properties do not establish the locally finite type group-scheme assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"connectedComponent\"",
+   "results": "msearch loogle: OK, 0 hits. Recorded hit names/files: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits were read; topological identity components and general scheme properties do not establish the locally finite type group-scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally algebraic group schemes have an open finite type neutral component and a smooth reduced neutral component",
+   "results": "msearch leanfinder: OK, 8 hits. Recorded hit names/files: AlgebraicGeometry.IsReduced, AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.Scheme.local_affine. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits were read; topological identity components and general scheme properties do not establish the locally finite type group-scheme assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-picard-identity-representability",
+  "date": "2026-10-23",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: The identity component and smooth reduction of a locally algebraic group.",
+   "via": [
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-locally-algebraic-group-identity-component",
+  "worker": "stage1",
+  "summary": "Q36 read the Stacks sources, excluded the finite-type-only upstream identity-component declarations as attachments, and split via local minimal primes, clopen components, subgroup factorization, irreducible-group quasi-compactness, field-extension compatibility and reduced multiplication. Reused existing reduced-group smoothness, reduced tensor and separatedness nodes. Two statement-only inputs; no new Mathlib leaves. Corrected the reduction-definition citation and doubled TeX, without changing the mathematical assertion.",
+  "blueprint": "Realizes the existing ancestor place recorded in blueprint.from.place: det-thm-sf-ctf-stability-direct-images proof (3), via the projective Picard identity representability prerequisite. The current ancestor command returns None because an earlier created.item chain ends in a module name; retained its null from.node and explicit place, without editing the other nodes.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic scheme/algebra tool used with its stated hypotheses in the identity-component argument; the Ctf-stability unit has no replacement for this supporting fact."
+   },
+   {
+    "node": "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "why": "Generic scheme/algebra tool used with its stated hypotheses in the identity-component argument; the Ctf-stability unit has no replacement for this supporting fact."
+   },
+   {
+    "node": "lem-weil-pbc-primes-of-localization",
+    "why": "Generic scheme/algebra tool used with its stated hypotheses in the identity-component argument; the Ctf-stability unit has no replacement for this supporting fact."
+   },
+   {
+    "node": "lem-sc-components-open-injection",
+    "why": "Generic scheme/algebra tool used with its stated hypotheses in the identity-component argument; the Ctf-stability unit has no replacement for this supporting fact."
+   },
+   {
+    "node": "lem-sc-locnoeth-components-locally-finite",
+    "why": "Generic scheme/algebra tool used with its stated hypotheses in the identity-component argument; the Ctf-stability unit has no replacement for this supporting fact."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Generic scheme/algebra tool used with its stated hypotheses in the identity-component argument; the Ctf-stability unit has no replacement for this supporting fact."
+   },
+   {
+    "node": "lem-sc-irreducible-product-over-field",
+    "why": "Generic scheme/algebra tool used with its stated hypotheses in the identity-component argument; the Ctf-stability unit has no replacement for this supporting fact."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Generic scheme/algebra tool used with its stated hypotheses in the identity-component argument; the Ctf-stability unit has no replacement for this supporting fact."
+   },
+   {
+    "node": "lem-weil-pbc-perfect-reduced-tensor",
+    "why": "Generic scheme/algebra tool used with its stated hypotheses in the identity-component argument; the Ctf-stability unit has no replacement for this supporting fact."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic scheme/algebra tool used with its stated hypotheses in the identity-component argument; the Ctf-stability unit has no replacement for this supporting fact."
+   },
+   {
+    "node": "lem-kun-geometric-reduced-perfect",
+    "why": "Generic scheme/algebra tool used with its stated hypotheses in the identity-component argument; the Ctf-stability unit has no replacement for this supporting fact."
+   },
+   {
+    "node": "lem-sc-group-scheme-separated-field",
+    "why": "Generic scheme/algebra tool used with its stated hypotheses in the identity-component argument; the Ctf-stability unit has no replacement for this supporting fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-sc-components-open-injection",
+  "lem-sc-locnoeth-components-locally-finite",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-sc-irreducible-product-over-field",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-perfect-reduced-tensor",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-sc-group-scheme-separated-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-b689bed88",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-b689bed88 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement, plus Stacks groupoids.tex at 047L, 047M (with the mu_3 warning remark), 047R, 0B7P, 0B7Q and 0B7R. New nodes: lem-sfb-group-local-minimal-prime is exactly 047M(1)-(3) for any group scheme over any field, and lem-sfb-irreducible-group-quasi-compact is exactly 0B7P with no finite-type hypothesis. Both are statement-only, have five recorded searches, and are strictly smaller than the item. Searches of the DAG and of the clones/live and side-live trees found no duplicate: existing group nodes assume finite type or are about abelian varieties. Steps: (1) gives a locally Noetherian G (01T6); minimal primes of Spec A inside p match those of A_p, so 047M(1) gives one component through each point, and the open-injection node makes the components disjoint. (2) Local finiteness makes components clopen, so Z = G^0; C_red is the reduced structure on Z, and the universal homeomorphism transfers geometric irreducibility from 047M(3) to C. (3) Irreducible C x C has image inside C; the maps factor uniquely through the open subscheme, so C is a subgroup. (4) 0B7P gives quasi-compactness, which with local finite type gives finite type; G is never assumed quasi-compact. (5) The clopen decomposition survives base change to any K/k, so (G^0)_K = (G_K)^0; I accept marking this step elementary. (6) R = C_red is integral and of finite type; R x R is reduced via 00I4 over the perfect field k; reduced-source factorization plus the monomorphism property make R a closed subgroup, which fills in 047R's omitted proof. (7) Reduced and finite type over a perfect field gives geometrically reduced, then smooth_of_grpObj gives smooth and 047L gives separated. All clauses are covered. The statement differs from the live base only in wording and three added definition citations. The item is still unsplit in live and side-live. Edge cases checked: trivial group, Z_k, alpha_p and mu_p, elliptic curve. The 12 declared tool uses are generic and accepted. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyAlgebraicGroupIdentityComponent",
+  "declaration": "AlgebraicGeometry.locallyAlgebraicGroup_identityComponent",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyAlgebraicGroupIdentityComponent.lean",
+  "statement": "theorem locallyAlgebraicGroup_identityComponent (k : Type u) [Field k] [IsAlgClosed k] (G : Over (Spec (.of k))) [GrpObj G] [LocallyOfFiniteType G.hom] : ∃ U : G.left.Opens, (U : Set G.left) = connectedComponent (GrpObj.onePoint G) ∧ IsClosed (U : Set G.left) ∧ GeometricallyIrreducible (U.ι ≫ G.hom) ∧ LocallyOfFiniteType (U.ι ≫ G.hom) ∧ QuasiCompact (U.ι ≫ G.hom) ∧ (∀ (K : Type u) [Field K] [Algebra k K], (pullback.fst G.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ⁻¹' (U : Set G.left) = connectedComponent (GrpObj.onePoint ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj G))) ∧ ∃ gC : GrpObj (Over.mk (U.ι ≫ G.hom)), @IsMonHom _ _ _ _ _ gC.toMonObj _ (Over.homMk (V := G) U.ι) ∧ Smooth (U.toScheme.nilradical.subschemeι ≫ U.ι ≫ G.hom) ∧ ConnectedSpace U.toScheme.nilradical.subscheme ∧ IsIntegral U.toScheme.nilradical.subscheme ∧ IsSeparated (U.toScheme.nilradical.subschemeι ≫ U.ι ≫ G.hom) ∧ LocallyOfFiniteType (U.toScheme.nilradical.subschemeι ≫ U.ι ≫ G.hom) ∧ QuasiCompact (U.toScheme.nilradical.subschemeι ≫ U.ι ≫ G.hom) ∧ IsHomeomorph U.toScheme.nilradical.subschemeι ∧ ∃ gR : GrpObj (Over.mk (U.toScheme.nilradical.subschemeι ≫ U.ι ≫ G.hom)), @IsMonHom _ _ _ _ _ gR.toMonObj gC.toMonObj (Over.homMk U.toScheme.nilradical.subschemeι)",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df55c3275",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean. Hypotheses: k : Type u, Field, IsAlgClosed; G : Over (Spec k), GrpObj, LocallyOfFiniteType only, no qc. Conclusion: U : Opens with carrier = connectedComponent(onePoint), closed; gC GrpObj with IsMonHom of U.ι (mono, so determined); GeometricallyIrreducible; LocallyOfFiniteType+QuasiCompact; for every field K : Type u, preimage of U under pullback.fst = identity component of the base-changed group; U.toScheme.nilradical.subscheme is Smooth, Connected, Integral, Separated, finite type, IsHomeomorph subschemeι, gR IsMonHom into gC. Checked against Stacks 0B7R and 047R (groupoids.tex), with the 047L/047N/047P citations. Item JSON differs from live and side-live only in lean; lean.statement is verbatim; no new defs or nodes; proof is sorry only; docstrings carry source place, blueprint tag and the 7 proof steps; report has Worker report and Second reading sections (second reading by the same worker, which has precedent). Plain imports = proof_dep modules. Upstream identity-component API requires QuasiCompact, so it cannot be attached and there is no duplicate. Edge cases: trivial group, Z_k, alpha_p and mu_p, elliptic curve, empty scheme impossible, arbitrary K. Advisory: onePoint comes from GroupScheme.Basic (owned by def-wf-algebraic-components, not a stmt_dep); it is the unit-section point. No compile run (no file changed)."
+ }
+}

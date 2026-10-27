@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-orientation-perfect-lines",
+ "kind": "statement",
+ "title": "The actual orientation lines are invertible in the finite-Tor domains",
+ "statement": "Fix the finite-field datum $D$, coefficient datum $C$, a finite extension $E/\\mathbf Q_\\ell$, and exponent $n=m+1\\ge1$ of [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $S$ be a six-functor datum [def-sf-datum], $O$ a coherent orientation datum [sk-def-sf-orientation], and $f:X\\to Y$ a smooth separated morphism of relative dimension $d\\ge0$ between finite-type $D.k$-schemes, with a compactification $c$. At each of the finite, completed integral, rational and common-stage coefficient categories [sk-def-sf-operations], let $\\gamma_f:L\\xrightarrow{\\sim}W$ be the actual component of $O$, with $L$ its recorded shifted root line and $W=Rf^!\\Lambda_Y$. Then $L$ and $W$ belong to the recorded finite-Tor domain, and $L$ admits a two-sided tensor inverse in that full subcategory for the tensor of $S$. The line is the actual single-complex presentation used by $O$, with the canonical shift, localization and inclusion comparisons of [def-sf-orientation-scalar-line-comparisons], rather than a replacement orientation.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-datum",
+  "sk-def-sf-orientation",
+  "sk-def-sf-operations",
+  "def-sf-orientation-scalar-line-comparisons"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+  "place": "first paragraph, the canonical twist isomorphism with m=d and shift 2d"
+ },
+ "proof": [
+  {
+   "text": "The coefficient evaluation theorem at twist d and shift 2d provides finite-Tor membership and a two-sided inverse for the standard shifted Tate line at each coefficient stage. The single-functor shift isomorphism of def-sf-orientation-scalar-line-comparisons identifies the actual integral orientation line with that shifted coefficient. Lift its composite with the inverse inclusion shift comparison through the full subcategory. Apply finite reduction to this same isomorphism at finite coefficients; apply localization and then the base-stage inclusion with their shift comparisons at the field stages.",
+   "uses": [
+    "lem-sf-coefficient-evaluation-naturality",
+    "def-sf-orientation-scalar-line-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite and integral Tor-domain membership transports across an isomorphism by composing each isomorphism from a complex representative with its inverse (after derived reduction in the integral case). The constructibility clause is the target object membership. The rational and common domains are top. Lift the line isomorphism to the finite-Tor full subcategory; tensor its two orders with the inverse-line identity and compose the two original contractions. This gives two-sided invertibility of the actual line. Its orientation isomorphism transports membership to the exceptional target.",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
+    "sk-def-sf-orientation",
+    "def-sf-datum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-coefficient-evaluation-naturality",
+  "def-sf-orientation-scalar-line-comparisons",
+  "def-weil-finite-tor-amplitude",
+  "sk-def-sf-orientation",
+  "def-sf-datum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+  "place": "first paragraph; explicit transport through the recorded coefficient presentations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A shifted Tate coefficient line is invertible in the finite Tor category and remains so under scalar localization",
+   "results": "{\"t\": \"2026-10-25T09:58:29Z\", \"tool\": \"leansearch\", \"query\": \"A shifted Tate coefficient line is invertible in the finite Tor category and remains so under scalar localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.IsCompatibleWithShift.shiftFunctor_comp_inverts\", \"Module.Invertible.instLocalizationLocalizedModule\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"CategoryTheory.Triangulated.Localization.instAdditiveLocalization'ShiftFunctorInt\", \"CategoryTheory.Shift.instLinearLocalizationShiftFunctorOfCommShiftOfQ\", \"CategoryTheory.Shift.linear_of_localization\", \"CategoryTheory.Triangulated.Localization.instAdditiveLocalizationShiftFunctorInt\", \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'\"], \"digest\": \"ddf1ac91d0330817\"}",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.Functor.mapIso",
+   "results": "{\"t\": \"2026-10-25T09:43:59Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsIso, CategoryTheory.Functor.mapIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A shifted Tate coefficient line is invertible in the finite Tor category and remains so under scalar localization",
+   "results": "{\"t\": \"2026-10-25T09:44:00Z\", \"tool\": \"leanfinder\", \"query\": \"A shifted Tate coefficient line is invertible in the finite Tor category and remains so under scalar localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"fontaineThetaInvertP\", \"CategoryTheory.Shift.linear_of_localization\", \"Module.Invertible.of_isLocalization\", \"BDeRham\", \"CategoryTheory.Shift.instLinearLocalization'ShiftFunctorOfCommShiftOfQ'\", \"exists_bijective_map_powers\", \"CategoryTheory.Shift.instLinearLocalizationShiftFunctorOfCommShiftOfQ\", \"ModuleCat.Tilde.isUnit_toStalk\"], \"digest\": \"fe1648b45435b047\"}",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsInvertible|shift.*invertible|invertible.*shift",
+   "results": "{\"t\": \"2026-10-25T09:43:59Z\", \"tool\": \"grep\", \"query\": \"IsInvertible|shift.*invertible|invertible.*shift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/VectorField/LieBracket.lean\", \"Mathlib/Geometry/Manifold/VectorField/LieBracket.lean\", \"Mathlib/Geometry/Manifold/VectorField/LieBracket.lean\", \"Mathlib/Geometry/Manifold/VectorField/LieBracket.lean\", \"Mathlib/Geometry/Manifold/VectorField/LieBracket.lean\", \"Mathlib/Geometry/Manifold/VectorField/Pullback.lean\", \"Mathlib/Geometry/Manifold/VectorField/Pullback.lean\", \"Mathlib/Geometry/Manifold/VectorField/Pullback.lean\"], \"digest\": \"35c6bc216adeb6a1\"}",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrientedPerfectDuality",
+  "date": "2026-10-25",
+  "group": "H9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-dual-perfect",
+   "place": "proof, first paragraph: canonical twist isomorphism with m=d and shift 2d",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-dual-perfect",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrientationPerfectLines",
+  "file": "lean/Sheaf/Paper/OrientationPerfectLines.lean",
+  "declaration": "WeilConjectures.sfOrientationPerfectLines",
+  "declarations": [
+   "WeilConjectures.SfOrientationLineOnDomain",
+   "WeilConjectures.sfOrientationPerfectLines"
+  ],
+  "statement": "theorem sfOrientationPerfectLines\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum} {E : Type u}\n    [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] {m : ℕ}\n    {S : SixFunctorDatum D C E (m + 1) (Nat.succ_le_succ (Nat.zero_le m))}\n    (O : SfOrientationDatum S) {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    [IsSeparated f.hom.left] (d : ℕ) [SmoothOfRelativeDimension d f.hom.left]\n    (c : Compactification f.hom.left) :\n    SfOrientationLineOnDomain (S.finiteClosed X) (SixFunctorOrientation O f d c) ∧\n    SfOrientationLineOnDomain (S.integralClosed X)\n      (SixFunctorOrientation.integralComponent O f d c) ∧\n    SfOrientationLineOnDomain (S.rationalClosed X)\n      (SixFunctorOrientation.rationalComponent O f d c) ∧\n    SfOrientationLineOnDomain (S.commonClosed X)\n      (SixFunctorOrientation.commonComponent O f d c)",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6c85e",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261025T123118-L-1833257",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6c85e",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261025T123118-L-1833257",
+  "kind": "interface",
+  "note": "independent cc review: sfOrientedPerfectDuality proof + new sfOrientationPerfectLines + wrapper sfOrientedCancellation_of_evaluationLaws against SfOrientedPerfectDuality def, unit sk-thm-sf-dual-perfect realized steps, and clone diff; axioms checked in /tmp sandbox (sorryAx only from upstream evaluation/dual-pair holes)"
+ }
+}

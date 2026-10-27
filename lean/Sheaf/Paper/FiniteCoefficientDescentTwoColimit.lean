@@ -6,7 +6,6 @@ Authors: SHEAF group Q44
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import Sheaf.AlgebraicGeometry.ProEtaleBoundedConstructible
 public import Sheaf.Paper.CoefficientFiniteDescentLisse
 import Sheaf.Paper.CondensedFiniteModelProofAPI
@@ -19,6 +18,9 @@ import Sheaf.CategoryTheory.SheafTensor
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+public import Mathlib.AlgebraicGeometry.QuasiAffine
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.DedekindDomain.Dvr
 
 /-!
 # Finite coefficient descent and the rational coefficient two-colimit

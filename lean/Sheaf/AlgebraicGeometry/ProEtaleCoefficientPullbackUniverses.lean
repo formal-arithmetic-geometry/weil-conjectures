@@ -128,7 +128,45 @@ adjoint is the displayed sectionwise pushforward with action through ρ_A^f. -/
 theorem coefficientProEtaleModuleDirectImage_isRightAdjoint {X Y : Scheme.{t}} (f : X ⟶ Y)
     (A : CommRingCat.{max r (t + 1)}) :
     (coefficientProEtaleModuleDirectImage f A).IsRightAdjoint := by
-  sorry
+  let rings (Z : Scheme.{t}) : Sheaf (ProEt.topology Z) RingCat.{max r (t + 1)} :=
+    (sheafCompose _ (forget₂ CommRingCat.{max r (t + 1)} RingCat.{max r (t + 1)})).obj
+      ((constantSheaf (ProEt.topology Z) CommRingCat.{max r (t + 1)}).obj A)
+  have upContinuous (Z : Scheme.{t}) :
+      (AsSmall.equiv.{t, t + 1, max r (t + 1)} (C := Z.ProEt)).functor.IsContinuous
+        (ProEt.topology Z) (coefficientProEtaleModelTopology.{t, r} Z) :=
+    coefficientProEtaleModelUp_isContinuous Z
+  have downContinuous (Z : Scheme.{t}) :
+      (AsSmall.equiv.{t, t + 1, max r (t + 1)} (C := Z.ProEt)).inverse.IsContinuous
+        (coefficientProEtaleModelTopology.{t, r} Z) (ProEt.topology Z) := by
+    change (AsSmall.down : coefficientProEtaleSiteModel.{t, r} Z ⥤ Z.ProEt).IsContinuous
+      (coefficientProEtaleModelTopology.{t, r} Z) (ProEt.topology Z)
+    infer_instance
+  let e (Z : Scheme.{t}) :=
+    SheafOfModules.pushforwardPushforwardEquivalence.{max r (t + 1)}
+      (AsSmall.equiv.{t, t + 1, max r (t + 1)} (C := Z.ProEt))
+      (S := rings Z) (R := ((AsSmall.down :
+        coefficientProEtaleSiteModel.{t, r} Z ⥤ Z.ProEt).sheafPushforwardContinuous
+          RingCat.{max r (t + 1)} (coefficientProEtaleModelTopology Z)
+            (ProEt.topology Z)).obj (rings Z)) (𝟙 _) (𝟙 _)
+      (by ext : 2; exact (rings Z).obj.map_id _)
+      (by ext : 2; exact (rings Z).obj.map_id _)
+  let smallPush := SheafOfModules.pushforward.{max r (t + 1)}
+    (coefficientProEtaleModelRingMap f A)
+  have : smallPush.IsRightAdjoint := by
+    dsimp [smallPush]
+    infer_instance
+  have hx : (e X).inverse.IsRightAdjoint := (e X).isRightAdjoint_inverse
+  have hy : (e Y).functor.IsRightAdjoint := (e Y).isRightAdjoint_functor
+  apply Functor.isRightAdjoint_of_iso
+    (F := (e X).inverse ⋙ smallPush ⋙ (e Y).functor)
+  refine NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget _).preimageIso
+    (PresheafOfModules.isoMk (fun U ↦ Iso.refl _) ?_)) ?_
+  · intro U V g
+    ext x
+    rfl
+  · intro M N g
+    ext U x
+    rfl
 
 /-- The canonical module inverse image, defined by the usual pullback adjunction.
 Its Kan-extension construction is f⁻¹(-) ⊗_(f⁻¹ A_Y) A_X. The adjunction unit

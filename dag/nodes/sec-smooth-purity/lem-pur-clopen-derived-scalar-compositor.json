@@ -1,0 +1,233 @@
+{
+ "id": "lem-pur-clopen-derived-scalar-compositor",
+ "kind": "statement",
+ "title": "Clopen derived scalar comparison and its normalized compositor",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $I$ a finite set, and $j_i:X_i\\hookrightarrow X$ pairwise disjoint open and closed subschemes covering $X$ [def-weil-open-immersion, def-weil-closed-immersion]. Work on their small pro-etale sites in the fixed universes [def-weil-pbc-proetale-site]. Let $R$ be a sheaf of commutative rings, $R_i=R|_{X_i}$, and let $r_i$, $G$ and $e_i$ be the restriction, sectionwise product gluing, and zero insertion functors of [lem-pur-clopen-ringed-module-gluing] on module sheaves [def-weil-sheaf-of-modules-category].\n\nUse unbounded derived module categories and localization functors $Q$ [def-weil-abstract-derived-category], sheaf scalar tensor [def-pur-sheaf-tensor-product], scalar restriction [def-pc-sheaf-restrict-scalars], flat-term K-flat complexes [def-pc-flat-sheaf-modules, def-pc-kflat-complex], and derived change of rings [lem-pur-derived-change-of-rings]. For every coefficient ring sheaf $B$, let $r^B_{D,i}:D(B)\\to D(B|_{X_i})$ be the degreewise restriction functor specified in [lem-pur-clopen-unbounded-derived-localization].\n\nFor every morphism $a:R\\to S$ of commutative ring sheaves, with $S_i=S|_{X_i}$, there is an $S_i$-linear natural isomorphism\n$$d_{a,i,K}:r^S_{D,i}(K\\otimes_R^{\\mathbf L}S)\\xrightarrow{\\sim}r^R_{D,i}K\\otimes_{R_i}^{\\mathbf L}S_i.$$\nIt is natural on all derived objects and morphisms and independent of resolution choices. On every flat-term K-flat $R$-complex $P$, it is the localization of the $S_i$-linear chain isomorphism $r_i(P\\otimes_RS)\\cong r_iP\\otimes_{R_i}S_i$, $p\\otimes s\\mapsto r_ip\\otimes r_is$, under canonical K-flat computation comparisons. Termwise $P\\otimes_RS$ is K-flat with flat terms over $S$, and its restriction has the same properties over $S_i$.\n\nFor composable maps $R\\xrightarrow{a}S\\xrightarrow{\\psi}T$, put $T_i=T|_{X_i}$, and let $\\gamma_K:(K\\otimes_R^{\\mathbf L}S)\\otimes_S^{\\mathbf L}T\\xrightarrow{\\sim}K\\otimes_R^{\\mathbf L}T$ be the canonical scalar compositor of [lem-sfb-successive-derived-quotient-normalization], with component version $\\gamma_{i,K}$. The following two maps from $r^T_{D,i}((K\\otimes_R^{\\mathbf L}S)\\otimes_S^{\\mathbf L}T)$ to $r^R_{D,i}K\\otimes_{R_i}^{\\mathbf L}T_i$ are equal:\n$$d_{\\psi a,i,K}\\circ r^T_{D,i}(\\gamma_K)\n=\\gamma_{i,r^R_{D,i}K}\\circ(d_{a,i,K}\\otimes_{S_i}^{\\mathbf L}1)\\circ d_{\\psi,i,K\\otimes_R^{\\mathbf L}S}.$$\nOn $P$ both paths send $(p\\otimes s)\\otimes t$ to $r_ip\\otimes\\psi_i(r_is)r_it$. For the identity coefficient map $d$ agrees with the unit identifications, represented by $r_ip\\otimes u\\mapsto u\\,r_ip$.\n\nNo flatness of the ring maps is assumed. The comparisons apply in particular to the finite quotient coefficient maps and the projections from the completed coefficient sheaf of [def-weil-completed-integral-coefficients], under the coefficient identifications of the gluing node, preserving quotient transitions and their composition. Empty components, empty partitions and zero coefficient sheaves are allowed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, sites-cohomology-lemma-derived-base-change; Tag 0D6D, sites-cohomology-lemma-derived-pullback-composition; sites-modules.tex Tag 05V4, sites-modules-lemma-flat-change-of-rings. Agent restriction/scalar square and compositor calculation: returned item steps 10-11 and the coefficient part of step 12."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "lem-pur-clopen-ringed-module-gluing",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-clopen-unbounded-derived-localization",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose global and component presentations with the existing successive normalization theorem. Obtain their canonical identity Units from [lem-pur-clopen-scalar-unit-normalization]. Construct the normalized Comparison family by [lem-pur-clopen-scalar-comparison-descent]. Obtain its computed and extended model properties from [lem-pur-clopen-scalar-model-properties]. Apply [lem-pur-clopen-scalar-comparison-coherence] to obtain Coherence and assemble the existential witnesses and conjunctions.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pur-clopen-scalar-unit-normalization",
+    "lem-pur-clopen-scalar-model-properties",
+    "lem-pur-clopen-scalar-comparison-descent",
+    "lem-pur-clopen-scalar-comparison-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pur-clopen-scalar-unit-normalization",
+  "lem-pur-clopen-scalar-model-properties",
+  "lem-pur-clopen-scalar-comparison-descent",
+  "lem-pur-clopen-scalar-comparison-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "P8: explicit assembly of normalization, independently proved units/models, comparison descent and coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite clopen restriction commutes with arbitrary derived extension of coefficient ring sheaves and the compositor for successive scalar extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.Tilde.toOpen_res\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (i : V ⟶ U),\\n  CategoryTheory.CategoryStruct.comp (ModuleCat.Tilde.toOpen M U) (M.tildeInModuleCat.map i.op) =\\n    ModuleCat.Tilde.toOpen M V\", \"doc\": \"For open subsets $U$ and $V$ of $\\\\operatorname{Spec}(R)$ with $V \\\\subseteq U$, the composition of the restriction map $\\\\widetilde{M}(U) \\\\to \\\\widetilde{M}(V)$ with the sheaf morphism induced by the inc\"}\n  {\"name\": \"ModuleCat.Tilde.res_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (i : V ⟶ U)\\n  (s : ↑(M.tildeInModuleCat.obj (Opposite.op U))) (x : ↥V),\\n  ↑((CategoryTheory.ConcreteCategory.hom (M.tildeInModuleCat.map i.op)) s) x = ↑s (i x)\", \"doc\": \"For open sets $U,V$ in $\\\\operatorname{Spec}(R)$ with inclusion $i:V\\\\to U$, the restriction map $\\\\widetilde{M}(U)\\\\to \\\\widetilde{M}(V)$ satisfies $(\\\\rho_{U\\\\supset V}(s))(x) = s(i(x))$ for all sections $\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type u} [inst_1 : CommRing S] (f : R →+* S)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.StructureSheaf.toOpen R U)\\n      (CommRingCat.ofHom\\n        (AlgebraicGeometry.Structur\", \"doc\": \"Let $f: R \\\\to S$ be a homomorphism of commutative rings, and let $f^*: \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ be the induced continuous map on their prime spectra. For any open set $U \\\\sub\"}\n  {\"name\": \"ModuleCat.Tilde.res_const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (f : ↑M) (g : R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (hu : ∀ x ∈ U, g ∈ x.asIdeal.primeCompl)\\n  (V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (hv : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl)\\n  (i\", \"doc\": \"For an $R$-module $M$ and its associated sheaf $\\\\widetilde{M}$ over $\\\\operatorname{Spec}(R)$, if $U \\\\supseteq V$ are open subsets where $g \\\\in R$ is invertible (i.e., $g$ lies in the complement of all\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toOpen_res\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (i : V ⟶ U),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.StructureSheaf.toOpen R U)\\n      ((AlgebraicGeometry.Spec.structureSheaf R).val.map i.op) =\\n    AlgebraicGeometry.StructureS\", \"doc\": \"For any open subsets $U$ and $V$ of $\\\\operatorname{Spec}(R)$ with $V \\\\subseteq U$, the composition of the canonical ring homomorphism $R \\\\to \\\\mathcal{O}(U)$ followed by the restriction map $\\\\mathcal{O\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type u} [inst_1 : CommRing S] (f : R →+* S)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) {Z : CommRingCat}\\n  (h :\\n    {\\n        carrier :=\\n          ↑((AlgebraicGeometry.Spec.structureSheaf S).val.obj\\n              (Opposite.op\\n     \", \"doc\": \"Let $R$ and $S$ be commutative rings and let $f: R \\\\to S$ be a ring homomorphism. Let $f^*: \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ be the induced continuous map on the prime spectra. For a\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type u} [inst_1 : CommRing S] (f : R →+* S)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (x : CategoryTheory.ToType { carrier := R, commRing := inst }),\\n  (AlgebraicGeometry.StructureSheaf.comap f U\\n        ((TopologicalSpace.Opens\", \"doc\": \"For a commutative ring $ R $ and an open subset $ U $ of its prime spectrum $ \\\\operatorname{Spec}(R) $, there exists a canonical ring homomorphism from $ R $ to the ring of sections $ \\\\mathcal{O}(U) $\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"∀ {X : TopCat} (F : TopCat.Sheaf CommRingCat X) (U V : TopologicalSpace.Opens ↑X)\\n  (x :\\n    ↑{\\n        carrier :=\\n          ↥(((CommRingCat.Hom.hom (F.val.map (CategoryTheory.homOfLE ⋯).op)).comp\\n                  (RingHom.fst ↑(F.val.obj (Opposite.op U)) ↑(F.val.obj (Opposite.op V)))).eqLocus\\n    \", \"doc\": \"For a sheaf $ F $ of commutative rings on a topological space $ X $, and open subsets $ U $ and $ V $ of $ X $, applying the sheaf's morphism corresponding to the inclusion $ U \\\\subseteq U \\\\cup V $ to\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic localization, ordinary ring modules or a different sheaf functor; none states this normalized finite-clopen assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Componentwise restriction of K-flat scalar tensor complexes respects the formula (p tensor s) tensor t maps to p tensor psi(s)t for composable coefficient maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.tensorHom\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive] →\\n          [inst_4 : ∀ (X₁ : C), ((CategoryTheory.Monoi\", \"doc\": \"Given morphisms $f: K_1 \\\\to L_1$ and $g: K_2 \\\\to L_2$ between homological complexes in a monoidal category, this constructs the induced morphism $K_1 \\\\otimes K_2 \\\\to L_1 \\\\otimes L_2$ between their ten\"}\n  {\"name\": \"HomologicalComplex.ιTensorObj\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive] →\\n          [inst_4 : ∀ (X₁ : C), ((CategoryTheory.Monoi\", \"doc\": \"Given two homological complexes $ K_1 $ and $ K_2 $ in a monoidal category $ \\\\mathcal{C} $, and indices $ i_1, i_2, j $ in the additive monoid $ I $ satisfying $ i_1 + i_2 = j $, this morphism maps th\"}\n  {\"name\": \"HomologicalComplex.HasTensor\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [(CategoryTheory.MonoidalCategory.curriedTensor C).Additive] →\\n          [∀ (X₁ : C), ((CategoryTheory.MonoidalCategory.currie\", \"doc\": \"Given two homological complexes $K_1$ and $K_2$ in a category $\\\\mathcal{C}$ equipped with a monoidal structure via the curried tensor product bifunctor, this definition asserts the existence of a tens\"}\n  {\"name\": \"HomologicalComplex.tensorObj\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive] →\\n          [inst_4 : ∀ (X₁ : C), ((CategoryTheory.Monoi\", \"doc\": \"Given two homological complexes $ K_1 $ and $ K_2 $ in a category $ \\\\mathcal{C} $ equipped with a monoidal structure via the curried tensor product bifunctor, this constructs their tensor product as a\"}\n  {\"name\": \"HomologicalComplex.HasGoodTensor₁₂\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        {I : Type u_2} →\\n          [inst_3 : AddMonoid I] →\\n            {c : ComplexShape I} →\\n              [c.TensorSigns] → HomologicalCompl\", \"doc\": \"A proposition asserting that for three homological complexes $K_1, K_2, K_3$ in a category $\\\\mathcal{C}$ with shape $c$, the composition of curried tensor product functors preserves colimits of diagra\"}\n  {\"name\": \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] {I : Type u_2} [inst_3 : AddMonoid I] {c : ComplexShape I}\\n  [inst_4 : c.TensorSigns] (K₁ K₂ K₃ : HomologicalComplex C c)\\n  [CategoryTheory.GradedObje\", \"doc\": \"Given three homological complexes $K_1, K_2, K_3$ in a category $\\\\mathcal{C}$ with zero morphisms, if their underlying graded objects $K_1.X, K_2.X, K_3.X$ admit a tensor product preserving colimits, \"}\n  {\"name\": \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] {I : Type u_2} [inst_3 : AddMonoid I] {c : ComplexShape I}\\n  [inst_4 : c.TensorSigns] (K₁ K₂ K₃ : HomologicalComplex C c)\\n  [CategoryTheory.GradedObje\", \"doc\": \"Given three homological complexes $ K_1, K_2, K_3 $ in a category $ \\\\mathcal{C} $ with shape $ c $, if their underlying graded objects $ K_1.X, K_2.X, K_3.X $ satisfy the colimit-preserving tensor pro\"}\n  {\"name\": \"HomologicalComplex.HasGoodTensor₂₃\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        {I : Type u_2} →\\n          [inst_3 : AddMonoid I] →\\n            {c : ComplexShape I} →\\n              [c.TensorSigns] → HomologicalCompl\", \"doc\": \"The tensor product of three homological complexes $K_1, K_2, K_3$ in a category $\\\\mathcal{C}$ with zero morphisms, using the curried tensor product structure and complex shapes $c$, forms a trifunctor\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic localization, ordinary ring modules or a different sheaf functor; none states this normalized finite-clopen assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars, CategoryTheory.NatIso",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-22",
+   "verdict": "No match: query rejected by Loogle as shown; usable searches below supply the search evidence."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk][ _-]?[Ff]lat|derived.*[Ss]calar|[Ss]calar.*derived|clopen.*[Ss]calar",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Ring/Submonoid/Pointwise.lean\", \"line\": \"35\", \"text\": \"Many results about multiplication are derived from the corresponding results about scalar\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic localization, ordinary ring modules or a different sheaf functor; none states this normalized finite-clopen assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change of rings of sheaves commutes with restriction to a finite disjoint clopen partition coherently under composition",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"[IsOpenImmersion f] [IsOpenImmersion g] : restrictFunctor (f ≫ g) ≅ restrictFunctor g ⋙ restrictFunctor f\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"ModuleCat.Tilde.toOpen_res\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(U V : Opens (PrimeSpectrum.Top R)) (i : V ⟶ U) : toOpen M U ≫ (tildeInModuleCat M).map i.op = toOpen M V\", \"doc\": \"For open subsets $U$ and $V$ of $\\\\operatorname{Spec}(R)$ with $V \\\\subseteq U$, the composition of the restriction map $\\\\widetilde{M}(U) \\\\to \\\\widetilde{M}(V)$ with the sheaf morphism induced by the inc\"}\n  {\"name\": \"AlgebraicGeometry.Spec.sheafedSpaceMap_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \"{R S T : CommRingCat.{u}} (f : R ⟶ S) (g : S ⟶ T) :\\n  Spec.sheafedSpaceMap (f ≫ g) = Spec.sheafedSpaceMap g ≫ Spec.sheafedSpaceMap f\", \"doc\": \"For commutative rings $ R $, $ S $, and $ T $, and ring homomorphisms $ f : R \\\\to S $ and $ g : S \\\\to T $, the sheafed space map induced by the composition $ g \\\\circ f $ is equal to the composition of\"}\n  {\"name\": \"TopCat.Presheaf.SheafConditionEqualizerProducts.w\", \"module\": \"Mathlib.Topology.Sheaves.SheafCondition.EqualizerProducts\", \"type\": \": res F U ≫ leftRes F U = res F U ≫ rightRes F U\", \"doc\": \"For a presheaf $F$ on a topological space and an open cover $\\\\{U_i\\\\}$, the composition of the restriction morphism $F(\\\\bigcup U_i) \\\\to \\\\prod F(U_i)$ with the left restriction morphism to intersections\"}\n  {\"name\": \"TopCat.Presheaf.SheafConditionEqualizerProducts.res_π\", \"module\": \"Mathlib.Topology.Sheaves.SheafCondition.EqualizerProducts\", \"type\": \"(i : ι) : res F U ≫ limit.π _ ⟨i⟩ = F.map (Opens.leSupr U i).op\", \"doc\": \"For a presheaf $ F $ on a topological space $ X $ with values in a category $ \\\\mathcal{C} $ having products, and for any family of open subsets $ \\\\{U_i\\\\}_{i \\\\in \\\\iota} $, the composition of the restri\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.comap_comp\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(f : R →+* S) (g : S →+* P) (U : Opens (PrimeSpectrum.Top R)) (V : Opens (PrimeSpectrum.Top S))\\n  (W : Opens (PrimeSpectrum.Top P)) (hUV : ∀ p ∈ V, PrimeSpectrum.comap f p ∈ U)\\n  (hVW : ∀ p ∈ W, PrimeSpectrum.comap g p ∈ V) :\\n  (comap (g.comp f) U W fun p hpW => hUV (PrimeSpectrum.comap g p) (hVW p \", \"doc\": \"Let $f: R \\\\to S$ and $g: S \\\\to P$ be homomorphisms of commutative rings. Let $U$, $V$, and $W$ be open subsets of the prime spectra $\\\\operatorname{Spec}(R)$, $\\\\operatorname{Spec}(S)$, and $\\\\operatorna\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \"{X : TopCat} (F : X.Sheaf CommRingCat) (U V : Opens X) (x) :\\n  F.1.map (homOfLE le_sup_right).op ((F.objSupIsoProdEqLocus U V).inv x) = x.1.2\", \"doc\": \"Let $F$ be a sheaf of commutative rings on a topological space $X$, and let $U$ and $V$ be two open subsets of $X$. The sheaf condition provides an isomorphism between the ring of sections $F(U \\\\cup V\"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  pullback.{v} φ ⋙ pullback.{v} ψ ≅ pullback.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic localization, ordinary ring modules or a different sheaf functor; none states this normalized finite-clopen assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"ModuleCat.extendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) : CategoryTheory.Functor (ModuleCat R) (ModuleCat S)\", \"doc\": \"Extension of scalars is a functor where an `R`-module `M` is sent to `S ⊗ M` and\\n`l : M1 ⟶ M2` is sent to `s ⊗ m ↦ s ⊗ l m`\"}\n  {\"name\": \"ModuleCat.instIsLeftAdjointExtendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) : (ModuleCat.extendScalars f).IsLeftAdjoint\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) : ModuleCat.extendScalars f ⊣ ModuleCat.restrictScalars f\", \"doc\": \"Given commutative rings `R, S` and a ring hom `f : R →+* S`, the extension and restriction of\\nscalars by `f` are adjoint to each other.\"}\n  {\"name\": \"ModuleCat.extendScalarsId\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" (R : Type u₁) [CommRing R] : ModuleCat.extendScalars (RingHom.id R) ≅ CategoryTheory.Functor.id (ModuleCat R)\", \"doc\": \"The extension of scalars by the identity of a ring is isomorphic to the\\nidentity functor.\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) {Y : ModuleCat S} : ((ModuleCat.restrictScalars f).comp (ModuleCat.extendScalars f)).obj Y ⟶ Y\", \"doc\": \"For any `S`-module Y, there is a natural `R`-linear map from `S ⨂ Y` to `Y` by\\n`s ⊗ y ↦ s • y`\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) {X : ModuleCat R} : X ⟶ ((ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)).obj X\", \"doc\": \"For any `R`-module X, there is a natural `R`-linear map from `X` to `X ⨂ S` by sending `x ↦ x ⊗ 1`\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) {X : ModuleCat R} {Y : ModuleCat S} (g : X ⟶ (ModuleCat.restrictScalars f).obj Y) : (ModuleCat.extendScalars f).obj X ⟶ Y\", \"doc\": \"Given `R`-module X and `S`-module Y and a map `X ⟶ (restrictScalars f).obj Y`, i.e `R`-linear map\\n`X ⟶ Y`, there is a map `(extend_scalars f).obj X ⟶ Y`, i.e `S`-linear map `S ⨂ X → Y` by\\n`s ⊗ x ↦ s •\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) {X : ModuleCat R} {Y : ModuleCat S} (g : (ModuleCat.extendScalars f).obj X ⟶ Y) : X ⟶ (ModuleCat.restrictScalars f).obj Y\", \"doc\": \"Given `R`-module X and `S`-module Y and a map `g : (extendScalars f).obj X ⟶ Y`, i.e. `S`-linear\\nmap `S ⨂ X → Y`, there is a `X ⟶ (restrictScalars f).obj Y`, i.e. `R`-linear map `X ⟶ Y` by\\n`x ↦ g (1 ⊗\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) {X : ModuleCat R} {Y : ModuleCat S} : ((ModuleCat.extendScalars f).obj X ⟶ Y) ≃ (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"Given `R`-module X and `S`-module Y, `S`-linear maps `(extendScalars f).obj X ⟶ Y`\\nbijectively correspond to `R`-linear maps `X ⟶ (restrictScalars f).obj Y`.\"}\n  {\"name\": \"ModuleCat.extendScalarsComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R₁ R₂ R₃ : Type u₁} [CommRing R₁] [CommRing R₂] [CommRing R₃] (f₁₂ : R₁ →+* R₂) (f₂₃ : R₂ →+* R₃) : ModuleCat.extendScalars (f₂₃.comp f₁₂) ≅ (ModuleCat.extendScalars f₁₂).comp (ModuleCat.extendScalars f₂₃)\", \"doc\": \"The extension of scalars by a composition of commutative ring morphisms\\nidentifies to the composition of the extension of scalars functors.\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) : (ModuleCat.restrictScalars f).comp (ModuleCat.extendScalars f) ⟶ CategoryTheory.Functor.id (ModuleCat S)\", \"doc\": \"The natural transformation from the composition of restriction and extension of scalars to the\\nidentity functor on `S`-module.\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) : CategoryTheory.Functor.id (ModuleCat R) ⟶ (ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)\", \"doc\": \"The natural transformation from identity functor on `R`-module to the composition of extension and\\nrestriction of scalars.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: general categorical or ordinary module tools only; the finite-clopen comparison with its specified normalization and unbounded assertions is additional work."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObj|tensorHom|pullbackComp",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/AlgCat/Monoidal.lean\", \"line\": \"37\", \"text\": \"noncomputable abbrev tensorObj (X Y : AlgCat.{u} R) : AlgCat.{u} R :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/AlgCat/Monoidal.lean\", \"line\": \"42\", \"text\": \"noncomputable abbrev tensorHom {W X Y Z : AlgCat.{u} R} (f : W ⟶ X) (g : Y ⟶ Z) :\"}\n  {\"file\": \"Mathlib/Algebra/Category/AlgCat/Monoidal.lean\", \"line\": \"43\", \"text\": \"    tensorObj W Y ⟶ tensorObj X Z :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/AlgCat/Monoidal.lean\", \"line\": \"51\", \"text\": \"  tensorObj := instMonoidalCategory.tensorObj\"}\n  {\"file\": \"Mathlib/Algebra/Category/AlgCat/Monoidal.lean\", \"line\": \"52\", \"text\": \"  whiskerLeft X _ _ f := tensorHom (𝟙 X) f\"}\n  {\"file\": \"Mathlib/Algebra/Category/BialgCat/Monoidal.lean\", \"line\": \"38\", \"text\": \"  tensorObj X Y := of R (X ⊗[R] Y)\"}\n  {\"file\": \"Mathlib/Algebra/Category/BialgCat/Monoidal.lean\", \"line\": \"41\", \"text\": \"  tensorHom f g := ofHom (Bialgebra.TensorProduct.map f.1 g.1)\"}\n  {\"file\": \"Mathlib/Algebra/Category/BialgCat/Monoidal.lean\", \"line\": \"55\", \"text\": \"  tensorHom_eq _ _ := by ext; rfl\"}\n  {\"file\": \"Mathlib/Algebra/Category/CommHopfAlgCat.lean\", \"line\": \"177\", \"text\": \"    simp only [unop_comp, unop_tensorObj, hom_comp, coe_tensorObj, lift_unop_hom,\"}\n  {\"file\": \"Mathlib/Algebra/Category/CommHopfAlgCat.lean\", \"line\": \"186\", \"text\": \"    simp only [unop_comp, unop_tensorObj, hom_comp, coe_tensorObj, lift_unop_hom, unop_id, hom_id,\"}\n  {\"file\": \"Mathlib/Algebra/Category/FGModuleCat/Basic.lean\", \"line\": \"164\", \"text\": \"@[simp] lemma tensorObj_obj (M N : FGModuleCat.{u} R) : (M ⊗ N).obj = (M.obj ⊗ N.obj) := rfl\"}\n  {\"file\": \"Mathlib/Algebra/Category/CommAlgCat/Monoidal.lean\", \"line\": \"56\", \"text\": \"  tensorObj S T := of R (S ⊗[R] T)\"}\n  {\"file\": \"Mathlib/Algebra/Category/CommAlgCat/Monoidal.lean\", \"line\": \"59\", \"text\": \"  tensorHom f g := ofHom (map f.hom g.hom)\"}\n  {\"file\": \"Mathlib/Algebra/Category/CommAlgCat/Monoidal.lean\", \"line\": \"67\", \"text\": \"@[simp] lemma coe_tensorObj : A ⊗ B = A ⊗[R] B := rfl\"}\n  {\"file\": \"Mathlib/Algebra/Category/CommAlgCat/Monoidal.lean\", \"line\": \"71\", \"text\": \"@[simp] lemma tensorHom_hom (f : A ⟶ C) (g : B ⟶ D) : (f ⊗ₘ g).hom = map f.hom g.hom := rfl\"}\n  {\"file\": \"Mathlib/Algebra/Category/CoalgCat/Monoidal.lean\", \"line\": \"40\", \"text\": \"  tensorObj X Y := of R (X ⊗[R] Y)\"}\n  {\"file\": \"Mathlib/Algebra/Category/CoalgCat/Monoidal.lean\", \"line\": \"43\", \"text\": \"  tensorHom f g := ofHom (Coalgebra.TensorProduct.map f.1 g.1)\"}\n  {\"file\": \"Mathlib/Algebra/Category/CoalgCat/Monoidal.lean\", \"line\": \"57\", \"text\": \"  tensorHom_eq f g := by ext; rfl\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"line\": \"167\", \"text\": \"noncomputable def pullbackComp :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"line\": \"177\", \"text\": \"lemma conjugateEquiv_pullbackComp_inv :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"line\": \"180\", \"text\": \"    (pullbackPushforwardAdjunction.{v} _) (pullbackComp.{v} φ ψ).inv =\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"line\": \"194\", \"text\": \"    isoWhiskerLeft _ (pullbackComp.{v} ψ ψ') ≪≫\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"line\": \"195\", \"text\": \"      pullbackComp.{v} (G := G ⋙ G') φ\"}\n  {\"file\": \"Mathlib/Algebra/Category/CoalgCat/ComonEquivalence.lean\", \"line\": \"130\", \"text\": \"theorem tensorObj_comul (K L : CoalgCat R) :\"}\n  {\"file\": \"Mathlib/Algebra/Category/CoalgCat/ComonEquivalence.lean\", \"line\": \"135\", \"text\": \"  simp only [Comon.monoidal_tensorObj_comon_comul,\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: general categorical or ordinary module tools only; the finite-clopen comparison with its specified normalization and unbounded assertions is additional work."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Ss]calar|[Ss]calar.*derived|[Kk][ _-]?[Ff]lat|clopen.*tensor",
+   "results": "ok=True; n_hits=1; top=Mathlib/Algebra/Ring/Submonoid/Pointwise.lean; note=; digest=5a371710ba1bd057",
+   "date": "2026-10-22",
+   "verdict": "No match for the full item: ordinary sheaf/module pullback hits do not state the unbounded derived assertion; localization hits are the existing generic tool lemmas used in the split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a ringed site restriction to an open and closed subsite commutes with derived extension of coefficient sheaves",
+   "results": "ok=True; n_hits=8; top=AlgebraicGeometry.LocallyRingedSpace.restrict, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, AlgebraicGeometry.LocallyRingedSpace.restrict_presheaf_obj, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, TopCat.Presheaf.restrictOpenCommRingCat_apply, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.Scheme.Modules.restrictFunctor; note=; digest=d48a18e08599b862",
+   "date": "2026-10-22",
+   "verdict": "No match for the full item: ordinary sheaf/module pullback hits do not state the unbounded derived assertion; localization hits are the existing generic tool lemmas used in the split."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "ok=True; n_hits=3; top=CategoryTheory.Localization.liftNatIso, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.liftNatIso_inv; note=; digest=be9e318bf29986e7",
+   "date": "2026-10-22",
+   "verdict": "No match for the full item: ordinary sheaf/module pullback hits do not state the unbounded derived assertion; localization hits are the existing generic tool lemmas used in the split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves to a clopen component commutes with derived extension of scalars naturally and respects successive scalar extension associators",
+   "results": "ok=True; n_hits=8; top=TopCat.Sheaf.extend_hom_app, SheafOfModules.map_ιFree_mapFree_hom_assoc, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, CategoryTheory.Sheaf.ΓRes_map_assoc, SheafOfModules.ιFree_mapFree_inv_assoc, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, ModuleCat.homEquiv_extendScalarsComp; note=; digest=c7ca4060399c4c31",
+   "date": "2026-10-22",
+   "verdict": "No match for the full item: ordinary sheaf/module pullback hits do not state the unbounded derived assertion; localization hits are the existing generic tool lemmas used in the split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change of sheaves of modules along a commutative square of ringed topoi with an exact restriction functor",
+   "results": "ok=True; n_hits=8; top=SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pushforward, SheafOfModules.pullback_assoc; note=; digest=2412b67d36c33b68",
+   "date": "2026-10-22",
+   "verdict": "No match for the full item: ordinary sheaf/module pullback hits do not state the unbounded derived assertion; localization hits are the existing generic tool lemmas used in the split."
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatIso|natTrans_ext|fullyFaithfulWhiskeringLeft",
+   "results": "ok=True; n_hits=25; top=Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Bifunctor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean; note=; digest=d5c4c23b5136d438",
+   "date": "2026-10-22",
+   "verdict": "Generic localization tool matches the existing leaf lem-weil-pbc-localization-universal-property; no match for the full clopen derived scalar comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-product-derived-tensor-calculus",
+  "date": "2026-10-22",
+  "group": "Q125"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion, via finite-clopen derived decomposition: restriction/scalar square and compositor calculation: returned item steps 10-11 and the coefficient part of step 12.",
+   "via": [
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-clopen-derived-scalar-compositor",
+  "worker": "stage1",
+  "summary": "Q27 checked the chain restriction/scalar comparison, flat-term K-flat preservation over the new ring, descent along the existing resolving-class localization equivalence, and the explicit scalar compositor and unit formulas. Reuses existing nodes throughout; no new nodes or statement changes.",
+  "blueprint": "Final invertibility assertion of def-pur-section-invariant, via finite-clopen derived decomposition and finite-product tensor calculus: returned scalar-square steps 10-11 and coefficient-transition part of step 12.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic preservation of flat-term K-flat complexes under a ringed-topos pullback; use the identity underlying topos and arbitrary coefficient map."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic equivalence of localized flat-term K-flat models with the ringed-site derived category; needed for descent and uniqueness on arbitrary derived arrows."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic normalized scalar compositor for arbitrary composable ring-sheaf maps; fixes the explicit model formula used in the square."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-6f71e6178",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-6f71e6178 (reviewer sub-agent of L); spot-checked: I read the item in full: statement, 5 steps, the statement of every cited node, unit sk-def-purity-conv, Stacks 0G7E/06YY/0D6D/05V4, and the old parent steps 10-12 that Q125 assigned to this item. There are 0 new nodes, no changes and no fixes. Shape: the statement and stmt_deps are byte-identical to live, which has the same 4 immersion/flat/K-flat definitions that the statement already cites. The item is unsplit on live and side-live and has no repair note of its own. There is no cycle, and proof_deps is the union of the uses. Step 1 applies lem-pur-clopen-total-tensor-kflat-detection with Q=S[0], giving an S_i-linear chain isomorphism. Step 2 applies lem-weil-pbc-ringed-topos-kflat-pullback (0G7E) with the identity topos and c=a: P⊗S is K-flat with flat terms over S, with no flatness of a needed. This replaces old step 11's cancellation argument with a stronger existing node. Step 3 descends along the W^{-1}P_R≃D(R) equivalence by localization universal property (2); the inverted classes are checked through derived-change-of-rings (1) and the restriction-quasi-iso clause. Step 4: I recomputed both paths on (p⊗s)⊗t, and both give r_ip⊗ψ_i(r_is)r_it; part (3) extends the equality to all of D(R). Step 5: the unit formula, the coefficient maps through the gluing node's preservation of projections and transitions, and the zero cases through the localization node. Tested: I=∅, a=id, Z→Z/2 (not flat), S=0. Accepted tool_uses: ringed-topos-kflat-pullback, site-derived-tensor-descent, successive-derived-quotient-normalization. derived-change-of-rings is on the route through sk-def-sf-operations."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenDerivedScalarCompositor",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.clopen_derived_scalar_compositor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.clopen_derived_scalar_compositor"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenDerivedScalarCompositor.lean",
+  "statement": "theorem clopen_derived_scalar_compositor (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t}) (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)] (hdisjoint : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k)))) (hcover : ∀ x : X, ∃ i, x ∈ Set.range (j i)) : ∃ (p : Presentations.{t, u} X) (n : Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)} (C := X.ProEt) (J := topology X) (hD := derived.{t, u} X) @p) (U : Units.{t, u} (Z := X) @p) (q : ∀ i, Presentations.{t, u} (Y i)) (m : ∀ i, Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)} (C := (Y i).ProEt) (J := topology (Y i)) (hD := derived.{t, u} (Y i)) (fun {R S} a ↦ q i (R := R) (S := S) a)) (V : ∀ i, Units.{t, u} (Z := Y i) (fun {R S} a ↦ q i (R := R) (S := S) a)) (d : ∀ i, Comparison.{t, u} (j i) @p (fun {R S} a ↦ q i (R := R) (S := S) a)), ∀ i, (d i).sections ∧ (d i).degree ∧ (d i).representative ∧ (d i).computed ∧ (d i).extended ∧ (d i).unique ∧ Coherence.{t, u} (j i) n (m i) U (V i) (d i)",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The scalar-first convention writes p tensor s as s tensor p. Presentation and Normalization are the existing successive-derived-quotient interfaces; the comparison data and explicit law predicates belong to this node. Every ordinary, chain and derived comparison is a natural isomorphism. The K-flat model equation uses the universal computation counit and the recorded exact-restriction localization factors; uniqueness fixes the comparison on every derived morphism. Compositor, pure-tensor and identity equations include arbitrary coefficient maps, hence the actual quotient transitions and completion projections after the gluing identifications. No source statement, dependency interface or universe equality is changed. P8: existing interfaces extracted verbatim to ProEtaleClopenDerivedScalarData and publicly re-exported; theorem signature unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e5b209e6",
+  "group": "NF",
+  "result": "pass",
+  "note": "Only the item node changed vs side-live (new lean field). Statement verbatim, 24 declarations listed, Worker report + Second reading present (second reading done in the worker's own session, clause-level; advisory). Clause check: Presentation is pinned (obj_eq/map_eq and universal derived pair). Comparison is pinned by sections (pure tensors), degree (chain), representative + computed (derived on flat-term K-flat models), plus unique; extended gives K-flat/flat terms over S and S_i with no flatness of a. Normalization fields (ordinary_hom, representative, computed) make n.derived the canonical compositor. Coherence.composition matches d_{ψa}∘r(γ)=γ_i∘(d_a⊗1)∘d_ψ term by term; composite_sections gives (p⊗s)⊗t↦r_ip⊗ψ_i(r_is)r_it (scalar-first). Units/identity give the u⊗p↦up laws. resD = res.mapDerivedCategory = the localization node's derivedRestriction; rings = the same Over.map pushforward as clopenRingRestriction. Universes: coefficients max u (t+1), the most general the interface allows and the completed sheaf's universe; I : Type w independent. Edge cases I=∅, empty components, zero rings and non-flat maps are covered. No hollow defs; sorry only; docstrings with source, blueprint and 5 steps; plain imports are proof-dep modules. Advisories: Presentation/Normalization/sectionTensor owned by def-weil-pbc-successive-derived-quotient-data and clopenTensorRings by a proof_dep node, neither in stmt_deps (base stage-1 stmt_deps, none added); global instances sheafify/locallyBijective/derived as in ClopenLocalization. No file changed, so no compile; worker reports clean 24.0 s / 19.0 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-52d07",
+  "group": "P8",
+  "result": "fix",
+  "landing": "20261024T190624-L-4164674",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs live (identical); Data module vs the live item's interface declarations (verbatim except blueprint ids); new sorry statements vs their nodes and the pinning laws of Normalization, Units and Comparison; #print axioms of the 6 modules compiled in a sandbox"
+ }
+}

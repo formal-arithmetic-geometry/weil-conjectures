@@ -1,0 +1,62 @@
+# Worker report: lem-sfb-field-action-topos-coefficients
+
+## Files written
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-field-action-topos-coefficients.json: existing statement split in eight steps. The mathematical statement is unchanged. Added the existing set-valued profinite-point geometric-morphism statement to stmt_deps, alongside the original abelian point reference. No new nodes; no new Mathlib leaves.
+- citations.json: nine step/node entries, copied verbatim from the current cited statements.
+- searches.jsonl: six additional Q89 searches, run through the mandatory msearch command. The original Q30 searches are retained in the item.
+- report.md: this report.
+
+## Attachments
+
+None. Searched lean/WeilConjectures for the exact blueprint tag, field/action-topos terms, condensed/Galois terms and profinite G-set terms. AlgClosedFieldSite.lean only concerns an algebraically closed field and section exactness; it does not state this item. The related Sheaf/AlgebraicGeometry/CondensedGaloisGlobalDescent.lean theorem has a sorry, and its broader blueprint-tagged docstring is not an attachment.
+
+## WANTED
+
+WANTED: an exact non-SGA published reference combining Bhatt--Scholze Example 4.1.10 with the free-action-site convention, the normalized point-adjunction mate and transport of ring operations, for lem-sfb-field-action-topos-coefficients. The available sources supply the field-site equivalence, dense-subsite comparison and adjunction principle; the additional explicit normalization argument here is marked agent-written. No literature was downloaded or changed.
+
+## What was wrong or incomplete
+
+The item was statement-only. Its source already calls the combined reference WANTED. I supplied the argument rather than asserting that Example 4.1.10 contains its normalization clauses. I found no mathematical error requiring a statement change.
+
+The point reference sk-def-sfb-pullback-from-point formulates its detailed adjunction on abelian sheaves. For the set-topos sentence I also cite lem-weil-pbc-profinite-point-pullback, which explicitly constructs a geometric inverse image on sets. These are the same test-object construction, not an identification of different coefficient categories. The test formula for the point right adjoint is the formula specified by the item, and agrees on underlying sets with that in the abelian reference.
+
+The inherited unit is sk-thm-sf-ctf-stability (filed in sec-six-functors), while the chapter is sec-six-functors-basics. I retained both maintainer-owned fields. I read that unit and the current six-functors-basics chapter. This is subordinate infrastructure for paragraph (3) of the current direct-images proof, not a replacement of its route. The inherited blueprint.from.node is null; blueprint_refs.py ancestor confirms that value. No ancestor was invented. Searches of the whole imported blueprint for 'profinite G', 'action topos', 'internal action', 'field action' and the broader Galois context found no duplicate of the combined item; same_as remains empty.
+
+## Not duplicates
+
+No new nodes. Existing lem-sfb-field-profinite-galois-site supplies the normalized field-site and tests, but does not identify the internal-action topos or the point inverse image. Existing lem-sfb-action-topos-geometric-restriction supplies the generic internal-action site equivalence and trivial-action geometric inverse image, but does not relate it to a field pro-etale site. Existing lem-pc-fppf-dense-sheaf-equivalence supplies the general comparison and is already a Mathlib leaf. These are reused, not recreated. The algebraically closed dense-subsite/evaluation nodes were also read; they do not cover an arbitrary separably closed closure over a possibly imperfect field with nontrivial absolute Galois action.
+
+## Mathlib searches and hits read
+
+I ran leanfinder twice with different conceptual phrasings, loogle with the Condensed/Galois pattern, leansearch for the field topos equivalence, and two grep searches (one global, one in CategoryTheory). Each command is recorded exactly in searches.jsonl and copied unchanged into mathlib_searches with its verdict. All six returned successfully. The first semantic hits describe profiniteToCondensed, locally constant/discrete condensed sheaves and topological-space embeddings. The second phrasing returns Condensed.ofSheafProfinite, ofSheafForgetProfinite, isSheafProfinite, and profinite free/solid module constructions. I read their source locations in Condensed/Explicit.lean, Equivalence.lean and Functors.lean. They do not mention the field pro-etale topos, internal Galois actions, or the normalized adjunction. The global grep returned no hits. The categorical grep hit Sites/IsSheafFor.lean:463, a generic local sheaf-condition abstraction, not a field/action theorem. Loogle returned no hits. The existing dense-subsite Mathlib leaf was read directly at CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean, including the IsEquivalence instance around line 107; it is used as a leaf through its existing DAG node.
+
+## Review by Q89
+
+I read Bhatt--Scholze, The pro-etale topology for schemes, PDF pages 27-29: Examples 4.1.9 and 4.1.10 describe the test objects, the qcqs profinite Galois-set category and its finite jointly surjective covering criterion. Example 4.1.10 uses a separable closure, so I did not replace it by an algebraic closure or require k to be perfect. I read Stacks sites.tex Definition 00VM (definition-sheaf-sets) for the equalizer, categories.tex Tag 0B65 (lemma-transformation-between-functors-and-adjoints) for the mate normalization, the existing dense-subsite Mathlib declaration, and current blueprint direct-images paragraph (3). No new node needs a source review; none was created. The free-coordinate and operation arguments are explicitly my own refinements of these sources.
+
+Step 1 uses the actual statement of lem-sfb-field-profinite-galois-site: it supplies density, the induced topology, the profinite G-set equivalence, the two test identifications and their natural map. The comparison statement lem-pc-fppf-dense-sheaf-equivalence asks for full faithfulness, induced topology, cover density and the specified right-Kan limits. Full inclusion supplies the first, the field-site statement supplies the next two, and the stated universe-small sites with larger-universe sets supply the last. I did not use an unstated strengthening of a definition.
+
+Step 2 is the explicit evaluation-at-(1,t) argument on the free objects. It proves continuity, uniqueness and the composite formula, and gives the free cover of any profinite G-object. No black-box theorem about torsor trivializations is used. Step 3 explicitly reduces finite joint surjectivity to the base maps by solving g' b_i(t)=g. It also verifies the topology for sieves by replacing a finite covering family by the finite free covers of its domains. Hence the second comparison has the topology it needs, not merely a category equivalence.
+
+Step 4 again applies exactly the full/dense/induced-topology comparison, now with the hypotheses verified in steps 2-3. The first paragraph of lem-sfb-action-topos-geometric-restriction states the SET-valued internal-action equivalence with this exact composition and restriction formula. I use that paragraph, not merely the module-valued statement of lem-sfb-internal-action-site-presentation. The base category is profinite sets, which has finite limits; the action site is only required to have its specified generated topology. The group sheaf is the condensed profinite group already present in the item, with sections continuous maps into G. I do not assume a terminal object in the free subsite. The resulting E is an equivalence of the topos categories and therefore preserves their finite limits.
+
+Step 5 invokes only the sheaf equalizer formula stated in def-weil-pbc-sites-and-cohomology. The cover is the projection G times P to trivial P. The explicit homeomorphisms (g,h,p) <-> (g,gh,p) identify its kernel pair and both projection maps, with continuous inverse using inversion and multiplication in G. In free coordinates these are (pr_P,1) and (pr_P,h), so the equalizer equation is precisely universal internal fixedness. Pulling back along every (b,t) proves the all-tests implication, and choosing the universal test G times P proves the converse. This does not identify internal invariants with pointwise invariants under only G(*).
+
+Step 6 checks the invariant subfunctor's sheaf condition by local gluing and separation, and gives the two mutually inverse Hom factorizations for trivial inflation and invariants. These are a short elementwise consequence of the definition of a sheaf action, not a new lemma needing a node. The cited action-topos statement says that p_G inverse image IS trivial action. Consequently its right adjoint is the invariants just computed. This identifies the actual point right-adjoint comparison by the restriction map, rather than asserting an unspecified equivalence of adjoints.
+
+Step 7 uses lem-weil-pbc-profinite-point-pullback for the set geometric inverse image and sk-def-sfb-pullback-from-point for the test adjunction construction. I checked the two use exactly Spec LC(P,Z) base-changed to s. The conjugate-adjoint lemma states uniqueness and invertibility with a prescribed unit-compatible mate, not just existence of some iso of functors. Its R_2 -> R_1 orientation requires the inverse of the step-6 comparison; this is recorded explicitly. Its hypotheses concern only these two adjunctions, so no invariant exactness or cohomological-dimension bound enters. Finite-product compatibility follows by applying naturality to each projection and uniqueness at the terminal object, which the proof spells out.
+
+Step 8 checks each operation as an actual n-ary map R^n -> R. The naturality equation plus the product comparison proves the operation square; n=0 checks the multiplicative unit as well as zero, n=1 checks negation, and n=2 checks addition and multiplication. Naturality at a ring map proves its square. No preservation of the multiplication was silently inferred from an additive comparison. All steps are under 1000 characters, so the long-step threshold has no hidden sublemma here.
+
+For small cases I checked G=1, P empty, arbitrary infinite profinite G, noncommutative finite G, and zero/ordinary/non-discrete condensed rings. For G=1 the two equalizer arrows coincide; at the empty profinite set the empty cover forces terminal values. No global continuous section of a general free-object map is assumed: only the displayed cover and the algebraic inverse formula for an existing point are used. In a noncommutative group the composition order is c(u)b(h(u)); for distinct transpositions in S_3 reversing the order changes the composite, confirming why the order must be written exactly. The kernel-pair parametrization is equivariant for simultaneous left translation. No assumption of finite G, perfect k, discrete R, bounded derived objects or exact invariants was added.
+
+Against delivery-errors B: all metadata and the statement were retained, no statement-only child was given a hidden proof, source tags are checked, and recorded searches are real. Against C: I opened every cited node, selected verbatim quotes into citations.json, checked hypotheses at each use, and recorded generic off-unit tool uses only in split_report.tool_uses. The original generic point definition is also a definition-use rather than a route substitution. Against D: no clause was moved to a new child; the item carries the actual free-site, kernel-pair and normalization arguments. Against E: the correct kernel pair, noncommutative order, universal internal fixedness, set/abelian distinction, and ring unit are all checked above. Nothing was corrected by altering the item statement.
+
+## What could not be finished
+
+No mathematical part is outstanding. The required server dry run passed. Independent maintainer review remains the normal next step.
+
+## Validation and delivery
+
+The required deliver.py --no-push exited 0: OK (not pushed), commit 43e76f1e944, preflight passed. This report update records that result; the node and citations are unchanged. The direct push is the following required deliver.py invocation, which reruns preflight and prints the authoritative delivery commit. No Lean, compiler, Lake, local DAG checker, repository write, launcher write, or agent delegation was used.

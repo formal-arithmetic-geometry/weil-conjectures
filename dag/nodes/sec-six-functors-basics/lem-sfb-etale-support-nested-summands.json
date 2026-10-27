@@ -15,37 +15,35 @@
  ],
  "proof": [
   {
-   "text": "The private Lean lemma unit_comp_toLowerStar proves by the adjunction hom-equivalence that the structural unit followed by the sum-to-direct-image comparison is graph extension. The private lemma unit_comp_normalized_inclusion extends this to the arbitrary support functor and supplied normalized sum isomorphism. Postcompose the desired equation with the injective final support inclusion; substitute the three normalized comparisons and the section-preserving composition equation. Naturality moves the inner sheaf inclusion past the outer graph extension. It remains to compose graph extensions along h and e, with the canonical mapComp identification.",
+   "text": "The existing private adjunction calculation identifies each unit followed by its normalized inclusion with graph extension. Prove privately that graph extension is zero after restriction along any map whose range misses the graph, by factoring that map through the complementary open subscheme.",
    "uses": [
     "def-weil-pbc-etale-sum-extension",
-    "lem-cbc-proper-support-sheaf-composition",
     "lem-weil-pbc-etale-section-clopen-immersion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F4Y and 0F50"
-   }
+   "elementary": false
   },
   {
-   "text": "On a nested lift, extending by zero along its inner and outer clopen graphs is extending by zero along the composite graph: both restrictions to the graph are the input section and both restrictions off it are zero. The sheaf axiom gives equality. Addition and sheafification extend from lift generators. The inverse mapComp identifies the test objects. Cancel the final injective inclusion.",
+   "text": "Let c identify the graph target of the composite with the iterated pullback, and let j be the pullback of the outer graph. Check by the pullback projection equations that graph(h) followed by j equals graph(h e) followed by c. The map j is an open immersion, being a base change of the outer graph. Apply the outer graph/complement sheaf extensionality lemma. On the outer graph, apply inner graph/complement extensionality: restriction to the inner graph is identity, and the inner complement is disjoint from the composite graph since j is injective. On the outer complement, projection to the outer graph target proves disjointness from the composite graph. The zero-restriction lemma closes both complement cases. The pullback compositor then gives the graph-extension composition equation.",
+   "uses": [
+    "lem-weil-pbc-etale-section-clopen-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose with the final sectionwise injective inclusion. Substitute the supplied section-preserving composition equation, move the final inclusion past mapComp by naturality, and apply the three unit normalization equations. Naturality of graph extension moves the inner inclusion past the outer extension. Apply the proved graph-extension composition equation and cancel the final injective inclusion.",
    "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F4Y and 0F50"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-etale-sum-extension",
-  "lem-cbc-proper-support-sheaf-composition",
   "lem-weil-pbc-etale-section-clopen-immersion"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "V1",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F4Y and 0F50; source steps extracted and formalized by U1"
+  "place": "Tags 0F4Y and 0F50; direct proof of graph-extension composition using the existing clopen graph API in WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale"
  },
  "mathlib_searches": [
   {
@@ -119,13 +117,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "C-748a7",
-  "group": "U1",
-  "result": "fix",
-  "landing": "20261021T140922-L-2774891",
-  "kind": "interface",
-  "note": "independent cc review: re-delivery of 5642e44c (FIX, landing failed on override name): 7 Lean files and 7 new nodes byte-identical; item node vs live (only lean/proof/proof_deps/proof_origin/statement addendum/statement_change); statement_change.citers vs the 10 live citing nodes; change record Users vs tools/downstream.py --uses and coord/claims; 7 delivered modules plus new importers EtaleClosedChartExceptionalPreservation and EtaleSumRightAdjointCoherence compiled together"
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261023T131957-L-2178989",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

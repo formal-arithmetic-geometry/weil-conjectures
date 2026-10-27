@@ -5,7 +5,10 @@ module
 
 public import Sheaf.Paper.FiniteDiscreteDerivedCoefficientData
 import Sheaf.CategoryTheory.ThreeStepAdjunctionComparison
-import Sheaf.Paper.FiniteDiscreteRealizationFunctor
+public import Sheaf.Paper.FiniteDiscreteRealizationFunctor
+public import Sheaf.CategoryTheory.Functor.TransportedCompositeIso
+public import Sheaf.Paper.BoundedExchangeAmbient
+public import Sheaf.Paper.ResidueExchangeAmbient
 
 /-! # The specified exchange from coherent coefficient comparisons -/
 

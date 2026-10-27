@@ -1,0 +1,410 @@
+{
+ "id": "lem-sfb-local-algebra-module-noetherian-subring-model",
+ "kind": "statement",
+ "title": "Simultaneous finite algebra and module models over a Noetherian local subring",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative local ring, so $\\mathfrak m$ is its unique maximal ideal. Let $C$ be a finitely presented commutative $R$-algebra [def-weil-pbc-finitely-presented-algebra] and let $M$ be a finitely presented $C$-module [def-sc-finitely-presented-module]. There exist a unital subring $R_0\\subseteq R$, a finitely presented commutative $R_0$-algebra $C_0$, and a finitely presented $C_0$-module $M_0$ with the following properties. The ring $R_0$ is local with maximal ideal $\\mathfrak n=R_0\\cap\\mathfrak m$, is Noetherian [def-weil-pbc-noetherian-ring], and is essentially of finite type over $\\mathbf Z$ [def-weil-pbc-essentially-finite-type-algebra]. In particular $\\mathfrak n$ is finitely generated. There are an $R$-algebra isomorphism $\\alpha:R\\otimes_{R_0}C_0\\xrightarrow{\\sim}C$ and a $C$-linear isomorphism $\\beta:C\\otimes_{C_0}M_0\\xrightarrow{\\sim}M$, where $C_0\\to C$ is $c\\mapsto\\alpha(1\\otimes c)$. Consequently the canonical balanced map $R\\otimes_{R_0}M_0\\to M$, $r\\otimes x\\mapsto r\\,\\beta(1\\otimes x)$, is an $R$-linear isomorphism compatible with the $C$-actions through $\\alpha$. Tensor products have the meaning of [def-weil-pbc-module-tensor-product]. No flatness of $C$ or $M$ over $R$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0AT8, lemma-find-pure-spreadout, proof: the local essentially finite type subring A_0 and simultaneous models B_0,N_0 before I=m_{A_0}A is chosen."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-finitely-presented-algebra] choose $C\\cong R[X_1,\\ldots,X_d]/(F_1,\\ldots,F_e)$, and by [def-sc-finitely-presented-module] choose $C^a\\xrightarrow{H}C^b\\to M\\to0$. Lift every entry of the finite matrix $H$ to a polynomial $h_{ij}(X)$ over $R$, and list their finitely many coefficients as $u_1,\\ldots,u_t$. To include these coefficients in an algebra-presentation core, use the equivalent presentation\n$$C\\cong R[X_1,\\ldots,X_d,Y_1,\\ldots,Y_t]/(F_1,\\ldots,F_e,Y_1-u_1,\\ldots,Y_t-u_t).$$\nIndeed evaluation $Y_l\\mapsto u_l$ and the inclusion of the $X$-variables are inverse on the two quotients: they fix $R,X_i$, and $Y_l=u_l$ in the augmented quotient. Empty variable, relation and matrix index sets are allowed.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0AT8, lemma-find-pure-spreadout, proof: simultaneous local coefficient-subring models; explicit presentation argument filling the omitted construction."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-presentation-noetherian-coefficient-model] to the augmented presentation. Its coefficient subring $D\\subseteq R$ is generated over $\\mathbf Z$ by the coefficients of the $F_j$ and the $u_l$; the extra coefficients $1,-1$ already lie in the image of $\\mathbf Z$. The cited statement gives that $D$ is finite type over $\\mathbf Z$ and Noetherian. Write\n$$E=D[X,Y]/(F^D_1,\\ldots,F^D_e,Y_1-u_1,\\ldots,Y_t-u_t).$$\nIt is finitely presented over $D$, and the canonical map $E\\otimes_D R\\xrightarrow{\\sim}C$ is an algebra isomorphism with the displayed evaluation formulas. The same statement gives the polynomial presentation of $E\\otimes_D T$ for every commutative $D$-algebra $T$, without a flatness hypothesis.",
+   "uses": [
+    "lem-trf-presentation-noetherian-coefficient-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0AT8, lemma-find-pure-spreadout, proof: simultaneous local coefficient-subring models; explicit presentation argument filling the omitted construction."
+   }
+  },
+  {
+   "text": "Put $\\mathfrak p=D\\cap\\mathfrak m$ and $W=D\\setminus\\mathfrak p$. Since $\\mathfrak m$ is maximal it is prime, so $W$ is multiplicatively closed. Every $w\\in W$ is a unit of $R$: otherwise the proper ideal $(w)$ lies in a maximal ideal, necessarily $\\mathfrak m$. Define the unital subring $R_0=\\{d/w:d\\in D,w\\in W\\}\\subseteq R$. The map $W^{-1}D\\to R$, $d/w\\mapsto dw^{-1}$, is injective: a fraction mapping to zero has $d=0$ in $R$, hence in the subring $D$. Thus $R_0$ is a localization of $D$. Its ideal $\\mathfrak n=R_0\\cap\\mathfrak m$ consists exactly of fractions whose numerator lies in $\\mathfrak p$. A fraction outside $\\mathfrak n$ has inverse $w/d\\in R_0$. As $1\\notin\\mathfrak n$, the ideal is proper; all elements outside it are units, so every proper ideal is contained in it. Consequently $\\mathfrak n$ is the unique maximal ideal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0AT8, lemma-find-pure-spreadout, proof: simultaneous local coefficient-subring models; explicit presentation argument filling the omitted construction."
+   }
+  },
+  {
+   "text": "The ring $D$ is Noetherian by step 2 and $R_0$ is its localization at $W$ by step 3. Therefore [lem-weil-pbc-localization-noetherian] gives that $R_0$ is Noetherian. Since $D$ is finite type over $\\mathbf Z$, the description $R_0=W^{-1}D$ is precisely essentially finite type in [def-weil-pbc-essentially-finite-type-algebra]. By [def-weil-pbc-noetherian-ring], every ideal of $R_0$, in particular $\\mathfrak n$, is finitely generated.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0AT8, lemma-find-pure-spreadout, proof: simultaneous local coefficient-subring models; explicit presentation argument filling the omitted construction."
+   }
+  },
+  {
+   "text": "Set $C_0=E\\otimes_D R_0$. The last clause of [lem-trf-presentation-noetherian-coefficient-model], with $T=R_0$, presents $C_0$ as $R_0[X,Y]/(F^{R_0},Y-u)$, so it is finitely presented. Combining the same clause with $T=R$ and the isomorphism of step 2 gives\n$$\\alpha:R\\otimes_{R_0}C_0\\xrightarrow{\\sim}C.$$\nFor clarity the tensor identification used here is $R\\otimes_{R_0}(E\\otimes_D R_0)\\cong E\\otimes_D R$: $r\\otimes(e\\otimes s)\\mapsto e\\otimes rs$, with inverse $e\\otimes r\\mapsto r\\otimes(e\\otimes1)$. These formulas respect the balanced relations and are inverse on pure tensors. In particular $c_0\\mapsto\\alpha(1\\otimes c_0)$ sends the classes of $X_i,Y_l$ to their values in $C$.",
+   "uses": [
+    "lem-trf-presentation-noetherian-coefficient-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0AT8, lemma-find-pure-spreadout, proof: simultaneous local coefficient-subring models; explicit presentation argument filling the omitted construction."
+   }
+  },
+  {
+   "text": "Each $h_{ij}$ has coefficients in $D\\subseteq R_0$, so its class gives an entry of a matrix $H_0:C_0^a\\to C_0^b$. Define $M_0=\\operatorname{coker}H_0$. This is finitely presented by [def-sc-finitely-presented-module]. Apply [lem-weil-pbc-tensor-right-exact] over $C_0$ to $C_0^a\\to C_0^b\\to M_0\\to0$, tensoring with $C$. The free-module identifications $C\\otimes_{C_0}C_0^q\\cong C^q$ send $c\\otimes(v_i)$ to $(cv_i)$; their inverses send $(c_i)$ to $\\sum_i c_i\\otimes e_i$. Since $H_0$ maps to $H$ entrywise, the resulting sequence is $C^a\\xrightarrow H C^b\\to C\\otimes_{C_0}M_0\\to0$. Both this module and $M$ are the quotient of $C^b$ by $\\operatorname{im}H$; the quotient maps therefore give a $C$-linear isomorphism $\\beta:C\\otimes_{C_0}M_0\\xrightarrow{\\sim}M$. Only right exactness is used, so no flatness of $C$ or $M$ over $R$ is needed.",
+   "uses": [
+    "def-sc-finitely-presented-module",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0AT8, lemma-find-pure-spreadout, proof: simultaneous local coefficient-subring models; explicit presentation argument filling the omitted construction."
+   }
+  },
+  {
+   "text": "Using the balanced relations of [def-weil-pbc-module-tensor-product], the maps\n$$R\\otimes_{R_0}M_0\\ \\longleftrightarrow\\ (R\\otimes_{R_0}C_0)\\otimes_{C_0}M_0,$$\n$$r\\otimes x\\longmapsto(r\\otimes1)\\otimes x,\\qquad(r\\otimes c_0)\\otimes x\\longmapsto r\\otimes(c_0x)$$\nare well-defined inverse $R$-linear maps. The first composite fixes $r\\otimes x$, and the other fixes $(r\\otimes c_0)\\otimes x$ because $(r\\otimes1)\\otimes(c_0x)=(r\\otimes c_0)\\otimes x$. Apply $\\alpha$ on the algebra tensor factor and then $\\beta$. The composite sends $r\\otimes x$ to $r\\beta(1\\otimes x)$, hence is exactly the required canonical map and is an isomorphism. On the middle tensor product the action of $R\\otimes_{R_0}C_0$ is multiplication on its first factor, so after $\\alpha$ the maps respect the specified $C$-action.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0AT8, lemma-find-pure-spreadout, proof: simultaneous local coefficient-subring models; explicit presentation argument filling the omitted construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-sc-finitely-presented-module",
+  "lem-trf-presentation-noetherian-coefficient-model",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-tensor-right-exact",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0AT8, lemma-find-pure-spreadout, proof: simultaneous local coefficient-subring models; explicit presentation argument filling the omitted construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite presentation algebra and a finitely presented module over a local ring descend simultaneously to a Noetherian local subring essentially of finite type over the integers",
+   "results": {
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.finitePresentation_isLocal",
+     "Algebra.FinitePresentation.of_finiteType",
+     "Algebra.FinitePresentation.of_isLocalizationAway",
+     "AlgHom.FinitePresentation.of_finiteType",
+     "instFinitePresentationAway",
+     "Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway",
+     "RingHom.finitePresentation_holdsForLocalizationAway",
+     "RingHom.FinitePresentation.of_finiteType"
+    ],
+    "digest": "1a9d0cd9a0f3eb02"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: coefficient-presentation models and smooth algebra descent are present, but none of the hits simultaneously descends an arbitrary algebra and module to a local Noetherian subring with these tensor isomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorModelOfHasCoeffsEquiv|[Nn]oetherian.*[Mm]odel|[Mm]odel.*[Nn]oetherian|[Ll]ocal.*[Ss]ubring",
+   "results": {
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Spectrum/Maximal/Localization.lean",
+     "Mathlib/RingTheory/Smooth/NoetherianDescent.lean",
+     "Mathlib/RingTheory/Smooth/NoetherianDescent.lean",
+     "Mathlib/RingTheory/Smooth/NoetherianDescent.lean",
+     "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+     "Mathlib/RingTheory/LocalRing/MaximalIdeal/Basic.lean",
+     "Mathlib/RingTheory/LocalRing/LocalSubring.lean",
+     "Mathlib/RingTheory/LocalRing/LocalSubring.lean"
+    ],
+    "digest": "44526eadba6472ac"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: coefficient-presentation models and smooth algebra descent are present, but none of the hits simultaneously descends an arbitrary algebra and module to a local Noetherian subring with these tensor isomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Presentation, Module.FinitePresentation, IsLocalRing",
+   "results": {
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: coefficient-presentation models and smooth algebra descent are present, but none of the hits simultaneously descends an arbitrary algebra and module to a local Noetherian subring with these tensor isomorphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented algebra together with a finitely presented module over a local ring has a simultaneous model over a Noetherian local subring essentially of finite type over the integers",
+   "results": {
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.FinitePresentation",
+     "Algebra.Presentation.finitePresentation_of_isFinite",
+     "AlgHom.FinitePresentation",
+     "Module.finitePresentation_of_finite",
+     "AlgHom.FinitePresentation.of_finiteType",
+     "Module.finitePresentation_iff_finite",
+     "Module.FinitePresentation.of_finite_of_finitePresentation",
+     "Algebra.Presentation.exists_presentation_fin"
+    ],
+    "digest": "f5e3406542029025"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: coefficient-presentation models and smooth algebra descent are present, but none of the hits simultaneously descends an arbitrary algebra and module to a local Noetherian subring with these tensor isomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneously descend a finite presentation algebra and a finite presentation module to a local Noetherian subring of a local ring, with exact tensor base change",
+   "results": {
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.finitePresentation_isLocal",
+     "Algebra.FinitePresentation.of_isLocalizationAway",
+     "RingHom.finitePresentation_ofLocalizationSpanTarget",
+     "Algebra.Smooth.exists_finiteType",
+     "Algebra.Smooth.exists_subalgebra_fg",
+     "RingHom.finitePresentation_holdsForLocalizationAway",
+     "Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway",
+     "fg_of_fg_of_fg"
+    ],
+    "digest": "5f6bdafe47294fc5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: coefficient-presentation models and smooth algebra descent are present, but none of the hits simultaneously descends an arbitrary algebra and module to a local Noetherian subring with these tensor isomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented algebra and a finitely presented module over it descend to a Noetherian local subring essentially of finite type over the integers",
+   "results": {
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.EssFiniteType.isNoetherianRing",
+     "Algebra.FinitePresentation.of_finiteType",
+     "AlgHom.FinitePresentation.of_finiteType",
+     "RingHom.FinitePresentation.of_finiteType",
+     "Algebra.FiniteType.isNoetherianRing",
+     "fg_of_fg_of_fg",
+     "IsNoetherianRing.of_finite",
+     "Algebra.QuasiFiniteAt"
+    ],
+    "digest": "d6b527a9f5a58556"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: coefficient algebra models and finite-presentation consequences exist, but the hits do not simultaneously supply the local subring and arbitrary module model; the coefficient-model ingredient is reused as an existing Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorModelOfHasCoeffsEquiv|[Nn]oetherian.*[Mm]odel|[Ll]ocal.*[Ss]ubring",
+   "results": {
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Spectrum/Maximal/Localization.lean",
+     "Mathlib/RingTheory/Smooth/NoetherianDescent.lean",
+     "Mathlib/RingTheory/Smooth/NoetherianDescent.lean",
+     "Mathlib/RingTheory/Smooth/NoetherianDescent.lean",
+     "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+     "Mathlib/RingTheory/DedekindDomain/AdicValuation.lean",
+     "Mathlib/RingTheory/Valuation/ValuationSubring.lean",
+     "Mathlib/RingTheory/Valuation/ValuationSubring.lean"
+    ],
+    "digest": "3017908ab5c00ac6"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: coefficient algebra models and finite-presentation consequences exist, but the hits do not simultaneously supply the local subring and arbitrary module model; the coefficient-model ingredient is reused as an existing Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous descent of finitely presented algebra and module to a Noetherian local subring",
+   "results": {
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.finitePresentation_of_finite",
+     "Module.FinitePresentation.exists_free_localizedModule_powers",
+     "Module.finitePresentation_iff_finite",
+     "Module.FinitePresentation.of_finite_of_finitePresentation",
+     "AlgHom.FinitePresentation.of_finiteType",
+     "Module.FinitePresentation.iff_finitePresentation_of_finite",
+     "isNoetherian_of_isNoetherianRing_of_finite",
+     "IsLocalization.Away.finitePresentation"
+    ],
+    "digest": "606bf6a27927ca70"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: coefficient algebra models and finite-presentation consequences exist, but the hits do not simultaneously supply the local subring and arbitrary module model; the coefficient-model ingredient is reused as an existing Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Presentation, Module.FinitePresentation, IsLocalRing",
+   "results": {
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: coefficient algebra models and finite-presentation consequences exist, but the hits do not simultaneously supply the local subring and arbitrary module model; the coefficient-model ingredient is reused as an existing Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose finitely many coefficients of polynomial relations and module presentation matrices and localize their integer subring to obtain simultaneous algebra module models",
+   "results": {
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.PreSubmersivePresentation.ofHasCoeffs",
+     "Algebra.Presentation.ModelOfHasCoeffs",
+     "Module.FinitePresentation.exists_basis_localizedModule_powers",
+     "Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite",
+     "Algebra.SubmersivePresentation.ofHasCoeffs",
+     "Algebra.SubmersivePresentation.HasCoeffs",
+     "Algebra.Presentation.exists_presentation_fin",
+     "Algebra.Presentation.localizationAway"
+    ],
+    "digest": "05ab00ce2fad989f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: coefficient algebra models and finite-presentation consequences exist, but the hits do not simultaneously supply the local subring and arbitrary module model; the coefficient-model ingredient is reused as an existing Mathlib leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-finite-presentation-pure-spreadout",
+  "date": "2026-10-24",
+  "group": "Q06"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tag 0AT8 (lemma-find-pure-spreadout), proof: choose a local subring A_0 essentially of finite type over Z and simultaneous algebra/module models B_0,N_0; algebraic input to the inherited Tag 0AT9/BLR S-density route.",
+   "via": [
+    "lem-sfb-local-finite-presentation-pure-spreadout",
+    "lem-sfb-flat-finitely-presented-module-fibre-injectivity",
+    "lem-sfb-smooth-fibrewise-dense-open-base-change",
+    "lem-sfb-birational-law-strictification",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-local-algebra-module-noetherian-subring-model",
+  "worker": "stage1",
+  "summary": "Expanded the simultaneous local model construction omitted in Stacks 0AT8. Used an augmented presentation so the existing coefficient-core Mathlib leaf captures module-matrix coefficients, embedded its localization in R, and constructed the module model using tensor right exactness. Statement unchanged; no new nodes or flatness hypotheses.",
+  "blueprint": "The ancestor command returns None, as recorded in the inherited blueprint.from.node. This supplies the coefficient-model subargument of the inherited Tag 0AT8 pure-spreadout route, serving the Tag 0AT9/BLR density chain. Searched latest main-20261024 and the imported blueprint for an equivalent local algebra/module model; none found."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-e05126b03",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-e05126b03 (reviewer sub-agent of L); spot-checked: This is a first split: the base in clones/side-live was unsplit with an identical statement and stmt_deps, and no re-split note exists. No new nodes. Source: Stacks flat.tex Tag 0AT8, lemma-find-pure-spreadout (lines 7270-7302), which only says to 'choose' the local subring A_0 and the models B_0, N'_0; the item supplies that construction (proof_origin agent). Steps: (1) the augmented presentation with Y_l-u_l is the same quotient as the original. (2) The coefficient-core leaf applies to that specified presentation; D contains the u_l, is of finite type over Z and Noetherian, E⊗_D R≅C, and the clause holds for any D-algebra T. (3) The elements of W are units of R because R is local; W^{-1}D→R is injective; n=R_0∩m is the unique maximal ideal. (4) Conditions (a)-(c) of lem-weil-pbc-localization-noetherian hold, and the essentially-finite-type definition is met. (5) C_0=E⊗_D R_0 is finitely presented by the T=R_0 clause; the α associativity formulas were checked. (6) H_0 has entries over D, right exactness needs no flatness, and coker H gives β. (7) The associativity iso and the C_0-linearity of α give exactly r⊗x↦rβ(1⊗x). Edge cases checked: empty data, M=0, C=0, R a field, zero divisors, positive characteristic, and the example R=k[[t]], C=R[x]/(x^2-t). No duplicate: lem-sfb-flat-fp-presentation-noetherian-model (flat, no module), lem-trf-local-module-arrow-noetherian-descent (colimit form) and the affine wrapper all differ. Batch-5 flag: lem-trf-presentation-noetherian-coefficient-model has status mathlib, an empty proof_deps and only pbc ring definitions as stmt_deps. It is a general commutative-algebra fact, not part of the trace formula or Poincaré duality and not given by either assumption, so it is accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalAlgebraModuleNoetherianSubringModel",
+  "declaration": "Algebra.exists_local_algebra_module_noetherian_subring_model",
+  "file": "lean/Sheaf/RingTheory/LocalAlgebraModuleNoetherianSubringModel.lean",
+  "statement": "theorem exists_local_algebra_module_noetherian_subring_model (R : Type u) (C : Type v) (M : Type w) [CommRing R] [IsLocalRing R] [CommRing C] [Algebra R C] [Algebra.FinitePresentation R C] [AddCommGroup M] [Module C M] [Module R M] [IsScalarTower R C M] [Module.FinitePresentation C M] : ∃ (R₀ : Subring R) (_ : IsLocalRing R₀), IsNoetherianRing R₀ ∧ Algebra.EssFiniteType ℤ R₀ ∧ IsLocalRing.maximalIdeal R₀ = (IsLocalRing.maximalIdeal R).comap R₀.subtype ∧ (IsLocalRing.maximalIdeal R₀).FG ∧ ∃ (C₀ : Type u) (_ : CommRing C₀) (_ : Algebra R₀ C₀), Algebra.FinitePresentation R₀ C₀ ∧ ∃ (α : R ⊗[R₀] C₀ ≃ₐ[R] C) (_ : Algebra C₀ C), (∀ c₀ : C₀, algebraMap C₀ C c₀ = α (1 ⊗ₜ[R₀] c₀)) ∧ ∃ (M₀ : Type u) (_ : AddCommGroup M₀) (_ : Module C₀ M₀) (_ : Module R₀ M₀) (_ : IsScalarTower R₀ C₀ M₀), Module.FinitePresentation C₀ M₀ ∧ ∃ (β : C ⊗[C₀] M₀ ≃ₗ[C] M) (γ : R ⊗[R₀] M₀ ≃ₗ[R] M), (∀ (r : R) (x : M₀), γ (r ⊗ₜ[R₀] x) = r • β (1 ⊗ₜ[C₀] x)) ∧ (∀ (c₀ : C₀) (r : R) (x : M₀), γ (r ⊗ₜ[R₀] (c₀ • x)) = α (1 ⊗ₜ[R₀] c₀) • γ (r ⊗ₜ[R₀] x))",
+  "branch": "sheaf-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25704a520",
+  "group": "NV",
+  "result": "pass",
+  "note": "Clause-by-clause check against node and Stacks 0AT8 proof: R local, C fp algebra, M fp C-module (R-action only via scalar tower), R₀ : Subring R with inclusion algebra, IsLocalRing R₀ with maximalIdeal = comap of m, Noetherian, EssFiniteType ℤ, FG; C₀ fp with α : R⊗[R₀]C₀ ≃ₐ[R] C and Algebra C₀ C pinned by algebraMap = α(1⊗·); M₀ fp with β C-linear; γ R-linear determined by pure-tensor formula; C-compatibility clause (redundant, harmless). C₀, M₀ in Type u is a true strengthening only; edge cases C=0, M=0, empty presentations, fields, non-flat covered; no flatness/nontriviality. Node differs from side-live only in lean; statement verbatim; dep records/mathlib_match correct; no defs, sorry only, docstrings with source and blueprint; no duplicate found. No findings, no recompile (no file changed)."
+ }
+}

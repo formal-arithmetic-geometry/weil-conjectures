@@ -1,0 +1,105 @@
+{
+ "id": "def-sf-concrete-projection-factors",
+ "kind": "definition",
+ "title": "Proper and open factors of the coefficient square",
+ "statement": "Proper and open factors of the coefficient square. These are the actual functors and ordered comparisons of the concrete finite-reduction square, with normalized scalar adjunctions and tensor models [def-sp-open-scalar-tensor-data] and compact-support coefficient data [def-pur-integral-compact-support-coefficient-data]. These factors use the fixed constant coefficient system and tensor input [def-sf-concrete-projection-reduction-data].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6, 0D6D, 0E48; more-etale.tex Tags 0GL1 and 0GL6. Concrete proper/open argument of fix-prop-projection-formula, proof sentence 2."
+ },
+ "stmt_deps": [
+  "def-sf-concrete-projection-reduction-data",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof": [
+  {
+   "text": "Name the actual proper and open functors, scalar mates and counit-defined proper projection. The open factor includes the geometric pullback compositor of the chosen compactification. No comparison is chosen anew.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Concrete finite coefficient-reduction square, proof sentence 2; the component argument recorded above."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback and extension of scalar coefficients commute with tensor product and adjunction counit projection formula",
+   "results": "Ordinary ModuleCat unit/counit and Presheaf.pullbackComp hits; no normalized unbounded constant-ring proper/open square.",
+   "verdict": "No exact match.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"counit\"",
+   "results": "Eleven generic adjunction APIs; use Hom-equivalence naturality and mate equations.",
+   "verdict": "Useful generic glue, no exact scalar comparison.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(scalar|coefficient)|(scalar|coefficient).*projection",
+   "results": "One unrelated CStarProjection hit. Local rg located normalized scalar tensor, proper/open and compact-support comparisons used here.",
+   "verdict": "Use the stated library comparisons.",
+   "date": "2026-10-25"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConcreteProjectionReductionSquare",
+  "date": "2026-10-25",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-concrete-projection-reduction-square",
+   "place": "Normalized concrete proper/open coefficient square, its components and coefficient cocycles."
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConcreteProjectionFactorizationData",
+  "file": "lean/Sheaf/Paper/ConcreteProjectionFactorizationData.lean",
+  "declaration": "WeilConjectures.ConcreteProjectionReduction.openFactor",
+  "declarations": [
+   "WeilConjectures.ConcreteProjectionReduction.openImage",
+   "WeilConjectures.ConcreteProjectionReduction.properImage",
+   "WeilConjectures.ConcreteProjectionReduction.properScalar",
+   "WeilConjectures.ConcreteProjectionReduction.openScalar",
+   "WeilConjectures.ConcreteProjectionReduction.properProjection",
+   "WeilConjectures.ConcreteProjectionReduction.openFactor"
+  ],
+  "statement": "def openFactor (A : Type u) [CommRing A] {X Y : Scheme.{u}} {f : X ⟶ Y}\n    (c : Compactification f) (K : proEtaleDerivedCategory X A)\n    (L : proEtaleDerivedCategory Y A) :\n    input m A c.g ((openImage A c.i).obj K) L ≅\n      (openImage A c.i).obj (input m A f K L)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a9b01",
+  "group": "D7",
+  "result": "fix",
+  "landing": "20261025T201645-L-2595850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a9b01",
+  "group": "D7",
+  "result": "fix",
+  "landing": "20261025T201645-L-2595850",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-sf-concrete-projection-reduction-square + 6 new/2 changed nodes vs delivered Lean (compiled set + 8 copied OpenScalarTensorData importers in sandbox, axioms printed); change records vs Lean diffs; claims lock of IntegralCompactSupportCoefficientComparison (F8)"
+ }
+}

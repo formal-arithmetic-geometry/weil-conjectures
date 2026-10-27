@@ -1,0 +1,412 @@
+{
+ "id": "lem-sf-open-roos-extension-comparison",
+ "kind": "statement",
+ "title": "Normalized open-extension Roos comparison on arbitrary strict towers",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "statement": "Fix the finite-field datum $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, a uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. On each small pro-etale site put $B_W=\\lim_n(A_n)_W$ [def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients] and use the ordinary unbounded module derived category $D(B_W)$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Open extension and restriction mean exact ringed-slice functors $e_!\\dashv e^*$, applied termwise [lem-pur-site-restriction-module-adjunction-exact].\nLet $j:U\\hookrightarrow X$ be an open immersion of finite-type $k$-schemes [def-weil-scheme-morphism-properties, def-weil-open-immersion]. Work with sites small in the fixed module universe; all tower indices are $\\mathbf N_{\\geq1}^{\\mathrm{op}}$. Write $L_W=R\\lim$ for total right derived inverse limit on strict towers of $B_W$-modules and use its normalized signed Roos model [lem-cbc-exact-product-functor-strict-limit]. A strict tower complex $M_\\bullet$ has termwise product $P_M=\\prod_nM_n$, transition shift $s((x_n)_n)=(d_nx_{n+1})_n$, and signed fiber $\\mathsf H(M)^a=P_M^a\\oplus P_M^{a-1}$ with differential $(x,y)\\mapsto(dx,(1-s)x-dy)$. Here $d_n:M_{n+1}\\to M_n$ are the tower transitions. Denote termwise extension by $J$ and termwise restriction by $G$; the same open operations on derived categories are written $j_!$ and $j^*$.\nThen $U,X$ are Noetherian and qcqs, $j$ is quasi-compact, and $\\ell$ is invertible on both schemes. The exact ringed extension $j_!$ has invertible canonical countable-product comparison $\\phi_M:j_!\\prod_nM_n\\xrightarrow{\\sim}\\prod_nj_!M_n$, characterized by $\\mathrm{pr}_n\\phi_M=j_!(\\mathrm{pr}_n)$; countable products of $B_U$-modules and $B_X$-modules are exact.\nFor every strict tower complex $M_\\bullet$ on $U$ there is a specified natural isomorphism\n$$\\lambda_M:j_!L_UM_\\bullet\\xrightarrow{\\sim}L_XJM_\\bullet.$$\nIts representative under the normalized Roos identifications is $\\phi_M$ on both signed summands of $\\mathsf H(M)$; it is independent of resolutions. For every complex $D$ of $B_U$-modules and strict augmentation $c:\\Delta D\\to M_\\bullet$, let $a_c:D\\to L_UM_\\bullet$ denote its actual induced map. Then\n$$\\lambda_M\\circ j_!(a_c)=a_{Jc}:j_!D\\longrightarrow L_XJM_\\bullet.$$\nHere $\\Delta$ is the constant tower, and both augmentations have first Roos coordinate $(c_n)_n$ and shifted coordinate zero. All assertions are natural in strict tower maps and strict augmentation squares. No separatedness of $X$ over $k$, boundedness or constructibility of $M_\\bullet$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BP, lemma-j-shriek-limits; agent-formulated signed Roos and strict-augmentation normalization of the open-factor argument. Original item proof steps 1–2; exact-product comparison as in the cited generic node."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-sheaf-of-modules-category",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "proof": [
+  {
+   "text": "Use Mathlib LocallyOfFiniteType.isLocallyNoetherian and QuasiCompact.compactSpace_of_compactSpace on both given structure morphisms. A Noetherian source makes U.hom quasi-compact. Derive characteristic p of k0 from its cardinality p^a, then of its algebraic closure k. Since l is a different prime, its image in k is nonzero and a unit; map this unit through the global section structure map and every stalk germ.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; properties.tex Tags 01OW, 01OY, 01OZ, lemmas locally-Noetherian, locally-Noetherian-quasi-separated, Noetherian-topology"
+   }
+  },
+  {
+   "text": "For an arbitrary ring sheaf restricted to the slice, transport modules along ProEt.sliceEquiv using the existing module pushforward equivalence. ProEt.sliceDense supplies the topology equivalence. Apply ProEt.products_exact to the resulting ring sheaf on U.left and reflect exactness back along the equivalence. Apply the same exact-products theorem directly to the ambient completed ring. This requires no comparison with the separately constructed completed ring on U.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "det-pe-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI, 03DJ, lemma-extension-by-zero and lemma-extension-by-zero-exact; canonical completed-ring restriction as in the cited coefficient node"
+   }
+  },
+  {
+   "text": "Apply lem-sf-ringed-open-extension-products-of-universes to the actual completed commutative ring sheaf on X and the countable family M. The extension is definitionally localizedSystemExtension, so this is exactly the specified piComparison. Step 1 supplies quasi-compactness of the open immersion. This genuinely separate Tag 09BP result remains to be proved; the old tied-universe product declaration does not suffice.",
+   "uses": [
+    "lem-sf-ringed-open-extension-products-of-universes",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BP, lemma-j-shriek-limits; sites-cohomology.tex proposition-enough-weakly-contractibles, product exactness clause"
+   }
+  },
+  {
+   "text": "Apply lem-cbc-exact-product-functor-strict-limit to $F=j_!$ on these two small ringed sites. Define $\\lambda_M=\\theta_{JM}^{-1}\\kappa_M j_!(\\theta_M)$ using its normalized signed Roos isomorphisms. Its statement gives an isomorphism natural in strict tower maps, represented by $\\phi$ on both signed summands and independent of resolutions. The categories here are the ordinary unbounded module derived categories, so this application imposes no boundedness or constructibility condition.",
+   "uses": [
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Final paragraph applying exactness and derived-limit comparison; normalized refinement supplied by the cited generic node"
+   }
+  },
+  {
+   "text": "The generic strict-limit theorem supplies signed augmentation maps b and b-prime with first coordinate gamma and shifted coordinate zero, and proves their comparison equality. To identify these with the actual induced maps through every K-injective resolution, first construct the canonical inclusion from the ordinary limit into the signed Roos complex. Signed coordinates uniquely determine it. Use the normalization-on-injectives and naturality along a functorial K-injective resolution to prove eta theta = Q(iota) at every complex, using the normalized_unit argument of lem-cbc-exact-product-functor-roos-resolution. The coordinate equations imply b = a0 iota for the ordinary strict-limit augmentation a0. On any K-injective I, eta_I is invertible because ordinary limit preserves homotopy equivalences. Set dI = eta_I followed by the inverse of L(Qq), and a = a0 followed by lim(q). Limit projections and naturality of eta prove exactly the three resolution-normalized augmentation equations in ComparisonAssertions. Repeat this for the extended tower; functoriality preserves its strict compatibility equation.",
+   "uses": [
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lem-cbc-exact-product-functor-roos-resolution",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Final paragraph, canonical comparison refined to strict augmentations via the cited generic node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-proetale-weakly-etale-localization",
+  "det-pe-products-exact",
+  "lem-sf-ringed-open-extension-products-of-universes",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-cbc-exact-product-functor-roos-resolution",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "T4: finite-type and characteristic geometry; exact countable products transported along the slice equivalence; separate Tag 09BP independent-universe product lemma. The derived comparison is assembled from exactProductFunctorStrictLimit, with actual augmentation-resolution normalization proved using canonical signed inclusions, derived-unit naturality, and the K-injective derivability argument of exactProductFunctorRoosResolution."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact open immersion between finite type schemes over a field has an augmentation preserving normalized signed Roos comparison for extension by zero on arbitrary strict towers",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec",
+     "AlgebraicGeometry.exists_map_preimage_le_map_preimage",
+     "AlgebraicGeometry.exists_map_preimage_eq_map_preimage",
+     "AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage"
+    ],
+    "note": "",
+    "digest": "178c2882bc0b6408"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the HomologicalComplex limit-preservation declarations (HomologicalComplexLimits.lean:195) concern ordinary termwise limits. ExactFunctor.mapDerivedCategoryFactorsh_hom_app concerns descent of an exact functor, not a normalized derived inverse-limit comparison preserving augmentations. The geometric normalization/AffineTransitionLimit hits do not concern module-sheaf Roos limits."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesLimitsOfShape, HomologicalComplex",
+   "results": {
+    "ok": true,
+    "n_hits": 4,
+    "top": [
+     "HomologicalComplex.instPreservesLimitsOfShapeEvalOfHasLimitsOfShape",
+     "HomologicalComplex.instPreservesLimitsOfShapeSingle",
+     "HomologicalComplex.preservesLimitsOfShape_of_eval",
+     "CategoryTheory.instPreservesLimitsOfShapeHomologicalComplexMapHomologicalComplexOfHasLimitsOfShape"
+    ],
+    "note": "",
+    "digest": "ffb3db97c4b2896a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the HomologicalComplex limit-preservation declarations (HomologicalComplexLimits.lean:195) concern ordinary termwise limits. ExactFunctor.mapDerivedCategoryFactorsh_hom_app concerns descent of an exact functor, not a normalized derived inverse-limit comparison preserving augmentations. The geometric normalization/AffineTransitionLimit hits do not concern module-sheaf Roos limits."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|homotopyLimit|derivedLimit|jShriek.*[Pp]roduct",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the HomologicalComplex limit-preservation declarations (HomologicalComplexLimits.lean:195) concern ordinary termwise limits. ExactFunctor.mapDerivedCategoryFactorsh_hom_app concerns descent of an exact functor, not a normalized derived inverse-limit comparison preserving augmentations. The geometric normalization/AffineTransitionLimit hits do not concern module-sheaf Roos limits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero commutes with derived inverse limits of strict towers and preserves strict augmentations",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "DirectLimit.instZero",
+     "CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero",
+     "AddMonoidHom.completion_zero",
+     "CategoryTheory.Abelian.Ext.zero_comp",
+     "HomologicalComplex.extendMap_zero",
+     "CategoryTheory.Abelian.Ext.mk₀_zero",
+     "DerivedCategory.instHasZeroObject",
+     "CategoryTheory.Abelian.Ext.comp_zero"
+    ],
+    "note": "",
+    "digest": "c360674f13042869"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the HomologicalComplex limit-preservation declarations (HomologicalComplexLimits.lean:195) concern ordinary termwise limits. ExactFunctor.mapDerivedCategoryFactorsh_hom_app concerns descent of an exact functor, not a normalized derived inverse-limit comparison preserving augmentations. The geometric normalization/AffineTransitionLimit hits do not concern module-sheaf Roos limits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor preserving countable products commutes with the total right derived inverse limit and its strict augmentation maps",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+     "CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc",
+     "CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc",
+     "CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc",
+     "CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc",
+     "CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc",
+     "CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+     "CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc"
+    ],
+    "note": "",
+    "digest": "0e5989c5e9499dc0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the HomologicalComplex limit-preservation declarations (HomologicalComplexLimits.lean:195) concern ordinary termwise limits. ExactFunctor.mapDerivedCategoryFactorsh_hom_app concerns descent of an exact functor, not a normalized derived inverse-limit comparison preserving augmentations. The geometric normalization/AffineTransitionLimit hits do not concern module-sheaf Roos limits."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|homotopyLimit|derivedLimit|jShriek.*[Pp]roduct",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary HomologicalComplex limit preservation, exact-functor derived localization, and condensed right Kan extensions do not assert a pro-etale open-extension normalized Roos comparison or preservation of its actual augmentation maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero commutes with derived inverse limits of towers of module sheaves",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero",
+     "SheafOfModules.hasLimit",
+     "DirectLimit.inv₀_def",
+     "DirectLimit.instZero",
+     "Finsupp.supportedEquivFinsupp_symm_apply_coe",
+     "DirectLimit.instSMulWithZeroOfMulActionHomClassOfZeroHomClass",
+     "DerivedCategory.instHasZeroObject",
+     "DirectLimit.instSMulZeroClassOfMulActionHomClass"
+    ],
+    "note": "",
+    "digest": "5f33e95119ce814a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary HomologicalComplex limit preservation, exact-functor derived localization, and condensed right Kan extensions do not assert a pro-etale open-extension normalized Roos comparison or preservation of its actual augmentation maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesLimitsOfShape, HomologicalComplex",
+   "results": {
+    "ok": true,
+    "n_hits": 4,
+    "top": [
+     "HomologicalComplex.instPreservesLimitsOfShapeEvalOfHasLimitsOfShape",
+     "HomologicalComplex.instPreservesLimitsOfShapeSingle",
+     "HomologicalComplex.preservesLimitsOfShape_of_eval",
+     "CategoryTheory.instPreservesLimitsOfShapeHomologicalComplexMapHomologicalComplexOfHasLimitsOfShape"
+    ],
+    "note": "",
+    "digest": "ffb3db97c4b2896a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary HomologicalComplex limit preservation, exact-functor derived localization, and condensed right Kan extensions do not assert a pro-etale open-extension normalized Roos comparison or preservation of its actual augmentation maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact open extension functor on proetale module sheaves commutes with derived inverse limits of strict towers preserving normalized Roos augmentations",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "Condensed.profiniteSolid",
+     "Condensed.profiniteSolidification",
+     "Condensed.profiniteSolidCounit",
+     "Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit",
+     "localCohomology.diagram",
+     "CondensedMod.ofSheafProfinite",
+     "LightCondMod.ofSheafLightProfinite",
+     "Profinite.NobelingProof.succ_exact"
+    ],
+    "note": "",
+    "digest": "9a901e73c8d2f921"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary HomologicalComplex limit preservation, exact-functor derived localization, and condensed right Kan extensions do not assert a pro-etale open-extension normalized Roos comparison or preservation of its actual augmentation maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive exact functor preserving countable products preserves total right derived inverse limits with natural strict augmentation comparison",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+     "CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+     "CategoryTheory.instIsIsoFunctorToRightDerivedZero",
+     "CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure",
+     "CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc",
+     "CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'"
+    ],
+    "note": "",
+    "digest": "1007e203ad26ef02"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary HomologicalComplex limit preservation, exact-functor derived localization, and condensed right Kan extensions do not assert a pro-etale open-extension normalized Roos comparison or preservation of its actual augmentation maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-open-projection-roos-completion",
+  "date": "2026-10-22",
+  "group": "Q158"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Open-factor paragraph: both composites take values in the essential image of the open extension. Work package: original lem-sf-open-projection-roos-completion steps 1–2, geometric hypotheses and augmentation-normalized extension/limit comparison.",
+   "via": [
+    "lem-sf-open-projection-roos-completion",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-open-roos-extension-comparison",
+  "worker": "stage1",
+  "summary": "NC checked finite-type geometry, exact ringed slice functors, completed coefficient restriction and product hypotheses; assembled the existing signed normalized comparison including strict augmentation naturality. Statement unchanged; no new nodes needed.",
+  "blueprint": "Realizes the open-factor paragraph of prop-sf-pf-coherence: normalized open extension/limit interface used by the restriction-to-the-open argument, via lem-sf-open-projection-roos-completion steps 1–2.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the geometric open pro-etale site with its slice and finite coefficient restrictions. This is a generic tool for the open-factor route, not a replacement of its projection-formula argument; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-sf-clopen-coefficient-comparison",
+    "why": "Identifies the completed coefficient ring on the open with the restricted ring, preserving projections. This is a generic tool for the open-factor route, not a replacement of its projection-formula argument; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Supplies additive exact ringed extension and restriction with their adjunction. This is a generic tool for the open-factor route, not a replacement of its projection-formula argument; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-cbc-ringed-open-extension-products",
+    "why": "Supplies the canonical product comparison for a quasi-compact open and any ring sheaf. This is a generic tool for the open-factor route, not a replacement of its projection-formula argument; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Supplies exact countable products for arbitrary pro-etale ring sheaves. This is a generic tool for the open-factor route, not a replacement of its projection-formula argument; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Supplies normalized signed derived-limit comparison with resolution independence and strict augmentations. This is a generic tool for the open-factor route, not a replacement of its projection-formula argument; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Supplies the signed Roos representative $z\\mapsto((c_nz)_n,0)$ of the canonical derived map induced by a strict augmentation, which Step 5 and the coordinate clause of the statement use. This is a generic tool for the open-factor route; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NC-00244d938",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-00244d938 (reviewer sub-agent of L); spot-checked: Read the item in full: statement unchanged, 5 steps, no new nodes. This is its first split (created by Q158 on 2026-10-22 with an empty proof), not a 2026-10-21 re-split. Source: Stacks Tag 09BP lemma-j-shriek-limits (proetale.tex:5185-5211); no SGA. All cited statements read in full. Step 1: U and X are Noetherian and qcqs, j is quasi-compact (V∩U is open in a Noetherian affine V), and ℓ is invertible; no separatedness is used. Step 2: localization + clopen-coefficient-comparison (stated for every open) give B_X|_U ≅ B_U, so the completed ring is kept. Step 3: every hypothesis of lem-cbc-exact-product-functor-strict-limit holds: ringed product φ for a quasi-compact open with a small family, exact countable products on U and X, exact additive j_! (same sheafified extension by zero as the adjunction node), sites 𝒱-small. Step 4: λ=θ⁻¹κj_!(θ) from the generic node. Step 5: coordinate check correct, (1−s)(c_n z)=c_n z−d_n c_{n+1} z=0. Edge cases U=∅, U=X, zero tower and identity-transition tower all pass. Duplicate search over the Roos nodes (ringed-open-roos-preservation, open-closed-extension-zero-limits, completed-extension-zero-comparison, immersion-limit-preservation): none states the specified augmentation-preserving λ. One fault, C4: Step 5 and the statement's coordinate clause use the representative z↦((c_n z)_n,0), which is the last clause of lem-weil-strict-roos-comparison, but Step 5 did not cite that node. Fix: added it to Step 5 uses, to proof_deps, and to split_report.tool_uses (generic tool from sk-def-sf-operations); no cycle. Accepted tool_uses: weakly-etale-localization, clopen-coefficient-comparison, site-restriction-adjunction, ringed-open-extension-products, countable-products-exact, exact-product-functor-strict-limit, strict-roos-comparison.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfOpenRoosExtensionComparison",
+  "declaration": "WeilConjectures.SfOpenRoos.comparison",
+  "declarations": [
+   "WeilConjectures.SfOpenRoos.sliceAbSheafify",
+   "WeilConjectures.SfOpenRoos.sliceAbLocallyBijective",
+   "WeilConjectures.SfOpenRoos.modulesX",
+   "WeilConjectures.SfOpenRoos.modulesU",
+   "WeilConjectures.SfOpenRoos.extension",
+   "WeilConjectures.SfOpenRoos.extensionAdditive",
+   "WeilConjectures.SfOpenRoos.extensionLimits",
+   "WeilConjectures.SfOpenRoos.extensionColimits",
+   "WeilConjectures.SfOpenRoos.restriction",
+   "WeilConjectures.SfOpenRoos.geometry_products",
+   "WeilConjectures.SfOpenRoos.ComparisonAssertions",
+   "WeilConjectures.SfOpenRoos.comparison"
+  ],
+  "file": "lean/Sheaf/Paper/SfOpenRoosExtensionComparison.lean",
+  "statement": "theorem comparison (D : FiniteFieldDatum.{t}) (_hl : l ≠ D.p) (aX : X ⟶ Spec (CommRingCat.of D.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType (U.hom ≫ aX)] [QuasiCompact (U.hom ≫ aX)] [IsOpenImmersion U.hom] [HasDerivedCategory.{wA} (modulesU l E X U)] [HasDerivedCategory.{wA} (ℕᵒᵖ ⥤ modulesU l E X U)] [HasDerivedCategory.{wB} (modulesX l E X)] [HasDerivedCategory.{wB} (ℕᵒᵖ ⥤ modulesX l E X)] (LA : DerivedCategory.{wA} (ℕᵒᵖ ⥤ modulesU l E X U) ⥤ DerivedCategory.{wA} (modulesU l E X U)) (LB : DerivedCategory.{wB} (ℕᵒᵖ ⥤ modulesX l E X) ⥤ DerivedCategory.{wB} (modulesX l E X)) (etaA : HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙ (lim : (ℕᵒᵖ ⥤ CochainComplex (modulesU l E X U) ℤ) ⥤ CochainComplex (modulesU l E X U) ℤ) ⋙ DerivedCategory.Q.{wA} ⟶ DerivedCategory.Q.{wA} ⋙ LA) (_hLA : LA.IsRightDerivedFunctor etaA (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ modulesU l E X U) (ComplexShape.up ℤ))) (etaB : HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙ (lim : (ℕᵒᵖ ⥤ CochainComplex (modulesX l E X) ℤ) ⥤ CochainComplex (modulesX l E X) ℤ) ⋙ DerivedCategory.Q.{wB} ⟶ DerivedCategory.Q.{wB} ⋙ LB) (_hLB : LB.IsRightDerivedFunctor etaB (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ modulesX l E X) (ComplexShape.up ℤ))) : ComparisonAssertions (extension l E X U) LA LB etaA etaB",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The open module category uses the equivalent ringed-slice presentation explicitly specified in the node. geometry_products states the geometric and canonical-product conclusions; comparison states the normalized unbounded derived comparison, with the full signed-coordinate and resolution-normalized augmentation specification in ComparisonAssertions. All helpers belong to this node; no arbitrary extension functor or arbitrary augmentation map is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ae28dc55",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Read item, all 10 stmt_deps, Stacks 09BP, delivered module, the dep exactProductFunctorStrictLimit, CompletedIntegralCoefficients, FiniteFieldDatum and the proof-dep modules. Every node clause rendered: actual localizedSystemExtension/Restriction on ringedSiteModules(B.over U), B = limit of constant A_{n+1} sheaves on Scheme.ProEt; finite-type via LocallyOfFiniteType+QuasiCompact for X and U; geometry (Noetherian, qcqs, QuasiCompact j, l unit in stalks), exact countable products and IsIso piComparison are conclusions of geometry_products. ComparisonAssertions copies the dep conclusion clause by clause (signed cone pinning, kappa = phi on both summands, lambda square, beta, K-injective resolution independence, (gamma,0) augmentations) minus the triangle clause, plus pinned actual-induced-map clauses (true via iota=(pi,0) and resolution refinement); comparison follows from the dep with F = extension, universes max u (t+1) matching. No hollow defs, sorry only in the 2 theorems, docstrings with source/blueprint/proof steps, statement verbatim, 12 declarations present, lines <=100, proof_dep plain imports, no universe equality, Mathlib Scheme.ProEt site. Advisories: towerTransitionEndomorphism used while lem-weil-strict-roos-comparison only a proof_dep (same as the PASSed dep); proEtaleRingedExtensionByZero_products is at tied universes Scheme.{u}/CommRingCat.{u+1} with a different functor name, stage 3 must generalize or identify; countableProducts_exact is on Y.ProEt, the slice goes through step 2. No compile (no fix)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2c7f4",
+  "group": "T4",
+  "result": "fix",
+  "landing": "20261025T003345-L-3232879",
+  "kind": "interface",
+  "note": "independent cc review: StrictLimitAssertions body vs old exactProductFunctorStrictLimit conclusion (token-identical after A/B substitution); 8 users naming the theorem compiled against delivered ExactProductFunctorStrictLimit; new universe-enlarged 09BP lemma vs landed proEtaleRingedExtensionByZero_products; item node proof_deps vs Lean"
+ }
+}

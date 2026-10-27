@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "$f^!$ with rational coefficients",
- "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a finite extension $E/\\mathbf Q_\\ell$. Let $\\Lambda=E$ or $\\overline{\\mathbf Q}_\\ell$, with its condensed coefficient ring and pulled-back module-object interpretation of [sk-def-sfb-dc-setting, sk-def-sfb-constructible]. Let $X,Y$ be separated schemes of finite type over $k$, and let $f:X\\to Y$ be a separated finite-type $k$-morphism, in that standing setting [sk-def-sfb-dc-setting, def-weil-finite-type-morphism, def-weil-proper-morphism]. Write $\\Dctf(T,\\Lambda)$ for the full subcategory of bounded constructible complexes of finite Tor amplitude [sk-def-sfb-constructible], and $\\Loc(\\Dctf(T,\\Lambda))$ for its full localizing closure [sk-def-localizing-closure]. The right adjoint $f^!$ of [sk-prop-sf-existence] on these localizing categories satisfies\n$$\nf^!\\bigl(\\Dctf(Y,\\Lambda)\\bigr)\\subseteq\\Dctf(X,\\Lambda).\n$$\nIts restriction is right adjoint to $Rf_!:\\Dctf(X,\\Lambda)\\to\\Dctf(Y,\\Lambda)$.",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a finite extension $E/\\mathbf Q_\\ell$. Let $\\Lambda=E$, with its condensed coefficient ring and pulled-back module-object interpretation of [sk-def-sfb-dc-setting, sk-def-sfb-constructible]. Let $X,Y$ be separated schemes of finite type over $k$, and let $f:X\\to Y$ be a separated finite-type $k$-morphism, in that standing setting [sk-def-sfb-dc-setting, def-weil-finite-type-morphism, def-weil-proper-morphism]. Write $\\Dctf(T,\\Lambda)$ for the full subcategory of bounded constructible complexes of finite Tor amplitude [sk-def-sfb-constructible], and $\\Loc(\\Dctf(T,\\Lambda))$ for its full localizing closure [sk-def-localizing-closure]. The right adjoint $f^!$ of [sk-prop-sf-existence] on these localizing categories satisfies\n$$\nf^!\\bigl(\\Dctf(Y,\\Lambda)\\bigr)\\subseteq\\Dctf(X,\\Lambda).\n$$\nIts restriction is right adjoint to $Rf_!:\\Dctf(X,\\Lambda)\\to\\Dctf(Y,\\Lambda)$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/_section.md",
   "place": "node sk-thm-restriction, order 1565"
@@ -22,7 +22,7 @@
  ],
  "proof": [
   {
-   "text": "The finite-type separated structure maps give qcqs X and Y. Either coefficient disjunct embeds into IsLocalizingAdmissibleCoefficient without changing the continuous-map convention. The fourth conjunct of compactification_localizing gives preservation of Dctf by the actual compactification lower shriek.",
+   "text": "The finite-type separated structure maps give qcqs X and Y. The coefficient E embeds into IsLocalizingAdmissibleCoefficient as its finite-extension case. The fourth conjunct of compactification_localizing gives preservation of Dctf by the actual compactification lower shriek.",
    "uses": [
     "def-weil-finite-type-morphism",
     "def-weil-proper-morphism",
@@ -36,21 +36,10 @@
    }
   },
   {
-   "text": "Split the original coefficient disjunction. For the finite-extension E case only, rationalRestrictionGlue gives bounded constructibility of G K. The predicate equality in localizingClosure_ctf_equals_bc on X promotes it to Dctf. This invocation uses the E disjunct of both input theorems; their finite-subextension-valued Qbar disjuncts are never used.",
+   "text": "For the finite-extension coefficient E, rationalRestrictionGlue gives bounded constructibility of G K. The predicate equality in localizingClosure_ctf_equals_bc on X promotes it to Dctf. This invocation uses the E disjunct of both input theorems; their finite-subextension-valued Qbar disjuncts are never used.",
    "uses": [
     "det-thm-restriction-glue",
     "det-def-localizing-closure-ctf-equals-bc"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction.proof.md",
-    "place": "The affine-factorization and finite-cover arguments in the first two paragraphs, and the restricted Hom bijection in the last paragraph."
-   }
-  },
-  {
-   "text": "For the all-continuous-map Qbar case use lem-sfb-continuous-qbar-exceptional-preservation with the same compactification, closure-preservation proof, right adjoint and adjunction. This is only the geometric preservation component of the argument, and retains the unit affine-factorization, purity, closed-support and finite-cover route.",
-   "uses": [
-    "lem-sfb-continuous-qbar-exceptional-preservation"
    ],
    "elementary": false,
    "source": {
@@ -69,6 +58,16 @@
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction.proof.md",
     "place": "The affine-factorization and finite-cover arguments in the first two paragraphs, and the restricted Hom bijection in the last paragraph."
    }
+  },
+  {
+   "text": "For E and the algebraic closure the exceptional inverse image itself follows: Brown representability gives the right adjoint of the compactly supported direct image on the localizing closures, the compactification cocycle compares the chosen compactification with any other, and the glued restriction theorem shows that this right adjoint preserves Dbc, which equals Dctf for these coefficients. No integral or finite restriction is used (Lean: rationalExceptionalInverseImage_exists).",
+   "uses": [
+    "sk-prop-sf-existence",
+    "det-sf-comp-coherence-cocycle",
+    "det-thm-restriction-glue",
+    "det-def-localizing-closure-ctf-equals-bc"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -78,8 +77,8 @@
   "det-sf-comp-coherence-single",
   "det-thm-restriction-glue",
   "det-def-localizing-closure-ctf-equals-bc",
-  "lem-sfb-continuous-qbar-exceptional-preservation",
-  "sk-prop-sf-existence"
+  "sk-prop-sf-existence",
+  "det-sf-comp-coherence-cocycle"
  ],
  "proof_origin": {
   "by": "agent",
@@ -174,7 +173,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q68-0f6347bd2 (reviewer sub-agent of L); spot-checked: Read the complete item, unit/chapter route, cited DAG statements, blueprint proofs, Stacks locations, delivery errors, packet, and report. Verified all eight proof steps, hypotheses, coefficient categories, base-change factorization, edge cases, route compliance, and absence of duplicate/new-node faults. Wrote review.md. No SGA, Lean, builds, git, ssh, or live project access used."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -188,10 +198,11 @@
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.rationalExceptional_preserves_constructibleFiniteTor",
   "declarations": [
    "AlgebraicGeometry.ProEtale.constantModelFiniteTorToLocalizing",
-   "AlgebraicGeometry.ProEtale.CondensedRing.rationalExceptional_preserves_constructibleFiniteTor"
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalExceptional_preserves_constructibleFiniteTor",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalExceptionalInverseImage_exists"
   ],
   "file": "lean/Sheaf/Paper/RationalExceptionalRestriction.lean",
-  "statement": "theorem rationalExceptional_preserves_constructibleFiniteTor (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] (E : PadicAlgCl.FiniteIntermediateField ℓ) (_hΛ : Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj (PadicAlgCl ℓ)))) (c : Compactification.BoundaryCompactification f) (h : ∀ K, localizingClosureProEtale Λ X K → localizingClosureProEtale Λ Y ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K)) (G : (localizingClosureProEtale Λ Y).FullSubcategory ⥤ (localizingClosureProEtale Λ X).FullSubcategory) (_adj : localizingLowerShriek Λ c.obj.obj h ⊣ G) : (∀ K : (localizingClosureProEtale Λ Y).FullSubcategory, (constantModelBoundedConstructible Λ Y K.obj ∧ DerivedCategory.finiteTorAmplitude _ K.obj) → constantModelBoundedConstructible Λ X (G.obj K).obj ∧ DerivedCategory.finiteTorAmplitude _ (G.obj K).obj) ∧ ∃ (F₀ : ConstantModelConstructibleFiniteTor Λ X ⥤ ConstantModelConstructibleFiniteTor Λ Y) (G₀ : ConstantModelConstructibleFiniteTor Λ Y ⥤ ConstantModelConstructibleFiniteTor Λ X), F₀ ⋙ constantModelFiniteTorToLocalizing Λ Y = constantModelFiniteTorToLocalizing Λ X ⋙ localizingLowerShriek Λ c.obj.obj h ∧ G₀ ⋙ constantModelFiniteTorToLocalizing Λ X = constantModelFiniteTorToLocalizing Λ Y ⋙ G ∧ Nonempty (F₀ ⊣ G₀)",
+  "statement": "theorem rationalExceptional_preserves_constructibleFiniteTor (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] (E : PadicAlgCl.FiniteIntermediateField ℓ) (_hΛ : Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) (c : Compactification.BoundaryCompactification f) (h : ∀ K, localizingClosureProEtale Λ X K → localizingClosureProEtale Λ Y ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K)) (G : (localizingClosureProEtale Λ Y).FullSubcategory ⥤ (localizingClosureProEtale Λ X).FullSubcategory) (_adj : localizingLowerShriek Λ c.obj.obj h ⊣ G) : (∀ K : (localizingClosureProEtale Λ Y).FullSubcategory, (constantModelBoundedConstructible Λ Y K.obj ∧ DerivedCategory.finiteTorAmplitude _ K.obj) → constantModelBoundedConstructible Λ X (G.obj K).obj ∧ DerivedCategory.finiteTorAmplitude _ (G.obj K).obj) ∧ ∃ (F₀ : ConstantModelConstructibleFiniteTor Λ X ⥤ ConstantModelConstructibleFiniteTor Λ Y) (G₀ : ConstantModelConstructibleFiniteTor Λ Y ⥤ ConstantModelConstructibleFiniteTor Λ X), F₀ ⋙ constantModelFiniteTorToLocalizing Λ Y = constantModelFiniteTorToLocalizing Λ X ⋙ localizingLowerShriek Λ c.obj.obj h ∧ G₀ ⋙ constantModelFiniteTorToLocalizing Λ X = constantModelFiniteTorToLocalizing Λ Y ⋙ G ∧ Nonempty (F₀ ⊣ G₀)",
   "branch": "newtargets-dag",
   "by": "Q06",
   "date": "2026-10-18",
@@ -207,5 +218,84 @@
   "landing": "20261019T005338-L-2754886",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "L maintenance (coefficient removal)",
+  "old_statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a finite extension $E/\\mathbf Q_\\ell$. Let $\\Lambda=E$ or $\\overline{\\mathbf Q}_\\ell$, with its condensed coefficient ring and pulled-back module-object interpretation of [sk-def-sfb-dc-setting, sk-def-sfb-constructible]. Let $X,Y$ be separated schemes of finite type over $k$, and let $f:X\\to Y$ be a separated finite-type $k$-morphism, in that standing setting [sk-def-sfb-dc-setting, def-weil-finite-type-morphism, def-weil-proper-morphism]. Write $\\Dctf(T,\\Lambda)$ for the full subcategory of bounded constructible complexes of finite Tor amplitude [sk-def-sfb-constructible], and $\\Loc(\\Dctf(T,\\Lambda))$ for its full localizing closure [sk-def-localizing-closure]. The right adjoint $f^!$ of [sk-prop-sf-existence] on these localizing categories satisfies\n$$\nf^!\\bigl(\\Dctf(Y,\\Lambda)\\bigr)\\subseteq\\Dctf(X,\\Lambda).\n$$\nIts restriction is right adjoint to $Rf_!:\\Dctf(X,\\Lambda)\\to\\Dctf(Y,\\Lambda)$.",
+  "what": "Decision of the human, 2026-10-25: the ring of all continuous maps to the algebraic closure (continuousMapRingObj (PadicAlgCl l)) is no longer an admissible coefficient. The blueprint's algebraic-closure coefficient of sk-def-localizing-closure is the finite-subextension-valued ring (sk-def-sfb-qlbar-condensed), which this statement never listed. The all-continuous case was dropped from this statement and from its Lean hypothesis; the remaining coefficients are unchanged. The blueprint's Qbar_l case (finite-subextension-valued, sk-def-sfb-qlbar-condensed) of this theorem is proved inside exceptionalInverseImage_exists (sk-thm-existence) by rationalRestrictionGlue and Dctf=Dbc; the Lean declaration of this node covers E.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/_section.md",
+   "place": "coefficient list A, Z_l, O_E, Q_l, E, Qbar_l, with Qbar_l read as sk-def-sfb-qlbar-condensed"
+  },
+  "citers": [
+   {
+    "id": "sk-thm-existence",
+    "holds": true,
+    "note": "cites it only for A, Z_l, O_E, Q_l, E or the finite-subextension-valued Qbar_l; the all-continuous coefficient is not admissible any more"
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "The finite-type separated structure maps give qcqs X and Y. Either coefficient disjunct embeds into IsLocalizingAdmissibleCoefficient without changing the continuous-map convention. The fourth conjunct of compactification_localizing gives preservation of Dctf by the actual compactification lower shriek.",
+    "uses": [
+     "def-weil-finite-type-morphism",
+     "def-weil-proper-morphism",
+     "sk-def-localizing-closure",
+     "det-sf-comp-coherence-single"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction.proof.md",
+     "place": "The affine-factorization and finite-cover arguments in the first two paragraphs, and the restricted Hom bijection in the last paragraph."
+    }
+   },
+   {
+    "text": "Split the original coefficient disjunction. For the finite-extension E case only, rationalRestrictionGlue gives bounded constructibility of G K. The predicate equality in localizingClosure_ctf_equals_bc on X promotes it to Dctf. This invocation uses the E disjunct of both input theorems; their finite-subextension-valued Qbar disjuncts are never used.",
+    "uses": [
+     "det-thm-restriction-glue",
+     "det-def-localizing-closure-ctf-equals-bc"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction.proof.md",
+     "place": "The affine-factorization and finite-cover arguments in the first two paragraphs, and the restricted Hom bijection in the last paragraph."
+    }
+   },
+   {
+    "text": "For the all-continuous-map Qbar case use lem-sfb-continuous-qbar-exceptional-preservation with the same compactification, closure-preservation proof, right adjoint and adjunction. This is only the geometric preservation component of the argument, and retains the unit affine-factorization, purity, closed-support and finite-cover route.",
+    "uses": [
+     "lem-sfb-continuous-qbar-exceptional-preservation"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction.proof.md",
+     "place": "The affine-factorization and finite-cover arguments in the first two paragraphs, and the restricted Hom bijection in the last paragraph."
+    }
+   },
+   {
+    "text": "Construct both Dctf restrictions by ObjectProperty.lift. Their composites with the full inclusion into the localizing closures are definitionally the original functors: both equalities are rfl, including their maps. The defining intersection of the localizing closure contains Dctf. Apply Adjunction.restrictFullyFaithful along ObjectProperty.fullyFaithfulιOfLE to obtain the required restricted adjunction.",
+    "uses": [
+     "sk-def-localizing-closure",
+     "sk-prop-sf-existence"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction.proof.md",
+     "place": "The affine-factorization and finite-cover arguments in the first two paragraphs, and the restricted Hom bijection in the last paragraph."
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-finite-type-morphism",
+   "def-weil-proper-morphism",
+   "sk-def-localizing-closure",
+   "det-sf-comp-coherence-single",
+   "det-thm-restriction-glue",
+   "det-def-localizing-closure-ctf-equals-bc",
+   "lem-sfb-continuous-qbar-exceptional-preservation",
+   "sk-prop-sf-existence"
+  ]
+ },
+ "lean_notes": "2026-10-26 (maintainer M, route audit 10-25, batch 4 C): rationalExceptionalInverseImage_exists (module Sheaf.Paper.RationalExceptionalInverseImageExistence) is sk-thm-existence clause (4) for E and Q̄ℓ, proved from this theorem alone."
 }

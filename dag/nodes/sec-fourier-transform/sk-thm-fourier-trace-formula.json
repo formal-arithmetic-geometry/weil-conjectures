@@ -202,7 +202,84 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-fourier-transform",
  "unit": "sk-thm-fourier-trace-formula",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilComplex.traceFunction_fourierTransform",
+     "module": "WeilConjectures.WeilSheaf.FourierTrace",
+     "lines": [
+      167,
+      204
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`sk-thm-fourier-trace-formula`; blueprint: `thm-fd-fourier-trace`"
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+     "lines": [
+      405,
+      415
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-adic-affine-direct-image-finiteness"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_comp_iso",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      184,
+      200
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-native-weil-shriek-composition",
+      "prop-functor-package"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      218,
+      243
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "prop-functor-package",
+      "lem-zl-morphism-open-closed-reduction"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.sum_trace_compactlySupportedCohomology_eq_sum_traceFunction",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekOperations",
+     "lines": [
+      95,
+      114
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
+  }
+ },
  "split_report": {
   "date": "2026-10-18",
   "item": "sk-thm-fourier-trace-formula",
@@ -264,5 +341,25 @@
   "by": "Q24",
   "date": "2026-10-18",
   "existing": false
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "proof"
+  ],
+  "statement": "For $y\\in\\mathbf F_{q^n}$ and a Weil complex $K$ on $\\Aone$,\n\n$$\nt_{\\FT_\\psi(K)}(y)\n=-\\sum_{x\\in\\mathbf F_{q^n}}t_K(x)\\,\\psi\\bigl(\\Tr_{\\mathbf F_{q^n}/k_0}(xy)\\bigr).\n$$\n\nThus, up to the sign coming from the shift $[1]$, the trace function of the\ntransform is the classical Fourier transform of the trace function of the\ninput.",
+  "proof": [
+   {
+    "text": "By P3 the stalk of $\\FT_\\psi(K)$ at the geometric point over $y$ is\n$H^*_c(\\Aone,K\\otimes^L\\mathcal L_{\\psi(xy)})[1]$. The\nGrothendieck–Lefschetz trace formula over $\\mathbf F_{q^n}$\n([sk-thm-tf-uniform-formula] with $\\Lambda=\\Qlb$, in the point-counting form\ncor:trf-point-counting) computes the trace of the Frobenius on that\ncomplex as the sum of the traces at the geometric points of the fibre, i.e. as $-\\sum_xt_{K\\otimes^L\\mathcal L_{\\psi(xy)}}(x)$, the sign being the shift\n$[1]$ of [sk-def-ft]. The trace of a tensor product is the product of the\ntraces, and the trace of the Artin–Schreier factor at $x$ is\n$\\psi(\\Tr_{\\mathbf F_{q^n}/k_0}(xy))$ by [sk-lem-as-properties].",
+    "uses": [
+     "sk-thm-tf-uniform-formula",
+     "sk-def-ft",
+     "sk-lem-as-properties"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

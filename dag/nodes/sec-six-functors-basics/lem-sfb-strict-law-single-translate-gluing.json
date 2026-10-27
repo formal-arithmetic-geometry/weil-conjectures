@@ -1,0 +1,368 @@
+{
+ "id": "lem-sfb-strict-law-single-translate-gluing",
+ "kind": "statement",
+ "title": "Adjoining one left translated chart preserves strictness",
+ "statement": "Let $A$ be a Noetherian normal strictly henselian local ring [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring, def-weil-pbc-henselian-terminology], and put $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Products and fibres are scheme-theoretic base changes [def-pc-base-change]. An open $U\\subset Y$ in an $S$-scheme is $S$-dense if $U_s$ is dense in $Y_s$ for every $s\\in S$. An $S$-rational map is a morphism on an $S$-dense open, modulo agreement on an $S$-dense common open; an $S$-birational map is represented by an isomorphism between $S$-dense opens. Smoothness and finite type have the meanings of [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]; separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. A strict birational law on a smooth separated finite-type $S$-scheme $Y$ with nonempty fibres is an associative $S$-rational map $m:Y\\times_SY\\dashrightarrow Y$ for which there are opens $D,V,W\\subset Y\\times_SY$, each dense in every fibre of both projections to $Y$, such that $m$ is defined on $D$ and $(x,y)\\mapsto(x,m(x,y))$, $(x,y)\\mapsto(m(x,y),y)$ induce isomorphisms $D\\simeq V$ and $D\\simeq W$, respectively. Let $Y\\to S$ be smooth, separated, of finite type and have nonempty fibres, let $m$ be a strict birational law on $Y$, and let $a:S\\to Y$ be a section. Put $\\tau_a(y)=m(a,y)$ as an $S$-rational map. Let $T_a\\subseteq Y\\times_SY$ be the scheme-theoretic closure [def-nagata-scheme-theoretic-image] of its graph, with projections $r_1,r_2:T_a\\to Y$. Both projections are open immersions with $S$-dense images. Take a second copy $Y(a)$ of $Y$, with its copy isomorphism $c_a:Y\\xrightarrow{\\sim}Y(a)$, and glue $Y$ and $Y(a)$ by identifying $r_2(t)$ in the first copy with $c_a(r_1(t))$ in the second copy, for $t\\in T_a$. There is a scheme $Y^+$ with open immersions $i:Y\\hookrightarrow Y^+$ and $k:Y(a)\\hookrightarrow Y^+$, whose images cover $Y^+$ and whose intersection is precisely this identified copy of $T_a$. The scheme $Y^+$ is smooth, separated and of finite type over $S$ and has nonempty fibres; both charts are $S$-dense. There is a strict birational law $m^+$ on $Y^+$ restricting to $m$ on $Y$. As an $S$-rational map $Y\\dashrightarrow Y^+$, $i\\tau_a$ has the everywhere-defined representative $k c_a:Y\\to Y^+$.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "5.3 construction before Lemma 5 and Lemma 5, printed pp.122-124 (PDF pp.128-130); primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-nagata-scheme-theoretic-image"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-strict-law-graph-charts] for the graph closure $\\Gamma$ and replace the original strictness domain by $D=q_{12}(\\Gamma)$. Write $\\Phi(x,y)=(x,m(x,y))$, $\\Psi(x,y)=(m(x,y),y)$ and $V=\\Phi(D)$, $W=\\Psi(D)$. They are isomorphisms from $D$ to $V,W$, and all three opens are dense in every fibre of either projection. The base-change lemma makes this fibrewise density available after arbitrary residue-field extension. All finite products of $Y$ over $S$, and their opens, are reduced and locally Noetherian by the smooth reducedness lemma, and Noetherian by finite type over $S$. Consequently a dense open in any of these schemes is schematically dense: its inclusion is quasi-compact and quasi-separated, so apply the reduced dense-image lemma. Equality on such an open into a separated target therefore gives equality of morphisms by the separated uniqueness lemma. We will use precisely this equality criterion below.",
+   "uses": [
+    "lem-sfb-strict-law-graph-charts",
+    "lem-sfb-strict-law-base-change",
+    "lem-trf-smooth-reduced-dense-pullback",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lemma-nagata-reduced-dense-image-schematic",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.3 Lemma 3 and its paragraph on maximal domains; reduced-density preparation for the construction and Lemma 5"
+   }
+  },
+  {
+   "text": "Form $C_a=\\Gamma\\times_{Y,\\,q_1,a}S$, regarded as a closed subscheme of $Y\\times_SY$ by its second and third coordinates. Its two maps to $Y$ are the base changes of $q_{12}$ and $q_{13}$ along $y\\mapsto(a,y)$; hence both are open immersions. The graph of $m(a,-)$ on the pullback of the original strictness domain is contained in $C_a$. Its first-coordinate image is $S$-dense in $Y$, so it is dense in the open first-coordinate image of $C_a$. This makes that graph schematically dense in $C_a$, which is reduced as an open of $Y$. Since $C_a$ is closed in $Y^2$, its schematic closure is exactly $T_a$. Thus $T_a=C_a$. Each projection has $S$-dense image because it is the base change along $a$ of the corresponding projection-dense graph chart. In particular this proves the assertions about $r_1,r_2$ without assuming that schematic closure commutes with arbitrary base change.",
+   "uses": [
+    "lem-sfb-strict-law-graph-charts",
+    "lem-sfb-strict-law-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lemma-nagata-reduced-dense-image-schematic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.3 construction preceding Lemma 5, p.122; graph-closure slice justified using Lemma 3"
+   }
+  },
+  {
+   "text": "Set $O_2=r_2(T_a)\\subset Y$ and $O_1=c_a r_1(T_a)\\subset Y(a)$. The overlap isomorphism $O_2\\to O_1$ is $c_a r_1 r_2^{-1}$, with inverse $r_2r_1^{-1}c_a^{-1}$. Use identity overlaps on each chart and these mutually inverse maps on the two mixed overlaps. The cocycle equations reduce to the two inverse identities. Apply the scheme-gluing lemma; it gives $P=Y^+$ and open immersions $i,k$ covering $P$, with intersection exactly $T_a$. The two structural maps to $S$ agree on $T_a$ since both $r_j$ are over $S$, and glue to $P\\to S$. Put $h=kc_a:Y\\to P$.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.3 two-copy gluing construction, p.122; Stacks 01JB/01JC for the gluing and its intersections"
+   }
+  },
+  {
+   "text": "On the four open charts of $P\\times_SP$, the inverse image of the diagonal of $P/S$ is respectively the diagonal of $Y/S$, the diagonal of $Y(a)/S$, and the two copies of $T_a$ with the coordinates interchanged as necessary. All are closed immersions: the first two by separatedness of $Y$, the others by the definition of $T_a$. Closedness of the image is local on this open cover, and surjectivity of the structure-sheaf map can be checked on the same cover. Thus the diagonal is a closed immersion, so $P/S$ is separated. Smoothness can be checked on the affine neighbourhoods already contained in the two charts, where the structural ring maps are exactly those of $Y/S$. The union of finite affine covers of the two charts is a finite affine cover of $P$ by finite-type $A$-algebras, proving finite type. Its fibres are nonempty since they contain the fibres of $Y$. In each fibre the overlap is dense in each chart, by step 2, so each whole chart is dense in $P_s$. Hence $i(Y)$ and $h(Y)$ are $S$-dense.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sbc-smooth-morphisms",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.3 construction, p.122, separatedness and the two S-dense smooth finite-type charts"
+   }
+  },
+  {
+   "text": "For every $T\\to S$, the base change of the $S$-dense chart $i(Y)$ is $T$-dense by the smooth density clause of the base-change lemma (the density clause requires only smoothness, not a strict law on $P$). It follows successively that $i(Y)^r$ is $S$-dense in $P^r$ for $r=2,3$. Define the rational law $m^+$ on $P$ by the morphism $i\\circ m$ on the open $(i\\times i)(D)$. This is a representative on an $S$-dense open. The rational identity $(xy)z=x(yz)$ holds on an $S$-dense open of $Y^3$, and hence of $P^3$: the needed successive product domains are dense because the original universal translations are projection-birational. Thus $m^+$ is associative and restricts to $m$. The universal rational translations of $m^+$ are birational since they coincide with those of $m$ on this common dense chart. The overlap equation $i r_2=h r_1$ also says $i\\tau_a=h$ on the $S$-dense first image of $T_a$; hence $h$ is the required everywhere-defined representative.",
+   "uses": [
+    "lem-sfb-strict-law-base-change",
+    "lem-sfb-strict-law-graph-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.3 p.123 before and at the beginning of Lemma 5: extension as a rational law and the extended left translation"
+   }
+  },
+  {
+   "text": "Here are explicit regular representatives on the opens used to establish strictness. Let $U_0=(i\\times i)(D)$ with $\\mu_0(i x,i y)=i(xy)$, and let $U_1=(h\\times i)(D)$ with $\\mu_1(hx,iy)=h(xy)$. Define the open $B_a=\\{x:(x,a)\\in D\\}$ and its morphism $\\beta:B_a\\to Y$, $\\beta(x)=m(x,a)$. It is an isomorphism between $S$-dense opens, as the base change of $\\Psi:D\\simeq W$ at the second coordinate $a$. Let $E_2=\\{(x,y):x\\in B_a,\\ (\\beta(x),y)\\in D\\}$, an open of $Y^2$, and put $U_2=(i\\times h)(E_2)$ with $\\mu_2(ix,hy)=i(\\beta(x)y)$. These are morphisms. The formulas are the ordered expressions $xy$, $a(xy)$, and $(xa)y$; no commutativity is used.",
+   "uses": [
+    "lem-sfb-strict-law-graph-charts",
+    "lem-sfb-strict-law-base-change",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.3 Lemma 5(a), pp.123-124: the three multiplication opens and their formulas"
+   }
+  },
+  {
+   "text": "Let $A_a=r_1(T_a)$ and $\\alpha:A_a\\to r_2(T_a)$ be the open translation isomorphism. In $U_1$ restrict to the open where $x\\in A_a$, $xy\\in A_a$, and $(\\alpha(x),y)\\in D$. There $hx=i(ax)$ and associativity gives $h(xy)=i(a(xy))=i((ax)y)$. In $U_2$ restrict to the open where $y\\in A_a$ and $(x,\\alpha(y))\\in D$; then $hy=i(ay)$ and $i((xa)y)=i(x(ay))$. These restrictions are dense: each is a finite intersection of translation domains and inverse images of dense opens under the birational maps supplied by graph-charts. This can be tested in each fibre after residue-field extension. Hence each $\\mu_j$ represents $m^+$. On each $U_j\\cap U_l$ the morphisms agree on a dense open. The overlap is reduced and Noetherian, while $P$ is separated by step 4, so schematic density and separated uniqueness give equality on the entire overlap. Morphism gluing gives $\\mu:U'=U_0\\cup U_1\\cup U_2\\to P$, a representative of $m^+$.",
+   "uses": [
+    "lem-sfb-strict-law-graph-charts",
+    "lem-sfb-strict-law-base-change",
+    "lem-trf-smooth-reduced-dense-pullback",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lemma-nagata-reduced-dense-image-schematic",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.3 Lemma 5(a), agreement by associativity and gluing, pp.123-124"
+   }
+  },
+  {
+   "text": "The open $U_0\\cup U_1$ is dense in every fibre of the first projection $P^2\\to P$: for first coordinate $ix$ use the dense row of $D$ in $U_0$, and for $hx$ use that in $U_1$. The old second chart $i(Y)$ is itself universally fibre-dense in $P$, so either row is dense in the whole projection fibre. For the second projection, points in $i(Y)$ are handled by $U_0$. For a second coordinate $hy$ in the new chart, the allowed first coordinates in $U_2$ are $x\\in B_a$ with $(\\beta(x),y)\\in D$. The second condition cuts out a dense open in $Y$ as $\\beta(x)$ varies; its intersection with the dense image of $\\beta$ is dense, and its inverse image under the open isomorphism $\\beta$ is dense in $Y$. Thus this fibre is dense too. These arguments apply over the residue field of each point, using the residue-field extension clause in graph-charts and universal density. This proves that $U'$ is dense in every fibre of both projections.",
+   "uses": [
+    "lem-sfb-strict-law-graph-charts",
+    "lem-sfb-strict-law-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.3 Lemma 5(a), projection-density of U union U1 union U2"
+   }
+  },
+  {
+   "text": "Let $F=(p_1,\\mu)$ and $H=(\\mu,p_2)$ on $U'$. On $U_0$ these are $\\Phi,\\Psi$ in the old charts. On $U_1$, the formulas are $(hx,iy)\\mapsto(hx,h(xy))$ and $(hx,iy)\\mapsto(h(xy),iy)$, so they are $\\Phi,\\Psi$ conjugated by chart isomorphisms. On $U_2$, use coordinates $u=\\beta(x)$ on $B_a$. The map $F$ is $(x,y)\\mapsto(x,uy)$ followed by $i\\times i$; this is the base change of the first-coordinate-preserving open immersion $\\Phi$ along $\\beta$ in the first coordinate. The map $H$ is $(x,y)\\mapsto(uy,hy)$, obtained by $\\beta\\times\\mathrm{id}$ on the source, $\\Psi$ on its open domain, and $i\\times h$ on the target. Thus both $F$ and $H$ are open immersions on each $U_j$.",
+   "uses": [
+    "lem-sfb-strict-law-graph-charts",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.3 Lemma 5(b), local universal-translation formulas, p.124"
+   }
+  },
+  {
+   "text": "For completeness, the local inverses from step 9 glue, so no birational form of Zariski Main is left implicit here. Do this for $F$ (the argument for $H$ is identical). On $F(U_j)\\cap F(U_l)$, the images of $U_j\\cap U_0$ and $U_l\\cap U_0$ are dense opens: $U_0$ is dense in $U'$, and both restrictions of $F$ are open isomorphisms. Their intersection is dense, and there the inverse branches coincide since $F|_{U_0}=\\Phi$ is injective. The intersection of target images is reduced and Noetherian; the inverse branches into the separated scheme $P^2$ therefore agree everywhere by the schematic-density and separated uniqueness lemmas. Glue the inverse branches on the union of the target images. They are two-sided inverses to $F$ by checking on the $U_j$. Hence $F$ is an isomorphism onto its open image $V'$. Applying the same argument to $H$ gives an isomorphism $U'\\simeq W'=H(U')$.",
+   "uses": [
+    "lem-sfb-strict-law-graph-charts",
+    "lem-trf-smooth-reduced-dense-pullback",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lemma-nagata-reduced-dense-image-schematic",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.3 Lemma 5(b), global open-immersion conclusion, with the elementary inverse-gluing argument replacing its Zariski Main invocation"
+   }
+  },
+  {
+   "text": "The open $V'$ contains $(i\\times i)(V)$ from $U_0$ and $(h\\times h)(V)$ from $U_1$. Each copy of $V$ is dense in every fibre of either projection within its two charts. For a first coordinate in $i(Y)$ use the first copy, and for a first coordinate in $h(Y)$ use the second; the remaining chart in that fibre is dense in the whole fibre. This proves first-projection density of $V'$. For a second coordinate in either chart use the same two copies with the roles of the coordinates interchanged. Universal density of the charts and the residue-field extension clause in graph-charts justify this for every scheme point. Thus $V'$ is dense in every fibre of both projections.",
+   "uses": [
+    "lem-sfb-strict-law-graph-charts",
+    "lem-sfb-strict-law-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.3 Lemma 5(b), V contains V union V1, p.124"
+   }
+  },
+  {
+   "text": "For $W'$, the copies $(i\\times i)(W)\\subset H(U_0)$ and $(h\\times i)(W)\\subset H(U_1)$ prove density in fibres of the first projection, for first coordinates in either chart. They also prove density in fibres of the second projection at points in $i(Y)$. For a second coordinate $hy$ in $h(Y)$, use $H(U_2)$: its first coordinates are $i(\\beta(x)y)$. The map $x\\mapsto\\beta(x)y$ is the composite of the birational right translation $\\beta:x\\mapsto xa$ with the birational right translation $u\\mapsto uy$. It is defined on exactly the open used in $E_2$ over $y$ and has dense open image in $Y$; intersections of the two domain/image opens remain dense. This uses only the graph-chart fibrewise birationality, after extension to $\\kappa(y)$. The image is dense in the whole first-coordinate fibre of $P$ since $i(Y)$ is universally dense. Therefore $W'$ is dense in every fibre of both projections.",
+   "uses": [
+    "lem-sfb-strict-law-graph-charts",
+    "lem-sfb-strict-law-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.3 Lemma 5(b), W2 and right-translation argument for the second projection, p.124"
+   }
+  },
+  {
+   "text": "Steps 8, 10, 11 and 12 exhibit the opens $U',V',W'\\subset P^2$, each dense in every fibre of either projection, with $\\mu$ regular on $U'$ and universal translations giving isomorphisms $U'\\simeq V'$ and $U'\\simeq W'$. Together with associativity from step 5 this is precisely a strict birational law on $P$. The chart properties and the everywhere-defined representative $h=kc_a$ were proved in steps 3-5, giving every asserted clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 5.3 conclusion of Lemma 5, p.124"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-strict-law-graph-charts",
+  "lem-sfb-strict-law-base-change",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lemma-nagata-reduced-dense-image-schematic",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 5.3 construction and Lemma 5, printed pp.122-124 (PDF pp.128-130), primary scan read online; local PDF WANTED. Explicit graph slices, ordered multiplication formulas and inverse gluing supply the details."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Gluing two copies of a smooth scheme along a rational left translation preserves a strict birational group law",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → AlgebraicGeometry.Scheme\", \"doc\": \"The scheme constructed by gluing the data in $ D $, defined as the colimit of the corresponding locally ringed space gluing diagram. This involves converting scheme gluing data to locally ringed space\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"WeierstrassCurve.VariableChange.instGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"{R : Type u} → [inst : CommRing R] → Group (WeierstrassCurve.VariableChange R)\", \"doc\": \"For any commutative ring $ R $, the set of variable changes for a Weierstrass curve over $ R $ is equipped with a canonical group structure. The group operation combines variable changes via multiplic\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_addMap\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Projective F} {P Q : WeierstrassCurve.Projective.PointClass F},\\n  W.NonsingularLift P → W.NonsingularLift Q → W.NonsingularLift (W.addMap P Q)\", \"doc\": \"For any two projective points $[P]$ and $[Q]$ on a Weierstrass curve $W$ over a field $F$, if both $[P]$ and $[Q]$ satisfy the nonsingularity condition (i.e., they lie on the curve $Y^2Z = X^3 + aXZ^2\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (i j : ι),\\n  (AlgebraicGeometry.Scheme.LocalRe\", \"doc\": \"Given a sheaf $ F $ on the category of schemes with the Zariski topology, and a family of open immersions $ f_i : \\text{Hom}(-, X_i) \\to F $ in the presheaf category, the transpose morphism $ t_{i,j} : \"}\n  {\"name\": \"WeierstrassCurve.Jacobian.nonsingularLift_addMap\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Jacobian F} {P Q : WeierstrassCurve.Jacobian.PointClass F},\\n  W.NonsingularLift P → W.NonsingularLift Q → W.NonsingularLift (W.addMap P Q)\", \"doc\": \"If $P$ and $Q$ are nonsingular points in the Jacobian of a Weierstrass curve, then their sum $P + Q$ under the Jacobian addition operation is also a nonsingular point. This holds because nonsingularit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.isoLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) → D.glued.toLocallyRingedSpace ≅ D.toLocallyRingedSpaceGlueData.glued\", \"doc\": \"The glued scheme constructed from gluing data, when mapped through the forgetful functor to locally ringed spaces, is isomorphic to the glued locally ringed space obtained by applying the forgetful fu\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.add_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)) {h₁ : W.Nonsingular x₁ y₁} {h₂ : W.Nonsingular x₂ y₂},\\n  WeierstrassCurve.Affine.Point.some h₁ + WeierstrassCurve.Affine.Point.some h₂ = WeierstrassCurv\", \"doc\": \"For an affine Weierstrass curve over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 - a_3 $), then \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.GlueData.glued requires supplied gluing data and gives no translation graph, separatedness, or strict-law preservation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme.GlueData\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" : Type (u_1 + 1)\", \"doc\": \"A family of gluing data consists of\\n1. An index type `J`\\n2. A scheme `U i` for each `i : J`.\\n3. A scheme `V i j` for each `i j : J`.\\n  (Note that this is `J × J → Scheme` rather than `J → J → Scheme` \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.glued\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) : AlgebraicGeometry.Scheme\", \"doc\": \"The glued scheme of a glued space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) : AlgebraicGeometry.Scheme\", \"doc\": \"(Implementation). The glued scheme of a glue data.\\nThis should not be used outside this file. Use `AlgebraicGeometry.Scheme.GlueData.glued` instead.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.toLocallyRingedSpaceGlueData\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) : AlgebraicGeometry.LocallyRingedSpace.GlueData\", \"doc\": \"The glue data of locally ringed spaces associated to a family of glue data of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) : D.glued.OpenCover\", \"doc\": \"The open cover of the glued space given by the glue data.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.toGlueData\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (self : AlgebraicGeometry.Scheme.GlueData) : CategoryTheory.GlueData AlgebraicGeometry.Scheme\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) : CategoryTheory.Limits.HasMulticoequalizer D.diagram\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.ι\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) (i : D.J) : D.U i ⟶ D.glued\", \"doc\": \"The immersion from `D.U i` into the glued space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.openCover_I₀\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) : D.openCover.I₀ = D.J\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.ι_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) (i : D.J) : AlgebraicGeometry.IsOpenImmersion (D.ι i)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.openCover_X\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) (a✝ : D.J) : D.openCover.X a✝ = D.U a✝\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.vPullbackCone\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) (i j : D.J) : CategoryTheory.Limits.PullbackCone (D.ι i) (D.ι j)\", \"doc\": \"The pullback cone spanned by `V i j ⟶ U i` and `V i j ⟶ U j`.\\nThis is a pullback diagram (`vPullbackConeIsLimit`).\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.GlueData.glued requires supplied gluing data and gives no translation graph, separatedness, or strict-law preservation."
+  },
+  {
+   "tool": "grep",
+   "query": "translat.*glui|glui.*translat|strict.*birational",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.GlueData.glued requires supplied gluing data and gives no translation graph, separatedness, or strict-law preservation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoin one translate to a strict rational group law using the closure of its translation graph",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"closure_vadd\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"∀ {α : Type u_2} {G : Type u_4} [inst : TopologicalSpace α] [inst_1 : AddGroup G] [inst_2 : AddAction G α]\\n  [ContinuousConstVAdd G α] (c : G) (s : Set α), closure (c +ᵥ s) = c +ᵥ closure s\", \"doc\": \"For any additive group $G$ acting continuously on a topological space $\\\\alpha$, and for any element $c \\\\in G$ and subset $s \\\\subseteq \\\\alpha$, the closure of the set $c + s$ is equal to $c + \\\\text{clo\"}\n  {\"name\": \"isClosedMap_vadd\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"∀ {α : Type u_2} {G : Type u_4} [inst : TopologicalSpace α] [inst_1 : AddGroup G] [inst_2 : AddAction G α]\\n  [ContinuousConstVAdd G α] (c : G), IsClosedMap fun x => c +ᵥ x\", \"doc\": \"For any additive group $ G $ acting continuously on a topological space $ \\\\alpha $, and for any element $ c \\\\in G $, the translation map $ x \\\\mapsto c + x $ is a closed map.\"}\n  {\"name\": \"SubAddAction.closure\", \"module\": \"Mathlib.GroupTheory.GroupAction.SubMulAction.Closure\", \"type\": \"(R : Type u_1) → {M : Type u_2} → [inst : VAdd R M] → Set M → SubAddAction R M\", \"doc\": \"Given a set $ S \\\\subseteq M $, the closure of $ S $ under the additive action of $ R $ is the smallest subset of $ M $ containing $ S $ that is closed under the additive action of $ R $, obtained as t\"}\n  {\"name\": \"isClosedMap_add_right\", \"module\": \"Mathlib.Topology.Algebra.Group.Basic\", \"type\": \"∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : AddGroup G] [ContinuousAdd G] (a : G), IsClosedMap fun x => x + a\", \"doc\": \"For any element $ a $ in a topological additive group $ G $, the right translation map $ x \\\\mapsto x + a $ is a closed map. That is, the image of every closed subset $ U \\\\subseteq G $ under this map i\"}\n  {\"name\": \"upperClosure_vadd\", \"module\": \"Mathlib.Algebra.Order.UpperLower\", \"type\": \"∀ {α : Type u_1} [inst : AddCommGroup α] [inst_1 : PartialOrder α] [inst_2 : IsOrderedAddMonoid α] (s : Set α) (a : α),\\n  upperClosure (a +ᵥ s) = a +ᵥ upperClosure s\", \"doc\": \"For any ordered additive commutative group $\\\\alpha$, subset $s \\\\subseteq \\\\alpha$, and element $a \\\\in \\\\alpha$, the upper closure of the translation $a + s$ equals the translation of the upper closure o\"}\n  {\"name\": \"isClosedMap_add_left\", \"module\": \"Mathlib.Topology.Algebra.Group.Basic\", \"type\": \"∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : AddGroup G] [ContinuousAdd G] (a : G), IsClosedMap fun x => a + x\", \"doc\": \"For any element $ a $ in a topological additive group $ G $, the function $ f(x) = a + x $ is a closed map, meaning it maps closed subsets of $ G $ to closed subsets of $ G $.\"}\n  {\"name\": \"isUniformEmbedding_translate_add\", \"module\": \"Mathlib.Topology.Algebra.IsUniformGroup.Basic\", \"type\": \"∀ {α : Type u_1} [inst : UniformSpace α] [inst_1 : AddGroup α] [IsUniformAddGroup α] (a : α),\\n  IsUniformEmbedding fun x => x + a\", \"doc\": \"In a uniform additive group $\\\\alpha$, for any element $a \\\\in \\\\alpha$, the translation map $x \\\\mapsto x + a$ is a uniform embedding. This follows from the uniform continuity of addition and negation op\"}\n  {\"name\": \"AddSubgroup.topologicalClosure\", \"module\": \"Mathlib.Topology.Algebra.Group.Basic\", \"type\": \"{G : Type w} →\\n  [inst : TopologicalSpace G] → [inst_1 : AddGroup G] → [IsTopologicalAddGroup G] → AddSubgroup G → AddSubgroup G\", \"doc\": \"Given a topological additive group $ G $ and an additive subgroup $ s $ of $ G $, the topological closure of $ s $ is the smallest closed additive subgroup of $ G $ containing $ s $. It is formed by i\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.GlueData.glued requires supplied gluing data and gives no translation graph, separatedness, or strict-law preservation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group chunk can be enlarged by one left translated chart with the translation defined on the entire original chart",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"writtenInExtChartAt_chartAt\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/ExtChartAt\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {M : Type u_3} {H : Type u_4} [inst : NontriviallyNormedField 𝕜]\\n  [inst_1 : NormedAddCommGroup E] [inst_2 : NormedSpace 𝕜 E] [inst_3 : TopologicalSpace H] [inst_4 : TopologicalSpace M]\\n  {I : ModelWithCorners 𝕜 E H} [inst_5 : ChartedSpace H M] {x : M} {y : E},\\n  y ∈ \", \"doc\": \"For a manifold with corners modeled on a normed vector space $E$, if a point $y$ lies in the target of the extended chart at $x$, then expressing $y$ in the extended chart using the original chart $\\\\t\"}\n  {\"name\": \"extChartAt\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/ExtChartAt\", \"type\": \"{𝕜 : Type u_1} →\\n  {E : Type u_2} →\\n    {M : Type u_3} →\\n      {H : Type u_4} →\\n        [inst : NontriviallyNormedField 𝕜] →\\n          [inst_1 : NormedAddCommGroup E] →\\n            [inst_2 : NormedSpace 𝕜 E] →\\n              [inst_3 : TopologicalSpace H] →\\n                [inst_4 : TopologicalSpace M\", \"doc\": \"The extended chart at a point $x$ in a manifold with corners is constructed by composing the chart from the charted space structure with the model with corners $I$. This provides a local coordinate sy\"}\n  {\"name\": \"ext_coord_change_source\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/ExtChartAt\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {M : Type u_3} {H : Type u_4} [inst : NontriviallyNormedField 𝕜]\\n  [inst_1 : NormedAddCommGroup E] [inst_2 : NormedSpace 𝕜 E] [inst_3 : TopologicalSpace H] [inst_4 : TopologicalSpace M]\\n  {I : ModelWithCorners 𝕜 E H} [inst_5 : ChartedSpace H M] (x x' : M),\\n  ((extChar\", \"doc\": \"For a manifold with corners modeled on a normed vector space $E$ over a nontrivially normed field $\\\\mathbb{K}$, the domain of the composition of the inverse of the extended chart at $x'$ with the exte\"}\n  {\"name\": \"StructureGroupoid.maximalAtlas\", \"module\": \"Mathlib/Geometry/Manifold/HasGroupoid\", \"type\": \"{H : Type u} →\\n  (M : Type u_2) →\\n    [inst : TopologicalSpace H] →\\n      [inst_1 : TopologicalSpace M] → [ChartedSpace H M] → StructureGroupoid H → Set (OpenPartialHomeomorph M H)\", \"doc\": \"Let $M$ be a charted space with model space $H$, and let $G$ be a structure groupoid on $H$. The maximal atlas for $M$ is the set of all charts $e$ (partial homeomorphisms from open subsets of $M$ to \"}\n  {\"name\": \"StructureGroupoid.restriction_mem_maximalAtlas_subtype\", \"module\": \"Mathlib/Geometry/Manifold/HasGroupoid\", \"type\": \"∀ {H : Type u} {M : Type u_2} [inst : TopologicalSpace H] [inst_1 : TopologicalSpace M] [inst_2 : ChartedSpace H M]\\n  {G : StructureGroupoid H} {e : OpenPartialHomeomorph M H},\\n  e ∈ atlas H M →\\n    Nonempty ↑e.source →\\n      ∀ [HasGroupoid M G] [ClosedUnderRestriction G],\\n        let s := { carrier\", \"doc\": \"For a topological space $ M $ with a charted structure over a model space $ H $, if $ G $ is a structure groupoid compatible with $ M $ and closed under restriction, then for any chart $ e $ in the at\"}\n  {\"name\": \"StructureGroupoid.trans_restricted\", \"module\": \"Mathlib/Geometry/Manifold/HasGroupoid\", \"type\": \"∀ {H : Type u} {M : Type u_2} [inst : TopologicalSpace H] [inst_1 : TopologicalSpace M] [inst_2 : ChartedSpace H M]\\n  {e e' : OpenPartialHomeomorph M H} {G : StructureGroupoid H},\\n  e ∈ atlas H M →\\n    e' ∈ atlas H M →\\n      ∀ [HasGroupoid M G] [ClosedUnderRestriction G] {s : TopologicalSpace.Opens \", \"doc\": \"For a topological space $ H $ and a charted space $ M $ over $ H $ with a structure groupoid $ G $ closed under restriction, if $ e $ and $ e' $ are charts in the atlas of $ M $ and $ s $ is a non-emp\"}\n  {\"name\": \"StructureGroupoid.compatible\", \"module\": \"Mathlib/Geometry/Manifold/HasGroupoid\", \"type\": \"∀ {H : Type u_5} [inst : TopologicalSpace H] (G : StructureGroupoid H) {M : Type u_6} [inst_1 : TopologicalSpace M]\\n  [inst_2 : ChartedSpace H M] [HasGroupoid M G] {e e' : OpenPartialHomeomorph M H},\\n  e ∈ atlas H M → e' ∈ atlas H M → e.symm.trans e' ∈ G\", \"doc\": \"For a topological space $H$ and a charted space $M$ over $H$ with compatible structure groupoid $G$, if $e$ and $e'$ are charts in the atlas of $M$, then the composition of the inverse of $e$ with $e'\"}\n  {\"name\": \"StructureGroupoid.subset_maximalAtlas\", \"module\": \"Mathlib/Geometry/Manifold/HasGroupoid\", \"type\": \"∀ {H : Type u} {M : Type u_2} [inst : TopologicalSpace H] [inst_1 : TopologicalSpace M] [inst_2 : ChartedSpace H M]\\n  (G : StructureGroupoid H) [HasGroupoid M G], atlas H M ⊆ StructureGroupoid.maximalAtlas M G\", \"doc\": \"The atlas of the charted space $ M $ with model space $ H $ is a subset of the maximal atlas of $ M $ associated with the structure groupoid $ G $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.GlueData.glued requires supplied gluing data and gives no translation graph, separatedness, or strict-law preservation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated local isomorphism of schemes which is an isomorphism on dense open subschemes is an open immersion",
+   "results": "IsOpenImmersion.of_isIso_stalkMap; IsLocalIso.exists_isOpenImmersion; isLocalIso_iff. These require a topological embedding or give only local open immersions; none proves the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme.GlueData\"",
+   "results": "Scheme.GlueData.glued, gluedScheme, openCover, iota_isOpenImmersion, vPullbackCone. Read AlgebraicGeometry/Gluing.lean lines 133-180: arbitrary gluing only, not strict laws.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*birational|birational.*law|translat.*glui|glui.*translat",
+   "results": "0 hits in AlgebraicGeometry.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing one left translated chart to a strict birational group law preserves strictness",
+   "results": "contMDiffAt_mul_left, L_mul, smoothLeftMul, smoothRightMul: Lie-group/manifold translations only.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strict birational group law extends after adjoining a left translated copy along the closure of its translation graph",
+   "results": "WeierstrassCurve.VariableChange.instGroup; elliptic-curve Point.instAddCommGroup; Set.vadd_graphOn; Subgroup.closure_mul_image_eq_top: unrelated group laws and set graphs.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-law-finite-translate-envelope",
+  "date": "2026-10-24",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Theorem 6, printed p.108 (PDF p.114), equivalently 5.1 Theorem 5 including the no-shrinking clause, printed p.114 (PDF p.120). Supporting sublemma: BLR 5.2 Theorem 3 and the explicit translate construction of 5.3, printed pp.117-128 (PDF pp.123-134); descent to an arbitrary field or DVR in 6.5 Corollary 2, printed pp.157-158 (PDF pp.163-164); uniqueness in 5.1 Proposition 3; 5.3 finite translate construction and Lemma 6; only completion of the original square, not realization as a group; 5.3 construction before Lemma 5 and Lemma 5, printed pp.122-124 (PDF pp.128-130)",
+   "via": [
+    "lem-sfb-strict-law-finite-translate-envelope",
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-strict-law-single-translate-gluing",
+  "worker": "stage1",
+  "summary": "Q27 read BLR 5.3 construction and Lemma 5 online. Kept the statement and its hypotheses. Reused graph-charts for closed graph slices and all universal translation domains, and existing scheme-gluing, density and equality nodes. Wrote the three regular multiplication formulas, projection-density checks and the elementary inverse-gluing proof of global open immersions. No new nodes or Mathlib leaves; no Lean attachment.",
+  "blueprint": "The inherited blueprint.from.node is null (blueprint_refs.py ancestor confirms None), and is preserved. This split realizes the from.place clause BLR 5.3 construction before Lemma 5 and Lemma 5, printed pp.122-124: steps 1-5 construct the translated chart; steps 6-8 give Lemma 5(a); steps 9-12 give Lemma 5(b); step 13 assembles strictness. Searched the whole current blueprint for birational, strict law, translate and gluing; no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-smooth-reduced-dense-pullback",
+    "why": "Reducedness of smooth overlaps over the reduced Noetherian base, solely for schematic-density uniqueness; no strict-law node states this generic fact."
+   },
+   {
+    "node": "lemma-nagata-reduced-dense-image-schematic",
+    "why": "Convert topologically dense opens of reduced Noetherian overlaps into schematic density, for graph closure and equality of chart formulas."
+   },
+   {
+    "node": "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "why": "Equality of overlap morphisms and inverse branches into separated targets from schematic density; this is a generic equality tool, not a replacement route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lemma-nagata-reduced-dense-image-schematic",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-90ad5a8e2",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-90ad5a8e2 (reviewer sub-agent of L); spot-checked: I read the item's statement and all 13 steps in full, along with the statement of every cited node (graph-charts, strict-law base-change, trf smooth-reduced-dense-pullback, pbc finite-type-over-noetherian/open-immersion-base-change/glue-schemes/morphism-gluing, nagata reduced-dense-image and separated-equality). BLR §5.3 Lemma 5 is not in literature/, so proof_origin=agent with a WANTED line is correct, and I checked the mathematics independently. Step 2: C_a = Γ×_{Y,q1,a}S is closed in Y², and its maps to Y are base changes of q12/q13, so they are open immersions. D_a is S-dense because a(s) is a rational point, so the graph is schematically dense and T_a = C_a. Step 4: the diagonal on the four chart products is Δ_Y, Δ_{Y(a)} and two swapped copies of T_a, all closed. Step 5: h = kc_a agrees with iτ_a on r1(T_a) because ir2 = hr1, so the orientation is right. Steps 6–7: β is the base change of Ψ at y=a, the ordered formulas (ax)y = a(xy) and (xa)y = x(ay) are correct, and the extra domain conditions are dense preimages. Steps 9–10: F and H are explicit composites of Φ/Ψ/β with chart maps; the inverse branches agree on a dense open because Φ is a monomorphism, so they glue (this is genuinely elementary). Steps 8, 11, 12: I checked fibrewise density for both charts and both projections. Small cases: A^1∖{0} with addition and a=1 gives P = A^1 and h(y) = y+1; a group Y collapses to Y. There is no cycle, no duplicate in the strict-law family and no new nodes; this is not a re-split item. Batch-5 flags: lem-trf-smooth-reduced-dense-pullback is generic (smooth over reduced locally Noetherian ⇒ reduced, dense preimages), and graph-charts→translation-embedding→lem-trf-smooth-composition and the other trf closure nodes are generic algebra/geometry, not trace-formula or Poincaré content, so I accepted both. I accept the three declared tool_uses (trf smooth-reduced, nagata dense-image, nagata separated-equality) as generic black boxes."
+ }
+}

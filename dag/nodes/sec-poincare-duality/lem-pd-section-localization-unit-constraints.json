@@ -1,0 +1,144 @@
+{
+ "id": "lem-pd-section-localization-unit-constraints",
+ "kind": "statement",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "title": "Regular-unit constraints of the section localization tensorator",
+ "statement": "Let Λ be a commutative condensed ring and assume HasDerivedCategory for the section-module category over every scheme. For a scheme T, give DerivedCategory(modules Λ T) its fixed transported monoidal structure derivedMonoidal. Let Q be cochain localization, s(A,B)=modelTensor Λ T A B, and e=regular Λ T, the fixed localized ordinary regular-unit comparison. For every unbounded section complex P, both equations hold: s(1,P)≫Q(λ_P)=regularLeft Q e (QP) and s(P,1)≫Q(ρ_P)=regularRight Q e (QP), where regularLeft Q e M=(e.inv▷M)≫λ_M and regularRight Q e M=(M◁e.inv)≫ρ_M. Composition is in Lean order. The objects and comparisons are precisely those of def-pd-section-resolving-oplax-constraint-data. There is no K-flatness or flat-term hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 07A4; localization tensor construction and regular-module constraints; the normalized modelTensor unitor equations of Steps 2–3 of lem-pd-section-resolving-oplax-unit-models"
+ },
+ "stmt_deps": [
+  "def-pd-section-resolving-oplax-constraint-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved section_ordinary_monoidal_constraints for the associator and two unitor identities of the fixed ordinaryTensorComparison and ordinaryUnitComparison. Together with the existing sectionOrdinaryTensorNaturality these define oplax data on the ordinary section equivalence. Invert the comparison isomorphisms and apply CoreMonoidal.mk' to obtain strong monoidal data with those exact oplax fields. Apply section_cochain_monoidal_constraints, which uses the existing mapCochainComplexMonoidal construction. Equality of its ordinary δ natural transformation with sectionOrdinaryTensorMap identifies the total map with cochainTensorComparison via sectionTotalComparison_eq. Its oplax unit is totalUnitComparison, by the explicit single-complex formula. These give the ordinary total unitor laws without repeating their summand proof.",
+   "uses": [
+    "lem-pd-section-ordinary-monoidal-constraints",
+    "lem-pd-section-cochain-monoidal-constraints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU and 07A4; localization tensor construction and regular-module constraints; the normalized modelTensor unitor equations of Steps 2–3 of lem-pd-section-resolving-oplax-unit-models"
+   }
+  },
+  {
+   "text": "Use the oplax structure in the section K-flat comparison ConstraintCondition on the derived section equivalence, with identity unit and tensorComparison as binary comparison. TransportedDerivedMonoidal equals Monoidal.transport, so this structure gives a strong monoidal functor G with lax tensorator tensorComparison.inv and identity lax unit. Compose the internal lax localization with G to obtain a lax monoidal functor U. The sectionLocalizationIso identifies U with the termwise section functor followed by section localization. Its unit followed by localized totalUnitComparison is regular. The qTensorArrow_normalization theorem is precisely the representative tensor square for these functors, after cancelling tensorComparison.",
+   "uses": [
+    "lem-pd-section-tensor-representatives-exists-unique",
+    "lem-pd-section-kflat-tensor-comparison",
+    "def-pd-section-derived-tensor-data",
+    "def-pd-section-representative-tensor-arrow",
+    "def-pd-section-resolving-oplax-constraint-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU and 07A4; localization tensor construction and regular-module constraints; the normalized modelTensor unitor equations of Steps 2–3 of lem-pd-section-resolving-oplax-unit-models"
+   }
+  },
+  {
+   "text": "Apply a proved general unit-descent calculation. On an image F(P), precompose the left equation with the isomorphism induced by the localization comparison at P. Expand regular into the composite unit and localization comparisons, use tensor-map naturality at the ordinary unit comparison, then the representative tensor square, the total left unitor law, and localization-comparison naturality. The remaining equation is the lax left unit law for U. The identical right-whiskering calculation gives the right law. For an arbitrary section complex use the essential-surjectivity isomorphism F(F.objPreimage M) ≅ M. Tensor-map naturality and unitor naturality transport both equations, cancelling the mapped isomorphism. Finally cancel regular.hom on the unit factor to obtain the displayed inverse-unit equations. The argument imposes no boundedness, flatness, nonzero-ring or resolving assumption.",
+   "uses": [
+    "def-pd-section-derived-tensor-data",
+    "def-pd-section-representative-tensor-arrow"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU and 07A4; localization tensor construction and regular-module constraints; the normalized modelTensor unitor equations of Steps 2–3 of lem-pd-section-resolving-oplax-unit-models"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-section-ordinary-monoidal-constraints",
+  "lem-pd-section-cochain-monoidal-constraints",
+  "lem-pd-section-tensor-representatives-exists-unique",
+  "lem-pd-section-kflat-tensor-comparison",
+  "def-pd-section-derived-tensor-data",
+  "def-pd-section-representative-tensor-arrow",
+  "def-pd-section-resolving-oplax-constraint-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 07A4; formal unit descent via the normalized representative tensor square and the existing strong-monoidal total-complex construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The localized tensor comparison under an exact equivalence respects the specified regular module unit comparison",
+   "results": "8 hits: module-localization tensor maps and tensor equivalences, and CategoryTheory.Localization.Monoidal.tensor_comp. None identifies the project-specific normalized qTensor and regular comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.left_unitality",
+   "results": "Exact generic lax monoidal left unit law in Mathlib.CategoryTheory.Monoidal.Functor. It supplies the internal localization law; it does not identify the section qTensor with the specified unit comparison.",
+   "date": "2026-10-27",
+   "verdict": "generic tool, not this normalization theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep qTensor|modelTensor|regularLeft|regularRight; rg qTensor.*(λ_|ρ_)|modelTensor.*(λ_|ρ_)|regular.*inv.*(λ_|ρ_) in lean/Sheaf and lean/WeilConjectures",
+   "results": "The Mathlib grep search has no hits. Project occurrences give definitions of regularLeft and regularRight, and the assigned unit-edge theorem. SectionKFlatTensorComparison.UnitCondition concerns θ, whereas TensorRepresentativeCondition has normalization, one-sided invertibility and existence of a unit isomorphism, without these qTensor unitor equations.",
+   "date": "2026-10-27",
+   "verdict": "no existing matching declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionResolvingOplaxUnitModels",
+  "date": "2026-10-27",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pd-section-resolving-oplax-unit-models",
+   "place": "Normalized source and target modelTensor unitor equations used in Steps 2–3",
+   "via": [
+    "lem-pd-section-resolving-oplax-unit-models",
+    "lem-pd-section-resolving-oplax-constraint-diagrams"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionLocalizationUnitConstraints",
+  "file": "lean/Sheaf/Paper/SectionLocalizationUnitConstraints.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.section_localization_unit_constraints",
+  "statement": "theorem section_localization_unit_constraints (T : Scheme.{u})\n    (P : CochainComplex (modules Λ T) ℤ) :\n    letI := derivedMonoidal Λ T\n    (modelTensor Λ T (𝟙_ (CochainComplex (modules Λ T) ℤ)) P ≫\n        DerivedCategory.Q.map (λ_ P).hom =\n      regularLeft DerivedCategory.Q (regular Λ T) (DerivedCategory.Q.obj P)) ∧\n    (modelTensor Λ T P (𝟙_ (CochainComplex (modules Λ T) ℤ)) ≫\n        DerivedCategory.Q.map (ρ_ P).hom =\n      regularRight DerivedCategory.Q (regular Λ T) (DerivedCategory.Q.obj P))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261027T012946-L-2352028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T034709-L-3675686",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

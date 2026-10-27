@@ -1,0 +1,297 @@
+{
+ "id": "lem-sfb-invariant-integral-open-schematic-closure",
+ "kind": "statement",
+ "title": "Invariant integral open schematic closure and its canonical function field",
+ "statement": "Let $k$ be a field [def-weil-field], $S=\\operatorname{Spec}k$ [def-weil-affine-spectrum], $X$ an integral scheme [def-pc-integral-scheme], and $f:X\\to S$ a structure morphism. Let $P$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme], and let $r:P\\to X$ be a morphism [def-pc-scheme]. Let a finite group $H$ act by scheme automorphisms $a_h$ on $X$, $A_h$ on $P$ and $b_h$ on $S$, all left actions, with $fa_h=b_hf$ and $rA_h=a_hr$; the $b_h$ arise from a field action using inverse field automorphisms under $\\operatorname{Spec}$. Suppose $U\\subset X$ is a dense invariant open and $r^{-1}(U)\\to U$ is an isomorphism. Let $j:U\\hookrightarrow P$ be the open immersion given by its inverse [def-weil-open-immersion], and let $c:T=\\operatorname{SIm}(j)\\hookrightarrow P$ be the scheme-theoretic image [def-nagata-scheme-theoretic-image, def-weil-closed-immersion]. Then $T$ is the reduced induced closed subscheme on $\\overline{j(|U|)}$, is nonempty and irreducible, and is integral [def-pc-integral-scheme]. The factorization $j_T:U\\to T$ of $j$ is a dense open immersion, and for $q=rc$ the restriction $q^{-1}(U)\\to U$ is an isomorphism of schemes. The defining ideal of $T$ [def-sbc-closed-immersion-ideal-sheaf] is preserved by every $A_h$. There is a unique left action $a^T_h:T\\to T$ by scheme automorphisms with $ca^T_h=A_hc$; it satisfies $qa^T_h=a_hq$ and $fqa^T_h=b_hfq$. If $\\eta_T$ and $\\eta_X$ are the generic points [def-sc-generic-point], then $q(\\eta_T)=\\eta_X$ and the actual stalk map $q^\\sharp_{\\eta_T}:\\mathcal O_{X,\\eta_X}\\to\\mathcal O_{T,\\eta_T}$ is an isomorphism of fields, hence gives the canonical identification $k(X)\\simeq k(T)$ [def-sc-function-field]. No normality, geometric integrality, projectivity or faithfulness of an action is assumed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 056B, lemma-scheme-theoretic-image-reduced; Tag 01R8, lemma-quasi-compact-scheme-theoretic-image, including restriction to an open and the ideal kernel; Tag 01RW, definition-function-field, and Tag 01RV, lemma-integral-scheme-rational-functions. Returned proof steps 6 (closure and restriction), 7 (invariant ideal and descended action), and 9 (generic stalk map); action descent is agent-explicit."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-open-immersion",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-closed-immersion",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Write $i:U\\hookrightarrow X$ and $W=r^{-1}(U)\\subseteq P$. The given inverse identifies $U$ with the open subscheme $W$, so $j$ is an open immersion with image $W$. Since $X$ is nonempty and $U$ is dense, $U$ is nonempty. Its stalks are the corresponding reduced stalks of $X$, and any two nonempty opens of $U$ are nonempty opens of the irreducible space $X$ and hence intersect. Thus $U$ is integral. By [lem-weil-pbc-noetherian-open-subscheme-noetherian], every open subscheme of the Noetherian scheme $P$ is quasi-compact. In particular for every affine open $V\\subseteq P$, $j^{-1}(V)$ is isomorphic to the open subscheme $W\\cap V$ of $P$ and is quasi-compact. This proves that $j$ is quasi-compact.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OW (lemma-locally-Noetherian), 01OZ (lemma-Noetherian-topology); equivalently Tag 01OX (lemma-immersion-into-noetherian)."
+   }
+  },
+  {
+   "text": "By [def-nagata-scheme-theoretic-image], the ideal defining the specified $T=\\operatorname{SIm}(j)$ is the largest quasi-coherent ideal contained in $\\ker(\\mathcal O_P\\to j_*\\mathcal O_U)$; since $j$ is quasi-compact, it is this sheaf kernel itself. Thus the image and canonical factor in the following citations are the specified $T,c,j_T$. Apply [lem-trf-reduced-scheme-image] to the reduced source $U$: $T$ is the reduced induced closed subscheme on $\\overline{j(|U|)}$. This space is nonempty and irreducible: if two opens meet the closure, each meets $j(U)$, and their intersections with $j(U)$ meet since $U$ is irreducible. Therefore $T$ is integral by [def-pc-integral-scheme]. The quasi-compact open immersion $j$ is in particular an immersion; [lemma-nagata-immersion-open-in-scheme-image] gives that its canonical factor $j_T:U\\to T$ is an open immersion with dense image, and $cj_T=j$.",
+   "uses": [
+    "def-nagata-scheme-theoretic-image",
+    "lem-trf-reduced-scheme-image",
+    "def-pc-integral-scheme",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "lemma-nagata-scheme-image-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 056B (lemma-scheme-theoretic-image-reduced); Tag 01RG (lemma-quasi-compact-immersion); Tag 01R6 (lemma-scheme-theoretic-image)."
+   }
+  },
+  {
+   "text": "The equality $qj_T=i$ follows from $q=rc$ and $rj=i$. For $t\\in T$, $q(t)\\in U$ if and only if $c(t)\\in W=j(U)$. Since a closed immersion is injective on underlying points and $cj_T=j$, this is equivalent to $t\\in j_T(U)$. Consequently the open subscheme $q^{-1}(U)$ is exactly the open image of $j_T$. By the definition of open immersion, $j_T:U\\to q^{-1}(U)$ is an isomorphism. The equation $qj_T=i$ says that its inverse is the specified restriction $q^{-1}(U)\\to U$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R8 (lemma-quasi-compact-scheme-theoretic-image), restriction to the open W; here the common-open assertion is proved directly from the open factor and injectivity of c."
+   }
+  },
+  {
+   "text": "Fix $h\\in H$ and write $u_h=a_h|_U$. Equivariance of $r$ and invariance of $U$ imply $A_h(W)=W$ and $A_hj=ju_h$: on $W$, both maps are determined by their composite with the isomorphism $r|_W:W\\to U$. The morphism $c_h=A_{h^{-1}}c:T\\to P$ is a closed immersion, since composing a closed immersion with an isomorphism preserves its defining closed embedding and surjective structure-sheaf map. It gives the closed factorization $c_h(j_Tu_h)=A_{h^{-1}}ju_h=j$. Apply [lemma-nagata-scheme-image-universal] to this factorization of $j$: there is a unique $v_h:T\\to T$ with $c_hv_h=c$, hence $cv_h=A_hc$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lemma-nagata-scheme-image-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R6 (lemma-scheme-theoretic-image), minimal closed factor; agent-explicit translated closed factorization, as in lemma-factor-factor."
+   }
+  },
+  {
+   "text": "A closed immersion is a monomorphism: its injective point map determines any factoring point map, and locally the surjection onto its structure sheaf determines any factoring sheaf map. Cancel $c$ in $cv_e=c$, $cv_hv_g=A_hA_gc=A_{hg}c$ and $cv_hv_{h^{-1}}=c$. Thus $v_e=1$, $v_hv_g=v_{hg}$ and $v_{h^{-1}}=v_h^{-1}$. Also $cv_hj_T=A_hj=ju_h=cj_Tu_h$, so cancellation gives $v_hj_T=j_Tu_h$: the descended action restricts to the prescribed action on the common open. Set $a_h^T=v_h$; these are the unique automorphisms with the required compatibility. Composition with $r$ and $f$ gives $qa_h^T=a_hq$ and $fqa_h^T=b_hfq$. For the defining ideal $\\mathcal I(V)=\\ker(c^\\sharp_V)$ of [def-sbc-closed-immersion-ideal-sheaf], the square $ca_h^T=A_hc$ gives $c^\\sharp_{A_h^{-1}V}A_h^\\sharp_V=(a_h^T)^\\sharp_{c^{-1}V}c^\\sharp_V$. Both horizontal pullbacks are isomorphisms, so $A_h^\\sharp_V$ carries $\\mathcal I(V)$ onto $\\mathcal I(A_h^{-1}V)$ for every open $V\\subseteq P$. This is preservation of the defining ideal, as a sheaf, by $A_h$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HK (definition-closed-immersion-locally-ringed-spaces), kernel and surjection; elementary cancellation and kernel calculation for the constructed maps."
+   }
+  },
+  {
+   "text": "By [lem-sc-scheme-sober], the integral schemes $U,X,T$ have unique generic points. Let $\\eta_U$ be that of $U$. The closure in $X$ of $i(\\eta_U)$ contains $i(U)$, because its intersection with the open subspace $i(U)$ is closed and contains a point dense there. Since $U$ is dense in $X$, this closure is $X$, so $i(\\eta_U)=\\eta_X$. The identical argument for the dense open $j_T$ gives $j_T(\\eta_U)=\\eta_T$. Evaluating $qj_T=i$ at $\\eta_U$ proves $q(\\eta_T)=\\eta_X$.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "def-sc-generic-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IS (lemma-scheme-sober); elementary closure-of-a-singleton argument for the two dense open embeddings."
+   }
+  },
+  {
+   "text": "For an open immersion, the stalk map is the identity under restriction to the open image: neighbourhoods contained in that image are cofinal among all neighbourhoods of the point, with the same rings of sections and restriction maps. Thus $i^\\sharp_{\\eta_U}$ and $(j_T)^\\sharp_{\\eta_U}$ are isomorphisms. Taking germs in $qj_T=i$ gives $(j_T)^\\sharp_{\\eta_U}\\circ q^\\sharp_{\\eta_T}=i^\\sharp_{\\eta_U}$; hence the actual stalk map is $q^\\sharp_{\\eta_T}=((j_T)^\\sharp_{\\eta_U})^{-1}\\circ i^\\sharp_{\\eta_U}$ and is an isomorphism. By [lem-sc-rational-functions-generic-stalks] these generic stalks of the integral schemes $X,T$ are fields, and by [def-sc-function-field] they are $k(X),k(T)$. This proves precisely the canonical function-field identification induced by $q$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-sc-rational-functions-generic-stalks",
+    "def-sc-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV (lemma-integral-scheme-rational-functions), Tag 01RW (definition-function-field); elementary cofinal-neighbourhood stalk comparison and functoriality of germs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-nagata-scheme-theoretic-image",
+  "lem-trf-reduced-scheme-image",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-scheme-image-universal",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-sc-scheme-sober",
+  "def-sc-generic-point",
+  "lem-sc-rational-functions-generic-stalks",
+  "def-sc-function-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 056B, 01RG, 01R6, 01RV and 01RW, with Properties Tags 01OW and 01OZ; equivariant factorization and the actual generic stalk calculation written explicitly by NG."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The schematic closure of an invariant integral open in a Noetherian scheme is integral and inherits the group action and the generic stalk isomorphism over an isomorphism open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsIntegral X] {U : X.Opens} [Nonempty ↥↑U],\\n  AlgebraicGeometry.IsIntegral ↑U\", \"doc\": \"Every non-empty open subset $ U $ of an integral scheme $ X $ is itself an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"Algebra.IsInvariant.isIntegral_of_profinite\", \"module\": \"Mathlib/RingTheory/Invariant/Profinite\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {G : Type u_3}\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B] [SMulCommClass G A B] [inst_6 : TopologicalSpace G]\\n  [CompactSpace G] [TotallyDisconnectedSpace G] [IsTopologicalGroup G] [inst_10 : \", \"doc\": \"If the algebra $ A $ over $ B $ is invariant under the action of a group $ G $, then every element of $ A $ is integral over $ B $.\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [IsDomain ↑R], AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $ R $ that is a domain (i.e., has no zero divisors), the scheme $ \\\\operatorname{Spec}(R) $ constructed from the prime spectrum of $ R $ is an integral scheme. This means $ \\\\op\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral.component_integral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsIntegral X] (U : X.Opens) [Nonempty ↥↑U],\\n  IsDomain ↑(X.presheaf.obj (Opposite.op U))\", \"doc\": \"For any integral scheme $X$ and any non-empty open subset $U \\\\subseteq X$, the ring of sections $\\\\Gamma(U, \\\\mathcal{O}_X)$ is an integral domain.\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [Nonempty ↥X]\\n  [IsDomain ↑(X.presheaf.obj (Opposite.op ⊤))], AlgebraicGeometry.IsIntegral X\", \"doc\": \"If $X$ is a non-empty affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain, then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: integrality of nonempty opens and normalization, invariance of topological closure, ring integral closure and rational maps do not give an action on the schematic closure with its common open and canonical generic stalk map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"image\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.fullyFaithfulForgetToPresheafedSpace_preimage_hom\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (f : AlgebraicGeometry.SheafedSpace.forgetToPresheafedSpace.obj X ⟶ AlgebraicGeometry.SheafedSpace.forgetToPresheafedSpace.obj Y) : (AlgebraicGeometry.SheafedSpace.fullyFaithfulForgetToPresheafedSpace.preimage \", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.preimage_basicOpen\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \" {X Y : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Y) {U : TopologicalSpace.Opens ↑Y.toTopCat} (s : ↑(Y.presheaf.obj (Opposite.op U))) : (TopologicalSpace.Opens.map f.base).obj (Y.toRingedSpace.basicOpen s) = X.toRingedSpace.basicOpen ((CategoryTheory.ConcreteCategory.hom (f.c.app (Opposite.op U\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace_preimage_toLRSHom\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \" {X✝ Y✝ : AlgebraicGeometry.Scheme} (toLRSHom' : X✝.Hom Y✝.toLocallyRingedSpace) : AlgebraicGeometry.Scheme.Hom.toLRSHom (AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace.preimage toLRSHom') = toLRSHom'\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.id_preimage\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \" {X : AlgebraicGeometry.Scheme} (U : X.Opens) : (TopologicalSpace.Opens.map (CategoryTheory.CategoryStruct.id X).base).obj U = U\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preimage_bot\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : (TopologicalSpace.Opens.map f.base).obj ⊥ = ⊥\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preimage_iSup\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {ι : Sort u_1} (U : ι → Y.Opens) : (TopologicalSpace.Opens.map f.base).obj (iSup U) = ⨆ i, (TopologicalSpace.Opens.map f.base).obj (U i)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.mem_preimage\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {x : ↥X} {U : Y.Opens} : x ∈ (TopologicalSpace.Opens.map f.base).obj U ↔ f x ∈ U\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.iSup_preimage_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {ι : Sort u_1} {U : ι → Y.Opens} (hU : iSup U = ⊤) : ⨆ i, (TopologicalSpace.Opens.map f.base).obj (U i) = ⊤\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SpecMap_preimage_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \" {R S : CommRingCat} (f : R ⟶ S) (r : ↑R) : (TopologicalSpace.Opens.map (AlgebraicGeometry.Spec.map f).base).obj (PrimeSpectrum.basicOpen r) = PrimeSpectrum.basicOpen ((CategoryTheory.ConcreteCategory.hom f) r)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preimage_top\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : (TopologicalSpace.Opens.map f.base).obj ⊤ = ⊤\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preimage_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {U U' : Y.Opens} (hUU' : U ≤ U') : (TopologicalSpace.Opens.map f.base).obj U ≤ (TopologicalSpace.Opens.map f.base).obj U'\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.coe_preimage\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {U : Y.Opens} : ↑((TopologicalSpace.Opens.map f.base).obj U) = ⇑f ⁻¹' ↑U\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: integrality of nonempty opens and normalization, invariance of topological closure, ring integral closure and rational maps do not give an action on the schematic closure with its common open and canonical generic stalk map"
+  },
+  {
+   "tool": "grep",
+   "query": "image.*(action|[Ee]quivariant)|[Ii]nvariant.*(closure|[Ss]ubsheme)|[Ss]chematic.*closure",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"1066\", \"text\": \"to the fraction `a / b`, its image on `V` evaluates on `p` to the fraction `f(a) / f(b)`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"1114\", \"text\": \"to the fraction `a / b`, its image on `V` evaluates on `p` to the fraction `f(a) / f(b)`.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: integrality of nonempty opens and normalization, invariance of topological closure, ring integral closure and rational maps do not give an action on the schematic closure with its common open and canonical generic stalk map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A group action preserving a reduced integral open preserves its scheme theoretic closure and restricts to an action on the integral closure subscheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"closure_smul\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"(c : G) (s : Set α) : closure (c • s) = c • closure s\", \"doc\": \"For a topological group $G$ acting continuously on a topological space $\\\\alpha$, and for any $c \\\\in G$ and subset $S \\\\subseteq \\\\alpha$, the closure of the set $c \\\\cdot S$ (where $\\\\cdot$ denotes the gr\"}\n  {\"name\": \"integralClosure.coe_smul\", \"module\": \"Mathlib.RingTheory.IntegralClosure.Algebra.Basic\", \"type\": \"(g : G) (k : integralClosure R K) : (g • k : integralClosure R K) = g • (k : K)\", \"doc\": \"For any group element $g$ and any element $k$ in the integral closure of $R$ in $K$, the action of $g$ on $k$ within the integral closure equals the action of $g$ on $k$ when $k$ is viewed as an eleme\"}\n  {\"name\": \"Algebra.isInvariant_of_isGalois\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[FiniteDimensional K L] [h : IsGalois K L] :\\n  letI := IsIntegralClosure.MulSemiringAction A K L B\\n  Algebra.IsInvariant A B Gal(L/K)\", \"doc\": \"If $ L/K $ is a finite Galois extension and $ B $ is the integral closure of $ A $ in $ L $, then $ B $ is invariant under the action of the Galois group $ \\\\text{Gal}(L/K) $. This means that for all $\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsIntegralHom f] : IsIntegralHom (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is an integral morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also an integral morphism.\"}\n  {\"name\": \"Algebra.IsInvariant.isIntegral\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[Finite G] : Algebra.IsIntegral A B\", \"doc\": \"If $ G $ is a finite group acting invariantly on the algebra $ A $ over $ B $, then $ A $ is integral over $ B $. In other words, every element of $ A $ satisfies a monic polynomial equation with coef\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(U : X.Opens) [IsReduced X] : IsReduced U\", \"doc\": \"Every open subset of a reduced scheme is itself a reduced scheme. This follows because the local rings of the open subscheme are restrictions of the local rings of the ambient scheme, which by definit\"}\n  {\"name\": \"Algebra.IsInvariant.isIntegral_of_profinite\", \"module\": \"Mathlib.RingTheory.Invariant.Profinite\", \"type\": \"[Algebra.IsInvariant A B G] : Algebra.IsIntegral A B\", \"doc\": \"If the algebra $ A $ over $ B $ is invariant under the action of a group $ G $, then every element of $ A $ is integral over $ B $.\"}\n  {\"name\": \"instSMulDistribClassAlgEquiv\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[Algebra.IsAlgebraic K L] :\\n  let := IsIntegralClosure.MulSemiringAction A K L B\\n  SMulDistribClass Gal(L/K) B L\", \"doc\": \"The Galois group $\\\\text{Gal}(L/K)$ acts on the integral closure $B$ of $A$ in $L$ as a distributive scalar multiplication, satisfying $\\\\sigma(b_1 + b_2) = \\\\sigma(b_1) + \\\\sigma(b_2)$ and $\\\\sigma(b \\\\cdo\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: integrality of nonempty opens and normalization, invariance of topological closure, ring integral closure and rational maps do not give an action on the schematic closure with its common open and canonical generic stalk map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism over a dense integral open induces the canonical function field isomorphism on the reduced schematic closure",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.RationalMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : IrreducibleSpace ↥X] (f : X.PartialMap Y),\\n  f.toRationalMap.fromFunctionField = f.fromFunctionField\", \"doc\": \"For irreducible schemes $X$ and $Y$, the morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ constructed from a rational map $X \\\\dashrightarrow Y$ via the function field $K(X)$ is compatible with the conversio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.PartialMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"Given an irreducible scheme $X$ and a partial map $f : X \\to Y$ to a scheme $Y$, this constructs the morphism $\\\\operatorname{Spec}(K(X)) \\to Y$ where $K(X)$ is the function field of $X$. The constructio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) [inst : IrreducibleSpace ↥X] {U : X.Opens} (hU : Dense ↑U)\\n  (hU' : U ≤ f.domain), (f.restrict U hU hU').fromFunctionField = f.fromFunctionField\", \"doc\": \"Let $X$ be an irreducible scheme, $Y$ be a scheme, and $f: X \\\\dashrightarrow Y$ be a rational map. Let $U$ be a dense open subset of $X$ that is contained in the domain of $f$. The morphism of schemes\"}\n  {\"name\": \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [inst : AlgebraicGeometry.IsIntegral X] → Field ↑X.functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.functionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [IrreducibleSpace ↥X] → CommRingCat\", \"doc\": \"For an irreducible scheme $X$, the function field is defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$. This corresponds to the commutative ring obtained by takin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  (sX : X ⟶ S) →\\n    (sY : Y ⟶ S) →\\n      [inst : AlgebraicGeometry.IsIntegral X] →\\n        [AlgebraicGeometry.LocallyOfFiniteType sY] →\\n          (f : AlgebraicGeometry.Spec X.functionField ⟶ Y) →\\n            CategoryTheory.CategoryStruct.comp f sY =\\n           \", \"doc\": \"Given an integral scheme $X$, a scheme $Y$ with a morphism $s_Y:Y\\\\to S$ locally of finite type, and a morphism $f:\\\\operatorname{Spec}(K(X))\\\\to Y$ from the spectrum of $X$'s function field $K(X)$ satis\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: integrality of nonempty opens and normalization, invariance of topological closure, ring integral closure and rational maps do not give an action on the schematic closure with its common open and canonical generic stalk map"
+  },
+  {
+   "tool": "grep",
+   "query": "image.*(IsIntegral|action|equivariant)|invariant.*schematic|schematic.*closure",
+   "results": "{\"t\": \"2026-10-22T11:05:55Z\", \"tool\": \"grep\", \"query\": \"image.*(IsIntegral|action|equivariant)|invariant.*schematic|schematic.*closure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\"], \"digest\": \"f1fd4dbcb977b2c2\"}; Returned hits were read: image definitions/factorizations, open restriction isomorphisms, residue-field and stalk isomorphisms, and function-field rational maps. None states the equivariant closure theorem with all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Group action on scheme theoretic image of invariant dense open and isomorphism on generic local rings",
+   "results": "{\"t\": \"2026-10-22T11:05:56Z\", \"tool\": \"leansearch\", \"query\": \"Group action on scheme theoretic image of invariant dense open and isomorphism on generic local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.Scheme.Hom.isoOpensRange\", \"AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion\", \"IsLocalRing.ResidueField.residue_smul\", \"AlgebraicGeometry.Scheme.Hom.isoImage\", \"AlgebraicGeometry.Scheme.Opens.instIsIsoCommRingCatAppLEιTopToScheme\", \"AlgebraicGeometry.Scheme.Hom.appIso\", \"AlgebraicGeometry.IsOpenImmersion.instIsIsoCommRingCatStalkMap\"], \"digest\": \"aa90e2d90ca3a81a\"}; Returned hits were read: image definitions/factorizations, open restriction isomorphisms, residue-field and stalk isomorphisms, and function-field rational maps. None states the equivariant closure theorem with all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"image\", \"IsIntegral\"",
+   "results": "{\"t\": \"2026-10-22T11:05:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"image\\\", \\\"IsIntegral\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Returned hits were read: image definitions/factorizations, open restriction isomorphisms, residue-field and stalk isomorphisms, and function-field rational maps. None states the equivariant closure theorem with all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant birational morphism obtained by scheme theoretic closure of a common integral open has canonical isomorphism of function fields",
+   "results": "{\"t\": \"2026-10-22T11:06:05Z\", \"tool\": \"leanfinder\", \"query\": \"Equivariant birational morphism obtained by scheme theoretic closure of a common integral open has canonical isomorphism of function fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_eq_iff\"], \"digest\": \"dd73c5d779b41a5f\"}; Returned hits were read: image definitions/factorizations, open restriction isomorphisms, residue-field and stalk isomorphisms, and function-field rational maps. None states the equivariant closure theorem with all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.image",
+   "results": "{\"t\": \"2026-10-22T11:06:41Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.image\", \"AlgebraicGeometry.Scheme.Hom.imageι\", \"AlgebraicGeometry.Scheme.Hom.toImage\", \"AlgebraicGeometry.Scheme.Hom.toImageAux\", \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.Scheme.Hom.toImageAux_spec\", \"AlgebraicGeometry.Scheme.Hom.toImage_imageι\"], \"digest\": \"7ac1a6882eb682e1\"}; Returned hits were read: image definitions/factorizations, open restriction isomorphisms, residue-field and stalk isomorphisms, and function-field rational maps. None states the equivariant closure theorem with all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a scheme automorphism to the scheme theoretic image of an equivariant open immersion",
+   "results": "{\"t\": \"2026-10-22T11:06:42Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of a scheme automorphism to the scheme theoretic image of an equivariant open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.isoRestrict\", \"AlgebraicGeometry.morphismRestrictOpensRange\", \"AlgebraicGeometry.Scheme.Hom.isoImage\", \"AlgebraicGeometry.Scheme.Hom.isoOpensRange\", \"AlgebraicGeometry.Scheme.Hom.isoImage_hom_ι\", \"AlgebraicGeometry.morphismRestrictRestrict\", \"AlgebraicGeometry.Scheme.Hom.appIso_hom'\", \"AlgebraicGeometry.Scheme.Hom.isoImage_inv_ι\"], \"digest\": \"51682a10495abd3f\"}; Returned hits were read: image definitions/factorizations, open restriction isomorphisms, residue-field and stalk isomorphisms, and function-field rational maps. None states the equivariant closure theorem with all clauses.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semilinear-equivariant-chow-modification",
+  "date": "2026-10-22",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong, Families of curves and alterations (1997), §§2.7--2.10, printed pp.603--605: invariant purely inseparable generic normalization, equivariant Chow preparation and simultaneous flattening. The marking flattening is also ILO X Theorem 3.4 Step 2, p.160.; equivariant Chow preparation in de Jong §2.10, before simultaneous flattening; re-split of lem-sfb-semilinear-equivariant-chow-modification, returned proof steps closure part of 6, 7, 9; this split: common-open integrality, translated closed factorization, and the equation of the actual generic stalk maps",
+   "via": [
+    "lem-sfb-semilinear-equivariant-chow-modification",
+    "lem-sfb-equivariant-flat-curve-preparation",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-invariant-integral-open-schematic-closure",
+  "worker": "stage1",
+  "summary": "Seven explicit steps using only existing DAG nodes; no new nodes. Checked the reduced schematic image, quasi-compactness from the Noetherian ambient scheme, equality of the common open, translated closed factorization for action descent, the kernel calculation for invariant ideals, and functoriality of generic stalk maps. Added only the missing ideal-sheaf definition citation to the statement. Repair of returned head 796972bdc41: rebased the retained stage-1 payload on the current unsplit node, re-read all twelve previously cited statements and the current image/kernel/factor definitions, and verified all 18 retained citation quotes. Step 2 now explicitly identifies the current largest-quasi-coherent-kernel image and its quasi-compact specialization; Step 5 explicitly proves compatibility of the descended action with the common open by cancellation. All prior searches and the seven-step proof route are retained; no new nodes.",
+  "blueprint": "The inherited place in det-thm-sf-ctf-stability-direct-images (3), through the equivariant Chow-preparation chain: realizes the closure part of returned steps 6, 7 and 9 of lem-sfb-semilinear-equivariant-chow-modification. The ancestor command currently returns None because created.item reaches a module name; retained the existing from.node and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-reduced-scheme-image",
+    "why": "General reduced schematic-image theorem, Stacks 056B; used only for reducedness and support, not to change the alteration route."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-universal",
+    "why": "General minimal closed-factor universal property, used for the translated closed factorization in the action construction."
+   },
+   {
+    "node": "lem-sc-rational-functions-generic-stalks",
+    "why": "General identification of the generic local ring of an integral scheme with its field of rational functions, Stacks 01RV."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-reduced-scheme-image",
+  "lemma-nagata-scheme-image-universal",
+  "lem-sc-rational-functions-generic-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NG-125cb3f1d",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-125cb3f1d (reviewer sub-agent of L); spot-checked: I read the item and every cited statement. This re-delivery answers the side-completion promotion refusal of PASSed head 796972bd (coord/returns/NG.md, 2026-10-22 14:44Z). Live and side-live both still have the item unsplit with an empty proof, and there is no repair note. Diff against the prior head: the statement is identical, and against live it only adds the correct citation [def-sbc-closed-immersion-ideal-sheaf] (ideal = ker c^♯, also added to stmt_deps). Two proof additions, both correct. First, Step 2 now applies def-nagata-scheme-theoretic-image: its 'this kernel itself when g is quasi-compact' clause plus Step 1's proof that j is quasi-compact give the ideal of T as the sheaf kernel. This makes explicit that the smallest closed subscheme of 056B is SIm. Second, Step 5 adds c v_h j_T = A_h j = j u_h = c j_T u_h, so v_h j_T = j_T u_h by cancelling the monic c. proof_deps equals the union of step uses. All seven steps re-checked. S1: rj=i, and j is quasi-compact via the Noetherian-open lemma on W∩V. S2: 056B gives the reduced closure, plus irreducibility, plus the open-in-image lemma. S3: c^{-1}W = j_T(U). S4: c_h = A_{h^{-1}}c and c_h(j_T u_h) = j, so the universal property gives c v_h = A_h c. S5: left action, uniqueness, and A_h^♯ I(V) = I(A_h^{-1}V). S6: generic points via density. S7: (j_T)^♯ q^♯ = i^♯, and the stalks are fields by 01RV with n=1. Stacks 056B (morphisms.tex l.977-988) read. Edge cases checked: Spec k, an extra component, nonreduced P, nonnormal X=P, trivial H. No new nodes, no SGA. Batch-5 flag accepted: lem-trf-reduced-scheme-image is general Stacks 056B, and its recomputed closure has no other sec-trace-formula node and no Poincaré-duality node, so it is not part of either assumed proof. Accepted tool_uses: 056B, the Nagata image universal property, 01RV."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvariantIntegralOpenSchematicClosure",
+  "declaration": "AlgebraicGeometry.invariant_integral_open_schematic_closure",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvariantIntegralOpenSchematicClosure.lean",
+  "statement": "theorem invariant_integral_open_schematic_closure (k : Type u) [Field k] (X P : Scheme.{u}) [IsIntegral X] (f : X ⟶ Spec (.of k)) [IsLocallyNoetherian P] [CompactSpace P] (r : P ⟶ X) (H : Type v) [Group H] [Finite H] (rho : H →* (k ≃+* k)) (a : H →* Aut X) (A : H →* Aut P) (b : H →* Aut (Spec (.of k))) (hb : ∀ h : H, (b h).hom = Spec.map (CommRingCat.ofHom (rho h⁻¹).toRingHom)) (hf : ∀ h : H, (a h).hom ≫ f = f ≫ (b h).hom) (hr : ∀ h : H, (A h).hom ≫ r = r ≫ (a h).hom) (U : X.Opens) (hU : Dense (U : Set X)) (hUinv : ∀ h : H, (a h).hom ⁻¹ᵁ U = U) [IsIso (r ∣_ U)] (j : U.toScheme ⟶ P) (hj : j = inv (r ∣_ U) ≫ (r ⁻¹ᵁ U).ι) : j.ker = Scheme.IdealSheafData.vanishingIdeal (Closeds.mk (closure (Set.range j)) isClosed_closure) ∧ Set.range j.imageι = closure (Set.range j) ∧ IsReduced j.image ∧ Nonempty j.image ∧ IrreducibleSpace j.image ∧ ∃ (_ : IsIntegral j.image), IsOpenImmersion j.toImage ∧ DenseRange j.toImage ∧ IsIso ((j.imageι ≫ r) ∣_ U) ∧ (∀ (h : H) (V : P.Opens), Ideal.map ((A h).hom.app V).hom (RingHom.ker (j.imageι.app V).hom) = RingHom.ker (j.imageι.app ((A h).hom ⁻¹ᵁ V)).hom) ∧ (∃ aT : H →* Aut j.image, (∀ h : H, (aT h).hom ≫ j.imageι = j.imageι ≫ (A h).hom) ∧ (∀ aT' : H →* Aut j.image, (∀ h : H, (aT' h).hom ≫ j.imageι = j.imageι ≫ (A h).hom) → aT' = aT) ∧ (∀ h : H, (aT h).hom ≫ (j.imageι ≫ r) = (j.imageι ≫ r) ≫ (a h).hom) ∧ (∀ h : H, (aT h).hom ≫ (j.imageι ≫ r ≫ f) = (j.imageι ≫ r ≫ f) ≫ (b h).hom)) ∧ ∃ hη : (j.imageι ≫ r) (genericPoint j.image) = genericPoint X, IsIso ((j.imageι ≫ r).stalkMap (genericPoint j.image)) ∧ ∃ e : X.functionField ≃+* j.image.functionField, e.toRingHom = (X.presheaf.stalkSpecializes (specializes_of_eq hη) ≫ (j.imageι ≫ r).stalkMap (genericPoint j.image)).hom",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4971e4433",
+  "group": "NE",
+  "result": "pass",
+  "note": "Snapshot node differs from side-live only in lean; single sorry theorem, no defs, no name collision, docstrings carry Stacks 056B/01R8/01RV/01RW, blueprint tag and the 7 proof steps; lean.statement verbatim. Hypotheses match the node with nothing stronger: IsIntegral X, IsLocallyNoetherian+CompactSpace P, H →* Aut left actions (Aut_mul_def), hb = Spec.map(rho h⁻¹) checked to give b(gh)=b g∘b h, hf/hr in correct order, dense preimage-invariant U, IsIso (r∣_U), j pinned by hj. Conclusions all present and true: ker = vanishingIdeal(closure range j), range imageι = closure, IsReduced/Nonempty/Irreducible/IsIntegral of j.image, toImage dense open immersion, IsIso q∣_U, ideal preservation via ordinary kernels on all opens (= def-sbc-closed-immersion-ideal-sheaf definition; Hom.ker only on affine opens), aT : H →* Aut unique among actions satisfying the c-square alone, q- and fq-equivariance, q(η_T)=η_X, IsIso stalkMap, e equal to stalkSpecializes ≫ stalkMap. Edge cases (U=X, trivial H, extra/nonreduced components, char, universes) fine. No compile needed (no change)."
+ }
+}

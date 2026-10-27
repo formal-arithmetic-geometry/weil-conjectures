@@ -1,0 +1,209 @@
+{
+ "id": "def-sf-ordinary-integral-derived-pullback",
+ "kind": "definition",
+ "title": "Ordinary unbounded total derived integral pullback",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, with valuation ring $R$ and uniformizer $t$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be any scheme morphism [def-weil-scheme-morphism-properties], and use the small pro-etale sites [def-weil-pbc-proetale-site]. Put $B_Z=\\varprojlim_{n\\geq0}(R/t^{n+1})_Z$ for $Z=X,Y$ [def-weil-completed-integral-coefficients]. Use the canonical ordinary additive module pullback $f_B^*: \\operatorname{Mod}(B_Y)\\to\\operatorname{Mod}(B_X)$, with its completed coefficient map and sheafified Kan-extension adjunction, of [def-sf-ordinary-integral-pullback-construction]. Write $Q_Z:K(\\operatorname{Mod}(B_Z))\\to D(\\operatorname{Mod}(B_Z))$ for localization at quasi-isomorphisms [def-weil-abstract-derived-category], and $F=Q_X\\circ K(f_B^*)$. Its total left derived functor exists. Define the ordinary unbounded derived pullback $Lf_B^*:D(\\operatorname{Mod}(B_Y))\\to D(\\operatorname{Mod}(B_X))$ to be the total left derived functor of $F$ along $Q_Y$, with its universal counit $Lf_B^*\\circ Q_Y\\to F$. This is the right Kan extension of $F$ along $Q_Y$, determined up to the unique isomorphism compatible with that counit. No derived completion is applied.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-sf-ordinary-integral-pullback-construction",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YV, section-derived-pullback; Tag 06YY, lemma-derived-base-change, specialized to the completed integral ringed pro-etale sites."
+ },
+ "proof": [
+  {
+   "text": "Present the completed-ring module inverse image by proEtaleAlgebraicInverseImage_exists. The pro-etale set inverse image preserves finite limits by toposFunctorialityInverseImage. Compose the canonical module inverse-image adjunction with the explicit same-site tensor/restriction adjunction for the adjunct completed coefficient map. The unit/counit identity for the coefficient adjunction identifies its right adjoint with completed-coefficient module pushforward. The unique left-adjoint comparison therefore identifies this tensor functor with the specified ordinaryIntegralModulePull.",
+   "uses": [
+    "lem-sp-proetale-algebraic-inverse-image",
+    "det-pe-topos-functoriality-inverse-image",
+    "new-lem-weil-pbc-proetale-module-canonical-unit",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-pur-integral-ambient-operation-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY; ordinary ringed pullback from exact inverse image and scalar extension"
+   }
+  },
+  {
+   "text": "Apply ringedTopoiDerivedPullbackIndependent to the algebraic inverse-image presentation and the explicit tensor functor. It supplies a homotopy-category total left derived functor with counit invertible on flat-term K-flat complexes. Transport existence across the additive left-adjoint comparison to prove ordinaryIntegralPull_hasLeftDerived. The unique counit-normalized derived comparison transports invertibility to ordinaryIntegralPullCounit; the remaining factors defining ordinaryIntegralPullComplexCounit are localization isomorphisms. Thus ordinaryIntegralPullComplexCounit_isIso follows for every good representative.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY; ordinary ringed pullback from exact inverse image and scalar extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-sp-proetale-algebraic-inverse-image",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "new-lem-weil-pbc-proetale-module-canonical-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "G6: algebraic inverse image, tensor adjunction and counit-normalized uniqueness of total left derived functors."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "total left derived pullback of sheaves of modules on ringed sites",
+   "results": {
+    "t": "2026-10-22T12:47:05Z",
+    "tool": "leansearch",
+    "query": "total left derived pullback of sheaves of modules on ringed sites",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pullback",
+     "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback",
+     "CategoryTheory.Functor.totalLeftDerived",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "CategoryTheory.Functor.sheafPullback",
+     "CategoryTheory.Functor.IsLeftDerivedFunctor.mk",
+     "AlgebraicGeometry.Scheme.Modules.pullback",
+     "PresheafOfModules.pullbackObjIsDefined"
+    ],
+    "digest": "f18c792e7eef02ae"
+   },
+   "date": "2026-10-22",
+   "verdict": "Mathlib provides totalLeftDerived and ordinary module pullback, not this completed-coefficient specialization; use the already published ordinaryIntegralDerivedPull."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unbounded total left derived ordinary pullback of completed integral coefficient module sheaves on the small proetale site",
+   "results": {
+    "t": "2026-10-22T12:47:07Z",
+    "tool": "leanfinder",
+    "query": "unbounded total left derived ordinary pullback of completed integral coefficient module sheaves on the small proetale site",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CondensedMod.ofSheafProfinite",
+     "LightCondMod.ofSheafLightProfinite",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'",
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+     "AlgebraicGeometry.Scheme.Modules.pullback",
+     "SheafOfModules.pullbackObjFreeIso",
+     "PresheafOfModules.pullbackObjIsDefined",
+     "SheafOfModules.pullbackIso"
+    ],
+    "digest": "cb03054f54f9fc87"
+   },
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; reuse the published project construction without a second definition."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinaryIntegralDerivedPull|ordinaryIntegralPull_hasLeftDerived",
+   "results": {
+    "t": "2026-10-22T12:47:04Z",
+    "tool": "grep",
+    "query": "ordinaryIntegralDerivedPull|ordinaryIntegralPull_hasLeftDerived",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; reuse the published project construction without a second definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n ordinaryIntegralDerivedPull|ordinaryIntegralPull_hasLeftDerived lean/WeilConjectures lean/Sheaf; rg -l of these names in dag/nodes; blueprint_refs.py search ordinaryIntegralDerivedPull",
+   "results": "No upstream definition; published Sheaf.Paper.OrdinaryCompletedIntegralPullback defines the two declarations at lines 227 and 235. DAG ownership is only through lem-tw-ordinary-completed-integral-pullback; def-sf-ordinary-integral-pullback-construction omits these two. No definition node owns the total derived ordinary pullback. blueprint_refs: 0 matching blueprint nodes.",
+   "date": "2026-10-22",
+   "verdict": "Existing project construction, missing definition-node ownership; existing:true binding required by the return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-fix-constructible-projective-chart-refinement",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Ordinary leaf and chart restrictions before derived completion in the common projective-chart refinement.",
+   "via": [
+    "lem-fix-constructible-projective-chart-refinement",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "module": "Sheaf.Paper.OrdinaryIntegralPullbackConstruction",
+  "declaration": "WeilConjectures.ordinaryIntegralDerivedPull",
+  "declarations": [
+   "WeilConjectures.ordinaryIntegralDerivedPull",
+   "WeilConjectures.ordinaryIntegralPull_hasLeftDerived",
+   "WeilConjectures.ordinaryIntegralPullCounit"
+  ],
+  "statement": "def ordinaryIntegralDerivedPull",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "H2 repair of returned head 31e2f8a3749d: definition-node ownership of the existing total derived ordinary pullback and the named HasLeftDerivedFunctor instance that supplies its universal construction. The module uses Functor.totalLeftDerived, hence no arbitrary choice of derived functor or completion. def-sf-ordinary-integral-pullback-construction owns the underlying additive module pullback but not these two declarations. No Noetherian premise and no use of ordinaryCompletedIntegralPullback.",
+  "file": "lean/Sheaf/Paper/OrdinaryIntegralPullbackConstruction.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73e3feff1",
+  "group": "Q10",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73e3feff1",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 31e2f8a3749d. The Lean signature is byte-identical; only the imports changed (public ProEtaleInverseImage, proof-only homology import). Re-read clause by clause against the node: qcqs W, l invertible, sfIntegralConstructible M and N, partitions with _hlisse via the actual constant-module pullback, binary qc-open/closed tree with root iso W, leaf factorizations through strata, completeness of the ordinary pullback, bounded locally constant finite residue cohomology, affine weakly contractible V with a singleton pro-etale cover, finite disjoint qcqs opens covering T, bounded P with split finite-free terms and a derived iso. Edge cases W empty, m=0, M=N, zero complexes, r=0, non-reduced W are fine. The H2 repair is as prescribed: the new definition node def-sf-ordinary-integral-derived-pullback is existing:true over ordinaryIntegralPull_hasLeftDerived and ordinaryIntegralDerivedPull (arbitrary f, totalLeftDerived with counit, no completion, no Noetherian premise; fields per §5; stmt_deps exist; co-ownership follows the def-sf-ordinary-integral-pullback-construction precedent; no competing owner on live). The item stmt_deps drop the theorem node and add the new node plus the landed def-weil-proetale-inverse-image, owner of proEtaleConstantModulePullback. The item is not landed on live. Not recompiled (no file changed); worker reports scompile and deliver2 --no-push OK. Advisory: the statement inlines the weak-contractibility condition instead of the upstream IsWeaklyContractible; equivalent and matches the node's parenthetical."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0c664",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261025T101620-L-3714355",
+  "kind": "interface",
+  "note": "independent cc review: item proof (characterization + new integralStratifiedPerfect_pullback + existing sorried strict-model comparison + actual-tower unit) against lem-tw-ordinary-completed-integral-pullback; construction module vs live item (verbatim move + local irreducible/private helpers); adapted modules and node stmt_deps/lean records vs clone; sandbox --all compile incl. importer ProperIntegralOrdinaryInputs"
+ }
+}

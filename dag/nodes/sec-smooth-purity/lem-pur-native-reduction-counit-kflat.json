@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-native-reduction-counit-kflat",
+ "kind": "statement",
+ "title": "Native whole-system reduction counit computes on K-flat complexes",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell and a scheme W. Let S be any recorded CoefficientDerivedSystemCalculus for E on W. Let P be an arbitrary unbounded K-flat complex of modules over the completed integral coefficient sheaf [def-pc-kflat-complex]. For the ordinary quotient/limit adjunction and the derived-limit-normalized mate systemReductionCounit of [def-pur-native-reduction-counit-data], its component at the homotopy class of P is an isomorphism from S.reduction(Qh(P)) to Qh(ordinaryReduction(P)). This assertion is on the native whole sequence site, before constant-scalar restriction, scalar extension to a second field, or arithmetic restriction. It has no completeness or constructibility hypothesis and includes the zero complex and empty site.",
+ "stmt_deps": [
+  "def-pur-native-reduction-counit-data",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma derived-base-change (06YY), section-derived-limits (0940), lemma-derived-limit-is-ok (0941); literature/stacks-project/derived.tex, lemma-derived-adjoint-functors. The quotient extension is the sequence-site specialization; its inverse-image part is exact constant diagram formation."
+ },
+ "proof": [
+  {
+   "text": "View the ordinary quotient-system functor as constant diagram formation followed by extension to the actual quotient-ring sheaf on the sequence site. The ordinary right adjoint is inverse limit after coefficient restriction, so uniqueness of left adjoints identifies this ordinary functor with ordinaryReduction. This identification uses its ordinary adjunction unit.",
+   "uses": [
+    "def-pur-native-reduction-counit-data",
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Constant diagram formation is exact, and its tensor with any acyclic sequence complex is acyclic at each level when P is K-flat. Thus its value on P is K-flat. Extension to the quotient sequence ring computes derived extension on this K-flat complex, by the same tensor-restriction adjunction argument used for ordinary change of rings. Consequently the canonical computing counit from derived ordinary quotient extension to ordinaryReduction is invertible at P.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The derived quotient-extension/limit adjunction identifies its right adjoint with the right derived functor of ordinaryLimit. The recorded reductionRightComparison identifies that functor with coefficientSequenceLimit and fixes the unit on every whole-system complex. Unique left-adjoint comparison therefore identifies the derived quotient extension with S.reduction. Under adjoint transposition its computing counit is exactly the mate of the right-derived unit, namely systemReductionCounit. This proves invertibility of its component at P. The argument applies to arbitrary unbounded K-flat P; flat terms are not required for the pure change-of-rings tensor computation, since the constant diagram functor is exact.",
+   "uses": [
+    "def-pur-native-reduction-counit-data",
+    "lem-pc-derived-adjoint-functors"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-native-reduction-counit-data",
+  "lem-pur-system-ringed-sequence-site",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-derived-adjoint-functors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The native quotient-extension computation in the proof of lem-pur-scalar-target-counit-universal, before scalar extension and exact restrictions. Adjoint uniqueness and unit normalization identify the precise mate."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The mate of the unit of a total right derived functor is the counit of the total left derived functor of its left adjoint",
+   "results": "8 hits, including Functor.totalLeftDerivedCounit, Adjunction.derived_unit, Adjunction.derivedε and mateEquiv_apply. These are generic derived/adjunction constructions and do not identify the native sequence-site counit or compute it on K-flat complexes.",
+   "date": "2026-10-26",
+   "verdict": "No exact native computation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of the total right derived unit computes ordinary extension of coefficients on a K-flat complex",
+   "results": "8 hits, including Adjunction.derivedε, derivedη, derived_unit, derivedε_fac_app and totalRightDerivedUnit. None proves this specified whole-system mate invertible on K-flat objects.",
+   "date": "2026-10-26",
+   "verdict": "No direct match; the remaining obligation is the native sequence-site specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|IsLeftDerivedFunctor; local rg for systemReductionCounit, native reduction K-flat computation; blueprint_refs search K-flat reduction counit and 0941",
+   "results": "Mathlib has mate identities and generic derived functors, but no native coefficient systems. The only project systemReductionCounit is the definition in NativeConstantSupportModel and uses of it in unproved composite comparisons. No duplicate K-flat computation was found. Blueprint searches returned no matching nodes.",
+   "date": "2026-10-26",
+   "verdict": "A new narrower computation node is needed."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarTargetCounitUniversal",
+  "date": "2026-10-26",
+  "group": "Q6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Finite coefficient extension comparison: the target composite universal-counit proof, sentence computing native F quotient extension on a K-flat replacement, before exact restriction.",
+   "via": [
+    "lem-pur-scalar-target-counit-universal",
+    "def-pur-strict-scalar-reduction-balancing",
+    "lem-pur-compact-support-strict-scalar-mate",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeReductionCounitKFlat",
+  "file": "lean/Sheaf/Paper/NativeReductionCounitKFlat.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.nativeReductionCounit_kFlat",
+  "statement": "theorem nativeReductionCounit_kFlat (W : Scheme.{u})\n    (S : CoefficientDerivedSystemCalculus.{u, u} l E W)\n    (P : CochainComplex (scalarReductionSource l E W) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients\n      (R := completedIntegralCommRingSheafUnrestricted l E W) P) :\n    IsIso ((systemReductionCounit l E W S).app\n      ((HomotopyCategory.quotient _ _).obj P))",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261025T205931-L-3412043",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261025T205931-L-3412043",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,486 @@
+{
+ "id": "lem-sfb-space-flat-higher-image-base-change",
+ "kind": "statement",
+ "title": "Flat base change of higher quasi-coherent direct images on algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $f:X\\to Y$ and $g:Y'\\to Y$ be morphisms of algebraic spaces over $S$ [def-trf-algebraic-space]. Suppose that $f$ is quasi-compact and quasi-separated: inverse images of quasi-compact spaces are quasi-compact and its diagonal is quasi-compact. Suppose $g$ is flat, meaning flat on etale scheme charts [def-weil-flat-morphism]. Form $X'=X\\times_YY'$ with projections $g':X'\\to X$ and $f':X'\\to Y'$ [lem-trf-space-fibre-products-etale-covers]. Let $M$ be quasi-coherent on $X$ [def-trf-space-quasi-coherent-module]. Use tensor pullback and direct image on the small etale ringed sites [def-trf-space-etale-module-functors], and higher direct images computed by injective resolutions in all module sheaves [def-sp-injective-resolutions]. For every $q\\geq0$ the canonical flat base-change map is a natural isomorphism of $\\mathcal O_{Y'}$-modules\n$$\\beta^q_{g,M}:g^*R^qf_*M\\xrightarrow{\\sim}R^qf'_* (g')^*M.$$\nThe map is the cohomology map of derived exchange in the module derived categories [def-weil-abstract-derived-category], with the flat pullbacks identified with their ordinary exact tensor pullbacks; derived exchange is adjoint to pullback of the direct-image counit. For a second flat morphism $k:Y''\\to Y'$, these maps compose to $\\beta^q_{gk,M}$ under the canonical pullback-composition identifications. If $Y=\\operatorname{Spec}R$ and $Y'=\\operatorname{Spec}B$, the corresponding map on cohomology is the canonical isomorphism\n$$H^q(X,M)\\otimes_RB\\xrightarrow{\\sim}H^q(X', (g')^*M),$$\nwhose value on $a\\otimes1$ is the usual cohomological pullback of $a$. There is no properness, Noetherian, finite-type, coherence or flatness assumption on $f$ beyond the stated quasi-compactness and quasi-separatedness.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 073K (lemma-flat-base-change-cohomology), clauses (1) and (2); spaces-morphisms.tex Tag 073C (lemma-flat-morphism-sites); sites-cohomology.tex Tag 0E47 (remark-compose-base-change-horizontal) for successive base changes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-module-derived-exchange",
+  "def-sfb-space-derived-pullback",
+  "def-sfb-space-affine-hom-comparison",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-quasi-compact-presheaf-map",
+  "def-sfb-presheaf-map-separated-diagonal",
+  "def-sfb-space-affine-global-sections",
+  "def-sfb-space-affine-sections-compositors",
+  "def-sfb-space-affine-higher-image-sections-data"
+ ],
+ "proof": [
+  {
+   "text": "Write $h=g'$. Flatness is stable under base change, so $h$ is flat. The geometric/ringed flatness comparison and the definition of flat ringed morphism make $g^*$ and $h^*$ exact: inverse image is exact and scalar extension by the flat structural algebra is exact. Hence their derived pullbacks are their termwise exact pullbacks: for an exact functor the termwise functor on complexes is a total left derived functor, so by uniqueness of derived functors $Lg^*$ and $Lh^*$ are identified with termwise $g^*$ and $h^*$. On the small ringed-site models form the derived adjunction mate $\\beta_{M[0]}$ of the pullback square. By exact-functor cohomology its degree-$q$ map has source $g^*R^qf_*M$ and target $R^qf'_*h^*M$. This constructs precisely the map in the statement; it does not yet assert invertibility.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-flat-etale-ringed-comparison",
+    "def-sfb-flat-etale-ringed-map",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "def-trf-topos-derived-base-change-map",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073K, proof first paragraph; Tag 073C; sites-cohomology Tags 0736 and 07A7"
+   }
+  },
+  {
+   "text": "We first prove the affine-base cohomology assertion. Set $Y=\\operatorname{Spec}A$, $Y'=\\operatorname{Spec}B$, and $N=h^*M$. The ring map $A\\to B$ is flat by the affine criterion. The space $X$ is quasi-compact since $f$ is quasi-compact and the base is affine; it is quasi-separated by the quasi-separated-source lemma, viewing all spaces over $\\operatorname{Spec}\\mathbf Z$ through the base-change-of-ground-scheme equivalence. The map $h$ is affine: it is a base change of the map between affine schemes $\\operatorname{Spec}B\\to\\operatorname{Spec}A$. Also $N$ is quasi-coherent. Affine cohomology comparison therefore gives a canonical isomorphism $H^q(X,h_*N)\\to H^q(X',N)$. No separatedness of $X$ is used.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-qcqs-source-products",
+    "lem-sfb-space-change-base-to-integers",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-space-affine-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073K, proof second paragraph; Tag 0D2U (lemma-relative-affine-cohomology)"
+   }
+  },
+  {
+   "text": "Let $\\underline A,\\underline B$ denote the constant ring sheaves on $X_{\\mathrm{et}}$, and put $T(P)=M\\otimes_{\\underline A}\\underline P$ for an $A$-module $P$. For any presentation $A^{(J)}\\to A^{(I)}\\to P\\to0$, the constant-sheaf functor (sheafification, a left adjoint, of the pointwise constant presheaf) and $M\\otimes_{\\underline A}-$ both preserve colimits, so the presentation gives $T(P)=\\operatorname{coker}(M^{(J)}\\to M^{(I)})$. The quasi-coherent kernels/colimits statement makes it quasi-coherent. The affine-chart calculus computes this cokernel and the two sums on $U$, giving $T(P)(U)=M(U)\\otimes_AP$, with the specified tensor generators. Thus no equality between arbitrary presheaf tensor sections and sheaf tensor sections is presumed. There is a canonical map $\\rho:T(B)\\to h_*N$, sending a local tensor $m\\otimes b$ to $b\\,\\eta_h(m)$. It is an isomorphism, as follows on each affine etale chart $U=\\operatorname{Spec}C\\to X$. The pullback chart $U_B=\\operatorname{Spec}(C\\otimes_AB)$ is affine; the Zariski/etale quasi-coherent equivalence and its pullback comparison identify the restriction of $N$ to $U_B$ with the etale module of the Zariski pullback of the module associated to $M(U)$, and the quasi-coherent affine pullback formula then identifies $N(U_B)$ with $M(U)\\otimes_C(C\\otimes_AB)=M(U)\\otimes_AB$, and the direct-image chart projections identify $(h_*N)(U)$ with $N(U_B)$. The affine-chart tensor formula gives the same sections for $T(B)$: locally its tensor is sheafified sectionwise tensor, and scalar extension from the constant $A$-module $B$ gives the associated $C$-module $M(U)\\otimes_AB$. Both maps send $m\\otimes b$ to $b\\eta_h(m)$. They commute with chart restrictions and scalar actions, so $\\rho$ is an isomorphism of module sheaves, not just of abstract groups.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "def-trf-space-etale-module-functors",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-constant-sheaf",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-weil-pbc-sheafification",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073K, displayed calculation of g-prime pushforward on affine etale charts"
+   }
+  },
+  {
+   "text": "For any $P$, the bilinear pairing $(m,p)\\mapsto m\\otimes p$ defines an $A$-linear natural map $\\alpha_P^q:H^q(X,M)\\otimes_AP\\to H^q(X,T(P))$: its value on $a\\otimes p$ is $H^q(m\\mapsto m\\otimes p)(a)$. The balancing identity follows from the tensor relation, and additivity from additivity of cohomology. For $P=A^r$ this is an isomorphism. Indeed $T(A^r)=M^r$ with its specified inclusions and projections. A finite direct sum of injective resolutions of $M$ is an injective resolution of $M^r$: exactness is componentwise and a finite sum of injectives is injective since its Hom functor is the finite product of the exact Hom functors. Applying sections and taking kernels modulo images gives $H^q(X,M^r)=H^q(X,M)^r$, and the maps of the summands are the specified inclusions. For a matrix between finite free modules the induced map on these groups is the same matrix, so these isomorphisms are natural for every transition map between finite free modules, independently of bases.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-sfb-module-resolution-derived-presheaf-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073K, fourth equality in the final displayed calculation (finite free modules)"
+   }
+  },
+  {
+   "text": "By Lazard's theorem take a small directed system of finite free $A$-modules $P_i$ with colimit $B$. Sheaf tensor commutes with colimits, as do constant sheaves by their sheafification adjunction; hence $\\varinjlim_iT(P_i)=T(B)$. Colimits of module sheaves have the corresponding underlying abelian colimits. Since $X$ is qcqs, its abelian cohomology commutes with this filtered colimit. The module/abelian cohomology comparison, natural in every coefficient endomorphism, makes this an $A$-linear statement for the modules at hand. Consequently the colimit of the maps from Step 4 gives\n$$H^q(X,M)\\otimes_AB=\\varinjlim_i(H^q(X,M)\\otimes_AP_i)\\xrightarrow{\\sim}\\varinjlim_iH^q(X,T(P_i))\\xrightarrow{\\sim}H^q(X,T(B)).$$\nThe first identification is tensor preservation of the module colimit; the last is filtered cohomology continuity. On each colimit leg this is exactly $\\alpha_{P_i}^q$, so the resulting map is the specified $\\alpha_B^q$, regardless of the presentation.",
+   "uses": [
+    "lem-kun-lazard-flat-module",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sfb-space-cohomology-filtered-colimit",
+    "lem-sfb-ringed-site-global-module-abelian-cohomology",
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073K, final displayed calculation and explanations; algebra Tag 058G; spaces-cohomology Tag 073E"
+   }
+  },
+  {
+   "text": "Compose $\\alpha_B^q$, $H^q(\\rho)$ from Step 3, and the affine cohomology comparison from Step 2. This gives an isomorphism $\\gamma^q:H^q(X,M)\\otimes_AB\\to H^q(X',h^*M)$. At $a\\otimes1$ the coefficient map is $m\\mapsto\\rho(m\\otimes1)=\\eta_h(m)$. The cohomology-fmap calculus is applied on the enlarged etale sites $\\mathcal C_X,\\mathcal C_{X'}$, which have terminal objects $X,X'$ and, by the site-model lemma, the same ringed topoi, module categories and direct images as the small sites (a small etale site of an algebraic space need not have a terminal object); the module/abelian comparison identifies its module cohomology with the abelian cohomology of the affine comparison. Thus the composite is the usual cohomological pullback: the cohomology-fmap calculus identifies the affine comparison with the map for the identity coefficient $h_*N\\to h_*N$, and its composition with $M\\xrightarrow{\\eta_h}h_*N$ is the pullback for that unit. In general $\\gamma^q(a\\otimes b)=b\\,h^*a$. This also proves naturality in $M$ and $B$ without making Lazard presentations functorial.",
+   "uses": [
+    "lem-sfb-space-affine-cohomology",
+    "lem-sfb-ringed-site-cohomology-fmap-calculus",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-sfb-ringed-site-global-module-abelian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073K, affine calculation; sites-cohomology Tag 0736, augmentation/unit normalization"
+   }
+  },
+  {
+   "text": "The map $\\gamma^q$ just proved invertible is the affine-sections map of the exchange in Step 1. Here is its normalization. Choose injective resolutions $M\\to I$ and $h^*M\\to J$ in nonnegative degrees. The flat ringed exchange resolution-unit equality says that on any bounded-below representative its composite with $g^*$ of the right-derived comparison unit is the ordinary termwise mate followed by the right-derived comparison unit on the target. Its adjoint is therefore induced by the coefficient unit $M\\to h_*h^*M$; composing the ordinary mate with the unit gives precisely this unit, by the triangle identities. The cohomology-fmap calculus computes its action on global classes from such augmentation-preserving comparison maps, and identifies it with $a\\mapsto h^*a$. Both the exchange map on affine sections and $\\gamma^q$ are $B$-linear, so agreement on $a\\otimes1$ proves agreement on $a\\otimes b$ and their finite sums. As in Step 6 the calculus is applied on the enlarged sites, which have terminal objects. For the source and target sections we use the affine-base higher-image isomorphisms for $f$ and for $f'$, and affine tensor pullback; $f'$ is quasi-compact by base-change permanence of quasi-compactness and quasi-separated since its diagonal is a base change of that of $f$; higher images are quasi-coherent. Thus no arbitrary abstract cohomology isomorphism has been substituted for the canonical exchange.",
+   "uses": [
+    "lem-sfb-flat-ringed-exchange-resolution-unit",
+    "lem-sfb-ringed-site-cohomology-fmap-calculus",
+    "lem-sfb-space-affine-base-higher-image-sections",
+    "lem-sfb-space-higher-direct-image-quasi-coherent",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-sfb-space-quasicompact-affine-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073K, first paragraph reduction to clause (2); sites-cohomology Tag 0736 proof and Tag 07A7"
+   }
+  },
+  {
+   "text": "For arbitrary $Y,Y'$, choose affine etale charts $V\\to Y$ and affine etale charts $V'\\to Y'\\times_YV$. Their composites cover $Y'$. The resulting map $V\\prime\\to V$ is flat: the base-changed $g$ is flat on scheme charts; etale chart ring maps are flat, and composites of flat ring maps are flat. Apply the affine flatness criterion on scheme charts. The quasi-compact affine-test statement makes $X_V$ quasi-compact; quasi-separatedness is preserved since its relative diagonal is the base change of the diagonal of $f$, and quasi-compact maps are stable under base change. With $V$ affine, the source is also absolutely quasi-separated as in Step 2. Higher-image etale restriction and canonical tensor-pullback composition identify the restriction of $\\beta^q$ with the map for $X_V\\to V$ and $V'\\to V$. For the arrows, this follows from mate pasting applied to the two localization squares, whose comparisons are the canonical restrictions; the site model identifies those squares with actual localized etale ringed sites. Each restricted map is invertible: its source and target are quasi-coherent on the affine scheme $V'$ (higher images are quasi-coherent and tensor pullback preserves quasi-coherence), its map of global sections is the isomorphism $\\gamma^q$ by Step 7, and by the affine-chart calculus a quasi-coherent module on $V'$ is the module associated to its global sections, functorially, so a map of such modules that is an isomorphism on global sections is an isomorphism. A sheaf morphism invertible on a covering is invertible: the local inverses agree on overlaps by uniqueness of inverses and glue by the sheaf axiom. This proves clause (1).",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-sfb-space-qcqs-source-products",
+    "lem-sfb-space-higher-image-etale-restriction",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-sfb-space-higher-direct-image-quasi-coherent",
+    "lem-sfb-space-module-pullback-quasicoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073K, reduction etale locally to affine bases; spaces-properties Tag 03LX; sites-cohomology Tag 0E47"
+   }
+  },
+  {
+   "text": "For a second flat map $k:Y''\\to Y'$, apply horizontal mate pasting to the derived pullback squares for $g$ and $k$. The pullback comparisons are the canonical derived composition comparisons, with their adjunction-compatible counits. The pasted inverse-image square is that for $gk$, since the fibre-product identifications preserve both projections. Hence the equality of mates is\n$$\\beta_{gk,M[0]}=\\beta_{k,L(g')^*M[0]}\\circ Lk^*(\\beta_{g,M[0]})$$\nunder those comparisons. The base changes of $k$ are flat, so every horizontal pullback here is exact, by Step 1. Taking $H^q$ and the exact-functor cohomology identifications gives the required equality for $\\beta^q$, with $(g')^*M$ as the coefficient of the second square. Naturality is already part of the mate construction and persists under cohomology. The affine formula and its value at $a\\otimes1$ are Steps 6 and 7. All uses of finiteness in the argument were qcqs continuity or finite free stages; no hypothesis on $f$ other than qcqs has entered.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal); Tag 07A7 derived exchange as adjoint of counit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-flat-etale-ringed-comparison",
+  "def-sfb-flat-etale-ringed-map",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-trf-topos-derived-base-change-map",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-qcqs-source-products",
+  "lem-sfb-space-change-base-to-integers",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-sfb-space-affine-cohomology",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "def-trf-space-etale-module-functors",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-constant-sheaf",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-sfb-module-resolution-derived-presheaf-comparison",
+  "lem-kun-lazard-flat-module",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sfb-space-cohomology-filtered-colimit",
+  "lem-sfb-ringed-site-global-module-abelian-cohomology",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "def-weil-pbc-sheafification",
+  "lem-sfb-ringed-site-cohomology-fmap-calculus",
+  "lem-sfb-flat-ringed-exchange-resolution-unit",
+  "lem-sfb-space-affine-base-higher-image-sections",
+  "lem-sfb-space-higher-direct-image-quasi-coherent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-sfb-space-higher-image-etale-restriction",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 073K (lemma-flat-base-change-cohomology), entire proof; canonical-map normalization from sites-cohomology.tex Tags 0736 and 07A7; composition from Tag 0E47."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change for higher direct images of quasi coherent modules on quasi compact quasi separated algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T21:17:23Z\", \"tool\": \"leanfinder\", \"query\": \"Flat base change for higher direct images of quasi coherent modules on quasi compact quasi separated algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.comp\", \"AlgebraicGeometry.Flat\"], \"digest\": \"89bbca56cabc7f45\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern scheme flatness and limit sections, not higher quasi-coherent direct images on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-23T21:18:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"higherDirectImage\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern scheme flatness and limit sections, not higher quasi-coherent direct images on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|flat.*base.*change.*cohom|cohom.*flat.*base.*change",
+   "results": "{\"t\": \"2026-10-23T21:20:31Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|flat.*base.*change.*cohom|cohom.*flat.*base.*change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern scheme flatness and limit sections, not higher quasi-coherent direct images on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher quasi coherent cohomology commutes with flat base change for algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T21:20:31Z\", \"tool\": \"leansearch\", \"query\": \"Higher quasi coherent cohomology commutes with flat base change for algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.isStableUnderBaseChange\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"Module.Flat.isBaseChange\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\"], \"digest\": \"f2b99accc098eb62\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern scheme flatness and limit sections, not higher quasi-coherent direct images on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a quasi coherent sheaf on an algebraic space over an affine ring commutes with flat scalar extension",
+   "results": "{\"t\": \"2026-10-23T21:22:21Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of a quasi coherent sheaf on an algebraic space over an affine ring commutes with flat scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"], \"digest\": \"94e1d77daddf93ec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern scheme flatness and limit sections, not higher quasi-coherent direct images on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|flat.*base.*change.*cohom|cohom.*flat.*base.*change",
+   "results": "{\"t\": \"2026-10-23T22:06:09Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|flat.*base.*change.*cohom|cohom.*flat.*base.*change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme or ring flatness, not quasi-coherent higher direct images on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher quasi coherent cohomology commutes with flat base change for algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T22:06:09Z\", \"tool\": \"leansearch\", \"query\": \"Higher quasi coherent cohomology commutes with flat base change for algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.isStableUnderBaseChange\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"Module.Flat.isBaseChange\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\"], \"digest\": \"f2b99accc098eb62\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme or ring flatness, not quasi-coherent higher direct images on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-23T22:06:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"higherDirectImage\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme or ring flatness, not quasi-coherent higher direct images on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change for higher direct images of quasi coherent modules on quasi compact quasi separated algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T22:06:10Z\", \"tool\": \"leanfinder\", \"query\": \"Flat base change for higher direct images of quasi coherent modules on quasi compact quasi separated algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.comp\", \"AlgebraicGeometry.Flat\"], \"digest\": \"89bbca56cabc7f45\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme or ring flatness, not quasi-coherent higher direct images on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a quasi coherent sheaf on an algebraic space over an affine ring commutes with flat scalar extension",
+   "results": "{\"t\": \"2026-10-23T22:06:11Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of a quasi coherent sheaf on an algebraic space over an affine ring commutes with flat scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"], \"digest\": \"94e1d77daddf93ec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme or ring flatness, not quasi-coherent higher direct images on algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-strict-local-cohomology-comparison",
+  "date": "2026-10-24",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Coherent higher-image fibre-dimension bound for proper algebraic spaces. Supporting input in the proof of Tag 0A4T: the completed geometric stalk is computed by infinitesimal-fibre cohomology (Tag 08B1). Supporting input: Tag 08B1 first reduction, canonical strict-local base change before completion. General cohomological input: Tag 073K higher flat base change, including the canonical map and its successive-flat-base-change compatibility.",
+   "via": [
+    "lem-sfb-space-strict-local-cohomology-comparison",
+    "lem-sfb-space-formal-functions-geometric-stalk",
+    "lem-sfb-noetherian-space-fibre-cohomology-bound",
+    "lem-sfb-space-picard-stack-smooth",
+    "lem-sfb-curve-smooth-polarization-cover",
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-flat-higher-image-base-change",
+  "worker": "stage1",
+  "summary": "Followed the Lazard/filtered-colimit proof of Stacks 073K using existing nodes only. Wrote the chart tensor computation, finite-free transition naturality, unit-normalized canonical-map identification, etale localization and horizontal pasting. Statement unchanged; no new nodes.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), supporting cohomology chain recorded in blueprint.from.place. The ancestor command reports None, retained explicitly; the immediate source is Stacks 073K.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "General Enlarged etale ringed-site models of algebraic spaces used as a tool in steps 1, 6, 7, 8; the unit does not supply a separate replacement for this foundational input."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "General Exactness of inverse image on abelian sheaves and modules used as a tool in steps 1; the unit does not supply a separate replacement for this foundational input."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "General Sections of the pullback of a quasi-coherent module over an affine open used as a tool in steps 3, 7; the unit does not supply a separate replacement for this foundational input."
+   },
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "General Chart-adjunction pullbacks realize normalized ringed tensors used as a tool in steps 3, 8; the unit does not supply a separate replacement for this foundational input."
+   },
+   {
+    "node": "lem-kun-lazard-flat-module",
+    "why": "General Lazard presentation of flat modules used as a tool in steps 5; the unit does not supply a separate replacement for this foundational input."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "General Tensor colimits with independent site and coefficient universes used as a tool in steps 3, 5; the unit does not supply a separate replacement for this foundational input."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "General Colimits of sheaves of modules and the forgetful functor to abelian sheaves used as a tool in steps 5; the unit does not supply a separate replacement for this foundational input."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "General Zariski and small etale quasi-coherent modules agree functorially used as a tool in steps 3, 7; the unit does not supply a separate replacement for this foundational input."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "General Fibre products of algebraic spaces and pullback of etale coverings used as a tool in steps 8, 9; the unit does not supply a separate replacement for this foundational input."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "General Chartwise etale permanence for algebraic spaces used as a tool in steps 8; the unit does not supply a separate replacement for this foundational input."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "General Monoidal and adjunction normalization of derived ringed-topos comparisons used as a tool in steps 8, 9; the unit does not supply a separate replacement for this foundational input."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "General: the termwise functor of an exact functor is its total derived functor, used in step 1 to identify the flat derived pullbacks with termwise pullbacks; no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-kun-lazard-flat-module",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-49133fec6",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-49133fec6 (reviewer sub-agent of L); spot-checked: I read the whole proof against Stacks 073K (spaces-cohomology.tex l.1705-1801) and the statements of all 51 cited nodes. The statement and stmt_deps are byte-identical to live, which has the item unsplit with no repair note. There are no new nodes, no duplicate (sfb-space-flat-direct-image-base-change is degree 0 and separated only), no cycle and no SGA citation. The steps follow 073K: affine bases, g' affine, chart tensor, Lazard, continuity, then the mate normalization and 0E47 pasting. Hypotheses checked: X qcqs over an affine base via qcqs-source-products and change-base-to-integers; f' qcqs; V'->V flat; no affine overlaps assumed. Edge cases checked: B=0, X empty, rank 0, nonseparated X, nonflat f. Fault E1: steps 6-7 used ringed-site-cohomology-fmap-calculus, which requires sites with terminal objects, on X_et of an algebraic space, which has none in general. FIX: apply it on the enlarged sites C_X, C_X' (terminal objects X, X', same ringed topoi) via lem-trf-space-enlarged-etale-ringed-site-model, with the module/abelian comparison. Missing citations added (C1): step 1 derived pullback = termwise (lem-weil-pbc-exact-functor-derived-functor, declared as a tool use); step 3 colimit preservation (independent-sheaf-tensor-colimits, left-adjoint, sheafification) and the Zariski/etale pullback comparison; step 7 qcqs of f' (quasicompact-affine-tests); step 8 the qcoh-on-affine 'iso on global sections => iso' argument (chart calculus, higher-image qcoh, pullback qcoh). Batch-5 check: every listed sfb citation reaches sec-trace-formula only through def-trf-algebraic-space (a general definition). The cited trf nodes are general foundations: site model, derived base-change mate definition, inverse-image exactness, chart-tensor realization, Zariski/etale qcoh, chartwise etale permanence. No closure reaches an nt-assume, trace-formula or Poincare-duality theorem, so no RETURN on that check. The corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFlatHigherImageBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isIso_moduleDerivedExchange_of_flat",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.spaceFlatTensorPullback_exact",
+   "AlgebraicGeometry.AlgebraicSpace.spaceFlatPullback",
+   "AlgebraicGeometry.AlgebraicSpace.spaceFlatComp",
+   "AlgebraicGeometry.AlgebraicSpace.spaceFlatDerivedPullback",
+   "AlgebraicGeometry.AlgebraicSpace.spaceFlatDerivedPullbackFactors",
+   "AlgebraicGeometry.AlgebraicSpace.spaceFlatDerivedPullbackIso",
+   "AlgebraicGeometry.AlgebraicSpace.spaceFlatPullbackHomology",
+   "AlgebraicGeometry.AlgebraicSpace.spaceFlatPullbackSingle",
+   "AlgebraicGeometry.AlgebraicSpace.spaceHigherFlatBaseChange",
+   "AlgebraicGeometry.AlgebraicSpace.isIso_moduleDerivedExchange_of_flat",
+   "AlgebraicGeometry.AlgebraicSpace.isIso_spaceHigherFlatBaseChange",
+   "AlgebraicGeometry.AlgebraicSpace.spaceHigherFlatBaseChange_naturality",
+   "AlgebraicGeometry.AlgebraicSpace.spaceHigherFlatBaseChange_comp",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineScalarSectionsIso_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineScalarSectionsIso",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineScalarCohomologyIso",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineHigherImageSectionsIso",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSmallTensorPullback_quasiCoherent",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineUnitSections",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineCohomologyRestrictionIso",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineCohomologicalPullback",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineFlatCohomologyBaseChange",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineTensorSectionsMap",
+   "AlgebraicGeometry.AlgebraicSpace.spaceHigherFlatBaseChange_affine_sections",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineFlatCohomologyBaseChange_isIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFlatHigherImageBaseChange.lean",
+  "statement": "theorem isIso_moduleDerivedExchange_of_flat (f : X ⟶ Y) (g : Y' ⟶ Y) (h : X' ⟶ X) (f' : X' ⟶ Y') (sq : IsPullback h f' f g) (hg : MapIsFlat g) (hqc : IsQuasiCompactPresheafMap f.hom.hom) (hqs : IsQuasiCompactPresheafMap (diagonalPresheafMap f.hom.hom)) (M : X.SmallModules) (hM : (X.smallModuleEquivalence.inverse.obj M).IsQuasicoherent) : IsIso (moduleDerivedExchange f f' g h sq.w ((DerivedCategory.singleFunctor X.SmallModules 0).obj M))",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of 91e12e59eff0: main IsIso is the canonical derived exchange on a quasi-coherent module in degree zero; the per-degree result is its homology corollary. The explicit affine-sections equation and all declaration signatures remain unchanged. Both qcqs definition owners are cited. The five affine normalization definitions are imported and reused from their live SpaceAffineBaseHigherImageSections module via def-sfb-space-affine-higher-image-sections-data with existing:true. No extraction, copy, rename or dependency-module modification is delivered. The affine comparison theorem remains only in proof_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3acf932be",
+  "group": "N6",
+  "result": "pass",
+  "note": "Re-delivery after the 91e1 LAND refusal (extracted module redeclared names still declared live). The def node def-sfb-space-affine-higher-image-sections-data is now existing:true at the live SpaceAffineBaseHigherImageSections; its statement matches the five live defs (l.58-101) and lean.statement is verbatim; 9 landed def stmt_deps; no new module and no duplicate names. Item .lean is identical to 91e1 except imports; item node differs from live only in stmt_deps (base entries kept) and lean; statement, proof and proof_deps byte-identical. Re-read against 073K: derived IsIso main declaration plus per-degree corollary, naturality, composition and pinned affine equation; only qcqs on f; flat g; QCoh M; free derived universe. The 7fcb theorem stmt_dep is gone (proof_deps only). No hollow defs, sorry only. No compile run (no file changed)."
+ }
+}

@@ -28,71 +28,104 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-point-finite-free-sections-tensor] the coefficient sections and finite bases give the canonical balanced chain isomorphism. By [lem-weil-point-derived-sections-tensor-descent] its localization is the natural isomorphism $\\theta_{L/E,K}$ computed by K-flat derived tensor. The input is derived complete by [def-weil-derived-complete-integral-detailed], so [lem-weil-finite-free-completed-scalar-comparison] makes $\\psi_{L/E,K}=\\Gamma(s,\\chi_{L/E,K})\\theta_{L/E,K}$ a natural isomorphism. Set $\\varphi=\\psi^{-1}$, exactly as specified.",
+   "text": "The canonical ordinary sections comparison is the map already constructed in pointSectionsTensor. Its unit equation follows by evaluating on 1 tensor x: the module multiplication and sheaf multiplication both give x. Its tower equation follows on 1 tensor (1 tensor x): both balanced associators multiply the two constant coefficient factors. Double scalar-extension adjunction detects equality of module maps. Apply the exact-derived unit and tower descent lemmas of the coefficient-complex rationalization node, and conjugate by the counit-normalized pointOrdinaryDerivedComparison. Naturality of these comparison isomorphisms gives the corresponding equations for pointDerivedSectionsTensor, pointDerivedTensorUnit and pointDerivedTensorAssoc.",
    "uses": [
-    "lem-weil-point-finite-free-sections-tensor",
     "lem-weil-point-derived-sections-tensor-descent",
-    "def-weil-derived-complete-integral-detailed",
-    "lem-weil-finite-free-completed-scalar-comparison"
+    "lem-weil-coefficient-complex-rationalization"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
-    "place": "Final paragraph, stagewise passage; assembly of the extracted ordinary sections, derived descent, tower and rationalization lemmas"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Coefficient extension at the geometric point; normalized sections maps and their unit/tower compatibilities"
    }
   },
   {
-   "text": "For $E\\subset L\\subset M$, [lem-weil-point-derived-tensor-tower-coherence] supplies the ordinary derived associator $\\alpha$ and its sections equation. By [lem-weil-integral-scalar-extension-constructible] the first integral extension is again constructible; by [def-weil-derived-complete-integral-detailed] it is complete. Thus [lem-weil-finite-free-completed-scalar-comparison] applies also to that input. Write $A=K\\otimes^L_{R_E}R_L$, $C=\\chi_{L/E,K}$, $D=\\chi_{M/L,T_{L/E}K}$, $H=\\chi_{M/E,K}$ and $F=-\\otimes^L_{R_L}R_M$. The stipulated integral associator is $a^{\\mathrm{int}}=H\\alpha F(C^{-1})D^{-1}$.",
+   "text": "Let psi be pointDerivedSectionsTensor followed by sections of completedScalarComparison. This is a natural transformation on the ambient derived category. On constructible complete objects the comparison is invertible by the finite-free completed scalar comparison. Therefore the specified phi=psi inverse is natural, by multiplying the naturality equation by the two inverse components.",
    "uses": [
-    "lem-weil-point-derived-tensor-tower-coherence",
-    "lem-weil-integral-scalar-extension-constructible",
     "def-weil-derived-complete-integral-detailed",
-    "lem-weil-finite-free-completed-scalar-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
-    "place": "Final paragraph, stagewise passage; assembly of the extracted ordinary sections, derived descent, tower and rationalization lemmas"
-   }
-  },
-  {
-   "text": "Naturality from [lem-weil-point-derived-sections-tensor-descent] gives $\\theta_{M/L,T_{L/E}K}(\\Gamma(C)\\otimes1)=\\Gamma(F(C))\\theta_{M/L,A}$. Substitute this into the definition of $\\psi$:\n$$\\begin{aligned}\n\\Gamma(a^{\\mathrm{int}})\\psi_{M/L,T_{L/E}K}(\\psi_{L/E,K}\\otimes1)\n&=\\Gamma(H)\\Gamma(\\alpha)\\Gamma(F(C^{-1}))\\Gamma(D^{-1})\\Gamma(D)\\theta_{M/L,T_{L/E}K}(\\Gamma(C)\\otimes1)(\\theta_{L/E,K}\\otimes1)\\\\\n&=\\Gamma(H)\\Gamma(\\alpha)\\Gamma(F(C^{-1}))\\Gamma(F(C))\\theta_{M/L,A}(\\theta_{L/E,K}\\otimes1)\\\\\n&=\\Gamma(H)\\Gamma(\\alpha)\\theta_{M/L,A}(\\theta_{L/E,K}\\otimes1)\n=\\psi_{M/E,K}a^{\\mathrm{mod}}.\n\\end{aligned}$$\nThe last equality is [lem-weil-point-derived-tensor-tower-coherence]. Invert $\\psi$ to get the required composition equation. Its unit equation and the completeness-unit assertion of [lem-weil-finite-free-completed-scalar-comparison] give the identity assertion. For four fields its iterated equation and cancellation of intermediate $\\chi^{-1}\\chi$ give iterated coherence.",
-   "uses": [
-    "lem-weil-point-derived-sections-tensor-descent",
-    "lem-weil-point-derived-tensor-tower-coherence",
     "lem-weil-finite-free-completed-scalar-comparison"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
-    "place": "Final paragraph, stagewise passage; assembly of the extracted ordinary sections, derived descent, tower and rationalization lemmas"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Coefficient extension at the geometric point; normalized sections maps and their unit/tower compatibilities"
    }
   },
   {
-   "text": "Tensor $\\varphi$ with $L$ and apply $\\beta_{L/E,\\Gamma(s,K)}$ of [lem-weil-coefficient-complex-rationalization]. Exactness there makes these maps well defined on derived categories. Its naturality, unit and mixed integral/field tower equation carry the integral equations just proved to the stated rational equations.",
+   "text": "Unfold the specified integral unit and associator. The unit equation is the ordinary derived sections unit equation preceded by sections of chi inverse. For a tower, constructibility of the first extension allows its completion comparison to be inverted. Cancel the final chi with its inverse, apply the ordinary derived sections tower equation, and use naturality of pointDerivedSectionsTensor inverse along chi inverse. This gives exactly the integral associator equation without a choice of alternative associator.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-constructible",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Coefficient extension at the geometric point; normalized sections maps and their unit/tower compatibilities"
+   }
+  },
+  {
+   "text": "The module unit and associator selected in the parent equal the coefficientComplexIntegralUnit and coefficientComplexIntegralAssoc: their displayed pure-tensor formulas and uniqueness establish the equalities. The existing coefficient-complex rationalization unit and tower calculations therefore apply to the actual pointDerivedTensorRationalization. Map the three integral equations through rationalization. Its naturality gives the rational naturality equation; its unit and mixed tower equations give the remaining two clauses, with one use of naturality of beta to move phi across the second scalar extension.",
    "uses": [
     "lem-weil-coefficient-complex-rationalization"
    ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Coefficient extension at the geometric point; normalized sections maps and their unit/tower compatibilities"
+   }
+  },
+  {
+   "text": "The auxiliary declarations for the canonical ordinary comparison are proved directly. Finite constant sections over the final point are their coefficient ring; the profinite tower identifies completed sections with the valuation ring. Evaluation of sheafification at the final point is unchanged, and transport across the two coefficient ring equivalences gives the balanced tensor comparison, its naturality and uniqueness. This avoids constructing a common global basis for this auxiliary comparison.",
+   "uses": [
+    "lem-sfb-integers-profinite-tower",
+    "lem-trf-point-finite-reduction-section-algebra"
+   ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
-    "place": "Final paragraph, stagewise passage; assembly of the extracted ordinary sections, derived descent, tower and rationalization lemmas"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Coefficient extension in the point fiber; auxiliary canonical comparisons of the retained stagewise sections statement"
+   }
+  },
+  {
+   "text": "Exact point sections and exact coefficient module tensors provide exactness. The already proved ordinary exactness clauses of the completed-scalar-extension t-exactness node give exact ordinary sheaf extension, so its finite-biproduct proof need not be repeated here. Its exact-derived comparison is normalized by the original universal counit. The ordinary unit is obtained from the complex multiplication at degree zero. The ordinary sheaf associator is the uniqueness comparison between composed left adjoints; the adjunction units insert tensor factors 1, and scalar linearity gives the full balanced formula and uniqueness. Module unit, module associator and rationalization are the uniquely normalized coefficient-complex constructions. Constructibility is transferred by the existing legacy equivalence; an auxiliary characteristic distinct from l transfers derived completeness to the unrestricted interface, so the completed comparison is invertible.",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-coefficient-complex-rationalization",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-pbc-finite-free-strict-tower-transport",
+    "lem-weil-point-derived-sections-tensor-descent",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-weil-integral-scalar-extension-constructible",
+    "lem-pod-completed-scalar-extension-texact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Coefficient extension in the point fiber; auxiliary canonical comparisons of the retained stagewise sections statement"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-point-finite-free-sections-tensor",
   "lem-weil-point-derived-sections-tensor-descent",
+  "lem-weil-coefficient-complex-rationalization",
   "def-weil-derived-complete-integral-detailed",
   "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-point-derived-tensor-tower-coherence",
   "lem-weil-integral-scalar-extension-constructible",
-  "lem-weil-coefficient-complex-rationalization"
+  "lem-sfb-integers-profinite-tower",
+  "lem-trf-point-finite-reduction-section-algebra",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-pbc-finite-free-strict-tower-transport",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-pod-completed-scalar-extension-texact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
-  "place": "Final paragraph (stagewise functor); finite-free sheaf and completion inputs from Bhatt--Scholze 6.8.2(1), 3.4.10, 3.4.12; explicit sections, associator, and localization calculations"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "R2: direct pure-tensor unit/tower equations, exact-derived descent, completion-comparison cancellation, and rationalization assemble all six clauses; previous auxiliary constructions are retained."
  },
  "mathlib_searches": [
   {
@@ -153,7 +186,18 @@
   "item": "def-weil-finite-coefficient-point",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-sf-compatibility",
  "split_report": {
@@ -275,5 +319,15 @@
   "from_unit": "sk-def-sf-admissible",
   "date": "2026-10-17",
   "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T030533-L-2858814",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

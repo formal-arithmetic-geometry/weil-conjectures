@@ -1,0 +1,248 @@
+{
+ "id": "lem-zl-component-derived-pullback-square",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1) before Proposition 4.3, pp. 8-9; naturality implicit in Corollary 4.4(2), expanded by the worker"
+ },
+ "proof": [
+  {
+   "text": "Take the ordinary component system supplied by lem-zl-component-ordinary-pullback-square.",
+   "uses": [
+    "lem-zl-component-ordinary-pullback-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Equip its three families of exact module inverse images with the normalized derived tensor structures and tensor/unit comparison of lem-zl-component-derived-tensor-lifts.",
+   "uses": [
+    "lem-zl-component-derived-tensor-lifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use lem-zl-component-derived-square-coherence for the localized identity and composition equations.",
+   "uses": [
+    "lem-zl-component-derived-square-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble these fields into System. For each of its three duality fields, install the corresponding TensorLift.monoidal and apply the proved source-library theorem CategoryTheory.IsDualizable.map, which sends both triangle identities along a strong monoidal functor.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-component-ordinary-pullback-square",
+  "lem-zl-component-derived-tensor-lifts",
+  "lem-zl-component-derived-square-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1), pp. 8-9, expanded into ordinary coherence, tensor descent and exact localization; final duality uses the proved IsDualizable.map API."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-condensed-henselian-lisse-rigidity",
+  "date": "2026-10-22",
+  "group": "NC"
+ },
+ "title": "The affine component square on ordinary derived condensed module categories",
+ "statement": "Let $f:Y\\to X$ be any morphism of affine schemes [def-pc-scheme], let $P=\\pi_0(X)$, $Q=\\pi_0(Y)$ be the quotient component spaces [lem-pe-spectral-components-profinite], and let $h=\\pi_0(f):Q\\to P$. Use compatible small-site universes [def-weil-size-convention], the small pro-etale sites [def-weil-pbc-proetale-site], and the component geometric morphisms $\\pi_X,\\pi_Y$ induced by the relative component lifts [lem-zl-component-relative-profinite-site]. On profinite spaces over $P$ or $Q$ use finite jointly surjective coverings; the geometric morphism associated with $h$ is induced on test objects by $E\\mapsto Q\\times_P E$. Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], and use its pulled-back ring sheaves $\\Lambda_X,\\Lambda_Y$ [sk-def-sfb-pulled-back-coefficients] and its restrictions $\\Lambda_P,\\Lambda_Q$ on those profinite slice sites. Let $D(-,\\Lambda)$ be the ordinary unbounded derived categories of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], with ordinary derived tensor. The natural isomorphism of relative test-object functors $c_{f,E}$ [lem-zl-component-lift-base-change] induces, for the actual inverse-image functors, a natural isomorphism of exact symmetric monoidal functors\n$$\\theta_f:f^*\\pi_X^*\\xrightarrow{\\sim}\\pi_Y^*h^*:D(P,\\Lambda)\\longrightarrow D(Y,\\Lambda).$$\nAt the coefficient unit, $\\theta_f$ is the canonical identification of the two pullbacks of $\\Lambda_P$ with $\\Lambda_Y$; it respects the tensor comparisons. It is induced by the corresponding isomorphism of exact module-sheaf inverse images applied termwise to complexes and localized at quasi-isomorphisms. It is compatible with identity and composition in $f$, using the canonical inverse-image composition isomorphisms. In particular it restricts to the full subcategories of dualizable objects, where dualizable means admitting evaluation and coevaluation with both triangle identities. No henselian or w-contractibility assumption on $X,Y$ and no discreteness or boundedness assumption on coefficients or complexes is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-pe-spectral-components-profinite",
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "lem-zl-component-relative-profinite-site",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-zl-component-lift-base-change",
+  "def-zl-condensed-lisse-evaluation-model",
+  "def-zl-profinite-test-projection"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The square of component pro etale geometric morphisms for any affine scheme map induces a coefficient compatible symmetric monoidal isomorphism on unbounded derived module inverse images",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over_assoc; AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord; AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map; AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv; AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop; AlgebraicGeometry.AffineSpace.SpecIso_inv_over_assoc; AlgebraicGeometry.arrowIsoΓSpecOfIsAffine",
+   "date": "2026-10-22",
+   "verdict": "no match: generic pullbackComp and exact-functor localization results do not identify this geometric component square or its actual condensed coefficient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of condensed coefficient module sheaves commutes with the map to the profinite space of connected components for arbitrary affine schemes",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackComp; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: generic pullbackComp and exact-functor localization results do not identify this geometric component square or its actual condensed coefficient comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of component site inverse image on ordinary unbounded derived categories with condensed ring coefficients",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality; CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: generic pullbackComp and exact-functor localization results do not identify this geometric component square or its actual condensed coefficient comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CondensedMod, DerivedCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic pullbackComp and exact-functor localization results do not identify this geometric component square or its actual condensed coefficient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(component|profinite).*(mapDerivedCategory|derived.*pullback)|(mapDerivedCategory|derived.*pullback).*(component|profinite)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic pullbackComp and exact-functor localization results do not identify this geometric component square or its actual condensed coefficient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of affine schemes the connected component geometric morphisms form a commutative square of exact derived module inverse images with condensed coefficients",
+   "results": "8 hits: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram, AlgebraicGeometry.exists_map_preimage_eq_map_preimage, AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply general pullback composition or exact-functor localization, not the specified component-site square and coefficient-normalized monoidal comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(component|profinite).*(derived|pullback)|(derived|pullback).*(component|profinite)",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/Condensed/Light/Sequence.lean, Mathlib/Condensed/Light/Sequence.lean, Mathlib/Condensed/Light/Sequence.lean, Mathlib/Condensed/Light/Sequence.lean, Mathlib/Condensed/Light/Sequence.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/Topology/Category/CompHausLike/Limits.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply general pullback composition or exact-functor localization, not the specified component-site square and coefficient-normalized monoidal comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of derived pullback from profinite component spaces for affine scheme morphisms with arbitrary condensed ring coefficients",
+   "results": "8 hits: SheafOfModules.pullback, AlgebraicGeometry.Scheme.Pullback.affine_hasPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback, CondensedMod.hom_naturality_apply, AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply general pullback composition or exact-functor localization, not the specified component-site square and coefficient-normalized monoidal comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply general pullback composition or exact-functor localization, not the specified component-site square and coefficient-normalized monoidal comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between component site functors induces a monoidal natural isomorphism of exact module inverse images and their unbounded derived functors",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Tor'_map_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply general pullback composition or exact-functor localization, not the specified component-site square and coefficient-normalized monoidal comparison."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Corollary 4.4(1)-(2). Re-split: old Step 5, coefficient-compatible isomorphism of actual inverse images, with the ordinary derived monoidal comparison used in old Steps 4 and 6.",
+   "via": [
+    "lem-zl-condensed-henselian-lisse-rigidity",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-component-derived-pullback-square",
+  "worker": "stage1",
+  "summary": "Expanded the restriction-induced square, its adjunction mate, absolute-test coefficient normalization, module transport, exact termwise localization, monoidal comparison and coherence. Reused existing generic nodes throughout; no new nodes and no statement change. Checked the HRS construction and Stacks mate, exactness and tensor/composition sources.",
+  "blueprint": "Realizes the component-naturality input in prop-zl-smooth-proper-relative-purity Step 3 (field-stage projection formula), via the recorded condensed henselian rigidity / dualizable-model / truncation chain. In the immediate parent lem-zl-condensed-henselian-lisse-rigidity it supplies Step 5, without using the parent as a proof dependency.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Constructs the geometric morphism of profinite slice sites from finite-limit and covering preservation; no smooth/proper or purity route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Generic restriction/composition identification of the two direct images of the square."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic unit-normalized mate of the restriction isomorphism, also used to verify coefficient and composition normalization."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-module-transport",
+    "why": "Generic operation-level module transport identifies the comparison as a map of actual module inverse images."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Generic exactness of inverse image with transported scalars applies to arbitrary condensed coefficient ring sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic termwise localization for exact additive functors on the unbounded derived categories."
+   },
+   {
+    "node": "lem-sfb-exact-derived-natural-iso",
+    "why": "Generic descent and uniqueness of a specified natural isomorphism of exact functors."
+   },
+   {
+    "node": "lem-sfb-exact-derived-composition",
+    "why": "Generic derived composition normalization needed to identify the termwise square with the actual composed functors."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ringed-topos tensor, unit, composition and specified 2-isomorphism coherence; no coefficient restriction."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Identifies total derived ringed pullback with termwise localization when the ordinary module inverse image is exact."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-54b6435a9",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-54b6435a9 (reviewer sub-agent of L); spot-checked: Read the item, its 8 steps, the full statements of all 14 cited nodes, HRS pp. 6-9 (Construction (4.1); Prop 4.3 and Cor 4.4 assume w-contractible/henselian X, not needed here) and the citer lem-zl-condensed-henselian-lisse-rigidity step 5 (closed immersion i, covered by the arbitrary-affine statement). No new nodes; statement and stmt_deps unchanged; proof_deps = union of uses; no cycle; no SGA. Step 2: the mate direction checked, delta: h_*pi_Y* ≅ pi_X*f_* via the conjugate lemma gives f^{-1}pi_X^{-1} → pi_Y^{-1}h^{-1}. Step 1: h's site functor E↦Q×_P E preserves finite limits and finite jointly surjective covers, as the left-exact-site lemma needs. Step 3: slice restriction is q_P^{-1}; product identification of P×S tests plus mate uniqueness gives the structural coefficient isos, so ring-map compatibility holds. Step 4: structural maps are isos, so module pullback = transported scalars and is exact; no flatness used. Steps 5-6: exactness hypotheses of the exact-derived nodes are met; the 2-iso clause of lem-sfb-ringed-derived-monoidal-comparisons applies to pi_X∘f and h∘pi_Y. Step 7: composition formula θ_{fg,K} = θ_{g,h_f^*K}∘g^*θ_{f,K} checked. Step 8 is elementary. Edge cases checked: identity, empty X/Y, zero ring, unbounded complexes. No duplicate: the component-pullback-compatibility, generic-component-coefficient/site-comparison and relative-component-lift-pullback-space nodes are w-contractible, equivalence-assuming, fibre-specific or underlying-space statements. Tool uses accepted (all generic site, adjunction, exact-functor or ringed-topos lemmas; the unit cites sk-thm-properbasechange). Batch-5: lem-trf-geometric-inverse-image-exact is a generic fact (inverse image of a geometric morphism is exact, also with transported module scalars). Its 132-node closure contains only def-trf-geometric-morphism, def-trf-abelian-inverse-image-presentation and itself from trf, and nothing from the Poincare-duality chapter, nt-* or sk-thm-trace-transport. It is outside the assumed statements and their proofs, so it is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ComponentDerivedPullbackSquare",
+  "declaration": "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.component_derived_pullback_square",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.component_derived_pullback_square"
+  ],
+  "file": "lean/Sheaf/Paper/ComponentDerivedPullbackSquare.lean",
+  "statement": "theorem component_derived_pullback_square (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] : Nonempty (System Λ)",
+  "branch": "newtargets-dag",
+  "by": "Q117",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The simultaneous System packages only witnesses of this statement. Component and slice inverse images are fixed to actual site functors, their adjunctions and tensor comparisons; absolute-test mate formulas fix the coefficient identifications. Square.theta is explicitly the localized termwise ordinary comparison with canonical composition maps. No arbitrary map, tensor, equivalence, coefficient ring, or boundedness hypothesis is substituted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-23e155db7",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Re-delivery of the 118950e3f49a H2 RETURN. The Lean module is byte-identical (sha256 e4c0968b). The only item change: stmt_deps swaps lem-weil-pbc-condensed-field-continuous-realization for the new definition node def-zl-profinite-test-projection. That node binds the plain def AlgebraicGeometry.ProEtale.profiniteTestProjection existing:true, statement verbatim from 'def'. Its statement matches the Lean composite (pullback.fst, homeomorphPrimeSpectrum.symm, fst; factor order Spec LC ×_Z X). Its stmt_deps are def-pc-scheme and def-sfb-profinite-test-objects; no other definition node owns the declaration. Independent re-read of the whole module against the node: Corner/Slice/Square/SliceIdentity/SliceComposition data are pinned by equations, HEq or mates. theta is the localized termwise comparison, direction f*π_X* ≅ π_Y*h*. Tensor, unit, identity, composition and dualizable clauses present; no extra hypotheses; empty/identity/zero-ring/unbounded cases admitted. Not recompiled (no file changed). Advisory: the existing def's docstring still names the theorem node as its blueprint."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-012c7",
+  "group": "D9",
+  "result": "fix",
+  "landing": "20261025T100935-L-3640985",
+  "kind": "interface",
+  "note": "independent cc review: delivered ComponentDerivedSquareData vs published ComponentDerivedPullbackSquare (moved block byte-identical); split statements OrdinarySystem/TensorSystem vs original System fields (all data pinned, ordinary eqns equivalent to derived ones); nodes vs Lean; importers compiled against delivery"
+ }
+}

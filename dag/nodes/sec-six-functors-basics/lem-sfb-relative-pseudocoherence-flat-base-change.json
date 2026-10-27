@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-relative-pseudocoherence-flat-base-change",
+ "kind": "statement",
+ "title": "Relative pseudo-coherence survives flat base change",
+ "statement": "Let $f:X\\to S$ and $g:S^{\\prime}\\to S$ be morphisms of schemes [def-pc-scheme], with $f$ locally of finite type [def-pc-morphism-conventions] and $g$ flat [def-weil-flat-morphism]. Set $X^{\\prime}=X\\times_S S^{\\prime}$, with projections $q:X^{\\prime}\\to X$ and $f^{\\prime}:X^{\\prime}\\to S^{\\prime}$ [def-pc-fibre-product]. For every integer $m$ and every $E\\in D(\\mathcal O_X)$ [def-pc-derived-category] which is $m$-pseudo-coherent relative to $S$ [def-sfb-relative-pseudo-coherent-complex], the derived pullback $Lq^*E$ [def-pc-derived-pullback] is $m$-pseudo-coherent relative to $S^{\\prime}$ with respect to $f^{\\prime}$. In particular, if $E$ is pseudo-coherent relative to $S$, then $Lq^*E$ is pseudo-coherent relative to $S^{\\prime}$. There is no quasi-coherence hypothesis on $E$ and no Noetherian hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09UR, lemma-base-change-relative-pseudo-coherent, flat-base-change specialization (flatness implies Tor independence)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Fix $m$. Choose the witnesses in [def-sfb-relative-pseudo-coherent-complex]: affine opens $V_a=\\operatorname{Spec}A_a$ covering $S$, affine opens $U_{ab}=\\operatorname{Spec}B_{ab}$ covering $f^{-1}(V_a)$, and closed embeddings $i_{ab}:U_{ab}\\hookrightarrow P_{ab}=\\mathbf A^{n_{ab}}_{V_a}$ such that $K_{ab}=R(i_{ab})_*(E|_{U_{ab}})$ is $m$-pseudo-coherent. By [lem-weil-pbc-affine-opens-basis], take the covering of each open $g^{-1}(V_a)$ by all its affine opens $W_{ac}=\\operatorname{Spec}A^{\\prime}_{ac}$. Put $U^{\\prime}_{abc}=U_{ab}\\times_{V_a}W_{ac}$. By [lem-weil-pbc-open-immersion-base-change], these are open subschemes of $X^{\\prime}$; for fixed $a,c$ they cover $(f^{\\prime})^{-1}(W_{ac})$, since the $U_{ab}$ cover $f^{-1}(V_a)$. They are affine by [lem-weil-pbc-fibre-product-affine-spectra], with ring $B_{ab}\\otimes_{A_a}A^{\\prime}_{ac}$. All covers may be infinite.",
+   "uses": [
+    "def-sfb-relative-pseudo-coherent-complex",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UR, lemma-base-change-relative-pseudo-coherent, first two sentences of proof; Tag 09UI, definition-relative-pseudo-coherence, clause (1)."
+   }
+  },
+  {
+   "text": "Base change gives $P^{\\prime}_{abc}=P_{ab}\\times_{V_a}W_{ac}\\cong\\mathbf A^{n_{ab}}_{W_{ac}}$: this is the associativity of the fibre-product definition of relative affine space [def-nagata-relative-affine-space, def-pc-fibre-product]. Write $h_{abc}:P^{\\prime}_{abc}\\to P_{ab}$ and $q_{abc}:U^{\\prime}_{abc}\\to U_{ab}$ for the projections. The induced $i^{\\prime}_{abc}:U^{\\prime}_{abc}\\to P^{\\prime}_{abc}$ is the base change of $i_{ab}$, hence is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. The map $W_{ac}\\to V_a$ is flat: its local ring maps are those of $g$ at the same points [def-weil-flat-morphism]. Thus $h_{abc}$ is flat by [lem-weil-pbc-flat-morphism-base-change]. Finally, $f^{\\prime}$ is locally of finite type: the closed embedding $i_{ab}$ expresses $B_{ab}$ as a quotient of $A_a[T_1,\\ldots,T_{n_{ab}}]$ [def-weil-closed-immersion], and the tensors in step 1 are generated over $A^{\\prime}_{ac}$ by the images of those generators. For any affine open $H=\\operatorname{Spec}C\\subset S^{\\prime}$, cover $H$ by principal opens $D(t)\\subset H\\cap g^{-1}(V_a)$, using [lem-weil-pbc-spec-localization-away-basic-open]. They are affine with ring $C_t$ [lem-weil-pbc-affine-ideals-closed-subscheme], hence occur among the $W_{ac}$. Above each, the rings $B_{ab}\\otimes_{A_a}C_t$ are generated over $C$ by $1/t$ and the finitely many polynomial generator images. These affine source opens cover $(f^{\\prime})^{-1}(H)$, proving the condition in [def-weil-finite-type-morphism].",
+   "uses": [
+    "def-nagata-relative-affine-space",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UR, base-changed polynomial embedding; morphisms.tex Tags 01QR (closed immersion base change) and 01U9 (flat base change)."
+   }
+  },
+  {
+   "text": "Let $E^{\\prime}=Lq^*E$ and $F_{abc}=E|_{U_{ab}}$. If $j:U_{ab}\\to X$ and $j^{\\prime}:U^{\\prime}_{abc}\\to X^{\\prime}$ are the open inclusions, then $q\\circ j^{\\prime}=j\\circ q_{abc}$. Applying [lem-pc-ringed-spaces-derived-pullback-composition] to these two factorizations gives $(E^{\\prime})|_{U^{\\prime}_{abc}}\\cong Lq_{abc}^*F_{abc}$. By [lem-sc-flat-pullback-tor-independent] applied to the flat $h_{abc}$ of step 2 and to $i_{ab}$, higher Tor of their source stalk rings over the ambient stalk vanishes. [lem-weil-pbc-tor-symmetry] exchanges the two factors, giving exactly the order in the stalkwise Tor-independence hypothesis of [lem-sfb-tor-independent-closed-pushforward-comparison]. Apply that node to this Cartesian square and $F_{abc}$; $i_{ab}$ is a closed immersion by construction. The resulting derived-category isomorphism is\n$$R(i^{\\prime}_{abc})_*((E^{\\prime})|_{U^{\\prime}_{abc}})\\cong Lh_{abc}^*K_{ab}.$$\nThe exchange statement allows arbitrary complexes, so no quasi-coherence or boundedness has been imposed on $E$.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-sc-flat-pullback-tor-independent",
+    "lem-weil-pbc-tor-symmetry",
+    "lem-sfb-tor-independent-closed-pushforward-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UR, displayed base-change isomorphism and its stalk calculation; perfect.tex Tag 0E23, lemma-compare-base-change-closed-immersion."
+   }
+  },
+  {
+   "text": "By [lem-sfb-derived-pullback-m-pseudocoherent], the right side in step 3 is $m$-pseudo-coherent, because $K_{ab}$ is. The left side is therefore $m$-pseudo-coherent as well: in [def-sfb-m-pseudo-coherent-complex], compose each local strictly perfect approximation with the displayed isomorphism; its maps on cohomology remain isomorphisms above $m$ and surjections in degree $m$. The affine covers $W_{ac}$ and $U^{\\prime}_{abc}$ and embeddings $i^{\\prime}_{abc}$ now satisfy exactly [def-sfb-relative-pseudo-coherent-complex] for $f^{\\prime}$ and $E^{\\prime}$. This proves the assertion for the fixed integer $m$.",
+   "uses": [
+    "lem-sfb-derived-pullback-m-pseudocoherent",
+    "def-sfb-m-pseudo-coherent-complex",
+    "def-sfb-relative-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UR, final sentence invoking Cohomology Tag 09U7; Tag 09UI, clause (1)."
+   }
+  },
+  {
+   "text": "If $E$ is pseudo-coherent relative to $S$, then [def-sfb-relative-pseudo-coherent-complex] says that it is relatively $m$-pseudo-coherent for every integer $m$. Apply steps 1--4 separately to each $m$. The same definition gives pseudo-coherence of $Lq^*E$ relative to $S^{\\prime}$; it does not require that the covers for different $m$ coincide.",
+   "uses": [
+    "def-sfb-relative-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UI, definition-relative-pseudo-coherence, clause (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-relative-pseudo-coherent-complex",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-nagata-relative-affine-space",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-flat-pullback-tor-independent",
+  "lem-weil-pbc-tor-symmetry",
+  "lem-sfb-tor-independent-closed-pushforward-comparison",
+  "lem-sfb-derived-pullback-m-pseudocoherent",
+  "def-sfb-m-pseudo-coherent-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09UR, lemma-base-change-relative-pseudo-coherent, specialized to flat base change; with perfect.tex Tag 0E23 and cohomology.tex Tag 09U7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|IsMPseudoCoherent",
+   "results": "{\"t\": \"2026-10-23T18:01:32Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coher|IsMPseudoCoherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, morphism flatness, pseudofunctors, finite presentation or affine transition limits; none states the required derived pseudo-coherence assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T18:01:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"pseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, morphism flatness, pseudofunctors, finite presentation or affine transition limits; none states the required derived pseudo-coherence assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback under flat base change preserves relative pseudo coherence of a complex of structure sheaves",
+   "results": "{\"t\": \"2026-10-23T18:01:33Z\", \"tool\": \"leansearch\", \"query\": \"Derived pullback under flat base change preserves relative pseudo coherence of a complex of structure sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.isBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"CategoryTheory.MorphismProperty.instIsStableUnderBaseChangePullbacks\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\"], \"digest\": \"52440110ea4eb790\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, morphism flatness, pseudofunctors, finite presentation or affine transition limits; none states the required derived pseudo-coherence assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change preserves m pseudo coherent complexes relative to a base scheme",
+   "results": "{\"t\": \"2026-10-23T18:01:36Z\", \"tool\": \"leanfinder\", \"query\": \"Flat base change preserves m pseudo coherent complexes relative to a base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.Flat.instFstScheme\"], \"digest\": \"6e46e62c616f92a7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, morphism flatness, pseudofunctors, finite presentation or affine transition limits; none states the required derived pseudo-coherence assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relatively pseudo coherent complex stays relatively pseudo coherent after extension of the base ring by a flat algebra",
+   "results": "{\"t\": \"2026-10-23T18:01:39Z\", \"tool\": \"leanfinder\", \"query\": \"A relatively pseudo coherent complex stays relatively pseudo coherent after extension of the base ring by a flat algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"Algebra.HasGoingDown.of_flat\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"6d6445cb777b9975\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, morphism flatness, pseudofunctors, finite presentation or affine transition limits; none states the required derived pseudo-coherence assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative pseudo coherence of a derived complex of sheaves survives flat base change",
+   "results": "{\"t\": \"2026-10-23T18:33:31Z\", \"tool\": \"leanfinder\", \"query\": \"Relative pseudo coherence of a derived complex of sheaves survives flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"CategoryTheory.compatiblePreservingOfFlat\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\"], \"digest\": \"178907885064aa5a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits are ordinary module pullback and pseudofunctor comparisons, generic derived exact-functor constructions, or categorical precoherence; none states preservation of local strictly perfect m-approximations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T18:33:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits are ordinary module pullback and pseudofunctor comparisons, generic derived exact-functor constructions, or categorical precoherence; none states preservation of local strictly perfect m-approximations."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|IsMPseudoCoherent",
+   "results": "{\"t\": \"2026-10-23T18:33:27Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coher|IsMPseudoCoherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits are ordinary module pullback and pseudofunctor comparisons, generic derived exact-functor constructions, or categorical precoherence; none states preservation of local strictly perfect m-approximations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived pullback of an m pseudo coherent complex is m pseudo coherent",
+   "results": "{\"t\": \"2026-10-23T18:33:28Z\", \"tool\": \"leansearch\", \"query\": \"A derived pullback of an m pseudo coherent complex is m pseudo coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Precoherent.pullback\", \"CategoryTheory.Precoherent.recOn\", \"CategoryTheory.ShortComplex.SnakeInput.P\", \"CategoryTheory.IsPullback.exact_shortComplex'\", \"CategoryTheory.MorphismProperty.Over.hasPullbacks\", \"CategoryTheory.Limits.hasPullback_of_comp_mono\", \"CategoryTheory.IsPullback.mono_shortComplex'_f\", \"AlgebraicGeometry.Scheme.canonicallyOverPullback\"], \"digest\": \"74e0fd05c44534fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits are ordinary module pullback and pseudofunctor comparisons, generic derived exact-functor constructions, or categorical precoherence; none states preservation of local strictly perfect m-approximations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-pseudocoherence-composition",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 09UU (lemma-check-relative-pseudo-coherence-on-charts, equivalence (1) and (3) for every integer m). Supporting prerequisite of 09UU proof, equivalence (2) and (3): apply composition-relative-pseudo-coherent to id:P -> P after establishing relative pseudo-coherence of the structure sheaf. Prerequisite for Tag 09UT, middle paragraph: base change of the relatively pseudo-coherent structure sheaf along the polynomial projection.",
+   "via": [
+    "lem-sfb-relative-pseudocoherence-composition",
+    "lem-sfb-flat-ambient-relative-pseudocoherence",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-pseudocoherence-flat-base-change",
+  "worker": "stage1",
+  "summary": "Read 09UR and retained the exact statement, including arbitrary structure-module complexes, all integers m and absence of Noetherian assumptions. Realized the affine reduction with explicit covering witnesses, polynomial embeddings, closed-immersion exchange and absolute m-pseudo-coherence pullback. Introduced only the absolute pullback prerequisite; reused the live Tor-independent closed-pushforward comparison after the first dry run found its recent landing. Verified its Tor hypothesis from flatness with existing stalkwise independence and Tor-symmetry tools. No new node restates a relative clause of the item. Reused the existing Mathlib geometric base-change leaves. Searched the DAG, current blueprint and project Lean; no attachment or matching prerequisite exists.",
+  "blueprint": "The current blueprint det-thm-sf-ctf-stability-direct-images proof (3) supplies the direct-image route; this is its inherited cohomology-and-base-change prerequisite chain recorded in blueprint.from.place. The current blueprint does not itself state relative pseudo-coherence. blueprint_refs ancestor returns None on this inherited chain; retain the null ancestor and precise place, rather than inventing one. No chapter or unit changes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ringed-spaces-derived-pullback-composition",
+    "why": "Generic composition comparison for structure-sheaf derived pullback, used only to identify restriction of Lq*E on a Cartesian open chart. No node of this unit replaces this functoriality tool."
+   },
+   {
+    "node": "lem-sc-flat-pullback-tor-independent",
+    "why": "General scheme flatness-to-Tor-independence tool for the ambient polynomial projection; this unit has no such stalkwise assertion for an arbitrary other morphism."
+   },
+   {
+    "node": "lem-weil-pbc-tor-symmetry",
+    "why": "General commutative-ring Tor symmetry, used to put the two stalk modules in exactly the order of the existing closed-image exchange hypothesis; no node of this unit supplies Tor symmetry."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-flat-pullback-tor-independent",
+  "lem-weil-pbc-tor-symmetry"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-918b3c13c",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-918b3c13c (reviewer sub-agent of L); spot-checked: Read Stacks 09UR (more-morphisms l.17112), 09U7 (cohomology l.12015) and the existing 0E23 comparison node. The item statement is unchanged: 09UR specialised to flat g, all m, arbitrary E in D(O_X), no qc or Noetherian hypothesis. Step 1: witness covers via the affine-opens basis, open-immersion base change and affine fibre product; the cover of f'^{-1}(W_ac) checks. Step 2: the base-changed polynomial chart; i' is closed (01QR); h: A^n_W -> A^n_V is flat (01U9); local finite type of f' is written out correctly through basic opens and generators (advisory: the leaf lem-weil-pbc-lft-base-change would do it in one cite). Step 3: composition gives E'|U' = Lq*F. The Tor hypothesis of lem-sfb-tor-independent-closed-pushforward-comparison is obtained from flat h through lem-sc-flat-pullback-tor-independent, with Tor symmetry giving the right factor order. The square U x_P P' = U' is Cartesian, and the exchange needs no boundedness. Step 4: the new node plus transport along the iso gives exactly the relative definition's witnesses. Step 5: quantifier over m. New node lem-sfb-derived-pullback-m-pseudocoherent is exactly 09U7 for schemes: statement only, self-contained, true (pullback is right t-exact on the cone); no duplicate in the DAG (pc derived-pullback-perfect and localized-pullback-perfect-model differ), not a clause of the item; searches recorded. Accepted tool_uses (generic): lem-pc-ringed-spaces-derived-pullback-composition, lem-sc-flat-pullback-tor-independent, lem-weil-pbc-tor-symmetry. Null blueprint ancestor is the same as in reviewed siblings. No SGA. Parent composition uses the item with a flat polynomial projection, consistent with the statement. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativePseudoCoherenceFlatBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.isMPseudoCoherentRelativeTo_of_flatBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.isMPseudoCoherentRelativeTo_of_flatBaseChange",
+   "AlgebraicGeometry.Scheme.isPseudoCoherentRelativeTo_of_flatBaseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativePseudoCoherenceFlatBaseChange.lean",
+  "statement": "theorem isMPseudoCoherentRelativeTo_of_flatBaseChange [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S) [LocallyOfFiniteType f] [Flat g] (m : ℤ) (E : schemeDerivedCategory X) (hE : IsMPseudoCoherentRelativeTo f m E) : IsMPseudoCoherentRelativeTo (pullback.snd f g) m ((derivedPullback (pullback.fst f g)).obj E)",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db81a3139",
+  "group": "N8",
+  "result": "pass",
+  "note": "Matches Stacks 09UR specialised to flat g, which gives Tor independence. Hypotheses are only LocallyOfFiniteType f and Flat g. X', q, f' are Mathlib pullback, pullback.fst, pullback.snd. Hypothesis and conclusion use the real IsMPseudoCoherentRelativeTo predicate, read in live RelativePseudoCoherentComplex, at the same m with the canonical derivedPullback. The all-m corollary is stated separately. E is in the full schemeDerivedCategory; no qcoh, Noetherian or boundedness hypothesis. LocallyOfFiniteType f' comes from the Mathlib base-change instance. HasDerivedCategory family binder is the same as the dependency's. Universes u and w explicit, autoImplicit false. lean.statement verbatim. The node differs from side-live only in its lean field; the 7 stmt_dep copies are identical. Proofs are sorry, no definitions, docstrings carry source, blueprint id and 5 proof steps; proof-only modules imported privately and all exist. Report has Worker report and Second reading sections. Edge cases checked: empty X or S', E=0, any m, m-dependent covers. No files changed, so no compile run."
+ }
+}

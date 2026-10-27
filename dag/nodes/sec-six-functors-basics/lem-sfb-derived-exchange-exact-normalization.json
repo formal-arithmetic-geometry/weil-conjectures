@@ -20,11 +20,9 @@
  ],
  "proof": [
   {
-   "text": "For each arrow $u$, the module-object pullback is exact and additive by [det-prop-sfb-module-pullback-exact-main]. By [sk-def-sfb-module-derived-pushpull] these are ordinary unbounded total derived functors, computed on K-flat and K-injective resolutions; in particular the ambient module categories have the required resolutions. Apply [def-sfb-left-derived-exact] to identify $P_u$ with the termwise derived pullback $D(u^*)$. The comparison respects the canonical shifts: on a resolution $J\\to M$, it is induced by $u^*J\\to u^*M$, and on the shifted resolution it is the shift of this map, since exactness sends both resolution arrows to quasi-isomorphisms. Thus [lem-weil-pbc-exact-functor-derived-factorization] gives the exactness and fixed integer-shift structure of $P_u$. The underived pushforward is additive by [def-sfb-module-lower-star]. Apply [lem-pc-right-derived-functor-triangulated] to it to get the exactness of $G_u$ with its canonical K-injective shift. The two composites $\\Phi=P_gG_p$ and $\\Psi=G_{p'}P_{g'}$ are exact with composite shift comparisons by [lem-weil-pbc-triangulated-functor-composite].",
+   "text": "The existing exactness instances for module pullback give the canonical comparison leftDerivedUpperStarIsoMapDerivedCategory with the exact termwise functor [sk-def-sfb-module-derived-pushpull, lem-weil-pbc-exact-functor-derived-factorization]. Transport triangulatedness along its inverse using Functor.CommShift.ofIso_compatibility and Functor.isTriangulated_of_iso, with exactly the fixed pullback shift term. The module pushforward is the canonical rightDerivedFunctor of the additive lowerStar [def-sfb-module-lower-star, lem-pc-right-derived-functor-triangulated]. Compose the triangulated functors using [lem-weil-pbc-triangulated-functor-composite].",
    "uses": [
-    "det-prop-sfb-module-pullback-exact-main",
     "sk-def-sfb-module-derived-pushpull",
-    "def-sfb-left-derived-exact",
     "lem-weil-pbc-exact-functor-derived-factorization",
     "def-sfb-module-lower-star",
     "lem-pc-right-derived-functor-triangulated",
@@ -37,7 +35,7 @@
    }
   },
   {
-   "text": "The underived adjunction is precisely that of [def-sfb-module-upper-lower-adjunction], and its canonical derived adjunction is [def-sfb-module-derived-pushpull-adjunction]. Apply [lem-sp-canonical-right-derived-adjunction-shift] with $L=u^*$ and $R=u_*$, using the exactness and the resolution hypotheses checked in step 1. It states compatibility with the fixed canonical shifts, so the unit $\\eta_u$ and counit $\\varepsilon_u$ commute with every integer shift. This lemma concerns $D(u^*)\\dashv G_u$; the specified adjunction is $P_u\\dashv G_u$, with $P_u$ computed on K-flat resolutions. Let $c:P_u\\cong D(u^*)$ be the canonical isomorphism of step 1. It is the comparison of left derived functors, so $\\alpha^D\\circ cQ=\\alpha^P$ for their comparisons $\\alpha^P:P_uQ\\to Q\\,C(u^*)$ and $\\alpha^D:D(u^*)Q\\to Q\\,C(u^*)$. Both adjunctions are derived adjunctions of $u^*\\dashv u_*$ with the same $G_u$ and K-injective comparison $\\beta$. By [lem-sc-derived-adjunction-from-underived] their counits satisfy $\\varepsilon'_{QJ}\\circ P'(\\beta_J)=Q(\\varepsilon_J)\\circ\\alpha'_{u_*J}$ for $(P',\\alpha')=(P_u,\\alpha^P),(D(u^*),\\alpha^D)$. For K-injective $J$, $\\beta_J$ is invertible. Naturality of $c$ then gives $\\varepsilon^P_{QJ}=\\varepsilon^D_{QJ}\\circ c_{G_uQJ}$. Every object is isomorphic to such a $QJ$, so $\\varepsilon^P=\\varepsilon^D\\circ cG_u$. Thus the specified adjunction is the transport of $D(u^*)\\dashv G_u$ along $c$, not a newly chosen adjunction on isomorphic functors. Its unit and counit are composites of those of $D(u^*)\\dashv G_u$ with $c^{\\pm1}$, which is shift-compatible by step 1. They therefore commute with every integer shift.",
+   "text": "Apply canonicalRightDerivedAdjunctionShift [lem-sp-canonical-right-derived-adjunction-shift] to the actual underived module adjunction [def-sfb-module-upper-lower-adjunction]. The published derived adjunction [def-sfb-module-derived-pushpull-adjunction] is the transport of this exact-left-derived adjunction along leftDerivedUpperStarIsoMapDerivedCategory: Adjunction.derived_eq_ofNatIsoLeft proves the equality from the canonical derived-counit factorization leftDerivedFunctorIsoMapDerivedCategory_hom_fac, using the derived-adjunction normalization [lem-sc-derived-adjunction-from-underived]. The inverse comparison commutes with the fixed shifts by their definition. Adjunction.commShift_ofNatIsoLeft therefore proves compatibility of the actual published adjunction, including its unit and counit.",
    "uses": [
     "def-sfb-module-upper-lower-adjunction",
     "def-sfb-module-derived-pushpull-adjunction",
@@ -51,12 +49,12 @@
    }
   },
   {
-   "text": "The composition comparison of ambient pullbacks is the one induced by the underived comparison, by [prop-sfb-module-left-derived-upper-star-comp]. To check its shifts, use the exact termwise descriptions from step 1. Write $b:(vu)^*\\cong u^*v^*$ for the underived comparison. By [lem-sfb-exact-derived-natural-iso] and [lem-sfb-exact-derived-composition], its derived comparison is represented on every complex $M$ by the degreewise map $b_{M^r}$ followed by the termwise composition identification. For $M[n]$ the degree-$r$ component is $b_{M^{r+n}}$, exactly the degree-$r$ component of the shifted comparison; both differentials are multiplied by $(-1)^n$. The localization factorizations in [lem-weil-pbc-exact-functor-derived-factorization] respect these shifts. Every derived object is represented by a complex, so this proves the shift square for the canonical composition comparison for all $n\\in\\mathbf Z$. The same equation for its inverse follows by multiplying the square by inverse isomorphisms. The comparison $\\theta$ is the inverse compositor for $(p',g)$ followed by the compositor for $(g',p)$, with the equality $gp'=pg'$ in between. The equality inserts identical termwise functors, hence respects shifts. Therefore $\\theta$ commutes with all integer shifts.",
+   "text": "Expand the published leftDerivedUpperStarComp [prop-sfb-module-left-derived-upper-star-comp] as the canonical exact comparisons, mapDerivedCategoryNatIso of upperStarComp, mapDerivedCategoryCompIso, and the inverse exact comparisons. The source-library proved instances commShift_mapDerivedCategoryNatIso_hom and commShift_mapDerivedCategoryCompIso_hom supply the degreewise shift arguments already available for the exact induced isomorphisms [lem-sfb-exact-derived-natural-iso, lem-weil-pbc-exact-functor-derived-factorization]. The fixed comparison hom and inverse commute with shifts by Functor.CommShift.ofIso_compatibility and NatTrans.CommShift.of_iso_inv. Composition and whiskering preserve these equations [lem-weil-pbc-commshift-nattrans-comp-whisker]. Hence the compositor and its inverse commute with shifts. The equality comparison commutes by equality elimination. Their composite is the stated square comparison.",
    "uses": [
     "prop-sfb-module-left-derived-upper-star-comp",
     "lem-sfb-exact-derived-natural-iso",
-    "lem-sfb-exact-derived-composition",
-    "lem-weil-pbc-exact-functor-derived-factorization"
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
    ],
    "elementary": false,
    "source": {
@@ -65,7 +63,7 @@
    }
   },
   {
-   "text": "Fix $K$. Put $A=P_gG_pK$, $C=P_{g'}K$, $F=P_{p'}$, $H=G_{p'}$, and $a=P_{g'}(\\varepsilon_{p,K})\\circ\\theta_{G_pK}:FA\\to C$. The definition gives $B_K=H(a)\\circ\\eta'_{A}$. Naturality of the counit of $F\\dashv H$ gives $\\varepsilon'_{C}\\circ FH(a)=a\\circ\\varepsilon'_{FA}$. Consequently\n$$\\varepsilon'_C\\circ F(B_K)=a\\circ\\varepsilon'_{FA}\\circ F(\\eta'_A)=a,$$\nwhere the last equality is the adjunction triangle identity. This is exactly the asserted counit equation. Only the adjunction laws of [sk-def-sfb-module-derived-pushpull] are used; cartesianness plays no role.",
+   "text": "Apply Mathlib mateEquiv_counit to the two actual derived adjunctions and the actual pullback square comparison. This is precisely the stated counit equation. It is proved by counit naturality followed by the left adjunction triangle identity, and requires no cartesianness [sk-def-sfb-module-derived-pushpull]. A private proved equation exposes the exchange as that mate at the natural-transformation level. Transport the complete normalization assertion along this equation before evaluating components; this avoids unfolding the concrete derived constructions inside NatTrans.app.",
    "uses": [
     "sk-def-sfb-module-derived-pushpull"
    ],
@@ -76,7 +74,7 @@
    }
   },
   {
-   "text": "Let $\\chi_\\Phi^n(K):\\Phi(K[n])\\to\\Phi(K)[n]$ and $\\chi_\\Psi^n(K):\\Psi(K[n])\\to\\Psi(K)[n]$ be the composite comparisons. The three transformations making up $B$ are the unit for $p'$ whiskered by $P_gG_p$, the comparison $\\theta$ whiskered by $G_{p'}$ and $G_p$, and the counit for $p$ whiskered by $G_{p'}P_{g'}$. Steps 2 and 3 make each factor shift-compatible. Apply the composition and whiskering rules of [lem-weil-pbc-commshift-nattrans-comp-whisker], for each shift $[n]$, to obtain\n$$\\chi_\\Psi^n(K)\\circ B_{K[n]}=B_K[n]\\circ\\chi_\\Phi^n(K).$$\nHere $B$ is a natural transformation because it is a composite of whiskered natural transformations.",
+   "text": "The adjunction compatibility from step 2 and the square compatibility from step 3 imply the exchange compatibility by the existing source-library theorem NatTrans.CommShift.mateEquiv. Its proof expands the mate into unit, square comparison, counit, associators and unitors, and uses the composition and whiskering instances [lem-weil-pbc-commshift-nattrans-comp-whisker].",
    "uses": [
     "lem-weil-pbc-commshift-nattrans-comp-whisker"
    ],
@@ -87,7 +85,7 @@
    }
   },
   {
-   "text": "For a distinguished triangle $K\\xrightarrow{u}L\\xrightarrow{v}M\\xrightarrow{w}K[1]$, the image triangles under $\\Phi$ and $\\Psi$ are distinguished by step 1. Naturality of $B$ gives the squares for $u$ and $v$. For the last square, naturality at $w$ and step 5 give\n$$\\chi_\\Psi^1(K)\\circ\\Psi(w)\\circ B_M\n=\\chi_\\Psi^1(K)\\circ B_{K[1]}\\circ\\Phi(w)\n=B_K[1]\\circ\\chi_\\Phi^1(K)\\circ\\Phi(w).$$\nThus $(B_K,B_L,B_M)$ is a morphism of the two image triangles, including their connecting arrows, by the definition of a triangle morphism in [def-weil-triangulated-category].",
+   "text": "Construct the morphism of image triangles with the three exchange components. The first two squares are naturality. For the connecting square, reassociate, replace the source shift comparison followed by the shifted exchange component using NatTrans.shift_app_comm at 1, then apply naturality at the original connecting map. This proves the third square in TriangleMorphism [def-weil-triangulated-category]. The two functors are triangulated by step 1.",
    "uses": [
     "def-weil-triangulated-category"
    ],
@@ -98,11 +96,12 @@
    }
   },
   {
-   "text": "Now impose exactly the stated preservation and restriction hypotheses. Every object occurring in the three factors of $B_K$ then belongs to its chosen subcategory. A full-subcategory inclusion leaves Hom sets, identities and composition unchanged, so the same three arrows define the restricted natural transformation. By the assumed restriction of the adjunctions and composition maps, these arrows are respectively the restricted unit, $G_{p'}$ of the restricted square comparison, and $G_{p'}P_{g'}$ of the restricted counit. Their composite is word for word the formula of [det-def-sfb-base-change-morphism-bc], with $f=p$ and $f'=p'$. Fullness and faithfulness make equality of the ambient components equality of the restricted components. Shifts and distinguished triangles are inherited by [def-weil-triangulated-subcategory], so steps 4--6 remain valid. For $\\Dbc$ its morphisms are explicitly the ambient morphisms by [sk-def-sfb-bounded-constructible]; the conclusion applies whenever the preservation hypotheses in the statement hold.",
+   "text": "Expand the general full-subcategory mate into its unit, square-comparison image and counit image. ObjectProperty.liftFullSubcategoryAdjunction_unit_app_hom and its counit counterpart identify the restricted adjunction components with the ambient ones. The lift acts on morphisms by the original functor map, and the square-component hypothesis identifies the middle component, giving the ambient exchange. For the actual bounded-constructible map [det-def-sfb-base-change-morphism-bc, sk-def-sfb-bounded-constructible], first identify its three-step natural transformation with Adjunction.squareExchange using squareExchange_eq_unit_square_counit [def-weil-pbc-adjunction-square-exchange]. Its squareExchange_map_counit equation gives the restricted counit equation. Apply the inclusion to this equation. Adjunction.map_restrictFullyFaithful_counit_app identifies the underlying restricted counits, and the restricted pullback maps by the ambient pullback. The stated square-component hypothesis and the proved object equations therefore identify this with the ambient counit equation from step 4. Injectivity of the inverse ambient adjunction hom equivalence proves equality of components. A proved private helper keeps both transformations and square comparisons as parameters while carrying out this calculation; explicitly reducing only the small full-subcategory lift, inclusion and functor composition definitions normalizes hidden object arguments before the final comparison. No restricted data construction is changed. The triangulated-subcategory hypotheses retain the inherited structures [def-weil-triangulated-subcategory].",
    "uses": [
     "det-def-sfb-base-change-morphism-bc",
     "sk-def-sfb-bounded-constructible",
-    "def-weil-triangulated-subcategory"
+    "def-weil-triangulated-subcategory",
+    "def-weil-pbc-adjunction-square-exchange"
    ],
    "elementary": true,
    "source": {
@@ -112,9 +111,7 @@
   }
  ],
  "proof_deps": [
-  "det-prop-sfb-module-pullback-exact-main",
   "sk-def-sfb-module-derived-pushpull",
-  "def-sfb-left-derived-exact",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "def-sfb-module-lower-star",
   "lem-pc-right-derived-functor-triangulated",
@@ -125,17 +122,17 @@
   "lem-sc-derived-adjunction-from-underived",
   "prop-sfb-module-left-derived-upper-star-comp",
   "lem-sfb-exact-derived-natural-iso",
-  "lem-sfb-exact-derived-composition",
   "lem-weil-pbc-commshift-nattrans-comp-whisker",
   "def-weil-triangulated-category",
   "det-def-sfb-base-change-morphism-bc",
   "sk-def-sfb-bounded-constructible",
-  "def-weil-triangulated-subcategory"
+  "def-weil-triangulated-subcategory",
+  "def-weil-pbc-adjunction-square-exchange"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
-  "place": "paragraph (3), expanded using exact termwise derived functors, canonical derived-adjunction shift compatibility, and the displayed naturality/triangle-identity calculation"
+  "place": "R3 Lean proof: canonical comparison transport, published proved exact-compositor shift API, derived_eq_ofNatIsoLeft normalization, mateEquiv_counit and CommShift.mateEquiv, equality transport before component evaluation, direct triangle construction, full-subcategory mate components, and the actual bounded base-change counit equation via squareExchange, the restricted-counit and object/map APIs, the square hypothesis and inverse-adjunct injectivity; rational proof paragraph (3)."
  },
  "mathlib_searches": [
   {
@@ -229,11 +226,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-derived-exchange-exact-normalization",
   "worker": "stage1",
-  "summary": "Q32 checked the current proper-base-change unit and rational proof paragraph (3), retained the full ambient statement, and expanded the counit, canonical shift, connecting-square and restriction arguments into seven steps. Existing generic DAG nodes suffice; no new nodes or Mathlib leaves are created. Exactness and canonical normalization are taken from their actual cited statements, not from the etale-only exchange results.",
-  "blueprint": "Realizes det-thm-sfb-proper-base-change-rational proof paragraph (3): the base-change map is a natural transformation of exact functors, so triangle devissage uses the canonical connecting square; the ambient map restricts componentwise to the constructible map. The item remains a child of this blueprint ancestor at its existing from.place.",
+  "summary": "Q38 repair: the item statement is unchanged. Extracted old steps 1 and 3 into lem-sfb-module-derived-functor-compositor-shifts and old step 2 into lem-sfb-kflat-derived-adjunction-transport-shifts, both self-contained statement-only unsplit nodes, with all original argument text retained in report.md for future workers. The item now has a short assembly retaining the counit cancellation, shift equation, connecting square and full-subcategory restriction. Searches, full-source comparison, edge cases and verbatim citations checked.",
+  "blueprint": "Proper-base-change rational proof paragraph (3): exact functors and natural transformations of exact functors used in triangle devissage. Both new nodes serve this exact sentence through the present item.",
   "tool_uses": [
    {
     "node": "det-prop-sfb-module-pullback-exact-main",
@@ -270,24 +267,33 @@
   ]
  },
  "tool_uses": [
-  "det-prop-sfb-module-pullback-exact-main",
   "sk-def-sfb-module-derived-pushpull",
   "def-sfb-module-upper-lower-adjunction",
   "def-sfb-module-derived-pushpull-adjunction",
   "lem-sp-canonical-right-derived-adjunction-shift",
   "prop-sfb-module-left-derived-upper-star-comp",
-  "lem-sfb-exact-derived-composition",
   "sk-def-sfb-bounded-constructible"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q32-25c5df0a7",
-  "group": "Q32",
+  "reviewer": "NT-cc-Q38-4061acda2",
+  "group": "Q38",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-25c5df0a7 (reviewer sub-agent of L); spot-checked: I read the item in full, its empty-proof base (sha 334d9fba), its parent det-thm-sfb-proper-base-change-rational (whose steps 4 and 6 cite it), the parent's re-split note, the unit sk-thm-sfb-proper-base-change and chapter, main-20261015 rational proof paragraph (3), Stacks derived.tex 015F/014X/05SE/0DVC/09T5 (labels checked) and the statement of all 9 stmt_deps and 17 proof_deps. I also read the published UpperLowerStar.lean:205-247, read-only. Mechanical checks: the item and its cited nodes are not in the drop list, there is no SGA, no cycle, and proof_deps equals the union of uses. The closure diff against the parent adds only the generic lem-sp-canonical-right-derived-adjunction-shift. The declared tool_uses are generic derived-category tools, accepted. There are no new nodes and I found no duplicate. Statement: the only change makes explicit that the Dbc categories must be full triangulated subcategories. The previous sentence already assumed this, so nothing is weakened. The square-zero counterexample is correct, and the parent's E/Qlbar use is unaffected. Steps 3-7 are correct: theta matches theta_sq, the counit identity checks by type with the triangle identity, the composition/whiskering rules (i)-(iv) apply, the connecting square matches TR3, and step 7 is the same formula as det-def-sfb-base-change-morphism-bc under fullness. Two repairable faults, fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-derived-exchange-exact-normalization.json. (1) C1/E5, step 2: lem-sp-canonical-right-derived-adjunction-shift is stated for D(u^*)⊣R(u_*), but the specified adjunction is derivedAdjunction on the K-flat Lu^*. The transfer between them was only asserted. I wrote out the argument, citing lem-sc-derived-adjunction-from-underived: from alpha^D∘cQ=alpha^P and beta invertible on K-injectives, eps^P=eps^D∘cG_u, so the specified adjunction is the transport along the shift-compatible c. (2) C1, step 1: the additivity of the pushforward is now cited to def-sfb-module-lower-star. proof_deps was recomputed (19 ids); the statement and all other fields are unchanged. Full checks are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-4061acda2 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read in full the item, both new nodes, the statements of all cited nodes, the 2026-10-21/22 re-split note (released), the base (live) seven-step proof, Stacks derived.tex labels 015F, 014X, 05SE and 0DVC (lines 5884, 3431, 4895, 9570, checked against tags/tags) and the main-20261015 rational.proof.md paragraph (3). Every old argument is accounted for. Old steps 1 and 3 (exactness of P_u/G_u, c_u matching shifted K-flat resolutions, the derived compositor as the localized termwise b with degree-r component b_{M^{r+n}}, the θ shift square) are now lem-sfb-module-derived-functor-compositor-shifts. Old step 2 (two derived adjunctions sharing β with α^A∘cQ=α^P, counit comparison on K-injectives, transport, shifts) is now lem-sfb-kflat-derived-adjunction-transport-shifts. I checked its transport formulas: η^P=G(c^{-1})η^A and ε^P=ε^A∘c_G. The elementary old steps 4–7 (counit naturality plus triangle identity, whiskering rules (i)–(iv), connecting square, full-subcategory restriction) are kept almost verbatim as assembly steps 2–5. The assembly is 2319 characters. The two new nodes are of comparable size (about 2400 and 1651 characters of extracted proof), are independent of each other and do not restate the item. Both statements are true; I tested u=id, n=0/±1, the zero ring and noncartesian squares. Both have unsplit status, an empty proof, four search kinds and the correct created/blueprint provenance. Only proof fields changed: statement and stmt_deps are identical to live, so citers are unaffected. Nothing is on the drop list, there is no SGA source and no cycle (DFS checked), and the live tree has no parallel re-split. Duplicates checked: lem-weil-pbc-derived-adjunction-shift (ringed topoi; overlaps only the shift clause, advisory), lem-sp-exact-derived-transformation-pasting, lem-weil-pbc-derived-square-shift-on-kinjectives, lem-sfb-derived-composition-adjunction-normalization and lem-sfb-resolving-derived-adjunction-normalization; none is a duplicate. Advisory: split_report.tool_uses keeps harmless historical entries for nodes the item no longer cites directly."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.DerivedExchangeExactNormalization",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedExchange_exact_normalization",
@@ -314,5 +320,15 @@
   "group": "Q40",
   "result": "pass",
   "note": "I checked every clause against the node. B is mateEquiv of θ over derivedUpperStarLowerStarAdjunction; θ = inverse compositor(p',g), then eqToIso(sq.w), then compositor(g',p); both have the right orientation. The counit identity matches exactly in Lean's left-to-right order. Both composites are IsTriangulated with the canonical shifts: the pullback's is ofIso from the termwise D(u^*), with no competing global instance, and the pushforward's is the existing K-injective instance. NatTrans.CommShift B ℤ is stated, and every distinguished triangle gets a triangle morphism whose components are B. The restriction theorem has four IsTriangulated subcategories, the six preservation hypotheses in the right directions, liftFullSubcategoryAdjunction of the ambient adjunctions, and θ pinned componentwise. The Dbc theorem ties B to boundedConstructibleBaseChangeOfPreserves; its hθ holds by construction. Setting, coefficients and universes are faithful, with no cartesian assumption. The only change to the node is lean. nt_compile --json: a 60 s timeout at load ~210, then clean in 53.5 s at load ~203. Advisory: seven unused private proof-dep imports; stale BLOCKED narrative in the report; the compile is near the 60 s limit, so retry landing at lower load if it times out."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-74ddf",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261022T144114-L-1500271",
+  "kind": "interface",
+  "note": "independent cc review: delivered module vs prior PASSed b0e4d files (byte-identical) and clones/live (re-annotated, definitionally equal statements; proofs, private helpers and plain imports only); node vs live (only proof/proof_deps/proof_origin/tool_uses); sandbox compile of item + both direct importers rc 0; #print axioms"
  }
 }

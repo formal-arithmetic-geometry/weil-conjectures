@@ -1,0 +1,293 @@
+{
+ "id": "lem-a1-affine-relation-comparison-preparation",
+ "kind": "statement",
+ "title": "Groupoid and comparison data for an affine finite flat relation",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $U=\\operatorname{Spec}A$ and $R=\\operatorname{Spec}B$ affine $S$-schemes [def-weil-affine-spectrum], and $s,t:R\\to U$ finite locally free [def-pc-finite-locally-free]. Suppose $(s,t):R\\to U\\times_SU$ [def-pc-fibre-product] identifies $R(H)$ with an equivalence relation on $U(H)$ for every $S$-scheme $H$. Write $\\sigma=s^\\sharp$, $\\tau=t^\\sharp$, $C=\\{a\\in A:\\sigma(a)=\\tau(a)\\}$, $M=\\operatorname{Spec}C$, and $q:U\\to M$ for the map induced by inclusion. There are unique identity, inverse and composition morphisms compatible with $s,t$ which make these schemes an absolute groupoid scheme [def-a1-groupoid-scheme]; they are also morphisms over $S$. We have $qs=qt$. Under the canonical affine fibre-product identification $U\\times_MU=\\operatorname{Spec}(A\\otimes_C A)$ [def-weil-pbc-module-tensor-product], the comparison $R\\to U\\times_MU$ has coordinate homomorphism\n$$\\phi:A\\otimes_C A\\longrightarrow B,\\qquad a\\otimes a'\\longmapsto\\sigma(a)\\tau(a').$$\nThis comparison is a finite monomorphism and a closed immersion [def-weil-finite-integral-morphism, def-weil-closed-immersion], so $\\phi$ is surjective. The inclusion $C\\subset A$ is integral, meaning every element of $A$ satisfies a monic polynomial over $C$; $q$ is surjective, and two points of $U$ have the same image in $M$ exactly when they are the source and target of a point of $R$. Each of the two $A$-module structures on $B$ has a finite principal-open cover on which it is finite free. For every flat $C$-algebra $D$ [def-weil-pbc-flat-ring-map], put $A_D=A\\otimes_C D$ and $B_D=B\\otimes_C D$. The base-changed operations form a groupoid on $\\operatorname{Spec}A_D,\\operatorname{Spec}B_D$, the two projections remain finite locally free, and $D\\to A_D$ identifies $D$ with the equalizer of $\\sigma_D,\\tau_D:A_D\\to B_D$. The comparison is $\\phi_D$, and the finite principal-open free covers above base change to such covers for $B_D$.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tags 03BM (proposition-finite-flat-equivalence), proof first and second paragraphs; 03BK (lemma-invariants-base-change), (1),(3). Finite free affine descriptions: morphisms.tex Tag 02KB (lemma-finite-flat)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-finite-locally-free",
+  "def-pc-fibre-product",
+  "def-a1-groupoid-scheme",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-finite-integral-morphism",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "For an $S$-scheme $H$, regard the unique element of $R(H)$ with endpoints $(x,y)$ as an arrow $x\\to y$. Reflexivity supplies the arrow $(x,x)$, symmetry supplies $(y,x)$ from $(x,y)$, and transitivity supplies $(x,z)$ from $(x,y),(y,z)$. These assignments are natural in $H$: precomposition preserves endpoints and the arrow with prescribed endpoints is unique. The fibre-product universal property identifies composable pairs with $H$-points of $R\\times_{s,U,t}R$. Applying [lem-pc-yoneda] to these natural transformations gives $S$-morphisms $e,i,c$. Every identity, inverse, and associativity equation has the same source and target on both sides, so uniqueness of the arrow with those endpoints proves each equation. Yoneda makes these equations equalities of morphisms. They are exactly the laws of [def-a1-groupoid-scheme]; hence they also hold on arbitrary absolute test schemes. Uniqueness of $e,i,c$ follows from the same endpoint uniqueness and Yoneda.",
+   "uses": [
+    "lem-pc-yoneda",
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "lemma-equivalence-groupoid: explicit proof of the omitted exercise; definition-groupoid (Tag 0231)"
+   }
+  },
+  {
+   "text": "By definition of $C$, $\\sigma|_C=\\tau|_C$, so $qs=qt$ by [def-weil-affine-spectrum]. Thus the fibre-product property gives $j_M:R\\to U\\times_MU$ with projections $s,t$. By [lem-weil-pbc-fibre-product-affine-spectra] the target is $\\operatorname{Spec}(A\\otimes_CA)$. The algebra tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives its coordinate map, uniquely, as $\\phi(a\\otimes a')=\\sigma(a)\\tau(a')$. The operations are over $M$: with $h=qs=qt:R\\to M$, the endpoint equations give $he=q$, $hi=h$, and $hc=h\\operatorname{pr}_1=h\\operatorname{pr}_0$ on composable pairs.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, proposition-finite-flat-equivalence, first proof paragraph; Tag 03BK, lemma-invariants-base-change (1)"
+   }
+  },
+  {
+   "text": "The map $j_M$ is an absolute monomorphism. Indeed, if $a,b:H\\to R$ have equal composites with $j_M$, they have equal sources and targets; their composites to $S$ agree, so the hypothesis for this induced $S$-structure on $H$ gives $a=b$. Put $P=A\\otimes_CA$. Since $s$ is finite, $B$ has finitely many module generators $b_1,\\ldots,b_n$ over $A$ via $\\sigma$ [def-pc-finite-locally-free, def-weil-finite-integral-morphism]. The same elements generate it over $P$ via $\\phi$: a coefficient $a\\in A$ acts through $a\\otimes1$. Hence $j_M$ is finite; on any principal open of $\\operatorname{Spec}P$, the localized $b_i$ still generate, which also checks the affine-local finite condition. Apply [lem-a1-finite-monomorphism-closed-immersion]. Its conclusion and the affine characterization in [def-weil-closed-immersion] say precisely that $\\phi$ is surjective.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "def-weil-finite-integral-morphism",
+    "lem-a1-finite-monomorphism-closed-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, proposition-finite-flat-equivalence, first proof paragraph; morphisms.tex Tag 03BB, lemma-finite-monomorphism-closed"
+   }
+  },
+  {
+   "text": "The absolute groupoid from Step 1 has affine objects $\\operatorname{Spec}A$, affine arrows $\\operatorname{Spec}B$, and finite locally free source and target. Its invariant subring is exactly $C$. Consequently [lem-a1-affine-groupoid-integral-invariants] gives the monic polynomial for every element of $A$. Under precisely these same hypotheses [lem-a1-affine-groupoid-orbit-fibres] gives surjectivity of $|U|\\to|\\operatorname{Spec}C|$ and says that equality of the images of two points is equivalent to their being the source and target of a point of $R$. These are the asserted integrality and topological clauses.",
+   "uses": [
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-a1-affine-groupoid-orbit-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BJ, lemma-integral-over-invariants; Tag 03BL, lemma-points"
+   }
+  },
+  {
+   "text": "Apply the following argument separately to $s$ and $t$. Finiteness makes $B$ a finite $A$-module. Flatness gives a flat $A$-module by [lem-weil-pbc-flat-morphism-affine-criterion]. Local finite presentation gives a finitely presented $A$-algebra by [lem-weil-pbc-lfp-affine-opens-finite-presentation], applied to the whole affine source and target. Then [lem-weil-pbc-finite-algebra-presentation-module-presentation] gives a finitely presented $A$-module, and [lem-weil-pbc-finitely-presented-flat-module-projective] makes it finite projective. Finally [lem-weil-pbc-finite-projective-standard-free-cover] supplies finitely many $f_i\\in A$ generating the unit ideal, with $B_{\\sigma(f_i)}$ finite free over $A_{f_i}$ for $s$, and the corresponding (possibly different) family for $t$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-algebra-presentation-module-presentation",
+    "lem-weil-pbc-finitely-presented-flat-module-projective",
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KB, lemma-finite-flat, affine proof; algebra.tex Tags 0564 (lemma-finite-finitely-presented-extension) and 00NX (lemma-finite-projective)"
+   }
+  },
+  {
+   "text": "For a flat $C$-algebra $D$, apply the groupoid-base-change clause of [lem-a1-affine-groupoid-basechange-polynomial-norm] to the absolute groupoid of Step 1 and the map $C\\to D$. Step 2 already exhibited its structure over $\\operatorname{Spec}C$. The cited clause gives exactly the groupoid on $\\operatorname{Spec}B_D\\rightrightarrows\\operatorname{Spec}A_D$ and finite locally free source and target with coordinate maps $\\sigma_D,\\tau_D$. The groupoid equations are equalities of morphisms and so also give the absolute groupoid laws after base change, as in Step 1. No norm conclusion of the cited lemma is needed.",
+   "uses": [
+    "lem-a1-affine-groupoid-basechange-polynomial-norm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BK, lemma-invariants-base-change (1)"
+   }
+  },
+  {
+   "text": "The sequence of $C$-modules $0\\to C\\to A\\xrightarrow{\\sigma-\\tau}B$ is exact by the definition of $C$; the difference is $C$-linear because $\\sigma$ and $\\tau$ agree on $C$. Tensor it with the flat module $D$ using [lem-weil-pbc-flat-tensor-exact]. Identifying $C\\otimes_CD$ with $D$, we obtain an injection $D\\to A_D$ whose image is $\\ker(\\sigma_D-\\tau_D)$. This is the equalizer of the two ring maps. The injection and image identification respect products and units since $d\\mapsto1\\otimes d$ is a ring homomorphism. Thus $D$ is the asserted invariant ring, not merely a quotient or an abstract module isomorphic to it.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BK, lemma-invariants-base-change, proof of (3)"
+   }
+  },
+  {
+   "text": "The base-changed comparison is determined by its projections. On elementary tensors its coordinate map is\n$$(a\\otimes d)\\otimes(a'\\otimes d')\\longmapsto\\sigma(a)\\tau(a')\\otimes dd',$$\nwhich is $\\phi\\otimes1$ under $(A\\otimes_CA)\\otimes_CD\\cong A_D\\otimes_DA_D$; uniqueness follows from [lem-weil-pbc-algebra-tensor-pushout-universal-property]. For a source free chart of Step 5, write $1=\\sum_i u_i f_i$. Then $1=\\sum_i(u_i\\otimes1)(f_i\\otimes1)$ in $A_D$, so [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] shows that their principal opens cover. The localization/base-change identification sends $(b/\\sigma(f_i)^n)\\otimes d$ to $(b\\otimes d)/(\\sigma(f_i)\\otimes1)^n$; its inverse is given by the same formula read backwards, using the universal properties of tensor product and localization. Tensoring a chosen free basis on the original chart therefore gives a free basis over $(A_D)_{f_i\\otimes1}$ on the new chart. Repeat this calculation for the target charts with $\\tau$. This proves the comparison and cover compatibility assertions.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BK, lemma-invariants-base-change (1); morphisms.tex Tag 02KB, lemma-finite-flat, free affine charts"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-yoneda",
+  "def-pc-fibre-product",
+  "def-a1-groupoid-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-pc-finite-locally-free",
+  "def-weil-finite-integral-morphism",
+  "lem-a1-finite-monomorphism-closed-immersion",
+  "def-weil-closed-immersion",
+  "lem-a1-affine-groupoid-integral-invariants",
+  "lem-a1-affine-groupoid-orbit-fibres",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-algebra-presentation-module-presentation",
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-a1-affine-groupoid-basechange-polynomial-norm",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tags 03BM, 03BK, 03BJ, 03BL; explicit Yoneda construction in lemma-equivalence-groupoid; finite-free charts from morphisms.tex Tag 02KB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free equivalence relation of affine schemes gives a groupoid whose invariant ring has orbit fibres and whose tensor comparison is surjective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_galois_representative\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C),\\n  ∃ A a,\\n    CategoryTheory.PreGaloisCategory.IsGalois A ∧\\n      Function.Bijective fun f => (\", \"doc\": \"For any object $X$ in a pre-Galois category $\\\\mathcal{C}$ equipped with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists a Galois object $A \\\\in \\\\mathcal{C}$ and an element $a \\\\in \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]\\n  [CategoryTh\", \"doc\": \"Let $\\\\mathcal{C}$ be a pre-Galois category with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, and let $G$ be a group acting on $F$. For any finite family of Galois objects $\\\\{X_i\\\\}_{i \\\\in I\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_fiber\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  (x : (F.obj X).carrier),\\n  ∃ A f a, CategoryTheory.PreGaloisCategory.IsGalois A ∧ (CategoryTh\", \"doc\": \"For any object $X$ in a pre-Galois category $\\\\mathcal{C}$ and any element $x$ in the image of $X$ under a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists a Galois object $A$, a mor\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_fiber_nonempty\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C),\\n  Nonempty (F.obj X).carrier → ∃ A x, CategoryTheory.PreGaloisCategory.IsGalois A\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ equipped with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, for any object $X \\\\in \\\\mathcal{C}$ such that the fiber $F(X)$ is non-empty, there exists a Ga\"}\n  {\"name\": \"CategoryTheory.GaloisCategory.hasFiberFunctor\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} [self : CategoryTheory.GaloisCategory C],\\n  ∃ F, Nonempty (CategoryTheory.PreGaloisCategory.FiberFunctor F)\", \"doc\": \"Every Galois category admits a fiber functor to the category of finite types.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give affine morphism properties, ordinary Galois categories or tensor-map surjectivity under different hypotheses; none constructs the internal relation groupoid and its invariant comparison data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite flat affine equivalence relation the map from the tensor square over the invariant subring to the relation algebra is surjective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FiniteType.baseChangeAux_surj\", \"module\": \"Mathlib/RingTheory/FiniteStability\", \"type\": \"∀ {R : Type w₁} [inst : CommRing R] {A : Type w₂} [inst_1 : CommRing A] [inst_2 : Algebra R A] (B : Type w₃)\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] {σ : Type u_1} {f : MvPolynomial σ R →ₐ[R] A},\\n  Function.Surjective ⇑f → Function.Surjective ⇑(Algebra.TensorProduct.map (AlgHom.id B B) f)\", \"doc\": \"Let $ R $ be a commutative semiring, $ \\\\sigma $ a type indexing variables, and $ B $ an $ R $-algebra. If $ f: R[\\\\sigma] \\\\to A $ is a surjective $ R $-algebra homomorphism, then the induced map $ B \\\\o\"}\n  {\"name\": \"RingHom.surjective_of_tmul_eq_tmul_of_finite\", \"module\": \"Mathlib/Algebra/Algebra/Epi\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : Ring A] [inst_2 : Algebra R A] [Module.Finite R A],\\n  Algebra.IsEpi R A ↔ Function.Surjective ⇑(algebraMap R A)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $ that is finitely generated as an $ R $-module, the canonical algebra homomorphism $ R \\to A $ is an epimorphism in the category of $ R $-algebras\"}\n  {\"name\": \"Module.FaithfullyFlat.surjective_of_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u_3}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [Module.FaithfullyFlat R S],\\n  Function.Surjective ⇑(algebraMap S (TensorProduct R S T)) → Function.Surjective ⇑(algebraMap R T)\", \"doc\": \"If $ S $ is a faithfully flat $ R $-module and the canonical algebra map $ S \\\\to S \\\\otimes_R T $ is surjective, then the canonical algebra map $ R \\\\to T $ is also surjective.\"}\n  {\"name\": \"TensorProduct.flip_mk_surjective\", \"module\": \"Mathlib/RingTheory/TensorProduct/Basic\", \"type\": \"∀ {R : Type u_1} (S : Type u_3) {T : Type u_4} [inst : CommSemiring R] [inst_1 : Semiring S] [inst_2 : Algebra R S]\\n  [inst_3 : Ring T] [inst_4 : Algebra R T],\\n  Function.Surjective ⇑(algebraMap R T) → Function.Surjective ⇑((TensorProduct.mk R S T).flip 1)\", \"doc\": \"If the canonical ring homomorphism $\\\\phi: R \\\\to T$ is surjective, then the flipped tensor product map $\\\\mathrm{flip}(\\\\mathrm{TensorProduct.mk}_R(S, T))$ evaluated at $1 \\\\in R$ is also surjective. This\"}\n  {\"name\": \"Algebra.TensorProduct.mapOfCompatibleSMul_surjective\", \"module\": \"Mathlib/RingTheory/TensorProduct/Maps\", \"type\": \"∀ (R : Type u_3) (S : Type u_4) (A : Type u_5) (B : Type u_6) [inst : CommSemiring R] [inst_1 : CommSemiring S]\\n  [inst_2 : Semiring A] [inst_3 : Semiring B] [inst_4 : Algebra R A] [inst_5 : Algebra R B] [inst_6 : Algebra S A]\\n  [inst_7 : Algebra S B] [inst_8 : SMulCommClass R S A] [inst_9 : TensorP\", \"doc\": \"Given commutative semirings $ R $ and $ S $, $ R $-algebras $ A $ and $ B $ equipped with compatible $ S $-module structures (via $ \\\\mathrm{SMulCommClass} $ and $ \\\\mathrm{TensorProduct.CompatibleSMul}\"}\n  {\"name\": \"Algebra.TensorProduct.includeLeft_surjective\", \"module\": \"Mathlib/RingTheory/TensorProduct/Basic\", \"type\": \"∀ {R : Type u_1} {T : Type u_4} [inst : CommSemiring R] [inst_1 : Ring T] [inst_2 : Algebra R T] (S : Type u_5)\\n  (A : Type u_6) [inst_3 : CommSemiring S] [inst_4 : Semiring A] [inst_5 : Algebra S A] [inst_6 : Algebra R A]\\n  [inst_7 : SMulCommClass R S A],\\n  Function.Surjective ⇑(algebraMap R T) → F\", \"doc\": \"Let $ R $ be a commutative semiring, $ A $ an $ R $-algebra, and $ T $ an $ R $-algebra with a surjective algebra homomorphism $ R \\\\to T $. The canonical algebra homomorphism $ \\\\text{includeLeft}: A \\\\\"}\n  {\"name\": \"Algebra.TensorProduct.includeRight_surjective\", \"module\": \"Mathlib/RingTheory/TensorProduct/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} (T : Type u_4) [inst : CommSemiring R] [inst_1 : Semiring S] [inst_2 : Algebra R S]\\n  [inst_3 : Ring T] [inst_4 : Algebra R T],\\n  Function.Surjective ⇑(algebraMap R S) → Function.Surjective ⇑Algebra.TensorProduct.includeRight\", \"doc\": \"If the canonical algebra homomorphism from $ R $ to $ S $ is surjective, then the algebra homomorphism $ \\\\text{includeRight} : T \\\\to S \\\\otimes_R T $ defined by $ t \\\\mapsto 1 \\\\otimes t $ is surjective.\"}\n  {\"name\": \"TensorProduct.mk_surjective\", \"module\": \"Mathlib/RingTheory/TensorProduct/Basic\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) (S : Type u_3) [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : Semiring S] [inst_4 : Algebra R S],\\n  Function.Surjective ⇑(algebraMap R S) → Function.Surjective ⇑((TensorProduct.mk R S M) 1)\", \"doc\": \"The tensor product $ M \\\\otimes_R N $ of modules over a commutative semiring $ R $ is equipped with an $ R $-module structure where scalar multiplication acts on the left component, satisfying distribu\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give affine morphism properties, ordinary Galois categories or tensor-map surjectivity under different hypotheses; none constructs the internal relation groupoid and its invariant comparison data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite locally free affine equivalence relation has integral invariant inclusion and a surjective tensor comparison map",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"term_≃ᵃ[_]_\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.AffineEquiv\", \"type\": \": Lean.TrailingParserDescr✝\", \"doc\": \"The notation $ ≃ᵃ[𝕜] $ denotes an affine equivalence between affine spaces over a field $ 𝕜 $, i.e., a bijective affine map whose inverse is also affine.\"}\n  {\"name\": \"Submodule.tensorInvEquiv\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": I ⊗[R] ↑I⁻¹ ≃ₗ[R] R\", \"doc\": \"Let $R$ be a commutative ring and $A$ be a faithful $R$-algebra. For any invertible $R$-submodule $I$ of $A$, the tensor product $I \\\\otimes_R I^{-1}$ is linearly equivalent to $R$ as an $R$-module.\"}\n  {\"name\": \"AffineEquiv.recOn\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.AffineEquiv\", \"type\": \"{k : Type u_1} →\\n  {P₁ : Type u_2} →\\n    {P₂ : Type u_3} →\\n      {V₁ : Type u_4} →\\n        {V₂ : Type u_5} →\\n          [inst : Ring k] →\\n            [inst_1 : AddCommGroup V₁] →\\n              [inst_2 : AddCommGroup V₂] →\\n                [inst_3 : Module k V₁] →\\n                  [inst_4 : Module k V\", \"doc\": \"A structure representing an affine equivalence between two affine spaces $ P_1 $ and $ P_2 $ over a ring $ k $, where $ P_1 $ is a torsor over the $ k $-module $ V_1 $ and $ P_2 $ is a torsor over the\"}\n  {\"name\": \"AffineEquiv.noConfusionType\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.AffineEquiv\", \"type\": \"Sort u →\\n  {k : Type u_1} →\\n    {P₁ : Type u_2} →\\n      {P₂ : Type u_3} →\\n        {V₁ : Type u_4} →\\n          {V₂ : Type u_5} →\\n            [inst : Ring k] →\\n              [inst_1 : AddCommGroup V₁] →\\n                [inst_2 : AddCommGroup V₂] →\\n                  [inst_3 : Module k V₁] →\\n           \", \"doc\": \"A structure representing an invertible affine map between two affine spaces $ P_1 $ and $ P_2 $ over a ring $ k $, where $ P_1 $ and $ P_2 $ are torsors over $ k $-modules $ V_1 $ and $ V_2 $. This in\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsFinite f ↔ IsIntegralHom f ∧ LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AffineEquiv.ctorIdx\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.AffineEquiv\", \"type\": \"{k : Type u_1} →\\n  {P₁ : Type u_2} →\\n    {P₂ : Type u_3} →\\n      {V₁ : Type u_4} →\\n        {V₂ : Type u_5} →\\n          {inst : Ring k} →\\n            {inst_1 : AddCommGroup V₁} →\\n              {inst_2 : AddCommGroup V₂} →\\n                {inst_3 : Module k V₁} →\\n                  {inst_4 : Module k V\", \"doc\": \"A structure representing an affine equivalence between two affine spaces $ P_1 $ and $ P_2 $ over a ring $ k $, where $ P_1 $ is a torsor over the $ k $-module $ V_1 $ and $ P_2 $ is a torsor over the\"}\n  {\"name\": \"AffineEquiv.noConfusion\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.AffineEquiv\", \"type\": \"{P : Sort u} →\\n  {k : Type u_1} →\\n    {P₁ : Type u_2} →\\n      {P₂ : Type u_3} →\\n        {V₁ : Type u_4} →\\n          {V₂ : Type u_5} →\\n            {inst : Ring k} →\\n              {inst_1 : AddCommGroup V₁} →\\n                {inst_2 : AddCommGroup V₂} →\\n                  {inst_3 : Module k V₁} →\\n     \", \"doc\": \"A structure representing an invertible affine map between two affine spaces $ P_1 $ and $ P_2 $ over a ring $ k $, where $ P_1 $ and $ P_2 $ are torsors over $ k $-modules $ V_1 $ and $ V_2 $. This in\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": HasAffineProperty @IsIntegralHom fun X _ f _ ↦ IsAffine X ∧ RingHom.IsIntegral (f.app ⊤).hom\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give affine morphism properties, ordinary Galois categories or tensor-map surjectivity under different hypotheses; none constructs the internal relation groupoid and its invariant comparison data."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"eqLocus\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give affine morphism properties, ordinary Galois categories or tensor-map surjectivity under different hypotheses; none constructs the internal relation groupoid and its invariant comparison data."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*invariant|invariant.*groupoid|relation.*tensor|tensor.*relation",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give affine morphism properties, ordinary Galois categories or tensor-map surjectivity under different hypotheses; none constructs the internal relation groupoid and its invariant comparison data."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid|invariant.*equalizer|equivalence.*relation",
+   "results": "1 hit: Mathlib/AlgebraicGeometry/Gluing.lean:239, an equivalence relation on the disjoint union of gluing charts.",
+   "date": "2026-10-23",
+   "verdict": "no match: gluing-chart relation does not supply the invariant-ring theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsFinite",
+   "results": "3 hits: AlgebraicGeometry.IsFinite.instOfIsClosedImmersion; AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono; AlgebraicGeometry.IsClosedImmersion.eq_isFinite_inf_mono, all Mathlib.AlgebraicGeometry.Morphisms.Finite.",
+   "date": "2026-10-23",
+   "verdict": "partial match only: finite monomorphism criterion, already represented by lem-a1-finite-monomorphism-closed-immersion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free equivalence relation on an affine scheme defines a groupoid and its invariant subring has integral inclusion, orbit fibres, and flat base change invariants",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.HasAffineProperty.affineAnd_iff; affine-space and ring-hom-property infrastructure.",
+   "date": "2026-10-23",
+   "verdict": "no match: none states the relation-groupoid invariant theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The invariant subring of an affine finite locally free equivalence relation commutes with flat base change",
+   "results": "8 hits: IsInvariantSubring.mk, IsInvariantSubring, RingHom.Flat.isStableUnderBaseChange, IsSMulRegular.of_flat_of_isBaseChange, RingHom.IsStableUnderBaseChange, RingHom.FaithfullyFlat.isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange.",
+   "date": "2026-10-23",
+   "verdict": "no match: invariant-subring definitions and stability of flatness do not state preservation of this equalizer."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite flat groupoid schemes the invariant ring commutes with flat extension of scalars and the quotient has orbit fibres",
+   "results": "8 hits: Ideal.Quotient.exists_algEquiv_fixedPoint_quotient_under, Ideal.Quotient.exists_algHom_fixedPoint_quotient_under, Ideal.Quotient.finite_of_isInvariant, IsArithFrobAt.exists_of_isInvariant, Algebra.IsInvariant.exists_smul_of_under_eq, CategoryTheory.PreGaloisCategory.FiberFunctor.preservesQuotientsByFiniteGroups, instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient, Algebra.IsInvariant.isIntegral_of_profinite.",
+   "date": "2026-10-23",
+   "verdict": "no match: finite/profinite group actions on one ring are not general finite locally free groupoids."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-finite-flat-affine-relation-quotient",
+  "date": "2026-10-22",
+  "group": "Q131"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Fourth paragraph of the proof of 03XX: the affine schemes U′,R′ with finite etale projections have affine quotient by groupoids-proposition-finite-flat-equivalence. Supporting affine-quotient argument: Stacks Tags 03BM (proposition-finite-flat-equivalence), proof first and second paragraphs; 03BK (lemma-invariants-base-change), (1),(3). Finite free affine descriptions: morphisms.tex Tag 02KB (lemma-finite-flat). Returned item steps 1,2,3,4,6.",
+   "via": [
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-affine-relation-comparison-preparation",
+  "worker": "stage1",
+  "summary": "Preserved every clause of the statement. Wrote eight proof steps: Yoneda construction, tensor comparison, finite monomorphism, integrality/orbits, finite-free charts, groupoid base change, flat equalizer, and explicit comparison/chart compatibility. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "Retains the inherited ancestry to lem-a1-affine-hc0 through the affine finite-flat quotient branch; realizes the supporting Stacks 03BM first two proof paragraphs and 03BK (1),(3), with 03BJ and 03BL for the auxiliary integrality and orbit assertions. The current blueprint ancestor itself states compact-support vanishing; this delivery does not modify that statement or the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-bc73a55eb",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-bc73a55eb (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps in full, every cited node's statement, and Stacks groupoids.tex 03BM (proof paragraphs 1-2), 03BJ, 03BK (parts 1 and 3 and their proof), 03BL and lemma-equivalence-groupoid. No new nodes. The statement is unchanged and matches these Stacks results hypothesis by hypothesis; Stacks writes j=(t,s), the item uses (s,t) consistently. S1: Yoneda over Sch/S gives e,i,c; every law compares arrows with equal endpoints, so the laws are equalities of morphisms and hold for absolute test schemes. This relies on the implicit standard reading that s,t are S-morphisms. S2: qs=qt; the affine fibre product and the tensor universal property (2)(3) give phi. S3: j_M is a monomorphism (give H the S-structure via pi s a); it is finite because generators over A via sigma generate over A(x)A, using the f_*O_X form in def-weil-finite-integral-morphism. lem-a1-finite-monomorphism-closed-immersion then makes j_M a closed immersion, and the affine characterization of closed immersions makes phi surjective. S4: integral-invariants and orbit-fibres have exactly these hypotheses and the same C. S5: flat/lfp affine criteria, then 0564, then fp+flat => projective, then the standard free cover (Lean-closed in slopmaster2, so a tool use, not off-route), for sigma and tau separately. S6: base-change paragraph of the polynomial-norm node, valid for any C->D; norm clauses unused. S7: sigma-tau is C-linear and flat tensor exactness gives the equalizer, as in the proof of 03BK(3). S8: phi_D = phi(x)1 and the covers base-change; these are routine identities, so the elementary mark is accepted. proof_deps equals the union of uses; no cycle (162-node closure); the only citer is the parent, whose step 1 uses exactly these clauses. No duplicate found by rg -L over dag/nodes (the sibling local-basis-reduction and flat-local-descent are the parent's later steps). Edge cases checked: A=0, the diagonal relation, variable-rank disjoint unions, D=0, nonreduced rings. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineRelationComparisonPreparation",
+  "declaration": "AlgebraicGeometry.affineRelation_comparison_preparation",
+  "declarations": [
+   "AlgebraicGeometry.affineRelation_comparison_preparation",
+   "AlgebraicGeometry.AffineRelationComparison.invariantArrowAlgebra",
+   "AlgebraicGeometry.AffineRelationComparison.source",
+   "AlgebraicGeometry.AffineRelationComparison.target",
+   "AlgebraicGeometry.AffineRelationComparison.comparison",
+   "AlgebraicGeometry.AffineRelationComparison.extend",
+   "AlgebraicGeometry.AffineRelationComparison.extendedMap",
+   "AlgebraicGeometry.AffineRelationComparison.extensionProjection",
+   "AlgebraicGeometry.AffineRelationComparison.extendedComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineRelationComparisonPreparation.lean",
+  "statement": "theorem affineRelation_comparison_preparation {S : Scheme.{u}} {A B : CommRingCat.{u}} (a : Spec A ⟶ S) (b : Spec B ⟶ S) (σ τ : A →+* B) (hs : (Spec.map (CommRingCat.ofHom σ)) ≫ a = b) (ht : (Spec.map (CommRingCat.ofHom τ)) ≫ a = b) [((Spec.map (CommRingCat.ofHom σ))).IsFiniteLocallyFree] [((Spec.map (CommRingCat.ofHom τ))).IsFiniteLocallyFree] (hrel : ∀ H : Over S, Function.Injective (fun r : H ⟶ Over.mk b ↦ (r.left ≫ (Spec.map (CommRingCat.ofHom σ)), r.left ≫ (Spec.map (CommRingCat.ofHom τ)))) ∧ Equivalence (fun x y : H ⟶ Over.mk a ↦ ∃ r : H ⟶ Over.mk b, r.left ≫ (Spec.map (CommRingCat.ofHom σ)) = x.left ∧ r.left ≫ (Spec.map (CommRingCat.ofHom τ)) = y.left)) : ∃ (e : Spec A ⟶ Spec B) (i : Spec B ⟶ Spec B) (c : pullback (Spec.map (CommRingCat.ofHom σ)) (Spec.map (CommRingCat.ofHom τ)) ⟶ Spec B), IsGroupoidScheme (Spec.map (CommRingCat.ofHom σ)) (Spec.map (CommRingCat.ofHom τ)) e i c ∧ e ≫ b = a ∧ i ≫ b = b ∧ c ≫ b = pullback.fst (Spec.map (CommRingCat.ofHom σ)) (Spec.map (CommRingCat.ofHom τ)) ≫ b ∧ (∀ (e' : Spec A ⟶ Spec B) (i' : Spec B ⟶ Spec B) (c' : pullback (Spec.map (CommRingCat.ofHom σ)) (Spec.map (CommRingCat.ofHom τ)) ⟶ Spec B), IsGroupoidScheme (Spec.map (CommRingCat.ofHom σ)) (Spec.map (CommRingCat.ofHom τ)) e' i' c' → e' = e ∧ i' = i ∧ c' = c) ∧ ∃ hq : (Spec.map (CommRingCat.ofHom σ)) ≫ (Spec.map (CommRingCat.ofHom (σ.eqLocus τ).subtype)) = (Spec.map (CommRingCat.ofHom τ)) ≫ (Spec.map (CommRingCat.ofHom (σ.eqLocus τ).subtype)), (pullback.lift (Spec.map (CommRingCat.ofHom σ)) (Spec.map (CommRingCat.ofHom τ)) hq ≫ (pullbackSpecIso (σ.eqLocus τ) A A).hom = Spec.map (CommRingCat.ofHom (comparison σ τ))) ∧ IsFinite (pullback.lift (Spec.map (CommRingCat.ofHom σ)) (Spec.map (CommRingCat.ofHom τ)) hq) ∧ Mono (pullback.lift (Spec.map (CommRingCat.ofHom σ)) (Spec.map (CommRingCat.ofHom τ)) hq) ∧ IsClosedImmersion (pullback.lift (Spec.map (CommRingCat.ofHom σ)) (Spec.map (CommRingCat.ofHom τ)) hq) ∧ Function.Surjective (comparison σ τ) ∧ (∀ x y : A, comparison σ τ (x ⊗ₜ y) = σ x * τ y) ∧ (∀ x : A, ∃ P : Polynomial (σ.eqLocus τ), P.Monic ∧ P.eval₂ (σ.eqLocus τ).subtype x = 0) ∧ Surjective (Spec.map (CommRingCat.ofHom (σ.eqLocus τ).subtype)) ∧ (∀ x y : Spec A, (Spec.map (CommRingCat.ofHom (σ.eqLocus τ).subtype)) x = (Spec.map (CommRingCat.ofHom (σ.eqLocus τ).subtype)) y ↔ ∃ r : Spec B, (Spec.map (CommRingCat.ofHom σ)) r = x ∧ (Spec.map (CommRingCat.ofHom τ)) r = y) ∧ ∃ (n : Bool → ℕ) (f : (p : Bool) → Fin (n p) → A), (∀ p : Bool, Ideal.span (Set.range (f p)) = ⊤ ∧ ∀ j : Fin (n p), Module.Finite (Localization.Away (f p j)) (LocalizedModule.Away (f p j) ((ModuleCat.restrictScalars (if p then σ else τ)).obj (ModuleCat.of B B))) ∧ Module.Free (Localization.Away (f p j)) (LocalizedModule.Away (f p j) ((ModuleCat.restrictScalars (if p then σ else τ)).obj (ModuleCat.of B B)))) ∧ ∀ (D : Type u) [CommRing D] [Algebra (σ.eqLocus τ) D] [Module.Flat (σ.eqLocus τ) D], ((Spec.map (CommRingCat.ofHom (extendedMap σ τ D true).toRingHom))).IsFiniteLocallyFree ∧ ((Spec.map (CommRingCat.ofHom (extendedMap σ τ D false).toRingHom))).IsFiniteLocallyFree ∧ (∃ (eD : Spec (CommRingCat.of (D ⊗[σ.eqLocus τ] A)) ⟶ Spec (CommRingCat.of (D ⊗[σ.eqLocus τ] B))) (iD : Spec (CommRingCat.of (D ⊗[σ.eqLocus τ] B)) ⟶ Spec (CommRingCat.of (D ⊗[σ.eqLocus τ] B))) (cD : pullback (Spec.map (CommRingCat.ofHom (extendedMap σ τ D true).toRingHom)) (Spec.map (CommRingCat.ofHom (extendedMap σ τ D false).toRingHom)) ⟶ Spec (CommRingCat.of (D ⊗[σ.eqLocus τ] B))), IsGroupoidScheme (Spec.map (CommRingCat.ofHom (extendedMap σ τ D true).toRingHom)) (Spec.map (CommRingCat.ofHom (extendedMap σ τ D false).toRingHom)) eD iD cD ∧ eD ≫ extensionProjection (C := σ.eqLocus τ) B D = extensionProjection (C := σ.eqLocus τ) A D ≫ e ∧ iD ≫ extensionProjection (C := σ.eqLocus τ) B D = extensionProjection (C := σ.eqLocus τ) B D ≫ i ∧ ∀ (H : Scheme.{u}) (x y : H ⟶ Spec (CommRingCat.of (D ⊗[σ.eqLocus τ] B))) (hxy : x ≫ (Spec.map (CommRingCat.ofHom (extendedMap σ τ D true).toRingHom)) = y ≫ (Spec.map (CommRingCat.ofHom (extendedMap σ τ D false).toRingHom))) (hxy' : (x ≫ extensionProjection (C := σ.eqLocus τ) B D) ≫ (Spec.map (CommRingCat.ofHom σ)) = (y ≫ extensionProjection (C := σ.eqLocus τ) B D) ≫ (Spec.map (CommRingCat.ofHom τ))), (pullback.lift x y hxy ≫ cD) ≫ extensionProjection (C := σ.eqLocus τ) B D = pullback.lift (x ≫ extensionProjection (C := σ.eqLocus τ) B D) (y ≫ extensionProjection (C := σ.eqLocus τ) B D) hxy' ≫ c) ∧ Function.Injective (algebraMap D (D ⊗[σ.eqLocus τ] A)) ∧ (∀ z : D ⊗[σ.eqLocus τ] A, extendedMap σ τ D true z = extendedMap σ τ D false z ↔ ∃ d : D, algebraMap D (D ⊗[σ.eqLocus τ] A) d = z) ∧ (∃ hD : (Spec.map (CommRingCat.ofHom (extendedMap σ τ D true).toRingHom)) ≫ (Spec.map (CommRingCat.ofHom (algebraMap D (D ⊗[σ.eqLocus τ] A)))) = (Spec.map (CommRingCat.ofHom (extendedMap σ τ D false).toRingHom)) ≫ (Spec.map (CommRingCat.ofHom (algebraMap D (D ⊗[σ.eqLocus τ] A)))), pullback.lift (Spec.map (CommRingCat.ofHom (extendedMap σ τ D true).toRingHom)) (Spec.map (CommRingCat.ofHom (extendedMap σ τ D false).toRingHom)) hD ≫ (pullbackSpecIso D (D ⊗[σ.eqLocus τ] A) (D ⊗[σ.eqLocus τ] A)).hom = Spec.map (CommRingCat.ofHom (extendedComparison σ τ D))) ∧ (∀ (x y : A) (d d' : D), extendedComparison σ τ D ((d ⊗ₜ x) ⊗ₜ (d' ⊗ₜ y)) = (d * d') ⊗ₜ comparison σ τ (x ⊗ₜ y)) ∧ ∀ p : Bool, Ideal.span (Set.range (fun j : Fin (n p) ↦ (Algebra.TensorProduct.includeRight : A →ₐ[σ.eqLocus τ] D ⊗[σ.eqLocus τ] A) (f p j))) = ⊤ ∧ ∀ j : Fin (n p), Module.Finite (Localization.Away ((Algebra.TensorProduct.includeRight : A →ₐ[σ.eqLocus τ] D ⊗[σ.eqLocus τ] A) (f p j))) (LocalizedModule.Away ((Algebra.TensorProduct.includeRight : A →ₐ[σ.eqLocus τ] D ⊗[σ.eqLocus τ] A) (f p j)) ((ModuleCat.restrictScalars (extendedMap σ τ D p).toRingHom).obj (ModuleCat.of (D ⊗[σ.eqLocus τ] B) (D ⊗[σ.eqLocus τ] B)))) ∧ Module.Free (Localization.Away ((Algebra.TensorProduct.includeRight : A →ₐ[σ.eqLocus τ] D ⊗[σ.eqLocus τ] A) (f p j))) (LocalizedModule.Away ((Algebra.TensorProduct.includeRight : A →ₐ[σ.eqLocus τ] D ⊗[σ.eqLocus τ] A) (f p j)) ((ModuleCat.restrictScalars (extendedMap σ τ D p).toRingHom).obj (ModuleCat.of (D ⊗[σ.eqLocus τ] B) (D ⊗[σ.eqLocus τ] B))))",
+  "branch": "sheaf-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded IsGroupoidScheme and Mathlib RingHom.eqLocus directly. Canonical tensor comparisons and scalar-extension maps are real helper constructions belonging to this node. Scalar extensions are written D tensor_C A and D tensor_C B, canonically symmetric to the displayed A tensor_C D and B tensor_C D; all base-change compatibility formulas are included."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9ec92083",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Read the node, all 9 stmt_dep records (IsGroupoidScheme source read in side-live), the module and the report (Worker report and Second reading by Q95 present). Every hypothesis matches the node: sigma/tau parametrization covers all affine maps; hrel = injective endpoint map plus Equivalence on S-points; C = Mathlib eqLocus. Every conclusion is present: unique absolute groupoid over S; qs=qt; comparison tied to pullbackSpecIso with its pure-tensor formula; finite, mono, closed immersion, phi surjective; monic polynomials; q surjective with point orbit fibres; finite principal-open free covers for both module structures; for flat D: finite locally free maps, base-changed groupoid pinned by its projection squares (D-component forced by the laws), equalizer, phi_D with formula, same covers base changed. Helpers are real canonical constructions; statement verbatim; proof only sorry; one universe, all bound; no stronger hypotheses; edge cases A=0 and D=0 covered. Not recompiled (no file changed; worker reports a clean compile). Advisories: the public global instance invariantArrowAlgebra could clash with the subring algebra when sigma, tau : A ->+* A; the citer uses Over-morphisms s,t and needs a routine translation at stage 3."
+ }
+}

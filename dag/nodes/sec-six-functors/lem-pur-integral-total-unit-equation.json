@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-integral-total-unit-equation",
+ "kind": "statement",
+ "title": "The total compact-support completion-unit square",
+ "statement": "For an adic datum d, compactifications c,c′, a chosen Cartesian proper square sp and open square sj, any finite tuple generating d.ideal and any complete K, assume only that the ordinary open exchange at K equals the forward cbcBeta. Then the ordinaryToCompleted unit at (g,Rc.g_*c.i_!K), followed by the specified completedCompactSupportExchange, equals the ordinary proper/open purIntegralReindexingExchange at K followed by cbcSupport d c′ applied to the completion unit at (g′,K). All constructions are exactly those of [def-pur-strict-integral-exchange-data]. This asserts only the final total square, not the strict proper identities, invertibility of units, or coherence laws.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+  "place": "Original normalization step 9: paste the actual proper and open completion-unit squares."
+ },
+ "stmt_deps": [
+  "def-pur-strict-integral-exchange-data"
+ ],
+ "proof": [
+  {
+   "text": "expand completedCompactSupportExchange into completedExchange followed by\nproper direct image of cbcDatumCompletedExchange. The completedExchange_unit law\nmoves the source completion unit past the proper factor. Functoriality of the\nproper direct image combines the input completion unit with the completed open\nfactor. Apply cbcDatumCompletedExchange_unit and replace its ordinary exchange\nby the assumed beta identification. Split the resulting direct-image composite.\nThe ordered ordinary proper factor and direct image of beta are exactly the\ncomponent of purIntegralReindexingExchange; the final direct image of the open\nextension of the input unit is cbcSupport.map of that unit. Associativity gives\nthe displayed equality. No cancellation, invertibility, origin witness, or finite\nevaluation faithfulness is used. Empty schemes, zero objects and empty generating\ntuples obey the same categorical identities. This is only the final total square;\nit asserts none of the strict proper identities or the input units' invertibility.",
+   "uses": [
+    "lem-weil-pbc-completed-exchange-unit",
+    "lem-cbc-completed-extension-zero-comparison",
+    "def-cbc-completed-exchange-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Original normalization step 9: paste the actual proper and open completion-unit squares."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completed-exchange-unit",
+  "lem-cbc-completed-extension-zero-comparison",
+  "def-cbc-completed-exchange-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "reason": "The blueprint constituent paragraph assembles compatibilities. These explicit strict-tower arguments expand its integral normalization steps.",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural adjunction mates commute with inverse limits and tensor coefficient reduction",
+   "results": "CategoryTheory.Limits.constLimAdj, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv, CategoryTheory.preservesLimitNatIso_inv_app; generic infrastructure only.",
+   "date": "2026-10-25",
+   "verdict": "no match for these specified completed coefficient and strict quotient comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv, mateEquiv_counit, mateEquiv_vcomp, mateEquiv_hcomp and conjugateEquiv variants, Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-25",
+   "verdict": "no match; none specializes in one line to the specified reduction, completed pullback and proper/open maps"
+  },
+  {
+   "tool": "grep",
+   "query": "rg mate|whisker Mathlib/CategoryTheory/Adjunction/Mates.lean; rg PurIntegralProperNormalization|PurIntegralStrictHorizontal|purStrictIntegral lean/Sheaf lean/WeilConjectures",
+   "results": "Mates supplies the generic bijection and pasting. PurStrictIntegralExchangeNormalization has the parent statement only; SemilinearExchangeReindexing repeats it in a parent conjunction and imports the item, so cannot supply a proof.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurStrictIntegralExchangeNormalization",
+  "date": "2026-10-25",
+  "group": "T1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Original normalization step 9: paste the actual proper and open completion-unit squares.",
+   "via": [
+    "lem-pur-isomorphism-strict-integral-exchange-normalization",
+    "lem-pur-weil-semilinear-exchange-reindexing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurIntegralTotalUnitEquation",
+  "file": "lean/Sheaf/Paper/PurIntegralTotalUnitEquation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.purIntegralTotalUnitEquation",
+  "statement": "theorem purIntegralTotalUnitEquation\n    {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    {X' X Y' Y : Scheme.{t}} {f : X ⟶ Y} {f' : X' ⟶ Y'}\n    {g : Y' ⟶ Y} {g' : X' ⟶ X} [QuasiCompact f]\n    (c : Compactification f) (c' : Compactification f') (gb : c'.Z ⟶ c.Z)\n    (sp : ChosenCartesianSquare gb c'.g c.g g)\n    (sj : OpenImmersionSquare g' c'.i c.i gb)\n    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)\n    (K : (cbcCompleteProperty d X r a ha).FullSubcategory)\n    (hbeta : (cbcDatumOrdinaryExchange d sj).app K.obj =\n      (cbcBeta d g' c'.i c.i gb sj.w\n        (IsPullback.of_iso_pullback sj.toCommSq sj.isoPullback sj.hom_fst\n          sj.hom_snd)).hom.app K.obj) :\n    d.ordinaryToCompleted g ((cbcSupport d c).obj K.obj) ≫\n        completedCompactSupportExchange d c c' gb sp sj r a ha K =\n      (purIntegralReindexingExchange d c c' gb sp sj).app K.obj ≫\n        (cbcSupport d c').map (d.ordinaryToCompleted g' K.obj)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "worker": "stage3",
+  "item": "Sheaf.Paper.PurStrictIntegralExchangeNormalization",
+  "summary": "Postpone only the final total completion-unit square; proper strict normalization and the completed open unit equation are proved separately in the parent.",
+  "blueprint": "Original normalization step 9: paste the actual proper and open completion-unit squares."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-477d0",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261025T205604-L-3299132",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-477d0",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261025T205604-L-3299132",
+  "kind": "interface",
+  "note": "independent cc review: old item module vs new PurStrictIntegralExchangeData + item (defs verbatim, statement byte-identical); delivered item node vs base node under stage3_delivery/check_statement_change; importer SemilinearExchangeReindexingData compiled with delivered modules"
+ }
+}

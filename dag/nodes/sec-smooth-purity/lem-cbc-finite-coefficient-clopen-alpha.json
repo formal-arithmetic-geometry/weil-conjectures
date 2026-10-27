@@ -1,0 +1,177 @@
+{
+ "id": "lem-cbc-finite-coefficient-clopen-alpha",
+ "kind": "statement",
+ "title": "Finite coefficient realization respects the ordinary clopen alpha",
+ "statement": "Let $B,\\Lambda$ be commutative rings, $\\Lambda$ finite and discrete, and $\\varphi:B\\to\\Lambda$ a unital ring map. For schemes $V,W,S,T$ [def-pc-scheme], quasi-compact open immersions $k:V\\to W$, $i:S\\to T$ [def-weil-open-immersion, def-weil-finite-type-morphism], proper maps $r:V\\to S$, $p:W\\to T$ [def-weil-proper-morphism], and $pk=ir$, use $H_X=C_X\\nu_X^*$ and the normalized comparisons of [def-cbc-finite-constant-coefficient-transport]. Let $q_f$ be hPullbackIso, from applying $H_Y$ and then $f_B^*$ to applying $f_{et}^*$ and then $H_X$; its hom is hPullbackInv. Let $o_j$ be the isomorphism whose hom is hOpen, from applying $j_{!,et}$ and then $H_X$ to applying $H_U$ and then $j_{!,B}$. Let $\\alpha^{et}$ be alpha from [lem-cbc-etale-clopen-mate-normalization], and $\\alpha^B$ singleAlpha from [def-cbc-strict-tower-ordinary-proper-open-arrows]. For each $M\\in \\operatorname{Sh}(S_{et},\\operatorname{Mod}_\\Lambda)$, the two arrows from $H_Wp_{et}^*i_{!,et}M$ to $k_{!,B}r_B^*H_SM$ agree: $H_W(\\alpha^{et}_M)$ followed by $(o_k)_{r_{et}^*M}$ and $k_{!,B}((q_r)^{-1}_M)$ equals $(q_p)^{-1}_{i_{!,et}M}$ followed by $p_B^*((o_i)_M)$ and $\\alpha^B_{H_SM}$. All functors in this equation act on ordinary sheaves; there are no complexes, derived categories, proper adjunction mates, or derived direct-image comparisons.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099R (section-comparison), 09AF (lemma-jshriek-comparison); sites-modules.tex Tag 03DA; sites-cohomology.tex Tag 07A7; first two steps of lem-cbc-single-level-finite-proper-open-transport"
+ },
+ "stmt_deps": [
+  "def-cbc-finite-constant-coefficient-transport",
+  "lem-cbc-etale-clopen-mate-normalization",
+  "def-cbc-strict-tower-ordinary-proper-open-arrows",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Factor H as site inverse image followed by coefficient realization C. For the site factor apply finiteClopenAlphaSiteTransport to the single complex M[0] and take zeroth cohomology. The canonical exact-single and homology comparison isomorphisms identify each functor and each natural transformation with its ordinary sheaf counterpart. Consequently this gives the ordinary site alpha equation, with its specified pullback and open comparisons. This reduces the coefficient portion to the same ordinary alpha comparison between fixed-ring pro-etale sheaves and constant-ring module sheaves.",
+   "uses": [
+    "def-cbc-finite-constant-coefficient-transport",
+    "lem-cbc-finite-clopen-alpha-site-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099R (section-comparison), 09AF (lemma-jshriek-comparison); sites-modules.tex Tag 03DA; sites-cohomology.tex Tag 07A7; first two steps of lem-cbc-single-level-finite-proper-open-transport"
+   }
+  },
+  {
+   "text": "For identity scalars on the finite ring, realization is an equivalence. The direct-image comparison cDirect fixes each pulled-back section under cUnderlying. Taking its inverse mate gives the unit-preserving pullback comparison; taking the next inverse mate gives the open comparison. The inverse cartesian beta is characterized by the transpose of the pulled-back open unit followed by the inverse-image compositor. The comparison preserves this unit and compositor, so the two beta maps agree by injectivity of transpose. The same unit characterization identifies the open and inverse-image compositors, including their identity and equality-transport cases.",
+   "uses": [
+    "def-cbc-finite-constant-coefficient-transport",
+    "lem-cbc-tower-open-beta-normalization",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099R (section-comparison), 09AF (lemma-jshriek-comparison); sites-modules.tex Tag 03DA; sites-cohomology.tex Tag 07A7; first two steps of lem-cbc-single-level-finite-proper-open-transport"
+   }
+  },
+  {
+   "text": "Let s be the clopen lift of (k,r) to W times_T S, and c its complementary open. The section decomposition of the clopen-projector theorem expresses a sheaf section as a pair on the two opens. Under cUnderlying both restrictions retain their sections. The coefficient realization is additive, so identity and zero component maps are preserved. Hence it identifies the unique (x,y) maps to (x,0) projector. Together with the beta and compositor identifications this compares all factors of the ordinary alpha in the identity-scalar presentation. Empty images and empty complements use the same unique zero section.",
+   "uses": [
+    "lem-cbc-proper-open-clopen-projector",
+    "lem-cbc-tower-open-beta-normalization",
+    "def-cbc-finite-constant-coefficient-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099R (section-comparison), 09AF (lemma-jshriek-comparison); sites-modules.tex Tag 03DA; sites-cohomology.tex Tag 07A7; first two steps of lem-cbc-single-level-finite-proper-open-transport"
+   }
+  },
+  {
+   "text": "For a general ring map B to Lambda, factor C through identity-scalar realization over Lambda, then constant-ring scalar restriction along this map. The scalar_alpha assertion compares exactly the latter alpha maps. Section normalization identifies the composite direct-image comparison with cDirect; injectivity of both mate correspondences then identifies the composite pullback and open comparisons with hPullbackInv and hOpen. Paste this scalar equation with the identity-scalar realization equation and the site equation. The resulting ordinary sheaf equation is the stated one. No localization step is included in this obligation. No proper mate, derived direct-image comparison, preservation of K-injectives, or flatness is used.",
+   "uses": [
+    "def-cbc-finite-constant-coefficient-transport",
+    "lem-cbc-tower-mate-evaluation-scalars",
+    "lem-cbc-etale-clopen-mate-normalization",
+    "def-cbc-strict-tower-ordinary-proper-open-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099R (section-comparison), 09AF (lemma-jshriek-comparison); sites-modules.tex Tag 03DA; sites-cohomology.tex Tag 07A7; first two steps of lem-cbc-single-level-finite-proper-open-transport"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-finite-constant-coefficient-transport",
+  "lem-cbc-finite-clopen-alpha-site-transport",
+  "lem-cbc-tower-open-beta-normalization",
+  "def-weil-pbc-adjunction-mate",
+  "lem-cbc-proper-open-clopen-projector",
+  "lem-cbc-tower-mate-evaluation-scalars",
+  "lem-cbc-etale-clopen-mate-normalization",
+  "def-cbc-strict-tower-ordinary-proper-open-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099R (section-comparison), 09AF (lemma-jshriek-comparison); sites-modules.tex Tag 03DA; sites-cohomology.tex Tag 07A7; first two steps of lem-cbc-single-level-finite-proper-open-transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact scalar restriction and etale proetale comparison preserve clopen extension by zero projection natural transformations",
+   "results": "8 hits including PresheafOfModules.restrictScalars, LinearMap.restrictScalars_zero, SheafOfModules.restrictScalars_map_val, GrothendieckTopology.diagramNatTrans_zero, PresheafOfModules.restrictScalars_map_app.",
+   "date": "2026-10-26",
+   "verdict": "Generic scalar restriction, zero maps and sheafification only; no specified clopen-alpha comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The equivalence between fixed ring sheaves and constant ring module sheaves carries the clopen extension by zero projector and its base change map to the same maps",
+   "results": "8 hits including ModuleCat.Tilde.res_const, CompHausLike.LocallyConstantModule.functor_map_val and SheafOfModules.pullbackObjFreeIso.",
+   "date": "2026-10-26",
+   "verdict": "No comparison of the specified finite coefficient realization and clopen alpha."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*(scalar|coefficient)|(scalar|coefficient).*clopen",
+   "results": "No Mathlib hits. Blueprint search clopen found 12 nodes and coefficient clopen alpha found none. Library/DAG search found FiniteClopenAlphaSiteTransport (site factor only), TowerMateEvaluationScalars.scalar_alpha (scalar factor only), and ProperOpenCoefficientMate (cartesian Noetherian scalar extension, different from this scalar restriction for an arbitrary proper/open square).",
+   "date": "2026-10-26",
+   "verdict": "The site and scalar factors are reused in the proof plan. No node already compares C realization of this alpha."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleLevelFiniteProperOpenTransport",
+  "date": "2026-10-26",
+  "group": "F3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof, first displayed factorization of Ex^c_!(K), with BC followed by Rp prime_* of the inverse open exchange; final paragraph: \"Both arrows are natural transformations, so the composite is natural in K.\" The ordinary finite-coefficient proper/open compatibility is used by the retained strict-tower refinement (parent calculus steps 4--5 and this parent node steps 1--2). The latest blueprint states the condensed integral result; this is a finite-level auxiliary, not a change to its target.",
+   "via": [
+    "lem-cbc-single-level-finite-proper-open-transport",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteCoefficientClopenAlpha",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCoefficientClopenAlpha.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.finiteCoefficientClopenAlpha",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.hPullbackIso",
+   "AlgebraicGeometry.ProEtale.StrictTower.hPullbackPlus",
+   "AlgebraicGeometry.ProEtale.StrictTower.hOpenPlus",
+   "AlgebraicGeometry.ProEtale.StrictTower.finiteCoefficientClopenAlpha"
+  ],
+  "statement": "theorem finiteCoefficientClopenAlpha\n    {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)\n    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]\n    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i)\n    (M : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    (H B W Λ φ).map ((Etale.ClopenMateNormalization.alpha Λ k r p i h).app M) ≫\n      (hOpen B k Λ φ).app ((Etale.upperStar (ModuleCat.{u + 1} Λ) r).obj M) ≫\n      (moduleJ B k).map ((hPullbackIso B Λ φ r).inv.app M) =\n    (hPullbackIso B Λ φ p).inv.app\n        ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i).obj M) ≫\n      (modulePullback B p).map ((hOpen B i Λ φ).app M) ≫\n      (singleAlpha B k r p i h).app ((H B S Λ φ).obj M)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T001435-L-4193104",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T001435-L-4193104",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

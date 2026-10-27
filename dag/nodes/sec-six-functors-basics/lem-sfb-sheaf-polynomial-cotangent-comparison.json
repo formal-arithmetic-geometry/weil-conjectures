@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-sheaf-polynomial-cotangent-comparison",
+ "kind": "statement",
+ "title": "Polynomial-presentation comparisons for the sheaf naive cotangent complex",
+ "statement": "Let $\\mathcal C$ be a small site in the chosen universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], and let $A\\to B$ be a homomorphism of sheaves of commutative rings. Use module sheaves [def-weil-sheaf-of-modules-category] and their derived category [def-weil-abstract-derived-category]. For a sheaf of sets $E$ with map $\\alpha:E\\to B$, let $P_E=A[E]$ be the sheafification [def-weil-pbc-sheafification] of $U\\mapsto A(U)[E(U)]$, with restriction of coefficients and variables; polynomial rings use [def-weil-pbc-mv-polynomial-ring]. Suppose evaluation $P_E\\to B$, $[e]\\mapsto\\alpha(e)$, is surjective as a sheaf map. Put $J_E=\\ker(P_E\\to B)$, an ideal subsheaf [def-weil-pbc-ringed-site-ideal], and let $J_E^2$ consist locally of finite sums of products of sections of $J_E$. Write $M_E=J_E/J_E^2$, $F_E=\\Omega_{P_E/A}\\otimes_{P_E}B$ and $K_E=[M_E\\xrightarrow{d_E}F_E]$ in degrees $-1,0$, where $d_E(\\bar j)=\\mathrm dj\\otimes1$. Here differentials are the sheafification of the sectionwise universal modules [def-weil-pbc-kahler-differentials], and tensor products are [def-pur-sheaf-tensor-product]. Define $\\mathrm{NL}_{B/A}=K_B$ using $E=B$ and $\\alpha=\\mathrm{id}$, and write $\\Omega_{B/A}$ for the sheafified sectionwise differential module. There are canonical isomorphisms $\\lambda_E:K_E\\xrightarrow{\\sim}\\mathrm{NL}_{B/A}$ in $D(\\operatorname{Mod}(B))$. If $v:E\\to E'$ is a map over $B$ between such presentations, the induced chain map $K(v):K_E\\to K_{E'}$ is a quasi-isomorphism and $\\lambda_{E'}K(v)=\\lambda_E$. These comparisons are compatible with identity maps and composition. The canonical map $F_E\\to\\Omega_{B/A}$ induces $\\operatorname{coker}(d_E)\\xrightarrow{\\sim}\\Omega_{B/A}$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08TY (lemma-NL-up-to-qis), including naturality of the canonical comparison under maps of sheaf generators; Tag 08TS (lemma-differential-seq), for the cokernel identification."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-ringed-site-ideal",
+  "def-weil-pbc-kahler-differentials",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-sheaf-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Put $Q(U)=A(U)[E(U)]$, $C(U)=\\operatorname{im}(Q(U)\\to B(U))$ and $I(U)=\\ker(Q(U)\\to B(U))$. These are presheaves with the evident restriction maps; $Q\\to C$ is sectionwise surjective. Apply [lem-weil-pbc-image-presheaf-sheafification-iso] to $Q\\to B$: its sheafification is the assumed surjection $P_E\\to B$, so $C\\subset B$ is locally surjective and $C^\\#=B$. All objects and values lie in the chosen universe. We will use the ring presentation $Q(U)\\twoheadrightarrow C(U)$, never assume $Q(U)\\to B(U)$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-image-presheaf-sheafification-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TY (lemma-NL-up-to-qis), proof of the claim: definition of the image presheaf B′."
+   }
+  },
+  {
+   "text": "Sheafify the sectionwise two-term complex $T_E(U)=[I(U)/I(U)^2\\to\\Omega_{Q(U)/A(U)}\\otimes_{Q(U)}C(U)]$. Its terms have their extended sheaf-module structures by [lem-pc-sites-module-sheafification-interface]. Exactness of abelian sheafification ([lem-weil-pbc-site-r-module-presheaf-sheafification-exact], with the fixed ring $\\mathbf Z$) gives $I^\\#=J_E$. By the local representation and local equality clauses of [lem-weil-pbc-site-sheafification-sections-local], $(I^2)^\\#=J_E^2$: a finite sum of products of local sections of $J_E$ locally lifts to the same finite sum of products of sections of $I$, and conversely each such sum lands in $J_E^2$. Exactness then gives $(I/I^2)^\\#=J_E/J_E^2$. The differential term becomes $F_E$: [lem-trf-sheafified-module-differentials-cokernel] identifies the sheafified differential module with $\\Omega_{P_E/A}$, while [lem-pc-sites-module-sheafification-tensor], applied over the presheaf of rings $Q$ to the presheaves of $Q$-modules $\\Omega_{Q/A}$ and $C$ (with $Q^\\#=P_E$, $C^\\#=B$), gives $(\\Omega_{Q/A}\\otimes_{p,Q}C)^\\#\\cong\\Omega_{P_E/A}\\otimes_{P_E}B$ in the sense of [def-pur-sheaf-tensor-product]. Explicitly this map sends $\\mathrm dq\\otimes c$ to $\\mathrm d\\eta_Q(q)\\otimes\\eta_C(c)$. These identifications carry $\\bar i\\mapsto\\mathrm di\\otimes1$ to $d_E$. Thus $T_E^\\#$ is $K_E$ as a complex. Exact sheafification also commutes with its kernels and cokernels. The same formulas show compatibility with every generator map over $B$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "lem-trf-sheafified-module-differentials-cokernel",
+    "lem-pc-sites-module-sheafification-tensor",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TY, proof of the claim (sheafification of the kernel complex), using Tag 08TP (lemma-differentials-sheafify)."
+   }
+  },
+  {
+   "text": "For each $U$, compare the polynomial presentation $Q(U)\\twoheadrightarrow C(U)$ to the canonical one $A(U)[C(U)]\\twoheadrightarrow C(U)$ by $[e]\\mapsto[\\alpha(e)]$. By [lem-weil-pbc-nl-presentations-homotopy-equivalent] it induces an isomorphism on the kernels of the conormal differentials. These kernel identifications commute with restrictions and with maps of generators: [lem-weil-pbc-nl-presentation-h1-functoriality] says that the kernel map is independent of the chosen lift and respects composition, including when base rings change. Applying step 2 gives $H^{-1}(K_E)=\\mathcal T_C^\\#$. Now apply [lem-sfb-locally-dense-cotangent-h1] to $C\\subset B$, whose local-density hypothesis was proved in step 1. This gives a canonical isomorphism $H^{-1}(K_E)\\cong\\mathcal T_B^\\#$. For $E=B$ the image presheaf is already $B$. The comparison for $E\\to B$ induces precisely this isomorphism: its map to the canonical presentation of $B(U)$ factors through the canonical presentation of $C(U)$ by the displayed generator formula. Thus it is an isomorphism in degree $-1$.",
+   "uses": [
+    "lem-weil-pbc-nl-presentations-homotopy-equivalent",
+    "lem-weil-pbc-nl-presentation-h1-functoriality",
+    "lem-sfb-locally-dense-cotangent-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TY, proof of the claim, reduction to ring presentation independence and local-density invariance; Algebra Tag 00S1 (lemma-NL-homotopy)."
+   }
+  },
+  {
+   "text": "The same ring presentation comparison identifies $H^0(T_E(U))$ with the cokernel for $A(U)[C(U)]\\to C(U)$. By [lem-weil-pbc-naive-cotangent-complex-cokernel-kahler] this is $\\Omega_{C(U)/A(U)}$. This identification is the evaluation map: $\\mathrm dq\\otimes c\\mapsto c\\,\\mathrm d(\\operatorname{ev}(q))$; it commutes with restriction and generator maps because these formulas agree on every $\\mathrm dq$. Exact sheafification [lem-weil-pbc-site-r-module-presheaf-sheafification-exact] and [lem-trf-sheafified-module-differentials-cokernel], applied to $A\\to C$ with $C^\\#=B$, give $\\operatorname{coker}(d_E)\\cong\\Omega_{B/A}$. The map is exactly the canonical $F_E\\to\\Omega_{B/A}$ in the statement. In particular $K_E\\to K_B$ induces the identity of $\\Omega_{B/A}$ in degree zero.",
+   "uses": [
+    "lem-weil-pbc-nl-presentations-homotopy-equivalent",
+    "lem-weil-pbc-naive-cotangent-complex-cokernel-kahler",
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "lem-trf-sheafified-module-differentials-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TS (lemma-differential-seq), equivalently its proof by sectionwise cokernels and exact sheafification; Tag 08TY, H^0 paragraph."
+   }
+  },
+  {
+   "text": "The polynomial map $P_E\\to P_B$, $[e]\\mapsto[\\alpha(e)]$, sends $J_E$ and $J_E^2$ into $J_B$ and $J_B^2$. On the differential terms use $\\mathrm dp\\otimes b\\mapsto\\mathrm d f(p)\\otimes b$. The universal differential property [def-weil-pbc-kahler-differentials] makes these maps linear, and on $\\bar j$ the two chain-map composites both give $\\mathrm d f(j)\\otimes1$. Leibniz gives $\\mathrm d(jj')\\otimes1=0$ for $j,j'\\in J_E$, so the conormal formula is well defined. Steps 3 and 4 show this chain map is a quasi-isomorphism, since both complexes vanish outside degrees $-1,0$. Define $\\lambda_E$ to be its image in the derived category [def-weil-abstract-derived-category]; it is invertible by the definition of that localization. For $v:E\\to E'$ over $B$, the equality $\\alpha'v=\\alpha$ gives $P(\\alpha')P(v)=P(\\alpha)$ by the polynomial universal property [def-weil-pbc-mv-polynomial-ring]. On conormal classes and differential generators this yields the actual chain-map equality $K(\\alpha')K(v)=K(\\alpha)$, hence $\\lambda_{E'}K(v)=\\lambda_E$. On cohomology the two outer maps are isomorphisms, so $K(v)$ is a quasi-isomorphism. Identity and composition follow by the same generator formulas.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TY (lemma-NL-up-to-qis), canonical derived comparison, with the explicit map induced by E → B and its identity/composition formulas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-image-presheaf-sheafification-iso",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "lem-trf-sheafified-module-differentials-cokernel",
+  "lem-pc-sites-module-sheafification-tensor",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-nl-presentations-homotopy-equivalent",
+  "lem-weil-pbc-nl-presentation-h1-functoriality",
+  "lem-sfb-locally-dense-cotangent-h1",
+  "lem-weil-pbc-naive-cotangent-complex-cokernel-kahler",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 08TY (lemma-NL-up-to-qis), full proof including image presheaf and local-density argument, and 08TS (lemma-differential-seq). Canonical comparison taken to be the map E → B, which also proves naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived isomorphism between naive cotangent complexes from arbitrary sheaf polynomial presentations",
+   "results": "8 hits; top results: Algebra.SubmersivePresentation.cotangentEquiv_apply, Algebra.Generators.CotangentSpace.compEquiv, Algebra.Generators.H1Cotangent.δ_comp_equiv, Algebra.SubmersivePresentation.cotangentEquiv, Algebra.H1Cotangent.map, Algebra.Generators.cotangentCompLocalizationAwayEquiv, Algebra.Generators.CotangentSpace.fst_compEquiv_apply, Algebra.PreSubmersivePresentation.cotangentComplexAux",
+   "date": "2026-10-23",
+   "verdict": "No match: ring-presentation cotangent maps and presheaf differential universal properties do not give the derived comparison for arbitrary sheaf polynomial generators. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:52-72 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:171-218; these are linear maps and presheaf differentials, not this derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangentComplex\"",
+   "results": "12 hits; top results: Algebra.Extension.cotangentComplex, KaehlerDifferential.cotangentComplexBaseChange, Algebra.Extension.exact_hCotangentι_cotangentComplex, Algebra.Extension.exact_cotangentComplex_toKaehler, Algebra.Extension.cotangentComplex_mk, Algebra.Extension.Cotangent.mk_C_mem_ker_cotangentComplex, Algebra.Extension.CotangentSpace.map_cotangentComplex, KaehlerDifferential.cotangentComplexBaseChange_tmul",
+   "date": "2026-10-23",
+   "verdict": "No match: ring-presentation cotangent maps and presheaf differential universal properties do not give the derived comparison for arbitrary sheaf polynomial generators. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:52-72 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:171-218; these are linear maps and presheaf differentials, not this derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "NL.up.to.qis|[Ss]heaf.*[Cc]otangent|[Cc]otangent.*[Ss]heaf|naive.*cotangent",
+   "results": "12 hits; top results: Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "No match: ring-presentation cotangent maps and presheaf differential universal properties do not give the derived comparison for arbitrary sheaf polynomial generators. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:52-72 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:171-218; these are linear maps and presheaf differentials, not this derived comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Changing the sheaf of generators does not change the naive cotangent complex on a ringed site",
+   "results": "8 hits; top results: SheafOfModules.Presentation.generators, SheafOfModules.LocalGeneratorsData.ctorIdx, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.LocalGeneratorsData.generators, SheafOfModules.Presentation.map_generators_I, SheafOfModules.Presentation.mapGenerators.congr_simp, SheafOfModules.QuasicoherentData.localGeneratorsData, SheafOfModules.Presentation.mk.injEq",
+   "date": "2026-10-23",
+   "verdict": "No match: ring-presentation cotangent maps and presheaf differential universal properties do not give the derived comparison for arbitrary sheaf polynomial generators. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:52-72 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:171-218; these are linear maps and presheaf differentials, not this derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf polynomial presentation conormal differential cokernel is the sheaf of relative Kahler differentials",
+   "results": "8 hits; top results: PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj, PresheafOfModules.DifferentialsConstruction.relativeDifferentials', CommRingCat.KaehlerDifferential, PresheafOfModules.DifferentialsConstruction.instHasDifferentials, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map, Algebra.Presentation.differentials, CommRingCat.KaehlerDifferential.d, KaehlerDifferential",
+   "date": "2026-10-23",
+   "verdict": "No match: ring-presentation cotangent maps and presheaf differential universal properties do not give the derived comparison for arbitrary sheaf polynomial generators. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:52-72 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:171-218; these are linear maps and presheaf differentials, not this derived comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-algebra-extension-ext",
+  "date": "2026-10-23",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 0GQ5 (lemma-extensions-of-relative-ringed-topoi), 0GQ6 (remark-extensions-of-relative-ringed-topoi), 0GQ7 (lemma-extensions-of-relative-ringed-topoi-functorial), 0GQ8 (remark-extensions-of-relative-ringed-topoi-functorial), and 08UG (lemma-huge-diagram-ringed-topoi), clause (2), with identity underlying topos. Supporting input: Polynomial-presentation comparisons for the sheaf naive cotangent complex.",
+   "via": [
+    "lem-sfb-etale-algebra-extension-ext",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-sheaf-polynomial-cotangent-comparison",
+  "worker": "stage1",
+  "summary": "Read Stacks 08TY and 08TS, reused ring homotopy and H1 functoriality and the existing sheafification interfaces. Split the genuinely local H1 comparison into one statement-only node; gave the image-presheaf reduction, sheafification calculations, both homology calculations and a canonical map with strict naturality. No statement correction and no attachment.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli prerequisite chain requires 08TY for algebra-extension Ext classification. This split supplies that exact polynomial-presentation comparison, using the local image-presheaf claim and H^0 calculation of 08TY/08TS. Searched the whole imported blueprint for cotangent, cotangent homology, conormal, sheaf polynomial and locally dense; no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-image-presheaf-sheafification-iso",
+    "why": "Generic image-presheaf/local-surjectivity interface, used to pass from a sheaf quotient to sectionwise ring presentations. No statement of the item’s unit supplies this algebraic/site tool."
+   },
+   {
+    "node": "lem-trf-sheafified-module-differentials-cokernel",
+    "why": "Generic differential/sheafification universal-property comparison for presheaves of rings. No statement of the item’s unit supplies this algebraic/site tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic local representation and local equality criteria for associated-sheaf sections. No statement of the item’s unit supplies this algebraic/site tool."
+   },
+   {
+    "node": "lem-weil-pbc-nl-presentations-homotopy-equivalent",
+    "why": "Generic commutative algebra polynomial presentation comparison of Stacks 00S1. No statement of the item’s unit supplies this algebraic/site tool."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Generic Stacks 0GMW comparison (F^# tensor G^# = sheafified presheaf tensor) used in step 2 for the differential term; added by the maintainer reader in place of an uncited local-lifting sketch. No statement of the item's unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-image-presheaf-sheafification-iso",
+  "lem-trf-sheafified-module-differentials-cokernel",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-nl-presentations-homotopy-equivalent",
+  "lem-pc-sites-module-sheafification-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NW-4559356a6",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-4559356a6 (reviewer sub-agent of L); spot-checked: I read Stacks 08TY in full (the claim and the injectivity/surjectivity paragraphs), plus 08TS/08TP, the item's 5 steps and every cited statement. The item statement is unchanged and matches 08TY plus the 08TS cokernel. It compares E→B directly, which is valid because NL_{B/A}=NL(id_B). Step 1: the image-presheaf node gives local surjectivity and C^#=B. Step 3: the 00S1 homotopy equivalence and h1-functoriality (with base and target change) identify H^{-1}(K_E) with T_C^#, and the composite presentation map shows H^{-1}(K(α)) is the new node's map. Step 4: the cokernel is Ω via cokernel-kahler and 08TP applied to A→C. Step 5: the strict chain equality K(α')K(v)=K(α) and two-term qis give λ and naturality. The new node lem-sfb-locally-dense-cotangent-h1 is true: it is exactly 08TY's last two paragraphs, argued via 07BQ and finitely generated subalgebras on a cover. It is statement-only and self-contained, not a duplicate (rg -L for 08TY/07BQ/locally dense), and not a restatement of a parent clause. I tested it on identity-cover sites, the two-point discrete space with the diagonal subring, and the empty site. Batch-5: lem-trf-sheafified-module-differentials-cokernel is the generic Stacks 08TP sheaf-differentials lemma. Neither assumption gives it, and its 128-node closure has no assume leaf or trace/PD target. Other sfb cotangent nodes already cite it, so I accept it. FIX (C1/C2): step 2 only sketched the comparison (Ω_{Q/A}⊗_{p,Q}C)^# ≅ Ω_{P_E/A}⊗_{P_E}B in a step marked elementary. The existing node lem-pc-sites-module-sheafification-tensor (0GMW) states exactly this, so step 2 and proof_deps now cite it (no cycle), and I declared it in split_report.tool_uses. The corrected item is at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-sheaf-polynomial-cotangent-comparison.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafPolynomialCotangentComparison",
+  "declaration": "CategoryTheory.SheafPolynomialCotangent.sheaf_polynomial_cotangent_comparison",
+  "declarations": [
+   "CategoryTheory.SheafPolynomialCotangent.sets",
+   "CategoryTheory.SheafPolynomialCotangent.polynomials",
+   "CategoryTheory.SheafPolynomialCotangent.polynomialSheaf",
+   "CategoryTheory.SheafPolynomialCotangent.coefficientMap",
+   "CategoryTheory.SheafPolynomialCotangent.base",
+   "CategoryTheory.SheafPolynomialCotangent.evaluationPresheaf",
+   "CategoryTheory.SheafPolynomialCotangent.evaluation",
+   "CategoryTheory.SheafPolynomialCotangent.Presentation",
+   "CategoryTheory.SheafPolynomialCotangent.canonical_surjective",
+   "CategoryTheory.SheafPolynomialCotangent.canonical",
+   "CategoryTheory.SheafPolynomialCotangent.LocallyInKernelSquare",
+   "CategoryTheory.SheafPolynomialCotangent.kernel_ideal_axioms",
+   "CategoryTheory.SheafPolynomialCotangent.kernelIdeal",
+   "CategoryTheory.SheafPolynomialCotangent.differentialTerm",
+   "CategoryTheory.SheafPolynomialCotangent.tensorD",
+   "CategoryTheory.SheafPolynomialCotangent.Model",
+   "CategoryTheory.SheafPolynomialCotangent.polynomialMapPresheaf",
+   "CategoryTheory.SheafPolynomialCotangent.polynomialMap",
+   "CategoryTheory.SheafPolynomialCotangent.derived",
+   "CategoryTheory.SheafPolynomialCotangent.localization",
+   "CategoryTheory.SheafPolynomialCotangent.GeneratorMap",
+   "CategoryTheory.SheafPolynomialCotangent.Comparison",
+   "CategoryTheory.SheafPolynomialCotangent.sheaf_polynomial_cotangent_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SheafPolynomialCotangentComparison.lean",
+  "statement": "theorem sheaf_polynomial_cotangent_comparison (J : Precoverage C) (_hJ : J.IsSiteForCoverings) (A B : Sheaf J.toGrothendieck CommRingCat.{u}) (f : A ⟶ B) : Nonempty (Comparison f)",
+  "branch": "newtargets-dag",
+  "by": "Q150",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The Comparison record states every clause with generator-normalized maps, actual polynomial sheafification and actual differential/tensor sheaves. Its conormal quotient is specified by local surjectivity and exactly the locally generated kernel square, which determines the module up to its unique compatible isomorphism. No data is chosen from an uncharacterized existence assertion. The new definition node def-sfb-sheaf-differentials binds the already landed sheaf differential module and derivation; no inverse-image comparison theorem is used for these definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5564c10ca",
+  "group": "Q150",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN on 4db191f6a9ca. Lean module byte-identical to the earlier delivery, whose substance was checked clause by clause (sheafified polynomial ring, local surjectivity, local kernel square, J/J² up to unique iso, F_E = changeOfRings(ev)(omega base), d = 1⊗dj, pinned generator maps, qis, lambda = Q(K(values)), naturality/identity/composition, cokernel iso b⊗dp↦b·d(ev p)). Item diff: only stmt_deps lem-trf-topos-inverse-image-differentials → new def-sfb-sheaf-differentials, plus lean.note. New definition node matches Stacks 08TP; stmt_deps are 3 definition nodes; lean existing:true on Sheaf.CategoryTheory.Sites.InverseImageDifferentials with ring/sets/moduleSets/omega/derivation/d, all real defs read live (l.51-104), not choices from inverseDifferentials_existsUnique; statement field verbatim. No duplicate definition node live; item not landed elsewhere. Advisory: the theorem node's lean record also lists the six decls; precedent accepts existing:true definition-node ownership. No compile needed (no file changed)."
+ }
+}

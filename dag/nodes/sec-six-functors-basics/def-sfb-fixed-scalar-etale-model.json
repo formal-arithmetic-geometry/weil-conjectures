@@ -1,0 +1,109 @@
+{
+ "id": "def-sfb-fixed-scalar-etale-model",
+ "kind": "definition",
+ "title": "Explicit exact etale and pro-etale scalar equivalences",
+ "statement": "For a scheme X in universe u and a commutative ring k in universe u+1, compose the AsSmall sheaf equivalence on the original etale (respectively pro-etale) site with the inverse of constant scalar restriction [def-coef-constant-scalar-restriction]. This gives explicit additive equivalences from fixed-k module sheaves to modules over the constant ring on the small models. Define their termwise cochain functors and localized pro-etale derived functor. The pro-etale termwise functor is the prescribed [def-sfb-fixed-scalar-complex-model], and its localized functor is an equivalence with the canonical factorization isomorphism. All data comes from these specified equivalences.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY; proetale.tex Tag 09A5; canonical localization of exact equivalences"
+ },
+ "stmt_deps": [
+  "def-coef-constant-scalar-restriction",
+  "def-sfb-fixed-scalar-complex-model"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY; proetale.tex Tag 09A5; canonical localization of exact equivalences"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence between abelian categories preserves homology of complexes",
+   "date": "2026-10-25",
+   "results": "CategoryTheory.Functor.preservesHomology_of_map_exact; CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf; CategoryTheory.Functor.preservesHomology_of_preservesEpis_and_kernels; CategoryTheory.Functor.exact_tfae; CategoryTheory.Functor.PreservesHomology; CategoryTheory.Functor.PreservesHomology.preservesRightHomologyOf; CategoryTheory.Functor.preservesHomologyOfExact; HomologicalComplex.quasiIso_map_of_preservesHomology",
+   "verdict": "Use Mathlib exact-functor localization and homology infrastructure with the existing scalar restriction equivalence; no duplicate project presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact equivalence of sheaf module categories induces an equivalence of derived categories preserving homology",
+   "date": "2026-10-25",
+   "results": "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso; DerivedCategory.homologyFunctorFactors",
+   "verdict": "Use Mathlib exact-functor localization and homology infrastructure with the existing scalar restriction equivalence; no duplicate project presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Ii]so|IsConstructibleSheaf",
+   "date": "2026-10-25",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "verdict": "Use Mathlib exact-functor localization and homology infrastructure with the existing scalar restriction equivalence; no duplicate project presentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FixedScalarEtaleOrigin",
+  "date": "2026-10-26",
+  "group": "M3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Fixed scalar etale origin: Explicit exact etale and pro-etale scalar equivalences",
+   "via": [
+    "lem-sfb-fixed-scalar-etale-origin",
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FixedScalarEtaleModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/FixedScalarEtaleModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.fixedScalarEtaleSheafEquivalence",
+  "statement": "def fixedScalarEtaleSheafEquivalence (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k] :\n    Sheaf (X.smallEtaleTopology) (ModuleCat.{u + 1} k) ≌\n      ConstantCompletion.Mod\n        (ConstantCompletion.constant (smallModelComparisonEtaleTopology.{u, u} X) k)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.fixedScalarEtaleSheafEquivalence",
+   "AlgebraicGeometry.Scheme.fixedScalarProEtaleSheafEquivalence",
+   "AlgebraicGeometry.Scheme.fixedScalarEtaleSheafEquivalence_additive",
+   "AlgebraicGeometry.Scheme.fixedScalarProEtaleSheafEquivalence_additive",
+   "AlgebraicGeometry.Scheme.fixedScalarEtaleSheafEquivalence_inverse_additive",
+   "AlgebraicGeometry.Scheme.fixedScalarEtaleComplexToModel",
+   "AlgebraicGeometry.Scheme.fixedScalarComplexToModel_eq",
+   "AlgebraicGeometry.Scheme.fixedScalarEtaleComplexToModel_isEquivalence",
+   "AlgebraicGeometry.Scheme.fixedScalarProEtaleDerivedFunctor",
+   "AlgebraicGeometry.Scheme.fixedScalarProEtaleDerivedFunctor_isEquivalence",
+   "AlgebraicGeometry.Scheme.fixedScalarProEtaleDerivedFactors"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261025T180900-L-4047669",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261025T180900-L-4047669",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

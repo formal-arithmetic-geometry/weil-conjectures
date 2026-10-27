@@ -5,9 +5,6 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 public import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import Sheaf.CategoryTheory.ExactDerivedComposition
 import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Derived inverse image and geometric stalks
@@ -41,20 +38,21 @@ Source: Stacks Project, Tag 03Q1, `lemma-stalk-pullback` (1), (3); Tag 015F,
 (blueprint: lem-sf-etale-derived-pullback-stalk)
 
 Proof:
-1. The inverse-image module exactness theorem identifies the underlying abelian inverse
-image and transports the constant-ring action. The inverse-image stalk-germ comparison
-is natural in modules. Apply naturality to multiplication by each scalar: it is therefore
-`A`-linear. This is the canonical `upperStarCompSheafFiberIso` for module coefficients.
-2. Apply this comparison degreewise. Naturality for each differential makes it a chain
-isomorphism; naturality for each component of a chain map gives naturality on complexes.
-3. Inverse image and the two stalks are additive and exact. The constant-complex stalk
-exactness lemma and exact-functor derived factorization show their termwise functors
-preserve quasi-isomorphisms, including for unbounded complexes.
-4. Descend the chain isomorphism by `Localization.liftNatIso`, as in the exact-derived
-natural-isomorphism lemma, and compose with the inverse of the normalized exact-derived
-composition isomorphism. The two localization normalizations give precisely the equation
-below. Naturality holds on the entire derived category by localization. No boundedness,
-finiteness, flatness, or other condition on the scheme morphism is used. -/
+1. Use the coefficient-category-valued `upperStarCompSheafFiberIso` directly for
+`ModuleCat A`. Its components are already linear maps, and its naturality applies
+both to differentials and to components of maps of complexes.
+2. Apply `mapHomologicalComplexCompIso` to obtain the canonical comparison between
+termwise inverse image followed by termwise stalk and termwise image-point stalk.
+3. Whisker the exact-derived factorization of inverse image by the derived stalk,
+then compose with the stalk's exact-derived factorization. Whisker the chain
+comparison by the localization functor. This constructs an isomorphism from the
+localization followed by the two derived functors to the termwise image-point stalk
+followed by localization. Exactness and additivity are the existing instances for
+sheaf inverse image and point fibers.
+4. Apply `Localization.liftNatIso` with this isomorphism and the canonical lifting
+of the image-point stalk. Its component formula, followed by cancellation of the
+image-point stalk factorization and its inverse, is exactly the equation below.
+The construction is natural on the entire unbounded derived category. -/
 theorem exists_etaleDerivedPullbackStalkIso
     (A : Type (u + 1)) [CommRing A] {U T : Scheme.{u}} (f : U ⟶ T)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (v : Spec (.of Ω) ⟶ U) :
@@ -73,6 +71,26 @@ theorem exists_etaleDerivedPullbackStalkIso
               ((Functor.mapHomologicalComplexCompIso
                 (upperStarCompSheafFiberIso (ModuleCat.{u + 1} A) f v)
                 (ComplexShape.up ℤ)).hom.app C) := by
-  sorry
+  let P := upperStar (ModuleCat.{u + 1} A) f
+  let S := (pointSmallEtale v).sheafFiber (A := ModuleCat.{u + 1} A)
+  let R := (pointSmallEtale (v ≫ f)).sheafFiber (A := ModuleCat.{u + 1} A)
+  let e : _root_.DerivedCategory.Q ⋙ (P.mapDerivedCategory ⋙ S.mapDerivedCategory) ≅
+      R.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ _root_.DerivedCategory.Q :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight P.mapDerivedCategoryFactors S.mapDerivedCategory ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ S.mapDerivedCategoryFactors ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight
+        (Functor.mapHomologicalComplexCompIso
+          (upperStarCompSheafFiberIso (ModuleCat.{u + 1} A) f v)
+          (ComplexShape.up ℤ)) _root_.DerivedCategory.Q
+  refine ⟨Localization.liftNatIso _root_.DerivedCategory.Q
+    (HomologicalComplex.quasiIso
+      (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (ComplexShape.up ℤ))
+    _ _ (P.mapDerivedCategory ⋙ S.mapDerivedCategory) R.mapDerivedCategory e, ?_⟩
+  intro C
+  simp [Localization.liftNatIso_hom, Localization.liftNatTrans_app,
+    Localization.Lifting.iso, e, P, S, R]
 
 end AlgebraicGeometry.Etale

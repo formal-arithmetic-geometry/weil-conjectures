@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-ordered-composition-complex-homology",
+ "kind": "statement",
+ "title": "Ordered vector compositions and proper-interval chains, with dual cohomology",
+ "statement": "Let $r\\geq0$ and $m=(m_1,\\ldots,m_r)\\in\\mathbf N^r$. For $n\\geq0$ let $V_{m,n}$ be the rational vector space with basis the ordered tuples $(\\alpha_1,\\ldots,\\alpha_n)$ of nonzero vectors in $\\mathbf N^r$ with sum $m$. The empty tuple is a basis vector exactly for $m=0,n=0$. Set $V_{m,n}=0$ for $n<0$. Define\n$$\\partial_n[\\alpha_1|\\cdots|\\alpha_n]=\\sum_{a=1}^{n-1}(-1)^a[\\alpha_1|\\cdots|\\alpha_a+\\alpha_{a+1}|\\cdots|\\alpha_n],$$\nwith zero differential for $n=0,1$. These maps square to zero. Write $V_m^n{}^*=\\operatorname{Hom}_{\\mathbf Q}(V_{m,n},\\mathbf Q)$ with cochain differential $\\partial_{n+1}^*$, and define homology and cohomology by the corresponding kernel modulo image [def-weil-pbc-module-chain-complex-homology].\nFor $m\\ne0$, order $[0,m]=\\prod_i\\{0,\\ldots,m_i\\}$ coordinatewise, let $T_m=[0,m]\\setminus\\{0,m\\}$, and let $A(m)_k$ have as basis the strict chains with $k+1$ vertices in $T_m$, with $A(m)_{-1}=\\mathbf Q$ on the empty chain and zero terms below $-1$. Its boundary deletes vertices with alternating signs, including the augmentation sending each vertex to $1$. Cumulative partial sums\n$$(\\alpha_1,\\ldots,\\alpha_n)\\longmapsto[\\alpha_1<\\alpha_1+\\alpha_2<\\cdots<\\alpha_1+\\cdots+\\alpha_{n-1}]$$\nidentify $V_{m,n}$ with $A(m)_{n-2}$ and carry $\\partial$ to minus the boundary of $A(m)$, including $n=1$ and the empty chain. Multiplying this map in degree $n$ by $(-1)^n$ gives a chain isomorphism to the chain complex with degree-$n$ term $A(m)_{n-2}$ and its displayed boundary, hence also an isomorphism in the derived category [def-weil-abstract-derived-category].\nFor every $m$ and $n\\geq0$,\n$$\\dim_{\\mathbf Q}H^n(V_m^*)=\\dim_{\\mathbf Q}H_n(V_m)=\\begin{cases}1&\\text{if every }m_i\\in\\{0,1\\}\\text{ and }n=\\sum_i m_i,\\\\0&\\text{otherwise.}\\end{cases}$$\nIn particular $m=0$ gives one copy of $\\mathbf Q$ in degree zero, while any coordinate $m_i\\geq2$ gives an acyclic complex and acyclic dual. Every term is finite dimensional; if $m\\ne0$ it is zero for $n>\\sum_i m_i$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), algebraic obligation under the trivial lattice calculation; returned proof step 5 and the finite-transpose-rank argument of step 6: cumulative sums, sign and shift n-2, proper-product-interval homology, and passage to the rational dual. Agent-formulated comparison; the interval homology input already has node lem-sfb-product-chain-proper-interval-homology."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-abstract-derived-category",
+  "def-sfb-product-chain-proper-interval-complex"
+ ],
+ "proof": [
+  {
+   "text": "Write $s=\\sum_i m_i$. In a basis tuple every coordinate of each $\\alpha_a$ is between $0$ and $m_i$, so for fixed $n$ the basis is a subset of a finite set of arrays. Also $|\\alpha_a|=\\sum_i(\\alpha_a)_i\\geq1$, and $\\sum_a|\\alpha_a|=s$, so $n\\leq s$ for every nonempty basis tuple. Thus every term is finite-dimensional and the asserted upper bound holds. If $m=0$, nonnegativity forces every block to be zero, which is forbidden: only the empty tuple in degree zero remains. Its differential and dual differential vanish. This proves all claims for $m=0$, including $r=0$. Henceforth $m\\ne0$, so $r\\geq1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: algebraic input to the trivial-lattice polynomial-bar calculation, via lem-sfb-rational-polynomial-bar-contraction. The latest blueprint gives motivation only; cumulative sums, the boundary sign, and finite dual dimensions are agent-formulated details."
+   }
+  },
+  {
+   "text": "Let $F_n$ be the cumulative-sum map of the statement. For $n\\geq2$, its vertices are strictly increasing coordinatewise because each intervening block is nonzero; the first vertex is nonzero and the last is below $m$ because the last block is nonzero. Conversely, from $v_1<\\cdots<v_{n-1}$ recover $(v_1,v_2-v_1,\\ldots,v_{n-1}-v_{n-2},m-v_{n-1})$. Coordinatewise differences are nonnegative and nonzero, and telescope to $m$. These formulas are mutually inverse. For $n=1$ the unique tuple $(m)$ corresponds to the empty chain in degree $-1$. For $n\\leq0$ both spaces are zero. Extending linearly gives isomorphisms $F_n:V_{m,n}\\to A(m)_{n-2}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: algebraic input to the trivial-lattice polynomial-bar calculation, via lem-sfb-rational-polynomial-bar-contraction. The latest blueprint gives motivation only; cumulative sums, the boundary sign, and finite dual dimensions are agent-formulated details."
+   }
+  },
+  {
+   "text": "The alternating boundary $d$ of $A(m)$ squares to zero: for deleted positions $i<j$, the two orders of deletion give signs $(-1)^{i+j-1}$ and $(-1)^{i+j}$; they cancel. For a two-vertex chain the two augmentations cancel, and all lower cases are zero. Merging blocks $a,a+1$ deletes precisely the $a$th cumulative sum, whose zero-based vertex position is $a-1$. Its coefficient in $F_{n-1}\\partial_n$ is $(-1)^a$, the negative of its coefficient $(-1)^{a-1}$ in $dF_n$. Thus $F_{n-1}\\partial_n=-dF_n$. At $n=2$, explicitly $[\\alpha|\\beta]\\mapsto-[m]$ corresponds to minus the augmentation of $[\\alpha]$; at $n=1$ both boundaries are zero. Invertibility of $F$ now gives $\\partial^2=0$; precomposition gives $(\\partial^*)^2=0$. With $G_n=(-1)^nF_n$, the same identity becomes $G_{n-1}\\partial_n=dG_n$. The inverse of $G$ commutes with boundaries by this equation. This proves the stated chain isomorphism [def-weil-pbc-module-chain-complex-homology].",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: algebraic input to the trivial-lattice polynomial-bar calculation, via lem-sfb-rational-polynomial-bar-contraction. The latest blueprint gives motivation only; cumulative sums, the boundary sign, and finite dual dimensions are agent-formulated details."
+   }
+  },
+  {
+   "text": "Reindex the two chain complexes as cochain complexes by $C^j=C_{-j}$. Applying the localization functor of [def-weil-abstract-derived-category] to $G$ and its inverse preserves their two inverse identities. Consequently the comparison is an isomorphism in the derived category as asserted.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: algebraic input to the trivial-lattice polynomial-bar calculation, via lem-sfb-rational-polynomial-bar-contraction. The latest blueprint gives motivation only; cumulative sums, the boundary sign, and finite dual dimensions are agent-formulated details."
+   }
+  },
+  {
+   "text": "The maps $G$ and $G^{-1}$ send kernels to kernels and images to images, so induce inverse linear maps $H_n(V_m)\\cong H_{n-2}(A(m))$ by [def-weil-pbc-module-chain-complex-homology]. Apply [lem-sfb-product-chain-proper-interval-homology], with $m\\ne0$ and $r\\geq1$ established in step 1. A coordinate $m_i\\geq2$ makes every group zero. Otherwise the number of coordinates equal to one is $s$, and the sole nonzero interval degree is $s-2$, of dimension one. Since $n-2=s-2$ exactly when $n=s$, this proves the homology dimension formula, including $s=1$ and interval degree $-1$.",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology",
+    "lem-sfb-product-chain-proper-interval-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: algebraic input to the trivial-lattice polynomial-bar calculation, via lem-sfb-rational-polynomial-bar-contraction. The latest blueprint gives motivation only; cumulative sums, the boundary sign, and finite dual dimensions are agent-formulated details."
+   }
+  },
+  {
+   "text": "Put $c_n=\\dim V_{m,n}$ and $b_n=\\dim\\operatorname{im}\\partial_n$, with $b_0=0$. The rank-nullity and quotient-dimension identities [lem-weil-pbc-idempotent-charpoly-rank-nullity, lem-trf-vector-space-quotient-dimension], applied to $\\partial_n$ and then to its cycle space modulo boundaries, give $\\dim H_n(V_m)+b_{n+1}+b_n=c_n$. Boundaries are a subspace of cycles by step 3, and inclusion into $V_{m,n}$ identifies their images linearly. All spaces are finite-dimensional by step 1. For the dual cochain complex, [lem-sfb-linear-dual-dimension-rank] gives term dimension $c_n$ and incoming and outgoing image dimensions respectively $b_n$ and $b_{n+1}$. Applying the same two dimension identities gives $\\dim H^n(V_m^*)+b_n+b_{n+1}=c_n$. Reordering the summands and cancelling yields $\\dim H^n(V_m^*)=\\dim H_n(V_m)$. This includes $n=0$, using the zero incoming map. Step 5 and the $m=0$ case of step 1 give the full displayed formula and the two acyclicity conclusions.",
+   "uses": [
+    "lem-weil-pbc-idempotent-charpoly-rank-nullity",
+    "lem-trf-vector-space-quotient-dimension",
+    "lem-sfb-linear-dual-dimension-rank"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: algebraic input to the trivial-lattice polynomial-bar calculation, via lem-sfb-rational-polynomial-bar-contraction. The latest blueprint gives motivation only; cumulative sums, the boundary sign, and finite dual dimensions are agent-formulated details."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-product-chain-proper-interval-homology",
+  "lem-weil-pbc-idempotent-charpoly-rank-nullity",
+  "lem-trf-vector-space-quotient-dimension",
+  "lem-sfb-linear-dual-dimension-rank"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: algebraic input to the trivial-lattice polynomial-bar calculation, via lem-sfb-rational-polynomial-bar-contraction. The latest blueprint gives motivation only; cumulative sums, the boundary sign, and finite dual dimensions are agent-formulated details."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(composition|multiindex|multidegree|proper.interval).*(homology|acyclic)|(homology|acyclic).*(composition|multiindex|multidegree|proper.interval)",
+   "results": "{\"t\": \"2026-10-22T06:05:13Z\", \"tool\": \"grep\", \"query\": \"(composition|multiindex|multidegree|proper.interval).*(homology|acyclic)|(homology|acyclic).*(composition|multiindex|multidegree|proper.interval)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/Homology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean\"], \"digest\": \"4dfa4cd29b41570f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar compositions, order duals, and general simplicial homology do not identify this vector-composition differential with shifted proper-product-interval chains or compute its rational dual cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"OrderComplex\", \"homology\"",
+   "results": "{\"t\": \"2026-10-22T06:05:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"OrderComplex\\\", \\\"homology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar compositions, order duals, and general simplicial homology do not identify this vector-composition differential with shifted proper-product-interval chains or compute its rational dual cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The rational dual complex on ordered positive vector compositions is the shifted proper interval order complex of a product of chains and its cohomology is one dimensional exactly in squarefree top degree",
+   "results": "{\"t\": \"2026-10-22T06:05:14Z\", \"tool\": \"leansearch\", \"query\": \"The rational dual complex on ordered positive vector compositions is the shifted proper interval order complex of a product of chains and its cohomology is one dimensional exactly in squarefree top degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OrderDual.instRatCast\", \"isAtomic_dual_iff_isCoatomic\", \"ofDual_ratCast\", \"toDual_ratCast\", \"ProperCone.dual_singleton\", \"Order.coheight_ofDual\", \"isAtomistic_dual_iff_isCoatomistic\", \"CochainComplex.ConnectData.homologyIsoPos\"], \"digest\": \"2ebf1ca99d732c22\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar compositions, order duals, and general simplicial homology do not identify this vector-composition differential with shifted proper-product-interval chains or compute its rational dual cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite rational chain complex on ordered decompositions of a multiindex into nonzero blocks with adjacent merge boundary has homology only for squarefree multiindices in their total degree",
+   "results": "{\"t\": \"2026-10-22T06:05:28Z\", \"tool\": \"leanfinder\", \"query\": \"The finite rational chain complex on ordered decompositions of a multiindex into nonzero blocks with adjacent merge boundary has homology only for squarefree multiindices in their total degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id\", \"ChainComplex.instHasHomologyNatObjAlternatingConst\", \"AlgebraicTopology.DoldKan.hσ'_eq_zero\", \"AlgebraicTopology.DoldKan.PInfty_comp_map_mono_eq_zero\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.of_P\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.Termwise.mapMono_eq_zero\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.induction\"], \"digest\": \"6dd18f9ec8a82a7e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar compositions, order duals, and general simplicial homology do not identify this vector-composition differential with shifted proper-product-interval chains or compute its rational dual cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cumulative partial sums identify the merging complex of ordered vector compositions with augmented chains of the proper product interval shifted by two and boundary sign reversed",
+   "results": "{\"t\": \"2026-10-22T06:05:28Z\", \"tool\": \"leanfinder\", \"query\": \"Cumulative partial sums identify the merging complex of ordered vector compositions with augmented chains of the proper product interval shifted by two and boundary sign reversed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Composition.sizeUpTo_sizeUpTo_add\", \"FormalMultilinearSeries.compPartialSumTarget\", \"FormalMultilinearSeries.compPartialSumSource\", \"CompositionAsSet.blocks_partial_sum\", \"Composition.gather\", \"FormalMultilinearSeries.compPartialSumTargetSet\", \"CompositionAsSet.blocksFun\", \"Composition.boundaries\"], \"digest\": \"21ec69ba30ed308d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar compositions, order duals, and general simplicial homology do not identify this vector-composition differential with shifted proper-product-interval chains or compute its rational dual cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "orderComplex|proper.interval.*homolog|composition.*homolog",
+   "results": "{\"t\": \"2026-10-23T09:46:00Z\", \"tool\": \"grep\", \"query\": \"orderComplex|proper.interval.*homolog|composition.*homolog\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/ShortComplex/Homology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean\"], \"digest\": \"b276efc3643befdd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Composition cumulative sums concern scalar compositions, and Dold–Kan normalization does not give this vector-composition/proper-interval comparison or its homology formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cumulative sums identify the ordered vector composition complex with augmented strict chains in a product of finite chains",
+   "results": "{\"t\": \"2026-10-23T09:46:00Z\", \"tool\": \"leansearch\", \"query\": \"Cumulative sums identify the ordered vector composition complex with augmented strict chains in a product of finite chains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Composition.boundaries\", \"Composition.sizeUpTo_succ'\", \"Composition.sizeUpTo_strict_mono\", \"Composition.boundary\", \"FormalMultilinearSeries.comp_rightInv_aux1\", \"Composition.toCompositionAsSet\", \"Composition.sizeUpTo_index_le\", \"OmegaCompletePartialOrder.Chain.zip\"], \"digest\": \"9037bbaefefdf5f4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Composition cumulative sums concern scalar compositions, and Dold–Kan normalization does not give this vector-composition/proper-interval comparison or its homology formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"OrderComplex\", \"homology\"",
+   "results": "{\"t\": \"2026-10-23T09:46:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"OrderComplex\\\", \\\"homology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Composition cumulative sums concern scalar compositions, and Dold–Kan normalization does not give this vector-composition/proper-interval comparison or its homology formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered vector compositions with adjacent merging differential have the reduced homology of the proper interval in a product of chains",
+   "results": "{\"t\": \"2026-10-23T09:46:10Z\", \"tool\": \"leanfinder\", \"query\": \"Ordered vector compositions with adjacent merging differential have the reduced homology of the proper interval in a product of chains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id\", \"AlgebraicTopology.DoldKan.N₂_obj_X_d\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.of_P\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.induction\", \"AlgebraicTopology.DoldKan.σ_comp_P_eq_zero\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.inclusionOfMooreComplexMap\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.comp_Hσ_eq\", \"AlgebraicTopology.DoldKan.σ_comp_PInfty\"], \"digest\": \"c3c7c62b01a77a01\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Composition cumulative sums concern scalar compositions, and Dold–Kan normalization does not give this vector-composition/proper-interval comparison or its homology formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-polynomial-bar-contraction",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: algebraic input to the trivial-lattice polynomial-bar calculation, via lem-sfb-rational-polynomial-bar-contraction. The latest blueprint gives motivation only; cumulative sums, the boundary sign, and finite dual dimensions are agent-formulated details.",
+   "via": [
+    "lem-sfb-rational-polynomial-bar-contraction",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ordered-composition-complex-homology",
+  "worker": "stage1",
+  "summary": "Q121 supplies the inverse cumulative-sum bijection, checks the boundary minus sign and (-1)^n correction, handles zero multidegree and finite support, reuses the reviewed proper-interval theorem, and obtains dual dimensions from rank-nullity. One exact Mathlib leaf records finite dual dimensions and dual-map image ranks. No statement change.",
+  "blueprint": "Paragraph (3), open direct image: algebraic input to the trivial-lattice polynomial-bar calculation, via lem-sfb-rational-polynomial-bar-contraction. The latest blueprint gives motivation only; cumulative sums, the boundary sign, and finite dual dimensions are agent-formulated details. Steps 1–5 realize the finite multidegree calculation; step 6 realizes finite transpose ranks. The ancestor command returns None; inherited null from.node is retained, as for the reviewed proper-interval sibling."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-c8fe37af8",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-c8fe37af8 (reviewer sub-agent of L); spot-checked: I read the delivery in full. The item was unsplit on live with no repair note, so this is a first split, not a re-split. Its statement and stmt_deps are unchanged from the base. Blueprint main-20261015 direct-images paragraph (3) gives only motivation, so proof_origin agent and the WANTED line are correct. Steps: (1) the bases are finite, n<=s, and the m=0/r=0 case is complete. (2) The cumulative sums have an explicit inverse given by differences, including n=1 (empty chain) and n<=0. (3) The sign F d = -d F holds because merging blocks a,a+1 deletes vertex a-1; I checked n=2 by hand. G=(-1)^n F commutes with the boundaries, and d^2=0 is transported. (4) The localization functor Q of def-weil-abstract-derived-category takes the reindexed chain isomorphism to an isomorphism. (5) lem-sfb-product-chain-proper-interval-homology (reviewed PASS by Q21) is applied with its hypotheses r>=1 and m nonzero satisfied, and the shift n-2 gives n=s, including s=1. (6) Rank-nullity, the quotient-dimension leaf and the new leaf give dim H^n = c_n - b_n - b_{n+1} = dim H_n, with b_0=0. New node lem-sfb-linear-dual-dimension-rank: a true, general Mathlib leaf, one declaration per clause. I checked Subspace.instModuleDualFiniteDimensional (507-509), Subspace.dual_finrank_eq (512-517, [Field K]) and LinearMap.finrank_range_dualMap_eq_finrank_range (920-926) in Dual/Lemmas.lean. rg -L found no duplicate: lem-sc-dual-map-injective-iff-surjective and lem-pod-cohomology-of-dual-over-field state other things. Batch-5: lem-trf-vector-space-quotient-dimension is the generic Mathlib leaf Submodule.finrank_quotient_add_finrank, outside both the trace-formula and Poincare-duality assumptions, so it is accepted. My own exact rank computation for 14 multidegrees, with a d^2=0 assertion, matches the formula. No SGA, no route departure, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Combinatorics.OrderedCompositionComplexHomology",
+  "declaration": "OrderedCompositionComplex.homology",
+  "declarations": [
+   "OrderedCompositionComplex.Basis",
+   "OrderedCompositionComplex.Terms",
+   "OrderedCompositionComplex.mergeRaw",
+   "OrderedCompositionComplex.merge_valid",
+   "OrderedCompositionComplex.merge",
+   "OrderedCompositionComplex.boundary",
+   "OrderedCompositionComplex.boundary_squared",
+   "OrderedCompositionComplex.complexNat",
+   "OrderedCompositionComplex.natDegreeEmbedding",
+   "OrderedCompositionComplex.complex",
+   "OrderedCompositionComplex.dualBoundary",
+   "OrderedCompositionComplex.dualBoundary_squared",
+   "OrderedCompositionComplex.dualComplex",
+   "OrderedCompositionComplex.partialSums",
+   "OrderedCompositionComplex.partialSums_valid",
+   "OrderedCompositionComplex.cumulative",
+   "OrderedCompositionComplex.cumulativeLinear",
+   "OrderedCompositionComplex.cumulative_comparison",
+   "OrderedCompositionComplex.IntervalBasis",
+   "OrderedCompositionComplex.IntervalTerms",
+   "OrderedCompositionComplex.intervalBoundary",
+   "OrderedCompositionComplex.intervalBoundary_squared",
+   "OrderedCompositionComplex.intervalComplex",
+   "OrderedCompositionComplex.comparison",
+   "OrderedCompositionComplex.homology"
+  ],
+  "file": "lean/Sheaf/Combinatorics/OrderedCompositionComplexHomology.lean",
+  "statement": "theorem homology {r : ℕ} (m : Fin r → ℕ) : (∀ n : ℕ, FiniteDimensional ℚ (Terms m n)) ∧ (∀ n : ℕ, m ≠ 0 → (∑ i, m i) < n → IsZero ((complexNat m).X n)) ∧ (∀ n : ℕ, Module.finrank ℚ ((dualComplex m).homology n) = Module.finrank ℚ ((complexNat m).homology n) ∧ Module.finrank ℚ ((complexNat m).homology n) = if (∀ i, m i = 0 ∨ m i = 1) ∧ n = ∑ i, m i then 1 else 0) ∧ ((∃ i, 2 ≤ m i) → (∀ n : ℕ, IsZero ((complexNat m).homology n)) ∧ (∀ n : ℕ, IsZero ((dualComplex m).homology n)))",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The same module supplies the canonical basis, merge differential, unsigned rational dual, cumulative comparison and sign-corrected chain/derived isomorphism. The proper-interval complex is owned by def-sfb-product-chain-proper-interval-complex; lem-sfb-product-chain-proper-interval-homology remains a proof dependency only. Return 2c690ef71e93: boundary_squared explicitly qualifies the merge maps and their Terms modules; it is distinct from the imported deletion-boundary theorem on Chains."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4010c7cd1",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Re-delivery after landing return L (2c690ef71e93: boundary_squared reported as the same statement as ProductChainProperInterval.boundary_squared). The delta is only explicit qualification of boundary_squared (OrderedCompositionComplex.boundary (r := r), with 0 typed Terms m (n+2) →ₗ Terms m n) plus lean.note; the def node is byte-identical. The duplicate finding was a false positive: merge on Terms vs deletion on Chains, related only by the cumulative comparison with sign and shift (m=(2), n=0: 0 vs augmentation), and explicit binders are the remedy the return allows. Fresh full reading: merge sign (-1)^(a+1) zero-based via succAbove; dualMap differential unsigned; F∂=-dF checked against the published deletion sign (-1)^a, at 1 and 2 blocks; e pinned to (-1)^(n+1)F; derived iso = Q.mapIso of the extended e; finiteness, vanishing above Σm, dim H^n(V*)=dim H_n=if-formula, acyclicity for a coordinate ≥2; edge cases r=0/m=0, unit vector, n=0/1. Statement verbatim; 25 declarations match; item on live unchanged with no Lean record; new existing:true def node not on live. No file changed, no compile (worker scompile clean 2.0/1.9 s). Advisory: ℤ-graded complex unused."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T083146-L-2284220",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "OrderedCompositionComplex.boundary_squared",
+   "OrderedCompositionComplex.comparison",
+   "OrderedCompositionComplex.cumulative_comparison",
+   "OrderedCompositionComplex.dualBoundary_squared",
+   "OrderedCompositionComplex.homology",
+   "OrderedCompositionComplex.intervalBoundary_squared",
+   "OrderedCompositionComplex.merge_valid",
+   "OrderedCompositionComplex.partialSums_valid"
+  ],
+  "sorry_after": [
+   "OrderedCompositionComplex.cumulative_comparison",
+   "OrderedCompositionComplex.homology"
+  ]
+ }
+}

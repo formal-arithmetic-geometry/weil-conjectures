@@ -113,5 +113,48 @@
   ],
   "sorry_after": []
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.exists_globalSections_stalk_comparison"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_globalSections_stalk_comparison",
+     "module": "WeilConjectures.AlgebraicGeometry.GlobalSectionsStalkComparison",
+     "lines": [
+      32,
+      83
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $g:Y\\to X$ be a morphism of schemes, $\\Omega$ an algebraically closed field, $y:\\operatorname{Spec}\\Omega\\to Y$ a geometric point, and $F$ an abelian sheaf on the small etale site of $X$. There is an isomorphism $c:(g^{-1}F)_y\\xrightarrow{\\sim}F_{g\\circ y}$ of geometric stalks [def-weil-pbc-geometric-stalks] such that the following two maps $F(X)\\to F_{g\\circ y}$ agree: (1) the canonical global-sections pullback $F(X)\\to(g^{-1}F)(Y)$ [def-weil-pbc-finite-section-pullback], followed by the germ at $y$ of the identity etale neighbourhood $(Y,y)$ and then by $c$; (2) the germ at $g\\circ y$ of the identity etale neighbourhood $(X,g\\circ y)$. Here global sections are identified with sections over the identity etale objects $\\mathrm{id}_Y$ and $\\mathrm{id}_X$, which are terminal in the small etale sites.",
+  "proof": [
+   {
+    "text": "Take the inverse-image stalk isomorphism and its germ compatibility. Evaluate it at the identity étale neighbourhood. The definition of globalSectionsUpperStarMap evaluates the adjunction unit at the chosen terminal object and then restricts along its base-change terminal isomorphism. Transport terminal evaluations to the identity objects by the unique terminal isomorphisms; naturality of evaluation and the point-colimit relation toPresheafFiber_w identify the induced germ with the identity-neighbourhood germ. Apply inverseImage_stalk_germ to obtain the displayed equality. ([lem-weil-pbc-inverse-image-stalk-germ]).",
+    "uses": [
+     "lem-weil-pbc-inverse-image-stalk-germ"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

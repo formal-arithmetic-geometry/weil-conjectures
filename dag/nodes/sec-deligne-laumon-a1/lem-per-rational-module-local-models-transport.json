@@ -1,0 +1,186 @@
+{
+ "id": "lem-per-rational-module-local-models-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First paragraph of lem-per-smooth-pullback-t-exact, continuous rational cohomology sheaves before pullback. Refines item proof Step 3: ordinary finite local models and their coefficient-presentation transport; neither the unit statement nor its proof route is replaced.",
+   "via": [
+    "lem-per-rational-module-realization-functor",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ordinary local models under completed-to-continuous rational coefficient transport",
+ "statement": "Let $\\ell$ be prime and $E/\\mathbf Q_\\ell$ finite with integer ring $A$ [def-weil-l-adic-coefficient-extension]. Let $X$ be noetherian, $B_X$ the completed coefficient ring [def-weil-pbc-adic-coefficient-datum], and $i:B_X\\simeq C(-,A)$ a ring-sheaf isomorphism carrying the completed scalar map to constant continuous integral functions. Put $\\alpha=i$ followed by $C(-,A)\\to C(-,E)$. For every $B_X$-module sheaf $M$ that is integral stratified finitely presented [def-weil-pbc-continuous-constructible-module], the rational extension $\\alpha_!M$ has a finite locally closed stratification [def-constructible-stratification] on each of whose strata its ordinary ringed inverse image from X is finite locally free over the inverse-image rational coefficient ring. For every finitely presented ordinary $A$-module $N$ [def-sc-finitely-presented-module], there is an isomorphism of rational module sheaves $\\alpha_!\\operatorname{integralConstantModule}(N)\\simeq C(-,E)\\otimes_{E_X^c}(E\\otimes_A N)_X^c$, where both constant-module functors are the project constant sheafification functors [def-sf-site-constant-module-functor]. This is an ordinary sheaf assertion, independent of derived categories and raw rationalization; no flatness of N is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2; Definition 6.8.10; Proposition 6.8.11(3); construction of Proposition 6.8.14(2)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-continuous-constructible-module",
+  "def-constructible-stratification",
+  "def-sc-finitely-presented-module",
+  "def-sf-site-constant-module-functor"
+ ],
+ "proof": [
+  {
+   "text": "First use the completed constant-model transport to cancel restriction along pbcCompletedComparison. Compare integralConstantModule with the continuous constant model after extension by i. The scalar square identifies their coefficient units. Both constant module sheafifications are left adjoint to evaluation of global constant sections after the corresponding scalar restriction, so uniqueness of left adjoints yields a natural comparison preserving their units. Successive scalar extension is left adjoint to composite restriction. Its canonical comparison is tensor reassociation, e tensor (b tensor n) mapping to eb tensor n; no flatness assumption is involved.",
+   "uses": [
+    "lem-pur-site-constant-module-hom",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-sfb-integral-completed-constant-model-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2; Definition 6.8.10; Proposition 6.8.11(3); construction of Proposition 6.8.14(2)"
+   }
+  },
+  {
+   "text": "Compose this comparison with RationalStratum.reassociation and RationalStratum.scalarModels. The resulting comparison is the stated ordinary model formula. For each finite-presentation local integral model, commute inverse image and slice restriction with this localization using the normalized coefficient square, and apply RationalStratum.chosenLocalModel. A basis of E tensor_A N gives a finite-power rational model, including rank zero for torsion modules.",
+   "uses": [
+    "lem-per-rational-stratum-finite-free-model",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2; Definition 6.8.10; Proposition 6.8.11(3); construction of Proposition 6.8.14(2)"
+   }
+  },
+  {
+   "text": "Use the original finite stratification and its covering sieves. Normalized coefficient pullback is an isomorphism. Restricting a finite-power module across that coefficient isomorphism gives the same finite-power inverse-image module. Thus the local free models certify IsFiniteLocallyFree over the original inverse-image rational ring on each stratum. Convert the stratification to FiniteLocallyClosedStratification, retaining its strata and immersions. Empty strata and empty schemes satisfy the same covering argument.",
+   "uses": [
+    "lem-per-rational-stratum-finite-free-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2; Definition 6.8.10; Proposition 6.8.11(3); construction of Proposition 6.8.14(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-rational-stratum-finite-free-model",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-pur-site-constant-module-hom",
+  "lem-sfb-integral-completed-constant-model-transport",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2; Definition 6.8.10; Proposition 6.8.11(3); construction of Proposition 6.8.14(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization of finitely presented integral constant sheaf modules at a uniformizer becomes a finite locally free rational sheaf and commutes with inverse image",
+   "results": "Eight ordinary finite-presentation results, including instFinitePresentationLocalizationLocalizedModule, Module.FinitePresentation.exists_free_localizedModule_powers and SheafOfModules.isFinitePresentation. No comparison of completed constants with either ordinary continuous model.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing finitely presented constant integral module sheaves gives locally finite free rational module sheaves under change of coefficient presentation",
+   "results": "Eight hits, principally SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation and Module.FinitePresentation.exists_free_localizedModule_powers. These do not compare the constant-module sheafification and coefficient pullbacks here.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Ff]inite|localiz.*[Ss]heaf|extendScalars.*[Ff]inite in Mathlib/Algebra/Category/ModuleCat and Mathlib/CategoryTheory/Sites",
+   "results": "No hits for this comparison. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean and Mathlib/Algebra/Module/FinitePresentation.lean: generic finite-presentation/localized module facts only.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalModuleRealizationFunctor",
+  "date": "2026-10-27",
+  "group": "D7"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalModuleLocalModelsTransport",
+  "file": "lean/Sheaf/Paper/RationalModuleLocalModelsTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.rationalModuleLocalModelsTransport",
+  "statement": "theorem rationalModuleLocalModelsTransport (X : Scheme.{u}) [IsNoetherian X]\n    (i : pbcAdicCompletion X (pbcIntegralDatum l E) ≅ integralCoefficientSheaf l X E)\n    (_hi : pbcCompletedScalar X (pbcIntegralDatum l E) ≫ i.hom =\n      (letI := coefficientExtensionNormedField l E\n       continuousCoefficientConstantComparison X (PbcIntegralRing l E))) :\n    (∀ M : pbcModules X (pbcAdicCompletion X (pbcIntegralDatum l E)),\n      IsIntegralStratifiedFinitelyPresented X (pbcIntegralDatum l E) M →\n        ∃ s : FiniteLocallyClosedStratification X, ∀ k : Fin s.n,\n          ((proEtaleModuleInverseImage (s.immersion k)\n            (rationalCoefficientSheaf l X E)).obj\n              ((pbcExtend (i.hom ≫ integralRationalCoefficientMap l E X)).obj M)\n            ).IsFiniteLocallyFree) ∧\n    (∀ (N : ModuleCat.{u + 1} (PbcIntegralRing l E)),\n      Module.FinitePresentation (PbcIntegralRing l E) N →\n        Nonempty ((pbcExtend (i.hom ≫ integralRationalCoefficientMap l E X)).obj\n          ((integralConstantModule X (pbcIntegralDatum l E)).obj N) ≅\n            (adicLisseConstantModules X (ULift.{u + 1} E) ⋙\n              pbcExtend (letI := coefficientExtensionNormedField l E\n                continuousCoefficientConstantComparison X (ULift.{u + 1} E))).obj\n                ((ModuleCat.extendScalars\n                  (RingHom.ulift (Padic.coefficientExtensionIntegers l E).subtype)).obj N)))",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-per-rational-module-local-models-transport",
+  "worker": "stage3",
+  "summary": "Transport step separated from the coefficient-normalized realization assembly. Existing generic theorems remain the inputs; no target or existing declaration is changed.",
+  "blueprint": "First paragraph of lem-per-smooth-pullback-t-exact, continuous rational cohomology sheaves before pullback. Refines item proof Step 3: ordinary finite local models and their coefficient-presentation transport; neither the unit statement nor its proof route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-per-rational-stratum-finite-free-model",
+    "why": "Generic coefficient or derived-category comparison used to transport the existing construction, without replacing a unit-level argument."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "why": "Generic coefficient or derived-category comparison used to transport the existing construction, without replacing a unit-level argument."
+   },
+   {
+    "node": "lem-pur-site-constant-module-hom",
+    "why": "Generic coefficient or derived-category comparison used to transport the existing construction, without replacing a unit-level argument."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "why": "Generic coefficient or derived-category comparison used to transport the existing construction, without replacing a unit-level argument."
+   },
+   {
+    "node": "lem-sfb-integral-completed-constant-model-transport",
+    "why": "Ordinary comparison of the completed constant-module presentation; a generic input below the unit argument."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T235845-L-1461581",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T235845-L-1461581",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

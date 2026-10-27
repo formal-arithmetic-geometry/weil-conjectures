@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-relative-split-torus-matrix-sheaf",
+ "kind": "statement",
+ "title": "Locally constant exponent matrices classify relative split-torus homomorphisms",
+ "statement": "Let $B$ be any scheme [def-pc-scheme]. For $n\\geq0$, let $T_{n,B}$ be the commutative $B$-group scheme obtained by gluing $\\operatorname{Spec}A[x_1^{\\pm1},\\ldots,x_n^{\\pm1}]$ on affine opens $\\operatorname{Spec}A\\subset B$, with multiplication, identity and inverse defined by $x_i\\mapsto x_i\\otimes x_i$, $x_i\\mapsto1$ and $x_i\\mapsto x_i^{-1}$, respectively. Rank zero means $T_{0,B}=B$, the trivial group. For every $B$-scheme $W$, its $W$-points are naturally $(\\Gamma(W,\\mathcal O_W)^\\times)^n$.\n\nFor finite $r,s\\geq0$, there is a bijection\n$$\\operatorname{Hom}_{B\\text{-grp}}(T_{r,B},T_{s,B})\\simeq\\operatorname{LC}(|B|,\\operatorname{Mat}_{s\\times r}(\\mathbf Z)),$$\nwhere the left side means scheme morphisms over $B$ preserving multiplication and identity, and $\\operatorname{LC}$ consists of functions locally constant for the Zariski topology with the matrix set discrete. A matrix $A=(a_{ji})$ constant on an open of $B$ corresponds there to $(u_i)\\mapsto(\\prod_i u_i^{a_{ji}})_j$ on all test schemes. Composition corresponds to matrix multiplication, identity to the identity matrix, and pointwise multiplication of homomorphisms to addition of matrices. These correspondences commute with arbitrary scheme base change, by composing the locally constant function with the underlying map. In particular automorphisms correspond exactly to locally constant maps to $\\operatorname{GL}_r(\\mathbf Z)$. On the small etale site [def-weil-pbc-etale-site], the character sheaf $U\\mapsto\\operatorname{Hom}_{U\\text{-grp}}(T_{r,U},T_{1,U})$ is naturally the constant sheaf $\\underline{\\mathbf Z^r}$ [def-weil-pbc-constant-sheaf]. No connectedness, reducedness or field hypothesis is imposed on $B$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 12.4 and Theorem 12.9(a), printed pp.232–234, read; agent generalization of the group-like coefficient comparison from fields to arbitrary rings, with orthogonal idempotents retained. General-base point formula agrees with Stacks groupoids.tex Example 022U, example-multiplicative-group."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "For any commutative ring $A$, use the concrete presentation $A[L_n]=\\bigoplus_{v\\in L_n}Ae^v$, $L_n=\\mathbf Z^n$, with convolution $e^ve^w=e^{v+w}$. This is $A[x_1^{\\pm1},\\ldots,x_n^{\\pm1}]$: send $x_i$ to $e^{b_i}$ and $e^v$ to $\\prod_i x_i^{v_i}$. These mutually inverse maps can equally be defined from the presentation $A[x_i,z_i]/(x_iz_i-1)_i$, so no domain assumption is involved. An $A$-algebra map to a commutative $A$-algebra $C$ is uniquely specified by units $u_i\\in C^\\times$, and sends $\\sum_v c_ve^v$ to $\\sum_v c_v\\prod_i u_i^{v_i}$. Also $A[L_n]\\otimes_AA[L_m]\\simeq A[L_n\\oplus L_m]$: the maps send $e^v\\otimes e^w$ to $e^{(v,w)}$ and $e^{(v,w)}$ to $e^v\\otimes e^w$, extended linearly. The latter map is multiplicative on basis elements; the tensor universal property gives the former, and both composites fix the displayed generators. This proves the tensor identification without using the field-only Laurent-polynomial node.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Examples 12.1–12.2 and Proposition 12.3, printed pp.231–232; explicit finite-sum calculation over rings"
+   }
+  },
+  {
+   "text": "Construct $T_{n,B}$ as $B\\times_{\\operatorname{Spec}\\mathbf Z}\\operatorname{Spec}\\mathbf Z[L_n]$, using the unique structure map to $\\operatorname{Spec}\\mathbf Z$ given by the affine adjunction. Fibre products exist by [def-pc-fibre-product]; on an affine open $\\operatorname{Spec}A$ the affine fibre-product formula and the finite-sum maps of Step 1 identify this with $\\operatorname{Spec}A[L_n]$. Thus it is the model specified in the statement. The maps $\\Delta(e^v)=e^v\\otimes e^v$, $\\varepsilon(e^v)=1$, $S(e^v)=e^{-v}$ define multiplication, unit and inverse on the integer model by affine contravariance, and hence on its base changes. The group identities follow on $e^v$ from $e^v\\otimes e^v\\otimes e^v$, $1e^v=e^v$, and $e^{-v}e^v=1$; commutativity follows by swapping the tensor factors. For an arbitrary $B$-scheme $W$, the fibre-product universal property and [lem-a1-locally-ringed-space-affine-adjunction] identify $T_{n,B}(W)$ with ring maps $\\mathbf Z[L_n]\\to\\Gamma(W,\\mathcal O_W)$, hence with $n$ units by Step 1. These identifications are natural in $W$, and the three maps give componentwise multiplication, the tuple of ones and inversion.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 022U, example-multiplicative-group; arbitrary-rank construction by finite sums and fibre products, using Schemes Tag 01I1 lemma-morphism-into-affine and Tag 01JQ lemma-fibre-product-affines"
+   }
+  },
+  {
+   "text": "Let $f:T_{r,B}\\to T_{s,B}$ preserve multiplication and identity. Over $U=\\operatorname{Spec}A\\subset B$, affine contravariance identifies $f_U$ with an $A$-algebra map $\\phi:A[L_s]\\to A[L_r]$. Under the affine fibre-product identification, its multiplication diagram is $\\Delta\\phi=(\\phi\\otimes\\phi)\\Delta$, and its identity diagram is $\\varepsilon\\phi=\\varepsilon$; here the tensor map is determined by $a\\otimes b\\mapsto\\phi(a)\\otimes\\phi(b)$. Consequently for every standard generator $b_j\\in L_s$, the finite sum $g_j=\\phi(e^{b_j})=\\sum_v c_{jv}e^v$ satisfies $\\Delta(g_j)=g_j\\otimes g_j$ and $\\sum_v c_{jv}=1$. Conversely an algebra map satisfying these identities on the generators satisfies the diagrams everywhere, since those generators and their inverses generate the algebra.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.4 and Theorem 12.9(a), printed pp.232–234; translating the group diagrams on affine charts"
+   }
+  },
+  {
+   "text": "Compare the coefficient of $e^{(v,w)}$ in the equality $\\sum_v c_{jv}e^{(v,v)}=\\sum_{v,w}c_{jv}c_{jw}e^{(v,w)}$ using the finite-sum tensor identification of Step 1. For $v=w$ this gives $c_{jv}^2=c_{jv}$; for $v\\ne w$ it gives $c_{jv}c_{jw}=0$. Together with $\\sum_v c_{jv}=1$ these say precisely that each row's coefficients are a finite complete orthogonal family of idempotents. Conversely these equations give both group-like identities by the same displayed coefficient calculation. In particular no nilpotent coefficients survive in addition to these idempotents. This is the coefficient argument in Milne's proof, retaining all its idempotents instead of making the field-only inference that one coefficient is globally $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.4, printed p.232, proof: complete orthogonal idempotents; elementary coefficient expansion over A"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-clopen-idempotent], $D(c_{jv})$ is clopen. For each $j$ these sets are disjoint and cover $U$: orthogonality excludes simultaneous nonzero images in a prime residue field, and the sum $1$ ensures some image is nonzero. On $D(c_{jv})$ the coefficient $c_{jv}$ is an invertible idempotent, hence is $1$, and orthogonality forces all other coefficients to be $0$. Thus $g_j=e^v$ there. Intersect these finitely many row partitions to obtain a clopen partition with constant exponent matrices $M=(v_j)_j$. This gives a locally constant function $|U|\\to\\operatorname{Mat}_{s\\times r}(\\mathbf Z)$. The matrix at a point is unique: after passing to its residue field, distinct monomials are distinct basis elements with coefficient $1\\ne0$. Restricting $f$ to an affine open inside an overlap gives the same residue-field monomials, so the functions from different affine charts agree pointwise on overlaps and define a unique locally constant matrix function on $|B|$. This also proves injectivity of the association: on an open where two such functions have the same value, all coordinate maps agree on generators, hence the scheme maps agree; use scheme-morphism gluing for global equality.",
+   "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EE, lemma-disjoint-decomposition; coefficient argument of Milne 12.4, followed by scheme-morphism gluing (Sheaves Tag 00AN)"
+   }
+  },
+  {
+   "text": "Conversely let $M:|B|\\to\\operatorname{Mat}_{s\\times r}(\\mathbf Z)$ be locally constant. On each open fibre $B_N=M^{-1}(N)$ define a morphism by the integer-model algebra map $e^{b_j}\\mapsto e^{v_j}$, where $v_j$ is row $j$ of $N$, and base change to $B_N$. These generator images are units and satisfy the group-like equations, so the maps preserve multiplication and identity. The inverse images of the $B_N$ cover $T_{r,B}$; compose the local maps to $T_{s,B_N}$ with the maps to $T_{s,B}$ and apply [lem-weil-pbc-scheme-morphism-gluing]. There is no finiteness requirement on this cover. The group diagrams agree globally because they agree on the corresponding open cover of the source (and of its product). Step 5 applied to this morphism recovers $M$; starting with $f$, its restrictions on the clopen pieces of Step 5 have exactly these generator images and hence recover $f$. On arbitrary test schemes over $B_N$, Step 2 evaluates these images as $(u_i)\\mapsto(\\prod_i u_i^{N_{ji}})_j$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(a), printed pp.233–234; explicit inverse to the arbitrary-base coefficient classification; Sheaves Tag 00AN for gluing"
+   }
+  },
+  {
+   "text": "On any open where the matrices of $f:T_r\\to T_s$ and $h:T_s\\to T_t$ are $M$ and $N$, substitution gives $(h\\circ f)_k(u)=\\prod_j(\\prod_i u_i^{M_{ji}})^{N_{kj}}=\\prod_i u_i^{\\sum_jN_{kj}M_{ji}}$. Thus composition is $NM$; the identity has matrix $I_r$. Multiplying two output monomials adds their exponent vectors, so pointwise multiplication is matrix addition. These computations are identities in Laurent algebras, hence identities of scheme morphisms. For arbitrary $b:B'\\to B$, the inverse images $b^{-1}(B_N)$ are open and cover $B'$. The base change of the integer-model map on $B_N$ has the same generator images on $b^{-1}(B_N)$; therefore the new matrix function is $M\\circ|b|$. If $f$ is an automorphism its inverse has a matrix function whose product with $M$ in either order is $I_r$, so $M$ takes values in $\\operatorname{GL}_r(\\mathbf Z)$. Conversely inversion of such integer matrices is a map of discrete sets, so $M^{-1}$ is locally constant; the corresponding morphism is a two-sided inverse by the composition formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(a), printed pp.233–234; elementary substitution, inversion and base-change calculation on the explicit generator maps"
+   }
+  },
+  {
+   "text": "Apply the established bijection with $B=U$, $s=1$ to every object $U\\to B$ of the small etale site. It identifies the character presheaf with $U\\mapsto\\operatorname{LC}(|U|,\\mathbf Z^r)$, and the base-change computation of Step 7 makes this an identification of presheaves, not just of their values. By [lem-galois-coproduct-copies-morphisms-clopen] this latter presheaf is the presheaf $h_{B_E}$, where $E=\\mathbf Z^r$ and $B_E=\\coprod_{e\\in E}B$. By [lem-galois-constant-sheaf-sets-representable], $h_{B_E}$ is a sheaf canonically isomorphic to $\\underline E$. The constant section $v\\in\\mathbf Z^r$ corresponds to its monomial character. The addition computation of Step 7 identifies addition of locally constant vectors with multiplication of characters, so this is also an isomorphism of sheaves of abelian groups.",
+   "uses": [
+    "lem-galois-coproduct-copies-morphisms-clopen",
+    "lem-galois-constant-sheaf-sets-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P5, remark-constant-locally-constant-maps, with Groupoids Tag 03YW example-constant-group; existing generic set-valued representation statements"
+   }
+  },
+  {
+   "text": "When $r=0$, the algebra $A[L_0]$ is $A$ and each character image has just one possible exponent, $0$; its coefficient is $1$ by the counit. When $s=0$ there are no coordinate choices. Thus either zero-rank Hom set and its matrix-function set are singletons, with empty products equal to $1$. In rank zero the identity matrix is the unique empty matrix and $\\operatorname{GL}_0(\\mathbf Z)$ is the trivial group. If $B$ is empty, every $T_{n,B}$ is empty and both sides of every claimed bijection are singletons; the coefficient calculations permit the zero ring. For a disconnected base the clopen pieces can have different matrices, and the calculation of Step 4 works unchanged for nonreduced rings. No connectedness or reducedness hypothesis entered the proof.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Explicit checks of the degenerate cases in the ring-generalized argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-galois-constant-sheaf-sets-representable",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-spec-clopen-idempotent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 12.4 and Theorem 12.9(a), pp.232–234; arbitrary-base extension by explicit idempotent coefficient comparison and Zariski gluing, with Stacks Tags 022U, 00EE and 03P5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over an arbitrary commutative ring, homomorphisms between split multiplicative tori are locally constant integer exponent matrices",
+   "results": "8 hits; ; LocallyConstant.mapMonoidHom, Profinite.NobelingProof.Nobeling_aux, LocallyConstant.constMonoidHom, LocallyConstant.evalMonoidHom, LocallyConstant.mapMonoidHom_apply, LocallyConstant.toContinuousMapMonoidHom, LocallyConstant.comapMonoidHom, Matrix.SpecialLinearGroup.isEmbedding_mapGL",
+   "date": "2026-10-24",
+   "verdict": "no match: the read hits concern locally constant maps, matrices, or scheme morphisms without a multiplicative group-scheme classification. No group-like/Laurent hit in AlgebraicGeometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homomorphisms of split algebraic tori over a scheme are locally constant matrices of integers",
+   "results": "8 hits; ; LocallyConstant.coeFnAlgHom_apply, LocallyConstant.coeFnAlgHom, LocallyConstant.constₐ, AlgebraicGeometry.Scheme.Hom, Algebra.embeddingsMatrix, LocallyConstant.toContinuousMapAlgHom, AlgebraicGeometry.Scheme.Modules.Hom, Matrix.scalarAlgHom",
+   "date": "2026-10-24",
+   "verdict": "no match: the read hits concern locally constant maps, matrices, or scheme morphisms without a multiplicative group-scheme classification. No group-like/Laurent hit in AlgebraicGeometry."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsGroup\"",
+   "results": "0 hits; ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the read hits concern locally constant maps, matrices, or scheme morphisms without a multiplicative group-scheme classification. No group-like/Laurent hit in AlgebraicGeometry."
+  },
+  {
+   "tool": "grep",
+   "query": "IsGroupLike|group.like|Laurent",
+   "results": "0 hits; ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the read hits concern locally constant maps, matrices, or scheme morphisms without a multiplicative group-scheme classification. No group-like/Laurent hit in AlgebraicGeometry."
+  },
+  {
+   "tool": "grep",
+   "query": "splitTorus|SplitTorus|diagonalizable|split torus|split tori",
+   "results": "{\"t\": \"2026-10-24T03:55:17Z\", \"tool\": \"grep\", \"query\": \"splitTorus|SplitTorus|diagonalizable|split torus|split tori\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no torus classification; the locally constant hits concern finite-flat rank, not morphisms of group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Group scheme morphisms from a split torus to the multiplicative group over any ring are locally constant characters",
+   "results": "{\"t\": \"2026-10-24T03:55:18Z\", \"tool\": \"leansearch\", \"query\": \"Group scheme morphisms from a split torus to the multiplicative group over any ring are locally constant characters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulChar.instFunLike\", \"MulChar\", \"MulChar.mk\", \"AlgebraicGeometry.Scheme.Hom\", \"LocallyConstant.instGroup\", \"AddChar.linearIndependent\", \"MulChar.rec\", \"MulChar.recOn\"], \"digest\": \"d039f3d4337a2ac9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space morphisms, multiplicative characters of abstract monoids and operations on locally constant functions do not give relative split-torus group morphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torus\"",
+   "results": "{\"t\": \"2026-10-24T03:55:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"torus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space morphisms, multiplicative characters of abstract monoids and operations on locally constant functions do not give relative split-torus group morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms between split multiplicative tori over an arbitrary scheme are locally constant integer exponent matrices",
+   "results": "{\"t\": \"2026-10-24T03:55:19Z\", \"tool\": \"leanfinder\", \"query\": \"Homomorphisms between split multiplicative tori over an arbitrary scheme are locally constant integer exponent matrices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"LocallyConstant.constMonoidHom\", \"LocallyConstant.mapMonoidHom_apply\", \"LocallyConstant.mapMonoidHom\", \"CompHausLike.LocallyConstant.unit_app\", \"AlgebraicGeometry.AffineSpace.homOfVector_appTop_coord\", \"LocallyConstant.constMonoidHom_apply\", \"LocallyConstant.comapMonoidHom\"], \"digest\": \"476809d15950d5a0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space morphisms, multiplicative characters of abstract monoids and operations on locally constant functions do not give relative split-torus group morphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "IsGroupLike|group.like|LocallyConstant",
+   "results": "{\"t\": \"2026-10-24T03:55:40Z\", \"tool\": \"grep\", \"query\": \"IsGroupLike|group.like|LocallyConstant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\"], \"digest\": \"d43dd0bdf22f5d69\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no torus classification; the locally constant hits concern finite-flat rank, not morphisms of group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations between powers of the functor of units over a commutative ring are locally constant Laurent monomial group homomorphisms",
+   "results": "{\"t\": \"2026-10-24T03:55:41Z\", \"tool\": \"leanfinder\", \"query\": \"Natural transformations between powers of the functor of units over a commutative ring are locally constant Laurent monomial group homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstant.unit\", \"LaurentPolynomial.smeval_T_pow\", \"LaurentPolynomial.T_apply\", \"CompHausLike.LocallyConstantModule.functorToPresheaves\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_map_app\", \"LaurentPolynomial.eval₂_T_n\", \"CompHausLike.LocallyConstantModule.functor_map_val\", \"LaurentPolynomial.eval₂_T\"], \"digest\": \"baa79a893118fa4e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LaurentPolynomial evaluation hits compute monomial values only; condensed locally constant functors do not classify relative group-scheme maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-torus-character-reconstruction",
+  "date": "2026-10-24",
+  "group": "Q140"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Abstract good reduction input, reconstruction: turn the extended character lattice into a relative torus, and identify its generic fibre by characters. Supporting input: relative split-model homomorphisms, including disconnected and nonreduced bases; Milne 12.4 coefficient comparison over rings.",
+   "via": [
+    "lem-sfb-relative-torus-character-reconstruction",
+    "lem-sfb-generic-toric-abstract-good-reduction",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-split-torus-matrix-sheaf",
+  "worker": "stage1",
+  "summary": "Preserved the arbitrary-base statement and gave the finite-sum coordinate proof with orthogonal idempotent coefficients, local matrix extraction, inverse gluing, all functorial operations and the character-sheaf identification. No new node is needed: the coefficient comparison is written out and all geometric and sheaf inputs exist. Avoided the field-only Laurent and group-like nodes. Six logged Mathlib searches found no exact match.",
+  "blueprint": "Supporting relative split-model Hom input for the character reconstruction branch recorded in blueprint.from.place. The latest sk-thm-sf-ctf-stability direct-image route is unchanged. The computed ancestor is null (inherited created.item chain), as for the reviewed field-case sibling.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-coproduct-copies-morphisms-clopen",
+    "why": "Generic coproduct-of-copies represents Zariski locally constant functions; used only for the character sheaf, and no node of this unit states it."
+   },
+   {
+    "node": "lem-galois-constant-sheaf-sets-representable",
+    "why": "Generic constant sheaf identification on the small etale site for E=Z^r; used only for the final character-sheaf identification, not to replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-galois-constant-sheaf-sets-representable"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NM-70dc9536e",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-70dc9536e (reviewer sub-agent of L); spot-checked: Read the item and all 9 steps in full. The statement is unchanged from live (live is unsplit and no repair note exists, so not superseded and not a re-split). Sources checked: Milne iAG pp.232-234 (Lemma 12.4 orthogonal-idempotent proof, Remark 12.6, Theorem 12.9(a)) and Stacks 022U. No SGA source. Mathematics: Step 1 builds the free finite-sum model and its tensor identification from the pushout leaf. Step 2 defines T_{n,B} as B x_Z Spec Z[L_n] and gets its points via the locally-ringed affine adjunction, which holds for any W. Step 3 turns the group diagrams into Delta phi=(phi tensor phi)Delta and eps phi=eps. Step 4: the coefficient comparison gives complete orthogonal idempotents (I re-checked it). Step 5 cuts out clopen D(c) (00EE leaf for any ring), checks pointwise uniqueness in residue fields (no claim that affine intersections are affine), and glues. Step 6 builds the inverse map on the open fibres M^{-1}(N) with no finiteness assumption. Step 7: composition gives NM, pointwise product gives addition, base change gives M o |b|, automorphisms give GL. Step 8: the coproduct-of-copies and constant-sheaf nodes give the character sheaf Z^r on B_et, with naturality from Step 7. Step 9: I checked the edge cases r=0, s=0, empty B, k x k and k[eps]. No new nodes. Duplicate search: only field versions exist (split-torus-hom-matrices, group-algebra-group-like-basis), correctly not cited. Accepted tool_uses: lem-galois-coproduct-copies-morphisms-clopen and lem-galois-constant-sheaf-sets-representable (unit sk-prop-h2, generic constant-sheaf representability, used only in Step 8). blueprint.from.node=null is inherited from the base node, not this delivery's fault. Advisory only: the report's preflight section is empty, and Step 8's argument that the isomorphism respects addition is brief but correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeSplitTorusMatrixSheaf",
+  "declaration": "AlgebraicGeometry.RelativeSplitTorus.matrix_sheaf_classification",
+  "declarations": [
+   "AlgebraicGeometry.RelativeSplitTorus.LaurentAlgebra",
+   "AlgebraicGeometry.RelativeSplitTorus.integerModel",
+   "AlgebraicGeometry.RelativeSplitTorus.model",
+   "AlgebraicGeometry.RelativeSplitTorus.integralProjection",
+   "AlgebraicGeometry.RelativeSplitTorus.coordinate",
+   "AlgebraicGeometry.RelativeSplitTorus.changeHom",
+   "AlgebraicGeometry.RelativeSplitTorus.matrix_sheaf_classification"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeSplitTorusMatrixSheaf.lean",
+  "statement": "theorem matrix_sheaf_classification : ∃ (p : ∀ (B : Scheme.{u}) (n : ℕ) (W : Over B), (W ⟶ (model B n).X) ≃* (Fin n → Γ(W.left, ⊤)ˣ)) (e : ∀ (B : Scheme.{u}) (r s : ℕ), ((model B r).toGrp ⟶ (model B s).toGrp) ≃ LocallyConstant B (Matrix (Fin s) (Fin r) ℤ)) (β : ∀ {B B' : Scheme.{u}} (b : B' ⟶ B) (n : ℕ), (Over.pullback b).mapGrp.obj (model B n).toGrp ≅ (model B' n).toGrp), (∀ (B : Scheme.{u}) (n : ℕ) (W : Over B) (x : W ⟶ (model B n).X) (i : Fin n), ↑(p B n W x i) = x.left.appTop (coordinate B n i)) ∧ (∀ (B : Scheme.{u}) (n : ℕ) (V W : Over B) (a : W ⟶ V) (x : V ⟶ (model B n).X) (i : Fin n), p B n W (a ≫ x) i = Units.map a.left.appTop.hom.toMonoidHom (p B n V x i)) ∧ (∀ (B : Scheme.{u}) (r s : ℕ) (f : (model B r).toGrp ⟶ (model B s).toGrp) (U : B.Opens) (A : Matrix (Fin s) (Fin r) ℤ) (_hA : ∀ b ∈ U, e B r s f b = A) (W : Over B) (_hW : Set.range W.hom ⊆ U) (x : W ⟶ (model B r).X) (j : Fin s), p B s W (x ≫ f.hom.hom) j = ∏ i : Fin r, p B r W x i ^ A j i) ∧ (∀ (B : Scheme.{u}) (r s t : ℕ) (f : (model B r).toGrp ⟶ (model B s).toGrp) (g : (model B s).toGrp ⟶ (model B t).toGrp) (b : B), e B r t (f ≫ g) b = e B s t g b * e B r s f b) ∧ (∀ (B : Scheme.{u}) (r : ℕ) (b : B), e B r r (𝟙 _) b = 1) ∧ (∀ (B : Scheme.{u}) (r s : ℕ) (f g : (model B r).toGrp ⟶ (model B s).toGrp), ∃ h : (model B r).toGrp ⟶ (model B s).toGrp, h.hom.hom = f.hom.hom * g.hom.hom ∧ ∀ b : B, e B r s h b = e B r s f b + e B r s g b) ∧ (∀ (B B' : Scheme.{u}) (b : B' ⟶ B) (n : ℕ) (W : Over B') (x : W ⟶ ((Over.pullback b).mapGrp.obj (model B n).toGrp).X) (i : Fin n), p B' n W (x ≫ (β b n).hom.hom.hom) i = p B n ((Over.map b).obj W) (((Over.mapPullbackAdj b).homEquiv W (model B n).X).symm x) i) ∧ (∀ (B B' : Scheme.{u}) (b : B' ⟶ B) (r s : ℕ) (f : (model B r).toGrp ⟶ (model B s).toGrp) (x : B'), e B' r s (changeHom b r s (β b r) (β b s) f) x = e B r s f (b x)) ∧ (∀ (B : Scheme.{u}) (r : ℕ), ∃ a : Aut (model B r).toGrp ≃ LocallyConstant B (Matrix (Fin r) (Fin r) ℤ)ˣ, ∀ (f : Aut (model B r).toGrp) (b : B), ↑(a f b) = e B r r f.hom b) ∧ (∀ B : Scheme.{u}, Nonempty ((model B 0).toGrp ≅ Grp.trivial (Over B))) ∧ (∀ (B : Scheme.{u}) (r : ℕ), ∃ (H : B.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1}) (hH : Presheaf.IsSheaf B.smallEtaleTopology H) (q : ∀ U : B.Etale, H.obj (op U) ≃ ((model U.left r).toGrp ⟶ (model U.left 1).toGrp)) (φ : (constantSheaf B.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift.{u + 1} (Fin r → ℤ))) ≅ ⟨H, hH⟩), (∀ (U V : B.Etale) (k : V ⟶ U) (χ : H.obj (op U)), q V (H.map k.op χ) = changeHom k.left r 1 (β k.left r) (β k.left 1) (q U χ)) ∧ (∀ (U : B.Etale) (χ ψ : H.obj (op U)), (q U (χ + ψ)).hom.hom = (q U χ).hom.hom * (q U ψ).hom.hom) ∧ (∀ (U : B.Etale) (v : Fin r → ℤ), e U.left r 1 (q U ((φ.hom.hom.app (op U)) ((toSheafify B.smallEtaleTopology ((Functor.const B.Etaleᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} (Fin r → ℤ))))).app (op U) ⟨v⟩))) = LocallyConstant.const U.left (fun (_ : Fin 1) (i : Fin r) ↦ v i)))",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f478b4780",
+  "group": "O3",
+  "result": "pass",
+  "note": "All clauses match the node: arbitrary B (no extra hypotheses), torus = base change of Mathlib's Laurent Hopf algebra over ULift Z (CommGrp), W-points as units pinned by coordinates with naturality, Hom ≃ LocallyConstant B (Matrix (Fin s) (Fin r) Z) pinned by the monomial formula on all test schemes, composition NM, identity, product→sum, canonical base-change β pinned via Over.mapPullbackAdj (Yoneda), e∘changeHom = e∘b, Aut ≃ LC units, rank 0 ≅ Grp.trivial, character sheaf with q/φ pinned to the actual constantSheaf and toSheafify constants. Statement verbatim, single sorry, real helper defs, docstrings with source and steps, node unchanged vs live except the lean record. Advisory maintainer note: def-sfb-relative-split-torus (relativeSplitTorus, Q110) is the same notion but landed 04:22 UTC after this base (04:11 UTC), so it could not be cited and a stmt_dep FIX would be refused; two T_{S,r} models now exist and downstream citers should settle on one or record the isomorphism. No compile (no file changed)."
+ }
+}

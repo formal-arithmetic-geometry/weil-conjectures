@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-translated-cartier-parameter-family",
+ "kind": "statement",
+ "title": "An affine parameter family of sections on a smooth integral group",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and $H/k$ a smooth integral separated group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-pc-integral-scheme, def-weil-finite-type-morphism]; separated means that its diagonal is a closed immersion. There exist an integer $d\\geq0$, a nonempty affine open subscheme $V\\subseteq\\mathbf A^d_k$, where $\\mathbf A^d_k=\\operatorname{Spec}k[t_1,\\ldots,t_d]$ [def-weil-affine-spectrum, def-weil-open-immersion], and an invertible module $\\mathcal M$ on $H\\times_kV$ [def-pc-fibre-product, def-sc-invertible-module], with the following properties. For $v\\in V(k)$ put $\\mathcal M_v=i_v^*\\mathcal M$, where $i_v:H\\to H\\times_kV$ sends $h$ to $(h,v)$ and pullback is tensor inverse image [def-pc-module-pullback]. There is a family of sections $(s_v)_{v\\in V(k)}$, with $s_v\\in\\Gamma(H,\\mathcal M_v)$, such that for every $v\\in V(k)$ the open $H_{s_v}$ is affine, where $H_{s_v}$ is the locus where the value of $s_v$ in the residue-field fibre is nonzero [def-weil-pbc-ample-invertible-module]. For every $h\\in H(k)$ there is a $v\\in V(k)$ such that $h\\in H_{s_v}$. No constancy of the isomorphism classes of the $\\mathcal M_v$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0BF7, lemma-algebraic-quasi-projective, smooth irreducible case: affine complement divisor D, finite etale chart W to V, image divisor E on H times V, and M=O(E), through the sentence preceding the application of rational-equivalence-for-Pic. This extracts a parameter family, not the final ample module."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose a nonempty affine open $U\\subseteq H$ from an affine cover; $H$ is nonempty because it is integral. Apply the affine-boundary lemma to obtain an effective Cartier divisor $D$ with $H\\setminus|D|=U$. The canonical-section lemma gives an invertible module $L=\\mathcal O_H(D)$ and $a\\in\\Gamma(H,L)$ with zero scheme $D$. In a local frame $a$ is multiplication by the equation of $D$, so $H_a=U$.",
+   "uses": [
+    "lem-sfb-smooth-affine-cartier-boundary",
+    "def-pc-integral-scheme",
+    "def-pc-scheme",
+    "lem-sc-canonical-section-zero-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0BF7, groupoids-lemma-algebraic-quasi-projective, smooth irreducible case, finite-chart construction and norm footnote, before rational-equivalence-for-Pic."
+   }
+  },
+  {
+   "text": "Apply the finite-chart lemma to $X=H$, obtaining $d,n,j:W\\hookrightarrow H,q:W\\to V$. Put $Y=H\\times_k W$, $Z=H\\times_k V$, $p=1_H\\times q$, and $\\alpha:Y\\to H$, $\\alpha(h,w)=h j(w)$. Multiplication and $j$ define this morphism by the group-scheme data. The pullback clause of the finite-locally-free descent lemma makes $p$ finite locally free of degree $n$. Its fibre algebra at every point has dimension $n\\geq1$, hence is a nonzero finite algebra over a field and has a maximal ideal; every fibre has a point, so $p$ is surjective. Apply the function-norm lemma to $p$ to obtain restriction-compatible multiplicative norms with the scalar-power and residue-zero properties. Pull back $L,a$ along $\\alpha$, giving the invertible module $A=\\alpha^*L$ and section $b=\\alpha^*a$; its nonvanishing locus is $Y_b=\\alpha^{-1}(U)$ by the residue-fibre formula. The existing norm-of-invertible-sections lemma, with exponent $1$, now gives an invertible module $\\mathcal M$ on $Z$ and a section $t\\in\\Gamma(Z,\\mathcal M)$ with $$Z_t=\\{z\\in Z:p^{-1}(\\{z\\})\\subseteq\\alpha^{-1}(U)\\}.$$",
+   "uses": [
+    "lem-sfb-smooth-integral-finite-etale-chart",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-sfb-finite-norm-invertible-sections",
+    "lem-sfb-finite-locally-free-function-norm",
+    "lem-sfb-finite-locally-free-fppf-descent",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0BF7, groupoids-lemma-algebraic-quasi-projective, smooth irreducible case, finite-chart construction and norm footnote, before rational-equivalence-for-Pic."
+   }
+  },
+  {
+   "text": "For every $v\\in V(k)$ set $s_v=i_v^*t$ in $\\mathcal M_v=i_v^*\\mathcal M$. Pullback preserves invertibility and nonvanishing opens by its residue-fibre formula. Write $W_v=\\coprod_{i=1}^n\\operatorname{Spec}k$, with points $w_i$, using the chart lemma. The finite-coproduct base-change lemma, applied to this decomposition along $H\\to\\operatorname{Spec}k$, identifies $p$ over $H\\times\\{v\\}$ with $n$ copies of $H$; on the $i$th copy $\\alpha$ is right translation $R_{j(w_i)}$. Hence Step 2 gives, for all points of $H$, $$H_{s_v}=\\bigcap_{i=1}^n R_{j(w_i)}^{-1}(U)=\\bigcap_{i=1}^n Uj(w_i)^{-1}.$$ Translation is an isomorphism: its inverse is translation by the group inverse, since the composites are the identity by the group laws. Each displayed open is therefore affine. The diagonal of $H$ is a closed immersion, hence affine by the closed-immersion-finite lemma. Apply the affine-diagonal intersection lemma repeatedly to this nonempty finite family ($n\\geq1$) to conclude that $H_{s_v}$ is affine.",
+   "uses": [
+    "lem-sfb-smooth-integral-finite-etale-chart",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-sc-picard-affine-diagonal-intersections",
+    "lem-sc-etale-fibre-product-base-change-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0BF7, groupoids-lemma-algebraic-quasi-projective, smooth irreducible case, finite-chart construction and norm footnote, before rational-equivalence-for-Pic."
+   }
+  },
+  {
+   "text": "Fix $h\\in H(k)$. The inverse image $W_h=j^{-1}(h^{-1}U)$ is nonempty open in $W$: both $j(W)$ and $h^{-1}U$ are nonempty open in the irreducible space $H$. It is dense in $W$, since a nonempty open subspace of an irreducible space is irreducible. Thus $T_h=W\\setminus W_h$ is closed nowhere dense. Apply the finite-image lemma to $q$ to see that $q(T_h)$ is closed nowhere dense in $V$. Consequently $V_h=V\\setminus q(T_h)$ is nonempty open. Since $V$ is locally of finite type over $k$, the Jacobson lemma gives a closed point of $V$ in $V_h$ (apply density to the closed subset $V$ itself). The residue-field lemma makes it a $k$-rational point $v$. Every point $w_i$ above $v$ belongs to $W_h$, so $h j(w_i)\\in U$ for all $i$. The formula of Step 3 yields $h\\in H_{s_v}$. The fixed $d,V,\\mathcal M$ and the pullbacks $s_v=i_v^*t$ satisfy every clause of the item.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-sc-group-scheme",
+    "lem-sfb-finite-image-nowhere-dense",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sfb-smooth-integral-finite-etale-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0BF7, groupoids-lemma-algebraic-quasi-projective, smooth irreducible case, finite-chart construction and norm footnote, before rational-equivalence-for-Pic."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "def-pc-integral-scheme",
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "lem-sc-canonical-section-zero-scheme",
+  "lem-sc-etale-fibre-product-base-change-coproduct",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sc-picard-affine-diagonal-intersections",
+  "lem-sfb-finite-image-nowhere-dense",
+  "lem-sfb-finite-locally-free-fppf-descent",
+  "lem-sfb-finite-locally-free-function-norm",
+  "lem-sfb-finite-norm-invertible-sections",
+  "lem-sfb-smooth-affine-cartier-boundary",
+  "lem-sfb-smooth-integral-finite-etale-chart",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0BF7, groupoids-lemma-algebraic-quasi-projective, smooth irreducible case, finite-chart construction and norm footnote, before rational-equivalence-for-Pic."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth integral algebraic group over an algebraically closed field has a line bundle family parametrized by an open of affine space with fibrewise affine nonvanishing sections avoiding every rational point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S) ↔ IsEmpty ↥S ∨ IsEmpty n\", \"doc\": \"The structure morphism of the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ is an integral morphism if and only if the base scheme $S$ is empty or the type $n$ is empty.\"}\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}\n  {\"name\": \"WeierstrassCurve.exists_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] [inst_3 : IsDomain R]\\n  [ValuationRing R] [IsFractionRing R K] (W : WeierstrassCurve K), ∃ C, WeierstrassCurve.IsIntegral R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ has an integral coordina\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space morphisms, etale base change and basic-open localization lemmas construct neither a Cartier moving family nor affine section loci on all its fibres."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Moving translates of a Cartier divisor with affine complement in a smooth group scheme through a finite etale affine space chart",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AffineSubspace.map_pointwise_vadd\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Pointwise\", \"type\": \"(f : P₁ →ᵃ[k] P₂) (v : V₁) (s : AffineSubspace k P₁) : (v +ᵥ s).map f = f.linear v +ᵥ s.map f\", \"doc\": \"For an affine map $ f : P_1 \\\\to P_2 $ over a ring $ k $, a vector $ v \\\\in V_1 $, and an affine subspace $ s \\\\subseteq P_1 $, the image of the translated subspace $ v + s $ under $ f $ equals the trans\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"translate\", \"module\": \"Mathlib.Algebra.Group.Translate\", \"type\": \"(a : G) (f : G → α) : G → α\", \"doc\": \"Given an element $ a $ of an additive commutative group $ G $ and a function $ f : G \\\\to \\\\alpha $, the translated function maps each $ x \\\\in G $ to $ f(x - a) $. This operation shifts the input of $ f\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \"{S T : Scheme.{max u v}} (f : S ⟶ T) : 𝔸(n; S) ⟶ 𝔸(n; T)\", \"doc\": \"Given a morphism $ f: S \\to T $ of schemes, this function constructs the induced morphism $ \\\\mathbb{A}^n_S \\to \\\\mathbb{A}^n_T $ between affine spaces by composing the canonical projection $ \\\\mathbb{A}^n\"}\n  {\"name\": \"AffineEquiv.constVAddHom_apply\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.AffineEquiv\", \"type\": \"∀ (k : Type u_1) (P₁ : Type u_2) {V₁ : Type u_6} [inst : Ring k] [inst_1 : AddCommGroup V₁] [inst_2 : Module k V₁]\\n  [inst_3 : AddTorsor V₁ P₁] (v : Multiplicative V₁),\\n  (AffineEquiv.constVAddHom k P₁) v = AffineEquiv.constVAdd k P₁ (Multiplicative.toAdd v)\", \"doc\": \"For any ring $ k $, affine space $ P_1 $ over a $ k $-module $ V_1 $, and any vector $ v $ in the multiplicative structure on $ V_1 $, applying the group homomorphism from the multiplicative vectors t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space morphisms, etale base change and basic-open localization lemmas construct neither a Cartier moving family nor affine section loci on all its fibres."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasAmpleFamily\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space morphisms, etale base change and basic-open localization lemmas construct neither a Cartier moving family nor affine section loci on all its fibres."
+  },
+  {
+   "tool": "grep",
+   "query": "HasAmpleFamily|AmpleFamily|Cartier.*[Tt]ranslat|[Tt]ranslat.*Cartier",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space morphisms, etale base change and basic-open localization lemmas construct neither a Cartier moving family nor affine section loci on all its fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth integral algebraic group admits line bundles parametrized by an affine space open with affine section loci covering all rational points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.coord\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} → (S : AlgebraicGeometry.Scheme) → n → ↑((AlgebraicGeometry.AffineSpace n S).presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For an index $i$ in the type $n$, the $i$-th coordinate function on the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$, defined as the global section of the structure sheaf corresponding to the $i$-t\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) → [inst_3 : GradedRing 𝒜] → (AlgebraicGeometry.Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$, if the irrelevant ideal (elements with zero degree component) is contained in the ideal generated by homogeneous elements $\\\\{f_i\\\\}$ of positive degree, t\"}\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (consisting of elements with zero zeroth homogeneous component) is contained in the ideal generated b\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space and basic-open declarations do not construct the required family of invertible modules and covering sections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Moving translates of a Cartier divisor through a finite etale affine space chart give a family of line bundles and affine nonvanishing loci",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AffineEquiv.vaddConst\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.AffineEquiv\", \"type\": \"(b : P₁) : V₁ ≃ᵃ[k] P₁\", \"doc\": \"Given a point $ b $ in an affine space $ P_1 $ over a ring $ k $, this constructs the affine equivalence from the underlying vector space $ V_1 $ to $ P_1 $ defined by translating vectors via addition\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AffineSubspace.pointwiseVAdd\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Pointwise\", \"type\": \": VAdd V (AffineSubspace k P)\", \"doc\": \"For a vector $ x $ in the module and an affine subspace $ s $, this defines the action of translating $ s $ by $ x $, resulting in the affine subspace obtained by adding $ x $ to every point in $ s $.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \"{S T : Scheme.{max u v}} (f : S ⟶ T) : 𝔸(n; S) ⟶ 𝔸(n; T)\", \"doc\": \"Given a morphism $ f: S \\to T $ of schemes, this function constructs the induced morphism $ \\\\mathbb{A}^n_S \\to \\\\mathbb{A}^n_T $ between affine spaces by composing the canonical projection $ \\\\mathbb{A}^n\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.app_basicOpen_eq_away_map\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) {U : Y.Opens} (hU : IsAffineOpen U) (h : IsAffineOpen (f ⁻¹ᵁ U)) (r : Γ(Y, U)) :\\n  haveI := hU.isLocalization_basicOpen r\\n  haveI := h.isLocalization_basicOpen (f.app U r)\\n  f.app (Y.basicOpen r) =\\n    (CommRingCat.ofHom (IsLocalization.Away.map Γ(Y, Y.basicOpen r) Γ(X\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $U \\\\subseteq Y$ be an affine open subset such that its preimage $f^{-1}(U)$ is also affine. For any section $r \\\\in \\\\Gamma(U, \\\\mathcal{O}_Y)$, the map\"}\n  {\"name\": \"AffineBasis.instAddAction\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Basis\", \"type\": \": AddAction V (AffineBasis ι k P)\", \"doc\": \"For any vector $ v $ in the vector space $ V $ and any affine basis $ b $ of the affine space $ P $, the translation of each basis point by $ v $ defines a canonical additive action of $ V $ on the ty\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ is affine, then any base change (pullback) of $ f $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space and basic-open declarations do not construct the required family of invertible modules and covering sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasAmpleFamily\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space and basic-open declarations do not construct the required family of invertible modules and covering sections."
+  },
+  {
+   "tool": "grep",
+   "query": "HasAmpleFamily|AmpleFamily|Cartier.*[Tt]ranslat|[Tt]ranslat.*Cartier",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space and basic-open declarations do not construct the required family of invertible modules and covering sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a parameter family of sections by taking norms of a divisor translated by a dense open of a smooth group scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.sectionInBasicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (x : ↑(ProjectiveSpectrum.top 𝒜)) →\\n                (f : HomogeneousLocalization.NumDenSa\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a point $x$ in its projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$, this defines a section over the basic open set $D_+(f.\\\\text{den})$ (where $f$ is a homogeneous lo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (s : ↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj (Opposite.op U))) {ι : Type u_1} (t : Finset ι) (a h : ι → R)\\n  (iDh : (i : ι) → PrimeSpectrum.basicOpen (h i) ⟶ U),\\n  U ≤ ⨆ i ∈ t, Prim\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n  {\"name\": \"toMeromorphicNFOn\", \"module\": \"Mathlib/Analysis/Meromorphic/NormalForm\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} → [inst_1 : NormedAddCommGroup E] → [NormedSpace 𝕜 E] → (𝕜 → E) → Set 𝕜 → 𝕜 → E\", \"doc\": \"The function maps elements of the nontrivially normed field $\\\\mathbb{K}$ to the normed space $E$, representing the meromorphic normal form on a specified set $U$. For points in $U$ where the function \"}\n  {\"name\": \"MeromorphicOn.divisor_of_toMeromorphicNFOn\", \"module\": \"Mathlib/Analysis/Meromorphic/NormalForm\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {f : 𝕜 → E} {U : Set 𝕜},\\n  MeromorphicOn f U → MeromorphicOn.divisor (toMeromorphicNFOn f U) U = MeromorphicOn.divisor f U\", \"doc\": \"For a meromorphic function $ f $ on a set $ U $ in a nontrivially normed field $ \\\\mathbb{K} $, taking values in a normed vector space $ E $, the divisor of the meromorphic normal form of $ f $ on $ U \"}\n  {\"name\": \"Function.locallyFinsuppWithin.toClosedBall_divisor\", \"module\": \"Mathlib/Analysis/Complex/ValueDistribution/LogCounting/Basic\", \"type\": \"∀ {r : ℝ} {f : ℂ → ℂ},\\n  Meromorphic f →\\n    MeromorphicOn.divisor f (Metric.closedBall 0 |r|) =\\n      (Function.locallyFinsuppWithin.toClosedBall r) (MeromorphicOn.divisor f Set.univ)\", \"doc\": \"For a meromorphic function $f: \\\\mathbb{C} \\\\to \\\\mathbb{C}$, the divisor of $f$ restricted to the closed ball $\\\\overline{B}(0, |r|)$ equals the image of the global divisor of $f$ under the restriction m\"}\n  {\"name\": \"AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X} (x : ↥U) {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n  ↑x ∈ X.basicOpen s → ∀ {n : ℕ}, s ^ n * f = 0 → (CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U ↑x ⋯)) f = 0\", \"doc\": \"Let $ X $ be a scheme, $ U $ an open subset of $ X $, $ x $ a point in $ U $, and $ f, s $ sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $. If $ x $ lies in the basic open set $ X_{\\\\text{\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space and basic-open declarations do not construct the required family of invertible modules and covering sections."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-type-group-ample-line",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3, printed p.53, opening parenthesis: the generic line is a difference of two ample lines; Stacks supplies this for all finite-type algebraic groups, not only abelian varieties. Supporting input for the present split: existence of one ample invertible module on a finite-type group scheme, before choosing a high twist of the supplied line. Smooth irreducible geometric construction in Groupoids Tag 0BF7, before Picard rigidity.",
+   "via": [
+    "lem-sfb-finite-type-group-ample-line",
+    "lem-sfb-algebraic-group-ample-difference",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-translated-cartier-parameter-family",
+  "worker": "stage1",
+  "summary": "Checked the unchanged parameter-family statement against Stacks 0BF7 before Picard rigidity. Followed its explicit norm footnote, reusing the existing canonical-section and norm-of-invertible-sections nodes. Added three statement-only geometric inputs. Reused the live function-norm and finite-locally-free pullback nodes after preflight identified a newly available norm lemma. Wrote the all-points fibrewise affine-intersection formula and the whole-fibre avoidance argument using 03HX; no constancy of fibre line classes or universal Cartier restriction is assumed.",
+  "blueprint": "The inherited supporting chain serves det-thm-sf-ctf-stability-direct-images (3). This split realizes only its recorded 0BF7 smooth integral group parameter-family prerequisite, through the finite chart, norm footnote and point avoidance. Read the latest direct-images proof (3); neither chapter nor unit was changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-canonical-section-zero-scheme",
+    "why": "The general canonical section of an effective Cartier divisor identifies H_a with the affine complement U; this is a generic geometric input to the 0BF7 construction."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Tensor pullback preserves invertibility and nonvanishing loci by its residue-fibre formula; needed for alpha and every fibre inclusion."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "The separatedness hypothesis makes the diagonal a closed immersion, so this general lemma makes it affine."
+   },
+   {
+    "node": "lem-sc-picard-affine-diagonal-intersections",
+    "why": "Finite nonempty intersections of translated affine opens are affine because the diagonal is affine; no lemma of this unit supplies this generic scheme input."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Density of closed points supplies a closed point in the nonempty good open of V."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Over the given algebraically closed field a closed point of V is k-rational."
+   },
+   {
+    "node": "lem-sc-etale-fibre-product-base-change-coproduct",
+    "why": "The split finite chart fibre remains a disjoint union of copies of H after base change, with both projections identified; used to compute the norm-section locus on every scheme point, not only rational points."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-canonical-section-zero-scheme",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-sc-picard-affine-diagonal-intersections",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-etale-fibre-product-base-change-coproduct"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-2e3666e35",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-2e3666e35 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, 4 steps), the three new statement-only nodes, the statement of every cited node, and Stacks 0BF7 (groupoids.tex, through the sentence before rational-equivalence-for-Pic, including the norm footnote), 0BCW, 054L, 02NW and 03HX with its proof. This is a first split: the base item was unsplit with no proof and has no repair note; live and side-live still show it unsplit. Step 1: U is a nonempty affine open of H; the new boundary lemma gives D, and the canonical-section lemma gives a with H_a=U. Step 2: chart W→V of degree n. p=1×q is a base change, so the pullback clause of the fppf-descent node gives degree n; surjectivity follows from n≥1. The landed Q91 function-norm node gives exactly the ν hypotheses of lem-sfb-finite-norm-invertible-sections, which with exponent 1 gives Z_t={z: p^{-1}(z)⊆α^{-1}U}. Step 3: the coproduct base-change leaf splits the fibre over H×{v} into n copies of H, so H_{s_v}=∩U j(w_i)^{-1} at every scheme point. These are affine through the closed diagonal and affine-diagonal intersections; the multiplication order matches Stacks and commutativity is not used. Step 4: the finite image of the closed nowhere-dense set T_h (03HX) leaves a nonempty open V_h; Jacobson density and alg. closed k give a k-point whose whole fibre lies in W_h. New nodes: the boundary lemma is true by 0BCW+056S+0AG0. The chart lemma is true by 054L, 02NW(4), 04MH and 02GL, including d=0. The finite-image lemma is exactly 03HX. No duplicates were found in the snapshot, live or side-live (rg on 03HX/03J2/0BCW/054L and a statement scan); none restates an item clause. Edge cases checked: H=Spec k, affine H, char p dividing n, noncommutative H. Batch-5 flag on lem-sfb-finite-locally-free-fppf-descent: only its pullback clause is used. Its added closure reaches sec-trace-formula only through three generic fppf/fpqc descent nodes of unit sk-i-curve-zero; it reaches no nt-assume leaf or trace-formula/PD proof step, so I accept it. All 7 declared tool_uses are generic scheme facts and are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TranslatedCartierParameterFamily",
+  "declaration": "AlgebraicGeometry.exists_translated_cartier_parameter_family",
+  "file": "lean/Sheaf/AlgebraicGeometry/TranslatedCartierParameterFamily.lean",
+  "statement": "theorem exists_translated_cartier_parameter_family (k : Type u) [Field k] [IsAlgClosed k] (H : Over (Spec (.of k))) [GrpObj H] [Smooth H.hom] [IsIntegral H.left] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] [IsClosedImmersion (pullback.diagonal H.hom)] : ∃ (d : ℕ) (V : Over (Spec (.of k))) (j : V.left ⟶ Spec (.of (MvPolynomial (Fin d) k))), IsOpenImmersion j ∧ IsAffine V.left ∧ Nonempty V.left ∧ j ≫ Spec.map (CommRingCat.ofHom (algebraMap k (MvPolynomial (Fin d) k))) = V.hom ∧ ∃ M : (pullback H.hom V.hom).Modules, M.IsInvertible ∧ ∃ s : ∀ v : Over.mk (𝟙 (Spec (.of k))) ⟶ V, Γ((Scheme.Modules.tensorPullback (pullback.lift (𝟙 H.left) (H.hom ≫ v.left) (by simp only [Category.id_comp, Category.assoc, Over.w, Over.mk_hom, Category.comp_id]))).obj M, ⊤), ∃ U : (Over.mk (𝟙 (Spec (.of k))) ⟶ V) → H.left.Opens, (∀ v : Over.mk (𝟙 (Spec (.of k))) ⟶ V, IsAffineOpen (U v) ∧ (U v : Set H.left) = Scheme.Modules.nonvanishingLocus ((Scheme.Modules.tensorPullback (pullback.lift (𝟙 H.left) (H.hom ≫ v.left) (by simp only [Category.id_comp, Category.assoc, Over.w, Over.mk_hom, Category.comp_id]))).obj M) (s v)) ∧ ∀ h : Over.mk (𝟙 (Spec (.of k))) ⟶ H, ∃ v : Over.mk (𝟙 (Spec (.of k))) ⟶ V, h.left (IsLocalRing.closedPoint k) ∈ U v",
+  "branch": "sheaf-dag",
+  "by": "Q85",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d75ac59a5",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Statement checked clause by clause against the node and Stacks 0BF7. Hypotheses: k algebraically closed; GrpObj H over Spec k; Smooth, IsIntegral, LocallyOfFiniteType + QuasiCompact; separatedness exactly as the diagonal being a closed immersion. Conclusion: d:ℕ; V a nonempty affine open of Spec MvPolynomial (Fin d) k, its structure map compatible with A^d; one invertible M on pullback H.hom V.hom; for each k-point v a section of tensorPullback along pullback.lift (𝟙) (H.hom ≫ v.left), whose nonvanishingLocus equals an affine open U v; every k-point of H lies in some U v. No constancy asserted, no extra hypotheses, single universe. Edge cases: d=0, H=Spec k, empty H excluded, noncommutative H. lean.statement verbatim; one theorem, sorry proof; docstrings give source and blueprint id with the 4 proof steps. Node identical to side-live apart from the lean field. Each plain import belongs to a proof_dep. No new defs or dependency modules. Not recompiled (no change). No findings."
+ }
+}

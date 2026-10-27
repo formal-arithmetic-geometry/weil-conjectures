@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-relative-finite-constant-slice-comparison",
+ "kind": "statement",
+ "title": "Constant module local isomorphisms on corresponding slices",
+ "statement": "Let g:Y→X be a scheme morphism, B a commutative ring, F a module sheaf over g⁻¹(B_X), M a B-module, and V an object of the equivalent AsSmall site of Y. There is an isomorphism of F restricted to AsSmall.down(V) with the restriction of g⁻¹ of the constant M-module on X if and only if the explicit coefficient transport of F restricted to V is isomorphic to the restriction of the constantCoefficientModule associated with the same M on the small site. No finiteness hypothesis on B or M is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; sites.tex Tag 03A0, lemma-equivalence; sites-cohomology.tex Tags 06YY and 0D6D, derived pullback and composition"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-relative-finite-coefficient-transport",
+  "def-weil-pbc-locally-constant-finite-type-modules"
+ ],
+ "proof": [
+  {
+   "text": "Apply the slice equivalence for arbitrary module sheaves to F and the inverse-image constant module, then compose with the identification of the transported constant model.",
+   "uses": [
+    "lem-weil-pbc-relative-finite-model-slice-equivalence",
+    "lem-weil-pbc-relative-finite-constant-model-identification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the reverse implication, compose the given transported local isomorphism with the inverse of the constant-model identification and use the reverse direction of the slice equivalence.",
+   "uses": [
+    "lem-weil-pbc-relative-finite-model-slice-equivalence",
+    "lem-weil-pbc-relative-finite-constant-model-identification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-relative-finite-model-slice-equivalence",
+  "lem-weil-pbc-relative-finite-constant-model-identification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 03A0; reduced to slice equivalence and constant-model identification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "equivalence of sites sends inverse image constant module sheaves on slices to constant coefficient module sheaves",
+   "results": "8 hits, including CategoryTheory.Sheaf.isConstant_iff_of_equivalence and Sheaf.isConstant_iff_forget; no ringed-module comparison on these slices.",
+   "date": "2026-10-27",
+   "verdict": "Use the equivalence API, but the scalar-linear constant-module comparison still requires proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforwardPushforwardEquivalence\"",
+   "results": "3 hits: SheafOfModules.pushforwardPushforwardEquivalence and its unit and counit component equations.",
+   "date": "2026-10-27",
+   "verdict": "Constructs the module equivalence; does not identify the project constant module or scalar extension."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomologyFunctorIso|pushforwardPushforwardEquivalence",
+   "results": "7 Mathlib hits in module-sheaf pushforward, quasicoherent modules and topological sheaf modules. The homology API is in the adopted WeilConjectures tree and is used directly.",
+   "date": "2026-10-27",
+   "verdict": "The project-specific comparisons are not already present as a single Mathlib statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of ringed sites transports constant module sheaves, exact derived functors and restriction of scalars",
+   "results": "8 hits: ModuleCat.restrictScalars_isEquivalence_of_ringEquiv; SheafOfModules.restrictScalars; CategoryTheory.Sheaf.isConstant_iff_of_equivalence; CategoryTheory.Equivalence.transportIsoSheafToPresheaf; Equivalence.sheafCongr; Equivalence.sheafCongrPrecoherent; Equivalence.sheafCongr.functor; ModuleCat.restrictScalarsEquivalenceOfRingEquiv_additive. These are ordinary module and sheaf transport APIs, not the project-specific relative constant or derived scalar comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No complete match; the relevant equivalence and restriction APIs are used in the explicit construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RelativeFiniteCoefficientModel",
+  "date": "2026-10-27",
+  "group": "G5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Proof (c), Tag 094I: coefficient-site comparison in finite refinement and nilpotent propagation",
+   "via": [
+    "lem-weil-pbc-relative-finite-coefficient-model",
+    "new-lem-weil-pbc-normalized-tower-lisse-propagation",
+    "lem-weil-pbc-normalized-tower-common-lisse-strata",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RelativeFiniteConstantSliceComparison",
+  "file": "lean/Sheaf/Paper/RelativeFiniteConstantSliceComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.relativeFiniteConstantSliceComparison",
+  "statement": "theorem relativeFiniteConstantSliceComparison {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (B : Type (u + 1)) [CommRing B]\n    (F : pbcModules Y ((adicTowerInverseImage g).obj (adicLisseConstantRing X B)))\n    (M : ModuleCat.{u + 1} B) (V : proEtaleSiteModel Y) :\n    Nonempty (F.over (AsSmall.down.obj V) ≅\n      ((proEtaleModuleInverseImage g (adicLisseConstantRing X B)).obj\n        ((adicLisseConstantModules X B).obj M)).over (AsSmall.down.obj V)) ↔\n    Nonempty (((relativeFiniteModelModules g B).obj F).over V ≅\n      ((SheafOfModules.constantCoefficientModule (proEtaleModelTopology Y) B).obj M).over V)",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261027T034650-L-3672174",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261027T054607-L-968947",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

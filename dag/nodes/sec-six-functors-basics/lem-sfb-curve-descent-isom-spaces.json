@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-curve-descent-isom-spaces",
+ "kind": "statement",
+ "title": "Etale descent and Isom spaces for families of curves",
+ "statement": "On schemes over $\\operatorname{Spec}\\mathbf Z$ [def-pc-scheme, def-weil-affine-spectrum], let $\\mathcal C(T)$ be the groupoid of flat proper finitely presented morphisms $X\\to T$ of algebraic spaces whose geometric fibres have dimension at most one [def-weil-geometric-fibre, def-kun-topological-krull-dimension]. Arrows in $\\mathcal C(T)$ are $T$-isomorphisms and pullback is cartesian base change; arrows over $T'\\to T$ are isomorphisms $X'\\cong X\\times_TT'$ [def-pc-fibre-product]. Algebraic spaces are as in [def-trf-algebraic-space], with the universe convention [def-weil-size-convention]. Flatness and local finite presentation for their morphisms are tested on etale scheme charts using [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. A morphism of algebraic spaces is proper if it is separated, of finite type and universally closed: separated means its diagonal is a closed immersion, finite type means quasi-compact and locally of finite type on etale charts, and universally closed means closed on underlying spaces after every algebraic-space base change (the scheme conventions are [def-weil-proper-morphism, def-weil-finite-type-morphism]). The category $\\mathcal C$ is a stack in groupoids for the fppf topology [def-pc-fppf-site]: isomorphisms form a sheaf and all compatible descent data for families are effective. Moreover, for any scheme $T$ and $X,Y\\in\\mathcal C(T)$, the sheaf $T'\\mapsto\\operatorname{Isom}_{T'}(X\\times_TT',Y\\times_TT')$ is an algebraic space over $T$.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-geometric-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-fppf-site",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "For a scheme map $T\\prime\\to T$ and $X\\in\\mathcal C(T)$, the algebraic-space pullback $X\\times_TT\\prime$ exists by [lem-trf-space-fibre-products-etale-covers]. By [lem-sfb-space-flat-proper-fp-locality] its structure map is proper, flat and finitely presented; by [lem-sfb-space-relative-dimension-base-change] with $d=1$, applied to $X\\to T$, which is locally of finite type and quasi-separated since proper morphisms are of finite type and separated, its geometric fibres have dimension at most one. Iterated pullbacks agree by the fibre-product universal property. They give cartesian lifts, and the arrows in each fibre are isomorphisms by definition. Hence $\\mathcal C$ is fibred in groupoids. This also proves that every subsequent pullback remains a curve family.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-relative-dimension-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D51, lemma-curves-fibred-in-groupoids, and lemma-spaces-fibred-in-groupoids."
+   }
+  },
+  {
+   "text": "Fix $X,Y\\in\\mathcal C(T)$. Apply [lem-sfb-space-hom-representability] with $B=T$ to $(Z,W)=(X,Y),(Y,X),(X,X),(Y,Y)$. In all four applications the source is flat, proper and finitely presented, while the target is finitely presented and separated because properness includes separatedness. Obtain algebraic spaces $M_{XY},M_{YX},M_{XX},M_{YY}$ over $T$, whose sections are exactly the corresponding morphisms after arbitrary scheme base change. No dimension hypothesis is needed for this input.",
+   "uses": [
+    "lem-sfb-space-hom-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D53, lemma-curves-diagonal, through Tag 0D1F, lemma-spaces-diagonal, and Tag 0D1C, proposition-Mor."
+   }
+  },
+  {
+   "text": "Composition and identities give natural transformations $c:M_{XY}\\times_TM_{YX}\\to M_{XX}\\times_TM_{YY}$, $(a,b)\\mapsto(b\\circ a,a\\circ b)$, and $e:T\\to M_{XX}\\times_TM_{YY}$, $e=(\\mathrm{id}_X,\\mathrm{id}_Y)$. These are morphisms of algebraic spaces because such morphisms are natural transformations [def-trf-algebraic-space]. By [lem-trf-space-fibre-products-etale-covers] the fibre product $I=(M_{XY}\\times_TM_{YX})\\times_{c,M_{XX}\\times_TM_{YY},e}T$ is an algebraic space. On every $U\\to T$, its elements are pairs $(a,b)$ with $ba=\\mathrm{id}$ and $ab=\\mathrm{id}$. Sending $(a,b)$ to $a$ is a bijection with $\\operatorname{Isom}_U(X_U,Y_U)$, since an inverse is unique: $b=b(ab\\prime)=(ba)b\\prime=b\\prime$. The bijections commute with pullback because composition and identity do. Thus $I$ represents precisely the requested Isom functor. By the fppf sheaf condition in [def-trf-algebraic-space], it also proves the isomorphism-sheaf part of descent.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1F, lemma-spaces-diagonal, fibre-product diagram; applied in Tag 0D53, lemma-curves-diagonal."
+   }
+  },
+  {
+   "text": "Now take an fppf covering $\\{T_i\\to T\\}$ and a descent datum of curve families $X_i\\to T_i$. Each $X_i\\to T_i$ is of finite type, since this is part of properness in the statement. The transition isomorphisms and their cocycle are therefore a finite-type algebraic-space descent datum. Apply [lem-sfb-space-finite-type-fppf-effectivity] to produce an algebraic space $X\\to T$ with isomorphisms $X\\times_TT_i\\cong X_i$ that recover the given transitions. In particular this uses the finite-type effectivity assertion, whose index set may be arbitrary, rather than an effectivity assertion restricted to countable covers.",
+   "uses": [
+    "lem-sfb-space-finite-type-fppf-effectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D52, lemma-curves-stack, via Tag 0D1G, lemma-spaces-stack, and Tag 0ADV, bootstrap-lemma-descend-algebraic-space (2)."
+   }
+  },
+  {
+   "text": "For the descended morphism $X\\to T$, every pullback to $T_i$ is isomorphic to the prescribed proper flat finitely presented morphism $X_i\\to T_i$. Each of properness, flatness and finite presentation therefore holds on this fppf covering. Applying the three separate locality assertions of [lem-sfb-space-flat-proper-fp-locality] gives all three properties for $X\\to T$. In particular it is locally of finite type: on etale charts a finitely presented algebra has finitely many algebra generators.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1G, lemma-spaces-stack, last paragraph, with Tags 041V, 041W and 0422."
+   }
+  },
+  {
+   "text": "An fppf covering is jointly surjective by [def-pc-fppf-site]. Apply the covering-detection assertion of [lem-sfb-space-relative-dimension-base-change] to the morphism $X\\to T$ from Step 5, which is locally of finite type and quasi-separated because it is proper (separated, so its diagonal is a closed immersion and in particular quasi-compact), and $d=1$. Every pullback is $X_i\\to T_i$, so every geometric fibre of $X\\to T$ has dimension at most one. Thus $X\\in\\mathcal C(T)$, and the isomorphisms of Step 4 make the original datum effective in $\\mathcal C$. The isomorphism sheaves of Step 3 give uniqueness and descent of arrows. Together with the cartesian lifts of Step 1, these are exactly the stack-in-groupoids conditions, proving the remaining assertion.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-sfb-space-relative-dimension-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D52, lemma-curves-stack, covering equivalence (1)--(2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-relative-dimension-base-change",
+  "lem-sfb-space-hom-representability",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-finite-type-fppf-effectivity",
+  "def-pc-fppf-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 0D51--0D53, expanded through the proofs of Tags 0D1F and 0D1G."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper flat finitely presented algebraic spaces with fibres of dimension at most one form a stack with representable diagonal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally injective descends along morphisms that are simultaneously surjective, flat, and quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is surjective, fl\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  AlgebraicGeometry.IsZariskiLocalAtTarget P.diagonal\", \"doc\": \"If a morphism property $P$ on schemes is Zariski local at the target, then the diagonal morphism property $P.diagonal$ (defined via pullbacks) is also Zariski local at the target. This asserts that th\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale descent of families of curves and algebraic space representing isomorphisms between two proper flat families",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Isom\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.isoMk\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (e : X.toPresheafedSpace ≅ Y.toPresheafedSpace) : X ≅ Y\", \"doc\": \"Constructor for isomorphisms in the category `SheafedSpace C`.\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.isoMk_hom\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (e : X.toPresheafedSpace ≅ Y.toPresheafedSpace) : (AlgebraicGeometry.SheafedSpace.isoMk e).hom = CategoryTheory.InducedCategory.homMk e.hom\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.isoMk_inv\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (e : X.toPresheafedSpace ≅ Y.toPresheafedSpace) : (AlgebraicGeometry.SheafedSpace.isoMk e).inv = CategoryTheory.InducedCategory.homMk e.inv\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instReflectsIsomorphismsSheafedSpaceCommRingCatForgetToSheafedSpace\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \" : AlgebraicGeometry.LocallyRingedSpace.forgetToSheafedSpace.ReflectsIsomorphisms\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" : (CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).IsLocalAtTarget AlgebraicGeometry.Scheme.zariskiPrecoverage\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.IsIso\", \"type\": \" : CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme = AlgebraicGeometry.IsOpenImmersion ⊓ @AlgebraicGeometry.Surjective\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.IsIso\", \"type\": \" : CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme = (CategoryTheory.MorphismProperty.isomorphisms TopCat).inverseImage AlgebraicGeometry.Scheme.forgetToTop ⊓ AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] f => Function.Bijective ⇑f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsomorphismsSchemeAndIsAffineIsIsoCommRingCatAppTop\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.IsIso\", \"type\": \" : AlgebraicGeometry.HasAffineProperty (CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme) fun X x f x_1 => AlgebraicGeometry.IsAffine X ∧ CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.appTop f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedUnderIsomorphismsSchemeIsReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \" : CategoryTheory.ObjectProperty.IsClosedUnderIsomorphisms fun x => AlgebraicGeometry.IsReduced x\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedUnderIsomorphismsSchemeConnectedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \" : CategoryTheory.ObjectProperty.IsClosedUnderIsomorphisms fun x => ConnectedSpace ↥x\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedUnderIsomorphismsSchemeIrreducibleSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \" : CategoryTheory.ObjectProperty.IsClosedUnderIsomorphisms fun x => IrreducibleSpace ↥x\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetGeometricallyOfIsClosedUnderIsomorphismsScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Basic\", \"type\": \" (P : CategoryTheory.ObjectProperty AlgebraicGeometry.Scheme) [P.IsClosedUnderIsomorphisms] : AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.geometrically P)\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "curveStack|isomFunctor|algebraicStack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat finitely presented algebraic spaces with fibres of dimension at most one form a stack with representable diagonal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": QuasiSeparatedSpace X ↔ QuasiCompact (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"A scheme $X$ is quasi-separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.QuasiSeparated f ↔\\n    autoParam (AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal._autoParam\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \": IsImmersion (pullback.diagonal f)\", \"doc\": \"For any morphism $ f $ of schemes, the diagonal morphism from $ X $ to the pullback of $ f $ against itself is an immersion. This asserts that the canonical diagonal map associated to a morphism of sc\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat proper finitely presented algebraic spaces with geometric fibres of dimension at most one form an fppf stack with algebraic Isom spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent and representable diagonal for the moduli stack of curves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.universallyInjective_eq_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"@AlgebraicGeometry.UniversallyInjective = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.Surjective\", \"doc\": \"A morphism of schemes is universally injective if and only if its diagonal morphism (obtained from the pullback of the morphism with itself) is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  AlgebraicGeometry.IsZariskiLocalAtTarget P.diagonal\", \"doc\": \"If a morphism property $P$ on schemes is Zariski local at the target, then the diagonal morphism property $P.diagonal$ (defined via pullbacks) is also Zariski local at the target. This asserts that th\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtSourceDiagonalSchemeOfHasOfPostcompPropertyOfRespectsRightIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.HasOfPostcompProperty AlgebraicGeometry.IsOpenImmersion] [P.RespectsRight AlgebraicGeometry.IsOpenImmersion]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P], AlgebraicGeometry.IsZariskiLocalAtSource P.diagonal\", \"doc\": \"If a morphism property $P$ on schemes is Zariski-local at the source, closed under post-composition with open immersions, and respects right composition with open immersions, then the diagonal morphis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  [inst : ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)]\\n  (𝒰' : (i : 𝒰.\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes where $ Y $ is affine. Suppose $ \\\\mathcal{U} $ is an open cover of $ Y $ such that each $ \\\\mathcal{U}.X_i $ is affine, and for each $ i $, the pullback of $ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Isom\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.isoMk\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (e : X.toPresheafedSpace ≅ Y.toPresheafedSpace) : X ≅ Y\", \"doc\": \"Constructor for isomorphisms in the category `SheafedSpace C`.\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.isoMk_hom\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (e : X.toPresheafedSpace ≅ Y.toPresheafedSpace) : (AlgebraicGeometry.SheafedSpace.isoMk e).hom = CategoryTheory.InducedCategory.homMk e.hom\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.isoMk_inv\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (e : X.toPresheafedSpace ≅ Y.toPresheafedSpace) : (AlgebraicGeometry.SheafedSpace.isoMk e).inv = CategoryTheory.InducedCategory.homMk e.inv\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instReflectsIsomorphismsSheafedSpaceCommRingCatForgetToSheafedSpace\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \" : AlgebraicGeometry.LocallyRingedSpace.forgetToSheafedSpace.ReflectsIsomorphisms\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" : (CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).IsLocalAtTarget AlgebraicGeometry.Scheme.zariskiPrecoverage\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.IsIso\", \"type\": \" : CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme = AlgebraicGeometry.IsOpenImmersion ⊓ @AlgebraicGeometry.Surjective\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.IsIso\", \"type\": \" : CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme = (CategoryTheory.MorphismProperty.isomorphisms TopCat).inverseImage AlgebraicGeometry.Scheme.forgetToTop ⊓ AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] f => Function.Bijective ⇑f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsomorphismsSchemeAndIsAffineIsIsoCommRingCatAppTop\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.IsIso\", \"type\": \" : AlgebraicGeometry.HasAffineProperty (CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme) fun X x f x_1 => AlgebraicGeometry.IsAffine X ∧ CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.appTop f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedUnderIsomorphismsSchemeIsReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \" : CategoryTheory.ObjectProperty.IsClosedUnderIsomorphisms fun x => AlgebraicGeometry.IsReduced x\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedUnderIsomorphismsSchemeConnectedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \" : CategoryTheory.ObjectProperty.IsClosedUnderIsomorphisms fun x => ConnectedSpace ↥x\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedUnderIsomorphismsSchemeIrreducibleSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \" : CategoryTheory.ObjectProperty.IsClosedUnderIsomorphisms fun x => IrreducibleSpace ↥x\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetGeometricallyOfIsClosedUnderIsomorphismsScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Basic\", \"type\": \" (P : CategoryTheory.ObjectProperty AlgebraicGeometry.Scheme) [P.IsClosedUnderIsomorphisms] : AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.geometrically P)\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|CurvesStack|IsomSpace",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stack of proper flat curves has algebraic spaces of isomorphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [QuasiCompact f] [Surjective f] [Mono f] : IsIso f\", \"doc\": \"If $ f : X \\to Y $ is a morphism of schemes that is flat, quasi-compact, surjective, and a monomorphism, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \": (MorphismProperty.isomorphisms Scheme).IsLocalAtTarget zariskiPrecoverage\", \"doc\": \"The property of being an isomorphism for morphisms of schemes is local on the target with respect to the Zariski precoverage. Specifically, if a morphism $ f: X \\to Y $ becomes an isomorphism after pul\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instRespectsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.RespectsIso @IsSeparated\", \"doc\": \"Every isomorphism of schemes is a separated morphism.\"}\n  {\"name\": \"CategoryTheory.RepresentablyFlat.of_iso\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \"[RepresentablyFlat F] {G : C ⥤ D} (α : F ≅ G) : RepresentablyFlat G\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is representably flat and there exists an isomorphism $ \\\\alpha : F \\\\cong G $ between $ F $ and another functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.of_isIso\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"{X Y : SheafedSpace C} (f : X ⟶ Y) [IsIso f] : SheafedSpace.IsOpenImmersion f\", \"doc\": \"Every isomorphism between sheafed spaces is an open immersion. Specifically, if $ f : X \\to Y $ is an isomorphism of sheafed spaces (i.e., admits an inverse morphism), then $ f $ satisfies the defining\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsIso f] : IsClosedImmersion f\", \"doc\": \"Every isomorphism of schemes is a closed immersion. Specifically, if $ f: X \\to Y $ is an isomorphism of schemes, then it induces a homeomorphism of the underlying topological space of $ X $ onto a clo\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.RespectsIso @IsProper\", \"doc\": \"Every isomorphism of schemes is a proper morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-curve-stack-smooth",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves.",
+   "via": [
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-curve-descent-isom-spaces",
+  "worker": "stage1",
+  "summary": "Expanded the source reduction into cartesian lifts, four Hom spaces, the explicit inverse-pair fibre product for Isom, finite-type fppf effectivity, descent of three morphism properties, and detection of the dimension bound. Added four general inputs, with actual logged searches, and reused algebraic-space fibre products. No statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Steps 1, 4--6 realize the proof of 0D52; Steps 2--3 expand 0D53 via 0D1F.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and universal property of algebraic-space fibre products, required for pullbacks and the inverse-pair Isom construction; the curve unit supplies no alternative construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-1dd173de5",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-1dd173de5 (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes and the Stacks sources: quot 0D4Z, 0D51, 0D52, 0D53, 0D1C, 0D1E, 0D1F, 0D1G; bootstrap 0ADV(2); spaces-descent 041V/041W/0422; spaces-morphisms 03XR/03MO/04WP/04NS/06LR; decent-spaces 0A4J. Item steps: (1) fibred in groupoids; (2) 0D1C applied four times, all hypotheses met; (3) Isom as the 0D1F fibre product, inverse uniqueness checked, sheaf property from def-trf-algebraic-space; (4) finite-type effectivity under 0ADV(2), any index set; (5) separate fppf locality of flat, proper and fp; (6) covering detection, with joint surjectivity confirmed in def-pc-fppf-site. Effectivity, locality and Hom nodes match their sources; no duplicates found in the DAG. One fault (E2/B-source), repaired: lem-sfb-space-relative-dimension-base-change used the topological dimension of |X_Ω| for any locally finite-type map. That agrees with the source's chart dimension (04NS/06LR) only for decent spaces (0A4J); e.g. A¹_Q/Z has chart dimension 1 but topological dimension 0. FIX adds a quasi-separated hypothesis (geometric fibres are then decent), cites 0A4J, and makes item steps 1 and 6 say that X→T is proper, hence quasi-separated; the item is the node's only citer. Batch-5 flags: def-trf-algebraic-space (general definition) and lem-trf-space-fibre-products-etale-covers (general fibre products, 02X2) are accepted. Their computed closures contain only generic algebraic-space foundation nodes, with no nt-assume leaf, no sk-thm-trace-transport and no Poincaré-duality node. The declared tool use is accepted.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveDescentIsomSpaces",
+  "declaration": "AlgebraicGeometry.ProperCurveModuli.fppf_stack_and_isom_spaces",
+  "declarations": [
+   "AlgebraicGeometry.ProperCurveFamily.isomorphisms",
+   "AlgebraicGeometry.ProperCurveFamily.isomorphismBaseChange",
+   "AlgebraicGeometry.ProperCurveModuli.fppf_stack_and_isom_spaces"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveDescentIsomSpaces.lean",
+  "statement": "theorem fppf_stack_and_isom_spaces : (forget (Spec (.of (ULift.{u} ℤ)))).IsFibered ∧ (∀ {X Y : ProperCurveModuli (Spec (.of (ULift.{u} ℤ)))} (a : X ⟶ Y), (forget (Spec (.of (ULift.{u} ℤ)))).IsStronglyCartesian a.base a) ∧ (∀ (T : Over (Spec (.of (ULift.{u} ℤ)))) (R : Sieve T), R ∈ (Scheme.fppfTopology.over (Spec (.of (ULift.{u} ℤ)))) T → ∀ (D : R.arrows.category ⥤ ProperCurveModuli (Spec (.of (ULift.{u} ℤ)))) (hD : D ⋙ forget (Spec (.of (ULift.{u} ℤ))) = R.arrows.diagram), ∃ (c : Cocone D) (hc : c.pt.base = T), Nonempty (IsColimit c) ∧ ∀ i : R.arrows.category, (c.ι.app i).base ≫ eqToHom hc = eqToHom (Functor.congr_obj hD i) ≫ i.obj.hom) ∧ ∀ (T : Scheme.{u}) (X Y : ProperCurveFamily (Over.mk (𝟙 T))), ∃ (I : AlgebraicSpace T) (θ : ∀ U : Over T, I.obj.obj.obj (op U) ≃ ProperCurveFamily.isomorphisms X Y U), ∀ (U V : Over T) (a : U ⟶ V) (z : I.obj.obj.obj (op V)), θ U (I.obj.obj.map a.op z) = ProperCurveFamily.isomorphismBaseChange X Y a (θ V z)",
+  "branch": "newtargets-dag",
+  "by": "Q127",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Reuses the landed def-sfb-proper-curve-moduli. The stack clause is written directly for fppf covering sieves, since the existing IsModuliStack predicate is etale. The Isom clause uses natural representing bijections with isomorphisms of restrictions to slice sites, exactly the base-changed algebraic spaces. No source statement correction and no new nodes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2ef69255",
+  "group": "Q127",
+  "result": "pass",
+  "note": "The item node changes only in lean and stmt_deps; stmt_deps gains only the landed def-sfb-proper-curve-moduli, which brief §4 allows. The other 13 nodes are byte-identical to side-live, and lean.statement is verbatim in the file. The statement matches Stacks 0D4Z/0D52/0D53: ProperCurveModuli over Spec ULift.{u} Z is reused (flat/proper/fp, fibre dim <=1, cartesian-square arrows). Stack in groupoids = IsFibered plus every arrow strongly cartesian. fppf descent is stated with colimiting cocones over Scheme.fppfTopology.over covering sieves, legs over the canonical maps; this is equivalent to effectivity plus the Hom-sheaf property by subcanonicity, and the etale-only IsModuliStack is correctly not used. Isom: for every scheme T and families X,Y over T, I : AlgebraicSpace T with bijections to natural isos of the restrictions along Over.forget U (= U-isomorphisms of the base changes), natural in every a : U -> V. No extra hypotheses; empty base/curve, any characteristic and arbitrary covers are kept; single universe u. Helpers carry real data with docstrings; the only sorry is the theorem's proof; source/blueprint docstrings present; the proof docstring covers all 6 node steps in 3 paragraphs (advisory); lines <=100; the proof-only import is the one recorded proof dep. No compile needed (no FIX); the worker reports a clean compile."
+ }
+}

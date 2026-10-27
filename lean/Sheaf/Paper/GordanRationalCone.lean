@@ -1,5 +1,7 @@
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
+module
+
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 
 /-!
 # Gordan's lemma for lattice points in a rational cone
@@ -18,6 +20,8 @@ Source: literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf
 3.2.9, proof, printed p. 104 (finite toric saturation)
 (blueprint: lem-trf-gordan-rational-cone-finite).
 -/
+
+@[expose] public section
 
 universe u
 

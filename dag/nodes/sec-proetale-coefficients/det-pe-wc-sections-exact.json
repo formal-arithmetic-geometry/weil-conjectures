@@ -173,7 +173,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-4cd6ee79a (reviewer sub-agent of L); spot-checked: Reviewed the complete item, blueprint route, cited nodes, Stacks sources, Mathlib searches, hypotheses, edge cases, and duplication candidates. The five-step proof is correct, follows the prescribed projectivity route, uses only the accepted generic forgetting tool, has no new nodes or SGA citations, and needs no repair. Wrote review.md."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ProEtaleWContractibleSectionsExact",
   "declaration": "AlgebraicGeometry.Scheme.ProEt.wContractible_sections_exact",
@@ -201,5 +212,24 @@
   "landing": "20261019T002618-L-2160538",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $U=\\operatorname{Spec}D$ with $D$ w-contractible be an object of $X_{\\mathrm{proét}}$,\nand let $\\Lambda$ be a ring. The functor $\\Gamma(U,-)\\colon F\\mapsto F(U)$ from sheaves of\n$\\Lambda$-modules on $X_{\\mathrm{proét}}$ to $\\Lambda$-modules is exact: it preserves kernels,\nand an epimorphism $F\\to G$ of sheaves of $\\Lambda$-modules induces a surjection\n$F(U)\\to G(U)$. For $\\Lambda=\\mathbf Z$ this is the statement for abelian sheaves.",
+  "proof": [
+   {
+    "text": "Kernels of sheaves of modules are computed sectionwise, so $\\Gamma(U,-)$ is left exact. Let\n$F\\to G$ be an epimorphism of sheaves of $\\Lambda$-modules. It is locally surjective, i.e. the\nunderlying map of sheaves of sets is an epimorphism (cokernels of sheaves of modules are\nsheafified presheaf cokernels, so surjectivity in either sense means local surjectivity on\nsections). By [det-pe-wcb-projective], $F(U)\\to G(U)$ is surjective. A left exact functor\npreserving epimorphisms is exact.",
+    "uses": [
+     "det-pe-wcb-projective"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

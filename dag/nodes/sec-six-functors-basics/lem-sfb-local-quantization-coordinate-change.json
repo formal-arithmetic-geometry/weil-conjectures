@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-local-quantization-coordinate-change",
+ "kind": "statement",
+ "title": "Local quantization under a smooth change of coordinates and real frames",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field] and the symbol estimates and oscillatory-integral normalization of [def-sfb-symbol-pseudodifferential-operators]. Let $U,V\\subset\\mathbf R^m$ be open, $m\\geq1$, let $\\kappa:U\\to V$ be a smooth diffeomorphism, and let $H_E:U\\to\\mathrm{GL}_p(\\mathbf R)$ and $H_F:U\\to\\mathrm{GL}_q(\\mathbf R)$ be smooth, where $p,q\\geq0$. Let $a\\in S^r(V\\times\\mathbf R^m;\\operatorname{Hom}_{\\mathbf C}(\\mathbf C^p,\\mathbf C^q))$, $r\\in\\mathbf Z$, and $\\chi,\\psi\\in C_c^\\infty(U)$ be real. On compactly supported smooth inputs define $$L f(x)=\\chi(x)H_F(x)\\left[\\operatorname{Op}(a)\\left((H_E^{-1}\\psi f)\\circ\\kappa^{-1}\\right)\\right](\\kappa(x)).$$ Transport distributions by duality with test densities, including the absolute Jacobian. There exist $q\\in S^r(U\\times\\mathbf R^m)$ compactly supported in $x$, a real $\\mu\\in C_c^\\infty(U)$ equal to one near $\\operatorname{supp}\\chi\\cup\\operatorname{supp}\\psi$, and a smooth compactly supported kernel $K$ on $U\\times U$ such that $$L=\\operatorname{Op}(q)\\mu+R_K$$ on all distributions, and $$q(x,\\xi)-\\chi(x)\\psi(x)H_F(x)a\\bigl(\\kappa(x),D\\kappa(x)^{-T}\\xi\\bigr)H_E(x)^{-1}\\in S^{r-1}.$$ All spatially supported symbols and kernels may be extended by zero to $\\mathbf R^m$. The same assertion holds for the real parts of the quantizations; then the leading expression is replaced by its average under $q(x,\\xi)\\mapsto\\overline{q(x,-\\xi)}$.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: Part I §3.B, (3.4)–(3.5) and Proposition 3.7, printed pp.12–13. Global quantization before Proposition 3.6: change of coordinates and real bundle frames modulo one lower order. Agent-supplied local formulation. Supplemental course read online: https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf, §3, (3.3)–(3.6), 3.12–3.15, printed pp.6–12; coordinate-change and amplitude reduction details are supplied by the agent, not asserted to be proved in those notes."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-symbol-pseudodifferential-operators"
+ ],
+ "proof": [
+  {
+   "text": "Put $J(y)=|\\det D\\kappa(y)|$. Apply the cited change-of-variables formula entrywise to the regularized integral, with the old input variable $z=\\kappa(y)$. The kernel of $L$ is the tested cutoff limit with phase $(\\kappa(x)-\\kappa(y))\\cdot\\eta$ and amplitude $$d(x,y,\\eta)=\\chi(x)H_F(x)a(\\kappa(x),\\eta)H_E(y)^{-1}\\psi(y)J(y).$$ This calculation includes the density Jacobian, and holds for the bilinear transpose as well. In old coordinates $X=\\kappa(x),Y=\\kappa(y)$ the spatially compact amplitude before the input Jacobian is $\\chi(\\kappa^{-1}X)H_F(\\kappa^{-1}X)a(X,\\eta)H_E(\\kappa^{-1}Y)^{-1}\\psi(\\kappa^{-1}Y)$. It satisfies the cited amplitude estimates by the product and chain rules on the two compact supports. Amplitude reduction makes its operator and transpose continuous smooth-to-compact-smooth maps. Pullback, frame multiplication and the test-density Jacobian preserve this continuity: each derivative through order $k$ on a fixed compact is a finite sum of bounded smooth coefficients times input derivatives through order $k$ on its compact image. Thus $L$ on all distributions is the transpose of this test operator, exactly with the convention in its statement.",
+   "uses": [
+    "lem-sfb-euclidean-jacobian-integral",
+    "lem-sfb-compact-oscillatory-amplitude-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Local kernel and input-density change of variables; agent argument supplementing the online Demailly course §3, (3.3)–(3.6) and 3.12–3.14."
+   }
+  },
+  {
+   "text": "Near the diagonal, where the segment from $y$ to $x$ stays in $U$, put $$B(x,y)=\\int_0^1D\\kappa(y+t(x-y))\\,dt.$$ The fundamental theorem of calculus gives $\\kappa(x)-\\kappa(y)=B(x,y)(x-y)$ and $B(x,x)=D\\kappa(x)$. Smoothness and invertibility persist on an open neighborhood $W$ of the diagonal; shrink $W$ to these segment neighborhoods. Let $C_0=\\operatorname{supp}\\chi\\times\\operatorname{supp}\\psi$. Its intersection with the diagonal is compact. Choose a relatively compact open neighborhood of that intersection whose closure lies in $W$, and a smooth real $\\theta$ compactly supported in $W$ equal to one near that intersection. The cited smooth separating cutoff on $\\mathbf R^{2m}$ supplies this function, using the compact intersection and the closed complement of the relatively compact neighborhood as the two closed sets. Split $d=\\theta d+(1-\\theta)d$. The second amplitude, expressed in old coordinates as in step 1 with the extra factor $1-\\theta(\\kappa^{-1}X,\\kappa^{-1}Y)$, vanishes near the diagonal. The cited off-diagonal assertion gives a smooth compact kernel there. Its kernel in $U$ is obtained by composing with $(\\kappa,\\kappa)$ and multiplying by $J(y)$; it remains smooth with compact support in $U\\times U$. Denote it by $K_0$.",
+   "uses": [
+    "lem-sfb-smooth-separating-cutoff",
+    "lem-sfb-compact-oscillatory-amplitude-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Near-diagonal linearization and the separated smooth kernel; agent argument supplementing the online Demailly course §3, (3.3)–(3.6) and 3.12–3.14."
+   }
+  },
+  {
+   "text": "For $b=\\theta d$ on $W$, the frequency-substitution lemma applies: its compact spatial support lies in $W$, its derivatives have the symbol bounds, and $D_y[B(x,y)(x-y)]=-D\\kappa(y)$ is invertible. The near-diagonal kernel therefore has phase $(x-y)\\cdot\\xi$ and amplitude $$c(x,y,\\xi)=\\theta(x,y)\\chi(x)\\psi(y)H_F(x)a(\\kappa(x),B(x,y)^{-T}\\xi)H_E(y)^{-1}\\frac{J(y)}{|\\det B(x,y)|}.$$ This is an amplitude of order $r$ compactly supported inside $U\\times U$. Indeed $B^{-T}$ and its derivatives are bounded on that support and $1+|B^{-T}\\xi|$ is bounded above and below by positive multiples of $1+|\\xi|$. Every spatial derivative hitting the frequency argument introduces one factor linear in $\\xi$ and one additional frequency derivative of $a$; their orders cancel. Each explicit frequency derivative lowers the order by one. Products with the smooth compact spatial factors preserve these bounds. Extension by zero is smooth since the spatial support lies compactly inside $W$. The frequency lemma justifies the changed cutoff; ordinary finite-cutoff substitution alone would not do so.",
+   "uses": [
+    "lem-sfb-oscillatory-linear-frequency-substitution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Parameter-dependent frequency substitution; agent argument supplementing the online Demailly course §3, (3.3)–(3.6) and 3.12–3.14."
+   }
+  },
+  {
+   "text": "Apply amplitude reduction to $c$, within the prescribed open coordinate domain $U$. Write $$A_c=\\operatorname{Op}(b_0)\\mu_0+R_{K_1},\\qquad b_0-c(x,x,\\xi)\\in S^{r-1}.$$ Here $b_0$ is compactly supported in $x$, $K_1$ is smooth compactly supported in $U\\times U$, and $\\mu_0=1$ near both spatial projections of $\\operatorname{supp}c$. On the diagonal $B(x,x)=D\\kappa(x)$, so $J(x)/|\\det B(x,x)|=1$. Also $\\theta(x,x)\\chi(x)\\psi(x)=\\chi(x)\\psi(x)$. Consequently $$c(x,x,\\xi)=e(x,\\xi):=\\chi(x)\\psi(x)H_F(x)a(\\kappa(x),D\\kappa(x)^{-T}\\xi)H_E(x)^{-1}.$$ This proves the required leading expression before the cutoff adjustment.",
+   "uses": [
+    "lem-sfb-compact-oscillatory-amplitude-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Amplitude reduction and cancellation of the diagonal Jacobians; agent argument supplementing the online Demailly course §3, (3.3)–(3.6) and 3.12–3.14."
+   }
+  },
+  {
+   "text": "Let $X$ be the compact first spatial projection of $\\operatorname{supp}c$. By the separating cutoff choose a real $\\lambda\\in C_c^\\infty(U)$ equal to one near $X$ with support contained in the open set where $\\mu_0=1$. Such a compactly contained neighborhood exists since $\\mu_0$ is identically one near $X$. Since $A_c$ is supported in $X$ in its output variable, multiplication by $\\lambda$ gives $$A_c=\\operatorname{Op}(b)\\mu_0+R_{\\lambda K_1},\\qquad b=\\lambda b_0.$$ The support of $e$ in $x$ lies in $X$, so $b-e=\\lambda(b_0-e)\\in S^{r-1}$. Choose real $\\mu\\in C_c^\\infty(U)$ equal to one near $\\operatorname{supp}b\\cup\\operatorname{supp}\\chi\\cup\\operatorname{supp}\\psi$, again by the separating cutoff. The amplitude $b(x,\\xi)(\\mu_0(y)-\\mu(y))$ vanishes near the diagonal: both cutoffs equal one on a neighborhood of $\\operatorname{supp}b$. Its spatial support is compact. Its kernel $K_2$ is smooth and compactly supported by the off-diagonal amplitude assertion. Therefore $$L=\\operatorname{Op}(b)\\mu+R_K,\\qquad K=K_0+\\lambda K_1+K_2.$$ Rename $b$ as the statement's symbol $q$. All symbols and kernels have support compactly inside the indicated coordinate domains, so their zero extensions are smooth. Empty supports or a zero bundle rank give the zero amplitude and the same construction, with $b=K=0$ if $L=0$.",
+   "uses": [
+    "lem-sfb-smooth-separating-cutoff",
+    "lem-sfb-compact-oscillatory-amplitude-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Cutoff enlargement without changing the principal symbol; agent argument supplementing the online Demailly course §3, (3.3)–(3.6) and 3.12–3.14."
+   }
+  },
+  {
+   "text": "Every kernel identity above was obtained as a tested cutoff limit, with continuous compactly supported smooth transposes supplied by amplitude reduction. Equality of kernels gives equality of their transposes on each smooth test density, and hence, for every distribution $u$ and test $\\phi$, $(Lu)(\\phi)=u(L^t\\phi)=u((\\operatorname{Op}(q)\\mu+R_K)^t\\phi)$. This proves the identity on all distributions, not only smooth inputs. For the real assertion the cited amplitude conjugation rule gives $a^\\natural(X,\\eta)=\\overline{a(X,-\\eta)}$. All spatial cutoffs, $B,J,H_E,H_F$ are real, so the transformed diagonal expression becomes $(e(x,\\xi)+\\overline{e(x,-\\xi)})/2$. Replace the output symbol by $(q(x,\\xi)+\\overline{q(x,-\\xi)})/2$ and the kernel by its real part. This averaging preserves the order $r-1$ remainder and every compact support, and gives precisely the real distributional action.",
+   "uses": [
+    "lem-sfb-compact-oscillatory-amplitude-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Distributional identity and the real conjugation involution; agent argument supplementing the online Demailly course §3, (3.3)–(3.6) and 3.12–3.14."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-euclidean-jacobian-integral",
+  "lem-sfb-compact-oscillatory-amplitude-reduction",
+  "lem-sfb-smooth-separating-cutoff",
+  "lem-sfb-oscillatory-linear-frequency-substitution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Local coordinate-change argument supplied by Q125, using the online Demailly pseudodifferential course §3, (3.3)–(3.6), 3.12–3.14 as context; the principal cited PDF is WANTED locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Changing smooth coordinates and bundle frames preserves pseudodifferential symbol order and transforms the principal symbol by the cotangent map",
+   "results": "{\"t\": \"2026-10-24T04:14:10Z\", \"tool\": \"leanfinder\", \"query\": \"Changing smooth coordinates and bundle frames preserves pseudodifferential symbol order and transforms the principal symbol by the cotangent map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"inCoordinates_apply_eq₂\", \"ContMDiff.coordChangeL\", \"contMDiffOn_symm_coordChangeL\", \"ContMDiffOn.coordChangeL\", \"contMDiffOn_coordChangeL\", \"ContMDiffAt.coordChangeL\", \"ContMDiff.coordChange\", \"contMDiffAt_coordChangeL\"], \"digest\": \"d499639572e458c7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Schwartz spaces, ordinary coordinate changes or Fourier derivative estimates, not this oscillatory symbol theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudodifferential\"",
+   "results": "{\"t\": \"2026-10-24T04:14:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"pseudodifferential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no relevant pseudodifferential or oscillatory declaration; symbol-name hits are parser syntax."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudodifferential|pseudoDifferential|principalSymbol|principal_symbol",
+   "results": "{\"t\": \"2026-10-24T04:14:03Z\", \"tool\": \"grep\", \"query\": \"pseudodifferential|pseudoDifferential|principalSymbol|principal_symbol\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits in Mathlib/Analysis/."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A diffeomorphism conjugates a pseudodifferential operator and pulls back its principal symbol",
+   "results": "{\"t\": \"2026-10-24T04:14:04Z\", \"tool\": \"leansearch\", \"query\": \"A diffeomorphism conjugates a pseudodifferential operator and pulls back its principal symbol\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Diffeomorph.noConfusion\", \"OpenPartialHomeomorph.MDifferentiable.symm_comp_deriv\", \"Diffeomorph\", \"Diffeomorph.ctorIdx\", \"Diffeomorph.image_eq_preimage_symm\", \"Diffeomorph.symm_apply_apply\", \"Diffeomorph.mk\", \"Diffeomorph.symm_image_eq_preimage\"], \"digest\": \"bca0c6e56b4dfcac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary asymptotic order, diffeomorphisms or matrices, not this oscillatory symbol theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full symbol under a diffeomorphism changes by a lower order remainder from cotangent pullback and conjugation by smooth frames",
+   "results": "{\"t\": \"2026-10-24T04:14:12Z\", \"tool\": \"leanfinder\", \"query\": \"The full symbol under a diffeomorphism changes by a lower order remainder from cotangent pullback and conjugation by smooth frames\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"tangentCoordChange\", \"inTangentCoordinates_eq\", \"inTangentCoordinates\", \"inTangentCoordinates_eq_mfderiv_comp\", \"inTangentCoordinates_model_space\", \"hasFDerivWithinAt_tangentCoordChange\", \"Diffeomorph.mfderivToContinuousLinearEquiv_coe\", \"Diffeomorph.mfderivToContinuousLinearEquiv\"], \"digest\": \"ee1ab78fd441dfb7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Schwartz spaces, ordinary coordinate changes or Fourier derivative estimates, not this oscillatory symbol theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "principalSymbol|principal_symbol|pseudodifferential",
+   "results": "{\"t\": \"2026-10-24T04:43:55Z\", \"tool\": \"grep\", \"query\": \"principalSymbol|principal_symbol|pseudodifferential\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits in Mathlib/Analysis/."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudodifferential\"",
+   "results": "{\"t\": \"2026-10-24T04:43:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"pseudodifferential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Fourier transforms, integrable change-of-variables or bundle coordinate maps do not assert distributional oscillatory cutoff invariance or pseudodifferential symbol transport."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coordinate invariance modulo lower order of local quantization of a matrix symbol",
+   "results": "{\"t\": \"2026-10-24T04:43:56Z\", \"tool\": \"leansearch\", \"query\": \"Coordinate invariance modulo lower order of local quantization of a matrix symbol\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"contDiffWithinAt_localInvariantProp\", \"Matrix.IsSymm\", \"Matrix.isHyperbolic_conj'_iff\", \"QuadraticMap.toMatrix'.congr_simp\", \"Algebra.PreSubmersivePresentation.jacobiMatrix_ofAlgEquiv\", \"SymplecticGroup.coeMatrix\", \"AffineBasis.toMatrix_apply\", \"Matrix.compLinearEquiv_symm_apply\"], \"digest\": \"940fd1e7033bab15\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Fourier transforms, integrable change-of-variables or bundle coordinate maps do not assert distributional oscillatory cutoff invariance or pseudodifferential symbol transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A diffeomorphism and smooth bundle frames conjugate a pseudodifferential operator with principal symbol pulled back by inverse transpose derivative",
+   "results": "{\"t\": \"2026-10-24T04:43:59Z\", \"tool\": \"leanfinder\", \"query\": \"A diffeomorphism and smooth bundle frames conjugate a pseudodifferential operator with principal symbol pulled back by inverse transpose derivative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"inCoordinates_apply_eq₂\", \"ContMDiff.coordChangeL\", \"hom_chart\", \"contMDiffOn_symm_coordChangeL\", \"ContinuousLinearMap.inCoordinates_eq\", \"contMDiffFiberwiseLinear\", \"VectorBundleCore.inCoordinates_eq\", \"Pretrivialization.continuousLinearMapCoordChange_apply\"], \"digest\": \"8a0168160f9464c6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Fourier transforms, integrable change-of-variables or bundle coordinate maps do not assert distributional oscillatory cutoff invariance or pseudodifferential symbol transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local pseudodifferential kernel under coordinate changes is an amplitude whose diagonal is the cotangent transformed symbol",
+   "results": "{\"t\": \"2026-10-24T04:44:00Z\", \"tool\": \"leanfinder\", \"query\": \"Local pseudodifferential kernel under coordinate changes is an amplitude whose diagonal is the cotangent transformed symbol\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"inCoordinates_apply_eq₂\", \"Algebra.Generators.cotangentCompAwaySec\", \"KaehlerDifferential.kerCotangentToTensor_toCotangent\", \"sectionOfRetractionKerToTensorAux\", \"KaehlerDifferential.derivationQuotKerTotal_apply\", \"KaehlerDifferential.ker_map\", \"derivationQuotKerSq_mk\", \"derivationQuotKerSq\"], \"digest\": \"1a3a4a41e3f33b3e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Fourier transforms, integrable change-of-variables or bundle coordinate maps do not assert distributional oscillatory cutoff invariance or pseudodifferential symbol transport."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudodifferential-leading-calculus",
+  "date": "2026-10-24",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Elliptic left parametrix as an identity on distributions. Supporting input: (3.4)–(3.5), global quantization before Proposition 3.6, and composition Proposition 3.7, printed pp.12–13; leading-symbol formulation and real conjugation symmetry made explicit. Supporting local analytic input: Global quantization before Proposition 3.6: change of coordinates and real bundle frames modulo one lower order.",
+   "via": [
+    "lem-sfb-pseudodifferential-leading-calculus",
+    "lem-sfb-elliptic-distribution-parametrix",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-local-quantization-coordinate-change",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Derived the transformed kernel and its diagonal principal expression explicitly, reused compact amplitude reduction, Jacobian and smooth separating cutoff nodes, and added only parameter-dependent linear frequency substitution as a statement-only analytic prerequisite. Handled the enlarged input cutoff, test-density Jacobian, all distributions and the real involution explicitly. No project attachment or Mathlib match.",
+  "blueprint": "Inherited analytic prerequisite below det-thm-sf-ctf-stability-direct-images proof (3), through elliptic regularity and the Hodge branch. Steps realize coordinate and frame independence of global quantization in Demailly. Latest blueprint main-20261024 unit and direct-image proof read; global searches found no analytic duplicate. blueprint_refs.py ancestor prints None, so inherited null ancestor and via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-e2a1da731",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-e2a1da731 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement and stmt_deps unchanged vs live/side-live, where it is unsplit with no proof; no repair note) and the new node lem-sfb-oscillatory-linear-frequency-substitution. Demailly hodge-ams is absent from both literature trees and the proof is correctly agent-origin with a WANTED line; no SGA. I re-derived the transformed kernel: Z=κ(y) gives amplitude d with J(y), as in step 1. The amplitude-reduction hypotheses hold in old coordinates (compact (X,Y)-support, uniform estimates). Step 2: B=∫Dκ(y+t(x−y))dt and κ(x)−κ(y)=B(x−y) are correct; θ comes from the separating-cutoff leaf on R^{2m}; (1−θ)d vanishes near the whole diagonal because C_0 is closed and θ=1 near C_0∩Δ; the off-diagonal clause gives K_0. Step 3: all new-node hypotheses hold (D_yF=−Dκ invertible, support compact in W); c=b(B^{-T}ξ)/|det B| is correct; order-r estimates are correct, with a two-sided comparison of 1+|B^{-T}ξ| and 1+|ξ|. Step 4: c(x,x,ξ)=e since J/|det Dκ|=1 and θ(x,x)=1 wherever χψ(x)≠0; the test κ=2x, a=iη gives iξ/2. Step 5: λ-truncation is valid since A_c's output lies in X and λe=e; b(μ_0−μ) vanishes near the diagonal; this cutoff enlargement is genuinely needed for the item's μ. Step 6: transpose testing and the a^♮ conjugation clause are correct. New node: statement-only, self-contained, true (integration by parts in y with |D_yF^Tη|≥c|η| on C); tested on B=I, B=2 in m=1, det<0 and p or q=0; not a restatement of the item; searches recorded. No duplicates found among about 38 oscillatory/pseudodifferential nodes (amplitude-reduction, compact-symbol-frequency-kernel, cutoff-convergence, symbol-common-atlas). All cited nodes are in the same unit or are Mathlib leaves, so no tool_uses. No fixes."
+ }
+}

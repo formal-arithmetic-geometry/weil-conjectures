@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-smooth-tensor-mate-unit",
+ "kind": "statement",
+ "title": "Unit evaluation of the canonical exceptional tensor mate in comparison coordinates",
+ "statement": "Use the finite coefficient setting P of [def-pur-conventions], and let f:X → Y be any compactifiable scheme morphism. Write Q for the degree-zero ordinary etale coefficient unit, C for exact pullback from the ordinary etale to the pro-etale site, and omega_f for the pro-etale dualizing object [thm-pur-diagonal-dualizing-object]. The canonical tensor mate theta_f of [def-pur-smooth-purity-map], evaluated at K=C(Q), represented by Q with the identity representation, equals (e_f tensor identity);lambda_{omega_f}. Here e_f:Lf*(C(Q)) ≅ 1 is the following fixed composite: exact pullback of the coefficient-unit map projectionUnitRaw [def-pur-affine-diagonal-tate-coordinates], inverse of the exact/left-derived pullback comparison, and the derived pullback-unit isomorphism. No smoothness, relative dimension, orientation, Tate twist, or affine comparison is used in this identity.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Tensor/counit specialization at the coefficient unit and the final canonical reassociations"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-smooth-purity-map",
+  "def-pur-affine-diagonal-tate-coordinates",
+  "thm-pur-diagonal-dualizing-object"
+ ],
+ "proof": [
+  {
+   "text": "On the ordinary etale site, expand the canonical tensor transpose as the adjunct of inverse projection followed by the exceptional counit. At the tensor unit, the proved source-library identity Etale.projectionMap_rightUnitality identifies projection followed by the mapped pullback-unit right unitor with the right unitor. Apply adjunct uniqueness and the adjunction triangle: the transpose at the unit is tensor with the pullback-unit map followed by the right unitor. Naturality in the coefficient input transports this identity along the degree-zero-unit isomorphism smoothPurityUnitIso. The symmetry in smoothPurityEtaleTheta changes the right-unitor formula to the left-unitor formula.",
+   "uses": [
+    "def-pur-smooth-purity-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+    "place": "Specialization of the displayed tensor/counit composite to the coefficient unit"
+   }
+  },
+  {
+   "text": "Expand smoothPurityTensorComparison and smoothPurityTheta. Naturality moves diagonalDualizingComparison through tensor and the left unitor; its inverse comparison-unit factor cancels the final comparison-adjunction-unit factor of theta. The exact site comparison preserves tensor evaluation into the coefficient unit. Its pullback compatibility identifies the remaining unit map with exact pullback of projectionUnitRaw followed by inverse exact/left-derived comparison and the pullback-unit isomorphism. Thus the surviving composite is the stated left unitor after tensoring e_f. All cancellations are of specified isomorphisms, so identity morphisms, empty schemes and zero coefficient rings satisfy the same calculation.",
+   "uses": [
+    "def-pur-smooth-purity-map",
+    "def-pur-affine-diagonal-tate-coordinates",
+    "lem-pur-site-tensor-unit-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+    "place": "Final canonical reassociations and the ordinary/pro-etale comparison coordinates"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-smooth-purity-map",
+  "def-pur-affine-diagonal-tate-coordinates",
+  "lem-pur-site-tensor-unit-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Tensor/counit specialization at the coefficient unit and the final canonical reassociations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical smooth dualizing orientation etale pullback",
+   "results": "Eight semantic results; no equality for the specified exceptional tensor mate and its comparison-coordinate unit maps.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The exceptional inverse image tensor map at the tensor unit equals the canonical unitor",
+   "results": "Generic adjunction and monoidal identities; no result identifying these separately constructed derived comparison maps.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionTensorMap.*unit|unit.*projectionTensorMap|tensor.*counit",
+   "results": "Source-library ProjectionFormula.Unit supplies projectionMap_rightUnitality; DualizingUnitComposite proves the ordinary tensor-unit calculation privately. SiteTensorUnitEvaluation supplies the independent site tensor-unit identity. No theorem for smoothPurityTheta at its represented coefficient unit was found.",
+   "date": "2026-10-27",
+   "verdict": "The remaining comparison-coordinate identity is not already stated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalDncChartNormalization",
+  "date": "2026-10-27",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-diagonal-dnc-chart-normalization",
+   "place": "Step 4, projection agreement evaluated at the coefficient unit",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityTensorUnit",
+  "file": "lean/Sheaf/Paper/SmoothPurityTensorUnit.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.smoothPurityTheta_unit",
+  "statement": "theorem smoothPurityTheta_unit (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}}\n    (f : X ⟶ Y) [HasCompactification f] :\n    let e :=\n      (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).mapDerivedCategory.mapIso\n          (X := (ProEtale.comparisonUpperStar\n            (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory.obj\n              (Etale.ordinaryFiniteUnit P.Coefficient Y))\n          (projectionUnitRaw P.Coefficient Y) ≪≫\n        (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory\n          (ModuleCat.{u + 1} P.Coefficient) f).symm.app _ ≪≫\n        ProEtale.leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} P.Coefficient) f\n    P.smoothPurityTheta f\n        ((ProEtale.comparisonUpperStar\n          (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory.obj\n            (Etale.ordinaryFiniteUnit P.Coefficient Y))\n        (Etale.ordinaryFiniteUnit P.Coefficient Y) (Iso.refl _) =\n      (((curriedTensor (_root_.DerivedCategory\n          (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient)))).mapIso\n            e).app (P.diagonalDualizing f) ≪≫\n        λ_ (P.diagonalDualizing f)).hom",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T021337-L-2759031",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T021337-L-2759031",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

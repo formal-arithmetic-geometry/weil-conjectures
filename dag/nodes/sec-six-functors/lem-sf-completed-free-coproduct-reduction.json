@@ -1,0 +1,152 @@
+{
+ "id": "lem-sf-completed-free-coproduct-reduction",
+ "kind": "statement",
+ "title": "Normalized reduction of finite free coproducts",
+ "statement": "For a prime l, a finite extension E of Q_l and a scheme X, let B be the completed coefficient ring sheaf and k its first quotient. Put P=free_B(ULift(Fin r)) and S=free_k(ULift(Fin r)), for any natural rank r. Suppose q:P\\to Res S restricts on each standard generator to the rank-one coefficient projection followed by the corresponding residue generator. For any integer b and any comparison c:DerivedExtension(single_b P)\\to single_b S whose derived adjoint is single_b(q) followed by the inverse restriction/single comparison, c is an isomorphism and q is epic. Rank zero is included. [lem-weil-derived-scalar-extension-restriction-adjunction] [def-weil-completed-integral-coefficients]",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09C2 and 09C3, final induction paragraph; extracted proof step of lem-sf-complete-top-residue-cell-cone."
+ },
+ "stmt_deps": [
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-weil-completed-integral-coefficients",
+  "def-sf-completed-coefficient-free-cell"
+ ],
+ "proof": [
+  {
+   "text": "Scalar extension preserves the coproduct of unit modules. The normalized unit calculation on every generator constructs an ordinary extension isomorphism whose adjoint is precisely q.",
+   "uses": [
+    "lem-sf-completed-free-cell-ordinary-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09C2 and 09C3, final induction paragraph; extracted proof step of lem-sf-complete-top-residue-cell-cone."
+   }
+  },
+  {
+   "text": "Restriction preserves coproducts, so q is a coproduct of epic rank-one coefficient projections followed by a coproduct comparison isomorphism. Finite free modules are flat; their single complexes are bounded above and K-flat.",
+   "uses": [
+    "lem-sf-completed-coefficient-free-resolution",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09C2 and 09C3, final induction paragraph; extracted proof step of lem-sf-complete-top-residue-cell-cone."
+   }
+  },
+  {
+   "text": "The K-flat reduction counit is invertible. The normalized derived adjunction identifies the resulting single-cell isomorphism with c by injectivity of its hom equivalence.",
+   "uses": [
+    "lem-sf-complete-lifted-top-cell-triangle",
+    "lem-sf-completed-coefficient-free-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09C2 and 09C3, final induction paragraph; extracted proof step of lem-sf-complete-top-residue-cell-cone."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-completed-free-cell-ordinary-limit",
+  "lem-sf-completed-coefficient-free-resolution",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-sf-complete-lifted-top-cell-triangle",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09C2 and 09C3, final induction paragraph; extracted proof step of lem-sf-complete-top-residue-cell-cone."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite free module coefficient reduction commutes with derived tensor and is invertible on a single complex",
+   "results": "8 hits: ModuleCat.free_δ_freeMk, ModuleCat.FreeMonoidal.μIso, lTensorHomEquivHomLTensor.congr_simp, Module.Flat.rTensor_shortComplex_exact, lTensorHomEquivHomLTensor, dualTensorHomEquivOfBasis, Module.Invertible.instTensorProduct, Module.Invertible.rTensorEquiv",
+   "date": "2026-10-27",
+   "verdict": "No exact result for derived coefficient reduction of sheaf complexes; use the existing project APIs and categorical normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free module coefficient reduction commutes with derived tensor and is invertible on a single complex",
+   "results": "8 hits: Algebra.FormallyUnramified.finite_of_free_aux, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, Algebra.Extension.tensorCotangentInvFun, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul, Algebra.PreSubmersivePresentation.cotangentComplexAux, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Algebra.Generators.CotangentSpace.compEquiv_symm_zero",
+   "date": "2026-10-27",
+   "verdict": "No exact result for derived coefficient reduction of sheaf complexes; use the existing project APIs and categorical normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesCoproduct.iso|isKFlat.*boundedAbove",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No exact result for derived coefficient reduction of sheaf complexes; use the existing project APIs and categorical normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompleteTopResidueCellCone",
+  "group": "T6",
+  "date": "2026-10-27"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "lem-sf-complete-top-residue-cell-cone",
+   "place": "Proof step 1"
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedFreeCoproductReduction",
+  "file": "lean/Sheaf/Paper/CompletedFreeCoproductReduction.lean",
+  "declaration": "WeilConjectures.completed_free_coproduct_reduction",
+  "declarations": [
+   "WeilConjectures.completedCoproductLocallyBijective",
+   "WeilConjectures.completedCoproductSheafify",
+   "WeilConjectures.completedCoproductSiteSmall",
+   "WeilConjectures.completedCoproductSourceAbelian",
+   "WeilConjectures.completedCoproductTargetAbelian",
+   "WeilConjectures.completedCoproductSourceDerived",
+   "WeilConjectures.completedCoproductTargetDerived",
+   "WeilConjectures.completedCoproductRestrictionLimits",
+   "WeilConjectures.completedCoproductRestrictionColimits",
+   "WeilConjectures.completedCoproductIntegralFree",
+   "WeilConjectures.completedCoproductResidueFree",
+   "WeilConjectures.completed_free_coproduct_reduction"
+  ],
+  "by": "T6",
+  "date": "2026-10-27",
+  "existing": false,
+  "statement": "theorem completed_free_coproduct_reduction (r : ℕ)\n    (q : (completedCoproductIntegralFree l E X r) ⟶\n      (scalarReductionRestriction.{u, u} l E X 0).obj\n      (completedCoproductResidueFree l E X r))\n    (hq : ∀ i : ULift.{u + 1} (Fin r), SheafOfModules.ιFree i ≫ q =\n      CompletedCoefficientFree.quotientProjection.{u, u} l E X 0 ≫\n        (scalarReductionRestriction.{u, u} l E X 0).map (SheafOfModules.ιFree i)) (b : ℤ)\n    (cmp : (scalarReductionDerivedExtension.{u, u} l E X 0).obj\n      ((DerivedCategory.singleFunctor (scalarReductionSource.{u, u} l E X) b).obj\n        (completedCoproductIntegralFree l E X r)) ⟶\n      (DerivedCategory.singleFunctor (scalarReductionTarget.{u, u} l E X 0) b).obj\n        (completedCoproductResidueFree l E X r))\n    (hcmp : (derivedScalarExtensionRestrictionAdjunction.{u, u} l E X 0).choose.unit.app\n      ((DerivedCategory.singleFunctor (scalarReductionSource.{u, u} l E X) b).obj\n        (completedCoproductIntegralFree l E X r)) ≫\n      (scalarReductionRestriction.{u, u} l E X 0).mapDerivedCategory.map cmp =\n      (DerivedCategory.singleFunctor (scalarReductionSource.{u, u} l E X) b).map q ≫\n        ((scalarReductionRestriction.{u, u} l E X 0).mapDerivedCategorySingleFunctor b).inv.app\n          (completedCoproductResidueFree l E X r)) :\n    IsIso cmp ∧ Epi q",
+  "branch": "sheaf-dag"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c53b6",
+  "group": "T6",
+  "result": "fix",
+  "landing": "20261027T034747-L-3683103",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c53b6",
+  "group": "T6",
+  "result": "fix",
+  "landing": "20261027T034747-L-3683103",
+  "kind": "interface",
+  "note": "independent cc review: T6 c53b6e2b CompleteTopResidueCellCone + new CompletedFreeCoproductReduction against the clone, node lem-sf-complete-top-residue-cell-cone and units sk-rem-sf-pf-done / sk-prop-sfb-qlbar-colimit-x; axioms checked by scratch compile"
+ }
+}

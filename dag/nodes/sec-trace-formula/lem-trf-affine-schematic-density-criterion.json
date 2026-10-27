@@ -15,70 +15,51 @@
  ],
  "proof": [
   {
-   "text": "Write $\\lambda:A\\to\\bigoplus_i A_{f_i}$ for the localization map and $\\mu:A\\to A^{\\oplus n}$ for multiplication by the tuple. Finite direct sums and products have the same coordinates. By the fraction equality in [def-weil-ring-localization-away], $\\lambda(a)=0$ precisely when for every $i$ there is $e_i\\geq1$ with $f_i^{e_i}a=0$ (increase an exponent zero to one if necessary). If $\\lambda$ is injective and $\\mu(a)=0$, take all $e_i=1$ to obtain $a=0$. Thus $\\mu$ is injective. For these additive maps, zero kernel is equivalent to injectivity, by applying the zero-kernel assertion to a difference.",
+   "text": "Write $\\lambda(a)=(a/1)_i$ and $\\mu(a)=(f_i a)_i$. By [def-weil-ring-localization-away], $\\lambda(a)=0$ precisely when each $f_i^{e_i}a=0$ for some $e_i\\geq1$ (increase a zero exponent to one). If $\\mu(a)=0$, then $f_i a=0$ for every $i$; choosing all $e_i=1$ gives $\\lambda(a)=0$. Injectivity of $\\lambda$ therefore gives $a=0$, proving injectivity of $\\mu$ by subtraction. Conversely, if $\\mu$ is injective, apply [lem-trf-finite-scalar-power-common-kernel] with $M=A$ and scalar action $b\\cdot a=ba$ to these exponents to obtain $a=0$ whenever $\\lambda(a)=0$. For both additive maps, zero kernel implies injectivity by taking differences. Finite direct sums and products have the same coordinates; this proves the first equivalence. For $n=0$, both maps have zero target, and either injectivity condition says $A=0$.",
    "uses": [
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
-    "place": "Algebra Tag 0565 (lemma-when-injective-covering), first paragraph of proof"
-   }
-  },
-  {
-   "text": "Conversely assume $\\mu$ injective. Prove, simultaneously for all $a\\in A$ and tuples $e_i\\geq1$, that $f_i^{e_i}a=0$ for all $i$ implies $a=0$, by strong induction on $E=\\sum_i(e_i-1)$. If $E=0$, all exponents are one, so this is $\\ker\\mu=0$. If $E>0$, choose $j$ with $e_j>1$ and put $b=f_ja$. The exponents $e_i$ for $i\\ne j$ and $e_j-1$ for $j$ annihilate $b$, by commutativity, and have excess sum $E-1$. Induction gives $f_ja=0$. Now the original $a$ satisfies the equations with the $j$th exponent replaced by one; that excess sum is strictly smaller than $E$, so induction gives $a=0$. The fraction relation in [def-weil-ring-localization-away], as expanded in Step 1, identifies this assertion with $\\ker\\lambda=0$. When $n=0$, the base case asserts that the map $A\\to0$ has zero kernel, exactly the injectivity hypothesis on $\\mu$; both maps are the zero map and the same conclusion holds.",
-   "uses": [
-    "def-weil-ring-localization-away"
+    "def-weil-ring-localization-away",
+    "lem-trf-finite-scalar-power-common-kernel"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
-    "place": "Algebra Tag 0565 (lemma-when-injective-covering), exponent induction in proof"
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0565 (lemma-when-injective-covering), power-annihilator argument"
    }
   },
   {
-   "text": "Put $X=\\operatorname{Spec}A$. The global-section identification in [def-weil-affine-spectrum] gives $\\mathcal O_X(X)=A$. By clause (b) of [lem-weil-pbc-affine-open-section-vanishing-prime], $D(f_i)$ is affine and $\\mathcal O_X(D(f_i))=A_{f_i}$ through the restriction map. By [def-weil-open-immersion], $\\mathcal O_U$ is the restriction of $\\mathcal O_X$. Hence a global section vanishes on $U$ if and only if it vanishes on each $D(f_i)$: one implication is restriction and the other is uniqueness in the sheaf axiom for this cover. Thus $\\ker(A\\to\\mathcal O_U(U))=\\ker\\lambda$. In particular injectivity of the sheaf restriction implies injectivity of $\\lambda$ by evaluation on $X$.",
+   "text": "Put $K=\\ker\\lambda$. Taking $g=1$ in [lem-trf-principal-union-restriction-kernel-localization] identifies $K$ with the kernel of $\\mathcal O_X(X)\\to\\mathcal O_X(U)$, using $X=\\operatorname{Spec}A$, $D(1)=X$, and $A_1=A$: the canonical identification $A_1\\to A$ sends $a/1^r$ to $a$ and the localization map $A\\to A_1$ to the identity. Thus the displayed fractions correspond exactly to $K$ under the same section identification, not merely under an unspecified ring isomorphism. If $\\mathcal O_X\\to j_*\\mathcal O_U$ is injective, the every-open formulation of [def-trf-schematically-dense-open] gives injectivity on $X$, hence $K=0$ and $\\lambda$ is injective. Here [def-weil-open-immersion] identifies the structure sheaf of $U$ with the restriction of $\\mathcal O_X$. Explicitly, on every open $V$, $(j_*\\mathcal O_U)(V)=\\mathcal O_U(V\\cap U)=\\mathcal O_X(V\\cap U)$, so these are the same restriction homomorphisms.",
    "uses": [
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-affine-open-section-vanishing-prime",
-    "def-weil-open-immersion"
+    "lem-trf-principal-union-restriction-kernel-localization",
+    "def-weil-open-immersion",
+    "def-trf-schematically-dense-open"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
-    "place": "Morphisms Tags 056C (example-scheme-theoretic-closure), 01RE (lemma-characterize-scheme-theoretically-dense); Schemes Tag 01HV (lemma-spec-sheaves)"
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 056C (example-scheme-theoretic-closure) and 01RE (lemma-characterize-scheme-theoretically-dense), principal-open kernel calculation"
    }
   },
   {
-   "text": "Assume $\\lambda$ injective, hence $\\mu$ injective by Step 1. Fix $g\\in A$. Multiplication by the tuple $f_i/1$ is injective on $A_g$: if $f_i a/g^r=0$ for every $i$, the localization definition gives exponents $k_i$ with $g^{k_i}f_i a=0$. Take $k=\\max_i k_i$ (take $k=0$ for the empty family). Then $\\mu(g^ka)=0$, so $g^ka=0$, and $a/g^r=0$. Applying the already proved ring-algebra equivalence of Steps 1--2 to $A_g$ shows that $A_g\\to\\bigoplus_i(A_g)_{f_i/1}$ is injective.",
+   "text": "Conversely suppose $K=0$. For every $g\\in A$, [lem-trf-principal-union-restriction-kernel-localization] identifies the restriction kernel from $D(g)$ to $D(g)\\cap U$ with fractions $a/g^r$ having $a\\in K$; these are zero since $K=0$. By [lem-weil-pbc-spec-localization-away-basic-open](i), the $D(g)$ form a basis. If a section on any open $V$ vanishes on $V\\cap U$, its restriction to every $D(g)\\subseteq V$ is therefore zero. These basis members cover $V$ (also for non-quasi-compact $V$); all their restricted sections are zero, so sheaf uniqueness makes the section zero. For sections $s,t$ on $V$ with equal restrictions to $V\\cap U$, apply this argument to $s-t$ to get $s=t$. Thus restriction is injective on every $V$, precisely sheaf injectivity by [def-trf-schematically-dense-open]. For $n=0$, $K=A$, so this hypothesis forces $A=0$ and all the same kernels vanish. Combining Steps 2--3 with Step 1 proves all three equivalences.",
    "uses": [
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
-    "place": "Morphisms Tag 056C and Tag 01RE, principal-open verification; fraction argument written out"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-affine-open-section-vanishing-prime](b), $D(g)$ is affine with section ring $A_g$, and its principal open for $f_i/1$ is $D(g)\\cap D(f_i)$, since the prime-ideal description in (a) tests the same element $f_i$. Its section ring is therefore $(A_g)_{f_i/1}$ via restriction. The injectivity from Step 4 says that a section on $D(g)$ vanishing on $D(g)\\cap U$ is zero. The principal opens form a basis by [lem-weil-pbc-spec-localization-away-basic-open](i). For any open $V\\subseteq X$, cover $V$ by these $D(g)\\subseteq V$. A section of $\\mathcal O_X(V)$ vanishing on $V\\cap U$ vanishes on each basis member and hence is zero by the sheaf axiom. Therefore $\\mathcal O_X\\to j_*\\mathcal O_U$ is injective. This also handles the empty family: the assumed injectivity forces $A=0$, so all these section rings are zero.",
-   "uses": [
-    "lem-weil-pbc-affine-open-section-vanishing-prime",
-    "lem-weil-pbc-spec-localization-away-basic-open"
+    "lem-trf-principal-union-restriction-kernel-localization",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "def-trf-schematically-dense-open"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
-    "place": "Morphisms Tags 056C (example-scheme-theoretic-closure), 01RE (lemma-characterize-scheme-theoretically-dense); Schemes Tag 01HV (lemma-spec-sheaves)"
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 056C (example-scheme-theoretic-closure) and 01RE (lemma-characterize-scheme-theoretically-dense), principal-open kernel calculation"
    }
   }
  ],
  "proof_deps": [
   "def-weil-ring-localization-away",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-trf-finite-scalar-power-common-kernel",
+  "lem-trf-principal-union-restriction-kernel-localization",
   "def-weil-open-immersion",
-  "lem-weil-pbc-spec-localization-away-basic-open"
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "def-trf-schematically-dense-open"
  ],
  "proof_origin": {
   "by": "document",
@@ -195,28 +176,22 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "item": "lem-trf-affine-schematic-density-criterion",
   "worker": "stage1",
-  "summary": "Kept the statement unchanged. Proved the algebra equivalence by explicit strong induction on excess exponents and proved the sheaf equivalence on a principal-open basis using existing section-localization and basis nodes. No new nodes. Checked the empty family, zero ring, nilpotents and reducible rings; recorded actual Mathlib searches.",
-  "blueprint": "Realizes the affine algebra calculation of Tag 0573 in the Tag 0578 generic-fibre input below lem-trf-local-term-locality, retaining the inherited blueprint ancestor and via chain.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
-    "why": "Uses only its generic clauses (a),(b): the prime description, affineness and principal-open localization of structure-sheaf sections. The trace unit contains no substitute for this affine geometry tool."
-   }
-  ]
+  "summary": "Rebased retained Q105 split onto the current shared DAG following the landing/promotion return; initial server dry run 01a1fe1c305 passed. Reread every cited statement, Stacks 0565/056C/01RE/01HV and current blueprint provenance. Retained both statement-only helper tasks, all earlier arguments and actual logged searches. Step 2 now specifies the canonical A_1 to A map and its compatibility with the section identification, so the g=1 specialization gives precisely K. Statement, statement dependencies and maintainer-owned metadata are preserved; three-step assembly remains below 3000 characters.",
+  "blueprint": "Realizes the affine algebra calculation of Tag 0573 in the Tag 0578 generic-fibre input below lem-trf-local-term-locality, retaining the inherited blueprint ancestor and via chain."
  },
  "tool_uses": [
   "lem-weil-pbc-affine-open-section-vanishing-prime"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q27-dcadbdfeb",
-  "group": "Q27",
+  "reviewer": "NT-cc-Q105-d7eca835a",
+  "group": "Q105",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-dcadbdfeb (reviewer sub-agent of L); spot-checked: I read the full item (statement, 5 steps, dependencies, blueprint, split_report) and the statements of all five cited nodes. The statement is unchanged and matches its sources: Stacks Tag 0565 (algebra.tex:4405, applied to M=A), Tag 056C and Tag 01RE (morphisms.tex). It has no extra hypothesis, and the finite direct sum is the same as the finite product in 056C. Steps 1-2 follow 0565 exactly. The power-annihilator test comes from the fraction relation of def-weil-ring-localization-away. Step 2 is a properly set-up strong induction on the excess sum E=sum(e_i-1): both recursive calls strictly decrease E, and n=0 is the base case. Step 3 identifies O(X)=A and O(D(f_i))=A_{f_i} through restriction (section-vanishing clause (b), and (a) for the prime description of D(f_i)), so ker(A->O(U))=ker(lambda). This gives sheaf injectivity => lambda injective. Step 4 is an elementary few-line calculation: injectivity of mu passes to every A_g by taking the maximum exponent. Step 5 identifies D(g) intersect D(f_i) as the principal open of f_i/1 in D(g)=Spec A_g with ring (A_g)_{f_i/1}, then uses the basis lemma (i) and the sheaf axiom to get injectivity of O_X -> j_*O_U on every open; only principal opens of one affine scheme are involved. Together the steps prove all directions. All cited nodes are definitions or Mathlib leaves, so the unit route is fine and the declared tool_use is harmless and accepted. Small cases checked: n=0 (all three conditions hold exactly when A=0); k[e]/(e^2) with f=e (all fail); k[x,y]/(xy) with (x,y) (all hold with no individual nonzerodivisor); k[t] with f=t (all hold, so this is not the unit-ideal cover criterion). Duplicate search (0565, 056C, 01RE, scheme-theoretic density): only the parent lem-trf-schematic-density-generic-fibre-open cites it, and the parent uses the item as stated. The other candidates are the n=1 nonzerodivisor node and the Nagata definition, so there is no duplicate. No new nodes and no SGA. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-d7eca835a (reviewer sub-agent of L); spot-checked: This is the 10th push of the Q105 re-split, and it is not superseded: in clones/live and clones/side-live the item still has split status with the old 5-step proof, and neither new node exists there. Against 3a0e, both new nodes are identical and the item changes only in the Step-2 text and the split_report summary. The new Step-2 sentence (the canonical A_1→A map sends a/1^r to a and the localization map to the identity, so the g=1 fraction set is exactly K) is correct. The statement, stmt_deps, proof_deps, source and tool_uses are unchanged, and all 7 cited statements match the 3a0e snapshot. I read the item statement against Stacks 0565 (algebra.tex:4405, M=A), 056C (morphisms.tex:1088) and 01RE. Steps 1-3 are correct. Step 1 is the fraction relation, with node 1 giving μ injective ⇒ λ injective. Step 2 is node 2 at g=1 plus evaluation of the sheaf map on X. Step 3 uses the D(g) basis and sheaf uniqueness on s−t, and covers non-quasi-compact V and n=0. Each old step is carried by a node or the item: 1→item Step 1; 2→node 1; 3→node 2 at g=1; 4→the ⊆ half of node 2; 5→node 2 plus item Step 3. Nothing was dropped, the two nodes are of comparable size and neither restates the item. Node 1 (strong induction on Σ(e_i−1)) is true; cases checked: n=0, k[x,y]/(xy), k[ε]/ε². Node 2 (max-exponent argument for ⊆, cover uniqueness for ⊇) is true; cases checked: g nilpotent, g=1, n=0, k[x,y]/(xy) with g=y. One fault, the same as on every previous head: node 2 uses the identification O_X(D(g))=A_g compatible with restriction without citing a node. I re-applied the standing fix verbatim (sha 26fc88d1) at fixes/dag/nodes/sec-trace-formula/lem-trf-principal-union-restriction-kernel-localization.json. It cites lem-weil-pbc-affine-open-section-vanishing-prime(b), applied to the affine open X, and adds it to stmt_deps; that node is on this base with status mathlib. No SGA is cited. The tool_use is accepted.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.AffineSchematicDensityCriterion",
@@ -236,5 +211,16 @@
   "result": "pass",
   "note": "Snapshot vs side: only the item node (lean record; stmt_deps gains the landed def-trf-schematically-dense-open, allowed under 'STMT_DEPS MAY GAIN LANDED NODES') and the new module Sheaf/AlgebraicGeometry/AffineSchematicDensityCriterion.lean. Lean matches the node clause by clause (Stacks 0565 with M=A, 056C/01RE): A : Type u CommRing with no Nontrivial assumption; f : Fin n → A with n=0 allowed; localization tuple via algebraMap into Localization.Away; multiplication tuple f i * a; (λ inj ↔ μ inj) ∧ (λ inj ↔ SchematicallyDenseOpen (Z := Spec (.of A)) (⨆ basicOpen (f i))). The landed def is ∀ W, injectivity of restriction W → W⊓U, i.e. O_X → j_*O_U injective. No extra hypothesis. Edge cases checked: n=0 (all three conditions ⇔ A=0), A=0, k[ε]/ε², Z/6 with (2,3), k[t] with t. No duplicate found in Mathlib or side lean/Sheaf. Docstrings carry the source place, the blueprint id and steps 1-5; proof is sorry only; lean.statement verbatim; lines ≤100. nt_compile --json exit 0 in 2.2 s with no warnings; a deliberately broken copy fails with a type error. Report has both sections; the second reading is by the same worker but matches each binder and map concretely. Advisory: unused plain imports ResidueField and Prime.Topology (H9, non-blocking)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

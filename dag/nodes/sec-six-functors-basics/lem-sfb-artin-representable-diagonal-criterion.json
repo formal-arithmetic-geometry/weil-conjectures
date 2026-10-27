@@ -1,0 +1,329 @@
+{
+ "id": "lem-sfb-artin-representable-diagonal-criterion",
+ "kind": "statement",
+ "title": "Artin criterion over the integers with representable diagonal",
+ "statement": "Let $\\mathcal X$ be a category fibred in groupoids on schemes over $\\operatorname{Spec}\\mathbf Z$ [def-pc-scheme, def-weil-affine-spectrum, def-weil-size-convention]. A category fibred in groupoids means a category over schemes with cartesian lifts along every base map and groupoid fibres. Suppose: (i) isomorphisms between two objects form an etale sheaf and every etale descent datum for objects is effective; (ii) the diagonal is representable by algebraic spaces [def-trf-algebraic-space], meaning that the sheaf of isomorphisms of any two objects over a scheme is an algebraic space; (iii) for every small directed inverse system of affine schemes $T_i$ with limit $T$, the natural functor $\\mathop{2\\!\\operatorname{colim}}_i\\mathcal X(T_i)\\to\\mathcal X(T)$ is an equivalence, where the left side consists of objects at a stage and arrows at sufficiently late common stages; (iv) for every pushout $S'=S\\amalg_TT'$ of spectra of Artinian local rings of finite type over $\\mathbf Z$, with $T\\to T'$ a thickening, the functor $\\mathcal X(S')\\to\\mathcal X(S)\\times_{\\mathcal X(T)}\\mathcal X(T')$ is an equivalence; (v) for every finite type field $K$ over $\\mathbf Z$ and object $x_0\\in\\mathcal X(K)$, the tangent space (isomorphism classes of objects over $K[\\epsilon]/(\\epsilon^2)$ with identified special fibre $x_0$) and the infinitesimal automorphism space (automorphisms of the trivial such deformation inducing the identity on $x_0$) are finite-dimensional over $K$ [def-weil-field]; (vi) every compatible system $x_n\\in\\mathcal X(A/\\mathfrak m^n)$ for a complete Noetherian local ring $(A,\\mathfrak m)$ with finite type residue field over $\\mathbf Z$ is induced, with all transition isomorphisms, by an object over $A$ [def-weil-pbc-noetherian-ring, def-weil-pbc-adic-completion]; (vii) if a family over a scheme locally of finite type over $\\mathbf Z$ is versal at a finite type point, it is versal at all finite type points of some open neighbourhood. Here a family $x$ over a scheme $U$ locally of finite type over $\\mathbf Z$ is versal at a finite type point $u$ if the following lifting condition holds. For every surjection $A'\\to A$ of Artinian local rings with common residue field $\\kappa(u)$ and nilpotent kernel, a map $\\operatorname{Spec}A\\to U$ reducing to $u$, and a deformation over $A'$ of $x_u$ together with an isomorphism of its restriction with the pulled-back family over $A$, there is a lift $\\operatorname{Spec}A'\\to U$ and an isomorphism with the given deformation extending that isomorphism. Assume also the usual size bound: the cardinalities of isomorphism classes and arrows in $\\mathcal X(K)$ for finite type fields $K/\\mathbf Z$ have a common bound by the size of a scheme in the chosen universe. Then $\\mathcal X$ is an algebraic stack: it has the representable diagonal in (ii) and a smooth surjective atlas from a scheme, representable by algebraic spaces. Smoothness of morphisms representable by algebraic spaces is tested on etale scheme charts [def-sbc-smooth-morphisms]. A commutative local ring has a unique maximal ideal; it is Artinian when every descending chain of ideals stabilizes. A thickening here is a closed immersion defined by a nilpotent ideal. A finite type point $u$ of $U$ means that $\\operatorname{Spec}\\kappa(u)\\to U$ is of finite type [def-weil-residue-field, def-weil-finite-type-morphism]. The complete local systems in (vi) are indexed by integers $n\\geq1$.",
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-weil-field",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-sbc-smooth-morphisms",
+  "def-weil-residue-field",
+  "def-weil-finite-type-morphism",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof": [
+  {
+   "text": "The integers are a G-ring by [lem-weil-pbc-z-g-ring]. Apply [lem-sfb-artin-smooth-point-neighbourhood] with $R=\\mathbf Z$. Its five deformation assumptions are exactly (iii)--(vii), and its diagonal hypothesis is (ii). Thus for every finite type field $k/\\mathbf Z$ and every isomorphism class $[x_0]$ in $\\mathcal X(k)$, choose a finite type affine $U_{k,[x_0]}$, an object $x_{k,[x_0]}$, a point $u_{k,[x_0]}$ with residue field identified with $k$, and an isomorphism $x_{k,[x_0]}|_u\\cong x_0$. The resulting map $h_{U_{k,[x_0]}}\\to\\mathcal X$ is smooth and representable by algebraic spaces.",
+   "uses": [
+    "lem-weil-pbc-z-g-ring",
+    "lem-sfb-artin-smooth-point-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07Y4 (lemma-diagonal-representable), first sentence, applying Tag 07XY (lemma-get-smooth)."
+   }
+  },
+  {
+   "text": "Choose one representative of each finite type field over $\\mathbf Z$ and each object isomorphism class in its fibre. These fields form a small set: each has a presentation as a quotient of a polynomial ring in finitely many variables over $\\mathbf Z$. The assumed common bound on the fibre cardinalities makes the resulting index set $I$ small in the chosen universe [def-weil-size-convention]. Form $U=\\coprod_{i\\in I}U_i$ by [lem-weil-pbc-scheme-coproduct-family]. Its inclusions are pairwise disjoint open immersions covering $U$. The objects $x_i$ have the unique descent identifications on the empty pairwise overlaps and the identity on self-overlaps; hypothesis (i) glues them to $x\\in\\mathcal X(U)$. For any scheme $V$ and $y\\in\\mathcal X(V)$, the sheaf of triples $(a:T\\to U,b:T\\to V,\\alpha:a^*x\\cong b^*y)$ is the pullback of the diagonal along $(x,y):U\\times V\\to\\mathcal X\\times\\mathcal X$. Hypothesis (ii) therefore represents it by an algebraic space $W_V=U\\times_{\\mathcal X}V$. This proves representability of $h_U\\to\\mathcal X$.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07Y4, coproduct construction and its set-theoretical footnote."
+   }
+  },
+  {
+   "text": "For the same $V,y$, the inverse images $W_i$ of the open-and-closed subschemes $U_i\\subset U$ cover $W_V$. Each projection $W_i=U_i\\times_{\\mathcal X}V\\to V$ is smooth by the defining test for the smooth morphism chosen in step 1. On a surjective etale scheme chart $P\\to W_V$ [def-trf-algebraic-space], the inverse images $P_i$ cover $P$ by open subschemes. Each $P_i\\to V$ is smooth, since it is an etale scheme chart of the smooth map $W_i\\to V$. By [lem-weil-pbc-smooth-local-on-source], $P\\to V$ is smooth. Thus $W_V\\to V$ is smooth by the chart definition, for every $V,y$, including an empty cover. Hence $h_U\\to\\mathcal X$ is smooth.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07Y4, assertion that the disjoint union map is smooth; chart-local verification written out."
+   }
+  },
+  {
+   "text": "Now let $V$ be affine and locally of finite presentation over $\\operatorname{Spec}\\mathbf Z$ and $y\\in\\mathcal X(V)$. For every etale scheme chart $P\\to W_V$, the smooth map $P\\to V$ is flat and locally of finite presentation by [lem-pc-smooth-flat]. Flatness and local finite presentation of algebraic-space morphisms are tested on these charts, so [lem-sfb-flat-lfp-space-universally-open] applies to $W_V\\to V$. Its image $O\\subseteq|V|$ is open.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-sfb-flat-lfp-space-universally-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07Y4, paragraph beginning with the algebraic space W: smoothness makes its image open."
+   }
+  },
+  {
+   "text": "The affine locally finitely presented scheme $V$ over the affine base $\\operatorname{Spec}\\mathbf Z$ is of finite type: finite presentation gives finitely many algebra generators locally, and quasi-compactness of the affine source [lem-weil-pbc-affine-scheme-qcqs] gives a finite such affine cover [def-sbc-locally-finite-presentation, def-weil-finite-type-morphism]. If $v\\in V$ is a finite type point, then $\\operatorname{Spec}\\kappa(v)\\to V$ is of finite type by definition, and composition with $V\\to\\operatorname{Spec}\\mathbf Z$ is of finite type by [lem-sfb-finite-type-composition-base-change]. Put $k=\\kappa(v)$ and $x_0=y|_v$. The component indexed by $(k,[x_0])$ supplies $u$ and the specified isomorphism $x_i|_u\\cong y|_v$. The triple $(u,v,\\alpha)$ is a $k$-point of $W_V$ over $v$, so $v\\in O$. This uses the isomorphism in the fibre product, not equality of the chosen object representatives. By [lem-sfb-finite-type-points-detect-open], the open $O$ containing every finite type point is all of $|V|$. Thus $W_V\\to V$ is surjective for each such finite presentation affine test.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sfb-finite-type-points-detect-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07Y4, final paragraph, using Morphisms Tag 02J4 (lemma-enough-finite-type-points)."
+   }
+  },
+  {
+   "text": "Hypothesis (iii), being an equivalence on the indicated $2$-colimits, implies in particular limit preservation on objects. The map $h_U\\to\\mathcal X$ is representable by step 2. Apply [lem-sfb-limit-test-surjective-representable] with $S=\\operatorname{Spec}\\mathbf Z$, $\\mathcal F=h_U$, and $\\mathcal G=\\mathcal X$; step 5 gives exactly its tests on affine schemes locally of finite presentation. It follows that $W_V\\to V$ is surjective for every scheme $V$ and every $y\\in\\mathcal X(V)$. Hence $h_U\\to\\mathcal X$ is a smooth surjective representable atlas.",
+   "uses": [
+    "lem-sfb-limit-test-surjective-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07Y4, application of Criteria for Representability Tag 07WI (lemma-check-property-limit-preserving)."
+   }
+  },
+  {
+   "text": "Hypothesis (i) says that $\\mathcal X$ is an etale stack, (ii) gives its representable diagonal, and steps 2--6 supply the smooth surjective scheme atlas. Apply [lem-sfb-etale-smooth-atlas-fppf-descent]. It supplies fppf descent for objects and arrows, so $\\mathcal X$ is an algebraic stack with this diagonal and this atlas, as asserted.",
+   "uses": [
+    "lem-sfb-etale-smooth-atlas-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07Y4, invocation of Criteria for Representability Tag 076V (lemma-stacks-etale)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-size-convention",
+  "lem-pc-smooth-flat",
+  "lem-sfb-artin-smooth-point-neighbourhood",
+  "lem-sfb-etale-smooth-atlas-fppf-descent",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-finite-type-points-detect-open",
+  "lem-sfb-flat-lfp-space-universally-open",
+  "lem-sfb-limit-test-surjective-representable",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-z-g-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 07Y4 (lemma-diagonal-representable), its construction of a smooth atlas from Tag 07XY, finite type point coverage and Tag 07WI; final topology comparison Tag 076V."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Artin algebraicity criterion for a stack with representable diagonal limit preservation effective formal objects and open versality",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The property of a scheme being locally Artinian, i.e., every point has an open neighborhood whose ring is Artinian.\"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is Artinian\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyArtinianXScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyArtinian X] {U : X.OpenCover} (i : U.I₀),\\n  AlgebraicGeometry.IsLocallyArtinian (U.X i)\", \"doc\": \"If $ X $ is a locally Artinian scheme and $ U $ is an open cover of $ X $, then each open subset $ U_i $ in the cover is also a locally Artinian scheme. This means the property of being locally Artini\"}\n  {\"name\": \"AlgebraicGeometry.isArtinianScheme_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsArtinianScheme X ↔ AlgebraicGeometry.IsLocallyArtinian X ∧ CompactSpace ↥X\", \"doc\": \"A scheme $X$ is Artinian if and only if it is locally Artinian (every point has an open neighborhood with an Artinian ring) and its underlying topological space is compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [h : AlgebraicGeometry.IsLocallyArtinian X] [AlgebraicGeometry.IsAffine X],\\n  IsArtinianRing ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For any affine scheme $X$ that is locally Artinian, the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an Artinian ring.\"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme.toIsLocallyArtinian\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsArtinianScheme X], AlgebraicGeometry.IsLocallyArtinian X\", \"doc\": \"If $X$ is an Artinian scheme, then $X$ is locally Artinian, meaning every point of $X$ has an open neighborhood whose coordinate ring is Artinian.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyArtinian_iff_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  AlgebraicGeometry.IsLocallyArtinian X ↔ ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsLocallyArtinian (𝒰.X i)\", \"doc\": \"For any scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$, the scheme $X$ is locally Artinian if and only if every open subscheme $\\\\mathcal{U}.X(i)$ in the cover is locally Artinian. This equivalence \"}\n  {\"name\": \"AlgebraicGeometry.instIsArtinianSchemeSpecOfIsArtinianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {R : CommRingCat} [IsArtinianRing ↑R], AlgebraicGeometry.IsArtinianScheme (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is an Artinian ring, then the scheme $ \\\\operatorname{Spec}(R) $ is an Artinian scheme.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A stack satisfying Rim Schlessinger finite tangent spaces and effective versal deformations admits a smooth atlas",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stack\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicStack|opennessOfVersality|ArtinCriterion",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artin algebraicity criterion for a stack with representable diagonal limit preservation effective formal objects and open versality",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.IsRepresentable\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \": IsLocallyArtinian X ↔ IsLocallyNoetherian X ∧ DiscreteTopology X\", \"doc\": \"A scheme $X$ is locally Artinian if and only if it is locally Noetherian and its underlying topological space has the discrete topology, meaning every subset is open.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isLocallyArtinianScheme_Spec\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"{R : CommRingCat} : IsLocallyArtinian (Spec R) ↔ IsArtinianRing R\", \"doc\": \"The scheme $\\\\operatorname{Spec}(R)$ is locally Artinian if and only if the commutative ring $R$ is Artinian, i.e., satisfies the descending chain condition on ideals.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  autoParam (∀ (U : ↑X.affineOpens), IsArtinianRing ↑(X.presheaf.obj (Opposite.op ↑U)))\\n      AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_presheaf_obj._autoParam →\\n    AlgebraicGeometry.IsLocallyArtinian X\", \"doc\": \"For a scheme $ X $, if for every affine open subset $ U $ of $ X $, the ring associated to $ U $ is Artinian, then $ X $ is locally Artinian.\"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsArtinianScheme X → Sort u_1} →\\n    (t : AlgebraicGeometry.IsArtinianScheme X) →\\n      ([toIsLocallyArtinian : AlgebraicGeometry.IsLocallyArtinian X] → [toCompactSpace : CompactSpace ↥X] → motive ⋯) →\\n        motive t\", \"doc\": \"Given a property of an Artinian scheme, if the property holds for any scheme that is locally Artinian with a compact underlying space, then the property holds for all Artinian schemes. Formally, for a\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin algebraicity criterion etale stack representable diagonal limit preserving Rim Schlessinger finite tangent effective formal objects open versality",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Set.univ ↔ Algebra.FormallyEtale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ \\\\operatorname{Spec}(A) $ if and only if $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smooth rings or morphisms of schemes, not the algebraicity criterion for a fibred groupoid"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stack\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smooth rings or morphisms of schemes, not the algebraicity criterion for a fibred groupoid"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicStack|opennessOfVersality|ArtinCriterion",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smooth rings or morphisms of schemes, not the algebraicity criterion for a fibred groupoid"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A stack with representable diagonal limit preserving effective formal deformations finite tangent spaces and openness of versality is algebraic",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n  {\"name\": \"Algebra.FormallySmooth.mk\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Module.Projective A Ω[A⁄R] → Subsingleton (Algebra.H1Cotangent R A) → Algebra.FormallySmooth R A\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if the module of Kähler differentials $ \\\\Omega_{A/R} $ is projective as an $ A $-module and the first cohomology group of the cotangent complex $ H^1 $ is tri\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smooth rings or morphisms of schemes, not the algebraicity criterion for a fibred groupoid"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-curve-stack-smooth",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings.",
+   "via": [
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-artin-representable-diagonal-criterion",
+  "worker": "stage1",
+  "summary": "Checked the seven-hypothesis criterion against Tag 07Y4, adding only the explicit definitions of Artinian local rings, thickenings and finite type points and the positive indexing convention for formal systems. Split the proof into local smooth neighbourhoods, the size-bounded coproduct and its representability and smoothness, open images on finite-presentation affines, finite type point lifts, the limit test, and etale-to-fppf descent. Created four smaller statement-only lemmas; reused the existing scheme coproduct, smooth-source-locality, smooth-flat, algebraic-space openness, finite-type composition and integer G-ring nodes.",
+  "blueprint": "Realizes the inherited direct-image constructibility proof (3), alteration/moduli input: algebraicity of the nodal-curve stack used in stable-curve parameter spaces, via the ordinary Artin criterion. The inherited created.item chain has no tagged blueprint ancestor (blueprint_refs.py ancestor returns None); retained from.node null and its exact inherited place, and recorded the four local proof positions after it. The chapter and unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-z-g-ring",
+    "why": "Generic arithmetic input that the affine integer base is a G-ring, needed by the local Artin chart theorem; no deformation-theory result in this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic existence and disjoint open-cover description of a scheme coproduct, used to assemble the local charts; not a replacement for any unit step."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic scheme-chart implication smooth implies flat and locally of finite presentation, needed for the existing algebraic-space openness theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-z-g-ring",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-pc-smooth-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-2f2a489e5",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-2f2a489e5 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the 4 new nodes and every cited statement against Stacks, read at the cited places. Item: matches 07Y4 over Spec Z: (i)-(vii) and the size bound correspond to [0], (1), [1], [2], [3], formal effectivity (3), openness of versality (4) and [-1]. The G-ring hypothesis (5) holds through lem-weil-pbc-z-g-ring. The added sentences only define existing quantifiers; the citer lem-sfb-nodal-curve-stack-smooth is unaffected. The steps follow the 07Y4 proof sentence by sentence. Step 1: the new 07XY node at R=Z; its hypotheses (1)-(5) plus the diagonal map exactly to (iii)-(vii) and (ii). Step 2: the coproduct over a small index set (finite type fields over Z are finitely generated Z-algebras, plus bound [-1]); gluing by (i) over empty overlaps; representability as the Isom sheaf over U×V by (ii). Step 3: smoothness through the open-and-closed W_i and charts P_i, then smooth-local-on-source. Step 4: smooth-flat plus flat-lfp-space-open gives an open image. Step 5: an affine lfp V over Z is of finite type, so κ(v) is a finite type field and the chosen component gives a k-point of W_V; then the 02J4 node. Step 6: the 07WI node for surjectivity, with limit preservation on objects taken from (iii). Step 7: the 076V node. New nodes: they are correct specializations of 07XY (an affine G-ring base, with an affine neighbourhood of the point), 07WI (surjective is fppf local on the base and stable under base change), 02J4 (any scheme; the DVR generic point is a finite type point) and 076V. All are statement-only and self-contained. None restates a clause of the item. I searched the DAG for the tags and key words and found no duplicate; the Kerodon 02J4 node is unrelated. Batch-5 check: def-trf-algebraic-space (already in the item's base stmt_deps) and lem-trf-space-fibre-products-etale-covers are general algebraic-space definitions and foundations. Their closures contain only foundational trf nodes and no trace-formula or Poincaré step, so I accept both citations. I accept the generic tool_uses (Z is a G-ring, scheme coproduct, smooth implies flat). No SGA source is used. Cosmetic only: step 5 writes k=κ(v) where it means the chosen representative with an isomorphism to κ(v). No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinRepresentableDiagonalCriterion",
+  "declaration": "AlgebraicGeometry.ArtinCriterion.isAlgebraicModuliStack_of_artin",
+  "declarations": [
+   "AlgebraicGeometry.ArtinCriterion.Base",
+   "AlgebraicGeometry.ArtinCriterion.integerScheme",
+   "AlgebraicGeometry.ArtinCriterion.overMap",
+   "AlgebraicGeometry.ArtinCriterion.Object",
+   "AlgebraicGeometry.ArtinCriterion.Lift",
+   "AlgebraicGeometry.ArtinCriterion.ObjectsDescend",
+   "AlgebraicGeometry.ArtinCriterion.ArrowsDescend",
+   "AlgebraicGeometry.ArtinCriterion.ArrowEqualitiesDescend",
+   "AlgebraicGeometry.ArtinCriterion.IsLimitPreserving",
+   "AlgebraicGeometry.ArtinCriterion.RimSchlessinger",
+   "AlgebraicGeometry.ArtinCriterion.MarkedDeformation",
+   "AlgebraicGeometry.ArtinCriterion.MarkedDeformation.Isomorphic",
+   "AlgebraicGeometry.ArtinCriterion.MarkedDeformation.Induces",
+   "AlgebraicGeometry.ArtinCriterion.FiniteTangent",
+   "AlgebraicGeometry.ArtinCriterion.InfinitesimalAutomorphism",
+   "AlgebraicGeometry.ArtinCriterion.FiniteInfinitesimalAutomorphisms",
+   "AlgebraicGeometry.ArtinCriterion.FiniteInfinitesimalSpaces",
+   "AlgebraicGeometry.ArtinCriterion.AdicNeighbourhood",
+   "AlgebraicGeometry.ArtinCriterion.adicTransition",
+   "AlgebraicGeometry.ArtinCriterion.adicInclusion",
+   "AlgebraicGeometry.ArtinCriterion.FormalSystem",
+   "AlgebraicGeometry.ArtinCriterion.FormalObjectsEffective",
+   "AlgebraicGeometry.ArtinCriterion.FiniteTypePoint",
+   "AlgebraicGeometry.ArtinCriterion.IsVersalAt",
+   "AlgebraicGeometry.ArtinCriterion.OpennessOfVersality",
+   "AlgebraicGeometry.ArtinCriterion.HasSizeBound",
+   "AlgebraicGeometry.ArtinCriterion.SpaceMapIsSmooth",
+   "AlgebraicGeometry.ArtinCriterion.HasSmoothSurjectiveAtlas",
+   "AlgebraicGeometry.ArtinCriterion.IsAlgebraicModuliStack",
+   "AlgebraicGeometry.ArtinCriterion.isAlgebraicModuliStack_of_artin"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinRepresentableDiagonalCriterion.lean",
+  "statement": "theorem isAlgebraicModuliStack_of_artin (F : BasedCategory.{v, w} (Over Base.{u})) (hFibred : IsFibredInGroupoids F) (hEtale : IsModuliStack F) (hDiagonal : HasAlgebraicSpaceDiagonal F) (hLimits : IsLimitPreserving F) (hRS : RimSchlessinger F) (hInfinitesimal : FiniteInfinitesimalSpaces F) (hEffective : FormalObjectsEffective F) (hVersal : OpennessOfVersality F) (hSize : HasSizeBound F) : IsAlgebraicModuliStack F",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Repair of return on immutable head 3a1f6452c554: all seven helper modules are inlined unchanged into this module, with blueprint docstrings attached to this item and all declarations recorded here. No new nodes or helper modules. Statement dependencies are the base ten plus the existing stable-pointed moduli groupoid vocabulary. The standalone algebraic-moduli-stack module is unavailable on the live server, so the accepted local characterization is retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2c1272929",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Re-delivery after the 3a1f RETURN (reach on 7 new def-sfb-artin-* nodes) inlines all 7 helper modules into Sheaf.AlgebraicGeometry.ArtinRepresentableDiagonalCriterion. A script comparison shows all 30 declaration bodies identical to the 3a1f/fa9e modules (same names, universes, namespace, opens a superset, non-side imports kept). No new nodes or modules remain. The item differs from live only in lean and stmt_deps (base 10 + def-sfb-stable-pointed-moduli-groupoids). All 11 dep nodes are byte-identical to live and own every vocabulary declaration used. lean.statement is verbatim; lean.declarations = the file's 30 decls; one sorry, in the theorem; 31 blueprint docstrings with source places; 7-step proof docstring; the report has Worker report and Second reading by Q17. Clauses (i)-(vii), the size bound and the 076V-style conclusion match Tag 07Y4 over Spec Z, as in the earlier fa9e PASS: no extra hypotheses, no universe equality, nothing hollow. No duplicate in side-live Sheaf/WeilConjectures (HasSmoothFiniteTypeModuliAtlas is a different notion); def-sfb-algebraic-moduli-stack is not landed; no ArtinCriterion name collision. Nothing changed or compiled by me. Advisories: three unused proof-plan imports; conclusion restates (i)/(ii); the report flags an existing Nagata proof-dep cycle outside the delivery."
+ }
+}

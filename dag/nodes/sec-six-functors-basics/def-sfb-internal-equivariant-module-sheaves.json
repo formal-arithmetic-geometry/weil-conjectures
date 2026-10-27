@@ -1,0 +1,143 @@
+{
+ "id": "def-sfb-internal-equivariant-module-sheaves",
+ "kind": "definition",
+ "title": "Internal equivariant module sheaves and their sectionwise additive category",
+ "status": "split",
+ "statement": "Fix compatible universes [def-weil-size-convention] and a small site $(C,J)$ [def-weil-pbc-sites-and-cohomology]. Let $K:C^{\\mathrm{op}}\\to\\mathrm{Grp}$ be a group presheaf and $R:C^{\\mathrm{op}}\\to\\mathrm{Ring}$ a ring presheaf with values in the coefficient universe. For a presheaf of $R$-modules $M$ [def-weil-presheaf-modules-sheafification], a natural linear $K$-action consists of homomorphisms $K(U)\\to\\operatorname{End}_{R(U)}(M(U))$ of monoids such that restriction of $a\\cdot m$ equals the restricted group section acting on the restricted module section. An equivariant module presheaf is such a pair $(M,a)$. Its morphisms are restriction-natural sectionwise linear maps commuting with the actions. These maps form the additive subgroup of the ordinary module-presheaf maps cut out by equivariance, with identity, composition, zero, addition and negation inherited from the underlying maps. This is the specified preadditive structure.\n\nFor a sheaf of rings $S$ on $(C,J)$, define $\\mathcal E_K(S)$ as the full subcategory of equivariant module presheaves over $S$ whose underlying module presheaf is a sheaf [def-weil-sheaf-of-modules-category], with the inherited addition. Define its forgetful functor to $\\operatorname{Mod}(S)$ by retaining the underlying module sheaf and every component map; likewise forget actions on presheaves. For a commutative ring sheaf, its base ring sheaf is obtained by forgetting only commutativity. In particular, when $K$ is a sheaf of groups this defines internal equivariant module sheaves with trivial coefficient action: each group section acts $S(U)$-linearly and does not act on coefficients. No nontriviality, surjectivity or nonzero-ring assumption is imposed.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated categorical input: the internal equivariant module category introduced in lem-sfb-sheaf-action-grothendieck-inflation and constructed in InternalActionSitePresentation. This records its definitions, not the action-site presentation theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Category of sheaves of modules with natural linear actions of a sheaf of groups and equivariant morphisms",
+   "results": "{\"t\": \"2026-10-22T09:43:52Z\", \"tool\": \"leansearch\", \"query\": \"Category of sheaves of modules with natural linear actions of a sheaf of groups and equivariant morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instCategory\", \"SheafOfModules\", \"SheafOfModules.mk\", \"AlgebraicGeometry.Scheme.Modules\", \"SheafOfModules.noConfusionType\", \"TopCat.instCategorySheaf\", \"SheafOfModules.hom_ext\", \"CategoryTheory.instPreadditiveSheaf\"], \"digest\": \"1e710b63bc6ee041\"}",
+   "date": "2026-10-22",
+   "verdict": "Ordinary sheaf-module and fixed-group action APIs do not give variable internal group-sheaf actions. Reuse the exact existing InternalActionSitePresentation definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Action\"",
+   "results": "{\"t\": \"2026-10-22T09:43:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"Action\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "Ordinary sheaf-module and fixed-group action APIs do not give variable internal group-sheaf actions. Reuse the exact existing InternalActionSitePresentation definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "EquivariantSheaf|LinearAction|equivariantPreadditive",
+   "results": "{\"t\": \"2026-10-22T09:43:51Z\", \"tool\": \"grep\", \"query\": \"EquivariantSheaf|LinearAction|equivariantPreadditive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "Ordinary sheaf-module and fixed-group action APIs do not give variable internal group-sheaf actions. Reuse the exact existing InternalActionSitePresentation definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n EquivariantSheaf|LinearAction|equivariantPreadditive lean/WeilConjectures lean/Sheaf",
+   "results": "Exact definitions found at lean/Sheaf/CategoryTheory/InternalActionSitePresentation.lean:185,193,207,223,240,260,279,292,304,316. WeilConjectures point-fiber group actions concern an external group, not an internal sheaf-group action.",
+   "date": "2026-10-22",
+   "verdict": "Existing declaration reused; new definition node records ownership requested by the independent reviewer."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n EquivariantSheaf|LinearAction|equivariantPreadditive|internal-equivariant-module-sheaves dag/nodes; tools/blueprint_refs.py search equivariant",
+   "results": "Only lem-sfb-internal-action-site-presentation lists these exact declarations, as helpers of its theorem. No definition node owns them. Blueprint search gives 44 equivariant matches but no separate definition of this general category.",
+   "date": "2026-10-22",
+   "verdict": "Existing declaration reused; new definition node records ownership requested by the independent reviewer."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sheaf-action-grothendieck-inflation",
+  "date": "2026-10-22",
+  "group": "Q124"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), categorical input: internal linear group actions and their underlying module sheaves. The ancestor command returns None, as for the item.",
+   "via": [
+    "lem-sfb-sheaf-action-grothendieck-inflation",
+    "lem-sfb-condensed-product-action-inflation",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InternalActionSiteBasic",
+  "declaration": "CategoryTheory.InternalActionSite.EquivariantSheaf",
+  "declarations": [
+   "CategoryTheory.InternalActionSite.LinearAction",
+   "CategoryTheory.InternalActionSite.EquivariantPresheaf",
+   "CategoryTheory.InternalActionSite.Equivariant",
+   "CategoryTheory.InternalActionSite.homGroup",
+   "CategoryTheory.InternalActionSite.equivariantCategoryStruct",
+   "CategoryTheory.InternalActionSite.equivariantCategory",
+   "CategoryTheory.InternalActionSite.homAddCommGroup",
+   "CategoryTheory.InternalActionSite.equivariantPreadditive",
+   "CategoryTheory.InternalActionSite.forgetPresheaf",
+   "CategoryTheory.InternalActionSite.EquivariantSheaf",
+   "CategoryTheory.InternalActionSite.inclusion",
+   "CategoryTheory.InternalActionSite.forgetSheaf",
+   "CategoryTheory.InternalActionSite.baseRing"
+  ],
+  "statement": "abbrev EquivariantSheaf (J : GrothendieckTopology C) (S : Sheaf J RingCat.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition ownership of the unchanged public sectionwise action declarations already landed in InternalActionSitePresentation. LinearAction gives the action laws and restriction naturality; EquivariantPresheaf/homGroup give objects and equivariant linear maps; equivariantPreadditive supplies the inherited addition; EquivariantSheaf imposes precisely the sheaf condition; forgetSheaf and baseRing give the stated forgetful constructions. No copy, new module, chosen Presentation or dependency on the presentation theorem is introduced. B3: the identical declarations are extracted to InternalActionSiteBasic and publicly re-exported by InternalActionSitePresentation; no mathematical interface changes.",
+  "file": "lean/Sheaf/CategoryTheory/InternalActionSiteBasic.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79fce984d",
+  "group": "Q124",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79fce984d",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Re-delivery of the 19ee72b2 H2/theorem-stmt_dep RETURN. Lean module byte-identical to the returned head. The item now cites the new existing:true definition node def-sfb-internal-equivariant-module-sheaves (13 unchanged InternalActionSitePresentation declarations: LinearAction, EquivariantPresheaf, homGroup, equivariantPreadditive, EquivariantSheaf, forgetSheaf, baseRing, ...) instead of lem-sfb-internal-action-site-presentation, which stays in proof_deps. Item node vs side-live differs only in lean and that one stmt_dep. check_existing, check_record and check_new_node are clean; the statement field is verbatim. All project declarations used are owned by stmt_deps; no cycle, no competing owner, no repair note. Mathematics re-checked: universes u, small site with finite limits, existential Abelian equal to the inherited Preadditive plus IsGrothendieckAbelian for K and L, ActionForgetExact (creation, sectionwise kernel, exactness and zero detection), real restrictLinearAction/inflateSheaf data, ActionInflationExact; edge cases K=1, L=1, zero ring, arbitrary theta. Advisory only: sheafifiedCokernel is a bare Nonempty iso. No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-36998",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261023T230416-L-3424073",
+  "kind": "interface",
+  "note": "independent cc review: Delivered Basic+Presentation vs live InternalActionSitePresentation (diff: same signatures/data, sorrys proved); Geometry/Reflector diffs vs live; node files vs Lean; 5-module overlay + 15 importers compiled with lcompile.py; #print axioms clean"
+ }
+}

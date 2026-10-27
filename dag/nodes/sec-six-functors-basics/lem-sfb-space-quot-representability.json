@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-space-quot-representability",
+ "kind": "statement",
+ "title": "The Quot presheaf is an algebraic space, locally finitely presented for finitely presented source",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $a:A\\to B$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Assume that $a$ is separated and of finite presentation. Let $\\mathcal F$ be any quasi-coherent $\\mathcal O_A$-module, using the module conventions and the proper-support Quot presheaf of [def-sfb-space-proper-quot-functor]. There exist an algebraic space $R$ over $S$, a morphism $r:R\\to B$, and bijections $\\operatorname{Hom}_B(T,R)\\simeq\\operatorname{Quot}_{\\mathcal F/A/B}(T)$ natural in all schemes $T\\to B$. If $\\mathcal F$ is of finite presentation as an $\\mathcal O_A$-module, then $r$ is locally of finite presentation. No flatness or properness of $a$ and no finite-presentation assumption on $\\mathcal F$ are required for the representability assertion.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 09TU, quot-proposition-quot."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-proper-quot-functor"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\mathcal C=\\mathcal C_{A/B}$ be the algebraic stack supplied by [lem-sfb-space-coherent-stack-general]; its hypotheses are exactly separatedness and finite presentation of $a$. Form a category fibred in groupoids $\\mathcal Q$ whose objects over $T$ are $(b:T\\to B,q:\\mathcal F_T\\twoheadrightarrow Q)$ with the target conditions of [def-sfb-space-proper-quot-functor]. An arrow over $v:T\\to T_1$ is a pullback isomorphism $\\alpha:v_A^*Q_1\\simeq Q$ intertwining the quotients. The pullback transitions and their composition are those already specified by that definition; thus $\\mathcal Q$ is fibred in groupoids. Forgetting the quotient map gives a morphism $j:\\mathcal Q\\to\\mathcal C$. No stack assertion about $\\mathcal Q$ has yet been used.",
+   "uses": [
+    "lem-sfb-space-coherent-stack-general",
+    "def-sfb-space-proper-quot-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 09TU, proposition-quot, first two paragraphs; quotient groupoid rather than its discrete skeleton."
+   }
+  },
+  {
+   "text": "Fix an object $(b:T\\to B,G)$ of $\\mathcal C$. The base change $A_T\\to T$ is finitely presented by [lem-sfb-space-flat-proper-fp-locality], and $\\mathcal F_T$ is quasi-coherent by [lem-sfb-space-module-pullback-quasicoherent]. Hence [lem-sfb-space-module-hom-affine] supplies an affine algebraic space $H/T$ for maps $\\mathcal F_U\\to G_U$. The 2-fibre product $T\\times_{\\mathcal C}\\mathcal Q$ is naturally equivalent to the discrete functor of surjections among these maps. Indeed its objects over $U/T$ are $(q:\\mathcal F_U\\twoheadrightarrow Q,\\theta:Q\\simeq G_U)$; send this to $\\theta q$. The inverse sends $u$ to $(u,\\mathrm{id})$. Between two such objects an arrow, if present, must be $\\theta_2^{-1}\\theta_1$, and it intertwines the quotients exactly when their composites with $\\theta_i$ coincide. These formulas commute with pullback.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-space-module-hom-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 09TU, proposition-quot, description of the 2-fibre product and application of Tag 08K6."
+   }
+  },
+  {
+   "text": "Let $H^{\\mathrm{surj}}\\subset H$ be this subfunctor. For every scheme $V\\to H$, the Hom bijection of step 2 gives a module map $u:\\mathcal F_V\\to G_V$ on $A_V$. The morphism $A_V\\to V$ is finitely presented by [lem-sfb-space-flat-proper-fp-locality]. The module $G_V$ is finitely presented, flat with proper support because it is the pullback family in $\\mathcal C$ of [lem-sfb-space-coherent-stack-general]; finite presentation implies finite type by taking the images of the finitely many local free generators. Apply [lem-sfb-space-module-surjectivity-open] to $u$. It identifies $V\\times_HH^{\\mathrm{surj}}$ with an open subscheme of $V$ for arbitrary further base changes. Thus [def-a1-space-open-subspace] makes $H^{\\mathrm{surj}}$ an algebraic space. Step 2 therefore proves that $j$ is representable by algebraic spaces. By [lem-sfb-stack-representable-source-algebraic], $\\mathcal Q$ is algebraic.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-module-surjectivity-open",
+    "def-a1-space-open-subspace",
+    "lem-sfb-stack-representable-source-algebraic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 09TU, proposition-quot, last paragraph (Tag 09TP and Tag 05UM); scheme tests avoid presupposing a universal map over a space."
+   }
+  },
+  {
+   "text": "Every automorphism $\\alpha$ of $(b,q)$ in $\\mathcal Q(T)$ satisfies $\\alpha q=q$. Since $q$ is a surjection of sheaves of modules, sections of its target locally lift, so $\\alpha$ fixes every section locally and hence globally: $\\alpha=\\mathrm{id}$. Apply [lem-sfb-algebraic-setoid-space] to obtain an algebraic space $R/S$ naturally equivalent to $\\mathcal Q$. Its bijections identify $R(T)$ with pairs $(b,[q])$, where $[q]\\in\\operatorname{Quot}_{\\mathcal F/A/B}(T,b)$ by [def-sfb-space-proper-quot-functor]. Projection to $b$ gives a morphism $r:R\\to B$. Taking the fibre at each fixed $b:T\\to B$ gives the required relative bijections. They commute with all scheme morphisms because the equivalence, the class map and the projection use the pullback transitions.",
+   "uses": [
+    "lem-sfb-algebraic-setoid-space",
+    "def-sfb-space-proper-quot-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 09TU, proposition-quot, application of Tag 04SZ and passage from total to relative functors."
+   }
+  },
+  {
+   "text": "Now suppose $\\mathcal F$ is finitely presented. Its pullback $\\mathcal F_T$ is finitely presented: tensoring a local presentation $\\mathcal O^m\\to\\mathcal O^n\\to\\mathcal F\\to0$ gives the same finite presentation after pullback, since $N\\otimes(M/L)=(N\\otimes M)/\\operatorname{im}(N\\otimes L)$. Thus [lem-sfb-space-module-hom-affine] makes $H\\to T$ in step 2 finitely presented. The open immersion $H^{\\mathrm{surj}}\\to H$ of step 3 is locally finitely presented: on scheme charts principal opens have ring presentation $R[t]/(ft-1)$. Its composite to $T$ is locally finitely presented by [lem-sfb-space-separated-fp-composition]. Hence every scheme base change of $j$ is locally finitely presented. Choose a surjective etale scheme chart $V\\to B$. The definition of the two groupoids identifies their base changes with $\\mathcal Q_{A_V/V}$ and $\\mathcal C_{A_V/V}$. The base-changed $a$ is separated and finitely presented by [lem-sfb-space-separated-fp-composition, lem-sfb-space-flat-proper-fp-locality]. The scheme-base clause of [lem-sfb-space-coherent-stack-general] makes $\\mathcal C_{A_V/V}\\to V$ locally finitely presented. Applying the local-finite-presentation clause of [lem-sfb-stack-representable-source-algebraic] over $V$ gives a smooth surjective scheme atlas $W\\to\\mathcal Q_{A_V/V}$ with $W\\to V$ locally finitely presented. Through the equivalence $\\mathcal Q_{A_V/V}\\simeq h_{R\\times_BV}$ of step 4, $W\\to R\\times_BV$ is smooth and surjective, and both $W\\to R\\times_BV$ and $R\\times_BV\\to V$ are representable by algebraic spaces; [lem-sfb-smooth-cover-flat-lfp-descent] therefore makes $R\\times_BV\\to V$ locally finitely presented on etale scheme charts. The chart criterion [lem-sfb-space-local-properties-chart-test] therefore gives that $r$ is locally of finite presentation. All uses of finite presentation of $\\mathcal F$ occur in this step.",
+   "uses": [
+    "lem-sfb-space-module-hom-affine",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-stack-representable-source-algebraic",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-sfb-smooth-cover-flat-lfp-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 09TU, local-finite-presentation conclusion, expanded via Tags 08K6, 08KD, 06CN and 06Q3. Smooth-source descent of local finite presentation: stacks-properties.tex Tag 06M2 with spaces-descent.tex Tag 06EV."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-coherent-stack-general",
+  "def-sfb-space-proper-quot-functor",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-sfb-space-module-hom-affine",
+  "lem-sfb-space-module-surjectivity-open",
+  "def-a1-space-open-subspace",
+  "lem-sfb-stack-representable-source-algebraic",
+  "lem-sfb-algebraic-setoid-space",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-smooth-cover-flat-lfp-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 09TU, proposition-quot; explicit 2-fibre-product computation and local-finite-presentation conclusion using 08K6, 09TP, 08KD, 05UN and 04SZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Quot functor of a quasi coherent sheaf on a separated finitely presented algebraic space is an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a site $(\\\\mathcal{C}, J)$ has finite presentation, then its local generators data satisfies the finite type condition under th\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern module presentations, scheme closed subschemes, scheme morphism properties, total quotient rings or Zariski gluing; none defines or represents this algebraic-space moduli functor or proves this natural identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability theorem for the functor of flat coherent quotients with proper support on algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f], Topology.IsQuotientMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"Let $ f : X \\\\to Y $ be a morphism of schemes. If $ f $ is flat, quasi-compact, and surjective, then the underlying continuous map of topological spaces is a quotient map, meaning the topology on $ Y $\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern module presentations, scheme closed subschemes, scheme morphism properties, total quotient rings or Zariski gluing; none defines or represents this algebraic-space moduli functor or proves this natural identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quot\", \"representable\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern module presentations, scheme closed subschemes, scheme morphism properties, total quotient rings or Zariski gluing; none defines or represents this algebraic-space moduli functor or proves this natural identification"
+  },
+  {
+   "tool": "grep",
+   "query": "quot.*representab|QuotFunctor|AlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern module presentations, scheme closed subschemes, scheme morphism properties, total quotient rings or Zariski gluing; none defines or represents this algebraic-space moduli functor or proves this natural identification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraicity and local finite presentation of the moduli space of flat coherent quotients with proper support",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsFiniteType\", \"doc\": \"For any sheaf of modules $ \\\\mathcal{M} $ over a ring sheaf $ \\\\mathcal{R} $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if $ \\\\mathcal{M} $ is of finite presentation (i.e., locally t\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf data $ q $ over a ring sheaf $ \\\\mathcal{O} $, if every indexed presentation $ q.\\text{presentation}(i) $ is finite (admits finite generators and relations), then $ q $ itsel\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \": HasRingHomProperty (@LocallyOfFinitePresentation) RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If there exists a quasicoherent sheaf $\\\\sigma$ over the ring sheaf $\\\\mathcal{O}$ such that $\\\\sigma$ satisfies the finite presentation condition, then the sheaf $\\\\mathcal{M}$ also satisfies the finite \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern module presentations, scheme closed subschemes, scheme morphism properties, total quotient rings or Zariski gluing; none defines or represents this algebraic-space moduli functor or proves this natural identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The proper support Quot functor of any quasi coherent module for a separated finitely presented morphism of algebraic spaces is an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a site $(\\\\mathcal{C}, J)$ has finite presentation, then its local generators data satisfies the finite type condition under th\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local presentations of modules, scheme morphism properties and ordinary representability do not represent the proper-support Quot functor on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraicity of the moduli space of flat finitely presented quotients with proper support without finite presentation of the source module",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FinitePresentation.of_finitePresentation\", \"module\": \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation\", \"type\": \"∀ (R : Type u) (S : Type u_1) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Module.FinitePresentation R S], Algebra.FinitePresentation R S\", \"doc\": \"If a module $ S $ over a commutative semiring $ R $ is finitely presented, then the $ R $-algebra structure on $ S $ is also finitely presented. This instance asserts that the finite presentation of t\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"Module.FinitePresentation.iff_finitePresentation_of_finite\", \"module\": \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation\", \"type\": \"∀ (R : Type u) (S : Type u_1) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S],\\n  Module.FinitePresentation R S ↔ Algebra.FinitePresentation R S\", \"doc\": \"If $ S $ is a finitely generated $ R $-module, then $ S $ is finitely presented as an $ R $-module if and only if it is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.FinitePresentation\", \"module\": \"Mathlib/RingTheory/FinitePresentation\", \"type\": \"(R : Type w₁) → (A : Type w₂) → [inst : CommSemiring R] → [inst_1 : Semiring A] → [Algebra R A] → Prop\", \"doc\": \"Given a commutative semiring $ R $, a semiring $ A $ with an $ R $-algebra structure, this proposition asserts that $ A $ is finitely presented over $ R $.\"}\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}\n  {\"name\": \"AlgHom.FinitePresentation\", \"module\": \"Mathlib/RingTheory/FinitePresentation\", \"type\": \"{R : Type u_1} →\\n  {A : Type u_2} →\\n    {B : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing A] →\\n          [inst_2 : CommRing B] → [inst_3 : Algebra R A] → [inst_4 : Algebra R B] → (A →ₐ[R] B) → Prop\", \"doc\": \"The proposition asserts that the algebra structure on $ B $ over $ A $ induced by the algebra homomorphism $ f : A →ₐ[R] B $ is finitely presented. An algebra is finitely presented over $ A $ if it is\"}\n  {\"name\": \"Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] {P : Algebra.Presentation R S ι σ} (R₀ : Type u_5) [inst_3 : CommRing R₀]\\n  [inst_4 : Algebra R₀ R] [inst_5 : Algebra R₀ S] [inst_6 : IsScalarTower R₀ R S] [inst_7 : P.Has\", \"doc\": \"If the index types $\\\\iota$ and $\\\\sigma$ are finite, then the quotient ring $R₀[\\\\iota]$ modulo the ideal generated by the relations $P.\\\\text{relationOfHasCoeffs}(R₀)$ is finitely presented over $R₀$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local presentations of modules, scheme morphism properties and ordinary representability do not represent the proper-support Quot functor on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quot\", \"representable\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: local presentations of modules, scheme morphism properties and ordinary representability do not represent the proper-support Quot functor on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "QuotFunctor|quotFunctor|quot.*representab|AlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: local presentations of modules, scheme morphism properties and ordinary representability do not represent the proper-support Quot functor on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of the Quot functor on algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsRepresentedBy\", \"module\": \"Mathlib.CategoryTheory.RepresentedBy\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (F : CategoryTheory.Functor Cᵒᵖ (Type w)) → {X : C} → F.obj (Opposite.op X) → Prop\", \"doc\": \"For a category $\\\\mathcal{C}$, a contravariant functor $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathrm{Type}\\\\,w$, and an object $X \\\\in \\\\mathcal{C}$, this proposition asserts that $F$ is representable by $X$, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.IsRepresentable\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"CategoryTheory.Functor.IsRepresentedBy.mk\", \"module\": \"Mathlib.CategoryTheory.RepresentedBy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {F : CategoryTheory.Functor Cᵒᵖ (Type w)} {X : C}\\n  {x : F.obj (Opposite.op X)}, (∀ {Y : C}, Function.Bijective fun f => F.map f.op x) → F.IsRepresentedBy x\", \"doc\": \"Given a category $\\\\mathcal{C}$, a contravariant functor $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathrm{Type}\\\\,w$, an object $X \\\\in \\\\mathcal{C}$, and an element $x \\\\in F(X^{\\\\text{op}})$, if for every object \"}\n  {\"name\": \"CategoryTheory.Functor.IsRepresentedBy.representableBy\", \"module\": \"Mathlib.CategoryTheory.RepresentedBy\", \"type\": \"(h : F.IsRepresentedBy x) : F.RepresentableBy X\", \"doc\": \"Given a contravariant functor $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Type}_v$ and an object $X \\\\in \\\\mathcal{C}$ such that $F$ is representable by $X$ (i.e., there exists a natural isomorphism between \"}\n  {\"name\": \"CategoryTheory.Functor.representableBy\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \": F.RepresentableBy F.reprX\", \"doc\": \"The data witnessing that a contravariant functor $F$ is representable by its representing object $X$, i.e., a natural isomorphism between $F$ and the hom-functor $\\\\mathrm{Hom}(-, X)$ constructed via t\"}\n  {\"name\": \"CategoryTheory.Quotient.functor\", \"module\": \"Mathlib.CategoryTheory.Quotient\", \"type\": \": C ⥤ Quotient r\", \"doc\": \"The canonical functor from a category $\\\\mathcal{C}$ to its quotient category $\\\\mathcal{C}/R$, which maps each object to itself and each morphism to its equivalence class under the composition-closed r\"}\n  {\"name\": \"CategoryTheory.Quotient.essSurj_functor\", \"module\": \"Mathlib.CategoryTheory.Quotient\", \"type\": \": (functor r).EssSurj\", \"doc\": \"There exists a canonical functor from a category $\\\\mathcal{C}$ to its quotient category $\\\\mathcal{C}/R$, which maps each object to itself and each morphism to its equivalence class under the compositi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.RepresentableBy (glueData hf).glued\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local presentations of modules, scheme morphism properties and ordinary representability do not represent the proper-support Quot functor on algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-hilbert-representability",
+  "date": "2026-10-23",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 09TU, quot-proposition-quot.",
+   "via": [
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-quot-representability",
+  "worker": "stage1",
+  "group": "Q85",
+  "summary": "Checked Stacks 09TU and its general coherent-stack, module-Hom and surjectivity-locus route. Five statement-only inputs suffice; the representable-source theorem also establishes stack descent, so no separate Quot sheaf node is needed. Explicitly computed the fibre groupoid, trivial automorphisms, relative representing bijections, and the conditional local finite presentation. Kept the statement unchanged; no flatness of a or finite presentation of F is introduced into algebraicity.",
+  "blueprint": "The inherited place in det-thm-sf-ctf-stability-direct-images proof (3), through nodal-curve diagonal representability, relative Mor and Hilbert spaces, and Stacks 09TU. The ancestor command returns None; inherited null from.node is preserved and new via chains extend the item chain.",
+  "tool_uses": [
+   {
+    "node": "def-a1-space-open-subspace",
+    "why": "Generic criterion for algebraicity of an open subfunctor of an algebraic space; the Hom space is not assumed to be a scheme."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and chart base change for sheaf fibre products, already in the statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-a1-space-open-subspace",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-1d830879d",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-1d830879d (reviewer sub-agent of L); spot-checked: Read in full against the Stacks sources: 09TU (and its proof, which never proves the lfp clause), 08KB, 09DS, 08KD, 08K6, 09TP, 05UM, 05UN and 04SZ. The item statement is unchanged and matches 09TU. All five new nodes are statement-only, match their sources (coherent-stack-general = 09DS, with the scheme-base lfp clause from 08KD plus 0CMY; module-hom-affine = 08K6; surjectivity-open = 09TP; representable-source-algebraic = 05UN/05UM; algebraic-setoid-space = 04SZ (1)<=>(3)), passed small-case tests, and none duplicates an existing node or restates a clause of the item. Steps 1-4 check out: the 2-fibre product is discrete with the forced arrow theta2^{-1}theta1; the hypotheses of 09TP hold for G_V; automorphisms are trivial because q is an epimorphism. One fault, C1 in step 5: 'equivalently R x_B V -> V' passed from stack-lfp (some smooth atlas with lfp composite) to space-lfp (étale charts) without citation; that passage is smooth-local-on-source descent (06M2/06EV). FIX: step 5 now cites the existing same-unit node lem-sfb-smooth-cover-flat-lfp-descent (split and reviewed by Q21; no cycle), added to uses and proof_deps, with the source place extended. Both declared tool_uses (def-a1-space-open-subspace, lem-trf-space-fibre-products-etale-covers) are accepted as generic. Batch 5: every flagged citation is a general algebraic-space definition or a generic permanence/chart lemma reaching sec-trace-formula only through def-trf-algebraic-space or def-trf-projective-bundle-morphism; none is part of the trace formula or Poincaré duality, so all are accepted. No SGA. The null blueprint.from.node is inherited from the base.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQuotRepresentability",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_properQuot_representing_space",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQuotRepresentability.lean",
+  "statement": "theorem exists_properQuot_representing_space {S : Scheme.{u}} {A B : AlgebraicSpace S} (a : A ⟶ B) (ha : ProperQuotFinitePresentation a) (hsep : MapIsSeparated a) (F : A.QCoh) : ∃ (R : AlgebraicSpace S) (r : R ⟶ B) (e : ∀ T : ProperQuotTest B, { f : yoneda.obj T.left ⟶ R.obj.obj // f ≫ r.hom.hom = T.hom } ≃ (properQuotFunctor a ha F).obj (op T)), (∀ (T' T : ProperQuotTest B) (h : T' ⟶ T) (f : { f : yoneda.obj T.left ⟶ R.obj.obj // f ≫ r.hom.hom = T.hom }) (f' : { f : yoneda.obj T'.left ⟶ R.obj.obj // f ≫ r.hom.hom = T'.hom }), yoneda.map h.left ≫ f.val = f'.val → e T' f' = (properQuotFunctor a ha F).map h.op (e T f)) ∧ (F.obj.IsFinitePresentation → MapIsLocallyOfFinitePresentation r)",
+  "branch": "sheaf-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49e49c311",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Read item node, Stacks 09TR/09TU (quot.tex l.2198-2330), delivered SpaceQuotRepresentability.lean, the stmt_dep module SpaceProperQuotFunctor in full (snapshot node identical to side-live), and AlgebraicSpaceMorphismProperties. Clause by clause: S : Scheme.{u}; a : A ⟶ B between AlgebraicSpace S; finite presentation = ProperQuotFinitePresentation (lfp+qc+qc diagonal, the dep's own predicate); separated = MapIsSeparated (closed-immersion diagonal); F : A.QCoh arbitrary; ∃ R r with Equiv from Hom_B subtype {f : yoneda T ⟶ R // f ≫ r = T.hom} to properQuotFunctor.obj (op T) for every T : ProperQuotTest B; naturality over all h : T' ⟶ T with direction checked; F.obj.IsFinitePresentation → MapIsLocallyOfFinitePresentation r. No extra hypotheses, no weakened clause, edge cases (zero F, empty spaces, non-flat tests) and universes fine. No duplicate representability theorem (rg in Sheaf/WeilConjectures/slopmaster2). Record verbatim and complete, item changed only in lean; a single sorried theorem; docstrings carry source, blueprint id and 5 proof steps; lines ≤100; public imports = stmt deps, plain imports = exactly the existing proof_dep modules (plan imports). Report has Worker report + Second reading sections; worker scompile clean. Advisory: MapIsSeparated/MapIsLocallyOfFinitePresentation are owned by def-sfb-space-morphism-properties, which is not in stmt_deps but is reached via stmt_dep def-sfb-space-proper-quot-functor; stage-1 stmt_deps unchanged and S2 cannot add existing nodes, so maintainer may add it. No compile run (no file changed)."
+ }
+}

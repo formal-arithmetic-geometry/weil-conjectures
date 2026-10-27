@@ -1,0 +1,286 @@
+{
+ "id": "lem-sfb-smooth-curve-generic-differentials",
+ "kind": "statement",
+ "title": "Generic differential line of a smooth integral curve",
+ "statement": "Let $k$ be a field [def-weil-field] and $Z$ a smooth curve over $k$ [def-pc-curve, def-sbc-smooth-morphisms], where a curve is a separated integral finite-type $k$-scheme of dimension one. Let $\\eta$ be its generic point [def-sc-generic-point], and put $F=k(Z)=\\mathcal O_{Z,\\eta}$ [def-sc-function-field]. Use the differential sheaf $\\Omega_{Z/k}$ [def-sc-relative-differential-sheaf], its stalk [def-weil-pbc-module-stalk], and the module of Kähler differentials $(\\Omega_{F/k},d)$ [def-weil-pbc-kahler-differentials]. There is a unique $F$-linear isomorphism\n$$\\alpha_Z:(\\Omega_{Z/k})_\\eta\\xrightarrow{\\sim}\\Omega_{F/k}$$\nsuch that for every nonempty open $W\\subseteq Z$ and every $a\\in\\mathcal O_Z(W)$, $\\alpha_Z((da)_\\eta)=d(a_\\eta)$, where $a_\\eta\\in F$ is the germ. Both vector spaces in this isomorphism have dimension one over $F$ and are nonzero.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C1C (lemma-generically-etale), proof, invertibility of the differential sheaves and nonvanishing at the generic point; expansion by the affine localization computation in algebra.tex Tag 00RT (lemma-differentials-localize), part (2)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-curve",
+  "def-sbc-smooth-morphisms",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-a1-smooth-curve-cotangent-generic-isomorphism] with $X=Y=Z$ and $h=\\mathrm{id}_Z$. Its last assertion, with $W=Z$ and $x=\\eta$, says that $(\\Omega_{Z/k})_\\eta$ is nonzero and free of rank one over $\\mathcal O_{Z,\\eta}=F$. Thus it has $F$-dimension one.",
+   "uses": [
+    "lem-a1-smooth-curve-cotangent-generic-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1C, lemma-generically-etale, first sentence of proof; morphisms.tex Tag 02G1, lemma-smooth-omega-finite-locally-free"
+   }
+  },
+  {
+   "text": "Choose a nonempty affine open $U=\\operatorname{Spec}A$ of $Z$. By [lem-sc-integral-function-field-affine-fraction], $\\eta\\in U$, $A$ is a domain, and the germ map identifies $F$ with $\\operatorname{Frac}(A)$. In this affine chart $\\eta$ is the prime $(0)$: its closure is all of $\\operatorname{Spec}A$, and the closure of a prime $\\mathfrak p$ is $V(\\mathfrak p)$, so $\\mathfrak p$ is contained in every prime and is zero in a domain.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-sc-generic-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV, lemma-integral-scheme-rational-functions, integral case; schemes.tex Tag 01HV, lemma-spec-sheaves"
+   }
+  },
+  {
+   "text": "Put $M=\\Omega_{A/k}$. By [def-sc-relative-differential-sheaf], $\\Omega_{Z/k}|_U=\\widetilde M$, compatibly with universal derivations. By [lem-weil-pbc-spec-module-tilde-sections] at $D(1)=U$, its section module is $M$, with $da$ corresponding to the universal differential of $a\\in A$. The same statement gives quasi-coherence. Apply [lem-sbc-affine-module-germ-localization] to this associated sheaf on $U$ at $\\eta=(0)$: its germ map identifies its stalk with $(A\\setminus\\{0\\})^{-1}M$. The stalk is the ambient stalk by [def-weil-pbc-module-stalk]: neighbourhoods contained in $U$ are cofinal, since intersecting a neighbourhood with $U$ preserves its germs.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-sbc-affine-module-germ-localization",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves (2),(4),(7); morphisms.tex lemma-differentials-affine; sheaves.tex Tag 0078, stalks"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-kahler-differentials-localization] to $k\\to A$ and $S=A\\setminus\\{0\\}$. With the preceding fraction-field identification it gives an $F$-linear isomorphism $S^{-1}M\\to\\Omega_{F/k}$ sending $da/s$ to $s_\\eta^{-1}d(a_\\eta)$. Compose with the stalk identification of step 3 to define $\\alpha_Z$. In particular $\\alpha_Z((da)_\\eta)=d(a_\\eta)$ for $a\\in A$.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RT, lemma-differentials-localize (2)"
+   }
+  },
+  {
+   "text": "For any nonempty open $W$ and $a\\in\\mathcal O_Z(W)$, choose a basic open $D(s)\\subseteq U\\cap W$ containing $\\eta$. Here $s\\ne0$, and $a|_{D(s)}=b/s^n$ for some $b\\in A$ by the basic-open section description in [lem-weil-pbc-spec-module-tilde-sections]. Restrictions of the differential commute with $d$ by [def-sc-relative-differential-sheaf]. The Leibniz rule of [def-weil-pbc-kahler-differentials] gives $d(b/s^n)=s^{-n}db-nbs^{-n-1}ds$. Applying the formula of step 4 to its germ gives exactly $d(b_\\eta/s_\\eta^n)=d(a_\\eta)$. By the quotient presentation in the same Kähler definition, $M$ is generated by $da$ for $a\\in A$; hence its localization is spanned over $F$ by their germs. The required normalization therefore determines every $F$-linear map uniquely. Finally the isomorphism transfers the dimension one and nonvanishing established in step 1 to $\\Omega_{F/k}$.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-sc-relative-differential-sheaf",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RT, lemma-differentials-localize, quotient-rule formula in proof; schemes.tex Tag 01HV, lemma-spec-sheaves (3),(4); morphisms.tex definition-sheaf-differentials"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-smooth-curve-cotangent-generic-isomorphism",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-sc-generic-point",
+  "def-sc-relative-differential-sheaf",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-sbc-affine-module-germ-localization",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00RT, lemma-differentials-localize (2), applied on an affine chart; curves.tex Tag 0C1C, lemma-generically-etale, rank-one assertion in proof; schemes.tex Tag 01HV, lemma-spec-sheaves (7)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth integral curve over a field k the Kahler differentials of its function field over k form a one dimensional vector space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Subsingleton Ω[S⁄R]\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is zero.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S],\\n  Algebra.IsStandardSmooth R S ↔\\n    Subsingleton (Algebra.H1Cotangent R S) ∧ ∃ I b, Set.range ⇑b ⊆ Set.range ⇑(KaehlerDifferential.D R S)\", \"doc\": \"An $ R $-algebra $ S $ of finite presentation is standard smooth if and only if the first cohomology group $ H^1 $ of its cotangent complex is trivial (a subsingleton) and there exists a basis for the\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Nontrivial S] (n : ℕ)\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], Module.rank S Ω[S⁄R] = ↑n\", \"doc\": \"If $ S $ is a non-trivial commutative ring that is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then the rank of the module of Kähler differentials $ \\\\Omega_{S/\"}\n  {\"name\": \"Algebra.IsStandardSmooth.free_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Module.Free S Ω[S⁄R]\", \"doc\": \"For a standard smooth algebra $ S $ over a commutative ring $ R $, the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free $ S $-module. This follows from the fact that standard smooth algebras \"}\n  {\"name\": \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Subsingleton (Algebra.H1Cotangent R S)] {I : Type u_3}\\n  (b : Module.Basis I S Ω[S⁄R]), Set.range ⇑b ⊆ Set.range ⇑(KaehlerDifferential.D R S) → Algebra.IsStandardSmoot\", \"doc\": \"If $ S $ is finitely presented over $ R $, the first cohomology group $ H^1 $ of the cotangent complex of $ S $ over $ R $ is trivial, and there exists a basis for the module of Kähler differentials $\"}\n  {\"name\": \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ (R : Type u_2) [inst : Field R], Module.finrank (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R) = 0\", \"doc\": \"For any field $ R $, the finite rank of its cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the maximal ideal) as a module over the residue field $ R/\\\\mathfrak{m} $ is zero.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Nontrivial S]\\n  [Algebra.IsStandardSmooth R S] (n : ℕ), Algebra.IsStandardSmoothOfRelativeDimension n R S ↔ Module.rank S Ω[S⁄R] = ↑n\", \"doc\": \"For a non-trivial commutative ring $ S $ that is a standard smooth algebra over a commutative ring $ R $, $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $ if and only if the r\"}\n  {\"name\": \"Differential.differentialFiniteDimensional\", \"module\": \"Mathlib/FieldTheory/Differential/Basic\", \"type\": \"(F : Type u_2) →\\n  [inst : Field F] →\\n    [Differential F] →\\n      [CharZero F] →\\n        (K : Type u_3) → [inst_3 : Field K] → [inst_4 : Algebra F K] → [FiniteDimensional F K] → Differential K\", \"doc\": \"For a field extension $ K/F $ of finite degree where $ F $ has characteristic zero, the differential structure on $ K $ is constructed by selecting a primitive element $ \\\\alpha \\\\in K $, using its moni\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth algebra rank, tilde stalk localization, and localization of algebraic differentials are components; no hit states the normalized geometric generic-stalk isomorphism together with its one-dimensionality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"finrank\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth algebra rank, tilde stalk localization, and localization of algebraic differentials are components; no hit states the normalized geometric generic-stalk isomorphism together with its one-dimensionality"
+  },
+  {
+   "tool": "grep",
+   "query": "(functionField|genericPoint).*([Kk]aehler|[Dd]ifferential)|([Kk]aehler|[Dd]ifferential).*(functionField|genericPoint)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth algebra rank, tilde stalk localization, and localization of algebraic differentials are components; no hit states the normalized geometric generic-stalk isomorphism together with its one-dimensionality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The generic stalk of the differential sheaf of a smooth curve is canonically the one dimensional module of differentials of the function field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(p : PrimeSpectrum R) : IsLocalization.AtPrime ((structureSheaf R).presheaf.stalk p) p.asIdeal\", \"doc\": \"For any commutative ring $ R $ and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the stalk $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R), \\\\mathfrak{p}} $ of the structure sheaf at $ \\\\mathfrak{p} $ is canonically i\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.𝒪\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": Sheaf CommRingCat X.toTopCat\", \"doc\": \"The sheaf $\\\\mathcal{O}_X$ of commutative rings on the underlying topological space of a locally ringed space $X$, where every stalk is a local ring. This is the canonical sheaf associated to the local\"}\n  {\"name\": \"ModuleCat.Tilde.stalkIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(x : PrimeSpectrum.Top R) :\\n  TopCat.Presheaf.stalk (tildeInModuleCat M) x ≅ ModuleCat.of R (LocalizedModule x.asIdeal.primeCompl M)\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the stalk of the sheaf $ \\\\widetilde{M} $ at the point corresponding to $ \\\\mathfrak{p} $ is isomorphic \"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \": (derivation' φ').Universal\", \"doc\": \"The relative Kähler differentials presheaf $\\\\Omega_{\\\\phi'}$ satisfies the universal property: for any derivation $d': S' \\\\to M'$ (where $M'$ is an $R$-module presheaf), there exists a unique $R$-linea\"}\n  {\"name\": \"ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(x : PrimeSpectrum.Top R) : IsLocalizedModule x.asIdeal.primeCompl (toStalk M x).hom\", \"doc\": \"For a prime ideal $ \\\\mathfrak{p} $ in the prime spectrum of a commutative ring $ R $, the stalk of the sheaf $ \\\\widetilde{M} $ at $ \\\\mathfrak{p} $ is the localization of the module $ M $ at the multip\"}\n  {\"name\": \"ModuleCat.Tilde.toStalk\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(x : PrimeSpectrum.Top R) : ModuleCat.of R M ⟶ TopCat.Presheaf.stalk (tildeInModuleCat M) x\", \"doc\": \"For a point $ x $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, this defines the canonical morphism from the module $ M $ (viewed as an object in the category of $ R $-modules) to the stalk of the\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.residueField\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField\", \"type\": \"(x : X) : CommRingCat\", \"doc\": \"Given a locally ringed space $X$ and a point $x$ in $X$, this constructs the residue field of the stalk of the structure sheaf at $x$. The stalk is a local ring, and its residue field is obtained by q\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(x : X) : Field (X.residueField x)\", \"doc\": \"For any scheme $X$ and any point $x$ in $X$, the stalk of the structure sheaf at $x$ is a local ring, i.e., $\\\\mathcal{O}_{X,x}$ is a local ring.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth algebra rank, tilde stalk localization, and localization of algebraic differentials are components; no hit states the normalized geometric generic-stalk isomorphism together with its one-dimensionality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an integral scheme Z over a field k with generic point eta the stalk of the relative differential sheaf at eta is canonically isomorphic to Kahler differentials of the function field over k sending germs of da to d of germs",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField; AlgebraicGeometry.stalkFunctionFieldAlgebra; AlgebraicGeometry.Scheme.functionField; AlgebraicGeometry.instFieldCarrierFunctionField; AlgebraicGeometry.Scheme.germToFunctionField; AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv; AlgebraicGeometry.functionField_isScalarTower; AlgebraicGeometry.germ_stalkClosedPointIso_hom_assoc. All returned hits concern structure-sheaf function fields, not differential sheaf stalks.",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth algebra rank, tilde stalk localization, and localization of algebraic differentials are components; no hit states the normalized geometric generic-stalk isomorphism together with its one-dimensionality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"relativeDifferentials\", \"stalk\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth algebra rank, tilde stalk localization, and localization of algebraic differentials are components; no hit states the normalized geometric generic-stalk isomorphism together with its one-dimensionality"
+  },
+  {
+   "tool": "grep",
+   "query": "([Dd]ifferential|[Kk]aehler).*(stalk|genericPoint|functionField)|(stalk|genericPoint|functionField).*([Dd]ifferential|[Kk]aehler)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth algebra rank, tilde stalk localization, and localization of algebraic differentials are components; no hit states the normalized geometric generic-stalk isomorphism together with its one-dimensionality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization at the zero prime identifies the generic stalk of a scheme differential sheaf with the module of differentials of its fraction field compatibly with universal derivations",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatStalkToFiberRingHom\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum R) : IsIso (stalkToFiberRingHom R x)\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, the ring homomorphism from the stalk $ \\\\mathcal{O}_x $ of the structure sheaf at $ x $ to the localizat\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkToFiberRingHom_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) {Z : CommRingCat}\\n  (h : { carrier := Localization.AtPrime x.asIdeal, commRing := OreLocalization.instCommRing } ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.StructureSheaf.localizationToStalk R x)\\n   \", \"doc\": \"For any commutative ring $ R $ and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the composition of the canonical ring homomorphism from the localization $ R_{\\\\mathfrak{p}} $ to the stalk $ \\\\mathcal{O}_{\\\\o\"}\n  {\"name\": \"ModuleCat.Tilde.stalkIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(x : PrimeSpectrum.Top R) :\\n  TopCat.Presheaf.stalk (tildeInModuleCat M) x ≅ ModuleCat.of R (LocalizedModule x.asIdeal.primeCompl M)\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the stalk of the sheaf $ \\\\widetilde{M} $ at the point corresponding to $ \\\\mathfrak{p} $ is isomorphic \"}\n  {\"name\": \"KaehlerDifferential.isLocalizedModule_map\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"(M : Submonoid S) [IsLocalization M T] : IsLocalizedModule M (map R R S T)\", \"doc\": \"Let $R$ and $S$ be commutative rings, where $S$ is an $R$-algebra. Let $M$ be a submonoid of $S$, and let $T$ be the localization of $S$ at $M$. This instance states that the formation of the module o\"}\n  {\"name\": \"KaehlerDifferential.isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Kaehler.TensorProduct\", \"type\": \"(p : Submonoid R) [IsLocalization p S] [IsLocalization (Algebra.algebraMapSubmonoid A p) B] :\\n  IsLocalizedModule p ((map R S A B).restrictScalars R)\", \"doc\": \"Given a commutative ring $R$ with submonoid $p$, its localization $S$ at $p$, and an $R$-algebra $A$ with localization $B$ at the image of $p$ under the algebra map, the module of Kähler differentials\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.stalkIso\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum.Top R) : (structureSheaf R).presheaf.stalk x ≅ CommRingCat.of (Localization.AtPrime x.asIdeal)\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, the stalk $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R),x} $ of the structure sheaf at $ x $ is isomorphic to t\"}\n  {\"name\": \"ModuleCat.Tilde.stalkToFiberLinearMap_toStalk\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(x : PrimeSpectrum.Top R) (m : M) : (stalkToFiberLinearMap M x).hom (toStalk M x m) = LocalizedModule.mk m 1\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a prime ideal $ \\\\mathfrak{p} $ (viewed as a point $ x \\\\in \\\\operatorname{Spec}(R) $), the canonical morphism from the stalk $ \\\\widetilde{M}_x $ \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(p : PrimeSpectrum R) : IsLocalization.AtPrime ((structureSheaf R).presheaf.stalk p) p.asIdeal\", \"doc\": \"For any commutative ring $ R $ and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the stalk $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R), \\\\mathfrak{p}} $ of the structure sheaf at $ \\\\mathfrak{p} $ is canonically i\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth algebra rank, tilde stalk localization, and localization of algebraic differentials are components; no hit states the normalized geometric generic-stalk isomorphism together with its one-dimensionality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The generic stalk of the relative differential sheaf of a smooth integral curve is canonically isomorphic to the one dimensional module of Kahler differentials of its function field",
+   "results": "[leanfinder] OK 8 hit(s). Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential; Algebra.IsStandardSmooth.free_kaehlerDifferential; AlgebraicGeometry.stalkFunctionFieldAlgebra; AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField; KaehlerDifferential.isLocalizedModule_map; Algebra.Extension.toKaehler; Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential; Algebra.IsStandardSmooth.of_basis_kaehlerDifferential",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give algebraic localization, standard smooth algebra ranks, or structure-sheaf stalks, not the full normalized geometric isomorphism with dimension one"
+  },
+  {
+   "tool": "grep",
+   "query": "(functionField|genericPoint).*([Kk]aehler|[Dd]ifferential)|([Kk]aehler|[Dd]ifferential).*(functionField|genericPoint)",
+   "results": "[grep] OK 0 hit(s). ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give algebraic localization, standard smooth algebra ranks, or structure-sheaf stalks, not the full normalized geometric isomorphism with dimension one"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The generic stalk of the sheaf of differentials of a smooth curve has dimension one and is the module of differentials of the function field",
+   "results": "[leansearch] OK 8 hit(s). AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk; Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential; Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential; Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType; AlgebraicGeometry.LocallyRingedSpace.residueField; smoothSheafCommRing.nonunits_stalk; instNontrivialCarrierStalkCommRingCatPresheafSmoothSheafCommRing; ModuleCat.Tilde.stalkIso",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give algebraic localization, standard smooth algebra ranks, or structure-sheaf stalks, not the full normalized geometric isomorphism with dimension one"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"relativeDifferentials\", \"stalk\"",
+   "results": "[loogle] OK 0 hit(s). ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give algebraic localization, standard smooth algebra ranks, or structure-sheaf stalks, not the full normalized geometric isomorphism with dimension one"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization at the generic point identifies relative differential sheaf stalks with Kahler differentials of the function field compatibly with universal derivations",
+   "results": "[leanfinder] OK 8 hit(s). KaehlerDifferential.isLocalizedModule_map; KaehlerDifferential.isLocalizedModule; KaehlerDifferential.isLocalizedModule_of_isLocalizedModule; KaehlerDifferential.span_range_map_derivation_of_isLocalization; AlgebraicGeometry.localRingHom_comp_stalkIso_apply; AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply; AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux; AlgebraicGeometry.StructureSheaf.localizationToStalk_mk'",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give algebraic localization, standard smooth algebra ranks, or structure-sheaf stalks, not the full normalized geometric isomorphism with dimension one"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"finrank\"",
+   "results": "[loogle] OK 0 hit(s). ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give algebraic localization, standard smooth algebra ranks, or structure-sheaf stalks, not the full normalized geometric isomorphism with dimension one"
+  },
+  {
+   "tool": "grep",
+   "query": "([Dd]ifferential|[Kk]aehler).*(stalk|genericPoint|functionField)|(stalk|genericPoint|functionField).*([Dd]ifferential|[Kk]aehler)",
+   "results": "[grep] OK 0 hit(s). ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give algebraic localization, standard smooth algebra ranks, or structure-sheaf stalks, not the full normalized geometric isomorphism with dimension one"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-separable-curve-differential-nonzero",
+  "date": "2026-10-22",
+  "group": "Q128"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), the direct-image constructibility/alteration auxiliary route already recorded through the high-genus-cover and Riemann--Hurwitz nodes: this lemma supplies the nonzero differential for the separable curve factor (Stacks 0C1C (5) implies (1)). Generic differential line of a smooth integral curve.",
+   "via": [
+    "lem-sfb-separable-curve-differential-nonzero",
+    "lem-sfb-curve-riemann-hurwitz-numerical",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-curve-generic-differentials",
+  "worker": "stage1",
+  "summary": "Proved using existing rank-one smooth-curve, affine module-germ localization, fraction-field, and Kähler localization nodes; no new nodes. Explicit quotient-rule check handles all open sections and spanning proves uniqueness. Statement unchanged.",
+  "blueprint": "The inherited auxiliary curve route below det-thm-sf-ctf-stability-direct-images (3), now sk-thm-sf-ctf-stability-direct-images (3) in literature/blueprint/latest: generic differential line needed in the separable-curve factor of the recorded alteration route. Steps 1–5 expand Stacks 0C1C and 00RT; no route change.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-smooth-curve-cotangent-generic-isomorphism",
+    "why": "Generic rank-one stalk assertion specialized to the identity of Z; shared smooth-curve tool, no node of this unit states the rank-one fact."
+   },
+   {
+    "node": "lem-sbc-affine-module-germ-localization",
+    "why": "Affine quasi-coherent module germs are localizations; generic sheaf tool used with the explicitly associated differential module, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-smooth-curve-cotangent-generic-isomorphism",
+  "lem-sbc-affine-module-germ-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-fa2f1bea9",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-fa2f1bea9 (reviewer sub-agent of L); spot-checked: S1 split with no new nodes and the statement unchanged; there is no re-split note, and the item is still unsplit in live and side-live, so no other group has superseded it. Sources read: Stacks 0C1C, whose proof starts by saying Omega_{X/k} and Omega_{Y/k} are invertible (via 02G1); 00RT(2); and 01HV. Step 1: the last clause of lem-a1-smooth-curve-cotangent-generic-isomorphism (W=Z, x=eta, h=id) gives a nonzero stalk free of rank one over O_{Z,eta}=F. Step 2: lem-sc-integral-function-field-affine-fraction gives eta in U, A a domain and F=Frac(A); eta=(0) follows elementarily from the closure V(p). Step 3: by def-sc-relative-differential-sheaf, Omega|_U=(Omega_{A/k})~, which is quasi-coherent by the tilde node; lem-sbc-affine-module-germ-localization with L=V=U and y=eta then gives the stalk as the localization at A minus 0, and the restricted stalk equals the ambient one since neighbourhoods inside U are cofinal. Step 4: the Kahler localization node for k->A and S=A minus 0 defines alpha, with (da)_eta mapped to d(a_eta). Step 5: I checked d(b s^{-n}) = s^{-n}db - n b s^{-n-1}ds for n=0 and in characteristic p. The basic open D(s) inside U∩W exists because Z is irreducible, and uniqueness follows because the da generate the module. proof_deps equals the union of the step citations, and there is no cycle since the a1 node has no proof_deps. Small cases: A^1 (d(1/t) maps to -t^{-2}dt), an imperfect base field, and a regular but non-smooth curve, which fails the step-1 hypothesis. A grep of the DAG for Omega_{F/k}-type statements found no duplicate: the p-basis node needs k algebraically closed of characteristic p, the dominant-comparison node takes alpha as a hypothesis, and the trf/pbc nodes are ring-level. No SGA source is cited. Accepted tool_uses: lem-a1-smooth-curve-cotangent-generic-isomorphism (rank-one stalk, which no node of this unit states) and lem-sbc-affine-module-germ-localization (a generic sheaf fact)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.SmoothGenericDifferentials",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.smooth_curve_generic_differentials",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/SmoothGenericDifferentials.lean",
+  "statement": "theorem Scheme.Hom.smooth_curve_generic_differentials {k : Type u} [Field k] {Z : Scheme.{u}} (p : Z ⟶ Spec (.of k)) [IsIntegralCurve p] [Smooth p] [Algebra k Z.functionField] (hk : algebraMap k Z.functionField = (Z.presheaf.germ ⊤ (genericPoint Z) trivial).hom.comp (p.appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom)) : (∃! α : (RingedSpace.moduleStalkFunctor Z.toRingedSpace (genericPoint Z)).obj p.relativeDifferentials ≃ₗ[Z.functionField] Ω[Z.functionField⁄k], ∀ (W : Z.Opens) (hW : genericPoint Z ∈ W) (a : Γ(Z, W)), α (p.relativeDifferentials.presheaf.germ W (genericPoint Z) hW (p.relativeDifferentialsDerivation.d (X := op W) a)) = KaehlerDifferential.D k Z.functionField (Z.presheaf.germ W (genericPoint Z) hW a)) ∧ Module.finrank Z.functionField ((RingedSpace.moduleStalkFunctor Z.toRingedSpace (genericPoint Z)).obj p.relativeDifferentials) = 1 ∧ Module.finrank Z.functionField Ω[Z.functionField⁄k] = 1 ∧ Nontrivial ((RingedSpace.moduleStalkFunctor Z.toRingedSpace (genericPoint Z)).obj p.relativeDifferentials) ∧ Nontrivial Ω[Z.functionField⁄k]",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a97f0459",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Every clause matches the node: field; IsIntegralCurve (separated, LOFT, QC, integral, dim 1) and Smooth p; genericPoint; Z.functionField with k-algebra pinned by hk to germ∘appTop∘ΓSpecIso.inv; module stalk via RingedSpace.moduleStalkFunctor (sanctioned in the def-weil-pbc-module-stalk note; germ lands in the same Ab-stalk carrier); ∃! F-linear iso with normalization over all W containing η (= nonempty opens); finrank 1 and Nontrivial for both sides. No extra hypotheses or universe restriction. lean.statement verbatim; node differs from side-live only in lean; no defs, sorry proof, docstrings carry source, blueprint and 5 proof steps; proof-dep modules exist; no existing duplicate; report has Worker report and Second reading sections (self-check). No file changed, no compile."
+ }
+}

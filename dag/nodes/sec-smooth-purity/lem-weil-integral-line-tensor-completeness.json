@@ -23,36 +23,26 @@
  ],
  "proof": [
   {
-   "text": "the internal dual of L is its tensor inverse, checked after a rank-one\ntrivialization. Tensor by L and by that dual are inverse exact equivalences of module\nsheaves, and hence give inverse triangulated equivalences on unbounded derived\ncategories. The derived equivalence preserves products by their universal property:\nmaps B to the image of a product correspond to maps from the inverse image of B\nto that product, and hence to the product of the corresponding component Hom sets.\nChoose flat-term K-flat representatives for the reductions of K. The usual balanced\nassociativity map identifies reduction of K tensor L with reduction of K tensored\nwith the ordinary reduction of L. After restriction of scalars it also identifies\nthese reductions with the line twist of the original restricted reductions, without\nrequiring those restrictions to be K-flat over the integral ring. On pure tensors\nthese maps commute with quotient transitions and with x mapped to 1 tensor x.\nApply the triangulated equivalence to the distinguished augmented Roos triangle\nin IsSfDerivedComplete. Its product comparisons and the preceding compatible\nreduction comparisons identify its first map with the canonical reduction units\nand its second map with 1 minus the quotient shift. The transported connecting map\ntherefore supplies exactly the required distinguished triangle. This argument uses\nno boundedness, constructibility, or choice of a unique map to a derived limit.",
+   "text": "Choose a prime p greater than l+1, and the standard finite-field datum with base ZMod p and its algebraic closure, so l differs from its characteristic. By sfDerivedComplete_iff_legacy, hK supplies a witness of IsDerivedCompleteUnrestricted. Apply the already stated CompletedLineTensor.complete at exponent one. Its signed power is definitionally L, since scalarTensorPower has degree-one value L, so its derived tensor functor is exactly the functor of the conclusion (proof-instance choices are irrelevant). Unpack the resulting unrestricted-completeness witness and use sfDerivedComplete_iff_legacy in the reverse direction. No hypothesis about boundedness, finite reductions or the residue characteristics of S is introduced.",
    "uses": [
-    "def-coefficient-twists-detailed",
-    "def-weil-integral-derived-reduction",
-    "def-weil-derived-complete",
-    "def-weil-derived-complete-integral-detailed",
-    "lem-pur-kflat-change-of-rings",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-sf-exact-functor-derived-triangulated"
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-pur-signed-line-legacy-completeness"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "the corresponding isolated parent-proof steps"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), tensor inverse and integral completion; the already stated CompletedLineTensor.complete clause, whose proof is recorded in its docstring."
    }
   }
  ],
  "proof_deps": [
-  "def-coefficient-twists-detailed",
-  "def-weil-integral-derived-reduction",
-  "def-weil-derived-complete",
-  "def-weil-derived-complete-integral-detailed",
-  "lem-pur-kflat-change-of-rings",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-sf-exact-functor-derived-triangulated"
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-pur-signed-line-legacy-completeness"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "lean/Sheaf/Paper/TwistPreservesFiniteness.lean",
-  "place": "parent proof, isolated intermediate interface"
+  "document": "lean/Sheaf/Paper/IntegralLineTensorCompleteness.lean",
+  "place": "Y2: specialize the existing signed-line completeness theorem to exponent one, transporting through the proved legacy comparison."
  },
  "mathlib_searches": [
   {
@@ -120,14 +110,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-22",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G5",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261020T051323-L-1634726",
-  "kind": "interface",
+  "landing": "20261022T144500-L-1756556",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

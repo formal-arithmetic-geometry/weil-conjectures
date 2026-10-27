@@ -21,12 +21,10 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal E$ for internal $G$-equivariant modules, $\\mathcal M$ for ordinary internal modules, $U$ for forgetting the action, and $F=\\Gamma_G$. By the derived restriction calculus, both categories are Grothendieck abelian, $U$ is exact and detects exactness, and $F$ is additive and right adjoint to exact trivial inflation, hence left exact. Enough injectives gives a nonnegative equivariant injective resolution $s:N[0]\\to I^\\bullet$: embed $N$ in an injective, embed its cokernel in the next injective, and continue. These successive embeddings make the augmented sequence exact. The cited K-injective computation theorem says $I^\\bullet$ is K-injective.",
+   "text": "Apply [lem-sfb-homogeneous-injective-total-target] to choose $s:N[0]\\to I$ with $I$ K-injective and $Us$ injective, and form the nonnegative equivariantly injective total $T$ and constants $\\delta:I\\to T$. Write $F=\\Gamma_G$; it is additive by [lem-sfb-condensed-derived-restriction-calculus].",
    "uses": [
-    "lem-sfb-condensed-derived-restriction-calculus",
-    "lem-sp-grothendieck-enough-injectives",
-    "def-sp-injective-resolutions",
-    "lem-sp-kinjective-computes"
+    "lem-sfb-homogeneous-injective-total-target",
+    "lem-sfb-condensed-derived-restriction-calculus"
    ],
    "elementary": false,
    "source": {
@@ -35,64 +33,11 @@
    }
   },
   {
-   "text": "For a profinite parameter $S$, the free module $A[S]$ is $j_{S!}A_S$: maps from the presheaf $V\\mapsto\\bigoplus_{V\\to S}A(V)$ to a module sheaf are determined by the image of the identity generator at $S$, so its sheafification has exactly the free universal property. The internal/section-module equivalence allows application of the cited flatness theorem; thus $A[G]$ is flat. The functor $L(M)=A[\\underline G]\\otimes_A M$, with translation on the first factor, is left adjoint to $U$: $h:M\\to UJ$ corresponds to $[g]\\otimes m\\mapsto g h(m)$, with inverse evaluation at $[1]$. These formulas hold after every base change. Since $U$ creates exactness and tensor with $A[G]$ is exact, $L$ is exact. The exact-left-adjoint injectivity theorem now implies that $UI^q$ is injective for every $q$. Exactness of $U$ makes $Us$ an ordinary internal-module injective resolution.",
+   "text": "Apply [lem-sfb-homogeneous-bar-coordinate-normalization] to this resolution. It supplies $\\chi:F(T)\\cong V$, $v=\\chi F(\\delta)$, $t:R_N\\to T$ and $j_{\\rm chain}$ with $j=Q(j_{\\rm chain})$, $\\chi F(te)=j_{\\rm chain}\\rho$, $t\\operatorname{aug}=\\delta s$, and $\\epsilon=Q(v)u_I^{-1}RF(Qs)$.",
    "uses": [
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "lem-pc-sites-modules-j-shriek-flat",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-sfb-condensed-derived-restriction-calculus",
-    "lem-sp-right-adjoint-preserves-injectives"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EV, lemma-j-shriek-flat; homology.tex Tag 015Z, lemma-adjoint-preserve-injectives; explicit free-adjunction specialization"
-   }
-  },
-  {
-   "text": "Form $T^{p,q}=\\underline{\\operatorname{Hom}}_A(A[\\underline G^{p+1}],UI^q)$ for $p,q\\geq0$, with homogeneous deletion differential horizontally and $d_I$ vertically. Give it the diagonal action on arguments AND the action on $I^q$ on values. These differentials are equivariant and commute. Put $T=\\operatorname{Tot}T^{p,q}$ with $d_h+(-1)^p d_v$. The new homogeneous-function injectivity lemma applies to $I^q$, using step 2, so each $T^{p,q}$ is equivariantly injective. Each $T^n$ is a finite sum of these objects, hence injective: extend a map across a monomorphism separately after each of the finitely many projections, and take their sum into the finite biproduct. Thus $T$ is a bounded-below complex of equivariant injectives. There is an equivariant cochain map $\\delta:I\\to T$ placing the constant function with value $x\\in I^q$ in bidegree $(0,q)$: its horizontal differential is zero and its vertical differential is the constant function with value $d_Ix$.",
-   "uses": [
-    "lem-sfb-internal-homogeneous-functions-injective",
-    "def-sp-double-complex-total",
-    "def-sp-injective-resolutions"
+    "lem-sfb-homogeneous-bar-coordinate-normalization"
    ],
    "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: agent expansion of equivariant resolution-to-bar normalization"
-   }
-  },
-  {
-   "text": "There is a cochain isomorphism $\\chi:F(T)\\to V$, where\n$$V=\\operatorname{Tot}_{p,q\\geq0}\\underline{\\operatorname{Hom}}_A(A[\\underline G^p],UI^q)$$\nhas the inhomogeneous action differential. In bidegree $(p,q)$ take $f$ to $c(g_1,\\ldots,g_p)=f(1,g_1,g_1g_2,\\ldots,g_1\\cdots g_p)$; its inverse is\n$$f(h_0,\\ldots,h_p)=h_0\\cdot c(h_0^{-1}h_1,h_1^{-1}h_2,\\ldots,h_{p-1}^{-1}h_p).$$\nCancellation of the common left factor proves equivariance and that the formulas are inverse after every profinite base change. Deleting the first homogeneous coordinate gives $g_1c(g_2,\\ldots)$, deleting an interior one multiplies the adjacent arguments, and deleting the last drops the last argument, with their original alternating signs. Postcomposition with $d_I$ commutes with evaluation because $d_I$ is equivariant. This proves the cochain assertion with the total signs of step 3. Invariants commute with these finite biproducts: a tuple is fixed exactly when each coordinate is fixed. Write $v=\\chi F(\\delta):F(I)\\to V$; it is the bar-degree-zero inclusion of invariants.",
-   "uses": [
-    "def-sfb-condensed-equivariant-bar-data",
-    "def-sp-double-complex-total"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: agent expansion of equivariant resolution-to-bar normalization"
-   }
-  },
-  {
-   "text": "Use $Us$ as the single compatible resolution for every derived internal Hom term. Step 2 makes this legitimate. The bar theorem, with the augmentation normalization specified in the bar-data node, identifies $QV$ with $\\mathscr B_A(G;N)$ and gives\n$$\\epsilon=Q(v)\\circ c_s,\\qquad c_s=u_I^{-1}\\circ R F(Qs):R F(QN)\\longrightarrow QF(I).$$\nHere $u_I$ is invertible since $I$ is K-injective. The formula for $c_s$ is the normalized derived-functor comparison, not a choice of an isomorphism on cohomology. In this model the underived-to-derived bar map $j$ is postcomposition with $s$ into the resolution-degree-zero row of $V$.",
-   "uses": [
-    "lem-sfb-condensed-derived-invariant-bar",
-    "def-sfb-condensed-equivariant-bar-data",
-    "def-sfb-right-derived-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: agent expansion of equivariant resolution-to-bar normalization"
-   }
-  },
-  {
-   "text": "Define $t:R_N\\to T$ in degree $p$ by postcomposing with $s^0:N\\to UI^0$ and putting the result in bidegree $(p,0)$. It is a cochain map since $d_Is^0=0$, and is equivariant because $s$ is equivariant and $N$ is trivial. From the definition of $\\rho$ and the coordinate formulas of step 4 one obtains the equality of cochain maps\n$$\\chi\\circ F(t e)=j_{\\mathrm{chain}}\\circ\\rho.$$\nIndeed both send $x\\in F(K^p)$ to the function $s^0(e^p(x)(1,g_1,g_1g_2,\\ldots))$ in bidegree $(p,0)$ and have zero other bidegree components. Here $j_{\\mathrm{chain}}$ is the model of $j$ fixed in step 5.",
-   "uses": [
-    "def-sfb-condensed-equivariant-bar-data"
-   ],
-   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
     "place": "Paragraph (3), open direct image: agent expansion of equivariant resolution-to-bar normalization"
@@ -110,11 +55,10 @@
    }
   },
   {
-   "text": "Both maps $te,\\delta b:K\\to T$ have the same composite with $a$. The first composite sends $n$ to the constant function with value $s^0(n)$ in bidegree $(0,0)$, because $ea$ is the given augmentation. The second is $\\delta s$, the very same map. Since $a$ is a quasi-isomorphism and $T$ is bounded below with injective terms (step 3), the homotopy-uniqueness lemma gives $te\\simeq\\delta b$ equivariantly. Applying additive invariants to $te-\\delta b=dH+Hd$ preserves this equation. Localization therefore gives\n$$Q(\\chi)\\,QF(te)=Q(v)\\,QF(b).$$",
+   "text": "Both $te$ and $\\delta b$ restrict along $a$ to $\\delta s$: for $te$ use $ea=\\operatorname{aug}$ and step 2, and for $\\delta b$ use $ba=s$. Apply [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy] to the quasi-isomorphism $a$ and the bounded-below injective target $T$ of step 1 to obtain $te\\simeq\\delta b$. Additivity of $F$ preserves $te-\\delta b=dH+Hd$; localization kills that homotopy. Thus $Q(\\chi)QF(te)=Q(v)QF(b)$, and step 2 gives $jQ(\\rho)=Q(v)QF(b)$.",
    "uses": [
     "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
-    "def-weil-abstract-derived-category",
-    "lem-sfb-condensed-derived-restriction-calculus"
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
@@ -123,7 +67,7 @@
    }
   },
   {
-   "text": "Naturality of the derived unit in [def-sfb-right-derived-functor] gives\n$$QF(b)=u_I^{-1}\\circ R F(Qb)\\circ u_K.$$\nSince $ba=s$ and $Qa$ is invertible, functoriality gives $R F(Qb)=R F(Qs)\\circ(R F(Qa))^{-1}$. Substitute this in step 8, and then use steps 5 and 6:\n$$j\\circ Q(\\rho)=Q(v)\\circ c_s\\circ(R F(Qa))^{-1}\\circ u_K=\\epsilon\\circ(R F(Qa))^{-1}\\circ u_K.$$\nOnly $I$ and the auxiliary $T$ were required to have injective terms. In particular, this argument imposed no acyclicity condition on the given $K^n$ or $R_N^n$.",
+   "text": "Naturality of the unit gives $QF(b)=u_I^{-1}RF(Qb)u_K$. From $ba=s$ and invertibility of $Qa$, $RF(Qb)=RF(Qs)(RF(Qa))^{-1}$. Hence $jQ(\\rho)=Q(v)u_I^{-1}RF(Qs)(RF(Qa))^{-1}u_K=\\epsilon(RF(Qa))^{-1}u_K$. Only the auxiliary complexes $I,T$ had injective terms; no acyclicity of $K^n$ or $R_N^n$ was used.",
    "uses": [
     "def-sfb-right-derived-functor",
     "def-weil-abstract-derived-category"
@@ -136,22 +80,13 @@
   }
  ],
  "proof_deps": [
+  "lem-sfb-homogeneous-injective-total-target",
   "lem-sfb-condensed-derived-restriction-calculus",
-  "lem-sp-grothendieck-enough-injectives",
-  "def-sp-injective-resolutions",
-  "lem-sp-kinjective-computes",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "lem-pc-sites-modules-j-shriek-flat",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-sp-right-adjoint-preserves-injectives",
-  "lem-sfb-internal-homogeneous-functions-injective",
-  "def-sp-double-complex-total",
-  "def-sfb-condensed-equivariant-bar-data",
-  "lem-sfb-condensed-derived-invariant-bar",
-  "def-sfb-right-derived-functor",
+  "lem-sfb-homogeneous-bar-coordinate-normalization",
   "lem-weil-pbc-lift-along-injective-quasi-iso",
   "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor"
  ],
  "proof_origin": {
   "by": "agent",
@@ -276,24 +211,12 @@
   "date": "2026-10-22",
   "item": "lem-sfb-equivariant-resolution-bar-normalization",
   "worker": "stage1",
-  "summary": "Compared all citations with their statements; constructed a common homogeneous injective target, used strict extension across the nonnegative augmentation, compared maps by Stacks 013S, and finished by the derived-unit naturality equation. One supporting injectivity lemma is new; the item statement is unchanged.",
-  "blueprint": "The current blueprint direct-images proof paragraph (3), open-immersion direct image, is the originating context. This agent-created chain has blueprint.from.node=null in the live import; its existing via chain is retained. Steps 1-5 supply the compatible normalized bar model; steps 6-9 prove the augmentation-preserving evaluation has that normalized arrow.",
+  "summary": "Repair of the 6238-character re-split return: two comparable statement-only nodes carry old steps 1-3 and 4-6, retaining all hypotheses, internal actions, coordinate formulas, total signs and augmentation normalization. The parent statement is unchanged and its five assembly steps retain old steps 7-9. Full old arguments and their assignment are preserved in report.md.",
+  "blueprint": "Current main-20261015 direct-images proof paragraph (3), open direct image, via the inherited agent-created normalization chain. Inherited null blueprint ancestor and via chain are retained; the two new nodes extend via by this item.",
   "tool_uses": [
    {
-    "node": "lem-sp-kinjective-computes",
-    "why": "Generic internal-module, injectivity, or derived-resolution tool used for the auxiliary comparison; it does not replace any geometric step of the direct-image unit."
-   },
-   {
-    "node": "lem-pc-sites-modules-j-shriek-flat",
-    "why": "Generic internal-module, injectivity, or derived-resolution tool used for the auxiliary comparison; it does not replace any geometric step of the direct-image unit."
-   },
-   {
-    "node": "lem-pc-sheaf-modules-tensor-closed",
-    "why": "Generic internal-module, injectivity, or derived-resolution tool used for the auxiliary comparison; it does not replace any geometric step of the direct-image unit."
-   },
-   {
     "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
-    "why": "Generic internal-module, injectivity, or derived-resolution tool used for the auxiliary comparison; it does not replace any geometric step of the direct-image unit."
+    "why": "Generic bounded-below injective-target homotopy comparison (Stacks 013S); no geometric route is replaced."
    }
   ]
  },
@@ -304,12 +227,12 @@
   "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q10-3c6872baf",
-  "group": "Q10",
+  "reviewer": "NT-cc-Q79-f67550d80",
+  "group": "Q79",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-3c6872baf (reviewer sub-agent of L); spot-checked: I read the item, all nine steps, the new node and the cited statements in full. On the base the item had an empty proof; it was created by Q06 on 2026-10-22 for the polynomial-bar node, so it is not a 2026-10-21 re-split and is not on the dropped list. No SGA is cited. Step-by-step checks: (1) Grothendieck abelian with enough injectives gives an equivariant injective resolution s:N[0]->I, which is K-injective by lem-sp-kinjective-computes (2). (2) A[S]=j_{S!}A_S by the universal property, so it is flat by 03EV (read). L=A[G](x)- with translation is an exact left adjoint of U, and its transpose formulas are correct. By 015Z (read), U preserves injectives. (3) T^{p,q}=Hom(A[G^{p+1}],UI^q) with diagonal and value action; its terms are injective by the new node, and finite biproducts of injectives are injective. delta is the constant function, and its horizontal differential x-x=0. (4) chi(f)=f(1,g1,g1g2,...) with inverse h0.c(h0^{-1}h1,...); I checked invariance and that the first face equals g1.c(g2,...), the bar-data first face. (5) eps=Q(v)c_s is exactly the bar-data computation datum, which is normalized by the total augmentation and is Assertion(G) of the bar node. j is modeled as postcomposition with s^0; it is a chain map since s^0 is equivariant and N is trivial. (6) t is a chain map since d_I s^0=0. It is equivariant because N is trivial. chi F(te)=j rho holds coordinatewise. (7) a^0 is monic because K^{-1}=0 gives H^0=ker d^0, which satisfies the hypothesis of the 013P(2) lift lemma (read). (8) te.a=delta.s=const s^0 n, so te and delta b are homotopic by 013S (read). (9) Unit naturality and RF(Qb)=RF(Qs)RF(Qa)^{-1} give the stated equality exactly, with no acyclicity of K^n or R_N^n used. New node lem-sfb-internal-homogeneous-functions-injective: it is true, since H_n(J) is isomorphic to the coinduction of Hom(A[G^n],UJ) (I checked the untwisting). Coinduction is right adjoint to the exact U, and Hom(A[G^n],UJ) is injective by flatness. Small cases: G=1 gives UJ (the hypothesis), n=0 gives the twisted coinduced module, and J=0 gives 0. It is statement-only, self-contained, and strictly smaller than the item. The rg -L duplicate search found no duplicate: the lem-exc-coinduced-* nodes are about discrete modules over finite rings, and lem-sfb-condensed-internal-bar-resolution states exactness and the induced-module form, not injectivity. tool_uses (kinjective-computes, j-shriek-flat, tensor-closed, lift-unique-homotopy) are generic black-box homological tools and accepted. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-f67550d80 (reviewer sub-agent of L); spot-checked: Re-split of 2026-10-21 (released note 2026-10-22) done correctly. Live still has the 9-step Q10 proof and neither new node, so the delivery is not superseded. The item statement and stmt_deps are unchanged, and proof_deps equals the union of the uses. All old arguments are kept. Old steps 1-3 are in lem-sfb-homogeneous-injective-total-target: the resolution, j_! flatness (03EV), the exact left adjoint A[G]⊗− so that U preserves injectives (015Z, direction checked), the homogeneous T^{p,q}, injectivity of T^n and the constants δ. Old steps 4-6 are in lem-sfb-homogeneous-bar-coordinate-normalization: χ and χ^{-1} checked inverse via f(gh)=gf(h), the face formulas, the p=0 face gc−c, ε=Q(v)u_I^{-1}RF(Qs) matching the bar-data augmentation normalization, t and j_chain equivariant and cochain maps since s^0 is equivariant, N is trivial and d s^0=0, and χF(te)=j_chain ρ componentwise. Old steps 7-9 stay as parent steps 3-5, which only apply cited nodes: a^0 monic from K^{-1}=0 and the 013P(2) lift; te∘a=δs=δb∘a and the 013S homotopy; unit naturality and RF(Qb)=RF(Qs)RF(Qa)^{-1}. Composition types match. The two nodes are of comparable size (2256 and 2922 characters, three old steps each), self-contained, statement-only, with 6 real searches each, and neither restates the item. Parent proof: 1747 characters. Duplicate checks: lem-sfb-topological-homogeneous-cochain-coordinates is the topological-vector-space analogue, not internal condensed modules, so not a duplicate. Advisory: def-sfb-relative-derived-invariants already asserts that action-forgetting preserves injectives for profinite G; the worker who proves the injective-total-target node may cite it. No SGA; accepted tool_use lift-to-injective-unique-up-to-homotopy (013S). No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.EquivariantResolutionBarNormalization",
@@ -339,5 +262,17 @@
   "group": "NS",
   "result": "pass",
   "note": "Re-delivery of ab4904d3c220 H2 RETURN, done as instructed: new def-sfb-condensed-homogeneous-functions (existing:true) records homogeneousHom/homogeneousEvaluate/HomogeneousFunctions in the UNCHANGED module CondensedHomogeneousFunctionsInjective and replaces the theorem stmt_dep; the theorem stays in proof_deps; no dependency record touched (no ef6f2b collision). Item Lean byte-identical to ab4904 (sha256 c5fe4b92); only the item's stmt_deps changed. check_existing and check_new_node clean; the new node's stmt_deps cover every declaration its definitions use; no cycle; every declaration in the item statement comes from a stmt_dep. Maths re-read: homogeneous bar action/differential/augmentation pinned on slices; rho pinned via prefixTuple evaluation; j pinned via I.ι.f 0 into the (n,0) summand; epsilon = M.computation.iso I; u_K = rightDerivedFunctorUnitQ; diagrammatic composition order matches the node; equality in the derived category; no acyclicity assumed; edge cases n=0, trivial/noncommutative G, N=0, zero ring, empty test space covered. Docstrings carry the source and all nine proof steps; the only sorry is the theorem proof. No compile (no file changed). Advisory: the injectivity theorem node should later cite the new def node."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

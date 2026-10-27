@@ -1,0 +1,129 @@
+{
+ "id": "lem-sp-finite-p1-diagonal-picard",
+ "kind": "statement",
+ "title": "Picard class of the projective-line diagonal under either chart",
+ "statement": "For every scheme S, either canonical projection chart from P1 over P1_S to P1_S ×_S P1_S pulls the dual of the invertible diagonal ideal to the tensor product of the relative O(1) with the pullback of O(1) on P1_S. The equality is in the actual scheme Picard group, without any coefficient or cohomology assertion [def-sp-p1-diagonal-charts, def-pc-divisor-line-bundle, lem-weil-pbc-projective-space-standard-charts].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise finite diagonal calculation, expanded in lem-sp-finite-p1-diagonal-kummer-component-formula"
+ },
+ "stmt_deps": [
+  "def-sp-p1-diagonal-charts",
+  "def-pc-divisor-line-bundle",
+  "lem-weil-pbc-projective-space-standard-charts"
+ ],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "proof": [
+  {
+   "text": "Form the global section x0 tensor y1 minus x1 tensor y0 of p1*O(1) tensor p2*O(1). On an affine subopen of the product chart (i,j), the pulled coordinate sections are scalar multiples of the pulled i-th and j-th free generators, with scalars the coordinate ratios. Bilinearity computes its coefficient as the normalized determinant. The local diagonal-ideal formula therefore identifies its zero scheme with the actual diagonal kernel ideal. Equality on these affine opens implies equality globally because they cover the product.",
+   "uses": [
+    "lem-sp-p1-diagonal-local-ideal",
+    "lem-weil-pbc-projective-space-standard-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved general divisor-line correspondence to this section, using the supplied Cartier hypothesis hI. Its source is the unit, so the right unitor identifies the resulting divisor line with the external tensor product. Passing to Picard classes gives [O(Delta)]=p1*[O(1)] times p2*[O(1)].",
+   "uses": [
+    "lem-pc-zero-scheme-divisor-iso",
+    "def-pc-divisor-line-bundle",
+    "lem-sc-pic-group"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull this equality through the canonical chart. The two composites with the product projections are the structure map and the projective-space base-change map, in opposite orders for the two Boolean choices. PullbackMapTwistIso identifies the pullback along the base-change map with relative O(1); functoriality and commutativity in Pic give the stated equality in both cases.",
+   "uses": [
+    "def-sp-p1-diagonal-charts",
+    "def-pc-projective-space-twist",
+    "lem-sc-pic-group"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-p1-diagonal-local-ideal",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-pc-zero-scheme-divisor-iso",
+  "def-pc-divisor-line-bundle",
+  "lem-sc-pic-group",
+  "def-sp-p1-diagonal-charts",
+  "def-pc-projective-space-twist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/lem-amb-p1-diagonal-integrals.proof.md",
+  "place": "First sentence: the diagonal equation x0*y1-x1*y0=0, expanded on the four standard product charts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Kummer Chern class of the diagonal of the projective line over any base is the sum of the two hyperplane Chern classes",
+   "results": "Only unrelated elliptic-curve/projectivization results.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "CategoryTheory.Adjunction.homEquiv_naturality_left.",
+   "date": "2026-10-26",
+   "verdict": "Available for adjunct algebra, not the geometric or scalar Kummer comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinaryFiniteClass|diagonal.*chern|chern.*diagonal",
+   "results": "No Mathlib match. Local source search found arbitrary-base bijectivity and supported normalization, but not the diagonal Picard identity or the normalized scalar Kummer pullback formula.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing comparison and normalization; separate the two missing steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteP1DiagonalKummerComponentFormula",
+  "date": "2026-10-26",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-finite-p1-diagonal-kummer-component-formula",
+   "place": "Picard class of the projective-line diagonal under either chart",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteP1DiagonalPicard",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteP1DiagonalPicard.lean",
+  "declaration": "AlgebraicGeometry.Etale.finiteP1_diagonal_picard",
+  "statement": "theorem finiteP1_diagonal_picard (S : Scheme.{u})\n    (hI : (pullback.diagonal (ProjectiveLine S ↘ S)).ker.IsInvertible) (a : Bool) :\n    letI := hI.isInvertible_dual_toModules\n    Scheme.Pic.map (projectiveLineDiagonalChart S a).val.hom\n        (Scheme.Pic.ofIsInvertible\n          (Scheme.Modules.dual (pullback.diagonal (ProjectiveLine S ↘ S)).ker.toModules)) =\n      Scheme.Pic.ofIsInvertible\n          (ProjectiveSpace.twist (ULift.{u} (Fin 2)) (ProjectiveLine S) 1) *\n        Scheme.Pic.map (ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S)\n          (Scheme.Pic.ofIsInvertible (ProjectiveSpace.twist (ULift.{u} (Fin 2)) S 1))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-efdbd",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261026T222636-L-676965",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T235919-L-1468262",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

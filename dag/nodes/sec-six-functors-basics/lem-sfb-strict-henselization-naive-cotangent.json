@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-strict-henselization-naive-cotangent",
+ "kind": "statement",
+ "title": "Naive cotangent comparison under strict henselization of local rings",
+ "statement": "Let $A\\to B$ be a local homomorphism of commutative local rings (the inverse image of the maximal ideal of $B$ is the maximal ideal of $A$). Choose separable closures $k_A^{\\mathrm{sep}}$, $k_B^{\\mathrm{sep}}$ of their residue fields and a compatible embedding $k_A^{\\mathrm{sep}}\\to k_B^{\\mathrm{sep}}$ extending the residue map [def-pd-separable-closure, def-weil-residue-field]. Let $A^{\\mathrm{sh}}$, $B^{\\mathrm{sh}}$ be the strict henselizations relative to these choices [def-sc-ring-strict-henselization], with the induced local homomorphism $A^{\\mathrm{sh}}\\to B^{\\mathrm{sh}}$ respecting the residue embeddings. For any ring map $R\\to T$, put $P=R[x_t\\mid t\\in T]$, $I=\\ker(P\\to T)$ with $x_t\\mapsto t$, and $\\mathrm{NL}_{T/R}=[I/I^2\\xrightarrow{[h]\\mapsto\\mathrm dh\\otimes1}\\Omega_{P/R}\\otimes_P T]$ in degrees $-1,0$ [def-weil-pbc-mv-polynomial-ring, def-weil-pbc-kahler-differentials, def-weil-pbc-module-tensor-product]. The canonical map induced by the square of ring homomorphisms gives an isomorphism\n$$\\mathrm{NL}_{B/A}\\otimes_B B^{\\mathrm{sh}}\\xrightarrow{\\sim}\\mathrm{NL}_{B^{\\mathrm{sh}}/A^{\\mathrm{sh}}}\\quad\\text{in }D(\\operatorname{Mod}(B^{\\mathrm{sh}}))$$\n[def-weil-abstract-derived-category]. The left side uses ordinary termwise tensor product. No Noetherian, finite-type or flatness hypothesis on $A\\to B$ is required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0D08, lemma-henselization-NL, strict-henselization clause."
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "def-weil-residue-field",
+  "def-sc-ring-strict-henselization",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $A_s=A^{\\mathrm{sh}}$ and $B_s=B^{\\mathrm{sh}}$. By [def-sc-ring-strict-henselization], $A_s$ is the colimit, as an $A$-algebra, of the forgetful diagram on the category of pairs $(S,\\chi)$ with $S$ an etale $A$-algebra and $\\chi:S\\to k_A^{\\mathrm{sep}}$ an $A$-algebra map; this is the full subcategory of etale $A$-algebras in the over-category of $k_A^{\\mathrm{sep}}$, which is filtered by [lem-sc-pointed-etale-filtered] (applied to the local ring $A$ and the separable closure $k_A^{\\mathrm{sep}}$). Hence $A_s$ is a filtered colimit of etale $A$-algebras, and in the same way, with $B$ and $k_B^{\\mathrm{sep}}$, $B_s$ is a filtered colimit of etale $B$-algebras. Each stage is finitely presented by [lem-weil-pbc-etale-algebra-finite-presentation-localization](1). This is the ind-etale condition [def-weil-pbc-ind-etale-algebra]. By [lem-sfb-ind-etale-naive-cotangent-acyclic], the differentials of $\\mathrm{NL}_{A_s/A}$ and $\\mathrm{NL}_{B_s/B}$ are isomorphisms. The first remains an isomorphism after termwise tensor with $B_s$, since a functor sends an inverse to an inverse. Thus $H^{-1}(\\mathrm{NL}_{A_s/A}\\otimes_{A_s}B_s)=0$, $\\Omega_{A_s/A}=0$, and $H^{-1}(\\mathrm{NL}_{B_s/B})=\\Omega_{B_s/B}=0$; the identifications of cokernels with differentials are [lem-weil-pbc-naive-cotangent-complex-cokernel-kahler].",
+   "uses": [
+    "def-sc-ring-strict-henselization",
+    "lem-sc-pointed-etale-filtered",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-sfb-ind-etale-naive-cotangent-acyclic",
+    "lem-weil-pbc-naive-cotangent-complex-cokernel-kahler"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D08 (lemma-henselization-NL), first paragraph, strict-henselization case."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-jacobi-zariski-homology-sequence] to $A\\to A_s\\to B_s$. Its first term and its fourth term vanish by step 1. Exactness therefore makes the canonical map $H^{-1}(\\mathrm{NL}_{B_s/A})\\to H^{-1}(\\mathrm{NL}_{B_s/A_s})$ both injective and surjective: its kernel is the image of the zero first term and its cokernel maps injectively into the zero fourth term. The same sequence ends in $0\\to\\Omega_{B_s/A}\\to\\Omega_{B_s/A_s}\\to0$. Hence the coefficient-change chain map $v:\\mathrm{NL}_{B_s/A}\\to\\mathrm{NL}_{B_s/A_s}$ is an isomorphism on both cohomology groups.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-homology-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D08 (lemma-henselization-NL), Jacobi-Zariski for A to its strict henselization to the strict henselization of B."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-jacobi-zariski-homology-sequence] to $A\\to B\\to B_s$. The canonical map $u:\\mathrm{NL}_{B/A}\\otimes_B B_s\\to\\mathrm{NL}_{B_s/A}$ is surjective on $H^{-1}$ because the following term $H^{-1}(\\mathrm{NL}_{B_s/B})$ is zero. It is injective on $H^{-1}$ by [lem-sfb-ind-etale-jacobi-zariski-left-injective], using the ind-etale final map proved in step 1. The same exact sequence and the two vanishings for $B_s/B$ give $\\Omega_{B/A}\\otimes_B B_s\\cong\\Omega_{B_s/A}$. By [lem-weil-pbc-naive-cotangent-complex-cokernel-kahler] and [lem-weil-pbc-tensor-right-exact], these are precisely the degree-zero cohomology modules of the source and target of $u$, with the same induced map. Thus $u$ is an isomorphism on both cohomology groups. No replacement of $H^{-1}(\\mathrm{NL}\\otimes B_s)$ by $H^{-1}(\\mathrm{NL})\\otimes B_s$ is used.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-homology-sequence",
+    "lem-sfb-ind-etale-jacobi-zariski-left-injective",
+    "lem-weil-pbc-naive-cotangent-complex-cokernel-kahler",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D08 (lemma-henselization-NL), six-term sequence for A to B to its strict henselization."
+   }
+  },
+  {
+   "text": "The composite $vu$ is the specified square-induced chain map. On polynomial presentations it sends coefficients $a$ to their images in $A_s$ and sends $x_b$ to $x_{\\bar b}$, where $\\bar b$ is the image of $b$ in $B_s$. On conormal elements it sends $[g]\\otimes c$ to $c[g^{\\sharp}]$, and on differential symbols it sends $\\mathrm dx_b\\otimes c$ to $c\\,\\mathrm dx_{\\bar b}$. These are exactly the formulas obtained by composing the two maps. Both maps induce isomorphisms in degrees $-1,0$ by steps 2 and 3; all other cohomology groups are zero because the complexes have only these two terms. Hence $vu$ is a quasi-isomorphism. The localization defining $D(\\operatorname{Mod}(B_s))$ in [def-weil-abstract-derived-category] inverts it and gives the asserted isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D08 (lemma-henselization-NL), composition of the two canonical maps, concluding sentence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ring-strict-henselization",
+  "lem-sc-pointed-etale-filtered",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-sfb-ind-etale-naive-cotangent-acyclic",
+  "lem-weil-pbc-naive-cotangent-complex-cokernel-kahler",
+  "lem-weil-pbc-jacobi-zariski-homology-sequence",
+  "lem-sfb-ind-etale-jacobi-zariski-left-injective",
+  "lem-weil-pbc-tensor-right-exact",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0D08 (lemma-henselization-NL), strict-henselization case, with the two Jacobi-Zariski sequences spelled out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a local homomorphism A to B the naive cotangent complex base changed to the strict henselization of B is quasi isomorphic to the naive cotangent complex of strict henselizations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (S' : Type u_2) →\\n            [inst_3 : CommRing S'] →\\n              [inst_4 : Algebra R S'] →\\n                (T : Type w) →\\n                  [inst_5 : CommRing T] →\\n \", \"doc\": \"The $ S' $-linear map from the first cotangent cohomology module of $ R \\to S' $ to that of $ S \\to T $, induced by the canonical algebra homomorphism between the generator-based extensions of $ S' $ an\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (A : Type u_1) [inst_3 : CommRing A] [inst_4 : Algebra S A] [inst_5 : Algebra P.Ring A]\\n  [inst_6 : IsScalarTower P.Ring S A],\\n  LinearMap.baseChange A P.cotangentComplex =\\n    \", \"doc\": \"The base change of the cotangent complex of an algebra extension $ P $ to a ring $ A $ is equal to the composition of three maps: the inverse of the base change cancellation isomorphism for the algebr\"}\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n  {\"name\": \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (A : Type u_1) [inst_3 : CommRing A] [inst_4 : Algebra S A] [inst_5 : Algebra P.Ring A]\\n  [inst_6 : IsScalarTower P.Ring S A],\\n  KaehlerDifferential.cotangentComplexBaseChange R\", \"doc\": \"The base change of the cotangent complex from $ R $ to $ S $ over $ P $, when extended by $ A $, is equal to the composition of the tensor product of $ A $ with the cotangent complex of $ P $ over $ R\"}\n  {\"name\": \"Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} {ι : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (g : S) [inst_7 : IsLocalization.Away g T] (P : Algebra.Generators R S\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ R $-algebra structures on $ S $ and $ T $, and an $ S $-algebra structure on $ T $ satisfying the scalar tower condition $ R \\\\to S \\\\to T $, if $ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: localization and formally etale comparison lemmas need additional presentation and kernel identifications; no simultaneous strict-henselization theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselization preserves the first cotangent homology and Kahler differentials by scalar extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {R' : Type u'} →\\n            {S' : Type v'} →\\n              [inst_3 : CommRing R'] →\\n                [inst_4 : CommRing S'] →\\n                  [inst_5 : Algebra R' S'] \", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P') $, induced by an algebra extension homomorphism $ f: P \\to P' $, which preserves the $ S $-module structure through sca\"}\n  {\"name\": \"Algebra.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (S' : Type u_2) →\\n            [inst_3 : CommRing S'] →\\n              [inst_4 : Algebra R S'] →\\n                (T : Type w) →\\n                  [inst_5 : CommRing T] →\\n \", \"doc\": \"The $ S' $-linear map from the first cotangent cohomology module of $ R \\to S' $ to that of $ S \\to T $, induced by the canonical algebra homomorphism between the generator-based extensions of $ S' $ an\"}\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_eq\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {R' : Type u'}\\n  {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S'] {P' : Algebra.Extension R' S'}\\n  [inst_6 : Algebra R R'] [inst_7 : Algebra S S'] [inst_8 : Algebra R S']\", \"doc\": \"For algebra extension homomorphisms $ f, g : P \\\\to P' $, the induced linear maps on the first cotangent cohomology modules $ H^1(P) \\\\to H^1(P') $ are equal whenever $ f = g $.\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {P : Algebra.Extension R S} →\\n            {R' : Type u'} →\\n              {S' : Type v'} →\\n                [inst_3 : CommRing R'] →\\n                  [inst_4 : CommRing S\", \"doc\": \"Given an algebra extension homomorphism $ f : P \\to P' $, this constructs the induced linear map $ P.\\text{CotangentSpace} \\to P'.\\text{CotangentSpace} $ over $ S $, defined by restricting scalars and com\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex_mk\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (x : ↥P.ker), P.cotangentComplex (Algebra.Extension.Cotangent.mk x) = 1 ⊗ₜ[P.Ring] (KaehlerDifferential.D R P.Ring) ↑x\", \"doc\": \"The module of Kähler differentials $\\\\Omega_{S/R}$ for an $R$-algebra $S$ inherits the structure of an additive commutative group from its module structure over $S$. This group operation is induced by \"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.Extension.tensorCotangentSpace\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given a formally étale ring homomorphism $ f: P \\\\to Q $ between commutative rings, this constructs a linear equivalence between the tensor product $ T \\\\otimes_S P.\\\\text{CotangentSpace} $ and $ Q.\\\\text\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: localization and formally etale comparison lemmas need additional presentation and kernel identifications; no simultaneous strict-henselization theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cotangent\", \"Hensel\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: localization and formally etale comparison lemmas need additional presentation and kernel identifications; no simultaneous strict-henselization theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*cotangent|cotangent.*hensel",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: localization and formally etale comparison lemmas need additional presentation and kernel identifications; no simultaneous strict-henselization theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naive cotangent complex is invariant under simultaneous strict henselization of local rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.tensorH1CotangentOfIsLocalization\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"(M : Submonoid S) [IsLocalization M T] : T ⊗[S] H1Cotangent R S ≃ₗ[T] H1Cotangent R T\", \"doc\": \"Let $R \\\\to S \\\\to T$ be homomorphisms of commutative rings, where $T$ is the localization of $S$ at a multiplicative submonoid $M \\\\subseteq S$. Then the first cotangent cohomology module commutes with \"}\n  {\"name\": \"IsLocalRing.subsingleton_cotangentSpace_iff\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"[IsNoetherianRing R] : Subsingleton (CotangentSpace R) ↔ IsField R\", \"doc\": \"For a Noetherian local ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ is trivial (i.e., a subsingleton) if and only if $ R $ is a field, where $ \\\\mathfrak{m} $ denotes the unique maxi\"}\n  {\"name\": \"Algebra.tensorH1CotangentOfIsLocalization.congr_simp\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  (M M_1 : Submonoid S) (e_M : M = M_1) [inst_7 : IsLocalization M T],\\n  Algebra.tensor\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with compatible algebra structures, if $M$ and $M_1$ are equal submonoids of $S$ and $T$ is the localization of $S$ at $M$ (or $M_1$), then the tensor product\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": P.Cotangent →ₗ[S] P.CotangentSpace\", \"doc\": \"The linear map from the cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the cotangent space $S \\\\otimes_R \\\\Omega_{S/R}$ of an $R$-algebra extension $S$, constructed by composing the canonical isomorphism\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_apply_coe\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {R' : Type u'}\\n  {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S'] {P' : Algebra.Extension R' S'}\\n  [inst_6 : Algebra R R'] [inst_7 : Algebra S S'] [inst_8 : Algebra R S']\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and an algebra extension homomorphism $ f: P \\to P' $, the first cotangent cohomology map $ H^1(P) \\to H^1(P') $ satisfies $ \\\\io\"}\n  {\"name\": \"Algebra.Generators.cotangentCompLocalizationAwayEquiv.congr_simp\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.LocalizationAway\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} {ι : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (g : S) [inst_7 : IsLocalization.Away g T] (P : Algebra.Generators R S\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ R $-algebra structures on $ S $ and $ T $, and an $ S $-algebra structure on $ T $ satisfying the scalar tower condition $ R \\\\to S \\\\to T $, if $ \"}\n  {\"name\": \"Algebra.Extension.cotangentComplex_injective_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(P : Extension R A) [FormallySmooth R P.Ring] :\\n  Function.Injective P.cotangentComplex ↔ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For an $ R $-algebra extension $ P $, the cotangent complex map $ P.\\text{cotangentComplex} $ is injective if and only if the first cohomology group $ \\text{Algebra.H1Cotangent}(R, A) $ is trivial (i.e.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: localization and formally etale comparison lemmas need additional presentation and kernel identifications; no simultaneous strict-henselization theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naive cotangent complex comparison under simultaneous strict henselization of local rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentEquiv_apply\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) (a : P.toExtension.Cotangent)\\n  (a_1 : σ), P.cotangentEquiv a a_1 = P.cotangentComplexAux a a_1\", \"doc\": \"For a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, there exists a linear isomorphism between the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ (where $ \\\\phi:\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  {R' : Type u'} {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S']\\n  {P' : Algebra.Extension R' S'} [inst_6 : Algebra R R'] [inst_7 : Algebra S\", \"doc\": \"For any algebra extension homomorphism $ f : P \\\\to P' $, the induced linear map on cotangent spaces satisfies $ \\\\text{CotangentSpace.map}(f) \\\\circ \\\\text{cotangentComplex}_P = \\\\text{cotangentComplex}_{\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_eq\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {R' : Type u'}\\n  {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S'] {P' : Algebra.Extension R' S'}\\n  [inst_6 : Algebra R R'] [inst_7 : Algebra S S'] [inst_8 : Algebra R S']\", \"doc\": \"For algebra extension homomorphisms $ f, g : P \\\\to P' $, the induced linear maps on the first cotangent cohomology modules $ H^1(P) \\\\to H^1(P') $ are equal whenever $ f = g $.\"}\n  {\"name\": \"Algebra.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (S' : Type u_2) →\\n            [inst_3 : CommRing S'] →\\n              [inst_4 : Algebra R S'] →\\n                (T : Type w) →\\n                  [inst_5 : CommRing T] →\\n \", \"doc\": \"The $ S' $-linear map from the first cotangent cohomology module of $ R \\to S' $ to that of $ S \\to T $, induced by the canonical algebra homomorphism between the generator-based extensions of $ S' $ an\"}\n  {\"name\": \"Algebra.Extension.Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {P : Algebra.Extension R S} →\\n            {R' : Type u_1} →\\n              {S' : Type u_2} →\\n                [inst_3 : CommRing R'] →\\n                  [inst_4 : CommRing\", \"doc\": \"Given compatible algebra structures and a scalar tower condition $ R \\\\to R' \\\\to S' $, this linear map sends elements of the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ of an algebra extension $ P $ t\"}\n  {\"name\": \"Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} {ι : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (g : S) [inst_7 : IsLocalization.Away g T] (P : Algebra.Generators R S\", \"doc\": \"For commutative rings $ R $, $ S $, and $ T $ with compatible algebra structures and scalar tower $ R \\\\to S \\\\to T $, if $ T $ is the localization of $ S $ at an element $ g $, then the composition of \"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_comp_cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  {R' : Type u'} {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S']\\n  {P' : Algebra.Extension R' S'} [inst_6 : Algebra R R'] [inst_7 : Algebra S\", \"doc\": \"For an algebra extension homomorphism $ f : P \\to P' $, the composition of the cotangent space map $ \\text{CotangentSpace.map}(f) $ with the cotangent complex $ P.\\text{cotangentComplex} $ equals the com\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern localization, presentation maps or formal smoothness, not simultaneous strict henselization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict henselization preserves the naive cotangent complex by scalar extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent.map\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"(f : Hom P P') : P.H1Cotangent →ₗ[S] P'.H1Cotangent\", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P') $, induced by an algebra extension homomorphism $ f: P \\to P' $, which preserves the $ S $-module structure through sca\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_comp_cotangentComplex\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"(f : Hom P P') : CotangentSpace.map f ∘ₗ P.cotangentComplex = P'.cotangentComplex.restrictScalars S ∘ₗ Cotangent.map f\", \"doc\": \"For an algebra extension homomorphism $ f : P \\to P' $, the composition of the cotangent space map $ \\text{CotangentSpace.map}(f) $ with the cotangent complex $ P.\\text{cotangentComplex} $ equals the com\"}\n  {\"name\": \"Algebra.Extension.Cotangent.map\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \"(f : Hom P P') : P.Cotangent →ₗ[S] P'.Cotangent\", \"doc\": \"Given compatible algebra structures and a scalar tower condition $ R \\\\to R' \\\\to S' $, this linear map sends elements of the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ of an algebra extension $ P $ t\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": P.Cotangent →ₗ[S] P.CotangentSpace\", \"doc\": \"The linear map from the cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the cotangent space $S \\\\otimes_R \\\\Omega_{S/R}$ of an $R$-algebra extension $S$, constructed by composing the canonical isomorphism\"}\n  {\"name\": \"Algebra.Extension.Cotangent.map_mk\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \"(f : Hom P P') (x) :\\n  Cotangent.map f (.mk x) = .mk ⟨f.toAlgHom x, by simpa [-map_aeval] using RingHom.congr_arg (algebraMap S S') x.2⟩\", \"doc\": \"Given compatible algebra structures and a scalar tower condition $ R \\\\to R' \\\\to S' $, for an algebra extension homomorphism $ f: P \\\\to P' $, the induced cotangent module homomorphism sends the equival\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"(f : Hom P P') : P.CotangentSpace →ₗ[S] P'.CotangentSpace\", \"doc\": \"Given an algebra extension homomorphism $ f : P \\to P' $, this constructs the induced linear map $ P.\\text{CotangentSpace} \\to P'.\\text{CotangentSpace} $ over $ S $, defined by restricting scalars and com\"}\n  {\"name\": \"Algebra.tensorH1CotangentOfIsLocalization\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"(M : Submonoid S) [IsLocalization M T] : T ⊗[S] H1Cotangent R S ≃ₗ[T] H1Cotangent R T\", \"doc\": \"Let $R \\\\to S \\\\to T$ be homomorphisms of commutative rings, where $T$ is the localization of $S$ at a multiplicative submonoid $M \\\\subseteq S$. Then the first cotangent cohomology module commutes with \"}\n  {\"name\": \"KaehlerDifferential.cotangentComplexBaseChange_tmul\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"{P A : Type*} [CommRing P] [CommRing A] [Algebra P S] [Algebra P A] [Algebra R P] [Algebra S A] [IsScalarTower P S A]\\n  (a b) :\\n  cotangentComplexBaseChange R S P A (a ⊗ₜ b) =\\n    a • kerToTensor R P A ⟨b.1, by rw [IsScalarTower.algebraMap_eq P S A]; aesop⟩\", \"doc\": \"Given commutative rings $P, S, A$ with compatible algebra structures and a scalar tower condition $P \\\\to S \\\\to A$, the cotangent complex base change of the tensor product $a \\\\otimes b$ equals the scal\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern localization, presentation maps or formal smoothness, not simultaneous strict henselization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cotangent\", \"Hensel\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern localization, presentation maps or formal smoothness, not simultaneous strict henselization."
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*cotangent|cotangent.*hensel",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern localization, presentation maps or formal smoothness, not simultaneous strict henselization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-naive-cotangent-etale-comparison",
+  "date": "2026-10-23",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting alteration chain recorded in the item: coherent naive cotangent cohomology via the scheme-to-space comparison, Stacks Tag 0D0X; the final local algebra input in the proof of Tag 0D0X.",
+   "via": [
+    "lem-sfb-scheme-naive-cotangent-etale-comparison",
+    "lem-sfb-affine-etale-naive-cotangent-presentation",
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-strict-henselization-naive-cotangent",
+  "worker": "stage1",
+  "summary": "Preserved the statement and followed Stacks 0D08 using two explicit Jacobi-Zariski sequences. Reused pointed-etale filteredness (for the strict henselization of def-sc-ring-strict-henselization), Jacobi-Zariski, cokernel-Kahler and tensor right-exactness. Created only ind-etale acyclicity and ind-etale left injectivity as statement-only inputs; no flatness or Noetherian assumption is added.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting alteration chain recorded in the item: coherent naive cotangent cohomology via the scheme-to-space comparison, Stacks Tag 0D0X; the final local algebra input in the proof of Tag 0D0X. Realizes the local algebra input to Tag 0D0X through Tag 0D08; latest blueprint direct-images proof (3) is unchanged. Searches for henselization, cotangent, Jacobi, ind-etale, 07BQ, 07D5 and left injectivity found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-jacobi-zariski-homology-sequence",
+    "why": "Generic commutative algebra transitivity sequence explicitly required by Tag 0D08; no node in the unit supplies it."
+   },
+   {
+    "node": "lem-sc-pointed-etale-filtered",
+    "why": "Lean-closed generic local algebra fact: the pointed etale algebras indexing def-sc-ring-strict-henselization form a filtered category, so the strict henselization is ind-etale; no node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-jacobi-zariski-homology-sequence",
+  "lem-sc-pointed-etale-filtered"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-b880b6727",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-b880b6727 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, against Stacks 0D08 (more-algebra lemma-henselization-NL), 07D4/07D5 (lemma-transitive-lci-at-end, lemma-transitive-colimit-lci-at-end), 07BQ, 00U1 and 00U9. The item is still unsplit on live and side-live, there is no repair note, the statement and stmt_deps are byte-identical to side-live, and there is no SGA source. One fault, fixed (C3/C4): step 1 took 'A^sh is a filtered colimit of etale algebras' from lem-weil-pbc-strict-henselization-triples. That node's clauses only concern its own triples colimit; the identification with the def-sc-ring-strict-henselization colimit over pointed pairs is a parenthetical, absent from its Lean statement. The fix cites def-sc-ring-strict-henselization plus the Lean-closed lem-sc-pointed-etale-filtered (the pointed etale algebras form a filtered category), updates proof_deps, and replaces the triples tool use with this node. Steps 2-4 are correct. In step 2, the Jacobi-Zariski sequence for A->A_s->B_s has first and fourth terms 0, so v is an isomorphism on H^{-1} and on Omega. In step 3, H_1(B_s/B)=0 gives surjectivity, the new left-injective node gives injectivity, and on H^0 the map is Omega_{B/A}⊗B_s ≅ Omega_{B_s/A} via cokernel-Kahler and right exactness of tensor; there is no H_1⊗ swap. Step 4: v∘u is the square map, a quasi-isomorphism of two-term complexes, which the localization inverts. New node lem-sfb-ind-etale-naive-cotangent-acyclic is true (etale gives NL≃0, 07BQ with a constant base and exact filtered colimits); tested on R_f, R×R and a separable closure; not a duplicate of directed-union-cotangent-h1, the etale-at-prime criterion or etale-iff-affine. New node lem-sfb-ind-etale-jacobi-zariski-left-injective is true by 07D5 (etale ⇒ standard smooth ⇒ lci, then colimit); tested on C=B, C=B_f and C=0; the regular-sequence left-injective node needs a global regular presentation and is not a one-line generalization. Neither new node restates the item. The Mathlib searches are recorded and I re-grepped Mathlib: no match. I accept the tool uses jacobi-zariski-homology-sequence and lem-sc-pointed-etale-filtered. Advisory: blueprint.from.node is null, a fault inherited from the parent chain.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StrictHenselizationNaiveCotangent",
+  "declaration": "Algebra.strictHenselization_naiveCotangent_iso",
+  "file": "lean/Sheaf/RingTheory/StrictHenselizationNaiveCotangent.lean",
+  "statement": "theorem strictHenselization_naiveCotangent_iso {A : Type u} {B : Type v} {KA KB As Bs : Type (max u v t)} [CommRing A] [CommRing B] [IsLocalRing A] [IsLocalRing B] [Algebra A B] [IsLocalHom (algebraMap A B)] [Field KA] [Field KB] [Algebra (IsLocalRing.ResidueField A) KA] [IsSepClosure (IsLocalRing.ResidueField A) KA] [Algebra (IsLocalRing.ResidueField B) KB] [IsSepClosure (IsLocalRing.ResidueField B) KB] [Algebra A KA] [IsScalarTower A (IsLocalRing.ResidueField A) KA] [Algebra B KB] [IsScalarTower B (IsLocalRing.ResidueField B) KB] [CommRing As] [CommRing Bs] [IsLocalRing As] [IsLocalRing Bs] [Algebra A As] [Algebra B Bs] [Algebra As Bs] [Algebra A Bs] [IsScalarTower A B Bs] [IsScalarTower A As Bs] [IsLocalHom (algebraMap As Bs)] (PA : StrictHenselizationPresentationIn.{u, max v t} A KA As) (PB : StrictHenselizationPresentationIn.{v, max u t} B KB Bs) (i : KA →+* KB) (hi : i.comp (algebraMap (IsLocalRing.ResidueField A) KA) = (algebraMap (IsLocalRing.ResidueField B) KB).comp (IsLocalRing.ResidueField.map (algebraMap A B))) (hres : PB.residueMap.comp (algebraMap As Bs) = i.comp PA.residueMap) [HasDerivedCategory.{w} (ModuleCat.{max u v t} Bs)] : ∃ e : DerivedCategory.Q.obj (CochainComplex.mappingCone ((HomologicalComplex.single (ModuleCat.{max u v t} Bs) (.up ℤ) 0).map (ModuleCat.ofHom ((Generators.self A B).toExtension.cotangentComplex.baseChange Bs)))) ≅ DerivedCategory.Q.obj (CochainComplex.mappingCone ((HomologicalComplex.single (ModuleCat.{max u v t} Bs) (.up ℤ) 0).map (ModuleCat.ofHom (Generators.self As Bs).toExtension.cotangentComplex))), ∃ f : CochainComplex.mappingCone ((HomologicalComplex.single (ModuleCat.{max u v t} Bs) (.up ℤ) 0).map (ModuleCat.ofHom ((Generators.self A B).toExtension.cotangentComplex.baseChange Bs))) ⟶ CochainComplex.mappingCone ((HomologicalComplex.single (ModuleCat.{max u v t} Bs) (.up ℤ) 0).map (ModuleCat.ofHom (Generators.self As Bs).toExtension.cotangentComplex)), DerivedCategory.Q.map f = e.hom ∧ (CochainComplex.mappingCone.inl ((HomologicalComplex.single (ModuleCat.{max u v t} Bs) (.up ℤ) 0).map (ModuleCat.ofHom ((Generators.self A B).toExtension.cotangentComplex.baseChange Bs)))).v 0 (-1) rfl ≫ f.f (-1) = ModuleCat.ofHom (LinearMap.liftBaseChange Bs (Extension.Cotangent.map (Generators.defaultHom (Generators.self A B) (Generators.self As Bs)).toExtensionHom)) ≫ (CochainComplex.mappingCone.inl ((HomologicalComplex.single (ModuleCat.{max u v t} Bs) (.up ℤ) 0).map (ModuleCat.ofHom (Generators.self As Bs).toExtension.cotangentComplex))).v 0 (-1) rfl ∧ (CochainComplex.mappingCone.inr ((HomologicalComplex.single (ModuleCat.{max u v t} Bs) (.up ℤ) 0).map (ModuleCat.ofHom ((Generators.self A B).toExtension.cotangentComplex.baseChange Bs)))).f 0 ≫ f.f 0 = ModuleCat.ofHom (LinearMap.liftBaseChange Bs (Extension.CotangentSpace.map (Generators.defaultHom (Generators.self A B) (Generators.self As Bs)).toExtensionHom)) ≫ (CochainComplex.mappingCone.inr ((HomologicalComplex.single (ModuleCat.{max u v t} Bs) (.up ℤ) 0).map (ModuleCat.ofHom (Generators.self As Bs).toExtension.cotangentComplex))).f 0",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-865e6abd4",
+  "group": "NK",
+  "result": "pass",
+  "note": "I read the node, Stacks 0D08, all 7 statement dependencies (identical to side-live) and the StrictHenselizationPresentationIn source (real cocone, IsColimit and identification data). Clause by clause: local A→B by IsLocalHom; separable closures by IsSepClosure with residue towers; compatible embedding i by hi; A^sh and B^sh by the recorded presentations; induced map pinned by the A-towers and hres (IsLocalRing/IsLocalHom on As, Bs follow from these data, so they are not stronger); NL as the mappingCone of the degree-0 single map of Generators.self cotangentComplex (degrees -1,0, positive differential), the same representation as the recorded indEtale acyclic theorem; the left side is termwise baseChange; the derived isomorphism e has Q.map f = e.hom, with both nonzero components of f pinned to liftBaseChange of Cotangent.map/CotangentSpace.map of Generators.defaultHom, so f is the canonical map. No Noetherian, finite-type or flatness assumption; universes u, v, max u v t are justified by the pointed-etale interface and invariant under isomorphism. Only the item lean field changed; the statement field is verbatim in the file; there are no new definitions; the only proof is sorry; the docstrings carry the source, blueprint tag and 4 proof steps; the report has both required sections; the left-injective node has no Lean declaration yet, so it is correctly not imported. Not re-compiled; the worker reports clean compiles. No findings."
+ }
+}

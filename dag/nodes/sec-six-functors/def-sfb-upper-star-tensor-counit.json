@@ -1,0 +1,328 @@
+{
+ "id": "def-sfb-upper-star-tensor-counit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-proper-image-localizing-open",
+   "place": "the Lean proof of det-proper-image-localizing-open's declarations uses (or, for the batch import closure, sits beside) AlgebraicGeometry.ProEtale.CondensedRing.upperStarTensorCounit (found by the 2026-10-22 maintainer audit of upstream sorries without a DAG node); in blueprint terms: the projection formula for an open immersion compares Lf^*(K ⊗^L L) with Lf^*K ⊗^L Lf^*L (monoidality of the derived pullback)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The pullback tensor comparison on the homotopy category",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring] and $f\\colon X\\to Y$ a morphism of schemes. Write $\\Mod_{\\Lambda_T}$ for module objects over the pulled-back ring on the pro-étale site of $T$, $f^*$ for the (exact, monoidal) pullback of module objects, $Lf^*$ for its left derived functor and $\\otimes^L$ for the derived tensor product [sk-def-sfb-module-derived-pushpull, sk-def-sfb-derived-tensor-hom]; $Q_h\\colon K(\\Mod_{\\Lambda_T})\\to D(\\Mod_{\\Lambda_T})$ is the localization of the homotopy category. The maps $Q_h(f^*A)\\otimes^LQ_h(f^*B)\\to Q_h(f^*A\\otimes f^*B)\\to Q_h(f^*(A\\otimes B))$, the lax monoidal structure of $Q_h$ followed by $Q_h$ of the degreewise tensor comparison $f^*A\\otimes f^*B\\cong f^*(A\\otimes B)$ of complexes, form a natural transformation of bifunctors on $K(\\Mod_{\\Lambda_Y})$ (natural in $A$ and in $B$).",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.md",
+  "place": "det-proper-image-localizing-open: the projection formula for an open immersion compares Lf^*(K ⊗^L L) with Lf^*K ⊗^L Lf^*L (monoidality of the derived pullback); Lean: upstream file lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean, declaration AlgebraicGeometry.ProEtale.CondensedRing.upperStarTensorCounit (module WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal, lines 187-200, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-module-upper-star",
+  "def-sfb-derived-tensor-modules",
+  "lem-sfb-total-tensor-homotopy",
+  "lem-sfb-termwise-strong-monoidal",
+  "lem-sfb-derived-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal C_T=\\Mod_{\\Lambda_T}$ and $F=f^*$. The small pro-étale sites are essentially small in the coefficient universe, as specified in [sk-def-sfb-sheaf-tensor], whose sheafified objectwise tensor is the one used for module objects. For abelian sheaves this tensor category is closed symmetric monoidal Grothendieck abelian by [lem-weil-pbc-sheaf-tensor-closed]. Abelian groups have a functorial flat resolution by [lem-sfb-abelian-functorial-flat-resolution], so $\\Sh(T_{\\mathrm{proét}},\\Ab)$ has one by [lem-sfb-sheaf-functorial-flat-resolution]. Apply [lem-sfb-modobj-grothendieck] and [def-sfb-modobj-internal-hom] to the commutative ring object $\\Lambda_T$: $\\mathcal C_T$ is Grothendieck abelian and closed symmetric monoidal for the relative tensor, and by [lem-sfb-modobj-flat-resolutions] it has a functorial flat resolution for that tensor. Its tensor functors are left adjoints, so preserve small colimits by [lem-weil-pbc-left-adjoint-preserves-colimits]. They are additive: preservation of zero objects and binary coproducts gives preservation of biproduct projections and diagonals, hence of $a+b=\\nabla(a\\oplus b)\\Delta$. The functor $F$ is additive by [def-sfb-module-upper-star], a left adjoint by [sk-def-sfb-module-pushforward-pullback], and strong monoidal on the actual internal-module category by the first assertion of [new-integral-residue-ordinary-monoidal]. The same colimit theorem makes $F$ preserve countable coproducts. Thus the hypotheses of the termwise tensor comparison are satisfied, with no boundedness or flatness assumption on the complexes, and $\\Sh(T_{\\mathrm{proét}},\\Ab)$ and $\\mathcal C_T$ satisfy the hypotheses of the relative derived tensor and of the lax monoidal localization used in step 4. The ordinary strong structure uses the existing mapMod structure [def-sfb-mapmod-strong-monoidal] and extension/restriction along the coefficient isomorphism [def-sfb-comap-iso-strong-monoidal].",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-abelian-functorial-flat-resolution",
+    "lem-sfb-sheaf-functorial-flat-resolution",
+    "lem-sfb-modobj-grothendieck",
+    "lem-sfb-modobj-flat-resolutions",
+    "def-sfb-modobj-internal-hom",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-sfb-module-upper-star",
+    "sk-def-sfb-module-pushforward-pullback",
+    "new-integral-residue-ordinary-monoidal",
+    "def-sfb-mapmod-strong-monoidal",
+    "def-sfb-comap-iso-strong-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean",
+    "place": "upperStarTensorCounit; p5NativeHomotopyTensorMapEq and the two categorical naturality calculations"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-termwise-strong-monoidal] to $F$. Let $m_{A,B}=\\tau_{A,B}^{-1}:F_{\\rm Ch}A\\otimes F_{\\rm Ch}B\\to F_{\\rm Ch}(A\\otimes B)$. This is a chain isomorphism natural in both complexes. Its degree-$n$ map is exactly the map in the item: writing $\\iota_{p,q}$ and $\\iota'_{p,q}$ for the total-tensor summand inclusions, the defining equation $\\tau^n F(\\iota_{p,q})=\\iota'_{p,q}c_{A^p,B^q}$ gives $m^n\\iota'_{p,q}=F(\\iota_{p,q})\\mu^F_{A^p,B^q}$ after composing with the inverses. Equality on all direct-sum inclusions determines the degree map. In particular this identifies $m$ with the concrete degreewise comparison using the existing proved chain-map equation. The already proved chain-map property [lem-sfb-upper-star-tensor-complex-comparison-chain-map] supplies the specified concrete complex morphism, whose components are identified by this calculation.",
+   "uses": [
+    "lem-sfb-termwise-strong-monoidal",
+    "lem-sfb-upper-star-tensor-complex-comparison-chain-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean",
+    "place": "upperStarTensorCounit; p5NativeHomotopyTensorMapEq and the two categorical naturality calculations"
+   }
+  },
+  {
+   "text": "The homotopy category and its tensor are those of [lem-sfb-total-tensor-homotopy]. Termwise $F$ sends a cochain homotopy $a-a'=dh+hd$ to $F(a)-F(a')=dF(h)+F(h)d$ by additivity, so gives a functor $F_h$ on homotopy classes. Define $\\bar m_{A,B}$ to be the homotopy class of $m_{A,B}$. For classes $a:A\\to A'$ and $b:B\\to B'$, choose cochain-map representatives. Complex naturality from step 2 gives\n$$F_h(a\\otimes b)\\circ\\bar m_{A,B}=\\bar m_{A',B'}\\circ(F_ha\\otimes F_hb).$$\nPassing the equality to classes is legitimate because the quotient is strong monoidal and its tensor on maps is induced from complexes. The equation is independent of the representatives by the very definition of a quotient morphism. Thus $\\bar m$ is a natural tensor comparison on $K(\\mathcal C_Y)$.",
+   "uses": [
+    "lem-sfb-total-tensor-homotopy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean",
+    "place": "upperStarTensorCounit; p5NativeHomotopyTensorMapEq and the two categorical naturality calculations"
+   }
+  },
+  {
+   "text": "By step 1, $\\mathcal C_X$ is a closed symmetric monoidal Grothendieck abelian category with additive tensor and a functorial flat resolution, over the ambient $\\Sh(X_{\\mathrm{proét}},\\Ab)$ with the same properties. By [def-sfb-derived-tensor-modules] the tensor on $D(\\mathcal C_X)$ is the relative derived tensor, obtained by the construction of [lem-sfb-derived-monoidal]. The latter states that $Q_h:K(\\mathcal C_X)\\to D(\\mathcal C_X)$ is lax monoidal. Write $\\mu_{U,V}:Q_hU\\otimes^LQ_hV\\to Q_h(U\\otimes V)$ for its tensorator; it is natural in $U,V$ as part of the lax monoidal structure. Define\n$$\\theta_{A,B}=Q_h(\\bar m_{A,B})\\circ\\mu_{F_hA,F_hB}.$$\nBoth factors have the indicated source and target, so this is the component displayed in the item, in the same coefficient category.",
+   "uses": [
+    "def-sfb-derived-tensor-modules",
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean",
+    "place": "upperStarTensorCounit; p5NativeHomotopyTensorMapEq and the two categorical naturality calculations"
+   }
+  },
+  {
+   "text": "For $a:A\\to A'$ and $b:B\\to B'$ in $K(\\mathcal C_Y)$, use the equation of step 3 and functoriality of $Q_h$, then naturality of its lax tensorator from [lem-sfb-derived-monoidal], to compute\n$$\\begin{aligned}\nQ_h(F_h(a\\otimes b))\\circ\\theta_{A,B}\n&=Q_h(\\bar m_{A',B'})\\circ Q_h(F_ha\\otimes F_hb)\\circ\\mu_{F_hA,F_hB}\\\\\n&=Q_h(\\bar m_{A',B'})\\circ\\mu_{F_hA',F_hB'}\\circ(Q_h(F_ha)\\otimes^LQ_h(F_hb))\\\\\n&=\\theta_{A',B'}\\circ(Q_h(F_ha)\\otimes^LQ_h(F_hb)).\n\\end{aligned}$$\nTaking $a=1_A$ gives naturality in $B$; taking $b=1_B$ gives naturality in $A$. For the curried bifunctors, the first identity makes each $\\theta_{A,-}$ a natural transformation and the second is the componentwise equality asserting naturality of $A\\mapsto\\theta_{A,-}$. Thus the displayed components define the required natural transformation of bifunctors. The Lean implementation identifies each concrete quotient map with the component of the inverse termwise oplax natural transformation, using mapHomotopyCategoryδNatTrans_app_app and the existing complex-comparison equation. It then applies naturality of that inverse transformation and of the lax tensorator of Qh, separately in each variable. These equations fill precisely the two original naturality fields.",
+   "uses": [
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean",
+    "place": "upperStarTensorCounit; p5NativeHomotopyTensorMapEq and the two categorical naturality calculations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-abelian-functorial-flat-resolution",
+  "lem-sfb-sheaf-functorial-flat-resolution",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sfb-modobj-flat-resolutions",
+  "def-sfb-modobj-internal-hom",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-sfb-module-upper-star",
+  "sk-def-sfb-module-pushforward-pullback",
+  "new-integral-residue-ordinary-monoidal",
+  "lem-sfb-termwise-strong-monoidal",
+  "lem-sfb-total-tensor-homotopy",
+  "def-sfb-derived-tensor-modules",
+  "lem-sfb-derived-monoidal",
+  "lem-sfb-upper-star-tensor-complex-comparison-chain-map",
+  "def-sfb-mapmod-strong-monoidal",
+  "def-sfb-comap-iso-strong-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean",
+  "place": "upperStarTensorCounit: inverse homotopy tensor comparison and direct naturality; W4 proof restoration, 2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homotopyTensorCounit|upperStarTensorCounit|mapHomotopyCategory.*[Mm]onoidal|mapHomotopyCategory.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-22T05:43:05Z\", \"tool\": \"grep\", \"query\": \"homotopyTensorCounit|upperStarTensorCounit|mapHomotopyCategory.*[Mm]onoidal|mapHomotopyCategory.*[Tt]ensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general naturality and ordinary monoidal localization infrastructure does not state this specified internal-module homotopy comparison; native derived localization is lax monoidal on arbitrary complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μNatTrans",
+   "results": "{\"t\": \"2026-10-22T05:43:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.LaxMonoidal.μNatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Functor.LaxMonoidal.μNatTrans'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general naturality and ordinary monoidal localization infrastructure does not state this specified internal-module homotopy comparison; native derived localization is lax monoidal on arbitrary complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monoidal additive functor induces a tensor comparison on the homotopy category followed by the lax monoidal localization to the derived category",
+   "results": "{\"t\": \"2026-10-22T05:43:06Z\", \"tool\": \"leansearch\", \"query\": \"A monoidal additive functor induces a tensor comparison on the homotopy category followed by the lax monoidal localization to the derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\", \"CategoryTheory.Functor.Monoidal.toLaxMonoidal\", \"CategoryTheory.Functor.mapHomotopyCategory\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_μIso_hom\", \"CategoryTheory.LaxMonoidalFunctor.noConfusion\", \"CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp\", \"DerivedCategory.Qh\"], \"digest\": \"3ad552cf8d3ae59b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general naturality and ordinary monoidal localization infrastructure does not state this specified internal-module homotopy comparison; native derived localization is lax monoidal on arbitrary complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The lax tensorator of derived localization composed with the termwise tensor comparison of a monoidal pullback gives a natural transformation on homotopy categories",
+   "results": "{\"t\": \"2026-10-22T05:43:13Z\", \"tool\": \"leanfinder\", \"query\": \"The lax tensorator of derived localization composed with the termwise tensor comparison of a monoidal pullback gives a natural transformation on homotopy categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost\", \"CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost_hom_app_app'\", \"CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost_hom_app_app\", \"CategoryTheory.Localization.Monoidal.tensorBifunctor\", \"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\", \"CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp\", \"CategoryTheory.Localization.Monoidal.instLifting₂LocalizedMonoidalToMonoidalCategoryCompFunctorCurriedTensorObjWhiskeringRightTensorBifunctor\", \"CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_μ\"], \"digest\": \"50b91626139e28c9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general naturality and ordinary monoidal localization infrastructure does not state this specified internal-module homotopy comparison; native derived localization is lax monoidal on arbitrary complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "μ_natural|mapHomotopyCategory|μNatTrans",
+   "results": "{\"t\": \"2026-10-22T05:43:36Z\", \"tool\": \"grep\", \"query\": \"μ_natural|mapHomotopyCategory|μNatTrans\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Multifunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Multifunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\"], \"digest\": \"149ca1071e6d8034\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general naturality and ordinary monoidal localization infrastructure does not state this specified internal-module homotopy comparison; native derived localization is lax monoidal on arbitrary complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality in two variables of Qh of a monoidal functor on cochain complexes tensor comparison with derived tensor product",
+   "results": "{\"t\": \"2026-10-22T05:43:44Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality in two variables of Qh of a monoidal functor on cochain complexes tensor comparison with derived tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor_map\", \"CategoryTheory.NatTrans.tensor_naturality\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.NatTrans.tensor_naturality_assoc\", \"CategoryTheory.Localization.Monoidal.μ_natural_right\"], \"digest\": \"b510ef740f97a1c0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general naturality and ordinary monoidal localization infrastructure does not state this specified internal-module homotopy comparison; native derived localization is lax monoidal on arbitrary complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "curriedTensorPreIsoPost|functorCoreMonoidalOfComp|tensorBifunctorIso|variable.*IsMonoidal",
+   "results": "{\"t\": \"2026-10-22T05:44:52Z\", \"tool\": \"grep\", \"query\": \"curriedTensorPreIsoPost|functorCoreMonoidalOfComp|tensorBifunctorIso|variable.*IsMonoidal\", \"sub\": \"CategoryTheory/Localization/Monoidal\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\"], \"digest\": \"200753203767299b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general naturality and ordinary monoidal localization infrastructure does not state this specified internal-module homotopy comparison; native derived localization is lax monoidal on arbitrary complexes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration in a batch target's import closure without a DAG node (maintainer audit of dag/lean_audit.json with_sorry_and_no_node, 2026-10-22, the human's order); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.upperStarTensorCounit"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.upperStarTensorCounit",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal",
+     "lines": [
+      285,
+      301
+     ],
+     "kind": "def",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sf-open-ctf",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalCounit",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/MonoidalCounit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.upperStarTensorCounit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.upperStarTensorCounit"
+  ],
+  "statement": "noncomputable def upperStarTensorCounit :\n    (((whiskeringLeft₂ _).obj\n        ((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)).obj\n        ((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)).obj\n        (curriedTensor _) ⟶\n      upperStarTensorTarget Λ f where\n  app A :=\n    { app B := Functor.LaxMonoidal.μ DerivedCategory.Qh\n          (((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ)).obj A)\n          (((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ)).obj B) ≫\n        DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map\n          (upperStarTensorComplexHom Λ f A.as B.as))\n      naturality B B' ψ := by\n        obtain ⟨A, rfl⟩ := A.quotient_obj_surjective\n        obtain ⟨B, rfl⟩ := B.quotient_obj_surjective\n        obtain ⟨B', rfl⟩ := B'.quotient_obj_surjective\n        obtain ⟨ψ, rfl⟩ := (HomotopyCategory.quotient _ _).map_surjective ψ\n        have h := upperStarTensorCounit_naturality_aux Λ f (𝟙 A) ψ\n        rw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,\n          CategoryTheory.Functor.map_id, MonoidalCategory.id_tensorHom,\n          MonoidalCategory.id_tensorHom] at h\n        rw [Category.assoc]\n        exact h }\n  naturality A A' φ := by\n    ext B\n    obtain ⟨A, rfl⟩ := A.quotient_obj_surjective\n    obtain ⟨A', rfl⟩ := A'.quotient_obj_surjective\n    obtain ⟨B, rfl⟩ := B.quotient_obj_surjective\n    obtain ⟨φ, rfl⟩ := (HomotopyCategory.quotient _ _).map_surjective φ\n    have h := upperStarTensorCounit_naturality_aux Λ f φ (𝟙 B)\n    rw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,\n          CategoryTheory.Functor.map_id, MonoidalCategory.tensorHom_id,\n      MonoidalCategory.tensorHom_id] at h\n    rw [NatTrans.comp_app, NatTrans.comp_app, Category.assoc]\n    exact h",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-27",
+  "note": "upstream proof (slopmaster2 94795abff8, PR #1694) ported to live 2026-10-27 by hand, in the 60 s split of the sync work tree (Monoidal + 7 modules); declaration now in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalCounit, proved"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "def-sfb-upper-star-tensor-counit",
+  "worker": "stage1",
+  "summary": "Construct the stated components using the existing termwise strong monoidal comparison, pass its naturality to homotopy classes, and compose with the lax tensorator of derived localization. Write the joint naturality equation and both curried naturality laws. No new nodes and no statement change. The upstream declaration still has two sorry naturality fields; the Sheaf generic analogue is not an eligible WeilConjectures attachment. Review FIX (cc maintainer reader): step 1 now verifies functorial flat resolutions for abelian sheaves and for the module categories (and cites sk-def-sfb-sheaf-tensor for the essentially small pro-etale sites), the hypotheses of def-sfb-derived-tensor-modules and lem-sfb-derived-monoidal that step 4 uses.",
+  "blueprint": "The imported anchor det-proper-image-localizing-open has only its extension-by-zero statement in the current blueprint; the maintainer attached this auxiliary definition for its import closure. This split realizes precisely step 2 (homotopy category) of the upstream Monoidal module docstring; it does not replace a step of the open-extension unit or prove a derived comparison invertible.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Verifies the ambient closed Grothendieck tensor category for abelian sheaves on the small pro-etale site. This is an auxiliary categorical construction; the open-extension unit has no substitute for this input."
+   },
+   {
+    "node": "lem-sfb-abelian-functorial-flat-resolution",
+    "why": "Supplies a functorial flat resolution of abelian groups, the input of the sheaf flat-resolution lemma. This is an auxiliary categorical construction; the open-extension unit has no substitute for this input."
+   },
+   {
+    "node": "lem-sfb-sheaf-functorial-flat-resolution",
+    "why": "Transfers functorial flat resolutions to abelian sheaves on the pro-etale site, a hypothesis of the derived tensor and lax monoidal localization. This is an auxiliary categorical construction; the open-extension unit has no substitute for this input."
+   },
+   {
+    "node": "lem-sfb-modobj-flat-resolutions",
+    "why": "Transfers functorial flat resolutions to internal modules over the pulled-back ring, the hypothesis of lem-sfb-derived-monoidal applied to the module category. This is an auxiliary categorical construction; the open-extension unit has no substitute for this input."
+   },
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Verifies the Grothendieck abelian hypothesis for internal modules over the pulled-back ring. This is an auxiliary categorical construction; the open-extension unit has no substitute for this input."
+   },
+   {
+    "node": "def-sfb-modobj-internal-hom",
+    "why": "Defines the underived module functor, adjunction, or relative tensor category used in the construction. This is an auxiliary categorical construction; the open-extension unit has no substitute for this input."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Applies to module pullback and the closed tensor adjoints to verify the coproduct hypotheses. This is an auxiliary categorical construction; the open-extension unit has no substitute for this input."
+   },
+   {
+    "node": "def-sfb-module-upper-star",
+    "why": "Defines the underived module functor, adjunction, or relative tensor category used in the construction. This is an auxiliary categorical construction; the open-extension unit has no substitute for this input."
+   },
+   {
+    "node": "sk-def-sfb-module-pushforward-pullback",
+    "why": "Defines the underived module functor, adjunction, or relative tensor category used in the construction. This is an auxiliary categorical construction; the open-extension unit has no substitute for this input."
+   },
+   {
+    "node": "new-integral-residue-ordinary-monoidal",
+    "why": "Its first assertion supplies the strong monoidal structure of the actual pro-etale internal-module pullback for arbitrary condensed coefficients. This is an auxiliary categorical construction; the open-extension unit has no substitute for this input."
+   },
+   {
+    "node": "lem-sfb-termwise-strong-monoidal",
+    "why": "Provides the natural chain tensor isomorphism and its summand formula for an additive coproduct-preserving strong monoidal functor. This is an auxiliary categorical construction; the open-extension unit has no substitute for this input."
+   },
+   {
+    "node": "lem-sfb-total-tensor-homotopy",
+    "why": "Provides the homotopy quotient and its tensor on maps, needed to pass complex naturality to homotopy classes. This is an auxiliary categorical construction; the open-extension unit has no substitute for this input."
+   },
+   {
+    "node": "def-sfb-derived-tensor-modules",
+    "why": "Defines the underived module functor, adjunction, or relative tensor category used in the construction. This is an auxiliary categorical construction; the open-extension unit has no substitute for this input."
+   },
+   {
+    "node": "lem-sfb-derived-monoidal",
+    "why": "Provides the lax monoidal homotopy localization and hence naturality of its tensorator. This is an auxiliary categorical construction; the open-extension unit has no substitute for this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-abelian-functorial-flat-resolution",
+  "lem-sfb-sheaf-functorial-flat-resolution",
+  "lem-sfb-modobj-flat-resolutions",
+  "lem-sfb-modobj-grothendieck",
+  "def-sfb-modobj-internal-hom",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-sfb-module-upper-star",
+  "sk-def-sfb-module-pushforward-pullback",
+  "new-integral-residue-ordinary-monoidal",
+  "lem-sfb-termwise-strong-monoidal",
+  "lem-sfb-total-tensor-homotopy",
+  "def-sfb-derived-tensor-modules",
+  "lem-sfb-derived-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-665a75e13",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-665a75e13 (reviewer sub-agent of L); spot-checked: I read the whole item. Its 5 steps, every cited statement and the Lean source (Monoidal.lean docstring and lines 137-200) all agree: the component is mu_Qh(F_hA,F_hB) followed by Qh of the degreewise comparison, on the same relative-tensor Mod_{Lambda_T} category. Step 2 recovers upperStarTensorComplexHomX's summand formula from lem-sfb-termwise-strong-monoidal (m^n iota' = F(iota) mu^F), so it does not depend on the sorried comm lemma. I recomputed the naturality calculations of steps 3 and 5 and both curried laws. Edge cases checked: identities, the zero complex, and single-degree complexes. Live node still unsplit, with no repair note and no dropped entry. No new nodes, no cycle (the derived-pullback monoidality nodes are avoided), no SGA. One fault (E1/C4): step 4 applies def-sfb-derived-tensor-modules and lem-sfb-derived-monoidal, which need functorial flat resolutions on Sh(X_proet,Ab) and Mod_{Lambda_X}, and these were never verified. Fixed: step 1 now cites lem-sfb-abelian-functorial-flat-resolution, lem-sfb-sheaf-functorial-flat-resolution and lem-sfb-modobj-flat-resolutions (the same triple the landed sibling new-proetale-derived-module-pullback-monoidal uses). It also cites sk-def-sfb-sheaf-tensor for the essential smallness of the site, which step 1 had asserted without a citation. Step 4 now recalls these hypotheses. proof_deps were recomputed and the 3 tool_uses added. Statement and stmt_deps unchanged. Advisory: partial overlap with new-proetale-derived-module-pullback-monoidal, whose r-naturality does not imply the item because gamma is not invertible.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261026T114231-L-2276331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

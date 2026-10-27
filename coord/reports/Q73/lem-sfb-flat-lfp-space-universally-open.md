@@ -1,0 +1,39 @@
+## Worker report
+
+Files written: `dag/nodes/sec-six-functors-basics/lem-sfb-flat-lfp-space-universally-open.json` (statement, split; not a Mathlib leaf), `citations.json`, and this report. Zero new nodes; zero new Mathlib leaves. The existing scheme leaf `lem-weil-pbc-flat-lfp-open` is used.
+
+Attachments: none for this item. Searching the project for the exact blueprint tag found no declaration. Searching its flat/open and UniversallyOpen declarations found `AlgebraicGeometry.universallyOpen_of_flat_of_locallyOfFinitePresentation`, `lean/WeilConjectures/AlgebraicGeometry/NoetherianComponents.lean:52`, whose objects are schemes, not algebraic spaces. Its proof is the Mathlib instance; this is already the existing scheme leaf, not an attachment for the present item.
+
+WANTED: none.
+
+The imported item had no proof. Its statement is unchanged, including its ancillary properness convention (unused in this proof), and its inherited statement dependencies are retained. The source Tag 042S really states universal openness for flat locally finitely presented morphisms of algebraic spaces, without quasi-compactness or separation. No STATEMENT-DISPUTED or source correction was needed. The apparent mismatch between the item's chapter and its inherited unit, and the null nearest blueprint ancestor, are inherited metadata: the owned blueprint fields only receive the search result `same_as: []`. The recorded from.place already specifies the precise Tag 042S input of the nested nodal-curve argument and is preserved.
+
+The proof follows Stacks `spaces-morphisms.tex`, Tag 042S, `lemma-fppf-open`. I read its references: `spaces.tex` Tag 02X1, `lemma-lift-morphism-presentations`; `spaces-morphisms.tex` Tags 03MM, `lemma-flat-local`, and 0410, `lemma-finite-presentation-local`; scheme Tag 01UA, `lemma-fppf-open`; and Tag 03Z5, `lemma-universally-open-local`. Rather than introducing a node restating the descent conclusion, the split expands the quotient-topology calculation, using the common-extension argument of `spaces-properties.tex` Tag 03H4, `lemma-points-cartesian`.
+
+Mathlib searches used the required msearch command for LeanFinder (two phrasings), Loogle, grep, and LeanSearch. Actual results are logged in searches.jsonl and copied by tool/query into the item. All services returned hits. The strongest match is `AlgebraicGeometry.UniversallyOpen.of_flat`, checked in `Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:147`; it only concerns schemes, as do the fpqc-descent hits. Its existing DAG leaf is cited. DAG searches covered the source tags and statement keywords; blueprint searches included `universally open`, `03Z5`, and `flat open`. No blueprint node states the algebraic-space item. No new nodes are proposed.
+
+Unfinished work: none at stage 1; this delivery does not claim a formal Lean proof.
+
+## Not duplicates
+
+No new nodes. In particular the existing `lem-weil-pbc-flat-lfp-open` is reused for the scheme theorem, and `lem-trf-space-fibre-products-etale-covers` is reused for algebraic-space fibre products, point classes, and pullback of covers.
+
+## Review by Q73
+
+I read the node statements used below, not just their titles or proofs, and checked the split against delivery-errors B through E. The source 042S's chart argument has the same hypotheses as the item. Tags 03MM and 0410 assert the chart tests the item's own convention already specifies. The scheme theorem 01UA requires exactly flatness and local finite presentation. The existing scheme leaf states both openness and its persistence after every base change. No new definition, duplicate theorem, or clause-shaped replacement of the item was introduced.
+
+Step 1 uses the atlas and representable-diagonal clauses of `def-trf-algebraic-space`. The scheme U is explicitly U_0 times_Y V; representability of the diagonal supplies its schematicity. `lem-trf-space-fibre-products-etale-covers` states the preservation of jointly surjective etale families under arbitrary pullback, so supplies U to U_0. `lem-weil-pbc-etale-composition-cancellation` really includes composition of etale scheme morphisms in clause (2). Applying it after a scheme test verifies the space-level composite rather than assuming an unstated space-composition theorem. Surjectivity composes as a set-theoretic property. This is the construction of 02X1, not a new unsplit chart lemma.
+
+Step 2 uses the two scheme definition nodes to interpret flat and locally finitely presented on the compatible chart. The hypothesis on f supplies those tests. It then uses the full statement of `lem-weil-pbc-flat-lfp-open`; I checked that it includes all scheme base changes, which is essential for step 4. It does not require f or alpha to be quasi-compact, separated, or proper.
+
+Step 3 again uses the fibre-product node, which permits an arbitrary algebraic-space base change, not merely a small or affine scheme base. In particular Z=V times_Y W is a scheme because V to Y is representable etale and W is a scheme. T is the scheme fibre product U times_V Z. T to X times_Y W is the pullback of p:U to X, so the stated cover-base-change clause applies. The two displayed versions of T represent exactly the same tuples. The same scheme-test composition argument and the cited scheme composition theorem show that T to P is an atlas. No inference assumes that the original square U,V,X,Y was cartesian: it generally is not.
+
+Step 4 invokes the scheme leaf for beta, the pullback of alpha along the scheme map Z to V. That map need not be etale, which causes no difficulty because the leaf is universal. The existing etale-open-map node states openness for every open subset of a scheme, precisely what is needed for Z to W. Openness of their composite is the two successive images of an open set; no extra theorem is hidden there.
+
+Step 5 is elementary relative to the fibre-product node's explicit point equivalence relation and universal property. For a point x of P and a point z of W with equal images, the common-field-extension equivalence makes their maps agree, giving a point of P times_{Y'} W. Surjectivity of r then lifts it to T. This proves both inclusions of the needed image identity and explicitly avoids the false assertion that underlying spaces preserve fibre products as homeomorphisms. The openness of A follows directly from the item's stipulated quotient topology because a:T to P is the atlas already constructed. No general continuity theorem about arbitrary space morphisms is being cited tacitly.
+
+Step 6 is elementary quotient-topology descent: step 4 gives an open image on W, step 5 identifies it with the preimage of the desired image on Y', and the stipulated quotient topology along W to Y' then proves openness. The final whole-image assertion takes the identity base change and the whole open subset. None of these is a restatement delegated to a new node. No proof step exceeds 2000 characters or hides a comparison lemma under the word 'transport'.
+
+I checked the empty source, empty base change, and empty open subset: all images in the displayed identity are empty and the conclusion holds. Identity maps give the expected openness. Scheme X,Y specialize to the existing scheme leaf. No non-Noetherian, non-quasi-compact, or non-separated case is excluded. For arbitrary atlas points the proof uses a common field extension, not an unjustified rational-point lift over the original field.
+
+The only non-Mathlib tool outside the inherited unit is `lem-trf-space-fibre-products-etale-covers`. It supplies general constructions and covering pullbacks, not a replacement of the unit's alteration or nodal-curve route. This is declared in split_report.tool_uses for the maintainer's judgement; no maintainer-owned tool_uses field was set. Citations.json has one entry per step/node, with verbatim statement text. No earlier sandbox split or report was present; this is the first attempt, not a repair of a returned delivery.

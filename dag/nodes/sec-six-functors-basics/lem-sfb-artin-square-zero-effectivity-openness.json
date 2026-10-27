@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-artin-square-zero-effectivity-openness",
+ "kind": "statement",
+ "title": "Strong square-zero effectivity implies openness of versality",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum] in the universes of [def-weil-size-convention]. Let $\\mathcal F$ be a category fibred in groupoids on the big fppf site [def-pc-fppf-site]: equivalently, it assigns a groupoid $\\mathcal F(T)$ to each scheme $T$, with pullback functors along scheme morphisms and coherent composition and identity isomorphisms. Assume the following four conditions. (1) For any scheme $T$ and $a,b\\in\\mathcal F(T)$, the presheaf $T'\\mapsto\\operatorname{Isom}_{\\mathcal F(T')}(a|_{T'},b|_{T'})$ on $T$-schemes is represented by an algebraic space over $T$ [def-trf-algebraic-space]. (2) For all ring maps $A\\to B\\leftarrow B'$ with $B'\\to B$ surjective and square-zero kernel, restriction induces an equivalence $\\mathcal F(\\operatorname{Spec}(A\\times_B B'))\\simeq\\mathcal F(\\operatorname{Spec}A)\\times_{\\mathcal F(\\operatorname{Spec}B)}\\mathcal F(\\operatorname{Spec}B')$. The groupoid on the right consists of two objects and a specified isomorphism of their restrictions, with pairs of arrows compatible with that isomorphism. (3) For every small directed inverse system of affine schemes $T_i$ with limit $T$, every object over $T$ descends to a stage, every isomorphism between stage objects descends to a sufficiently late common stage, and equality of stage isomorphisms over $T$ holds at a sufficiently late common stage. (4) For every inverse sequence of commutative rings $(R_n)_{n\\geq1}$ whose maps $R_m\\to R_n$ for $m\\geq n$ are surjective with square-zero kernels, every compatible system $x_n\\in\\mathcal F(\\operatorname{Spec}R_n)$ is effective: for $R=\\varprojlim_n R_n$ there is an $x\\in\\mathcal F(\\operatorname{Spec}R)$ with isomorphisms $x|_{\\operatorname{Spec}R_n}\\cong x_n$ compatible with all transition isomorphisms.\n\nThen $\\mathcal F$ satisfies openness of versality. Precisely, let $U$ be locally of finite type over $\\mathbf Z$ [def-weil-finite-type-morphism] and $x\\in\\mathcal F(U)$. A finite type point $u$ means that $\\operatorname{Spec}\\kappa(u)\\to U$ is of finite type. Say that $x$ is versal at $u$ if for every surjection $A'\\to A$ of Artinian local rings with residue field identified with $\\kappa(u)$ and nilpotent kernel, every map $\\operatorname{Spec}A\\to U$ reducing to $u$, and every object $y'\\in\\mathcal F(\\operatorname{Spec}A')$ equipped with an isomorphism $y'|_{\\operatorname{Spec}A}\\cong x|_{\\operatorname{Spec}A}$, there is a lift $\\operatorname{Spec}A'\\to U$ and an isomorphism $y'\\cong x|_{\\operatorname{Spec}A'}$ inducing the specified one. Here Artinian means that every descending chain of ideals stabilizes; all ring maps respect the indicated residue-field identifications. If $x$ is versal at a finite type point $u_0$, there is an open neighbourhood $U'$ of $u_0$ on which $x$ is versal at every finite type point.",
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-sfb-artin-square-zero-gluing",
+  "def-sfb-artin-strong-square-zero-effectivity",
+  "def-sfb-artin-integer-base-versality",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof": [
+  {
+   "text": "Fix $U,x,u_0$ in the conclusion. Choose an affine neighbourhood of $u_0$ on which $U\\to\\operatorname{Spec}\\mathbf Z$ is of finite type, and replace $U$ and $x$ by their restrictions. Write $U=\\operatorname{Spec}R_0$. This is permitted by the local finite type definition, and finding the required open inside this neighbourhood suffices for the original $U$. By [lem-weil-pbc-finite-type-over-noetherian], $U$ is Noetherian and $\\operatorname{Spec}\\mathbf Z$ is Noetherian. Suppose for contradiction that no open neighbourhood of $u_0$ has the required versality. Let $E$ be the finite type points where $x$ is not versal. Every neighbourhood of $u_0$ meets $E$, hence $u_0\\in\\overline E$, whereas $u_0\\notin E$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXU (lemma-SGE-implies-openness-versality), first paragraph: affine restriction and the bad locus E."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-artin-versality-generalization] with $\\Lambda=\\mathbf Z$. Its three assumptions are (1)--(3) of the item, and the Noetherian base is given in step 1. No $u\\in E$ can specialize to $u_0$, since versality at $u_0$ would then imply versality at $u$. By [lem-sfb-noetherian-countable-antichain], choose an at most countable $D\\subseteq E$ with $\\overline D=\\overline E$ and no specializations between distinct points. It is infinite: if $D$ were finite, $\\overline D=\\bigcup_{u\\in D}\\overline{\\{u\\}}$ would exclude $u_0$. Enumerate $D=\\{u_1,u_2,\\ldots\\}$ without repetitions. Thus $u_0$ is in its closure and every term is a non-versal finite type point.",
+   "uses": [
+    "lem-sfb-artin-versality-generalization",
+    "lem-sfb-noetherian-countable-antichain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXU (lemma-SGE-implies-openness-versality), first paragraph: generalization, countable extraction and removal of specializations."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-artin-nonversal-thickening-tower] to this sequence; condition (2) of the item is its square-zero gluing assumption. Obtain $U_n=\\operatorname{Spec}R_n$ and $x_n$ with all transition isomorphisms and with the stated prohibition on local retractions at $u_n$. Put $R=\\varprojlim_{n\\geq0}R_n$. For $m\\geq n$, an element of $\\ker(R_m\\to R_n)$ lies in $\\ker(R_m\\to R_0)$, whose square is zero; hence every transition kernel is square zero, including nonconsecutive ones. Restricting to indices $n\\geq1$ does not change this limit: its $R_0$ coordinate is forced by its $R_1$ coordinate. Hypothesis (4) therefore supplies $\\xi\\in\\mathcal F(\\operatorname{Spec}R)$ with compatible identifications at all $n\\geq0$, including $x_0=x$.",
+   "uses": [
+    "lem-sfb-artin-nonversal-thickening-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXU (lemma-SGE-implies-openness-versality), second paragraph: the tower and application of strong square-zero effectivity."
+   }
+  },
+  {
+   "text": "The projection $R\\to R_0$ is surjective: given an element of $R_0$, lift it recursively through each surjection $R_{n+1}\\to R_n$. If $a,b$ lie in its kernel, their coordinates at $n$ lie in $\\ker(R_n\\to R_0)$, so every coordinate of $ab$ is zero. Thus $\\ker(R\\to R_0)^2=0$. The finitely generated $\\mathbf Z$-subalgebras of $R$, ordered by inclusion, are a small directed system and their union is $R$: any finite collection of elements belongs to the subalgebra it generates, and the sum and product operations agree there. Their inclusion cocone is colimiting by [lem-weil-pbc-directed-subalgebra-ring-colimit], since the union is all of $R$. The affine case of [lem-weil-pbc-limit-affine-transition] therefore identifies the scheme limit with $\\operatorname{Spec}R$. Hypothesis (3) descends $\\xi$ to some $x'\\in\\mathcal F(U')$ with $U'=\\operatorname{Spec}R'$ for a finite type $\\mathbf Z$-subalgebra $R'\\subseteq R$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-directed-subalgebra-ring-colimit",
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXU (lemma-SGE-implies-openness-versality), second paragraph: the square-zero projection and finite type descent of xi."
+   }
+  },
+  {
+   "text": "Choose finitely many $\\mathbf Z$-algebra generators of $R_0$ and lifts in $R$. Adjoin these lifts to $R'$, pulling back $x'$ to the enlarged finite type subalgebra. Now $R'\\to R_0$ is surjective and its kernel is square zero, being contained in $\\ker(R\\to R_0)$. Thus $j:U\\hookrightarrow U'$ is a first order thickening. The projections $R\\to R_n$ restrict to maps $R'\\to R_n$ compatible with $R'\\to R_0$; pulling back $x'$ along them yields the compatible isomorphisms $x_n\\cong x'|_{U_n}$ already fixed through $\\xi$. In particular fix the resulting $\\theta:x\\cong j^*x'$.",
+   "uses": [
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXU (lemma-SGE-implies-openness-versality), second paragraph: enlarge R prime and retain all compatibility isomorphisms."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-artin-versal-base-change-smooth] with the original $U,x$ and with $V=U',y=x'$. Conditions (1)--(3) are unchanged, both schemes are finite type over $\\mathbf Z$, and $\\theta$ gives its thickening-section case. Obtain the algebraic space $Z$ of triples $(a,b,\\alpha:a^*x\\cong b^*x')$, its projections $p:Z\\to U$, $q:Z\\to U'$, and $i:U\\to Z$ with $pi=\\operatorname{id}_U$, $qi=j$, and universal isomorphism restricting to $\\theta$. The lemma states that $i(u_0)$ is a finite type point and provides an open $O\\subseteq Z$ containing $i(u_0)$ on which $q$ is smooth. This invocation requires neither effectiveness for a completed Noetherian local ring nor an algebraic-stack assumption on $\\mathcal F$.",
+   "uses": [
+    "lem-sfb-artin-versal-base-change-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXU (lemma-SGE-implies-openness-versality), paragraphs defining Z and z_0 and applying lemma-base-change-versal."
+   }
+  },
+  {
+   "text": "Choose a principal open $V=D(f)\\subseteq U$ containing $u_0$ and contained in $i^{-1}(O)$. Lift $f$ to $f'\\in R'$ and put $V'=D(f')\\subseteq U'$. The quotient $R'_{f'}\\to (R_0)_f$ is surjective and square zero: a fraction in its kernel has numerator mapping to zero after multiplication by some power of $f$; multiply its numerator and denominator by that power to represent it by an element of the localized original kernel, whose square vanishes. Thus $V\\hookrightarrow V'$ is a first order thickening of affine schemes. Apply [lem-sfb-smooth-space-affine-infinitesimal-lift] to $q|_O:O\\to U'$, $a_0=i|_V$ and the open inclusion $b:V'\\to U'$. It gives $s:V'\\to O$ with $qs=b$ and $s|_V=i|_V$.",
+   "uses": [
+    "lem-sfb-smooth-space-affine-infinitesimal-lift",
+    "def-sbc-first-order-thickening",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXU (lemma-SGE-implies-openness-versality), shrinking paragraph and penultimate paragraph: explicit principal-open restriction and affine infinitesimal lifting."
+   }
+  },
+  {
+   "text": "Put $r=ps:V'\\to U$. The universal isomorphism at the triple $s$ gives $\\beta:r^*x\\cong x'|_{V'}$, whose restriction to $V$ is $\\theta|_V$, and $r|_V$ is the open inclusion $V\\to U$. Since $u_0\\in\\overline{\\{u_n:n\\geq1\\}}$, choose $n$ with $u_n\\in V$. Let $W$ be the inverse image of $V'$ in $U_n$ under its map to $U'$. It is an open neighbourhood of $u_n$ and $W\\cap U=V$. Pull back $\\beta^{-1}$ to $W$ and compose with $x_n|_W\\cong x'|_W$. This gives an arrow $x_n|_W\\to x$ over $W\\to V'\\xrightarrow r U$. On $V$, compatibility of the chosen reduction isomorphisms makes its composite with $x|_V\\to x_n|_W$ the canonical restriction arrow $x|_V\\to x$: the two factors are precisely $\\theta$ and $\\theta^{-1}$. This is forbidden at $u_n$ by [lem-sfb-artin-nonversal-thickening-tower]. The contradiction proves that an open neighbourhood with the required versality exists.",
+   "uses": [
+    "lem-sfb-artin-nonversal-thickening-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXU (lemma-SGE-implies-openness-versality), last paragraph: pull back the universal isomorphism, construct the forbidden local retraction and conclude."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-artin-versality-generalization",
+  "lem-sfb-noetherian-countable-antichain",
+  "lem-sfb-artin-nonversal-thickening-tower",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-directed-subalgebra-ring-colimit",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-sbc-first-order-thickening",
+  "lem-sfb-artin-versal-base-change-smooth",
+  "lem-sfb-smooth-space-affine-infinitesimal-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 0CXU (lemma-SGE-implies-openness-versality), complete proof; principal-open shrinking and compatibility of the final retraction made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A category fibred in groupoids with representable diagonal Rim Schlessinger condition limit preservation and square zero strong effectiveness satisfies openness of versality",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"@AlgebraicGeometry.UniversallyOpen = (AlgebraicGeometry.topologically @IsOpenMap).universally\", \"doc\": \"The property of a morphism of schemes being universally open is equivalent to the property that its underlying continuous map is an open map, and this openness is preserved under all base changes.\"}\n  {\"name\": \"AlgebraicGeometry.universallyOpen_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.UniversallyOpen f ↔ (AlgebraicGeometry.topologically @IsOpenMap).universally f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally open if and only if for every base change $ Y' \\to Y $, the induced continuous map on topological spaces $ X \\times_Y Y' \\to Y' $ is an open map. This e\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.UniversallyOpen\", \"doc\": \"The property of being universally open for morphisms of schemes is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ becomes universally open after restricting to an open cover \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource @AlgebraicGeometry.UniversallyOpen\", \"doc\": \"The property of being universally open for a morphism of schemes is Zariski-local at the source. That is, if a morphism $ f: X \\to Y $ has an open cover $ \\\\{U_i\\\\} $ of $ X $ such that each restriction \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.out\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyOpen f],\\n  (AlgebraicGeometry.topologically @IsOpenMap).universally f\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, if $ f $ is universally open, then the underlying continuous map of $ f $ satisfies the universal property of being an open map. That is, for every base chan\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"Every open immersion of schemes is a universally open morphism. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on the image), th\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern universal openness, smooth or etale loci, or effective equivalence relations; none is the Artin criterion for fibred groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong effectiveness of first order infinitesimal thickenings implies the versal locus is open",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.UniversallyOpen\", \"doc\": \"The property of being universally open for morphisms of schemes is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ becomes universally open after restricting to an open cover \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource @AlgebraicGeometry.UniversallyOpen\", \"doc\": \"The property of being universally open for a morphism of schemes is Zariski-local at the source. That is, if a morphism $ f: X \\to Y $ has an open cover $ \\\\{U_i\\\\} $ of $ X $ such that each restriction \"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget AlgebraicGeometry.IsOpenImmersion\", \"doc\": \"The property of being an open immersion is Zariski local at the target. That is, for any open immersion $ f: X \\to Y $ of schemes and any Zariski covering sieve $ S $ on $ Y $ (generated by open immers\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"@AlgebraicGeometry.UniversallyOpen = (AlgebraicGeometry.topologically @IsOpenMap).universally\", \"doc\": \"The property of a morphism of schemes being universally open is equivalent to the property that its underlying continuous map is an open map, and this openness is preserved under all base changes.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern universal openness, smooth or etale loci, or effective equivalence relations; none is the Artin criterion for fibred groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"versal\", \"effective\"",
+   "sub": "",
+   "results": "[loogle] OK 10 hit(s)\n  {\"name\": \"CategoryTheory.IsUniversallyEffectiveEquivalenceRelationCategory\", \"module\": \"Mathlib.CategoryTheory.EquivalenceRelation\", \"type\": \" (C : Type u_1) [CategoryTheory.Category.{v_1, u_1} C] {R A : C} : Prop\", \"doc\": \"A category `C` is a universally exact category if all equivalence relations in `C` are\\nuniversally effective equivalence relations.\"}\n  {\"name\": \"CategoryTheory.IsUniversallyEffectiveEquivalenceRelation\", \"module\": \"Mathlib.CategoryTheory.EquivalenceRelation\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R A : C} (p₁ p₂ : R ⟶ A) : Prop\", \"doc\": \"The typeclass associated with the structure `UniversallyEffectiveEquivalenceRelation`.\"}\n  {\"name\": \"CategoryTheory.UniversallyEffectiveEquivalenceRelation\", \"module\": \"Mathlib.CategoryTheory.EquivalenceRelation\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R A : C} (p₁ p₂ : R ⟶ A) : Type (max u_1 v_1)\", \"doc\": \"A universally effective equivalence relation is an effective equivalence relation\\n`p₁, p₂ : R ⟶ A` such that the corresponding morphism `π : A ⟶ B` is a universal effective\\nepimorphism.\"}\n  {\"name\": \"CategoryTheory.UniversallyEffectiveEquivalenceRelation.toEffectiveEquivalenceRelation\", \"module\": \"Mathlib.CategoryTheory.EquivalenceRelation\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R A : C} {p₁ p₂ : R ⟶ A} (self : CategoryTheory.UniversallyEffectiveEquivalenceRelation p₁ p₂) : CategoryTheory.EffectiveEquivalenceRelation p₁ p₂\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsUniversallyEffectiveEquivalenceRelation.mk\", \"module\": \"Mathlib.CategoryTheory.EquivalenceRelation\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R A : C} {p₁ p₂ : R ⟶ A} (nonempty_universallyEffectiveEquivalenceRelation : Nonempty (CategoryTheory.UniversallyEffectiveEquivalenceRelation p₁ p₂)) : CategoryTheory.IsUniversallyEffectiveEquivalenceRelation p₁ p₂\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsUniversallyEffectiveEquivalenceRelation.nonempty_universallyEffectiveEquivalenceRelation\", \"module\": \"Mathlib.CategoryTheory.EquivalenceRelation\", \"type\": \" {C : Type u_1} {inst✝ : CategoryTheory.Category.{v_1, u_1} C} {R A : C} {p₁ p₂ : R ⟶ A} [self : CategoryTheory.IsUniversallyEffectiveEquivalenceRelation p₁ p₂] : Nonempty (CategoryTheory.UniversallyEffectiveEquivalenceRelation p₁ p₂)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsUniversallyEffectiveEquivalenceRelationCategory.isUniversallyEffectiveEquivalenceRelation\", \"module\": \"Mathlib.CategoryTheory.EquivalenceRelation\", \"type\": \" {C : Type u_1} {inst✝ : CategoryTheory.Category.{v_1, u_1} C} {R A : C} [self : CategoryTheory.IsUniversallyEffectiveEquivalenceRelationCategory C] (p₁ p₂ : R ⟶ A) [CategoryTheory.IsEquivalenceRelation p₁ p₂] : CategoryTheory.IsUniversallyEffectiveEquivalenceRelation p₁ p₂\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsUniversallyEffectiveEquivalenceRelationCategory.mk\", \"module\": \"Mathlib.CategoryTheory.EquivalenceRelation\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R A : C} (isUniversallyEffectiveEquivalenceRelation : ∀ (p₁ p₂ : R ⟶ A) [CategoryTheory.IsEquivalenceRelation p₁ p₂], CategoryTheory.IsUniversallyEffectiveEquivalenceRelation p₁ p₂) : CategoryTheory.IsUniversallyEffectiveEquivalenceRelationCate\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.UniversallyEffectiveEquivalenceRelation.mk\", \"module\": \"Mathlib.CategoryTheory.EquivalenceRelation\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R A : C} {p₁ p₂ : R ⟶ A} (toEffectiveEquivalenceRelation : CategoryTheory.EffectiveEquivalenceRelation p₁ p₂) (universally_effectiveEpi_π : CategoryTheory.MorphismProperty.universally (fun x x_1 f => CategoryTheory.EffectiveEpi f) toEffectiveEq\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.UniversallyEffectiveEquivalenceRelation.universally_effectiveEpi_π\", \"module\": \"Mathlib.CategoryTheory.EquivalenceRelation\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R A : C} {p₁ p₂ : R ⟶ A} (self : CategoryTheory.UniversallyEffectiveEquivalenceRelation p₁ p₂) : CategoryTheory.MorphismProperty.universally (fun x x_1 f => CategoryTheory.EffectiveEpi f) self.π\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern universal openness, smooth or etale loci, or effective equivalence relations; none is the Artin criterion for fibred groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "versality|RimSchlessinger|strongEffect",
+   "sub": "AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern universal openness, smooth or etale loci, or effective equivalence relations; none is the Artin criterion for fibred groupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Openness of versality from strong effectiveness of square zero inverse systems",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"[IsOpenImmersion (pullback.diagonal f)] : FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[LocallyOfFinitePresentation f] (hf : GeneralizingMap f) : IsOpenMap f\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOpenImmersionF\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(i : 𝒰.I₀) : IsOpenImmersion (𝒰.f i)\", \"doc\": \"For each element $i$ in the zeroth component $I_0$ of a pre-zero hypercover $\\\\mathcal{U}$ of a scheme $S$, the associated morphism $\\\\mathcal{U}.f(i): X(i) \\\\to S$ is an open immersion. This means the m\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_isOpenMap\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"{𝒰 : S.Cover K} [Scheme.JointlySurjective K] (h : ∀ i, IsOpenMap (𝒰.f i)) : QuasiCompactCover 𝒰.toPreZeroHypercover\", \"doc\": \"If $ S $ is a scheme equipped with a jointly surjective precoverage $ K $, and $ \\\\mathcal{U} $ is a $ K $-cover of $ S $ such that every morphism $ \\\\mathcal{U}.f(i) $ in the cover is an open map, then\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"[FormallyUnramified f] [LocallyOfFiniteType f] : IsOpenImmersion (pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[IsOpenImmersion f] : UniversallyOpen f\", \"doc\": \"Every open immersion of schemes is a universally open morphism. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on the image), th\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern universal openness, smooth or etale loci, or effective equivalence relations; none is the Artin criterion for fibred groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong square zero effectivity for a limit preserving category fibred in groupoids implies openness of versality",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.fromGlued_open_map\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰).base)\", \"doc\": \"For any open cover 𝒰 of a scheme X, the underlying continuous map of the canonical morphism from the glued scheme constructed from 𝒰 to X is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.isOpenMap_fromGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰).base)\", \"doc\": \"The canonical morphism from the glued scheme constructed via an open cover to the original scheme is an open map, meaning it maps open subsets of the glued scheme to open subsets of the original schem\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyIsOpenMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsOpenMap)\", \"doc\": \"The property of a scheme morphism having an underlying continuous map that is an open map is Zariski-local at the source. That is, for any scheme morphism, if there exists a Zariski-open cover of its \"}\n  {\"name\": \"IsOpenMap.coverPreserving\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/Sites\", \"type\": \"∀ {X Y : TopCat} {f : X ⟶ Y} (hf : IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f)),\\n  CategoryTheory.CoverPreserving (Opens.grothendieckTopology ↑X) (Opens.grothendieckTopology ↑Y) hf.functor\", \"doc\": \"For topological spaces $X$ and $Y$, if $f : X \\to Y$ is an open map, then the functor induced by $f$ between the categories of open subsets of $X$ and $Y$ (equipped with their respective Grothendieck t\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsOpenMap)\", \"doc\": \"The property of being an open map for morphisms of schemes is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes is an open map (i.e., its underlying continuous map s\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"@AlgebraicGeometry.UniversallyOpen = (AlgebraicGeometry.topologically @IsOpenMap).universally\", \"doc\": \"The property of a morphism of schemes being universally open is equivalent to the property that its underlying continuous map is an open map, and this openness is preserved under all base changes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.isOpen_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ (D : AlgebraicGeometry.Scheme.GlueData) (U : Set ↥D.glued),\\n  IsOpen U ↔ ∀ (i : D.J), IsOpen (⇑(CategoryTheory.ConcreteCategory.hom (D.ι i).base) ⁻¹' U)\", \"doc\": \"A subset $ U $ of the underlying topological space of the glued scheme $ D.\\\\text{glued} $ is open if and only if for every index $ i $, the preimage of $ U $ under the inclusion morphism $ \\\\iota_i $ i\"}\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionMapSchemeCompOverOverTopMorphismPropertyForgetForget\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {S : AlgebraicGeometry.Scheme} {J : Type u_1}\\n  [inst : CategoryTheory.Category.{v_1, u_1} J] (F : CategoryTheory.Functor J (P.Over ⊤ S))\\n  [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f).left] {i j : J} (f : i ⟶ \", \"doc\": \"For any morphism $ f $ in the appropriate category, applying the composition of the forgetful functors (first forgetting the morphism property and then forgetting the over category structure) results \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: universal openness of schemes is not openness of versality of a fibred groupoid"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"versality\"",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: universal openness of schemes is not openness of versality of a fibred groupoid"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bversality\\b|RimSchlessinger|strongEffect",
+   "sub": "",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: universal openness of schemes is not openness of versality of a fibred groupoid"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Openness of versality from effective inverse sequences of square zero extensions",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"[IsOpenImmersion (pullback.diagonal f)] : FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.universallyOpen_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.UniversallyOpen f ↔ (AlgebraicGeometry.topologically @IsOpenMap).universally f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally open if and only if for every base change $ Y' \\to Y $, the induced continuous map on topological spaces $ X \\times_Y Y' \\to Y' $ is an open map. This e\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[LocallyOfFinitePresentation f] (hf : GeneralizingMap f) : IsOpenMap f\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOpenImmersionF\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(i : 𝒰.I₀) : IsOpenImmersion (𝒰.f i)\", \"doc\": \"For each element $i$ in the zeroth component $I_0$ of a pre-zero hypercover $\\\\mathcal{U}$ of a scheme $S$, the associated morphism $\\\\mathcal{U}.f(i): X(i) \\\\to S$ is an open immersion. This means the m\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \": @UniversallyOpen = universally (topologically @IsOpenMap)\", \"doc\": \"The property of a morphism of schemes being universally open is equivalent to the property that its underlying continuous map is an open map, and this openness is preserved under all base changes.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[IsOpenImmersion f] : UniversallyOpen f\", \"doc\": \"Every open immersion of schemes is a universally open morphism. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on the image), th\"}\n  {\"name\": \"TrivSqZeroExt.invertibleOfInvertibleFst\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"(x : tsze R M) [Invertible x.fst] : Invertible x\", \"doc\": \"For an element $(r, m)$ in the trivial square-zero extension $R \\\\times M$ of a ring $R$ by an $R$-module $M$, if the first component $r$ is invertible in $R$, then $(r, m)$ is invertible in $R \\\\times \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: universal openness of schemes is not openness of versality of a fibred groupoid"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin criterion axiom openness of versality from strong formal effectiveness",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The property of a scheme being locally Artinian, i.e., every point has an open neighborhood whose ring is Artinian.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyArtinianXScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyArtinian X] {U : X.OpenCover} (i : U.I₀),\\n  AlgebraicGeometry.IsLocallyArtinian (U.X i)\", \"doc\": \"If $ X $ is a locally Artinian scheme and $ U $ is an open cover of $ X $, then each open subset $ U_i $ in the cover is also a locally Artinian scheme. This means the property of being locally Artini\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyArtinianToScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyArtinian X] {U : X.Opens},\\n  AlgebraicGeometry.IsLocallyArtinian ↑U\", \"doc\": \"If a scheme $X$ is locally Artinian (i.e., every point has an open neighborhood with an Artinian ring), then every open subscheme $U \\\\subseteq X$ is also locally Artinian. This instance asserts that t\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyArtinian_iff_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  AlgebraicGeometry.IsLocallyArtinian X ↔ ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsLocallyArtinian (𝒰.X i)\", \"doc\": \"For any scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$, the scheme $X$ is locally Artinian if and only if every open subscheme $\\\\mathcal{U}.X(i)$ in the cover is locally Artinian. This equivalence \"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is Artinian\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"@AlgebraicGeometry.UniversallyOpen = (AlgebraicGeometry.topologically @IsOpenMap).universally\", \"doc\": \"The property of a morphism of schemes being universally open is equivalent to the property that its underlying continuous map is an open map, and this openness is preserved under all base changes.\"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme.toIsLocallyArtinian\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsArtinianScheme X], AlgebraicGeometry.IsLocallyArtinian X\", \"doc\": \"If $X$ is an Artinian scheme, then $X$ is locally Artinian, meaning every point of $X$ has an open neighborhood whose coordinate ring is Artinian.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: universal openness of schemes is not openness of versality of a fibred groupoid"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-openness-versality",
+  "date": "2026-10-22",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality.",
+   "via": [
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-artin-square-zero-effectivity-openness",
+  "worker": "stage1",
+  "summary": "Read Stacks 0CXU and its supporting statements. Preserved the item statement; split the nonversal-point contradiction into eight steps, exposing the generalization lemma, countable antichain extraction, non-retractable deformation tower, versal base-change smoothness and affine lifting for smooth algebraic spaces. All five new statements are unsplit and searched. The final shrinking uses a principal open, with exact reduction-isomorphism compatibility, without interchanging localization and an inverse limit. Repaired the return for head c7ef24a98b3 by rebasing onto the current live unsplit item: its statement and statement dependencies agree with the retained delivery. Re-read all six existing proof dependencies and verified that each complete statement is identical to its retained citation. Preserved both the live inherited Mathlib searches and the logged Q50 searches; the eight-step proof and five supporting statements remain applicable. The delivery tool builds and preflights this overlay on current origin/sheaf-dag, rather than treating a side-DAG completion as a live completion. Repair resumed 2026-10-23: reconstructed again from the current shared live record after initial dry run 138795d3e2e passed; the live item remains unsplit and all five helper ids are absent. Reopened all eleven cited statements, verified all fourteen citation entries verbatim, and reread the supporting Stacks sources. No cited statement or mathematical hypothesis changed; only the split-owned overlay and retained search records are reapplied to the current live baseline.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Realizes Tag 0CXU in the supporting Artin-openness input; the inherited ancestor is null and blueprint_refs.py ancestor confirms null. No unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-directed-subalgebra-ring-colimit",
+    "why": "Generic directed-union colimit of rings used to apply limit preservation, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic affine spectrum limit formula used for finite type descent; the unit has no replacement for this scheme-limit tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-directed-subalgebra-ring-colimit",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-a8bb54266",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-a8bb54266 (reviewer sub-agent of L); spot-checked: This head is the fourth delivery (c7ef PASS; b08f FIX; b864 FIX re-applied). All five new nodes are sha256-identical to b864/b08f. The item differs only in split_report (date and repair sentence); its statement, stmt_deps, proof and proof_deps are byte-identical. So the b08f fix to lem-sfb-artin-versal-base-change-smooth is lost again, the third issue of the same fix. Live and side-live still have the item unsplit with no helper ids, and there is no repair note, so the delivery is not superseded. I reread Stacks artin.tex 0CXU in full together with 0G2S, 0CXM (including the parenthetical on limit preservation) and 0G2K, plus properties 0G2F/0G2R and spaces-more-morphisms 04AM/060G. The item matches 0CXU over Spec Z hypothesis by hypothesis, and the eight steps follow the source proof one for one. Step 3: every kernel ker(R_m→R_n) lies in ker(R_m→R_0), so all transition kernels square to zero. Step 4: R→R_0 is surjective with square-zero kernel; Spec R is a limit by the generic pbc tool nodes, which I accept. Step 7: the D(f) fraction argument keeps the kernel square zero. Step 8: the constructed arrow composes to θ^{-1}∘θ, the canonical arrow the tower node forbids. Edge cases checked: E empty or finite, the closed points of Spec Z, Spec Z_(p), and the zero-ideal lift. The duplicate search (rg -L over \\bversal, versality and the seven tags) found no duplicate: curve-openness 0D59, smooth-point-neighbourhood 07XY, representable-diagonal 07Y4, finite-type-points-detect-open, and the per-lift nodes (converse direction or schemes only). No SGA source is cited. The batch-5 citations of def-trf-algebraic-space in three new nodes are a generic definition already in the item's base stmt_deps, so I accept them. The fault: the base-change node's 'in particular' clause claims q is smooth near i(u_0) for every finite type point without versality, which is false (F=h_V, x=j, y=id gives q=j, a closed immersion). I re-applied the b08f fix file verbatim (statement only: p∘i=id, q∘i=j, versality at u_0 required for smoothness); the item's step 6 already assumes versality. Maintainer note: apply this fix together with the promotion, since it has been lost three times.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinSquareZeroEffectivityOpenness",
+  "declaration": "AlgebraicGeometry.ArtinCriterion.opennessOfVersality_of_strongSquareZeroEffectivity",
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinSquareZeroEffectivityOpenness.lean",
+  "statement": "theorem opennessOfVersality_of_strongSquareZeroEffectivity (F : BasedCategory.{v, w} (Over Base.{u})) (hFibred : IsFibredInGroupoids F) (hDiagonal : HasAlgebraicSpaceDiagonal F) (hGluing : SquareZeroGluing F) (hLimits : IsLimitPreserving F) (hEffective : StrongSquareZeroEffectivity F) : OpennessOfVersality F",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-028b5b2ea",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Re-delivery of RETURN 326b (H2/H12). Lean byte-identical (sha256 + diff). Item changes only stmt_deps (+def-sfb-artin-integer-base-versality, +def-sfb-stable-pointed-moduli-groupoids); lean.statement verbatim. New existing:true node records the 12 ArtinCriterion decls (all present; OpennessOfVersality statement verbatim, line 315); TeX matches the Lean (base, Object/Lift, limit preservation = def-sfb-fibred-groupoid-limit-preserving at S=Base, lft+qc finite type point, Artinian lifting versality with b≫d=c, openness). Square-zero def nodes cite it in TeX + stmt_deps. Item clauses (1)-(4) and conclusion re-checked vs 0CXU; edge cases and universes OK; report sections present; no compile needed (no change). Maintainer note: parallel ArtinVersality.IsRimSchlessingerStar (theorem-node-owned helper of lem-sfb-artin-versality-generalization, landed 616b9e96 during the 326b review) duplicates RS*; stage 3 needs a SquareZeroGluing ⇒ IsRimSchlessingerStar bridge at S=Base for proof step 2."
+ }
+}

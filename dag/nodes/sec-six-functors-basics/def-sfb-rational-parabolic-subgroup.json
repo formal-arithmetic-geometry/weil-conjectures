@@ -1,0 +1,155 @@
+{
+ "id": "def-sfb-rational-parabolic-subgroup",
+ "kind": "definition",
+ "title": "Rational parabolic subgroups and minimality",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field] and let $P,G$ be group schemes over $k$ [def-sc-group-scheme]. Use closed subgroup schemes [def-sc-group-scheme-subgroup], smooth morphisms [def-sbc-smooth-morphisms], connectedness [def-weil-connected-scheme], and extension to the algebraic closure [def-sfb-tori-multiplicative-type]. A homomorphism $i:P\\to G$ is a parabolic subgroup if it is a closed subgroup inclusion, $P$ is smooth and geometrically connected, and there are a $k$-scheme $Q$ and a $k$-morphism $q:G\\to Q$ such that $Q$ is proper over $k$ [def-weil-proper-morphism], $q$ is flat [def-weil-flat-morphism], surjective [def-weil-surjective-morphism], and locally of finite presentation [def-sbc-locally-finite-presentation], and for every $k$-scheme $T$ and $a,b\\in G(T)$ one has $q(a)=q(b)$ if and only if $a^{-1}b\\in i(P(T))$. Thus $Q$ represents the fppf sheafification of the right-coset presheaf: $q$ supplies fppf-local lifts and the displayed relation identifies exactly the right cosets. Properness includes finite type [def-weil-finite-type-morphism]. A parabolic $i:P\\to G$ is minimal if every closed subgroup inclusion $j:Q'\\to P$ for which $i\\circ j$ is a parabolic subgroup of $G$ is an isomorphism. The subgroup $P=G$ is allowed.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-tori-multiplicative-type",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 17.15, printed p.356; Theorem 25.6(b),(c) and minimality in Chapter 25(a), printed pp.544--546, with author errata p.545 et seq. The fppf projection and coset-fibre formulation expresses the represented right-coset sheaf."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A parabolic subgroup is a smooth geometrically connected closed subgroup with proper represented quotient",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Matrix.GeneralLinearGroup.IsParabolic\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \"(g : GL (Fin 2) R) : Prop\", \"doc\": \"A 2×2 invertible matrix over a semiring $ R $ is parabolic if it is not a scalar matrix (i.e., not a scalar multiple of the identity matrix) and its characteristic polynomial has zero discriminant.\"}\n  {\"name\": \"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"module\": \"Mathlib.NumberTheory.ModularForms.Cusps\", \"type\": \"{g} (hg : g ∈ 𝒢) (hg10 : g 1 0 = 0) : g.IsParabolic ↔ (∃ x ≠ 0, g = upperRightHom x) ∨ (∃ x ≠ 0, g = -upperRightHom x)\", \"doc\": \"For a matrix $ g $ in the subgroup of $ \\\\mathrm{GL}(2, R) $ with determinant $ \\\\pm 1 $ and $ g_{1,0} = 0 $, $ g $ is parabolic if and only if there exists a non-zero $ x \\\\in R $ such that $ g $ equals\"}\n  {\"name\": \"ClosedSubgroup.ctorIdx\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"{G : Type u} → {inst : Group G} → {inst_1 : TopologicalSpace G} → ClosedSubgroup G → ℕ\", \"doc\": \"A closed subgroup of a topological group $G$ is a subgroup $H$ of $G$ that is closed in the topology of $G$.\"}\n  {\"name\": \"Matrix.IsParabolic\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \": Prop\", \"doc\": \"A square matrix is parabolic if it is not a scalar matrix (i.e., not in the image of the scalar embedding) and its characteristic polynomial has zero discriminant.\"}\n  {\"name\": \"ClosedSubgroup.recOn\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"{G : Type u} →\\n  [inst : Group G] →\\n    [inst_1 : TopologicalSpace G] →\\n      {motive : ClosedSubgroup G → Sort u_1} →\\n        (t : ClosedSubgroup G) →\\n          ((toSubgroup : Subgroup G) →\\n              (isClosed' : IsClosed toSubgroup.carrier) → motive { toSubgroup := toSubgroup, isClosed' := isC\", \"doc\": \"A closed subgroup of a topological group $ G $ is a subgroup $ H $ of $ G $ that is closed in the topology of $ G $, meaning its underlying subset of $ G $ is a closed set in the topological space str\"}\n  {\"name\": \"Matrix.isParabolic_conj_iff\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \": (g.val * m * g.val⁻¹).IsParabolic ↔ IsParabolic m\", \"doc\": \"For any invertible matrix $ g $ and square matrix $ m $, the conjugated matrix $ g m g^{-1} $ is parabolic if and only if $ m $ is parabolic. A matrix is parabolic if it is not a scalar matrix and its\"}\n  {\"name\": \"Matrix.isParabolic_conj'_iff\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \": (g.val⁻¹ * m * g.val).IsParabolic ↔ m.IsParabolic\", \"doc\": \"For any invertible matrix $ g $ and square matrix $ m $, the conjugated matrix $ g^{-1} m g $ is parabolic if and only if $ m $ is parabolic. A matrix is parabolic if it is not a scalar matrix and its\"}\n  {\"name\": \"ClosedSubgroup\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"(G : Type u) → [Group G] → [TopologicalSpace G] → Type u\", \"doc\": \"A closed subgroup of a topological group $G$ is a subgroup $H$ of $G$ that is closed in the topology of $G$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No rational parabolic group-scheme predicate; hits concern matrices or unrelated quotients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"parabolic\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Matrix.IsParabolic\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] (m : Matrix (Fin 2) (Fin 2) R) : Prop\", \"doc\": \"A `2 × 2` matrix is *parabolic* if it is non-scalar and its discriminant is 0.\"}\n  {\"name\": \"Matrix.parabolicEigenvalue\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {K : Type u_1} [Field K] (m : Matrix (Fin 2) (Fin 2) K) : K\", \"doc\": \"The unique eigenvalue of a parabolic matrix (junk if `m` is not parabolic).\"}\n  {\"name\": \"Matrix.GeneralLinearGroup.IsParabolic\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] (g : GL (Fin 2) R) : Prop\", \"doc\": \"Synonym of `Matrix.IsParabolic`, for dot-notation.\"}\n  {\"name\": \"Matrix.IsParabolic.neg\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] {m : Matrix (Fin 2) (Fin 2) R} (h : m.IsParabolic) : (-m).IsParabolic\", \"doc\": \"\"}\n  {\"name\": \"Matrix.IsParabolic.of_neg\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] {m : Matrix (Fin 2) (Fin 2) R} (h : (-m).IsParabolic) : m.IsParabolic\", \"doc\": \"\"}\n  {\"name\": \"Matrix.isParabolic_neg_iff\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] {m : Matrix (Fin 2) (Fin 2) R} : (-m).IsParabolic ↔ m.IsParabolic\", \"doc\": \"\"}\n  {\"name\": \"Matrix.GeneralLinearGroup.parabolicEigenvalue_ne_zero\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {K : Type u_2} [Field K] {g : GL (Fin 2) K} [NeZero 2] (hg : g.IsParabolic) : (↑g).parabolicEigenvalue ≠ 0\", \"doc\": \"\"}\n  {\"name\": \"Matrix.isParabolic_iff_of_upperTriangular\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] {m : Matrix (Fin 2) (Fin 2) R} [IsReduced R] (hm : m 1 0 = 0) : m.IsParabolic ↔ m 0 0 = m 1 1 ∧ m 0 1 ≠ 0\", \"doc\": \"\"}\n  {\"name\": \"Matrix.GeneralLinearGroup.IsParabolic.pow\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {K : Type u_2} [Field K] {g : GL (Fin 2) K} (hg : g.IsParabolic) [CharZero K] {n : ℕ} (hn : n ≠ 0) : (g ^ n).IsParabolic\", \"doc\": \"A non-zero power of a parabolic element is parabolic.\"}\n  {\"name\": \"Matrix.isParabolic_conj'_iff\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] {m : Matrix (Fin 2) (Fin 2) R} (g : GL (Fin 2) R) : ((↑g)⁻¹ * m * ↑g).IsParabolic ↔ m.IsParabolic\", \"doc\": \"\"}\n  {\"name\": \"Matrix.isParabolic_conj_iff\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] {m : Matrix (Fin 2) (Fin 2) R} (g : GL (Fin 2) R) : (↑g * m * (↑g)⁻¹).IsParabolic ↔ m.IsParabolic\", \"doc\": \"\"}\n  {\"name\": \"Matrix.GeneralLinearGroup.isParabolic_conj_iff\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] (g h : GL (Fin 2) R) : (g * h * g⁻¹).IsParabolic ↔ h.IsParabolic\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No rational parabolic group-scheme predicate; hits concern matrices or unrelated quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "IsParabolic|parabolic subgroup|[Pp]arabolic.*[Qq]uotient",
+   "results": "[grep] OK 13 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"line\": \"19\", \"text\": \"* parabolic elements (`Matrix.IsParabolic`) - one eigenvalue with non-semisimple generalized\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"line\": \"40\", \"text\": \"def IsParabolic : Prop := m ∉ Set.range (scalar _) ∧ m.discr = 0\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"line\": \"46\", \"text\": \"@[simp] lemma isParabolic_conj_iff : (g.val * m * g.val⁻¹).IsParabolic ↔ IsParabolic m := by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"line\": \"47\", \"text\": \"  simp_rw [IsParabolic, discr_conj, Set.mem_range, ← Matrix.coe_units_inv,\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"line\": \"51\", \"text\": \"@[simp] lemma isParabolic_conj'_iff : (g.val⁻¹ * m * g.val).IsParabolic ↔ m.IsParabolic := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"49\", \"text\": \"lemma isParabolic_iff_of_upperTriangular {g} (hg : g ∈ 𝒢) (hg10 : g 1 0 = 0) :\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"50\", \"text\": \"    g.IsParabolic ↔ (∃ x ≠ 0, g = upperRightHom x) ∨ (∃ x ≠ (0 : K), g = -upperRightHom x) :=\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"51\", \"text\": \"  isParabolic_iff_of_upperTriangular_of_det (HasDetPlusMinusOne.det_eq hg) hg10\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"59\", \"text\": \"  ∃ g ∈ 𝒢, g.IsParabolic ∧ g • c = c\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"124\", \"text\": \"    · suffices (mapGL ℝ ModularGroup.T).IsParabolic by simpa\"}\n  {\"file\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine.lean\", \"line\": \"191\", \"text\": \"lemma IsParabolic.smul_eq_self_iff {g : GL (Fin 2) K} (hg : g.IsParabolic) [NeZero (2 : K)]\"}\n  {\"file\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine.lean\", \"line\": \"210\", \"text\": \"lemma IsParabolic.parabolicFixedPoint_pow {g : GL (Fin 2) K} (hg : IsParabolic g) [CharZero K]\"}\n  {\"file\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine.lean\", \"line\": \"213\", \"text\": \"  rw [eq_comm, ← IsParabolic.smul_eq_self_iff (hg.pow hn)]\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No rational parabolic group-scheme predicate; hits concern matrices or unrelated quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsParabolicGroupScheme|IsMinimalParabolicGroupScheme|minimal_parabolic_split_centralizers lean/.lake/packages/mathlib/Mathlib lean/WeilConjectures lean/Sheaf; rg -l parabolic dag/nodes/*/def-*.json",
+   "results": "No matching declarations or parabolic definition nodes. Existing cocharacter limit functors and standard parabolic geometry do not define arbitrary rational parabolics. Existing IsFppfGroupQuotient concerns homomorphisms to group quotients by normal kernels, not a nonnormal parabolic coset quotient.",
+   "date": "2026-10-24",
+   "verdict": "New parabolic definition required."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "parabolic",
+   "results": "0 blueprint nodes match 'parabolic'",
+   "date": "2026-10-24",
+   "verdict": "No existing blueprint definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-minimal-parabolic-split-centralizers",
+  "date": "2026-10-24",
+  "group": "Q160"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Definition of the rational parabolic and minimality in the centralizer lemma hypothesis.",
+   "via": [
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RationalParabolic",
+  "declaration": "AlgebraicGeometry.IsParabolicGroupScheme",
+  "declarations": [
+   "AlgebraicGeometry.IsParabolicGroupScheme",
+   "AlgebraicGeometry.IsMinimalParabolicGroupScheme"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RationalParabolic.lean",
+  "statement": "def IsParabolicGroupScheme {k : Type u} [Field k] {P G : Grp (Over (Spec (.of k)))} (i : P ⟶ G) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2cf068bb",
+  "group": "Q160",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2cf068bb",
+  "group": "Q160",
+  "result": "fix",
+  "note": "Item theorem matches the node clause by clause (minimal parabolic in G; closed split tori maximal in P; U fixed as R_uP by its universal property; L_a = C_G(S_a) on all algebras, reductive, U x L_a -> P an iso with explicit conjugation; one rational u with u L0 u^-1 = L1). New node def-sfb-rational-parabolic-subgroup is a real, non-stronger definition. Records verbatim; stmt_deps changed only by adding the new node. H12 FIX: the new node now cites def-weil-surjective-morphism (fixes/def-sfb-rational-parabolic-subgroup.json; JSON only, no compile). Maintainer note: parallel Q134 delivery (lem-sfb-field-parabolic-isotropy-criterion 84831f00) adds the same notion as def-sfb-parabolic-subgroup / IsParabolicSubgroup, not landed; whichever lands second must cite the first (H4)."
+ }
+}

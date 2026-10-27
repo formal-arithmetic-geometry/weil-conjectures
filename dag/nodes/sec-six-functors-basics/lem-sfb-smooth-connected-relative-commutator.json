@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-smooth-connected-relative-commutator",
+ "kind": "statement",
+ "title": "Smooth connected relative commutator subgroup and its minimality",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups are affine [def-pc-scheme] $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], with closed subgroup schemes as in [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Let $G$ be smooth and connected and let $N\\subseteq G$ be a smooth connected normal closed subgroup. There exists a smooth connected normal closed subgroup $D\\subseteq G$ contained in $N$ such that, for every commutative $k$-algebra $R$, every $g\\in G(R)$ and every $n\\in N(R)$, one has $gng^{-1}n^{-1}\\in D(R)$. If $K\\subseteq G$ is any closed subgroup scheme such that $gng^{-1}n^{-1}\\in K(R)$ for every commutative $k$-algebra $R$, every $g\\in G(R)$ and every $n\\in N(R)$, then $D\\subseteq K$. The subgroup $K$ need not be smooth, connected or normal. Denote this smallest subgroup by $[G,N]$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 6.24 and Remark 6.25(b), printed p.131; generated-subgroup construction and scalar extension, Propositions 2.46–2.48 and 2.50, printed pp.54–56; normality and containment for [G,N] with N normal, as used in the descending central series preceding Proposition 6.38, printed p.133."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=G\\times_kN$, $o=(e,e)$ and $A=k[G]$. The affine-product identification [lem-weil-pbc-fibre-product-affine-spectra] makes $X$ and its powers affine. The finite-type base-change and composition clauses of [lem-sfb-finite-type-composition-base-change] show that $X$ and all its powers are of finite type over $k$. We will use the following elementary affine test throughout: for an affine $Y=\\operatorname{Spec}B$ and a closed subscheme $K=\\operatorname{Spec}(A/J)$ of $G$, a morphism $u:Y\\to G$ factors through $K$ precisely when $u^*(J)=0$. Indeed the homomorphism $u^*:A\\to B$ then descends to $A/J$, and conversely a descended homomorphism kills $J$. Equivalently one may test membership in $K(B)$ of the universal point $u_B(\\mathrm{id}_B)$. The descriptions of affine morphisms and closed subschemes used here are [def-weil-affine-spectrum, def-weil-closed-immersion].",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 2.46–2.48, pp.54–55, affine setup; finite-type products: Stacks Tags 01T3 (lemma-composition-finite-type), 01T4 (lemma-base-change-finite-type)"
+   }
+  },
+  {
+   "text": "The group operations [def-sc-group-scheme] define the morphism $c:X\\to G$, $c(g,n)=gng^{-1}n^{-1}$, and $c(o)=e$. Normality of $N$ in the sense of [def-sc-group-scheme-subgroup] gives $gng^{-1}\\in N(R)$ for every $R$, hence $c(g,n)\\in N(R)$. The image of $c$ is inversion stable on every algebra, since\n$$c(g,n)^{-1}=ngn^{-1}g^{-1}=c(g^{-1},gng^{-1}),$$\nand the second entry on the right lies in $N(R)$. The same normality, tested on the universal point of the affine scheme $G\\times_kN$ using step 1, gives a morphism $G\\times_kN\\to N$, $(h,n)\\mapsto hnh^{-1}$. Thus all subsequent conjugation substitutions are morphisms, not merely substitutions of geometric points.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 6.24 and Remark 6.25(b), p.131; relative commutator calculation for normal N"
+   }
+  },
+  {
+   "text": "The projection $X\\to N$ is the base change of the smooth morphism $G\\to\\operatorname{Spec}k$, so clause (2) of [lem-pc-proper-base-change] makes it smooth. Its composite with the smooth structure morphism of $N$ is smooth by [lem-trf-smooth-composition]. Hence $X$ is geometrically reduced by [sbc-lem-smooth-geometrically-reduced], applied over the field $k$. The base is a field and both group schemes are smooth by hypothesis; no perfection hypothesis on $k$ is used.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 2.48 and 2.50, pp.55–56, geometric reducedness input; Stacks Tags 01VB (lemma-base-change-smooth), 01VA (lemma-composition-smooth), 056T (lemma-smooth-geometrically-normal)"
+   }
+  },
+  {
+   "text": "The identity sections give $k$-rational points of the connected schemes $G$ and $N$. Apply [lem-sbc-connected-rational-point-geometrically-connected] separately to their structure morphisms: $G$ and $N$ are geometrically connected. For every field extension $L/k$, $G_L$ is again geometrically connected (any further extension is an extension of $k$), and $N_L$ is nonempty and connected. Apply [lem-weil-pbc-geometrically-connected-product-components] over $L$: the components of $G_L\\times_LN_L=X_L$ are in bijection with those of $N_L$. Thus $X_L$ has exactly one component and is nonempty, also witnessed by $o_L$. This proves geometric connectedness of $X$.",
+   "uses": [
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-weil-pbc-geometrically-connected-product-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 2.48, p.55; Stacks Tags 04KV (lemma-geometrically-connected-if-connected-and-point), 0385 (lemma-bijection-connected-components)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-pointed-map-generated-subgroup] to $(G,X,o,c)$. The affineness and finite-type conditions are step 1, and its pointedness and inversion-stability conditions are step 2. With $w_n:X^n\\to G$ the product of $n$ commutators and $I=\\bigcap_{n\\geq1}\\ker(w_n^*)$, it gives the closed subgroup $j:D=\\operatorname{Spec}(A/I)\\hookrightarrow G$ through which $c$ factors, minimal among all closed subgroups through which $c$ factors. It is affine of finite type, geometrically reduced by step 3 and geometrically connected by step 4. Apply [lem-sfb-geometrically-reduced-group-smooth] to this finite-type group scheme to deduce smoothness. In particular $D$ is connected (take the extension $k/k$). Write $C=A/I$, $B_n=k[X^n]$ and $f_n:C\\to B_n$ for the induced pullbacks of the word maps. Directly from the formula for $I$, if all $f_n(z)$ vanish then $z=0$.",
+   "uses": [
+    "lem-sfb-affine-pointed-map-generated-subgroup",
+    "lem-sfb-geometrically-reduced-group-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 2.46 and 2.48, pp.54–55; Proposition 2.50, p.56; Definition 6.24 and Remark 6.25(b), p.131"
+   }
+  },
+  {
+   "text": "Since $c$ factors through $D$, evaluation gives $c(g,n)\\in D(R)$ for every $R,g,n$ in the statement. Conversely let $K\\subseteq G$ be any closed subgroup containing all those commutators on all $k$-algebras. Taking $R=k[X]$ and the universal point of $X$ shows by the affine test of step 1 that $c$ factors through $K$. Minimality in [lem-sfb-affine-pointed-map-generated-subgroup] gives $D\\subseteq K$. This uses no smoothness, connectedness or normality of $K$. Apply the same argument to $K=N$, using the membership proved in step 2, to obtain $D\\subseteq N$.",
+   "uses": [
+    "lem-sfb-affine-pointed-map-generated-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 2.46, pp.54–55; Definition 6.24, p.131; containment used in the descending central series preceding Proposition 6.38, p.133"
+   }
+  },
+  {
+   "text": "Consider the morphism $q:G\\times_kD\\to G$, $q(h,d)=hdh^{-1}$. For each $n$ define $T_n:G\\times_kX^n\\to X^n$ by simultaneously replacing each pair $(g_i,n_i)$ by $(hg_ih^{-1},hn_ih^{-1})$. These are morphisms by the conjugation morphism from step 2 and the group operations [def-sc-group-scheme]. Cancellation in any group gives\n$$h\\,c(g_i,n_i)h^{-1}=c(hg_ih^{-1},hn_ih^{-1}),$$\nso $q\\circ(\\mathrm{id}_G\\times\\bar w_n)=w_n\\circ T_n$, where $\\bar w_n:X^n\\to D$ is the factorization from step 5. Consequently for every $a\\in I$, the pullback of $q^*(a)$ along $\\mathrm{id}_G\\times\\bar w_n$ is $T_n^*w_n^*(a)=0$. The affine-product identification [lem-weil-pbc-fibre-product-affine-spectra] expresses this as\n$$(\\mathrm{id}_A\\otimes f_n)(q^*(a))=0,\\qquad q^*(a)\\in A\\otimes_kC.$$",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 6.24, p.131, conjugation of relative commutator words; compare the normality argument of Proposition 6.18, p.129"
+   }
+  },
+  {
+   "text": "The maps $f_n:C\\to B_n$ jointly detect zero by step 5. Swap the two tensor factors of $q^*(a)$ and apply [lem-sfb-vector-space-tensor-family-zero-detection] with $M=C$, $N=A$ and the family $(f_n)_{n\\geq1}$. Step 7 gives all its required vanishing equations; hence $q^*(a)=0$ for every $a\\in I$. The affine test from step 1 therefore factors $q$ through $D$. On $R$-points this says $hD(R)h^{-1}\\subseteq D(R)$ for every commutative $k$-algebra $R$ and $h\\in G(R)$. Applying the same inclusion to $h^{-1}$ gives equality. Thus $D$ is normal by [def-sc-group-scheme-subgroup]. Combined with steps 5 and 6 this proves every asserted property; the minimality makes $D$ unique and defines $[G,N]$.",
+   "uses": [
+    "lem-sfb-vector-space-tensor-family-zero-detection",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 2.46, pp.54–55, tensor detection for word maps; Definition 6.24 and Remark 6.25(b), p.131; normality as used before Proposition 6.38, p.133"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "lem-sfb-affine-pointed-map-generated-subgroup",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-sfb-vector-space-tensor-family-zero-detection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 2.46–2.48 and 2.50, pp.54–56; Definition 6.24, Remark 6.25(b), p.131; descending central series preceding Proposition 6.38, p.133. The conjugation-of-word-maps calculation is expanded explicitly over arbitrary algebras."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine algebraic group and a smooth connected normal subgroup have a smooth connected closed normal commutator subgroup generated scheme theoretically by their commutators",
+   "results": "8 hits: instNormalCommutatorClosure, Field.absoluteGaloisGroup.commutator_closure_isNormal, commutator_eq_normalClosure, instNormalCommutator, Subgroup.commutator_def', derivedSeries_normal, Subgroup.commutator_normal, upperCentralSeriesStep",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract or topological group results do not supply a closed subgroup scheme, smoothness, or connectedness; the algebraic-geometry grep hits concern commutativity of proper groups only"
+  },
+  {
+   "tool": "grep",
+   "query": "commutator|lowerCentralSeries",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract or topological group results do not supply a closed subgroup scheme, smoothness, or connectedness; the algebraic-geometry grep hits concern commutativity of proper groups only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The subgroup scheme generated by commutators of a smooth connected affine group scheme with a smooth connected normal subgroup is smooth and connected",
+   "results": "8 hits: closureCommutatorRepresentatives, instNormalCommutator, commutator, Subgroup.commutator_def, Subgroup.commutator, Subgroup.commutator_le_left, commutator_def, Subgroup.commutator_le_self",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract or topological group results do not supply a closed subgroup scheme, smoothness, or connectedness; the algebraic-geometry grep hits concern commutativity of proper groups only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, commutator",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry'; 0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "unavailable: the Loogle index rejected this identifier, so this query supplies no absence evidence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative derived subgroup of connected algebraic groups is a smooth connected algebraic subgroup and is contained in every closed subgroup containing the commutator morphism",
+   "results": "8 hits: derivedSeries_one, derivedSeries, instNormalCommutatorClosure, Field.absoluteGaloisGroup.commutator_closure_isNormal, commutator_def, commutator_eq_closure, commutator_eq_normalClosure, lowerCentralSeries_one",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract or topological group results do not supply a closed subgroup scheme, smoothness, or connectedness; the algebraic-geometry grep hits concern commutativity of proper groups only"
+  },
+  {
+   "tool": "loogle",
+   "query": "GrpObj.commutator",
+   "results": "loogle: unknown identifier 'GrpObj.commutator'; 0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "unavailable: the Loogle index rejected this identifier, so this query supplies no absence evidence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commutator\"",
+   "results": "12 hits: addCommutatorElement, commutatorElement, addCommutatorElement_def, commutatorElement_def, AddSubgroup.mem_centralizer_iff_addCommutator_eq_zero, AddSubgroup.mem_centralizer_iff_addCommutator_eq_zero', Subgroup.mem_centralizer_iff_commutator_eq_one, Subgroup.mem_centralizer_iff_commutator_eq_one'",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract or topological group results do not supply a closed subgroup scheme, smoothness, or connectedness; the algebraic-geometry grep hits concern commutativity of proper groups only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth connected affine group scheme relative commutator subgroup of a smooth connected normal subgroup",
+   "results": "{\"t\": \"2026-10-23T23:30:40Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth connected affine group scheme relative commutator subgroup of a smooth connected normal subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"upperCentralSeriesStep\", \"Subgroup.commutator_def'\", \"instNormalCommutator\", \"upperCentralSeriesAux\", \"instNormalCommutatorClosure\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"Subgroup.commutator_normal\", \"derivedSeries_normal\"], \"digest\": \"5ae92d6c8a648a26\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract or topological subgroups do not supply the scheme-theoretic relative commutator, smoothness, connectedness and minimality; AlgebraicGeometry/Group/Abelian.lean proves commutativity of proper group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commutator\", \"Normal\"",
+   "results": "{\"t\": \"2026-10-23T23:30:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"commutator\\\", \\\"Normal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"instNormalAddCommutator\", \"instNormalCommutator\", \"addCommutator_eq_normalClosure\", \"commutator_eq_normalClosure\", \"AddSubgroup.Normal.of_addCommutator_le\", \"Subgroup.Normal.of_commutator_le\", \"AddSubgroup.addCommutator_normal\", \"Subgroup.commutator_normal\"], \"digest\": \"d0019f6d6f820950\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract or topological subgroups do not supply the scheme-theoretic relative commutator, smoothness, connectedness and minimality; AlgebraicGeometry/Group/Abelian.lean proves commutativity of proper group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "commutator|derived.*subgroup",
+   "results": "{\"t\": \"2026-10-23T23:30:40Z\", \"tool\": \"grep\", \"query\": \"commutator|derived.*subgroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\"], \"digest\": \"ef266cacf5ce3ac5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract or topological subgroups do not supply the scheme-theoretic relative commutator, smoothness, connectedness and minimality; AlgebraicGeometry/Group/Abelian.lean proves commutativity of proper group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smallest smooth connected closed subgroup scheme containing commutators of an algebraic group and a normal subgroup",
+   "results": "{\"t\": \"2026-10-23T23:30:41Z\", \"tool\": \"leansearch\", \"query\": \"Smallest smooth connected closed subgroup scheme containing commutators of an algebraic group and a normal subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instNormalCommutator\", \"commutator\", \"commutator_def\", \"commutator_eq_closure\", \"closureCommutatorRepresentatives\", \"Subgroup.commutator_def\", \"Subgroup.commutator_le_left\", \"Subgroup.Normal.commutator_le_of_self_sup_commutative_eq_top\"], \"digest\": \"4fb338fffe676282\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract or topological subgroups do not supply the scheme-theoretic relative commutator, smoothness, connectedness and minimality; AlgebraicGeometry/Group/Abelian.lean proves commutativity of proper group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic group scheme generated by the image of a commutator morphism geometrically reduced connected minimal closed subgroup",
+   "results": "{\"t\": \"2026-10-23T23:32:13Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraic group scheme generated by the image of a commutator morphism geometrically reduced connected minimal closed subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"closureCommutatorRepresentatives\", \"image_commutatorSet_closureCommutatorRepresentatives\", \"commutator\", \"commutator_def\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"instNormalCommutatorClosure\", \"commutator_eq_closure\", \"commutatorRepresentatives\"], \"digest\": \"2ab11497adfa6bfb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract or topological subgroups do not supply the scheme-theoretic relative commutator, smoothness, connectedness and minimality; AlgebraicGeometry/Group/Abelian.lean proves commutativity of proper group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "generated.*subgroup|subgroup.*generated|commutator",
+   "results": "{\"t\": \"2026-10-23T23:32:13Z\", \"tool\": \"grep\", \"query\": \"generated.*subgroup|subgroup.*generated|commutator\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\"], \"digest\": \"ef266cacf5ce3ac5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract or topological subgroups do not supply the scheme-theoretic relative commutator, smoothness, connectedness and minimality; AlgebraicGeometry/Group/Abelian.lean proves commutativity of proper group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nilpotent-connected-central-series",
+  "date": "2026-10-24",
+  "group": "Q100"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: A connected nilpotent group admits a central series of connected subgroup varieties. Milne descending-central-series construction: smooth connected relative commutator [G,C_j] and its minimality at each recursive step.",
+   "via": [
+    "lem-sfb-nilpotent-connected-central-series",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-connected-relative-commutator",
+  "worker": "stage1",
+  "summary": "Reused the existing affine pointed-map generated-subgroup construction, field-geometric connectedness inputs, and geometrically reduced group smoothness. Checked inverse stability of relative commutators using normality. Proved minimality by a universal affine point and normality by conjugation of word maps and tensor-family zero detection, over all algebras, without new nodes or a perfection assumption. Statement unchanged.",
+  "blueprint": "Inherited supporting input for the central-series prerequisite below det-thm-sf-ctf-stability-direct-images, clause (3); the latest blueprint has no node stating the relative commutator theorem. Steps realize Milne Definition 6.24 and Remark 6.25(b), including the containment and normality required before Proposition 6.38. The current direct-images proof uses compactification; no upper-level route is changed here.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only its generic smooth base-change clause (2) is used for the projection G times N to N; it is not a replacement of the unit route."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smooth-over-a-field geometric reducedness input to the Milne generated-subgroup construction; no commutator assertion is taken from this node."
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Generic field-geometric connectedness criterion applied to the identity sections; it supplies precisely the geometric connectedness hypothesis of the generated-subgroup node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sbc-connected-rational-point-geometrically-connected"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-edfba2abd",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-edfba2abd (reviewer sub-agent of L); spot-checked: I read all eight steps of the item and every cited statement. The delivery adds no new nodes; the statement and stmt_deps are unchanged, and there is no re-split note. Source check: Milne iAG Def 6.24 and Rem 6.25 (p.131) define [H1,H2] as the subgroup generated by the commutator map, and the descending central series (p.133) uses [G,C_j]. The item matches this, and minimality against arbitrary closed K fits the citer lem-sfb-nilpotent-connected-central-series. Step checks: (2) I verified c(g,n)^{-1}=c(g^{-1},gng^{-1}), whose second entry lies in N by normality. (3) Smooth base change (pc clause 2), then trf smooth composition, then sbc smooth implies geometrically reduced fibres; the fibre over Spec k is X. (4) A rational point plus connectedness gives geometric connectedness, and the product-components bijection over L gives X_L connected. (5) All hypotheses of lem-sfb-affine-pointed-map-generated-subgroup hold, including inversion stability on every R. The Mathlib leaf then gives smoothness, and the f_n detect zero because I equals the intersection of the I_n. (6) The universal point of k[X] reduces membership to factorization of c, then minimality gives D⊆K; with K=N, D⊆N. (7)+(8) h·c(g,n)·h^{-1}=c(hgh^{-1},hnh^{-1}) gives (id⊗f_n)q^*(a)=0, and tensor-family zero detection then gives q^*(I)=0, so D is normal. Small cases checked: N trivial or central gives D=e; N=G gives the usual derived group; nothing relies on density over imperfect fields. Not duplicates: lem-sfb-smooth-connected-derived-subgroup (algebraically closed field, N=H only) and lem-ag-closure-commutators (monodromy). Batch-5 flag: lem-trf-smooth-composition is the generic Mathlib-status statement that composites of smooth morphisms are smooth (Stacks 01VA). It is not part of the proof of the trace formula or Poincaré duality, so I accept it. The three declared generic tool_uses are accepted. No SGA is cited and every step is under 2000 characters."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SmoothConnectedRelativeCommutator",
+  "declaration": "AlgebraicGeometry.exists_smooth_connected_relative_commutator",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SmoothConnectedRelativeCommutator.lean",
+  "statement": "theorem exists_smooth_connected_relative_commutator {k : Type u} [Field k] (G N : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [ConnectedSpace G.X.left] [IsAffine N.X.left] [LocallyOfFiniteType N.X.hom] [QuasiCompact N.X.hom] [Smooth N.X.hom] [ConnectedSpace N.X.left] (i : N ⟶ G) [IsClosedSubgroupScheme i.hom.hom] [IsNormalSubgroupScheme i.hom.hom] : ∃ (D : Grp (Over (Spec (.of k)))) (j : D ⟶ G), IsClosedSubgroupScheme j.hom.hom ∧ IsNormalSubgroupScheme j.hom.hom ∧ IsAffine D.X.left ∧ LocallyOfFiniteType D.X.hom ∧ QuasiCompact D.X.hom ∧ Smooth D.X.hom ∧ ConnectedSpace D.X.left ∧ (∃ l : D.X ⟶ N.X, l ≫ i.hom.hom = j.hom.hom) ∧ (∀ (R : Type u) [CommRing R] [Algebra k R] (g : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ G.X) (n : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ N.X), ∃ d : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ D.X, d ≫ j.hom.hom = g * (n ≫ i.hom.hom) * g⁻¹ * (n ≫ i.hom.hom)⁻¹) ∧ (∀ (K : Grp (Over (Spec (.of k)))) (a : K ⟶ G), IsClosedSubgroupScheme a.hom.hom → (∀ (R : Type u) [CommRing R] [Algebra k R] (g : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ G.X) (n : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ N.X), ∃ x : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ K.X, x ≫ a.hom.hom = g * (n ≫ i.hom.hom) * g⁻¹ * (n ≫ i.hom.hom)⁻¹) → ∃ l : D.X ⟶ K.X, l ≫ a.hom.hom = j.hom.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d75ca33a7",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Read the item node, all 7 stmt_dep records, the upstream GroupScheme/Defs classes (IsSubgroupScheme, IsClosedSubgroupScheme, IsNormalSubgroupScheme), Milne Def 6.24/Rem 6.25(b) and the citer lem-sfb-nilpotent-connected-central-series. The Lean matches every clause: G and N affine, finite type (LocallyOfFiniteType+QuasiCompact), smooth and connected; i closed and normal; D closed, normal, affine, finite type, smooth, connected and contained in N by factorization; g n g⁻¹ n⁻¹ in D(R) for every k-algebra R : Type u; minimality against every closed K with no extra hypotheses. No stronger assumptions (no perfectness, algebraic closure or characteristic). Edge cases (trivial or central N, N=G, R=0, non-reduced K, imperfect k) are covered. lean.statement matches the file verbatim; the node changes only in lean; no definitions; proof is sorry; docstrings give source and blueprint and the 8 proof steps; imports exist; no existing duplicate (the derived-subgroup theorem needs N=G and an algebraically closed field). The report has both required sections. No compile run since no file was changed."
+ }
+}

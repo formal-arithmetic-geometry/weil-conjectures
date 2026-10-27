@@ -1,0 +1,182 @@
+{
+ "id": "lem-trf-koszul-relations-quotient-torsionfree",
+ "kind": "statement",
+ "title": "Koszul syzygies imply saturation of linear chart relations",
+ "statement": "Let $S$ be a commutative ring, $s\\ge1$, and let $f_1,\\ldots,f_s,t_2,\\ldots,t_s\\in S$. In the free module $S^s$ [def-weil-pbc-free-module] of $s$-tuples let $e_i$ be the standard unit vectors. Assume that every $v=(v_1,\\ldots,v_s)\\in S^s$ with $\\sum_i f_iv_i=0$ can be written as $v=\\sum_{i<j}b_{ij}(f_ie_j-f_je_i)$ for coefficients $b_{ij}\\in S$. Set $J=(f_1t_i-f_i\\mid 2\\le i\\le s)$ and $Q=S/J$. Then multiplication by the image of $f_1$ on $Q$ is injective. In particular, for every $h\\in S$ and integer $N\\ge0$, $f_1^Nh\\in J$ implies $h\\in J$, or equivalently every class $x\\in Q$ with $f_1^Nx=0$ is zero.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BIQ (lemma-blowup-regular-sequence), final H_1-to-torsion-free inference, in explicit degree-one syzygy coordinates; the statement assumes the boundary formula directly."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $g_i=f_1t_i-f_i$ for $2\\le i\\le s$. Suppose $f_1h\\in J$. By the meaning of the finitely generated ideal $J$, choose $c_2,\\ldots,c_s\\in S$ with $f_1h=\\sum_{i=2}^s c_i g_i$. In the tuple module [def-weil-pbc-free-module] set $v=(h-\\sum_{i=2}^s c_it_i,c_2,\\ldots,c_s)$. Expanding gives $\\sum_{i=1}^s f_iv_i=f_1h-\\sum_{i=2}^s c_i(f_1t_i-f_i)=0$. The hypothesis of the item therefore supplies coefficients $b_{ij}$ such that $v=\\sum_{i<j}b_{ij}(f_ie_j-f_je_i)$. Define $\\lambda:S^s\\to S$ by $\\lambda(w)=w_1+\\sum_{i=2}^s t_iw_i$. Distributing finite sums proves that $\\lambda$ is $S$-linear, and substitution of the coordinates of $v$ gives $\\lambda(v)=h$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BIQ (lemma-blowup-regular-sequence), final H_1-to-torsion-free inference; explicit coordinate argument by Q102."
+   }
+  },
+  {
+   "text": "Set $w=(1,t_2,\\ldots,t_s)$ and let $\\lambda:S^s\\to S$ be the linear functional $\\lambda(v)=\\sum_i w_iv_i=v_1+\\sum_{i=2}^s t_iv_i$. Let $q:S\\to S/J$ be the quotient map. The defining generators of $J$ give $q(f_i)=q(f_1)q(w_i)$ for every index, including the first index where $w_1=1$. Thus for every pair $i,j$, $q(\\lambda(f_ie_j-f_je_i))=q(f_i)q(w_j)-q(f_j)q(w_i)=0$ by commutativity. Consequently every Koszul generator has image under $\\lambda$ in $J$. Apply $\\lambda$ to the boundary expression of the relation $v$ in Step 1. Closure of $J$ under finite sums and scalar multiplication gives $\\lambda(v)\\in J$, and direct evaluation gives $\\lambda(v)=h$. This proves $f_1h\\in J\\Rightarrow h\\in J$ without cancellation in $S$. When $s=1$, all pair sums are empty and the same proof gives $h=0\\in J=(0)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BIQ (lemma-blowup-regular-sequence), final H_1-to-torsion-free inference; explicit coordinate argument by Q102."
+   }
+  },
+  {
+   "text": "Every $x\\in Q=S/J$ has a representative $h\\in S$. If $[f_1]x=0$, then $f_1h\\in J$, hence $h\\in J$ by Step 2, and $x=0$. If $[f_1]x=[f_1]y$, apply this assertion to $x-y$ to get $x=y$; multiplication by $[f_1]$ is injective. Induct on $N$ to prove that $[f_1]^Nx=0$ implies $x=0$: for $N=0$ the equation is $x=0$; for $N+1$, the zero-kernel assertion applied to $[f_1]^Nx$ gives $[f_1]^Nx=0$, and the induction hypothesis gives $x=0$. Finally $[f_1]^N[h]=[f_1^Nh]$, so this assertion is equivalent to $f_1^Nh\\in J\\Rightarrow h\\in J$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BIQ (lemma-blowup-regular-sequence), final H_1-to-torsion-free inference; explicit coordinate argument by Q102."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BIQ (lemma-blowup-regular-sequence), final H_1-to-torsion-free inference; coordinate proof formalized by K3, evaluating all Koszul generators uniformly in the quotient."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If every syzygy of a,b_1,...,b_n in a commutative ring is a Koszul boundary, multiplication by a on the quotient by a*t_i-b_i is injective",
+   "results": "Hits: Algebra.SubmersivePresentation.cotangentComplexAux_injective, Algebra.SubmersivePresentation.cotangentComplex_injective, RingTheory.Sequence.isWeaklyRegular_iff, RingTheory.Sequence.isWeaklyRegular_iff_Fin, RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev, Algebra.Generators.CotangentSpace.map_toComp_injective, RingTheory.Sequence.isWeaklyRegular_cons_iff', Module.Relations.Solution.injective_fromQuotient_iff_ker_π_eq_span. Read StandardSmoothCotangent.lean:80: injectivity there concerns a cotangent map of a submersive presentation, not multiplication by a on the relation quotient. The regular-sequence definition hits do not imply this quotient assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "First Koszul homology vanishing implies that a is a nonzerodivisor modulo the relations a times t_i minus b_i",
+   "results": "Hits: HomologicalComplex.ExactAt.isZero_homology, Algebra.FormallySmooth.subsingleton_h1Cotangent, HomologicalComplex.exactAt_iff_isZero_homology, Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential, CategoryTheory.ShortComplex.cyclesIsoLeftHomology, groupHomology.d₁₀_eq_zero_of_isTrivial, HomologicalComplex.mapBifunctor.d₁_eq_zero', HomologicalComplex.mapBifunctor₂₃.d₁_eq_zero. Generic homology-zero/exactness equivalences and cotangent results do not give this syzygy-to-saturation calculation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"koszul\", \"injective\"",
+   "results": "No hits. No exact statement or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "syzyg|[Kk]oszul|[Hh]1[Rr]egular",
+   "results": "Hits: Mathlib/RingTheory/Regular/RegularSequence.lean. The only hit is the RegularSequence.lean:21 TODO for Koszul and H_1 regular sequences. Searched Mathlib/RingTheory.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing first Koszul homology implies f_1 is regular modulo the linear chart relations f_1*t_i-f_i",
+   "results": "Algebra.FormallySmooth.subsingleton_h1Cotangent, CategoryTheory.ShortComplex.HomologyData.ofIsLimitKernelFork, Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential, HomologicalComplex.mapBifunctor₂₃.d₁_eq_zero, groupHomology.isBoundary₁_of_mem_boundaries₁, HomologicalComplex.mapBifunctor.d₁_eq_zero', groupHomology.boundaries₁, ChainComplex.isIso_homologyι₀. The returned statements concern regular-sequence definitions, cotangent smoothness, or generic homology/group homology; none supplies regularity of f_1 on this relation quotient from its stated syzygy assumption.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If all relations among f_1,...,f_s are generated by Koszul syzygies, f_1 is a nonzerodivisor modulo f_1*t_i-f_i",
+   "results": "RingTheory.Sequence.IsWeaklyRegular, RingTheory.Sequence.IsRegular, RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev, RingTheory.Sequence.IsRegular.toIsWeaklyRegular, RingTheory.Sequence.isWeaklyRegular_iff, RingTheory.Sequence.isWeaklyRegular_iff_Fin, RingTheory.Sequence.isRegular_iff, RingTheory.Sequence.isWeaklyRegular_cons_iff. The returned statements concern regular-sequence definitions, cotangent smoothness, or generic homology/group homology; none supplies regularity of f_1 on this relation quotient from its stated syzygy assumption.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSMulRegular|smul.*[Ii]njective",
+   "results": "Mathlib/RingTheory/Regular/Category.lean, Mathlib/RingTheory/Regular/RegularSequence.lean. Read RegularSequence.lean:132-147 and IsSMulRegular.lean:79-85. These define weak regularity and characterize quotient regularity; they do not prove it from the assumed syzygy formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSMulRegular, Ideal.Quotient",
+   "results": "No hits. Pattern rejected with loogle: unknown identifier 'Ideal.Quotient'; no mathematical absence inferred from this query.",
+   "date": "2026-10-23",
+   "verdict": "invalid query; no conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear functional sending one coordinate to 1 shows the quotient by a*t_i-b_i has no a torsion if every relation on a,b_i is an antisymmetric Koszul relation",
+   "results": "exteriorPower.presentation.relations, exteriorPower.presentation_R, exteriorPower.presentation_relation, exteriorPower.presentation.isPresentationCore, exteriorPower.presentation.relations_relation, exteriorPower.presentation.relations_R, exteriorPower.presentation, exteriorPower.presentation.relations_G. Read ExteriorPower/Basic.lean:125-150: the hits present exterior powers by alternating multilinearity relations; none asserts saturation of this ideal.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-blowup-chart-regular-sequence-presentation",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Lemma 4.2.9 coordinate-chart computation supporting lem-trf-local-term-locality: infer a-torsion-freeness of the relation quotient from its degree-one Koszul syzygies (old chart-presentation Step 3).",
+   "via": [
+    "lem-trf-blowup-chart-regular-sequence-presentation",
+    "lem-trf-permissible-coordinate-chart"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-koszul-relations-quotient-torsionfree",
+  "worker": "stage1",
+  "summary": "Direct coordinate proof of saturation: construct an exact relation from f_1h in J, apply the assumed Koszul boundary formula, and evaluate the linear functional with coefficients (1,t_2,...,t_s). Both types of Koszul generators have explicitly computed images in J. Derive quotient injectivity and power saturation by subtraction and induction. Statement unchanged; no new nodes, hidden homology theorem, or cancellation hypothesis. Read Stacks 0BIQ and current blueprint ancestry; searched current project and Mathlib twice.",
+  "blueprint": "Serves the inherited lem-trf-local-term-locality ancestry through lem-trf-permissible-coordinate-chart and lem-trf-blowup-chart-regular-sequence-presentation: Lemma 4.2.9 coordinate-chart calculation, the old chart-presentation Step 3, exactly the degree-one syzygy to chart-relation saturation inference. The current latest blueprint ancestor states the contracting local-term theorem; this subsidiary commutative algebra calculation changes neither its statement nor the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-a366310c5",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-a366310c5 (reviewer sub-agent of L); spot-checked: PASS. The delivery changes only the item JSON and the report; there are no new nodes, and the statement, sources and ancestry are unchanged. There is no re-split note for this item. I checked the 3-step elementary proof in full. Step 1 builds v=(h-Σc_i t_i, c_2..c_s), which satisfies Σf_i v_i=0, and λ(w)=w_1+Σt_i w_i gives λ(v)=h. Step 2 computes λ of each Koszul generator: λ(f_1e_j-f_je_1)=g_j, and λ(f_ie_j-f_je_i)=t_i g_j-t_j g_i, sign confirmed by expansion. So h lies in J with no cancellation in S. Step 3 gives injectivity on the quotient and the f_1^N saturation by a correct induction. Edge cases hold: s=1, s=2, Z/3, and the zero ring or nilpotent f_1 forcing Q=0. The parent lem-trf-blowup-chart-regular-sequence-presentation applies the item with t_i=y_i, and its hypothesis comes from lem-trf-polynomial-regular-sequence-syzygies; the two match. The proof agrees with Stacks Tag 0BIQ (more-algebra.tex 7893-7931): the source's H_1-vanishing/cone inference, read in coordinates, uses the same variable-change functional. No SGA source is used. An rg -L search over the DAG for 'syzyg' and the item id found no duplicate, and the zeroth-boundary-saturation node assumes the regularity this item proves. Minor: the report mentions a citations.json that was not delivered; this is not a DAG fault."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.KoszulRelationsQuotientTorsionfree",
+  "declaration": "RingTheory.koszul_relations_quotient_torsionfree",
+  "file": "lean/Sheaf/RingTheory/KoszulRelationsQuotientTorsionfree.lean",
+  "statement": "theorem koszul_relations_quotient_torsionfree {S : Type u} [CommRing S] (n : ℕ) (f : Fin (n + 1) → S) (t : Fin n → S) (hsyzygies : ∀ v : Fin (n + 1) → S, (∑ i, f i * v i) = 0 → ∃ b : Fin (n + 1) → Fin (n + 1) → S, v = ∑ i, ∑ j ∈ Finset.univ.filter (fun j ↦ i < j), b i j • (f i • Pi.single j (1 : S) - f j • Pi.single i (1 : S))) : Function.Injective (fun x : S ⧸ Ideal.span (Set.range (fun i : Fin n ↦ f 0 * t i - f i.succ)) ↦ Ideal.Quotient.mk _ (f 0) * x) ∧ (∀ (h : S) (N : ℕ), f 0 ^ N * h ∈ Ideal.span (Set.range (fun i : Fin n ↦ f 0 * t i - f i.succ)) → h ∈ Ideal.span (Set.range (fun i : Fin n ↦ f 0 * t i - f i.succ))) ∧ (∀ (N : ℕ) (x : S ⧸ Ideal.span (Set.range (fun i : Fin n ↦ f 0 * t i - f i.succ))), Ideal.Quotient.mk _ (f 0) ^ N * x = 0 → x = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-713f79783",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Each clause checked against the node and Stacks 0BIQ. The theorem covers any commutative ring at any universe u and every s>=1 (as n+1). The syzygy hypothesis has the sign f_i e_j - f_j e_i over pairs i<j; a full matrix b is equivalent to a triangular one. J = span(f 0 * t i - f i.succ) with the index shift correct. All three conclusions are present (injectivity on S/J, f1^N h in J -> h in J, quotient N-torsion zero). Edge cases s=1 (J = bottom), N=0, zero ring, f1 = 0 or nilpotent are covered. lean.statement is verbatim in the file. Docstrings carry the source place, blueprint tag and the 3-step proof. Proof is sorry only; no definitions, nodes or dependency modules. The stmt_dep module Mathlib FreeModule.Basic is imported and the concrete Pi tuple module is used. No duplicate in side-live Sheaf/WeilConjectures or Mathlib; no other S2 delivery; the report has both required sections. No compile needed (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T070158-L-3439244",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-product-hom-ses-boundary",
+ "kind": "statement",
+ "title": "Signed product-Hom boundary of a short exact sequence of complexes",
+ "statement": "Let $\\mathcal C$ be a locally small abelian category [def-sp-abelian] in a fixed Hom universe, with unbounded cochain derived category and localization $Q$ [def-weil-abstract-derived-category]. Let $0\\to A\\xrightarrow{i}B\\xrightarrow{p}C\\to0$ be a degreewise short exact sequence of integer cochain complexes. Let $I$ be a K-injective complex, meaning that every chain map from an acyclic complex to $I$ is null-homotopic, whose terms are injective objects [def-sp-injective-resolutions]. Put $\\mathsf H(X,I)^n=\\prod_{r\\in\\mathbf Z}\\operatorname{Hom}_{\\mathcal C}(X^r,I^{r+n})$, as a complex of abelian groups with differential $D(f)=d_I f-(-1)^n f d_X$. Let $b:QC\\to QA[1]$ be the canonical derived SES boundary, namely $-Q(\\mathrm{pr}_A)Q(q)^{-1}$, where $q:\\operatorname{Cone}(i)\\to C$ is induced by $p$ and $\\operatorname{Cone}(i)^r=B^r\\oplus A^{r+1}$ with differential $(x,a)\\mapsto(d_Bx+i(a),-d_Aa)$.\nThen $0\\to\\mathsf H(C,I)\\xrightarrow{p^*}\\mathsf H(B,I)\\xrightarrow{i^*}\\mathsf H(A,I)\\to0$ is short exact. Its cohomology boundary $\\partial:H^0\\mathsf H(A,I)\\to H^1\\mathsf H(C,I)$ is given, under $H^j\\mathsf H(X,I)=\\operatorname{Hom}_{D(\\mathcal C)}(QX,QI[j])$, by\n$$\\partial([f])=-Q(f)[1]\\circ b$$\nfor every chain map $f:A\\to I$. Here the boundary on cohomology has the lift-differentiate convention: extend $f$ to a degree-zero graded map $g:B\\to I$, factor $Dg=h p$, and take the class of $h$. This assertion holds for unbounded complexes and sequences that do not split in each degree.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A5X (equation-cohomology-hom-complex), in section-hom-complexes: product Hom and its differential. Extension to arbitrary abelian categories and the comparison with the signed SES cone boundary are agent-written."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "For a degree-$n$ family $u$, expand the two applications of $D$: the mixed terms have coefficients $-(-1)^n$ and $-(-1)^{n+1}$ and cancel, while the remaining terms contain $d_I^2$ or $d_X^2$. Hence $D^2u=0$. If $a:X\\to Y$ is a chain map, $D(ua)=(Du)a$, since $d_Ya=ad_X$. Thus precomposition by $p$ and $i$ gives maps of the displayed abelian-group complexes, with $i^*p^*=0$. The products exist in the fixed Hom universe; no products in $\\mathcal C$ are required.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5X (equation-cohomology-hom-complex), preceding differential formula; its coordinate calculation in an arbitrary abelian category"
+   }
+  },
+  {
+   "text": "Fix $n$. Precomposition by each epimorphism $p^r$ is injective on $\\operatorname{Hom}(C^r,I^{r+n})$. If a family $u:B^r\\to I^{r+n}$ satisfies $u^ri^r=0$, the cokernel property of $p^r$ gives a unique family $v:C^r\\to I^{r+n}$ with $u^r=v^rp^r$. Finally, for every family $w:A^r\\to I^{r+n}$, injectivity of $I^{r+n}$ extends each $w^r$ along the monomorphism $i^r$ to $u^r:B^r\\to I^{r+n}$. Choose these extensions for the set of integers $r$. This proves injectivity, middle exactness and surjectivity in every degree, hence short exactness of the Hom complexes. Only the individual $i^r$ are monomorphisms; no splitting of the original sequence has been used.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5X, product-Hom construction; elementary extension and cokernel argument using the stated injectivity hypothesis"
+   }
+  },
+  {
+   "text": "A degree-$j$ cocycle $u$ is precisely a chain map $X\\to I[j]$, because $Du=0$ means $d_Iu=(-1)^ju d_X$. A boundary $Ds$, with $s$ of degree $j-1$, is null-homotopic as such a map: take the degree-$(-1)$ homotopy $(-1)^js:X\\to I[j]$, whose homotopy differential is $d_I s+(-1)^jsd_X=Ds$. Conversely every such homotopy has this form. Thus the coordinate map gives $H^j\\mathsf H(X,I)=\\operatorname{Hom}_{K(\\mathcal C)}(X,I[j])$, taking the class of $u$ to its chain-homotopy class. The shift lemma makes $I[j]$ K-injective, and the K-injective localization bijection identifies this group with $\\operatorname{Hom}_{D(\\mathcal C)}(QX,QI[j])$, sending that class to $Q(u)$. This fixes the identification, in particular in degrees $0$ and $1$, without a boundedness hypothesis.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-shift",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), (1) implies (3); Tag 0A5X gives the Hom-cohomology formula, with the explicit coordinate sign check here"
+   }
+  },
+  {
+   "text": "Let $f:A\\to I$ be a chain map, and use step 2 to choose a degree-zero graded extension $g:B\\to I$ with $gi=f$. Since $(Dg)i=Df=0$, there is a unique degree-one $h:C\\to I$ with $hp=Dg=d_Ig-gd_B$. Then $(Dh)p=D^2g=0$, and the epimorphisms $p^r$ imply $Dh=0$, so $h:C\\to I[1]$ is a chain map. This is exactly the specified lift-differentiate boundary, so $\\partial([f])=[h]$. To check the choices explicitly, replacing $g$ by $g+tp$ changes $h$ to $h+Dt$. If $f$ is replaced by $f+Ds$, extend the degree-$(-1)$ family $s$ to a family $t:B\\to I$ using injectivity of $I^{r-1}$; the lift $g+Dt$ has unchanged differential. Therefore the cohomology class is independent both of the extension and of the representative. The same operations applied to sums show additivity.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5X differential formula; agent-written lift-differentiate calculation for the boundary convention stipulated in the item"
+   }
+  },
+  {
+   "text": "Apply the cone-projection quasi-isomorphism lemma to $0\\to A\\xrightarrow{i}B\\xrightarrow{p}C\\to0$. Its canonical morphism is exactly $q:\\operatorname{Cone}(i)\\to C$, $q(x,a)=p(x)$. Hence $Q(q)$ is invertible in the given derived category, and the stipulated boundary $b=-Q(\\mathrm{pr}_A)Q(q)^{-1}$ is defined. The cited lemma applies to any degreewise short exact sequence, not only degreewise split sequences.",
+   "uses": [
+    "lem-pc-cone-short-exact-quasi-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152 (lemma-derived-canonical-delta-functor), preceding construction of q and formula -p q^{-1}"
+   }
+  },
+  {
+   "text": "Both $hq$ and $f[1]\\mathrm{pr}_A$ are chain maps $\\operatorname{Cone}(i)\\to I[1]$. Define a homotopy $H^r:\\operatorname{Cone}(i)^r\\to I[1]^{r-1}=I^r$ by $H^r(x,a)=g^r(x)$. On the two biproduct summands its homotopy differential is\n$$d_{I[1]}H+Hd_{\\operatorname{Cone}(i)}=(-d_Ig+gd_B,\\,gi)=(-hp,\\,f)=f[1]\\mathrm{pr}_A-hq.$$\nThese are equations of morphisms, with $(x,a)$ denoting the two biproduct coordinates, not elements of objects of $\\mathcal C$. Homotopic maps have equal image under $Q$, so $Q(h)Q(q)=Q(f)[1]Q(\\mathrm{pr}_A)$. Cancel $Q(q)$ and substitute the definition of $b$ to obtain $Q(h)=-Q(f)[1]b$. Step 3 sends $[h]=\\partial([f])$ to $Q(h)$, proving the claimed signed formula. All constructions are componentwise in $r$ and use no finite-support condition.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, cone differential and signed boundary; agent-written explicit homotopy comparison with Tag 0A5X"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-kinjective-shift",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pc-cone-short-exact-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A5X (equation-cohomology-hom-complex); generalized to locally small abelian categories, with explicit signed comparison to derived.tex Tag 0152 and localization via Tag 070I."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Hh]om.*[Bb]oundary|[Hh]om.*[Cc]onnecting|[Hh]om.*triangleOfSES|triangleOfSES.*[Hh]om",
+   "results": "Search returned 25 hits: Mathlib/Algebra/Homology/Embedding/TruncGEHomology.lean, Mathlib/Algebra/Homology/Embedding/TruncGEHomology.lean, Mathlib/Algebra/Homology/Embedding/TruncGEHomology.lean, Mathlib/Algebra/Homology/Embedding/TruncGEHomology.lean, Mathlib/Algebra/Homology/Embedding/TruncGEHomology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide SES or Ext boundaries, not the unbounded product-Hom cochain boundary comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homComplex, CategoryTheory.ShortComplex.ShortExact",
+   "results": "Search returned 0 hits: . loogle: unknown identifier 'HomologicalComplex.homComplex'",
+   "date": "2026-10-23",
+   "verdict": "invalid pattern (unknown identifier); superseded by the valid CochainComplex.HomComplex query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connecting homomorphism for the contravariant Hom complex of a short exact sequence of complexes equals signed composition with its derived boundary",
+   "results": "Search returned 8 hits: CategoryTheory.ShortComplex.ShortExact.δ_apply', CategoryTheory.ShortComplex.ShortExact.δ_apply, CategoryTheory.ShortComplex.ShortExact.δ_eq, CategoryTheory.ShortComplex.ShortExact.δ_eq', CategoryTheory.ShortComplex.ShortExact.δ, CategoryTheory.ShortComplex.SnakeInput.δ_apply, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.ShortComplex.SnakeInput.δ_apply'. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide SES or Ext boundaries, not the unbounded product-Hom cochain boundary comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "preadditiveYoneda.*[δd]|homComplex.*[Ee]xact|HomComplex.*[Ee]xact|contravariant.*[Bb]oundary",
+   "results": "Search returned 5 hits: Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide SES or Ext boundaries, not the unbounded product-Hom cochain boundary comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Contravariant Hom complex of an arbitrary short exact sequence of unbounded complexes into a termwise injective K-injective complex signed boundary composition",
+   "results": "Search returned 8 hits: CategoryTheory.Abelian.Ext.contravariantSequence, CochainComplex.isKInjective_of_injective_aux, CategoryTheory.ShortComplex.Exact.comp_descToInjective_assoc, CochainComplex.IsKInjective, HomologicalComplex.instHasHomologyOppositeOp, CategoryTheory.ShortComplex.homologyMap'_op, HomologicalComplex.unop, CochainComplex.isKInjective_of_injective. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide SES or Ext boundaries, not the unbounded product-Hom cochain boundary comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex, CategoryTheory.ShortComplex.ShortExact",
+   "results": "Search returned 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide SES or Ext boundaries, not the unbounded product-Hom cochain boundary comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a short exact sequence A to B to C of complexes and an injective complex I the connecting map Hom(A,I) to Hom(C,I)[1] is negative precomposition by C to A[1]",
+   "results": "Search returned 8 hits: CategoryTheory.ShortComplex.ShortExact.δ_apply', CategoryTheory.ShortComplex.ShortExact.δ_apply, CategoryTheory.ShortComplex.ShortExact.singleδ, CategoryTheory.ShortComplex.ShortExact.δ_eq, CategoryTheory.ShortComplex.ShortExact.δ_eq', CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.ShortComplex.SnakeInput.δ_apply, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide SES or Ext boundaries, not the unbounded product-Hom cochain boundary comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "HomComplex.*(shortExact|[δ]|boundary)|contravariant.*[Bb]oundary|preadditiveYoneda.*homologySequence",
+   "results": "Search returned 6 hits: Mathlib/Algebra/Homology/Factorizations/CM5b.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: HomologySequence supplies the general connecting-map construction; Ext results concern objects in degree zero; mappingCone formulas and HomComplex are ingredients, not the entire signed comparison for unbounded complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom complex contravariant short exact sequence connecting homomorphism signed composition derived category",
+   "results": "Search returned 8 hits: CategoryTheory.ShortComplex.ShortExact.δ_eq', CategoryTheory.ShortComplex.ShortExact.δ, CategoryTheory.ShortComplex.ShortExact.δ.congr_simp, CategoryTheory.ShortComplex.ShortExact.comp_δ, CategoryTheory.Abelian.Ext.contravariantSequence, CategoryTheory.ShortComplex.ShortExact.epi_δ, CategoryTheory.ShortComplex.ShortExact.extClass_hom, CochainComplex.HomComplex",
+   "date": "2026-10-23",
+   "verdict": "no match: HomologySequence supplies the general connecting-map construction; Ext results concern objects in degree zero; mappingCone formulas and HomComplex are ingredients, not the entire signed comparison for unbounded complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex, CategoryTheory.ShortComplex.ShortExact",
+   "results": "Search returned 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: HomologySequence supplies the general connecting-map construction; Ext results concern objects in degree zero; mappingCone formulas and HomComplex are ingredients, not the entire signed comparison for unbounded complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The connecting morphism of the product Hom complex of a short exact sequence of unbounded complexes into a termwise injective K-injective complex is negative precomposition by the derived cone boundary",
+   "results": "Search returned 8 hits: CategoryTheory.ShortComplex.ShortExact.singleδ, DerivedCategory.triangleOfSESδ, CochainComplex.cm5b.i_f_comp, CochainComplex.cm5b.i_f_comp_assoc, CochainComplex.mappingCone.δ_snd, CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, CochainComplex.cm5b.i, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: HomologySequence supplies the general connecting-map construction; Ext results concern objects in degree zero; mappingCone formulas and HomComplex are ingredients, not the entire signed comparison for unbounded complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology connecting map after applying contravariant Hom into an injective cochain complex agrees with precomposition by the mapping cone projection up to sign",
+   "results": "Search returned 8 hits: CochainComplex.cm5b.i_f_comp_assoc, CochainComplex.cm5b.i, CochainComplex.cm5b.i_f_comp, CochainComplex.cm5b.fac_assoc, CochainComplex.mappingCone.descCocycle_coe, CochainComplex.mappingCone.δ_descCochain, CochainComplex.mappingCone.inl_v_descCochain_v, CochainComplex.mappingCone.δ_inl",
+   "date": "2026-10-23",
+   "verdict": "no match: HomologySequence supplies the general connecting-map construction; Ext results concern objects in degree zero; mappingCone formulas and HomComplex are ingredients, not the entire signed comparison for unbounded complexes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-adjoint-ses-mates",
+  "date": "2026-10-23",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1K (lemma-base-change-tensor), statement and precise canonical map in the proof; sites-cohomology.tex Tags 07A6 (lemma-adjoint) and 07A7 (remark-base-change). Supporting input to 0A1K: Tag 0DKH (lemma-single-complex-base-change), with condition (1) of Tag 0DKG (lemma-single-complex-base-change-condition) and equation-bc immediately before it; the canonical exchange is the map specified there and explicitly defined in the statement. Supporting input: Tag 0DKH induction step: canonical commutative relative Mayer–Vietoris triangle diagram, before applying third-isomorphism-triangle. Supporting input: Homological comparison of the canonical resolution sequences behind the connecting square in Tag 0DKH. Supporting signed calculation: contravariant product Hom of a short exact resolution sequence, before transferring its boundary through the normalized adjunction.",
+   "via": [
+    "lem-sfb-derived-adjoint-ses-mates",
+    "lem-sfb-space-relative-mv-exchange-triangles",
+    "lem-sfb-space-single-complex-base-change",
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-product-hom-ses-boundary",
+  "worker": "stage1",
+  "summary": "Retained the full statement. Gave six steps: signed Hom differential, degreewise exactness by injective extension and cokernel factorization, shifted Hom/derived identification, lift-differentiate construction, existing cone quasi-isomorphism, and the explicit cone homotopy fixing the minus sign. Reused three existing Mathlib leaves and existing definitions; no new nodes.",
+  "blueprint": "Supporting signed calculation for lem-sfb-derived-adjoint-ses-mates, on the inherited route to det-thm-sf-ctf-stability-direct-images proof (3). Steps 1--4 realize contravariant product Hom on a resolution SES; steps 5--6 compare its boundary with the canonical signed SES cone boundary before normalized adjunction. The ancestor command returns None for this pre-existing created chain; retained inherited from.node/via/place. Latest blueprint direct-images proof (3) remains unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-267f5eb6d",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-267f5eb6d (reviewer sub-agent of L); spot-checked: Read the item in full: retained statement, 6 steps, 0 new nodes. Read all six cited statements, all Mathlib leaves or definitions. Source matches Stacks more-algebra section-hom-complexes / 0A5X: Hom^n and the sign d(f)=d_M f-(-1)^n f d_L. b=-Q(pr_A)Q(q)^{-1} matches derived.tex 0152 (-p∘q^{-1}) and Mathlib triangleOfSESδ (DerivedCategory/ShortExact.lean:38), and the citer lem-sfb-derived-adjoint-ses-mates uses the same signs. Hand checks: D²=0; D(ua)=(Du)a; exactness from epi/cokernel/injective-extension. Degree-j cocycle = chain map to I[j], homotopy (-1)^j s gives Ds. The K-injective shift and Hom bijection use the unbounded clauses (070I). Lift-differentiate: (Dg)i=Df=0, Dh=0, and the class is independent of the choice of g and of f+Ds. The cone homotopy H(x,a)=g(x) gives (-hp,f)=f[1]pr_A-hq, hence Q(h)=-Q(f)[1]b. Edge cases tested: f=0, A=0, C=0, nonsplit Z→Q→Q/Z, characteristic 2. The DAG duplicate search (bifunctor-homotopy-exact, hom-triangulated, complex-ses-triangle, cyclic-derived-hom) found no duplicate. No route/tool_uses issue and no SGA. No repair note applies. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ProductHomSesBoundary",
+  "declaration": "CochainComplex.HomComplex.productHom_ses_boundary",
+  "declarations": [
+   "CochainComplex.HomComplex.precompMap",
+   "CochainComplex.HomComplex.homologyToDerived",
+   "CochainComplex.HomComplex.productHom_ses_boundary"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ProductHomSesBoundary.lean",
+  "statement": "theorem productHom_ses_boundary [HasDerivedCategory.{w} 𝒜] (S : ShortComplex (CochainComplex 𝒜 ℤ)) (hS : S.ShortExact) (I : CochainComplex 𝒜 ℤ) [I.IsKInjective] [∀ r : ℤ, Injective (I.X r)] : (∀ (X : CochainComplex 𝒜 ℤ) (j : ℤ), Function.Bijective (homologyToDerived X I j)) ∧ ∃ (w₀ : precompMap S.g I ≫ precompMap S.f I = 0) (hH : (ShortComplex.mk (precompMap S.g I) (precompMap S.f I) w₀).ShortExact), ∀ f : S.X₁ ⟶ I, homologyToDerived S.X₃ I 1 ((hH.δ 0 1 (by decide)) ((homologyAddEquiv S.X₁ I 0).symm (CohomologyClass.mk (Cocycle.ofHom f)))) = -(DerivedCategory.triangleOfSESδ hS ≫ (DerivedCategory.Q.map f)⟦(1 : ℤ)⟧')",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The two auxiliary definitions construct precomposition and the canonical homology-to-derived-Hom map using Mathlib HomComplex; all data are explicit. The theorem supplies the zero-composite proof and short exactness, and states the signed boundary formula for every chain map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f888bda13",
+  "group": "NR",
+  "result": "pass",
+  "note": "Snapshot differs from side-live node only in lean field; lean.statement is verbatim in the file. Clauses match: Abelian 𝒜 with HasDerivedCategory.{w} (u,v,w independent); S.ShortExact, no splitting; [I.IsKInjective] (Mathlib def = homotopy to 0 from acyclic) plus termwise Injective; HomComplex δ_v = d_I f − (−1)^n f d_X (Stacks 0A5X checked in .tex); precompMap is real precomposition; homologyToDerived = homologyAddEquiv→toHom (equivHomShift via rightShift, no sign)→Qh.map, conjugated by quotientCompQhIso and commShiftIso, the same composite as in Mathlib's bijective_toSmallShiftedHom_of_isKInjective proof; hH.δ 0 1 is lift-differentiate (ShortExact.δ_apply); triangleOfSESδ = −Q(pr_A)Q(q)⁻¹. Independent cone-homotopy check with Mathlib cone/shift signs (H(a,x)=g x gives f[1]pr_A − hq) gives Q(h) = −Q(f)[1]b, matching the conclusion and the citer lem-sfb-derived-adjoint-ses-mates. Edge cases A=0, C=0, f=0, all j, nonsplit, universes OK. H4: no Mathlib precomposition chain map on HomComplex or boundary formula, no side-live name clash; homologyToDerived is a canonical helper (advisory only). Docstrings carry source and blueprint tag plus 6 steps; only sorry is the main theorem; no hollow defs; plain imports serve proof_deps. No compile run (no file changed); worker reports clean compile."
+ }
+}

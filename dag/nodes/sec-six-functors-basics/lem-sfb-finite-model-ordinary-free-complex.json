@@ -1,0 +1,140 @@
+{
+ "id": "lem-sfb-finite-model-ordinary-free-complex",
+ "kind": "statement",
+ "title": "Ordinary quotient extension of a literal finite free model complex",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its integral scalar ring $A$, the positive quotient $R_n=A/(\\varpi_E^{n+1})$, a scheme $T$, and a normalized encoding $e$ as in [def-sfb-finite-model-quotient-coordinates]. For finite ranks $a,b$ and an arbitrary matrix $v:A^a\\to A^b$, form the literal double complex $K=[\\operatorname{model}_{A,T}(A^a)\\xrightarrow{\\operatorname{model}(v)}\\operatorname{model}_{A,T}(A^b)]$ in degrees $-1,0$, using the recorded lifted scalar coordinates. Apply ordinary internal-module extension along the actual quotient map, then the ordinary fixed-coordinate encoding $(e.\\mathrm{ordinary}\\circ e.\\mathrm{fixed})$. The resulting cochain complex is isomorphic to the termwise constant realization of the literal scalar complex $[R_n^a\\xrightarrow{\\bar v}R_n^b]$, with $\\bar v$ the entrywise actual quotient. No injectivity or exactness assumption on $v$ is imposed, and zero ranks are included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+  "place": "Local models: the finite free scalar resolution tensored with N is [N^a → N^b]; the ordinary quotient matrix calculation in specified normalized coordinates."
+ },
+ "stmt_deps": [
+  "def-sfb-finite-model-quotient-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Construct a scalar-compatible rank-one comparison under the actual quotient and normalized encoding, using the regular-module comparisons.",
+   "uses": [
+    "lem-sfb-finite-model-ordinary-scalar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The integral model, quotient extension and encoding are additive. Compare their finite biproducts with those of the constant-sheaf functor. In the standard Pi coordinates, integralDifferential and differential are biproduct.matrix with entries multiplication by v i j and its actual residue. The rank-one square proves the full differential square by biproduct hom extensionality.",
+   "uses": [
+    "def-sfb-finite-constant-model-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the cochain isomorphism of the mapped double complexes from the two term isomorphisms and their differential square. Outside degrees -1 and 0 both objects are zero. This covers either rank zero using the empty biproduct.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-model-ordinary-scalar",
+  "def-sfb-finite-constant-model-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+  "place": "Local models: the finite free scalar resolution tensored with N is [N^a → N^b]; the ordinary quotient matrix calculation in specified normalized coordinates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars sends a finite free matrix complex to its entrywise reduced matrix",
+   "results": "OK 8 hits, including ModuleCat.ExtendScalars.map', ModuleCat.ExtendScalars.obj', ModuleCat.extendRestrictScalarsAdj and LinearMap.mapMatrix. Ordinary scalar-module APIs only.",
+   "date": "2026-10-25",
+   "verdict": "No normalized internal-module/sheaf cochain comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary extension of scalars of a constant finite free module over continuous coefficients commutes with the matrix differential",
+   "results": "OK 8 hits, including IsBaseChange.endHom_toMatrix and LinearMap.toMatrix_baseChange. These express the basis computation for ordinary modules, but not the sheaf encoding.",
+   "date": "2026-10-25",
+   "verdict": "No exact comparison for the project modelFunctor and normalized Encoding."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"double\"",
+   "results": "OK 0 hits.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "regularExtensionIso|ordinary_free_complex|modelFiniteFree",
+   "results": "OK 0 Mathlib hits. Project rg finds the proved regularExtensionIso and its naturality, modelFiniteFree, and modelFunctor_exact.",
+   "date": "2026-10-25",
+   "verdict": "Use the project APIs; the ordinary normalized comparison is not stated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteModelQuotientChartComparison",
+  "date": "2026-10-25",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms, (2): the closed-complement proper-base-change calculation on bounded constructible finite-Tor generators; Adic completeness and classical reductions of qcqs finite-model integral inputs. Subargument: Local models and Locality paragraphs of the finite-model proof; returned proof steps 8--9. Agent finite-quotient matrix calculation and finite-stratification descent; compare Bhatt--Scholze Section 6.3 for classical finite coefficients. Local models and Locality: compare quotient extension with a specified scalar resolution, before taking cohomology. Subargument: Local models: the finite free scalar resolution tensored with N is [N^a → N^b]; the ordinary quotient matrix calculation in specified normalized coordinates.",
+   "via": [
+    "lem-sfb-finite-model-quotient-chart-comparison",
+    "lem-sfb-finite-model-sheaf-quotient-constructible",
+    "lem-sfb-qcqs-integral-finite-model-completeness",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteModelOrdinaryFreeComplex",
+  "file": "lean/Sheaf/Paper/FiniteModelOrdinaryFreeComplex.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteModelQuotient.ordinary_free_complex",
+  "statement": "theorem ordinary_free_complex (T : Scheme.{u}) (n : ℕ) (e : Encoding l E n T)\n    (a b : ℕ) (v : Matrix (Fin b) (Fin a) (A l E)) :\n    letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField\n    Nonempty\n      ((((e.ordinary.trans e.fixed).functor.mapHomologicalComplex (.up ℤ)).obj\n        (((Mod.extendScalars (AdicCompletion.quotient l E T n)).mapHomologicalComplex\n            (.up ℤ)).obj\n          (HomologicalComplex.double\n            ((FiniteConstantModel.modelFunctor (A l E) T).map\n              (integralDifferential l E a b v))\n            (c := ComplexShape.up ℤ) (i₀ := -1) (i₁ := 0) (by decide)))) ≅\n        (((constantSheaf (Scheme.ProEt.topology T)\n          (ModuleCat.{u + 1} (ULift.{u + 1} (R l E n)))).mapHomologicalComplex\n            (.up ℤ)).obj (scalarComplex l E n a b v)))",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T122536-L-1782635",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261025T164504-L-1024577",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

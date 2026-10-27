@@ -1,0 +1,147 @@
+{
+ "id": "lem-asd-open-support-refinement-exchange",
+ "kind": "statement",
+ "title": "Proper/open exchange for one cartesian refinement",
+ "statement": "Let Λ be a finite commutative ring, a:V→X and j:U→Y open immersions, and sq:a≫f=p≫j a cartesian square of schemes. Let c,d be compactifications of f, r:c.Refinement d a proper refinement, and hr:IsPullback c.i id_X r.hom d.i. Its literal pullback rU=r.ofIsPullback sq is a refinement cU→dU with cartesian source square hrU. Write ρ(r) and ρ(rU) for the specified derived unit/inverse-open-base-change/proper-composition refinement maps of [def-amb-etale-compact-support], and P(c),P(d) for [def-asd-open-support-pullback-model]. Then (ρ(rU) ▷ Dj!) ≫ P(c).hom = P(d).hom ≫ (Da! ◁ ρ(r)). This involves only one supplied refinement and its literal pullback; no graph comparison, common refinement, density, or quasi-compactness is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
+  "place": "Coherences (i) and (iii): restriction of the compactification diagram to an open and adjunction transposition."
+ },
+ "stmt_deps": [
+  "def-asd-open-support-pullback-model",
+  "def-amb-etale-compact-support",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [
+  {
+   "text": "Construct the explicit triangles (p,j) and (a,f), with common output c.precomp a, and likewise for d. The first uses c.ofIsPullback sq and the trivial open compactification of j; the second uses the trivial open compactification of a and c. The map r.hom gives their output refinements. Their source cartesian squares follow from hr and its literal pullback, including the precomposition of hr by a. Thus r and r.ofIsPullback sq define the two triangle morphisms used by the proof.",
+   "uses": [
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing arbitrary-scheme unboundedFormalism implementation, unbounded_has_base_change, unbounded_has_proper_exchange, and CompactSupportFormalism.compIso_naturality on both triangle morphisms. Remove the identity proper pushforwards attached to the trivial open compactifications by pfId. Identity-refinement comparison is the identity. Naturality of pfId then gives the naturality equations for the two normalized triangle compositions.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the normalized (a,f) compositor using identity-horizontal exchange and the left identity proper compositor. It is the inverse open compositor whiskered by proper direct image. Compute the normalized (p,j) compositor using compIso_hom_app and the right identity proper compositor. Package their exchange/open-compositor factors in a generic raw comparison; its composite with the normalized (a,f) compositor is the normalized (p,j) compositor, by functoriality and cancellation of the open-composition isomorphism. Use unbounded_open_exchange and unbounded_sh_comp, including congruence under the pullback open equation, to identify this generic raw comparison with P(c). Thus P(c) followed by the first normalized compositor is the second; likewise for d.",
+   "uses": [
+    "def-asd-open-support-pullback-model",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing unbounded_refinement_comparison identifies all formalism refinement maps with the specified unit/inverse-open-base-change/proper-composition maps. Substitute the factorization into the two normalized triangle-naturality equations, which have the same output refinement. Reassociate and cancel the normalized (a,f) composition isomorphism for c. This is the displayed single-refinement equation; the construction uses no quasi-compactness of the opens or Noetherian hypothesis.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-compactifications-refinements",
+  "def-asd-open-support-pullback-model",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
+  "place": "Coherence (i), proved using two explicit triangles and the existing general compIso_naturality theorem. The private unboundedFormalism, exchange, open-compositor and refinement identifications are all arbitrary-scheme constructions, despite the Noetherian hypotheses on some public theorems in their module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward open extension by zero exchange commutes with a cartesian compactification refinement",
+   "date": "2026-10-26",
+   "results": "HasCompactSupport.extend_zero and related topological lemmas; no derived sheaf refinement exchange.",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of compactification comparison isomorphism for extension by zero along open immersions",
+   "date": "2026-10-26",
+   "results": "Scheme.Hom.appIso_inv_naturality and open-immersion sheaf restriction identities.",
+   "verdict": "No compact-support exchange coherence. The local general graph comparison theorem supplies normalization and cocycles, but not this raw one-refinement equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "date": "2026-10-26",
+   "results": "CategoryTheory.mateEquiv_hcomp in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "verdict": "Supplies abstract pasting; geometric unit and compositor identifications are still needed."
+  },
+  {
+   "tool": "grep",
+   "query": "Compactification.*(naturality|trans|cocycle); refinement.*exchange|exchange.*refinement",
+   "date": "2026-10-26",
+   "results": "No Mathlib compactification coherence. Repository signatures read: EtaleGraphComparisonBaseChange, EtaleGraphRefinementNormalization, RefinementOfIsPullback, OpenImmersionLowerShriekProjectionBaseChange. Blueprint search refinement open found zero imported blueprint nodes.",
+   "verdict": "No duplicate of the raw proper/open single-refinement equation or its explicit graph-free factor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenSupportCompactificationNaturality",
+  "date": "2026-10-26",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-asd-smooth-base-change",
+   "place": "Coherence (i) in prop-asd-smooth-base-change.proof.md: restriction of the compactification diagram to an open, specifically the proper/open exchange and open-composition factors and their compatibility with refinements.",
+   "via": [
+    "lem-asd-open-support-compactification-naturality",
+    "lem-asd-open-restriction-compact-support-cube",
+    "lem-asd-exceptional-base-change-open-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenSupportRefinementExchange",
+  "file": "lean/Sheaf/SixFunctors/OpenSupportRefinementExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.openSupportPullbackIso_refinement",
+  "statement": "theorem openSupportPullbackIso_refinement\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {X Y U V : Scheme.{u}} {f : X ⟶ Y}\n    {j : U ⟶ Y} [IsOpenImmersion j] {a : V ⟶ X} [IsOpenImmersion a]\n    {p : V ⟶ U} (sq : IsPullback a p f j)\n    {c d : Compactification f} (r : c.Refinement d)\n    (hr : IsPullback c.i (𝟙 X) r.hom d.i) :\n    Functor.whiskerRight\n        (rightDerivedLowerShriekOfCompactificationComparison (ModuleCat.{u + 1} Λ)\n          (r.ofIsPullback sq) (r.isPullback_ofIsPullback sq hr))\n        D((j)_!open[ModuleCat.{u + 1} Λ]) ≫\n      (openSupportPullbackIso Λ sq c).hom =\n    (openSupportPullbackIso Λ sq d).hom ≫\n      Functor.whiskerLeft D((a)_!open[ModuleCat.{u + 1} Λ])\n        (rightDerivedLowerShriekOfCompactificationComparison (ModuleCat.{u + 1} Λ)\n          r hr)",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261026T023311-L-541216",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261026T023311-L-541216",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

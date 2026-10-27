@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-rank-one-normalized-gauss-chart",
+ "kind": "statement",
+ "title": "Normalized opposite-root Gauss chart in relative semisimple rank one",
+ "statement": "Let $A$ be a nonzero commutative ring, $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and $H/S$ a reductive group (smooth affine of finite presentation, with connected reductive geometric fibres) in [def-sfb-pinned-split-root-realization]. Let $M$ be a finite-rank free abelian group, $T=D_A(M)\\hookrightarrow H$ a closed subgroup [def-sfb-ring-diagonalizable-group, def-weil-closed-immersion] whose geometric fibres are maximal tori, and $a\\in M\\setminus\\{0\\}$. For every $m\\in M$, let $\\chi_m:T\\to\\mathbf G_{m,A}$ be the monomial character. Put $\\mathfrak h=\\ker(H(A[\\epsilon]/(\\epsilon^2))\\to H(A))$, with its tangent $A$-module structure and the full conjugation coaction $\\rho:\\mathfrak h\\to\\mathfrak h\\otimes_A A[M]$, and put $P_m=\\{v:\\rho(v)=v\\otimes e^m\\}$. Suppose every geometric fibre has exactly the nonzero torus weights $\\{a,-a\\}$, both $P_a$ and $P_{-a}$ are free of rank one, and the natural inclusions give $\\mathfrak h=\\operatorname{Lie}(T)\\oplus P_a\\oplus P_{-a}$. Fix a generator $X\\in P_a$.\n\nWrite $\\mathbf G_a(B)=(B,+)$ and $\\mathbf G_m(B)=B^\\times$ for every commutative $A$-algebra $B$. There is a unique triple $(x_+,x_-,h)$ of $S$-group homomorphisms $x_\\pm:\\mathbf G_a\\to H$ and $h:\\mathbf G_m\\to T$ with the following properties. The maps $x_\\pm$ are closed immersions, $T$-equivariant for the actions $t\\cdot u=\\chi_{\\pm a}(t)u$, and their tangent vectors $dx_+(1)=X$, $dx_-(1)\\in P_{-a}$ are generators. Multiplication\n$$\\mathbf G_a\\times_S T\\times_S\\mathbf G_a\\longrightarrow H,\\qquad(v,t,u)\\longmapsto x_-(v)t x_+(u)$$\nis an open immersion [def-weil-open-immersion], with image $\\Omega$. For every $A$-algebra $B$ and $u,v\\in B$, the point $x_+(u)x_-(v)$ lies in $\\Omega(B)$ if and only if $w=1+uv\\in B^\\times$, and whenever this holds,\n$$x_+(u)x_-(v)=x_-(v/w)h(w)x_+(u/w).$$\nAll assertions concern the full group schemes and all test algebras, including nonreduced ones. There is no Noetherian, connectedness or residue-characteristic assumption on $A$.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Theorem 4.1.4 and its proof, printed pp.110,116-118; Theorem 4.2.6, printed pp.120-121, normalized by a generator of the positive root line. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this rank-one structural theorem."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sfb-pinned-split-root-realization",
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Choose any generator $Y_0$ of $P_{-a}$. Apply [lem-sfb-reductive-framed-noetherian-descent] to $G=H$, $\\Psi=\\{a,-a\\}$, $X_a=X$, $X_{-a}=Y_0$. It gives a nonzero finitely generated integer subring $A_0\\subseteq A$, a reductive pair $(H_0,T_0=D_{A_0}(M))$, and generators $X_0,Y_{0,0}$ with the same full coaction decomposition. Every geometric fibre of $H_0$ has semisimple rank one and roots $\\{a,-a\\}$. Thus the Noetherian hypothesis needed by the existing relative structural lemmas is satisfied over $A_0$, without imposing it on $A$.",
+   "uses": [
+    "lem-sfb-reductive-framed-noetherian-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 3.1.11, printed pp.88-89, with the framed tangent data; agent reduction to the existing Noetherian structural statements."
+   }
+  },
+  {
+   "text": "Choose a lattice basis $M\\simeq\\mathbf Z^r$. Apply [lem-sfb-relative-canonical-root-exponential] over $A_0$ to both root lines and pull back to $A$. Its arbitrary-base-change clause supplies closed maps $e_\\pm:V(P_{\\pm a})\\to H$, uniquely determined by tangent inclusion and $T$-equivariance even after any further algebra extension. Define $x_+(u)=e_+(uX)$. Apply [lem-sfb-relative-rank-one-local-matrix-model] to $(H_0,T_0,a)$. All its hypotheses hold by step 1: smoothness, affine finite type, reductive fibres, maximal torus and semisimple rank one. Pull its affine open cover and its inverse isomorphisms back to $S$. We obtain affine opens $S_i=\\operatorname{Spec}R_i$ covering $S$, on each of which $(H,T)$ is a central split torus times one of the three indicated matrix pairs, with $a$ the ratio of diagonal entries. These chosen models remain valid over every $R_i$-algebra.",
+   "uses": [
+    "lem-sfb-relative-canonical-root-exponential",
+    "lem-sfb-relative-rank-one-local-matrix-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.1.4, printed pp.110,116-118; Theorem 5.1.8 and Corollary 5.1.9 proof, pp.139-141, matrix realization of the rank-one calculation."
+   }
+  },
+  {
+   "text": "Work on one such open, and suppress the identity in the central torus. Put $U(z)=\\left(\\begin{smallmatrix}1&z\\\\ 0&1\\end{smallmatrix}\\right)$ and $L(z)=\\left(\\begin{smallmatrix}1&0\\\\ z&1\\end{smallmatrix}\\right)$, taking their classes in the projective case. The positive tangent generator is $X=cE_{12}$ for a unit $c\\in R_i^\\times$. The standard maps $U$ and $L$ are group homomorphisms, closed immersions and equivariant for the ratio character and its inverse. By uniqueness of the canonical exponentials, including after base change, $x_+(u)=U(cu)$ and $e_-(v c^{-1}E_{21})=L(c^{-1}v)$. Define local candidates $x_{-,i}(v)=L(c^{-1}v)$ and $h_i(w)=\\operatorname{diag}(w,w^{-1})$, with trivial central-torus component. Their tangent vectors are generators and they are group homomorphisms. The closed-image assertions follow from the closed canonical exponential and a change of basis of its line; in the projective case the off-diagonal tangent coordinates are also $E_{12},E_{21}$, including in characteristic two.",
+   "uses": [
+    "lem-sfb-relative-canonical-root-exponential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Example 4.2.1, printed pp.115-116; linked coordinates after Theorem 4.2.6, p.121; Corollary 5.1.9 proof, p.141."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-relative-block-gauss-chart] with two blocks of size one. For $g=\\left(\\begin{smallmatrix}p&q\\\\ r&s\\end{smallmatrix}\\right)\\in\\operatorname{GL}_2(B)$ with $p$ a unit, its unique factors are\n$$g=L(r/p)\\operatorname{diag}(p,\\det(g)/p)U(q/p).$$\nRestricting $\\det(g)=1$ gives the $\\operatorname{SL}_2$ chart. For the projective quotient, the condition that $p$ be a unit is invariant under multiplying a lift by a scalar unit, hence defines the open quotient chart. A lift on this chart has the unique scalar-normalized representative $\\left(\\begin{smallmatrix}1&b\\\\ d&e\\end{smallmatrix}\\right)$, where $e-bd$ is a unit. Local normalized lifts agree, so this description holds also for projective points lacking a global matrix lift. The inverse chart coordinates are $L(d)$, $[\\operatorname{diag}(1,e-bd)]$ and $U(b)$. Consequently lower times diagonal times upper is an open immersion in each of the three models. Multiplying the unipotent parameters by $c^{-1},c$ and retaining the central torus gives the required local multiplication chart. Its factors are unique over every algebra.",
+   "uses": [
+    "lem-sfb-relative-block-gauss-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Example 4.2.5, printed pp.119-120; explicit projective quotient chart; arbitrary-ring Gauss chart specializes to two one-dimensional blocks."
+   }
+  },
+  {
+   "text": "Direct multiplication gives\n$$U(cu)L(c^{-1}v)=\\begin{pmatrix}1+uv&cu\\\\ c^{-1}v&1\\end{pmatrix}.$$\nBy step 4 this lies in the lower-diagonal-upper chart exactly when $w=1+uv$ is a unit. If so its three factors are $L(c^{-1}v/w)$, $\\operatorname{diag}(w,w^{-1})$ and $U(cu/w)$. Passing to projective classes gives the same identity and the same unit criterion: the top-left entry of this explicit lift is $w$. Central components are identities. These equalities are regular formulas in $R_i[u,v,(1+uv)^{-1}]$, so hold on every test algebra, with no unit assumption on $u$ or $v$. This proves all required assertions for the local candidates.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Example 4.2.5 and equation (4.2.1), printed pp.119-121; the displayed two-by-two matrix multiplication."
+   }
+  },
+  {
+   "text": "We prove local uniqueness over every $R_i$-algebra $R$. In any candidate triple the positive map is $U(cu)$ by the uniqueness assertion of [lem-sfb-relative-canonical-root-exponential]. Its negative tangent generator is $dE_{21}$ for a unit $d\\in R^\\times$; the same assertion makes its negative map $L(dv)$. Its chart is therefore the same open as in step 4. Take $u=1,v=\\epsilon$ in $R[\\epsilon]/(\\epsilon^2)$. Comparing the unique upper coordinates in its asserted Gauss formula gives\n$$c/(1+cd\\epsilon)=c/(1+\\epsilon).$$\nSince $c$ is a unit, comparison of the $\\epsilon$ coefficients gives $cd=1$, valid even if $R$ is nonreduced or has characteristic two. Thus the negative map is forced to be $L(c^{-1}v)$. Finally take $u=1,v=t-1$ over $R[t,t^{-1}]$. The now fixed unipotent factors and uniqueness of the whole torus factor in step 4 force $h(t)=\\operatorname{diag}(t,t^{-1})$ with identity central component. This is equality of morphisms by the universal invertible coordinate $t$, not equality only on field-valued points. Hence the local triple is unique after arbitrary base change.",
+   "uses": [
+    "lem-sfb-relative-canonical-root-exponential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.2.6 uniqueness, printed pp.121-125; agent coefficient argument using dual numbers and the universal unit, retaining nilpotent information."
+   }
+  },
+  {
+   "text": "On overlaps of the opens $S_i$, step 6 identifies the two local triples; its proof applies to any further algebra, so equality can be checked on affine opens of each overlap. The covering is fpqc by [lem-weil-pbc-fpqc-finer-than-etale], and its pullbacks to $\\mathbf G_a$, $\\mathbf G_m$ and all products are fpqc by [lem-galois-fpqc-covering-base-change]. Apply [lem-weil-pbc-fpqc-representable-descent] to glue the local $x_{-,i}$ and $h_i$ uniquely. Their group and equivariance identities hold globally by the equality part of this same descent statement on the product covers. The local negative tangent generators glue to a global basis $Y$ of $P_{-a}$: relative to the fixed basis $Y_0$, their scalar coefficients and their reciprocals agree and glue as sections of the structure sheaf. Thus $x_-(v)=e_-(vY)$ by the canonical uniqueness already established in step 2. In particular $x_-$ is a closed immersion, as is $x_+$, and $dx_-(1)=Y$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Theorem 4.1.4 and Theorem 4.2.6, uniqueness and gluing; Stacks Tags 022C, 022D(3), 023Q."
+   }
+  },
+  {
+   "text": "Let $\\Omega_i$ be the local open images in step 4. Their restrictions agree on overlaps since the multiplication morphisms agree. Their union is an open $\\Omega\\subseteq H$. The local inverse maps from $\\Omega_i$ to $\\mathbf G_a\\times T\\times\\mathbf G_a$ agree, since each is inverse to that same multiplication map. Glue them by [lem-weil-pbc-fpqc-representable-descent], using [lem-weil-pbc-fpqc-finer-than-etale] and [lem-galois-fpqc-covering-base-change] for the covers; this is a global inverse and proves the open immersion. For any $A$-algebra $B$, its spectrum is covered by the pulls of the $S_i$. Step 5 says that the product factors through $\\Omega$ on this cover exactly when $1+uv$ is locally a unit. Local inverses of a fixed element agree, so this is equivalent to being a unit in $B$. The identity of step 5 then holds globally by uniqueness of morphism descent. Any competing global triple restricts to our triple by step 6 and hence equals it by the same equality detection. If $B=0$ all schemes over its spectrum are empty and the formulas hold uniquely. Nothing used division by an integer, reducedness, or connectedness of $A$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-galois-fpqc-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Theorem 4.2.6, equation (4.2.1), with the functorial open-cell interpretation; Stacks Tags 022C, 022D(3), 023Q."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-framed-noetherian-descent",
+  "lem-sfb-relative-canonical-root-exponential",
+  "lem-sfb-relative-rank-one-local-matrix-model",
+  "lem-sfb-relative-block-gauss-chart",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/conrad-reductive-group-schemes.pdf",
+  "place": "Conrad Theorems 4.1.4, 4.2.6, and 5.1.8, printed pp.110,116-125,139-141, read online; local copy WANTED. Agent matrix assembly through existing Noetherian structural nodes and a new framed descent prerequisite."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coroot.*Scheme|Scheme.*coroot|root.*Gauss|Gauss.*root|root.*[Pp]airing",
+   "results": "{\"t\": \"2026-10-24T10:27:06Z\", \"tool\": \"grep\", \"query\": \"coroot.*Scheme|Scheme.*coroot|root.*Gauss|Gauss.*root|root.*[Pp]airing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract root pairings, Geck Lie-algebra matrices, opposite abstract subgroups or Gauss sums; none constructs root subgroup schemes or their relative Gauss chart. Read RootSystem/Defs.lean:100-110 and GeckConstruction/Relations.lean:189-194 for the closest concepts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Opposite root subgroup Gauss multiplication formula for reductive group schemes of semisimple rank one over a ring",
+   "results": "{\"t\": \"2026-10-24T10:27:06Z\", \"tool\": \"leansearch\", \"query\": \"Opposite root subgroup Gauss multiplication formula for reductive group schemes of semisimple rank one over a ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.mem_op\", \"Subgroup.smul_opposite_mul\", \"Subgroup.op\", \"Subgroup.unop\", \"AddSubgroup.op_inj\", \"AddSubgroup.op\", \"AddSubgroup.Normal.op\", \"gaussSum_mulShift\"], \"digest\": \"172d4d275b3fb424\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract root pairings, Geck Lie-algebra matrices, opposite abstract subgroups or Gauss sums; none constructs root subgroup schemes or their relative Gauss chart. Read RootSystem/Defs.lean:100-110 and GeckConstruction/Relations.lean:189-194 for the closest concepts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"coroot\"",
+   "results": "{\"t\": \"2026-10-24T10:27:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"coroot\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract root pairings, Geck Lie-algebra matrices, opposite abstract subgroups or Gauss sums; none constructs root subgroup schemes or their relative Gauss chart. Read RootSystem/Defs.lean:100-110 and GeckConstruction/Relations.lean:189-194 for the closest concepts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative SL2 root subgroup multiplication open cell coroot homomorphism over arbitrary commutative rings",
+   "results": "{\"t\": \"2026-10-24T10:27:07Z\", \"tool\": \"leanfinder\", \"query\": \"Relative SL2 root subgroup multiplication open cell coroot homomorphism over arbitrary commutative rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.f\", \"RootPairing.GeckConstruction.isSl2Triple\", \"RootPairing.GeckConstruction.ω_mul_e\", \"RootPairing.GeckConstruction.ω_mul_f\", \"RootPairing.IsG2.toEmbeddedG2\", \"RootPairing.EmbeddedG2\", \"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"RootPairing.EmbeddedG2.ofPairingInThree\"], \"digest\": \"4f17c7cf473d367e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract root pairings, Geck Lie-algebra matrices, opposite abstract subgroups or Gauss sums; none constructs root subgroup schemes or their relative Gauss chart. Read RootSystem/Defs.lean:100-110 and GeckConstruction/Relations.lean:189-194 for the closest concepts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rank one reductive group schemes opposite root line bundles Gauss multiplication perfect pairing torus factor",
+   "results": "{\"t\": \"2026-10-24T10:27:08Z\", \"tool\": \"leanfinder\", \"query\": \"Rank one reductive group schemes opposite root line bundles Gauss multiplication perfect pairing torus factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.toPerfPair_comp_root\", \"RootPairing.root'In\", \"RootPairing.mk''\", \"RootPairing.EmbeddedG2\", \"RootPairing.pairingIn\", \"RootPairing.IsG2.toEmbeddedG2\", \"RootPairing.prod_rootFormIn_smul_coroot_mem_range_PolarizationIn\", \"RootPairing.four_nsmul_coPolarization_compl_polarization_apply_root\"], \"digest\": \"1cb791a78afc9c7f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract root pairings, Geck Lie-algebra matrices, opposite abstract subgroups or Gauss sums; none constructs root subgroup schemes or their relative Gauss chart. Read RootSystem/Defs.lean:100-110 and GeckConstruction/Relations.lean:189-194 for the closest concepts."
+  },
+  {
+   "tool": "grep",
+   "query": "root.*(subgroup|Gauss)|coroot.*Scheme|reductive",
+   "results": "{\"t\": \"2026-10-24T10:59:14Z\", \"tool\": \"grep\", \"query\": \"root.*(subgroup|Gauss)|coroot.*Scheme|reductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and Geck matrices, field-valued transvection decompositions, and SL2 matrix induction do not state a relative group-scheme root chart. Read Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean:387,534,699; the last decomposition assumes a field and allows arbitrary lists of transvections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique opposite root parametrizations and Gauss factorization of SL2 PGL2 over commutative rings",
+   "results": "{\"t\": \"2026-10-24T10:59:15Z\", \"tool\": \"leansearch\", \"query\": \"Unique opposite root parametrizations and Gauss factorization of SL2 PGL2 over commutative rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.fin_two_induction\", \"IsCoprime.exists_SL2_col\", \"Matrix.GeneralLinearGroup.isParabolic_iff_of_upperTriangular_of_det\", \"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"Matrix.SpecialLinearGroup.SL2_inv_expl\", \"IsCoprime.exists_SL2_row\", \"Matrix.SpecialLinearGroup.isCoprime_col\", \"TwoUniqueProds.of_mulOpposite\"], \"digest\": \"4287c7ae4e8441eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and Geck matrices, field-valued transvection decompositions, and SL2 matrix induction do not state a relative group-scheme root chart. Read Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean:387,534,699; the last decomposition assumes a field and allows arbitrary lists of transvections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\", \"mul\"",
+   "results": "{\"t\": \"2026-10-24T10:59:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpecialLinearGroup\\\", \\\"mul\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.hasMul\", \"Matrix.instDistribMulActionSpecialLinearGroupForall\", \"Matrix.SpecialLinearGroup.transvection_mul_neg\", \"Matrix.instSMulCommClassSpecialLinearGroupForall\", \"Matrix.SpecialLinearGroup.transvection_mulVec_single_self\", \"Matrix.SpecialLinearGroup.coe_mul\", \"Matrix.SpecialLinearGroup.transvection_smul_single_fst\", \"Matrix.SpecialLinearGroup.transvection_mulVec_single_other\"], \"digest\": \"4de55b130009e5c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and Geck matrices, field-valued transvection decompositions, and SL2 matrix induction do not state a relative group-scheme root chart. Read Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean:387,534,699; the last decomposition assumes a field and allows arbitrary lists of transvections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For reductive group schemes of semisimple rank one linked root group parameters give a Gauss open cell with denominator one plus u times v",
+   "results": "{\"t\": \"2026-10-24T10:59:16Z\", \"tool\": \"leanfinder\", \"query\": \"For reductive group schemes of semisimple rank one linked root group parameters give a Gauss open cell with denominator one plus u times v\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.u\", \"RootPairing.EmbeddedG2.setOf_index_eq_univ\", \"RootPairing.IsG2.toEmbeddedG2\", \"RootPairing.EmbeddedG2.ofPairingInThree\", \"RootPairing.pairingIn_pairingIn_mem_set_of_isCrystal_of_isRed'\", \"RootPairing.EmbeddedG2.toIsValuedIn\", \"RootPairing.pairingIn_pairingIn_mem_set_of_isCrystal_of_isRed\", \"RootPairing.IsNotG2.toIsValuedIn\"], \"digest\": \"ae349a4e0295b630\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and Geck matrices, field-valued transvection decompositions, and SL2 matrix induction do not state a relative group-scheme root chart. Read Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean:387,534,699; the last decomposition assumes a field and allows arbitrary lists of transvections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication of upper and lower root elements factors into lower diagonal upper matrices when one plus u v is a unit",
+   "results": "{\"t\": \"2026-10-24T10:59:17Z\", \"tool\": \"leanfinder\", \"query\": \"Multiplication of upper and lower root elements factors into lower diagonal upper matrices when one plus u v is a unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ω_mul_e\", \"RootPairing.GeckConstruction.ω_mul_f\", \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_induction\", \"Algebra.Norm.Transitivity.mul_auxMat_blockTriangular\", \"Matrix.Pivot.exists_isTwoBlockDiagonal_list_transvec_mul_mul_list_transvec\", \"Matrix.Pivot.isTwoBlockDiagonal_listTransvecCol_mul_mul_listTransvecRow\", \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_aux\", \"Algebra.Norm.Transitivity.mul_auxMat_corner\"], \"digest\": \"c9da6a0bbceb1d24\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and Geck matrices, field-valued transvection decompositions, and SL2 matrix induction do not state a relative group-scheme root chart. Read Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean:387,534,699; the last decomposition assumes a field and allows arbitrary lists of transvections."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-arbitrary-base-root-lines-coroots",
+  "date": "2026-10-24",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Lemma 5.1.3 and Proposition 5.1.6, printed pp.136-138; Definition 6.1.1 and its following paragraph, p.186; affine localization of the etale neighborhoods; Introduction to Section 4, printed pp.107-108 (the tangent weight subbundles and zero weight); Lemma 4.1.3, pp.108-109, and Theorem 4.2.6, pp.120-121 (canonical coroot on the rank-one centralizer and arbitrary base change); Definition 5.1.1 and the final localization in Lemma 5.1.3, pp.136-137. No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None). Supporting rank-one multiplication input: Conrad Theorems 4.1.4 and 4.2.6 after the centralizer reduction of Lemma 4.1.3, with both root lines trivialized; the torus factor in the Gauss formula is subsequently identified and glued in the parent proof.",
+   "via": [
+    "lem-sfb-arbitrary-base-root-lines-coroots",
+    "lem-sfb-reductive-etale-pinned-splitting",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rank-one-normalized-gauss-chart",
+  "worker": "stage1",
+  "summary": "Retained the full arbitrary-base statement. Added one statement-only framed reductive Noetherian-descent prerequisite; reused canonical exponentials and the rank-one local matrix classification. Wrote the scheme charts, projective scalar normalization, matrix formula, nilpotent-sensitive uniqueness and gluing explicitly. No Lean changes or compilation.",
+  "blueprint": "No imported blueprint ancestor: blueprint_refs.py ancestor returns None. Retains the existing from.place chain to det-thm-sf-ctf-stability-direct-images proof (3); realizes its last supporting rank-one multiplication input, Conrad 4.1.4 and 4.2.6, via the existing 5.1.8 matrix models. Latest blueprint searched for Gauss, root parametrizations, opposite-root, split torus, framed reductive and tangent framing; no matching blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Turns the local matrix-model open cover into an fpqc cover; no group-theoretic node states the covering comparison."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Pulls that cover to the domains on which the maps and group identities are compared."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Glues the compatible local morphisms and inverse charts; the rank-one structural statements do not themselves state this general sheaf property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-9b8c1d125",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-9b8c1d125 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, plus the statements of all 8 cited nodes and the parent lem-sfb-arbitrary-base-root-lines-coroots. The item's statement and stmt_deps match live exactly, where it is still unsplit, so nothing is weakened. Conrad's notes are WANTED and not in literature/, so I checked the mathematics directly; proof_origin is agent. Step 1: every hypothesis of the new node holds with Psi={a,-a}. Step 2: the exponential and matrix-model lemmas apply over the Noetherian A_0, the weight space over A_0 is A_0X_{a,0}, and the 'uniqueness after every base change' clause justifies their use over A, R_i and further algebras. Step 3: X=cE12 with c a unit in all three models, including PGL2 in characteristic 2, and the U/L equivariance is correct. Steps 4-5: I recomputed L(x)diag(d1,d2)U(y), the PGL2 normalized chart [[1,b],[d,e]], and U(cu)L(c^{-1}v)=[[1+uv,cu],[c^{-1}v,1]], which gives x_-(v/w)h(w)x_+(u/w). Step 6: c/(1+cd eps)=c/(1+eps) gives cd=1 without dividing by 2, and the universal unit t pins h. Steps 7-8: Zariski gluing through the fpqc tool nodes is correct. New node lem-sfb-reductive-framed-noetherian-descent: true (finitely presented data, the framing equations and the inverse matrix descend; reductivity spreads out; a zero weight space equal to Lie T gives maximality; semisimple rank = dim span Psi). Its form passes B1-B4/B7/B9, and it does not duplicate split-reductive-finite-type-spreading, smooth-connected-subgroup-noetherian-model, residue-marked-smooth-group-integer-model or relative-root-rank-one-centralizer. It is not a restated item clause. Batch-5 flags: lem-trf-split-lattice-torus-projection, lem-trf-fppf-covering-is-fpqc (Mathlib leaf) and lem-trf-smooth-fpqc-base-descent (Mathlib leaf) are generic torus, covering and descent tools that sit in sec-trace-formula only through historical ancestry. None is a step of the trace formula or Poincare duality, so all are accepted. The three declared tool_uses (fpqc-finer-than-etale, fpqc-covering-base-change, fpqc-representable-descent) are accepted for gluing morphisms. Cosmetic only: the steps 7-8 source document is descent.tex while the place names Conrad. No fixes."
+ }
+}

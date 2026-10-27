@@ -1,0 +1,265 @@
+{
+ "id": "lem-per-tate-separable-local-cotangent-coordinates",
+ "kind": "statement",
+ "title": "Cotangent coordinates of a Tate algebra at a separable closed point",
+ "statement": "Let $F$ be a field complete for a nontrivial real-valued nonarchimedean absolute value, and let $r\\geq0$. Let $T=F\\langle x_1,\\ldots,x_r\\rangle$ be the ring of series $\\sum_{\\nu\\in\\mathbf N^r}a_\\nu x^\\nu$ such that, for every $\\epsilon>0$, only finitely many coefficients satisfy $|a_\\nu|\\geq\\epsilon$, with coefficientwise addition and Cauchy multiplication. Let $\\mathfrak n$ be a maximal proper ideal of $T$ and put $\\kappa=T/\\mathfrak n$. Suppose $\\kappa/F$ is finite separable, meaning finite-dimensional over $F$ with every element having a minimal polynomial with distinct roots. Set $R=T_{\\mathfrak n}$ [def-weil-pbc-localization-at-prime] and $\\mathfrak p=\\mathfrak nR$. Then $R$ is a regular Noetherian local ring [def-weil-regular-scheme], with maximal ideal $\\mathfrak p$ and residue map $\\rho:R\\to\\kappa$ given by $h/u\\mapsto\\bar h/\\bar u$. The following rule is a well-defined $\\kappa$-linear isomorphism:\n$$\\theta:\\mathfrak p/\\mathfrak p^2\\xrightarrow{\\sim}\\kappa^{\\oplus r},\\qquad [h/u]\\longmapsto\\left(\\frac{\\overline{\\partial h/\\partial x_i}}{\\bar u}\\right)_{i=1}^r\\quad(h\\in\\mathfrak n,\\ u\\notin\\mathfrak n).$$\nThe derivatives are termwise derivatives of restricted series. The scalar structure on $\\mathfrak p/\\mathfrak p^2$ is induced by $R/\\mathfrak p=\\kappa$. For $r=0$, one has $T=R=\\kappa=F$, $\\mathfrak n=\\mathfrak p=0$, and the displayed isomorphism is between zero spaces.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+  "place": "Theorem 1.1.5(1), PDF p.4, regularity of Tate algebras; separable-point first-order refinement formulated by the agent using Conrad, Irreducible components of rigid spaces, https://www.numdam.org/article/AIF_1999__49_2_473_0.pdf, section 1.1 printed p.477 and proof of Lemma 3.3.1 printed p.510. Read online 2026-10-24; archival copies WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-localization-at-prime], $R$ is local with maximal ideal $\\mathfrak p=\\mathfrak nR$. Every element of $\\mathfrak p$ has a representative $h/u$ with $h\\in\\mathfrak n$ and $u\\notin\\mathfrak n$: put a finite sum of ideal fractions over a common denominator. The formula $\\rho(h/u)=\\bar h/\\bar u$ respects the fraction relation, since every denominator and every clearing factor outside $\\mathfrak n$ has nonzero image in the field $\\kappa$. It is surjective (lift each element of $\\kappa$ to $T$) and its kernel is exactly $\\mathfrak p$. Thus $R/\\mathfrak p=\\kappa$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Theorem 1.1.5(1), PDF p.4; agent first-order refinement using polynomial comparison and Stacks Tags 00OP, 07NY, 07NV, 00KU."
+   }
+  },
+  {
+   "text": "Put $P=F[x_1,\\ldots,x_r]$. Apply [lem-trf-affinoid-polynomial-closed-point-comparison] with $J=0$, $C=T$ and the given maximal ideal $\\mathfrak n$. It says that $T$ is Noetherian, that $\\mathfrak m=\\mathfrak n\\cap P$ is maximal, and that the induced local map $A=P_{\\mathfrak m}\\to R$ gives a ring isomorphism $\\widehat A\\simeq\\widehat R$. By [lem-weil-pbc-localization-noetherian], $R$ is Noetherian. By [lem-weil-pbc-polynomial-ring-field-regular-ring], $A$ is Noetherian regular local; [lem-weil-pbc-polynomial-ring-maximal-localization-dimension] gives $\\dim A=r$. Apply [lem-weil-pbc-completion-regular-local] to $A$ and then $R$: the isomorphism of their completed local rings proves $R$ regular. Apply [lem-weil-pbc-completion-dimension] to both rings to obtain $\\dim R=\\dim\\widehat R=\\dim\\widehat A=\\dim A=r$. All completion results here have their required Noetherian local hypotheses.",
+   "uses": [
+    "lem-trf-affinoid-polynomial-closed-point-comparison",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-completion-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Theorem 1.1.5(1), PDF p.4; agent first-order refinement using polynomial comparison and Stacks Tags 00OP, 07NY, 07NV, 00KU."
+   }
+  },
+  {
+   "text": "For each $i$, termwise differentiation gives an $F$-linear derivation $d_i:T\\to T$. Indeed, $|n\\cdot1_F|\\leq1$ for every natural number $n$, by the strong triangle inequality, so the coefficient $(\\nu_i+1)a_{\\nu+e_i}$ of $d_i h$ still tends to zero. The coefficient of a fixed monomial in a product is a finite Cauchy sum; differentiating it and using $\\alpha_i+\\beta_i=\\nu_i$ proves the Leibniz rule coefficient by coefficient. Compose with $T\\to\\kappa$ and extend to fractions by $$D_i(h/u)=\\frac{\\bar u\\,\\overline{d_i h}-\\bar h\\,\\overline{d_i u}}{\\bar u^2}.$$ To check independence, differentiate a clearing relation $s(hu'-h'u)=0$ with $s\\notin\\mathfrak n$ and reduce modulo $\\mathfrak n$. The undifferentiated relation kills the term involving $d_i s$, and cancellation of $\\bar s$ gives equality of the two displayed values. The same product and sum rules show that $D_i$ is an $F$-derivation to the $R$-module $\\kappa$ with scalar map $\\rho$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Theorem 1.1.5(1), PDF p.4; agent first-order refinement using polynomial comparison and Stacks Tags 00OP, 07NY, 07NV, 00KU."
+   }
+  },
+  {
+   "text": "For $a,b\\in\\mathfrak p$ the Leibniz rule gives $D_i(ab)=\\rho(a)D_i(b)+\\rho(b)D_i(a)=0$. Thus $D=(D_i)_i$ kills $\\mathfrak p^2$. For $t\\in R$, $a\\in\\mathfrak p$, it gives $D(ta)=\\rho(t)D(a)$, so the induced map $\\theta:\\mathfrak p/\\mathfrak p^2\\to\\kappa^{\\oplus r}$ is $\\kappa$-linear. If $a=h/u$ with $h\\in\\mathfrak n$, the term involving $\\bar h$ vanishes in step 3, giving exactly the formula in the statement. This proves both its well-definedness and the asserted scalar convention.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Theorem 1.1.5(1), PDF p.4; agent first-order refinement using polynomial comparison and Stacks Tags 00OP, 07NY, 07NV, 00KU."
+   }
+  },
+  {
+   "text": "Write $a_i=\\bar x_i\\in\\kappa$, and let $f_i(Z)\\in F[Z]$ be its monic minimal polynomial. Finite separability makes $f_i'(a_i)\\ne0$: in a splitting field the derivative at a root is the product of its differences from all other roots, each nonzero. Now $h_i=f_i(x_i)\\in\\mathfrak n$, and coefficient differentiation gives $\\theta([h_i/1])=f_i'(a_i)e_i$, where $e_i$ is the $i$th coordinate vector. Multiplying this class by $f_i'(a_i)^{-1}\\in\\kappa$ gives a preimage of $e_i$. Therefore $\\theta$ is surjective; this uses only polynomials inside $T$, not a choice of coefficient field in $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Theorem 1.1.5(1), PDF p.4; agent first-order refinement using polynomial comparison and Stacks Tags 00OP, 07NY, 07NV, 00KU."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-regular-local-cotangent-dimension] to the Noetherian regular local ring $R$ obtained in step 2. It gives $\\dim_\\kappa(\\mathfrak p/\\mathfrak p^2)=\\dim R=r$. A surjective map between these two vector spaces of dimension $r$ has zero kernel: lift the $r$ standard basis vectors as in step 5; they are linearly independent because their images are, hence form a basis of the source, and $\\theta$ sends that basis to the standard basis. Thus $\\theta$ is an isomorphism. When $r=0$, a restricted series is just its constant coefficient, so $T=F$, its only maximal proper ideal is zero, $R=\\kappa=F$ and $\\mathfrak p=0$. This verifies the degenerate clause as well.",
+   "uses": [
+    "lem-weil-pbc-regular-local-cotangent-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Theorem 1.1.5(1), PDF p.4; agent first-order refinement using polynomial comparison and Stacks Tags 00OP, 07NY, 07NV, 00KU."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-trf-affinoid-polynomial-closed-point-comparison",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-regular-local-cotangent-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/conrad-several-approaches-non-archimedean-geometry.pdf",
+  "place": "Theorem 1.1.5(1), PDF p.4; first-order argument reconstructed from minimal polynomials and Stacks 00OP, 07NY, 07NV, 00KU. Archival Conrad PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|RestrictedPowerSeries|restricted.*series|separable.*cotangent",
+   "results": "{\"t\": \"2026-10-24T07:36:57Z\", \"tool\": \"grep\", \"query\": \"TateAlgebra|RestrictedPowerSeries|restricted.*series|separable.*cotangent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Restricted.lean\", \"Mathlib/RingTheory/MvPowerSeries/Restricted.lean\", \"Mathlib/RingTheory/MvPowerSeries/Restricted.lean\", \"Mathlib/RingTheory/MvPowerSeries/Restricted.lean\", \"Mathlib/RingTheory/MvPowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\"], \"digest\": \"1f32e1598fd78098\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: MvPowerSeries/Restricted.lean defines the restricted-series subring but no local regularity or cotangent comparison; Ideal/Cotangent provides general cotangent spaces, and Kaehler/JacobiZariski.lean:148 concerns polynomial generator presentations, not continuous Tate coordinates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tangent space at a separable closed point of a Tate algebra is the coordinate vector space and the local ring is regular",
+   "results": "{\"t\": \"2026-10-24T07:36:57Z\", \"tool\": \"leansearch\", \"query\": \"The tangent space at a separable closed point of a Tate algebra is the coordinate vector space and the local ring is regular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instModuleTangentSpace\", \"TangentSpace\", \"instTopologicalSpaceTangentSpace\", \"IsLocalRing.closedPoint\", \"instAddCommGroupTangentSpace\", \"instInhabitedTangentSpace\", \"oneTangentSpaceIcc_def\", \"IsLocalRing.instModuleResidueFieldCotangentSpace\"], \"digest\": \"dde1ca8c80f35e48\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: MvPowerSeries/Restricted.lean defines the restricted-series subring but no local regularity or cotangent comparison; Ideal/Cotangent provides general cotangent spaces, and Kaehler/JacobiZariski.lean:148 concerns polynomial generator presentations, not continuous Tate coordinates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CotangentSpace\", \"equiv\"",
+   "results": "{\"t\": \"2026-10-24T07:36:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"CotangentSpace\\\", \\\"equiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Algebra.Generators.CotangentSpace.compEquiv\", \"Algebra.Generators.CotangentSpace.fst_compEquiv\", \"Algebra.Generators.CotangentSpace.fst_compEquiv_apply\", \"Algebra.Generators.CotangentSpace.compEquiv_symm_inr\", \"Algebra.Generators.CotangentSpace.compEquiv_symm_zero\"], \"digest\": \"d39a8b2b3ad9d0d9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: MvPowerSeries/Restricted.lean defines the restricted-series subring but no local regularity or cotangent comparison; Ideal/Cotangent provides general cotangent spaces, and Kaehler/JacobiZariski.lean:148 concerns polynomial generator presentations, not continuous Tate coordinates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a maximal ideal of a Tate algebra with finite separable residue field the local ring is regular and its cotangent space is isomorphic to the coordinate vector space by termwise partial derivatives",
+   "results": "{\"t\": \"2026-10-24T07:36:59Z\", \"tool\": \"leanfinder\", \"query\": \"At a maximal ideal of a Tate algebra with finite separable residue field the local ring is regular and its cotangent space is isomorphic to the coordinate vector space by termwise partial derivatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"IsLocalRing.CotangentSpace\", \"IsLocalRing.finrank_cotangentSpace_le_one_iff\", \"IsLocalRing.instModuleResidueFieldCotangentSpace\", \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\", \"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\", \"Algebra.IsEtaleAt\"], \"digest\": \"21afbed2787c11c2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: MvPowerSeries/Restricted.lean defines the restricted-series subring but no local regularity or cotangent comparison; Ideal/Cotangent provides general cotangent spaces, and Kaehler/JacobiZariski.lean:148 concerns polynomial generator presentations, not continuous Tate coordinates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The maximal ideal modulo its square in a restricted power series algebra at a finite separable residue field is identified with one copy of the residue field for each variable",
+   "results": "{\"t\": \"2026-10-24T07:39:28Z\", \"tool\": \"leanfinder\", \"query\": \"The maximal ideal modulo its square in a restricted power series algebra at a finite separable residue field is identified with one copy of the residue field for each variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.residueFieldOfPowerSeries\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"instIsSeparableQuotientIdealOfResidueField\", \"Algebra.instFormallyUnramifiedResidueField\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"instIsSeparableResidueFieldOfQuotientIdeal\", \"PowerSeries.weierstrassMod\", \"Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal\"], \"digest\": \"449bb3d1cffa71e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: MvPowerSeries/Restricted.lean defines the restricted-series subring but no local regularity or cotangent comparison; Ideal/Cotangent provides general cotangent spaces, and Kaehler/JacobiZariski.lean:148 concerns polynomial generator presentations, not continuous Tate coordinates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CotangentSpace\", \"finrank\"",
+   "results": "{\"t\": \"2026-10-24T08:01:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"CotangentSpace\\\", \\\"finrank\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\", \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"IsLocalRing.finrank_cotangentSpace_le_one_iff\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"IsLocalRing.spanFinrank_maximalIdeal_eq_finrank_cotangentSpace\", \"IsLocalRing.spanFinrank_maximalIdeal_eq_finrank_cotangentSpace_of_fg\", \"IsRegularLocalRing.iff_finrank_cotangentSpace\"], \"digest\": \"35640476eda1209d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series definitions and algebraic presentation cotangent bases do not state local regularity and the derivative isomorphism for this analytic algebra; source inspected in MvPowerSeries/Restricted.lean, RegularLocalRing/Defs.lean, and Ideal/Cotangent.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Tate algebra at a closed point with separable residue field is regular and termwise derivatives identify its cotangent space with the residue field coordinate space",
+   "results": "{\"t\": \"2026-10-24T08:01:28Z\", \"tool\": \"leanfinder\", \"query\": \"A Tate algebra at a closed point with separable residue field is regular and termwise derivatives identify its cotangent space with the residue field coordinate space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.cotangentEquiv_apply\", \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"IsLocalRing.instModuleResidueFieldCotangentSpace\", \"Algebra.Generators.basisCotangentAway\", \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"Algebra.Generators.basisCotangentAway_apply\", \"Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective\", \"Algebra.Generators.cotangentCompAwaySec\"], \"digest\": \"138a62602ab90d72\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series definitions and algebraic presentation cotangent bases do not state local regularity and the derivative isomorphism for this analytic algebra; source inspected in MvPowerSeries/Restricted.lean, RegularLocalRing/Defs.lean, and Ideal/Cotangent.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|RestrictedPowerSeries|restricted.*series|separable.*cotangent",
+   "results": "{\"t\": \"2026-10-24T08:03:00Z\", \"tool\": \"grep\", \"query\": \"TateAlgebra|RestrictedPowerSeries|restricted.*series|separable.*cotangent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/Enumerative/Partition/Glaisher.lean\", \"Mathlib/Combinatorics/Enumerative/Partition/Glaisher.lean\", \"Mathlib/RingTheory/MvPowerSeries/Restricted.lean\", \"Mathlib/RingTheory/MvPowerSeries/Restricted.lean\", \"Mathlib/RingTheory/MvPowerSeries/Restricted.lean\", \"Mathlib/RingTheory/MvPowerSeries/Restricted.lean\", \"Mathlib/RingTheory/MvPowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\"], \"digest\": \"ed814b3ad2ef5f1d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series definitions and algebraic presentation cotangent bases do not state local regularity and the derivative isomorphism for this analytic algebra; source inspected in MvPowerSeries/Restricted.lean, RegularLocalRing/Defs.lean, and Ideal/Cotangent.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cotangent space of a Tate algebra at a finite separable residue field is isomorphic to the coordinate vector space by partial derivatives",
+   "results": "{\"t\": \"2026-10-24T08:03:00Z\", \"tool\": \"leansearch\", \"query\": \"The cotangent space of a Tate algebra at a finite separable residue field is isomorphic to the coordinate vector space by partial derivatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.CotangentSpace\", \"Algebra.Extension.CotangentSpace\", \"Algebra.SubmersivePresentation.cotangentEquiv\", \"Algebra.SubmersivePresentation.cotangentEquiv_apply\", \"Algebra.Generators.cotangentSpaceBasis_repr_one_tmul\", \"Algebra.Generators.cotangentSpaceBasis_repr_tmul\", \"Algebra.Generators.cotangentSpaceBasis_apply\", \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\"], \"digest\": \"3ec252e49dee5101\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series definitions and algebraic presentation cotangent bases do not state local regularity and the derivative isomorphism for this analytic algebra; source inspected in MvPowerSeries/Restricted.lean, RegularLocalRing/Defs.lean, and Ideal/Cotangent.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricted power series algebra localized at a separable maximal ideal has derivative coordinate basis of the maximal ideal modulo its square",
+   "results": "{\"t\": \"2026-10-24T08:03:01Z\", \"tool\": \"leanfinder\", \"query\": \"Restricted power series algebra localized at a separable maximal ideal has derivative coordinate basis of the maximal ideal modulo its square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.basisCotangent_localizationAway_apply\", \"Algebra.Generators.basisCotangentAway\", \"Algebra.SubmersivePresentation.basisDeriv\", \"Algebra.Generators.basisCotangentAway_apply\", \"PowerSeries.weierstrassDistinguished\", \"Algebra.SubmersivePresentation.basisCotangent\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"Algebra.Generators.cotangentSpaceBasis\"], \"digest\": \"57e28d624e7bdc21\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series definitions and algebraic presentation cotangent bases do not state local regularity and the derivative isomorphism for this analytic algebra; source inspected in MvPowerSeries/Restricted.lean, RegularLocalRing/Defs.lean, and Ideal/Cotangent.lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-separable-regular-affinoid-residual-conormal",
+  "date": "2026-10-24",
+  "group": "Q61"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited formal-algebraization support branch through lem-per-separable-regular-affinoid-residual-conormal: ambient Tate local regularity and cotangent coordinates. The latest blueprint ancestor lem-per-artin-gabber-affine-curve Step 3 is the duality argument and has no explicit formal-algebraization sentence; this split fills its existing descendant analytic prerequisite.",
+   "via": [
+    "lem-per-separable-regular-affinoid-residual-conormal",
+    "lem-per-perfect-affinoid-local-jacobian-chart",
+    "lem-per-regular-affinoid-complete-field-extension",
+    "lem-per-regular-generic-continuous-jacobian",
+    "lem-per-rig-principal-formal-algebraization",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-tate-separable-local-cotangent-coordinates",
+  "worker": "stage1",
+  "summary": "Kept the statement; reused completed polynomial/Tate local comparison and existing regularity/dimension tools. Wrote out the derivative fraction rule, descent modulo the maximal ideal square, separable minimal-polynomial preimages of coordinate vectors, and the equal-dimension argument. No new nodes, Lean or builds.",
+  "blueprint": "Inherited formal-algebraization support branch through lem-per-separable-regular-affinoid-residual-conormal: ambient Tate local regularity and cotangent coordinates. The latest blueprint ancestor lem-per-artin-gabber-affine-curve Step 3 is the duality argument and has no explicit formal-algebraization sentence; this split fills its existing descendant analytic prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-affinoid-polynomial-closed-point-comparison",
+    "why": "Generic analytic comparison at a closed point, used at J=0 for Noetherianity and completed local rings; no node in the perverse unit supplies this analytic tool."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+    "why": "Dimension of a polynomial local ring at a maximal ideal; generic commutative algebra absent from the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Regularity is invariant under maximal-ideal completion; generic commutative algebra tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Krull dimension is invariant under completion; generic local algebra tool absent from the perverse unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-affinoid-polynomial-closed-point-comparison",
+  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-completion-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-0cc3c9b42",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-0cc3c9b42 (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item and all six steps in full. The statement is unchanged from the base and the delivery adds no new nodes. Small cases: r=0 is true; the rational-point case is the existing lem-per-tate-rational-local-coordinates; x^p−c with an inseparable residue shows separability is necessary, and step 5 uses it exactly there. Step 1 (ρ is well defined, ker ρ = 𝔭) is elementary and correct. Step 2 applies lem-trf-affinoid-polynomial-closed-point-comparison with J=0 and C=T, whose statement gives T Noetherian, 𝔫∩P maximal and P_𝔪^≅T_𝔫^. It then uses localization-noetherian, regularity of polynomial localizations, dim P_𝔪=r, completion-regular-local (an iff, Stacks 07NY at more-algebra.tex:10668) and completion-dimension (07NV at :10624); all Noetherian-local hypotheses are in place before use. Step 3: I checked that termwise d_i stays restricted (|n·1|≤1) and satisfies Leibniz, and that D_i is well defined on fractions by differentiating the clearing relation. Step 4 (D kills 𝔭², ρ-linear, numerator-only formula) and step 5 (f_i(x_i)∈𝔫 maps to f_i'(a_i)e_i, so θ is surjective) are correct. Step 6 uses regular-local-cotangent-dimension: a surjection between r-dimensional spaces is an isomorphism. Batch-5 flag: the full closure of the cited trf node is generic Tate-algebra analysis (Weierstrass division, Gauss completion, spectral and bounded-power lemmas), l-adic absolute-value lemmas and pbc definitions. Neither assumption leaf gives Tate Noetherianity or completion comparison, so the assumption leaves cannot be cited instead. The node is already cited by lem-per-tate-rational-local-coordinates, lem-per-perfect-affinoid-local-jacobian-chart (in this item's via chain) and lem-per-affinoid-jacobian-certificate-regular, so it adds no new trf node to the batch-5 closure; accepted as generic. The four declared tool_uses are generic commutative algebra and accepted. Conrad aws.pdf is not in literature/ (WANTED declared); the proof is a self-contained reconstruction from cited nodes. No SGA, no duplicates."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateSeparableLocalCotangentCoordinates",
+  "declaration": "RestrictedSeries.tate_separable_local_cotangent_coordinates",
+  "file": "lean/Sheaf/RingTheory/TateSeparableLocalCotangentCoordinates.lean",
+  "statement": "theorem tate_separable_local_cotangent_coordinates (F : Type u) [NormedField F] [IsUltrametricDist F] [CompleteSpace F] (hF : ∃ a : F, a ≠ 0 ∧ ‖a‖ ≠ 1) (r : ℕ) (n : Ideal ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ)))) [n.IsMaximal] (hfinite : @Module.Finite F (↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) ⧸ n) _ _ ((Ideal.Quotient.mk n).comp (constants F r)).toAlgebra.toModule) (hseparable : @Algebra.IsSeparable F (↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) ⧸ n) _ _ ((Ideal.Quotient.mk n).comp (constants F r)).toAlgebra) : IsRegularLocalRing (Localization.AtPrime n) ∧ n.map (algebraMap ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) (Localization.AtPrime n)) = IsLocalRing.maximalIdeal (Localization.AtPrime n) ∧ (∃ d : Fin r → ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) → ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))), (∀ (i : Fin r) (h : ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ)))), (d i h).val = MvPowerSeries.pderiv F i h.val) ∧ ∃ ρ : Localization.AtPrime n →+* (↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) ⧸ n), Function.Surjective ρ ∧ RingHom.ker ρ = IsLocalRing.maximalIdeal (Localization.AtPrime n) ∧ (∀ (h : ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ)))) (v : n.primeCompl), ρ (IsLocalization.mk' (Localization.AtPrime n) h v) = @Div.div _ (Ideal.Quotient.field n).toDiv (Ideal.Quotient.mk n h) (Ideal.Quotient.mk n v.val)) ∧ ∃ θ : IsLocalRing.CotangentSpace (Localization.AtPrime n) ≃+ (Fin r → ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) ⧸ n), (∀ (a : Localization.AtPrime n) (z : IsLocalRing.CotangentSpace (Localization.AtPrime n)) (i : Fin r), θ (a • z) i = ρ a * θ z i) ∧ ∀ (h : n) (v : n.primeCompl) (z : IsLocalRing.maximalIdeal (Localization.AtPrime n)), z.val = IsLocalization.mk' (Localization.AtPrime n) h.val v → ∀ i : Fin r, θ ((IsLocalRing.maximalIdeal (Localization.AtPrime n)).toCotangent z) i = @Div.div _ (Ideal.Quotient.field n).toDiv (Ideal.Quotient.mk n (d i h.val)) (Ideal.Quotient.mk n v.val)) ∧ (r = 0 → n = ⊥ ∧ IsLocalRing.maximalIdeal (Localization.AtPrime n) = ⊥ ∧ ∃ (eT : ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) ≃+* F) (eR : Localization.AtPrime n ≃+* F) (eκ : (↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) ⧸ n) ≃+* F), (∀ a : F, eT (constants F r a) = a) ∧ (∀ a : F, eR (algebraMap ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) (Localization.AtPrime n) (constants F r a)) = a) ∧ (∀ a : F, eκ (Ideal.Quotient.mk n (constants F r a)) = a) ∧ Subsingleton (IsLocalRing.CotangentSpace (Localization.AtPrime n)) ∧ Subsingleton (Fin r → ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) ⧸ n))",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00e0a5427",
+  "group": "ND",
+  "result": "fix",
+  "note": "Lean exact against node: F NormedField+ultrametric+complete+∃a≠0,‖a‖≠1; T=IsRestricted.subring(c=1) (cofinite decay = node); maximal n; Module.Finite/Algebra.IsSeparable via explicit (mk n).comp constants (landed def-trf-restricted-series-presentation, added stmt_dep OK); IsRegularLocalRing(AtPrime n); nR=maximalIdeal; d pinned by pderiv; ρ pinned by fraction formula, surjective, ker=p; θ ≃+ with ρ-semilinearity (=κ-linear) and numerator formula on all h/v reps (pins θ); r=0 clause with constants-normalized eT/eR/eκ. Statement verbatim, ≤99 cols, sorry only, docstrings/source/blueprint present, dep records unchanged vs live, no H4 duplicate. Sole fault H11: dispatcher-wording placeholder second reading → fixes/<item>.report.md with Worker report verbatim + real clause-by-clause second reading. No compile needed (no Lean changed)."
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-ringed-forget-hom-representative",
+ "kind": "lemma",
+ "title": "The normalized Hom comparison on chain maps into Hom",
+ "statement": "For the ringed sites, exact additive functor U, underived comparisons and fixed two-injective Hom comparison chi of [def-sf-ringed-forget-tensor-transposition-data, lem-sf-ringed-forget-two-injective-hom], let Q,K,I be complexes with I K-injective, and q:Q to Hom(K,I). Apply the derived comparison to F(Q(q) followed by the inverse source Hom representative), then transport the inputs by the exact-localization factors. The result equals the localization factor on Q followed by Q of U(q) and the chain Hom comparison, followed by the inverse target Hom representative. There is no K-injectivity hypothesis on Q or K and no tensor or uncurrying assertion.",
+ "stmt_deps": [
+  "def-sf-ringed-forget-tensor-transposition-data",
+  "lem-sf-ringed-forget-two-injective-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "section-hom-complexes (08J9), K-injective resolutions 079P and localization 08J7; naturality extension in step 1 of lem-sf-ringed-forget-normalized-uncurry."
+ },
+ "proof": [
+  {
+   "text": "Choose a K-injective resolution a:K to Kprime. Its localization Q(a) is an isomorphism, so the derived Hom map H(Q(a),id), and its image under F, are isomorphisms. It suffices to precompose both sides of the desired square by F(H(Q(a),id)).",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of chi transports the derived Hom factor across this precomposition. Naturality of the inverse exact-localization factor gives the corresponding square in the contravariant variable. Naturality of the target representative isomorphisms then identifies the left side with the known two-injective representative equation for Kprime and I.",
+   "uses": [
+    "lem-sf-ringed-forget-two-injective-hom",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality of the chain Hom comparison and the exact-localization factor on Hom. Naturality of the source representative isomorphisms identifies the remaining composite with the precomposed right side. Cancellation proves the desired square for K. Finally compose the representative equation with the inverse source and target representative isomorphisms. Precompose by F(Q(q)) and use naturality of the localization factor on q. This gives the displayed normalized formula for every map q into Hom(K,I).",
+   "uses": [
+    "lem-sf-ringed-forget-two-injective-hom",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sf-ringed-forget-two-injective-hom",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "section-hom-complexes (08J9), K-injective resolutions 079P and localization 08J7; naturality extension in step 1 of lem-sf-ringed-forget-normalized-uncurry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "representative.*KInjective|KInjective.*representative|DerivedCompatibility",
+   "results": "The existing DerivedCompatibility equation assumes K-injective source and target; Mathlib KInjective localization results supply resolution inversion but no equation for this specific ringed Hom comparison. Extension follows by naturality and cancellation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a natural comparison square from K-injective source representatives to arbitrary complexes by cancelling the derived image of a K-injective resolution.",
+   "results": "8 hits: InjectiveResolution.descFSucc, toRightDerivedZero', desc, descHomotopyZeroOne, descFOne, descHomotopyZeroZero, descHomotopyZeroSucc, desc_commutes_assoc. These concern bounded-below resolutions of objects, not extension of this unbounded Hom comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map_isIso\", \"naturality\"",
+   "results": "0 hits. Inversion of the localized resolution and ordinary naturality are available, but the specified normalized Hom square is project-specific.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedForgetNormalizedUncurry",
+  "date": "2026-10-27",
+  "group": "H4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Naturality of evaluation and the internal-Hom comparison; arbitrary source representative square in the evaluation-first proof.",
+   "via": [
+    "lem-sf-ringed-forget-normalized-uncurry",
+    "lem-sf-ringed-forget-tensor-transposition",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedForgetHomRepresentative",
+  "file": "lean/Sheaf/Algebra/Homology/RingedForgetHomRepresentative.lean",
+  "declaration": "CategoryTheory.RingedForgetTensorTransposition.ringed_forget_hom_representative",
+  "statement": "theorem ringed_forget_hom_representative\n    (Q K I : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ) [I.IsKInjective]\n    (q : Q ⟶ homComplex (R := R) K I) :\n    U.mapDerivedCategory.map (DerivedCategory.Q.map q ≫ (χ.source.iso K I).inv) ≫\n        χ.derived.hom.app (op (DerivedCategory.Q.obj K), DerivedCategory.Q.obj I) ≫\n        (derivedInternalHomOfUniverses.{d, vd, s, wa} J' R').map\n          (X := (op (U.mapDerivedCategory.obj (DerivedCategory.Q.obj K)),\n            U.mapDerivedCategory.obj (DerivedCategory.Q.obj I)))\n          (Y := (op (DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj K)),\n            DerivedCategory.Q.obj ((U.mapHomologicalComplex (.up ℤ)).obj I)))\n          ((U.mapDerivedCategoryFactors.inv.app K).op,\n            U.mapDerivedCategoryFactors.hom.app I) =\n      U.mapDerivedCategoryFactors.hom.app Q ≫\n        DerivedCategory.Q.map ((U.mapHomologicalComplex (.up ℤ)).map q ≫\n          χ.chain.hom.app (op K, I)) ≫\n        (χ.target.iso ((U.mapHomologicalComplex (.up ℤ)).obj K)\n          ((U.mapHomologicalComplex (.up ℤ)).obj I)).inv",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T222709-L-683575",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T222709-L-683575",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

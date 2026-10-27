@@ -1,0 +1,121 @@
+{
+ "id": "def-trf-strict-local-ring-affine-colimit-comparison",
+ "kind": "definition",
+ "title": "Canonical comparison from the etale structure-ring stalk to the affine strict henselization",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $X$ be a scheme and $\\bar x:\\operatorname{Spec}\\Omega\\to X$ a geometric point [def-weil-geometric-point]. Let $E_{X,\\bar x}$ be the ring-valued geometric stalk denoted $\\operatorname{strictLocalRing}(X,\\bar x)$ in [def-trf-log-regular-pair], and let $A^{\\rm sh}_{X,\\bar x}$ be the colimit of the affine pointed-neighbourhood coordinate rings [def-weil-pbc-strict-henselization-limit]. Define the canonical comparison $E_{X,\\bar x}\\xrightarrow{\\sim}A^{\\rm sh}_{X,\\bar x}$ by the geometric-stalk colimit cocone, restriction to affine pointed neighbourhoods, and transport to the chosen small representative diagram. Its direction is from the geometric stalk to the affine colimit, and it identifies the two germs of every regular function on a pointed affine neighbourhood.",
+ "stmt_deps": [
+  "def-weil-geometric-point",
+  "def-trf-log-regular-pair",
+  "def-weil-pbc-strict-henselization-limit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/algebra.tex",
+  "place": "Tags 04HX (lemma-describe-etale-local-ring) and 03PS (definition-etale-local-rings); restriction to cofinal affine pointed neighbourhoods in the proof of 04HX."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical isomorphism between etale geometric structure ring stalk and strict henselization colimit of affine pointed neighborhoods",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.stalkIso\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum.Top R) : (structureSheaf R).presheaf.stalk x ≅ CommRingCat.of (Localization.AtPrime x.asIdeal)\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, the stalk $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R),x} $ of the structure sheaf at $ x $ is isomorphic to t\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkToFiberRingHom_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) {Z : CommRingCat}\\n  (h : { carrier := Localization.AtPrime x.asIdeal, commRing := OreLocalization.instCommRing } ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.StructureSheaf.localizationToStalk R x)\\n   \", \"doc\": \"For any commutative ring $ R $ and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the composition of the canonical ring homomorphism from the localization $ R_{\\\\mathfrak{p}} $ to the stalk $ \\\\mathcal{O}_{\\\\o\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toStalk\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum.Top R) : CommRingCat.of R ⟶ (structureSheaf R).presheaf.stalk x\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, this is the canonical ring homomorphism from $ R $ to the stalk $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R),x\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.stalkIso_hom\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)),\\n  (AlgebraicGeometry.StructureSheaf.stalkIso R x).hom = AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom R x\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, the stalk $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R),x} $ of the structure sheaf at $ x $ is isomorphic to t\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(p : PrimeSpectrum R) : IsLocalization.AtPrime ((structureSheaf R).presheaf.stalk p) p.asIdeal\", \"doc\": \"For any commutative ring $ R $ and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the stalk $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R), \\\\mathfrak{p}} $ of the structure sheaf at $ \\\\mathfrak{p} $ is canonically i\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatLocalizationToStalk\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum R) : IsIso (localizationToStalk R x)\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, the canonical ring homomorphism from the localization $ R_{\\\\mathfrak{p}} $ (at the prime ideal $ \\\\mathf\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.restrictStalkIso\", \"module\": \"Mathlib.Geometry.RingedSpace.Stalks\", \"type\": \"{U : TopCat} (X : PresheafedSpace.{_, _, v} C) {f : U ⟶ (X : TopCat.{v})} (h : IsOpenEmbedding f) (x : U) :\\n  (X.restrict h).presheaf.stalk x ≅ X.presheaf.stalk (f x)\", \"doc\": \"For a presheafed space $X$ over a category $\\\\mathcal{C}$, an open subset $U$ of $X$ with open embedding $f: U \\\\to X$, and a point $x \\\\in U$, the stalk of the restricted presheafed space at $x$ is isom\"}\n  {\"name\": \"AlgebraicGeometry.stalkClosedPointIso_inv\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \": (stalkClosedPointIso R).inv = StructureSheaf.toStalk R _\", \"doc\": \"The inverse of the isomorphism between the stalk of the structure sheaf at the closed point of the prime spectrum of a commutative ring $ R $ and $ R $ itself is given by the canonical ring homomorphi\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib declaration; reuse the exact existing project definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictHenselization\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; existing Sheaf helpers give the required definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "strictLocalRingStrictHenselizationIso|strictHenselizationRingMapAlong|strictHenselizationLocalRing|strictHenselizationRingMap (Mathlib AlgebraicGeometry; lean/WeilConjectures; lean/Sheaf; dag/nodes)",
+   "results": "[grep] OK 0 hit(s)\n\nProject search:\nlean/Sheaf/TraceFormula/SmoothGeometricStalkAlgebra.lean\nlean/Sheaf/TraceFormula/StrictHenselizationTensorFinite.lean\nlean/Sheaf/AlgebraicGeometry/LogRegularCompletedChart.lean\nlean/Sheaf/AlgebraicGeometry/FiniteQuotientInertiaSlice.lean\ndag/nodes/sec-trace-formula/def-trf-deformation-specialization.json\ndag/nodes/sec-trace-formula/def-trf-hilbert-samuel-presentation.json\ndag/nodes/sec-trace-formula/def-trf-specialization-slice-data.json\n\nFull DAG JSON scan found no definition node owning any of the four named declarations. blueprint_refs.py search returned 0 blueprint nodes for those declaration names.",
+   "date": "2026-10-24",
+   "verdict": "Exact definitions already exist in Sheaf.AlgebraicGeometry.LogRegularCompletedChart; add only a definition-node existing:true attachment, not another Lean declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-polynomial-log-chart-regularity",
+  "date": "2026-10-24",
+  "group": "Q61"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polynomial logarithmic chart argument: transport the base and polynomial nonunit log ideals from geometric stalks to affine strict henselizations.",
+   "via": [
+    "lem-trf-polynomial-log-chart-regularity",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogRegularCompletedChart",
+  "declaration": "AlgebraicGeometry.strictLocalRingStrictHenselizationIso",
+  "declarations": [
+   "AlgebraicGeometry.strictLocalRingStrictHenselizationIso"
+  ],
+  "statement": "noncomputable def strictLocalRingStrictHenselizationIso\n    (X : Scheme.{u}) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (t : Spec (.of Ω) ⟶ X) : strictLocalRing X t ≅ Scheme.strictHenselizationRing t",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Ownership attachment requested in the return of 800b572ba266. Reuses these existing plain definitions in the published module without copying or changing their Lean source. The surrounding theorem is not a statement dependency."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7a73b775",
+  "group": "Q61",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7a73b775",
+  "group": "Q61",
+  "result": "fix",
+  "note": "Repair of the H2 return of 800b572b. New def nodes def-trf-strict-local-ring-affine-colimit-comparison (strictLocalRingStrictHenselizationIso) and def-trf-strict-henselization-local-ring-maps (strictHenselizationLocalRing/RingMap/RingMapAlong) are existing:true, match side-live source verbatim, are canonical constructions and have exact stmt_deps; no other owner in side-live. The item changes only in lean and stmt_deps (+2 new nodes, + landed def-trf-log-regular-pair, allowed for landed nodes); lean.statement is verbatim; sorry-only; module sha unchanged. Mathematics re-checked against the IsChart/characteristic/characteristicRank/nonunitIdeal/IsLogRegular definitions: all hypotheses and clauses match, iso and φ pinned, edge cases r=0, K empty, Y empty and universes fine. FIX F1: both new-node mathlib_searches grep results contained pasted brief text (statement_change template and §1(A) field list); cleaned in fixes/<id>.json, all other fields unchanged. Advisory: theorem-owned AffineCoordinateStrictLocal.coordinate/coordinateIdeal are similar helpers, not citable by the item. No Lean changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e5fc0",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T091647-L-3361593",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs node lem-trf-log-regular-completed-chart (statement byte-identical, only proof/proof_deps/proof_origin changed) and CompleteToricModel import swap vs change record; all 23 direct importers compile (12 from packet, 11 compiled by me)",
+  "sorry_before": [
+   "AlgebraicGeometry.exists_completed_chart_of_logRegular"
+  ],
+  "sorry_after": []
+ }
+}

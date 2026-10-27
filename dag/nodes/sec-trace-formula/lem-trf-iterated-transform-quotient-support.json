@@ -1,0 +1,241 @@
+{
+ "id": "lem-trf-iterated-transform-quotient-support",
+ "kind": "statement",
+ "title": "Canonical quotient and kernel support for two successive module strict transforms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $\\mathcal I\\subseteq\\mathcal O_S$ be a finite-type quasi-coherent ideal [pqf-def-coherent], and let $b_0:S_1=\\operatorname{Bl}_{\\mathcal I}(S)\\to S$ be its blow-up [def-nagata-global-blowup]. Let $\\mathcal J\\subseteq\\mathcal O_{S_1}$ be a finite-type quasi-coherent ideal and let $b_1:S_2=\\operatorname{Bl}_{\\mathcal J}(S_1)\\to S_1$. For a morphism $f:X\\to S$, put $A=X\\times_SS_1$, $B=X\\times_SS_2=A\\times_{S_1}S_2$, with projections $p:A\\to X$, $q:B\\to A$, $f_1:A\\to S_1$ and $f_2:B\\to S_2$ [def-pc-fibre-product]. For a quasi-coherent $\\mathcal O_X$-module $\\mathcal F$ [pqf-def-coherent], let $M$ be its module strict transform along $b_0$ and let $N$ be the module strict transform of $M$ along $b_1$ [def-trf-module-strict-transform]. Then $M$ and $N$ are quasi-coherent, and the canonical composite\n$$\\alpha:q^*p^*\\mathcal F\\xrightarrow{q^*(\\pi_0)}q^*M\\xrightarrow{\\pi_1}N,$$\nwhere $\\pi_0$ and $\\pi_1$ are the defining strict-transform quotient maps and pullback is [def-pc-module-pullback], is surjective. Set\n$$T_I=(b_0b_1f_2)^{-1}V(\\mathcal I),\\qquad T_J=(b_1f_2)^{-1}V(\\mathcal J).$$\nThe restriction of $\\alpha$ to $B\\setminus(T_I\\cup T_J)$ is an isomorphism, and every local section of $\\ker\\alpha$ vanishes on that complement. For $\\mathcal F=\\mathcal O_X$, under the multiplication identifications $p^*\\mathcal O_X=\\mathcal O_A$ and $q^*\\mathcal O_A=\\mathcal O_B$, this is the canonical quotient $\\mathcal O_B\\twoheadrightarrow N$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080I, lemma-strict-transform-composition-blowups, first proof paragraph and first three sentences of the second paragraph; Tag 080D, definition-strict-transform (1)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-nagata-global-blowup",
+  "def-pc-fibre-product",
+  "def-trf-module-strict-transform",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-strict-transform-sheaf-kernel] first to $(f,\\mathcal I,\\mathcal F)$ and then to $(f_1,\\mathcal J,M)$. The first application gives quasi-coherence of $M$ and surjectivity of $\\pi_0$; thus the quasi-coherence hypothesis for the second application holds, and it gives quasi-coherence of $N$ and surjectivity of $\\pi_1$. The first quotient is an isomorphism on $U=A\\setminus (b_0f_1)^{-1}V(\\mathcal I)$, and the second is an isomorphism on $B\\setminus T_J$.",
+   "uses": [
+    "lem-trf-strict-transform-sheaf-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups, first proof paragraph and first three sentences of the second paragraph; Tag 080D, definition-strict-transform (1)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-module-pullback-epi-direct-sum](1), $q^*\\pi_0$ is an epimorphism. Its composite with the epimorphism $\\pi_1$ is an epimorphism: if two maps agree after composition with $\\pi_1q^*\\pi_0$, cancel $q^*\\pi_0$ and then $\\pi_1$. This composite is precisely the stated $\\alpha$, hence it is surjective as a morphism of sheaves.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-epi-direct-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups, first proof paragraph and first three sentences of the second paragraph; Tag 080D, definition-strict-transform (1)."
+   }
+  },
+  {
+   "text": "Put $V=B\\setminus(T_I\\cup T_J)$. The fibre-product identities give $q^{-1}(A\\setminus U)=T_I$, so $q|_V$ factors through $U$; write $r:V\\to U$. Pullback composition [def-pc-module-pullback] and the natural identification of open pullback with restriction [lem-weil-pbc-open-immersion-module-pullback-restriction] identify $(q^*\\pi_0)|_V$ with $r^*(\\pi_0|_U)$. It is invertible: applying $r^*$ to the inverse gives its inverse. Also $\\pi_1|_V$ is invertible by step 1. Thus $\\alpha|_V$ is invertible. For every open $W\\subseteq B$ and $s\\in(\\ker\\alpha)(W)$, one has $(\\alpha|_V)(s|_{W\\cap V})=0$; its inverse gives $s|_{W\\cap V}=0$, as required.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups, first proof paragraph and first three sentences of the second paragraph; Tag 080D, definition-strict-transform (1)."
+   }
+  },
+  {
+   "text": "For $\\mathcal F=\\mathcal O_X$, use the multiplication identifications $p^*\\mathcal O_X\\cong\\mathcal O_A$ and $q^*\\mathcal O_A\\cong\\mathcal O_B$ given by [lem-weil-pbc-module-pullback-structure-sheaf]. By [def-trf-module-strict-transform], $\\pi_0$ is the defining quotient of $\\mathcal O_A$, and $\\pi_1$ is the defining quotient of its pulled-back module. Their composite, after these identifications, is exactly the canonical map $\\mathcal O_B\\to N$; its surjectivity is step 2.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "def-trf-module-strict-transform"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080I, lemma-strict-transform-composition-blowups, first proof paragraph and first three sentences of the second paragraph; Tag 080D, definition-strict-transform (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-strict-transform-sheaf-kernel",
+  "lem-weil-pbc-module-pullback-epi-direct-sum",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "def-trf-module-strict-transform"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080I, lemma-strict-transform-composition-blowups, first proof paragraph and first three sentences of the second paragraph; Tag 080D, definition-strict-transform (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi coherent sheaf on a scheme the two successive strict transforms under blowups admit a surjection from the composite pullback whose kernel is supported on the union of the two exceptional loci",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective, AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion, AlgebraicGeometry.Scheme.IdealSheafData.map, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp_assoc, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp, AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp, AlgebraicGeometry.Scheme.IdealSheafData.map_ker; inspected responses do not state this two-step strict-transform assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical map from a pulled back module to its iterated strict transform is surjective and an isomorphism away from both blowup centers",
+   "results": "8 hits: IsLocalizedModule.mk'_surjective, AlgebraicGeometry.Scheme.Modules.pullbackCongr, IsLocalizedModule.fromLocalizedModule', AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.IdealSheafData.comapIso; inspected responses do not state this two-step strict-transform assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData, strictTransform",
+   "results": "loogle: unknown identifier 'strictTransform'; 0 hits: ; inspected responses do not state this two-step strict-transform assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|supported.*blowup",
+   "results": "0 hits: ; inspected responses do not state this two-step strict-transform assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|moduleStrictTransform",
+   "results": "0 hits: ; read the returned signatures: none states the iterated module strict-transform quotient and support assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An iterated strict transform of a quasi coherent sheaf is a quotient of the pullback with kernel supported on the exceptional loci",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.comap, SheafOfModules.QuasicoherentData.I, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent.casesOn, AlgebraicGeometry.Scheme.IdealSheafData.ideal_map, SheafOfModules.IsQuasicoherent.recOn, AlgebraicGeometry.Scheme.Hom.ker, SheafOfModules.IsQuasicoherent.rec; read the returned signatures: none states the iterated module strict-transform quotient and support assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, \"strictTransform\"",
+   "results": "0 hits: ; read the returned signatures: none states the iterated module strict-transform quotient and support assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two successive module strict transforms under blowups have a surjective canonical map from the iterated pullback, isomorphic off the two centers, with kernel supported on their inverse images",
+   "results": "8 hits: AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp_assoc, Module.FinitePresentation.exists_notMem_bijective, surjective_of_isLocalized_span, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq; read the returned signatures: none states the iterated module strict-transform quotient and support assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*transform|transform.*strict|exceptional.*quotient",
+   "results": "11 hits: Mathlib/Tactic/Linarith/Preprocessing.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Homology/Embedding/TruncGE.lean, Mathlib/Algebra/Homology/Embedding/TruncLE.lean, Mathlib/Analysis/MellinTransform.lean; read the returned signatures: none states the iterated module strict-transform quotient and support assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composing two quotients of pulled back quasicoherent modules by sections supported on closed subsets gives an epimorphism which is an isomorphism off their union",
+   "results": "8 hits: SheafOfModules.GeneratingSections.opEpi_comp, SheafOfModules.GeneratingSections.ofEpi_I, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, SheafOfModules.GeneratingSections.ofEpi, SheafOfModules.GeneratingSections.ofEpi_s, SheafOfModules.generatorsOfIsCokernelFree_π, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex, SheafOfModules.generatorsOfIsCokernelFree_I; read the returned signatures: none states the iterated module strict-transform quotient and support assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-strict-transform-composition",
+  "date": "2026-10-22",
+  "group": "Q73"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting finite-after-blowup input in the Orgogozo modification route of lem-trf-local-term-locality; extraction from Tag 080I, lemma-strict-transform-composition-blowups, first proof paragraph and first three sentences of the second paragraph; Tag 080D, definition-strict-transform (1).",
+   "via": [
+    "lem-trf-strict-transform-composition",
+    "lem-trf-finite-after-blowup",
+    "lem-trf-alteration-finite-refinement",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-iterated-transform-quotient-support",
+  "worker": "stage1",
+  "summary": "Assembled the two single-transform quotient maps using the existing single-transform kernel theorem and Mathlib pullback-epimorphism leaf. Made restriction compatibility and the supported-section argument explicit. No new nodes or statement change.",
+  "blueprint": "Supporting blowup/flattening input in the ancestor lem-trf-local-term-locality, proof (1)--(2), contracting-correspondence specialization route; this extraction realizes Tag 080I first paragraph and first three sentences of the second paragraph via 080D (1). Latest blueprint proof read; the ancestor does not itself assert this two-step module lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-pullback-structure-sheaf",
+    "why": "The generic multiplication isomorphism g^*O_Y = O_X identifies the source of the canonical quotient in the structure-sheaf case. This is a module-pullback tool, not a replacement of the trace-formula unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-1f84c711d",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-1f84c711d (reviewer sub-agent of L); spot-checked: Read Stacks divisors.tex Tag 080D definition-strict-transform (1) with the paragraph before it, and Tag 080I lemma-strict-transform-composition-blowups, whole proof. The item is the composite-surjection and kernel-support part of that proof, which needs no union-centre hypothesis. T_I = (b0 b1 f2)^-1 V(I) equals the source's (fpq)^-1 Z, and T_J = (b1 f2)^-1 V(J) equals (f'q)^-1 Z'. Statement and stmt_deps are byte-identical to live and side-live, where the item is unsplit with an empty proof. There are no new nodes and no repair note, so the re-split rule does not apply; no SGA citation. Step 1: two applications of lem-trf-strict-transform-sheaf-kernel. The first, to (f, V(I), F), gives M quasi-coherent, pi0 surjective and an isomorphism on U = A minus (b0 f1)^-1 V(I). The second, to (f1, V(J), M), has its quasi-coherence input supplied by the first and gives an isomorphism off T_J, since (f1 q)^-1 = (b1 f2)^-1. Step 2: Mathlib leaf epi-direct-sum (1) gives q^* pi0 epi; a composite of epis is epi, and an epi in Mod(O_B) is a surjective sheaf map. Step 3 (elementary): q^-1(A minus U) = T_I because f1 q = b1 f2. The pullback compositor and the open-immersion restriction iso (Mathlib leaf) identify (q^* pi0)|_V with r^*(pi0|_U), so alpha|_V is an iso and kernel sections vanish on V. Step 4 (elementary): the epsilon isomorphisms of the structure-sheaf leaf plus the definition give the O_B quotient. proof_deps equals the union of step uses. Off-unit citations are Mathlib leaves or definitions; the declared structure-sheaf tool_use is accepted. Closure of 651 nodes contains no cycle. Citers (strict-transform-composition step 1, comparison-epimorphism steps 1-2) use only stated clauses. Duplicate search over the whole DAG: exceptional-support, module-admissible-blowup-calculus and comparison-epimorphism are distinct statements. Small cases pass: k[t] with I=(t), J=(1), F = O plus O/(t), kernel O/(t) on T_I; centres swapped; I=0 empty and vacuous; F=0. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IteratedTransformQuotientSupport",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.iteratedModuleStrictTransform_quotient_support",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.iteratedModuleStrictTransform_quotient_support",
+   "AlgebraicGeometry.Scheme.Modules.iteratedModuleStrictTransform_quotient_structureSheaf"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IteratedTransformQuotientSupport.lean",
+  "statement": "theorem iteratedModuleStrictTransform_quotient_support {X S : Scheme.{u}} (f : X ⟶ S) (I : S.IdealSheafData) [I.toModules.IsFiniteType] (J : I.blowup.IdealSheafData) [J.toModules.IsFiniteType] (F : X.Modules) [F.IsQuasicoherent] : ∃ h₁ : (moduleStrictTransform f I F).IsQuasicoherent, ∃ α : (tensorPullback (pullback.fst (pullback.snd f I.blowupMap) J.blowupMap)).obj ((tensorPullback (pullback.fst f I.blowupMap)).obj F) ⟶ @moduleStrictTransform _ _ (pullback.snd f I.blowupMap) J inferInstance (moduleStrictTransform f I F) h₁, α = (tensorPullback (pullback.fst (pullback.snd f I.blowupMap) J.blowupMap)).map (cokernel.π (kernel.ι (moduleStrictTransformRestriction f I F))) ≫ cokernel.π (kernel.ι (moduleStrictTransformRestriction (pullback.snd f I.blowupMap) J (moduleStrictTransform f I F))) ∧ (@moduleStrictTransform _ _ (pullback.snd f I.blowupMap) J inferInstance (moduleStrictTransform f I F) h₁).IsQuasicoherent ∧ Epi α ∧ IsIso ((restrictFunctor (((pullback.fst (pullback.snd f I.blowupMap) J.blowupMap ≫ pullback.fst f I.blowupMap ≫ f) ⁻¹ᵁ I.support.compl) ⊓ ((pullback.fst (pullback.snd f I.blowupMap) J.blowupMap ≫ pullback.snd f I.blowupMap) ⁻¹ᵁ J.support.compl)).ι).map α) ∧ ∀ (W : (Limits.pullback (pullback.snd f I.blowupMap) J.blowupMap).Opens) (s : Γ((tensorPullback (pullback.fst (pullback.snd f I.blowupMap) J.blowupMap)).obj ((tensorPullback (pullback.fst f I.blowupMap)).obj F), W)), α.app W s = 0 → ((restrictAdjunction (((pullback.fst (pullback.snd f I.blowupMap) J.blowupMap ≫ pullback.fst f I.blowupMap ≫ f) ⁻¹ᵁ I.support.compl) ⊓ ((pullback.fst (pullback.snd f I.blowupMap) J.blowupMap ≫ pullback.snd f I.blowupMap) ⁻¹ᵁ J.support.compl)).ι).unit.app ((tensorPullback (pullback.fst (pullback.snd f I.blowupMap) J.blowupMap)).obj ((tensorPullback (pullback.fst f I.blowupMap)).obj F))).app W s = 0",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Stage-2 reviewer FIX: the two defining quotients are written by the body cokernel.π (kernel.ι (moduleStrictTransformRestriction …)) of def-trf-module-strict-transform instead of moduleStrictTransformπ / moduleStrictTransformStructureMap, which are owned by the uncited theorem node lem-trf-strict-transform-sheaf-kernel. The multiplication maps ε_p, ε_q are written as the adjoints of SheafOfModules.unitToPushforwardObjUnit under tensorPullbackSectionAdjunction (def-pc-module-pullback), instead of tensorPullbackObjUnitToUnit (owned by the uncited def-sfb-tensor-pullback-structure-sheaf-map) and the uncited theorem tensorPullbackObjUnitToUnit_isIso; their invertibility is now asserted in the structure-sheaf statement. Same maps (existsUnique_tensorPullbackSectionAdjunction), same mathematics.",
+  "fixed_by": "NT-stage2-cc-ada1ac47c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ada1ac47c",
+  "group": "Q57",
+  "result": "fix",
+  "note": "The mathematics is right: each node clause matches the Lean (objects, epi of the pinned α = q^*π₀≫π₁, iso and kernel-vanishing on (q≫p≫f)⁻¹(I.support)ᶜ ⊓ (q≫f₁)⁻¹(J.support)ᶜ), checked against Stacks 080I and 080D(1); no extra hypotheses; edge cases hold. H2 fixed: moduleStrictTransformπ and moduleStrictTransformStructureMap (theorem node lem-trf-strict-transform-sheaf-kernel, not cited) replaced by the def-trf-module-strict-transform body cokernel.π (kernel.ι (moduleStrictTransformRestriction …)). H2 fixed: tensorPullbackObjUnitToUnit and _isIso (uncited def-sfb-tensor-pullback-structure-sheaf-map and lem-weil-pbc-module-pullback-structure-sheaf) replaced by ((tensorPullbackSectionAdjunction g).homEquiv _ _).symm (unitToPushforwardObjUnit …) from the cited def-pc-module-pullback; this is the same map because the adjunction is unique, and the statement now asserts its invertibility. Fixes: the full module and the item lean-record.json. nt_compile --json on the fixed module: clean, 15.5 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261026T081232-L-1888176",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.Modules.iteratedModuleStrictTransform_quotient_structureSheaf",
+   "AlgebraicGeometry.Scheme.Modules.iteratedModuleStrictTransform_quotient_support"
+  ],
+  "sorry_after": []
+ }
+}

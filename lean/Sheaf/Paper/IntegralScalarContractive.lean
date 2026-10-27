@@ -5,7 +5,7 @@ Authors: SHEAF group B4
 -/
 module
 
-public import Sheaf.Paper.ContinuousIntegralCoefficients
+public import Sheaf.Paper.ContinuousIntegralCoefficientData
 
 import all Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization
 import all Sheaf.Paper.PointLanAffineEvaluation

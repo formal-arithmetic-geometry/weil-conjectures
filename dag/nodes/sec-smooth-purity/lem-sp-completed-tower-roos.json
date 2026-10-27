@@ -1,0 +1,145 @@
+{
+ "id": "lem-sp-completed-tower-roos",
+ "kind": "statement",
+ "title": "Canonical Roos triangle after completed scalar forgetting",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a scheme $T$ [def-weil-l-adic-coefficient-extension, def-pc-scheme]. Let $D$ be the normalized abelian coefficient-tower interface [det-sp-coefficient-towers-abelian]. Let $F$ forget the finite-level scalar actions to the completed coefficient ring $A=\\widehat{\\mathcal O}_{E,T}$, retaining all strict transitions [sk-def-sp-coefficient-towers, def-weil-completed-integral-coefficients]. Put $L=R\\lim\\circ D(F)$, with the resolution-normalized projections $p_n:LC\\to C_n$ transported through the canonical exact evaluation comparison [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Then $F$ is additive and exact and $L$ has the standard integer-shift and triangulated structures. Assuming countable products in $D(A)$, every $C\\in D(\\operatorname{Tow}(T,\\mathcal O_E))$ admits a connecting map $\\delta$ for which $(LC\\xrightarrow{(p_n)}\\prod_n C_n\\xrightarrow{1-s}\\prod_n C_n\\xrightarrow\\delta LC[1])$ is distinguished, where $s$ uses the actual derived transitions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+  "place": "Adjunction, Unit, Counit and Restriction paragraphs; Bhatt--Scholze Lemma 3.5.7"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-reduction-tower-normalized",
+  "sk-def-sp-normalized-towers",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation of strict scalar forgetting is the composite of exact coefficient evaluation and exact restriction of scalars. Finite limits and colimits are detected by evaluation; additivity follows from preservation of binary products. Exact derived forgetting composed with the total right-derived additive inverse limit has its standard shift and triangulated structures.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "sk-lem-sp-tower",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an auxiliary finite-field datum of characteristic different from ell, solely to instantiate the existing fixed-ring Roos theorem; its tower ring, derived functor and projections do not depend on that datum. Apply that theorem to D(F)C. The canonical derived evaluation comparison identifies every evaluated object with the original completed scalar restriction. Localization uniqueness identifies successor maps. Transport the distinguished triangle along the product of these evaluation isomorphisms; the product universal property identifies its first arrow with the specified projections.",
+   "uses": [
+    "lem-coef-constant-tower-roos"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-coefficient-towers-abelian",
+  "sk-lem-sp-tower",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-constant-tower-roos"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+  "place": "Normalization: fixed-ring total-limit triangle and projection transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor between full subcategories is an equivalence when an adjunction has invertible unit and counit",
+   "results": "Adjunction.toEquivalence and its functor/inverse equations; abstract restriction assembly only.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit of strict sheaf module towers has distinguished Roos triangle with canonical projections",
+   "results": "Eight hits: derived-category fractions and triangleOfSES; no completed coefficient tower comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.toEquivalence",
+   "results": "Adjunction.toEquivalence and component formulas; abstract equivalence only.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|derived.*[Cc]omplet|[Nn]ormalized.*[Tt]ower",
+   "results": "Three normalized field trace hits; none concerns derived module-sheaf towers.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityNormalizedEquivalence",
+  "date": "2026-10-25",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization: fixed-ring total-limit triangle and projection transport",
+   "via": [
+    "det-sp-normalized-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityCompletedTowerRoos",
+  "file": "lean/Sheaf/Paper/SmoothPurityCompletedTowerRoos.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spCompletedTotalLimit_roos",
+  "statement": "theorem spCompletedTotalLimit_roos (D : SpCoefficientTowersAbelian l E T) [HasCountableProducts (DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T))] (C : spDerivedCoefficientTowers l E T D) : ∃ δ : (∏ᶜ fun n : ℕ ↦ (spDerivedCompletedEvaluation l E T D n).obj C) ⟶ ((spCompletedTotalLimit l E T D).obj C)⟦(1 : ℤ)⟧, IsDerivedLimitTriangle (fun n : ℕ ↦ (spDerivedCompletedTransition l E T D n).app C) ((spCompletedTotalLimit l E T D).obj C) (Pi.lift (fun n : ℕ ↦ (spCompletedTotalProjection l E T D n).app C)) δ",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spCompletedStrictTower",
+   "AlgebraicGeometry.ProEtale.spCompletedReduction",
+   "AlgebraicGeometry.ProEtale.spCompletedTotalLimit",
+   "AlgebraicGeometry.ProEtale.spCompletedForgettingEvaluationIso",
+   "AlgebraicGeometry.ProEtale.spCompletedTotalProjection",
+   "AlgebraicGeometry.ProEtale.spCompletedStrictTowerLimits",
+   "AlgebraicGeometry.ProEtale.spCompletedStrictTowerColimits",
+   "AlgebraicGeometry.ProEtale.spCompletedStrictTowerAdditive",
+   "AlgebraicGeometry.ProEtale.spCompletedTotalLimitShift",
+   "AlgebraicGeometry.ProEtale.spCompletedTotalLimit_triangulated",
+   "AlgebraicGeometry.ProEtale.spCompletedTotalLimit_roos"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9c225",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261025T095827-L-3486300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9c225",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261025T095827-L-3486300",
+  "kind": "interface",
+  "note": "independent cc review: moved defs byte-identical to clone; item sig/structure unchanged; 3 sorry lemmas vs item fields (all implied by item statement; Roos w/o Invertible true via coefficientConstantTower_roos); 5 direct importers compiled against delivered interface OK; #print axioms clean"
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "id": "lem-z8-etale-diagonal-section-coherence",
+ "kind": "statement",
+ "title": "Etale Diagonal Section Coherence",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ntheorem diagonalCoordinateTransport\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    (F : C ⥤ D) (G₁ G₂ : D ⥤ E) (H : E ⥤ D)\n    (l₁ : G₁ ⋙ H ≅ 𝟭 D) (l₂ : G₂ ⋙ H ≅ 𝟭 D)\n    (c : F ⋙ G₁ ⟶ F ⋙ G₂) (K : C) {M : D} (e : F.obj K ≅ M)\n    (hc : H.map (c.app K) ≫ l₂.hom.app (F.obj K) = l₁.hom.app (F.obj K)) :\n    H.map (G₁.map e.inv ≫ c.app K ≫ G₂.map e.hom) ≫ l₂.hom.app M =\n      l₁.hom.app M\n\ndef derivedSectionPushIso {X Y : Scheme.{u}} (s : X ⟶ Y) (p : Y ⟶ X)\n    (h : s ≫ p = 𝟙 X) :\n    𝟭 (DerivedCategory (Sheaf X.smallEtaleTopology B)) ≅\n      (lowerStar B s).rightDerivedFunctor ⋙ (lowerStar B p).rightDerivedFunctor\n\ndef derivedDirectCoordinateIso {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    (lowerStar B (pullback.snd f f)).rightDerivedFunctor ⋙\n        (lowerStar B f).rightDerivedFunctor ≅\n      (lowerStar B (pullback.fst f f)).rightDerivedFunctor ⋙\n        (lowerStar B f).rightDerivedFunctor\n\ndef derivedSingleUnitorNatIso (X : Scheme.{u}) :\n    derivedTensorRight B X ((DerivedCategory.singleFunctor _ 0).obj\n      ((constantSheaf X.smallEtaleTopology B).obj (𝟙_ B))) ≅\n      𝟭 (DerivedCategory (Sheaf X.smallEtaleTopology B))\n\ntheorem derivedSingleUnitorNatIso_hom_app (X : Scheme.{u})\n    (M : DerivedCategory (Sheaf X.smallEtaleTopology B)) :\n    (derivedSingleUnitorNatIso B X).hom.app M =\n      ((derivedTensor B X).obj M).map (singleFunctorObjUnitIso B X).hom ≫\n        (derivedTensorRightUnitor B X M).hom\n\ntheorem derivedSingleUnitorNatIso_cancel (X : Scheme.{u})\n    (M V : DerivedCategory (Sheaf X.smallEtaleTopology B)) (t : V ⟶ 𝟙_ _) :\n    ((derivedTensor B X).obj M).map (t ≫ (singleFunctorObjUnitIso B X).inv) ≫\n        (derivedSingleUnitorNatIso B X).hom.app M =\n      ((derivedTensor B X).obj M).map t ≫ (derivedTensorRightUnitor B X M).hom\n\ntheorem rightDerivedLowerStarComp_hom_eq_conjugate\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :\n    (rightDerivedLowerStarComp B f g).hom =\n      conjugateEquiv\n        ((derivedUpperStarLowerStarAdjunction B g).comp\n          (derivedUpperStarLowerStarAdjunction B f))\n        (derivedUpperStarLowerStarAdjunction B (f ≫ g))\n        (leftDerivedUpperStarComp B f g (f ≫ g) rfl).hom\n\ntheorem diagonalSection_coordinate {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (K : DerivedCategory (Sheaf Y.smallEtaleTopology B)) :\n    (upperStar B (pullback.diagonal f)).leftDerivedFunctor.map\n        ((derivedSquareUpperStarIso B\n          (CommSq.mk (pullback.condition (f := f) (g := f)).symm)).hom.app K) ≫\n      (leftDerivedUpperStarCompSectionIso B (pullback.diagonal f) (pullback.snd f f)\n        (pullback.diagonal_snd f)).hom.app ((upperStar B f).leftDerivedFunctor.obj K) =\n    (leftDerivedUpperStarCompSectionIso B (pullback.diagonal f) (pullback.fst f f)\n      (pullback.diagonal_fst f)).hom.app ((upperStar B f).leftDerivedFunctor.obj K)\n\ntheorem diagonalSection_directComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    (rightDerivedLowerStarComp B (pullback.snd f f) f ≪≫\n      eqToIso (congrArg (fun g ↦ (lowerStar B g).rightDerivedFunctor)\n        (pullback.condition (f := f) (g := f)).symm) ≪≫\n      (rightDerivedLowerStarComp B (pullback.fst f f) f).symm).hom =\n    conjugateEquiv\n      ((derivedUpperStarLowerStarAdjunction B f).comp\n        (derivedUpperStarLowerStarAdjunction B (pullback.snd f f)))\n      ((derivedUpperStarLowerStarAdjunction B f).comp\n        (derivedUpperStarLowerStarAdjunction B (pullback.fst f f)))\n      (derivedSquareUpperStarIso B\n        (CommSq.mk (pullback.condition (f := f) (g := f)).symm)).hom\n\ntheorem diagonalSection_push_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    let a₁ := derivedSectionPushIso B (pullback.diagonal f) (pullback.fst f f)\n      (pullback.diagonal_fst f)\n    let a₂ := derivedSectionPushIso B (pullback.diagonal f) (pullback.snd f f)\n      (pullback.diagonal_snd f)\n    let d := (derivedDirectCoordinateIso B f).hom\n    Functor.whiskerRight a₂.hom (lowerStar B f).rightDerivedFunctor ≫\n        Functor.whiskerLeft (lowerStar B (pullback.diagonal f)).rightDerivedFunctor d =\n      Functor.whiskerRight a₁.hom (lowerStar B f).rightDerivedFunctor\n\ntheorem diagonalSection_push_comparison_app {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (K : DerivedCategory (Sheaf X.smallEtaleTopology B)) :\n    (lowerStar B f).rightDerivedFunctor.map\n        ((derivedSectionPushIso B (pullback.diagonal f) (pullback.snd f f)\n          (pullback.diagonal_snd f)).hom.app K) ≫\n      (derivedDirectCoordinateIso B f).hom.app\n        ((lowerStar B (pullback.diagonal f)).rightDerivedFunctor.obj K) =\n    (lowerStar B f).rightDerivedFunctor.map\n      ((derivedSectionPushIso B (pullback.diagonal f) (pullback.fst f f)\n        (pullback.diagonal_fst f)).hom.app K)\n\ntheorem diagonalSection_push_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (K : DerivedCategory (Sheaf X.smallEtaleTopology B))\n    {V : DerivedCategory (Sheaf (pullback f f).smallEtaleTopology B)}\n    (d : (lowerStar B (pullback.diagonal f)).rightDerivedFunctor.obj K ⟶ V) :\n    (lowerStar B f).rightDerivedFunctor.map\n        ((derivedSectionPushIso B (pullback.diagonal f) (pullback.snd f f)\n          (pullback.diagonal_snd f)).hom.app K ≫\n          (lowerStar B (pullback.snd f f)).rightDerivedFunctor.map d) ≫\n      (derivedDirectCoordinateIso B f).hom.app V =\n    (lowerStar B f).rightDerivedFunctor.map\n      ((derivedSectionPushIso B (pullback.diagonal f) (pullback.fst f f)\n        (pullback.diagonal_fst f)).hom.app K ≫\n        (lowerStar B (pullback.fst f f)).rightDerivedFunctor.map d)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-trace-counit",
+  "lem-kun-inverse-image-monoidal",
+  "lem-z8-section-conjugate-comparison",
+  "lem-z8-section-projection-unit"
+ ],
+ "proof": [
+  {
+   "text": "Apply associativity of inverse-image compositors to the diagonal, either projection, and the original morphism. Cancel their common invertible factors to obtain the coordinate comparison after diagonal restriction. Naturality transports this equation through a coefficient isomorphism. The direct-image compositors are conjugates of the inverse-image compositors, so conjugate-equivalence composition gives the direct-image coordinate comparison and the equality of the two pushed section units.",
+   "uses": [
+    "def-asd-ordinary-finite-trace-counit",
+    "lem-kun-inverse-image-monoidal",
+    "lem-z8-section-conjugate-comparison",
+    "lem-z8-section-projection-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-trace-counit",
+  "lem-kun-inverse-image-monoidal",
+  "lem-z8-section-conjugate-comparison",
+  "lem-z8-section-projection-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleDiagonalSectionCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDiagonalSectionCoherence.lean",
+  "declaration": "AlgebraicGeometry.Etale.diagonalSection_push_naturality",
+  "declarations": [
+   "AlgebraicGeometry.Etale.diagonalCoordinateTransport",
+   "AlgebraicGeometry.Etale.derivedSectionPushIso",
+   "AlgebraicGeometry.Etale.derivedDirectCoordinateIso",
+   "AlgebraicGeometry.Etale.derivedSingleUnitorNatIso",
+   "AlgebraicGeometry.Etale.derivedSingleUnitorNatIso_hom_app",
+   "AlgebraicGeometry.Etale.derivedSingleUnitorNatIso_cancel",
+   "AlgebraicGeometry.Etale.rightDerivedLowerStarComp_hom_eq_conjugate",
+   "AlgebraicGeometry.Etale.diagonalSection_coordinate",
+   "AlgebraicGeometry.Etale.diagonalSection_directComparison",
+   "AlgebraicGeometry.Etale.diagonalSection_push_comparison",
+   "AlgebraicGeometry.Etale.diagonalSection_push_comparison_app",
+   "AlgebraicGeometry.Etale.diagonalSection_push_naturality"
+  ],
+  "statement": "theorem diagonalSection_push_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (K : DerivedCategory (Sheaf X.smallEtaleTopology B))\n    {V : DerivedCategory (Sheaf (pullback f f).smallEtaleTopology B)}\n    (d : (lowerStar B (pullback.diagonal f)).rightDerivedFunctor.obj K ⟶ V) :\n    (lowerStar B f).rightDerivedFunctor.map\n        ((derivedSectionPushIso B (pullback.diagonal f) (pullback.snd f f)\n          (pullback.diagonal_snd f)).hom.app K ≫\n          (lowerStar B (pullback.snd f f)).rightDerivedFunctor.map d) ≫\n      (derivedDirectCoordinateIso B f).hom.app V =\n    (lowerStar B f).rightDerivedFunctor.map\n      ((derivedSectionPushIso B (pullback.diagonal f) (pullback.fst f f)\n        (pullback.diagonal_fst f)).hom.app K ≫\n        (lowerStar B (pullback.fst f f)).rightDerivedFunctor.map d)",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

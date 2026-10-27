@@ -168,7 +168,32 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_isProper"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_isProper",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine",
+     "lines": [
+      100,
+      104
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -195,24 +220,24 @@
   "note": "statement made precise (module sheaves over the constant sheaf F_r, the map named); Lean attached by the lead"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "For every prime $r$, every proper $f:X\\to Y$ (no finite-presentation\nhypothesis), every cartesian base change, and every sheaf $F$ of $\\mathbf\nF_r$-modules on $X_{\\Et}$, the specified map\n\n$$\n g^{-1}Rf_*F\\xrightarrow{\\sim}Rf'_*g'^{-1}F\n$$\n\nis an isomorphism.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative ring which is torsion as an additive group\n(for instance $\\Lambda=\\mathbf F_r$ for a prime $r$). For every proper\n$f:X\\to Y$ (no finite-presentation hypothesis) and every cartesian square\n[def-weil-pbc-cartesian-square] with base change $g:Y'\\to Y$, the derived\nexchange morphism [def-weil-pbc-derived-exchange]\n\n$$\n \\Ex_\\square:g^{-1}Rf_*\\xrightarrow{\\sim}Rf'_*g'^{-1}\n$$\n\nis an isomorphism of functors $\\Dplus(X_{\\Et},\\Lambda)\\to\n\\Dplus(Y'_{\\Et},\\Lambda)$. In particular, for every prime $r$ and every sheaf\n$F$ of $\\mathbf F_r$-modules on $X_{\\Et}$, the map\n$g^{-1}Rf_*F\\to Rf'_*g'^{-1}F$ is an isomorphism.",
   "proof": [
    {
-    "text": "The projective-line proposition [prop-weil-pbc-projective-line]\nsupplies the hypothesis of the reduction proposition\n[prop-weil-pbc-reduction-to-projective-line], and that proposition\nyields $\\mathrm{PBC}(f)$ for every proper $f$ in the sense of\n[def-weil-pbc-property]; the displayed map is exactly the exchange morphism of\nthat property, hence an isomorphism.",
+    "text": "Since $\\Lambda$ is torsion as an additive group, every sheaf of\n$\\Lambda$-modules is torsion, so every object of $\\Dplus(\\,\\cdot_{\\Et},\\Lambda)$\nhas torsion cohomology sheaves. Hence part 1 of the projective-line\nproposition [prop-weil-pbc-projective-line] says that $\\mathbf P^1_S\\to S$\nsatisfies $\\mathrm{PBC}$ in the sense of [def-weil-pbc-property], with\ncoefficients in $\\Lambda$-modules, for every scheme $S$. This is the\nhypothesis of the reduction proposition\n[prop-weil-pbc-reduction-to-projective-line] for the torsion coefficient ring\n$\\Lambda$, which therefore yields $\\mathrm{PBC}(f)$ for every proper $f$: the\nderived exchange morphism of every cartesian square over $f$ is an\nisomorphism on all of $\\Dplus(X_{\\Et},\\Lambda)$. For $\\Lambda=\\mathbf F_r$ and\n$K=F[0]$ this is the last assertion.",
     "uses": [
      "prop-weil-pbc-projective-line",
-     "prop-weil-pbc-reduction-to-projective-line",
-     "def-weil-pbc-property"
+     "def-weil-pbc-property",
+     "prop-weil-pbc-reduction-to-projective-line"
     ],
     "elementary": false
-   },
-   {
-    "text": "The projective-line proposition supplies the sole geometric input required by\nthe S3 reduction. Finite morphisms, composition, and cancellation in that\nreduction preserve the named S0 exchange map, so the resulting isomorphism is\nthe exchange map for the original proper morphism.",
-    "uses": [],
-    "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

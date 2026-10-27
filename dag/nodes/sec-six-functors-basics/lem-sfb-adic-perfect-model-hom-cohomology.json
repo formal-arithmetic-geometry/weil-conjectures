@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-adic-perfect-model-hom-cohomology",
+ "kind": "statement",
+ "title": "Ordinary homotopy Hom as quotient algebraic Hom cohomology",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "statement": "Let X,A,J,U be as in def-sfb-adic-perfect-reduction-model-complexes with the same surjectivity of final evaluation for epimorphisms of set sheaves. Let P,Q be bounded integer cochain complexes of finite-projective A-modules. Let C_n(P), C_n(Q), alpha_n(P), alpha_n(Q) and tau_n be the actual ordinary models and scalar-balancing maps of that definition. Let F_n be sections at the slice terminal object of the constant A-module sheaf on H^0(moduleHomComplex(P,Q)/J^(n+1)), with canonical quotient cohomology transitions. There are bijections e_n from Hom in the homotopy category between C_n(P) and C_n(Q) to F_n. For every chain map f:C_(n+1)(P)->C_(n+1)(Q), e_n of the homotopy class of alpha_n(P)^(-1), then ordinary change(tau_n)(f), then alpha_n(Q), equals the quotient transition applied to e_(n+1) of the homotopy class of f. No derived localization, derived Hom, or choice of derived comparison is part of this assertion.",
+ "stmt_deps": [
+  "def-sfb-adic-perfect-reduction-model-complexes",
+  "def-sc-module-total-hom-complex",
+  "def-sfb-adic-short-complex-quotient-tower",
+  "def-sfb-adic-residue-lift-comparisons"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09C5 and 09C6, exact sections and the displayed H_n calculation; sites-cohomology.tex Tag 06YY for K-flat scalar extension; derived.tex Tag 064B for K-projective bounded-above models."
+ },
+ "proof": [
+  {
+   "text": "Apply the all-degree quotient Hom evaluation comparison. Its successor equation, extended to additive chain maps by the signed Hom differential, gives a commuting square of ordinary abelian-group complexes. The actual scalarHomMap is constructed from Cochain.map, precomposition by the source balancing inverse and postcomposition by the target balancing.",
+   "uses": [
+    "lem-sfb-adic-perfect-hom-cochains"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sections of constant module sheaves preserve finite limits and finite colimits on any small site, by the existing constant-module section properties proof (its exactness part does not require Noetherianity). Compose with the forgetful functor to abelian groups. The canonical exact-functor homology comparison identifies H^0 of each realized quotient Hom complex with sections of algebraic quotient H^0.",
+   "uses": [
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib homologyAddEquiv and CohomologyClass.homAddEquiv identify H^0 of the ordinary global Hom complex with Hom in the homotopy category; remove the zero shift using shiftFunctorZero. On a chain map the inverse equivalence is its cocycle class. Prove this class formula and its naturality under scalarHomMap by cycles inclusion injectivity and naturality of the homology projection. Apply homology to the chain square and use mapHomologyIso_hom_naturality for the quotient transition. This gives the required successor identity on every actual chain map.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adic-perfect-hom-cochains",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, quotient Hom calculation, with the cycle-class descent and exact-functor naturality written in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homotopy category morphisms between finite projective constant module sheaf complexes computed by algebraic Hom cohomology on a weakly contractible site",
+   "results": "msearch.py: HomotopyCategory, SheafOfModules.Hom, ShortComplex.Homotopy.homologyMap_congr, HomologicalComplex.Hom.mk, HomotopyCategory.homotopyOfEq and quotient. No constant quotient Hom/cohomology comparison.",
+   "date": "2026-10-26",
+   "verdict": "No complete statement; only generic homotopy and sheaf Hom components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy classes of chain maps between quotient constant finite projective complexes are sections of degree zero algebraic Hom cohomology, natural under quotient scalars",
+   "results": "msearch.py: HomComplex.CohomologyClass.homAddEquiv and toHom_mk; these concern ordinary Hom cochains, without constant sheaf realization, quotient scalars or sections.",
+   "date": "2026-10-26",
+   "verdict": "Useful components, no full comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexCompIso|mapHomotopyCategoryFactors|Qh_map_bijective; constant finite-projective reduction models",
+   "results": "Mathlib localization and additive functor comparisons. Source search found ConstantModuleKFlat, PerfectConstantLocalChainRepresentative, AdicPerfectModelCompleteReduction and ScalarPerfectDualRealization. The local chain result only gives a cover; the residue completeness theorem requires Noetherianity and a maximal ideal and treats exponent one. Neither has the present successor-coherent computation on a fixed weakly contractible slice. No matching blueprint node found.",
+   "date": "2026-10-26",
+   "verdict": "No existing declaration with the required hypotheses and conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "P4",
+  "item": "Sheaf.Paper.AdicPerfectHomCohomologyComparison",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Local perfect lifting in the proof invoking sk-prop-integral-criterion; expanded as Stacks Tag 09C6. Tags 09C5 and 09C6, dual-perfect tensor calculation and exact sections on each affine weakly contractible covering object. Supporting calculation: actual quotient Hom from two fixed constant perfect models, before image stabilization. The explicit ordinary-complex calculation in proof steps 1--3 of lem-sfb-adic-perfect-hom-cohomology-comparison.",
+   "via": [
+    "lem-sfb-adic-perfect-hom-cohomology-comparison",
+    "lem-sfb-adic-perfect-reduction-hom-ml",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPerfectModelHomCohomology",
+  "file": "lean/Sheaf/Paper/AdicPerfectModelHomCohomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicPerfectModelHomCohomology",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicPerfectModelHomCohomology"
+  ],
+  "statement": "theorem adicPerfectModelHomCohomology (X : Scheme.{u})\n    {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)\n    (U : coefficientProEtaleSiteModel.{u, v} X)\n    (_hU : AdicResidueSliceWeaklyContractible.{u, v} X U)\n    (P Q : CochainComplex (ModuleCat.{max v (u + 1)} A) ℤ)\n    (a b c d : ℤ) (_ha : P.IsStrictlyGE a) (_hb : P.IsStrictlyLE b)\n    (_hc : Q.IsStrictlyGE c) (_hd : Q.IsStrictlyLE d)\n    (_hP : ∀ i : ℤ, Module.Finite A (P.X i) ∧ Module.Projective A (P.X i))\n    (_hQ : ∀ i : ℤ, Module.Finite A (Q.X i) ∧ Module.Projective A (Q.X i)) :\n    let F := AdicCohomology.tower J ((CochainComplex.moduleHomComplex P Q).sc 0) ⋙\n      AdicCohomology.sections\n        ((coefficientProEtaleModelTopology.{u, v} X).over U) (Over.mk (𝟙 U)) ⋙\n      CategoryTheory.forget (ModuleCat A)\n    let H := fun n : ℕ ↦ HomotopyCategory.quotient\n      (Mod ((finite (coefficientProEtaleModelTopology.{u, v} X) A J n).over U)) (.up ℤ)\n    ∃ e : ∀ n : ℕ,\n        ((H n).obj (adicPerfectQuotientComplex.{u, v} X J U P n) ⟶\n          (H n).obj (adicPerfectQuotientComplex.{u, v} X J U Q n)) ≃ F.obj (op n),\n      ∀ (n : ℕ) (f : adicPerfectQuotientComplex.{u, v} X J U P (n + 1) ⟶\n          adicPerfectQuotientComplex.{u, v} X J U Q (n + 1)),\n        e n ((H n).map ((adicPerfectQuotientStep.{u, v} X J U P n).inv ≫\n            ((change (adicPerfectQuotientScalarStep.{u, v} X J U n)).mapHomologicalComplex\n              (.up ℤ)).map f ≫ (adicPerfectQuotientStep.{u, v} X J U Q n).hom)) =\n          F.map (homOfLE (Nat.le_succ n)).op (e (n + 1) ((H (n + 1)).map f))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T002124-L-58811",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T022735-L-411359",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-nodal-log-dualizing-pullback",
+ "kind": "statement",
+ "title": "Regular pullback of the logarithmic dualizing line along a nodal modification",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$ [def-sc-discrete-valuation-ring, def-pc-field-extension], and put $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $X\\to S$ and $Y\\to S$ be projective flat finitely presented morphisms with nonempty connected reduced one-dimensional geometric fibres having only ordinary double points. Give $X$ and $Y$ pairwise disjoint sections $a_1,\\ldots,a_n$ and $b_1,\\ldots,b_n$ in their relative smooth loci. Use the marked-family and canonical relative-dualizing-module conventions of [lem-sfb-nodal-log-canonical-reconstruction], without positivity; put $D_X=\\sum_j a_j(S)$, $D_Y=\\sum_j b_j(S)$ and $L_X=\\omega_{X/R}(D_X)$, $L_Y=\\omega_{Y/R}(D_Y)$ [def-pc-divisor-line-bundle]. Let $p:Y\\to X$ be a proper $S$-morphism [def-weil-proper-morphism], with $p b_j=a_j$, for which some finite set $Z$ of closed points of the special fibre of $X$ has $p^{-1}(X\\setminus Z)\\xrightarrow{\\sim}X\\setminus Z$. Then the canonical isomorphism $p^*L_X\\cong L_Y$ on $p^{-1}(X\\setminus Z)$ extends to an $\\mathcal O_Y$-linear morphism $\\alpha_p:p^*L_X\\to L_Y$ [def-pc-module-pullback, def-weil-sheaf-of-modules-category]. Its restriction to the generic fibre is the usual pullback isomorphism of logarithmic dualizing line bundles for $p_K$. This assertion concerns the line bundles and their morphism, not their modules of global sections. Neither stability nor smooth generic fibre nor normal total space is assumed, and $n=0$ is allowed.",
+ "source": {
+  "document": "literature/stacks-project/models.tex",
+  "place": "Agent logarithmic discrepancy formulation motivated by Tag 0CDC (example-blowup), using the adjunction normalization in def-trf-nodal-dualizing-datum. Tag 0CDC computes the blowup charts, not this theorem. A precise reference including horizontal persistent nodes and markings is WANTED: Knudsen, The projectivity of the moduli space of stable curves II, sections 1--2."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "lem-sfb-nodal-log-canonical-reconstruction",
+  "def-pc-divisor-line-bundle",
+  "def-weil-proper-morphism",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $U=p^{-1}(X\\setminus Z)$ and $M=(p^*L_X)^\\vee\\otimes L_Y$. The canonical invertible dualizing lines and their Cartier marking twists give this invertible Hom module. The given marked-family isomorphism on $U$ supplies $s_U\\in\\Gamma(U,M)$. Since $Z$ lies in the special fibre, $Y_K\\subset U$ and its restriction $s_K$ is the canonical pullback for the isomorphism $p_K$.",
+   "uses": [
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0E9I (lemma-depth-2-hartog), reduction to an invertible Hom module; agent setup"
+   }
+  },
+  {
+   "text": "For a special-fibre component generic point $\\eta$ whose image in $X$ is relatively smooth, apply the smooth-image integrality lemma. Its hypotheses hold for the same marked families and $p_K$; properness of $p$ is unnecessary for it. Thus $s_K\\in M_\\eta$. This includes images on a marked section and uses no assumption that the generic fibre is wholly smooth.",
+   "uses": [
+    "lem-sfb-log-pullback-smooth-image-integrality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054L (lemma-smooth-etale-over-affine-space), centred smooth-section coordinates; agent logarithmic-integrality argument from old lem-sfb-nodal-log-dualizing-pullback Steps 2, 4 and 5, using algebra.tex lemma-intersection-powers-ideal-module and duality.tex lemma-fundamental-class-lci. Not a verbatim assertion of the tag."
+   }
+  },
+  {
+   "text": "If $p(\\eta)$ is nonsmooth, apply the nodal-image integrality lemma to the same data and the original canonical generic comparison. It gives $s_K\\in M_\\eta$, including persistent nodes. Together with the preceding case this verifies integrality at every special-fibre component generic point.",
+   "uses": [
+    "lem-sfb-log-pullback-nodal-image-integrality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY (lemma-etale-local-structure-nodal-family); agent branch-integrality and faithfully flat pole-quotient argument from old lem-sfb-nodal-log-dualizing-pullback Steps 2, 3, 6 and 7. Normalization uses duality.tex lemma-fundamental-class-lci and lemma-shriek-etale. Not a verbatim assertion of the tag."
+   }
+  },
+  {
+   "text": "Apply the trait line-section extension lemma to $(Y,M,U,s_U)$. The morphism $Y\\to\\operatorname{Spec}R$ is flat and of finite type, its special fibre is reduced and pure one-dimensional, and the preceding two steps supply all required integral germs. We obtain a section $s\\in\\Gamma(Y,M)$ restricting to $s_U$.",
+   "uses": [
+    "lem-sfb-trait-line-section-generic-germs-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0E9I (lemma-depth-2-hartog), combined with algebra.tex lemma-criterion-reduced and lemma-apply-grothendieck; agent generic-germ spreading and depth argument from old lem-sfb-nodal-log-dualizing-pullback Steps 1 and 8--10. The tag alone assumes the depth condition, whereas this statement derives it from the reduced curve special fibre."
+   }
+  },
+  {
+   "text": "Evaluate $s$ as a homomorphism of the two invertible modules: on a local frame $e$ of $p^*L_X$, write $s=e^\\vee\\otimes v$ and set $\\alpha_p(e)=v$; changes of frame give the same map. Since $s|_U=s_U$, this map is the prescribed isomorphism on $U$ and therefore the usual pullback on $Y_K$. For $n=0$ the marked case is absent. No stability, positivity or normality has entered.",
+   "uses": [
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0E9I (lemma-depth-2-hartog), combined with algebra.tex lemma-criterion-reduced and lemma-apply-grothendieck; agent generic-germ spreading and depth argument from old lem-sfb-nodal-log-dualizing-pullback Steps 1 and 8--10. The tag alone assumes the depth condition, whereas this statement derives it from the reduced curve special fibre."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-nodal-log-canonical-reconstruction",
+  "def-sc-invertible-module",
+  "lem-sfb-log-pullback-smooth-image-integrality",
+  "lem-sfb-log-pullback-nodal-image-integrality",
+  "lem-sfb-trait-line-section-generic-germs-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Short assembly of separately queued smooth-image, nodal-image, and generic-germ extension lemmas; the retained ten-step argument is apportioned verbatim in the Q136 report. Stacks Tag 0E9I and the original local-chart/adjunction route remain the source material."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dualizing|discrepancy|logCanonical",
+   "results": "{\"t\": \"2026-10-22T04:05:09Z\", \"tool\": \"grep\", \"query\": \"dualizing|discrepancy|logCanonical\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic rational maps, normalization maps, and minimal Weierstrass discriminants do not extend the logarithmic dualizing pullback across nodal modifications; source grep finds no dualizing or discrepancy construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Log canonical sheaves of nodal marked curve models have effective discrepancy under proper birational modifications",
+   "results": "{\"t\": \"2026-10-22T04:05:09Z\", \"tool\": \"leansearch\", \"query\": \"Log canonical sheaves of nodal marked curve models have effective discrepancy under proper birational modifications\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"WeierstrassCurve.IsGoodReduction.congr_simp\", \"WeierstrassCurve.integralModel_Δ_eq\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.coe_inv_variableChange_Δ'\"], \"digest\": \"3d8e77f5d52fc25c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic rational maps, normalization maps, and minimal Weierstrass discriminants do not extend the logarithmic dualizing pullback across nodal modifications; source grep finds no dualizing or discrepancy construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"canonical\"",
+   "results": "{\"t\": \"2026-10-22T04:05:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"canonical\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.CanonicallyOver\", \"AlgebraicGeometry.Scheme.Opens.instCanonicallyOverToScheme\", \"AlgebraicGeometry.Scheme.canonicallyOverPullback\", \"AlgebraicGeometry.Scheme.canonicallyOverPullback_over\", \"AlgebraicGeometry.instCanonicallyOverSpecStalkCommRingCatPresheaf\", \"AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField\", \"AlgebraicGeometry.instCanonicallyOverFiber\", \"AlgebraicGeometry.Scheme.subcanonical_zariskiTopology\"], \"digest\": \"65099c3a2f6a202b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic rational maps, normalization maps, and minimal Weierstrass discriminants do not extend the logarithmic dualizing pullback across nodal modifications; source grep finds no dualizing or discrepancy construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper modification of semistable pointed curves over a DVR the generic pullback extends to a morphism of logarithmic dualizing line bundles",
+   "results": "{\"t\": \"2026-10-22T04:05:10Z\", \"tool\": \"leanfinder\", \"query\": \"For a proper modification of semistable pointed curves over a DVR the generic pullback extends to a morphism of logarithmic dualizing line bundles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo\"], \"digest\": \"0ece674a8f350f71\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic rational maps, normalization maps, and minimal Weierstrass discriminants do not extend the logarithmic dualizing pullback across nodal modifications; source grep finds no dualizing or discrepancy construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effectivity of the relative canonical discrepancy for birational maps between nodal curves over a trait with disjoint smooth marked sections",
+   "results": "{\"t\": \"2026-10-22T04:05:22Z\", \"tool\": \"leanfinder\", \"query\": \"Effectivity of the relative canonical discrepancy for birational maps between nodal curves over a trait with disjoint smooth marked sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.isMinimal_iff\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\"], \"digest\": \"73e819fca9f85633\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic rational maps, normalization maps, and minimal Weierstrass discriminants do not extend the logarithmic dualizing pullback across nodal modifications; source grep finds no dualizing or discrepancy construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative logarithmic differential on a nodal curve over a discrete valuation ring pulls back regularly along a modification",
+   "results": "{\"t\": \"2026-10-22T04:19:02Z\", \"tool\": \"leanfinder\", \"query\": \"A relative logarithmic differential on a nodal curve over a discrete valuation ring pulls back regularly along a modification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.minimal\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.reduction\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"WeierstrassCurve.isGoodReduction_iff\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\"], \"digest\": \"81f3d15659385ba2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass minimal models, ordinary scheme pullbacks and normalization maps do not assert regular pullback of marked nodal dualizing lines; source grep gives no nodal dualizing construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\"",
+   "results": "{\"t\": \"2026-10-22T04:19:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"dualizing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass minimal models, ordinary scheme pullbacks and normalization maps do not assert regular pullback of marked nodal dualizing lines; source grep gives no nodal dualizing construction."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|nodal|logarithmic.differential",
+   "results": "{\"t\": \"2026-10-22T04:19:34Z\", \"tool\": \"grep\", \"query\": \"dualizing|nodal|logarithmic.differential\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass minimal models, ordinary scheme pullbacks and normalization maps do not assert regular pullback of marked nodal dualizing lines; source grep gives no nodal dualizing construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of pullback of log dualizing line bundles on nodal curve models over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-22T04:19:45Z\", \"tool\": \"leansearch\", \"query\": \"Extension of pullback of log dualizing line bundles on nodal curve models over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.canonicallyOverPullback\", \"AlgebraicGeometry.IsProper.instFstScheme\", \"AlgebraicGeometry.IsProper.instSndScheme\", \"AlgebraicGeometry.IsIntegralHom.instFstScheme\", \"AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback\", \"AlgebraicGeometry.IsFinite.instSndScheme\", \"AlgebraicGeometry.Scheme.Pullback.instHasPullbacks\", \"AlgebraicGeometry.Scheme.Modules.pullback\"], \"digest\": \"a6ffa1c0ac0fd602\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass minimal models, ordinary scheme pullbacks and normalization maps do not assert regular pullback of marked nodal dualizing lines; source grep gives no nodal dualizing construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semistable-log-pluricanonical-lattices",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Regular pullback of the logarithmic dualizing line along a nodal modification",
+   "via": [
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-log-dualizing-pullback",
+  "worker": "stage1",
+  "summary": "Landing-refusal repair rebased through deliver.py on 2026-10-23: the retained returned-node.json is still identical to the current repository item. No cited statement changed; all six assembly citation quotations were rechecked against their current statements. Corrected Step 1 source attribution to the original Hom-line setup / Hartogs source instead of the smooth-coordinate source. Retained the three statement-only tasks, all 15 logged searches, and the ten original proof paragraphs verbatim in report.md. The five-step assembly remains 1711 characters; statement, statement dependencies, and current maintainer/Lean metadata are preserved. Initial current-server dry run passed at ab6a4a75dde; final dry run and delivery follow these repair edits.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Regular pullback of the logarithmic dualizing line along a nodal modification; realizes the logarithmic-pluricanonical-lattice input to the stable-pointed rigidity step using local regular pullback, rather than a claim about global sections. Re-split only below that input; old Steps 2/4/5, 2/3/6/7 and 1/8/9/10 are now separate worker tasks.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-trf-generic-fibre-points-smooth",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-trf-nodal-family-etale-local-model",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-sc-smooth-section-affine-coordinates",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-serre-criterion-reduced",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-sbc-depth-two-hartogs-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-86e8533b9",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-86e8533b9 (reviewer sub-agent of L); spot-checked: PASS, no fixes, nothing dropped. This is the fourth push of the Q136 keep_plan re-split; 838cffac, 9f721f41 and d049d6e7 each got PASS, and their landings were refused for promotion ('not in the live DAG … L promotes it'), not for mathematics. Diff against d049: the three new nodes (lem-sfb-log-pullback-smooth-image-integrality, lem-sfb-log-pullback-nodal-image-integrality, lem-sfb-trait-line-section-generic-germs-extension) are byte-identical. In the item only step 1's source (morphisms 054L → divisors 0E9I lemma-depth-2-hartog, Hom-line setup) and split_report changed. Step 1 is the Hom-line setup, so the new attribution is correct. Statement, stmt_deps, step texts and uses, proof_deps, tool_uses and the reviewed/lean records are unchanged. I re-read the item and all three statements. Re-split rule: the old 10-step NI proof (~7900 chars) is now a 1711-char assembly. Old steps 2/4/5 go to the smooth node (A is a DVR, a=π^m w, da/a=dw/w, marked frame dt/t with p*t≠0). Old steps 2/3/6/7 go to the nodal node (du=uε, dv=−vε; one of p*u, p*v is nonzero, including h=0; faithfully flat pole descent 00HR/05CK). Old steps 1/8/9/10 go to the extension node (W, depth ≥2 via 031R + 0337, Hartogs 0E9I; both labels read and the tags file checked) and to item step 5 (Hom evaluation). Nothing was dropped and no node restates the item. Small cases checked: blowup of uv=π², uv=0 with one branch vanishing, contraction to a marked point, Y empty, U=Y, n=0. Duplicate search on the current snapshot by content, because the d049 dagsnap has been cleaned: hits such as semistable-hilbert-trait-nodal-preparation, fs-log calculus, elementary-nodal-contraction and the sbc depth-two family are not duplicates. No cycle and no SGA citation. Batch-5 flag (both integrality nodes → lem-sfb-nodal-log-canonical-reconstruction → def-trf-nodal-dualizing-datum): accepted. That node is a general definition of a Jacobian-normalized lci dualizing datum, not a step of the trace formula or of Poincaré duality, and the reconstruction node is already a base stmt_dep of the item. Maintainer note: the item's tool_uses still lists the 13 tools of the old split, none of which the assembly cites; prune it."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalLogDualizingPullback",
+  "declaration": "AlgebraicGeometry.exists_nodal_log_dualizing_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalLogDualizingPullback.lean",
+  "statement": "theorem exists_nodal_log_dualizing_pullback (R K : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field K] [Algebra R K] [IsFractionRing R K] (P Q : MultipointedCurve (Spec (.of R))) [IsHProjective P.x] [IsHProjective Q.x] (n : ℕ) (a : (∐ fun _ : Fin n ↦ Spec (.of R)) ≅ P.D) (b : (∐ fun _ : Fin n ↦ Spec (.of R)) ≅ Q.D) (ha : a.hom ≫ P.d = Sigma.desc (fun _ : Fin n ↦ 𝟙 (Spec (.of R)))) (hb : b.hom ≫ Q.d = Sigma.desc (fun _ : Fin n ↦ 𝟙 (Spec (.of R)))) (hsmoothP : ∀ z : P.D, P.i z ∈ P.x.smoothLocus) (hsmoothQ : ∀ z : Q.D, Q.i z ∈ Q.x.smoothLocus) (hnodalP : HasNodalGeometricFibres P.x) (hnodalQ : HasNodalGeometricFibres Q.x) (hgeometricP : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of R)), IsReduced (pullback P.x t) ∧ (pullback P.x t).IsPureDimension 1) (hgeometricQ : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of R)), IsReduced (pullback Q.x t) ∧ (pullback Q.x t).IsPureDimension 1) (DP : MarkedNodalDualizingDegreesData P) (DQ : MarkedNodalDualizingDegreesData Q) (p : Q.X ⟶ P.X) [IsProper p] (hp : p ≫ P.x = Q.x) (hmarks : ∀ j : Fin n, Sigma.ι (fun _ : Fin n ↦ Spec (.of R)) j ≫ b.hom ≫ Q.i ≫ p = Sigma.ι (fun _ : Fin n ↦ Spec (.of R)) j ≫ a.hom ≫ P.i) (Z : Set P.X) (hfinite : Z.Finite) (hclosed : ∀ z ∈ Z, IsClosed ({z} : Set P.X)) (hspecial : ∀ z ∈ Z, P.x z = IsLocalRing.closedPoint R) (U : P.X.Opens) (hU : (U : Set P.X) = Zᶜ) (hiso : IsIso (pullback.snd p U.ι)) : ∃ α : (Scheme.Modules.tensorPullback p).obj (markedNodalLine P DP.omega) ⟶ markedNodalLine Q DQ.omega, IsIso ((Scheme.Modules.tensorPullback (p ⁻¹ᵁ U).ι).map α) ∧ (∀ (W : P.X.Opens), W ≤ U → ∀ s : Γ(P.X, W), (((Scheme.Modules.tensorPullback p).map (nodalLogFundamental P DP.omega DP.dualizing)) ≫ α).app (p ⁻¹ᵁ W) (P.x.relativeDifferentialsPullbackGenerator p W s) = (nodalLogFundamental Q DQ.omega DQ.dualizing).app (p ⁻¹ᵁ W) (Q.x.relativeDifferentialsDerivation.d (X := op (p ⁻¹ᵁ W)) (p.app W s))) ∧ IsIso ((Scheme.Modules.tensorPullback (pullback.fst Q.x (Spec.map (CommRingCat.ofHom (algebraMap R K))))).map α)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0cbf71b14",
+  "group": "N8",
+  "result": "pass",
+  "note": "Single theorem exists_nodal_log_dualizing_pullback, sorry-only; only the lean field differs from live/side-live; statement verbatim in the file; Worker report and Second reading by N8 sections present. Every node clause is matched: DVR R with fraction field K and Spec R; MultipointedCurve (flat, lfp, qc, qs) plus IsHProjective; HasNodalGeometricFibres (connected, dim 1, nodes) plus reduced/pure-1 geometric fibres; Fin n coproduct splitting of the markings (disjoint, n=0 allowed) in the smooth loci; canonical MarkedNodalDualizingDegreesData (canonical field gives unique iso; no positivity); markedNodalLine = omega tensor dual marking ideal; IsProper p over S; marks equation p b_j = a_j; finite closed special-fibre Z with complement U and IsIso(pullback.snd p U.ι). Conclusion: α : p*L_X → L_Y in Scheme.Modules, IsIso on p⁻¹U, the 1⊗ds equation through nodalLogFundamental (pins α by density on the reduced Y and is consistent because p is an iso of marked families over U), and IsIso on Y_K = pullback along Spec K → Spec R. Edge cases n=0, Z empty, blowups and the persistent node h=0 are covered. Declarations are the recorded ones (no copies); plain imports are the stated proof-dependency modules; docstrings carry source place, blueprint tag and the ten-step plan. No fixes; no compile run per instruction."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "id": "lem-sfb-bounded-homology-tensor-acyclic",
+ "kind": "statement",
+ "title": "Bounded tensor acyclicity from the homology factors",
+ "statement": "Let $C$ be a small site with topology $T$ and let $R$ be a commutative ring sheaf. Let $P,K$ be cochain complexes of $R$-module sheaves [def-pc-tensor-complex-sheaves]. Suppose $P$ is K-flat [def-pc-kflat-complex], all its terms are flat, and there are integers $a,z$ such that $K^i=0$ whenever $i<a$ or $z<i$. If $\\operatorname{Tot}(P\\otimes_R H^i(K)[0])$ is acyclic for every integer $i$, then $\\operatorname{Tot}(P\\otimes_R K)$ is acyclic. There is no bound on $P$.",
+ "stmt_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 08J5, remark-truncation-distinguished-triangle; sites-cohomology.tex Tags 06YM and 06YU, derived tensor exactness and definition."
+ },
+ "proof": [
+  {
+   "text": "Use the fixed K-flat tensor descent and its resolving comparison to obtain an exact functor F on the standard derived category whose value on Q(L) computes the naive total P tensor L. The assumed termwise flatness and K-flatness are exactly its resolving hypotheses.",
+   "uses": [
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite ordered Postnikov tower to Q(K), with lower bound a and length max(z-a,0)+1. The standard cohomology-factor comparison identifies each factor with H^i(K)[0] shifted by minus i. The hypotheses and the computation comparison kill the unshifted homology objects; commutation with shifts kills every factor. Applying F to each distinguished triangle shows inductively that every vertex is zero. Transfer the final zero vertex back through the computation comparison.",
+   "uses": [
+    "lem-sfb-bounded-postnikov-extension-generation",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-sfb-bounded-postnikov-extension-generation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 08J5, remark-truncation-distinguished-triangle; sites-cohomology.tex Tags 06YM and 06YU, derived tensor exactness and definition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact functor on the derived category kills a bounded complex if it kills each of its homology objects concentrated in degree zero",
+   "date": "2026-10-26",
+   "results": "8 hits. CategoryTheory.ShortComplex.RightHomologyData.exact_map_iff; CategoryTheory.ShortComplex.LeftHomologyData.exact_map_iff; CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf; CategoryTheory.Functor.IsHomological.casesOn",
+   "verdict": "No exact Mathlib theorem; use existing source results and the explicit proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor on the derived category kills a bounded complex if it kills each of its homology objects concentrated in degree zero",
+   "date": "2026-10-26",
+   "results": "8 hits. CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.IsHomological.exact; CategoryTheory.Functor.map_distinguished_exact; CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "verdict": "No exact Mathlib theorem; use existing source results and the explicit proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTriangulated\", \"IsZero\"",
+   "date": "2026-10-26",
+   "results": "0 hits. No matching declaration.",
+   "verdict": "No exact Mathlib theorem; use existing source results and the explicit proof."
+  },
+  {
+   "tool": "grep",
+   "query": "(bounded|homology).*(tensor.*acyclic|acyclic.*tensor)",
+   "date": "2026-10-26",
+   "results": "0 hits. No matching declaration.",
+   "verdict": "No exact Mathlib theorem; use existing source results and the explicit proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteKoszulResidueAcyclic",
+  "date": "2026-10-26",
+  "group": "U6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "The finite-stage Tag 0G1T vanishing used in the Tag 0G1U residue-zero detection proof: extend vanishing on homology sheaves to the bounded finite Koszul complex.",
+   "via": [
+    "lem-sfb-finite-koszul-residue-acyclic",
+    "lem-sfb-adic-residue-koszul-nakayama",
+    "lem-sfb-adic-residue-quotient-unit-universal",
+    "lem-sfb-adic-residue-cech-quotient-cone",
+    "lem-sfb-adic-complete-reduction-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BoundedHomologyTensorAcyclic",
+  "declaration": "CategoryTheory.tensor_acyclic_of_bounded_homology",
+  "statement": "theorem tensor_acyclic_of_bounded_homology\n    {C : Type u} [SmallCategory C] {T : GrothendieckTopology C}\n    (R : Sheaf T CommRingCat.{u}) (P K : ringedSiteComplex R)\n    (hP : P.IsAcyclicTensorKFlat)\n    (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (P.X i))\n    (hbounded : ∃ a z : ℤ, ∀ i : ℤ, i < a ∨ z < i → IsZero (K.X i))\n    (hH : ∀ i : ℤ, (((ringedKoszulTensor R).obj P).obj\n      ((HomologicalComplex.single _ (.up ℤ) 0).obj (K.homology i))).Acyclic) :\n    (((ringedKoszulTensor R).obj P).obj K).Acyclic",
+  "branch": "sheaf-dag",
+  "by": "U6",
+  "date": "2026-10-26",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedHomologyTensorAcyclic.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261026T092804-L-3466917",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261026T092804-L-3466917",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "All groups and maps in the statement are defined on finite bases in each degree and extended linearly. Deletion preserves weak increase. For any string of degree at least two, deleting original positions $i<j$ in the two possible orders gives the same remaining string with coefficients $(-1)^{i+j-1}$ and $(-1)^{i+j}$, which cancel. The composite differential in degree one is zero by the degree-zero convention. Also the augmentation of the boundary of an edge is $1-1=0$. Thus the three displayed constructions are augmented chain complexes in the convention of [def-weil-pbc-module-chain-complex-homology]. For a shuffle, $A_k,B_k$ are nondecreasing and in the stated index ranges, so every summand is a valid generator of $V$.",
+   "text": "Deletion preserves weak increase. Deleting positions $i<j$ in opposite orders has coefficients $(-1)^{i+j-1}$ and $(-1)^{i+j}$, hence $\\partial^2=0$; in degree one the next differential is zero. An edge boundary has augmentation $1-1=0$. Extending by zero gives the complexes of [def-weil-pbc-module-chain-complex-homology]. Every shuffle term is valid since its coordinate counts are nondecreasing and in range.",
    "uses": [
     "def-weil-pbc-module-chain-complex-homology"
    ],
@@ -23,7 +23,30 @@
    }
   },
   {
-   "text": "Encode a partition by a word $w$ of length $n=a+b$ with $a$ letters $H$ in the positions of $\\mu$ and $b$ letters $V$ in those of $\\nu$. Write $z(w)$ for its pair string and $I(w)$ for the number of pairs of positions in which a $V$ precedes an $H$. The concatenated permutation $(\\mu,\\nu)$ has precisely these inversions: each block is increasing and a cross-block inversion is a vertical position smaller than a horizontal position. Hence its sign is $s(w)=(-1)^{I(w)}$. For $n>0$, expansion of the left side of the boundary identity is the finite sum over labeled pairs $(w,k)$, $0\\leq k\\leq n$, of $s(w)(-1)^k$ times $z(w)$ with vertex $k$ omitted. We compare these labeled terms before collecting equal generators.",
+   "text": "Apply the word lemmas with $X=[p]$, $Y=[q]$ and the given strings. Encode the partition by $w\\in W_{a,b}$, with $H$ at its horizontal positions. By [lem-sfb-shuffle-mixed-corner-cancellation] the permutation sign is $s(w)=(-1)^{I(w)}$. For $n=a+b>0$, expand the boundary as the finite sum of $s(w)(-1)^k[d_kz_{u,v}(w)]$ over labeled pairs $(w,k)$. Partition these into mixed interior corners, horizontal cases, and vertical cases: endpoints belong to the type of their only adjacent letter, and interiors have either unlike or equal adjacent letters. The mixed sum is zero by the cited involution.",
+   "uses": [
+    "lem-sfb-shuffle-mixed-corner-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written universal shuffle boundary calculation; the blueprint motivates the comparison but supplies no combinatorial proof. The numbered cases below are proved directly from the displayed definitions."
+   }
+  },
+  {
+   "text": "For $a>0$, [lem-sfb-shuffle-horizontal-face-reindexing] bijects every horizontal case, including both endpoints, with $(i,\\bar w)\\in\\{0,\\ldots,a\\}\\times W_{a-1,b}$, preserving its evaluated string and giving coefficient $(-1)^i s(\\bar w)$. Thus their sum is $\\sigma(\\partial u\\otimes v)$. For $b>0$, [lem-sfb-shuffle-vertical-face-reindexing] similarly gives coefficient $(-1)^{a+j}s(\\bar w)$ and sum $(-1)^a\\sigma(u\\otimes\\partial v)$. When a factor degree is zero its labeled set is empty. All evaluated strings are weakly increasing. Thus coefficients outside the monotone strings are zero on every side; equality on each remaining basis symbol gives the identity in $V(p,q)$. The three disjoint cases exhaust the boundary; repeated generators are collected only afterwards. If $a=b=0$, all differential terms are zero. Bilinearity extends the identity from basis pairs.",
+   "uses": [
+    "lem-sfb-shuffle-horizontal-face-reindexing",
+    "lem-sfb-shuffle-vertical-face-reindexing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written universal shuffle boundary calculation; the blueprint motivates the comparison but supplies no combinatorial proof. The numbered cases below are proved directly from the displayed definitions."
+   }
+  },
+  {
+   "text": "In degree zero the unique word is empty and has sign $1$, so $\\sigma_0$ sends a pair of vertices to that pair vertex. Both augmentations send it to $1$ under $\\mathbf Z\\otimes\\mathbf Z\\cong\\mathbf Z$. Linearity proves the augmentation identity.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -32,70 +55,7 @@
    }
   },
   {
-   "text": "Consider $0<k<n$ where letters $k-1,k$ of $w$ are different. Swap these two letters to obtain $w'$, keeping $k$ fixed. This is a fixed-point-free involution on these labeled pairs. Before the two moves and after the two moves the lattice vertices agree; their only possibly different vertex is the deleted vertex $k$. Thus the surviving pair strings agree entry by entry, including when $u$ or $v$ has repetitions. Only the inversion between the two adjacent letters changes, so $s(w')=-s(w)$. The coefficients $s(w)(-1)^k$ and $s(w')(-1)^k$ therefore cancel pairwise.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent-written universal shuffle boundary calculation; the blueprint motivates the comparison but supplies no combinatorial proof. The numbered cases below are proved directly from the displayed definitions."
-   }
-  },
-  {
-   "text": "Suppose instead that $0<k<n$ and both neighboring letters are $H$. Put $i=A_k$ and $t=B_k$, so $k=i+t$ and $1\\leq i<a$. Remove the vertex between the two horizontal moves and replace those two letters by a single $H$, giving a word $\\bar w$ with $a-1$ horizontal letters and $b$ vertical letters. The deleted pair string is exactly the $\\bar w$ summand for $(u_0,\\ldots,\\widehat u_i,\\ldots,u_a)$ and $v$. One of the two identical horizontal moves has been removed; its inversions are the $t$ preceding vertical moves. Hence $I(w)=I(\\bar w)+t$, and $s(w)(-1)^k=s(\\bar w)(-1)^{t+i+t}=s(\\bar w)(-1)^i$. For each fixed $i$ and each such $\\bar w$ the inverse operation splits its $i$-th horizontal move (counted from one) into two horizontal moves; this gives exactly one labeled pair $(w,k)$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent-written universal shuffle boundary calculation; the blueprint motivates the comparison but supplies no combinatorial proof. The numbered cases below are proved directly from the displayed definitions."
-   }
-  },
-  {
-   "text": "The horizontal endpoints give the missing horizontal faces. If $k=0$ and the first letter is $H$, remove that letter; no inversion is removed, and the remaining string is the shuffle of $(u_1,\\ldots,u_a)$ with $v$. Its coefficient is $s(\\bar w)$, the face sign for $i=0$. If $k=n$ and the last letter is $H$, remove that letter; it has all $b$ vertical letters before it, so $I(w)=I(\\bar w)+b$ and $s(w)(-1)^n=s(\\bar w)(-1)^{b+a+b}=s(\\bar w)(-1)^a$. The remaining string is the shuffle of $(u_0,\\ldots,u_{a-1})$ with $v$. Prepending or appending $H$ gives the inverse bijection with the shorter shuffle words. For $a=1$ there are no interior horizontal faces, and these two distinct labeled endpoint cases still apply; for $a=0$ there are no horizontal cases at all.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent-written universal shuffle boundary calculation; the blueprint motivates the comparison but supplies no combinatorial proof. The numbered cases below are proved directly from the displayed definitions."
-   }
-  },
-  {
-   "text": "If $0<k<n$ and the two neighboring letters are $V$, put $i=A_k$, $j=B_k$, so $k=i+j$ and $1\\leq j<b$. Collapse the two vertical moves to one, obtaining $\\bar w$ with $a$ horizontal letters and $b-1$ vertical letters. The surviving string is its shuffle on $u$ and $(v_0,\\ldots,\\widehat v_j,\\ldots,v_b)$. The removed vertical move has exactly $a-i$ horizontal moves after it; hence $I(w)=I(\\bar w)+a-i$. Consequently $s(w)(-1)^k=s(\\bar w)(-1)^{a-i+i+j}=s(\\bar w)(-1)^{a+j}$. For each fixed $j$ and shorter word, splitting its $j$-th vertical move (counted from one) recovers the unique original labeled pair.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent-written universal shuffle boundary calculation; the blueprint motivates the comparison but supplies no combinatorial proof. The numbered cases below are proved directly from the displayed definitions."
-   }
-  },
-  {
-   "text": "At $k=0$ with first letter $V$, removal of that letter removes $a$ inversions. The remaining string is the shuffle on $u$ and $(v_1,\\ldots,v_b)$ with coefficient $s(\\bar w)(-1)^a$, as required for $j=0$. At $k=n$ with last letter $V$, no inversion is removed. The remaining string is the shuffle on $u$ and $(v_0,\\ldots,v_{b-1})$ with coefficient $s(\\bar w)(-1)^{a+b}$, as required for $j=b$. Prepending or appending $V$ is the inverse bijection. For $b=1$ these are the only vertical cases, and for $b=0$ there are none.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent-written universal shuffle boundary calculation; the blueprint motivates the comparison but supplies no combinatorial proof. The numbered cases below are proved directly from the displayed definitions."
-   }
-  },
-  {
-   "text": "For $n>0$ these cases exhaust the expanded left side: an endpoint has a first or last letter of exactly one type, and an interior vertex has either different neighbors or two horizontal or two vertical neighbors. After the mixed terms cancel, the horizontal bijections give precisely $\\sum_{i=0}^a(-1)^i\\sigma((u_0,\\ldots,\\widehat u_i,\\ldots,u_a)\\otimes v)$ when $a>0$, while the vertical bijections give precisely $\\sum_{j=0}^b(-1)^{a+j}\\sigma(u\\otimes(v_0,\\ldots,\\widehat v_j,\\ldots,v_b))$ when $b>0$. This is the asserted boundary identity. No injectivity of the evaluation of labeled strings was used. If $n=0$, both boundaries and both omitted terms are zero. Equality on basis pairs extends bilinearly to all elements.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent-written universal shuffle boundary calculation; the blueprint motivates the comparison but supplies no combinatorial proof. The numbered cases below are proved directly from the displayed definitions."
-   }
-  },
-  {
-   "text": "In degree zero $a=b=0$ and the unique word is empty, with sign $1$; $\\sigma_0$ sends the pair of vertices $(u_0,v_0)$ to that pair vertex. Both $\\epsilon_V\\sigma_0$ and $\\epsilon_p\\otimes\\epsilon_q$, under $\\mathbf Z\\otimes_{\\mathbf Z}\\mathbf Z\\cong\\mathbf Z$, take every such basis pair to $1$. Linearity proves the augmentation identity.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent-written universal shuffle boundary calculation; the blueprint motivates the comparison but supplies no combinatorial proof. The numbered cases below are proved directly from the displayed definitions."
-   }
-  },
-  {
-   "text": "For monotone $f:[p]\\to[p']$ and $g:[q]\\to[q']$, the shuffle term indexed by $w$ after postcomposition has vertex $(f(u_{A_k}),g(v_{B_k}))$. This is exactly the $w$ term obtained by first postcomposing $u,v$ and then shuffling; the indexing words and signs do not change. Summing proves naturality. Postcomposition also commutes entry by entry with deletion and sends a vertex to a vertex, so these are maps of the augmented complexes. Noninjective maps can identify generators, but equality term by term before collecting coefficients remains valid.",
+   "text": "For monotone $f,g$, the $w$ summand postcomposes entrywise to $(f(u_{A_k}),g(v_{B_k}))$, exactly the summand obtained by postcomposing the inputs first. Words and signs are unchanged. Sum to obtain naturality. Postcomposition commutes with deletion and takes vertices to vertices, giving augmented chain maps. This remains termwise equality when noninjective maps identify generators.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -105,12 +65,15 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-module-chain-complex-homology"
+  "def-weil-pbc-module-chain-complex-homology",
+  "lem-sfb-shuffle-mixed-corner-cancellation",
+  "lem-sfb-shuffle-horizontal-face-reindexing",
+  "lem-sfb-shuffle-vertical-face-reindexing"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-  "place": "Paragraph (3), universal combinatorial input, proved by the explicit word-and-deleted-vertex calculation in steps 1–10. WANTED: Weibel, An Introduction to Homological Algebra, section 8.5; not available locally and not claimed as a read source."
+  "place": "Paragraph (3), agent-written universal combinatorial input. The returned ten-step proof is decomposed into mixed-corner cancellation and horizontal/vertical signed reindexing nodes, with elementary assembly, augmentation and naturality retained here. WANTED: Weibel §8.5; not available locally and not claimed as a read source."
  },
  "mathlib_searches": [
   {
@@ -216,17 +179,17 @@
   "date": "2026-10-22",
   "item": "lem-sfb-simplex-lattice-shuffle-boundary",
   "worker": "stage1",
-  "group": "Q13",
-  "summary": "Proved the unnormalized shuffle identity directly by a labeled word/vertex partition: adjacent mixed letters cancel, horizontal and vertical faces are reindexed with explicit inversion counts, and endpoints, zero degrees, augmentation and naturality are checked. No new nodes: each case is a short direct calculation from the displayed definitions. No matching project declaration or Mathlib shuffle chain map found.",
-  "blueprint": "The assigned node has blueprint.is=null and ancestor command returns None. Its inherited from.place locates paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md, the universal signed shuffle input to the open-direct-image comparison; steps 2–8 supply the boundary calculation and steps 9–10 augmentation and naturality. This is below the unit route and changes no unit or chapter."
+  "group": "Q102",
+  "summary": "Repair of the human re-split return: retain the exact item statement and split the 6312-character calculation into three independent statement-only combinatorial nodes of comparable size. Their statements preserve the explicit involution, two face bijections, all inversion counts, endpoint cases, and repeated-entry validity. The item now assembles their contributions and handles complexes, degree zero, augmentation and naturality in fewer than 3000 characters. Searches and full old-to-new argument mapping are in report.md. Repair of the subsequent L promotion/rebase return: compared with the current shared DAG, retained current metadata through the delivery overlay, re-read both external definition statements and all three lemma statements, and made the monotone-basis restriction explicit in step 3. The current item statement and statement dependencies remain identical. Promotion-return repair, 2026-10-22: rebased through deliver.py onto the current server DAG; re-read every dependency statement, made the specialization to X=[p], Y=[q] and coefficientwise restriction to monotone strings explicit. Item statement and all three new lemma statements are unchanged.",
+  "blueprint": "Inherited blueprint.is and nearest ancestor are null. Same-as searches for shuffle, mixed corner, horizontal face and vertical face found none. New nodes refine the universal shuffle input below paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md, within the inherited unit route; no chapter or unit changes."
  },
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q13-6e5db7bb8",
-  "group": "Q13",
+  "reviewer": "NT-cc-Q102-6463e90b4",
+  "group": "Q102",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-6e5db7bb8 (reviewer sub-agent of L); spot-checked: Read the item in full: statement plus 10 steps, no new nodes, one commit with item and report only. The statement and stmt_deps are byte-identical to the NY-created version, so the target is not weakened. The only citation, def-weil-pbc-module-chain-complex-homology, is a definition and Mathlib leaf; step 1 uses only d∘d=0 and extension by zero, which it states. So there is no route or tool-use issue and no SGA. Blueprint paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md has no shuffle calculation, correctly said; the proof is agent-written with Weibel 8.5 WANTED. Hand-checked every sign: step 1 square-zero (-1)^{i+j-1} vs (-1)^{i+j}; step 2 inversions are V-before-H; step 3 at a mixed corner both paths leave the same string and the swap flips the sign; step 4 HH gives (-1)^{2t+i}; step 5 a trailing H removes b inversions, giving (-1)^a; step 6 VV gives (-1)^{a+j}; step 7 a leading V removes a inversions; step 8 the cases are exhaustive and disjoint, and n=0 is handled; steps 9 and 10 (augmentation, naturality) are term-by-term. My own integer-coefficient enumeration, keeping repeated entries, passed all 2,704 pairs with p,q≤2 and a,b≤3, and naturality held for noninjective f,g. Duplicate search (rg -L over shuffle, Eilenberg–Zilber, lattice path, prism nodes, cbc diagonal and strict-chain nodes) found no node with this signed identity; the parent bicosimplicial totalization cites it. Mathlib has no chain-level shuffle. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-6463e90b4 (reviewer sub-agent of L); spot-checked: The re-split is correct. The item's statement, stmt_deps, source and blueprint are identical to the live node (clones/live), and live still holds the old 10-step proof, so the item is not superseded. The three new nodes are byte-identical to the previous head 83d7c67. The item changes only by two correct clarifications: step 2 now names X=[p], Y=[q], and step 3 restricts to monotone strings coefficient by coefficient. I checked the mathematics myself. Mixed node: π_w lists H positions then V positions; its inversions are the pairs where a V comes before an H, so its sign is ε(μ,ν)=s(w). The adjacent swap changes only vertex k, changes I by ±1 and has no fixed points, so the mixed terms cancel; I tested a=b=1. Horizontal node: at an interior HH, I(w)=I(w̄)+t and the sign is (−1)^i; the endpoints lose 0 and b inversions, giving (−1)^0 and (−1)^a; d_k z = z_{d_i u,v}; splitting the i-th H is the inverse, and a=1 with b=0 gives {0,1}×{∅}. Vertical node: interior a−i, endpoints a and 0, giving (−1)^{a+j}. The sums give σ(∂u⊗v)+(−1)^aσ(u⊗∂v), and the a=0, b=0 and n=0 cases match the omitted terms. ∂²=0, augmentation and termwise naturality (including non-injective maps) are genuinely elementary. Every old step is accounted for: 2–3 → mixed node, 4–5 → horizontal, 6–7 → vertical, 8 → item steps 2–3, and 1, 9, 10 kept as elementary steps 1, 4, 5. The new nodes are 1344, 1661 and 1664 characters, all statement-only and strictly smaller than the item, with no restated clause and no cycle; the assembly is under 3000 characters. A grep of the DAG for shuffle, lattice path and inversion found no duplicates, only parents (universal-shuffle-homotopy-inverse, bicosimplicial-shuffle-totalization). The cited defs (module-chain-complex-homology, free-module) say what the steps use. Blueprint paragraph (3) (lines 19–25) only gives the application, and the nodes honestly say they are agent-written with Weibel §8.5 WANTED. No SGA source is cited. No fixes and no tool_uses."
  },
  "lean": {
   "module": "Sheaf.AlgebraicTopology.SimplexLatticeShuffleBoundary",
@@ -260,5 +223,17 @@
   "group": "NA",
   "result": "pass",
   "note": "Clause-by-clause match: unnormalized AlternatingFaceMapComplex of free Z-modules on Δ[p] and Δ[p]⊗Δ[q] (repetitions retained, d=0 in degree 0); LatticePath = partitions with A_k,B_k as coordinates; pathSign = (-1)^#(vertical before horizontal) = sign of the μ-then-ν permutation; shuffle a genuine bilinear map via FreeMonoidal.μIso; terms omitted for a=0/b=0 are literally 0, sign (-1)^a; augmentation and naturality for all monotone f,g in all degrees. Own enumeration with the Lean conventions: 2704/2704 generator pairs (p,q≤2, a,b≤3) satisfy the boundary identity. lean.statement verbatim; node differs from live only by the lean record; 11 real-data helpers, single sorry theorem with the proof docstring; source and blueprint docstrings present; no extra hypotheses, universes fixed at 0; no duplicate in Mathlib or side-live (BicosimplicialShuffleTotalization is a downstream citer). Advisory: the ProdStdSimplex import is not needed by the statement. No compile (no changes)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

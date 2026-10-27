@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-principal-affine-test-universally-open",
+ "kind": "statement",
+ "title": "Principal-open affine tests suffice for universal openness",
+ "statement": "Let $\\varphi:A\\to C$ be a homomorphism of commutative rings, and set $f=\\operatorname{Spec}(\\varphi):\\operatorname{Spec}(C)\\to\\operatorname{Spec}(A)$ [def-weil-affine-spectrum]. For every commutative $A$-algebra $B$, put $D_B=B\\otimes_A C$ [def-weil-pbc-module-tensor-product], with multiplication $(b\\otimes c)(b'\\otimes c')=bb'\\otimes cc'$ and unit $1\\otimes1$, and put $q_B=\\operatorname{Spec}(j_B)$ for $j_B:B\\to D_B$, $b\\mapsto b\\otimes1$. Write $D_{D_B}(g)=\\{\\mathfrak p\\in\\operatorname{Spec}(D_B):g\\notin\\mathfrak p\\}$. Assume that $q_B(D_{D_B}(g))$ is open in $\\operatorname{Spec}(B)$ for every such $B$ and every $g\\in D_B$. Then every $q_B$ is open, and $f$ is universally open: for every scheme $T$ [def-pc-scheme] and morphism $a:T\\to\\operatorname{Spec}(A)$, the projection $q:P=\\operatorname{Spec}(C)\\times_{\\operatorname{Spec}(A)}T\\to T$ [def-pc-fibre-product] is open. More precisely, for any affine open subscheme $W\\subseteq T$ [def-weil-open-immersion] and any isomorphism $W\\cong\\operatorname{Spec}(B)$, give $B$ the $A$-algebra structure corresponding to $a|_W$. There is an isomorphism over $W$ from $P\\times_T W$ to $\\operatorname{Spec}(B\\otimes_A C)$, under which its map to $P$ identifies it with the open subscheme $q^{-1}(W)$ and its projection to $W$ becomes $q_B$. For every open subset $O\\subseteq P$ one has\n$$q(O)\\cap W=q_B\\bigl(O\\cap q^{-1}(W)\\bigr),$$\nwhere the right side uses these identifications; this set is open in $W$ and in $T$. There is no quasi-compactness, separation, Noetherian, finite-type or nonempty-scheme hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0F31, lemma-test-universally-open, proof of (3) implies (1), first paragraph, lines 21742--21752, and principal-open basis reduction at 21757--21759; affine localization uses schemes.tex Tags 01IT (lemma-basis-affine-opens), 01JY (lemma-base-change-immersion), and morphisms.tex Tag 01S1 (lemma-base-change-surjective, subset image identity in its proof)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Fix an $A$-algebra $B$ and an open $V\\subseteq\\operatorname{Spec}(D_B)$. By clause (i) of [lem-weil-pbc-spec-localization-away-basic-open], $V=\\bigcup_{D_{D_B}(g)\\subseteq V}D_{D_B}(g)$. Direct images commute with arbitrary unions, so\n$$q_B(V)=\\bigcup_{D_{D_B}(g)\\subseteq V}q_B(D_{D_B}(g)).$$\nEvery term is open by the hypothesis for this same $B$ and $g$, hence the union is open. Thus every $q_B$ is open, including when $D_B$ is the zero ring or $V$ is empty.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F31, lemma-test-universally-open, principal-open basis reduction in (3) implies (1); algebra.tex Tag 00E0, lemma-Zariski-topology (11),(14)"
+   }
+  },
+  {
+   "text": "Fix $a:T\\to S=\\operatorname{Spec}(A)$, put $X=\\operatorname{Spec}(C)$ and $P=X\\times_ST$, and let $W\\subseteq T$ be any affine open. Apply [lem-weil-pbc-open-fibre-product] with the full opens $S\\subseteq S$, $X\\subseteq X$, and $W\\subseteq T$. It identifies $Q=X\\times_SW$ with the open subscheme $q^{-1}(W)$ of $P$, compatibly with both projections. Also $P\\times_TW\\cong Q$: by [def-pc-fibre-product], a map into either side is exactly a pair of maps to $X$ and $W$ with equal composites to $S$ (the map to $T$ must be the map to $W$ followed by its inclusion). These two universal descriptions give inverse morphisms, since their composites fix both projections. This identifies the specified map $P\\times_TW\\to P$ with that open-subscheme inclusion.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JR, lemma-open-fibre-product, with U=S and V=X; Tag 01JP, definition-fibre-product, universal property"
+   }
+  },
+  {
+   "text": "Choose the specified isomorphism $e:W\\cong\\operatorname{Spec}(B)$. By [def-weil-affine-spectrum], the morphism $a|_W$ in these coordinates is the spectrum of a unique ring map $A\\to B$; use this map as the $A$-algebra structure. The universal property [def-pc-fibre-product] identifies $Q=X\\times_SW$ with $\\operatorname{Spec}(B)\\times_S\\operatorname{Spec}(C)$: interchange the maps to the two factors, replacing the map to $W$ by its composite with $e$, and interchange back using $e^{-1}$. The composites fix the projections, so are identities. Now apply [lem-weil-pbc-fibre-product-affine-spectra] with base ring $A$ and factor algebras $B,C$. It gives an isomorphism $Q\\cong\\operatorname{Spec}(B\\otimes_A C)$ whose projection to $W$, in the coordinates $e$, is $\\operatorname{Spec}(b\\mapsto b\\otimes1)=q_B$. Combined with step 2, this proves all the asserted scheme and projection identifications for this arbitrary choice of $W,e$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4, lemma-fibre-product-affine-schemes (tensor-product formula), Tag 01JQ, lemma-fibre-product-affines; Tag 01JP, definition-fibre-product"
+   }
+  },
+  {
+   "text": "Let $O\\subseteq P$ be open. For $w\\in W$, membership in $q(O)\\cap W$ means exactly that there is $x\\in O$ with $q(x)=w$; such $x$ lies in $q^{-1}(W)$. Thus\n$$q(O)\\cap W=q_B\\bigl(O\\cap q^{-1}(W)\\bigr)$$\nunder steps 2--3. The intersection on the right is open in the open subscheme $q^{-1}(W)$, hence its image is open in $W$ by step 1 and the isomorphisms. Since $W$ is open in $T$, that image is open in $T$. By [lem-weil-pbc-affine-opens-basis], the affine opens $W$ cover $T$, so $q(O)=\\bigcup_W(q(O)\\cap W)$ is open in $T$. This includes empty $T$ and arbitrary infinite affine covers: only unions are used. Since $T,a,O$ were arbitrary, every base-changed projection is open, which is precisely the stated universal openness of $f$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F31, lemma-test-universally-open, first paragraph of (3) implies (1); schemes.tex Tag 01IT, lemma-basis-affine-opens"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-open-fibre-product",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0F31, lemma-test-universally-open, affine localization and principal-open basis reduction in (3) implies (1); identifications spelled out using schemes.tex Tags 01JR, 01I4, 01JP and 01IT"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "universallyOpen.*[Bb]asic|[Bb]asic.*universallyOpen|[Uu]niversallyOpen.*[Aa]ffine|[Aa]ffine.*[Uu]niversallyOpen",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions, Zariski locality and affine pullback identifications are ingredients; no declaration assembles principal-open tests over every A-algebra into openness after arbitrary scheme base change. The descent theorem requires an additional codescent property, and does not state this criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyOpen\", \"basicOpen\"",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions, Zariski locality and affine pullback identifications are ingredients; no declaration assembles principal-open tests over every A-algebra into openness after arbitrary scheme base change. The descent theorem requires an additional codescent property, and does not state this criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal openness of an affine scheme morphism can be checked on principal opens after all affine base changes",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine scheme morphism is universally open if for every affine base change the images of principal open subsets are open",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.universallyOpen_iff, AlgebraicGeometry.UniversallyOpen.out, AlgebraicGeometry.Scheme.Hom.isOpenMap, AlgebraicGeometry.UniversallyOpen.eq, AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.UniversallyOpen.universally_isOpenMap, AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget, AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions, Zariski locality and affine pullback identifications are ingredients; no declaration assembles principal-open tests over every A-algebra into openness after arbitrary scheme base change. The descent theorem requires an additional codescent property, and does not state this criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "universally.*[Aa]ffine|[Aa]ffine.*universally|isOpenMap_iff",
+   "results": "Actual search: 12 hits; Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean; subdirectory AlgebraicGeometry/Morphisms",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions, Zariski locality and affine pullback identifications are ingredients; no declaration assembles principal-open tests over every A-algebra into openness after arbitrary scheme base change. The descent theorem requires an additional codescent property, and does not state this criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"universally\", \"affine\"",
+   "results": "Actual search: 2 hits; AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom, AlgebraicGeometry.IsIntegralHom.eq_universallyClosed_inf_isAffineHom",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions, Zariski locality and affine pullback identifications are ingredients; no declaration assembles principal-open tests over every A-algebra into openness after arbitrary scheme base change. The descent theorem requires an additional codescent property, and does not state this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If each comap Spec(B tensor_A C) to Spec B maps each standard open D(g) to an open set for every A algebra B, all scheme pullbacks of Spec C to Spec A are open",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong, AlgebraicGeometry.UniversallyOpen, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.pullbackSpecIso, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback, RingHom.IsStableUnderBaseChange.pullback_fst_appTop, AlgebraicGeometry.instIsOpenImmersionMapOfHomForallEvalRingHom",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions, Zariski locality and affine pullback identifications are ingredients; no declaration assembles principal-open tests over every A-algebra into openness after arbitrary scheme base change. The descent theorem requires an additional codescent property, and does not state this criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "of_pullback_fst_Spec_of_codescendsAlong",
+   "results": "Actual search: 3 hits; 94, 177, 211; subdirectory AlgebraicGeometry/Morphisms/Descent.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions, Zariski locality and affine pullback identifications are ingredients; no declaration assembles principal-open tests over every A-algebra into openness after arbitrary scheme base change. The descent theorem requires an additional codescent property, and does not state this criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "universallyOpen.*basic|basic.*universallyOpen|pullbackSpecIso|isPullback_SpecMap_tensor",
+   "results": "Actual search: 25 hits; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean. Subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: universal-openness definitions and locality do not assemble the principal-open criterion; affine pullback identifications are existing ingredients; the descent lemma requires codescent hypotheses not supplied here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal openness of Spec C to Spec A follows from open images of principal opens in Spec of B tensor A C for every A algebra B",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.UniversallyOpen.universally_isOpenMap, AlgebraicGeometry.UniversallyOpen.mk, AlgebraicGeometry.universallyOpen_iff, AlgebraicGeometry.UniversallyOpen.eq, AlgebraicGeometry.UniversallyOpen.out, AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion, Algebra.instIsStandardOpenImmersionTensorProduct",
+   "date": "2026-10-23",
+   "verdict": "no match: universal-openness definitions and locality do not assemble the principal-open criterion; affine pullback identifications are existing ingredients; the descent lemma requires codescent hypotheses not supplied here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyOpen\", \"basicOpen\"",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: universal-openness definitions and locality do not assemble the principal-open criterion; affine pullback identifications are existing ingredients; the descent lemma requires codescent hypotheses not supplied here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine scheme morphism is universally open if the images of all principal open subsets after every affine tensor base change are open",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.universallyOpen_iff, AlgebraicGeometry.UniversallyOpen.out, AlgebraicGeometry.UniversallyOpen.universally_isOpenMap, AlgebraicGeometry.UniversallyOpen.eq, AlgebraicGeometry.Scheme.Hom.isOpenMap, AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget, AlgebraicGeometry.UniversallyOpen.instIsMultiplicativeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: universal-openness definitions and locality do not assemble the principal-open criterion; affine pullback identifications are existing ingredients; the descent lemma requires codescent hypotheses not supplied here."
+  },
+  {
+   "tool": "grep",
+   "query": "of_pullback_fst_Spec_of_codescendsAlong|isOpenMap_iff",
+   "results": "Actual search: 7 hits; Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean. Subdirectory AlgebraicGeometry/Morphisms",
+   "date": "2026-10-23",
+   "verdict": "no match: universal-openness definitions and locality do not assemble the principal-open criterion; affine pullback identifications are existing ingredients; the descent lemma requires codescent hypotheses not supplied here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"universally\", \"affine\"",
+   "results": "Actual search: 2 hits; AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom, AlgebraicGeometry.IsIntegralHom.eq_universallyClosed_inf_isAffineHom",
+   "date": "2026-10-23",
+   "verdict": "no match: universal-openness definitions and locality do not assemble the principal-open criterion; affine pullback identifications are existing ingredients; the descent lemma requires codescent hypotheses not supplied here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If Spec of B tensor_A C to Spec B is an open map for every A algebra B then every scheme pullback of Spec C to Spec A is open",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.UniversallyOpen.universally_isOpenMap, AlgebraicGeometry.UniversallyOpen.out, AlgebraicGeometry.UniversallyOpen.fst, AlgebraicGeometry.universallyOpen_iff, AlgebraicGeometry.UniversallyOpen.eq, AlgebraicGeometry.UniversallyOpen.snd, AlgebraicGeometry.Scheme.Hom.isOpenMap, AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: universal-openness definitions and locality do not assemble the principal-open criterion; affine pullback identifications are existing ingredients; the descent lemma requires codescent hypotheses not supplied here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-polynomial-test-universally-open",
+  "date": "2026-10-22",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §§3.2 and 3.5, pp.605,607--608, finite normalization and constant-field models. The relative purity and the full fibre-product surjectivity are the finite normal-model assertions used there; no flatness is claimed. Finiteness itself is already lem-fin-normalization-extension-finite. Local PDF WANTED; publisher PDF read.; justification that the full fibre product has a dense generic point after a finite extension of constants; finite normal-base openness proof: polynomial-base-change test upgrading openness to arbitrary scheme base change; first paragraph, lines 21742--21752, and principal-open basis reduction at 21757--21759; affine localization uses schemes.tex Tags 01IT (lemma-basis-affine-opens), 01JY (lemma-base-change-immersion), and morphisms.tex Tag 01S1 (lemma-base-change-surjective, subset image identity in its proof)",
+   "via": [
+    "lem-sfb-polynomial-test-universally-open",
+    "lem-sfb-finite-dominant-normal-base-universally-open",
+    "lem-sfb-finite-normal-relative-curve-model",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-principal-affine-test-universally-open",
+  "worker": "stage1",
+  "summary": "Q110 supplies a four-step proof with unchanged statement: basis images give every affine tensor map open; open fibre products and the universal property identify restriction over W; affine tensor spectra identify its projection; the elementary image identity and arbitrary affine cover finish. Every non-elementary ingredient is an existing Mathlib leaf, so there are no new nodes. Project attachment and two Mathlib search phrasings were checked. Sources and every cited statement were read; zero rings, empty opens and arbitrary non-quasicompact bases were tested.",
+  "blueprint": "Realizes the affine/principal-open localization prerequisite recorded in the inherited from.place below det-thm-sf-ctf-stability-direct-images proof (3), through lem-sfb-polynomial-test-universally-open. The current latest blueprint direct-images proof (3) was read; the inherited alteration chain is a DAG refinement, not text newly claimed to appear in that proof. blueprint_refs ancestor returns None, so the inherited null ancestor and via chain are preserved. Whole-blueprint searches for universally open, principal open, affine fibre product and tensor product found no equivalent criterion."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-63ed69e0c",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-63ed69e0c (reviewer sub-agent of L); spot-checked: Ordinary first split with no repair note, so the re-split rule does not apply. The statement is unchanged and is exactly the affine/principal-open part of Stacks 0F31 (3)=>(1), more-morphisms.tex:21726ff, which I read. It matches what parent lem-sfb-polynomial-test-universally-open step 2 needs: hypothesis q_B(D(g)) open for all B and g, conclusion universal openness, tensor order B⊗_A C. Step 1: by spec-localization-away-basic-open (i), opens are unions of D(g), and the image of a union is the union of images. Step 2: open-fibre-product (01JR, statement read at schemes.tex:3198) with U=S, V=X identifies X×_S W with q^{-1}(W); P×_T W ≅ X×_S W follows from the def-pc-fibre-product universal property and uniqueness. Step 3: def-weil-affine-spectrum Hom bijection gives the map A→B; the factor swap goes via the universal property; fibre-product-affine-spectra (pullbackSpecIso) gives Spec(B⊗_A C) with first projection Spec(b↦b⊗1)=q_B; no extra hypotheses. Step 4: q(O)∩W = q_B(O∩q^{-1}W) is elementary; the affine-opens-basis cover finishes, using only unions (no finite subcover or affine intersections), so non-qc and non-qs T and empty T are fine. Every proof dependency is a Mathlib leaf, so there is no route issue and no tool_uses. No new nodes. Duplicate scan of 'universally open' nodes found no equivalent. Small cases checked: g=0, g=1, D_B=0, A=C, empty W and T. Advisory only: source.place names 01JY and 01S1 while the steps use 01JR, 01I4 and 01IT."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrincipalAffineTestUniversallyOpen",
+  "declaration": "AlgebraicGeometry.principalAffineTest_universallyOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalAffineTestUniversallyOpen.lean",
+  "statement": "theorem principalAffineTest_universallyOpen (A C : Type u) [CommRing A] [CommRing C] [Algebra A C] (h : ∀ (B : Type u) [CommRing B] [Algebra A B] (g : B ⊗[A] C), IsOpen ((Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom : B →+* B ⊗[A] C))) '' (PrimeSpectrum.basicOpen g : Set (PrimeSpectrum (B ⊗[A] C))))) : (∀ (B : Type u) [CommRing B] [Algebra A B], IsOpenMap (Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom : B →+* B ⊗[A] C)))) ∧ UniversallyOpen (Spec.map (CommRingCat.ofHom (algebraMap A C))) ∧ ∀ (T : Scheme.{u}) (a : T ⟶ Spec (CommRingCat.of A)) (P : Scheme.{u}) (p : P ⟶ Spec (CommRingCat.of C)) (q : P ⟶ T), IsPullback p q (Spec.map (CommRingCat.ofHom (algebraMap A C))) a → IsOpenMap q ∧ ∀ (W : T.Opens) (B : Type u) [CommRing B] [Algebra A B] (e : W.toScheme ≅ Spec (CommRingCat.of B)), e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap A B)) = W.ι ≫ a → ∃ (i : pullback q W.ι ≅ Spec (CommRingCat.of (B ⊗[A] C))), i.hom ≫ Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom : B →+* B ⊗[A] C)) = pullback.snd q W.ι ≫ e.hom ∧ IsOpenImmersion (pullback.fst q W.ι) ∧ Set.range (pullback.fst q W.ι) = q ⁻¹' (W : Set T) ∧ ∀ (O : P.Opens), q '' (O : Set P) ∩ (W : Set T) = W.ι '' (e.inv '' ((Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom : B →+* B ⊗[A] C))) '' (i.hom '' ((pullback.fst q W.ι) ⁻¹' (O : Set P))))) ∧ IsOpen (e.inv '' ((Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom : B →+* B ⊗[A] C))) '' (i.hom '' ((pullback.fst q W.ι) ⁻¹' (O : Set P))))) ∧ IsOpen (q '' (O : Set P) ∩ (W : Set T))",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2c299175d",
+  "group": "O4",
+  "result": "pass",
+  "note": "Read node, 5 stmt_deps (unchanged vs side-live), Stacks 0F31 (3)=>(1), module, report (Worker report + Second reading by O4 present). Lean clauses match node: hypothesis IsOpen(q_B '' basicOpen g) for all B:Type u, g; conclusions IsOpenMap q_B, UniversallyOpen f, and for any IsPullback p q f a: IsOpenMap q plus per affine chart (W,e with algebra-structure equation, exists uniquely via Spec.homEquiv) an iso pullback q W.ι ≅ Spec(B⊗C) over W with projection q_B, IsOpenImmersion+range of fst = q⁻¹W, image formula and openness in W and T; all verified true via pullbackSpecIso and pointwise e.inv∘e.hom=id. Universes consistent (u), edge cases (zero rings, g=0/1, empty schemes/opens, non-qc T) covered. No new defs, proof is sorry, docstrings with source/blueprint and 4 proof steps, lean.statement verbatim. Parent uses φ : A →+* C vs Algebra A C here: harmless. Advisory: source.place tag list 01JY/01S1 vs used 01JR/01I4/01IT. No compile needed (no change)."
+ }
+}

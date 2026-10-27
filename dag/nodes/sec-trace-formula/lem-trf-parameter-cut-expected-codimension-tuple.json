@@ -1,0 +1,249 @@
+{
+ "id": "lem-trf-parameter-cut-expected-codimension-tuple",
+ "kind": "statement",
+ "title": "Parameter cut of a generating tuple at the expected codimension",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative regular local ring [def-weil-regular-scheme] of dimension $d\\ge1$, and let $t_1,\\ldots,t_d\\in\\mathfrak m$ generate $\\mathfrak m$. Let $1\\le b\\le d$, choose $z_2,\\ldots,z_b\\in\\mathfrak m$, and set $I=(t_1,z_2,\\ldots,z_b)$. Assume $\\dim(R/I)=d-b$. Put $R'=R/(t_1)$, let $q:R\\to R'$ be the quotient map, and put $I'=q(I)R'$. Then $R'$ is regular local of dimension $d-1$, its maximal ideal is $\\mathfrak m/(t_1)$, and $q(z_2),\\ldots,q(z_b)$ is an $R'$-regular sequence in that maximal ideal [def-weil-pbc-regular-sequence] generating $I'$. The canonical quotient isomorphism $R'/I'\\simeq R/I$ satisfies $\\dim(R'/I')=(d-1)-(b-1)$. For every surjective local homomorphism $f:R\\twoheadrightarrow S$ to a commutative local ring $S$ with $t_1\\in\\ker f$, the induced $f':R'\\twoheadrightarrow S$ is local and $\\dim R'-\\dim S=(\\dim R-\\dim S)-1$. Here local means that maximal ideals map into maximal ideals, and $S$ has finite Krull dimension since it is a quotient of $R$. When $b=1$, the displayed regular sequence is empty, $I'=0$, and $R'/I'=R'$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00SE (lemma-ci-well-defined), final paragraph: replace A by A/xA and I by I/xA, decreasing the dimension and generator count by one; fixed-tuple regularity is the dimension computation implicit in that reduction."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-regular-local-generators-regular-sequence] to the given ordered $d$-tuple, with prefix length $c=1$. Its hypotheses are exactly that $R$ is regular local of dimension $d$ and the tuple generates $\\mathfrak m$. It gives that $R\\prime=R/(t_1)$ is regular local of dimension $d-1$. Since $(t_1)\\subseteq\\mathfrak m$, [lem-weil-pbc-quotient-local-structure] identifies its maximal ideal as $\\mathfrak m\\prime=q(\\mathfrak m)=\\mathfrak m/(t_1)$. In particular all $q(z_i)$ lie in $\\mathfrak m\\prime$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-quotient-local-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NQ (lemma-regular-ring-CM), prefix c=1; Tags 00E9 (lemma-characterize-local-ring) and 07BJ (lemma-characterize-local-ring-map), quotient-local interpretation"
+   }
+  },
+  {
+   "text": "As $q(t_1)=0$, applying $q$ to the displayed generating expression for $I$ gives $I\\prime=(q(z_2),\\ldots,q(z_b))$. Define $\\alpha:R\\prime/I\\prime\\to R/I$ by $[q(r)]\\mapsto[r]$, and its inverse by $[r]\\mapsto[q(r)]$. Both are well-defined because $(t_1)\\subseteq I$ and $q(I)$ vanishes modulo $I\\prime$; the two composites fix every residue class. Pullback of prime ideals along these inverse ring maps identifies strict prime chains, hence their Krull dimensions agree [def-weil-pbc-krull-dimension-ring]. Thus $\\dim(R\\prime/I\\prime)=d-b=(d-1)-(b-1)$, using $1\\le b\\le d$. For $b=1$, the generator list is empty and $I\\prime=0$.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SE (lemma-ci-well-defined), final paragraph, quotient identification and dimension bookkeeping in A/xA and I/xA"
+   }
+  },
+  {
+   "text": "The ring $R\\prime$ is nonzero because it is local. Its empty sequence is regular: the injectivity conditions are vacuous and the final quotient is $R\\prime\\ne0$, by [def-weil-pbc-regular-sequence]. Apply [lem-trf-regular-local-regular-sequence-depth] to the regular local ring $R\\prime$, with $c=0$ and this empty sequence. Its assertion for $i=0$ gives that $R\\prime$ is Noetherian local and $\\operatorname{depth}(R\\prime)=\\dim R\\prime=d-1$.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "lem-trf-regular-local-regular-sequence-depth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NQ (lemma-regular-ring-CM), final sentence; Tag 02JN (lemma-reformulate-CM), empty-prefix instance"
+   }
+  },
+  {
+   "text": "Use [lem-trf-cm-regular-sequence-generator-count] with the Noetherian local ring $R\\prime$, its finite dimension $d-1$, and the ordered $(b-1)$-tuple $(q(z_2),\\ldots,q(z_b))$. Step 1 puts every entry in its maximal ideal, Step 3 supplies the depth hypothesis, and Step 2 supplies precisely the required quotient dimension. The criterion proves regularity of this very tuple, which generates $I\\prime$ by Step 2. It includes $b=1$: the sequence is empty and $R\\prime/I\\prime=R\\prime$.",
+   "uses": [
+    "lem-trf-cm-regular-sequence-generator-count"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JN (lemma-reformulate-CM), displayed equivalence, applied after the parameter cut in Tag 00SE (lemma-ci-well-defined)"
+   }
+  },
+  {
+   "text": "For the given $f$, define $f\\prime(q(r))=f(r)$. If $q(r)=q(s)$ then $r-s\\in(t_1)\\subseteq\\ker f$, proving well-definedness; its ring laws and surjectivity follow directly from those of $f$. Every member of $\\mathfrak m\\prime$ is $q(a)$ for $a\\in\\mathfrak m$, so $f\\prime(\\mathfrak m\\prime)\\subseteq\\mathfrak m_S$ by locality of $f$. To check finiteness of $\\dim S$, pull a strict prime chain of $S$ back along $f$: preimages are prime because $S/P$ is a domain, and remain strict because a witness in a difference has a lift under the surjection. Chain lengths are therefore at most $d$, while $S$ has its maximal prime ideal; by [def-weil-pbc-krull-dimension-ring], $0\\le\\dim S\\le d$. Using Step 1, integer arithmetic now gives $\\dim R\\prime-\\dim S=(d-1)-\\dim S=(\\dim R-\\dim S)-1$.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SE (lemma-ci-well-defined), last paragraph, factoring the local surjection through A/xA and decreasing the dimension difference; Tag 07BI (definition-local-ring), local map definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-quotient-local-structure",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-regular-sequence",
+  "lem-trf-regular-local-regular-sequence-depth",
+  "lem-trf-cm-regular-sequence-generator-count"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00SE (lemma-ci-well-defined), final parameter-cut paragraph; 00NQ (lemma-regular-ring-CM); 02JN (lemma-reformulate-CM). Explicit residue-class maps and arithmetic fill the quotient and local-map bookkeeping."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(regular|parameter).*(quotient|dimension|finrank)|IsRegularLocalRing.*[Ii]deal|[Ii]deal.*IsRegularLocalRing",
+   "results": "{\"t\": \"2026-10-22T07:24:30Z\", \"tool\": \"grep\", \"query\": \"(regular|parameter).*(quotient|dimension|finrank)|IsRegularLocalRing.*[Ii]deal|[Ii]deal.*IsRegularLocalRing\", \"sub\": \"RingTheory/RegularLocalRing\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\"], \"digest\": \"d2317e15b2a77730\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a regular local ring R and a regular sequence ideal I containing x in the maximal ideal outside its square, quotienting by x gives a regular local ring with a regular sequence ideal with one fewer generator",
+   "results": "{\"t\": \"2026-10-22T07:24:30Z\", \"tool\": \"leansearch\", \"query\": \"For a regular local ring R and a regular sequence ideal I containing x in the maximal ideal outside its square, quotienting by x gives a regular local ring with a regular sequence ideal with one fewer generator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_jacobson\", \"RingTheory.Sequence.IsRegular.cons'\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"RingTheory.Sequence.isWeaklyRegular_cons_iff'\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"RingTheory.Sequence.IsRegular.recIterModByRegular\"], \"digest\": \"98690f47d3057187\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, Ideal.Quotient, RingTheory.Sequence.IsRegular",
+   "results": "{\"t\": \"2026-10-22T07:24:30Z\", \"tool\": \"loogle\", \"query\": \"IsRegularLocalRing, Ideal.Quotient, RingTheory.Sequence.IsRegular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.Quotient'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If I is a regular sequence ideal of length b in a regular local ring R and x belongs to I but not the square of the maximal ideal then R/x is regular local of dimension dim R minus one and I/(x) is generated by a regular sequence of length b minus one",
+   "results": "{\"t\": \"2026-10-22T07:24:34Z\", \"tool\": \"leanfinder\", \"query\": \"If I is a regular sequence ideal of length b in a regular local ring R and x belongs to I but not the square of the maximal ideal then R/x is regular local of dimension dim R minus one and I/(x) is generated by a regular sequence of length b minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"RingTheory.Sequence.IsRegular.ndrecIterModByRegular\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\"], \"digest\": \"67ddd9608b8dce5c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Removing a parameter from a complete intersection ideal of a regular local ring preserves complete intersection and decreases codimension by one",
+   "results": "{\"t\": \"2026-10-22T07:24:35Z\", \"tool\": \"leanfinder\", \"query\": \"Removing a parameter from a complete intersection ideal of a regular local ring preserves complete intersection and decreases codimension by one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\"], \"digest\": \"1923793a0031afae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A parameter x outside m squared as the first of b generators of an ideal I in a regular local ring with quotient dimension d minus b gives regular remaining generators in R/(x)",
+   "results": "{\"t\": \"2026-10-22T07:25:25Z\", \"tool\": \"leansearch\", \"query\": \"A parameter x outside m squared as the first of b generators of an ideal I in a regular local ring with quotient dimension d minus b gives regular remaining generators in R/(x)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsRegular.cons\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"RingTheory.Sequence.isRegular_cons_iff'\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_jacobson\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\"], \"digest\": \"31f2116c749865b0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, RingTheory.Sequence.IsRegular",
+   "results": "{\"t\": \"2026-10-22T07:25:25Z\", \"tool\": \"loogle\", \"query\": \"IsRegularLocalRing, RingTheory.Sequence.IsRegular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a regular local ring R of dimension d let I have generators x,z2,...,zb in the maximal ideal, dim(R/I)=d-b, and x outside the square of the maximal ideal. Then R/x is regular local of dimension d-1 and the images z2,...,zb are a regular sequence",
+   "results": "{\"t\": \"2026-10-22T07:25:29Z\", \"tool\": \"leanfinder\", \"query\": \"In a regular local ring R of dimension d let I have generators x,z2,...,zb in the maximal ideal, dim(R/I)=d-b, and x outside the square of the maximal ideal. Then R/x is regular local of dimension d-1 and the images z2,...,zb are a regular sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\"], \"digest\": \"5bbe20a4783397ce\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularLocalRing|quotient_span_singleton|CohenMacaulay",
+   "results": "{\"t\": \"2026-10-23T04:27:00Z\", \"tool\": \"grep\", \"query\": \"IsRegularLocalRing|quotient_span_singleton|CohenMacaulay\", \"sub\": \"RingTheory/RegularLocalRing\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\"], \"digest\": \"1b3392e66693c7c9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular local ring quotient by a parameter, regularity of a generating tuple with expected codimension",
+   "results": "{\"t\": \"2026-10-23T04:27:00Z\", \"tool\": \"leansearch\", \"query\": \"Regular local ring quotient by a parameter, regularity of a generating tuple with expected codimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"RingTheory.Sequence.isRegular_cons_iff'\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_jacobson\", \"RingTheory.Sequence.isRegular_cons_iff\", \"RingTheory.Sequence.isWeaklyRegular_cons_iff'\"], \"digest\": \"5726467760536028\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, RingTheory.Sequence.IsRegular",
+   "results": "{\"t\": \"2026-10-23T04:27:00Z\", \"tool\": \"loogle\", \"query\": \"IsRegularLocalRing, RingTheory.Sequence.IsRegular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a regular local ring of dimension d generated by t1 through td, quotient by t1 is regular local of dimension d minus one; remaining b minus one generators of an ideal with quotient dimension d minus b form a regular sequence",
+   "results": "{\"t\": \"2026-10-23T04:27:08Z\", \"tool\": \"leanfinder\", \"query\": \"In a regular local ring of dimension d generated by t1 through td, quotient by t1 is regular local of dimension d minus one; remaining b minus one generators of an ideal with quotient dimension d minus b form a regular sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"RingTheory.Sequence.IsRegular.cons'\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"RingTheory.Sequence.isRegular_cons_iff'\"], \"digest\": \"dd6db3f94b605f9e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Cohen Macaulay local ring any tuple in the maximal ideal whose quotient has dimension equal to the original dimension minus its length is a regular sequence",
+   "results": "{\"t\": \"2026-10-23T04:27:46Z\", \"tool\": \"leanfinder\", \"query\": \"In a Cohen Macaulay local ring any tuple in the maximal ideal whose quotient has dimension equal to the original dimension minus its length is a regular sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"RingTheory.Sequence.isRegular_iff\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"RingTheory.Sequence.isWeaklyRegular_iff_Fin\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal\"], \"digest\": \"5e18937017f22fc6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-regular-local-surjection-kernel-comparison",
+  "date": "2026-10-22",
+  "group": "Q32"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "lem-trf-local-term-locality.proof.md, paragraph “(1) and (2)”, final sentences: “Its proof reduces, via the additivity of trace classes along the open–closed decomposition ... and proper pushforward from Z ... which is then shown by the normal-cone argument”. This is supporting local algebra in the existing completion/local-complete-intersection branch reached through the listed via nodes, not a complete-intersection assertion in the blueprint itself. The immediate source for the kernel comparison is Algebra 00SE. Re-split of lem-trf-regular-local-surjection-kernel-comparison: old Step 8: regular local prefix quotient, quotient maximal ideal, explicit b-1 tuple, quotient identification, dimension calculation and factored local map.",
+   "via": [
+    "lem-trf-regular-local-surjection-kernel-comparison",
+    "lem-trf-complete-local-ci-presentation-independence",
+    "lem-trf-regular-quotient-completion-kernel-test"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-parameter-cut-expected-codimension-tuple",
+  "worker": "stage1",
+  "summary": "Five-step split using existing parameter-prefix regularity, quotient-local structure, regular-local depth and the fixed-tuple dimension criterion. Explicit inverse residue-class maps identify the quotients; direct factorization proves locality and prime-chain pullback proves finite target dimension. Statement unchanged; no new nodes or Mathlib leaves. Checked b=1, d=1, b=d and nonparameter ideal generators.",
+  "blueprint": "lem-trf-local-term-locality.proof.md, paragraph “(1) and (2)”, final sentences: “Its proof reduces, via the additivity of trace classes along the open–closed decomposition ... and proper pushforward from Z ... which is then shown by the normal-cone argument”. This is supporting local algebra in the existing completion/local-complete-intersection branch reached through the listed via nodes, not a complete-intersection assertion in the blueprint itself. The immediate source for the kernel comparison is Algebra 00SE. Re-split of lem-trf-regular-local-surjection-kernel-comparison: old Step 8: regular local prefix quotient, quotient maximal ideal, explicit b-1 tuple, quotient identification, dimension calculation and factored local map.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic parameter-prefix regularity and exact dimension formula, stored in sk-thm-p1; the current unit has no lemma providing these local algebra facts."
+   },
+   {
+    "node": "lem-weil-pbc-quotient-local-structure",
+    "why": "Generic quotient-local structure and its maximal ideal, stored in sk-thm-p1; used only as a local algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-quotient-local-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-3c975e468",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-3c975e468 (reviewer sub-agent of L); spot-checked: One-level split of the Q32-created node, with no new nodes. The statement and stmt_deps are unchanged. Source checked: Stacks 00SE (lemma-ci-well-defined), final paragraph 'replace A by A/xA'; 02JN (lemma-reformulate-CM, line 25319) gives the CM criterion. Steps: (1) the regular-local-generators lemma with c=1, valid since d>=1, plus the quotient-local Mathlib leaf for m/(t1). (2) Explicit inverse residue maps, since (t1) is in I, give I'=(q(z_i)) and dimension (d-1)-(b-1); elementary and acceptable. (3) The depth lemma at c=0 with the empty sequence, which its statement explicitly allows, gives depth R'=dim R'. (4) The 'if' direction of the cm generator-count criterion with r=b-1 proves regularity of this exact tuple. (5) f' is well-defined, surjective and local because m'=q(m); 0<=dim S<=d by pulling prime chains back along the surjection. Small cases: b=1, a DVR with d=b=1, k[[x,y]] with z2=y^2; z2=0 and z2=x are both excluded by the dimension hypothesis. No cycle (37-node closure). No duplicate found in sk-i-curve-zero or elsewhere. The citer kernel-comparison step 5 uses exactly these outputs. Accepted tool_uses: lem-weil-pbc-regular-local-generators-regular-sequence (generic; the unit has no lemma that R/(t1) is regular local) and lem-weil-pbc-quotient-local-structure (Mathlib leaf). No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ParameterCutExpectedCodimensionTuple",
+  "declaration": "IsRegularLocalRing.parameterCut_expectedCodimension_tuple",
+  "file": "lean/Sheaf/RingTheory/ParameterCutExpectedCodimensionTuple.lean",
+  "statement": "theorem parameterCut_expectedCodimension_tuple (R : Type u) [CommRing R] [IsRegularLocalRing R] (d : ℕ) (hdpos : 1 ≤ d) (hd : ringKrullDim R = (d : WithBot ℕ∞)) (x : R) (ts : List R) (htlen : (x :: ts).length = d) (htmem : ∀ a ∈ x :: ts, a ∈ IsLocalRing.maximalIdeal R) (htspan : Ideal.ofList (x :: ts) = IsLocalRing.maximalIdeal R) (b : ℕ) (hbpos : 1 ≤ b) (hbd : b ≤ d) (zs : List R) (hzlen : zs.length = b - 1) (hzmem : ∀ z ∈ zs, z ∈ IsLocalRing.maximalIdeal R) (I : Ideal R) (hI : I = Ideal.ofList (x :: zs)) (hcodim : ringKrullDim (R ⧸ I) = ((d - b : ℕ) : WithBot ℕ∞)) : ∃ hQ : IsRegularLocalRing (R ⧸ Ideal.span {x}), ringKrullDim (R ⧸ Ideal.span {x}) = ((d - 1 : ℕ) : WithBot ℕ∞) ∧ @IsLocalRing.maximalIdeal (R ⧸ Ideal.span {x}) _ hQ.toIsLocalRing = (IsLocalRing.maximalIdeal R).map (Ideal.Quotient.mk (Ideal.span {x})) ∧ RingTheory.Sequence.IsRegular (R ⧸ Ideal.span {x}) (zs.map (Ideal.Quotient.mk (Ideal.span {x}))) ∧ (∀ z ∈ zs.map (Ideal.Quotient.mk (Ideal.span {x})), z ∈ @IsLocalRing.maximalIdeal (R ⧸ Ideal.span {x}) _ hQ.toIsLocalRing) ∧ Ideal.ofList (zs.map (Ideal.Quotient.mk (Ideal.span {x}))) = I.map (Ideal.Quotient.mk (Ideal.span {x})) ∧ (∃ e : ((R ⧸ Ideal.span {x}) ⧸ I.map (Ideal.Quotient.mk (Ideal.span {x}))) ≃+* R ⧸ I, ∀ r : R, e (Ideal.Quotient.mk _ (Ideal.Quotient.mk (Ideal.span {x}) r)) = Ideal.Quotient.mk I r) ∧ ringKrullDim ((R ⧸ Ideal.span {x}) ⧸ I.map (Ideal.Quotient.mk (Ideal.span {x}))) = (((d - 1) - (b - 1) : ℕ) : WithBot ℕ∞) ∧ (∀ (S : Type v) [CommRing S] [IsLocalRing S] (f : R →+* S), Function.Surjective f → IsLocalHom f → x ∈ RingHom.ker f → ∃ f' : (R ⧸ Ideal.span {x}) →+* S, f'.comp (Ideal.Quotient.mk (Ideal.span {x})) = f ∧ Function.Surjective f' ∧ IsLocalHom f' ∧ ∃ s : ℕ, ringKrullDim S = (s : WithBot ℕ∞) ∧ ((d - 1 : ℕ) : ℤ) - (s : ℤ) = ((d : ℤ) - (s : ℤ)) - 1) ∧ (b = 1 → zs = [] ∧ I.map (Ideal.Quotient.mk (Ideal.span {x})) = ⊥ ∧ ∃ e₀ : ((R ⧸ Ideal.span {x}) ⧸ I.map (Ideal.Quotient.mk (Ideal.span {x}))) ≃+* (R ⧸ Ideal.span {x}), ∀ a : R ⧸ Ideal.span {x}, e₀ (Ideal.Quotient.mk _ a) = a)",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ee9cfc0b",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read item node, both stmt_dep nodes, Stacks 00SE proof, delivered module and report. Lean matches every clause: concrete R/(x), Ideal.Quotient.mk, I.map; ∃ hQ : IsRegularLocalRing (Prop class) with dim d-1 and maximal ideal m.map mk; IsRegular of the specified image list, its membership and generation of I'; canonical R'/I'≃R/I characterized on residues; dim (d-1)-(b-1); ∀ S : Type v local surjections killing x give f' with f'∘q=f, surjective, IsLocalHom, finite dim witness and the ℤ identity; b=1 clause with zs=[], I'=⊥, canonical e₀. No extra hypotheses or universe ties. Edge cases d=b=1, b=d, b=1<d checked. Records: item differs only in lean; deps unchanged; statement verbatim; no duplicate declaration. Gates: no defs, sorry proof, docstrings with source/blueprint/5 steps, lines ≤100, imports exist, Worker report and Second reading present. Advisory: def-weil-pbc-krull-dimension-ring (ringKrullDim) is not in stmt_deps, a stage-1 omission that stage 2 cannot fix; the Lean uses the recorded Mathlib declaration directly. No recompile: no changes made."
+ }
+}

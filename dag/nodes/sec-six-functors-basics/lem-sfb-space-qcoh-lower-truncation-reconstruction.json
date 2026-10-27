@@ -1,0 +1,344 @@
+{
+ "id": "lem-sfb-space-qcoh-lower-truncation-reconstruction",
+ "kind": "statement",
+ "title": "Lower-truncation reconstruction for quasi-coherent complexes on algebraic spaces",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$, with its small etale ringed site $(X_{\\mathrm{et}},\\mathcal O_X)$ [def-trf-algebraic-space]. Let $E\\in D(\\operatorname{Mod}(\\mathcal O_X))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category] have quasi-coherent cohomology sheaves [def-trf-space-quasi-coherent-module], with no boundedness assumption. For $n\\in\\mathbf N$ put $E_n=\\tau_{\\geq-n}E$, let $c_n:E\\to E_n$ and $f_n:E_{n+1}\\to E_n$ be the canonical truncation maps [def-sbc-standard-tstructure-derived-category]. The product $P=\\prod_{n\\geq0}E_n$ exists in the ambient category $D(\\operatorname{Mod}(\\mathcal O_X))$, and there is a distinguished triangle\n$$E\\xrightarrow{(c_n)_n}P\\xrightarrow{1-s}P\\longrightarrow E[1],\\qquad \\operatorname{pr}_n s=f_n\\operatorname{pr}_{n+1}.$$\nThus $E$, with these specified maps, is a derived limit of its lower-truncation tower [def-weil-derived-limit].",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08F6, label lemma-nice-K-injective; canonical truncation reconstruction used at the start of the proof of Tag 08F7 (lemma-application-nice-K-injective), part (2)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-abstract-derived-category",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-derived-limit",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Choose the small skeleton allowed by [def-weil-size-convention] and let $\\mathcal B$ consist of the affine scheme objects of $X_{\\mathrm{et}}$ [def-trf-algebraic-space]. Every object $U\\to X$ is covered by its affine open subschemes by [lem-weil-pbc-affine-opens-basis]. Their inclusions into $U$ are etale by [lem-weil-pbc-open-immersion-etale], and their composites with $U\\to X$ are representable etale by [lem-trf-space-representable-etale-scheme-tests]. The inclusions are jointly surjective, hence form a covering in this site. This verifies the covering hypothesis of the site reconstruction theorem without any quasi-compactness or separation assumption on $X$.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F6, label lemma-nice-K-injective, proof: the set of affine objects of the small etale site"
+   }
+  },
+  {
+   "text": "For a scheme object $u:U\\to X$, postcomposition identifies $(X_{\\mathrm{et}}/U,\\mathcal O_X|_U)$ with $(U_{\\mathrm{et}},\\mathcal O_U)$. Indeed an object on the left is a scheme map $V\\to U$ whose composite with $u$ is etale; this map is etale by the final assertion of [lem-trf-space-representable-etale-scheme-tests]. Conversely an etale $V\\to U$ has etale composite by its composition assertion. Arrows are precisely the same maps over $U$, coverings on both sides are jointly surjective etale families, and both rings evaluate on $V$ as $\\Gamma(V,\\mathcal O_V)$ [def-trf-algebraic-space]. For every $q$, the restriction $M_q=\\mathcal H^q(E)|_U$ is quasi-coherent: the local presentations on the slice over each object are exactly those required by [def-trf-space-quasi-coherent-module], since relocalization identifies $(X_{\\mathrm{et}}/U)/(V/U)$ with $X_{\\mathrm{et}}/V$ and restriction of $\\mathcal H^q(E)|_U$ along it with $\\mathcal H^q(E)|_V$ [def-pur-localized-ringed-site].",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-trf-algebraic-space",
+    "def-trf-space-quasi-coherent-module",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F6, label lemma-nice-K-injective, proof; Tag 071Y, label section-higher-direct-image, scheme-object interpretation"
+   }
+  },
+  {
+   "text": "The module category on the small ringed site is Grothendieck by [prop-pur-kinjective-resolutions-exist], hence has enough injectives by [lem-sp-grothendieck-enough-injectives]. Apply [lem-pe-ringed-site-derived-evaluation-slice] to $\\mathcal H^q(E)$ and the object $U$: for $p\\geq0$ it identifies its module-derived evaluation $R^p\\Gamma_{\\mathrm{Mod},U}(\\mathcal H^q(E))$, computed by injective module resolutions, with abelian cohomology on the slice, now $H^p(U_{\\mathrm{et}},M_q)$. By [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] choose a quasi-coherent Zariski module $F_q$ on $U$ with $(F_q)_{\\mathrm{et}}\\cong M_q$. The isomorphisms of [lem-sc-etale-zariski-qcoh-comparison] identify this group with $H^p(U,F_q)$. For affine $U$ the latter vanishes for every $p>0$ by [pqf-lem-affine-vanishing], applied to the affine open $U$ of itself. Thus $R^p\\Gamma_{\\mathrm{Mod},U}(\\mathcal H^q(E))=0$ for every $U\\in\\mathcal B$, $p>0$ and $q\\in\\mathbf Z$. The site-reconstruction theorem of Step 4 defines $H^p(U,\\mathcal H^q(E))$ by evaluating a K-injective resolution of $\\mathcal H^q(E)[0]$; by [lem-sp-kinjective-computes](2), applied to the left exact additive evaluation $\\Gamma(U,-)$ on the Grothendieck category of modules, an injective resolution is such a K-injective resolution and $H^p(U,\\mathcal H^q(E))\\cong R^p\\Gamma_{\\mathrm{Mod},U}(\\mathcal H^q(E))$, and by (1) the choice of K-injective resolution does not matter. Hence $H^p(U,\\mathcal H^q(E))=0$ in the convention needed below.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-pe-ringed-site-derived-evaluation-slice",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sc-etale-zariski-qcoh-comparison",
+    "pqf-lem-affine-vanishing",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F6, label lemma-nice-K-injective, proof: affine vanishing via Tag 071Y (spaces-cohomology.tex, section-higher-direct-image), Tag 03DW (descent.tex, proposition-same-cohomology-quasi-coherent), and Tag 01XB (coherent.tex, lemma-quasi-coherent-affine-cohomology-zero)"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-site-truncation-derived-limit] to this small ringed site, the object $E$, the covering family of objects $\\mathcal B$, and $d=0$. Step 3 supplies its vanishing hypothesis even for every $q$, so in particular for $q<0$. Its conclusion gives the existence of the ambient product and the distinguished triangle with first map $(c_n)_n$ and second map $1-s$ whose components are $f_n\\operatorname{pr}_{n+1}$. By [def-kun-truncations] the good truncations used there have as images in $D(\\operatorname{Mod}(\\mathcal O_X))$ the truncation functors of the standard t-structure; these are the very standard truncations and canonical maps of the item, so this is the asserted triangle, not merely an unspecified isomorphism of its first object with a derived limit.",
+   "uses": [
+    "lem-kun-site-truncation-derived-limit",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08F6, label lemma-nice-K-injective, final sentence: apply Tag 0D6P, sites-cohomology.tex, label lemma-is-limit-dimension, with d = 0"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "def-trf-space-quasi-coherent-module",
+  "def-pur-localized-ringed-site",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "pqf-lem-affine-vanishing",
+  "lem-sp-kinjective-computes",
+  "lem-kun-site-truncation-derived-limit",
+  "def-kun-truncations"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08F6, label lemma-nice-K-injective, proof, using Tag 0D6P with d=0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "trunc.*[Dd]erived[Ll]imit|[Dd]erived[Ll]imit.*trunc|rightDerived.*preserves|rightDerived.*[dD]erived[Ll]imit",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent cohomology on an algebraic space implies convergence of the lower truncation tower to the complex as a homotopy limit",
+   "results": "OK 8 hits: CochainComplex.quasiIso_ιTruncLE_iff, CochainComplex.quasiIso_πTruncGE_iff, CochainComplex.quasiIso_truncGEMap_iff, HomologicalComplex.instQuasiIsoAtιTruncLEF, HomologicalComplex.truncGE'.quasiIsoAt_restrictionToTruncGE', HomologicalComplex.truncLE'.quasiIsoAt_truncLE'ToRestriction, HomologicalComplex.quasiIso_truncLEMap_iff, HomologicalComplex.quasiIso_πTruncGE_iff_isSupported",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\", \"PreservesLimitsOfShape\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor from a Grothendieck abelian category to abelian groups preserving countable products has a right derived functor preserving homotopy limits of inverse sequences",
+   "results": "OK 8 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.Functor.leftDerivedToHomotopyCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, CategoryTheory.Functor.leftDerived, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent complex on an algebraic space is the derived inverse limit of its bounded below canonical truncations",
+   "results": "OK 8 hits: SheafOfModules.QuasicoherentData.X, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|leftComplete|[Ll]eft[Cc]omplete|truncGE.*limit",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unbounded right derived functor of an additive countable product preserving functor from a Grothendieck category to Ab preserves derived inverse limits",
+   "results": "OK 8 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.Functor.IsRightDerivedFunctor, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id, CategoryTheory.Functor.HasRightDerivedFunctor.mk, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv, CategoryTheory.rightExactFunctor_le_additiveFunctor",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"truncGE\", \"limit\"",
+   "results": "OK 1 hits: HomologicalComplex.truncGE'.isLimitKernelFork",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derivation of a countable product preserving functor into an AB4 star abelian category commutes with R lim",
+   "results": "OK 8 hits: CategoryTheory.CountableAB4Star.of_hasExactLimitsOfShape_nat, CategoryTheory.CountableAB4Star.of_countableAB5Star, CategoryTheory.CountableAB4Star.of_hasExactLimitsOfShape_nat_and_finite, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Limits.colimitPointwiseProductToProductColimit_app, CategoryTheory.NatTrans.leftDerived_comp_assoc, CategoryTheory.NatTrans.leftDerived_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left completeness for quasi coherent derived categories of algebraic spaces: E is the homotopy inverse limit of tau greater than minus n E",
+   "results": "OK 8 hits: DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso, DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|leftComplete|truncGE.*[Ll]imit",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: individual truncation quasi-isomorphisms, standard t-structure bounds and an auxiliary kernel fork do not reconstruct an unbounded quasi-coherent algebraic-space complex"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An unbounded quasi coherent complex on an algebraic space is reconstructed from its canonical lower truncation tower",
+   "results": "OK 8 hits: CochainComplex.quasiIso_ιTruncLE_iff, HomologicalComplex.quasiIso_ιTruncLE_iff_isSupported, CochainComplex.quasiIso_πTruncGE_iff, CochainComplex.ιTruncLE, SheafOfModules.IsQuasicoherent.mk, CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE, SheafOfModules.IsQuasicoherent.recOn, SheafOfModules.IsQuasicoherent.rec",
+   "date": "2026-10-24",
+   "verdict": "no match: individual truncation quasi-isomorphisms, standard t-structure bounds and an auxiliary kernel fork do not reconstruct an unbounded quasi-coherent algebraic-space complex"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"truncGE\", \"limit\"",
+   "results": "OK 1 hits: HomologicalComplex.truncGE'.isLimitKernelFork",
+   "date": "2026-10-24",
+   "verdict": "no match: individual truncation quasi-isomorphisms, standard t-structure bounds and an auxiliary kernel fork do not reconstruct an unbounded quasi-coherent algebraic-space complex"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived category complex whose cohomology sheaves are acyclic on a covering basis is the derived limit of its Postnikov truncations",
+   "results": "OK 8 hits: DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isLE_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: individual truncation quasi-isomorphisms, standard t-structure bounds and an auxiliary kernel fork do not reconstruct an unbounded quasi-coherent algebraic-space complex"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of sheaves of modules with quasi coherent cohomology on an algebraic space is the homotopy inverse limit of its lower truncations",
+   "results": "OK 8 hits: CochainComplex.quasiIso_ιTruncLE_iff, CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.instQuasiIsoIntπTruncGEOfIsGE, CochainComplex.quasiIso_πTruncGE_iff, HomologicalComplex.quasiIsoAt_πTruncGE, HomologicalComplex.quasiIso_ιTruncLE_iff_isSupported, HomologicalComplex.instQuasiIsoAtπTruncGEF, HomologicalComplex.quasiIso_πTruncGE_iff_isSupported",
+   "date": "2026-10-24",
+   "verdict": "no match: individual truncation quasi-isomorphisms, standard t-structure bounds and an auxiliary kernel fork do not reconstruct an unbounded quasi-coherent algebraic-space complex"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-product-preserving-derived-functor-upper-bound",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Right adjoint of quasi-coherent pushforward for qcqs algebraic spaces. Supporting input: 0E55 Brown hypotheses: qcqs derived direct image and direct-sum comparison 08FA/08FB. Auxiliary input: Uniform upper bound for unbounded quasi-coherent space pushforward. Supporting input: 08FA proof of (2): apply 08F7 to the functor Gamma(V times_Y X, -). 08F7 proof (2), first sentence: E = R lim E_n, using 08F6.",
+   "via": [
+    "lem-sfb-space-product-preserving-derived-functor-upper-bound",
+    "lem-sfb-space-derived-pushforward-upper-bound",
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "lem-sfb-qcqs-space-pushforward-right-adjoint",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-qcoh-lower-truncation-reconstruction",
+  "worker": "stage1",
+  "summary": "Followed Stacks 08F6: affine etale objects cover, their slices are the schemes small etale sites, quasi-coherent module cohomology there agrees with Zariski cohomology and vanishes positively, and the existing ringed-site reconstruction theorem applies with d=0. No new nodes; canonical maps and ambient products retained. Scheme-only Lean reconstruction is not an attachment.",
+  "blueprint": "The inherited from.place locates this auxiliary in det-thm-sf-ctf-stability-direct-images, proof (3), through 08FA/08F7. The four steps supply exactly 08F7 proof (2), first sentence E = R lim E_n, by the 08F6 affine-object argument. Whole-blueprint searches for truncation, 08F6 and 0D6P found no equivalent algebraic-space statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic scheme affine-basis existence supplies the covering of each scheme object; this is the affine-object route of 08F6. It is a tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic scheme open-immersion theorem makes the affine open covers etale covers. It is a tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic algebraic-space representability/composition and cancellation identify affine objects and the slice site. It is a tool, not a replacement of a unit step."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Grothendieck property and K-injective resolution existence for module sheaves on a small ringed site. It is a tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic enough-injectives theorem discharges the precise hypothesis of the module evaluation comparison. It is a tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-pe-ringed-site-derived-evaluation-slice",
+    "why": "Generic comparison of module-derived evaluation with underlying abelian cohomology on a slice; no same-unit theorem supplies this coefficient-category bridge. It is a tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic equivalence represents the restricted quasi-coherent etale module by a Zariski quasi-coherent module. It is a tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-sc-etale-zariski-qcoh-comparison",
+    "why": "Generic quasi-coherent etale/Zariski cohomology comparison used on the affine scheme object. It is a tool, not a replacement of a unit step."
+   },
+   {
+    "node": "pqf-lem-affine-vanishing",
+    "why": "Generic Serre affine vanishing supplies bound zero on each affine etale object. It is a tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-kun-site-truncation-derived-limit",
+    "why": "General ringed-site reconstruction with a covering family and cohomological bound supplies the exact Roos triangle; this is the 0D6P input explicitly required by 08F6. It is a tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Generic comparison: a bounded-below injective resolution is K-injective, so K-injective derived evaluation of a module in degree zero equals its injective-resolution derived functor; bridges the conventions of the slice-evaluation and site-reconstruction nodes. It is a tool, not a replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "pqf-lem-affine-vanishing",
+  "lem-kun-site-truncation-derived-limit",
+  "lem-sp-kinjective-computes"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-657a84dab",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-657a84dab (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited statement and Stacks 08F6 (spaces-perfect.tex l.452-477; its use in 08F7(2)). The statement matches 08F6 exactly: unbounded E, ambient product in D(Mod O_X), specified Roos triangle with (c_n) and 1-s. The 4 steps follow the 08F6 proof (affine objects of X_et form B; slice = U_et; quasi-coherent vanishing via the etale/Zariski equivalence, 03DW comparison and 01XB; 0D6P = lem-kun-site-truncation-derived-limit with d=0). Edge cases checked: E=0, a single module, non-qc/non-separated X, infinite covers. No new nodes; no duplicate found (lem-pc-qcoh-truncation-derived-limit is the scheme case). Fault C1/C4 repaired: lem-kun defines H^p(V,M) through K-injective resolutions, while lem-pe-ringed-site-derived-evaluation-slice uses injective-resolution derived functors, and step 3 bridged them uncited. Now cites lem-sp-kinjective-computes (1)+(2) with an explicit sentence and a tool_uses entry. Also added the definition citations def-pur-localized-ringed-site (step 2, slice relocalization) and def-kun-truncations (step 4, kun truncations = standard t-structure truncations); proof_deps = union of uses. Batch-5: lem-trf-space-representable-etale-scheme-tests (03EC/025W) and lem-trf-scheme-zariski-etale-quasi-coherent-equivalence (03DX/03LC) are generic algebraic-space/quasi-coherent foundations, not steps of the trace formula or of Poincare duality. Their own closures contain no nt-assume leaf, no sec-poincare-duality node and no trf theorem/proposition: accepted. The 10 declared tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQCohLowerTruncationReconstruction",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.qcoh_lower_truncation_isDerivedLimitTriangle",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQCohLowerTruncationReconstruction.lean",
+  "statement": "theorem qcoh_lower_truncation_isDerivedLimitTriangle {S : Scheme.{u}} (X : AlgebraicSpace S) [HasDerivedCategory.{w} X.SmallModules] (E : X.DerivedModules) (hE : X.derivedQCohProperty E) : ∃ (_ : HasProduct (fun n : ℕ ↦ ((DerivedCategory.TStructure.t (C := X.SmallModules)).truncGE (-(n : ℤ))).obj E)), ∃ δ : (∏ᶜ (fun n : ℕ ↦ ((DerivedCategory.TStructure.t (C := X.SmallModules)).truncGE (-(n : ℤ))).obj E)) ⟶ E⟦(1 : ℤ)⟧, IsDerivedLimitTriangle (fun n : ℕ ↦ ((DerivedCategory.TStructure.t (C := X.SmallModules)).natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (Int.neg_le_neg (Int.ofNat_le.mpr (Nat.le_succ n)))).app E) E (Pi.lift (fun n : ℕ ↦ ((DerivedCategory.TStructure.t (C := X.SmallModules)).truncGEπ (-(n : ℤ))).app E)) δ",
+  "branch": "sheaf-dag",
+  "by": "NY",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the already landed small ringed model and derived-module calculus to implement the size convention with the original section universe. The specified module equivalence transports quasi-coherent cohomology; the ambient product is asserted to exist and the first Roos arrow is the canonical product lift."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5770fb856",
+  "group": "NY",
+  "result": "pass",
+  "note": "Read the item, all 10 stmt_dep records, the delivered module, the dependency Lean (SmallModules/smallModuleEquivalence, DerivedModules/derivedQCohProperty = forall q IsQuasicoherent of transported H^q, QCoh = Mathlib isQuasicoherent, IsDerivedLimitTriangle with 1-s = 1 - Pi.lift(pi(n+1) >> f n), Mathlib truncGE/truncGEpi/natTransTruncGEOfLE direction) and Stacks 08F6 (spaces-perfect.tex l.451-477). Clause by clause correct: unrestricted S and X, unbounded E, ambient product asserted by an existential, first map Pi.lift of truncGEpi, transitions tau>=-(n+1) to tau>=-n, specified Roos triangle with the node's sign; conclusion identical in form to site_truncation_isDerivedLimitTriangle (proof step 4). Universes u and w independent; edge cases E=0, empty space, n=0, non-qcqs X covered. Node diff vs live: only lean plus two landed def stmt_deps that the statement uses. lean.statement verbatim; all 16 imports exist; no name clash or competing delivery. No defs, single sorry theorem, source and blueprint docstrings and 4-step proof present; both report sections present. No compile (no change). No findings."
+ }
+}

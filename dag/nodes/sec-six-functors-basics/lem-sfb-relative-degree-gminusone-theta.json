@@ -1,0 +1,540 @@
+{
+ "id": "lem-sfb-relative-degree-gminusone-theta",
+ "kind": "statement",
+ "title": "The degree-g-minus-one Picard torsor and its determinant theta divisor",
+ "statement": "Let $S$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], $g\\geq2$, and $f:C\\to S$ a smooth stable unpointed genus-$g$ family [def-sfb-stable-pointed-moduli-groupoids]. Assume $J=\\operatorname{Pic}^0_{C/S}$ is represented by an algebraic space [sk-def-picard-pic, def-trf-algebraic-space]. Let $P=\\operatorname{Pic}^{g-1}_{C/S}$ be the sub-fppf sheaf of line-module classes of fibrewise degree $g-1$, where the degree on a smooth proper geometric curve is $\\chi(L)-\\chi(\\mathcal O)$. Then $P$ is represented by an algebraic space and tensor product makes it a $J$-torsor: the action map gives $J\\times_SP\\simeq P\\times_SP$, and $P$ has sections etale locally on $S$. There is an etale covering family $S_i\\to S$ of locally Noetherian schemes on which $C_{S_i}$ has a section $p_i$; the maps\n$$\\beta_{p_i}:J_{S_i}\\xrightarrow{\\sim}P_{S_i},\\qquad [M]\\longmapsto[M\\otimes\\mathcal O_C((g-1)p_i)]$$\nare torsor trivializations.\n\nThere is a canonical effective Cartier divisor $\\Theta_{C/S}$ on $P$ (on every etale scheme chart of $P$ a closed subscheme locally cut out by one non-zero-divisor), flat over $S$ in the chartwise sense of [def-sfb-space-morphism-properties], with associated invertible module $\\mathcal T=\\mathcal O_P(\\Theta_{C/S})$ [def-pc-divisor-line-bundle, def-sc-invertible-module]. On a scheme chart $V\\to P$ carrying a representing invertible module $\\mathcal U$ on $C_V$, the complex $Rf_{V,*}\\mathcal U$ is locally represented in degrees $0,1$ by a map $d:E^0\\to E^1$ of finite locally free modules of the same rank [def-amb-finite-locally-free-module]. Here $Rf_{V,*}$ means the complex obtained by applying $f_{V,*}$ to an injective resolution, considered in the derived category [def-pc-derived-category]. The pullback of the pair $(\\mathcal T,s_\\Theta)$ is canonically the pair\n$$(\\det E^1\\otimes(\\det E^0)^{-1},\\det d),$$\nwhere $\\det E$ is the highest exterior power [def-sc-sheaf-exterior-power] and $s_\\Theta$ is the section cutting out $\\Theta_{C/S}$. These pairs are independent of the representative $\\mathcal U$ and of the displayed complex. For every geometric point $\\operatorname{Spec}K\\to S$, the divisor $(\\Theta_{C/S})_K$ is the scheme-theoretic image of the Abel morphism from the scheme of effective divisors of degree $g-1$ on $C_K$ [thm-pc-hilb-curves], sending $D$ to $[\\mathcal O_{C_K}(D)]$ in $P_K$.\n\nFormation of $P$, its action, the maps $\\beta_p$, and the pair $(\\mathcal T,s_\\Theta)$ commutes with arbitrary base change between locally Noetherian schemes and with isomorphisms of the curve families. For an isomorphism $u:C\\xrightarrow{\\sim}D$, the induced map $b=(u^{-1})^*:P_C\\to P_D$ pulls the pair for $D$ back to the pair for $C$. All these comparisons satisfy identity and composition. No line module on $J$ without a choice of local torsor section is asserted.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter III Sections 6 and 8, especially Theorem 8.1 and its following relative Picard discussion, printed pp.110--111; the relative determinant-divisor construction is an agent expansion. Determinant infrastructure read in Stacks perfect.tex, lemma-determinant-two-term-complexes and remark-functorial-det; detailed relative theta reference WANTED in report."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "sk-def-picard-pic",
+  "def-trf-algebraic-space",
+  "def-pc-divisor-line-bundle",
+  "def-sc-invertible-module",
+  "def-amb-finite-locally-free-module",
+  "def-pc-derived-category",
+  "def-sc-sheaf-exterior-power",
+  "def-sfb-space-morphism-properties",
+  "thm-pc-hilb-curves",
+  "def-pd-degree-morphism",
+  "def-pc-derived-direct-image",
+  "def-trf-space-module-scheme-restriction",
+  "def-trf-two-term-determinant-data",
+  "def-pc-module-pullback",
+  "def-sfb-tensor-pullback-structure-sheaf-map"
+ ],
+ "proof": [
+  {
+   "text": "The family is flat and finitely presented, with nonempty smooth geometrically connected fibres of dimension one, by the stable-family hypothesis; it is proper because it is projective in the projective-bundle sense. Apply universal structure-sheaf pushforward to get $\\mathcal O_T\\simeq(f_T)_*\\mathcal O_{C_T}$ for every $T$. Smoothness and nonempty fibres make $C\\to S$ a smooth surjection, so choose an etale cover $S_i\\to S$ with sections $p_i$. The $S_i$ are locally Noetherian by local finite type over $S$. Each $p_i$ is an effective Cartier divisor because the curve is separated and smooth of relative dimension one. Its geometric fibre is one rational point, so $\\mathcal O((g-1)p_i)$ has degree $g-1$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-trf-projective-bundle-proper",
+    "lem-sc-proper-flat-global-sections",
+    "lem-sfb-smooth-space-cover-etale-sections",
+    "pqf-lem-locnoeth-lft",
+    "lem-trf-smooth-curve-section-cartier",
+    "lem-pc-degree-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0B9U, rigidification along a section; existence of etale sections: spaces-topologies.tex Tag 0CFV; Cartier section: divisors.tex Tag 067R."
+   }
+  },
+  {
+   "text": "The full Picard fppf sheaf is a smooth algebraic space by the curve-Picard theorem, using Step 1's universal structure-sheaf condition. Its degree-$r$ subfunctor is open: on $S_i$, every class on a parameter scheme $T$ has a normalized line representative, by rigidification; the locus where $\\chi(L_t)-\\chi(\\mathcal O_{C_t})=r$ is open and closed by Euler local constancy. These loci agree on overlaps since Euler degree is invariant under field extension and base twists. Thus they glue to the required open subscheme of every test scheme $T$; the definition of open subspace makes the subfunctor an algebraic space. In particular $P$ is represented and is smooth over $S$. Here $J=\\operatorname{Pic}^0_{C/S}$ is the degree-zero Picard sheaf, in the convention of the statement.",
+   "uses": [
+    "lem-sfb-picard-space-curves-smooth",
+    "sk-prop-picard-pic-split",
+    "lem-sfb-proper-flat-sheaf-euler-local-constancy",
+    "lem-pc-degree-base-change",
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D2C (proposition-pic-functor); moduli.tex Tag 0DPK; perfect.tex Tag 0B9T; pic.tex Tag 0B9U."
+   }
+  },
+  {
+   "text": "Tensor degree is additive on each geometric curve, so tensoring defines $J\\times_SP\\to P$. For any test scheme the map $(M,L)\\mapsto(M\\otimes L,L)$ has inverse $(L_1,L_2)\\mapsto(L_1\\otimes L_2^{-1},L_2)$; both formulas are formulas for Picard sheaf sections, and their composites cancel the dual factors. Thus it is an isomorphism of sheaves and hence of representing spaces. On $S_i$, tensoring by $A_i=\\mathcal O((g-1)p_i)$ has inverse tensoring by $A_i^{-1}$ and gives $\\beta_{p_i}:J_{S_i}\\simeq P_{S_i}$. The class of $A_i$ is a local section of $P$, proving the torsor assertion.",
+   "uses": [
+    "lem-trf-curve-degree-tensor-additive",
+    "sk-def-picard-pic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYX (lemma-degree-tensor-product); Milne III Section 8, degree components of the relative Picard functor."
+   }
+  },
+  {
+   "text": "Choose etale scheme charts of $P$ lying over the $S_i$. On each such chart $V$ rigidification along $p_i$ supplies an actual line module $U$ on $C_V$ representing its classifying map. Since $f_V$ is proper, hence quasi-compact and quasi-separated, the etale--Zariski equivalence on $D_{\\mathrm{QCoh}}$ intertwines the Zariski complex $K=Rf_{V,*}U$ with $R\\epsilon_{V,*}Rf_{V,\\mathrm{et},*}U$. By perfect coherent base change, $K$ is therefore perfect and its derived pullback is the cohomology complex for every base change. On a geometric fibre it has cohomology only in degrees $0,1$, by the coherent curve vanishing, and its Euler characteristic is $(g-1)+(1-g)=0$, by Riemann--Roch and the definition of degree. On an affine chart, the residue-field criterion puts this perfect object in Tor degrees $[0,1]$. Apply the two-term Tor-window equivalence to $K[1]$ in degrees $[-1,0]$ and reindex back to obtain $E^0\\xrightarrow d E^1$ (rescaling one term removes the shift sign). The equality of Euler characteristics forces the ranks of $E^0,E^1$ to agree on each component. Only the fibrewise degree $g-1$ of $U$ was used, so the same holds for any representing module on any scheme chart of $P$.",
+   "uses": [
+    "sk-prop-picard-pic-split",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sc-riemann-roch",
+    "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
+    "lem-trf-two-term-perfect-tor-window"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CTM; more-algebra.tex Tag 068V and lemma-perfect; perfect.tex Tag 0FJX. The [0,1] to [-1,0] reindexing retains the same differential for the displayed determinant formula."
+   }
+  },
+  {
+   "text": "Apply the canonical-section lemma to $K$ to obtain $(D(K),\\delta_K)$ on $V$ with the displayed exterior-power formula. This immediately removes dependence on a chosen two-term complex, including after adding an acyclic identity complex. If $U'=U\\otimes f_V^*N$, the perfect projection formula identifies $Rf_{V,*}U'$ with $K\\otimes N$; rank-zero twist cancellation identifies its pair with the old pair. Any two representatives of the same class differ in this way: normalize both along $p_i$ and use rigidification's uniqueness. The choice of an isomorphism between representatives is immaterial, since its ambiguity is a scalar from $V$ by Step 1, and scalars act trivially on the determinant pair. This argument applies also on overlaps where the two chosen curve sections differ: normalize both representatives using either one section on that overlap.",
+   "uses": [
+    "lem-sfb-rank-zero-perfect-determinant-section",
+    "lem-sbc-ringed-site-perfect-projection-formula",
+    "sk-prop-picard-pic-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 0FJX, 0FJY; sites-cohomology.tex Tag 0944; pic.tex Tag 0B9U."
+   }
+  },
+  {
+   "text": "On each double overlap $V_i\\times_PV_j$ the pulled-back complexes are the direct images of the pulled-back representatives, by perfect coherent base change along the flat chart maps; use Step 5's comparison there. On a triple overlap, composing the representative isomorphisms tensors their base lines; cancellation for the product twist and functoriality for derived isomorphisms give the same comparison as going directly. Any residual scalar acts trivially. Thus the lines have a genuine etale descent datum and the sections agree under it. Line-module descent gives a line module $\\mathcal T$ on $P$; its fully faithful assertion, applied to maps $\\mathcal O\\to\\mathcal T$, glues the sections to $s_\\Theta$. Set $\\Theta=Z(s_\\Theta)$. This is a real zero-scheme construction and on each chart it is locally the principal ideal $(\\det d)$.",
+   "uses": [
+    "lem-trf-algebraic-space-invertible-descent",
+    "lem-sfb-rank-zero-perfect-determinant-section",
+    "lem-sfb-proper-flat-space-derived-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 04W8 (proposition-fpqc-descent-quasi-coherent), etale rank-one case; perfect.tex Tags 0FJX, 0FJY."
+   }
+  },
+  {
+   "text": "Fix an algebraically closed geometric field $k$ over $S$, and choose $p\\in C(k)$. The geometric curve is smooth connected, hence integral: its regular local rings are domains, so distinct irreducible components cannot meet, and connectedness leaves one component. Its degree-zero Picard space is the Jacobian by representability and uniqueness of representing objects. Translate $P_k$ to that Jacobian by $L\\mapsto L(-(g-1)p)$. The Abel-image theorem gives an integral effective Cartier divisor $W_{g-1}$, of dimension $g-1$, as the scheme-theoretic image. By the determinant-section lemma, the support of the determinant zero scheme is exactly the locus with $H^0(C,L)\\ne0$, since $\\chi(L)=0$. A nonzero section of a line on an integral curve cuts out an effective Cartier divisor with $L\\simeq\\mathcal O(D)$; the degree formula makes its degree $g-1$. Conversely the canonical section of $\\mathcal O(D)$ is nonzero. Thus this support is precisely $W_{g-1}$, which is a proper closed subset of the integral $g$-dimensional Jacobian. The determinant section is therefore nonzero and its zero scheme is an effective Cartier divisor.",
+   "uses": [
+    "lem-sc-smooth-regular",
+    "thm-sc-jacobian-representability",
+    "lem-sfb-symmetric-abel-image-geometry",
+    "lem-sfb-rank-zero-perfect-determinant-section",
+    "lem-pc-nonzero-section-integral-cartier",
+    "lem-pc-degree-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III Sections 1, 5--6, especially Theorem 5.1(a), pp.101--102; determinant support: Stacks Section 0FJI. This proves support and Cartierness, not yet scheme equality."
+   }
+  },
+  {
+   "text": "Choose an effective divisor $D$ of degree $g-1$ with $h^0(\\mathcal O(D))=1$ using the small-degree-divisor lemma, and put $L=\\mathcal O(D)$. Riemann--Roch gives $h^1(L)=1$. Choose nonzero $s\\in H^0(L)$ and $t\\in H^0(\\omega_C\\otimes L^{-1})$ by Serre duality. Their product is a nonzero canonical differential, since both are nonzero at the generic point of the integral curve. The perfect Serre pairing between $H^1(\\mathcal O_C)$ and $H^0(\\omega_C)$ supplies $v$ with $\\langle v,st\\rangle\\ne0$. The split-thickening Picard cocycle lemma realizes $v$ as a tangent direction at $L$ in $P_k$. By the first-order-obstruction lemma the induced map $H^0(L)\\to H^1(L)$ is nonzero.",
+   "uses": [
+    "lem-sfb-small-degree-divisor-sections",
+    "lem-sc-riemann-roch",
+    "thm-sc-serre-duality-curve",
+    "lem-sfb-split-thickening-picard-cocycle",
+    "lem-sfb-line-section-first-order-obstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0BS2, 0BS4; Milne III Lemma 5.2, pp.101--102; split-thickening section-boundary computation in the new auxiliary."
+   }
+  },
+  {
+   "text": "At $L$ the equal-rank matrix $d_0$ has one-dimensional kernel and cokernel. In a local trivialization an $(r-1)$-minor is a unit. Elementary row and column operations using that minor reduce $d$ to an identity block and one scalar $a$ in the maximal ideal; they change its determinant by a unit. Along Step 8's dual-number direction $\\operatorname{Spec}A\\to P_k$, perfect coherent base change makes the pulled-back two-term free complex a model of $R\\Gamma(C_A,L_A)$; the coefficient of $\\epsilon$ in $a$ is the nonzero kernel-to-cokernel obstruction, by the model comparison of the first-order lemma. Consequently the local equation $\\det d$ is not in the square of the maximal ideal at $L$. For $r=1$ this is the same argument with an empty identity block. This computes multiplicity at a specified point without assuming any generic smoothness of the Abel map.",
+   "uses": [
+    "lem-pc-local-invertible-minor-block",
+    "lem-sfb-line-section-first-order-obstruction",
+    "lem-sfb-proper-flat-space-derived-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Section 0FJI, determinant of the differential; the Schur-complement computation after choosing a unit minor is ordinary matrix elimination."
+   }
+  },
+  {
+   "text": "The geometric Jacobian is smooth, so its local rings are regular, hence unique factorization domains. Let $h$ be a local prime equation for the integral Cartier divisor $W_{g-1}$. Since Step 7 gives equality of supports, the local determinant equation has no prime factor except $h$, and so is $u h^n$ with $u$ a unit and $n\\ge1$. At Step 8's point, $n>1$ would put this equation in the square of the maximal ideal, contradicting Step 9. Therefore its order at the generic point of $W_{g-1}$ is one. At every other point of $W_{g-1}$ the exponent is the same generic order (localizing at $(h)$ gives the generic DVR), so $n=1$ everywhere. The determinant ideal and the ideal of $W_{g-1}$ consequently agree at every stalk. This proves equality with the scheme-theoretic Abel image, including its multiplicity and not just its set of points.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "lem-per-regular-prime-divisor-local-equations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0AGA and 0AGB; regular-local factoriality: more-algebra.tex Tag 0AG0; multiplicity-one input is the explicit computation in Steps 8--9."
+   }
+  },
+  {
+   "text": "For an etale scheme chart $V\\to P$, the map $V\\to S$ is flat and locally finitely presented, since $P\\to S$ is smooth (Step 2). The subscheme $Z(s_\\Theta)|_V$ is locally principal. Steps 7--10 show that its every geometric fibre is an effective Cartier divisor. This also holds over the residue fields themselves: after a faithfully flat algebraic field extension, injectivity of multiplication by a local equation reflects back, since tensor with a field extension is faithful. Apply the local fibre-Cartier criterion at each point. It gives that $\\Theta|_V$ is effective Cartier and flat over $S$. These are exactly the asserted chartwise properties on $P$. A regular line section gives its divisor line canonically: in a local frame $e$ with $s=a e$, the ideal is $(a)$ and the identification $\\mathcal I^{-1}\\simeq\\mathcal T$ sends the functional $a\\mapsto1$ to $e$. These identifications agree on changes of frame, and their distinguished section is $s_\\Theta$. Thus $\\mathcal T\\simeq\\mathcal O_P(\\Theta)$.",
+   "uses": [
+    "lem-pc-recd-fibre-cartier-local",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 062Y (lemma-fibre-Cartier), part (3); the divisor-line identification is the local dual-ideal formula."
+   }
+  },
+  {
+   "text": "Base change restricts the Picard sheaf and preserves fibre degrees, so it preserves $P$, $J$, the tensor action and the tensor formulas for $\\beta_p$. Pulling a section divisor through a base change preserves it and its line module; hence the reference $\\mathcal O((g-1)p)$ also pulls back. On each representing chart, perfect coherent base change identifies the new direct-image complex with $Lh^*K$. The canonical-section lemma identifies the resulting determinant pair with the pulled-back pair, compatibly with changing representatives. By the fully faithful descent of maps of lines these local comparisons give the global comparison of $(\\mathcal T,s_\\Theta)$, and hence of its zero divisor, for arbitrary locally Noetherian base change. In particular the fibre comparisons used in Steps 7--10 are comparisons of the constructed pair.",
+   "uses": [
+    "sk-def-picard-pic",
+    "lem-pc-degree-base-change",
+    "lem-pc-recd-pullback",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-rank-zero-perfect-determinant-section",
+    "lem-trf-algebraic-space-invertible-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 0FJX, 0FJY; spaces-perfect.tex Tag 0CTM; divisors.tex Tag 056Q (lemma-relative-Cartier)."
+   }
+  },
+  {
+   "text": "For a family isomorphism $u:C\\simeq D$, the map $b=(u^{-1})^*:P_C\\to P_D$ sends a representing line $U$ to $(u^{-1})^*U$; pulling it back along $u$ recovers $U$. Since $u$ is an isomorphism, its inverse-image and direct-image functors are inverse exact equivalences on module sheaves. Applying them to an injective resolution gives the canonical identification of the two derived direct images, compatible with identity and composition. The determinant functor and section transport this identification to $b^*(\\mathcal T_D,s_D)\\simeq(\\mathcal T_C,s_C)$. The same tensor identities give compatibility for the action and for $\\beta_p$ with $p$ transported to $u(p)$. For two base changes, two family isomorphisms, or their combination, the comparisons on lines are the functorial ones for pulled-back complexes and rank-zero twists; their identity and composition laws follow from the corresponding laws of the canonical-section lemma and perfect base change. Fully faithful line descent checks the same equations globally. No point or degree-$g-1$ class is selected globally in this construction.",
+   "uses": [
+    "lem-sfb-rank-zero-perfect-determinant-section",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-trf-algebraic-space-invertible-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 0FJX, 0FJY; spaces-perfect.tex Tag 0CTM; agent assembly for family isomorphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sc-proper-flat-global-sections",
+  "lem-sfb-smooth-space-cover-etale-sections",
+  "pqf-lem-locnoeth-lft",
+  "lem-trf-smooth-curve-section-cartier",
+  "lem-pc-degree-base-change",
+  "lem-sfb-picard-space-curves-smooth",
+  "sk-prop-picard-pic-split",
+  "lem-sfb-proper-flat-sheaf-euler-local-constancy",
+  "def-a1-space-open-subspace",
+  "lem-trf-curve-degree-tensor-additive",
+  "sk-def-picard-pic",
+  "lem-sfb-proper-flat-space-derived-base-change",
+  "lem-sfb-proper-space-curve-qcoh-bound",
+  "lem-sc-riemann-roch",
+  "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
+  "lem-trf-two-term-perfect-tor-window",
+  "lem-sfb-rank-zero-perfect-determinant-section",
+  "lem-sbc-ringed-site-perfect-projection-formula",
+  "lem-trf-algebraic-space-invertible-descent",
+  "lem-sc-smooth-regular",
+  "thm-sc-jacobian-representability",
+  "lem-sfb-symmetric-abel-image-geometry",
+  "lem-pc-nonzero-section-integral-cartier",
+  "lem-sfb-small-degree-divisor-sections",
+  "thm-sc-serre-duality-curve",
+  "lem-sfb-split-thickening-picard-cocycle",
+  "lem-sfb-line-section-first-order-obstruction",
+  "lem-pc-local-invertible-minor-block",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-per-regular-prime-divisor-local-equations",
+  "lem-pc-recd-fibre-cartier-local",
+  "def-pc-divisor-line-bundle",
+  "lem-pc-recd-pullback",
+  "lem-trf-projective-bundle-proper",
+  "lem-sfb-derived-etale-zariski-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "III Sections 5, 6 and 8, with the Stacks determinant construction (0FJX, 0FJY), perfect base change (0CTM), and fibre-Cartier criterion (062Y). The source supplies the field geometry; the relative determinant and multiplicity-one assembly are written out here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The determinant of cohomology of degree g minus one line bundles on a smooth proper curve defines a relative theta divisor compatible with arbitrary base change",
+   "results": "Actual search: 8 hits; WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', CommRing.relPic, WeierstrassCurve.Affine.Point.toClass_some, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul, WeierstrassCurve.Affine.Point.toClass_apply, WeierstrassCurve.Affine.Point.toClass, Algebra.SubmersivePresentation.aevalDifferentialEquiv, FunctionField.classNumber; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Weierstrass coordinates, ring Picard groups, linear duals, convex ample sets or ordinary scheme isomorphisms; none states this relative Picard or abelian-divisor theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The determinant line of the universal degree g minus one invertible sheaf descends to the Picard torsor of a relative smooth projective curve and cuts out its theta divisor",
+   "results": "Actual search: 8 hits; Submodule.unitsQuotEquivRelPic_apply_coe, Submodule.unitsQuotEquivRelPic_symm_apply, Submodule.unitsQuotEquivRelPic, LinearEquiv.coe_det, LinearEquiv.det_symm, CommRing.relPic, CommRing.Pic.AsModule, LinearEquiv.det; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Weierstrass coordinates, ring Picard groups, linear duals, convex ample sets or ordinary scheme isomorphisms; none states this relative Picard or abelian-divisor theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"det\", \"Picard\"",
+   "results": "Actual search: 0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Weierstrass coordinates, ring Picard groups, linear duals, convex ample sets or ordinary scheme isomorphisms; none states this relative Picard or abelian-divisor theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "determinant.*cohomology|theta.?divisor|polarization",
+   "results": "Actual search: 25 hits; Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Weierstrass coordinates, ring Picard groups, linear duals, convex ample sets or ordinary scheme isomorphisms; none states this relative Picard or abelian-divisor theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "theta.?divisor|Picard.?torsor|determinant.?of.?cohomology",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent-complex connecting maps, ordinary matrix derivatives, and ring Picard groups do not state deformation of sections of curve line bundles or its Serre pairing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"divisor\"",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent-complex connecting maps, ordinary matrix derivatives, and ring Picard groups do not state deformation of sections of curve line bundles or its Serre pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth projective family of curves the degree g minus one Picard space is a torsor under the Jacobian and carries the theta Cartier divisor defined by determinant of cohomology",
+   "results": "Actual search: 8 hits; WeierstrassCurve.Jacobian.PointClass, WeierstrassCurve.Projective.PointClass, WeierstrassCurve.Jacobian.Point.instAddCommGroup, WeierstrassCurve.Jacobian.Point.point, WeierstrassCurve.Affine.Point.toClass_some, WeierstrassCurve.Affine.Point.toClass_apply, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', WeierstrassCurve.Affine.Point.toClass",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent-complex connecting maps, ordinary matrix derivatives, and ring Picard groups do not state deformation of sections of curve line bundles or its Serre pairing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The component Picard g minus one of a family of smooth proper curves is a torsor under Picard zero with a canonical relative theta divisor",
+   "results": "Actual search: 8 hits; CommRing.relPic, AddTorsor.mk, Submodule.unitsQuotEquivRelPic_apply_coe, Submodule.unitsQuotEquivRelPic, Submodule.unitsQuotEquivRelPic_symm_apply, Submodule.mulExact_unitsToPic_mapAlgebra, CommRing.Pic.ext_iff, CommRing.relPic_eq_top",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent-complex connecting maps, ordinary matrix derivatives, and ring Picard groups do not state deformation of sections of curve line bundles or its Serre pairing"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-jacobian-theta-polarization",
+  "date": "2026-10-23",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative theta autoduality of smooth curve Picard spaces. Supporting input: The degree-g-minus-one Picard torsor and its determinant theta divisor.",
+   "via": [
+    "lem-sfb-relative-jacobian-theta-polarization",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-degree-gminusone-theta",
+  "worker": "stage1",
+  "summary": "Constructed the torsor as a degree-open Picard subspace, descended rank-zero determinant pairs, proved geometric multiplicity one using the section-lifting obstruction and Serre duality, and deduced relative Cartierness/flatness and coherent arbitrary base change. Two general supporting lemmas are new, both statement-only; all existing geometry is reused. The statement is unchanged.",
+  "blueprint": "The ancestry tool returns null: retained the inherited null ancestor and via chain. The explicit current latest blueprint anchor is det-thm-sf-ctf-stability-direct-images, proof paragraph (3), whose alteration/moduli prerequisite is refined by the relative Jacobian polarization route. The construction here supplies the degree-g-minus-one torsor and determinant divisor input to that route; no unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Properness of the projective-bundle stable family, needed for universal pushforward, Picard representability and perfect base change."
+   },
+   {
+    "node": "lem-sc-proper-flat-global-sections",
+    "why": "Universal structure-sheaf pushforward supplies the cohomological-flatness hypothesis for Picard representability."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Etale scheme parameters remain locally Noetherian over the given base."
+   },
+   {
+    "node": "lem-trf-smooth-curve-section-cartier",
+    "why": "The local curve section is a Cartier divisor and so defines the reference line."
+   },
+   {
+    "node": "lem-pc-degree-base-change",
+    "why": "Geometric degree is field-invariant and the reference point divisor has degree one."
+   },
+   {
+    "node": "sk-prop-picard-pic-split",
+    "why": "Rigidification gives actual line representatives and their uniqueness modulo a base line."
+   },
+   {
+    "node": "lem-trf-curve-degree-tensor-additive",
+    "why": "Tensor degree additivity is needed for the torsor action and inverse."
+   },
+   {
+    "node": "lem-sc-riemann-roch",
+    "why": "The geometric Euler characteristic of a degree-g-minus-one line is zero."
+   },
+   {
+    "node": "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
+    "why": "Affine perfect-complex residue criterion supplies the [0,1] Tor window."
+   },
+   {
+    "node": "lem-trf-two-term-perfect-tor-window",
+    "why": "The shifted [0,1] perfect object has two-term vector-bundle models."
+   },
+   {
+    "node": "lem-sbc-ringed-site-perfect-projection-formula",
+    "why": "Only the perfect rank-one projection formula is used to compare base-line twists."
+   },
+   {
+    "node": "lem-trf-algebraic-space-invertible-descent",
+    "why": "Etale descent of line modules and their maps glues the canonical pair."
+   },
+   {
+    "node": "lem-sc-smooth-regular",
+    "why": "Regular local rings of the smooth curve show its connected fibre is integral."
+   },
+   {
+    "node": "thm-sc-jacobian-representability",
+    "why": "The geometric degree-zero Picard functor is represented by an abelian variety."
+   },
+   {
+    "node": "lem-pc-nonzero-section-integral-cartier",
+    "why": "Nonzero line sections cut effective divisors on an integral scheme."
+   },
+   {
+    "node": "thm-sc-serre-duality-curve",
+    "why": "Perfect Serre pairings detect a nonzero differential product."
+   },
+   {
+    "node": "lem-pc-local-invertible-minor-block",
+    "why": "A unit minor supplies the block used in the elementary first-order determinant calculation."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Smoothness gives regular local rings on the geometric Jacobian."
+   },
+   {
+    "node": "lem-trf-regular-local-ufd-boundary-factorization",
+    "why": "The r=0 case supplies unique factorization in a regular local ring."
+   },
+   {
+    "node": "lem-per-regular-prime-divisor-local-equations",
+    "why": "Prime Cartier equations and the generic DVR identify the multiplicity at all stalks."
+   },
+   {
+    "node": "lem-pc-recd-fibre-cartier-local",
+    "why": "The general fibre-Cartier criterion promotes the computed fibre equations to relative flat Cartier equations."
+   },
+   {
+    "node": "lem-pc-recd-pullback",
+    "why": "The reference Cartier-section line is preserved by arbitrary base change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-proper",
+  "lem-sc-proper-flat-global-sections",
+  "pqf-lem-locnoeth-lft",
+  "lem-trf-smooth-curve-section-cartier",
+  "lem-pc-degree-base-change",
+  "sk-prop-picard-pic-split",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-sc-riemann-roch",
+  "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
+  "lem-trf-two-term-perfect-tor-window",
+  "lem-sbc-ringed-site-perfect-projection-formula",
+  "lem-trf-algebraic-space-invertible-descent",
+  "lem-sc-smooth-regular",
+  "thm-sc-jacobian-representability",
+  "lem-pc-nonzero-section-integral-cartier",
+  "thm-sc-serre-duality-curve",
+  "lem-pc-local-invertible-minor-block",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-per-regular-prime-divisor-local-equations",
+  "lem-pc-recd-fibre-cartier-local",
+  "lem-pc-recd-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-18fb3781f",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-18fb3781f (reviewer sub-agent of L); spot-checked: Read in full: the item (13 steps), both new statement-only nodes, the statements of all 35 proof_deps and 12 stmt_deps, Milne AV III §5 (Thm 5.1, Lemma 5.2, pp.101-102) and §8 (Thm 8.1, pp.110-111), and Stacks perfect.tex 0FJX/0FJY. Every other cited tag resolves to its stated label. No SGA. First split (no repair note); the statement is unchanged and was not weakened. The mathematics is correct. Steps 2-3 give Pic^{g-1} as an open subspace via rigidification and Euler local constancy, and the torsor. Step 4 gets a two-term model of rank zero from perfect base change, curve vanishing, RR, the residue-field Tor criterion and the Tor window. Steps 5-6 build the determinant pair and descend it, with twist and scalar invariance. Step 7 shows the support of Z(δ) is the locus h^0≠0, which equals W_{g-1}. Steps 8-10 prove multiplicity one: a degree-(g-1) divisor with h^0=1, Serre duality st≠0, and the section-lifting obstruction give det d ∉ m² at one point; the UFD and generic-DVR argument then gives n=1 at every stalk. Step 11 uses fibre-Cartier (062Y) for relative Cartier and flat. Steps 12-13 cover base change and family isomorphisms. New nodes: rank-zero-perfect-determinant-section is Stacks 0FJX δ + 0FJY reindexed to [0,1] (the sign can be consistently absorbed), plus twist, scalar and field-fibre clauses. I tested it on the zero complex, the identity [O→O], [O→O] via 0, Z via n mod p, scalars and twists. It is not a duplicate: lem-trf-two-term-perfect-determinant has no δ. line-section-first-order-obstruction is the H^1 section boundary with ⟨∂_v s,t⟩=⟨v,st⟩ and the free-model formula; checked by Čech computation. It is not a duplicate of split-thickening-cocycle, square-zero-picard-obstruction or pic-tangent-space. Neither new node restates the item. No cycle. Off-unit tools are all declared and generic. Batch-5: every listed citation (lem-trf curve-section-cartier, degree-additivity, tor-window, invertible-descent, regular-local-UFD; Picard, RR, coherent Serre duality, Euler constancy, 0CTM base change, Abel image, def-a1 open subspace, etc.) is general algebraic geometry or commutative algebra that neither assumption gives and that is not a step of their proofs, so all are accepted. Artin-Gabber flag: lem-per-regular-prime-divisor-local-equations is pure commutative algebra (Stacks 0AGA/0AG9). Its proof uses no forbidden input. It is reviewed and already cited by lem-sfb-symmetric-abel-image-geometry. It is used at Step 10 for the generic DVR, so it is accepted. FIX (C1/B3 citation gaps, written to fixes/dag/nodes/sec-six-functors-basics/): Step 1 now cites lem-trf-projective-bundle-proper for properness, with a tool_uses entry. Step 4 now cites lem-sfb-derived-etale-zariski-equivalence, because the statement's Zariski Rf_{V,*} is identified with the étale K_f of the base-change lemma, and Step 4 now notes the argument applies to any representative on any chart. Steps 6 and 9 now cite lem-sfb-proper-flat-space-derived-base-change for the chart-overlap and dual-number pullbacks. proof_deps is updated. The determinant node adds def-pc-scheme-derived-tensor-structure and the obstruction node adds thm-sc-serre-duality-curve for the pairing.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeDegreeGMinusOneTheta",
+  "declaration": "AlgebraicGeometry.relative_degree_gminusone_theta",
+  "declarations": [
+   "AlgebraicGeometry.RelativeThetaCurve",
+   "AlgebraicGeometry.RelativeThetaCurve.base",
+   "AlgebraicGeometry.RelativeThetaCurve.map",
+   "AlgebraicGeometry.RelativeThetaCurve.proper",
+   "AlgebraicGeometry.RelativeThetaCurve.finitePresentation",
+   "AlgebraicGeometry.RelativeThetaCurve.degree",
+   "AlgebraicGeometry.RelativeThetaRepresentation",
+   "AlgebraicGeometry.RelativeThetaInput",
+   "AlgebraicGeometry.RelativeThetaRepresentation.class",
+   "AlgebraicGeometry.RelativeThetaRepresentation.Test",
+   "AlgebraicGeometry.RelativeThetaRepresentation.testClass",
+   "AlgebraicGeometry.RelativeThetaModel",
+   "AlgebraicGeometry.RelativeThetaModel.complex",
+   "AlgebraicGeometry.RelativeThetaModel.line",
+   "AlgebraicGeometry.RelativeThetaModel.IsDeterminantPair",
+   "AlgebraicGeometry.RelativeThetaModel.Computes",
+   "AlgebraicGeometry.RelativeThetaPair",
+   "AlgebraicGeometry.RelativeThetaRepresentation.fibreTest",
+   "AlgebraicGeometry.RelativeThetaPair.GeometricAbelImage",
+   "AlgebraicGeometry.relativeThetaClassEquiv",
+   "AlgebraicGeometry.relativeThetaTensorClass",
+   "AlgebraicGeometry.RelativeThetaTorsor",
+   "AlgebraicGeometry.RelativeThetaRepresentation.pointTest",
+   "AlgebraicGeometry.RelativeThetaDatum",
+   "AlgebraicGeometry.RelativeThetaArrow",
+   "AlgebraicGeometry.RelativeThetaComparison",
+   "AlgebraicGeometry.RelativeThetaSystemData",
+   "AlgebraicGeometry.RelativeThetaSystemData.identity_points",
+   "AlgebraicGeometry.RelativeThetaSystemData.identity_lines",
+   "AlgebraicGeometry.RelativeThetaSystemData.composition_points",
+   "AlgebraicGeometry.RelativeThetaSystemData.composition_lines",
+   "AlgebraicGeometry.RelativeThetaSystemData.Natural",
+   "AlgebraicGeometry.RelativeThetaSystem",
+   "AlgebraicGeometry.relative_degree_gminusone_theta"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDegreeGMinusOneTheta.lean",
+  "statement": "theorem relative_degree_gminusone_theta : Nonempty (RelativeThetaSystem.{u, w})",
+  "branch": "sheaf-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary structures package precisely this node, with the existing degree subfunctor, small algebraic-space lift, determinant model, scheme restriction and injective-resolution derived image. No data is selected from the theorem. All schemes and all locally Noetherian cartesian family changes are quantified simultaneously; chartwise relative effective Cartier ideals are the actual zero loci of the retained sections."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3188905b0",
+  "group": "NV",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of c2da9e274fd2. The Lean module is byte-identical to the returned head. The only node change replaces stmt_dep lem-weil-pbc-module-pullback-structure-sheaf by def-sfb-tensor-pullback-structure-sheaf-map, the existing:true Q73 owner of tensorPullbackObjUnitToUnit; the record is identical to side-live and the def is used only in restriction_section l.207. All 18 stmt_deps resolve; thm-pc-hilb-curves is cited in the node text and was in the base node. Independent reading: StablePointedModuli n=0 + locally Noetherian + smooth (stability gives g>=2); J and P are representations of picardDegreeSubfunctor at 0 and g-1; torsor action pinned to the picardFunctorGrp law, with simply_transitive; etale locally Noetherian cover with sections; beta pinned to O((g-1)p); Theta pair on the small etale site, test pullbacks normalized (composition law forces the descended line), chartIso to schemeRestriction; relative effective Cartier and flat on every chart; divisorLine gives O(Theta); Computes is a derived-category iso of schemeDerivedDirectImage; the line is det E1 tensor (det E0)^vee with det d pinned on top wedges; zeroLocus = abel.left.ker over every algebraically closed K with hilbertPresheaf degree g-1; arbitrary cartesian arrows with pinned comparisons, identity, composition and naturality; no line on J. Edge cases (empty base, g=2, rank 0, nonflat base change) and universes {u,w} checked. No hollow defs, single sorry, 13-step docstring, lean.statement verbatim. No compile: no file changed."
+ }
+}

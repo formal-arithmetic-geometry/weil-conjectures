@@ -1,0 +1,313 @@
+{
+ "id": "lem-pur-closed-transported-hom-counit-formula",
+ "kind": "statement",
+ "title": "Expanded Hom bijections and counit for finite closed site transport",
+ "statement": "Fix the finite coefficient datum of [def-pur-conventions], with $A=A_{E,n}$. Let $i:Z\\hookrightarrow X$ be a closed immersion of separated finite-type $k$-schemes, with quasi-compact complementary open immersion $j:U\\hookrightarrow X$ [def-weil-closed-immersion, def-weil-open-immersion, def-weil-finite-type-morphism, def-weil-proper-morphism]. Use ordinary constant-$A$ module derived categories on the small etale and pro-etale sites [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules]. Put $S_T=\\nu_T^*$ and $U_T=R\\nu_{T,*}$ for the comparison adjunction, and denote its counit by $e_T:S_TU_T\\to1$ [def-weil-pbc-site-comparison-morphism, def-sf-comparison-derived-pullback]. Let $F=i_{\\mathrm{et},*}$ be exact termwise derived direct image, identify $Ri_!^c=F$ for $c=(\\operatorname{id}_Z,i)$ by [lem-pur-closed-unbounded-compact-support-normalization], and write $G=i_c^\\times$ for its ordinary etale right adjoint with counit $\\epsilon^G:FG\\to1$ [def-weil-exceptional-inverse-image]. Pro-etale direct image on module sheaves is exact, and its total unbounded right derived functor is canonically its termwise descent $P=i_{\\mathrm{proet},*}$. For $H\\in D^+(Z_{\\mathrm{et}},A)$, the canonical direct-image comparison of [sk-thm-pe-direct-image-comparison] is a natural isomorphism\n$$\\lambda_H:S_XFH\\xrightarrow{\\sim}PS_ZH.$$\nUnder the identity-extension identifications, the compact-support comparison of [lem-sf-class-compact-support-comparison] at the identity etale-origin witness is exactly $\\lambda_H^{-1}$.\n\nLet $L\\in D^+(X_{\\mathrm{proet}},A)$ and assume $E_L=GU_XL\\in D^+(Z_{\\mathrm{et}},A)$. The finite transported exceptional value is $Ri^!L=S_ZE_L$ [def-weil-exceptional-inverse-image]. For every $H\\in D^+(Z_{\\mathrm{et}},A)$, its transported relative adjunction is the specified composite\n$$\\operatorname{Hom}(PS_ZH,L)\\xrightarrow{f\\mapsto f\\circ\\lambda_H}\\operatorname{Hom}(S_XFH,L)\\cong\\operatorname{Hom}(FH,U_XL)\\cong\\operatorname{Hom}(H,GU_XL)\\xrightarrow{S_Z}\\operatorname{Hom}(S_ZH,S_ZGU_XL),$$\nwhere the middle bijections are the comparison adjunction and $F\\dashv G$, and the last is comparison full faithfulness on $D^+$ [thm-weil-pbc-site-comparison]. The inverse image of $1_{S_ZE_L}$ under this bijection is the transported exceptional counit, and it equals\n$$\\epsilon^{\\mathrm{tr}}_L=e_{X,L}\\circ S_X(\\epsilon^G_{U_XL})\\circ\\lambda_{E_L}^{-1}:PS_ZE_L\\longrightarrow L.$$\nThe formula is natural on the full subcategory of such $L$. It asserts only this relative adjunction, not an adjunction on all unbounded pro-etale inputs.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+  "place": "Displayed finite transported Hom chain, specialized to the first closed localization triangle of sk-prop-a1; expanded inverse image of the identity (returned item Step 5)."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sf-comparison-derived-pullback",
+  "lem-pur-closed-unbounded-compact-support-normalization",
+  "def-weil-exceptional-inverse-image",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-sf-class-compact-support-comparison",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-closed-immersion-proper](a) and [pqf-lem-proper-basic], $i$ is proper and qcqs, so $c=(\\operatorname{id}_Z,i)$ is an allowed compactification. By [lem-kun-dimension-finite-type], choose $d\\geq0$ with $\\dim Z\\leq d$ (take $d=0$ for $Z=\\varnothing$). The etale normalization [lem-pur-closed-unbounded-compact-support-normalization] gives $Ri_!^c=F$ and shows that $FH$ is bounded below whenever $H$ is. By [lem-exc-proetale-closed-exact], the quasi-compact complement in the hypotheses makes pro-etale module direct image exact. Apply [lem-weil-pbc-exact-functor-derived-factorization] and [lem-weil-pbc-exact-functor-derived-functor] to this exact functor: its termwise descent $P$ exists on the whole unbounded category, and the canonical map from termwise direct image to total right derived direct image is invertible on every complex. Thus $Ri_{\\mathrm{proet},*}=P$ with the specified canonical identification.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "pqf-lem-proper-basic",
+    "lem-kun-dimension-finite-type",
+    "lem-pur-closed-unbounded-compact-support-normalization",
+    "lem-exc-proetale-closed-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+    "place": "Finite-coefficient and compactification hypotheses before the displayed Hom chain; Stacks 01W5, 01W1 and 015F (derived.tex, lemma-right-derived-exact-functor)."
+   }
+  },
+  {
+   "text": "Apply [sk-thm-pe-direct-image-comparison] to $i$ and $H\\in D^+$; Step 1 verifies qcqs. Under the exact-derived identifications this gives the natural isomorphism $\\lambda_H:S_XFH\\to PS_ZH$. It is the named canonical direct-image mate of [lem-weil-pbc-comparison-direct-image-canonical-mate]. Apply [lem-coef-proper-identity-open-site-comparison] with $f=i$ and its etale input $H$. Its equation $S_X(e_H)C_{c,H}q_{S_ZH}^{-1}=b_{i,H}^{-1}$ identifies the compact-support comparison with $\\lambda_H^{-1}$ after removing identity extension by zero. Its final assertion verifies that the identity-open comparison contributes the identity, so no extra automorphism is inserted.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-coef-proper-identity-open-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+    "place": "Compact-support factor of the Hom chain; identity-open normalization of the preceding compact-support comparison."
+   }
+  },
+  {
+   "text": "For $L$ as in the statement put $E=GU_XL$. By hypothesis $E\\in D^+$, and [def-sf-comparison-derived-pullback] gives $S_ZE,S_ZH\\in D^+$. The formula [def-weil-exceptional-inverse-image] identifies the exceptional value with $S_ZE$. Apply [lem-coef-relative-hom-change-of-presentation] with $f=i$, etale input $H$, pro-etale target $M=L$, and the exact-derived presentations $F,P$ from Step 1. Use the induced adjunction $F\\dashv G$; after this identification its adjoint-conjugation map is the identity. Its dimension hypothesis is Step 1, and its two lower-bound hypotheses are $FH\\in D^+$ and $GU_XL=E\\in D^+$. Step 2 makes its $B_H=\\lambda_H$. Its equality therefore gives precisely the specified four-factor Hom map in the item. The first map is bijective since $\\lambda_H$ is invertible, the middle maps are the specified adjunction bijections, and the last is bijective by [thm-weil-pbc-site-comparison] applied to the two bounded-below etale objects $H,E$. In particular this conclusion does not require $L$ to be of etale origin.",
+   "uses": [
+    "def-sf-comparison-derived-pullback",
+    "def-weil-exceptional-inverse-image",
+    "lem-coef-relative-hom-change-of-presentation",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+    "place": "The four arrows of the displayed finite transported Hom chain, on their bounded-below domains."
+   }
+  },
+  {
+   "text": "Set $H=E$. Reverse the four bijections of Step 3 on $1_{S_ZE}$. The inverse fully faithful Hom map sends it to $1_E$, since functors preserve identities. For $F\\dashv G$, [lem-weil-pbc-adjunct-counit-identity] sends $1_E$ backwards to $\\epsilon^G_{U_XL}:FE\\to U_XL$. Applying the same lemma to $S_X\\dashv U_X$ sends this backwards to $e_{X,L}\\circ S_X(\\epsilon^G_{U_XL}):S_XFE\\to L$. Finally inverse precomposition by $\\lambda_E$ gives\n$$t_L=e_{X,L}\\circ S_X(\\epsilon^G_{U_XL})\\circ\\lambda_E^{-1}:PS_ZE\\to L.$$\nEach reversal is of the specified bijection, so $t_L$ is its unique inverse image of the identity, exactly the relative exceptional counit in the statement.",
+   "uses": [
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+    "place": "Inverse image of the identity in the four-factor display; Stacks categories.tex, Definition 0037 and the following unit/counit formulas."
+   }
+  },
+  {
+   "text": "For a morphism $u:L\\to L'$ between allowed targets, put $v=GU_X(u):E_L\\to E_{L'}$. Naturality of the etale counit gives $\\epsilon^G_{U_XL'}\\circ F(v)=U_X(u)\\circ\\epsilon^G_{U_XL}$. Naturality of $\\lambda^{-1}$ gives $\\lambda_{E_{L'}}^{-1}\\circ PS_Z(v)=S_XF(v)\\circ\\lambda_{E_L}^{-1}$, and naturality of the comparison counit gives $e_{X,L'}\\circ S_XU_X(u)=u\\circ e_{X,L}$. Substitution in Step 4 yields $t_{L'}\\circ PS_Z(v)=u\\circ t_L$. These are the required naturality squares. All maps lie in the full subcategory specified by $L,E_L\\in D^+$; the argument asserts no exceptional adjunction outside it.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+    "place": "Naturality of the displayed Hom chain; expand the three naturality squares for its inverse at the identity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-proper",
+  "pqf-lem-proper-basic",
+  "lem-kun-dimension-finite-type",
+  "lem-pur-closed-unbounded-compact-support-normalization",
+  "lem-exc-proetale-closed-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-coef-proper-identity-open-site-comparison",
+  "def-sf-comparison-derived-pullback",
+  "def-weil-exceptional-inverse-image",
+  "lem-coef-relative-hom-change-of-presentation",
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-adjunct-counit-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+  "place": "Four-factor finite transported Hom chain; explicit identity-open specialization and inverse-image-of-identity calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Counit formula for exceptional right adjoint transported through etale to proetale site comparison using direct image comparison and the comparison adjunction counit",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "transportedCounit|closedComparison|exceptional.*counit|etale.*proetale",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert the ordinary constant-module etale/pro-etale closed compact-support normalization or its specified derived counit"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"counit\"",
+   "results": "12 hits: CategoryTheory.Adjunction.CoreHomEquivUnitCounit; CategoryTheory.Adjunction.CoreUnitCounit; CategoryTheory.Adjunction.mkOfUnitCounit; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv; CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.unit; CategoryTheory.Adjunction.CoreUnitCounit.counit",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert the ordinary constant-module etale/pro-etale closed compact-support normalization or its specified derived counit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Expanding the Hom adjunction bijections for an exceptional functor transported from etale to proetale sheaves gives its counit as inverse direct image comparison followed by the etale counit and the comparison counit",
+   "results": "8 hits: CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val; LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction; Condensed.profiniteSolidCounit; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous; CategoryTheory.Equivalence.sheafCongrPrecoherent_counitIso_hom_app_val_app; CategoryTheory.Equivalence.sheafCongr.counitIso_hom_app_val_app; CategoryTheory.constantSheafAdj_counit_w",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert the ordinary constant-module etale/pro-etale closed compact-support normalization or its specified derived counit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite closed exceptional functor on ordinary proetale module complexes has counit equal to comparison counit composed with pullback of the etale adjunction counit composed with inverse pushforward base change",
+   "results": "8 hits: Condensed.profiniteSolidCounit; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction; CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; Condensed.profiniteSolidification; CategoryTheory.MorphismProperty.Over.mapPullbackAdj_counit_app; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert the ordinary constant-module etale/pro-etale closed compact-support normalization or its specified derived counit"
+  },
+  {
+   "tool": "grep",
+   "query": "transportedCounit|closedComparison|exceptional.*counit|etale.*proetale",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: abstract adjunction formulas do not supply the etale/pro-etale exactness and specified compact-support comparisons; elementary counit inversion is used through the existing Mathlib leaf lem-weil-pbc-adjunct-counit-identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"homEquiv_counit\"",
+   "results": "3 hits: CategoryTheory.Adjunction.homEquiv_counit, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_counit, CategoryTheory.Adjunction.mkOfHomEquiv_counit_app",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: abstract adjunction formulas do not supply the etale/pro-etale exactness and specified compact-support comparisons; elementary counit inversion is used through the existing Mathlib leaf lem-weil-pbc-adjunct-counit-identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Counit of a transported exceptional adjunction along etale proetale site comparison",
+   "results": "8 hits: CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.CoreUnitCounit.counit, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f, CategoryTheory.Adjunction.ofCat_counit",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: abstract adjunction formulas do not supply the etale/pro-etale exactness and specified compact-support comparisons; elementary counit inversion is used through the existing Mathlib leaf lem-weil-pbc-adjunct-counit-identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit of a right adjoint transported through etale proetale comparison is inverse direct image comparison followed by the etale counit and comparison counit",
+   "results": "8 hits: CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_counit, LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction, CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.Monad.comparison_obj_a, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val, CategoryTheory.Monad.comparisonForget",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: abstract adjunction formulas do not supply the etale/pro-etale exactness and specified compact-support comparisons; elementary counit inversion is used through the existing Mathlib leaf lem-weil-pbc-adjunct-counit-identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Expanding the natural Hom bijections for a bounded below exceptional functor transported through fully faithful site pullback computes the exceptional counit",
+   "results": "8 hits: CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, CategoryTheory.Equivalence.sheafCongr.counitIso, CategoryTheory.Functor.IsDenseSubsite.isIso_ranCounit_app_of_isDenseSubsite, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val, CategoryTheory.Equivalence.sheafCongr.counitIso_hom_app_val_app, CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: abstract adjunction formulas do not supply the etale/pro-etale exactness and specified compact-support comparisons; elementary counit inversion is used through the existing Mathlib leaf lem-weil-pbc-adjunct-counit-identity"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_symm_apply|map_restrictFullyFaithful_counit_app|functorCategory_inverseImage_isomorphisms_counit",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LiftingProperties/ParametrizedAdjunction.lean, Mathlib/CategoryTheory/LiftingProperties/ParametrizedAdjunction.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: abstract adjunction formulas do not supply the etale/pro-etale exactness and specified compact-support comparisons; elementary counit inversion is used through the existing Mathlib leaf lem-weil-pbc-adjunct-counit-identity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-closed-finite-adjoint-counit-transport",
+  "date": "2026-10-22",
+  "group": "Q130"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-line-orientation-uniqueness",
+   "place": "prop-pur-affine-line-orientation-uniqueness proof Steps 1 and 3, realizing sk-prop-a1 first localization triangle: specified transported closed counit, via the four-factor Hom chain of thm-sf-ambient-adjoint-class (returned item Step 5).",
+   "via": [
+    "lem-pur-closed-finite-adjoint-counit-transport",
+    "lem-pur-retracted-support-localization-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-closed-transported-hom-counit-formula",
+  "worker": "stage1",
+  "summary": "Q126: reused existing exact-derived, identity-open and presentation-change tools; verified all domains, expanded the four Hom inverses and the counit naturality equation. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the first localization triangle in sk-prop-a1 / prop-pur-affine-line-orientation-uniqueness through its closed finite adjoint-counit transport helper, retaining the four-factor Hom-chain route of thm-sf-ambient-adjoint-class.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Properness of a closed immersion supplies the identity-open compactification; general scheme tool."
+   },
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "Qcqs consequences of properness for the direct-image comparison."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite dimension of the compactification required by the presentation-change interface."
+   },
+   {
+    "node": "lem-exc-proetale-closed-exact",
+    "why": "Exactness on ordinary pro-etale module sheaves with quasi-compact complement, used to identify total derived direct image."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "General localization/derived-functor tool: every complex computes an exact functor."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "Canonical bounded-below direct-image comparison, as a tool for site transport."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Specifies the named direct-image comparison used in the identity-open comparison."
+   },
+   {
+    "node": "lem-coef-proper-identity-open-site-comparison",
+    "why": "Generic proper identity-open normalization, avoiding a duplicate of this existing lemma."
+   },
+   {
+    "node": "lem-coef-relative-hom-change-of-presentation",
+    "why": "Generic change of compact-support presentations for the specified relative Hom bijection; no node of this unit gives this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-proper",
+  "pqf-lem-proper-basic",
+  "lem-kun-dimension-finite-type",
+  "lem-exc-proetale-closed-exact",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-coef-proper-identity-open-site-comparison",
+  "lem-coef-relative-hom-change-of-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-4656413ef",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-4656413ef (reviewer sub-agent of L); spot-checked: No new nodes. Statement and stmt_deps are identical to the Q130 unsplit copy; no SGA; no repair note. Source: thm-sf-ambient-adjoint-class.proof.md four-factor chain, specialized to c=(id_Z,i). The direction of λ matches sk-thm-pe-direct-image-comparison. Step 1: i is proper and qcqs; dim Z is finite (d=0 if Z is empty); the closed-unbounded normalization gives FH in D+; pro-etale i_* is exact (needs the quasi-compact complement and the finite ring A); exact-functor-derived-functor gives Ri_proet,*=P on every complex (Stacks 015F (3),(4)). Step 2: proper-identity-open gives S(e)∘C∘q^-1=b^-1, so B_H=λ_H. Step 3: every hypothesis of relative-hom-change-of-presentation holds (separated finite-type morphism, dim Z≤d, FH and GU_XL in D+). The conjugate r is the identity for the adjunction transported along e. This ties the four-factor composite to the official Φ^c, as the parent's Step 3 needs. S_Z full faithfulness is used only on H,E in D+, and L is never assumed classical. Step 4: I recomputed the inverse adjuncts: 1_E ↦ ε^G ↦ e∘S_X(ε^G), then ∘λ_E^-1; this matches the formula. Step 5: I recomputed the naturality chain; it uses naturality of ε^G, λ^-1 and e, all correctly stated. Edge cases: Z empty; i=id gives the comparison counit (no invertibility claimed); L=0; shifts. Duplicates checked: lem-sf-fully-faithful-exceptional-hom-transport handles origin targets only; lem-coef-site-closed-counit-transport, lem-coef-dualizing-closed-site and lem-pur-bounded-site-adjunction-transpose handle classical targets; lem-pur-exact-adjoint-classical-counit-comparison only defines t_N. None of these is this item. The eight general tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedTransportedHomCounitFormula",
+  "declaration": "AlgebraicGeometry.ProEtale.closed_transported_hom_counit_formula",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.closedTransportDirectImage",
+   "AlgebraicGeometry.ProEtale.closedTransportDirectImageIso",
+   "AlgebraicGeometry.ProEtale.closedTransportProetNormalization",
+   "AlgebraicGeometry.ProEtale.closedTransportComparison",
+   "AlgebraicGeometry.ProEtale.closedTransportEtaleNormalization",
+   "AlgebraicGeometry.ProEtale.closedTransportEtaleRight",
+   "AlgebraicGeometry.ProEtale.closedTransportEtaleAdjunction",
+   "AlgebraicGeometry.ProEtale.closedTransportEtaleValue",
+   "AlgebraicGeometry.ProEtale.closedTransportExceptional",
+   "AlgebraicGeometry.ProEtale.closedTransportAllowedTarget",
+   "AlgebraicGeometry.ProEtale.closedTransportHomMap",
+   "AlgebraicGeometry.ProEtale.closedTransportCounit",
+   "AlgebraicGeometry.ProEtale.closed_transported_hom_counit_formula"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedTransportedHomCounitFormula.lean",
+  "statement": "theorem closed_transported_hom_counit_formula (P : PurityFiniteSetting.{u}) {Z U X : Scheme.{u}} [Z.Over (Spec (CommRingCat.of P.field.k))] [X.Over (Spec (CommRingCat.of P.field.k))] [IsSeparated (Z ↘ Spec (CommRingCat.of P.field.k))] [IsSeparated (X ↘ Spec (CommRingCat.of P.field.k))] [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of P.field.k))] [QuasiCompact (Z ↘ Spec (CommRingCat.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of P.field.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of P.field.k))] (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of P.field.k))] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (hij : IsCompl (Set.range i.base) (Set.range j.base)) : (fun [_hfin : Finite P.Coefficient] ↦ (PreservesFiniteLimits (lowerStar (ModuleCat.{u + 1} P.Coefficient) i) ∧ PreservesFiniteColimits (lowerStar (ModuleCat.{u + 1} P.Coefficient) i)) ∧ (∀ K : CochainComplex (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} P.Coefficient)) ℤ, IsIso ((lowerStar (ModuleCat.{u + 1} P.Coefficient) i).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K))) ∧ (∀ H : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)), (compactSupportSiteComparison P.Coefficient (Compactification.ofIsProper i)).hom.app H ≫ (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.map ((closedTransportEtaleNormalization P.Coefficient i).hom.app H.obj) = (closedTransportProetNormalization P.Coefficient i j hij).hom.app ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Z).mapDerivedCategory.obj H.obj) ≫ (closedTransportComparison P.Coefficient i j hij).inv.app H.obj) ∧ (∀ L : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient)), closedTransportAllowedTarget P.Coefficient i L → (closedTransportExceptional P.Coefficient i).obj L = (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Z).mapDerivedCategory.obj ((closedTransportEtaleValue P.Coefficient i).obj L)) ∧ (∀ (H : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (L : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))), DerivedCategory.TStructure.t.plus H → closedTransportAllowedTarget P.Coefficient i L → Function.Bijective (closedTransportHomMap P.Coefficient i j hij H L)) ∧ (∀ (L : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))) (t : (closedTransportDirectImage P.Coefficient i j hij).obj ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Z).mapDerivedCategory.obj ((closedTransportEtaleValue P.Coefficient i).obj L)) ⟶ L), closedTransportAllowedTarget P.Coefficient i L → (closedTransportHomMap P.Coefficient i j hij ((closedTransportEtaleValue P.Coefficient i).obj L) L t = 𝟙 _ ↔ t = closedTransportCounit P.Coefficient i j hij L)) ∧ (∀ (H H' : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))) (v : H' ⟶ H) (f : (closedTransportDirectImage P.Coefficient i j hij).obj ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Z).mapDerivedCategory.obj H) ⟶ L) (u : L ⟶ L'), DerivedCategory.TStructure.t.plus H → DerivedCategory.TStructure.t.plus H' → closedTransportAllowedTarget P.Coefficient i L → closedTransportAllowedTarget P.Coefficient i L' → closedTransportHomMap P.Coefficient i j hij H' L' ((closedTransportDirectImage P.Coefficient i j hij).map ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Z).mapDerivedCategory.map v) ≫ f ≫ u) = (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Z).mapDerivedCategory.map v ≫ closedTransportHomMap P.Coefficient i j hij H L f ≫ (closedTransportExceptional P.Coefficient i).map u) ∧ (∀ (L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))) (u : L ⟶ L'), closedTransportAllowedTarget P.Coefficient i L → closedTransportAllowedTarget P.Coefficient i L' → (closedTransportDirectImage P.Coefficient i j hij).map ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Z).mapDerivedCategory.map ((closedTransportEtaleValue P.Coefficient i).map u)) ≫ closedTransportCounit P.Coefficient i j hij L' = closedTransportCounit P.Coefficient i j hij L ≫ u)) (_hfin := Equiv.ulift.finite_iff.mpr (Padic.finite_coefficientExtensionRing P.coefficients.l P.extension P.level P.level_pos))",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The named canonical maps are constructed from the existing exact direct images, descended underived comparison mate, identity-open compact-support normalizations, comparison adjunction and ordinary etale Brown right adjoint. Finiteness of the actual coefficient quotient is supplied internally by finite_coefficientExtensionRing; no extra finite-instance or etale-origin hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f9285fef7",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Statement verbatim in file, one sorry, real helper bodies, docstrings with source/blueprint and Steps 1-5. Hypotheses match the node (separated finite-type k-schemes, closed i over k, quasi-compact open j with complementary ranges); finiteness supplied internally, nothing extra. Objects: comparisonUpperStar/comparisonLowerStar/derivedComparisonAdjunction; G = rightAdjoint of etale Ri_!^c at ofIsProper i, the same functor as in sfFiniteExceptionalAt; the adjunction is transported along the canonical identity-extension plus exact-derived normalization; lambda = termwise descent of lowerStarComparisonUpperStarBaseChange, the same underived mate as comparisonDirectImageCanonicalMate. Conjuncts checked: exactness; derived = termwise direct image; lambda^-1 = compactSupportSiteComparison after normalizations (types match the dep record); Ri^!L = S_Z E_L; four-factor Hom map bijective for H, E_L in D+; Phi t = 1 iff t = e o S_X(eps^G) o lambda^-1 (recomputed); both naturality squares; all guarded by D+. Source chain thm-sf-ambient-adjoint-class matches (last factor full faithfulness). Edge cases: empty Z, i = id, zero objects, n = 1, universes. Advisory: helpers overlap the landed parent ClosedFiniteTransport.proTermwise/closedComparison/transportedCounit (cannot be cited: the child is a proof dep of the parent); lambda vs comparisonDirectImageCanonicalMate agreement left to the proof (as in parent Q20 PASS); proof-only non-public imports probably unused. No file changed, no compile."
+ }
+}

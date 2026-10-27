@@ -197,26 +197,31 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q92-c492a2c4f (reviewer sub-agent of L); spot-checked: Read both nodes in full and checked all ten steps against Stacks 0FJI–0FJM, 0FJX–0FJY and the cited interfaces. Verified normalization, nonflat pullback, edge cases, duplicates and absence of a dependency cycle. No repairs needed. Detailed checks and accepted tool uses are in review.md; unavailable pivot-history checks are explicitly noted."
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.TraceFormula.TwoTermPerfectDeterminant",
-  "file": "lean/Sheaf/TraceFormula/TwoTermPerfectDeterminant.lean",
-  "declaration": "AlgebraicGeometry.exists_twoTermPerfectDeterminantData",
-  "statement": "theorem exists_twoTermPerfectDeterminantData [∀ (X : Scheme.{u}) (U : X.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] : (∀ (X : Scheme.{u}) (L : schemeDerivedCategory X), isTwoTermPerfect X L ↔ Scheme.IsPerfect X L ∧ ∀ (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (i : ℤ), i < -1 ∨ 0 < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj (L ⊗ (DerivedCategory.singleFunctor _ 0).obj M))) ∧ Nonempty (TwoTermPerfectDeterminantData.{u, w})",
-  "branch": "newtargets-dag",
-  "by": "NK",
-  "date": "2026-10-17",
+  "module": "Sheaf.TraceFormula.CanonicalTwoTermPerfectDeterminant",
+  "declaration": "AlgebraicGeometry.exists_canonicalTwoTermPerfectDeterminantData",
   "declarations": [
-   "AlgebraicGeometry.exists_twoTermPerfectDeterminantData"
+   "AlgebraicGeometry.TwoTermDeterminantModel.negativeMap",
+   "AlgebraicGeometry.TwoTermDeterminantModel.zeroMap",
+   "AlgebraicGeometry.TwoTermDeterminantModel.pullbackNegativeMap",
+   "AlgebraicGeometry.TwoTermDeterminantModel.pullbackZeroMap",
+   "AlgebraicGeometry.TwoTermPerfectDeterminantData.IsCanonical",
+   "AlgebraicGeometry.exists_canonicalTwoTermPerfectDeterminantData"
   ],
-  "note": "The original data definitions are publicly reexported verbatim from TwoTermPerfectDeterminantData. The unchanged theorem is assembled from the proved Tor characterization and normalized recorded coherence, the affine good-diagram construction, and conditional affine descent."
+  "file": "lean/Sheaf/TraceFormula/CanonicalTwoTermPerfectDeterminant.lean",
+  "statement": "theorem exists_canonicalTwoTermPerfectDeterminantData [∀ (X : Scheme.{u}) (U : X.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] : (∀ (X : Scheme.{u}) (L : schemeDerivedCategory X), isTwoTermPerfect X L ↔ Scheme.IsPerfect X L ∧ ∀ (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (i : ℤ), i < -1 ∨ 0 < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj (L ⊗ (DerivedCategory.singleFunctor _ 0).obj M))) ∧ ∃ T : TwoTermPerfectDeterminantData.{u, w}, T.IsCanonical",
+  "branch": "sheaf-dag",
+  "by": "Q116",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "§1(B) repair required by the return of lem-sfb-adjunction-cotangent-determinant-normalization, immutable head d60bba2950e8. The original record supplies arbitrary exterior-model isomorphisms, constrained only on identity complexes. It does not state the canonical derived model comparisons of the node. The new module imports and reuses the original data unchanged, adds IsCanonical using the shared signed exact-cone and pure-wedge predicates (generic algebraic definitions only; no use of adjunction existence), and states the full determinant existence and Tor-window equivalence with this canonicity. All schemes, models, chain quasi-isomorphisms and arbitrary pullbacks are included. The K-flat counit pins the derived representative of pullback. The two-term core functor and original identity/composition, naturality, zero and evaluation fields remain exactly those of the original record. The adjunction consumer is compiled against this repaired interface in the same packet."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-b6e53d456",
-  "group": "NK",
-  "result": "fix",
-  "note": "Mechanical report repair supplied; Lean, node statement, dependencies, source alignment, edge cases, and compilation all checked."
+  "reviewer": "NT-stage2-cc-537fa7c38",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Re-delivery after d60b H3 RETURN. Item now takes (T : TwoTermPerfectDeterminantData) (hT : T.IsCanonical) instead of ∃ T; the rest of the item module is byte-identical to d60b and re-read. New §1(B) module CanonicalTwoTermPerfectDeterminant: IsCanonical.model pins modelIso via IsFlatLCIDeterminantComparison for every chain qiso, using the actual doubleXIso-transported term maps; IsCanonical.pullback pins pullbackIso via pure-wedge IsFlatLCIPullbackDeterminantComparison with e = recorded K-flat counit ≫ Q.map q. Checked consistent and non-vacuous: identity gives det 1, homotopic maps give the same map, [O→O]↔0 gives dual-first evaluation consistent with the acyclic field; only a coherent unit gauge remains, absorbed by θ. Dependency theorem = old Tor equivalence ∧ ∃ canonical T (superset of the old one). Records differ from side-live only in lean (+3 landed def stmt_deps on the item); statements verbatim; declarations present; no name clash; no competing (B) record; docstrings with source, blueprint and 4/9 proof steps; universes u,w free. Advisory: M1 the dependency's G2 stage-3 proof is re-pointed to a sorry'd theorem, so stage 3 must re-open it; M2 the new module imports the FlatLCICanonicalAdjunction theorem module for generic predicates and that node's proof closure reaches the determinant node (stage-3 cycle hazard; extract a data module); M3 the S1 re-split repair note is still released. No compile (no FIX)."
  },
  "reviewed_proof": {
   "date": "2026-10-20",
@@ -228,5 +233,16 @@
   "kind": "interface",
   "note": "independent cc review: ee7502bc vs PASSed fbdc6cf3 (diff -r: only 5 Users rows added to G2-derived-tensor-vanishing-single-definition.md), delivery recompiled against live build, #print axioms of proved decls, all 13 direct importers of Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes compiled against the delivered .lbuild (10 pass, 3 quarantined fail identically on published build)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

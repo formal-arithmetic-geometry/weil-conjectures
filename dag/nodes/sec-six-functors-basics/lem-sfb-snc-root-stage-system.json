@@ -1,0 +1,324 @@
+{
+ "id": "lem-sfb-snc-root-stage-system",
+ "kind": "statement",
+ "title": "Regular finite root-stage system and its affine base change",
+ "statement": "Let $p$ be a prime, $k$ a field of characteristic $p$, $Y$ a regular separated finite-type $k$-scheme, and $V=\\operatorname{Spec}B\\to Y$ an affine etale chart [def-weil-regular-scheme, def-weil-finite-type-morphism, def-weil-etale-morphism]. Let $t_1,\\ldots,t_r\\in B$, $r\\geq0$, cut out a reduced strict normal crossings boundary $V(t_1\\cdots t_r)$ with its pairwise distinct reduced irreducible branches precisely $V(t_b)$ [def-trf-strict-normal-crossings-boundary]. Let $I=\\{n\\in\\mathbf Z_{>0}:(n,p)=1\\}$, ordered by divisibility. Using multivariate polynomial rings [def-weil-pbc-mv-polynomial-ring], put\n$$B_n=B[x_{1,n},\\ldots,x_{r,n}]/(x_{b,n}^n-t_b)_b.$$\nThe transition $B_n\\to B_m$ for $n\\mid m$ sends $x_{b,n}$ to $x_{b,m}^{m/n}$. Fix $J\\subseteq\\{1,\\ldots,r\\}$ and $a\\notin J$, and put $u_J=\\prod_{b\\in J}t_b$, $C_n=B_n[1/u_J]$, $X_n=\\operatorname{Spec}C_n$, $D_n=V(x_{a,n})\\subset X_n$, and $W_n=X_n[1/t_a]$. Localization here is the universal ring in which the indicated element is invertible; affine schemes are as in [def-weil-affine-spectrum]. Then the following hold.\n\nFor $n\\mid m$ and $e=m/n$, the natural presentation is\n$$B_m\\simeq B_n[y_1,\\ldots,y_r]/(y_b^e-x_{b,n})_b,$$\nand $B_m$ is free over $B_n$ with basis $\\prod_b y_b^{d_b}$, $0\\leq d_b<e$. The same basis gives freeness of $C_m$ over $C_n$; $B_n$ is free over $B$ with exponents $0\\leq d_b<n$. Each $X_n$ and $D_n$ is regular Noetherian affine of finite type over $k$. Multiplication by $t_a$ and by $x_{a,n}$ on $C_n$ is injective. Thus $D_n$ is an effective Cartier divisor [def-nagata-effective-cartier-ideal], with complement $W_n=X_n[1/x_{a,n}]$; its defining equation pulls back to $x_{a,m}^{m/n}$.\n\nWrite $X=\\operatorname{Spec}(\\varinjlim_n C_n)$, the affine inverse limit, and $W=X[1/t_a]$ [def-weil-pbc-category-colimit]. For every affine pro-etale $U=\\operatorname{Spec}R\\to V$ [def-weil-pbc-proetale-site], the projection $X'=X\\times_VU\\to X$ is affine pro-etale [def-pc-fibre-product]. If\n$$T_R=\\operatorname{Spec}\\left(\\varinjlim_{n\\in I}R[z_{1,n},\\ldots,z_{r,n}]/(z_{b,n}^n-t_b)_b\\right),$$\nwhere $t_b$ denotes its image in $R$ and transitions are $z_{b,n}\\mapsto z_{b,m}^{m/n}$, there is a canonical isomorphism of pairs over $U$\n$$(X',W\\times_X X')\\simeq\\bigl(T_R[1/u_J],T_R[1/(u_Jt_a)]\\bigr).$$\nIt carries the principal open inclusion to the displayed principal open inclusion and the section $t_a$ to $t_a$. The statements allow the zero ring and empty coordinate divisors; for $r=0$ the finite-algebra assertions hold with empty monomial basis index (basis $1$), while no pair $(J,a)$ is allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IX Proposition 2.1 proof, printed p.133, simultaneous parameter-root algebra; Stacks Tag 0BIA, etale.tex, lemma-strict-normal-crossings. Agent extraction of returned parent proof step 1 and the root-colimit/localization base-change identification in step 5; not quoted verbatim as one literature theorem."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-etale-morphism",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-affine-spectrum",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-proetale-site",
+  "def-pc-fibre-product",
+  "def-sfb-snc-residual-chart-data",
+  "def-sfb-strict-local-kummer-tame-module"
+ ],
+ "proof": [
+  {
+   "text": "Regularity of the etale chart follows stalkwise from isRegularLocalRing_stalk_of_etale and local Noetherian ascent. A morphism from the affine chart to the quasi-separated Y is quasi-compact. Local finite type and quasi-compactness compose with the given structure map.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-weil-etale-morphism",
+    "def-weil-affine-spectrum",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1 proof, printed p.133, simultaneous parameter-root algebra; Stacks Tag 0BIA, etale.tex, lemma-strict-normal-crossings. Agent extraction of returned parent proof step 1 and the root-colimit/localization base-change identification in step 5; not quoted verbatim as one literature theorem."
+   }
+  },
+  {
+   "text": "Use the already proved root monomial basis from lem-sfb-henselian-parameter-root-regularity (the generic root_basis helper, exposed for reuse without any local-base hypothesis). Its normal-form argument applies to the definitionally identical finite root quotient. For n dividing m construct inverse evaluation maps for the iterated root presentation using that module's rootEval API; generator extensionality proves both inverses. Transport the existing basis through this equivalence.",
+   "uses": [
+    "lem-sfb-henselian-parameter-root-regularity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1 proof, printed p.133, simultaneous parameter-root algebra; Stacks Tag 0BIA, etale.tex, lemma-strict-normal-crossings. Agent extraction of returned parent proof step 1 and the root-colimit/localization base-change identification in step 5; not quoted verbatim as one literature theorem."
+   }
+  },
+  {
+   "text": "Construct transitions using the existing rootEval quotient evaluator, sending each old root to the indicated power. Its coefficient and coordinate formulas, the power relation and divisibility arithmetic prove their identity and composition laws. Localize the transitions and inclusions with Away.lift. Transport the relative basis using Basis.localizationLocalization and the compatible coefficient square; this does not assume injectivity of localization.",
+   "uses": [
+    "lem-sfb-henselian-parameter-root-regularity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1 proof, printed p.133, simultaneous parameter-root algebra; Stacks Tag 0BIA, etale.tex, lemma-strict-normal-crossings. Agent extraction of returned parent proof step 1 and the root-colimit/localization base-change identification in step 5; not quoted verbatim as one literature theorem."
+   }
+  },
+  {
+   "text": "The prime-to-p order is a unit over k and hence over B. Apply the finite-root-face regularity theorem to the empty and singleton faces. The empty face gives the full root ring by quotientBot; localization preserves regularity. For a singleton face, quotient localization identifies the localized coordinate quotient as a localization of the regular face. Use the top affine chart of the closed subscheme and Gamma-Spec to transfer regularity. Finite polynomial presentations, principal localization and the closed immersion provide finite type and quasi-compactness.",
+   "uses": [
+    "lem-sfb-snc-finite-root-face-regular",
+    "lem-weil-pbc-localization-of-regular-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1 proof, printed p.133, simultaneous parameter-root algebra; Stacks Tag 0BIA, etale.tex, lemma-strict-normal-crossings. Agent extraction of returned parent proof step 1 and the root-colimit/localization base-change identification in step 5; not quoted verbatim as one literature theorem."
+   }
+  },
+  {
+   "text": "Apply the proved SNC branch-equation nonzerodivisor theorem. The finite monomial basis makes the root algebra flat over B, and localization is flat, so multiplication by t_a stays injective. Since x_a^n=t_a, multiplication by x_a is injective. The canonical Gamma-Spec isomorphism carries this regular generator to the global-section generator of the coordinate ideal; IsInvertible.of_isAffine proves the Cartier assertion.",
+   "uses": [
+    "def-trf-strict-normal-crossings-boundary",
+    "lem-sfb-snc-branch-equation-nonzerodivisor",
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1 proof, printed p.133, simultaneous parameter-root algebra; Stacks Tag 0BIA, etale.tex, lemma-strict-normal-crossings. Agent extraction of returned parent proof step 1 and the root-colimit/localization base-change identification in step 5; not quoted verbatim as one literature theorem."
+   }
+  },
+  {
+   "text": "The coordinate-ideal support is the zero locus of x_a. Its complement is D(x_a), and the equation x_a^n=t_a with n positive identifies it with D(t_a). The localized transition root formula follows from its coefficient formula and the unlocalized transition formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1 proof, printed p.133, simultaneous parameter-root algebra; Stacks Tag 0BIA, etale.tex, lemma-strict-normal-crossings. Agent extraction of returned parent proof step 1 and the root-colimit/localization base-change identification in step 5; not quoted verbatim as one literature theorem."
+   }
+  },
+  {
+   "text": "For any compatible ring maps from the localized finite stages, restrict to the finite root quotients. Their coefficients agree through the order-one stage. Evaluate the full compatible-root polynomial quotient on the images of all labelled roots; the power and compatibility relations vanish. The denominator is a unit, so extend by Away.lift. Quotient and localization extensionality prove uniqueness. Apply the Gamma-Spec adjunction to the maps into the ring of global sections of any test scheme to obtain the scheme inverse-limit universal property.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-small-colimit-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1 proof, printed p.133, simultaneous parameter-root algebra; Stacks Tag 0BIA, etale.tex, lemma-strict-normal-crossings. Agent extraction of returned parent proof step 1 and the root-colimit/localization base-change identification in step 5; not quoted verbatim as one literature theorem."
+   }
+  },
+  {
+   "text": "Prove the coefficient-change square for the full root algebra is a pushout directly: evaluate every new labelled root at the image of the old labelled root, and use agreement on coefficients for its power relation. Generator extensionality proves uniqueness. Principal localization is a pushout, and pasting gives the localized coefficient-change pushout. Taking spectra gives a pullback square and its canonical comparison isomorphism. Weak etaleness and affineness of the projection follow from scheme base-change instances.",
+   "uses": [
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1 proof, printed p.133, simultaneous parameter-root algebra; Stacks Tag 0BIA, etale.tex, lemma-strict-normal-crossings. Agent extraction of returned parent proof step 1 and the root-colimit/localization base-change identification in step 5; not quoted verbatim as one literature theorem."
+   }
+  },
+  {
+   "text": "The pullback square fixes labelled roots and parameters by Gamma-Spec naturality. Inverting x and then y is the localization away from xy. Construct its open immersion using the canonical localization equivalence; its range is D(y). The pullback of the original principal open has this same range after the comparison isomorphism. The unique isomorphism of open immersions with equal ranges gives the pair comparison and its inclusion identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX Proposition 2.1 proof, printed p.133, simultaneous parameter-root algebra; Stacks Tag 0BIA, etale.tex, lemma-strict-normal-crossings. Agent extraction of returned parent proof step 1 and the root-colimit/localization base-change identification in step 5; not quoted verbatim as one literature theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sfb-henselian-parameter-root-regularity",
+  "lem-sfb-snc-finite-root-face-regular",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "def-trf-strict-normal-crossings-boundary",
+  "lem-sfb-snc-branch-equation-nonzerodivisor",
+  "def-nagata-effective-cartier-ideal",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1 proof, printed p.133. Reuses the proved generic basis and quotient-evaluation API of HenselianParameterRootRegularity; localization pushouts and Gamma-Spec adjunction implement the root-stage system. No SGA result is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite compatible root algebras of a strict normal crossings chart have finite free transition maps, regular coordinate Cartier divisors, and commute with affine base change and localization",
+   "results": "8 hits: Algebra.IsStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmooth.out, StandardEtalePresentation, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.out, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; digest 8a9ef9f9671beff8",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smooth or etale presentations, polynomial roots, or unrelated regularity, not this compatible SNC root-stage system and its Cartier/base-change assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "(root|Kummer).*(Cartier|regular|finiteFree)|(Cartier|regular).*(root|Kummer)",
+   "results": "25 hits: Mathlib/Algebra/Regular/Pi.lean, Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean, Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean, Mathlib/Algebra/Polynomial/Basic.lean, Mathlib/Algebra/Module/Pi.lean, Mathlib/Algebra/Order/Monoid/Unbundled/WithTop.lean, Mathlib/Algebra/Order/Monoid/Unbundled/WithTop.lean, Mathlib/Algebra/Order/Monoid/Unbundled/WithTop.lean; digest 0df659ef2e9590a5",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smooth or etale presentations, polynomial roots, or unrelated regularity, not this compatible SNC root-stage system and its Cartier/base-change assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing, Module.Free",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smooth or etale presentations, polynomial roots, or unrelated regularity, not this compatible SNC root-stage system and its Cartier/base-change assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "(strictNormalCrossings|normal.crossings|rootAlgebra|tameRoot|finiteRoot|Cartier)",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smooth or etale presentations, polynomial roots, or unrelated regularity, not this compatible SNC root-stage system and its Cartier/base-change assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous parameter roots on a regular strict normal crossings pair form regular rings with regular Cartier faces and finite free power map transitions",
+   "results": "8 hits: StandardEtalePair.HasMap, Polynomial.roots_X_pow_char_sub_C_pow, Polynomial.roots_X_pow_char_pow_sub_C_pow, RootPairing.Base, Polynomial.rootsExpandPowEquivRoots, Algebra.mvPolynomial, StandardEtalePresentation.hasMap, Algebra.smoothLocus; digest 91b19fc2b2fdf681",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smooth or etale presentations, polynomial roots, or unrelated regularity, not this compatible SNC root-stage system and its Cartier/base-change assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining compatible prime to characteristic roots of boundary parameters gives finite locally free regular stages and commutes with tensor product and localization",
+   "results": "8 hits: Algebra.Smooth.exists_finiteType, Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg, Algebra.Smooth.exists_subalgebra_fg, Algebra.Smooth.exists_subalgebra_finiteType, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, RingHom.SurjectiveOnStalks.exists_mul_eq_tmul, Algebra.Etale.exists_subalgebra_fg, Algebra.IsSmoothAt.exists_notMem_smooth; digest 4322e2dc88ab9dd0",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern smooth or etale presentations, polynomial roots, or unrelated regularity, not this compatible SNC root-stage system and its Cartier/base-change assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous roots of strict normal crossings parameters give regular finite free rings with regular coordinate divisors and compatible base change",
+   "results": "8 hits: Algebra.IsStandardSmooth, StandardEtalePresentation, Algebra.SubmersivePresentation.isStandardSmooth, StandardEtalePair, Algebra.IsStandardSmoothOfRelativeDimension, RingHom.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardEtale, Polynomial.instEtaleUniversalCoprimeFactorizationRing; digest fc6cd45ca962cda9. ",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth and unramified base-change presentations do not give the regular SNC root system, coordinate Cartier equations and compatible pair identification"
+  },
+  {
+   "tool": "grep",
+   "query": "(strictNormalCrossings|normal.crossings|rootAlgebra|tameRoot|finiteRoot)",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth and unramified base-change presentations do not give the regular SNC root system, coordinate Cartier equations and compatible pair identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing, Module.Free",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth and unramified base-change presentations do not give the regular SNC root system, coordinate Cartier equations and compatible pair identification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous parameter root rings of strict normal crossings divisors are regular and commute with affine base change",
+   "results": "8 hits: Algebra.Unramified.baseChange, RingHom.FormallySmooth.isStableUnderBaseChange, RingHom.Smooth.isStableUnderBaseChange, RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.Smooth.baseChange, RingHom.FormallyUnramified.isStableUnderBaseChange, RingHom.isStandardSmooth_isStableUnderBaseChange; digest 0136a572c27c6a9c. ",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth and unramified base-change presentations do not give the regular SNC root system, coordinate Cartier equations and compatible pair identification"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-root-coordinate-supported-vanishing",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Direct-images proof paragraph (3), one-coordinate root calculation: returned proof step 1 (regular finite root stages, finite free transitions, regular Cartier coordinate faces) and step 5 (affine pro-etale base change of the root-colimit pair).",
+   "via": [
+    "lem-sfb-root-coordinate-supported-vanishing",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-snc-root-stage-system",
+  "worker": "stage1",
+  "summary": "Proved the transition presentations by mutually inverse generator maps, finite bases by iterated monic division, localized bases by a coefficient calculation, regularity using the existing all-coordinate-face theorem, Cartier injectivity by cancellation, and the affine pro-etale base-change pair by compatible tensor/colimit/localization maps. No new nodes or changes to the statement. Reviewer FIX (Q107 maintainer reader): step 1 now derives regularity of V from lem-sbc-etale-regular-divisor-base-change (g=1) on affine charts instead of the sec-trace-formula node lem-trf-etale-coordinate-intersection-geometry.",
+  "blueprint": "Direct-images proof paragraph (3), one-coordinate root calculation: returned proof step 1 (regular finite root stages, finite free transitions, regular Cartier coordinate faces) and step 5 (affine pro-etale base change of the root-colimit pair).",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-etale-regular-divisor-base-change",
+    "why": "Generic ring-level fact (etale over a regular ring is regular, used with g=1) giving regularity of the affine etale chart; no node of the unit gives it, and it replaces a sec-trace-formula lemma that lies in the trace-formula proof chain (batch-5)."
+   },
+   {
+    "node": "lem-kun-etale-lfp",
+    "why": "Generic chart, affine-geometry, regularity or ring-colimit tool used with exactly its stated hypotheses; it supplies no replacement for the unit's constructible-direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-of-regular-ring",
+    "why": "Generic chart, affine-geometry, regularity or ring-colimit tool used with exactly its stated hypotheses; it supplies no replacement for the unit's constructible-direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+    "why": "Generic chart, affine-geometry, regularity or ring-colimit tool used with exactly its stated hypotheses; it supplies no replacement for the unit's constructible-direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-of-regular-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-26d41c233",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-26d41c233 (reviewer sub-agent of L); spot-checked: Read the item in full: 9 steps, statement unchanged, no new nodes. I also read the statements of all 20 cited nodes and 10 stmt_deps, the citer lem-sfb-root-coordinate-supported-vanishing (steps 1 and 3, which use exactly the stated clauses), and ILO IX Prop 2.1 at printed p.133, which displays the root algebra A[x]/(x_i^n-t_i); proof_origin=agent is accurate. Every step is correct. Step 2: the presentation of B_m over B_n with mutually inverse generator maps, and the monomial basis from iterated lem-weil-pbc-monic-quotient-free. Step 3: freeness survives localization by killing denominators, with no nonzerodivisor assumption on u_J. Step 4: lem-sfb-snc-finite-root-face-regular with J empty and J={a} (n is a unit since (n,p)=1), then localization and finite type. Step 5: the SNC boundary equation is an effective Cartier generator, so it is a nonzerodivisor by cancellation, and injectivity passes to t_a, to B_n coefficientwise, to C_n, and to x_a because x_a^n=t_a. Step 7: weakly étale base change. Step 8: the tensor product commutes with the filtered colimit and with localization, as rings. Edge cases checked: r=0, n=1, the zero ring and k imperfect, plus k[s,t] with boundary st. No duplicate and no cycle. Batch-5: (1) lem-trf-etale-coordinate-intersection-geometry is an unsplit sec-trace-formula lemma whose blueprint via-chain runs up to lem-trf-trace-specialization, so it belongs to the trace-formula proof chain. I did not accept it. FIX: step 1 now proves V regular on affine charts with lem-sbc-etale-regular-divisor-base-change (g=1, R/(1)=0 is regular), which is reviewed pass and has no trace-formula or Poincaré-duality node in its closure. proof_deps and tool_uses are updated to match. (2) lem-sfb-snc-finite-root-face-regular reaches def-trf-strict-normal-crossings-boundary, a general definition, and otherwise only the Mathlib leaf lem-trf-polynomial-ring-regular-base. Neither is part of either assumption's proof, so I accept it. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-snc-root-stage-system.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SNCRootStageSystem",
+  "declaration": "AlgebraicGeometry.ProEtale.snc_root_stage_system",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sncStageLocalization",
+   "AlgebraicGeometry.ProEtale.sncLocalizedRoot",
+   "AlgebraicGeometry.ProEtale.sncLimitLocalization",
+   "AlgebraicGeometry.ProEtale.sncStageCoordinateIdeal",
+   "AlgebraicGeometry.ProEtale.snc_root_stage_system"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SNCRootStageSystem.lean",
+  "statement": "theorem snc_root_stage_system (p : ℕ) (hp : p.Prime) (k : Type u) [Field k] [CharP k p] (Y : Scheme.{u}) (g : Y ⟶ Spec (.of k)) (hY : IsRegularScheme Y) [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (B : Type u) [CommRing B] [Algebra k B] (v : Spec (.of B) ⟶ Y) [Etale v] (hv : v ≫ g = Spec.map (CommRingCat.ofHom (algebraMap k B))) (r : ℕ) (t : Fin r → B) (H : (Spec (.of B)).IdealSheafData) (hH : H = Scheme.IdealSheafData.ofIdealTop (Ideal.span {(Scheme.ΓSpecIso (.of B)).inv (∏ b, t b)})) (hsnc : IsStrictNormalCrossingsBoundary H) (hreduced : ∀ b, _root_.IsReduced (B ⧸ Ideal.span ({t b} : Set B))) (hdistinct : Function.Injective (fun b : Fin r ↦ PrimeSpectrum.zeroLocus ({t b} : Set B))) (hbranches : Set.range (fun b : Fin r ↦ PrimeSpectrum.zeroLocus ({t b} : Set B)) = Set.image (Set.image Subtype.val) (irreducibleComponents (H.support : Set (Spec (.of B))))) : ∃ (transition : ∀ (n m : TameRootOrder p), n.val ∣ m.val → sncRootLevel t n.val →ₐ[B] sncRootLevel t m.val) (inclusion : ∀ n : TameRootOrder p, sncRootLevel t n.val →ₐ[B] tameRootAlgebra p t), (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val) (b : Fin r), transition n m h (sncRootCoordinate t n.val b) = sncRootCoordinate t m.val b ^ (m.val / n.val)) ∧ (∀ n, transition n n (dvd_refl n.val) = AlgHom.id B _) ∧ (∀ (n m l : TameRootOrder p) (h : n.val ∣ m.val) (h' : m.val ∣ l.val), (transition m l h').comp (transition n m h) = transition n l (h.trans h')) ∧ (∀ (n : TameRootOrder p) (b : Fin r), inclusion n (sncRootCoordinate t n.val b) = sncFullRootCoordinate p t n b) ∧ (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val), (inclusion m).comp (transition n m h) = inclusion n) ∧ (∀ n : TameRootOrder p, ∃ b : Module.Basis (Fin r → Fin n.val) B (sncRootLevel t n.val), ∀ d, b d = ∏ i, sncRootCoordinate t n.val i ^ (d i).val) ∧ (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val), (∃ e : sncRootLevel (sncRootCoordinate t n.val) (m.val / n.val) ≃+* sncRootLevel t m.val, (∀ c, e (algebraMap _ _ c) = transition n m h c) ∧ ∀ b, e (sncRootCoordinate (sncRootCoordinate t n.val) (m.val / n.val) b) = sncRootCoordinate t m.val b) ∧ ∃ b : @Module.Basis (Fin r → Fin (m.val / n.val)) (sncRootLevel t n.val) (sncRootLevel t m.val) _ _ (@Algebra.toModule _ _ _ _ (transition n m h).toRingHom.toAlgebra), ∀ d, b d = ∏ i, sncRootCoordinate t m.val i ^ (d i).val) ∧ ∀ J : Finset (Fin r), ∃ (localizedTransition : ∀ (n m : TameRootOrder p), n.val ∣ m.val → sncStageLocalization t J n.val →+* sncStageLocalization t J m.val) (localizedInclusion : ∀ n : TameRootOrder p, sncStageLocalization t J n.val →+* sncLimitLocalization p t J), (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val) (c : sncRootLevel t n.val), localizedTransition n m h (algebraMap _ _ c) = algebraMap _ _ (transition n m h c)) ∧ (∀ n, localizedTransition n n (dvd_refl n.val) = RingHom.id _) ∧ (∀ (n m l : TameRootOrder p) (h : n.val ∣ m.val) (h' : m.val ∣ l.val), (localizedTransition m l h').comp (localizedTransition n m h) = localizedTransition n l (h.trans h')) ∧ (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val), ∃ b : @Module.Basis (Fin r → Fin (m.val / n.val)) (sncStageLocalization t J n.val) (sncStageLocalization t J m.val) _ _ (@Algebra.toModule _ _ _ _ (localizedTransition n m h).toAlgebra), ∀ d, b d = ∏ i, sncLocalizedRoot t J m.val i ^ (d i).val) ∧ (∀ (n : TameRootOrder p) (c : sncRootLevel t n.val), localizedInclusion n (algebraMap _ _ c) = algebraMap _ _ (inclusion n c)) ∧ (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val), (localizedInclusion m).comp (localizedTransition n m h) = localizedInclusion n) ∧ (∀ (Q : Type u) [CommRing Q] (f : ∀ n : TameRootOrder p, sncStageLocalization t J n.val →+* Q), (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val), (f m).comp (localizedTransition n m h) = f n) → ∃! fLimit : sncLimitLocalization p t J →+* Q, ∀ n, fLimit.comp (localizedInclusion n) = f n) ∧ (∀ (Z : Scheme.{u}) (f : ∀ n : TameRootOrder p, Z ⟶ Spec (.of (sncStageLocalization t J n.val))), (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val), f m ≫ Spec.map (CommRingCat.ofHom (localizedTransition n m h)) = f n) → ∃! fLimit : Z ⟶ Spec (.of (sncLimitLocalization p t J)), ∀ n, fLimit ≫ Spec.map (CommRingCat.ofHom (localizedInclusion n)) = f n) ∧ (∀ n : TameRootOrder p, IsRegularScheme (Spec (.of (sncStageLocalization t J n.val))) ∧ IsNoetherian (Spec (.of (sncStageLocalization t J n.val))) ∧ LocallyOfFiniteType (Spec.map (CommRingCat.ofHom (algebraMap B (sncStageLocalization t J n.val))) ≫ v ≫ g) ∧ QuasiCompact (Spec.map (CommRingCat.ofHom (algebraMap B (sncStageLocalization t J n.val))) ≫ v ≫ g)) ∧ ∀ (a : Fin r), a ∉ J → (∀ n : TameRootOrder p, IsRegularScheme (sncStageCoordinateIdeal t J n.val a).subscheme ∧ IsNoetherian (sncStageCoordinateIdeal t J n.val a).subscheme ∧ IsAffine (sncStageCoordinateIdeal t J n.val a).subscheme ∧ LocallyOfFiniteType ((sncStageCoordinateIdeal t J n.val a).subschemeι ≫ Spec.map (CommRingCat.ofHom (algebraMap B (sncStageLocalization t J n.val))) ≫ v ≫ g) ∧ QuasiCompact ((sncStageCoordinateIdeal t J n.val a).subschemeι ≫ Spec.map (CommRingCat.ofHom (algebraMap B (sncStageLocalization t J n.val))) ≫ v ≫ g) ∧ Function.Injective (fun c : sncStageLocalization t J n.val ↦ algebraMap B _ (t a) * c) ∧ Function.Injective (fun c : sncStageLocalization t J n.val ↦ sncLocalizedRoot t J n.val a * c) ∧ (sncStageCoordinateIdeal t J n.val a).IsInvertible ∧ ((sncStageCoordinateIdeal t J n.val a).support).compl = PrimeSpectrum.basicOpen (algebraMap B (sncStageLocalization t J n.val) (t a)) ∧ PrimeSpectrum.basicOpen (algebraMap B (sncStageLocalization t J n.val) (t a)) = PrimeSpectrum.basicOpen (sncLocalizedRoot t J n.val a)) ∧ (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val), localizedTransition n m h (sncLocalizedRoot t J n.val a) = sncLocalizedRoot t J m.val a ^ (m.val / n.val)) ∧ ∀ (R : Type u) [CommRing R] [Algebra B R] (u : Spec (.of R) ⟶ Spec (.of B)) (hu : u = Spec.map (CommRingCat.ofHom (algebraMap B R))) (hpro : WeaklyEtale u), IsAffineHom (pullback.fst (Spec.map (CommRingCat.ofHom (algebraMap B (sncLimitLocalization p t J)))) u) ∧ WeaklyEtale (pullback.fst (Spec.map (CommRingCat.ofHom (algebraMap B (sncLimitLocalization p t J)))) u) ∧ ∃ e : pullback (Spec.map (CommRingCat.ofHom (algebraMap B (sncLimitLocalization p t J)))) u ≅ Spec (.of (sncLimitLocalization p (fun b ↦ algebraMap B R (t b)) J)), e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap R (sncLimitLocalization p (fun b ↦ algebraMap B R (t b)) J))) = pullback.snd _ _ ∧ (∀ (n : TameRootOrder p) (b : Fin r), e.hom.appTop ((Scheme.ΓSpecIso (.of (sncLimitLocalization p (fun i ↦ algebraMap B R (t i)) J))).inv (algebraMap (tameRootAlgebra p (fun i ↦ algebraMap B R (t i))) _ (sncFullRootCoordinate p (fun i ↦ algebraMap B R (t i)) n b))) = (pullback.fst (Spec.map (CommRingCat.ofHom (algebraMap B (sncLimitLocalization p t J)))) u).appTop ((Scheme.ΓSpecIso (.of (sncLimitLocalization p t J))).inv (algebraMap (tameRootAlgebra p t) _ (sncFullRootCoordinate p t n b)))) ∧ e.hom.appTop ((Scheme.ΓSpecIso (.of (sncLimitLocalization p (fun b ↦ algebraMap B R (t b)) J))).inv (algebraMap R _ (algebraMap B R (t a)))) = (pullback.fst (Spec.map (CommRingCat.ofHom (algebraMap B (sncLimitLocalization p t J)))) u).appTop ((Scheme.ΓSpecIso (.of (sncLimitLocalization p t J))).inv (algebraMap B _ (t a))) ∧ ∃ (openMap : sncLimitLocalization p (fun b ↦ algebraMap B R (t b)) J →+* Localization.Away (algebraMap R (tameRootAlgebra p (fun b ↦ algebraMap B R (t b))) ((∏ b ∈ J, algebraMap B R (t b)) * algebraMap B R (t a)))), (∀ c : tameRootAlgebra p (fun b ↦ algebraMap B R (t b)), openMap (algebraMap _ _ c) = algebraMap _ _ c) ∧ ∃ ew : pullback (Scheme.Opens.ι (X := Spec (.of (sncLimitLocalization p t J))) (PrimeSpectrum.basicOpen (algebraMap B (sncLimitLocalization p t J) (t a)))) (pullback.fst (Spec.map (CommRingCat.ofHom (algebraMap B (sncLimitLocalization p t J)))) u) ≅ Spec (.of (Localization.Away (algebraMap R (tameRootAlgebra p (fun b ↦ algebraMap B R (t b))) ((∏ b ∈ J, algebraMap B R (t b)) * algebraMap B R (t a))))), ew.hom ≫ Spec.map (CommRingCat.ofHom openMap) = pullback.snd _ _ ≫ e.hom",
+  "branch": "sheaf-dag",
+  "by": "O2",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Reuses the finite root quotient and compatible-root presentation from the two added, already landed definition dependencies. Auxiliary declarations name the partial localizations and coordinate ideal explicitly introduced in this node. Bases and canonical maps are normalized on the stated generators; the full localized algebra is characterized as the colimit and its spectrum as the inverse limit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1486fc01",
+  "group": "O2",
+  "result": "pass",
+  "note": "Statement unchanged; only lean record + two landed def-node stmt_deps (def-sfb-snc-residual-chart-data owns sncRootLevel/sncRootCoordinate/sncFullRootCoordinate existing:true; def-sfb-strict-local-kummer-tame-module owns TameRootOrder/tameRootAlgebra), no cycle. lean.statement verbatim. Hypotheses = node (regular separated lft+qc Y/k, étale affine chart with k-structure, SNC via hH/hsnc + reduced/distinct/branches=irreducible components, TameRootOrder, arbitrary WeaklyEtale R in universe u = Mathlib ProEt), nothing stronger. All conclusion clauses present and true: root-fixed transitions and inclusions into the colimit presentation, monomial bases B_n/B and B_m/B_n, presentation e pinned on coefficients and roots, localized bases, explicit ∃! colimit and scheme inverse-limit properties, X_n/D_n regular Noetherian finite type, t_a/x_a injective, IsInvertible, complement D(t_a)=D(x_a), pullback equation x^{m/n}, affine weakly étale projection, pair isomorphisms e/ew unique via over-U, roots, t_a and inclusions. Edge cases r=0, n=1, zero ring, empty divisor, universes OK. No hollow defs, docstrings carry source/blueprint and all 9 steps, single sorry. No file changed, nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261024T015006-L-2308572",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

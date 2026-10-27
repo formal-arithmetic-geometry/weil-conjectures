@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-ringed-projection-local-ordinary-tensor-square",
+ "kind": "statement",
+ "title": "Ordinary tensor coherence of the localized inverse mate",
+ "statement": "For the schemes, coefficients, g,V,l and ordinary inverse mate gamma defined in [def-weil-pbc-ringed-projection-restriction-data] and [lem-weil-pbc-ringed-projection-local-pullback-normalization], let F,G,H,K denote global pullback, Y restriction, X restriction and local pullback. For any ordinary module sheaves M,N on Y, gamma(M tensor N);H(muF(M,N));muH(FM,FN) equals K(muG(M,N));muK(GM,GN);tensor(gamma(M),gamma(N)), where the four mu are exactly the ordinaryTensor isomorphisms supplied by g and l. No complexes or derived tensor comparisons occur.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04J0 and 07A4, with Modules on Sites Tags 03EK and 03EL; the ordinary pure-tensor substep of the parent tensor-square proof."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-projection-restriction-data",
+  "lem-weil-pbc-ringed-projection-local-pullback-normalization"
+ ],
+ "proof": [
+  {
+   "text": "The inverse-mate unit law and ordinaryDirectImage_sections show that pushforward(gamma(M)) sends the local unit of a section to the restriction of its global unit. This is an identity for each section of each slice object.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK, 03EL and 04J0; sheafified tensor products and localized adjunctions."
+   }
+  },
+  {
+   "text": "Transpose the desired ordinary tensor square under the local module adjunction and precompose with the inverse Y-restriction tensor isomorphism. Tensor sheaf maps are determined by pure sections. The inverse restriction isomorphism restores the same pure tensor on the underlying global object, by pure_sections and its inverse law. Naturality of the local unit moves the Y restriction tensor comparison through it.",
+   "uses": [
+    "lem-pur-independent-ringed-tensorator-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK, 03EL and 04J0; sheafified tensor products and localized adjunctions."
+   }
+  },
+  {
+   "text": "On a pure tensor use the global and local pure_unit formulas. On the global route use the inverse-mate section identity and then restrictionX.pure_sections. On the local route use pure_map for gamma on the two factors and the same section identities. Both outputs are the pure tensor of the same restricted global units. Pure-section extensionality and adjunction injectivity conclude. Zero rings and zero modules require no exception.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK, 03EL and 04J0; sheafified tensor products and localized adjunctions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-pur-independent-ringed-tensorator-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04J0 and 07A4, with Modules on Sites Tags 03EK and 03EL; the ordinary pure-tensor substep of the parent tensor-square proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The inverse adjunction mate of direct image restriction to a slice commutes with the sheaf module tensor product on pure sections",
+   "results": "Eight ordinary module adjunction/unit hits, including PullbackConstruction.adjunction and pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit. No four-comparison tensor square.",
+   "date": "2026-10-27",
+   "verdict": "Prove the square from adjunction injectivity and the supplied pure-unit identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Twelve mate identities, including unit_mateEquiv_symm.",
+   "date": "2026-10-27",
+   "verdict": "Use the unit identity for the inverse mate."
+  },
+  {
+   "tool": "grep",
+   "query": "pure_hom_ext|unit_mateEquiv_symm|mapDerivedCategoryRightDerivedAdjunction",
+   "results": "Mathlib has the inverse mate unit law. Project rg locates pure_hom_ext and pure_map in CochainTensoratorExistence with independent site universes; the public RingedTopoiTensorSections versions have a shared universe.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the proved independent-universe private pure-section calculus with a private proof import."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionLocalTensorSquare",
+  "date": "2026-10-27",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Tags 04J0 and 07A4, with Modules on Sites Tags 03EK and 03EL; the ordinary pure-tensor substep of the parent tensor-square proof.",
+   "via": [
+    "lem-weil-pbc-ringed-projection-local-tensor-square",
+    "lem-weil-pbc-ringed-projection-local-model",
+    "lem-weil-pbc-ringed-projection-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProjectionLocalOrdinaryTensorSquare",
+  "file": "lean/Sheaf/Paper/RingedProjectionLocalOrdinaryTensorSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProjectionRestriction.localOrdinaryTensorSquare",
+  "statement": "theorem localOrdinaryTensorSquare\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X)\n    (g : Global f R_Y R_X c) (V : Y.ProEt)\n    (l : Local f R_Y R_X c g V) (M N : Mod R_Y) :\n    (localOrdinaryPullbackSquare l).app (((tensor R_Y).obj M).obj N) ≫\n        (SheafOfModules.overFunctor.{u + 1}\n          ((sheafCompose (ProEt.topology X)\n            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R_X)\n          ((proEtaleBaseChange f).obj V)).map (g.ordinaryTensor.iso M N).hom ≫\n        (l.restrictionX.ordinaryTensor (g.operation.pullback.obj M)\n          (g.operation.pullback.obj N)).hom =\n      l.operation.pullback.map (l.restrictionY.ordinaryTensor M N).hom ≫\n        (l.ordinaryTensor.iso (M.over V) (N.over V)).hom ≫\n        (Functor.uncurry.obj (tensor (R_X.over ((proEtaleBaseChange f).obj V)))).map\n          (Prod.mkHom ((localOrdinaryPullbackSquare l).app M)\n            ((localOrdinaryPullbackSquare l).app N))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-27",
+  "sorry_free": true
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.RingedProjectionLocalTensorSquare",
+  "worker": "stage3",
+  "summary": "A proved square for ordinary module sheaves, independent of derived localization. No new proof hole.",
+  "blueprint": "The ordinary pure-tensor verification in the localized tensor-square subargument below the perfect projection formula.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-independent-ringed-tensorator-existence",
+    "why": "Reuses only the proved private pure_hom_ext and pure_map calculus at independent site sizes; it does not use the tensorator existence assertion or replace that unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T050630-L-247356",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T050630-L-247356",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

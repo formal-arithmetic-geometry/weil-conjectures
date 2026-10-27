@@ -1,0 +1,100 @@
+{
+ "id": "def-trf-continuous-ringed-topos-construction",
+ "kind": "definition",
+ "title": "Continuous ringed-topos construction with specified adjoint transpose",
+ "statement": "Let $(C,J)$ and $(D,K)$ be sites [def-weil-pbc-sites-and-cohomology] whose categories are essentially small in the coefficient universe. Let $F:D\\to C$ be continuous, let $L:\\operatorname{Sh}(D,K)\\to\\operatorname{Sh}(C,J)$ be a finite-limit-preserving left adjoint to precomposition by $F$, and let $R,S$ be commutative-ring sheaves on $C,D$. Given $\\phi:S\\to F_*R$, define a morphism of ringed topoi [def-pur-ringed-topos-morphism-of-universes] with inverse image $L$, direct image $F_*$, and structural map the inverse adjoint transpose of the underlying set map of $\\phi$. Its module direct image is sectionwise precomposition with scalars restricted along $\\phi$. The ring identities and module-linearity identities are proved from naturality of the adjunction with respect to the sectionwise operations.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV, ring objects; sites-modules.tex, Tag 03D7, scalar restriction and module direct image."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pur-ringed-topos-morphism-of-universes"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "RingedToposMorphismOfUniverses|siteContinuousRingedTopos",
+   "results": "{\"t\": \"2026-10-26T07:10:28Z\", \"tool\": \"grep\", \"query\": \"RingedToposMorphismOfUniverses|siteContinuousRingedTopos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib construction; the source signatures in the project were read and the existing construction is reused unchanged."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous functor of sites and a map of commutative ring sheaves induce a morphism of ringed topoi with scalar module direct image",
+   "results": "{\"t\": \"2026-10-26T07:10:29Z\", \"tool\": \"leansearch\", \"query\": \"A continuous functor of sites and a map of commutative ring sheaves induce a morphism of ringed topoi with scalar module direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPushforwardContinuous\", \"SheafOfModules.pushforward\", \"SheafOfModules.pushforward_map_val\", \"CategoryTheory.Functor.IsContinuous.mk\", \"SheafOfModules.pushforwardSections\", \"SheafOfModules.unitToPushforwardObjUnit\", \"TopCat.Sheaf.pushforward\", \"CategoryTheory.Functor.sheafPushforwardContinuous_obj_val_map\"], \"digest\": \"dcde09d06da38aa6\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib construction; the source signatures in the project were read and the existing construction is reused unchanged."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transpose a direct image map of commutative ring sheaves under a left exact sheaf adjunction to construct a morphism of ringed topoi",
+   "results": "{\"t\": \"2026-10-26T07:10:32Z\", \"tool\": \"leanfinder\", \"query\": \"Transpose a direct image map of commutative ring sheaves under a left exact sheaf adjunction to construct a morphism of ringed topoi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.unitToPushforwardObjUnit\"], \"digest\": \"fa354239b42a973c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib construction; the source signatures in the project were read and the existing construction is reused unchanged."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EnlargedChartRingedMorphism",
+  "date": "2026-10-26",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C), through the section-algebra etale-base-change step: present the small etale ringed topoi by enlarged etale sites before applying ringed-site localization. Historical imported ancestry retained. Re-split of lem-trf-space-enlarged-etale-ringed-site-model, old proof steps 6–7: Chart-normalized ringed morphism on enlarged etale sites. Existing canonical subconstruction used by the arbitrary-normalization transport.",
+   "via": [
+    "lem-trf-space-enlarged-chart-ringed-morphism"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedPullbackPresentationOnSites",
+  "file": "lean/Sheaf/CategoryTheory/RingedPullbackPresentationOnSites.lean",
+  "declaration": "SheafOfModules.RingedPresentationOnSites.siteContinuousRingedTopos",
+  "statement": "def siteContinuousRingedTopos\n    [PreservesFiniteLimits L]\n    (R : Sheaf J CommRingCat.{u}) (S : Sheaf K CommRingCat.{u})\n    (φ : S ⟶ (F.sheafPushforwardContinuous CommRingCat.{u} K J).obj R) :\n    RingedToposMorphismOfUniverses (C := C) (D := D) (J := J) (K := K)\n      (base R) (base S)",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-26",
+  "existing": true,
+  "note": "Existing proved private construction, available to proofs by import all. No Lean file is changed and no declaration is introduced. The independently sized sites and coefficient universe are those of its enclosing section; base forgets commutativity. Direct, inverse, adjunction, ringMap and modules are explicit record fields."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261026T080913-L-1673565",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261026T080913-L-1673565",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

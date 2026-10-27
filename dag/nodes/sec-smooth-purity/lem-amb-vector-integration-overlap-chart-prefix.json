@@ -1,0 +1,134 @@
+{
+ "id": "lem-amb-vector-integration-overlap-chart-prefix",
+ "kind": "statement",
+ "title": "Change of frame for restricted vector integration chart prefixes",
+ "statement": "Let N>0, let A be a finite commutative ring with (N:A)=0, fix a normalized finite Tate transport t, and let S be Noetherian with N invertible. Let F be a locally free O_S module of constant rank d, and U,V,V_prime opens with U contained in both V and V_prime. Given frames e on V and e_prime on V_prime, use the actual inverse-frame compact-support exchange, canonical coefficient comparison and inverse ordered-tower compact-support comparison to define chartPrefix. Restrict this prefix to U using the derived inverse-image compositor and affineTraceUnitBaseChange (the ordered affine exchange, right-functor base-change comparison and constant-unit comparison). There exists g in GL_d(Gamma(U,O_U)) such that overlapPrefix(e_prime) equals overlapPrefix(e) followed by the actual affineLinearTraceAction of g over U, with its canonical Cartesian-square certificate. There is no counit or trace in this conclusion. The constructions and maps are those of [def-amb-vector-integration-charts], [def-amb-affine-linear-trace-action] and [def-amb-affine-trace-construction], and the frames are those of [def-asd-vector-bundle-zero-section].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Overlap calculation: independence of the local vector trace under linear changes of frame; original local-compatibility node Steps 1--2, before application of the affine counit."
+ },
+ "stmt_deps": [
+  "def-amb-vector-integration-charts",
+  "def-amb-affine-linear-trace-action",
+  "def-amb-affine-trace-construction",
+  "def-asd-vector-bundle-zero-section"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the inverse-frame charts geometrically to U. Apply the coordinate-only overlap lemma to obtain an invertible matrix g with q_e′ = a_g followed by q_e. Both restricted chart squares are Cartesian by pasting.",
+   "uses": [
+    "lem-amb-vector-integration-overlap-coordinates",
+    "lem-amb-vector-integration-cartesian-prefix-action"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the one-frame restriction-transport theorem separately to e and e′. This identifies the two overlap prefixes with Cartesian prefixes using the same L and base coefficient comparison along U→S.",
+   "uses": [
+    "lem-amb-vector-integration-restricted-chart-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved Cartesian-prefix action theorem to the equality q_e′=a_g followed by q_e. Its action is the prescribed affineLinearTraceAction with the canonical Cartesian certificate. Substitute the two single-frame comparison identities to obtain exactly the original equation. The local geometric properties and Noetherianness are supplied by vectorIntegration_geometry and restriction to an open.",
+   "uses": [
+    "lem-amb-vector-integration-cartesian-prefix-action",
+    "def-amb-vector-integration-charts",
+    "def-amb-affine-linear-trace-action"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-vector-integration-overlap-coordinates",
+  "lem-amb-vector-integration-cartesian-prefix-action",
+  "lem-amb-vector-integration-restricted-chart-transport",
+  "def-amb-vector-integration-charts",
+  "def-amb-affine-linear-trace-action"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Overlap calculation before the affine counit; the two local maps are identified by linear changes of frame."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported inverse frame base change comparisons of an algebraic vector bundle differ by the action of a linear coordinate substitution, before applying the trace counit",
+   "results": "Eight results concerning topological vector-bundle coordinate changes, including Trivialization.comp_continuousLinearEquivAt_eq_coord_change and Trivialization.coordChangeL. These do not concern scheme frames or compact-support exchange.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local compact support traces of a vector bundle agree on overlapping linear frames by affine linear trace invariance",
+   "results": "Eight results on topological/manifold local frames and coordinates. No algebraic compact-support comparison.",
+   "date": "2026-10-26",
+   "verdict": "No match; use the project's actual affine action and frame constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerShriek|affineLinearTraceAction|vectorIntegrationChartPrefix in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory; overlap chart/prefix search in the current DAG and blueprint",
+   "results": "No Mathlib match. The existing VectorIntegrationSwapChartPrefix concerns a biproduct swap over a single open, not two frame opens restricted to a common smaller open. Existing original compatibility node requires equality after counits and sheaf descent. No blueprint node states this prefix comparison separately.",
+   "date": "2026-10-26",
+   "verdict": "A separate geometric exchange comparison is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorIntegrationLocalTraceCompatibility",
+  "date": "2026-10-26",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-amb-vector-integration",
+   "place": "Overlap calculation before the affine-space counit; source proof says linear trace invariance identifies the maps on overlaps.",
+   "via": [
+    "lem-amb-vector-integration-local-trace-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorIntegrationOverlapChartPrefix",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorIntegrationOverlapChartPrefix.lean",
+  "declaration": "AlgebraicGeometry.Etale.vectorIntegration_overlap_chart_prefix",
+  "declarations": [
+   "AlgebraicGeometry.Etale.affineTraceUnitBaseChange",
+   "AlgebraicGeometry.Etale.vectorIntegrationChartPrefix",
+   "AlgebraicGeometry.Etale.vectorIntegrationOverlapPrefix",
+   "AlgebraicGeometry.Etale.vectorIntegration_overlap_chart_prefix"
+  ],
+  "statement": "theorem vectorIntegration_overlap_chart_prefix (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)\n    (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d]\n    (U V V' : S.Opens) (hUV : U ≤ V) (hUV' : U ≤ V')\n    (e : VectorBundleZeroSection.Trivialization S d F V)\n    (e' : VectorBundleZeroSection.Trivialization S d F V') :\n    letI : TopologicalSpace.NoetherianSpace U.toScheme :=\n      U.ι.isOpenEmbedding.isInducing.noetherianSpace\n    letI : IsNoetherian U.toScheme :=\n      { toIsLocallyNoetherian := inferInstance\n        isCompact_univ := TopologicalSpace.NoetherianSpace.isCompact _ }\n    ∃ g : Matrix.GeneralLinearGroup (Fin d) Γ(U.toScheme, ⊤),\n      vectorIntegrationOverlapPrefix N hN A hA t S hS d F U V' hUV' e' =\n        vectorIntegrationOverlapPrefix N hN A hA t S hS d F U V hUV e ≫\n          affineLinearTraceAction N hN A hA t U.toScheme\n            (affineTracePullbackInvertible N U.ι hS) d\n            (affineTraceLinearMap U.toScheme d g) (affineTraceLinearMap_isPullback _ _ g)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T100422-L-21726",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T111800-L-1729909",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

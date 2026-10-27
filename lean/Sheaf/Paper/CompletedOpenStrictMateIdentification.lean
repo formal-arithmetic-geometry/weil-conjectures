@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.CompletedRingStrictFiniteExchange
 public import Sheaf.Paper.CompletedOpenExchangeTransport
-public import Sheaf.Paper.CompleteProetaleStrictTowerRealization
+public import Sheaf.Paper.StrictTowerRealizationComparisons
 public import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 public import Sheaf.Paper.IntrinsicCompletionCompleted
 public import Sheaf.Paper.ConstantCompletionEquivalence
@@ -17,6 +17,10 @@ public import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
 public import Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars
 public import Sheaf.Paper.ExactProductFunctorStrictLimit
 public import Sheaf.Paper.PbcQbarCompletedPullback
+import Sheaf.Paper.CompletedOpenExchangeLimitNormalization
+import Sheaf.Paper.CompletedOpenScalarLimitSquare
+import Sheaf.Paper.CompletedOpenStrictMateTranspose
+import Sheaf.Paper.CompletedOpenFiniteTransposeCoherence
 
 /-!
 # The actual completed open exchange and its strict constant-coefficient mate
@@ -37,9 +41,13 @@ is not used in this module.
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
+
+attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoidalCategory
+  Functor.leftAdjoint limit Functor.mapDerivedCategory Functor.rightDerivedFunctor
 
 variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 variable {U' U T' T : Scheme.{u}} {v : U' ⟶ U} {j' : U' ⟶ T'}
@@ -162,6 +170,118 @@ def cbcOpenMateCompletedB (K : d.derived U) :
     (ProEtale.StrictTower.moduleJ A j').mapDerivedCategory.mapIso
       (cbcRealizationPullLimit d v K)
 
+private theorem constant_beta_formula (M : ProEtale.StrictTower.Derived A U) :
+    (ProEtale.StrictTower.beta A v j' j g sq.w
+      (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd)).inv.app M =
+      (ProEtale.StrictTower.J A j').map
+        ((ProEtale.StrictTower.G A v).map ((ProEtale.StrictTower.jAdj A j).unit.app M) ≫
+          (CompletedOpenFiniteTranspose.constantSquare (A := A) sq).hom.app
+            ((ProEtale.StrictTower.J A j).obj M)) ≫
+        (ProEtale.StrictTower.jAdj A j').counit.app
+          ((ProEtale.StrictTower.G A g).obj ((ProEtale.StrictTower.J A j).obj M)) := by
+  change ProEtale.StrictTower.betaInvApp A v j' j g sq.w M = _
+  rw [ProEtale.StrictTower.betaInvApp, Adjunction.homEquiv_counit]
+  have he : (ProEtale.StrictTower.squareG A v j' j g sq.w).inv =
+      (CompletedOpenFiniteTranspose.constantSquare (A := A) sq).hom := by
+    simp only [CompletedOpenFiniteTranspose.constantSquare, ProEtale.StrictTower.squareG,
+      Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, Iso.symm_hom, eqToIso.inv]
+    simp only [Category.assoc, eqToIso.hom]
+  rw [he]
+
+private theorem target_comparison_eq (K : d.derived U) :
+    CompletedOpenFiniteTranspose.extensionComparison d (j' := j') (v := v) K =
+      cbcOpenMateB d (j' := j') (v := v) K := by
+  apply Iso.ext
+  dsimp only [CompletedOpenFiniteTranspose.extensionComparison,
+    CompletedOpenFiniteTranspose.cornerComparison, cbcOpenMateB,
+    Iso.trans_hom, Functor.mapIso_hom, cbcStrictOpen, cbcStrictOpenModule,
+    CompletedOpenFiniteTranspose.corner, CompletedOpenFiniteTranspose.openTarget,
+    CompletedOpenFiniteTranspose.restricted, Functor.comp_obj]
+  simp only [Functor.map_comp]
+  have hn := (cbcRealizationTowerScalarOpen d j').hom.naturality
+    ((cbcDatumTowerTransport d v).hom.app ((completedReductionTower U d).obj K))
+  simp only [Functor.comp_map] at hn
+  simpa only [Category.assoc, Iso.app_hom] using
+    (congrArg (fun t ↦ t ≫ (ProEtale.StrictTower.J A j').map
+      ((exchangeResPull d v).hom.app ((completedReductionTower U d).obj K))) hn).symm
+
+private theorem source_comparison_eq (K : d.derived U) :
+    CompletedOpenFiniteTranspose.sourceComparison d (j := j) (g := g) K =
+      cbcOpenMateA d (j := j) (g := g) K := rfl
+
+attribute [-instance] CategoryTheory.catToReflQuiver in
+private theorem unit_transpose_eq (K : d.derived U) :
+    ((cbcRealizationTowerAdj d j').homEquiv
+      ((CompletedOpenFiniteTranspose.corner d (v := v)).obj K)
+      ((CompletedOpenFiniteTranspose.source d (j := j) (g := g)).obj K))
+      (cbcOpenMateOmega d sq K).inv = CompletedOpenFiniteTranspose.unitArrow d sq K := by
+  exact completedOpenStrictMateTranspose d sq K
+
+private theorem forward_of_inverse
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {Q Q' : C} {N N' : D} (w : Q ≅ Q') (b : F.obj Q' ≅ N')
+    (a : F.obj Q ≅ N) (t : N ≅ N')
+    (h : b.inv ≫ F.map w.inv ≫ a.hom = t.inv) :
+    F.map w.hom ≫ b.hom = a.hom ≫ t.hom := by
+  apply (cancel_epi (F.map w.inv)).1
+  rw [← Category.assoc, ← F.map_comp, w.inv_hom_id, F.map_id, Category.id_comp]
+  have hi : F.map w.inv ≫ a.hom = b.hom ≫ t.inv := by
+    apply (cancel_epi b.inv).1
+    simpa only [Category.assoc, Iso.inv_hom_id_assoc] using h
+  rw [← Category.assoc, hi, Category.assoc, t.inv_hom_id, Category.comp_id]
+
+private theorem limit_pasting
+    {C D E H : Type*} [Category C] [Category D] [Category E] [Category H]
+    (F : C ⥤ D) (L : C ⥤ E) (R : D ⥤ H) (S : E ⥤ H)
+    (lam : L ⋙ S ⟶ F ⋙ R) {Q Q' : C} {Y : E} {Z : H}
+    {W₀ N₀ : D} (e : L.obj Q ⟶ Y) (mu : Y ⟶ L.obj Q')
+    (theta : Q ⟶ Q') (aa : F.obj Q ⟶ W₀) (bb : F.obj Q' ⟶ N₀)
+    (beta : W₀ ⟶ N₀) (a : S.obj (L.obj Q) ⟶ R.obj W₀)
+    (b : S.obj Y ⟶ Z) (o : Z ≅ R.obj N₀)
+    (ht : F.map theta ≫ bb = aa ≫ beta)
+    (hb : S.map mu ≫ lam.app Q' ≫ R.map bb = b ≫ o.hom)
+    (hn : e ≫ mu = L.map theta)
+    (ha : a = lam.app Q ≫ R.map aa) :
+    S.map e ≫ b = a ≫ R.map beta ≫ o.inv := by
+  apply (cancel_mono o.hom).1
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  rw [← hb, ← S.map_comp_assoc, hn]
+  have hx := lam.naturality theta
+  dsimp only [Functor.comp_map] at hx
+  rw [← Category.assoc, hx, Category.assoc, ← R.map_comp, ht,
+    R.map_comp, ← Category.assoc, ← ha]
+
+attribute [local irreducible] ProEtale.StrictTower.beta ProEtale.StrictTower.jAdj
+  ProEtale.StrictTower.squareG CompletedOpenFiniteTranspose.constantSquare
+
+private theorem strict_square (K : d.derived U) :
+    (exchangeTowerRes d T').map (cbcOpenMateOmega d sq K).hom ≫
+    (cbcOpenMateB d (j' := j') (v := v) K).hom =
+    (cbcOpenMateA d (j := j) (g := g) K).hom ≫
+      (cbcOpenMateBeta d sq K).hom := by
+  have h := (CompletedOpenFiniteTranspose.completedOpenFiniteTransposeCoherence
+    d sq K).1
+    (((cbcRealizationTowerAdj d j').homEquiv _ _)
+      (cbcOpenMateOmega d sq K).inv)
+  rw [Equiv.symm_apply_apply] at h
+  rw [unit_transpose_eq d sq K] at h
+  rw [(CompletedOpenFiniteTranspose.completedOpenFiniteTransposeCoherence
+    d sq K).2] at h
+  have hb := constant_beta_formula (A := A) sq
+    ((CompletedOpenFiniteTranspose.restricted d (U := U)).obj K)
+  change (cbcOpenMateBeta d sq K).inv = _ at hb
+  have hinv := h.trans hb.symm
+  have hf := forward_of_inverse (exchangeTowerRes d T') (cbcOpenMateOmega d sq K)
+    (CompletedOpenFiniteTranspose.extensionComparison d (j' := j') (v := v) K)
+    (CompletedOpenFiniteTranspose.sourceComparison d (j := j) (g := g) K)
+    (cbcOpenMateBeta d sq K) hinv
+  have he := congrArg (fun z ↦ (exchangeTowerRes d T').map
+    (cbcOpenMateOmega d sq K).hom ≫ z.hom)
+    (target_comparison_eq d (j' := j') (v := v) K)
+  have ha := congrArg (fun z ↦ z.hom ≫ (cbcOpenMateBeta d sq K).hom)
+    (source_comparison_eq d (j := j) (g := g) K)
+  exact he.symm.trans (hf.trans ha)
+
 /-- The actual finite strict exchange restricts to the constant-A open-unit mate,
 and the canonical completed exchange is its ordered derived inverse limit.
 The first equality lies in the derived category of strict towers, before evaluation.
@@ -223,7 +343,100 @@ theorem completedOpenStrictMateIdentification [QuasiCompact j]
             ((completedTowerPullback g d).map (cbcRealizationReduction d j K.obj).hom) ≫
           (cbcSourceFiniteComparison d sq n).hom.app K.obj ≫
           (cbcFiniteExchange d sq n).hom.app ((cbcFiniteReduction d U n).obj K.obj)) := by
-  sorry
+  have hstrict := strict_square d sq K.obj
+  refine ⟨hstrict, ?_, ?_⟩
+  · let : QuasiCompact j' := cbcOpenMateQC sq
+    let C := (d.towerPull v).obj ((completedReductionTower U d).obj K.obj)
+    let Q := (d.towerPull g).obj ((completedReductionTower T d).obj
+      ((cbcDerivedOpenShriek d j inferInstance).obj K.obj))
+    let theta : Q ⟶ (cbcRealizationJ d j').obj C :=
+      (cbcDatumTowerTransport d g).inv.app
+          ((completedReductionTower T d).obj
+            ((cbcDerivedOpenShriek d j inferInstance).obj K.obj)) ≫
+        (cbcOpenMateOmega d sq K.obj).hom ≫
+        (cbcRealizationJ d j').map
+          ((cbcDatumTowerTransport d v).hom.app ((completedReductionTower U d).obj K.obj))
+    let aa := (exchangeResPull d g).hom.app
+        ((completedReductionTower T d).obj
+          ((cbcDerivedOpenShriek d j inferInstance).obj K.obj)) ≫
+      (ProEtale.StrictTower.G A g).map (cbcRealizationQuotientOpen d j K.obj).hom
+    let bb := (cbcRealizationTowerScalarOpen d j').hom.app C ≫
+      (ProEtale.StrictTower.J A j').map
+        ((exchangeResPull d v).hom.app ((completedReductionTower U d).obj K.obj))
+    have ht : (exchangeTowerRes d T').map theta ≫ bb =
+        aa ≫ (cbcOpenMateBeta d sq K.obj).hom := by
+      have hh := congrArg (fun k ↦ (exchangeTowerRes d T').map
+        ((cbcDatumTowerTransport d g).inv.app
+          ((completedReductionTower T d).obj
+            ((cbcDerivedOpenShriek d j inferInstance).obj K.obj))) ≫ k) hstrict
+      dsimp only [theta, bb, aa, cbcOpenMateA, cbcOpenMateB,
+        Iso.trans_hom, Functor.mapIso_hom] at hh ⊢
+      simp only [Functor.map_comp, Category.assoc, Iso.app_hom] at hh ⊢
+      simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app] at hh
+      erw [CategoryTheory.Functor.map_id, Category.id_comp] at hh
+      simp only [Functor.map_comp, Category.assoc] at hh
+      simpa only [Functor.map_comp, Category.assoc, cbcStrictOpen, cbcStrictOpenModule,
+        cbcRealizationJ, cbcRealizationTowerJ, C] using hh
+    have hb : (cbcRealizationRes d T').mapDerivedCategory.map
+          ((cbcRealizationLimitMap (cbcOpenShriek d j' inferInstance)).app C) ≫
+        (cbcRealizationResLimit d T').hom.app ((cbcRealizationJ d j').obj C) ≫
+        (completedRlim T' (exchangeConstantRing T' A)).map bb =
+      (cbcOpenMateCompletedB d (j' := j') (v := v) K.obj).hom ≫
+        (cbcRealizationOpenLimit d j').hom.app
+          ((ProEtale.StrictTower.G A v).obj ((cbcOpenMateM d (U := U)).obj K.obj)) := by
+      have hp := congrArg (fun k ↦ k ≫
+        (completedRlim T' (exchangeConstantRing T' A)).map
+          ((ProEtale.StrictTower.J A j').map
+            ((exchangeResPull d v).hom.app ((completedReductionTower U d).obj K.obj))))
+        (completedOpenScalarLimitSquare d j' C)
+      have hn := (cbcRealizationOpenLimit d j').hom.naturality
+        ((exchangeResPull d v).hom.app ((completedReductionTower U d).obj K.obj))
+      dsimp only [Functor.comp_map] at hn
+      dsimp only [bb, cbcOpenMateCompletedB, cbcRealizationPullLimit,
+        Iso.trans_hom, Functor.mapIso_hom]
+      simp only [Functor.map_comp, Category.assoc] at hp ⊢
+      dsimp only [C, Functor.comp_obj] at hp
+      erw [← hn] at hp
+      dsimp only [Iso.app_hom, C, Functor.comp_obj,
+        AdicCoefficientDatum.completedPull, cbcOpenMateM, exchangeConstantPull,
+        exchangeTowerPull, exchangeTowerModulePull, ProEtale.StrictTower.G,
+        ProEtale.StrictTower.towerPullback, ProEtale.StrictTower.modulePullback,
+        exchangeConstantIso, ProEtale.StrictTower.constantRingIso,
+        proEtaleConstantComparison, exchangeConstantRing, adicLisseConstantRing,
+        ProEtale.StrictTower.coefficients, ProEtale.StrictTower.Modules] at hp ⊢
+      exact hp
+    have hn := completedOpenExchangeLimitNormalization d sq r a ha K _completeOpen
+    change (cbcDatumCompletedExchange d sq r a ha).app K ≫
+      (cbcRealizationLimitMap (cbcOpenShriek d j' inferInstance)).app C =
+      (completedRlim T' (d.completedRing T')).map theta at hn
+    have ha' : (cbcOpenMateCompletedA d (j := j) (g := g) K.obj).hom =
+        (cbcRealizationResLimit d T').hom.app Q ≫
+          (completedRlim T' (exchangeConstantRing T' A)).map aa := by
+      dsimp only [cbcOpenMateCompletedA, cbcRealizationPullLimit, Iso.trans_hom,
+        Functor.mapIso_hom, aa, Q]
+      simp only [Functor.map_comp,
+        Category.assoc, Iso.app_hom]
+    exact limit_pasting (exchangeTowerRes d T')
+      (completedRlim T' (d.completedRing T'))
+      (completedRlim T' (exchangeConstantRing T' A))
+      (cbcRealizationRes d T').mapDerivedCategory
+      (cbcRealizationResLimit d T').hom
+      ((cbcDatumCompletedExchange d sq r a ha).app K)
+      ((cbcRealizationLimitMap (cbcOpenShriek d j' inferInstance)).app C)
+      theta aa bb (cbcOpenMateBeta d sq K.obj).hom
+      (cbcOpenMateCompletedA d (j := j) (g := g) K.obj).hom
+      (cbcOpenMateCompletedB d (j' := j') (v := v) K.obj).hom
+      ((cbcRealizationOpenLimit d j').app
+        ((ProEtale.StrictTower.G A v).obj ((cbcOpenMateM d (U := U)).obj K.obj)))
+      ht hb hn ha'
+  · intro n
+    apply heq_of_eq
+    have h := eq_of_heq ((completedRingStrictFiniteExchange d sq).2 K.obj n)
+    dsimp only [cbcOpenMateOmega, Iso.trans_hom, Functor.mapIso_hom]
+    rw [Functor.map_comp, Category.assoc]
+    exact congrArg (fun t ↦
+      (pbcTowerEvaluation T' (pbcAdicCompletion T' d) n).map
+        ((completedTowerPullback g d).map (cbcRealizationReduction d j K.obj).hom) ≫ t) h
 
 private def reductionOpenNatIso :
     completedReductionTower U d ⋙ cbcRealizationJ d j ≅

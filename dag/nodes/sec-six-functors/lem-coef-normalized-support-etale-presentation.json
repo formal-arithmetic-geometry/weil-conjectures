@@ -1,0 +1,146 @@
+{
+ "id": "lem-coef-normalized-support-etale-presentation",
+ "kind": "statement",
+ "title": "Etale presentation of normalized compact support",
+ "statement": "Fix a finite-field datum $D$, a prime $\\ell\\ne D.p$, and a finite extension $E/\\mathbf Q_\\ell$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a separated finite-type morphism between separated finite-type schemes over $\\operatorname{Spec}D.k$, and let $c$ be its compactification [def-weil-scheme-morphism-properties, def-weil-compactifications-refinements]. Write $\\mathscr N_W$ for the full category of normalized ordinary pro-etale derived coefficient systems whose individual positive levels are bounded constructible with finite Tor amplitude, with no common bound. Take coefficient-derived-system calculi $S_X,S_Z,S_Y$, an actual proper/open support presentation $S$, a functor $F:\\mathscr N_X\\to\\mathscr N_Y$ and an isomorphism $F\\iota_Y\\simeq\\iota_X S.\\mathrm{functor}$ [def-coef-finite-adjunction-system-data]. There exist comparison presentations $C_X,C_Y$ [def-coef-cartesian-section-data], an actual etale support $F_{\\mathrm{et}}$, a right adjoint $G_{\\mathrm{et}}$ with $F_{\\mathrm{et}}\\dashv G_{\\mathrm{et}}$, and a left comparison $a:F\\iota_YR_Y\\simeq\\iota_XR_XF_{\\mathrm{et}}$. The counit $\\varepsilon^X_M:P_XR_XM\\to M$ is invertible for every $M\\in\\mathscr N_X$. The actual functor $P_XG_{\\mathrm{et}}R_Y$ sends $\\mathscr N_Y$ to $\\mathscr N_X$. There is an adjunction $F\\dashv H$, where $H$ is the full-subcategory lift of this precise composite, whose Hom bijection sends $h:FM\\to N$ to $(\\varepsilon^X_M)^{-1}\\,P_X(\\operatorname{adj}_{\\mathrm{et}}(a_M^{-1}\\,R_Yh))$. The assertion requires neither a previously given normalized right adjoint nor an enriched mapping isomorphism.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+  "place": "Paragraphs 1--3, adjoint uniqueness and counit transposes; ordinary-system refinement of prop-coef-integral-exceptional-adjoint, system adjunction descent before enriched Hom."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-coef-finite-adjunction-system-data",
+  "def-coef-cartesian-section-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose source and target sequence-site comparison presentations from system internal-Hom representability. The levelwise normalized site equivalences identify their actual localized adjunctions. On normalized finite-Tor constructible inputs the comparison counits are invertible, by finite etale origin at each level and conservative evaluation. No common bound is used.",
+   "uses": [
+    "lem-coef-system-internal-hom-representability",
+    "lem-coef-levelwise-normalized-adjoint-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the ambient ordinary etale proper/open support and its right adjoint using system compact-support projection and the etale coefficient-system adjoint theorem. If the coefficient field is small, lift its universe and transport the coefficient rings, module categories, derived functors and their units back along the ring equivalences.",
+   "uses": [
+    "lem-coef-system-compact-support-projection",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Free insertion identifies the evaluated right adjoint and actual quotient transitions with the counit mates. Levelwise normalized adjoint descent implies that its transported inverse/direct-image composite preserves the full normalized finite-Tor domain. Canonical proper/open site comparison and the given support realization give the left comparison for F.",
+   "uses": [
+    "lem-coef-free-insertion-compact-support-coherence",
+    "lem-coef-levelwise-normalized-adjoint-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the inverse source counit, mapped ambient adjunction transpose and inverse left comparison to form the displayed Hom bijections. Their inverses use the inverse site equivalences and the inverse ambient Hom bijection. The comparison and ambient triangle identities prove both inverse equations and naturality. The natural Hom bijections define the restricted adjunction with precisely the stated Hom formula.",
+   "uses": [
+    "lem-coef-levelwise-normalized-adjoint-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-free-insertion-compact-support-coherence",
+  "lem-coef-levelwise-normalized-adjoint-descent",
+  "lem-coef-system-compact-support-projection",
+  "lem-coef-system-internal-hom-representability",
+  "lem-pur-etale-coefficient-system-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+  "place": "Paragraphs 1--3, adjoint uniqueness and counit transposes; ordinary-system refinement of prop-coef-integral-exceptional-adjoint, system adjunction descent before enriched Hom."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compact support functor on normalized derived coefficient systems is the restriction of an etale adjunction transported through etale proetale comparison",
+   "results": "8 hits including CompHausLike.LocallyConstant.adjunction, CondensedSet.LocallyConstant.functorFullyFaithful, CategoryTheory.Equivalence.transportSheafificationAdjunction.",
+   "date": "2026-10-25",
+   "verdict": "No match: these do not give the ordinary derived coefficient-system site comparison or normalized-domain preservation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful",
+   "results": "6 hits: restrictFullyFaithful, its unit/counit formulas and Hom formula. Read Mathlib/CategoryTheory/Adjunction/Restrict.lean.",
+   "date": "2026-10-25",
+   "verdict": "Categorical restriction tool only; it requires comparison and preservation data that are conclusions here."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFullyFaithful|rightAdjointUniq",
+   "results": "25 hits, including Mathlib/CategoryTheory/Adjunction/Unique.lean and Restrict.lean. Local searches also read ExceptionalSystemTransport, LevelwiseNormalizedAdjointDescent, SystemInternalHomRepresentability and FiniteAdjunctionDiagramRealization. No existing declaration identifies the comparison presentation used here with a restricted adjunction.",
+   "date": "2026-10-25",
+   "verdict": "No complete match; use the existing geometric theorem interfaces and natural Hom bijections."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CartesianSectionAdjointMates",
+  "date": "2026-10-25",
+  "group": "Z5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Middle RHom calculation and final units/counits paragraph: transport the ordinary etale compact-support adjunction to normalized proetale systems before identifying its right adjoint.",
+   "via": [
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedSupportEtalePresentation",
+  "file": "lean/Sheaf/Paper/NormalizedSupportEtalePresentation.lean",
+  "declaration": "WeilConjectures.CartesianSectionAdjoint.normalizedSupportEtalePresentation",
+  "statement": "theorem normalizedSupportEtalePresentation\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f)\n    {SX : CoefficientDerivedSystemCalculus l E X}\n    {SZ : CoefficientDerivedSystemCalculus l E c.Z}\n    {SY : CoefficientDerivedSystemCalculus l E Y}\n    (S : Support l E c SX SZ SY)\n    (F : (domain l E X).FullSubcategory ⥤ (domain l E Y).FullSubcategory)\n    (e : F ⋙ (domain l E Y).ι ≅ (domain l E X).ι ⋙ S.functor) :\n    ∃ (source : CartesianSectionData.Representability l E (X ↘ Spec (.of D.k)))\n      (target : CartesianSectionData.Representability l E (Y ↘ Spec (.of D.k)))\n      (support : Etale.SystemProjection.Support c (SystemInternalHom.coefficients l E))\n      (right : SystemInternalHom.Et l E Y ⥤ SystemInternalHom.Et l E X)\n      (adj : support.F ⊣ right)\n      (left : F ⋙ (domain l E Y).ι ⋙ target.comparison.R ≅\n        (domain l E X).ι ⋙ source.comparison.R ⋙ support.F)\n      (counitIso : ∀ M : (domain l E X).FullSubcategory,\n        IsIso (source.comparison.derivedAdjunction.counit.app M.obj))\n      (preserves : ∀ N : (domain l E Y).FullSubcategory,\n        domain l E X\n          (source.comparison.P.obj (right.obj (target.comparison.R.obj N.obj))))\n      (a : F ⊣ (domain l E X).lift\n        ((domain l E Y).ι ⋙ target.comparison.R ⋙ right ⋙ source.comparison.P) preserves),\n      ∀ (M : (domain l E X).FullSubcategory) (N : (domain l E Y).FullSubcategory)\n        (h : F.obj M ⟶ N),\n        (a.homEquiv M N h).hom =\n          (@inv _ _ _ _ (source.comparison.derivedAdjunction.counit.app M.obj)\n            (counitIso M)) ≫\n          source.comparison.P.map\n            (adj.homEquiv _ _ (left.inv.app M ≫ target.comparison.R.map h.hom))",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T102017-L-3767539",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T102017-L-3767539",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

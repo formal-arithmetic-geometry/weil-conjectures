@@ -1,0 +1,286 @@
+{
+ "id": "lem-sfb-algebraic-stack-setoid-space",
+ "kind": "statement",
+ "title": "An algebraic stack with setoid fibres is an algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Use categories fibred in groupoids, their morphisms and 2-morphisms as in [def-sfb-stable-pointed-moduli-groupoids], algebraic spaces as in [def-trf-algebraic-space], and the big fppf site [def-pc-fppf-site]. Let $\\mathcal W$ be an fppf stack in groupoids over $S$: its isomorphism presheaves are fppf sheaves and all fppf descent data for objects are effective. Suppose its diagonal is representable by algebraic spaces, meaning that every scheme 2-base change of the diagonal is equivalent to an algebraic space, and that it admits a representable smooth surjective scheme atlas. Smoothness is tested on etale scheme charts [def-sbc-smooth-morphisms]; surjectivity means lifting field-valued objects after field extension [def-weil-field]. Assume that for every $S$-scheme $T$ and every $x,y\\in\\mathcal W(T)$ the set of arrows $x\\to y$ has at most one element (the fibres are setoids). Then there exists an algebraic space $E/S$ and an equivalence over $\\mathit{Sch}/S$ from $\\mathcal W$ to the discrete fibred groupoid $T\\mapsto E(T)$.",
+ "source": {
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 04SZ (proposition-algebraic-stack-no-automorphisms), implication (1) to (3)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site",
+  "def-sbc-smooth-morphisms",
+  "def-weil-field",
+  "def-sfb-fppf-stackification",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-surjective-moduli-map"
+ ],
+ "proof": [
+  {
+   "text": "Every etale covering is an fppf covering: its arrows are flat and locally of finite presentation by [def-weil-etale-morphism], and joint surjectivity is unchanged in [def-pc-fppf-site]. Therefore the assumed fppf sheaf condition for isomorphisms and effectiveness of object descent hold on etale coverings. The diagonal condition and the smoothness of the atlas are word for word those of [def-sfb-algebraic-moduli-stack]. For surjectivity, fix $h_T\\to\\mathcal W$, let $Z\\simeq h_T\\times_{\\mathcal W}h_U$ be the algebraic space and $V\\to Z$ a representable surjective etale scheme chart [def-trf-algebraic-space]; surjectivity of $Z\\to T$ means that of $V\\to T$. If field-valued objects lift, take $t\\in T$ and the restriction of the object to $\\operatorname{Spec}\\kappa(t)$ [def-weil-field]: a lift over $L\\supseteq\\kappa(t)$ is an $L$-point of $Z$ over $t$, and $V\\times_Z\\operatorname{Spec}L\\to\\operatorname{Spec}L$ is surjective, so some point of $V$ maps to $t$. Conversely, for $x\\in\\mathcal W(K)$ take $T=\\operatorname{Spec}K$; then $V\\neq\\emptyset$, and a point $v\\in V$ gives $L=\\kappa(v)\\supseteq K$ and an object of $U(L)$ with an isomorphism of its image to $x|_L$. Hence the hypotheses give precisely the algebraic-stack predicate of [def-sfb-algebraic-moduli-stack], with the same atlas and the same scheme base changes.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "def-sfb-algebraic-moduli-stack",
+    "def-trf-algebraic-space",
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 026O, definition-algebraic-stack and the following comparison with the etale convention."
+   }
+  },
+  {
+   "text": "For every $S$-scheme $T$ and every $x\\in\\mathcal W(T)$, the identity $1_x$ exists. Every automorphism $a:x\\to x$ equals $1_x$, since the assumed arrow set has at most one element. This verifies the automorphism hypothesis on every test scheme, including nonreduced ones, rather than only on geometric points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04SZ (proposition-algebraic-stack-no-automorphisms), implication (1) to (3)."
+   }
+  },
+  {
+   "text": "Apply the existing theorem [lem-sfb-algebraic-setoid-space] to $\\mathcal X=\\mathcal W$ with the algebraic-stack predicate from step 1 and the automorphism condition from step 2. It supplies an algebraic space $E/S$ and an equivalence $h_E\\simeq\\mathcal W$ over $\\mathit{Sch}/S$. Take the inverse equivalence to obtain $\\mathcal W\\simeq h_E$. Here $h_E(T)=\\operatorname{Hom}_S(T,E)$ is discrete, exactly the required fibred groupoid.",
+   "uses": [
+    "lem-sfb-algebraic-setoid-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04SZ (proposition-algebraic-stack-no-automorphisms), implication (1) to (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-pc-fppf-site",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "def-weil-field",
+  "lem-sfb-algebraic-setoid-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 04SZ (proposition-algebraic-stack-no-automorphisms), implication (1) to (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack whose fibre groupoids have at most one morphism between each pair of objects is an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.instInhabitedDiscreteUnit\", \"module\": \"Mathlib/Geometry/RingedSpace/SheafedSpace\", \"type\": \"Inhabited (AlgebraicGeometry.SheafedSpace (CategoryTheory.Discrete Unit))\", \"doc\": \"There exists a sheafed space over the discrete category of the unit type, constructed by equipping the empty topological space with a constant sheaf that assigns the singleton set $\\\\{\\\\ast\\\\}$ to every \"}\n  {\"name\": \"AlgebraicGeometry.Scheme\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The type of schemes in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfSubsingletonCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Subsingleton ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is a subsingleton (i.e., contains at most one point), then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.unit\", \"module\": \"Mathlib/Geometry/RingedSpace/SheafedSpace\", \"type\": \"TopCat → AlgebraicGeometry.SheafedSpace (CategoryTheory.Discrete Unit)\", \"doc\": \"For any topological space $X$, this constructs the sheafed space over the discrete category of the unit type by equipping $X$ with the constant sheaf that assigns the singleton set $\\\\{\\\\ast\\\\}$ to every\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyArtinian X], DiscreteTopology ↥X\", \"doc\": \"Every locally Artinian scheme $X$ (i.e., a scheme where every point has an open neighborhood with an Artinian ring) is equipped with the discrete topology, meaning every subset of $X$ is open.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n  {\"name\": \"CategoryTheory.Groupoid.IsTotallyDisconnected\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Basic\", \"type\": \"(C : Type u_1) → [CategoryTheory.Groupoid C] → Prop\", \"doc\": \"A groupoid is totally disconnected if for any two objects $ c $ and $ d $, the existence of a morphism $ c \\to d $ implies $ c = d $. In other words, the only morphisms in such a groupoid are identity \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.empty\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"AlgebraicGeometry.Scheme\", \"doc\": \"The scheme constructed from the empty topological space equipped with the constant sheaf valued in the trivial commutative ring (unit type). The sheaf condition is satisfied vacuously as the presheaf \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, ordinary categories or topological groupoids, not algebraic stacks; no exact result or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic stack with trivial automorphism groups over every scheme is representable by an algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.IsRepresentable\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfSubsingletonCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Subsingleton ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is a subsingleton (i.e., contains at most one point), then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.RepresentableBy (glueData hf).glued\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[∀ x : X, _root_.IsReduced (X.presheaf.stalk x)] : IsReduced X\", \"doc\": \"If for every point $ x $ in a scheme $ X $, the stalk of the structure sheaf at $ x $ is a reduced ring (i.e., contains no nonzero nilpotent elements), then the scheme $ X $ is reduced.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": HasAffineProperty @QuasiSeparated (fun X _ _ _ ↦ QuasiSeparatedSpace X)\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.IsStandardEtale.mk\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Nonempty (StandardEtalePresentation R S) → Algebra.IsStandardEtale R S\", \"doc\": \"If there exists a standard étale presentation of $ S $ over $ R $, then $ S $ is a standard étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., zero) and the first cohomology group of the cotangent complex $ H^1_{\\\\text\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, ordinary categories or topological groupoids, not algebraic stacks; no exact result or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, ordinary categories or topological groupoids, not algebraic stacks; no exact result or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic.?stack|stack.*setoid|setoid.*stack|stack.*automorphism",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, ordinary categories or topological groupoids, not algebraic stacks; no exact result or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|algebraic.stack|setoid.*stack|stack.*setoid",
+   "results": {
+    "t": "2026-10-23T13:45:05Z",
+    "tool": "grep",
+    "query": "AlgebraicStack|algebraic.stack|setoid.*stack|stack.*setoid",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes and Zariski local representability, not algebraic stacks or algebraic-space representability of a setoid stack"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic stack with trivial automorphisms over all schemes is an algebraic space",
+   "results": {
+    "t": "2026-10-23T13:45:05Z",
+    "tool": "leansearch",
+    "query": "An algebraic stack with trivial automorphisms over all schemes is an algebraic space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instIsAffineOfSubsingletonCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.Scheme.mk.noConfusion",
+     "AlgebraicGeometry.IsAffine.recOn",
+     "AlgebraicGeometry.FormallyUnramified.casesOn",
+     "AlgebraicGeometry.isAffine_of_isEmpty",
+     "AlgebraicGeometry.IsAffine.casesOn",
+     "AlgebraicGeometry.AffineSpace.isoOfIsAffine.congr_simp",
+     "AlgebraicGeometry.Scheme.Etale"
+    ],
+    "digest": "9b3323c2980153f6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes and Zariski local representability, not algebraic stacks or algebraic-space representability of a setoid stack"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\"",
+   "results": {
+    "t": "2026-10-23T13:45:05Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicStack\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes and Zariski local representability, not algebraic stacks or algebraic-space representability of a setoid stack"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack with setoid fibres is representable by an algebraic space",
+   "results": {
+    "t": "2026-10-23T13:45:06Z",
+    "tool": "leanfinder",
+    "query": "An algebraic stack with setoid fibres is representable by an algebraic space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.LocalRepresentability.representableBy",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+     "AlgebraicGeometry.Scheme",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued",
+     "AlgebraicGeometry.Scheme.instFullEtaleOverForget",
+     "AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite",
+     "AlgebraicGeometry.Scheme.Etale"
+    ],
+    "digest": "982d593be6d0e343"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes and Zariski local representability, not algebraic stacks or algebraic-space representability of a setoid stack"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An Artin stack whose objects have no nonidentity automorphisms is an algebraic space",
+   "results": {
+    "t": "2026-10-23T13:48:01Z",
+    "tool": "leanfinder",
+    "query": "An Artin stack whose objects have no nonidentity automorphisms is an algebraic space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsLocallyArtinian.discreteTopology",
+     "AlgebraicGeometry.IsLocallyArtinian.discreteTopology_of_isAffine",
+     "AlgebraicGeometry.IsArtinianScheme",
+     "AlgebraicGeometry.IsArtinianScheme.finite",
+     "AlgebraicGeometry.IsLocallyArtinian",
+     "AlgebraicGeometry.IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology",
+     "AlgebraicGeometry.IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology",
+     "AlgebraicGeometry.IsAffine"
+    ],
+    "digest": "e91ce2a06d336628"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes and Zariski local representability, not algebraic stacks or algebraic-space representability of a setoid stack"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-self-relation-quotient-embedding",
+  "date": "2026-10-23",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Locally finite type residual substack at a finite-type point. Quotient construction: The quotient of a self-relation embeds in its target stack. Representability after an algebraic quotient: an algebraic stack with setoid fibres is an algebraic space (Stacks 04SZ).",
+   "via": [
+    "lem-sfb-self-relation-quotient-embedding",
+    "lem-sfb-finite-type-point-residual-substack",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-algebraic-stack-setoid-space",
+  "worker": "stage1",
+  "summary": "Reused the existing equivalent 04SZ theorem lem-sfb-algebraic-setoid-space rather than creating a duplicate. Checked its algebraic-stack definition, restricted the assumed fppf descent to etale coverings, verified identity automorphisms on every scheme directly, and inverted the supplied equivalence. No statement changes or new nodes. Project Lean search found no attachment; fresh logged Mathlib searches found no match.",
+  "blueprint": "Realizes the inherited from.place prerequisite for the self-relation quotient embedding: Stacks 04SZ. Read current latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), whose upper route has been shortened; retain the assigned generic supporting result, its null ancestor, and its full historical via chain. Whole-blueprint searches setoid, setoid space, algebraic stack, and no automorphisms found no blueprint equivalent.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-6c880dce4",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-6c880dce4 (reviewer sub-agent of L); spot-checked: Read all of the following: the item; the new proof's 3 steps; the cited statements (def-weil-etale-morphism, def-pc-fppf-site, def-sfb-algebraic-moduli-stack, def-trf-algebraic-space, def-sfb-stable-pointed-moduli-groupoids, lem-sfb-algebraic-setoid-space); Stacks algebraic.tex 04SZ with its proof of (1)=>(3), and 026O with the fppf/etale remark after it. The item statement is unchanged and correct for 04SZ (1)=>(3). The delivery creates no new nodes. Step 3 cites the equivalent existing same-day node lem-sfb-algebraic-setoid-space (Q85, same unit, unsplit, no cycle). The brief prescribes citation rather than a second node, so this is not D1/D2. The maintainer may merge the same-day duplicate pair (1-dag §2). Step 2 is elementary: at most one arrow gives Aut(x)={1} over every T, nonreduced T included. Step 3 inverts h_E≃W, which is valid; the cited node needs only an etale stack, which is weaker than the item's fppf hypothesis. FIX (E5/C2 gloss in step 1): the item defines atlas surjectivity as lifting field-valued objects after field extension, while def-sfb-algebraic-moduli-stack asks for Z→T surjective on the algebraic space 2-fibre product. The step claimed 'precisely the predicate' without a bridge. I added the few-line chart argument (V→Z etale surjective; a lift over L⊇κ(t) gives an L-point of Z, and V×_Z Spec L is nonempty), plus the converse. I added def-trf-algebraic-space and def-weil-field to the step's uses and to proof_deps. The step stays elementary; corrected file at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-algebraic-stack-setoid-space.json. Batch-5 flag: def-sfb-algebraic-moduli-stack, and through it def-trf-algebraic-space (already a stmt_dep on the base), are general definitions and not steps of the trace-formula or Poincaré proofs, so the citation is accepted. same_as [] confirmed (no 04SZ/setoid in blueprint main-20261015). No tool_uses needed; no SGA cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicStackSetoidSpace",
+  "declaration": "CategoryTheory.algebraicStack_setoid_space",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicStackSetoidSpace.lean",
+  "statement": "theorem algebraicStack_setoid_space {S : Scheme.{u}} (W : BasedCategory.{v, w} (Over S)) (hstack : IsFppfModuliStack W) (hdiag : HasAlgebraicSpaceDiagonal W) (hatlas : ∃ (U : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj U)) W), (∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) W), ∃ (Z : AlgebraicSpace S) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange a T t Z p ∧ SpaceMapIsSmooth Z T p) ∧ IsSurjectiveModuliMap a) (hsetoid : ∀ (T : Over S) (x y : Functor.Fiber W.p T), Subsingleton (x ⟶ y)) : ∃ (E : AlgebraicSpace S) (e : BasedFunctor W (discreteModuli E.obj.obj)), e.toFunctor.IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned head eb2c35d302c5 (H2): cite the live definition node def-sfb-surjective-moduli-map for the existing plain definition CategoryTheory.IsSurjectiveModuliMap, replacing the theorem-node statement dependency lem-sfb-stack-chartwise-smooth-etale-calculus. The fppf descent and smoothness definition nodes remain cited. The Lean file is byte-identical to the returned delivery; no theorem conclusion or .choose defines the predicate, and no statement correction or new definition is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-612167a70",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Repair of returned head eb2c35d302c5 (H2). The Lean file is byte-identical (sha256 189801c0); the item record changes only the stmt_dep, lem-sfb-stack-chartwise-smooth-etale-calculus -> def-sfb-surjective-moduli-map (live Q87, existing:true, plain def CategoryTheory.IsSurjectiveModuliMap), and lean.note. Dependency records are identical to side-live. Clause check against live source: IsFppfModuliStack, HasAlgebraicSpaceDiagonal, atlas with HasSpaceBaseChange+SpaceMapIsSmooth+IsSurjectiveModuliMap, Subsingleton vertical arrows, conclusion an equivalence W -> discreteModuli E.obj.obj. This is faithful to Stacks 04SZ (1)=>(3). Universes are free and no edge case is excluded. No Lean duplicate: lem-sfb-algebraic-setoid-space has lean null. Statement verbatim, a single sorry, docstrings present, report sections present. No compile because no file changed. Advisories: the H9 Morphisms.Etale import is proof-only; the IsSurjectiveModuliMap docstring still names the old theorem node as its blueprint."
+ }
+}

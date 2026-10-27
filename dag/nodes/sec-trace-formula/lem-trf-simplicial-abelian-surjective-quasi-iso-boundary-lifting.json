@@ -2,45 +2,31 @@
  "id": "lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting",
  "kind": "statement",
  "title": "Surjective simplicial abelian-group quasi-isomorphisms fill boundaries",
- "statement": "Let $X,Y:\\Delta^{\\mathrm{op}}\\to\\mathrm{Ab}$ be simplicial abelian groups and $f:X\\to Y$ a morphism [def-weil-pbc-simplicial-object]. Put $s(X)^{-n}=X_n$ for $n\\geq0$, with differential $\\sum_{i=0}^n(-1)^id_i$ for $n>0$, and zero positive terms, and define $s(Y)$ similarly. Assume that every homomorphism $f_n:X_n\\to Y_n$ is surjective and that $s(f)$ is a quasi-isomorphism, meaning an isomorphism on all cohomology groups $\\ker(d^r)/\\operatorname{im}(d^{r-1})$ [def-weil-abstract-derived-category]. Then the underlying simplicial-set map $Uf:UX\\to UY$ is a trivial Kan fibration [def-weil-pbc-trivial-kan-fibration]. Explicitly, for every $n\\geq0$, every commutative square with left map $\\partial\\Delta[n]\\hookrightarrow\\Delta[n]$ and right map $Uf$ has a simplicial filler making both triangles commute; $n=0$ includes surjectivity on vertices. No multiplicative structure, finiteness assumption, model structure, or topological realization is part of the hypotheses.",
+ "statement": "Let $X,Y:\\Delta^{\\mathrm{op}}\\to\\mathrm{Ab}$ be simplicial abelian groups and $f:X\\to Y$ a morphism [def-weil-pbc-simplicial-object]. Put $s(X)^{-n}=X_n$ for $n\\geq0$, with differential $\\sum_{i=0}^n(-1)^id_i$ for $n>0$, and zero positive terms, and define $s(Y)$ similarly. Assume that every homomorphism $f_n:X_n\\to Y_n$ is surjective and that $s(f)$ is a quasi-isomorphism, meaning an isomorphism on all cohomology groups $\\ker(d^r)/\\operatorname{im}(d^{r-1})$ [def-weil-abstract-derived-category]. Then the underlying simplicial-set map $Uf:UX\\to UY$ is a trivial Kan fibration. Explicitly, for every $n\\geq0$, every commutative square with left map $\\partial\\Delta[n]\\hookrightarrow\\Delta[n]$ and right map $Uf$ has a simplicial filler making both triangles commute; $n=0$ includes surjectivity on vertices. No multiplicative structure, finiteness assumption, model structure, or topological realization is part of the hypotheses.",
  "source": {
   "document": "literature/stacks-project/simplicial.tex",
   "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups), lines 5837-5881; trivial Kan means the boundary lifting of Definition 08NL."
  },
  "stmt_deps": [
   "def-weil-pbc-simplicial-object",
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-trivial-kan-fibration"
+  "def-weil-abstract-derived-category"
  ],
  "proof": [
   {
-   "text": "Let $K_n=\\ker(f_n)\\subseteq X_n$. Naturality of $f$ restricts every simplicial operator of $X$ to $K$, so $K$ is a simplicial abelian group. The alternating differentials restrict as well. Degreewise surjectivity gives the short exact sequence of cochain complexes $0\\to s(K)\\to s(X)\\xrightarrow{s(f)}s(Y)\\to0$, including the zero terms in positive degrees. Apply the cited long exact cohomology sequence. In $H^{r-1}(s(X))\\to H^{r-1}(s(Y))\\to H^r(s(K))\\to H^r(s(X))\\to H^r(s(Y))$, the first map is surjective and the last map injective by the quasi-isomorphism hypothesis. Exactness therefore makes the map out of $H^r(s(K))$ both injective and zero. Hence $H^r(s(K))=0$ for every integer $r$.",
+   "text": "Apply [lem-trf-simplicial-normalized-kernel-acyclic] to $f$. Its hypotheses are precisely the assumed termwise surjectivity and quasi-isomorphism of $s(f)$. It gives the simplicial kernel $K_m=\\ker(f_m)$ and $\\ker\\partial_m=\\operatorname{im}\\partial_{m+1}$ in its positive-face normalized complex for every $m\\geq0$.",
    "uses": [
-    "def-weil-pbc-simplicial-object",
-    "lem-weil-pbc-complex-ses-homology-long-exact"
+    "lem-trf-simplicial-normalized-kernel-acyclic"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08P1, proof, second paragraph: pass to the acyclic kernel, using Homology Tag 0117 (lemma-long-exact-sequence-cochain), equivalently its chain-indexed version Tag 0111."
+    "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups), second and last proof paragraphs: acyclic kernel and normalization comparison; Homology Tag 0117 (lemma-long-exact-sequence-cochain); Tag 019C (lemma-quasi-isomorphism). Positive-face normalization as in the existing lem-cbc-normalized-alternating-homotopy-equivalence. Returned proof Steps 1-2."
    }
   },
   {
-   "text": "Use the positive-face normalization in the cited comparison: $N(K)_0=K_0$, $N(K)_m=\\bigcap_{i=1}^m\\ker(d_i)$ for $m>0$, with differential $d_0$. The alternating complex $C(K)$ in that comparison has exactly the terms and differentials of $s(K)$ after replacing chain degree $m$ by cochain degree $-m$. Thus $C(K)$ is acyclic by Step 1. The comparison supplies chain maps $i:N(K)\\to C(K)$ and $p:C(K)\\to N(K)$ with $pi$ homotopic to the identity. On a cycle $z$, an identity $pi-1=dh+hd$ gives $piz-z=d(hz)$, so $pi$ acts as the identity on homology. The class of $iz$ is zero in $C(K)$, hence $[z]=p_*i_*[z]=0$. This proves that $N(K)$ is acyclic, also in degree zero, whose outgoing differential is zero.",
-   "uses": [
-    "lem-cbc-normalized-alternating-homotopy-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08P1, proof, last paragraph, using Tag 019C (lemma-quasi-isomorphism). The existing Mathlib homotopy-equivalence leaf supplies the positive-face/d_0 normalization, so the omitted face below is face 0 instead of the last face."
-   }
-  },
-  {
-   "text": "Fix a lifting square in dimension $n$. If $n=0$, choose $x\\in X_0$ mapping to the vertex $y\\in Y_0$, using surjectivity of $f_0$; the boundary is empty. For $n\\geq1$, evaluate the lower map $b:\\Delta[n]\\to UY$ at $\\mathrm{id}_{[n]}$ to get $y\\in Y_n$, and evaluate the upper map $a$ at the codimension-one injections $\\delta_i$ to get $x_i\\in X_{n-1}$. Naturality gives $b(\\alpha)=Y(\\alpha)y$ for every operator $\\alpha:[m]\\to[n]$, and the lifting square gives $f(x_i)=d_i y$. For $n\\geq2$, the face-face identity and naturality of $a$ give $d_i x_j=d_{j-1}x_i$ for $i<j$. For $n=1$ there are no such equations. It suffices to find $x\\in X_n$ mapping to $y$ with faces $x_i$; Step 7 checks the whole boundary, including its degenerate simplices.",
+   "text": "Fix a lifting square in dimension $n$. If $n=0$, choose $x\\in X_0$ mapping to the vertex $y\\in Y_0$, using surjectivity of $f_0$; the boundary is empty. For $n\\geq1$, evaluate the lower map $b:\\Delta[n]\\to UY$ at $\\mathrm{id}_{[n]}$ to get $y\\in Y_n$, and evaluate the upper map $a$ at the codimension-one injections $\\delta_i$ to get $x_i\\in X_{n-1}$. Naturality gives $b(\\alpha)=Y(\\alpha)y$ for every operator $\\alpha:[m]\\to[n]$, and the lifting square gives $f(x_i)=d_i y$. For $n\\geq2$, the face-face identity and naturality of $a$ give $d_i x_j=d_{j-1}x_i$ for $i<j$. For $n=1$ there are no such equations. It suffices to find $x\\in X_n$ mapping to $y$ with faces $x_i$; Step 5 checks the whole boundary, including its degenerate simplices.",
    "uses": [
     "def-weil-pbc-simplicial-object",
-    "def-weil-pbc-trivial-kan-fibration",
     "lem-weil-pbc-simplex-face-face-identity"
    ],
    "elementary": true,
@@ -62,33 +48,21 @@
    }
   },
   {
-   "text": "Apply the compatible-horn filling statement to the simplicial abelian group $K$, with omitted face $k=0$ and the prescribed faces $a_1,\\ldots,a_n$. Its hypotheses are exactly the compatibility equations obtained in Step 4 (none for $n=1$). Obtain $u\\in K_n$ with $d_j u=a_j$ for $1\\leq j\\leq n$. Set $z_i=a_i-d_i u$ for $0\\leq i\\leq n$. These satisfy $z_1=\\cdots=z_n=0$ and retain all the boundary compatibility equations.",
+   "text": "Apply [lem-trf-simplicial-normalized-acyclic-compatible-boundary] to $G=K$ and the family $(a_i)$ of Step 3. Step 1 supplies normalized acyclicity, including degree zero; Step 3 supplies every compatibility equation. Obtain $v\\in K_n$ with $d_i v=a_i$ for all $i$, also when $n=1$. Hence $x=t+v$ maps to $y$ and has faces $x_i$.",
    "uses": [
-    "lem-trf-simplicial-abelian-horn-filling"
+    "lem-trf-simplicial-normalized-acyclic-compatible-boundary"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08P1, proof, third paragraph invoking Tag 08NZ (lemma-simplicial-group-kan). Omit face 0 to match the positive-face normalization of Step 2."
+    "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups), third proof paragraph: horn filler and residual normalized cycle, using Tag 08NZ (lemma-simplicial-group-kan). Omit face 0 for the positive-face/d_0 normalization. Returned proof Steps 5-6."
    }
   },
   {
-   "text": "For $n\\geq2$ and $0\\leq i\\leq n-2$, compatibility for the pair $(0,i+1)$ gives $d_i z_0=d_0 z_{i+1}=0$. Thus all faces of $z_0\\in K_{n-1}$ vanish: it belongs to $N(K)_{n-1}$ and is a cycle for $d_0$. For $n=1$, $z_0\\in K_0=N(K)_0$ is automatically a cycle. Since Step 2 proved $H_{n-1}(N(K))=0$, the cycle $z_0$ lies in the image of the differential. Choose $w\\in N(K)_n$ with $d_0 w=z_0$; the defining kernels give $d_jw=0$ for $1\\leq j\\leq n$. Therefore $v=u+w\\in K_n$ has $d_i v=a_i$ for every $i$.",
-   "uses": [
-    "lem-cbc-normalized-alternating-homotopy-equivalence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08P1, proof, last paragraph: the residual face is a normalized cycle and acyclicity supplies a normalized primitive; using the d_0 convention avoids the last-face sign conversion."
-   }
-  },
-  {
-   "text": "Put $x=t+u+w$ for $n\\geq1$, and retain the vertex lift of Step 3 for $n=0$. Define $c:\\Delta[n]\\to UX$ in degree $m$ by $c(\\alpha)=X(\\alpha)x$. Functoriality makes this a simplicial map, and naturality of $f$ gives $f(c(\\alpha))=Y(\\alpha)y=b(\\alpha)$. To check the other triangle for $n\\geq1$, let $\\alpha:[m]\\to[n]$ be any boundary simplex, so it misses some vertex $i$. The cited face-factorization statement gives $\\alpha=\\delta_i\\circ\\psi$. Thus $c(\\alpha)=X(\\psi)d_i x=X(\\psi)x_i=a(\\alpha)$ by naturality of $a$. This includes every degenerate boundary simplex. For $n=0$ the boundary triangle is vacuous. Consequently the required fillers exist in all dimensions, which is precisely the cited definition of a trivial Kan fibration.",
+   "text": "Put $x=t+v$ for $n\\geq1$, and retain the vertex lift of Step 2 for $n=0$. Define $c:\\Delta[n]\\to UX$ in degree $m$ by $c(\\alpha)=X(\\alpha)x$. Functoriality makes this a simplicial map, and naturality of $f$ gives $f(c(\\alpha))=Y(\\alpha)y=b(\\alpha)$. To check the other triangle for $n\\geq1$, let $\\alpha:[m]\\to[n]$ be any boundary simplex, so it misses some vertex $i$. The cited face-factorization statement gives $\\alpha=\\delta_i\\circ\\psi$. Thus $c(\\alpha)=X(\\psi)d_i x=X(\\psi)x_i=a(\\alpha)$ by naturality of $a$. This includes every degenerate boundary simplex. For $n=0$ the boundary triangle is vacuous. Consequently the required fillers exist in all dimensions, which is precisely Definition 08NL of a trivial Kan fibration.",
    "uses": [
     "def-weil-pbc-simplicial-object",
-    "lem-weil-pbc-simplex-face-factorization",
-    "def-weil-pbc-trivial-kan-fibration"
+    "lem-weil-pbc-simplex-face-factorization"
    ],
    "elementary": true,
    "source": {
@@ -98,12 +72,10 @@
   }
  ],
  "proof_deps": [
+  "lem-trf-simplicial-normalized-kernel-acyclic",
   "def-weil-pbc-simplicial-object",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-cbc-normalized-alternating-homotopy-equivalence",
-  "def-weil-pbc-trivial-kan-fibration",
   "lem-weil-pbc-simplex-face-face-identity",
-  "lem-trf-simplicial-abelian-horn-filling",
+  "lem-trf-simplicial-normalized-acyclic-compatible-boundary",
   "lem-weil-pbc-simplex-face-factorization"
  ],
  "proof_origin": {
@@ -202,19 +174,170 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "item": "lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting",
   "worker": "stage1",
-  "summary": "Read Stacks 08P1 and its cited inputs. Retained the statement and inherited searches; gave the complete kernel/normalized-cycle proof in seven steps, including n=0 and n=1 and the check on arbitrary degenerate boundary simplices. Reused the existing Mathlib long exact sequence, normalized/alternating comparison and simplex factorization leaves. Added only the strictly smaller compatible-horn filling statement (08NZ), with actual logged Mathlib searches. No Lean edits or compilation.",
-  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Direct simplicial abelian-group input: termwise surjective quasi-isomorphism has boundary lifting (Stacks 08P1). Steps 1-7 discharge the boundary-lifting input of the standard polynomial-resolution comparison; Step 5 is the 08NZ horn input inside the 08P1 proof. This is the same auxiliary branch of the inherited nearest-blueprint ancestry, not a replacement of a unit step."
+  "summary": "NH repair of the 2026-10-22 re-split return: extracted old Steps 1-2 as normalized kernel acyclicity and old Steps 5-6 as compatible-boundary filling from normalized acyclicity. Both are self-contained statement-only unsplit nodes with logged searches. The parent keeps the original statement and the boundary extraction, subtraction and full simplicial reconstruction argument. Original seven arguments are preserved verbatim in report.md and allocated to parent/new nodes; no Lean edits or compiles. Repaired the subsequent L landing return by comparing the retained fc570d0eb40 delivery with the current live DAG, rereading every assembly citation and the retained argument inputs, and rebasing through deliver.py. The current live statement and all non-split metadata agree with the retained copy; all eight citation quotations remain verbatim. The live DAG still has the old seven-step proof, so the two extracted nodes and five-step assembly remain necessary. Current retry: initial server dry run 7b69815d889 passed. Compared the retained delivery again with the current read clone: only proof, proof_deps and split_report differ. Reread all current cited statements and source passages; no hypothesis, face convention or conclusion changed. Expanded citations.json to quote the natural-transformation definition, the kernel construction and the full compatible-family hypothesis, making the cited interfaces explicit. Both new statements and all logged searches are retained. Continued 2026-10-23: initial current-base dry run found two newer 08P1 polynomial-resolution nodes; opened their statements and added all four explicit pairwise nonduplicate explanations. Compared all retained/current metadata, reread every assembly citation and retained-argument input, and verified all eight verbatim quotes. The five-step assembly remains 2482 characters and both required extracted nodes remain unsplit; delivery is rebased by deliver.py onto the current server branch.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Direct simplicial abelian-group input: termwise surjective quasi-isomorphism has boundary lifting (Stacks 08P1). Steps 1-7 discharge the boundary-lifting input of the standard polynomial-resolution comparison; Step 5 is the 08NZ horn input inside the 08P1 proof. This is the same auxiliary branch of the inherited nearest-blueprint ancestry, not a replacement of a unit step. Old Steps 1-2 now belong to lem-trf-simplicial-normalized-kernel-acyclic; old Steps 5-6 belong to lem-trf-simplicial-normalized-acyclic-compatible-boundary; the parent retains old Steps 3,4,7."
  },
  "reviewed": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q59-3a27e3d95",
-  "group": "Q59",
+  "reviewer": "NT-cc-NH-4509ea554",
+  "group": "NH",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-3a27e3d95 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-simplicial-abelian-horn-filling and all 7 cited statements (all Mathlib leaves or matched defs), plus Stacks simplicial.tex 08NL l.5533-5545, 08NZ l.5755-5803, 08P1 l.5837-5881 and 019C; the tags 0111, 0117, 0166 and 0167 are correct. The statement is unchanged and matches 08P1 hypothesis by hypothesis. Step 1: the long exact sequence with H^{r-1}(f) onto and H^r(f) injective gives H^r(s(K))=0. Step 2: the homotopy equivalence with pi~1 makes N(K) acyclic, including degree 0. Steps 3-4: the face-face identity after an index shift gives a compatible boundary in K. Step 5 applies the horn node with k=0. Step 6: the pair (0,i+1) gives d_i z_0=0 for i<=n-2, so z_0 is a d_0-cycle in N(K)_{n-1}; the primitive w is normalized, and the cases n=1 and n=2 were checked. Step 7: c(alpha)=X(alpha)x, and alpha=delta_i psi also covers degenerate boundary simplices. The horn node is Moore's 08NZ for abelian groups. It is true (tested on n=1, the zero group and constant groups), strictly smaller than the item, statement-only and self-contained, with 4 search kinds logged. The DAG search (08NZ, horn and filler claims) found no duplicate: lem-cbc-dold-kan-homology, lem-cbc-normalized-horn-disk, lem-cbc-simplicial-module-moore-homotopy and lem-trf-cotangent-sheaf-model state other things, and the first two are dropped. There is no cycle, no off-unit route and no SGA. Route pivot: def-weil-pbc-trivial-kan-fibration is on the dropped list only as a 2026-10-18 propagation entry (an unreachable node whose Lean imported the machinery). It is the plain 08NL boundary lifting, already in the base stmt_deps, the item's own conclusion, used at Steps 3 and 7, and already used by the PASSed citer lem-trf-cotangent-resolution-coherence. Accepted. Maintainer note: give that def a Lean module without the dropped imports at stage 2. The flagged vocabulary (joyal, quillen, model structure, Kan complex, quasicategory, Segal) appears only in rejected Mathlib search records or in a negation; 'simplicial set' is elementary. Accepted. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-4509ea554 (reviewer sub-agent of L); spot-checked: Fourth push of the NH re-split, after earlier heads f5b5b4e2, 8ff70e57 and df26db5f all passed. Each was refused at landing only because the side completion was never promoted to live (coord/returns/NH.md, 14:51). Compared with df26db5f after json.tool, both new nodes are byte-identical; in the item only split_report.date and summary changed (statement, stmt_deps, proof, proof_deps, lean record and statement_change are unchanged). Live still has the old 7-step proof, neither new id exists live, and the released stage-1 repair note still applies, so nothing is superseded. The 7 cited statements are identical in live. I read Stacks simplicial.tex 08P1 (l.5836-5881). The delivery mirrors the source's face convention (positive faces with d_0, horn omitting face 0) and uses the cochain long exact sequence 0117. No SGA is cited. Re-split check: old Steps 1-2 become lem-trf-simplicial-normalized-kernel-acyclic (the LES gives H^r(s(K))=0 with r=0 included; then N≃C makes N(K) acyclic). Old Steps 5-6 become lem-trf-simplicial-normalized-acyclic-compatible-boundary (horn at k=0, z_0 is a normalized cycle, then a primitive w). Old Steps 3, 4 and 7 stay verbatim as parent Steps 2, 3 and 5. The new nodes take 1399 and 923 characters of the old proof, the assembly is 2482 characters (limit 3000) and nothing was shortened. Parent steps: Step 1's hypotheses are the item's exactly. The coface identity gives d_i x_j=d_{j-1}x_i. The a_i lie in K and stay compatible. The factorization α=δ_iψ also covers degenerate boundary simplices. proof_deps equals the union of the uses. Both new statements are true, self-contained and statement-only, each with 6 logged searches of the 4 kinds. Tested on n=1 (u=s_0a_1, w from exactness at degree 0), on n=2, on zero groups and on constant groups. Neither restates the item. A live grep for 08P1/08NZ finds cbc-dold-kan-homology, moore-homotopy, polynomial-augmentation-boundary, polynomial-resolution-extension, the twin node and horn-filling; none duplicates either new lemma. There is no cycle and no off-unit route, so there are no tool_uses. No fixes. Maintainer note: the side completion should be promoted rather than returning this head again."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SurjectiveQuasiIsoTrivialKan",
+  "declaration": "CategoryTheory.SimplicialObject.trivialKanFibration_of_surjective_of_quasiIso",
+  "statement": "theorem trivialKanFibration_of_surjective_of_quasiIso\n    {X Y : SimplicialObject AddCommGrpCat.{u}} (f : X ⟶ Y)\n    (hsurj : ∀ n : ℕ, Function.Surjective (f.app (Opposite.op (SimplexCategory.mk n))))\n    (hqis : ∀ n : ℤ, IsIso (HomologicalComplex.homologyMap\n      (HomologicalComplex.extendMap\n        ((AlgebraicTopology.alternatingFaceMapComplex AddCommGrpCat.{u}).map f)\n        ComplexShape.embeddingUpNat.op) n)) :\n    SSet.modelCategoryQuillen.I.rlp (Functor.whiskerRight f (forget AddCommGrpCat.{u}))",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Existing twin statement of Stacks 08P1. The alternating complex is represented as an integer chain complex, extended along embeddingUpNat.op (n ↦ n); reindexing chain degree n as cochain degree -n gives exactly the nonpositive complex of this node, with unchanged differentials and homology maps. Universal isomorphy on integer homology is therefore precisely the stated quasi-isomorphism hypothesis. I.rlp is boundary lifting in every dimension, including zero. No new declaration or import edge is introduced; the seven-step kernel/horn/normalized-cycle proof remains the proof plan for this node. The retired explanatory definition citation is removed by statement_change; the explicit boundary-lifting condition is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-142236771",
+  "group": "Q43",
+  "result": "pass",
+  "note": "existing:true binding to the landed twin declaration trivialKanFibration_of_surjective_of_quasiIso matches the node clause by clause (SimplicialObject AddCommGrpCat.{u}; hsurj for all n:ℕ; hqis on the integer homology of the alternating complex extended along embeddingUpNat.op, i.e. index n↦n so chain j = cochain −j with degree 0 keeping X_0; conclusion I.rlp = boundary lifting for all n with vertex surjectivity at n=0). The statement_change only drops the citation of def-weil-pbc-trivial-kan-fibration (route-pivot dropped) and its proof edges, verified by exact text comparison; the explicit filler clause is unchanged and both citers hold. Only the item node changed versus side-live; the recorded statement matches the file verbatim; no hollow definition, only sorry, no compile needed. Maintainer notes: the twin node's Step 2 applies this item, so stage 3 must prove the shared declaration with this item's 08P1 proof; the twin docstring wrongly says the degree-0 term is zero (it is X_0).",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "Q43 stage 2",
+  "old_statement": "Let $X,Y:\\Delta^{\\mathrm{op}}\\to\\mathrm{Ab}$ be simplicial abelian groups and $f:X\\to Y$ a morphism [def-weil-pbc-simplicial-object]. Put $s(X)^{-n}=X_n$ for $n\\geq0$, with differential $\\sum_{i=0}^n(-1)^id_i$ for $n>0$, and zero positive terms, and define $s(Y)$ similarly. Assume that every homomorphism $f_n:X_n\\to Y_n$ is surjective and that $s(f)$ is a quasi-isomorphism, meaning an isomorphism on all cohomology groups $\\ker(d^r)/\\operatorname{im}(d^{r-1})$ [def-weil-abstract-derived-category]. Then the underlying simplicial-set map $Uf:UX\\to UY$ is a trivial Kan fibration [def-weil-pbc-trivial-kan-fibration]. Explicitly, for every $n\\geq0$, every commutative square with left map $\\partial\\Delta[n]\\hookrightarrow\\Delta[n]$ and right map $Uf$ has a simplicial filler making both triangles commute; $n=0$ includes surjectivity on vertices. No multiplicative structure, finiteness assumption, model structure, or topological realization is part of the hypotheses.",
+  "what": "The explanatory definition citation def-weil-pbc-trivial-kan-fibration is retired by coord/route-pivot-dropped.txt. Server preflight rejects that stmt_deps edge. Remove only the citation and its statement/proof dependency edges; the statement already spells out every boundary square, its filler, and dimension zero, so its mathematical meaning is unchanged. The existing Mathlib I.rlp predicate implements that explicit condition directly, as Stacks 08NL requires. This follows the same source-preserving correction already made for the twin lem-trf-surjective-qis-simplicial-group-trivial-kan.",
+  "source": {
+   "document": "literature/stacks-project/simplicial.tex",
+   "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups) and Definition 08NL (definition-trivial-kan)"
+  },
+  "citers": [
+   {
+    "id": "lem-trf-cotangent-resolution-coherence",
+    "holds": true,
+    "note": "Step 3 applies the item to a termwise surjective augmentation and obtains all boundary lifts, including vertices; all these hypotheses and conclusions are unchanged."
+   },
+   {
+    "id": "lem-trf-surjective-qis-simplicial-group-trivial-kan",
+    "holds": true,
+    "note": "Steps 1–2 reindex the same alternating complex and use all-dimensional boundary lifting; removing an explanatory definition citation changes neither use."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-simplicial-object",
+   "def-weil-abstract-derived-category",
+   "def-weil-pbc-trivial-kan-fibration"
+  ],
+  "old_proof": [
+   {
+    "text": "Let $K_n=\\ker(f_n)\\subseteq X_n$. Naturality of $f$ restricts every simplicial operator of $X$ to $K$, so $K$ is a simplicial abelian group. The alternating differentials restrict as well. Degreewise surjectivity gives the short exact sequence of cochain complexes $0\\to s(K)\\to s(X)\\xrightarrow{s(f)}s(Y)\\to0$, including the zero terms in positive degrees. Apply the cited long exact cohomology sequence. In $H^{r-1}(s(X))\\to H^{r-1}(s(Y))\\to H^r(s(K))\\to H^r(s(X))\\to H^r(s(Y))$, the first map is surjective and the last map injective by the quasi-isomorphism hypothesis. Exactness therefore makes the map out of $H^r(s(K))$ both injective and zero. Hence $H^r(s(K))=0$ for every integer $r$.",
+    "uses": [
+     "def-weil-pbc-simplicial-object",
+     "lem-weil-pbc-complex-ses-homology-long-exact"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/simplicial.tex",
+     "place": "Tag 08P1, proof, second paragraph: pass to the acyclic kernel, using Homology Tag 0117 (lemma-long-exact-sequence-cochain), equivalently its chain-indexed version Tag 0111."
+    }
+   },
+   {
+    "text": "Use the positive-face normalization in the cited comparison: $N(K)_0=K_0$, $N(K)_m=\\bigcap_{i=1}^m\\ker(d_i)$ for $m>0$, with differential $d_0$. The alternating complex $C(K)$ in that comparison has exactly the terms and differentials of $s(K)$ after replacing chain degree $m$ by cochain degree $-m$. Thus $C(K)$ is acyclic by Step 1. The comparison supplies chain maps $i:N(K)\\to C(K)$ and $p:C(K)\\to N(K)$ with $pi$ homotopic to the identity. On a cycle $z$, an identity $pi-1=dh+hd$ gives $piz-z=d(hz)$, so $pi$ acts as the identity on homology. The class of $iz$ is zero in $C(K)$, hence $[z]=p_*i_*[z]=0$. This proves that $N(K)$ is acyclic, also in degree zero, whose outgoing differential is zero.",
+    "uses": [
+     "lem-cbc-normalized-alternating-homotopy-equivalence"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/simplicial.tex",
+     "place": "Tag 08P1, proof, last paragraph, using Tag 019C (lemma-quasi-isomorphism). The existing Mathlib homotopy-equivalence leaf supplies the positive-face/d_0 normalization, so the omitted face below is face 0 instead of the last face."
+    }
+   },
+   {
+    "text": "Fix a lifting square in dimension $n$. If $n=0$, choose $x\\in X_0$ mapping to the vertex $y\\in Y_0$, using surjectivity of $f_0$; the boundary is empty. For $n\\geq1$, evaluate the lower map $b:\\Delta[n]\\to UY$ at $\\mathrm{id}_{[n]}$ to get $y\\in Y_n$, and evaluate the upper map $a$ at the codimension-one injections $\\delta_i$ to get $x_i\\in X_{n-1}$. Naturality gives $b(\\alpha)=Y(\\alpha)y$ for every operator $\\alpha:[m]\\to[n]$, and the lifting square gives $f(x_i)=d_i y$. For $n\\geq2$, the face-face identity and naturality of $a$ give $d_i x_j=d_{j-1}x_i$ for $i<j$. For $n=1$ there are no such equations. It suffices to find $x\\in X_n$ mapping to $y$ with faces $x_i$; Step 7 checks the whole boundary, including its degenerate simplices.",
+    "uses": [
+     "def-weil-pbc-simplicial-object",
+     "def-weil-pbc-trivial-kan-fibration",
+     "lem-weil-pbc-simplex-face-face-identity"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/simplicial.tex",
+     "place": "Tag 08P1, first proof paragraph; Tag 08NL (definition-trivial-kan); Tag 0167 (lemma-relations-face-degeneracy), first identity."
+    }
+   },
+   {
+    "text": "For $n\\geq1$ choose $t\\in X_n$ with $f(t)=y$ and put $a_i=x_i-d_i t$. Then $f(a_i)=d_i y-d_i f(t)=0$, so $a_i\\in K_{n-1}$. When $n\\geq2$, the face-face identity gives $d_i a_j=d_i x_j-d_i d_j t=d_{j-1}x_i-d_{j-1}d_i t=d_{j-1}a_i$. Thus $(a_i)$ is a compatible boundary in $K$. A simplex $v\\in K_n$ with faces $a_i$ will give $x=t+v$ with $f(x)=y$ and $d_i x=x_i$.",
+    "uses": [
+     "def-weil-pbc-simplicial-object",
+     "lem-weil-pbc-simplex-face-face-identity"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/simplicial.tex",
+     "place": "Tag 08P1, proof, second paragraph: subtract an arbitrary lift of the lower simplex."
+    }
+   },
+   {
+    "text": "Apply the compatible-horn filling statement to the simplicial abelian group $K$, with omitted face $k=0$ and the prescribed faces $a_1,\\ldots,a_n$. Its hypotheses are exactly the compatibility equations obtained in Step 4 (none for $n=1$). Obtain $u\\in K_n$ with $d_j u=a_j$ for $1\\leq j\\leq n$. Set $z_i=a_i-d_i u$ for $0\\leq i\\leq n$. These satisfy $z_1=\\cdots=z_n=0$ and retain all the boundary compatibility equations.",
+    "uses": [
+     "lem-trf-simplicial-abelian-horn-filling"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/simplicial.tex",
+     "place": "Tag 08P1, proof, third paragraph invoking Tag 08NZ (lemma-simplicial-group-kan). Omit face 0 to match the positive-face normalization of Step 2."
+    }
+   },
+   {
+    "text": "For $n\\geq2$ and $0\\leq i\\leq n-2$, compatibility for the pair $(0,i+1)$ gives $d_i z_0=d_0 z_{i+1}=0$. Thus all faces of $z_0\\in K_{n-1}$ vanish: it belongs to $N(K)_{n-1}$ and is a cycle for $d_0$. For $n=1$, $z_0\\in K_0=N(K)_0$ is automatically a cycle. Since Step 2 proved $H_{n-1}(N(K))=0$, the cycle $z_0$ lies in the image of the differential. Choose $w\\in N(K)_n$ with $d_0 w=z_0$; the defining kernels give $d_jw=0$ for $1\\leq j\\leq n$. Therefore $v=u+w\\in K_n$ has $d_i v=a_i$ for every $i$.",
+    "uses": [
+     "lem-cbc-normalized-alternating-homotopy-equivalence"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/simplicial.tex",
+     "place": "Tag 08P1, proof, last paragraph: the residual face is a normalized cycle and acyclicity supplies a normalized primitive; using the d_0 convention avoids the last-face sign conversion."
+    }
+   },
+   {
+    "text": "Put $x=t+u+w$ for $n\\geq1$, and retain the vertex lift of Step 3 for $n=0$. Define $c:\\Delta[n]\\to UX$ in degree $m$ by $c(\\alpha)=X(\\alpha)x$. Functoriality makes this a simplicial map, and naturality of $f$ gives $f(c(\\alpha))=Y(\\alpha)y=b(\\alpha)$. To check the other triangle for $n\\geq1$, let $\\alpha:[m]\\to[n]$ be any boundary simplex, so it misses some vertex $i$. The cited face-factorization statement gives $\\alpha=\\delta_i\\circ\\psi$. Thus $c(\\alpha)=X(\\psi)d_i x=X(\\psi)x_i=a(\\alpha)$ by naturality of $a$. This includes every degenerate boundary simplex. For $n=0$ the boundary triangle is vacuous. Consequently the required fillers exist in all dimensions, which is precisely the cited definition of a trivial Kan fibration.",
+    "uses": [
+     "def-weil-pbc-simplicial-object",
+     "lem-weil-pbc-simplex-face-factorization",
+     "def-weil-pbc-trivial-kan-fibration"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/simplicial.tex",
+     "place": "Tag 08P1, conclusion, with Tag 08NL (definition-trivial-kan). Factorization is Tag 0166 (lemma-face-degeneracy), as recorded in the cited existing node."
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-pbc-simplicial-object",
+   "lem-weil-pbc-complex-ses-homology-long-exact",
+   "lem-cbc-normalized-alternating-homotopy-equivalence",
+   "def-weil-pbc-trivial-kan-fibration",
+   "lem-weil-pbc-simplex-face-face-identity",
+   "lem-trf-simplicial-abelian-horn-filling",
+   "lem-weil-pbc-simplex-face-factorization"
+  ]
+ }
 }

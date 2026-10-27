@@ -101,7 +101,32 @@
   "item": "lem-weil-pbc-n2-char-p-purely-inseparable-criterion",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Normal.fixedField_purelyInseparable_and_galois"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Normal.fixedField_purelyInseparable_and_galois",
+     "module": "WeilConjectures.FieldTheory.NormalExtensionFixedField",
+     "lines": [
+      27,
+      63
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "reviewed": "2026-10-10 L: 6 steps checked (030M (2), details omitted in Stacks, written out): E^G a subfield, roots of the minimal polynomial form one G-orbit (0BME), a G-fixed alpha has minimal polynomial (T - alpha)^d hence purely inseparable over F, E/E^G normal (09HN) and separable since the minimal polynomial divides the G-invariant product over the orbit (09H3); infinite G covered",
@@ -140,5 +165,47 @@
   "landing": "20261012T210030-L-954061",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $F$ be a field and $E/F$ a field extension which is algebraic and normal: every $\\alpha\\in E$ is algebraic over $F$ and its minimal polynomial over $F$ is a product of polynomials of degree one in $E[T]$. Let $E_{insep}=\\{x\\in E:\\sigma(x)=x$ for every $F$-algebra automorphism $\\sigma$ of $E\\}$. Then $E_{insep}$ is a subfield of $E$ containing $F$, the extension $E_{insep}/F$ is purely inseparable, and the extension $E/E_{insep}$ is separable algebraic and normal (i.e. Galois).",
+  "proof": [
+   {
+    "text": "Write $G$ for the group of $F$-algebra automorphisms of $E$, so $E_{insep}=\\{x\\in E:\\sigma(x)=x\\ \\forall\\sigma\\in G\\}$. Each $\\sigma\\in G$ is a ring automorphism fixing (the image of) $F$, so $F\\subseteq E_{insep}$, and if $x,y\\in E_{insep}$ then $\\sigma(x\\pm y)=x\\pm y$, $\\sigma(xy)=xy$ and, for $x\\neq0$, $\\sigma(x^{-1})=\\sigma(x)^{-1}=x^{-1}$. Hence $E_{insep}$ is a subfield of $E$ containing $F$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Orbits are root sets. Let $\\alpha\\in E$, let $P\\in F[T]$ be its minimal polynomial over $F$ ($\\alpha$ is algebraic over $F$ since $E/F$ is algebraic), and let $S_\\alpha=\\{\\beta\\in E:P(\\beta)=0\\}$. Then $\\alpha\\in S_\\alpha$, and $S_\\alpha$ is finite, with at most $\\deg P$ elements, as $P\\neq0$ in $E[T]$. For $\\sigma\\in G$ and $\\beta\\in S_\\alpha$, applying $\\sigma$ to $P(\\beta)=0$ (the coefficients of $P$ lie in $F$ and are fixed) gives $P(\\sigma(\\beta))=0$, so $\\sigma$ maps $S_\\alpha$ injectively into itself, hence bijectively since $S_\\alpha$ is finite. Conversely, for every $\\beta\\in S_\\alpha$ there is $\\sigma\\in G$ with $\\sigma(\\alpha)=\\beta$, since $E/F$ is algebraic and normal (the $F$-embedding $F(\\alpha)\\to E$, $\\alpha\\mapsto\\beta$, extends to an $F$-automorphism of $E$). Hence $S_\\alpha=\\{\\sigma(\\alpha):\\sigma\\in G\\}$, and every $\\sigma\\in G$ permutes $S_\\alpha$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "$E_{insep}/F$ is purely inseparable. Let $\\alpha\\in E_{insep}$ with minimal polynomial $P$ over $F$, of degree $d\\geq1$. By normality $P=\\prod_{i=1}^d(T-\\alpha_i)$ in $E[T]$ with $\\alpha_i\\in S_\\alpha$; by step 2 each $\\alpha_i=\\sigma_i(\\alpha)$ for some $\\sigma_i\\in G$, and $\\sigma_i(\\alpha)=\\alpha$ as $\\alpha\\in E_{insep}$. So $P=(T-\\alpha)^d$ in $E[T]$. If $F$ has characteristic $0$: the coefficient of $T^{d-1}$ in $P$ is $-d\\alpha\\in F$ and $d\\neq0$ in $F$, so $\\alpha\\in F$; hence $E_{insep}=F$. If $F$ has characteristic $p>0$: write $d=p^em$ with $p\\nmid m$. In $E[T]$ we have $(T-\\alpha)^{p^e}=T^{p^e}-\\alpha^{p^e}$ (the binomial coefficients $\\binom{p^e}{k}$, $0<k<p^e$, are divisible by $p$), so $P=(T^{p^e}-\\alpha^{p^e})^m$, whose coefficient of $T^{p^e(m-1)}$ is $-m\\alpha^{p^e}$. This lies in $F$ and $m$ is invertible in $F$, so $\\alpha^{p^e}\\in F$. In both cases $E_{insep}/F$ is purely inseparable (in characteristic $0$: $E_{insep}=F$; in characteristic $p$: every element has a $p^e$-th power in $F$).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "$E/E_{insep}$ is algebraic and normal: in the tower $F\\subseteq E_{insep}\\subseteq E$ (step 1), with $E/F$ algebraic and normal, the upper extension is normal (the minimal polynomial over $E_{insep}$ of $\\alpha\\in E$ divides its minimal polynomial over $F$, which splits in $E$).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "$E/E_{insep}$ is separable. Let $\\alpha\\in E$; it is algebraic over $E_{insep}$ by step 4. Let $S_\\alpha=\\{\\beta_1,\\dots,\\beta_r\\}$ be as in step 2, the $\\beta_j$ pairwise distinct, and $Q=\\prod_{j=1}^r(T-\\beta_j)\\in E[T]$, monic. For $\\sigma\\in G$ let $Q^\\sigma$ be the polynomial obtained by applying $\\sigma$ to the coefficients; $f\\mapsto f^\\sigma$ is a ring automorphism of $E[T]$ fixing $T$, so $Q^\\sigma=\\prod_j(T-\\sigma(\\beta_j))=Q$, because $\\sigma$ permutes $S_\\alpha$ (step 2). Thus every coefficient of $Q$ is fixed by $G$, i.e. $Q\\in E_{insep}[T]$. Since $Q(\\alpha)=0$ ($\\alpha\\in S_\\alpha$), the minimal polynomial $R$ of $\\alpha$ over $E_{insep}$, the monic generator of the kernel of $E_{insep}[T]\\to E$, $T\\mapsto\\alpha$, divides $Q$ in $E_{insep}[T]$. Since the $\\beta_j$ are pairwise distinct, $Q$ is separable in $E[T]$, hence separable as a polynomial over $E_{insep}$ (separability does not change under field extension), and so is its divisor $R$. So $\\alpha$ is separable over $E_{insep}$, and $E/E_{insep}$ is separable algebraic.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "By steps 4 and 5, $E/E_{insep}$ is algebraic, separable and normal, i.e. Galois (Definition 09I0). Together with steps 1 and 3 this is the statement.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

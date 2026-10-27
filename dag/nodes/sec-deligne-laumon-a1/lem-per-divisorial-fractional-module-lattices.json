@@ -1,0 +1,328 @@
+{
+ "id": "lem-per-divisorial-fractional-module-lattices",
+ "kind": "statement",
+ "title": "Divisorial fractional modules and their height-one lattices",
+ "statement": "Let $A$ be a commutative Noetherian normal domain [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring], and put $K=\\operatorname{Frac}(A)$. Let $H(A)$ be the set of height-one primes of $A$, meaning nonzero prime ideals having no prime strictly between them and $(0)$. For $\\mathfrak p\\in H(A)$, the localization $A_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] is a discrete valuation ring [def-sc-discrete-valuation-ring]; write $v_{\\mathfrak p}:K^\\times\\to\\mathbf Z$ for its normalized valuation. Let $(d_{\\mathfrak p})_{\\mathfrak p\\in H(A)}$ be integers, zero except at finitely many primes, and write $D=\\sum d_{\\mathfrak p}[\\mathfrak p]$. Define the concrete fractional submodule\n$$I_A(D)=\\{0\\}\\cup\\{f\\in K^\\times: v_{\\mathfrak p}(f)\\ge d_{\\mathfrak p}\\text{ for all }\\mathfrak p\\in H(A)\\}.$$\nThen $I_A(D)$ is a nonzero finitely generated $A$-submodule of $K$, spans $K$ over $K$, and is reflexive: evaluation $I_A(D)\\to\\operatorname{Hom}_A(\\operatorname{Hom}_A(I_A(D),A),A)$ is an isomorphism. For every $\\mathfrak p\\in H(A)$ and uniformizer $\\pi_{\\mathfrak p}$,\n$$I_A(D)_{\\mathfrak p}=\\pi_{\\mathfrak p}^{d_{\\mathfrak p}}A_{\\mathfrak p}\\subset K.$$\nFor every multiplicative subset $S\\subseteq A\\setminus\\{0\\}$, localization satisfies $S^{-1}I_A(D)=I_{S^{-1}A}(D|_{S^{-1}A})$, where the restricted divisor retains exactly the height-one primes disjoint from $S$, with their coefficients. The associated sheaf on $\\operatorname{Spec}A$, defined on each basic open $D(s)$ by $I_A(D)_s$, is coherent [pqf-def-coherent] and of finite presentation, meaning locally the cokernel of a map between finite free module sheaves. Every nonzero finite reflexive submodule $L\\subset K$ satisfies\n$$L=\\bigcap_{\\mathfrak p\\in H(A)}L_{\\mathfrak p}\\quad\\text{inside }K.$$\nIn particular $A=\\bigcap_{\\mathfrak p\\in H(A)}A_{\\mathfrak p}$. If all $d_{\\mathfrak p}\\ge0$, then $I_A(D)$ is an ideal of $A$ and $\\sqrt{I_A(D)}=\\bigcap_{d_{\\mathfrak p}>0}\\mathfrak p$, with an empty intersection equal to $A$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0EBM (divisors-lemma-normal-class-group), construction for a given Weil divisor, in its embedded fractional-module form; Tag 0AVB (more-algebra-lemma-reflexive-over-normal), condition (3). The localization, sign convention O(-D), and effective-ideal radical are explicit consequences of these constructions."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-discrete-valuation-ring",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-per-reflexive-height-one-intersection-criterion] to the finite free rank-one module $A$: both duals identify with $A$ by evaluation at $1$, and its evaluation map becomes the identity. It follows that $A=\\bigcap_{\\mathfrak p\\in H(A)}A_{\\mathfrak p}$ inside $K$. By [lem-trf-normal-domain-principal-divisor-kernel], these local rings are DVRs, membership is the condition $v_{\\mathfrak p}(f)\\ge0$, their units have valuation zero, and every nonzero $f\\in K$ has nonzero valuations at only finitely many height-one primes. We use only these assertions, not its divisor-class notation.",
+   "uses": [
+    "lem-per-reflexive-height-one-intersection-criterion",
+    "lem-trf-normal-domain-principal-divisor-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AVB, more-algebra-lemma-reflexive-over-normal, (1) iff (3); algebra.tex Tag 031T, algebra-lemma-normal-domain-intersection-localizations-height-1, (2), and Tag 00PD, algebra-lemma-characterize-dvr"
+   }
+  },
+  {
+   "text": "The valuation inequality $v(f+g)\\ge\\min(v(f),v(g))$ (when $f+g\\ne0$), together with $v(af)=v(a)+v(f)$ and $v_{\\mathfrak p}(a)\\ge0$ for $0\\ne a\\in A$, shows that $I=I_A(D)$ is an $A$-submodule of $K$. For each prime with $d_{\\mathfrak p}\\ne0$ choose $0\\ne c_{\\mathfrak p}\\in\\mathfrak p$. Set $a=\\prod_{d_{\\mathfrak p}<0}c_{\\mathfrak p}^{-d_{\\mathfrak p}}$ and $b=\\prod_{d_{\\mathfrak p}>0}c_{\\mathfrak p}^{d_{\\mathfrak p}}$. Both are nonzero, with empty products equal to $1$. Since $c_{\\mathfrak p}/1$ lies in the maximal ideal of its DVR, its valuation there is at least $1$; at every other prime its valuation is nonnegative. Hence $v_{\\mathfrak p}(a)+d_{\\mathfrak p}\\ge0$ and $v_{\\mathfrak p}(b)\\ge d_{\\mathfrak p}$ for all $\\mathfrak p$. Step 1 gives $aI\\subseteq A$ and $bA\\subseteq I$.",
+   "uses": [
+    "lem-trf-normal-domain-principal-divisor-kernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EBM, divisors-lemma-normal-class-group, construction for a given divisor; explicit affine valuation argument with the sign convention I(D)=O(-D)"
+   }
+  },
+  {
+   "text": "Multiplication by $a$ is an $A$-linear isomorphism $I\\cong aI$, and $aI\\subseteq A$. Apply [lem-trf-noetherian-submodule-finitely-presented] with the finite module $F=A$ and submodule $aI$. Thus $I$ is finitely generated and finitely presented. The nonzero element $b\\in I$ proves nonzeroness and spanning of $K$: every $x\\in K$ is $(x/b)b$. In particular the map $K\\otimes_A I\\to K$ is an isomorphism, with inverse $x\\mapsto(x/b)\\otimes b$; the fraction relations show that this inverse is independent of the chosen element of $I$ used to represent a tensor.",
+   "uses": [
+    "lem-trf-noetherian-submodule-finitely-presented"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FP, algebra-lemma-Noetherian-finite-type-is-finite-presentation, (1) and (2)"
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak p\\in H(A)$. Fractions $h/u$ with $h\\in I$ and $u\\in A\\setminus\\mathfrak p$ have $v_{\\mathfrak p}(h/u)\\ge d_{\\mathfrak p}$ because $v_{\\mathfrak p}(u)=0$. Conversely, take $0\\ne f\\in K$ satisfying that inequality. The bad set $B=\\{\\mathfrak q:v_{\\mathfrak q}(f)<d_{\\mathfrak q}\\}$ is finite, by finite support of both $D$ and the valuations of $f$, and does not contain $\\mathfrak p$. Distinct height-one primes are incomparable, so for each $\\mathfrak q\\in B$ choose $t_{\\mathfrak q}\\in\\mathfrak q\\setminus\\mathfrak p$. Put $t=\\prod_{\\mathfrak q\\in B}t_{\\mathfrak q}^{d_{\\mathfrak q}-v_{\\mathfrak q}(f)}$. Then $t\\notin\\mathfrak p$, and at a bad prime the corresponding factor adds at least the required deficit. At every other prime all added valuations are nonnegative. Thus $tf\\in I$ and $f=(tf)/t\\in I_{\\mathfrak p}$. Including zero proves $I_{\\mathfrak p}=\\{0\\}\\cup\\{f:v_{\\mathfrak p}(f)\\ge d_{\\mathfrak p}\\}=\\pi_{\\mathfrak p}^{d_{\\mathfrak p}}A_{\\mathfrak p}$, the last equality following by applying the membership test to $f/\\pi_{\\mathfrak p}^{d_{\\mathfrak p}}$.",
+   "uses": [
+    "lem-trf-normal-domain-principal-divisor-kernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AVB, more-algebra-lemma-reflexive-over-normal, finite-support localization argument; explicit rank-one denominator correction"
+   }
+  },
+  {
+   "text": "The definition of $I$ and Step 4 give $I=\\bigcap_{\\mathfrak p\\in H(A)}I_{\\mathfrak p}$ in $K$. It is torsion free as a submodule of a field, and finite by Step 3. Therefore [lem-per-reflexive-height-one-intersection-criterion] proves reflexivity, for the actual evaluation map in the statement. If $L\\subset K$ is any nonzero finite reflexive module, the same criterion gives $L=\\bigcap L_{\\mathfrak p}$: any $0\\ne l\\in L$ identifies $K\\otimes_A L$ with $K$ by the multiplication map, whose inverse is $x\\mapsto(x/l)\\otimes l$. Thus these are the specified embedded intersections, not just abstract isomorphisms.",
+   "uses": [
+    "lem-per-reflexive-height-one-intersection-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AVB, more-algebra-lemma-reflexive-over-normal, (1) iff (3)"
+   }
+  },
+  {
+   "text": "Put $A^{\\prime}=S^{-1}A$. It is Noetherian and normal with fraction field $K$ by [lem-weil-pbc-localization-noetherian, lem-weil-pbc-localization-normal-domain]. By [lem-weil-pbc-localization-prime-residue-field-iso], primes of $A^{\\prime}$ correspond to primes of $A$ disjoint from $S$, and $(A^{\\prime})_{S^{-1}\\mathfrak p}=A_{\\mathfrak p}$ inside $K$. Extension and contraction preserve inclusion (check generators of extended ideals), and every prime below one disjoint from $S$ is also disjoint from $S$. Thus height-one primes correspond exactly and their normalized valuations agree. Fractions $h/s$ with $h\\in I$ satisfy every surviving inequality since $v_{\\mathfrak p}(s)=0$ at primes disjoint from $S$. Conversely, let $0\\ne f\\in K$ satisfy those inequalities. Its finite bad set $B=\\{\\mathfrak q:v_{\\mathfrak q}(f)<d_{\\mathfrak q}\\}$ consists entirely of primes meeting $S$. Choose $s_{\\mathfrak q}\\in S\\cap\\mathfrak q$ for each, and set $s=\\prod_{\\mathfrak q\\in B}s_{\\mathfrak q}^{d_{\\mathfrak q}-v_{\\mathfrak q}(f)}\\in S$. Exactly as in Step 4, $sf\\in I$, so $f=(sf)/s\\in S^{-1}I$. Zero belongs to both sides. This proves the claimed equality for arbitrary $S$, including localization to a field.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-trf-normal-domain-principal-divisor-kernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E3, algebra-lemma-spec-localization; 00FN, algebra-lemma-Noetherian-permanence; 00GY, algebra-lemma-localize-normal-domain; explicit finite denominator correction"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-spec-module-tilde-sections] to $I$: it gives the quasi-coherent sheaf whose sections on $D(s)$ are $I_s$, with the stated localization restrictions. By [lem-weil-pbc-quasi-coherent-finite-type-affine], its finite and finitely presented global-section module $I$ (Step 3) makes this sheaf of finite type and of finite presentation, with the latter having precisely the local finite-free cokernel meaning in the item. Since $\\operatorname{Spec}A$ is locally Noetherian, [pqf-lem-coherent-ft-locnoeth] then proves coherence.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XZ, coherent-lemma-coherent-Noetherian; properties.tex Tags 01PB, properties-lemma-finite-type-module, and 01PC, properties-lemma-finite-presentation-module; schemes.tex Tag 01HV, schemes-lemma-spec-sheaves"
+   }
+  },
+  {
+   "text": "If every $d_{\\mathfrak p}\\ge0$, Step 1 gives $I\\subseteq A$, so the submodule is an ideal. For $x\\in A\\setminus\\{0\\}$ and $d_{\\mathfrak p}>0$, membership $x\\in\\mathfrak p$ is equivalent to $v_{\\mathfrak p}(x)\\ge1$: localization contracts the maximal ideal back to $\\mathfrak p$, and positive valuation means membership in that maximal ideal. If $x^N\\in I$ for some $N\\ge1$, then $Nv_{\\mathfrak p}(x)\\ge d_{\\mathfrak p}>0$, so $x$ belongs to every such prime. Conversely, if $x$ belongs to all those primes, choose $N\\ge1$ at least all the finitely many positive $d_{\\mathfrak p}$. Then $Nv_{\\mathfrak p}(x)\\ge d_{\\mathfrak p}$ at the positive coefficients; at all other primes $v_{\\mathfrak p}(x)\\ge0$. Hence $x^N\\in I$. Zero satisfies both sides. With no positive coefficients $D=0$ and $I=A$, proving the empty-intersection convention too.",
+   "uses": [
+    "lem-trf-normal-domain-principal-divisor-kernel",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3, algebra-lemma-spec-localization; Tag 031T, algebra-lemma-normal-domain-intersection-localizations-height-1; explicit radical calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-reflexive-height-one-intersection-criterion",
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-trf-noetherian-submodule-finitely-presented",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Affine embedded-module elaboration of Tag 0EBM, using Tag 0AVB. Finite denominator corrections and the effective radical are written out by Q39."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fractional ideal defined by finitely many height one valuation inequalities in a normal Noetherian domain is finite reflexive of rank one",
+   "results": "{\"t\": \"2026-10-24T01:29:59Z\", \"tool\": \"leanfinder\", \"query\": \"The fractional ideal defined by finitely many height one valuation inequalities in a normal Noetherian domain is finite reflexive of rank one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FractionalIdeal.finite_factors\", \"IsDedekindDomain.HeightOneSpectrum.Support.finite\", \"Set.coe_integer\", \"FractionalIdeal.finite_factors'\", \"FractionalIdeal.count_maximal\", \"Ideal.finite_mulSupport_inv\", \"Ideal.finite_mulSupport_coe\", \"instIsPrincipalIdealRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation\"], \"digest\": \"a4190c7b07663cf3\"}; The semantic hits concern Dedekind domains or the definition of reflexivity. FractionalIdeal.isNoetherian only proves finiteness of an already constructed fractional ideal. None constructs arbitrary Weil divisorial lattices over higher-dimensional normal domains.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Divisorial ideals are exactly rank one reflexive fractional submodules of the fraction field of a normal Noetherian domain",
+   "results": "{\"t\": \"2026-10-24T01:32:05Z\", \"tool\": \"leanfinder\", \"query\": \"Divisorial ideals are exactly rank one reflexive fractional submodules of the fraction field of a normal Noetherian domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomainInv.isDedekindDomain\", \"IsDedekindDomainInv\", \"IsDedekindDomain\", \"isDedekindDomainInv_iff\", \"FractionalIdeal.isPrincipal\", \"isDedekindDomain_iff_isDedekindDomainInv\", \"isDedekindDomain_iff\", \"IsDedekindDomainInv.dimensionLEOne\"], \"digest\": \"f1b40f4fe5c4a9b0\"}; The semantic hits concern Dedekind domains or the definition of reflexivity. FractionalIdeal.isNoetherian only proves finiteness of an already constructed fractional ideal. None constructs arbitrary Weil divisorial lattices over higher-dimensional normal domains.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil divisors correspond to rank one reflexive modules over normal Noetherian domains",
+   "results": "{\"t\": \"2026-10-24T01:29:57Z\", \"tool\": \"leansearch\", \"query\": \"Weil divisors correspond to rank one reflexive modules over normal Noetherian domains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.IsReflexive\", \"Module.IsReflexive.of_isPerfPair\", \"LinearEquiv.isReflexive_of_equiv_dual_of_isReflexive\", \"Module.IsReflexive.to_isTorsionFree\", \"FractionalIdeal.isNoetherian\", \"Module.Dual.instIsReflecive\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.evalEquiv\"], \"digest\": \"214db1b03eaf1164\"}; The semantic hits concern Dedekind domains or the definition of reflexivity. FractionalIdeal.isNoetherian only proves finiteness of an already constructed fractional ideal. None constructs arbitrary Weil divisorial lattices over higher-dimensional normal domains.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsReflexive, IsIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-24T01:29:57Z\", \"tool\": \"loogle\", \"query\": \"Module.IsReflexive, IsIntegrallyClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The semantic hits concern Dedekind domains or the definition of reflexivity. FractionalIdeal.isNoetherian only proves finiteness of an already constructed fractional ideal. None constructs arbitrary Weil divisorial lattices over higher-dimensional normal domains.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "reflexive|divisorial|fractional.*ideal",
+   "results": "{\"t\": \"2026-10-24T01:29:57Z\", \"tool\": \"grep\", \"query\": \"reflexive|divisorial|fractional.*ideal\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/FractionalIdeal/Operations.lean\", \"Mathlib/RingTheory/FractionalIdeal/Operations.lean\", \"Mathlib/RingTheory/FractionalIdeal/Operations.lean\", \"Mathlib/RingTheory/FractionalIdeal/Operations.lean\", \"Mathlib/RingTheory/FractionalIdeal/Operations.lean\", \"Mathlib/RingTheory/FractionalIdeal/Extended.lean\", \"Mathlib/RingTheory/FractionalIdeal/Extended.lean\", \"Mathlib/RingTheory/FractionalIdeal/Extended.lean\"], \"digest\": \"8007c916d877be02\"}; The semantic hits concern Dedekind domains or the definition of reflexivity. FractionalIdeal.isNoetherian only proves finiteness of an already constructed fractional ideal. None constructs arbitrary Weil divisorial lattices over higher-dimensional normal domains.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReflexive|dualDistribEquiv|baseChange",
+   "date": "2026-10-24",
+   "results": "{\"t\": \"2026-10-24T01:38:55Z\", \"tool\": \"grep\", \"query\": \"IsReflexive|dualDistribEquiv|baseChange\", \"sub\": \"LinearAlgebra/Dual\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\"], \"digest\": \"ae05e615d3797610\"}; Read Dual/Defs.lean lines 205-250, Dual/Lemmas.lean lines 251-270, and all of Dual/BaseChange.lean. Reflexive definition and finite-free dual base change do not supply the required general normal-domain/flat-base-change result.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsReflexive, IsIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-24T01:58:30Z\", \"tool\": \"loogle\", \"query\": \"Module.IsReflexive, IsIntegrallyClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Definition/free or projective reflexivity and Dedekind-domain localization results do not give the arbitrary-rank normal Noetherian domain criterion. Read Dual/Defs.lean 205-250, Dual/Lemmas.lean 251-270, and DedekindDomain/Ideal/Lemmas.lean 564-577.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite torsion free modules over a normal Noetherian domain are reflexive if and only if they equal the intersection of their height one localizations",
+   "results": "{\"t\": \"2026-10-24T01:58:33Z\", \"tool\": \"leanfinder\", \"query\": \"Finite torsion free modules over a normal Noetherian domain are reflexive if and only if they equal the intersection of their height one localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"Module.Flat.instOfIsDedekindDomainOfIsTorsionFree\", \"Module.Finite.of_isLocalized_maximal\", \"IsDedekindDomain.flat_iff_torsion_eq_bot\", \"Submodule.fg_of_isLocalized_maximal\", \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"Submodule.exists_isInternal_prime_power_torsion\", \"IsDedekindDomain.HeightOneSpectrum.iInf_localization_eq_bot\"], \"digest\": \"d02a5d812bf651d8\"}; Definition/free or projective reflexivity and Dedekind-domain localization results do not give the arbitrary-rank normal Noetherian domain criterion. Read Dual/Defs.lean 205-250, Dual/Lemmas.lean 251-270, and DedekindDomain/Ideal/Lemmas.lean 564-577.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite module over a normal Noetherian domain is reflexive exactly when it is torsion free and equals its height one localizations intersection",
+   "results": "{\"t\": \"2026-10-24T01:58:46Z\", \"tool\": \"leansearch\", \"query\": \"A finite module over a normal Noetherian domain is reflexive exactly when it is torsion free and equals its height one localizations intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.IsReflexive\", \"Module.IsReflexive.to_isTorsionFree\", \"Module.Dual.instIsReflecive\", \"Module.IsReflexive.of_finite_of_free\", \"LinearEquiv.isReflexive_of_equiv_dual_of_isReflexive\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.IsReflexive.mk\", \"Module.free_iff_isTorsionFree\"], \"digest\": \"0f966b66931b3de3\"}; Definition/free or projective reflexivity and Dedekind-domain localization results do not give the arbitrary-rank normal Noetherian domain criterion. Read Dual/Defs.lean 205-250, Dual/Lemmas.lean 251-270, and DedekindDomain/Ideal/Lemmas.lean 564-577.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReflexive|reflexive|heightOneSpectrum|HeightOneSpectrum",
+   "results": "{\"t\": \"2026-10-24T01:58:46Z\", \"tool\": \"grep\", \"query\": \"IsReflexive|reflexive|heightOneSpectrum|HeightOneSpectrum\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean\", \"Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean\", \"Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\"], \"digest\": \"a84d5c82fc6f17ce\"}; Definition/free or projective reflexivity and Dedekind-domain localization results do not give the arbitrary-rank normal Noetherian domain criterion. Read Dual/Defs.lean 205-250, Dual/Lemmas.lean 251-270, and DedekindDomain/Ideal/Lemmas.lean 564-577.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reflexive hull of a finite torsion free module over an integrally closed Noetherian domain is the intersection at codimension one primes",
+   "results": "{\"t\": \"2026-10-24T01:58:51Z\", \"tool\": \"leanfinder\", \"query\": \"Reflexive hull of a finite torsion free module over an integrally closed Noetherian domain is the intersection at codimension one primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.instFiniteNormalClosure_1\", \"Ring.instFiniteNormalClosure\", \"coeSubmodule_differentIdeal\", \"differentIdeal\", \"coeSubmodule_differentIdeal_fractionRing\", \"IsDedekindDomain.HeightOneSpectrum.iInf_localization_eq_bot\", \"IsDedekindDomainInv.integrallyClosed\", \"isDedekindDomain_iff\"], \"digest\": \"c68fc0e1ba49b335\"}; Definition/free or projective reflexivity and Dedekind-domain localization results do not give the arbitrary-rank normal Noetherian domain criterion. Read Dual/Defs.lean 205-250, Dual/Lemmas.lean 251-270, and DedekindDomain/Ideal/Lemmas.lean 564-577.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Divisorial fractional ideals of normal Noetherian domains are finite reflexive modules with prescribed codimension one valuations",
+   "results": "{\"t\": \"2026-10-24T02:00:28Z\", \"tool\": \"leansearch\", \"query\": \"Divisorial fractional ideals of normal Noetherian domains are finite reflexive modules with prescribed codimension one valuations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsFractional\", \"FractionalIdeal.fg_of_isNoetherianRing\", \"FractionalIdeal.isNoetherian\", \"FractionalIdeal.isNoetherian_coeIdeal\", \"FractionalIdeal.instDivNonZeroDivisors.congr_simp\", \"FractionalIdeal.isPrincipal\", \"FractionalIdeal.isNoetherian_iff\", \"NumberField.instFreeIntSubtypeMemSubmoduleRingOfIntegersCoeToSubmodule\"], \"digest\": \"a92a9fcd3c5e0742\"}; FractionalIdeal.fg_of_isNoetherianRing (Basic.lean 699-703) handles an already bounded fractional ideal; Dedekind-domain results require dimension at most one. No match for the complete divisorial construction and localization/reflexivity clauses.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "divisorial|isNoetherian|finite_factors",
+   "results": "{\"t\": \"2026-10-24T02:00:28Z\", \"tool\": \"grep\", \"query\": \"divisorial|isNoetherian|finite_factors\", \"sub\": \"RingTheory/FractionalIdeal\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/FractionalIdeal/Operations.lean\", \"Mathlib/RingTheory/FractionalIdeal/Operations.lean\", \"Mathlib/RingTheory/FractionalIdeal/Operations.lean\", \"Mathlib/RingTheory/FractionalIdeal/Operations.lean\", \"Mathlib/RingTheory/FractionalIdeal/Operations.lean\", \"Mathlib/RingTheory/FractionalIdeal/Basic.lean\"], \"digest\": \"1a2494141ae330d6\"}; FractionalIdeal.fg_of_isNoetherianRing (Basic.lean 699-703) handles an already bounded fractional ideal; Dedekind-domain results require dimension at most one. No match for the complete divisorial construction and localization/reflexivity clauses.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fractional module defined by finitely supported height one valuation lower bounds on a normal Noetherian domain is finite and reflexive and commutes with localization",
+   "results": "{\"t\": \"2026-10-24T02:00:32Z\", \"tool\": \"leanfinder\", \"query\": \"The fractional module defined by finitely supported height one valuation lower bounds on a normal Noetherian domain is finite and reflexive and commutes with localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.Support.finite\", \"Set.coe_integer\", \"IsDedekindDomain.HeightOneSpectrum.valuation_def\", \"NumberField.RingOfIntegers.instIsDedekindDomainWithVal\", \"IsDedekindDomain.HeightOneSpectrum.instIsTorsionFreeSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"NumberField.instIsLocalizedModuleIntSubtypeMemSubmoduleRingOfIntegersCoeToSubmoduleValFractionalIdealNonZeroDivisorsRestrictScalarsSubtype\", \"IsDedekindDomain.HeightOneSpectrum.valuation_of_mk'\", \"IsDedekindDomain.HeightOneSpectrum.valuation_le_one\"], \"digest\": \"ef8bf247eba6f317\"}; FractionalIdeal.fg_of_isNoetherianRing (Basic.lean 699-703) handles an already bounded fractional ideal; Dedekind-domain results require dimension at most one. No match for the complete divisorial construction and localization/reflexivity clauses.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReflexive|reflexive|localization",
+   "results": "{\"t\": \"2026-10-24T02:01:13Z\", \"tool\": \"grep\", \"query\": \"IsReflexive|reflexive|localization\", \"sub\": \"LinearAlgebra/Dual\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\"], \"digest\": \"92eebbbdbc8e2f8f\"}; Definition/free or projective reflexivity and Dedekind-domain localization results do not give the arbitrary-rank normal Noetherian domain criterion. Read Dual/Defs.lean 205-250, Dual/Lemmas.lean 251-270, and DedekindDomain/Ideal/Lemmas.lean 564-577.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-weil-divisor-strict-local-cartier-test",
+  "date": "2026-10-24",
+  "group": "Q63"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular-pair modification input: ILO VIII 5.3.8, printed p.125, assertion that the quotient Weil boundary is Q-Cartier, checked etale-locally; Divisorial fractional modules and their height-one lattices.",
+   "via": [
+    "lem-per-weil-divisor-strict-local-cartier-test",
+    "lem-per-very-tame-boundary-quotient-cartier",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-divisorial-fractional-module-lattices",
+  "worker": "stage1",
+  "summary": "Proved the concrete lattice construction by valuation bounds and explicit finite denominator products; extracted only the general arbitrary-rank reflexivity/intersection criterion. Reused existing DVR/finiteness/localization/associated-sheaf results. No statement correction.",
+  "blueprint": "The inherited ancestor lem-per-artin-gabber-affine-curve, proof Step 3 regular-pair modification input, via the recorded Gabber/very-tame boundary chain: supplies the concrete O(-D) fractional lattice used in the strict-local Cartier test. No change to chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-normal-domain-principal-divisor-kernel",
+    "why": "Generic normal-domain DVR membership and finite valuation support, needed to construct the boundary fractional lattice; the unit contains no such algebraic input."
+   },
+   {
+    "node": "lem-trf-noetherian-submodule-finitely-presented",
+    "why": "Generic finite-submodule and finite-presentation theorem used after bounding the concrete fractional module."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic permanence of Noetherian rings under localization for the arbitrary multiplicative-set clause."
+   },
+   {
+    "node": "lem-weil-pbc-localization-normal-domain",
+    "why": "Generic permanence of normal domains and fraction fields under localization."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Generic prime correspondence and equality of iterated local rings; proves the divisor restriction and radical test."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "Generic construction of the associated quasi-coherent sheaf on an affine scheme."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic affine comparison of finite generation/presentation with the sheaf notions."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic coherent versus quasi-coherent finite type criterion on a locally Noetherian scheme."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-trf-noetherian-submodule-finitely-presented",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-12ea4b2ab",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-12ea4b2ab (reviewer sub-agent of L); spot-checked: I read the item and the one new node in full. The new node lem-per-reflexive-height-one-intersection-criterion is exactly Stacks more-algebra 0AVB (1)<=>(3), which I read at the source. Its height-one and empty-intersection conventions are stated, it carries a statement only and is unsplit, and its LeanSearch, LeanFinder, Loogle and grep searches all found no match. rg -L over dag/nodes and blueprint_refs (reflexive, 0AVB) found no duplicate. It is a strict generalization used in two directions, not a restated clause. I checked all 8 steps against the statements of the cited nodes. Steps 2-4: the valuation bounds and the elements a, b, t are correct; q is not contained in p because both have height one; the inverse x -> (x/b)(x)b is well defined. Step 3: the trf 00FP leaf is applied to aI inside A. Step 6: 0 is not in S, prime correspondence and equal local rings, s = product of s_q in S. Step 7: tilde sheaf, affine finite type/presentation comparison, 01XZ coherence. Step 8: radical via contraction of pA_p. Edge cases checked: A a field, D=0, S={1}, S=A minus 0, and (x,y) in k[x,y]. The parent's uses (stalk localization, lattice formula, intersections, effective radical) are all covered by the item's statement. Batch 5: lem-trf-normal-domain-principal-divisor-kernel has an 83-node closure that is pure commutative algebra; its only trace-formula-chapter member besides itself is the definition def-trf-affine-weil-divisor-class-group. lem-trf-noetherian-submodule-finitely-presented is a Mathlib leaf. Both are generic and outside the trace-formula and Poincare-duality assumptions, so I accepted them. All 8 tool_uses are generic and accepted. No SGA cited, no statement change, no fixes."
+ }
+}

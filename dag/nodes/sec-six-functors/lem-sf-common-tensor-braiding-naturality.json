@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-common-tensor-braiding-naturality",
+ "kind": "statement",
+ "title": "Naturality of the common-stage Koszul braiding",
+ "statement": "Let l be prime, Ω an algebraic closure of Q_l, and X a scheme on whose residue fields l is invertible. In the common finite coefficient-stage category C of [def-weil-algebraically-closed-coefficients], use the specified tensor T of [def-weil-derived-pullback-tensor-hom] and common-stage Koszul braiding β of [def-sf-rational-common-tensor-symmetries]. For any M,M′,N,N′ in C and any f:M→M′ and g:N→N′, T(f,g) ≫ β(M′,N′).hom = β(M,N).hom ≫ T(g,f). This includes all localized arrows and does not impose site-perfectness.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10, Lemma 3.4.11, Proposition 6.8.14 and Remark 6.8.15; agent-written common-field representative argument, refining step 6 of lem-sf-adic-common-stage-hom-transpose."
+ },
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-rational-common-tensor-symmetries"
+ ],
+ "proof": [
+  {
+   "text": "Integral braiding is the coherent-reduction-normalized Koszul symmetry. Naturality of that symmetry and the reduction/tensor comparison implies integral naturality: apply the faithful coherent reduction functor, substitute the defining normalization of both braidings, and cancel the reduction tensor comparisons. Localized tensor braiding naturality then extends this equation to arbitrary rational arrows.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-coef-localized-tensor-braiding-naturality",
+    "def-pod-integral-tensor-constraints",
+    "lem-pod-integral-system-reduction-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose one finite common field containing representatives of f and g, all four object fields and all four tensor-object fields. Substitute the tensor map and braiding representative formulas, both conjugated by commonStageTensorComparison. Middle comparisons cancel. Rational braiding naturality proves equality at that field, hence equality of common-stage classes. These formulas hold at every enlarged field, so no scalar-extension Hom map is assumed injective.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-sf-rational-common-tensor-symmetries"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-coef-localized-tensor-braiding-naturality",
+  "def-pod-integral-tensor-constraints",
+  "lem-pod-integral-system-reduction-fully-faithful",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-rational-common-tensor-symmetries"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10, Lemma 3.4.11, Proposition 6.8.14 and Remark 6.8.15; agent-written common-field representative argument, refining step 6 of lem-sf-adic-common-stage-hom-transpose."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The Koszul braiding on common stage rational constructible complexes is natural for all morphisms",
+   "results": "CategoryTheory.BraidedCategory.braiding_naturality; CategoryTheory.BraidedCategory.braiding_naturality_right; CategoryTheory.BraidedCategory.braiding_naturality_left.",
+   "date": "2026-10-25",
+   "verdict": "No match: the specified braiding is defined by normalized finite-stage representatives, without a supplied matching BraidedCategory instance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Koszul symmetry for tensor products is natural after passing to a common finite coefficient field",
+   "results": "Eight hits, including Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul, Module.Invertible.tmul_comm and KaehlerDifferential.tensorKaehlerEquiv; none concerns the normalized common-stage sheaf category.",
+   "date": "2026-10-25",
+   "verdict": "No match: the returned algebraic tensor identities do not supply the specified common-stage braiding naturality."
+  },
+  {
+   "tool": "grep",
+   "query": "braiding_naturality|ev_naturality in Mathlib/CategoryTheory/Monoidal",
+   "results": "Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean:121, CategoryTheory.BraidedCategory.braiding_naturality; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean: counit naturality.",
+   "date": "2026-10-25",
+   "verdict": "No match: these require existing monoidal/closed structures whose maps agree with the prescribed common-stage maps; that identification is part of this obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCommonStageHomTranspose",
+  "date": "2026-10-25",
+  "group": "Q5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native refinement of lem-sf-adic-common-stage-hom-transpose, proof step 6: Naturality of the common-stage Koszul braiding. The ancestor query returns None.",
+   "via": [
+    "lem-sf-adic-common-stage-hom-transpose",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonTensorBraidingNaturality",
+  "file": "lean/Sheaf/Paper/CommonTensorBraidingNaturality.lean",
+  "declaration": "WeilConjectures.commonTensorBraiding_naturality",
+  "statement": "theorem commonTensorBraiding_naturality (M M' N N' : generalAlgebraicallyClosedConstructibleCategory l Ω X) (f : M ⟶ M') (g : N ⟶ N') : (commonStageDerivedTensor l Ω X).map (Prod.mkHom f g) ≫ (pullbackTensorCommonBraiding l Ω X M' N').hom = (pullbackTensorCommonBraiding l Ω X M N).hom ≫ (commonStageDerivedTensor l Ω X).map (Prod.mkHom g f)",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261025T143744-L-1081556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261025T143744-L-1081556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

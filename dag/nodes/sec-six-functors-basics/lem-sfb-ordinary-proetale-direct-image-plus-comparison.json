@@ -28,121 +28,56 @@
  ],
  "proof": [
   {
-   "text": "For each $W=X,Y$ and $s=\\mathrm{et},\\mathrm{proet}$, put $\\mathcal A_{W,s}=\\operatorname{Mod}(B_W)$. The chosen site is small in the coefficient universe and $B_W$ is a sheaf of commutative rings. Apply [prop-pur-kinjective-resolutions-exist] to this ringed site: $\\mathcal A_{W,s}$ is Grothendieck abelian and every complex has a K-injective resolution. By [lem-sp-grothendieck-enough-injectives] it also has enough ordinary injectives. These statements apply to the intrinsic module category, without replacing it by a category of externally valued sheaves.",
+   "text": "The intrinsic module categories are Grothendieck abelian by the universe-correct ringed-site construction. The existing Grothendieck K-injective-resolution instance supplies a quasi-isomorphism from every complex into a K-injective complex. Both direct images are additive. Apply additiveDerivedPlus_unit_normalization to obtain the full right-derived normalizations, their units, and computation on bounded-below injective complexes.",
    "uses": [
     "prop-pur-kinjective-resolutions-exist",
-    "lem-sp-grothendieck-enough-injectives"
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-sfb-additive-derived-plus-unit-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A5, section-unbounded, opening paragraph; injectives.tex Tags 079H and 079P"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $F_s=f_{s,*}$. Its section formula and ring action are [def-weil-pbc-direct-image] for the etale site and [def-weil-proetale-module-direct-image] for the pro-etale site. Addition of maps is componentwise, so $F_s$ is additive. Kernels and finite products of module sheaves are sectionwise [def-weil-sheaf-of-modules-category]; evaluating them at $V\\times_Y X$ and restricting scalars along $B_Y(V)\\to B_X(V\\times_Y X)$ preserves those kernels and products. Thus $F_s$ is left exact on both intrinsic module categories.",
-   "uses": [
-    "def-weil-pbc-direct-image",
-    "def-weil-proetale-module-direct-image",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 071J, section-derived-functors, module direct image; sites-modules.tex Tag 03D6, definition-pushforward"
-   }
-  },
-  {
-   "text": "Apply $F_s$ degreewise. Additivity preserves the equations defining chain homotopies, shifts, and the differential of a mapping cone: $F_s(C\\oplus A[1])=F_s(C)\\oplus F_s(A)[1]$, with the same differential matrix. Hence it induces an exact functor $K(\\mathcal A_{X,s})\\to K(\\mathcal A_{Y,s})$, and composition with derived localization gives an exact functor to $D(\\mathcal A_{Y,s})$. The K-injective existence proved in step 1 is precisely the hypothesis of [lem-weil-pbc-kinjective-total-derived]. Applying it gives the total right derived functor $RF_s$ with its unit, in the sense of [def-sfb-right-derived-functor]. Its unit at a K-injective $I$ is invertible. For a resolution $C\\to I$, applying $RF_s$ to $QC\\cong QI$ therefore gives $RF_s(QC)\\cong Q(F_s I)$, as asserted.",
-   "uses": [
-    "lem-weil-pbc-kinjective-total-derived",
-    "def-sfb-right-derived-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070K (lemma-enough-K-injectives-implies) and 070Y (lemma-K-injective-defined); sites-cohomology.tex Tag 07A5"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-dplus-injective-representative], every object $M\\in D^+(\\mathcal A_{X,s})$ is $QJ$ up to isomorphism for a bounded-below complex of injectives $J$, and $J$ is K-injective. Step 3 then computes $RF_sM$ by $Q(F_sJ)$. Since $F_s(0)=0$, this complex is bounded below, so $RF_s$ restricts to $D^+$. Apply [lem-weil-pbc-right-derived-plus-injective] to the additive $F_s$ and the enough-injectives category of step 1. It gives the usual bounded-below functor $R^+F_s$, whose unit at $J$ is invertible and whose value at $Q^+J$ is $Q^+(F_sJ)$. Thus both constructions are computed on the same $J$. This is the bounded-below etale direct image of [def-weil-pbc-direct-image]; for the ordinary pro-etale operation of [def-weil-pbc-proetale-operations] it specifies its bounded-below restriction.",
-   "uses": [
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-right-derived-plus-injective",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-proetale-operations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 013K, lemma-injective-resolutions-exist; Tag 070J, lemma-bounded-below-injectives-K-injective; Tags 05TI, lemma-enough-injectives-right-derived, and 05TH, lemma-injective-acyclic; sites-cohomology.tex Tag 071J"
-   }
-  },
-  {
-   "text": "The identifications in step 4 are natural and normalized by the units. For a morphism represented by bounded-below injective complexes $J,J'$, [lem-weil-pbc-kinjective-hom-derived] gives a unique homotopy class $h:J\\to J'$ representing it. Naturality of the invertible units [lem-weil-pbc-kinjective-total-derived, lem-weil-pbc-right-derived-plus-injective] identifies both images with $Q(F_sh)$. Changing the injective models uses a homotopy equivalence, whose image under the additive $F_s$ is again a homotopy equivalence. At $QJ$ define $\\theta_{QJ}=\\alpha_J\\eta_J^{-1}$, where $\\eta,\\alpha$ are the full and bounded-below units and inclusions into the full categories are understood. The preceding naturality makes these components independent of models and natural on $D^+$. For a bounded-below complex $C$, [lem-sc-bounded-below-injective-resolution-existence] supplies a quasi-isomorphism $s:C\\to J$ with bounded-below injective target. Explicitly,\n$$\\theta_{QC}=R^+F_s(Q^+s)^{-1}\\alpha_J\\eta_J^{-1}RF_s(Qs).$$\nNaturality of the two units gives $RF_s(Qs)\\eta_C=\\eta_JQ(F_ss)$ and $R^+F_s(Q^+s)\\alpha_C=\\alpha_JQ(F_ss)$. Substitution into the formula yields $\\theta_{QC}\\eta_C=\\alpha_C$. This proves compatibility with the derived-functor units.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-right-derived-plus-injective",
-    "lem-sc-bounded-below-injective-resolution-existence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I, lemma-K-injective, and 070K, lemma-enough-K-injectives-implies; Tag 013K, lemma-injective-resolutions-exist"
-   }
-  },
-  {
-   "text": "For $W=X,Y$, [def-weil-pbc-site-comparison-morphism] gives the geometric morphism $\\nu_W$ and the sectionwise right adjoint: $(\\nu_{W,*}N)(U)=N(u_WU)$. Its fixed-$B$ action and its intrinsic constant-ring module action agree: for a constant scalar $b$ both act by the same endomorphism $b:N(u_WU)\\to N(u_WU)$; the ring map from $B_W$ is determined by these constant sections by sheafification. The intrinsic constant-section presentation in [lem-pe-coefficient-comparison-data] uses this ring map. The constant-ring inverse-image construction and its exactness are [lem-pe-constant-left-module-inverse-image], and [lem-weil-pbc-module-inverse-image-unit-comparison] supplies its normalized module-pullback unit. Both inverse-image presentations are therefore left adjoint to this same module right adjoint. Explicitly, if $L\\dashv R$ and $L\\prime\\dashv R$ are these presentations, define $a_M:LM\\to L\\prime M$ to be the adjunct of $\\eta\\prime_M:M\\to RL\\prime M$ under the first adjunction; define $b_M$ in the reverse way from $\\eta_M$. The adjunction bijections give $R(a_M)\\eta_M=\\eta\\prime_M$ and $R(b_M)\\eta\\prime_M=\\eta_M$, so $b_Ma_M$ and $a_Mb_M$ correspond to the respective units and are identities. The adjunct formulas also prove naturality. This is the canonical, unit-preserving isomorphism of inverse images required in the statement.",
+   "text": "Restrict scalars along the constant-ring sheafification units. Restriction is an equivalence: the sheafification adjunction unit is invertible on a fixed-scalar sheaf and the counit is invertible for a locally bijective scalar map. Direct image commutes with restriction by the identity on sections, since the coefficient maps agree on constants. Transport the fixed-scalar comparison adjunction through these equivalences. Its unit on sections is the comparison unit followed by module sheafification; the equivalence triangle and naturality of the comparison unit give the displayed formula. Uniqueness of left adjoints gives the intrinsic pullback identification, and injectivity of the adjunction Hom equivalence proves uniqueness. The inverse mate of the restriction comparison gives finite-limit preservation; left adjointness gives colimits, hence additivity and exactness.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
-    "lem-pe-coefficient-comparison-data",
-    "lem-pe-constant-left-module-inverse-image",
-    "lem-weil-pbc-module-inverse-image-unit-comparison"
+    "lem-weil-pbc-etale-constant-ring-module-equivalence",
+    "def-sp-finite-coefficient-intrinsic-derived-comparison",
+    "lem-stage3-inverse-mate-equivalences"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D2 (lemma-pullback-module) and 03D3 (lemma-adjoint-push-pull-modules); sites.tex Tag 00YV, proposition-functoriality-algebraic-structures-topoi"
-   }
+   "elementary": false
   },
   {
-   "text": "The exact intrinsic $\\nu_W^*$ descends termwise through localization and commutes with cohomology by [lem-pe-coefficient-comparison-derived-functor]. Thus it preserves $D^+$, and the natural isomorphism of step 6 descends termwise as well. Since $f$ is qcqs and $G\\in D^+(X_{\\mathrm{et}},B)$, [prop-weil-pbc-comparison-direct-image], with $u=f$, $\\Lambda=B$, and $L=G$, supplies $c_G:\\nu_Y^*R^+F_{\\mathrm{et}}G\\xrightarrow{\\sim}R^+F_{\\mathrm{proet}}\\nu_X^*G$. Let $\\theta_s:RF_s|_{D^+}\\xrightarrow{\\sim}R^+F_s$ denote the identification of steps 4-5, with inclusions into the full categories understood. The required arrow is exactly the composite $\\theta_{\\mathrm{proet},\\nu_X^*G}^{-1}\\circ c_G\\circ\\nu_Y^*(\\theta_{\\mathrm{et},G})$, using the inverse-image identification of step 6. Each factor is natural and invertible, so the composite is a natural isomorphism. This formula also proves that it is the specified bounded-below comparison after inclusion, with its direct-image units unchanged by step 5. Only bounded-below inputs were used; no extension to unbounded-below etale inputs follows.",
+   "text": "For etale direct image cancel the scalar-restriction equivalence in its identity-on-sections comparison. For pro-etale direct image use the existing scalar-unit-normalized intrinsic comparison, in the inverse direction. Realization equivalences preserve injectives, so the derived base-change transformations of both coefficient comparisons are invertible by the right-acyclic criterion. Their sections and their actual derived transformations give CoefficientNormalization.",
    "uses": [
-    "lem-pe-coefficient-comparison-derived-functor",
-    "prop-weil-pbc-comparison-direct-image"
+    "lem-weil-pbc-etale-constant-ring-module-equivalence",
+    "def-sp-finite-intrinsic-direct-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 5.4.3 and Remark 5.4.4, printed p. 39; compare Stacks proetale.tex Tag 099R, lemma-morphism-comparison"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Use the specified qcqs bounded-below comparisonDirectImagePlus. Whisker and compose its isomorphism with the two derived coefficient comparisons and the two realized inverse-image identifications, then cancel the etale realization equivalence on D+. The fully faithful preimage equation proves exactly the required component formula. Whisker this plus comparison with the full-derived inclusion and conjugate by the two unit-normalized plusIso isomorphisms and the exact-pullback inclusion compatibility. Associator and whiskering equations give the displayed fullComparison component formula.",
+   "uses": [
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-sfb-additive-derived-plus-unit-normalization"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "prop-pur-kinjective-resolutions-exist",
   "lem-sp-grothendieck-enough-injectives",
-  "def-weil-pbc-direct-image",
-  "def-weil-proetale-module-direct-image",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-kinjective-total-derived",
-  "def-sfb-right-derived-functor",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-right-derived-plus-injective",
-  "def-weil-pbc-proetale-operations",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-sc-bounded-below-injective-resolution-existence",
+  "lem-sfb-additive-derived-plus-unit-normalization",
   "def-weil-pbc-site-comparison-morphism",
-  "lem-pe-coefficient-comparison-data",
-  "lem-pe-constant-left-module-inverse-image",
-  "lem-weil-pbc-module-inverse-image-unit-comparison",
-  "lem-pe-coefficient-comparison-derived-functor",
+  "lem-weil-pbc-etale-constant-ring-module-equivalence",
+  "def-sp-finite-coefficient-intrinsic-derived-comparison",
+  "lem-stage3-inverse-mate-equivalences",
+  "def-sp-finite-intrinsic-direct-adjunction",
   "prop-weil-pbc-comparison-direct-image"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A5 and 071J; derived.tex Tags 070I, 070J, 070K and 013K; sites-modules.tex Tags 03D2 and 03D3; Bhatt-Scholze Lemma 5.4.3"
+  "by": "A6",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2–03D3 and 00YV; scalar-restriction equivalences and uniqueness of adjoints, assembled with derived.tex 070K/070J and Bhatt–Scholze Lemma 5.4.3."
  },
  "mathlib_searches": [
   {
@@ -260,27 +195,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-ordinary-proetale-direct-image-plus-comparison",
   "worker": "stage1",
-  "summary": "Seven steps reuse the existing arbitrary-ringed-site K-injective existence, total-derived and bounded-below injective computation nodes. The same injective models give a natural identification with an explicit unit equation; the common module right adjoint identifies inverse-image presentations, and conjugation of the existing bounded-below comparison gives exactly the requested full-category arrow. No statement change, new node, or Mathlib leaf. Repair of returned head ae9a1446d52: compared the retained split and all 21 citation quotations with the current live DAG. All cited statements and the item statement agree. Removed five now-Mathlib theorem citations from the off-unit tool declarations, updated the bounded-below source places, and made the unit-normalized comparison component explicit in step 5. Delivery is rebuilt by deliver.py on current origin/sheaf-dag.",
+  "summary": "Repair of the 6361-character returned split: two independent statement-only nodes carry the additive full/plus unit-normalization argument (old steps 3-5) and the constant-section/intrinsic module adjunction comparison (old step 6 and its localization). Retained after the landing-refusal return: compared returned-node.json with the current read-clone item (identical), re-read every current cited statement, validated all 13 verbatim quotations, and distinguished the newly present 070I tower-resolution/shift node in report.md. The item keeps the ringed-site and sectionwise setup and explicitly conjugates the existing qcqs bounded-below comparison. Statement and Lean metadata unchanged; the full old argument and all logged searches are retained. Delivery is rebuilt on current origin/sheaf-dag by deliver.py.",
   "blueprint": "Nearest ancestor lem-sfb-dc-hom-preserves: the finite-coefficient internal-Hom finiteness sentence after the reduction-modulo-varpi display, realized through lem-sfb-finite-field-internal-hom-finiteness and lem-sfb-finite-field-proetale-direct-image. This item supplies the ordinary direct-image and bounded-below normalization input singled out in its inherited blueprint.from.place.",
   "tool_uses": [
    {
     "node": "prop-pur-kinjective-resolutions-exist",
     "why": "General small ringed-site module K-injective existence, for the actual intrinsic coefficient categories. No node of this restricted-functor unit replaces this general input."
-   },
-   {
-    "node": "lem-weil-pbc-kinjective-total-derived",
-    "why": "Abstract total right derived existence and invertibility of the unit on K-injectives. No node of this restricted-functor unit replaces this general input."
-   },
-   {
-    "node": "lem-pe-constant-left-module-inverse-image",
-    "why": "General constant-ring inverse image and exactness for the comparison geometric morphism. No node of this restricted-functor unit replaces this general input."
-   },
-   {
-    "node": "lem-weil-pbc-module-inverse-image-unit-comparison",
-    "why": "Normalized identification of intrinsic module-pullback and abelian inverse-image units. No node of this restricted-functor unit replaces this general input."
    },
    {
     "node": "lem-pe-coefficient-comparison-data",
@@ -299,19 +222,15 @@
  "tool_uses": [
   "prop-pur-kinjective-resolutions-exist",
   "lem-weil-pbc-kinjective-total-derived",
-  "lem-pe-constant-left-module-inverse-image",
-  "lem-weil-pbc-module-inverse-image-unit-comparison",
-  "lem-pe-coefficient-comparison-data",
-  "lem-pe-coefficient-comparison-derived-functor",
   "prop-weil-pbc-comparison-direct-image"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NQ-38a064022",
-  "group": "NQ",
+  "reviewer": "NT-cc-Q46-3dd1f881a",
+  "group": "Q46",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-38a064022 (reviewer sub-agent of L); spot-checked: I read the item in full: 7 steps, no new nodes. This is a re-delivery after the landing refusal at returns/NQ.md:60. The earlier head ae9a1446d52 was PASSed; the landing refused it as a side completion that was never promoted, not for a mathematical fault. Live and side-live both still show the item unsplit, so no parallel group has split it. There is no repair note. Neither the item nor any cite is on route-pivot-dropped.txt, and no SGA source is cited. Diff against the PASSed head: (1) Step 4 adds Stacks 05TI and 05TH. Both tags and labels are correct (derived.tex:6980 and :6948). (2) Step 5 now writes the component out as theta_QC = R+F(Q+s)^-1 alpha_J eta_J^-1 RF(Qs). I checked the algebra: the two unit-naturality identities give theta_QC eta_C = alpha_C. eta_J is invertible because J is K-injective (dplus-injective-representative(2) and kinjective-total-derived), and alpha_J is invertible by right-derived-plus-injective(2). Independence of the model comes from kinjective-hom-derived. (3) Five tool_uses that are now Mathlib leaves were removed but stay cited in the proof; I accept the remaining 7 as generic. Everything else is byte-identical, and all 27 cited statements are unchanged from the earlier snapshot. The cite closure (1102 nodes) does not contain the item, so there is no cycle. I re-read steps 1-4 and 6-7 against the current statements: ringed-site K-injectives and enough injectives; additive, left-exact direct images; the RF of def-sfb; the étale R+ is exactly def-weil-pbc-direct-image; the pro-étale Ru_* of def-weil-pbc-proetale-operations matches RF through the canonical K-injective isomorphism; the two inverse-image presentations are left adjoints of the same sectionwise nu_*, so the adjunct isomorphism is unit-preserving; the composite theta_proet^-1 c_G nu*(theta_et) has the right direction and lands in D(Y_proet,B), with u=f qcqs, Lambda=B finite and L=G in D+. Source: Bhatt-Scholze Lemma 5.4.3 (D+, qcqs) and Remark 5.4.4 (unbounded case fails) match the item's scope exactly, and the target is not weakened. Edge cases B=0, empty scheme, f=id and a sheaf in degree n all hold. Not a duplicate of the canonical-mate node. Maintainer note: this head may hit the same side-completion landing condition."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-3dd1f881a (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the sources in full. The math is correct, but the three repairs of the previous FIX (8c7532ce) were lost and are re-applied. That FIX was approved, but the landing refused it as a side completion that was never promoted (returns/Q46.md:44), not for a math fault. This head equals 8c7532ce except for the split_report summary. Live and side-live still hold the 7-step proof of 6361 characters. The released re-split note (at least 2 nodes, at most 3000 chars) is met, and all 28 cited statements are identical to side-live. Mapping: old steps 1-2 are kept verbatim. Old 3-5 go to node A, lem-sfb-additive-derived-plus-unit-normalization: total RF, K-injective values, J clause and the unique theta with theta eta = alpha. I checked the types; uniqueness holds because every D+ object is Q+J (070J, 013K); F=id, F=0 and M tensor - pass. Old 6 and the descent in old 7 go to node B, lem-sfb-constant-section-intrinsic-pullback-identification: rho is the identity on sections, a and b come from uniqueness of left adjoints; B=0 and u=id pass. Step 5 keeps beta = theta_proet^-1 c_G nu*(theta_et); the direction is right and only D+ inputs are used, matching Bhatt-Scholze Lemma 5.4.3 and Remark 5.4.4 on printed p.39. Neither node restates the item; there is no cycle and no SGA source. FIX 1 (B3/E1): node B now puts B in the coefficient universe, as lem-pe-constant-left-module-inverse-image requires. FIX 2 (C4): step 4 now says node B's L^sc (lambda_b transport) is nu_W^* of def-weil-pbc-site-comparison-morphism and L is the intrinsic one. FIX 3 (B5): step-5 source 099R becomes 09A6, the label of lemma-morphism-comparison in tags/tags. Proof is 2966 chars. I accept the 4 declared tool_uses as generic. Maintainer notes: (1) landing needs the item promoted to the live queue DAG. (2) Node A overlaps the Lean of src-right-derived-functor-plus-compatibility, whose DAG statement is weaker; its worker should attach it. (3) The item source and prop-weil-pbc-comparison-direct-image still cite 099R. (4) Stale top-level tool_uses.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.SixFunctors.OrdinaryProEtaleDirectImagePlusComparison",
@@ -364,5 +283,27 @@
   "group": "Q10",
   "result": "pass",
   "note": "Re-delivery after H13 RETURN of f9a8a166fdc6. def-weil-pbc-direct-image is byte-identical to live and side-live (UpperLowerStar.Defs, Etale.lowerStar + rightDerivedLowerStarPlus, sorry_free). Helper module IntrinsicEtaleDirectImage removed; its 8 declarations moved verbatim into the item module, retagged to the item blueprint and listed in item lean.declarations (32 total, all present). Item module otherwise unchanged except imports; item node identical to live apart from lean; all 17 stmt_deps byte-identical to live; lean.statement verbatim; no name collisions in live or side-live lean. Mathematics re-read and correct: qcqs f, finite B with no Nontrivial, original sites with no universe equality; recorded RF; resolutionIso for any qis to a K-injective; plusIso pinned by unit_eq; ComparisonIdentification and CoefficientNormalization pinned; plus goes through rightDerivedFunctorPlusBaseChange(lowerStarComparisonUpperStarBaseChange f); fullComparison D+-only per BS 5.4.3/5.4.4. Edge cases B=0, empty scheme, f=id OK. No hollow defs; 3 named sorry theorems with docstrings. No compile (no file changed); worker reports clean 14 s scompile. Advisories: original-site vs AsSmall ring-map correspondence, helper sorry theorems without own node, decls from nodes outside stmt_deps, possibly unused plain imports."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261024T184553-L-3069919",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

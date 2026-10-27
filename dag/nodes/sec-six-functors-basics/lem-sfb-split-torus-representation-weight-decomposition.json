@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-split-torus-representation-weight-decomposition",
+ "kind": "statement",
+ "title": "Weight decomposition of a finite-dimensional representation of a split torus",
+ "statement": "Let $k$ be a field [def-weil-field], let $r\\geq0$ be an integer, and let $T$ be a $k$-group scheme [def-sc-group-scheme] isomorphic to $(\\mathbf G_{m,k})^r$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga] for every commutative $k$-algebra $A$. A character of $T$ is a homomorphism of $k$-group schemes $\\chi:T\\to\\mathbf G_{m,k}$. Let $V$ be a finite-dimensional $k$-vector space [def-weil-finite-dimensional-subspace] and let $\\rho:T\\to\\operatorname{GL}(V)$ be a homomorphism of $k$-group schemes, where $\\operatorname{GL}(V)(A)=\\operatorname{Aut}_A(V\\otimes_kA)$; after a choice of basis this is the general linear group scheme of [def-sc-general-linear-group], and for $V=0$ it is the trivial group scheme. For a character $\\chi$ put $$V_\\chi=\\{v\\in V:\\rho_A(t)(v\\otimes1)=v\\otimes\\chi_A(t)\\text{ for every commutative }k\\text{-algebra }A\\text{ and every }t\\in T(A)\\}.$$ Then only finitely many $V_\\chi$ are nonzero, and $V=\\bigoplus_\\chi V_\\chi$: every $v\\in V$ has a unique expression as a finite sum $\\sum_\\chi v_\\chi$ with $v_\\chi\\in V_\\chi$. Consequently, if $\\Omega$ is the finite set of characters with $V_\\chi\\ne0$ and $(e_i)$ is a basis of $V$ obtained by concatenating bases of the $V_\\chi$, $\\chi\\in\\Omega$, then for every commutative $k$-algebra $A$ and every $t\\in T(A)$ the matrix of $\\rho_A(t)$ in the $A$-basis $(e_i\\otimes1)$ of $V\\otimes_kA$ is block diagonal, with the scalar $\\chi_A(t)$ on each diagonal entry of the block of $\\chi$. The assertion holds in every characteristic and includes $r=0$ and $V=0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.12, (a) implies (d), printed pp.234--235, with Remark 12.13, applied to the split torus D(Z^r) = G_m^r (Theorem 12.9 and Definition 12.14, printed pp.233--236); used for the eigenspace decomposition V = sum V_i of S in the proof of Lemma 16.42, printed p.339."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-gm-ga",
+  "def-weil-finite-dimensional-subspace",
+  "def-sc-general-linear-group",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose the given isomorphism $T\\simeq\\mathbf G_m^r$ and put $L=\\mathbf Z^r$, $H=k[L]=\\bigoplus_{m\\in L}ke^m$, with the multiplication and Hopf maps of [lem-sfb-group-algebra-group-like-basis]. By [def-sc-gm-ga] and repeated application of [lem-weil-pbc-fibre-product-affine-spectra], $k[T]$ is the tensor product of $r$ copies of $k[t,t^{-1}]$ (the empty product is $k$). Identify it with $H$ by $t^{m_1}\\otimes\\cdots\\otimes t^{m_r}\\mapsto e^{(m_1,\\ldots,m_r)}$. This map exists by the tensor universal property [def-weil-pbc-module-tensor-product]; its inverse sends $e^m$ to that pure tensor and extends linearly. Expanding each Laurent polynomial in its unique finite Laurent expansion [def-weil-laurent-polynomial-ring] shows both composites are the identity on generating pure tensors. The multiplication formula of [lem-weil-pbc-algebra-tensor-pushout-universal-property] shows that the maps preserve multiplication and unit. The product group law gives $\\Delta(e^m)=e^m\\otimes e^m$, $\\epsilon(e^m)=1$ and $S(e^m)=e^{-m}$, since these formulas hold in every factor. Thus the identification respects the given group structure, not just the underlying vector space.",
+   "uses": [
+    "lem-sfb-group-algebra-group-like-basis",
+    "def-sc-gm-ga",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-laurent-polynomial-ring",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Examples 12.1(a), 12.2 and Proposition 12.3, printed pp.231–232; the coordinate presentation preceding Theorem 12.12."
+   }
+  },
+  {
+   "text": "Characters of $T$ are indexed by $m\\in L$. Indeed [def-weil-affine-spectrum] identifies $\\chi:T\\to\\mathbf G_m$ with the algebra map $k[t,t^{-1}]\\to H$ sending $t$ to a unit $h$. Compatibility with multiplication and identity says $\\Delta(h)=h\\otimes h$ and $\\epsilon(h)=1$, by [def-sc-gm-ga]. Conversely these equations, together with invertibility of $h$, give compatibility with multiplication and identity; inversion follows by taking inverses in the group law. By [lem-sfb-group-algebra-group-like-basis], such an $h$ is exactly $e^m$ for a unique $m$, uniqueness following from the displayed basis of $H$. Each $e^m$ is a unit with inverse $e^{-m}$, so every $m$ occurs. Write the character as $\\chi_m$. For a $k$-algebra $B$ and $x\\in T(B)$, represented by $x:H\\to B$, its value is $\\chi_{m,B}(x)=x(e^m)$. This classifies characters as scheme morphisms, without restricting to $k$-points.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-gm-ga",
+    "lem-sfb-group-algebra-group-like-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 12(a), printed p.230; Lemma 12.4 and its following character formula, printed p.232."
+   }
+  },
+  {
+   "text": "The algebra $H$ is generated by the $2r$ elements $e^{b_i},e^{-b_i}$, where the $b_i$ are the standard generators of $\\mathbf Z^r$; for $r=0$ it is $k$. Thus $T=\\operatorname{Spec}H$ is affine of finite type by [def-weil-finite-type-morphism], using its single affine chart. Apply [lem-sfb-rational-representation-comodule-dictionary] to the given homomorphism $\\rho$, obtaining the $k$-linear coaction $c:V\\to V\\otimes_kH$ with $(c\\otimes1)c=(1\\otimes\\Delta)c$ and $(1\\otimes\\epsilon)c=1$. Its all-algebras formula is $\\rho_B(x)(v\\otimes b)=\\sum_j v_j\\otimes x(h_j)b$ when $c(v)=\\sum_jv_j\\otimes h_j$. This applies also to the zero vector space, as the dictionary explicitly allows arbitrary dimension.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, equations (24)–(25); Theorem 12.12(a) implies (b), printed p.235, first paragraph."
+   }
+  },
+  {
+   "text": "For each $m\\in L$ let $[h]_m$ denote the coefficient of $e^m$ in $h\\in H$. For any vector space $W$, the bilinear map $(w,h)\\mapsto[h]_mw$ induces $E_m^W:W\\otimes_kH\\to W$ by [def-weil-pbc-module-tensor-product]. Every tensor is a finite sum of pure tensors; expanding their $H$ entries gives $z=\\sum_m E_m^W(z)\\otimes e^m$, a finite sum. Applying $E_n^W$ proves uniqueness of its coefficients. Set $p_m=E_m^V c$, so $c(v)=\\sum_m p_m(v)\\otimes e^m$. The maps $p_m$ are linear and every fixed $v$ has finite support. We use the tensor identifications $(W\\otimes H)\\otimes H\\simeq W\\otimes(H\\otimes H)$ and $W\\otimes k\\simeq W$, given on pure tensors by reassociation and scalar multiplication; their inverse formulas fix the generators, so they follow from the same universal property.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12(a) implies (b), printed p.235, expansion in the group-like basis; coefficient extraction written explicitly."
+   }
+  },
+  {
+   "text": "Substitute the expansion of Step 4 into the two coaction identities supplied by [lem-sfb-rational-representation-comodule-dictionary]. Since $\\Delta(e^m)=e^m\\otimes e^m$ and $\\epsilon(e^m)=1$ from Step 1, they give $\\sum_m c(p_m(v))\\otimes e^m=\\sum_m p_m(v)\\otimes e^m\\otimes e^m$ and $v=\\sum_m p_m(v)$. Extracting the last coefficient $n$, with $E_n^{V\\otimes H}$ of Step 4, gives $c(p_n(v))=p_n(v)\\otimes e^n$. In particular every component is homogeneous and the counit reconstructs the original vector. These are finite tensor identities for the given vector, so no convergence or interchange of infinite sums is involved.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12(a) implies (b), printed p.235, the two displayed identities and extraction of the coefficient of e_i."
+   }
+  },
+  {
+   "text": "For $v\\in V$, the condition $c(v)=v\\otimes e^m$ is equivalent to the all-algebras definition $v\\in V_{\\chi_m}$. In the forward direction the formula of [lem-sfb-rational-representation-comodule-dictionary] gives $\\rho_B(x)(v\\otimes1)=v\\otimes x(e^m)=v\\otimes\\chi_{m,B}(x)$ for every $B,x$, by Step 2. Conversely take $B=H$ and $x=\\mathrm{id}_H$. The dictionary gives $c(v)=\\rho_H(\\mathrm{id}_H)(v\\otimes1)$, and Step 2 gives $\\chi_{m,H}(\\mathrm{id}_H)=e^m$. Thus the all-algebras condition forces the desired equality in $V\\otimes H$. Each $V_{\\chi_m}$ is a subspace because this is a linear equation. Step 5 now proves that these subspaces span $V$.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, universal element; Theorem 12.12 and Remark 12.13, printed p.235, identification of the homogeneous subspaces with character eigenspaces."
+   }
+  },
+  {
+   "text": "If $w\\in V_{\\chi_m}$, Step 6 and coefficient extraction give $p_n(w)=\\delta_{nm}w$. Therefore for a finite relation $\\sum_m w_m=0$ with $w_m\\in V_{\\chi_m}$, application of $p_n$ gives $w_n=0$ for each $n$. Together with the finite decomposition of Step 5, this proves existence and uniqueness of a finite weight decomposition of every vector. By the bijective indexing of characters in Step 2, this is exactly the direct sum over all characters in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12(b) implies (d), printed p.235; coefficient projections give directness without an additional independence theorem."
+   }
+  },
+  {
+   "text": "Choose a finite spanning list $v_1,\\ldots,v_s$ using [def-weil-finite-dimensional-subspace], and let $F\\subset L$ be the union of their finite coefficient supports. For $m\\notin F$, $p_m(v_j)=0$ for every $j$; linearity gives $p_m=0$ on $V$. Since $p_m$ is the identity on $V_{\\chi_m}$ by Step 7, that subspace is zero. Thus only finitely many weights occur. Moreover for each $m\\in F$, $V_{\\chi_m}$ is spanned by $p_m(v_1),\\ldots,p_m(v_s)$: apply $p_m$ to an expression $w=\\sum_j a_jv_j$ for $w\\in V_{\\chi_m}$ to obtain $w=\\sum_j a_jp_m(v_j)$.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12 and Remark 12.13, printed pp.234–235, finite-dimensional consequence of the coefficient expansion."
+   }
+  },
+  {
+   "text": "Each nonzero weight space has a finite basis: scan its spanning list from Step 8 and retain a vector precisely when it is not in the span of the preceding retained vectors. Each discarded vector is in that span. In a linear relation among retained vectors, a nonzero coefficient on the last vector would solve for it in the preceding span, a contradiction, since $k$ is a field [def-weil-field]. The retained list is therefore independent and spans, hence a basis in [def-weil-pbc-free-module]. Concatenating these bases yields a basis of $V$: spanning follows from Step 5 and independence from Step 7 followed by independence within each weight space. This also proves the assertion for any choices of bases of those spaces.",
+   "uses": [
+    "def-weil-field",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 12.11 and Theorem 12.12(c), printed pp.234–235: choosing a diagonalizing basis; finite basis selection made explicit."
+   }
+  },
+  {
+   "text": "For any such concatenated basis $(e_i)$ and any commutative $k$-algebra $B$, it is a $B$-basis after tensoring: if $\\lambda_i:V\\to k$ are the coordinate forms, the maps $\\sum_i e_i\\otimes b_i\\mapsto(b_i)_i$ and $(b_i)_i\\mapsto\\sum_i e_i\\otimes b_i$ are inverse, by applying the bilinear coordinate maps $(v,b)\\mapsto\\lambda_i(v)b$ and pure-tensor generation [def-weil-pbc-module-tensor-product]. The scalar action is the one in [def-weil-module-base-change]. If $e_i\\in V_\\chi$, Step 6 gives $\\rho_B(x)(e_i\\otimes1)=(e_i\\otimes1)\\chi_B(x)$. By $B$-linearity these are precisely the basis images determining the matrix. Its entries off that basis diagonal are zero and its diagonal entries in the $\\chi$ block equal $\\chi_B(x)$, proving the block-diagonal assertion over every $B$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 12.11, printed p.234, diagonal matrices over every k-algebra; Theorem 12.12(c)–(d), printed p.235."
+   }
+  },
+  {
+   "text": "If $r=0$, then $L=0$, $H=k$ and Step 2 gives just the trivial character; the counit identity says $c(v)=v\\otimes1$, so its weight space is all of $V$. If $V=0$, every coefficient and weight space is zero, $\\Omega$ is empty and the empty basis gives the unique automorphism of the zero module after any base change. The coefficient and counit calculations use no division except by a nonzero field element when choosing a basis, and no assumption on the characteristic. They also apply when the test algebra is the zero ring, where the base-changed module is zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12 and Remark 12.13, printed pp.234–235, including the zero-dimensional and trivial-group cases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-gm-ga",
+  "def-weil-affine-spectrum",
+  "def-weil-field",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-finite-type-morphism",
+  "def-weil-laurent-polynomial-ring",
+  "def-weil-module-base-change",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-group-algebra-group-like-basis",
+  "lem-sfb-rational-representation-comodule-dictionary",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.12(a) implies (b) and (d), and Remark 12.13, printed pp.234–235; Examples 12.1–12.2, Proposition 12.3 and Lemma 12.4, pp.231–232; representation/comodule dictionary in Remark 4.1, p.84. Coefficient projections and finite-basis assembly are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "weightSpace|eigenspace",
+   "results": "0 hits in Mathlib/RepresentationTheory and Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has no weight decomposition for representations of algebraic tori (group schemes)."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|diagonalizable group|D\\(M\\)",
+   "results": "0 hits in Mathlib/AlgebraicGeometry and Mathlib/RepresentationTheory.",
+   "date": "2026-10-24",
+   "verdict": "no match: no diagonalizable/split torus group scheme in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "weightSpace|splitTorus|diagonalizable|Comodule",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no matching source text in Mathlib/RepresentationTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A comodule over the group algebra of an abelian group is the direct sum of its homogeneous weight spaces",
+   "results": "8 hits; MonoidAlgebra.Submodule.instIsSemisimpleModule, LieModule.weightSpace, MvPolynomial.weightedHomogeneousComponent_directSum, AddMonoidAlgebra.grade.decomposition, HomogeneousSubmodule.noConfusion, HomogeneousSubmodule, HomogeneousSubmodule.is_homogeneous', LieModule.instLinearWeightsOfIsLieAbelian",
+   "date": "2026-10-23",
+   "verdict": "no match: returned graded-algebra decompositions and Lie weights, not construction of the grading from a coaction"
+  },
+  {
+   "tool": "loogle",
+   "query": "Coalgebra, AddMonoidAlgebra",
+   "results": "7 hits; AddMonoidAlgebra.instCoalgebra, AddMonoidAlgebra.instIsCocomm, AddMonoidAlgebra.counit_single, AddMonoidAlgebra.comul_single, LaurentPolynomial.comul_C, LaurentPolynomial.comul_C_mul_T, AddMonoidAlgebra.comul_def",
+   "date": "2026-10-23",
+   "verdict": "no match: coalgebra operations alone do not state a comodule weight decomposition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional rational representation of a split torus group scheme decomposes as a direct sum of character weight spaces over any field",
+   "results": "8 hits; LieModule.iSup_genWeightSpace_eq_top, LieModule.iSup_genWeightSpace_eq_top', FDRep.char_orthonormal, FDRep.simple_iff_char_is_norm_one, FDRep.scalar_product_char_eq_finrank_equivariant, Rep.diagonalSuccIsoFree, LieModule.traceForm_eq_sum_finrank_nsmul', LieModule.finite_genWeightSpace_ne_bot",
+   "date": "2026-10-23",
+   "verdict": "no match: returned coalgebra structures or Lie-module/finite-group weight results, not arbitrary rational representations of a split torus scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "comodule|weightSpace|splitTorus|diagonalizable",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no matching source text in Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration with the queried name"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coalgebra comodule over a group algebra is a graded vector space with homogeneous components given by the coaction coefficients",
+   "results": "8 hits; GroupLike, AddMonoidAlgebra.instCoalgebra, MonoidAlgebra.instCoalgebra, Coalgebra.Repr, Coalgebra.Repr.ι, MonoidAlgebra.instIsCocomm, AddMonoidAlgebra.instIsCocomm, Coalgebra.Repr.left",
+   "date": "2026-10-23",
+   "verdict": "no match: returned coalgebra structures or Lie-module/finite-group weight results, not arbitrary rational representations of a split torus scheme"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-torus-regular-semisimple-element",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Lemma 16.42 and its proof, printed p.339: a faithful representation and separation of its finitely many torus weights. The conclusion is equality of centralizer schemes, not just equality on field-valued points. Supporting input: Lemma 16.42, proof, the eigenspace decomposition V = sum V_i of S (Theorem 12.12).",
+   "via": [
+    "lem-sfb-torus-regular-semisimple-element",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-torus-representation-weight-decomposition",
+  "worker": "stage1",
+  "summary": "Read Milne Theorem 12.12 and its coordinate inputs; retain the statement, use the existing comodule dictionary and group-like classification, and write all coefficient, finite-support, basis and all-algebras matrix arguments explicitly. No new nodes. Tested rank zero, dimension zero, finite fields, positive characteristic and the zero test algebra.",
+  "blueprint": "Realizes the inherited blueprint.from.place: Milne Lemma 16.42 weight decomposition supporting the torus centralizer input in det-thm-sf-ctf-stability-direct-images (3). The latest blueprint unit was read; no equivalent blueprint node was found by comodule/diagonalizable/weight searches. The inherited null ancestor is retained, as blueprint_refs.py ancestor returns None."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-683fc4dc4",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-683fc4dc4 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Shape: one commit, item plus report, 0 new nodes. The statement is byte-identical to live; stmt_deps gain base-change, tensor and basis definitions, all of which the statement uses. Every citation in a step is in its uses, the uses together equal proof_deps, no cycle, no SGA, no foreign-unit tool. Source: Milne Thm 12.12 (a)=>(b),(d) and Rmk 12.13, pp.234-235, plus Ex 12.15. The item is Milne's statement for a split torus D(Z^r) over any field, with eigenspaces defined over all algebras, so nothing is weakened. I read all 13 cited statements. The comodule dictionary gives the coaction for any dimension (so V=0), the all-algebras action formula and c(v)=r_A(id)(v⊗1). The group-like leaf gives h=e^m over any field. The fibre-product and algebra-tensor lemmas give k[T]=k[Z^r]. Steps check: (1) the coordinate ring and Hopf maps of k[Z^r]; (2) characters correspond to group-like units e^m, as scheme maps, not by values on k-points; (3) the finite-type hypothesis via 2r generators; (4) coefficient maps E_m from the tensor universal property; (5) c(p_n v)=p_n v⊗e^n, tensor factor order checked; (6) the converse is tested at B=H, x=id_H, which is needed over F_2; (7) independence via the projections p_n, with no algebraically closed field needed; (8) finitely many weights via the supports of a spanning list; (9) greedy bases; (10) the base-changed basis and block-diagonal matrix for every B, including nonreduced and zero B; (11) r=0, V=0, any characteristic. Duplicates checked: gm-representation-weight-basis is the r=1 special case; character-eigenspaces-independent and torus-finite-character-separation need an algebraically closed field and say less; split-torus-subgroups-diagonalizable is about subgroups. None states this theorem. Blueprint from.node null is inherited from the base record."
+ }
+}

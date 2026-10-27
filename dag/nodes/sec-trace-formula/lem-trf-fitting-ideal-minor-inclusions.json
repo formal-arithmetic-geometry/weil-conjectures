@@ -24,9 +24,9 @@
    }
   },
   {
-   "text": "For (1), take an $(r+1)\\times(r+1)$ submatrix $Q$ of $A$ with its rows and columns in increasing order. Fix any column $j$ of $Q$. By [lem-weil-pbc-matrix-adjugate-identity], the $(j,j)$ entry of $\\operatorname{adj}(Q)\\,Q=\\det(Q)\\cdot1$ reads $\\det Q=\\sum_i\\operatorname{adj}(Q)_{ji}Q_{ij}=\\sum_i(-1)^{i+j}Q_{ij}\\det Q^{(i,j)}$, where $Q^{(i,j)}$ deletes row $i$ and column $j$ of $Q$ (the expansion of $\\det Q$ along its column $j$). Every cofactor is the determinant of an $r\\times r$ submatrix of $A$, so belongs to $J_r(A)$. The coefficients are signed entries of $Q$, hence elements of $R$. Closure of the ideal under finite sums and scalar multiplication gives $\\det Q\\in J_r(A)$. Applying Step 1 to all generators yields $J_{r+1}(A)\\subseteq J_r(A)$.",
+   "text": "For (1), take an $(r+1)$-minor $Q$ of $A$. Apply [lem-trf-minor-laplace-coefficient-formula] with $q=r+1$, $s=r$ and $T=\\{1,\\ldots,r\\}$. Each $Q_{I,T}$ is an $r$-minor of $A$; its coefficient is the signed complementary $1$-minor, hence an element of $R$. The identity expresses $\\det Q$ as a finite sum of elements of $J_r(A)$. Step 1 gives the inclusion. The formula includes the signs from the cofactor expansion, with no invertibility hypothesis.",
    "uses": [
-    "lem-weil-pbc-matrix-adjugate-identity"
+    "lem-trf-minor-laplace-coefficient-formula"
    ],
    "elementary": false,
    "source": {
@@ -35,9 +35,9 @@
    }
   },
   {
-   "text": "For (2), fix $r\\ge1$ and induct on $d$, with the claim quantified over all $p,n,A,B$ as in the statement. At $d=0$ one has $B=A$ and the inclusion is equality. For the induction step, let $B$ have $n+d+1$ columns and let $D$ be its first $n+d$ columns. The induction hypothesis gives $J_{r+d}(D)\\subseteq J_r(A)$. Take a square submatrix $Q$ of $B$ of size $r+d+1$. If it omits the last column of $B$, its determinant lies in $J_{r+d+1}(D)\\subseteq J_{r+d}(D)$ by Step 2 applied to $D$ with index $r+d$. If it contains that last column, let $j$ be its position in $Q$ and expand $\\det Q$ along column $j$ by the $(j,j)$ entry of the identity $\\operatorname{adj}(Q)\\,Q=\\det(Q)\\cdot1$ of [lem-weil-pbc-matrix-adjugate-identity], exactly as in Step 2. Deleting it and any selected row leaves an $(r+d)\\times(r+d)$ submatrix of $D$, so every cofactor belongs to $J_{r+d}(D)$. Thus in both cases $\\det Q\\in J_{r+d}(D)\\subseteq J_r(A)$. Taking generators proves $J_{r+d+1}(B)\\subseteq J_r(A)$ and completes the induction. If there is no such $Q$, the inclusion follows from Step 1.",
+   "text": "For (2), for each $(r+d)$-minor $B_{I,J}$ apply [lem-trf-column-extension-minor-coefficients] to $B$ and its first $n$ columns $A$. Its displayed evaluation identity writes this determinant as a sum of coefficients in $R$ times $r$-minors of $A$. Every summand lies in $J_r(A)$, and Step 1 gives $J_{r+d}(B)\\subseteq J_r(A)$. At $d=0$ the coefficients are Kronecker deltas, so this is equality; no minors are selected when their index sets do not exist.",
    "uses": [
-    "lem-weil-pbc-matrix-adjugate-identity"
+    "lem-trf-column-extension-minor-coefficients"
    ],
    "elementary": false,
    "source": {
@@ -58,7 +58,8 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-matrix-adjugate-identity",
+  "lem-trf-minor-laplace-coefficient-formula",
+  "lem-trf-column-extension-minor-coefficients",
   "lem-weil-pbc-cauchy-binet"
  ],
  "proof_origin": {
@@ -166,11 +167,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-fitting-ideal-minor-inclusions",
   "worker": "stage1",
-  "summary": "Kept all three clauses and all boundary conventions unchanged. Expanded the omitted proof of Stacks 07Z7 into four steps: generator and boundary reductions, Laplace descent, induction on added columns, and Cauchy–Binet for restricted row/column products. Column expansion is taken from the diagonal entries of the existing Mathlib leaf lem-weil-pbc-matrix-adjugate-identity (adj(M)M = det(M)1); the proposed new leaf lem-trf-determinant-column-expansion was dropped by the maintainer reader as a one-line specialization of that node. Reused the existing closed Cauchy–Binet node; no new clause-equivalent nodes.",
-  "blueprint": "Supplies the general determinant-ideal calculation used by lem-trf-fitting-ideal-independence-base-change in the first-Fitting singular-subscheme dependency of the nodal-family geometry route, retaining the existing ancestry to lem-trf-local-term-locality. That ancestor and its current main-20261015 proof contain no separate Fitting clause; this is a generic algebra tool below the imported unit route.",
+  "summary": "Repair of the human re-split return: statement unchanged; two new statement-only coefficient-identity nodes distribute the cofactor and appended-column induction work. The parent retains generator/boundary reductions and its original Cauchy–Binet argument, and assembles the new identities by ideal closure. No new node states the conjunction or an ideal-inclusion clause. Full former proof is retained in report.md, with the distribution and recursive induction detailed there.",
+  "blueprint": "Supplies the general determinant-ideal calculation used by lem-trf-fitting-ideal-independence-base-change in the first-Fitting singular-subscheme dependency of the nodal-family geometry route, retaining the existing ancestry to lem-trf-local-term-locality. That ancestor and its current main-20261015 proof contain no separate Fitting clause; this is a generic algebra tool below the imported unit route. Re-split: former step 2 is assigned to the Laplace coefficient identity; former step 3 to the recursive extension certificate; former steps 1 and 4 remain in the parent.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-cauchy-binet",
@@ -182,12 +183,12 @@
   "lem-weil-pbc-cauchy-binet"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q68-a11c1b214",
-  "group": "Q68",
+  "reviewer": "NT-cc-Q81-5ef7e909a",
+  "group": "Q81",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-a11c1b214 (reviewer sub-agent of L); spot-checked: I read the item, the new node, the cited statements (def-weil-matrix, def-weil-submatrix, def-weil-pbc-matrix-determinant, lem-weil-pbc-cauchy-binet, lem-weil-pbc-matrix-adjugate-identity), the parent's three uses of the item, and the source. Stacks 07Z7 (more-algebra.tex l.1326, lemma-ideals-generated-by-minors; the tag is confirmed in tags/tags) states parts (1)-(3) for appended rows and left multiplication, with the proof omitted except for an expansion hint. The item states the transposed column and right-multiplication form, which is exactly what the parent uses; no hypothesis is added or dropped and nothing is weakened. Step 1 (reduction to generators, r=0, oversized minors) is elementary and correct. Step 2: each cofactor of an (r+1)-minor is an r-minor of A, so the clause holds. Step 3: the induction on d is set up correctly, quantified over all matrices, with base d=0 and two cases (the minor omits or contains the last column); it is not circular. Step 4: Cauchy-Binet applied with m=r to A_I and C_J, with (AC)_{I,J}=A_I C_J checked entry by entry, covers n<r and r=0. Cauchy-Binet is outside this unit but its Lean is closed in slopmaster2, so I accept the declared tool_uses entry. Edge cases checked: empty matrices, r=0, r>min(p,n), d=0, the zero ring, zero divisors, characteristic 2. Fault found (C5 / brief section 2, special case of an existing node): the new Mathlib leaf lem-trf-determinant-column-expansion (Matrix.det_succ_column, l.787) is true, but it is the (j,j) diagonal entry of the existing leaf lem-weil-pbc-matrix-adjugate-identity (adj(M)M=det(M)1, with adj_{ji}=(-1)^{i+j}det M^{(i,j)}). Fix: Steps 2-3 now cite that node with the diagonal-entry computation written out, proof_deps is updated, the split_report summary records the change, and the new node is dropped (nothing else cites it). The dropped node also cited det_fin_zero at l.797-798; it is at l.796. Corrected file: fixes/dag/nodes/sec-trace-formula/lem-trf-fitting-ideal-minor-inclusions.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-5ef7e909a (reviewer sub-agent of L); spot-checked: I read the re-split repair note for this item (released 2026-10-22; live and side-live copies are identical). The live item is still at the base, so no other group has superseded it. I read the source, Stacks 07Z7 in more-algebra.tex at line 1326. The item statement is the transposed form and is unchanged.\n\nOld step 2 (column cofactor expansion via the adjugate node) is now the new node lem-trf-minor-laplace-coefficient-formula. That node is the general Laplace expansion along any s-column set T. I checked the sign by hand: at q=2 it gives ad-cb for T={1} and da-bc for T={2}. For s=0, s=q and q=0 it reduces to 1=1. In the parent's case (q=r+1, s=r, T={1..r}) the sign works out to (-1)^(a+q), which is ordinary expansion along the last column. Only that single-column case is actually used. That case is already in Mathlib (det_succ_column) and in the DAG (the adjugate node), so the node is more general than needed. I accept this because the node is true and comparable in size to the other new node; it is a note for the maintainer, not a fault.\n\nOld step 3 (induction on the number of added columns) is now lem-trf-column-extension-minor-coefficients. The coefficients are explicit integer polynomials L_d defined by a recursion that expands along the last selected column j_q. All remaining columns are at most n+d-1, so they lie in the shorter matrix, and the sign (-1)^(a+q) matches the cofactor expansion. I checked the cases d=0; r=0, d=1; r=1, d=1 with the minor containing or omitting the new column; vacuous selections; and the zero ring. The node gives an explicit identity rather than restating clause (2). The recursion is defining data, not a proof sketch, so it is not a B1 fault. The node does not depend on the Laplace node, so the two can be worked on in parallel.\n\nSteps 1 and 4 are kept word for word. I checked step 4's use of Cauchy-Binet against that node's statement: m=r, and the chosen submatrix of AC equals A_I C_J entry by entry. The retained Cauchy-Binet tool_uses entry is accepted. The parent proof is 2319 characters of assembly. Its proof_deps are exactly the three cited nodes, and there is no cycle.\n\nI found no duplicates: rg -L for laplace, cofactor and complementary minors over the snapshot DAG finds only unrelated nodes. Mathlib has single-column expansions only. Both new nodes meet B1-B7: statement only, self-contained, the matrix/submatrix/determinant definitions cited, the 07Z7 hint as source, and correct blueprint.from/via. I could not check the recorded searches against the search log, which exists only on the Codex machine. No SGA is cited. No fixes were made."
  },
  "lean": {
   "module": "Sheaf.LinearAlgebra.Matrix.MinorIdealInclusions",
@@ -207,5 +208,16 @@
   "result": "fix",
   "note": "Read node, Stacks 07Z7 (more-algebra.tex l.1326, transposed form), all stmt_deps records, proof-dep records, both modules and report. Lean matches each clause exactly (CommRing R, Fin p x Fin n, (1) r+1 vs r, (2) Fin.castAdd d first-columns hypothesis with r+d, (3) A*C); minorIdeal is a real Ideal.span with increasing orderEmbOfFin, giving J_0 = top and J_r = bot for oversized r; edge cases r=0, p/n=0, d=0, zero ring covered; no extra hypotheses; lean.statement verbatim; item changed only in lean and stmt_deps; new-node fields fine; no duplicate notion. Compiled clean with nt_compile.py --json, as delivered and fixed (error-probe confirmed reporting). Fixes: (1) def-trf-minor-ideal.json had single-backslash \\times escapes, parsing as TAB+'imes' -> corrected to \\\\times; (2) item module imported duplicate Sheaf.LinearAlgebra.Matrix.CauchyBinet instead of recorded WeilConjectures.LinearAlgebra.Matrix.CauchyBinet -> MinorIdealInclusions.lean and report.md corrected."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

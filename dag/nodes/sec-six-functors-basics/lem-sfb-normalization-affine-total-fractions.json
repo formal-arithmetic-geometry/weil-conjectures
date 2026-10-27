@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-normalization-affine-total-fractions",
+ "kind": "statement",
+ "title": "Affine normalization charts via total fractions without a Noetherian hypothesis",
+ "statement": "Let $X$ be a reduced scheme [def-pc-reduced-scheme] such that every quasi-compact open has finitely many irreducible components [def-weil-irreducible-components]. Let $\\nu:X^\\nu\\to X$ be the componentwise normalization [def-weil-pbc-reduced-normalization], and let $U=\\operatorname{Spec}A\\subseteq X$ be an affine open [def-weil-affine-spectrum]. Let $S_A$ be the multiplicative set of nonzerodivisors of $A$ (elements $s$ for which $sa=0$ implies $a=0$), put $Q(A)=S_A^{-1}A$ [def-weil-pbc-module-localization], and let $\\overline A\\subseteq Q(A)$ be the integral closure of $A$ in $Q(A)$ [def-weil-pbc-integral-closure]. Then $A$ is reduced and has finitely many minimal prime ideals (prime ideals containing no strictly smaller prime ideal), and there is a canonical isomorphism $\\nu^{-1}(U)\\simeq\\operatorname{Spec}\\overline A$ over $U$. Under this isomorphism the structural ring map is $A\\to\\overline A$, $a\\mapsto a/1$. No Noetherian or finiteness-of-normalization hypothesis is imposed. If $U$ is empty, $A$, $Q(A)$ and $\\overline A$ are the zero ring and both schemes in this isomorphism are empty.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 035P, label lemma-description-normalization, parts (1) and (4); componentwise normalization is the same normalization by Tag 0CDV, label lemma-normalization-in-terms-of-components."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "By [def-pc-reduced-scheme], $A=\\mathcal O_X(U)$ is reduced. Apply [lem-sfb-normalization-generic-residue-affine-charts] to $X,U$: it provides the finite set $I_U$ of generic points of the components of $U$. By [lem-weil-pbc-spec-irreducible-components-minimal-primes], those components are the $V(\\mathfrak p_i)$ for the minimal primes $\\mathfrak p_i$ of $A$. Distinct minimal primes give distinct closed sets: $V(\\mathfrak p)$ contains $\\mathfrak q$ precisely when $\\mathfrak p\\subseteq\\mathfrak q$. Their generic points are the points $\\mathfrak p_i$ themselves, since the closure of $\\{\\mathfrak p_i\\}$ is $V(\\mathfrak p_i)$. Thus we can index all the minimal primes without repetition by this finite set.",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "lem-sfb-normalization-generic-residue-affine-charts",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035P (lemma-description-normalization), proof of (1); Algebra Tag 00ES (lemma-irreducible)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-reduced-weakass-minimal] to the reduced ring $A$. Every weakly associated prime is one of the finitely many $\\mathfrak p_i$ from step 1. Therefore [lem-sc-affine-totalquotient-minimal-product] gives the canonical isomorphism $\\alpha:Q(A)\\xrightarrow{\\sim}\\prod_i A_{\\mathfrak p_i}$. Its $i$-th coordinate sends $a/s$ to $(a/1)(s/1)^{-1}$, so it is compatible with the maps from $A$. This application requires only finiteness of the minimal primes and the weakly associated prime condition, both now established.",
+   "uses": [
+    "lem-sfb-reduced-weakass-minimal",
+    "lem-sc-affine-totalquotient-minimal-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035P (lemma-description-normalization), proof of (2); Algebra Tags 0EMA and 02LX."
+   }
+  },
+  {
+   "text": "For each $i$, [lem-weil-pbc-minimal-prime-reduced-localization-field] gives $\\mathfrak p_iA_{\\mathfrak p_i}=0$ and says $A_{\\mathfrak p_i}$ is a field. By [lem-weil-pbc-affine-open-stalk-localization], the isomorphism $A_{\\mathfrak p_i}\\simeq\\mathcal O_{X,\\eta_i}$ sends $a/s$ to $a_{\\eta_i}s_{\\eta_i}^{-1}$, where $\\eta_i$ is the corresponding point of $U$. Its quotient by the maximal ideal therefore identifies $A_{\\mathfrak p_i}$ with $\\kappa_X(\\eta_i)$, using the residue-field definition [def-weil-residue-field]. Compose these coordinate isomorphisms with $\\alpha$ to obtain an $A$-algebra isomorphism $e:Q(A)\\xrightarrow{\\sim}C_U=\\prod_i\\kappa_X(\\eta_i)$. Explicitly $e(a/1)$ is the tuple of residue classes of the germs of $a$, exactly the $A$-algebra structure required by the chart lemma.",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035P (lemma-description-normalization), proof of (2); Algebra Tag 00EU; Schemes Tag 01HV (lemma-spec-sheaves), (6)."
+   }
+  },
+  {
+   "text": "Write $D_U\\subseteq C_U$ for the integral closure in [lem-sfb-normalization-generic-residue-affine-charts]. The isomorphism $e$ restricts to $\\bar e:\\overline A\\xrightarrow{\\sim}D_U$: if $z$ satisfies a monic equation $z^n+\\sum_{j<n}(a_j/1)z^j=0$, applying $e$ gives the same monic equation for $e(z)$, since $e(a_j/1)$ is the structural image of $a_j$. Conversely apply $e^{-1}$ to a monic equation for an element of $D_U$. This is precisely integrality as defined in [def-weil-pbc-integral-closure]. Apply the contravariant spectrum functor [def-weil-affine-spectrum] to $\\bar e$ and compose $\\nu^{-1}(U)\\simeq\\operatorname{Spec}D_U$ from the chart lemma with $\\operatorname{Spec}(\\bar e):\\operatorname{Spec}D_U\\simeq\\operatorname{Spec}\\overline A$. The composite is over $U$: on rings, $a$ maps to $e(a/1)$ in $D_U$ and then to $a/1$ in $\\overline A$. All maps used are the canonical localization, germ, residue and integral-closure maps, so the identification is canonical.",
+   "uses": [
+    "lem-sfb-normalization-generic-residue-affine-charts",
+    "def-weil-pbc-integral-closure",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035P (lemma-description-normalization), (4), and Tag 0CDV (lemma-normalization-in-terms-of-components); transport of integral closure along the canonical algebra isomorphism."
+   }
+  },
+  {
+   "text": "If $U$ is empty, its ring of sections $A$ is the zero ring by the sheaf axiom for the empty open. In the localization $Q(A)=S_A^{-1}A$, $0=1$ still holds, so $Q(A)$ is the zero ring [def-weil-pbc-module-localization]. Its integral-closure subring $\\overline A$ is also the zero ring [def-weil-pbc-integral-closure]. Its spectrum has no prime ideals [def-weil-affine-spectrum]. The chart lemma [lem-sfb-normalization-generic-residue-affine-charts] states that the inverse image of this empty $U$ is empty. Thus the preceding isomorphism has exactly the asserted empty-case interpretation.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-integral-closure",
+    "def-weil-affine-spectrum",
+    "lem-sfb-normalization-generic-residue-affine-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035P (lemma-description-normalization), empty affine case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "lem-sfb-normalization-generic-residue-affine-charts",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-sfb-reduced-weakass-minimal",
+  "lem-sc-affine-totalquotient-minimal-product",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-residue-field",
+  "def-weil-pbc-integral-closure",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 035P (lemma-description-normalization), proof of (1), (2), (4), with the componentwise formulation of Tag 0CDV and Algebra Tag 0EMA."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine charts of normalization of reduced schemes with finitely many minimal primes are spectra of integral closures in total rings of fractions",
+   "results": "{\"t\": \"2026-10-22T06:42:10Z\", \"tool\": \"leansearch\", \"query\": \"Affine charts of normalization of reduced schemes with finitely many minimal primes are spectra of integral closures in total rings of fractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.affine_isReduced_iff\"], \"digest\": \"56a0cb9f6044087f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization chart results concern the integral closure in sections of a supplied qcqs morphism, not componentwise absolute normalization in Q(A). Read Mathlib/AlgebraicGeometry/Normalization.lean:46-74, 184-190, 259-266; identifying its relative normalization with the componentwise construction is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fromNormalization_app\"",
+   "results": "{\"t\": \"2026-10-22T06:42:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"fromNormalization_app\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fromNormalization_app\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization_app_assoc\"], \"digest\": \"d22c13d80638da4b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization chart results concern the integral closure in sections of a supplied qcqs morphism, not componentwise absolute normalization in Q(A). Read Mathlib/AlgebraicGeometry/Normalization.lean:46-74, 184-190, 259-266; identifying its relative normalization with the componentwise construction is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "fromNormalization_app|normalization|totalRingOfFractions",
+   "results": "{\"t\": \"2026-10-22T06:42:11Z\", \"tool\": \"grep\", \"query\": \"fromNormalization_app|normalization|totalRingOfFractions\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"eaf1feaf40fd07c6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization chart results concern the integral closure in sections of a supplied qcqs morphism, not componentwise absolute normalization in Q(A). Read Mathlib/AlgebraicGeometry/Normalization.lean:46-74, 184-190, 259-266; identifying its relative normalization with the componentwise construction is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of an affine open under the componentwise normalization of a reduced scheme is the spectrum of its integral closure in the total quotient ring",
+   "results": "{\"t\": \"2026-10-22T06:42:23Z\", \"tool\": \"leanfinder\", \"query\": \"The inverse image of an affine open under the componentwise normalization of a reduced scheme is the spectrum of its integral closure in the total quotient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\"], \"digest\": \"463c687dd8de192e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization chart results concern the integral closure in sections of a supplied qcqs morphism, not componentwise absolute normalization in Q(A). Read Mathlib/AlgebraicGeometry/Normalization.lean:46-74, 184-190, 259-266; identifying its relative normalization with the componentwise construction is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization of a reduced affine scheme is Spec of the integral closure of its ring in the product of fraction fields of its minimal prime quotients",
+   "results": "{\"t\": \"2026-10-22T06:42:38Z\", \"tool\": \"leanfinder\", \"query\": \"The normalization of a reduced affine scheme is Spec of the integral closure of its ring in the product of fraction fields of its minimal prime quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"7ed043f630972149\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization chart results concern the integral closure in sections of a supplied qcqs morphism, not componentwise absolute normalization in Q(A). Read Mathlib/AlgebraicGeometry/Normalization.lean:46-74, 184-190, 259-266; identifying its relative normalization with the componentwise construction is not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-component-dominant-normalization-lift",
+  "date": "2026-10-22",
+  "group": "NN"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts. Smooth pullback proof: identify the integral normal pullback with absolute normalization by its generic points, as in Stacks 07TD final sentence. Recognition proof: Universal property of componentwise normalization for a normal source. Affine construction in the proof of the normal-source lifting property: identify the target chart with integral closure in its total fraction ring.",
+   "via": [
+    "lem-sfb-component-dominant-normalization-lift",
+    "lem-sfb-integral-normal-generic-recognition",
+    "lem-sfb-componentwise-normalization-smooth-pullback",
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-normalization-affine-total-fractions",
+  "worker": "stage1",
+  "summary": "Preserved the full non-Noetherian statement. Reused the existing generic-residue-field normalization charts and total-quotient product theorem; added only the general reduced-ring weakly-associated-prime lemma (Stacks 0EMA) needed to satisfy the latter theorem. Checked all cited statements, canonical structural maps, and the zero ring. No project declaration states the item exactly. Repair of returned head 46ea0f3abd8: rebased the retained split onto the current DAG, re-read every cited statement and confirmed all retained full-statement quotes still match. Corrected the spectrum-components source tag from 00ER to 00ES; preserved the statement, hypotheses, five-step proof route and logged searches.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. absolute normalization on etale charts. Smooth pullback proof: identify the integral normal pullback with absolute normalization by its generic points, as in Stacks 07TD final sentence. Recognition proof: Universal property of componentwise normalization for a normal source. Affine construction in the proof of the normal-source lifting property: identify the target chart with integral closure in its total fraction ring. The steps realize the affine construction by first identifying total fractions with the generic residue algebra, then restricting this canonical algebra isomorphism to integral closures.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "why": "Generic commutative-algebra/topology tool converting finite components to finite minimal primes; no replacement of the unit route."
+   },
+   {
+    "node": "lem-sc-affine-totalquotient-minimal-product",
+    "why": "Generic algebra tool decomposing total fractions under the verified weakly-associated-prime hypothesis; no Noetherianity required."
+   },
+   {
+    "node": "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "why": "Generic algebra tool identifying minimal-prime localizations of a reduced ring with their residue fields."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic affine geometry tool identifying germ maps with prime localizations and fixing structural-map compatibility."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-sc-affine-totalquotient-minimal-product",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-affine-open-stalk-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-4d81edbd0",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-4d81edbd0 (reviewer sub-agent of L); spot-checked: This head re-delivers 46ea0f3abd81 (my earlier FIX; its landing was refused because a side completion had not been promoted). Diff of the two snapshots: the item changes only in the step-1 source tag, 00ER→00ES, which is correct (tags/tags: 00ES = algebra-lemma-irreducible, 00ER = a section), and in the split_report summary. The new node lem-sfb-reduced-weakass-minimal is identical to the earlier delivered version, so the earlier fix was lost. I re-read the whole item. Step 1: def-pc-reduced-scheme gives A reduced; the generic-residue chart lemma (needs only finitely many components) gives the finite set I_U; 00ES(3) matches components with minimal primes, so A has finitely many. Step 2: 0EMA together with lem-sc-affine-totalquotient-minimal-product (02LX+05C3, any commutative ring) gives Q(A)≅∏A_{p_i} by the canonical map. Step 3: 00EU (each A_{p_i} is a field) and 01HV stalk part (c) give the A-algebra isomorphism Q(A)≅C_U, matching the chart lemma's germ-then-residue structure. Step 4: integral closures correspond by moving the monic equation through e and e⁻¹, and the resulting map is a↦a/1 over U. Step 5: the empty case is covered by the chart lemma. The new node is Stacks 0EMA (algebra.tex l.15986), checked in full. I tested it on a field, k×k, k[x,y]/(xy), a non-Noetherian domain and the zero ring. It does not restate a clause of the item, and an rg -L search of the DAG for WeakAss/0EMA finds no duplicate: lem-sc-affine-weakass-nonzerodivisors and lem-trf-affine-minimal-prime-stalk-annihilator (Noetherian, Ass) are different results. The fault, re-applied: the node cites only def-weil-pbc-annihilator-associated-primes, which defines Ass (prime equal to an annihilator), a different notion. The fix cites def-sc-weakly-associated-primes (Tag 0547) in the statement and makes it the only stmt_dep; the mathematics is unchanged (fixes/dag/nodes/sec-six-functors-basics/lem-sfb-reduced-weakass-minimal.json). I accept the four generic tool_uses. There is no re-split note for this item and no SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizationAffineTotalFractions",
+  "declaration": "AlgebraicGeometry.Scheme.normalization_affine_total_fractions",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizationAffineTotalFractions.lean",
+  "statement": "theorem normalization_affine_total_fractions (X : Scheme.{u}) [IsReduced X] (hfinite : ∀ V : X.Opens, IsCompact (V : Set X) → (irreducibleComponents V).Finite) (U : X.affineOpens) : _root_.IsReduced Γ(X, U) ∧ (minimalPrimes Γ(X, U)).Finite ∧ (∃ e : (X.fromReducedNormalization ⁻¹ᵁ U.1).toScheme ≅ Spec (.of (integralClosure Γ(X, U) (Localization (nonZeroDivisors Γ(X, U))))), e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap Γ(X, U) (integralClosure Γ(X, U) (Localization (nonZeroDivisors Γ(X, U)))))) ≫ U.2.isoSpec.inv = X.fromReducedNormalization ∣_ U.1) ∧ (U.1 = ⊥ → Subsingleton Γ(X, U) ∧ Subsingleton (Localization (nonZeroDivisors Γ(X, U))) ∧ Subsingleton (integralClosure Γ(X, U) (Localization (nonZeroDivisors Γ(X, U)))) ∧ IsEmpty (X.fromReducedNormalization ⁻¹ᵁ U.1).toScheme ∧ IsEmpty (Spec (.of (integralClosure Γ(X, U) (Localization (nonZeroDivisors Γ(X, U)))))))",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bc5320e8c",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Clause-by-clause match with Stacks 035P(1),(4)/0CDV: [IsReduced X]; hfinite is exactly the qc-open finite-components hypothesis, no Noetherian assumption; ν = recorded fromReducedNormalization (Sigma.desc of component normalizations then subschemeι); A = Γ(X,U) via U.2.isoSpec; Q(A) = Localization nonZeroDivisors; Ā = integralClosure. Conclusions: IsReduced A, minimalPrimes finite, ∃ e : ν⁻¹U ≅ Spec Ā over U through algebraMap A Ā (a↦a/1); the equation forces e to be unique (an A-automorphism of Ā ⊆ Q is the identity), so not an arbitrary map. Empty-U clauses all present. One universe u. lean.statement verbatim (script check); item node unchanged except lean record. No duplicate: ComponentwiseNormalizationAffineCharts needs IsLocallyNoetherian. Docstrings carry source, blueprint tag and 5 proof steps; proof is sorry only. Second-reading section is the tool's standard line (policy since 2026-10-17). No compile (no file changed)."
+ }
+}

@@ -1,0 +1,146 @@
+{
+ "id": "lem-trf-constructible-vanishing-canonical-strata",
+ "kind": "statement",
+ "title": "Canonical module pullback reads normalized stratum trivializations",
+ "statement": "Let f:X→S, i:X′→X and j:S′→S be scheme morphisms, and Λ a finite commutative ring. Let F be a constant-coefficient module sheaf on the vanishing site V_f [def-trf-oriented-nearby-cycles]. Suppose its normalized restriction along (i,j), as defined by identity-base-change normalization followed by stratumRestriction [def-trf-oriented-constructible-sheaf], is finite type locally constant [def-weil-pbc-finite-type-locally-constant-module-sheaf]. Let r be a constant-module geometric morphism [lem-sp-completion-mate-comparison] from the oriented triple site for (f∘i,j) [lem-trf-oriented-point-cohomology] to V_f, whose set inverse image is naturally isomorphic to sheafified left Kan extension along the canonical triple functor (U,V,W)↦(U×_X X′,V,W×_S S′), with the associativity comparison for i,f and unchanged second structural arrow. Then the fixed-ring module sheaf underlying r*F admits a covering sieve of the terminal triple, and on each member its slice is isomorphic to the constant sheaf with some finite Λ-module value. Scalar restriction is the canonical CommRingCat-to-RingCat comparison followed by [lem-cbc-constant-ring-module-sheaves]. This is a statement about one pair of maps, with no assertion that stratifications exist and no nearby-cycle or Psi-goodness hypothesis.",
+ "source": {
+  "document": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/48/9291-1712.10216v7.pdf",
+  "place": "Lu–Zheng, printed p. 38: definition immediately following Theorem 4.27 (PDF index 37); ILO XI 1.1, 1.7, 1.9 for the canonical triple-site restrictions; Stacks Tags 03CY (unique sheafified module action) and 03D2 (inverse image of module operations). Checked online 2026-10-24."
+ },
+ "stmt_deps": [
+  "def-trf-oriented-nearby-cycles",
+  "def-trf-oriented-constructible-sheaf",
+  "lem-trf-oriented-point-cohomology",
+  "lem-cbc-constant-ring-module-sheaves",
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-sp-completion-mate-comparison",
+  "def-weil-pbc-finite-type-locally-constant-module-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Use the assumed finite-type local-constancy witness on this one normalized stratum. Normalize the second structural arrow using the isomorphism between base change along the identity of S and the identity functor. No stratification is constructed in this lemma.",
+   "uses": [
+    "def-trf-oriented-constructible-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose normalization with stratum base change. Base-change associativity on the first outer entry and the identity-pullback projection on the second identify the resulting triple functor with the concrete functor specifying r. Each comparison respects the three generating cover types. The set inverse images are the corresponding sheafified left Kan extensions, so uniqueness of left adjoints gives their natural isomorphism.",
+   "uses": [
+    "def-trf-oriented-constructible-sheaf",
+    "def-trf-oriented-nearby-cycles"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the constant-ring module equivalence to this inverse-image comparison. The scalar actions agree on constant sections, and extension along the sheafification unit is unique. Thus the fixed-ring sheaf of r*F agrees with the fixed-ring sheaf of the normalized stratum restriction. This concerns the actual canonical module pullback, not an arbitrarily chosen functor on modules.",
+   "uses": [
+    "lem-cbc-constant-ring-module-sheaves",
+    "lem-sp-completion-mate-comparison",
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the local-constancy witness at the terminal triple. Scalar restriction commutes with restriction to its slices and identifies the constant module models with constant fixed-ring module sheaves. Compose the slice isomorphisms with the comparison above. Keep the covering sieve and finite-type module models; finite generation over the finite coefficient ring makes their underlying sets finite. The argument also applies to empty strata and the zero ring.",
+   "uses": [
+    "def-trf-oriented-constructible-sheaf",
+    "lem-cbc-constant-ring-module-sheaves",
+    "lem-trf-oriented-point-cohomology",
+    "def-weil-pbc-finite-type-locally-constant-module-sheaf"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-site-derived-constant-module-functor",
+  "def-trf-oriented-constructible-sheaf",
+  "def-trf-oriented-nearby-cycles",
+  "def-weil-pbc-finite-type-locally-constant-module-sheaf",
+  "lem-cbc-constant-ring-module-sheaves",
+  "lem-sp-completion-mate-comparison",
+  "lem-trf-oriented-point-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/48/9291-1712.10216v7.pdf",
+  "place": "Lu–Zheng, printed p. 38: definition immediately following Theorem 4.27 (PDF index 37); ILO XI 1.1, 1.7, 1.9 for the canonical triple-site restrictions; Stacks Tags 03CY (unique sheafified module action) and 03D2 (inverse image of module operations). Checked online 2026-10-24. The detailed comparison is expanded by H7 from these adjunction/scalar-transport constructions; it is not a separately numbered lemma in Lu–Zheng."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "vanishingNormalization|IsConstructibleVanishing|constantRingModuleRestriction",
+   "results": "{\"t\": \"2026-10-24T02:56:57Z\", \"tool\": \"grep\", \"query\": \"vanishingNormalization|IsConstructibleVanishing|constantRingModuleRestriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No applicable oriented-site transport theorem. Local source search finds the constant-ring equivalence and the abstract-versus-sheafified-Lan pullback comparison, but no theorem relating the two recorded constructibility presentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.sheafPullbackConstruction.sheafPullbackIso",
+   "results": "{\"t\": \"2026-10-24T02:56:57Z\", \"tool\": \"loogle\", \"query\": \"Functor.sheafPullbackConstruction.sheafPullbackIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Functor.sheafPullbackConstruction.sheafPullbackIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No applicable oriented-site transport theorem. Local source search finds the constant-ring equivalence and the abstract-versus-sheafified-Lan pullback comparison, but no theorem relating the two recorded constructibility presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical inverse image of a constructible module sheaf on an oriented vanishing site has finite locally constant strata",
+   "results": "{\"t\": \"2026-10-24T02:56:59Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical inverse image of a constructible module sheaf on an oriented vanishing site has finite locally constant strata\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"LightCondMod.LocallyConstant.functor\", \"LightCondMod.LocallyConstant.functorToPresheaves\", \"LightCondMod.ofSheafLightProfinite\", \"CondensedMod.LocallyConstant.functor\", \"CondensedMod.LocallyConstant.functorToPresheaves\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier\"], \"digest\": \"fdca5efe7bcfa839\"}",
+   "date": "2026-10-24",
+   "verdict": "No applicable oriented-site transport theorem. Local source search finds the constant-ring equivalence and the abstract-versus-sheafified-Lan pullback comparison, but no theorem relating the two recorded constructibility presentations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PsiGoodOrientedCohomologyStrata",
+  "date": "2026-10-24",
+  "group": "H7"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Constructibility input before geometric slicing: step 5 of lem-trf-psi-good-oriented-cohomology-strata, identifying the normalized stratum restrictions with canonical geometric module inverse images.",
+   "via": [
+    "lem-trf-psi-good-oriented-cohomology-strata",
+    "lem-trf-nearby-cycle-sheaf-finiteness",
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "lem-trf-specialization-zero-section"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleVanishingCanonicalStrata",
+  "file": "lean/Sheaf/Paper/ConstructibleVanishingCanonicalStrata.lean",
+  "declaration": "AlgebraicGeometry.OrientedConstructibleSheaf.canonical_stratum_trivializations",
+  "statement": "theorem canonical_stratum_trivializations {X S X' S' : Scheme.{u}} (f : X ⟶ S)\n    (i : X' ⟶ X) (j : S' ⟶ S)\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    (r : Morphism (vanishingDatum.{u, u + 1} f)\n        (OrientedPointCohomology.datum.{u, u} (i ≫ f) j))\n    (hr : Nonempty (r.inverse ≅\n        sheafToPresheaf (vanishingTopology.{u, u + 1} f) (Type (u + 1)) ⋙\n          (Comma.map\n            ((Functor.rightUnitor ((etaleBaseChange i).prod (etaleBaseChange j)) ≪≫\n              (Functor.leftUnitor ((etaleBaseChange i).prod (etaleBaseChange j))).symm).hom)\n            (show (etaleBaseChange.{u, u + 1} f).prod' (𝟭 (EtaleSite S)) ⋙\n                (etaleBaseChange i).prod (etaleBaseChange j) ⟶\n              𝟭 (EtaleSite S) ⋙\n                (etaleBaseChange (i ≫ f)).prod' (etaleBaseChange j) from\n              { app := fun V ↦ ((etaleBaseChangeComp i f).inv.app V, 𝟙 _)\n                naturality := fun V W h ↦\n                  Prod.ext ((etaleBaseChangeComp i f).inv.naturality h) (by simp) })).op.lan ⋙\n          presheafToSheaf (OrientedPointCohomology.datum.{u, u} (i ≫ f) j).topology\n            (Type (u + 1))))\n    (F : (vanishingDatum.{u, u + 1} f).modules (Coeff.{u, u + 1} Λ))\n    (hF : SheafOfModules.IsFiniteTypeLocallyConstant\n      (productTopology (i ≫ f) (j ≫ 𝟙 S)) (Coeff Λ)\n      ((stratumRestriction f (𝟙 S) i j Λ).obj ((vanishingModuleTransport f Λ).obj F))) :\n    letI : HasFiniteLimits (OrientedPointCohomology.datum.{u, u} (i ≫ f) j).objects :=\n      OrientedPointCohomology.triples_finiteLimits (i ≫ f) j\n    ∃ R : (OrientedPointCohomology.datum.{u, u} (i ≫ f) j).topology.Cover\n      (⊤_ (OrientedPointCohomology.datum.{u, u} (i ≫ f) j).objects),\n    ∀ (Z : (OrientedPointCohomology.datum.{u, u} (i ≫ f) j).objects)\n      (k : Z ⟶ ⊤_ (OrientedPointCohomology.datum.{u, u} (i ≫ f) j).objects), R k →\n      ∃ M : ModuleCat.{u + 1} (Coeff.{u, u + 1} Λ), Finite M ∧\n        Nonempty\n          (((constantRingModuleRestriction _ (Coeff Λ)).obj\n            ((SheafOfModules.restrictScalars (realizationRingIso _ (Coeff Λ)).inv).obj\n              ((r.modulePull (Coeff Λ)).obj F))).over Z ≅\n            (constantSheaf\n              ((OrientedPointCohomology.datum.{u, u} (i ≫ f) j).topology.over Z)\n              (ModuleCat.{u + 1} (Coeff.{u, u + 1} Λ))).obj M)",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261024T190023-L-3852392",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261024T190023-L-3852392",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

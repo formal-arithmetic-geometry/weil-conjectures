@@ -1,0 +1,232 @@
+{
+ "id": "lem-zl-point-heart-finite-stage",
+ "kind": "statement",
+ "title": "Finite-stage Weil representatives and the exact point-heart equivalence",
+ "statement": "Fix a prime power $q=p^a$, $k_0=\\mathbf F_q$, its algebraic closure $k$, a prime $\\ell\\ne p$, and an algebraic closure $\\Omega/\\mathbf Q_\\ell$. Put $s=\\operatorname{Spec}k$ and let $g_s$ be its geometric Frobenius automorphism. Use the raw rational and common-stage coefficient categories [def-weil-algebraically-closed-coefficients], their constructible hearts [def-weil-constructible-heart], Weil pairs [def-weil-weil-sheaf-complex], and the specified point-fibre functors [def-weil-finite-coefficient-point].\nFor every finite $E\\subset\\Omega$ over $\\mathbf Q_\\ell$, and for $\\Lambda=\\Omega$, the functor $\\omega_\\Lambda=H^0\\operatorname{Fib}_{s,\\Lambda}$ (degree-zero cohomology [def-weil-coefficient-cohomology-modules]) restricts to an exact equivalence from $\\Sh_c(s,\\Lambda)$ to finite-dimensional $\\Lambda$-vector spaces. It preserves and reflects kernels, cokernels, zero objects and short exact sequences. Its identifications with degree-zero fibres are the canonical truncation comparisons; for $E\\subset L\\subset\\Omega$ they commute with the specified scalar/cohomology comparisons, with identity normalization and compatibility under successive extensions.\nFor every constructible $\\Omega$-Weil sheaf $\\mathcal F$ on $\\operatorname{Spec}k_0$, there exist a finite $E_0\\subset\\Omega$, an actual object $M\\in\\Sh_c(s,E_0)$, an isomorphism $\\theta:Lg_s^*M\\xrightarrow{\\sim}M$, and a Weil isomorphism $e:(E_0,(M,\\theta))\\xrightarrow{\\sim}\\mathcal F$. Both inverse identities for $\\theta$ and $e$, and the Weil-intertwining identity for $e$, hold at one common finite coefficient stage. The induced fibre identification is $\\omega_\\Omega(\\mathcal F)\\cong\\omega_{E_0}(M)\\otimes_{E_0}\\Omega$, with the specified scalar comparison. No continuity condition on the powers of $\\theta$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7, dimension-zero Jordan filtration: point-heart restriction and finite-stage descent of the given Weil pair; old item steps 1–2."
+ },
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-finite-coefficient-point",
+  "def-weil-coefficient-cohomology-modules",
+  "def-weil-frobenius-point-transport",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-local-frobenius-trace"
+ ],
+ "proof": [
+  {
+   "text": "Use the rational and common-stage essential-image theorem. Finite dimensionality of each value is the defining property of coefficientFdCohomology and coefficientQbarCohomology. Apply the proved generic exactness-from-essential-image theorem separately to the two functors.",
+   "uses": [
+    "lem-zl-point-heart-essential-images",
+    "lem-zl-point-heart-exactness-from-image",
+    "def-weil-coefficient-cohomology-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the simultaneous rational scalar/truncation squares and common-stage truncation comparisons from the truncation step. Take identity and tower normalization from the scalar step. The remaining change-of-stage equation is exactly coefficientQbarCohomology_changeStage at degree zero.",
+   "uses": [
+    "lem-zl-point-heart-truncation-squares",
+    "lem-zl-point-heart-scalar-normalizations",
+    "def-weil-coefficient-cohomology-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the given Weil sheaf obtain simultaneous finite-stage carrier and structure data. Retain each field and arrow. Define fibre as H^0 of the specified common-stage fibre applied to e inverse, followed by zlPointWeilStageOmega at the specified localClosedPoint. The fibre normalization is reflexivity. This supplies every field of the original witness and finishes the conjunction.",
+   "uses": [
+    "lem-zl-point-weil-simultaneous-descent",
+    "def-zl-point-heart-finite-stage-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-coefficient-cohomology-modules",
+  "def-zl-point-heart-finite-stage-data",
+  "lem-zl-point-heart-essential-images",
+  "lem-zl-point-heart-exactness-from-image",
+  "lem-zl-point-heart-scalar-normalizations",
+  "lem-zl-point-heart-truncation-squares",
+  "lem-zl-point-weil-simultaneous-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7; Lean assembly of essential images, exactness, truncations, scalar coherence and Weil descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A constructible Weil sheaf in the common finite coefficient heart at a geometric point descends to a finite coefficient heart and point realization restricts to an exact equivalence with finite dimensional vector spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ {P : TopCat → Prop} (R : Type (max u w)) [inst : Ring R] [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_2 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n      CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCateg\", \"doc\": \"For a ring $ R $ and a compact Hausdorff-like predicate $ P $ with explicit finite coproducts and pullbacks, and where effective epimorphisms are surjective on underlying sets, the underlying presheaf\"}\n  {\"name\": \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_functor_obj_val\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] [inst_2 : CategoryTheory.Preregular C]\\n  [inst_3 : CategoryTheory.FinitaryExtensive C] [inst_4 : ∀ (X : C), CategoryTheory.Projective X]\\n  (F : CategoryTheory.Sheaf (CategoryT\", \"doc\": \"In a preregular finitary extensive category $\\\\mathcal{C}$ where all objects are projective, the equivalence between the category of sheaves with respect to the coherent Grothendieck topology and the c\"}\n  {\"name\": \"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"module\": \"Mathlib/Condensed/Discrete/Characterization\", \"type\": \"∀ (X : LightCondSet)\\n  (h :\\n    (S : LightProfinite) →\\n      CategoryTheory.Limits.IsColimit (X.val.mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone))),\\n  LightCondSet.LocallyConstant.functor.essImage X\", \"doc\": \"For any light condensed set $ X $, if for every light profinite space $ S $, the cocone obtained by applying the functor to the right opposite of $ S $'s limit cone is a colimit, then $ X $ lies in th\"}\n  {\"name\": \"CondensedMod.ofSheafCompHaus\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor CompHausᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\\\mathrm{CompHaus}^{\\\\mathrm{op}} \\\\to \\\\mathrm{ModuleCat}\\\\, R $ that preserves finite products and satisfies the equalizer condition for the regular topology, $ F $ defines a sheaf w\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"CondensedMod.ofSheafProfinite\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\text{Profinite}^\\\\text{op} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructs the correspondi\"}\n  {\"name\": \"CondensedMod.ofSheafStonean\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Stoneanᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] → CondensedMod R\", \"doc\": \"Given a ring $ R $ and a functor $ F : \\\\text{Stonean}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products, this function constructs the corresponding condensed $ R $-module by applyi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general exact-functor and abelian-equivalence tools do not construct this specified point-heart equivalence or finite-stage Weil representative"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Point realization is an exact equivalence from the constructible heart at an algebraically closed field point to finite dimensional coefficient vector spaces compatible with scalar extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.stalkClosedPointIso\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \": (Spec R).presheaf.stalk (closedPoint R) ≅ R\", \"doc\": \"The stalk of the structure sheaf at the closed point of the prime spectrum of a commutative ring $ R $ is isomorphic to $ R $ itself. This isomorphism is constructed by composing the canonical isomorp\"}\n  {\"name\": \"Field.embEquivOfEquiv\", \"module\": \"Mathlib.FieldTheory.SeparableDegree\", \"type\": \"(i : E ≃ₐ[F] K) : Emb F E ≃ Emb F K\", \"doc\": \"Given an $ F $-algebra equivalence between fields $ E $ and $ K $, this constructs a bijection between the $ F $-algebra embeddings of $ E $ into its algebraic closure and the $ F $-algebra embeddings\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.PointedGaloisObject.pt\", \"module\": \"Mathlib.CategoryTheory.Galois.Prorepresentability\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    [inst_1 : CategoryTheory.GaloisCategory C] →\\n      {F : CategoryTheory.Functor C FintypeCat} →\\n        (self : CategoryTheory.PreGaloisCategory.PointedGaloisObject F) → (F.obj self.obj).carrier\", \"doc\": \"Given a Galois category $C$ and a functor $F:C\\to\\text{FintypeCat}$, this function extracts the distinguished element (the 'point') in the finite type $F(\\text{obj})$, where $\\\\text{obj}$ is the underlyin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.stalkClosedPointTo\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \": X.presheaf.stalk (f (closedPoint R)) ⟶ R\", \"doc\": \"The morphism from the stalk of the structure sheaf at the closed point of $\\\\operatorname{Spec}(R)$ to $R$, constructed by composing the stalk map induced by a scheme morphism $f$ with the canonical is\"}\n  {\"name\": \"Trivialization.linearEquivAt\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"(e : Trivialization F (π F E)) [e.IsLinear R] (b : B) (hb : b ∈ e.baseSet) : E b ≃ₗ[R] F\", \"doc\": \"For a linear trivialization $ e $ of a vector bundle over base space $ B $ with fiber $ F $, and for any point $ b $ in the base set of $ e $, this constructs a linear equivalence between the fiber $ \"}\n  {\"name\": \"Pretrivialization.linearEquivAt\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"(e : Pretrivialization F (π F E)) [e.IsLinear R] (b : B) (hb : b ∈ e.baseSet) : E b ≃ₗ[R] F\", \"doc\": \"For a linear pretrivialization $ e $ of a vector bundle over base space $ B $ with fiber $ F $, and for any point $ b $ in the base set of $ e $, this constructs a linear equivalence between the fiber\"}\n  {\"name\": \"Subalgebra.SeparatesPoints.rclike_to_real\", \"module\": \"Mathlib.Topology.ContinuousMap.StoneWeierstrass\", \"type\": \"{A : StarSubalgebra 𝕜 C(X, 𝕜)} (hA : A.SeparatesPoints) :\\n  ((A.restrictScalars ℝ).comap (ofRealAm.compLeftContinuous ℝ continuous_ofReal)).SeparatesPoints\", \"doc\": \"If a star subalgebra $ A $ of continuous functions separates points in the context of a real closed-like structure, then the subalgebra obtained by restricting scalars to $ \\\\mathbb{R} $ and taking the\"}\n  {\"name\": \"FiniteDimensional.complexToReal\", \"module\": \"Mathlib.LinearAlgebra.Complex.FiniteDimensional\", \"type\": \"(E : Type*) [AddCommGroup E] [Module ℂ E] [FiniteDimensional ℂ E] : FiniteDimensional ℝ E\", \"doc\": \"If $ E $ is a finite-dimensional complex vector space, then $ E $ is also finite-dimensional when viewed as a real vector space. This follows because the real dimension of $ E $ is twice its complex d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general exact-functor and abelian-equivalence tools do not construct this specified point-heart equivalence or finite-stage Weil representative"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Abelian",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.of_equivalence\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C] (α : C ≌ D) : CategoryTheory.IsGrothendieckAbelian.{w, v₂, u₂} D\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.Plus.fibrantObjectEquivalence\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives\", \"type\": \" (C : Type u_1) [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] : CochainComplex.Plus (CategoryTheory.InjectiveObject C) ≌ HomotopicalAlgebra.FibrantObject (CochainComplex.Plus C)\", \"doc\": \"The equivalence between `CochainComplex.Plus (InjectiveObject C)`\\nand the category of fibrant object in `CochainComplex.Plus C` for the\\nQuillen model category structure.\"}\n  {\"name\": \"CategoryTheory.Abelian.DoldKan.equivalence\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.Equivalence\", \"type\": \" {A : Type u_1} [CategoryTheory.Category.{v_1, u_1} A] [CategoryTheory.Abelian A] : CategoryTheory.SimplicialObject A ≌ ChainComplex A ℕ\", \"doc\": \"The Dold-Kan equivalence for abelian categories\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general exact-functor and abelian-equivalence tools do not construct this specified point-heart equivalence or finite-stage Weil representative"
+  },
+  {
+   "tool": "grep",
+   "query": "pointFiber|constructibleHeart|WeilSheaf",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: general exact-functor and abelian-equivalence tools do not construct this specified point-heart equivalence or finite-stage Weil representative"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a t exact derived equivalence to an equivalence of abelian hearts preserving kernels cokernels and descend Frobenius isomorphism through filtered coefficient Hom colimits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}\n  {\"name\": \"CategoryTheory.Functor.exact_tfae\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/ExactFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Abelian C]\\n  [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_4 : F.Additive],\\n  [∀ (S : CategoryTheory.ShortComplex C), \", \"doc\": \"For a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between abelian categories, the following are equivalent: (1) $F$ preserves short exact sequences, (2) $F$ preserves exact complexes, (3) $F$ preserves \"}\n  {\"name\": \"CategoryTheory.abelianOfEquivalence\", \"module\": \"Mathlib/CategoryTheory/Abelian/Transfer\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [CategoryTheory.Preadditive C] →\\n      [CategoryTheory.Limits.HasFiniteProducts C] →\\n        {D : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} D] →\\n            [CategoryTheory.Abelian D] → (F : CategoryTheory.Func\", \"doc\": \"Given a preadditive category $\\\\mathcal{C}$ with finite products and an abelian category $\\\\mathcal{D}$, if there exists an equivalence $F : \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, then $\\\\mathcal{C}$ inherits \"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      {D : Type u'} →\\n        [inst_2 : CategoryTheory.Category.{v', u'} D] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            (F : CategoryTheory.Functor C D) →\\n              [F.Additiv\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, this defines the induced group homomorphism $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.of_equivalence\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Abelian D]\\n  [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C] (α : C ≌ D), CategoryTheory.IsGrothendieckAbelian.{w, v₂\", \"doc\": \"If categories $C$ and $D$ are equivalent, and $C$ is a Grothendieck abelian category in universe $w$, then $D$ is also a Grothendieck abelian category in universe $w$.\"}\n  {\"name\": \"AddCommGrpCat.leftExactFunctorForgetEquivalence\", \"module\": \"Mathlib/Algebra/Category/Grp/LeftExactFunctor\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [CategoryTheory.Limits.HasFiniteBiproducts C] → C ⥤ₗ AddCommGrpCat ≌ C ⥤ₗ Type v\", \"doc\": \"The categorical equivalence between left exact functors from a category $\\\\mathcal{C}$ to the category of additive commutative groups and left exact functors from $\\\\mathcal{C}$ to the category of types\"}\n  {\"name\": \"CategoryTheory.Functor.mapExactFunctor_smul\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, the induced map $ \\\\operatorname{Ext}^n(X,Y) \\\\to \\\\operatorname{Ext}^n(F(X), F(Y)\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.isoModSerre_isInvertedBy_iff\", \"module\": \"Mathlib/CategoryTheory/Abelian/SerreClass/MorphismProperty\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [CategoryTheory.Abelian D] (P : CategoryTheory.ObjectProperty C)\\n  [inst_4 : P.IsSerreClass] (F : CategoryTheory.Functor C D) [CategoryTheory.Lim\", \"doc\": \"For a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ preserving finite limits and colimits, the property that $ F $ inverts the isomorphism modulo Serre class $ P $ is equivalent to $ P $ being contained\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general exact-functor and abelian-equivalence tools do not construct this specified point-heart equivalence or finite-stage Weil representative"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric point fibre equivalence restricts to an exact equivalence of constructible hearts with finite dimensional vector spaces and descends Weil isomorphisms to a finite coefficient field",
+   "results": "Q98 logged search: 8 hits; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff, AlgebraicGeometry.Scheme.Hom.fiberι_fiberHomeo_symm, AlgebraicGeometry.Scheme.Hom.fiberHomeo_apply, AlgebraicGeometry.Scheme.Hom.fiberHomeo, WittVector.isocrystal_classification, CategoryTheory.PreGaloisCategory.GaloisCategory.getFiberFunctor, CategoryTheory.PreGaloisCategory.FiberFunctor.comp_right",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide general derived/exact-functor or unrelated fibre results, not the specified raw constructible point heart with finite coefficient Weil descent"
+  },
+  {
+   "tool": "grep",
+   "query": "pointFiber|pointHeart|constructibleHeart|WeilSheaf",
+   "results": "Q98 logged search: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide general derived/exact-functor or unrelated fibre results, not the specified raw constructible point heart with finite coefficient Weil descent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restrict a t exact equivalence of derived categories to an equivalence of abelian hearts with finite dimensional vector spaces",
+   "results": "Q98 logged search: 8 hits; HasDerivedCategory.standard, HasDerivedCategory, DerivedCategory.instCategory, CategoryTheory.IsGrothendieckAbelian.of_equivalence, DerivedCategory, CategoryTheory.Functor.mapDerivedCategory, HomologicalComplexUpToQuasiIso.Q, CategoryTheory.Functor.mapDerivedCategory.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide general derived/exact-functor or unrelated fibre results, not the specified raw constructible point heart with finite coefficient Weil descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Abelian",
+   "results": "Q98 logged search: 3 hits; CategoryTheory.IsGrothendieckAbelian.of_equivalence, CochainComplex.Plus.fibrantObjectEquivalence, CategoryTheory.Abelian.DoldKan.equivalence",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide general derived/exact-functor or unrelated fibre results, not the specified raw constructible point heart with finite coefficient Weil descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A t exact fully faithful derived equivalence induces an exact equivalence on hearts and finite diagrams of morphisms and equations descend along filtered coefficient extension",
+   "results": "Q98 logged search: 8 hits; CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.exact_tfae, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure, CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide general derived/exact-functor or unrelated fibre results, not the specified raw constructible point heart with finite coefficient Weil descent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-point-weil-heart-flag",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 7, dimension-zero Jordan filtration: point-heart restriction and finite-stage descent of the given Weil pair; old item steps 1–2.",
+   "via": [
+    "lem-zl-point-weil-heart-flag"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-point-heart-finite-stage",
+  "worker": "stage1",
+  "summary": "Retained the statement. Proved t-exactness and reflection for the specified rational point equivalence; restricted via canonical truncations and fully faithful degree-zero embedding; proved common-stage heart equivalence by finite matrices; descended all Weil maps, inverse equations and intertwining at one finite field. Reused existing nodes, adding none.",
+  "blueprint": "thm-zl-real-mixed-by-curves.proof.md paragraph 7, dimension-zero Jordan-filtration input: exact point heart and a common finite-stage representative of the actual Weil pair.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic coefficient, derived-category or canonical truncation tool used for the dimension-zero point argument; this unit has no replacement for this interface."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Generic coefficient, derived-category or canonical truncation tool used for the dimension-zero point argument; this unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Generic coefficient, derived-category or canonical truncation tool used for the dimension-zero point argument; this unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-pod-texact-truncation-comparison",
+    "why": "Generic coefficient, derived-category or canonical truncation tool used for the dimension-zero point argument; this unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Generic coefficient, derived-category or canonical truncation tool used for the dimension-zero point argument; this unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-weil-cohomology-commutes-scalar-extension",
+    "why": "Generic coefficient, derived-category or canonical truncation tool used for the dimension-zero point argument; this unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic coefficient, derived-category or canonical truncation tool used for the dimension-zero point argument; this unit has no replacement for this interface."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-1117c6dad",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-1117c6dad (reviewer sub-agent of L); spot-checked: I read the whole delivery: no new nodes, and the item's statement and stmt_deps are identical to the base (live and side-live are still unsplit). There is no repair note, so this is not a re-split order. The source, main-20261015 thm-zl-real-mixed-by-curves paragraph 7 (dimension-zero Jordan filtration), takes for granted the point heart and the descent of the Weil pair to one finite field, and the item makes these explicit. I checked all ten steps against the cited statements and found them correct: (1) t-exactness via proetale-sections-exact, localization-exact and the rational halves as isomorphism closures; (2) reflection of the halves by full faithfulness and the vanishing-truncation criteria; (3) the roof C<-tau<=0 C->H^0[0] and the derived-single full faithfulness; (4) scalar compatibility via sections-scalar-extension, cohomology-scalar and the naturality and composition laws of the texact comparison; (5) the finite-stage heart model tau>=0 tau<=0 K; (6) the Omega equivalence by finitely many matrix entries and composita; (7) exactness; (8) transport of the Weil structure; (9) descent of finitely many classes and equations to one field E_0; (10) the fibre identification. Small cases checked: V=0, E=Q_l, L=E, Jordan blocks, a non-unit alpha. Batch-5 check: lem-pod-texact-truncation-comparison is a general fact about t-exact functors (proof_deps are only def-weil-triangulated-category and def-weil-t-structure; it was created from prop-constructible-truncations). It is not a step of the proof of Poincaré duality or of the trace formula, so I accept it; prop-constructible-truncations is the foundational standard t-structure. I accept the seven declared tool uses. No existing node duplicates the item. Advisory: lem-a1-point-realization-standard-cohomology overlaps steps 1, 2 and 4 and could have been cited instead; the delivery's own argument is complete."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointHeartFiniteStage",
+  "declaration": "WeilConjectures.zl_point_heart_finite_stage",
+  "declarations": [
+   "WeilConjectures.zl_point_heart_finite_stage"
+  ],
+  "file": "lean/Sheaf/Paper/PointHeartFiniteStage.lean",
+  "statement": "theorem zl_point_heart_finite_stage : (∀ E' : Padic.FiniteCoefficientFields l Ω, ZlPointHeartExact E'.val (zlPointHeartOmega D l hl E'.val)) ∧ ZlPointHeartExact Ω (zlPointCommonHeartOmega D l hl Ω) ∧ (∃ c : ∀ (E' : Type u) [Field E'] [Algebra (Padic l) E'] [FiniteDimensional (Padic l) E'], ZlPointTruncationComparison E' (zlPointT D l hl E') (zlPointAmbient D l hl E'), (∀ (E' L' : Type u) [Field E'] [Algebra (Padic l) E'] [FiniteDimensional (Padic l) E'] [Field L'] [Algebra (Padic l) L'] [FiniteDimensional (Padic l) L'] (i : E' →ₐ[Padic l] L'), ZlPointScalarTruncationSquare D l hl E' L' i (c E') (c L'))) ∧ Nonempty (ZlPointTruncationComparison Ω (sfCommonStageStandardTStructure l (Spec (.of D.k)) Ω D hl) (zlPointCommonAmbient D l hl Ω)) ∧ (∀ (E' : Type u) [Field E'] [Algebra (Padic l) E'] [FiniteDimensional (Padic l) E'] (K : sfRationalConstructibleCategory l E' (Spec (.of D.k))), (pointRationalFibre D l hl E' ⋙ DerivedCategory.coefficientFdCohomology E' 0).mapIso ((sfRationalScalarUnit l E' (Spec (.of D.k)) 0 (Nat.Prime.ne_zero (Fact.out : l.Prime))).app K) = zlPointHeartScalar D l hl E' E' (AlgHom.id (Padic l) E') K ≪≫ (ModuleCat.extendScalarsId E').app ((pointRationalFibre D l hl E' ⋙ DerivedCategory.coefficientFdCohomology E' 0).obj K)) ∧ (∀ (E' L' N' : Type u) [Field E'] [Algebra (Padic l) E'] [FiniteDimensional (Padic l) E'] [Field L'] [Algebra (Padic l) L'] [FiniteDimensional (Padic l) L'] [Field N'] [Algebra (Padic l) N'] [FiniteDimensional (Padic l) N'] (i : E' →ₐ[Padic l] L') (j : L' →ₐ[Padic l] N') (K : sfRationalConstructibleCategory l E' (Spec (.of D.k))), (pointRationalFibre D l hl N' ⋙ DerivedCategory.coefficientFdCohomology N' 0).mapIso ((sfRationalScalarComp l E' L' i (Spec (.of D.k)) 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) N' j).app K) ≪≫ zlPointHeartScalar D l hl E' N' (j.comp i) K = zlPointHeartScalar D l hl L' N' j ((zlPointScalar D l E' L' i).obj K) ≪≫ (ModuleCat.extendScalars j.toRingHom).mapIso (zlPointHeartScalar D l hl E' L' i K) ≪≫ ((ModuleCat.extendScalarsComp i.toRingHom j.toRingHom).app ((pointRationalFibre D l hl E' ⋙ DerivedCategory.coefficientFdCohomology E' 0).obj K)).symm) ∧ (∀ (A B : Padic.FiniteCoefficientFields l Ω) (h : A ≤ B) (C : (DerivedCategory.pointFiniteDimensional A.val).FullSubcategory), (DerivedCategory.coefficientQbarCohomology l Ω 0).mapIso ((DerivedCategory.pointFdQbarStageComp l Ω h).app C) = DerivedCategory.coefficientCohomologyChangeStage l Ω h C 0) ∧ (∀ (F : sfCommonStageWeilSheaf D l hl (zlPointHeartBase D) Ω) (y : {y : (zlPointHeartBase D).left // y ∈ closedPoints (zlPointHeartBase D).left}) (ι : (zlPointHeartBase D).left.residueField y.val →+* D.k) (hι : ι.comp ((zlPointHeartBase D).hom.residueFieldAlgebraMap y.val) = algebraMap D.k₀ D.k), Nonempty (ZlPointFiniteStageWitness D l hl Ω F (localClosedPoint D (zlPointHeartBase D) y ι hι)))",
+  "branch": "sheaf-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-080243da1",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 49c8 (H3+H4) correctly applies route (a): F : sfCommonStageWeilSheaf on zlPointHeartBase = Over.mk (𝟙 Spec k₀), the same category as the landed citer lem-zl-point-weil-heart-flag; private Frobenius copies removed; no citer import. Witness: finite A, actual sfWeilSheaf M (θ = M.obj.str), e : sfWeilStageObject A M ≅ F.obj pinned by e_hom/e_inv to a stage-A iso u, intertwining at A, targetTheta pinned to F.obj.str, fibre pinned to ω(e⁻¹) ≫ localQbarPullbackStageIso ≫ canonical stage/tensor tower along localClosedPoint. Heart exactness, canonical truncation comparisons (counit/unit characterized), scalar squares, unit/composition normalizations checked clause by clause. Mechanical theorem stmt_dep lem-weil-scalar-extension-composition: sfRationalScalarUnit/Comp are ∃!.choose of that theorem, i.e. constructed objects → PASS on this point. lean.statement verbatim; 21 declarations, no name clashes, no hollow defs, single sorry, docstrings with source/blueprint, universe u throughout; edge cases zero/V=0/E=Q_ℓ/L=E/non-heart raw representative covered. No recompile (no file changed). Advisories: conjunct 7 restates coefficientQbarCohomology_changeStage; def-weil-derived-pullback-tensor-hom (commonStageDerivedPullback) is reached only through cited def-weil-local-frobenius-trace, as in the landed citer."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3ce6d",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261025T123659-L-1889419",
+  "kind": "interface",
+  "note": "independent cc review: delivered item theorem and 20 relocated defs (type/value hashes published vs sandbox, rfl equality of the changed zlPointWeilStageOmega body) against base 6c5fa6c0be3; 4 sorried split statements against the item's conjuncts and the ZlPointFiniteStageWitness fields; #print axioms in a full sandbox compile"
+ }
+}

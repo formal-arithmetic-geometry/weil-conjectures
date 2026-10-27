@@ -1,0 +1,162 @@
+{
+ "id": "lem-sp-tower-factor-tensor",
+ "kind": "statement",
+ "title": "Base change of the tower tensor/counit factor",
+ "statement": "Fix a finite-field datum D of characteristic p, a prime ell unequal to p, and a finite extension E of Q_ell [def-weil-finite-field-fiber, det-sp-tower-gamma]. Let X,Y,Xprime,Yprime be noetherian separated finite-type schemes over D.k. Let f:X to Y, v:Yprime to Y, u:Xprime to X and fprime:Xprime to Yprime be D.k-morphisms forming a Cartesian square, where f is smooth separated of pure relative dimension d and quasi-compact with a chosen compactification c, and fprime is quasi-compact and compactifiable [def-sbc-smooth-morphisms, def-pc-base-change]. Fix section-preserving tower operations b,o and original strict-tower coordinates q. Fix the supplied restricted adjunctions and calibrated finite-level data a at c and its pulled-back compactification, a specified open exchange x for which the associated compact-support exchange beta is invertible, twists w,wprime, and published purity packages P,Pprime at these two compactifications [def-sp-purity-bc-tower-data]. Supply normalized geometric pullback coordinates gv for v at every positive quotient and a unit isomorphism s:v*unit_Y to unit_Yprime satisfying the ordinary constant-unit WordComparison at every quotient. For every K in the full uniform constructible finite-Tor tower category over Y, u*(towerTensorMap(P,K)) followed by towerExchange(K) equals towerTensorComparison(K,omega_f), then identity tensor towerUnitExchange(s), then towerTensorMap(Pprime,VK). The source comparison includes the specified square compositor and realization counits. No Tate orientation equation or gamma equation is assumed or asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (2), the tower inverse-projection and counit-transpose argument"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-pc-base-change",
+  "det-sp-finite-general-ring",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-tensor",
+  "def-coefficient-twists-detailed",
+  "det-sp-tower-shriek-levels",
+  "def-pur-co-smoothness",
+  "det-sp-tower-gluing",
+  "thm-pur-cohomological-smoothness",
+  "def-exchange-projection",
+  "det-sp-tower-exceptional-bc",
+  "thm-pur-diagonal-dualizing-object",
+  "det-sp-tower-gamma",
+  "def-pur-smooth-purity-map",
+  "def-pur-purity-base-change-sources",
+  "def-sp-purity-bc-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "The level equations for s identify it with the coefficient-unit pullback map, since the endpoints are degree-zero sheaf towers. Use exact evaluation on sheaf maps, not on arbitrary derived morphisms.",
+   "uses": [
+    "lem-sp-orientation-scalar-tower-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify any supplied adjoints counit-preservingly with those furnished by tower exceptional base change, by uniqueness of right adjoints. The unit mate is invertible because its evaluated maps are finite smooth exceptional exchanges and evaluation is conservative on objects. Use the pullback-domain theorem to place every pulled and primed tensor source in the restricted adjunction domains. The purity packages supply their actual inverse projection maps and the specified tensor/counit transposes.",
+   "uses": [
+    "lem-sp-proetale-ctf-pullback-domains",
+    "det-sp-tower-gamma",
+    "det-sp-tower-exceptional-bc"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply compact_projection_base_change to c and its Cartesian pullback, with the published inverse projection maps. Naturality at the unit exchange transports invertibility to the mixed source. This gives the required inverse projection/exchange identity for these actual maps.",
+   "uses": [
+    "lem-sp-compact-projection-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply tensorCounitExchangeCalculus_restricted to the two actual adjunctions and beta. Their specified counit transposes are towerTensorMap and towerExchange after realization. Compose its first conclusion with the inverse tensor source comparison; all comparison factors are exactly towerTensorComparison.",
+   "uses": [
+    "lem-sp-tensor-counit-exchange-calculus",
+    "det-sp-tower-exceptional-bc"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-orientation-scalar-tower-transport",
+  "lem-sp-proetale-ctf-pullback-domains",
+  "det-sp-tower-gamma",
+  "det-sp-tower-exceptional-bc",
+  "lem-sp-compact-projection-base-change",
+  "lem-sp-tensor-counit-exchange-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (2), the tower inverse-projection and counit-transpose argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth purity orientation and tensor counit maps commute with base change in derived coefficient towers",
+   "results": "Only cotangent and Kaehler base-change matches; no result about the specified coefficient tower maps.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Functor.map_comp supplies the elementary final composition rule, not the normalized tower orientation or tensor/counit factor.",
+   "date": "2026-10-27",
+   "verdict": "partial tool only; no match for the tower factors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps between shifted coefficient sheaf towers can be compared levelwise, and the smooth purity orientation and counit tensor map commute with base change",
+   "results": "Found exact functor commShift tools, adjunction shift compatibility, and algebraic base change; no tower factor theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "towerTensorComparison|tensorCounitExchangeCalculus|tower_orientation_transport",
+   "results": "No Mathlib hits. Library contains generic tensor/counit calculus and conditional orientation transport; neither has the named compactification/WordComparison factor statement.",
+   "date": "2026-10-27",
+   "verdict": "no match for the specialized factor statements"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "C3",
+  "item": "Sheaf.Paper.SmoothPurityBaseChangeFactors",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "Proof (2), the tower inverse-projection and counit-transpose argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerFactorTensor",
+  "file": "lean/Sheaf/Paper/TowerFactorTensor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.tower_factor_tensor",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.tower_factor_tensor"
+  ],
+  "statement": "theorem tower_factor_tensor\n    (D : FiniteFieldDatum.{u}) (_hne : ell ≠ D.p)\n    (X Y X' Y' : Over (Spec (.of D.k)))\n    [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n    [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]\n    [IsSeparated X'.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]\n    [IsSeparated Y'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]\n    [IsNoetherian X.left] [IsNoetherian Y.left]\n    [IsNoetherian X'.left] [IsNoetherian Y'.left]\n    (f : X ⟶ Y) (v : Y' ⟶ Y) (u' : X' ⟶ X) (f' : X' ⟶ Y')\n    (sq : IsPullback u'.left f'.left f.left v.left)\n    (d : ℕ) [SmoothOfRelativeDimension d f.left]\n    [IsSeparated f.left] [QuasiCompact f.left] [HasCompactification f.left]\n    [QuasiCompact f'.left] [HasCompactification f'.left]\n    (c : Compactification f.left) (a : SpTowerMate.Data ell E b o q sq c)\n    (x : SpTowerShriek.OpenExchange ell E b o)\n    (hb : IsIso (SpTowerMate.beta ell E b o q a x))\n    (w : SpChartAdmissibility.Twists ell E X.left)\n    (w' : SpChartAdmissibility.Twists ell E X'.left)\n    (P : TowerPurityAt ell E b o q c d w a.support_closed a.right\n      a.adjunction a.levels)\n    (P' : TowerPurityAt ell E b o q (c.ofIsPullback sq) d w' a.support_closed'\n      a.right' a.adjunction' a.levels')\n    (gv : ∀ n : ℕ, SpTowerP1.GeometricCoordinates ell E n v.left)\n    (s : (SpTowerShriek.pull ell E b (o.geometry v.left)).obj\n        (SpTowerGamma.unit ell E Y.left) ≅ SpTowerGamma.unit ell E Y'.left)\n    (hs : ∀ n : ℕ, SpTowerP1.WordComparison ell E n\n        (SpTowerP1.pullWord ell E n b (o.geometry v.left) (gv n)\n          (SpTowerP1.unitWord ell E n Y.left (P.coefficientsY n)))\n        (SpTowerP1.unitWord ell E n Y'.left (P'.coefficientsY n)) s.hom\n        (((Etale.ordinaryFinitePullback (SpTowerP1.levelRing ell E n) v.left).mapIso\n          (Etale.singleFunctorObjUnitIso\n            (ModuleCat.{u + 1} (SpTowerP1.levelRing ell E n)) Y.left) ≪≫\n          Etale.leftDerivedUpperStarUnitIso\n            (ModuleCat.{u + 1} (SpTowerP1.levelRing ell E n)) v.left ≪≫\n          (Etale.singleFunctorObjUnitIso\n            (ModuleCat.{u + 1} (SpTowerP1.levelRing ell E n)) Y'.left).symm).hom)) :\n      ∀ K : SpTowerCalculus.C ell E b q Y.left,\n        (SpTowerShriek.pull ell E b (o.geometry u'.left)).map\n            (towerTensorMap ell E b o q c d w a.support_closed a.right\n              a.adjunction a.levels P K) ≫ towerExchange ell E b o q a x hb K =\n          (towerTensorComparison ell E b o q a K _).hom ≫\n            (SpTowerShriek.tensor ell E b X'.left).map\n              (Prod.mkHom (𝟙 _)\n                (towerUnitExchange ell E b o q a x hb P.unit_mem P'.unit_mem s)) ≫\n            towerTensorMap ell E b o q (c.ofIsPullback sq) d w' a.support_closed'\n              a.right' a.adjunction' a.levels' P' ((SpTowerMate.V ell E b o q a).obj K)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d9a02",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261027T021300-L-2752542",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d9a02",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261027T021300-L-2752542",
+  "kind": "interface",
+  "note": "independent cc review: tower_factors split into tower_factor_orientation (first three conjuncts verbatim) + tower_factor_tensor (all s pinned by the unit WordComparison) against the published tower_factors; towerGamma factor formula against SpTowerGamma.gamma (old=new by rcases c; rfl, compiled); importer FinitePurityCounitSystem compiled against the delivered modules"
+ }
+}

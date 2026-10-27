@@ -1,0 +1,123 @@
+{
+ "id": "def-sf-coefficient-projection-adjunction-data",
+ "kind": "definition",
+ "title": "Normalized tensor localization and simultaneous adjunction data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "For abelian monoidal preadditive categories with countable coproducts and ordinary unbounded derived categories [def-weil-abstract-derived-category], define the signed total tensor on complexes [def-pc-tensor-complex-sheaves]. A tensor localization consists of a derived tensor bifunctor and its universal left-derived comparison from tensor of localized complexes to localization of signed total tensor. For a prescribed additive right functor, a prescribed derived right functor and its comparison on complexes, an adjoint localization records an additive ordinary left adjoint, its universal left-derived comparison and derived adjunction, with the equation identifying the derived transpose of every comparison-applied chain map with localization of its ordinary transpose. For specified ordinary direct-image lax tensor maps, tensor-adjunction data record the ordinary strong pullback tensor comparison, its naturality and its adjunction-unit normalization, and the derived strong comparison with its full signed-total representative square, using the existing inverse-ordinary-comparison signed total tensorPullbackTotal of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Extract the counit-defined projection mate in the orientation of [def-weil-pbc-projection-formula-arrows]. Define the derived-composition normalization to be the universal-unit square comparing a specified ordinary direct-image composition isomorphism with a specified derived composition isomorphism. Transport a tensor comparison along a natural isomorphism by whiskering the isomorphism and its product. These are data and compatibility predicates, not existence assertions. All category and localization universes are independent.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-projection-formula-arrows",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6, 0B56, 0D6E; signed total tensor 06YN; normalized comparisons used in blueprint prop-coef-integral-dualizing proof paragraph 2."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Universal localization of signed total tensor and ordinary module adjunction gives normalized derived tensor adjunction and projection mate",
+   "results": "8 hits: CategoryTheory.tensorLeftAdjunction, CategoryTheory.Localization.Monoidal.triangle_aux₂, CategoryTheory.Localization.Monoidal.triangle_aux₃, CategoryTheory.tensorRightAdjunction, CategoryTheory.Localization.Monoidal.ε', CategoryTheory.Localization.Monoidal.tensorBifunctorIso, CategoryTheory.Localization.Monoidal.triangle, CategoryTheory.Localization.Monoidal.triangle_aux₁; generic component constructions only, no complete normalized package.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal derived adjunction tensor comparison normalized by ordinary pure tensor module unit and signed total complex representative equation",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.ihom.coev, ModuleCat.monoidalClosedHomEquiv, CategoryTheory.Adjunction.derivedη_fac_app_assoc; generic component constructions only, no complete normalized package.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TensorLocalization|AdjointLocalization|ordinary_unit.*tensor|derived.*tensor.*adjunction",
+   "results": "0 hits: ; generic component constructions only, no complete normalized package.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "rg",
+   "query": "TensorLocalization|AdjointLocalization|TensorAdjunction in dag/nodes, lean/WeilConjectures, lean/Sheaf",
+   "results": "No exact package. NormalizedLeftExtension gives left-derived data only; no ordinary/derived adjunction transpose or tensor representative equation.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "tensor adjunction",
+   "results": "One unrelated geometric generic-exchange node.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-system-projection-evaluation",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Proof paragraph 2, mapping-complex adjunction and specified natural maps before limits; returned expansion lem-coef-tower-evaluation-pairing, steps 6-8: Projection-evaluation word on ringed coefficient systems.",
+   "via": [
+    "lem-coef-system-projection-evaluation",
+    "lem-coef-tower-evaluation-pairing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.CoefficientProjectionAdjunctionData",
+  "declaration": "WeilConjectures.CoefProjectionEvaluation.TensorAdjunction",
+  "declarations": [
+   "WeilConjectures.CoefProjectionEvaluation.total",
+   "WeilConjectures.CoefProjectionEvaluation.TensorLocalization",
+   "WeilConjectures.CoefProjectionEvaluation.AdjointLocalization",
+   "WeilConjectures.CoefProjectionEvaluation.TensorAdjunction",
+   "WeilConjectures.CoefProjectionEvaluation.projection",
+   "WeilConjectures.CoefProjectionEvaluation.rightUnit",
+   "WeilConjectures.CoefProjectionEvaluation.DerivedCompositionNormalization",
+   "WeilConjectures.CoefProjectionEvaluation.transportTensor"
+  ],
+  "file": "lean/Sheaf/SixFunctors/CoefficientProjectionAdjunctionData.lean",
+  "statement": "structure TensorAdjunction (TA : DerivedCategory A × DerivedCategory A ⥤ DerivedCategory A) (TB : DerivedCategory B × DerivedCategory B ⥤ DerivedCategory B) (tA : TensorLocalization TA) (tB : TensorLocalization TB) (R : B ⥤ A) [R.Additive] (RD : DerivedCategory B ⥤ DerivedCategory A) (η : R.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RD) (lax : ∀ M N : B, R.obj M ⊗ R.obj N ⟶ R.obj (M ⊗ N)) (F : AdjointLocalization R RD η)",
+  "branch": "sheaf-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e9726b135",
+  "group": "Q19",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e9726b135",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Re-delivery of a18b (RETURN H2/H12). All three Lean modules are byte-identical to a18b (cmp), whose maths was accepted; re-read v/Pi/q/balance/beta/ScalarSpecialization and the theorem signature against the node: OK. The item's stmt_deps gained the 7 requested landed def owners (VaryingRing, compact-support native evaluation, open-tensor evaluation data, point-sections data, derived symmetric monoidal data, scalar-Hom comparison, derived-system calculus) plus the 2 new nodes, and lost none; all are on side-live with lean records (STMT_DEPS MAY GAIN LANDED NODES); statement text unchanged; no other base node modified. Point-data node now cites the 5 requested owners, placed in its statement text. Adjunction-data node cites lem-weil-pbc-ringed-topoi-derived-tensor-pullback for tensorPullbackTotal: correct, because no def node lists that declaration and its source (RingedTopoiCanonicalTensorPullback.lean:147) is tagged to that theorem. Report has Worker report, Second reading by Q19 and the repair section. Only named-theorem sorries; docstrings OK; universes as siblings. No file changed, no compile (report: 11.5/40.1/53.4 s)."
+ }
+}

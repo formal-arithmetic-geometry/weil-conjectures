@@ -1,0 +1,319 @@
+{
+ "id": "lem-sfb-fppf-sheafification-affine-continuity",
+ "kind": "statement",
+ "title": "Fppf sheafification preserves affine limit continuity",
+ "statement": "Let $B$ be a scheme [def-pc-scheme], work in the universes of [def-weil-size-convention], and let $F:(\\mathit{Sch}/B)_{fppf}^{\\mathrm{op}}\\to\\mathit{Sets}$ be a presheaf on the big fppf site [def-pc-fppf-site]. Suppose that for every small nonempty directed set $I$ and every inverse system of affine $B$-schemes $(T_i)$ with limit $T=\\varprojlim_iT_i$ [lem-weil-pbc-limit-affine-transition], the canonical map $\\operatorname{colim}_iF(T_i)\\to F(T)$ is bijective. Let $F^{\\#}$ be its set-valued fppf sheafification [def-weil-pbc-sheafification]. Then for every such inverse system the canonical map\n$$\\operatorname{colim}_iF^{\\#}(T_i)\\longrightarrow F^{\\#}(T)$$\nis bijective. All colimits here are filtered colimits of sets [def-weil-pbc-category-colimit]. No sheaf condition on $F$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 049O, lemma-sheafify-finite-presentation."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Write $G^+$ for the plus construction of any presheaf $G$. Its sections are classes $[\\mathcal V,s]$ of matching families; two classes agree precisely after restriction to a common covering refinement. These are the representation, equality and restriction assertions of [lem-weil-pbc-site-plus-construction-presheaf]. For an affine base, [lem-pc-fppf-affine-refinement] permits both the representing cover and any cover witnessing equality to be replaced by a finite affine fppf cover. Such a cover is standard in the explicit sense of [lem-sfb-standard-fppf-cover-limit-descent]. We will prove continuity for $G^+$ whenever $G$ satisfies the continuity hypothesis of the item.",
+   "uses": [
+    "lem-weil-pbc-site-plus-construction-presheaf",
+    "lem-pc-fppf-affine-refinement",
+    "lem-sfb-standard-fppf-cover-limit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 049O, lemma-sheafify-finite-presentation, proof."
+   }
+  },
+  {
+   "text": "Fix a standard covering $\\mathcal V_i=\\{V_{i,a}\\to T_i\\}_{a=1}^m$, and for $j\\ge i$ put $V_{j,a}=V_{i,a}\\times_{T_i}T_j$, $V_a=V_{i,a}\\times_{T_i}T$. Base change preserves the covering by [lem-trf-fppf-covering-base-change]. All $V_{j,a}$ and $V_{j,a}\\times_{T_j}V_{j,b}$ are affine: maps between affines are affine, and affine morphisms remain affine under base change and have affine source over an affine target. Apply [lem-weil-pbc-scheme-over-limit] to $V_{i,a}$ and to $V_{i,a}\\times_{T_i}V_{i,b}$; the fibre-product universal property identifies their limits with $V_a$ and $V_a\\times_TV_b$. Thus the hypothesis on $G$ applies to both systems. We also use that tails of $I$ suffice: every index has a common upper bound with $i$, and the element/equality criterion for filtered set colimits gives the same colimit on $I_{\\ge i}$.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-scheme-over-limit",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 049O, lemma-sheafify-finite-presentation, proof."
+   }
+  },
+  {
+   "text": "For this fixed cover the canonical map $\\operatorname{colim}_{j\\ge i}H^0(\\mathcal V_j,G)\\to H^0(\\mathcal V,G)$ is bijective. Indeed, lift each of the finitely many components $s_a\\in G(V_a)$ to a stage using continuity on the first systems of step 2. Choose a common stage for these lifts. Each of the finitely many matching equations holds at the limit on $V_a\\times_TV_b$; continuity on the second systems and [lem-weil-pbc-filtered-colimit-sets-elementwise](3) give a later stage where all those equations hold. This proves surjectivity. If two matching families have the same limit, apply the same eventual-equality criterion to their finitely many components and choose a common later stage; this proves injectivity. The description of $H^0$ used here is exactly [def-weil-pbc-site-plus-construction](a). When $m=0$ the matching set is a singleton at every stage and the argument still holds.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-site-plus-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 049O, lemma-sheafify-finite-presentation, proof."
+   }
+  },
+  {
+   "text": "For surjectivity of $\\operatorname{colim}_iG^+(T_i)\\to G^+(T)$ take $x\\in G^+(T)$ and choose a matching family on a finite affine fppf cover as in step 1. By [lem-sfb-standard-fppf-cover-limit-descent] this cover is the base change of a standard cover at some stage $i$. Step 3 lifts its matching family to some $j\\ge i$. Its class in $G^+(T_j)$ restricts to $x$, by the restriction formula of [lem-weil-pbc-site-plus-construction-presheaf](3).",
+   "uses": [
+    "lem-sfb-standard-fppf-cover-limit-descent",
+    "lem-weil-pbc-site-plus-construction-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 049O, lemma-sheafify-finite-presentation, proof."
+   }
+  },
+  {
+   "text": "For injectivity represent two colimit elements at a common stage $i$, using [lem-weil-pbc-filtered-colimit-sets-elementwise], and represent their plus sections by matching families on standard covers $\\mathcal V_i,\\mathcal V_i^\\prime$ (step 1). If their limit sections coincide, [lem-weil-pbc-site-plus-construction-presheaf](2) and affine refinement give a standard cover $\\mathcal W$ of $T$ with refinement maps to both limit covers, on which the two families agree. Descend $\\mathcal W$ by [lem-sfb-standard-fppf-cover-limit-descent], and pass to a common stage $k\\ge i$. Descend its finitely many component maps to the two covers by [lem-weil-pbc-finite-presentation-arrows-descent], retaining their finite index assignments. The hypotheses hold: all component schemes and bases are affine, hence qcqs, the cover components are finitely presented over their bases, and finite presentation is preserved by base change [lem-weil-pbc-qcqs-morphism-permanence]. Maps between affine bases are affine. Thus the descended arrows are morphisms of coverings over $T_k$. The pulled-back families are matching families on $\\mathcal W_k$ whose limit families coincide. Step 3 gives their equality at a later stage. Their plus classes are therefore equal by [lem-weil-pbc-site-plus-construction-presheaf](2), proving injectivity. All refinements and section maps are the actual descended maps, so this equality identifies the canonical colimit elements.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-site-plus-construction-presheaf",
+    "lem-pc-fppf-affine-refinement",
+    "lem-sfb-standard-fppf-cover-limit-descent",
+    "lem-weil-pbc-finite-presentation-arrows-descent",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-morphism-affine-schemes-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 049O, lemma-sheafify-finite-presentation, proof."
+   }
+  },
+  {
+   "text": "Steps 2--5 prove the asserted continuity for $G^+$ for every presheaf $G$ satisfying the hypothesis, without separatedness or a sheaf assumption. Apply them first to $G=F$ and then to $G=F^+$. The resulting continuity for $F^{++}$ is the desired continuity for $F^\\#$: [lem-weil-pbc-sheafification-plus-theorem](3) gives an isomorphism of presheaves $F^{++}\\simeq F^\\#$ carrying the sheafification unit to the given unit. Its naturality with respect to every $T\\to T_i$ makes the two canonical comparison maps commute with these bijections, and hence transfers bijectivity.",
+   "uses": [
+    "lem-weil-pbc-sheafification-plus-theorem"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 049O, lemma-sheafify-finite-presentation, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-plus-construction-presheaf",
+  "lem-pc-fppf-affine-refinement",
+  "lem-sfb-standard-fppf-cover-limit-descent",
+  "lem-trf-fppf-covering-base-change",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-scheme-over-limit",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "def-weil-pbc-site-plus-construction",
+  "lem-weil-pbc-finite-presentation-arrows-descent",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-sheafification-plus-theorem"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 049O, lemma-sheafify-finite-presentation, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ll]imit[Pp]reserv|sheafif.*[Ff]inite[Pp]resentation|[Ll]imit.*[Pp]reserving",
+   "results": "OK 16 hits: Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean, Mathlib/CategoryTheory/Limits/Preserves/Filtered.lean, Mathlib/CategoryTheory/Limits/Preserves/Filtered.lean, Mathlib/CategoryTheory/Limits/Preserves/Basic.lean, Mathlib/CategoryTheory/Limits/Preserves/Basic.lean, Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean, Mathlib/CategoryTheory/Limits/Preserves/Finite.lean, Mathlib/CategoryTheory/Limits/Preserves/Finite.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: generic sheafification and coefficient-functor compatibility do not assert continuity in the scheme variable; descent of standard fppf covers is additional geometry."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafification\", \"PreservesFilteredColimits\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic sheafification and coefficient-functor compatibility do not assert continuity in the scheme variable; descent of standard fppf covers is additional geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fppf sheafification of a limit preserving presheaf on schemes preserves directed inverse limits of affine schemes",
+   "results": "OK 8 hits: AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.preservesColimit_Γ, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, AlgebraicGeometry.instIsLocallyDirectedCompSchemeOverOverTopMorphismPropertyForgetForgetForget, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: generic sheafification and coefficient-functor compatibility do not assert continuity in the scheme variable; descent of standard fppf covers is additional geometry."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafif|[Ff]inite[Pp]resentation",
+   "results": "OK 25 hits: Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean, Mathlib/CategoryTheory/Sites/Monoidal.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: generic sheafification and coefficient-functor compatibility do not assert continuity in the scheme variable; descent of standard fppf covers is additional geometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafifying a presheaf on the big fppf site of schemes preserves commutation with directed inverse limits of affine schemes",
+   "results": "OK 8 hits: CategoryTheory.GrothendieckTopology.sheafifyCompIso.congr_simp, CategoryTheory.GrothendieckTopology.toSheafify_comp_sheafifyCompIso_inv_assoc, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf, CategoryTheory.GrothendieckTopology.toSheafify_comp_sheafifyCompIso_inv, CategoryTheory.GrothendieckTopology.preservesLimitsOfShape_sheafification, CategoryTheory.preservesLimitsOfShape_presheafToSheaf, CategoryTheory.GrothendieckTopology.sheafifyCompIso, CategoryTheory.GrothendieckTopology.sheafify",
+   "date": "2026-10-23",
+   "verdict": "no match: generic sheafification and coefficient-functor compatibility do not assert continuity in the scheme variable; descent of standard fppf covers is additional geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor on schemes commuting with filtered colimits of rings remains so after fppf sheafification by descent of standard fppf covers",
+   "results": "OK 8 hits: LightProfinite.hasSheafify, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.GrothendieckTopology.instPreservesSheafificationForgetOfPreservesLimitsOfHasColimitsOfShapeOfPreservesColimitsOfShapeOppositeCoverOfHasLimitsOfShapeWalkingMulticospanOfReflectsIsomorphisms, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, CategoryTheory.GrothendieckTopology.instPreservesSheafification_1, CategoryTheory.GrothendieckTopology.instPreservesSheafification, CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification, CategoryTheory.GrothendieckTopology.PreservesSheafification",
+   "date": "2026-10-23",
+   "verdict": "no match: generic sheafification and coefficient-functor compatibility do not assert continuity in the scheme variable; descent of standard fppf covers is additional geometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fppf sheafification preserves commutation with directed inverse limits of affine schemes",
+   "results": "OK 8 hits: CategoryTheory.GrothendieckTopology.sheafifyCompIso.congr_simp, CategoryTheory.GrothendieckTopology.sheafification, CategoryTheory.preservesLimitsOfShape_presheafToSheaf, CategoryTheory.GrothendieckTopology.sheafificationWhiskerRightIso_hom_app, CategoryTheory.GrothendieckTopology.toSheafify_comp_sheafifyCompIso_inv, CategoryTheory.GrothendieckTopology.preservesLimitsOfShape_sheafification, CategoryTheory.GrothendieckTopology.sheafificationWhiskerLeftIso, CategoryTheory.GrothendieckTopology.sheafificationWhiskerLeftIso_inv_app",
+   "date": "2026-10-23",
+   "verdict": "no match: generic finite-limit preservation in the presheaf variable is not affine-limit continuity in the scheme argument; the fppf hits define coverings but do not prove the assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fppf plus construction of a functor preserving affine inverse limits also preserves affine inverse limits",
+   "results": "OK 8 hits: CategoryTheory.GrothendieckTopology.preserveFiniteLimits_plusFunctor, CategoryTheory.GrothendieckTopology.preservesLimitsOfShape_plusFunctor, AlgebraicGeometry.preservesLimit_rightOp_Γ, AlgebraicGeometry.AffineScheme.Γ_preservesLimits, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, CategoryTheory.GrothendieckTopology.preservesLimit_diagramFunctor, CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification, CategoryTheory.preservesFiniteLimits_presheafToSheaf",
+   "date": "2026-10-23",
+   "verdict": "no match: generic finite-limit preservation in the presheaf variable is not affine-limit continuity in the scheme argument; the fppf hits define coverings but do not prove the assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafification\", \"PreservesFilteredColimits\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic finite-limit preservation in the presheaf variable is not affine-limit continuity in the scheme argument; the fppf hits define coverings but do not prove the assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "fppf|[Ll]imit[Pp]reserving",
+   "results": "OK 7 hits: Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: generic finite-limit preservation in the presheaf variable is not affine-limit continuity in the scheme argument; the fppf hits define coverings but do not prove the assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-affine-limit-criterion",
+  "date": "2026-10-23",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 07SK (lemma-descend-finite-presentation), specialized to affine scheme bases; base change of finite presentation: spaces-morphisms.tex, Tag 03XR (lemma-base-change-finite-presentation). Supporting limit test used in Tag 07SK, second paragraph, on an affine atlas and on its quasi-compact quasi-separated scheme kernel pair; Tag 0CP4 supplies the nonaffine overlap case. Affine input: Tag 04AK with the cartesian-square formulation of Tag 06BC, before the qcqs gluing argument of Tag 0CP4. Tag 04AK, forward proof, final sentence: apply Tag 049O to the presheaf quotient U/R.",
+   "via": [
+    "lem-sfb-space-relative-affine-limit-criterion",
+    "lem-sfb-lfp-space-scheme-limit-test",
+    "lem-sfb-fp-space-limit-category",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fppf-sheafification-affine-continuity",
+  "worker": "stage1",
+  "summary": "Read Tag 049O and its covering and plus-construction inputs. Reused existing nodes throughout; wrote explicit fixed-cover matching-family continuity and separate surjectivity/injectivity arguments, including descent of refinement maps and the empty-cover case. No statement change and no new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 07SK (lemma-descend-finite-presentation), specialized to affine scheme bases; base change of finite presentation: spaces-morphisms.tex, Tag 03XR (lemma-base-change-finite-presentation). Supporting limit test used in Tag 07SK, second paragraph, on an affine atlas and on its quasi-compact quasi-separated scheme kernel pair; Tag 0CP4 supplies the nonaffine overlap case. Affine input: Tag 04AK with the cartesian-square formulation of Tag 06BC, before the qcqs gluing argument of Tag 0CP4. Tag 04AK, forward proof, final sentence: apply Tag 049O to the presheaf quotient U/R. This split supplies precisely the Tag 049O sheafification input in the final sentence of Tag 04AK; the six steps implement its plus-construction proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-plus-construction-presheaf",
+    "why": "Representatives, equality after common refinement, and restriction of plus sections; generic site theory explicitly used by Tag 049O. No same-unit replacement supplies this generic input."
+   },
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Tag 021P gives finite affine refinement of arbitrary fppf covers; this is the covering basis required by Tag 049O. No same-unit replacement supplies this generic input."
+   },
+   {
+    "node": "lem-trf-fppf-covering-base-change",
+    "why": "Base changes of stage covers remain covers, independent of any descent datum. No same-unit replacement supplies this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Affine bases and components yield affine transitions and affine overlaps. No same-unit replacement supplies this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Base change of affine morphisms has affine source over affine bases. No same-unit replacement supplies this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-over-limit",
+    "why": "Tag 01YZ identifies the component and overlap limits. No same-unit replacement supplies this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-arrows-descent",
+    "why": "Tag 01ZM(2) descends the finitely many refinement component maps needed for injectivity. No same-unit replacement supplies this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Supplies the qcqs hypotheses of arrow descent. No same-unit replacement supplies this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Finite presentation survives base change to a common stage. No same-unit replacement supplies this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-plus-theorem",
+    "why": "The generic plus-plus theorem identifies the twice-applied construction with the chosen sheafification. No same-unit replacement supplies this generic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-plus-construction-presheaf",
+  "lem-pc-fppf-affine-refinement",
+  "lem-trf-fppf-covering-base-change",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-scheme-over-limit",
+  "lem-weil-pbc-finite-presentation-arrows-descent",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-sheafification-plus-theorem"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-76fa2e5d8",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-76fa2e5d8 (reviewer sub-agent of L); spot-checked: I read Stacks Tag 049O (spaces-limits.tex, lemma-sheafify-finite-presentation) and its proof in full. The statement matches the source hypothesis for hypothesis (affine directed limits, set-valued presheaf, arbitrary base) and is unchanged, as are the stmt_deps; the parent's step 4 uses it as stated. There are no new nodes, and proof_deps equals the union of the uses. Step by step: (1) the plus-presheaf node's clauses (1)-(3) and 021P give standard (021Q) representing covers and standard equality covers at T and at each T_i. (2) The 021O(3) Mathlib leaf, 01SH and the affine permanence lemma make every component and overlap affine; 01YZ identifies the component and overlap limits, and the tail I_{>=i} is a valid small directed set. (3) The fixed-cover H^0 bijection is written out over finitely many components and equations with eventual equality, including m=0. (4) Surjectivity uses 049N(1) cover descent and restriction clause (3). (5) Injectivity descends the equality cover W by 049N(1) and its finitely many component maps by 01ZM(2), whose hypotheses I checked: affine so qcqs, fp preserved by base change. Step 3 then gives equality at a later stage, and criterion (2) gives equality of the classes. This replaces the source's colimit interchange without any cofinality assumption. (6) The plus-plus theorem (3) gives F^{++} isomorphic to F^# as presheaves compatibly with the units, which transfers bijectivity. Edge cases checked: empty T and the empty cover, constant systems, non-injective transitions, non-affine B. No duplicate: the rg search for 049O and sheafification/continuity hits only the item and its parent, plus different-variable results. I accept all declared tool_uses as generic inputs of Tag 049O. Batch 5: lem-trf-fppf-covering-base-change is a Mathlib leaf for Stacks 021O(3), a basic property of the fppf topology, outside both the trace-formula and the Poincare-duality assumptions and their proofs, so the citation is acceptable."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfSheafificationAffineContinuity",
+  "declaration": "AlgebraicGeometry.Scheme.fppfSheafification_affineContinuity",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfSheafificationAffineContinuity.lean",
+  "statement": "theorem fppfSheafification_affineContinuity (B : Scheme.{u}) (F : (Over B)ᵒᵖ ⥤ Type (max (u + 1) v)) (hF : ∀ (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over B) (_hD : ∀ i : Iᵒᵖ, IsAffine (D.obj i).left) (c : Cone D) (_hc : IsLimit c), Function.Bijective (colimit.desc (D.op ⋙ F) (F.mapCocone c.op))) (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over B) (hD : ∀ i : Iᵒᵖ, IsAffine (D.obj i).left) (c : Cone D) (hc : IsLimit c) : Function.Bijective (colimit.desc (D.op ⋙ sheafify (fppfTopology.over B) F) ((sheafify (fppfTopology.over B) F).mapCocone c.op))",
+  "branch": "sheaf-dag",
+  "by": "Q59",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97fb63274",
+  "group": "Q59",
+  "result": "pass",
+  "note": "No-op re-delivery: snapshot equals the run 535af893 delivery (PASS, landed 45cbdb97) except for the landing-added reviewed_lean record; module and report identical to side-live; node equals live up to lean.statement whitespace normalisation. Independent re-check against Stacks 049O and the limit-preserving definition: arbitrary B : Scheme.{u}; F : (Over B)ᵒᵖ ⥤ Type (max (u+1) v); Type u nonempty directed I; affine stages; any limit cone; canonical colimit.desc/mapCocone map; sheafify (fppfTopology.over B); no sheaf hypothesis; edge cases match; only sorry; docstrings complete; no duplicate. No compile (no file changed). Lead may retire the claim."
+ }
+}

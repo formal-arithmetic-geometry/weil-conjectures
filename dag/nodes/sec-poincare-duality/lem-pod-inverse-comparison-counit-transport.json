@@ -1,0 +1,284 @@
+{
+ "id": "lem-pod-inverse-comparison-counit-transport",
+ "kind": "statement",
+ "title": "Transport of a composite counit through two inverse comparison squares",
+ "statement": "Let $\\mathcal C_F,\\mathcal D_F$ for $F=E,L$ be categories [def-nagata-category], and let $T_C:\\mathcal C_E\\to\\mathcal C_L$, $T_D:\\mathcal D_E\\to\\mathcal D_L$ be functors (maps preserving identities and composition). For each $F$ supply functors $P_F,G_F:\\mathcal C_F\\to\\mathcal D_F$, $Q_F,H_F:\\mathcal D_F\\to\\mathcal C_F$, and natural isomorphisms $\\kappa_F:G_F\\xrightarrow{\\sim}P_F$, $\\rho_F:H_F\\xrightarrow{\\sim}Q_F$, $u_F:H_FG_F\\xrightarrow{\\sim}\\mathrm{id}_{\\mathcal C_F}$. Here natural means commuting with every morphism of the source category, and all products of functors denote composition, applied right to left. Supply natural isomorphisms\n$$a:T_DP_E\\xrightarrow{\\sim}P_LT_C,\\quad d:T_CQ_E\\xrightarrow{\\sim}Q_LT_D,\\quad b:T_DG_E\\xrightarrow{\\sim}G_LT_C,\\quad e:T_CH_E\\xrightarrow{\\sim}H_LT_D$$\nsatisfying, for $K\\in\\mathcal C_E$ and $M\\in\\mathcal D_E$,\n$$a_K T_D(\\kappa_{E,K})=\\kappa_{L,T_CK}b_K,\\qquad d_M T_C(\\rho_{E,M})=\\rho_{L,T_DM}e_M.$$\nPut $\\lambda_F=\\kappa_F^{-1}$, $\\nu_F=\\rho_F^{-1}$ and\n$$v_{F,K}=u_{F,K}H_F(\\lambda_{F,K})\\nu_{F,P_FK}:Q_FP_FK\\longrightarrow K.$$\nThen the inverse comparison squares and the expanded counit transport formula are\n$$\\lambda_{L,T_CK}a_K=b_KT_D(\\lambda_{E,K}),\\qquad \\nu_{L,T_DM}d_M=e_MT_C(\\nu_{E,M}),$$\n$$v_{L,T_CK}Q_L(a_K)d_{P_EK}=\\bigl(u_{L,T_CK}H_L(b_K)e_{G_EK}\\bigr)\\,T_C\\bigl(H_E(\\lambda_{E,K})\\nu_{E,P_EK}\\bigr).$$\nThe last equality is between arrows $T_CQ_EP_EK\\to T_CK$, and is natural in $K$. No relation between $u_E$ and $u_L$, and no adjunction or equivalence axioms beyond the displayed data, is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First paragraph, inverse automorphism squares and identity pasting. Agent-formulated categorical extraction of original item Steps 2, 3 and 5: invert both comparison squares, expand the composite counit, and move the comparison factors using naturality."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the associativity and identity laws of [def-nagata-category]; throughout juxtaposition means composition right to left. Postcompose the first supplied square by $\\lambda_{L,T_CK}$ and precompose it by $T_D(\\lambda_{E,K})$. Since $\\lambda_L\\kappa_L=1$ and $T_D(\\kappa_E)T_D(\\lambda_E)=T_D(\\kappa_E\\lambda_E)=1$, this gives\n$$\\lambda_{L,T_CK}a_K=b_KT_D(\\lambda_{E,K}).$$",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Inverse of the first comparison square. Agent-written component calculation for the inverse-square pasting in paragraph 1."
+   }
+  },
+  {
+   "text": "Apply the same cancellation to the second supplied square: postcompose by $\\nu_{L,T_DM}$ and precompose by $T_C(\\nu_{E,M})$. The inverse identities and preservation of composition and identities by $T_C$ give\n$$\\nu_{L,T_DM}d_M=e_MT_C(\\nu_{E,M}).$$\nOnly the category laws of [def-nagata-category] and the displayed hypotheses are used.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Inverse of the second comparison square. Agent-written component calculation for the inverse-square pasting in paragraph 1."
+   }
+  },
+  {
+   "text": "The inverse families are natural: for $s:A\\to B$ in $\\mathcal D_F$, the given equation $\\rho_{F,B}H_F(s)=Q_F(s)\\rho_{F,A}$, postcomposed with $\\nu_{F,B}$ and precomposed with $\\nu_{F,A}$, gives $H_F(s)\\nu_{F,A}=\\nu_{F,B}Q_F(s)$. The identical cancellation for $\\kappa_F$ gives $G_F(t)\\lambda_{F,A}=\\lambda_{F,B}P_F(t)$ for $t:A\\to B$ in $\\mathcal C_F$. These use the category laws of [def-nagata-category].",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Naturality of inverse comparisons, explicitly by cancellation. Agent-written component calculation for the inverse-square pasting in paragraph 1."
+   }
+  },
+  {
+   "text": "Expand $v_L$ in the left side of the asserted formula. Naturality of $\\nu_L$ from Step 3 at $a_K:T_DP_EK\\to P_LT_CK$ gives\n$$\\nu_{L,P_LT_CK}Q_L(a_K)=H_L(a_K)\\nu_{L,T_DP_EK}.$$\nThus that left side equals\n$$u_{L,T_CK}H_L(\\lambda_{L,T_CK}a_K)\\nu_{L,T_DP_EK}d_{P_EK}.$$\nThis is substitution, functoriality of $H_L$ and associativity [def-nagata-category].",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Expansion and the naturality square of the inverse comparison at a_K. Agent-written component calculation for the inverse-square pasting in paragraph 1."
+   }
+  },
+  {
+   "text": "Insert Steps 1 and 2 (with $M=P_EK$) into Step 4. Its expression becomes\n$$u_{L,T_CK}H_L(b_K)H_L(T_D(\\lambda_{E,K}))e_{P_EK}T_C(\\nu_{E,P_EK}).$$\nNaturality of the given $e$ at $\\lambda_{E,K}:P_EK\\to G_EK$ says\n$$H_L(T_D(\\lambda_{E,K}))e_{P_EK}=e_{G_EK}T_C(H_E(\\lambda_{E,K})).$$\nSubstitute this and combine the last two factors by functoriality of $T_C$. Associativity [def-nagata-category] gives exactly the claimed right side. Each composite starts at $T_CQ_EP_EK$ and ends at $T_CK$; $u_E$ has not been used.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Pasting the inverse squares, then the naturality square of e at lambda_E. Agent-written component calculation for the inverse-square pasting in paragraph 1."
+   }
+  },
+  {
+   "text": "For $t:K\\to K'$ the three equations from Step 3 and the given naturality of $u_F$ are\n$$\\nu_{F,P_FK'}Q_FP_F(t)=H_FP_F(t)\\nu_{F,P_FK},\\quad H_F(\\lambda_{F,K'})H_FP_F(t)=H_FG_F(t)H_F(\\lambda_{F,K}),\\quad u_{F,K'}H_FG_F(t)=t u_{F,K}.$$\nMultiplication gives $v_{F,K'}Q_FP_F(t)=t v_{F,K}$. Put $w_K=v_{L,T_CK}Q_L(a_K)d_{P_EK}$. Naturality of $a,d$ now gives, by substitution and associativity [def-nagata-category],\n$$w_{K'}T_CQ_EP_E(t)=v_{L,T_CK'}Q_L(a_{K'})Q_L(T_DP_E(t))d_{P_EK}=v_{L,T_CK'}Q_L(P_LT_C(t))Q_L(a_K)d_{P_EK}=T_C(t)w_K.$$\nThe right side proved equal to $w_K$ in Step 5 has the same naturality equation. This proves naturality of the asserted equality without any relation between $u_E$ and $u_L$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Naturality in K of the pasted equality. Agent-written component calculation for the inverse-square pasting in paragraph 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Paragraph 1, inverse automorphism squares and their identity pasting. Explicit categorical calculation from the supplied data; no geometric counit coherence or adjunction theorem is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "inverseImage.*[Ss]calar|[Ss]calar.*inverseImage|pullback.*[Cc]omparison",
+   "results": "{\"t\": \"2026-10-22T07:05:47Z\", \"tool\": \"grep\", \"query\": \"inverseImage.*[Ss]calar|[Ss]calar.*inverseImage|pullback.*[Cc]omparison\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"Mathlib/CategoryTheory/Sites/JointlySurjective.lean\", \"Mathlib/CategoryTheory/Sites/JointlySurjective.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean\"], \"digest\": \"9dec6a5ab05d2324\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual naturality/cancellation identities, ordinary sheaf or module comparisons, not this composite comparison formula with its specified data; no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete pro etale pullback along a scheme isomorphism inverse comparison compatible with scalar extension",
+   "results": "{\"t\": \"2026-10-22T07:05:47Z\", \"tool\": \"leansearch\", \"query\": \"Derived complete pro etale pullback along a scheme isomorphism inverse comparison compatible with scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullbackCongr\", \"RingHom.Etale.respectsIso\", \"CategoryTheory.Limits.instIsIsoPullbackComparison\", \"AlgebraicGeometry.Scheme.Hom.stalkMap_inv_hom\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.FormallyEtale.iff_of_equiv\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom\"], \"digest\": \"e71c09e1418041e7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual naturality/cancellation identities, ordinary sheaf or module comparisons, not this composite comparison formula with its specified data; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.counitIso, CategoryTheory.NatIso",
+   "results": "{\"t\": \"2026-10-22T07:05:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Equivalence.counitIso, CategoryTheory.NatIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.NatIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: query rejected for an unknown identifier; corrected searches also recorded"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, CategoryTheory.Iso.inv_comp_eq",
+   "results": "{\"t\": \"2026-10-22T07:05:49Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatIso, CategoryTheory.Iso.inv_comp_eq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.NatIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: query rejected for an unknown identifier; corrected searches also recorded"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical inverse derived pullback comparison lambda commutes with finite l adic scalar extension via the inverse-image tensor comparison",
+   "results": "{\"t\": \"2026-10-22T07:05:58Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical inverse derived pullback comparison lambda commutes with finite l adic scalar extension via the inverse-image tensor comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.tensor_map_id_left_eq_map\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst'\", \"AdicCompletion.ofTensorProduct_naturality\", \"PresheafOfModules.pullbackComp\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst\", \"AlgebraicGeometry.pullbackSpecIso_inv_snd\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"2e69b8e3efb2db43\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual naturality/cancellation identities, ordinary sheaf or module comparisons, not this composite comparison formula with its specified data; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*[Nn]aturality|[Nn]aturality.*counit|counit.*[Tt]ransport",
+   "results": "{\"t\": \"2026-10-22T07:06:31Z\", \"tool\": \"grep\", \"query\": \"counit.*[Nn]aturality|[Nn]aturality.*counit|counit.*[Tt]ransport\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean\", \"Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\"], \"digest\": \"53efcdf0303d9ec6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual naturality/cancellation identities, ordinary sheaf or module comparisons, not this composite comparison formula with its specified data; no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality pasting preserves a composite counit under two compatible inverse natural isomorphisms and comparison transformations",
+   "results": "{\"t\": \"2026-10-22T07:06:32Z\", \"tool\": \"leansearch\", \"query\": \"Naturality pasting preserves a composite counit under two compatible inverse natural isomorphisms and comparison transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.StrongTrans.naturality_comp_inv_app\", \"CategoryTheory.Equivalence.counit_naturality_assoc\", \"CategoryTheory.Adjunction.counitAsIsoOfIso\", \"CategoryTheory.Lax.StrongTrans.vComp_naturality_inv\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"CategoryTheory.Equivalence.counitInv_naturality_assoc\", \"CategoryTheory.Equivalence.counitInv_naturality\", \"CategoryTheory.Pseudofunctor.StrongTrans.naturality_comp_inv_assoc\"], \"digest\": \"dbd6792fbd50d623\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual naturality/cancellation identities, ordinary sheaf or module comparisons, not this composite comparison formula with its specified data; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Iso",
+   "results": "{\"t\": \"2026-10-22T07:06:32Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans.naturality, CategoryTheory.Iso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.PullbackCone.isoMk\", \"CategoryTheory.Limits.PushoutCocone.isoMk\"], \"digest\": \"3ace081a7eac2d1e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual naturality/cancellation identities, ordinary sheaf or module comparisons, not this composite comparison formula with its specified data; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport composite counit through natural isomorphisms of functors when change-of-scalars squares commute; cancel kappa to get inverse lambda compatibility",
+   "results": "{\"t\": \"2026-10-22T07:06:42Z\", \"tool\": \"leanfinder\", \"query\": \"Transport composite counit through natural isomorphisms of functors when change-of-scalars squares commute; cancel kappa to get inverse lambda compatibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Compatibility.τ₀_hom_app\", \"AlgebraicTopology.DoldKan.Compatibility.υ\", \"AlgebraicTopology.DoldKan.Compatibility.τ₁\", \"CategoryTheory.Equivalence.trans_counitIso\", \"CategoryTheory.Equivalence.counitIso_inv_app_comp_functor_map_η_inverse\", \"CategoryTheory.Equivalence.cancel_counitInv_right_assoc'\", \"CategoryTheory.Equivalence.counitInv_app_comp_functor_map_η_inverse\", \"CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse\"], \"digest\": \"83bb06c6785a270c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual naturality/cancellation identities, ordinary sheaf or module comparisons, not this composite comparison formula with its specified data; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.inv_comp_eq",
+   "results": "{\"t\": \"2026-10-22T07:13:41Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Iso.inv_comp_eq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Iso.inv_comp_eq\"], \"digest\": \"bcb7d82d78335e2f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual naturality/cancellation identities, ordinary sheaf or module comparisons, not this composite comparison formula with its specified data; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a composite natural transformation through two compatible inverse natural isomorphism squares between functors",
+   "results": "{\"t\": \"2026-10-22T11:11:53Z\", \"tool\": \"leanfinder\", \"query\": \"Transport a composite natural transformation through two compatible inverse natural isomorphism squares between functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CatCommSq.hComp_iso_inv_app\", \"CategoryTheory.CatCommSq.vComp_iso_inv_app\", \"CategoryTheory.CatCommSq.vInv\", \"CategoryTheory.CatCommSq.hComp_iso_hom_app\", \"CategoryTheory.CatCommSq.vInv_iso_hom_app\", \"CategoryTheory.CatCommSq.hInv_hInv\", \"CategoryTheory.CatCommSq.vInv_vInv\", \"CategoryTheory.CatCommSq.vComp_iso_hom_app\"], \"digest\": \"f41640f6c8dd8890\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: CatCommSq composition expands the specified square isomorphisms; hInv/vInv require equivalences and use their units/counits. They do not give this formula for supplied kappa, rho and arbitrary u_L without adjunction assumptions."
+  },
+  {
+   "tool": "grep",
+   "query": "inv_comp_eq|inv_comp.*naturality|naturality.*inv_comp|counit.*[Tt]ransport",
+   "results": "{\"t\": \"2026-10-22T11:12:19Z\", \"tool\": \"grep\", \"query\": \"inv_comp_eq|inv_comp.*naturality|naturality.*inv_comp|counit.*[Tt]ransport\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/Subobject/Basic.lean\", \"Mathlib/CategoryTheory/Subobject/Basic.lean\", \"Mathlib/CategoryTheory/Iso.lean\", \"Mathlib/CategoryTheory/Iso.lean\", \"Mathlib/CategoryTheory/Iso.lean\", \"Mathlib/CategoryTheory/Iso.lean\", \"Mathlib/CategoryTheory/Iso.lean\"], \"digest\": \"fb32bc42aca7f8fd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Iso.inv_comp_eq and NatIso cancellation identities cover individual rearrangements; none states the two given comparison-square consequences together with the expanded composite formula and its naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Iso.inv_comp_eq",
+   "results": "{\"t\": \"2026-10-22T11:12:20Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans.naturality, CategoryTheory.Iso.inv_comp_eq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the combined existing-name pattern returned no declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse natural isomorphism comparison squares commute and transport a composite natural transformation by naturality",
+   "results": "{\"t\": \"2026-10-22T11:12:20Z\", \"tool\": \"leansearch\", \"query\": \"Inverse natural isomorphism comparison squares commute and transport a composite natural transformation by naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CatCommSq.iso_inv_naturality_assoc\", \"CategoryTheory.CatCommSq.iso_inv_naturality\", \"CategoryTheory.NatIso.naturality_2'_assoc\", \"CategoryTheory.CatCommSq.iso_hom_naturality_assoc\", \"CategoryTheory.NatTrans.naturality_2_assoc\", \"CategoryTheory.NatTrans.naturality_2\", \"CategoryTheory.NatIso.naturality_1'_assoc\", \"CategoryTheory.NatIso.naturality_2'\"], \"digest\": \"9405981cad165a04\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give single naturality identities or mate/counit theorems for supplied adjunctions. The item has no adjunction hypotheses, and combining the two inverse squares and pasting requires several substitutions."
+  },
+  {
+   "tool": "grep",
+   "query": "naturality_1|naturality_2|theorem.*inv|trans_counitIso",
+   "results": "{\"t\": \"2026-10-22T11:12:53Z\", \"tool\": \"grep\", \"query\": \"naturality_1|naturality_2|theorem.*inv|trans_counitIso\", \"sub\": \"CategoryTheory/NatIso.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"61\", \"65\", \"124\", \"134\", \"140\"], \"digest\": \"6abac1d0fa127321\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Iso.inv_comp_eq and NatIso cancellation identities cover individual rearrangements; none states the two given comparison-square consequences together with the expanded composite formula and its naturality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugate a composite counit by inverse natural isomorphisms compatibly with two change of functor comparison squares",
+   "results": "{\"t\": \"2026-10-22T11:12:54Z\", \"tool\": \"leansearch\", \"query\": \"Conjugate a composite counit by inverse natural isomorphisms compatibly with two change of functor comparison squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateEquiv_symm_apply_app\", \"CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv\", \"CategoryTheory.conjugateEquiv_counit_symm\", \"CategoryTheory.conjugateEquiv_symm_comp\", \"CategoryTheory.Adjunction.counitAsIsoOfIso\", \"CategoryTheory.conjugateEquiv_comm\", \"CategoryTheory.unit_conjugateEquiv\", \"CategoryTheory.Equivalence.counitInv\"], \"digest\": \"073ef33e21c59495\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give single naturality identities or mate/counit theorems for supplied adjunctions. The item has no adjunction hypotheses, and combining the two inverse squares and pasting requires several substitutions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given two commuting squares of natural isomorphisms invert their vertical comparisons and paste them with an arbitrary natural counit",
+   "results": "{\"t\": \"2026-10-22T11:12:55Z\", \"tool\": \"leanfinder\", \"query\": \"Given two commuting squares of natural isomorphisms invert their vertical comparisons and paste them with an arbitrary natural counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CatCommSq.vInv\", \"CategoryTheory.CatCommSq.vComp_iso_inv_app\", \"CategoryTheory.CatCommSq.vInv_vInv\", \"CategoryTheory.CatCommSq.hInv\", \"CategoryTheory.CatCommSq.hComp_iso_inv_app\", \"CategoryTheory.CatCommSq.vInvEquiv\", \"CategoryTheory.CatCommSq.hInv_hInv\", \"CategoryTheory.CatCommSq.vComp\"], \"digest\": \"dd631b198048216a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: CatCommSq composition expands the specified square isomorphisms; hInv/vInv require equivalences and use their units/counits. They do not give this formula for supplied kappa, rho and arbitrary u_L without adjunction assumptions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-pullback-identities-scalar-extension",
+  "date": "2026-10-22",
+  "group": "Q123"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Proof sentence 1 ('The equivariant lifts of the operations ... are [lem-fix-weil-operations]'): the inverse automorphism squares for pullback, read at the algebraically closed coefficient level, must paste to the identity after scalar extension; this node is the categorical part of that pasting (inverting the two comparison squares and moving the comparison factors through the composite counit), used in Step 3 of lem-pod-pullback-identities-scalar-extension.",
+   "via": [
+    "lem-pod-pullback-identities-scalar-extension",
+    "lem-pod-semilinear-field-operation-lifts"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-inverse-comparison-counit-transport",
+  "worker": "stage1",
+  "group": "Q27",
+  "summary": "Kept the complete statement unchanged. Proved the two inverse comparison squares by multiplying by their inverses; expanded the composite using inverse-comparison naturality; used naturality of e and functoriality to finish; wrote the component naturality equation in K. All six steps are elementary category calculations, so no new nodes are created. Fresh logged searches found cancellation and naturality APIs but no exact theorem or one-line specialization of the entire item.",
+  "blueprint": "prop-weil-operations proof sentence 1 invokes lem-fix-weil-operations; its first paragraph says inverse automorphism squares paste to the identity. Steps 1–5 provide the inverse-comparison and expanded-counit part of that pasting, used by lem-pod-pullback-identities-scalar-extension Step 3. Step 6 checks its naturality. The existing blueprint.from.place and via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-21e3135da",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-21e3135da (reviewer sub-agent of L); spot-checked: Ordinary first split with no repair note and no new nodes. The live node is unsplit, so the delivery is not superseded. Statement, stmt_deps, source and blueprint are unchanged from live; only proof, proof_deps, proof_origin, mathlib_searches, split_report and status changed. I read all six steps against the statement. Steps 1–2 cancel λ_L/T_D(λ_E) and ν_L/T_C(ν_E) in the two given squares (a T_D(κ_E)=κ_L b and d T_C(ρ_E)=ρ_L e). Step 3 proves naturality of the inverse families, with directions correct (λ: P→G, ν: Q→H). Step 4 applies naturality of ν_L at a_K: T_D P_E K→P_L T_C K. Step 5 substitutes Steps 1–2 at M=P_E K and applies naturality of e at λ_{E,K}: P_E K→G_E K, giving exactly (u_L H_L(b) e_{G_E K}) T_C(H_E(λ_E) ν_E), without using u_E. Step 6 proves naturality in K from naturality of v_F, a and d. Each step is a few lines from the category laws of def-nagata-category (a Mathlib leaf, CategoryTheory.Category) and the supplied naturality, so the elementary flags hold. I recomputed the Q^× one-object example: both sides equal 2431/21. The parent lem-pod-pullback-identities-scalar-extension Step 3 uses exactly this expanded form and closes the parenthesis by a separate node, so nothing is weakened. The source is lem-fix-weil-operations.proof.md (main-20261015), paragraph 1, inverse square pasting; the proof is agent-written and marked so. No SGA is cited and there are no tool_uses. Mathlib searches cover all three kinds and find no one-line match. An rg -L search of dag/nodes found no duplicate. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InverseComparisonCounitTransport",
+  "declaration": "CategoryTheory.inverseComparisonCounitTransport",
+  "declarations": [
+   "CategoryTheory.inverseComparisonCounitApp",
+   "CategoryTheory.inverseComparisonCounitTransport"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InverseComparisonCounitTransport.lean",
+  "statement": "theorem inverseComparisonCounitTransport {CE : Type uCE} [Category.{vCE} CE] {DE : Type uDE} [Category.{vDE} DE] {CL : Type uCL} [Category.{vCL} CL] {DL : Type uDL} [Category.{vDL} DL] (TC : CE ⥤ CL) (TD : DE ⥤ DL) (PE GE : CE ⥤ DE) (QE HE : DE ⥤ CE) (PL GL : CL ⥤ DL) (QL HL : DL ⥤ CL) (κE : GE ≅ PE) (ρE : HE ≅ QE) (_uE : GE ⋙ HE ≅ 𝟭 CE) (κL : GL ≅ PL) (ρL : HL ≅ QL) (uL : GL ⋙ HL ≅ 𝟭 CL) (a : PE ⋙ TD ≅ TC ⋙ PL) (d : QE ⋙ TC ≅ TD ⋙ QL) (b : GE ⋙ TD ≅ TC ⋙ GL) (e : HE ⋙ TC ≅ TD ⋙ HL) (hκ : ∀ K : CE, TD.map (κE.hom.app K) ≫ a.hom.app K = b.hom.app K ≫ κL.hom.app (TC.obj K)) (hρ : ∀ M : DE, TC.map (ρE.hom.app M) ≫ d.hom.app M = e.hom.app M ≫ ρL.hom.app (TD.obj M)) : (∀ K : CE, a.hom.app K ≫ κL.inv.app (TC.obj K) = TD.map (κE.inv.app K) ≫ b.hom.app K) ∧ (∀ M : DE, d.hom.app M ≫ ρL.inv.app (TD.obj M) = TC.map (ρE.inv.app M) ≫ e.hom.app M) ∧ (∀ K : CE, d.hom.app (PE.obj K) ≫ QL.map (a.hom.app K) ≫ inverseComparisonCounitApp κL ρL uL (TC.obj K) = TC.map (ρE.inv.app (PE.obj K) ≫ HE.map (κE.inv.app K)) ≫ (e.hom.app (GE.obj K) ≫ HL.map (b.hom.app K) ≫ uL.hom.app (TC.obj K))) ∧ (∀ (K K' : CE) (t : K ⟶ K'), TC.map (QE.map (PE.map t)) ≫ (d.hom.app (PE.obj K') ≫ QL.map (a.hom.app K') ≫ inverseComparisonCounitApp κL ρL uL (TC.obj K')) = (d.hom.app (PE.obj K) ≫ QL.map (a.hom.app K) ≫ inverseComparisonCounitApp κL ρL uL (TC.obj K)) ≫ TC.map t)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d639f8e3",
+  "group": "ND",
+  "result": "pass",
+  "note": "Clause-by-clause check of the item node against InverseComparisonCounitTransport.lean: categories with independent universes; TC/TD; P,G,Q,H for E and L; κ,ρ,u (u_E kept unused, no link to u_L); a,d,b,e with correct composite directions; hκ/hρ match the displayed squares; the helper v = ρ⁻¹_{PK} ≫ H(κ⁻¹_K) ≫ u_K is real data; the two inverse squares, the expanded transport formula (source T_C Q_E P_E K, target T_C K, parenthesisation kept) and naturality in K all match. Statement is true (the six steps were checked by hand). lean.statement matches the file verbatim; only the lean field differs from the live node; stmt_dep def-nagata-category is a Mathlib leaf. Docstrings, imports, line lengths, namespace and autoImplicit are correct; no duplicate in side-live Sheaf or Mathlib (CatCommSq.hInv/vInv need equivalences); proof is sorry only; worker report and second reading present. Advisory only: no copyright header (the example module is withdrawn; 124 landed modules also lack one). No recompile (instructed); no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261023T123830-L-1263837",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.inverseComparisonCounitTransport"
+  ],
+  "sorry_after": []
+ }
+}

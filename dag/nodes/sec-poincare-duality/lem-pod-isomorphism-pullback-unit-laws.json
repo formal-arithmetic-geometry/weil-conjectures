@@ -1,0 +1,131 @@
+{
+ "id": "lem-pod-isomorphism-pullback-unit-laws",
+ "kind": "statement",
+ "title": "Unit equations for specified integral and rational scalar comparisons",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "statement": "Fix a prime ell, an algebraic closure Omega/Q_ell, the actual small coefficient models of its finite subextensions [def-weil-algebraically-closed-coefficients, def-pod-isomorphism-coefficient-inclusions], and a scheme isomorphism g:X→Y with ell invertible. Let F_E denote completed integral pullback and T^W_{L/E} the completed scalar transition [def-weil-derived-pullback-tensor-hom, def-weil-integral-scalar-extension]. Let alpha_{L/E}:F_E T^X_{L/E}≅T^Y_{L/E} F_L be any family of natural isomorphisms whose components equal the prescribed integralPullbackScalarComparison. For each finite subextension E and integral constructible K on Y, alpha_{E/E,K} followed by F_E(u^Y_K) equals u^X_{F_E K}, where u is the canonical integral scalar unitor transported along the actual inclusion-identity law [lem-weil-scalar-extension-composition]. The corresponding equation holds for the prescribed rational pullback comparison and the canonical rational unitor on every raw rational object. No stage, shift, exactness or tower existence is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-constructible-truncations.proof.md",
+  "place": "Proof, final sentence on automorphism pullback: completed-to-termwise comparison, t-exactness, and rational scalar/shift coherence (previous steps 8-9); agent extraction of the existing corrected stage-1 argument, not a quoted theorem of the blueprint"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-algebraically-closed-coefficients",
+  "def-pod-isomorphism-coefficient-inclusions"
+ ],
+ "proof": [
+  {
+   "text": "First use the supplied component normalization of alpha, and congrArg Iso.hom, to replace each of its components by the prescribed integral comparison. Then apply the original normalized-map argument. Use the scalarIdentity field of a normalized integral comparison system.\nThe comparison-agreement theorem identifies its whole-system map with the prescribed\ncompleted comparison. The normalized scalar unit is ordinary multiplication, conjugated\nby completion, so the identity equation is precisely the displayed integral unit law.\nApply the integral-to-rational functor: the prescribed rational comparison and rational\nscalar unitor are its images componentwise. Their fixed object formulas identify all\nendpoints; functoriality transfers the equation. No morphism is discarded, including\nintegral torsion morphisms, whose images may vanish. Transport the unit or tower equation along coefficientInclusion_laws in the small coefficient models. The rational adapters are exactly GeneralAlgebraicallyClosedCoefficients.unitor and its normalized associator.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-specified-pullback-comparison-alpha",
+    "lem-weil-normalized-scalar-completion",
+    "lem-weil-scalar-extension-composition",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-pod-isomorphism-scalar-comparison-agreement",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-pur-semilinear-scalar-localization",
+    "def-pod-isomorphism-coefficient-inclusions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-specified-pullback-comparison-alpha",
+  "lem-weil-normalized-scalar-completion",
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-pod-isomorphism-scalar-comparison-agreement",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-semilinear-scalar-localization",
+  "def-pod-isomorphism-coefficient-inclusions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-constructible-truncations.proof.md",
+  "place": "S5 extraction of parent proof steps 5, 7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scheme isomorphism completed constructible integral pullback normalized exact shifts rational scalar extension unit tower coherence",
+   "results": "8 normalization-of-schemes hits; none concerns completed constructible complexes",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"IsTriangulated\"",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.commShift",
+   "date": "2026-10-26",
+   "verdict": "generic exact-adjunction API, no specified completed pullback or scalar normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*(scalar|tExact)|scalar.*(tower|unit)",
+   "results": "25 unrelated algebraic scalar-tower and completion hits",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme isomorphism completed constructible integral pullback normalized exact shifts rational scalar extension unit tower coherence",
+   "results": "8 hits: scheme normalization, isomorphisms as affine or closed immersions, ideal-sheaf comap, and CategoryTheory.pullbackShiftIso.",
+   "date": "2026-10-26",
+   "verdict": "no match: pullbackShiftIso changes the indexing monoid of a shift action; none of the hits treats completed constructible pullback, rational localization, or its coefficient coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IsomorphismPullbackTExactCoefficients",
+  "date": "2026-10-26",
+  "group": "S5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-pod-isomorphism-pullback-texact-coefficients"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IsomorphismPullbackUnitLaws",
+  "file": "lean/Sheaf/Paper/IsomorphismPullbackUnitLaws.lean",
+  "declaration": "WeilConjectures.isomorphismPullbackUnitLaws",
+  "statement": "theorem isomorphismPullbackUnitLaws\n    (l : ℕ) [Fact l.Prime]\n    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (α : ∀ (E L : Index l Ω) (h : E ≤ L),\n      constructibleIntegralPullback l (Coefficient.{u} l Ω E) g ⋙\n        GeneralAlgebraicallyClosedCoefficients.integralTransition l Ω X E L h ≅\n      GeneralAlgebraicallyClosedCoefficients.integralTransition l Ω Y E L h ⋙\n        constructibleIntegralPullback l (Coefficient.{u} l Ω L) g)\n    (hα : ∀ (E L : Index l Ω) (h : E ≤ L)\n      (K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E) Y),\n      (α E L h).app K = integralPullbackScalarComparison l (Coefficient.{u} l Ω E)\n        (Coefficient.{u} l Ω L) (isomorphismCoefficientInclusion l Ω E L h) g K) :\n    (∀ (E : Index l Ω)\n    (K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E) Y),\n      (α E E le_rfl).hom.app K ≫\n        (constructibleIntegralPullback l (Coefficient.{u} l Ω E) g).map\n          ((isomorphismCoefficientIntegralUnitor l Ω Y E).hom.app K) =\n      (isomorphismCoefficientIntegralUnitor l Ω X E).hom.app\n        ((constructibleIntegralPullback l (Coefficient.{u} l Ω E) g).obj K)) ∧\n    (∀ (E : Index l Ω)\n    (K : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) Y),\n      (rationalPullbackScalarComparison l (Coefficient.{u} l Ω E)\n          (Coefficient.{u} l Ω E) (isomorphismCoefficientInclusion l Ω E E le_rfl) g).hom.app K ≫\n        (rationalDerivedPullback l (Coefficient.{u} l Ω E) g).map\n          ((GeneralAlgebraicallyClosedCoefficients.unitor l Ω Y E).hom.app K) =\n      (GeneralAlgebraicallyClosedCoefficients.unitor l Ω X E).hom.app\n        ((rationalDerivedPullback l (Coefficient.{u} l Ω E) g).obj K))",
+  "branch": "sheaf-dag",
+  "by": "S5",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4d672",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261026T002644-L-105314",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4d672",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261026T002644-L-105314",
+  "kind": "interface",
+  "note": "independent cc review: item proof assembled from raw-stage (proved) + 4 sorried sub-statements vs node lem-pod-isomorphism-pullback-texact-coefficients steps; adapter/inclusion changes vs change record (defeq aliases); importer IsomorphismFieldTransport compiled against the delivered modules"
+ }
+}

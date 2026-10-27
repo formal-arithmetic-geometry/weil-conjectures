@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-trait-group-finite-smooth-cover",
+ "kind": "statement",
+ "title": "Potential finite smooth cover of a separated flat group over a trait",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring] and let $G$ be a group scheme over $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum], with multiplication, identity section and inverse satisfying the group diagrams. Assume $G\\to S$ is flat [def-weil-flat-morphism], separated [def-weil-proper-morphism], and of finite type [def-weil-finite-type-morphism]. There exist a faithfully flat injective local homomorphism $R\\to R'$ of discrete valuation rings and an $R'$-group scheme $N$, separated and of finite type and smooth over $R'$ [def-sbc-smooth-morphisms], together with an $R'$-group homomorphism $q:N\\to G_{R'}=G\\times_S\\operatorname{Spec}R'$ [def-pc-base-change], such that $q$ is finite and surjective [def-weil-finite-integral-morphism, def-weil-surjective-morphism]. The ring $R'$ can be chosen strictly henselian [def-weil-pbc-henselian-terminology] with algebraically closed residue field [def-weil-algebraic-closure]. No affineness or generic smoothness or connectedness hypothesis on $G$ is imposed, and no excellence hypothesis on $R$ is imposed. Faithfully flat has the meaning of [def-weil-pbc-faithfully-flat-ring-map]; local means that the maximal ideal of $R$ maps into that of $R'$. The morphism $\\operatorname{Spec}R'\\to S$ is flat and surjective and is a singleton fpqc covering [def-weil-pbc-fpqc-covering].",
+ "source": {
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "WANTED locally; read online https://math.stanford.edu/~conrad/papers/qrg.pdf: Proposition 3.1, first paragraph, printed p.5; Appendix Corollary A.4, printed p.29, including stability under further Dedekind extensions; the henselian extension with algebraically closed residue field used after Lemma A.9, printed pp.31-32. Use the finite normalization of the reduced base change, not the potentially non-finite ordinary smoothening of an arbitrary model."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-pc-base-change",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof": [
+  {
+   "text": "Choose a uniformizer $\\pi$ of $R$ and an algebraic closure $\\bar k$ of its residue field. The flat local extension with prescribed residue field gives a local flat $R$-algebra $T$ with maximal ideal $\\pi T$ and residue field $\\bar k$. Tensoring the injection $R\\xrightarrow{\\pi}R$ with $T$ shows that $\\pi$ is a nonzerodivisor on $T$. The principal-regular-local completion lemma therefore gives a complete DVR $D=\\varprojlim T/\\pi^nT$ with uniformizer the image of $\\pi$ and residue field $\\bar k$. The composite $R\\to D$ is local and injective: every nonzero $a\\in R$ is $u\\pi^n$ for a unit $u$, whose image is nonzero in the domain $D$.",
+   "uses": [
+    "lem-weil-pbc-flat-local-extension-given-residue-field",
+    "lem-sfb-principal-regular-local-completion-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 03C3 (lemma-flat-local-given-residue-field) and 0328 (lemma-cohen-rings-exist), completion argument generalized to a regular generator; no excellence of R is used."
+   }
+  },
+  {
+   "text": "Set $X=G_D$. Flatness, separatedness and finite type persist under this base change by the three cited permanence statements. The group maps of $G$ also base change: the universal property identifies $(G\\times_RG)_D$ with $G_D\\times_DG_D$, and base change carries each group-diagram equality to the same equality on $X$. Thus $X$ satisfies the hypotheses of the complete-trait normalized-reduction theorem. Apply it and obtain $L/\\operatorname{Frac}D$, its complete DVR $V$, the reduction $H=(G_V)_{\\mathrm{red}}$, and $\\nu:N\\to H$. In particular $H,N$ are flat separated finite-type $V$-schemes, $\\nu$ is finite surjective, $H_L$ is geometrically reduced, and $N_k$ is geometrically reduced for $k=V/\\mathfrak m_V$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sfb-complete-trait-normalized-reduced-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Appendix Theorem A.2 and Remark A.3; Stacks Tag 09IL, theorem-normalized-base-change-with-reduced-fibre, after passage to the complete DVR D."
+   }
+  },
+  {
+   "text": "Base change along $D\\to V$ once more: $G_V=X\\times_{\\operatorname{Spec}D}\\operatorname{Spec}V$ is flat, separated and of finite type over $V$ by the same three permanence statements, and, as in Step 2, the identification $(X\\times_DX)_V=G_V\\times_VG_V$ carries the group maps and group-diagram equalities of $X$ to $G_V$; moreover $H=(G_V)_{\\mathrm{red}}$. Apply the group-structure lemma to this $V$-group $G_V$ and this $H,N,\\nu$. Its finite-normalization, flatness of $H,N$ and two geometric-reducedness hypotheses are precisely the conclusions of Step 2. It equips $H$ and $N$ with compatible $V$-group structures and identifies $N_L$ with $H_L$ as groups. Consequently both $N_L$ and $N_k$ are geometrically reduced groups of finite type over their respective fields. The geometrically-reduced-group smoothness lemma makes both fibres smooth. This step uses neither an affine coordinate Hopf algebra nor connectedness of the fibres.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sfb-trait-normalization-group-structure",
+    "lem-sfb-geometrically-reduced-group-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Corollary A.4 proof, printed p.29; smoothness of geometric fibres by Stacks groupoids.tex Tags 047N and 047P."
+   }
+  },
+  {
+   "text": "The scheme $N$ is flat and of finite type over the Noetherian ring $V$. On each affine chart its coordinate algebra is finitely generated over $V$, hence finitely presented by the finite-type-over-Noetherian finite-presentation lemma. Thus $N\\to\\operatorname{Spec}V$ is locally of finite presentation. A DVR has just its generic and closed points, whose fibres are smooth by Step 3. The flat, locally finitely presented, smooth-fibre criterion proves that $N$ is smooth over $V$. It is already separated and of finite type by Step 2.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "sbc-lem-smooth-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V8, lemma-smooth-flat-smooth-fibres; Tag 02H6 identifies the smoothness conventions. Finite presentation is checked on affine charts."
+   }
+  },
+  {
+   "text": "Define $q$ as $N\\xrightarrow{\\nu}H\\xrightarrow{j}G_V$. The reduction inclusion $j$ is a surjective closed immersion by the reduction theorem and is finite by the closed-immersion lemma. The finite-composition lemma makes $q$ finite; its underlying map is surjective because both factors are surjective. The group structures of Step 3 make both factors homomorphisms, so their composite commutes with multiplication, identity and inverse by composing those equalities. This is the required finite surjective group homomorphism.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Reduction and finite-morphism composition; Corollary A.4 applied as in the first paragraph of Proposition 3.1, printed p.5."
+   }
+  },
+  {
+   "text": "Take $R'=V$. The local injection $R\\to D\\to V$ makes $V$ torsion free as an $R$-module; the PID torsion-free-flat lemma makes it flat. The flat-local lemma then makes it faithfully flat and gives surjectivity of $\\operatorname{Spec}V\\to\\operatorname{Spec}R$. The affine flatness criterion gives flatness of this scheme morphism. Its singleton is an fpqc cover directly from the definition: the only nonempty opens of the spectrum of a DVR are the whole spectrum and its generic point; their inverse images are respectively the affine schemes $\\operatorname{Spec}V$ and $\\operatorname{Spec}\\operatorname{Frac}V$, which surject onto those opens. The empty open uses the empty family.",
+   "uses": [
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0AUW and 0539 for torsion-free flatness; flat-local faithful flatness, followed by the explicit two-open fpqc verification."
+   }
+  },
+  {
+   "text": "Finally $V$ is complete for its maximal ideal, so the complete-pair lemma makes it henselian. Since $V$ is finite over $D$, its residue field is finite-dimensional over $D/\\mathfrak m_D=\\bar k$ (reduce any finite set of module generators). This field extension is an isomorphism, since $\\bar k$ is algebraically closed. In particular the residue field is separably closed, and the henselian-terminology definition says that $V$ is strictly henselian. Together with Steps 4--6 this proves every clause without any excellence, affineness, generic smoothness or connectedness assumption on $G$.",
+   "uses": [
+    "lem-weil-pbc-complete-pair-henselian",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ALJ (lemma-complete-henselian); Prasad--Yu Appendix Remark A.1 and the residue-field extension following Lemma A.9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-henselian-terminology",
+  "lem-sfb-complete-trait-normalized-reduced-fibres",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-sfb-principal-regular-local-completion-dvr",
+  "lem-sfb-trait-normalization-group-structure",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-flat-local-extension-given-residue-field",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-separated-base-change",
+  "sbc-lem-smooth-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "Read online: Proposition 3.1 first paragraph; Conrad Appendix Theorem A.2, Corollary A.4 and proof, Remark A.1, and residue-field extension after A.9. Local archive WANTED. Assembly with Stacks 03C3/0328 to use a complete auxiliary trait and avoid any excellence assumption on R."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "group.*smooth.*normali|normali.*smooth.*group|Raynaud",
+   "results": "{\"t\": \"2026-10-24T05:08:06Z\", \"tool\": \"grep\", \"query\": \"group.*smooth.*normali|normali.*smooth.*group|Raynaud\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/RingTheory/Etale/Descent.lean\"], \"digest\": \"32c23e1f9a5e7755\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth algebra descent constructs smaller coefficient rings, not a finite smooth cover of a group over a trait; relative normalization supplies no potential smoothness theorem. Both phrasings and the source hits were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Potential smooth normalization of a flat group scheme over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T05:08:06Z\", \"tool\": \"leansearch\", \"query\": \"Potential smooth normalization of a flat group scheme over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\"], \"digest\": \"c0aa736be1990c31\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth algebra descent constructs smaller coefficient rings, not a finite smooth cover of a group over a trait; relative normalization supplies no potential smoothness theorem. Both phrasings and the source hits were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Smooth\", \"AlgebraicGeometry.IsFinite\"",
+   "results": "{\"t\": \"2026-10-24T05:08:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.Smooth\\\", \\\"AlgebraicGeometry.IsFinite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth algebra descent constructs smaller coefficient rings, not a finite smooth cover of a group over a trait; relative normalization supplies no potential smoothness theorem. Both phrasings and the source hits were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite surjective homomorphism from a smooth group to the base change of a group over a trait",
+   "results": "{\"t\": \"2026-10-24T05:08:08Z\", \"tool\": \"leanfinder\", \"query\": \"Finite surjective homomorphism from a smooth group to the base change of a group over a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_finiteType\", \"RingHom.Smooth.isStableUnderBaseChange\", \"Algebra.FiniteType.baseChangeAux_surj\", \"RingHom.surjective_isStableUnderBaseChange\", \"KaehlerDifferential.mapBaseChange_surjective\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\"], \"digest\": \"32f4e01f92ef867c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth algebra descent constructs smaller coefficient rings, not a finite smooth cover of a group over a trait; relative normalization supplies no potential smoothness theorem. Both phrasings and the source hits were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "After extending a discrete valuation ring a separated flat finite type group scheme admits a finite surjective smooth group scheme cover",
+   "results": "{\"t\": \"2026-10-24T05:08:09Z\", \"tool\": \"leanfinder\", \"query\": \"After extending a discrete valuation ring a separated flat finite type group scheme admits a finite surjective smooth group scheme cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_finiteType\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.Smooth.exists_subalgebra_fg\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\"], \"digest\": \"0ffffcaeed302647\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth algebra descent constructs smaller coefficient rings, not a finite smooth cover of a group over a trait; relative normalization supplies no potential smoothness theorem. Both phrasings and the source hits were read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-generic-affine-group-affine",
+  "date": "2026-10-24",
+  "group": "Q128"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Generic torus quotient input, closedness of the extended generic torus inclusion: A monic relative torus homomorphism is a closed immersion. No imported blueprint ancestor was found (blueprint_refs.py ancestor returns None). Supporting input: Conrad Theorem 5.3.5, p.166: apply Raynaud affineness to the separated flat finite-type generic-image closure; Prasad–Yu Proposition 3.1 supplies the proof. Supporting input to Raynaud affineness: Proposition 3.1, first paragraph, printed p.5; Appendix Corollary A.4, printed p.29, including stability under further Dedekind extensions; the henselian extension with algebraically closed residue field used after Lemma A.9, printed pp.31-32. Use the finite normalization of the reduced base change, not the potentially non-finite ordinary smoothening of an arbitrary model.",
+   "via": [
+    "lem-sfb-dvr-generic-affine-group-affine",
+    "lem-sfb-relative-torus-monomorphism-closed",
+    "lem-sfb-torus-hom-generic-closed-rigidity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-trait-group-finite-smooth-cover",
+  "worker": "stage1",
+  "summary": "Q17 checked Prasad--Yu/Conrad online, excluded existing affine-only normalizations, and assembled the cover from two smaller statement-only inputs: normalized reduced fibres for schemes over a complete trait, and group operations on an already finite normalization. Constructed the auxiliary algebraically closed-residue complete trait, checked smooth fibres and finite presentation, and verified faithful flatness and the actual fpqc definition. No statement correction.",
+  "blueprint": "No imported blueprint ancestor: blueprint_refs.py ancestor returns None, matching the existing from.node. Retains the complete existing provenance chain. This realizes the supporting potential-smooth-cover input in the Raynaud-affineness proof used by the relative-torus closedness input. Latest sk-thm-sf-ctf-stability unit and chapter were read; no higher-level route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "Generic permanence or local-ring tool used exactly as stated in the assembly of Corollary A.4; this unit has no replacement for that tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-extension-given-residue-field",
+    "why": "Generic permanence or local-ring tool used exactly as stated in the assembly of Corollary A.4; this unit has no replacement for that tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Generic permanence or local-ring tool used exactly as stated in the assembly of Corollary A.4; this unit has no replacement for that tool."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Generic permanence or local-ring tool used exactly as stated in the assembly of Corollary A.4; this unit has no replacement for that tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-flat-local-extension-given-residue-field",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "sbc-lem-smooth-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-9c9cca2a6",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-9c9cca2a6 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement; Stacks 09IL checked in more-morphisms.tex l.19282 (the Prasad-Yu PDF is not in literature/, WANTED). New node lem-sfb-complete-trait-normalized-reduced-fibres is true: V finite because a complete DVR is Nagata; H=(X_V)_red has no pi-torsion (pi^n s^n=0 gives s^n=0), so it is flat; N is flat and nu finite surjective; H_L becomes geometrically reduced after a purely inseparable L; N_k is geometrically reduced by 09IL plus S1 of a Cartier divisor in a normal scheme; the unused clause 'N_L geometrically normal' also holds. It generalizes the affine lem-sfb-raynaud-faltings-normalized-reduction, so it is not a copy; tested on the empty scheme and on D[x]/(x^p-t). New node lem-sfb-trait-normalization-group-structure checked by proving it: H x H is flat with reduced generic fibre, so it is reduced and m factors through H; nu_L is an iso because H_L is a smooth group; N x N is normal (flat, smooth generic fibre, reduced special fibre); multiplication and inverse lift by the normalization universal property; the identity lifts by the valuative criterion since nu is finite; the axioms follow from schematic density and separatedness. It is not an item clause and is distinct from the affine lem-sfb-group-model-potential-smooth-normalization. Steps 1, 2 and 4-7 were checked against the cited statements (complete DVR from the principal-regular completion, smooth-fibre criterion, finite composite, PID flat plus flat-local faithfully flat, fpqc via D(pi) and the empty family, complete gives henselian, residue field equals the algebraic closure). FIX (E1): Step 3 applied the group-structure node to G_V but only G_D had been shown flat, separated, finite type and a group. Added the D->V base change by the three permanence nodes (added to step 3 uses) and H=(G_V)_red. Tool uses accepted: complete-pair-henselian, flat-local-extension-given-residue-field, reduction-universal-homeomorphism, sbc-lem-smooth-criterion.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitGroupFiniteSmoothCover",
+  "declaration": "AlgebraicGeometry.exists_trait_group_finite_smooth_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitGroupFiniteSmoothCover.lean",
+  "statement": "theorem exists_trait_group_finite_smooth_cover (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (G : Grp (Over (Spec (.of R)))) [Flat G.X.hom] [IsSeparated G.X.hom] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] : ∃ (R' : Type u) (_ : CommRing R') (_ : IsDomain R') (_ : IsDiscreteValuationRing R') (_ : Algebra R R'), Function.Injective (algebraMap R R') ∧ IsLocalHom (algebraMap R R') ∧ Module.FaithfullyFlat R R' ∧ IsStrictlyHenselianLocalRing R' ∧ IsAlgClosed (IsLocalRing.ResidueField R') ∧ Flat (Spec.map (CommRingCat.ofHom (algebraMap R R'))) ∧ Surjective (Spec.map (CommRingCat.ofHom (algebraMap R R'))) ∧ Presieve.singleton (Spec.map (CommRingCat.ofHom (algebraMap R R'))) ∈ Scheme.fpqcPrecoverage (Spec (.of R)) ∧ ∃ (N : Grp (Over (Spec (.of R')))), IsSeparated N.X.hom ∧ LocallyOfFiniteType N.X.hom ∧ QuasiCompact N.X.hom ∧ Smooth N.X.hom ∧ ∃ q : N ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R R')))).mapGrp.obj G, IsFinite q.hom.hom.left ∧ Surjective q.hom.hom.left",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e2484202",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: DVR R; G : Grp (Over (Spec R)) with Flat/IsSeparated/LocallyOfFiniteType+QuasiCompact (recorded dep decls, no IsProper); ∃ R' : Type u DVR with one shared Algebra: injective, IsLocalHom, Module.FaithfullyFlat, IsStrictlyHenselianLocalRing, IsAlgClosed residue field, Spec map Flat+Surjective+singleton ∈ fpqcPrecoverage; ∃ N : Grp (Over Spec R') separated/finite type/Smooth, ∃ q : N ⟶ (Over.pullback _).mapGrp.obj G with IsFinite ∧ Surjective on q.hom.hom.left. No affine/connected/excellence assumptions, no universe restriction; lean.statement verbatim; one sorried theorem, no defs; source+blueprint docstrings and 7-step proof; node unchanged. Parallel Q19 delivery did not land (LAND superseded), live lean unset. Advisory only: docstring step 3 omits the explicit D→V base-change permanence of the node, the fpqc argument is rephrased equivalently, the second reading is a disclosed self-reading, and the report's push-failure paragraph is stale."
+ }
+}

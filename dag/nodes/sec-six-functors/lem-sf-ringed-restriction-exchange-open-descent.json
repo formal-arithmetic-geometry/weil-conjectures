@@ -1,0 +1,404 @@
+{
+ "id": "lem-sf-ringed-restriction-exchange-open-descent",
+ "kind": "statement",
+ "title": "Normalized ringed restriction exchange and open descent",
+ "statement": "Let $p:P\\to T$ and $h:T'\\to T$ be morphisms of schemes, let $P'=P\\times_TT'$ with projections $h':P'\\to P$ and $p':P'\\to T'$ [def-pc-scheme; def-pc-fibre-product], and let $R$ be a sheaf of commutative rings on $T_{\\mathrm{proet}}$. Use small site representatives in a common larger universe [def-weil-pbc-proetale-site; def-weil-size-convention]. On $P,T',P'$ use respectively $p^{-1}R,h^{-1}R,h'^{-1}p^{-1}R\\cong p'^{-1}h^{-1}R$. Module inverse image is the exact topos inverse image with its transported action and without extension of scalars [def-weil-proetale-inverse-image; def-weil-sheaf-of-modules-category]. Use ordinary unbounded derived categories and total right derived direct images [def-weil-abstract-derived-category; def-sfb-right-derived-functor].\n\nFor a complex $K$ of $p^{-1}R$-module sheaves, let $\\operatorname{bc}_K:h^{-1}p_*K\\to p'_*h'^{-1}K$ be formed termwise as the adjunct of $p'^{-1}h^{-1}p_*K\\cong h'^{-1}p^{-1}p_*K\\to h'^{-1}K$, with the last arrow the counit. Choose K-injective resolutions $a:K\\to I$ and $b:h'^{-1}I\\to J$ [def-pur-kinjective-complex]. The class of\n$$h^{-1}p_*I\\xrightarrow{\\operatorname{bc}_I}p'_*h'^{-1}I\\xrightarrow{p'_*b}p'_*J$$\ndefines a natural morphism $\\operatorname{Ex}_{h,p,K}:h^{-1}Rp_*K\\to Rp'_*h'^{-1}K$, independent of the choices under their canonical derived comparisons. It is the derived counit mate of the canonical pullback-square comparison, for the derived adjunctions $u^{-1}\\dashv Ru_*$ ($u=p,p'$) obtained by deriving the ordinary module adjunctions, i.e. those for which the Hom transpose of the class of every chain map $u^{-1}L\\to I$ into a K-injective complex $I$ is the class of its ordinary transpose $L\\to u_*I$. For a module $M$, writing $\\delta_{p,M}:(p_*M)[0]\\to Rp_*(M[0])$ for the canonical comparison, it satisfies\n$$\\operatorname{Ex}_{h,p,M[0]}\\circ h^{-1}\\delta_{p,M}=\\delta_{p',h'^{-1}M}\\circ\\operatorname{bc}_M[0].$$\n\nFor an open immersion $j:U\\hookrightarrow T$, let $j_P:P_U\\hookrightarrow P$, $j':T'_U\\hookrightarrow T'$, $j_{P'}:P'_U\\hookrightarrow P'$ be its base changes and $p_U,h_U,p'_U,h'_U$ the restricted square. For every scheme map $f:S\\to Z$, sheaf of rings $R_Z$ and open $V\\hookrightarrow Z$, there is an isomorphism $j_V^{-1}Rf_*\\cong Rf_{V,*}j_S^{-1}$ over the actual inverse-image rings, represented on a K-injective $I$ by the section identification $I(S\\times_Z Q)=I(S_V\\times_V Q)$ for $Q\\to V$. Through these open comparisons and the canonical inverse-image composition maps, one has equality of derived morphisms\n$$j'^{-1}\\operatorname{Ex}_{h,p,K}=\\operatorname{Ex}_{h_U,p_U,j_P^{-1}K}.$$\nFor every small open cover $T=\\bigcup_aU_a$, $\\operatorname{Ex}_{h,p,K}$ is invertible if all its restricted exchanges on $T'\\times_TU_a$ are invertible. The exchange for an identity $h$ is the identity under resolution comparisons; empty schemes and zero complexes are included. These assertions require no separatedness, finite type, properness or constructibility assumptions.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FI, lemma-restrict-K-injective-to-open; derived.tex Tag 09T5, lemma-derived-adjoint-functors; proetale.tex Tag 09A5, section-morphism; sites.tex Tag 00XZ, section-localize. Agent expansion of returned proof steps 4, 5, 9 and 10: resolving mate normalization, localization and cover detection."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "def-pur-kinjective-complex",
+  "def-weil-open-immersion",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-strict-tower-operations",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-sf-proetale-open-restriction-data",
+  "def-sf-proetale-ring-identity-comparison",
+  "def-sfb-proetale-composite-coefficients",
+  "def-sf-derived-degree-zero-exchange-equation",
+  "def-sf-ringed-restriction-open-cube"
+ ],
+ "proof": [
+  {
+   "text": "Use the geometric inverse image of [lem-weil-pbc-left-exact-site-inverse-image-tensor] for each scheme map. The forgetful functor in [lem-weil-pbc-module-sheaves-colimits-forgetful] is faithful and exact and computes kernels and cokernels on underlying abelian sheaves. Thus inverse image with its transported action is additive and exact: its underlying functor is the exact abelian inverse image, and a sequence of module sheaves is exact precisely when its underlying sequence is. Apply [lem-weil-pbc-ringed-topoi-module-adjunction] with the structural ring map the identity of the inverse-image ring; tensoring over that ring with itself is the identity, giving the specified ordinary adjunction. The inverse-image composition isomorphisms of [lem-weil-pbc-site-morphism-composition] respect these actions: apply their naturality to the action map and their finite-product comparisons. On the Cartesian square they give $c:p'^{-1}h^{-1}\\cong h'^{-1}p^{-1}$, with the corresponding identification of coefficient rings. Lean coefficient coherence: define the canonical inverse-image compositor with an explicitly specified equal composite scheme map. Conjugation sends it to the corresponding direct-image compositor. The site square is the inverse first compositor followed by the second compositor with the same chosen composite; this follows by substitution in pullbackComp. Since sheaf pushforward transports natural isomorphisms functorially, conjugateIsoEquiv injectivity identifies ringSquareIso with the inverse first ring compositor followed by the second. Evaluating its inverse at R cancels the second compositor, giving actualCoefficients_coherent. HEq transports the original composite maps to the common chosen map, without changing any coefficient isomorphism.",
+   "uses": [
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-site-morphism-composition",
+    "lem-sfb-proetale-open-restriction-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, lemma-adjoint-pullback-pushforward-modules; 04JC, lemma-flat-pullback-exact; sites.tex Tag 03CB, lemma-composition-morphisms-sites."
+   }
+  },
+  {
+   "text": "For transpose_normalization, use the existing exact-left/right-derived adjunction. On homotopy categories its unit satisfies Adjunction.derivedη_fac_app. Expanding homEquiv_unit and applying naturality of the right-derived unit gives the ordinary homotopy transpose followed by that unit. On quotient objects, the degreewise adjunction unit is the quotient of the chain adjunction unit. Transport along quotientCompQhIso and the explicit inverse of rightDerivedFunctorObjQIso proves precisely the stated chain-map transpose normalization. K-injective resolutions and the derived adjunction exist by the recorded dependencies. This replaces the proposed proof through two Hom-set bijections; it proves the actual chosen adjunction has the required normalization.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I, lemma-K-injective; 070K, lemma-enough-K-injectives-implies; 08BJ, lemma-adjoint-preserve-K-injectives; 09T5, lemma-derived-adjoint-functors; sites-cohomology.tex Section 07A5."
+   }
+  },
+  {
+   "text": "Use [lem-sf-ringed-exchange-chain-unit] to obtain exchange_chain on every complex before choosing resolutions. At I the source comparison is the inverse K-injective object comparison. Naturality of the target derived unit at b and cancellation of the two K-injective object comparisons gives the formula for a=id. Naturality of exchange at Q(a) followed by naturality of upperPull.mapDerivedCategoryFactors gives resolution_formula for arbitrary a. No K-injectivity of upperPull(I) is needed.",
+   "uses": [
+    "lem-sf-ringed-exchange-chain-unit",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; Tag 09T5, lemma-derived-adjoint-functors (mate calculation using the normalized adjunction of step 2)."
+   }
+  },
+  {
+   "text": "The equation exchange_chain holds on every complex and the resolution formula holds for every quasi-isomorphism a to a K-injective I and every b from upperPull(I) to a K-injective J. Thus both choices compute the same specified derived mate under their canonical comparison isomorphisms; equality of the two presentations follows by substitution. This replaces a separate construction of chain-level homotopy comparisons.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, including its equivalent quasi-isomorphism-precomposition formulation."
+   }
+  },
+  {
+   "text": "For degreeZero_normalization, evaluate exchange_chainUnit on the single complex M[0]. The ordinary transformation commutes with the single-complex comparisons: prove this degreewise, where degree zero is the original component and all other degrees vanish. Naturality of the target right-derived cochain unit moves the upper single-complex comparison to the ordinary side. Naturality of basePull.mapDerivedCategoryFactors moves the inverse source single-complex comparison to the ordinary side too. Combine the three chain maps using functoriality of Q and the degreewise identity. Expanding degreeZeroComparison and degreeZeroPullIso gives exactly the stated normalization, with no new resolution choices.",
+   "uses": [
+    "lem-sf-ringed-exchange-chain-unit",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070K, lemma-enough-K-injectives-implies; naturality of the derived-functor comparison and ordinary exchange."
+   }
+  },
+  {
+   "text": "For $f:S\\to Z$ and $V\\hookrightarrow Z$, [lem-weil-pbc-proetale-ringed-open-comparison] identifies actual inverse-image module restriction with slice restriction. By [lem-pur-kinjective-restrict-localized-universes], a K-injective $I$ on $S$ restricts to a K-injective $j_S^{-1}I$ on $S_V$. Apply [lem-sfb-proetale-open-restriction-counit] termwise to obtain\n$$j_V^{-1}f_*I\\cong f_{V,*}j_S^{-1}I.$$\nThe right side computes $Rf_{V,*}j_S^{-1}K$ and the left computes $j_V^{-1}Rf_*K$. The displayed isomorphism on an object $Q\\to V$ is precisely $I(S\\times_ZQ)=I(S_V\\times_VQ)$, with identical actions after the inverse-image ring identification. Naturality of this ordinary isomorphism and the canonical homotopy comparisons of [lem-weil-pbc-kinjective-hom-derived] show it descends naturally and independently of $I$. Its counit equation descends too, since it is an equality of chain maps before localization. Lean implementation of K-injective preservation: use the ringed open comparison to identify inverse image with overFunctor followed by the inverse site equivalence. The localized restriction theorem gives K-injective preservation for overFunctor. ScalarExtensionRingIso identifies actual changeOfRings along c with restriction along c.inv; this is the inverse of the scalar equivalence. Equivalences preserve K-injectives, and preservation is stable under composition and natural isomorphism. The chosen Cartesian-square hom_fst makes the upper horizontal map an open immersion, so the same theorem applies there. For open_representative, specialize resolution_formula to a=id and b=id and cancel the two canonical comparison isomorphisms. The preservation argument is now factored into the fully proved functor-level instances [lem-sf-proetale-open-pullback-preserves-kinjective] and [lem-sf-upper-open-pullback-preserves-kinjective]. The existing complex-level theorem signatures remain, and the generic map-complex instance supplies the same inference from these preservation instances. Cancellation in open_representative is performed by a generic two-isomorphism cancellation lemma before specializing to module-sheaf derived categories. The ordinary geometric assertion is factored into [lem-sf-ringed-ordinary-open-exchange]. For open_comparison, apply exchange_chainUnit on a K-injective I. Both cochain units are inverse right-derived object comparisons, since upper open pullback preserves K-injectives. The ordinary exchange is an isomorphism degreewise, so its chain map and its image under Q are isomorphisms. The chain-unit equation and cancellation show exchange at QI invertible. Resolve a representative of an arbitrary derived object K and transport invertibility along QI isomorphic to K by naturality. This proves the entire derived half from the ordinary geometric assertion, without a new derived comparison or choice of a natural inverse. For open_sectionwise, use the existing proEtaleOpenRestrictionCounit to obtain beta with its Sectionwise formula and an alpha with AlphaNormalization and CounitEquation. Apply lem-sf-ringed-open-square-unit-normalization to the inverse of the selected actual-ring module square. The two alphas have equal transposes under the composite ordinary adjunction: their sectionwise unit normalizations are identical. Injectivity of homEquiv therefore identifies alpha with the inverse selected square. Apply injectivity of the target ordinary adjunction transpose to beta and ordinary(actualSquare), cancel alpha, and use CounitEquation and mateEquiv_counit. This proves equality of the natural transformations, while retaining the existing Sectionwise formula unchanged.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-comparison",
+    "lem-pur-kinjective-restrict-localized-universes",
+    "lem-sfb-proetale-open-restriction-counit",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "lem-sf-proetale-open-pullback-preserves-kinjective",
+    "lem-sf-upper-open-pullback-preserves-kinjective",
+    "lem-sf-ringed-ordinary-open-exchange",
+    "lem-sf-ringed-open-square-unit-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; proetale.tex Tag 09A5, section-morphism; sites.tex Tag 00XZ, section-localize."
+   }
+  },
+  {
+   "text": "Apply restriction_exchange_cube to the specified OpenCube. This proved derived-cube helper localizes the ordinary inverse-image cube, identifies the six canonical comparisons, and takes the four exchange mates. Unfolding the pullSquare abbreviation gives exactly the open_restriction equation; its openness hypothesis is not needed for this equality.",
+   "uses": [
+    "lem-sf-ringed-restriction-derived-cube"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Cartesian base faces identify each local base open with the pullback of the covering open of Y. The pullback range formula and the chosen Cartesian isomorphisms show these opens cover Y prime. For every a, open_comparison makes exchange of the source and target open faces invertible. The pullSquare maps are isomorphisms, and localIso makes the remaining local exchange invertible. Rewrite open_restriction and cancel the invertible target-face exchange and upper pullSquare comparison: native restriction of the global exchange to each local base open is invertible. Apply [lem-sf-proetale-ringed-open-cover-reflects-iso] with the coefficient rings and isomorphisms stored in OpenCube. This proves open_descent for arbitrary complexes, including empty covers, without separately constructing derived models of all slice categories.",
+   "uses": [
+    "lem-sf-proetale-ringed-open-cover-reflects-iso",
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "sites.tex Tag 00XZ, section-localize; sites-cohomology.tex Tag 0EYZ, section-localization (restriction to slices as a morphism of topoi), applied to open slice restrictions; invertibility local on a covering sieve as in the cited node."
+   }
+  },
+  {
+   "text": "When $h=1_T$, identify the square with the identity square and choose $J=I$, $b=1$. The ordinary exchange is $1_{p_*I}$: its transpose is the counit, which is also the transpose of the identity by the adjunction triangle. The formula of step 3 is therefore the identity, and step 4 handles arbitrary resolution choices. For the zero complex choose the zero resolution. The empty-site module categories are zero categories (the empty covering forces the unique section), so all formulas and the empty-cover case hold there as well. No step has used separatedness, finite type, properness, constructibility, boundedness or a constant coefficient ring. identityDirect_existsUnique is constructed directly by SheafOfModules.pushforwardCongr₂ along the inverse of pullbackId, followed by pushforwardId. The unit equation for the adjunction-conjugate coefficient ringId identifies its structural map with the canonical direct-image identity. The construction has the required section formula definitionally. Equality on all module sections proves uniqueness. For identityCoefficients_coherent, conjugate the generalized compositors for id followed by p and p followed by id. The unit laws for pullbackComp and the adjunction conjugation laws identify these with the left and right unitors followed by the canonical inverse-image identity comparisons. Evaluate at the ring sheaf. Naturality of the identity comparison moves the given coefficient map c through the left expression; cancellation of each identity comparison with its inverse makes both expressions equal to c. HEq again transports to the common composite p. The remaining identity exchange normalization retains the preceding plan.",
+   "uses": [
+    "lem-weil-pbc-site-morphism-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XZ, section-localize; identity/counit adjunction triangle and zero objects."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-sfb-proetale-open-restriction-counit",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-ringed-exchange-chain-unit",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "lem-pur-kinjective-restrict-localized-universes",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-sf-proetale-open-pullback-preserves-kinjective",
+  "lem-sf-upper-open-pullback-preserves-kinjective",
+  "lem-sf-ringed-ordinary-open-exchange",
+  "lem-sf-ringed-open-square-unit-normalization",
+  "lem-sf-ringed-restriction-derived-cube",
+  "lem-sf-proetale-ringed-open-cover-reflects-iso",
+  "lem-weil-pbc-base-change-image"
+ ],
+ "proof_origin": {
+  "by": "worker J4",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Step 7 follows the ordinary inverse-image cube through exact localization and exchangeMate_cube, factored into a proved helper module to keep every compile below 60 seconds."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived base change mate for modules over actual inverse image rings is computed by two K injective resolutions commutes with open restriction and is an isomorphism if locally so",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this continuous-coefficient module-derived comparison, normalized exchange localization, or global stratification assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski local compatibility of the counit normalized derived restriction map for direct images of sheaves of modules on pro etale sites",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.ofRestrict_app; AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this continuous-coefficient module-derived comparison, normalized exchange localization, or global stratification assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"rightDerived\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this continuous-coefficient module-derived comparison, normalized exchange localization, or global stratification assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]ase[Cc]hange|[Kk]Injective|[Kk]injective",
+   "results": "[grep] OK 25 hit(s); Mathlib/CategoryTheory/Sites/Pretopology.lean:287:     [J.IsStableUnderBaseChange] [J.IsStableUnderComposition] : Pretopology C where; Mathlib/CategoryTheory/Sites/MorphismProperty.lean:57: instance [P.IsStableUnderBaseChange] : P.precoverage.IsStableUnderBaseChange where; Mathlib/CategoryTheory/Sites/MorphismProperty.lean:95: def coverage (P : MorphismProperty C) [P.IsStableUnderBaseChange] [P.HasPullbacks] :; Mathlib/CategoryTheory/Sites/MorphismProperty.lean:107: abbrev grothendieckTopology (P : MorphismProperty C) [P.IsStableUnderBaseChange] [P.HasPullbacks] :; Mathlib/CategoryTheory/Sites/MorphismProperty.lean:113: variable [P.IsStableUnderBaseChange] [HasPullbacks C]; Mathlib/CategoryTheory/Sites/MorphismProperty.lean:119: def pretopology (P : MorphismProperty C) [P.IsMultiplicative] [P.IsStableUnderBaseChange] :; Mathlib/CategoryTheory/Sites/Continuous.lean:318:     (K : Precoverage D) [J.IsStableUnderBaseChange] [J.HasPullbacks] [K.IsStableUnderBaseChange]; Mathlib/CategoryTheory/Sites/Precoverage.lean:30: - `CategoryTheory.Precoverage.IsStableUnderBaseChange`: The pullback of a covering presieve is again; Mathlib/CategoryTheory/Sites/Precoverage.lean:95: class IsStableUnderBaseChange (J : Precoverage C) : Prop where; Mathlib/CategoryTheory/Sites/Precoverage.lean:132: lemma mem_coverings_of_isPullback {J : Precoverage C} [IsStableUnderBaseChange J]; Mathlib/CategoryTheory/Sites/Precoverage.lean:145:   · refine IsStableUnderBaseChange.mem_coverings_of_isPullback (fun i ↦ f (a i)) ?_ g _; Mathlib/CategoryTheory/Sites/Precoverage.lean:189: lemma pullbackArrows_mem {J : Precoverage C} [IsStableUnderBaseChange J]; Mathlib/CategoryTheory/Sites/Hypercover/Subcanonical.lean:77: variable [Limits.HasPullbacks C] [J.IsStableUnderBaseChange]; Mathlib/CategoryTheory/Sites/Hypercover/Subcanonical.lean:83:   refine .mk_of_isStableUnderBaseChange fun {X Y} f 𝒰 (H : ∀ i, IsIso _) ↦ ⟨?_, ?_, ?_⟩; Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean:26: stronger axioms than pretopologies (`J.HasIsos`, `J.IsStableUnderBaseChange`,; Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean:382:   [J.HasIsos] [J.IsStableUnderBaseChange] [J.IsStableUnderComposition]; Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean:385: /-- If a precoverage satisfies `HasIsos`, `IsStableUnderBaseChange` and; Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean:407: /-- If a precoverage satisfies `HasIsos`, `IsStableUnderBaseChange` and; Mathlib/CategoryTheory/Sites/Hypercover/ZeroFamily.lean:99: lemma Precoverage.IsStableUnderBaseChange.of_preZeroHypercoverFamily_of_isClosedUnderIsomorphisms; Mathlib/CategoryTheory/Sites/Hypercover/ZeroFamily.lean:104:     Precoverage.IsStableUnderBaseChange P.precoverage where; Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean:170: variable [K.HasIsos] [K.IsStableUnderBaseChange] [K.IsStableUnderComposition]; Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean:721: def pullback₁ [J.IsStableUnderBaseChange] (f : S ⟶ T) (E : ZeroHypercover.{w} J T); Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean:730: def pullback₂ [J.IsStableUnderBaseChange] (f : S ⟶ T) (E : ZeroHypercover.{w} J T); Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean:749: def inter [J.IsStableUnderBaseChange] [J.IsStableUnderComposition] (E : ZeroHypercover.{w} J T); Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean:904:     [IsStableUnderBaseChange J] [∀ (i : E.I₀), HasPullback f (E.f i)] :",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this continuous-coefficient module-derived comparison, normalized exchange localization, or global stratification assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction exchange of ringed topoi using K injective resolutions commutes with open localization and degree zero unit comparison",
+   "results": "[leansearch] OK 8 hit(s); TopCat.Presheaf.restrictOpenCommRingCat_apply; AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso; AlgebraicGeometry.LocallyRingedSpace.restrict; KaehlerDifferential.isLocalizedModule_map; AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec; AlgebraicGeometry.LocallyRingedSpace.restrict_presheaf_obj; CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this continuous-coefficient module-derived comparison, normalized exchange localization, or global stratification assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective|exchange|baseChange",
+   "results": "15 hits: Mathlib/CategoryTheory/Abelian/Monomorphisms.lean; Mathlib/CategoryTheory/Abelian/Monomorphisms.lean; Mathlib/CategoryTheory/Abelian/Monomorphisms.lean; Mathlib/CategoryTheory/Abelian/Monomorphisms.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; source directory CategoryTheory/Abelian",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adjunctions and generic derived adjunction constructions do not state the full normalized pro-etale exchange, degree-zero equation and open descent assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KInjective\", \"Adjunction\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adjunctions and generic derived adjunction constructions do not state the full normalized pro-etale exchange, degree-zero equation and open descent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change counit mate for sheaves of modules computed with K injective resolutions and compatible with restriction to an open subscheme",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.sheafificationCompPullback; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adjunctions and generic derived adjunction constructions do not state the full normalized pro-etale exchange, degree-zero equation and open descent assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change exchange for module sheaves over inverse image rings agrees with counit mate and commutes with open restriction",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adjunctions and generic derived adjunction constructions do not state the full normalized pro-etale exchange, degree-zero equation and open descent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived direct image base change morphism obtained by deriving an adjunction and its degree zero comparison unit",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedη; CategoryTheory.Adjunction.derivedε; CategoryTheory.Adjunction.derived_unit; CategoryTheory.Adjunction.derived'_unit; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.Adjunction.derivedε_fac_app",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adjunctions and generic derived adjunction constructions do not state the full normalized pro-etale exchange, degree-zero equation and open descent assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-continuous-adic-proper-base-change-restriction",
+  "date": "2026-10-22",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Continuous-module proper exchange realization for prop-functor-package clause 2: returned proof steps 4, 5, 9 and 10 of lem-sf-continuous-adic-proper-base-change-restriction; independent normalized ringed restriction exchange and open descent argument.",
+   "via": [
+    "lem-sf-continuous-adic-proper-base-change-restriction",
+    "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-ringed-restriction-exchange-open-descent",
+  "worker": "stage1",
+  "summary": "Proved the normalized exchange formula, choice independence, degree-zero comparison, open restriction and cover detection from existing generic ringed-site/K-injective nodes. Nine explicit steps, no new nodes and no statement change.",
+  "blueprint": "The inherited blueprint ancestor is null (blueprint_refs ancestor confirms). This is the normalization/open-locality part of the continuous-module exchange realization of prop-functor-package clause 2 in sk-thm-sf-package, through the inherited created.item chain; the unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic ringed-site or homological algebra tool: geometric inverse image is exact on abelian sheaves. No theorem of the package unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic ringed-site or homological algebra tool: underlying abelian sheaves detect exactness. No theorem of the package unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic ringed-site or homological algebra tool: module adjunction over actual inverse-image rings. No theorem of the package unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Generic ringed-site or homological algebra tool: canonical composition maps compatible with adjunctions. No theorem of the package unit replaces this general tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ringed-site or homological algebra tool: unbounded resolutions on arbitrary small ringed sites. No theorem of the package unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic ringed-site or homological algebra tool: computation of total right derived functors on K-injectives. No theorem of the package unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic ringed-site or homological algebra tool: exact-left-adjoint criterion. No theorem of the package unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic ringed-site or homological algebra tool: Hom into K-injectives and comparison homotopy equivalences. No theorem of the package unit replaces this general tool."
+   },
+   {
+    "node": "lem-sp-kinjective-comparison-principle",
+    "why": "Generic ringed-site or homological algebra tool: lifting comparisons against quasi-isomorphisms. No theorem of the package unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-comparison",
+    "why": "Generic ringed-site or homological algebra tool: actual inverse-image rings and open slice equivalence. No theorem of the package unit replaces this general tool."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized-universes",
+    "why": "Generic ringed-site or homological algebra tool: unbounded slice restriction preserves K-injectives. No theorem of the package unit replaces this general tool."
+   },
+   {
+    "node": "lem-sfb-proetale-open-restriction-counit",
+    "why": "Generic ringed-site or homological algebra tool: ordinary open comparison and its exact counit equation. No theorem of the package unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-restriction-local-iso",
+    "why": "Generic ringed-site or homological algebra tool: cover-local detection in the unbounded derived module category. No theorem of the package unit replaces this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-site-morphism-composition",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "lem-pur-kinjective-restrict-localized-universes",
+  "lem-sfb-proetale-open-restriction-counit"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-300270479",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-300270479 (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps and the statements of all 14 cited nodes in full. The statement is the base text: the clause on the Hom-transpose normalization was Q40's accepted FIX. The delivery creates no new nodes, the graph has no cycle, and proof_deps equal the union of the step uses. Steps 3, 4, 5 and 7 check out when written out: the transpose of the mate is p'_*b∘bc_I, the uniqueness of s and t gives independence of the resolutions, naturality of bc at a gives the degree-zero equation, and the counit equation of lem-sfb-proetale-open-restriction-counit with the uniqueness of compositors in site-morphism-composition gives the restriction equality. Step 2 meets every hypothesis of the cited nodes: inverse image is exact by step 1, so u_*I stays K-injective, and the site is small. Step 8 meets every hypothesis of lem-weil-pbc-ringed-restriction-local-iso through the covering sieve and the open-slice comparison. Edge cases tested: h=id, U=T, U empty, empty schemes, zero ring, K=0, nonseparated or unbounded cases. The Stacks tags 08FI, 09T5, 070I, 070K, 08BJ, 09A5, 00XZ, 03CB, 04JC and 07A5 exist with the labels quoted, and no SGA is cited. All 13 declared tool_uses are generic ringed-site or K-injective tools and are accepted. One fault, B5: the source place of step 8 cited Tag 0944, which is the projection formula. I corrected it to sites.tex 00XZ and sites-cohomology 0EYZ in fixes/dag/nodes/sec-six-functors/lem-sf-ringed-restriction-exchange-open-descent.json; no other field changes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RingedRestrictionExchangeOpenDescent",
+  "declaration": "AlgebraicGeometry.Scheme.RingedRestrictionExchange.resolution_formula",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.pullSquare",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.resolutionIso",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.cartesian",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.actualCoefficients_coherent",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.actualSquare",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.resolution_formula",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.transpose_normalization",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.degreeZeroComparison",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.degreeZeroPullIso",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.degreeZero_normalization",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.open_inverseImage_isKInjective",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.open_upper_isKInjective",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.open_comparison",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.open_sectionwise",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.open_representative",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.openCube_exists",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.open_restriction",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.open_descent",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.identityDirect_existsUnique",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.identityDirect",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.identityPull",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.identityDerivedPull",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.identityCoefficients_coherent",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.identityRings",
+   "AlgebraicGeometry.Scheme.RingedRestrictionExchange.identity_normalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RingedRestrictionExchangeOpenDescent.lean",
+  "statement": "theorem resolution_formula (r : StrictTowerRingedSquare sq) {K I : CochainComplex (proEtaleRingModules X r.RX) ℤ} [I.IsKInjective] (a : K ⟶ I) [QuasiIso a] {J : CochainComplex (proEtaleRingModules X' r.RX') ℤ} [J.IsKInjective] (b : ((upperPull r).mapHomologicalComplex (.up ℤ)).obj I ⟶ J) [QuasiIso b] : (basePull r).mapDerivedCategory.map (resolutionIso r a).hom ≫ (basePull r).mapDerivedCategoryFactors.hom.app (((verticalPush r).mapHomologicalComplex (.up ℤ)).obj I) ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (ordinary r) (.up ℤ)).app I ≫ ((targetPush r).mapHomologicalComplex (.up ℤ)).map b) = (exchange r).app (DerivedCategory.Q.obj K) ≫ (targetPush r).rightDerivedFunctor.map ((upperPull r).mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map (((upperPull r).mapHomologicalComplex (.up ℤ)).map a) ≫ DerivedCategory.Q.map b) ≫ ((targetPush r).rightDerivedFunctorObjQIso J).hom",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "All clauses are supplied by resolution_formula, transpose_normalization, degreeZero_normalization, open_comparison, open_sectionwise, open_representative, open_restriction, open_descent and identity_normalization. actualSquare has exactly the stated inverse-image rings. Transparent aliases use the published ordinary module operations and ambient counit mate; coefficient isomorphisms only transport actions. OpenCube describes shared presentations of the five Cartesian faces, and openCube_exists ensures this adds no assumption. Identity comparisons are selected from a unique sectionwise characterization, not mere existence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80940312e",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Re-delivery of f1c53ce3 (RETURN H2). All corrections made: theorem stmt_deps lem-sfb-proetale-open-restriction-counit, lem-pur-proetale-inverse-image-tensor-comparison and lem-weil-pbc-ringed-square-localization replaced by new existing:true def owners def-sf-proetale-open-restriction-data (14 plain ProEtaleOpenRestriction defs; Sectionwise signature verbatim; TeX matches the bodies) and def-sf-proetale-ring-identity-comparison (ringId = conjugateIsoEquiv of lowerStarId.symm), plus def-sfb-proetale-composite-coefficients (record identical to live); used declarations are all owned by cited def nodes and the closure contains no theorem. def-weil-pbc-ambient-ringed-exchange record is a strict superset of live (2 general declarations added, existing:false and file kept); CondensedAmbientExchange.lean adds only a transitively redundant public import (harmless, advisory). Item Lean differs from f1c5 by one import swap (the dropped module was unused); signatures and verbatim statement unchanged; f1c5's clause-by-clause maths verdict holds, spot re-check done (resolution formula, open descent incl. empty cover, identity case pinned by unique existence, no universe or extra hypotheses). No FIX, so no compile; worker reports clean compiles (21.9 s / 18.0 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261027T050611-L-243018",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

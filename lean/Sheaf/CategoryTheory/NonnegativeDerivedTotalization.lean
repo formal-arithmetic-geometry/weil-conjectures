@@ -13,10 +13,8 @@ public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import WeilConjectures.Algebra.Homology.FirstQuadrantTotalComparison
-import Sheaf.CategoryTheory.DerivedInjectiveResolutionNaturality
-import Sheaf.CategoryTheory.KInjectiveComputes
-import Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution
+import Sheaf.CategoryTheory.CosimplicialInjectiveTotalReplacement
+import Sheaf.CategoryTheory.ResolvedTotalAugmentationSquare
 
 /-!
 # Derived totalization of nonnegative cosimplicial complexes
@@ -201,6 +199,28 @@ structure NonnegativeDerivedTotalizationComparison where
         eA.hom ≫ (nonnegativeComplexLocalization D).map
           ((F.mapHomologicalComplex (ComplexShape.up ℕ)).map aI ≫ (beta R.diagram).hom))
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem nonnegative_unit_naturality
+    {A B : CochainComplex C ℕ} (f : A ⟶ B) :
+    (nonnegativeComplexLocalization D).map
+        ((F.mapHomologicalComplex (ComplexShape.up ℕ)).map f) ≫
+        nonnegativeRightDerivedUnit F B =
+      nonnegativeRightDerivedUnit F A ≫
+        F.rightDerivedFunctor.map ((nonnegativeComplexLocalization C).map f) := by
+  have h := (ComplexShape.embeddingUpNat.mapExtendFunctorNatIso F).inv.naturality f
+  change HomologicalComplex.extendMap
+      ((F.mapHomologicalComplex (ComplexShape.up ℕ)).map f) ComplexShape.embeddingUpNat ≫
+        (B.mapExtendIso ComplexShape.embeddingUpNat F).inv =
+      (A.mapExtendIso ComplexShape.embeddingUpNat F).inv ≫
+        (F.mapHomologicalComplex (ComplexShape.up ℤ)).map
+          (HomologicalComplex.extendMap f ComplexShape.embeddingUpNat) at h
+  dsimp only [nonnegativeRightDerivedUnit, nonnegativeComplexLocalization, Functor.comp_map,
+    ComplexShape.Embedding.extendFunctor]
+  rw [← Category.assoc, ← DerivedCategory.Q.map_comp, h, DerivedCategory.Q.map_comp,
+    Category.assoc, F.rightDerivedFunctorUnitQ_naturality]
+  simp only [Category.assoc]
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Right derivation commutes with coherent nonnegative cosimplicial totalization.
 Source: Stacks Tags 0141, 070J and 015J, with the node's strict cosimplicial extension
 (blueprint: lem-sfb-nonnegative-derived-totalization).
@@ -234,6 +254,157 @@ Proof:
 theorem nonnegative_derived_totalization
     [IsGrothendieckAbelian.{v} C] [IsGrothendieckAbelian.{v'} D]
     [PreservesFiniteLimits F] : Nonempty (NonnegativeDerivedTotalizationComparison F) := by
-  sorry
+  classical
+  obtain ⟨⟨I, η, hη, hI, _, _, _⟩, htotal, _⟩ :=
+    exists_cosimplicial_injective_total_replacement C
+  obtain ⟨S⟩ := resolved_total_augmentation_square F
+  let Q := nonnegativeComplexLocalization C
+  let Q' := nonnegativeComplexLocalization D
+  let T := nonnegativeCosimplicialTotal C
+  let M := F.mapHomologicalComplex (ComplexShape.up ℕ)
+  let R : ∀ K, NonnegativeCosimplicialResolution C K := fun K ↦
+    ⟨K ⋙ I, Functor.whiskerLeft K η, fun n ↦ hη (K.obj n),
+      fun n q ↦ hI (K.obj n) q⟩
+  have hQ : ∀ {A B : CochainComplex C ℕ} (f : A ⟶ B),
+      QuasiIso f → IsIso (Q.map f) := by
+    intro A B f hf
+    have := hf
+    change IsIso (DerivedCategory.Q.map (HomologicalComplex.extendMap f
+      ComplexShape.embeddingUpNat))
+    infer_instance
+  have hu : ∀ (K : CosimplicialObject (CochainComplex C ℕ))
+      (R : NonnegativeCosimplicialResolution C K), IsIso (F.rightDerivedFunctor.map
+        (Q.map (T.map R.augmentation))) := by
+    intro K R
+    have ht : QuasiIso (T.map R.augmentation) := htotal _ _ _ R.quasiIso
+    have := hQ _ ht
+    infer_instance
+  let χ := fun K (R : NonnegativeCosimplicialResolution C K) ↦
+    have := hu K R
+    asIso (F.rightDerivedFunctor.map (Q.map (T.map R.augmentation))) ≪≫
+      S.rho (T.obj R.diagram) (S.totalInjective R.diagram R.injective) ≪≫
+      Q'.mapIso (S.beta R.diagram)
+  let c := fun K (R : NonnegativeCosimplicialResolution C K) n ↦
+    have := hQ (R.augmentation.app n) (R.quasiIso n)
+    F.rightDerivedFunctor.mapIso (asIso (Q.map (R.augmentation.app n))) ≪≫
+      S.rho (R.diagram.obj n) (R.injective n)
+  have hrho : ∀ (A : CochainComplex C ℕ) (hA : ∀ q, Injective (A.X q)),
+      (S.rho A hA).inv = nonnegativeRightDerivedUnit F A := by
+    intro A hA
+    exact S.rho_inverse A hA
+  have hc : ∀ K (R : NonnegativeCosimplicialResolution C K) n,
+      (c K R n).hom ≫ nonnegativeRightDerivedUnit F (R.diagram.obj n) =
+        F.rightDerivedFunctor.map (Q.map (R.augmentation.app n)) := by
+    intro K R n
+    dsimp only [c, Iso.trans_hom, Functor.mapIso_hom, asIso_hom]
+    rw [← hrho _ (R.injective n)]
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  have hρ : ∀ {A B : CochainComplex C ℕ} (f : A ⟶ B)
+      (hA : ∀ q, Injective (A.X q)) (hB : ∀ q, Injective (B.X q)),
+      F.rightDerivedFunctor.map (Q.map f) ≫ (S.rho B hB).hom =
+        (S.rho A hA).hom ≫ Q'.map (M.map f) := by
+    intro A B f hA hB
+    apply (cancel_mono (S.rho B hB).inv).1
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+    rw [hrho, nonnegative_unit_naturality]
+    rw [← hrho A hA]
+    simp
+    rfl
+  have hunit : ∀ (A : CochainComplex C ℕ) (hA : ∀ q, Injective (A.X q)),
+      IsIso (nonnegativeRightDerivedUnit F A) := by
+    intro A hA
+    rw [← hrho A hA]
+    infer_instance
+  refine ⟨{
+    replacement := fun K ↦ ⟨R K⟩
+    mapReplacement := ?_
+    beta := S.beta
+    beta_summand := S.beta_summand
+    chi := χ
+    normalized := ?_
+    naturality := ?_
+    unique := ?_
+    column := ?_
+    column_normalized := ?_
+    augmentedReplacement := ?_
+    augmentation := ?_
+  }⟩
+  · intro K L f
+    refine ⟨R K, R L, Functor.whiskerRight f I, ?_⟩
+    apply NatTrans.ext
+    funext n
+    exact (η.naturality (f.app n)).symm
+  · intro K R
+    dsimp only [χ, Iso.trans_hom, asIso_hom, Functor.mapIso_hom]
+    simp only [Category.assoc]
+    have hbeta := (Q'.mapIso (S.beta R.diagram)).hom_inv_id
+    dsimp only [Functor.mapIso_hom, Functor.mapIso_inv] at hbeta
+    erw [reassoc_of% hbeta]
+    change F.rightDerivedFunctor.map (Q.map (T.map R.augmentation)) ≫
+      (S.rho (T.obj R.diagram) (S.totalInjective R.diagram R.injective)).hom ≫
+        nonnegativeRightDerivedUnit F (T.obj R.diagram) =
+      F.rightDerivedFunctor.map (Q.map (T.map R.augmentation))
+    erw [← hrho (T.obj R.diagram) (S.totalInjective R.diagram R.injective)]
+    simp
+  · intro K L R S' f g h
+    have hh := congrArg (fun t ↦ F.rightDerivedFunctor.map (Q.map (T.map t))) h
+    simp only [Functor.map_comp] at hh
+    have hb := congrArg (fun t ↦ Q'.map t) (S.beta_naturality g)
+    simp only [Functor.map_comp] at hb
+    dsimp only [χ, Iso.trans_hom, asIso_hom, Functor.mapIso_hom]
+    simp only [Category.assoc]
+    rw [← Category.assoc, ← Category.assoc, ← Category.assoc, ← hh]
+    simp only [Category.assoc]
+    rw [reassoc_of% (hρ (T.map g) (S.totalInjective R.diagram R.injective)
+      (S.totalInjective S'.diagram S'.injective))]
+    apply congrArg (fun t ↦ F.rightDerivedFunctor.map (Q.map (T.map R.augmentation)) ≫
+      (S.rho (T.obj R.diagram) (S.totalInjective R.diagram R.injective)).hom ≫ t)
+    exact hb
+  · intro K R e he
+    have := hunit (T.obj R.diagram) (S.totalInjective R.diagram R.injective)
+    apply Iso.ext
+    apply (cancel_mono (Q'.map (S.beta R.diagram).inv ≫
+      nonnegativeRightDerivedUnit F (T.obj R.diagram))).1
+    rw [he]
+    dsimp only [χ, Iso.trans_hom, asIso_hom, Functor.mapIso_hom]
+    simp only [Category.assoc]
+    have hbeta := (Q'.mapIso (S.beta R.diagram)).hom_inv_id
+    dsimp only [Functor.mapIso_hom, Functor.mapIso_inv] at hbeta
+    erw [reassoc_of% hbeta]
+    change F.rightDerivedFunctor.map (Q.map (T.map R.augmentation)) =
+      F.rightDerivedFunctor.map (Q.map (T.map R.augmentation)) ≫
+        (S.rho (T.obj R.diagram) (S.totalInjective R.diagram R.injective)).hom ≫
+          nonnegativeRightDerivedUnit F (T.obj R.diagram)
+    erw [← hrho (T.obj R.diagram) (S.totalInjective R.diagram R.injective)]
+    simp
+  · intro K R
+    refine NatIso.ofComponents (fun n ↦ c K R n) ?_
+    intro n m f
+    have := hunit (R.diagram.obj m) (R.injective m)
+    apply (cancel_mono (nonnegativeRightDerivedUnit F (R.diagram.obj m))).1
+    dsimp only [Functor.comp_map]
+    rw [Category.assoc, hc, Category.assoc, nonnegative_unit_naturality,
+      ← Category.assoc, hc, ← Functor.map_comp, ← Q.map_comp,
+      ← Functor.map_comp, ← Q.map_comp, R.augmentation.naturality]
+  · intro K R n
+    exact hc K R n
+  · intro A K b
+    refine ⟨I.obj A, η.app A, R K,
+      (Functor.constComp (J := SimplexCategory) A I).inv ≫ Functor.whiskerRight b I,
+      hη A, hI A, ?_⟩
+    intro n
+    simpa [R] using η.naturality (b.app n)
+  · intro A I r K R b c' hr hI hcomm
+    have := (S.comparison_isIso r R.augmentation hI R.injective hr R.quasiIso).1
+    refine ⟨S.augmentation b, S.augmentation c',
+      asIso (S.toResolvedTotalAugmentationData.sourceComparison r hI),
+      S.augmentation_component b, S.augmentation_component c', ?_, ?_⟩
+    · dsimp only [asIso_hom, ResolvedTotalAugmentationData.sourceComparison]
+      simp only [Category.assoc]
+      change F.rightDerivedFunctor.map (Q.map r) ≫ (S.rho I hI).hom ≫
+        nonnegativeRightDerivedUnit F I = F.rightDerivedFunctor.map (Q.map r)
+      rw [← hrho I hI]
+      simp
+    · exact S.square b c' r R.augmentation hI R.injective hr R.quasiIso hcomm
 
 end CategoryTheory

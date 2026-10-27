@@ -1,0 +1,403 @@
+{
+ "id": "lem-sfb-finite-subextension-continuous-cochain-quasi-isomorphism",
+ "kind": "statement",
+ "title": "Finite-subextension continuous cochains detect all cocycles and boundaries",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended norm topology, a finite intermediate field $E$, a profinite group $G$ (compact Hausdorff and totally disconnected), and a finite-dimensional norm-topological $E$-vector space $W$ with jointly continuous $E$-linear $G$-action. For every finite intermediate $E\\subseteq F\\subseteq\\Omega$, and for $F=\\Omega$, put $V_F=F\\otimes_E W$ with its finite product norm topology. The action is through $W$ and is trivial on $F$. All universes are as in [def-weil-size-convention]. Define $C^n_{\\mathrm{cts}}(G,V_F)=C(G^n,V_F)$ for $n\\geq0$, including $C^0_{\\mathrm{cts}}=V_F$, with the differential\n$$(df)(g_1,\\ldots,g_{n+1})=g_1f(g_2,\\ldots,g_{n+1})+\\sum_{a=1}^n(-1)^af(g_1,\\ldots,g_ag_{a+1},\\ldots,g_{n+1})+(-1)^{n+1}f(g_1,\\ldots,g_n),$$\nand $(dv)(g)=gv-v$ for $n=0$. This is the continuous cochain convention of [lem-sfb-continuous-cochain-finite-index-transfer]. Put $C^\\bullet_{\\mathrm{fin}}(G,V_\\Omega)=\\bigcup_{F\\supseteq E}C^\\bullet_{\\mathrm{cts}}(G,V_F)$ inside $C^\\bullet_{\\mathrm{cts}}(G,V_\\Omega)$; each cochain must take all its values in one finite $V_F$. Both complexes vanish in negative degrees and have cohomology equal to kernel modulo image in abstract $E$-vector spaces, without closure of images [def-weil-abstract-derived-category].\n\nThe actual inclusion $i:C^\\bullet_{\\mathrm{fin}}(G,V_\\Omega)\\hookrightarrow C^\\bullet_{\\mathrm{cts}}(G,V_\\Omega)$ is a quasi-isomorphism. More explicitly, its map on $H^0$ is the identity on $V_\\Omega^G$; for every $n\\geq1$, a cocycle in $C^n_{\\mathrm{fin}}$ which has a continuous $V_\\Omega$-valued primitive has a primitive taking all its values in one finite $V_F$, and every continuous $V_\\Omega$-valued $n$-cocycle is cohomologous to a cocycle taking all its values in one finite $V_F$. Thus $Q(i)$ is an isomorphism in the ordinary derived category $D(\\mathbf{Ab})$. No bound on $n$, finite generation or cohomological dimension of $G$, completeness of $\\Omega$, or discreteness of $W$ is assumed. This statement concerns explicit continuous cochains, without identifying them with internal condensed right derived invariants.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), arithmetic coefficient topology: old item steps 5–7, degree zero, continuous finite-field retractions for boundaries, local cocycle descent and finite-index transfer. Agent-formulated obligation; exact reference WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "lem-sfb-continuous-cochain-finite-index-transfer",
+  "def-weil-abstract-derived-category",
+  "def-pod-l-adic-representations"
+ ],
+ "proof": [
+  {
+   "text": "Choose an $E$-basis of $W$ of size $d$, so the stipulated product topologies identify $V_L$ with $L^d$. Every action matrix has entries in $E$, hence the displayed differential preserves cochains with values in each $F^d$; inclusions commute with the differential. Two finite fields lie in their compositum, which is finite since its degree is at most the product of their degrees. Thus the union is a subcomplex. Every vector of $\\Omega^d$ has finitely many algebraic coordinates, generating a finite extension of $E$. Consequently $C^0_{\\mathrm{fin}}=V_\\Omega=C^0_{\\mathrm{cts}}$, and the degree-zero kernels are both $V_\\Omega^G$. Both complexes vanish in negative degrees.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed complex and differential (lines 9007–9033); elementary finite-field subcomplex and H0 calculation by Q49."
+   }
+  },
+  {
+   "text": "Let $n\\geq1$ and let $z\\in C^n_{\\mathrm{fin}}$ satisfy $dz=0$ and $z=db$ for a continuous $V_\\Omega$-valued $(n-1)$-cochain $b$. Choose one finite $F\\supseteq E$ containing every value of $z$. By [lem-sfb-finite-subfield-continuous-linear-retraction] there is a continuous $E$-linear retraction $p_F:\\Omega\\to F$. Apply [lem-sfb-finite-scalar-cochain-retraction] with $L=\\Omega$, this $p_F$, and the chosen coordinates. All field inclusions are continuous for the restricted absolute value, and the original $E^d$-action is jointly continuous by hypothesis. Its coordinate map $P$ is equivariant, continuous, fixes $F^d$ and satisfies $dP_*=P_*d$. Hence $d(P_*b)=P_*z=z$. This primitive takes all its values in that same finite $F^d$, proving injectivity of $H^n(i)$. This includes $n=1$, when $b$ is a single vector.",
+   "uses": [
+    "lem-sfb-finite-subfield-continuous-linear-retraction",
+    "lem-sfb-finite-scalar-cochain-retraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), arithmetic expansion: finite-field retraction of a continuous primitive; original profinite-comparison step 6."
+   }
+  },
+  {
+   "text": "Let $n\\geq1$ and $z\\in Z^n_{\\mathrm{cts}}(G,V_\\Omega)$. By [lem-sfb-local-norm-algcl-cocycle-descent] choose an open $H\\subseteq G$, finite $F\\supseteq E$, cocycle $u\\in C^n_{\\mathrm{cts}}(H,V_F)$ and continuous $b$ with $\\mathrm{res}(z)=ju+db$, where $j:V_F\\hookrightarrow V_\\Omega$. These are exactly its hypotheses and cochain convention. Compactness makes the disjoint open coset cover finite; write $m=[G:H]\\geq1$. Apply [lem-sfb-continuous-cochain-finite-index-transfer] to both coefficient spaces, using its simultaneous naturality for the continuous equivariant inclusion $j$. Let $k$ be its homotopy, with $dk+kd=\\mathrm{cor}_\\Omega\\mathrm{res}-m\\,\\mathrm{id}$ (negate a supplied homotopy if needed). Naturality gives $\\mathrm{cor}_\\Omega(ju)=j\\mathrm{cor}_F(u)$. Since $dz=0$ and transfer is a cochain map,\n$$m z=j\\mathrm{cor}_F(u)+d(\\mathrm{cor}_\\Omega(b)-kz).$$\nThe field $E$ has characteristic zero, so $m^{-1}\\in E$. Thus $v=m^{-1}\\mathrm{cor}_F(u)$ is a continuous cocycle with all values in the one $V_F$, and\n$$z-jv=d\\bigl(m^{-1}(\\mathrm{cor}_\\Omega(b)-kz)\\bigr).$$\nThis proves surjectivity of $H^n(i)$ without taking limits or closing images.",
+   "uses": [
+    "lem-sfb-local-norm-algcl-cocycle-descent",
+    "lem-sfb-continuous-cochain-finite-index-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), arithmetic expansion: local descent, finite-index transfer and division by the index; original profinite-comparison step 7."
+   }
+  },
+  {
+   "text": "Steps 1–3 show that every cohomology map of the actual inclusion is an isomorphism. By [def-weil-abstract-derived-category] this is a quasi-isomorphism, and localization sends it to an isomorphism $Q(i)$ in $D(\\mathbf{Ab})$. The explicit primitive in step 2 and representative in step 3 give the asserted boundary and cocycle clauses. All computations concern the stated abstract kernel/image cohomology; no completeness, dimension bound on group cohomology or condensed derived-invariant comparison enters.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU, definition-unbounded-derived-category, localization at quasi-isomorphisms (lines 3689–3704)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-subfield-continuous-linear-retraction",
+  "lem-sfb-finite-scalar-cochain-retraction",
+  "lem-sfb-local-norm-algcl-cocycle-descent",
+  "lem-sfb-continuous-cochain-finite-index-transfer",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), arithmetic coefficient-topology obligation. Assembly of existing finite-field retraction, local cocycle descent and continuous transfer statements; the blueprint does not contain this analytic argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous finite dimensional E representation of a profinite group the inclusion of finite extension valued cochains into all norm continuous algebraic closure valued cochains is a quasi isomorphism",
+   "results": {
+    "t": "2026-10-22T11:24:33Z",
+    "tool": "leanfinder",
+    "query": "For a continuous finite dimensional E representation of a profinite group the inclusion of finite extension valued cochains into all norm continuous algebraic closure valued cochains is a quasi isomorphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.standardComplex.instQuasiIsoNatεToSingle₀",
+     "Rep.standardComplex.quasiIso_forget₂_εToSingle₀",
+     "Rep.FiniteCyclicGroup.resolution_quasiIso",
+     "ContinuousCohomology.continuousCohomologyZeroIso",
+     "CochainComplex.cm5b.instQuasiIsoIntP",
+     "groupCohomology.isoShortComplexH2_hom",
+     "groupCohomologyIsoExt",
+     "groupCohomology.isoShortComplexH1_hom"
+    ],
+    "digest": "48903550fd471a7c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: discrete Rep standard resolutions, general quasi-isomorphism facts, Galois constructions, Hilbert 90 and low-degree cocycle quotients do not compare finite-field-valued and all norm-continuous algebraic-closure cochains for arbitrary profinite G."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology\", \"quasiIso\"",
+   "results": {
+    "t": "2026-10-22T11:24:31Z",
+    "tool": "loogle",
+    "query": "\"groupCohomology\", \"quasiIso\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: discrete Rep standard resolutions, general quasi-isomorphism facts, Galois constructions, Hilbert 90 and low-degree cocycle quotients do not compare finite-field-valued and all norm-continuous algebraic-closure cochains for arbitrary profinite G."
+  },
+  {
+   "tool": "grep",
+   "query": "(cochain|continuousCohomology|groupCohomology).*(finiteExtension|IntermediateField|PadicAlgCl|quasiIso)|(IntermediateField|PadicAlgCl).*(cochain|Cohomology)",
+   "results": {
+    "t": "2026-10-22T11:24:30Z",
+    "tool": "grep",
+    "query": "(cochain|continuousCohomology|groupCohomology).*(finiteExtension|IntermediateField|PadicAlgCl|quasiIso)|(IntermediateField|PadicAlgCl).*(cochain|Cohomology)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 24,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean",
+     "Mathlib/Algebra/Homology/QuasiIso.lean",
+     "Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+     "Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean"
+    ],
+    "digest": "8318704323228bab"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: discrete Rep standard resolutions, general quasi-isomorphism facts, Galois constructions, Hilbert 90 and low-degree cocycle quotients do not compare finite-field-valued and all norm-continuous algebraic-closure cochains for arbitrary profinite G."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous profinite group cohomology unchanged by restricting algebraic closure valued cochains to functions with image in one finite field extension",
+   "results": {
+    "t": "2026-10-22T11:24:30Z",
+    "tool": "leansearch",
+    "query": "Continuous profinite group cohomology unchanged by restricting algebraic closure valued cochains to functions with image in one finite field extension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "InfiniteGalois.mk_toAlgEquivAux",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "ProfiniteGrp.hom_ext",
+     "ProfiniteGrp.hom_ext_iff",
+     "InfiniteGalois.profiniteGalGrp",
+     "ProfiniteGrp.ofHom_hom",
+     "InfiniteGalois.mulEquivToLimit_symm_continuous",
+     "ProfiniteGrp.Hom.ext_iff"
+    ],
+    "digest": "9ed5a67ec951c80e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: discrete Rep standard resolutions, general quasi-isomorphism facts, Galois constructions, Hilbert 90 and low-degree cocycle quotients do not compare finite-field-valued and all norm-continuous algebraic-closure cochains for arbitrary profinite G."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite subfield valued continuous cocycles detect every cohomology class and every boundary for a profinite group acting through matrices over a finite p adic field",
+   "results": {
+    "t": "2026-10-22T11:24:54Z",
+    "tool": "leanfinder",
+    "query": "Finite subfield valued continuous cocycles detect every cohomology class and every boundary for a profinite group acting through matrices over a finite p adic field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.H1π_eq_zero_iff",
+     "groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units",
+     "groupCohomology.H1ofAutOnUnitsUnique",
+     "groupCohomology.instEpiModuleCatH1π",
+     "continuousCohomology",
+     "groupCohomology.H2π_eq_iff",
+     "groupCohomology.H1π_eq_iff",
+     "groupCohomology.H1_induction_on"
+    ],
+    "digest": "b1765a80fc4b8fa1"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: discrete Rep standard resolutions, general quasi-isomorphism facts, Galois constructions, Hilbert 90 and low-degree cocycle quotients do not compare finite-field-valued and all norm-continuous algebraic-closure cochains for arbitrary profinite G."
+  },
+  {
+   "tool": "grep",
+   "query": "(finiteExtension|IntermediateField|PadicAlgCl).*(cochain|Cohomology)|(cochain|Cohomology).*(IntermediateField|PadicAlgCl)",
+   "results": {
+    "t": "2026-10-23T04:13:52Z",
+    "tool": "grep",
+    "query": "(finiteExtension|IntermediateField|PadicAlgCl).*(cochain|Cohomology)|(cochain|Cohomology).*(IntermediateField|PadicAlgCl)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no finite-subextension coefficient comparison. Semantic hits concern definitions of continuous cohomology, discrete Rep resolutions, Hilbert 90 or solidification. The pinned-source grep finds no such comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousCohomology\", \"quasiIso\"",
+   "results": {
+    "t": "2026-10-23T04:13:52Z",
+    "tool": "loogle",
+    "query": "\"continuousCohomology\", \"quasiIso\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no finite-subextension coefficient comparison. Semantic hits concern definitions of continuous cohomology, discrete Rep resolutions, Hilbert 90 or solidification. The pinned-source grep finds no such comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous group cocycles with normed algebraic closure coefficients descend up to coboundary to a finite extension",
+   "results": {
+    "t": "2026-10-23T04:13:52Z",
+    "tool": "leansearch",
+    "query": "Continuous group cocycles with normed algebraic closure coefficients descend up to coboundary to a finite extension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units",
+     "groupCohomology.exists_mul_galRestrict_of_norm_eq_one",
+     "groupCohomology.cocycles₁",
+     "groupCohomology.cocycles",
+     "groupCohomology.H1ofAutOnUnitsUnique",
+     "groupCohomology.cocycles₁.d₁₂_apply",
+     "ContinuousCohomology.MultiInd.complex",
+     "groupCohomology.mem_cocycles₁_of_comp_eq_d₀₁"
+    ],
+    "digest": "a5843b5e12468346"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no finite-subextension coefficient comparison. Semantic hits concern definitions of continuous cohomology, discrete Rep resolutions, Hilbert 90 or solidification. The pinned-source grep finds no such comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The union of finite subextension valued continuous cochains of a profinite group with finite dimensional p adic coefficients is quasi isomorphic to all algebraic closure valued continuous cochains",
+   "results": {
+    "t": "2026-10-23T04:13:58Z",
+    "tool": "leanfinder",
+    "query": "The union of finite subextension valued continuous cochains of a profinite group with finite dimensional p adic coefficients is quasi isomorphic to all algebraic closure valued continuous cochains",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.standardComplex.instQuasiIsoNatεToSingle₀",
+     "CochainComplex.cm5b.instQuasiIsoIntP",
+     "continuousCohomology",
+     "Rep.standardComplex.quasiIso_forget₂_εToSingle₀",
+     "ContinuousCohomology.homogeneousCochains",
+     "ContinuousCohomology.continuousCohomologyZeroIso",
+     "Rep.FiniteCyclicGroup.resolution_quasiIso",
+     "CondensedMod.IsSolid.isIso_solidification_map"
+    ],
+    "digest": "81274be516ed9422"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no finite-subextension coefficient comparison. Semantic hits concern definitions of continuous cohomology, discrete Rep resolutions, Hilbert 90 or solidification. The pinned-source grep finds no such comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricting continuous group cohomology to cochains taking values in one finite extension of the p adic field preserves cohomology",
+   "results": {
+    "t": "2026-10-23T04:13:59Z",
+    "tool": "leanfinder",
+    "query": "Restricting continuous group cohomology to cochains taking values in one finite extension of the p adic field preserves cohomology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.H1InfRes_X₂",
+     "continuousCohomology",
+     "ContinuousCohomology.homogeneousCochains",
+     "groupCohomology.H1InfRes_X₃",
+     "groupCohomology.coindIso",
+     "ContinuousCohomology.continuousCohomologyZeroIso",
+     "groupCohomology.H1InfRes_X₁",
+     "ContinuousCohomology.MultiInd.complex"
+    ],
+    "digest": "b96258a12c036da8"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no finite-subextension coefficient comparison. Semantic hits concern definitions of continuous cohomology, discrete Rep resolutions, Hilbert 90 or solidification. The pinned-source grep finds no such comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "def continuousCohomology|def homogeneousCochains|continuousCohomologyZeroIso",
+   "results": {
+    "t": "2026-10-23T04:14:48Z",
+    "tool": "grep",
+    "query": "def continuousCohomology|def homogeneousCochains|continuousCohomologyZeroIso",
+    "sub": "Algebra/Category/ContinuousCohomology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no finite-subextension coefficient comparison. Semantic hits concern definitions of continuous cohomology, discrete Rep resolutions, Hilbert 90 or solidification. The pinned-source grep finds no such comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-algcl-derived-invariants-comparison",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), arithmetic coefficient topology: old item steps 5–7, degree zero, continuous finite-field retractions for boundaries, local cocycle descent and finite-index transfer.",
+   "via": [
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-subextension-continuous-cochain-quasi-isomorphism",
+  "worker": "stage1",
+  "group": "Q49",
+  "summary": "Statement and statement dependencies retained. Four-step proof: subcomplex and H0, retraction of primitives, local cocycle descent followed by transfer with an explicit correcting primitive, derived localization. All analytic inputs already exist; no new nodes. Fresh searches recorded alongside inherited searches.",
+  "blueprint": "Main-20261015 direct-images proof paragraph (3), arithmetic coefficient-topology obligation, realizing old profinite-comparison steps 5–7 and localization. Ancestor command returns None; inherited null from.node and full via chain retained. No chapter or unit route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-da42bffda",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-da42bffda (reviewer sub-agent of L); spot-checked: The item is a four-step assembly with no new nodes. Statement and stmt_deps are byte-identical to the Q27 creation (4916b85c, PASS). Source: main-20261015 direct-images proof paragraph (3), read in full; it only factors Rf_* as Rp_*Rj_*, so proof_origin = agent is correct. No SGA cited, no repair note, so this is a normal first split. Step 1 is elementary: the matrices are over E, the compositum of two finite fields is finite, F's subspace topology in Ω is its own norm topology, a single vector has finitely many algebraic coordinates, and C^0_fin = C^0_cts. Step 2: the finite-subfield retraction gives a continuous E-linear p: Ω→F fixing F. The scalar-cochain retraction then gives an equivariant P with P_*d = dP_*. That node uses the same inhomogeneous differential as lem-sfb-topological-homogeneous-cochain-coordinates, which I checked. So d(P_*b) = z, including n = 1. Step 3: local descent (same hypotheses and convention) gives z|_H = ju + db. Transfer gives cor·res ≃ m·id, with naturality of cor and the homotopy in j. I re-derived mz = j cor_F(u) + d(cor_Ω b − kz); m is invertible because E has characteristic 0, H need not be normal, and the index is finite because H is open. Step 4: quasi-isomorphism and localization from def-weil-abstract-derived-category. Edge cases checked: W = 0, G trivial or finite, n = 0, n = 1, ℓ dividing [G:H], Ω incomplete. The closure has no cycle (58 nodes). All dependencies are in the same unit. No duplicate node found. Batch-5 findings: lem-trf-continuous-linear-map-norm-bound is a general fact (continuous linear maps between normed spaces are bounded) reached through ultrametric Hahn–Banach. def-pod-l-adic-representations is a general definition of representations. Neither is a trace-formula or Poincaré-duality step, so both are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.FiniteSubextensionContinuousCochains",
+  "declaration": "ContinuousCohomology.finiteSubextensionInclusion_quasiIso",
+  "declarations": [
+   "ContinuousCohomology.finiteScalarTopRep",
+   "ContinuousCohomology.finiteScalarTopRep_jointlyContinuous",
+   "ContinuousCohomology.scalarContinuousComplex",
+   "ContinuousCohomology.finiteFieldCochains",
+   "ContinuousCohomology.finiteSubextensionCochains",
+   "ContinuousCohomology.mem_finiteSubextensionCochains",
+   "ContinuousCohomology.finiteSubextensionCochains_d",
+   "ContinuousCohomology.finiteSubextensionComplex",
+   "ContinuousCohomology.finiteSubextensionInclusion",
+   "ContinuousCohomology.finiteSubextensionInclusion_quasiIso",
+   "ContinuousCohomology.finiteSubextensionInclusionAb",
+   "ContinuousCohomology.finiteSubextensionInclusion_derived_isIso"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/FiniteSubextensionContinuousCochains.lean",
+  "statement": "theorem finiteSubextensionInclusion_quasiIso (l : ℕ) [Fact l.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (E : IntermediateField ℚ_[l] Ω) [FiniteDimensional ℚ_[l] E] (G : ProfiniteGrp.{v}) (W : Type w) [AddCommGroup W] [Module E W] (ρ : G →* (W ≃ₗ[E] W)) (hρ : Representation.IsContinuousCoefficient l E G W ρ) : QuasiIso (finiteSubextensionInclusion l Ω E G W ρ hρ) ∧ (∀ v : Ω ⊗[E] W, (∀ g : G, Representation.coefficientScalarExtension E Ω G W ρ g v = v) ↔ ∃! f : finiteSubextensionCochains l Ω E G W ρ hρ 0, (scalarContinuousComplex l Ω E G W ρ hρ).d 0 1 f.val = 0 ∧ ∀ g : Fin 0 → G, f.val g = v) ∧ (∀ (n : ℕ) (z : (scalarContinuousComplex l Ω E G W ρ hρ).X (n + 1)), (scalarContinuousComplex l Ω E G W ρ hρ).d (n + 1) (n + 2) z = 0 → z ∈ finiteSubextensionCochains l Ω E G W ρ hρ (n + 1) → (∃ b : (scalarContinuousComplex l Ω E G W ρ hρ).X n, (scalarContinuousComplex l Ω E G W ρ hρ).d n (n + 1) b = z) → ∃ b : finiteSubextensionCochains l Ω E G W ρ hρ n, (scalarContinuousComplex l Ω E G W ρ hρ).d n (n + 1) b.val = z) ∧ (∀ (n : ℕ) (z : (scalarContinuousComplex l Ω E G W ρ hρ).X (n + 1)), (scalarContinuousComplex l Ω E G W ρ hρ).d (n + 1) (n + 2) z = 0 → ∃ (c : finiteSubextensionCochains l Ω E G W ρ hρ (n + 1)) (b : (scalarContinuousComplex l Ω E G W ρ hρ).X n), (scalarContinuousComplex l Ω E G W ρ hρ).d (n + 1) (n + 2) c.val = 0 ∧ z - c.val = (scalarContinuousComplex l Ω E G W ρ hρ).d n (n + 1) b)",
+  "branch": "sheaf-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Explicit construction of the finite-subextension subcomplex and its actual inclusion, plus the quasi-isomorphism, degree-zero identity through evaluation, both positive-degree clauses, and invertibility of the underlying integer-complex arrow in D(Ab). Helper theorems state the construction properties already asserted by this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-886fccccf",
+  "group": "NY",
+  "result": "pass",
+  "note": "First S2 delivery; dependency records byte-identical to live; only node changes are the used, landed stmt_dep def-pod-l-adic-representations and the lean record, whose statement is verbatim in the file. Clauses checked: Ω NormedField+NormedAlgebra+IsAlgClosure gives the extended norm (no completeness assumed); IsContinuousCoefficient matches the hypothesis on W (spectral-norm topology = restricted Ω topology); V_Ω = Ω⊗W with the module (product) topology and the 1⊗ρ action; V_F = image of F⊗W, a topological embedding; the dependency's continuousInhomogeneousComplex with signs checked (gv−v in degree 0); one-F-per-cochain union via directed ⨆ plus the membership lemma; inclusion is the actual subtype map; QuasiIso plus H0-identity, finite-primitive and finite-representative clauses in every degree ≥1; derived IsIso in D(Ab) per the 2026-10-21 rule. Universes independent. Edge cases W=0, n=0/1, trivial G, F=E, ℓ dividing [G:H], incomplete Ω covered. Docstrings and blueprint tags present, theorems all sorry, no name collisions. No compile (no changes); worker dry run OK. Minor only: unused proof-dependency imports, extra IsAlgClosure instance argument on helper defs."
+ }
+}

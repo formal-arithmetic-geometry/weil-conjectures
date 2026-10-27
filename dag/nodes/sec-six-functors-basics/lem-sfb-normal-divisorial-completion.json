@@ -1,0 +1,436 @@
+{
+ "id": "lem-sfb-normal-divisorial-completion",
+ "kind": "statement",
+ "title": "Normal proper completion with divisorial boundary",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All schemes are separated and of finite type over $k$ [def-weil-finite-type-morphism, def-weil-proper-morphism], where separated means that the diagonal is a closed immersion. Integral means reduced and irreducible [def-pc-integral-scheme]; normal means that all local rings are integrally closed domains. Dimensions are topological Krull dimensions [def-kun-topological-krull-dimension]. Let $Y$ be smooth [def-sbc-smooth-morphisms], connected [def-weil-connected-scheme], nonempty and not proper over $k$. Then $Y$ is integral and there exist a normal integral proper $k$-scheme $X_0$ and a dense open immersion $j_0:Y\\hookrightarrow X_0$ [def-weil-open-immersion]. The reduced complement $E_0=X_0\\setminus j_0(Y)$ is nonempty, and every irreducible component of $E_0$ has dimension $\\dim Y-1$. In particular $\\dim X_0=\\dim Y$ is a positive finite integer.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.25, p.154, referred rational-action proof: Milne (2013), Proposition 4.1 proof, first paragraph (embed, blow up the boundary, normalize), and Aside 5.4 (Nagata can replace quasi-projectivity). Local article WANTED; read https://arxiv.org/html/1311.6060v2. The normal divisorial-completion combination has no single Stacks tag."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-integral-scheme",
+  "def-weil-open-immersion",
+  "def-kun-topological-krull-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sbc-normal-dominant-galois"
+ ],
+ "proof": [
+  {
+   "text": "For every finite-type $k$-scheme $Z$ used below, choose a finite affine cover $\\operatorname{Spec}A_i$ with $A_i$ finitely generated over $k$ [def-weil-finite-type-morphism]. By [lem-wf-affine-noetherian-components], each $A_i$ is Noetherian and each affine space is topologically Noetherian. A descending chain of closed subsets of $Z$ stabilizes on each member of this finite cover, hence stabilizes on $Z$. Thus $Z$ is locally Noetherian and its topology is Noetherian. In particular every open in $Z$ is quasi-compact: otherwise finite unions of members of an open cover would have no maximal member, contradicting stabilization of ascending chains of opens.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-wf-affine-noetherian-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; affine argument and finite-cover assembly"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-smooth-geometrically-normal] to the smooth structure morphism of $Y$, using the trivial field extension: $Y$ is normal and reduced. By [lem-trf-normal-topologically-noetherian-components] and step 1, its irreducible components are a finite disjoint union of open and closed integral schemes. Since $Y$ is connected and nonempty, exactly one component occurs. Hence $Y$ is integral.",
+   "uses": [
+    "lem-trf-smooth-geometrically-normal",
+    "lem-trf-normal-topologically-noetherian-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T, lemma-smooth-geometrically-normal; properties.tex Tag 0357, lemma-normal-locally-finite-nr-irreducibles"
+   }
+  },
+  {
+   "text": "Apply [thm-nagata-compactification] to $Y\\to\\operatorname{Spec}k$. Its separatedness and finite type are hypotheses, and $\\operatorname{Spec}k$ is affine, hence quasi-compact and quasi-separated. By [def-nagata-compactifiable] and [def-nagata-compactification], obtain an open immersion $Y\\hookrightarrow P$ with $P$ proper over $k$. No quasi-projectivity of $Y$ is required.",
+   "uses": [
+    "thm-nagata-compactification",
+    "def-nagata-compactifiable",
+    "def-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0F41, theorem-nagata, applied over a field"
+   }
+  },
+  {
+   "text": "Let $T$ be the reduced induced closed subscheme on $\\overline{|Y|}\\subseteq P$, supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. Its topology is irreducible, being the closure of the irreducible set $|Y|$, and it is reduced, so $T$ is integral. Over the open subscheme $Y$ its defining ideal is zero: the affine description in that node gives the nilradical on every affine open of $Y$, which is zero by step 2. Therefore $Y\\hookrightarrow P$ factors as a dense open immersion into $T$, with its original scheme structure. By [lem-weil-pbc-closed-immersion-proper], $T$ is proper over $k$, hence finite type. Step 1 applies to $T$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3, lemma-reduced-closed-subscheme; morphisms.tex Tag 01W5, lemma-closed-immersion-proper"
+   }
+  },
+  {
+   "text": "Use [lemma-nagata-qc-open-complement-ideal-exists] on the qcqs scheme $T$ and its quasi-compact open $Y$, obtaining a finite-type quasi-coherent ideal $\\mathcal I$ with $V(\\mathcal I)=T\\setminus Y$. Apply [det-nagata-boundary-divisor-cartier]: the blowup $b:B=\\operatorname{Bl}_{\\mathcal I}T\\to T$ is a $Y$-admissible blow-up [def-nagata-admissible-blowup], so by [lemma-nagata-admissible-blowup-over-open] the induced morphism $b^{-1}(Y)=B\\times_TY\\to Y$ is an isomorphism and $Y$ is identified with the open $b^{-1}(Y)\\subseteq B$; moreover $\\mathcal I\\mathcal O_B$ defines an effective Cartier divisor $D$ with support $B\\setminus Y$. The ideal is nonzero since it is the unit ideal over nonempty $Y$. Thus [lem-sfb-integral-blowup-projective-geometry] gives integrality of $B$. By [lemma-nagata-blowup-proper] and [lem-weil-pbc-proper-composition], $B$ is proper over $k$. In particular $B$ is finite type, so step 1 applies.",
+   "uses": [
+    "lemma-nagata-qc-open-complement-ideal-exists",
+    "det-nagata-boundary-divisor-cartier",
+    "def-nagata-admissible-blowup",
+    "lemma-nagata-admissible-blowup-over-open",
+    "lem-sfb-integral-blowup-projective-geometry",
+    "lemma-nagata-blowup-proper",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OS, lemma-blowing-up-gives-effective-Cartier-divisor; Tag 02ND, lemma-blow-up-integral-scheme; properties.tex Tag 01PH, lemma-quasi-coherent-finite-type-ideals"
+   }
+  },
+  {
+   "text": "Let $\\nu:X_0=B^\\nu\\to B$ be the function-field normalization [def-sc-normalization]. Since $B$ is integral, this is also its componentwise normalization [def-weil-pbc-reduced-normalization]. By [lem-sfb-componentwise-normalization-generic-properties], $X_0$ is normal and has exactly one irreducible-component generic point. By [lem-sc-normalization-exists], $\\nu$ is finite and birational, and $X_0$ is proper over $k$, hence finite type. Step 1 and [lem-trf-normal-topologically-noetherian-components] then make $X_0$ a finite disjoint union of integral components; exactly one occurs, so it is integral. Since the open $Y\\subseteq B$ is normal, [lem-sc-normalization-over-normal-locus] identifies $\\nu^{-1}Y$ with $Y$. This gives an open immersion $j_0:Y\\hookrightarrow X_0$, dense because a nonempty open subset of an irreducible space is dense.",
+   "uses": [
+    "def-sc-normalization",
+    "def-weil-pbc-reduced-normalization",
+    "lem-sfb-componentwise-normalization-generic-properties",
+    "lem-sc-normalization-exists",
+    "lem-trf-normal-topologically-noetherian-components",
+    "lem-sc-normalization-over-normal-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035Q, lemma-normalization-normal; Tag 035K, lemma-normalization-localization; Tag 0H7D, lemma-normalization-trivial; varieties.tex Tag 0BXR, lemma-normalization-locally-algebraic"
+   }
+  },
+  {
+   "text": "The extended ideal $\\mathcal I\\mathcal O_{X_0}$ is effective Cartier. Indeed, on an affine open of $B$ where $D$ has equation $t$, the element $t$ is nonzero in the common function field. The normalization [def-sc-normalization] is built from subrings of that field, so the image of $t$ remains nonzero. Since $X_0$ is integral, multiplication by this image is injective on each local ring; this is precisely [def-nagata-effective-cartier-ideal]. These local equations generate the extended ideal and have vanishing set $\\nu^{-1}|D|$: a local ring homomorphism sends a local equation into the target maximal ideal exactly when it belongs to the source maximal ideal. Hence the resulting divisor $D_0$ has support $X_0\\setminus j_0(Y)$.",
+   "uses": [
+    "def-sc-normalization",
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OO, lemma-pullback-effective-Cartier-defined (2), elementary local-equation proof in this birational case"
+   }
+  },
+  {
+   "text": "Give $E_0=X_0\\setminus j_0(Y)$ its reduced induced closed structure using [lem-weil-pbc-reduced-induced-closed-subscheme]. Its support equals $|D_0|$ by step 7. It is nonempty: otherwise the open immersion $j_0$ would be surjective and therefore an isomorphism [def-weil-open-immersion], making $Y$ proper, contrary to hypothesis. By [lem-sc-dimension-locally-algebraic], $\\dim X_0=\\dim Y=:d$, and every nonempty affine open of $X_0$ has dimension $d$ and dimension $d$ at each of its points. By [lem-kun-dimension-finite-type], $d$ is finite; it is nonnegative since $Y$ is nonempty.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-open-immersion",
+    "lem-sc-dimension-locally-algebraic",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21, lemma-dimension-locally-algebraic (3), (6); schemes.tex Tag 01J3, lemma-reduced-closed-subscheme"
+   }
+  },
+  {
+   "text": "Let $C$ be any irreducible component of $E_0$ and $\\xi$ its generic point. Choose an affine neighbourhood $\\operatorname{Spec}A\\subseteq X_0$ of $\\xi$ on which $D_0$ has a single equation $t$. It can be chosen as a principal refinement of a finite-type affine chart, so $A$ is a finitely generated $k$-algebra and is Noetherian by step 1. It is a domain since $X_0$ is integral, and $t\\ne0$ by step 7. The prime $\\mathfrak p$ of $\\xi$ is minimal over $(t)$: otherwise a smaller prime containing $t$ would give a proper irreducible closed subset inclusion $C\\subsetneq C'\\subseteq |D_0|$ after taking closure, contradicting maximality of $C$. By [lem-sfb-krull-principal-ideal-height-bound], $\\operatorname{ht}\\mathfrak p\\le1$. Since $t\\in\\mathfrak p$ is nonzero, the strict chain $(0)\\subsetneq\\mathfrak p$ gives the opposite bound. By [lem-weil-pbc-localization-dimension-chains-below-prime], $\\dim A_{\\mathfrak p}=1$.",
+   "uses": [
+    "lem-sfb-krull-principal-ideal-height-bound",
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCN, lemma-effective-Cartier-codimension-1 (2), specialized to the integral case; algebra.tex Tag 00KV, lemma-minimal-over-1 (1), and Tag 00KF, definition-height"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-dimension-at-point-local-ring-trdeg] to the finite-type algebra $A$ and prime $\\mathfrak p$ of step 9. Step 8 gives $\\dim_{\\mathfrak p}(\\operatorname{Spec}A)=d$, and step 9 gives $\\dim A_{\\mathfrak p}=1$, so $d=1+\\operatorname{trdeg}_k\\kappa(\\mathfrak p)$. The residue field is the residue field of $X_0$ at $\\xi$, since open restriction preserves the local ring. By [lem-sc-closed-irreducible-dimension-trdeg] applied to the nonempty irreducible closed subset $C\\subseteq X_0$, its dimension is that same transcendence degree. Thus $\\dim C=d-1$. This holds for every component. Since $E_0$ is nonempty it has such a component, whose dimension is nonnegative. Therefore $d\\ge1$, proving the positive-dimension assertion as well.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "lem-sc-closed-irreducible-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21, lemma-dimension-locally-algebraic (6), (10); algebra.tex Tag 00P1, lemma-dimension-at-a-point-finite-type-field"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-wf-affine-noetherian-components",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-trf-normal-topologically-noetherian-components",
+  "thm-nagata-compactification",
+  "def-nagata-compactifiable",
+  "def-nagata-compactification",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lemma-nagata-qc-open-complement-ideal-exists",
+  "det-nagata-boundary-divisor-cartier",
+  "lemma-nagata-admissible-blowup-over-open",
+  "def-nagata-admissible-blowup",
+  "lem-sfb-integral-blowup-projective-geometry",
+  "lemma-nagata-blowup-proper",
+  "lem-weil-pbc-proper-composition",
+  "def-sc-normalization",
+  "def-weil-pbc-reduced-normalization",
+  "lem-sfb-componentwise-normalization-generic-properties",
+  "lem-sc-normalization-exists",
+  "lem-sc-normalization-over-normal-locus",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-open-immersion",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-kun-dimension-finite-type",
+  "lem-sfb-krull-principal-ideal-height-bound",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-sc-closed-irreducible-dimension-trdeg"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.25, printed p.154, referring to Milne (2013), Proposition 4.1 first paragraph and Aside 5.4; detailed assembly of existing Stacks lemmas, with the referenced article read online at https://arxiv.org/html/1311.6060v2 (local article WANTED)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth integral nonproper variety has a normal proper compactification with nonempty boundary of pure codimension one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegral.nonempty\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsIntegral X], Nonempty ↥X\", \"doc\": \"Every integral scheme has a non-empty underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X], AlgebraicGeometry.IsDominant X.toSpecΓ\", \"doc\": \"For any compact scheme $X$, the canonical morphism from $X$ to the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(X))$ is dominant, meaning its image is dense in $\\\\operatorname{Spec}(\\\\Gamma(X))$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Normalization constructions and immersion coborders do not give a proper completion with divisorial boundary. Read all returned signatures; no one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Compactification\", \"IsNormal\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Normalization constructions and immersion coborders do not give a proper completion with divisorial boundary. Read all returned signatures; no one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*normal|normal.*compactification|boundary.*codimension",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Normalization constructions and immersion coborders do not give a proper completion with divisorial boundary. Read all returned signatures; no one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normal proper completion of an integral variety after blowing up its boundary",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegral X] : IsIntegral f.normalization\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.toNormalization ≫ f.normalizationDesc f₁ f₂ H = f₁\", \"doc\": \"Given a morphism $ f $ that factors as $ f = f_1 \\\\circ f_2 $, the composition of the normalization morphism $ f.toNormalization $ and the normalization description morphism $ f.normalizationDesc(f_1, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": IsIntegralHom f.fromNormalization\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsAffineHom f] : IsAffineHom f.toNormalization\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalizationDesc f₁ f₂ H ≫ f₂ = f.fromNormalization\", \"doc\": \"For a scheme morphism $ f $ factoring as $ f_1 $ followed by $ f_2 $, the composition of the normalization morphism $ \\\\text{normalizationDesc} $ from the normalization of $ f $ to a target scheme $ T \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpa\", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, there exists a morphism from $ X $ to the normalization of $ f $, constructed by gluing local integral closure maps over an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Normalization constructions and immersion coborders do not give a proper completion with divisorial boundary. Read all returned signatures; no one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blow up the complement of an open immersion then normalize to get divisorial boundary",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftCoborder\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [inst : AlgebraicGeometry.IsImmersion f] → X ⟶ ↑(AlgebraicGeometry.Scheme.Hom.coborderRange f)\", \"doc\": \"Given an immersion $ f : X \\to Y $ of schemes, this constructs a morphism from $ X $ to the cobord of the image of $ f $ in $ Y $. The cobord is defined as the complement of the set difference between \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f]\\n  {U V : Y.AffineZariskiSite} (i : U ⟶ V),\\n  AlgebraicGeometry.IsOpenImmersion\\n    ((((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n                (Algebrai\", \"doc\": \"The composition of the opposite of the open subset functor, the right opposite of the normalization diagram, and the Spec functor yields an open immersion for morphisms in the affine Zariski site of a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpace.Opens.map f.base).obj ↑U).ι\\n      (AlgebraicGeometry.Scheme.Hom.toNormalization f) =\\n\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the composition of the inclusion morphism $f^{-1}(U) \\\\to X$ followed by the normalization morphism $X \\\\to \\\\overline{X}$ equals the composition of the can\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: Normalization constructions and immersion coborders do not give a proper completion with divisorial boundary. Read all returned signatures; no one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartier.*(codim|height|dimension)|effectiveCartier|IsEffectiveCartier",
+   "results": "{\"t\": \"2026-10-24T09:59:45Z\", \"tool\": \"grep\", \"query\": \"Cartier.*(codim|height|dimension)|effectiveCartier|IsEffectiveCartier\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic points, scheme normalization constructions, principal-ideal height bounds and manifold boundaries do not state the whole normal divisorial-completion assertion. The principal-ideal hit is already represented by lem-sfb-krull-principal-ideal-height-bound and is cited in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic points of effective Cartier divisors have codimension one",
+   "results": "{\"t\": \"2026-10-24T09:59:46Z\", \"tool\": \"leansearch\", \"query\": \"Generic points of effective Cartier divisors have codimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"genericPoints\", \"IsGenericPoint\", \"isGenericPoint_def\", \"AlgebraicGeometry.genericPoint_eq_bot_of_affine\", \"genericPoints.ofComponent\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"IsIrreducible.isGenericPoint_genericPoint\", \"IsGenericPoint.isIrreducible\"], \"digest\": \"d2f11099dcccaca0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic points, scheme normalization constructions, principal-ideal height bounds and manifold boundaries do not state the whole normal divisorial-completion assertion. The principal-ideal hit is already represented by lem-sfb-krull-principal-ideal-height-bound and is cited in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EffectiveCartierDivisor\", \"krullDim\"",
+   "results": "{\"t\": \"2026-10-24T09:59:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"EffectiveCartierDivisor\\\", \\\"krullDim\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic points, scheme normalization constructions, principal-ideal height bounds and manifold boundaries do not state the whole normal divisorial-completion assertion. The principal-ideal hit is already represented by lem-sfb-krull-principal-ideal-height-bound and is cited in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a generic point of an effective Cartier divisor on a locally Noetherian scheme the local ring has Krull dimension one",
+   "results": "{\"t\": \"2026-10-24T09:59:48Z\", \"tool\": \"leanfinder\", \"query\": \"At a generic point of an effective Cartier divisor on a locally Noetherian scheme the local ring has Krull dimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomainDvr.ring_dimensionLEOne\", \"Module.rankAtStalk_self\", \"Ring.KrullDimLE.of_isLocalization\", \"ringKrullDim_eq_one_iff_of_isLocalRing_isDomain\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\"], \"digest\": \"0f764f3fffa8d9f6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic points, scheme normalization constructions, principal-ideal height bounds and manifold boundaries do not state the whole normal divisorial-completion assertion. The principal-ideal hit is already represented by lem-sfb-krull-principal-ideal-height-bound and is cited in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal proper compactification of a smooth connected variety with pure codimension one boundary",
+   "results": "{\"t\": \"2026-10-24T09:59:49Z\", \"tool\": \"leanfinder\", \"query\": \"Normal proper compactification of a smooth connected variety with pure codimension one boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"modelWithCornersSelf_boundaryless\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"ModelWithCorners.Boundaryless\", \"ModelWithCorners.boundary_of_boundaryless_right\", \"ModelWithCorners.boundary_of_boundaryless_left\", \"ModelWithCorners.boundary\", \"SingularManifold.toPUnit\", \"ModelWithCorners.instBoundarylessManifold\"], \"digest\": \"46c9062e34544f0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic points, scheme normalization constructions, principal-ideal height bounds and manifold boundaries do not state the whole normal divisorial-completion assertion. The principal-ideal hit is already represented by lem-sfb-krull-principal-ideal-height-bound and is cited in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowing up the boundary and normalizing gives a normal compactification with divisorial boundary",
+   "results": "{\"t\": \"2026-10-24T10:00:19Z\", \"tool\": \"leansearch\", \"query\": \"Blowing up the boundary and normalizing gives a normal compactification with divisorial boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\"], \"digest\": \"d4ef435fe5993a08\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic points, scheme normalization constructions, principal-ideal height bounds and manifold boundaries do not state the whole normal divisorial-completion assertion. The principal-ideal hit is already represented by lem-sfb-krull-principal-ideal-height-bound and is cited in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An effective Cartier divisor in a Noetherian scheme has height one at every minimal prime of its local defining principal ideal",
+   "results": "{\"t\": \"2026-10-24T10:00:20Z\", \"tool\": \"leanfinder\", \"query\": \"An effective Cartier divisor in a Noetherian scheme has height one at every minimal prime of its local defining principal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.height_le_one_of_isPrincipal_of_mem_minimalPrimes\", \"Ideal.height_le_one_of_isPrincipal_of_mem_minimalPrimes_of_isLocalRing\", \"Ideal.map_height_le_one_of_mem_minimalPrimes\", \"Ideal.height_le_spanRank_toENat_of_mem_minimal_primes\", \"Ideal.height_le_height_add_one_of_mem\", \"Ideal.height_le_card_of_mem_minimalPrimes_span\", \"Ideal.exists_finset_card_eq_height_of_isNoetherianRing\", \"Ideal.height_le_iff_exists_minimalPrimes\"], \"digest\": \"2c0ea26aa8778b3c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic points, scheme normalization constructions, principal-ideal height bounds and manifold boundaries do not state the whole normal divisorial-completion assertion. The principal-ideal hit is already represented by lem-sfb-krull-principal-ideal-height-bound and is cited in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blow up the complement of an open immersion and normalize to obtain a divisorial boundary in a proper normal variety",
+   "results": "{\"t\": \"2026-10-24T10:04:25Z\", \"tool\": \"leanfinder\", \"query\": \"Blow up the complement of an open immersion and normalize to obtain a divisorial boundary in a proper normal variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\"], \"digest\": \"2a90ee59f856ffc4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic points, scheme normalization constructions, principal-ideal height bounds and manifold boundaries do not state the whole normal divisorial-completion assertion. The principal-ideal hit is already represented by lem-sfb-krull-principal-ideal-height-bound and is cited in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-boundary-positive-stabilizer",
+  "date": "2026-10-24",
+  "group": "Q126"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Normal completion used in step 1 of lem-sfb-rational-boundary-positive-stabilizer: the compactify, blow up the boundary, normalize construction in Milne (2013), Proposition 4.1 proof, first paragraph; Aside 5.4 permits Nagata. This auxiliary item has no imported blueprint ancestor (ancestor tool returns None).",
+   "via": [
+    "lem-sfb-rational-boundary-positive-stabilizer",
+    "lem-sfb-rosenlicht-nonproper-affine-subgroup",
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-divisorial-completion",
+  "worker": "stage1",
+  "summary": "Q76: statement unchanged. Complete Nagata/reduced-closure, boundary-blowup and normalization proof, including preservation of a Cartier boundary and an explicit local principal-ideal/dimension calculation. Reused all existing lemmas, including the principal-ideal Mathlib leaf, rather than adding elementary or duplicate nodes. No new nodes or new Mathlib leaves. Read Milne 8.25 and the referenced Milne (2013) proof online, checked each cited statement and the Stacks sources, and recorded verbatim citations.",
+  "blueprint": "No imported ancestor is available (blueprint_refs.py ancestor returns None). Realizes the normal divisorial completion used by the parent rational-boundary-positive-stabilizer proof, along Milne Proposition 4.1 first paragraph and Aside 5.4; retains the inherited chapter and unit and does not replace any unit step. Searched latest blueprint and entire imported DAG for normalization, compactification, divisorial and principal-ideal statements.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Generic scheme-theoretic tool used only for its stated conclusion in the compactify/blowup/normalize argument; the inherited six-functors unit supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-trf-normal-topologically-noetherian-components",
+    "why": "Generic scheme-theoretic tool used only for its stated conclusion in the compactify/blowup/normalize argument; the inherited six-functors unit supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic scheme-theoretic tool used only for its stated conclusion in the compactify/blowup/normalize argument; the inherited six-functors unit supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme-theoretic tool used only for its stated conclusion in the compactify/blowup/normalize argument; the inherited six-functors unit supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lemma-nagata-qc-open-complement-ideal-exists",
+    "why": "Generic scheme-theoretic tool used only for its stated conclusion in the compactify/blowup/normalize argument; the inherited six-functors unit supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "det-nagata-boundary-divisor-cartier",
+    "why": "Generic scheme-theoretic tool used only for its stated conclusion in the compactify/blowup/normalize argument; the inherited six-functors unit supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "Generic scheme-theoretic tool used only for its stated conclusion in the compactify/blowup/normalize argument; the inherited six-functors unit supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-sc-normalization-exists",
+    "why": "Generic scheme-theoretic tool used only for its stated conclusion in the compactify/blowup/normalize argument; the inherited six-functors unit supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-sc-normalization-over-normal-locus",
+    "why": "Generic scheme-theoretic tool used only for its stated conclusion in the compactify/blowup/normalize argument; the inherited six-functors unit supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-sc-dimension-locally-algebraic",
+    "why": "Generic scheme-theoretic tool used only for its stated conclusion in the compactify/blowup/normalize argument; the inherited six-functors unit supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic scheme-theoretic tool used only for its stated conclusion in the compactify/blowup/normalize argument; the inherited six-functors unit supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "why": "Generic scheme-theoretic tool used only for its stated conclusion in the compactify/blowup/normalize argument; the inherited six-functors unit supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Generic scheme-theoretic tool used only for its stated conclusion in the compactify/blowup/normalize argument; the inherited six-functors unit supplies no replacement for this algebraic-geometric fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-smooth-geometrically-normal",
+  "lem-trf-normal-topologically-noetherian-components",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lemma-nagata-qc-open-complement-ideal-exists",
+  "det-nagata-boundary-divisor-cartier",
+  "lemma-nagata-blowup-proper",
+  "lem-sc-normalization-exists",
+  "lem-sc-normalization-over-normal-locus",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-sc-closed-irreducible-dimension-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-6662d56da",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-6662d56da (reviewer sub-agent of L); spot-checked: Read in full: the item and its 10 steps; there are no new nodes and the statement is unchanged. The statement is true. Small cases: A^1 in P^1; A^2 in P^2; a proper surface minus a point, where the blowup is needed; proper Y is excluded by hypothesis. The route is Nagata compactification, then the reduced closure, then blowing up the boundary ideal, then normalizing; this matches Milne iAG Prop. 8.25. Every cited statement was checked against its hypotheses. Steps 1-4 and 6-10 are correct, including Krull's principal ideal theorem on a minimal prime over t and the formula dim_p = dim A_p + trdeg at component generic points. Fault C4 in step 5: the claim that the blowup is unchanged over Y was cited to det-nagata-boundary-divisor-cartier, which only says the blowup is U-admissible. FIX: cite def-nagata-admissible-blowup and lemma-nagata-admissible-blowup-over-open in the step text, the step uses and proof_deps. Also fixed the step-9 TeX `C\\prime` to `C'`. Batch-5 flags: lem-trf-smooth-geometrically-normal and lem-trf-normal-topologically-noetherian-components are generic scheme facts. lem-sfb-integral-blowup-projective-geometry reaches the trf chapter only through the definitions def-trf-projective-bundle-morphism and def-trf-canonical-symmetric-graded-algebra, and only its integrality clause is used. Recomputed closures reach no assumption leaf and no trace-formula or Poincaré theorem, so all three are accepted as generic. The off-unit tool_uses are generic algebraic-geometry tools and are accepted. Maintainer note: lem-sc-normalization-exists has an imported proof restricted to dimension ≤1; only its statement is used here.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalDivisorialCompletion",
+  "declaration": "AlgebraicGeometry.exists_normal_proper_completion_divisorial_boundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalDivisorialCompletion.lean",
+  "statement": "theorem exists_normal_proper_completion_divisorial_boundary {k : Type u} [Field k] [IsAlgClosed k] (Y : Scheme.{u}) (f : Y ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [Smooth f] [ConnectedSpace Y] (hnotproper : ¬ IsProper f) : IsIntegral Y ∧ ∃ (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) (j : Y ⟶ X) (_ : IsOpenImmersion j), IsNormalScheme X ∧ IsProper p ∧ j ≫ p = f ∧ DenseRange j.base ∧ Nonempty (Scheme.IdealSheafData.vanishingIdeal ⟨(j.opensRange : Set X)ᶜ, j.opensRange.isOpen.isClosed_compl⟩).subscheme ∧ ∃ d : ℕ, 0 < d ∧ topologicalKrullDim Y = (d : WithBot ℕ∞) ∧ topologicalKrullDim X = (d : WithBot ℕ∞) ∧ ∀ C ∈ irreducibleComponents (Scheme.IdealSheafData.vanishingIdeal ⟨(j.opensRange : Set X)ᶜ, j.opensRange.isOpen.isClosed_compl⟩).subscheme, topologicalKrullDim C = ((d - 1 : ℕ) : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "Q112",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1c89ea76",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Read item node, all 10 stmt_dep records, the module, the report (Worker report + Second reading by Q112 present) and the live IsNormalScheme def (IsIntegral ∧ stalks integrally closed domains). Every clause matches: alg. closed k; separated + LocallyOfFiniteType + QuasiCompact; Smooth; ConnectedSpace (includes nonempty); ¬IsProper; conclusions IsIntegral Y, IsNormalScheme X (normal+integral), IsProper p, IsOpenImmersion j, j≫p=f, DenseRange, nonempty Mathlib vanishingIdeal subscheme of the closed complement (canonical reduced structure), ∃ d:ℕ, 0<d, dim Y = dim X = d, every irreducible component of E has dim d-1. Only node changes vs live: lean record and added stmt_dep def-sbc-normal-dominant-galois (landed IsNormalScheme owner). lean.statement verbatim. Edge cases (empty Y, dim 0 = Spec k proper, A^1⊂P^1) fine; single universe u inherent to Spec. One sorry theorem, no defs, docstrings with source and all 10 proof steps. No file changed, so no compile."
+ }
+}

@@ -1,0 +1,54 @@
+# Q123 stage-1 delivery: lem-sfb-lie-kolchin-triangular-embedding
+
+## Files written
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-lie-kolchin-triangular-embedding.json: statement, split into seven proof steps; statement unchanged; not a Mathlib leaf.
+- dag/nodes/sec-six-functors-basics/lem-sfb-commutative-group-representation-eigenline.json: statement-only, unsplit; searches found no exact group-scheme result.
+- dag/nodes/sec-six-functors-basics/lem-sfb-character-eigenspaces-independent.json: statement-only, unsplit; searches found no exact group-scheme result.
+- citations.json: verbatim statement quotations for every step-node citation.
+- searches.jsonl and search-results.json: actual command log and captured outputs; write_split.py is the sandbox-only reproducible JSON assembly.
+
+## Attachments
+
+None. I searched lean/WeilConjectures by the item tag, Lie–Kolchin/trigonalization/solvable-triangular terminology, and the representation/character/weight terminology for both proposed children. No declaration states the item. The available Lie-algebra statements require different objects (and the solvable Lie theorem in Mathlib uses characteristic zero).
+
+## WANTED
+
+None. All mathematical sources used are present. No SGA source is used.
+
+## Faults found and corrections
+
+The imported item has no proof. Its statement agrees with Milne Theorem 16.30 plus Proposition 16.2(a)–(c), and I have not changed it. The source's induction paragraph calls its normal subgroup N before explicitly identifying it as the derived group; its later commutator argument makes this choice necessary. I make N=D_H explicit using the existing derived-subgroup node. I index the same proof by the derived length of H(k), so no unsupported dimension-drop theorem or hidden smooth solvable-series replacement is needed. Step 1 derives termination on rational points directly from the item's fppf-normal-series notion.
+
+The prescribed-kernel theorem already gives a faithful representation by taking N=1. I initially searched for a new linearity theorem, then read this existing node and reused it with the existing homomorphism factorization. No duplicate linearity node was created. The usual characteristic-zero Lie-algebra route cannot justify this arbitrary-characteristic group-scheme statement and is not used.
+
+Nothing remains unfinished within this one-level split. The two new statements deliberately have no proof; they join the queue. No Lean was written or compiled. The unit is inherited and is not the item's key node, so its realization record is untouched. The item's blueprint ancestor is null, as blueprint_refs.py ancestor reports; its existing long via chain is preserved and prepended for each child. The latest blueprint (7284bb09daf97437d544c51882b325f9c52cd345) was searched by the item notion, common eigenline, commutative algebraic group, character eigenspaces, character subrepresentations, and trigonalizable. No imported node states either proposed child or the item.
+
+## Not duplicates
+
+lem-sfb-commutative-group-representation-eigenline vs lem-wf-solvable-common-eigenvector: the existing statement is for a solvable Lie algebra over Q_l-bar; the new statement is for rational representations of commutative group schemes in arbitrary characteristic, including nonreduced groups.
+lem-sfb-commutative-group-representation-eigenline vs p-linear-triangular: the existing statement triangularizes a single operator, not a rational action of an entire group scheme.
+lem-sfb-commutative-group-representation-eigenline vs lem-sfb-gm-representation-weight-basis: the existing statement concerns only G_m and gives a weight decomposition; the new statement allows any commutative affine algebraic group, including G_a and infinitesimal groups.
+lem-sfb-character-eigenspaces-independent vs lem-sfb-gm-representation-weight-basis: the existing statement concerns G_m and integer weights, whereas the new theorem concerns independence for arbitrary group-scheme characters of any affine algebraic group and does not assert that they span the representation.
+lem-sfb-character-eigenspaces-independent vs lem-sfb-split-torus-subgroups-diagonalizable: the existing statement describes subgroup schemes of a split torus; it does not state independence of eigenspaces in an arbitrary rational module.
+lem-sfb-character-eigenspaces-independent vs lem-wf-solvable-common-eigenvector: the latter proves existence for a Lie-algebra action, not independence of group-scheme character spaces.
+
+## Review by Q123
+
+I read Milne iAG2017 Theorem 16.30, printed pp.334–335, in full, together with Definition 16.1 and Proposition 16.2, pp.324–325. For the first child I read Corollary 16.14, p.329, and the definition of trigonalizable in 16.1: a nonzero rational module contains a one-dimensional subrepresentation, not necessarily a fixed vector. For the second child I read Corollary 4.24 and Theorem 4.25, pp.93–94: distinct characters are independent in the Hopf algebra, and their representation eigenspaces form a direct sum. Finite-dimensionality, without a semisimplicity assumption, makes the set of nonzero summands finite. These are supporting facts, not clauses of the triangular-embedding conclusion.
+
+I opened every cited node and compared its statement with the claim used, rather than its proof. Step 1 uses the quotient node's kernel to see commutators land in the next term of the given solvable series, and the smooth-geometrically-reduced and affine Nullstellensatz statements to test matrix entries on rational points. The abstract derived-length induction and its base are explicitly written; taking a least positive-dimensional stable subspace needs only finite-dimensional linear algebra. The claim holds for every smooth connected H with the stated derived-length bound, so it is available for N without having to infer scheme-solvability anew.
+
+Step 2 uses the derived-subgroup node's actual normal/smooth/connected conclusion and its exact equality D_H(k)=[H(k),H(k)]. This supplies the decrease of the induction parameter. The second child states precisely the independence and finiteness used to form S, with eigenspaces tested over all algebras. Step 3 explicitly calculates the conjugated character for an arbitrary algebra A. The finite-index stabilizer is cut out by lower-left entries; its closed cosets give a disjoint finite cover because any nonempty finite-type closed intersection or open complement has a closed point, which the Nullstellensatz node identifies with a k-point. Connectedness makes the cover a single member; smooth reducedness and the vanishing principle then promote k-point stability to scheme stability. No theorem about Lie algebras or an unproved orbit-stabilizer scheme is substituted here.
+
+Step 4 uses the rational-point equality of the derived-subgroup node, and the determinant-homomorphism clause of def-sc-general-linear-group, to make the determinant of each commutator equal to one. Smooth reducedness and the vanishing principle apply to N, since the derived-subgroup statement gives smoothness. The polynomial T^d-1 may have repeated roots; I checked the argument on characteristic p with p dividing d. Its distinct root fibres still partition the underlying space; connectedness and the identity select 1, and reducedness promotes this to the trivial scheme character. I never claim mu_d is smooth or reduced.
+
+Step 5 uses the quotient node's actual fppf-sheaf-quotient assertion, including local lifts and their ambiguity by N, and spells out descent of the representation. The derived node supplies factorization of the commutator through N, which makes Q commutative. The first child applies to Q without requiring smoothness or connectedness, so all its hypotheses are verified. The resulting invariant line is H-stable, forcing the simple representation to have dimension one.
+
+Step 6 uses the prescribed-normal-kernel node with the trivial subgroup and r>=1, and the homomorphism-factorization node with its identification of the flat image as the fppf quotient by that kernel. Hence the representation is a closed immersion, not merely injective on rational points. I read Milne 4.9/4.10, p.87, as the source of the faithful-representation input and 3.35, p.75, for the closed-immersion conclusion. Reusing the existing stronger nodes avoids another new node.
+
+Step 7 is the elementary flag induction of Milne 16.2(a)–(c). The induction is on vector-space dimension and applies the already established stable-line property to V/L; the quotient action is given explicitly by its matrix block. An adapted basis gives all-algebra upper-triangularity. The coordinate algebra map to k[J] factors through the quotient by the below-diagonal variables and stays surjective, which is the affine closed-immersion criterion of def-weil-closed-immersion. I checked its statement and the coordinate description in def-sc-general-linear-group. This is not a new lemma hidden by the word “transport.”
+
+Small-case checks: J=1 admits n=1; G_a has its usual two-dimensional unipotent triangular representation; G_m has its one-dimensional representation. The finite disconnected nonabelian solvable case is excluded, as it must be: the connectedness argument is essential. The commutative child covers G_a, G_m, and mu_p, with no assertion of a splitting or a fixed vector. The independent-eigenspace child permits modules with only the trivial weight and nonsemisimple unipotent actions; it does not assert every vector is a weight vector. These checks found no false statement or missing hypothesis. Every proof step is shorter than 2000 characters; no source's “standard” comparison is buried in a long step.
+
+Against delivery-errors B: both children are self-contained statement-only nodes with inline meanings of representation, character, stability and eigenspace; all group/scheme notions cite their definition nodes. All recorded searches were actually run through msearch.py, with the original query text; search outputs are retained. I read Mathlib AlgebraRepresentation/Basic.lean:19–48, Eigenspace/Basic.lean:710–735, Eigenspace/Pi.lean, and Lie/LieTheorem.lean:166 onward to reject the tempting partial hits. None is an exact theorem or one-line specialization for rational group schemes. Against C: citations.json quotes each cited statement verbatim; no citation supplies more than its statement, no SGA route or target/unit route replacement occurs, and the two off-unit generic tools are declared in split_report.tool_uses. Against D: the induction, conjugation, determinant, quotient descent and full flag construction remain in the item, with two strictly smaller supporting inputs. Against E: smoothness, connectedness, all-algebra character equalities, and the fppf meaning of the quotient are tracked at each use. No source error or statement dispute was found.

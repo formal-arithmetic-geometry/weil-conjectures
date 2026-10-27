@@ -1,0 +1,306 @@
+{
+ "id": "lem-sfb-finite-locally-free-open-affine-cover",
+ "kind": "statement",
+ "title": "Schematicity under a finite locally free cover open in an affine scheme",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $X$ an algebraic space over $S$ [def-trf-algebraic-space], and $p:U\\to X$ a representable surjective morphism from a scheme. Suppose every pullback of $p$ to a scheme is finite locally free [def-pc-finite-locally-free]; surjectivity means surjectivity of the field-valued point classes [def-a1-space-point-topology]. Suppose $U$ is isomorphic to an open subscheme [def-weil-open-immersion] of an affine scheme $\\operatorname{Spec}A$ for a commutative ring $A$ [def-weil-affine-spectrum]. Then $X$ is represented by an $S$-scheme. The open $U$ need not be quasi-compact, and no Noetherian or finite-type hypothesis on $S$ or $A$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 07S6, proposition-finite-flat-equivalence-global, applied to the kernel-pair relation of p; paragraph immediately following the proof: locally closed subschemes of affine schemes satisfy condition (3)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-pc-finite-locally-free",
+  "def-a1-space-point-topology",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Form the scheme $R=U\\times_XU$: representability of $p$ gives it by the scheme test $U\\to X$. On each test $H$, its points are exactly pairs $(a,b)\\in U(H)^2$ with $p(a)=p(b)$. The diagonal $a\\mapsto(a,a)$, exchange $(a,b)\\mapsto(b,a)$, and composition $((a,b),(b,c))\\mapsto(a,c)$ define the kernel-pair groupoid; the groupoid identities are identities of ordered pairs. The projections $s,t:R\\to U$ are finite locally free since each is the scheme pullback of $p$ along $U\\to X$. Thus $s,t$ are flat and locally of finite presentation, and are surjective because of their diagonal section.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-a1-groupoid-scheme",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 (proposition-finite-flat-equivalence-global), kernel-pair application; pairwise construction from the definitions."
+   }
+  },
+  {
+   "text": "The singleton $\\{p\\}$ is fppf in the space sense: flatness and local finite presentation hold on every scheme test by hypothesis, and joint surjectivity is the assumed surjectivity on point classes. The fppf covering calculus, parts (2) and (4), shows that for each $a\\in X(T)$ the represented pullback $P=T\\times_XU\\to T$ is an fppf covering of schemes. Its tautological map to $U$ lifts $a$. Consequently $X$ is the fppf sheaf quotient of $U$ by $R$: a map from the pointwise quotient into any fppf sheaf $G$ is an $R$-invariant map $h_U\\to G$; evaluate it on these local lifts and glue in $G$. On overlaps the lifts are an $R$-point, so the evaluations agree. A common covering refinement proves independence of lifts, and uniqueness follows from the sheaf uniqueness axiom. This is precisely the universal property of sheafification, giving $X\\simeq (U/R)^{\\#}$.",
+   "uses": [
+    "lem-sfb-space-fppf-covering-calculus",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 (proposition-finite-flat-equivalence-global), quotient sheaf; spaces-topologies.tex Tag 03Y9 (lemma-fppf), base change; sheafification universal property."
+   }
+  },
+  {
+   "text": "Identify $U$ with its given open in $\\operatorname{Spec}A$. For $u\\in U$, the orbit $E=t(s^{-1}(\\{u\\}))$ is a finite nonempty set: $s$ has finite fibres and its section puts $u$ in $E$. For each $v\\in E$ choose $f_v\\in A$ with $v\\in D(f_v)\\subseteq U$ by the principal-open basis. Let $J=(f_v:v\\in E)$. For every prime $\\mathfrak p_v$ corresponding to a point of $E$, $J\\not\\subseteq\\mathfrak p_v$, since $f_v\\notin\\mathfrak p_v$. Prime avoidance gives $f\\in J$ lying in none of these finitely many primes. Hence $E\\subseteq D(f)$. Every prime containing all $f_v$ contains $f$, so $D(f)\\subseteq\\bigcup_{v\\in E}D(f_v)\\subseteq U$. The principal open $D(f)$ is affine. Thus every orbit is contained in an affine open of $U$, without requiring a finite cover of $U$.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-prime-avoidance",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Paragraph after Tag 07S6: condition (3) follows from Properties Tag 01ZY (lemma-ample-finite-set-in-affine), case (2); direct open-in-affine argument using Algebra Tag 00DS (lemma-silly)."
+   }
+  },
+  {
+   "text": "Apply the invariant-affine lemma to each orbit from step 3. Obtain an affine open $W_u\\subseteq U$ containing that orbit and satisfying $s^{-1}(W_u)=t^{-1}(W_u)$. The $W_u$ cover $U$, since $u$ belongs to its own orbit. Put $R_u=s^{-1}(W_u)=t^{-1}(W_u)$. The restricted relation on $W_u$ is exactly $R_u=W_u\\times_XW_u$: if one endpoint is in $W_u$, invariance puts the other there. Also $R_u=U\\times_XW_u$, so $R_u\\to W_u$ is finite locally free by the scheme-test hypothesis on $p$; the other projection has the same property after exchanging endpoints. Since a finite morphism has affine inverse images of affine opens, $R_u$ is affine. The restricted relation is still an equivalence relation on every test scheme.",
+   "uses": [
+    "lem-sfb-locally-free-groupoid-invariant-affine",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 proof, first sentence; Groupoids Tag 03JE (lemma-find-invariant-affine)."
+   }
+  },
+  {
+   "text": "Write $W_u=\\operatorname{Spec}A_u$, $R_u=\\operatorname{Spec}B_u$. The affine quotient theorem applied to $R_u\\rightrightarrows W_u$ gives the affine $S$-scheme $M_u=\\operatorname{Spec}C_u$, where $C_u$ is the equalizer of the two ring maps $A_u\\rightrightarrows B_u$. It represents the fppf quotient $W_u/R_u$, with finite locally free surjection $W_u\\to M_u$ and relation $R_u\\simeq W_u\\times_{M_u}W_u$. The map $W_u\\to X$ is invariant, so the quotient universal property gives the induced map $h_{M_u}\\to X\\simeq(U/R)^{\\#}$.",
+   "uses": [
+    "lem-a1-finite-flat-affine-relation-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 proof: apply Groupoids Tag 03BM (proposition-finite-flat-equivalence) to each invariant affine open."
+   }
+  },
+  {
+   "text": "The inclusion $W_u\\to U$ is an open immersion, hence etale, and therefore flat and locally of finite presentation. Apply the finding-opens lemma to the equivalence relation $R\\rightrightarrows U$ and this inclusion. Its hypotheses on $s,t$ were checked in step 1. Its restricted relation is $R_u$ by step 4. With the quotient identifications in steps 2 and 5, its conclusion says exactly that $h_{M_u}\\to X$ is representable by open immersions. In particular it is a monomorphism, so identify $h_{M_u}$ with its image subfunctor of $X$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-etale-morphism",
+    "lem-trf-etale-relation-finding-opens"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 proof: Spaces Tag 02WU (lemma-finding-opens), in the general flat locally finitely presented form of the cited node."
+   }
+  },
+  {
+   "text": "For any $a:h_T\\to X$, let $V_u\\subseteq T$ be the open representing $h_T\\times_Xh_{M_u}$. Pull back along the fppf covering $P=T\\times_XU\\to T$ of step 2, and let $b:P\\to U$ be the lift. The opens $b^{-1}(W_u)$ cover $P$. On each such open $a$ factors through $W_u\\to M_u\\to X$, so it lies in the inverse image of $V_u$. Surjectivity of $P\\to T$ therefore implies $T=\\bigcup_uV_u$. This verifies Zariski coverage on every scheme test, rather than merely sheaf-local coverage. Since $X$ is an fppf sheaf it is a Zariski sheaf: open coverings are fppf, as open immersions are etale, hence flat and locally finitely presented. The representable open subfunctors $h_{M_u}$ now satisfy every hypothesis of the schemes representability criterion. It yields an $S$-scheme representing $X$. The index set is $|U|$, a set in the chosen site universes; for $U=\\varnothing$, surjectivity makes $X$ empty and the empty family gives the empty scheme.",
+   "uses": [
+    "lem-pc-schemes-criterion",
+    "def-trf-algebraic-space",
+    "def-pc-fppf-site",
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 proof, final paragraph: coverage and Schemes Tag 01JJ (lemma-glue-functors)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-a1-groupoid-scheme",
+  "def-pc-finite-locally-free",
+  "lem-sfb-space-fppf-covering-calculus",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "lem-sfb-locally-free-groupoid-invariant-affine",
+  "def-weil-finite-integral-morphism",
+  "lem-a1-finite-flat-affine-relation-quotient",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-etale-morphism",
+  "lem-trf-etale-relation-finding-opens",
+  "lem-pc-schemes-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 07S6 (proposition-finite-flat-equivalence-global), proof and following paragraph; Properties Tag 01ZY, case (2), with its requested direct argument for an open of an affine."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free surjection from an open subscheme of an affine scheme to an algebraic space implies that the target is a scheme",
+   "results": "OK 8 hits: AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme, AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource, AlgebraicGeometry.isFinite_iff; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space admitting a finite faithfully flat cover by a quasi affine scheme is representable by a scheme",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.IsAffine, AlgebraicGeometry.AffineScheme, AlgebraicGeometry.isAffine_affineScheme, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Scheme.IsQuasiAffine; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite flat descent of schematicity when a scheme cover is an open of an affine scheme",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.Scheme.affineOpenCover, AlgebraicGeometry.HasAffineProperty.iff_of_openCover, AlgebraicGeometry.Scheme.AffineOpenCover.openCover, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.directedAffineCover, AlgebraicGeometry.Scheme.openCover_affineOpenCover; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FiniteLocallyFree\"",
+   "results": "OK 0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*flat.*quotient|finite.*locally.*free.*quotient|AlgebraicSpace",
+   "results": "OK 0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|finite.*flat.*quotient|finite.*locally.*free.*quotient",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphism properties and quasi-affine schemes, not schematicity of an algebraic-space target under this cover"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FiniteLocallyFree\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphism properties and quasi-affine schemes, not schematicity of an algebraic-space target under this cover"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally free descent of representability by schemes for an open subscheme of an affine scheme",
+   "results": "OK 8 hits: AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict, AlgebraicGeometry.HasAffineProperty.iff_of_openCover, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.sourceAffineLocally, AlgebraicGeometry.IsAffineOpen",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphism properties and quasi-affine schemes, not schematicity of an algebraic-space target under this cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free surjection from an open of an affine scheme to an algebraic space has schematic target",
+   "results": "OK 8 hits: AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphism properties and quasi-affine schemes, not schematicity of an algebraic-space target under this cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space with a finite faithfully flat quasi affine covering is a scheme",
+   "results": "OK 8 hits: AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.Scheme.IsQuasiAffine, AlgebraicGeometry.Scheme.AffineCover, AlgebraicGeometry.IsAffine, AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine, AlgebraicGeometry.instIsAffineXSchemeAffineCover, AlgebraicGeometry.AffineScheme, AlgebraicGeometry.Scheme.isAffine_affineCover",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphism properties and quasi-affine schemes, not schematicity of an algebraic-space target under this cover"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quasiseparated-space-dense-scheme-open",
+  "date": "2026-10-23",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the local-dimension bound on the points over x in the first paragraph of the proof of Tag 0ADD. Conversion of the topological dimension hypothesis to chart local-ring bounds in the proof of Tag 0ADD, first paragraph; comparison supplied by Tags 0A4J and 0BAN. Supporting point-topology input to Tag 0A4J: Sobriety of a quasi-separated algebraic space. In Tag 03K6, the sentence applying theorem-decent-open-dense-scheme to the reduced closed subspace. Supporting input to the dense schematic locus argument: Schematicity under a finite locally free cover open in an affine scheme.",
+   "via": [
+    "lem-sfb-quasiseparated-space-dense-scheme-open",
+    "lem-sfb-quasiseparated-space-sober",
+    "lem-sfb-space-topological-dimension-local-rings",
+    "lem-sfb-space-quasifinite-source-dimension-bound",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-locally-free-open-affine-cover",
+  "worker": "stage1",
+  "summary": "Split through the kernel-pair relation following Stacks 07S6, with seven explicit steps. Reused existing nodes throughout, including 03JE, 03BM, 02WU, 01JJ and prime avoidance. Supplied the direct finite-subset principal-affine argument and the quotient universal-property argument; no quasi-compactness or Noetherian hypothesis added. No new nodes. Mathlib searches find no algebraic-space schematicity statement.",
+  "blueprint": "Realizes the recorded supporting schematicity input to the dense-scheme-open argument on the alteration chain below det-thm-sf-ctf-stability-direct-images, proof (3). Current latest blueprint proof (3) and the chapter/unit route were read. The inherited blueprint.from.node is null (ancestor command confirms); the existing from.place and via are retained. No matching blueprint node was found by tag and concept searches.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-finite-flat-affine-relation-quotient",
+    "why": "The generic affine finite locally free equivalence-relation quotient is the explicit affine-quotient input of the item source 07S6; no node of this unit states that algebraic quotient theorem."
+   },
+   {
+    "node": "lem-trf-etale-relation-finding-opens",
+    "why": "The generic flat locally finitely presented relation finding-opens theorem is the explicit 02WU input of 07S6; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "why": "Only clause (0), affineness of a principal open of an affine scheme, is used to verify the orbit condition; this is scheme theory independent of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-localization-away-basic-open",
+    "why": "Only the principal-open topological basis clause is used in the finite-orbit construction."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic scheme-morphism fact to check the hypothesis of the 02WU input and Zariski sheaf condition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-finite-flat-affine-relation-quotient",
+  "lem-trf-etale-relation-finding-opens",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-open-immersion-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-fa6cfc17d",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-fa6cfc17d (reviewer sub-agent of L); spot-checked: PASS, with no fixes. I read the whole delivery against Stacks 07S6 (spaces-properties.tex, proposition-finite-flat-equivalence-global: proof plus the following paragraph that points to 01ZY). The item statement is unchanged from live and side-live, which still have it unsplit, so the delivery is not superseded. The split creates no new nodes and has seven steps, each checked against the statement of the node it cites. (1) The kernel pair R=U×_X U: s and t are finite locally free as base changes of p, and surjective through the diagonal section. (2) Parts (2) and (4) of lem-sfb-space-fppf-covering-calculus make T×_X U→T a scheme fppf covering. The step then writes out the sheafification universal property to get X≅(U/R)^#. (3) This is a direct proof of 01ZY case (2) and needs no quasi-compactness: f_v from the D(f) basis, prime avoidance with r=|E|≥1, D(f)⊆∪D(f_v)⊆U, and D(f) affine by clause (0) of lem-weil-pbc-affine-ideals-closed-subscheme. (4) 03JE gives an invariant affine W_u. R_u=U×_X W_u is finite over W_u, so it is affine. (5) The hypotheses of 03BM (lem-a1-finite-flat-affine-relation-quotient) all hold. (6) The 02WU node's statement allows flat lfp s and t, and g=W_u↪U is étale, hence flat lfp. Both quotient identifications are compatible. (7) Coverage is verified by the fppf lift, X is a Zariski sheaf, and 01JJ applies (it is Lean-closed, so it is a tool). Edge cases: U empty, A=0, nonreduced R, repeated primes. Further checks: proof_deps equals the union of uses; no cycle (the closure of 904 nodes does not contain the item); no SGA source. I accept the declared tool_uses for 03BM, 02WU and the generic pbc scheme lemmas. Batch 5: def-trf-algebraic-space is a definition. lem-trf-finite-presentation-module-descent-flat-local is faithfully-flat descent of finite presentation, pure algebra. lem-trf-etale-relation-finding-opens (02WU) is a general algebraic-space lemma. None of the three is given by the trace-formula or Poincaré-duality assumptions or is a step of their proofs, so all are accepted as generic. No duplicate of the item exists in the DAG; the 07S6/01ZY search hits are narrower or different statements."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeOpenAffineCover",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_scheme_of_finiteLocallyFree_openAffineCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeOpenAffineCover.lean",
+  "statement": "theorem exists_scheme_of_finiteLocallyFree_openAffineCover {S : Scheme.{u}} (X : AlgebraicSpace S) (U : Over S) (p : yoneda.obj U ⟶ X.obj.obj) (hp : IsRepresentableWith (fun _ _ q ↦ q.left.IsFiniteLocallyFree) p) (hsurj : pointImage p = Set.univ) (A : CommRingCat.{u}) (j : U.left ⟶ Spec A) [IsOpenImmersion j] : ∃ V : Over S, Nonempty (yoneda.obj V ≅ X.obj.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9b1c472af",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Read node, source 07S6 (proof plus the following 01ZY paragraph), the module, the report and the dep declarations (IsRepresentableWith, pointImage/Point, Scheme.Hom.IsFiniteLocallyFree, IsOpenImmersion, Spec). Every hypothesis and conclusion clause matches: hp gives representability with finite locally free pullbacks on every test, hsurj is point-class surjectivity, the open immersion into Spec A has no quasi-compactness condition, the conclusion is ∃ V : Over S with yoneda.obj V ≅ X. No extra assumptions; a single site universe u; edge cases U empty, A = 0 and U not quasi-compact are covered. Fresh delivery (only the lean field differs from side-live; the statement field is verbatim), all imports exist, no duplicate (AdmissibleFreeFiniteQuotient is the 07S7 finite-group case), no definitions, sorry only, docstrings carry the source, blueprint tag and seven steps, the report has both sections. No findings; no compile needed."
+ }
+}

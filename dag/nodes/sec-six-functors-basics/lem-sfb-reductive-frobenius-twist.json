@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-reductive-frobenius-twist",
+ "kind": "statement",
+ "title": "Frobenius twist and root datum of a split reductive group",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] of characteristic $p>0$. Let $G$ be a reductive $F$-group scheme [def-sc-group-scheme], meaning smooth, connected, affine and of finite type with no nontrivial smooth connected normal unipotent subgroup. Unipotent means unipotent matrices at geometric points in a faithful representation. Fix a split maximal torus $T\\subseteq G$, and use its reduced root datum $(M,\\Phi,M^\\vee,\\Phi^\\vee)$ as in [lem-sfb-reductive-borel-pair-structure], with $M=X^*(T)=\\operatorname{Hom}_{F\\text{-groups}}(T,\\mathbf G_m)$ and $\\mathbf G_m(A)=A^\\times$. Put $\\sigma(a)=a^p$, $C=F[G]$, $G^{(p)}=\\operatorname{Spec}(C\\otimes_{F,\\sigma}F)$ [def-weil-affine-spectrum] with the base-changed group operations, and let $T^{(p)}\\subseteq G^{(p)}$ be the base change of $T$. Then $G^{(p)}$ is reductive and $T^{(p)}$ is a split maximal torus. Base change of characters gives an isomorphism $\\iota:M\\xrightarrow{\\sim}X^*(T^{(p)})$, $\\chi\\mapsto\\chi^{(p)}$, where the base change of $\\mathbf G_m$ is identified with $\\mathbf G_m$ by its Laurent coordinate. Together with the base change of cocharacters, $\\iota$ identifies the full reduced root data: roots correspond by $\\alpha\\mapsto\\alpha^{(p)}$ and their coroots by $\\alpha^\\vee\\mapsto(\\alpha^\\vee)^{(p)}$, preserving the integer pairing. The relative Frobenius $F_{G/F}:G\\to G^{(p)}$, whose coordinate map is $b\\otimes c\\mapsto cb^p$, is a surjective faithfully flat group homomorphism with finite scheme-theoretic kernel; finite means finite-dimensional coordinate algebra and faithfully flat means extension of scalars is exact and detects zero modules. It maps $T$ into $T^{(p)}$, and $\\chi^{(p)}\\circ F_{G/F}|_T=p\\chi$ for every $\\chi\\in M$. The torus and trivial-group cases are included.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "2.25--2.29, printed pp.47--49 (twist, functoriality, group homomorphism and faithfully flat Frobenius isogeny); proof of 23.27, p.493 (root data unchanged by base field extension), applied to the field automorphism sigma; 12.9 and 21.11 (characters and canonical root datum)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "The field map $\\sigma$ is bijective: $a^p=b^p$ implies $(a-b)^p=0$, hence $a=b$ in a field; every $c\\in F$ has a $p$th root since $X^p-c$ has a root in $F$. For any commutative $F$-algebra $A$, set $A^\\sigma=A\\otimes_{F,\\sigma}F$. The tensor balancing relation is $(\\lambda a)\\otimes c=a\\otimes\\sigma(\\lambda)c$. Consequently $j_A:a\\mapsto a\\otimes1$ is a bijective ring map, with inverse $a\\otimes c\\mapsto\\sigma^{-1}(c)a$; it is $\\sigma$-semilinear. The two inverse identities follow by substituting the balancing relation. For every $F$-algebra map $f:A\\to D$, $f^\\sigma j_A=j_D f$. Twisting by $\\sigma^{-1}$ reverses this operation, also on maps. The maps $j$ identify the underlying spectra, although they need not be $F$-morphisms. Tensoring the multiplication, identity and inverse diagrams therefore gives the specified group structure on $G^{(p)}$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "2.24--2.28, printed pp.46--49; the inverse for an automorphism of the base field is written explicitly."
+   }
+  },
+  {
+   "text": "This operation preserves affineness, finite type and connectedness: the underlying rings and spectra are isomorphic by step 1, and a finite algebra generating family is carried to a finite generating family. It also preserves smoothness, directly from [def-sbc-smooth-morphisms]. A finite presentation is carried to the presentation with every coefficient acted on by $\\sigma$, and twisting back recovers the original presentation. For a first-order affine thickening and a lifting problem over the twisted field structure, twist the entire diagram by $\\sigma^{-1}$. Its ideal still has square zero. Formal smoothness of the original scheme gives a lift; twisting the lift forward solves the original diagram, with the same restriction. This proves preservation of formal smoothness and local finite presentation, and hence smoothness. Apply this to $G$ and, when needed, to its smooth closed subgroups.",
+   "uses": [
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "2.29, printed pp.48--49, first part of its proof; smoothness under the field automorphism is checked using the infinitesimal definition."
+   }
+  },
+  {
+   "text": "Twisting and its inverse carry closed subgroup diagrams and their conjugation diagrams to closed subgroup diagrams and conjugation diagrams; thus inclusions and normality are preserved and reflected. A faithful matrix representation twists to a faithful matrix representation, since twisting the defining coordinate maps is invertible. The matrix identity $(u-I)^n=0$ twists to the identical matrix identity: addition, multiplication and $I$ are preserved. The equivalence on test algebras therefore preserves and reflects unipotence on all geometric points. If $G^{(p)}$ had a nontrivial smooth connected normal unipotent subgroup, its inverse twist would have all these properties in $G$, contradicting reductivity. Thus $G^{(p)}$ is reductive. Twisting a splitting $T\\simeq\\mathbf G_m^r$ gives $T^{(p)}\\simeq\\mathbf G_m^r$, since the Laurent-coordinate group operations have integer coefficients. Any larger torus in $G^{(p)}$ inverse-twists to a larger torus in $G$. Hence $T^{(p)}$ is split and maximal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "2.26--2.29, printed pp.47--49; reductivity and maximality checked using the invertible change of field structure, as in the base-change observation in 23.27, p.493."
+   }
+  },
+  {
+   "text": "Twist the maps $\\chi:T\\to\\mathbf G_m$ and $\\nu:\\mathbf G_m\\to T$. The Laurent-coordinate identification $(F[z,z^{-1}])^\\sigma\\simeq F[z,z^{-1}]$ sends $z\\otimes1$ to $z$ and $1\\otimes c$ to $c$. Step 1 and its inverse therefore give inverse bijections on characters and on cocharacters; they are group homomorphisms because pointwise multiplication of maps is preserved. These give the asserted lattice isomorphisms. If $\\chi\\nu$ has coordinate $z\\mapsto z^n$, its twist still has coordinate $z\\mapsto z^n$, including $n<0$. Thus $\\langle\\chi^{(p)},\\nu^{(p)}\\rangle=\\langle\\chi,\\nu\\rangle$. This is the integer pairing specified in [lem-sfb-reductive-borel-pair-structure], so the full character and cocharacter lattices, including central torus directions, are retained.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "12.9(a), printed pp.233--234; 21a and 21.12, pp.424--430; the character/cocharacter maps and pairing are calculated on Laurent coordinates."
+   }
+  },
+  {
+   "text": "Use the tangent-space and character-weight description in [lem-sfb-reductive-rank-one-reflections]. Twisting identifies tangent vectors by applying step 1 to $F[\\varepsilon]/(\\varepsilon^2)$: the coefficient map $a+\\varepsilon b\\mapsto\\sigma(a)+\\varepsilon\\sigma(b)$ respects addition, multiplication and evaluation at $\\varepsilon=0$. In the kernel of $G(F[\\varepsilon])\\to G(F)$ this gives a bijective $\\sigma$-semilinear map $J:\\mathfrak g\\to\\mathfrak g^{(p)}$. Addition is given by multiplication of tangent points, and scalar multiplication by substitution $\\varepsilon\\mapsto c\\varepsilon$, so $J$ is indeed semilinear. Differentiating conjugation amounts to evaluating that same conjugation diagram on dual numbers; its twist is the conjugation diagram for $T^{(p)}$ in $G^{(p)}$. Thus twisting the weight equation $t\\cdot v=\\alpha(t)v$, as an identity on test algebras, gives $t'\\cdot J(v)=\\alpha^{(p)}(t')J(v)$. The inverse twist gives the converse. The direct sum of weight spaces is consequently carried to the direct sum of the corresponding twisted weight spaces. Nonzero spaces and nonzero characters are preserved. The nonzero weights, hence the roots, correspond exactly by $\\alpha\\mapsto\\alpha^{(p)}$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.1--21.2, printed pp.424--425; 23.27, p.493, invariance of the root datum from its definition; tangent and weight comparison written out on dual numbers."
+   }
+  },
+  {
+   "text": "To identify coroots, use the rank-one centralizer and uniqueness assertions of [lem-sfb-reductive-rank-one-reflections], rather than differentials of characters. Twisting identifies $\\ker\\alpha$ with $\\ker\\alpha^{(p)}$ and preserves inclusions of tori in both directions, so it identifies their largest subtori $T_\\alpha$ and $T_{\\alpha^{(p)}}$. The centralizer equations $gt=tg$ on every test algebra twist to the same equations. Hence it identifies $(G_\\alpha)^{(p)}$ with $(G^{(p)})_{\\alpha^{(p)}}$ and also identifies their torus normalizers, their $F$-points and their quotients by the tori. The unique nonidentity element of the rank-one Weyl group therefore corresponds to the unique nonidentity element for the twisted root. Conjugation and character composition commute with twisting, giving $s_{\\alpha^{(p)}}(x^{(p)})=(s_\\alpha x)^{(p)}$. Apply the character-lattice isomorphism to $s_\\alpha x=x-\\langle x,\\alpha^\\vee\\rangle\\alpha$ and use step 4 to obtain\n$$s_{\\alpha^{(p)}}(x^{(p)})=x^{(p)}-\\langle x^{(p)},(\\alpha^\\vee)^{(p)}\\rangle\\alpha^{(p)}.$$\nSince every character is $x^{(p)}$, the cited uniqueness of the cocharacter in this reflection identity shows $(\\alpha^{(p)})^\\vee=(\\alpha^\\vee)^{(p)}$. Together with steps 4--5 this proves identification of the full reduced root data in every characteristic.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(d)--(e), printed pp.429--430, and proof of 23.27, p.493; coroots characterized by the unique rank-one reflection."
+   }
+  },
+  {
+   "text": "Put $B=C\\otimes_{F,\\sigma}F$. Define $\\varphi:B\\to C$ by $b\\otimes c\\mapsto cb^p$. The tensor universal property makes this an $F$-algebra map: additivity is $(b+d)^p=b^p+d^p$, and the balancing relation maps to $c(\\lambda b)^p=\\lambda^pcb^p$. By [lem-sfb-affine-group-coordinate-hopf], $C$ has the Hopf maps induced by the group operations. On $B$ use their scalar extensions. For $\\Delta(b)=\\sum_i b_i'\\otimes b_i''$ the required compatibility is\n$$\\Delta(\\varphi(b\\otimes c))=c\\sum_i(b_i')^p\\otimes(b_i'')^p=(\\varphi\\otimes\\varphi)\\Delta_B(b\\otimes c).$$\nThe counit and antipode compatibilities are $\\epsilon(cb^p)=c\\epsilon(b)^p$ and $S(cb^p)=cS(b)^p$. All are identities on pure tensors and hence on $B$. The Hopf-spectrum functor [lem-sfb-hopf-spectrum-functor] makes $\\operatorname{Spec}\\varphi$ a group homomorphism. Its displayed coordinate map is exactly that of $F_{G/F}$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-sfb-hopf-spectrum-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "2.24 and 2.27--2.28, printed pp.46--49; Proposition 3.6 and Corollary 3.7, pp.66--67."
+   }
+  },
+  {
+   "text": "Apply [sbc-lem-smooth-geometrically-reduced] to the smooth structure morphism $G\\to\\operatorname{Spec}F$: its single fibre $G$ is reduced. Then [lem-weil-pbc-affine-scheme-reduced-iff] makes $C$ a reduced ring. Every $u=\\sum_i b_i\\otimes c_i\\in B$ has the form $d\\otimes1$ with $d=\\sum_i\\sigma^{-1}(c_i)b_i$, by the balancing relation of step 1. If $\\varphi(u)=0$, then $d^p=0$, so reducedness gives $d=0$ and hence $u=0$. Thus $\\varphi$ is injective. By [lem-pc-affine-finite-type-algebra], $C$ is finitely generated over $F$. If $z_1,\\ldots,z_N$ generate $C$, then $z_1\\otimes1,\\ldots,z_N\\otimes1$ generate $B$ over its right-hand copy of $F$; twisting a polynomial expression for $b$ simply acts on its coefficients by $\\sigma$. Both Hopf algebras therefore meet the finite-generation hypothesis used next.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-affine-scheme-reduced-iff",
+    "lem-pc-affine-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "2.29, printed pp.48--49, reducedness and dominance; Stacks Tags 056T (varieties, lemma-smooth-geometrically-normal), 01J2 (schemes, lemma-affine-reduced), and 01T2 (morphisms, lemma-locally-finite-type-characterize)."
+   }
+  },
+  {
+   "text": "The map $\\varphi:B\\to C$ is an injective homomorphism of finitely generated commutative Hopf $F$-algebras by steps 7--8. Apply [lem-sfb-hopf-subalgebra-faithfully-flat] with source $B$ and target $C$. It says exactly that extension of scalars along $\\varphi$ is exact and detects zero modules, proving faithful flatness in the stated exactness-and-detection sense. For surjectivity on spectra no additional group-image theorem is needed: $\\varphi\\circ j_C$ is the absolute Frobenius $d\\mapsto d^p$. Its inverse-image map on prime ideals is the identity, since $d^p\\in\\mathfrak p$ if and only if $d\\in\\mathfrak p$. Since $j_C$ is a ring isomorphism, $\\operatorname{Spec}\\varphi$ is a bijection on underlying points, in particular surjective.",
+   "uses": [
+    "lem-sfb-hopf-subalgebra-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.31, printed pp.73--74; 2.25--2.29, pp.47--49, for absolute Frobenius on points and faithful flatness of relative Frobenius."
+   }
+  },
+  {
+   "text": "The scheme-theoretic kernel is the fibre over the identity, with coordinate algebra $D=C\\otimes_{B,\\epsilon_B}F$. Let $\\bar z_i$ be the images of the algebra generators from step 8. They generate $D$ as an $F$-algebra. In this tensor product,\n$$\\bar z_i^p=\\varphi(z_i\\otimes1)\\otimes1=1\\otimes\\epsilon_B(z_i\\otimes1)=\\epsilon(z_i)^p.$$\nThus reducing powers of each $\\bar z_i$ shows that the monomials $\\prod_i\\bar z_i^{e_i}$, $0\\leq e_i<p$, span $D$ over $F$. There are at most $p^N$ such monomials. Hence $D$ is finite-dimensional and the kernel is finite. This calculation imposes no reducedness on the kernel, and applies also when $N=0$, with the empty monomial equal to $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "2.24--2.29, printed pp.46--49; explicit finite-coordinate calculation for the Frobenius kernel."
+   }
+  },
+  {
+   "text": "For any closed subgroup $H\\subseteq G$, with coordinate quotient $C\\to C_H$, taking $p$th powers commutes with the quotient map. Thus the Frobenius square for $H\\to G$ commutes on pure tensors and $F_{G/F}$ maps $H$ into $H^{(p)}$. In particular it maps $T$ into $T^{(p)}$. If $u_\\chi\\in F[T]^\\times$ is the invertible coordinate function of a character $\\chi$, its twisted character has coordinate function $u_\\chi\\otimes1$. Pulling back by $F_{T/F}$ sends this to $u_\\chi^p$, the coordinate function of $p\\chi$. Therefore $\\chi^{(p)}\\circ F_{G/F}|_T=p\\chi$. For a torus the root set is empty and steps 4 and 7--10 still apply; for $G=1$ the lattices and root sets are zero, $C=B=D=F$, and the homomorphism is the identity. These verify the stated edge cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "2.27(a), printed p.48, functoriality; Laurent-coordinate calculation of the torus restriction, with the empty-root and trivial-group cases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-sfb-hopf-spectrum-functor",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-sfb-hopf-subalgebra-faithfully-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "2.24--2.29 (twist and relative Frobenius), 12.9 (character lattices), 21.11(d)--(e) (unique coroot reflection), 23.27 proof (root-datum invariance), and 3.31 (Hopf faithful flatness); the semilinear, tangent, and kernel calculations are written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius twist of a split reductive group preserves its root datum and relative Frobenius is a faithfully flat isogeny",
+   "results": "{\"t\": \"2026-10-23T21:47:25Z\", \"tool\": \"leanfinder\", \"query\": \"Frobenius twist of a split reductive group preserves its root datum and relative Frobenius is a faithfully flat isogeny\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"coe_frobeniusEquiv\", \"frobeniusEquiv_apply\", \"frobenius_apply_frobeniusEquiv_symm\", \"frobeniusEquiv\", \"frobeniusEquiv_symm_apply_frobenius\", \"Perfection.pthRoot_frobenius\", \"FiniteField.frobeniusAlgEquiv\", \"FiniteField.frobeniusAlgEquiv_symm_apply\"], \"digest\": \"37f38d2de8e87065\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Frobenius and abstract root-pairing scalar restriction are different statements. Read Mathlib/Algebra/CharP/Frobenius.lean:114-118, FieldTheory/Perfect.lean:119-122 and LinearAlgebra/RootSystem/BaseChange.lean:114-116. No group scheme Frobenius isogeny or identification of its integral root datum is stated; AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"FaithfullyFlat\"",
+   "results": "{\"t\": \"2026-10-23T21:47:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"frobenius\\\", \\\"FaithfullyFlat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Frobenius and abstract root-pairing scalar restriction are different statements. Read Mathlib/Algebra/CharP/Frobenius.lean:114-118, FieldTheory/Perfect.lean:119-122 and LinearAlgebra/RootSystem/BaseChange.lean:114-116. No group scheme Frobenius isogeny or identification of its integral root datum is stated; AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]robenius|[Rr]oot[Dd]atum",
+   "results": "{\"t\": \"2026-10-23T21:47:23Z\", \"tool\": \"grep\", \"query\": \"[Ff]robenius|[Rr]oot[Dd]atum\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Frobenius and abstract root-pairing scalar restriction are different statements. Read Mathlib/Algebra/CharP/Frobenius.lean:114-118, FieldTheory/Perfect.lean:119-122 and LinearAlgebra/RootSystem/BaseChange.lean:114-116. No group scheme Frobenius isogeny or identification of its integral root datum is stated; AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Frobenius of a smooth connected algebraic group is a faithfully flat isogeny and twisting preserves roots",
+   "results": "{\"t\": \"2026-10-23T21:47:24Z\", \"tool\": \"leansearch\", \"query\": \"Relative Frobenius of a smooth connected algebraic group is a faithfully flat isogeny and twisting preserves roots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteField.Extension.frob\", \"LinearMap.frobenius\", \"FiniteField.coe_frobeniusAlgEquivOfAlgebraic\", \"FiniteField.frobeniusAlgEquivOfAlgebraic\", \"FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp\", \"frobeniusEquiv\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Polynomial.rootsExpandPowEquivRoots\"], \"digest\": \"4c5052a969d94487\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Frobenius and abstract root-pairing scalar restriction are different statements. Read Mathlib/Algebra/CharP/Frobenius.lean:114-118, FieldTheory/Perfect.lean:119-122 and LinearAlgebra/RootSystem/BaseChange.lean:114-116. No group scheme Frobenius isogeny or identification of its integral root datum is stated; AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under the Frobenius twist of a split reductive group the character lattice roots and coroots are unchanged",
+   "results": "{\"t\": \"2026-10-23T21:48:24Z\", \"tool\": \"leanfinder\", \"query\": \"Under the Frobenius twist of a split reductive group the character lattice roots and coroots are unchanged\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.restrictScalars_coe_coroot\", \"LieAlgebra.IsKilling.rootSystem_coroot_apply\", \"RootPairing.flip_root\", \"RootPairing.algebraMap_root'In_apply\", \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"RootPairing.restrictScalars_coe_root\", \"LieAlgebra.IsKilling.apply_coroot_eq_cast\", \"RootPairing.Hom.root_weightMap_apply\"], \"digest\": \"c5b468219ebd59cc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Frobenius and abstract root-pairing scalar restriction are different statements. Read Mathlib/Algebra/CharP/Frobenius.lean:114-118, FieldTheory/Perfect.lean:119-122 and LinearAlgebra/RootSystem/BaseChange.lean:114-116. No group scheme Frobenius isogeny or identification of its integral root datum is stated; AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]robenius|[Rr]oot[Dd]atum",
+   "results": "{\"t\": \"2026-10-23T22:33:44Z\", \"tool\": \"grep\", \"query\": \"[Ff]robenius|[Rr]oot[Dd]atum\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Mathlib/Algebra/CharP/Frobenius.lean:114-118, FieldTheory/Perfect.lean:119-122, LinearAlgebra/RootSystem/Defs.lean:109 and LinearAlgebra/RootSystem/BaseChange.lean:114-120. Ring Frobenius and abstract scalar restriction of root pairings do not state the group-scheme twist or its reductive root datum. The AlgebraicGeometry grep and Loogle have no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Frobenius of a reductive algebraic group and the root datum of its Frobenius twist",
+   "results": "{\"t\": \"2026-10-23T22:33:44Z\", \"tool\": \"leansearch\", \"query\": \"Relative Frobenius of a reductive algebraic group and the root datum of its Frobenius twist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootDatum\", \"FiniteField.Extension.frob\", \"LinearMap.frobenius\", \"FiniteField.frobeniusAlgEquivOfAlgebraic\", \"FiniteField.coe_frobeniusAlgEquivOfAlgebraic\", \"FiniteField.frobeniusAlgHom_apply\", \"FiniteField.coe_frobeniusAlgHom\", \"Perfection.frobenius_pthRoot\"], \"digest\": \"845fb65d2b06828c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Mathlib/Algebra/CharP/Frobenius.lean:114-118, FieldTheory/Perfect.lean:119-122, LinearAlgebra/RootSystem/Defs.lean:109 and LinearAlgebra/RootSystem/BaseChange.lean:114-120. Ring Frobenius and abstract scalar restriction of root pairings do not state the group-scheme twist or its reductive root datum. The AlgebraicGeometry grep and Loogle have no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"FaithfullyFlat\"",
+   "results": "{\"t\": \"2026-10-23T22:33:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"frobenius\\\", \\\"FaithfullyFlat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Mathlib/Algebra/CharP/Frobenius.lean:114-118, FieldTheory/Perfect.lean:119-122, LinearAlgebra/RootSystem/Defs.lean:109 and LinearAlgebra/RootSystem/BaseChange.lean:114-120. Ring Frobenius and abstract scalar restriction of root pairings do not state the group-scheme twist or its reductive root datum. The AlgebraicGeometry grep and Loogle have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius twist of a split reductive group preserves roots coroots and relative Frobenius is a faithfully flat isogeny",
+   "results": "{\"t\": \"2026-10-23T22:33:45Z\", \"tool\": \"leanfinder\", \"query\": \"Frobenius twist of a split reductive group preserves roots coroots and relative Frobenius is a faithfully flat isogeny\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"coe_frobeniusEquiv\", \"frobeniusEquiv_apply\", \"coe_frobenius_comp_coe_frobeniusEquiv_symm\", \"frobenius_apply_frobeniusEquiv_symm\", \"frobeniusEquiv_symm_apply_frobenius\", \"frobeniusEquiv\", \"Perfection.pthRoot_frobenius\", \"frobenius_comp_frobeniusEquiv_symm\"], \"digest\": \"858e9e8d127eab2f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Mathlib/Algebra/CharP/Frobenius.lean:114-118, FieldTheory/Perfect.lean:119-122, LinearAlgebra/RootSystem/Defs.lean:109 and LinearAlgebra/RootSystem/BaseChange.lean:114-120. Ring Frobenius and abstract scalar restriction of root pairings do not state the group-scheme twist or its reductive root datum. The AlgebraicGeometry grep and Loogle have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change by a field automorphism preserves a reductive group and its integral root datum",
+   "results": "{\"t\": \"2026-10-23T22:33:47Z\", \"tool\": \"leanfinder\", \"query\": \"Base change by a field automorphism preserves a reductive group and its integral root datum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.restrictScalars\", \"SpecialLinearGroup.baseChange_apply_coe\", \"WeierstrassCurve.baseChange_integralModel_eq\", \"RootPairing.restrictScalars'\", \"SpecialLinearGroup.baseChange\", \"RootPairing.restrictScalars_coe_root\", \"WeierstrassCurve.VariableChange.map_baseChange\", \"RootPairing.restrictScalars_coe_coroot\"], \"digest\": \"7108a967ebb3b6be\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Mathlib/Algebra/CharP/Frobenius.lean:114-118, FieldTheory/Perfect.lean:119-122, LinearAlgebra/RootSystem/Defs.lean:109 and LinearAlgebra/RootSystem/BaseChange.lean:114-120. Ring Frobenius and abstract scalar restriction of root pairings do not state the group-scheme twist or its reductive root datum. The AlgebraicGeometry grep and Loogle have no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scalar-p-isogeny-relative-frobenius",
+  "date": "2026-10-24",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Multiplication of simple-module dimensions along the p-adic weight expansion. Supporting input to the numerical multiplication: Steinberg tensor-product simplicity for a restricted simple module and a Frobenius pullback. Supporting input: Sections 2.25--2.29, printed pp.47--49 (relative Frobenius), and full isogeny theorem 23.25, printed pp.492--493 (existence and uniqueness up to an inner torus automorphism); isomorphism theorem 23.26. Scalar p isogeny specialization: compare f with relative Frobenius after the root-datum isomorphism between G^(p) and G, and absorb the inner torus automorphism into h. Supporting input here: 2.25--2.29, printed pp.47--49 (twist, functoriality, group homomorphism and faithfully flat Frobenius isogeny); proof of 23.27, p.493 (root data unchanged by base field extension), applied to the field automorphism sigma; 12.9 and 21.11 (characters and canonical root datum).",
+   "via": [
+    "lem-sfb-scalar-p-isogeny-relative-frobenius",
+    "lem-sfb-restricted-frobenius-tensor-simplicity",
+    "lem-sfb-restricted-highest-weight-dimension-product",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-reductive-frobenius-twist",
+  "worker": "stage1",
+  "summary": "Expanded the field-automorphism transport and relative Frobenius into eleven explicit steps. Reused the existing rank-one coroot uniqueness and Hopf faithful-flatness theorems, with smooth reducedness and affine finite-type inputs. Proved finite kernel by a bounded-monomial calculation; no new node, statement change, or Lean attachment. Checked torus, trivial-group and nonreduced-kernel cases.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Multiplication of simple-module dimensions along the p-adic weight expansion. Supporting input to the numerical multiplication: Steinberg tensor-product simplicity for a restricted simple module and a Frobenius pullback. Supporting input: Sections 2.25--2.29, printed pp.47--49 (relative Frobenius), and full isogeny theorem 23.25, printed pp.492--493 (existence and uniqueness up to an inner torus automorphism); isomorphism theorem 23.26. Scalar p isogeny specialization: compare f with relative Frobenius after the root-datum isomorphism between G^(p) and G, and absorb the inner torus automorphism into h. Supporting input here: 2.25--2.29, printed pp.47--49 (twist, functoriality, group homomorphism and faithfully flat Frobenius isogeny); proof of 23.27, p.493 (root data unchanged by base field extension), applied to the field automorphism sigma; 12.9 and 21.11 (characters and canonical root datum).",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smooth-fibre reducedness, applied to the structure morphism over F; the unit has no separate smooth-reducedness statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-reduced-iff",
+    "why": "Generic affine reducedness dictionary used to infer reducedness of C from G; not a proper-base-change argument."
+   },
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Generic affine finite-type dictionary needed for the finitely generated Hopf-algebra theorem; not a Picard argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-pc-affine-finite-type-algebra"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-d6959695c",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-d6959695c (reviewer sub-agent of L); spot-checked: I read the item and all 11 steps in full. There are no new nodes. I checked every cited statement against the use made of it. Source checked: Milne iAG 2.24–2.29 (pp.46–49) gives A^(p)=A⊗_{k,f}k and F_X=Spm(a⊗c↦ca^p); in 2.29's proof σ is an isomorphism, so G^(p)≅G as a scheme and F_G is faithfully flat. Milne 23.27's proof (p.493) says root data do not change under base field extension. The statement matches both, and I tested it on the torus case (kernel μ_p^r, nonreduced, dim p^r, χ^(p)∘F=pχ), on G=1, and on SL_2 coroots. Step by step: well-definedness of φ on the balancing relation and the inverse of j_A both hold. Smoothness transfers through the σ^{-1}-twisted lifting problem, and reductivity, unipotence and maximality transfer by the invertible twist. The twist keeps z↦z^n for n<0. On dual numbers it gives a σ-semilinear tangent map that respects weights. The coroot follows from rank-one-reflections' uniqueness clause, which is in its statement. The Hopf compatibilities hold because Δ(b)^p=Σ(b')^p⊗(b'')^p in characteristic p. φ is injective because C is reduced (smooth ⇒ reduced fibre G, then affine-reduced-iff). Faithful flatness comes from hopf-subalgebra-faithfully-flat with all its hypotheses met. Spec φ is bijective because φ∘j_C is absolute Frobenius. The kernel C⊗_{B,ε}F is spanned by at most p^N monomials since z̄_i^p=ε(z_i)^p. The torus pullback is u_χ↦u_χ^p. I found no duplicate in a search for Frobenius twist and relative Frobenius over the DAG; the nearest nodes are affine-group-frobenius-smooth-image, frobenius-twist-geometric-integrality, rank-one-frobenius-extension, isogeny-torus-conjugacy and trf 0CCD, and none states this item. No SGA. I accept the three tool uses (smooth-geometrically-reduced, affine-reduced-iff, affine-finite-type-algebra) as generic dictionaries. Batch-5: lem-trf-smooth-fpqc-base-descent (Mathlib smoothness descent along flat surjections, Stacks 02VL) and lem-trf-flat-tensor-preserves-injection (Module.Flat.lTensor_preserves_injective_linearMap) are generic algebra, not steps of the trace formula or Poincaré duality, so I accept both. Maintainer note: the statement of borel-pair-structure only asserts that coroots exist, and with a nontrivial centre that does not fix them. Its proof uses the canonical coroots of rank-one-reflections, and step 6 identifies exactly those. Rewording borel-pair-structure would make the convention explicit. No files changed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ReductiveFrobeniusTwist",
+  "declaration": "AlgebraicGeometry.GroupSchemeFrobenius.reductive_frobenius_twist",
+  "declarations": [
+   "AlgebraicGeometry.GroupSchemeFrobenius.twist",
+   "AlgebraicGeometry.GroupSchemeFrobenius.reductive_frobenius_twist"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ReductiveFrobeniusTwist.lean",
+  "statement": "theorem reductive_frobenius_twist {F : Type u} [Field F] [IsAlgClosed F] (p : ℕ) [Fact p.Prime] [CharP F p] (G T : Grp (Over (Spec (.of F)))) (i : T ⟶ G) (hG : ReductiveTorusCentralizer.IsReductive G) (hT : ReductiveTorusCentralizer.IsMaximalTorus i) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) : ReductiveTorusCentralizer.IsReductive ((twist F p).obj G) ∧ ReductiveTorusCentralizer.IsMaximalTorus ((twist F p).map i) ∧ (∃ r : ℕ, Nonempty ((twist F p).obj T ≅ MultiplicativeType.splitTorus F r)) ∧ ∃ (fG : G ⟶ (twist F p).obj G) (fT : T ⟶ (twist F p).obj T) (e : (twist F p).obj (Grp.mk (StandardGroupSchemes.multiplicative F)) ≅ Grp.mk (StandardGroupSchemes.multiplicative F)) (_ : IsCommMonObj (StandardGroupSchemes.multiplicative F)) (_ : IsCommMonObj T.X) (_ : IsCommMonObj ((twist F p).obj T).X) (iota : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) ≃+ Additive ((twist F p).obj T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (kappa : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T) ≃+ Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ (twist F p).obj T)) (a : ModObj T.X G.X) (ap : ModObj ((twist F p).obj T).X ((twist F p).obj G).X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) (Pp : RootDatum Φ (Additive ((twist F p).obj T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ (twist F p).obj T))), (∀ b : Γ(G.X.left, ⊤), fG.hom.hom.left.appTop ((pullback.fst G.X.hom (Spec.map (CommRingCat.ofHom (frobenius F p)))).appTop b) = b ^ p) ∧ (∀ b : Γ(T.X.left, ⊤), fT.hom.hom.left.appTop ((pullback.fst T.X.hom (Spec.map (CommRingCat.ofHom (frobenius F p)))).appTop b) = b ^ p) ∧ e.hom.hom.hom.left.appTop ((Scheme.ΓSpecIso (.of (LaurentPolynomial F))).inv (LaurentPolynomial.T 1)) = (pullback.fst (StandardGroupSchemes.multiplicative F).hom (Spec.map (CommRingCat.ofHom (frobenius F p)))).appTop ((Scheme.ΓSpecIso (.of (LaurentPolynomial F))).inv (LaurentPolynomial.T 1)) ∧ (∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), (iota χ).toMul = (twist F p).map χ.toMul ≫ e.hom) ∧ (∀ ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T), (kappa ν).toMul = e.inv ≫ (twist F p).map ν.toMul) ∧ Surjective fG.hom.hom.left ∧ fG.hom.hom.left.appTop.hom.FaithfullyFlat ∧ IsFinite (GrpObj.ker fG.hom.hom).hom ∧ i ≫ fG = fT ≫ (twist F p).map i ∧ (∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), fT.hom.hom ≫ (iota χ).toMul.hom.hom = χ.toMul.hom.hom ^ p) ∧ Module.Finite ℤ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) ∧ Module.Finite ℤ (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)) ∧ Module.Finite ℤ (Additive ((twist F p).obj T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) ∧ Module.Finite ℤ (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ (twist F p).obj T)) ∧ P.IsReduced ∧ Pp.IsReduced ∧ a.smul = (i.hom.hom ⊗ₘ 𝟙 G.X) ≫ GrpObj.conj G.X ∧ ap.smul = (((twist F p).map i).hom.hom ⊗ₘ 𝟙 ((twist F p).obj G).X) ≫ GrpObj.conj ((twist F p).obj G).X ∧ (∀ α : Φ, P.root α = α.val) ∧ (∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T G a χ.toMul ≠ ⊥) ∧ (∀ χ : Additive ((twist F p).obj T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), (∃ α : Φ, Pp.root α = χ) ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ ((twist F p).obj T) ((twist F p).obj G) ap χ.toMul ≠ ⊥) ∧ (∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) ∧ (∀ (χ : Additive ((twist F p).obj T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ (twist F p).obj T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (Pp.toLinearMap χ ν)) ∧ (∀ α : Φ, Pp.root α = iota (P.root α) ∧ Pp.coroot α = kappa (P.coroot α)) ∧ ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), Pp.toLinearMap (iota χ) (kappa ν) = P.toLinearMap χ ν",
+  "branch": "newtargets-dag",
+  "by": "Q159",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing scalar-extension functor specialized to Frobenius. The relative maps and Laurent identification are pinned by coordinate equations. Characters and cocharacters are the actual Hom lattices used by the recorded Borel-pair interface; both reduced root data and their integer composition pairings are specified."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1320783e1",
+  "group": "Q159",
+  "result": "pass",
+  "note": "Node identical to live except lean; stmt_deps unchanged; lean.statement verbatim; single sorry. twist = existing MultiplicativeType.baseChange along (frobenius F p).toAlgebra (pullback along Spec σ, scalars from the right copy of F, matching Milne 2.26-2.28); real data, no duplicate. fG/fT pinned uniquely by fst^* b ↦ b^p plus over-Spec F (G affine via IsReductive); e pinned by T ↦ fst^*T; iota/kappa pinned to base change composed with e.hom/e.inv. Clauses checked: surjective, RingHom.FaithfullyFlat on Γ, IsFinite of the scheme-theoretic kernel, torus square, χ^(p)∘F|_T = χ^p, reductive/maximal/split twist, roots = nonzero tangent weights on both sides, composition-pinned pairings, root/coroot transport, pairing preserved incl. central directions. Edge cases: torus, G=1, r=0, nonreduced kernel; universes consistent. Maintainer note: coroots are existential as in the recorded borel-pair interface (not unique when Φ does not span X); canonical coroots live only in the proof_dep reductive_rankOne_reflections; the node says 'as in borel-pair', so this is faithful; the ∃P form loses nothing because transport by the pairing-preserving iota/kappa is generic. No files changed, no compile."
+ }
+}

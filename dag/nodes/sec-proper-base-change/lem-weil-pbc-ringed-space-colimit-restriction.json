@@ -14,7 +14,7 @@
     "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Restriction of sheaf-module colimits to an open",
@@ -32,38 +32,25 @@
  ],
  "proof": [
   {
-   "text": "*Restriction is a functor.* For $\\mathcal M\\in\\Mod(\\mathcal O_X)$, $\\mathcal M|_U$ is a sheaf of $\\mathcal O_U$-modules: an open covering of an open $W\\subseteq U$ by opens of $U$ is an open covering in $X$, so the sheaf condition for $\\mathcal M|_U$ on $W$ is that of $\\mathcal M$, and $\\mathcal M(W)$ is an $\\mathcal O_X(W)=\\mathcal O_U(W)$-module with semilinear restriction maps [def-weil-sheaf-of-modules-category], [def-weil-pbc-module-finite-type-presentation]. For $\\alpha:\\mathcal M\\to\\mathcal N$ the components $\\alpha_W$ ($W\\subseteq U$) are $\\mathcal O_U(W)$-linear and commute with restrictions, so $\\alpha|_U$ is a morphism of $\\mathcal O_U$-modules; $(\\beta\\alpha)|_U=\\beta|_U\\alpha|_U$ and $\\mathrm{id}|_U=\\mathrm{id}$ componentwise. So $(-)|_U:\\Mod(\\mathcal O_X)\\to\\Mod(\\mathcal O_U)$ is a functor, and the $c_i|_U$ form a cocone on $i\\mapsto\\mathcal M_i|_U$: $c_j|_U\\circ\\mathcal M(a)|_U=(c_j\\circ\\mathcal M(a))|_U=c_i|_U$ for $a:i\\to j$.",
+   "text": "Clause (1): Mathlib SheafOfModules.overPushforwardOverAdj gives the adjunction for overFunctor directly, without needing the additional sectionwise formulas of lem-weil-pbc-ringed-space-open-restriction-adjunction. Its leftAdjoint_preservesColimits instance and isColimitOfPreserves send the given colimit cocone to a colimit cocone on the restricted diagram.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-module-finite-type-presentation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00A0 (sheaves-lemma-j-pullback) (2) and its last sentence, Definition 00A1 (sheaves-definition-restriction) (3),(4)"
-   }
-  },
-  {
-   "text": "*Clause (1).* By [lem-weil-pbc-ringed-space-open-restriction-adjunction] the functor $(-)|_U:\\Mod(\\mathcal O_X)\\to\\Mod(\\mathcal O_U)$ of Step 1 is left adjoint to the direct image $j_*:\\Mod(\\mathcal O_U)\\to\\Mod(\\mathcal O_X)$, $(j_*\\mathcal G)(V)=\\mathcal G(V\\cap U)$. A left adjoint carries a colimit cocone to a colimit cocone [lem-weil-pbc-left-adjoint-preserves-colimits]: applied with $L=(-)|_U$, $R=j_*$ and the colimit $(\\mathcal M,(c_i)_i)$ of $i\\mapsto\\mathcal M_i$ [def-weil-pbc-category-colimit], it gives that $(\\mathcal M|_U,(c_i|_U)_i)$ is a colimit of $i\\mapsto\\mathcal M_i|_U$ in $\\Mod(\\mathcal O_U)$.",
-   "uses": [
-    "lem-weil-pbc-ringed-space-open-restriction-adjunction",
     "lem-weil-pbc-left-adjoint-preserves-colimits",
     "def-weil-pbc-category-colimit"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01AJ (modules-lemma-exactness-pushforward-pullback) (2) and its proof (adjoint pair, Sheaves Lemma 0096, Categories Lemma 0038), for the open immersion j:(U,O_U)->(X,O_X) with j^* = restriction (Sheaves, Lemma 00A0)"
+    "place": "Modules, Lemma 01AJ (modules-lemma-exactness-pushforward-pullback) (2) and its proof (adjoint pair, Sheaves Lemma 0096 (sheaves-lemma-adjoint-pullback-pushforward-modules)), for the open immersion j:(U,O_U)->(X,O_X) with j^* = restriction (Sheaves, Lemma 00A0 (sheaves-lemma-j-pullback), Definition 00A1 (sheaves-definition-restriction))"
    }
   },
   {
-   "text": "*The sheafified sectionwise colimit is a colimit.* Regard the $\\mathcal M_i|_U$ as presheaves of $\\mathcal O_U$-modules on the open subsets of $U$. By [lem-weil-pbc-presheaf-modules-colimits-sectionwise] the sectionwise colimit $\\mathcal P$, $\\mathcal P(W)=\\varinjlim_i\\mathcal M_i(W)$, is a presheaf of $\\mathcal O_U$-modules and $(\\mathcal P,(\\iota_i)_i)$ is a colimit of $i\\mapsto\\mathcal M_i|_U$ in the category $\\mathrm{PMod}(\\mathcal O_U)$ of presheaves of $\\mathcal O_U$-modules. Let $\\eta:\\mathcal P\\to\\mathcal P^\\#$ be its sheafification as a presheaf of $\\mathcal O_U$-modules [def-weil-presheaf-modules-sheafification] (the sheafification of the underlying presheaf of abelian groups on the site of open subsets of $U$ exists [def-weil-pbc-sheafification]). Claim: $(\\mathcal P^\\#,(\\eta\\circ\\iota_i)_i)$ is a colimit of $i\\mapsto\\mathcal M_i|_U$ in $\\Mod(\\mathcal O_U)$ [def-weil-pbc-category-colimit]. It is a cocone, since the $\\iota_i$ are. Let $(\\mathcal G,(g_i)_i)$ be a cocone in $\\Mod(\\mathcal O_U)$. Morphisms of sheaves of $\\mathcal O_U$-modules are the morphisms of their underlying presheaves of $\\mathcal O_U$-modules [def-weil-sheaf-of-modules-category], so $(\\mathcal G,(g_i))$ is a cocone in $\\mathrm{PMod}(\\mathcal O_U)$ and there is exactly one $g:\\mathcal P\\to\\mathcal G$ with $g\\circ\\iota_i=g_i$ for all $i$; as $\\mathcal G$ is a sheaf, there is exactly one $\\mathcal O_U$-linear $g^\\#:\\mathcal P^\\#\\to\\mathcal G$ with $g^\\#\\circ\\eta=g$ [def-weil-presheaf-modules-sheafification]. Then $g^\\#\\circ\\eta\\circ\\iota_i=g_i$. If also $h:\\mathcal P^\\#\\to\\mathcal G$ has $h\\circ\\eta\\circ\\iota_i=g_i$ for all $i$, then $h\\circ\\eta=g$ by the uniqueness of $g$, hence $h=g^\\#$ by the uniqueness of $g^\\#$. This proves the claim.",
+   "text": "*The sheafified sectionwise colimit is a colimit.* The site of open subsets of $U$ has sheafification of presheaves of abelian groups [def-weil-pbc-sheafification], and $\\mathcal O_U$ is a sheaf of rings on it. Apply [lem-weil-pbc-module-sheaves-colimits-forgetful] (2) to the diagram $i\\mapsto\\mathcal M_i|_U$ in $\\Mod(\\mathcal O_U)$ (its terms are $\\mathcal O_U$-modules by Step 1): its colimit is the sheafification, as a presheaf of $\\mathcal O_U$-modules [def-weil-presheaf-modules-sheafification], of the sectionwise colimit $W\\mapsto\\varinjlim_i\\mathcal M_i(W)$ with its evident coprojections. That sectionwise colimit, with its restriction maps and coprojections, is the presheaf $\\mathcal P$ with the $\\iota_i$ of the statement [lem-weil-pbc-presheaf-modules-colimits-sectionwise], and the evident coprojections of $\\mathcal P^\\#$ are the composites $\\eta\\circ\\iota_i$. Hence $(\\mathcal P^\\#,(\\eta\\circ\\iota_i)_i)$ is a colimit of $i\\mapsto\\mathcal M_i|_U$ in $\\Mod(\\mathcal O_U)$ [def-weil-pbc-category-colimit].",
    "uses": [
-    "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
-    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
     "def-weil-pbc-sheafification",
-    "def-weil-pbc-category-colimit",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+    "def-weil-pbc-category-colimit"
    ],
    "elementary": false,
    "source": {
@@ -72,8 +59,11 @@
    }
   },
   {
-   "text": "*Clause (2).* By Step 2 and Step 3, $(\\mathcal M|_U,(c_i|_U)_i)$ and $(\\mathcal P^\\#,(\\eta\\circ\\iota_i)_i)$ are two colimits of the same diagram in $\\Mod(\\mathcal O_U)$. By the universal property of the colimit $\\mathcal P^\\#$ [def-weil-pbc-category-colimit] applied to the cocone $(\\mathcal M|_U,(c_i|_U))$ there is exactly one $u:\\mathcal P^\\#\\to\\mathcal M|_U$ with $u\\circ\\eta\\circ\\iota_i=c_i|_U$ for all $i$, and by that of $\\mathcal M|_U$ exactly one $v:\\mathcal M|_U\\to\\mathcal P^\\#$ with $v\\circ c_i|_U=\\eta\\circ\\iota_i$. Then $vu$ and $\\mathrm{id}_{\\mathcal P^\\#}$ both satisfy $w\\circ\\eta\\circ\\iota_i=\\eta\\circ\\iota_i$ for all $i$, so $vu=\\mathrm{id}$ by uniqueness, and likewise $uv=\\mathrm{id}$. Hence $u$ is an isomorphism.",
+   "text": "Apply moduleSheaves_colimits_forgetful to the restricted diagram. It supplies a colimit cocone s, an isomorphism e from its vertex to the module sheafification of the sectionwise colimit, and the canonical coprojection equations after forgetting module structure. Let k be the unique isomorphism from s.pt to the restricted vertex given by the two colimit universal properties. Set u = e.inv followed by k.hom. This is an isomorphism. Applying the faithful presheaf forgetful functor and the formula for sheafificationHomEquiv, the supplied equations become the required equations for u after canceling e.hom followed by e.inv. Finally, any v satisfying them has the same image under sheafificationHomEquiv as u: use hom_ext for the sectionwise presheaf colimit. Injectivity of this equivalence gives v = u. The argument also covers empty indexing categories and the empty open, since it uses only universal properties.",
    "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
@@ -84,19 +74,20 @@
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-module-finite-type-presentation",
-  "lem-weil-pbc-ringed-space-open-restriction-adjunction",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
   "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-pbc-sheafification",
   "def-weil-presheaf-modules-sheafification",
-  "def-weil-pbc-sheafification"
+  "lem-weil-pbc-presheaf-modules-colimits-sectionwise"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "E7",
+  "date": "2026-10-23",
+  "note": "Lean implementation of the existing Stacks route; Mathlib overPushforwardOverAdj supplies the adjunction without the unfinished sectionwise-formula theorem. The adopted moduleSheaves_colimits_forgetful supplies the sheafified colimit with its canonical coprojection equations.",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01AJ (modules-lemma-exactness-pushforward-pullback) (2) and its proof for the inclusion j:(U,O_U)->(X,O_X), with Sheaves Lemmas 0096, 00A0 (sheaves.tex); Modules, Lemma 01AH (modules-lemma-limits-colimits) (2) on (U,O_U)"
+  "place": "Modules, Lemma 01AH (modules-lemma-limits-colimits) (2) (colimits in Mod(O) are the sheafifications of the presheaf colimits; the module form of Sheaves, Section 009E (sheaves-section-limits-sheaves) (3)), and Modules, Lemma 01AJ (modules-lemma-exactness-pushforward-pullback) (2) with its proof (f^* commutes with all colimits as the left adjoint of f_*, Sheaves Lemma 0096), applied to the inclusion j:(U,O_U)->(X,O_X), for which j^* is the restriction (Sheaves, Lemma 00A0 (sheaves-lemma-j-pullback), Definition 00A1)"
  },
  "mathlib_searches": [
   {
@@ -147,6 +138,27 @@
    "results": "PushforwardContinuous.lean:59 overFunctor, :342 overPushforwardOverAdj, :350 IsLeftAdjoint instance; Topology/Sheaves/Module.lean:30 sheafOfModulesEquivOver; no lemma that restriction of modules to an open of a topological space preserves colimits",
    "date": "2026-10-10",
    "verdict": "no match: Mathlib gives the item only as Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint applied to the composite overFunctor R U ⋙ (U.sheafOfModulesEquivOver R).functor, whose identification with M -> M|_U is the candidate of the new node"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor|sheafOfModulesEquivOver",
+   "results": "5 hit(s); first recorded hits: Mathlib/Topology/Sheaves/Module.lean, Mathlib/Topology/Sheaves/Module.lean, Mathlib/Topology/Sheaves/Module.lean, Mathlib/Topology/Sheaves/Module.lean, Mathlib/Topology/Sheaves/Module.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib returns module-sheaf colimit existence, fixed-value sheafifyCocone and overFunctor; no declaration states both clauses with their canonical coprojection equations. Read Sheaf/Colimits.lean:30 and Topology/Sheaves/Module.lean:30."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "3 hit(s); first recorded hits: SheafOfModules.overFunctor, SheafOfModules.overFunctorMap, AlgebraicGeometry.Scheme.Modules.overFunctorEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib returns module-sheaf colimit existence, fixed-value sheafifyCocone and overFunctor; no declaration states both clauses with their canonical coprojection equations. Read Sheaf/Colimits.lean:30 and Topology/Sheaves/Module.lean:30."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a colimit cocone of sheaves of modules on any ringed topological space to an open subset is a colimit and is canonically the sheafification of the sectionwise colimit",
+   "results": "8 hit(s); first recorded hits: SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, CategoryTheory.Sheaf.isColimitSheafifyCocone, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, SheafOfModules.Presentation.isColimit, SheafOfModules.isColimitFreeCofan, PresheafOfModules.isColimitColimitCocone, PresheafOfModules.colimitCocone_pt, PresheafOfModules.colimitCocone",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib returns module-sheaf colimit existence, fixed-value sheafifyCocone and overFunctor; no declaration states both clauses with their canonical coprojection equations. Read Sheaf/Colimits.lean:30 and Topology/Sheaves/Module.lean:30."
   }
  ],
  "mathlib_match": null,
@@ -157,20 +169,34 @@
   "item": "lem-weil-pbc-sheaf-hom-finite-presentation-colimit",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
-  "date": "2026-10-10",
+  "date": "2026-10-22",
   "item": "lem-weil-pbc-ringed-space-colimit-restriction",
-  "worker": "stage1",
-  "summary": "Read Modules 01AH and its proof, 01AJ, Sheaves 009E, 0095, 0096, 00A0, 00A1 and Categories 0038. Statement rewritten to be self-contained: the restriction M|_U and O_U are defined as W -> M(W) (the j^{-1} of the old text was cited to def-weil-sheaf-of-modules-category, which does not define it; for an open inclusion j^{-1}M is this restriction by Sheaves 00A0), clause (2) now says precisely what 'is the sheafification of the sectionwise colimit' means (the canonical u from P^# to M|_U is an isomorphism), and the sentence referring to tags for the meaning (B7) is removed; the source names 01AH(2), 01AJ(2), 009E, 00A0, 0096 (01AH(3), exactness of filtered colimits, is not used and was dropped from the place). Proof in 4 steps: restriction is a functor (elementary); clause (1) because restriction is left adjoint to j_* (new unsplit node lem-weil-pbc-ringed-space-open-restriction-adjunction, Sheaves 0096 + 00A0, Mathlib candidate overFunctor + sheafOfModulesEquivOver) and left adjoints preserve colimits (leaf lem-weil-pbc-left-adjoint-preserves-colimits); the sheafified sectionwise colimit on U is a colimit, written out from the universal properties of the presheaf colimit (leaf lem-weil-pbc-presheaf-modules-colimits-sectionwise) and of module sheafification (leaf def-weil-presheaf-modules-sheafification), as in Modules 01AH(2); uniqueness of colimits (elementary). The route tool lem-weil-pbc-module-sheaves-colimits-forgetful (unit sk-thm-reduction) is not used. Mathlib searched with all three kinds: no declaration of the item."
+  "worker": "Q58",
+  "summary": "Repair of the 2026-10-22 mandatory re-split, corrected by the reviewer: preserved the statement verbatim. The two delivered helpers restated existing nodes (the open-restriction adjunction with the left-adjoint-preserves-colimits leaf; the Lean-closed lem-weil-pbc-module-sheaves-colimits-forgetful (2)) and were dropped (C5). Every old argument now rests on a dedicated existing node: old steps 1-2 on lem-weil-pbc-ringed-space-open-restriction-adjunction and lem-weil-pbc-left-adjoint-preserves-colimits, old step 3 on lem-weil-pbc-module-sheaves-colimits-forgetful (2); old step 4 is kept verbatim as the elementary uniqueness step. No Lean changes.",
+  "blueprint": "step 4 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, third paragraph, 'By Lemma 09Z7 (lemma-constructible-maps-into-constant-general) and the remarks above we may assume F is of the form f_*M where M is a finite Z/lZ-module and f: Y -> X is a finite morphism of finite presentation'); supporting local module-colimit restriction in constructible approximation (current main-20261015 ancestor proof, first paragraph)."
  },
  "reviewed": {
-  "date": "2026-10-10",
+  "date": "2026-10-22",
   "by": "L",
-  "result": "accepted",
-  "note": "4 steps (Modules 01AH (2), 01AJ (2)): restriction is a functor and carries cocones; clause (1) by a new unsplit node for the adjunction restriction -| j_* (Sheaves 0096 for the open inclusion, Mathlib candidate recorded, B8) and the left-adjoints-preserve-colimits leaf; the sheafified sectionwise colimit is a colimit by the two universal properties (sectionwise presheaf colimit leaf of sk-thm-reduction, module sheafification definition); clause (2) by uniqueness of colimits. Statement rewritten: j^{-1} replaced by the explicit restriction W -> M(W), the tag sentence removed (B7), clause (2) made precise. Tags 0096, 00A0, 01AH, 01AJ verified."
+  "reviewer": "NT-cc-Q58-d42901569",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-d42901569 (reviewer sub-agent of L); spot-checked: This is a re-delivery of b46e3958427b. That head was FIXed: both helper nodes were dropped as C5 duplicates and steps 1-2 were rewritten to cite existing nodes. Its landing was then refused with 'completed in this project's DAG but not in the live DAG', a promotion refusal with no mathematical content, so the FIX was lost. The report calls the split 'approved', but it was FIXed. Against the b46e snapshot, both new nodes are byte-identical and the item differs only in its split_report summary. Against the prior fix file, the item differs only in split-owned fields, so I copied that file unchanged. Independent checks on this snapshot: the item statement is unchanged and true. It is Stacks Modules 01AH (2) with 01AJ (2) and its proof via 0096, and 00A0/00A1 give j^* = restriction; I re-read modules.tex l.185-275. I checked U=X, U empty, I empty and I a point. (1) Node A is true but C5. Its functor clause and its V∩U transpose formulas with the same inverse are lem-weil-pbc-ringed-space-open-restriction-adjunction. Its constrained bijection is the naturality of that adjunction, which is the Mathlib leaf lem-weil-pbc-left-adjoint-preserves-colimits (leftAdjoint_preservesColimits, 0038). The delivered step 1 dropped both citations that old step 2 had. (2) Node B is true but C5. For the sheaf diagram the item uses, it is lem-weil-pbc-module-sheaves-colimits-forgetful (2). That node's Lean record has no sorry and pins the coprojections as colimitCocone.ι ≫ toSheafify, i.e. η∘ι_i. B's presheaf-term generality is unused. After the FIX, step 1 cites the adjunction node, the left-adjoint leaf and def-weil-pbc-category-colimit. Step 2 cites forgetful (2), the sheafification definitions and the sectionwise node; its hypotheses hold, since the opens of U have abelian sheafification and O_U is a sheaf of rings. Step 3 is old step 4. The proof is 2657 characters and the closure check finds no cycle. No other node cites the dropped ids. Every old argument rests on an existing node, so nothing was lost. Maintainer: please waive the ≥2-new-node count for this item, as asked in the prior review. No SGA source is used and there are no tool_uses.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Topology.ModuleColimitRestriction",
@@ -190,5 +216,15 @@
   "group": "J1",
   "result": "fix",
   "note": "FIX: file-local notations O/OU/res/P/pc removed (STATE FILE-LOCAL NOTATION); X : RingedSpace on landed moduleRings X; restriction = plain SheafOfModules.overFunctor (moduleRings X) U into (moduleRings X).over U (K1 b7bd91fa9, G1 3fcb1ccf8) instead of TopCat+sheafCompose and the sheafOfModulesEquivOver composite"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261023T123459-L-1195718",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

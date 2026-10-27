@@ -1,0 +1,364 @@
+{
+ "id": "lem-per-bennett-normal-flat-local-criterion",
+ "kind": "statement",
+ "title": "Bennett numerical normal-flatness criterion without reducedness",
+ "statement": "Let $F$ be a field and let $(R,\\mathfrak m)$ be a nonzero Noetherian local commutative $F$-algebra essentially of finite type (a localization of a finitely generated $F$-algebra) [def-weil-pbc-essentially-finite-type-algebra, def-weil-pbc-noetherian-ring]. Let $I\\subseteq\\mathfrak m$ be a prime ideal such that $A=R/I$ is a regular local ring, and set $d=\\dim A$ [def-weil-regular-scheme, def-weil-pbc-krull-dimension-ring]. Write $R_I$ for localization at $I$, whose maximal ideal is $IR_I$ [def-weil-pbc-localization-at-prime], and define\n$$h_R(n)=\\operatorname{length}_R(R/\\mathfrak m^{n+1}),\\qquad h_{R_I}(n)=\\operatorname{length}_{R_I}(R_I/(IR_I)^{n+1}),\\quad n\\ge0$$\n[def-weil-pbc-module-length]. For sequences put $\\Lambda f(n)=\\sum_{j=0}^n f(j)$. Then\n$$\\operatorname{gr}_I R\\text{ is flat over }A\\quad\\Longleftrightarrow\\quad h_R=\\Lambda^d h_{R_I},$$\nwhere $\\operatorname{gr}_I R=\\bigoplus_{j\\ge0}I^j/I^{j+1}$ [def-weil-pbc-associated-graded-ring] and flatness means that tensoring injections of $A$-modules with this graded ring preserves injectivity [def-weil-pbc-flat-ring-map]. The case $I=0$ is allowed. No reducedness is assumed on $R$.",
+ "source": {
+  "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+  "place": "Cossart--Jannsen--Saito, Canonical embedded and non-embedded resolution of singularities for excellent two-dimensional schemes, March 12 2009 preprint, section 2 (X any excellent scheme, D a reduced closed subscheme; no reducedness of X), Theorem 2.3(1) iff (2), printed p.29, which is Bennett [Be], Theorem (3). The source compares degree-wise Hilbert functions H^{(0)}_{O_{X,x}}=H^{(codim)}_{O_{X,y}}; applying one summation gives the length convention here, with codim = dim A. Purely local; includes a nilpotent prime centre. Read online at https://epub.uni-regensburg.de/13766/1/MP32.pdf; archival copy WANTED. The document field names the ancestor (BMT) source only. No Stacks tag states this result."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-length",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-trf-hilbert-samuel-invariant"
+ ],
+ "proof": [
+  {
+   "text": "Put $k=R/\\mathfrak m$, $\\mathfrak a=\\mathfrak m/I$, $K=\\operatorname{Frac}(A)$, and $G_j=I^j/I^{j+1}$. The ring $A$ is a domain by [lem-sc-regular-local-domain]. Each $I^j$ is finite over $R$ by [lem-weil-pbc-noetherian-submodule-finite], so $G_j$ is finite over $A$, since $I$ annihilates it. Define $r_j=\\dim_K(K\\otimes_A G_j)$ and $\\mu_j=\\dim_k(G_j/\\mathfrak aG_j)$. Localize $0\\to I^{j+1}\\to I^j\\to G_j\\to0$ at $R\\setminus I$ using [lem-weil-pbc-localization-module-exact]. The localized quotient of $R/I$ is $K$, so\n$$K\\otimes_A G_j\\simeq (IR_I)^j/(IR_I)^{j+1}.$$\nThus $r_j=g_{R_I}(j)$, where $g_T(j)=\\dim_{T/\\mathfrak m_T}\\mathfrak m_T^j/\\mathfrak m_T^{j+1}$. All these dimensions are finite.",
+   "uses": [
+    "lem-sc-regular-local-domain",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NP (lemma-regular-domain), 00IK (lemma-Noetherian-basic), and 00CS (proposition-localization-exact); elementary identification of the localized ideal powers and residue field."
+   }
+  },
+  {
+   "text": "For later use, a finite $A$-module $M$ with $r=\\dim_K(K\\otimes_A M)$ and $\\mu=\\dim_k(M/\\mathfrak aM)$ is free if $\\mu=r$. Indeed, lifts of a residue basis give a surjection $A^\\mu\\to M$ by [lem-weil-pbc-nakayama-local-generators]. If $L$ is its kernel, [lem-weil-pbc-localization-module-exact] makes $K\\otimes_A L$ the kernel of a surjection between $K$-spaces of the same dimension, hence zero. An element of $L\\subseteq A^\\mu$ which vanishes after localization is killed by a nonzero element of the domain $A$, and therefore is zero coordinate by coordinate. Thus $L=0$. Conversely $M\\simeq A^r$ has $\\mu=r$, directly from the standard basis. This includes rank zero.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DV (lemma-NAK, local generators) and 00CS (proposition-localization-exact); elementary kernel argument over the domain A."
+   }
+  },
+  {
+   "text": "For $T=R$ or $R_I$, the filtration of $T/\\mathfrak m_T^{n+1}$ by its maximal-ideal powers has successive factors $\\mathfrak m_T^j/\\mathfrak m_T^{j+1}$ for $0\\le j\\le n$. A basis of each such residue-field vector space gives a composition series with that many one-dimensional simple factors. Repeated use of [lem-weil-pbc-length-additive-short-exact] therefore gives $h_T=\\Lambda g_T$. On integer sequences set $\\Delta f(0)=f(0)$ and $\\Delta f(n)=f(n)-f(n-1)$ for $n>0$. Telescoping gives $\\Delta\\Lambda f=f=\\Lambda\\Delta f$. Consequently the desired numerical equality is equivalent to\n$$g_R=\\Lambda^d r,\\qquad r(j)=r_j.$$\nThis equivalence concerns all entries, not just eventual Hilbert polynomials.",
+   "uses": [
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IV (lemma-length-additive); maximal-ideal filtration and telescoping. Cossart--Jannsen--Saito, Theorem 2.3(2), uses the degree-wise convention g rather than h."
+   }
+  },
+  {
+   "text": "Write $C=\\widehat R$ for maximal-ideal completion, $J=IC$, $D=\\widehat A$, $\\mathfrak n=\\mathfrak mC$, and $\\mathfrak p=\\mathfrak aD$. By [lem-weil-pbc-completion-noetherian-quotient-noetherian] both completions are Noetherian and complete. By [lem-weil-pbc-local-completion-local-ring] they are local with maximal ideals $\\mathfrak n,\\mathfrak p$ and common residue field $k$. By [lem-weil-pbc-adic-completion-mod-power], $C/\\mathfrak n^q\\simeq R/\\mathfrak m^q$ for all $q\\ge1$. Taking kernels of successive quotient maps gives $g_C=g_R$. The ring $D$ is regular by [lem-weil-pbc-completion-regular-local] and has dimension $d$ by [lem-weil-pbc-completion-dimension-eq]. No completion of $R_I$ is used.",
+   "uses": [
+    "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-completion-dimension-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05GH (lemma-completion-Noetherian), 05GI (lemma-radical-completion), 05GG (lemma-hathat-finitely-generated), 07NY (lemma-completion-regular), 07NV (lemma-completion-dimension)."
+   }
+  },
+  {
+   "text": "The quotient-completion map of [lem-weil-pbc-local-completion-quotient] identifies $C/J=D$, and identifies the image of the completion of $I^j\\hookrightarrow R$ with $I^jC=J^j$. Exact completion [lem-weil-pbc-completion-exact-finite-modules] applied to $0\\to I^{j+1}\\to I^j\\to G_j\\to0$ therefore identifies\n$$H_j:=J^j/J^{j+1}\\simeq\\widehat{G_j}\\simeq D\\otimes_A G_j.$$\nFor the last isomorphism use [lem-weil-pbc-completion-finite-module-tensor] over $A$: the $\\mathfrak m$-adic filtration on $G_j$ equals its $\\mathfrak a$-adic filtration since $IG_j=0$. The reduction statement of [lem-weil-pbc-module-completion-complete] gives $H_j/\\mathfrak pH_j\\simeq G_j/\\mathfrak aG_j$. In particular, if $G_j\\simeq A^{r_j}$ then $H_j\\simeq D^{r_j}$, while $\\dim_k H_j/\\mathfrak pH_j=\\mu_j$ without any freeness assumption.",
+   "uses": [
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-weil-pbc-completion-exact-finite-modules",
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MA (lemma-completion-tensor), 00MB (lemma-completion-flat), 05GG (lemma-hathat-finitely-generated). All modules completed in this step are finite."
+   }
+  },
+  {
+   "text": "Choose a coefficient ring $k_0\\subset C$ by [lem-weil-pbc-cohen-coefficient-ring-exists]. Because $C$ contains the field $F$, its characteristic equals the characteristic of its residue field. The coefficient ring's maximal ideal $p k_0$ is consequently zero, so $k_0$ is a field and $k_0\\simeq k$. Its image in $D$ is again a coefficient field. Choose $d$ generators $\\bar t_1,\\ldots,\\bar t_d$ of $\\mathfrak p$. By [lem-trf-regular-complete-coefficient-coordinates], $\\theta:k_0[[T_1,\\ldots,T_d]]\\to D$, $T_i\\mapsto\\bar t_i$, is an isomorphism. Lift them to $t_i\\in\\mathfrak n$ and use [lem-weil-pbc-power-series-adic-evaluation] to obtain $E:k_0[[T]]\\to C$. The composite of $E$ with $C\\to D$ is $\\theta$ by the explicit evaluation formula. Thus $s=E\\theta^{-1}:D\\to C$ is a section. Regard $D$ as a subring by $s$; then $\\mathfrak n=J+\\mathfrak pC$. No $F$-linearity of this section, and no separability of $k/F$, is asserted or needed.",
+   "uses": [
+    "lem-weil-pbc-cohen-coefficient-ring-exists",
+    "lem-trf-regular-complete-coefficient-coordinates",
+    "lem-weil-pbc-power-series-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032A (theorem-cohen-structure-theorem), 0326 (definition-coefficient-ring and following equicharacteristic discussion), 0C0S (lemma-regular-complete-containing-coefficient-field); adic evaluation as in More on Algebra 07NL/07NN."
+   }
+  },
+  {
+   "text": "Fix $N\\ge1$ and assume only that $G_j$ is free over $A$ for $j<N$. Put $B=C/J^{N+1}$ and $Q=JB$. The section of step 6 makes $B$ a $D$-algebra. We have $Q^{N+1}=0$, $Q^j/Q^{j+1}=H_j$, $Q^N=H_N$, and $\\mathfrak b:=Q+\\mathfrak pB=\\mathfrak nB$. Apply [lem-per-split-nilpotent-filtration-graded-piece], since step 5 gives $H_j\\cong D^{r_j}$ for $j<N$. As $J^{N+1}\\subseteq\\mathfrak n^{N+1}$, the quotient $C\\to B$ preserves the degree-$N$ maximal-ideal graded piece. Thus\n$$\\mathfrak n^N/\\mathfrak n^{N+1}\\cong H_N/\\mathfrak pH_N\\oplus\\bigoplus_{j<N}(\\mathfrak p^{N-j}/\\mathfrak p^{N-j+1})^{\\oplus r_j}.$$\nLet $c_d(q)$ count monomials of degree $q$ in $d$ variables, with $c_0(0)=1$ and $c_0(q)=0$ for $q>0$. Under the power-series coordinates of step 6, $\\mathfrak p^q$ consists of series with no terms below degree $q$: assign each exponent of degree at least $q$ to a degree-$q$ divisor and factor out that monomial (only finitely many divisors occur). Degree-$q$ coefficient extraction then gives a basis of $\\mathfrak p^q/\\mathfrak p^{q+1}$ on those monomials. Taking dimensions, with steps 4--5, yields\n$$g_R(N)=\\mu_N+\\sum_{j<N}r_jc_d(N-j).$$\nIn particular, this formula does not assume $G_N$ free.",
+   "uses": [
+    "lem-per-split-nilpotent-filtration-graded-piece"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written finite filtered-module calculation, using only lifts of bases and expansion of powers of a sum of ideals; not a quoted Stacks theorem. This isolates the calculation in steps 7--8 of the accepted agent proof of lem-trf-bennett-normal-flat-numerical-criterion, which applies without reducedness. Natural-language proof retained in report.md."
+   }
+  },
+  {
+   "text": "For any sequence $r$, define its convolution with $c_d$ in degree $n$ by $\\sum_{j=0}^n r_jc_d(n-j)$. A monomial in $d+1$ variables is uniquely a monomial in $d$ variables times a power of the last variable, whence $c_{d+1}(q)=\\sum_{i=0}^q c_d(i)$. Interchanging two finite sums shows that replacing $c_d$ by $c_{d+1}$ replaces the convolution by its partial sums. Starting with $c_0$ therefore gives\n$$(\\Lambda^d r)(n)=\\sum_{j=0}^n r_jc_d(n-j).$$\nIn particular, $c_d(0)=1$ for every $d\\ge0$, so the coefficient of $r_n$ is always one. This includes $d=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written equicharacteristic proof of the Bennett criterion; explicit calculation below."
+   }
+  },
+  {
+   "text": "Assume $G=\\operatorname{gr}_I R$ is flat over $A$. Each $G_j$ is a direct summand of $G$. It is flat: for an injection $U\\hookrightarrow V$, a kernel element in $U\\otimes_A G_j$ embeds by the split inclusion in $U\\otimes_A G$, where it is zero by flatness, and the split projection gives its original value zero. Each $G_j$ is finite by step 1, so [lem-weil-pbc-finite-flat-local-free] makes it free over the local ring $A$. Its rank is $r_j$ after tensoring with $K$, and hence $\\mu_j=r_j$. Apply the formula of step 7 for every $N\\ge1$ and step 8 to obtain $g_R(N)=(\\Lambda^d r)(N)$. Degree zero also agrees: $g_R(0)=1=r_0$. Thus $g_R=\\Lambda^d r$, and step 3 yields $h_R=\\Lambda^d h_{R_I}$.",
+   "uses": [
+    "lem-weil-pbc-finite-flat-local-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NZ (lemma-finite-flat-local); flatness of the individual graded summands is proved directly from the tensor-injection definition, followed by the finite calculation of steps 7--10."
+   }
+  },
+  {
+   "text": "Conversely, assume $h_R=\\Lambda^d h_{R_I}$, so $g_R=\\Lambda^d r$ by step 3. We prove by induction on $N$ that $G_N$ is free of rank $r_N$. At $N=0$, $G_0=A$ and $r_0=1$. If all degrees below $N\\ge1$ are free, steps 7 and 8 give\n$$\\mu_N+\\sum_{j<N}r_jc_d(N-j)=g_R(N)=(\\Lambda^d r)(N)=r_N+\\sum_{j<N}r_jc_d(N-j).$$\nCancel the finite sum to get $\\mu_N=r_N$. The explicit kernel argument in step 2 makes $G_N$ free of rank $r_N$, completing the induction. The induction uses no assumed freeness in degree $N$; that degree was the unrestricted summand $M$ in step 7.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written equicharacteristic proof of the Bennett criterion; explicit calculation below."
+   }
+  },
+  {
+   "text": "Choose the bases just obtained for all $G_j$. Their disjoint union, with each vector labelled by its degree, is an $A$-basis of $G=\\bigoplus_jG_j$, since every element of a direct sum has finite support and relations separate degree by degree. For an injection $U\\hookrightarrow V$, the basis identifies tensoring with $G$ with a direct sum of copies of that injection. A finite-support tuple which maps to zero has every coordinate zero; hence this direct sum map is injective. This is exactly the flatness required in the statement. Both implications are now established. No nontrivial-centre hypothesis occurred, so the proof also applies to $I=0$; if $I=\\mathfrak m$, then $d=0$ and the numerical assertion is the identity $h_R=h_R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written equicharacteristic proof of the Bennett criterion; explicit calculation below."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-length-additive-short-exact",
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-completion-dimension-eq",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-cohen-coefficient-ring-exists",
+  "lem-trf-regular-complete-coefficient-coordinates",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-per-split-nilpotent-filtration-graded-piece",
+  "lem-weil-pbc-finite-flat-local-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent-written nonreduced version of the equicharacteristic proof, adapted after reading the accepted reduced-version argument in lem-trf-bennett-normal-flat-numerical-criterion. The finite nilpotent filtration calculation is an explicit new input. Supporting Stacks tags and labels occur in each step; CJS 2009 Theorem 2.3 was checked online, but its Bennett citation is not used as a substitute for a proof. Archival CJS and Bennett sources WANTED in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Bennett|normal.?flat|HilbertSamuel|hilbert.?samuel",
+   "results": "{\"t\": \"2026-10-24T08:51:30Z\", \"tool\": \"grep\", \"query\": \"Bennett|normal.?flat|HilbertSamuel|hilbert.?samuel\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; smoothness/flatness, localization, ordinary additive group actions and Proj do not state this Hilbert--Samuel normal-cone result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-bennett-normal-flat-local-criterion: flat associated graded ring over regular local quotient if and only if Hilbert Samuel function is iterated summation of the localized Hilbert Samuel function",
+   "results": "{\"t\": \"2026-10-24T08:51:31Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-bennett-normal-flat-local-criterion: flat associated graded ring over regular local quotient if and only if Hilbert Samuel function is iterated summation of the localized Hilbert Samuel function\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"Module.flat_of_isLocalized_maximal\", \"Module.flat_of_localized_maximal\", \"Module.flat_iff_of_isLocalization\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Module.Flat.of_forall_isTrivialRelation\", \"Module.Flat.of_isLocalizedModule\", \"Module.flat_of_localized_span\"], \"digest\": \"85fdbc0f5bfb636a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; smoothness/flatness, localization, ordinary additive group actions and Proj do not state this Hilbert--Samuel normal-cone result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HilbertSamuel\"",
+   "results": "{\"t\": \"2026-10-24T08:51:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"HilbertSamuel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; smoothness/flatness, localization, ordinary additive group actions and Proj do not state this Hilbert--Samuel normal-cone result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-bennett-normal-flat-local-criterion: Bennett criterion for normal flatness along a regular prime quotient of a possibly nonreduced noetherian local algebra: Hilbert Samuel function equals iterated sum at the prime",
+   "results": "{\"t\": \"2026-10-24T08:51:32Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-bennett-normal-flat-local-criterion: Bennett criterion for normal flatness along a regular prime quotient of a possibly nonreduced noetherian local algebra: Hilbert Samuel function equals iterated sum at the prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.IsSmoothAt\", \"Algebra.Smooth.flat\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"Algebra.IsSmoothAt.exists_notMem_smooth\"], \"digest\": \"237330d027777cff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; smoothness/flatness, localization, ordinary additive group actions and Proj do not state this Hilbert--Samuel normal-cone result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-bennett-normal-flat-local-criterion: numerical characterization of flatness of the normal cone by equality of Hilbert functions in local algebra",
+   "results": "{\"t\": \"2026-10-24T08:52:21Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-bennett-normal-flat-local-criterion: numerical characterization of flatness of the normal cone by equality of Hilbert functions in local algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.Smooth.flat\", \"Algebra.IsSmoothAt\", \"Module.flat_of_isLocalized_maximal\", \"Module.free_of_flat_of_isLocalRing\", \"RingHom.Flat.propertyIsLocal\", \"Algebra.HasGoingDown.of_flat\", \"instFlatAtPrime\"], \"digest\": \"78a9b7f2f86df529\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; smoothness/flatness, localization, ordinary additive group actions and Proj do not state this Hilbert--Samuel normal-cone result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bennett criterion: flat associated graded algebra of a prime ideal with regular local quotient iff Hilbert Samuel function equals iterated partial sums at the prime",
+   "results": "{\"t\": \"2026-10-24T09:20:34Z\", \"tool\": \"leanfinder\", \"query\": \"Bennett criterion: flat associated graded algebra of a prime ideal with regular local quotient iff Hilbert Samuel function equals iterated partial sums at the prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"Module.flat_of_isLocalized_maximal\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_isPrime\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\"], \"digest\": \"329a464ffe7ebca7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures concern localization-flatness, ordinary stable filtrations, smooth-flatness and Krull dimension; none states Bennett normal flatness or the Hilbert--Samuel equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedGraded\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-24T09:20:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"associatedGraded\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures concern localization-flatness, ordinary stable filtrations, smooth-flatness and Krull dimension; none states Bennett normal flatness or the Hilbert--Samuel equality."
+  },
+  {
+   "tool": "grep",
+   "query": "Bennett|normal.?flat|HilbertSamuel|hilbert.?samuel",
+   "results": "{\"t\": \"2026-10-24T09:21:10Z\", \"tool\": \"grep\", \"query\": \"Bennett|normal.?flat|HilbertSamuel|hilbert.?samuel\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures concern localization-flatness, ordinary stable filtrations, smooth-flatness and Krull dimension; none states Bennett normal flatness or the Hilbert--Samuel equality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bennett numerical criterion for normal flatness along a regular local quotient without reducedness",
+   "results": "{\"t\": \"2026-10-24T09:21:11Z\", \"tool\": \"leansearch\", \"query\": \"Bennett numerical criterion for normal flatness along a regular local quotient without reducedness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Module.flat_of_localized_maximal\", \"RingHom.Flat.holdsForLocalizationAway\", \"Module.Flat.of_isLocalizedModule\", \"Module.flat_of_localized_span\", \"Module.Flat.of_forall_isTrivialRelation\", \"RingHom.Flat.propertyIsLocal\"], \"digest\": \"4e366082126f116a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures concern localization-flatness, ordinary stable filtrations, smooth-flatness and Krull dimension; none states Bennett normal flatness or the Hilbert--Samuel equality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert Samuel function equality with partial sums detects flat normal cone associated graded ring",
+   "results": "{\"t\": \"2026-10-24T09:21:13Z\", \"tool\": \"leanfinder\", \"query\": \"Hilbert Samuel function equality with partial sums detects flat normal cone associated graded ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Filtration.Stable.bounded_difference\", \"Ideal.Filtration.submodule_eq_span_le_iff_stable_ge\", \"Ideal.Filtration.ext_iff\", \"AdicCompletion.flat_of_isNoetherian\", \"Ideal.Filtration.ext\", \"Ideal.Filtration.Stable.exists_forall_le\", \"AdicCompletion.ext_iff\", \"Ideal.Filtration.Stable\"], \"digest\": \"6fe346890f293c27\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected signatures concern localization-flatness, ordinary stable filtrations, smooth-flatness and Krull dimension; none states Bennett normal flatness or the Hilbert--Samuel equality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-scheme-near-point-normal-cone",
+  "date": "2026-10-24",
+  "group": "Q78"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular-resolution branch: BMT §6.3 common-presentation assertion and Remark 6.2, near-point component-profile survival under permissible histories and auxiliary tests. Structural input: Normal cone at a Hilbert--Samuel near point without reducedness. Lower local input: Bennett numerical normal-flatness criterion without reducedness.",
+   "via": [
+    "lem-per-scheme-near-point-normal-cone",
+    "lem-per-hilbert-test-component-retention",
+    "lem-per-scheme-normalized-hilbert-head",
+    "lem-per-generically-reduced-rational-invariant-calculus",
+    "lem-per-rig-variety-strong-resolution",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-bennett-normal-flat-local-criterion",
+  "worker": "stage1",
+  "summary": "Proved the possibly nonreduced criterion using finite normal-graded modules, exact completion, an equicharacteristic coefficient-field section, the isolated nilpotent-filtration calculation, and a degree-by-degree freeness induction. Checked all cited statements; no reducedness is used and no statement change was needed.",
+  "blueprint": "Historical regular-resolution branch recorded in blueprint.from, through the normal cone at a Hilbert--Samuel near point: supply the numerical normal-flatness criterion needed by lem-per-scheme-near-point-normal-cone. Current latest blueprint has no separate Bennett or nilpotent-filtration node.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic local commutative algebra tool: Regular local rings are domains. Used solely for its stated algebraic conclusion in the coefficient-section/freeness argument; this unit has no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "why": "Generic local commutative algebra tool: Adic completion is Noetherian when the quotient is Noetherian and the ideal finitely generated. Used solely for its stated algebraic conclusion in the coefficient-section/freeness argument; this unit has no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Generic local commutative algebra tool: A Noetherian local ring is regular iff its completion is. Used solely for its stated algebraic conclusion in the coefficient-section/freeness argument; this unit has no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension-eq",
+    "why": "Generic local commutative algebra tool: Dimension equality for maximal-ideal completion. Used solely for its stated algebraic conclusion in the coefficient-section/freeness argument; this unit has no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "Generic local commutative algebra tool: Completion of a quotient of a Noetherian local ring. Used solely for its stated algebraic conclusion in the coefficient-section/freeness argument; this unit has no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-cohen-coefficient-ring-exists",
+    "why": "Generic local commutative algebra tool: Cohen structure theorem: a complete local ring has a coefficient ring. Used solely for its stated algebraic conclusion in the coefficient-section/freeness argument; this unit has no version of this tool."
+   },
+   {
+    "node": "lem-trf-regular-complete-coefficient-coordinates",
+    "why": "Generic local commutative algebra tool: Coordinates over a specified coefficient field in a complete regular local ring. Used solely for its stated algebraic conclusion in the coefficient-section/freeness argument; this unit has no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-adic-evaluation",
+    "why": "Generic local commutative algebra tool: Evaluation of finite-variable power series in an adically complete ring. Used solely for its stated algebraic conclusion in the coefficient-section/freeness argument; this unit has no version of this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-completion-dimension-eq",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-cohen-coefficient-ring-exists",
+  "lem-trf-regular-complete-coefficient-coordinates",
+  "lem-weil-pbc-power-series-adic-evaluation"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-00be779c2",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-00be779c2 (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps, the new node and every cited statement in full. Live has the item unsplit and its statement is unchanged; there is no repair note, so this is a first split. Steps 1-6 and 8-11 match the accepted reduced proof of lem-trf-bennett-normal-flat-numerical-criterion, and I re-checked each one: no step uses reducedness. The Stacks tags 00NP, 00IK, 00CS, 00DV, 00IV, 05GH, 05GI, 05GG, 07NY, 07NV, 00MA, 00MB, 032A, 0C0S and 00NZ resolve to the cited labels. Step 6: since F lies in C, the Cohen ring is a field, and uniqueness of the adic evaluation makes s a section. Step 7: J^{N+1} lies in n^{N+1}, so the quotient keeps degree N, and freeness is assumed only for j<N. The convolution step and the induction are correct, and the edge cases I=0 and I=m hold. Test rings: k[t,x]/(x^2) with I=(x) is flat on both sides; k[t,x]/(x^2,tx) fails on both sides. The new node lem-per-split-nilpotent-filtration-graded-piece is statement-only, self-contained, cites def-weil-pbc-free-module and records four search kinds. I proved it by lifting bases, so that Q^a = M plus the E_j, and computing b^q coordinatewise as p^{max(q-N,0)}M plus p^{max(q-j,0)}E_j. It is true, strictly smaller than the item and not a restated clause; I found no duplicate in the DAG. Batch-5 flag: lem-trf-regular-complete-coefficient-coordinates is Stacks 0C0S(2), generic commutative algebra. Its 22-node closure contains no trace-formula, Poincare-duality or assumption node, so the citation is accepted. The 8 declared tool_uses are generic local-algebra black boxes, accepted. The item generalizes the existing trf reduced criterion, which is acceptable. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.BennettNormalFlatLocalCriterion",
+  "declaration": "Ideal.flat_associatedGraded_iff_hilbertSamuel_eq_iterate_summation",
+  "file": "lean/Sheaf/RingTheory/BennettNormalFlatLocalCriterion.lean",
+  "statement": "theorem flat_associatedGraded_iff_hilbertSamuel_eq_iterate_summation (F : Type u) [Field F] (R : Type v) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] [Algebra F R] [Algebra.EssFiniteType F R] (I : Ideal R) [I.IsPrime] (hI : I ≤ IsLocalRing.maximalIdeal R) [IsRegularLocalRing (R ⧸ I)] (d : ℕ) (hd : ringKrullDim (R ⧸ I) = (d : WithBot ℕ∞)) : Module.Flat (R ⧸ I) (associatedGraded I) ↔ (fun n : ℕ ↦ (Module.length R (R ⧸ IsLocalRing.maximalIdeal R ^ (n + 1))).toNat) = (AlgebraicGeometry.HilbertSamuel.summation^[d]) (fun n : ℕ ↦ (Module.length (Localization.AtPrime I) (Localization.AtPrime I ⧸ IsLocalRing.maximalIdeal (Localization.AtPrime I) ^ (n + 1))).toNat)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e6acc0fa",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Read item, all 9 stmt_dep records (byte-identical to live), module, report (Worker report + Second reading present), live HilbertSamuel.summation, associatedGraded + its Algebra (R⧸I) instance, Mathlib IsRegularLocalRing. Item changes only in lean and an allowed added landed stmt_dep def-trf-hilbert-samuel-invariant; lean.statement verbatim. Clause-by-clause match: F field/R F-algebra in independent universes, Noetherian local, EssFiniteType, prime I ≤ m, IsRegularLocalRing (R⧸I), d via ringKrullDim, Localization.AtPrime with maximalIdeal = IR_I, finite lengths so toNat faithful, summation^[d] = Λ^d, Module.Flat (R⧸I) gr_I R, iff with equality on all n. Edge cases I=0, I=m (d=0), n=0 and nonreduced R covered; x² examples checked. No defs, sorry only, docstrings with source place and blueprint and 11 steps, imports resolve, no line >100, no duplicate declaration. Not recompiled (no file changed)."
+ }
+}

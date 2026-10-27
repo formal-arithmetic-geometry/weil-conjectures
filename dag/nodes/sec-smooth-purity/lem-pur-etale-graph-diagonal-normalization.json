@@ -1,0 +1,136 @@
+{
+ "id": "lem-pur-etale-graph-diagonal-normalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "prop-asd-smooth-base-change.proof.md, coherences (i) and (iii), the specified compactification exchange and composition comparison: Diagonal normalization of the explicit graph comparison; inherited blueprint ancestor is null, as printed by tools/blueprint_refs.py ancestor.",
+   "via": [
+    "lem-pur-etale-graph-comparison-base-change",
+    "lem-route-exists-right-derived-lower-shriek-comp-iso",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Diagonal normalization of the explicit graph comparison",
+ "statement": "Let A be a finite commutative ring, f:X→Y any morphism of schemes, and c=(i:X→C,g:C→Y) an open-then-proper compactification. For the explicit graph map B(c,ofCompactification(c)) of [def-pur-etale-graph-presentation-maps], B(c,ofCompactification(c)) equals the inverse of the canonical isomorphism removing R(id_X)_* from the presentation word. No quasi-compactness or Noetherianity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Diagonal normalization of the explicit graph comparison; Tags 0F7B--0F7F and the explicit graph formula in LowerShriekComposition.lean:193--268. Agent specialization/pasting argument, not a claim that the upstream file states this equality."
+ },
+ "stmt_deps": [
+  "def-pur-etale-graph-presentation-maps"
+ ],
+ "proof": [
+  {
+   "text": "Use a proof-only import all of UnboundedEtaleCompactSupportComparisons to reuse its existing private unboundedFormalism and unbounded_refinement_comparison. The latter identifies the formalism comparison with the specified unbounded comparison for arbitrary schemes and coefficients. Specialize it to Compactification.Refinement.id c with IsPullback.id_vert c.i and apply the existing CompactSupportFormalism.refinementComparison_eq_id. Thus the specified identity refinement comparison equals the identity. No formalism construction, derived coherence lemma or mate proof is copied.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the single-refinement graph normalization to this identity refinement and Cartesian identity square. Convert the proved identity of natural transformations to an identity of asIso isomorphisms by Iso.ext, substitute it, and remove the identity isomorphism. This proves B(c,c)=openNormalization(c) inverse.",
+   "uses": [
+    "lem-pur-etale-graph-refinement-normalization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-pur-etale-graph-refinement-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Identity specialization using the existing private unbounded_refinement_comparison and unboundedFormalism through Lean module import all, followed by the single-refinement graph normalization. All copied implementation helpers from the returned packet are removed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Triangle identity for the canonical product graph comparison between proper open proper factorizations on unbounded etale derived categories",
+   "results": "{\"t\": \"2026-10-23T20:16:23Z\", \"tool\": \"leansearch\", \"query\": \"Triangle identity for the canonical product graph comparison between proper open proper factorizations on unbounded etale derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.prod.triangle\", \"CategoryTheory.CartesianMonoidalCategory.ofChosenFiniteProducts.triangle\", \"CategoryTheory.Pretriangulated.productTriangle\", \"CategoryTheory.Pretriangulated.binaryProductTriangle\", \"CategoryTheory.GradedObject.Monoidal.triangle\", \"CategoryTheory.Limits.CatCospanTransform.triangle_assoc\", \"CategoryTheory.Limits.coprod.triangle\", \"CategoryTheory.Pretriangulated.productTriangle.congr_simp\"], \"digest\": \"2aa6de6a1a1c47a5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: signatures concern scheme geometry, combinatorial graphs, or generic mates; none states the specified ordinary unbounded small-etale presentation comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Product graph comparison triangle law for proper open proper presentations of a scheme morphism",
+   "results": "{\"t\": \"2026-10-23T20:18:52Z\", \"tool\": \"leanfinder\", \"query\": \"Product graph comparison triangle law for proper open proper presentations of a scheme morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.g\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hab\", \"AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd\", \"AlgebraicGeometry.Scheme.Pullback.t'_fst_snd\", \"AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_fst\", \"AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst\"], \"digest\": \"70aaa70eb9ecf998\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: signatures concern scheme geometry, combinatorial graphs, or generic mates; none states the specified ordinary unbounded small-etale presentation comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "graph.*(triangle|comparison|refinement)|proper.*open.*presentation",
+   "results": "{\"t\": \"2026-10-23T20:18:50Z\", \"tool\": \"grep\", \"query\": \"graph.*(triangle|comparison|refinement)|proper.*open.*presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/Extremal/RuzsaSzemeredi.lean\", \"Mathlib/Combinatorics/Extremal/RuzsaSzemeredi.lean\", \"Mathlib/Combinatorics/Extremal/RuzsaSzemeredi.lean\", \"Mathlib/Combinatorics/Extremal/RuzsaSzemeredi.lean\", \"Mathlib/Combinatorics/Extremal/RuzsaSzemeredi.lean\", \"Mathlib/Combinatorics/SimpleGraph/Metric.lean\", \"Mathlib/Combinatorics/SimpleGraph/Metric.lean\", \"Mathlib/Combinatorics/SimpleGraph/Triangle/Tripartite.lean\"], \"digest\": \"9ca7557f40634ed9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: signatures concern scheme geometry, combinatorial graphs, or generic mates; none states the specified ordinary unbounded small-etale presentation comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical compactification refinement comparison along the identity refinement is the identity on unbounded etale derived categories",
+   "results": "{\"t\": \"2026-10-23T21:01:13Z\", \"tool\": \"leansearch\", \"query\": \"The canonical compactification refinement comparison along the identity refinement is the identity on unbounded etale derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.fullyFaithfulCompHausLikeToTop\", \"instCategoryCompactum\", \"topToCompHaus\", \"CondensedSet.fullyFaithfulCompactlyGeneratedToCondensedSet\", \"compHausToTop.reflective\", \"Profinite.toCompHaus.reflective\", \"CompHausLike.LocallyConstant.unitIso\", \"compHausToCondensed\"], \"digest\": \"1feb8dc2d798dcd5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned compact-space, set-graph and combinatorial-graph results do not state the small-etale derived identity-refinement normalization; the library generic formalism identity law is used instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The self comparison of the explicit product graph compactification is the inverse identity direct image normalization",
+   "results": "{\"t\": \"2026-10-23T21:13:37Z\", \"tool\": \"leanfinder\", \"query\": \"The self comparison of the explicit product graph compactification is the inverse identity direct image normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Metric.PiNatEmbed.toPiNatHomeo_symm_apply\", \"Metric.PiNatEmbed.toPiNatHomeo_apply_ofPiNat\", \"Set.graphOn_prod_graphOn\", \"Set.graphOn_prod_prodMap\", \"SimpleGraph.boxProdAssoc_symm_apply\", \"Hamming.toHamming_ofHamming\", \"SimpleGraph.boxProdComm_symm_apply\", \"Hamming.toHamming_symm_eq\"], \"digest\": \"1e399f3c667e58b4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned compact-space, set-graph and combinatorial-graph results do not state the small-etale derived identity-refinement normalization; the library generic formalism identity law is used instead."
+  },
+  {
+   "tool": "grep",
+   "query": "graph.*(diagonal|self)|refinementComparison_eq_id",
+   "results": "{\"t\": \"2026-10-23T21:13:36Z\", \"tool\": \"grep\", \"query\": \"graph.*(diagonal|self)|refinementComparison_eq_id\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/Digraph/Basic.lean\", \"Mathlib/Combinatorics/Digraph/Basic.lean\", \"Mathlib/Combinatorics/SimpleGraph/Maps.lean\", \"Mathlib/Combinatorics/SimpleGraph/Maps.lean\", \"Mathlib/Combinatorics/SimpleGraph/Maps.lean\", \"Mathlib/Combinatorics/SimpleGraph/Operations.lean\", \"Mathlib/Combinatorics/SimpleGraph/CompleteMultipartite.lean\", \"Mathlib/Combinatorics/SimpleGraph/FiveWheelLike.lean\"], \"digest\": \"0ebca8c932aa6efd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned compact-space, set-graph and combinatorial-graph results do not state the small-etale derived identity-refinement normalization; the library generic formalism identity law is used instead."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphComparisonBaseChange",
+  "date": "2026-10-24",
+  "group": "F8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphDiagonalNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphDiagonalNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleGraphComparison_diagonal",
+  "statement": "theorem etaleGraphComparison_diagonal\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :\n    etaleGraphComparisonFromOpen A c (EtaleGraphPresentation.ofCompactification c) =\n      (etaleGraphOpenNormalization A c).symm",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-f5ec9",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261024T224918-L-1829485",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-f5ec9",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261024T224918-L-1829485",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone 98b5ab3 (byte-identical); moved defs vs old item file (identical); 3 adapted modules vs clone (import line only); 2 new sorried statements vs their nodes and Stacks 0F7C-0F7F; direct importers OpenShrink/ProperAmbient/Pairwise/InterchangeData compiled against delivered modules; #print axioms"
+ }
+}

@@ -10,7 +10,11 @@ declaration, sorry added without progress, ...) is class AUTO with the reason "c
 batch lander returns it with that message. Class CODEX ("reader required: ...") only where the gate cannot decide (the
 statement of a declaration a DAG node records or several modules use is changed or removed, a unit-route import is
 removed, the delivery cannot be read); the reader is the cc review service (~/weil-review-svc, lane S3). Every other
-delivery is AUTO and lands through tools/batch_land.py, verified by the global build. The text below until "Stage 2"
+delivery is AUTO and lands through tools/batch_land.py, verified by the global build.
+Since 2026-10-26 (decision of the human: only a stage-3 delivery that changes other files is read): a delivery that
+changes an existing module besides its item, or the node file of another module (stage3_gate.other_files), is CODEX
+"reader required: changes other files: <list>"; its packet carries the compile of the direct importers
+(tools/importer_compile.py), and the reader checks semantic consistency and that nothing it did not touch breaks. The text below until "Stage 2"
 describes the classes before 2026-10-17.
 Stage 3 (decision of the human, 2026-10-12: no Claude reviewer in stage 3). An item that is a module of the library
 (Sheaf.<...> or WeilConjectures.<...>) is classified by tools/stage3_delivery.py and gets one of two classes:

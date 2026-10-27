@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-qlbar-tail-finite-free-algebra-presentation",
+ "kind": "statement",
+ "title": "Finite-free algebraic-closure coefficient presentation on the cofinal field tail",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "statement": "Let $\\ell$ be prime, $\\Omega=\\overline{\\mathbf Q}_\\ell$, $E$ a finite intermediate extension of $\\mathbf Q_\\ell$ in $\\Omega$, and $X$ any scheme. Use a small pro-étale site and a coefficient universe containing the site and the set $\\Omega$ [def-weil-size-convention, def-weil-pbc-proetale-site]. Put $S=E_X=p_X^*\\underline E$ and $T=\\Omega_X=p_X^*\\underline\\Omega$, with the condensed and pulled-back coefficient conventions [sk-def-sfb-condensed-ring, sk-def-sfb-qlbar-condensed, sk-def-sfb-pulled-back-coefficients]. Let $I$ be the poset of finite intermediate fields of $\\Omega/\\mathbf Q_\\ell$ and $I_E$ its full subposet on fields containing $E$ [det-def-sfb-qlbar-condensed-subextensions]. For an inclusion $H\\subseteq J$ write $a_{H,J}:H_X\\to J_X$ for the specified coefficient ring map, and $q_H:H_X\\to T$ for the specified closure map [def-sfb-subfield-coefficient-map, def-sfb-subfield-to-qlbar-coefficient-map].\n\nThe posets $I,I_E$ are small in this universe, $I_E$ is nonempty and filtered, and $I_E\\hookrightarrow I$ is cofinal: for every $H\\in I$, the poset of $F\\in I_E$ containing $H$ is nonempty and directed. The maps $a$ compose as the inclusions do, and $q_Ja_{H,J}=q_H$. Every $F_X$, with its $S$-action through $a_{E,F}$, is finite free over $S$, of rank $[F:E]$, including the rank-one identity at $F=E$.\n\nThe maps $q_F$ exhibit $T$ as the colimit of $(F_X)_{F\\in I_E}$ in sheaves of commutative rings and in sheaves of commutative $S$-algebras, with structure map $q_E$ [def-weil-pbc-category-colimit]. Explicitly, for any commutative ring sheaf $B$ and compatible ring maps $t_F:F_X\\to B$, there is exactly one ring map $t:T\\to B$ with $tq_F=t_F$ for every $F\\in I_E$; if $B$ is an $S$-algebra and the $t_F$ are $S$-algebra maps, this $t$ is an $S$-algebra map. Under the equivalence preserving underlying abelian sheaves [def-weil-pbc-internal-abelian-sheaf-module-equivalence], these same $q_F$ exhibit the underlying $S$-module of $T$ as the module-sheaf colimit [def-weil-sheaf-of-modules-category], with exactly the actions induced by $a_{E,F}$ and $q_E$. No choice of finite bases changes the transitions or cocone legs.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(2), coefficient union; agent extraction of returned item proof steps 1–3, including the tail ring/S-algebra universal property. Finite freeness: blueprint sk-prop-sfb-cartesian-coefficients assertion (2)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "det-def-sfb-qlbar-condensed-subextensions",
+  "def-sfb-subfield-coefficient-map",
+  "def-sfb-subfield-to-qlbar-coefficient-map",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-qlbar-tail-module-objects"
+ ],
+ "proof": [
+  {
+   "text": "The existing finite-intermediate-field directed-order instance supplies a common finite overfield of any two fields. Restrict this construction to the subtype of fields containing E; E itself is an object. Restrict again to fields containing both E and H for the displayed cofinality assertion. Infer smallness from the field subtype, and filteredness from the resulting nonempty directed order. This uses the existing finite-compositum construction without its stronger degree bound or finite-subset assertion.",
+   "uses": [
+    "def-weil-size-convention",
+    "det-def-sfb-qlbar-condensed-subextensions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/sk-prop-sfb-qlbar-colimit-point.proof.md",
+    "place": "Directed finite subextensions; elementary restriction to the tail by composita"
+   }
+  },
+  {
+   "text": "The point-level transition maps are postcomposition with field inclusions, so $\\iota_{H,H}=1$ and $\\iota_{J,K}\\iota_{H,J}=\\iota_{H,K}$. By the definition of $a_{H,J}$ and functoriality of $\\Lambda\\mapsto\\Lambda_X$, their images satisfy $a_{H,H}=1$ and $a_{J,K}a_{H,J}=a_{H,K}$. The coefficient-map compatibility lemma gives $q_Ja_{H,J}=q_H$. In particular $a_{F,G}a_{E,F}=a_{E,G}$ and $q_Fa_{E,F}=q_E$ on the tail; these are precisely the compatibilities for its $S$-algebra structures and for its cocone.",
+   "uses": [
+    "def-sfb-qlbar-subextension-map",
+    "def-sfb-subfield-coefficient-map",
+    "sk-def-sfb-pulled-back-coefficients",
+    "lem-sfb-subfield-coefficient-map-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/sk-prop-sfb-qlbar-colimit-point.proof.md",
+    "place": "Opening paragraph, transitions and cocone compatibility; apply the pullback functor"
+   }
+  },
+  {
+   "text": "Apply cartesianCoefficients_finiteFree to the inclusion E ≤ F. Its first clause supplies an integral basis; its second clause, applied to this basis, supplies the rational comparison isomorphism at X. Reverse that isomorphism to obtain the displayed finite-free witness. The identity-inclusion scalar module is definitionally the self-module, whose finrank is one.",
+   "uses": [
+    "det-prop-sfb-cartesian-coefficients-finite-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "Integral basis and rational finite-free comparison"
+   }
+  },
+  {
+   "text": "The inclusion of the tail into all finite intermediate fields is a final functor: for any H, a common finite overfield of E and H lies in the tail above H. Restrict the existing abelian-sheaf coefficient cocone padicAlgClRingObjCocone along this functor. Functor.Final.isColimitWhiskerEquiv transports isColimitPadicAlgClRingObjCocone to this restricted cocone, with exactly the original closure legs. Bundle the coefficient fields and maps as a diagram of ring objects. Apply Mon.filtered_cocone_isColimit to the underlying abelian colimit. Tensor preserves these colimits since the sheaf tensor functors are left adjoints. For a compatible family t, bundle t as a competing ring-object cocone and use its canonical descent morphism. Its factorization equations and uniqueness, after projecting underlying maps, are exactly the displayed ring universal property. Restricting to commutative targets yields the required commutative ring statement.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-sfb-filtered-ring-object-cocone-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
+    "place": "Third isomorphism; explicit extension and restriction of cocones to fields containing E"
+   }
+  },
+  {
+   "text": "Now give $B$ a commutative $S$-algebra structure $s_B:S\\to B$, and suppose the tail maps $t_F$ are $S$-algebra maps. Since the tail contains $E$ and its structure map $a_{E,E}$ is the identity, $t_E=s_B$. The factorization from step 4 satisfies $tq_E=t_E=s_B$, exactly the defining condition for an $S$-algebra map. Its uniqueness as a ring map implies uniqueness as an $S$-algebra map. This proves the asserted algebra colimit with structure map $q_E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
+    "place": "Third isomorphism; elementary universal property in the category of S-algebras"
+   }
+  },
+  {
+   "text": "Apply the already proved qlbar_tail_module_colimit at X, ell and E, and project its final conjunct. Its stage objects, vertex and sectionwise factorization equations are exactly those in the final conjunct here. This avoids repeating the general directed ring-sheaf/module-colimit argument and the internal-module equivalence transport. No basis occurs in the definitions of the transitions or cocone legs.",
+   "uses": [
+    "lem-sfb-qlbar-tail-module-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DB (lemma-limits-colimits) and 03EP (lemma-tensor-commute-colimits); use the existing directed ring-sheaf/module comparison statement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "det-def-sfb-qlbar-condensed-subextensions",
+  "def-sfb-qlbar-subextension-map",
+  "def-sfb-subfield-coefficient-map",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-sfb-subfield-coefficient-map-comp",
+  "det-prop-sfb-cartesian-coefficients-finite-free",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-sfb-filtered-ring-object-cocone-colimit",
+  "lem-sfb-qlbar-tail-module-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
+  "place": "Third comparison; proof uses finality of the finite-field tail, the existing abelian coefficient colimit and filtered ring-object lifting, the rational Cartesian-coefficient comparison, and the already proved tail module colimit (Q3, 2026-10-22)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(cofinal|IsColimit).*(padic|Subfield|IntermediateField)|(padic|IntermediateField).*(cofinal|IsColimit)",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "No match: field-embedding filtrations and ordinary ring colimit factorization do not state the finite-free coefficient-sheaf tail presentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free ell adic coefficient sheaves over the cofinal poset of finite subextensions containing a given field",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IntermediateField\", \"colimit\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "No match: field-embedding filtrations and ordinary ring colimit factorization do not state the finite-free coefficient-sheaf tail presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a filtered coefficient ring colimit to finite intermediate fields above a fixed field preserves its ring and module colimit cocone",
+   "results": "RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit; Field.Emb.Cardinal.embFunctor; Field.Emb.Cardinal.filtration_succ; Field.Emb.Cardinal.instInverseSystemWithTopToTypeOrdRankAlgHomSubtypeMemIntermediateFieldCoeOrderEmbeddingFiltrationAlgebraicClosureEmbFunctor; CategoryTheory.PreGaloisCategory.PointedGaloisObject.isColimit; RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; Field.Emb.Cardinal.filtration_apply; Field.Emb.Cardinal.directed_filtration",
+   "date": "2026-10-22",
+   "verdict": "No match: field-embedding filtrations and ordinary ring colimit factorization do not state the finite-free coefficient-sheaf tail presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite extensions containing a fixed ell adic subfield form a small cofinal finite free diagram of coefficient sheaves with algebraic closure colimit",
+   "results": "Field.Emb.Cardinal.instInverseSystemWithTopToTypeOrdRankAlgHomSubtypeMemIntermediateFieldCoeOrderEmbeddingFiltrationAlgebraicClosureEmbFunctor; localCohomology.hasColimitDiagram; IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion; Field.Emb.Cardinal.directed_filtration; RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit; localCohomology.ofDiagram; AdicCompletion.instAlgebra; IsDedekindDomain.HeightOneSpectrum.adicCompletion.instIsScalarTower'",
+   "date": "2026-10-22",
+   "verdict": "No match: field-embedding filtrations and ordinary ring colimit factorization do not state the finite-free coefficient-sheaf tail presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free condensed p adic coefficient sheaves indexed by finite subextensions above E have algebraic closure as their ring and module colimit",
+   "results": "BDeRhamPlus; instCommRingBDeRhamPlus; BDeRham; Condensed.profiniteSolid; IsDedekindDomain.FiniteAdeleRing.instAlgebra_1; IsDedekindDomain.FiniteAdeleRing.instAlgebra; IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion; PadicAlgCl",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits give algebraic closure fields, unrelated period rings, or general (pre)sheaf colimit constructions, not this specified finite-free coefficient-ring/S-algebra/module tail cocone."
+  },
+  {
+   "tool": "grep",
+   "query": "padicAlgCl|padicSubfield|isColimit.*[Tt]ail",
+   "results": "Mathlib/NumberTheory/Padics/Complex.lean; Mathlib/NumberTheory/Padics/Complex.lean; Mathlib/NumberTheory/Padics/Complex.lean; Mathlib/NumberTheory/Padics/Complex.lean; Mathlib/NumberTheory/Padics/Complex.lean",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits give algebraic closure fields, unrelated period rings, or general (pre)sheaf colimit constructions, not this specified finite-free coefficient-ring/S-algebra/module tail cocone."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The algebraic closure p adic coefficient sheaf is a colimit of finite free algebra sheaves indexed by fields containing a fixed finite extension",
+   "results": "PadicAlgCl; SheafOfModules.Presentation.isColimit; SheafOfModules.isColimitFreeCofan; AlgebraicGeometry.PresheafedSpace.colimit; AlgebraicGeometry.Scheme.Modules.instHasColimits; PadicAlgCl.instCoePadic; PadicAlgCl.isAlgebraic; SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits give algebraic closure fields, unrelated period rings, or general (pre)sheaf colimit constructions, not this specified finite-free coefficient-ring/S-algebra/module tail cocone."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"colimit\"",
+   "results": "PresheafOfModules.Finite.hasFiniteColimits; PresheafOfModules.hasColimitsOfSize; PresheafOfModules.hasColimitsOfShape; PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits; PresheafOfModules.toPresheaf_preservesColimitsOfSize; PresheafOfModules.toPresheaf_preservesColimitsOfShape; PresheafOfModules.Finite.evaluation_preservesFiniteColimits; PresheafOfModules.evaluation_preservesColimitsOfSize",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits give algebraic closure fields, unrelated period rings, or general (pre)sheaf colimit constructions, not this specified finite-free coefficient-ring/S-algebra/module tail cocone."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a directed union of p adic coefficient ring sheaves to the cofinal tail of fields containing E and obtain a finite free E algebra presentation",
+   "results": "BDeRhamPlus; BDeRham; IsDedekindDomain.instDFunLikeFiniteAdeleRingHeightOneSpectrumAdicCompletion; IsDedekindDomain.FiniteAdeleRing.instDFunLikeHeightOneSpectrumAdicCompletion; instCommRingBDeRhamPlus; IsDedekindDomain.FiniteAdeleRing; IsDedekindDomain.FiniteAdeleRing.instAlgebra_1; Field.Emb.Cardinal.instInverseSystemWithTopToTypeOrdRankAlgHomSubtypeMemIntermediateFieldCoeOrderEmbeddingFiltrationAlgebraicClosureEmbFunctor",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits give algebraic closure fields, unrelated period rings, or general (pre)sheaf colimit constructions, not this specified finite-free coefficient-ring/S-algebra/module tail cocone."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "lem-sfb-dc-hom-preserves.proof.md, final algebraic-closure paragraph: descending to a finite extension and passing through the finite coefficient fields; returned item steps 1–3.",
+   "via": [
+    "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+    "lem-sfb-dc-hom-small-coefficients"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-qlbar-tail-finite-free-algebra-presentation",
+  "worker": "stage1",
+  "summary": "Statement unchanged. No new nodes. Proved smallness and tail cofinality by composita, checked the specified coefficient maps, used existing integral-basis and finite-free comparisons, explicitly extended tail ring cocones to all finite fields and proved uniqueness, checked the S-algebra structure at E, and applied the existing generic directed ring-sheaf/module comparison with exact scalar maps. All proof citations were read and quoted in citations.json. Five real searches appended; no project declaration states the whole item.",
+  "blueprint": "lem-sfb-dc-hom-preserves.proof.md, final algebraic-closure paragraph: the finite coefficient fields used when descending to a finite extension. This supplies the coefficient presentation isolated from the parent comparison; the argument follows the point and X coefficient-colimit proofs.",
+  "tool_uses": [
+   {
+    "node": "det-def-sfb-qlbar-condensed-subextensions",
+    "why": "Finite-compositum closure is the generic field-theoretic tool for directedness and cofinality; it changes no unit route."
+   },
+   {
+    "node": "lem-sfb-subfield-coefficient-map-comp",
+    "why": "Compatibility of the specified closure maps, used as a generic coefficient-map identity."
+   },
+   {
+    "node": "lem-sfb-local-field-integral-basis",
+    "why": "Existence of an integral basis of a finite local-field extension supplies the input of the basis-induced comparison."
+   },
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-finite-free",
+    "why": "The finite-free coefficient comparison is exactly the coefficient construction needed here, used without its inverse-image assertions."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "Only the last ring-colimit assertion is used as the full-index coefficient presentation, before writing the tail argument explicitly."
+   },
+   {
+    "node": "lem-sfb-directed-ring-sheaf-module-colimit",
+    "why": "Generic comparison of a directed ring-sheaf colimit with its underlying module colimit, with the same scalar maps and legs."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sfb-qlbar-condensed-subextensions",
+  "lem-sfb-subfield-coefficient-map-comp",
+  "det-prop-sfb-cartesian-coefficients-finite-free",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-86de138a5",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-86de138a5 (reviewer sub-agent of L); spot-checked: I read every step of the item and the statement of every cited node; there are 0 new nodes. Statement, stmt_deps and source are byte-identical to side-live, and the item is still unsplit live with no repair note. Comparing with old steps 1–3 of the re-split parent (Q34 snapshot), every argument is kept and spelled out in more detail. Step 1: smallness and cofinality follow from compositum clause 1 of det-def-sfb-qlbar-condensed-subextensions, with EH as the initial object above H. Step 2: strict functoriality of a, and q_J a_{H,J} = q_H from lem-sfb-subfield-coefficient-map-comp. Step 3: the integral basis plus det-prop-sfb-cartesian-coefficients-finite-free give finite freeness, with the action through a_{E,F}. Step 4: the full-index ring colimit comes from sk-prop-sfb-qlbar-colimit-x, whose legs are def-sfb-qlbar-x-cocone. Reading it as a ring-sheaf colimit is sound because I is filtered. I recomputed the extension t~_H = t_{EH} a_{H,EH}, its compatibility and uniqueness. Step 5: the S-algebra map follows from t_E = s_B. Step 6: every hypothesis of lem-sfb-directed-ring-sheaf-module-colimit holds. Sources checked: BS Lemma 6.8.2(2) p.58, and the blueprint proofs of qlbar-colimit-point, qlbar-colimit-x (third isomorphism) and cartesian finite-free. Edge cases: E = Q_l, F = E, H not comparable with E, X empty, B = 0. Accepted tool_uses: the integral-basis and cartesian finite-free nodes from unit sk-prop-sfb-cartesian-coefficients, which are generic tools; the other four are on route. Duplicate candidates read: tail-module-colimit, qlbar-ring-object-cocone, tail-module-objects, lem-coef-finite-free-extension, local-field-coefficient-stages. None states the item. Advisory: step 6 could have cited lem-sfb-qlbar-tail-module-colimit directly; the generic route it takes is valid."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QlbarTailFiniteFreeAlgebraPresentation",
+  "declaration": "AlgebraicGeometry.ProEtale.qlbar_tail_finite_free_algebra_presentation",
+  "file": "lean/Sheaf/Paper/QlbarTailFiniteFreeAlgebraPresentation.lean",
+  "statement": "theorem qlbar_tail_finite_free_algebra_presentation (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) : Small.{u + 1} (FiniteIntermediateField ℓ) ∧ Small.{u + 1} {F : FiniteIntermediateField ℓ // E ≤ F} ∧ Nonempty {F : FiniteIntermediateField ℓ // E ≤ F} ∧ IsFiltered {F : FiniteIntermediateField ℓ // E ≤ F} ∧ (∀ F G : {F : FiniteIntermediateField ℓ // E ≤ F}, ∃ K : {F : FiniteIntermediateField ℓ // E ≤ F}, F ≤ K ∧ G ≤ K) ∧ (∀ H : FiniteIntermediateField ℓ, Nonempty {F : FiniteIntermediateField ℓ // E ≤ F ∧ H ≤ F} ∧ ∀ F G : {F : FiniteIntermediateField ℓ // E ≤ F ∧ H ≤ F}, ∃ K : {F : FiniteIntermediateField ℓ // E ≤ F ∧ H ≤ F}, F ≤ K ∧ G ≤ K) ∧ (∀ H : FiniteIntermediateField ℓ, padicSubfieldRingObjMap X ℓ (le_refl H) = 𝟙 (padicSubfieldRingObj X ℓ H)) ∧ (∀ (H J K : FiniteIntermediateField ℓ) (h : H ≤ J) (k : J ≤ K), padicSubfieldRingObjMap X ℓ h ≫ padicSubfieldRingObjMap X ℓ k = padicSubfieldRingObjMap X ℓ (h.trans k)) ∧ (∀ (H J : FiniteIntermediateField ℓ) (h : H ≤ J), padicSubfieldRingObjMap X ℓ h ≫ padicSubfieldRingObjToPadicAlgCl X ℓ J = padicSubfieldRingObjToPadicAlgCl X ℓ H) ∧ (∀ (F : FiniteIntermediateField ℓ) (h : E ≤ F), Nonempty ((Mod.comap (padicSubfieldRingObjMap X ℓ h)).obj (Mod.regular (padicSubfieldRingObj X ℓ F)) ≅ Mod.finiteFree (padicSubfieldRingObj X ℓ E) (@Module.finrank E F inferInstance inferInstance (Module.compHom F (IntermediateField.inclusion h).toRingHom)))) ∧ (@Module.finrank E E inferInstance inferInstance (Module.compHom E (IntermediateField.inclusion (le_refl E)).toRingHom) = 1) ∧ (∀ (B : Sheaf (ProEt.topology X) Ab.{u + 1}) [MonObj B] [IsCommMonObj B] (t : ∀ F : {F : FiniteIntermediateField ℓ // E ≤ F}, {f : padicSubfieldRingObj X ℓ F.1 ⟶ B // IsMonHom f}), (∀ (F G : {F : FiniteIntermediateField ℓ // E ≤ F}) (h : F ≤ G), padicSubfieldRingObjMap X ℓ h ≫ (t G).1 = (t F).1) → ∃! f : {f : padicAlgClRingObj X ℓ ⟶ B // IsMonHom f}, ∀ F : {F : FiniteIntermediateField ℓ // E ≤ F}, padicSubfieldRingObjToPadicAlgCl X ℓ F.1 ≫ f.1 = (t F).1) ∧ (∀ (B : Sheaf (ProEt.topology X) Ab.{u + 1}) [MonObj B] [IsCommMonObj B] (s : padicSubfieldRingObj X ℓ E ⟶ B) [IsMonHom s] (t : ∀ F : {F : FiniteIntermediateField ℓ // E ≤ F}, {f : padicSubfieldRingObj X ℓ F.1 ⟶ B // IsMonHom f}), (∀ (F G : {F : FiniteIntermediateField ℓ // E ≤ F}) (h : F ≤ G), padicSubfieldRingObjMap X ℓ h ≫ (t G).1 = (t F).1) → (∀ F : {F : FiniteIntermediateField ℓ // E ≤ F}, padicSubfieldRingObjMap X ℓ F.2 ≫ (t F).1 = s) → ∃! f : {f : padicAlgClRingObj X ℓ ⟶ B // IsMonHom f}, padicSubfieldRingObjToPadicAlgCl X ℓ E ≫ f.1 = s ∧ ∀ F : {F : FiniteIntermediateField ℓ // E ≤ F}, padicSubfieldRingObjToPadicAlgCl X ℓ F.1 ≫ f.1 = (t F).1) ∧ (∀ (M : ringedSiteModules.{u + 1} ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} (ProEt.topology X) (padicSubfieldRingObj X ℓ E)))) (t : ∀ F : {F : FiniteIntermediateField ℓ // E ≤ F}, qlbarTailStage X ℓ F.2 ⟶ M), (∀ (F G : {F : FiniteIntermediateField ℓ // E ≤ F}) (h : F ≤ G) (U : X.ProEtᵒᵖ) (x : (padicSubfieldRingObj X ℓ F.1).obj.obj U), (t G).val.app U ((padicSubfieldRingObjMap X ℓ h).hom.app U x) = (t F).val.app U x) → ∃! f : qlbarTailVertex X ℓ E ⟶ M, ∀ (F : {F : FiniteIntermediateField ℓ // E ≤ F}) (U : X.ProEtᵒᵖ) (x : (padicSubfieldRingObj X ℓ F.1).obj.obj U), f.val.app U ((padicSubfieldRingObjToPadicAlgCl X ℓ F.1).hom.app U x) = (t F).val.app U x)",
+  "branch": "sheaf-dag",
+  "by": "Q73",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Explicit ring and S-algebra universal properties use morphisms of the prescribed commutative ring objects in abelian sheaves; the recorded section-ring reconstruction identifies these with commutative ring sheaves. The module universal property uses the existing qlbarTailStage and qlbarTailVertex through the recorded underlying-sheaf-preserving equivalence. No basis is used in any transition or leg."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62769c83c",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Read the item against all 12 stmt_dep records, the module, the report (both required sections present) and the live sources QlbarTailModuleColimit, ModuleObjects/Free, FiniteSubextension and CartesianCoefficientsFiniteFree. Item differs from side-live only in lean and one added landed def stmt_dep (def-sfb-qlbar-tail-module-objects, record identical to live). Clauses match the node: Small.{u+1} for I and I_E; tail Nonempty, IsFiltered and directed; cofinality as in the node; a identity and composition and q_J a = q_H over all of I; Mod.comap a_{E,F}(regular F_X) iso finiteFree S [F:E], with Mathlib finrank through the actual inclusion, F=E included and [E:E]=1; ring universal property over all comm monoid objects B with IsMonHom legs; S-algebra universal property with q_E ≫ f = s; module clause verbatim the third conjunct of the landed, proved qlbar_tail_module_colimit; no basis anywhere. T is the finite-subextension-valued condensed ring of sk-def-sfb-qlbar-condensed. Universes u/u+1 as in the landed sibling. Edge cases checked: E=Q_l, F=E, H not containing E, empty X, B=0. One sorry, no defs, docstrings with source, blueprint id and steps 1-6, statement verbatim, lines at most 100 characters, plain imports exactly the proof_dep modules (brief-stage2 l.104). No file changed, no compile run; the report records a clean server compile and an OK dry run. Advisory: the statement uses padicSubfieldRingObj, padicAlgClRingObj, Mod.finiteFree and sectionRingSheaf, owned by nodes outside stmt_deps; these are the cited maps' source and target objects, the same pattern as the landed sibling, and a stage-2 FIX cannot change stmt_deps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261022T144057-L-1495376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-artin-local-test-algebra",
+ "kind": "statement",
+ "title": "Algebra of Artinian deformation tests",
+ "statement": "Let $R$ be a commutative Noetherian ring and $k$ a field of finite type over $R$ [def-weil-pbc-noetherian-ring], [def-weil-field], [def-weil-finite-type-morphism]. Use the category $\\mathcal C_{R,k}$ of Artinian local $R$-algebras with specified residue field $k$ and local maps inducing the identity on $k$ [def-sfb-artin-deformation-test-category]. $\\mathfrak m_A$ is nilpotent for every $A\\in\\mathcal C_{R,k}$. If $A_1\\to A\\leftarrow A_2$ are morphisms and $A_2\\to A$ is surjective, the ring $P=A_1\\times_A A_2=\\{(a_1,a_2):a_1|_A=a_2|_A\\}$ is Artinian local with residue field $k$, with its canonical $R$-structure, and $P\\to A_1$ is surjective. If $A_2\\to A$ is a small extension, $P\\to A_1$ is a small extension with the same kernel. Every surjection $B\\twoheadrightarrow C$ in $\\mathcal C_{R,k}$ factors as $B=B_n\\twoheadrightarrow B_{n-1}\\twoheadrightarrow\\cdots\\twoheadrightarrow B_0\\xrightarrow{\\sim}C$ with $n\\geq0$, each $B_j\\to B_{j-1}$ a small extension and $B_0\\to C$ an isomorphism in $\\mathcal C_{R,k}$; if its kernel is nonzero one may take $B_0=C$ with the identity, so the surjection is itself a composite of $n\\geq1$ small extensions, while $n=0$ exactly when it is an isomorphism. If $\\mathfrak p=\\ker(R\\to k)$ and $\\Lambda=R_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], then $\\Lambda$ is Noetherian local, $k$ is finite as a $\\Lambda$-module, and extension of the $R$-structure uniquely identifies $\\mathcal C_{R,k}$ with $\\mathcal C_{\\Lambda,k}$; it also identifies their categories of complete Noetherian local algebras with residue field $k$.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tags 06GH (lemma-fiber-product-CLambda), 06GE (lemma-factor-small-extension); Artin Tag 07T4 (artin.tex, equation-predeformation-category), localization at the image point."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-sfb-artin-deformation-test-category",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "For every test algebra $B$, apply [lem-weil-pbc-artinian-local-noetherian-nilpotent] to its Artinian local underlying ring. This gives $\\mathfrak m_B^N=0$ for some $N\\geq1$, as asserted, and also gives Noetherianness when needed below.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00J8 (lemma-artinian-radical-nilpotent), 00KH (lemma-Noetherian-dimension-0)."
+   }
+  },
+  {
+   "text": "We will use the following elementary reading of [lem-weil-pbc-artinian-ideal-length-one-filtration]. For any ideal $J$ in an Artinian local test algebra $B$, take its finite filtration $0=J_0\\subset\\cdots\\subset J_r=J$ with simple nonzero factors $S_i$. The submodule $\\mathfrak m_BS_i$ is either zero or $S_i$. The latter would imply $\\mathfrak m_B^NS_i=S_i$, contradicting the nilpotence supplied by [lem-weil-pbc-artinian-local-noetherian-nilpotent]. Thus every factor is annihilated by $\\mathfrak m_B$, hence is a vector space over $B/\\mathfrak m_B=k$. The span of any nonzero vector is a nonzero $B$-submodule, so simplicity says that it is all of $S_i$: each factor has $k$-dimension one.",
+   "uses": [
+    "lem-weil-pbc-artinian-ideal-length-one-filtration",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06GE (lemma-factor-small-extension), finite-dimensional kernel argument; Algebra 00J3 (lemma-simple-pieces)."
+   }
+  },
+  {
+   "text": "Let $B\\twoheadrightarrow C$ be a morphism in the test category and $J$ its kernel. Apply the filtration and the preceding argument to $J$. Since $J\\subset\\mathfrak m_B$, all quotients $B/J_i$ have residue field $k$ and are local: an element outside $\\mathfrak m_B/J_i$ is the image of a unit. They are Artinian because a descending chain of their ideals pulls back to a chain of ideals of $B$. The maps $B/J_{i-1}\\twoheadrightarrow B/J_i$ have kernels $J_i/J_{i-1}$, nonzero of $k$-dimension one and annihilated by their source maximal ideals. They are small extensions by [def-sfb-artin-deformation-test-category]. Their composite is $B\\twoheadrightarrow B/J$, followed by the isomorphism $B/J\\cong C$ in $\\mathcal C_{R,k}$ induced by the given map; this is the asserted factorization with $n=r$. If $J\\neq0$ then $r\\geq1$, and composing the last small extension $B/J_{r-1}\\twoheadrightarrow B/J$ with $B/J\\cong C$ gives a surjective morphism with the same kernel $J/J_{r-1}$, isomorphically, so it is again a small extension and $B\\twoheadrightarrow C$ is a composite of $r$ small extensions. If $J=0$ the given map is an isomorphism and $r=0$; conversely a composite of $n\\geq1$ small extensions has nonzero kernel, so $n=0$ exactly for isomorphisms. A non-identity automorphism (for example $\\epsilon\\mapsto u\\epsilon$ on $k[\\epsilon]$, $u\\neq1$) is not an empty composite, which is why the final isomorphism is kept.",
+   "uses": [
+    "lem-weil-pbc-artinian-ideal-length-one-filtration",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06GE (lemma-factor-small-extension), with a simple ideal filtration in place of the two successive refinements."
+   }
+  },
+  {
+   "text": "Write $f_i:A_i\\to A$ and $P=\\{(a_1,a_2):f_1(a_1)=f_2(a_2)\\}$. Coordinatewise operations and $r\\mapsto(r|_{A_1},r|_{A_2})$ give the ring and its $R$-structure. For each $a_1$, surjectivity of $f_2$ provides $a_2$ over $f_1(a_1)$, so $\\pi_1:P\\twoheadrightarrow A_1$. The common residue $\\rho:P\\to k$ is therefore surjective. Its kernel is $\\mathfrak n=\\{(a_1,a_2)\\in P:a_i\\in\\mathfrak m_{A_i}\\}$. If a pair has nonzero residue, both coordinates are units, and their inverses again have equal image in $A$; hence the pair is a unit of $P$. A pair of zero residue cannot be a unit. Thus $\\mathfrak n$ is the unique maximal ideal, $P/\\mathfrak n=k$, and both projections are local maps inducing the identity on $k$. Finally $\\ker\\pi_1=\\{(0,j):j\\in J\\}$ for $J=\\ker f_2$, and multiplication on this kernel is $(a_1,a_2)(0,j)=(0,a_2j)$.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06GH (lemma-fiber-product-CLambda), proof of (1), explicit local-ring and kernel calculation."
+   }
+  },
+  {
+   "text": "It remains to prove $P$ Artinian; we do not infer this merely because it is a subring of $A_1\\times A_2$. Filter $J=\\ker f_2$ by [lem-weil-pbc-artinian-ideal-length-one-filtration]. Step 2 shows that its factors are copies of the residue module $k$. Each $\\{(0,j):j\\in J_i\\}$ is a $P$-submodule of $\\ker\\pi_1$, and $P$ acts on each factor through its surjective residue map $P\\to k$. Its $P$-submodules are consequently its $k$-subspaces, so each factor has length one. Repeated use of [lem-weil-pbc-length-additive-short-exact] gives finite $P$-length of $\\ker\\pi_1$. The $P$-submodules of $A_1$ are exactly its $A_1$-ideals since $\\pi_1$ is surjective. Thus [lem-weil-pbc-artinian-ring-self-finite-length] gives finite $P$-length of $A_1$. Apply length additivity to $0\\to\\ker\\pi_1\\to P\\to A_1\\to0$ to obtain finite length of $P$ over itself. A strictly descending chain of ideals would give arbitrarily long finite strict chains, contradicting this finite bound. Hence $P$ is Artinian and is an object of the test category.",
+   "uses": [
+    "lem-weil-pbc-artinian-ideal-length-one-filtration",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-weil-pbc-length-additive-short-exact",
+    "lem-weil-pbc-artinian-ring-self-finite-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06GH (lemma-fiber-product-CLambda), finite-length argument; Algebra Tags 00IV (lemma-length-additive), 00JB (lemma-artinian-finite-length)."
+   }
+  },
+  {
+   "text": "If $f_2$ is small, its kernel $J$ is a one-dimensional $k$-vector space annihilated by $\\mathfrak m_{A_2}$. The map $j\\mapsto(0,j)$ is an additive isomorphism $J\\cong\\ker\\pi_1$. The multiplication formula of step 4 shows that the action on this kernel factors through the same residue field $k$, and $\\mathfrak n$ annihilates it because its second coordinate lies in $\\mathfrak m_{A_2}$. The kernel is therefore nonzero of $k$-dimension one. Together with surjectivity this says that $\\pi_1$ is a small extension by [def-sfb-artin-deformation-test-category], with its kernel canonically identified with $J$.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06GH (lemma-fiber-product-CLambda), proof of (2)."
+   }
+  },
+  {
+   "text": "Put $\\mathfrak p=\\ker(R\\to k)$, a prime ideal since $k$ is a field, and $\\Lambda=R_{\\mathfrak p}$ as in [def-weil-pbc-localization-at-prime]. This is local with maximal ideal $\\mathfrak p\\Lambda$ and is Noetherian by [lem-weil-pbc-localization-noetherian]. For any local $R$-algebra $B$ with specified residue $k$ (Artinian, or complete Noetherian), every $s\\in R\\setminus\\mathfrak p$ has nonzero residue in $B$ and hence is a unit. By [lem-weil-pbc-ring-localization-universal-property] there is a unique extended structure $\\Lambda\\to B$, explicitly $r/s\\mapsto r_Bs_B^{-1}$. It is local: its composite to $k$ has kernel $\\mathfrak p\\Lambda$. Any $R$-map between two such $B$ commutes with these extended structures by uniqueness (or by the displayed fraction formula). Conversely any $\\Lambda$-map is an $R$-map. Extension and restriction thus identify the test categories, preserving their specified residue identifications. The same construction identifies the complete Noetherian local categories: the underlying rings, maximal ideals, quotient towers and canonical maps to their inverse limits are unchanged, so completeness and Noetherianness are unchanged. Any requirement of maximal-ideal-adic continuity of morphisms is likewise unchanged.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CP (proposition-universal-property-localization), 00FN (lemma-Noetherian-permanence), 07BH (section-local-rings); Artin 07T4 (equation-predeformation-category), base-category independence."
+   }
+  },
+  {
+   "text": "The map $\\Lambda\\to k$ annihilates $\\mathfrak p\\Lambda$, so it induces an inclusion of fields $k_0=\\Lambda/\\mathfrak p\\Lambda=\\kappa(\\mathfrak p)\\hookrightarrow k$. Choose finitely many $R$-algebra generators of $k$, using the given finite-type hypothesis. The same elements generate $k$ over $k_0$: the $k_0$-subalgebra they generate contains the image of $R$ and all its generators, hence all of $k$. Apply [lem-weil-pbc-zariski-lemma] to the field extension $k_0\\subset k$ to get $[k:k_0]<\\infty$. A $k_0$-basis also generates $k$ as a $\\Lambda$-module, since $\\Lambda\\twoheadrightarrow k_0$ is surjective. Thus $k$ is finite over $\\Lambda$, completing the last clause. No assertion that $\\mathfrak p$ is maximal in $R$ is needed.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-zariski-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FV (theorem-nullstellensatz), part (1); localization at a prime, Section 07BH."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-artinian-ideal-length-one-filtration",
+  "def-sfb-artin-deformation-test-category",
+  "lem-weil-pbc-length-additive-short-exact",
+  "lem-weil-pbc-artinian-ring-self-finite-length",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-weil-pbc-zariski-lemma"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tags 06GE and 06GH, with an elementary simple-filtration proof of Artinianness and explicit localization reduction using Algebra Tags 00CP, 00FN, 00FV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Artinian local algebras with fixed finite type residue field are finite type and closed under pullbacks along surjections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.QuasiFinite.instIsArtinianRingFiber\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.QuasiFinite R S] (P : Ideal R) [inst_4 : P.IsPrime], IsArtinianRing (P.Fiber S)\", \"doc\": \"If $ S $ is a quasi-finite algebra over a commutative ring $ R $ and $ P $ is a prime ideal of $ R $, then the fiber of $ P $ in $ S $—defined as the tensor product of the residue field of $ P $ with \"}\n  {\"name\": \"Module.finite_of_isArtinianRing\", \"module\": \"Mathlib/RingTheory/Jacobson/Artinian\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FiniteType R A] [IsJacobsonRing R] [IsArtinianRing A], Module.Finite R A\", \"doc\": \"If $ R $ is a Jacobson ring and $ A $ is an Artinian ring, then $ A $ is a finitely generated $ R $-module.\"}\n  {\"name\": \"IsLocalRing.ResidueField.finite_of_finite\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : IsLocalRing R] [inst_2 : CommRing S]\\n  [inst_3 : IsLocalRing S] [inst_4 : Algebra R S] [IsLocalHom (algebraMap R S)] [Module.Finite R S],\\n  Finite (IsLocalRing.ResidueField R) → Finite (IsLocalRing.ResidueField S)\", \"doc\": \"Let $ R $ and $ S $ be local rings with $ S $ being a finite $ R $-module. If the residue field of $ R $ is finite, then the residue field of $ S $ is also finite.\"}\n  {\"name\": \"Module.Finite.of_quasiFinite\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [IsArtinianRing R]\\n  [Algebra.QuasiFinite R S], Module.Finite R S\", \"doc\": \"If $ R $ is an Artinian ring and $ S $ is a quasi-finite $ R $-algebra (i.e., a commutative ring equipped with an $ R $-algebra structure that is finitely generated as an $ R $-module), then $ S $ is \"}\n  {\"name\": \"RingHom.EssFiniteType.residueFieldMap\", \"module\": \"Mathlib/RingTheory/RingHom/EssFiniteType\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} [inst_2 : IsLocalRing R]\\n  [inst_3 : IsLocalRing S] [inst_4 : IsLocalHom f], f.EssFiniteType → (IsLocalRing.ResidueField.map f).EssFiniteType\", \"doc\": \"If $ f : R \\\\to S $ is a local homomorphism between commutative local rings such that $ S $ is essentially of finite type over $ R $, then the induced homomorphism between their residue fields is also \"}\n  {\"name\": \"Algebra.QuasiFinite.iff_of_isArtinianRing\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [IsArtinianRing R],\\n  Algebra.QuasiFinite R S ↔ Module.Finite R S\", \"doc\": \"If $ R $ is an Artinian ring, then a commutative $ R $-algebra $ S $ is quasi-finite over $ R $ if and only if $ S $ is finitely generated as an $ R $-module.\"}\n  {\"name\": \"IsLocalRing.ResidueField.finite_of_module_finite\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : IsLocalRing R] [inst_2 : CommRing S]\\n  [inst_3 : IsLocalRing S] [inst_4 : Algebra R S] [inst_5 : IsLocalHom (algebraMap R S)] [Module.Finite R S],\\n  Module.Finite (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S)\", \"doc\": \"Given local rings $ R $ and $ S $ where the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with an algebra structure over the residue field of $ R \"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (P : Ideal S) [inst_4 : P.IsPrime] [inst_5 : P.LiesOver p] [Algebra.QuasiFiniteAt R P],\\n  Module.Finite p.ResidueField P.ResidueField\", \"doc\": \"Given prime ideals $\\\\mathfrak{p} \\\\subseteq R$ and $\\\\mathfrak{P} \\\\subseteq S$ where $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, if the localization $S_\\\\mathfrak{P}$ is quasi-finite as an $R$-module, then \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: quotient and finite-type Artinian facts do not assert the pullback and fixed-residue-field test-category assertions; Module.finite_of_isArtinianRing assumes finite type and a Jacobson base"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fiber product of Artinian local rings along surjection is Artinian local with same residue field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"isArtinianRing_rangeS\", \"module\": \"Mathlib.RingTheory.Artinian.Module\", \"type\": \"{R} [Semiring R] {S} [Semiring S] (f : R →+* S) [IsArtinianRing R] : IsArtinianRing f.rangeS\", \"doc\": \"If $ R $ is an Artinian semiring and $ f : R \\to S $ is a ring homomorphism, then the image of $ f $, which is a subsemiring of $ S $, is also Artinian. This means the descending chain condition on ide\"}\n  {\"name\": \"Function.Surjective.isArtinianRing\", \"module\": \"Mathlib.RingTheory.Artinian.Module\", \"type\": \"{R} [Semiring R] {S} [Semiring S] {F} [FunLike F R S] [RingHomClass F R S] {f : F} (hf : Function.Surjective f)\\n  [H : IsArtinianRing R] : IsArtinianRing S\", \"doc\": \"Let $ R $ and $ S $ be semirings, and let $ f : R \\to S $ be a surjective semiring homomorphism. If $ R $ is an Artinian semiring (satisfying the descending chain condition on ideals), then $ S $ is al\"}\n  {\"name\": \"isArtinian_pi\", \"module\": \"Mathlib.RingTheory.Artinian.Module\", \"type\": \": ∀ {M : ι → Type*} [Π i, AddCommGroup (M i)] [Π i, Module R (M i)] [∀ i, IsArtinian R (M i)], IsArtinian R (Π i, M i)\", \"doc\": \"If each module in a family $\\\\{M_i\\\\}_{i \\\\in I}$ is Artinian over a ring $R$, then their product module $\\\\prod_{i \\\\in I} M_i$ is also Artinian over $R$. This follows from the descending chain condition \"}\n  {\"name\": \"IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.Ideal.KrullsHeightTheorem\", \"type\": \"[IsLocalRing R] (I : Ideal R) (hp : IsLocalRing.maximalIdeal R ∈ I.minimalPrimes) : IsArtinianRing (R ⧸ I)\", \"doc\": \"Let $ R $ be a local ring with maximal ideal $ \\\\mathfrak{m} $, and let $ I $ be an ideal of $ R $ such that $ \\\\mathfrak{m} $ is a minimal prime ideal containing $ I $. Then the quotient ring $ R/I $ i\"}\n  {\"name\": \"IsLocalRing.instCommRingResidueField\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → [inst_1 : IsLocalRing R] → CommRing (IsLocalRing.ResidueField R)\", \"doc\": \"For any commutative ring $ R $ that is a local ring, the residue field of $ R $, defined as the quotient of $ R $ by its unique maximal ideal of non-units, inherits a commutative ring structure from $\"}\n  {\"name\": \"Algebra.QuasiFinite.finite_fiber\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.QuasiFinite R S] (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S)\", \"doc\": \"For any commutative ring $ R $ and a quasi-finite $ R $-algebra $ S $, and for every prime ideal $ P $ of $ R $, the fiber of $ S $ over $ P $ (defined as the tensor product of the residue field of $ \"}\n  {\"name\": \"Algebra.QuasiFinite.instIsArtinianRingFiber\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"[QuasiFinite R S] (P : Ideal R) [P.IsPrime] : IsArtinianRing (P.Fiber S)\", \"doc\": \"If $ S $ is a quasi-finite algebra over a commutative ring $ R $ and $ P $ is a prime ideal of $ R $, then the fiber of $ P $ in $ S $—defined as the tensor product of the residue field of $ P $ with \"}\n  {\"name\": \"IsArtinianRing.localization_artinian\", \"module\": \"Mathlib.RingTheory.Artinian.Ring\", \"type\": \": IsArtinianRing L\", \"doc\": \"If $ R $ is an Artinian ring and $ L $ is the localization of $ R $ at a submonoid $ M $, then $ L $ is also an Artinian ring.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: quotient and finite-type Artinian facts do not assert the pullback and fixed-residue-field test-category assertions; Module.finite_of_isArtinianRing assumes finite type and a Jacobson base"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsArtinianRing, Algebra.FiniteType",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"Module.finite_of_isArtinianRing\", \"module\": \"Mathlib.RingTheory.Jacobson.Artinian\", \"type\": \" (R : Type u_1) (A : Type u_2) [CommRing R] [CommRing A] [Algebra R A] [Algebra.FiniteType R A] [IsJacobsonRing R] [IsArtinianRing A] : Module.Finite R A\", \"doc\": \"If `A` is a finite type algebra over `R`, then `A` is an Artinian ring and `R` is Jacobson\\nimplies `A` is finite over `R`.\"}\n  {\"name\": \"Module.finite_iff_isArtinianRing\", \"module\": \"Mathlib.RingTheory.Jacobson.Artinian\", \"type\": \" (R : Type u_1) (A : Type u_2) [CommRing R] [CommRing A] [Algebra R A] [Algebra.FiniteType R A] [IsArtinianRing R] : Module.Finite R A ↔ IsArtinianRing A\", \"doc\": \"If `A` is a finite type algebra over an Artinian ring `R`,\\nthen `A` is finite over `R` if and only if `A` is an Artinian ring.\"}\n  {\"name\": \"Module.finite_iff_krullDimLE_zero\", \"module\": \"Mathlib.RingTheory.Jacobson.Artinian\", \"type\": \" (R : Type u_1) (A : Type u_2) [CommRing R] [CommRing A] [Algebra R A] [Algebra.FiniteType R A] [IsArtinianRing R] : Module.Finite R A ↔ Ring.KrullDimLE 0 A\", \"doc\": \"If `A` is a finite type algebra over an Artinian ring `R`,\\nthen `A` is finite over `R` if and only if `dim A = 0`.\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.isClopen_singleton\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] (p : PrimeSpectrum S) [IsArtinianRing R] [Algebra.FiniteType R S] [Algebra.QuasiFiniteAt R p.asIdeal] : IsClopen {p}\", \"doc\": \"If `R` is an artinian ring, and `S` is a finite type `R`-algebra `R`-quasi-finite at `p`,\\nthen `{p}` is clopen in `Spec S`.\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.of_isOpen_singleton\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] [IsArtinianRing R] (p : PrimeSpectrum S) [Algebra.FiniteType R S] (H : IsOpen {p}) : Algebra.QuasiFiniteAt R p.asIdeal\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: quotient and finite-type Artinian facts do not assert the pullback and fixed-residue-field test-category assertions; Module.finite_of_isArtinianRing assumes finite type and a Jacobson base"
+  },
+  {
+   "tool": "grep",
+   "query": "IsArtinianRing.*[Pp]ullback|[Pp]ullback.*IsArtinian|[Aa]rtinian.*[Ff]inite[Tt]ype",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"line\": \"442\", \"text\": \"    (p : Ideal S) [p.IsPrime] [IsArtinianRing R] [Algebra.EssFiniteType R S]\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"line\": \"473\", \"text\": \"    (p : PrimeSpectrum S) [IsArtinianRing R] [Algebra.FiniteType R S]\"}\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"line\": \"482\", \"text\": \"    [IsArtinianRing R] (p : PrimeSpectrum S) [Algebra.FiniteType R S]\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: quotient and finite-type Artinian facts do not assert the pullback and fixed-residue-field test-category assertions; Module.finite_of_isArtinianRing assumes finite type and a Jacobson base"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of Artinian local algebras along a surjection and factorization into small extensions with fixed residue field",
+   "results": "8 hits: isArtinian_of_surjective_algebraMap, Algebra.QuasiFinite.instIsArtinianRingFiber, IsArtinianRing.localization_surjective, Function.Surjective.isArtinianRing, RingHom.EssFiniteType.residueFieldMap, Algebra.instFiniteResidueFieldOfFormallyUnramified, Ideal.surjectiveOnStalks_residueField, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; pullback locality alone is in RingHom.isLocalRing_pullback, Mathlib/RingTheory/LocalRing/Pullback.lean:99-100; its projection surjectivity is at lines 81-83. These do not give Artinianness, small-extension factorizations or the localization equivalences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artinian local ring fiber product over a surjective map finite length small extensions",
+   "results": "8 hits: isArtinian_of_surjective_algebraMap, Algebra.QuasiFinite.instIsArtinianRingFiber, IsLocalRing.ResidueField.finite_of_finite, isArtinian_of_surjective, isArtinian_of_fg_of_artinian', Module.Finite.of_quasiFinite, isArtinianRing_rangeS, Algebra.QuasiFinite.iff_of_isArtinianRing",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; pullback locality alone is in RingHom.isLocalRing_pullback, Mathlib/RingTheory/LocalRing/Pullback.lean:99-100; its projection surjectivity is at lines 81-83. These do not give Artinianness, small-extension factorizations or the localization equivalences."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsArtinianRing, IsLocalRing",
+   "results": "5 hits: IsArtinianRing.isField_of_isReduced_of_isLocalRing, isArtinianRing_iff_isNilpotent_maximalIdeal, IsLocalRing.exists_maximalIdeal_pow_le_of_isArtinianRing_quotient, instIsAdicCompleteMaximalIdealOfIsArtinianRing, IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; pullback locality alone is in RingHom.isLocalRing_pullback, Mathlib/RingTheory/LocalRing/Pullback.lean:99-100; its projection surjectivity is at lines 81-83. These do not give Artinianness, small-extension factorizations or the localization equivalences."
+  },
+  {
+   "tool": "grep",
+   "query": "([Aa]rtinian|[Pp]ullback).*(small.extension|[Pp]ullback.*[Ll]ocal)|small.extension",
+   "results": "1 hits: Mathlib/RingTheory/LocalRing/Pullback.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; pullback locality alone is in RingHom.isLocalRing_pullback, Mathlib/RingTheory/LocalRing/Pullback.lean:99-100; its projection surjectivity is at lines 81-83. These do not give Artinianness, small-extension factorizations or the localization equivalences."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-rs-versal-formal-object",
+  "date": "2026-10-23",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: first three sentences of the proof, construction of a versal formal object before effectivity; Tags 06GH (lemma-fiber-product-CLambda), 06GE (lemma-factor-small-extension); Morphisms Tag 02HV (morphisms.tex, lemma-artinian-finite-type); Artin Tag 07T4 (artin.tex, equation-predeformation-category), localization at the image point.",
+   "via": [
+    "lem-sfb-artin-rs-versal-formal-object",
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-artin-local-test-algebra",
+  "worker": "stage1",
+  "summary": "Checked Tags 06GE and 06GH against the test-category definition and reused existing ideal-filtration, nilpotence, length and localization nodes. Supplied explicit kernel, residue, small-extension and localization arguments; no new nodes. The finite-type residue hypothesis gives finiteness after localization, without incorrectly requiring the original kernel prime to be maximal. Reviewer correction (NL maintainer reader, 2026-10-23): the factorization clause now ends in an isomorphism (Stacks 06GE ends with $\\cong A$); the former wording was false for non-identity automorphisms.",
+  "blueprint": "Supporting algebra for the recorded chain to sk-thm-sf-ctf-stability direct-images proof (3), through the Artin versal formal-object input: the pullback and small-extension arguments required by Tags 07XY and 07Y4. The inherited ancestor is null, exactly as blueprint_refs.py ancestor reports; current latest direct-images proof does not itself state this supporting algebra.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-b15bfb7be",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-b15bfb7be (reviewer sub-agent of L); spot-checked: Read in full: the item JSON (0 new nodes, no repair note), the report, Stacks formal-defos 06GE (l.280-304) and 06GH (l.451-500), artin 07T4 and the RS lemma at l.608, and the statements of all 12 cited nodes. Steps 1-8 are correct and each cited statement says what the step takes from it. Step 4: units of P come coordinatewise and ker pi_1 = {(0,j)}. Step 5: P is Artinian by finite length, built from the J-filtration factors (P acts through the surjection to k) and from A_1 (its P-submodules are its ideals), using length additivity; this avoids the false 'subring of an Artinian ring' inference. Step 6: the small-extension kernel is killed via m_{A_2}. Step 7: s outside p maps to a unit, so the R-structure extends uniquely to Lambda=R_p by the universal property; the extension is local and the complete-algebra categories are unchanged. Step 8: k is finite over kappa(p) by Zariski's lemma, so finite over Lambda, without assuming p maximal (checked on F[[t]] -> F((t))). The Mathlib searches cover all three kinds. No duplicate exists in the DAG. Off-unit inputs are Mathlib leaves or Lean-closed (filtration), so tool_uses=[] is accepted. No SGA is cited. FIX (E2, false clause in the item statement): 'every surjection factors into finitely many small extensions (the identity is an empty composite)' is false for a non-identity isomorphism, e.g. eps->u*eps on k[eps] with u not 1, because an empty composite is the identity and a nonempty composite has nonzero kernel. Stacks 06GE ends its chain with '≅ A'. Corrected statement: B=B_n->...->B_0 ≅ C, with n>=1 and B_0=C possible when the kernel is nonzero, and n=0 exactly for isomorphisms. Step 3 now proves this: the last small extension composed with the isomorphism is again small. split_report.summary has one added sentence. The citer lem-sfb-ring-deformation-smoothness-test step 5 already treats an isomorphism as the empty case, and lem-sfb-artin-rs-versal-formal-object uses only the nilpotence and pullback clauses, so both are unaffected. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-artin-local-test-algebra.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinLocalTestAlgebra",
+  "declaration": "AlgebraicGeometry.ArtinDeformation.artin_local_test_algebra",
+  "declarations": [
+   "AlgebraicGeometry.ArtinDeformation.artin_local_test_algebra",
+   "AlgebraicGeometry.ArtinDeformation.exists_small_extension_factorization",
+   "AlgebraicGeometry.ArtinDeformation.localization_marked_structures"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinLocalTestAlgebra.lean",
+  "statement": "theorem artin_local_test_algebra : (∀ B : TestCategory R k, ∃ N : ℕ, 0 < N ∧ IsLocalRing.maximalIdeal (ring B) ^ N = ⊥) ∧ (∀ (A₁ A₂ A : TestCategory R k) (f₁ : A₁ ⟶ A) (f₂ : A₂ ⟶ A) (hs : Function.Surjective (map f₂)), IsTestAlgebra R k (A := CommAlgCat.of R (fibreProductAlgebra f₁ f₂)) (fibreProductResidue f₁ f₂) ∧ Function.Surjective (map (fibreProductFst f₁ f₂ hs)) ∧ (IsSmallExtension f₂ → IsSmallExtension (fibreProductFst f₁ f₂ hs) ∧ ∃ e : RingHom.ker (map (fibreProductFst f₁ f₂ hs)).toRingHom ≃+ RingHom.ker (map f₂).toRingHom, ∀ x, (e x).val = x.val.val.2))",
+  "branch": "newtargets-dag",
+  "by": "Q159",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three declarations jointly state the node. Localization is the unique extension of the marked structures and preservation of their maps on the same underlying rings; this is the object-and-arrow identification of both categories. The primary declaration covers nilpotence and the literal fibre product, including its canonical second-coordinate kernel identification."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-022fdabcc",
+  "group": "Q159",
+  "result": "pass",
+  "note": "Read item node, report, module ArtinLocalTestAlgebra.lean, and the dependency module ArtinDeformationTestCategory.lean (IsTestAlgebra, TestCategory, IsSmallExtension, fibreProductAlgebra/Residue/Fst, CompleteLocalAlgebra). Only the node's lean field changed; lean.statement matches the file verbatim. Hypotheses equal the node's (Noetherian R, field k of finite type, one universe u as in the dependency, no maximality of ker(R→k)). Clauses checked: nilpotence (N>0); fibre product is a test algebra, projection surjective; small extension passes to the projection, with the kernel identified canonically by the second coordinate; factorization via ComposableArrows from B with final iso to C, each step small, composite = f, n=0 iff IsIso f, and a positive chain ending at C when the kernel is nonzero; localization via IsLocalization at primeCompl of ker (covers Localization.AtPrime): Noetherian, local, unique q: Λ→k with q.Finite, unique residue-compatible extensions for test and complete algebras, R-maps commute with them, giving the identification of both categories. Edge cases: k itself, automorphisms with n=0, identity second leg, non-maximal kernel, universes. Gates: no definitions, all proofs sorry, docstrings give Stacks places and the blueprint id, imports OK, report sections present. Advisory only: the n=0 iff clause is stated for the asserted factorization, not for every chain; this matches the node's sentence and the citers' use. No compile run because no file was changed."
+ }
+}

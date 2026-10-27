@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-smooth-affine-adjoint-kernel-calculus",
+ "kind": "statement",
+ "title": "Adjoint representations, base change and tangent kernels",
+ "statement": "Let $A$ be a nonzero commutative ring, $S=\\operatorname{Spec}A$, and let $J$ be a smooth affine finitely presented $S$-group scheme. Group schemes have multiplication, identity and inverse satisfying the group diagrams, with the conventions of [def-sfb-pinned-split-root-realization] but with no reductivity, connectedness, torus or pinning assumption. For each commutative $A$-algebra $B$ put $L_J(B)=\\ker(J(B[\\epsilon]/(\\epsilon^2))\\to J(B))$, the kernel over the identity under $\\epsilon\\mapsto0$ [def-sc-dual-numbers]. Its module operations are the operations on derivations at the identity: if $J=\\operatorname{Spec}C$ and $c:C\\to B$ is the identity section, a tangent vector is $c+\\epsilon d$ with $d$ $A$-linear and $d(xy)=c(x)d(y)+c(y)d(x)$. Write $L=L_J(A)$. Then $L$ is finite projective, meaning a direct summand of a finite free $A$-module, and the canonical map $B\\otimes_A L\\to L_J(B)$ is an isomorphism, natural under successive algebra extensions. Conjugation on dual-number points defines a homomorphism $\\operatorname{Ad}_J:J\\to\\operatorname{GL}(L)$, where $\\operatorname{GL}(L)(B)=\\operatorname{Aut}_B(B\\otimes_A L)$, and these homomorphisms commute with arbitrary base change. Its scheme-theoretic kernel $K=J\\times_{\\operatorname{GL}(L),1}S$ is an affine finitely presented closed normal subgroup [def-weil-closed-immersion], and its formation commutes with arbitrary base change. Normal means invariant under conjugation after every algebra extension. If $A=k$ is a field, the canonical Lie bracket and differentials of [lem-sfb-affine-group-lie-tangent-calculus] satisfy $d\\operatorname{Ad}_J(x)(y)=[x,y]$ and identify $\\operatorname{Lie}(K)=\\{x\\in L:[x,y]=0\\text{ for all }y\\in L\\}$ as a subspace of $L$. No reducedness or smoothness of $K$ is required.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Introduction, printed p.2 (Lie preserves fibre products); Proposition 3.3.8 proof, printed p.102 (finite presentation of the adjoint kernel, Lie(ker Ad)=ker(ad), and functoriality). General tangent construction as in Milne, Algebraic Groups, Sections 10.19--10.23. Read online; local Conrad PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "def-sc-dual-numbers",
+  "def-weil-closed-immersion",
+  "lem-sfb-affine-group-lie-tangent-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Write $J=\\operatorname{Spec}C$, and let $u:C\\to A$ be the identity augmentation. By [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], $C$ is a smooth $A$-algebra. An $A$-algebra point $C\\to B[\\epsilon]/\\epsilon^2$ reducing to $u_B$ has a unique expression $u_B+\\epsilon d$; comparing constant and linear coefficients in the product law says precisely that $d$ is a derivation at $u_B$. Extension by $d_B(b\\otimes c)=b\\,d(c)$ identifies these derivations with $T(B\\otimes_A C,u_B)$, with inverse restriction to $1\\otimes C$. Thus [lem-sfb-smooth-augmented-tangent-scalar-extension] proves that $L=T(C,u)$ is finite projective and supplies the stated comparison, explicitly $(b\\otimes d)(c)=b\\,d(c)$. Its identity, tower and augmented-algebra naturality clauses give the required successive-extension compatibility, without assuming flatness of $B$.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-sfb-smooth-augmented-tangent-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.19--10.23, printed pp.192--193; agent extension to a smooth affine group over an arbitrary base ring"
+   }
+  },
+  {
+   "text": "For $g\\in J(B)$, conjugation $c_g:J_B\\to J_B$ is a scheme automorphism fixing the identity. By [lem-weil-pbc-fibre-product-affine-spectra], $J_B=J\\times_S\\operatorname{Spec}B$ is $\\operatorname{Spec}(B\\otimes_A C)$, so by [def-weil-affine-spectrum] $c_g$ is induced by an augmented $B$-algebra automorphism $q_g:B\\otimes_A C\\to B\\otimes_A C$. The coefficient of $\\epsilon$ in $c_g(u_B+\\epsilon d)$ is $d\\circ q_g$, which adds and scales pointwise; its inverse is the operation from $g^{-1}$. Hence conjugation is a $B$-linear automorphism of $L_J(B)$. The equality $c_{gh}=c_g\\circ c_h$ proves the group homomorphism law. Under $B\\to B'$, applying the algebra map to the coefficients of $g(u_B+\\epsilon d)g^{-1}$ gives $g'(u_{B'}+\\epsilon d')g'^{-1}$. Together with the explicit comparison in step 1 this proves naturality on all algebra points.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.19--10.23, printed pp.192--193; agent extension to a smooth affine group over an arbitrary base ring"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-projective-automorphism-affine-presentation] to $P=L$. Evaluate step 2 at the universal point $g_{\\rm univ}\\in J(C)$, the identity map of $C$. It yields an element of $\\operatorname{GL}_A(L)(C)$, hence a morphism $a:J\\to\\operatorname{GL}_A(L)$ by the representing bijection. Every $g\\in J(B)$ is the image of this universal point under its coordinate map $C\\to B$, so the naturality already proved shows $a_B(g)=\\operatorname{Ad}_J(g)$. The homomorphism identities hold on universal pairs of points and thus are scheme identities. After $A\\to A'$, the tangent comparisons in step 1 identify both conjugation constructions on every $A'$-algebra by the identical product $gvg^{-1}$, and the cited lemma identifies the two linear-group schemes. They therefore identify the two morphisms, compatibly with successive extensions.",
+   "uses": [
+    "lem-sfb-projective-automorphism-affine-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.19--10.23, printed pp.192--193; agent extension to a smooth affine group over an arbitrary base ring"
+   }
+  },
+  {
+   "text": "Let $D$ be the coordinate algebra of $\\operatorname{GL}_A(L)$ and $I=\\ker(D\\to A)$ its identity ideal, finitely generated by [lem-sfb-projective-automorphism-affine-presentation]. If $a^*:D\\to C$ is step 3, then [lem-weil-pbc-fibre-product-affine-spectra] describes $K$ as $\\operatorname{Spec}(C\\otimes_D A)$. This algebra is $C/(a^*(I))$: maps from either algebra to a commutative ring are exactly maps from $C$ annihilating $a^*(I)$, since $D/I=A$. Thus $K\\hookrightarrow J$ is a closed immersion by [def-weil-closed-immersion]. Its ideal is finitely generated, and $C$ is finitely presented over $A$ by step 1, so [lem-weil-pbc-finite-presentation-quotient-fg-ideal] proves finite presentation of $K$ over $A$. This also proves finite presentation of the closed immersion, by the same finite list of ideal generators.",
+   "uses": [
+    "lem-sfb-projective-automorphism-affine-presentation",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-finite-presentation-quotient-fg-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4, lemma-fibre-product-affine-schemes; algebra.tex, Tag 00F3, definition-finite-type; agent assembly of the identity fibre"
+   }
+  },
+  {
+   "text": "For every $A$-algebra $B$, the fibre-product condition is exactly $K(B)=\\{g\\in J(B):\\operatorname{Ad}_J(g)=1\\}$. The homomorphism law gives closure under multiplication and inverse and $\\operatorname{Ad}_J(hgh^{-1})=\\operatorname{Ad}_J(h)1\\operatorname{Ad}_J(h)^{-1}=1$. These identities on universal algebra points give a subgroup scheme and conjugation invariance, including after every algebra extension. Under any $A\\to A'$, a point of the base-changed fibre product over an $A'$-algebra $B$ satisfies that same identity. Step 3 identifies it with $\\operatorname{Ad}_{J_{A'}}(g)=1$. Equivalently both fibre products are the same iterated pullback: their maps into any scheme are the same compatible triples. This proves the claimed canonical kernel base-change isomorphism without a flatness assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 022S, definition-group-scheme; agent verification of kernel and base change from the fibre-product universal property"
+   }
+  },
+  {
+   "text": "Now let $A=k$ be a field. By [lem-sfb-affine-group-faithful-linear-representation] choose a closed immersion $r:J\\to\\operatorname{GL}_{m,k}$ injective on all algebra-valued points. By [lem-sfb-affine-group-lie-tangent-calculus], $r(t_x)=1+\\delta\\,dr(x)$ and $dr$ preserves brackets, with matrix bracket $[U,V]=UV-VU$. Also $dr$ is injective: $dr(x)=0$ implies $r(t_x)=1$, hence $t_x=1$ by pointwise injectivity and then $x=0$ by the tangent identification. Write $\\operatorname{Ad}_{k[\\delta]}(t_x)(y)=y+\\delta z$, where $k[\\delta]=k[\\delta]/\\delta^2$; the constant term is $y$ because $t_x$ reduces to the identity. Postcomposition of coefficient derivations by $r^*$ gives $dr(y)+\\delta dr(z)$, directly by linearity. In $k[\\delta,\\epsilon]/(\\delta^2,\\epsilon^2)$, apply $r$ to the conjugation defining this tangent point. The resulting matrix is\n$$(1+\\delta dr(x))(1+\\epsilon dr(y))(1-\\delta dr(x))=1+\\epsilon dr(y)+\\delta\\epsilon[dr(x),dr(y)].$$\nComparison of the $\\delta\\epsilon$ coefficients gives $dr(z)=[dr(x),dr(y)]=dr([x,y])$. Injectivity of $dr$ therefore gives $z=[x,y]$. Consequently $\\operatorname{Ad}_{k[\\delta]}(t_x)$ acts as $1+\\delta(y\\mapsto[x,y])$.",
+   "uses": [
+    "lem-sfb-affine-group-faithful-linear-representation",
+    "lem-sfb-affine-group-lie-tangent-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 10.23 and its proof, printed p.193, equations (58)--(63); faithful representation from Theorem 4.9, p.87"
+   }
+  },
+  {
+   "text": "A $k[\\delta]/\\delta^2$-linear automorphism of $L\\oplus\\delta L$ reducing to $1$ has the unique form $1+\\delta T$, $T\\in\\operatorname{End}_k(L)$, with inverse $1-\\delta T$. Hence the tangent identification for the general linear group sends this automorphism to $T$. In the differential convention of [lem-sfb-affine-group-lie-tangent-calculus], step 6 is precisely $d\\operatorname{Ad}_J(x)(y)=[x,y]$. Finally, a tangent point $t_x$ of $J$ factors through $K$ exactly when its image in the linear group is the constant identity, by the defining fibre product. By step 6 this holds exactly when $[x,y]=0$ for every $y\\in L$. Inclusion gives an injective linear map on tangent spaces (postcomposition of dual-number points); its image is the displayed subspace. Apply the cited tangent calculus to the affine finite-type group $K$ from step 4: it does not require smoothness or reducedness. This identifies its canonical $\\operatorname{Lie}(K)$ with that subspace, including in positive characteristic.",
+   "uses": [
+    "lem-sfb-affine-group-lie-tangent-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.18--10.23, printed pp.191--193; kernel universal-property argument as in Conrad Introduction, printed p.2 (read online)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-sfb-smooth-augmented-tangent-scalar-extension",
+  "def-weil-affine-spectrum",
+  "lem-sfb-projective-automorphism-affine-presentation",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-finite-presentation-quotient-fg-ideal",
+  "lem-sfb-affine-group-faithful-linear-representation",
+  "lem-sfb-affine-group-lie-tangent-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "10.18--10.23, pp.191--193, with the arbitrary-ring conjugation construction and the faithful-matrix calculation in two independent dual-number parameters; Stacks 01I4 and 00F3 for the kernel presentation. Conrad Introduction p.2 and Proposition 3.3.8 p.102 supply context, not a reductivity assumption."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lie algebra of the kernel of the adjoint representation of a smooth affine group scheme equals the kernel of the adjoint Lie algebra map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.ad_ker_eq_self_module_ker\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  (LieAlgebra.ad R L).ker = LieModule.ker R L L\", \"doc\": \"The kernel of the adjoint representation of a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ coincides with the kernel of its self-module action, i.e., $\\\\ker(\\\\mathrm{ad}) = \\\\ker(\\\\mathfrak{g} \\\\\"}\n  {\"name\": \"LieHom.ker_toSubmodule\", \"module\": \"Mathlib/Algebra/Lie/Ideal\", \"type\": \"∀ {R : Type u} {L : Type v} {L' : Type w₂} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieRing L']\\n  [inst_3 : LieAlgebra R L'] [inst_4 : LieAlgebra R L] (f : L →ₗ⁅R⁆ L'), ↑f.ker = (↑f).ker\", \"doc\": \"The underlying submodule of the kernel of a Lie algebra homomorphism $ f: L \\\\to L' $ over a commutative ring $ R $ is equal to the kernel of the underlying linear map $ f: L \\\\to L' $.\"}\n  {\"name\": \"LieDerivation.ad_ker_eq_center\", \"module\": \"Mathlib/Algebra/Lie/Derivation/AdjointAction\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  (LieDerivation.ad R L).ker = LieAlgebra.center R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, the kernel of the adjoint representation $ \\\\mathrm{ad}: L \\\\to \\\\mathrm{Der}(L) $, defined by $ \\\\mathrm{ad}_x(y) = [x, y] $, coincides with the cen\"}\n  {\"name\": \"LieAlgebra.self_module_ker_eq_center\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieModule.ker R L L = LieAlgebra.center R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, the kernel of the Lie module action of $ L $ on itself is equal to the center of $ L $.\"}\n  {\"name\": \"LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.HasTrivialRadical R L], (LieAlgebra.ad R L).ker = ⊥\", \"doc\": \"If a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ has a trivial radical (i.e., its radical is the zero ideal), then the kernel of the adjoint representation $ \\\\mathrm{ad}: \\\\mathfrak{g} \\\\\"}\n  {\"name\": \"LieHom.ker\", \"module\": \"Mathlib/Algebra/Lie/Ideal\", \"type\": \"{R : Type u} →\\n  {L : Type v} →\\n    {L' : Type w₂} →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieRing L'] → [inst_3 : LieAlgebra R L'] → [inst_4 : LieAlgebra R L] → (L →ₗ⁅R⁆ L') → LieIdeal R L\", \"doc\": \"The kernel of a Lie algebra homomorphism $ f: L \\\\to L' $ over a commutative ring $ R $ is the Lie ideal of $ L $ consisting of all elements $ x \\\\in L $ such that $ f(x) = 0 $. This is defined as the p\"}\n  {\"name\": \"LieHom.mem_ker\", \"module\": \"Mathlib/Algebra/Lie/Ideal\", \"type\": \"∀ {R : Type u} {L : Type v} {L' : Type w₂} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieRing L']\\n  [inst_3 : LieAlgebra R L'] [inst_4 : LieAlgebra R L] {f : L →ₗ⁅R⁆ L'} {x : L}, x ∈ f.ker ↔ f x = 0\", \"doc\": \"An element $ x $ belongs to the kernel of a Lie algebra homomorphism $ f $ if and only if $ f(x) = 0 $. This characterizes the kernel as the set of elements annihilated by the homomorphism.\"}\n  {\"name\": \"LieModule.ker\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"(R : Type u) →\\n  (L : Type v) →\\n    (M : Type w) →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] →\\n              [inst_4 : Module R M] → [inst_5 : LieRingModule L M] → [LieModule R L M] → LieIdeal R L\", \"doc\": \"The Lie ideal of $\\\\mathfrak{g}$ consisting of all elements $x$ such that the Lie bracket $[x, m] = 0$ for all $m \\\\in M$, i.e., the elements of $\\\\mathfrak{g}$ that act trivially on the $R$-module $M$ u\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not state the group-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "LieDerivation.ad, LieAlgebra.center",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"LieDerivation.ad_ker_eq_center\", \"module\": \"Mathlib.Algebra.Lie.AdjointAction.Derivation\", \"type\": \" (R : Type u_1) (L : Type u_2) [CommRing R] [LieRing L] [LieAlgebra R L] : (LieDerivation.ad R L).ker = LieAlgebra.center R L\", \"doc\": \"The kernel of the adjoint action on a Lie algebra is equal to its center.\"}\n  {\"name\": \"LieDerivation.injective_ad_of_center_eq_bot\", \"module\": \"Mathlib.Algebra.Lie.AdjointAction.Derivation\", \"type\": \" {R : Type u_1} {L : Type u_2} [CommRing R] [LieRing L] [LieAlgebra R L] (h : LieAlgebra.center R L = ⊥) : Function.Injective ⇑(LieDerivation.ad R L)\", \"doc\": \"If the center of a Lie algebra is trivial, then the adjoint action is injective.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not state the group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Lie.*ker|ker.*Lie|adjoint",
+   "results": "[grep] OK 13 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"69\", \"text\": \"instance : (toPresheafOfModules X).IsRightAdjoint :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"70\", \"text\": \"  (PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).isRightAdjoint\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"188\", \"text\": \"is left adjoint to the pushforward functor. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"198\", \"text\": \"instance : (pullback f).IsLeftAdjoint := (pullbackPushforwardAdjunction f).isLeftAdjoint\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"199\", \"text\": \"instance : (pushforward f).IsRightAdjoint := (pullbackPushforwardAdjunction f).isRightAdjoint\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"24\", \"text\": \"* `AlgebraicGeometry.tilde.adjunction` : `~` is left adjoint to taking global sections.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"384\", \"text\": \"instance : (tilde.functor R).IsLeftAdjoint := tilde.adjunction.isLeftAdjoint\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"587\", \"text\": \"  exact SheafOfModules.isQuasicoherent_pushforward_of_isLeftAdjoint.{u}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"line\": \"604\", \"text\": \"instance : LocallyRingedSpace.Γ.IsRightAdjoint :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"line\": \"605\", \"text\": \"  ΓSpec.locallyRingedSpaceAdjunction.rightOp.isRightAdjoint\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"line\": \"607\", \"text\": \"instance : Scheme.Γ.IsRightAdjoint := ΓSpec.adjunction.rightOp.isRightAdjoint\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"95\", \"text\": \"instance : f.opensFunctor.IsLeftAdjoint :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"96\", \"text\": \"  f.opensFunctorAdjunction.isLeftAdjoint\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not state the group-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoint representation of a smooth affine group scheme on its tangent module commutes with arbitrary base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.ad\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \": L →ₗ⁅R⁆ Module.End R L\", \"doc\": \"The adjoint representation of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ is the Lie algebra homomorphism $ \\\\mathrm{ad}: \\\\mathfrak{g} \\\\to \\\\mathrm{End}_R(\\\\mathfrak{g}) $, where each el\"}\n  {\"name\": \"LieModule.toEnd_baseChange\", \"module\": \"Mathlib.Algebra.Lie.BaseChange\", \"type\": \"(x : L) : toEnd A (A ⊗[R] L) (A ⊗[R] M) (1 ⊗ₜ x) = (toEnd R L M x).baseChange A\", \"doc\": \"For any element $x$ in a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, and an $R$-module $M$ equipped with a Lie module structure over $\\\\mathfrak{g}$, the endomorphism of $A \\\\otimes_R M$ ind\"}\n  {\"name\": \"IsBaseChange.dual\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": IsBaseChange A (ibc.toDual)\", \"doc\": \"Given an $ R $-module $ V $ and its base change $ W = V \\\\otimes_R A $ along an $ R $-algebra $ A $, the base change induces an $ R $-linear map from the dual module $ \\\\text{Hom}_R(V, R) $ to the dual \"}\n  {\"name\": \"Algebra.Smooth.baseChange\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[Smooth R A] : Smooth B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then for any commutative ring $ B $ extending $ R $, the tensor product $ B \\\\otimes_R A $ is a smooth algebra over $ B $.\"}\n  {\"name\": \"SpecialLinearGroup.baseChange_apply_coe\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [inst_5 : Module.Free R V] [inst_6 : Module.Finite R V]\\n  (g : SpecialLinearGroup R V), ↑(SpecialLinearGroup.baseChange g) = LinearEquiv.b\", \"doc\": \"For any commutative ring $ R $, commutative $ R $-algebra $ S $, and finite free $ R $-module $ V $, the base change homomorphism $ \\\\text{SL}(R,V) \\\\to \\\\text{SL}(S,S \\\\otimes_R V) $ satisfies $ \\\\uparrow\"}\n  {\"name\": \"IsBaseChange.toDual_apply\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \"(f : Dual R V) : ibc.toDual f = (f.baseChange A).congr ibc.equiv\", \"doc\": \"For any R-linear functional $ f $ on $ V $, the dual map induced by base change to $ A $ satisfies $ \\\\text{toDual}(f) = (f_{A}) \\\\circ \\\\text{equiv} $, where $ f_{A} $ is the base change of $ f $ to $ A\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmooth\", \"type\": \"[IsStandardSmoothOfRelativeDimension n R S] : IsStandardSmoothOfRelativeDimension n T (T ⊗[R] S)\", \"doc\": \"Let $S$ and $T$ be commutative $R$-algebras over a commutative ring $R$. If $S$ is a standard smooth $R$-algebra of relative dimension $n$, then the base change $T \\\\otimes_R S$ is a standard smooth $T\"}\n  {\"name\": \"AffineBasis.reindex_smul\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Basis\", \"type\": \"(a : G) (b : AffineBasis ι k V) (e : ι ≃ ι') : (a • b).reindex e = a • b.reindex e\", \"doc\": \"For any group element $a$, affine basis $b$ indexed by $\\\\iota$, and equivalence $e : \\\\iota \\\\simeq \\\\iota'$, the reindexing of the group action $a \\\\cdot b$ by $e$ equals the group action applied to the \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not state the group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Differential of conjugation is the Lie bracket and taking Lie algebras preserves scheme theoretic kernels",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.ad_ker_eq_self_module_ker\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  (LieAlgebra.ad R L).ker = LieModule.ker R L L\", \"doc\": \"The kernel of the adjoint representation of a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ coincides with the kernel of its self-module action, i.e., $\\\\ker(\\\\mathrm{ad}) = \\\\ker(\\\\mathfrak{g} \\\\\"}\n  {\"name\": \"LieAlgebra.Extension.lie_toKer_apply\", \"module\": \"Mathlib/Algebra/Lie/Extension\", \"type\": \"∀ {R : Type u_1} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : LieRing M] [inst_4 : LieAlgebra R M] (E : LieAlgebra.Extension R M L) (x : M) (y : E.L),\\n  ⁅y, ↑(E.toKer x)⁆ = ⁅y, E.incl x⁆\", \"doc\": \"In a Lie algebra extension $\\\\text{Ext}$ of $M$ by $N$ over a commutative ring $R$, for any $x \\\\in M$ and $y \\\\in \\\\text{Ext}$, the Lie bracket $[y, \\\\text{toKer}(x)]$ equals $[y, \\\\text{incl}(x)]$, where \"}\n  {\"name\": \"LieAlgebra.Extension.toKer_bracket\", \"module\": \"Mathlib/Algebra/Lie/Extension\", \"type\": \"∀ {R : Type u_1} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : LieRing M] [inst_4 : LieAlgebra R M] [inst_5 : IsLieAbelian M] (E : LieAlgebra.Extension R M L)\\n  (x : ↥E.proj.ker) (y : L), E.toKer ⁅y, E.toKer.symm x⁆ = ⁅Exists.choose ⋯ y,\", \"doc\": \"In a Lie algebra extension $0 \\\\to L \\\\to \\\\text{Ext} \\\\to M \\\\to 0$ over a commutative ring $R$, where $M$ is an abelian Lie algebra and $L$ is an abelian Lie ideal, the bracket operation between an eleme\"}\n  {\"name\": \"LieDerivation.ad_isIdealMorphism\", \"module\": \"Mathlib/Algebra/Lie/Derivation/AdjointAction\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  (LieDerivation.ad R L).IsIdealMorphism\", \"doc\": \"The adjoint action map $\\\\mathrm{ad} : L \\\\to \\\\mathrm{Der}(L)$ is a Lie algebra homomorphism whose image forms a Lie ideal in the Lie algebra of derivations $\\\\mathrm{Der}(L)$. This means that for any $x\"}\n  {\"name\": \"LieAlgebra.Extension.lie_incl_mem_ker\", \"module\": \"Mathlib/Algebra/Lie/Extension\", \"type\": \"∀ {R : Type u_1} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : LieRing M] [inst_4 : LieAlgebra R M] {E : LieAlgebra.Extension R M L} (x : E.L) (y : M),\\n  ⁅x, E.incl y⁆ ∈ E.proj.ker\", \"doc\": \"For any element $x$ in the Lie algebra of the extension $E$ and any element $y$ in $M$, the Lie bracket $[x, \\\\text{incl}(y)]$ lies in the kernel of the projection map $\\\\text{proj}: E \\\\to L$.\"}\n  {\"name\": \"LieDerivation.ad_ker_eq_center\", \"module\": \"Mathlib/Algebra/Lie/Derivation/AdjointAction\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  (LieDerivation.ad R L).ker = LieAlgebra.center R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, the kernel of the adjoint representation $ \\\\mathrm{ad}: L \\\\to \\\\mathrm{Der}(L) $, defined by $ \\\\mathrm{ad}_x(y) = [x, y] $, coincides with the cen\"}\n  {\"name\": \"LieAlgebra.lieCharacter_apply_lie\", \"module\": \"Mathlib/Algebra/Lie/Character\", \"type\": \"∀ {R : Type u} {L : Type v} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (χ : LieAlgebra.LieCharacter R L) (x y : L), χ ⁅x, y⁆ = 0\", \"doc\": \"For any Lie character $\\\\chi$ over a commutative ring $R$ on a Lie algebra $L$, and for all elements $x, y \\\\in L$, the value of $\\\\chi$ on the Lie bracket $[x, y]$ is zero, i.e., $\\\\chi([x, y]) = 0$.\"}\n  {\"name\": \"LieSubmodule.comap_bracket_eq\", \"module\": \"Mathlib/Algebra/Lie/IdealOperations\", \"type\": \"∀ {R : Type u} {L : Type v} {M : Type w} {M₂ : Type w₁} [inst : CommRing R] [inst_1 : LieRing L]\\n  [inst_2 : AddCommGroup M] [inst_3 : Module R M] [inst_4 : LieRingModule L M] [inst_5 : AddCommGroup M₂]\\n  [inst_6 : Module R M₂] [inst_7 : LieRingModule L M₂] (N₂ : LieSubmodule R L M₂) (f : M →ₗ⁅R,L⁆ \", \"doc\": \"Let $ R $ be a commutative ring, $ L $ a Lie algebra over $ R $, and $ M $ an $ R $-module with a Lie module structure over $ L $. Given an injective Lie module homomorphism $ f : M \\to N $ with trivia\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not state the group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Lie\\(|LieAlgebra|tangent.*group|group.*tangent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra or ordinary group-action facts do not provide the scheme-theoretic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Lie algebra|adjoint representation|tangent.*group|group.*tangent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra or ordinary group-action facts do not provide the scheme-theoretic assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "LieDerivation.ad, LieAlgebra.center",
+   "results": "{\"t\": \"2026-10-24T11:45:01Z\", \"tool\": \"loogle\", \"query\": \"LieDerivation.ad, LieAlgebra.center\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"LieDerivation.ad_ker_eq_center\", \"LieDerivation.injective_ad_of_center_eq_bot\"], \"digest\": \"db793f48111757cc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.ad_ker_eq_center concerns an abstract Lie algebra, Scheme.Hom.ker is an ideal sheaf rather than a group-scheme kernel, and manifold Lie groups are different objects; none gives all clauses of the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugation by a smooth affine group scheme acts linearly on its finite projective tangent module, and the Lie algebra of the scheme theoretic adjoint kernel is the centre",
+   "results": "{\"t\": \"2026-10-24T11:45:09Z\", \"tool\": \"leanfinder\", \"query\": \"Conjugation by a smooth affine group scheme acts linearly on its finite projective tangent module, and the Lie algebra of the scheme theoretic adjoint kernel is the centre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.ad_ker_eq_center\", \"LieAlgebra.self_module_ker_eq_center\", \"instLieAlgebraGroupLieAlgebra\", \"LeftInvariantDerivation.instLieAlgebra\", \"instLieRingGroupLieAlgebra\", \"mulInvariantVectorField\", \"GroupLieAlgebra\", \"instLieAlgebraAddGroupLieAlgebra\"], \"digest\": \"0ae5a327560114e2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.ad_ker_eq_center concerns an abstract Lie algebra, Scheme.Hom.ker is an ideal sheaf rather than a group-scheme kernel, and manifold Lie groups are different objects; none gives all clauses of the item"
+  },
+  {
+   "tool": "grep",
+   "query": "adjoint|LieAlgebra|tangent.*group",
+   "results": "{\"t\": \"2026-10-24T11:45:30Z\", \"tool\": \"grep\", \"query\": \"adjoint|LieAlgebra|tangent.*group\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"1fcddd7256268612\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.ad_ker_eq_center concerns an abstract Lie algebra, Scheme.Hom.ker is an ideal sheaf rather than a group-scheme kernel, and manifold Lie groups are different objects; none gives all clauses of the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugation on dual number points of an affine smooth group scheme has differential equal to the Lie bracket, and its tangent kernel is the Lie algebra centre",
+   "results": "{\"t\": \"2026-10-24T11:45:30Z\", \"tool\": \"leansearch\", \"query\": \"Conjugation on dual number points of an affine smooth group scheme has differential equal to the Lie bracket, and its tangent kernel is the Lie algebra centre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.ad_ker_eq_center\", \"LieAlgebra.center\", \"VectorField.lieBracket\", \"instBracketAddGroupLieAlgebra\", \"DualNumber.lift\", \"LieAlgebra.instIsLieAbelianSubtypeMemLieSubmoduleCenter\", \"LieAlgebra.self_module_ker_eq_center\", \"VectorField.lieBracketWithin_eq_lieBracket\"], \"digest\": \"2cf67e5920b63eea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.ad_ker_eq_center concerns an abstract Lie algebra, Scheme.Hom.ker is an ideal sheaf rather than a group-scheme kernel, and manifold Lie groups are different objects; none gives all clauses of the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth group scheme the kernel of the adjoint morphism is a finitely presented closed normal subgroup compatible with any change of base ring",
+   "results": "{\"t\": \"2026-10-24T11:45:33Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth group scheme the kernel of the adjoint morphism is a finitely presented closed normal subgroup compatible with any change of base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.ker\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.kerFunctor\", \"AlgebraicGeometry.Scheme.kerFunctor_obj\", \"AlgebraicGeometry.Scheme.ker_of_isAffine\", \"Algebra.Extension.ker_infinitesimal\", \"AlgebraicGeometry.Scheme.Hom.ker_comp\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι\"], \"digest\": \"26c1a238bbc9ffbe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.ad_ker_eq_center concerns an abstract Lie algebra, Scheme.Hom.ker is an ideal sheaf rather than a group-scheme kernel, and manifold Lie groups are different objects; none gives all clauses of the item"
+  },
+  {
+   "tool": "grep",
+   "query": "Lie.*ker|ker.*Lie|conjugation.*tangent",
+   "results": "{\"t\": \"2026-10-24T11:46:19Z\", \"tool\": \"grep\", \"query\": \"Lie.*ker|ker.*Lie|conjugation.*tangent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.ad_ker_eq_center concerns an abstract Lie algebra, Scheme.Hom.ker is an ideal sheaf rather than a group-scheme kernel, and manifold Lie groups are different objects; none gives all clauses of the item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adjoint-action-kernel-is-centre",
+  "date": "2026-10-24",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting input to lem-sfb-adjoint-action-kernel-is-centre: Conrad Proposition 3.3.8 proof, printed p.102; Adjoint representations, base change and tangent kernels. The item supports the root-coordinate prerequisite to the existing geometric-reductivity/alteration branch of det-thm-sf-ctf-stability-direct-images, proof (3).",
+   "via": [
+    "lem-sfb-adjoint-action-kernel-is-centre"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-affine-adjoint-kernel-calculus",
+  "worker": "stage1",
+  "summary": "Kept the statement. Reused the existing smooth augmented tangent scalar-extension theorem; constructed the conjugation action and its scheme morphism using one new generic projective-automorphism representability lemma. Proved the kernel claims via its finite identity ideal and the affine fibre-product formula, and computed dAd by a faithful matrix representation in two independent dual-number parameters. No reducedness, smoothness of the kernel, Noetherianity or flat base-change assumption was introduced.",
+  "blueprint": "Supporting input to lem-sfb-adjoint-action-kernel-is-centre: Conrad Proposition 3.3.8 proof, printed p.102; Adjoint representations, base change and tangent kernels. The item supports the root-coordinate prerequisite to the existing geometric-reductivity/alteration branch of det-thm-sf-ctf-stability-direct-images, proof (3). The latest blueprint thm-sf-ctf-stability proof, clause (iii), gives the surrounding direct-image route. This created group-theoretic prerequisite has no blueprint ancestor (ancestor command returns None); all seven steps serve the existing supporting chain, with no change to the unit route. Full blueprint searches for adjoint, cotangent, automorphism and 022W found no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic equivalence between affine smooth schemes and smooth algebras needed to apply the existing tangent lemma."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic coordinate formula for the identity fibre of the adjoint morphism."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-quotient-fg-ideal",
+    "why": "Generic finite-presentation permanence for the explicit finite identity equations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-presentation-quotient-fg-ideal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-ca7e72ce3",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-ca7e72ce3 (reviewer sub-agent of L); spot-checked: Read the item, the new node and all 11 cited statements in full, plus Milne iAG 10.18-10.24 (printed pp.191-194) and Stacks 022W (example-general-linear-group). The item statement is unchanged from the base, with no Noetherian, flatness or kernel-smoothness assumption. Steps 1-5 build the tangent module over an arbitrary base and check: B⊗L≅L_J(B) via the smooth augmented tangent lemma (its hypotheses are met by the counit); Ad from the universal point id_C; K=Spec(C/a*(I)) is closed by the affine closed-immersion criterion and fp by the fg-quotient lemma; normality and base change are elementary. Step 6 follows Milne 10.23's faithful-matrix proof. I recomputed (1+δX)(1+εY)(1-δX)=1+εY+δε[X,Y], which also holds in characteristic 2, and dr is injective. Step 7 identifies Lie(K) with the centre without smoothness. Small cases G_a, G_m, étale J, GL_2/F_2 and SL_2 in characteristic 2 (K=μ_2 nonreduced) are all consistent. The new node lem-sfb-projective-automorphism-affine-presentation is true: I checked the D_e relations on (iap, ia^{-1}p), that the identity quotient is A, and the edge cases e=0, n=0, diag(1,0) giving G_m, and idempotents of varying rank. It is statement-only and generic, so it does not restate the item (D1). It is not a duplicate: lem-sfb-smooth-group-relative-adjoint states GL_S(E) only for a Lie module over a Noetherian base, and def-sc-general-linear-group is the free case over a field. The dependency closure has no cycle. All three declared tool uses are accepted (one generic black box and two Mathlib leaves). FIX (C1): step 2 identified the coordinate ring of J_B with B⊗_A C citing only def-weil-affine-spectrum. It now also cites lem-weil-pbc-fibre-product-affine-spectra in the text and in uses; that node was already in proof_deps. Advisory for stage 2: the item statement uses the scheme GL(L) in a fibre product but defines only its functor of points, and representability comes from the new theorem node, which is not a stmt_dep.; 1 file(s) fixed by the reviewer"
+ }
+}

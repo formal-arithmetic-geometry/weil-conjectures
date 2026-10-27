@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Supply exact global sections for the original affine-neighbourhood colimit scheme using strictHenselizationScheme_globalSections_preservesFiniteColimits, proved from strictHenselizationLocalStructure and the terminal-sections theorem. Compute the cocycle class using leftHomologyData.π_comp_homologyIso_inv. Apply the chain map given by sourceFreeSectionsComplexIso followed by the degreewise transformation τ. For an exact functor, ShortComplex.LeftHomologyData.homologyπ_comp_homologyIso_hom and mapHomologyIso_eq identify the mapped homology projection with the mapped original projection after mapCyclesIso. Apply this for inverse image U and strict-local sections G. The composite cycle inclusion is G.map (U.map (L.iCycles n)); it is monic. Cancel this inclusion to identify the mapped cycle with τ applied to free-generator evaluation of L.liftCycles f. This follows from cyclesMap_i, cyclesIso_inv_comp_iCycles, Cochain.fromSingleEquiv_fromSingleMk and naturality of τ for L.iCycles n. Naturality for L.homologyπ n now gives the restriction identity before localization.",
+   "text": "Supply exact global sections for the original affine-neighbourhood colimit scheme using strictHenselizationScheme_globalSections_preservesFiniteColimits, proved from strictHenselizationLocalStructure and the terminal-sections theorem. Compute the cocycle class using leftHomologyData.π_comp_homologyIso_inv. Apply the chain map given by smallModel_sourceFreeSectionsComplexIso followed by the degreewise transformation τ. For an exact functor, ShortComplex.LeftHomologyData.homologyπ_comp_homologyIso_hom and mapHomologyIso_eq identify the mapped homology projection with the mapped original projection after mapCyclesIso. Apply this for inverse image U and strict-local sections G. The composite cycle inclusion is G.map (U.map (L.iCycles n)); it is monic. Cancel this inclusion to identify the mapped cycle with τ applied to free-generator evaluation of L.liftCycles f. This follows from cyclesMap_i, cyclesIso_inv_comp_iCycles, Cochain.fromSingleEquiv_fromSingleMk and naturality of τ for L.iCycles n. Naturality for L.homologyπ n now gives the restriction identity before localization.",
    "uses": [
     "def-weil-pbc-strict-local-injective-source-comparison",
     "lem-weil-pbc-strict-henselization-scheme-sections-exact"
@@ -27,7 +27,7 @@
    "elementary": false
   },
   {
-   "text": "The bounded-below homology comparison is the unbounded comparison restricted along the inclusion, since mapDerivedCategoryPlusCompatibility is Iso.refl. Substitute the restriction calculation of step 1 into the transport calculation of step 2. Use naturality of τ for b = homologyFunctorFactors.inv.app L followed by Hⁿ(r.inv), and sourceFreeSectionsEquiv_comp, to obtain the explicitly constructed sourceCocycleHomologySection. No K-injectivity or localized-cocycle comparison theorem is used, only the definition of that section.",
+   "text": "The bounded-below homology comparison is the unbounded comparison restricted along the inclusion, since mapDerivedCategoryPlusCompatibility is Iso.refl. Substitute the restriction calculation of step 1 into the transport calculation of step 2. Use naturality of τ for b = homologyFunctorFactors.inv.app L followed by Hⁿ(r.inv), and smallModel_sourceFreeSectionsEquiv_comp, to obtain the explicitly constructed smallModel_sourceCocycleHomologySection. No K-injectivity or localized-cocycle comparison theorem is used, only the definition of that section.",
    "uses": [
     "def-weil-pbc-strict-local-injective-source-comparison",
     "lem-weil-pbc-source-localized-cocycle-homology"
@@ -50,7 +50,7 @@
  "proof_origin": {
   "by": "agent M2, API adaptation of the existing proof",
   "document": "Stacks Project",
-  "place": "Tags 03Q9, last proof paragraph, and 03QO; degreewise restriction and exact homology comparison; restriction generalized to PointedEtaleSectionCone without changing its canonical maps."
+  "place": "Tags 03Q9, last proof paragraph, and 03QO; degreewise restriction and exact homology comparison; restriction generalized to PointedEtaleSectionCone without changing its canonical maps; F1 retirement audit (2026-10-22): spell out the existing smallModel_ helper names; the full old statement is obtained from smallModel_sourceCocycleExactRestriction with the original evaluation constructions."
  },
  "mathlib_searches": [
   {
@@ -133,7 +133,7 @@
   "branch": "sheaf-dag",
   "by": "C3",
   "date": "2026-10-21",
-  "note": "Fully proved original small-colimit-model realization. The canonical upstream realization uses strictLocalization instead of strictHenselizationScheme and cannot be imported with the original Sheaf interfaces. Restores the proved StrictLocalSmallModel dependency chain previously landed in c03b8450536.",
+  "note": "Fully proved original small-colimit-model realization. The canonical upstream realization uses strictLocalization instead of strictHenselizationScheme and cannot be imported with the original Sheaf interfaces. Restores the proved StrictLocalSmallModel dependency chain previously landed in c03b8450536. Retirement F1 (2026-10-22) withdraws only the obsolete unprefixed Sheaf.AlgebraicGeometry.SourceCocycleExactRestriction duplicate. This existing small-model Lean attachment, its full statement and all dependencies remain. The distinct canonical source theorem remains in WeilConjectures.AlgebraicGeometry.SourceCocycleExactRestriction.",
   "declarations": [
    "AlgebraicGeometry.Etale.smallModel_sourceCocycleExactRestriction"
   ]
@@ -149,14 +149,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-651cf",
-  "group": "M2",
+  "reviewer": "COMPILER",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261021T022438-L-2847349",
+  "landing": "20261022T113942-L-430451",
   "kind": "interface",
-  "note": "independent cc review: Delivered twin retirement (stub item module, node redirected to upstream WeilConjectures.AlgebraicGeometry.StrictHenselizationRestriction, generic PointedEtaleSectionCone/StrictLocalSectionCone/ExactGlobalSectionsLeray, 18 adapted unclaimed modules) against the live library, the change record and the node files; old vs new maps proved rfl/unique-equal in a probe; all files, 7 direct importers and 5 audited users compiled; axioms clean"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

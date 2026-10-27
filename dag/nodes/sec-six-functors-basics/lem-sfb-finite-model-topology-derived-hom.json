@@ -1,0 +1,506 @@
+{
+ "id": "lem-sfb-finite-model-topology-derived-hom",
+ "kind": "statement",
+ "title": "Derived global Hom topology comparison for finite-field constructible models",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, a separated finite-type $k$-scheme $X$ [sk-def-sfb-dc-setting], and an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with the extended norm topology. On profinite sets with finite jointly surjective covers put\n$$C(P)=\\{f\\in C(P,\\Omega):f(P)\\subset E'\\text{ for some finite }\\mathbf Q_\\ell\\subset E'\\subset\\Omega\\},\\qquad B(P)=C(P,\\Omega)$$\n[sk-def-sfb-qlbar-condensed, def-sfb-continuous-map-condensed-ring]. Let $c:C\\to B$ be inclusion. For a scheme $V$ over $X$ set $C_V=p_V^*C$, $B_V=p_V^*B$ [sk-def-sfb-pulled-back-coefficients], and for a finite intermediate field $D\\subset\\Omega$ put $A_{D,V}=p_V^*C(-,D)$, with its restricted norm topology [sk-def-sfb-condensed-ring]. Work on small pro-etale sites [def-weil-pbc-proetale-site] in ordinary unbounded derived categories of internal modules [sk-def-sfb-module-objects, sk-def-sfb-derived-categories], with K-flat derived scalar extension and unit $v\\mapsto1\\otimes v$ [sk-def-sfb-derived-extension-of-scalars].\n\nFix a finite intermediate field $E\\subset\\Omega$, put $A=A_{E,X}$, and let $K,N\\in D(\\operatorname{Mod}_A)$ be bounded constructible in the finite constant local model sense [sk-def-sfb-constructible]. Define $S_R(V)=R_X\\otimes_A^L V$ for $R=C,B$, $J=B_X\\otimes_{C_X}^L(-)$, and $D=R\\mathcal Hom_A(K,N)$ using the relative tensor and internal Hom [sk-def-sfb-derived-tensor-hom]. Then $D$ is bounded constructible in both the finite constant local model and stratified local-finite-presentation senses [sk-def-sfb-bounded-constructible]. Also, for every small filtered diagram $(V_i^\\bullet)$ of $A$-module complexes with one common termwise lower bound, the evaluation map\n$$\\varinjlim_i R\\mathcal Hom_A(K,V_i^\\bullet)\\longrightarrow R\\mathcal Hom_A(K,\\varinjlim_iV_i^\\bullet)$$\nis invertible; these are exact termwise sheaf colimits of functorial representatives [def-weil-pbc-category-colimit].\n\nFor each $R=C,B$ the evaluation transpose\n$$\\phi_R:S_RD\\longrightarrow R\\mathcal Hom_{R_X}(S_RK,S_RN)$$\nis an isomorphism in $D(\\operatorname{Mod}_{R_X})$, natural in $K,N$. Its transpose is exactly\n$$S_RD\\otimes^L_{R_X}S_RK\\simeq R_X\\otimes_A^L(D\\otimes_A^L K)\\xrightarrow{1\\otimes\\mathrm{ev}}S_RN,$$\nwith K-flat balanced-tensor reassociation. Define $m_D:\\operatorname{Res}_{A\\to C_X}S_CD\\to\\operatorname{Res}_{A\\to B_X}S_BD$ by $z\\otimes v\\mapsto c_X(z)\\otimes v$. On forgetting coefficients, $R\\Gamma(X_{\\mathrm{proet}},m_D)$ is an isomorphism in the derived category of abelian groups [def-pur-ringed-site-zeroth-hypercohomology].\n\nLet $\\Psi_{K,N}$ be the actual morphism of derived global Hom objects induced by $J$, using the canonical reassociations $JS_CK\\simeq S_BK$ and $JS_CN\\simeq S_BN$:\n$$\\Psi_{K,N}:R\\Gamma R\\mathcal Hom_{C_X}(S_CK,S_CN)\\longrightarrow R\\Gamma R\\mathcal Hom_{B_X}(S_BK,S_BN).$$\nUnder $R\\Gamma\\phi_C$ and $R\\Gamma\\phi_B$ it equals $R\\Gamma(m_D)$; in particular $\\Psi_{K,N}$ is an isomorphism in the derived category of abelian groups. The scalar-extended evaluation transposes are both $B_X\\otimes_A^L(D\\otimes_A^L K)\\xrightarrow{1\\otimes\\mathrm{ev}}S_BN$. All maps are natural in arrows of $K,N$. Derived global sections before and after restriction from $R_X$ to $A$ are canonically identified in this assertion. The same identifications hold in the section-ring model under the underlying-sheaf-preserving module equivalence. No site-perfectness, flatness of $c_X$, completeness of $\\Omega$, or bound on the cohomological dimension of $k$ is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-created obligation absent from the blueprint; extracted from the reviewed proof of lem-sfb-supported-finite-stage-topology-defect, steps 5,6. Exact literature proof WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-pbc-category-colimit",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pc-cochain-complex-modules",
+  "def-sfb-finite-model-topology-comparison-maps"
+ ],
+ "proof": [
+  {
+   "text": "First identify internal modules with section-ring module sheaves by the underlying-sheaf-preserving equivalence. The tensor comparison identifies exactness, K-flatness and the total tensor complexes, and the Hom comparison identifies derived internal Hom together with evaluation. For a coefficient map, extension of scalars is the same balanced coequalizer in the two presentations: the two action relations are identical after the section-action equivalence. Thus the comparison on scalar extensions is the identity on local tensors and remains so on K-flat representatives. Restriction of scalars also has identical underlying sheaves and actions in the two presentations. We may perform the following argument with section rings; transporting back preserves each of its specified maps, not only the objects.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-module-object-ringed-site-derived-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Internal Hom, evaluation and K-flat tensor comparison; agent use of the existing internal-to-section comparison statements (Tags 08J9, 08JA)."
+   }
+  },
+  {
+   "text": "The scheme $X$ is Noetherian: a field has only the ideals $0$ and $(1)$, so $\\operatorname{Spec}k$ is Noetherian, and the finite-type-over-Noetherian lemma applies to $X\\to\\operatorname{Spec}k$. Apply the adic constructibility-predicate comparison to the finite normed field $E$. It carries the given finite constant local model conditions on $K,N$ to the stratified local-finite-presentation conditions. The $\\underline E$ case of the small-coefficient internal-Hom finiteness theorem therefore makes $D=R\\mathcal Hom_A(K,N)$ bounded constructible in that latter sense. Applying the predicate comparison in the reverse direction gives the finite constant local model condition on $D$. Here $E$ is a finite extension of $\\mathbf Q_\\ell$ and $X$ is separated of finite type over a field of positive characteristic different from $\\ell$, exactly as required; no condition on the cohomological dimension of $k$ enters.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-adic-constructibility-predicate-comparison",
+    "lem-sfb-dc-hom-small-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 (preservation of constructibility by ambient Hom), using the existing small-coefficient finiteness and predicate-comparison statements."
+   }
+  },
+  {
+   "text": "Apply constructible internal-Hom continuity with coefficient $\\Lambda=\\underline E$, source $K$, and the diagram $(V_i^\\bullet)$ in the question. The Noetherian hypothesis was verified in step 2. The diagram is small and has the required common termwise lower bound; its terms need not be constructible. The comparison furnished by that statement is precisely the evaluation-induced map, represented by exact termwise sheaf colimits of functorial representatives. Consequently it proves the requested continuity assertion with its stated convention on representatives.",
+   "uses": [
+    "lem-sfb-constructible-internal-hom-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 and Lemma 6.3.14; the cited existing node states the needed internal-sheaf continuity formulation explicitly."
+   }
+  },
+  {
+   "text": "Apply the finite-subextension coefficient comparison with $S=A$, $T=C_X$, and $L=N$. The continuity hypothesis is step 3 and the cohomological lower bound is implied by boundedness of $N$. The ring $C$ is exactly the finite-subextension-valued coefficient ring of that comparison, rather than the norm-continuous ring $B$. It gives the isomorphism $\\phi_C$. Its statement specifies its transpose by scalar-extended evaluation and K-flat balanced reassociation, and includes naturality in both inputs. The finite fields containing $E$ form the cofinal tail used there; no completeness of $\\Omega$ is needed.",
+   "uses": [
+    "lem-sfb-qlbar-internal-hom-coefficient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15, with the existing evaluation-normalized coefficient-union comparison."
+   }
+  },
+  {
+   "text": "Apply norm-algebraic-closure internal-Hom base change to the same $E,X,K,N$. Its rings $C,B$ and map $c$ are exactly those in the question, and its constructibility convention is the finite constant local model convention. It supplies $\\phi_B$ as an isomorphism natural in both inputs, with the displayed evaluation transpose and K-flat reassociation. This is a distinct input from step 4: it does not identify $B$ with the union of finite-subextension coefficient rings and does not assume flatness of $c_X$.",
+   "uses": [
+    "lem-sfb-norm-algcl-internal-hom-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), existing agent obligation for norm-continuous coefficient internal-Hom comparison; no direct literature theorem for this topology comparison is claimed."
+   }
+  },
+  {
+   "text": "Apply norm-algebraic-closure cohomology topology comparison to $V=D$, which meets its finite constant local model and boundedness hypotheses by step 2. It says that $R\\Gamma(m_D)$ is invertible after forgetting coefficients, for the actual map represented by $z\\otimes d\\mapsto c_X(z)\\otimes d$. Use derived-sections scalar coherence for $A\\to C_X$ and $A\\to B_X$ to identify derived sections before and after restriction. These are natural identifications in the ordinary unbounded categories and require neither flat restriction nor preservation of injectives by restriction. Thus the global isomorphism is the one in the question.",
+   "uses": [
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-coef-derived-sections-scalar-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), existing global coefficient-topology comparison; scalar-forgetting coherence is Stacks Tag 0D6E (lemma-derived-pushforward-composition)."
+   }
+  },
+  {
+   "text": "Write $H_R=R\\mathcal Hom_{R_X}(S_RK,S_RN)$. The strong monoidal composition comparisons identify $JS_CV$ with $S_BV$ for $V=D,K,N$, including the scalar units. Let $\\chi:JH_C\\to H_B$ be the transpose of $J(\\mathrm{ev}_C)$, and let $\\theta:H_C\\to\\operatorname{Res}_{c_X}H_B$ be its composite with the scalar unit. By the normalized scalar-Hom adjunction, transpose computations may be made after inserting $S_CK\\to\\operatorname{Res}_{c_X}JS_CK$. Under $JS_CD\\simeq S_BD$, the transpose of $\\chi\\circ J\\phi_C$ is\n$$B_X\\otimes_A^L(D\\otimes_A^L K)\\xrightarrow{1\\otimes\\mathrm{ev}}S_BN.$$\nIndeed $\\phi_C$ is by definition the transpose of $C_X\\otimes_A^L\\mathrm{ev}$, and the monoidal composition comparison takes its scalar extension to $B_X\\otimes_A^L\\mathrm{ev}$. This is also the transpose of $\\phi_B$, so uniqueness in the tensor-Hom adjunction gives $\\chi\\circ J\\phi_C=\\phi_B$. Naturality of the scalar unit now gives\n$$\\theta\\circ\\phi_C=\\operatorname{Res}_{c_X}(\\phi_B)\\circ m_D^C,$$\nwhere $m_D^C:S_CD\\to\\operatorname{Res}_{c_X}S_BD$ is the $C_X$-linear map whose underlying $A$-linear map is $m_D$. Its formula is $z\\otimes d\\mapsto c_X(z)\\otimes d$: it is the unit $S_CD\\to\\operatorname{Res}_{c_X}JS_CD$ followed by reassociation. This proves the required equality of maps by adjunction and its unit, without any faithfulness claim for scalar extension.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 0D6D: monoidality and scalar-composition reassociation; agent formal transpose calculation from the cited normalized comparisons."
+   }
+  },
+  {
+   "text": "By definition the map on derived global Hom objects induced by $J$ is $R\\Gamma(\\theta)$, with the scalar-forgetting identifications of step 6: it applies the strong monoidal functor $J$ to evaluation and inserts its scalar unit. Applying $R\\Gamma$ to the equality in step 7 yields\n$$\\Psi_{K,N}\\circ R\\Gamma(\\phi_C)=R\\Gamma(\\phi_B)\\circ R\\Gamma(m_D).$$\nBoth $R\\Gamma(\\phi_R)$ are invertible by steps 4 and 5, and $R\\Gamma(m_D)$ is invertible by step 6, so $\\Psi_{K,N}$ is invertible. Each equality in step 7 is natural under precomposition in $K$ and postcomposition in $N$: evaluation has these naturalities, and transposition, scalar units and the cited monoidal comparisons are natural. The same is true after derived sections by scalar coherence. Step 1 identifies every evaluation and scalar unit in the section-ring presentation, so the identical square and both scalar-extended evaluation transposes hold there as well.",
+   "uses": [
+    "lem-coef-derived-sections-scalar-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E: natural derived-sections coefficient-forgetting; agent application of the explicit equality of step 7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-sections-scalar-coherence",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "lem-sfb-constructible-internal-hom-continuity",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-sfb-dc-hom-small-coefficients",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-sfb-norm-algcl-cohomology-topology-comparison",
+  "lem-sfb-norm-algcl-internal-hom-base-change",
+  "lem-sfb-qlbar-internal-hom-coefficient-comparison",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), structural topology-comparison obligation; assembly of existing DAG statements and the explicit adjunction calculation in steps 7–8. This comparison is not asserted by the blueprint paragraph itself."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(Condensed|PadicAlgCl).*(internalHom|internal_hom|constructible|fullyFaithful|cohomology)|(internalHom|internal_hom|constructible|fullyFaithful|cohomology).*(Condensed|PadicAlgCl)",
+   "results": {
+    "t": "2026-10-22T06:01:32Z",
+    "tool": "grep",
+    "query": "(Condensed|PadicAlgCl).*(internalHom|internal_hom|constructible|fullyFaithful|cohomology)|(internalHom|internal_hom|constructible|fullyFaithful|cohomology).*(Condensed|PadicAlgCl)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/TopCatAdjunction.lean",
+     "Mathlib/Condensed/TopCatAdjunction.lean"
+    ],
+    "digest": "da51325471a49d3d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Galois limits, light condensed underived internal Homs, and derived-category localization identities do not compare the two coefficient topologies on derived global Hom."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"hom\"",
+   "results": {
+    "t": "2026-10-22T06:01:33Z",
+    "tool": "loogle",
+    "query": "\"DerivedCategory\", \"hom\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "DerivedCategory.instEssSurjHomotopyCategoryIntUpQh",
+     "DerivedCategory.instCommShiftHomotopyCategoryIntUpQh",
+     "DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso",
+     "DerivedCategory.instAdditiveHomotopyCategoryIntUpQh",
+     "DerivedCategory.singleFunctorIsoCompQ_hom_app",
+     "DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh",
+     "DerivedCategory.singleFunctorsPostcompQIso_hom_hom",
+     "DerivedCategory.singleFunctorsPostcompQIso_inv_hom"
+    ],
+    "digest": "b1c12b60144f0a9e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Galois limits, light condensed underived internal Homs, and derived-category localization identities do not compare the two coefficient topologies on derived global Hom."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom of bounded constructible sheaves over a finite p-adic field is unchanged under inclusion of finite-subextension-valued algebraic closure coefficients into norm continuous coefficients; compatibility of evaluation transpose maps",
+   "results": {
+    "t": "2026-10-22T06:01:44Z",
+    "tool": "leanfinder",
+    "query": "Derived Hom of bounded constructible sheaves over a finite p-adic field is unchanged under inclusion of finite-subextension-valued algebraic closure coefficients into norm continuous coefficients; compatibility of evaluation transpose maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "InfiniteGalois.algEquivToLimit",
+     "InfiniteGalois.mk_toAlgEquivAux",
+     "InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj",
+     "InfiniteGalois.toAlgEquivAux_eq_proj_of_mem",
+     "InfiniteGalois.toAlgEquivAux_eq_liftNormal",
+     "InfiniteGalois.proj_of_le",
+     "InfiniteGalois.algEquivToLimit_continuous",
+     "InfiniteGalois.proj_adjoin_singleton_val"
+    ],
+    "digest": "461259ad45c645ec"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Galois limits, light condensed underived internal Homs, and derived-category localization identities do not compare the two coefficient topologies on derived global Hom."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom comparison between finite-subextension-valued and norm continuous algebraic closure coefficients on constructible pro-etale sheaves",
+   "results": {
+    "t": "2026-10-22T06:01:53Z",
+    "tool": "leansearch",
+    "query": "Derived Hom comparison between finite-subextension-valued and norm continuous algebraic closure coefficients on constructible pro-etale sheaves",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation-normalized derived internal Hom scalar base change and derived global sections identify extension of scalars on morphisms for constructible p-adic sheaves",
+   "results": {
+    "t": "2026-10-22T06:02:06Z",
+    "tool": "leanfinder",
+    "query": "Evaluation-normalized derived internal Hom scalar base change and derived global sections identify extension of scalars on morphisms for constructible p-adic sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihom_map_val_app",
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.ihomPoints",
+     "LightCondensed.ihomPoints_apply",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.ihomPoints_symm_apply",
+     "LightCondensed.instMonoidalClosedLightCondMod",
+     "CondensedMod.hom_naturality_apply"
+    ],
+    "digest": "65d7822b55c4d70a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Galois limits, light condensed underived internal Homs, and derived-category localization identities do not compare the two coefficient topologies on derived global Hom."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global internal Hom comparison for constructible pro etale sheaves under extension from finite p adic coefficients to algebraic closure coefficient topologies",
+   "results": {
+    "t": "2026-10-22T06:55:13Z",
+    "tool": "leanfinder",
+    "query": "Derived global internal Hom comparison for constructible pro etale sheaves under extension from finite p adic coefficients to algebraic closure coefficient topologies",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints_apply",
+     "LightCondensed.ihom_map_val_app",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.ihomPoints",
+     "LightCondensed.ihomPoints_symm_apply",
+     "Condensed.profiniteSolidCounit",
+     "LightCondMod.ofSheafLightProfinite"
+    ],
+    "digest": "95a0a8482590c7bc"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned underived light-condensed Hom, solid-module, derived-localization, etale-topology and module-topology declarations do not assert the derived constructible comparison for these two coefficient rings."
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|Proetale).*(internalHom|internal_hom|constructible|cohomology)|(internalHom|internal_hom|constructible|cohomology).*(Condensed|Proetale)",
+   "results": {
+    "t": "2026-10-22T06:55:32Z",
+    "tool": "grep",
+    "query": "(Condensed|Proetale).*(internalHom|internal_hom|constructible|cohomology)|(internalHom|internal_hom|constructible|cohomology).*(Condensed|Proetale)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned underived light-condensed Hom, solid-module, derived-localization, etale-topology and module-topology declarations do not assert the derived constructible comparison for these two coefficient rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"hom\"",
+   "results": {
+    "t": "2026-10-22T06:55:33Z",
+    "tool": "loogle",
+    "query": "\"DerivedCategory\", \"hom\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "DerivedCategory.instEssSurjHomotopyCategoryIntUpQh",
+     "DerivedCategory.instCommShiftHomotopyCategoryIntUpQh",
+     "DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso",
+     "DerivedCategory.instAdditiveHomotopyCategoryIntUpQh",
+     "DerivedCategory.singleFunctorIsoCompQ_hom_app",
+     "DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh",
+     "DerivedCategory.singleFunctorsPostcompQIso_hom_hom",
+     "DerivedCategory.singleFunctorsPostcompQIso_inv_hom"
+    ],
+    "digest": "b1c12b60144f0a9e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned underived light-condensed Hom, solid-module, derived-localization, etale-topology and module-topology declarations do not assert the derived constructible comparison for these two coefficient rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global Hom topology comparison for bounded constructible pro etale modules over finite extensions of Q_l",
+   "results": {
+    "t": "2026-10-22T06:56:02Z",
+    "tool": "leansearch",
+    "query": "Derived global Hom topology comparison for bounded constructible pro etale modules over finite extensions of Q_l",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology",
+     "CommRingCat.HomTopology.instTopologicalSpaceHom",
+     "IsModuleTopology.casesOn",
+     "SubmodulesBasis.topology",
+     "ProfiniteGrp.hom_ext_iff",
+     "WithSeminorms.congr",
+     "IsModuleTopology.isoₛₗ"
+    ],
+    "digest": "c35941c97d7b68f4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned underived light-condensed Hom, solid-module, derived-localization, etale-topology and module-topology declarations do not assert the derived constructible comparison for these two coefficient rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible l adic sheaves derived internal Hom commutes with filtered colimits and extension of scalars comparison is evaluation transpose",
+   "results": {
+    "t": "2026-10-22T06:56:14Z",
+    "tool": "leanfinder",
+    "query": "Constructible l adic sheaves derived internal Hom commutes with filtered colimits and extension of scalars comparison is evaluation transpose",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.ihomPoints",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.ihom_map_val_app",
+     "LightCondensed.ihomPoints_symm_apply",
+     "LightCondensed.ihomPoints_apply",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition"
+    ],
+    "digest": "35290f069734181e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned underived light-condensed Hom, solid-module, derived-localization, etale-topology and module-topology declarations do not assert the derived constructible comparison for these two coefficient rings."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-supported-finite-stage-topology-defect",
+  "date": "2026-10-22",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), agent topology-comparison obligation: finite-field internal Hom constructibility, continuity, evaluation and global topology-map identification (returned item steps 5–6).",
+   "via": [
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-model-topology-derived-hom",
+  "worker": "stage1",
+  "summary": "No new nodes. Reuse the exact existing constructibility, continuity, two separate scalar-Hom comparisons and norm-topology global comparison. Verify the actual induced global Hom map by monoidal-composition normalization, transposition and the scalar unit, and carry the maps through the section-action equivalence. Statement unchanged.",
+  "blueprint": "Main 2026-10-15 sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3): realizes the agent-added derived-Hom topology obligation in supported-finite-stage-topology-defect steps 5–6. The ancestor tool returns None for this pre-existing chain; preserve its maintained blueprint ancestry. The proof does not claim the blueprint supplies a theorem about the two different algebraic-closure topologies.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic exact monoidal section-action equivalence with K-flat total comparisons; needed to compare the two presentations without a flat coefficient-map hypothesis."
+   },
+   {
+    "node": "lem-sfb-module-object-ringed-site-derived-comparison",
+    "why": "Generic evaluation-normalized internal-to-section derived Hom comparison, without coefficient flatness."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic geometric tool to verify the Noetherian hypothesis of the existing continuity and predicate-comparison inputs."
+   },
+   {
+    "node": "lem-sfb-adic-constructibility-predicate-comparison",
+    "why": "Predicate equivalence needed to apply Hom finiteness and recover the finite constant local model condition."
+   },
+   {
+    "node": "lem-sfb-dc-hom-small-coefficients",
+    "why": "Use only the finite normed E case of the existing generic internal-Hom finiteness statement."
+   },
+   {
+    "node": "lem-coef-derived-sections-scalar-coherence",
+    "why": "Generic ringed-site tool identifies derived global sections through arbitrary coefficient restriction with its specified natural comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "lem-sfb-dc-hom-small-coefficients",
+  "lem-coef-derived-sections-scalar-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NW-416088d28",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-416088d28 (reviewer sub-agent of L); spot-checked: I read the whole proof and every cited statement. The 8-step proof assembles 12 existing nodes and adds none. The statement is unchanged against live, and the item is still unsplit in live and side-live. There is no repair note, and the parent's re-split note is resolved. No SGA is cited and proof_deps equals the union of the steps' uses. Blueprint paragraph (3) of the stability direct-images proof does not cover coefficient topology, so proof_origin=agent is correct. A BFS over the snapshot finds no path from any cited node back to the item. The norm-algcl internal-Hom and cohomology-topology inputs are landed, reviewed splits outside the old open/proper-scalar cycle. Step checks: (2) X is Noetherian via finite type over k; the predicate comparison gives both directions; dc-hom-small in the E case gives D bounded constructible in both senses. (3) The continuity node's hypotheses and its representative convention match the item word for word. (4) The qlbar node's T is exactly C (sk-def-sfb-qlbar-condensed); continuity comes from step 3 and N bounded below gives phi_C. (5) phi_B is the norm-algcl base-change node verbatim. (6) The topology comparison with V=D plus sigma scalar coherence gives R Gamma(m_D). (7) I re-derived chi∘J phi_C = phi_B from equal transposes under the monoidal comparison J S_C ≅ S_B, and theta∘phi_C = Res phi_B∘m_D^C from naturality of the unit. (8) Psi = R Gamma(theta), which matches the parent's use, so Psi is invertible. Small cases checked: X empty, K or N zero, K=N=A (reduces to R Gamma(C_X) to R Gamma(B_X)), Spec k^sep, and H^1 over Spec F_q via Baire. Batch 5: lem-pod-adic-limit-finite-modules is commutative algebra of finitely generated O_E-modules, def-pod-l-adic-representations is a definition, and lem-pd-module-ringed-topos-derived-comparison is a generic module/ringed-topos foundation. None is a trace-formula or Poincare-duality step, so all three are accepted. Declared tool_uses are accepted. Maintainer note: the generic off-route citations continuity, qlbar-coefficient-comparison, dc-hom-scalar-adjunction and ringed-derived-monoidal-comparisons are undeclared; review_split records them without refusing, and they could be added to tool_uses at merge."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteModelTopologyDerivedHom",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.finiteModelTopologyDerivedHom",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.homComparison_naturality",
+   "AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.finiteModelTopologyDerivedHom",
+   "AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.scalarExtendedEvaluation",
+   "AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.finiteCoefficientComparison_sections",
+   "AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.globalComparison_naturality",
+   "AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.sectionRingComparisons"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteModelTopologyDerivedHom.lean",
+  "statement": "theorem finiteModelTopologyDerivedHom {k : Type u} [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ) (a : X ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType a] [QuasiCompact a] [IsSeparated a] (hK : constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X K) (hN : constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X N) : constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X (finiteHom X ℓ E K N) ∧ boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E) X) (finiteHom X ℓ E K N) ∧ QlbarInternalHom.Continuous X ℓ E K ∧ IsIso (homComparison X (finiteToUnion ℓ E) K N) ∧ IsIso (homComparison X (finiteToNorm ℓ E) K N) ∧ IsIso (globalCoefficientComparison X ℓ E (finiteHom X ℓ E K N)) ∧ IsIso ((sections X (condensedRingObj (Profinite.continuousMapRingObj E) X)).map (finiteCoefficientComparison X ℓ E (finiteHom X ℓ E K N))) ∧ ((sections X (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)).map (homComparison X (finiteToUnion ℓ E) K N) ≫ globalHomComparison X ℓ E K N = globalCoefficientComparison X ℓ E (finiteHom X ℓ E K N) ≫ (sections X (condensedRingObj (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) X)).map (homComparison X (finiteToNorm ℓ E) K N)) ∧ IsIso (globalHomComparison X ℓ E K N)",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The companion declarations state naturality, equality of scalar-extended evaluations, action-forgetting coherence, and the section-ring form. Canonical maps are in the cited definition node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c83a57dab",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Clause-by-clause match. Hypotheses: char p>0 field, p≠ℓ, X separated finite type over k; K,N constantModelBoundedConstructible; no flatness, perfectness, completeness or cd binders. Conclusions: D bounded constructible in both senses (constantModel + IsConstructibleModuleObject); continuity via QlbarInternalHom.Continuous, a full quasi-iso over every u+1-small filtered diagram with a common termwise lower bound (section-ring model, as the node allows); phi_C and phi_B invertible and natural (homComparison = evaluationComparison term without its unsatisfiable flatness binder); m_D = scalar unit + reassociation restricted to A, RΓ iso in A- and C-linear forms; Ψ = RΓ(θ) from the actual J-induced χ; square RΓφ_C≫Ψ = RΓm_D≫RΓφ_B and Ψ iso; χ∘Jφ_C=φ_B; naturality; section-ring transport. Records: only lean plus one new def node in stmt_deps vs live; statements verbatim; all decls exist; new def node has real constructions and docstrings; docstring carries all 8 steps. Advisory: theorem-owned decls used without stmt_deps (coefficientInclusion, Qlbar Continuous, forward) per precedent; justified homComparison/sections duplicates; stage-3 bridge Res S_C D vs Res C_X⊗D for the norm-algcl comparison; 54 s compile near the limit (unused private imports in the def module). No fixes; no compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261025T043232-L-1691401",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.finiteCoefficientComparison_sections",
+   "AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.finiteModelTopologyDerivedHom",
+   "AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.globalComparison_naturality",
+   "AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.homComparison_naturality",
+   "AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.scalarExtendedEvaluation",
+   "AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.sectionRingComparisons"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.finiteCoefficientComparison_sections",
+   "AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.finiteModelTopologyDerivedHom",
+   "AlgebraicGeometry.ProEtale.FiniteModelTopologyHom.scalarExtendedEvaluation"
+  ]
+ }
+}

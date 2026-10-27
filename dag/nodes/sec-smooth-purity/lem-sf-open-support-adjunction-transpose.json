@@ -1,0 +1,150 @@
+{
+ "id": "lem-sf-open-support-adjunction-transpose",
+ "kind": "statement",
+ "title": "Whole-system open adjunction Hom-transpose normalization",
+ "statement": "Fix a prime ell, a finite extension E/Q_ell, a finite-field datum D with ell a specified unit in D.k, and a quasi-compact open immersion j:U -> X over D.k, with X separated finite type and U finite type, using the residue-field inverse structures and the exact completed coefficient data of [def-sf-integral-support-normalization-data]. Write F for the specified integral compact-support functor for (j,id), R for the specified constructible integral pullback, and d for inverse compact-support realization followed by section-normalized openIdentity. There is a natural isomorphism p from R followed by inclusion to inclusion followed by ordinaryOpenPull. Let a:F ⊣ R be the ordinary open adjunction restricted using exactly d and p. For every N,K and f:F(N) -> K, the reduction of f to the entire strict quotient system is the composite of compactOperationReduction(N), systemDirectId, and the inverse system-open Hom transpose of the reduction of a.homEquiv(f) followed by the actual integralComparisonPullbackCounit(K). This asserts only the normalized pullback comparison and compatibility of Hom transposes; it contains no completeness, interval, finite reduction, shift, or triangulated conclusion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Triangle and Hom vanishing paragraphs: derived exact open adjunction; its integral normalization is detailed in the parent node proof steps 1, 2 and 5."
+ },
+ "stmt_deps": [
+  "def-sf-integral-support-normalization-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the normalized immersion pullback comparison on the open immersion. Transport the ordinary coefficient presentation to ordinaryOpenPull with the coefficient isomorphism preserving constant sections, all quotient projections and transitions. Restrict to the full constructible subcategory; this produces p, with no change to the specified strict pullback.",
+   "uses": [
+    "lem-sf-integral-immersion-pullback-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Hom vanishing paragraph: ordinary exact open restriction and derived pullback."
+   }
+  },
+  {
+   "text": "Use integralOpenReductionComparison on the actual open slice. Identify its completed and strict-system open functors with the recorded ordinary and system functors through the section-normalized coefficient maps and uniqueness of adjoints. Its system unit and counit identities imply the Hom-transpose identity: on one simultaneous flat-term K-flat quotient representative both transposes are x -> x tensor 1. The quotient transitions preserve this equality, so it descends through exact localization as an equality of entire derived system morphisms, before evaluation.",
+   "uses": [
+    "lem-sf-integral-open-reduction-comparison",
+    "def-weil-system-operation-exchange-realization",
+    "def-zl-ordinary-open-integral-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Triangle and Hom vanishing paragraphs: exact open adjunction on complexes and derived categories."
+   }
+  },
+  {
+   "text": "The normalized compact-support realization for (j,id) uses the same quotient augmentations. Removing the identity factor by its section-normalized right-adjoint identity gives precisely compactOperationReduction followed by systemDirectId. Restrict the ordinary adjunction by the full inclusions using d and p, and apply its Hom bijection to f. The previous whole-system equality becomes the stated formula. Identity and empty opens and zero inputs follow from the same adjunction triangles, without faithfulness of evaluation.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-system-operation-exchange-realization",
+    "def-zl-ordinary-open-support-normalization",
+    "lem-sp-fully-faithful-adjunction-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Triangle paragraph: canonical counit and its strict integral realization."
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Triangle and Hom vanishing paragraphs; Stacks Tags 03DI, 0941 and 0GL1, and the existing normalized open reduction comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero integral quotient systems derived adjunction Hom transpose compatibility",
+   "results": "OK 8 hits, including generic Adjunction.homAddEquiv_zero, homAddEquiv_symm_zero and Adjunction.CommShift.compatibilityUnit_isoZero; none compares the recorded integral quotient-system operations.",
+   "date": "2026-10-27",
+   "verdict": "No specialized whole-system open Hom-transpose normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right_symm",
+   "results": "OK 1 exact generic adjunction naturality lemma in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "date": "2026-10-27",
+   "verdict": "Used by the parent to deduce its unit formula; it does not give the required coefficient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "openAdjunctionTranspose|open.*[Hh]om.*[Tt]ranspose|open.*[Ss]ystem[Uu]nit",
+   "results": "OK 0 hits. Project rg inspected the normalized open reduction comparison, immersion comparison and compact realization; their presentations still need to be identified. Blueprint search open Hom transpose returned zero nodes.",
+   "date": "2026-10-27",
+   "verdict": "State only the remaining transport square, not the parent structure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural comparison of extension by zero and integral reduction intertwines the derived open adjunction Hom transposes on entire quotient systems",
+   "results": "OK 8 hits: generic Condensed adjunctions, ModuleCat.homEquiv_extendScalarsComp and representation adjunction results, with no normalized completed-system open transpose.",
+   "date": "2026-10-27",
+   "verdict": "General adjunction APIs suffice for assembly but not this coefficient normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOpenSupportNormalization",
+  "date": "2026-10-27",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Open adjunction normalization: the pullback comparison and its whole-system Hom square.",
+   "via": [
+    "lem-sf-open-support-normalization",
+    "lem-sf-integral-support-functor-normalization",
+    "lem-sf-rational-localization-triangle-orthogonality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralOpenAdjunctionTransposeNormalization",
+  "file": "lean/Sheaf/Paper/IntegralOpenAdjunctionTransposeNormalization.lean",
+  "declaration": "WeilConjectures.IntegralSupportNormalization.openAdjunctionTransposeNormalization",
+  "statement": "theorem openAdjunctionTransposeNormalization (D : FiniteFieldDatum.{u})\n    (primeUnit : IsUnit (l : D.k))\n    {U X : Scheme.{u}}\n    [X.Over (Spec (.of D.k))] [U.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (U ↘ Spec (.of D.k))] [QuasiCompact (U ↘ Spec (.of D.k))]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ x : U, Invertible (l : U.residueField x)]\n    (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]\n    [j.IsOver (Spec (.of D.k))] :\n    let d := (sfQcqsCompactSupportRealization l E D.k primeUnit\n      (Compactification.ofIsOpenImmersion j)).symm ≪≫\n        isoWhiskerLeft (sfIntegralConstructible l E U).ι (openIdentity l E j)\n    ∃ p : constructibleIntegralPullback l E j ⋙ (sfIntegralConstructible l E U).ι ≅\n        (sfIntegralConstructible l E X).ι ⋙ ordinaryOpenPull l E j,\n      let a := (ordinaryOpenAdjunction l E j).restrictFullyFaithful\n        (sfIntegralConstructible l E U).fullyFaithfulι\n        (sfIntegralConstructible l E X).fullyFaithfulι d.symm p.symm\n      ∀ (N : sfIntegralConstructibleCategory l E U)\n        (K : sfIntegralConstructibleCategory l E X)\n        (f : (sfCompactSupportFiniteIntegralFunctor l D.k primeUnit\n          (Compactification.ofIsOpenImmersion j) E).obj N ⟶ K),\n        (FrobeniusExchange.reduction l E X).map f.hom =\n          ((FrobeniusExchange.compactOperationReduction l E D.k primeUnit j\n            (Compactification.ofIsOpenImmersion j)).app N ≫\n            (systemDirectId l E X).hom.app\n              ((FrobeniusExchange.systemDerivedOpen l E j).obj\n                ((FrobeniusExchange.reduction l E U).obj N.obj))) ≫\n          ((FrobeniusExchange.systemDerivedOpenAdjunction l E j).homEquiv _ _).symm\n            ((FrobeniusExchange.reduction l E U).map ((a.homEquiv N K) f).hom ≫\n              (integralComparisonPullbackCounit l E j\n                ((FrobeniusExchange.models l E).system X)\n                ((FrobeniusExchange.models l E).system U)\n                ((FrobeniusExchange.models l E).roos U)\n                ((FrobeniusExchange.models l E).pullback j)).app K.obj)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-system-operation-exchange-realization",
+  "def-zl-ordinary-open-integral-operations",
+  "def-zl-ordinary-open-support-normalization",
+  "lem-sf-integral-immersion-pullback-normalization",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sp-fully-faithful-adjunction-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T084359-L-3674026",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T084359-L-3674026",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

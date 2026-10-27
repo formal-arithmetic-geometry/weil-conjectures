@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-direct-image-family-exact",
+ "kind": "statement",
+ "title": "Compatible exact structures on a fixed direct-image family",
+ "statement": "Fix universes u and w, a prime natural number l, and an algebraic closure Ω : Type w of ℚ_[l], with its given field and algebra structures. Let X and Y be schemes in universe u, each Noetherian and of finite topological Krull dimension, with l invertible in every stalk. Write dT and iT for the respective dimension and invertibility witnesses for each scheme T. All preservation hypotheses, functors, comparisons and conclusions are quantified exactly as follows.\n\ntheorem pbcDirectImageFamilyExact (f : X ⟶ Y)\n    (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω)\n      (K : pbcIntegralStage l Ω X E),\n      PbcIsBoundedConstructibleComplete Y (pbcStageDatum.{u} l Ω E)\n        ((pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)).obj K.obj))\n    (R : StageSystem.Morphism (pbcScalarSystem l Ω X dX.out iX.out)\n      (pbcScalarSystem l Ω Y dY.out iY.out))\n    (hR : ∀ E : Padic.FiniteCoefficientFields l Ω,\n      R.Φ E = pbcDescentDirectImage l Ω f pres E)\n    (bR : PbcDirectImageBetaSpec l Ω f pres R) :\n    ∃ C : StageSystem.CoherentExactMorphism (pbcScalarSystem l Ω X dX.out iX.out)\n      (pbcScalarSystem l Ω Y dY.out iY.out), C.base = R\n\nThe fixed scalar systems and normalization predicates are those of [def-weil-pbc-descent-interfaces], [def-per-rational-direct-image-family] and [def-weil-pbc-qbar-category]. The theorem adds exact structures to a supplied coherent family; it does not construct that family.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+  "place": "Final operations paragraph, exactness and shift compatibility clause; Lean module Sheaf.Paper.PbcDirectImageFamilyExact, declaration AlgebraicGeometry.Scheme.pbcDirectImageFamilyExact"
+ },
+ "stmt_deps": [
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-rational-transport",
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-descent-interfaces",
+  "def-per-rational-direct-image-family"
+ ],
+ "proof": [
+  {
+   "text": "Use the unique normalized exact shift at each actual rational direct-image stage and transport its exactness along hR. The scalar-comparison shift theorem supplies betaCommShift. Additivity is inherited from the explicit tensor-base-change transport. Package these structures with the unchanged R, so C.base = R is reflexivity.",
+   "uses": [
+    "lem-weil-pbc-direct-image-stage-exact",
+    "lem-weil-pbc-direct-image-family-shift-compatible",
+    "prop-weil-pbc-rational-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-direct-image-stage-exact",
+  "lem-weil-pbc-direct-image-family-shift-compatible",
+  "prop-weil-pbc-rational-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+  "place": "Assembly of the proved normalized stage exactness and the separate scalar-shift equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact scalar compatible direct image and completed pullback families descend from integral derived categories to rational coefficient stages, and their exchange is scalar compatible",
+   "results": "8 hits: IsScalarTower.rat, PresheafOfModules.pullback and pullbackPushforwardAdjunction, sheafificationCompPullback, scalar towers and scalar-localized modules. None provides the normalized derived coefficient family or its exchange compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scalar compatible family of direct image or completed pullback functors on derived coefficient categories is coherent and exact after rational localization",
+   "results": "8 hits about linear derived functors, derived localization, and Ext; none supplies normalized coefficient-stage coherence or exchange compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "12 hits: CommShift, identities, composition, ofIso_compatibility and ofComp_compatibility; useful local shift interfaces, no coefficient-family theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*[Ee]xchange|[Ee]xchange.*scalar",
+   "results": "No Mathlib hits. Project search finds the ambient pbcScalarCompletedExchange and rationalized equation, but no normalized StageSystem.Morphism.Hom construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcDescentFunctors",
+  "date": "2026-10-22",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-descent-functors",
+   "place": "Final operations paragraph, exactness and compatibility with shifts",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PbcDirectImageFamilyExact",
+  "file": "lean/Sheaf/Paper/PbcDirectImageFamilyExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbcDirectImageFamilyExact",
+  "statement": "theorem pbcDirectImageFamilyExact (f : X ⟶ Y)\n    (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω)\n      (K : pbcIntegralStage l Ω X E),\n      PbcIsBoundedConstructibleComplete Y (pbcStageDatum.{u} l Ω E)\n        ((pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)).obj K.obj))\n    (R : StageSystem.Morphism (pbcScalarSystem l Ω X dX.out iX.out)\n      (pbcScalarSystem l Ω Y dY.out iY.out))\n    (hR : ∀ E : Padic.FiniteCoefficientFields l Ω,\n      R.Φ E = pbcDescentDirectImage l Ω f pres E)\n    (bR : PbcDirectImageBetaSpec l Ω f pres R) :\n    ∃ C : StageSystem.CoherentExactMorphism (pbcScalarSystem l Ω X dX.out iX.out)\n      (pbcScalarSystem l Ω Y dY.out iY.out), C.base = R",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-22"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-direct-image-family-exact",
+  "worker": "stage3",
+  "summary": "Separate exact structures on a fixed coherent normalized family from the explicit construction of its functors, beta maps and coefficient coherence. The construction and its BetaSpec are proved in the consumer.",
+  "blueprint": "The final operations paragraph uses rational exact transport and shift compatibility. Whole-blueprint searches for direct-image family and shift equations return no equivalent blueprint statement.",
+  "edge_cases": "Identity morphisms, empty schemes, repeated coefficient fields, independently sized coefficient algebraic closures, and proof-irrelevant preservation witnesses keep the same statement."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-f13bb",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T113810-L-253425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-f13bb",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T113810-L-253425",
+  "kind": "interface",
+  "note": "independent cc review: delivered PbcDescentFunctors + 8 new modules and nodes against the clone (moved defs byte-identical), the item/sorry statements against PbcScalarExtension exchange routes, and the 9 direct importers compiled against the delivered modules (all rc 0); #print axioms only upstream sorryAx"
+ }
+}

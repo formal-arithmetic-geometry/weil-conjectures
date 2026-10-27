@@ -1,0 +1,85 @@
+{
+ "id": "lem-per-matrix-corner-reconstruction",
+ "kind": "statement",
+ "title": "Reconstruction of a left matrix module from an idempotent corner",
+ "statement": "Let $R$ be a unital ring, not necessarily commutative, let $d\\geq1$, and put $B=M_d(R)$ [def-weil-matrix], with row-column multiplication. For $1\\leq i,j\\leq d$, let $E_{ij}$ have entry $1$ in position $(i,j)$ and zero elsewhere, and write $I_d$ for the identity matrix. For any unital left $B$-module $N$, put $V=E_{11}N=\\{E_{11}x:x\\in N\\}$ and give $V$ the left $R$-action $r\\cdot v=(rI_d)v$. Give $V^d$ the column action $(A\\cdot(v_j))_i=\\sum_j A_{ij}\\cdot v_j$. The maps $$N\\longrightarrow V^d,\\quad x\\longmapsto(E_{1i}x)_{i=1}^d,\\qquad V^d\\longrightarrow N,\\quad(v_i)\\longmapsto\\sum_{i=1}^d E_{i1}v_i$$ are mutually inverse $B$-linear isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/brauer.tex",
+  "place": "Tag 074D, lemma-matrix-algebras, part (1), left-module form; explicit object isomorphism in Mathlib/RingTheory/Morita/Matrix.lean:144--173."
+ },
+ "stmt_deps": [
+  "def-weil-matrix"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a ring R and positive integer d every left M_d(R) module N is canonically isomorphic to the column module (e_11 N)^d by x maps to (e_1i x) with inverse sum e_i1 x_i",
+   "results": "{\"t\": \"2026-10-24T01:58:17Z\", \"tool\": \"leanfinder\", \"query\": \"For a ring R and positive integer d every left M_d(R) module N is canonically isomorphic to the column module (e_11 N)^d by x maps to (e_1i x) with inverse sum e_i1 x_i\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"toModuleCatFromModuleCatLinearEquiv\", \"ModuleCat.matrixEquivalence\", \"fromModuleCatToModuleCatLinearEquiv_apply\", \"fromModuleCatToModuleCatLinearEquiv\", \"ModuleCat.matrixEquivalence_inverse\", \"fromModuleCatToModuleCatLinearEquivtoModuleCatObj\", \"MatrixModCat.fromMatrixLinear_apply_coe\", \"MatrixModCat.toModuleCat_obj_carrier\"], \"digest\": \"397dc8e9727cbc0a\"}",
+   "date": "2026-10-24",
+   "verdict": "match: specializes in one line: take the finite index type Fin d, j = 0 (d >= 1), and M = ModuleCat.of B N in toModuleCatFromModuleCatLinearEquiv, lines 144--173. The declaration gives both maps exactly (1-based indices in the node). Its corner is the range of E_11, defined at lines 59--66, and uses restriction along Matrix.scalar, lines 144--147; this is precisely r I_d. The column action is the one at ModuleCat.toMatrixModCat, lines 42--44."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A module over a matrix ring is linearly equivalent to columns of its first idempotent corner",
+   "results": "{\"t\": \"2026-10-24T01:58:49Z\", \"tool\": \"leansearch\", \"query\": \"A module over a matrix ring is linearly equivalent to columns of its first idempotent corner\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"toModuleCatFromModuleCatLinearEquiv\", \"ModuleCat.matrixEquivalence\", \"moritaEquivalenceMatrix\", \"Matrix.toLinearEquiv\", \"Matrix.toLinearEquivRight'OfInv\", \"Matrix.toLin'OfInv\", \"Matrix.uniqueLinearEquiv\", \"endVecRingEquivMatrixEnd\"], \"digest\": \"f7571db597b4a333\"}",
+   "date": "2026-10-24",
+   "verdict": "match: specializes in one line: take the finite index type Fin d, j = 0 (d >= 1), and M = ModuleCat.of B N in toModuleCatFromModuleCatLinearEquiv, lines 144--173. The declaration gives both maps exactly (1-based indices in the node). Its corner is the range of E_11, defined at lines 59--66, and uses restriction along Matrix.scalar, lines 144--147; this is precisely r I_d. The column action is the one at ModuleCat.toMatrixModCat, lines 42--44."
+  },
+  {
+   "tool": "loogle",
+   "query": "toModuleCatFromModuleCatLinearEquiv",
+   "results": "{\"t\": \"2026-10-24T01:58:49Z\", \"tool\": \"loogle\", \"query\": \"toModuleCatFromModuleCatLinearEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"toModuleCatFromModuleCatLinearEquiv\"], \"digest\": \"091260411e7e21e8\"}",
+   "date": "2026-10-24",
+   "verdict": "match: specializes in one line: take the finite index type Fin d, j = 0 (d >= 1), and M = ModuleCat.of B N in toModuleCatFromModuleCatLinearEquiv, lines 144--173. The declaration gives both maps exactly (1-based indices in the node). Its corner is the range of E_11, defined at lines 59--66, and uses restriction along Matrix.scalar, lines 144--147; this is precisely r I_d. The column action is the one at ModuleCat.toMatrixModCat, lines 42--44."
+  },
+  {
+   "tool": "grep",
+   "query": "^def toModuleCatFromModuleCatLinearEquiv",
+   "results": "{\"t\": \"2026-10-24T01:59:55Z\", \"tool\": \"grep\", \"query\": \"^def toModuleCatFromModuleCatLinearEquiv\", \"sub\": \"RingTheory/Morita\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Morita/Matrix.lean\"], \"digest\": \"6c2049fa0127e80c\"}",
+   "date": "2026-10-24",
+   "verdict": "match: specializes in one line: take the finite index type Fin d, j = 0 (d >= 1), and M = ModuleCat.of B N in toModuleCatFromModuleCatLinearEquiv, lines 144--173. The declaration gives both maps exactly (1-based indices in the node). Its corner is the range of E_11, defined at lines 59--66, and uses restriction along Matrix.scalar, lines 144--147; this is precisely r I_d. The column action is the one at ModuleCat.toMatrixModCat, lines 42--44."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "toModuleCatFromModuleCatLinearEquiv",
+  "file": "Mathlib/RingTheory/Morita/Matrix.lean",
+  "how": "specializes in one line: take the finite index type Fin d, j = 0 (d >= 1), and M = ModuleCat.of B N in toModuleCatFromModuleCatLinearEquiv, lines 144--173. The declaration gives both maps exactly (1-based indices in the node). Its corner is the range of E_11, defined at lines 59--66, and uses restriction along Matrix.scalar, lines 144--147; this is precisely r I_d. The column action is the one at ModuleCat.toMatrixModCat, lines 42--44.",
+  "line": 144
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-matrix-division-module-classification",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3, regular finite-torsion local model via the tame equivariant modification in XVI 3.7; specifically Expose X Proposition 1.2, second assertion and its proof, printed p.138, equations (4)--(5), followed by the localization of Lambda in 1.3, printed pp.139--140. Specifically: Gabber preparation second assertion: integral representation lifting before equation (5). Auxiliary field-splitting input: Agent auxiliary algebra lemma for the characteristic-zero field-splitting input; proof rationale in report.md. The passage cites Serre but does not state this criterion. WANTED: Serre, Linear Representations of Finite Groups, Part III, fields of definition and Schur indices. No Stacks tag for this exact criterion was found. Supporting algebra input: Matrix-module classification used in the representation-class argument preceding ILO X Proposition 1.2, equation (5); Tag 074E (1)--(4). This tool serves Tag 074D, lemma-matrix-algebras, part (1), left-module form; explicit object isomorphism in Mathlib/RingTheory/Morita/Matrix.lean:144--173.",
+   "via": [
+    "lem-per-matrix-division-module-classification",
+    "lem-per-semisimple-scalar-extension-kzero-criterion",
+    "lem-per-cyclotomic-field-brauer-splitting",
+    "lem-per-local-cyclotomic-group-algebra-split",
+    "lem-per-tame-smooth-representation-chart",
+    "lem-per-gabber-fixed-locus-log-chart",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

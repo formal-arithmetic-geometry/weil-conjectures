@@ -1,0 +1,283 @@
+{
+ "id": "lem-trf-relative-tensor-localized-resolution-comparison",
+ "kind": "statement",
+ "title": "Simultaneous prime localization of a test resolution and its relative total tensor",
+ "statement": "Let $\\varphi:R\\to A$ be a homomorphism of commutative rings, $K^\\bullet$ an arbitrary unbounded $A$-complex, $N$ an $R$-module, and $\\epsilon:P^\\bullet\\to N[0]$ a K-flat resolution over $R$ [def-pc-module-kflat-complex]. For a prime $\\mathfrak q\\subset A$ put $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$; localization is as in [def-weil-pbc-module-localization], and use $R_{\\mathfrak p}\\to A_{\\mathfrak q}$, $r/t\\mapsto\\varphi(r)/\\varphi(t)$. Then $P_{\\mathfrak p}=R_{\\mathfrak p}\\otimes_R P$, with its localized augmentation, is a K-flat resolution of $N_{\\mathfrak p}[0]$ over $R_{\\mathfrak p}$. Write $C=\\operatorname{Tot}(K\\otimes_R P)$ and $D=\\operatorname{Tot}(K_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}P_{\\mathfrak p})$, using the signed direct-sum total differential [def-pc-tensor-complex-sheaves] and the $A$-actions on the first factors. In the unbounded derived category $D(A_{\\mathfrak q})$ [def-weil-abstract-derived-category] there is a natural isomorphism\n$$Q_{A_{\\mathfrak q}}(C_{\\mathfrak q})\\xrightarrow{\\sim}Q_{A_{\\mathfrak q}}(D).$$\nIt is represented by the $A_{\\mathfrak q}$-linear chain isomorphism sending each localized homogeneous tensor $(k\\otimes u)/s$ to $(k/s)\\otimes(u/1)$, whose inverse sends $(k/s)\\otimes(u/t)$ to $(k\\otimes u)/(s\\varphi(t))$. Naturality is with respect to chain maps in $K$ and maps of augmented resolutions $P\\to P'$ over module maps $N\\to N'$. No flatness of $A/R$ or boundedness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0B67, lemma-tor-amplitude-localization, displayed localization identity; chain-level calculation with a base K-flat test resolution and its localized augmentation, using lemma-base-change-K-flat."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=R\\setminus\\mathfrak p$ and $T=A\\setminus\\mathfrak q$. Since $\\varphi(S)\\subset T$, the fraction formula $r/t\\mapsto\\varphi(r)/\\varphi(t)$ defines the structural ring map. Identify $R_{\\mathfrak p}\\otimes_R P^j$ with $S^{-1}P^j$: the inverse maps are $(r/t)\\otimes u\\mapsto ru/t$ and $u/t\\mapsto(1/t)\\otimes u$. Tensor balancing gives both composites equal to the identity. If $u/t=u'/t'$, choose $v\\in S$ with $v(t'u-tu')=0$; multiplying by the unit $vtt'$ shows that the second formula is independent of the representative. These maps commute with every $R$-linear map of $P^j$ by their formulas, so identify the tensor extension complex, its differentials, and its augmentation with the localized ones.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK, lemma-tensor-localization; Tag 07JZ, definition-localization-module, fractions construction."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-kflat-extension-of-scalars] to $R\\to R_{\\mathfrak p}$ and $P$: the tensor extension complex, identified in Step 1 with $P_{\\mathfrak p}$, is K-flat. Localization is additive by the fraction formulas and exact by [lem-weil-pbc-localization-module-exact]. Thus [lem-weil-pbc-exact-functor-complex-cohomology] applies to termwise localization and gives $H^j(P_{\\mathfrak p})\\cong H^j(P)_{\\mathfrak p}$, naturally in the augmentation. Since $\\epsilon$ is a quasi-isomorphism, its localized augmentation is a quasi-isomorphism to $N_{\\mathfrak p}[0]$. Together with K-flatness this is the asserted resolution. None of these results assumes flatness of $A/R$ or boundedness.",
+   "uses": [
+    "lem-pc-kflat-extension-of-scalars",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-pc-module-kflat-complex",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y1, lemma-base-change-K-flat; algebra.tex Tag 00CS, proposition-localization-exact; homology.tex Tag 010N, lemma-exact-functor."
+   }
+  },
+  {
+   "text": "For each pair of degrees $(i,j)$ apply [lem-weil-pbc-localization-tensor-over-base] with $M=K^i$, the multiplicative subset $T\\subset A$, and the $R$-module $P^j$. It gives an isomorphism $(K^i\\otimes_R P^j)_{\\mathfrak q}\\to K^i_{\\mathfrak q}\\otimes_R P^j$ sending $(k\\otimes u)/s$ to $(k/s)\\otimes u$. It is $A_{\\mathfrak q}$-linear: scalar multiplication by $a/v$ on either expression multiplies $k$ by $a$ and its denominator by $v$. The displayed formula also commutes with maps in $K^i$, as well as the stated naturality in $P^j$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DK, lemma-tensor-localization, and 00D2, lemma-tensor-with-bimodule; applied to the localization identity in more-algebra.tex Tag 0B67."
+   }
+  },
+  {
+   "text": "Set $X=K^i_{\\mathfrak q}$ and $U=P^j$. The map $X\\otimes_R U\\to X\\otimes_{R_{\\mathfrak p}}U_{\\mathfrak p}$ sends $x\\otimes u$ to $x\\otimes(u/1)$. Its inverse is $x\\otimes(u/t)\\mapsto\\varphi(t)^{-1}(x\\otimes u)$. Here $X\\otimes_R U$ has its $A_{\\mathfrak q}$-action through $X$. To check independence of $u/t$, if $v(t'u-tu')=0$ with $v\\in S$, then $\\varphi(v)(x\\otimes(t'u-tu'))=0$; cancellation of the unit $\\varphi(vtt')$ gives equality of the inverse expressions. Addition uses a common denominator. For $r/v\\in R_{\\mathfrak p}$ the two balancing expressions both give $\\varphi(r)\\varphi(vt)^{-1}(x\\otimes u)$, so the inverse is $R_{\\mathfrak p}$-balanced and defines a tensor map. Both maps are $A_{\\mathfrak q}$-linear and inverse: in the target $x\\otimes(u/t)=(\\varphi(t)^{-1}x)\\otimes(u/1)$. Compose with Step 3. The resulting inverse on fractions is $(k/s)\\otimes(u/t)\\mapsto(k\\otimes u)/(s\\varphi(t))$, exactly as asserted.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B67, lemma-tor-amplitude-localization, chain-level expansion of the localization identity; balancing calculation as in Tag 06Y1, lemma-base-change-K-flat."
+   }
+  },
+  {
+   "text": "Localization commutes with the direct sums in total degree. Explicitly, for any family $(M_\\alpha)$ the map $T^{-1}(\\bigoplus M_\\alpha)\\to\\bigoplus T^{-1}M_\\alpha$ sends $(m_\\alpha)/s$ to $(m_\\alpha/s)$. A finite family of fractions has a common denominator (the product of its denominators), proving surjectivity. If all coordinates of $(m_\\alpha)/s$ vanish, choose an annihilating denominator for each of the finitely many nonzero $m_\\alpha$; their product annihilates the entire tuple, proving injectivity. Both formulas are linear. Apply this to $M_{(i,j)}=K^i\\otimes_R P^j$, $i+j=n$, and sum the isomorphisms of Steps 3--4. This gives inverse $A_{\\mathfrak q}$-linear maps in every total degree with exactly the asserted formulas on homogeneous tensors; finite support makes them valid for arbitrary unbounded complexes.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B67, lemma-tor-amplitude-localization, explicit direct-sum realization of its localization identity; total convention of homology.tex Tag 012Z."
+   }
+  },
+  {
+   "text": "Write $\\alpha$ for the degreewise map of Step 5. For $k\\in K^i$ one has\n$$\\alpha\\bigl(d((k\\otimes u)/s)\\bigr)=(dk/s)\\otimes(u/1)+(-1)^i(k/s)\\otimes(du/1)=d\\bigl((k/s)\\otimes(u/1)\\bigr).$$\nThus $\\alpha$ is a chain map for the specified signed total differential. Its degreewise inverse is also a chain map, since $\\alpha d=d\\alpha$ implies $d\\alpha^{-1}=\\alpha^{-1}d$. For chain maps $f:K\\to K'$ and $g:P\\to P'$ both naturality composites send $(k\\otimes u)/s$ to $(f(k)/s)\\otimes(g(u)/1)$; equality on these generators gives the naturality square. A map of augmented resolutions has $\\epsilon'g=h[0]\\epsilon$, whose localization is the same equation over $R_{\\mathfrak p}$, so this includes the specified maps over $N\\to N'$. Finally apply the functor $Q_{A_{\\mathfrak q}}$: it sends the inverse chain maps to inverse arrows and their naturality squares to commuting squares in $D(A_{\\mathfrak q})$. This proves the claimed natural derived isomorphism.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B67, lemma-tor-amplitude-localization, chain-level expansion; homology.tex Tag 012Z for signs; derived.tex Tag 05RU for derived localization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pc-kflat-extension-of-scalars",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-pc-module-kflat-complex",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0B67, lemma-tor-amplitude-localization, explicit chain-level justification of the displayed localization identity, using Tag 06Y1 and algebra.tex Tags 00CS, 00DK, 00D2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "localiz.*[Kk].?[Ff]lat|[Kk].?[Ff]lat.*localiz|localiz.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-22T06:49:38Z\", \"tool\": \"grep\", \"query\": \"localiz.*[Kk].?[Ff]lat|[Kk].?[Ff]lat.*localiz|localiz.*[Tt]ensor\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, CochainComplex",
+   "results": "{\"t\": \"2026-10-22T06:49:38Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization, CochainComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous localization of both tensor factors of unbounded complexes at a source prime and its contraction is an isomorphism of complexes",
+   "results": "{\"t\": \"2026-10-22T06:49:38Z\", \"tool\": \"leansearch\", \"query\": \"Simultaneous localization of both tensor factors of unbounded complexes at a source prime and its contraction is an isomorphism of complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"IsLocalizedModule.rTensor\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"IsLocalization.isLocalization_isLocalization_atPrime_isLocalization\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors\", \"IsLocalization.localizationLocalizationAtPrimeIsoLocalization\", \"HomologicalComplexUpToQuasiIso\"], \"digest\": \"7d84549d3e75ba8a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a K-flat resolution at a contracted prime and comparing the localized total tensor complex over R with the total tensor over R_p as A_q complexes",
+   "results": "{\"t\": \"2026-10-22T06:49:49Z\", \"tool\": \"leanfinder\", \"query\": \"Localizing a K-flat resolution at a contracted prime and comparing the localized total tensor complex over R with the total tensor over R_p as A_q complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"Module.Flat.of_isLocalizedModule\", \"Module.flat_iff_of_isLocalization\", \"instFlatAtPrime\", \"IsLocalization.flat\", \"RingHom.Flat.ofLocalizationPrime\", \"Module.Flat.localizedModule\", \"RingHom.Flat.localRingHom\"], \"digest\": \"5859e0e9f92b28f1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorProduct_isLocalizedModule|instIsLocalizedModuleTensorProductMap|rTensor",
+   "results": "{\"t\": \"2026-10-22T06:49:59Z\", \"tool\": \"grep\", \"query\": \"tensorProduct_isLocalizedModule|instIsLocalizedModuleTensorProductMap|rTensor\", \"sub\": \"RingTheory/Localization/BaseChange.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"98\", \"244\", \"245\", \"257\", \"259\"], \"digest\": \"89d670bb61622390\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.tensorProduct_isLocalizedModule",
+   "results": "{\"t\": \"2026-10-22T06:49:59Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization.tensorProduct_isLocalizedModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsLocalization.tensorProduct_isLocalizedModule\"], \"digest\": \"eb62773ea8840ec7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K-flat module resolution stays a resolution after ring localization and the signed direct sum total tensor has the simultaneous source and base localization isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:50:10Z\", \"tool\": \"leanfinder\", \"query\": \"A K-flat module resolution stays a resolution after ring localization and the signed direct sum total tensor has the simultaneous source and base localization isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.localizedModule\", \"Module.flat_of_isLocalized_span\", \"Module.Flat.of_isLocalizedModule\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"IsLocalization.flat\", \"Module.flat_iff_of_isLocalization\", \"Module.flat_of_localized_span\"], \"digest\": \"3cab25f4c4460f89\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "localiz.*[Tt]ensor|[Tt]ensor.*localiz|KFlat|kFlat",
+   "results": "{\"t\": \"2026-10-22T06:51:51Z\", \"tool\": \"grep\", \"query\": \"localiz.*[Tt]ensor|[Tt]ensor.*localiz|KFlat|kFlat\", \"sub\": \"Algebra/Homology/Monoidal\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, HomologicalComplex",
+   "results": "{\"t\": \"2026-10-22T06:51:51Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization, HomologicalComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a prime q of A contracting to p in R, a K-flat resolution P to N localizes to a K-flat R_p resolution and (Tot(K tensor_R P))_q is isomorphic in D(A_q) to Tot(K_q tensor_R_p P_p)",
+   "results": "{\"t\": \"2026-10-22T06:52:02Z\", \"tool\": \"leanfinder\", \"query\": \"At a prime q of A contracting to p in R, a K-flat resolution P to N localizes to a K-flat R_p resolution and (Tot(K tensor_R P))_q is isomorphic in D(A_q) to Tot(K_q tensor_R_p P_p)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"Module.flat_iff_of_isLocalization\", \"Module.Flat.of_isLocalizedModule\", \"Module.flat_of_localized_span\", \"Module.Flat.localizedModule\", \"IsLocalization.flat\", \"Module.flat_of_localized_maximal\", \"Module.flat_of_isLocalized_maximal\"], \"digest\": \"c324bb56e8596252\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "localiz.*[Kk].?[Ff]lat|[Kk].?[Ff]lat.*localiz",
+   "results": "{\"t\": \"2026-10-23T14:41:55Z\", \"tool\": \"grep\", \"query\": \"localiz.*[Kk].?[Ff]lat|[Kk].?[Ff]lat.*localiz\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned flat-module or generic total-tensor infrastructure does not assert the simultaneous contracted-prime K-flat resolution comparison and its natural chain formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of unbounded total tensor complexes at a prime and its contracted base prime using a K-flat resolution",
+   "results": "{\"t\": \"2026-10-23T14:41:55Z\", \"tool\": \"leansearch\", \"query\": \"Localization of unbounded total tensor complexes at a prime and its contracted base prime using a K-flat resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_isLocalizedModule\", \"IsLocalization.tensor\", \"Module.flat_iff_of_isLocalization\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat.holdsForLocalizationAway\", \"Module.flat_of_isLocalized_span\", \"IsLocalization.flat\"], \"digest\": \"c48a0029a36c9ee6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned flat-module or generic total-tensor infrastructure does not assert the simultaneous contracted-prime K-flat resolution comparison and its natural chain formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, CochainComplex",
+   "results": "{\"t\": \"2026-10-23T14:41:55Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization, CochainComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned flat-module or generic total-tensor infrastructure does not assert the simultaneous contracted-prime K-flat resolution comparison and its natural chain formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a K-flat resolution and the unbounded total tensor over a ring map at a prime and its contraction gives a natural chain isomorphism",
+   "results": "{\"t\": \"2026-10-23T14:41:56Z\", \"tool\": \"leanfinder\", \"query\": \"Localizing a K-flat resolution and the unbounded total tensor over a ring map at a prime and its contraction gives a natural chain isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.ofLocalizationPrime\", \"instFlatAtPrime\", \"RingHom.Flat.localRingHom\", \"RingHom.Flat.holdsForLocalizationAway\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"Module.flat_of_isLocalized_maximal\", \"Module.flat_of_isLocalized_span\", \"RingHom.Flat.propertyIsLocal\"], \"digest\": \"a3800997da6c691e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned flat-module or generic total-tensor infrastructure does not assert the simultaneous contracted-prime K-flat resolution comparison and its natural chain formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|localiz.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-23T14:43:33Z\", \"tool\": \"grep\", \"query\": \"KFlat|kFlat|localiz.*[Tt]ensor\", \"sub\": \"Algebra/Homology/Monoidal\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned flat-module or generic total-tensor infrastructure does not assert the simultaneous contracted-prime K-flat resolution comparison and its natural chain formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of a K-flat complex preserves acyclicity tests and simultaneous localization commutes with signed direct sum total tensor of two unbounded complexes",
+   "results": "{\"t\": \"2026-10-23T14:43:37Z\", \"tool\": \"leanfinder\", \"query\": \"Scalar extension of a K-flat complex preserves acyclicity tests and simultaneous localization commutes with signed direct sum total tensor of two unbounded complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.tensorObj\", \"HomologicalComplex.instHasTensorOfHasTensorX\"], \"digest\": \"c9d5c402c47f5ad2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned flat-module or generic total-tensor infrastructure does not assert the simultaneous contracted-prime K-flat resolution comparison and its natural chain formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-tor-amplitude-localization",
+  "date": "2026-10-22",
+  "group": "Q137"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Affine comparison for a given coherent relative dualizing pair. Relative Tor amplitude in the affine reduction, using the generic affine relative-Tor criterion. Algebraic localization step in the affine relative-Tor comparison (Stacks 0DHY invoking 0B67). Old localization proof steps 3--4: localized test resolution and the explicit signed total-tensor isomorphism underlying step 5.",
+   "via": [
+    "lem-trf-relative-tor-amplitude-localization",
+    "lem-trf-affine-relative-tor-amplitude-criterion",
+    "lem-trf-affine-relative-dualizing-comparison",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-relative-tensor-localized-resolution-comparison",
+  "worker": "stage1",
+  "summary": "Checked the simultaneous localization statement against Stacks 0B67 and 06Y1. Reused existing K-flat base change, exact localization, exact-functor cohomology, and module tensor localization nodes. Wrote the fraction balancing, finite-support totalization, differential and naturality calculations explicitly; no new node or statement change is needed.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Affine comparison for a given coherent relative dualizing pair. Relative Tor amplitude in the affine reduction, using the generic affine relative-Tor criterion. Algebraic localization step in the affine relative-Tor comparison (Stacks 0DHY invoking 0B67). Old localization proof steps 3--4: localized test resolution and the explicit signed total-tensor isomorphism underlying step 5.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-extension-of-scalars",
+    "why": "Generic K-flat scalar extension for R to R_p, not a replacement for a unit step; no statement of this unit supplies that algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-extension-of-scalars"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-94ad99275",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-94ad99275 (reviewer sub-agent of L); spot-checked: Read Stacks 0B67, whose proof uses the localization identity without justifying it, and 06Y1; checked the tag-to-label mapping for every tag the step sources cite. The statement is unchanged and true, and it gives the parent lem-trf-relative-tor-amplitude-localization exactly what its Step 2 uses. Step 1: R_p⊗P ≅ S^{-1}P, with well-definedness of both maps checked. Step 2: K-flatness from lem-pc-kflat-extension-of-scalars, whose hypothesis and conclusion match def-pc-module-kflat-complex; quasi-isomorphism from exact localization plus the exact-functor cohomology node, with no boundedness needed. Step 3: lem-weil-pbc-localization-tensor-over-base with M=K^i and T=A∖q. Step 4: representative independence, R_p-balancing and the inverse (k⊗u)/(sφ(t)) all verified. Step 5: localization commutes with direct sums by finite support. Step 6: chain map under the signed differential, naturality, and passage to D(A_q) via Q. Edge cases checked: K=0, N=0, A=0 (vacuous), R=A, and the non-flat map Z→Z/2. No new nodes, no unit changes, proof_deps equal the union of uses. DAG search for nodes combining K-flat and localization, and for tags 0B67/06Y1, found no duplicate. Declared tool use lem-pc-kflat-extension-of-scalars (generic, 06Y1) accepted. No fixes."
+ }
+}

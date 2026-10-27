@@ -1,0 +1,125 @@
+{
+ "id": "def-pur-etale-exceptional-precomp-locality",
+ "kind": "definition",
+ "title": "The specified etale exceptional precomposition comparison",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let A be a finite commutative ring of universe u+1, and use ordinary unbounded derived categories of constant-A module sheaves [def-weil-pbc-derived-categories]. Let u:U→X be a separated finite-type etale morphism [def-weil-etale-morphism] [def-weil-scheme-morphism-properties], and f:X→S a morphism, with U,X,S Noetherian and f and f∘u compactifiable [def-asd-compactifiable]. Given a graph-normalized compact-support datum N [def-sp-etale-compact-support-normalization], define E_(u,f):Rf! followed by u* ≅ R(f∘u)! by conjugating the specified etale left comparison [def-sp-etale-adjoint-chart-comparison] under the compact-support exceptional adjunctions [thm-amb-etale-exceptional-adjoint] and the derived sum/evaluation adjunction. The result is tensorMateEtalePrecompLocalityIso, in the direction Rf! ⋙ u* → R(f∘u)!, with its actual counit normalization; it is not the tensor-precomposition compatibility theorem.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-etale-morphism",
+  "def-weil-scheme-morphism-properties",
+  "def-asd-compactifiable",
+  "def-sp-etale-compact-support-normalization",
+  "def-sp-etale-adjoint-chart-comparison",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 3, first paragraph: composing adjunctions with the canonical etale exceptional identification."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sourceOrdinary|sourceLift_geometry|tensorMateEtalePrecompLocalityIso|unboundedEtaleLowerShriekCongr|pullComparison|sourceComparison [CategoryTheory]",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the published Sheaf definitions; no replacement construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical etale chart self-product section comparison, exceptional adjoint locality, compact-support congruence and etale pro-etale pullback comparison",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.arrowResLEAppIso\", \"RingHom.Etale.ofLocalizationSpan\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.of_comp\"]}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the published Sheaf definitions; no replacement construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "pullback.map, conjugateIsoEquiv",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'pullback.map'\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the published Sheaf definitions; no replacement construction."
+  },
+  {
+   "tool": "rg / blueprint_refs.py",
+   "query": "Exact helper names in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search chart source / etale locality / compact support congruence / section comparison",
+   "results": "The exact declarations are in ChartDncVectorFactors, TensorMateEtalePrecomp, UnboundedEtaleCompactSupportComparisons and PurityDncInvariance. No definition node owns these exact declarations. def-pur-finite-section-comparison owns the underlying sectionComparison only. No exact upstream WeilConjectures match. Blueprint searches: 0 chart source, 2 etale locality (generic smoothness nodes), 0 compact support congruence, 1 section comparison (det-sp-orientation-charts).",
+   "date": "2026-10-24",
+   "verdict": "Record existing:true definition ownership at the original modules, as required by the immutable-head H2 review."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-chart-diagonal-source-mate",
+  "date": "2026-10-24",
+  "group": "Q58"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-orientation-charts",
+   "place": "Step 3, first paragraph: composing adjunctions with the canonical etale exceptional identification.",
+   "via": [
+    "lem-pur-chart-diagonal-source-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-orientation",
+ "lean": {
+  "module": "Sheaf.SmoothPurity.TensorMateEtalePrecomp",
+  "declaration": "AlgebraicGeometry.Etale.tensorMateEtalePrecompLocalityIso",
+  "declarations": [
+   "AlgebraicGeometry.Etale.tensorMateEtalePrecompLocalityIso"
+  ],
+  "statement": "def tensorMateEtalePrecompLocalityIso\n    (A : Type (v + 1)) [CommRing A] [Finite A]\n    (N : EtaleCompactSupportNormalization A)\n    {U X S : Scheme.{v}} (u : U ⟶ X) (f : X ⟶ S)\n    [Etale u] [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u]\n    [IsNoetherian U] [IsNoetherian X] [IsNoetherian S]\n    [HasCompactification f] [HasCompactification (u ≫ f)] :\n    R(f)^![ModuleCat A] ⋙ (u)^*[ModuleCat A].mapDerivedCategory ≅\n      R(u ≫ f)^![ModuleCat A]",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested by the immutable-head H2 review of 28bbd8b6d51c. The published declarations remain in their original module, with no move, copy, or mathematical change. The theorem conclusion of the former owning record is not used."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6fd81382f",
+  "group": "Q58",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6fd81382f",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 28bbd8b6. Lean module byte-identical to the previously reviewed version except the imports, now public (TensorMateEtalePrecomp, PurityDncInvariance, UnboundedEtaleCompactSupportComparisons, EtaleCompactSupportNormalization). Item node: only lean plus stmt_deps changed; theorem dep lem-pur-chart-dnc-vector-factors replaced; added deps all definitions (def-pur-diagonal-dnc-chart-data, def-sp-etale-compact-support-normalization, and 4 new existing:true owners: def-pur-chart-source-comparison for ChartFactors.selfMap/sourceLift/sourceOrdinary/source, def-pur-etale-exceptional-precomp-locality for tensorMateEtalePrecompLocalityIso, def-pur-compact-support-morphism-congruence for unboundedEtaleLowerShriekCongr (subst/Iso.refl), def-pur-section-pullback-site-comparisons for Dnc.pullComparison/sourceComparison). Each new lean.statement verbatim in side-live; bodies match node text; statement citations equal stmt_deps; deps exist; no cycle; no parallel def owner landed; item lean.statement verbatim and all 10 decls present. Maths re-checked: hypotheses not stronger (no surjectivity/Noetherian/compactification hypotheses, d=0 included), mate clause is (Le*α_p)∘a=c_e∘α_h with correct endpoints, O = W∖(Z∖Δ), viaQ with target-étale unit D_v and pinned η_e, restriction over all V≤O with section; edge cases and universes (u/u+1) fine; only sorry proofs; docstrings carry source and blueprint id. Advisory: new def nodes cite theorem lem-pur-dnc-section-geometry for Dnc.sourceSection/sourceEtale/sectionBaseChange (sole owner, constructed data); Dnc.compactifiable used only for instances (Nagata cited). No file changed; no compile run; worker scompile clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261025T144301-L-1223057",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Etale.tensorMateEtalePrecomp"
+  ],
+  "sorry_after": []
+ }
+}

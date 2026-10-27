@@ -77,3 +77,9 @@ L: independent stage-2 immutable head 02300fc54238: H3. F1: IsClopenIntegralRest
 
 L: independent stage-2 immutable head 41ca8225942b: Compiles clean (nt_compile 5.0 s, no warnings); no hollow defs or proofs. RETURN for substance. H3: conclusion is a bare Nonempty iso per (M,N); the node's canonical iso natural in M,N and compatible with finite reduction, scalar extension and shifts is missing; state the natural iso (upstream derivedHomRightDerivedLowerShriekIsoOfFinite) with CommShift and coefficient-change squares. H3/H4/H7: only finite Λ, silently dropping the O_E, E and Q̄_ℓ stages the node and proof steps 2/6/15 cover, and M,N use the étale slopmaster2 constructibleFiniteTor instead of the node's pro-étale Dctf (landed WeilConjectures.finiteTorConstructible/…Integral/finiteTorFieldCoefficientCategory, stage interface in Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients); restate on those, adding landed stmt_deps. H3/H9: finite-type instances on free aX, aY unrelated to the X.Over structure used by f.IsOver; use X ↘ Spec (.of D.k) as in hasCompactification_of_finiteType_over_field, which also discharges HasCompactification f. H8: docstring lacks the 15 proof steps. H9 rule 7: none of the 41 landed proof-dependency modules imported. H11: second reading missed all of these.
 
+## lem-sfb-sheaf-dg-good-resolutions (2026-10-24 17:33 UTC, branch head b64b0763963)
+
+L: independent stage-2 immutable head b64b0763963d: Sheaf.CategoryTheory.SheafDgTensorData declares names that other modules already declare:
+  CategoryTheory.SheafDg.GradedAlgebra: also in Sheaf.CategoryTheory.GradedSheafModule
+Import and reuse the existing declaration. Renaming yours only hides the collision and leaves the same fact proved twice; rename only when the two declarations say different things.
+

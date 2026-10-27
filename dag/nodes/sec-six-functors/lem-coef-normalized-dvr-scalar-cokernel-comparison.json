@@ -1,0 +1,150 @@
+{
+ "id": "lem-coef-normalized-dvr-scalar-cokernel-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-dvr-flat-cokernel",
+   "place": "Coefficient calculation for a single universal finite-level chain map",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Scalar cokernel comparison for one universal finite-coefficient chain map",
+ "statement": "Let B_j be the finite DVR coefficient sheaves and completed restrictions of [def-coef-normalized-dvr-tower]. For n ≤ m, a K-flat complex F over B_m [def-pc-kflat-complex], a complex K over B_n, and a semilinear chain map f:F→Res(K), suppose composition with Q(f) gives the universal Hom bijection for derived extension to B_n. Let v be the completed uniformizer [def-sp-completed-uniformizer-section]. For any natural isomorphism between the composite finite/completed restriction and the direct completed restriction, if the resulting chain map kills v^(n+1), its descent from coker(v^(n+1):Res(F)→Res(F)) to Res(K) is a quasi-isomorphism. No tower, family of representatives, successor composition, or normalization datum is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+  "place": "Strict flat-model normalization: only the scalar-cokernel quasi-isomorphism field"
+ },
+ "stmt_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-pc-kflat-complex",
+  "def-sp-completed-uniformizer-section"
+ ],
+ "proof": [
+  {
+   "text": "The completed projection onto B_n is sectionwise surjective: lift through the constant quotient and use the constant-to-completion cone identity. The same gives sectionwise surjectivity of B_m to B_n. Restriction along each map is fully faithful. These quotient-surjectivity helpers are reused from the finite-quotient uniqueness module.",
+   "uses": [
+    "lem-sp-completed-integral-finite-quotient-hom-ext"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the scalar cokernel C in completed-coefficient complexes. Its scalar power acts by zero because the cokernel projection is epi. Completed projection divisibility then shows that the kernel of the projection to B_n annihilates each term of C. Construct the B_n-action by descending the existing action through the surjective ring map; its restricted underlying module is the original module. Full faithfulness lifts the differentials, so C belongs to the image of completed restriction from B_n.",
+   "uses": [
+    "lem-sp-completed-integral-projection-divisibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the normalized ordinary and derived scalar adjunctions. The finite scalar power vanishes after restriction from B_n. The ordinary extension unit therefore kills the scalar power. Since its scalar cokernel belongs to the image of the fully faithful right adjoint, the cokernel universal property and the ordinary adjunction identify the descended unit with an isomorphism. This categorical argument works directly in complexes and needs neither injectivity of multiplication nor flatness.",
+   "uses": [
+    "lem-pur-system-scalar-model",
+    "def-sp-completed-uniformizer-section"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Hom bijections make the derived transpose of f invertible, by the coyoneda criterion. K-flatness makes the ordinary-to-derived comparison invertible, and the normalized transpose identity consequently makes the ordinary transpose of f a quasi-isomorphism.",
+   "uses": [
+    "lem-pur-system-scalar-model",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact finite and completed restriction preserve the quasi-isomorphism of the ordinary transpose. The adjunction identity and the cokernel universal property identify the desired descent with the composite of the unit-cokernel isomorphism, this restricted quasi-isomorphism, and the given comparison isomorphism. The composite is a quasi-isomorphism for every choice of the comparison.",
+   "uses": [
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-completed-integral-finite-quotient-hom-ext",
+  "lem-sp-completed-integral-projection-divisibility",
+  "lem-pur-system-scalar-model",
+  "def-sp-completed-uniformizer-section",
+  "def-pc-kflat-complex",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+  "place": "V8: scalar quotient action descent, cokernel universal property, and ordinary/derived adjunction comparison; all helper proofs in the item module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsColimit.*extendScalars|cokernel.*extendScalars|extendScalars.*cokernel",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem for scalar cokernels of universal derived maps of the actual finite coefficient sheaves; use quotient action descent and the normalized adjunction model."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cokernel\", \"restrictScalars\"",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem for scalar cokernels of universal derived maps of the actual finite coefficient sheaves; use quotient action descent and the normalized adjunction model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars along a quotient ring is a cokernel of scalar multiplication on a sheaf module; K-flat computes derived extension",
+   "results": "8 hits: Module.Flat.of_forall_exists_factorization, Module.flat_of_isLocalized_span, Module.Flat.iff_forall_exists_factorization, SheafOfModules.Presentation.isColimit, SheafOfModules.Presentation.map, localCohomology.diagram, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, SheafOfModules.generatorsOfIsCokernelFree_I",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem for scalar cokernels of universal derived maps of the actual finite coefficient sheaves; use quotient action descent and the normalized adjunction model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a surjective morphism of ring sheaves whose kernel is generated by a scalar power, extension of scalars of a K-flat complex is its scalar cokernel and a universal derived extension map induces a quasi-isomorphism",
+   "results": "8 hits: ModuleCat.ExtendScalars.map', LinearEquiv.extendScalarsOfSurjective, LinearMap.kerLTensorEquivOfSurjective, LinearMap.extendScalarsOfSurjective, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, comonadicExtendScalars, AlgHom.extendScalarsOfSurjective, ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem for scalar cokernels of universal derived maps of the actual finite coefficient sheaves; use quotient action descent and the normalized adjunction model."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedDVRScalarCokernelComparison",
+  "date": "2026-10-26",
+  "group": "V8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedDVRScalarCokernelComparison",
+  "file": "lean/Sheaf/Paper/NormalizedDVRScalarCokernelComparison.lean",
+  "declaration": "WeilConjectures.normalizedDVR_scalar_cokernel_comparison",
+  "statement": "theorem normalizedDVR_scalar_cokernel_comparison\n    {m n : ℕ} (h : n ≤ m)\n    (i : normalizedDVRModuleRes l E X h ⋙ completedIntegralRestrictScalars l E X D hl m ≅\n      completedIntegralRestrictScalars l E X D hl n)\n    (F : CochainComplex (normalizedDVRModules l E X m) ℤ)\n    (K : CochainComplex (normalizedDVRModules l E X n) ℤ)\n    (f : F ⟶ ((normalizedDVRModuleRes l E X h).mapHomologicalComplex (.up ℤ)).obj K)\n    (hF : CochainComplex.IsKFlatIndependentCoefficients F)\n    (hf : ∀ Z : normalizedDVRDerived l E X n,\n      Function.Bijective (fun b : DerivedCategory.Q.obj K ⟶ Z ↦\n        (DerivedCategory.Q.map f ≫\n          (normalizedDVRModuleRes l E X h).mapDerivedCategoryFactors.inv.app K) ≫\n          (normalizedDVRRes l E X h).map b))\n    (hz : ((⟨(PrincipalKoszulStrictReplacement.uniformizer l E X).val,\n        (PrincipalKoszulStrictReplacement.uniformizer l E X).property⟩ :\n      RingCat.sectionsSubring ((completedIntegralCommRingSheafUnrestricted l E X).obj ⋙\n        forget₂ CommRingCat RingCat)) ^ (n + 1) •\n        𝟙 (((completedIntegralRestrictScalars l E X D hl m).mapHomologicalComplex\n          (.up ℤ)).obj F)) ≫\n      (((completedIntegralRestrictScalars l E X D hl m).mapHomologicalComplex\n        (.up ℤ)).map f ≫ (Functor.mapHomologicalComplexCompIso\n          i (.up ℤ)).hom.app K) = 0) :\n    QuasiIso (cokernel.desc ((⟨(PrincipalKoszulStrictReplacement.uniformizer l E X).val,\n        (PrincipalKoszulStrictReplacement.uniformizer l E X).property⟩ :\n      RingCat.sectionsSubring ((completedIntegralCommRingSheafUnrestricted l E X).obj ⋙\n        forget₂ CommRingCat RingCat)) ^ (n + 1) •\n        𝟙 (((completedIntegralRestrictScalars l E X D hl m).mapHomologicalComplex\n          (.up ℤ)).obj F))\n      (((completedIntegralRestrictScalars l E X D hl m).mapHomologicalComplex\n        (.up ℤ)).map f ≫ (Functor.mapHomologicalComplexCompIso\n          i (.up ℤ)).hom.app K) hz)",
+  "branch": "sheaf-dag",
+  "by": "V8",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.normalizedDVR_scalar_cokernel_comparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261026T083346-L-2332223",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261026T083346-L-2332223",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

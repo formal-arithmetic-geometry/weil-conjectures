@@ -1,0 +1,134 @@
+{
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "id": "def-trf-free-module-sheaf-construction",
+ "kind": "definition",
+ "title": "Sheafified free modules on arbitrary sheaves of generators",
+ "statement": "On an essentially small site, for a commutative ring sheaf $B$ and a set sheaf $E$, define $B[E]$ by module sheafification of the sectionwise free module presheaf. Its restrictions send $[s]$ to $[s|_V]$ and restrict coefficients. The generator is the sectionwise basis map followed by sheafification. For a ring map $b:B\\to B\\prime$ and a generator map $e:E\\to E\\prime$, define the simultaneous semilinear change by linear extension into the scalar-restricted target and module sheafification. The underlying-set functor uses the canonical trivial ULift of the recorded algebraic inverse-image interface. The site convention is [def-weil-pbc-sites-and-cohomology], the module sheaf category is [def-weil-sheaf-of-modules-category], free modules are [def-weil-pbc-free-module], and the module sheafification is [def-weil-presheaf-modules-sheafification].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04BL and 03CY: free presheaf construction, generator maps and module sheafification."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-free-module",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.InverseImageFreeModule",
+  "date": "2026-10-23",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Shared definition extraction to break the proof-dependency import cycle; definitions unchanged.",
+   "via": [
+    "lem-trf-geometric-inverse-image-free-module",
+    "lem-trf-topos-inverse-image-differentials",
+    "lem-trf-affine-cotangent-comparison",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sheafification of free module represents maps from a sheaf of generators",
+   "results": "SheafOfModules.freeHomEquiv, freeMap, freeFunctor use a constant indexing type; no arbitrary-generator sheaf construction.",
+   "date": "2026-10-23",
+   "verdict": "reuse current construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.freeAdjunction",
+   "results": "Presheaf-level freeAdjunction, freeAdjunction_homEquiv and freeAdjunction_unit_app supply the existing construction ingredients.",
+   "date": "2026-10-23",
+   "verdict": "reuse current construction"
+  },
+  {
+   "tool": "grep",
+   "query": "freeHomEquiv|freeAdjunction|inverseFreeModule",
+   "results": "Mathlib has presheaf free and constant-index sheaf free. Project has precisely the construction being moved, and three dependent theorem modules.",
+   "date": "2026-10-23",
+   "verdict": "move existing definitions verbatim; do not duplicate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free module sheaf on an arbitrary sheaf of sets",
+   "results": "PresheafOfModules.free/freeObj, SheafOfModules.free/freeFunctor (constant indexing type), Condensed.free and LightCondensed.free (specialized sites). Existing construction composes presheaf free with module sheafification.",
+   "date": "2026-10-23",
+   "verdict": "reuse and relocate the existing construction"
+  }
+ ],
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.FreeModuleSheafConstruction",
+  "file": "lean/Sheaf/CategoryTheory/Sites/FreeModuleSheafConstruction.lean",
+  "declaration": "CategoryTheory.SheafFreeModule.free",
+  "declarations": [
+   "CategoryTheory.SheafFreeModule.ring",
+   "CategoryTheory.SheafFreeModule.moduleSets",
+   "CategoryTheory.SheafFreeModule.free",
+   "CategoryTheory.SheafFreeModule.generatorRaw",
+   "CategoryTheory.SheafFreeModule.generator",
+   "CategoryTheory.SheafFreeModule.change",
+   "CategoryTheory.SheafFreeModule.changeSets"
+  ],
+  "statement": "def free (B : Sheaf J CommRingCat.{w}) : Sheaf J (Type w) ⥤ ringedSiteModules.{w, w, vC, uC} (ring B)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-c0b3a",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261023T131812-L-2153781",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-c0b3a",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261023T131812-L-2153781",
+  "kind": "interface",
+  "note": "independent cc review: 5 proofs of InverseImageFreeModule vs node lem-trf-geometric-inverse-image-free-module and its stated deps; moved 7 defs vs live (verbatim but tags); reader-gate compile of 5 delivered modules + importers InverseImageDifferentials, RingedSitePointFinitePresentationRetract (all clean); #print axioms (sorryAx only via X2/X3 dep holes)"
+ }
+}

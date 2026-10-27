@@ -1,0 +1,292 @@
+{
+ "id": "lem-coef-evaluation-transpose-coherence",
+ "kind": "statement",
+ "title": "Coherence of evaluation transposes under strong monoidal functors",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be symmetric monoidal closed categories [def-nagata-category] and [def-sfb-monoidal-category], with tensor $\\otimes$, internal Hom $H$, and natural adjunction bijections $\\operatorname{Hom}(T,H(K,M))\\cong\\operatorname{Hom}(T\\otimes K,M)$ whose counits are $\\mathrm{ev}$. Let $F:\\mathcal C\\to\\mathcal D$ be strong monoidal [def-sfb-strong-monoidal-functor] and compatible with the symmetries, with coherent natural isomorphisms $t_{U,V}:FU\\otimes FV\\xrightarrow{\\sim}F(U\\otimes V)$ and a unit isomorphism. For every $K,M$ let $v^F_{K,M}:FH_{\\mathcal C}(K,M)\\to H_{\\mathcal D}(FK,FM)$ be the transpose of $F(\\mathrm{ev})\\circ t_{H(K,M),K}$. Then this map is the unique arrow satisfying\n$$\\mathrm{ev}_{FK,FM}\\circ(v^F_{K,M}\\otimes1)=F(\\mathrm{ev}_{K,M})\\circ t_{H(K,M),K}.$$\nIt is natural contravariantly in $K$ and covariantly in $M$. If $a:T\\otimes K\\to M$ has transpose $a^\\sharp$, then $v^F_{K,M}\\circ F(a^\\sharp)$ is the transpose of $F(a)\\circ t_{T,K}$.\n\nWrite $\\mu:H(M,N)\\otimes H(K,M)\\to H(K,N)$ for composition characterized by two successive evaluations. For every triple one has\n$$v^F_{K,N}\\circ F(\\mu_{\\mathcal C})\\circ t_{H(M,N),H(K,M)}=\\mu_{\\mathcal D}\\circ(v^F_{M,N}\\otimes v^F_{K,M}).$$\nFor another symmetric monoidal closed category $\\mathcal E$, strong symmetric monoidal functors $G:\\mathcal D\\to\\mathcal E$, $J:\\mathcal C\\to\\mathcal E$, and a monoidal natural isomorphism $h:GF\\xrightarrow{\\sim}J$, the corresponding comparisons satisfy\n$$v^J_{K,M}\\circ h_{H(K,M)}=H_{\\mathcal E}(h_K^{-1},h_M)\\circ v^G_{FK,FM}\\circ G(v^F_{K,M}).$$\nFor the identity functor with its canonical monoidal structure, $v^{\\mathrm{id}}_{K,M}=1$. These identities do not require any $v$ to be invertible; tensor and functor associators are the specified coherent ones.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+  "place": "Proof paragraphs 4; returned proof steps 10, 11, 12; extracted argument preserved verbatim in Q07 report, not a new literature theorem"
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\Theta_{T,K,M}$ for the stipulated natural adjunction bijection and $U_{T,K,M}=\\Theta_{T,K,M}^{-1}$. In either category, naturality in $T$ applied to $1_{H(K,M)}$ gives $U(q)=\\mathrm{ev}_{K,M}\\circ(q\\otimes1_K)$. Since $U$ is a bijection it detects equality. More generally its naturality says\n$$U(H(a,b)\\circ q\\circ r)=b\\circ U(q)\\circ(r\\otimes a)$$\nfor $a:K'\\to K$, $b:M\\to M'$, $r:T'\\to T$, and $q:T\\to H(K,M)$. Indeed apply $\\Theta$ to the right side: naturality gives $H(a,b)\\circ\\Theta(U(q))\\circ r=H(a,b)\\circ q\\circ r$, and cancel $\\Theta$. These are consequences of the assumed natural bijections, with the tensor bifunctor and composition conventions of [def-sfb-monoidal-category] and [def-nagata-category].",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof, final paragraph: evaluation, associativity of tensor product and uniqueness of transpose; explicit formal calculation by Q127"
+   }
+  },
+  {
+   "text": "Put $V=H_{\\mathcal C}(K,M)$ and $e^F_{K,M}=F(\\mathrm{ev}_{K,M})\\circ t^F_{V,K}$. By definition $v^F_{K,M}=\\Theta(e^F_{K,M})$, so $U(v^F_{K,M})=e^F_{K,M}$. The evaluation formula from step 1 is exactly the claimed equation. Conversely any arrow satisfying that equation has uncurrying $e^F_{K,M}$ and therefore equals $\\Theta(e^F_{K,M})$. This proves existence and uniqueness without an invertibility assumption on $v$. The tensorator has the direction specified in [def-sfb-strong-monoidal-functor].",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof, final paragraph: evaluation, associativity of tensor product and uniqueness of transpose; explicit formal calculation by Q127"
+   }
+  },
+  {
+   "text": "For $a:T\\otimes K\\to M$, put $a^\\sharp=\\Theta(a)$, so $\\mathrm{ev}_{K,M}\\circ(a^\\sharp\\otimes1_K)=a$. Naturality of the tensorator in [def-sfb-strong-monoidal-functor] and step 2 give\n$$U(v^F_{K,M}\\circ F(a^\\sharp))=F(\\mathrm{ev}_{K,M})\\circ t^F_{V,K}\\circ(F(a^\\sharp)\\otimes1_{FK})=F(\\mathrm{ev}_{K,M}\\circ(a^\\sharp\\otimes1_K))\\circ t^F_{T,K}=F(a)\\circ t^F_{T,K}.$$\nApply $\\Theta$ to obtain the required compatibility with transposition.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof, final paragraph: evaluation, associativity of tensor product and uniqueness of transpose; explicit formal calculation by Q127"
+   }
+  },
+  {
+   "text": "For $b:M\\to M'$, let $V'=H_{\\mathcal C}(K,M')$. Naturality in step 1 gives $\\mathrm{ev}_{K,M'}\\circ(H(1_K,b)\\otimes1_K)=b\\circ\\mathrm{ev}_{K,M}$. Thus tensorator naturality [def-sfb-strong-monoidal-functor] gives\n$$U(v^F_{K,M'}\\circ F H(1_K,b))=F(b\\circ\\mathrm{ev}_{K,M})\\circ t^F_{V,K}=F(b)\\circ e^F_{K,M}=U(H(1_{FK},Fb)\\circ v^F_{K,M}).$$\nInjectivity of $U$ proves covariant naturality in $M$.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof, final paragraph: evaluation, associativity of tensor product and uniqueness of transpose; explicit formal calculation by Q127"
+   }
+  },
+  {
+   "text": "For $a:K'\\to K$, step 1 applied to evaluation gives $\\mathrm{ev}_{K',M}\\circ(H(a,1_M)\\otimes1_{K'})=\\mathrm{ev}_{K,M}\\circ(1_V\\otimes a)$. Consequently, by tensorator naturality [def-sfb-strong-monoidal-functor],\n$$U(v^F_{K',M}\\circ F H(a,1_M))=F(\\mathrm{ev}_{K,M}\\circ(1_V\\otimes a))\\circ t^F_{V,K'}=e^F_{K,M}\\circ(1_{FV}\\otimes Fa)=U(H(Fa,1_{FM})\\circ v^F_{K,M}).$$\nCancel $U$. Composing this identity with step 4, and using bifunctoriality of $H$, proves simultaneous contravariant/covariant naturality.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof, final paragraph: evaluation, associativity of tensor product and uniqueness of transpose; explicit formal calculation by Q127"
+   }
+  },
+  {
+   "text": "For composition put $A=H_{\\mathcal C}(M,N)$ and $B=H_{\\mathcal C}(K,M)$. The definition of $\\mu_{\\mathcal C}$ in the statement is precisely\n$$\\mathrm{ev}_{K,N}\\circ(\\mu_{\\mathcal C}\\otimes1_K)=\\mathrm{ev}_{M,N}\\circ(1_A\\otimes\\mathrm{ev}_{K,M})\\circ\\alpha^{\\mathcal C}_{A,B,K}.$$\nIt uniquely defines $\\mu_{\\mathcal C}$ by $\\Theta$; the same formula defines $\\mu_{\\mathcal D}$. Define $s^F=t^F_{A\\otimes B,K}\\circ(t^F_{A,B}\\otimes1_{FK})$. Its source is $(FA\\otimes FB)\\otimes FK$ and target $F((A\\otimes B)\\otimes K)$. The associativity axiom in [def-sfb-strong-monoidal-functor] is exactly\n$$F(\\alpha^{\\mathcal C}_{A,B,K})\\circ s^F=t^F_{A,B\\otimes K}\\circ(1_{FA}\\otimes t^F_{B,K})\\circ\\alpha^{\\mathcal D}_{FA,FB,FK}.$$\nThus no suppression of associators or general coherence theorem is needed.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof, final paragraph: evaluation, associativity of tensor product and uniqueness of transpose; explicit formal calculation by Q127"
+   }
+  },
+  {
+   "text": "Let $L=v^F_{K,N}\\circ F(\\mu_{\\mathcal C})\\circ t^F_{A,B}$. Uncurrying, step 2 and naturality of $t^F$ with respect to $\\mu_{\\mathcal C}$ in [def-sfb-strong-monoidal-functor] give\n$$U(L)=F(\\mathrm{ev}_{K,N})\\circ t^F_{H(K,N),K}\\circ(F(\\mu_{\\mathcal C})\\otimes1)\\circ(t^F_{A,B}\\otimes1)=F(\\mathrm{ev}_{K,N}\\circ(\\mu_{\\mathcal C}\\otimes1_K))\\circ s^F.$$\nBy step 6 this equals $F(\\mathrm{ev}_{M,N}\\circ(1_A\\otimes\\mathrm{ev}_{K,M})\\circ\\alpha^{\\mathcal C}_{A,B,K})\\circ s^F$.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof, final paragraph: evaluation, associativity of tensor product and uniqueness of transpose; explicit formal calculation by Q127"
+   }
+  },
+  {
+   "text": "Let $R=\\mu_{\\mathcal D}\\circ(v^F_{M,N}\\otimes v^F_{K,M})$. Expand $U(R)$ using the defining equation for $\\mu_{\\mathcal D}$ from step 6. Naturality of $\\alpha^{\\mathcal D}$ [def-sfb-monoidal-category], followed by the two evaluation equations from step 2, gives\n$$U(R)=F(\\mathrm{ev}_{M,N})\\circ t^F_{A,M}\\circ(1_{FA}\\otimes F(\\mathrm{ev}_{K,M}))\\circ(1_{FA}\\otimes t^F_{B,K})\\circ\\alpha^{\\mathcal D}_{FA,FB,FK}.$$\nNaturality of $t^F$ for $\\mathrm{ev}_{K,M}:B\\otimes K\\to M$ rewrites $t^F_{A,M}\\circ(1\\otimes F(\\mathrm{ev}_{K,M}))$ as $F(1_A\\otimes\\mathrm{ev}_{K,M})\\circ t^F_{A,B\\otimes K}$. Substitute the associativity equation of step 6 to obtain\n$$U(R)=F(\\mathrm{ev}_{M,N}\\circ(1_A\\otimes\\mathrm{ev}_{K,M})\\circ\\alpha^{\\mathcal C}_{A,B,K})\\circ s^F=U(L).$$\nCancel $U$ to prove the internal-Hom composition identity. Only tensor bifunctoriality, the displayed naturality equations and the associativity axiom of [def-sfb-strong-monoidal-functor] were used.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof, final paragraph: evaluation, associativity of tensor product and uniqueness of transpose; explicit formal calculation by Q127"
+   }
+  },
+  {
+   "text": "For the composite functor $P=GF$, its tensorator is $t^P_{X,Y}=G(t^F_{X,Y})\\circ t^G_{FX,FY}$; this is the specified composite monoidal structure. Put $z=v^G_{FK,FM}\\circ G(v^F_{K,M})$. Step 2 for $G$, naturality of $t^G$ [def-sfb-strong-monoidal-functor], and then step 2 for $F$ give\n$$U(z)=G(\\mathrm{ev}_{FK,FM})\\circ t^G_{H(FK,FM),FK}\\circ(G(v^F_{K,M})\\otimes1)=G(\\mathrm{ev}_{FK,FM}\\circ(v^F_{K,M}\\otimes1))\\circ t^G_{FV,FK}$$\n$$=GF(\\mathrm{ev}_{K,M})\\circ G(t^F_{V,K})\\circ t^G_{FV,FK}=P(\\mathrm{ev}_{K,M})\\circ t^P_{V,K}=U(v^P_{K,M}).$$\nTherefore $z=v^P_{K,M}$ by injectivity. The calculation uses only the tensor maps of the given strong monoidal structures.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof, final paragraph: evaluation, associativity of tensor product and uniqueness of transpose; explicit formal calculation by Q127"
+   }
+  },
+  {
+   "text": "Now let $h:P\\xrightarrow{\\sim}J$ be the stipulated monoidal natural isomorphism. Its monoidality means $t^J_{X,Y}\\circ(h_X\\otimes h_Y)=h_{X\\otimes Y}\\circ t^P_{X,Y}$. With $V=H_{\\mathcal C}(K,M)$, naturality of $h$ at $\\mathrm{ev}_{K,M}$ and step 2 give\n$$U(v^J_{K,M}\\circ h_V)\\circ(1_{PV}\\otimes h_K)=J(\\mathrm{ev}_{K,M})\\circ t^J_{V,K}\\circ(h_V\\otimes h_K)=h_M\\circ P(\\mathrm{ev}_{K,M})\\circ t^P_{V,K}=h_M\\circ U(v^P_{K,M}).$$\nOn the other hand step 1 gives\n$$U(H(h_K^{-1},h_M)\\circ v^P_{K,M})\\circ(1_{PV}\\otimes h_K)=h_M\\circ U(v^P_{K,M})\\circ(1_{PV}\\otimes h_K^{-1})\\circ(1_{PV}\\otimes h_K)=h_M\\circ U(v^P_{K,M}).$$\nThe tensor bifunctor of [def-sfb-monoidal-category] makes $1_{PV}\\otimes h_K$ invertible, with inverse $1_{PV}\\otimes h_K^{-1}$. Cancel this morphism and then $U$. Substitution of step 9 is the required formula for $h:GF\\cong J$, with the stated variance and without inverting any $v$.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof, final paragraph: evaluation, associativity of tensor product and uniqueness of transpose; explicit formal calculation by Q127"
+   }
+  },
+  {
+   "text": "For the identity functor with its canonical monoidal structure, the tensorator $t^{\\mathrm{id}}_{V,K}$ is the identity. Hence $U(v^{\\mathrm{id}}_{K,M})=\\mathrm{ev}_{K,M}=U(1_{H(K,M)})$ by steps 1 and 2. Cancel $U$ to obtain $v^{\\mathrm{id}}_{K,M}=1$. Together with steps 3--5, 8 and 10 this proves all the clauses. No dualizability, rigidity, exactness, or invertibility of the internal-Hom comparisons was used.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+    "place": "Proof, final paragraph: evaluation, associativity of tensor product and uniqueness of transpose; explicit formal calculation by Q127"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-monoidal-category",
+  "def-nagata-category",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+  "place": "Proof, last paragraph; Q127 expands uniqueness of transpose into the displayed calculations, using Stacks Tags 0FFK and 0FFL only for structural definitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Strong monoidal functor between closed monoidal categories canonical internal Hom comparison preserves evaluation composition and functor composition",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.expComparison_ev [Mathlib/CategoryTheory/Monoidal/Closed/Functor]; CategoryTheory.coev_expComparison [Mathlib/CategoryTheory/Monoidal/Closed/Functor]; CategoryTheory.expComparison [Mathlib/CategoryTheory/Monoidal/Closed/Functor]; CategoryTheory.uncurry_expComparison [Mathlib/CategoryTheory/Monoidal/Closed/Functor]; CategoryTheory.expComparison_whiskerLeft [Mathlib/CategoryTheory/Monoidal/Closed/Functor]; CategoryTheory.MonoidalClosedFunctor.comparison_iso [Mathlib/CategoryTheory/Monoidal/Closed/Functor]; CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev [Mathlib/CategoryTheory/Monoidal/Closed/Basic]; CategoryTheory.ihom.ev_naturality_assoc [Mathlib/CategoryTheory/Monoidal/Closed/Basic] No match: Closed/Functor.lean assumes CartesianMonoidalCategory; Closed/Basic.lean supplies individual currying laws, not this strong tensor-functor comparison and its composition equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor Hom transpose of image of evaluation is natural and compatible with successive strong monoidal functors",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.tensorLeftHomEquiv_naturality [Mathlib/CategoryTheory/Monoidal/Rigid/Basic]; CategoryTheory.tensorRightHomEquiv_naturality [Mathlib/CategoryTheory/Monoidal/Rigid/Basic]; CategoryTheory.tensorLeftHomEquiv_symm_naturality [Mathlib/CategoryTheory/Monoidal/Rigid/Basic]; CategoryTheory.tensorRightHomEquiv_symm_naturality [Mathlib/CategoryTheory/Monoidal/Rigid/Basic]; CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev [Mathlib/CategoryTheory/Monoidal/Closed/Basic]; CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_three [Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic]; CategoryTheory.MonoidalClosed.compTranspose [Mathlib/CategoryTheory/Monoidal/Closed/Basic]; CategoryTheory.ihom.ev_naturality [Mathlib/CategoryTheory/Monoidal/Closed/Basic] No match: Closed/Functor.lean assumes CartesianMonoidalCategory; Closed/Basic.lean supplies individual currying laws, not this strong tensor-functor comparison and its composition equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"comparison\"",
+   "results": "[loogle] OK 1 hit(s); CategoryTheory.MonoidalClosedFunctor.comparison_iso [Mathlib.CategoryTheory.Monoidal.Closed.Functor] No match: Closed/Functor.lean assumes CartesianMonoidalCategory; Closed/Basic.lean supplies individual currying laws, not this strong tensor-functor comparison and its composition equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*[Cc]omposition|[Cc]omposition.*comparison|curry.*[Ff]unctor",
+   "results": "[grep] OK 4 hit(s); Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean:39   uncurry.obj <| (Functor.postcompose₂.obj <| uncurry).obj <|; Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean:64   simp only [uncurry_natural_left, uncurry_uncurry_ihomCurry, Functor.id_obj, uncurry_id_eq_ev]; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean:162         simp only [Category.assoc, MonoidalClosed.uncurry_eq, Functor.id_obj,; Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean:84       curry_uncurry, NatTrans.naturality_assoc, functorEnrichedHom_obj, functorEnrichedHom_map, No match: Closed/Functor.lean assumes CartesianMonoidalCategory; Closed/Basic.lean supplies individual currying laws, not this strong tensor-functor comparison and its composition equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strong monoidal closed category canonical Hom comparison evaluation composition coherence",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.expComparison_ev [Mathlib.CategoryTheory.Monoidal.Closed.Functor]; CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev [Mathlib.CategoryTheory.Monoidal.Closed.Basic]; CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev_assoc [Mathlib.CategoryTheory.Monoidal.Closed.Basic]; CategoryTheory.MonoidalClosed.assoc [Mathlib.CategoryTheory.Monoidal.Closed.Basic]; CategoryTheory.monoidalComp [Mathlib.Tactic.CategoryTheory.MonoidalComp]; CategoryTheory.ExactPairing.evaluation_coevaluation [Mathlib.CategoryTheory.Monoidal.Rigid.Basic]; CategoryTheory.MonoidalClosed.enrichedCategorySelf [Mathlib.CategoryTheory.Monoidal.Closed.Enrichment]; CategoryTheory.uncurry_expComparison [Mathlib.CategoryTheory.Monoidal.Closed.Functor] No match: Closed/Functor.lean assumes CartesianMonoidalCategory; Closed/Basic.lean supplies individual currying laws, not this strong tensor-functor comparison and its composition equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|expComparison|curry.*[Ff]unctor",
+   "results": "{\"t\": \"2026-10-22T06:49:12Z\", \"tool\": \"grep\", \"query\": \"ihomComparison|expComparison|curry.*[Ff]unctor\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean\"], \"digest\": \"b9c446384b688099\"}; Read the CartesianMonoidalCategory assumptions in Closed/Functor.lean:44--48 and its evaluation formulas at 81--110. Basic.lean:150--194 gives individual adjunction identities. Rigid/Basic hits assume ExactPairing. None states all clauses for an arbitrary strong monoidal functor between symmetric monoidal closed categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strong monoidal closed functor internal hom comparison composition evaluation coherence",
+   "results": "{\"t\": \"2026-10-22T06:49:13Z\", \"tool\": \"leansearch\", \"query\": \"Strong monoidal closed functor internal hom comparison composition evaluation coherence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.expComparison_ev\", \"CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev\", \"CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev_assoc\", \"CategoryTheory.MonoidalClosed.internalHom\", \"CategoryTheory.internalHom\", \"CategoryTheory.exp.ev\", \"CategoryTheory.prod_map_pre_app_comp_ev\", \"CategoryTheory.uncurry_expComparison\"], \"digest\": \"90fa0c99340cac07\"}; Read the CartesianMonoidalCategory assumptions in Closed/Functor.lean:44--48 and its evaluation formulas at 81--110. Basic.lean:150--194 gives individual adjunction identities. Rigid/Basic hits assume ExactPairing. None states all clauses for an arbitrary strong monoidal functor between symmetric monoidal closed categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"comparison\"",
+   "results": "{\"t\": \"2026-10-22T06:49:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidalClosed\\\", \\\"comparison\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosedFunctor.comparison_iso\"], \"digest\": \"ef339676444afb4e\"}; Read the CartesianMonoidalCategory assumptions in Closed/Functor.lean:44--48 and its evaluation formulas at 81--110. Basic.lean:150--194 gives individual adjunction identities. Rigid/Basic hits assume ExactPairing. None states all clauses for an arbitrary strong monoidal functor between symmetric monoidal closed categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong monoidal functor internal Hom comparison preserves evaluation composition and monoidal natural isomorphisms",
+   "results": "{\"t\": \"2026-10-22T06:49:24Z\", \"tool\": \"leanfinder\", \"query\": \"Strong monoidal functor internal Hom comparison preserves evaluation composition and monoidal natural isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosedFunctor.comparison_iso\", \"CategoryTheory.expComparison_ev\", \"CategoryTheory.expComparison\", \"CategoryTheory.expComparison_whiskerLeft\", \"CategoryTheory.coev_expComparison\", \"CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso\", \"CategoryTheory.uncurry_expComparison\", \"CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso\"], \"digest\": \"417fbda39f987eda\"}; Read the CartesianMonoidalCategory assumptions in Closed/Functor.lean:44--48 and its evaluation formulas at 81--110. Basic.lean:150--194 gives individual adjunction identities. Rigid/Basic hits assume ExactPairing. None states all clauses for an arbitrary strong monoidal functor between symmetric monoidal closed categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor Hom transpose functoriality strong tensor functor internal composition successive functors",
+   "results": "{\"t\": \"2026-10-22T06:50:56Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor Hom transpose functoriality strong tensor functor internal composition successive functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorLeftHomEquiv_naturality\", \"CategoryTheory.tensorRightHomEquiv_naturality\", \"CategoryTheory.tensorLeftHomEquiv_symm_naturality\", \"CategoryTheory.frobeniusMorphism_mate\", \"CategoryTheory.tensorRightHomEquiv_symm_naturality\", \"CategoryTheory.MonoidalClosed.compTranspose\", \"CategoryTheory.tensorLeftHomEquiv_tensor\", \"CategoryTheory.MonoidalClosed.compTranspose_eq\"], \"digest\": \"76cc5ca721b2d13c\"}; Read the CartesianMonoidalCategory assumptions in Closed/Functor.lean:44--48 and its evaluation formulas at 81--110. Basic.lean:150--194 gives individual adjunction identities. Rigid/Basic hits assume ExactPairing. None states all clauses for an arbitrary strong monoidal functor between symmetric monoidal closed categories.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-coef-finite-hom",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof paragraphs 4; returned proof steps 10, 11, 12",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-evaluation-transpose-coherence",
+  "worker": "stage1",
+  "summary": "All coherence clauses proved by explicit uncurrying calculations from the stipulated natural adjunctions and the existing monoidal-category and strong-monoidal-functor definitions; no new nodes and no changes to the statement. Associators are retained in the internal-composition calculation, and monoidal natural-isomorphism compatibility is checked before cancelling the tensor of h_K. The live Lean contains partial comparison laws but no declaration covering all clauses.",
+  "blueprint": "thm-coef-finite-hom, proof last paragraph: evaluation compatibility, associativity and uniqueness of transpose give composition and successive coefficient changes. Steps 1--5 give uniqueness/naturality/adjunction, 6--8 give composition, 9--11 give successive functors, monoidal identification and identity."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-c9b0cf8c5",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-c9b0cf8c5 (reviewer sub-agent of L); spot-checked: Item unsplit on live and side-live. No repair note; created 2026-10-22 by Q07's re-split of thm-coef-finite-hom, whose step 4 cites it. Statement, stmt_deps and blueprint fields are unchanged; only proof fields and searches were added. No new nodes. The 11 steps cite only the Mathlib-leaf definitions def-sfb-monoidal-category, def-sfb-strong-monoidal-functor and def-nagata-category; proof_deps equals the union of step uses. There is no route issue, no tool_uses and no SGA. I redid every calculation. Step 1: naturality of the stipulated bijection. Steps 2–3: U(v)=F(ev)∘t, and F(a♯) transport via tensorator naturality with g=id. Steps 4–5: naturality in both variables, with types and variance checked. Steps 6–8: the composition identity, with the associators kept, using α^D naturality, interchange, tensorator naturality at (1,ev) and the associativity axiom exactly as in the def node. Step 9: GF composite tensorator. Step 10: monoidal-iso transport; H(h_K⁻¹,h_M) has the right variance, and only U and 1⊗h_K are cancelled, never v. Step 11: identity. All steps are short and genuinely elementary (max 959 chars). Edge cases: id functor; Z→F₂ with K=Z/2, M=Z gives non-invertible v:0→F₂, and the proof still holds. Source: master thm-coef-finite-hom.md, last proof paragraph, read; Stacks 0FFK/0FFL exist. Mathlib has only the cartesian expComparison; the project ihomComparison lemmas (WeilConjectures/Mathlib/.../Closed/Basic.lean 105–295) are partial, so there is no leaf and no attachment. Maintainer note: unsplit lem-fix-internal-hom-comparison-composition (sk-prop-sf-pf-reduction, tensor-left convention) overlaps clause 9 only; the item predates this delivery, so it is not a delivery fault."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EvaluationTransposeCoherence",
+  "declaration": "CategoryTheory.Functor.Braided.evaluationTransposeCoherence",
+  "file": "lean/Sheaf/CategoryTheory/EvaluationTransposeCoherence.lean",
+  "statement": "theorem evaluationTransposeCoherence {C : Type uC} [Category.{vC} C] [MonoidalCategory C] [SymmetricCategory C] [MonoidalClosed C] {D : Type uD} [Category.{vD} D] [MonoidalCategory D] [SymmetricCategory D] [MonoidalClosed D] {E : Type uE} [Category.{vE} E] [MonoidalCategory E] [SymmetricCategory E] [MonoidalClosed E] (F : C ⥤ D) [F.Braided] : (∀ (K M : C) (q : F.obj ((ihom K).obj M) ⟶ (ihom (F.obj K)).obj (F.obj M)), (q ▷ F.obj K ≫ (β_ ((ihom (F.obj K)).obj (F.obj M)) (F.obj K)).hom ≫ (ihom.ev (F.obj K)).app (F.obj M) = μ F ((ihom K).obj M) K ≫ F.map ((β_ ((ihom K).obj M) K).hom ≫ (ihom.ev K).app M)) ↔ q = (ihomComparison F K).natTrans.app M) ∧ (∀ {K K' M M' : C} (a : K' ⟶ K) (b : M ⟶ M'), F.map ((pre a).app M ≫ (ihom K').map b) ≫ (ihomComparison F K').natTrans.app M' = (ihomComparison F K).natTrans.app M ≫ (pre (F.map a)).app (F.obj M) ≫ (ihom (F.obj K')).map (F.map b)) ∧ (∀ {T K M : C} (a : T ⊗ K ⟶ M), F.map (curry ((β_ K T).hom ≫ a)) ≫ (ihomComparison F K).natTrans.app M = curry ((β_ (F.obj K) (F.obj T)).hom ≫ μ F T K ≫ F.map a)) ∧ (∀ (K M N : C), μ F ((ihom M).obj N) ((ihom K).obj M) ≫ F.map ((β_ ((ihom M).obj N) ((ihom K).obj M)).hom ≫ MonoidalClosed.comp K M N) ≫ (ihomComparison F K).natTrans.app N = ((ihomComparison F M).natTrans.app N ⊗ₘ (ihomComparison F K).natTrans.app M) ≫ (β_ ((ihom (F.obj M)).obj (F.obj N)) ((ihom (F.obj K)).obj (F.obj M))).hom ≫ MonoidalClosed.comp (F.obj K) (F.obj M) (F.obj N)) ∧ (∀ (G : D ⥤ E) (J : C ⥤ E) [G.Braided] [J.Braided] (h : F ⋙ G ≅ J) [NatTrans.IsMonoidal h.hom] (K M : C), h.hom.app ((ihom K).obj M) ≫ (ihomComparison J K).natTrans.app M = G.map ((ihomComparison F K).natTrans.app M) ≫ (ihomComparison G (F.obj K)).natTrans.app (F.obj M) ≫ (pre (h.inv.app K)).app (G.obj (F.obj M)) ≫ (ihom (J.obj K)).map (h.hom.app M)) ∧ (∀ (K M : C), (ihomComparison (𝟭 C) K).natTrans.app M = 𝟙 ((ihom K).obj M))",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the canonical upstream ihomComparison. Explicit symmetries render exactly the node’s evaluation on H(K,M) ⊗ K, transposition from T ⊗ K, and composition on H(M,N) ⊗ H(K,M), rather than silently reversing tensor factors."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4daefffb1",
+  "group": "Q64",
+  "result": "pass",
+  "note": "lem-coef-evaluation-transpose-coherence: the statement reuses the canonical upstream ihomComparison (mate of the tensorator). The node's right-handed evaluation, transpose and composition conventions are rendered with explicit symmetries; I checked by hand that the evaluation equation holds (braided F, symmetric category) and that β≫comp is the node's μ (symmetric coherence). Naturality, transposition, composition, h:GF≅J with H(h_K⁻¹,h_M) variance, and the identity-functor clause all match the node. No IsIso on v, independent universes, no extra instances. The node changed from live only by the lean record; the statement field is verbatim; the docstrings carry the source place, blueprint tag and 11 steps; the proof is only sorry; no new definitions or collisions. Advisory: the 'Second reading by Q64' section is a stub (direct-delivery policy, not H11). Not compiled (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261022T143143-L-978498",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Functor.Braided.evaluationTransposeCoherence"
+  ],
+  "sorry_after": []
+ }
+}

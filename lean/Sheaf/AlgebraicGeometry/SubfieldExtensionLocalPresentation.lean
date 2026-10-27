@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 public import Mathlib.CategoryTheory.Monoidal.Mod

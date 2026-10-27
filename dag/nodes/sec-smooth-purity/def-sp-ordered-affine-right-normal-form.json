@@ -1,0 +1,103 @@
+{
+ "id": "def-sp-ordered-affine-right-normal-form",
+ "kind": "definition",
+ "title": "Specified ordered affine right normal form",
+ "status": "split",
+ "statement": "Let $A$ be a finite commutative ring, $N\\geq1$ an integer with $NA=0$, and $S$ a scheme on which $N$ is invertible. Use the coordinate tower $X_0=S$, $X_{r+1}=\\mathbf A^1_{X_r}$ and $p_d:X_d\\to S$ of [def-amb-affine-trace-tower], and the ordinary small-etale finite Tate sheaves $A_T(r)=A_T(1)^{\\otimes r}$, $A_T(0)=A_T$, of [lem-asd-finite-etale-twist-line], viewed in degree zero in $D(T_{\\mathrm{et}},A)$. On the standard affine chart $j_r:X_{r+1}\\to\\mathbf P^1_{X_r}$ with projection $q_r$, put $W_{r,A}=j_r^*q_r^*(-)(1)[2]$ and $\\mathcal G_{0,A}=1$, $\\mathcal G_{r+1,A}=W_{r,A}\\mathcal G_{r,A}$. Define $G_{0,A}=1$ and, for $d>0$, $G_{d,A}=p_d^*(-)\\otimes_A^L A_{X_d}(d)[2d]$. Define the specified isomorphism $I_{d,A}:\\mathcal G_{d,A}\\xrightarrow{\\sim}G_{d,A}$ to be the identity at $d=0$, and in positive dimension the existing ordered recursive affine right normal form: compose the successive pullbacks, move them through the previous tensor and shift, use the canonical Tate pullback of [lem-asd-etale-finite-twist-pullback], append the new Tate line on the right, reassociate without permuting factors, and add the even shifts. All unit, identity-pullback and zero-shift identifications are the canonical ones. Also define the degree-zero derived Tate product $A_T(d)\\otimes_A^L A_T(1)\\xrightarrow{\\sim}A_T(d+1)$, for $d\\geq0$ and $N$ invertible on $T$, by the flat-single tensor comparison followed by the canonical ordered Tate multiplication of [lem-asd-etale-finite-twist-pullback]. These are specified composites, with no choice from the existence of an arbitrary isomorphism.",
+ "stmt_deps": [
+  "def-amb-affine-trace-tower",
+  "lem-asd-finite-etale-twist-line",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: Ordered Tate right comparisons agree with canonical scalar extension; retained affine-counit proof steps 4"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ordered affine coordinate tower right adjoint normal form as pullback tensor Tate power and even shift",
+   "results": "8 hits: CategoryTheory.PullbackShift.adjunction, CategoryTheory.Adjunction.rightAdjointCommShift, AlgHom.tensorEqualizer, CategoryTheory.PullbackShift, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, CategoryTheory.Adjunction.RightAdjointCommShift.iso', CategoryTheory.Adjunction.RightAdjointCommShift.iso, CategoryTheory.NatTrans.commShiftPullback",
+   "date": "2026-10-23",
+   "verdict": "no exact match: only generic shift, adjunction, or affine-scheme declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical ordered normal form of iterated affine-line Tate pullback functors and degree-zero Tate multiplication",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.AffineSpace.functor, AlgebraicGeometry.AffineSpace.reindex, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.over_over, AlgebraicGeometry.AffineSpace.homOfVector, AlgebraicGeometry.AffineSpace.functor_obj_map, AlgebraicGeometry.AffineSpace.isPullback_map",
+   "date": "2026-10-23",
+   "verdict": "no exact match: only generic shift, adjunction, or affine-scheme declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "orderedAffineRight|orderedTateProductIso|towerENormalForm|singleProductGeneral",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no exact match: no Mathlib declarations; project generic private towerENormalForm and singleProductGeneral are reused by specialization, not redefined"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-ordered-tate-scalar-normalization",
+  "date": "2026-10-23",
+  "group": "O2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts, iterated projective-line integration: the ordered pullback/Tate/shift right normal form used by the canonical chart comparison",
+   "via": [
+    "lem-sp-ordered-tate-scalar-normalization",
+    "lem-sp-affine-counit-scalar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean": {
+  "module": "Sheaf.Paper.OrderedAffineTraceNormalForm",
+  "declaration": "AlgebraicGeometry.Etale.orderedAffineRightIso",
+  "declarations": [
+   "AlgebraicGeometry.Etale.orderedAffineRight",
+   "AlgebraicGeometry.Etale.orderedAffineRightIso",
+   "AlgebraicGeometry.Etale.orderedTateProductIso"
+  ],
+  "file": "lean/Sheaf/Paper/OrderedAffineTraceNormalForm.lean",
+  "statement": "def orderedAffineRightIso (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) : (d : ℕ) → affineTraceRight A N hA S d ≅ orderedAffineRight A N hA S d",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bd966db1",
+  "group": "O2",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bd966db1",
+  "group": "O2",
+  "result": "pass",
+  "note": "Lean byte-identical to the returned head ddc80, whose maths was already checked; I re-checked every clause, the edge cases (d=0, N=1, empty S, nonflat φ) and the universes. H13 of both returns fixed: lem-amb-affine-space-top-trace record restored byte-identical to live. New §1(A) node def-sp-ordered-affine-right-normal-form owns orderedAffineRight, orderedAffineRightIso and orderedTateProductIso as prescribed, with the §5 fields and real bodies (identity at 0); no definition node duplicates it. Both statement fields verbatim. Theorem stmt_dep lem-pur-finite-tate-scalar-source-normalization is genuine (the item uses its IsIso clause and the .choose of the unique β; β is pinned on generators, so it agrees with reductionEtaleTateMap) → PASS on the mechanical finding. Advisories: A_d helpers owned by det-sp-reduction-exceptional and affineTraceRight by def-amb-affine-trace-construction, neither cited; module docstring cites sk-prop-an instead of the node's source place. No compile (no file changed)."
+ }
+}

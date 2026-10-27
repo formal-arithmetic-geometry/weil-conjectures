@@ -1,0 +1,317 @@
+{
+ "id": "lem-sfb-stable-labelled-isom-trait-extension",
+ "kind": "statement",
+ "title": "Unique extension of labelled stable isomorphisms over an arbitrary trait",
+ "statement": "Let $S$ be a locally Noetherian scheme [pqf-def-locnoeth], let $n\\ge0$, and let $(W,s_1,\\ldots,s_n)$ and $(W',s'_1,\\ldots,s'_n)$ be stable pointed curves over $S$ [def-sfb-stable-pointed-curve]. Fix a permutation $\\sigma$ of $\\{1,\\ldots,n\\}$. Let $R$ be any discrete valuation ring [def-sc-discrete-valuation-ring] with fraction field $K$, and let $b:\\operatorname{Spec}R\\to S$ be any morphism [def-weil-affine-spectrum]. Use fibre products [def-pc-fibre-product] to form $W_R,W'_R,W_K,W'_K$ and all pulled-back sections. Every $K$-isomorphism $u_K:W_K\\xrightarrow{\\sim}W'_K$ satisfying $u_K\\circ s_{i,K}=s'_{\\sigma(i),K}$ for all $i$ is the restriction of exactly one $R$-isomorphism $u_R:W_R\\xrightarrow{\\sim}W'_R$ satisfying $u_R\\circ s_{i,R}=s'_{\\sigma(i),R}$ for all $i$. The DVR need not be excellent or of finite type over $S$; its generic point need not map to a generic point of $S$. No smoothness of $W_K$ or $W'_K$ and no identity condition on $u_K$ are assumed. Marking equalities are equalities of section morphisms.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Agent marked and persistently nodal extension of the log-canonical common-model route motivated by Tag 0E97 (lemma-unique-stable-model). That tag assumes a smooth unmarked generic curve and does not itself state this result. Uses the already stated logarithmic reconstruction and section-lattice comparison, as in returned proof step 4 and the first half of step 5; de Jong 1997 section 3.8, printed pp.608--609."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-sfb-stable-pointed-curve",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=\\operatorname{Spec}R$, $X=W_R$, $Y=W'_R$, and relabel the target marks as $t_i=s'_{\\sigma(i),R}$. Both pulled-back families are H-projective: apply [lem-trf-projective-bundle-affine-presentations] to each bundle embedding from [def-sfb-stable-pointed-curve]. Choose a resulting open neighbourhood of the image under $b$ of the closed point of $T$. Its inverse image contains that closed point and hence all of $T$ (every prime of the local ring $R$ is contained in its maximal ideal). Thus $b$ factors through this neighbourhood. Compose the two closed embeddings there; the composite is a closed immersion by [lem-weil-pbc-closed-immersion-products], and pull back using [lem-weil-pbc-closed-immersion-base-change]. Projective space pulls back to projective space by its fibre-product definition [def-nagata-projective-space-base-change]. This gives a finite-projective-space embedding over $T$ for each family. Flatness and finite presentation follow from [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence](3). Every geometric fibre with its marked sections is the original geometric fibre for the composite geometric point into $S$, by associativity of fibre products [def-pc-fibre-product]. Consequently all nodal, reducedness, connectedness, dimension, smooth-marking and component-stability conditions in [def-sfb-stable-pointed-curve] hold over $T$. The relative smooth locus $W^{\\mathrm{sm}}\\subset W$ is open and smooth over $S$; it is the disjoint union of the opens on which its relative dimension is a fixed $n$ (locally constant by [def-sbc-smooth-morphisms]). By [lem-sbc-smooth-relative-dimension-permanence](1) each of their pullbacks to $T$, an open subscheme of $W_R$, is smooth over $T$, hence lies in the relative smooth locus of $W_R\\to T$ and contains the pulled sections; likewise for $W'$. The relabelled $u_K$ preserves every label.",
+   "uses": [
+    "lem-trf-projective-bundle-affine-presentations",
+    "def-sfb-stable-pointed-curve",
+    "lem-weil-pbc-closed-immersion-products",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-nagata-projective-space-base-change",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fibre-product",
+    "def-sbc-smooth-morphisms",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Agent assembly of the marked, persistently nodal logarithmic reconstruction and lattice-comparison prerequisites; Tag 0E97 (lemma-unique-stable-model) motivates uniqueness but assumes a smooth unmarked generic curve and is not applied."
+   }
+  },
+  {
+   "text": "A DVR is Noetherian by [def-sc-discrete-valuation-ring], so $T$ is locally Noetherian. Apply [lem-sfb-nodal-log-canonical-reconstruction] to $X/T$ and $Y/T$. Write $D_X=\\sum_i s_i(T)$, $D_Y=\\sum_i t_i(T)$ and $L_X=\\omega_{X/T}(D_X)$, $L_Y=\\omega_{Y/T}(D_Y)$. For each normalized geometric component $C$, its stated degree formula is $2g(C)-2+r_C$. This is positive: for $g=0$, stability gives $r_C\\ge3$; for $g=1$, it gives $r_C\\ge1$; for $g\\ge2$, it is at least $2$. Thus both log-dualizing modules are relatively ample, and the same node gives canonical isomorphisms $r_X:X\\simeq\\operatorname{Proj}A_X$ and $r_Y:Y\\simeq\\operatorname{Proj}A_Y$, where $A_X=\\bigoplus_{m\\ge0}H^0(X,L_X^{\\otimes m})$ and likewise for $Y$. This includes degree zero and an empty marking.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-sfb-nodal-log-canonical-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Agent assembly of the marked, persistently nodal logarithmic reconstruction and lattice-comparison prerequisites; Tag 0E97 (lemma-unique-stable-model) motivates uniqueness but assumes a smooth unmarked generic curve and is not applied."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-semistable-log-pluricanonical-lattices] to $X,Y$ and $u_K$, with the labels just fixed. Its hypotheses are exactly the projective flat finitely presented nodal families with disjoint smooth marks of step 1; it imposes neither excellence nor smoothness of the generic fibre. Generic restriction is injective in every degree, and $u_K^*$ identifies the image of $H^0(Y,L_Y^{\\otimes m})$ with that of $H^0(X,L_X^{\\otimes m})$. Thus each section on $Y$ has a unique section on $X$ with generic restriction its canonical pullback. The multiplication and unit compatibility in the cited statement makes these bijections a graded unital $R$-algebra isomorphism $\\Phi:A_Y\\xrightarrow{\\sim}A_X$.",
+   "uses": [
+    "lem-sfb-semistable-log-pluricanonical-lattices"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Agent assembly of the marked, persistently nodal logarithmic reconstruction and lattice-comparison prerequisites; Tag 0E97 (lemma-unique-stable-model) motivates uniqueness but assumes a smooth unmarked generic curve and is not applied."
+   }
+  },
+  {
+   "text": "By [prop-nagata-relative-proj-functoriality](2), $\\Phi$ gives the contravariant isomorphism $P:\\operatorname{Proj}A_X\\simeq\\operatorname{Proj}A_Y$. Define $u_R=r_Y^{-1}P r_X$. Check its generic restriction as follows. Both families are proper by [lem-kun-projective-implies-proper], hence quasi-compact and quasi-separated. The field $K$ is the localization $R[1/\\pi]$, so is flat over $R$ by [lem-weil-pbc-localization-flat]. Apply [lem-pc-flat-base-change-cohom] with $i=0$ to each $L^{\\otimes m}$: its canonical map identifies $A_X\\otimes_R K$ and $A_Y\\otimes_R K$ with the full generic section algebras. These identifications preserve multiplication, since $(s/\\pi^a)(t/\\pi^b)=st/\\pi^{a+b}$. Step 3 then says that $\\Phi\\otimes_R K$ is precisely the canonical graded pullback by $u_K$. The flat Proj base change of [prop-nagata-relative-proj-functoriality](4) identifies $P_K$ with its Proj map. The reconstruction maps restrict to the generic reconstruction maps: on a standard chart their formulas are $t/s^a\\mapsto t/s^a$, as stated in [lem-sfb-proper-ample-section-proj-reconstruction], and localization at $\\pi$ preserves these formulas. Its isomorphism-naturality gives $P_K r_{X_K}=r_{Y_K}u_K$. Substituting in the definition proves $(u_R)_K=u_K$.",
+   "uses": [
+    "prop-nagata-relative-proj-functoriality",
+    "lem-kun-projective-implies-proper",
+    "lem-pc-flat-base-change-cohom",
+    "lem-sfb-proper-ample-section-proj-reconstruction",
+    "lem-weil-pbc-localization-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Agent assembly of the marked, persistently nodal logarithmic reconstruction and lattice-comparison prerequisites; Tag 0E97 (lemma-unique-stable-model) motivates uniqueness but assumes a smooth unmarked generic curve and is not applied."
+   }
+  },
+  {
+   "text": "We verify the hypotheses for a separated-target uniqueness argument. The target $Y/T$ is proper by [lem-kun-projective-implies-proper], hence separated. The source $X$ is reduced and $X_K\\to X$ has dense image: in every local ring of the flat $R$-scheme $X$, multiplication by $\\pi$ is injective (tensor the injection $R\\xrightarrow{\\pi}R$ with a flat module). Thus the structure sheaf injects into its localization at $\\pi$. That localization is the reduced generic fibre; reducedness follows from the given geometric reducedness, since tensoring a vector space with a field extension is injective (extend a nonzero vector to a basis), and a nilpotent remains nilpotent after extension. A nilpotent local section is therefore zero, so $X$ is reduced. Every nonempty affine open meets $D(\\pi)$: otherwise $\\pi$ would be nilpotent in its ring, contradicting injectivity of multiplication by $\\pi$. Hence $X_K$ is dense. Also $T$ is reduced and $\\operatorname{Spec}K\\to T$ is dense because $R$ is a domain. These are elementary consequences of flatness and the DVR hypotheses [def-weil-flat-morphism, def-sc-discrete-valuation-ring].",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "def-weil-flat-morphism",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Agent assembly of the marked, persistently nodal logarithmic reconstruction and lattice-comparison prerequisites; Tag 0E97 (lemma-unique-stable-model) motivates uniqueness but assumes a smooth unmarked generic curve and is not applied."
+   }
+  },
+  {
+   "text": "For each $i$, the two $T$-morphisms $u_R s_i,t_i:T\\to Y$ agree after $\\operatorname{Spec}K\\to T$ by step 4 and the prescribed generic marking equations. Apply [lem-sfb-relative-separated-dominant-ext], using reducedness of $T$, density of its generic point and separatedness of $Y/T$ from step 5. It gives $u_R s_i=t_i$ as section morphisms. If $v_R$ is any other $R$-isomorphism with generic restriction $u_K$, apply that same lemma to $u_R,v_R:X\\to Y$ and the dense map $X_K\\to X$; step 5 verifies reducedness of $X$ and separatedness of the target. Thus $v_R=u_R$. Relabelling back proves the required permutation equations and uniqueness. No step used the image of the generic point of $T$ being generic in $S$.",
+   "uses": [
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Agent assembly of the marked, persistently nodal logarithmic reconstruction and lattice-comparison prerequisites; Tag 0E97 (lemma-unique-stable-model) motivates uniqueness but assumes a smooth unmarked generic curve and is not applied."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-projective-bundle-affine-presentations",
+  "def-sfb-stable-pointed-curve",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-nagata-projective-space-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pc-fibre-product",
+  "def-sbc-smooth-morphisms",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-nodal-log-canonical-reconstruction",
+  "lem-sfb-semistable-log-pluricanonical-lattices",
+  "prop-nagata-relative-proj-functoriality",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-flat-base-change-cohom",
+  "lem-sfb-proper-ample-section-proj-reconstruction",
+  "lem-weil-pbc-localization-flat",
+  "def-weil-flat-morphism",
+  "lem-sfb-relative-separated-dominant-ext"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Agent assembly of the marked, persistently nodal logarithmic reconstruction and lattice-comparison prerequisites; Tag 0E97 (lemma-unique-stable-model) motivates uniqueness but assumes a smooth unmarked generic curve and is not applied."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every generic isomorphism between projective stable marked curves over a discrete valuation ring extends uniquely over that ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.instIsMinimalMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K},\\n  WeierstrassCurve.IsMinimal R (WeierstrassCurve.minimal R W)\", \"doc\": \"For any Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the minimal Weierstrass curve obtained by applying the minimal transformation to $ W $ satisfies the m\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.mk.inj\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} {inst : CommRing R} {W' : WeierstrassCurve.Projective R}\\n  {point : WeierstrassCurve.Projective.PointClass R} {nonsingular : W'.NonsingularLift point}\\n  {point_1 : WeierstrassCurve.Projective.PointClass R} {nonsingular_1 : W'.NonsingularLift point_1},\\n  { point := point, nonsingular :\", \"doc\": \"For a commutative ring $ R $ and a projective Weierstrass curve over $ R $, if two nonsingular projective points constructed via the $\\\\mathrm{mk}$ function are equal, then their underlying projective \"}\n  {\"name\": \"WeierstrassCurve.VariableChange.ext\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"∀ {R : Type u} {inst : CommRing R} {x y : WeierstrassCurve.VariableChange R},\\n  x.u = y.u → x.r = y.r → x.s = y.s → x.t = y.t → x = y\", \"doc\": \"Two Weierstrass curve variable changes over a commutative ring $ R $ are equal if and only if their corresponding parameters $ u $ (a unit in $ R $), $ r $, $ s $, and $ t $ (elements of $ R $) are eq\"}\n  {\"name\": \"WeierstrassCurve.exists_variableChange_of_j_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ\", \"type\": \"∀ {F : Type u_1} [inst : Field F] [IsSepClosed F] (E E' : WeierstrassCurve F) [inst_2 : E.IsElliptic]\\n  [inst_3 : E'.IsElliptic], E.j = E'.j → ∃ C, C • E = E'\", \"doc\": \"If two elliptic curves over a separably closed field have the same $ j $-invariant, then there exists a variable change (isomorphism) transforming one curve into the other.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations, variable changes over fields, rational maps on dense opens, and stalk parametrizations do not extend isomorphisms of stable pointed families over a DVR"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Log canonical section rings reconstruct stable pointed curves and extend their isomorphisms over a trait",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X) ≃\\n        (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {X : AlgebraicGeometry.Scheme}\\n  {f₁ f₂ : (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })},\\n  f₁ = f₂ ↔\\n    ∃ (e : f₁.fst = f₂.fst),\\n      f₁.snd = CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.residueF\", \"doc\": \"For a scheme $X$ and points $x, y \\\\in X$, if $x = y$, then the residue fields $\\\\kappa(x)$ and $\\\\kappa(y)$ are isomorphic via the identity isomorphism on $\\\\kappa(x)$.\"}\n  {\"name\": \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  (R : CommRingCat) →\\n    [IsLocalRing ↑R] → (AlgebraicGeometry.Spec R ⟶ X) ≃ (x : ↥X) × { f // IsLocalHom (CommRingCat.Hom.hom f) }\", \"doc\": \"For any scheme $X$ and commutative local ring $R$, there is a bijection between morphisms from $\\\\operatorname{Spec}(R)$ to $X$ and pairs $(x, \\\\varphi)$, where $x$ is a point in $X$ and $\\\\varphi : \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} {f₁ f₂ : (x : ↥X) × { f // IsLocalHom (CommRingCat.Hom.hom f) }},\\n  f₁ = f₂ ↔ ∃ (h₁ : f₁.fst = f₂.fst), ↑f₁.snd = CategoryTheory.CategoryStruct.comp (X.presheaf.stalkCongr ⋯).hom ↑f₂.snd\", \"doc\": \"Two pairs consisting of a point in a scheme $X$ and a local homomorphism from the stalk at that point to a ring $R$ are equal if and only if their points are equal and their homomorphisms are related \"}\n  {\"name\": \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (R : CommRingCat) [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X),\\n  ((AlgebraicGeometry.SpecToEquivOfLocalRing X R) f).fst =\\n    (CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R)\", \"doc\": \"For any scheme $X$ and commutative local ring $R$, the first component of the bijection between morphisms $\\\\operatorname{Spec}(R) \\\\to X$ and pairs $(x, \\\\varphi)$ (where $x \\\\in X$ and $\\\\varphi: \\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.SpecToEquivOfLocalRing_symm_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (R : CommRingCat) [inst : IsLocalRing ↑R]\\n  (xf : (x : ↥X) × { f // IsLocalHom (CommRingCat.Hom.hom f) }),\\n  (AlgebraicGeometry.SpecToEquivOfLocalRing X R).symm xf =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map ↑xf.snd) (X.fromSpecStalk xf.fst)\", \"doc\": \"The inverse of the bijection between morphisms $\\\\operatorname{Spec}(R) \\\\to X$ and pairs $(x, \\\\varphi)$, where $x \\\\in X$ and $\\\\varphi : \\\\mathcal{O}_{X,x} \\\\to R$ is a local ring homomorphism, maps each \"}\n  {\"name\": \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (R : CommRingCat) [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X),\\n  ↑((AlgebraicGeometry.SpecToEquivOfLocalRing X R) f).snd = AlgebraicGeometry.Scheme.stalkClosedPointTo f\", \"doc\": \"For any scheme $X$ and commutative local ring $R$, the second component of the bijection between morphisms $\\\\operatorname{Spec}(R) \\\\to X$ and pairs $(x, \\\\varphi)$ (where $x \\\\in X$ and $\\\\varphi : \\\\math\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations, variable changes over fields, rational maps on dense opens, and stalk parametrizations do not extend isomorphisms of stable pointed families over a DVR"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Isom\", \"Valuation\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations, variable changes over fields, rational maps on dense opens, and stalk parametrizations do not extend isomorphisms of stable pointed families over a DVR"
+  },
+  {
+   "tool": "grep",
+   "query": "stable.*model|pluricanonical|stable.*curve|marked.*curve",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass equations, variable changes over fields, rational maps on dense opens, and stalk parametrizations do not extend isomorphisms of stable pointed families over a DVR"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique extension of an isomorphism of stable pointed curves over a discrete valuation ring",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphisms of stable pointed curves over the fraction field of a discrete valuation ring extend uniquely over the ring",
+   "results": "{\"t\": \"2026-10-23T04:29:49Z\", \"tool\": \"leanfinder\", \"query\": \"Isomorphisms of stable pointed curves over the fraction field of a discrete valuation ring extend uniquely over the ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.eq\", \"AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\"], \"digest\": \"75c35902b57f9acf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuative-criterion interfaces, general scheme maps and Weierstrass models do not establish stable marked nodal trait extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Isom\", \"Valuation\"",
+   "results": "{\"t\": \"2026-10-23T04:31:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Isom\\\", \\\"Valuation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuative-criterion interfaces, general scheme maps and Weierstrass models do not establish stable marked nodal trait extension"
+  },
+  {
+   "tool": "grep",
+   "query": "stable.*curve|pointed.*curve|pluricanonical",
+   "results": "{\"t\": \"2026-10-23T04:35:40Z\", \"tool\": \"grep\", \"query\": \"stable.*curve|pointed.*curve|pluricanonical\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuative-criterion interfaces, general scheme maps and Weierstrass models do not establish stable marked nodal trait extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique extension of an isomorphism between stable marked nodal curves over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-23T04:35:40Z\", \"tool\": \"leansearch\", \"query\": \"Unique extension of an isomorphism between stable marked nodal curves over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.extendIso\", \"CategoryTheory.Limits.Cocones.instIsIsoCoconeExtend\", \"AbsoluteValue.Completion.extensionEmbedding_of_comp_coe\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"AlgebraicGeometry.universallyClosed_respectsIso\", \"Isometry.extensionHom\", \"AlgebraicGeometry.UniversallyInjective.respectsIso\"], \"digest\": \"4669389228e2195a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuative-criterion interfaces, general scheme maps and Weierstrass models do not establish stable marked nodal trait extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Log canonical section algebras determine stable marked curves and their generic isomorphisms over a trait",
+   "results": "{\"t\": \"2026-10-23T04:36:39Z\", \"tool\": \"leanfinder\", \"query\": \"Log canonical section algebras determine stable marked curves and their generic isomorphisms over a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCommSq.mk.inj\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.Scheme.mk.inj\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\"], \"digest\": \"82b6278fe52b5e46\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuative-criterion interfaces, general scheme maps and Weierstrass models do not establish stable marked nodal trait extension"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-pointed-isom-finite",
+  "date": "2026-10-22",
+  "group": "Q143"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; de Jong section 3.8, last paragraph, finiteness of Isom: existence and uniqueness in every DVR test via logarithmic section lattices and Proj reconstruction (returned proof step 4 and the equalizer part of step 5).",
+   "via": [
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stable-labelled-isom-trait-extension",
+  "worker": "stage1",
+  "summary": "Q38 assembles existing logarithmic reconstruction and semistable section-lattice comparison, including the H-projective conversion over the trait, flat generic Proj comparison, marking equations and reduced-source uniqueness. No new nodes, no change of statement, and no Lean writing or compilation. Tag 0E97 is motivation only.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; de Jong section 3.8, last paragraph, finiteness of Isom: existence and uniqueness in every DVR test via logarithmic section lattices and Proj reconstruction (returned proof step 4 and the equalizer part of step 5).",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-affine-presentations",
+    "why": "Generic geometric tool used for trait preparation, reconstruction, or flat generic base change; the marked-curve route remains the existing logarithmic section-lattice comparison."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic geometric tool used for trait preparation, reconstruction, or flat generic base change; the marked-curve route remains the existing logarithmic section-lattice comparison."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic geometric tool used for trait preparation, reconstruction, or flat generic base change; the marked-curve route remains the existing logarithmic section-lattice comparison."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic geometric tool used for trait preparation, reconstruction, or flat generic base change; the marked-curve route remains the existing logarithmic section-lattice comparison."
+   },
+   {
+    "node": "prop-nagata-relative-proj-functoriality",
+    "why": "Generic geometric tool used for trait preparation, reconstruction, or flat generic base change; the marked-curve route remains the existing logarithmic section-lattice comparison."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic geometric tool used for trait preparation, reconstruction, or flat generic base change; the marked-curve route remains the existing logarithmic section-lattice comparison."
+   },
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "Generic geometric tool used for trait preparation, reconstruction, or flat generic base change; the marked-curve route remains the existing logarithmic section-lattice comparison."
+   },
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Generic flatness of localization, used for the fraction-field base change of section modules."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-products",
+    "why": "Generic composition of closed immersions, used to compose the stable curve's bundle embedding with the affine projective-bundle presentation; no node of the unit gives it."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic base change of smooth morphisms, used to show the pulled-back sections lie in the relative smooth locus over the trait; no node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-affine-presentations",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "prop-nagata-relative-proj-functoriality",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-flat-base-change-cohom",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-sbc-smooth-relative-dimension-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-2d534d294",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-2d534d294 (reviewer sub-agent of L); spot-checked: Read the item, its six steps and every cited statement in full, plus Stacks 0E97 (moduli-curves.tex lemma-unique-stable-model). 0E97 assumes a smooth unmarked generic curve and is only motivation; de Jong 1997 is absent and proof_origin=agent is correct. The statement is true and unchanged; parent lem-sfb-stable-pointed-isom-finite step 2 uses it as stated. Not duplicated by lem-sfb-labelled-stable-isom-unramified or lem-sfb-stable-pointed-generic-extension. Steps 2-6 check: positivity 2g-2+r_C>0 for g=0 (r>=3), g=1 (r>=1), g>=2; lattice node needs no stability and covers a nodal generic fibre; Proj(Phi) direction correct; flat base change at i=0 with K=R[1/pi]; generic agreement via chart formula and naturality of lem-sfb-proper-ample-section-proj-reconstruction; X reduced with X_K dense by an elementary flatness argument (no normality assumed); relative-separated-dominant-ext applied twice with hypotheses met. Two repairs in step 1. C1: composition of closed immersions was uncited; now cites lem-weil-pbc-closed-immersion-products. C4/E1: lem-trf-semistable-marked-base-change was cited for smooth-locus pullback without checking its semistable-pair hypotheses (D etale closed immersion); replaced by lem-sbc-smooth-relative-dimension-permanence(1) plus def-sbc-smooth-morphisms (smooth locus split by locally constant relative dimension). proof_deps equals the union of uses; tool_uses updated. Batch 5: lem-trf-projective-bundle-affine-presentations is generic projective geometry, accepted. lem-trf-semistable-marked-base-change is removed by the fix. The reconstruction and lattice nodes reach only def-trf-nodal-dualizing-datum, a general lci dualizing definition. None is a trace-formula or Poincare-duality statement or proof step. No cycle, no SGA source.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StableLabelledIsomTraitExtension",
+  "declaration": "AlgebraicGeometry.existsUnique_stable_labelled_isom_trait_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/StableLabelledIsomTraitExtension.lean",
+  "statement": "theorem existsUnique_stable_labelled_isom_trait_extension {S W W' : Scheme.{u}} [IsLocallyNoetherian S] (f : W ⟶ S) (f' : W' ⟶ S) (n : ℕ) (s : Fin n → (S ⟶ W)) (s' : Fin n → (S ⟶ W')) (hs : ∀ i, s i ≫ f = 𝟙 S) (hs' : ∀ i, s' i ≫ f' = 𝟙 S) (hstable : IsStablePointedCurve f s hs) (hstable' : IsStablePointedCurve f' s' hs') (σ : Equiv.Perm (Fin n)) (R K : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field K] [Algebra R K] [IsFractionRing R K] (b : Spec (.of R) ⟶ S) (uK : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).obj ((Over.pullback b).obj (Over.mk f)) ≅ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).obj ((Over.pullback b).obj (Over.mk f'))) (hmarks : ∀ i : Fin n, (pullback.snd f b).baseChangeSection (f.baseChangeSection (s i) (hs i) b) (f.baseChangeSection_snd (s i) (hs i) b) (Spec.map (CommRingCat.ofHom (algebraMap R K))) ≫ uK.hom.left = (pullback.snd f' b).baseChangeSection (f'.baseChangeSection (s' (σ i)) (hs' (σ i)) b) (f'.baseChangeSection_snd (s' (σ i)) (hs' (σ i)) b) (Spec.map (CommRingCat.ofHom (algebraMap R K)))) : ∃! uR : (Over.pullback b).obj (Over.mk f) ≅ (Over.pullback b).obj (Over.mk f'), (∀ i : Fin n, f.baseChangeSection (s i) (hs i) b ≫ uR.hom.left = f'.baseChangeSection (s' (σ i)) (hs' (σ i)) b) ∧ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).mapIso uR = uK",
+  "branch": "sheaf-dag",
+  "by": "Q97",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96d44f335",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: IsLocallyNoetherian S; IsStablePointedCurve for both families (body read); Equiv.Perm (Fin n); arbitrary DVR R with IsFractionRing K and no excellence or finite-type assumption; arbitrary b; W_R/W_K formed canonically by iterated Over.pullback with pulled-back sections via baseChangeSection; ∃! R-iso in Over (Spec R) with marking equations and mapIso uR = uK. Edge cases n=0, any characteristic, non-generic image of the generic point, one universe u forced by Spec. Only the lean field was added to the node record and lean.statement is verbatim in the file. No definitions, proof is sorry only, docstrings carry source, blueprint tag and six steps; imports are the existing proof-dependency modules. No duplicate declaration found. Not recompiled since nothing changed. Advisory: the report's second-reading section says no worker second reading was done (dispatcher policy), not treated as H11."
+ }
+}

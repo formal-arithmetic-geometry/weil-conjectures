@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-finite-iff-integral-lft], the finite morphism $\\pi$ is integral. By [pqf-lem-integral-univclosed], it is universally closed and hence closed. Put $C=Z\\setminus U$. This is closed and $y\\notin\\pi(C)$: a point of $C$ mapping to $y$ would equal $z$, whereas $z\\in U$. Thus $V=Y\\setminus\\pi(C)$ is an open neighbourhood of $y$. If $w\\in\\pi^{-1}(V)$ were outside $U$, then $\\pi(w)\\in\\pi(C)$, a contradiction. This proves the neighbourhood assertion.",
+   "text": "A finite morphism is integral by [lem-weil-pbc-finite-iff-integral-lft] and therefore universally closed by [pqf-lem-integral-univclosed]. Given an open U containing z, take V to be the complement of the closed image of Z minus U. A point outside U mapping to pi(z) must equal z by the singleton-fibre hypothesis, a contradiction. Hence V contains pi(z) and its inverse image lies in U.",
    "uses": [
     "lem-weil-pbc-finite-iff-integral-lft",
     "pqf-lem-integral-univclosed"
@@ -24,66 +24,36 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 05B8 (lemma-finite-morphism-single-point-in-fibre), proof of assertions (1) and (4)."
+    "place": "Tag 05B8, lemma-finite-morphism-single-point-in-fibre, proof of (1) and the final alternative proof of (4)."
    }
   },
   {
-   "text": "To prove the module assertion, take any affine open neighbourhood $V_0$ of $y$. By [def-weil-finite-integral-morphism] and [pqf-def-affine-morphism], $W=\\pi^{-1}(V_0)$ is affine and the ring map $A=\\mathcal O_Y(V_0)\\to B=\\mathcal O_Z(W)$ is finite. Use [lem-weil-pbc-affine-open-spec-points] on $V_0$ and $W$ to represent $y,z$ by primes $\\mathfrak p,\\mathfrak q$. A point lies above $y$ precisely when its corresponding prime contracts to $\\mathfrak p$: the point prime consists of sections whose germs lie in the maximal ideal, and the stalk maps of a scheme morphism are local. The singleton-fibre hypothesis therefore makes $\\mathfrak q$ the unique prime of $B$ above $\\mathfrak p$.",
-   "uses": [
-    "def-weil-finite-integral-morphism",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-affine-open-spec-points"
-   ],
-   "elementary": false,
+   "text": "Use the alternative stalk proof explicitly given at the end of Stacks Tag 05B8. Every element of G_z is the germ of a section s on some U containing z. Step 1 supplies V with inverse image contained in U. Restrict s to this inverse image; its pushforward germ maps to the original germ by stalkPushforward_germ_apply and germ_res_apply. For injectivity represent two pushforward stalk elements on target neighbourhoods U and V. Equality after stalkPushforward means their source sections agree on a neighbourhood W of z, by the filtered-colimit germ_eq criterion. Use Step 1 to obtain Q with inverse image inside W, and intersect Q with U and V. On this intersection the two pushforward sections agree, since restriction maps compose and maps between opens are unique. Thus their germs agree. This proves bijectivity and hence IsIso in AddCommGrpCat, without quasi-coherence.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 05B8 (lemma-finite-morphism-single-point-in-fibre), proof of assertions (1) and (4)."
+    "place": "Tag 05B8, lemma-finite-morphism-single-point-in-fibre, proof of (1) and the final alternative proof of (4)."
    }
   },
   {
-   "text": "Set $M=\\mathcal G(W)$. Since $\\pi$ is affine, clause (1) of [lem-weil-pbc-affine-pushforward-base-change] says $\\pi_*\\mathcal G$ is quasi-coherent (take the auxiliary base change to be the identity). Apply [lem-sbc-affine-module-germ-localization] to this module on $V_0$, and to $\\mathcal G$ on $W$. Using $(\\pi_*\\mathcal G)(V_0)=M$, these identify their actual germ maps with localization maps from $M$: at $y$ one inverts $A\\setminus\\mathfrak p$, and at $z$ one inverts $B\\setminus\\mathfrak q$. Explicitly the resulting identifications are $(\\pi_*\\mathcal G)_y\\cong M\\otimes_A A_{\\mathfrak p}$ and $\\mathcal G_z\\cong M_{\\mathfrak q}$. The map $m\\otimes(a/s)\\mapsto am/s$ and its inverse $m/s\\mapsto m\\otimes(1/s)$ give the tensor description directly from [def-weil-pbc-module-localization] and [def-weil-pbc-module-tensor-product].",
-   "uses": [
-    "lem-weil-pbc-affine-pushforward-base-change",
-    "lem-sbc-affine-module-germ-localization",
-    "def-weil-pbc-module-localization",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": false,
+   "text": "Represent a target-ring stalk scalar by a section r on U, and the pushforward-module stalk element by a section m on a smaller V contained in U. Restrict r to V. The module germ_smul identity identifies their stalk scalar product with the germ of the sectionwise scalar product. The pushforward action on m is multiplication by pi.app(V)(r). Apply stalkPushforward_germ_apply to both module germs, then germ_smul on the source, and Scheme.Hom.germ_stalkMap_apply to the scalar germ. The resulting equality is exactly scalar compatibility along pi.stalkMap(z). This is the canonical map in the original statement; no choice of a stalk isomorphism is made.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 05B8 (lemma-finite-morphism-single-point-in-fibre), proof of assertions (1) and (4)."
-   }
-  },
-  {
-   "text": "Apply [lem-trf-unique-prime-localization] with the finite ring map and unique prime of Step 2. Its module comparison is an isomorphism $M\\otimes_A A_{\\mathfrak p}\\to M_{\\mathfrak q}$. Through Step 3 it sends $m_y/s_y$ to $m_z/(\\pi^\\sharp s)_z$ for $m\\in M$ and $s\\in A\\setminus\\mathfrak p$. The canonical pushforward-to-source germ map sends $m_y$ to $m_z$ and commutes with multiplication by germs of sections of $A$, so it has exactly this fraction formula. Every element is such a fraction, proving equality with the canonical map. Finally [lem-weil-pbc-affine-open-stalk-localization](c) identifies $\\mathcal O_{Y,y}$ with $A_{\\mathfrak p}$ through $a/s\\mapsto a_y/s_y$; the same formula for the ring-sheaf map identifies its action on $\\mathcal G_z$ with restriction along $\\pi_z^\\sharp$. Thus the canonical isomorphism is linear for exactly the action stated in the item.",
-   "uses": [
-    "lem-trf-unique-prime-localization",
-    "lem-weil-pbc-affine-open-stalk-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 05B8 (lemma-finite-morphism-single-point-in-fibre), proof of assertions (1) and (4)."
+    "place": "Tag 05B8, lemma-finite-morphism-single-point-in-fibre, proof of (1) and the final alternative proof of (4)."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-finite-integral-morphism",
-  "def-weil-pbc-module-localization",
-  "def-weil-pbc-module-tensor-product",
-  "lem-sbc-affine-module-germ-localization",
-  "lem-trf-unique-prime-localization",
-  "lem-weil-pbc-affine-open-spec-points",
-  "lem-weil-pbc-affine-open-stalk-localization",
-  "lem-weil-pbc-affine-pushforward-base-change",
   "lem-weil-pbc-finite-iff-integral-lft",
-  "pqf-def-affine-morphism",
   "pqf-lem-integral-univclosed"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 05B8, lemma-finite-morphism-single-point-in-fibre, assertions (1) and (4)."
+  "place": "Tag 05B8, lemma-finite-morphism-single-point-in-fibre, proof of (1) and the final alternative proof of (4)."
  },
  "mathlib_searches": [
   {
@@ -261,11 +231,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-affine-pushforward-base-change",
-  "lem-weil-pbc-affine-open-spec-points",
-  "lem-weil-pbc-affine-open-stalk-localization"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -292,5 +258,26 @@
   "result": "pass",
   "note": "Statement matches node and Stacks 05B8 (1),(4): IsFinite, full point-fibre singleton, neighbourhood clause with same quantifier order, only IsQuasicoherent, canonical Mathlib stalkPushforward with IsIso and linearity along π.stalkMap z (stalk module instances agree). No extra hypotheses, single universe u, edge cases covered, no existing equivalent found. Single sorry theorem, source and blueprint docstrings with proof steps, lean.statement verbatim, node changed only in lean, report has Worker report and Second reading sections. nt_compile --json rc=0 in 3.3 s, no warnings; #check confirms the elaborated type. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261023T124446-L-1404070",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,192 @@
+{
+ "id": "lem-sfb-finite-free-ordinary-chain-comparison",
+ "kind": "statement",
+ "title": "Ordinary signed scalar-dual chain comparison and finite-basis inverse",
+ "statement": "For the concrete native scalar chart of a bounded finite free scalar complex P, its scalar dual admits the normalized chain isomorphism kappa to ordinary sheaf Hom into the coefficient unit complex. For every unbounded native target F, there is a natural chain isomorphism epsilon from the section total tensor with that scalar dual to ordinary Hom from the section chart P. It factors through totalComparison, tensor with kappa, and the generator-normalized ordinary evaluation. Its inverse is the sum over source degrees b in [-h,-l] and every supplied finite basis of P^(-b), sending f to the sum of f(e_j) tensor e_j^*. The full quantifiers and concrete formula are in lean.statement below. No derived localization, K-flatness or Hom quasi-isomorphism invariance is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JH and 08JJ; finite-free dual calculation and evaluation localization."
+ },
+ "stmt_deps": [
+  "def-sfb-finite-free-dual-chain-models",
+  "def-pur-hom-complex",
+  "def-sfb-ringed-ordinary-evaluation-models"
+ ],
+ "proof": [
+  {
+   "text": "Use the reconstruction counit to identify the section chart with scalarPerfectComplex in the actual site and coefficient universes. A constant scalar rank-one module sheafifies to the constant ring: its map is the ring sheafification unit, which is locally bijective. Extension sends this module to the coefficient unit by multiplication. Additivity and the finite-product comparison then identify the realization of every chosen finite scalar basis with a finite power of the coefficient unit. The construction includes the empty product.",
+   "uses": [
+    "lem-sfb-scalar-perfect-chart-finite-free",
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree b use scalar dual coordinates Hom_A(P^(-b),A). Define evaluation on balanced local generators by (r tensor phi)(r-prime tensor x)=r*r-prime*alpha(phi(x)). It is additive in each argument and balanced over the constant scalar ring; the module sheafification adjunction extends it first through constant-module sheafification and then through extension sheafification. On a finite scalar basis its inverse sends a local functional f to the sum of f(1 tensor e_j) tensor e_j-star. Expanding x and phi in the two dual bases proves both inverse identities; the same reasoning proves independence of the basis and compatibility with restriction. Naturality under a scalar linear map follows by evaluating each composite on a local scalar generator.",
+   "uses": [
+    "lem-sfb-scalar-perfect-dual-realization",
+    "lem-sfb-constant-finite-free-presentation-extension",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar coordinate differential is (-1)^(b+1) precomposition with d_P. Naturality of evaluation shows that the degreewise scalar evaluation isomorphisms commute with the signed dual differential. Identify that signed sheaf dual with the ordinary Hom product into the coefficient unit in degree zero, whose only nonzero target factor is zero. This gives kappa with its specified scalar generator formula.",
+   "uses": [
+    "lem-sfb-scalar-perfect-dual-realization",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a target term N, evaluation from N tensor the dual finite free term to sheaf Hom has inverse the finite dual-basis sum. Apply bounded evaluation assembly, then tensor with kappa and the native section total comparison. The component in degrees a,b supported at source degree -b sends y tensor phi to x maps to phi(x)y. Every other source component is zero. The tensor and Hom differentials agree since (-1)^(a+b+1)=-(-1)^(a+b). Only source degrees in the original finite interval survive, even for an unbounded target. For the inverse, sum the termwise dual-basis inverse over b in [-h,-l]; both composites are identities by the finite biproduct identities and the two dual-basis expansions. These same component formulas prove target naturality.",
+   "uses": [
+    "lem-sfb-ringed-site-bounded-evaluation-assembly",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scalar-perfect-chart-finite-free",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-scalar-perfect-dual-realization",
+  "lem-sfb-constant-finite-free-presentation-extension",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-hom",
+  "def-pur-hom-complex",
+  "lem-sfb-ringed-site-bounded-evaluation-assembly",
+  "lem-pe-internal-section-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "E5 stage 3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JH and 08JJ, parent proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded finite free complex sheaf tensor dual internal Hom chain evaluation isomorphism",
+   "results": "['LightCondensed.ihomPoints', 'LightCondensed.ihomPoints_symm_comp', 'LightCondensed.ihomPoints_symm_apply', 'SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply', 'ModuleCat.ihom_ev_app', 'SheafOfModules.freeHomEquiv_symm_comp', 'LightCondensed.ihomPoints_apply', 'LightCondensed.free_internallyProjective_iff_tensor_condition']; digest 9c012544b2a256da",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Dual\", \"TensorProduct\"",
+   "results": "['TensorProduct.AlgebraTensorModule.dualDistrib', 'TensorProduct.AlgebraTensorModule.dualDistrib_apply']; digest 4bdfe90b540ff384",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorHomEquiv|evaluationTranspose|finiteFreeDualChainComparison",
+   "results": "['Mathlib/RepresentationTheory/Intertwining.lean', 'Mathlib/RepresentationTheory/FDRep.lean', 'Mathlib/RepresentationTheory/FDRep.lean', 'Mathlib/LinearAlgebra/TensorProduct/Associator.lean', 'Mathlib/LinearAlgebra/Trace.lean', 'Mathlib/LinearAlgebra/Trace.lean', 'Mathlib/LinearAlgebra/Trace.lean', 'Mathlib/LinearAlgebra/Trace.lean']; digest 6fb8893bf6333529",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite free scalar extension functor is additive and bounded finite free complex tensor dual internal Hom evaluation comparison",
+   "results": "['ModuleCat.ihom_ev_app', 'LightCondensed.free_internallyProjective_iff_tensor_condition', \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", 'FGModuleCat.FGModuleCatEvaluation', \"FGModuleCat.FGModuleCatEvaluation_apply'\", 'FGModuleCat.FGModuleCatEvaluation_apply', 'CategoryTheory.IsGrothendieckAbelian.tensorObj', 'ModuleCat.ihom_coev_app']; digest 4d82feb4a37a36ad",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Additive",
+   "results": "['CategoryTheory.Functor.instAdditiveId', 'CategoryTheory.Functor.Additive', 'CategoryTheory.Functor.hasZeroObject_of_additive', 'CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive', 'CategoryTheory.Functor.preservesFiniteProductsOfAdditive', 'CategoryTheory.AdditiveFunctor.of', 'CategoryTheory.Functor.fullSubcategoryInclusion_additive', 'CategoryTheory.Functor.inducedFunctor_additive']; digest 8e280f0dc00ec864",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*dual.*(comparison|evaluation)|evaluation.*finite.*free",
+   "results": "[]; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinary.*[Ee]valuation.*[Ll]ocalization|[Ff]inite.*[Ff]ree.*[Cc]hain",
+   "results": "[]; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homComplex\", \"tensor\"",
+   "results": "[]; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localize a natural ordinary tensor dual evaluation isomorphism into the native derived tensor Hom adjunction preserving the evaluation counit",
+   "results": "['CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation', 'CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation', 'ModuleCat.ihom_ev_app', 'CategoryTheory.tensorLeftHomEquiv', 'CategoryTheory.tensorRightHomEquiv_tensor', 'CategoryTheory.tensorLeftHomEquiv_tensor', 'CategoryTheory.tensorRightHomEquiv', 'CategoryTheory.tensorLeftHomEquiv_whiskerLeft_comp_evaluation']; digest 0d18f9e1ff340c9d",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a bounded finite free sheaf complex tensor with its signed dual is the ordinary Hom complex with finite basis inverse",
+   "results": "['dualTensorHomEquivOfBasis', 'dualTensorHomEquiv', 'lTensorHomEquivHomLTensor', 'Module.dual_free', 'PiTensorProduct.dualDistribEquivOfBasis', 'HomologicalComplex.tensorObj', 'PiTensorProduct.dualDistribInvOfBasis', 'PiTensorProduct.dualDistribEquiv']; digest f0094a621a922225",
+   "date": "2026-10-23",
+   "verdict": "No exact match for normalized sheaf-complex evaluation. Ordinary algebra and monoidal ingredients are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeDualChainComparison",
+  "date": "2026-10-24",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-tensor-product",
+   "place": "First paragraph: finite-free local evaluation calculation; Ordinary signed scalar-dual chain comparison and finite-basis inverse",
+   "via": [
+    "lem-sfb-finite-free-dual-chain-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFreeOrdinaryChainComparison",
+  "file": "lean/Sheaf/Paper/FiniteFreeOrdinaryChainComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteFreeDualComparison.finiteFreeOrdinaryChainComparison",
+  "statement": "theorem finiteFreeOrdinaryChainComparison\n    (P : CochainComplex (ModuleCat.{u + 1} A) ℤ)\n    (hfinite : ∀ i : ℤ, Module.Finite A (P.X i))\n    (hfree : ∀ i : ℤ, Module.Free A (P.X i))\n    (l h : ℤ) (hbounded : ∀ i : ℤ, i < l ∨ h < i → IsZero (P.X i)) :\n    ∃ κ : (complexForward Λ X).obj (chart Λ X A α (scalarDual A P)) ≅\n        homComplex.{u + 1, u, u + 1, u + 1} (R := ring Λ X) ((complexForward Λ X).obj (chart Λ X A\n          α P))\n          (ringedTensorUnitComplex.{u + 1, u, u} (Scheme.ProEt.topology X) (ring Λ X)),\n    (∀ (b : ℤ) (U : X.ProEtᵒᵖ) (r r' : (ring Λ X).obj.obj U)\n      (z : (scalarDual A P).X b) (x : P.X (-b)),\n      ringedOrdinaryDualValue.{u + 1, u, u} (Scheme.ProEt.topology X) (ring Λ X)\n        ((complexForward Λ X).obj (chart Λ X A α P)) b (-b) (neg_add_cancel b) U\n        ((κ.hom.f b).val.app U (scalarSection Λ X A α _ U r z))\n        (scalarSection Λ X A α _ U r' x) =\n          r * r' * scalar Λ X A α U ((CategoryTheory.ScalarPerfectDual.coordinates A P b).hom\n            z x)) ∧\n    ∃ ε : ∀ F : CochainComplex (Internal Λ X) ℤ,\n        (complexForward Λ X).obj\n            (internalTotalTensor Λ X F (chart Λ X A α (scalarDual A P))) ≅\n          homComplex.{u + 1, u, u + 1, u + 1} (R := ring Λ X) ((complexForward Λ X).obj (chart Λ X\n            A α P))\n            ((complexForward Λ X).obj F),\n    (∀ F : CochainComplex (Internal Λ X) ℤ,\n      ∃ aEF : (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology X) (ring Λ X)).obj\n          ((complexForward Λ X).obj F,\n            homComplex.{u + 1, u, u + 1, u + 1} (R := ring Λ X) ((complexForward Λ X).obj (chart Λ\n              X A α P))\n              (ringedTensorUnitComplex.{u + 1, u, u} (Scheme.ProEt.topology X) (ring Λ X))) ⟶\n            homComplex.{u + 1, u, u + 1, u + 1} (R := ring Λ X) ((complexForward Λ X).obj (chart Λ\n              X A α P))\n              ((complexForward Λ X).obj F),\n        RingedOrdinaryEvaluationFormula.{u + 1, u, u} (Scheme.ProEt.topology X) (ring Λ X)\n          ((complexForward Λ X).obj (chart Λ X A α P)) ((complexForward Λ X).obj F) aEF ∧\n        (ε F).hom = (totalComparison Λ X F (chart Λ X A α (scalarDual A P))).hom ≫\n          (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology X) (ring Λ X)).map\n            (𝟙 ((complexForward Λ X).obj F), κ.hom) ≫ aEF) ∧\n    (∀ {F G : CochainComplex (Internal Λ X) ℤ} (f : F ⟶ G),\n      (complexForward Λ X).map (tensorTargetMap Λ X A α P f) ≫ (ε G).hom =\n        (ε F).hom ≫ ((homComplexFunctor.{u + 1, u, u + 1, u + 1} (R := ring Λ X)).obj\n          (op ((complexForward Λ X).obj (chart Λ X A α P)))).map\n            ((complexForward Λ X).map f)) ∧\n    (∀ (F : CochainComplex (Internal Λ X) ℤ) (n : ℤ) (U : X.ProEtᵒᵖ)\n      (f : ((homComplex.{u + 1, u, u + 1, u + 1} (R := ring Λ X)\n        ((complexForward Λ X).obj (chart Λ X A α P)) ((complexForward Λ X).obj F)).X n).val.obj U)\n      (ι : ℤ → Type (u + 1)) [∀ b : ℤ, Fintype (ι b)]\n      (e : ∀ b : ℤ, Module.Basis (ι b) A (P.X (-b))),\n      ((totalComparison Λ X F (chart Λ X A α (scalarDual A P))).hom.f n).val.app U\n          (((ε F).inv.f n).val.app U f) =\n        ∑ b : ↥(Finset.Icc (-h) (-l)), ∑ j : ι b.val,\n          coefficientTensorGenerator.{u, u + 1, u} (Scheme.ProEt.topology X) (ring Λ X)\n            ((complexForward Λ X).obj F)\n            ((complexForward Λ X).obj (chart Λ X A α (scalarDual A P)))\n            (n - b.val) b.val n (by omega) U\n            (ringedOrdinaryHomValue.{u + 1, u, u} (Scheme.ProEt.topology X) (ring Λ X)\n              ((complexForward Λ X).obj (chart Λ X A α P)) ((complexForward Λ X).obj F)\n              n (-b.val) (n - b.val) (by omega) U f\n              (scalarSection Λ X A α _ U 1 (e b.val j)))\n            (scalarSection Λ X A α _ U 1\n              ((CategoryTheory.ScalarPerfectDual.coordinates A P b.val).inv\n                ((e b.val).coord j))))",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-8d2b4",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261023T230956-L-3523151",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-8d2b4",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261023T230956-L-3523151",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs live clone (identical); relocated 12 defs vs live item block (verbatim, realization_additive now proved); new sorry statements vs RingedOrdinaryEvaluationFormula signs and the parent conclusion clauses; node lean.statement vs Lean text"
+ }
+}

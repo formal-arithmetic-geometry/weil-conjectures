@@ -1,0 +1,208 @@
+{
+ "id": "lem-sfb-ultrametric-component-map-extension",
+ "kind": "statement",
+ "title": "Continuous ultrametric functions extend across a component homeomorphism",
+ "statement": "Let $Y,Z$ be topological spaces and $i:Y\\to Z$ a continuous map. For a space $T$, let $q_T:T\\to\\pi_0(T)$ be its quotient by belonging to the same connected component (maximal connected subset), with the quotient topology. Suppose $h:\\pi_0(Y)\\to\\pi_0(Z)$ is a homeomorphism with $h\\circ q_Y=q_Z\\circ i$. Let $A$ be a field [def-weil-field] with a multiplicative absolute value and metric $d(a,b)=|a-b|$, and assume $|a+b|\\leq\\max(|a|,|b|)$. Then $A$ is totally disconnected: every connected subset has at most one point. For $T=Y$ and $T=Z$, every continuous $f:T\\to A$ has a unique continuous factor $\\bar f:\\pi_0(T)\\to A$ with $f=\\bar f\\circ q_T$. Give $C(T,A)$ its pointwise ring operations. The actual precomposition map $i^*:C(Z,A)\\to C(Y,A)$, $g\\mapsto g\\circ i$, is a ring isomorphism whose inverse is $E_i(f)=\\bar f\\circ h^{-1}\\circ q_Z$. This holds for empty spaces and for the trivial absolute value, without completeness, local compactness or compactness of $Y,Z$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12, last paragraph (factorization through components); agent ultrametric separation and inverse-composition argument of returned parent proof steps 5-6, generalized to topological spaces."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "The identity $a-c=(a-b)+(b-c)$ gives $d(a,c)\\leq\\max(d(a,b),d(b,c))$. Apply [lem-sfb-ultrametric-space-totally-disconnected] to this genuine metric on $A$. It follows that every connected subset of $A$ has at most one point. The leaf requires neither completeness nor nontriviality of the absolute value.",
+   "uses": [
+    "lem-sfb-ultrametric-space-totally-disconnected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, totally disconnected target hypothesis; agent absolute-value specialization of the general Mathlib ultrametric-space result."
+   }
+  },
+  {
+   "text": "For each $T\\in\\{Y,Z\\}$ apply [lem-sfb-continuous-connected-component-lift] with $B=A$. Step 1 verifies its only target hypothesis; $T$ is arbitrary. It gives the unique continuous factor $\\bar f$ with $\\bar f q_T=f$, and supplies continuity and surjectivity of $q_T$. These are precisely the quotient and factorization assertions required here.",
+   "uses": [
+    "lem-sfb-continuous-connected-component-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, final proof paragraph; arbitrary-space form in Continuous.connectedComponentsLift and its continuity, composite and uniqueness theorems."
+   }
+  },
+  {
+   "text": "The pointwise operations preserve continuity. Indeed addition satisfies $|(x\\prime+y\\prime)-(x+y)|\\leq\\max(|x\\prime-x|,|y\\prime-y|)$, negation is an isometry, and constants are continuous. For multiplication, put $M=1+|x|+|y|$ and choose $0<\\delta<\\min(1,\\epsilon/M)$. If both input differences are $<\\delta$, then $|x\\prime|\\leq\\max(|x|,1)\\leq M$ and $|x\\prime y\\prime-xy|\\leq\\max(|x\\prime|\\,|y\\prime-y|,|y|\\,|x\\prime-x|)<\\epsilon$. The pointwise ring laws are those of $A$. Thus $i^*(g)=g\\circ i$ is a ring homomorphism: continuity follows by composition and preservation of $0,1,+,\\cdot$ follows by evaluation at each point.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent elementary metric inequalities and pointwise ring calculation, supplementing Lemma 4.2.12."
+   }
+  },
+  {
+   "text": "Define $E_i(f)=\\bar f h^{-1}q_Z$; it is continuous by step 2 and continuity of $h^{-1}$. The equation $q_Zi=hq_Y$ gives $i^*E_i(f)=\\bar f h^{-1}hq_Y=f$. If $g\\in C(Z,A)$ and $f=g i$, then $(\\bar g h)q_Y=\\bar g q_Zi=g i=f$. Uniqueness in step 2 gives $\\bar f=\\bar g h$, whence $E_i(i^*g)=\\bar g h h^{-1}q_Z=g$. Therefore $i^*$ is a bijective ring homomorphism and $E_i$ is its inverse. Its inverse preserves ring operations since applying the injective ring map $i^*$ to each required equality reduces it to that equality in $C(Y,A)$. No point was chosen: for empty $Y$ the homeomorphism forces empty $Z$, and both function rings have one element. The trivial absolute value gives a discrete genuine metric, so all preceding arguments still apply.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent inverse-composition and uniqueness calculation, generalizing the component-factorization argument of Lemma 4.2.12."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ultrametric-space-totally-disconnected",
+  "lem-sfb-continuous-connected-component-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12 final paragraph motivates the component route; arbitrary-space ultrametric specialization and explicit inverse ring-map verification by Q37 using the two cited Mathlib leaves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous map inducing a homeomorphism on connected component quotients gives a ring equivalence on continuous functions into an ultrametric normed field",
+   "results": "[leanfinder] OK 8 hit(s); LocallyConstant.congrLeftRingEquiv [Mathlib/Topology/LocallyConstant/Algebra]; LocallyConstant.congrLeftRingEquiv_apply_apply [Mathlib/Topology/LocallyConstant/Algebra]; UniformSpace.sepQuotHomeomorphRingQuot [Mathlib/Topology/Algebra/UniformRing]; LocallyConstant.congrLeftRingEquiv_symm_apply_apply [Mathlib/Topology/LocallyConstant/Algebra]; LocallyConstant.congrLeftₐ [Mathlib/Topology/LocallyConstant/Algebra]; CommRingCat.HomTopology.precompHomeomorph [Mathlib/Algebra/Category/Ring/Topology]; UniformSpace.Completion.mapRingEquiv [Mathlib/Topology/Algebra/UniformRing]; LocallyConstant.congrRightRingEquiv_apply_apply [Mathlib/Topology/LocallyConstant/Algebra]",
+   "date": "2026-10-22",
+   "verdict": "no match: quotient lifts and ultrametric total disconnectedness are ingredients, and locally constant congruences concern a different function space; no hit states the actual precomposition ring equivalence under a component homeomorphism with its inverse formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ConnectedComponents\", \"ContinuousMap\"",
+   "results": "[loogle] OK 0 hit(s); none",
+   "date": "2026-10-22",
+   "verdict": "no match: quotient lifts and ultrametric total disconnectedness are ingredients, and locally constant congruences concern a different function space; no hit states the actual precomposition ring equivalence under a component homeomorphism with its inverse formula."
+  },
+  {
+   "tool": "grep",
+   "query": "(ConnectedComponents|connectedComponents).*(equiv|lift|ContinuousMap)|(equiv|lift|ContinuousMap).*(ConnectedComponents|connectedComponents)",
+   "results": "[grep] OK 24 hit(s); Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean:88 /-- `continuousMapPresheaf` is `U ↦ C(ConnectedComponents U, T)` if `T` is totally; Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean:92     (continuousMapPresheaf T).obj (.op U) ≃ C(ConnectedComponents U, T) where; Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean:93   toFun f := ⟨f.continuous.connectedComponentsLift, f.continuous.connectedComponentsLift_continuous⟩; Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean:98     exact (Continuous.connectedComponentsLift_unique _ _ (by simp)).symm; Mathlib/CategoryTheory/Category/Cat/Adjunction.lean:75       exact (ConnectedComponents.typeToCatHomEquiv _ _).trans; Mathlib/CategoryTheory/Category/Cat/Adjunction.lean:81         app := fun X => ↾(ConnectedComponents.liftFunctor _; Mathlib/CategoryTheory/ConnectedComponents.lean:63 def ConnectedComponents.liftFunctor (J) [Category* J] {X : Type*} (F : J ⥤ Discrete X) :; Mathlib/CategoryTheory/ConnectedComponents.lean:69 def ConnectedComponents.typeToCatHomEquiv (J) [Category* J] (X : Type*) :; Mathlib/CategoryTheory/ConnectedComponents.lean:72   invFun := ConnectedComponents.liftFunctor _; Mathlib/Topology/Category/Profinite/Basic.lean:111     { toFun := Continuous.connectedComponentsLift g.hom.hom.2; Mathlib/Topology/Category/Profinite/Basic.lean:112       continuous_toFun := Continuous.connectedComponentsLift_continuous g.hom.hom.2 }; Mathlib/Topology/Connected/Clopen.lean:575 noncomputable def equivOfIsClopen : ConnectedComponents α ≃ Σ i, ConnectedComponents (U i) := by; Mathlib/Topology/Connected/Clopen.lean:581         x.lift (ConnectedComponents.mk ∘ Subtype.val); Mathlib/Topology/Connected/TotallyDisconnected.lean:253 The lift to `connectedComponents α` of a continuous map from `α` to a totally disconnected space; Mathlib/Topology/Connected/TotallyDisconnected.lean:255 def Continuous.connectedComponentsLift (h : Continuous f) : ConnectedComponents α → β := fun x =>; Mathlib/Topology/Connected/TotallyDisconnected.lean:259 theorem Continuous.connectedComponentsLift_continuous (h : Continuous f) :; Mathlib/Topology/Connected/TotallyDisconnected.lean:260     Continuous h.connectedComponentsLift :=; Mathlib/Topology/Connected/TotallyDisconnected.lean:264 theorem Continuous.connectedComponentsLift_apply_coe (h : Continuous f) (x : α) :; Mathlib/Topology/Connected/LocallyPathConnected.lean:138 def connectedComponentsEquivZerothHomotopy : ConnectedComponents X ≃ ZerothHomotopy X where; Mathlib/Topology/Connected/LocallyPathConnected.lean:145 lemma connectedComponentsEquivZerothHomotopy_apply (x : X) :; Mathlib/Topology/Connected/LocallyPathConnected.lean:146     connectedComponentsEquivZerothHomotopy ⟦x⟧ = (.mk x) :=; Mathlib/Topology/Connected/LocallyPathConnected.lean:150 lemma coe_connectedComponentsEquivZerothHomotopy_symm :; Mathlib/Topology/Connected/LocallyPathConnected.lean:151     ⇑connectedComponentsEquivZerothHomotopy.symm = ZerothHomotopy.toConnectedComponents (X := X) :=; Mathlib/Topology/Connected/CardComponents.lean:50       refine h (fun i ↦ ConnectedComponents.mk ⁻¹' {(Fintype.equivFin _).symm i}) (fun i ↦ ?_)",
+   "date": "2026-10-22",
+   "verdict": "no match: quotient lifts and ultrametric total disconnectedness are ingredients, and locally constant congruences concern a different function space; no hit states the actual precomposition ring equivalence under a component homeomorphism with its inverse formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous functions into a nonarchimedean field factor through the connected components quotient and precomposition with a component homeomorphism is bijective",
+   "results": "[leanfinder] OK 8 hit(s); Continuous.connectedComponentsLift_apply_coe [Mathlib/Topology/Connected/TotallyDisconnected]; Continuous.connectedComponentsLift [Mathlib/Topology/Connected/TotallyDisconnected]; Continuous.connectedComponentsLift_comp_coe [Mathlib/Topology/Connected/TotallyDisconnected]; Continuous.connectedComponentsLift_unique [Mathlib/Topology/Connected/TotallyDisconnected]; Profinite.toCompHausEquivalence [Mathlib/Topology/Category/Profinite/Basic]; TotallyDisconnectedSpace.continuousMapEquivOfConnectedSpace_symm_apply_apply [Mathlib/Topology/Connected/TotallyDisconnected]; TotallyDisconnectedSpace.continuousMapEquivOfConnectedSpace [Mathlib/Topology/Connected/TotallyDisconnected]; Continuous.image_eq_of_connectedComponent_eq [Mathlib/Topology/Connected/TotallyDisconnected]",
+   "date": "2026-10-22",
+   "verdict": "no match: quotient lifts and ultrametric total disconnectedness are ingredients, and locally constant congruences concern a different function space; no hit states the actual precomposition ring equivalence under a component homeomorphism with its inverse formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For continuous i between topological spaces inducing a homeomorphism on connected components precomposition on continuous maps into an ultrametric field is a ring equivalence",
+   "results": "[leansearch] OK 8 hit(s); LocallyConstant.congrLeftRingEquiv [Mathlib.Topology.LocallyConstant.Algebra]; LocallyConstant.congrLeftRingEquiv_apply_apply [Mathlib.Topology.LocallyConstant.Algebra]; LocallyConstant.congrLeftRingEquiv_symm_apply_apply [Mathlib.Topology.LocallyConstant.Algebra]; LocallyConstant.congrLeftₐ [Mathlib.Topology.LocallyConstant.Algebra]; PrimeSpectrum.homeomorphOfRingEquiv [Mathlib.RingTheory.Spectrum.Prime.Topology]; ContinuousAlgEquivClass.toHomeomorphClass [Mathlib.Topology.Algebra.Algebra.Equiv]; CommRingCat.HomTopology.precompHomeomorph [Mathlib.Algebra.Category.Ring.Topology]; Homeomorph.continuousMapCongr_apply [Mathlib.Topology.ContinuousMap.Basic]",
+   "date": "2026-10-22",
+   "verdict": "no match: quotient lifts and ultrametric total disconnectedness are ingredients, and locally constant congruences concern a different function space; no hit states the actual precomposition ring equivalence under a component homeomorphism with its inverse formula."
+  },
+  {
+   "tool": "grep",
+   "query": "connectedComponentsLift|continuousMapPresheafEquivOfTotallyDisconnectedSpace|IsUltrametricDist.*Totally|compRightAlgHom",
+   "results": "[grep] OK 20 hit(s); Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean:90 def continuousMapPresheafEquivOfTotallyDisconnectedSpace [TotallyDisconnectedSpace T]; Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean:93   toFun f := ⟨f.continuous.connectedComponentsLift, f.continuous.connectedComponentsLift_continuous⟩; Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean:98     exact (Continuous.connectedComponentsLift_unique _ _ (by simp)).symm; Mathlib/Topology/MetricSpace/Ultra/TotallySeparated.lean:25 instance {X : Type*} [MetricSpace X] [IsUltrametricDist X] : TotallySeparatedSpace X :=; Mathlib/Topology/MetricSpace/Ultra/TotallySeparated.lean:32 example {X : Type*} [MetricSpace X] [IsUltrametricDist X] : TotallyDisconnectedSpace X :=; Mathlib/Topology/Category/Profinite/Basic.lean:111     { toFun := Continuous.connectedComponentsLift g.hom.hom.2; Mathlib/Topology/Category/Profinite/Basic.lean:112       continuous_toFun := Continuous.connectedComponentsLift_continuous g.hom.hom.2 }; Mathlib/Topology/ContinuousMap/Weierstrass.lean:60       compRightAlgHom ℝ ℝ (iccHomeoI a b h).symm; Mathlib/Topology/ContinuousMap/Weierstrass.lean:73     rw [polynomialFunctions.comap_compRightAlgHom_iccHomeoI] at p; Mathlib/Topology/ContinuousMap/Polynomial.lean:172 theorem polynomialFunctions.comap_compRightAlgHom_iccHomeoI (a b : ℝ) (h : a < b) :; Mathlib/Topology/ContinuousMap/Polynomial.lean:173     (polynomialFunctions I).comap (compRightAlgHom ℝ ℝ (iccHomeoI a b h).symm) =; Mathlib/Topology/ContinuousMap/Star.lean:89 `ContinuousMap.compAddMonoidHom'`, `ContinuousMap.compRightAlgHom` for bundlings of; Mathlib/Topology/ContinuousMap/Algebra.lean:693 def ContinuousMap.compRightAlgHom {α β : Type*} [TopologicalSpace α] [TopologicalSpace β]; Mathlib/Topology/ContinuousMap/Algebra.lean:702 theorem ContinuousMap.compRightAlgHom_continuous {α β : Type*} [TopologicalSpace α]; Mathlib/Topology/ContinuousMap/Algebra.lean:703     [TopologicalSpace β] (f : C(α, β)) : Continuous (compRightAlgHom R A f) :=; Mathlib/Topology/Connected/TotallyDisconnected.lean:255 def Continuous.connectedComponentsLift (h : Continuous f) : ConnectedComponents α → β := fun x =>; Mathlib/Topology/Connected/TotallyDisconnected.lean:259 theorem Continuous.connectedComponentsLift_continuous (h : Continuous f) :; Mathlib/Topology/Connected/TotallyDisconnected.lean:260     Continuous h.connectedComponentsLift :=; Mathlib/Topology/Connected/TotallyDisconnected.lean:264 theorem Continuous.connectedComponentsLift_apply_coe (h : Continuous f) (x : α) :; Mathlib/Topology/Connected/TotallyDisconnected.lean:265     h.connectedComponentsLift x = f x :=",
+   "date": "2026-10-22",
+   "verdict": "no match: quotient lifts and ultrametric total disconnectedness are ingredients, and locally constant congruences concern a different function space; no hit states the actual precomposition ring equivalence under a component homeomorphism with its inverse formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition by a continuous map inducing a homeomorphism on connected components is a ring equivalence on continuous ultrametric field valued functions",
+   "results": "OK: 8 hits; LocallyConstant.congrLeftRingEquiv, CommRingCat.HomTopology.precompHomeomorph, LocallyConstant.congrLeftRingEquiv_apply_apply, CommRingCat.HomTopology.precompHomeomorph_apply, LocallyConstant.congrLeftRingEquiv_symm_apply_apply, LocallyConstant.congrLeftₐ, CommRingCat.HomTopology.precompHomeomorph_symm_apply, WeakDual.CharacterSpace.homeoEval_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: quotient lifts, scheme-specific continuous-map equivalences, precomposition algebra homomorphisms and locally constant congruences are ingredients, but none states all clauses of this actual-precomposition ring equivalence for arbitrary spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ConnectedComponents\", \"ContinuousMap\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: quotient lifts, scheme-specific continuous-map equivalences, precomposition algebra homomorphisms and locally constant congruences are ingredients, but none states all clauses of this actual-precomposition ring equivalence for arbitrary spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "connectedComponentsLift|continuousMapPresheafEquivOfTotallyDisconnectedSpace|IsUltrametricDist.*Totally|compRightAlgHom",
+   "results": "OK: 20 hits; Mathlib/Topology/Category/Profinite/Basic.lean, Mathlib/Topology/Category/Profinite/Basic.lean, Mathlib/Topology/ContinuousMap/Weierstrass.lean, Mathlib/Topology/ContinuousMap/Weierstrass.lean, Mathlib/Topology/ContinuousMap/Polynomial.lean, Mathlib/Topology/ContinuousMap/Polynomial.lean, Mathlib/Topology/ContinuousMap/Star.lean, Mathlib/Topology/ContinuousMap/Algebra.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: quotient lifts, scheme-specific continuous-map equivalences, precomposition algebra homomorphisms and locally constant congruences are ingredients, but none states all clauses of this actual-precomposition ring equivalence for arbitrary spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous functions with values in a nonarchimedean field extend uniquely along a map inducing a homeomorphism of connected component quotients",
+   "results": "OK: 8 hits; Continuous.connectedComponentsLift_unique, ConnectedComponents.continuous_coe, Continuous.connectedComponentsLift_continuous, Continuous.connectedComponentsMap, ContinuousMap.sigmaCodHomeomorph, Continuous.connectedComponentsMap_continuous, ContinuousLinearMap.extend, Continuous.connectedComponentsLift",
+   "date": "2026-10-22",
+   "verdict": "no match: quotient lifts, scheme-specific continuous-map equivalences, precomposition algebra homomorphisms and locally constant congruences are ingredients, but none states all clauses of this actual-precomposition ring equivalence for arbitrary spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-generic-continuous-sections",
+  "date": "2026-10-22",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Generic restriction of continuous coefficient sections on a normal scheme; returned proof steps 5-6: ultrametric total disconnectedness, continuous component factorization and the explicit inverse ring map",
+   "via": [
+    "lem-sfb-normal-generic-continuous-sections",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-ultrametric-component-map-extension",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Read Bhatt–Scholze Lemma 4.2.12 and Mathlib ultrametric and component-lift sources. Added two strictly more general Mathlib leaves, with all clauses and lines identified. Four proof steps explicitly establish ultrametric specialization, factorization, pointwise ring closure and the two inverse equations; empty and trivial-absolute-value cases checked. No Lean written or compiled.",
+  "blueprint": "Inherited blueprint.from.node is null (ancestor command agrees). Realizes the recorded det-thm-sf-ctf-stability-direct-images paragraph (3) all-continuous obligation via the parent normal-generic-continuous-sections proof step 3; retains the prescribed component-factorization route and existing via chain. Blueprint searches for connected component, ultrametric, totally disconnected, connectedComponentsLift and totally separated found no equivalent blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-fb11eca6f",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-fb11eca6f (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, and found no faults; no fixes. The statement is unchanged and no repair or re-split note exists for this item. Source: Bhatt-Scholze Lemma 4.2.12, last paragraph (p.30), where continuous maps to a totally disconnected target factor through pi0 of a qcqs U. The item is the arbitrary-space form, which comes correctly from Mathlib, and the proof is marked agent-written. Step 1: |a|=0 iff a=0 makes d a genuine metric, and a-c=(a-b)+(b-c) gives the ultrametric inequality, so the ultrametric leaf applies. Step 2: the component-lift leaf gives existence, continuity and uniqueness of the lift among all functions, plus continuity and surjectivity of q_T. Step 3 (elementary): with delta<1, |x'|<=max(|x|,1)<=M and |x'y'-xy|<=max(|x'||y'-y|,|y||x'-x|)<M*delta<eps; this is correct. Step 4 (elementary): i^*E_i f = fbar h^-1 h q_Y = f; (gbar h)q_Y = g i, so uniqueness gives E_i i^* g = g; checked. Edge cases checked: empty Y forces empty Z and both rings are zero; the trivial absolute value gives a discrete ultrametric. New leaves: Mathlib lines verified in both checkouts, with one declaration per clause. lem-sfb-ultrametric-space-totally-disconnected: Ultra/TotallySeparated.lean:25 and the example at :32, plus TotallyDisconnected.lean:218. lem-sfb-continuous-connected-component-lift: TotallyDisconnected.lean:255/259/269/277 and Clopen.lean:535/538/545. Both are statement-only, with blueprint.from null and via prefixed by the item. Duplicate search with rg -L for connectedComponentsLift, TotallySeparated, IsUltrametricDist, totally disconnected, connected component and ultrametric found no node stating either leaf or the item. Candidates read: ultrametric-criterion-natural-norms, spectral-clopen-component-homeomorphism, zl-affine-component-site-projection, pbc finite-continuous-ultrametric-pivot, geometric-component-count. The leaves are strictly more general tools, not restatements (D1/D2 OK). Mathlib leaves are route-free, so there are no tool_uses and no SGA. The parent normal-generic-continuous-sections step 3 uses exactly the item's clauses."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.UltrametricComponentMapExtension",
+  "declaration": "ContinuousMap.ultrametric_component_map_extension",
+  "file": "lean/Sheaf/Topology/UltrametricComponentMapExtension.lean",
+  "statement": "theorem ultrametric_component_map_extension {Y : Type u} {Z : Type v} {A : Type w} [TopologicalSpace Y] [TopologicalSpace Z] [NormedField A] (i : C(Y, Z)) (h : ConnectedComponents Y ≃ₜ ConnectedComponents Z) (hcomm : ∀ y : Y, h (ConnectedComponents.mk y) = ConnectedComponents.mk (i y)) (hna : ∀ a b : A, ‖a + b‖ ≤ max ‖a‖ ‖b‖) : TotallyDisconnectedSpace A ∧ (∀ f : C(Y, A), ∃! fbar : C(ConnectedComponents Y, A), f = fbar.comp ⟨ConnectedComponents.mk, ConnectedComponents.continuous_coe⟩) ∧ (∀ g : C(Z, A), ∃! gbar : C(ConnectedComponents Z, A), g = gbar.comp ⟨ConnectedComponents.mk, ConnectedComponents.continuous_coe⟩) ∧ ∃ e : C(Z, A) ≃+* C(Y, A), e.toRingHom = (ContinuousMap.compRightAlgHom A A i).toRingHom ∧ ∀ (f : C(Y, A)) (fbar : C(ConnectedComponents Y, A)), f = fbar.comp ⟨ConnectedComponents.mk, ConnectedComponents.continuous_coe⟩ → e.symm f = (fbar.comp ⟨h.symm, h.symm.continuous⟩).comp ⟨ConnectedComponents.mk, ConnectedComponents.continuous_coe⟩",
+  "branch": "sheaf-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c172f77df",
+  "group": "O2",
+  "result": "pass",
+  "note": "Clause-by-clause match: arbitrary Y,Z (u,v), i : C(Y,Z), ConnectedComponents with the quotient topology, h ≃ₜ with hcomm h∘q_Y=q_Z∘i in the right direction; NormedField A = field + multiplicative absolute value + metric, trivial absolute value allowed; hna is exactly the ultrametric inequality. Conclusions: TotallyDisconnectedSpace A (equivalent to the node's at-most-one-point wording); ∃! continuous factor for Y and for Z; e.toRingHom = compRightAlgHom A A i (literally g ↦ g.comp i, so e is pinned); e.symm f = fbar∘h.symm∘q_Z for every factor. Empty and trivial-absolute-value cases covered; universes bound. lean.statement verbatim; node differs from side-live only by the lean record; only stmt_dep is Field via NormedField. No defs, sorry only, docstrings give source place, blueprint id and 4 proof steps; report has Worker report and Second reading by O2. No existing duplicate found. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T041228-L-1103287",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "ContinuousMap.ultrametric_component_map_extension"
+  ],
+  "sorry_after": []
+ }
+}

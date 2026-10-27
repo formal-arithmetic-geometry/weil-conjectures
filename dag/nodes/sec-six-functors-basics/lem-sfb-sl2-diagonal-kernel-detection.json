@@ -1,0 +1,319 @@
+{
+ "id": "lem-sfb-sl2-diagonal-kernel-detection",
+ "kind": "statement",
+ "title": "The diagonal torus detects the scheme kernel of an SL2 representation",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $S=\\operatorname{SL}_{2,k}$ be the affine group scheme whose $A$-points are the determinant-one $2\\times2$ matrices over a commutative $k$-algebra $A$ [def-sc-group-scheme]. Let $D\\subset S$ be its diagonal torus, $D(A)=\\{\\operatorname{diag}(s,s^{-1}):s\\in A^\\times\\}$. If $N\\subset S$ is a closed normal subgroup scheme [def-sc-group-scheme-subgroup] with scheme-theoretic intersection $N\\cap D=1$, then $N=1$. Here normal means stable under the conjugation morphism $S\\times N\\to S$, and the intersection is the fibre product of the two subgroup inclusions. Consequently, if $M$ is a finite-dimensional $k$-vector space and $v:S\\to\\operatorname{GL}(M)$ is a group-scheme homomorphism whose restriction $v|_D$ is a closed immersion, then $v$ is a closed immersion [def-weil-closed-immersion]. The conclusions hold in characteristic two as well as in every other characteristic, without any reducedness assumption on $N$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 20g, pp.415--418, standard matrices of SL2 and its scalar centre; Theorem 3.34, p.75, for the closed-image conclusion. Agent-formulated kernel-detection lemma supporting Theorem 23.72; no assertion here is quoted as a theorem stated verbatim by Milne."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion",
+  "def-sc-general-linear-group",
+  "def-sfb-sl2-diagonal-torus"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=E_{12}$, $F=E_{21}$ and $H=\\operatorname{diag}(1,-1)$. The tangent-space definition [def-sc-scheme-tangent-space] identifies $T_{N/k,1}$ with the subspace $W=\\{X:I+\\epsilon X\\in N(k[\\epsilon]/\\epsilon^2)\\}$ of trace-zero matrices: expanding the determinant gives $\\det(I+\\epsilon X)=1+\\epsilon\\operatorname{tr}X$, and the tangent operations are matrix addition and scalar multiplication. Normality makes $W$ stable under $X\\mapsto gXg^{-1}$ for $g\\in S(k)$. Moreover $W\\cap kH=0$, since $I+\\epsilon aH=\\operatorname{diag}(1+\\epsilon a,(1+\\epsilon a)^{-1})$ belongs to $D(k[\\epsilon]/\\epsilon^2)$, so membership in $N$ forces it to be the identity by the scheme-intersection hypothesis.",
+   "uses": [
+    "def-sc-scheme-tangent-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Sections 10a--10c, dual-number tangent points (10.5--10.11 and 10.14), pp.186--190; agent matrix expansion. Tangent convention: Stacks Tag 0B2C, varieties-definition-tangent-space."
+   }
+  },
+  {
+   "text": "The field $k$ is infinite: if it were finite, $\\prod_{a\\in k}(T-a)-1$ would be a nonconstant polynomial with no root. Choose $t_1,t_2,t_3\\in k^\\times$ whose squares $q_i=t_i^2$ are pairwise distinct, possible because a quadratic has at most two roots. For $X=aH+bE+cF\\in W$, torus conjugation gives $aH+q_i bE+q_i^{-1}cF\\in W$. The matrix with rows $(1,q_i,q_i^{-1})$ is invertible: multiplying row $i$ by $q_i$ and permuting columns gives the Vandermonde rows $(1,q_i,q_i^2)$, with determinant $\\prod_{i<j}(q_j-q_i)\\ne0$. Taking linear combinations shows $aH,bE,cF\\in W$, and therefore $a=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Sections 10b and 10d, formulas for dual-number points and conjugation, pp.188--193; elementary interpolation supplied by the agent."
+   }
+  },
+  {
+   "text": "If $b\\ne0$ for some $aH+bE+cF\\in W$, step 2 gives $E\\in W$. With $l=I+F\\in S(k)$, direct multiplication gives $lEl^{-1}=E-H-F\\in W$. Applying step 2 to this vector gives $-H\\in W$, a contradiction. Similarly, $c\\ne0$ would give $F\\in W$, and $(I+E)F(I-E)=F+H-E$ would give $H\\in W$. Thus $W=0$. In characteristic two $H=I_2$ is still nonzero, and its coefficient in both displayed conjugations is still a unit, so the same argument applies.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 10d, matrix formula Ad(A)(X)=AXA^{-1}, p.193, and Section 20g, p.415; explicit agent calculation."
+   }
+  },
+  {
+   "text": "We next show $N(k)=\\{I\\}$. A scalar point of $N$ already lies in $D(k)$ and is the identity. If a nonscalar $n\\in N(k)$ exists, choose a nonzero vector $v$ for which $nv\\notin kv$: otherwise the two coordinate lines and the line through their sum would force $n$ to be scalar. Complete $v$ to a determinant-one basis by rescaling its second vector. Normality lets us replace $n$ by its matrix in this basis, whose lower-left entry $c$ is nonzero. Write the entries of $n$ as $a,b,c,d$ in row order, and put $u(t)=I+tE$. Then $z(t)=nu(t)n^{-1}u(-t)\\in N(k)$, and multiplication using $ad-bc=1$ gives $\\operatorname{tr}z(t)=2+c^2t^2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 20g, pp.415--416, elementary SL2 matrices; the trace calculation and choice of basis are supplied by the agent."
+   }
+  },
+  {
+   "text": "Choose $t\\in k$ with $(2+c^2t^2)^2\\ne4$. This excludes only the roots of a nonzero degree-four polynomial (leading coefficient $c^4$), so step 2 ensures such a $t$ exists. Put $T=\\operatorname{tr}z(t)$. The roots $\\lambda,\\lambda^{-1}$ of $x^2-Tx+1$ exist in $k$, are nonzero, and are distinct: a repeated root would have $\\lambda^2=1$ and hence $T^2=4$, also in characteristic two. The two eigenvectors are linearly independent; rescaling one gives a determinant-one eigenbasis. Thus $z(t)$ is conjugate by $S(k)$ to $\\operatorname{diag}(\\lambda,\\lambda^{-1})\\ne I$. Normality puts this nonidentity diagonal point in $N(k)\\cap D(k)$, contradicting the hypothesis. Hence $N(k)=\\{I\\}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 20g, pp.415--418; agent argument by the degree-two characteristic polynomial, with no classification theorem for normal subgroups."
+   }
+  },
+  {
+   "text": "Since $N$ is closed in $S=\\operatorname{Spec}k[a,b,c,d]/(ad-bc-1)$, the affine description of closed immersions [def-weil-closed-immersion] gives $N=\\operatorname{Spec}B$ with $B$ a finitely generated $k$-algebra. It is Noetherian by [lem-wf-affine-noetherian-components]. Clause 1 of [lem-wf-affine-nullstellensatz-vanishing] identifies its maximal ideals with its $k$-points. Step 5 therefore says that $B$ has exactly one maximal ideal, the augmentation ideal $\\mathfrak m=\\ker(B\\to k)$ of the identity. Thus $B$ is local, its residue field is $k$, and $\\mathfrak m$ is finitely generated. Neither this use of clause 1 nor the preceding steps assume that $B$ is reduced.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-wf-affine-noetherian-components",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 1b, affine algebraic schemes, and Section 10a, identity tangent space; elementary application of the existing Noetherian and weak Nullstellensatz nodes."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-rational-tangent-cotangent-duality] to the rational identity of $\\operatorname{Spec}B$ over $\\operatorname{Spec}k$. Since $B$ is local its local ring there is $B$ itself; step 3 gives $0=W\\cong\\operatorname{Hom}_k(\\mathfrak m/\\mathfrak m^2,k)$. The quotient is finite-dimensional because $\\mathfrak m$ is finitely generated. If it were nonzero, extending a nonzero vector to a basis would give a nonzero functional, so $\\mathfrak m/\\mathfrak m^2=0$. Apply [lem-weil-pbc-nakayama-local-generators] with local ring $B$, module $\\mathfrak m$ and the empty generating family: it generates the zero quotient, hence generates $\\mathfrak m$. Therefore $\\mathfrak m=0$, the augmentation is an isomorphism $B\\simeq k$, and the identity section identifies $N$ with the trivial subgroup scheme.",
+   "uses": [
+    "lem-sc-rational-tangent-cotangent-duality",
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2E, lemma-tangent-space-rational-point; Nakayama is algebra.tex Tag 00DV, lemma-NAK, item (8), as recorded by the existing local-generators node."
+   }
+  },
+  {
+   "text": "For the consequence, let $K=\\ker v$. By [lem-sc-kernel-subgroup] this is a closed subgroup scheme, with $K(A)=\\ker(v_A)$ for every commutative $k$-algebra $A$. These kernels are normal, so conjugation restricts to $S\\times K\\to K$ (equivalently, the morphism to $\\operatorname{GL}(M)$ is constantly the identity on that product). A closed immersion is injective on all algebra-valued points by its affine quotient description [def-weil-closed-immersion]; thus $v|_D$ has trivial kernel, and $K\\cap D=1$. Steps 1--7 give $K=1$, hence $v_A$ is injective for every $A$. Both $S$ and $\\operatorname{GL}(M)$ are affine of finite type: choose a basis of $M$ to use the determinant-coordinate presentation, and for $\\dim M=0$ the target is the trivial affine group. Apply [lem-sfb-geometric-unipotence-faithful-closed-immersion] to conclude that $v$ is a closed immersion.",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "def-weil-closed-immersion",
+    "lem-sfb-geometric-unipotence-faithful-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 3.35 and Theorem 3.34, printed p.75; the kernel and normality verification is by the displayed functor-of-points identity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-scheme-tangent-space",
+  "def-weil-closed-immersion",
+  "lem-wf-affine-noetherian-components",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-sc-kernel-subgroup",
+  "lem-sfb-geometric-unipotence-faithful-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent-formulated elementary rank-one kernel argument; Milne Sections 10a--10d and 20g for matrix/tangent conventions, Corollary 3.35 for the final closed-immersion theorem. Uses Stacks 0B2E and 00DV only through the named existing nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A closed normal subgroup scheme of SL2 whose intersection with the diagonal torus is trivial is trivial including in characteristic two",
+   "results": "{\"t\": \"2026-10-23T22:20:23Z\", \"tool\": \"leanfinder\", \"query\": \"A closed normal subgroup scheme of SL2 whose intersection with the diagonal torus is trivial is trivial including in characteristic two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CongruenceSubgroup.Gamma_zero_bot\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"Matrix.SpecialLinearGroup.center_eq_bot_of_subsingleton\", \"CongruenceSubgroup.mem_Gamma_one\", \"CongruenceSubgroup.Gamma\", \"Subgroup.isRegularAtInfty_of_neg_one_mem\", \"CongruenceSubgroup.Gamma_one_top\", \"CongruenceSubgroup.Gamma0\"], \"digest\": \"910b1bb88369d313\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits describe abstract matrix-group kernels or topological embeddings. Matrix.SpecialLinearGroup.isClosedEmbedding_toGL is about topology, not arbitrary algebraic representations or infinitesimal normal subgroup schemes; the source grep found no kernel-detection theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional algebraic representation of SL2 faithful on its diagonal torus is a closed immersion in all characteristics",
+   "results": "{\"t\": \"2026-10-23T22:23:38Z\", \"tool\": \"leanfinder\", \"query\": \"A finite dimensional algebraic representation of SL2 faithful on its diagonal torus is a closed immersion in all characteristics\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.isClosedEmbedding_toGL\", \"Matrix.SpecialLinearGroup.isClosedEmbedding_mapGLInt\", \"Matrix.SpecialLinearGroup.isEmbedding_mapGL\", \"OnePoint.exists_mem_SL2\", \"Matrix.SpecialLinearGroup.isEmbedding_toGL\", \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"Matrix.SpecialLinearGroup.mapGL_injective\", \"Matrix.SpecialLinearGroup.mapGL_inj\"], \"digest\": \"e6762ba7bdefa788\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits describe abstract matrix-group kernels or topological embeddings. Matrix.SpecialLinearGroup.isClosedEmbedding_toGL is about topology, not arbitrary algebraic representations or infinitesimal normal subgroup schemes; the source grep found no kernel-detection theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.SpecialLinearGroup, \"ker\"",
+   "results": "{\"t\": \"2026-10-23T22:23:37Z\", \"tool\": \"loogle\", \"query\": \"Matrix.SpecialLinearGroup, \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.range_toGL_eq_ker_det\", \"Matrix.SpecialLinearGroup.toGLKerEquiv\", \"Matrix.SpecialLinearGroup.toGLKerEquiv_apply_coe\", \"Matrix.SpecialLinearGroup.toGLKerEquiv_symm_apply_coe\", \"Matrix.SpecialLinearGroup.toPGL_ker\", \"Projectivization.SL_mulAction_ker\"], \"digest\": \"27dd09fcc0b8e450\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits describe abstract matrix-group kernels or topological embeddings. Matrix.SpecialLinearGroup.isClosedEmbedding_toGL is about topology, not arbitrary algebraic representations or infinitesimal normal subgroup schemes; the source grep found no kernel-detection theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal closed subgroup scheme of SL2 with trivial intersection with the diagonal torus is the trivial subgroup scheme",
+   "results": "{\"t\": \"2026-10-23T22:23:37Z\", \"tool\": \"leansearch\", \"query\": \"A normal closed subgroup scheme of SL2 with trivial intersection with the diagonal torus is the trivial subgroup scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.center_eq_bot_of_subsingleton\", \"CongruenceSubgroup.Gamma_zero_bot\", \"Subgroup.bot_subgroupOf\", \"ClosedSubgroup.ctorIdx\", \"Subgroup.subgroupOf_bot_eq_bot\", \"Subgroup.botCharacteristic\", \"Subgroup.subset_normalClosure\", \"CongruenceSubgroup.IsCongruenceSubgroup\"], \"digest\": \"b8d60e58ed1df711\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits describe abstract matrix-group kernels or topological embeddings. Matrix.SpecialLinearGroup.isClosedEmbedding_toGL is about topology, not arbitrary algebraic representations or infinitesimal normal subgroup schemes; the source grep found no kernel-detection theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "normal.*subgroup|ker|faithful",
+   "results": "{\"t\": \"2026-10-23T22:23:37Z\", \"tool\": \"grep\", \"query\": \"normal.*subgroup|ker|faithful\", \"sub\": \"LinearAlgebra/Matrix/SpecialLinearGroup.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits describe abstract matrix-group kernels or topological embeddings. Matrix.SpecialLinearGroup.isClosedEmbedding_toGL is about topology, not arbitrary algebraic representations or infinitesimal normal subgroup schemes; the source grep found no kernel-detection theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "normal.*subgroup|ker|faithful",
+   "results": "{\"t\": \"2026-10-23T23:37:51Z\", \"tool\": \"grep\", \"query\": \"normal.*subgroup|ker|faithful\", \"sub\": \"LinearAlgebra/Matrix/SpecialLinearGroup.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group and topological embedding results do not address a normal closed subgroup scheme over arbitrary algebra extensions or its infinitesimal kernel."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic representation of SL2 faithful on the diagonal torus is a closed immersion",
+   "results": "{\"t\": \"2026-10-23T23:37:52Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic representation of SL2 faithful on the diagonal torus is a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\", \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"Matrix.SpecialLinearGroup.isClosedEmbedding_toGL\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\"], \"digest\": \"be8b130cfe7916c1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group and topological embedding results do not address a normal closed subgroup scheme over arbitrary algebra extensions or its infinitesimal kernel."
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.SpecialLinearGroup, \"ker\"",
+   "results": "{\"t\": \"2026-10-23T23:37:52Z\", \"tool\": \"loogle\", \"query\": \"Matrix.SpecialLinearGroup, \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.range_toGL_eq_ker_det\", \"Matrix.SpecialLinearGroup.toGLKerEquiv\", \"Matrix.SpecialLinearGroup.toGLKerEquiv_apply_coe\", \"Matrix.SpecialLinearGroup.toGLKerEquiv_symm_apply_coe\", \"Matrix.SpecialLinearGroup.toPGL_ker\", \"Projectivization.SL_mulAction_ker\"], \"digest\": \"27dd09fcc0b8e450\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group and topological embedding results do not address a normal closed subgroup scheme over arbitrary algebra extensions or its infinitesimal kernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal closed subgroup scheme of SL2 meeting the diagonal torus trivially is trivial even in characteristic two",
+   "results": "{\"t\": \"2026-10-23T23:37:53Z\", \"tool\": \"leanfinder\", \"query\": \"A normal closed subgroup scheme of SL2 meeting the diagonal torus trivially is trivial even in characteristic two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CongruenceSubgroup.Gamma_zero_bot\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"CongruenceSubgroup.mem_Gamma_one\", \"Subgroup.isRegularAtInfty_of_neg_one_mem\", \"CongruenceSubgroup.IsCongruenceSubgroup\", \"CongruenceSubgroup.Gamma_one_top\", \"CongruenceSubgroup.Gamma\", \"CongruenceSubgroup.Gamma_normal\"], \"digest\": \"266a30667014b1eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group and topological embedding results do not address a normal closed subgroup scheme over arbitrary algebra extensions or its infinitesimal kernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representation of an algebraic group is a closed immersion when its scheme theoretic kernel is trivial",
+   "results": "{\"t\": \"2026-10-23T23:38:22Z\", \"tool\": \"leanfinder\", \"query\": \"A representation of an algebraic group is a closed immersion when its scheme theoretic kernel is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot\", \"AlgebraicGeometry.instIsClosedImmersionISchemeOfSubsingletonCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.isClosedImmersion_of_comp_eq_id\", \"AlgebraicGeometry.IsClosedImmersion.isIso_of_ker_eq\", \"AlgebraicGeometry.instIsClosedImmersionOfSubsingletonCarrierCarrierCommRingCatOfIsOver\", \"AlgebraicGeometry.IsClosedImmersion.isIso_lift\", \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\"], \"digest\": \"97543eb07c81b297\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group and topological embedding results do not address a normal closed subgroup scheme over arbitrary algebra extensions or its infinitesimal kernel."
+  },
+  {
+   "tool": "grep",
+   "query": "isClosedEmbedding_toGL|range_toGL_eq_ker_det|toPGL_ker",
+   "results": "{\"t\": \"2026-10-23T23:38:51Z\", \"tool\": \"grep\", \"query\": \"isClosedEmbedding_toGL|range_toGL_eq_ker_det|toPGL_ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/Group/Matrix.lean\", \"Mathlib/Topology/Algebra/Group/Matrix.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean\"], \"digest\": \"b6f9c5f23d976316\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group and topological embedding results do not address a normal closed subgroup scheme over arbitrary algebra extensions or its infinitesimal kernel."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-integral-rank-one",
+  "date": "2026-10-24",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Section 23h, equation (153), Theorem 23.72 proof, pp.510-511: rank-one hypotheses and simple-root generation omitted there; Section 23d and Theorem 23.71 for Weyl signs. These integral rank-one details are an agent-stated supporting lemma, not a quotation of Theorem 23.72. Supporting input: Section 20g, pp.415--418, standard matrices of SL2 and its scalar centre; Theorem 3.34, p.75, for the closed-image conclusion. Agent-formulated kernel-detection lemma supporting Theorem 23.72; no assertion here is quoted as a theorem stated verbatim by Milne.",
+   "via": [
+    "lem-sfb-chevalley-integral-rank-one",
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sl2-diagonal-kernel-detection",
+  "worker": "stage1",
+  "summary": "NO: supplied the full characteristic-independent matrix proof, first killing the dual-number tangent subspace, then all nonidentity rational points, and using weak Nullstellensatz, cotangent duality and Nakayama to conclude scheme-theoretic triviality. Reused all general inputs; no new nodes and no change to the statement. The closed-immersion consequence uses the existing affine group monomorphism theorem.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) compactification/alteration route, through the Chevalley integral rank-one input to root-datum realization. Latest blueprint proof (3) read in literature/blueprint/latest; SL2 kernel detection is an auxiliary agent argument below the fixed unit route. The ancestor utility returns null, matching the inherited blueprint.from.node; preserved its long explicit place and via list. Whole-blueprint searches for SL2 and diagonal torus found no identical statement.",
+  "tool_uses": [
+   {
+    "node": "def-sc-scheme-tangent-space",
+    "why": "General dual-number tangent-space definition and linear structure; no tangent convention in this unit. It is used only for infinitesimal matrix points."
+   },
+   {
+    "node": "lem-wf-affine-noetherian-components",
+    "why": "General finite type algebra Noetherianity; no input in this unit replaces this ring-theoretic tool."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Only clause 1, the weak Nullstellensatz for maximal ideals of a finite type algebra over an algebraically closed field; no reducedness assertion is used."
+   },
+   {
+    "node": "lem-sc-rational-tangent-cotangent-duality",
+    "why": "General rational-point duality at the identity; this unit does not supply an alternative tangent-cotangent comparison."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-local-generators",
+    "why": "General local-ring finite-module Nakayama with the empty generating family; no geometric route is replaced."
+   },
+   {
+    "node": "lem-sc-kernel-subgroup",
+    "why": "General group-scheme kernel representability and its algebra-valued points; needed only for the representation consequence."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "General affine quotient description of a closed immersion, used to describe B and to obtain injectivity on algebra-valued points."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sc-scheme-tangent-space",
+  "lem-wf-affine-noetherian-components",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-sc-kernel-subgroup",
+  "def-weil-closed-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NO-7432f116e",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-7432f116e (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, and the statement of every cited node: def-sc-scheme-tangent-space, def-weil-closed-immersion, lem-wf-affine-noetherian-components, lem-wf-affine-nullstellensatz-vanishing (clause 1 only), lem-sc-rational-tangent-cotangent-duality, lem-weil-pbc-nakayama-local-generators, lem-sc-kernel-subgroup and lem-sfb-geometric-unipotence-faithful-closed-immersion. I also opened Milne iAG2017 Corollary 3.35 (printed p.75) and §20g on SL2. Statement and stmt_deps are byte-identical to the Q68 creation; the delivery has 0 new nodes and is not a re-split. I recomputed the math by hand. Step 1: det(I+εX)=1+ε tr X; diag(1+εa,1-εa) lies in D, also in characteristic 2. Step 2: the (1,q,q^{-1}) Vandermonde argument holds. Step 3: (I+F)E(I-F)=E-H-F and (I+E)F(I-E)=F+H-E, so W=0 with no division by 2. Step 4: nEn^{-1}=[[-ac,a^2],[-c^2,ac]] and tr z(t)=2+c^2t^2. Step 5: the polynomial is 4c^2t^2+c^4t^4 (c^4t^4 in characteristic 2), giving distinct eigenvalues λ≠λ^{-1} and a nonidentity point in N(k)∩D(k). Step 6: maximal ideals of B correspond to N(k)={I}, so B is local and Noetherian; no reducedness is used. Steps 7-8: duality plus Nakayama with the empty family give m=0. K∩D=1 because a closed immersion into affine GL(M) is injective on R-points, and the injectivity hypotheses of the cited node are checked. Small cases: μ2 in characteristic 2 (excluded only scheme-theoretically), Frobenius kernel, M=0. A whole-DAG rg -L for SL2 normal, kernel and faithful statements found no duplicate. The declared tool_uses are generic and accepted; the faithful closed-immersion node is in the same unit. Batch-5: lem-trf-flat-tensor-preserves-injection is the generic fact that flat tensor preserves injections, reached through the Hopf/flat-image proof of Milne Corollary 3.35. It is not part of either assumed statement or its proof, so the citation is accepted. Advisory: GL(M) has no definition node in the inherited statement. Blueprint from.node null is inherited from Q68."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SL2DiagonalKernelDetection",
+  "declaration": "AlgebraicGeometry.LinearGroupSchemes.sl2_diagonal_kernel_detection",
+  "declarations": [
+   "AlgebraicGeometry.LinearGroupSchemes.sl2_diagonal_kernel_detection",
+   "AlgebraicGeometry.LinearGroupSchemes.sl2_closedImmersion_of_diagonal"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SL2DiagonalKernelDetection.lean",
+  "statement": "theorem sl2_diagonal_kernel_detection (k : Type u) [Field k] [IsAlgClosed k] (N : Over (Spec (.of k))) [GrpObj N] (i : N ⟶ specialLinear k 2) [IsClosedSubgroupScheme i] [IsNormalSubgroupScheme i] (hinter : ∀ (R : Type u) [CommRing R] [Algebra k R] (n : StandardGroupSchemes.affine k R ⟶ N) (d : StandardGroupSchemes.affine k R ⟶ StandardGroupSchemes.multiplicative k), n ≫ i = d ≫ diagonalTorus k → n ≫ i = 1) : IsIso N.hom",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Both conclusions are recorded. The intersection is rendered on every commutative k-algebra, equivalently the fibre-product subgroup is trivial; IsIso N.hom says N is the identity subgroup. GL(M) uses the basis-indexed existing GL scheme, retaining dimension zero and all characteristics."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-871be07dc",
+  "group": "NN",
+  "result": "pass",
+  "note": "Item clauses match: IsAlgClosed k; S = specialLinear k 2; N closed+normal via IsClosedSubgroupScheme/IsNormalSubgroupScheme (all-algebra normality); hinter tests the fibre product N×_S D on all R : Type u (i and the torus are injective on points, so this is exactly scheme-theoretic N∩D=1, excluding μ2/Frobenius kernels in char 2); IsIso N.hom = N trivial. Consequence: GL(M) = upstream GeneralLinearGroup on ChooseBasisIndex k M (M=0 vacuous), IsMonHom v, hD on diagonalTorus ≫ v, conclusion IsClosedImmersion v.left. New def-sfb-sl2-diagonal-torus has all §5 fields, real Laurent substitution (0,0)↦T1,(1,1)↦T(-1), sole sorry = true det-relation lemma; no duplicate in Sheaf/WeilConjectures/DAG. Item diff vs base: only lean + stmt_deps gaining the landed def-sc-general-linear-group and the new node (allowed by §6). lean.statement verbatim for both; docstrings carry source, blueprint tags and steps 1-8; 3 sorries, no proofs; report sections present. No files changed, no compile run."
+ }
+}

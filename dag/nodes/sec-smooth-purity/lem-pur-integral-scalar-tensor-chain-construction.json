@@ -1,0 +1,141 @@
+{
+ "id": "lem-pur-integral-scalar-tensor-chain-construction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Finite ordinary coefficient comparison needed for the final paragraph of def-weil-derived-pullback-tensor-hom (latest blueprint, sec-proetale-coefficients/sk-prop-sf-open-closed-triangle); coefficient compatibility is referred there to sk-prop-scalar-six. This is a proved construction step of lem-pur-integral-scalar-tensor-level-construction.",
+   "via": [
+    "lem-pur-integral-scalar-tensor-level-construction",
+    "lem-pur-integral-scalar-finite-comparison-models",
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normalized scalar chain map on one finite tensor level",
+ "statement": "Let l be prime, let E and L be finite extensions of Q_l, and let iota:E -> L be a Q_l-algebra embedding. For F=E,L fix its valuation ring and uniformizer. On the small pro-etale site of a scheme W, put R_F,W=lim_m (O_F/pi_F^(m+1))_W, A_F,W=(O_F/pi_F^(n+1))_W, p_F:R_F,W -> A_F,W the quotient projection, j_W:R_E,W -> R_L,W the completed scalar map, and k_W:A_E,W -> A_L,W the quotient scalar map. Thus p_E;k_W=j_W;p_L. Write S_W(M)=R_L,W tensor_(R_E,W) M and T_F,W(M)=A_F,W tensor_(R_F,W) M, with sheafified ordinary tensor, their canonical unit sections denoted 1 tensor x. Restriction of scalars is understood along the displayed ring maps. All complexes below are arbitrary unbounded cochain complexes with termwise ordinary scalar extension and reduction. Write D_F,n(P,Q)=Res_pF Tot(T_F(P) tensor_(A_F,W) T_F(Q)), with direct-sum totalization and its signed differential. For each pair P,Q there exists a chain map alpha:S_W(D_E,n(P,Q)) -> D_L,n(S_W(P),S_W(Q)). This statement requires only this chain map and its normalization, without naturality in P,Q. For every pair P,Q of complexes, degrees p,q, object U and sections x in P^p(U), y in Q^q(U), its degree p+q component sends 1 tensor ((1 tensor x) tensor (1 tensor y)) in the (p,q) total-tensor summand to (1 tensor (1 tensor x)) tensor (1 tensor (1 tensor y)) in the corresponding target summand. All tensor sections are the canonical sheafification-unit sections. This is existence with this normalization only, requiring no flatness or boundedness hypothesis. These coefficient, module and tensor constructions use [def-weil-l-adic-coefficient-extension], [def-weil-completed-integral-coefficients], [def-weil-integral-scalar-extension], [def-weil-integral-reduction-tower], [lem-pur-integral-operations-well-defined], [def-pur-integral-finite-tensor-tower], [def-pur-sheaf-tensor-product], [def-pur-change-of-rings-complex], [def-sfb-scalar-extension-pure-tensor-section], [def-pc-sheaf-restrict-scalars].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CZ (lemma-adjointness-tensor-restrict), 03D7 (lemma-adjoint-pullback-pushforward-modules), 03EL (lemma-tensor-product-pullback); specialization constructed in lean/Sheaf/Paper/IntegralScalarTensorChainConstruction.lean:176"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-scalar-extension",
+  "def-weil-integral-reduction-tower",
+  "lem-pur-integral-operations-well-defined",
+  "def-pur-integral-finite-tensor-tower",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-change-of-rings-complex",
+  "def-sfb-scalar-extension-pure-tensor-section",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing signed total tensor chain-map construction TensorChainProof.map to b_P and b_Q degreewise. The coefficient square allows restriction from finite coefficients to the completed source coefficients. This gives an adjunct from the source finite tensor complex to the restriction of the target scalar tensor complex.",
+   "uses": [
+    "lem-pur-integral-scalar-finite-reduction-unit-map",
+    "lem-pur-integral-operations-well-defined",
+    "def-pur-change-of-rings-complex",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the adjunct through the scalar extension/restriction adjunction lifted to complexes. Its unit formula, TensorChainProof.pure on the (p,q) summand of the signed total tensor, and the two unit formulas for b give precisely the stated normalization. All totalization signs and compatibility with differentials are supplied by the existing total-tensor chain map, rather than a new degreewise assertion.",
+   "uses": [
+    "lem-pur-integral-scalar-finite-reduction-unit-map",
+    "def-pur-cochain-coefficient-arrows",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-scalar-finite-reduction-unit-map",
+  "lem-pur-integral-operations-well-defined",
+  "def-pur-change-of-rings-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-cochain-coefficient-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CZ, 03D7, 03EL; for total complexes also literature/stacks-project/homology.tex, Tag 012Z.",
+  "note": "Complete Lean construction from the existing ordinary adjunction and tensor APIs. This new module separates elaboration costs; no new sorry or mathematical assumption."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A chain map between scalar extension of a finite quotient tensor complex and the tensor of scalar extended complexes with its pure tensor unit formula",
+   "results": "ModuleCat.ExtendScalars.map_tmul and map, TensorProduct.map, HomologicalComplex.tensorHom. Generic ingredients; no finite-quotient sheaf comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match or one-line specialization: these are generic ingredients; the finite quotient coefficient square, specified unit sections and natural complex transformation still require construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.tensorHom",
+   "results": "Generic total tensor maps in Mathlib.Algebra.Homology.Monoidal, not the normalized coefficient-square scalar map.",
+   "date": "2026-10-27",
+   "verdict": "No exact match or one-line specialization: these are generic ingredients; the finite quotient coefficient square, specified unit sections and natural complex transformation still require construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg changeOfRings|pullbackComp|extendRestrictScalarsAdj_unit_app_apply in Mathlib/Algebra/Category/ModuleCat/Sheaf and Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "results": "SheafOfModules.pullbackComp in Sheaf/PullbackContinuous.lean:167 and ModuleCat.extendRestrictScalarsAdj_unit_app_apply in ChangeOfRings.lean:912. Read both signatures: composition of generic pullbacks, respectively module-ring scalar adjunction, rather than the required quotient coefficient comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match or one-line specialization: these are generic ingredients; the finite quotient coefficient square, specified unit sections and natural complex transformation still require construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOperationsScalarComparisonModels",
+  "date": "2026-10-27",
+  "group": "N4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarTensorChainConstruction",
+  "file": "lean/Sheaf/Paper/IntegralScalarTensorChainConstruction.lean",
+  "declaration": "WeilConjectures.integralScalarTensorChain_exists",
+  "statement": "theorem integralScalarTensorChain_exists (W : AlgebraicGeometry.Scheme.{u}) (n : ℕ) (P Q : CochainComplex (integralTowerModules l E W) ℤ) : ∃ a : ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj ((integralOperationsTensorLevel l E W n).obj (P, Q)) ⟶ (integralOperationsTensorLevel l L W n).obj ((((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P), (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj Q)), ∀ (p q : ℤ) (U : W.ProEtᵒᵖ) (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U), (a.f (p + q)).val.app U (integralOrdinaryTensorSection l E L ι W (((integralOperationsTensorLevel l E W n).obj (P, Q)).X (p + q)) U 1 (integralOperationsTotalTensorSection l E W n P Q p q U (unrestrictedIntegralTensorSection l E W n (P.X p) U 1 x) (unrestrictedIntegralTensorSection l E W n (Q.X q) U 1 y))) = integralOperationsTotalTensorSection l L W n (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P) (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj Q) p q U (unrestrictedIntegralTensorSection l L W n ((integralOrdinaryScalar l E L ι W).obj (P.X p)) U 1 (integralOrdinaryTensorSection l E L ι W (P.X p) U 1 x)) (unrestrictedIntegralTensorSection l L W n ((integralOrdinaryScalar l E L ι W).obj (Q.X q)) U 1 (integralOrdinaryTensorSection l E L ι W (Q.X q) U 1 y))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-05af7",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261027T112415-L-1580767",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-05af7",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261027T112415-L-1580767",
+  "kind": "interface",
+  "note": "independent cc review: item proofs and 4 new construction modules vs nodes pullback/tensor-level-exists-unique and 4 new nodes; removed CoefficientExtensionFinite import vs import closure (still public via IntegralOperationsWellDefined) and unit sk-thm-sf-compatibility realized (empty)"
+ }
+}

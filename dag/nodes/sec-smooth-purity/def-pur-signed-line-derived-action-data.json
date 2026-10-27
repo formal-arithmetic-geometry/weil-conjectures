@@ -1,0 +1,140 @@
+{
+ "id": "def-pur-signed-line-derived-action-data",
+ "kind": "definition",
+ "title": "Signed line derived action data",
+ "statement": "For the sheaf module categories and signed powers [def-pur-signed-line-pullback-normalization-data], define F to be the specified module pullback. Define signed isomorphism maps by positive tensor powers and precomposition with inverse powers for negative indices. Define D_L as the published unbounded derived tensor with L[0], and collapse as the total-complex single-factor comparison. ResolvingNormalization requires the comparison Q D_L ≅ (- tensor L) Q to agree with representativeIso followed by collapse on every K-flat representative. DerivedActionData consists of these comparisons on both sites and an isomorphism D_L D(F) ≅ D(F) D_M. DerivedAction requires flatness and the specified resolving normalizations, the termwise tensor comparison square, and uniqueness. DerivedLineConstraints specifies ordinary unit, positive reassociation and dual evaluation on all pure sections and specifies their derived lifts after Q. DerivedFamilyCoherence requires the same derived action family to commute with those three constraints on all derived objects. IsoNaturality and ScalarNaturality are the commuting signed-power squares for compatible line isomorphisms and arbitrary compatible extensions of coefficient rings. All definitions are the explicit formulas of the Lean attachment; no existence witness is used as definition data. DerivedActionData is represented by a structure with fst the source localization comparison and snd the pair of target comparison and derived action; these are exactly the preceding three pieces of data. LocalizedLineConstraints and LocalizedLineFamily are generic one-constructor propositions containing exactly the original witnesses and equations; DerivedLineConstraints and DerivedFamilyCoherence specialize them to the same sheaf-module functors. DerivedActionSquare and DerivedActionUnique name exactly the termwise square and uniqueness clauses used in DerivedAction.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pur-signed-line-scalar-normalization-data",
+  "def-pur-signed-line-pullback-normalization-data",
+  "def-sf-ringed-kflat-tensor-representative-data",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-sp-scalar-tensor-comparison-data",
+  "def-pur-signed-line-ordinary-constraint-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D3, 03EL and 0FNY; for derived localization use derived.tex Tags 06YU, 07A4 and 015F. Specialization of the Powers and duals paragraph of the current blueprint."
+ },
+ "proof": [
+  {
+   "text": "Use the existing module pullback, signed tensor powers, internal Hom, and derived tensor. Define collapse by the total-complex single-factor comparison. State the resolving normalization on all K-flat representatives, and define the action square and three coherence equations by their displayed composites. No mathematical existence is assumed by these predicates.",
+   "uses": [
+    "def-pur-signed-line-pullback-normalization-data",
+    "def-sf-ringed-kflat-tensor-representative-data",
+    "def-pur-site-sheaf-tensor-presentation-data",
+    "def-pur-signed-line-ordinary-constraint-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-signed-line-pullback-normalization-data",
+  "def-sf-ringed-kflat-tensor-representative-data",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "def-pur-signed-line-ordinary-constraint-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Powers and duals, including unit, positive tensor recursion, evaluation, and unbounded derived action. The component proof is given below and in the attached Lean module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of pullback invertible module sheaves extends to all signed tensor powers and derived tensor products",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory",
+   "results": "0 hits; loogle: unknown identifier 'Functor.mapDerivedCategory'",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "signed_line_derived_base_change|SignedLinePullbackNormalized",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SignedLineDerivedBaseChange",
+  "date": "2026-10-24",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-signed-line-derived-base-change",
+   "place": "The corresponding strict component of its proof.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SignedLineDerivedBaseChangeData",
+  "file": "lean/Sheaf/Algebra/Homology/SignedLineDerivedBaseChangeData.lean",
+  "declaration": "SheafOfModules.SignedLineDerivedBaseChange.pull",
+  "declarations": [
+   "SheafOfModules.SignedLineDerivedBaseChange.pull",
+   "SheafOfModules.SignedLineDerivedBaseChange.signedIsoHom",
+   "SheafOfModules.SignedLineDerivedBaseChange.derivedLine",
+   "SheafOfModules.SignedLineDerivedBaseChange.complexLine",
+   "SheafOfModules.SignedLineDerivedBaseChange.collapse",
+   "SheafOfModules.SignedLineDerivedBaseChange.ResolvingNormalization",
+   "SheafOfModules.SignedLineDerivedBaseChange.DerivedActionData",
+   "SheafOfModules.SignedLineDerivedBaseChange.DerivedAction",
+   "SheafOfModules.SignedLineDerivedBaseChange.DerivedLineConstraints",
+   "SheafOfModules.SignedLineDerivedBaseChange.DerivedFamilyCoherence",
+   "SheafOfModules.SignedLineDerivedBaseChange.IsoNaturality",
+   "SheafOfModules.SignedLineDerivedBaseChange.ScalarNaturality",
+   "SheafOfModules.SignedLineDerivedBaseChange.DerivedActionSquare",
+   "SheafOfModules.SignedLineDerivedBaseChange.DerivedActionUnique",
+   "SheafOfModules.SignedLineDerivedBaseChange.LocalizedLineConstraints",
+   "SheafOfModules.SignedLineDerivedBaseChange.LocalizedLineFamily"
+  ],
+  "statement": "abbrev pull\n    (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶\n      (U.sheafPushforwardContinuous RingCat J K).obj\n        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published statement (byte-identical); relocated Data definitions vs published bodies (structure/inductive repackaging, same content, change record); 18 delivered modules + 3 direct importers compiled together in a sandbox (no errors; CartesianCoefficientTwists 84 s vs 81 s for the published file, so its slowness was already there); #print axioms only propext/choice/Quot.sound plus sorryAx from cited open library statements"
+ }
+}

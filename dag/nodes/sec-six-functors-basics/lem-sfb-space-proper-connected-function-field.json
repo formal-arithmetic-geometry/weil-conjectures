@@ -1,0 +1,194 @@
+{
+ "id": "lem-sfb-space-proper-connected-function-field",
+ "kind": "statement",
+ "title": "Global functions on a proper reduced connected algebraic space",
+ "statement": "Let $k$ be a field [def-weil-field] and $X$ an algebraic space over $\\operatorname{Spec}k$ [def-pc-scheme, def-trf-algebraic-space]. Suppose the structure morphism is proper [def-sfb-space-morphism-properties], meaning separated, of finite type and universally closed. Suppose $X$ is reduced, meaning the rings of affine etale scheme charts have no nonzero nilpotents, and $|X|$ is nonempty and connected in the atlas topology [def-a1-space-point-topology]. Then $\\Gamma(X,\\mathcal O_X)$ is a field, finite-dimensional as a $k$-algebra. Here $\\mathcal O_X$ is the structure sheaf on the small etale site. No geometric reducedness or geometric connectedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Tag 0DMY, lemma-proper-geometrically-reduced-global-sections, clauses (1)--(3), restricted to a single nonempty connected component"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "def-a1-space-point-topology",
+  "def-sfb-reduced-algebraic-space",
+  "def-sfb-space-affine-global-sections"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\Gamma(X_{\\mathrm{et}},\\mathcal O_X)$ and let $C$ be the set of connected components of $|X|$. Apply [lem-sfb-space-proper-global-algebra-components] to the given proper algebraic space over the field $k$. It gives a finite-dimensional $k$-algebra $A$ and the restriction isomorphism $A\\simeq\\prod_{c\\in C}\\Gamma(c_{\\mathrm{et}},\\mathcal O_c)$. Since $X$ is reduced, every factor in this product is a finite field extension of $k$. This application uses only ordinary reducedness, not geometric reducedness.",
+   "uses": [
+    "lem-sfb-space-proper-global-algebra-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0DMY, lemma-proper-geometrically-reduced-global-sections, clauses (1)--(3) and the component decomposition in the proof of (2)"
+   }
+  },
+  {
+   "text": "The whole set $|X|$ is nonempty and connected, so it is itself a maximal nonempty connected subset. Every connected component, being maximal among such subsets and contained in $|X|$, is therefore $|X|$. Thus $C$ has exactly one element $c_0$. Evaluation at $c_0$ identifies the preceding product with its sole factor (the inverse sends an element to the function on the singleton having that value). Composing with restriction gives a $k$-algebra isomorphism from $A$ to a field finite over $k$. Hence $A$ is a field and finite-dimensional over $k$, as claimed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0DMY, lemma-proper-geometrically-reduced-global-sections, clauses (1)--(3) and the component decomposition in the proof of (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-proper-global-algebra-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Tag 0DMY, lemma-proper-geometrically-reduced-global-sections, clauses (1)--(3) and the component decomposition in the proof of (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isField.*[Uu]niversallyClosed|[Gg]lobal.*[Ss]ections.*[Ff]ield|[Pp]roper.*[Ss]ections",
+   "results": "5 hits; top: Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf.lean, Mathlib/CategoryTheory/Types/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned candidates; scheme global functions/germ results, ring Picard groups and topological bundles do not state this algebraic-space result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsField\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned candidates; scheme global functions/germ results, ring Picard groups and topological bundles do not state this algebraic-space result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The global sections of the structure sheaf of a proper reduced connected algebraic space form a field",
+   "results": "8 hits; top: AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.Scheme.ΓSpecIso_inv, AlgebraicGeometry.LocallyRingedSpace.𝒪, AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.StructureSheaf.to_global_factors_apply, AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom, AlgebraicGeometry.instFieldCarrierFunctionField",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned candidates; scheme global functions/germ results, ring Picard groups and topological bundles do not state this algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global functions on a proper reduced connected algebraic space over a field form a finite field extension",
+   "results": "8 hits; top: AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.instFieldCarrierFunctionField, functionField_iff, AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec, AlgebraicGeometry.Scheme.functionField, FunctionField, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned candidates; scheme global functions/germ results, ring Picard groups and topological bundles do not state this algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper connected reduced algebraic space has a ring of global regular functions which is a field finite over the base",
+   "results": "8 hits; top: AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec, AlgebraicGeometry.Scheme.functionField, AlgebraicGeometry.functionField_isFractionRing_of_affine, AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.IsIntegral",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned candidates; scheme global functions/germ results, ring Picard groups and topological bundles do not state this algebraic-space result"
+  },
+  {
+   "tool": "grep",
+   "query": "isField.*[Uu]niversallyClosed|finite_appTop_of_universallyClosed|[Aa]lgebraic[Ss]pace",
+   "results": "5 hits; top: Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean. Read Proper.lean:150--163; both global-section results require an integral scheme, not an arbitrary reduced connected algebraic space.",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates are integral-scheme global sections, their generic-point function fields or abstract field definitions; they do not cover algebraic spaces or ordinary reduced connected spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The global sections of the structure sheaf of a proper reduced connected algebraic space form a field finite over the base field",
+   "results": "8 hits; top: AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.Scheme.ΓSpecIso_inv, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.StructureSheaf.to_global_factors_apply, AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom, AlgebraicGeometry.LocallyRingedSpace.𝒪. Read Proper.lean:150--163; both global-section results require an integral scheme, not an arbitrary reduced connected algebraic space.",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates are integral-scheme global sections, their generic-point function fields or abstract field definitions; they do not cover algebraic spaces or ordinary reduced connected spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsField\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates are integral-scheme global sections, their generic-point function fields or abstract field definitions; they do not cover algebraic spaces or ordinary reduced connected spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global functions on a proper reduced connected algebraic space over a field form a finite field extension",
+   "results": "8 hits; top: AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.instFieldCarrierFunctionField, functionField_iff, AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec, AlgebraicGeometry.Scheme.functionField, FunctionField, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop. Read Proper.lean:150--163; both global-section results require an integral scheme, not an arbitrary reduced connected algebraic space.",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates are integral-scheme global sections, their generic-point function fields or abstract field definitions; they do not cover algebraic spaces or ordinary reduced connected spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper connected reduced algebraic space has a ring of global regular functions which is a field finite over the base",
+   "results": "8 hits; top: AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec, AlgebraicGeometry.Scheme.functionField, AlgebraicGeometry.functionField_isFractionRing_of_affine, AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.IsIntegral. Read Proper.lean:150--163; both global-section results require an integral scheme, not an arbitrary reduced connected algebraic space.",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates are integral-scheme global sections, their generic-point function fields or abstract field definitions; they do not cover algebraic spaces or ordinary reduced connected spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-dual-effective-line-triviality",
+  "date": "2026-10-24",
+  "group": "Q61"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Rigidified Picard representability for proper geometrically integral algebraic-space families. Supporting input: Valuation-ring triviality used to establish uniqueness for two rigidified classes, before applying the valuative criterion. Field-fibre input: Two opposite effective line classes on a proper integral algebraic space. Tag 0DMZ proof: the assertion that K = H^0(X,O_X) is a field, using 0DMY(1)--(3).",
+   "via": [
+    "lem-sfb-space-dual-effective-line-triviality",
+    "lem-sfb-space-valuation-line-triviality",
+    "lem-sfb-rigidified-space-picard",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-proper-connected-function-field",
+  "worker": "stage1",
+  "summary": "Read Stacks 0DMY(1)--(3) and reused the existing general component/global-algebra theorem. The proof specializes its product to the unique connected component and keeps arbitrary base fields and ordinary reducedness. No new nodes or statement changes. Mathlib candidates concern integral schemes only.",
+  "blueprint": "The inherited from.place locates the field-fibre input to Tag 0DMZ on the long direct-image/alteration prerequisite chain. The current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) is the overarching direct-image step. Here 0DMY(1)--(3) is realized by the existing general component theorem followed by the singleton-component argument. The inherited null ancestor and via list are preserved; whole-blueprint searches found no exact blueprint equivalent."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NB-58772452a",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-58772452a (reviewer sub-agent of L); spot-checked: I read the item and checked it against Stacks 0DMY (spaces-over-fields.tex, label lemma-proper-geometrically-reduced-global-sections; tags/tags line 17098), clauses (1)-(3). The hypotheses match one for one: any field k, X proper (separated, finite type, universally closed), ordinary reducedness. The item does not use clause (7), and its conclusion (a field finite over k, not A=k) is true without geometric hypotheses. There are no new nodes. The statement and stmt_deps are unchanged from the base. No repair note exists, so the re-split rule does not apply. Step 1 cites lem-sfb-space-proper-global-algebra-components (same unit, unsplit, empty proof_deps). Its statement gives finiteness of A, the restriction isomorphism A ≅ product over the connected components, and finite-field factors for X reduced, with reduced defined in the same chart wording as the item. The step uses that statement, not the proof, and there is no cycle: this item's citers are proper-field-global-functions, dual-effective-line-triviality and flat-geometric-component-count, none of them below the cited node. Step 2 is honestly elementary: a nonempty connected |X| is its own unique component, and a product over a singleton is its one factor, so A is a field finite over k. Small cases checked: Spec k; Spec L with L/k inseparable (A=L, a field but not k); two P^1 meeting at a point; empty X (excluded by nonemptiness); Spec k ⊔ Spec k (excluded by connectedness); Spec k[ε]/(ε²) (excluded by reducedness); A^1 (excluded by properness). A search of the DAG for 0DMY found no duplicate: the general node is cited, and proper-field-global-functions sits above the item and would be circular here. No SGA is used and no tool_uses are needed. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProperConnectedFunctionField",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.globalFunctions_isField_finite_of_proper_reduced_connected",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProperConnectedFunctionField.lean",
+  "statement": "theorem globalFunctions_isField_finite_of_proper_reduced_connected (k : Type u) [Field k] (X : AlgebraicSpace (Spec (CommRingCat.of k))) (f : X ⟶ schemeSpace (Over.mk (𝟙 (Spec (CommRingCat.of k))))) (hf : MapIsProper f) (hred : X.IsReduced) [ConnectedSpace (Point X.obj.obj)] : IsField (RingCat.sectionsSubring X.smallStructureRings.obj) ∧ @Module.Finite k (RingCat.sectionsSubring X.smallStructureRings.obj) _ _ (affineGlobalScalar k (Over.mk (𝟙 (Spec (CommRingCat.of k)))) (Iso.refl _) X f).toModule",
+  "branch": "sheaf-dag",
+  "by": "Q79",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae9caeaed",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Checked against Stacks 0DMY(1)-(3) (spaces-over-fields.tex). Arbitrary field k; X : AlgebraicSpace (Spec k); f to the terminal schemeSpace (unique); MapIsProper = separated ∧ finite type ∧ universally closed; X.IsReduced = all étale charts reduced (equivalent to affine charts); [ConnectedSpace (Point X.obj.obj)] with the recorded pointTopologicalSpace instance (includes nonempty; pointConstructibleTopology is only a def). Γ(X,O_X) = sectionsSubring X.smallStructureRings.obj (compatible families, i.e. the limit; same carrier as the landed affineGlobalScalar and steinGlobalFunctions); conclusion IsField ∧ Module.Finite via the canonical affineGlobalScalar k (Over.mk 𝟙) (Iso.refl) X f. Edge cases: empty excluded by ConnectedSpace as in the node; inseparable Spec L allowed; single universe u. Item differs from side-live only in lean plus two added landed definition stmt_deps (reduced space, affine global sections), no cycle; dependency node files byte-identical; lean.statement verbatim; sorry only; docstrings with source, blueprint and both proof steps; lines ≤100; no new defs; no existing declaration (Mathlib results are for integral schemes). Advisory: smallStructureRings owner reached only through def-sfb-space-affine-global-sections; sibling proper-field-global-functions uses big-site SheafOfModules sections, so stage 3 needs the restriction comparison. No files changed, no compile."
+ }
+}

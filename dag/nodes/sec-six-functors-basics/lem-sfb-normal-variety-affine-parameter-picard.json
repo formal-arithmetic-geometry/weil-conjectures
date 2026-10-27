@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-normal-variety-affine-parameter-picard",
+ "kind": "statement",
+ "title": "Rational affine-space parameters give isomorphic line-module fibres",
+ "statement": "Let $k$ be a field [def-weil-field] and $X$ an integral separated scheme of finite type over $k$ [def-pc-integral-scheme, def-weil-finite-type-morphism], where separated means that the diagonal is a closed immersion. Assume $X$ is normal, meaning that each local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $n\\geq0$, let $U$ be an open subscheme of $\\mathbf A^n_k=\\operatorname{Spec}k[t_1,\\ldots,t_n]$ [def-weil-affine-spectrum, def-weil-open-immersion, def-weil-pbc-mv-polynomial-ring], and let $p,q\\in U(k)$. For every invertible module $\\mathcal N$ on $X\\times_kU$ [def-pc-fibre-product, def-sc-invertible-module], there is an isomorphism $i_p^*\\mathcal N\\simeq i_q^*\\mathcal N$ of $\\mathcal O_X$-modules, where $i_r(x)=(x,r)$ and pullback is tensor inverse image [def-pc-module-pullback].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BEH, lemma-rational-equivalence-for-Pic."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-normal-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $Y=X\\times_kU$ and $f=\\operatorname{pr}_X$. Since every ideal of a field is zero or the unit ideal, $\\operatorname{Spec}k$ is locally Noetherian. The finite-type hypothesis on $X$ and [pqf-lem-locnoeth-lft] imply that $X$ is locally Noetherian. To check $f$ is locally of finite type, cover $X$ by affine opens $\\operatorname{Spec}A$ and $U$ by standard principal opens $D(g)\\subseteq U$ of $\\operatorname{Spec}k[t_1,\\ldots,t_n]$. By [lem-weil-pbc-fibre-product-affine-spectra], the corresponding product chart has ring $A\\otimes_k k[t_1,\\ldots,t_n]_g\\cong A[t_1,\\ldots,t_n]_{g_A}$: the isomorphism sends $a\\otimes t_j$ to $at_j$ and $1\\otimes g^{-1}$ to $g_A^{-1}$, with inverse given by the same generators. This algebra is generated over $A$ by $t_1,\\ldots,t_n,g_A^{-1}$, so these charts verify the locally-finite-type condition of [def-weil-finite-type-morphism]. Apply [pqf-lem-locnoeth-lft] once more to $f$ to conclude that $Y$ is locally Noetherian.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-finite-type-morphism",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEH, lemma-rational-equivalence-for-Pic, proof; hypotheses of Divisors Tag 0BD7 spelled out."
+   }
+  },
+  {
+   "text": "The morphism $f$ is flat. Indeed, over an affine open $\\operatorname{Spec}A\\subseteq X$, the product with the whole affine space is $\\operatorname{Spec}A[t_1,\\ldots,t_n]$, by the tensor calculation in step 1. Its projection is flat by [lem-nagata-polynomial-projection-flat]. The restriction to the open $\\operatorname{Spec}A\\times_kU$ has exactly the same source and target local rings at its points. Thus it is flat at each point by [def-weil-flat-morphism]. These opens cover $Y$, proving the assertion.",
+   "uses": [
+    "lem-nagata-polynomial-projection-flat",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEH, lemma-rational-equivalence-for-Pic, proof; hypotheses of Divisors Tag 0BD7 spelled out."
+   }
+  },
+  {
+   "text": "For each $x\\in X$, write $K=\\kappa(x)$. The fibre $Y_x$ is $U_K=U\\times_k\\operatorname{Spec}K$, an open of $\\operatorname{Spec}K[t_1,\\ldots,t_n]$: the affine chart calculation of step 1 replaces $k[t]_g$ by $K[t]_{g_K}$ and the charts glue by their identical localization maps. The point $p\\in U(k)$ base changes to a $K$-point, so this open is nonempty. By [lem-sfb-polynomial-field-ufd], $K[t_1,\\ldots,t_n]$ is a domain. Its spectrum is reduced and irreducible (the zero prime is generic); a nonempty open remains irreducible, and its local rings are the same domain localizations. It is therefore integral in the equivalent reduced/irreducible formulation of [def-pc-integral-scheme]. This checks integral nonempty fibres for every $x$, including the generic point.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sfb-polynomial-field-ufd",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEH, lemma-rational-equivalence-for-Pic, proof; hypotheses of Divisors Tag 0BD7 spelled out."
+   }
+  },
+  {
+   "text": "Let $\\eta$ be the generic point of $X$ and put $K=\\kappa(\\eta)$. The tensor pullback $\\mathcal N_\\eta$ is invertible on $Y_\\eta=U_K$: a local rank-one frame $e$ pulls back to the frame $1\\otimes e$ [def-sc-invertible-module, def-pc-module-pullback]. Apply [lem-sfb-affine-space-open-invertible-trivial] over the field $K$ to obtain $\\mathcal N_\\eta\\simeq\\mathcal O_{Y_\\eta}$. Now [lem-sfb-normal-noetherian-generic-line-pullback], applied to $f:Y\\to X$ and $\\mathcal N$, gives an invertible module $M$ on $X$ and $f^*M\\simeq\\mathcal N$: local Noetherianity and local finite type were proved in step 1, flatness in step 2, and integral nonempty fibres in step 3. The base $X$ is integral and normal by hypothesis. Thus all five hypotheses of that criterion, including generic-fibre triviality, have been checked.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback",
+    "lem-sfb-affine-space-open-invertible-trivial",
+    "lem-sfb-normal-noetherian-generic-line-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEH, lemma-rational-equivalence-for-Pic, proof; hypotheses of Divisors Tag 0BD7 spelled out."
+   }
+  },
+  {
+   "text": "For $r=p,q$, the map $i_r:X\\to Y$ is the pair $(\\operatorname{id}_X,r\\circ(X\\to\\operatorname{Spec}k))$, so $f\\circ i_r=\\operatorname{id}_X$ by [def-pc-fibre-product]. Pull back the isomorphism from step 4. The identity and composition isomorphisms in [def-pc-module-pullback] give $i_r^*\\mathcal N\\simeq i_r^*f^*M\\simeq(f\\circ i_r)^*M\\simeq M$. Compose the isomorphism for $p$ with the inverse of the one for $q$ to obtain $i_p^*\\mathcal N\\simeq i_q^*\\mathcal N$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEH, lemma-rational-equivalence-for-Pic, proof; hypotheses of Divisors Tag 0BD7 spelled out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "lem-nagata-polynomial-projection-flat",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "lem-sfb-polynomial-field-ufd",
+  "def-pc-integral-scheme",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-sfb-affine-space-open-invertible-trivial",
+  "lem-sfb-normal-noetherian-generic-line-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BEH, lemma-rational-equivalence-for-Pic, proof (fibre Picard triviality and Divisors 0BD7); local hypotheses expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a normal variety X a line bundle on X times an open of affine space has isomorphic restrictions at any two rational parameter points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    {X : AlgebraicGeometry.Scheme} →\\n      [inst : X.Over S] → { f // AlgebraicGeometry.Scheme.Hom.IsOver f S } ≃ (n → ↑(X.presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"For any scheme $ S $ and any scheme $ X $ over $ S $, there is a natural equivalence between morphisms from $ X $ to the affine space $ \\\\mathbb{A}^n_S $ over $ S $ and $ n $-tuples of global sections \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a global section $f$, and a positive integer $n$ with $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism $\\\\text{fromOfGlobalSections}(\\\\mathcal{A}, f, hf)$ to the b\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S],\\n  AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).hom =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.ΓSpecIso\\n          { carrier := MvPolynomial n ↑(S\", \"doc\": \"When the base scheme $ S $ is affine, the isomorphism between the affine space $ \\\\mathbb{A}^n_S $ and the spectrum of the polynomial ring over the global sections of $ S $ maps the entire space to the\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S] (i : n),\\n  (CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).inv))\\n      (AlgebraicGeometry.AffineSpace.coord S i) =\\n    (CategoryTheo\", \"doc\": \"For an affine scheme $ S $, the inverse of the isomorphism between the affine space $ \\\\mathbb{A}^n_S $ and the spectrum of the polynomial ring over the global sections of $ S $ maps the $ i $-th coord\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOverEquiv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) {X : AlgebraicGeometry.Scheme} [inst : X.Over S]\\n  (f : { f // AlgebraicGeometry.Scheme.Hom.IsOver f S }) (i : n),\\n  (AlgebraicGeometry.AffineSpace.homOverEquiv S) f i =\\n    (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop ↑f))\\n \", \"doc\": \"For any scheme $ S $ and any scheme $ X $ over $ S $, there is a natural bijection between morphisms from $ X $ to the affine space $ \\\\mathbb{A}^n_S $ over $ S $ and $ n $-tuples of global sections of\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.appBasicOpenIsoAwayMap\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    {U : Y.Opens} →\\n      (hU : AlgebraicGeometry.IsAffineOpen U) →\\n        (h : AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).obj U)) →\\n          (r : ↑(Y.presheaf.obj (Opposite.op U))) →\\n            CategoryTheory.Arrow.mk (A\", \"doc\": \"Given an isomorphism $\\\\alpha: X \\\\cong Y$ in a category $\\\\mathcal{C}$, this constructs the corresponding isomorphism $\\\\alpha^{\\\\text{op}}: Y^{\\\\text{op}} \\\\cong X^{\\\\text{op}}$ in the opposite category $\\\\m\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: CommRing.Pic classifies invertible modules over one ring; it does not compare sheaves on different fibres of a normal variety times an affine-space open. Upstream AffineSpaceRigidity proves only the factorial, algebraically closed, basic-open affine-line case."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rationally equivalent invertible modules on a normal variety are isomorphic Picard affine space parameter rigidity",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CommRing.Pic.ext_iff\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"{M N : Pic R} : M = N ↔ Nonempty (M ≃ₗ[R] N)\", \"doc\": \"For any two elements $ M $ and $ N $ in the Picard group $ \\\\mathrm{Pic}(R) $, $ M = N $ if and only if there exists an $ R $-linear isomorphism between the corresponding invertible modules $ M $ and $\"}\n  {\"name\": \"CommRing.Pic.mk_eq_one_iff_free\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Pic.mk R M = 1 ↔ Free R M\", \"doc\": \"For a commutative semiring $ R $ and an invertible $ R $-semimodule $ M $, the class of $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the identity element if and only if $ M $ is a free $ \"}\n  {\"name\": \"CommRing.Pic.instCoeSortType\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": CoeSort (Pic R) (Type u)\", \"doc\": \"There is a canonical coercion from elements of the Picard group $\\\\mathrm{Pic}(R)$ to their corresponding invertible $R$-modules, where each element $M \\\\in \\\\mathrm{Pic}(R)$ is represented by its underl\"}\n  {\"name\": \"CommRing.Pic.mk_eq_mk_iff\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Pic.mk R M = Pic.mk R N ↔ Nonempty (M ≃ₗ[R] N)\", \"doc\": \"For a commutative semiring $ R $, the equality $ [M] = [N] $ in the Picard group $ \\\\mathrm{Pic}(R) $ holds if and only if there exists an $ R $-linear isomorphism between the invertible $ R $-semimodu\"}\n  {\"name\": \"CommRing.Pic.AsModule\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(M : Pic R) : Type u\", \"doc\": \"For an element $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $, this returns the corresponding invertible semimodule (module) over $ R $ in the skeleton category, representing the isomorphism class of i\"}\n  {\"name\": \"CommRing.Pic.mk_eq_iff\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"{N : Pic R} : Pic.mk R M = N ↔ Nonempty (M ≃ₗ[R] N)\", \"doc\": \"For a commutative semiring $ R $, two invertible $ R $-modules $ M $ and $ N $ represent the same element in the Picard group $ \\\\mathrm{Pic}(R) $ if and only if $ M $ and $ N $ are isomorphic as $ R $\"}\n  {\"name\": \"CommRing.Pic.mk\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Pic R\", \"doc\": \"The Picard group of a commutative semiring $ R $ is the group formed by isomorphism classes of invertible $ R $-semimodules under the tensor product operation. Each class has an inverse given by the d\"}\n  {\"name\": \"CommRing.Pic.subsingleton_iff\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"{R : Type u} [CommRing R] :\\n  Subsingleton (Pic R) ↔ ∀ (M : Type u) [AddCommGroup M] [Module R M], Module.Invertible R M → Free R M\", \"doc\": \"For a commutative ring $ R $, the Picard group $ \\\\operatorname{Pic}(R) $ is trivial (a subsingleton) if and only if every invertible $ R $-module is free.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: CommRing.Pic classifies invertible modules over one ring; it does not compare sheaves on different fibres of a normal variety times an affine-space open. Upstream AffineSpaceRigidity proves only the factorial, algebraically closed, basic-open affine-line case."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PicardGroup\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: CommRing.Pic classifies invertible modules over one ring; it does not compare sheaves on different fibres of a normal variety times an affine-space open. Upstream AffineSpaceRigidity proves only the factorial, algebraically closed, basic-open affine-line case."
+  },
+  {
+   "tool": "grep",
+   "query": "PicardGroup|rational.*equivalence|[Aa]ffineSpace.*[Rr]igid",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"22\", \"text\": \"  A rational map from `X` to `Y` (`X ⤏ Y`) is an equivalence class of partial maps.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"372\", \"text\": \"/-- A rational map from `X` to `Y` (`X ⤏ Y`) is an equivalence class of partial maps,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"391\", \"text\": \"/-- A rational map is an `S`-map if some partial map in the equivalence class is an `S`-map. -/\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: CommRing.Pic classifies invertible modules over one ring; it does not compare sheaves on different fibres of a normal variety times an affine-space open. Upstream AffineSpaceRigidity proves only the factorial, algebraically closed, basic-open affine-line case."
+  },
+  {
+   "tool": "grep",
+   "query": "Pic|[Ii]nvertible",
+   "results": "{\"t\": \"2026-10-23T21:44:51Z\", \"tool\": \"grep\", \"query\": \"Pic|[Ii]nvertible\", \"sub\": \"AlgebraicGeometry/AffineSpace.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned projective-spectrum and ring Picard declarations do not compare two rational parameter fibres on a normal variety. The project source has only a factorial/algebraically-closed/basic-open version."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace, Module.Invertible",
+   "results": "{\"t\": \"2026-10-23T21:44:52Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.AffineSpace, Module.Invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned projective-spectrum and ring Picard declarations do not compare two rational parameter fibres on a normal variety. The project source has only a factorial/algebraically-closed/basic-open version."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Line bundles on a product of a normal variety and an open affine space have isomorphic restrictions at rational parameter points",
+   "results": "{\"t\": \"2026-10-23T21:44:53Z\", \"tool\": \"leanfinder\", \"query\": \"Line bundles on a product of a normal variety and an open affine space have isomorphic restrictions at rational parameter points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc\", \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\"], \"digest\": \"b4d58cfea0e70b76\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned projective-spectrum and ring Picard declarations do not compare two rational parameter fibres on a normal variety. The project source has only a factorial/algebraically-closed/basic-open version."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rationally equivalent line bundles on a normal variety are isomorphic",
+   "results": "{\"t\": \"2026-10-23T21:48:34Z\", \"tool\": \"leansearch\", \"query\": \"Rationally equivalent line bundles on a normal variety are isomorphic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.mk_eq_iff\", \"CommRing.Pic.ext_iff\", \"CommRing.Pic.mk_eq_mk_iff\", \"Submodule.unitsToPicEquiv\", \"CommRing.Pic.mk.linearEquiv\", \"AlgebraicGeometry.Scheme.RationalMap\", \"Pretrivialization.linearEquivAt.congr_simp\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\"], \"digest\": \"6b78264a784e6fd8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned projective-spectrum and ring Picard declarations do not compare two rational parameter fibres on a normal variety. The project source has only a factorial/algebraically-closed/basic-open version."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-type-group-ample-line",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3, printed p.53, opening parenthesis: the generic line is a difference of two ample lines; Stacks supplies this for all finite-type algebraic groups, not only abelian varieties. Supporting input for the present split: existence of one ample invertible module on a finite-type group scheme, before choosing a high twist of the supplied line. Final paragraph of Groupoids Tag 0BF7: independence of the fibre line-module class under rational variation in V.",
+   "via": [
+    "lem-sfb-finite-type-group-ample-line",
+    "lem-sfb-algebraic-group-ample-difference",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-variety-affine-parameter-picard",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0BEH using the existing full 0BD7 pullback criterion. Added only the missing arbitrary-open affine-space Picard-triviality input, rather than duplicating the existing whole-space theorem. Verified local Noetherianity, flatness, local finite type, nonempty integral fibres and generic-fibre triviality before applying the criterion. The upstream theorem has strictly stronger factorial/algebraically-closed/basic-open hypotheses and is not an attachment. Normalized doubled TeX backslashes and supplied the polynomial-ring definition dependency; no mathematical hypotheses or conclusion changed.",
+  "blueprint": "Supporting algebraic-geometric input in the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration chain, ultimately the final paragraph of Groupoids 0BF7: rational variation of the fibre line class. Read the latest unit and direct-images proof. The imported ancestry is missing (blueprint_refs.py ancestor returns None), so preserved the inherited null from.node and via chain, and made the supporting place precise. Whole-blueprint searches for Picard, rationally, open subscheme, 0BD7 and 0BDA found no equivalent blueprint node; same_as remains [].",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic permanence tool: a locally finite type scheme over a locally Noetherian base is locally Noetherian. Used only to check hypotheses of 0BD7, not to replace a unit-route step."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine fibre-product tensor description, used for product charts and their fibres; no node of this unit gives this foundational identification."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-692c8cf34",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-692c8cf34 (reviewer sub-agent of L); spot-checked: Read Stacks 0BEH (varieties.tex lemma-rational-equivalence-for-Pic), 0BD7 (divisors lemma-in-image-pullback) and 0BDA (lemma-open-subscheme-UFD, final sentence), the item, the new node and all 13 cited statements. The item statement is unchanged from the base except for the added stmt_dep def-weil-pbc-mv-polynomial-ring; it is still unsplit on live and side-live, so no other group has split it. Steps 1-3 check the hypotheses of 0BD7. Step 1: local Noetherianity via 01T6 twice, and local finite type via the A[t]_g chart. Step 2: flatness via lem-nagata-polynomial-projection-flat plus the pointwise definition on an open. Step 3: the fibres are U_K, nonempty because of p and integral because K[t] is a domain; this step is genuinely elementary. Step 4 applies the new node over kappa(eta) and then lem-sfb-normal-noetherian-generic-line-pullback; all five hypotheses match. Step 5 uses f∘i_r=id and the id/composition isomorphisms stated in def-pc-module-pullback. The new node lem-sfb-affine-space-open-invertible-trivial is exactly 0BDA's field case, and it holds on V=∅, n=0, A^2 minus the origin, and finite or imperfect fields. It is not a clause of the item and duplicates none of affine-space-invertible-trivial (whole space only), ufd/pid-invertible-module-trivial (ring level), invertible-extension-factorial-complement (0BD9, an extension theorem) or affine-cell-picard-product (needs an algebraically closed field). No SGA citation and no cycle. Batch-5: lem-trf-flat-module-torsionfree-domain, reached through the 0BD7 node, is a Mathlib leaf of generic algebra (flat over a domain implies torsion-free); it is neither the trace formula nor Poincare duality nor a step of their proofs, so it is not grounds for RETURN. Accepted tool_uses: pqf-lem-locnoeth-lft and lem-weil-pbc-fibre-product-affine-spectra, both Mathlib leaves. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalVarietyAffineParameterPicard",
+  "declaration": "AlgebraicGeometry.nonempty_iso_tensorPullback_lift_of_normal_variety",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalVarietyAffineParameterPicard.lean",
+  "statement": "theorem nonempty_iso_tensorPullback_lift_of_normal_variety (k : Type u) [Field k] (X : Scheme.{u}) [IsIntegral X] (sX : X ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType sX] [QuasiCompact sX] [IsClosedImmersion (pullback.diagonal sX)] (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (n : ℕ) (U : Scheme.{u}) (j : U ⟶ Spec (CommRingCat.of (MvPolynomial (Fin n) k))) [IsOpenImmersion j] (p q : Spec (CommRingCat.of k) ⟶ U) (hp : p ≫ (j ≫ Spec.map (CommRingCat.ofHom (MvPolynomial.C))) = 𝟙 _) (hq : q ≫ (j ≫ Spec.map (CommRingCat.ofHom (MvPolynomial.C))) = 𝟙 _) (N : (pullback sX (j ≫ Spec.map (CommRingCat.ofHom (MvPolynomial.C)))).Modules) [N.IsInvertible] : Nonempty ((Scheme.Modules.tensorPullback (pullback.lift (𝟙 X) (sX ≫ p) (by simp [hp]))).obj N ≅ (Scheme.Modules.tensorPullback (pullback.lift (𝟙 X) (sX ≫ q) (by simp [hq]))).obj N)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-19dc2ab7d",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Read node, Stacks 0BEH (varieties.tex 5867-5884) and definition-variety, all 10 stmt_dep records and the declarations IsInvertible and tensorPullback. Every hypothesis matches without strengthening: Field k, IsIntegral X, LocallyOfFiniteType+QuasiCompact sX, closed-immersion diagonal, stalkwise IsDomain∧IsIntegrallyClosed, arbitrary open immersion U into Spec k[Fin n], k-points p,q as sections of j≫Spec.map C. Conclusion is Nonempty iso of tensorPullback along pullback.lift (𝟙 X) (sX≫r) in X.Modules. Edge cases n=0, U=∅, non-affine U, p=q and any k are covered; single universe u, forced. No duplicate: upstream AffineSpaceRigidity/LocalizationAwayRigidity need IsAlgClosed+UFD stalks+basic opens. Node differs from base only in lean; statement verbatim in file; sorry only; docstrings carry source, blueprint id and 5 proof steps; report has both required sections. No findings."
+ }
+}

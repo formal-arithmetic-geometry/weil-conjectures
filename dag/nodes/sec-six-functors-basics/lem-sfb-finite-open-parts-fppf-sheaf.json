@@ -1,0 +1,402 @@
+{
+ "id": "lem-sfb-finite-open-parts-fppf-sheaf",
+ "kind": "statement",
+ "title": "Finite-open pairs satisfy fppf descent",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention], and let $f:X\\to Y$ be any morphism of $S$-schemes. On $S$-schemes let $P_f(T)$ be the set of pairs $(a,Z)$ with $a:T\\to Y$ an $S$-map and $Z\\subseteq X\\times_{Y,a}T$ an open subscheme [def-pc-fibre-product, def-weil-open-immersion] finite over $T$ [def-weil-finite-integral-morphism], with restriction by pullback. Then $P_f$ is a sheaf of sets for the big fppf topology [def-pc-fppf-site]. Explicitly, for every fppf covering family $\\{T_i\\to T\\}$ and pairs $(a_i,Z_i)$ whose pullbacks agree on every $T_i\\times_TT_j$, there is a unique pair $(a,Z)\\in P_f(T)$ pulling back to all $(a_i,Z_i)$. No separatedness, finite type, flatness, or finite presentation assumption on $f$ is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 04PE (lemma-finite-sheaf), part (1), restricted to scheme source and target."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-pc-fppf-site"
+ ],
+ "proof": [
+  {
+   "text": "First check restriction. For $h:T^{\\prime}\\to T$, write $W=X\\times_{Y,a}T$ and $W^{\\prime}=X\\times_{Y,ah}T^{\\prime}$. The universal property of fibre products identifies $W^{\\prime}$ with $W\\times_TT^{\\prime}$, compatibly with both projections. The inverse image of the open $Z\\subset W$ is the open subscheme on that inverse-image open set; it represents $Z\\times_TT^{\\prime}$, since a map to $W^{\\prime}$ factors through it exactly when its composite to $W$ factors through $Z$. Its projection to $T^{\\prime}$ is finite by base-change stability of finite morphisms in [lem-trf-finite-radicial-basechange]. Inverse images compose and preserve identities, so these restrictions define $P_f$ as a presheaf.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "lem-trf-finite-radicial-basechange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04PE (lemma-finite-sheaf), proof of part (1), first paragraph, specialized to schemes."
+   }
+  },
+  {
+   "text": "Let $\\{v_i:T_i\\to T\\}$ be an fppf cover and $(a_i,Z_i)$ a matching family. By [lem-trf-fppf-covering-is-fpqc] this is an fpqc cover. Equality of pairs on overlaps implies $a_i\\operatorname{pr}_1=a_j\\operatorname{pr}_2$. Apply [lem-weil-pbc-fpqc-representable-descent] with target $Y$ to obtain the unique scheme map $a:T\\to Y$ restricting to $a_i$. It is an $S$-map: its composite to $S$ and the given structure map of $T$ have equal restrictions on all $T_i$, hence are equal by the uniqueness clause of that same node with target $S$.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04PE (lemma-finite-sheaf), proof of part (1), first paragraph, specialized to schemes."
+   }
+  },
+  {
+   "text": "Put $W=X\\times_{Y,a}T$ and $W_i=W\\times_TT_i$. The universal property [def-pc-fibre-product] identifies $W_i$ with $X\\times_{Y,a_i}T_i$, and $W_i\\times_WW_j$ with $X\\times_Y(T_i\\times_TT_j)$: each identification is the unique map preserving the $X,T_i,T_j$ projections, and its inverse is given by the same projections. Thus the matching condition on the $Z_i$ is equality of their inverse-image opens on $W_i\\times_WW_j$. By [lem-trf-fppf-covering-base-change] the family $\\{W_i\\to W\\}$ is fppf, hence fpqc by [lem-trf-fppf-covering-is-fpqc]. Apply [lem-weil-pbc-open-subscheme-fpqc-descent] to this cover and these opens. It gives a unique open subscheme $Z\\subset W$ whose pullback to $W_i$ is $Z_i$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-open-subscheme-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04PE (lemma-finite-sheaf), proof of part (1), first paragraph, specialized to schemes."
+   }
+  },
+  {
+   "text": "For the projection $p:Z\\to T$, its base change to $T_i$ is $Z\\times_TT_i\\to T_i$. Under the fibre-product identifications of step 3 and the open-subscheme identification there, this is exactly the given finite morphism $Z_i\\to T_i$. Apply [lem-weil-pbc-fpqc-descend-finite] along the fpqc cover $\\{T_i\\to T\\}$ from step 2. Hence $p$ is finite, so $(a,Z)\\in P_f(T)$ and its restrictions are all the prescribed pairs.",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04PE (lemma-finite-sheaf), proof of part (1), first paragraph, specialized to schemes."
+   }
+  },
+  {
+   "text": "If another pair $(b,Z^{\\prime})$ has those restrictions, uniqueness in [lem-weil-pbc-fpqc-representable-descent] gives $b=a$. Regard both open subschemes as opens in the same $W=X\\times_{Y,a}T$. Their restrictions to each $W_i$ equal $Z_i$, so uniqueness in [lem-weil-pbc-open-subscheme-fpqc-descent] gives $Z^{\\prime}=Z$. This is uniqueness of the pair, and establishes the sheaf condition for every fppf covering. Only properties of the covering and the local finite projections were used; no hypothesis on $f$ has been introduced.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-weil-pbc-open-subscheme-fpqc-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04PE (lemma-finite-sheaf), proof of part (1), first paragraph, specialized to schemes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "lem-trf-finite-radicial-basechange",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-trf-fppf-covering-base-change",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-weil-pbc-fpqc-descend-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 04PE (lemma-finite-sheaf), proof of part (1), first paragraph, specialized to schemes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The functor of open subschemes finite over the base of a scheme morphism is an fppf sheaf",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:08:15Z",
+    "tool": "leanfinder",
+    "query": "The functor of open subschemes finite over the base of a scheme morphism is an fppf sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instMorphismRestrict",
+     "AlgebraicGeometry.LocallyOfFiniteType",
+     "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+     "AlgebraicGeometry.IsFinite.instLocallyOfFiniteType",
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "AlgebraicGeometry.Scheme.Hom.finite_app",
+     "AlgebraicGeometry.LocallyQuasiFinite",
+     "AlgebraicGeometry.IsFinite"
+    ],
+    "digest": "86915f9fa28b07bc"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite base-change and generic descent-property instances do not descend embedded open pairs. Read Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:164-185 and Sites/Representability.lean:18-29; neither states this sheaf assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite open subschemes of a morphism descend uniquely under faithfully flat base change",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:08:10Z",
+    "tool": "leansearch",
+    "query": "Finite open subschemes of a morphism descend uniquely under faithfully flat base change",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme",
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.Flat.isStableUnderBaseChange",
+     "AlgebraicGeometry.IsFinite.recOn",
+     "AlgebraicGeometry.Scheme.Hom.flat_appLE",
+     "AlgebraicGeometry.Flat.flat_of_affine_subset",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange"
+    ],
+    "digest": "20db9dac1feb47f2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite base-change and generic descent-property instances do not descend embedded open pairs. Read Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:164-185 and Sites/Representability.lean:18-29; neither states this sheaf assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSheaf\", \"IsFinite\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:08:11Z",
+    "tool": "loogle",
+    "query": "\"IsSheaf\", \"IsFinite\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite base-change and generic descent-property instances do not descend embedded open pairs. Read Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:164-185 and Sites/Representability.lean:18-29; neither states this sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(part|open).*sheaf|finite.*subscheme.*functor",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T20:08:10Z",
+    "tool": "grep",
+    "query": "finite.*(part|open).*sheaf|finite.*subscheme.*functor",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite base-change and generic descent-property instances do not descend embedded open pairs. Read Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:164-185 and Sites/Representability.lean:18-29; neither states this sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor of finite open subspaces of a morphism is an fppf sheaf with values pairs",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:10:29Z",
+    "tool": "leanfinder",
+    "query": "The functor of finite open subspaces of a morphism is an fppf sheaf with values pairs",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.PresheafIsFinite",
+     "CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat",
+     "CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits",
+     "LightProfinite.instWEqualsLocallyBijectiveCoherentTopology",
+     "TopCat.Presheaf.SheafCondition.instFinalPairwiseOpensLeCoverPairwiseToOpensLeCover",
+     "CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize",
+     "CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits",
+     "CategoryTheory.coherentTopology.isLocallySurjective_iff"
+    ],
+    "digest": "1784443ddbc583cb"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite base-change and generic descent-property instances do not descend embedded open pairs. Read Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:164-185 and Sites/Representability.lean:18-29; neither states this sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(part|open).*sheaf|finite.*subscheme.*functor",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T20:35:36Z",
+    "tool": "grep",
+    "query": "finite.*(part|open).*sheaf|finite.*subscheme.*functor",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; finite base-change and fpqc-to-fppf morphism-property descent do not assert descent of embedded finite open pairs. The second phrasing returned Zariski gluing data, which do not cover fppf descent. Checked Finite.lean:60-62,88-93; FlatDescent.lean:164-185; Sites/Representability.lean:18-29."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite open subschemes of a morphism descend uniquely under faithfully flat base change",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:35:36Z",
+    "tool": "leansearch",
+    "query": "Finite open subschemes of a morphism descend uniquely under faithfully flat base change",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme",
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.Flat.isStableUnderBaseChange",
+     "AlgebraicGeometry.IsFinite.recOn",
+     "AlgebraicGeometry.Scheme.Hom.flat_appLE",
+     "AlgebraicGeometry.Flat.flat_of_affine_subset",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange"
+    ],
+    "digest": "20db9dac1feb47f2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; finite base-change and fpqc-to-fppf morphism-property descent do not assert descent of embedded finite open pairs. The second phrasing returned Zariski gluing data, which do not cover fppf descent. Checked Finite.lean:60-62,88-93; FlatDescent.lean:164-185; Sites/Representability.lean:18-29."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSheaf\", \"IsFinite\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:35:36Z",
+    "tool": "loogle",
+    "query": "\"IsSheaf\", \"IsFinite\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; finite base-change and fpqc-to-fppf morphism-property descent do not assert descent of embedded finite open pairs. The second phrasing returned Zariski gluing data, which do not cover fppf descent. Checked Finite.lean:60-62,88-93; FlatDescent.lean:164-185; Sites/Representability.lean:18-29."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor of open subschemes finite over the base of a scheme morphism is an fppf sheaf",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:35:38Z",
+    "tool": "leanfinder",
+    "query": "The functor of open subschemes finite over the base of a scheme morphism is an fppf sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instMorphismRestrict",
+     "AlgebraicGeometry.LocallyOfFiniteType",
+     "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+     "AlgebraicGeometry.IsFinite.instLocallyOfFiniteType",
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "AlgebraicGeometry.Scheme.Hom.finite_app",
+     "AlgebraicGeometry.LocallyQuasiFinite",
+     "AlgebraicGeometry.IsFinite"
+    ],
+    "digest": "86915f9fa28b07bc"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; finite base-change and fpqc-to-fppf morphism-property descent do not assert descent of embedded finite open pairs. The second phrasing returned Zariski gluing data, which do not cover fppf descent. Checked Finite.lean:60-62,88-93; FlatDescent.lean:164-185; Sites/Representability.lean:18-29."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible finite open subschemes of a relative scheme glue uniquely for the faithfully flat topology",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:36:07Z",
+    "tool": "leanfinder",
+    "query": "Compatible finite open subschemes of a relative scheme glue uniquely for the faithfully flat topology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Cover.RelativeGluingData.mk.inj",
+     "AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued",
+     "AlgebraicGeometry.Scheme.Cover.gluedCover",
+     "AlgebraicGeometry.Scheme.GlueData.mk.inj",
+     "AlgebraicGeometry.Scheme.Cover.gluedCover_t'",
+     "AlgebraicGeometry.Scheme.GlueData.gluedScheme",
+     "AlgebraicGeometry.Scheme.GlueData.Rel",
+     "AlgebraicGeometry.Scheme.Cover.RelativeGluingData"
+    ],
+    "digest": "f8ce607463f4ee77"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; finite base-change and fpqc-to-fppf morphism-property descent do not assert descent of embedded finite open pairs. The second phrasing returned Zariski gluing data, which do not cover fppf descent. Checked Finite.lean:60-62,88-93; FlatDescent.lean:164-185; Sites/Representability.lean:18-29."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unmarked-finite-open-parts-space",
+  "date": "2026-10-24",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: affine locally quasi-finite relation; finite etale quasi-splitting charts and quotient by the open finite locally free subrelation (Tags 04S0, 04S4). Supporting input: Pointed affine etale quasi-splitting of a flat locally quasi-finite groupoid. Supporting input: finite-part parameter scheme and its residue-field point used before the affine quasi-splitting. Unmarked finite-part algebraic space used in the proof of Tag 04RI, first paragraph (Proposition 04QH). Supporting input for 04QH: Tag 04PE (lemma-finite-sheaf), part (1), restricted to scheme source and target.",
+   "via": [
+    "lem-sfb-unmarked-finite-open-parts-space",
+    "lem-sfb-section-marked-finite-parts-scheme",
+    "lem-sfb-affine-groupoid-pointed-quasisplitting",
+    "lem-sfb-fppf-relation-etale-replacement",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-open-parts-fppf-sheaf",
+  "worker": "stage1",
+  "summary": "Read Stacks 04PE(1) and its descent inputs. Proved presheaf restriction, glued the underlying S-map by scheme fpqc representable descent, descended compatible open subschemes after base change of the fppf cover, and descended finiteness. All inputs already exist in the DAG; no new node, additional hypothesis, or statement correction is needed.",
+  "blueprint": "Supporting input in the recorded ancestry of det-thm-sf-ctf-stability-direct-images, proof (3): unmarked finite-open-parts parameter space (04QH), using the sheaf assertion 04PE(1). Steps 2-5 realize the three sentences of the first paragraph of the proof of 04PE. The latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) was read. Whole-blueprint searches finite open, 03N0 and 04PE found no equivalent blueprint assertion. blueprint_refs.py ancestor returns None, retained as the inherited from.node; the existing detailed from.place and via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "why": "Generic scheme fpqc descent of compatible open subschemes, Tag 03N0, applied to the base-changed fppf cover. No same-unit node gives this unrestricted scheme assertion."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-finite",
+    "why": "Generic scheme finiteness descent, Tag 02LA, applied to Z to T after its open subscheme has been constructed. The same-unit space finiteness descent is more general but would require unnecessary passage to algebraic spaces."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-weil-pbc-fpqc-descend-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-f318a3d44",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-f318a3d44 (reviewer sub-agent of L); spot-checked: I read the item in full: 5 steps and no new nodes. Its statement matches Stacks 04PE (lemma-finite-sheaf) part (1) in spaces-more-groupoids.tex, specialized to schemes: no hypothesis on f, and pairs (a,Z) with Z open in X×_{Y,a}T and finite over T. I compared each step with the first paragraph of the Stacks proof. Step 1: the presheaf structure follows from the fibre-product universal property and finite base change (lem-trf-finite-radicial-basechange, a Mathlib leaf). Step 2: a is obtained by fpqc representable descent with target Y; its uniqueness with target S makes a an S-map. Step 3: the identifications W_i=X×_{Y,a_i}T_i and W_i×_W W_j=X×_Y(T_ij) are correct. The cover {W_i→W} is fppf by base change and therefore fpqc, so 03N0 open descent applies. Step 4: Z×_T T_i is Z_i, and 02LA finiteness descent applies along the fpqc cover. Step 5: uniqueness follows from both uniqueness clauses. Edge cases I checked: empty base, empty cover and empty X; non-quasi-compact T, handled by the fpqc family notion; non-separated f. The only citer, lem-sfb-unmarked-finite-open-parts-space, uses exactly this sheaf property. There are no duplicates (rg over 04PE and finite-open nodes) and no cycle. Batch-5 check: lem-trf-fppf-covering-is-fpqc (022C) and lem-trf-fppf-covering-base-change (021O(3)) are Mathlib leaves stating general facts about fppf covering families. Neither is part of the trace formula or Poincaré duality, and they are the only trf or Poincaré-duality nodes in the proof closure, so I accept them. I accept both tool_uses (pbc 03N0 and 02LA, generic scheme descent). One minor point for the maintainer: the worker wrote tool_uses into split_report themselves, which C8 says the worker should not do. It is harmless."
+ }
+}

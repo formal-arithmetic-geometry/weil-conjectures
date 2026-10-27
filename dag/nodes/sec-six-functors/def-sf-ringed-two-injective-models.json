@@ -1,0 +1,173 @@
+{
+ "id": "def-sf-ringed-two-injective-models",
+ "kind": "definition",
+ "title": "Normalized representative and comparison data for two-injective Hom",
+ "statement": "For small ringed sites and their unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], define Representatives(H,DH) to consist of isomorphisms DH(QK,QI) ≅ QH(K,I) for every complex K and K-injective I, natural in both chain maps, and inverting quasi-isomorphisms in the two variables. For the actual derived internal Hom [def-pur-derived-internal-hom] and actual product-total sheaf Hom [def-pur-hom-complex], RingedRepresentatives additionally fixes these isomorphisms by the canonical coefficient target-resolution augmentation. Such normalized representatives exist, by the already proved augmentation construction. Define Comparison for exact additive U preserving products, internal sheaf Hom, and K-injectives to consist of source and target normalized representatives, a chain natural isomorphism pinned on every product projection to the given sheaf-Hom comparison, and a derived natural isomorphism represented by it with the two exact-functor localization-factor legs. Define StandardModel to consist of a complex bifunctor, its degreewise product projections, the standard differential d_I f minus (-1)^n f d_K, and the component map equations. For the native Frobenius-fixed module category [def-sf-native-weil-derived-framework, def-weil-endofunctor-fixed-pair-category], define the existing underlying-Hom bifunctor and forgetKInjective proof, and TwoInjectiveHomModel containing the finite-subextension coefficient interpretation, standard source and target models, the native-to-standard sign isomorphism with (n,p) component (-1)^(np), its naturality, the normalized native derived-Hom identification, and the normalized chain and derived forgetting comparisons. These are precisely the existing definitions, with no existence assertion for the final Comparison or native TwoInjectiveHomModel.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Sections 0A8X and 08J7, Lemma 0A95; componentwise and localization assembly from steps 4–5 of lem-sf-ringed-forget-two-injective-hom."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-hom",
+  "def-pur-kinjective-complex",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-endofunctor-fixed-pair-category",
+  "lem-sf-twisted-action-ringed-site",
+  "def-sf-native-weil-derived-framework"
+ ],
+ "proof": [
+  {
+   "text": "Retain every field and definition from the existing module verbatim. They specify actual product projections, standard differentials, the canonical target-resolution augmentation, and both localization-factor legs, rather than choosing unknown data. The native record only specifies the native coefficient, sign, naturality and forgetting equations; its existence theorem is separate.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Retain the already proved ringedRepresentatives construction: augment the target to its functorial K-injective resolution. For a K-injective target the augmentation induces a quasi-isomorphism of Hom complexes by the universe companion of RHom invariance. Invert its localization and compose the canonical derived-Hom factor. Naturality follows by cancelling this isomorphism, and the normalization is the canonical augmentation equation.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-rhom-well-defined-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Retain the existing forgetKInjective proof, which specializes the exact orbit-induction/right-adjoint criterion to the native fixed-pair category. Universe-shrinking supplies the countable coproduct and exactness instances used by the already existing criterion.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-rhom-well-defined-universes",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Formal categorical assembly of the product-total Hom and K-injective models in Sections 0A8X and 08J7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "A natural isomorphism of bifunctors on K-injective complexes descends to the derived category",
+   "results": [
+    "Functor.leftDerivedNatIso",
+    "Functor.mapHomologicalComplexUpToQuasiIsoFactorsh"
+   ],
+   "date": "2026-10-27",
+   "verdict": "Infrastructure only; not the projection-normalized two-variable statement."
+  },
+  {
+   "tool": "LeanFinder / Loogle",
+   "query": "An exact additive functor preserving products and internal Hom commutes with derived internal Hom; IsLimit.conePointUniqueUpToIso",
+   "results": [
+    "Functor.mapDerivedCategory",
+    "IsLimit.conePointUniqueUpToIso",
+    "IsLimit.conePointUniqueUpToIso_hom_comp"
+   ],
+   "date": "2026-10-27",
+   "verdict": "Use the product-limit and localization APIs; no existing complete comparison found."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*(Iso|iso); bifunctor.*[Cc]omp; whiskerLeft.*Full; preimageIso; KInjectives",
+   "results": [
+    "homComplexIsLimit",
+    "homComplex_d_π",
+    "homComplexFunctor_map_f_π",
+    "Localization.fullyFaithfulWhiskeringLeft",
+    "CochainComplex.KInjectives.ι ⋙ DerivedCategory.Q is a localization"
+   ],
+   "date": "2026-10-27",
+   "verdict": "Existing component and localization APIs provide the proof ingredients; no duplicate theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedForgetTwoInjectiveHom",
+  "date": "2026-10-27",
+  "group": "A6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Internal-Hom comparison paragraph of cor-coef-verdier-weil-equivariance.proof.md, via steps 4–5 of lem-sf-ringed-forget-two-injective-hom.",
+   "via": [
+    "lem-sf-ringed-forget-two-injective-hom",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedForgetTwoInjectiveModels",
+  "file": "lean/Sheaf/Algebra/Homology/RingedForgetTwoInjectiveModels.lean",
+  "declaration": "CategoryTheory.RingedForgetTwoInjective.RingedRepresentatives",
+  "statement": "structure RingedRepresentatives extends Representatives\n    (Functor.uncurry.obj (homComplexFunctor (R := R)))\n    (derivedInternalHomOfUniverses.{c, v, r, wb} J R)",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-27",
+  "declarations": [
+   "CategoryTheory.RingedForgetTwoInjective.Representatives",
+   "CategoryTheory.RingedForgetTwoInjective.DerivedCompatibility",
+   "CategoryTheory.RingedForgetTwoInjective.augmentation",
+   "CategoryTheory.RingedForgetTwoInjective.RingedRepresentatives",
+   "CategoryTheory.RingedForgetTwoInjective.ringedRepresentatives",
+   "CategoryTheory.RingedForgetTwoInjective.Comparison",
+   "CategoryTheory.RingedForgetTwoInjective.StandardModel",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.underlyingHomBifunctor",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.forgetKInjective",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.TwoInjectiveHomModel"
+  ],
+  "note": "Pure relocation from the assigned module. Every moved declaration retains its name, signature, visibility and body; the assigned module publicly re-exports this module. No data is selected from a new existence theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-35fba",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T222544-L-667647",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-35fba",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T222544-L-667647",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered Lean files vs clone item (pure relocation, identical bodies/signatures), new theorem statements vs their nodes, item node proof_deps vs step uses; both direct importers compiled against delivered files"
+ }
+}

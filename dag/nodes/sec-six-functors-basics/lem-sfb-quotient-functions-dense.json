@@ -1,0 +1,400 @@
+{
+ "id": "lem-sfb-quotient-functions-dense",
+ "kind": "statement",
+ "title": "Uniform density of open-normal quotient functions",
+ "statement": "Let $K$ be a compact Hausdorff topological group with a basis of open normal subgroups at the identity: for every open neighbourhood $W$ of $1$ there is an open normal subgroup $U\\subseteq W$. Let $B$ be a normed field, with norm topology, and let $C(K,B)$ carry the supremum norm. Define $D\\subseteq C(K,B)$ to be the set of functions factoring through $\\pi_U:K\\to K/U$ for some open normal subgroup $U$. Then $K$ is totally disconnected, meaning that every connected subset has at most one point. For every finite discrete set $F$ and every continuous $g:K\\to F$, there is an open normal subgroup $U$ and a function $\\bar g:K/U\\to F$ with $g=\\bar g\\circ\\pi_U$. For every $f\\in C(K,B)$ and every real $\\epsilon>0$, there are an open normal subgroup $U$ and a function $b:K/U\\to B$ such that the continuous function $d=b\\circ\\pi_U$ satisfies\n$$\\|f-d\\|_\\infty<\\epsilon.$$\nEquivalently, $D$ is dense in $C(K,B)$ for the supremum norm. No completeness or nonarchimedean hypothesis on $B$, and no countability or metrizability hypothesis on $K$, is required. All spaces use [def-weil-size-convention].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar tame-kernel analytic input; extraction of returned integral proof steps 4–5: total disconnectedness, finite-map approximation and open-normal coset refinement. Agent-formulated auxiliary assertion; exact literature reference WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Every left coset $xU$ of an open subgroup is open, since left translation is a homeomorphism; its complement is the union of the other open cosets, so it is also closed. Given $x\\ne y$, Hausdorffness makes $K\\setminus\\{x^{-1}y\\}$ an open neighbourhood of $1$. Choose an open normal $U$ inside it. Then $xU$ contains $x$ and excludes $y$. A connected subset containing both points would be separated by its intersections with $xU$ and its complement. Thus every connected subset has at most one point, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0BR1, lemma-profinite-group, open cosets and finite discrete quotients; elementary consequences written out by the agent"
+   }
+  },
+  {
+   "text": "For any open normal $U$, the cosets cover compact $K$ by disjoint nonempty open sets. A finite subcover therefore includes every coset, so $K/U$ is finite. Give it the discrete topology. The inverse image under $\\pi_U$ of any subset is a union of open cosets, so $\\pi_U$ is continuous. Every map from $K/U$ to any topological space is continuous, and hence so is its composite with $\\pi_U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0BR1, lemma-profinite-group, open cosets and finite discrete quotients; elementary consequences written out by the agent"
+   }
+  },
+  {
+   "text": "By step 1, $K$ is a profinite group in the compact Hausdorff totally disconnected sense. Apply [lem-exc-coinduced-functions-open-stabilizer] to the given continuous $g:K\\to F$, with $F$ discrete. It gives an open normal $U$ with $g(xu)=g(x)$ for all $x\\in K$ and $u\\in U$. Define $\\bar g(xU)=g(x)$. If $xU=yU$ then $y=xu$ for some $u\\in U$, so the displayed invariance proves that this value is well defined. Consequently $g=\\bar g\\circ\\pi_U$.",
+   "uses": [
+    "lem-exc-coinduced-functions-open-stabilizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0BR1, lemma-profinite-group; assembly with the existing right-invariance lemma (agent-written)"
+   }
+  },
+  {
+   "text": "Fix $f\\in C(K,B)$ and $\\epsilon>0$. The set $S=\\{(v,w)\\in B\\times B:\\|v-w\\|<\\epsilon/2\\}$ is open and contains the diagonal, by continuity of the norm and $\\epsilon/2>0$. Apply [lem-sfb-profinite-finite-map-approximation], using compactness, Hausdorffness and step 1, with $X=K$ and $V=B$. Obtain a finite discrete set $F$, continuous $g:K\\to F$ and $h:F\\to B$ such that $\\|f(x)-h(g(x))\\|<\\epsilon/2$ for every $x$. Step 3 supplies $U$ and $\\bar g:K/U\\to F$. Set $b=h\\circ\\bar g$ and $d=b\\circ\\pi_U=h\\circ g$. Step 2 makes $d$ continuous. Taking the supremum of the pointwise bounds gives $\\|f-d\\|_\\infty\\leq\\epsilon/2<\\epsilon$. Thus each open norm ball about each $f$ meets $D$, which is precisely density. This argument uses neither completeness of $B$ nor countability of $K$.",
+   "uses": [
+    "lem-sfb-profinite-finite-map-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/Topology/Separation/DisjointCover.lean",
+    "place": "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal, lines 140–141; epsilon/2 specialization and quotient assembly written by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-coinduced-functions-open-stabilizer",
+  "lem-sfb-profinite-finite-map-approximation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar tame-kernel auxiliary input inherited through the integral-averaging node; explicit argument supplied here using Stacks Tag 0BR1 and the existing finite-approximation leaf. The blueprint paragraph itself does not contain the topological argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dense.*(locallyConstant|locally_constant)|exists.*(openNormal|openNormalSubgroup)|LocallyConstant.*dense",
+   "results": {
+    "t": "2026-10-22T06:06:10Z",
+    "tool": "grep",
+    "query": "dense.*(locallyConstant|locally_constant)|exists.*(openNormal|openNormalSubgroup)|LocallyConstant.*dense",
+    "sub": "",
+    "ok": true,
+    "n_hits": 18,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/Discrete/Colimit.lean",
+     "Mathlib/Condensed/Discrete/Colimit.lean",
+     "Mathlib/Condensed/Discrete/Colimit.lean",
+     "Mathlib/Condensed/Discrete/LocallyConstant.lean",
+     "Mathlib/Condensed/Discrete/LocallyConstant.lean",
+     "Mathlib/Condensed/Discrete/LocallyConstant.lean",
+     "Mathlib/Condensed/Discrete/LocallyConstant.lean",
+     "Mathlib/Condensed/Discrete/LocallyConstant.lean"
+    ],
+    "digest": "ea6f1f48046aa54d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: LocallyConstant and quotient-density hits do not give uniform approximation by open-normal group quotients. DisjointCover.lean:140–141 supplies finite-map approximation (already an existing DAG leaf), but the normal-coset refinement remains a separate argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous functions on a profinite group can be uniformly approximated by functions factoring through finite open normal quotients",
+   "results": {
+    "t": "2026-10-22T06:06:11Z",
+    "tool": "leansearch",
+    "query": "Continuous functions on a profinite group can be uniformly approximated by functions factoring through finite open normal quotients",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"dense\"",
+   "results": {
+    "t": "2026-10-22T06:06:11Z",
+    "tool": "loogle",
+    "query": "\"LocallyConstant\", \"dense\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CondensedSet.LocallyConstant.functor",
+     "CondensedSet.LocallyConstant.functorFullyFaithful",
+     "CondensedSet.LocallyConstant.instFaithfulFunctor",
+     "CondensedSet.LocallyConstant.instFullFunctor",
+     "LightCondSet.LocallyConstant.instFaithfulLightCondensedTypeDiscrete",
+     "LightCondSet.LocallyConstant.instFullLightCondensedTypeDiscrete",
+     "CondensedSet.LocallyConstant.instFaithfulCondensedTypeDiscrete",
+     "CondensedSet.LocallyConstant.instFullCondensedTypeDiscrete"
+    ],
+    "digest": "9386b2b00859126d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: LocallyConstant and quotient-density hits do not give uniform approximation by open-normal group quotients. DisjointCover.lean:140–141 supplies finite-map approximation (already an existing DAG leaf), but the normal-coset refinement remains a separate argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Density in supremum norm of functions factoring through finite group quotients of a compact topological group with an open normal subgroup basis",
+   "results": {
+    "t": "2026-10-22T06:06:23Z",
+    "tool": "leanfinder",
+    "query": "Density in supremum norm of functions factoring through finite group quotients of a compact topological group with an open normal subgroup basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "UnitAddTorus.span_mFourier_closure_eq_top",
+     "QuotientAddGroup.dense_image_mk",
+     "QuotientGroup.dense_image_mk",
+     "UnitAddTorus.span_mFourierLp_closure_eq_top",
+     "QuotientAddGroup.dense_preimage_mk",
+     "span_fourier_closure_eq_top",
+     "UnitAddTorus.mFourierSubalgebra_closure_eq_top",
+     "ProfiniteGrp.denseRange_toLimit"
+    ],
+    "digest": "55ee767d2c9daf4c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: LocallyConstant and quotient-density hits do not give uniform approximation by open-normal group quotients. DisjointCover.lean:140–141 supplies finite-map approximation (already an existing DAG leaf), but the normal-coset refinement remains a separate argument."
+  },
+  {
+   "tool": "grep",
+   "query": "((dense|approxim).*(locally|Locally)|(locally|Locally).*(dense|approxim)|exists.*[Oo]pen[Nn]ormal)",
+   "results": {
+    "t": "2026-10-22T06:06:40Z",
+    "tool": "grep",
+    "query": "((dense|approxim).*(locally|Locally)|(locally|Locally).*(dense|approxim)|exists.*[Oo]pen[Nn]ormal)",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/UniformSpace/UniformApproximation.lean",
+     "Mathlib/Topology/UniformSpace/UniformApproximation.lean",
+     "Mathlib/Topology/UniformSpace/UniformApproximation.lean",
+     "Mathlib/Topology/UniformSpace/UniformApproximation.lean",
+     "Mathlib/Topology/UniformSpace/UniformApproximation.lean",
+     "Mathlib/Topology/Algebra/Valued/LocallyCompact.lean",
+     "Mathlib/Topology/FiberPartition.lean"
+    ],
+    "digest": "17ee2cde599e8ef4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: LocallyConstant and quotient-density hits do not give uniform approximation by open-normal group quotients. DisjointCover.lean:140–141 supplies finite-map approximation (already an existing DAG leaf), but the normal-coset refinement remains a separate argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally constant functions factoring through an open normal quotient are dense in the continuous functions on a compact totally disconnected group",
+   "results": {
+    "t": "2026-10-22T06:07:19Z",
+    "tool": "leansearch",
+    "query": "Locally constant functions factoring through an open normal quotient are dense in the continuous functions on a compact totally disconnected group",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LocallyConstant",
+     "IsLocallyConstant.iff_continuous",
+     "DiscreteQuotient.proj_isLocallyConstant",
+     "LocallyConstant.toContinuousMap",
+     "QuotientAddGroup.dense_preimage_mk",
+     "LocallyConstant.continuous",
+     "CompHausLike.LocallyConstant.locallyConstantIsoContinuousMap",
+     "QuotientAddGroup.dense_image_mk"
+    ],
+    "digest": "e6c01c2a09227ee5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: LocallyConstant and quotient-density hits do not give uniform approximation by open-normal group quotients. DisjointCover.lean:140–141 supplies finite-map approximation (already an existing DAG leaf), but the normal-coset refinement remains a separate argument."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_finite_approximation|dense.*[Ll]ocally[Cc]onstant|[Ll]ocally[Cc]onstant.*dense|exists_openNormalSubgroup",
+   "results": {
+    "t": "2026-10-23T10:00:01Z",
+    "tool": "grep",
+    "query": "exists_finite_approximation|dense.*[Ll]ocally[Cc]onstant|[Ll]ocally[Cc]onstant.*dense|exists_openNormalSubgroup",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Separation/DisjointCover.lean",
+     "Mathlib/Topology/Separation/DisjointCover.lean",
+     "Mathlib/Topology/Separation/DisjointCover.lean"
+    ],
+    "digest": "e983524f192b5ea7"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite-map approximation at DisjointCover.lean:140 is already lem-sfb-profinite-finite-map-approximation; it has no group quotient or total-disconnectedness clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform approximation of continuous functions on a profinite group by functions factoring through finite open normal quotients",
+   "results": {
+    "t": "2026-10-23T10:00:01Z",
+    "tool": "leansearch",
+    "query": "Uniform approximation of continuous functions on a profinite group by functions factoring through finite open normal quotients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "continuous_of_uniform_approx_of_continuous",
+     "ContinuousMap.exists_finite_sum_smul_approximation_of_mem_uniformity",
+     "ProfiniteGrp.topologicalGroup",
+     "polynomialFunctions_closure_eq_top'",
+     "IsTopologicalAddGroup.tendstoUniformlyOn_iff",
+     "uniformContinuous_of_uniform_approx_of_uniformContinuous",
+     "IsTopologicalGroup.tendstoUniformly_iff",
+     "instIsUniformGroupUniformFun"
+    ],
+    "digest": "442273891adcaed4"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: uniform-limit criteria, tensor product approximation and profinite structure do not state the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap, OpenNormalSubgroup",
+   "results": {
+    "t": "2026-10-23T10:00:01Z",
+    "tool": "loogle",
+    "query": "ContinuousMap, OpenNormalSubgroup",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: zero hits for this pair of names."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous functions on a compact group with an open normal subgroup basis are uniformly approximated by functions on finite quotient groups",
+   "results": {
+    "t": "2026-10-23T10:00:05Z",
+    "tool": "leanfinder",
+    "query": "Continuous functions on a compact group with an open normal subgroup basis are uniformly approximated by functions on finite quotient groups",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Subgroup.instFiniteQuotientSubtypeMemOpenSubgroupOfIsTopologicalGroupOfCompactSpace",
+     "AddSubgroup.instFiniteQuotientSubtypeMemOpenAddSubgroupOfIsTopologicalAddGroupOfCompactSpace",
+     "Subgroup.quotient_finite_of_isOpen'",
+     "Subgroup.quotient_finite_of_isOpen",
+     "AddSubgroup.quotient_finite_of_isOpen'",
+     "AddSubgroup.instFiniteQuotientOfContinuousAddOfCompactSpace",
+     "AddSubgroup.quotient_finite_of_isOpen",
+     "Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace"
+    ],
+    "digest": "c90dbbf387fa50c8"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: finite-index statements only, not the complete item; quotient finiteness is a few-line compactness step here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant functions on a profinite group factor through open normal quotient groups and are dense for the supremum norm",
+   "results": {
+    "t": "2026-10-23T10:01:22Z",
+    "tool": "leanfinder",
+    "query": "Locally constant functions on a profinite group factor through open normal quotient groups and are dense for the supremum norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteGrp.denseRange_toLimit",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "Profinite.exists_locallyConstant",
+     "Profinite.exists_locallyConstant_finite_aux",
+     "Profinite.exists_locallyConstant_finite_nonempty",
+     "ProfiniteGrp.toLimit_fun",
+     "CategoryTheory.PreGaloisCategory.has_decomp_quotients",
+     "ProfiniteGrp.toLimit_surjective"
+    ],
+    "digest": "0c3b3af666d9d7c7"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: cofiltered-limit factorization and density of the canonical map to a group limit are different assertions; no one-line specialization gives all clauses of this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-prime-to-ell-complete-scalar-integral",
+  "date": "2026-10-22",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), scalar tame-kernel analytic input; extraction of returned integral proof steps 4–5: total disconnectedness, finite-map approximation and open-normal coset refinement. Agent-formulated auxiliary assertion; exact literature reference WANTED.",
+   "via": [
+    "lem-sfb-prime-to-ell-complete-scalar-integral",
+    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-quotient-functions-dense",
+  "worker": "stage1",
+  "group": "Q154",
+  "summary": "Statement unchanged. Proved total disconnectedness by separating points with clopen cosets, proved finite discrete quotient continuity directly, reused the existing open-normal right-invariance theorem for finite-set factorization, and combined the existing finite-map approximation Mathlib leaf with epsilon/2 for strict supremum-norm density. No new nodes. Read the current blueprint, Stacks 0BR1, both cited statements and their Lean/Mathlib source, and recorded actual searches.",
+  "blueprint": "Paragraph (3) of the current direct-images proof is the inherited application context only; it does not contain this auxiliary analytic argument. Preserved the existing null ancestor and via chain; the complete topological argument is agent-written. Whole-blueprint searches found no node stating this complete assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-coinduced-functions-open-stabilizer",
+    "why": "Generic theorem for continuous functions on a profinite group with discrete codomain, used only for right invariance in step 3. No node of this unit supplies this already-proved theorem; its use does not change the inherited scalar tame-kernel route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-coinduced-functions-open-stabilizer"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-9c53f1fe4",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-9c53f1fe4 (reviewer sub-agent of L); spot-checked: I read the whole item and both cited statements, and checked every step. Only proof-side fields changed; the statement, stmt_deps and blueprint block are identical to live. Live and side-live still have the item unsplit, and there is no repair note. Step 1 (cosets are clopen, Hausdorff separation, so K is totally disconnected) and step 2 (compact cover gives finite index; pi_U is continuous to the discrete quotient, per Stacks 0BR1 at topology.tex:5781 and about line 5820) are correctly elementary. Step 3 cites lem-exc-coinduced-functions-open-stabilizer, which gives an open normal U with g(xu)=g(x). Its profinite hypothesis is met by step 1 plus compactness and Hausdorffness, and the factorization is well defined. I accept the declared off-unit tool use: it is a generic, reviewed node from sk-prop-h2. Step 4 cites lem-sfb-profinite-finite-map-approximation, which matches Mathlib DisjointCover.lean:140-141. Its neighbourhood S={||v-w||<eps/2} is open, and the bound sup<=eps/2<eps closes the strict-supremum gap. Step 2 makes d continuous. Small cases pass: finite K, Z_p, trivially normed B, empty F. lem-sfb-profinite-group-open-normal-subgroup-basis (the converse) and lem-sfb-profinite-product-finite-oscillation (stronger, unsplit) are not duplicates. There are no new nodes, no SGA sources, and proof_deps equals the union of uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.OpenNormalQuotientFunctionsDense",
+  "declaration": "ContinuousMap.openNormalQuotientFunctions_dense",
+  "file": "lean/Sheaf/Topology/OpenNormalQuotientFunctionsDense.lean",
+  "statement": "theorem openNormalQuotientFunctions_dense (K : Type u) [Group K] [TopologicalSpace K] [IsTopologicalGroup K] [CompactSpace K] [T2Space K] (B : Type v) [NormedField B] (h_basis : ∀ W : Set K, IsOpen W → (1 : K) ∈ W → ∃ U : OpenNormalSubgroup K, (U : Set K) ⊆ W) : TotallyDisconnectedSpace K ∧ (∀ (F : Type w) [TopologicalSpace F] [DiscreteTopology F] [Finite F] (g : C(K, F)), ∃ (U : OpenNormalSubgroup K) (b : K ⧸ U.toSubgroup → F), ∀ x : K, g x = b (QuotientGroup.mk x)) ∧ (∀ (f : C(K, B)) (ε : ℝ), 0 < ε → ∃ (U : OpenNormalSubgroup K) (b : K ⧸ U.toSubgroup → B) (d : C(K, B)), (∀ x : K, d x = b (QuotientGroup.mk x)) ∧ ‖f - d‖ < ε) ∧ Dense {d : C(K, B) | ∃ (U : OpenNormalSubgroup K) (b : K ⧸ U.toSubgroup → B), ∀ x : K, d x = b (QuotientGroup.mk x)}",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e768c33ea",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Only the item's lean record changed vs side-live; statement, stmt_deps, proof and stage-1 review identical. Lean matches every clause: compact Hausdorff topological group with explicit open-normal-basis hypothesis, NormedField B with no extra assumptions, TotallyDisconnectedSpace (equivalent to connected subsets having at most one point), finite discrete F factorisation through K/U with arbitrary function b, epsilon-approximation with bundled continuous d and sup norm < eps, Dense of the inline set D. Independent universes u v w. lean.statement verbatim; no name clash in live or side-live; proof-dep modules imported plainly and exist; docstrings carry source, Stacks 0BR1, blueprint tag and all 4 proof steps; no definitions; proof is sorry only; report has both sections. Edge cases (trivial or finite K, empty or singleton F, trivially normed or incomplete B, f=0, universes) checked. No findings; not recompiled because no file was changed."
+ }
+}

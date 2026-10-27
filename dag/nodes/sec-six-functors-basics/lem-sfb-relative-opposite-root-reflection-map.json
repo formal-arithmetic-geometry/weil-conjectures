@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-relative-opposite-root-reflection-map",
+ "kind": "statement",
+ "title": "Opposite-root pairing and three-exponential reflection map",
+ "statement": "Let $A$ be a nonzero commutative Noetherian ring [def-weil-pbc-noetherian-ring], $X=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and $r\\geq0$. An $A$-group scheme means a scheme over $X$ with multiplication, identity and inverse satisfying associativity, unit and inverse diagrams, as in [def-sc-group-scheme] with this base in place of a field. Put $T=\\mathbf G_{m,A}^r=\\operatorname{Spec}A[M]$, $M=\\mathbf Z^r$, where $A[M]=A[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$, $e^m=\\prod_jz_j^{m_j}$, and the group law is multiplication of units. Write $\\chi_m:T\\to\\mathbf G_{m,A}$ for the character $e^m$. Let $G$ be a smooth [def-sbc-smooth-morphisms] affine finite-type [def-weil-finite-type-morphism] $A$-group scheme with a closed inclusion $T\\hookrightarrow G$ [def-weil-closed-immersion]. Assume every geometric fibre of $G$ is reductive, meaning connected [def-weil-connected-scheme] with no nontrivial smooth connected normal unipotent closed subgroup. Unipotent means that all geometric points are unipotent matrices in a faithful representation. Assume $T$ is a maximal torus in every geometric fibre, where a torus over an algebraically closed field is a product of multiplicative groups and maximality is for subgroup inclusion. Put $\\mathfrak g=\\ker(G(A[\\epsilon]/(\\epsilon^2))\\to G(A))$, with addition induced by multiplication in $G$ and scalar multiplication induced by $\\epsilon\\mapsto a\\epsilon$. The conjugation coaction of $T$ on this tangent module is denoted $\\rho$, and $\\mathfrak g_m=\\{v:\\rho(v)=v\\otimes e^m\\}$. Suppose $\\alpha\\ne0$ and both $\\mathfrak g_\\alpha$ and $\\mathfrak g_{-\\alpha}$ are locally free of rank one, with canonical maps $\\exp_{\\pm\\alpha}:V_{\\pm\\alpha}\\to G$ of [lem-sfb-relative-canonical-root-exponential], where $V_{\\pm\\alpha}(B)=B\\otimes_A\\mathfrak g_{\\pm\\alpha}$. There are a perfect $A$-bilinear pairing $\\beta_\\alpha:\\mathfrak g_\\alpha\\otimes_A\\mathfrak g_{-\\alpha}\\xrightarrow{\\sim}A$ and an $A$-group homomorphism $\\alpha^\\vee:\\mathbf G_{m,A}\\to T$ such that $\\chi_\\alpha(\\alpha^\\vee(c))=c^2$. Here perfect means that each root module identifies with the $A$-dual of the other. For every commutative $A$-algebra $B$ and generator $x$ of the free rank-one $B$-module $B\\otimes_A\\mathfrak g_\\alpha$, let $x^{-1}\\in B\\otimes_A\\mathfrak g_{-\\alpha}$ be determined by $\\beta_\\alpha(x,x^{-1})=1$. Then\n$$n_\\alpha(x)=\\exp_\\alpha(x)\\exp_{-\\alpha}(-x^{-1})\\exp_\\alpha(x)\\in G(B)$$\nnormalizes $T_B$ and satisfies\n$$n_\\alpha(x)t n_\\alpha(x)^{-1}=t\\,\\alpha^\\vee(\\chi_\\alpha(t))^{-1}$$\nfor every $B$-algebra $C$ and $t\\in T(C)$. On every geometric fibre $\\alpha^\\vee$ is the usual coroot for $\\alpha$ in [lem-sfb-reductive-rank-one-reflections], and $n_\\alpha(x)$ represents its root reflection. The pairing, coroot and formula commute with arbitrary base change and successive base changes. Neither freeness of all the other root modules nor a globally constant root system is assumed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula). Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-connected-scheme",
+  "lem-sfb-relative-tangent-weight-base-change",
+  "lem-sfb-relative-canonical-root-exponential",
+  "lem-sfb-reductive-rank-one-reflections"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\alpha=n a_0$ with $n>0$ and $a_0$ primitive in $M=\\mathbf Z^r$. Integer elementary row operations extend $a_0$ to a basis. Thus $T_\\alpha:=\\ker\\chi_{a_0}$ is a split codimension-one torus, closed in $T$ by the quotient Hopf algebra of def-sfb-ring-diagonalizable-group. On a geometric fibre $\\ker\\chi_\\alpha=\\mu_n\\times\\mathbf G_m^{r-1}$ in these coordinates; a map from a torus to $\\mu_n$ is trivial since its character exponents have no integer torsion. Hence this is the largest subtorus killed by $\\alpha$, even when the residue characteristic divides $n$. The two weights remain roots on every geometric fibre by lem-sfb-relative-tangent-weight-base-change and their rank-one hypothesis. The coordinate algebra of $G$ is finitely presented over $A$ by lem-weil-pbc-finite-type-noetherian-finite-presentation. Apply lem-sfb-relative-torus-centralizer-normalizer to $T_\\alpha\\subset G$: its centralizer $H$ is smooth affine of finite presentation, closed in $G$, and commutes with arbitrary base change. On every geometric fibre, lem-sfb-reductive-rank-one-reflections identifies $H$ with the reductive rank-one centralizer for $\\alpha$. Consequently $H$ has reductive fibres of semisimple rank one and $T$ remains a maximal torus in it.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "lem-sfb-relative-tangent-weight-base-change",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-sfb-relative-torus-centralizer-normalizer",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "WANTED locally; read online https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf . Conrad Lemma 4.1.3, printed pp.108-109; Theorem 4.2.6, printed pp.120-126; Theorem 5.1.8 and Corollary 5.1.9, printed pp.139-142. Agent assembly with explicit matrix and overlap calculations."
+   }
+  },
+  {
+   "text": "The $T$-equivariance in lem-sfb-relative-canonical-root-exponential shows that $T_\\alpha$ centralizes both exponential maps on every test algebra: $\\chi_{\\pm\\alpha}|_{T_\\alpha}=1$. Thus they factor through $H$. Apply lem-sfb-relative-rank-one-local-matrix-model to $H,T,\\alpha$. On each resulting affine open write\n$$u_+(a)=I+aE_{12},\\quad u_-(b)=I+bE_{21},\\quad h(c)=\\operatorname{diag}(c,c^{-1}),$$\nwhere $I$ is the identity matrix and $E_{ij}$ has its only nonzero entry $1$ in row $i$, column $j$; use their images in $\\operatorname{PGL}_2$ when appropriate, and identity on the extra central torus. Their tangent vectors $e_+,e_-$ are bases of the two root lines. Their $T$-equivariance and tangent inclusions identify $u_\\pm$ with $\\exp_{\\pm\\alpha}$ by the uniqueness clause of the exponential node, applied to $H$ and then to $G$. Set $\\beta(ae_+,be_-)=ab$ and set the local coroot equal to $h$. These are a perfect pairing and a group homomorphism, and $\\chi_\\alpha(h(c))=c^2$.",
+   "uses": [
+    "lem-sfb-relative-canonical-root-exponential",
+    "lem-sfb-relative-rank-one-local-matrix-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "WANTED locally; read online https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf . Conrad Lemma 4.1.3, printed pp.108-109; Theorem 4.2.6, printed pp.120-126; Theorem 5.1.8 and Corollary 5.1.9, printed pp.139-142. Agent assembly with explicit matrix and overlap calculations."
+   }
+  },
+  {
+   "text": "In any of these matrix models put $d=1+ab$. If $d$ is a unit, multiplication gives\n$$u_+(a)u_-(b)=u_-(b/d)h(d)u_+(a/d):$$\nboth sides have row entries $(1+ab,a,b,1)$. The multiplication $U_-\\times T\\times U_+\\to H$ is a monomorphism: a matrix $u_-(y)\\operatorname{diag}(d_1,d_2)u_+(z)$ has entries $(d_1,d_1z,yd_1,yd_1z+d_2)$, so its entries recover $y,z,d_1,d_2$ uniquely. In $\\operatorname{PGL}_2$ they recover $y,z$ and the diagonal class, since scaling all entries does not change the two ratios; equality in the sheaf quotient is equality modulo a unit scalar after an fppf covering, and the recovered coordinates then agree by lem-weil-pbc-fpqc-representable-descent. The extra central torus coordinate is separately recovered. Thus these assertions hold over arbitrary rings. Intrinsically the displayed Gauss formula has lower parameter $Y/(1+\\beta(X,Y))$, torus parameter $h(1+\\beta(X,Y))$ and upper parameter $X/(1+\\beta(X,Y))$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "WANTED locally; read online https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf . Conrad Lemma 4.1.3, printed pp.108-109; Theorem 4.2.6, printed pp.120-126; Theorem 5.1.8 and Corollary 5.1.9, printed pp.139-142. Agent assembly with explicit matrix and overlap calculations."
+   }
+  },
+  {
+   "text": "Check agreement on overlaps, refining to affine opens with bases $e,f$ of the two root lines. Let two model choices give pairings with coefficients $p=\\beta(e,f)$ and $q=\\beta'(e,f)$, both units. Evaluate the two Gauss identities at $X=\\epsilon e$, $Y=f$ over $R[\\epsilon]/(\\epsilon^2)$. Uniqueness of the lower coordinate in step 3 yields $(1-p\\epsilon)f=(1-q\\epsilon)f$, hence $p=q$. This equality is over the whole overlap ring, including its nilpotents. With $f$ now chosen dual to $e$, evaluate at $X=(c-1)e$, $Y=f$ for an arbitrary unit $c$ in any overlap algebra. The common Gauss denominator is $c$, so uniqueness of the torus coordinate gives $h(c)=h'(c)$. Consequently both pairings and coroots agree as morphisms on overlaps, rather than merely on geometric fibres.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "WANTED locally; read online https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf . Conrad Lemma 4.1.3, printed pp.108-109; Theorem 4.2.6, printed pp.120-126; Theorem 5.1.8 and Corollary 5.1.9, printed pp.139-142. Agent assembly with explicit matrix and overlap calculations."
+   }
+  },
+  {
+   "text": "Apply lem-weil-pbc-fpqc-representable-descent to the open cover of the domain $V_\\alpha\\times_X V_{-\\alpha}$ and the target $\\mathbf A^1_X$, regarded as sections of the target pulled back to that domain. It glues the local pairings. Apply it on the domain $\\mathbf G_{m,X}$ with target $T$ to glue the coroots. Choose a finite principal-open refinement of the affine base cover. Its pullbacks to each domain form fpqc coverings (a finite family of flat quasi-compact open immersions covering the domain). The glued morphisms are over $X$ because their composites to $X$ agree on this cover and hence globally by the same uniqueness clause. The same uniqueness clause detects all defining identities on these covers: bilinearity, the group-homomorphism identities, and $\\chi_\\alpha\\circ\\alpha^\\vee(c)=c^2$. The inverses of the two duality maps glue too, since inverses are unique, so the global pairing is perfect. On the affine base its global-sections pairing is the required $A$-bilinear isomorphism $\\mathfrak g_\\alpha\\otimes_A\\mathfrak g_{-\\alpha}\\to A$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "WANTED locally; read online https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf . Conrad Lemma 4.1.3, printed pp.108-109; Theorem 4.2.6, printed pp.120-126; Theorem 5.1.8 and Corollary 5.1.9, printed pp.139-142. Agent assembly with explicit matrix and overlap calculations."
+   }
+  },
+  {
+   "text": "For a generator $x$ after $A\\to B$, on any pulled-back matrix chart write $x=a e_+$ with $a\\in B^\\times$. Then $x^{-1}=a^{-1}e_-$ and direct multiplication gives\n$$u_+(a)u_-(-a^{-1})u_+(a)=w(a):=\\begin{pmatrix}0&a\\\\-a^{-1}&0\\end{pmatrix}.$$\nFor $t=\\operatorname{diag}(d_1,d_2)$ one has\n$$w(a)t w(a)^{-1}=\\operatorname{diag}(d_2,d_1)=t\\,h(d_1/d_2)^{-1}.$$\nIn $\\operatorname{SL}_2$ impose $d_2=d_1^{-1}$; in $\\operatorname{PGL}_2$ use the diagonal class with representative $\\operatorname{diag}(c,1)$, giving $h(c)=[\\operatorname{diag}(c,c^{-1})]$. The central factor is fixed. Thus this is exactly $t\\alpha^\\vee(\\chi_\\alpha(t))^{-1}$ in all models, over every further algebra $C$. This map of $T$ is involutive: its $\\alpha$-character is $\\chi_\\alpha(t)^{-1}$ since $\\chi_\\alpha\\circ\\alpha^\\vee(c)=c^2$. Conjugation therefore preserves $T$ as a subgroup scheme, in both directions. The sheaf uniqueness of lem-weil-pbc-fpqc-representable-descent identifies these local equalities over $C$, proving the global normalizer assertion and displayed formula.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "WANTED locally; read online https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf . Conrad Lemma 4.1.3, printed pp.108-109; Theorem 4.2.6, printed pp.120-126; Theorem 5.1.8 and Corollary 5.1.9, printed pp.139-142. Agent assembly with explicit matrix and overlap calculations."
+   }
+  },
+  {
+   "text": "On a geometric fibre the coroot and the nonidentity normalizer class just computed are the usual ones: apply the unique-reflection and unique-coroot clauses of lem-sfb-reductive-rank-one-reflections to $G,T$ and its centralizer $H$. In the matrix models $w(a)$ swaps the two root characters, so it is the nonidentity class even in characteristic two. The tangent-weight comparisons in lem-sfb-relative-tangent-weight-base-change and exponential maps in lem-sfb-relative-canonical-root-exponential commute with every algebra extension. Pull back the chosen local matrix charts along any $A\\to B$: their pairings and coroots are still the constructions in step 2. The overlap uniqueness calculation of step 4 works over every ring $B$, without Noetherianity. It therefore identifies the pullback constructions with those constructed over $B$ and with any further pullback over $C$. The inverse dual vector and the three-factor product are preserved as well, by their formulas and uniqueness. This proves arbitrary and successive base-change compatibility, without trivializing any other root module or fixing its weights globally.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-relative-tangent-weight-base-change",
+    "lem-sfb-relative-canonical-root-exponential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "WANTED locally; read online https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf . Conrad Lemma 4.1.3, printed pp.108-109; Theorem 4.2.6, printed pp.120-126; Theorem 5.1.8 and Corollary 5.1.9, printed pp.139-142. Agent assembly with explicit matrix and overlap calculations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ring-diagonalizable-group",
+  "lem-sfb-relative-tangent-weight-base-change",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-sfb-relative-torus-centralizer-normalizer",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-relative-canonical-root-exponential",
+  "lem-sfb-relative-rank-one-local-matrix-model",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/conrad-reductive-group-schemes.pdf",
+  "place": "WANTED locally; read online https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf . Conrad Lemma 4.1.3, printed pp.108-109; Theorem 4.2.6, printed pp.120-126; Theorem 5.1.8 and Corollary 5.1.9, printed pp.139-142. Agent assembly with explicit matrix and overlap calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coroot|normalizer|root.?subgroup|root.?group",
+   "results": "{\"t\": \"2026-10-24T04:48:34Z\", \"tool\": \"grep\", \"query\": \"coroot|normalizer|root.?subgroup|root.?group\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a reductive group scheme the product of positive and negative root exponentials gives a normalizer reflection through a dual pair of root line generators",
+   "results": "{\"t\": \"2026-10-24T04:48:35Z\", \"tool\": \"leansearch\", \"query\": \"In a reductive group scheme the product of positive and negative root exponentials gives a normalizer reflection through a dual pair of root line generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.reflection\", \"RootPairing.RootPositiveForm.isOrthogonal_reflection\", \"RootPairing.reflection_apply\", \"RootPairing.reflectionPerm_coroot\", \"RootPairing.toPerfPair_conj_reflection\", \"RootPairing.weylGroup.induction\", \"RootPairing.reflection_apply_root\", \"RootPairing.reflection_inv\"], \"digest\": \"eb09b5ad72e8c8ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"normalizer\"",
+   "results": "{\"t\": \"2026-10-24T04:48:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"normalizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a root of a reductive group scheme the canonical pairing of opposite root line bundles produces a Weyl reflection representative from a nonvanishing root vector",
+   "results": "{\"t\": \"2026-10-24T04:48:36Z\", \"tool\": \"leanfinder\", \"query\": \"For a root of a reductive group scheme the canonical pairing of opposite root line bundles produces a Weyl reflection representative from a nonvanishing root vector\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.mapsTo_reflection_root\", \"RootPairing.weylGroup.ofIdx\", \"RootPairing.weylGroup.ofIdx_smul\", \"RootPairing.reflection_apply_root\", \"RootPairing.reflection\", \"RootPairing.Equiv.reflection_weightEquiv\", \"RootPairing.reflection_apply_root'\", \"RootPairing.reflection_apply\"], \"digest\": \"b9c872f24bbc2359\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split reductive group scheme has a rank one centralizer of the largest subtorus in the kernel of a root",
+   "results": "{\"t\": \"2026-10-24T05:17:29Z\", \"tool\": \"leanfinder\", \"query\": \"A split reductive group scheme has a rank one centralizer of the largest subtorus in the kernel of a root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.IsKilling.isCompl_ker_weight_span_coroot\", \"LieAlgebra.zero_rootSpace_eq_top_of_nilpotent\"], \"digest\": \"d802d2202802cad7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group centres, Lie-algebra root spaces and abstract root pairings do not give the relative reductive group-scheme classification or canonical root-group normalizer construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GroupScheme, centralizer",
+   "results": "{\"t\": \"2026-10-24T05:17:30Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.GroupScheme, centralizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.GroupScheme'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Loogle reports an unknown identifier, so this query is inconclusive; the subsequent valid pattern and semantic/source searches were also run."
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|coroot|semisimple.?rank|root.?subgroup",
+   "results": "{\"t\": \"2026-10-24T05:17:30Z\", \"tool\": \"grep\", \"query\": \"reductive|coroot|semisimple.?rank|root.?subgroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group centres, Lie-algebra root spaces and abstract root pairings do not give the relative reductive group-scheme classification or canonical root-group normalizer construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reductive group scheme of semisimple rank one with split maximal torus is locally a product of a torus and SL2 PGL2 or GL2",
+   "results": "{\"t\": \"2026-10-24T05:17:30Z\", \"tool\": \"leansearch\", \"query\": \"A reductive group scheme of semisimple rank one with split maximal torus is locally a product of a torus and SL2 PGL2 or GL2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.subsingleton_of_finrank_eq_one\", \"Matrix.GeneralLinearGroup.IsParabolic\", \"AlgebraicGeometry.Scheme\", \"RootDatum\", \"Subgroup.IsArithmetic.is_commensurable\", \"CongruenceSubgroup.mem_Gamma_one\", \"Subgroup.HasDetOne\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\"], \"digest\": \"f82a3c945bd19fb1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group centres, Lie-algebra root spaces and abstract root pairings do not give the relative reductive group-scheme classification or canonical root-group normalizer construction."
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|root.?subgroup|semisimple.?rank|rank.?one.*classif",
+   "results": "{\"t\": \"2026-10-24T05:18:23Z\", \"tool\": \"grep\", \"query\": \"reductive|root.?subgroup|semisimple.?rank|rank.?one.*classif\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\"], \"digest\": \"d761836b500ad783\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group centres, Lie-algebra root spaces and abstract root pairings do not give the relative reductive group-scheme classification or canonical root-group normalizer construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scheme centralizer of the codimension one subtorus killed by a root is reductive with exactly the two opposite root spaces and formation commutes with base change",
+   "results": "{\"t\": \"2026-10-24T05:18:23Z\", \"tool\": \"leansearch\", \"query\": \"The scheme centralizer of the codimension one subtorus killed by a root is reductive with exactly the two opposite root spaces and formation commutes with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.centralizer\", \"RootPairing.restrictScalars_coe_root\", \"LieAlgebra.rootSpace\", \"RootPairing.restrictScalars_coe_coroot\", \"LieSubalgebra.root.congr_simp\", \"Subalgebra.centralizer_coe_map_includeLeft_eq_center_tensorProduct\", \"LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple\", \"Subring.centralizer\"], \"digest\": \"4a8872fbb513cb87\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group centres, Lie-algebra root spaces and abstract root pairings do not give the relative reductive group-scheme classification or canonical root-group normalizer construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.SpecialLinearGroup, Subgroup.centralizer",
+   "results": "{\"t\": \"2026-10-24T05:18:23Z\", \"tool\": \"loogle\", \"query\": \"Matrix.SpecialLinearGroup, Subgroup.centralizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group centres, Lie-algebra root spaces and abstract root pairings do not give the relative reductive group-scheme classification or canonical root-group normalizer construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski locally a relative semisimple rank one reductive group and its maximal torus are SL2 PGL2 or GL2 times a central split torus",
+   "results": "{\"t\": \"2026-10-24T05:18:29Z\", \"tool\": \"leanfinder\", \"query\": \"Zariski locally a relative semisimple rank one reductive group and its maximal torus are SL2 PGL2 or GL2 times a central split torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"SpecialLinearGroup.subsingleton_of_finrank_eq_one\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity\", \"LieAlgebra.IsKilling.instHasTrivialRadical\"], \"digest\": \"9a971381c5762610\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group centres, Lie-algebra root spaces and abstract root pairings do not give the relative reductive group-scheme classification or canonical root-group normalizer construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical perfect pairing of opposite root line bundles and a coroot yield three root exponentials acting by a reflection on a split maximal torus over an arbitrary ring",
+   "results": "{\"t\": \"2026-10-24T05:18:30Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical perfect pairing of opposite root line bundles and a coroot yield three root exponentials acting by a reflection on a split maximal torus over an arbitrary ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.reflection\", \"RootPairing.reflection_apply\", \"RootPairing.reflection_apply_root'\", \"RootPairing.reflection_apply_root\", \"RootPairing.coroot'_reflection\", \"RootPairing.reflectionPerm_root\", \"RootPairing.EmbeddedG2.ofPairingInThree_long\", \"RootPairing.coroot'_reflectionPerm\"], \"digest\": \"23cc305c18c4a17f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract matrix-group centres, Lie-algebra root spaces and abstract root pairings do not give the relative reductive group-scheme classification or canonical root-group normalizer construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-split-root-data-weyl-lifts",
+  "date": "2026-10-24",
+  "group": "Q151"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula). ",
+   "via": [
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-opposite-root-reflection-map",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reduced to the existing relative torus centralizer, then one new statement-only local rank-one matrix classification. Constructed the pairing and coroot in the three models, proved overlap uniqueness using dual numbers, glued using the existing representable-sheaf lemma, and multiplied the three matrices over arbitrary rings. No fibrewise-equality shortcut or characteristic restriction is used.",
+  "blueprint": "Latest blueprint direct-images proof (3), inherited alteration/root-model prerequisite chain. Ancestor command returns None; inherited null from.node and via are retained. The item realizes the opposite-root pairing/coroot and reflection prerequisite, using Conrad Lemma 4.1.3, Theorem 5.1.8 and the matrix calculation in Corollary 5.1.9. Whole blueprint searches found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic fpqc gluing and equality detection for scheme morphisms, also used to read PGL2 quotient identities on matrix lifts; no structural reductive-group statement is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NS-bfe6245cf",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-bfe6245cf (reviewer sub-agent of L); spot-checked: PASS with no fixes; I read the item, the new node and all seven steps in full. The item statement, stmt_deps and blueprint are identical to the base (unsplit, empty proof), so no target was weakened. Source checked: Conrad, Reductive group schemes, Lemma 4.1.3, Thm 4.2.6 with its proof, Props 4.2.7/4.3.1/4.3.4, Def 5.1.1, Lemma 5.1.3, Thm 5.1.8 and proof, Cor 5.1.9 (pp.108-142); no SGA is cited. New node lem-sfb-relative-rank-one-local-matrix-model states Conrad 5.1.8 correctly: split G_m^r gives condition (1) and the root lines are free Zariski-locally. Condition (3) on coroots is defined through 4.2.6 but is never used in the proof of 5.1.8, which rests on 4.2.7, 4.3.1 and 4.3.4. Those three are proved independently of 4.2.6, so there is no circularity with the item. The node does not restate the item: it gives no pairing, coroot or reflection. The type may vary over the base (GL(O+L), Conrad Ex 5.1.2). No duplicate in the DAG: lem-sfb-split-rank-one-classification is the field version only. Step checks: (1) T_alpha = D(M/Z a0) is a split codim-one torus and closed; finite presentation via the Noetherian leaf; the centralizer node gives H with base change, and its fibre is G_alpha, with the largest-subtorus point holding even when p divides n. (2) Equivariance makes T_alpha centralize both exponentials, so they factor through H. The new node applies to H; the uniqueness clause of the exponential node, for H and then G, identifies u+ and u- with the exponentials. (3) Recomputed the Gauss formula [[1+ab,a],[b,1]] and the monomorphism; PGL2 handled by fpqc uniqueness. (4) The dual-number argument gives p=q, and X=(c-1)e, Y=f gives h=h'; this matches Conrad p.125. (5) The local pairings and coroots glue by fpqc descent and the pairing is perfect. (6) Recomputed w(a)=[[0,a],[-a^-1,0]] and w t w^-1 = diag(d2,d1) = t h(d1/d2)^-1, including PGL2 [diag(c,1)]; the map is an involution, so the subgroup is normalized. (7) The unique nonidentity class plus unique-coroot clauses of the field node give the usual coroot on fibres; base change follows. Batch-5 flag on def-trf-algebraic-space, reached via torus-centralizer-normalizer: it is the general algebraic-space definition (Stacks 025Y), not a step of the trace formula or of Poincare duality; accepted. Accepted tool_use: fpqc-representable-descent (mathlib leaf), used for gluing and equality detection only."
+ }
+}

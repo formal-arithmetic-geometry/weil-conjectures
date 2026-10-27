@@ -1,0 +1,440 @@
+{
+ "id": "lem-trf-tensor-diagonal-unit-hom",
+ "kind": "statement",
+ "title": "Unit map into the tensor-diagonal base change",
+ "statement": "Let $k$ be a commutative ring, $L$ a commutative $k$-algebra, and $B,C$ commutative $L$-algebras, regarded as $k$-algebras by restriction. Tensor products are those of [def-weil-pbc-module-tensor-product], with multiplication $(x\\otimes y)(x\\prime\\otimes y\\prime)=xx\\prime\\otimes yy\\prime$ and unit $1\\otimes1$. Put $R=L\\otimes_kL$ and $D=B\\otimes_kC$. Give $D$ its $R$-algebra structure through $\\psi:R\\to D$, $\\lambda\\otimes\\lambda\\prime\\mapsto(\\lambda1_B)\\otimes(\\lambda\\prime1_C)$, and give $L$ its $R$-algebra structure through $\\mu:R\\to L$, $\\lambda\\otimes\\lambda\\prime\\mapsto\\lambda\\lambda\\prime$. There is a unique unital ring homomorphism $\\alpha:B\\otimes_LC\\to D\\otimes_RL$ such that $\\alpha(b\\otimes c)=(b\\otimes c)\\otimes1$ for all $b\\in B,c\\in C$. No injectivity, flatness, reducedness, finite-generation or field assumption is imposed; zero algebras are allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C2Y, lemma-geometrically-reduced-over-separable-algebraic, second proof paragraph displayed identity; agent generalization of its forward map to commutative algebras over a commutative ring"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Clause (1) of [lem-weil-pbc-algebra-tensor-pushout-universal-property] supplies the commutative tensor rings $R,D$ and their unital inclusions. Clause (2) over $k$ constructs $\\psi$ from the two $k$-algebra maps $\\lambda\\mapsto(\\lambda1_B)\\otimes1_C$ and $\\lambda\\mapsto1_B\\otimes(\\lambda1_C)$ into $D$, and constructs $\\mu$ from the two identity maps of $L$. The two inputs for $\\psi$ are composites of the given $k$-algebra maps $L\\to B,C$ with the $k$-algebra inclusions from clause (1); hence they preserve the same $k$-structure, as clause (2) requires. Its pure-tensor formula gives exactly the $\\psi,\\mu$ specified in the statement. Hence the stated $R$-algebra structures are defined. Put $Q=D\\otimes_RL$. Clause (1) gives unital ring maps $j:D\\to Q$, $d\\mapsto d\\otimes1$, $i_B:B\\to D$, $b\\mapsto b\\otimes1$, and $i_C:C\\to D$, $c\\mapsto1\\otimes c$. Give $Q$ its $L$-algebra structure through the right inclusion $\\ell:L\\to Q$, $\\lambda\\mapsto1_D\\otimes\\lambda$. Set $f=j\\circ i_B$ and $g=j\\circ i_C$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2Y, lemma-geometrically-reduced-over-separable-algebraic, second proof paragraph displayed identity; explicit forward-map argument supplied by Q118 using Tag 00CX (lemma-tensor-product)"
+   }
+  },
+  {
+   "text": "The bilinearity relations of [def-weil-pbc-module-tensor-product] in $Q$ give $(\\psi(r)d)\\otimes a=d\\otimes\\mu(r)a$ for $r\\in R$, $d\\in D$, $a\\in L$, since both sides equal $r(d\\otimes a)$. For $\\lambda\\in L$, specialize to $d=1_D$, $a=1$, and respectively $r=\\lambda\\otimes1$ and $r=1\\otimes\\lambda$. Since $\\psi(\\lambda\\otimes1)=(\\lambda1_B)\\otimes1_C$, $\\psi(1\\otimes\\lambda)=1_B\\otimes(\\lambda1_C)$, and both elements have $\\mu$-image $\\lambda$, this gives $f(\\lambda1_B)=((\\lambda1_B)\\otimes1_C)\\otimes1=1_D\\otimes\\lambda=(1_B\\otimes(\\lambda1_C))\\otimes1=g(\\lambda1_C)$. Hence both $f$ and $g$ respect the given $L$-structure maps, so they are $L$-algebra homomorphisms.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2Y, lemma-geometrically-reduced-over-separable-algebraic, second proof paragraph displayed identity; explicit forward-map argument supplied by Q118 using Tag 00CX (lemma-tensor-product)"
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-weil-pbc-algebra-tensor-pushout-universal-property] over $L$ to $f:B\\to Q$ and $g:C\\to Q$. It gives an $L$-algebra homomorphism $\\alpha:B\\otimes_LC\\to Q$ with $\\alpha(b\\otimes c)=f(b)g(c)$. The tensor multiplications specified in the statement give $f(b)g(c)=((b\\otimes1_C)\\otimes1)((1_B\\otimes c)\\otimes1)=(b\\otimes c)\\otimes1$, as required.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2Y, lemma-geometrically-reduced-over-separable-algebraic, second proof paragraph displayed identity; explicit forward-map argument supplied by Q118 using Tag 00CX (lemma-tensor-product)"
+   }
+  },
+  {
+   "text": "Let $\\alpha\\prime$ be any unital ring map with the required pure-tensor formula. Taking $b=\\lambda1_B$ and $c=1_C$ and using step 2 shows $\\alpha\\prime((\\lambda1_B)\\otimes1_C)=1_D\\otimes\\lambda=\\ell(\\lambda)$; thus $\\alpha\\prime$ is also an $L$-algebra homomorphism. Taking $c=1_C$ or $b=1_B$ shows its composites with the two tensor inclusions are $f$ and $g$. Clause (3) of [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives $\\alpha\\prime=\\alpha$. Every construction used arbitrary commutative rings and unital maps, including zero rings.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2Y, lemma-geometrically-reduced-over-separable-algebraic, second proof paragraph displayed identity; explicit forward-map argument supplied by Q118 using Tag 00CX (lemma-tensor-product)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit generalization of the forward map in Tag 0C2Y, lemma-geometrically-reduced-over-separable-algebraic, second proof paragraph; tensor universal property Tag 00CX"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "diagonal|baseChange.*[Ll]ift|[Ll]ift.*baseChange",
+   "results": {
+    "t": "2026-10-22T05:56:44Z",
+    "tool": "grep",
+    "query": "diagonal|baseChange.*[Ll]ift|[Ll]ift.*baseChange",
+    "sub": "RingTheory/TensorProduct",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean",
+     "Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean",
+     "Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean",
+     "Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean",
+     "Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean",
+     "Mathlib/RingTheory/TensorProduct/Basic.lean",
+     "Mathlib/RingTheory/TensorProduct/Basic.lean",
+     "Mathlib/RingTheory/TensorProduct/Basic.lean"
+    ],
+    "digest": "6bd9f995a423f18a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general tensor lift/map constructors do not supply the two scalar-action compatibility checks for this diagonal base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical map B tensor over L C to (B tensor over k C) tensor over (L tensor over k L) L is a ring homomorphism",
+   "results": {
+    "t": "2026-10-22T05:56:44Z",
+    "tool": "leansearch",
+    "query": "The canonical map B tensor over L C to (B tensor over k C) tensor over (L tensor over k L) L is a ring homomorphism",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.lift",
+   "results": {
+    "t": "2026-10-22T05:56:44Z",
+    "tool": "loogle",
+    "query": "Algebra.TensorProduct.lift",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Algebra.TensorProduct.lift",
+     "Algebra.TensorProduct.lift_comp_includeLeft",
+     "Algebra.TensorProduct.lift_comp_includeRight'",
+     "Algebra.TensorProduct.lift_comp_includeRight",
+     "Algebra.TensorProduct.lift_tmul",
+     "Algebra.TensorProduct.lift_includeLeft_includeRight",
+     "Algebra.TensorProduct.lmul'_comp_map",
+     "Algebra.TensorProduct.restrictScalars_lift"
+    ],
+    "digest": "9fde71472adfb8e7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general tensor lift/map constructors do not supply the two scalar-action compatibility checks for this diagonal base change"
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|theorem lift_tmul|def map|def lmul|def.*[Bb]ase[Cc]hange|diagonal",
+   "results": {
+    "t": "2026-10-22T05:56:57Z",
+    "tool": "grep",
+    "query": "def lift|theorem lift_tmul|def map|def lmul|def.*[Bb]ase[Cc]hange|diagonal",
+    "sub": "RingTheory/TensorProduct",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean",
+     "Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean",
+     "Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean"
+    ],
+    "digest": "10e448c477a646eb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general tensor lift/map constructors do not supply the two scalar-action compatibility checks for this diagonal base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For commutative k algebras L B C where B and C are L algebras the map B tensor L C to (B tensor k C) tensor (L tensor k L) L sending b tensor c to (b tensor c) tensor 1 is a ring homomorphism",
+   "results": {
+    "t": "2026-10-22T05:57:01Z",
+    "tool": "leanfinder",
+    "query": "For commutative k algebras L B C where B and C are L algebras the map B tensor L C to (B tensor k C) tensor (L tensor k L) L sending b tensor c to (b tensor c) tensor 1 is a ring homomorphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.TensorProduct.algebraMap_def",
+     "Algebra.TensorProduct.lift",
+     "Algebra.TensorProduct.rTensor",
+     "Algebra.TensorProduct.mapOfCompatibleSMul",
+     "Algebra.TensorProduct.map",
+     "Algebra.TensorProduct.mapOfCompatibleSMul'",
+     "Algebra.TensorProduct.lTensor",
+     "Algebra.TensorProduct.algHomOfLinearMapTensorProduct"
+    ],
+    "digest": "bdca73033cf734d4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general tensor lift/map constructors do not supply the two scalar-action compatibility checks for this diagonal base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of tensor base ring via the multiplication diagonal: the unit map on pure tensors descends through balancing over L",
+   "results": {
+    "t": "2026-10-22T05:57:18Z",
+    "tool": "leanfinder",
+    "query": "Change of tensor base ring via the multiplication diagonal: the unit map on pure tensors descends through balancing over L",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TensorProduct.isBaseChange",
+     "TensorProduct.AlgebraTensorModule.cancelBaseChange",
+     "Algebra.TensorProduct.cancelBaseChange_tmul",
+     "Algebra.baseChange_lmul",
+     "TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul",
+     "IsBaseChange.tensorEquiv",
+     "Algebra.TensorProduct.tmul_one_eq_one_tmul",
+     "Algebra.TensorProduct.lidOfCompatibleSMul_tmul"
+    ],
+    "digest": "0e6a5e3556504f60"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general tensor lift/map constructors do not supply the two scalar-action compatibility checks for this diagonal base change"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorProduct_tensorProduct",
+   "results": {
+    "t": "2026-10-22T05:58:37Z",
+    "tool": "grep",
+    "query": "tensorProduct_tensorProduct",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/IsTensorProduct.lean",
+     "Mathlib/RingTheory/Localization/BaseChange.lean",
+     "Mathlib/RingTheory/Localization/BaseChange.lean",
+     "Mathlib/RingTheory/Localization/BaseChange.lean",
+     "Mathlib/RingTheory/Localization/BaseChange.lean",
+     "Mathlib/RingTheory/Smooth/IntegralClosure.lean",
+     "Mathlib/RingTheory/Smooth/IntegralClosure.lean",
+     "Mathlib/RingTheory/Etale/QuasiFinite.lean"
+    ],
+    "digest": "a9809d57fae7c2d3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: IsPushout.tensorProduct_tensorProduct is base change of an assumed pushout, not either diagonal comparison map with its scalar compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For commutative k algebras L B C the pure tensor map from B tensor over L C to (B tensor over k C) tensor over (L tensor over k L) L is a unique unital ring homomorphism",
+   "results": {
+    "t": "2026-10-22T07:10:51Z",
+    "tool": "leansearch",
+    "query": "For commutative k algebras L B C the pure tensor map from B tensor over L C to (B tensor over k C) tensor over (L tensor over k L) L is a unique unital ring homomorphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.TensorProduct.ext",
+     "Algebra.TensorProduct.algHomOfLinearMapTensorProduct",
+     "Algebra.TensorProduct.productLeftAlgHom",
+     "TensorProduct.map",
+     "Algebra.TensorProduct.algHomOfLinearMapTensorProduct_apply",
+     "Bialgebra.TensorProduct.map_toAlgHom",
+     "Algebra.TensorProduct.piRightHom",
+     "Algebra.TensorProduct.lift"
+    ],
+    "digest": "bde078bec65534db"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: tensor lift/productMap and cancellation hits are general constructors; the required diagonal scalar compatibility is the explicit calculation of step 2. Reuse the existing pushout universal-property Mathlib leaf, not a new node."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.lift",
+   "results": {
+    "t": "2026-10-22T07:10:52Z",
+    "tool": "loogle",
+    "query": "Algebra.TensorProduct.lift",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Algebra.TensorProduct.lift",
+     "Algebra.TensorProduct.lift_comp_includeLeft",
+     "Algebra.TensorProduct.lift_comp_includeRight'",
+     "Algebra.TensorProduct.lift_comp_includeRight",
+     "Algebra.TensorProduct.lift_tmul",
+     "Algebra.TensorProduct.lift_includeLeft_includeRight",
+     "Algebra.TensorProduct.lmul'_comp_map",
+     "Algebra.TensorProduct.restrictScalars_lift"
+    ],
+    "digest": "9fde71472adfb8e7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: tensor lift/productMap and cancellation hits are general constructors; the required diagonal scalar compatibility is the explicit calculation of step 2. Reuse the existing pushout universal-property Mathlib leaf, not a new node."
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|theorem lift_tmul|tensorProduct_tensorProduct|diagonal",
+   "results": {
+    "t": "2026-10-22T07:10:52Z",
+    "tool": "grep",
+    "query": "def lift|theorem lift_tmul|tensorProduct_tensorProduct|diagonal",
+    "sub": "RingTheory/TensorProduct",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/Basic.lean",
+     "Mathlib/RingTheory/TensorProduct/Basic.lean"
+    ],
+    "digest": "7c43d44cde6cd611"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: tensor lift/productMap and cancellation hits are general constructors; the required diagonal scalar compatibility is the explicit calculation of step 2. Reuse the existing pushout universal-property Mathlib leaf, not a new node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The map B tensor L C to (B tensor k C) tensor (L tensor k L) L sending b tensor c to (b tensor c) tensor 1 is well defined by the tensor balancing relations",
+   "results": {
+    "t": "2026-10-22T07:10:54Z",
+    "tool": "leanfinder",
+    "query": "The map B tensor L C to (B tensor k C) tensor (L tensor k L) L sending b tensor c to (b tensor c) tensor 1 is well defined by the tensor balancing relations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TensorProduct.Algebra.moduleAux",
+     "LinearMap.tensorKerBil",
+     "LinearMap.BilinMap.tensorDistrib",
+     "TensorProduct.AlgebraTensorModule.rTensor_tmul",
+     "TensorProduct.AlgebraTensorModule.lift_tmul",
+     "TensorProduct.AlgebraTensorModule.lift_apply",
+     "Algebra.TensorProduct.lmul''_eq_lid_comp_mapOfCompatibleSMul",
+     "TensorProduct.Algebra.moduleAux_apply"
+    ],
+    "digest": "fca8241f488c2e99"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: tensor lift/productMap and cancellation hits are general constructors; the required diagonal scalar compatibility is the explicit calculation of step 2. Reuse the existing pushout universal-property Mathlib leaf, not a new node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of scalar ring along the multiplication L tensor k L to L identifies B tensor L C with diagonal scalar extension of B tensor k C",
+   "results": {
+    "t": "2026-10-22T07:11:22Z",
+    "tool": "leanfinder",
+    "query": "Change of scalar ring along the multiplication L tensor k L to L identifies B tensor L C with diagonal scalar extension of B tensor k C",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.TensorProduct.cancelBaseChange",
+     "IsBaseChange.tensorEquiv",
+     "Algebra.TensorProduct.cancelBaseChange_tmul",
+     "TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul",
+     "TensorProduct.AlgebraTensorModule.cancelBaseChange",
+     "TensorProduct.isBaseChange",
+     "TensorProduct.AlgebraTensorModule.distribBaseChange",
+     "Algebra.TensorProduct.cancelBaseChange_symm_tmul"
+    ],
+    "digest": "c6aad3c0faebe865"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: tensor lift/productMap and cancellation hits are general constructors; the required diagonal scalar compatibility is the explicit calculation of step 2. Reuse the existing pushout universal-property Mathlib leaf, not a new node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometric-reducedness-separable-scalar-restriction",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Via the scalar-restriction input below the ancestor: Stacks 0C2Y second proof paragraph, displayed tensor identity; map from the relative tensor to the diagonal base change",
+   "via": [
+    "lem-trf-geometric-reducedness-separable-scalar-restriction",
+    "lem-trf-geometrically-integral-curve-factorization",
+    "lem-trf-de-jong-geometrically-irreducible-tower",
+    "lem-trf-plurinodal-proper-hypercover",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-tensor-diagonal-unit-hom",
+  "worker": "stage1",
+  "summary": "Q118 repair of the latest return (2026-10-22 16:33 UTC, immutable head 7be242aa97e): compared returned item and cited files with current DAG, rebuilt from the current unsplit node, and retained the four-step route, actual searches and citations. Both cited files are unchanged. Step 2 now writes the general outer-tensor balancing identity and derives it from bilinearity before its two scalar specializations; all hypotheses of the pushout applications and ring-map uniqueness were reread. Statement and blueprint ancestry unchanged; no new nodes.",
+  "blueprint": "The existing ancestry through scalar restriction below lem-trf-local-term-locality is preserved. The steps make explicit the forward-map component of the Stacks 0C2Y tensor identity; no blueprint node states this algebraic comparison.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-3a85a309d",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-3a85a309d (reviewer sub-agent of L); spot-checked: This is the fourth delivery of the same substance (FIX 3befd9c3, PASS f85ef6ee, PASS 7be242aa); each earlier head was refused at landing as 'completed in this project's DAG but not in the live DAG'. Compared field by field with the 7be242 item, only proof and split_report differ, and in proof only step 2's text changed. It now states the general R-balancing identity (ψ(r)d)⊗a=d⊗μ(r)a in Q=D⊗_R L before setting d=1, a=1. That is correct and comes directly from the bilinearity relations of def-weil-pbc-module-tensor-product. The statement, stmt_deps, proof_deps, source and proof_origin are unchanged, there are no new nodes and there is no repair note. I read lem-weil-pbc-algebra-tensor-pushout-universal-property (clauses 1-3, no nonzero, flat or field hypothesis) and def-weil-pbc-module-tensor-product in full. Step 1: clause (2) over k builds ψ from k-algebra maps (L→B or L→C composed with ι) and μ from (id,id); j and ℓ are ring maps; f=j∘i_B, g=j∘i_C. Step 2: f(λ1_B)=ℓ(λ)=g(λ1_C), so f and g are L-algebra maps. Step 3: clause (2) over L gives α(b⊗c)=(b⊗c)⊗1. Step 4: any competing ring map is L-linear because λx=((λ1_B)⊗1)x, so clause (3) gives uniqueness at full strength. Edge cases hold: L=k, Z→Z/2, the nonflat B=Z/2, C=Z/3 over Z (D=0), and zero B, C or L. Source: Stacks algebra.tex Tag 0C2Y (lemma-geometrically-reduced-over-separable-algebraic), displayed identity K⊗_{k'}A=(K⊗_kA)⊗_{k'⊗k'}k', generalized by the agent with the 00CX relations; no SGA. rg -lL 0C2Y finds only the reverse-map sibling, the parent, the curve-factorization node and two sfb nodes, none a duplicate. No tool_uses are needed and I made no changes. Maintainer note: the item needs promotion into the live DAG; another re-delivery will not land it."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TensorDiagonalUnitHom",
+  "declaration": "Algebra.TensorProduct.Diagonal.existsUnique_unitHom",
+  "declarations": [
+   "Algebra.TensorProduct.Diagonal.scalarMap",
+   "Algebra.TensorProduct.Diagonal.baseChange",
+   "Algebra.TensorProduct.Diagonal.baseChangeCommRing",
+   "Algebra.TensorProduct.Diagonal.baseChangeTmul",
+   "Algebra.TensorProduct.Diagonal.existsUnique_unitHom"
+  ],
+  "file": "lean/Sheaf/RingTheory/TensorDiagonalUnitHom.lean",
+  "statement": "theorem existsUnique_unitHom (k : Type u) (L : Type v) (B : Type w) (C : Type z) [CommRing k] [CommRing L] [CommRing B] [CommRing C] [Algebra k L] [Algebra L B] [Algebra L C] [Algebra k B] [Algebra k C] [IsScalarTower k L B] [IsScalarTower k L C] : ∃! α : B ⊗[L] C →+* baseChange k L B C, ∀ (b : B) (c : C), α (b ⊗ₜ[L] c) = baseChangeTmul k L B C (b ⊗ₜ[k] c) 1",
+  "branch": "sheaf-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a6ae15be",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Node diff vs live: only lean added; statement verbatim. Lean matches every clause: CommRing k/L/B/C with IsScalarTower restriction; ψ = TensorProduct.map of the two toAlgHom; μ = lmul'; D⊗_R L via the real def baseChange with letI toAlgebra and no global instance; ∃! over all RingHom with α(b⊗c)=(b⊗c)⊗1. No extra hypotheses, independent universes (Type (max v w z) correct). Math true (L-balancing ((λb)⊗c)⊗1=(b⊗c)⊗λ=(b⊗λc)⊗1; uniqueness by generation by pure tensors). Edge cases zero/L=0/k=L/Z→Z/2/Z/2⊗Z/3 covered. Source Stacks 0C2Y second proof paragraph read. Docstrings carry source, blueprint and 4 proof steps; only sorry; no hollow defs; stmt_deps fine. Maintainer note: parallel Q27 eval-hom delivery 1c0d3072 defines the same ring (tensorDiagonalScalarMap/tensorDiagonalBaseChange); neither has landed, so the second lander should reuse the first's defs."
+ }
+}

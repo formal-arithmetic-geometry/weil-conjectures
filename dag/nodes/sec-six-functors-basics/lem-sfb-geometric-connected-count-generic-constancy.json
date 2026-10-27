@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-geometric-connected-count-generic-constancy",
+ "kind": "statement",
+ "title": "Generic constancy of geometric connected-component counts",
+ "statement": "Let $f:Y\\to T$ be a morphism of finite type [def-weil-finite-type-morphism] of schemes [def-pc-scheme]. For $t\\in T$, let $n_f(t)\\in\\mathbb N\\cup\\{\\infty\\}$ be the well-defined geometric connected-component count of [lem-weil-pbc-geometric-component-count-base-change]: the number of maximal nonempty connected subsets of $Y\\times_T\\operatorname{Spec}K$ for an algebraically closed extension $K$ of the residue field $\\kappa(t)$, with infinite counts recorded as $\\infty$ and the empty fibre having count $0$. For every nonempty irreducible closed subset $Z\\subseteq|T|$, there are a nonempty relatively open subset $V\\subseteq Z$ and a value $c\\in\\mathbb N\\cup\\{\\infty\\}$ such that $n_f(t)=c$ for every $t\\in V$. Here irreducible means that any two nonempty relatively open subsets intersect. No finite-presentation, flatness, smoothness, properness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055H, label lemma-nr-geom-connected-components-good; reformulated for irreducible closed subsets Z, each of which is the closure of its generic point in a scheme (Schemes Tag 01IS, lemma-scheme-sober). Counts are those of Tag 055F."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "lem-weil-pbc-geometric-component-count-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Fix a nonempty irreducible closed subset $Z\\subseteq|T|$. By [lem-sc-scheme-sober], $Z=\\overline{\\{\\eta\\}}$ for a generic point $\\eta$. Give $Z$ its reduced induced closed scheme structure using [lem-weil-pbc-reduced-induced-closed-subscheme]. The base change $X=Y\\times_T Z\\to Z$ is finite type by [lem-sfb-finite-type-composition-base-change], and [lem-weil-pbc-geometric-component-count-base-change] identifies its count function with $n_f|_Z$. It suffices to find a nonempty open in this irreducible base on which its count is constant. Rename this morphism $h:X\\to S$.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-geometric-component-count-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055H, first paragraph; scheme sobriety is Tag 01IS."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-etale-generic-component-splitting] to $h$. It gives an irreducible affine $B$ and a finite etale surjection $g:B\\to U$ onto a nonempty open of $S$. Put $q:P=X\\times_S B\\to B$ and write $\\xi$ for the generic point of $B$. Base-change stability makes $q$ finite type. Every irreducible component of $G=P_\\xi$ is geometrically irreducible. We will find an open neighbourhood of $\\xi$ in $B$ with constant geometric count and then take its open image in $S$.",
+   "uses": [
+    "lem-sfb-etale-generic-component-splitting",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055H, second paragraph, using Tag 0551."
+   }
+  },
+  {
+   "text": "The fibre $G$ is finite type over the field $k=\\kappa(\\xi)$ by base change. A field has only the ideals $(0)$ and $(1)$, so it is Noetherian and its one-point spectrum is a Noetherian scheme. Thus [lem-weil-pbc-finite-type-over-noetherian] makes $G$ Noetherian. By [lem-weil-pbc-noetherian-finite-components] and [lem-sc-irreducible-components-cover], its irreducible components form a finite closed cover $(A_i)_{i\\in I}$. The index set $I$ is finite, and $I$ is empty exactly when $G$ is empty.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055H, final paragraph, finite generic component decomposition; Tag 01T6 for the Noetherian fibre."
+   }
+  },
+  {
+   "text": "Join $i,j\\in I$ by an edge when $A_i\\cap A_j\\ne\\varnothing$. Each $A_i$ is connected: a separation would contradict irreducibility. The union belonging to a graph component is connected, since a separation cannot split a vertex or two intersecting vertices, hence cannot split a path. Different graph-component unions are disjoint, and each is closed, being a finite union of closed $A_i$; its complement is also closed. These nonempty clopen connected unions are therefore exactly the connected components of $G$ (a nonempty clopen connected subset is a maximal connected subset). Let $n$ be the number of graph components, a finite integer since $I$ is finite; then $G$ has exactly $n$ connected components. If $I$ is empty, $n=0$ and $G$ is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055G, final paragraph (equivalence classes of the intersection relation), as used for Tag 055H; this step defines the finite integer $n$."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-geometric-generic-cover-spread] to $q$, with $L=k$, the identity finite etale spectrum map and the supplied cover $(A_i)$. The geometric-irreducibility hypothesis is Step 2. Obtain an open $W_+\\ni\\xi$ such that for every $b\\in W_+$ and every field extension $K/\\kappa(b)$ there is a surjection $p:Q\\to P_b\\times_{\\kappa(b)}\\operatorname{Spec}K$ and a cover $(D_i)$ of $Q$ by nonempty irreducible subsets, preserving every edge of the generic intersection graph. For each of its $n$ graph components, the corresponding union of the $D_i$ is connected by the separation-and-path argument of Step 4. Its image under $p$ is connected: a separation pulls back to a separation of that union. The $n$ images cover the target by surjectivity, so the target has at most $n$ connected components: each nonempty connected image lies in one maximal component, and every target point belongs to an image. This uses [lem-sfb-connected-component-maximality]. When $n=0$, the empty cover forces $Q$, and hence the target, to be empty. In particular $n_q(b)\\le n$ on $W_+$.",
+   "uses": [
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sfb-connected-component-maximality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055H, upper-bound part of final paragraph, using the geometric closed-cover and intersection-spreading construction of Tag 055G."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-generic-connected-component-lower-bound] to $q$ with the integer $n$ of Step 4, the number of connected components of $G=P_\\xi$. It gives an open $W_-\\ni\\xi$ on which every ordinary fibre $P_b$ has at least $n$ connected components. For any algebraically closed extension $K/\\kappa(b)$, [lem-pc-field-extension-surjective] and [lem-weil-pbc-surjective-base-change] make $P_b\\times_{\\kappa(b)}\\operatorname{Spec}K\\to P_b$ surjective. A continuous surjection cannot decrease the number of connected components in its source: the image of each source component is connected (pull back a separation), lies in a single target component by [lem-sfb-connected-component-maximality], and every target component is hit. Thus $n_q(b)\\ge n$. Combining with Step 5 gives $n_q=n$ on the nonempty open $W=W_-\\cap W_+$.",
+   "uses": [
+    "lem-sfb-generic-connected-component-lower-bound",
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-sfb-connected-component-maximality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055H, lower-bound part of final paragraph, using Tag 055D; comparison of ordinary and geometric components via the field-extension projection."
+   }
+  },
+  {
+   "text": "The etale map $g$ is open by [lem-weil-pbc-etale-morphism-open-map], so $V=g(W)$ is a nonempty open subset of $U$, hence of $S$. For $s\\in V$, choose $b\\in W$ with $g(b)=s$. By [lem-weil-pbc-geometric-component-count-base-change], $n_h(s)=n_q(b)=n$. Step 1 identifies this $V$ with a nonempty relatively open subset of the original $Z$ and identifies the count there with $n_f$. Take $c=n$. All base changes were unrestricted, and no additional hypothesis was imposed on the original family.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-geometric-component-count-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055H, open-image descent in paragraph 2; the count identity is Tag 055F (not the irreducible-component count identity)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-geometric-component-count-base-change",
+  "lem-sfb-etale-generic-component-splitting",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-sc-irreducible-components-cover",
+  "lem-sbc-geometric-generic-cover-spread",
+  "lem-sfb-connected-component-maximality",
+  "lem-sfb-generic-connected-component-lower-bound",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-etale-morphism-open-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055H (lemma-nr-geom-connected-components-good), with the finite generic irreducible-cover form of the upper-bound argument from Tag 055G and the ordinary lower bound of Tag 055D."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism of schemes the number of geometric connected components of the fibres is constant on a dense open of every irreducible closed subset",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.Scheme.Hom.finite_preimage, AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.IsDominant",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The number of geometric connected components in a finite type family of schemes is constant on a nonempty open subset of an irreducible base",
+   "results": "8 hits; AlgebraicGeometry.Scheme.OpenCover.restrict_I₀, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.germToFunctionField.congr_simp, AlgebraicGeometry.Scheme.isAffine_affineCover, irreducibleComponent_subset_connectedComponent, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.IsSeparated.instMorphismRestrict",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric connected component count of a finite type family is generically constant on every irreducible closed subset of the base",
+   "results": "8 hits; genericPoints.component_ofComponent, genericPoints.finite, genericPoints.component_surjective, genericPoints.ofComponent, genericPoints.isGenericPoint_ofComponent, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, genericPoints.ofComponent_component, irreducibleComponent_subset_connectedComponent",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyConnected, IsLocallyConstructible",
+   "results": "0 hits; ; loogle: unknown identifier 'IsLocallyConstructible'",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  },
+  {
+   "tool": "grep",
+   "query": "([Cc]onnected.*[Cc]onstructible|[Cc]omponent.*[Cc]onstant|[Cc]onstant.*[Cc]omponent)",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyConnected",
+   "results": "12 hits; AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyConnected, AlgebraicGeometry.GeometricallyConnected, AlgebraicGeometry.instSurjectiveOfGeometricallyConnected, AlgebraicGeometry.GeometricallyConnected.eq_geometrically, AlgebraicGeometry.GeometricallyConnected.geometrically_connectedSpace, AlgebraicGeometry.GeometricallyConnected.mk, AlgebraicGeometry.geometricallyConnected_iff, AlgebraicGeometry.instGeometricallyConnectedFiberToSpecResidueField",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyConnected|geometricallyConnected",
+   "results": "5 hits; Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyConnected, Topology.IsLocallyConstructible",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  },
+  {
+   "tool": "grep",
+   "query": "055H|connected.*component.*constan|constan.*connected.*component",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric connected component count of a finite type family is constant on a nonempty open subset of an irreducible base",
+   "results": "8 hits: TopologicalSpace.NoetherianSpace.exists_open_ne_empty_le_irreducibleComponent, TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent, irreducibleComponents_eq_singleton, connectedComponent, irreducibleComponents, irreducibleComponent_subset_connectedComponent, connectedComponentIn_univ, IrreducibleSpace.connectedSpace",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "a460943fb7280733"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyConnected, ConnectedComponents",
+   "results": "2 hits: AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph, AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph_apply",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "7c6684093f1fd260"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic constancy of the number of geometric connected components of fibres of a finite type scheme morphism",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.Scheme.Hom.finite_preimage, AlgebraicGeometry.finite_appTop_of_universallyClosed",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "05c1566e8d0970eb"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-connected-fibre-locus-constructible",
+  "date": "2026-10-24",
+  "group": "Q95"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: the relative theorem of the cube, including compatibility of isomorphisms; Relative Picard detection by the three identity faces; normal-base step: pass from residue-field fibre triviality to local base pullbacks; normal-base Picard locality: unpointed normal arithmetic models, before descending a line or its generic trivialization; constructibility of the one-geometric-component locus, replacing the section-component shortcut in the unpointed arithmetic-model input. Stacks 055I: Noetherian reduction, then 055H generic constancy on irreducible closed subsets. Generic-constancy input, independent of constructible level sets.",
+   "via": [
+    "lem-sfb-geometric-connected-fibre-locus-constructible",
+    "lem-sfb-normal-domain-smooth-family-models",
+    "lem-sfb-normal-base-fibrewise-line-locality",
+    "lem-sfb-relative-picard-cube-face-detection",
+    "lem-sfb-semiabelian-cubical-rigidification",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-geometric-connected-count-generic-constancy",
+  "worker": "stage1",
+  "summary": "Followed Stacks 055H for arbitrary finite type morphisms. Added only its non-Noetherian finite etale generic-component model (0551) and ordinary connected-component lower bound (055D). Reused existing geometric cover spreading (055G), with an explicit finite-graph separation argument for the upper bound. Wrote unrestricted closed-base-change reduction, ordinary-to-geometric lower comparison, empty-fibre case, and open-image descent. Statement unchanged.",
+  "blueprint": "Current blueprint det-thm-sf-ctf-stability-direct-images, proof (3), arithmetic-model/Picard-line locality ancestry recorded in blueprint.from.place; this item realizes the 055H generic-constancy input of its 055I constructibility subargument. Steps 1--2 are closure reduction and etale splitting, Steps 3--6 establish the two component-count bounds, Step 7 descends them.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "The general construction of a scheme structure on any closed subset is needed before base change to the irreducible subset."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-component-count-base-change",
+    "why": "The general 055F identity for connected-component counts is needed both for closed-base restriction and etale descent."
+   },
+   {
+    "node": "lem-sbc-geometric-generic-cover-spread",
+    "why": "The general geometric closed-cover and intersection-spreading input of Stacks 055G supplies the upper bound on field-extended fibres; no same-unit node supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-geometric-component-count-base-change",
+  "lem-sbc-geometric-generic-cover-spread"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-6648509c9",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-6648509c9 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, and Stacks 0551, 055D, 055F, 055E/055G and 055H in more-morphisms.tex; also every cited node's statement. Live and side-live show the item unsplit with no repair note, so this is a first split, not a re-split. The item statement is unchanged from the base. Steps 1-2 (reduction to Z_red, then 0551 étale splitting) and Steps 5-7 (upper bound, lower bound, open-image descent) are correct; the details are below. The new 0551 node allows a non-Noetherian irreducible base, so it is a generalization of lem-trf-finite-etale-generic-component-splitting, not a duplicate. The new 055D node is exactly the Stacks statement. Neither new node restates the item. Small cases checked: empty fibre, n=0, the C/R fibre of Spec C over Spec R, a disjoint union of r sections. FIX (C4): Step 3 cited lem-sfb-noetherian-connected-components-open without checking its hypothesis (ACC on opens). The citation was not needed, because Step 4's graph argument already proves the connected components are the finitely many graph components. I removed it from Step 3, proof_deps and tool_uses; n is now defined in Step 4 and Step 6 refers to Step 4. Upper bound: cover-spread with L=κ(ξ), identity map and the generic components, with forward edge preservation and a connected image per graph component. Stacks routes this through 055E instead; the variant is equivalent and accepted. Lower bound: 055D plus the surjection from the field-extended fibre. Descent: étale openness plus 055F. Accepted tool uses: reduced-induced-closed-subscheme, geometric-component-count-base-change, geometric-generic-cover-spread. Fixed file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-geometric-connected-count-generic-constancy.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricConnectedCountGenericConstancy",
+  "declaration": "AlgebraicGeometry.exists_isOpen_geometricConnectedComponentCount_eq",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricConnectedCountGenericConstancy.lean",
+  "statement": "theorem exists_isOpen_geometricConnectedComponentCount_eq {Y T : Scheme.{u}} (f : Y ⟶ T) [LocallyOfFiniteType f] [QuasiCompact f] (Z : Set T) (hclosed : IsClosed Z) (hirreducible : IsIrreducible Z) : ∃ (V : Set Z) (c : ℕ∞), IsOpen V ∧ V.Nonempty ∧ ∀ (t : Z), t ∈ V → ∀ (K : Type u) [Field K] [IsAlgClosed K] (i : T.residueField t.val ⟶ CommRingCat.of K), ENat.card (ConnectedComponents (pullback f (Spec.map i ≫ T.fromSpecResidueField t.val) : Scheme.{u})) = c",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b8db3f2b",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Clause-by-clause match: finite type = [LocallyOfFiniteType f][QuasiCompact f]; Z closed + IsIrreducible (includes nonempty); V : Set Z with subtype topology, open and nonempty; c : ℕ∞ chosen before t, K, i; count = ENat.card ConnectedComponents of the geometric fibre, same encoding and universe u as the 055F dependency record, and ∀ K is equivalent to the node's count by 055F's K-independence. The node restates 055H via sobriety. The node is unchanged except for lean, and lean.statement is verbatim. Edge cases checked: empty Y/T, a point Z, r sections, connected reducible fibre. The trace-formula 055A theorem counts irreducible components, so it is not a duplicate; no other match in the Lean trees or Mathlib. Docstrings carry the source, blueprint id and 7 steps. Plain imports are the modules of recorded proof dependencies. No defs, the proof is sorry, both report sections are present. Not recompiled: no file changed."
+ }
+}

@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-rational-action-domain-laws",
+ "kind": "statement",
+ "title": "Maximal-domain identities for a rational extension of an action",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All schemes are separated and of finite type over $k$ [def-weil-finite-type-morphism, def-weil-proper-morphism], where separated means that the diagonal is a closed immersion. Integral means reduced and irreducible [def-pc-integral-scheme]; normal means that all local rings are integrally closed domains. Dimensions are topological Krull dimensions [def-kun-topological-krull-dimension]. Let $G$ be a smooth integral $k$-group scheme [def-sc-group-scheme, def-sbc-smooth-morphisms], with identity $e$. Products are scheme fibre products [def-pc-fibre-product]. Let $X$ be integral and let $Y\\subseteq X$ be a dense open subscheme [def-weil-open-immersion] with a regular action $a:G\\times_kY\\to Y$, meaning a morphism satisfying the unit and associativity identities. A rational map means an equivalence class of morphisms on dense open subschemes, taken on its largest open domain of definition. The morphism $a$ followed by $Y\\hookrightarrow X$ determines a unique rational map $\\alpha:G\\times_kX\\dashrightarrow X$. Write $g\\cdot x=\\alpha(g,x)$ whenever defined. For $g,h\\in G(k)$ and $x\\in X(k)$: if $e\\cdot x$ is defined, it equals $x$; if $h\\cdot x$ and $g\\cdot(h\\cdot x)$ are defined, then $(gh)\\cdot x$ is defined and equals $g\\cdot(h\\cdot x)$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.25, p.154, referred rational-action argument; Milne (2013), Definition 4.2 and Lemma 4.3 (graph-closure proof). Local article WANTED; read https://arxiv.org/html/1311.6060v2. No single Stacks tag states the maximal-domain composition assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-integral-scheme",
+  "def-weil-open-immersion",
+  "def-kun-topological-krull-dimension",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=G\\times_kX$ and $T_0=G\\times_kY$. Cover $G$ and $X$ by affine opens. Their coordinate algebras are reduced and finitely generated over the algebraically closed field $k$; [lem-wf-affine-product-reduced] says that each product chart is reduced. Hence $T$ is reduced, since this is checked on an affine open cover. The projection $p:T\\to X$ is open by [lem-sc-scheme-over-field-universally-open]. Every nonempty open $W\\subseteq T$ has nonempty open image $p(W)$, which meets the dense open $Y$. Therefore $W$ meets $p^{-1}(Y)=T_0$. Thus $T_0$ is a dense open of $T$.",
+   "uses": [
+    "lem-wf-affine-product-reduced",
+    "lem-sc-scheme-over-field-universally-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, printed pp.153-154; referenced Milne (2013), Definition 4.2 and Lemma 4.3 (read https://arxiv.org/html/1311.6060v2). Direct local-representative proof written by Q85, replacing the graph argument."
+   }
+  },
+  {
+   "text": "The morphism $G\\times_kY\\xrightarrow{a}Y\\hookrightarrow X$ on the dense open $T_0$ defines a rational map $\\alpha:T\\dashrightarrow X$. By [lem-sfb-rational-map-maximal-representative], it has a unique maximal representative $\\alpha:U\\to X$, since $T$ is reduced by step 1 and $X$ is separated by hypothesis. Its restriction to $T_0$ is exactly the given action followed by the open inclusion, and $T_0\\subseteq U$. A rational map with this restriction is the same equivalence class, so the rational extension is unique.",
+   "uses": [
+    "lem-sfb-rational-map-maximal-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, printed pp.153-154; referenced Milne (2013), Definition 4.2 and Lemma 4.3 (read https://arxiv.org/html/1311.6060v2). Direct local-representative proof written by Q85, replacing the graph argument."
+   }
+  },
+  {
+   "text": "Let $U_e\\subseteq X$ be the inverse image of $U$ under $z\\mapsto(e,z)$. It is open and contains $Y$. The restriction $b:U_e\\to X$, $b(z)=\\alpha(e,z)$, agrees with the identity of $X$ on $Y$, by the unit law for $a$. Thus $b$ and $\\mathrm{id}_X$ represent the same rational map from $X$ to $X$. The source $X$ is reduced because it is integral; the target $X$ is separated. Agreement on intersections in [lem-sfb-rational-map-maximal-representative] gives $b=\\mathrm{id}_X|_{U_e}$. This proves the unit assertion for every $x$ where $e\\cdot x$ is defined.",
+   "uses": [
+    "lem-sfb-rational-map-maximal-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, printed pp.153-154; referenced Milne (2013), Definition 4.2 and Lemma 4.3 (read https://arxiv.org/html/1311.6060v2). Direct local-representative proof written by Q85, replacing the graph argument."
+   }
+  },
+  {
+   "text": "Fix $g,h\\in G(k)$ and $x\\in X(k)$ with $(h,x)\\in U$ and $(g,\\alpha(h,x))\\in U$. Let $U_h\\subseteq X$ be the open inverse image of $U$ under $z\\mapsto(h,z)$, and put $b_h(z)=\\alpha(h,z)$. It contains $Y$, and $b_h|_Y=a(h,-)$. On $G\\times_kU_h$ the formula $L(u,z)=(uh^{-1},b_h(z))$ defines a morphism to $G\\times_kX$, using multiplication by the fixed $k$-point $h^{-1}$. Put $O=L^{-1}(U)$ and $F=\\alpha\\circ L:O\\to X$. These are an open of $T$ and a morphism on it. Since $L(gh,x)=(g,\\alpha(h,x))$, the point $(gh,x)$ belongs to $O$. Moreover $T_0\\subseteq O$: for $z\\in Y$ the point $b_h(z)$ lies in $Y$, where all actions are defined. On $T_0$ the associativity law for the regular action gives $F(u,z)=a(uh^{-1},a(h,z))=a(u,z)$, because $(uh^{-1})h=u$. These are equalities of morphisms, by restricting the given action identity along the fixed point $h$. Thus $O$ is dense by step 1 and $F$ represents $\\alpha$. By [lem-sfb-rational-map-maximal-representative], $O\\subseteq U$ and $\\alpha|_O=F$. Evaluating at $(gh,x)$ gives $(gh)\\cdot x=F(gh,x)=g\\cdot(h\\cdot x)$ and proves its definedness.",
+   "uses": [
+    "lem-sfb-rational-map-maximal-representative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, printed pp.153-154; referenced Milne (2013), Definition 4.2 and Lemma 4.3 (read https://arxiv.org/html/1311.6060v2). Direct local-representative proof written by Q85, replacing the graph argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-affine-product-reduced",
+  "lem-sc-scheme-over-field-universally-open",
+  "lem-sfb-rational-map-maximal-representative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.25, pp.153-154 and its reference to Milne (2013), Lemma 4.3. Q85 direct proof by fixed-h translation of a local representative; article read online, local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A rational map extending an action on a dense invariant open satisfies the unit and composition laws wherever successive actions are defined",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsOpen.dense_of_preimage_smul_invariant\", \"module\": \"Mathlib/Dynamics/Transitive\", \"type\": \"∀ (M : Type u_1) {α : Type u_2} [inst : TopologicalSpace α] [inst_1 : Monoid M] [inst_2 : MulAction M α]\\n  [MulAction.IsTopologicallyTransitive M α] {U : Set α},\\n  IsOpen U → U.Nonempty → (∀ (m : M), (fun x => m • x) ⁻¹' U ⊆ U) → Dense U\", \"doc\": \"Let $ M $ be a monoid acting topologically transitively on a topological space $ \\\\alpha $. If a non-empty open set $ U \\\\subseteq \\\\alpha $ satisfies $ m^{-1}(U) \\\\subseteq U $ for all $ m \\\\in M $, then \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → X.PartialMap Y → X.RationalMap Y\", \"doc\": \"Given a partial map $f$ between schemes $X$ and $Y$, this function constructs the corresponding rational map by taking the equivalence class of $f$ under the relation where two partial maps are identi\"}\n  {\"name\": \"IsOpen.dense_iUnion_preimage_smul\", \"module\": \"Mathlib/Dynamics/Transitive\", \"type\": \"∀ (M : Type u_1) {α : Type u_2} [inst : TopologicalSpace α] [inst_1 : Monoid M] [inst_2 : MulAction M α]\\n  [h : MulAction.IsTopologicallyTransitive M α] {U : Set α}, IsOpen U → U.Nonempty → Dense (⋃ m, (fun x => m • x) ⁻¹' U)\", \"doc\": \"Given a topologically transitive monoid action of $M$ on a topological space $\\\\alpha$, and a non-empty open subset $U \\\\subseteq \\\\alpha$, the union of the preimages of $U$ under the action of all eleme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.restrict_toRationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) (U : X.Opens) (hU : Dense ↑U) (hU' : U ≤ f.domain),\\n  (f.restrict U hU hU').toRationalMap = f.toRationalMap\", \"doc\": \"For schemes $X$ and $Y$, if $f$ is a partial map from $X$ to $Y$ and $U$ is a dense open subset of $X$ contained in the domain of $f$, then the rational map obtained by restricting $f$ to $U$ is equal\"}\n  {\"name\": \"Equidecomp.toPartialEquiv\", \"module\": \"Mathlib/Algebra/Group/Action/Equidecomp\", \"type\": \"{X : Type u_1} → {G : Type u_2} → [inst : SMul G X] → Equidecomp X G → PartialEquiv X X\", \"doc\": \"Given two sets equidecomposable under a group action, this function constructs a partial equivalence between them by mapping the finitely many congruent pieces via the group action.\"}\n  {\"name\": \"MulAction.IwasawaStructure\", \"module\": \"Mathlib/GroupTheory/GroupAction/Iwasawa\", \"type\": \"(M : Type u_1) → [inst : Group M] → (α : Type u_2) → [MulAction M α] → Type (max u_1 u_2)\", \"doc\": \"Given a group $M$ and a type $\\\\alpha$ equipped with a monoid action of $M$, the Iwasawa structure is a type that encodes additional data or properties specific to this group action context.\"}\n  {\"name\": \"SeparationQuotient.instIsPretransitiveSMul\", \"module\": \"Mathlib/Topology/Algebra/SeparationQuotient/Basic\", \"type\": \"∀ {M : Type u_1} {X : Type u_2} [inst : TopologicalSpace X] [inst_1 : SMul M X] [inst_2 : ContinuousConstSMul M X]\\n  [MulAction.IsPretransitive M X], MulAction.IsPretransitive M (SeparationQuotient X)\", \"doc\": \"If a topological space $X$ with a continuous scalar multiplication by a monoid $M$ is pretransitive (i.e., for any $x,y \\\\in X$ there exists $m \\\\in M$ such that $m \\\\cdot x = y$), then its separation qu\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.restrict\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X.PartialMap Y) → (U : X.Opens) → Dense ↑U → U ≤ f.domain → X.PartialMap Y\", \"doc\": \"Given a partial map $f$ from a scheme $X$ to a scheme $Y$, and a dense open subset $U$ of $X$ that is contained in the domain of $f$, this function constructs a new partial map from $X$ to $Y$ by rest\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: PartialMap/RationalMap restrict, domain and compHom define rational maps but do not prove these maximal-domain action identities. The other hits are ordinary actions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rational\", \"action\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: PartialMap/RationalMap restrict, domain and compHom define rational maps but do not prove these maximal-domain action identities. The other hits are ordinary actions."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalAction|rational_action|RationalMap.*action|action.*RationalMap",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: PartialMap/RationalMap restrict, domain and compHom define rational maps but do not prove these maximal-domain action identities. The other hits are ordinary actions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Domain of definition composition laws for a rational action of an algebraic group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MulActionHom.comp\", \"module\": \"Mathlib.GroupTheory.GroupAction.Hom\", \"type\": \"X →ₑ[χ] Z\", \"doc\": \"Given group homomorphisms $\\\\varphi: M \\\\to N$ and $\\\\psi: N \\\\to P$, and a compatible composition $\\\\chi = \\\\psi \\\\circ \\\\varphi$, for any $M$-action homomorphism $f: X \\\\to Y$ (with respect to $\\\\varphi$) and\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.compHom\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X ⤏ Y) (g : Y ⟶ Z) : X ⤏ Z\", \"doc\": \"Given a rational map $ f $ from a scheme $ X $ to a scheme $ Y $ and a morphism $ g $ from $ Y $ to $ Z $, this function constructs their composition as a rational map from $ X $ to $ Z $. The composi\"}\n  {\"name\": \"VAdd.comp\", \"module\": \"Mathlib.Algebra.Group.Action.Defs\", \"type\": \"{M : Type u_1} → {N : Type u_2} → (α : Type u_5) → [VAdd M α] → (N → M) → VAdd N α\", \"doc\": \"Given an additive action of $ M $ on $ \\\\alpha $ and a function $ f : N \\\\to M $, this constructs an additive action of $ N $ on $ \\\\alpha $ by defining $ n \\\\bullet a = f(n) \\\\bullet a $ for all $ n : N $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.compHom_domain\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) (g : Y ⟶ Z), (f.compHom g).domain = f.domain\", \"doc\": \"For schemes $X$, $Y$, and $Z$, given a partial map $f : X ⇀ Y$ and a morphism $g : Y \\\\to Z$, the domain of the composition $f \\\\circ g$ (as a partial map from $X$ to $Z$) is equal to the domain of $f$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X ⤏ Y) : X.Opens\", \"doc\": \"For a rational map $f$ between schemes $X$ and $Y$, this function returns the supremum (union) of all open subsets of $X$ where partial maps equivalent to $f$ are defined. This constructs the maximal \"}\n  {\"name\": \"term_ᵈᵐᵃ\", \"module\": \"Mathlib.GroupTheory.GroupAction.DomAct.Basic\", \"type\": \": Lean.TrailingParserDescr✝\", \"doc\": \"Defines the notation for a group action, typically written as $G \\\\curvearrowright X$, where $G$ is a group acting on a set $X$.\"}\n  {\"name\": \"Equidecomp.IsDecompOn.comp\", \"module\": \"Mathlib.Algebra.Group.Action.Equidecomp\", \"type\": \"{g f : X → X} {B A : Set X} {T S : Finset G} (hg : IsDecompOn g B T) (hf : IsDecompOn f A S) (h : MapsTo f A B) :\\n  IsDecompOn (g ∘ f) A (T * S)\", \"doc\": \"If $ f: A \\\\to B $ is decomposable via finite set $ S \\\\subset G $, $ g: B \\\\to X $ is decomposable via finite set $ T \\\\subset G $, and $ f $ maps $ A $ into $ B $, then the composition $ g \\\\circ f: A \\\\t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{f : X ⤏ Y} {x} : x ∈ f.domain ↔ ∃ g : X.PartialMap Y, x ∈ g.domain ∧ g.toRationalMap = f\", \"doc\": \"For a rational map $ f $ between schemes $ X $ and $ Y $, an element $ x $ belongs to the domain of $ f $ if and only if there exists a partial map $ g $ from $ X $ to $ Y $ such that $ x $ lies in th\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: PartialMap/RationalMap restrict, domain and compHom define rational maps but do not prove these maximal-domain action identities. The other hits are ordinary actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graph closure proves associativity and identity for birational group actions on varieties",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.VariableChange.instGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"{R : Type u} → [inst : CommRing R] → Group (WeierstrassCurve.VariableChange R)\", \"doc\": \"For any commutative ring $ R $, the set of variable changes for a Weierstrass curve over $ R $ is equipped with a canonical group structure. The group operation combines variable changes via multiplic\"}\n  {\"name\": \"OnePoint.instGLAction\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"{K : Type u_1} → [inst : Field K] → [DecidableEq K] → MulAction (GL (Fin 2) K) (OnePoint K)\", \"doc\": \"The general linear group $ \\\\mathrm{GL}(2, K) $ acts on the one-point compactification $ \\\\text{OnePoint}\\\\, K $ of a field $ K $, induced by its natural action on the projective line over $ K $. This ac\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {F : CategoryTheory.Functor C FintypeCat}\\n  {inst_1 : CategoryTheory.GaloisCategory C} {G : Type u_1} {inst_2 : Group G}\\n  {inst_3 : (X : C) → MulAction G (F.obj X).carrier} {inst_4 : TopologicalSpace G} {inst_5 : IsTopologicalGroup G}\\n  {i\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, and a compact topological group $G$ acting continuously on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, if $G$ is the fun\"}\n  {\"name\": \"CategoryTheory.FintypeCat.Action.pretransitive_of_isConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"∀ (G : Type u) [inst : Group G] (X : Action FintypeCat G) [CategoryTheory.PreGaloisCategory.IsConnected X],\\n  MulAction.IsPretransitive G X.V.carrier\", \"doc\": \"For a group action on the category of finite types, if the underlying object is connected, then the action is pretransitive. That is, for any two elements $x, y$ in the underlying finite type $X.V$, t\"}\n  {\"name\": \"Projectivization.instMulAction\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"{G : Type u_1} →\\n  {K : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : AddCommGroup V] →\\n        [inst_1 : DivisionRing K] →\\n          [inst_2 : Module K V] →\\n            [inst_3 : Group G] →\\n              [inst_4 : DistribMulAction G V] → [SMulCommClass G K V] → MulAction G (Projectivization K V)\", \"doc\": \"For a group $G$ acting distributively on a module $V$ over a division ring $K$ (with commuting scalar multiplications between $G$ and $K$), this constructs a group action of $G$ on the projectivizatio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.compHom\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} → X.RationalMap Y → (Y ⟶ Z) → X.RationalMap Z\", \"doc\": \"Given a rational map $ f $ from a scheme $ X $ to a scheme $ Y $ and a morphism $ g $ from $ Y $ to $ Z $, this function constructs their composition as a rational map from $ X $ to $ Z $. The composi\"}\n  {\"name\": \"MulAction.Regular.isPretransitive\", \"module\": \"Mathlib/Algebra/Group/Action/Pretransitive\", \"type\": \"∀ {G : Type u_2} [inst : Group G], MulAction.IsPretransitive G G\", \"doc\": \"The regular action of a group $G$ on itself by left multiplication is pretransitive. This means that for any two elements $x, y \\\\in G$, there exists an element $g \\\\in G$ such that $g \\\\cdot x = y$.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: PartialMap/RationalMap restrict, domain and compHom define rational maps but do not prove these maximal-domain action identities. The other hits are ordinary actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maximal domain of a rational map extending an algebraic group action satisfies associativity whenever successive actions are defined",
+   "results": "{\"t\": \"2026-10-24T09:58:38Z\", \"tool\": \"leanfinder\", \"query\": \"Maximal domain of a rational map extending an algebraic group action satisfies associativity whenever successive actions are defined\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.compHom\", \"AlgebraicGeometry.Scheme.RationalMap.compHom_toRationalMap\", \"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\", \"AlgebraicGeometry.Scheme.PartialMap.compHom\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.le_domain_toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.compHom_domain\", \"AlgebraicGeometry.Scheme.instIsOverToRationalMapOfIsOver\"], \"digest\": \"23d26b2f55848311\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are rational-map constructions or ordinary everywhere-defined actions; none states maximal-domain associativity for a rational extension of an action. The separately created maximal-representative lemma is a Mathlib leaf, not the action law."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.RationalMap, AlgebraicGeometry.Smooth",
+   "results": "{\"t\": \"2026-10-24T09:59:03Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.RationalMap, AlgebraicGeometry.Smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are rational-map constructions or ordinary everywhere-defined actions; none states maximal-domain associativity for a rational extension of an action. The separately created maximal-representative lemma is a Mathlib leaf, not the action law."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalAction|rational_action|RationalMap.*action|action.*RationalMap",
+   "results": "{\"t\": \"2026-10-24T09:59:03Z\", \"tool\": \"grep\", \"query\": \"rationalAction|rational_action|RationalMap.*action|action.*RationalMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are rational-map constructions or ordinary everywhere-defined actions; none states maximal-domain associativity for a rational extension of an action. The separately created maximal-representative lemma is a Mathlib leaf, not the action law."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational algebraic group action identity associativity maximal domain",
+   "results": "{\"t\": \"2026-10-24T09:59:29Z\", \"tool\": \"leansearch\", \"query\": \"Rational algebraic group action identity associativity maximal domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instMulActionRayVector\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"RatFunc.instAddCommGroup\", \"MulSemiringAction.toAlgAut\", \"RelIso.applyMulAction\", \"AlgEquiv.apply_faithfulSMul\", \"MulSemiringAction.toAlgEquiv_apply\", \"MulSemiringAction.toAlgAut.congr_simp\"], \"digest\": \"1a16580a43ceb8d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are rational-map constructions or ordinary everywhere-defined actions; none states maximal-domain associativity for a rational extension of an action. The separately created maximal-representative lemma is a Mathlib leaf, not the action law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extending composition of birational maps on a dense invariant open by translating the group variable",
+   "results": "{\"t\": \"2026-10-24T10:01:05Z\", \"tool\": \"leanfinder\", \"query\": \"Extending composition of birational maps on a dense invariant open by translating the group variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.compHom\", \"AlgebraicGeometry.Scheme.PartialMap.compHom\", \"AlgebraicGeometry.Scheme.RationalMap.compHom_toRationalMap\", \"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\", \"AlgebraicGeometry.Scheme.PartialMap.restrict_restrict_hom\", \"AlgebraicGeometry.Scheme.PartialMap.restrict_equiv\", \"AlgebraicGeometry.Scheme.PartialMap.compHom_hom\", \"AlgebraicGeometry.Scheme.PartialMap.restrict_hom\"], \"digest\": \"02405f2c8372c3a9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are rational-map constructions or ordinary everywhere-defined actions; none states maximal-domain associativity for a rational extension of an action. The separately created maximal-representative lemma is a Mathlib leaf, not the action law."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-boundary-positive-stabilizer",
+  "date": "2026-10-24",
+  "group": "Q126"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proposition 8.25, p.154, referred rational-action argument; Milne (2013), Definition 4.2 and Lemma 4.3 (graph-closure proof). Local article WANTED; read https://arxiv.org/html/1311.6060v2. No single Stacks tag states the maximal-domain composition assertion.",
+   "via": [
+    "lem-sfb-rational-boundary-positive-stabilizer",
+    "lem-sfb-rosenlicht-nonproper-affine-subgroup",
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rational-action-domain-laws",
+  "worker": "stage1",
+  "summary": "Q85 checked Milne 2013 Definition 4.2 and Lemma 4.3 and the iAG2017 reference. Proved the stronger domain-inclusion assertion by an explicit fixed-h translated representative, using one new generic Mathlib leaf for maximal representatives and existing reduced-product and open-projection nodes. No mathematical hypothesis or conclusion changed; doubled TeX escapes normalized. No project Lean declaration states this item.",
+  "blueprint": "The inherited nearest blueprint ancestor is null (tools/blueprint_refs.py ancestor confirms it). This auxiliary node supports the rational-action argument of lem-sfb-rational-boundary-positive-stabilizer, specifically the use of inverse successive actions to define e at a boundary point; it stays in the inherited sk-thm-sf-ctf-stability route. Whole-blueprint searches for rational action, rational map, maximal domain, domain of definition and 0A1Y found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-affine-product-reduced",
+    "why": "Generic reducedness of affine product charts over an algebraically closed field; no statement in this unit supplies the product-chart fact."
+   },
+   {
+    "node": "lem-sc-scheme-over-field-universally-open",
+    "why": "Generic openness of a scheme product projection, used only to show G times Y dense; no action or unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-affine-product-reduced",
+  "lem-sc-scheme-over-field-universally-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-aab3f1bc0",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-aab3f1bc0 (reviewer sub-agent of L); spot-checked: I read the item, its four steps and the one new node in full. The item statement is mathematically unchanged from Milne 2013 Def 4.2/Lemma 4.3 (iAG2017 Prop 8.25); only TeX escapes were normalized. The parent lem-sfb-rational-boundary-positive-stabilizer uses exactly the definedness and unit clauses the item states. Step 1: lem-wf-affine-product-reduced (reduced fg algebras over algebraically closed k) gives T=G×X reduced; Stacks 0383 open projection gives G×Y dense; both correct. Step 2: the leaf applies because T is reduced and X is separated over k, hence absolutely separated (one elementary line); T_0 ⊆ U. Step 3: U_e is the preimage of U under z↦(e,z), open and dense because it contains Y; b and id agree on Y, so they are equal on U_e by the leaf. Step 4: L(u,z)=(uh^{-1},α(h,z)), O=L^{-1}(U) ⊇ G×Y, F=α∘L equals a on G×Y as morphisms by associativity; (gh,x)∈O follows from the hypotheses; the leaf gives O⊆U and α|_O=F. This is correct, and marking the step elementary is acceptable. New node lem-sfb-rational-map-maximal-representative matches Stacks 0A1Y (morphisms.tex l.12820). Its Mathlib match was checked in the pinned RationalMap.lean: domain l.570, le_domain_toRationalMap l.573, toPartialMap l.602 with IsReduced and IsSeparated, restrict l.620, toRationalMap_toPartialMap l.633, equiv_iff_of_isSeparated_of_le l.327. It is a valid leaf and its statement is self-contained. I tested it on an empty source, on reducible reduced sources, and on non-reduced sources, which are excluded by hypothesis. An rg -L search for 0A1Y, toPartialMap, rational map and domain of definition found no duplicate; the nearest nodes are the abelian-target extension, relative smooth flat regularity and group divisorial indeterminacy. The new node is not a clause of the item. I accept both tool_uses (affine product reduced; open projection, a Mathlib leaf). No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalActionDomainLaws",
+  "declaration": "AlgebraicGeometry.existsUnique_rational_action_domain_laws",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalActionDomainLaws.lean",
+  "statement": "theorem existsUnique_rational_action_domain_laws (k : Type u) [Field k] [IsAlgClosed k] (G X Y : Over (Spec (.of k))) [GrpObj G] [ModObj G Y] [IsIntegral G.left] [Smooth G.hom] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [IsIntegral X.left] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (j : Y ⟶ X) [IsOpenImmersion j.left] (hj : Dense (Set.range j.left)) : ∃! α : Scheme.RationalMap (G ⊗ X).left X.left, ∃ p : Scheme.PartialMap (G ⊗ X).left X.left, p.toRationalMap = α ∧ p.domain = α.domain ∧ (∃ i : (G ⊗ Y).left ⟶ p.domain.toScheme, i ≫ p.domain.ι = (G ◁ j).left ∧ i ≫ p.hom = (ModObj.smul (M := G) (X := Y) ≫ j).left) ∧ (∀ (x : 𝟙_ (Over (Spec (.of k))) ⟶ X) (t : Spec (.of k) ⟶ p.domain.toScheme), t ≫ p.domain.ι = (lift (1 : 𝟙_ (Over (Spec (.of k))) ⟶ G) x).left → t ≫ p.hom = x.left) ∧ (∀ (g h : 𝟙_ (Over (Spec (.of k))) ⟶ G) (x y z : 𝟙_ (Over (Spec (.of k))) ⟶ X) (t v : Spec (.of k) ⟶ p.domain.toScheme), t ≫ p.domain.ι = (lift h x).left → t ≫ p.hom = y.left → v ≫ p.domain.ι = (lift g y).left → v ≫ p.hom = z.left → ∃ w : Spec (.of k) ⟶ p.domain.toScheme, w ≫ p.domain.ι = (lift (g * h) x).left ∧ w ≫ p.hom = z.left)",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8aeea6673",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Fresh delivery (only the lean record is added versus live). Every node clause matches the Lean: alg. closed k; G, X, Y separated + LocallyOfFiniteType + QuasiCompact; GrpObj G with IsIntegral and Smooth; IsIntegral X; j an open immersion with dense range; ModObj G Y for the regular action; ∃! RationalMap with a representative p whose domain = α.domain and which restricts to smul≫j on G⊗Y (unique since G×Y is dense); conditional unit clause; composition clause with a definedness witness w for lift (g*h) x (g*h = lift g h ≫ μ matches mul_smul). Taking y, z as k-points loses nothing since p.hom is over k. No stronger hypotheses; one universe u. Stmt_deps match; ModObj uncited but the node defines the action inline (note only). lean.statement verbatim; source and blueprint docstrings and proof steps present; sorry only; no name collision in side-live. Not recompiled (no change). Advisory: the 'Second reading by Q92' was done by the delivering worker."
+ }
+}

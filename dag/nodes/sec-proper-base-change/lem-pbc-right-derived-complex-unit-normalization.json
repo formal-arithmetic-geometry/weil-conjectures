@@ -1,0 +1,102 @@
+{
+ "id": "lem-pbc-right-derived-complex-unit-normalization",
+ "kind": "statement",
+ "title": "Identity homotopy factor does not change the complex right-derived unit",
+ "statement": "Let $C,D$ be abelian categories equipped with derived categories, assume $C$ has K-injective resolutions, and let $F:C\\to D$ be additive [def-sfb-right-derived-functor]. Write $q_C$ for the quotient to the homotopy category, $Q_C$ for localization from complexes, $Q_C^h$ for localization from the homotopy category, and $\\alpha_C:q_CQ_C^h\\cong Q_C$ for the canonical comparison. Let $\\beta:q_CF^h\\cong F^\\bullet q_D$ be the canonical factor comparison. For every complex $K$, the morphism $\\alpha_D^{-1}(F^\\bullet K);Q_D^h(\\beta_K^{-1});u_F(q_CK);RF(\\alpha_C(K))$ equals the canonical complex unit $u_F^Q(K):Q_D(F^\\bullet K)\\to RF(Q_CK)$.",
+ "stmt_deps": [
+  "def-sfb-right-derived-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "definition-derived-functor, lines 5277-5295; canonical quotient-comparison specialization of the right-derived unit, as implemented by rightDerivedFunctorUnitQ."
+ },
+ "proof": [
+  {
+   "text": "The inverse component of mapHomotopyCategoryFactors is identity by its quotient-lift construction. Its image under Qh is identity by functoriality. Deleting the identity factor leaves exactly the definition of rightDerivedFunctorUnitQ. This argument is made for abstract abelian categories and therefore need not unfold any sheaf-specific limit or colimit choices.",
+   "uses": [
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-right-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Elementary identity-factor calculation for the universal derived unit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical comparison from a complex to the right derived functor is unchanged by inserting the identity homotopy quotient factor",
+   "results": "8 hits: quotientCompQhIso and exact-functor localization comparisons, but no normalization of the source library rightDerivedFunctorUnitQ.",
+   "date": "2026-10-27",
+   "verdict": "Reuse canonical constructions; prove the identity-factor equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerivedFunctorUnitQ",
+   "results": "Unknown identifier: this unit is in the adopted source library rather than Mathlib.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib declaration matches."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Ff]actors|[Ff]actors.*rightDerived",
+   "results": "One bounded classical-derived-functor calculation in Mathlib.CategoryTheory.Abelian.RightDerived, line 196. The unbounded source unit is defined in RightDerivedFunctor.ShortExactPullback.",
+   "date": "2026-10-27",
+   "verdict": "Direct generic identity-factor proof is shorter."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedTowerDirectImage",
+  "date": "2026-10-27",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-direct-image-limits",
+   "place": "Normalize the explicit complex units before comparing scalar reduction and tensor projection.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RightDerivedComplexUnitNormalization",
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedComplexUnitNormalization.lean",
+  "declaration": "CategoryTheory.Functor.rightDerivedComplexUnitNormalization",
+  "statement": "theorem rightDerivedComplexUnitNormalization\n    {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]\n    [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions C]\n    (F : C ⥤ D) [F.Additive] (K : CochainComplex C ℤ) :\n    (DerivedCategory.quotientCompQhIso D).inv.app _ ≫\n        DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).inv.app K) ≫\n        F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient C (.up ℤ)).obj K) ≫\n        F.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso C).hom.app K) =\n      F.rightDerivedFunctorUnitQ K",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T222649-L-679938",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T222649-L-679938",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

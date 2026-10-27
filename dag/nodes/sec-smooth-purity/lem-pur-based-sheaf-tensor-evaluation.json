@@ -1,0 +1,370 @@
+{
+ "id": "lem-pur-based-sheaf-tensor-evaluation",
+ "kind": "statement",
+ "title": "Finite-basis tensor evaluation, exactness detection and the termwise complex comparison",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe, with terminal object $1$, and let $\\varphi:R\\to S$ be a morphism of sheaves of commutative rings. Use module sheaves [def-weil-sheaf-of-modules-category] and restriction $\\operatorname{Res}_\\varphi$ [def-pc-sheaf-restrict-scalars]. Suppose $d\\geq0$ is finite and $b_i\\in S(1)$ give an isomorphism $R^{\\oplus d}\\to\\operatorname{Res}_\\varphi S$, $(r_i)\\mapsto\\sum_i\\varphi(r_i)b_i$. Denote its inverse coordinates by $q_i:S\\to R$, and write $b_i|_U$ for restriction to any site object $U$.\n\nFor every $R$-module sheaf $F$, put $T(F)=F\\otimes_R S$, with the sheafified tensor of [def-pur-sheaf-tensor-product]. The presheaf $U\\mapsto F(U)\\otimes_{R(U)}S(U)$ is already a sheaf. There are natural inverse $R$-module sheaf isomorphisms\n$$\\Phi_F:\\operatorname{Res}_\\varphi T(F)\\xrightarrow{\\sim}F^{\\oplus d},\\qquad\\Phi_F([f\\otimes a])=(q_i(a)f)_i,\\qquad\\Phi_F^{-1}((f_i)_i)=\\sum_i[f_i\\otimes b_i|_U],$$\nwhere brackets denote the sheafification unit. For every $U$ the canonical map\n$$\\theta_{F,U}:F(U)\\otimes_{R(U)}S(U)\\xrightarrow{\\sim}T(F)(U),\\qquad f\\otimes a\\longmapsto[f\\otimes a]$$\nis an $S(U)$-linear isomorphism. It is the identity between the two coordinate copies of $F(U)^d$, and its inverse sends $x$ to $\\sum_i(\\Phi_{F,U}(x))_i\\otimes b_i|_U$. The comparison is natural in $F$, commutes with restriction in $U$, and is independent of the basis: it is uniquely determined by its displayed pure-tensor formula.\n\nRestriction of scalars along any $\\varphi$ preserves kernels and cokernels and preserves and reflects exactness. Under the finite-basis hypothesis above, $T$ is additive and exact. For any homomorphism of ordinary commutative rings $A\\to B$ with a finite $A$-basis of $B$, ordinary scalar extension $N\\mapsto N\\otimes_A B$ is also additive and exact. Here exactness means preservation of finite limits and finite colimits, and a composable pair is exact precisely when its image equals the following kernel.\n\nFor every possibly unbounded cochain complex $K$ of $R$-module sheaves [def-pc-cochain-complex-modules], the maps $\\theta_{K^j,U}$ give a natural isomorphism of cochain complexes $K(U)\\otimes_{R(U)}S(U)\\cong (K\\otimes_R S)(U)$, with termwise tensor differential. Its inverse has the preceding coordinate formula in every degree.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product; Tag 03DA, lemma-abelian; agent finite-basis consequence with explicit section formulas, extracted from old steps 4-8 of lem-weil-point-finite-free-sections-tensor"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the given basis isomorphism using Mathlib evaluationPreservesFiniteLimits and PreservesProduct.iso. ModuleCat.piIsoPi identifies its finite product with coordinate functions, including the empty family. The inverse coordinates are linear and commute with restrictions because they are components of e.inv followed by the coordinate projections. These are constructions in [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA and 03DB, lemma-abelian and lemma-limits-colimits; finite-product coordinate calculation"
+   }
+  },
+  {
+   "text": "Write $P_F(U)=F(U)\\otimes_{R(U)}S(U)$, with $S(U)$ acting on the second factor, as in [def-pur-sheaf-tensor-product]. The map $(f,a)\\mapsto(q_{i,U}(a)f)_i$ is additive in each argument and balanced, since $q_i(\\varphi(r)a)f=q_i(a)(rf)$. The tensor universal property [def-weil-pbc-module-tensor-product] therefore defines an $R(U)$-linear map $\\beta_U:P_F(U)\\to F(U)^d$. Define $\\gamma_U((f_i))=\\sum_i f_i\\otimes b_i|_U$. On a tuple, $(\\beta_U\\gamma_U(f_i))_j=\\sum_i q_j(b_i)f_i=f_j$. On a pure tensor, $\\gamma_U\\beta_U(f\\otimes a)=\\sum_i q_i(a)f\\otimes b_i=f\\otimes\\sum_i\\varphi(q_i(a))b_i=f\\otimes a$. Pure tensors generate, so these are inverse maps on all elements.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product, universal property and generation; applied to the presheaf tensor of Tag 03EK"
+   }
+  },
+  {
+   "text": "For $V\\to U$, the two restrictions of $\\beta_U(f\\otimes a)$ both give $(q_{i,V}(a|_V)(f|_V))_i$; restriction of $\\gamma_U((f_i))$ gives $\\sum_i(f_i|_V)\\otimes b_i|_V$. Thus $\\beta$ and $\\gamma$ are inverse maps of $R$-module presheaves. A matching family for $P_F$ is carried by $\\beta$ to $d$ matching families for $F$; glue each coordinate in $F$ and apply $\\gamma$. Uniqueness holds coordinatewise. Hence $P_F$ is already a sheaf, including for empty covering sieves, and its existing semilinear $S$-action makes it an $S$-module sheaf [def-weil-sheaf-of-modules-category]. In Lean, prove finite-product section extensionality directly by evaluating product coordinates, and use the defining pure-tensor equation of changeOfRingsMap for restriction compatibility. These local helpers work with the independent site universes and require no small-site scalar-extension theorem.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; coordinatewise verification of the sheaf condition"
+   }
+  },
+  {
+   "text": "Let $\\eta:P_F\\to T(F)$ be the module-sheafification unit of [def-pur-sheaf-tensor-product]. Apply [lem-pc-sites-module-sheafification-interface] with the ring presheaf already equal to the ring sheaf $S$, using $S\\to S$ as its sheafification. Since $P_F$ is a sheaf, the identity of $P_F$ factors uniquely as $\\epsilon\\eta$ for an $S$-linear sheaf morphism $\\epsilon:T(F)\\to P_F$. Then $\\epsilon\\eta=1$, and $\\eta\\epsilon=1$ by uniqueness after precomposition with $\\eta$. Consequently $\\Phi_F=\\beta\\epsilon$ and $\\Phi_F^{-1}=\\eta\\gamma$ are inverse $R$-module sheaf morphisms, with precisely the two displayed formulas on $[f\\otimes a]$ and on $(f_i)$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules (factorization and uniqueness); Tag 03EK, section-tensor-product"
+   }
+  },
+  {
+   "text": "The component $\\eta_U$ is exactly $\\theta_{F,U}$ and is $S(U)$-linear, with inverse $x\\mapsto\\sum_i(\\Phi_{F,U}(x))_i\\otimes b_i|_U$. Moreover $\\Phi_{F,U}\\theta_{F,U}=\\beta_U$, so in the two coordinate copies of $F(U)^d$ this map is the identity. For a module sheaf map $h:F\\to G$, both composites in its naturality square send $f\\otimes a$ to $[h_U(f)\\otimes a]$; tensor generation gives equality. For restriction along $V\\to U$, both composites send $f\\otimes a$ to $[(f|_V)\\otimes(a|_V)]$. The defining map $\\eta_U$ has no basis in its pure-tensor formula, and two linear maps with that formula agree by [def-weil-pbc-module-tensor-product]. This proves the asserted naturality, restriction compatibility and basis independence.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, sheafification-unit comparison; uniqueness from algebra Tag 00CX"
+   }
+  },
+  {
+   "text": "For arbitrary phi, the additive restriction functor of [def-pc-sheaf-restrict-scalars] followed by toSheaf R is definitionally toSheaf S. The forgetful functors of [def-weil-sheaf-of-modules-category] preserve finite limits by Mathlib and finite colimits by the proved instance SheafOfModules.preservesFiniteColimits_toSheaf in WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification. They reflect isomorphisms, hence reflect finite (co)limits. The composite preservation/reflection criterion therefore proves finite exactness of restriction directly.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian, kernels and cokernels correspond to abelian-sheaf constructions"
+   }
+  },
+  {
+   "text": "An equality imageSubobject f = kernelSubobject g implies f ≫ g = 0: factor f through its image and use Subobject.ofLE for the equality to factor through the kernel. Apply this also to the restricted pair and use faithfulness to reflect the zero composite. Form the corresponding ShortComplex. Mathlib ShortComplex.exact_iff_image_eq_kernel, exactness preservation by an additive finite-exact functor, and reflects_exact_of_faithful give the required equivalence without any a priori complex hypothesis.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian; homology Tag 010N, lemma-exact-functor, kernel/cokernel criterion"
+   }
+  },
+  {
+   "text": "In the abelian category [def-sp-abelian], identify the finite power with Functor.const (Discrete (Fin d)) followed by lim. Both factors preserve limits. Finite biproducts identify lim with colim by HasBiproductsOfShape.colimIsoLim; Functor.const and colim preserve finite colimits. Transport preservation across these natural isomorphisms. This also covers d = 0.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor, kernel/cokernel criterion; finite coordinate factorization in an abelian category"
+   }
+  },
+  {
+   "text": "The ordinary extension/restriction adjunction makes scalar extension additive, so sectionwise tensor is additive. Module sheafification is additive because it preserves binary products. Thus the explicitly constructed composite E is additive. The already-sheaf result makes the module sheafification unit an isomorphism, and its inverse composed with tensor coordinates gives the natural isomorphism E ⋙ Res_phi ≅ finitePower. Step 8 and transport along this isomorphism show finite exactness of E ⋙ Res_phi. Step 6 and reflection of isomorphisms by restriction show restriction reflects finite (co)limits. The composite preservation/reflection criterion proves finite exactness of E.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-pc-sites-module-sheafification-interface",
+    "def-pc-sheaf-restrict-scalars",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; agent finite-basis consequence using homology Tag 010N"
+   }
+  },
+  {
+   "text": "For ordinary commutative rings A → B, the specified finite basis gives a free A-module structure on B, hence flatness. Mathlib ModuleCat.preservesFiniteLimits_extendScalars_of_flat gives finite-limit preservation. The extension/restriction adjunction gives finite-colimit preservation and additivity. This proves the same ordinary-module conclusion directly, without constructing the one-object site.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, specialized to the one-object identity site"
+   }
+  },
+  {
+   "text": "Let $K$ be any cochain complex as in [def-pc-cochain-complex-modules]. Additivity of $T$ makes its termwise differentials square to zero. In degree $j$, use $\\theta_{K^j,U}$. For $f\\in K^j(U)$ and $a\\in S(U)$, both sides of the differential-compatibility equation are $[d^j_U(f)\\otimes a]$:\n$$\\theta_{K^{j+1},U}(d^j_U\\otimes1)=(T(d^j))_U\\theta_{K^j,U}.$$\nTensor generation [def-weil-pbc-module-tensor-product] extends this equality to every element. The inverse degreewise maps are those of Step 5, and the same equation after composing with inverses makes them a chain map. Naturality in a chain map follows degreewise from Step 5; restriction compatibility holds likewise. All formulas involve one degree at a time, so no boundedness, infinite sum or totalization is used.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-weil-pbc-module-tensor-product",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010V, section-complexes, definition of morphisms of cochain complexes; sites-modules Tag 03EK"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-tensor-product",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sites-module-sheafification-interface",
+  "def-pc-sheaf-restrict-scalars",
+  "def-sp-abelian",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03CY, 03DA and 03DB, algebra Tag 00CX, and homology Tags 010N and 010V. Explicit coordinate argument; ordinary exactness uses Mathlib flat scalar extension, finite powers use the finite-biproduct colim/lim isomorphism, and restriction uses the proved forgetful instances and ShortComplex exactness API. Coordinate extensionality and the tensor restriction formula are proved locally, so the previous small-site helper import is unnecessary. H7: the same proved argument works for arbitrary site universes under explicit sheafification hypotheses; private product-section and tensor-map helpers are proved locally at those universes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*[Ee]valuation|[Ee]valuation.*tensor|sections.*[Tt]ensor|[Tt]ensor.*sections",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define free sheaves, evaluation, presheaf tensors, restriction, or sheafification; none states this normalized evaluation isomorphism and exact change-of-rings result for arbitrary ring sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(Exact|exact|preserves)|extendScalars.*(Exact|exact|preserves)|PreservesFiniteLimits",
+   "results": "OK 5 hit(s): Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define free sheaves, evaluation, presheaf tensors, restriction, or sheafification; none states this normalized evaluation isomorphism and exact change-of-rings result for arbitrary ring sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, TensorProduct",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define free sheaves, evaluation, presheaf tensors, restriction, or sheafification; none states this normalized evaluation isomorphism and exact change-of-rings result for arbitrary ring sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of sheafified tensor with a globally free finite rank sheaf is the tensor of evaluated modules",
+   "results": "OK 8 hit(s): SheafOfModules.ιFree, SheafOfModules.free, PresheafOfModules.sheafify, smoothSheaf.evalAt, PresheafOfModules.Sheafify.map_smul_eq, PresheafOfModules.sheafifyMap, SheafOfModules.evaluation, SheafOfModules.freeHomEquiv_comp_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define free sheaves, evaluation, presheaf tensors, restriction, or sheafification; none states this normalized evaluation isomorphism and exact change-of-rings result for arbitrary ring sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "OK 4 hit(s): SheafOfModules.restrictScalars, SheafOfModules.instAdditiveRestrictScalars, SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define free sheaves, evaluation, presheaf tensors, restriction, or sheafification; none states this normalized evaluation isomorphism and exact change-of-rings result for arbitrary ring sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite free sheaf of algebras gives exact extension of scalars and restriction of scalars detects exact sequences",
+   "results": "OK 8 hit(s): PresheafOfModules.restrictScalarsObj, SheafOfModules.restrictScalars, SheafOfModules.ιFree, SheafOfModules.free, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, PresheafOfModules.restrictScalars, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define free sheaves, evaluation, presheaf tensors, restriction, or sheafification; none states this normalized evaluation isomorphism and exact change-of-rings result for arbitrary ring sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite free sheaf of algebras with a global basis, evaluation on any site object commutes with sheafified tensor product naturally, with the pure tensor formula",
+   "results": "OK 8 hit(s): SheafOfModules.mapFree, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.freeHomEquiv, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.map_ιFree_mapFree_hom_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define free sheaves, evaluation, presheaf tensors, restriction, or sheafification; none states this normalized evaluation isomorphism and exact change-of-rings result for arbitrary ring sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for sheaves of modules reflects exactness and extension by a finite free ring sheaf is an exact additive functor",
+   "results": "OK 8 hit(s): LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, Condensed.instAB4StarCondensedMod, instAbelianCondensedMod, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf, ModuleCat.localizedModule_functor_map_exact, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define free sheaves, evaluation, presheaf tensors, restriction, or sheafification; none states this normalized evaluation isomorphism and exact change-of-rings result for arbitrary ring sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]ensor|[Ee]xtendScalars|[Rr]estrictScalars",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define free sheaves, evaluation, presheaf tensors, restriction, or sheafification; none states this normalized evaluation isomorphism and exact change-of-rings result for arbitrary ring sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]ensor|[Ee]xtendScalars|[Rr]estrictScalars",
+   "results": "OK 5 hit(s): 16, 36, 39, 41, 43",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define free sheaves, evaluation, presheaf tensors, restriction, or sheafification; none states this normalized evaluation isomorphism and exact change-of-rings result for arbitrary ring sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring sheaves of modules with a finite direct sum of the unit is exact, and forgetting the larger ring action preserves and reflects kernels cokernels and exact sequences",
+   "results": "OK 8 hit(s): LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition, Condensed.instAB4CondensedMod",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define free sheaves, evaluation, presheaf tensors, restriction, or sheafification; none states this normalized evaluation isomorphism and exact change-of-rings result for arbitrary ring sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map F(U) tensor over R(U) S(U) to the sections at U of the sheaf tensor F tensor_R S is an isomorphism when S is globally finite free over R",
+   "results": "OK 8 hit(s): LightCondensed.instMonoidalLightCondSetLightCondModFree, PresheafOfModules.Monoidal.tensorObj, SheafOfModules.mapFree, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.ιFree_mapFree_inv, PresheafOfModules.Monoidal.tensorObj_obj, CategoryTheory.Sheaf.tensorProd_isSheaf, Module.mem_freeLocus_iff_tensor",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define free sheaves, evaluation, presheaf tensors, restriction, or sheafification; none states this normalized evaluation isomorphism and exact change-of-rings result for arbitrary ring sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Ee]valuation|[Ee]valuation.*tensor|restrictScalars|PreservesFinite",
+   "results": "OK 15 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; source reads: Sheaf/Free.lean:61,179-199, Presheaf/Monoidal.lean:45-80, Sheaf/ChangeOfRings.lean:36-43; grep subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: free-sheaf maps, presheaf tensors, evaluation and additive scalar restriction only; no declaration supplies every clause of the finite-basis section comparison and exactness statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of tensor product of sheaves with a finite free sheaf of algebras commutes with sections and is exact",
+   "results": "OK 8 hits: PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.Monoidal.tensorObj_map_tmul, CategoryTheory.Sheaf.tensorProd_isSheaf, PresheafOfModules.Monoidal.tensorObjMap, SheafOfModules.freeFunctor, SheafOfModules.free, SheafOfModules.evaluation, SheafOfModules.sectionsFunctor; source reads: Sheaf/Free.lean:61,179-199, Presheaf/Monoidal.lean:45-80, Sheaf/ChangeOfRings.lean:36-43; ",
+   "date": "2026-10-22",
+   "verdict": "no match: free-sheaf maps, presheaf tensors, evaluation and additive scalar restriction only; no declaration supplies every clause of the finite-basis section comparison and exactness statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "OK 4 hits: SheafOfModules.restrictScalars, SheafOfModules.instAdditiveRestrictScalars, SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars_map_val; source reads: Sheaf/Free.lean:61,179-199, Presheaf/Monoidal.lean:45-80, Sheaf/ChangeOfRings.lean:36-43; ",
+   "date": "2026-10-22",
+   "verdict": "no match: free-sheaf maps, presheaf tensors, evaluation and additive scalar restriction only; no declaration supplies every clause of the finite-basis section comparison and exactness statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of commutative rings R to S with a global finite R basis, sheafified extension of scalars evaluated on U is canonically F(U) tensor over R(U) S(U), and extension is exact",
+   "results": "OK 8 hits: SheafOfModules.mapFree, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, PresheafOfModules.Sheafify.mul_smul, PresheafOfModules.Sheafify.module, PresheafOfModules.Sheafify.smul, PresheafOfModules.Sheafify.smulCandidate, PresheafOfModules.Sheafify.instNonemptySMulCandidate; source reads: Sheaf/Free.lean:61,179-199, Presheaf/Monoidal.lean:45-80, Sheaf/ChangeOfRings.lean:36-43; ",
+   "date": "2026-10-22",
+   "verdict": "no match: free-sheaf maps, presheaf tensors, evaluation and additive scalar restriction only; no declaration supplies every clause of the finite-basis section comparison and exactness statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical pure tensor map from sections tensor sections to sections of sheaf tensor is an isomorphism for a sheaf of algebras with a global finite basis",
+   "results": "OK 8 hits: SheafOfModules.ιFree_mapFree_inv, SheafOfModules.mapFree, SheafOfModules.freeHomEquiv, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.freeSection, PresheafOfModules.Monoidal.tensorObj, Module.Invertible.instTensorProduct_1, ModuleCat.FreeMonoidal.μIso_hom_freeMk_tmul_freeMk; source reads: Sheaf/Free.lean:61,179-199, Presheaf/Monoidal.lean:45-80, Sheaf/ChangeOfRings.lean:36-43; ",
+   "date": "2026-10-22",
+   "verdict": "no match: free-sheaf maps, presheaf tensors, evaluation and additive scalar restriction only; no declaration supplies every clause of the finite-basis section comparison and exactness statement"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObj|mapFree|freeHomEquiv",
+   "results": "OK 25 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; source reads: Sheaf/Free.lean:61,179-199, Presheaf/Monoidal.lean:45-80, Sheaf/ChangeOfRings.lean:36-43; grep subdirectory Algebra/Category/ModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: free-sheaf maps, presheaf tensors, evaluation and additive scalar restriction only; no declaration supplies every clause of the finite-basis section comparison and exactness statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-point-finite-free-sections-tensor",
+  "date": "2026-10-22",
+  "group": "Q89"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "Final stagewise-colimit paragraph of def-weil-finite-coefficient-point: scalar-extension isomorphisms for the point evaluation functor, via the integral sections comparison; realizes the general finite-basis tensor evaluation, exactness and termwise differential argument extracted from lem-weil-point-finite-free-sections-tensor.",
+   "via": [
+    "lem-weil-point-finite-free-sections-tensor",
+    "lem-weil-point-sections-scalar-extension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-based-sheaf-tensor-evaluation",
+  "worker": "stage1",
+  "summary": "Kept the entire statement unchanged. Wrote the finite-basis coordinate inverse, the already-sheaf argument, canonical comparison and naturality; derived arbitrary scalar restriction exactness and reflection from the existing module-sheaf forgetful theorem; proved finite-power kernel/cokernel preservation explicitly and deduced both scalar-extension exactness clauses; checked the termwise chain equation. No new nodes.",
+  "blueprint": "The ancestor def-weil-finite-coefficient-point ends with stagewise passage to algebraically closed coefficients. Its scalar-extension comparisons require the present evaluation isomorphism through lem-weil-point-sections-scalar-extension and lem-weil-point-finite-free-sections-tensor. Steps 1-5 give that normalized ordinary comparison, Steps 6-10 its exactness inputs, Step 11 the termwise complex comparison. The current main-20261015 snapshot locates the same ancestor in sec-six-functors-basics/sk-def-sf-admissible; no unit or chapter route was changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "General small ringed-site limit/cokernel and forgetful theorem, used for finite products and comparing the same underlying abelian sheaves over R and S; this is a foundation tool, not an alternative six-functor route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NM-40ba8c372",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-40ba8c372 (reviewer sub-agent of L); spot-checked: Read the item's statement (unchanged from live; live item still unsplit), all 11 steps, every cited node's statement and the Stacks sources: 03EK (sites-modules.tex:3551), 03DA (:1337), 03DB (:1358), 03CY, 00CX, 010N (homology.tex:1545) and 010V; the tags were checked in tags/tags. No SGA. There are no new nodes. The item is a statement-only node created on 10-22 by Q89's landed re-split of lem-weil-point-finite-free-sections-tensor (that note is resolved). This is the item's first split and it has no repair note, so the 3000-character cap does not apply. Mathematics checked step by step. Steps 1-3: the coordinate inverse q_i (q_i(b_j|_U)=δ_ij from the terminal-object basis), balancedness of β, βγ=id and γβ=id, and P_F≅F^d, which is a sheaf even for empty covers. Step 4: the Mathlib-leaf sheafification interface is applied with O=S and the identity as its sheafification; this gives ε with εη=1 and ηε=1, then Φ=βε and Φ⁻¹=ηγ. Step 5: θ=η_U, naturality, restriction compatibility and basis independence. Steps 6-7: Res keeps the same abelian sheaf, and forgetful clause (1) gives sectionwise kernels and sheafified cokernels over both R and S. The inverse-linearity argument holds, Res reflects universal cones and preserves and reflects exactness, and the 010N-type kernel/cokernel criterion is a Mathlib leaf. Step 8: the finite power preserves kernels and cokernels, including d=0. Step 9: T is additive, Res∘T≅D_d, and reflection gives exactness of T. Step 10: the one-object identity site specializes this to ordinary A→B with a finite basis. Step 11: the termwise chain isomorphism is checked degreewise. Edge cases checked: d=0 (S=0), d=1 with φ=id, non-flat R→R/I for the restriction clause, and unbounded complexes. proof_deps equals the union of uses; there is no cycle. The tool_use of lem-weil-pbc-module-sheaves-colimits-forgetful (sk-thm-reduction, a generic ringed-site foundation) is accepted. Advisory: no node duplicates the whole item, but lem-pur-finite-free-scalar-extension (Φ for complexes), lem-pur-sheaf-ring-coefficient-ordinary-adjunction (Res finite-exact) and lem-pur-finite-power-complex (power functor exact) are in sk-def-sf-operations, which is on the unit's route. They overlap Steps 1-5/11, 6-7 and 8, which the delivery re-proves inline and correctly. The report's 'all general statements reused' is therefore inaccurate. The proof is 8266 characters with 0 new nodes, so a future re-split is likely; it could cite those nodes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.BasedTensorEvaluation",
+  "declaration": "SheafOfModules.basedSheafTensorEvaluation",
+  "declarations": [
+   "SheafOfModules.basedTensorProductSections",
+   "SheafOfModules.basedSheafTensorEvaluation"
+  ],
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/BasedTensorEvaluation.lean",
+  "statement": "theorem basedSheafTensorEvaluation :\n    (∀ (φ : R ⟶ S),\n      PreservesFiniteLimits (restrictScalars.{u}\n        ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map φ)) ∧\n      PreservesFiniteColimits (restrictScalars.{u}\n        ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map φ)) ∧\n      ∀ (M N P : SheafOfModules.{u}\n          ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj S))\n        (f : M ⟶ N) (g : N ⟶ P),\n        (imageSubobject f = kernelSubobject g ↔\n          imageSubobject ((restrictScalars.{u}\n            ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map φ)).map f) =\n          kernelSubobject ((restrictScalars.{u}\n            ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map φ)).map g))) ∧\n    (∀ (A B : Type u) [CommRing A] [CommRing B] (φ : A →+* B)\n      (d : ℕ) (b : Module.Basis (Fin d) A\n        ((ModuleCat.restrictScalars φ).obj (ModuleCat.of B B))),\n      (ModuleCat.extendScalars.{u, u, u} φ).Additive ∧\n      PreservesFiniteLimits (ModuleCat.extendScalars.{u, u, u} φ) ∧\n      PreservesFiniteColimits (ModuleCat.extendScalars.{u, u, u} φ)) ∧\n    ∀ (one : C) (hOne : IsTerminal one) (φ : R ⟶ S) (d : ℕ)\n      (b : Fin d → S.obj.obj (op one))\n      (e : (∏ᶜ fun _ : Fin d ↦\n          unit ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ≅\n        (restrictScalars.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map φ)).obj\n          (unit ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj S)))\n      (he : ∀ (U : Cᵒᵖ) (r : Fin d → R.obj.obj U),\n        e.hom.val.app U\n          ((basedTensorProductSections d\n            (unit ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) U).inv r) =\n          ∑ i : Fin d, φ.hom.app U (r i) * S.obj.map (hOne.from U.unop).op (b i)),\n      ∃ E : SheafOfModules.{u}\n          ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⥤\n          SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj S),\n      ∃ hE : ∀ F : SheafOfModules.{u}\n          ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R), E.obj F = changeOfRings\n            φ F,\n        (∀ {F G : SheafOfModules.{u}\n          ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)} (f : F ⟶ G), E.map f =\n          eqToHom (hE F) ≫ changeOfRingsHom.{vC, uC, u} φ F f ≫ eqToHom (hE G).symm) ∧\n      ∃ (_ : E.Additive),\n        PreservesFiniteLimits E ∧ PreservesFiniteColimits E ∧\n      ∃ Φ : E ⋙ restrictScalars.{u}\n          ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map φ) ≅\n          Functor.pi' (fun _ : Fin d ↦ 𝟭 (SheafOfModules.{u}\n            ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) ⋙\n            Pi.functor (Fin d),\n      ∃ θ : ∀ (F : SheafOfModules.{u}\n          ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (U : Cᵒᵖ),\n          (changeOfRingsPresheaf.{vC, uC, u} φ F).obj U ≅ (E.obj F).val.obj U,\n        (∀ F : SheafOfModules.{u}\n            ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R), Presheaf.IsSheaf J\n            (changeOfRingsPresheaf.{vC, uC, u} φ F).presheaf) ∧\n        (∀ (F : SheafOfModules.{u}\n            ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (U : Cᵒᵖ) (a :\n            S.obj.obj U) (x : F.val.obj U),\n          (θ F U).hom (a ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x) =\n            (eqToHom (hE F).symm).val.app U\n              ((toSheafify J (changeOfRingsPresheaf.{vC, uC, u} φ F).presheaf).app U\n                (a ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x))) ∧\n        (∀ (F : SheafOfModules.{u}\n            ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (U : Cᵒᵖ) (a :\n            S.obj.obj U) (x : F.val.obj U) (i : Fin d),\n          (Pi.π (fun _ : Fin d ↦ F) i).val.app U\n            ((Φ.hom.app F).val.app U\n              ((θ F U).hom (a ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x))) =\n            ((e.inv ≫ Pi.π\n              (fun _ : Fin d ↦ unit\n                ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) i).val.app U a) •\n            x) ∧\n        (∀ (F : SheafOfModules.{u}\n            ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (U : Cᵒᵖ) (x : (∏ᶜ fun\n            _ : Fin d ↦ F).val.obj U),\n          (Φ.inv.app F).val.app U x = (θ F U).hom\n            (∑ i : Fin d, S.obj.map (hOne.from U.unop).op (b i)\n              ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom]\n                ((Pi.π (fun _ : Fin d ↦ F) i).val.app U x))) ∧\n        (∀ (F : SheafOfModules.{u}\n            ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (U : Cᵒᵖ) (x : (E.obj\n            F).val.obj U),\n          (θ F U).inv x = ∑ i : Fin d,\n            S.obj.map (hOne.from U.unop).op (b i) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom]\n              ((Pi.π (fun _ : Fin d ↦ F) i).val.app U ((Φ.hom.app F).val.app U x))) ∧\n        (∀ (F G : SheafOfModules.{u}\n            ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (f : F ⟶ G) (U : Cᵒᵖ)\n            (x : (changeOfRingsPresheaf.{vC, uC, u} φ F).obj U),\n          (E.map f).val.app U ((θ F U).hom x) =\n            (θ G U).hom ((ModuleCat.extendScalars.{u, u, u}\n              (R := R.obj.obj U) (S := S.obj.obj U) (φ.hom.app U).hom).map\n              (f.val.app U) x)) ∧\n        (∀ (F : SheafOfModules.{u}\n            ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (U V : Cᵒᵖ) (j : U ⟶\n            V) (x : (changeOfRingsPresheaf.{vC, uC, u} φ F).obj U),\n          (E.obj F).val.map j ((θ F U).hom x) =\n            (θ F V).hom ((changeOfRingsPresheaf.{vC, uC, u} φ F).map j x)) ∧\n        (∀ (F : SheafOfModules.{u}\n            ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (U : Cᵒᵖ) (k :\n            (changeOfRingsPresheaf.{vC, uC, u} φ F).obj U ⟶ (E.obj F).val.obj U),\n          (∀ (a : S.obj.obj U) (x : F.val.obj U),\n            k (a ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x) =\n              (θ F U).hom (a ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)) →\n            k = (θ F U).hom) ∧\n        (∀ K : CochainComplex (SheafOfModules.{u}\n            ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ,\n          ∀ U : Cᵒᵖ,\n          ∃ α : (((evaluation.{u}\n              ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) U) ⋙\n              ModuleCat.extendScalars.{u, u, u}\n              (R := R.obj.obj U) (S := S.obj.obj U) (φ.hom.app U).hom).mapHomologicalComplex (.up\n            ℤ)).obj K ≅\n            (Functor.mapHomologicalComplex\n              (evaluation.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj S) U)\n              (.up ℤ)).obj ((E.mapHomologicalComplex (.up ℤ)).obj K),\n            ∀ j : ℤ, α.hom.f j = (θ (K.X j) U).hom ∧\n              α.inv.f j = (θ (K.X j) U).inv)",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": " H7 generalizes the Lean site object and morphism universes independently of coefficients, under explicit sheaf-composition, sheafification and locally-bijective assumptions; the old small-site case specializes this proved theorem. No mathematical clause changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d0a249c71",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 9ca391699de4. The only deltas: Φ's target finitePowerFunctor is replaced by the Mathlib composite Functor.pi' (fun _ ↦ 𝟭 _) ⋙ Pi.functor (Fin d) (objects ∏ᶜ fun _ ↦ F, maps Pi.map; checked in Pi/Basic.lean:193 and Limits/Shapes/Products.lean:1011); the Sheaf.Paper.FinitePowerComplex import is replaced by Mathlib imports; stmt_deps are restored to the live four def nodes (the node differs from live only in lean, and the live node has no lean record); the stray .{u} title is fixed. All other clauses are unchanged and re-checked against the node: basis iso pinned by he, E pinned to changeOfRings/changeOfRingsHom, IsSheaf clause, Φ/Φ⁻¹ formulas, θ unit/inverse/naturality/restriction/uniqueness, Res finite exactness and exactness iff, E additive and exact, ordinary extendScalars clause, unbounded complex iso with θ components. Edge cases d=0, zero ring, non-flat φ, empty covers OK; statement verbatim; sorry-only; helper has real data; docstrings carry source, blueprint and 11 steps; no repair note; no compile needed (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-0decb",
+  "group": "H7",
+  "result": "fix",
+  "landing": "20261024T224923-L-1831152",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + generalized BasedTensorEvaluation against nodes lem-weil-point-finite-free-sections-tensor / lem-pur-based-sheaf-tensor-evaluation, the published PointFiniteFreeSectionsTensorData (byte diff), the 440ef review fix, and the 5 direct importers compiled against delivered and corrected sets"
+ }
+}

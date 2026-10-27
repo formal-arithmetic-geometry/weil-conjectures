@@ -1,0 +1,119 @@
+{
+ "id": "lem-sf-p1-coordinate-line-comparison",
+ "kind": "statement",
+ "title": "Normalized line comparisons for the two product coordinates",
+ "statement": "Let A be a finite commutative ring, N a natural number, hA:(N:A)=0, and t normalized finite twist transport as in def-sf-p1-integral-transport-data. Let S,X be schemes, f:X→S proper, i:X≅ProjectiveLine(S) over S, and assume N is invertible in Γ(S,⊤). Write p₁,p₂ for the projective self-product projections, r₁,r₂ for the self-product projections of f, and j=i×ₛi. Put B=A_ProjectiveLine(S)(1)[2], B'=A_X(1)[2], and L=A_(ProjectiveLine(S)×ₛProjectiveLine(S))(1)[2], using the ordinary finite Tate lines. Let a:j*L≅r₂*B' be coefficientComparison, v:p₁*B≅L and l:i*B≅B' the normalized shifted-line pullback isomorphisms, and σ:i* followed by r₁*≅p₁* followed by j* the inverse-image composition comparison for firstProjectionSquare. Let k:r₁*B'≅r₂*B' be the canonical SfDiagonalKernel coordinate isomorphism constructed from the shifted line on S and its normalized pullback along f. Then a inverse, followed by j* applied to v inverse and σ inverse at B, equals k inverse followed by r₁* applied to l inverse. This is an equality of maps from r₂*B' to r₁*(i*B). It involves only inverse images and coefficient isomorphisms. It remains valid for N=0, empty schemes, and the zero coefficient ring.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The paragraphs identifying t_p1 and t_p2 with base change of t_q, using qp1=qp2 and the composite-adjunction counit."
+ },
+ "stmt_deps": [
+  "def-sf-p1-integral-transport-data"
+ ],
+ "proof": [
+  {
+   "text": "expand coefficientComparison and SfDiagonalKernel.coordinate. The roots\ninclusion and pure coefficient generators uniquely characterize normalized line\ntransport. Thus for composable morphisms its comparison is the composite of\nthe two comparisons and upperStarComp. For N>0 this is also the composition law\nof finiteEtaleTwistPullbackData; for N=0 the invertibility hypothesis makes S\nempty, and maps to the line sheaf are unique. Apply the degree-zero functor,\nits canonical exact/left-derived comparison, and shift by two. Naturality of\nthese comparisons gives the same composition law for shifted lines. Apply it\nto productMap followed by the first projective projection and to the first\nprojection followed by i, which are equal by projectionSquare. Apply it again\nto the two projections followed by f. The latter equality is pullback.condition;\nits derived comparison is CoordinateTrace.coordinate. Cancel the normalized\nline isomorphisms, leaving the displayed square. This proof applies to arbitrary\nschemes and zero coefficient rings and introduces no integration identity.",
+   "uses": [
+    "def-sf-p1-integral-transport-data",
+    "lem-amb-ordinary-finite-twist-transport-uniqueness",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-p1-integral-transport-data",
+  "lem-amb-ordinary-finite-twist-transport-uniqueness",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Fixed true component of the ordinary-to-compact-support exchange transport calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The base change mate is compatible with horizontal equivalences and direct image composition for an isomorphism",
+   "results": "Found mateEquiv_hcomp, mateEquiv_vcomp and mateEquiv_square; generic mate tools do not include the scheme and compact-support comparison normalizations.",
+   "date": "2026-10-26",
+   "verdict": "Ingredients, no exact result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_conjugateEquiv",
+   "results": "Found unit_conjugateEquiv in Mathlib.CategoryTheory.Adjunction.Mates; it gives the generic mate-unit equation, not the geometric comparison.",
+   "date": "2026-10-26",
+   "verdict": "Ingredient only."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(vComp|hComp)",
+   "results": "Found the mate composition sections and applications. Local rg additionally inspected BaseChangeCube and the private normalized shifted-line composition proof in SfP1ChartExchange.",
+   "date": "2026-10-26",
+   "verdict": "No matching public geometric equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition coherence of derived inverse image and proper base change natural isomorphisms",
+   "results": "Eight hits, including Scheme.Modules.pseudofunctor_mapComp_inv_tau_l, sheafPushforwardContinuousComp inverse components, and general pseudofunctor composition coherence. No proper compact-support comparison or normalized finite Tate-line statement.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; retain the proved concrete normalization and categorical pasting calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfP1ProjectionTraceTransportTrue",
+  "date": "2026-10-26",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-p1-adjunction",
+   "place": "The two-coordinate comparison calculation: Normalized line comparisons for the two product coordinates.",
+   "via": [
+    "lem-sf-p1-projection-trace-transport-true"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfP1CoordinateLineComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfP1CoordinateLineComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.SfP1Transport.coordinateLineComparison",
+  "statement": "theorem coordinateLineComparison\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]\n    (i : X ≅ ProjectiveLine S) (hi : i.hom ≫ (ProjectiveLine S ↘ S) = f)\n    (hS : IsUnit (N : Γ(S, ⊤))) :\n    (coefficientComparison A N hA t f i hi hS).inv ≫\n        (ordinaryFinitePullback A (productMap f i hi)).map\n          (ordinaryFiniteShiftedLinePullback A N hA t\n            (projectiveLineDiagonalProjection S false)\n            (finiteP1_unitOnPullback N (ProjectiveLine S ↘ S) hS)).inv ≫\n        (derivedSquareUpperStarIso (ModuleCat.{u + 1} A)\n          (firstProjectionSquare f i hi).toCommSq).inv.app\n            ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) =\n      (SfDiagonalKernel.coordinate A f\n        (CoordinateTrace.shiftedLine A (Scheme.finiteEtaleTateLine S N A hA) 1)\n        (ordinaryFiniteShiftedLinePullback A N hA t f hS).symm).inv ≫\n      (ordinaryFinitePullback A (pullback.fst f f)).map\n        (ordinaryFiniteShiftedLinePullback A N hA t i.hom\n          (finiteP1_unitOnPullback N (ProjectiveLine S ↘ S) hS)).inv",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.Etale.SfP1Transport.firstProjectionSquare",
+   "AlgebraicGeometry.Etale.SfP1Transport.coordinateLineComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b59d1",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T054555-L-964137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b59d1",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T054555-L-964137",
+  "kind": "interface",
+  "note": "independent cc review: item proof + presentationExchange sorry vs nodes lem-sf-p1-projection-trace-transport-true / lem-sf-p1-presentation-exchange; trace refactor vs change record sf-p1-trace-factorization and clone; forced adaptation ProjectiveLineTraceNormalization vs clone diff; all 11 direct importers compiled OK against the delivered set"
+ }
+}

@@ -1,0 +1,139 @@
+{
+ "id": "def-zl-finite-restriction-diagram-models",
+ "kind": "definition",
+ "title": "Models of semilinear finite-fibre restriction diagrams",
+ "statement": "For a field k, a semilinear diagram records schemes X,Y,X',Y' over Spec k, arbitrary diagram arrows f and f', a field automorphism sigma, scheme isomorphisms u and w semilinear over sigma, their commuting equations, and a geometric point y. Using the strict-system counit maps [lem-zl-finite-counit-restriction-towers], construct the Spec k automorphism c, transported point c^-1 y w, the unique fibre-product isomorphism, and the normalized equivalence x maps to c^-1 x u of point indices. The specified pullback compositors and direct-image mates determine source and middle transport; product projections determine sum transport by the point equivalence and stalk compositors. A square retains its four objects and arrows; image and full-subcategory restriction retain these arrows. The exchange and restriction squares use the actual counit maps on whole system complexes. Their Roos and completed realizations are the images under the fixed restriction/Roos and localization/total-limit functors. This is a relocation of existing constructions, with identical names and bodies; it introduces no second notion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+  "place": "Finite-stalk formula and Frobenius-permutation sentences; semilinear diagram refinement, parent proof steps 1--6."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-integral-morphism",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-direct-image",
+  "def-weil-geometric-point",
+  "def-pc-base-change",
+  "def-weil-rationalization-karoubi",
+  "def-weil-finite-coefficient-point",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-local-frobenius-trace",
+  "lem-zl-finite-counit-restriction-towers",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pod-completion-reindex-models"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of finite geometric fibre base change counit and restriction maps under isomorphisms",
+   "results": "TopCat.Presheaf.map_restrict, Scheme.Modules.restrictFunctorAdjCounitIso, finite base change stability. These concern ordinary presheaf restrictions or geometry, not the specified strict coefficient systems.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of base change and counit under isomorphisms of commutative squares, pullback geometric fibre point permutation",
+   "results": "CategoricalPullback.CatCommSqOver.iso_hom_naturality and Scheme.Pullback comparison lemmas; none states the coefficient-system comparison or completed constructibility.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|pullback.mapIso|CommSq.map",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates supplies mateEquiv and its counit identities; Mathlib.CategoryTheory.CommSq supplies functorial preservation. No theorem about these strict coefficient-system arrows or constructibility. Searched DAG and Sheaf/WeilConjectures: no duplicate of the two argument steps; the completed Frobenius germ square is a different specialized statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRestrictionDiagramNaturality",
+  "date": "2026-10-25",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-finite-pushforward",
+   "place": "Finite-stalk formula and Frobenius-permutation sentences; semilinear diagram refinement, parent proof steps 1--6.",
+   "via": [
+    "lem-zl-finite-restriction-diagram-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteRestrictionDiagramModels",
+  "file": "lean/Sheaf/Paper/FiniteRestrictionDiagramModels.lean",
+  "declaration": "WeilConjectures.FiniteRestrictionNaturality.Diagram",
+  "statement": "structure Diagram (k : Type u) [Field k]",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.FiniteRestrictionNaturality.canonicalSiteSmall",
+   "WeilConjectures.FiniteRestrictionNaturality.paths",
+   "WeilConjectures.FiniteRestrictionNaturality.pushSquare",
+   "WeilConjectures.FiniteRestrictionNaturality.Diagram",
+   "WeilConjectures.FiniteRestrictionNaturality.c",
+   "WeilConjectures.FiniteRestrictionNaturality.y'",
+   "WeilConjectures.FiniteRestrictionNaturality.geometry",
+   "WeilConjectures.FiniteRestrictionNaturality.fibreIso",
+   "WeilConjectures.FiniteRestrictionNaturality.points_existsUnique",
+   "WeilConjectures.FiniteRestrictionNaturality.points",
+   "WeilConjectures.FiniteRestrictionNaturality.point_paths",
+   "WeilConjectures.FiniteRestrictionNaturality.source",
+   "WeilConjectures.FiniteRestrictionNaturality.middle",
+   "WeilConjectures.FiniteRestrictionNaturality.stalk",
+   "WeilConjectures.FiniteRestrictionNaturality.sum_existsUnique",
+   "WeilConjectures.FiniteRestrictionNaturality.sum",
+   "WeilConjectures.FiniteRestrictionNaturality.sourceComplex",
+   "WeilConjectures.FiniteRestrictionNaturality.middleComplex",
+   "WeilConjectures.FiniteRestrictionNaturality.sumComplex",
+   "WeilConjectures.FiniteRestrictionNaturality.Square",
+   "WeilConjectures.FiniteRestrictionNaturality.Square.Commutes",
+   "WeilConjectures.FiniteRestrictionNaturality.Square.image",
+   "WeilConjectures.FiniteRestrictionNaturality.Square.Vertices",
+   "WeilConjectures.FiniteRestrictionNaturality.Square.restrict",
+   "WeilConjectures.FiniteRestrictionNaturality.exchangeSquare",
+   "WeilConjectures.FiniteRestrictionNaturality.restrictionSquare",
+   "WeilConjectures.FiniteRestrictionNaturality.roos",
+   "WeilConjectures.FiniteRestrictionNaturality.completed"
+  ],
+  "note": "Moved verbatim from FiniteRestrictionDiagramNaturality to permit separate argument-step modules without an import cycle. All theorem bodies retain the previously landed proofs."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0bdbb",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T164232-L-976036",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0bdbb",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T164232-L-976036",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs split nodes strict-transport/constructible-vertices; relocated Models block vs published FiniteRestrictionDiagramNaturality (identical bar docstring tags); node proof_deps vs Lean uses"
+ }
+}

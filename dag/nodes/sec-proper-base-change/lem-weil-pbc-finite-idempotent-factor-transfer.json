@@ -78,7 +78,32 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Algebra.finite_idempotent_factor_transfer"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Algebra.finite_idempotent_factor_transfer",
+     "module": "WeilConjectures.RingTheory.FiniteIdempotentFactorTransfer",
+     "lines": [
+      30,
+      153
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
@@ -111,5 +136,32 @@
   "landing": "20261012T085248-L-18405",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $A,B$ be commutative rings with $B$ an $A$-algebra and $I\\subset A$ an ideal. Let $D\\subset B$ be an $A$-subalgebra finite as an $A$-module. Let $C$ be an $(A/I)$-algebra and $\\Phi:D/ID\\cong (A/I)\\times C$ an isomorphism respecting the $A/I$ structure maps. Suppose $b,d\\in D$, $d^2=d$, $\\alpha\\in A$ is a unit, $bd=\\alpha d$, $D[1/b]\\to B[1/b]$ is bijective, and $\\Phi(\\bar d)=(1,0)$. For $e$ the image of $d$ in $B$, $A\\to B[1/e]$ is integral and the structure map $A/I\\to B[1/e]/IB[1/e]$ is bijective.",
+  "proof": [
+   {
+    "text": "Since $\\alpha$ is a unit, $bd=\\alpha d$ gives $d=b(\\alpha^{-1}d)$, so $b$ divides $d$ in $D$; hence the bijection $D[1/b]\\to B[1/b]$ induces a bijection $D[1/d]\\to B[1/e]$. As $d$ is idempotent, $D\\to D[1/d]$ is surjective (it is the projection onto the factor $dD$). Therefore $F:D\\to B[1/e]$ is surjective, and integrality of the finite $A$-algebra $D$ passes to its quotient $B[1/e]$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Let $\\sigma:D\\to A/I$ be the first coordinate of $\\Phi$ composed with $D\\to D/ID$. It is an $A$-algebra map with $\\sigma(d)=1$, so it extends over $D[1/d]$ and, through the bijection above, gives an $A$-algebra map $\\rho:B[1/e]\\to A/I$. It kills $IB[1/e]$, so it induces a left inverse of $A/I\\to B[1/e]/IB[1/e]$, proving injectivity.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For surjectivity, write an element of $B[1/e]/IB[1/e]$ as the class of $F(x)$ with $x\\in D$. Lift the first coordinate of $\\Phi(x\\bmod ID)$ to $a\\in A$. Then $\\Phi(d(x-a)\\bmod ID)=(1,0)\\cdot(\\Phi(x\\bmod ID)-\\Phi(a\\bmod ID))=0$, so $d(x-a)\\in ID$. Applying $F$, with $F(d)=1$, gives $F(x)-a\\in IB[1/e]$, so the class of $F(x)$ is the image of $a\\bmod I$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

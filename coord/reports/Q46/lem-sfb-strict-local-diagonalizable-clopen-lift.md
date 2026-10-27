@@ -1,0 +1,93 @@
+## Files written
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-strict-local-diagonalizable-clopen-lift.json: item, statement unchanged, five proof steps, status split.
+- lem-sfb-geometric-diagonalizable-separably-closed-split: new statement-only prerequisite, no Mathlib match.
+- lem-sfb-henselian-flat-group-split-fibre-model: new statement-only prerequisite, no Mathlib match.
+- lem-sfb-henselian-clopen-group-hom-approximation: new statement-only prerequisite, no Mathlib match.
+- citations.json: full verbatim statement for every citation of every proof step.
+
+## Attachments
+
+None. Searched lean/WeilConjectures by the exact blueprint tag, item id, diagonalizable/diagonalisable, multiplicativeType/MultiplicativeType, B.4.1/B.3.2 and approximation terminology. No project declaration states this item. Mathlib's affine Hopf spectrum construction is not a lifting theorem.
+
+## Literature wanted
+
+WANTED: Conrad, Reductive group schemes, Appendix B, especially Lemma B.1.5, Theorem B.3.2 and the strict-local claim in Theorem B.4.1, for lem-sfb-strict-local-diagonalizable-clopen-lift and lem-sfb-geometric-diagonalizable-separably-closed-split. The item already gives the URL https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf; I read it online without downloading or writing into literature/. A local archive literature/conrad-reductive-group-schemes.pdf remains wanted.
+
+## Issues and scope
+
+The item has no released repair note and its live state was unsplit. The sandbox initially held no item or previous split. The item statement is unchanged; no STATEMENT-DISPUTED claim about its truth is necessary.
+
+There is a source-route caution: after promising to use only the multiplicative-type special fibre, the printed B.4.1 proof later claims every power map is quasi-finite flat by examining all fibres and using their multiplicative type. That inference cannot be imported into this item's weaker setting. The precise issue is the missing hypothesis in the cited inference, not a claim that the theorem is false. The replacement stays within the completion-based group-scheme claim: choose a henselian G-ring model with the SAME split special fibre, lift over its completion using the existing B.3.2 node, and approximate finite clopen Hopf certificates. Thus the item does not use its parent fibral criterion and introduces no cycle.
+
+The latest blueprint is literature/blueprint/latest, currently main-20261024. I read sec-six-functors-basics/_section.md, the DAG chapter/unit records, and the latest sk-thm-sf-ctf-stability/_section.md and direct-images proof. The remote parent chain comes from direct-images (3); there is no imported blueprint ancestor (blueprint_refs.py ancestor prints None). Searches over the full blueprint for diagonalizable, multiplicative, henselian, approximation, clopen and separably closed found no node stating any new assertion. The long inherited blueprint.from.place is retained and the new nodes identify the precise B.4.1 subargument they serve. No chapter or unit route is changed, and the item is not the unit key node.
+
+## Proof plans for the statement-only prerequisites
+
+**Geometric splitting over a separably closed field.** Read Conrad's opening of B.4, p.297, and Lemma B.1.5, pp.283-284. Inside E choose an algebraic closure of k. Spread the finitely presented group isomorphism over E and its inverse, with the finitely many Hopf compatibility identities, to a finite-type algebra over that algebraic closure. A maximal ideal has residue equal to this algebraically closed base field; specialization gives the group isomorphism there. Thus H is of multiplicative type over k in the usual geometric sense, not merely after a particular transcendental extension. Lemma B.1.5 gives a finite separable splitting extension of k. Since k is separably closed, that extension is k. No reducedness of H is used. This is more than character antiduality, which already assumes multiplicative type, and more than the existing geometrically diagonal coalgebra lemma, which assumes a basis over the algebraic closure from the outset.
+
+**Henselian G-ring model with a prescribed split fibre.** Read Stacks more-algebra.tex, Tag 0A41, lemma-henselian-local-limit-G-rings, and limits.tex, Tag 04AI, lemma-descend-flat-finite-presentation. Write C as a filtered colimit of henselian local G-rings with local maps. Their residue fields inject into k and have colimit k. Finite presentation descends the affine coordinate algebra, multiplication, identity, inverse, and their finite diagram equalities to one stage. Flat finite-presentation descent 04AI makes the algebra flat at a later stage. The given residue isomorphism and its inverse are maps between finitely presented algebras over the residue-field colimit; their images on finite sets of generators and both inverse identities descend to a later residue-field stage. Hence the special fibre of that model is isomorphic to D(M), with exactly the specified scalar extension a. Replacing stages by a later stage preserves henselian locality and the G-ring property. The model map need not be injective and no claim is made about any other model fibre. Ordinary Noetherian descent of a ring or a section does not supply these Hopf and residue conditions.
+
+**Approximation of a given clopen homomorphism.** Read Stacks smoothing.tex, Tag 0AH5, lemma-henselian-pair, especially case (2), approximation order one. For the given map over the completion choose finite algebra presentations of P and Q. A clopen immersion identifies P over the completion with Q/(1-e) for an idempotent e in the completed scalar extension of Q. Record e, the Q-to-P map and an inverse P-to-Q/(1-e) by polynomial representatives. Their finite sets of coefficients are the unknowns. Include equations for e squared equals e, preservation of the algebra relations, both inverse identities, and compatibility of the Q-to-P map with comultiplication, counit and antipode. Equality in each quotient is encoded by finitely many explicit relation-membership witnesses: the actual equality has a finite expression in the finitely generated defining ideal. The tensor products in the comultiplication equation also have finite presentations. Fix the finite supports/degrees actually appearing in the completed data and witnesses. This gives one finite system of polynomial equations over A with a completed solution. Apply 0AH5 with N=1. The solution over A yields an idempotent e_A, inverse maps Q/(1-e_A) and P, and a Hopf map Q to P. Its spectrum is a clopen group homomorphism. Congruence of the coefficients modulo the maximal ideal gives equality of its residue Hopf map with the given one. No equality over the whole completion is concluded. This encoding of a clopen factor and of Hopf identities is the extra lemma beyond the existing henselian approximation of a finitely presented algebra map.
+
+## Review by Q46
+
+I checked delivery-errors B through E against all four node files and the sources, including the repeated B-E sections. Each new file is a self-contained statement only, with empty proof/proof_deps, real definition dependencies, a specific source, genuine logged searches, and a blueprint reference. I created no elementary lemma node, no restatement of the subgroup-lifting conclusion, and no duplicate of the completed lifting theorem. All assembly steps are below 2000 characters.
+
+Step 1 uses affine-morphism-permanence (arbitrary base change and affine source over an affine target), flat-morphism-base-change, and qcqs-morphism-permanence (clause (3), finite presentation base change) with H = G times_S T. Strict-henselization-local-structure really gives strict henselianity but explicitly does not give a residue identification; I therefore also cite strict-henselization-pointed-map, whose surjection and kernel give the embedding k into Omega and the pointed factorization. The new geometric-splitting statement allows exactly this arbitrary algebraically closed extension Omega/k. In particular I did not identify Omega with an algebraic closure or demand algebraicity over its image-point residue field.
+
+Step 2 uses exactly the new model statement. Its output explicitly includes henselian locality, the G-ring property, a flat finitely presented coordinate algebra, the group isomorphism after scalar extension and the specified residue isomorphism. These hypotheses are needed for both subsequent completion and approximation; a merely Noetherian model would not justify approximation. The residue map is injective because a local map of local rings induces a unital map of their residue fields.
+
+Step 3 uses adic-completion-noetherian and local-completion-local-ring for the complete ring's Noetherianity, maximal ideal and unchanged residue field; module-completion-complete, applied with M=A and the finitely generated maximal ideal, supplies completeness with respect to the extended ideal. The product rule for extended ideals makes it maximal-ideal completeness. Fibre-product-affine-spectra supplies the coordinate algebra; flat-module-base-change and finite-presentation-base-change-composition give flatness and finite presentation of it. I opened complete-local-diagonalizable-fibre-hom-lift and checked that it allows nonsmooth, noncommutative groups and torsion in M. Its input residue group is indeed D(M), hence of multiplicative type, and its output explicitly includes the open-and-closed assertion, not just a formal Hom bijection.
+
+Step 4 uses the structure theorem for finitely generated additive abelian groups only to give a finite Laurent-polynomial presentation of A[M]. Torsion exponents equal to one and empty products do not cause a problem; introduce an inverse variable for every generator. The new approximation lemma then applies to the two finitely presented affine groups and the actual completed clopen homomorphism. It returns the same residue map; the argument never assumes it returns the same completed morphism.
+
+Step 5 uses affine-fibre-product tensor coordinates and the separate open-immersion-base-change and closed-immersion-base-change theorems; both allow arbitrary base change, so A to C need not be flat. The group-algebra basis maps and their Hopf compatibility are written explicitly. The exact special-fibre map is a_A extended to k followed by the model isomorphism, which the model statement identifies with a; hence it is an isomorphism. No surjectivity on all fibres of G, connectedness, constant torsion orders, commutativity or smoothness is added.
+
+Small-case checks: M=0 gives an open-and-closed identity-section lift, with the possible complement allowed; torsion M=Z/p over residue characteristic p permits a nonreduced mu_p and uses no division by p; a nonreduced base still admits the Hopf and idempotent certificate argument; a non-Noetherian C is addressed by the model rather than its own completion; and a transcendental algebraically closed Omega is handled by geometric field-independence. A complement with empty special fibre is allowed throughout and no assertion that j is onto G is made. For approximation take X=Y and v the identity (the identity satisfies the finite certificate), and allow an empty clopen source (e=0). All new statements survive these cases.
+
+The Mathlib hits were read: they give HenselianLocalRing, ordinary IsSepClosed and Galois facts, formal smooth lifting, general affine properties, smooth Noetherian descent, and the construction of a group from a Hopf algebra. None yields these statements by one-line specialization. Every recorded query was actually run with msearch.py; second semantic phrasings were tried. No Mathlib leaf is claimed. Citations.json quotes the full statements to expose all hypotheses, and proof_deps is exactly the union of step uses. Generic off-unit tools are declared in split_report.tool_uses for the maintainer's review.
+
+## Not duplicates
+
+lem-sfb-henselian-flat-group-split-fibre-model vs def-weil-pbc-flat-descent-chart: The new statement selects a henselian local G-ring model of the entire group law and a specified split residue isomorphism; this existing statement does not supply that combination. Existing title: Finite-presentation ring chart and its base-change flatness predicates.
+
+lem-sfb-henselian-flat-group-split-fibre-model vs lem-weil-pbc-colimit-flat-ring-map-persistence: The new statement selects a henselian local G-ring model of the entire group law and a specified split residue isomorphism; this existing statement does not supply that combination. Existing title: Persistence of flatness after a flat stage.
+
+lem-sfb-henselian-flat-group-split-fibre-model vs lem-weil-pbc-flat-descent-chart-comparison: The new statement selects a henselian local G-ring model of the entire group law and a specified split residue isomorphism; this existing statement does not supply that combination. Existing title: A single finite-presentation chart and its stage and limit tensor spectra.
+
+lem-sfb-henselian-flat-group-split-fibre-model vs lem-weil-pbc-flat-descent-affine-charts: The new statement selects a henselian local G-ring model of the entire group law and a specified split residue isomorphism; this existing statement does not supply that combination. Existing title: Finite affine ring charts and flatness comparisons for inverse limits.
+
+lem-sfb-henselian-flat-group-split-fibre-model vs lem-weil-pbc-colimit-flat-ring-map-stage: The new statement selects a henselian local G-ring model of the entire group law and a specified split residue isomorphism; this existing statement does not supply that combination. Existing title: Existence of a flat stage in a filtered colimit.
+
+lem-sfb-henselian-flat-group-split-fibre-model vs lem-weil-pbc-descend-flat-finite-presentation: The new statement selects a henselian local G-ring model of the entire group law and a specified split residue isomorphism; this existing statement does not supply that combination. Existing title: Flatness descends to a finite stage of a limit.
+
+lem-sfb-henselian-flat-group-split-fibre-model vs lem-weil-pbc-affine-triple-tensor-base-change: The new statement selects a henselian local G-ring model of the entire group law and a specified split residue isomorphism; this existing statement does not supply that combination. Existing title: Tensor base change of an independently chosen open affine triple.
+
+lem-sfb-henselian-flat-group-split-fibre-model vs lem-weil-pbc-colimit-flat-ring-map: The new statement selects a henselian local G-ring model of the entire group law and a specified split residue isomorphism; this existing statement does not supply that combination. Existing title: Flatness of a finitely presented algebra map descends to a stage of a directed colimit of base rings.
+
+lem-sfb-henselian-clopen-group-hom-approximation vs lem-weil-pbc-henselian-approximation-alg-hom: The new statement algebraizes a given completed clopen group homomorphism, retaining the Hopf equations and a clopen factor certificate; this existing statement does not state those conditions. Existing title: Approximation of finitely presented algebra maps modulo the ideal.
+
+lem-sfb-henselian-clopen-group-hom-approximation vs lem-weil-pbc-henselian-pair-approximation: The new statement algebraizes a given completed clopen group homomorphism, retaining the Hopf equations and a clopen factor certificate; this existing statement does not state those conditions. Existing title: Approximation for henselian pairs with a Noetherian G-ring.
+
+lem-sfb-henselian-clopen-group-hom-approximation vs lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit: The new statement algebraizes a given completed clopen group homomorphism, retaining the Hopf equations and a clopen factor certificate; this existing statement does not state those conditions. Existing title: Maps from a finitely presented algebra into a filtered colimit factor through a stage.
+
+lem-sfb-henselian-clopen-group-hom-approximation vs lem-weil-pbc-finite-etale-lifting-approximation: The new statement algebraizes a given completed clopen group homomorphism, retaining the Hopf equations and a clopen factor certificate; this existing statement does not state those conditions. Existing title: Finite etale covers descend by henselian G-ring approximation.
+
+lem-sfb-henselian-clopen-group-hom-approximation vs lem-weil-pbc-smooth-polynomial-factorization: The new statement algebraizes a given completed clopen group homomorphism, retaining the Hopf equations and a clopen factor certificate; this existing statement does not state those conditions. Existing title: Finite polynomial solutions factor through a smooth algebra.
+
+lem-sfb-henselian-clopen-group-hom-approximation vs lem-weil-pbc-adic-completion-mod-power: The new statement algebraizes a given completed clopen group homomorphism, retaining the Hopf equations and a clopen factor certificate; this existing statement does not state those conditions. Existing title: The kernel of the completion modulo a power of the ideal.
+
+lem-sfb-geometric-diagonalizable-separably-closed-split vs lem-sfb-multiplicative-character-antiduality: The existing theorem assumes multiplicative type defined over an algebraic closure; the new lemma establishes splitting from a possibly transcendental algebraically closed extension.
+
+lem-sfb-geometric-diagonalizable-separably-closed-split vs lem-sfb-geometrically-diagonal-coalgebra-separable-basis: The coalgebra theorem assumes a group-like basis after algebraic closure and concerns no multiplication or finite type group. The new lemma handles arbitrary geometric extensions and concludes a group-scheme isomorphism.
+
+lem-sfb-henselian-flat-group-split-fibre-model vs lem-trf-flat-noetherian-model-prescribed-section: That node descends a flat algebra and an element to a finite-type subring; it gives no henselian G-ring model, Hopf diagrams or split residue isomorphism.
+
+lem-sfb-henselian-flat-group-split-fibre-model vs lem-sfb-split-reductive-finite-diagram-model: That node assumes split reductive groups and root data; the new statement allows nonsmooth diagonalizable special fibres and groups not reductive.
+
+lem-sfb-henselian-clopen-group-hom-approximation vs lem-sfb-complete-local-diagonalizable-fibre-hom-lift: That theorem creates a clopen lift from a split residue fibre over an already complete ring; the new approximation lemma requires a clopen morphism already supplied over the completion and changes its coefficient ring to a henselian G-ring.
+
+## Unfinished work
+
+No assembly gap remains. The three new nodes are intentionally unsplit stage-1 prerequisites. No Lean was written or compiled. Delivery status is determined by the required dry run and push.

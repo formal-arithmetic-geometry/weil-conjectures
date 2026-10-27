@@ -1,0 +1,110 @@
+{
+ "id": "lem-sfb-adic-perfect-reduction-models-kprojective",
+ "kind": "statement",
+ "title": "K-projectivity of ordinary adic quotient models",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "statement": "Let X be a scheme, A a coefficient-universe commutative ring, J an ideal, and U an object of the coefficient pro-etale site. Assume terminal-object evaluation of every epimorphism of set sheaves on the slice is surjective. For an integer cochain complex P with finite projective A-module terms and strict bounds a,b, every ordinary quotient complex C_n(P) of def-sfb-adic-perfect-reduction-model-complexes is K-projective.",
+ "stmt_deps": [
+  "def-sfb-adic-perfect-reduction-model-complexes",
+  "def-sfb-adic-residue-lift-comparisons"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09C5, 09C6 and 064B."
+ },
+ "proof": [
+  {
+   "text": "Apply termwise projectivity of the ordinary quotient complex. Its upper bound b is preserved by each additive termwise functor, via HomologicalComplex.map_isStrictlySupported. Apply Mathlib CochainComplex.isKProjective_of_projective with bound b.",
+   "uses": [
+    "lem-sfb-adic-perfect-quotient-terms-projective",
+    "lem-sc-bounded-above-projective-kprojective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adic-perfect-quotient-terms-projective",
+  "lem-sc-bounded-above-projective-kprojective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09C5 and 09C6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor maps a bounded above cochain complex to a bounded above cochain complex and projective terms imply K projective",
+   "results": "CochainComplex.isKProjective_of_projective. No theorem realizing the concrete quotient terms as projectives on the coefficient slice.",
+   "date": "2026-10-26",
+   "verdict": "Use the bounded-above criterion; isolate the termwise sheaf calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKProjective",
+   "results": "isKProjective_of_projective, isKProjective_of_iso, and homotopy invariance. None gives termwise projectivity for this realization.",
+   "date": "2026-10-26",
+   "verdict": "The general criterion is sufficient after termwise projectivity."
+  },
+  {
+   "tool": "grep",
+   "query": "Projective.of_retract|projective_of_retract|map_isStrictlySupported|isKProjective_of_projective",
+   "results": "HomologicalComplex.map_isStrictlySupported preserves the bound; CochainComplex.isKProjective_of_projective supplies K-projectivity. Source search found sf_weakly_contractible_projective for the large pro-etale site, not the coefficient-site slice in this statement.",
+   "date": "2026-10-26",
+   "verdict": "General ingredients exist; the concrete coefficient-slice projectivity remains."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "D4",
+  "item": "Sheaf.Paper.AdicPerfectReductionModels",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-adic-perfect-reduction-models",
+   "place": "Intermediate statement for its proof.",
+   "via": [
+    "lem-sfb-adic-perfect-reduction-models"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPerfectReductionModelsKProjective",
+  "file": "lean/Sheaf/Paper/AdicPerfectReductionModelsKProjective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicPerfectReductionModels_kprojective",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicPerfectReductionModels_kprojective"
+  ],
+  "statement": "theorem adicPerfectReductionModels_kprojective (X : Scheme.{u})\n    {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)\n    (U : coefficientProEtaleSiteModel.{u, v} X)\n    (_hU : AdicResidueSliceWeaklyContractible.{u, v} X U)\n    (P : CochainComplex (ModuleCat.{max v (u + 1)} A) ℤ)\n    (a b : ℤ) (_ha : P.IsStrictlyGE a) (_hb : P.IsStrictlyLE b)\n    (_hP : ∀ i : ℤ, Module.Finite A (P.X i) ∧ Module.Projective A (P.X i)) :\n    let R := fun n : ℕ ↦\n      (finite (coefficientProEtaleModelTopology.{u, v} X) A J n).over U\n    let C : (n : ℕ) → Cx (R n) := fun n ↦ adicPerfectQuotientComplex.{u, v} X J U P n\n    ∀ n : ℕ, (C n).IsKProjective",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-94abe",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T065433-L-2969140",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-94abe",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T065433-L-2969140",
+  "kind": "interface",
+  "note": "independent cc review: relocated definitions block vs clone (byte-identical); item conjunction vs kprojective+compatibility lemmas; new nodes' lean.statement vs signatures; terms_projective vs AdicResidueSliceWeaklyContractible and strictPerfectConstantSheaf; delivered modules + importer AdicPerfectModelHomCohomology + AdicPerfectHomCohomologyComparison compiled in sandbox (exit 0), axioms checked"
+ }
+}

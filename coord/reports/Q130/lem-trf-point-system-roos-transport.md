@@ -1,0 +1,128 @@
+# Stage-1 repair: lem-trf-point-system-roos-transport
+
+## Files written
+
+- dag/nodes/sec-trace-formula/lem-trf-point-system-roos-transport.json: same statement, existing Lean record and provenance; three assembly steps, 1919 characters total.
+- dag/nodes/sec-trace-formula/lem-trf-point-system-normalized-comparison-data.json: statement, unsplit; no Mathlib match after two semantic phrasings, Loogle, LeanSearch and logged source grep. Owns original steps 1–4 (3616 characters of argument).
+- dag/nodes/sec-trace-formula/lem-trf-point-restriction-whole-roos-square.json: statement, unsplit; no Mathlib match after two semantic phrasings, Loogle, LeanSearch and logged source grep. Owns original steps 5–7 (2641 characters of argument).
+- citations.json: an exact verbatim conclusion quotation for every cited node in each parent step.
+
+## Attachments
+
+None. Searching WeilConjectures/ by the exact blueprint tag and by point-system/Roos notions gave no declaration proving the item. I read lean/Sheaf/Paper/PointSystemRoosTransport.lean, including the concluding theorem WeilConjectures.PointSystemRoos.point_system_roos_transport, whose proof is sorry. Its Products/Models/Comparisons/TransportLaws structures package this assertion; they do not prove the new lemmas. No Lean file was written and no compiler was run.
+
+## Literature wanted
+
+WANTED: none.
+
+## What was wrong and what changed
+
+The return requires spreading the original 7189-character argument into at least two independent statement-only jobs of comparable size, retaining the item statement and at most 3000 characters of assembly. The sandbox initially held only dispatcher markers, no prior node, report, citations or search log. I copied the current read-only item; that is the returned eight-step version identified in the brief, reviewed as Q127 with module Sheaf.Paper.PointSystemRoosTransport. I preserved that entire input in returned-node.json, and preserve its eight argument texts verbatim below. The node statement and Lean metadata are byte-for-byte unchanged as JSON values. The delivery tool rebases the permitted split fields onto its current server base; no git command was run in the read-only repository.
+
+The first job constructs the coefficient-compatible and normalized comparison data, independently of any transport identity. It includes the scalar-action/transition calculation, exactness/product checks, signed-coordinate change and resolution-normalized descent. The second job proves the actual strict restriction square and its localization, independently of constructing a or zeta. It includes ambient unbounded restriction and its scalar linearity, the diagonal differential calculation, both-coordinate restriction, and compatibility with total-limit localization. Neither new statement depends on the parent or on the other new job, so they can be assigned concurrently. The parent does the explicit conjugation and cancellation. This implements the human's requested re-split, not merely a shorter paraphrase of the old proof or a transfer of the whole theorem into one node.
+
+No statement dispute or source error was found. The two sources are marked agent-formulated refinements at the original blueprint place, not misattributed as verbatim Stacks results. Stacks Tag 0941 (sites-cohomology.tex, lemma-derived-limit-is-ok) supports the existing total-limit nodes. Neither Tag 0941 nor any other Stacks theorem by itself asserts the new coefficient-specific comparisons or restriction square. There is no SGA citation.
+
+## Blueprint and duplicate searches
+
+I read dag/chapters/sec-trace-formula.json and dag/units/sk-thm-trace-transport.json. This is not the unit key statement, so no unit record is changed. I read the current main-20261015 prop-trf-rational-frobenius-integral-model.proof.md, especially (3), and thm-trf-l-function-euler-product.proof.md, Step 1 Global powers. The first explicitly describes integral compact-support maps as total limits of the finite maps; the second needs naturality and composition of their integral base-change comparisons. Our extracted point-system argument supplies that whole-system input and stays on that route.
+
+The ancestor command gives thm-trf-l-function-euler-product. The new via list is the parent item followed by its two existing via nodes. I searched the whole DAG by Roos/restriction/normalized/point/product terminology and 0941, and ran blueprint_refs.py search for Roos, point transport, exact product, semilinear, and restriction. The unrestricted restriction search is broad; the returned blueprint nodes concern ordinary Frobenius data, sheaf inverse image, derived limits, or unrelated restriction arguments, not either of these two intermediate statements. same_as=[] is retained on the item and set on both new nodes.
+
+## Not duplicates
+
+lem-trf-point-system-normalized-comparison-data vs lem-trf-point-system-roos-transport: the new node supplies only comparison data and its scalar/product/resolution normalization, with no sigma, u, I, or transport square; the parent additionally proves equality with point restriction by combining two independent lemmas.
+lem-trf-point-restriction-whole-roos-square vs lem-trf-point-system-roos-transport: the new node concerns the strict cone square and its localized representative; it neither constructs a and zeta nor states their derived transport identity. The parent must conjugate its square by the first job's specified comparisons.
+lem-trf-point-system-normalized-comparison-data vs lem-cbc-exact-product-functor-strict-limit: the existing node assumes an exact product-preserving functor between fixed sheaf-module categories; it does not identify U_s G_r with F_r U_s through the finite tensor insertions and actual quotient-linear transitions, verify the completed coefficient action, or identify the section tower with Gamma_bullet. The new job proves these hypotheses and realizes both comparisons with their common normalized coordinates; the generic theorem is reused as a statement dependency.
+lem-trf-point-system-normalized-comparison-data vs lem-cbc-exact-product-functor-roos-chain-maps: this generic result assumes exactness, products and a prescribed signed Roos functor; it does not construct the coefficient-compatible system identification or descend the two point-system comparisons with the specified total-limit normalization.
+lem-trf-point-system-normalized-comparison-data vs lem-cbc-exact-product-functor-roos-descent: the generic descent assumes the normalized models and the canonical comparisons; the new job verifies the actual point-system scalar/transition data and constructs simultaneous inverse-image and section comparisons from them. Generic descent is not redeclared as a new theorem.
+lem-trf-point-system-normalized-comparison-data vs lem-trf-point-sections-completion-cone: that node gives the general sections/cone comparison and completion augmentations for derived-complete constructible inputs; it does not supply simultaneous F_r/system scalar compatibility or the normalized a comparison for arbitrary derived systems. Its general sections-only clause is reused through the generic comparison result.
+lem-trf-point-system-normalized-comparison-data vs lem-coef-sequence-sections-limit-comparison: that node compares derived sections with a sequence projection and specifies finite projections; it does not specify both strict-cone coordinates, the inverse-image comparison through j_r, or their shared signed normalization.
+lem-trf-point-system-normalized-comparison-data vs lem-sfb-integral-pullback-strict-roos-normalization: that node concerns K-flat quotient towers for a morphism over k and constant/completed coefficient change. Our systems are arbitrary, and h^r is the semilinear point automorphism; the present pair of F_r and exact-sections comparisons is different.
+lem-trf-point-system-normalized-comparison-data vs lem-trf-point-system-power-roos-coherence: that node assumes the normalized a comparison and proves composition in the exponent. Our first job constructs the normalized comparison independently and asserts no power-composition identity.
+lem-trf-point-restriction-whole-roos-square vs lem-weil-point-automorphism-restriction-natural: the existing node supplies sigma on arbitrary ambient complexes, with linearity and derived naturality. It has no coefficient-system transition square, no Roos map H(u) and no whole-cone identity. That existing sigma theorem is reused as a statement dependency, rather than created again.
+lem-trf-point-restriction-whole-roos-square vs lem-trf-point-system-transport-descent: that node provides u and its localization I on entire strict systems, together with their actual transition equations; it does not compute the whole product cone square or compare it with ambient restriction on H(X).
+lem-trf-point-restriction-whole-roos-square vs lem-trf-point-transport-cone-comparison-descent: that node compares the strict quotient augmentation of a chosen K-flat complex P with its completed pullback via kappa_N. Our new lemma is the restriction square for arbitrary system complexes and BOTH coordinates of H(U_s M), with no chosen P, quotient augmentation, or completed-pullback kappa_N.
+lem-trf-point-restriction-whole-roos-square vs lem-trf-point-sections-completion-cone: its general clause gives c_X natural for sheaf-module tower maps, while u here is a transformation after sections, not an ambient sheaf-module map X to F_r X. Our square identifies it with point restriction on the entire ambient cone and localizes I; this is not that clause's one-line specialization.
+lem-trf-point-restriction-whole-roos-square vs def-trf-point-sections-roos-comparison: the definition pins the section/cone comparison by its two projections. It does not prove equality between H(u) and the point-restriction construction.
+lem-trf-point-restriction-whole-roos-square vs lem-weil-strict-roos-comparison: the existing node computes total limit and proves its naturality for strict tower maps, but does not identify point restriction on ambient products with u and prove the simultaneous square. Its normalized eta naturality is reused.
+
+## Review by Q130
+
+I checked both new statements and the parent against delivery-errors B–E, not just the shape of their JSON. Both new nodes introduce the field/coefficient datum, completed sheaf, strict quotient-linear system category, functors, transitions, signed differential and actual maps. They carry no proof steps or proof dependencies, and do not refer to the parent for their meaning. Derived comparisons are statements in the full derived categories, not merely per-degree cohomology assertions. The first fixes a and zeta by formulas and both product coordinates; the second fixes a strict chain square before localizing, so there is no unproved assertion that evaluation detects equality of derived morphisms.
+
+For the source of the first new node I read the blueprint places just named and the statements of lem-coef-derived-system-evaluation-calculus, def-weil-inverse-image-pullback-comparison, lem-weil-proetale-isomorphism-inverse-image, def-trf-coefficient-tower-operations, lem-weil-point-proetale-sections-exact, lem-weil-proetale-countable-products-exact, lem-weil-strict-roos-comparison, lem-weil-pbc-ringed-strict-tower-homotopy-limit and lem-cbc-exact-product-functor-strict-limit. The inverse-image comparison explicitly states pi_n c_hat = c_n F(pi_n); the site lemma gives exact reindexing; the point lemma gives exactness for ANY coefficient sheaf; the product lemma explicitly gives sectionwise exact countable products. Restricting sections to R preserves the underlying groups. Products in R-Mod are exact by coordinatewise lifts of tuples in surjection targets, so the generic theorem's two AB4* hypotheses hold; R-Mod is modules on the one-object trivial site. The generic comparison theorem explicitly fixes the entire limit cone, both summands, normalization and resolution independence. I recomputed Jd(b,a)=(da,db+(1-s)a)=dJ(b,a); this sends (0,gamma z) to (gamma z,0), preserving the claimed normalization and diagonal maps.
+
+For the second new node I read the same blueprint integral-limit sentence, the actual point-transport recipe, lem-trf-point-system-transport-descent, lem-weil-point-automorphism-restriction-natural, and the normalized strict Roos statement. The descent statement explicitly gives t'_n u_(n+1)=u_n t_n, finite-level j_r, the completed scalar identity, strict chain naturality and the localized I. The existing ambient restriction node explicitly applies to every unbounded completed-module complex and every derived morphism. Thus it supplies the old step 6 extension without a false reliance on the constructible-only definition. Computing the nth coordinate gives u_n x_n-t'_n u_(n+1)x_(n+1)=u_n(x_n-t_n x_(n+1)); the signed differential then gives d(Pb,Pa)=(-Pdb-P(1-s)a,Pda). On both coordinates of the square, restriction in a sectionwise product is exactly coordinatewise restriction; finite direct sums are finite products. The normalized Roos theorem explicitly gives eta naturality for these actual strict tower maps. No normalized/Cartesian hypothesis on M, or derived completeness of its realization, is used.
+
+Parent step 1 cites the first new statement: it expressly supplies the scalar-compatible identification, theta/eta/kappa maps, the formulas and all normalization claims taken there. Step 2 cites the second new statement: it expressly supplies the diagonal/transition identities, the cone square, the eta equation and ambient localized sigma. Step 3 cites both: I checked the source and target of each composite, substituted the square in zeta_G Rlim(I), and used sigma_H(X) T(theta_X)=T(F theta_X) sigma_L(C). Cancelling consecutive inverse comparisons gives T(a) sigma zeta in the requested order. This is the elementary assembly left in the parent, not an appeal to a further unanalyzed comparison lemma. citations.json quotes the actual new conclusions for all four step/node pairs, each checked as a literal substring.
+
+Edge cases: for the zero tower all maps are the unique maps on zero. For zero transitions, 1-s=1 and the cones are contractible but the formulas still hold as chain maps, including shifted coordinates. For a constant identity tower, (1-s)P=P(1-s) holds coordinatewise and the normalized augmentation has precisely zero shifted component. For r=1 the same tensor unit and coefficient identities apply. Unbounded M is allowed because exact products, exact sections and the exact reindexing functor operate degreewise and then localize; no bounded resolution or spectral-sequence convergence is invoked. Noncomplete ambient N is covered by the existing unrestricted sigma statement; the argument never replaces N by its completion. n>=1 is reindexed from the implementation's n>=0 by n=i+1, as the descent node states. No edge-case change to the item statement is necessary.
+
+Every new-node Mathlib query was executed with msearch.py and its full returned output saved as *-search-*.txt. I read the hits. The first search found scalar-restriction associators and sheaf limits; the second found topological presheaf product-restriction equations, not our ringed pro-etale strict-system square. Loogle's additive cone isomorphism is generic and degreewise; I read MappingCone.lean lines 591–632 and Pretriangulated.lean lines 95–180. They provide cone machinery, not either whole-system theorem as a one-line specialization. No Mathlib leaf is claimed and no search has been invented. Both new nodes have two independent semantic phrasings before the no-match verdict.
+
+The original proof's longest step was 1007 characters; the repaired parent has no step over 2000, and its total is below 3000. The substantial old arguments are preserved below and assigned to the two new unsplit jobs. The jobs are deliberately incomplete at stage 1: their proofs belong to future workers; the current authorized delivery is the split. The required server preflight has passed; delivery is the remaining operational step.
+
+## Original arguments preserved for the new jobs
+
+The following is the full returned proof text, not a shortened substitute. Steps 1–4 belong to lem-trf-point-system-normalized-comparison-data; steps 5–7 belong to lem-trf-point-restriction-whole-roos-square; step 8 is now the parent's explicit assembly. Cited support statements remain existing nodes; their text was read as described above. A future worker can start either new node without having to rediscover the old argument.
+
+### Original step 1 → lem-trf-point-system-normalized-comparison-data
+
+Fix $r\geq1$ and a complex $M$ of strict systems representing $C$. Put $X=U_sM$ and $Y=U_sG_rM$. The scalar identity $\pi_nc_{\widehat R}=c_nF_r(\pi_n)$ identifies $Y$ with the levelwise image $F_rX$, through the specified $j_{r,M_n}$, including its actual transitions. Indeed restriction of the $B_n$-action along $\pi_n$ before or after transport gives the same $\widehat R_s$-action by this identity. The site equivalence of [lem-weil-proetale-isomorphism-inverse-image] computes inverse image by $(F_rQ)(V,v)=Q(V,h^rv)$. Thus its canonical product comparison is an isomorphism, obtained by evaluating products at $(V,h^rv)$. Transport through the ring isomorphism of [def-weil-inverse-image-pullback-comparison] preserves this formula and exactness, also for completed modules. We therefore have an additive exact product-preserving functor $F_r$ on the ambient completed-module category, without any normalization hypothesis on $M$.
+
+Cited nodes: lem-coef-derived-system-evaluation-calculus, def-weil-inverse-image-pullback-comparison, lem-weil-proetale-isomorphism-inverse-image.
+
+### Original step 2 → lem-trf-point-system-normalized-comparison-data
+
+Let $T=\Gamma(s,-)$ with the $R$-action induced by constant sections. This is additive and exact by [lem-weil-point-proetale-sections-exact]. Sectionwise products from [lem-weil-proetale-countable-products-exact] give the canonical isomorphism $T(\prod Q_n)=\prod T(Q_n)$, with its ordinary projection maps. Restricting the resulting section modules to $R$ leaves their underlying groups, products and exactness unchanged. The levelwise functor $T^{\operatorname{Tow}}X$ is exactly $\Gamma_\bullet M$, with the same transitions, by [def-trf-coefficient-tower-operations]. Countable products are exact in the sheaf-module category by the cited product lemma. They are exact in $R$-modules as well: kernels and images of product maps are coordinatewise, and a tuple in a product of surjection targets lifts by choosing a preimage in each coordinate. In applying the general ringed-site comparison to $T$, ordinary $R$-modules are sheaf modules on the one-object site with the trivial topology.
+
+Cited nodes: lem-weil-point-proetale-sections-exact, lem-weil-proetale-countable-products-exact, def-trf-coefficient-tower-operations.
+
+### Original step 3 → lem-trf-point-system-normalized-comparison-data
+
+Use [lem-weil-strict-roos-comparison] for these strict towers, in the total-derived-limit sense of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], to write $\theta_X:\mathcal L_sC\xrightarrow{\sim}H(X)$ and $\eta_X:R\lim(T^{\operatorname{Tow}}X)\xrightarrow{\sim}H(T^{\operatorname{Tow}}X)$. The comparisons are natural for strict maps and descend to the derived tower category; their strict augmentation is $z\mapsto(0,(\gamma_nz)_n)$. To match the signed coordinates in [lem-cbc-exact-product-functor-strict-limit], use $J_X(b,a)=(a,-b)$. Direct computation gives $J_Xd(b,a)=(da,db+(1-s_X)a)=dJ_X(b,a)$ for its differential $d(x,y)=(dx,(1-s_X)x-dy)$. The augmentation becomes $((\gamma_nz)_n,0)$, exactly its normalization. Conjugating a diagonal product comparison by $J$ leaves it diagonal with the same comparison on both coordinates.
+
+Cited nodes: lem-weil-strict-roos-comparison, lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-cbc-exact-product-functor-strict-limit.
+
+### Original step 4 → lem-trf-point-system-normalized-comparison-data
+
+Apply [lem-cbc-exact-product-functor-strict-limit] to $F_r$ and to $T$, whose hypotheses were checked in Steps 1 and 2. Write $\kappa^F_X:F_rH(X)\xrightarrow{\sim}H(Y)$ and $\kappa^T_X:T H(X)\xrightarrow{\sim}H(T^{\operatorname{Tow}}X)$ for their diagonal product comparisons. The specified maps are
+$$a_{r,C}=\theta_Y^{-1}\kappa^F_XF_r(\theta_X),\qquad \zeta_C=T(\theta_X^{-1})(\kappa^T_X)^{-1}\eta_X.$$
+These have the asserted sources and targets because $Y=U_sG_rM$. The lemma identifies these particular maps with comparison of the entire ordinary limit cone on tower resolutions, independently of the resolutions. It supplies naturality, invertibility and the zero-shifted-coordinate augmentation normalization, rather than just the existence of an unspecified isomorphism. Step 3 puts its formula in precisely the coordinates required here.
+
+Cited nodes: lem-cbc-exact-product-functor-strict-limit, lem-coef-derived-system-evaluation-calculus.
+
+### Original step 5 → lem-trf-point-restriction-whole-roos-square
+
+By [lem-trf-point-system-transport-descent], $u=u_{r,M}$ is a strict chain map $T^{\operatorname{Tow}}X\to T^{\operatorname{Tow}}Y$ representing $I_{r,C}$. Set $P=\prod_nu_{r,n}$ and write $t_n,t'_n$ for the source and target transitions after sections. The $n$th coordinate of $(1-s')P(x)$ is $u_{r,n}x_n-t'_nu_{r,n+1}x_{n+1}=u_{r,n}(x_n-t_nx_{n+1})$, since $t'_nu_{r,n+1}=u_{r,n}t_n$. Thus $(1-s')P=P(1-s)$. Together with $dP=Pd$ this gives
+$$d(Pb,Pa)=(-Pdb-P(1-s)a,Pda)=H(u)d(b,a).$$
+Consequently $H(u)(b,a)=(Pb,Pa)$ is the actual cone map, with no off-diagonal term. Naturality of the normalized comparison in [lem-weil-strict-roos-comparison] identifies it with $R\lim(I_{r,C})$, namely $\eta_YR\lim(I_{r,C})=H(u)\eta_X$.
+
+Cited nodes: lem-trf-point-system-transport-descent, lem-weil-strict-roos-comparison.
+
+### Original step 6 → lem-trf-point-restriction-whole-roos-square
+
+The recipe of [def-weil-frobenius-point-transport] makes sense termwise for every completed-module complex $K$. In the reindexing description of [lem-weil-proetale-isomorphism-inverse-image], its colimit insertion and sheafification identify $\sigma_{r,K}$ with restriction $K(s,\mathrm{id})\to K(s,h^r)$. This is the same identification of the inverse-image recipe used in [lem-trf-point-system-transport-descent]; it applies to any sheaf, independently of boundedness. It is $R$-linear: restriction of a constant $a\in R$ is the same constant after the coefficient identification, as can be checked after every $\pi_n$ using $\pi_nc_{\widehat R}=c_nF_r(\pi_n)$. For any sheaf-module map $f:K\to K'$, the presheaf identity $f_{(s,h^r)}\operatorname{res}_{h^r}=\operatorname{res}_{h^r}f_{(s,\mathrm{id})}$ proves naturality, and for $f=d^i$ proves the chain-map identity. Exactness of $T$ and $F_r$ therefore localizes this natural transformation to all ambient derived complexes, including $\mathcal L_sC$.
+
+Cited nodes: def-weil-frobenius-point-transport, lem-weil-proetale-isomorphism-inverse-image, lem-trf-point-system-transport-descent, def-weil-inverse-image-pullback-comparison, lem-weil-point-proetale-sections-exact, def-weil-abstract-derived-category.
+
+### Original step 7 → lem-trf-point-restriction-whole-roos-square
+
+Put $Z=H(X)$. The preceding restriction formula and the defining projection equations for the product comparisons give the chain-map equality
+$$(\kappa^T_Y)^{-1}H(u)=T(\kappa^F_X)\sigma_{r,Z}(\kappa^T_X)^{-1}.$$
+Indeed take a pair $(b,a)$ of tuples of sections. On the left, its two coordinates are $(u_{r,n}b_n)_n$ and $(u_{r,n}a_n)_n$, interpreted as sections of the corresponding products. On the right, restriction on $Z^i=(\prod X_n^{i-1})\oplus(\prod X_n^i)$ is $(b,a)\mapsto((b_n|_{h^r})_n,(a_n|_{h^r})_n)$: restrictions in a sectionwise product are coordinatewise, and a finite direct sum is a finite product. The product comparison for $F_r$ and the finite-level identifications $j_r$ turn these coordinates into the same $u_{r,n}b_n,u_{r,n}a_n$ by [lem-trf-point-system-transport-descent]. Equality holds in each degree of the full cone, not just after projection to individual derived evaluations.
+
+Cited nodes: lem-trf-point-system-transport-descent, lem-weil-proetale-countable-products-exact.
+
+### Original step 8 → parent assembly
+
+Combine the chain-map equality in Step 7, the equation $\eta_YR\lim(I_{r,C})=H(u)\eta_X$ in Step 5, and the formulas of Step 4. Naturality of $\sigma$ for $\theta_X:\mathcal L_sC\to H(X)$ gives $\sigma_{r,H(X)}T(\theta_X)=T(F_r\theta_X)\sigma_{r,\mathcal L_sC}$. Substitution and cancellation of the consecutive inverse comparisons yield
+$$\zeta_{G_rC}R\lim(I_{r,C})=T(a_{r,C})\sigma_{r,\mathcal L_sC}\zeta_C.$$
+The normalized Roos comparisons descend by [lem-weil-strict-roos-comparison], and $u$ descends naturally by [lem-trf-point-system-transport-descent]. Every construction used is natural for strict chain maps; it consequently commutes with inverted quasi-isomorphisms and with their composites, hence with all morphisms of $D(\mathscr S_s)$. This also proves independence of the representative $M$. No step used completeness, cartesianness, constructibility, boundedness or a Tor-amplitude bound on $C$ or $\mathcal L_sC$.
+
+Cited nodes: lem-weil-strict-roos-comparison, lem-trf-point-system-transport-descent, def-weil-abstract-derived-category.
+
+## Validation
+
+The required deliver.py --no-push invocation exited 0 and printed preflight passed at 0420b748b17. This runs the server DAG/split/preflight checks; no local DAG checker or Lean compiler was run. The final report is rechecked before pushing.

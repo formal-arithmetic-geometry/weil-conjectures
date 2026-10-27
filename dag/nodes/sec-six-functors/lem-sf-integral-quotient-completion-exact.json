@@ -1,0 +1,221 @@
+{
+ "id": "lem-sf-integral-quotient-completion-exact",
+ "kind": "statement",
+ "title": "Exact normalized quotient completion with its shift-compatible unit",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbb Q_\\ell$ [def-weil-l-adic-coefficient-extension], and a quasi-compact quasi-separated scheme $T$ on which $\\ell$ is invertible [def-pc-scheme, def-weil-quasi-separated-morphism]. On its small pro-etale site [def-weil-pbc-proetale-site] let $B_T=\\varprojlim_n(\\mathcal O_E/\\varpi^{n+1})_T$ [def-weil-completed-integral-coefficients]. In the derived category of $B_T$-module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], let $C_T$ and $\\eta$ be exactly the normalized quotient-Roos completion and its augmentation of [def-pur-integral-derived-operations], using restriction of scalars [def-pc-sheaf-restrict-scalars] and the strict mapping fibre [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Then $C_T$ is additive and admits coherent integer shifts for which it is triangulated and $\\eta:\\mathrm{id}\\to C_T$ commutes with shifts. The site and coefficient universes are independent. No completeness assertion about any object is assumed or concluded.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XN and 05SE, with 014A, 014E and 08TC; parent lem-fix-bounded-projective-tensor-complete proof steps 3-5."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof": [
+  {
+   "text": "Use the additive quotient Roos functor on the homotopy category, with coherent exact shifts and the normalized zero-second-coordinate augmentation. This is the purely homotopy-level part; it requires neither K-flat resolutions nor a derived completion.",
+   "uses": [
+    "lem-sf-integral-quotient-roos-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XN and 05SE, resolving-class derived functors; Tags 014E, 011G and 08TC for the native quotient Roos functor."
+   }
+  },
+  {
+   "text": "For the resolving class take homotopy classes represented by K-flat complexes whose terms are flat on the site. K-flat resolutions give a quasi-isomorphism from such an object to every homotopy object. Convert tensor flatness to site flatness with siteSheafTensorRightIso. Fullness of the homotopy quotient and the already proved roosGoodInverts show that the native homotopy functor inverts quasi-isomorphisms between these representatives. Apply leftDerived_from_resolvingClass.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pur-site-sheaf-tensor-presentation-data",
+    "def-pur-integral-derived-operations",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XN and 05SE, resolving-class derived functors; Tags 014E, 011G and 08TC for the native quotient Roos functor."
+   }
+  },
+  {
+   "text": "Use rightKanExtension_coherentShift to choose the derived shifts whose counit commutes with shifts. Quasi-isomorphisms form a saturated triangulated multiplicative system. Resolving-class essential constancy supplies derived definedness everywhere. leftDerived_kan_map_source_distinguished proves source-triangle exactness for precisely these shifts; localization of arrows and isTriangulated_of_precomp give derived exactness.",
+   "uses": [
+    "lem-pur-right-kan-extension-coherent-shift",
+    "lem-pur-quasi-isos-saturated-triangulated",
+    "lem-pur-resolving-class-essential-constancy",
+    "lem-pur-left-derived-kan-source-triangles",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XN and 05SE, resolving-class derived functors; Tags 014E, 011G and 08TC for the native quotient Roos functor."
+   }
+  },
+  {
+   "text": "On good complexes, compose the derived counit with the native comparison. The counit is invertible there. completion_exists uniquely identifies the derived functor with the specified completion; transport shifts and exactness along this isomorphism. Additivity follows from exactness.",
+   "uses": [
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XN and 05SE, resolving-class derived functors; Tags 014E, 011G and 08TC for the native quotient Roos functor."
+   }
+  },
+  {
+   "text": "Lift the native augmentation from the identity through the right Kan extension. To prove shift compatibility, postcompose both candidate shift equations with the shifted counit. Postcomposition by a shift equivalence preserves the Kan property; its uniqueness detects equality. Naturality, the counit shift equation, and native augmentation compatibility prove the equality. Finally completionUnit_existsUnique identifies the transported lift with completionUnit by its prescribed normalization on good complexes.",
+   "uses": [
+    "lem-sf-integral-quotient-roos-homotopy",
+    "lem-pur-right-kan-extension-coherent-shift",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XN and 05SE, resolving-class derived functors; Tags 014E, 011G and 08TC for the native quotient Roos functor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-quotient-roos-homotopy",
+  "lem-pc-kflat-resolution",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "def-pur-integral-derived-operations",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-right-kan-extension-coherent-shift",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-pur-resolving-class-essential-constancy",
+  "lem-pur-left-derived-kan-source-triangles",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XN and 05SE, resolving-class derived functors; Tags 014E, 011G and 08TC for the native quotient Roos functor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived quotient completion of sheaves is an exact additive triangulated functor with a shift compatible unit",
+   "results": "DerivedCategory.instIsTriangulated; Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; Functor.mapDerivedCategory; triangulated localization instances. These cover exact ordinary functors/localizations, not this nonexact quotient tensor followed by its normalized derived descent.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived inverse limit of quotient scalar extensions is an additive triangulated endofunctor and its quotient augmentation commutes with integer shifts",
+   "results": "DerivedCategory.Q/Qh/quotientCompQhIso CommShift instances and mapDerivedCategory shift instance; no normalized quotient completion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*(Additive|CommShift|IsTriangulated)|IsIso.*completionUnit, Mathlib source",
+   "results": "Normed-group and nonarchimedean additive completions; no quotient-Roos sheaf completion or normalized derived unit.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"IsTriangulated\"",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.commShift, Mathlib.CategoryTheory.Triangulated.Adjunction. This supplies an adjunction API, not the specified quotient completion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-fix-bounded-projective-tensor-complete",
+  "date": "2026-10-24",
+  "group": "D9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof paragraph beginning For an admissible exceptional adjoint, evaluation ordinary-to-completed tensor comparison: exact completion and its canonical augmentation.",
+   "via": [
+    "lem-fix-bounded-projective-tensor-complete",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralQuotientCompletionExact",
+  "declaration": "WeilConjectures.integralQuotientCompletion_exact",
+  "file": "lean/Sheaf/Paper/IntegralQuotientCompletionExact.lean",
+  "statement": "theorem integralQuotientCompletion_exact\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (T : AlgebraicGeometry.Scheme.{t}) [CompactSpace T] [QuasiSeparatedSpace T]\n    (_hl : ∀ x : T, IsUnit (l : T.residueField x)) :\n    (completion l E T none).Additive ∧\n      ∃ (_ : (completion l E T none).CommShift ℤ),\n        (completion l E T none).IsTriangulated ∧\n          NatTrans.CommShift (completionUnit l E T none) ℤ",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "D9",
+  "date": "2026-10-24"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sf-integral-quotient-completion-exact",
+  "worker": "stage3",
+  "summary": "Separate source result extracted from the completion structure part of bounded-projective tensor completeness; no definition or target signature changes.",
+  "blueprint": "The completion structure used in the ordinary-to-completed tensor comparison for evaluation.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-roos-cone-calculus",
+    "why": "The existing generic homological algebra result is used with the actual completed coefficient module sheaves; it does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-tensor-mapping-cone-iso",
+    "why": "The existing generic homological algebra result is used with the actual completed coefficient module sheaves; it does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "The existing generic homological algebra result is used with the actual completed coefficient module sheaves; it does not replace the unit route."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "The existing generic homological algebra result is used with the actual completed coefficient module sheaves; it does not replace the unit route."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "The existing generic homological algebra result is used with the actual completed coefficient module sheaves; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "The existing generic homological algebra result is used with the actual completed coefficient module sheaves; it does not replace the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261024T204542-L-3793492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261027T021344-L-2761123",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

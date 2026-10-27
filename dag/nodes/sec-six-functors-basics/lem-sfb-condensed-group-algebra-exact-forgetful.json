@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-condensed-group-algebra-exact-forgetful",
+ "kind": "statement",
+ "title": "Internal group-algebra actions and exactness of the forgetful functor",
+ "statement": "Let $A$ be a commutative condensed ring on a small coherent site of profinite sets with finite jointly surjective coverings [sk-def-sfb-condensed-ring, def-weil-size-convention]. Work in internal $A$-modules [sk-def-sfb-module-objects], with internal relative tensor [def-sfb-modobj-relative-tensor]. Write $A[X]$ for the free internal module on a condensed set $X$, with its canonical generalized generators $[x]$, as in [def-sfb-condensed-free-module-adjunction]. Let $G$ be a profinite group and $\\underline G(S)=C(S,G)$ its condensed group. Let $\\mathcal A_G(A)$ be the category of natural $A(S)$-linear $C(S,G)$-actions on section modules and equivariant internal-module maps [def-sfb-condensed-action-module]. The internal module $B=A[\\underline G]$ has a monoid-object structure in internal $A$-modules, with multiplication and unit\n$$[g]\\otimes[h]\\longmapsto[gh],\\qquad 1\\longmapsto[1].$$\nIt need not be commutative. There is an equivalence\n$$\\mathcal A_G(A)\\simeq\\operatorname{Mod}_B(\\operatorname{Mod}_A),$$\nwhere the right side means module objects for this monoid [sk-def-sfb-module-objects], and the equivalence commutes with forgetting to internal $A$-modules. It sends the sectionwise action $gm$ to the unique internal $B$-action extending $[g]\\otimes m\\mapsto gm$; conversely it restricts a $B$-action to the canonical generators. More precisely, for every profinite $S$, the natural bilinear map\n$$A(S)[C(S,G)]\\times M(S)\\longrightarrow M(S),\\qquad (\\sum a_g[g],m)\\longmapsto\\sum a_g(gm)$$\nextends uniquely through module sheafification to the bilinear sheaf action, hence to $B\\otimes_A M\\to M$. This characterization does not require global finite-generator expressions for sections of $B$.\nThe category $\\mathcal A_G(A)$ is abelian. Its forgetful functor creates kernels, cokernels and images, with uniquely induced actions on the underlying subobjects and quotients. An equivariant complex is exact, including epimorphic augmentation, if and only if its underlying internal-module complex is exact.\nFor a condensed set $X$ with an internal $\\underline G$-action, linearization gives the action $[g]\\otimes[x]\\mapsto[gx]$ on $A[X]$. An equivariant map $u:X\\to Y$ induces an equivariant $A[u]$, and equivariance of a map from $A[X]$ is detected on generalized generators. If an internal module $T$ has trivial action, tensoring an equivariant module with $T$ gives the natural action $g(m\\otimes t)=(gm)\\otimes t$; equivariant maps tensor to equivariant maps and the resulting tensor functor is additive.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: extracted internal bar input. Former proof steps 3, 7-8: linearization of actions, internal group-algebra module equivalence, and creation of equivariant kernels/cokernels/images; the tensor-action portion of former step 9. Agent-formulated internal argument; independent reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-condensed-free-module-adjunction",
+  "def-sfb-condensed-action-module",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=\\underline G$. It is a sheaf of groups by [lem-sfb-condensed-action-injective-infrastructure]. Apply [lem-sfb-condensed-free-linearization-tensor] to $K\\times K\\to K$ and $1\\to K$: the composites $B\\otimes_A B\\cong A[K\\times K]\\to A[K]=B$ and $A\\cong A[1]\\to B$ define multiplication and unit. Their formulas are $[g]\\otimes[h]\\mapsto[gh]$ and $1\\mapsto[1]$. Under the cited associator and unitor comparisons, the two associativity maps send $[g]\\otimes[h]\\otimes[k]$ respectively to $[(gh)k]$ and $[g(hk)]$; these agree by the group law. The unit maps similarly send $[g]$ to $[1g]=[g]=[g1]$. Detection on generators in the same lemma proves the monoid laws. No commutativity of $G$ was used.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure",
+    "lem-sfb-condensed-free-linearization-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), internal group-algebra construction; agent expansion of the extracted bar input"
+   }
+  },
+  {
+   "text": "Let $M$ have the natural sectionwise action in [def-sfb-condensed-action-module]. Write $F_K(S)=A(S)[K(S)]$. Define $b_S(\\sum a_g[g],m)=\\sum a_g(gm)$. This is $A(S)$-bilinear because each $g$ acts linearly; restriction compatibility follows from the naturality of the given action. By [lem-sfb-condensed-free-linearization-tensor], $F_K^\\#=E_A(B)$. Apply [lem-pc-sites-module-sheafification-bilinear-extension] with $\\mathcal O=A$, $\\mathcal F=F_K$, and $\\mathcal G=\\mathcal H=E_A(M)$ (the latter already sheaves). It extends $b$ uniquely to a bilinear sheaf map $E_A(B)\\times E_A(M)\\to E_A(M)$. The tensor universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] and the pure-tensor comparison [lem-pe-internal-section-tensor-comparison] therefore give a unique internal map $\\gamma:B\\otimes_A M\\to M$ with $\\gamma([g]\\otimes m)=gm$. This is an extension from the free presheaf, not a claim that every section of $B$ is a finite sum of global generators.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "lem-sfb-condensed-free-linearization-tensor",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW (lemma-sheafification-tensor), bilinear extension and tensor universal property in Section 03EK; application to the internal action"
+   }
+  },
+  {
+   "text": "Use $B\\otimes_A B\\cong A[K\\times K]$ from [lem-sfb-condensed-free-linearization-tensor] to identify the source of the two module-associativity maps with $A[K\\times K]\\otimes_A M$, via associators. On the free presheaf $F_{K\\times K}(S)$ paired with $E_A(M)(S)$, both maps send $[(g,h)],m$ to $(gh)m=g(hm)$. Linearity then gives equality for every finite sum $\\sum c_{g,h}[(g,h)]$. Uniqueness in [lem-pc-sites-module-sheafification-bilinear-extension], applied to $F_{K\\times K}$ and $E_A(M)$, proves equality of the two associated bilinear sheaf maps; the injectivity of the bijection $\\operatorname{Hom}_A(\\mathcal F\\otimes_A\\mathcal G,\\mathcal H)\\cong\\mathrm{Bilin}_A(\\mathcal F\\times\\mathcal G,\\mathcal H)$ of [lem-pc-sites-sheaf-tensor-bilinear-universal] then gives equality of the two maps on the sheafified tensor. The comparison [lem-pe-internal-section-tensor-comparison] respects associators, so this is exactly the internal module associativity axiom of [sk-def-sfb-module-objects]. For the unit, $b([1],m)=m$ on every section; the tensor unit comparison gives the internal unitality axiom. Thus the constructed map is a $B$-module action.",
+   "uses": [
+    "lem-sfb-condensed-free-linearization-tensor",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), verification of internal group-algebra action laws; agent expansion using the sheafification universal properties"
+   }
+  },
+  {
+   "text": "Conversely, for an internal $B$-module define $gm=\\gamma([g]\\otimes m)$. Internal linearity and naturality give $A(S)$-linearity and restriction compatibility. The module laws give $1m=m$ and $(gh)m=g(hm)$; the inverse operator is that of $g^{-1}$. These are the objects of [def-sfb-condensed-action-module]. Restricting an extended action returns its original values $gm$. Extending a restricted action returns the original $\\gamma$ by the bilinear extension uniqueness [lem-pc-sites-module-sheafification-bilinear-extension], the tensor universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] and the tensor comparison [lem-pe-internal-section-tensor-comparison]. For a map $f:M\\to N$, $B$-linearity implies $f(gm)=gf(m)$. Conversely this equation implies $f(\\sum a_g gm)=\\sum a_g gf(m)$, hence commutation with the entire extended action by the same uniqueness and the tensor universal property [lem-pc-sites-sheaf-tensor-bilinear-universal]. Thus both constructions act as the identity on underlying maps and give inverse functors, with identity unit and counit; they commute with forgetting to internal $A$-modules.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "sk-def-sfb-module-objects",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), inverse equivalence and its compatibility with the underlying internal module; agent argument"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-condensed-action-injective-infrastructure] with $R=A$, $J=G$: its hypotheses are exactly the fixed small coherent site, coefficient universe and commutative condensed ring here. It gives an abelian action category and states that forgetting action creates sectionwise kernels and sheafified sectionwise cokernels and detects exactness. In particular it supplies the required kernel and cokernel actions. They are uniquely determined by equivariance of the structure maps: the kernel inclusion is a monomorphism, so it determines the restricted action; the cokernel projection is an epimorphism of sheaves, so two actions agreeing after it agree after every local lift, hence agree. The latter assertion is sheaf-local, not surjectivity on sections.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), existing action-category infrastructure, abelianness and creation of kernels and cokernels"
+   }
+  },
+  {
+   "text": "For an equivariant $f$, take the kernel of its equivariant cokernel; by step 5 its underlying subobject is $\\ker(\\operatorname{coker}(Uf))=\\operatorname{im}(Uf)$, with its unique induced action. This is the image of $f$ in the abelian action category. The exactness detection of [lem-sfb-condensed-action-injective-infrastructure] therefore identifies the equality of image and kernel in each degree with the same equality after forgetting. An augmentation is epimorphic exactly when its cokernel is zero; creation of cokernels and detection of zero objects in the same cited statement prove this equivalence as well. These statements concern internal-module exactness, not sectionwise surjectivity.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), images and augmented exact complexes; elementary kernel-cokernel argument from the cited infrastructure"
+   }
+  },
+  {
+   "text": "For a condensed $G$-set $X$, give $F_X(S)=A(S)[X(S)]$ the action $g(\\sum a_x[x])=\\sum a_x[gx]$. It is natural, linear and satisfies $1[x]=[x]$ and $g(h[x])=[(gh)x]$. The sheafification reflector [lem-sfb-equivariant-module-sheafification-reflector] gives its unique action on $F_X^\\#$, which is $E_A(A[X])$ by [lem-sfb-condensed-free-linearization-tensor]. Step 2 translates this to $[g]\\otimes[x]\\mapsto[gx]$. If $u$ is equivariant then $A[u](g[x])=[u(gx)]=[gu(x)]=gA[u]([x])$; the reflector makes $A[u]$ equivariant after sheafification. For $f:A[X]\\to M$, the equivariance equation is equality of maps $A[K]\\otimes_A A[X]\\cong A[K\\times X]\\to M$. Generator detection in the free-linearization lemma says it is equivalent to $f([gx])=g f([x])$ for all generalized $g,x$.",
+   "uses": [
+    "lem-sfb-equivariant-module-sheafification-reflector",
+    "lem-sfb-condensed-free-linearization-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), linearization of actions and detection of equivariance on generalized generators; agent expansion"
+   }
+  },
+  {
+   "text": "Let $T$ have trivial action. On the presheaf $P(S)=E_A(M)(S)\\otimes_{A(S)}E_A(T)(S)$ define $g(m\\otimes t)=(gm)\\otimes t$. Balancedness follows from $g(am)=a(gm)$; restriction naturality and the group laws follow on pure tensors, which generate each presheaf tensor module. Apply [lem-sfb-equivariant-module-sheafification-reflector] to obtain the action on $P^\\#$. By [lem-pe-internal-section-tensor-comparison] this is the required underlying internal tensor $M\\otimes_A T$. If $f$ is equivariant, $f\\otimes1$ commutes with $g$ on each presheaf pure tensor, so its sheafification is equivariant by the reflector. Finally $((f+f')\\otimes1)(m\\otimes t)=f(m)\\otimes t+f'(m)\\otimes t$ and $(0\\otimes1)(m\\otimes t)=0$. The bilinear universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] extends these equalities to tensor sheaves. Thus the resulting functor is additive. The identical calculation with an equivariant map in the trivially acted-on factor proves the two-variable map assertion.",
+   "uses": [
+    "lem-sfb-equivariant-module-sheafification-reflector",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), tensoring actions with a trivial factor; Section 03EK sheafified tensor construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-action-injective-infrastructure",
+  "lem-sfb-condensed-free-linearization-tensor",
+  "def-sfb-condensed-action-module",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pe-internal-section-tensor-comparison",
+  "sk-def-sfb-module-objects",
+  "lem-sfb-equivariant-module-sheafification-reflector"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), internal bar input; explicit sheafification argument using Stacks 0GMW/03EK and existing action infrastructure"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant internal modules for a condensed group are modules over its internal group algebra and forgetting actions creates kernels and cokernels",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [Ring R] → Type (u + 2)\", \"doc\": \"The category of condensed modules over a ring $ R $, defined as the category of sheaves on the site of compact Hausdorff spaces equipped with the coherent Grothendieck topology, taking values in the c\"}\n  {\"name\": \"instAbelianCondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ forms an abelian category. This follows from the fact that the category of sheaves on the site of compact Hausdorff spaces with the coh\"}\n  {\"name\": \"CondensedMod.LocallyConstant.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor (ModuleCat R) (CondensedMod R)\", \"doc\": \"A functor from the category of $ R $-modules to the category of condensed modules over $ R $, which assigns to each $ R $-module $ X $ the sheaf that maps a compact Hausdorff-like space $ S $ to the $\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ {P : TopCat → Prop} (R : Type (max u w)) [inst : Ring R] (X : ModuleCat R) (x : (CompHausLike P)ᵒᵖ),\\n  (((CompHausLike.LocallyConstantModule.functorToPresheaves R).obj X).obj x).isModule = LocallyConstant.instModule\", \"doc\": \"For any ring $R$ and compact Hausdorff-like space $S$, the module structure on the presheaf of locally constant functions $S \\to X$ induced by the functor coincides with the canonical $R$-module struct\"}\n  {\"name\": \"CondensedMod.LocallyConstant.functorToPresheaves\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] → CategoryTheory.Functor (ModuleCat R) (CategoryTheory.Functor CompHausᵒᵖ (ModuleCat R))\", \"doc\": \"For a ring $ R $, this defines a functor from the category of $ R $-modules to the category of presheaves on the opposite category of compact Hausdorff spaces. For each $ R $-module $ X $, the preshea\"}\n  {\"name\": \"LightCondMod.LocallyConstant.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → CategoryTheory.Functor (ModuleCat R) (LightCondMod R)\", \"doc\": \"The functor that maps each left $ R $-module to the light condensed $ R $-module of locally constant functions on light profinite spaces, with morphisms induced by precomposition. This constructs shea\"}\n  {\"name\": \"CondensedMod.ofSheafCompHaus\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor CompHausᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\\\mathrm{CompHaus}^{\\\\mathrm{op}} \\\\to \\\\mathrm{ModuleCat}\\\\, R $ that preserves finite products and satisfies the equalizer condition for the regular topology, $ F $ defines a sheaf w\"}\n  {\"name\": \"instAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → CategoryTheory.Abelian (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules forms an abelian category. This follows from the fact that the category of sheaves on the site of light profinite spaces (equipped wit\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: CondensedMod and its abelian instance concern coefficients in an ordinary ring and do not construct the internal sheafified group algebra or its module equivalence. Rep.linearizationOfMulActionIso (Mathlib/RepresentationTheory/Rep/Basic.lean:1037) concerns an abstract group acting on ordinary modules. SheafOfModules.forget_obj is only the underlying presheaf. No hit gives natural C(S,G)-actions as B-module objects with exactness creation over a variable condensed ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Modules with an internal group action in sheaves are equivalent to modules over the sheafified group algebra and exactness is detected by the forgetful functor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.forget_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  (R : CategoryTheory.Sheaf J RingCat) (F : SheafOfModules R), (SheafOfModules.forget R).obj F = F.val\", \"doc\": \"The forgetful functor sends each sheaf of modules over a sheaf of rings $ R $ to its underlying presheaf of modules over the presheaf of rings $ R $, effectively disregarding the sheaf condition. For \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.toPresheafOfModules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": X.Modules ⥤ X.PresheafOfModules\", \"doc\": \"The functor that sends each sheaf of modules over the structure sheaf of a scheme $X$ to its underlying presheaf of modules, and each sheaf homomorphism to its underlying presheaf morphism, effectivel\"}\n  {\"name\": \"SheafOfModules.forgetToSheafModuleCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"(X : Cᵒᵖ) (hX : Limits.IsInitial X) : SheafOfModules.{w} R ⥤ Sheaf J (ModuleCat.{w} (R.1.obj X))\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and an initial object $X$ in $\\\\mathcal{C}^\\\\text{op}$, this functor maps a sheaf of modules $M$ o\"}\n  {\"name\": \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \"{P : PresheafOfModules.{v} R₀} {F : SheafOfModules.{v} R}\\n  (g : P ⟶ (restrictScalars α).obj ((SheafOfModules.forget _).obj F)) :\\n  (SheafOfModules.toSheaf _).map ((sheafificationHomEquiv α).symm g) =\\n    (((sheafificationAdjunction J AddCommGrpCat).homEquiv P.presheaf ((SheafOfModules.toSheaf R).ob\", \"doc\": \"For a presheaf of modules $ M_0 $ over a presheaf of rings $ R_0 $, a sheaf of modules $ F $ over the sheafified ring $ R $, and a ring homomorphism $ \\\\alpha: R_0 \\\\to R $, the canonical bijection betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (toPresheaf X).ReflectsIsomorphisms\", \"doc\": \"The forgetful functor from the category of sheaves of modules over the structure sheaf of a scheme $ X $ to the category of presheaves of abelian groups reflects isomorphisms. That is, a morphism of s\"}\n  {\"name\": \"PresheafOfModules.sheafify\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify\", \"type\": \": SheafOfModules.{v} R\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, this constructs the sheafification of $M_0$ as a sheaf of modules over the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \"{P : PresheafOfModules.{v} R₀} {F : SheafOfModules.{v} R} (f : (sheafification α).obj P ⟶ F) :\\n  (toPresheaf R₀).map (sheafificationHomEquiv α f) =\\n    CategoryTheory.toSheafify J P.presheaf ≫ (toPresheaf R.val).map f.val\", \"doc\": \"For a presheaf of modules $ P $ over a presheaf of rings $ R_0 $, a sheaf of modules $ F $ over the sheafified ring $ R $, and a natural transformation $ \\\\alpha: R_0 \\\\to R $, the forgetful functor fro\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: CondensedMod and its abelian instance concern coefficients in an ordinary ring and do not construct the internal sheafified group algebra or its module equivalence. Rep.linearizationOfMulActionIso (Mathlib/RepresentationTheory/Rep/Basic.lean:1037) concerns an abstract group acting on ordinary modules. SheafOfModules.forget_obj is only the underlying presheaf. No hit gives natural C(S,G)-actions as B-module objects with exactness creation over a variable condensed ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod\", \"forget\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SemimoduleCat.instReflectsIsomorphismsForgetLinearMapIdCarrier\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Semi\", \"type\": \" {R : Type u} [Semiring R] : (CategoryTheory.forget (SemimoduleCat R)).ReflectsIsomorphisms\", \"doc\": \"\"}\n  {\"name\": \"SemimoduleCat.forget_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Semi\", \"type\": \" (R : Type u) [Semiring R] {M : SemimoduleCat R} : (CategoryTheory.forget (SemimoduleCat R)).obj M = ↑M\", \"doc\": \"\"}\n  {\"name\": \"SemimoduleCat.hasForgetToAddCommMonoid\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Semi\", \"type\": \" (R : Type u) [Semiring R] : CategoryTheory.HasForget₂ (SemimoduleCat R) AddCommMonCat\", \"doc\": \"\"}\n  {\"name\": \"SemimoduleCat.instReflectsIsomorphismsAddCommMonCatForget₂LinearMapIdCarrierAddMonoidHomCarrier\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Semi\", \"type\": \" {R : Type u} [Semiring R] : (CategoryTheory.forget₂ (SemimoduleCat R) AddCommMonCat).ReflectsIsomorphisms\", \"doc\": \"\"}\n  {\"name\": \"SemimoduleCat.forget₂_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Semi\", \"type\": \" (R : Type u) [Semiring R] (X : SemimoduleCat R) : (CategoryTheory.forget₂ (SemimoduleCat R) AddCommMonCat).obj X = ↧↑X\", \"doc\": \"\"}\n  {\"name\": \"SemimoduleCat.forget₂_obj_moduleCat_of\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Semi\", \"type\": \" (R : Type u) [Semiring R] (X : Type v) [AddCommMonoid X] [Module R X] : (CategoryTheory.forget₂ (SemimoduleCat R) AddCommMonCat).obj ↧X = ↧X\", \"doc\": \"\"}\n  {\"name\": \"SemimoduleCat.forget₂_map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Semi\", \"type\": \" (R : Type u) [Semiring R] (X Y : SemimoduleCat R) (f : X ⟶ Y) : (CategoryTheory.forget₂ (SemimoduleCat R) AddCommMonCat).map f = AddCommMonCat.ofHom ↑(SemimoduleCat.Hom.hom f)\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.instReflectsIsomorphismsForgetLinearMapIdCarrier\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Basic\", \"type\": \" {R : Type u} [Ring R] : (CategoryTheory.forget (ModuleCat R)).ReflectsIsomorphisms\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.forget_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Basic\", \"type\": \" (R : Type u) [Ring R] {M : ModuleCat R} : (CategoryTheory.forget (ModuleCat R)).obj M = ↑M\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.hasForgetToAddCommGroup\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Basic\", \"type\": \" (R : Type u) [Ring R] : CategoryTheory.HasForget₂ (ModuleCat R) AddCommGrpCat\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.instReflectsIsomorphismsAddCommGrpCatForget₂LinearMapIdCarrierAddMonoidHomCarrier\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Basic\", \"type\": \" {R : Type u} [Ring R] : (CategoryTheory.forget₂ (ModuleCat R) AddCommGrpCat).ReflectsIsomorphisms\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.forget₂_addCommGrp_additive\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Basic\", \"type\": \" {R : Type u} [Ring R] : (CategoryTheory.forget₂ (ModuleCat R) AddCommGrpCat).Additive\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: CondensedMod and its abelian instance concern coefficients in an ordinary ring and do not construct the internal sheafified group algebra or its module equivalence. Rep.linearizationOfMulActionIso (Mathlib/RepresentationTheory/Rep/Basic.lean:1037) concerns an abstract group acting on ordinary modules. SheafOfModules.forget_obj is only the underlying presheaf. No hit gives natural C(S,G)-actions as B-module objects with exactness creation over a variable condensed ring."
+  },
+  {
+   "tool": "grep",
+   "query": "groupAlgebra|group.algebra|equivariant.*(kernel|exact)|preserves.*(Kernel|Cokernel)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: CondensedMod and its abelian instance concern coefficients in an ordinary ring and do not construct the internal sheafified group algebra or its module equivalence. Rep.linearizationOfMulActionIso (Mathlib/RepresentationTheory/Rep/Basic.lean:1037) concerns an abstract group acting on ordinary modules. SheafOfModules.forget_obj is only the underlying presheaf. No hit gives natural C(S,G)-actions as B-module objects with exactness creation over a variable condensed ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linearization of a group object acting on a sheaf of modules extends uniquely to an action of the free internal group ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.linearizationOfMulActionIso\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] →\\n    [inst_1 : Monoid G] →\\n      (H : Type u) →\\n        [inst_2 : MulAction G H] → (Rep.linearization k G).obj (Action.ofMulAction G H) ≅ Rep.ofMulAction k G H\", \"doc\": \"The linearization of the $G$-action on the module $H$ is naturally isomorphic to the representation of $G$ on $H$ constructed directly from the monoid action, where both constructions yield equivalent\"}\n  {\"name\": \"Rep.coe_linearization_obj\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Monoid G] (X : Action (Type u) G),\\n  ↑((Rep.linearization k G).obj X).V = (X.V →₀ k)\", \"doc\": \"For a monoid $ G $ and a ring $ k $, the linearization functor applied to a $ G $-action $ X $ yields the free $ k $-module generated by the underlying set $ X.V $, denoted as $ X.V \\to₀ k $.\"}\n  {\"name\": \"Rep.linearization_obj_ρ\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Monoid G] (X : Action (Type u) G) (g : G),\\n  ((Rep.linearization k G).obj X).ρ g = Finsupp.lmapDomain k k (X.ρ g)\", \"doc\": \"For a $ G $-action on a type $ X $, the linearized representation's action map $ \\\\rho $ for an element $ g \\\\in G $ is given by the linear extension of the original action's $ \\\\rho(g) $, realized as th\"}\n  {\"name\": \"Rep.linearization_map_hom\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Monoid G] {X Y : Action (Type u) G} (f : X ⟶ Y),\\n  ((Rep.linearization k G).map f).hom = ModuleCat.ofHom (Finsupp.lmapDomain k k f.hom)\", \"doc\": \"For a $ G $-equivariant map $ f $ between $ G $-actions, the linearization of $ f $ as a morphism in the category of representations is given by the $ k $-linear map obtained by extending $ f $ linear\"}\n  {\"name\": \"Rep.coe_linearization_obj_ρ\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Monoid G] (X : Action (Type u) G) (g : G),\\n  ((Rep.linearization k G).obj X).ρ g = Finsupp.lmapDomain k k (X.ρ g)\", \"doc\": \"For any monoid $ G $, commutative ring $ k $, and $ G $-action $ X $ on a type, the linearization of $ X $ as a $ k $-module with $ G $-action satisfies that the action map $ \\\\rho(g) $ for each $ g \\\\i\"}\n  {\"name\": \"Rep.linearization\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Monoid G] → CategoryTheory.Functor (Action (Type u) G) (Rep k G)\", \"doc\": \"The functor that sends a $ G $-action on a type $ X $ to the free $ k $-module generated by $ X $, equipped with the $ G $-action extended linearly, and sends a $ G $-equivariant map $ f : X \\\\to Y $ t\"}\n  {\"name\": \"Rep.linearization_map_hom_single\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Monoid G] {X Y : Action (Type u) G} (f : X ⟶ Y) (x : X.V) (r : k),\\n  (CategoryTheory.ConcreteCategory.hom ((Rep.linearization k G).map f).hom) (Finsupp.single x r) =\\n    Finsupp.single (f.hom x) r\", \"doc\": \"For a $ G $-equivariant map $ f : X \\to Y $, the linearization functor applied to $ f $ satisfies $ (\\\\text{linearization}(k,G).\\\\text{map}\\\\, f)(\\\\delta_x \\\\cdot r) = \\\\delta_{f(x)} \\\\cdot r $ for all $ x \\\\i\"}\n  {\"name\": \"Rep.freeLift_hom_single_single\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Monoid G] {α : Type u} {A : Rep k G} (f : α → ↑A.V) (i : α) (g : G)\\n  (r : k),\\n  (CategoryTheory.ConcreteCategory.hom (A.freeLift f).hom) (Finsupp.single i (Finsupp.single g r)) = r • (A.ρ g) (f i)\", \"doc\": \"For a commutative ring $ k $, monoid $ G $, type $ \\\\alpha $, representation $ A $ of $ G $ over $ k $, and function $ f : \\\\alpha \\\\to A $, the unique $ k $-linear $ G $-equivariant morphism $ \\\\text{Rep\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: CondensedMod and its abelian instance concern coefficients in an ordinary ring and do not construct the internal sheafified group algebra or its module equivalence. Rep.linearizationOfMulActionIso (Mathlib/RepresentationTheory/Rep/Basic.lean:1037) concerns an abstract group acting on ordinary modules. SheafOfModules.forget_obj is only the underlying presheaf. No hit gives natural C(S,G)-actions as B-module objects with exactness creation over a variable condensed ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal group actions on sheaves of modules are equivalent to modules over a sheafified group algebra with exact forgetful functor",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Sheafify.module\", \"PresheafOfModules.Sheafify.instUniqueSMulCandidate\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"PresheafOfModules.Sheafify.instSubsingletonSMulCandidate\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.sheafifyHomEquiv\", \"PresheafOfModules.sheafify\", \"PresheafOfModules.Sheafify.one_smul\"], \"digest\": \"01ea2cac293f4ef7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: source inspection of Rep.equivalenceModuleMonoidAlgebra (Mathlib/RepresentationTheory/Rep/Iso.lean:159) gives ordinary ring and abstract monoid representations, not a variable ring sheaf and internal group object; module sheafification hits do not state the item."
+  },
+  {
+   "tool": "grep",
+   "query": "groupAlgebra|group.algebra|MonoidAlgebra|Action.*[Ee]quivalence",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/InfiniteSum/DiscreteConvolution.lean\", \"Mathlib/Logic/Equiv/Pairwise.lean\", \"Mathlib/Algebra/Algebra/NonUnitalHom.lean\", \"Mathlib/NumberTheory/Height/MvPolynomial.lean\", \"Mathlib/NumberTheory/Height/MvPolynomial.lean\", \"Mathlib/NumberTheory/Height/MvPolynomial.lean\", \"Mathlib/NumberTheory/Height/MvPolynomial.lean\", \"Mathlib/NumberTheory/Height/MvPolynomial.lean\"], \"digest\": \"8c64bcdd90ef30e4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: source inspection of Rep.equivalenceModuleMonoidAlgebra (Mathlib/RepresentationTheory/Rep/Iso.lean:159) gives ordinary ring and abstract monoid representations, not a variable ring sheaf and internal group object; module sheafification hits do not state the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence of internal group representations in sheaves with modules over the free group algebra sheaf",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.finsuppLEquivFreeAsModule\", \"SheafOfModules.free\", \"SheafOfModules.freeHomEquiv\", \"SheafOfModules.ιFree\", \"Rep.unitIsoAddEquiv\", \"Representation.instAddCommGroupAsModuleFinsuppFree\", \"SheafOfModules.freeHomEquiv_freeMap\", \"SheafOfModules.Presentation.mk.injEq\"], \"digest\": \"6e685513de184e80\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: source inspection of Rep.equivalenceModuleMonoidAlgebra (Mathlib/RepresentationTheory/Rep/Iso.lean:159) gives ordinary ring and abstract monoid representations, not a variable ring sheaf and internal group object; module sheafification hits do not state the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Rep\", \"equivalence\"",
+   "results": "{\"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"FGModuleRepr.instIsEquivalenceFGModuleCatEmbed\", \"CategoryTheory.Subobject.instIsEquivalenceMonoOverRepresentative\", \"Rep.instIsEquivalenceActionModuleCatActionToRep\", \"Rep.instIsEquivalenceActionModuleCatRepToAction\", \"TopRep.instIsEquivalenceActionTopModuleCatFromActionTopModFunc\", \"TopRep.instIsEquivalenceActionTopModuleCatToActionTopModFunc\", \"Rep.equivalenceModuleMonoidAlgebra\", \"Rep.instIsEquivalenceModuleCatMonoidAlgebraOfModuleMonoidAlgebra\"], \"digest\": \"3990289c090c7156\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: source inspection of Rep.equivalenceModuleMonoidAlgebra (Mathlib/RepresentationTheory/Rep/Iso.lean:159) gives ordinary ring and abstract monoid representations, not a variable ring sheaf and internal group object; module sheafification hits do not state the item."
+  },
+  {
+   "tool": "grep",
+   "query": "equivalenceModuleMonoidAlgebra|def toModuleMonoidAlgebra|def ofModuleMonoidAlgebra",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/Basic.lean\", \"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"Mathlib/RepresentationTheory/Rep/Iso.lean\"], \"digest\": \"4cbcbf0eea20cc4a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: source inspection of Rep.equivalenceModuleMonoidAlgebra (Mathlib/RepresentationTheory/Rep/Iso.lean:159) gives ordinary ring and abstract monoid representations, not a variable ring sheaf and internal group object; module sheafification hits do not state the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representations of a group object in a ringed topos are modules over its internal monoid algebra",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.toModuleMonoidAlgebra\", \"Rep.ofModuleMonoidAlgebra\", \"Rep.ihom_obj_V_isModule\", \"instLinearRep\", \"Rep\", \"Rep.instModuleCarrierVModuleCat\", \"FDRep.instLinear\", \"FDRep\"], \"digest\": \"c89e1cc654411714\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: source inspection of Rep.equivalenceModuleMonoidAlgebra (Mathlib/RepresentationTheory/Rep/Iso.lean:159) gives ordinary ring and abstract monoid representations, not a variable ring sheaf and internal group object; module sheafification hits do not state the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-internal-bar-resolution",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image, formal internal bar input. Former proof steps 3, 7-8: linearization of actions, internal group-algebra module equivalence, and creation of equivariant kernels/cokernels/images; the tensor-action portion of former step 9. Agent-formulated internal argument; independent reference WANTED.",
+   "via": [
+    "lem-sfb-condensed-internal-bar-resolution",
+    "lem-sfb-condensed-derived-invariant-bar",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-condensed-group-algebra-exact-forgetful",
+  "worker": "stage1",
+  "summary": "Constructed the internal group algebra through the existing free-linearization tensor lemma; extended section actions through the existing bilinear sheafification interface and proved inverse functors. Reused action infrastructure for abelianness and exactness, and equivariant sheafification for linearization and trivial-factor tensor. Statement unchanged; no new nodes.",
+  "blueprint": "Paragraph (3) of the current direct-images proof: extracted internal bar input, former steps 3, 7-8 and tensor-action part of step 9. The inherited ancestor command returns null; no blueprint.is was fabricated.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic bilinear extension under module sheafification; needed to extend the action without global freeness."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic tensor universal property in module sheaves; turns the bilinear action into a tensor morphism."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic exact monoidal internal/section-module comparison, needed to identify the actual internal relative tensor."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pe-internal-section-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-7c129dc2c",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-7c129dc2c (reviewer sub-agent of L); spot-checked: I read the item in full: statement, eight steps, every cited statement and the Stacks source; the delivery has no new nodes. This is a first split: the item was created 2026-10-22 by O3 from lem-sfb-condensed-internal-bar-resolution, and no re-split note applies. The statement is unchanged and correct. B=A[underline G] is a monoid object, not necessarily commutative. Small cases checked: G=1 gives B=A; X empty, A=0 and T=0 give zero; a finite nonabelian G gives a noncommutative B. Step checks: Step 1 builds mu and eta from the A[X]xA[Y]=A[XxY] and A[1]=A identifications of free-linearization-tensor; the monoid laws follow by generator detection on A[K^3]. Step 2 applies bilinear-extension with O=A (already a sheaf), F=F_K and G=H=E_A(M); it does not need global generators of B. Step 3 gets (gh)m=g(hm) on F_{KxK}. Step 4 gives the inverse functor and morphism criterion. Steps 5-6 use action-injective-infrastructure with R=A, J=G: it creates kernels and cokernels, detects zero objects and exactness, and im=ker coker gives both directions of exactness; quotient-action uniqueness uses only local lifts. Step 7 applies the reflector (the small profinite site has finite limits, K is a sheaf of groups, A has trivial action) and detects equivariance on A[KxX]. Step 8 gives the tensor action, balanced because g is A(S)-linear, identified with the internal tensor through the pe comparison. Fault fixed (C1/C4): steps 3 and 4 went from equality of bilinear sheaf maps to equality of maps out of the sheaf tensor without citing lem-pc-sites-sheaf-tensor-bilinear-universal (Hom(F⊗G,H)=Bilin). It is now cited and written out in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-condensed-group-algebra-exact-forgetful.json; nothing else changed. Other checks: no cycle (the transitive closure reaches 299 nodes and not the item); no duplicate (tensor-induction, coset-induction and product-action-exact-forgetting do not state the B-module equivalence); no SGA source. Blueprint main-20261015 direct-images paragraph (3) has no group-algebra argument: proof_origin agent and from.node null are honest. Accepted tool_uses: the generic bilinear-extension, sheaf-tensor-universal and internal-section-tensor-comparison nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedGroupAlgebraExactForgetful",
+  "declaration": "Profinite.CondensedAction.GroupAlgebra.exists_algebraEquivalence",
+  "declarations": [
+   "Profinite.CondensedAction.GroupAlgebra.groupSet",
+   "Profinite.CondensedAction.GroupAlgebra.algebra",
+   "Profinite.CondensedAction.GroupAlgebra.freeGenerator",
+   "Profinite.CondensedAction.GroupAlgebra.groupGenerator",
+   "Profinite.CondensedAction.GroupAlgebra.AlgebraEquivalence",
+   "Profinite.CondensedAction.GroupAlgebra.action_extension",
+   "Profinite.CondensedAction.GroupAlgebra.scalars",
+   "Profinite.CondensedAction.GroupAlgebra.bilinear_extension",
+   "Profinite.CondensedAction.GroupAlgebra.exists_algebraEquivalence",
+   "Profinite.CondensedAction.GroupAlgebra.forget_additive",
+   "Profinite.CondensedAction.GroupAlgebra.exists_abelian",
+   "Profinite.CondensedAction.GroupAlgebra.creates_kernels_cokernels",
+   "Profinite.CondensedAction.GroupAlgebra.ImageLift",
+   "Profinite.CondensedAction.GroupAlgebra.creates_images",
+   "Profinite.CondensedAction.GroupAlgebra.induced_action_unique",
+   "Profinite.CondensedAction.GroupAlgebra.exact_iff",
+   "Profinite.CondensedAction.GroupAlgebra.linearization_exists",
+   "Profinite.CondensedAction.GroupAlgebra.equivariant_iff_on_generators",
+   "Profinite.CondensedAction.GroupAlgebra.linearization_map",
+   "Profinite.CondensedAction.GroupAlgebra.TensorActions",
+   "Profinite.CondensedAction.GroupAlgebra.exists_tensorActions"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CondensedGroupAlgebraExactForgetful.lean",
+  "statement": "theorem exists_algebraEquivalence : Nonempty (AlgebraEquivalence A G)",
+  "branch": "sheaf-dag",
+  "by": "Q102",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "All clauses are stated in the recorded declarations: normalized noncommutative internal monoid and equivalence, unique bilinear and tensor-action extensions, abelianness with the prescribed addition, creation of kernels/cokernels/images and unique induced actions, exactness and epimorphism detection, linearization and generator detection, and additive tensor actions. The helper structures specify normalized data; no data are selected from postponed existence theorems."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9b03e6e8",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Read item node, 7 stmt_dep records, CondensedActionModule and CondensedInternalBarResolution dependency source in side-live, and the delivered module in full. All clauses rendered and pinned: noncommutative MonObj on free A (groupSet G) fixed on generators; the equivalence ActionModule ≌ Mod (Modules A) B with an underlying iso to forgetAction and action fixed on [g]⊗m; ∃! action extension and ∃! natural bilinear section extension (generator, finite-sum and pure-tensor realization, no global-generator claim); abelian with the given preadditive structure; creation of kernels/cokernels/images; unique induced actions (mono/epi); exactness of ShortComplexes and Epi detected; linearization, generator detection, linearization of maps; TensorActions with underlying tensorRight T, action g(m⊗t)=(gm)⊗t, maps, additivity. No extra hypotheses; the universe u is explicit; edge cases G=1, nonabelian G, A=0, X=∅, n=0, non-flat T admitted. lean.statement verbatim, all 21 declarations listed, dependency records are the recorded owners, node unchanged except lean, not superseded live. Docstrings carry source place, blueprint id and proof steps; sorry only. Advisory: AlgebraEquivalence.inverse_action is implied by action (redundant). No compile (no file changed)."
+ }
+}

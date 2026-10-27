@@ -1,0 +1,294 @@
+{
+ "id": "lem-pur-transport-finite-counit-system",
+ "kind": "statement",
+ "title": "Finite purity as a normalized system of explicit adjunctions",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, and an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$ [def-pur-conventions]. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ smooth separated of pure relative dimension $d\\geq0$ [sk-def-sfb-dc-setting, def-sbc-smooth-morphisms]. Write $\\mathcal C_T(\\Lambda)=\\Dctf(T,\\Lambda)$ for the bounded constructible finite-Tor pro-etale condensed-module category [sk-def-sfb-constructible], $F_{f,\\Lambda}=Rf_{!,\\Lambda}$, $G_{f,\\Lambda}=f^!_\\Lambda$ with its specified restricted adjunction $F_{f,\\Lambda}\\dashv G_{f,\\Lambda}$ and counit $\\varepsilon_{f,\\Lambda}$ [sk-thm-existence], and $J_{f,\\Lambda}=f^*_\\Lambda(-)(d)[2d]$ with the Tate twists of [def-coefficient-twists-detailed].\n\nLet $A$ range over finite commutative rings killed by a power of $\\ell$, with finite-$A$ twists, inverse diagonal/DNC orientation and tensor-transpose maps $\\gamma^A:J_{f,A}\\xrightarrow{\\sim}G_{f,A}$ specified in [det-sp-finite-general-ring]. Finite module categories are compared with the condensed categories by the exact section-action derived equivalence of [sk-prop-sf-rf-shriek-preservation]. For $A\\to B$, use derived scalar extension $T^T_{A,B}$, the compact-support comparison $b_{A,B}:T^Y_{A,B}F_{f,A}\\xrightarrow{\\sim}F_{f,B}T^X_{A,B}$ and the exceptional comparison $c_{A,B}:T^X_{A,B}G_{f,A}\\xrightarrow{\\sim}G_{f,B}T^Y_{A,B}$ of [det-sp-reduction-compatibilities], and the canonical source comparison $a_{A,B}:T^X_{A,B}J_{f,A}\\xrightarrow{\\sim}J_{f,B}T^Y_{A,B}$.\n\nThe maps $t^A_K=\\varepsilon_{f,A,K}\\circ F_{f,A}(\\gamma^A_K)$ are counits of adjunctions $F_{f,A}\\dashv J_{f,A}$ on these same categories, independent of the exponent chosen to annihilate $A$. Under the specified comparisons,\n$$t^B_{K_B}\\circ F_{f,B}(a_{A,B,K})=T^Y_{A,B}(t^A_K)\\circ b_{A,B,J_{f,A}K}^{-1}.$$\nThe induced source coefficient comparisons and these adjunctions are transitive for $A\\to B\\to C$. Their purity maps satisfy $c_{A,B,K}\\circ T^X_{A,B}(\\gamma^A_K)=\\gamma^B_{K_B}\\circ a_{A,B,K}$, the orientation/tensor composition and Cartesian base-change identities of [det-sp-composition-factors, det-sp-purity-bc-factors], and all finite-reduction trace identities of [thm-pur-finite-reduction-of-purity]. In particular this is a system of adjunctions and specified counits, not just a family of objectwise isomorphisms.\n\nFor an affine-line projection $p:\\mathbf A^1_S\\to S$, the counit is $(1_K\\otimes I_S)\\circ\\mathrm{PF}^{-1}$, where $I_S$ is projective-line integration restricted by extension by zero and the diagonal orientation is the integration-transposed normalization of [lem-pur-projection-purity-agreement]. Iteration gives the corresponding affine-space normalization, also for arbitrary nonregular finite $A$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 1 and 5: finite coefficient adjunction and coherent finite reductions; Step 4: finite integration normalization",
+  "note": "Agent interface lemma extracted from the returned 13-step proof; the full argument assigned to this node is retained verbatim in report.md."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "sk-def-sfb-dc-setting",
+  "def-sbc-smooth-morphisms",
+  "sk-def-sfb-constructible",
+  "sk-thm-existence",
+  "def-coefficient-twists-detailed",
+  "det-sp-finite-general-ring",
+  "sk-prop-sf-rf-shriek-preservation",
+  "det-sp-reduction-compatibilities",
+  "det-sp-composition-factors",
+  "det-sp-purity-bc-factors",
+  "thm-pur-finite-reduction-of-purity",
+  "lem-pur-projection-purity-agreement"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact section-action equivalence of [sk-prop-sf-rf-shriek-preservation, lem-sf-module-object-ordinary-coefficient-equivalence] to identify ordinary finite-module and condensed-module categories, tensor products and the same compactification composite $F_A$. The specified restricted adjunction remains $F_A\\dashv G_A$, with its counit. By [det-sp-finite-general-ring](3), $\\gamma^A:J_A\\to G_A$ is a natural isomorphism independent of the annihilating exponent. If $\\Phi_A$ denotes the specified adjunction bijection, set $\\Psi_A(u)=(\\gamma^A_K)^{-1}\\Phi_A(u)$ for $u:F_AM\\to K$. This is a natural bijection $\\operatorname{Hom}(F_AM,K)\\simeq\\operatorname{Hom}(M,J_AK)$. By [lem-weil-pbc-adjunction-of-natural-bijection] its unit is $(\\gamma^A_{F_AM})^{-1}\\eta^A_M$ and its counit is $\\varepsilon^A_KF_A(\\gamma^A_K)=t^A_K$. This proves the triangle identities and exponent independence on the stated categories, without identifying $\\Dctf$ with all bounded constructible complexes over a nonregular ring.",
+   "uses": [
+    "sk-prop-sf-rf-shriek-preservation",
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "det-sp-finite-general-ring",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 1, finite purity; Step 3, same left functor and restricted adjunction"
+   }
+  },
+  {
+   "text": "For $A\\to B$, [det-sp-scalar-extension-functor](2) ensures all scalar-extended inputs are still in $\\Dctf$, without flatness. Write $T_X,T_Y$ for extension. Clause (3) of [det-sp-reduction-compatibilities] says precisely $c_KT_X(\\gamma^A_K)=\\gamma^B_{K_B}a_K$. The defining counit equation of [det-sp-reduction-exceptional] and naturality of $b$ in [det-sp-reduction-direct-image], evaluated at $\\gamma^A_K:J_AK\\to G_AK$, give\n$$\\begin{aligned}t^B_{K_B}F_B(a_K)&=\\varepsilon^B_{K_B}F_B(c_K)F_BT_X(\\gamma^A_K)\\\\&=T_Y(\\varepsilon^A_K)b_{G_AK}^{-1}F_BT_X(\\gamma^A_K)\\\\&=T_Y(\\varepsilon^A_K)T_YF_A(\\gamma^A_K)b_{J_AK}^{-1}=T_Y(t^A_K)b_{J_AK}^{-1}.\\end{aligned}$$\nBoth sides start at $F_BT_XJ_AK$ and end at $T_YK$. Thus this is the required equation of actual counits, not merely an isomorphism of their source objects.",
+   "uses": [
+    "det-sp-scalar-extension-functor",
+    "det-sp-reduction-compatibilities",
+    "det-sp-reduction-exceptional",
+    "det-sp-reduction-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 1, coefficient compatibility of the exceptional adjunction"
+   }
+  },
+  {
+   "text": "The preceding purity equation expresses the specified source comparison as $a_{A,B}=\\gamma_B^{-1}c_{A,B}T_X\\gamma_A$. For $A\\to B\\to C$, substitute this expression into the two successive source comparisons. The adjacent factors $T_{B,C}(\\gamma_B)T_{B,C}(\\gamma_B^{-1})$ cancel. Clause (2) of [det-sp-reduction-compatibilities] then identifies the remaining exceptional comparison with $c_{A,C}$, and naturality of the scalar associator in [det-sp-scalar-extension-functor](4) identifies the remaining $\\gamma_A$ factor with its direct extension. Explicitly, with those associators denoted by $\\alpha^X,\\alpha^Y$,\n$$J_C(\\alpha^Y_K)a_{B,C,K_B}T^X_{B,C}(a_{A,B,K})=a_{A,C,K}\\alpha^X_{J_AK}.$$\nThe $b$ cocycle is exactly the last equation of [det-sp-reduction-direct-image]. The unit equation also transfers: substitute $\\eta^{J,A}=\\gamma_A^{-1}\\eta^A$ and $a=\\gamma_B^{-1}cT_X\\gamma_A$ into $J_B(b_M)a_{F_AM}T_X(\\eta^{J,A}_M)$; naturality of $\\gamma_B$ and [det-sp-reduction-compatibilities](1) reduce this to $\\gamma_{B,F_BM_B}^{-1}\\eta^B_{M_B}=\\eta^{J,B}_{M_B}$. Together with Step 2, this proves transitivity as adjunctions with specified units and counits.",
+   "uses": [
+    "det-sp-reduction-compatibilities",
+    "det-sp-scalar-extension-functor",
+    "det-sp-reduction-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 1, coherent coefficient reductions"
+   }
+  },
+  {
+   "text": "Apply the finite-ring alternatives of [det-sp-composition-factors] and [det-sp-purity-bc-factors] to these same $\\gamma^A$. Their statements use exactly the inverse diagonal orientation and the counit-transpose tensor map of [det-sp-finite-general-ring], so they give both the constituent identities and the asserted purity composition and Cartesian exchange equations. No tower case is needed. At $A=A_{E,n}$ and $B=A_{E,m}$, $1\\leq m\\leq n$, [thm-pur-finite-reduction-of-purity] supplies the reduction squares for orientations, traces, composition and base change. The coefficient-valued smooth trace of [def-pur-smooth-trace] is exactly $\\varepsilon^A_KF_A(\\gamma^A_K)$, hence the $t^A_K$ just constructed; there is no additional trace to identify. These results apply with the original smoothness, pure-dimension and separated finite-type hypotheses.",
+   "uses": [
+    "det-sp-finite-general-ring",
+    "det-sp-composition-factors",
+    "det-sp-purity-bc-factors",
+    "thm-pur-finite-reduction-of-purity",
+    "def-pur-smooth-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 1, orientations, smooth traces, composition and Cartesian squares"
+   }
+  },
+  {
+   "text": "For any finite $A$, put $L=A_X(d)[2d]$, $\\omega=G_AA_Y$, and write $v:L\\xrightarrow{\\sim}\\omega$ for the inverse orientation. By the specification in [det-sp-finite-general-ring], $\\gamma_K=\\theta_K(1\\otimes v)$, where $\\theta_K$ is the transpose of inverse coefficient-first projection followed by $1_K\\otimes\\varepsilon^A_{A_Y}$. The transpose formula of [lem-weil-pbc-adjunction-of-natural-bijection] therefore gives, by naturality of that projection in $v$,\n$$t^A_K=(1_K\\otimes\\varepsilon^A_{A_Y})\\mathrm{PF}_{\\omega,K}^{-1}F_A(1\\otimes v)=(1_K\\otimes[\\varepsilon^A_{A_Y}F_A(v)])\\mathrm{PF}_{L,K}^{-1}.$$\nThe bracket is $t^A_{A_Y}$, since the unit component of the twist reassociation identifies $\\gamma_{A_Y}$ with $v$. Unit constraints are understood. Consequently knowing the trace at the coefficient unit determines this counit for every $K$; $K$ need not be a scalar extension of a complex over a smaller ring.",
+   "uses": [
+    "det-sp-finite-general-ring",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 4, integration normalization; tensor-transpose construction underlying Step 1"
+   }
+  },
+  {
+   "text": "First take $R=\\mathbf Z/\\ell^n$, equivalently $E=\\mathbf Q_\\ell$ at level $n$. For $p:\\mathbf A^1_S\\to S$, [lem-pur-projection-purity-agreement] identifies the specified diagonal/DNC $\\gamma_{p,K}$ with the exceptional transpose of $(1_K\\otimes I_{R,S})\\mathrm{PF}^{-1}$. Applying the inverse adjunction bijection, as stated in [lem-weil-pbc-adjunction-of-natural-bijection], gives $t^R_K=(1_K\\otimes I_{R,S})\\mathrm{PF}^{-1}$ and in particular $t^R_{R_S}=I_{R,S}$. The agreement lemma explicitly fixes the inverse integration-transposed normal-bundle arrow; hence this uses the required orientation, including its scalar normalization.",
+   "uses": [
+    "lem-pur-projection-purity-agreement",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 4, finite affine-line integration normalization"
+   }
+  },
+  {
+   "text": "Now let $A$ be any finite ring with $\\ell^nA=0$, and apply Step 2 to $R\\to A$ at $K=R_S$. The coefficient-unit and Tate identifications give\n$$t^A_{A_S}F_{p,A}(a_{R,A,R_S})b_{R,A,J_RR_S}=T^S_{R,A}(I_{R,S}).$$\nThe actual projective traces, their open restrictions and their ordered affine traces satisfy this same scalar equation by [lem-pur-vector-trace-scalar-descent], with $N=\\ell^n$. Its ordinary-etale coefficient maps are the proper-counit/open-tensor maps. The site/coefficient square of [lem-sp-et-proet-coefficient-compatibility] carries this identity to exactly the $b$ just displayed, and the tensor/projection and counit comparisons of [lem-pur-finite-ring-site-tensor-transpose] give the same pro-etale trace. Since $F(a)b$ is invertible, $t^A_{A_S}=I_{A,S}$. All schemes used are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied over the Noetherian field spectrum. Step 5 now gives $t^A_K=(1_K\\otimes I_{A,S})\\mathrm{PF}^{-1}$ for every $K$. This uses scalar extension only for the coefficient unit, and imposes neither regularity on $A$ nor flatness over $R$.",
+   "uses": [
+    "lem-pur-vector-trace-scalar-descent",
+    "lem-sp-et-proet-coefficient-compatibility",
+    "lem-pur-finite-ring-site-tensor-transpose",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 4, finite affine integration normalization extended to arbitrary finite rings"
+   }
+  },
+  {
+   "text": "Finally factor $p_d:\\mathbf A^d_S\\to S$ into its ordered $d$ line projections. The composition formula already cited in Step 4 identifies $\\gamma_{p_d}$ with their iterated purity maps, under the specified source reassociations. Compose their Hom bijections from Step 1. By [def-weil-pbc-composite-adjunction], the resulting counit for two stages is $t_{g,K}\\circ F_g(t_{f,J_gK})$, preceded by the inverse compact-support compositor. Substitution of the composition formula for $\\gamma$ into $\\varepsilon_{gf}F_{gf}(\\gamma_{gf})$ gives that same expression, since the exceptional compositor in [det-sp-composition-factors] is adjunction-preserving. Induction on $d$, starting with the identity adjunction at $d=0$, proves the iterated affine-space normalization. Step 7 supplies each line factor over the arbitrary finite ring $A$. Even shifts $[2d]$ introduce no extra odd-degree interchange, and the ordered construction needs no change of coordinate order.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "det-sp-composition-factors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 4 and concluding paragraph, composition and affine integration normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-smooth-trace",
+  "def-weil-pbc-composite-adjunction",
+  "det-sp-composition-factors",
+  "det-sp-finite-general-ring",
+  "det-sp-purity-bc-factors",
+  "det-sp-reduction-compatibilities",
+  "det-sp-reduction-direct-image",
+  "det-sp-reduction-exceptional",
+  "det-sp-scalar-extension-functor",
+  "lem-pur-finite-ring-site-tensor-transpose",
+  "lem-pur-projection-purity-agreement",
+  "lem-pur-vector-trace-scalar-descent",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sk-prop-sf-rf-shriek-preservation",
+  "thm-pur-finite-reduction-of-purity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 1 and the finite part of Steps 3--4; explicit Hom-bijection and counit calculations supplement the blueprint"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transfer the diagonal smooth purity isomorphism to a right adjunction for compactly supported pushforward on finite coefficient constructible etale sheaves, preserving coefficient mates and affine line integration",
+   "results": "; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or algebraic hits do not identify the specified sheaf operations, purity families and coherent counits"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatIso",
+   "results": "loogle: unknown identifier 'CategoryTheory.NatIso'; no hits",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or algebraic hits do not identify the specified sheaf operations, purity families and coherent counits"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|Purity|upperShriek",
+   "results": "; no hits",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or algebraic hits do not identify the specified sheaf operations, purity families and coherent counits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth etale purity adjunction for finite rings with coefficient change and normalized trace",
+   "results": "; Algebra.normalizedTrace, Algebra.FormallyEtale.of_unramified_and_smooth, Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth, Algebra.FormallyEtale.iff_unramified_and_smooth, RingHom.Smooth.isStableUnderBaseChange, Algebra.normalizedTrace_map, RingHom.Smooth, RingHom.FormallySmooth.isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or algebraic hits do not identify the specified sheaf operations, purity families and coherent counits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite coefficient purity counit equals the exceptional counit composed with the direct image of the diagonal orientation and is transitive under change of rings",
+   "results": "; Condensed.profiniteSolidCounit, Pi.counit_comp_single, Pi.counit_comp_dFinsuppCoeFnLinearMap, Finsupp.counit_comp_lsingle, Pi.counit_comp_finsuppLcoeFun, DFinsupp.counit_comp_lsingle, ModuleCat.RestrictionCoextensionAdj.counit'_app, ModuleCat.ExtendRestrictScalarsAdj.counit_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or algebraic hits do not identify the specified sheaf operations, purity families and coherent counits"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoRight",
+   "results": "; CategoryTheory.Adjunction.ofNatIsoRight, CategoryTheory.Adjunction.ofNatIsoRight_counit, CategoryTheory.Adjunction.ofNatIsoRight_unit, CategoryTheory.Adjunction.homEquiv_ofNatIsoRight_apply, CategoryTheory.Adjunction.homEquiv_ofNatIsoRight_symm_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or algebraic hits do not identify the specified sheaf operations, purity families and coherent counits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth etale purity finite coefficient trace compatible scalar extension",
+   "results": "8 hits: Algebra.trace_trace, Algebra.trace_comp_trace, Algebra.trace_trace_of_basis, map_equiv_traceDual, Algebra.trace_comp_trace_of_basis, Algebra.algebraMap_intTrace, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Module.FinitePresentation.isLocalizedModule_mapExtendScalars",
+   "date": "2026-10-23",
+   "verdict": "no match for the full sheaf-theoretic system; the generic adjunction transport hit is used through the existing natural-bijection node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient smooth purity isomorphism gives compact support adjunction with compatible counits under change of rings and affine line integration",
+   "results": "8 hits: AlgebraicGeometry.ΓSpec.isIso_adjunction_counit, AlgebraicGeometry.ΓSpec.adjunction_counit_app', CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction, AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit, AlgebraicGeometry.ΓSpec.adjunction_counit_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen",
+   "date": "2026-10-23",
+   "verdict": "no match for the full sheaf-theoretic system; the generic adjunction transport hit is used through the existing natural-bijection node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The smooth trace counit is the exceptional counit composed with compactly supported direct image of purity, compatible with derived extension of finite coefficient rings",
+   "results": "8 hits: Condensed.profiniteSolidCounit, smoothSheafCommRing.ι_evalHom, smoothSheaf.ι_evalHom, CompHausLike.LocallyConstant.counit, CompHausLike.LocallyConstant.adjunction_counit, CompHausLike.LocallyConstant.counit_app_val, CompHausLike.LocallyConstant.counitApp, CompHausLike.LocallyConstant.counitApp_app",
+   "date": "2026-10-23",
+   "verdict": "no match for the full sheaf-theoretic system; the generic adjunction transport hit is used through the existing natural-bijection node"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "sk-thm-purity-transport",
+  "date": "2026-10-22",
+  "group": "Q64"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Steps 1 and 5: finite coefficient adjunction and coherent finite reductions; Step 4: finite integration normalization",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pur-transport-finite-counit-system",
+  "worker": "stage1",
+  "summary": "Constructs the explicit adjunction by natural Hom bijections, computes the coefficient counit equation and unit/transitivity identities, and obtains arbitrary finite-ring integration normalization from the coefficient-unit trace plus the canonical tensor transpose. All supporting results already have DAG nodes; no new nodes or Lean files.",
+  "blueprint": "Realizes the finite part of sk-thm-purity-transport.proof.md Step 1, the finite explicit-adjunction part of Step 3, and finite integration/coherence in Step 4 and the conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-et-proet-coefficient-compatibility",
+    "why": "Its generic site/coefficient square identifies the ordinary scalar-extension identity for the projective/open trace with the specified pro-etale b. This is a comparison-of-sites tool, not an alternative purity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-et-proet-coefficient-compatibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-69096d7bd",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-69096d7bd (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps against every cited statement; the delivery adds 0 new nodes. Statement, stmt_deps and source are identical to live (unsplit), and proof_deps equals the union of the step uses. No repair note exists and the NK run has no branch, so nothing supersedes this delivery. There is no cycle and no SGA citation. Step checks: Step 1 builds Psi=gamma^{-1}Phi, and the natural-bijection node gives counit eps F(gamma)=t. I recomputed Step 2: reduction-compatibilities(3), then the defining c-equation of reduction-exceptional, then naturality of b, gives t^B F(a)=T(t^A)b^{-1}. In Step 3, the a-cocycle and unit transfer follow from clauses (1)-(2), naturality of gamma_C and the alpha naturality of scalar-extension-functor(4). Step 4 is the Consequently clauses of composition-factors and purity-bc-factors plus thm-pur-finite-reduction-of-purity; def-pur-smooth-trace equals eps F(gamma) through finite-general-ring(2). Step 5 is the PF-naturality reduction of t_K to t at the unit. Step 6 applies projection-purity-agreement at Z/l^n with E=Q_l. In Step 7, vector-trace-scalar-descent (any N-torsion ring) uses proper-counit-transpose plus open-tensor maps, the same normalization as beta in et-proet-coefficient-compatibility, whose square carries the identity to the pro-etale b. Step 8: I recomputed the composite counit via the adjunction-preserving compositor. Batch-5: the six flagged citations reach only lem-trf-site-functorial-flat-resolution (flat resolutions), lem-trf-proetale-pullback-stalk-coherence (stalk coherence) and lem-pod-derived-exact-square-composition (category theory). I listed every trf/pod node in their closures and all are generic, none a trace-formula or Poincare-duality step, so they are OK. I accept the declared tool use of lem-sp-et-proet-coefficient-compatibility. Edge cases checked: d=0, A=0, identity maps, the non-regular F_l[e]/(e^2), empty S. Advisory only: the report says source moved to latest, but only proof_origin did; source is unchanged from base."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FinitePurityCounitSystem",
+  "declaration": "AlgebraicGeometry.ProEtale.FinitePurityCounit.finiteCounitSystem",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FinitePurityCounit.AdjunctionAt",
+   "AlgebraicGeometry.ProEtale.FinitePurityCounit.scalarAssociator",
+   "AlgebraicGeometry.ProEtale.FinitePurityCounit.affineIntegration",
+   "AlgebraicGeometry.ProEtale.FinitePurityCounit.affineIntegrationCounit",
+   "AlgebraicGeometry.ProEtale.FinitePurityCounit.System",
+   "AlgebraicGeometry.ProEtale.FinitePurityCounit.finiteCounitSystem"
+  ],
+  "file": "lean/Sheaf/Paper/FinitePurityCounitSystem.lean",
+  "statement": "theorem finiteCounitSystem : System.{u}",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-26",
+  "existing": false,
+  "note": "System spells out the normalized finite-coefficient adjunction, coefficient, geometric, finite-reduction and integration clauses. AdjunctionAt fixes both actual counits and every component of the natural purity isomorphism; the scalar and integration helpers are actual canonical composites. The fixed-module coordinates are the section-action derived presentation specified in the dependencies. No independent coefficient comparison or trace is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac252be57",
+  "group": "NI",
+  "result": "fix",
+  "note": "Mathematics matches the node. AdjunctionAt pins the exceptional counit (proCounit), the purity components (proGamma), the counit proTrace=F(gamma)≫eps and the unit eta≫gamma^-1 on IsCtf; exponent independence via FiniteGeneralRingLevelIndependence. Coefficient purity and counit equations in node order, a=proLambda with pinned CoefficientLineComparison, unit equation and a/b cocycles directions checked. Composition and base change copy SpCompositionFactors.finite and finite_factors verbatim (base-change conclusion character-identical); six reduction fields equal finiteReductionOf*; affine formula for every d and finite A, carried to pro-etale by site_trace. Extra Prop binders derivable; HasCompactification is a Prop; no flatness, regularity or universe restriction. Edge cases d=0, empty, A=0, nonflat ok. FIX (H2): affineIntegration used VectorTraceScalar.affineTrace, owned by theorem node lem-pur-vector-trace-scalar-descent (proof_dep only); inlined its body (affineLinearCompactComparison.inv ≫ affineTraceCounit with projectiveLineTraceTransport/Datum, owned by def-amb def nodes), definitionally equal; statement verbatim unchanged; nt_compile --json rc=0, 27.2 s, no errors or warnings. Advisory: reduction fields concern P.smoothPurityMap with no stated bridge to proGamma (docstring overclaims; system gamma covered by coefficient field); uncited def owners reachable via stmt_deps; proof-only imports kept; second reading by the author."
+ }
+}

@@ -69,18 +69,30 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
  "lean": {
-  "module": "Sheaf.Paper.BasicOperationsCoefficientReduction",
+  "module": "Sheaf.Paper.OperationCoefficientActionData",
   "declaration": "WeilConjectures.OperationScalarTransport",
   "statement": "structure OperationScalarTransport (l : ℕ) [Fact l.Prime]\n    (E L : Type u) [Field E] [Field L]\n    [Algebra (Padic l) E] [Algebra (Padic l) L]\n    [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L]\n    (ι : E →ₐ[Padic l] L) (W : Scheme.{u})",
   "branch": "newtargets-dag",
   "by": "NC",
   "date": "2026-10-19",
   "existing": true,
-  "note": "Existing structure at line 228 of the unchanged published module; owns only the normalized comparison datum, not the existence/uniqueness or basic-operations theorem of lem-fix-operation-reduction."
+  "note": "Existing structure at line 228 of the unchanged published module; owns only the normalized comparison datum, not the existence/uniqueness or basic-operations theorem of lem-fix-operation-reduction.",
+  "file": "lean/Sheaf/Paper/OperationCoefficientActionData.lean"
  },
  "reviewed": {
   "date": "2026-10-19",
@@ -97,5 +109,15 @@
   "group": "NC",
   "result": "pass",
   "note": "Re-delivery of 695e0022 (RETURN: theorem stmt_dep lem-fix-operation-reduction used only for the plain structure OperationScalarTransport). The fix adds def node def-pur-operation-scalar-transport with existing:true on the unchanged live BasicOperationsCoefficientReduction; the recorded statement is verbatim (one occurrence) and the node statement matches the ordinary/tensor/derived/counit fields with no existence claim. The item stmt_deps replace the theorem with that node. The three Lean modules are byte-identical to the returned head; the CondensedERealization dependency replacement is dropped and the live module is used; dependency records equal live side. Independent re-read found no extra hypotheses; P_R, alpha and a are actual constructions; the finite scalar comparison is pinned by whole-system and rationalized squares; every theorem is sorry; nothing is dropped by the route pivot; no duplicate notion. nt_compile --json on all three modules is clean: 20.0/13.0/33.8 s. Advisories: integralOrdinaryTensorSection is owned by a lemma node outside the def node's deps (inherited); projection-iso and refinement clauses are separate sorry theorems; the source path uses main-20261015."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-53384",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261025T162417-L-442363",
+  "kind": "interface",
+  "note": "independent cc review: 533840fb Lean files byte-identical to b270ea0/28abdf8 (whose reviewer FIXes were dropped) vs clone: item theorem statement byte-identical, 16 defs moved verbatim to OperationCoefficientActionData and publicly re-exported; DAG edges checked with a re-implementation of stage3_delivery edge_fails"
  }
 }

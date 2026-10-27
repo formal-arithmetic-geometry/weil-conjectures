@@ -182,23 +182,37 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-0a8d519f5 (reviewer sub-agent of L); spot-checked: Read the item node, its three steps, the single citer lem-trf-fine-monoid-finite-saturation, the unit sk-i-curve-zero and chapter sec-trace-formula, and ILO Exposé VIII, Lemma 3.2.9 and its proof (pdftotext; page header 104, so printed p. 104 is correct). That proof asserts that S[F^sat]→S[F] is finite and gives no argument, so proof_origin.by=agent is right. The statement is self-contained and true with no extra hypotheses. Tested cases: r=0, d=0, v=(2), v=(2,3), v=(1,-1), and v=((1,0),(1,2)) in Z^2, where F={(0,0),(1,1)}. Step 1: the coordinates of the half-open set are bounded by B_j=Σ|a_ij|, and points of L have integer coordinates, so F is finite and lies in C∩L. Step 2: flooring gives p∈P and f=x-p in Q∩L; the reverse inclusion follows by adding coefficients. Step 3: finite generation follows from the equality and closure under addition. All three steps are genuinely elementary, there are no uses, no cycle, no off-unit tool and no SGA source. The item is strictly smaller than its parent, and the parent uses exactly the finite-translate form stated here. Duplicates: grep of the DAG and both blueprint snapshots finds none, so same_as=[] is correct. Mathlib: the only Gordan result is AddSubmonoid.fg_eqLocusM (GroupTheory/Finiteness.lean:618-628, the equalizer form), which is not a one-line match. The recorded searches mark the invalid grep and the Loogle error as not evidence. No fixes."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-stage2-cc-5b3ba8acb",
-  "group": "Q01",
-  "result": "fix",
-  "note": "Statement checked clause by clause against the node and ILO VIII 3.2.9 p.104: free finite-rank L embedded in L⊗ℚ via x⊗1, C (nonnegative rational combinations), P (natural combinations), finite F⊆C∩L, C∩L=⋃(f+P), and closure(F∪{v_i})=C∩L are all correct, with no extra hypotheses. A #check probe confirms the three-clause ∧ parse. Edge cases r=0, rank 0, dependent generators, cones with lines and universes are covered. The redundant [Module ℤ L] is mathematically harmless (Subsingleton) and left as is. Mathlib has only AddSubmonoid.fg_eqLocusM (equalizer form), so this is not a duplicate. The proof is sorry only, there are no definitions, and lean.statement matches verbatim. Delivered and fixed modules both compile cleanly with nt_compile. H8 fault: no module docstring, and the theorem docstring lacked the node's proof steps. fixes/GordanRationalCone.lean is a complete replacement with a module docstring and the three-step proof in the theorem docstring; the statement is byte-identical, so no record change."
+  "reviewer": "NT-stage2-cc-8359f2724",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Item changes only lean; statement verbatim; 31 declarations exact; no name clash. 10 dep modules are header-only module-mode conversions (diffed vs live and side-live: bodies, proofs and sorry counts unchanged); FineFan/Monoscheme conversion identical to Q66 58c1 (PASS); proof-dep closure records admitted by stage2_delivery. Every clause checked: e pinned by ambient∘e = chartEvaluation plus base map; integral closure in Frac k[G] = k[C_a^sat]; HasOriginalGroup for C_a and C_a^sat; overlaps C_a+N(a-b) = C_a⊔C_b = C_b+N(b-a), also saturated, verified; restriction chart = C_a⊔<c^-1>, also saturated; IsPullback squares correctly oriented; normalized open immersions into the actual reducedNormalization with structural map, range and cover; coaction and torus clauses. Edge cases: P=1, a=b, redundant E, cusp <2,3>, N^2, c a unit. No hollow defs; theorem proof is sorry only; docstrings complete. Advisories: AffineBlowup/reducedNormalization owners outside stmt_deps; proof-only public import of FiniteDegree.Algebra; Q66 delivers the same dep conversion, so the second landing may meet 'lean changed since base'.; reverted the delivery's change of existing node(s) def-trf-fine-fan-blowup, def-trf-monoscheme-toric-realization (--revert-nodes; kept as on sheaf-dag)"
  },
  "lean": {
   "module": "Sheaf.Paper.GordanRationalCone",
   "declaration": "gordan_rational_cone_finite",
+  "declarations": [
+   "gordan_rational_cone_finite"
+  ],
   "file": "lean/Sheaf/Paper/GordanRationalCone.lean",
   "statement": "theorem gordan_rational_cone_finite (L : Type u) [AddCommGroup L] [Module ℤ L] [Module.Free ℤ L] [Module.Finite ℤ L] (r : ℕ) (v : Fin r → L) : let ι : L → TensorProduct ℤ L ℚ := fun x => TensorProduct.mk ℤ L ℚ x 1 let C : Set (TensorProduct ℤ L ℚ) := {x | ∃ q : Fin r → ℚ, (∀ i, 0 ≤ q i) ∧ x = ∑ i, TensorProduct.mk ℤ L ℚ (v i) (q i)} let P : Set (TensorProduct ℤ L ℚ) := {x | ∃ n : Fin r → ℕ, x = ∑ i, TensorProduct.mk ℤ L ℚ (v i) (n i : ℚ)} let Lset : Set (TensorProduct ℤ L ℚ) := Set.range ι ∃ F : Finset (TensorProduct ℤ L ℚ), (∀ f ∈ F, f ∈ C ∩ Lset) ∧ C ∩ Lset = ⋃ f ∈ (F : Set (TensorProduct ℤ L ℚ)), {x | ∃ p ∈ P, x = f + p} ∧ AddSubmonoid.closure ((F : Set (TensorProduct ℤ L ℚ)) ∪ Set.range (fun i => ι (v i))) = C ∩ Lset",
-  "branch": "newtargets-dag",
-  "by": "Q01",
-  "date": "2026-10-17",
+  "branch": "sheaf-dag",
+  "by": "Q107",
+  "date": "2026-10-23",
   "existing": false,
-  "fixed_by": "NT-stage2-cc-5b3ba8acb"
+  "note": "Dependency interface repair under brief-stage2 §1(B): preserve the exact recorded declarations and mathematical content; expose the module and its signature imports so that this required module-mode statement can import them. The published artifacts were legacy non-module files. No theorem statement or proof is changed."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

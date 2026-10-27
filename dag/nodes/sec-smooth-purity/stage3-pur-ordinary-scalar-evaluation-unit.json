@@ -1,0 +1,118 @@
+{
+ "id": "stage3-pur-ordinary-scalar-evaluation-unit",
+ "kind": "statement",
+ "title": "Ordinary scalar evaluation comparison with its specified unit",
+ "statement": "Let C be a site with Grothendieck topology J and the essential-smallness instance of [def-coef-semilinear-system-models]. Let B,F be sequences of commutative ring sheaves, tau,sigma their transitions, alpha a transition-compatible scalar map, and A scalar-system data [def-coef-semilinear-derived-calculus]. Ordinary scalar extension commutes with evaluation at each natural-number index by natural isomorphisms rho. For every system M the composite of evaluation of the system ordinary adjunction unit, the canonical restriction-evaluation comparison, and restriction of rho equals the finite ordinary adjunction unit at the evaluated M.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "sites-modules.tex, lemma-adjoint-pullback-pushforward-modules (03D7); sites-cohomology.tex, lemma-derived-base-change (06YY) and lemma-adjoint (07A6); step 2 of stage3-pur-extension-strict-derived-comparison."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Specialize the sequence-site pullback evaluation theorem to the identity site functor and the scalar ring-system morphism. It proves invertibility of the mate of the identity-on-sections restriction-evaluation comparison under the given ordinary adjunctions.",
+   "uses": [
+    "lem-sf-sequence-module-pullback-evaluation",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take rho to be the inverse of that mate. The standard mate unit identity, followed by restriction of the inverse mate, gives exactly the ordinary unit equation. This construction is natural and applies at every index, including zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-sequence-module-pullback-evaluation",
+  "def-coef-semilinear-system-models"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "sites-modules.tex, lemma-adjoint-pullback-pushforward-modules (03D7); sites-cohomology.tex, lemma-derived-base-change (06YY) and lemma-adjoint (07A6). Ordinary comparison uses the proved sequence-site mate theorem; normalized units descend from K-flat source resolutions.",
+  "group": "E9",
+  "date": "2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars for sheaves commutes with evaluating a system of modules at one index, compatibly with adjunction units",
+   "results": "8 hits about ordinary free modules and sheafification; no scalar evaluation comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use the project sequence-site mate lemma and adjunction API."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "12 hits including mateEquiv and unit_mateEquiv_symm.",
+   "date": "2026-10-26",
+   "verdict": "The mate unit identity provides the ordinary unit compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*pushforward|pushforward.*changeOfRings",
+   "results": "No Mathlib matches.",
+   "date": "2026-10-26",
+   "verdict": "No existing Mathlib scalar evaluation comparison was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientScalarCochainEvaluation",
+  "date": "2026-10-26",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Compatibility with finite reduction and scalar extension to Qlbar: Strict normalized representatives of coefficient extension; Derived comparison for a strict finite scalar tensor model; Finite evaluation of the universal scalar cochain counit; Ordinary scalar evaluation comparison with its specified unit",
+   "via": [
+    "stage3-pur-scalar-cochain-evaluation",
+    "stage3-pur-extension-strict-derived-comparison",
+    "stage3-pur-extension-strict-representatives",
+    "stage3-pur-reduction-skeleton-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryScalarEvaluationUnit",
+  "file": "lean/Sheaf/Paper/OrdinaryScalarEvaluationUnit.lean",
+  "declaration": "WeilConjectures.ordinaryScalarEvaluationUnit",
+  "statement": "theorem ordinaryScalarEvaluationUnit :\n    ∃ ρ : ∀ n, A.scalar.model.E ⋙ SemilinearSections.evaluation J F σ n ≅\n        SemilinearSections.evaluation J B τ n ⋙ (A.levels n).model.E,\n      ∀ n M,\n        (SemilinearSections.evaluation J B τ n).map\n            (A.scalar.ordinaryAdjunction.unit.app M) ≫\n          (SemilinearSections.restrictionEvaluation_existsUnique\n            J B τ F σ α hα n).exists.choose.hom.app (A.scalar.model.E.obj M) ≫\n          (SemilinearSections.res (α n)).map ((ρ n).hom.app M) =\n        (A.levels n).ordinaryAdjunction.unit.app\n          ((SemilinearSections.evaluation J B τ n).obj M)",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261026T091452-L-3345377",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261026T091452-L-3345377",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

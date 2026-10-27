@@ -1,0 +1,136 @@
+{
+ "id": "lem-sfb-negative-koszul-basis-unitor",
+ "kind": "statement",
+ "title": "Left-unitor normalization of a supported negative Koszul pure tensor",
+ "statement": "Let O be a commutative ring sheaf on a small site, A a commutative ring, rho:A→sections(O) a ring homomorphism, a:Fin r→A, and let N be the ordered negative tensor on the image sections at exponent n+1. For I with q=-card I, the specified canonical negative basis map on I, followed by the inverse left unitor O[0] tensor N←N in degree q, equals the inverse single-complex identification O→O[0]^(q+card I), followed by the specified ringedNegativeKoszulSummand on I. This is an equality of the existing explicit maps, for all n and including zero factors.",
+ "stmt_deps": [
+  "def-cbc-signed-koszul-completion-model",
+  "lem-sfb-exterior-koszul-basis-differential"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0622 and 0664, ordered Koszul generators and the graded Leibniz rule; algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul, finite free duality."
+ },
+ "proof": [
+  {
+   "text": "First prove the generic pure-tensor identity with coefficient degree p=0. Substitute p=0 and expand the inverse left unitor using HomologicalComplex.leftUnitor'_inv. Apply naturality of the inverse right unitor, the whiskering interchange law, and naturality of the inverse left unitor. The inverse left and right unitors of the unit agree, giving the identity. For a supported subset substitute q=-card I, so its coefficient degree q+card I is zero. Apply the generic identity to the canonical negative basis map; the definition of ringedNegativeKoszulSummand gives exactly the other side, with the single-complex degree transport. No factor or scalar is inverted.",
+   "uses": [
+    "def-cbc-signed-koszul-completion-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0622 and 0664, ordered Koszul generators and the graded Leibniz rule; algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul, finite free duality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-signed-koszul-completion-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V1",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0622 and 0664, ordered Koszul generators and the graded Leibniz rule; algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul, finite free duality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul differential on the ordered wedge basis is the signed sum over erased indices, with sign counting earlier indices",
+   "results": "Eight hits: exterior differential forms, bar-complex differential, polynomial Kaehler differentials, ExteriorAlgebra.ιMulti. No ringed-site Koszul basis equation.",
+   "verdict": "Use the generic inverse-left-unitor formula and monoidal naturality, then specialize to the explicit negative basis and its O[0] summand. This normalization equality is fully proved here.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite ordered subset basis of a Koszul complex agrees with tensor product of two term complexes, differential contraction and diagonal transition maps",
+   "results": "Eight hits, including HomologicalComplex.unit_tensor_d₁ and tensor_unit_d₂, and unrelated tensor-generator calculations.",
+   "verdict": "Use the generic inverse-left-unitor formula and monoidal naturality, then specialize to the explicit negative basis and its O[0] summand. This normalization equality is fully proved here.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"ιMulti\"",
+   "results": "Twelve hits including exteriorPower.ιMulti_family and its functoriality and spanning API.",
+   "verdict": "Use the generic inverse-left-unitor formula and monoidal naturality, then specialize to the explicit negative basis and its O[0] summand. This normalization equality is fully proved here.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul",
+   "results": "Three Mathlib hits concerning regular sequences, covariant derivatives and a local-cohomology comment. Local repository search found the signed finite coordinates and actual exterior basis coefficient definitions, but no theorem asserting this specific boundary comparison.",
+   "verdict": "Use the generic inverse-left-unitor formula and monoidal naturality, then specialize to the explicit negative basis and its O[0] summand. This normalization equality is fully proved here.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedKoszulDualBasis",
+  "group": "V1",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof (1), finite Koszul models in Stacks 099M: pure-tensor unit normalization.",
+   "via": [
+    "lem-sfb-negative-koszul-signed-differential",
+    "lem-sfb-negative-koszul-exterior-differential",
+    "lem-sfb-ringed-koszul-dual-basis",
+    "lem-sfb-exterior-koszul-scalar-realization",
+    "lem-sfb-adic-residue-koszul-coefficient-cone-comparison",
+    "lem-sfb-adic-residue-koszul-tensor-cone-pro-zero",
+    "lem-sfb-adic-residue-strict-koszul-augmentation",
+    "lem-sfb-adic-residue-quotient-finite-projection",
+    "lem-sfb-adic-residue-quotient-unit-universal",
+    "lem-sfb-adic-residue-cech-quotient-cone",
+    "lem-sfb-adic-complete-reduction-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedNegativeKoszulBasisUnitor",
+  "file": "lean/Sheaf/CategoryTheory/RingedNegativeKoszulBasisUnitor.lean",
+  "declaration": "CategoryTheory.ringedNegativeKoszulBasis_leftUnitor",
+  "statement": "theorem ringedNegativeKoszulBasis_leftUnitor\n    {C : Type w} [SmallCategory C] {T : GrothendieckTopology C}\n    (O : Sheaf T CommRingCat.{w}) {A : Type w} [CommRing A]\n    (ρ : A →+* RingCat.sectionsSubring (O.obj ⋙ forget₂ CommRingCat RingCat))\n    (r : ℕ) (a : Fin r → A) (n : ℕ) (q : ℤ) (I : exteriorKoszulIndex r q) :\n    letI := SheafOfModules.isGrothendieckAbelian\n      ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O)\n    letI := SheafOfModules.monoidalCategory O\n    letI := SheafOfModules.symmetricCategory O\n    letI := Classical.choice (SheafOfModules.tensorClosed O).1\n    letI := Classical.choice (SheafOfModules.tensorClosed O).2.1\n    let M := SheafOfModules.unit\n      ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O)\n    let N := ringedNegativeKoszul O r\n      (fun i ↦ ⟨(ρ (a i)).val, (ρ (a i)).property⟩) n\n    ringedNegativeKoszulBasis O r\n        (fun i ↦ ⟨(ρ (a i)).val, (ρ (a i)).property⟩) n I.1 q ≫\n        (HomologicalComplex.leftUnitor N).inv.f q =\n      (HomologicalComplex.singleObjXIsoOfEq (.up ℤ) 0 M (q + I.1.card)\n        (by have _hI := I.2; omega)).inv ≫\n          ringedNegativeKoszulSummand O ρ a n (ringedSiteRingComplex O) q I.1",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T202447-L-3459649",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T202447-L-3459649",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

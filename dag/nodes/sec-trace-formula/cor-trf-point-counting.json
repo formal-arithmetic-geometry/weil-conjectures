@@ -214,7 +214,18 @@
   "def-weil-weil-sheaf-complex"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-trace-formula",
  "unit": "sk-thm-trace-transport",
  "split_report": {
@@ -290,5 +301,26 @@
   "group": "Q70",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-bea3bd199 (reviewer sub-agent of L); spot-checked: PASS: read in full, no changes, fixes/ empty. Item statement matches main-20261015 cor-trf-point-counting.md word for word (only order 2401 to 2745 changed from master); no target weakened, no new nodes, no SGA. Stacks proetale.tex lemma-compare-locally-constant (099Y) read: it is an equivalence for locally constant finitely presented sheaves over any ring, so lem-sf-proetale-locally-constant-origin (b) applies to (A_n)_X. Step 1: constructible lemma (2) gives the lattice, derived reductions (A_n)_X and support [0,0]; normalization maps are multiplication isos; theta_O=c_O.lambda reduces to the finite-level maps and rationalizes to theta_E; stage-independence (2) gives the Qbar object. Step 2: lisse witness pair G_n[0], alpha_n[0]; admissibility is the item's hypothesis, and thm-trf-trace-formula-e needs nothing else at finite level. Step 3: with N=0, psi_{n,m} is the canonical unit comparison for h=Phi^m (an endomorphism of A_X sending 1 to 1 is the canonical one); constant-stalk trace gives 1 in A_n; adic (2)-(4) give tr=1 in O_E; scalar extension and supertrace give 1 in Qbar; no map A_n to E is used. Step 4: thm-qbar plus integral-model m=1 identification give F_c=F. F^m=F_c^m is only sketched ('functors preserve composition') but follows from cited statements: levelwise compact-description, a composite of lifts is a lift, and adic trace (4) does not depend on the lift. Accepted. Step 5: lem-weil-point-counts-finite (1), elementary, empty case included. Step 6: lem-pod (2) plus naturality of kappa give F j=j F_c, written out correctly; the identity compactification is a legitimate model, and admissibility is not tied to the model (def-trf-admissibility). Edge cases checked: empty, Spec F_q, Spec F_{q^2} (2 if 2|m, else 0), A^1 (q^m), P^1 (1+q^m), nonreduced and disconnected. Acyclic. Accepted tool_uses (off unit sk-thm-trace-transport): lem-weil-point-counts-finite, prop-weil-proper-compact-coincidence, lem-pod-proper-coincidence-frobenius. The other declared tool_uses are on the route and need no record. Remark: the report's last 'Changes' bullet says source/order were updated to main-20261015, but the node still has the master source and order 2401. These are maintainer fields, so the node is correct and the report sentence is inaccurate; the maintainer may refresh the metadata."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Fix the global finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, let $X_0$ be a\nseparated finite-type\n$k_0$-scheme, put $X=X_0\\times_{k_0}k$, and let\n$K=(\\Qlb)_X$ be the constant\nWeil sheaf with its canonical\nWeil structure $g_X^*\\Qlb_X\\cong\\Qlb_X$ of [def-weil-weil-sheaf-complex], the\ngeometric Frobenius acting trivially on stalks. Then for every\n$m\\geq1$,\n\n$$\n\\#X_0(\\mathbf F_{q^m})\n=\n\\sum_{i\\in\\mathbf Z}(-1)^i\n\\operatorname{Tr}\\bigl(F^m\\mid H_c^i(X,\\Qlb)\\bigr),\n$$\n\nand, when $X_0$ is\nproper,\n\n$$\n\\#X_0(\\mathbf F_{q^m})\n=\n\\sum_{i\\in\\mathbf Z}(-1)^i\n\\operatorname{Tr}\\bigl(F^m\\mid H^i(X,\\Qlb)\\bigr),\n$$\n\ncompactly supported cohomology being the ordinary one. The same holds with\n$\\Qlb$ replaced by any finite $E/\\Ql$.",
+  "proof": [
+   {
+    "text": "Apply [det-thm-tf-uniform-formula-weil] to the Weil sheaf\n$K=\\Lambda_X$, $\\Lambda\\in\\{E,\\Qlb\\}$, with its canonical Weil structure.\nFor every $y\\in X_0(\\mathbf F_{q^m})$ the stalk $K_{\\bar y}$ is $\\Lambda$ in\ndegree zero, and the local operator $F_{y,m}$ is its identity: the iterated\nstructure is the composite of the canonical identifications of inverse\nimages of $\\Lambda_X$, which are the identity on the constant stalk. This is\nthe unit stalk trace of [cor-trf-constant-stalk-trace], read over the field\n$\\Lambda$. Hence\n\n$$\n\\sum_{j}(-1)^j\\operatorname{Tr}\\bigl(F_{y,m}\\mid H^j(K_{\\bar y})\\bigr)=1\n$$\n\nfor every rational point $y$, and the right-hand side of the identity (2)\nof [det-thm-tf-uniform-formula-weil] is the cardinality of\n$X_0(\\mathbf F_{q^m})$, which is finite because $X_0$ is of finite type.\nThis is the first identity; the second is the identification\n$H_c^i\\simeq H^i$ for proper $X_0$ of\n[def-weil-ordinary-compact-cohomology].",
+    "uses": [
+     "det-thm-tf-uniform-formula-weil",
+     "cor-trf-constant-stalk-trace",
+     "def-weil-ordinary-compact-cohomology"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

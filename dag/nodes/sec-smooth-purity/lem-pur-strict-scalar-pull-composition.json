@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-strict-scalar-pull-composition",
+ "kind": "statement",
+ "title": "Pullback compositor respects strict scalar extension",
+ "statement": "Fix a prime $\\ell$, finite extensions $E,F$ of $\\mathbf Q_\\ell$, an algebra map $i:E\\to F$, and their integer rings $A,B$ [def-weil-l-adic-coefficient-extension]. Use the derived categories of strict constant-coefficient module towers, the functors $G_H,J_H,R_H$, and their specified compositors [def-cbc-strict-tower-proper-open-arrows], [def-cbc-strict-constant-tower-operations], [def-cbc-strict-tower-open-extension]. Let $T_W$ be finite scalar extension, $h_f$ the inverse of strictScalarPull, $b_f$ the openTensor map, and $a_f$ the proper scalar mate [def-pur-constant-scalar-tower-mates], [lem-pur-compact-support-strict-scalar-mate]. For arbitrary scheme maps $f:X\\to Y$, $g:Y\\to Z$ and $M\\in D(\\mathrm{Tow}(A_Z))$, the two routes from $G_{gf,B}T_ZM$ to $T_XG_{f,A}G_{g,A}M$ coincide: $gComp_B;G_{f,B}(h_g);h_fG_{g,A}=h_{gf};T_X(gComp_A)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 0D6D, derived-pullback-composition and derived-pushforward-composition; strict scalar refinement Steps 3--4."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-pur-constant-scalar-tower-mates",
+  "lem-pur-compact-support-strict-scalar-mate"
+ ],
+ "proof": [
+  {
+   "text": "For the ordinary coefficient restriction/direct-image comparisons, compare successive base changes with the base change along the composite. Both maps send a section to itself on the canonically identified iterated base-change object. The ordinary direct-image compositor makes this an equality of module sheaf maps, and applying it levelwise retains every strict transition.",
+   "uses": [
+    "def-pur-constant-scalar-tower-mates",
+    "def-cbc-strict-constant-tower-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derive the preceding equality using the specified whole-complex unitCompatible normalizations of properRestriction. The universal property of derived functors identifies both pasted derived comparisons from their ordinary maps and resolution units. Take conjugates under the composite geometric/scalar adjunctions. The resulting left comparison is the published strictScalarPull, and its geometric compositor is gComp. This gives the displayed equation before evaluation or inverse limit.",
+   "uses": [
+    "lem-pur-compact-support-strict-scalar-mate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-constant-scalar-tower-mates",
+  "def-cbc-strict-constant-tower-operations",
+  "lem-pur-compact-support-strict-scalar-mate",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "S4",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 0D6D, derived-pullback-composition and derived-pushforward-composition; strict scalar refinement Steps 3--4.",
+  "note": "A geometric compositor ingredient of the parent argument, with no compactification or support hypotheses. Empty schemes, zero complexes and identity scheme/coefficient maps obey the same summand or unit/counit equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with composition isomorphisms of pullback direct image and extension by zero",
+   "results": "ModuleCat.extendScalarsComp, ModuleCat.ExtendScalars.map'_comp, and scalar pseudofunctor lemmas; these compose coefficient ring maps rather than scheme maps.",
+   "date": "2026-10-27",
+   "verdict": "No theorem for the published strict tower geometric compositors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of mates with composition of functors and extension of scalars",
+   "results": "CategoryTheory.mateEquiv_hcomp, mateEquiv_vcomp, iterated_mateEquiv_conjugateEquiv and generic mate identities.",
+   "date": "2026-10-27",
+   "verdict": "Use mate pasting for the proper-composition deduction; no normalization theorem for the concrete strict scalar pullback and open comparators."
+  },
+  {
+   "tool": "grep",
+   "query": "properRestriction.*[Cc]omp|[Cc]omp.*properRestriction|openRestriction.*[Cc]omp|[Cc]omp.*openRestriction; scalar.*[Cc]omp|[Cc]omp.*scalar",
+   "results": "Searched Mathlib via msearch and lean/Sheaf and lean/WeilConjectures via rg. OrdinaryOpenScalarComposition concerns composition of coefficient extensions, not composition of open immersions. StrictTowerCompositionMaps defines the geometric comparisons but does not prove the scalar compositor equations.",
+   "date": "2026-10-27",
+   "verdict": "Separate the actual geometric compositor equations, then paste with the existing scalar_properOpen_gamma."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportStrictScalarRefinement",
+  "date": "2026-10-27",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Auxiliary strict scalar refinement Steps 3--6 and 9: geometric compositor compatibility",
+   "via": [
+    "lem-pur-compact-support-strict-scalar-refinement",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictScalarPullComposition",
+  "file": "lean/Sheaf/Paper/StrictScalarPullComposition.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.strictScalarPullComposition",
+  "statement": "theorem strictScalarPullComposition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (M : Derived (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) Z) :\n    (gComp (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) f g).hom.app\n        ((T l E F i Z).obj M) ≫\n        (G (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) f).map\n          ((strictScalarPull l E F i g).inv.app M) ≫\n        (strictScalarPull l E F i f).inv.app\n          ((G (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g).obj M) =\n      (strictScalarPull l E F i (f ≫ g)).inv.app M ≫\n        (T l E F i X).map\n          ((gComp (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) f g).hom.app M)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-27",
+  "note": "The section parameters l, E, F, i and their instances occur above the theorem in the module; this field reproduces its written signature verbatim."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T201404-L-3378672",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T201404-L-3378672",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

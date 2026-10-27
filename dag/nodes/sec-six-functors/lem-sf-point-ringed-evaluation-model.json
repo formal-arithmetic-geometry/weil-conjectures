@@ -25,142 +25,112 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-fix-geometric-stalk-topos-point] to $Y=s$ and $\\bar y=\\operatorname{id}_s$. Its inverse image is the pointed-neighbourhood colimit of [def-weil-proetale-geometric-stalk]. The object $(s,\\operatorname{id}_s)$ is initial in that neighbourhood category: its unique pointed arrow to $(U,u)$ is $u:s\\to U$. It is therefore terminal in the opposite index. Explicitly send a representative $(U,u,z)$ to $u^*z\\in\\mathcal F(s)$ and send $w\\in\\mathcal F(s)$ to its class at $(s,\\operatorname{id})$. Pointed-arrow compatibility makes the first map well-defined; the colimit relation for $u$ makes the two maps inverse. This proves the claimed natural identification, with precisely the restriction maps specified in the statement.",
+   "text": "The pointed final neighbourhood is terminal in the opposite index: the arrow from it to a pointed neighbourhood is its lift. Construct the restriction cocone and its colimit isomorphism, and use naturality of restriction to identify the specified geometric stalk. Equip the recorded geometric morphism with the actual section ring and module evaluation. The underlying operation graphs show that these identifications preserve the ring and module operations.",
    "uses": [
     "lem-fix-geometric-stalk-topos-point",
-    "def-weil-proetale-geometric-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0991, section-points, paragraph before lemma-classical-point (Tag 0993); explicit initial-object specialization"
-   }
-  },
-  {
-   "text": "The same restriction formulas respect addition, multiplication and module actions, since all those operations in [def-weil-proetale-geometric-stalk] are computed on common representatives. Hence $p^{-1}B=R=B(s)$ with its actual ring operations. Equip this point with $p^{-1}B\\to R$ equal to the identity. By the module-pullback formula in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], $p^*M=R\\otimes_Rp^{-1}M\\cong M(s)$ via $a\\otimes x\\mapsto ax$, with inverse $x\\mapsto1\\otimes x$. These maps are natural on module morphisms. Thus the actual module pullback is $\\Gamma_s$. It is exact and its termwise functor preserves quasi-isomorphisms by [lem-weil-point-proetale-sections-exact].",
-   "uses": [
     "def-weil-proetale-geometric-stalk",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-point-proetale-sections-exact"
+    "def-sfb-ringed-site-point"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, lemma-pullback-tensor-product; sites-modules.tex Tag 03D2, lemma-pullback-module; exact sections as in the cited point lemma"
-   }
+   "elementary": false
   },
   {
-   "text": "Use [lem-pur-cochain-pullback-tensor-coherence] for this ringed point, presenting $\\mathbf{Set}$ by the one-object trivial site and $R$ as its ring sheaf. Its cochain isomorphism $c_{p;P,Q}$, through step 2, is $b_{P,Q}$. Its inverse sends $x\\otimes y$ to the section tensor of $x,y$: substitute $1\\otimes x$ and $1\\otimes y$ in the displayed inverse formula for $c$. This holds on every bidegree summand, including arbitrary direct-sum total degrees. On a generator of bidegree $(i,j)$, the differential on either side is $dx\\otimes y+(-1)^i x\\otimes dy$, since the coefficient factors have degree zero. The cited lemma supplies the isomorphism and its naturality; this calculation fixes the direction and normalization of the specified chain map.",
+   "text": "Evaluation at the final object preserves sheafification, because every covering sieve there contains the identity. Thus evaluation of the sheaf tensor is canonically the tensor of the evaluated modules; its inverse on pure tensors is exactly the recorded section tensor. Compose the lax monoidal forgetful functor with presheaf evaluation. Its binary and unit maps are isomorphisms, so this gives a strong monoidal evaluation functor with the specified module comparisons.",
    "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "def-pc-tensor-complex-sheaves"
+    "lem-trf-point-sheafification-final",
+    "lem-pur-sheaf-line-evaluation-inverse-pair",
+    "lem-pur-kflat-total-tensor-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, lemma-pullback-tensor-product, displayed total-complex map; sites-modules.tex Tag 03EL, lemma-tensor-product-pullback"
-   }
+   "elementary": false
   },
   {
-   "text": "For flat-term K-flat $P,Q$, [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] says that $p^*P$ and $p^*Q$ are K-flat with flat terms. Under step 2 these are $\\Gamma_sP,\\Gamma_sQ$. By [lem-pur-kflat-total-tensor-model], $T=\\operatorname{Tot}(P\\otimes_BQ)$ is itself flat-term K-flat and represents the derived tensor. Apply [lem-pur-exact-pullback-signed-comparison] to the exact $p^*=\\Gamma_s$ of step 2. Its isomorphism $\\eta:Lp^*\\cong D(\\Gamma_s)$ identifies the resolving comparison on every flat-term K-flat complex with the termwise sections comparison. Its displayed representative square identifies the canonical derived tensor comparison with the localization of the specific $b_{P,Q}$ of step 3, including the representative maps for $P,Q,T$. The uniqueness and naturality in that lemma give independence of K-flat resolutions and naturality for all derived morphisms.",
+   "text": "The point description gives preservation of small colimits. Apply the standard mapHomologicalComplex monoidal construction to evaluation; its inverse comparison has the prescribed formula on every total summand. The oplax monoidal equations give naturality, associativity and both unitors. Test the module braiding on pure tensors, then the chain braiding on total summands: additivity preserves the common Koszul sign. Its unit is the single-complex lift of the actual identity on the section ring.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-kflat-total-tensor-model",
-    "lem-pur-exact-pullback-signed-comparison"
+    "lem-pur-cochain-comparison-monoidal-equations",
+    "lem-pur-sheaf-line-evaluation-inverse-pair",
+    "lem-sfb-ringed-site-point-tensor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0G7E (lemma-pullback-K-flat), 07A2 (lemma-tensor-product-K-flat), 06YY (lemma-derived-base-change), and 07A4 (lemma-pullback-tensor-product), with the cited representative-normalized exact-functor refinement"
-   }
+   "elementary": false
   },
   {
-   "text": "The unit isomorphism is the actual equality $\\Gamma_sB=R$. The constraint equations of [lem-pur-cochain-pullback-tensor-coherence] apply before localization. More explicitly, under $b^{-1}$ the associativity square sends $(x\\otimes y)\\otimes z$ to the section $x\\otimes(y\\otimes z)$ along either route. The symmetry square sends $x\\otimes y$ in degrees $(i,j)$ to $(-1)^{ij}$ times the section $y\\otimes x$ along either route. The two unit squares send $a\\otimes x$ or $x\\otimes a$ to $ax$. The coefficient-unit identification of step 2 sends $1\\otimes a$ to $a$, so these are the specified unitors. These are equalities of chain maps, with the same signs on each summand, rather than just existence of compatible constraints.",
+   "text": "The ringed-site stalk criterion and preservation of flatness imply that evaluation sends the recorded resolving class to flat-term K-flat module complexes. Exactness is the recorded point sections theorem. Existence of flat-term K-flat resolutions makes restriction to resolving representatives fully faithful in the homotopy localization. Apply tensorComparisonDescent with the explicitly constructed chain comparison; left-derived uniqueness identifies the exact descended section functor with every specified left-derived presentation.",
    "uses": [
+    "lem-sfb-ringed-site-kflat-stalk-criterion",
+    "lem-sfb-ringed-site-point-flat",
+    "det-pe-topos-functoriality-site",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-weil-pbc-tensor-comparison-descent-representatives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation of scalar extension is identified with ordinary extension of section scalars by the final-object sheafification isomorphism. The identification sends the specified extension pure tensor to its ordinary tensor. The ordinary strong monoidal extension-of-scalars functor supplies the chain scalar comparison and its balanced formula. The module insertion-tensor equation proves the module square on generators; coproduct extensionality and the total-summand comparison formulas lift it to the required chain square.",
+   "uses": [
+    "lem-trf-point-sheafification-final",
+    "lem-pur-module-tensor-extension-equation",
     "lem-pur-cochain-pullback-tensor-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 total-complex construction and Tag 03EL; explicit constraint equations of the cited cochain-coherence lemma"
-   }
+   "elementary": false
   },
   {
-   "text": "For $B\\to B'$ use in [lem-pur-cochain-pullback-tensor-coherence] the coefficient square $p^{-1}B\\to p^{-1}B'$ over $R\\to R'=B'(s)$, with both vertical ring maps the identities. The square commutes because the restriction maps of step 1 are natural also in ring sheaves. The cited $\\kappa$ and tensor/scalar equation give the requested square with the canonical scalar comparisons. In its inverse form, both routes on a homogeneous generator send $(x\\otimes a)\\otimes(y\\otimes b)$ to the section $(x\\otimes y)\\otimes ab$. This uses balancing over $R$ and multiplication in $R'$; the new scalars have degree zero, so there is no extra sign. For $B\\to B'\\to B''$, the scalar-association maps send $(x\\otimes a)\\otimes b$ to $x\\otimes ab$; the composition equation of the same lemma applies, and the iterated tensor square sends the two coefficient factors to their product in $B''(s)$. For an identity ring map these are multiplication unitors. This verifies the identity and composed scalar squares at chain level, with no flatness assumption on the coefficient map.",
+   "text": "Ringed-topos pullback along the identity topos preserves the flat-term K-flat class for any coefficient map; ordinary extension of scalars does likewise by base change. Restriction to resolving representatives is fully faithful after localization. Lift the composite of the prescribed representative isomorphisms across this restriction to construct the scalar derived comparison. Cancelling the representative isomorphisms proves its normalization and uniqueness.",
    "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence"
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-resolving-representative-whiskering"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 and sites-modules.tex Tag 03EL; coefficient and composition equations of the cited cochain-coherence refinement"
-   }
+   "elementary": false
   },
   {
-   "text": "Localize the equations in steps 5 and 6 using flat-term K-flat models. [lem-weil-pbc-site-derived-tensor-descent] identifies their localization with the derived category and its specified tensor representatives; [lem-pur-kflat-total-tensor-model] keeps every iterated tensor in the resolving class. For scalar extension, [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] applied to the identity topos with coefficient map $B\\to B'$ (and to $R\\to R'$ on the one-object site) supplies flat-term K-flat images even when the coefficient map is not flat. Consequently these are representatives for the derived scalar comparisons, rather than a claim that scalar extension is exact. The localization universal property [lem-weil-pbc-localization-universal-property], applied successively in each variable, preserves composition and equality of these transformations and makes them natural for localized morphisms. Step 4 pins the localized tensor comparison to the canonical one. Thus all the chain constraint and scalar equations descend to the required derived equations, independently of models.",
+   "text": "Every constant-section map, without a finiteness hypothesis on the ring, is bijective: its sheafification unit is locally bijective and every cover of the final point contains the identity. Naturality of sheafification identifies the residue transition maps, while the limit-lift equation identifies all projections of the integral constant map. The profinite tower isomorphism with the actual quotient maps identifies compatible residues with the integer ring. Evaluation preserves the ring-sheaf limit, so equality on all projections proves bijectivity of the specified integral-section map.",
    "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pur-kflat-total-tensor-model",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor), 0G7E (lemma-pullback-K-flat), and 07A4; categories.tex Tag 04VG with the cited localization universal property"
-   }
-  },
-  {
-   "text": "For the coefficient datum of [def-weil-completed-integral-coefficients], the valuation-ring and uniformizer hypotheses are supplied by [lem-weil-l-adic-extension-integers-dvr]. By [lem-weil-valued-dvr-finite-quotients], each $A_{E,n}$ is finite. Apply [lem-pur-proetale-finite-constant-sections] with $X=V=s$ and $A=A_{E,n}$. Since $|s|$ is a singleton, evaluation of a continuous function at its unique point identifies $(A_{E,n})_s(s)$ with $A_{E,n}$. The cited comparison sends every constant-presheaf element to its constant function, so the inverse is exactly the constant-section map. For a coefficient homomorphism $A_{E,m}\\to A_{E,n}$, naturality of sheafification sends the constant section $a$ to the constant section of its image. These elements exhaust the sections, so the induced section map is precisely the quotient homomorphism.",
-   "uses": [
+    "def-weil-proetale-locally-constant-sheaf",
+    "lem-trf-point-sheafification-final",
     "def-weil-completed-integral-coefficients",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients",
-    "lem-pur-proetale-finite-constant-sections"
+    "lem-sfb-integers-profinite-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the separately stated normalized chain tensor/scalar construction. Combine it with the proved geometric point identification, coefficient quotient/limit calculation and the representative-localization descent arguments in the item module.",
+   "uses": [
+    "lem-sf-point-evaluation-chain-models"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.2.12, discrete-space assertion; coefficient hypotheses and finite quotients from the cited arithmetic nodes"
-   }
-  },
-  {
-   "text": "By [def-weil-completed-integral-coefficients] and the sectionwise limit formula of [def-pur-sheaf-inverse-limit], $\\widehat{\\mathcal O}_{E,s}(s)=\\varprojlim_n A_{E,n}$, with coordinate projections. The canonical map $\\mathcal O_E\\to\\varprojlim_n A_{E,n}$ is an isomorphism: choose representatives $a_n\\in\\mathcal O_E$ for a compatible tuple. Then $a_m-a_n\\in\\varpi_E^n\\mathcal O_E$ for $m\\ge n$, hence $|a_m-a_n|_E\\le|\\varpi_E|_E^n\\to0$. By [lem-weil-l-adic-extension-complete] they converge to $a\\in E$. The closed balls $\\mathcal O_E$ and $a_n+\\varpi_E^n\\mathcal O_E$ contain the appropriate tails, so $a\\in\\mathcal O_E$ and has the given residues. Injectivity follows from $|a|_E\\le|\\varpi_E|_E^n$ for all $n$. Here $0<|\\varpi_E|_E<1$ follows from [lem-weil-l-adic-extension-integers-dvr]. The forward map is $a\\mapsto(a\\bmod\\varpi_E^n)_n$; it is a ring homomorphism, so its inverse is also one. Together with step 8 this identifies the constant-section and every quotient map exactly. Applying steps 3--7 to this ring sheaf uses its ordinary ambient tensor, as asserted.",
-   "uses": [
-    "def-weil-completed-integral-coefficients",
-    "def-pur-sheaf-inverse-limit",
-    "lem-weil-l-adic-extension-complete",
-    "lem-weil-l-adic-extension-integers-dvr"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/def-weil-completed-integral-coefficients.md",
-    "place": "Completed coefficient sheaf definition; agent-written elementary compatible-residue Cauchy argument using the cited completeness and valuation statements"
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, total-complex construction; sites-modules.tex Tag 03EL. Original item steps 3, 5 and 6."
    }
   }
  ],
  "proof_deps": [
   "lem-fix-geometric-stalk-topos-point",
   "def-weil-proetale-geometric-stalk",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "def-pc-tensor-complex-sheaves",
+  "def-sfb-ringed-site-point",
+  "lem-trf-point-sheafification-final",
+  "lem-pur-sheaf-line-evaluation-inverse-pair",
   "lem-pur-kflat-total-tensor-model",
-  "lem-pur-exact-pullback-signed-comparison",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-localization-universal-property",
+  "lem-pur-cochain-comparison-monoidal-equations",
+  "lem-sfb-ringed-site-point-tensor",
+  "lem-sfb-ringed-site-kflat-stalk-criterion",
+  "lem-sfb-ringed-site-point-flat",
+  "det-pe-topos-functoriality-site",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-weil-pbc-tensor-comparison-descent-representatives",
+  "lem-pur-module-tensor-extension-equation",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "def-weil-proetale-locally-constant-sheaf",
   "def-weil-completed-integral-coefficients",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-valued-dvr-finite-quotients",
-  "lem-pur-proetale-finite-constant-sections",
-  "def-pur-sheaf-inverse-limit",
-  "lem-weil-l-adic-extension-complete"
+  "lem-sfb-integers-profinite-tower",
+  "lem-sf-point-evaluation-chain-models"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A4, 06YY and 0G7E with sites-modules.tex Tag 03EL and proetale.tex Tag 0991; explicit point, signed-constraint, scalar and coefficient specialization"
+  "place": "Tags 07A4, 07A2 and 0G7E; sites-modules.tex Tag 03EL; proetale.tex Tag 0991. D8 direct final-object evaluation, standard monoidal mapHomologicalComplex, and resolving-representative localization."
  },
  "mathlib_searches": [
   {
@@ -336,14 +306,9 @@
  },
  "tool_uses": [
   "lem-fix-geometric-stalk-topos-point",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-point-proetale-sections-exact",
   "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-pur-kflat-total-tensor-model",
-  "lem-pur-exact-pullback-signed-comparison",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-pur-proetale-finite-constant-sections"
+  "lem-pur-kflat-total-tensor-model"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -381,5 +346,27 @@
   "group": "Q66",
   "result": "fix",
   "note": "Read the node, all 14 stmt_deps, the report, six modules, five new nodes and the side-live interfaces (RingedSitePoint, GeometricStalkToposPoint, PointProEtaleSectionsExact, KFlatTotalTensorModel, SheafOfModules monoidal unit, CompletedIntegralCoefficients). Every clause is rendered: point identification pinned on colimit injections, RingedSitePoint ring/module pinned via HEq with equal types, exactness, derived sections as the unique left-derived functor, b fixed on every summand and pure tensors, resolving preservation, the unique representative-square derived comparison (true for all presentations; same interface as ringedTopoiCanonicalDerivedTensorPullback, moved to the ModuleCat target), unit/assoc/Koszul braiding/unitors, scalar kappa/epsilon pinned with a balanced rule and no flatness assumed, coefficient constant/limit/transition maps. No hollow data, extra hypotheses or universe restrictions; statement verbatim; stmt_deps gains only the new nodes plus the landed def-sfb-ringed-site-point (allowed); new nodes conform; no duplicate found. FIX (mechanical): H9, moved five plain proof-dep imports from PointEvaluationTensorData to the item module; landing speed-ups, TensorData genInjectivity/genSizeOfSpec/linters off (original timed out at 60 s, fix clean in 46 s side by side at load 150) and TensorCoherence linters off. All six siblings compiled clean via nt_compile --json at load 94 (16.8/18.9/52.0/17.1/5.0/6.9 s). Land at lower load (TensorCoherence about 50 s). Advisories: module docstrings lack a # title; report mislabels the FromJoel kFlat; derived constraint and scalar squares are implied rather than restated."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261025T122741-L-1802373",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

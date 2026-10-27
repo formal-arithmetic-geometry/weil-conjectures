@@ -139,7 +139,40 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.AffineBlowup.strictChartMap",
+     "module": "WeilConjectures.Blowup.Affine.StrictTransformChart",
+     "lines": [
+      154,
+      161
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.AffineBlowup.coe_strictChartMap_tmul",
+     "module": "WeilConjectures.Blowup.Affine.StrictTransformChart",
+     "lines": [
+      163,
+      171
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-lem-nagata-sketch-blowups",
  "blueprint_update": {
@@ -176,5 +209,23 @@
   "group": "Q139",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-379584690 (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes. The statement keeps the current main-20261015 blueprint formula sigma_a(y⊗x/a)=y f(x)/b. It also makes explicit the context inherited from def-nagata-strict-transform-basechange-chart-ring (f:A→B a map of commutative rings, I an ideal, a∈I). This is the same map, with no hypothesis added or weakened. Step 1: lem-weil-pbc-localization-away-universal-property (a Mathlib leaf) gives lambda:A_a→B_b because f(a)/1=b/1 is a unit; the formula and the A-linearity check out. Step 2 is elementary: the preimage of B[J/b] under lambda is an A-subalgebra containing every generator x/a, since lambda(x/a)=f(x)/b and f(x)∈J; it never cancels a. Step 3: lem-weil-pbc-algebra-tensor-pushout-universal-property (2)/(3) is applied to s:B→B[J/b] and g, which agree on A. This gives a B-algebra map with the formula, unique by clause (3). Sources checked: Stacks 00CP = algebra.tex:1084 and 01I4 = schemes.tex:985. There is no cycle: the item does not cite the well-definedness lemma. Small cases checked: Z→Z/2 with a=2 (target 0), a nilpotent, a a unit, and k[x,y]→k[x,y]/(y) with a=x (sigma sends t to 0; kernel is the x-torsion, matching the kernel and surjectivity citers). The live Lean AffineBlowup.strictChartMap builds the same map. The tool_uses on the two generic Mathlib leaves are accepted. The item is not superseded (imported in live and side-live) and is in no dropped list or repair note. Advisories: A_a is cited only transitively through the localization lemma, and the report names citations.json and searches.jsonl, which are not in the delivery. No changes made."
+ },
+ "lean": {
+  "module": "WeilConjectures.Blowup.Affine.StrictTransformChart",
+  "declaration": "AlgebraicGeometry.AffineBlowup.strictChartMap",
+  "statement": "noncomputable def strictChartMap (ha : a ∈ I) :\n    BaseChangeChart B I a →ₐ[B] chartRing (I.map (algebraMap A B)) (algebraMap A B a)",
+  "branch": "slopmaster2",
+  "by": "Q13",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Explicit dependency binding under stage-2 §1(B): the local audit names the canonical map, but the current server preflight does not accept the node as a stated prerequisite without an explicit binding. The existing source strictChartMap is exactly sigma_a: B tensor_A A[I/a] to B[IB/f(a)], obtained from the localization map and the tensor-product universal property, with the stated fraction formula. No replacement map or construction is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c4c6ec6a",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Clauses of thm 1-4 match the node: J≤I^c; Z',N' smooth/lft/qc; ∃! Bl_C N≅N' over N; E' = strict-transform kernels ++ [exceptional] SNC + étale flag w.r.t. N'; invertible exceptional; unique division K*F^c=J·O ↔ K=controlled; affine colon by e^c; components inside C deleted (N and Z); generic nonvanishing; unchanged over complement; smooth base change (controlled ideal, cartesian strict-transform square over blowupFlatBaseChangeIso, ordered list); chart cover/coordinates/étaleness/saturation/monomial colon; strictChartMap bijective + colon + fraction formula. Truth checked by hand (sSup = unique quotient for invertible F^c; e nzd ⇒ colon; ∃! by reducedness + dense complement; C reduced ⇒ I|_D=0; flat base change 0805 for charts). Hypotheses not stronger (LocallyOfFiniteType redundant, label injectivity implied by radical E.prod). New defs real (sSup; étale flag Prop), no duplicate (HasAdaptedNormalCrossingsCenter / Step.Transforms differ). Statements verbatim; 6 added stmt_deps all def nodes and used; §1(B) existing:true strictChartMap on a dep with live lean null = base. Docstrings/source/blueprint/proof steps OK, sorry only. Advisory: blowupFlatBaseChangeIso, IsInvertible, reesGrading/reesX, ideal powers used without owner stmt_deps; second reading by same worker. No recompile (no file changed)."
  }
 }

@@ -25,123 +25,67 @@
  ],
  "proof": [
   {
-   "text": "Step 1a (geometric domain). The field $k$ is noetherian, since its only ideals are $0$ and $k$. Apply [lem-weil-pbc-finite-type-over-noetherian] to the structure morphisms of $X$ and $Y$, and [lem-kun-dimension-finite-type] over $k$. Thus both schemes are noetherian and finite-dimensional. Since $\\ell\\ne p$, $\\ell$ is invertible on them. They therefore satisfy the scheme hypotheses in [def-weil-pbc-rational-category]. Choose an integral lattice $K_0$ presenting the given rational object and write $Q_E$ for rationalization.",
+   "text": "Apply [lem-pur-rational-lattice-adic-domain] on $X,Y$. Every lattice $K_0$ representing $K$ is in the integral finite-Tor domain. The smooth separated pure-dimensional hypotheses therefore allow [thm-pur-adic-reconstruction]. Take the simultaneous linear natural family $\\gamma_E:H_E^{\\rm int}\\Rightarrow G_E^{\\rm int}$ of [lem-pur-adic-purity-scalar-naturality], with exactly those finite reductions and its specified coefficient comparisons. This uses a compatible choice, not uniqueness of coherent lifts.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-kun-dimension-finite-type",
-    "def-weil-pbc-rational-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
-    "place": "Step 1, lattice presentation: scheme hypotheses"
-   }
-  },
-  {
-   "text": "Step 1b (uniform Tor domain). By [lem-weil-pbc-integral-stratified-perfect-characterization], the integral category underlying the rationalization is exactly [def-weil-derived-complete-integral-detailed] on these schemes. In particular $K_0$ is derived complete and its first reduction is bounded; choose an interval $[r,s]$ containing its cohomology. By [lem-coef-integral-residue-tor], every reduction has Tor amplitude in that same interval. Consequently $K_0\\in D^b_{ctf}(Y,\\mathcal O_E)$, including when $K_0$ is a torsion lattice.",
-   "uses": [
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "def-weil-derived-complete-integral-detailed",
-    "lem-coef-integral-residue-tor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
-    "place": "Step 1, the lattice belongs to the adic finite-Tor category"
-   }
-  },
-  {
-   "text": "Step 1c (compatible integral choice). Set $H_E=Lf_E^*(-)(d)[2d]$ and $G_E=Rf_E^!$. The preceding domain checks and the stated smooth separated pure-dimensional hypotheses allow [thm-pur-adic-reconstruction] to be applied to every lattice. It supplies an integral isomorphism with the prescribed finite reductions, without uniqueness of coherent lifts. Choose the simultaneous family $\\gamma_{E,K_0}:H_EK_0\\to G_EK_0$ supplied by [lem-pur-adic-purity-scalar-naturality]. Its statement supplies the exact linear functors, integral linear naturality and coefficient compatibility, with exactly those reductions. All subsequent maps use this compatible choice.",
-   "uses": [
+    "lem-pur-rational-lattice-adic-domain",
     "thm-pur-adic-reconstruction",
     "lem-pur-adic-purity-scalar-naturality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
-    "place": "Step 1, adic purity for the lattice with a compatible choice"
+    "place": "Step 1: lattice domain and compatible adic family"
    }
   },
   {
-   "text": "Step 1d (localization). Apply [prop-weil-pbc-rational-transport] to the exact integral linear functors $H_E,G_E$ and their chosen natural transformation. It extends the transformation to all localized morphisms, with component $Q_E(\\gamma_{E,K_0})$. The rational pullback and tensor formulas of [def-weil-derived-pullback-tensor-hom] and the rational twist of [def-coefficient-twists-detailed] identify its source with $Lf_E^*(Q_EK_0)(d)[2d]$; [def-weil-exceptional-inverse-image] defines its target as $Rf_E^!(Q_EK_0)$. The inverse is $Q_E(\\gamma_{E,K_0}^{-1})$: the two inverse identities follow by functoriality. Naturality, supplied for all rational morphisms by the cited transport theorem, applies in particular to rational isomorphisms between lattice presentations, so these components are independent of presentation.",
+   "text": "By [prop-weil-pbc-rational-transport], this exact integral linear transformation extends to all rational morphisms with component $Q_E(\\gamma_{E,K_0})$. Apply [lem-pur-rational-scalar-comparison-identification] to identify its functors with $H_E=Lf_E^*(-)(d)[2d]$ and $G_E=Rf_E^!$. Its inverse is $Q_E(\\gamma_{E,K_0}^{-1})$: functoriality carries the two integral inverse equations to identities. Naturality on rational morphisms applies to any rational isomorphism between lattice presentations, proving independence of the presentation. Thus the required rational purity is obtained by rationalization.",
    "uses": [
     "prop-weil-pbc-rational-transport",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-coefficient-twists-detailed",
-    "def-weil-exceptional-inverse-image"
+    "lem-pur-rational-scalar-comparison-identification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
-    "place": "Step 1, rational transport and lattice independence"
+    "place": "Step 1: rationalization"
    }
   },
   {
-   "text": "Step 2 (finite extensions and their equations). For $E\\subset F$, let $T_{F/E}$ be [prop-weil-pbc-scalar-extension]. The helper's integral $C_{F/E,W}$ is ordinary tensor by the completed coefficient sheaf, as is the integral functor underlying this $T$. The natural isomorphism $\\chi$ of [lem-weil-finite-free-completed-scalar-comparison] identifies it with the strict inverse-limit scalar extension of [def-weil-integral-scalar-extension]; its hypothesis holds because the lattices are derived complete. Thus there is no identification of these two constructions by definition alone. Work in the helper's ordinary-tensor presentation, whose associator is precisely the tensor associator specified in [prop-weil-pbc-scalar-extension]. For the simultaneously chosen integral family of Step 1, rationalize the natural comparison equation of [lem-pur-adic-purity-scalar-naturality]. Since $T_{F/E}=Q_FC_{F/E}$ on integral representatives, this gives, on every object,\n$$b_{F/E,K}\\,T_{F/E,X}(\\gamma_{E,K})=\\gamma_{F,T_{F/E,Y}K}\\,a_{F/E,K}.$$\nFor the coefficient-passage exceptional functor defined in [def-weil-exceptional-inverse-image], use the rationalized integral $b$ as its scalar comparison. The helper identifies that integral map with the adjunction mate and proves its coherence, so no independent Verdier-duality comparison is needed. The twist comparison is the coefficient comparison of [def-coefficient-twists-detailed]. The identity and composition equations in the integral helper remain equations after applying rationalization; the helper also gives shift compatibility of both exact comparisons. Hence the displayed equation respects the unit, shifts and associators of [prop-weil-pbc-scalar-extension]. Solving it for inverses gives\n$$T_{F/E,X}(\\gamma_{E,K}^{-1})\\,b_{F/E,K}^{-1}=a_{F/E,K}^{-1}\\,\\gamma_{F,T_{F/E,Y}K}^{-1}.$$\nThus both the purity family and its inverse satisfy the finite-stage compatibility required for descent.",
+   "text": "For every $E\\subset F$, [lem-pur-rational-scalar-comparison-identification] gives the exact comparisons $a,b$, the square $b\\circ T(\\gamma_E)=\\gamma_F\\circ a$ and the inverse square $T(\\gamma_E^{-1})\\circ b^{-1}=a^{-1}\\circ\\gamma_F^{-1}$. It also identifies ordinary completed tensor with strict adic scalar extension and the exceptional comparison with the defining counit mate; the unit, associator and shift equations are retained. These are precisely the compatibility hypotheses for both families in [prop-weil-pbc-descent-functors].",
    "uses": [
-    "prop-weil-pbc-scalar-extension",
-    "lem-pur-adic-purity-scalar-naturality",
-    "def-weil-exceptional-inverse-image",
-    "def-coefficient-twists-detailed",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "def-weil-integral-scalar-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
-    "place": "Proof, Step 2 (Qbar-stage): compatibility of finite coefficient extensions, made explicit before common-stage descent"
-   }
-  },
-  {
-   "text": "Step 3a (common-stage descent). In [def-weil-pbc-qbar-category], objects are pairs $(E,K)$ and morphisms are common-stage classes $[M,u]$. Apply [prop-weil-pbc-descent-functors] to the rational exact families $H_E,G_E$, using the comparisons $a,b$ of Step 2. That step verifies precisely the unit, associator and shift hypotheses for both families, and the compatibility square for $\\gamma$. The theorem explicitly descends compatible natural transformations and their equations, not just functors. It therefore descends this family to a natural transformation $\\overline\\gamma:H\\Rightarrow G$, with component represented by $\\gamma_{E,K}$. Its representative formula gives the functor actions $a_F^{-1}H_M(u)a_E$ and $b_F^{-1}G_M(u)b_E$; independence of enlargement and of the class representative is part of the cited descent assertion.",
-   "uses": [
-    "def-weil-pbc-qbar-category",
+    "lem-pur-rational-scalar-comparison-identification",
     "prop-weil-pbc-descent-functors"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
-    "place": "Step 2, common-stage representatives and natural-transformation descent"
+    "place": "Step 2: finite coefficient comparisons"
    }
   },
   {
-   "text": "Step 3b (inverse and conclusion). The inverse family satisfies the coefficient square established in Step 2, so [prop-weil-pbc-descent-functors] descends it too, along with the equations $\\gamma_{E,K}^{-1}\\gamma_{E,K}=1$ and $\\gamma_{E,K}\\gamma_{E,K}^{-1}=1$. Hence $\\overline\\gamma$ is an isomorphism. The common-stage pullback, tensor and twist definitions in [def-weil-derived-pullback-tensor-hom] and [def-coefficient-twists-detailed], and the coefficient-passage exceptional functor of [def-weil-exceptional-inverse-image], identify $H(K)=Lf^*K(d)[2d]$ and $G(K)=Rf^!K$. These are the claimed $\\Qlb$ purity maps, transported from the rational maps and independent of the finite stage.",
+   "text": "Apply [lem-pur-common-stage-smooth-operation-identification] to these families. At $(E,K)$ the descended maps are represented by $\\gamma_{E,K}$ and $\\gamma_{E,K}^{-1}$; their actions on a common-stage arrow are the displayed $a^{-1}H_M(u)a$ and $b^{-1}G_M(u)b$ formulas, independent of its representative. Their composites are represented by the two finite-stage identities, hence are identities. The lemma identifies their source and target functors, including map actions, with $Lf^*(-)(d)[2d]$ and $Rf^!$. This proves the claimed $\\overline{\\mathbf Q}_\\ell$ purity and independence of the finite coefficient stage.",
    "uses": [
-    "prop-weil-pbc-descent-functors",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-coefficient-twists-detailed",
-    "def-weil-exceptional-inverse-image"
+    "lem-pur-common-stage-smooth-operation-identification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
-    "place": "Step 2, inverse equations and identification with Qbar operations"
+    "place": "Step 2: common-stage descent and inverse equations"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-kun-dimension-finite-type",
-  "def-weil-pbc-rational-category",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "def-weil-derived-complete-integral-detailed",
-  "lem-coef-integral-residue-tor",
+  "lem-pur-rational-lattice-adic-domain",
   "thm-pur-adic-reconstruction",
   "lem-pur-adic-purity-scalar-naturality",
   "prop-weil-pbc-rational-transport",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-coefficient-twists-detailed",
-  "def-weil-exceptional-inverse-image",
-  "prop-weil-pbc-scalar-extension",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "def-weil-integral-scalar-extension",
-  "def-weil-pbc-qbar-category",
-  "prop-weil-pbc-descent-functors"
+  "lem-pur-rational-scalar-comparison-identification",
+  "prop-weil-pbc-descent-functors",
+  "lem-pur-common-stage-smooth-operation-identification"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
-  "place": "Steps 1 and 2, preserving the returned localization / finite extension / common-stage route; existing generic transport nodes replace inline arguments"
+  "place": "Steps 1 and 2; extraction of the returned seven-step argument into three statement-only tasks, with localization and inverse equations assembled here"
  },
  "mathlib_searches": [
   {
@@ -296,43 +240,34 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "thm-pur-rational-and-qbar-purity",
   "worker": "stage1",
-  "summary": "Q79 repair of the long-step return: replace returned Step 1 by four short steps separating scheme hypotheses, uniform Tor amplitude, compatible integral choice and rational transport; replace returned Step 3 by two short applications of the existing general descent theorem for natural transformations and equations. Keep the statement and Lean record unchanged, and retain returned Step 2 verbatim. Existing rational-transport and descent nodes already state the hidden arguments, so no duplicate nodes are created. Reopen all cited statements and refresh verbatim citations.",
-  "blueprint": "Current main-20261015 proof Step 1 is realized by Steps 1a--1d; its Step 2 by the unchanged finite-extension Step 2 and Steps 3a--3b. As in the returned proof, integral scalar naturality avoids the circular downstream transitivity citation.",
+  "summary": "Q67 repair of the 2026-10-22 batch5 re-split return. Extract three statement-only tasks: geometric and uniform finite-Tor admissibility of every rational lattice; identification of the localized scalar comparison system, including the counit mate and both coefficient squares; identification of the descended functors on common-stage arrows and inverse equations. The parent assembles them in four short steps. report.md preserves all seven returned steps verbatim with an argument-by-argument destination map. The statement, imported metadata and Lean attachment are unchanged.",
+  "blueprint": "Main-20261015 proof Step 1: new lattice-domain node and parent Steps 1-2; its Step 2: new rational-scalar-comparison and common-stage-identification nodes and parent Steps 3-4. The downstream transitivity node remains excluded to avoid a cycle.",
   "tool_uses": [
    {
     "node": "prop-weil-pbc-rational-transport",
-    "why": "General scalar-localization transport of supplied exact linear functors and transformations; the purity unit requires this construction but does not state it."
-   },
-   {
-    "node": "prop-weil-pbc-scalar-extension",
-    "why": "General rational coefficient functors, associators and shift comparisons for finite fields; this is the unit Step 3 coefficient-passage tool."
+    "why": "Generic scalar-localization transport of the supplied integral natural transformation; required by the coefficient-passage unit."
    },
    {
     "node": "prop-weil-pbc-descent-functors",
-    "why": "General common-stage descent and its representative formula; it does not replace any smooth-purity argument."
-   },
-   {
-    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "why": "Identifies the two integral constructible presentations on noetherian finite-dimensional schemes, needed to type every lattice."
-   },
-   {
-    "node": "lem-coef-integral-residue-tor",
-    "why": "The uniform finite-Tor interval for every integral lattice discharges adic reconstruction hypotheses; the purity unit has no generic residue-Tor lemma."
-   },
-   {
-    "node": "lem-kun-dimension-finite-type",
-    "why": "Finite dimension of a finite-type scheme over a field discharges the coefficient-category domain; the purity unit does not prove this geometric fact."
-   },
-   {
-    "node": "lem-weil-finite-free-completed-scalar-comparison",
-    "why": "Generic comparison of strict inverse-limit integral scalar extension with tensor by the finite-free completed coefficient sheaf. It aligns the purity helper with the rational scalar-extension package; no purity-unit node supplies this construction comparison."
+    "why": "Generic common-stage descent of the two compatible transformations and their equations; the new identification lemma checks the specified geometric operations."
    }
   ]
  },
@@ -347,12 +282,12 @@
   "lem-pur-adic-purity-scalar-naturality"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q79-0791172a5",
-  "group": "Q79",
+  "reviewer": "NT-cc-Q67-60afe93ca",
+  "group": "Q67",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-0791172a5 (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote no fixes; review.md has the full checks. This is a repair of the return for long, non-elementary Steps 1 and 3. It creates no new nodes, leaves the statement and old Step 2 unchanged, and all 7 steps are under 2000 characters. proof_deps equals the union of uses, every cited id exists and none is merged, and the item does not reach itself, so there is no cycle. Leaving out prop-pur-rational-purity-transitivity-summands is correct, because that node cites this item. Step checks: 1a: lem-weil-pbc-finite-type-over-noetherian and lem-kun-dimension-finite-type give the noetherian, finite-dimensional domain of def-weil-pbc-rational-category. 1b: lem-weil-pbc-integral-stratified-perfect-characterization identifies that category with def-weil-derived-complete-integral-detailed, and lem-coef-integral-residue-tor gives D^b_c=D^b_ctf. 1c: the hypotheses of thm-pur-adic-reconstruction hold, and the family of lem-pur-adic-purity-scalar-naturality is taken from its statement, without assuming unique lifts. 1d: the first paragraph of prop-weil-pbc-rational-transport extends every natural transformation with components eta_K⊗1. I checked the rational-level clauses of def-weil-derived-pullback-tensor-hom, def-coefficient-twists-detailed and def-weil-exceptional-inverse-image: the operations are integral on objects and act on morphisms by u⊗c ↦ F(u)⊗c. 3a/3b: prop-weil-pbc-descent-functors states that compatible natural transformations and their equations descend. Its beta directions match a and b (T=Y, S=X), and the inverse equations descend, so gamma-bar is an isomorphism. The statement matches the master and main-20261015 sources, and the coefficient categories are exactly def-weil-pbc-rational-category and def-weil-pbc-qbar-category; the target is not weakened. Edge cases checked: zero object, a torsion lattice, d=0, E=F, ramified E⊂F. There is no SGA citation. I accept the eight recorded tool_uses. One observation does not block: the Qbar Rf^! comparison in its definition comes via lem-pur-etale-coefficient-system-adjoint, while Step 2 uses b, the adjunction mate. This affects only the action on morphisms, not that each component is an isomorphism, and Step 2 had already been accepted."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-60afe93ca (reviewer sub-agent of L); spot-checked: Batch5 re-split, repair note of 2026-10-22. The statement, stmt_deps, Lean record and tool_uses are unchanged; only the proof fields and split_report differ. The item is not superseded (live and side-live still hold the 7-step version and have none of the new ids) and is not on the dropped list. No SGA citation and no cycle. Every one of the 7 old steps has a destination: 1a and 1b go to lem-pur-rational-lattice-adic-domain; 1c and the transport/inverse/naturality part of 1d go to parent Steps 1-2, which only apply existing nodes; the identification part of 1d and old step 2 go to lem-pur-rational-scalar-comparison-identification; 3a and 3b go to lem-pur-common-stage-smooth-operation-identification. The parent has 4 steps of 2267 characters. The three new nodes are statement-only, of comparable size, and none restates the item. Checks against the cited statements: the lattice node follows from finite-type-over-noetherian, kun-dimension, stratified-perfect-characterization and coef-integral-residue-tor. Tested on the torsion lattice O_E/ϖ: [A_n -ϖ-> A_n] has Tor amplitude [-1,0], as claimed. The forward and inverse squares are correctly typed. T = Q_F C holds by definition in prop-weil-pbc-scalar-extension, and χ needs only derived completeness. The common-stage representative formula matches prop-weil-pbc-descent-functors. The identification of b (the compact-support counit mate) with the defining Q̄_ℓ scalar comparison of Rf^! (from lem-pur-etale-coefficient-system-adjoint, via def-weil-exceptional-inverse-image), which the 2026-10-17 review noted, is now an explicit task in the new nodes; I judge it true, since both are the mate of the compact-support comparison through the counit. Edge cases checked: E=F, a tower E⊂F⊂L, ramified E⊂F, d=0, empty T, K=0, and a common-stage arrow represented over two enlargements. Accepted tool_uses: prop-weil-pbc-rational-transport and prop-weil-pbc-descent-functors. Minor, not blocking: every search record carries the same generic verdict sentence, and the scalar node does not cite the lattice node."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",
@@ -393,5 +328,32 @@
   "group": "NE",
   "result": "fix",
   "note": "7th delivery; F1-F3 of b41005e3 addressed: the trace witnesses are pinned by equality/HEq to rationalIso, commonIso and the actual G/adjunction; composition uses f, g, d, e and c_{g,f} = conjugate mate of sfFieldShriekCompositionRational, with a common-stage ∃!-pinned support compositor; base change has an arbitrary IsPullback and no condition on b; the duplicate def node is gone. Remaining fault, H3: the Qbar trace clause was rfl because descendedSmoothTrace := F(commonIso) ≫ counit (compiler-checked with a control). FIX: new modelSmoothTrace (homEquiv.symm of smallModelIso), and descendedSmoothTrace = F(commonSourceComparison) ≫ q⁻¹ ≫ inclusion(model trace), stated on ⟨fieldIndex (stageSetting P i), K⟩ to avoid the heartbeat timeout from Shrink unfolding; rfl now fails; it holds by q-naturality plus the Comparison.counit field. fixes/: complete module (clean, 23.5 s), lean-record (+modelSmoothTrace, statement verbatim), report. Delivered module compiles clean in 19.1 s. Advisory: BaseChangeClause is a tautology inherited from thm-pur-smooth-base-change-coherence (Iso.hom_inv_id_assoc), and two private imports are unused. H4 clean; docstrings present; rational trace and composition clauses are substantive."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f83c",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T070945-L-3715061",
+  "kind": "interface",
+  "note": "independent cc review: smoothPullAugmentation_isIso (generalized to separated/LFT/qc, proved from finiteTorOrdinaryPullComplete + integralPullbackAugmentation_ambient + canonicalCompletionUnitCriterion) and explicit-type/ordinaryMonoidal changes against node def-pur-canonical-rational-purity-realization, its proof_deps and the 3 change records; delivered module + 6 direct importers compiled in sandbox",
+  "sorry_before": [
+   "WeilConjectures.RationalSmoothPurityCanonical.finiteIntegration_smoothPurityMap",
+   "WeilConjectures.RationalSmoothPurityCanonical.integralMap_isIso",
+   "WeilConjectures.RationalSmoothPurityCanonical.orientation_existsUnique",
+   "WeilConjectures.RationalSmoothPurityCanonical.projection_isIso",
+   "WeilConjectures.RationalSmoothPurityCanonical.rationalIso_scalar",
+   "WeilConjectures.RationalSmoothPurityCanonical.smoothPullAugmentation_isIso",
+   "WeilConjectures.RationalSmoothPurityCanonical.smoothPullToOrdinary_existsUnique"
+  ],
+  "sorry_after": [
+   "WeilConjectures.RationalSmoothPurityCanonical.finiteIntegration_smoothPurityMap",
+   "WeilConjectures.RationalSmoothPurityCanonical.integralMap_isIso",
+   "WeilConjectures.RationalSmoothPurityCanonical.orientation_existsUnique",
+   "WeilConjectures.RationalSmoothPurityCanonical.projection_isIso",
+   "WeilConjectures.RationalSmoothPurityCanonical.rationalIso_scalar",
+   "WeilConjectures.RationalSmoothPurityCanonical.smoothPullToOrdinary_existsUnique"
+  ]
  }
 }

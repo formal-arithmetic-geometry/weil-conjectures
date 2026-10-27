@@ -1,0 +1,129 @@
+{
+ "id": "lem-trf-resolving-centered-toric-lift-rule",
+ "kind": "statement",
+ "title": "A rational toric rule with resolving centered monoscheme lifts",
+ "statement": "There exists a rule F assigning a finite normalized blowup tower to the rational realization of every fine torsion-free monoscheme with finite affine cover, including finite disjoint unions, together with its smooth-scheme contracted-pullback comparisons and identity/composition equations [lem-trf-monoscheme-tower-comparison-coherence]. There is a centered lift rule T for F: its saturated monoscheme towers have the same ordered stages, actual monoid ideals realizing the ring ideals, canonical realization identifications, fine torsion-free intermediate objects, and unique centered local isomorphisms compatible with those identifications. Its transported ring centers are torus invariant. For each input M the terminal monoscheme of T(M) is smooth. This assertion does not supply comparisons between the monoscheme towers, or any fan tower.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, construction 3.2.19 (first half) and Theorem 3.2.20, p.106."
+ },
+ "stmt_deps": [
+  "lem-trf-monoscheme-tower-comparison-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Fix one smooth-functorial normalized rational toric desingularization rule from [lem-trf-toric-normalized-desingularization]. Forget its extra action fields to obtain the SchemeRule of [lem-trf-monoscheme-tower-comparison-coherence], keeping the towers, smooth-scheme comparisons and identity/composition equations. Keep its terminal regularity and invariant nowhere-dense centers for the next step.",
+   "uses": [
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-monoscheme-tower-comparison-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each input apply [lem-trf-monoscheme-toric-tower-descent] to the assigned tower. Keep its ordered tower, base identification, torsion-freeness, realization isomorphisms, arrows and exact centers to form a Lift. The regular endpoint and the last clause of tower descent give terminal smoothness. For any other Lift, compare inductively starting with the pinned base. Injectivity in [lem-trf-toric-monoid-comparison] identifies the centers under the preceding local isomorphism. The identical saturated blowup fraction charts give local isomorphisms at the next level, unique because they fix every fraction over the previous level; [lem-trf-normalized-blowup-calculus] identifies their realizations with the prescribed normalized scheme maps. This produces a LiftIso, and the same induction proves its uniqueness. The toric charts transport the original invariant ideals, giving LiftRule.invariant. No contraction or comparison of two different input towers is asserted here.",
+   "uses": [
+    "lem-trf-monoscheme-toric-tower-descent",
+    "lem-trf-toric-monoid-comparison",
+    "lem-trf-normalized-blowup-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-toric-normalized-desingularization",
+  "lem-trf-monoscheme-tower-comparison-coherence",
+  "lem-trf-monoscheme-toric-tower-descent",
+  "lem-trf-toric-monoid-comparison",
+  "lem-trf-normalized-blowup-calculus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, construction 3.2.19 (first half) and Theorem 3.2.20, p.106.",
+  "note": "First-half tower construction of 3.2.19, with the interface conversion to centered LiftRule separated from comparison descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CenteredToricTowerLift|LiftRule|resolvingLiftRule",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-26",
+   "results": "0 hits: . No declaration states centered saturated monoscheme tower lift existence. The returned scheme normalization/localization uniqueness APIs do not provide monoid ideals or tower lifts.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational toric resolution rule admits unique centered lifts to saturated monoscheme blowup towers with smooth last object",
+   "digest": "3f979233abf7b526",
+   "date": "2026-10-26",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_uniq, AlgebraicGeometry.IsOpenImmersion.lift_uniq, Algebra.FormallyUnramified.lift_unique, Algebra.FormallyUnramified.lift_unique', IsLocalizedModule.lift_unique, IsFractionRing.lift_unique, IsLocalization.lift_unique, Hausdorffification.lift_eq. No declaration states centered saturated monoscheme tower lift existence. The returned scheme normalization/localization uniqueness APIs do not provide monoid ideals or tower lifts.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized toric resolution rule has unique centered monoidal tower lifts with smooth final monoscheme",
+   "digest": "59b97a5d79fa1eea",
+   "date": "2026-10-26",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc. No declaration states centered saturated monoscheme tower lift existence. The returned scheme normalization/localization uniqueness APIs do not provide monoid ideals or tower lifts.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FunctorialFanDesingularization",
+  "date": "2026-10-26",
+  "group": "V3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. First half of ILO VIII 3.2.19: centered tower construction, before smooth-comparison descent.",
+   "via": [
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ResolvingCenteredToricLiftRule",
+  "file": "lean/Sheaf/AlgebraicGeometry/ResolvingCenteredToricLiftRule.lean",
+  "declaration": "AlgebraicGeometry.Monoscheme.TowerComparison.exists_resolvingLiftRule",
+  "statement": "theorem exists_resolvingLiftRule :\n    ∃ F : SchemeRule.{u}, ∃ T : LiftRule F,\n      ∀ M : Input.{u},\n        ((T.lift M).tower.level (Fin.last (F.tower M).length)).IsSmooth",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261026T083302-L-2314837",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261026T083302-L-2314837",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

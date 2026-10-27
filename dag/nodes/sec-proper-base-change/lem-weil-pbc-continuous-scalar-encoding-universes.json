@@ -1,0 +1,180 @@
+{
+ "id": "lem-weil-pbc-continuous-scalar-encoding-universes",
+ "kind": "statement",
+ "title": "Exact ordinary continuous scalar extension under the universe encodings",
+ "statement": "Let ℓ be prime, E : Type u a finite normed extension of Q_ℓ [def-weil-l-adic-coefficient-extension], and T : Scheme u with small pro-etale site [def-weil-pbc-proetale-site]. Put A=O_E and let B_T be its completed coefficient sheaf [def-weil-pbc-adic-coefficient-datum]. Let c : B_T ≅ C(|-|, A) be any ring-sheaf isomorphism. The actual inclusion C(|-|, A) → C(|-|, E), conjugated by the two canonical continuous ring charts [def-sfb-continuous-ring-canonical-comparison], defines a morphism φ : A_T^c → E_T^c of internal commutative ring objects [def-weil-pbc-condensed-e-module-category]. Internal extension of scalars along φ preserves finite limits. Write a=c followed by the actual continuous coefficient inclusion and let Ψ_A, Ψ_E be the inverse completed and field encodings [def-weil-pbc-completed-continuous-module-encoding-universes, def-sfb-continuous-coefficient-module-equivalence-universe]. There is a natural isomorphism pbcExtend(a) ⋙ Ψ_E ≅ Ψ_A ⋙ Mod.extendScalars(φ), where pbcExtend is the ordinary sectionwise extension [def-weil-pbc-bounded-constructible-tower]. This holds for all ordinary module sheaves, without Noetherianity, cohomological bounds or constructibility hypotheses.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(2) and scalar-extension construction of Proposition 6.8.14(2); Stacks 03EK and 03DA."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-sfb-continuous-ring-canonical-comparison",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-completed-continuous-module-encoding-universes",
+  "def-sfb-continuous-coefficient-module-equivalence-universe",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "The continuous field coefficient sheaf is the sheaf localization of the continuous integral ring at its constant uniformizer. On an arbitrary site object, a continuous field function has integral numerator after multiplication by a sufficiently large power on each open where that numerator has norm at most one. These opens cover; no global bound on a noncompact object is needed. Localization is flat, hence the ordinary sheaf scalar-extension functor preserves finite limits.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-localization",
+    "lem-weil-pbc-scalar-localization-sheaf-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Under section-action reconstruction, restriction of scalars retains the underlying abelian sections, restrictions and additive maps; the scalar acts through its image under the ring map. Conjugating the actual coefficient inclusion by the specified charts is exactly φ. Compose reconstruction with both chart ring-isomorphism transports and with c. The resulting restriction square commutes by identity on sections. The ordinary extension functors are the left adjoints of these restrictions, so uniqueness of left adjoints gives the displayed natural extension comparison.",
+   "uses": [
+    "lem-sfb-internal-section-scalar-adjunction",
+    "def-sfb-continuous-coefficient-module-equivalence-universe",
+    "def-weil-pbc-completed-continuous-module-encoding-universes",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both encodings are equivalences, so preserve and reflect finite limits. Transport finite-limit preservation of ordinary localization through the extension square to obtain finite-limit preservation of internal extension. Ring-isomorphism transport along arbitrary c is exact. These constructions include zero modules and the empty base.",
+   "uses": [
+    "def-sfb-continuous-coefficient-module-equivalence-universe",
+    "def-weil-pbc-completed-continuous-module-encoding-universes"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficient-localization",
+  "lem-weil-pbc-scalar-localization-sheaf-exact",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "def-sfb-continuous-coefficient-module-equivalence-universe",
+  "def-weil-pbc-completed-continuous-module-encoding-universes",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(2); ordinary scalar-encoding portion of Proposition 6.8.14(2), expanded by localization and uniqueness of ordinary left adjoints."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible derived sheaves scalar extension finite presentation exact functor",
+   "results": "{\"t\": \"2026-10-23T12:37:21Z\", \"tool\": \"leanfinder\", \"query\": \"Bounded constructible derived sheaves scalar extension finite presentation exact functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.Presentation.map\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"Condensed.profiniteSolid\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\"], \"digest\": \"f3216f2f94b3f1fb\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match. The generic Mathlib finite-presentation and flat extension statements do not compare the specified section-action encodings on the pro-etale site."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-23T12:37:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"constructible\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match. The generic Mathlib finite-presentation and flat extension statements do not compare the specified section-action encodings on the pro-etale site."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(scalar|encoding)|integral.*constructible",
+   "results": "{\"t\": \"2026-10-23T12:37:22Z\", \"tool\": \"grep\", \"query\": \"constructible.*(scalar|encoding)|integral.*constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match. The generic Mathlib finite-presentation and flat extension statements do not compare the specified section-action encodings on the pro-etale site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Section action equivalence of internal ring modules preserves finite locally presented integral constant models",
+   "results": "{\"t\": \"2026-10-23T15:23:42Z\", \"tool\": \"leanfinder\", \"query\": \"Section action equivalence of internal ring modules preserves finite locally presented integral constant models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FinitePresentation.exists_lift_equiv_of_isLocalizedModule\", \"Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite\", \"Module.FinitePresentation.iff_finitePresentation_of_finite\", \"RingHom.finitePresentation_holdsForLocalizationAway\", \"RingHom.finitePresentation_ofLocalizationSpanTarget\", \"Module.FinitePresentation.of_finite_of_finitePresentation\", \"Algebra.FinitePresentation.of_restrict_scalars_finitePresentation\", \"IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation\"], \"digest\": \"6ae924d227d556b8\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match. The generic Mathlib finite-presentation and flat extension statements do not compare the specified section-action encodings on the pro-etale site."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"PreservesFiniteLimits\"",
+   "results": "{\"t\": \"2026-10-23T15:23:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"extendScalars\\\", \\\"PreservesFiniteLimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\"], \"digest\": \"9659f7d7c8f8f04b\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match. The generic Mathlib finite-presentation and flat extension statements do not compare the specified section-action encodings on the pro-etale site."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionModuleEquivalence|integralSectionLocalModels|scalarLocalization_sheaf_exact",
+   "results": "{\"t\": \"2026-10-23T15:23:43Z\", \"tool\": \"grep\", \"query\": \"sectionModuleEquivalence|integralSectionLocalModels|scalarLocalization_sheaf_exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match. The generic Mathlib finite-presentation and flat extension statements do not compare the specified section-action encodings on the pro-etale site."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical section action equivalence of internal modules on a ringed site preserves finite presentations and commutes with exact localization of continuous p-adic integral coefficients",
+   "results": "{\"t\": \"2026-10-23T16:08:25Z\", \"tool\": \"leansearch\", \"query\": \"Canonical section action equivalence of internal modules on a ringed site preserves finite presentations and commutes with exact localization of continuous p-adic integral coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.isFinitePresentation\", \"instFinitePresentationLocalizationLocalizedModule\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.casesOn\", \"Module.FinitePresentation.isLocalizedModule_map\"], \"digest\": \"28b3f155b3cd906f\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits define generic sheaf finite presentation or scalar-module localization, not the specified continuous pro-etale section-action encodings."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralScalarConstructibleImage",
+  "date": "2026-10-23",
+  "group": "E2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof opening: choose an integral lattice and rationalize; comparison with internal continuous coefficients.",
+   "via": [
+    "lem-weil-pbc-integral-scalar-constructible-image",
+    "lem-weil-pbc-realization-scalar-functor",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousScalarEncodingUniverses",
+  "file": "lean/Sheaf/Paper/ContinuousScalarEncodingUniverses.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousScalarEncodingUniverses",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousInternalScalarMapUniverses",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousInternalScalarMapUniverses_isMonHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousScalarEncodingUniverses"
+  ],
+  "statement": "theorem continuousScalarEncodingUniverses (l : ℕ) [Fact l.Prime]\n    (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] (T : Scheme.{u})\n    (c : Scheme.pbcAdicCompletion T (Scheme.pbcIntegralDatum l E) ≅\n      latticeCoefficientSheaf T (Padic.coefficientExtensionIntegers l E)) :\n    let a := c.hom ≫ latticeCoefficientSheafMap T\n      (Padic.coefficientExtensionIntegers l E).subtype continuous_subtype_val\n    PreservesFiniteLimits\n        (Mod.extendScalars (continuousInternalScalarMapUniverses l E T)) ∧\n      Nonempty (Scheme.pbcExtend a ⋙\n          (continuousFieldModuleEquivalenceUniverse l E T).inverse ≅\n        (completedContinuousModuleEquivalence l E T c).inverse ⋙\n          Mod.extendScalars (continuousInternalScalarMapUniverses l E T))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-16167",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261023T230722-L-3471572",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-16167",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261023T230722-L-3471572",
+  "kind": "interface",
+  "note": "independent cc review: integralScalarConstructibleImage proof and the two new sorried lemmas read against node lem-weil-pbc-integral-scalar-constructible-image and the two new nodes; moved encoding block diffed against the live item module (identical up to blueprint tags); direct importer EmbeddedLatticeCoefficientComparison compiled with the delivered modules"
+ }
+}

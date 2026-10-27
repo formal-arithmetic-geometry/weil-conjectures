@@ -1,0 +1,296 @@
+{
+ "id": "lem-sfb-algebraic-group-homomorphism-factorization",
+ "kind": "statement",
+ "title": "Homomorphism theorem for finite-type group schemes over a field",
+ "statement": "Let $k$ be a field [def-weil-field], let $G,H$ be separated group schemes [def-sc-group-scheme, def-weil-proper-morphism] of finite type over $k$ [def-weil-finite-type-morphism], and let $f:G\\to H$ be a $k$-group-scheme homomorphism. Its scheme-theoretic kernel $N=G\\times_{H,f,e_H}\\operatorname{Spec}k$ is a closed normal subgroup scheme of finite type [def-sc-group-scheme-subgroup, def-pc-fibre-product]. There are a separated finite-type $k$-group scheme $I$ and homomorphisms $q:G\\to I$ and $i:I\\to H$ such that $f=i\\circ q$, $i$ is a closed immersion [def-weil-closed-immersion], and $q$ is faithfully flat and finitely presented. Faithfully flat here means flat [def-weil-flat-morphism] and surjective on underlying spaces; finitely presented means locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact [def-weil-finite-type-morphism] and quasi-separated [def-weil-quasi-separated-morphism]. The homomorphism $q$ has scheme-theoretic kernel $N$, and identifies $I$ with the fppf sheaf quotient $G/N$: the sheafification of $R\\mapsto G(R)/N(R)$ on commutative $k$-algebras for jointly surjective faithfully flat finitely presented coverings.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 5.39 (Homomorphism Theorem), printed p.108, with Theorem 5.28 and its following paragraph, printed p.105; Corollary 5.27 (torsor), printed p.105, and Section 5(j), Example 5.71, printed p.117, for the quotient-sheaf interpretation. Finite presentation follows since the group schemes are of finite type over a field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-quasi-separated-morphism",
+  "def-sfb-fppf-group-quotient-presentation",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-kernel-subgroup], $N$ is a closed subgroup scheme and $N(R)=\\ker f(R)$. It is normal: for $g\\in G(R)$ and $n\\in N(R)$, $f(gng^{-1})=f(g)1f(g)^{-1}=1$; the inverse conjugation gives equality. It is of finite type: its closed underlying subset in the quasi-compact $G$ is quasi-compact by [lem-weil-pbc-closed-in-quasi-compact]. On an affine finite-type chart $\\operatorname{Spec}A$ of $G$, its inverse image is $\\operatorname{Spec}(A/J)$ by [def-weil-closed-immersion]; the images of any finite set of $k$-algebra generators of $A$ generate $A/J$. A finite affine cover of $G$ therefore gives a finite affine finite-type cover of $N$ [def-weil-finite-type-morphism].",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "def-sc-group-scheme-subgroup",
+    "lem-weil-pbc-closed-in-quasi-compact",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.39, first sentence; normality of a kernel preceding Theorem 5.14, printed p.102; finite type from affine quotients."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algebraic-group-homogeneous-quotient] to the closed subgroup $N\\subset G$. Obtain a separated finite-type $k$-scheme $I$ and a flat surjective finitely presented map $q:G\\to I$. For every test scheme $T$, two $G(T)$-points have the same $q$-image precisely when they differ by right multiplication by an $N(T)$-point. Every $I(T)$-point lifts on an fpqc covering. These statements apply without assuming that $N$ is smooth or that $G$ is affine.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.28, following paragraph and Proposition 5.25, printed p.105."
+   }
+  },
+  {
+   "text": "Give $I(T)$ a group law by fpqc descent. Lift $x,y\\in I(T)$ to $a,b$ locally and define $xy$ locally by $q(ab)$, $x^{-1}$ by $q(a^{-1})$, and $1$ by $q(1)$. For two choices, $a'=an$, $b'=bm$ with $n,m\\in N$; then $a'b'=ab(b^{-1}nb)m$ and $b^{-1}nb\\in N$ by normality. Also $(an)^{-1}=a^{-1}(an^{-1}a^{-1})$ with the last factor in $N$. Thus the coset criterion in [lem-sfb-algebraic-group-homogeneous-quotient] makes these values agree on overlaps. Base-change the covers using [lem-galois-fpqc-covering-base-change]; for two or three variables apply [lem-weil-pbc-fpqc-representable-descent] successively over each cover, which both glues the values and detects their equality. The constructions are natural in $T$. Yoneda [lem-galois-yoneda-fully-faithful], applied to schemes over $k$, turns them into morphisms $I\\times_k I\\to I$, $I\\to I$, $\\operatorname{Spec}k\\to I$. Associativity, both unit laws and both inverse laws hold after lifting the variables, since they hold in $G$, and hence globally by uniqueness of descent. Therefore $I$ is a group scheme and $q$ is a homomorphism.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "def-sc-group-scheme-subgroup",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-galois-yoneda-fully-faithful",
+    "def-sc-group-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Paragraph after Theorem 5.28, printed p.105, and Proposition 5.12, printed p.101; descent as in Stacks Tag 023Q, descent-lemma-fpqc-universal-effective-epimorphisms; Yoneda Tag 001P, categories-lemma-yoneda; fpqc base change Tag 022D, topologies-lemma-fpqc (3)."
+   }
+  },
+  {
+   "text": "For $x\\in I(T)$ choose an fpqc-local lift $a\\in G$. Set $i(x)=f(a)$ locally. If $a'=an$ with $n\\in N$, then $f(a')=f(a)$, so [lem-weil-pbc-fpqc-representable-descent] for $H$ glues these values uniquely. The result is natural in $T$ and thus gives a morphism $i:I\\to H$ by [lem-galois-yoneda-fully-faithful]. The formula gives $iq=f$; applying it to products gives $i(xy)=i(x)i(y)$ locally and hence globally by descent. Thus $i$ is a homomorphism. It is injective on every test scheme's points: if $i(x)=i(y)$, lift $x,y$ on covers and compare on their fibre products [lem-galois-fpqc-covering-base-change]. There $f(a)=f(b)$, so $a^{-1}b\\in N$, whence $q(a)=q(b)$ by the quotient's coset criterion. Uniqueness of descent for $I$ gives $x=y$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.13 and its proof, printed p.101, used in Theorem 5.39, printed p.108; injectivity is the explicit coset argument; Stacks Tags 023Q, 022D and 001P as in step 3."
+   }
+  },
+  {
+   "text": "The hypotheses of [lem-sfb-algebraic-group-monomorphism-closed-immersion] hold for $i$: both $I$ and $H$ are separated and of finite type over $k$, and step 4 proves injectivity on all commutative $k$-algebras. Hence $i$ is a closed immersion. For every $T$, $q(a)=1$ if and only if $a^{-1}\\in N(T)$ by the coset criterion, equivalently $a\\in N(T)$. Thus $N$ is the scheme-theoretic kernel of $q$, by the fibre-product universal property [def-pc-fibre-product] and Yoneda [lem-galois-yoneda-fully-faithful].",
+   "uses": [
+    "lem-sfb-algebraic-group-monomorphism-closed-immersion",
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "def-pc-fibre-product",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.39, last sentence, printed p.108; Theorem 5.34, printed p.107; kernel from the coset criterion in Definition 5.20."
+   }
+  },
+  {
+   "text": "Finally restrict to affine tests $\\operatorname{Spec}R$. The maps $G(R)/N(R)\\to I(R)$ are injective by the coset criterion. They are fppf-locally surjective: base-change the fppf covering $q:G\\to I$ along any $x:\\operatorname{Spec}R\\to I$ using [lem-trf-fppf-covering-base-change], and take its finite affine refinement [lem-pc-fppf-affine-refinement]; the projection to $G$ is the required lift. The representable $I$ is a sheaf by [lem-weil-pbc-fpqc-representable-descent]. For any sheaf $F$ and natural map $G(-)/N(-)\\to F$, evaluate locally on such coset lifts. Two lifts agree as cosets on their overlap because their images in $I$ agree; hence their $F$-values agree and glue uniquely. Refining two choices proves independence, and uniqueness of gluing gives naturality. This is exactly the universal property of sheafification [def-weil-pbc-sheafification], so $I$ represents the stated fppf quotient. Flatness, surjectivity and finite presentation of $q$ were supplied in step 2.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-trf-fppf-covering-base-change",
+    "lem-pc-fppf-affine-refinement",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 5.71, printed p.117, and Corollary 5.27, printed p.105; fppf rather than only fpqc lifts via Stacks Tags 021O (topologies-lemma-fppf) and 021P (topologies-lemma-fppf-affine)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-kernel-subgroup",
+  "def-sc-group-scheme-subgroup",
+  "lem-weil-pbc-closed-in-quasi-compact",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-galois-yoneda-fully-faithful",
+  "def-sc-group-scheme",
+  "def-pc-fibre-product",
+  "lem-sfb-algebraic-group-monomorphism-closed-immersion",
+  "lem-trf-fppf-covering-base-change",
+  "lem-pc-fppf-affine-refinement",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 5.39, printed p.108, using Theorem 5.28 and Proposition 5.12 (construction of quotient group law), Theorem 5.13 (factorization), Theorem 5.34, and Example 5.71. Descent elaborated using Stacks Tags 023Q, 022D, 021O, 021P and 001P."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"image\"",
+   "results": "{\"t\": \"2026-10-23T11:42:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"image\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SheafedSpace.fullyFaithfulForgetToPresheafedSpace_preimage_hom\", \"AlgebraicGeometry.LocallyRingedSpace.preimage_basicOpen\", \"AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace_preimage_toLRSHom\", \"AlgebraicGeometry.Scheme.Hom.id_preimage\", \"AlgebraicGeometry.Scheme.Hom.preimage_bot\", \"AlgebraicGeometry.Scheme.Hom.preimage_iSup\", \"AlgebraicGeometry.Scheme.Hom.mem_preimage\", \"AlgebraicGeometry.Scheme.Hom.iSup_preimage_eq_top\"], \"digest\": \"495fb41fc90a12ad\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme images and closed-immersion lifts do not equip the image with a group structure or identify it with a faithfully flat quotient; abstract group/ring isomorphism theorems are for different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "factorThruImage|exists.*[Ii]mage|[Qq]uotient|[Kk]ernel",
+   "results": "{\"t\": \"2026-10-23T11:42:13Z\", \"tool\": \"grep\", \"query\": \"factorThruImage|exists.*[Ii]mage|[Qq]uotient|[Kk]ernel\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\"], \"digest\": \"2a4337d76395095b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme images and closed-immersion lifts do not equip the image with a group structure or identify it with a faithfully flat quotient; abstract group/ring isomorphism theorems are for different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of finite type group schemes over a field factors through the quotient by its kernel followed by a closed immersion",
+   "results": "{\"t\": \"2026-10-23T11:42:14Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism of finite type group schemes over a field factors through the quotient by its kernel followed by a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toImage_app\", \"AlgebraicGeometry.IsClosedImmersion.lift_fac\", \"AlgebraicGeometry.IsClosedImmersion.lift\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc\", \"Group.fintypeOfDomOfCoker\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp\", \"QuotientGroup.rangeKerLift\"], \"digest\": \"55cfcf7b197b3699\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme images and closed-immersion lifts do not equip the image with a group structure or identify it with a faithfully flat quotient; abstract group/ring isomorphism theorems are for different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every algebraic group homomorphism factors as a faithfully flat quotient by the kernel and a closed embedding",
+   "results": "{\"t\": \"2026-10-23T11:42:15Z\", \"tool\": \"leansearch\", \"query\": \"Every algebraic group homomorphism factors as a faithfully flat quotient by the kernel and a closed embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.quotientKerAlgEquivOfSurjective.congr_simp\", \"Con.quotientKerEquivRange\", \"Ideal.quotientKerEquivRange\", \"RingCon.quotientKerEquivRangeₐ\", \"Ideal.quotientKerAlgEquivOfSurjective\", \"RingCon.quotientKerEquivRangeₐ_mkₐ\", \"QuotientGroup.quotientKerEquivOfSurjective\", \"LieHom.quotKerEquivRange\"], \"digest\": \"50e5039b0eb33d85\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme images and closed-immersion lifts do not equip the image with a group structure or identify it with a faithfully flat quotient; abstract group/ring isomorphism theorems are for different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The first isomorphism theorem for algebraic group schemes identifies the fppf quotient by the scheme theoretic kernel with a closed subgroup of the target",
+   "results": "{\"t\": \"2026-10-23T11:42:16Z\", \"tool\": \"leanfinder\", \"query\": \"The first isomorphism theorem for algebraic group schemes identifies the fppf quotient by the scheme theoretic kernel with a closed subgroup of the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isIso_of_ker_eq\", \"AlgebraicGeometry.IsClosedImmersion.isIso_lift\", \"QuotientGroup.quotientKerEquivRange\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"QuotientGroup.ker_map\", \"QuotientGroup.ker_lift\", \"QuotientGroup.rangeKerLift\", \"LieHom.quotKerEquivRange_toFun\"], \"digest\": \"45a2302913cf8b14\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme images and closed-immersion lifts do not equip the image with a group structure or identify it with a faithfully flat quotient; abstract group/ring isomorphism theorems are for different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every algebraic group homomorphism factors into a faithfully flat homomorphism and a closed immersion",
+   "results": "{\"t\": \"2026-10-23T13:14:32Z\", \"tool\": \"leanfinder\", \"query\": \"Every algebraic group homomorphism factors into a faithfully flat homomorphism and a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.comp\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\"], \"digest\": \"f26c38af343d147f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract quotient groups, Galois categories and affine flatness criteria do not construct the algebraic-group image factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The first isomorphism theorem for finite type group schemes identifies the quotient by the kernel with a closed subgroup",
+   "results": "{\"t\": \"2026-10-23T13:14:33Z\", \"tool\": \"leanfinder\", \"query\": \"The first isomorphism theorem for finite type group schemes identifies the quotient by the kernel with a closed subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.quotientKerEquivRange\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"QuotientAddGroup.quotientKerEquivRange\", \"QuotientGroup.quotientKerEquivOfSurjective\", \"QuotientGroup.ker_map\", \"QuotientGroup.rangeKerLift\", \"QuotientAddGroup.ker_map\", \"Group.fintypeOfDomOfCoker\"], \"digest\": \"a9cd3d1139a67dfe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract quotient groups, Galois categories and affine flatness criteria do not construct the algebraic-group image factorization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-23T13:17:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract quotient groups, Galois categories and affine flatness criteria do not construct the algebraic-group image factorization."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|Quotient|[Mm]ono|[Kk]er",
+   "results": "{\"t\": \"2026-10-23T13:08:10Z\", \"tool\": \"grep\", \"query\": \"quotient|Quotient|[Mm]ono|[Kk]er\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"1b36a9a8e411ba83\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract quotient groups, Galois categories and affine flatness criteria do not construct the algebraic-group image factorization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed normal subgroup of a finite type group scheme has a faithfully flat quotient group scheme",
+   "results": "{\"t\": \"2026-10-23T13:12:27Z\", \"tool\": \"leansearch\", \"query\": \"A closed normal subgroup of a finite type group scheme has a faithfully flat quotient group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsZGroup.instQuotientSubgroupOfFinite\", \"QuotientGroup.instT3Space\", \"ClosedSubgroup.ctorIdx\", \"Subgroup.normalCore_isClosed\", \"Group.fintypeOfDomOfCoker\", \"QuotientAddGroup.quotientQuotientEquivQuotientAux_mk\", \"Subgroup.fintypeQuotientOfFiniteIndex\", \"ClosedSubgroup\"], \"digest\": \"d0f3dc75209f9e79\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract quotient groups, Galois categories and affine flatness criteria do not construct the algebraic-group image factorization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-abelian-hom-vanishing",
+  "date": "2026-10-23",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: the finite-rank integral endomorphism input for the torus and abelian quotient, retaining their extension. Supporting input: No homomorphisms between split tori and abelian varieties. Homomorphism image factorization used before applying Milne Proposition 8.1(b).",
+   "via": [
+    "lem-sfb-torus-abelian-hom-vanishing",
+    "lem-sfb-semiabelian-hom-finite-free",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-algebraic-group-homomorphism-factorization",
+  "worker": "stage1",
+  "summary": "Q43: checked Milne Theorem 5.39 and its quotient/monomorphism inputs; isolated homogeneous quotient existence for arbitrary closed subgroups and the closed-immersion theorem. Constructed the quotient group law and induced injection explicitly by representable fpqc descent; retained nonreduced kernels and upgraded local lifts to fppf using finite presentation. Statement unchanged; no Lean writing or compilation.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration route through torus--abelian homomorphism vanishing; below that route follows Milne 5.39. The latest blueprint does not contain this auxiliary statement; sk-p-geometry only gives an image statement in its matrix-group setting, not this quotient factorization.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Generic covering tool for the explicit descent and fppf quotient interpretation; the present unit supplies no covering refinement or base-change statement."
+   },
+   {
+    "node": "lem-trf-fppf-covering-base-change",
+    "why": "Generic covering tool for the explicit descent and fppf quotient interpretation; the present unit supplies no covering refinement or base-change statement."
+   },
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic covering tool for the explicit descent and fppf quotient interpretation; the present unit supplies no covering refinement or base-change statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-covering-base-change",
+  "lem-trf-fppf-covering-base-change",
+  "lem-pc-fppf-affine-refinement"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-ea9798174",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-ea9798174 (reviewer sub-agent of L); spot-checked: Read in full: Milne iAG2017 §5c–5e (Def 5.20, Props 5.21–5.25, Cor 5.27, Thm 5.28 and its following paragraph, Prop 5.31, Thm 5.34, Thm 5.39); the item's six steps; both new nodes; and the statement of every cited node. The item statement is identical to the live node; live is still unsplit, and neither new id exists in live or side-live. Steps: (1) is elementary: kernel lemma, conjugation, closed-in-quasi-compact (005C), affine quotients finitely generated. (2) applies the homogeneous quotient with L=N. (3) builds the group law; I checked the coset calculations a'b'=ab(b^-1nb)m and (an)^-1=a^-1(an^-1a^-1) against the criterion a^-1b∈N; covers are compared by base change (022D(3)) and descent (023Q) applied successively, and Yoneda with h_I×h_I=h_{I×I} turns the operations into morphisms. (4) builds i by descent and shows it is injective on all T. (5) gives the closed immersion from the monomorphism node and ker q=N from the coset criterion and Yoneda. (6) proves the fppf quotient: injectivity, local surjectivity via 021O base change of {q} plus the 021P affine refinement, I is a sheaf via 023Q (finite flat affine families are fpqc by definition), and the sheafification universal property is checked by gluing. New nodes: the homogeneous quotient is Milne 5.28/5.24/5.25 and true; separatedness of X is not written at 5.28 but follows by fpqc descent of the closed immersion G×L→G×G (or 8.42/8.43). Edge cases L=1, L=G and a Borel subgroup of GL2 behave correctly. The monomorphism node is 5.31(a)⇒5.34 and true; α_p→G_a fits, while α_p→e is not injective on points. Neither node is a clause of the item. Duplicate search over all Milne-citing nodes: affine-normal-quotient-geometry, affine-homomorphism-flat-image (3.34) and geometric-unipotence-faithful-closed-immersion (3.35) are the affine-only special cases, and the item's citers need the non-affine forms; smooth-commutative-subgroup-quotient is restricted to smooth commutative groups. No duplicate, no cycle. Batch 5: lem-trf-fppf-covering-base-change is a Mathlib leaf (Precoverage.mem_coverings_of_isPullback, 021O(3)), a generic statement that fppf coverings are stable under base change and no part of the trace formula or Poincaré duality, so accepted. The split_report tool_uses (fpqc/fppf covering tools, including lem-pc-fppf-affine-refinement) are accepted as generic, as is lem-sc-kernel-subgroup. No SGA source is cited. Maintainer note: blueprint.from.node is null on the base item and the new nodes inherit it; the right ancestor is det-thm-sf-ctf-stability-direct-images. This is a base fault, not a delivery fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.HomomorphismFactorization",
+  "declaration": "AlgebraicGeometry.algebraicGroup_homomorphism_factorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/HomomorphismFactorization.lean",
+  "statement": "theorem algebraicGroup_homomorphism_factorization {k : Type u} [Field k] (G H : Grp (Over (Spec (.of k)))) [IsSeparated G.X.hom] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [IsSeparated H.X.hom] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] (f : G ⟶ H) : IsClosedSubgroupScheme (GrpObj.kerι f.hom.hom) ∧ IsNormalSubgroupScheme (GrpObj.kerι f.hom.hom) ∧ LocallyOfFiniteType (GrpObj.ker f.hom.hom).hom ∧ QuasiCompact (GrpObj.ker f.hom.hom).hom ∧ ∃ (I : Grp (Over (Spec (.of k)))) (q : G ⟶ I) (i : I ⟶ H), IsSeparated I.X.hom ∧ LocallyOfFiniteType I.X.hom ∧ QuasiCompact I.X.hom ∧ q ≫ i = f ∧ IsClosedImmersion i.hom.hom.left ∧ Flat q.hom.hom.left ∧ Surjective q.hom.hom.left ∧ LocallyOfFinitePresentation q.hom.hom.left ∧ QuasiCompact q.hom.hom.left ∧ QuasiSeparated q.hom.hom.left ∧ IsFppfGroupQuotient (Grp.ofHom (GrpObj.kerι f.hom.hom)) q",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing general IsFppfGroupQuotient through its definition node def-sfb-fppf-group-quotient-presentation: its kernel square, canonical torsor and sheafification unit refer to the specified kernel inclusion and quotient homomorphism. The existing fppf-site and sheafification nodes remain statement dependencies. No affineness, smoothness, connectedness or perfectness assumption is imposed; the affine quotient theorem is not a statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35173503d",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Re-delivery of 2c4ce78e04a2 (H2 RETURN) does exactly what the return asked. New def node def-sfb-fppf-group-quotient-presentation records the existing AlgebraicGeometry.IsFppfGroupQuotient (existing:true, module Sheaf.AlgebraicGeometry.GroupScheme.AffineNormalQuotientGeometry, nothing moved or copied); its statement field matches side-live l.60-61 verbatim. All five parts of the definition match the node text (kernel square i/toUnit/q/eta, fppf local surjectivity of yoneda q, h_Q is a sheaf, torsor iso (g,n)->(g,g i(n)), coset coequalizer with pi>>etaq = yoneda q and bijective precomposition into every Type-u fppf sheaf). Source Milne 5.24/5.25/5.27/5.68/5.71 checked in the PDF; dependencies are definition nodes; no other live definition node owns the declaration. In the item's stmt_deps the theorem node is replaced by the new definition node; item statement, proof, proof_deps and lean.statement are unchanged. HomomorphismFactorization.lean is byte-identical to the previously reviewed module; clause-by-clause, edge-case and universe checks re-confirmed. Item not yet landed live. Pre-existing points, not counted: the theorem node still lists IsFppfGroupQuotient among its declarations; blueprint.from.node is null, inherited from the base item. No file changed, no compile run."
+ }
+}

@@ -1,0 +1,221 @@
+{
+ "id": "lem-trf-formal-jacobian-coordinate-minor-expansion",
+ "kind": "statement",
+ "title": "Explicit quotient-Jacobian minor formulas for formal coordinates",
+ "statement": "Let $F$ be a field, $n,s\\geq0$, $T=F[[x_1,\\ldots,x_n]]$ [def-weil-pbc-multivariate-power-series], and $y_1,\\ldots,y_n$ a regular system of parameters [def-weil-pbc-regular-system-of-parameters] together with an $F$-algebra coordinate isomorphism $F[[Y_1,\\ldots,Y_n]]\\xrightarrow{\\sim}T$, $Y_k\\mapsto y_k$. Let $I\\subseteq T$ be any ideal, $\\pi:T\\to R=T/I$ the quotient map, and $h_1,\\ldots,h_s\\in T$ any finite list. Use termwise formal partial derivatives in the indicated coordinates [def-trf-formal-power-series-partial-derivative]. Set $Q=(\\partial y_k/\\partial x_i)_{k,i}$ and $P=(\\partial x_i/\\partial y_k)_{i,k}$ over $T$ [def-weil-matrix], and define the $s\\times n$ quotient Jacobians $H_x=(\\pi(\\partial h_j/\\partial x_i))_{j,i}$ and $H_y=(\\pi(\\partial h_j/\\partial y_k))_{j,k}$. Then $QP=PQ=1_n$, and, writing bars for entrywise reduction modulo $I$,\n$$\\overline Q\\,\\overline P=\\overline P\\,\\overline Q=1_n,\\qquad H_x=H_y\\overline Q,\\qquad H_y=H_x\\overline P.$$\nFor every $r\\geq0$ and subsets $A\\subseteq\\{1,\\ldots,s\\}$, $B\\subseteq\\{1,\\ldots,n\\}$ of cardinality $r$, all ordered increasingly, one has in $R$\n$$\\det((H_x)_{A,B})=\\sum_{\\substack{S\\subseteq\\{1,\\ldots,n\\}\\\\|S|=r}}\\det((H_y)_{A,S})\\det(\\overline Q_{S,B}),$$\n$$\\det((H_y)_{A,B})=\\sum_{\\substack{S\\subseteq\\{1,\\ldots,n\\}\\\\|S|=r}}\\det((H_x)_{A,S})\\det(\\overline P_{S,B}).$$\nSubmatrices and determinants mean [def-weil-submatrix] and [def-weil-pbc-matrix-determinant]. Empty determinants equal $1$, so $r=0$ and $n=0$ are included. No stability of $I$ under the coordinate isomorphism is assumed: both Jacobians are reduced modulo the same ideal of $T$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), coordinate-change paragraph: invertible coordinate Jacobian and chain rule; quotient reduction, inverse formula, and the two selected-minor expansions; selected-minor formula made explicit using algebra.tex Tag 0F0K (item-cauchy-binet)."
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-formal-power-series-partial-derivative",
+  "def-weil-matrix",
+  "def-weil-submatrix",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-pbc-regular-system-of-parameters"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-formal-jacobian-coordinate-chain-rule] to the given $F$-algebra coordinate isomorphism and parameters. Its hypotheses are exactly those on $F,T,y$ here. Its inverse matrix is the specified $P$, so $QP=PQ=1_n$. For each $h_j$, its two chain rules give\n$$\\partial_{x_i}h_j=\\sum_k(\\partial_{y_k}h_j)Q_{ki},\\qquad\n\\partial_{y_k}h_j=\\sum_i(\\partial_{x_i}h_j)P_{ik}.$$\nThese are identities in $T$, before taking any quotient.",
+   "uses": [
+    "lem-trf-formal-jacobian-coordinate-chain-rule"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), coordinate-change paragraph: invertible coordinate Jacobian and chain rule; quotient reduction, inverse formula, and the two selected-minor expansions; selected-minor formula made explicit using algebra.tex Tag 0F0K (item-cauchy-binet)."
+   }
+  },
+  {
+   "text": "Apply the ring homomorphism $\\pi$ to these finite sums and products. Entrywise,\n$$\\pi(\\partial_{x_i}h_j)=\\sum_k\\pi(\\partial_{y_k}h_j)\\pi(Q_{ki}),\\qquad\n\\pi(\\partial_{y_k}h_j)=\\sum_i\\pi(\\partial_{x_i}h_j)\\pi(P_{ik}),$$\nwhich give $H_x=H_y\\overline Q$ and $H_y=H_x\\overline P$. Likewise $\\pi(\\sum_k Q_{ak}P_{kb})=\\sum_k\\pi(Q_{ak})\\pi(P_{kb})=\\delta_{ab}$, and the reversed product gives $\\overline P\\overline Q=1_n$. This uses only the quotient homomorphism of the fixed ideal $I$, never an induced coordinate automorphism of $T/I$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), coordinate-change paragraph: invertible coordinate Jacobian and chain rule; quotient reduction, inverse formula, and the two selected-minor expansions; selected-minor formula made explicit using algebra.tex Tag 0F0K (item-cauchy-binet)."
+   }
+  },
+  {
+   "text": "Fix the increasing enumerations $A=(a_1,\\ldots,a_r)$ and $B=(b_1,\\ldots,b_r)$. By [def-weil-submatrix] put $M=(H_y)_{A,\\{1,\\ldots,n\\}}$ and $N=\\overline Q_{\\{1,\\ldots,n\\},B}$, of sizes $r\\times n$ and $n\\times r$. For $1\\leq u,v\\leq r$,\n$$(MN)_{uv}=\\sum_{k=1}^n(H_y)_{a_u k}\\overline Q_{kb_v}=(H_x)_{a_u b_v}.$$\nThus $MN=(H_x)_{A,B}$. Replacing $(H_y,\\overline Q,H_x)$ with $(H_x,\\overline P,H_y)$ gives the analogous factorization of $(H_y)_{A,B}$.",
+   "uses": [
+    "def-weil-submatrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), coordinate-change paragraph: invertible coordinate Jacobian and chain rule; quotient reduction, inverse formula, and the two selected-minor expansions; selected-minor formula made explicit using algebra.tex Tag 0F0K (item-cauchy-binet)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-cauchy-binet] over the commutative ring $R=T/I$ to the two rectangular factorizations in Step 3, with its $m=r$. In the first factorization its column-selected matrix is $(H_y)_{A,S}$ and its row-selected matrix is $\\overline Q_{S,B}$; both use the same increasing enumeration of $S$. Hence its determinant formula is exactly the first required sum. For the second factorization the two selected matrices are $(H_x)_{A,S}$ and $\\overline P_{S,B}$, giving the second required sum. No permutation of $A,B$ or $S$ is introduced.",
+   "uses": [
+    "lem-weil-pbc-cauchy-binet"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0F0K (item-cauchy-binet), applied to the row/column-selected rectangular factors from Curves Tag 0C4B (lemma-fitting-ideal-well-defined)."
+   }
+  },
+  {
+   "text": "For $r=0$, the only size-zero subset is empty, and [def-weil-pbc-matrix-determinant] gives value $1$ for all three empty determinants in either expansion; the sums are $1\\cdot1=1$. If $n=0$, a subset $B$ as in the statement forces $r=0$, and all square coordinate matrices are the unique empty matrix. If $s=0$ the same conclusion follows from $A$. For $r>\\min(s,n)$ no such $A,B$ exist. The identities also hold for $I=T$: $R$ is then the zero ring, where $1=0$.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), coordinate-change paragraph: invertible coordinate Jacobian and chain rule; quotient reduction, inverse formula, and the two selected-minor expansions; selected-minor formula made explicit using algebra.tex Tag 0F0K (item-cauchy-binet)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-formal-jacobian-coordinate-chain-rule",
+  "def-weil-submatrix",
+  "lem-weil-pbc-cauchy-binet",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), final coordinate-change paragraph; expands its omitted quotient and selected-minor details using algebra.tex Tag 0F0K (item-cauchy-binet) and the existing formal chain-rule node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "chain.rule|jacobian|jacobiMatrix|derivative_subst",
+   "results": "0 hits; none; searched Mathlib/RingTheory/MvPowerSeries",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern polynomial algebra presentations, formal derivative/substitution definitions, or square-matrix determinant products; none states the formal quotient-Jacobian selected-minor formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cauchy Binet formula for Jacobian minors after a formal change of regular parameters in a power series quotient",
+   "results": "8 hits; Algebra.PreSubmersivePresentation.baseChange_jacobian, Algebra.PreSubmersivePresentation.comp_jacobian_eq_jacobian_smul_jacobian, Algebra.PreSubmersivePresentation.jacobian_ofAlgEquiv, FormalMultilinearSeries.compChangeOfVariables.congr_simp, Algebra.PreSubmersivePresentation.jacobian_eq_jacobiMatrix_det, Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs, Algebra.PreSubmersivePresentation.jacobian.congr_simp, Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern polynomial algebra presentations, formal derivative/substitution definitions, or square-matrix determinant products; none states the formal quotient-Jacobian selected-minor formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Matrix.det",
+   "results": "0 hits; none",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern polynomial algebra presentations, formal derivative/substitution definitions, or square-matrix determinant products; none states the formal quotient-Jacobian selected-minor formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under an invertible formal power series coordinate substitution the quotient Jacobian minors transform by minors of the coordinate Jacobian and its inverse",
+   "results": "8 hits; Algebra.SubmersivePresentation.map_invJacobianOfHasCoeffs, Algebra.SubmersivePresentation.aeval_invJacobianOfHasCoeffs, Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs, Algebra.SubmersivePresentation.jacobianRelations_spec, Algebra.PreSubmersivePresentation.jacobiMatrix_ofAlgEquiv, Algebra.SubmersivePresentation.aeval_jacobianOfHasCoeffs, Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one, MvPolynomial.universalFactorizationMapPresentation_jacobiMatrix",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern polynomial algebra presentations, formal derivative/substitution definitions, or square-matrix determinant products; none states the formal quotient-Jacobian selected-minor formula."
+  },
+  {
+   "tool": "grep",
+   "query": "subst|chain|pderiv|map_mul",
+   "results": "25 hits; Mathlib/RingTheory/MvPowerSeries/Rename.lean, Mathlib/RingTheory/MvPowerSeries/Rename.lean, Mathlib/RingTheory/MvPowerSeries/Rename.lean, Mathlib/RingTheory/MvPowerSeries/Rename.lean, Mathlib/RingTheory/MvPowerSeries/Rename.lean, Mathlib/RingTheory/MvPowerSeries/Substitution.lean, Mathlib/RingTheory/MvPowerSeries/Substitution.lean, Mathlib/RingTheory/MvPowerSeries/Substitution.lean; searched Mathlib/RingTheory/MvPowerSeries",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern polynomial algebra presentations, formal derivative/substitution definitions, or square-matrix determinant products; none states the formal quotient-Jacobian selected-minor formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For multivariate formal series, arbitrary coordinate automorphism gives formulas for selected subdeterminants of gradients modulo any ideal",
+   "results": "0 hits; none; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"det_mul\"",
+   "results": "12 hits; Matrix.det_mul, Matrix.det_mul_comm, Matrix.det_mul_column, Matrix.det_mul_row, Matrix.det_mul_left_comm, Matrix.det_mul_right_comm, Matrix.det_mul_aux, Matrix.C_det_mul_charpoly_of_mul_eq_mul",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern polynomial algebra presentations, formal derivative/substitution definitions, or square-matrix determinant products; none states the formal quotient-Jacobian selected-minor formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under a formal power series coordinate isomorphism quotient Jacobian matrices transform by inverse coordinate Jacobians and their minors satisfy Cauchy Binet",
+   "results": "{\"t\": \"2026-10-23T09:28:18Z\", \"tool\": \"leanfinder\", \"query\": \"Under a formal power series coordinate isomorphism quotient Jacobian matrices transform by inverse coordinate Jacobians and their minors satisfy Cauchy Binet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.map_invJacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\", \"Algebra.PreSubmersivePresentation.jacobiMatrix_naive\", \"Algebra.SubmersivePresentation.aeval_invJacobianOfHasCoeffs\", \"Algebra.PreSubmersivePresentation.jacobiMatrix_reindex\", \"Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one\", \"MvPolynomial.universalFactorizationMapPresentation_jacobiMatrix\", \"Algebra.SubmersivePresentation.aevalDifferentialEquiv\"], \"digest\": \"880c642502e2ae13\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: derivative source supplies the formal partial derivative only; inspected Submersive.lean:131-140,189-205,367-378 concerns MvPolynomial presentation Jacobians, not formal coordinate derivatives and arbitrary quotient selected minors."
+  },
+  {
+   "tool": "grep",
+   "query": "pderiv.*subst|subst.*pderiv|chain.rule|jacobian",
+   "results": "{\"t\": \"2026-10-23T09:28:57Z\", \"tool\": \"grep\", \"query\": \"pderiv.*subst|subst.*pderiv|chain.rule|jacobian\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\"], \"digest\": \"cc12ce84830b61af\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: derivative source supplies the formal partial derivative only; inspected Submersive.lean:131-140,189-205,367-378 concerns MvPolynomial presentation Jacobians, not formal coordinate derivatives and arbitrary quotient selected minors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Jacobian minors of formal power series after coordinate change modulo an ideal",
+   "results": "{\"t\": \"2026-10-23T09:28:57Z\", \"tool\": \"leansearch\", \"query\": \"Jacobian minors of formal power series after coordinate change modulo an ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.jacobian.congr_simp\", \"Algebra.PreSubmersivePresentation.jacobiMatrix_ofAlgEquiv\", \"Algebra.PreSubmersivePresentation.jacobian_ofAlgEquiv\", \"Algebra.PreSubmersivePresentation.jacobian_reindex\", \"Algebra.PreSubmersivePresentation.baseChange_jacobian\", \"Algebra.PreSubmersivePresentation.comp_jacobian_eq_jacobian_smul_jacobian\", \"Algebra.SubmersivePresentation.jacobianOfHasCoeffs.congr_simp\", \"Algebra.PreSubmersivePresentation.jacobiMatrix_reindex\"], \"digest\": \"72f451a0cb72e31c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: derivative source supplies the formal partial derivative only; inspected Submersive.lean:131-140,189-205,367-378 concerns MvPolynomial presentation Jacobians, not formal coordinate derivatives and arbitrary quotient selected minors."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.pderiv, Matrix.det",
+   "results": "{\"t\": \"2026-10-23T09:28:57Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.pderiv, Matrix.det\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: derivative source supplies the formal partial derivative only; inspected Submersive.lean:131-140,189-205,367-378 concerns MvPolynomial presentation Jacobians, not formal coordinate derivatives and arbitrary quotient selected minors."
+  },
+  {
+   "tool": "grep",
+   "query": "jacobiMatrix_ofAlgEquiv|comp_jacobian_eq_jacobian_smul_jacobian|def jacobiMatrix",
+   "results": "{\"t\": \"2026-10-23T09:29:32Z\", \"tool\": \"grep\", \"query\": \"jacobiMatrix_ofAlgEquiv|comp_jacobian_eq_jacobian_smul_jacobian|def jacobiMatrix\", \"sub\": \"RingTheory/Extension/Presentation\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\"], \"digest\": \"bd53fe1a28ecf744\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: derivative source supplies the formal partial derivative only; inspected Submersive.lean:131-140,189-205,367-378 concerns MvPolynomial presentation Jacobians, not formal coordinate derivatives and arbitrary quotient selected minors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For multivariate formal series an algebra coordinate automorphism gives the chain rule for gradients then Cauchy Binet for each selected minor",
+   "results": "{\"t\": \"2026-10-23T09:29:39Z\", \"tool\": \"leanfinder\", \"query\": \"For multivariate formal series an algebra coordinate automorphism gives the chain rule for gradients then Cauchy Binet for each selected minor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.aevalDifferentialEquiv\", \"Algebra.PreSubmersivePresentation.jacobiMatrix_ofAlgEquiv\", \"Algebra.PreSubmersivePresentation.jacobiMatrix_naive\", \"Algebra.SubmersivePresentation.jacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.map_invJacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs\", \"MvPolynomial.universalFactorizationMapPresentation_jacobiMatrix\", \"Algebra.PreSubmersivePresentation.aevalDifferential_toMatrix'_eq_mapMatrix_jacobiMatrix\"], \"digest\": \"596d2338da42ca0b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: derivative source supplies the formal partial derivative only; inspected Submersive.lean:131-140,189-205,367-378 concerns MvPolynomial presentation Jacobians, not formal coordinate derivatives and arbitrary quotient selected minors."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-trf-formal-jacobian-minor-invariance",
+  "by": "worker",
+  "date": "2026-10-23"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "coordinate-change paragraph: invertible coordinate Jacobian and chain rule; quotient reduction, inverse formula, and the two selected-minor expansions",
+   "via": [
+    "lem-trf-formal-jacobian-minor-invariance",
+    "lem-trf-formal-jacobian-quadratic-criterion",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-formal-jacobian-coordinate-minor-expansion",
+  "worker": "stage1",
+  "summary": "Expanded the unsplit quotient-Jacobian statement into five steps, reusing the existing formal coordinate chain-rule node and the closed Cauchy-Binet node. Wrote out entrywise quotient reduction and both selected-submatrix products, checked increasing orders and all empty cases, and added no nodes. Statement and original searches are preserved; fresh logged searches distinguish polynomial-presentation Jacobian results.",
+  "blueprint": "Realizes the inherited coordinate-invariance ingredient in the nodal/local-geometry dependency of lem-trf-local-term-locality: Curves 0C4B final coordinate-change paragraph, made explicit by 0F0K selected-minor expansions. Retains the existing ancestor/via chain and unit; no unit or chapter route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-e879b6b04",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-e879b6b04 (reviewer sub-agent of L); spot-checked: I read the item in full. The delivery adds no new nodes. Statement, stmt_deps and blueprint are unchanged from live, where the item is still unsplit with no proof. No repair note exists for it, and the 7 old searches are kept as a prefix of the 13 new ones. Sources: curves.tex 4063-4091 (0C4B, which ends with 'chain rule... details omitted') and algebra.tex 282-289 (0F0K Cauchy-Binet); this split writes out those omitted details. Step 1: the chain-rule node's hypotheses match the item's exactly (field, regular system of parameters, coordinate iso); its clauses (1) and (3) give both row chain rules and P=Q^{-1} in T, before any quotient. Step 2: reduction by pi only; I checked the index orientation, and both H_yQbar=H_x and H_xPbar=H_y hold. Step 3: the factorization (H_x)_{A,B}=(H_y)_{A,all}Qbar_{all,B} into r x n and n x r factors is correct. Step 4: Cauchy-Binet over T/I with m=r, increasing order of S and no sign. The node is Lean-closed in slopmaster2, so no tool_uses entry is needed. Step 5: the cases r=0, n=0, s=0, oversized r and I=T are handled correctly. Small tests: y1=x1+x2, y2=x2 gives QP=1 and H_yQ=H_x for h=x1. A coordinate swap with r=2 gives the sign -1, as it should. No duplicate: the minor-ideal inclusion and invariance nodes state ideal containments only. The parent cites both formulas exactly. No cycle, no SGA source. Nothing was written to fixes/."
+ }
+}

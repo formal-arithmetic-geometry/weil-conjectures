@@ -1,0 +1,357 @@
+{
+ "id": "lem-sfb-zero-dimensional-field-space-components",
+ "kind": "statement",
+ "title": "Artinian components of a zero-dimensional algebraic space over a field",
+ "statement": "Let $K$ be a field [def-weil-field], let $X$ be an algebraic space over $\\operatorname{Spec}K$ [def-trf-algebraic-space], and suppose $X\\to\\operatorname{Spec}K$ is locally of finite type, tested on etale scheme charts using [def-weil-finite-type-morphism]. Suppose $\\dim(X)\\le0$. Then $X$ is represented by a separated scheme, every quasi-compact open subscheme of $X$ is affine, and $X$ is a disjoint union of open and closed subschemes $\\operatorname{Spec}A_\\alpha$ with each $A_\\alpha$ a nonzero local Artinian $K$-algebra finite-dimensional as a $K$-vector space. The summands are precisely the one-point connected components. The empty space and an arbitrary, possibly infinite, set of components are allowed. Here separated means that the diagonal over $\\operatorname{Spec}\\mathbf Z$ is a closed immersion [def-weil-closed-immersion]; open and closed have their scheme meanings [def-weil-open-immersion]. Local means one maximal ideal and Artinian means every descending chain of ideals eventually stabilizes. Dimension for an algebraic space means $\\dim(X)=\\sup_{x\\in|X|}\\dim_x(X)$, where $\\dim_x(X)=\\dim_v(V)$ for any etale scheme chart $V\\to X$ and point $v$ over $x$; for a scheme, $\\dim_v(V)$ is the infimum of the Krull dimensions of open neighbourhoods of $v$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Tag 06LZ (lemma-locally-finite-type-dim-zero), case (2), and varieties.tex Tag 06LH (lemma-algebraic-scheme-dim-0), locally algebraic case and its proof. The dimension-at-most-zero wording includes the empty space."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Take an etale scheme atlas of $X$ and restrict it to affine open charts $U=\\operatorname{Spec}A$. Such charts still cover $X$. By the hypothesis tested on charts, $U$ is locally of finite type over $K$, and by the definition of dimension its dimension is at most zero. Since $U$ is affine it is quasi-compact, so it is of finite type. The affine-finiteness theorem gives $U\\to\\operatorname{Spec}K$ finite, hence $A$ finite-dimensional over $K$. The zero-dimensional finite-type theorem also gives that $|U|$ is finite. The open-image theorem factors each chart through a representable open subspace $Y\\subseteq X$ with a surjective etale atlas $U\\to Y$. These $Y$ cover the points of $X$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-finite-type-morphism",
+    "lem-pc-algebraic-dim-zero-affine-finite",
+    "lem-weil-pbc-finite-type-dim-zero-artinian",
+    "lem-a1-etale-scheme-map-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 06LZ, lemma-locally-finite-type-dim-zero, case (2): choose affine charts, applying Tag 06LH to U"
+   }
+  },
+  {
+   "text": "Fix such a $Y$ and form the scheme $R=U\\times_YU$ with projections $s,t$. Representability and etaleness of the atlas imply that both projections are etale. Composing their scheme tests with the atlas gives etale charts $R\\to X$; this uses composition of etale scheme maps. Thus $\\dim R\\le0$. Moreover $R$ is locally of finite type over $K$: on affine pieces the etale projection is locally finitely presented, hence has finitely many algebra generators over the corresponding affine ring of $U$; adjoining generators of that ring over $K$ gives finitely many generators over $K$. Here the chart convention for local finite type applies also after restricting to affine opens of $U$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 06LZ, case (2): R is a scheme, etale projections, dimension and local finite type"
+   }
+  },
+  {
+   "text": "The universal property of the kernel pair makes $j=(s,t):R\\to U\\times_KU$ a monomorphism: two lifts of the same pair of maps to $U$ agree. It is also a monomorphism on arbitrary field tests, so the field-test criterion for universal injectivity implies that $|j|$ is injective. The affine fibre-product formula identifies $U\\times_KU$ with $\\operatorname{Spec}(A\\otimes_KA)$. If $a_1,\\ldots,a_n$ span $A$ over $K$, the $a_i\\otimes a_j$ span its tensor square. Hence that algebra is finite-dimensional, therefore Artinian, and its prime spectrum is finite. The injection just obtained proves $|R|$ finite, without assuming the relation quasi-compact or $X$ quasi-separated.",
+   "uses": [
+    "def-weil-radicial-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-sfb-artinian-spectrum-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 06LZ, case (2): the finite(!) union argument; Tags 01S4, 01I4, 00J6 and 00J7 spell out finiteness"
+   }
+  },
+  {
+   "text": "A finite topological space is quasi-compact: choose one covering member per point. Thus $R$, already locally of finite type over $K$, is of finite type. Since $\\dim R\\le0$, the affine-finiteness theorem makes $R=\\operatorname{Spec}B$ with $B$ finite-dimensional over $K$. Each projection $R\\to U$ is finite: a finite $K$-spanning list of $B$ also generates $B$ as an $A$-module for either of the two $K$-algebra maps $A\\to B$, since its $K$-linear coefficients are images of elements of $A$. The maps are affine maps between affines, so this is precisely the finiteness criterion. Etaleness supplies flatness and local finite presentation. Therefore both projections are finite locally free, with that term understood as finite, flat and locally finitely presented.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-pc-algebraic-dim-zero-affine-finite",
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 06LZ, case (2): R affine and finite over K; finite projections; preparation for Tag 03BM"
+   }
+  },
+  {
+   "text": "For every test scheme $T$, the maps $(s,t)$ identify $R(T)$ with the equivalence relation on $U(T)$ given by equality in $Y(T)$. Apply the affine finite-locally-free relation quotient theorem over $\\operatorname{Spec}K$: its fppf quotient is an affine scheme $M$. It represents $Y$ as well. Indeed $U\\to Y$ has fppf local lifts; any section of $Y$ can locally be represented by a map to $U$. Two such representatives agree in $Y$ exactly when their pair is a section of $R$. Thus maps from the orbit presheaf into any fppf sheaf extend uniquely across $Y$, by sheaf gluing and the same local-lift argument. This is the universal property of its fppf sheafification, which $M$ also satisfies. Hence $Y\\simeq h_M$; Yoneda interprets the resulting representable-sheaf identification as the scheme identification when required.",
+   "uses": [
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-representable-etale-fppf-local-lifting",
+    "lem-pc-yoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 06LZ, end of case (2), using groupoids.tex Tag 03BM, proposition-finite-flat-equivalence"
+   }
+  },
+  {
+   "text": "The largest schematic open $X_{\\mathrm{sch}}\\subseteq X$ contains every open $Y$ just proved affine. Their point sets cover $|X|$, so this open has full point image. The point/open calculus says that an open subspace with full point image equals $X$. Consequently $X$ is a scheme. All constructions retain their $K$-structures. No global finite-type, quasi-compactness or quasi-separatedness hypothesis was introduced.",
+   "uses": [
+    "lem-sfb-space-largest-schematic-open",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 06LZ, opening local-to-global reduction; spaces-properties.tex Tag 03JH, lemma-subscheme"
+   }
+  },
+  {
+   "text": "For any quasi-compact open subscheme $V\\subseteq X$, restriction preserves local finite type (restrict the affine charts in its definition). The dimension bound restricts to an open subspace. Hence $V$ is of finite type over $K$ with dimension at most zero, and the affine-finiteness theorem makes it affine and finite over $K$. Apply the finite-type zero-dimensional topology theorem to affine open charts of $X$: each has discrete topology. A subset of $X$ is open exactly when its intersections with these open charts are open, so $X$ is discrete. This gives both the requested affineness assertion and the open-and-closed nature of each singleton.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-open-subspace-dimension-monotone",
+    "lem-pc-algebraic-dim-zero-affine-finite",
+    "lem-weil-pbc-finite-type-dim-zero-artinian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH, lemma-algebraic-scheme-dim-0, first two paragraphs; Tag 06LZ affineness assertion"
+   }
+  },
+  {
+   "text": "For $x\\in|X|$, let $C_x$ be the open singleton subscheme. It is quasi-compact, so the preceding argument gives $C_x=\\operatorname{Spec}A_x$ finite over $K$. Thus $A_x$ is finite-dimensional over $K$, and is Artinian by the finite-dimensional-algebra theorem. It is nonzero because its spectrum is nonempty. It is local: every maximal ideal is prime, and its spectrum has exactly one prime, so it has exactly one maximal ideal. This uses no algebraic-closedness or reducedness hypothesis on $K$ or $X$.",
+   "uses": [
+    "lem-pc-algebraic-dim-zero-affine-finite",
+    "lem-weil-pbc-finite-dim-algebra-artinian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH, second paragraph: singleton components and their local Artinian finite algebras"
+   }
+  },
+  {
+   "text": "Form the scheme coproduct $D=\\coprod_{x\\in|X|}C_x$. The component inclusions give a morphism $D\\to X$. Conversely the inverse identity maps $C_x\\to D$ glue over the disjoint open cover of $X$; compatibility on overlaps is vacuous. Morphism gluing shows that the two composites restrict to the identity on every component and hence are identities globally. Therefore $D\\simeq X$. A singleton is connected, while any subset of a discrete space containing distinct points is disconnected by splitting off one point. Thus these are precisely the connected components. The empty index set and any infinite set are allowed by the coproduct theorem.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH, second paragraph: disjoint union of singleton connected components"
+   }
+  },
+  {
+   "text": "Use the singleton affine open cover to apply the separated affine-cover criterion with base $\\operatorname{Spec}\\mathbf Z$. Distinct members have empty intersection, which is $\\operatorname{Spec}0$, and the corresponding ring map to the zero ring is surjective. For a member intersected with itself the restriction map is multiplication $A_x\\otimes_{\\mathbf Z}A_x\\to A_x$, which is surjective since $a$ is the image of $a\\otimes1$. Hence the absolute diagonal is a closed immersion. This proves separatedness in exactly the sense asserted, including for an infinite coproduct (the cover need not be finite) and the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-separated-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 06LZ, opening assertion that X is separated; schemes.tex Tag 01KP, lemma-characterize-separated"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "lem-pc-algebraic-dim-zero-affine-finite",
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "lem-a1-etale-scheme-map-open-image",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-radicial-morphism",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-sfb-artinian-spectrum-finite",
+  "def-weil-finite-integral-morphism",
+  "def-pc-finite-locally-free",
+  "lem-a1-finite-flat-affine-relation-quotient",
+  "lem-a1-representable-etale-fppf-local-lifting",
+  "lem-pc-yoneda",
+  "lem-sfb-space-largest-schematic-open",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-separated-affine-cover-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-over-fields.tex; literature/stacks-project/varieties.tex",
+  "place": "Tag 06LZ, lemma-locally-finite-type-dim-zero, proof of (2); Tag 06LH, lemma-algebraic-scheme-dim-0, locally algebraic clause and proof. Kernel-pair finiteness and absolute separatedness expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A zero dimensional algebraic space locally of finite type over a field is a separated scheme and a disjoint union of spectra of local Artinian finite dimensional algebras",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is Artinian\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The property of a scheme being locally Artinian, i.e., every point has an open neighborhood whose ring is Artinian.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X],\\n  topologicalKrullDim ↥X ≤ 0 → AlgebraicGeometry.IsLocallyArtinian X\", \"doc\": \"If a scheme $ X $ is locally Noetherian and its topological Krull dimension satisfies $ \\\\dim(X) \\\\leq 0 $, then $ X $ is locally Artinian. This follows because a Noetherian topological space of dimensi\"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme.finite\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsArtinianScheme X], Finite ↥X\", \"doc\": \"Every Artinian scheme is a finite scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isArtinianScheme_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsArtinianScheme X ↔ AlgebraicGeometry.IsLocallyArtinian X ∧ CompactSpace ↥X\", \"doc\": \"A scheme $X$ is Artinian if and only if it is locally Artinian (every point has an open neighborhood with an Artinian ring) and its underlying topological space is compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyArtinian X], DiscreteTopology ↥X\", \"doc\": \"Every locally Artinian scheme $X$ (i.e., a scheme where every point has an open neighborhood with an Artinian ring) is equipped with the discrete topology, meaning every subset of $X$ is open.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyArtinian X], DiscreteTopology ↥X\", \"doc\": \"Every locally Artinian scheme has a discrete topology, meaning that every subset of its underlying topological space is open.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.IsLocallyArtinian X ↔ AlgebraicGeometry.IsLocallyNoetherian X ∧ DiscreteTopology ↥X\", \"doc\": \"A scheme $X$ is locally Artinian if and only if it is locally Noetherian and its underlying topological space has the discrete topology, meaning every subset is open.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space representability or internal field-groupoid dimension statement; scheme Artinian facts, ordinary groupoids and unrelated stabilizers do not specialize in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zero dimensional locally algebraic spaces are representable and their connected components are finite Artinian schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme.finite\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsArtinianScheme X], Finite ↥X\", \"doc\": \"Every Artinian scheme is a finite scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is Artinian\"}\n  {\"name\": \"AlgebraicGeometry.isArtinianScheme_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsArtinianScheme X ↔ AlgebraicGeometry.IsLocallyArtinian X ∧ CompactSpace ↥X\", \"doc\": \"A scheme $X$ is Artinian if and only if it is locally Artinian (every point has an open neighborhood with an Artinian ring) and its underlying topological space is compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyArtinian X], DiscreteTopology ↥X\", \"doc\": \"Every locally Artinian scheme has a discrete topology, meaning that every subset of its underlying topological space is open.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyArtinian X], DiscreteTopology ↥X\", \"doc\": \"Every locally Artinian scheme $X$ (i.e., a scheme where every point has an open neighborhood with an Artinian ring) is equipped with the discrete topology, meaning every subset of $X$ is open.\"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme.iff_isNoetherian_and_discreteTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.IsArtinianScheme X ↔ AlgebraicGeometry.IsNoetherian X ∧ DiscreteTopology ↥X\", \"doc\": \"A scheme is Artinian if and only if it is Noetherian and its underlying topological space has the discrete topology.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The property of a scheme being locally Artinian, i.e., every point has an open neighborhood whose ring is Artinian.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.IsLocallyArtinian X ↔ AlgebraicGeometry.IsLocallyNoetherian X ∧ DiscreteTopology ↥X\", \"doc\": \"A scheme $X$ is locally Artinian if and only if it is locally Noetherian and its underlying topological space has the discrete topology, meaning every subset is open.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space representability or internal field-groupoid dimension statement; scheme Artinian facts, ordinary groupoids and unrelated stabilizers do not specialize in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space representability or internal field-groupoid dimension statement; scheme Artinian facts, ordinary groupoids and unrelated stabilizers do not specialize in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|IsLocallyArtinian|topologicalKrullDim.*zero",
+   "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/Topology/KrullDimension.lean\", \"line\": \"67\", \"text\": \"theorem topologicalKrullDim_zero_of_discreteTopology\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"142\", \"text\": \"nonrec lemma IsLocallyArtinian.of_locallyQuasiFinite [LocallyQuasiFinite f]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"143\", \"text\": \"    [IsLocallyArtinian Y] : IsLocallyArtinian X := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"146\", \"text\": \"  · exact (isLocallyArtinian_iff_openCover (Y.affineCover.pullback₁ f)).mpr fun i ↦\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"149\", \"text\": \"  · exact (isLocallyArtinian_iff_openCover X.affineCover).mpr fun i ↦\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"154\", \"text\": \"  simp only [isLocallyArtinianScheme_Spec, HasRingHomProperty.Spec_iff, id_eq] at *\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"19\", \"text\": \"* `AlgebraicGeometry.IsLocallyArtinian`: A scheme is locally Artinian if for all open affines,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"27\", \"text\": \"* `AlgebraicGeometry.IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology`: A scheme is\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"53\", \"text\": \"class IsLocallyArtinian (X : Scheme) : Prop where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"57\", \"text\": \"attribute [instance] IsLocallyArtinian.isArtinianRing_presheaf_obj\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"59\", \"text\": \"instance IsLocallyArtinian.isLocallyNoetherian [h : IsLocallyArtinian X] :\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space representability or internal field-groupoid dimension statement; scheme Artinian facts, ordinary groupoids and unrelated stabilizers do not specialize in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A zero dimensional algebraic space locally of finite type over a field is a disjoint union of spectra of finite dimensional local Artinian algebras",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"[IsLocallyNoetherian X] (h : topologicalKrullDim X ≤ 0) : IsLocallyArtinian X\", \"doc\": \"If a scheme $ X $ is locally Noetherian and its topological Krull dimension satisfies $ \\\\dim(X) \\\\leq 0 $, then $ X $ is locally Artinian. This follows because a Noetherian topological space of dimensi\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"[IsLocallyNoetherian X] [DiscreteTopology X] : IsLocallyArtinian X\", \"doc\": \"If a scheme $X$ is locally Noetherian and its underlying topological space has the discrete topology, then $X$ is locally Artinian. This means every point in $X$ has an open neighborhood whose coordin\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \"[IsEmpty n] : IsIso (𝔸(n; S) ↘ S)\", \"doc\": \"If the type $ n $ is empty (i.e., $ n = 0 $), then the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an isomorphism. This reflects the fact that the affine sp\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \": IsLocallyArtinian X ↔ IsLocallyNoetherian X ∧ DiscreteTopology X\", \"doc\": \"A scheme $X$ is locally Artinian if and only if it is locally Noetherian and its underlying topological space has the discrete topology, meaning every subset is open.\"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme.toIsLocallyArtinian\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsArtinianScheme X], AlgebraicGeometry.IsLocallyArtinian X\", \"doc\": \"If $X$ is an Artinian scheme, then $X$ is locally Artinian, meaning every point of $X$ has an open neighborhood whose coordinate ring is Artinian.\"}\n  {\"name\": \"PrimeSpectrum.instKrullDimLEOfNatNat\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Noetherian\", \"type\": \": Ring.KrullDimLE 0 R\", \"doc\": \"Every Artinian commutative ring has Krull dimension zero. That is, for any commutative ring $R$ satisfying the descending chain condition on ideals, the length of the longest chain of prime ideals in \"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is Artinian\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isLocallyArtinianScheme_Spec\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"{R : CommRingCat} : IsLocallyArtinian (Spec R) ↔ IsArtinianRing R\", \"doc\": \"The scheme $\\\\operatorname{Spec}(R)$ is locally Artinian if and only if the commutative ring $R$ is Artinian, i.e., satisfies the descending chain condition on ideals.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space representability or internal field-groupoid dimension statement; scheme Artinian facts, ordinary groupoids and unrelated stabilizers do not specialize in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A zero dimensional algebraic space locally of finite type over a field is a separated scheme and a union of local Artinian finite algebras",
+   "results": "{\"t\": \"2026-10-23T14:21:37Z\", \"tool\": \"leanfinder\", \"query\": \"A zero dimensional algebraic space locally of finite type over a field is a separated scheme and a union of local Artinian finite algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsArtinianScheme\", \"AlgebraicGeometry.IsLocallyArtinian\", \"AlgebraicGeometry.IsArtinianScheme.finite\", \"AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero\", \"AlgebraicGeometry.isArtinianScheme_iff\", \"AlgebraicGeometry.IsArtinianScheme.toIsLocallyArtinian\", \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology\", \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology_of_isAffine\"], \"digest\": \"99a3fcb1df445c60\"}; Read hits: scheme Artinian facts or separatedness API only; no algebraic-space representability statement. Mathlib/AlgebraicGeometry/Artinian.lean:66 inspected.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|IsLocallyArtinian.of_topologicalKrullDim_le_zero",
+   "results": "{\"t\": \"2026-10-23T14:22:53Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|IsLocallyArtinian.of_topologicalKrullDim_le_zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Artinian.lean\"], \"digest\": \"b9d15037c303a100\"}; Read hits: scheme Artinian facts or separatedness API only; no algebraic-space representability statement. Mathlib/AlgebraicGeometry/Artinian.lean:66 inspected.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zero dimensional algebraic spaces locally of finite type over a field are separated schemes",
+   "results": "{\"t\": \"2026-10-23T14:22:53Z\", \"tool\": \"leansearch\", \"query\": \"Zero dimensional algebraic spaces locally of finite type over a field are separated schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsSeparated.mk\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.Scheme.isSeparated_iff\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.IsSeparated\"], \"digest\": \"c2a781ca9b0ea309\"}; Read hits: scheme Artinian facts or separatedness API only; no algebraic-space representability statement. Mathlib/AlgebraicGeometry/Artinian.lean:66 inspected.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "{\"t\": \"2026-10-23T14:22:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: scheme Artinian facts or separatedness API only; no algebraic-space representability statement. Mathlib/AlgebraicGeometry/Artinian.lean:66 inspected.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every zero dimensional locally algebraic space over a field is represented by a scheme with finite Artinian connected components",
+   "results": "{\"t\": \"2026-10-23T14:22:54Z\", \"tool\": \"leanfinder\", \"query\": \"Every zero dimensional locally algebraic space over a field is represented by a scheme with finite Artinian connected components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsArtinianScheme\", \"AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero\", \"AlgebraicGeometry.IsLocallyArtinian\", \"AlgebraicGeometry.IsArtinianScheme.finite\", \"AlgebraicGeometry.isArtinianScheme_iff\", \"AlgebraicGeometry.IsArtinianScheme.toIsLocallyArtinian\", \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology\", \"AlgebraicGeometry.IsArtinianScheme.toCompactSpace\"], \"digest\": \"1787a6884fda2c8b\"}; Read hits: scheme Artinian facts or separatedness API only; no algebraic-space representability statement. Mathlib/AlgebraicGeometry/Artinian.lean:66 inspected.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-groupoid-identity-finite-relation",
+  "date": "2026-10-23",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Etale field cover of a reduced locally Noetherian singleton stack. Input for the field-cover construction: Identity component of an unramified field groupoid. Representability and local Artinian decomposition after the dimension calculation (Stacks 06LZ and the locally algebraic clause of 06LH).",
+   "via": [
+    "lem-sfb-field-groupoid-identity-finite-relation",
+    "lem-sfb-unramified-diagonal-singleton-field-cover",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-zero-dimensional-field-space-components",
+  "worker": "stage1",
+  "summary": "Read Stacks 06LZ proof (2) and 06LH in full. Split the affine-atlas/kernel-pair quotient argument, explicitly proving relation finiteness from its monomorphism into the finite tensor-square spectrum before invoking the existing finite-type scheme theorem. Reused existing scheme and space tools throughout; no new nodes, no new Mathlib leaves, and no statement change. Constructed singleton components and checked absolute separatedness separately.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Etale field cover of a reduced locally Noetherian singleton stack. Input for the field-cover construction: Identity component of an unramified field groupoid. Representability and local Artinian decomposition after the dimension calculation (Stacks 06LZ and the locally algebraic clause of 06LH). The current latest blueprint direct-image proof (3) is the high-level ancestor route. The inherited created.item chain has no imported blueprint ancestor (blueprint_refs.py ancestor prints None); its null node and via chain are preserved. Steps 1-6 realize the 06LZ representability prerequisite and steps 7-10 its 06LH components prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-algebraic-dim-zero-affine-finite",
+    "why": "Generic scheme/algebraic-space tool for the 06LZ/06LH proof, as used explicitly in steps 1,4,7,8; the unit states six-functor stability and has no replacement for this geometric fact."
+   },
+   {
+    "node": "lem-a1-etale-scheme-map-open-image",
+    "why": "Generic scheme/algebraic-space tool for the 06LZ/06LH proof, as used explicitly in steps 1; the unit states six-functor stability and has no replacement for this geometric fact."
+   },
+   {
+    "node": "lem-a1-finite-flat-affine-relation-quotient",
+    "why": "Generic scheme/algebraic-space tool for the 06LZ/06LH proof, as used explicitly in steps 5; the unit states six-functor stability and has no replacement for this geometric fact."
+   },
+   {
+    "node": "lem-a1-representable-etale-fppf-local-lifting",
+    "why": "Generic scheme/algebraic-space tool for the 06LZ/06LH proof, as used explicitly in steps 5; the unit states six-functor stability and has no replacement for this geometric fact."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic scheme/algebraic-space tool for the 06LZ/06LH proof, as used explicitly in steps 6; the unit states six-functor stability and has no replacement for this geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-separated-affine-cover-criterion",
+    "why": "Generic scheme/algebraic-space tool for the 06LZ/06LH proof, as used explicitly in steps 10; the unit states six-functor stability and has no replacement for this geometric fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-algebraic-dim-zero-affine-finite",
+  "lem-a1-etale-scheme-map-open-image",
+  "lem-a1-finite-flat-affine-relation-quotient",
+  "lem-a1-representable-etale-fppf-local-lifting",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-separated-affine-cover-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-61ecc1261",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-61ecc1261 (reviewer sub-agent of L); spot-checked: I read Stacks 06LZ (statement and proof of case 2) and 06LH (statement and proof), the item's 10 steps and the statements of all 22 cited nodes. The delivery has 0 new nodes, an unchanged statement and stmt_deps, and proof_deps equal to the union of the step uses; live and side-live are still unsplit, there is no repair note and no SGA. The route differs slightly from the source: each affine étale chart's open image Y=X_f is shown affine as U/R, with R=U×_YU. In detail, |R| is finite because R→U×_KU is a monomorphism and the field-point criterion (01S4) applies, with Spec(A⊗_KA) finite-dimensional and so Artinian with finite spectrum. Then R=Spec B is finite over K and s,t are finite locally free. The 03BM quotient lemma applies, its hypotheses checked, and the local-lifting gluing argument identifies Y with the sheafified U/R. The largest schematic open (03JH) plus the point/open calculus then show X is a scheme. From there: qc opens are affine and finite (06LH), X is discrete, singleton components are nonzero local Artinian finite-dimensional algebras, D=⨿C_x≅X by coproduct and gluing, and separatedness over Z follows from the 01KP criterion (empty and multiplication maps surjective). Edge cases tested: empty X, K[ε]/ε², a purely inseparable extension, and an infinite coproduct. The six declared tool uses are accepted as generic scheme and algebraic-space foundations. On the batch-5 flags, none of the four citations is part of the trace formula or Poincaré duality. The open-image, local-lifting and point-calculus nodes reach sec-trace-formula only through the general definition def-trf-algebraic-space, which is already an item stmt_dep. The 03BM quotient reaches only lem-trf-finite-presentation-module-descent-flat-local, which is pure faithfully-flat module descent. All four are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZeroDimensionalFieldSpaceComponents",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.zeroDimensional_fieldSpace_components",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZeroDimensionalFieldSpaceComponents.lean",
+  "statement": "theorem zeroDimensional_fieldSpace_components {K : Type u} [Field K] (X : AlgebraicSpace (Spec (CommRingCat.of K))) (hft : ∀ (U : Over (Spec (CommRingCat.of K))) (p : yoneda.obj U ⟶ X.obj.obj), IsEtale p → LocallyOfFiniteType U.hom) (hdim : ∀ (U : Over (Spec (CommRingCat.of K))) (p : yoneda.obj U ⟶ X.obj.obj), IsEtale p → ∀ v : U.left, (⨅ (W : U.left.Opens) (_ : v ∈ W), topologicalKrullDim W) ≤ 0) : ∃ Y : Over (Spec (CommRingCat.of K)), Nonempty (yoneda.obj Y ≅ X.obj.obj) ∧ IsClosedImmersion (prod.lift (𝟙 Y.left) (𝟙 Y.left)) ∧ (∀ V : Y.left.Opens, IsCompact (V : Set Y.left) → IsAffine V.toScheme) ∧ ∃ (I : Type u) (A : I → CommAlgCat.{u} K) (ι : ∀ i : I, Spec (CommRingCat.of (A i)) ⟶ Y.left), Nonempty (IsColimit (Cofan.mk Y.left ι)) ∧ (∀ i : I, Nontrivial (A i) ∧ IsLocalRing (A i) ∧ IsArtinianRing (A i) ∧ FiniteDimensional K (A i) ∧ ι i ≫ Y.hom = Spec.map (CommRingCat.ofHom (algebraMap K (A i))) ∧ IsOpenImmersion (ι i) ∧ IsClosed (Set.range (ι i)) ∧ Subsingleton (Spec (CommRingCat.of (A i)))) ∧ ∀ x : Y.left, ∃! i : I, Set.range (ι i) = connectedComponent x",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-051b0f1e5"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-051b0f1e5",
+  "group": "Q96",
+  "result": "fix",
+  "note": "Read the item, Stacks 06LZ(2)/06LH, the AlgebraicSpace/IsEtale declarations, the Mathlib dependencies and topologicalKrullDimAt. Every hypothesis and conclusion clause matches the node: absolute diagonal; qc opens affine; Cofan colimit over I : Type u, which can be empty or infinite; summands nonzero local Artinian finite-dimensional, compatible with K, clopen, one point; ∃! component per point. Universes consistent; edge cases (empty X, infinite, nilpotent, inseparable) covered; no hollow defs; docstrings carry source and 10 steps. Finding: the statement used topologicalKrullDimAt, owned by def-kun-dimension/def-kun-topological-dimension-at-point, neither of which is in stmt_deps. FIX inlines the item's own definition as (⨅ (W : U.left.Opens) (_ : v ∈ W), topologicalKrullDim W) ≤ 0, imports Mathlib.Topology.KrullDimension instead of the WeilConjectures module, and rewords the module docstring. nt_compile --json clean, 15.0 s."
+ }
+}

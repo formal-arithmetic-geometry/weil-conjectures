@@ -1,0 +1,130 @@
+{
+ "id": "def-pur-integration-scalar-objects",
+ "kind": "definition",
+ "title": "Tensor-normalized integration objects and scalar comparison",
+ "status": "split",
+ "statement": "Let $A,B$ be commutative rings, $\\varphi:A\\to B$ a unital homomorphism, $f:X\\to Y$ a scheme morphism and $c$ a compactification of $f$. Work in the ordinary small-etale unbounded module derived categories [def-weil-pbc-derived-categories], with derived tensor [def-kun-derived-tensor], $F_R=Rf^c_{!,R}$ [def-amb-etale-compact-support] and $Q_T=(-)\\otimes_A^LB$ [lem-pur-derived-change-of-rings]. For $W\\in D(X_{et},A)$ and $K\\in D(Y_{et},A)$ define $G_{W}(K)=Lf_A^*K\\otimes_A^LW$. Write $P_{c;K,W}:K\\otimes_A^LF_AW\\to F_A(G_W(K))$ for the canonical coefficient-first compact-support projection [def-pur-compact-support-projection-map], expressed using left-derived inverse-image coordinates. Given $t:F_AW\\to A_Y[0]$ and a proof that $P_{c;K,W}$ is invertible for every $K$, define $z_{c,W,t,K}:F_A(G_W(K))\\to K$ to be $P_{c;K,W}^{-1}$ followed by $1_K\\otimes t$ and the right tensor unitor. Given $W'\\in D(X_{et},B)$ and an isomorphism $l:Q_XW\\xrightarrow\\sim W'$, define $a_{\\varphi,f,W,W',l,K}:Q_X(G_W(K))\\to G_{W'}(Q_YK)$ as the normalized scalar tensor comparison [def-pur-exceptional-coefficient-normalizations], then the canonical scalar/pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], then $1\\otimes l$. These are the existing IntegrationScalar.object, IntegrationScalar.integration and IntegrationScalar.comparison constructions. No scalar integration or adjoint-transpose equation is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "def-amb-etale-compact-support",
+  "def-pur-compact-support-projection-map",
+  "def-pur-exceptional-coefficient-normalizations",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: integration, its tensor-normalized counit, and coefficient/pullback comparison before taking the adjoint transpose"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IntegrationScalar|integration.*(scalar|coefficient)|coefficient.*integration",
+   "results": "{\"t\": \"2026-10-23T04:29:32Z\", \"tool\": \"grep\", \"query\": \"IntegrationScalar|integration.*(scalar|coefficient)|coefficient.*integration\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib match for these geometric derived integration constructions; reuse the existing project definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Orientation twisted derived pullback inverse projection integration and scalar tensor pullback comparison",
+   "results": "{\"t\": \"2026-10-23T04:29:32Z\", \"tool\": \"leansearch\", \"query\": \"Orientation twisted derived pullback inverse projection integration and scalar tensor pullback comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullbackComparison\", \"VectorField.mpullback_smul_apply\", \"CategoryTheory.IsPullback.isoIsPullback_inv_snd\", \"CategoryTheory.Limits.pullbackProdSndIsoProd_inv_fst_snd\", \"VectorField.mpullback\", \"VectorField.mpullbackWithin_smul\", \"CategoryTheory.IsPullback.isoPullback_inv_snd_assoc\", \"CategoryTheory.GlueData.t'_jii\"], \"digest\": \"807b8ef24d0bfbd1\"}",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib match for these geometric derived integration constructions; reuse the existing project definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "{\"t\": \"2026-10-23T04:29:32Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointOplaxMonoidal\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.IsMonoidal\", \"CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal_1\", \"CategoryTheory.Adjunction.isMonoidal_comp\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε\"], \"digest\": \"ec73ed347580c9e9\"}",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib match for these geometric derived integration constructions; reuse the existing project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l IntegrationScalar\\.(object|integration|comparison) dag/nodes; rg -n IntegrationScalar lean/WeilConjectures lean/Sheaf; blueprint_refs.py search integration",
+   "results": "DAG: only lem-pur-integration-transpose-scalar-mate records these three helpers, as auxiliary definitions of a theorem node. Project: Sheaf.Paper.IntegrationTransposeScalarMate defines object, integration and comparison at lines 37,45,73. No existing definition node owns these three constructions. WeilConjectures: no IntegrationScalar match. Blueprint search: 33 integration matches, no definition node for this package.",
+   "date": "2026-10-23",
+   "verdict": "Existing exact definitions; add definition-only DAG ownership, no module or copied declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-affine-integration-coefficient-equation",
+  "date": "2026-10-23",
+  "group": "Q103"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Charts: tensor model of H_R, inverse-projection integration z, and canonical scalar/pullback orientation comparison; definition-only ownership of the existing IntegrationScalar constructions. Seed ancestry is null, as blueprint_refs.py ancestor reports.",
+   "via": [
+    "lem-pur-etale-affine-integration-coefficient-equation",
+    "lem-pur-etale-affine-projection-coefficient-mate",
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.IntegrationTransposeScalarMate",
+  "declaration": "AlgebraicGeometry.Etale.IntegrationScalar.object",
+  "declarations": [
+   "AlgebraicGeometry.Etale.IntegrationScalar.object",
+   "AlgebraicGeometry.Etale.IntegrationScalar.integration",
+   "AlgebraicGeometry.Etale.IntegrationScalar.comparison"
+  ],
+  "statement": "def object (f : X ⟶ Y) (W : DerivedCategoryModule A X)\n    (K : DerivedCategoryModule A Y) : DerivedCategoryModule A X",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition-only ownership requested by return L at immutable head b7f3d9aedc42. These three plain definitions are reused in their existing module without moving or copying them. None uses integrationTransposeScalarMate or chooses data from its conclusion. The declaration signatures and actual composite bodies remain unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d82cc09ee",
+  "group": "Q103",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d82cc09ee",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Re-delivery after the b7f3 RETURN (H2/theorem stmt_dep). Both Lean files are byte-identical to b7f3, so the earlier full clause check still holds: levels m+1,n+1, arbitrary phi, no flatness, Domain/T_Z clauses, both Equations with the actual q, w, a_K and unitor. In stmt_deps, lem-pur-integration-transpose-scalar-mate is replaced by the new def-pur-integration-scalar-objects: existing:true on Sheaf.Paper.IntegrationTransposeScalarMate, owning the plain defs IntegrationScalar.object/integration/comparison (l.37/45/73, no move or copy, no use of the theorem). Its statement field is verbatim; its prose matches G=Lf*K⊗W, z=P^-1;1⊗t;unitor and a=tensorIso;scalarPullbackIso;1⊗l; its source place cor-pur-vector-bundle-purity para 2 supports it; full §5 fields. The §1(B) AffineCounitScalar repair is still needed: N6's landed module is absent from both live clones and has no olean. The dep record changes only by/date/note, with the statement token-identical. It uses projectiveLineTraceDatum instead of N6's ambientAffineTraceDatum; this is canonical, and the counit at the unit is datum-independent via VectorIntegrationNormalization (∀ t,D). Advisories: the new node's Lean uses scalarPullbackIso/compactScalarProjection, owned outside its stmt_deps; keep one version if N6's lost module resurfaces. No compile run, no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261023T151904-L-420299",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Etale.IntegrationScalar.integrationTransposeScalarMate"
+  ],
+  "sorry_after": []
+ }
+}

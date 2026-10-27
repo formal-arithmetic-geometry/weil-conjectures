@@ -1,0 +1,214 @@
+{
+ "id": "lem-sfb-space-perfect-tests-pseudocoherence",
+ "kind": "statement",
+ "title": "Perfect pseudo-coherent tensor tests on flat algebraic spaces",
+ "statement": "Work in the universes of [def-weil-size-convention]. Use schemes [def-pc-scheme], algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category] and their unbounded derived categories $D(\\mathcal O_Z)$ [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for the full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. A perfect complex is etale locally represented by a bounded complex of direct summands of finite free modules [def-weil-pbc-strict-perfect-coefficient-package]. Derived tensor and pullback use K-flat resolutions, and derived global sections use K-injective resolutions. Let $A$ be a commutative ring and $f:X\\to\\operatorname{Spec}A$ a separated flat morphism of finite presentation. Separated means that the diagonal is a closed immersion; flatness and local finite presentation are tested on etale scheme charts, and finite presentation includes quasi-compactness and quasi-separatedness. Let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$. Suppose $R\\Gamma(X,E\\otimes^{\\mathbf L}_{\\mathcal O_X}K)$ [def-pur-ringed-site-zeroth-hypercohomology] is pseudo-coherent in $D(A)$ for every perfect $E$. Here pseudo-coherence over $A$ is [def-pc-ring-pseudo-coherent-complex]. Then $K$ is pseudo-coherent on $X$: etale locally on affine scheme charts it is represented by a bounded-above complex of finite free structure modules.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 0GFJ (lemma-characterize-pseudo-coh-improved) and 0DII (lemma-relative-pseudo-coherent-is-moot), flat locally finitely presented case."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-affine-global-sections",
+  "def-sfb-space-pseudocoherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "The affine base $\\operatorname{Spec}A$ is quasi-compact and quasi-separated. Apply the finite-presentation qcqs-source lemma to $f$ to obtain that $X$ is quasi-compact and quasi-separated. This uses the quasi-compactness and quasi-separatedness included in finite presentation, not properness.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-fp-qcqs-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "0GFJ: qcqs hypotheses"
+   }
+  },
+  {
+   "text": "For every perfect $P$, choose the bounded-above finite-free model of $R\\Gamma(X,P\\otimes^{\\mathbf L}K)$ supplied by pseudo-coherence. In degrees above its last nonzero term its cohomology is zero. The perfect tensor-test upper-bound criterion now gives an integer $b$ such that $\\mathcal H^i(K)=0$ for $i>b$. The individual test bounds need not be uniform.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-sfb-space-perfect-tensor-tests-upper-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "0GFJ using 0GFH"
+   }
+  },
+  {
+   "text": "Apply the perfect-to-pseudo-coherent test lemma to $X$, $A$, and $K$. The qcqs hypothesis is step 1, the required upper bound is step 2, and the perfect-test hypothesis is exactly the hypothesis of the item. It follows that $R\\Gamma(X,E\\otimes^{\\mathbf L}K)$ is pseudo-coherent in $D(A)$ for every pseudo-coherent $E$.",
+   "uses": [
+    "lem-sfb-space-perfect-to-pseudocoherent-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "0GFJ using 0CWH"
+   }
+  },
+  {
+   "text": "The pseudo-coherent tensor-test criterion applies to step 3 because $f$ is separated and of finite presentation and $K$ has quasi-coherent cohomology. It gives pseudo-coherence of $K$ relative to $\\operatorname{Spec}A$.",
+   "uses": [
+    "lem-sfb-space-pseudocoherent-tests-relative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "0GFJ using 0CTT"
+   }
+  },
+  {
+   "text": "Apply the relative/absolute comparison with base scheme $S=\\operatorname{Spec}A$ and $Y=S$. The morphism is flat by hypothesis and locally of finite presentation by its finite-presentation assumption. Its relative pseudo-coherence from step 4 therefore implies that $K$ is pseudo-coherent on $X$, which means precisely the etale-local bounded-above finite-free models in the conclusion.",
+   "uses": [
+    "lem-sfb-space-flat-relative-pseudocoherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "0DII, implication (1) to (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-fp-qcqs-source",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-sfb-space-perfect-tensor-tests-upper-bound",
+  "lem-sfb-space-perfect-to-pseudocoherent-tests",
+  "lem-sfb-space-pseudocoherent-tests-relative",
+  "lem-sfb-space-flat-relative-pseudocoherence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0GFJ, lemma-characterize-pseudo-coh-improved, followed by Tag 0DII, lemma-relative-pseudo-coherent-is-moot"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A complex on a flat separated finitely presented algebraic space is pseudo coherent if every perfect tensor test has pseudo coherent derived global sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Detect pseudo coherence by testing derived global sections against all perfect complexes on algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ)\\n  (CategoryTheory.Bicategory.Adj CategoryTheory.Cat)\", \"doc\": \"A pseudofunctor from the locally discrete opposite category of schemes to the bicategory of adjunctions in categories, assigning to each scheme its category of modules (as an adjunction) and to each m\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ (b : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.obj b).obj = CategoryTheory.Cat.of (Opposite.unop b.as).Modules\", \"doc\": \"For any scheme $X$ considered as an object in the locally discrete opposite category of schemes, the pseudofunctor assigns the category of modules over $X$. Specifically, applying the pseudofunctor to\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect tensor tests detect pseudo coherence on algebraic spaces flat over a ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.iff_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] : Module.Flat S (S ⊗[R] M) ↔ Module.Flat R M\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ a faithfully flat $ R $-algebra. Then an $ R $-module $ M $ is flat over $ R $ if and only if the tensor product $ S \\\\otimes_R M $ is flat as an $ S\"}\n  {\"name\": \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"module\": \"Mathlib.Algebra.Category.Ring.Under.Limits\", \"type\": \"[Module.Flat R S] : PreservesFiniteLimits (tensorProd R S)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the tensor product functor from the under category of $ R $ to the under category of $ S $ preserves finite limits.\"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.FormallySmooth.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] : FormallySmooth B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a formally smooth $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally smooth $ B $-algebra.\"}\n  {\"name\": \"Module.FaithfullyFlat.iff_flat_and_lTensor_reflects_triviality\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \":\\n  FaithfullyFlat R M ↔\\n    (Flat R M ∧ ∀ (N : Type max u v) [AddCommGroup N] [Module R N], Subsingleton (M ⊗[R] N) → Subsingleton N)\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is faithfully flat if and only if $ M $ is flat and for every $ R $-module $ N $ that is an abelian group, the triviality of the tensor product $ M \\\\otimes\"}\n  {\"name\": \"Module.Flat.iff_rTensor_injectiveₛ\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \":\\n  Flat R M ↔ ∀ ⦃P : Type u⦄ [AddCommMonoid P] [Module R P] (N : Submodule R P), Function.Injective (N.subtype.rTensor M)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every $ R $-module $ P $ and every submodule $ N \\\\subseteq P $, the induced linear map $ N \\\\otimes_R M \\\\to P \\\\otimes_R M $ o\"}\n  {\"name\": \"Module.Flat.iff_rTensor_exact\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \":\\n  Flat R M ↔\\n    ∀ ⦃N N' N'' : Type (max u v)⦄ [AddCommGroup N] [AddCommGroup N'] [AddCommGroup N''] [Module R N] [Module R N']\\n      [Module R N''] ⦃f : N →ₗ[R] N'⦄ ⦃g : N' →ₗ[R] N''⦄,\\n      Function.Exact f g → Function.Exact (f.rTensor M) (g.rTensor M)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\xr\"}\n  {\"name\": \"Module.Flat.iff_lTensor_exact'\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"[Small.{v'} R] :\\n  Flat R M ↔\\n    ∀ ⦃N N' N'' : Type v'⦄ [AddCommGroup N] [AddCommGroup N'] [AddCommGroup N''] [Module R N] [Module R N']\\n      [Module R N''] ⦃f : N →ₗ[R] N'⦄ ⦃g : N' →ₗ[R] N''⦄,\\n      Function.Exact f g → Function.Exact (f.lTensor M) (g.lTensor M)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\xr\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudoCoherent|pseudo_coherent|pseudocoherent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-test-relative-perfection",
+  "date": "2026-10-23",
+  "group": "NJ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces.",
+   "via": [
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-perfect-tests-pseudocoherence",
+  "worker": "stage1",
+  "summary": "Read 0GFJ and 0DII and their cited statements 0GFH, 0CWH, 0CTT. Preserved the statement. Split the proof into qcqs reduction, upper-boundedness, extension of the tests, relative detection and flat comparison; four statement-only algebraic-space tools, no scheme-only substitution.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Steps 1-5 expand the supporting perfect-test pseudo-coherence argument using the Stacks route. Current latest sk-thm-sf-ctf-stability direct-images proof is the ancestor route; no independent blueprint statement matches.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic affine-base qcqs fact needed to apply the space finite-presentation source criterion; not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-64648b7eb",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-64648b7eb (reviewer sub-agent of L); spot-checked: Item statement unchanged. The five steps follow Stacks 0GFJ (spaces-more-morphisms lemma-characterize-pseudo-coh-improved) and then 0DII. I read each against the source. (1) Spec A is qcqs, and lem-sfb-space-fp-qcqs-source (06G5) makes X qcqs. The target is affine, so the two qc conventions agree. (2) A pseudo-coherent RΓ over A vanishes above some degree, and the new node lem-sfb-space-perfect-tensor-tests-upper-bound (0GFH (7)(b)=>(1), generator from 09IY folded in, per-P bounds) gives K bounded above. (3) The new 0CWH node (lemma-perfect-enough) has exactly the hypotheses: qcqs, K in D^-_QCoh, perfect tests. (4) The new 0CTT node gives relative pseudo-coherence for separated fp f. Its 'every square' relative definition is equivalent to Stacks' 'one covering square' by the lemma before definition-relative-pseudo-coherence. (5) The new 0DII node with S=Y=Spec A, flat and lfp, gives absolute pseudo-coherence; its relative definition is the same text as step 4's. Each new node is a distinct Stacks lemma strictly smaller than the item: statement-only, self-contained, correct tags and labels. I tested them on X empty, Spec A, an unbounded-above K, and the flatness-free counterexample A/I. Duplicate search: tag grep over the DAG; every space pseudo-coherence node (def-sfb-space-relative-perfect, relative-perfect fibre and base change, 0GFI lower-bound detector, rhom-quasicoherent) and the scheme analogues; blueprint latest. No duplicate found. Batch-5 flags: def-trf-algebraic-space and def-trf-space-quasi-coherent-module are general definitions. The closure of lem-sfb-space-fp-qcqs-source reaches only foundational trf algebraic-space facts (fibre products, atlas tests, surjective composition), not steps of the trace formula or Poincaré duality, so I accept them. The tool_use lem-weil-pbc-affine-scheme-qcqs is a generic Mathlib leaf; accepted. No SGA. Minor nit, not a fault: 'point space' is not linked to def-a1-space-point-topology, as in the sibling nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePerfectTestsPseudoCoherence",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isPseudoCoherent_of_perfect_tensor_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePerfectTestsPseudoCoherence.lean",
+  "statement": "theorem isPseudoCoherent_of_perfect_tensor_tests (A : Type u) [CommRing A] (X : AlgebraicSpace (Spec (.of A))) [HasDerivedCategory.{w} X.SmallModules] (f : X ⟶ schemeSpace (Over.mk (𝟙 (Spec (.of A))))) (_hsep : MapIsSeparated f) (_hflat : MapIsFlat f) (_hfp : MapIsLocallyOfFinitePresentation f ∧ MapIsQuasiCompact f.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (K : X.DerivedModules) (_hK : X.derivedQCohProperty K) (_htest : ∀ E : X.DerivedModules, SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf E → DerivedCategory.IsPseudoCoherent ((affineDerivedSections A (Over.mk (𝟙 (Spec (.of A)))) (Iso.refl _) X f).obj (X.derivedDualityModel.closed.tensor.obj (E, K)))) : X.IsPseudoCoherent K",
+  "branch": "sheaf-dag",
+  "by": "Q113",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd0354121",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Statement matches Stacks 0GFJ+0DII and the node: X algebraic space over Spec A (source setting), f separated (MapIsSeparated), flat (MapIsFlat), fp = lfp ∧ MapIsQuasiCompact ∧ qc diagonal (inlined MapIsQuasiSeparated body, project idiom), K in D_QCoh unbounded, tests over all perfect E via IsPerfectOnRingedSiteOfUniverses.{u,u,u,w}, derivedDualityModel tensor (E,K) and A-valued affineDerivedSections, as in landed sibling perfectTensorTest; conclusion AlgebraicSpace.IsPseudoCoherent (absolute, étale-local bounded-above finite free). Edge cases (empty X, A=0, K=0, unbounded K) admitted; no extra assumptions or universe equalities. Node diff vs live: only lean record + 4 landed def stmt_deps (all with live lean records containing used decls); lean.statement verbatim in file; docstrings with tags/blueprint/5 proof steps; only sorry, no defs; no space duplicate (scheme analogue has different full name). Not recompiled per instructions."
+ }
+}

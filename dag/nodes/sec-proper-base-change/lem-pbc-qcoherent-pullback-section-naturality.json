@@ -1,0 +1,167 @@
+{
+ "id": "lem-pbc-qcoherent-pullback-section-naturality",
+ "kind": "statement",
+ "title": "Structural tensor pullback sections commute with etale restrictions",
+ "statement": "For schemes X,Y, g:Y→X, modules F on X and G on Y, and psi:g*F→G, the structural pullback section maps on U and V commute with the restriction associated to every morphism h:V→U in X.Etale and its base change. The coefficient maps are exactly qcoherentPullbackSection, with the pullback projections and their canonical commutativity proof. No cohomology, quasi-coherence or compactness is involved. Notions: [def-pc-scheme], [def-weil-sheaf-of-modules-category], [lem-weil-pbc-qcoherent-pullback-sections-map], [def-weil-pbc-etale-tensor-sections-restriction].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-qcoherent-pullback-sections-map",
+  "def-weil-pbc-etale-tensor-sections-restriction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FD refinement square; etale-cohomology.tex Tag 03P2; sites-cohomology.tex Tags 03AX and 03FD"
+ },
+ "proof": [
+  {
+   "text": "For an arbitrary family L_f left adjoint to scheme pushforward f_*, define its global-section unit and normalized composition comparison. Evaluate unit_conjugateEquiv_symm on the whole scheme; pushforwardComp is sectionwise identity there. Hence two successive section units followed by the normalized comparison equal the unit for the composite. Naturality of the adjunction unit gives naturality of section units in module morphisms. These are the fully proved private sectionsUnit_comp and sectionsUnit_naturality helpers.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize Adjunction.leftAdjointCompIso_assoc. Verify the right-adjoint coherence by extensionality on module sections, where pushforward composition has identity components. Combining this equality with section-unit composition and naturality proves tripleSections. Eliminate the two triangle equalities to obtain restrictionOfAdjunction_comp: normalized section restrictions compose for arbitrary scheme triangles. Keep these calculations generic in the family of left adjoints until the final theorem. All these helpers are proved here; no etaleness of the intervening maps is assumed.",
+   "uses": [
+    "lem-sc-left-adjoint-composition-iso-associativity",
+    "lem-pc-module-pullback-adjunction",
+    "def-trf-tensor-sections-unit-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the invertible composition maps in their forward associativity equation to obtain composition_inverse. Evaluate on global sections and use section-unit naturality. Equality elimination for a composed with b equals c yields composition_restriction: the inverse comparison for c and g intertwines the triangle restriction for b followed by g with the corresponding restriction on L_g F. The family L and its adjunctions remain abstract throughout these calculations.",
+   "uses": [
+    "lem-sc-left-adjoint-composition-iso-associativity",
+    "def-trf-tensor-sections-unit-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fully proved private square_sections theorem takes two triangles over X, their two counterparts over Y, the projection commutativity equations, and coefficient naturality. Apply restrictionOfAdjunction_comp to both paths and identify their composites by the projection equation using restrictionOfAdjunction_congr. This gives ht, the equality of the two pairs of forward triangle restrictions. Apply composition_restriction to k,a-prime,b-prime,g, then combine ht, that inverse-comparison equation and coefficient naturality using the elementary categorical lemma combine_triangles. In the public theorem, the pullback lift equation gives the required projection commutativity, and etaleTensorSectionsMap_naturality gives coefficient naturality. Specialize square_sections to the pinned tensor adjunctions. The proved private compOfAdjunction_tensor and restrictionOfAdjunction_tensor equalities identify its generic operations with the named tensor-section maps. Unfold the two public section-map formulas and reassociate, leaving the tensor construction abstract. This proves the original additive-map square without extra assumptions or any new sorry.",
+   "uses": [
+    "lem-weil-pbc-qcoherent-pullback-sections-map",
+    "lem-sc-etale-tensor-sections-map-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-sc-left-adjoint-composition-iso-associativity",
+  "def-trf-tensor-sections-unit-composition",
+  "lem-weil-pbc-qcoherent-pullback-sections-map",
+  "lem-sc-etale-tensor-sections-map-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DR, equation-quasi-coherent-presheaf: structural pullback functoriality. Q2 formalizes the square by two arbitrary scheme-triangle composition calculations and inverse-comparison naturality. Private generic calculations adapt the proved arguments in WeilConjectures.AlgebraicGeometry.EtaleTensorSections and EtaleOpenQuasiCoherentIdentificationNaturality; coefficient naturality is used through its public theorem. No unit-level route is changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasicoherent sheaf etale Zariski cohomology comparison natural under pullback morphism of schemes",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; generic APIs only."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "results": "10 hits; AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; generic APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleTensorSections.*[Pp]ullback|[Pp]ullback.*etaleTensorSections",
+   "results": "0 hits; ",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; generic APIs only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison module sheaf derived global sections and cohomology of underlying abelian sheaf natural under morphism of ringed spaces",
+   "results": "8 hits; SheafOfModules.Presentation.map_π_eq, SheafOfModules.sectionsMap, SheafOfModules.unitHomEquiv_comp_apply, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.unitHomEquiv, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; generic APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomologyFMap.*abelian|abelian.*moduleCohomologyFMap|qcoherentPullbackSection_naturality",
+   "results": "0 hits; ",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; generic APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "tools/blueprint_refs.py search: cohomology functoriality; tensor sections; cohomology comparison",
+   "results": "0, 0, and 5 nodes respectively. The latter concern proetale comparison or purity, not this quasi-coherent Zariski/etale argument.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate blueprint assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare",
+  "date": "2026-10-25",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical torsion constructibility input: 0GKW final sentence invokes 0GKV for prime constant coefficients. Expanded by 0GKV case (b): f_* O_X = O_S and R^1 f_* O_X is finite locally free. Etale form: compatibility of 03P2 comparison with restriction between etale base objects and with scalar multiplication.; extracted from lem-weil-pbc-qcoherent-cohomology-comparison-pullback: The normalized comparison commutes with the canonical pullback cohomology maps; extracted structural restriction / abelian-map comparison step",
+   "via": [
+    "lem-weil-pbc-qcoherent-normalized-pullback-square",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QcoherentPullbackSectionNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcoherentPullbackSectionNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.qcoherentPullbackSection_naturality",
+  "statement": "theorem qcoherentPullbackSection_naturality {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (F : X.Modules) (G : Y.Modules) (ψ : (tensorPullback g).obj F ⟶ G)\n    {U V : X.Etale} (h : V ⟶ U) :\n    etaleTensorSectionsRestriction F h ≫\n        qcoherentPullbackSection g F G ψ V\n          ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).obj V)\n          (pullback.fst V.hom g) pullback.condition =\n      qcoherentPullbackSection g F G ψ U\n          ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).obj U)\n          (pullback.fst U.hom g) pullback.condition ≫\n        etaleTensorSectionsRestriction G\n          ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).map h)",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261025T143205-L-963501",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T184054-L-3814745",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,196 @@
+{
+ "id": "lem-sfb-complete-procyclic-scalar-primitives",
+ "kind": "statement",
+ "title": "Higher procyclic scalar primitives with complete coefficients",
+ "statement": "Let $\\ell$ be prime and let $F$ be a complete normed field with a normed $\\mathbf Q_\\ell$-algebra structure, so the scalar embedding is isometric [def-weil-l-adic-numbers]. Let $S$ be any profinite set in the universes of [def-weil-size-convention], including the empty set. Use all continuous functions for the norm topology [def-sfb-continuous-map-condensed-ring]. Write $H=\\mathbf Z_\\ell$ additively. For $r\\geq0$ the trivial-action continuous cochain differential is\n$$(df)(s;t_1,\\ldots,t_{r+1})=f(s;t_2,\\ldots,t_{r+1})+\\sum_{i=1}^{r}(-1)^if(s;t_1,\\ldots,t_i+t_{i+1},\\ldots,t_{r+1})+(-1)^{r+1}f(s;t_1,\\ldots,t_r).$$\nFor every $q\\geq2$ and every $z\\in C(S\\times H^q,F)$ with $dz=0$, there exists $b\\in C(S\\times H^{q-1},F)$ with $db=z$. These are equalities of actual continuous functions, not of closures of images. No incomplete coefficient field is included in this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-written scalar analytic argument extracted in lem-sfb-procyclic-scalar-cochain-evaluation."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-size-convention",
+  "def-sfb-continuous-map-condensed-ring"
+ ],
+ "proof": [
+  {
+   "text": "The normed algebra F is ultrametric: apply IsUltrametricDist.of_normedAlgebra to Q_l. With V=C(S,F), completeness, its supremum norm and its normed scalar action are supplied by [lem-sfb-compact-function-space-complete]. The strong triangle inequality holds pointwise, hence for the supremum norm. The empty parameter gives V=0. Compact-open currying [lem-coef-compact-open-currying], with the factors switched, identifies parameterwise cochains with C(H^q,V), respecting all faces.",
+   "uses": [
+    "lem-sfb-compact-function-space-complete",
+    "lem-coef-compact-open-currying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-written scalar analytic argument extracted in lem-sfb-procyclic-scalar-cochain-evaluation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-banach-translation-difference-split] to V. Put R=C(H,V). Constants and Delta are continuous equivariant coefficient maps; postcomposition gives maps of continuous-cochain complexes. Their composite is zero. Postcomposition with the continuous right inverse of Delta gives surjectivity degreewise. Evaluation at zero continuously identifies the kernel with V-valued cochains. Thus these are a degreewise short exact sequence of abstract Q_l-vector-space complexes.",
+   "uses": [
+    "lem-sfb-banach-translation-difference-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-written scalar analytic argument extracted in lem-sfb-procyclic-scalar-cochain-evaluation."
+   }
+  },
+  {
+   "text": "The compact-open coinduced contraction [lem-sfb-compact-open-coinduced-contraction] makes the R-valued cochain homology zero in every positive degree. For q>=2, both outside terms of H^(q-1)(H,R) -> H^q(H,V) -> H^q(H,R) vanish. Exactness of [lem-weil-pbc-complex-ses-homology-long-exact] gives H^q(H,V)=0. By ordinary kernel/image homology, every closed cochain therefore has a preimage under d. The coordinate range conditions make the preimage an actual continuous cochain. Uncurrying gives b on S times H^(q-1).",
+   "uses": [
+    "lem-sfb-compact-open-coinduced-contraction",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-written scalar analytic argument extracted in lem-sfb-procyclic-scalar-cochain-evaluation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-compact-function-space-complete",
+  "lem-coef-compact-open-currying",
+  "lem-sfb-banach-translation-difference-split",
+  "lem-sfb-compact-open-coinduced-contraction",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-written scalar analytic argument extracted in lem-sfb-procyclic-scalar-cochain-evaluation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous cochains of Zp with complete normed Qp field coefficients have continuous primitives in degrees at least two with profinite parameters",
+   "results": {
+    "t": "2026-10-26T06:48:52Z",
+    "tool": "leansearch",
+    "query": "Continuous cochains of Zp with complete normed Qp field coefficients have continuous primitives in degrees at least two with profinite parameters",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.MultiInd.complex",
+     "ContinuousCohomology.MultiInd.d_comp_d_assoc",
+     "PadicInt.completeSpace",
+     "Padic.instCompleteSpace",
+     "mahler",
+     "PadicInt.complete",
+     "PadicInt.continuousAddCharEquiv_apply",
+     "Padic.adicCompletionEquiv"
+    ],
+    "digest": "30626480b1a48924"
+   },
+   "date": "2026-10-26",
+   "verdict": "No exact match: the hits supply general homology or continuous cochain constructions; none states this parameterwise primitive or local sheaf criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousCohomology\"",
+   "results": {
+    "t": "2026-10-26T06:44:59Z",
+    "tool": "loogle",
+    "query": "\"ContinuousCohomology\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "continuousCohomology",
+     "ContinuousCohomology.cocycles",
+     "ContinuousCohomology.π",
+     "ContinuousCohomology.cocyclesMap_id",
+     "ContinuousCohomology.map_id",
+     "ContinuousCohomology.cocyclesMap",
+     "ContinuousCohomology.map",
+     "ContinuousCohomology.resolutionMap_id"
+    ],
+    "digest": "d0b4f6d4782fce60"
+   },
+   "date": "2026-10-26",
+   "verdict": "No exact match: the hits supply general homology or continuous cochain constructions; none states this parameterwise primitive or local sheaf criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "procyclic|primitive|cohomology",
+   "results": {
+    "t": "2026-10-26T06:45:45Z",
+    "tool": "grep",
+    "query": "procyclic|primitive|cohomology",
+    "sub": "NumberTheory/Padics",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-26",
+   "verdict": "No exact match: the hits supply general homology or continuous cochain constructions; none states this parameterwise primitive or local sheaf criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.ProcyclicScalarCochainEvaluation",
+  "date": "2026-10-26",
+  "group": "J4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; steps 2 and 3 of the scalar cochain evaluation calculation (complete coefficient primitive).",
+   "via": [
+    "lem-sfb-procyclic-scalar-cochain-evaluation",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.CompleteProcyclicScalarPrimitives",
+  "file": "lean/Sheaf/RepresentationTheory/CompleteProcyclicScalarPrimitives.lean",
+  "declaration": "ContinuousCohomology.complete_procyclic_scalar_primitives",
+  "statement": "theorem complete_procyclic_scalar_primitives (ell : ℕ) [Fact ell.Prime]\n    (F : Type u) [NormedField F] [NormedAlgebra ℚ_[ell] F] [CompleteSpace F]\n    (S : Profinite.{v}) (n : ℕ) (z : C(S × (Fin (n + 2) → ℤ_[ell]), F))\n    (hz : ∀ (s : S) (t : Fin (n + 3) → ℤ_[ell]),\n      z (s, fun i ↦ t i.succ) +\n        ∑ i : Fin (n + 3), (-1 : ℤ) ^ (i.val + 1) •\n          z (s, Fin.contractNth i (· + ·) t) = 0) :\n    ∃ b : C(S × (Fin (n + 1) → ℤ_[ell]), F),\n      ∀ (s : S) (t : Fin (n + 2) → ℤ_[ell]),\n        b (s, fun i ↦ t i.succ) +\n          ∑ i : Fin (n + 2), (-1 : ℤ) ^ (i.val + 1) •\n            b (s, Fin.contractNth i (· + ·) t) = z (s, t)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T082256-L-2157434",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T082256-L-2157434",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-qcqs-space-pushforward-right-adjoint",
+ "kind": "statement",
+ "title": "Right adjoint of quasi-coherent pushforward for qcqs algebraic spaces",
+ "statement": "Work in the fixed universes [def-weil-size-convention]. Use schemes [def-pc-scheme], algebraic spaces and their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category], and the unbounded derived categories [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Use the canonical small etale module functors [def-trf-space-etale-module-functors]. Derived direct image is computed by K-injective resolutions, and derived tensor pullback by K-flat resolutions. Let $S$ be a scheme and $f:X\\to Y$ a morphism of quasi-compact quasi-separated algebraic spaces over $S$. Then $Rf_*$ takes $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ to $D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ and admits a right adjoint $a_f$. Its adjunction bijection sends $u:E\\to a_f(F)$ to $\\epsilon_{f,F}\\circ Rf_*u$, where $\\epsilon_f:Rf_*a_f\\to\\mathrm{id}$ is the counit. No Noetherian, smoothness or properness hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-duality.tex",
+  "place": "Tag 0E55, lemma-twisted-inverse-image; section-trace defines the counit trace."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-size-convention",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-derived-module-calculus",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-space-qcqs-permanence], the given $f$ is quasi-compact and quasi-separated. Apply [lem-sfb-space-derived-pushforward-coproducts] to obtain the restriction $R:D_{\\mathrm{QCoh}}(\\mathcal O_X)\\to D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ and its preservation of all small coproducts. By [lem-sfb-space-perfect-localizing-generation] applied to $X$ and $Y$, both full subcategories have these ambient coproducts and are closed under shifts and cones. They therefore inherit the distinguished triangles and triangulated structure from [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "lem-sfb-space-perfect-localizing-generation",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "Tag 0E55, lemma-twisted-inverse-image, proof; Tags 073B, 08FA and 08FB."
+   }
+  },
+  {
+   "text": "The canonical $f_*$ is additive: its sectionwise limit construction [def-trf-space-etale-module-functors] respects sums of module morphisms. Module sheaves on the small etale ringed sites of $X$ and $Y$ (small by [def-weil-size-convention]) form abelian categories in which every complex has a K-injective resolution [prop-pur-kinjective-resolutions-exist], so the hypotheses of [lem-pc-right-derived-functor-triangulated] hold and the K-injective right-derived functor $Rf_*$ is triangulated by it. Since the distinguished triangles in the full quasi-coherent subcategories are inherited, and Step 1 shows that $Rf_*$ takes their objects into the target subcategory, its restriction $R$ is exact.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-pc-right-derived-functor-triangulated",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "Tag 0E55, lemma-twisted-inverse-image, verification that the restricted derived functor is exact; the general K-injective triangulation theorem."
+   }
+  },
+  {
+   "text": "Choose the compact perfect generator $P$ supplied by [lem-sfb-space-compact-perfect-generator]. Its singleton family generates the source: if $E\\not\\simeq0$, some $\\operatorname{Hom}(P[n],E)$ is nonzero, equivalently some $\\operatorname{Hom}(P,E[-n])$ is nonzero. Thus the source is compactly generated in [def-pc-compactly-generated]. Together with Steps 1 and 2 these are exactly the hypotheses of [lem-pc-brown-representability-right-adjoint]. It supplies a right adjoint $a_f$ to $R=Rf_*$.",
+   "uses": [
+    "lem-sfb-space-compact-perfect-generator",
+    "def-pc-compactly-generated",
+    "lem-pc-brown-representability-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "Tag 0E55, lemma-twisted-inverse-image, proof, using Tags 09IY, 09M8 and 0A8G."
+   }
+  },
+  {
+   "text": "Let $\\alpha_{E,F}:\\operatorname{Hom}(E,a_fF)\\simeq\\operatorname{Hom}(Rf_*E,F)$ be this adjunction, and set $\\epsilon_{f,F}=\\alpha_{a_fF,F}(\\mathrm{id}_{a_fF})$. Naturality of $\\alpha$ in $E$, applied to $u:E\\to a_fF$, gives $\\alpha_{E,F}(u)=\\alpha_{a_fF,F}(\\mathrm{id})\\circ Rf_*u=\\epsilon_{f,F}\\circ Rf_*u$. Naturality in $F$ gives the counit transformation $Rf_*a_f\\to\\mathrm{id}$. This is precisely the asserted bijection. Every hypothesis used above was qcqs; none imposes Noetherianity, smoothness or properness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "section-trace, definition of the trace as the adjunction counit and its Hom formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-derived-pushforward-coproducts",
+  "lem-sfb-space-perfect-localizing-generation",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-etale-module-functors",
+  "lem-pc-right-derived-functor-triangulated",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-weil-size-convention",
+  "lem-sfb-space-compact-perfect-generator",
+  "def-pc-compactly-generated",
+  "lem-pc-brown-representability-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-duality.tex",
+  "place": "Tag 0E55, lemma-twisted-inverse-image, and section-trace."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward on quasi coherent complexes of quasi compact quasi separated algebraic spaces has a right adjoint",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {E : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D}\\n  {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (\", \"doc\": \"For functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $, a presheaf of rings $ R : \\\\mathcal{E}^{\\\\text{op}} \\\\to \\\\mathbf{Ring} $, and natural transformations $ \\\\phi: R \\\\to \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brown representability for derived quasi coherent direct image of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.pushforward f).Full\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsLeftAdjoint\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|twistedInverse|twisted_inverse|DQCoh",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"line\": \"20\", \"text\": \"This file was obtained by dualizing the definitions in\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"line\": \"82\", \"text\": \"/-- The path object of a homological complex is defined here by dualizing\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Dual.lean\", \"line\": \"190\", \"text\": \"and dualizing the result using `toDual`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"line\": \"32\", \"text\": \"* consider dualizing the results to right adjoints\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"22\", \"text\": \"by dualizing this file. These two files should be kept in sync.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"21\", \"text\": \"Note: this file was obtained by dualizing the definitions in the file\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"27\", \"text\": \"(This file was obtained by dualizing the results in the file\"}\n  {\"file\": \"Mathlib/CategoryTheory/Category/Cat/Op.lean\", \"line\": \"12\", \"text\": \"# The dualizing functor on `Cat`\"}\n  {\"file\": \"Mathlib/Data/Set/Defs.lean\", \"line\": \"60\", \"text\": \"Additionally, dualizing the order on sets would mean that a set is dual to its complement.\"}\n  {\"file\": \"Mathlib/Tactic/Translate/ToDual.lean\", \"line\": \"27\", \"text\": \"  We may also want this feature for dualizing results about bicategories.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward on quasi coherent complexes of quasi compact quasi separated algebraic spaces has a right adjoint",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).r =\\n    (AlgebraicGeometry.Scheme.Modules.pushforward f.as.unop).toCatHom\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the right adjoint component of the pseudofunctor's action on $ f $ equals the pushforward functor $ f_* $ between the module categories of $ X $ and $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \"[Functor.IsContinuous.{v₁} G J K] [HasWeakSheafify K A] : sheafPullback G A J K ⊣ G.sheafPushforwardContinuous A J K\", \"doc\": \"Given a continuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, and assuming the existence of weak sheafifications for $ K $, this constructs\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \": pushforward.{v} φ ⊣ pushforward.{v} ψ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (pushforward.{v} φ).IsRightAdjoint\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \"[HasWeakSheafify K A] : (G.sheafPushforwardContinuous A J K).IsRightAdjoint\", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the induced sheaf pushforward functor $ F_* $ is a right adjoint, provided th\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward on quasi coherent complexes of quasi compact quasi separated algebraic spaces has a right adjoint",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {E : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D}\\n  {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (\", \"doc\": \"For functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $, a presheaf of rings $ R : \\\\mathcal{E}^{\\\\text{op}} \\\\to \\\\mathbf{Ring} $, and natural transformations $ \\\\phi: R \\\\to \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module adjunctions, generic derived categories or generator definitions, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brown representability gives a second right adjoint to derived direct image on algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.restrictFunctor f).IsLeftAdjoint\", \"doc\": \"For an open immersion $ f: X \\to Y $ between schemes, the restriction functor from the category of sheaves of modules over $ Y $ to the category of sheaves of modules over $ X $, induced by $ f $, has \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}\n  {\"name\": \"TopCat.Sheaf.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Topology/Sheaves/Functors\", \"type\": \"∀ {X Y : TopCat} (f : X ⟶ Y) (A : Type u_1) [inst : CategoryTheory.Category.{w, u_1} A] {FA : A → A → Type u_2}\\n  {CA : A → Type w} [inst_1 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)]\\n  [inst_2 : CategoryTheory.ConcreteCategory A FA] [CategoryTheory.Limits.HasColimits A]\\n  [CategoryTheory.Limits.H\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a topological space $X$, the sheaves on $X$ with values in $\\\\mathcal{C}$ form a category. In this category: (1) objects are sheaves on $X$ valued in $\\\\mathcal{C}$; (\"}\n  {\"name\": \"PresheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"∀ {C D : Type u} [inst : CategoryTheory.SmallCategory C] [inst_1 : CategoryTheory.SmallCategory D]\\n  {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat}\\n  (φ : S ⟶ F.op.comp R), (PresheafOfModules.pushforward φ).IsRightAdjoint\", \"doc\": \"Given a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, a presheaf of rings $ R : \\\\mathcal{D}^{\\\\text{op}} \\\\to \\\\mathbf{Ring} $, and a natural transformation $ \\\\phi: R \\\\to S $ between presheaves of rings, \"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module adjunctions, generic derived categories or generator definitions, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsLeftAdjoint\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module adjunctions, generic derived categories or generator definitions, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic.?space.*adjoint|DQCoh|derived.*pushforward.*adjoint",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module adjunctions, generic derived categories or generator definitions, not this theorem for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward of quasi coherent complexes on algebraic spaces admits a right adjoint",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).r =\\n    (AlgebraicGeometry.Scheme.Modules.pushforward f.as.unop).toCatHom\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the right adjoint component of the pseudofunctor's action on $ f $ equals the pushforward functor $ f_* $ between the module categories of $ X $ and $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \"[HasWeakSheafify K A] : (G.sheafPushforwardContinuous A J K).IsRightAdjoint\", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the induced sheaf pushforward functor $ F_* $ is a right adjoint, provided th\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (pushforward.{v} φ).IsRightAdjoint\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"TopCat.Sheaf.pullback\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \"(f : X ⟶ Y) : Y.Sheaf A ⥤ X.Sheaf A\", \"doc\": \"For a continuous map $ f: X \\to Y $ between topological spaces, the sheaf pullback functor $ f^* $ maps sheaves on $ Y $ to sheaves on $ X $ and is defined as the right adjoint to the sheaf pushforward\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \": G.sheafPullback A J K ⊣ G.sheafPushforwardContinuous A J K\", \"doc\": \"Given a continuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, this defines an adjunction where the sheaf pullback functor (left adjoint) $ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived module adjunctions, generic derived categories or generator definitions, not this theorem for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-space-derived-duality",
+  "date": "2026-10-23",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Right adjoint of quasi-coherent pushforward for qcqs algebraic spaces.",
+   "via": [
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-qcqs-space-pushforward-right-adjoint",
+  "worker": "stage1",
+  "summary": "Q46 checked 0E55 and its Brown hypotheses, reused the qcqs permanence and localizing-generation statements, and exposed the compact perfect generator and general qcqs derived pushforward/coproduct theorem as two statement-only prerequisites. The final step derives the counit formula by naturality. The original provenance is retained, with its latest-blueprint mismatch reported.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Right adjoint of quasi-coherent pushforward for qcqs algebraic spaces. The split supplies the coherent-duality construction prerequisite by the source Brown route. In the latest blueprint the ancestor direct-image proof (3) now uses compactification and cited proper/open preservation, not the historical alteration paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-brown-representability-right-adjoint",
+    "why": "Generic Brown criterion, applied after checking exactness, compact generation and coproducts; no node of this unit states that category-theoretic tool."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic theorem that a K-injective right derived functor of an additive functor commutes with shifts and preserves distinguished triangles; used as a black box in step 2, and no node of this unit or of its cited units states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-brown-representability-right-adjoint",
+  "lem-pc-right-derived-functor-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-5698186c7",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-5698186c7 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, and checked them against Stacks 0E55 (spaces-duality.tex:320), 08FA(1), 08FB, 08F3, 09IY and 09M8 (spaces-perfect.tex) and 0A8G. The statement only gained explicit universe and module-functor conventions over its base; nothing was weakened. Steps 1-4 are correct. Step 1: qcqs permanence is 073B, and the smallest localizing subcategory is closed under shifts and cones. Step 3: the shift-sign conversion Hom(P[n],E)=Hom(P,E[-n]) matches def-pc-generators, and the Brown hypotheses all hold, with the target's coproducts from step 1 applied to Y. Step 4: the counit formula follows by naturality in E. lem-sfb-space-compact-perfect-generator is exactly 09IY+09M8 and lem-sfb-space-derived-pushforward-coproducts is exactly 08FA(1)+08FB with 08F3 coproducts; both are true (tested on the empty space, an affine space, the identity morphism and the empty family), self-contained, and not duplicates: the existing nodes for 09IY are the localizing-generation and affine-pullback detection nodes, the existing compact-generation nodes are for schemes only, and lem-pc-derived-direct-image-preserves-direct-sums is for schemes (08DZ). The graph stays acyclic. Batch-5: every listed citation is a general definition (def-trf-algebraic-space, def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors) or lem-sfb-space-qcqs-permanence, whose closure reaches sec-trace-formula only through a definition; none imports a proof of the trace formula or of Poincare duality, so all are accepted. Two faults are fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-qcqs-space-pushforward-right-adjoint.json: (1) E1/C4: step 2 applied lem-pc-right-derived-functor-triangulated without justifying its K-injective-resolution hypothesis; it now cites prop-pur-kinjective-resolutions-exist (on route through sk-def-sf-operations) and def-weil-size-convention, and proof_deps were recomputed; (2) C8: the off-unit lem-pc-right-derived-functor-triangulated is now declared in split_report.tool_uses and accepted as a generic tool. The Brown tool use is accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQCqsPushforwardRightAdjoint",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.qcqs_derivedDirectImage_hasRightAdjoint",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQCqsPushforwardRightAdjoint.lean",
+  "statement": "theorem qcqs_derivedDirectImage_hasRightAdjoint {S : Scheme.{u}} (X Y : AlgebraicSpace S) (f : X ⟶ Y) [HasDerivedCategory.{w} X.SmallModules] [HasDerivedCategory.{w} Y.SmallModules] (hXqc : CompactSpace (Point X.obj.obj)) (hXqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) (hYqc : CompactSpace (Point Y.obj.obj)) (hYqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ Y.obj.obj) (b : yoneda.obj V ⟶ Y.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) : (∀ E : X.DerivedModules, X.derivedQCohProperty E → Y.derivedQCohProperty ((derivedDirectImage f).obj E)) ∧ ∃ (D : QCohDirectImagePresentation f) (a : Y.DerivedQCoh ⥤ X.DerivedQCoh) (adj : D.functor ⊣ a), ∀ (E : X.DerivedQCoh) (F : Y.DerivedQCoh) (v : E ⟶ a.obj F), (adj.homEquiv E F).symm v = D.functor.map v ≫ adj.counit.app F",
+  "branch": "sheaf-dag",
+  "by": "NU",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45713fe76",
+  "group": "NU",
+  "result": "pass",
+  "note": "Read item node, module, report (Worker report + Second reading by NU present), Stacks 0E55 (spaces-duality.tex:319) and 0AHR (spaces-properties.tex:133), dep decls DerivedQCoh/derivedQCohProperty/derivedDirectImage/QCohDirectImagePresentation (comparison iso pins D.functor up to iso via fully faithful ι, so ∃ D equivalent to canonical restriction) and pointTopologicalSpace. qc = CompactSpace(Point), qs = 0AHR(3) absolute affine-pair criterion, no extra hypotheses, shared derived universe w as landed interface requires. Hom formula via homEquiv.symm correct orientation (tautological as in node). lean.statement verbatim in file; node differs from base only in lean + two landed stmt_deps (def-sfb-space-derived-module-calculus, def-a1-space-point-topology), allowed by §5. Proof sorry only, docstrings with source/blueprint/proof steps, no new defs. No compile run (no change)."
+ }
+}

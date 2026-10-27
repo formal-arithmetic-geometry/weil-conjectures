@@ -1,0 +1,308 @@
+{
+ "id": "lem-sfb-arbitrary-polynomial-diagonal-hom",
+ "kind": "statement",
+ "title": "Polynomial reduction of diagonal derived Hom over arbitrary rings",
+ "statement": "Let $R\\to A$ be a flat finitely presented homomorphism of arbitrary commutative rings [def-weil-pbc-flat-ring-map, def-weil-pbc-finitely-presented-algebra]. Fix a surjection $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow A$, where $n\\geq0$ [def-weil-pbc-mv-polynomial-ring]. Work in ordinary module derived categories [def-weil-abstract-derived-category], with derived tensor computed on K-flat resolutions and internal Hom [def-pur-derived-internal-hom] on the one-object ringed site. Put $C=C_{P\\to A}(P[0])[n]\\in D(A)$, where $C_{P\\to A}$ is derived coinduction with precomposition action $(a h)(a')=h(a'a)$ [def-trf-derived-coinduction]. Put $B=A\\otimes_R A$, let $p_1:A\\to B$ send $a$ to $a\\otimes1$, and give $A$ its $B$-action via multiplication [def-trf-affine-diagonal-module-data]. For every $T\\in D(A)$ there is an isomorphism in $D(A)$, natural in $T$,\n$$\\operatorname{Res}_{p_1}R\\operatorname{Hom}_B(A,T\\otimes_{A,p_1}^{\\mathbf L}B)\\ \\cong\\ R\\operatorname{Hom}_A(C,T).$$\nHere restriction is along the first coprojection $A\\to B$, not along multiplication $B\\to A$. No pseudo-coherence, boundedness, or finite Tor hypothesis on $T$, and no Noetherian hypothesis on the rings, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent mixed-ring polynomial-diagonal consequence of Tag 0A65, lemma-internal-hom (derived tensor--Hom adjunction), using perfect polynomial quotients and the ordered graph Koszul resolution. Derived-category isomorphism, not a cohomology-only comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-trf-derived-coinduction",
+  "def-trf-affine-diagonal-module-data"
+ ],
+ "proof": [
+  {
+   "text": "Distinguish the two copies $A_1,A_2$ of $A$. Set $S=A_1\\otimes_RP=A_1[x_1,\\ldots,x_n]$, $q:S\\to B=A_1\\otimes_RA_2$, $i:A_1\\to S$, and $e=\\mu q:S\\to A$, where $\\mu$ is multiplication. Write $a_j$ for the image of $x_j$ in $A$. Thus $e(x_j)=a_j$, $qi=p_1$ and $ei=1_A$. Put $D=C_{P\\to A_2}(P[0])$, $E=C_q(S[0])$ and $V=S\\otimes_{A_1}^{\\mathbf L}T$. Then $C=D[n]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent polynomial-diagonal assembly: Tags 067J (lemma-flat-finite-presentation-perfect), 068X (lemma-perfect-over-polynomial-ring), 07VI (lemma-dual-perfect-complex), 0A6A (lemma-base-change-RHom), 0A65 (lemma-internal-hom); mixed-ring adjunction dga.tex Tags 09LN/09LT and graph coinduction dualizing.tex Tag 0BZE."
+   }
+  },
+  {
+   "text": "The first conclusion of [lem-sfb-arbitrary-polynomial-dual-properties] gives a bounded finite projective $P$-resolution $F\\to A_2[0]$. For any $P$-module $M$ the balanced isomorphism $M\\otimes_PS\\cong M\\otimes_RA_1$, $m\\otimes(a\\otimes p)\\mapsto pm\\otimes a$, identifies tensoring with $S$ with tensoring over $R$ with the flat module $A_1$. By [lem-weil-pbc-flat-tensor-exact] this is exact. Hence $F\\otimes_PS$ resolves $B[0]$; its terms are direct summands of finite free $S$-modules. In particular $B[0]$ is perfect over $S$, and $A_2,S$ are Tor independent over $P$: bounded finite projective complexes are K-flat by [lem-pc-module-bounded-flat-kflat], so [lem-pc-derived-tensor-second-factor-functor] computes their derived tensor by this resolution.",
+   "uses": [
+    "lem-sfb-arbitrary-polynomial-dual-properties",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent polynomial-diagonal assembly: Tags 067J (lemma-flat-finite-presentation-perfect), 068X (lemma-perfect-over-polynomial-ring), 07VI (lemma-dual-perfect-complex), 0A6A (lemma-base-change-RHom), 0A65 (lemma-internal-hom); mixed-ring adjunction dga.tex Tags 09LN/09LT and graph coinduction dualizing.tex Tag 0BZE."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-perfect-coinduction-tor-independent-exchange] to $P\\to A_2$, $P\\to S$ and $M=P[0]$. The perfectness and Tor independence just established give $E\\cong B\\otimes_{A_2}^{\\mathbf L}D$ in $D(B)$, where $A_2\\to B$ is the second coprojection. This is an isomorphism with the precomposition $B$-action, not merely an isomorphism after forgetting scalars.",
+   "uses": [
+    "lem-sfb-perfect-coinduction-tor-independent-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent polynomial-diagonal assembly: Tags 067J (lemma-flat-finite-presentation-perfect), 068X (lemma-perfect-over-polynomial-ring), 07VI (lemma-dual-perfect-complex), 0A6A (lemma-base-change-RHom), 0A65 (lemma-internal-hom); mixed-ring adjunction dga.tex Tags 09LN/09LT and graph coinduction dualizing.tex Tag 0BZE."
+   }
+  },
+  {
+   "text": "Choose a flat-term K-flat $A_2$-model $G$ of $D$ by [lem-pc-kflat-resolution]. Its extension $B\\otimes_{A_2}G$ is K-flat over $B$ by [lem-pur-kflat-change-of-rings]. Consequently [lem-pc-derived-tensor-second-factor-functor] and Step 3 compute $A\\otimes_B^{\\mathbf L}E$ by $A\\otimes_B(B\\otimes_{A_2}G)\\cong G$. The map is $a\\otimes(b\\otimes g)\\mapsto a\\mu(b)g$, with inverse $g\\mapsto1\\otimes(1\\otimes g)$. Since $\\mu p_2=1_A$, these are inverse balanced chain maps. The residual $S$-action is through $e$: $a_1\\otimes p$ acts on $G$ as multiplication by $a_1\\bar p$. Thus $\\operatorname{Res}_q(A\\otimes_B^{\\mathbf L}E)\\cong\\operatorname{Res}_eD$ in $D(S)$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent polynomial-diagonal assembly: Tags 067J (lemma-flat-finite-presentation-perfect), 068X (lemma-perfect-over-polynomial-ring), 07VI (lemma-dual-perfect-complex), 0A6A (lemma-base-change-RHom), 0A65 (lemma-internal-hom); mixed-ring adjunction dga.tex Tags 09LN/09LT and graph coinduction dualizing.tex Tag 0BZE."
+   }
+  },
+  {
+   "text": "By [lem-trf-perfect-algebra-dual-evaluation], with $B$ perfect over $S$, $J_E(V)\\cong B\\otimes_S^{\\mathbf L}V$ in $D(B)$, naturally in $V$. A flat-term K-flat $A_1$-model $H$ of $T$ exists by [lem-pc-kflat-resolution]; $S\\otimes_{A_1}H$ is K-flat over $S$ by [lem-pur-kflat-change-of-rings]. Using [lem-pc-derived-tensor-second-factor-functor], the inverse balanced chain maps $b\\otimes(s\\otimes h)\\mapsto bq(s)\\otimes h$ and $b\\otimes h\\mapsto b\\otimes(1\\otimes h)$ give $B\\otimes_S^{\\mathbf L}V\\cong B\\otimes_{A_1}^{\\mathbf L}T$. They are $B$-linear and natural in $T$.",
+   "uses": [
+    "lem-trf-perfect-algebra-dual-evaluation",
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent polynomial-diagonal assembly: Tags 067J (lemma-flat-finite-presentation-perfect), 068X (lemma-perfect-over-polynomial-ring), 07VI (lemma-dual-perfect-complex), 0A6A (lemma-base-change-RHom), 0A65 (lemma-internal-hom); mixed-ring adjunction dga.tex Tags 09LN/09LT and graph coinduction dualizing.tex Tag 0BZE."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-derived-bimodule-tensor-hom] to $q:S\\to B$, $X=A$ with multiplication action, $E=C_q(S)$ and $V$. Steps 4 and 5 identify its two sides. Restrict its $D(S)$-isomorphism along $i:A_1\\to S$, using $qi=p_1$, to obtain $$\\operatorname{Res}_{p_1}R\\operatorname{Hom}_B(A,T\\otimes_{A_1}^{\\mathbf L}B)\\cong\\operatorname{Res}_iR\\operatorname{Hom}_S(\\operatorname{Res}_eD,V).$$ No flatness of the multiplication map is used.",
+   "uses": [
+    "lem-trf-derived-bimodule-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent polynomial-diagonal assembly: Tags 067J (lemma-flat-finite-presentation-perfect), 068X (lemma-perfect-over-polynomial-ring), 07VI (lemma-dual-perfect-complex), 0A6A (lemma-base-change-RHom), 0A65 (lemma-internal-hom); mixed-ring adjunction dga.tex Tags 09LN/09LT and graph coinduction dualizing.tex Tag 0BZE."
+   }
+  },
+  {
+   "text": "The evaluation $e:S=A_1[x_1,\\ldots,x_n]\\to A$ is exactly the graph map with ordered equations $x_j-a_j$. Apply [lem-trf-polynomial-graph-coinduction] to obtain $C_e(V)\\cong T[-n]$ in $D(A)$, naturally for every $T$, with its original $A$-action. Its hypotheses require neither Noetherianity nor boundedness or a Tor condition on $T$.",
+   "uses": [
+    "lem-trf-polynomial-graph-coinduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent polynomial-diagonal assembly: Tags 067J (lemma-flat-finite-presentation-perfect), 068X (lemma-perfect-over-polynomial-ring), 07VI (lemma-dual-perfect-complex), 0A6A (lemma-base-change-RHom), 0A65 (lemma-internal-hom); mixed-ring adjunction dga.tex Tags 09LN/09LT and graph coinduction dualizing.tex Tag 0BZE."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-algebraic-shriek-derived-hom-adjunction] to $e:S\\to A$, $X=D$ and $Y=V$. Its enriched isomorphism identifies $R\\operatorname{Hom}_S(\\operatorname{Res}_eD,V)$ with $\\operatorname{Res}_eR\\operatorname{Hom}_A(D,C_e(V))$. Restrict along $i$ and use $ei=1_A$ and Step 7. Step 6 therefore equals $R\\operatorname{Hom}_A(D,T[-n])\\cong R\\operatorname{Hom}_A(D[n],T)=R\\operatorname{Hom}_A(C,T)$; the shift identification is the reindexing, with the cochain differential signs, of [def-sc-module-total-hom-complex]. Each constituent is a natural derived isomorphism, so their composite is natural in $T$. The construction includes $n=0$ and the zero ring, and never uses a finiteness hypothesis on $T$.",
+   "uses": [
+    "lem-trf-algebraic-shriek-derived-hom-adjunction",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent polynomial-diagonal assembly: Tags 067J (lemma-flat-finite-presentation-perfect), 068X (lemma-perfect-over-polynomial-ring), 07VI (lemma-dual-perfect-complex), 0A6A (lemma-base-change-RHom), 0A65 (lemma-internal-hom); mixed-ring adjunction dga.tex Tags 09LN/09LT and graph coinduction dualizing.tex Tag 0BZE."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-total-hom-complex",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-resolution",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-kflat-change-of-rings",
+  "lem-sfb-arbitrary-polynomial-dual-properties",
+  "lem-sfb-perfect-coinduction-tor-independent-exchange",
+  "lem-trf-algebraic-shriek-derived-hom-adjunction",
+  "lem-trf-derived-bimodule-tensor-hom",
+  "lem-trf-perfect-algebra-dual-evaluation",
+  "lem-trf-polynomial-graph-coinduction",
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent polynomial-diagonal assembly: Tags 067J (lemma-flat-finite-presentation-perfect), 068X (lemma-perfect-over-polynomial-ring), 07VI (lemma-dual-perfect-complex), 0A6A (lemma-base-change-RHom), 0A65 (lemma-internal-hom); mixed-ring adjunction dga.tex Tags 09LN/09LT and graph coinduction dualizing.tex Tag 0BZE."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "diagonal.*[Hh]om|[Hh]om.*diagonal|coinduction",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived algebra or general derived categories, not this relative polynomial-duality assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\", \"DerivedCategory\"",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived algebra or general derived categories, not this relative polynomial-duality assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduce derived Hom along an algebra multiplication diagonal to derived Hom from the dual of a polynomial resolution",
+   "results": "8 hits: DualNumber.coe_lift_symm_apply, DualNumber.lift, DualNumber.algHom_ext'_iff, Polynomial.mapAlg, Module.Dual.baseChange, PolyEquivTensor.toFunAlgHom, Polynomial.CAlgHom, TensorProduct.AlgebraTensorModule.dualDistrib; digest=727dc1d86da393d7; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived algebra or general derived categories, not this relative polynomial-duality assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Diagonal derived Hom for a flat finitely presented algebra equals derived Hom from its polynomial relative dualizing complex",
+   "results": "8 hits: Algebra.Extension.tensorH1Cotangent, KaehlerDifferential.endEquivAuxEquiv, Algebra.Smooth.flat, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, AlgebraicGeometry.diagonal_SpecMap, AlgebraicGeometry.diagonal_Spec_map, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; digest=988e9b8f8d5e7321; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived algebra or general derived categories, not this relative polynomial-duality assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Diagonal derived Hom for a flat finitely presented algebra equals derived Hom from its polynomial relative dualizing complex",
+   "results": "{\"t\": \"2026-10-23T15:29:35Z\", \"tool\": \"leanfinder\", \"query\": \"Diagonal derived Hom for a flat finitely presented algebra equals derived Hom from its polynomial relative dualizing complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.tensorH1Cotangent\", \"KaehlerDifferential.endEquivAuxEquiv\", \"Algebra.Smooth.flat\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"AlgebraicGeometry.diagonal_SpecMap\", \"AlgebraicGeometry.diagonal_Spec_map\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"988e9b8f8d5e7321\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are ordinary cotangent/differential or tensor-dual constructions, scheme diagonals, or unrelated topology; none states this unbounded module-derived polynomial-diagonal reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "Hochschild|relativeDualizing|diagonal.*[Hh]om|coinduction",
+   "results": "{\"t\": \"2026-10-23T15:29:58Z\", \"tool\": \"grep\", \"query\": \"Hochschild|relativeDualizing|diagonal.*[Hh]om|coinduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\"], \"digest\": \"600aa21d29dde669\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are ordinary cotangent/differential or tensor-dual constructions, scheme diagonals, or unrelated topology; none states this unbounded module-derived polynomial-diagonal reduction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduce derived Hom along an algebra multiplication diagonal to derived Hom from the dual of a polynomial resolution",
+   "results": "{\"t\": \"2026-10-23T15:29:58Z\", \"tool\": \"leansearch\", \"query\": \"Reduce derived Hom along an algebra multiplication diagonal to derived Hom from the dual of a polynomial resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DualNumber.coe_lift_symm_apply\", \"DualNumber.lift\", \"DualNumber.algHom_ext'_iff\", \"Polynomial.mapAlg\", \"Module.Dual.baseChange\", \"PolyEquivTensor.toFunAlgHom\", \"Polynomial.CAlgHom\", \"TensorProduct.AlgebraTensorModule.dualDistrib\"], \"digest\": \"727dc1d86da393d7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are ordinary cotangent/differential or tensor-dual constructions, scheme diagonals, or unrelated topology; none states this unbounded module-derived polynomial-diagonal reduction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\", \"DerivedCategory\"",
+   "results": "{\"t\": \"2026-10-23T15:29:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"TensorProduct\\\", \\\"DerivedCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are ordinary cotangent/differential or tensor-dual constructions, scheme diagonals, or unrelated topology; none states this unbounded module-derived polynomial-diagonal reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "Hochschild|relativeDualizing|semidualizing",
+   "results": "{\"t\": \"2026-10-23T15:30:48Z\", \"tool\": \"grep\", \"query\": \"Hochschild|relativeDualizing|semidualizing\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are ordinary cotangent/differential or tensor-dual constructions, scheme diagonals, or unrelated topology; none states this unbounded module-derived polynomial-diagonal reduction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hochschild cohomology reduction using a perfect algebra dual and the tensor Hom adjunction over a polynomial algebra",
+   "results": "{\"t\": \"2026-10-23T15:30:50Z\", \"tool\": \"leanfinder\", \"query\": \"Hochschild cohomology reduction using a perfect algebra dual and the tensor Hom adjunction over a polynomial algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.H1Cotangent\", \"Algebra.Extension.tensorH1Cotangent\", \"Algebra.H1Cotangent.map\", \"Algebra.Extension.H1Cotangent.map\", \"Algebra.Extension.H1Cotangent\", \"Algebra.H1Cotangent.δ\", \"Algebra.Generators.H1Cotangent.δ_comp_equiv\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\"], \"digest\": \"bccc628b90cd8dce\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are ordinary cotangent/differential or tensor-dual constructions, scheme diagonals, or unrelated topology; none states this unbounded module-derived polynomial-diagonal reduction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism",
+  "date": "2026-10-23",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Open restriction and rigidity of supplied relative dualizing pairs over arbitrary bases. Affine uniqueness input: unmarked module complexes, before generator normalization. Supporting input: Polynomial reduction of diagonal derived Hom over arbitrary rings.",
+   "via": [
+    "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism",
+    "lem-sfb-relative-dualizing-pair-open-rigidity",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-arbitrary-polynomial-diagonal-hom",
+  "worker": "stage1",
+  "summary": "NV gives an eight-step arbitrary-ring assembly using existing perfectness, coinduction exchange, perfect-algebra dual evaluation, mixed-ring adjunction and polynomial graph coinduction. No new nodes. Both tensor cancellations are displayed on K-flat models, with actual scalar actions and first-copy restriction. No change to statement; removed an unused pseudo-coherence statement dependency.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Open restriction and rigidity of supplied relative dualizing pairs over arbitrary bases. Affine uniqueness input: unmarked module complexes, before generator normalization. Supporting input: Polynomial reduction of diagonal derived Hom over arbitrary rings. The affine auxiliary is realized by Steps 1–8. Current latest blueprint direct-images proof (3) supplies the inherited direct-image branch; these steps only supply its existing downstream algebraic relative-duality prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic module-derived algebra tool used only for the displayed polynomial-diagonal auxiliary; no six-functor unit step is replaced, and no same-unit statement supplies this comparison."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic module-derived algebra tool used only for the displayed polynomial-diagonal auxiliary; no six-functor unit step is replaced, and no same-unit statement supplies this comparison."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic module-derived algebra tool used only for the displayed polynomial-diagonal auxiliary; no six-functor unit step is replaced, and no same-unit statement supplies this comparison."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic module-derived algebra tool used only for the displayed polynomial-diagonal auxiliary; no six-functor unit step is replaced, and no same-unit statement supplies this comparison."
+   },
+   {
+    "node": "lem-trf-algebraic-shriek-derived-hom-adjunction",
+    "why": "Generic module-derived algebra tool used only for the displayed polynomial-diagonal auxiliary; no six-functor unit step is replaced, and no same-unit statement supplies this comparison."
+   },
+   {
+    "node": "lem-trf-derived-bimodule-tensor-hom",
+    "why": "Generic module-derived algebra tool used only for the displayed polynomial-diagonal auxiliary; no six-functor unit step is replaced, and no same-unit statement supplies this comparison."
+   },
+   {
+    "node": "lem-trf-perfect-algebra-dual-evaluation",
+    "why": "Generic module-derived algebra tool used only for the displayed polynomial-diagonal auxiliary; no six-functor unit step is replaced, and no same-unit statement supplies this comparison."
+   },
+   {
+    "node": "lem-trf-polynomial-graph-coinduction",
+    "why": "Generic module-derived algebra tool used only for the displayed polynomial-diagonal auxiliary; no six-functor unit step is replaced, and no same-unit statement supplies this comparison."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic module-derived algebra tool used only for the displayed polynomial-diagonal auxiliary; no six-functor unit step is replaced, and no same-unit statement supplies this comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-resolution",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-kflat-change-of-rings",
+  "lem-trf-algebraic-shriek-derived-hom-adjunction",
+  "lem-trf-derived-bimodule-tensor-hom",
+  "lem-trf-perfect-algebra-dual-evaluation",
+  "lem-trf-polynomial-graph-coinduction",
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-7a6243986",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-7a6243986 (reviewer sub-agent of L); spot-checked: First split of the NS-created unsplit node. Live and side-live still have it unsplit, and there is no repair note. The statement is unchanged; the only stmt_dep removed is def-pc-ring-pseudo-coherent-complex, which the statement mentions only to say it is not assumed. 0 new nodes. Tests: R=A, n=0 (both sides T); k[x]=P=A, n=1 (RHom_B(B/(x-y),T[y])=T[-1]=RHom_A(A[1],T)); A=0. All 8 steps checked against the full cited statements. Step 2: dual-properties gives A perfect over P; M⊗_PS≅M⊗_RA_1 with A_1 flat gives a finite projective resolution of B over S, so B is perfect over S and A_2,S are Tor independent over P (via the bounded-flat K-flat lemma and the tensor-functor lemma (2)). Step 3: the exchange applies with P→A_2, P→S, M=P, A_T=B, S→A_T=q, giving E≅B⊗^L_{A_2}D. Step 4: B⊗_{A_2}G is K-flat; A⊗_B(B⊗G)≅G via μp_2=1, and S acts through e. Step 5: dual-evaluation needs only B perfect over S, for arbitrary V; the cancellation uses qi=p_1. Step 6: the bimodule adjunction with X=A, restricted along i, gives the LHS. Step 7: graph-coinduction over base A_1. Step 8: shriek adjunction for e, then ei=1 and the shift reindexing. Stacks tags 0A65/07VI/067J/068X/0A6A/09LN/09LT/0A70/0A71/0BZE exist with the stated labels; no SGA anywhere. Not a duplicate: lem-trf-polynomial-diagonal-rhom-reduction is the Noetherian, pseudo-coherent special case (advisory: it now follows from this item). Batch-5: the closures of the exchange lemma, shriek adjunction, bimodule tensor-Hom, perfect-algebra dual evaluation and graph coinduction contain only generic ring/module derived algebra (coinduction models, bidual, currying, Koszul), no nt-assume leaf and no trace-formula or Poincaré-duality theorem. Accepted as generic; declared tool_uses accepted."
+ }
+}

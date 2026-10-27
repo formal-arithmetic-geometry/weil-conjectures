@@ -168,27 +168,43 @@
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.VeryTameEquivariantSharpChart",
-  "declaration": "AlgebraicGeometry.exists_equivariant_sharp_chart",
+  "declaration": "AlgebraicGeometry.exists_tame_equivariant_sharp_chart",
   "declarations": [
-   "AlgebraicGeometry.SharpChartCyclotomicRing",
-   "AlgebraicGeometry.EquivariantSharpChart",
-   "AlgebraicGeometry.exists_equivariant_sharp_chart"
+   "AlgebraicGeometry.sharpChartCyclotomicRing",
+   "AlgebraicGeometry.exists_tame_equivariant_sharp_chart"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/VeryTameEquivariantSharpChart.lean",
-  "statement": "theorem exists_equivariant_sharp_chart (X : FineSaturatedLogScheme.{u}) (G : Type v) [Group G] [Finite G] (a : FSLogGroupAction G X) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) (H : Subgroup G) (hH : ∀ g : G, g ∈ H ↔ t ≫ (a.baseAction g).hom = t) (htame : IsUnit (Nat.card H : Ω)) (hcharacteristic : ∀ (h : H) (U V : X.scheme.Etale) (p : (Scheme.pointSmallEtale t).fiber.obj U) (q : (Scheme.pointSmallEtale t).fiber.obj V) (k : V.left ⟶ U.left) (hk : k ≫ U.hom = V.hom ≫ (a.logMap h.val).base), q.left ≫ k = p.left → ∀ s : X.logStructure.monoidSheaf.obj.obj (op U), Associates.mk (X.logStructure.toEtalePrelogStructure.germ t V q ((a.logMap h.val).sectionMap U V k hk s)) = Associates.mk (X.logStructure.toEtalePrelogStructure.germ t U p s)) : Nonempty (EquivariantSharpChart X a H t) ∧ ∀ (h : H) (U V : X.scheme.Etale) (p : (Scheme.pointSmallEtale t).fiber.obj U) (q : (Scheme.pointSmallEtale t).fiber.obj V) (k : V.left ⟶ U.left) (_hk : k ≫ U.hom = V.hom ≫ (a.logMap h.val).base), q.left ≫ k = p.left → ∀ r : Γ(U.left, ⊤), (strictLocalGerm X.scheme t U p r) ^ Nat.card H = 1 → strictLocalGerm X.scheme t V q (k.appTop r) = strictLocalGerm X.scheme t U p r",
+  "statement": "theorem exists_tame_equivariant_sharp_chart (X : FineSaturatedLogScheme.{u}) {G : Type v} [Group G] [Finite G] (a : FSLogGroupAction G X) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) (H : Subgroup G) (_hH : ∀ g : G, g ∈ H ↔ t ≫ (a.baseAction g).hom = t) (_htame : IsUnit (Nat.card H : Ω)) (_hchar : ∀ (h : H) (W V : X.scheme.Etale) (k : V.left ⟶ W.left) (hk : k ≫ W.hom = V.hom ≫ (a.logMap h.val).base) (w : (Scheme.pointSmallEtale t).fiber.obj W) (z : (Scheme.pointSmallEtale t).fiber.obj V), z.left ≫ k = w.left → ∀ s : X.logStructure.monoidSheaf.obj.obj (op W), Associated (X.logStructure.toEtalePrelogStructure.germ t V z ((a.logMap h.val).sectionMap W V k hk s)) (X.logStructure.toEtalePrelogStructure.germ t W w s)) : IsFineSaturatedMonoid (X.logStructure.characteristic t) ∧ (∀ q : X.logStructure.characteristic t, IsUnit q → q = 1) ∧ ∃ (W : X.scheme.Etale) (w : (Scheme.pointSmallEtale t).fiber.obj W) (b : H →* Aut W.left) (hb : ∀ h : H, (b h).hom ≫ W.hom = W.hom ≫ (a.logMap h.val).base) (β : X.logStructure.characteristic t →* X.logStructure.monoidSheaf.obj.obj (op W)) (unitLift : Γ(W.left, ⊤)ˣ →* X.logStructure.monoidSheaf.obj.obj (op W)) (χ : TensorProduct ℤ (Additive (Abelianization H)) (Additive (Algebra.GrothendieckGroup (X.logStructure.characteristic t))) →ₗ[ℤ] Additive (rootsOfUnity (Nat.card H) (strictLocalRing X.scheme t))) (ρ : rootsOfUnity (Nat.card H) (strictLocalRing X.scheme t) →* Γ(W.left, ⊤)ˣ) (c : sharpChartCyclotomicRing (Nat.card H) →+* Γ(W.left, ⊤)) (e : rootsOfUnity (Nat.card H) (strictLocalRing X.scheme t) ≃* rootsOfUnity (Nat.card H) (sharpChartCyclotomicRing (Nat.card H))) (d : H →* (MonoidAlgebra (sharpChartCyclotomicRing (Nat.card H)) (X.logStructure.characteristic t) ≃+* MonoidAlgebra (sharpChartCyclotomicRing (Nat.card H)) (X.logStructure.characteristic t))) (θ : MonoidAlgebra (sharpChartCyclotomicRing (Nat.card H)) (X.logStructure.characteristic t) →+* Γ(W.left, ⊤)), IsAffine W.left ∧ X.logStructure.IsChart W β ∧ (∀ h : H, w.left ≫ (b h).hom = w.left) ∧ (∀ q : X.logStructure.characteristic t, Associates.mk (X.logStructure.toEtalePrelogStructure.germ t W w (β q)) = q) ∧ (∀ r : Γ(W.left, ⊤)ˣ, X.logStructure.alpha.app (op W) (unitLift r) = (r : Γ(W.left, ⊤))) ∧ (∀ z : rootsOfUnity (Nat.card H) (strictLocalRing X.scheme t), strictLocalGerm X.scheme t W w (ρ z : Γ(W.left, ⊤)) = ((z : (strictLocalRing X.scheme t)ˣ) : strictLocalRing X.scheme t)) ∧ (∀ (h : H) (z : rootsOfUnity (Nat.card H) (strictLocalRing X.scheme t)), (b h).hom.appTop (ρ z : Γ(W.left, ⊤)) = (ρ z : Γ(W.left, ⊤))) ∧ (∀ (h : H) (q : X.logStructure.characteristic t), (a.logMap h.val).sectionMap W W (b h).hom (hb h) (β q) = unitLift (ρ (Additive.toMul (χ (TensorProduct.tmul ℤ (Additive.ofMul (Abelianization.of h)) (Additive.ofMul (Algebra.GrothendieckGroup.of q)))))) * β q) ∧ (∀ z : rootsOfUnity (Nat.card H) (strictLocalRing X.scheme t), c (((e z : rootsOfUnity (Nat.card H) (sharpChartCyclotomicRing (Nat.card H))) : (sharpChartCyclotomicRing (Nat.card H))ˣ) : sharpChartCyclotomicRing (Nat.card H)) = (ρ z : Γ(W.left, ⊤))) ∧ (∀ (h : H) (r : sharpChartCyclotomicRing (Nat.card H)), d h (MonoidAlgebra.single 1 r) = MonoidAlgebra.single 1 r) ∧ (∀ (h : H) (q : X.logStructure.characteristic t), d h (MonoidAlgebra.single q 1) = MonoidAlgebra.single q (((e (Additive.toMul (χ (TensorProduct.tmul ℤ (Additive.ofMul (Abelianization.of h)) (Additive.ofMul (Algebra.GrothendieckGroup.of q)))))) : (sharpChartCyclotomicRing (Nat.card H))ˣ) : sharpChartCyclotomicRing (Nat.card H))) ∧ (∀ r : sharpChartCyclotomicRing (Nat.card H), θ (MonoidAlgebra.single 1 r) = c r) ∧ (∀ q : X.logStructure.characteristic t, θ (MonoidAlgebra.single q 1) = X.logStructure.alpha.app (op W) (β q)) ∧ ∀ (h : H) (f : MonoidAlgebra (sharpChartCyclotomicRing (Nat.card H)) (X.logStructure.characteristic t)), θ (d h f) = (b h).hom.appTop (θ f)",
   "branch": "newtargets-dag",
-  "by": "Q77",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.VeryTameEquivariantSharpChart deleted (dead: no target reaches it); this node is not reached either."
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-92874b0d2",
-  "group": "Q77",
+  "reviewer": "NT-stage2-cc-739fdb368",
+  "group": "Q18",
   "result": "pass",
-  "note": "Read node, ILO VI 3.1/3.4/3.5(a)/3.7(a) pp.73-75, deps FineSaturatedLogBlowup and FSLogGroupAction (live, unchanged). Node changes only lean plus landed stmt_dep def-per-fs-log-group-action (no cycle); statement verbatim. All hypotheses match: hH is the full geometric stabilizer, the unit premise in Omega is equivalent to the residue-field one, hcharacteristic is the stalk action on Associates over pointed diagrams (well posed, independent of k, not vacuous). Every conclusion clause is pinned: W/action/point_fixed/action_over, IsChart plus characteristic identity, fs/sharp, chi on H_ab tensor Q^gp into mu_n(A), eigenvector as log-section equality with the unit pinned by alpha, roots fixed, Lambda = Z[zeta_n,1/n] coefficient with character_germ, modelAction pinned on monomials, toModel pinned to the Gamma-Spec adjunct, equivariance consistent with the reversed pullback order. Edge cases (H or Q trivial, char 0, nonabelian G, empty X, universes) OK. No duplicate. sorry only, docstrings and imports correct. nt_compile --json clean 14.3 s. Advisory: sharp holds automatically for Associates; toModel_eq writes out the downstream chartSchemeMap formula."
+  "note": "Read node, ILO VI 3.1/3.4/3.5(a)/3.7(a) pp.73-75 (project PDF), deps FineSaturatedLogBlowup/FSLogGroupAction/VeryTameFSLogAction (live), Mathlib CyclotomicRing. Node differs from live only in lean; statement verbatim; sorry only; docstrings with source/blueprint and 4-step plan. Hyps: H = exact geometric stabilizer, IsUnit |H| in Omega (equivalent to residue field), characteristic triviality = IsVeryTame (ii) test, no stratum/log-regularity. Conclusions all pinned: fs+sharp Q, affine pointed W with b: H->*Aut fixing w over a.logMap, IsChart + identity on Associates, chi: H_ab tensor Q^gp -> mu_n(A), eigen equation in log sections with unitLift unique by alpha, rho by germ, roots fixed, Lambda = Away n (CyclotomicRing n Z Q) with c∘e = rho (e = choice of primitive root), d diagonal on generators, theta pinned and equivariant (checked consistent; Aut/RingEquiv order reversal harmless since scalars commute and are fixed). Edge cases ok. No duplicate. Imports = proof_dep modules. No compile (no change). Maintainer note: lean_removed (dead 8a6a58ff1c5) on live node; any reach refusal is structural."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/AlgebraicGeometry/VeryTameEquivariantSharpChart.lean",
+  "module": "Sheaf.AlgebraicGeometry.VeryTameEquivariantSharpChart",
+  "declaration": "AlgebraicGeometry.exists_equivariant_sharp_chart",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

@@ -126,5 +126,57 @@
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "RingTheory.pair_henselization_filtered"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "RingTheory.pair_henselization_filtered",
+     "module": "WeilConjectures.RingTheory.PairHenselizationFiltered",
+     "lines": [
+      134,
+      288
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "For a commutative ring B and ideal J, let C be the full category of ring maps B to D with Spec(D) to Spec(B) etale and the canonical map B/J to D/JD bijective, with all B-algebra maps as morphisms. Then C is filtered: it is nonempty, any two objects admit a common successor, and every pair of parallel maps is coequalized.",
+  "proof": [
+   {
+    "text": "*Nonempty.* The identity $B\\to B$ is an object: $\\operatorname{Spec}$ of the identity is the identity, which is etale, and the canonical map $B/J\\to B/JB$ is the identity, hence bijective.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Common successors.* For objects $C$ and $D$, take $C\\otimes_BD$ with its two factor maps $C\\to C\\otimes_BD\\leftarrow D$, which are $B$-algebra maps. $C\\otimes_BD$ is etale over $B$: it is the base change of $D$ along $B\\to C$, hence etale over $C$, and the composite with the etale map $B\\to C$ is etale. For the quotient condition, $(C\\otimes_BD)/J(C\\otimes_BD)\\cong(C/JC)\\otimes_{B/J}(D/JD)$; since $B/J\\to C/JC$ and $B/J\\to D/JD$ are bijective, this is $B/J\\otimes_{B/J}B/J=B/J$, and the canonical map $B/J\\to(C\\otimes_BD)/J(C\\otimes_BD)$ is bijective. So $C\\otimes_BD$ is an object receiving maps from $C$ and $D$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Coequalizers.* Let $f,g:C\\to D$ be parallel maps. Put $S=C\\otimes_BC$, let $m:S\\to C$ be the multiplication, $k:S\\to D$ the map $c\\otimes c'\\mapsto f(c)g(c')$, and $T=D\\otimes_SC$ (with $D$ an $S$-algebra via $k$ and $C$ via $m$). Since $S$ and $C$ are etale over $B$, the $B$-algebra map $m$ is etale; its base change $D\\to T$ is etale, so $B\\to T$ is etale by composition. By the previous step $B/J\\to S/JS$ is bijective. Extension of $J$ is compatible with towers $B\\to S\\to C$ and $B\\to S\\to D$, so, cancelling the bijection $B/J\\to S/JS$, the maps $S/JS\\to C/JC$ and $S/JS\\to D/JD$ are bijective. The argument of the previous step, applied over $S$ with the ideal $JS$, shows that $S/JS\\to T/JT$ is bijective, and composing, $B/J\\to T/JT$ is bijective. So $T$ is an object and $D\\to T$ is a morphism. Finally, for $c\\in C$, in $T$ one has $f(c)\\otimes1=k(c\\otimes1)\\otimes1=1\\otimes m(c\\otimes1)=1\\otimes c$ and likewise $g(c)\\otimes1=k(1\\otimes c)\\otimes1=1\\otimes m(1\\otimes c)=1\\otimes c$. Hence the composites of $f$ and $g$ with $D\\to T$ agree, and $D\\to T$ coequalizes $f$ and $g$.\n\nThese three properties say that the category is filtered.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

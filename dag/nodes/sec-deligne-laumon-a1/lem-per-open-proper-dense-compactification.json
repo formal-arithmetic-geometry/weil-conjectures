@@ -1,0 +1,281 @@
+{
+ "id": "lem-per-open-proper-dense-compactification",
+ "kind": "statement",
+ "title": "Dense compactification of a proper morphism over an open preserves its finite generic fibres",
+ "statement": "Let $S$ be a reduced Noetherian scheme [def-pc-reduced-scheme, def-weil-pbc-noetherian-ring], where Noetherian means admitting a finite affine cover by spectra of Noetherian rings. Let $u:U\\hookrightarrow S$ be an open immersion [def-weil-open-immersion] and $z:Z\\to U$ a proper morphism [def-weil-proper-morphism]. Assume that $uz:Z\\to S$ is an object of $\\operatorname{alt}/S$ [def-per-ordinary-alteration-topology]. Then there are a proper morphism $b:B\\to S$ and an open immersion $j:Z\\hookrightarrow B$ with $bj=uz$, whose image is dense in the underlying topological space of $B$, such that the square with sides $z,j,u,b$ is Cartesian: the induced $U$-morphism $Z\\to B\\times_SU$ is an isomorphism [def-pc-fibre-product]. For every generic point $s$ of an irreducible component of $S$ [def-sc-generic-point, def-weil-irreducible-components], the scheme $B_s=B\\times_S\\operatorname{Spec}\\kappa(s)$ [def-weil-residue-field] is finite over $\\kappa(s)$ [def-weil-finite-integral-morphism]; if $s\\notin U$, this fibre is empty. Neither $S$ nor $Z$ is assumed integral, and $U$ and $Z$ may be empty.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II Theorem 3.2.1, ordinary-case proof, printed p.29, compactification sentence; II Proposition 1.1.7 and Definition 1.2.2, printed p.24, for finite generic fibres. Compactification input: Stacks Tag 0F41, literature/stacks-project/flat.tex, theorem-nagata."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-per-ordinary-alteration-topology",
+  "def-pc-fibre-product",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-residue-field",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $f=u\\circ z$. By [def-per-ordinary-alteration-topology], $f$ is of finite type, every component generic point of $Z$ maps to a component generic point of $S$, and its residue-field extension is finite. The finite affine cover in the hypothesis makes $S$ locally Noetherian by [pqf-def-locnoeth] and quasi-compact: each affine is quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact], and the union is finite. Thus $S$ is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Moreover $f$ is separated. Indeed, because $u$ identifies $U$ with an open subscheme [def-weil-open-immersion], two maps to $U$ agree if their composites to $S$ agree. The fibre-product universal property [def-pc-fibre-product] therefore identifies $Z\\times_SZ$ with $Z\\times_UZ$, carrying $\\Delta_f$ to $\\Delta_z$. The latter is a closed immersion since $z$ is proper [def-weil-proper-morphism].",
+   "uses": [
+    "def-per-ordinary-alteration-topology",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Theorem 3.2.1, ordinary-case proof, printed p.29, compactification sentence; II Proposition 1.1.7 and Definition 1.2.2, printed pp.23–24."
+   }
+  },
+  {
+   "text": "Apply [det-nagata-theorem-dense] to the separated finite-type map $f$ over the qcqs base $S$. Unpack [def-nagata-compactification]: it gives $Z\\xrightarrow{j}B\\xrightarrow{b}S$, with $j$ an open immersion, $b$ proper, $bj=f$, and an injective sheaf map $\\mathcal O_B\\to j_*\\mathcal O_Z$. The image of $j$ is topologically dense. Otherwise its closure has a nonempty open complement $W$. On every open $A\\subseteq W$ the target ring $\\mathcal O_Z(j^{-1}A)$ is zero, so injectivity forces $\\mathcal O_B(A)=0$. The stalk at any point of $W$ is then zero, contradicting its being a local ring of a scheme [def-pc-scheme]. Finally $b$ is finite type by [def-weil-proper-morphism], so $B$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian].",
+   "uses": [
+    "det-nagata-theorem-dense",
+    "def-nagata-compactification",
+    "def-pc-scheme",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Theorem 3.2.1, ordinary-case proof, printed p.29, compactification sentence; II Proposition 1.1.7 and Definition 1.2.2, printed pp.23–24."
+   }
+  },
+  {
+   "text": "Identify $B_U=B\\times_SU$ with the inverse-image open $b^{-1}(U)$ using [lem-weil-pbc-open-preimage-fibre-product]. The equation $bj=uz$ induces $k:Z\\to B_U$; it is an open immersion because $j$ is the isomorphism onto its open image and that image lies in $b^{-1}(U)$ [def-weil-open-immersion]. The structural map $B_U\\to U$ is separated by [lem-weil-pbc-separated-base-change], since $b$ is proper [def-weil-proper-morphism]. As $z$ is proper and $k$ is a $U$-morphism, [lem-weil-pbc-proper-to-separated] makes $k$ proper; [lem-weil-pbc-proper-closed-image] makes its image closed in $B_U$. Its image is dense there: every nonempty open of the open subset $b^{-1}(U)\\subseteq B$ meets the dense open $j(Z)$. Consequently $k$ is a surjective open immersion, hence an isomorphism onto $B_U$ by the defining isomorphism onto the image in [def-weil-open-immersion]. This proves the required Cartesian square.",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-separated-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-weil-pbc-proper-closed-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Theorem 3.2.1, ordinary-case proof, printed p.29, compactification sentence; II Proposition 1.1.7 and Definition 1.2.2, printed pp.23–24."
+   }
+  },
+  {
+   "text": "The Noetherian scheme $B$ has finitely many irreducible components by [lem-weil-pbc-noetherian-finitely-many-components], each with a unique generic point by [lem-weil-pbc-scheme-sober]. Fix a component $C$ with generic point $\\xi$. Remove all the other components to get an open $W$ meeting $C$ at $\\xi$. It is nonempty, so density gives $W\\cap j(Z)\\ne\\varnothing$. This is a nonempty open of the irreducible $C$, hence contains $\\xi$: otherwise the closure of $\\{\\xi\\}=C$ would lie in its closed complement [def-sc-generic-point]. Thus every component generic point of $B$ lies in $j(Z)$. Under the open-subscheme isomorphism [def-weil-open-immersion] it is a component generic point of $Z$: any larger irreducible subset of $Z$ would have closure in $B$ strictly containing $C$, contrary to maximality [def-weil-irreducible-components]. The local rings, and hence residue fields, at the corresponding points are identical. The object condition [def-per-ordinary-alteration-topology] now gives that $b(\\xi)$ is a component generic point of $S$ and $\\kappa(\\xi)/\\kappa(b(\\xi))$ is finite.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-weil-pbc-scheme-sober",
+    "def-sc-generic-point",
+    "def-weil-open-immersion",
+    "def-weil-irreducible-components",
+    "def-per-ordinary-alteration-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Theorem 3.2.1, ordinary-case proof, printed p.29, compactification sentence; II Proposition 1.1.7 and Definition 1.2.2, printed pp.23–24."
+   }
+  },
+  {
+   "text": "The map $b$ is finite type, the base $S$ is Noetherian, and Step 4 verifies both maximal dominance and finite extensions at every component generic point of $B$. Apply [lem-per-generic-fibre-finiteness-criterion] with $X=B$ and $f=b$. Its final clause states exactly that $B_s$ is finite over $\\kappa(s)$ for every component generic point $s$ of $S$. This applies to the whole scheme fibre, including its scheme structure; it is not merely finiteness of its set of points.",
+   "uses": [
+    "lem-per-generic-fibre-finiteness-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Theorem 3.2.1, ordinary-case proof, printed p.29, compactification sentence; II Proposition 1.1.7 and Definition 1.2.2, printed pp.23–24."
+   }
+  },
+  {
+   "text": "Let $s$ be a component generic point of $S$ outside $U$. If $x\\in B$ mapped to $s$, choose an irreducible component $C$ containing $x$ by [lem-sc-irreducible-components-cover] and its generic point $\\xi$ by [lem-weil-pbc-scheme-sober]. Continuity gives $s\\in\\overline{\\{b(\\xi)\\}}$. Step 4 says $b(\\xi)$ is a component generic point. Taking closures therefore includes the component $\\overline{\\{s\\}}$ in the component $\\overline{\\{b(\\xi)\\}}$, so maximality makes them equal [def-weil-irreducible-components]; uniqueness of generic points in $S$ [lem-weil-pbc-scheme-sober] gives $s=b(\\xi)$. But Step 4 also puts $\\xi$ in $j(Z)$, whose image under $b$ lies in $U$, a contradiction. Thus no point of $B$ lies over $s$. A point of $B_s$ would project to such a point by the commuting projections [def-pc-fibre-product], so $B_s$ is empty. If $Z$ is empty, Step 2 forces $B$ empty by density; the same construction and arguments cover empty $U$ or $S$.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-weil-pbc-scheme-sober",
+    "def-weil-irreducible-components",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Theorem 3.2.1, ordinary-case proof, printed p.29, compactification sentence; II Proposition 1.1.7 and Definition 1.2.2, printed pp.23–24."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-ordinary-alteration-topology",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "det-nagata-theorem-dense",
+  "def-nagata-compactification",
+  "def-pc-scheme",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-scheme-sober",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "lem-per-generic-fibre-finiteness-criterion",
+  "lem-sc-irreducible-components-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II Theorem 3.2.1, ordinary-case proof, printed p.29, compactification sentence; II Proposition 1.1.7 and Definition 1.2.2, printed pp.23–24. Expanded proof of the compactification sentence, with dense Nagata compactification (Stacks 0F41) and explicit component arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-open-proper-dense-compactification: A scheme proper over an open U of a Noetherian S has a dense compactification B over S with B restricted to U isomorphic to Z. If Z is reduced maximally dominant generically finite over S, B is reduced and has finite fibres over generic points of S, empty outside U.",
+   "results": "8 hits; returned names/files: [\"AlgebraicGeometry.instIsDominantToSpec\\u0393OfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_\\u03b9\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"AlgebraicGeometry.Scheme.Hom.denseRange\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned local morphism-property, dominance and cover facts do not assert this compactification or common domination theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "compactif|IsSchemeTheoreticallyDominant.*[Ff]inite|[Ff]inite.*IsSchemeTheoreticallyDominant",
+   "results": "0 hits; returned names/files: []",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned local morphism-property, dominance and cover facts do not assert this compactification or common domination theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-open-proper-dense-compactification: A dense compactification of a reduced generically finite scheme proper over an open subset is cartesian over that open and has finite generic fibres",
+   "results": "8 hits; returned names/files: [\"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_\\u03b9\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"OnePoint.isDenseEmbedding_coe\", \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"AlgebraicGeometry.instIsProperOfIsFinite\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned local morphism-property, dominance and cover facts do not assert this compactification or common domination theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsSchemeTheoreticallyDominant",
+   "results": "0 hits; returned names/files: []",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned local morphism-property, dominance and cover facts do not assert this compactification or common domination theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-open-proper-dense-compactification: In a dense compactification, a proper morphism over an open base identifies the full inverse image of that open; generic fibres outside the open are empty when every source component dominates a base component",
+   "results": "8 hits; returned names/files: [\"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_\\u03b9\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder_preimage\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"AlgebraicGeometry.IsDominant.denseRange\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned local morphism-property, dominance and cover facts do not assert this compactification or common domination theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|compactif.*generic|generic.*compactif",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: dominance, restriction and open-immersion pullback results do not assert existence of this dense compactification with finite generic scheme fibres."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme proper over an open subscheme has a dense proper compactification over the whole base preserving the original scheme over the open and finite generic fibres",
+   "results": "8 hits: AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsProper.of_valuativeCriterion, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.instIsProperOfIsFinite",
+   "date": "2026-10-24",
+   "verdict": "no match: dominance, restriction and open-immersion pullback results do not assert existence of this dense compactification with finite generic scheme fibres."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Compactification",
+   "results": "0 hits: ; loogle: unknown identifier 'AlgebraicGeometry.Compactification'",
+   "date": "2026-10-24",
+   "verdict": "no match: dominance, restriction and open-immersion pullback results do not assert existence of this dense compactification with finite generic scheme fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dense compactification of a scheme proper over an open base is cartesian over that open and has finite generic fibres when the original map is maximally dominant generically finite",
+   "results": "8 hits: AlgebraicGeometry.IsDominant, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant, AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget, AlgebraicGeometry.isDominant_of_of_appTop_injective",
+   "date": "2026-10-24",
+   "verdict": "no match: dominance, restriction and open-immersion pullback results do not assert existence of this dense compactification with finite generic scheme fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper map followed by an open immersion admits a compactification with dense open image whose square over the open immersion is a pullback",
+   "results": "8 hits: AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion, AlgebraicGeometry.IsOpenImmersion.isPullback, AlgebraicGeometry.IsOpenImmersion.isPullback_lift_id, AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right, AlgebraicGeometry.IsOpenImmersion.lift, AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left, AlgebraicGeometry.Scheme.IsLocallyDirected.exists_of_pullback_V_V",
+   "date": "2026-10-24",
+   "verdict": "no match: dominance, restriction and open-immersion pullback results do not assert existence of this dense compactification with finite generic scheme fibres."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-zariski-proper-surjection-interchange",
+  "date": "2026-10-24",
+  "group": "Q103"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ordinary weak-uniformization branch: ILO II 3.2.1 ordinary-case proof, compactify each local proper morphism and identify its restriction over the original open; generic finiteness is needed before taking the dominant part of the product.",
+   "via": [
+    "lem-per-zariski-proper-surjection-interchange",
+    "lem-per-ordinary-alteration-proper-refinement",
+    "lem-per-qe-weak-uniformization-cover",
+    "lem-per-qe-alteration-regular-neighbourhood",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-open-proper-dense-compactification",
+  "worker": "stage1",
+  "summary": "Statement retained verbatim. Six-step split: verify qcqs and separatedness, apply the existing dense Nagata theorem, identify the restriction over U by properness and density, track component generic points through the dense open, use the existing generic-fibre finiteness criterion, and exclude fibres over generic points outside U. No new nodes or Mathlib leaves. All previous searches retained; five actual new searches logged.",
+  "blueprint": "Nearest blueprint ancestor lem-per-artin-gabber-affine-curve, current latest proof Step 3 (regular models and duality), via the inherited ordinary-alteration refinement chain. This item supplies precisely ILO II 3.2.1 ordinary-case compactification sentence used in lem-per-zariski-proper-surjection-interchange. No chapter/unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "det-nagata-theorem-dense",
+    "why": "Generic dense Nagata compactification supplies the compactification explicitly required by ILO II 3.2.1; no node of this unit proves that general existence theorem."
+   },
+   {
+    "node": "def-nagata-compactification",
+    "why": "Unpacks the data and properness contained in the dense Nagata conclusion; a definition, not an alternative proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-nagata-theorem-dense",
+  "def-nagata-compactification"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-6a36194fc",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-6a36194fc (reviewer sub-agent of L); spot-checked: I read the whole six-step split; the delivery has no new nodes, and the item statement and stmt_deps are verbatim the Q103 record. Step 1: f is separated because u is a monomorphism, so Z×_S Z = Z×_U Z and Δ_f = Δ_z. S is quasi-compact and locally Noetherian, hence quasi-separated (01OY), so Nagata applies. Step 2: dense Nagata (Stacks 0F41) gives O_B ↪ j_*O_Z, which forces topological density (a zero stalk on an open missing j(Z) contradicts locality); B is Noetherian by 01T6. Step 3: b⁻¹(U) = B_U; k is proper by proper-to-separated, so its image is closed, and it is also dense, so k is an isomorphism and the square is Cartesian. Step 4: every component generic point of B lies in the dense open j(Z) and is a component generic point of Z there, so the alt/S conditions transfer to b. Step 5: lem-per-generic-fibre-finiteness-criterion (ILO II 1.1.7, p.24) gives finite scheme fibres. Step 6: specialization, maximality and sobriety give empty fibres outside U. I checked against ILO II 3.2.1 p.29 (the compactification sentence) and 1.1.7 p.24, and Stacks flat.tex theorem-nagata. Edge cases checked: S, U or Z empty, U = S, a field base, a disconnected base, and two crossing lines. Batch-5 flag: the reached node lem-trf-finite-residue-point-closed-in-fibre is Stacks 01TE, general scheme theory with a 12-node closure, not part of the trace formula, so no RETURN. Artin–Gabber route flag: neither the item nor the criterion is in the closure of lem-per-artin-gabber-affine-curve on this snapshot. The criterion comes from Q135, not the dropped Q144 split, and uses no adic, duality, t-structure, uniformization or alteration input, so the lock does not apply. I accept the tool_uses det-nagata-theorem-dense and def-nagata-compactification. No SGA. No changes."
+ }
+}

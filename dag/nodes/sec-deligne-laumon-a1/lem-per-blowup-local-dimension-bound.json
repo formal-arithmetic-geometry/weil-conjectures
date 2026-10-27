@@ -1,0 +1,367 @@
+{
+ "id": "lem-per-blowup-local-dimension-bound",
+ "kind": "statement",
+ "title": "Local dimension bound for ordinary modifications and their centers",
+ "statement": "Let $A$ be a reduced Noetherian local ring of finite Krull dimension $n$ [def-weil-pbc-noetherian-ring, def-weil-pbc-krull-dimension-ring], where reduced means having no nonzero nilpotent. Let $P\\to\\operatorname{Spec}A$ be a finite tower of ordinary blowups in coherent nowhere dense centers [def-nagata-global-blowup, pqf-def-coherent]. Then $P$ is reduced and Noetherian, has dimension at most $n$, and every reduced nowhere dense closed subscheme $W\\subset P$ has dimension at most $n-1$ when $n\\ge1$. In particular all local rings of $W$ have dimension at most $n-1$. The empty subscheme is allowed. For a reduced Noetherian scheme $X$, a point $x$ with $\\dim\\mathcal O_{X,x}=n$, and such a tower over $X$, the same bounds hold after base change to $\\operatorname{Spec}\\mathcal O_{X,x}$. If $X$ is quasi-excellent [def-exc-excellent-ring], its local schemes, the resulting blowup schemes, and their reduced closed subschemes are quasi-excellent as well. Thus these local schemes are objects of the reduced Noetherian quasi-excellent category over $\\mathbf Q$ whenever $X$ is over $\\mathbf Q$.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "§4.3, Extensions 1,...,n: the inclusion of the inverse image of $X^{\\le d}$ in the locus where an old center has local dimension at most d-1, printed p.30; local modification dimension input made explicit; Temkin arXiv:0904.1592v2, read online 2026-10-24; archival copy WANTED. No Stacks tag states this combined assertion. Quasi-excellence under localization and finite type: Stacks Tag 07QU, more-algebra.tex, lemma-finite-type-over-excellent (quasi-excellent alternative)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-nagata-global-blowup",
+  "pqf-def-coherent",
+  "def-exc-excellent-ring",
+  "def-pc-reduced-scheme",
+  "pqf-def-locnoeth",
+  "def-kun-topological-krull-dimension",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-trf-ordinary-resolution-rule",
+  "def-per-gabber-modification-data",
+  "def-per-qe-ordinary-resolution-rule"
+ ],
+ "proof": [
+  {
+   "text": "Write the tower as $P_m\\to\\cdots\\to P_0=\\operatorname{Spec}A$. By [lem-weil-pbc-affine-scheme-reduced-iff], $P_0$ is reduced, and its single affine chart is Noetherian. Induct on $i$: [lem-per-reduced-noetherian-blowup-geometry] applied to the coherent center of $P_{i+1}\\to P_i$ gives a reduced Noetherian $P_{i+1}$ and a finite-type arrow. The base case is $i=0$; induction reaches every stage, including a tower of length zero. By [lem-sfb-finite-type-composition-base-change], the composite $P_m\\to\\operatorname{Spec}A$ is finite type.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-reduced-iff",
+    "lem-per-reduced-noetherian-blowup-geometry",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0808, lemma-blow-up-reduced-scheme, and 02NS, lemma-blowing-up-projective; induction on the number of blowups."
+   }
+  },
+  {
+   "text": "For each arrow, the ordinary-blowup clause of [lem-per-noetherian-normalized-blowup-finality] gives a bijection on component generic points with isomorphic residue fields: its hypotheses are reducedness and local Noetherianness from Step 1, and the given finite-type nowhere dense center. Compose those bijections and residue-field isomorphisms along the finite tower. Thus every component generic point of $P_m$ maps to a component generic point of $\\operatorname{Spec}A$ with transcendence degree zero. By [def-weil-pbc-krull-dimension-ring], $\\dim\\operatorname{Spec}A=n$. Apply [lem-sfb-generic-residue-transcendence-dimension-bound] with $d=n$ and generic transcendence bound $0$ to the finite-type composite from Step 1. It gives $\\dim P_m\\leq n$. This uses the inequality form of the dimension formula, which requires no catenarity.",
+   "uses": [
+    "lem-per-noetherian-normalized-blowup-finality",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-sfb-generic-residue-transcendence-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAE, lemma-dimension-formula-general, with all generic transcendence degrees zero; generic points of ordinary blowups: divisors.tex, Tag 0BFM, lemma-blow-up-and-irreducible-components."
+   }
+  },
+  {
+   "text": "Let $W\\subset P_m$ be nowhere dense and closed. By [def-kun-topological-krull-dimension], any chain $Z_0\\subsetneq\\cdots\\subsetneq Z_e$ in $W$ is a chain of irreducible closed subsets of $P_m$. By [lem-sc-irreducible-components-cover], $Z_e$ lies in a component $C$ of $P_m$. Since $P_m$ is Noetherian (Step 1), it has finitely many components by [lem-weil-pbc-noetherian-finitely-many-components], so $C$ minus the union of the other components is a nonempty open subset of $P_m$; nowhere-density of $W$ therefore gives $C\\not\\subseteq W$, so $Z_e\\subsetneq C$ appends one strict inclusion. Hence $e+1\\leq n$ by Step 2, and $\\dim W\\leq n-1$ for $n\\geq1$. The empty case has no chains and dimension $-\\infty$. By [lem-pc-scheme-dimension-local-rings], every $\\dim\\mathcal O_{W,w}\\leq\\dim W$. When $n=0$ the same argument forces $W$ empty.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-sc-irreducible-components-cover",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-pc-scheme-dimension-local-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Definition of Krull dimension by irreducible closed chains; append a component to a chain in a nowhere dense closed subset. Local-ring consequence: properties.tex, Tag 04MU, lemma-dimension."
+   }
+  },
+  {
+   "text": "For the scheme formulation put $L=\\mathcal O_{X,x}$ and $S=\\operatorname{Spec}L$. Choose an affine neighborhood $\\operatorname{Spec}R\\subseteq X$ of $x$, with prime $\\mathfrak p$ corresponding to $x$; then $L=R_{\\mathfrak p}$. The ring $R$ is Noetherian by [pqf-lem-affine-open-locnoeth], and $L$ is Noetherian by [lem-weil-pbc-localization-noetherian]. It is reduced by the definition [def-pc-reduced-scheme]. By [lem-sbc-canonical-stalk-spectrum-flat], $S\\to X$ is flat; therefore every stage projection $P_i\\times_XS\\to P_i$ is flat by [lem-weil-pbc-flat-morphism-base-change].",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-localization-noetherian",
+    "def-pc-reduced-scheme",
+    "lem-sbc-canonical-stalk-spectrum-flat",
+    "lem-weil-pbc-flat-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U9, lemma-base-change-flat; stalk-spectrum morphism is a localization on affine neighborhoods."
+   }
+  },
+  {
+   "text": "At each stage of the tower on $X$, let $U_i$ be the complement of the center. It is dense by hypothesis. Its open immersion is quasi-compact by [lem-sfb-noetherian-open-immersion-qc] and quasi-separated (its diagonal is an isomorphism). Since $P_i$ is reduced by the induction of Step 1 applied over $X$, [lemma-nagata-reduced-dense-image-schematic] says its scheme-theoretic image is $P_i$. Apply [lemma-nagata-dense-flat-pullback] to the flat projection of Step 4. The pulled-back open is schematically, hence topologically, dense, so the pulled-back center is nowhere dense. The comparison of [def-nagata-blowup-flat-base-change-map] is an isomorphism by [thm-nagata-blowup-flat-base-change]; thus the pulled-back arrow is the ordinary blowup of the extended center ideal. On affine charts the images of finitely many generators generate that extended ideal, which is quasi-coherent of finite type. Starting with the Noetherian $S$, the ordinary-blowup induction of Step 1 keeps all pulled-back stages Noetherian; [pqf-lem-coherent-ft-locnoeth] makes these ideals coherent at each inductive step. Consequently the base-changed tower satisfies the initial hypotheses over $L$, of dimension $n$. Steps 1--3 applied to this tower prove precisely the stated local bounds. A center may pull back to the empty subscheme; its unit ideal gives an allowed identity stage.",
+   "uses": [
+    "lem-sfb-noetherian-open-immersion-qc",
+    "lemma-nagata-reduced-dense-image-schematic",
+    "lemma-nagata-dense-flat-pullback",
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805, lemma-flat-base-change-blowing-up; schematic density under flat base change: morphisms.tex Tag 081I. Finite generators pull back to generators; coherence: coherent.tex Tag 01XZ."
+   }
+  },
+  {
+   "text": "Assume now that $X$ is quasi-excellent, imposed on its affine coordinate rings as in the statement. For $L=R_{\\mathfrak p}$ of Step 4, [lem-per-quasi-excellent-localization] gives quasi-excellence of $L$. In particular $L$ is a G-ring and J-2 by [def-exc-excellent-ring]. Apply [lem-trf-g-ring-affine-cover] and [lem-trf-j2-affine-cover] to the single affine cover $S=\\operatorname{Spec}L$: every affine open of $S$ has a coordinate ring that is both a G-ring and J-2; it is Noetherian by [pqf-lem-affine-open-locnoeth] since $S$ is Noetherian, hence it is quasi-excellent. The local Noetherian hypothesis needed for the J-2 result was established in Step 4.",
+   "uses": [
+    "lem-per-quasi-excellent-localization",
+    "def-exc-excellent-ring",
+    "lem-trf-g-ring-affine-cover",
+    "lem-trf-j2-affine-cover",
+    "pqf-lem-affine-open-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QU, lemma-finite-type-over-excellent, localization clause. Affine-cover locality of the G-ring and J-2 predicates: morphisms.tex, lemma-characterize-quasi-excellent."
+   }
+  },
+  {
+   "text": "Each ordinary blowup arrow is finite type by Step 1. Apply [lem-per-quasi-excellent-finite-type-stability] inductively to the tower over $X$, and also to the tower over $S$ using Step 6: all stage schemes are quasi-excellent. A closed immersion has on affine charts a quotient map $B\\twoheadrightarrow B/J$ by [def-weil-closed-immersion]. Such an algebra is generated over $B$ by the empty set, so this immersion is locally of finite type. Apply the same quasi-excellence stability result to any reduced closed subscheme of any stage. Its hypothesis on the target holds by this induction. Finally, when $X$ is a $\\mathbf Q$-scheme, composing structure maps makes $S$, all these stage schemes, and their closed subschemes $\\mathbf Q$-schemes. Together with reducedness and Noetherianness from Steps 1 and 4--5 (and the finite-type stability statement for the closed subschemes), these are the asserted objects of the reduced Noetherian quasi-excellent category.",
+   "uses": [
+    "lem-per-quasi-excellent-finite-type-stability",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QU, lemma-finite-type-over-excellent, finite-type clause; closed immersions are affine-locally quotient algebras."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-per-reduced-noetherian-blowup-geometry",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-per-noetherian-normalized-blowup-finality",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-sfb-generic-residue-transcendence-dimension-bound",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-irreducible-components-cover",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-pc-scheme-dimension-local-rings",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-localization-noetherian",
+  "def-pc-reduced-scheme",
+  "lem-sbc-canonical-stalk-spectrum-flat",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lemma-nagata-reduced-dense-image-schematic",
+  "lemma-nagata-dense-flat-pullback",
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-blowup-flat-base-change",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-per-quasi-excellent-localization",
+  "def-exc-excellent-ring",
+  "lem-trf-g-ring-affine-cover",
+  "lem-trf-j2-affine-cover",
+  "lem-per-quasi-excellent-finite-type-stability",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BAE, lemma-dimension-formula-general, specialized using generic-point control for blowups (divisors.tex Tag 0BFM); quasi-excellence inputs: more-algebra.tex Tag 07QU. Assembly for the local dimension assertion used by Temkin section 4.3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"blowUp\"",
+   "results": "{\"t\": \"2026-10-24T02:51:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowUp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowUp\"",
+   "results": "{\"t\": \"2026-10-24T02:51:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowUp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowUp\"",
+   "results": "{\"t\": \"2026-10-24T02:51:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowUp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-blowup-local-dimension-bound: A nowhere dense closed subscheme in a blowup of a noetherian local scheme of dimension n has dimension at most n minus one",
+   "results": "{\"t\": \"2026-10-24T02:51:53Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-blowup-local-dimension-bound: A nowhere dense closed subscheme in a blowup of a noetherian local scheme of dimension n has dimension at most n minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"topologicalKrullDim_subspace_le\", \"AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"AlgebraicGeometry.IsLocallyArtinian.of_isImmersion\", \"Ring.krullDimLE_of_isLocalization_maximal\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\"], \"digest\": \"d0ab7fd59b45b55b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowUp\"",
+   "results": "{\"t\": \"2026-10-24T02:51:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowUp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "(krullDim|dimension|height).*blow|blow.*(krullDim|dimension|height)",
+   "results": "{\"t\": \"2026-10-24T02:51:53Z\", \"tool\": \"grep\", \"query\": \"(krullDim|dimension|height).*blow|blow.*(krullDim|dimension|height)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-blowup-local-dimension-bound: The dimension of a blowup of a reduced noetherian local scheme is at most the dimension of the base",
+   "results": "{\"t\": \"2026-10-24T02:51:56Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-blowup-local-dimension-bound: The dimension of a blowup of a reduced noetherian local scheme is at most the dimension of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_le_ringKrullDim_add_card\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"Module.supportDim_quotSMulTop_succ_eq_supportDim\"], \"digest\": \"58a4cf93bd1d2bf6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-blowup-local-dimension-bound: A nowhere dense closed subscheme in a blowup of a noetherian local scheme of dimension n has dimension at most n minus one",
+   "results": "{\"t\": \"2026-10-24T02:51:57Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-blowup-local-dimension-bound: A nowhere dense closed subscheme in a blowup of a noetherian local scheme of dimension n has dimension at most n minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"ringKrullDim_le_ringKrullDim_add_card\", \"Module.supportDim_quotSMulTop_succ_eq_supportDim\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\"], \"digest\": \"69f08824c8b24a9d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-blowup-local-dimension-bound: Quasi excellence of local schemes and ordinary blowups with the local dimension bound for nowhere dense centers",
+   "results": "{\"t\": \"2026-10-24T02:55:51Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-blowup-local-dimension-bound: Quasi excellence of local schemes and ordinary blowups with the local dimension bound for nowhere dense centers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\"], \"digest\": \"cee5b1033718bb50\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none gives this scheme blowup or regular-morphism assertion; elementary dimension, immersion and smoothness results do not specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "(blow.?up|blow.?Up).*(dim|Dim)|(dim|Dim).*blow.?[uU]p",
+   "results": "{\"t\": \"2026-10-24T03:46:54Z\", \"tool\": \"grep\", \"query\": \"(blow.?up|blow.?Up).*(dim|Dim)|(dim|Dim).*blow.?[uU]p\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern regular-sequence dimension formulas and smooth algebras, not dimensions of ordinary blowup towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "{\"t\": \"2026-10-24T03:46:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern regular-sequence dimension formulas and smooth algebras, not dimensions of ordinary blowup towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-blowup-local-dimension-bound: A finite tower of blowups of a reduced Noetherian local scheme has dimension at most its base and nowhere dense closed subschemes have strictly smaller dimension",
+   "results": "{\"t\": \"2026-10-24T03:46:55Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-blowup-local-dimension-bound: A finite tower of blowups of a reduced Noetherian local scheme has dimension at most its base and nowhere dense closed subschemes have strictly smaller dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_le_ringKrullDim_add_card\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\"], \"digest\": \"ce9ece1f4b35db9c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern regular-sequence dimension formulas and smooth algebras, not dimensions of ordinary blowup towers."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-codimension-resolution-improvement",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, via ordinary characteristic-zero resolution: §4.3, Extensions 1,...,n: the inclusion of the inverse image of $X^{\\le d}$ in the locus where an old center has local dimension at most d-1, printed p.30; local modification dimension input made explicit",
+   "via": [
+    "lem-per-codimension-resolution-improvement",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-blowup-local-dimension-bound",
+  "worker": "stage1",
+  "summary": "Q67: seven-step proof preserving every clause. Reused general ordinary-blowup geometry, generic-residue dimension bounds, chain dimension and flat blowup comparison. One new statement-only lemma supplies quasi-excellence under arbitrary ring localization; no catenarity or characteristic hypothesis added. Reviewed B--E and every quoted dependency statement.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve proof Step 3, via the existing ordinary characteristic-zero resolution branch; realizes the Temkin section 4.3 Extensions 1,...,n dimension drop on old centers and Extension n+1 local-scheme construction. No chapter/unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-generic-residue-transcendence-dimension-bound",
+    "why": "General scheme/ring/topological input for the blowup dimension and quasi-excellence argument; the perverse-curve unit supplies no alternative theorem about this basic geometry."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "General scheme/ring/topological input for the blowup dimension and quasi-excellence argument; the perverse-curve unit supplies no alternative theorem about this basic geometry."
+   },
+   {
+    "node": "lem-sbc-canonical-stalk-spectrum-flat",
+    "why": "General scheme/ring/topological input for flat localization and base change; the perverse-curve unit supplies no alternative theorem about this basic geometry."
+   },
+   {
+    "node": "lemma-nagata-reduced-dense-image-schematic",
+    "why": "General scheme/ring/topological input for flat localization and base change; the perverse-curve unit supplies no alternative theorem about this basic geometry."
+   },
+   {
+    "node": "lemma-nagata-dense-flat-pullback",
+    "why": "General scheme/ring/topological input for flat localization and base change; the perverse-curve unit supplies no alternative theorem about this basic geometry."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "General scheme/ring/topological input for flat localization and base change; the perverse-curve unit supplies no alternative theorem about this basic geometry."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "General scheme/ring/topological input for flat localization and base change; the perverse-curve unit supplies no alternative theorem about this basic geometry."
+   },
+   {
+    "node": "lem-trf-g-ring-affine-cover",
+    "why": "General scheme/ring/topological input for the blowup dimension and quasi-excellence argument; the perverse-curve unit supplies no alternative theorem about this basic geometry."
+   },
+   {
+    "node": "lem-trf-j2-affine-cover",
+    "why": "General scheme/ring/topological input for the blowup dimension and quasi-excellence argument; the perverse-curve unit supplies no alternative theorem about this basic geometry."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-generic-residue-transcendence-dimension-bound",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sbc-canonical-stalk-spectrum-flat",
+  "lemma-nagata-reduced-dense-image-schematic",
+  "lemma-nagata-dense-flat-pullback",
+  "thm-nagata-blowup-flat-base-change",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-trf-g-ring-affine-cover",
+  "lem-trf-j2-affine-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-d3a300805",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-d3a300805 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, every cited statement and the new node in full. The mathematics is correct; two citations were missing and I added them. Step 3 says nowhere-density gives C⊄W, but that needs finitely many components: I added lem-weil-pbc-noetherian-finitely-many-components (P_m is Noetherian by Step 1). Step 6 left out the Noetherian clause of quasi-excellence: I added pqf-lem-affine-open-locnoeth. The corrected item is in fixes/dag/nodes/sec-deligne-laumon-a1/. Step 2 uses only the inequality of Stacks 0BAE (morphisms.tex l.13610, read) with generic trdeg 0 from the ordinary-blowup clause of lem-per-noetherian-normalized-blowup-finality, so no catenarity is needed. Step 5 gets nowhere-density of the pulled-back centers from flat pullback of schematic density, and the blowup base change from the nagata comparison map plus thm-nagata-blowup-flat-base-change. New node lem-per-quasi-excellent-localization: Stacks 07QU (more-algebra.tex l.13373, read; Stacks omits the localization proof). It is true (G-ring and J-2 both localize) and is not a duplicate: lem-exc-finite-type-localization-excellent assumes excellent, and lem-exc-weakly-etale-nagata-j2 needs a Nagata hypothesis. Artin–Gabber finite-route finding: not a violation. A BFS over the snapshot finds that neither the item nor lem-per-quasi-excellent-finite-type-stability is in the closure of lem-per-artin-gabber-affine-curve. The item is live through det-thm-sf-ctf-stability → … → lem-sfb-field-log-smooth-gabber-modification, where the cited node is already used. The item's statement requires quasi-excellence, and Step 7 justifies the use. Batch-5 findings: lem-trf-g-ring-affine-cover and lem-trf-j2-affine-cover are generic G-ring/J-2 locality; the finite-type stability node reaches trf only through them; the generic-residue bound reaches only the generic 0BAE dimension formula; normalized-blowup-finality reaches only a definition. None is part of the trace formula or Poincaré duality, so all are accepted. No SGA citations. Edge cases checked: a tower of length 0, empty centers, n=0, a DVR, and the reducible xy=0 case.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BlowupLocalDimensionBound",
+  "declaration": "AlgebraicGeometry.blowup_local_dimension_bound",
+  "declarations": [
+   "AlgebraicGeometry.blowup_local_dimension_bound",
+   "AlgebraicGeometry.blowup_stalk_dimension_bound",
+   "AlgebraicGeometry.blowup_quasiExcellent",
+   "AlgebraicGeometry.blowup_rationalInputs"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BlowupLocalDimensionBound.lean",
+  "statement": "theorem blowup_local_dimension_bound (A : Type u) [CommRing A] [IsLocalRing A] [_root_.IsReduced A] [IsNoetherianRing A] (n : ℕ) (hn : ringKrullDim A = (n : WithBot ℕ∞)) (T : OrdinaryBlowupTower (Spec (.of A))) (hcoh : ∀ i : Fin T.length, RingedSpace.IsCoherent (T.level i.castSucc).toRingedSpace (T.center i).toModules) (hdense : ∀ i : Fin T.length, IsNowhereDense ((T.center i).support : Set (T.level i.castSucc))) : IsReduced (T.level (Fin.last T.length)) ∧ IsNoetherian (T.level (Fin.last T.length)) ∧ topologicalKrullDim (T.level (Fin.last T.length)) ≤ (n : WithBot ℕ∞) ∧ ∀ (W : Scheme.{u}) (j : W ⟶ T.level (Fin.last T.length)) [IsClosedImmersion j] [IsReduced W], IsNowhereDense (Set.range j) → 1 ≤ n → topologicalKrullDim W ≤ ((n - 1 : ℕ) : WithBot ℕ∞) ∧ ∀ w : W, ringKrullDim (W.presheaf.stalk w) ≤ ((n - 1 : ℕ) : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q137",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Four declarations render the local ring, stalk-base-change, quasi-excellence and rational-input clauses. Existing ordinary tower, affine-local quasi-excellence and rational-input nodes added to stmt_deps; no definition is duplicated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e5896b61c",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Read item node, all 13 stmt_dep records, the three added def stmt_deps' live sources (OrdinaryBlowupTower/toBase, GabberModification.QuasiExcellent = affine-local IsQuasiExcellent, QERationalResolutionInput) and the delivered module. Node diff vs live: only +3 landed definition stmt_deps and the new lean record; statement field verbatim. All clauses matched: reduced Noetherian local A with ringKrullDim = n; ordinary tower with coherent (IsCoherent of toModules) nowhere-dense centres; last stage reduced, Noetherian, dim ≤ n; reduced nowhere-dense closed W has dim ≤ n-1 and stalks ≤ n-1 under 1 ≤ n; canonical pullback along fromSpecStalk for the scheme version; quasi-excellence for local schemes, stages over X and over the stalk, and reduced closed subschemes; Q-inputs with structure maps fixed to the actual composites by D.scheme = … ∧ HEq. No extra hypotheses. Edge cases (length 0, empty centres, empty W, n = 0, reducible rings) covered. No definitions, sorry-only proofs, docstrings carry source and blueprint tag with Steps 1-7, proof-dependency imports present in live, no duplicates found. Report has Worker report and a declared self-review Second reading section. No compile run (no file changed)."
+ }
+}

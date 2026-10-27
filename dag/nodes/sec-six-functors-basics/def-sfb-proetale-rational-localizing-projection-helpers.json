@@ -17,9 +17,46 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field-localizing.md",
   "place": "canonical internal-module tensor comparison and projection mate used by the projection/exchange construction"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The coefficient pullback map is an isomorphism. The exact inverse-image mapMod functor preserves flat modules; extension of scalars along the coefficient isomorphism is isomorphic to restriction along its inverse. Thus the full module pullback preserves flat objects and has the generic left-derived tensor comparison.",
+   "uses": [
+    "new-proetale-inverse-image-module-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize the ordinary comonoidal comparison on balanced generators. First use the isomorphism between extension of scalars and restriction along the inverse coefficient map to compute its inverse tensorator after the extension units. Naturality of those units and the mapMod tensor projection formula give exactly ModuleObjectTensorGeneratorFormula. The balanced coequalizer is epimorphic, so this formula determines the ordinary map uniquely.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the already proved source declarations Functor.leftDerivedTensorComparison, leftDerivedTensorComparison_app_app_comp_counit and HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX. Their equations on each (i,j) coproduct inclusion give the specified summand normalization and derived counit equation. Conversely that normalization determines q degree by degree using mapBifunctor.hom_ext_of_map. The proved generic Functor.leftDerived₂_ext then determines the derived transformation uniquely. The generic comparison is invertible, giving existence and uniqueness with the required IsIso condition. These are direct applications of the existing generic source API, not an invocation of the separate concrete pullback-comparison theorem. The generic representative formula is shared as tensorRepresentativeFormula; its pro-etale specialization has exactly the original quantified summand and counit equations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the normalized comparison as the published internal-module leftDerivedUpperStarTensor. The proved identification with the generic leftDerivedTensorComparison and its summand/counit formula prove moduleObjectDerivedTensorComparison_normalized. The unique-characterization theorem identifies this construction with its former selected witness. Form exactly the same counit mate under the existing derived adjunction.",
+   "uses": [
+    "def-sfb-module-derived-pushpull-adjunction",
+    "new-proetale-derived-module-pullback-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-module-derived-pushpull-adjunction",
+  "new-proetale-derived-module-pullback-monoidal",
+  "new-proetale-inverse-image-module-flat",
+  "sk-def-sfb-change-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 05VD and 0B56, with the total tensor and derived counit construction of Stacks 07A4 and 07A6; formalized using the existing generic left-derived tensor comparison and its two-variable universal property."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -69,7 +106,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-thm-int-restriction",
  "lean": {
@@ -80,7 +128,9 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.ModuleObjectDerivedTensorFormula",
    "AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_moduleObjectDerivedTensorComparison",
    "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedTensorComparison",
-   "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectProjectionMate"
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectProjectionMate",
+   "AlgebraicGeometry.ProEtale.CondensedRing.tensorRepresentativeFormula",
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedTensorComparison_normalized"
   ],
   "statement": "def moduleObjectProjectionMate\n    (A : DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))\n    (B : DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :\n    (lowerStar Λ f).rightDerivedFunctor.obj A ⊗ B ⟶\n      (lowerStar Λ f).rightDerivedFunctor.obj\n        (A ⊗ (upperStar Λ f).leftDerivedFunctor.obj B) ",
   "branch": "newtargets-dag",
@@ -104,5 +154,19 @@
   "group": "Q17",
   "result": "pass",
   "note": "Re-delivery after the ef40e3e6 RETURN (H2). Both Lean modules are byte-identical to ef40e3e6, which was otherwise correct. The new existing:true def node def-sfb-proetale-trace-coefficient-interfaces covers TraceD, tracePull, tracePush, TraceLoc, traceTate, CondensedTensorNormalization, condensedTensorCore_existsUnique, condensedTensorCore, condensedUpperStarMonoidal and condensedDerivedUnitIso. All exist in live TraceBaseChangeFirst; the primary statement is verbatim (line 317). It omits trace_base_change_first, TraceFirstAssertion and TraceFirstHypotheses. Its citations equal its stmt_deps (8 foundational nodes), and the Q16 owner record is untouched. The item and def-sfb-proetale-projection-exchange-maps now cite it in place of lem-sfb-trace-base-change-first. The delivered modules use only TraceLoc, tracePull, tracePush, traceTate and condensedDerivedUnitIso (plus the monoidal instance), all covered by the new node. Acyclic (2222, 2224 and 2280 reached nodes). Item vs live differs only in lean and stmt_deps; the dependency records equal live. nt_compile --json rc 0, no warnings: TraceBaseChangeFirst 38.0 s, ProEtaleProjectionExchangeMaps 36.7 s, TraceBaseChangeSecond 50.3 s. Non-blocking: TraceDerived/traceSquarePullback near-duplicate TraceD/tracePullSquare; the tensor and unit comparisons are separately normalized; maintainer note that the node lists Q16's sorry helper condensedTensorCore_existsUnique, whose content is stated in the node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6051f",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T071205-L-3882322",
+  "kind": "interface",
+  "note": "independent cc review: delivered RationalLocalizingProjectionFormula (finite-extension hole closed via finite_coefficient_iso transport + shared localizing helper) against node det-thm-sf-pf-field-localizing, change record U2-rational-projection-explicit-tensor-proofs, and the 4 direct importers compiled against it (all exit 0)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.isIso_projectionMate_localizing_finiteExtension"
+  ],
+  "sorry_after": []
  }
 }

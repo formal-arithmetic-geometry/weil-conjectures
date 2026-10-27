@@ -1,0 +1,111 @@
+{
+ "id": "lem-sfb-brown-admissible-compactness-criterion",
+ "kind": "statement",
+ "title": "Admissible Brown hypotheses over a field reduce to objectwise compactness",
+ "statement": "Let ℓ be prime, k a field, X a finite-type k-scheme, and Λ a commutative condensed coefficient ring isomorphic to a finite discrete ℓ-power-torsion ring, Z_l, O_E, Q_l, a finite extension E of Q_l, or finite-subextension-valued Qbar_l, exactly the admissible list [sk-def-localizing-closure]. Put S = Dctf(X,Λ) and L = Loc(S), with the fixed indexing universe. Then BrownHypothesesFor Λ X as characterized by [lem-sfb-brown-hypotheses-criterion] holds if and only if there exists a coproduct structure on L for which every object of L whose underlying object lies in S is compact [def-pc-compact-object]. No separatedness, characteristic, or base-field cohomological-dimension hypothesis is needed for this equivalence. It does not assert compactness over an arbitrary field.",
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "lem-sfb-brown-hypotheses-criterion",
+  "def-pc-compact-object"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
+  "place": "paragraphs 1--2: thickness and essential smallness, then compact representatives and generation"
+ },
+ "proof": [
+  {
+   "text": "A finite-type scheme over a field is compact and locally Noetherian. Permute the six explicit coefficient alternatives into the actual admissibility predicate and apply brownHypothesesFor_iff_compact_of_noetherian. This gives the unchanged finite-type compactness equivalence.",
+   "uses": [
+    "lem-sfb-brown-noetherian-compactness-criterion"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-brown-noetherian-compactness-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
+  "place": "paragraphs 1--2: thickness, essential smallness, compact representatives and generation",
+  "note": "W4: specialize the proved Noetherian-scheme criterion; the theorem signature is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type scheme over a field and admissible condensed coefficients Brown hypotheses are equivalent to compactness of each constructible finite Tor object in its localizing closure",
+   "results": "8 hits about discrete and solid condensed modules; none states this criterion. Local source supplies the general formal criterion and coefficient-specific thickness theorem used here.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EssentiallySmall\", \"IsTriangulated\"",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "brownHypotheses|det_brown_hypotheses_small|IsCompactObject",
+   "results": "0 Mathlib hits. Local rg and full-source reading find the general formal criterion, det_brown_hypotheses_small and private finite-field assembly; no admissibility-specialized equivalence. Blueprint Brown search finds the unit and its smallness detail, used here.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "date": "2026-10-25",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-brown-hypotheses",
+   "place": "proof paragraphs 1--2: discharge thickness and smallness before the compactness step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-brown-hypotheses",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypotheses.lean",
+  "declaration": "CategoryTheory.brownHypothesesFor_iff_compact_of_admissible",
+  "statement": "theorem brownHypothesesFor_iff_compact_of_admissible\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    {k : Type u} [Field k] {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))\n    [LocallyOfFiniteType aX] [QuasiCompact aX]\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (hΛ :\n      (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A)\n          (_ : DiscreteTopology A) (_ : IsTopologicalRing A),\n        Finite A ∧ (∃ r : ℕ, ∀ a : A, (ℓ ^ r) • a = 0) ∧\n          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))) ∨\n      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨\n      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,\n        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨\n      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨\n      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,\n        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨\n      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) :\n    BrownHypothesesFor Λ X ↔\n      ∃ hSums : HasCoproducts.{u + 1} (localizingClosureProEtale Λ X).FullSubcategory,\n        letI := hSums\n        ∀ K : (localizingClosureProEtale Λ X).FullSubcategory,\n          (constantModelBoundedConstructible Λ X K.obj ∧\n            DerivedCategory.finiteTorAmplitude _ K.obj) → IsCompactObject K",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T071140-L-106437",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T112403-L-1578020",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.brownHypotheses"
+  ],
+  "sorry_after": [
+   "CategoryTheory.brownHypotheses"
+  ]
+ }
+}

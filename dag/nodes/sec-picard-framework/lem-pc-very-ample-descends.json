@@ -119,7 +119,32 @@
   "def-sc-invertible-module"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsVeryAmple.of_pullback"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsVeryAmple.of_pullback",
+     "module": "WeilConjectures.AlgebraicGeometry.Modules.Ample",
+     "lines": [
+      352,
+      458
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
  "split_report": {
@@ -148,5 +173,26 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here); Lean refresh 7d675a26 (L): sorry-free on 7d675a263"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be a field, $X$ a proper scheme over $k$ and $\\mathcal{L}$ an\ninvertible module on $X$ such that $\\mathcal{L}_K$ is\nvery ample on $X_K$ for a field extension\n$K/k$. Then $\\mathcal{L}$ is very ample on $X$; in particular $\\mathcal{L}$ is\nample if $\\mathcal{L}_K$ is.",
+  "proof": [
+   {
+    "text": "By definition of very ampleness there is an immersion\n$i:X_K\\to\\mathbf P^N_K$ with $i^*\\mathcal{O}_{\\mathbf P^N}(1)=\\mathcal{L}_K$. The\nsections $x_1,\\dots,x_N$ of $\\mathcal{O}_{\\mathbf P^N}(1)$ pull back to\nsections $s_j$ of $\\mathcal{L}_K$ which $K$-linearly generate\n$H^0(X_K,\\mathcal{L}_K)=H^0(X,\\mathcal{L})\\otimes_kK$\n([lem-pc-flat-base-change-cohom]; the finite generation of the\nsections of $i^*\\mathcal{O}(1)$: the morphism $i$ is the morphism of the\nsections; more precisely the immersion $i$ is given by base point free\nsections $t_0,\\dots,t_N\\in H^0(X_K,\\mathcal{L}_K)$ separating points and\ntangent directions). Each $t_j$ is a finite combination\n$\\sum_ac_a u_a$ of elements $u_a\\in H^0(X,\\mathcal{L})$ (tensor structure\n$H^0(X_K,\\mathcal{L}_K)=H^0(X,\\mathcal{L})\\otimes_kK$), so the finite set\n$\\mathcal U=\\{u_a\\}\\cup\\{t_j\\}$ of elements of $H^0(X,\\mathcal{L})^{\\otimes}_k$\n(different powers twist to: the $x_j$'s are sections of\n$\\mathcal{O}(1)$, the $t_j$'s of $\\mathcal{L}$; all are sections of $\\mathcal{L}$; the\nseparability: the map to the projective space of the corresponding\nsubspace of $H^0(X,\\mathcal{L})$ (the subspace $V$ spanned by the $u_a$'s)\nafter base change to $K$ contains the defining sections\n$t_0,\\dots,t_N$, so the morphism\n$\\psi:X\\to\\mathbf P(V)$ (from the $k$-subspace $V$ of $H^0(X,\\mathcal{L})$)\nhas base change $\\psi_K:X_K\\to\\mathbf P(V_K)$ such that $\\psi_K=i$\n(the same sections): $\\psi_K$ is an immersion, and the descent of the\nimmersion property along a faithfully flat (field) base extension\n(Descent, Lemma 35.37.2 for closed immersions and the standard\ndescendability of open immersions – or: the classical statement: the\nproperty \"the morphism of a finite type scheme to projective space\ndefined by base-point-free sections is an immersion\" is descent-stable\nbecause it is precisely the condition that the base-point-freeness and\nseparation hold, and these conditions are tested on the geometric\npoints: for the closed-immersion picture of the\n$\\Gamma$-sections, effective descent along fields for closed\nimmersions is formal from the affine case along\n$k'\\to k''$: $A\\to A/I$ base changes, and descent of ideals:\n$I\\otimes_{k'}k''$-preimage: the ideal of a closed subscheme over a\nfinitely generated subextension is the span of finitely many\nelements; descent is classical) gives that $\\psi$ is an immersion.\nHence $\\mathcal{L}$ is very ample over $k$ ($\\psi^*\\mathcal{O}_{\\mathbf P(V)}(1)=\\mathcal{L}$\nby construction), and $X$ proper\n($\\mathbf P(V)$ and the immersion give the image-closedness over $k$),\nand ampleness: a very ample module is ample (the\n$X_s$-affine basis property, as in\n[def-sc-ample] and [lem-pc-very-ample-ample]).",
+    "uses": [
+     "lem-pc-flat-base-change-cohom",
+     "def-sc-ample",
+     "lem-pc-very-ample-ample"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

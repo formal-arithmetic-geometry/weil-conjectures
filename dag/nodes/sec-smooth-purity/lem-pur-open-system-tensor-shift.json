@@ -1,0 +1,233 @@
+{
+  "id": "lem-pur-open-system-tensor-shift",
+  "kind": "statement",
+  "title": "Signed shift square of open tensor projection on strict coefficient systems",
+  "statement": "Let $X$ be a scheme, $j:U\\hookrightarrow X$ an open immersion [def-weil-open-immersion], and $B_\\bullet=(B_1\\leftarrow B_2\\leftarrow\\cdots)$ an inverse sequence of sheaves of commutative rings on the small pro-etale site of $X$ [def-weil-pbc-proetale-site]. For $W=X,U$, let $\\mathscr S_W$ be the abelian category of strict semilinear $B_{\\bullet,W}$-module systems: its transitions are $B_{n+1,W}$-linear maps $M_{n+1}\\to\\operatorname{Res}_{n+1,n}M_n$, and morphisms commute with them [lem-coef-semilinear-derived-sections]. Use the ordinary unbounded derived categories $D(\\mathscr S_W)$ [def-weil-abstract-derived-category], derived system tensor computed by K-flat resolutions and signed direct-sum total tensor [def-pc-kflat-complex, def-pc-tensor-complex-sheaves], exact termwise extension $J_j$, and exact restriction $P_j$. Let\n$$\\delta_{M,N}:J_jM\\otimes^L N\\xrightarrow{\\sim}J_j(M\\otimes^L P_jN)$$\nbe the canonical open tensor comparison normalized by the open unit, on the ringed diagram site, as in [lem-sf-open-tensor-normalization]. For arbitrary $M\\in D(\\mathscr S_U)$ define $F_M(N)=J_jM\\otimes^LN$ and $H_M(N)=J_j(M\\otimes^LP_jN)$. Give both functors the cochain-shift comparisons $s_F^{(r)}:F_M(N[r])\\cong F_M(N)[r]$ and $s_H^{(r)}:H_M(N[r])\\cong H_M(N)[r]$: on a total tensor summand with first degree $a$, the second-slot comparison has coefficient $(-1)^{ra}$. Then for every $r\\in\\mathbf Z$,\n$$s_H^{(r)}\\circ\\delta_{M,N[r]}=\\delta_{M,N}[r]\\circ s_F^{(r)}.$$\nThis is an equality in $D(\\mathscr S_X)$, natural in $M,N$, and compatible with the actual coefficient transitions. The identical assertion holds on the ordinary module derived categories for a single sheaf of commutative rings $B_X$, with $J_j=j_!$ and $P_j=j^*$; in particular it applies to the finite constant rings $A_n=\\mathcal O_E/\\varpi_E^n$. There is no boundedness, degree-concentration, flatness of coefficient transitions or finite-Tor hypothesis.",
+  "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor: total K-flat construction; the signed shift square and its strict-system version are agent-formulated obligations expanding Unit Step 2 of sk-thm-purity-transport."
+  },
+  "stmt_deps": [
+    "def-weil-open-immersion",
+    "def-weil-pbc-proetale-site",
+    "lem-coef-semilinear-derived-sections",
+    "def-weil-abstract-derived-category",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-sf-open-tensor-normalization"
+  ],
+  "proof": [
+    {
+      "text": "Use the ringed vertical diagram site specified in [lem-sf-open-tensor-normalization], with its actual ring sheaf $B_\\bullet$; its modules are precisely the strict semilinear systems, not a product of the level categories. The equivalence and ordinary unbounded tensor interpretation are those of [lem-coef-semilinear-derived-sections]. The open subtopos is the vertical diagram site over $U$, and its extension and restriction are the given termwise $J_j,P_j$. All subsequent constructions take place in this one ringed topos. Choose complex representatives of $M,N$ and K-flat resolutions $P\\to M$, $Q\\to N$ with flat terms by [lem-pc-kflat-resolution], applied on the two ringed sites. The same choices and argument apply on the ordinary site with a single ring sheaf.",
+      "uses": [
+        "lem-sf-open-tensor-normalization",
+        "lem-coef-semilinear-derived-sections",
+        "lem-pc-kflat-resolution"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 06YS, lemma-K-flat-resolution; vertical-site interpretation as in the cited normalization node."
+      }
+    },
+    {
+      "text": "For arbitrary strict system complexes $P,Q$, at each level $n$ use [lem-sf-ringed-slice-tensor-generators] on the ordinary pro-etale site, with ring $B_n$ and open $U$, to define $\\psi_n:[x]_f\\otimes y\\mapsto[x\\otimes y|_f]_f$. These formulas give a map of semilinear systems: for a coefficient arrow $m\\to n$ both orders send the generator to $[\\tau_P(x)\\otimes(\\tau_Q(y))|_f]_f$, and semilinearity respects balancing. Naturality of the sheaf maps makes them commute with both cochain differentials. Since extension is a left adjoint, [lem-weil-pbc-left-adjoint-preserves-colimits] allows the countable total sums to pass through it. We obtain a natural chain isomorphism $\\psi_{P,Q}:\\operatorname{Tot}(J_jP\\otimes Q)\\xrightarrow{\\sim}J_j\\operatorname{Tot}(P\\otimes P_jQ)$. These are maps of sheafifications determined by presheaf generators, without a claim about arbitrary tensor-sheaf sections. The inverse is the open-adjunction transpose of the total map $\\eta_P\\otimes1$: the generator lemma gives that formula on every level and sheaf summand, and hence on their total sums and strict transitions. Thus its derived image is the specified $\\delta$ of [lem-sf-open-tensor-normalization], whose inverse has precisely this adjoint transpose.",
+      "uses": [
+        "lem-sf-ringed-slice-tensor-generators",
+        "lem-weil-pbc-left-adjoint-preserves-colimits",
+        "lem-sf-open-tensor-normalization"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 0GL1, lemma-j-shriek-and-tensor, using sites-modules.tex Tag 0E8I and its adjunction proof."
+      }
+    },
+    {
+      "text": "The chain isomorphism of Step 2 also proves preservation of the required resolving complexes on the whole system category. If $C$ is an acyclic ambient system complex, exactness of $P_j,J_j$ from [lem-coef-semilinear-derived-sections] gives $P_jC$ acyclic, then $\\operatorname{Tot}(P\\otimes P_jC)$ acyclic for K-flat $P$, then $J_j\\operatorname{Tot}(P\\otimes P_jC)$ acyclic. Step 2 identifies the last complex with $\\operatorname{Tot}(J_jP\\otimes C)$, so $J_jP$ is K-flat by [def-pc-kflat-complex]. Each term $J_jP^a$ is flat as well: applying $P_j$ to any short exact sequence is exact, tensoring it with the flat module $P^a$ remains exact, and applying exact $J_j$ remains exact; the degree-zero instance of Step 2 identifies the resulting sequence with tensoring by $J_jP^a$. This is exactly flatness as in [def-pc-flat-sheaf-modules]. These are arguments in the system module category, using its componentwise exactness, with no flatness assumed for the ring transitions.",
+      "uses": [
+        "lem-coef-semilinear-derived-sections",
+        "def-pc-kflat-complex",
+        "def-pc-flat-sheaf-modules"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 0GL1 omitted K-flat details: tensor comparison with an acyclic second input and exactness of open extension/restriction; the same elementary argument for flat terms."
+      }
+    },
+    {
+      "text": "Fix $r\\in\\mathbf Z$. Use [lem-weil-pbc-total-tensor-integer-shifts] for the second-slot chain comparisons, and let $y\\in Q^{b+r}=(Q[r])^b$, $x\\in P^a$. The comparison $s_F^{(r)}$ multiplies $[x]_f\\otimes y$ by $(-1)^{ra}$; $s_H^{(r)}$ multiplies $[x\\otimes y|_f]_f$ by the same scalar. Consequently both composites in the required square, before localization, send this generator to $(-1)^{ra}[x\\otimes y|_f]_f$ in the same summand of $J_j\\operatorname{Tot}(P\\otimes P_jQ)[r]$. The scalar commutes with every module map, and the generator uniqueness of [lem-sf-ringed-slice-tensor-generators] gives equality on each sheaf tensor summand; the coproduct universal property gives equality in every total degree. The cited integer-shift lemma ensures these are chain maps for the signed differentials for every integer $r$, including negative $r$. Hence $s_H^{(r)}\\psi_{P,Q[r]}=\\psi_{P,Q}[r]s_F^{(r)}$ is an equality of chain maps on the ringed diagram site.",
+      "uses": [
+        "lem-weil-pbc-total-tensor-integer-shifts",
+        "lem-sf-ringed-slice-tensor-generators"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 0FNH, item-shift-tensor; explicit homogeneous-summand calculation with the generator formula of Tag 0E8I."
+      }
+    },
+    {
+      "text": "Apply the localization functor to this chain equality. It commutes with shifts by [def-weil-abstract-derived-category]. By the K-flat tensor computation of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], the chosen resolutions compute the two derived tensor objects: $P$ and $J_jP$ are K-flat by Step 3, and $P_jQ$ is K-flat with flat terms by that pullback lemma applied to exact open restriction. The representatives $Q[r]$ may be used at the same time: shifting the K-flat condition preserves it, since total tensor with a shift is a shift of total tensor by the comparisons of Step 4. The resulting maps are the specified $s_F^{(r)},s_H^{(r)}$ and, by Step 2, $\\delta$. Transport along the resolution isomorphisms $P\\cong M$, $Q\\cong N$ therefore gives the asserted equation for arbitrary $M,N$. All comparisons used are natural; conjugation along these isomorphisms proves the equation for the already specified natural transformations, without assuming that evaluation detects equality of derived system maps.",
+      "uses": [
+        "def-weil-abstract-derived-category",
+        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 0GL1, K-flat construction; Tags 06YS and 06YU for derived tensor, with the signed identity of Step 3."
+      }
+    },
+    {
+      "text": "For completeness the coefficient-transition equation is already an equation of the chain systems just constructed. For a transition from $m$ to $n$, write $\\tau_P,\\tau_Q$ for the degree-zero semilinear transition maps. On an original tensor generator both orders (transition then either composite, or either composite then transition) give $(-1)^{ra}[\\tau_P(x)\\otimes (\\tau_Q(y))|_f]_f$. Semilinearity makes this balanced over $B_m\\to B_n$, and the sign is the image of the same integer under either structural ring map. Restriction of $\\tau_Q(y)$ equals the transition of $y|_f$ by the system morphism condition. The unique sheaf maps with these generators agree, so the equality respects every actual coefficient transition before localization and hence afterwards. Naturality in the two inputs follows in exactly the same way from $[x]_f\\otimes y\\mapsto[x\\otimes y|_f]_f$ and naturality of the signed shift maps. On the ordinary ringed site there are no coefficient transitions to check; Steps 1--5 give the identical assertion for any $B_X$, and thus for $A_n$. No step restricts the degree range or imposes flatness on a ring transition.",
+      "uses": [
+        "lem-sf-ringed-slice-tensor-generators",
+        "lem-coef-semilinear-derived-sections"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 0E8I and 0GL1 applied to the vertical ringed site; explicit semilinear transition calculation."
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-pc-flat-sheaf-modules",
+    "def-pc-kflat-complex",
+    "def-weil-abstract-derived-category",
+    "lem-coef-semilinear-derived-sections",
+    "lem-pc-kflat-resolution",
+    "lem-sf-open-tensor-normalization",
+    "lem-sf-ringed-slice-tensor-generators",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-total-tensor-integer-shifts"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Expansion of the omitted total-complex details in Tag 0GL1, using Tag 0E8I and the sign convention Tag 0FNH; the strict-system shift equation is agent-written."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "For an open immersion of ringed topoi extension by zero tensor projection isomorphism commutes with cochain shift in the second tensor variable including the Koszul sign for complexes and strict systems",
+      "results": "8 hits: CochainComplex.ι_mapBifunctorShift₂Iso_hom_f, CochainComplex.ι_mapBifunctorShift₁Iso_hom_f, CochainComplex.mapBifunctorHomologicalComplexShift₁Iso, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc, CochainComplex.mapBifunctorHomologicalComplexShift₁Iso_inv_f_f, HomologicalComplex.rightUnitor'_inv_comm, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app'",
+      "date": "2026-10-22",
+      "verdict": "no match: generic cochain shifts and adjunctions do not identify the specified open tensor system map"
+    },
+    {
+      "tool": "grep",
+      "query": "extensionByZero|extension_by_zero|mapBifunctorShift₂Iso",
+      "results": "5 hits: Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean",
+      "date": "2026-10-22",
+      "verdict": "no match: generic cochain shifts and adjunctions do not identify the specified open tensor system map"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Extension by zero derived tensor projection comparison commutes with the signed second cochain shift for module sheaves and inverse coefficient systems",
+      "results": "8 hits: CategoryTheory.Functor.commShiftIso_map₂CochainComplex_inv_app, CategoryTheory.Functor.commShiftMapCochainComplex, CochainComplex.shiftFunctor, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_hom_app, CategoryTheory.Functor.instCommShiftCochainComplexIntObjMap₂CochainComplex, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_inv_app, Homotopy.shift",
+      "date": "2026-10-22",
+      "verdict": "no match: generic cochain shifts and adjunctions do not identify the specified open tensor system map"
+    },
+    {
+      "tool": "loogle",
+      "query": "CochainComplex.mapBifunctorShift₂Iso",
+      "results": "8 hits: CochainComplex.mapBifunctorShift₂Iso, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_hom_app, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_inv_app, CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂, CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂_assoc, CochainComplex.ι_mapBifunctorShift₂Iso_hom_f, CochainComplex.ι_mapBifunctorShift₂Iso_hom_f_assoc, CochainComplex.mapBifunctorShift₁Iso_trans_mapBifunctorShift₂Iso",
+      "date": "2026-10-22",
+      "verdict": "no match: generic cochain shifts and adjunctions do not identify the specified open tensor system map"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Derived open immersion extension by zero tensor comparison respects translation in the right input on the ringed topos of inverse systems",
+      "results": "8 hits: AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app', AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp",
+      "date": "2026-10-22",
+      "verdict": "no match: generic cochain shifts and adjunctions do not identify the specified open tensor system map"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "lem-pur-adic-projection-shift-coherence",
+    "date": "2026-10-22",
+    "group": "Q138"
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-thm-sf-compatibility",
+  "blueprint": {
+    "from": {
+      "node": "thm-pur-rational-and-qbar-purity",
+      "place": "Proof Step 1 of thm-pur-rational-and-qbar-purity: the adic purity isomorphism for the lattice; supporting Unit Step 2 (the adic stage) of sk-thm-purity-transport, open-extension tensor factor and second-slot sign.",
+      "via": [
+        "lem-pur-adic-projection-shift-coherence"
+      ]
+    },
+    "same_as": [],
+    "is": null
+  },
+  "split_report": {
+    "date": "2026-10-22",
+    "item": "lem-pur-open-system-tensor-shift",
+    "worker": "stage1",
+    "summary": "Retained the statement and hypotheses. Split via existing ordinary ringed-site generator comparisons assembled as strict semilinear system maps, direct K-flat/flat preservation, and the integer second-slot sign calculation before localization. No new nodes or Mathlib leaves. Existing etale projection-shift Lean covers only a different coefficient/site setting.",
+    "blueprint": "thm-pur-rational-and-qbar-purity proof Step 1, through lem-pur-adic-projection-shift-coherence: the open constituent of the shift compatibility supporting the adic stage of sk-thm-purity-transport. Steps 1--3 provide strict representatives, the normalized arrow and its K-flat/flat preservation; Steps 4--6 prove the signed shift square and strict coefficient compatibility.",
+    "tool_uses": [
+      {
+        "node": "lem-pc-kflat-resolution",
+        "why": "General unbounded ringed-site K-flat resolutions, used on the vertical ringed site without coefficient-transition flatness."
+      },
+      {
+        "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+        "why": "Generic categorical preservation of total direct sums by the extension left adjoint."
+      },
+      {
+        "node": "lem-weil-pbc-total-tensor-integer-shifts",
+        "why": "Generic additive total-tensor integer-shift sign formula; no open operation or purity argument is replaced."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+        "why": "Generic ringed-site K-flat computation and preservation of flat-term K-flat complexes by restriction."
+      },
+      {
+        "node": "lem-coef-semilinear-derived-sections",
+        "why": "Identifies actual varying-ring strict systems and their unbounded tensor calculus; not a replacement for any purity step."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-coef-semilinear-derived-sections"
+  ],
+  "reviewed": {
+    "date": "2026-10-22",
+    "by": "L",
+    "reviewer": "NT-cc-NY-4e09d9fb9",
+    "group": "NY",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-4e09d9fb9 (reviewer sub-agent of L); spot-checked: I read the item, the report, each cited node's statement and Stacks 0GL1/0E8I (tags checked against stacks tags/tags). The delivery has one commit, no new nodes and no fixes. Statement: unchanged, on the same arbitrary strict-system diagram topos as lem-sf-open-tensor-normalization, and delta is that node's open-unit-normalized gamma (its inverse is the adjunct of u⊗1). The sign (-1)^{ra} matches lem-weil-pbc-total-tensor-integer-shifts, and no flatness or boundedness is added. Step 2: lem-sf-ringed-slice-tensor-generators applies at each level n with U in X_proet and B_{n,U}=j^{-1}B_n; I checked the levelwise transition and semilinear balancing by hand; its inverse is the specified adjunct; Q K-flat or P K-flat gives the derived tensors. Step 3: J_jP is K-flat with flat terms via the Step-2 isomorphism; this is correct but only one K-flat factor is needed. Step 4: P_j and J_j commute strictly with shift, both composites send [x]_f⊗y to (-1)^{ra}[x⊗y|]_f, and generator uniqueness plus the coproduct property give the chain equality. Step 5: localization, Q[r] K-flat, conjugation by the resolutions; no argument through evaluation. Step 6: naturality and transitions follow automatically. Edge cases checked: empty U, j=id, characteristic 2, negative r, a nonflat tower. proof_deps equals the union of uses. Five tool_uses accepted as generic: kflat-resolution, left-adjoint-colimits (leaf), total-tensor-shifts (leaf), ringed-topoi-tensor-pullback, semilinear-derived-sections (its unit is in sk-thm-sf-compatibility uses). No SGA source. Duplicate scan: the etale finite-C projection-shift-unit and primitive-comparison-shift differ in setting or scope. The unsplit sibling lem-pur-strict-compactification-projection-shift (Q138) has the open-factor clause as a special case; maintainer note: cite this item when that node is split."
+  },
+  "lean": {
+    "module": "Sheaf.SixFunctors.OpenSystemTensorShift",
+    "declaration": "SheafOfModules.OpenTensorNormalization.open_system_tensor_shift",
+    "file": "lean/Sheaf/SixFunctors/OpenSystemTensorShift.lean",
+    "statement": "theorem open_system_tensor_shift {m : Mode} {d : Input.{u} m} {t : SiteSquare d} (o : Operations d t) (a : Assertion o) : (Nonempty (TensorShifts o.tensorX) ∧ Nonempty (TensorShifts o.tensorU)) ∧ ∀ [TensorShifts o.tensorX] [TensorShifts o.tensorU] (M : Der (restrictRing m d.j d.R)) (N : Der d.R) (r : ℤ), a.gamma.hom.app (M, N⟦r⟧) ≫ o.opens.jShriek.map (o.tensorU.functor.map (Prod.mkHom (𝟙 M) ((o.opens.jStar.commShiftIso r).hom.app N)) ≫ (((Functor.curry.obj o.tensorU.functor).obj M).commShiftIso r).hom.app (o.opens.jStar.obj N)) ≫ (o.opens.jShriek.commShiftIso r).hom.app (o.tensorU.functor.obj (M, o.opens.jStar.obj N)) = (((Functor.curry.obj o.tensorX.functor).obj (o.opens.jShriek.obj M)).commShiftIso r).hom.app N ≫ (a.gamma.hom.app (M, N))⟦r⟧'",
+    "branch": "sheaf-dag",
+    "by": "Q11",
+    "date": "2026-10-24",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-24",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-69b7e9998",
+    "group": "Q11",
+    "result": "pass",
+    "note": "Read item, report (Worker report + Second reading by Q11), module, all 7 stmt_deps, and live OpenTensorNormalizationData / RingedProjectionRestrictionData / RingedProjectionTensorShifts. Only lean field changed; statement verbatim; docstrings with source/blueprint/6 steps; sorry only; no defs/new nodes. Clauses: X,j via Input (base-change data irrelevant, identity square exists); arbitrary strict B on vertical site / single ring in ordinary mode; unbounded Der; J_j,P_j = mapDerivedCategory with Mathlib commShift; tensor models pinned to signed total on flat K-flat reps; delta = a.gamma with gamma_inverse; s_F/s_H from TensorShifts (second pinned to mapBifunctorShift2Iso, sign (-1)^(ra)), s_H order jStar shift then tensorU shift then jShriek shift correct; equation direction matches node; TensorShifts unique so forall-binder not stronger; Nonempty conjunct true for any model. Edge cases: empty U, j=id, r<=0, char 2, nonflat tower, universes u/u+1 as dependency. No duplicate found. No compile (no file changed; worker 13.6/10.2 s). Advisory: plain decls of def-sf-open-normalization-data and def-weil-pbc-ringed-projection-restriction-data used via theorem stmt_dep lem-sf-open-tensor-normalization re-export; stage-1 stmt_deps unchanged, H2 forbids adding, so maintainer note only."
+  }
+}

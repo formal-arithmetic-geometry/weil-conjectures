@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-marked-deformation-tangent-field-extension",
+ "kind": "statement",
+ "title": "Marked deformation categories and tangent spaces under finite residue-field extension",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum], and $k$ a field of finite type as an $R$-algebra [def-weil-field, def-weil-finite-type-morphism]. Use schemes and universes of [def-pc-scheme, def-weil-size-convention]. Let $\\mathcal Y$ be a category fibred in groupoids over $S$-schemes: each fibre $\\mathcal Y(T)$ is a groupoid, with pullbacks along base morphisms and coherent identity and composition comparisons. Assume that for every pushout $T'=T\\amalg_Z Z'$ of spectra of Artinian local rings of finite type over $S$, with $Z\\to Z'$ a closed immersion defined by a nilpotent ideal, restriction is an equivalence $\\mathcal Y(T')\\simeq\\mathcal Y(T)\\times_{\\mathcal Y(Z)}\\mathcal Y(Z')$, where the right side retains the specified isomorphism over $Z$. For $y\\in\\mathcal Y(\\operatorname{Spec}k)$ define $\\mathcal F_y(A)$, on $\\mathcal C_{R,k}$ of [def-sfb-artin-deformation-test-category], to be the groupoid of pairs $(\\eta,\\alpha:\\eta|_k\\xrightarrow{\\sim}y)$, with arrows respecting the marking and with transport by pullback. Then $\\mathcal F_y$ is a predeformation category satisfying (RS), in the sense of that definition. Its tangent space $T_y=\\overline{\\mathcal F_y}(k[\\epsilon])$ has the canonical $k$-vector structure of [lem-sfb-artin-rs-tangent-tensor]. Let $l/k$ be any finite field extension (finite-dimensional as a $k$-vector space), and put $y_l=y|_l$. The same assertions hold for $\\mathcal F_{y_l}$ on $\\mathcal C_{R,l}$. Pullback along $k[\\epsilon]\\to l[\\epsilon]$ induces a $k$-linear map $\\rho:T_y\\to T_{y_l}$, and the map $T_y\\otimes_k l\\to T_{y_l}$, $v\\otimes a\\mapsto a\\rho(v)$, is a canonical $l$-linear isomorphism [def-weil-pbc-module-tensor-product]. The canonical operations are zero from the constant object, scalar multiplication from $\\epsilon\\mapsto a\\epsilon$, and addition from the product comparison for the square-zero algebra $k[\\epsilon_1,\\epsilon_2]/(\\epsilon_1,\\epsilon_2)^2$ and the map $\\epsilon_1,\\epsilon_2\\mapsto\\epsilon$ (and likewise over $l$). No finite-dimensionality assumption on $T_y$, and no algebraicity, separation, or finite type assumption on $\\mathcal Y$, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tags 07WU (lemma-deformation-category) and 07WX (lemma-change-of-field), together with formal-defos.tex Tag 07WB (lemma-tangent-space-change-of-field); marked category equation-predeformation-category. Affine Noetherian specialization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-artin-deformation-test-category",
+  "lem-sfb-artin-rs-tangent-tensor",
+  "def-weil-pbc-module-tensor-product",
+  "def-sfb-marked-stack-deformations",
+  "def-sfb-artin-family-lifting-data"
+ ],
+ "proof": [
+  {
+   "text": "Pullback sends a marked object $(\\eta,\\alpha)$ over $A$ to its pullback over $A'$, with the marking composed with the pullback comparison. The identity and composition constraints are those of $\\mathcal Y$, so they obey the required coherence. Over $k$, the object $(y,\\mathrm{id})$ exists, and between $(\\eta,\\alpha)$ and $(\\eta',\\alpha')$ the unique marking-preserving arrow is $(\\alpha')^{-1}\\alpha$. Thus $\\mathcal F_y(k)$ is equivalent to the one-object, one-arrow groupoid. This proves precisely the predeformation conditions of [def-sfb-artin-deformation-test-category].",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07T4 (equation-predeformation-category), lemma-predeformation-category"
+   }
+  },
+  {
+   "text": "For $A_1\\to A\\leftarrow A_2$ in $\\mathcal C_{R,k}$ with the second map surjective, [lem-sfb-artin-local-test-algebra] makes $P=A_1\\times_A A_2$ an Artinian local $R$-algebra with residue field $k$. Its cited nilpotence assertion makes the kernel of $A_2\\to A$, which lies in $\\mathfrak m_{A_2}$, nilpotent. By [lem-sfb-artinian-finite-type-residue-criterion], all four rings are of finite type over $R$. The scheme pushout is $\\operatorname{Spec}P$ by [lem-sfb-affine-closed-pinching-pushout], applied with the surjection $A_2\\to A$ and the map $A_1\\to A$. Consequently the assumed equivalence for $\\mathcal Y$ applies to exactly this square.",
+   "uses": [
+    "lem-sfb-artin-local-test-algebra",
+    "lem-sfb-artinian-finite-type-residue-criterion",
+    "lem-sfb-affine-closed-pinching-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07WU (lemma-deformation-category), pushout square; Tags 06GH, 02HV, 0ET0"
+   }
+  },
+  {
+   "text": "Take a triple of marked objects over $A_1,A_2$ and a marking-preserving isomorphism over $A$. Essential surjectivity of the equivalence in step 2 glues their underlying objects to $\\eta$ over $P$, with compatible restriction isomorphisms. Restrict either isomorphism to $k$ and compose with its marking to obtain $\\alpha:\\eta|_k\\cong y$; compatibility of the given isomorphism over $A$ makes the two choices equal. For arrows between two such triples, full faithfulness gives a unique arrow over $P$; restriction to $k$ shows it respects $\\alpha$. Thus restriction on marked groupoids is essentially surjective and fully faithful, proving (RS) in [def-sfb-artin-deformation-test-category]. This uses the assumed equivalence, not descent for a topology. A finite $k$-basis of $l$ generates $l$ as a $k$-algebra, so adjoining that basis to a finite set of $R$-algebra generators of $k$ proves that $l$ is of finite type over $R$. Steps 1–3 therefore apply verbatim to $y_l$ over $l$.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tags 07WU (lemma-deformation-category) and 07WX (lemma-change-of-field), taking marked fibres"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-artin-rs-tangent-tensor] to the two predeformation categories now proved to satisfy (RS). It gives their vector structures and natural bijections on square-zero extensions. Their operations have the stated form: $k[0]=k$ gives the zero class, $(a,v)\\mapsto(a,cv)$ gives scalar multiplication, and the projections from $k[k\\oplus k]=k[k]\\times_k k[k]$ give the product comparison. The sum map $(u,v)\\mapsto u+v$ then gives addition; the same argument works over $l$. Pullback $k[V]\\to l[l\\otimes_k V]$, $(c,v)\\mapsto(c,1\\otimes v)$ commutes with these projections, the sum map, the zero map and multiplication by each $c\\in k$. Applied to $V=k$ and $V=k\\oplus k$, these commutative diagrams show that the pullback map $\\rho$ preserves zero, addition and $k$-scalars. Hence $\\rho$ is $k$-linear.",
+   "uses": [
+    "lem-sfb-artin-rs-tangent-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 07WB (lemma-tangent-space-change-of-field); Tag 06IH (lemma-tangent-space-vector-space)"
+   }
+  },
+  {
+   "text": "For $B\\in\\mathcal C_{R,l}$ set $C=B\\times_l k$, with its induced $R$-structure. By [lem-sfb-artinian-finite-residue-restriction], $C$ is Artinian local with residue field $k$. By [lem-sfb-artinian-finite-type-residue-criterion], both $B$ and $C$ are of finite type over $R$. The kernel of $B\\to l$ is nilpotent by [lem-weil-pbc-artinian-local-noetherian-nilpotent]. By [lem-sfb-affine-closed-pinching-pushout], $\\operatorname{Spec}C=\\operatorname{Spec}k\\amalg_{\\operatorname{Spec}l}\\operatorname{Spec}B$. The hypothesis on $\\mathcal Y$ therefore identifies $\\mathcal Y(C)$ with triples $(z,\\eta,\\gamma:z|_l\\cong\\eta|_l)$ for $z\\in\\mathcal Y(k)$ and $\\eta\\in\\mathcal Y(B)$. An object marked by $\\alpha:z\\cong y$ gives the marking $\\eta|_l\\xrightarrow{\\gamma^{-1}}z|_l\\xrightarrow{\\alpha|_l}y_l$. Conversely a marking $\\beta:\\eta|_l\\cong y_l$ gives the triple $(y,\\eta,\\beta^{-1})$. The isomorphism $\\alpha:z\\cong y$ identifies the resulting triple with the original one, and arrows are exactly the marking-preserving arrows on both sides. Thus pullback is an equivalence $\\mathcal F_y(C)\\simeq\\mathcal F_{y_l}(B)$. It is natural in $B$, since the maps $B\\times_l k\\to B$ commute with every residue-preserving $B\\to B'$ and pullback composition has the given coherent comparisons.",
+   "uses": [
+    "lem-sfb-artinian-finite-residue-restriction",
+    "lem-sfb-artinian-finite-type-residue-criterion",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-sfb-affine-closed-pinching-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07WX (lemma-change-of-field), explicit equivalence on marked fibres"
+   }
+  },
+  {
+   "text": "Let $V$ be a finite-dimensional $l$-vector space and write $V_k$ for its underlying $k$-vector space. It is finite-dimensional because $[l:k]<\\infty$. Directly, $l[V]\\times_l k=k[V_k]$, by $((c,v),t)\\mapsto(t,v)$, since the fibre-product condition is $c=t$. Step 5 and [lem-sfb-artin-rs-tangent-tensor] now give a natural bijection $b_V:T_y\\otimes_k V_k\\longrightarrow\\overline{\\mathcal F_{y_l}}(l[V])$. These bijections preserve zero and addition: the projections and sum for $V\\oplus V$ are the same underlying $k$-linear maps and the same square-zero ring maps on both sides. For $a\\in l$, multiplication $m_a:V\\to V$ is $k$-linear. Naturality identifies its action on the source with $1\\otimes m_a$ and on the target with transport along $(c,v)\\mapsto(c,av)$. At $V=l$ this target action is precisely $a$ times the tangent class, by step 4. Consequently $b_l:T_y\\otimes_k l\\to T_{y_l}$ is an $l$-linear bijection. Naturality for $k\\to l$, $1\\mapsto1$, identifies $b_l(v\\otimes1)$ with pullback along $k[\\epsilon]\\to k[l\\epsilon]\\to l[\\epsilon]$, namely $\\rho(v)$. Therefore $b_l(v\\otimes a)=a\\rho(v)$. This description makes it canonical and independent of all pullback choices up to the coherent isomorphisms, which disappear on isomorphism classes. Only the auxiliary space $V_k$, never $T_y$, was required finite-dimensional.",
+   "uses": [
+    "lem-sfb-artin-rs-tangent-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 07WB (lemma-tangent-space-change-of-field), naturality on square-zero algebras"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-artin-deformation-test-category",
+  "lem-sfb-artin-local-test-algebra",
+  "lem-sfb-artinian-finite-type-residue-criterion",
+  "lem-sfb-affine-closed-pinching-pushout",
+  "lem-sfb-artin-rs-tangent-tensor",
+  "lem-sfb-artinian-finite-residue-restriction",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tags 07WU and 07WX, with formal-defos.tex Tag 07WB; explicit marked-fibre and scalar-map calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "predeformation|Rim.Schlessinger|tangent.space.change.of.field",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are tensor-product linear algebra or cotangent modules of ring extensions, not marked deformation groupoids or their residue-field change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tangent space of a deformation category after finite residue field extension is the scalar extension of its tangent space",
+   "results": "8 hits: tangentConeAt_mono_field, Algebra.Extension.CotangentSpace.map, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, Algebra.Extension.cotangentComplex, Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective, Algebra.tensorH1CotangentOfIsLocalization, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.Extension.Cotangent",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are tensor-product linear algebra or cotangent modules of ring extensions, not marked deformation groupoids or their residue-field change"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, LinearEquiv",
+   "results": "12 hits: TensorProduct.comm, TensorProduct.comm_symm, TensorProduct.comm_trans_comm, TensorProduct.comm_tmul, TensorProduct.equivOfCompatibleSMul, TensorProduct.comm_symm_tmul, TensorProduct.comm_comm, TensorProduct.lift.equiv",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are tensor-product linear algebra or cotangent modules of ring extensions, not marked deformation groupoids or their residue-field change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked deformations of a field valued object in an algebraic stack and finite extension of the residue field give tensor product tangent spaces",
+   "results": "8 hits: Algebra.Extension.tensorH1Cotangent, Algebra.Extension.tensorCotangentSpace, Algebra.Extension.tensorCotangent, Algebra.Extension.CotangentSpace.map, Algebra.Extension.tensorCotangentInvFun, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.Extension.CotangentSpace.map_tmul, Algebra.Extension.cotangentEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are tensor-product linear algebra or cotangent modules of ring extensions, not marked deformation groupoids or their residue-field change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a category fibred in groupoids satisfying Rim Schlessinger, marked deformation tangent spaces commute with finite extension of the residue field",
+   "results": "8 hits: Algebra.Extension.CotangentSpace.map_comp, Algebra.Extension.CotangentSpace.map_comp_apply, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.Extension.H1Cotangent.map, Algebra.Extension.CotangentSpace.map, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.H1Cotangent.map, Algebra.Extension.Cotangent.map_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are tensor-product linear algebra or cotangent modules of ring extensions, not marked deformation groupoids or their residue-field change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked deformation groupoids satisfying Rim Schlessinger have tangent spaces commuting with finite residue field extension",
+   "results": "8 hits: Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallyEtale, Algebra.Extension.homInfinitesimal, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective, RingHom.FormallyEtale, Algebra.FormallyEtale.instFormallySmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: these are cotangent modules of ring extensions, manifold tangents or tensor-product algebra, not marked deformation groupoids with the stated Rim-Schlessinger hypothesis"
+  },
+  {
+   "tool": "grep",
+   "query": "predeformation|Predeformation|Schlessinger|tangentSpace.*baseChange",
+   "results": "15 hits: Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean, Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean, Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean, Mathlib/RingTheory/Etale/Kaehler.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: these are cotangent modules of ring extensions, manifold tangents or tensor-product algebra, not marked deformation groupoids with the stated Rim-Schlessinger hypothesis"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tangent space of marked deformations of an object in a category fibred in groupoids commutes with finite field extension",
+   "results": "8 hits: Algebra.tensorH1CotangentOfIsLocalization, tangentConeAt_mono_field, TangentSpace, instAddCommGroupTangentSpace, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange, instTopologicalSpaceTangentSpace, Algebra.Extension.cotangentComplex, instModuleTangentSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: these are cotangent modules of ring extensions, manifold tangents or tensor-product algebra, not marked deformation groupoids with the stated Rim-Schlessinger hypothesis"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, LinearEquiv",
+   "results": "12 hits: TensorProduct.comm, TensorProduct.comm_symm, TensorProduct.comm_trans_comm, TensorProduct.comm_tmul, TensorProduct.equivOfCompatibleSMul, TensorProduct.comm_symm_tmul, TensorProduct.comm_comm, TensorProduct.lift.equiv",
+   "date": "2026-10-23",
+   "verdict": "no match: these are cotangent modules of ring extensions, manifold tangents or tensor-product algebra, not marked deformation groupoids with the stated Rim-Schlessinger hypothesis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Rim Schlessinger groupoid on Artinian local rings has marked deformation tangent vector space with canonical scalar extension isomorphism",
+   "results": "8 hits: Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.Extension.homInfinitesimal, Algebra.FormallyEtale, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective, Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.Extension.Cotangent.map_toInfinitesimal_bijective",
+   "date": "2026-10-23",
+   "verdict": "no match: these are cotangent modules of ring extensions, manifold tangents or tensor-product algebra, not marked deformation groupoids with the stated Rim-Schlessinger hypothesis"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-stack-tangent-finite",
+  "date": "2026-10-23",
+  "group": "Q95"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Existence of a versal ring at a finite-residue-field stack point. Supporting input for versal-ring existence: Finite-dimensional tangent space of a locally finite type algebraic stack. Tag 07X1, first paragraph: the canonical tangent-space scalar-extension isomorphism before replacing the point by an atlas lift.",
+   "via": [
+    "lem-sfb-algebraic-stack-tangent-finite",
+    "lem-sfb-stack-versal-ring-existence",
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-marked-deformation-tangent-field-extension",
+  "worker": "stage1",
+  "summary": "Checked Stacks 07WU, 07WX and 07WB. Proved the marked RS assertion by taking marked fibres, wrote the residue-restriction equivalence and checked the actual canonical l-linear tangent map. Reused all necessary existing algebra and affine pushout nodes; no new node and no statement change.",
+  "blueprint": "Supports the current det-thm-sf-ctf-stability-direct-images proof (3), along the recorded stable-curve/moduli deformation route to Tag 07X1. The existing ancestry record has from.node null, as confirmed by blueprint_refs.py ancestor; its precise inherited place and via list are retained. Whole-blueprint searches for deformation, tangent space, marked deformation, 07WU, 07WX and 07WB found no equivalent blueprint statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-c6072962e",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-c6072962e (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it unchanged: no fixes, no new nodes. Statement and stmt_deps are identical to live and side-live, where the node is still unsplit, so live has not superseded it. proof_deps equals the union of the step uses. No SGA. Every citation is in unit sk-thm-sf-ctf-stability apart from the Artinian-nilpotence Mathlib leaf. All step tags (07T4, 07WU, 07WX, 07WB, 07W8, 06IH, 06GH, 02HV, 0ET0) resolve to the stated labels. Read against artin.tex 07WU/07WX and formal-defos.tex 07WB. Step 1: (α')^{-1}α is the unique marked arrow over k, so F_y(k) is contractible. Step 2: 06GH gives P Artinian local and the kernel nilpotent, 02HV gives finite type, and 0ET0 (A2↠A, A1→A) gives the pushout, so the item's hypothesis applies exactly. Step 3: RS holds because the markings agree through the marked arrow over A; l is of finite type over R via k-basis generators. Step 4: zero, scalars and addition follow from the naturality clause of the 06IH node (V=0, λ=c, projections and the sum on k²), and ρ commutes with all of them, so ρ is k-linear. Step 5: for C=B×_l k, the 07W8 node, 02HV, the nilpotence leaf and 0ET0 (B↠l, k→l) apply. I checked the marked equivalence by hand: (z,η,γ,α)↦(η,α|_lγ^{-1}) with inverse (η,β)↦(y,η,β^{-1}), and b preserves the marking iff it is compatible with γ. Step 6: l[V]×_l k=k[V_k] holds. Additivity, l-scalars via m_a, and b_l(v⊗1)=ρ(v) are checked; this explicit check replaces the uniqueness lemma used in 07WB and is valid. Edge cases l=k, B=l, V=0, purely inseparable l/k and infinite-dimensional T_y all work. Duplicate search over 07WU/07WX/07WB found only the parent and versality nodes, none of which repeats this item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MarkedDeformationTangentFieldExtension",
+  "declaration": "AlgebraicGeometry.StackDeformation.markedDeformation_tangent_field_extension",
+  "declarations": [
+   "AlgebraicGeometry.StackDeformation.HasMarkedPredeformation",
+   "AlgebraicGeometry.StackDeformation.dualNumberFieldMap",
+   "AlgebraicGeometry.StackDeformation.PullsBackField",
+   "AlgebraicGeometry.StackDeformation.rightTensorModule",
+   "AlgebraicGeometry.StackDeformation.markedDeformation_tangent_field_extension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MarkedDeformationTangentFieldExtension.lean",
+  "statement": "theorem markedDeformation_tangent_field_extension (F : BasedCategory.{v, w} (Over (Spec (.of R)))) (hF : IsFibredInGroupoids F) (hRS : CategoryTheory.ArtinFamily.IsRimSchlessinger (.of R) F) (x : Functor.Fiber F.p (affine (CommAlgCat.of R k))) : HasMarkedPredeformation F x ∧ ∃ (_ : AddCommGroup (Tangent F x)) (_ : Module k (Tangent F x)), (∀ t : Tangent F x, IsZeroClass F x t ↔ t = 0) ∧ (∀ (c : k) (t s : Tangent F x), IsScalarClass F x c t s ↔ s = c • t) ∧ (∀ t s r : Tangent F x, IsSumClass F x t s r ↔ r = t + s) ∧ ∀ (l : Type u) [Field l] [Algebra k l] [Algebra R l] [IsScalarTower R k l] [FiniteDimensional k l] (xl : Functor.Fiber F.p (affine (CommAlgCat.of R l))) (a : xl.val ⟶ x.val), F.p.IsHomLift (affineMap (CommAlgCat.ofHom (IsScalarTower.toAlgHom R k l))) a → ∃ (_ : Algebra.FiniteType R l), HasMarkedPredeformation F xl ∧ ∃ (_ : AddCommGroup (Tangent F xl)) (_ : Module l (Tangent F xl)) (_ : Module k (Tangent F xl)) (_ : IsScalarTower k l (Tangent F xl)), (∀ t : Tangent F xl, IsZeroClass F xl t ↔ t = 0) ∧ (∀ (c : l) (t s : Tangent F xl), IsScalarClass F xl c t s ↔ s = c • t) ∧ (∀ t s r : Tangent F xl, IsSumClass F xl t s r ↔ r = t + s) ∧ ∃ (rho : Tangent F x →ₗ[k] Tangent F xl) (e : @LinearEquiv l l _ _ (RingHom.id l) (RingHom.id l) _ _ (TensorProduct k (Tangent F x) l) (Tangent F xl) _ _ (rightTensorModule l (Tangent F x)) _), (∀ (Y : Marked F x (ArtinDeformation.squareZeroTest (R := R) (k := k) k)) (Z : Marked F xl (ArtinDeformation.squareZeroTest (R := R) (k := l) l)), PullsBackField F x l xl a Y Z → rho (classOf F x Y) = classOf F xl Z) ∧ ∀ (t : Tangent F x) (c : l), e (t ⊗ₜ[k] c) = c • rho t",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The actual marked categories and tangent-operation relations are reused from def-sfb-marked-stack-deformations. HasMarkedPredeformation identifies a coherent ArtinDeformation.CofibredGroupoids presentation with those categories, including naturality of the actual pullback arrows. The canonical tangent module structures and the field-extension map and isomorphism are existential conclusions characterized by their geometric operations and pure tensors. No data are selected from a postponed existence proof."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa81d5843",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node and Stacks 07WU/07WX/07WB. Only lean and two landed definition stmt_deps added; statement verbatim, one sorry. Hypotheses match the node with nothing stronger: Noetherian R, finite-type field k, IsFibredInGroupoids, ArtinFamily.IsRimSchlessinger (total-category pushout = restriction equivalence), any finite l/k with no separability assumption, arbitrary pullback xl with a over k→l. HasMarkedPredeformation presents the marked groupoids as a CofibredGroupoids D with IsPredeformation and RS, naturally tied to actual marked pullback arrows. Tangent AddCommGroup/Module pinned by iff to IsZeroClass/IsScalarClass/IsSumClass, as in the landed parent. FiniteType R l is a conclusion. rho is k-linear and fixed by PullsBackField along the actual dualNumberFieldMap; e is l-linear on rightTensorModule with e(t⊗c)=c•rho t. No finite-dimensional tangent, algebraicity or universe restriction. Helpers are real, docstrings complete, no duplicate found. Advisory only: IsFibredInGroupoids reached transitively via def-sfb-artin-family-lifting-data; second reading is a self-reread (dispatcher policy)."
+ }
+}

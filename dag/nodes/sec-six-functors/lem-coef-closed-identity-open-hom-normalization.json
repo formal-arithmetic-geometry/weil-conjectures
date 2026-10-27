@@ -26,22 +26,20 @@
  ],
  "proof": [
   {
-   "text": "The coefficient construction [def-weil-l-adic-coefficient-extension] makes $R$ a finite commutative ring. The closed immersion $i$ is proper by [lem-weil-pbc-closed-immersion-proper](a), hence separated, of finite type, quasi-compact and quasi-separated by [pqf-lem-proper-basic]. Thus $c=(\\mathrm{id}_Z,i)$ is a compactification and the named qcqs direct-image mate applies. Since $Z$ is finite type over the field $k$, [lem-kun-dimension-finite-type] gives an integer $d\\geq0$ with $\\dim Z\\leq d$ (take $d=0$ when $Z$ is empty). This checks the geometric and coefficient hypotheses of the bounded comparison-class adjunction used in Step 4. Also $P$ is quasi-compact: its structure map has affine target $\\operatorname{Spec}k$ and is quasi-compact by [def-weil-finite-type-morphism], whose definition includes this condition in finite type. This checks the proper-case Hom-map definition used below.",
+   "text": "Use the finite positive coefficient quotient and its ULift. The closed immersion is proper, so its direct-image comparison is available. Quasi-compactness of P follows from its quasi-compact structure morphism to Spec k. No dimension bound is needed for the explicit specified Hom equivalence.",
    "uses": [
     "def-weil-l-adic-coefficient-extension",
     "lem-weil-pbc-closed-immersion-proper",
-    "pqf-lem-proper-basic",
-    "lem-kun-dimension-finite-type",
     "def-weil-finite-type-morphism"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-    "place": "Fixed finite coefficient and compactification hypotheses; Stacks morphisms.tex Tags 01W5 (lemma-closed-immersion-proper) and 01W1 (definition-proper); finite-dimensional compactification required in the stated general Hom normalization."
+    "place": "Displayed four-factor Hom chain, specialized to the identity-open compactification; domain check and canonical-mate normalization extracted from lem-coef-site-closed-counit-transport, former steps 1 and 2 (agent-written extraction)."
    }
   },
   {
-   "text": "By [thm-weil-pbc-site-comparison], the actual unit $\\eta_H:H\\to U_PS_PH$ is an isomorphism. Applying the functor $I$ gives an isomorphism $I(\\eta_H):IH\\to IU_PS_PH$, with inverse $I(\\eta_H^{-1})$: their two composites are identities by functoriality. Therefore $IU_PS_PH$ has the same lower cohomological bound as the assumed bounded-below object $IH$. Applying $S_Z$ gives the isomorphism $\\alpha_H$, with inverse $S_ZI(\\eta_H^{-1})$. The exact derived pullback [def-sf-comparison-derived-pullback] preserves bounded-below objects, so $S_ZIH$ and its isomorphic target $JS_PH$ are bounded below; likewise $S_PH$ and $S_ZL$ are bounded below. The pair $(IH,\\alpha_H)$ is now precisely the retained etale-origin witness of [def-weil-pbc-etale-origin-witness]. No boundedness theorem for $I$ on other inputs has been assumed.",
+   "text": "The actual comparison unit at H is invertible. Map its isomorphism through I to transport the assumed bounded-below property of IH to IU_PS_PH. Exact comparison S_Z preserves this bound, giving the bounded-below target JS_PH. Retain the witness with complex exactly IH and isomorphism exactly S_Z I(eta_H).",
    "uses": [
     "thm-weil-pbc-site-comparison",
     "def-sf-comparison-derived-pullback",
@@ -50,63 +48,64 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-    "place": "Domain of the fully faithful comparison in the displayed Hom chain; specialize the comparison unit to H, using the explicit hypothesis IH in D+."
+    "place": "Displayed four-factor Hom chain, specialized to the identity-open compactification; domain check and canonical-mate normalization extracted from lem-coef-site-closed-counit-transport, former steps 1 and 2 (agent-written extraction)."
    }
   },
   {
-   "text": "Let $C_{c,L}:QS_ZL\\to S_PFL$ be the comparison of [lem-sf-class-compact-support-comparison] at the identity witness. Its construction is explicitly fixed in [def-sf-compact-support-site-comparison-construction]: the forward comparison is first the proper counit mate, then the direct image of the exact open-extension comparison, with the canonical associators; $C_{c,L}$ is its inverse. Here the open factor is the identity. To check its map, let $e$ be its component after the canonical identifications of identity extension with the identity functor. Compatibility with composition in [lem-cbc-proetale-extension-zero-comparison], applied to $\\mathrm{id}_Z\\circ\\mathrm{id}_Z$, gives $e=e\\circ e$. Since $e$ is invertible, cancellation gives $e=1$. The descended termwise comparison is therefore also the identity. The forward compact-support comparison consequently reduces to $b_{i,L}$ of [lem-weil-pbc-comparison-direct-image-canonical-mate], whose defining transpose is the comparison pullback followed by the etale direct-image counit. This is exactly the named $\\delta_L$, not a newly chosen isomorphism. Its inverse is $C_{c,L}=\\delta_L^{-1}$. The same canonical inclusion identifications are used on both sides.",
+   "text": "Expand the canonical compact-support site comparison and the fixed comparison used in specifiedExceptionalHomEquiv. Naturality of the right-derived D+ inclusion comparison moves it past the three exact-open comparison factors. The compatibility formulas for mapDerivedCategoryPlusCompIso and mapDerivedCategoryPlusNatIso identify the two resulting morphisms.",
    "uses": [
-    "lem-sf-class-compact-support-comparison",
     "def-sf-compact-support-site-comparison-construction",
-    "lem-cbc-proetale-extension-zero-comparison",
+    "thm-sf-ambient-adjoint-class",
     "lem-weil-pbc-comparison-direct-image-canonical-mate"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-    "place": "First comparison of the displayed Hom chain; Stacks proetale.tex Tag 09AF (lemma-jshriek-comparison), identity open factor, and the counit-mate construction of the proper factor."
+    "place": "Displayed four-factor Hom chain, specialized to the identity-open compactification; domain check and canonical-mate normalization extracted from lem-coef-site-closed-counit-transport, former steps 1 and 2 (agent-written extraction)."
    }
   },
   {
-   "text": "Unpack the stipulated relative Hom bijection of [thm-sf-ambient-adjoint-class] at the identity witness $(L,1)$ and at $c=(\\mathrm{id}_Z,i)$. Its form is fixed in [def-weil-exceptional-inverse-image]: the etale adjunction transported by the compact-support comparison, followed by full faithfulness of $\\nu^*$ on $D^+$. Since $J=S_ZIU_P$, passing from $S_PFL$ to the etale adjoint goes through the comparison adjunction $S_P\\dashv U_P$, and the etale adjunction is $F\\dashv I$ by the counit-compatible identification stipulated in the item. So the bijection precomposes with the inverse of the compact-support comparison $C_{c,L}$, applies the comparison adjunction, then $\\beta$, then $S_Z$. Step 3 gives $C_{c,L}^{-1}=\\delta_L$. For $g:QS_ZL\\to S_PH$ these operations therefore give\n$$g\\longmapsto g\\circ\\delta_L\\longmapsto U_P(g\\circ\\delta_L)\\circ\\eta_{FL}\\longmapsto\\beta_{L,U_PS_PH}\\!\\left(U_P(g\\circ\\delta_L)\\circ\\eta_{FL}\\right)\\longmapsto S_Z\\!\\left(\\beta_{L,U_PS_PH}\\!\\left(U_P(g\\circ\\delta_L)\\circ\\eta_{FL}\\right)\\right).$$\nEach arrow is bijective: Step 3 gives the inverse to the first; the next two are the comparison adjunction and $F\\dashv I$ of [lem-exc-closed-ambient]; the last is full faithfulness of [thm-weil-pbc-site-comparison], since $L$ and $IU_PS_PH$ are bounded below. Also $FL$ is bounded below by the module direct-image construction [def-weil-pbc-direct-image], so every intermediate Hom is in the stated comparison domain. The unit formula for the second arrow is the defining adjunction formula. The identity origin witness inserts no conjugating arrow. The same four operations define the map $h_{L,S_PH}$ of [def-weil-boundary-exceptional-comparison-data] for $Z\\to P$ (its hypotheses were checked in Step 1, and its mate $b$ is the mate defining $\\delta_L$). Thus this is exactly the specified bijection, with all four factors retained, rather than a different bijection deduced from right-adjoint uniqueness.",
+   "text": "Specialize openImmersionLowerShriekComparison_coherence to the identity open. Descend the equation with mapDerivedCategoryNatIso, its whiskering compatibility and the derived composition unit laws. The resulting equation is o;t_pro = S_Z(t_et). Naturality of the inverse direct-image comparison at t_et moves S_P F(t_et) to Q S_Z(t_et). The identity-open factors cancel, proving the displayed inverse-mate equation.",
    "uses": [
-    "thm-sf-ambient-adjoint-class",
-    "def-weil-exceptional-inverse-image",
-    "def-weil-boundary-exceptional-comparison-data",
-    "lem-exc-closed-ambient",
-    "thm-weil-pbc-site-comparison",
-    "def-weil-pbc-direct-image"
+    "lem-cbc-proetale-extension-zero-comparison",
+    "def-sf-compact-support-site-comparison-construction",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-    "place": "Displayed four-factor Hom chain specialized to the identity-open compactification and identity origin witness; its proper-case Hom map is explicitly defined in def-weil-boundary-exceptional-comparison-data."
+    "place": "Displayed four-factor Hom chain, specialized to the identity-open compactification; domain check and canonical-mate normalization extracted from lem-coef-site-closed-counit-transport, former steps 1 and 2 (agent-written extraction)."
+   }
+  },
+  {
+   "text": "Expand specifiedExceptionalHomEquiv at the identity witness; the witness factors become identities. Invert the previous comparison equation to obtain C^{-1};q = S_P(e);delta. For adjc and beta, naturality of their rightAdjointUniq comparison and its unit equation identify adjc.homEquiv(f);r with beta.homEquiv(e^{-1};f). Apply S_Z, use naturality of the comparison adjunction in the left variable, and cancel e^{-1};e. This is exactly the stated four-factor Hom formula.",
+   "uses": [
+    "thm-sf-ambient-adjoint-class",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
+    "place": "Displayed four-factor Hom chain, specialized to the identity-open compactification; domain check and canonical-mate normalization extracted from lem-coef-site-closed-counit-transport, former steps 1 and 2 (agent-written extraction)."
    }
   }
  ],
  "proof_deps": [
   "def-sf-compact-support-site-comparison-construction",
   "def-sf-comparison-derived-pullback",
-  "def-weil-boundary-exceptional-comparison-data",
-  "def-weil-exceptional-inverse-image",
   "def-weil-finite-type-morphism",
   "def-weil-l-adic-coefficient-extension",
-  "def-weil-pbc-direct-image",
   "def-weil-pbc-etale-origin-witness",
   "lem-cbc-proetale-extension-zero-comparison",
-  "lem-exc-closed-ambient",
-  "lem-kun-dimension-finite-type",
-  "lem-sf-class-compact-support-comparison",
   "lem-weil-pbc-closed-immersion-proper",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "pqf-lem-proper-basic",
   "thm-sf-ambient-adjoint-class",
   "thm-weil-pbc-site-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-  "place": "Displayed four-factor Hom chain at the identity-open compactification; domain check by the actual unit, identity-open factorization from the existing comparison definition, and expansion of the existing proper-case Hom-map definition."
+  "place": "Direct expansion of the specified comparison and Hom constructions, using identity-open coherence, inclusion naturality and adjunction uniqueness; Lean proof by F4, 2026-10-25."
  },
  "mathlib_searches": [
   {
@@ -201,35 +200,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-coef-closed-identity-open-hom-normalization",
   "worker": "stage1",
-  "summary": "Kept the full statement. Expanded the comparison unit domain/witness argument, proved the identity-open comparison equals the inverse of the named counit mate using the existing construction and open-composition compatibility, then expanded the existing proper-case Hom-map definition and checked every arrow is bijective. Every non-elementary input is an existing node; no new nodes and no Mathlib leaves. Checked all bounded-below, finite coefficient, qcqs and dimension hypotheses; did not use the stronger purity coefficient conventions of the general site-transpose theorem.",
-  "blueprint": "Realizes the four-factor Hom chain in thm-sf-ambient-adjoint-class.proof.md at c=(id_Z,i), underlying the closed counit equation in lem-coef-finite-dualizing; the parent lem-coef-site-closed-counit-transport assembles that equation.",
+  "summary": "Repair of the human-requested batch5 re-split: retain the exact statement and all domain checks, extract two independently provable normalization arguments as statement-only unsplit nodes (proper identity-open site comparison; change of compact-support presentation for the specified Hom bijection). Preserve every argument of the returned proof in the report with its destination. Parent assembly is below 3000 characters; no Lean written or compiled.",
+  "blueprint": "Closed counit site transport in lem-coef-finite-dualizing, via lem-coef-site-closed-counit-transport; displayed four-factor Hom chain of thm-sf-ambient-adjoint-class at (id_Z,i).",
   "tool_uses": [
-   {
-    "node": "lem-cbc-proetale-extension-zero-comparison",
-    "why": "Composition compatibility of the canonical exact open comparison makes its identity-open component the identity by cancellation."
-   },
-   {
-    "node": "lem-exc-closed-ambient",
-    "why": "The ordinary etale closed-support adjunction, already fixed in the item."
-   },
    {
     "node": "lem-kun-dimension-finite-type",
     "why": "Finite-dimensionality of the existing identity-open compactification checks the hypothesis of the general bounded site-transpose formula."
    },
    {
-    "node": "lem-sf-class-compact-support-comparison",
-    "why": "Existing compact-support comparison at the identity witness, with its stated endpoints and invertibility."
-   },
-   {
     "node": "lem-weil-pbc-closed-immersion-proper",
     "why": "Closed immersions are proper, to instantiate the identity-open compactification and named mate; a generic geometric input, not a replacement biduality route."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "why": "The named proper direct-image map and its invertibility, already fixed in the item."
    },
    {
     "node": "pqf-lem-proper-basic",
@@ -238,31 +221,25 @@
    {
     "node": "thm-weil-pbc-site-comparison",
     "why": "Specified comparison unit and fully faithful bounded-below inverse image; already fixed in the item."
-   },
-   {
-    "node": "thm-sf-ambient-adjoint-class",
-    "why": "The stipulated bounded comparison-class Hom construction already fixed in the item; no unbounded pro-etale adjunction is invoked."
    }
   ]
  },
  "tool_uses": [
   "lem-cbc-proetale-extension-zero-comparison",
   "lem-exc-closed-ambient",
-  "lem-kun-dimension-finite-type",
   "lem-sf-class-compact-support-comparison",
   "lem-weil-pbc-closed-immersion-proper",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "pqf-lem-proper-basic",
   "thm-weil-pbc-site-comparison",
   "thm-sf-ambient-adjoint-class"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-O3-12ce9160a",
-  "group": "O3",
+  "reviewer": "NT-cc-Q17-cf6fd261b",
+  "group": "Q17",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-12ce9160a (reviewer sub-agent of L); spot-checked: I read the item in full with all 17 cited statements, the main-20261015 thm-sf-ambient-adjoint-class proof (lines 5-30) and the parent's old steps 1-2. Context: the item is unsplit on live and side-live, it is not in the dropped list, it cites no SGA, it makes no cycle and the statement is unchanged. There are no new nodes. The old steps 1-2 of the parent (domain/witness, C=δ^{-1}, the four-factor chain) are all carried here. Step 1: the hypotheses check out (i proper, so qcqs; d from kundim<∞, d=0 for Z empty; P quasi-compact). Step 2: the unit is an iso by thm-weil-pbc-site-comparison, so IU_PS_PH is in D^+ and the witness (IH,α_H) runs in the right direction. Step 3: the lem-sf-class comparison is the def-sf-construction composite. At j=id, composition compatibility in lem-cbc gives e=e∘e, so e=1. The forward map is then b_{i,L}=δ_L, which gives C=δ_L^{-1}. Step 4 had one fault, C4: it said thm-sf's Hom map 'is' the h of def-weil-boundary-exceptional-comparison-data, which neither node states. I rewrote it to derive the four operations from the specification in def-weil-exceptional-inverse-image (the item's own stmt_dep: étale adjunction transported by the compact-support comparison, then full faithfulness of ν^* on D^+) and J=S_ZIU_P. Agreement with h is now only a closing remark. I added def-weil-exceptional-inverse-image to the step's uses and proof_deps. Edge cases H=0, Z empty and i=id all hold. The declared tool_uses are generic black boxes and I accept them. Advisory: the proof is 4497 characters.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-cf6fd261b (reviewer sub-agent of L); spot-checked: I read the repair note: the batch5 re-split of 2026-10-22, with old steps of 901/823/1221/1942 characters. On live the item still carries the old four steps, the new ids do not exist, and only proof, proof_deps and split_report changed. Old steps 1 and 2 (hypothesis and D+ typing checks) are kept unabridged. Old step 3 moved into lem-coef-proper-identity-open-site-comparison, generalized to any proper f. I checked that node against the forward comparison of def-sf-compact-support-site-comparison-construction (p_* of the open comparison after b). Naturality of b reduces the claim S_Y(e)∘C∘q^{-1}=b^{-1} to the open factor at j=id being the identity. That holds: composition compatibility makes it an invertible idempotent, and Stacks 09AF (proetale.tex lemma-jshriek-comparison) gives it as an equality of left adjoints. The node is true and its directions match. Old step 4 moved into lem-coef-relative-hom-change-of-presentation. Its Phi^c is the chain of lem-pur-bounded-site-adjunction-transpose and of the thm-sf-ambient-adjoint-class proof display. I verified S_X(r)∘Phi^c(g∘q)=S_X(beta(U_Y(g∘B)∘eta_FG)) by naturality of eta plus the counit equation of the conjugate r of e^{-1}; r: I_c→I matches def-weil-pbc-adjunction-conjugate. All four factors are bijective under the stated D+ hypotheses. Item steps: step 3 gives B_L=delta_L; step 4 gets its typing from step 2 and def-weil-pbc-direct-image, and yields exactly the displayed Phi. Both nodes are statement-only and self-contained, with five recorded searches of three kinds and correct created and blueprint.from fields. Neither restates the item, and the two are of comparable size; the parent proof is 2565 characters. Not duplicates: cor-cbc-proper-coincidence, lem-sp-finite-compact-site-coherence, lem-sf-proper-open-comparison-site-normalization, lem-pod-identity-compact-support-normalization, lem-pur-bounded-site-adjunction-transpose (fixed presentation, no r). No cycle in a symlink-following walk of 24966 nodes, no SGA citation, no missing dependency. I accept the tool uses: they are the same other-unit nodes already recorded in the item's tool_uses. No fixes."
  },
  "lean": {
   "module": "Sheaf.Paper.ClosedIdentityOpenHomNormalization",
@@ -287,5 +264,27 @@
   "group": "Q04",
   "result": "pass",
   "note": "Node differs from base only in lean; lean.statement verbatim. Hypotheses: FiniteFieldDatum k, l prime ≠ p, E/Q_l finite, n≥1, ULift fixed-scalar O_E/ϖ^n (finiteness derived), separated finite-type Z,P over k, closed immersion i with i≫aP=aZ; CompactSpace P derived; nothing extra. Objects: F/Q actual étale/pro-étale R lowerStar, I=F.rightAdjoint with β, S_T/U_T/η the comparison adjunction, J=UP⋙I⋙SZ, c=ofIsProper i, e/q canonical identity-open isos via leftAdjointIdIso+upperStarId, r=rightAdjointUniq counit-compatible I_c≅I. Clauses: t.plus(IU_PS_PH), IsIso α_H, witness pinned to (IH,α_H) via W.complex equation and HEq, compactSupportSiteComparison composite = fixedDirectImageComparisonIso.inv (δ^{-1}, δ = recorded fixedComparisonDirectImageMatePlus), and specifiedExceptionalHomEquiv at the identity witness ≫ SZ(r) = SZ(β(η_FL ≫ UP(δ≫g))). Unfolding the equivalence by rightAdjointUniq/ofNatIsoLeft/η-naturality confirms this is exactly the four-factor Φ. Edge cases Z=∅, H=L=0, i=id, n=1 fine; one universe. Docstrings/source/blueprint/proof steps present; only the theorem is sorry; no pro-étale substitute. Advisory: e/q duplicate the Plus-level properCoincidenceIdentityOpenPlus pattern on the full derived category (same canonical map); used defs live in theorem-node modules but are the maps the node names, no mechanical flag. No recompile (no file changed); worker scompile clean."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T122851-L-1814834",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

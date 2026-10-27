@@ -5,6 +5,8 @@ Authors: SHEAF group Q06
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.ExactPullbackTensorComparison
+
 public import Sheaf.AlgebraicGeometry.NormalizedSupportTriangle
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
@@ -115,32 +117,6 @@ noncomputable def supportExactPullbackCompIso
   Functor.mapDerivedCategoryNatIso (upperStarComp E a b c hc) ≪≫
     Functor.mapDerivedCategoryCompIso (upperStar E b)
       (upperStar E a)
-
-/-- Tensor an isomorphism in each variable using the recorded derived tensor bifunctor.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
-noncomputable def supportDerivedTensorIso
-    (T : Scheme.{u}) {K K' L L' : DerivedCategory (Sheaf T.smallEtaleTopology E)}
-    (e : K ≅ K') (d : L ≅ L') :
-    ((derivedTensor E T).obj K).obj L ≅
-      ((derivedTensor E T).obj K').obj L' :=
-  ((derivedTensor E T).mapIso e).app L ≪≫
-    ((derivedTensor E T).obj K').mapIso d
-
-/-- The exact inverse image tensor comparison uses the canonical K-flat comparison.
-Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
-noncomputable def supportExactPullbackTensorIso
-    {S T : Scheme.{u}} (h : S ⟶ T) (K L : DerivedCategory (Sheaf T.smallEtaleTopology E)) :
-    (upperStar E h).mapDerivedCategory.obj
-        (((derivedTensor E T).obj K).obj L) ≅
-      ((derivedTensor E S).obj
-        ((upperStar E h).mapDerivedCategory.obj K)).obj ((upperStar E h).mapDerivedCategory.obj L)
-      :=
-  (leftDerivedUpperStarIsoMapDerivedCategory E h).symm.app
-      (((derivedTensor E T).obj K).obj L) ≪≫
-    leftDerivedUpperStarTensorIso E h K L ≪≫
-    supportDerivedTensorIso E S
-      ((leftDerivedUpperStarIsoMapDerivedCategory E h).app K)
-      ((leftDerivedUpperStarIsoMapDerivedCategory E h).app L)
 
 /-- Pullback comparison for a commuting projection square.
 Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/

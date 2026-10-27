@@ -195,7 +195,26 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.DerivedCategory.SupportCondition.tensor",
+    "AlgebraicGeometry.Etale.DerivedCategory.isPerverseLE_tensor",
+    "AlgebraicGeometry.Etale.DerivedCategory.isPerverseGE_tensor"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.DerivedCategory.SupportCondition.tensor",
+    "AlgebraicGeometry.Etale.DerivedCategory.isPerverseLE_tensor",
+    "AlgebraicGeometry.Etale.DerivedCategory.isPerverseGE_tensor"
+   ]
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-p-dl-a1-perverse",
  "lean": {
@@ -225,5 +244,24 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-327d9031a (reviewer sub-agent of L); spot-checked: Read the item, new node, unit/chapter route, cited statements, current/master blueprint proofs, Bhatt–Scholze pp. 58–62, and all coefficient definitions. Steps 1–4 are correct: adic tensor/cohomology fibres, support containment including rank zero, Verdier-dual lower bound, and signed shifts. Small cases and edge cases pass; no duplicate, cycle, route violation, SGA citation, or accepted tool_use. The new coefficient lemma is appropriately statement-only and unsplit. Review written to review.md. The report mentions citation/search sidecars absent from the packet, recorded as a delivery discrepancy only."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $X$ be smooth of pure\ndimension $d$, let $K\\in D^b_c(X,\\overline{\\mathbf Q}_\\ell)$\n([det-def-sfb-bounded-constructible]) and let $\\mathcal L$ be a lisse\n$\\overline{\\mathbf Q}_{\\ell,X}$-module ([sk-lem-coefficient-heart]). Then\n\n$$\nK\\in{}^pD^{\\le0}(X)\\ \\Longrightarrow\\\nK\\otimes^L\\mathcal L\\in{}^pD^{\\le0}(X),\n\\qquad\nK\\in{}^pD^{\\ge0}(X)\\ \\Longrightarrow\\\nK\\otimes^L\\mathcal L\\in{}^pD^{\\ge0}(X),\n$$\n\nand the analogous assertions hold for the shifted subcategories.",
+  "proof": [
+   {
+    "text": "For the $\\le$-direction: the cohomology sheaves of\n$K\\otimes^L\\mathcal L$ have support contained in the support of the\ncorresponding sheaves of $K$ (the tensor with the lisse sheaf is\nexact, and the module over each point is the tensor with the free\n$\\mathcal L_{\\bar x}$, of the same support), so the support\ninequalities of [def-per-support-condition] for $K$ imply the\nones for $K\\otimes^L\\mathcal L$. For the $\\ge$-direction: by\n[lem-per-dual-lisse-tensor],\n$D_X(K\\otimes^L\\mathcal L)\\cong D_XK\\otimes^L\\mathcal L^\\vee$, and\napplying the $\\le$-direction to the lisse sheaf\n$\\mathcal L^\\vee$ gives\n$\\operatorname{SuppCon}(D_X(K\\otimes^L\\mathcal L))$ from\n$\\operatorname{SuppCon}(D_XK)$, which is\n$\\mathrm{CosuppCon}(K\\otimes^L\\mathcal L)$ from\n$\\mathrm{CosuppCon}(K)$ by [def-per-support-condition].",
+    "uses": [
+     "def-per-support-condition",
+     "lem-per-dual-lisse-tensor"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

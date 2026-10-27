@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-filtered-colimit-conormal-modules",
+ "kind": "statement",
+ "title": "Conormal modules of compatible ideals commute with filtered colimits",
+ "statement": "Let $R$ be a commutative ring, $J$ a small filtered category, and $P:J\\to\\operatorname{CAlg}_R$ a diagram of commutative $R$-algebras with colimit cocone $(P_\\infty,(p_j))$ [def-weil-pbc-category-colimit]. Let $I_j\\subseteq P_j$ be ideals satisfying $P(a)(I_j)\\subseteq I_k$ for every arrow $a:j\\to k$. Let $I\\subseteq P_\\infty$ be an ideal such that $p_j(I_j)\\subseteq I$ for every $j$ and every $x\\in I$ equals $p_j(x_j)$ for some $j$ and $x_j\\in I_j$. For an ideal $L$ of a commutative ring $B$, let $L^2$ denote the ideal of finite sums of products of two elements of $L$, and let $L/L^2$ be the quotient of the additive $R$-module $L$ by its submodule $L^2$, with scalars restricted along $R\\to B$. Give $j\\mapsto I_j/I_j^2$ the transition maps $[x]\\mapsto[P(a)(x)]$. Then the $R$-linear maps $q_j:I_j/I_j^2\\to I/I^2$, $[x]\\mapsto[p_j(x)]$, exhibit $I/I^2$ as the colimit in $R$-modules of this diagram [def-weil-pbc-category-colimit]. No injectivity, flatness or finite-generation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07BQ (lemma-colimits-NL), proof: general ideal-square quotient argument implicit after the identification of the kernel as a filtered colimit."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "An $R$-algebra homomorphism carrying an ideal $L$ into an ideal $L\\prime$ carries $\\sum_{r=1}^n a_rb_r$, with $a_r,b_r\\in L$, to $\\sum_{r=1}^n f(a_r)f(b_r)\\in (L\\prime)^2$. Its restriction to $L$ is $R$-linear and therefore induces an $R$-linear map on the quotients by the squares. Apply this to each $P(a)$ and $p_j$. The identity and composition laws, and $q_k\\circ M(a)=q_j$ for $M_j=I_j/I_j^2$, hold on each representative $[x]$, by the corresponding laws for $P$ and its colimit cocone. Thus the displayed quotient maps form a diagram and a cocone.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BQ (lemma-colimits-NL), proof, ideal-square quotient step expanded by a finite-products argument."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-filtered-colimit-algebras-elementwise](1), $(P_\\infty,(p_j))$ is also a colimit of the underlying commutative rings. Hence [lem-pc-filtered-colimit-commrings-elementwise](2) applies: equality of images of any two ring elements can be witnessed after two arrows to a common object. Here the indexing category is precisely the given small filtered $J$; no change of index category is being made.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BQ (lemma-colimits-NL), proof, ideal-square quotient step expanded by a finite-products argument."
+   }
+  },
+  {
+   "text": "Every element of $I/I^2$ has a representative $x\\in I$. By the hypothesis on $I$, choose $j$ and $x_j\\in I_j$ with $p_j(x_j)=x$. Then its class is $q_j([x_j])$. This verifies joint surjectivity of the cocone on underlying sets.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BQ (lemma-colimits-NL), proof, ideal-square quotient step expanded by a finite-products argument."
+   }
+  },
+  {
+   "text": "Fix $j$ and a class $z=[x]\\in I_j/I_j^2$ with $q_j(z)=0$. Then $p_j(x)\\in I^2$, so by the stated definition write $p_j(x)=\\sum_{r=1}^n a_rb_r$, with $a_r,b_r\\in I$. Lift each factor to an element of some $I_i$ using the hypothesis on $I$. There are only finitely many such indices. Repeatedly use the common-object clause of filteredness [def-weil-pbc-category-colimit] to choose one object $t$, an arrow $u:j\\to t$, and arrows from all these factor indices to $t$. Their images $A_r,B_r$ belong to $I_t$ by compatibility of the ideals. Put $X=P(u)(x)$ and $Y=\\sum_r A_rB_r\\in I_t^2$. The cocone identities and preservation of sums and products give $p_t(X)=p_j(x)=p_t(Y)$. If $n=0$, take $t=j$, $u=\\mathrm{id}_j$, and $Y=0$; thus this argument also covers a relation with no products.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BQ (lemma-colimits-NL), proof, ideal-square quotient step expanded by a finite-products argument."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-filtered-colimit-commrings-elementwise](2) to $X,Y\\in P_t$ and the ring colimit from step 2. Obtain arrows $v,w:t\\to k$ with $P(v)(X)=P(w)(Y)$. The parallel-arrow clause of filteredness [def-weil-pbc-category-colimit] gives $e:k\\to l$ with $e\\circ v=e\\circ w$. Set $h=e\\circ v=e\\circ w$. Applying $P(e)$ to the equality yields $P(h)(X)=P(h)(Y)$. Since $Y\\in I_t^2$, its image is a sum of products of elements of $I_l$, hence belongs to $I_l^2$. Therefore the single arrow $h\\circ u:j\\to l$ sends $z$ to zero in $I_l/I_l^2$. This proves eventual vanishing of every class in the kernel of $q_j$, even when the original transition maps have kernels.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BQ (lemma-colimits-NL), proof, ideal-square quotient step expanded by a finite-products argument."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-filtered-colimit-modules-criterion] to the small filtered category $J$, the $R$-module diagram $M_j=I_j/I_j^2$, and the cocone with vertex $I/I^2$ from step 1. Its first hypothesis is step 3, and its equivalent kernel-vanishing second hypothesis is steps 4 and 5. It concludes that this very cocone is a colimit in $R$-modules, with the prescribed maps $q_j$. All constructions used only compatibility and the stated lifting property of $I$, so no injectivity, flatness or finite generation is required.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BQ (lemma-colimits-NL), proof, ideal-square quotient step expanded by a finite-products argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-modules-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07BQ (lemma-colimits-NL), expanding the omitted ideal-square quotient argument for a small filtered category; Categories Tag 04AX (section-directed-colimits) supplies the eventual-equality description."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For filtered diagrams of commutative algebras with compatible ideals, the colimit of ideal conormal modules I_i modulo I_i squared is I modulo I squared",
+   "results": "localCohomology.hasColimitDiagram; Ideal.cotangentIdeal; localCohomology.ofDiagram; Ideal.to_quotient_square_comp_toCotangent; Ideal.toCotangent_to_quotient_square; Ideal.cotangentToQuotientSquare; Ideal.instModuleQuotientCotangent; Ideal.instInhabitedCotangent",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern individual conormal modules or general colimit constructions, not compatibility of ideal-square quotients with filtered ring colimits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimits commute with the conormal module of compatible ideals",
+   "results": "CategoryTheory.Limits.colimitLimitIso; CategoryTheory.Limits.ι_colimitLimitIso_limit_π_assoc; CategoryTheory.Limits.colimitLimitIso.congr_simp; ModuleCat.FilteredColimits.ι_colimitDesc; CommRingCat.FilteredColimits.colimitCoconeIsColimit; ModuleCat.FilteredColimits.colimitCoconeIsColimit; RingCat.FilteredColimits.colimitCocone; ModuleCat.FilteredColimits.colimitCocone",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern individual conormal modules or general colimit constructions, not compatibility of ideal-square quotients with filtered ring colimits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cotangent\", \"colimit\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern individual conormal modules or general colimit constructions, not compatibility of ideal-square quotients with filtered ring colimits"
+  },
+  {
+   "tool": "grep",
+   "query": "(Cotangent|cotangent|Ideal).*(colimit|directLimit)|(colimit|directLimit).*(Cotangent|cotangent|Ideal)",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern individual conormal modules or general colimit constructions, not compatibility of ideal-square quotients with filtered ring colimits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking the quotient of an ideal by its square commutes with filtered direct limits of rings and ideals",
+   "results": "Ring.DirectLimit.quotientMk_of; localCohomology.hasColimitDiagram; Ideal.quotientToQuotientRangePowQuotSuccAux_mk; AdicCompletion.transitionMap_ideal_mk; Ideal.to_quotient_square_comp_toCotangent; Ideal.toCotangent_to_quotient_square; Ideal.powQuotPowSuccEquivMapMkPowSuccPow; Ideal.quotCotangent",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern individual conormal modules or general colimit constructions, not compatibility of ideal-square quotients with filtered ring colimits"
+  },
+  {
+   "tool": "grep",
+   "query": "(Cotangent|cotangent|conormal).*(colimit|directLimit)|(colimit|directLimit).*(Cotangent|cotangent|conormal)",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: conormal constructions, local cohomology, and general ring colimits do not assert this compatible-ideal colimit statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Taking the quotient of a compatible ideal by its square commutes with filtered colimits of commutative algebras",
+   "results": "DoubleQuot.quotQuotEquivCommₐ, CommRingCat.Colimits.ColimitType, CommRingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.colimitCoconeIsColimit, Ideal.Algebra.kerSquareLift, Ideal.quotCotangent, Ideal.Quotient.algebraMap_quotient_map_quotient, Algebra.Extension.infinitesimal",
+   "date": "2026-10-24",
+   "verdict": "no match: conormal constructions, local cohomology, and general ring colimits do not assert this compatible-ideal colimit statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cotangent\", \"colimit\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: conormal constructions, local cohomology, and general ring colimits do not assert this compatible-ideal colimit statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a filtered diagram of commutative R-algebras and compatible ideals, the conormal module I modulo I squared is the colimit of the conormal modules of the ideals",
+   "results": "localCohomology.hasColimitDiagram, localCohomology.ofDiagram, Ideal.Cotangent, Ideal.cotangentIdeal, Ideal.to_quotient_square_comp_toCotangent, Ideal.instModuleQuotientCotangent, instR, Ideal.instInhabitedCotangent",
+   "date": "2026-10-24",
+   "verdict": "no match: conormal constructions, local cohomology, and general ring colimits do not assert this compatible-ideal colimit statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor sending an ideal to its cotangent module preserves filtered direct limits of commutative rings with compatible ideals",
+   "results": "Ideal.Cotangent, Ideal.toCotangent, localCohomology.ringModIdeals, Ideal.instModuleQuotientCotangent, localCohomology.hasColimitDiagram, localCohomology.ofDiagram, Ideal.cotangentIdeal, Ideal.mapCotangent",
+   "date": "2026-10-24",
+   "verdict": "no match: conormal constructions, local cohomology, and general ring colimits do not assert this compatible-ideal colimit statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-filtered-colimit-naive-cotangent-comparison",
+  "date": "2026-10-24",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting alteration chain recorded in the item: coherent naive cotangent cohomology via the scheme-to-space comparison, Stacks Tag 0D0X; the final local algebra input in the proof of Tag 0D0X. Supporting local algebra: Tag 0D08 proof, first paragraph, acyclicity of the relative naive cotangent complexes of the strict henselizations. The filtered-colimit comparison invoked through Algebra Tag 07BQ in the first paragraph of More on Algebra, lemma-henselization-NL. General ideal-square quotient step implicit in the conclusion of Tag 07BQ after the kernel colimit identification.",
+   "via": [
+    "lem-sfb-filtered-colimit-naive-cotangent-comparison",
+    "lem-sfb-ind-etale-naive-cotangent-acyclic",
+    "lem-sfb-strict-henselization-naive-cotangent",
+    "lem-sfb-scheme-naive-cotangent-etale-comparison",
+    "lem-sfb-affine-etale-naive-cotangent-presentation",
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-filtered-colimit-conormal-modules",
+  "worker": "stage1",
+  "summary": "Expanded the ideal-square quotient argument implicit in Stacks 07BQ into six steps. Reused existing ring/algebra element descriptions and the module-colimit recognition criterion, with no new nodes. The kernel argument explicitly lifts each factor of a finite product expression and equalizes parallel arrows so that one transition kills the quotient class. The statement is unchanged.",
+  "blueprint": "The inherited provenance points to det-thm-sf-ctf-stability-direct-images, proof (3), through the supporting alteration/cotangent chain. At the immediate parent lem-sfb-filtered-colimit-naive-cotangent-comparison this is the degree -1 ideal-square quotient step of Stacks 07BQ. The newest blueprint direct-images proof and unit were read; no unit route or statement is replaced. blueprint_refs ancestor returns None for this existing created-node chain, so its inherited null from.node and via are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-0e7c6a2c3",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-0e7c6a2c3 (reviewer sub-agent of L); spot-checked: Read Stacks algebra.tex:35557, Tag 07BQ (lemma-colimits-NL). Its proof stops at 'Hence the lemma is clear', and the item is exactly that omitted step (D5). The statement is identical to the base (checked against the Q09 snapshot); live and side-live still have the item unsplit, so the delivery is not superseded; there is no re-split note. There are no new nodes. I read every cited statement in full. Step 2 uses algebras-elementwise (1), which says the algebra colimit is also a ring colimit, and commrings-elementwise (2); J is small and filtered as both require. Step 3 lifts each class to some I_j using the item's hypothesis on I. Step 4 lifts the 2n factors and uses the common-object clause of def-weil-pbc-category-colimit; the case n=0 is covered. Step 5 gets v,w:t→k from commrings (2), takes e equalizing v and w, and sets h=ev=ew. Then P(h)X=P(h)Y, which lies in I_l^2, so the single arrow hu kills the class; this is correct for a general filtered category. Step 6 applies the modules criterion with (1) from step 3 and (2) in its stated kernel form from steps 4–5. proof_deps equals the union of the step uses, and all four cited nodes are Mathlib leaves, so there is no route or cycle issue. Edge cases: I=0; J={1→2} with k[x]→k, x↦0 and I_1=(x), I_2=0, where the class dies through the transition map rather than by injectivity; a one-object J. No duplicate: lem-sfb-directed-union-cotangent-h1 is about T_1 of directed subalgebra unions and differs. One cosmetic point only: step 1 writes L\\prime."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FilteredColimitConormalModules",
+  "declaration": "Ideal.isColimit_conormalCocone",
+  "declarations": [
+   "Ideal.conormalDiagram_laws",
+   "Ideal.conormalDiagram",
+   "Ideal.conormalCocone_naturality",
+   "Ideal.conormalCocone",
+   "Ideal.isColimit_conormalCocone"
+  ],
+  "file": "lean/Sheaf/RingTheory/FilteredColimitConormalModules.lean",
+  "statement": "theorem isColimit_conormalCocone [IsFiltered J] (hc : IsColimit c) (hlift : ∀ x : c.pt, x ∈ I → ∃ (j : J) (y : P.obj j), y ∈ L j ∧ c.ι.app j y = x) : Nonempty (IsColimit (conormalCocone P L hL c I hι))",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses Mathlib Ideal.Cotangent and Ideal.mapCotangent. The auxiliary declarations supply exactly the quotient diagram and canonical cocone specified in the node; only their proof laws are postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e04a3d16",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Clause-by-clause match: R CommRing; J : Type v SmallCategory, IsFiltered (includes nonempty, as the dep requires); P : J ⥤ CommAlgCat.{v} R with an arbitrary colimit cocone c/hc; hL and hι comap inclusions in the correct direction; hlift asks for a single representative in L j; objects are Mathlib Ideal.Cotangent (I ⧸ I•⊤, image I² by map_toCotangent_ker) with scalars restricted to R; transition maps and legs are mapCotangent, matching [x]↦[P(a)x] and [x]↦[p_j x]; conclusion is Nonempty IsColimit of this prescribed cocone in ModuleCat.{v} R; no extra hypotheses. Helper laws (functoriality, naturality) are true node clauses with docstrings. Definitions carry real data and nothing is proved beyond sorry plus structural simpa glue. lean.statement is verbatim in the file. The dep record is unchanged and the node differs from side-live only in lean. Stacks algebra.tex:35557 (Tag 07BQ) read. No duplicate in Mathlib or the project trees. Edge cases: I=0, unit ideals, one-object J, non-injective k[x]→k, empty J excluded by filteredness. No compile, since no file was changed. Note: J and the algebras share universe v, the standard small-category convention."
+ }
+}

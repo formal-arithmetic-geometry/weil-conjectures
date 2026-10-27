@@ -24,17 +24,6 @@
    }
   },
   {
-   "text": "If $O_1,O_2$ are unions of members of $\\mathcal B$ and $(F_j,s_j)$ are solutions on them, put $T=O_1\\cap O_2$. The family $\\mathcal B_T$ covers $T$: refine $U_1\\cap U_2$ for $U_j\\subset O_j$. For each $V\\in\\mathcal B_T$, the map $(s_{2,V})^{-1}s_{1,V}$ identifies $F_1|_V$ with $F_2|_V$. Its restriction to a smaller $V'$ is the corresponding map since both $s_j$ satisfy the solution equation. The Hom bijection [lem-trf-derived-basis-local-hom-glue] on $T$ therefore gives an isomorphism $c:F_1|_T\\cong F_2|_T$; its inverse comes from the inverse local family, as in Step 1. The uniqueness part shows that these overlap maps compose correctly on triple overlaps, since their local formulas cancel the middle $s_j$.",
-   "uses": [
-    "lem-trf-derived-basis-local-hom-glue"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D69 (cohomology-remark-uniqueness), including the omitted overlap-cocycle verification"
-   }
-  },
-  {
    "text": "Well-order $\\mathcal B=(U_\\xi)_{\\xi<\\kappa}$ and put $W_\\alpha=\\bigcup_{\\xi<\\alpha}U_\\xi$ for $\\alpha\\le\\kappa$. We construct by transfinite recursion a solution $(F_\\alpha,s_{\\alpha,U})$ on each $W_\\alpha$. By Step 1 every such object has negative self Hom vanishing. For $\\beta<\\alpha$, Step 1 applied on $W_\\beta$ gives the unique comparison $r_\\beta^\\alpha:F_\\alpha|_{W_\\beta}\\cong F_\\beta$ satisfying $s_{\\beta,U}(r_\\beta^\\alpha|_U)=s_{\\alpha,U}$. These comparisons compose because both composites satisfy this displayed equation for every $U\\in\\mathcal B_{W_\\gamma}$, and the Hom bijection makes them equal. At stage zero take the zero complex on the empty scheme; all its module sheaves and maps are zero, so it is a solution even if the empty open belongs to $\\mathcal B$.",
    "uses": [
     "lem-trf-derived-basis-local-hom-glue"
@@ -46,70 +35,48 @@
    }
   },
   {
-   "text": "Suppose a solution on $W_\\alpha$ has been constructed. On $U_\\alpha$ the original object $K_{U_\\alpha}$ is a solution with structure maps $\\rho_V^{U_\\alpha}$. Step 2 supplies their comparison on $W_\\alpha\\cap U_\\alpha$. Apply [lem-sc-derived-open-gluing] on the scheme $W_{\\alpha+1}=W_\\alpha\\cup U_\\alpha$ to obtain $F_{\\alpha+1}$ with isomorphisms $f:F_{\\alpha+1}|_{W_\\alpha}\\cong F_\\alpha$ and $g:F_{\\alpha+1}|_{U_\\alpha}\\cong K_{U_\\alpha}$ having that transition. For each $V\\in\\mathcal B$ lying inside one of these two opens set $t_V=s_{\\alpha,V}(f|_V)$ or $t_V=\\rho_V^{U_\\alpha}(g|_V)$ respectively. If both formulas apply they agree by the overlap comparison. For any inclusion $V'\\subset V$ in this subfamily, $\\rho_{V'}^V(t_V|_{V'})=t_{V'}$: compute using the formula for the open containing $V$, and use the agreement of formulas if $V'$ also lies in the other open.",
+   "text": "At a successor, the supplied object $K_{U_\\alpha}$ is a solution on $U_\\alpha$ with maps $\\rho_V^{U_\\alpha}$. Apply [lem-trf-derived-basis-binary-extension] to this solution and the solution on $W_\\alpha$. Its conclusion gives a solution on $W_{\\alpha+1}$ with every original-family identification, including opens crossing the two pieces. Step 1 gives negative self Hom and all earlier comparisons.",
    "uses": [
-    "lem-sc-derived-open-gluing"
+    "lem-trf-derived-basis-binary-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D6C successor step, expanding the two-open argument of Tag 0D6A via Tag 08DG"
+    "place": "Tags 0D69 (cohomology-remark-uniqueness), 0D6A (cohomology-lemma-solution-in-finite-case), and 0D6C (cohomology-theorem-glueing-bbd-general), overlap comparisons and successor step."
    }
   },
   {
-   "text": "To supply the still missing maps at the successor stage, fix any $U\\in\\mathcal B_{W_{\\alpha+1}}$. The family $\\mathcal C_U$ of $V\\in\\mathcal B$ contained in $U$ and in either $W_\\alpha$ or $U_\\alpha$ covers $U$ and refines its pairwise intersections. On $V\\in\\mathcal C_U$ the maps $a_V=(\\rho_V^U)^{-1}t_V:F_{\\alpha+1}|_V\\to K_U|_V$ are compatible by Step 4 and the original cocycle. Their source and target are both isomorphic to $K_V$, so their cross negative Hom groups vanish. Apply [lem-trf-derived-basis-local-hom-glue] on $U$ to glue $a_V$ and its inverses; injectivity shows they are inverse maps. Denote this isomorphism by $s_{\\alpha+1,U}$. For $U'\\subset U$, both $\\rho_{U'}^U(s_{\\alpha+1,U}|_{U'})$ and $s_{\\alpha+1,U'}$ restrict to $t_V$ on $\\mathcal C_{U'}$; the Hom injectivity on that family makes them equal. For $U\\subset W_\\alpha$ the result equals $s_{\\alpha,U}(f|_U)$. This proves the complete solution equation and compatibility with the preceding stage; Step 1 gives negative self Hom vanishing and all earlier comparisons.",
+   "text": "At a nonzero limit $\\lambda\\le\\kappa$, apply [lem-trf-derived-basis-limit-extension] to the earlier solutions and their comparisons from Step 2. The opens are increasing, continuous, and start with $\\varnothing$; Step 1 gives negative self Hom, and Step 2 gives the comparison cocycle and preservation of all structure maps. The conclusion supplies the complete solution on $W_\\lambda$ and comparisons preserving every earlier identification. Step 1 again supplies its negative self Hom.",
+   "uses": [
+    "lem-trf-derived-basis-limit-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 0D6B (cohomology-lemma-glueing-increasing-union) and 0D6C (cohomology-theorem-glueing-bbd-general), limit step and final compatibility bookkeeping."
+   }
+  },
+  {
+   "text": "This completes the recursion. Since $W_\\kappa=X$, take $K=F_\\kappa$ and $\\rho_U=s_{\\kappa,U}$. Step 1 proves uniqueness by the Hom bijection [lem-trf-derived-basis-local-hom-glue]. The well-order is on the given set $\\mathcal B$; no finite subcover or quasi-compactness was used.",
    "uses": [
     "lem-trf-derived-basis-local-hom-glue"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 0D6A and 0D6C successor step: extension from the two-open gluing data to every chosen open, with the omitted compatibility checked"
-   }
-  },
-  {
-   "text": "Let $\\lambda\\le\\kappa$ be a nonzero limit stage and suppose solutions have been constructed for all $\\beta<\\lambda$. Their unique comparisons from Step 3 satisfy the cocycle, and each $F_\\beta$ has negative self Hom vanishing by Step 1. The cover $(W_\\beta)_{\\beta<\\lambda}$ of $W_\\lambda$ is increasing and continuous, with $W_0=\\varnothing$. Thus [lem-trf-derived-basis-increasing-union] gives $F_\\lambda\\in D(\\mathcal O_{W_\\lambda})$ and isomorphisms $r_\\beta:F_\\lambda|_{W_\\beta}\\cong F_\\beta$ satisfying $r_\\gamma^\\beta(r_\\beta|_{W_\\gamma})=r_\\gamma$ for $\\gamma<\\beta<\\lambda$. This constructs the object at the limit; its identifications on all members of $\\mathcal B_{W_\\lambda}$ are supplied next.",
-   "uses": [
-    "lem-trf-derived-basis-increasing-union"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D6C limit step, invoking Tag 0D6B (cohomology-lemma-glueing-increasing-union)"
-   }
-  },
-  {
-   "text": "Fix $U\\in\\mathcal B_{W_\\lambda}$. It need not be contained in any one $W_\\beta$. Instead cover $U$ by $\\mathcal C_U=\\{V\\in\\mathcal B:V\\subset U,\\ V\\subset W_\\beta\\text{ for some }\\beta<\\lambda\\}$. This covers $U$ by the intersection-refinement hypothesis and $W_\\lambda=\\bigcup_{\\beta<\\lambda}W_\\beta$; it refines intersections because two indices have an upper bound below the limit. Put $t_V=s_{\\beta,V}(r_\\beta|_V)$ for an index with $V\\subset W_\\beta$. For $\\beta<\\beta'$ containing $V$, the equations $s_{\\beta,V}(r_\\beta^{\\beta'}|_V)=s_{\\beta',V}$ and $r_\\beta^{\\beta'}(r_{\\beta'}|_{W_\\beta})=r_\\beta$ show independence of the index. After moving two indices to their maximum, the solution equation at that stage gives $\\rho_{V'}^V(t_V|_{V'})=t_{V'}$. Now glue $(\\rho_V^U)^{-1}t_V$ and its inverses by [lem-trf-derived-basis-local-hom-glue], obtaining $s_{\\lambda,U}:F_\\lambda|_U\\cong K_U$. The negative cross Hom hypothesis holds since both restrictions on $V$ are isomorphic to $K_V$.",
-   "uses": [
-    "lem-trf-derived-basis-local-hom-glue"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D6C limit step, the construction of rho_U at the end of the proof; explicitly treats a U not contained in any earlier stage"
-   }
-  },
-  {
-   "text": "For $U'\\subset U$ in $\\mathcal B_{W_\\lambda}$, the two maps $\\rho_{U'}^U(s_{\\lambda,U}|_{U'})$ and $s_{\\lambda,U'}$ restrict on every $V\\in\\mathcal C_{U'}$ to $t_V$. Their equality follows from Hom injectivity in [lem-trf-derived-basis-local-hom-glue]. If $U\\subset W_\\beta$, the same check shows $s_{\\lambda,U}=s_{\\beta,U}(r_\\beta|_U)$, so the provided $r_\\beta$ is the canonical comparison of Step 3. Hence the limit object is a solution with all comparison equations; Step 1 gives its negative self Hom vanishing. Transfinite recursion is complete. Finally $W_\\kappa=X$, so $(F_\\kappa,s_{\\kappa,U})$ gives the required $(K,\\rho_U)$ for every original $U$. Step 1 proves its uniqueness up to the unique compatible isomorphism. Only a well-order of the given set of opens was used, so no quasi-compactness assumption has entered.",
-   "uses": [
-    "lem-trf-derived-basis-local-hom-glue"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D6C, final compatibility bookkeeping and conclusion; uniqueness from Tag 0D68"
+    "place": "Tags 0D68 (cohomology-lemma-uniqueness) and 0D6C (cohomology-theorem-glueing-bbd-general), conclusion"
    }
   }
  ],
  "proof_deps": [
   "lem-trf-derived-basis-local-hom-glue",
-  "lem-sc-derived-open-gluing",
-  "lem-trf-derived-basis-increasing-union"
+  "lem-trf-derived-basis-binary-extension",
+  "lem-trf-derived-basis-limit-extension"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0D6C, theorem-glueing-bbd-general; expanded overlap and successor steps from Tags 0D68, 0D69 and 0D6A; Tags 0D66 and 0D6B are supporting inputs."
+  "place": "Tag 0D6C (cohomology-theorem-glueing-bbd-general), with rigidity from 0D68. The overlap/successor and continuous-limit arguments are separate statement-only nodes, using 0D69, 0D6A and 0D6B."
  },
  "mathlib_searches": [
   {
@@ -201,28 +168,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-derived-basis-bbd-descent",
   "worker": "stage1",
-  "summary": "Retained the statement and expanded Stacks 0D6C into eight steps. Uniqueness and negative self Hom are derived from a general global-object Hom-descent input, successor stages use the existing binary derived gluing node, and ordinal limits use a continuous-increasing-cover input. Wrote the compatibility equations omitted by the source and treated opens which are not contained in an earlier limit stage. Two new statement-only supporting nodes; no Mathlib match.",
-  "blueprint": "Preserves the inherited ancestry from lem-trf-local-term-locality, proof (1)--(2), nearby-cycle/semistable-alteration branch, through the polynomial-chart relative-duality input. The touched component is precisely BBD descent; steps 1--2 realize uniqueness and overlap maps, 3--5 successor gluing, 6--8 increasing-union gluing and complete compatibility.",
-  "tool_uses": [
-   {
-    "node": "lem-sc-derived-open-gluing",
-    "why": "Generic derived-category gluing across a two-open cover (Stacks 08DG), used at successor stages of the assigned BBD descent input; the zero-stalk trace unit contains no such homological-algebra construction."
-   }
-  ]
+  "summary": "Repair of returned head 99061745cda (2026-10-22 16:20 UTC), rebased by the delivery tool onto current sheaf-dag. Retained the human-requested two-task split: binary extension carries old steps 2, 4 and 5; limit extension carries old steps 6, 7 and the limit-compatibility part of 8. The unchanged parent statement and Lean record are preserved; its five-step assembly totals 2821 characters. Compared current shared item with the archived original (identical) and the retained returned split (only proof, proof dependencies, proof origin and split report differ). Re-read every parent citation and both supporting gluing statements against current Stacks; all five citation statement hashes match the prior audit, with every quote verbatim. No mathematical adjustment is required by the current DAG. The dated report records the actual latest return, current-base audit, edge cases, retained original arguments and reused logged searches; repair-current-dag-audit.json records the comparison.",
+  "blueprint": "Retains the ancestry from lem-trf-local-term-locality, proof (1)--(2), through the polynomial-chart relative-duality input. Only the BBD descent component is re-split: rigidity and recursion remain here; overlap/successor and limit bookkeeping become separate tasks. No unit or chapter route changes.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-sc-derived-open-gluing"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q103-632c0f122",
-  "group": "Q103",
+  "reviewer": "NT-cc-Q21-861441d2d",
+  "group": "Q21",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q103-632c0f122 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, but the item metadata incorrectly records created.item=lem-trf-relative-duality-polynomial-chart and group=Q89. Corrected whole DAG JSON is under fixes/dag/nodes/sec-trace-formula/lem-trf-derived-basis-bbd-descent.json; review.md records all source, step, edge-case, route, and search checks.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-861441d2d (reviewer sub-agent of L); spot-checked: PASS, no fixes. This is the fourth delivery of the human-requested re-split. The three earlier heads (72f9d9b9916c, e32fa64e93f2, 99061745cdae) were PASSed, and each was refused at landing because the base side completion was never promoted ('not in the live DAG', coord/returns/Q21.md 2026-10-22 16:20 UTC). That refusal concerns the base item, not this split. Compared with 99061745: binary-extension and limit-extension are identical in every field, and the item differs only in split_report date and summary. The cited local-hom-glue and increasing-union statements are unchanged. In the live and side-live clones the item is still the old 8-step Q89 split and neither new id exists, so nobody has superseded it and the ids do not collide. I re-read Stacks cohomology.tex 0D67-0D6C (lines 11160-11520; tags/tags 16512-16517) and 08DG. The item is the scheme case of 0D6C with all hypotheses kept: unbounded D(O_U), uniqueness, no quasi-compactness. Steps: 1, rigidity via local-hom-glue on B_O with cross negative Hom coming from K_U, inverses glued and injectivity; 2, continuous W_alpha with W_0 empty and comparisons with their cocycle; 3, K_{U_alpha} is a solution by rho_U^U=1 and the cocycle, then binary-extension gives a solution on W_{alpha+1}; 4, limit-extension hypotheses (continuity, W_0 empty, set-sized lambda, negative self-Hom, r cocycle, s-preservation in the right orientation) are exactly the invariant; 5, W_kappa=X with uniqueness from step 1. Both children are true. Binary-extension: B_{O1 cap O2} covers and refines, c_12 is unique by Hom descent, the triple cocycle follows by uniqueness, the object comes from 08DG, and crossing U are handled by gluing on C_U. Limit-extension: increasing-union applied on W_lambda, C_U covers since max(beta,beta')<lambda, t_V does not depend on the index, and the uniqueness characterization is consistent. Edge cases checked: O1 empty, O1=O2, empty overlap, and a non-quasi-compact countable union where X lies in no W_n. Re-split: old steps 1 and 3 become steps 1-2, old 2+4+5 become binary-extension, old 6+7 and the compatibility part of 8 become limit-extension, and the rest of 8 becomes step 5. Nothing was shortened. The children are comparable in size, independent and statement-only, and neither restates the parent. The assembly is 2821 characters. No duplicates: sc-derived-open-gluing, increasing-union and local-hom-glue are all weaker. No SGA source. The item's tool_uses entry (lem-sc-derived-open-gluing) is inherited metadata that also appears on the live item and does no harm. Maintainer: L must promote the side completion, or this head will loop again."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.DerivedBasisBbdDescent",
@@ -248,5 +210,16 @@
   "result": "pass",
   "note": "Statement matches the node and Stacks 0D67/0D68/0D6C clause by clause: sSup cover and refinement; K_U over the over-site; rho for every inclusion; rho_id against the canonical sectionwise identity comparison; rho_comp via derivedModuleOpenMapCompIso.inv (directions checked); Subsingleton negative self-Homs; existence with the openRestrictionComparison compatibility; ∃! compatible iso for every other solution. No extra hypotheses, universes u and w bound. Edge cases checked: empty B, empty open, U=V=W, non-quasi-compact X. Two new helper isos are real data with docstrings and duplicate nothing. Docstring has the 8 proof steps; imports follow rule 7; proof is sorry only. nt_compile --json clean, 15.2 s, rc 0. Advisory: derivedModuleOpenMapCompIso and openRestrictionComparison come from theorem-node modules outside stmt_deps; H2 bars citing them, so this is a maintainer note, not a fault."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

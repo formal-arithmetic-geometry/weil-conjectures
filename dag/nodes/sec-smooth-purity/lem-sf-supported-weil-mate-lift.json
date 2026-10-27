@@ -1,0 +1,372 @@
+{
+ "id": "lem-sf-supported-weil-mate-lift",
+ "kind": "statement",
+ "title": "Frobenius-equivariant closed right adjoint from the supported triangle",
+ "statement": "Fix a finite field $k_0$ with algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}k_0$, and coefficients $\\Lambda=E$ or $\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $i_0:Z_0\\hookrightarrow X_0$ be a closed immersion with complementary open $j_0:U_0\\hookrightarrow X_0$, with $X_0$ separated of finite type over $k_0$, and let $i,j$ be their geometric base changes [def-weil-scheme-morphism-properties]. Suppose on the specified $D^b_c(-,\\Lambda)$ categories the exact functors $i_*,i^*,J,j^*,Rj_*$ have adjunctions $i^*\\dashv i_*\\dashv J$, $j^*\\dashv Rj_*$, invertible counits $i^*i_*\\cong\\mathrm{id}$ and $j^*Rj_*\\cong\\mathrm{id}$, $j^*i_*=0$, and supported triangles $i_*JK\\xrightarrow eK\\xrightarrow uRj_*j^*K\\to$, unique on morphisms with prescribed middle component. Use the canonical Frobenius comparisons for $i_*,i^*,j^*,Rj_*$, preserving the open unit, and the coherent pullback composition identifications [def-weil-derived-pullback-tensor-hom]. The prescribed comparison $a:g_X^*i_*\\xrightarrow{\\sim}i_*g_Z^*$ for $i_*$ is the right-adjoint mate, for the given adjunction $i^*\\dashv i_*$, of the inverse of the pullback-composition comparison $d:g_Z^*i^*\\xrightarrow{\\sim}i^*g_X^*$ [def-weil-pbc-adjunction-mate]. The adjunctions are exact adjunctions: their units and counits commute with the specified shift isomorphisms. The given coefficient comparisons identify the supported triangles and their adjunction maps, commute with the Frobenius comparisons for the four prescribed functors and shifts, and satisfy their stated tower coherences. A Weil structure is an isomorphism $g_T^*K\\xrightarrow{\\sim}K$ for geometric Frobenius, as in [def-weil-weil-sheaf-complex].\nThere is a unique natural Frobenius comparison $g_Z^*J\\cong Jg_X^*$ whose closed pushforward identifies the counits in these supported triangles. It is the right-adjoint mate of the prescribed comparison for $i_*$, is compatible with exact shifts and the given coefficient comparisons, and makes the adjunction Hom bijections Frobenius-equivariant. For every Weil complex $(K,\\theta_K)$, the induced structure on $JK$ is the one obtained by applying $i^*$ to the unique isomorphism between the Frobenius-pulled supported triangle and the supported triangle of $K$. Both adjunction unit and counit and all three arrows of the supported triangle are equivariant, and this lift is functorial in morphisms of Weil complexes. The assertion is about equivariance of underlying distinguished triangles, and does not assert a triangulation of the category of Weil pairs.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Weil structures: comparison of supported triangles and right-adjoint mate; returned step 20"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-adjunction-mate",
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Use automorphismConstructibleStage_integral_rational and automorphismConstructibleStage_qbar to install the equivalence instances for the literal Frobenius pullbacks P and Q. The input S already fixes the closed comparison by S.a_mate, so the open/closed comparison theorem is not needed again.",
+   "uses": [
+    "lem-sf-automorphism-constructible-stage-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Weil structures: comparison of supported triangles and right-adjoint mate; returned step 20"
+   }
+  },
+  {
+   "text": "Set b := IsoAlgebra.mateIso S.exceptionalAdj S.a, the proved source-library construction. Its hom is definitionally sfSupportedWeilMate S. Mathlib mateEquiv_counit gives the required counit normalization. Apply the inverse exceptional Hom equivalence componentwise to prove uniqueness of any normalized natural isomorphism. Expanding mateEquiv gives the displayed three-factor formula.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-sf-fixed-pair-adjunction-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Weil structures: comparison of supported triangles and right-adjoint mate; returned step 20"
+   }
+  },
+  {
+   "text": "IsoAlgebra.mapOfNatIsoAdjunction lifts iPush ⊣ exceptional using the definitional mate equality. Its unit and counit have the prescribed underlying components by reflexivity. Apply the source-library counit equivariance lemma also to closedAdj, d and a, with S.a_mate.symm, to obtain the closed counit square needed for recovery.",
+   "uses": [
+    "lem-sf-fixed-pair-adjunction-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Weil structures: comparison of supported triangles and right-adjoint mate; returned step 20"
+   }
+  },
+  {
+   "text": "The exceptional counit normalization and counit naturality give the first square for an arbitrary arrow P(K) → L. For a Weil object K, its first component is an isomorphism, as a composite of a, iPush(b) and iPush(exceptional(theta)). Mathlib isoTriangleOfIso₁₂ yields a triangle isomorphism t₀ with that component and middle component theta. Any two maps from P(T_K) to T_L with equal middle components agree: precompose with t₀ inverse and use S.unique_middle, then cancel. For the third component, jp(openUnit_K) is inverse to the open counit by the triangle identity, hence jp(P(openUnit_K)) is invertible by dj naturality. Under jp ⊣ jPush, precomposition with P(openUnit_K) is therefore injective. The triangle second-square equation and S.openUnit identify the third component with the prescribed one. This proves existence, uniqueness and all triangle component clauses.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Weil structures: comparison of supported triangles and right-adjoint mate; returned step 20"
+   }
+  },
+  {
+   "text": "Use the closed counit equivariance square from step 3 for the Weil object (exceptional K, b_K followed by exceptional(theta_K)). Conjugate by the prescribed closed counit isomorphism c and cancel Q(c inverse) followed by Q(c) to obtain the recovery formula. The lifted IsoAlgebra functor acts by exceptional on arrows; its morphism equation gives functoriality. The triangle naturality equality follows from the equal-middle-components uniqueness argument of step 4 and the Weil morphism equation.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "lem-sf-fixed-pair-adjunction-lift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Weil structures: comparison of supported triangles and right-adjoint mate; returned step 20"
+   }
+  },
+  {
+   "text": "Apply the inverse exceptional Hom bijection to the asserted Hom-action equation. Expand its formula iPush(v) followed by the counit. Counit naturality moves exceptional(theta_K); mateEquiv_counit substitutes the normalized mate; naturality of a inverse moves Q(v); functoriality of P and the inverse Hom-bijection identity finish. No new assumption or admitted intermediate statement is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Weil structures: comparison of supported triangles and right-adjoint mate; returned step 20"
+   }
+  },
+  {
+   "text": "Install the specified shift structures and exact adjunction instances. Apply the proved source-library NatTrans.CommShift.mateEquiv to d inverse and rewrite using S.a_mate to obtain shift compatibility of a. Apply it again to a inverse to obtain shift compatibility of b. For coefficient change, apply the inverse target exceptional Hom bijection and precompose with sI. The target counit naturality, the given counit comparison, the mate counit equations, sP naturality, the given closed square conjugated by a inverse, and a-prime inverse naturality identify both transposes. Injectivity proves the universal coefficient square, valid for identity and composite comparisons as well.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Weil structures: comparison of supported triangles and right-adjoint mate; returned step 20"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-automorphism-constructible-stage-equivalence",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sf-fixed-pair-adjunction-lift",
+  "def-weil-triangulated-category",
+  "def-weil-weil-sheaf-complex",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Final Weil-structures paragraph; implemented with the proved source-library IsoAlgebra mate/lift, shift-mate lemma, Mathlib TR3, and explicit Hom-bijection calculations (Y7)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius equivariant lift right adjoint closed support localization triangle Weil complexes adjunction mate",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derivedε_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_2$ in category $\\\\mathcal{C}_2$, the composition of $G'$ applied to $\\\\beta_{X_2}$ with the derived counit $\\\\varepsilon'$ evaluated at $L_2(X_2)$ equals the composition of $\\\\alpha_{F(X\"}\n  {\"name\": \"CategoryTheory.Adjunction.Localization.ε\", \"module\": \"Mathlib/CategoryTheory/Localization/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"The counit $\\\\varepsilon$ of the adjunction, defined as a natural transformation $\\\\mathrm{id}_{\\\\mathcal{D}_1} \\\\Rightarrow G' \\\\circ F'$, constructed via the lifting condition for the localization functo\"}\n  {\"name\": \"CategoryTheory.Adjunction.Localization.ε_app\", \"module\": \"Mathlib/CategoryTheory/Localization/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_1$ in category $\\\\mathcal{C}_1$, the component of the counit $\\\\varepsilon$ of the localization adjunction at $L_1(X_1)$ is equal to the composition of three morphisms: (1) the action \"}\n  {\"name\": \"CategoryTheory.Adjunction.Localization.η\", \"module\": \"Mathlib/CategoryTheory/Localization/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"The natural transformation $\\\\eta: F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{D_2}$ constructed from the counit of the adjunction $\\\\epsilon: F \\\\circ G \\\\Rightarrow \\\\text{id}_{D_1}$ via whiskering with the local\"}\n  {\"name\": \"CategoryTheory.Adjunction.localization\", \"module\": \"Mathlib/CategoryTheory/Localization/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$, and localization functors $L_1: \\\\mathcal{C}_1 \\\\to \\\\mathcal{D}_1$, $L_2: \\\\mathcal{C}_2 \\\\to\"}\n  {\"name\": \"CategoryTheory.Adjunction.Localization.η_app\", \"module\": \"Mathlib/CategoryTheory/Localization/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"The component of the unit natural transformation $\\\\eta: F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{D_2}$ at an object $X_2 \\\\in C_2$ is given by the composition $G'(\\\\text{inv}(\\\\text{CatCommSq.iso}_{F,L_2})) \\\\c\"}\n  {\"name\": \"CategoryTheory.Adjunction.localization_counit_app\", \"module\": \"Mathlib/CategoryTheory/Localization/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$, and localization functors $L_1: \\\\mathcal{C}_1 \\\\to \\\\mathcal{D}_1$, $L_2: \\\\mathcal{C}_2 \\\\to\"}\n  {\"name\": \"CategoryTheory.Adjunction.isTriangulated_rightAdjoint\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"If $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is a triangulated functor between pretriangulated categories (commuting with integer-parameterized shifts, preserving preadditive structure, and respecting zero \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Equivalence",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"CategoryTheory.Equivalence.toAdjunction\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) : e.functor ⊣ e.inverse\", \"doc\": \"The adjunction given by an equivalence of categories. (To obtain the opposite adjunction,\\nsimply use `e.symm.toAdjunction`.)\"}\n  {\"name\": \"CategoryTheory.Equivalence.toAdjunction'\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) : e.inverse ⊣ e.functor\", \"doc\": \"`toAdjunction'` is the dual of `ToAdjunction`, which we need for `to_dual`.\\nPlease avoid using this directly.\"}\n  {\"name\": \"CategoryTheory.Equivalence.trans_toAdjunction\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) {E : Type u_1} [CategoryTheory.Category.{v_1, u_1} E] (e' : D ≌ E) : (e.trans e').toAdjunction = e.toAdjunction.comp e'.toAdjunction\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.toEquivalence\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)] [∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)] : C ≌ D\", \"doc\": \"If the unit and counit of a given adjunction are (pointwise) isomorphisms, then we can upgrade the\\nadjunction to an equivalence.\"}\n  {\"name\": \"CategoryTheory.Equivalence.transportSheafificationAdjunction\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (K : CategoryTheory.GrothendieckTopology D) (e : C ≌ D) (A : Type u₃) [CategoryTheory.Category.{v₃, u₃} A] [CategoryTheory.Functor.IsDenseSubsite K J e.i\", \"doc\": \"Transporting and sheafifying is left adjoint to taking the underlying presheaf.\"}\n  {\"name\": \"CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv\", \"module\": \"Mathlib.CategoryTheory.Endofunctor.Algebra\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {F G : CategoryTheory.Functor C C} (adj : F ⊣ G) : CategoryTheory.Endofunctor.Algebra F ≌ CategoryTheory.Endofunctor.Coalgebra G\", \"doc\": \"If `F` is left adjoint to `G`, then the category of algebras over `F` is equivalent to the\\ncategory of coalgebras over `G`.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "(Weil|Frobenius).*(recollement|adjunction)|recollement.*equivar",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"line\": \"51\", \"text\": \"/-- The Frobenius morphism for an adjunction `L ⊣ F` at `A` is given by the morphism\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil structure exceptional closed right adjoint unique supported triangle Frobenius comparison counit mate",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Unique\", \"type\": \"{F : C ⥤ D} {G G' : D ⥤ C} (adj1 : F ⊣ G) (adj2 : F ⊣ G') (x : D) :\\n  F.map ((rightAdjointUniq adj1 adj2).hom.app x) ≫ adj2.counit.app x = adj1.counit.app x\", \"doc\": \"Given functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and right adjoints $ G, G' : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ to $ F $, the canonical isomorphism $ G \\\\cong G' $ satisfies $ F(\\\\phi_x) \\\\circ \\\\epsilon'_x\"}\n  {\"name\": \"CategoryTheory.frobeniusMorphism_mate\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Functor\", \"type\": \"(h : L ⊣ F) (A : C) :\\n  conjugateEquiv (h.comp (ihom.adjunction A)) ((ihom.adjunction (F.obj A)).comp h) (frobeniusMorphism F h A).natTrans =\\n    (expComparison F A).natTrans\", \"doc\": \"Let $\\\\mathcal{C}$ and $\\\\mathcal{D}$ be monoidal closed categories, and let $L: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ and $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ be a pair of adjoint functors, with $L$ being the left \"}\n  {\"name\": \"CategoryTheory.Adjunction.rightAdjointUniq_hom_counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Unique\", \"type\": \"{F : C ⥤ D} {G G' : D ⥤ C} (adj1 : F ⊣ G) (adj2 : F ⊣ G') :\\n  whiskerRight (rightAdjointUniq adj1 adj2).hom F ≫ adj2.counit = adj1.counit\", \"doc\": \"Given functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and right adjoints $ G, G' : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ to $ F $, the composition of the whiskered natural isomorphism $ G \\\\cong G' $ (applied to \"}\n  {\"name\": \"CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Unique\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G G' : CategoryTheory.Functor D C}\\n  (adj1 : F ⊣ G) (adj2 : F ⊣ G') (x : D) {Z : D} (h : x ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (F.m\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and two right adjoints $G, G' : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ to $F$, the canonical isomorphism $G \\\\cong G\"}\n  {\"name\": \"CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Unique\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G G' : CategoryTheory.Functor D C}\\n  (adj1 : F ⊣ G) (adj2 : F ⊣ G') {Z : CategoryTheory.Functor D D} (h : CategoryTheory.Functor.id D ⟶ Z)\", \"doc\": \"Given a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and two right adjoints $ G, G' : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ to $ F $, there exists a canonical isomorphism $ G \\\\cong G' $ constructed via the con\"}\n  {\"name\": \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux\", \"module\": \"Mathlib.CategoryTheory.Monad.Comonadicity\", \"type\": \"[∀ A : adj.toComonad.Coalgebra, HasEqualizer (G.map A.a) (adj.unit.app (G.obj A.A))] (A : adj.toComonad.Coalgebra) :\\n  ((comparisonAdjunction adj).counit.app A).f =\\n    (adj.homEquiv _ A.A).symm (equalizer.ι (G.map A.a) (adj.unit.app (G.obj A.A)))\", \"doc\": \"For adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, the counit component at a $ GF $-coalgebra $ A $ is given by applying the inverse of the adjunction's \"}\n  {\"name\": \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit\", \"module\": \"Mathlib.CategoryTheory.Monad.Comonadicity\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Category.{v₁, u₂} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G)\\n  [inst_2 : ∀ (A : adj.toComonad.Coalgebra), CategoryTheory.Limits.HasEqualizer (G.map A.a) (adj.u\", \"doc\": \"Given adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, if every $ GF $-coalgebra admits an equalizer of $ G(A.\\\\alpha) $ and the unit $ \\\\eta_{G(A)} $, then \"}\n  {\"name\": \"CategoryTheory.Comonad.ComonadicityInternal.rightAdjointComparison\", \"module\": \"Mathlib.CategoryTheory.Monad.Comonadicity\", \"type\": \"[∀ A : adj.toComonad.Coalgebra, HasEqualizer (G.map A.a) (adj.unit.app (G.obj A.A))] : adj.toComonad.Coalgebra ⥤ C\", \"doc\": \"Given adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, this constructs the right adjoint to the comparison functor from the Eilenberg-Moore category of $ G\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant recollement supported triangle lifts exceptional inverse image with equivariant connecting morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5\", \"doc\": \"Given a functor $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between pretriangulated categories commuting with integer shifts, if $ T_1, T_2 $ are triangles in $ \\\\mathcal{D} $ belonging to the essential image \"}\n  {\"name\": \"CategoryTheory.Triangulated.TStructure.triangle_map_exists\", \"module\": \"Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] [inst_3 : CategoryTheory.HasShift C ℤ]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [inst_5 : CategoryTheory.Pretriangulated C]\\n  \", \"doc\": \"In a triangulated category equipped with a t-structure, given two distinguished triangles $ T $ and $ T' $, if $ T $'s first object satisfies the $ \\\\leq $-condition with respect to shift $ a $, $ T' $\"}\n  {\"name\": \"CategoryTheory.Functor.distTriang_iff\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5\", \"doc\": \"For any triangle $ T $ in the category $ \\\\mathcal{D} $, $ T $ is a distinguished triangle in $ \\\\mathcal{D} $ if and only if $ T $ is in the essential image of the functor $ L $ applied to the distingu\"}\n  {\"name\": \"CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Functor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasShift C ℤ]\\n  [inst_3 : CategoryTheory.HasShift D ℤ] (F : CategoryTheory.Functor C D) [inst_4 : F.CommShift ℤ]\\n  [inst_5 : CategoryTheory.Limits.\", \"doc\": \"Let $\\\\mathcal{C}$ and $\\\\mathcal{D}$ be pretriangulated categories, and let $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ be a triangulated functor that is essentially surjective on arrows. For any distinguished t\"}\n  {\"name\": \"CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5\", \"doc\": \"Given two distinguished triangles $T_1$ and $T_2$ in a triangulated category $\\\\mathcal{D}$ that lie in the essential image of a shift-commuting functor $L$, and morphisms $a: T_1.X_1 \\\\to T_2.X_1$ and \"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.mk''\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"An adjunction between functors $ F: C \\\\to D $ and $ G: D \\\\to C $ where both functors commute with the integer-parameterized shift operations in their respective pretriangulated categories $ C $ and $ \"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.mk'\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"An adjunction between functors $ F: C \\to D $ and $ G: D \\to C $ where both functors commute with the integer-parameterized shift operations in their respective pretriangulated categories $ C $ and $ D \"}\n  {\"name\": \"CategoryTheory.Adjunction.isTriangulated_leftAdjoint\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"In an adjunction between pretriangulated categories, if the right adjoint is a triangulated functor (i.e., commutes with the integer-parameterized shift operation, preserves the preadditive structure,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift an adjunction along Frobenius autoequivalences to categories of fixed pairs using a mate natural isomorphism",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.frobeniusMorphism_mate",
+     "CategoryTheory.frobeniusMorphism",
+     "CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso",
+     "CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso",
+     "CategoryTheory.tensorLeftAdjunction",
+     "CategoryTheory.tensorRightAdjunction",
+     "CategoryTheory.expComparison",
+     "CategoryTheory.coev_expComparison"
+    ],
+    "note": "",
+    "digest": "63efd80d96f5c200"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the complete supported Weil assertion; only general mate, adjunction, monoidal Frobenius reciprocity or algebra/coalgebra facts"
+  },
+  {
+   "tool": "grep",
+   "query": "mapOfNatIsoAdjunction|mate.*[Ii]so|[Ii]so.*mate",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+     "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+     "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean"
+    ],
+    "note": "",
+    "digest": "ea2fad2d4f991353"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the complete supported Weil assertion; only general mate, adjunction, monoidal Frobenius reciprocity or algebra/coalgebra facts"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatIso",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": "loogle: unknown identifier 'CategoryTheory.NatIso'",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "invalid query: unknown identifier CategoryTheory.NatIso; corrected by subsequent CategoryTheory.mateEquiv query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adjunction lifts to equivariant objects for commuting autoequivalences using mate isomorphisms",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Bicategory.mateEquiv_apply",
+     "CategoryTheory.Bicategory.mateEquiv",
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.LiftRightAdjoint.constructRightAdjointEquiv",
+     "CategoryTheory.mateEquiv_apply",
+     "CategoryTheory.Adjunction.toEquivalence",
+     "CategoryTheory.ParametrizedAdjunction.liftStructEquiv",
+     "CategoryTheory.Bicategory.mateEquiv_apply'"
+    ],
+    "note": "",
+    "digest": "acb541762fe5858d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the complete supported Weil assertion; only general mate, adjunction, monoidal Frobenius reciprocity or algebra/coalgebra facts"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|mapOfNatIso|equivariant",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the complete supported Weil assertion; only general mate, adjunction, monoidal Frobenius reciprocity or algebra/coalgebra facts"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.mateEquiv_counit_symm",
+     "CategoryTheory.unit_mateEquiv",
+     "CategoryTheory.unit_mateEquiv_symm",
+     "CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_vcomp"
+    ],
+    "note": "",
+    "digest": "b8ac30fd6644aa85"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the complete supported Weil assertion; only general mate, adjunction, monoidal Frobenius reciprocity or algebra/coalgebra facts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction between categories of objects with an isomorphism from an endofunctor, compatible units and counits",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.unitAsIsoOfIso",
+     "CategoryTheory.Endofunctor.Adjunction.AlgCoalgEquiv.unitIso",
+     "CategoryTheory.Adjunction.ofNatIsoLeft",
+     "CategoryTheory.Adjunction.leftAdjointIdIso_hom_app",
+     "CategoryTheory.Adjunction.isIso_unit_of_iso",
+     "CategoryTheory.Adjunction.leftAdjointIdIso",
+     "CategoryTheory.Adjunction.adjToMonadIso",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit"
+    ],
+    "note": "",
+    "digest": "323715e181f8d244"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the complete supported Weil assertion; only general mate, adjunction, monoidal Frobenius reciprocity or algebra/coalgebra facts"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-localization-all-stages",
+  "date": "2026-10-22",
+  "group": "Q35"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Weil structures: comparison of supported triangles and right-adjoint mate; returned step 20",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-supported-weil-mate-lift",
+  "worker": "stage1",
+  "summary": "O3 expanded the supported-triangle Weil argument using existing mate, automorphism and fixed-pair nodes. No new nodes. Corrected missing exact-adjunction and coefficient-normalization hypotheses; report gives counterexample and citer audit. Triangles remain underlying triangles.",
+  "blueprint": "Final Weil-structures paragraph of prop-sf-localization-all-stages.proof.md: mate normalization, lift, connecting arrow, units and counits.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-mate-iso-along-equivalences",
+    "why": "General invertibility criterion applied to Frobenius equivalences; no exceptional-existence theorem is invoked."
+   },
+   {
+    "node": "lem-sf-fixed-pair-adjunction-lift",
+    "why": "General lift of a given adjunction to fixed pairs, supplying equivariant unit and counit without a triangulation of pairs."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-fixed-pair-adjunction-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O3-818916c6f",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-818916c6f (reviewer sub-agent of L); spot-checked: Read in full: the item and its 7 steps, the statements of every cited node, the citer prop-sf-localization-all-stages, and the final 'Weil structures' paragraph of main-20261015 prop-sf-localization-all-stages.proof.md. No new nodes. The worker's added exactness hypothesis is right: I checked the counterexample on Spec F_{q^2} (semisimple D^b_c, unit/counit twisted by t=2^n at one point; the mate breaks shift compatibility). The citer supplies the new hypotheses from its exact linear adjunctions and shift equations (steps 3-4), and no target is weakened. One fault remained (E1/E2): i^*⊣i_* could still be any adjunction, while steps 1, 3 and 5 need a to be the mate of d^{-1} for that adjunction. Counterexample: i=id, U empty, i^*⊣i_* twisted by λ on one point (constant in degree, so still exact). Then i^* of the triangle isomorphism gives λθ_K, not θ_JK. FIX: the statement now says a is the right-adjoint mate of d^{-1} for the given i^*⊣i_*, and def-weil-pbc-adjunction-mate is added to stmt_deps; the citer supplies this through lem-sf-open-closed-weil-mate-structures (canonical c). Steps 1 and 3 now take the identification from this hypothesis. Step 7 ('transports') is written out: exactness means mate(s^{i_*})=(s^J)^{-1}; a commutes with shifts by pasting clause 1 from the shift-coherent d; then pasting gives s^J J(s^P) b_{K[1]} = b_K[1] s^Q Q(s^J). Checks: the mate formula and transpose; the fixed-pair lift orientation (e=a, b=mate); TR3 with φ=θ_B by injectivity of precomposition with P(u_K) (j^*u_K is the inverse of the open counit); steps 5-6 by hand; edge cases Z or U empty, i=id, zero complex. Tool uses accepted: lem-weil-mate-iso-along-equivalences and lem-sf-fixed-pair-adjunction-lift. Batch 5: lem-trf-adjoint-composition-coherence is a generic Mathlib-leaf adjunction coherence and def-pod-integral-completed-comparison-data is a general definition; neither is part of the trace formula or Poincare duality, so both are accepted. No SGA. Maintainer note: 'given coefficient comparisons' are not introduced in the statement (already so on the base); the citer does not use that clause.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.SupportedWeilMateLift",
+  "declaration": "WeilConjectures.sf_supportedWeilMateLift",
+  "declarations": [
+   "WeilConjectures.SfSupportedWeilInput",
+   "WeilConjectures.sfSupportedWeilMate",
+   "WeilConjectures.sfSupportedWeilTriangle",
+   "WeilConjectures.SfSupportedWeilConclusion",
+   "WeilConjectures.sf_supportedWeilMate_coefficient",
+   "WeilConjectures.sf_supportedWeilMateLift"
+  ],
+  "file": "lean/Sheaf/SixFunctors/SupportedWeilMateLift.lean",
+  "statement": "theorem sf_supportedWeilMateLift (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] {X₀ Z₀ U₀ : Over (Spec (.of D.k₀))} [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] [LocallyOfFiniteType Z₀.hom] [QuasiCompact Z₀.hom] [LocallyOfFiniteType U₀.hom] [QuasiCompact U₀.hom] (i₀ : Z₀ ⟶ X₀) (j₀ : U₀ ⟶ X₀) [IsClosedImmersion i₀.left] [IsOpenImmersion j₀.left] (_complement : Set.range j₀.left = (Set.range i₀.left)ᶜ) : (∀ S : SfSupportedWeilInput (fieldWeilPull D l hl E i₀) (fieldWeilPull D l hl E j₀) (sfWeilFrobeniusPullback D l hl X₀ E) (sfWeilFrobeniusPullback D l hl Z₀ E) (sfWeilFrobeniusPullback D l hl U₀ E) (fieldWeilPullSquare D l hl E i₀) (fieldWeilPullSquare D l hl E j₀), SfSupportedWeilConclusion S) ∧ (∀ S : SfSupportedWeilInput (zlPull D l hl Ω i₀) (zlPull D l hl Ω j₀) (sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω) (sfCommonStageWeilFrobeniusPullback D l hl Z₀ Ω) (sfCommonStageWeilFrobeniusPullback D l hl U₀ Ω) (zlFrobeniusSquare D l hl Ω i₀) (zlFrobeniusSquare D l hl Ω j₀), SfSupportedWeilConclusion S)",
+  "branch": "sheaf-dag",
+  "by": "Q131",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The owning records spell out the conditional supported-triangle hypotheses and every lift conclusion. The coefficient theorem is the same node’s universal comparison clause. Canonical rational/common-stage pullbacks and Frobenius squares are fixed to the published constructions. No statement correction or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-012d68bb4",
+  "group": "Q131",
+  "result": "pass",
+  "note": "Read item, 7 steps, source place (prop-sf-localization-all-stages final Weil paragraph), all stmt_deps and the used declarations (sfWeilFrobeniusPullback, zlPull/zlFrobeniusSquare, fieldWeilPull/fieldWeilPullSquare, mateEquiv, IsoAlgebra.mapOfNatIso(+Adjunction), Adjunction.IsTriangulated). All hypotheses render: exact adjunctions (IsTriangulated includes functor exactness), invertible counits, j*i*=0, unique supported triangles, d/dj canonical, a_mate orientation checked, r pinned by openUnit. Conclusion: unique counit-normalized b = mate of a^-1 with three-factor formula, CommShift, lifted adjunction with original unit/counit, Hom-bijection equivariance (matches step 6), unique triangle iso with theta_A/theta_B and i^* recovery (non-vacuous), functoriality and naturality. Coefficient theorem verified true by hand from _counit/_closed. Two sorries (theorems only), docstrings with source/blueprint and proof plan, no line >100 chars, statement verbatim, no name clash, new stmt_deps are landed def nodes. Not recompiled (2026-10-21 rule). Advisories: fieldWeilPull owner def-zl-field-weil-shriek-shift-data not in stmt_deps (no cycle found in side-live); shift structures are inputs, with dShift dischargeable via lem-sf-automorphism-constructible-stage-equivalence; second reading done by the same worker, as it states."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261025T164911-L-1124009",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

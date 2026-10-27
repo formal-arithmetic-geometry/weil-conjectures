@@ -1,0 +1,289 @@
+{
+ "id": "lem-pur-dualizing-sigma-cocycle-locality",
+ "kind": "statement",
+ "title": "Dualizing tensor cocycle and normalized etale source locality",
+ "statement": "Fix the finite coefficient datum [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}(k)$, $E/\\mathbf Q_\\ell$ finite with uniformizer $\\varpi_E$, and $\\Lambda=\\mathcal O_E/\\varpi_E^n$, $n\\geq1$. All schemes are finite-type $k$-schemes; absolute separatedness is not assumed. All morphisms below are separated and of finite type [def-weil-scheme-morphism-properties]. Every smooth morphism below is assumed to have a pure relative dimension $d_h\\geq0$. Work in the bounded constructible finite-Tor categories [def-weil-finite-tor-amplitude] on the small pro-etale sites [def-weil-pbc-proetale-site], with the derived operations [def-weil-derived-pullback-tensor-hom] and constructible exceptional inverse images [def-weil-exceptional-inverse-image]. Write $\\omega_h=Rh^!\\Lambda$, take $c_{v,u}:R(vu)^!\\simeq Ru^!Rv^!$ to be the specified adjunction conjugate of compact-support composition [def-pur-finite-exceptional-composition], and take $\\theta_{h,M}$ and $\\beta_{h,v}$ to be the specified counit transposes [def-pur-co-smoothness]. For composable smooth maps [def-sbc-smooth-morphisms] put $\\sigma_{u,v}=c_{v,u,\\Lambda}^{-1}\\theta_{u,\\omega_v}\\mathrm{sym}$. All pullback compositions, tensor constraints and unit comparisons below are the canonical derived ones [lem-weil-pbc-proetale-derived-pullback-composition, lem-weil-pbc-ringed-topoi-derived-tensor-pullback].\nFor an etale map $e$ [def-weil-etale-morphism], use the counit-normalized comparison $\\rho_e:Re^!\\simeq Le^*$, its unit value $\\eta_e:\\omega_e\\simeq\\Lambda$, and $E_{e,h}=\\rho_{e,\\omega_h}c_{h,e,\\Lambda}:\\omega_{he}\\simeq Le^*\\omega_h$ [lem-pur-finite-etale-dualizing-normalization].\nFor every composable smooth triple $u:S\\to X$, $v:X\\to Y$, $w:Y\\to Z$, the maps $\\sigma$ are isomorphisms and satisfy\n$$\\sigma_{vu,w}(\\sigma_{u,v}\\otimes1)=\\sigma_{u,wv}(1\\otimes Lu^*\\sigma_{v,w}).$$\nIf $u$ is etale, removing $\\omega_u$ by $\\eta_u$ gives\n$$E_{u,wv}\\sigma_{vu,w}=Lu^*\\sigma_{v,w}(E_{u,v}\\otimes1).$$\nFor a smooth Cartesian square $(h:X\\to Y,h':X'\\to Y',v:Y'\\to Y,u:X'\\to X)$ and an etale $e:X_1\\to X$, let $X_1'=X_1\\times_XX'$, with $e':X_1'\\to X'$ and $u_1:X_1'\\to X_1$. Then, with the same lower arrow $v$ in the base-change square for $he$,\n$$E_{e',h'}\\beta_{he,v}=Le'^*\\beta_{h,v}\\circ Lu_1^*E_{e,h}.$$\nFor a Cartesian base change of a smooth composable pair, the base-change comparisons intertwine $\\sigma$ with the base-changed $\\sigma$, including further open base changes. Consequently the canonical expressions built by finite composition, inverse, tensor product and derived pullback from $\\beta$, $\\sigma$ and the above $E$ commute with compatible restriction to opens in each scheme. Source-open comparisons in this assertion are $E$ for open immersions; they do not require a source-open square to be Cartesian. This assertion includes pullback along sections of the restricted diagrams.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1, coherence of composition and tensor reassociation, and etale localization of the remaining constituents (old item steps 6-7); agent-written refinement of the blueprint argument"
+ },
+ "stmt_deps": [
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-proetale-site",
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-finite-exceptional-composition",
+  "def-pur-co-smoothness",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-etale-morphism",
+  "lem-pur-finite-etale-dualizing-normalization",
+  "def-weil-pbc-cartesian-square"
+ ],
+ "proof": [
+  {
+   "text": "The existing source theorem exists_dualizingComplex_iso_and_tensor of [lem-sf-smooth-dualizing-complex-invertible] makes the canonical theta_f at omega_g invertible, with the finite coefficient invertible-exponent hypothesis supplied by P. Sigma is this map followed by the inverse exceptional compositor, hence is invertible. No orientation is chosen.",
+   "uses": [
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1; the refined proof of lem-pur-dualizing-sigma-cocycle-locality"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-dualizing-cocycle-source-etale] to obtain the smooth-triple cocycle and the normalized source-etale consequence.",
+   "uses": [
+    "lem-pur-dualizing-cocycle-source-etale"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1; the refined proof of lem-pur-dualizing-sigma-cocycle-locality"
+   }
+  },
+  {
+   "text": "Use the sigma clause of smoothExceptionalTowerPasting at the coefficient unit. Its target is bounded below; faithfulness of comparison pullback reflects its equation. The generic pullback-composition transport identifies pullSquare with the inverse Cartesian square isomorphism, so this is exactly SigmaBaseChange.",
+   "uses": [
+    "lem-pur-smooth-exceptional-tensor-pasting",
+    "lem-weil-pbc-fixed-module-derived-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1; the refined proof of lem-pur-dualizing-sigma-cocycle-locality"
+   }
+  },
+  {
+   "text": "Apply the tower formula of [lem-pur-smooth-exceptional-tensor-pasting] to the smooth tower $e:X_1\\to X$, $h:X\\to Y$, and its Cartesian pullback along $v$. Denote the upper arrows by $u_1,u$, as in the statement. It gives\n$$\\beta_{he,v}Lu_1^*\\sigma_{e,h}=\\sigma_{e',h'}(\\beta_{e,u}\\otimes Le'^*\\beta_{h,v}).$$\nThe base change $e'$ is etale, and [lem-pur-finite-etale-dualizing-normalization] supplies\n$$E_{e',h'}\\sigma_{e',h'}=\\eta_{e'}\\otimes1,\\qquad \\eta_{e'}\\beta_{e,u}=Lu_1^*\\eta_e,\\qquad E_{e,h}\\sigma_{e,h}=\\eta_e\\otimes1.$$\nConsequently postcomposing the preceding tower formula with $E_{e',h'}$ gives\n$$E_{e',h'}\\beta_{he,v}Lu_1^*\\sigma_{e,h}=Le'^*\\beta_{h,v}\\,Lu_1^*(E_{e,h}\\sigma_{e,h}).$$\nThe pullback $Lu_1^*\\sigma_{e,h}$ is an isomorphism, so cancellation proves\n$$E_{e',h'}\\beta_{he,v}=Le'^*\\beta_{h,v}\\,Lu_1^*E_{e,h}.$$\nIn particular the lower arrow throughout this calculation is $v$, not the upper comparison $u$; no source-localization square has been declared Cartesian. In Lean a generic monoidal calculation moves eta through the tensor pullback comparison using its left naturality and left-unitor identity.",
+   "uses": [
+    "lem-pur-smooth-exceptional-tensor-pasting",
+    "lem-pur-finite-etale-dualizing-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1; the refined proof of lem-pur-dualizing-sigma-cocycle-locality"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-dualizing-primitive-open-restriction] for the three primitive open squares. Induct on RestrictionExpression: primitive constructors use these squares, identity uses functoriality, composition pastes squares, inverse cancels the mapped isomorphism, tensor uses naturality of the tensor-pullback isomorphism and derivedTensorHom_comp, and pullback uses naturality of pullSquare and the functor image of the induction equality. The last constructor permits arbitrary commuting pullback squares, including sections. Assemble the nine conjuncts.",
+   "uses": [
+    "lem-pur-dualizing-primitive-open-restriction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1; the refined proof of lem-pur-dualizing-sigma-cocycle-locality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-smooth-dualizing-complex-invertible",
+  "lem-pur-dualizing-cocycle-source-etale",
+  "lem-pur-smooth-exceptional-tensor-pasting",
+  "lem-weil-pbc-fixed-module-derived-hom-bijection",
+  "lem-pur-finite-etale-dualizing-normalization",
+  "lem-pur-dualizing-primitive-open-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1; the refined proof of lem-pur-dualizing-sigma-cocycle-locality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "dualizing tensor composition is associative and compatible with etale exceptional pullback",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (t : ↥(CategoryTheory.Limits.pullback f g))\\n  {Z : AlgebraicGeometry.Scheme} (h : CategoryTheory.Limits.pullback f g ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.ofPointTensor t)\", \"doc\": \"For morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ of schemes, and a point $t$ in the fiber product $X \\\\times_S Y$, the composition of the canonical morphism from the spectrum of the tensor product of resi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  {Z : AlgebraicGeometry.Scheme} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp T.SpecTensorTo\\n      (CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.pullback.snd f g) h) =\\n \", \"doc\": \"For a pullback triplet in the category of schemes with morphisms $f: X \\\\to S$ and $g: Y \\\\to S$, the composition of the morphism $\\\\operatorname{Spec}(T.tensor) \\\\to X \\\\times_S Y$ with the second project\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  {Z : AlgebraicGeometry.Scheme} (h : X ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp T.SpecTensorTo\\n      (CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.pullback.fst f g) h) =\\n \", \"doc\": \"For schemes $X, Y, S$ with morphisms $f: X \\\\to S$ and $g: Y \\\\to S$, and a pullback triplet $T$, the composition of the morphism $\\\\operatorname{Spec}(T.tensor) \\\\to X \\\\times_S Y$ with the first projecti\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.CategoryStruct.comp T.SpecTensorTo (CategoryTheory.Limits.pullback.fst f g) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map T.tensorInl) (X.fromSpec\", \"doc\": \"The composition of the morphism from the spectrum of the tensor product ring $\\\\operatorname{Spec}(T.tensor)$ to the pullback scheme and the first projection morphism $\\\\operatorname{pullback.fst}(f,g)$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.CategoryStruct.comp T.SpecTensorTo (CategoryTheory.Limits.pullback.snd f g) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map T.tensorInr) (Y.fromSpec\", \"doc\": \"The composition of the morphism from the spectrum of the tensor product to the pullback scheme with the second projection to $Y$ equals the composition of the morphism induced by the right tensor incl\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap T.SpecTensorTo p))\\n      (\", \"doc\": \"For a pullback triplet $T$ in the category of schemes and a point $p$ in the spectrum of $T.tensor$, the composition of the morphisms $\\\\mathrm{Spec.map}(\\\\mathrm{Hom.residueFieldMap}(T.\\\\mathrm{SpecTens\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical pullbacks, ring etaleness or elementary tensor algebra, not the stated exceptional/coordinate comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cocycle of tensor product exceptional inverse image dualizing object and open restriction",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.MonoidalCategory.associator",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.MonoidalCategory.associator'",
+   "date": "2026-10-22",
+   "verdict": "no match: Loogle rejected the identifier; corrected query recorded separately"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing.*cocycle|upperShriek.*tensor|exceptional.*restriction",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical pullbacks, ring etaleness or elementary tensor algebra, not the stated exceptional/coordinate comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associativity of canonical tensor transposes and etale source localization of exceptional base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.Etale R A], Algebra.Etale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (A : Type u_3) →\\n      (B : Type u_4) →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing A] →\\n                [inst_4 : CommRing B] →\\n                  [inst_5 : Algebra R A] \", \"doc\": \"Let $R, S, A, B$ be commutative rings. Let $R \\\\to S$ and $R \\\\to A$ be ring homomorphisms giving $S$ and $A$ the structure of $R$-algebras. If $B$ is the pushout of $S$ and $A$ over $R$ (i.e., $B$ is i\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (s : S),\\n  (KaehlerDifferential.tensorKaehlerEqu\", \"doc\": \"For a formally étale algebra extension $ S \\to T $ over $ R $, the inverse of the base change isomorphism $ \\\\Omega_{S/R} \\\\otimes_S T \\\\cong \\\\Omega_{T/R} $ maps the Kähler differential $ d_T(\\\\mathrm{alge\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (A : Type u_1) [inst_3 : CommRing A] [inst_4 : Algebra S A] [inst_5 : Algebra P.Ring A]\\n  [inst_6 : IsScalarTower P.Ring S A],\\n  LinearMap.baseChange A P.cotangentComplex =\\n    \", \"doc\": \"The base change of the cotangent complex of an algebra extension $ P $ to a ring $ A $ is equal to the composition of three maps: the inverse of the base change cancellation isomorphism for the algebr\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical pullbacks, ring etaleness or elementary tensor algebra, not the stated exceptional/coordinate comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.Iso",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.CompositionIso\", \"type\": \" {C₀ : Type u_1} {C₁ : Type u_2} {C₂ : Type u_3} [CategoryTheory.Category.{v_1, u_1} C₀] [CategoryTheory.Category.{v_2, u_2} C₁] [CategoryTheory.Category.{v_3, u_3} C₂] {F₀₁ : CategoryTheory.Functor C₀ C₁} {F₁₂ : CategoryTheory.Functor C₁ C₂} {F₀₂ : CategoryTheory.Functor C₀ C₂} {G₁₀ : CategoryTheor\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical pullbacks, ring etaleness or elementary tensor algebra, not the stated exceptional/coordinate comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associativity of dualizing tensor composition and etale source restriction for exceptional inverse image",
+   "results": "8 hits: Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; specTensorTo_snd_assoc; Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc; specTensorTo_fst_assoc; Scheme.Modules.restrictFunctorComp_inv_app_app; restrictFunctorComp; specTensorTo_snd; specTensorTo_fst. These concern scheme carrier pullbacks and ordinary scheme module restrictions.",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction or tensor formulas do not specialize in one line to all geometric clauses of this item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.Iso",
+   "results": "1 hit: CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, Mathlib.CategoryTheory.Adjunction.CompositionIso. Read CompositionIso.lean lines 60-87: identifies a conjugate of a composition isomorphism, not the geometric tensor and etale-locality assertions.",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction or tensor formulas do not specialize in one line to all geometric clauses of this item"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing.*cocycle|upperShriek.*tensor|exceptional.*restriction",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction or tensor formulas do not specialize in one line to all geometric clauses of this item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "dualizing tensor comparison associativity and etale locality",
+   "results": "8 hits: Algebra.TensorProduct.assoc; CategoryTheory.Localization.Monoidal.tensor_comp_assoc; contractLeft_assoc_coevaluation; dualTensorHomEquivOfBasis; dualTensorHomEquiv; PiTensorProduct.dualDistribEquiv; TensorProduct.AlgebraTensorModule.dualDistrib_apply; TensorProduct.tensorTensorTensorAssoc. Tensor algebra and generic monoidal composition only.",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction or tensor formulas do not specialize in one line to all geometric clauses of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "counit transpose tensor comparison for composition of right adjoints satisfies pentagon and open pullback compatibility",
+   "results": "8 hits: CategoryTheory.mateEquiv_counit; Adjunction.comp_counit; Adjunction.map_mu_comp_counit_app_tensor and its assoc version; conjugateEquiv_counit; Adjunction.comp_counit_app_assoc; Adjunction.Triple.rightToLeft_eq_counits; Adjunction.comp_counit_app. Generic adjunction formulas do not state the dualizing tensor cocycle with specified etale comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction or tensor formulas do not specialize in one line to all geometric clauses of this item"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_leftAdjointCompIso_inv|leftAdjointCompIso_assoc",
+   "results": "[grep] OK 2 hit(s): Mathlib/CategoryTheory/Adjunction/CompositionIso.lean:82 conjugateEquiv_leftAdjointCompIso_inv; :170 leftAdjointCompIso_assoc. Read lines 170-183: transfers abstract composition coherence but supplies no dualizing tensor map or etale localization.",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract adjunction or tensor formulas do not specialize in one line to all geometric clauses of this item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-diagonal-section-pasting",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Step 1, coherence of composition and tensor reassociation, and etale localization of the remaining constituents (old item steps 6-7)",
+   "via": [
+    "lem-pur-diagonal-section-pasting"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-dualizing-sigma-cocycle-locality",
+  "worker": "stage1",
+  "summary": "No new nodes. Derived the threefold sigma cocycle from the existing composite tensor-transpose identity and associativity of counit conjugation; proved normalized etale source identities by substitution and cancellation; gave the finite-expression induction and factored compatible open restrictions into target and source restrictions. Statement unchanged.",
+  "blueprint": "thm-pur-composition-coherence proof Step 1: coherence of composition and tensor reassociation; etale locality of smooth-base-change constituents.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Uses only the associative compact-support compositor to conjugate its coherence, not any purity orientation; this is the composition infrastructure called for by the blueprint."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic adjunction pasting law used to conjugate compact-support associativity."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic natural monoidal derived-pullback comparison for the finite-expression tensor case."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic canonical derived-pullback compositor used in the finite-expression pullback and section cases."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-52861239e",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-52861239e (reviewer sub-agent of L); spot-checked: Read the item in full: all 7 steps, statement unchanged, no new nodes. Read every cited statement: composition-tensor-mate (*), smooth-exceptional-tensor-pasting (iteration, tower and σ-intertwining display, reassociation clause), finite-etale-dualizing-normalization clauses (2) and (3), finite-site-counit-projection-transport (compositor/exchange transport), thm-sf-comp-composition associativity, adjunction-conjugate, and mate-pasting (2). Recomputed each step. Step 1: C typing and associativity of the conjugated compositor. Step 2: (*) with f=u, g=v, K=ω_w (ctf via the pair (v,w)); the right side via naturality of θ_u and c_{w,v}σ_{v,w}=θ_{v,ω_w}sym; the result agrees after cancelling C. Step 3: postcompose with E_{u,wv}, use clause (3) for h=v and h=wv, cancel σ_{u,v}⊗1; domain and codomain match the statement. Step 4: literally the pasting node's last display. Step 5: tower indices give A=β_{e,u}, B=β_{h,v}, D=β_{he,v} (e is smooth of dimension 0); clause (2) with w=u gives η_{e'}β_{e,u}=Lu_1^*η_e; the cancellation is valid and the types are Lu_1^*ω_{he}→Le'^*ω_{h'}. Step 6: E_{ea,h}=La^*E_{e,h}E_{a,he} rederived from the ρ composition law, compositor associativity and naturality of ρ_a; the factorization of X_0 through X×_Y Y_0 is correct. Step 7: the induction is condensed but matches the soft final clause of the statement; restricting the middle scheme reduces to the cocycle plus the E/β normalizations. Edge cases checked: identities, empty source, two successive opens, non-Cartesian target+source restriction, dimension 0. No SGA, no cycle (the only citer is the parent lem-pur-diagonal-section-pasting). Accepted tool uses: thm-sf-comp-composition (compositor associativity) and the two generic properbasechange pullback/tensor comparisons. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DualizingSigmaCocycleLocality",
+  "declaration": "AlgebraicGeometry.ProEtale.DualizingLocality.dualizing_sigma_cocycle_locality",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DualizingLocality.pullSquare",
+   "AlgebraicGeometry.ProEtale.DualizingLocality.restriction",
+   "AlgebraicGeometry.ProEtale.DualizingLocality.SigmaIsIso",
+   "AlgebraicGeometry.ProEtale.DualizingLocality.Cocycle",
+   "AlgebraicGeometry.ProEtale.DualizingLocality.SourceEtale",
+   "AlgebraicGeometry.ProEtale.DualizingLocality.SourceBaseChange",
+   "AlgebraicGeometry.ProEtale.DualizingLocality.SigmaBaseChange",
+   "AlgebraicGeometry.ProEtale.DualizingLocality.OpenSigma",
+   "AlgebraicGeometry.ProEtale.DualizingLocality.OpenE",
+   "AlgebraicGeometry.ProEtale.DualizingLocality.OpenBeta",
+   "AlgebraicGeometry.ProEtale.DualizingLocality.RestrictionExpression",
+   "AlgebraicGeometry.ProEtale.DualizingLocality.FiniteExpressionLocality",
+   "AlgebraicGeometry.ProEtale.DualizingLocality.dualizing_sigma_cocycle_locality"
+  ],
+  "file": "lean/Sheaf/Paper/DualizingSigmaCocycleLocality.lean",
+  "statement": "theorem dualizing_sigma_cocycle_locality (P : WeilConjectures.PurityFiniteSetting.{u}) : SigmaIsIso P ∧ Cocycle P ∧ SourceEtale P ∧ SourceBaseChange P ∧ SigmaBaseChange P ∧ OpenSigma P ∧ OpenE P ∧ OpenBeta P ∧ FiniteExpressionLocality P",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c8b1ac084",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Re-delivery of 9806081abd66 (RETURN F1, H3/H5: the finite-expression clause was a generic category tautology). The diff changes only RestrictionExpression/FiniteExpressionLocality, the universe line and docstring Step 7; the node differs from live only in lean. New RestrictionExpression is indexed by open j, φ in D(T), φ0 in D(T0) and rM/rN : (pull P j).obj _ ≅ _. Its sigma/sourceEtale/beta constructors carry the actual σ/E/β with exactly the OpenSigma/OpenE/OpenBeta isomorphisms and take no equation premise. tensor uses derivedTensorHom with leftDerivedUpperStarTensorIso ≪≫ (rM⊗rK); pullback takes arbitrary g, g0 with CommSq and pullSquare ≪≫ g0^* rM, covering sections without a smoothness hypothesis. Conclusion (pull j).map φ ≫ rN.hom = rM.hom ≫ φ0 is true: primitives are the accepted open clauses, leftDerivedUpperStarTensorIso is .app of a NatIso (checked upstream Comparison.lean:107), pullSquare is a functor iso. Other clauses re-read, OK. Statement verbatim, 13 declarations present, single sorry, docstrings with source and blueprint, no line over 100 chars, no supersession on live. Advisories: comp needs a defeq shared rN; proof-only imports. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T122714-L-1798478",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

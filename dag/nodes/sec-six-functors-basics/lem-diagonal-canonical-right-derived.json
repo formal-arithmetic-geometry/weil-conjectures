@@ -1,0 +1,108 @@
+{
+ "id": "lem-diagonal-canonical-right-derived",
+ "kind": "statement",
+ "title": "The canonical diagonal right derived model",
+ "statement": "For an additive functor F:C→D between abelian categories with the indicated derived localizations and K-injective resolutions in C, construct a DiagonalRightDerived F as defined in [det-prop-diagonal-tower-limit]. Its functor is literally F.rightDerivedFunctor, and its full unit on every complex is rightDerivedFunctorUnitQ. It has K-injective computation, the canonical commutation with shifts and the triangulated structure.",
+ "stmt_deps": [
+  "det-prop-diagonal-tower-limit"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), canonical right-derived units"
+ },
+ "proof": [
+  {
+   "text": "Quasi-isomorphisms between K-injective complexes are homotopy equivalences. An additive functor preserves homotopy equivalences, so the K-injective localizer derives F.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The published cochain unit is invertible on K-injectives. Apply the localizer universal-property criterion, and retain the canonical shift and triangulated instances.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "U4",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), canonical right-derived units"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport integration identity through a natural transformation and endpoint isomorphisms; canonical right derived functor computed on K injective complexes; diagonal trace coefficient extension and uniformizer quotient annihilation",
+   "results": "Eight hits, including InjectiveResolution.isoRightDerivedObj and Functor.mapDerivedCategoryFactorsh_hom_app; none states the normalized diagonal comparison. The canonical K-injective unit API is reused.",
+   "date": "2026-10-24",
+   "verdict": "No complete existing diagonal coefficient theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "Twelve hits, including rightDerivedUnique and LocalizerMorphism.Derives construction APIs. These provide the canonical unit universal property; they do not assert the geometric coefficient endpoints.",
+   "date": "2026-10-24",
+   "verdict": "Use the published universal-property API for the canonical derived model."
+  },
+  {
+   "tool": "grep",
+   "query": "integration_transport|canonicalDiagonalRightDerived|diagonalUniformizer_annihilator|diagonalCompleted_frame|diagonalCoefficientFamily_extension|diagonalCoefficient_uniformizerFiniteComparison",
+   "results": "Zero hits in the search service. Local rg of both roots found the definitions of Reference, Family and ScalarCompatibility but no constructions.",
+   "date": "2026-10-24",
+   "verdict": "New comparison components are necessary for this reduction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerCoefficients",
+  "date": "2026-10-24",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), canonical right-derived units",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CanonicalDiagonalRightDerived",
+  "file": "lean/Sheaf/Paper/CanonicalDiagonalRightDerived.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.canonicalDiagonalRightDerived",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.canonicalDiagonalUnit",
+   "AlgebraicGeometry.ProEtale.canonicalDiagonalUnit_universal",
+   "AlgebraicGeometry.ProEtale.canonicalDiagonalRightDerived"
+  ],
+  "statement": "def canonicalDiagonalRightDerived (F : C ⥤ D) [F.Additive]\n    [Abelian.HasKInjectiveResolutions C] : DiagonalRightDerived F",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e2cc7",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T020722-L-2653769",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e2cc7",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T020722-L-2653769",
+  "kind": "interface",
+  "note": "independent cc review: item module diff + 13 new modules/nodes vs clone (Family, ScalarCompatibility, FiniteReductions, FamilyPullback, SupportedSource defs; unit sk-prop-diagonal-tower realized=empty; importer grep = 0)"
+ }
+}

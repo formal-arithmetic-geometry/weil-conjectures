@@ -1,0 +1,119 @@
+{
+ "id": "lem-sfb-small-module-cardinal-colimits",
+ "kind": "statement",
+ "title": "Bounded-size modules are cardinal-presentable",
+ "statement": "Fix a universe $U$ as in [def-weil-size-convention]. Let $R$ be a unital ring in $U$, let $\\rho\\in U$ be an uncountable regular cardinal with $|R|<\\rho$, and let $M$ be a left $R$-module in $U$ with $|M|<\\rho$. Regular means that unions of fewer than $\\rho$ sets each of size less than $\\rho$ have size less than $\\rho$. A small category is $\\rho$-filtered when every diagram with fewer than $\\rho$ morphisms admits a cocone. The module $M$ is $\\rho$-presentable in $\\operatorname{Mod}_R$: for every $U$-small $\\rho$-filtered diagram $D$ of left $R$-modules, the canonical map\n$$\\varinjlim_i\\operatorname{Hom}_R(M,D_i)\\ \\longrightarrow\\ \\operatorname{Hom}_R(M,\\varinjlim_iD_i)$$\nis bijective, with colimits as in [def-weil-pbc-category-colimit]. In particular every map to the colimit factors through some stage, and two maps $M\\to D_i$ equal in the colimit become equal after one morphism $i\\to j$ of the index category.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/Algebra/Category/ModuleCat/FilteredColimits.lean",
+  "place": "ModuleCat.isCardinalPresentable_of_hasCardinalLT, lines 76-90 (the exact project declaration); HNR arXiv:1405.1888 Lemma A.5 uses this module fact at the end of the forward implication. No Stacks tag is asserted: algebra.tex lemma-characterize-finite-presentation-hom is the finite-presentation analogue, not this cardinal statement."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a ring of cardinality less than an uncountable regular cardinal kappa a module of cardinality less than kappa is kappa presentable and every module is the kappa filtered union of its submodules of cardinality less than kappa",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HasCardinalLT.isCardinalPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Type\", \"type\": \"∀ {X : Type u} {κ : Cardinal.{u}},\\n  HasCardinalLT X κ → ∀ [inst : Fact κ.IsRegular], CategoryTheory.IsCardinalPresentable X κ\", \"doc\": \"If a type $X$ has cardinality strictly less than a regular cardinal $\\\\kappa$, then $X$ is $\\\\kappa$-presentable.\"}\n  {\"name\": \"CategoryTheory.IsCardinalLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → (κ : Cardinal.{w}) → [Fact κ.IsRegular] → Prop\", \"doc\": \"A category $ \\\\mathcal{C} $ is locally presentable with respect to a regular cardinal $ \\\\kappa $.\"}\n  {\"name\": \"CategoryTheory.HasCardinalFilteredGenerators\", \"module\": \"Mathlib/CategoryTheory/Presentable/CardinalFilteredPresentation\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → (κ : Cardinal.{w}) → [hκ : Fact κ.IsRegular] → Prop\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a regular cardinal $\\\\kappa$, this proposition asserts that $\\\\mathcal{C}$ has a set of $\\\\kappa$-filtered generators. This means there exists a set of objects in $\\\\mat\"}\n  {\"name\": \"CategoryTheory.HasCardinalFilteredGenerator\", \"module\": \"Mathlib/CategoryTheory/Presentable/CardinalFilteredPresentation\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → (κ : Cardinal.{w}) → [hκ : Fact κ.IsRegular] → Prop\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a regular cardinal $\\\\kappa$, this proposition asserts that $\\\\mathcal{C}$ has a $\\\\kappa$-filtered generator, meaning there exists a set of objects in $\\\\mathcal{C}$ su\"}\n  {\"name\": \"CategoryTheory.isCardinalPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Basic\", \"type\": \"(C : Type u₁) →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    (κ : Cardinal.{w}) → [Fact κ.IsRegular] → CategoryTheory.ObjectProperty C\", \"doc\": \"An object $ X $ in a category $ \\\\mathcal{C} $ is said to be $ \\\\kappa $-presentable if it satisfies the property defined by $ \\\\text{IsCardinalPresentable}\\\\, X\\\\, \\\\kappa $, typically meaning that the hom\"}\n  {\"name\": \"CategoryTheory.IsCardinalPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Basic\", \"type\": \"{C : Type u₁} → [CategoryTheory.Category.{v₁, u₁} C] → C → (κ : Cardinal.{w}) → [Fact κ.IsRegular] → Prop\", \"doc\": \"An object $ X $ in a category is $ \\\\kappa $-presentable if the hom-functor $ \\\\text{Hom}(X, -) $ is $ \\\\kappa $-accessible, meaning it preserves colimits of diagrams indexed by $ \\\\kappa $-filtered categ\"}\n  {\"name\": \"CategoryTheory.AreCardinalFilteredGenerators\", \"module\": \"Mathlib/CategoryTheory/Presentable/CardinalFilteredPresentation\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.ObjectProperty C → (κ : Cardinal.{w}) → [Fact κ.IsRegular] → Prop\", \"doc\": \"A predicate asserting that an object property $P$ in a category $\\\\mathcal{C}$ satisfies the conditions to be a $\\\\kappa$-filtered generator, where $\\\\kappa$ is a regular cardinal. This means that $P$-ob\"}\n  {\"name\": \"CategoryTheory.isCardinalFilteredGenerator_isCardinalPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Dense\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] (κ : Cardinal.{w}) [inst_1 : Fact κ.IsRegular]\\n  [CategoryTheory.IsCardinalAccessibleCategory C κ],\\n  (CategoryTheory.isCardinalPresentable C κ).IsCardinalFilteredGenerator κ\", \"doc\": \"In a κ-accessible category $\\\\mathcal{C}$, every κ-presentable object satisfies the property of being a κ-filtered generator, meaning the class of κ-presentable objects forms a κ-filtered generator for\"}",
+   "date": "2026-10-24",
+   "verdict": "no Mathlib match: HasCardinalLT.isCardinalPresentable concerns Type, not ModuleCat; the filtered-colimit forgetful instances alone do not impose linearity on representatives. The precise result exists in the project as ModuleCat.isCardinalPresentable_of_hasCardinalLT, and is recorded for attachment instead of split."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModuleCat\", \"IsCardinalPresentable\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no Mathlib match: HasCardinalLT.isCardinalPresentable concerns Type, not ModuleCat; the filtered-colimit forgetful instances alone do not impose linearity on representatives. The precise result exists in the project as ModuleCat.isCardinalPresentable_of_hasCardinalLT, and is recorded for attachment instead of split."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCardinalPresentable|IsCardinalFiltered|cardinal|Cardinal",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Free.lean\", \"line\": \"177\", \"text\": \"    Module.Free.rank_eq_card_chooseBasisIndex R S.X₃, Cardinal.add_def, Cardinal.eq]\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean\", \"line\": \"22\", \"text\": \"assert_not_exists Cardinal\"}",
+   "date": "2026-10-24",
+   "verdict": "no Mathlib match: HasCardinalLT.isCardinalPresentable concerns Type, not ModuleCat; the filtered-colimit forgetful instances alone do not impose linearity on representatives. The precise result exists in the project as ModuleCat.isCardinalPresentable_of_hasCardinalLT, and is recorded for attachment instead of split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps from modules of size less than a regular cardinal into filtered colimits factor at a stage and equality of two maps holds at a later stage",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit'\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \"[IsCardinalPresentable X κ] {J : Type u₂} [Category.{v₂} J] [EssentiallySmall.{w} J] [IsCardinalFiltered J κ]\\n  {F : J ⥤ C} {c : Cocone F} (hc : IsColimit c) {i : J} (f₁ f₂ : X ⟶ F.obj i) (hf : f₁ ≫ c.ι.app i = f₂ ≫ c.ι.app i) :\\n  ∃ (j : J) (u : i ⟶ j), f₁ ≫ F.map u = f₂ ≫ F.map u\", \"doc\": \"Let $\\\\kappa$ be a regular cardinal, $X$ a $\\\\kappa$-presentable object in a category $\\\\mathcal{C}$, $J$ a $\\\\kappa$-filtered category, and $F : J \\\\to \\\\mathcal{C}$ a functor with a colimit cocone $c$. If\"}\n  {\"name\": \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \"[IsCardinalPresentable X κ] {J : Type u₂} [Category.{v₂} J] [EssentiallySmall.{w} J] [IsCardinalFiltered J κ]\\n  {F : J ⥤ C} {c : Cocone F} (hc : IsColimit c) {i₁ i₂ : J} (f₁ : X ⟶ F.obj i₁) (f₂ : X ⟶ F.obj i₂)\\n  (hf : f₁ ≫ c.ι.app i₁ = f₂ ≫ c.ι.app i₂) : ∃ (j : J) (u : i₁ ⟶ j) (v : i₂ ⟶ j), f₁ ≫ F.m\", \"doc\": \"For a κ-presentable object $X$, a κ-filtered category $\\\\mathcal{J}$, a diagram $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, and a colimit cocone $c$ of $F$, if morphisms $f_1 : X \\\\to F(i_1)$ and $f_2 : X \\\\to F(\"}\n  {\"name\": \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {κ : Cardinal.{w}} {inst_1 : Fact κ.IsRegular}\\n  [self : CategoryTheory.IsCardinalAccessibleCategory C κ], CategoryTheory.HasCardinalFilteredColimits C κ\", \"doc\": \"If a category $ \\\\mathcal{C} $ is $ \\\\kappa $-accessible for a regular cardinal $ \\\\kappa $, then $ \\\\mathcal{C} $ has all $ \\\\kappa $-filtered colimits.\"}\n  {\"name\": \"ModuleCat.FilteredColimits.M.mk_eq\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.FilteredColimits\", \"type\": \"(x y : Σ j, F.obj j) (h : ∃ (k : J) (f : x.1 ⟶ k) (g : y.1 ⟶ k), F.map f x.2 = F.map g y.2) : M.mk F x = M.mk F y\", \"doc\": \"In the filtered colimit of a diagram of left $ R $-modules over a small filtered category $ \\\\mathcal{J} $, two elements represented by pairs $ (j, m) $ and $ (j', m') $ are equal if there exists an ob\"}\n  {\"name\": \"ModuleCat.FilteredColimits.M.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.FilteredColimits\", \"type\": \": (Σ j, F.obj j) → M F\", \"doc\": \"Given a small filtered category $\\\\mathcal{J}$ and a functor $F : \\\\mathcal{J} \\\\to \\\\text{ModuleCat}_R$, this constructs the filtered colimit of $F$ in the category of left $R$-modules by first forming t\"}\n  {\"name\": \"CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone\", \"module\": \"Mathlib.CategoryTheory.Presentable.Limits\", \"type\": \": IsColimit (c.pt.mapCocone cX)\", \"doc\": \"A cocone obtained by mapping a cocone $ cX $ through the apex object $ c.\\\\text{pt} $ satisfies the universal property of a colimit if it meets two conditions: (1) every element in the apex is the imag\"}\n  {\"name\": \"CategoryTheory.HasCardinalFilteredColimits\", \"module\": \"Mathlib.CategoryTheory.Presentable.Basic\", \"type\": \"(C : Type u₁) → [CategoryTheory.Category.{v₁, u₁} C] → (κ : Cardinal.{w}) → [Fact κ.IsRegular] → Prop\", \"doc\": \"The category $ C $ has all κ-filtered colimits, where $ κ $ is a regular cardinal.\"}\n  {\"name\": \"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Filtered\", \"type\": \"(F : C ⥤ D) [PreservesColimitsOfSize.{w, w'} F] : PreservesFilteredColimitsOfSize.{w, w'} F\", \"doc\": \"Any functor that preserves colimits of a given size also preserves filtered colimits of that size.\"}",
+   "date": "2026-10-24",
+   "verdict": "no Mathlib match: HasCardinalLT.isCardinalPresentable concerns Type, not ModuleCat; the filtered-colimit forgetful instances alone do not impose linearity on representatives. The precise result exists in the project as ModuleCat.isCardinalPresentable_of_hasCardinalLT, and is recorded for attachment instead of split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules generated by fewer than kappa generators and relations preserve kappa filtered colimits under Hom",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.hasColimitsOfSize\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Colimits\", \"type\": \"∀ (R : Type w) [inst : Ring R] [CategoryTheory.Limits.HasColimitsOfSize.{v, u, w', w' + 1} AddCommGrpCat],\\n  CategoryTheory.Limits.HasColimitsOfSize.{v, u, w', max (w' + 1) w} (ModuleCat R)\", \"doc\": \"For any ring $ R $, the category of left $ R $-modules has all colimits of shape $ C $.\"}\n  {\"name\": \"ModuleCat.FilteredColimits.forget_preservesFilteredColimits\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/FilteredColimits\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.Limits.PreservesFilteredColimits (CategoryTheory.forget (ModuleCat R))\", \"doc\": \"The forgetful functor from the category of left $ R $-modules to the category of types preserves filtered colimits. This means that applying the forgetful functor to a filtered colimit of modules yiel\"}\n  {\"name\": \"ModuleCat.FilteredColimits.M\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/FilteredColimits\", \"type\": \"{R : Type u} →\\n  [inst : Ring R] →\\n    {J : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory J] →\\n        [CategoryTheory.IsFiltered J] → CategoryTheory.Functor J (ModuleCat R) → AddCommGrpCat\", \"doc\": \"Given a small filtered category $\\\\mathcal{J}$ and a functor $F : \\\\mathcal{J} \\\\to \\\\text{ModuleCat}_R$, this constructs the filtered colimit of $F$ in the category of left $R$-modules by first forming t\"}\n  {\"name\": \"ModuleCat.FilteredColimits.forget_reflectsFilteredColimits\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/FilteredColimits\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.Limits.ReflectsFilteredColimits (CategoryTheory.forget (ModuleCat R))\", \"doc\": \"The forgetful functor from the category of left $ R $-modules to the category of types reflects filtered colimits. This means that if a diagram in the module category has a colimit whose underlying ty\"}\n  {\"name\": \"ModuleCat.FilteredColimits.M.mk\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/FilteredColimits\", \"type\": \"{R : Type u} →\\n  [inst : Ring R] →\\n    {J : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory J] →\\n        [inst_2 : CategoryTheory.IsFiltered J] →\\n          (F : CategoryTheory.Functor J (ModuleCat R)) → (j : J) × ↑(F.obj j) → ↑(ModuleCat.FilteredColimits.M F)\", \"doc\": \"Given a small filtered category $\\\\mathcal{J}$ and a functor $F : \\\\mathcal{J} \\\\to \\\\text{ModuleCat}_R$, this constructs the filtered colimit of $F$ in the category of left $R$-modules by first forming t\"}\n  {\"name\": \"ModuleCat.FilteredColimits.colimitModule\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/FilteredColimits\", \"type\": \"{R : Type u} →\\n  [inst : Ring R] →\\n    {J : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory J] →\\n        [inst_2 : CategoryTheory.IsFiltered J] →\\n          (F : CategoryTheory.Functor J (ModuleCat R)) → Module R ↑(ModuleCat.FilteredColimits.M F)\", \"doc\": \"For any ring $ R $, small filtered category $ \\\\mathcal{J} $, and functor $ F : \\\\mathcal{J} \\\\to \\\\text{ModuleCat}_R $, the filtered colimit of $ F $ in the category of $ R $-modules is constructed by fi\"}\n  {\"name\": \"ModuleCat.FilteredColimits.colimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/FilteredColimits\", \"type\": \"{R : Type u} →\\n  [inst : Ring R] →\\n    {J : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory J] →\\n        [CategoryTheory.IsFiltered J] → CategoryTheory.Functor J (ModuleCat R) → ModuleCat R\", \"doc\": \"For any ring $ R $, small filtered category $ \\\\mathcal{J} $, and functor $ F : \\\\mathcal{J} \\\\to \\\\text{ModuleCat}_R $, this constructs the filtered colimit of $ F $ in the category of $ R $-modules by f\"}\n  {\"name\": \"ModuleCat.FilteredColimits.M.mk_surjective\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/FilteredColimits\", \"type\": \"∀ {R : Type u} [inst : Ring R] {J : Type v} [inst_1 : CategoryTheory.SmallCategory J]\\n  [inst_2 : CategoryTheory.IsFiltered J] (F : CategoryTheory.Functor J (ModuleCat R))\\n  (m : ↑(ModuleCat.FilteredColimits.M F)), ∃ j x, ModuleCat.FilteredColimits.M.mk F ⟨j, x⟩ = m\", \"doc\": \"For any filtered colimit of modules over a ring $ R $, every element in the colimit module is the image of an element from some module in the diagram. Specifically, given a filtered category $ \\\\mathca\"}",
+   "date": "2026-10-24",
+   "verdict": "no Mathlib match: HasCardinalLT.isCardinalPresentable concerns Type, not ModuleCat; the filtered-colimit forgetful instances alone do not impose linearity on representatives. The precise result exists in the project as ModuleCat.isCardinalPresentable_of_hasCardinalLT, and is recorded for attachment instead of split."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-grothendieck-presentables-module-size",
+  "date": "2026-10-24",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting Brown representability branch; Hall--Neeman--Rydh Appendix A, Remark A.4 and Lemma A.5: cardinal control of the exact module localization. Lemma A.5, forward implication, last sentence: the bounded module factors through a stage of the module colimit; also supplies eventual equality.",
+   "via": [
+    "lem-sfb-grothendieck-presentables-module-size",
+    "lem-sfb-weak-serre-presentable-cardinal-package",
+    "lem-sfb-weak-serre-derived-small-generators",
+    "lem-sfb-grothendieck-weak-serre-derived-representability",
+    "lem-sfb-levelwise-quasicoherent-brown",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "ModuleCat.isCardinalPresentable_of_hasCardinalLT",
+     "module": "WeilConjectures.Mathlib.Algebra.Category.ModuleCat.FilteredColimits",
+     "lines": [
+      76,
+      90
+     ],
+     "kind": "lemma",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ }
+}

@@ -1,0 +1,176 @@
+{
+ "id": "lem-zl-sheet-return-transport-comparison",
+ "kind": "statement",
+ "title": "Ordered sheet-return transport comparison at finite and integral stages",
+ "statement": "Fix D, m≥1, X₀ separated finite type over k₀, ℓ≠p and a finite coefficient field E/Q_ℓ as in [def-zl-sheet-return-data]. Then the specified TransportLaws, SheetReturnRationalOperators, SheetReturnStalkNaturality and SheetReturnScalarCompatibility all hold: m-blocks concatenate to the same ordered power transport both at finite coefficients and on whole coefficient towers, the latter realizes through the prescribed zeta/nu identity, and the specified rational stalk isomorphism intertwines the return operator naturally and compatibly with finite coefficient extension. This is independent of common-stage local spectra, weights and subobjects.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+ },
+ "stmt_deps": [
+  "def-zl-sheet-return-data",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\eta^{[t]}=\\eta\\circ H^*\\eta\\circ\\cdots\\circ(H^{t-1})^*\\eta$. Expand the $r$-fold return Weil map using its defining recurrence. For $r=1$ it is $j_0^*\\eta^{[m]}$ by the definition of $\\phi$. If the $b$-fold return has expanded to $j_0^*\\eta^{[mb]}$, its next factor is $(g_X^{mb})^*\\phi=j_0^*(H^{mb})^*\\eta^{[m]}$ under the specified comparisons. The composite is $j_0^*\\eta^{[m(b+1)]}$. Induction gives exactly the ordered factors $j_0^*(H^t)^*\\eta$ for $t=0,\\ldots,mr-1$, without commuting any factors. Finite derived composition supplies these comparisons at finite coefficients; the integral realization theorem supplies associativity, units, equality-of-scheme-map compatibility and arbitrary finite iteration for the specified integral comparisons. Thus the expansion uses the actual normalized compositors, not independently chosen isomorphisms.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "lem-zl-constant-extension-sheet-heart-coordinates",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+   }
+  },
+  {
+   "text": "First take finite coefficients and put $V=Lx^*j_0^*N\\simeq Ly^*N$, $U=Lh^*$. The finite point-composition lemma identifies the single recipe for $h^m$ with the composite of $m$ recipes for $h$: start with $m=1$ and apply its displayed recurrence successively. This is an identity for every input, hence also for $U^{bm}V$, $0\\le b<r$. In the $r$ successive return transports, replace block $b$ by the ordered factors $\\iota_{U^{bm}V},\\ldots,\\iota_{U^{bm+m-1}V}$. Concatenating the blocks gives each exponent $0,1,\\ldots,mr-1$ once, in that order; these are exactly the iterated transports defining $I_V^{[mr]}$. Canonical pullback composition identifies the targets. This proves equality of the point-transport factors, rather than only equality of their abstract Frobenius powers.",
+   "uses": [
+    "lem-trf-point-transport-composition",
+    "def-weil-local-frobenius-trace",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+   }
+  },
+  {
+   "text": "For integral coefficients perform the same induction in the derived category of whole module towers, using $I_{t,C}:\\Gamma_\\bullet C\\to\\Gamma_\\bullet G_tC$ of the cited tower-powers theorem. Its recurrence holds for every system $C$, and therefore for every successive $G_{bm}C$; its naturality holds for system morphisms, including the Weil-map and pullback-comparison arrows. Replacing each $m$-block by its recurrence gives the same ordered $mr$ factors as in step 4, now as a whole-tower identity. Apply $R\\lim$. The equation involving $\\zeta_C$ and $\\nu_{t,C}$ identifies each realized $I_{t,C}$ with the specified integral point transport; the final equation for $\\nu_{m+1,C}$ identifies the realized compositors with the specified integral ones. Take $C$ to be the simultaneous reduction system of the point pullback in question. Its derived limit is bounded constructible, which is precisely the realization hypothesis of that theorem. The integral pullback realization statement likewise identifies the comparisons in the return square and in step 3 with the simultaneous quotient-diagram comparisons. Thus the two local composites agree after the specified whole-limit realization. No inference from equality of separate reductions is made, and no finite Tor-amplitude assumption is needed.",
+   "uses": [
+    "lem-trf-integral-point-transport-tower-powers",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+   }
+  },
+  {
+   "text": "Under the canonical identification $c:\\operatorname{Fib}_s(Lx^*j_0^*N)\\xrightarrow{\\sim}\\operatorname{Fib}_s(Ly^*N)$, the local operator is the composite of three arrows: point transport, the return-square pullback comparison, and the stalk of the iterated Weil map. Steps 3–5 identify these three arrows respectively in the two interpretations: the iterated Weil factors agree in their original order, the square is the identical square of step 2 with its composition comparisons, and the transport is the identical $mr$-factor transport. Composing gives $cF_{R(N),z}=F_{N,z}c$ at finite and integral coefficients (and already on the whole-tower model in the integral case). All these identifications are natural on Weil morphisms: the structure squares commute by the definition of such a morphism, the pullback comparisons are natural, and the finite/tower transport identities are natural in the input.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "lem-trf-point-transport-composition",
+    "lem-trf-integral-point-transport-tower-powers",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+   }
+  },
+  {
+   "text": "Pass the finite/integral comparison equation to arbitrary rational arrows by raw scalar localization. On pure tensors the two ordered composites have the same numerator and denominator, so tensor generators give equality. For a finite coefficient extension, apply the specified iterated-return scalar calculus to the point transport and return square; naturality handles the pulled-back Weil arrow. This proves the rational operator, naturality and scalar-compatibility predicates. Common-stage descent is deferred to the separate local-spectra lemma.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "lem-trf-iterated-return-transport-scalar-calculus",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-local-frobenius-trace",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-trf-integral-point-transport-tower-powers",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-iterated-return-transport-scalar-calculus",
+  "lem-trf-point-transport-composition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-zl-constant-extension-sheet-heart-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7)--(1.1.10), pp. 150--152, and (1.2.6), p. 154; ordered block and finite-filtration consequences."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ordered iterated pullback comparison for blocks of Frobenius transports and their naturality at finite and integral coefficients",
+   "results": "CategoryTheory.Limits.pullbackComparison; CategoryTheory.Limits.pullbackPullbackRightIsPullback; CategoryTheory.Limits.instIsIsoPullbackComparison; CategoryTheory.Functor.IsFibered.pullbackPullbackIso; CategoryTheory.frobeniusMorphism; SheafOfModules.pullbackComp; CategoryTheory.Limits.pullbackObjIso; CategoryTheory.Over.pullbackComp",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states this specific normalized sheet-return comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered point transport iterates concatenate into blocks under pullback composition with scalar extension compatibility",
+   "results": "FormalMultilinearSeries.compChangeOfVariables_blocksFun; OrderedFinpartition.compAlongOrderedFinpartitionₗ; Composition.blocksFun_sigmaCompositionAux; Composition.sigmaCompositionAux; WeierstrassCurve.Affine.Point.map_map; OrderedFinpartition.compAlongOrderFinpartition_apply; stdSimplex.map_comp_apply; AlgebraicGeometry.AffineSpace.reindex_comp",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states this specific normalized sheet-return comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(point|tower).*transport|transport.*(point|tower)",
+   "results": "Mathlib/CategoryTheory/IsConnected.lean",
+   "date": "2026-10-25",
+   "verdict": "no match: no result states this specific normalized sheet-return comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantExtensionReturnLocalOperators",
+  "date": "2026-10-25",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraphs 1 and 5: constant-extension interpretation of Weil filtrations; Ordered sheet-return transport comparison at finite and integral stages",
+   "via": [
+    "lem-zl-constant-extension-return-local-operators",
+    "lem-zl-constant-extension-weil-heart-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "module": "Sheaf.Paper.ConstantExtensionReturnTransportComparison",
+  "file": "lean/Sheaf/Paper/ConstantExtensionReturnTransportComparison.lean",
+  "declaration": "WeilConjectures.sheetReturnTransportComparison",
+  "declarations": [
+   "WeilConjectures.sheetReturnTransportComparison"
+  ],
+  "statement": "theorem sheetReturnTransportComparison (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] : SheetReturn.TransportLaws D l E hl m ∧ SheetReturnRationalOperators D m hm X₀ l hl E ∧ SheetReturnStalkNaturality D m hm X₀ l hl E ∧ SheetReturnScalarCompatibility D m hm X₀ l hl E",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-483c7",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261025T161911-L-141922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-483c7",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261025T161911-L-141922",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to clone; 17 moved decls diffed verbatim vs clone item block (only blueprint tags + Prop proof); 3 new sorry statements read against item conjuncts/Deligne 1.1.10; new-node stmt_deps vs owners of Lean statement decls"
+ }
+}

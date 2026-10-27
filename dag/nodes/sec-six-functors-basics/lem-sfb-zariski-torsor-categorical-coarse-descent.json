@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-zariski-torsor-categorical-coarse-descent",
+ "kind": "statement",
+ "title": "Coarse descent from a categorical quotient of a Zariski torsor presentation",
+ "statement": "Let $k$ be a field [def-weil-field], let $G$ be a group scheme over $k$ (a scheme with multiplication, unit and inverse satisfying the group identities), and let $J$ be a $k$-scheme with a left $G$-action [def-pc-scheme]. A Zariski locally trivial $G$-torsor over $T$ means a $T$-scheme $E$ with $G_T$-action admitting a Zariski open cover of $T$ on which it is equivariantly isomorphic to $G\\times_k T$ acting on itself by left multiplication. Let $\\mathcal F$ be a category fibred in groupoids over $k$-schemes [def-sfb-stable-pointed-moduli-groupoids], equipped with a cartesian equivalence $e$ to the fibred groupoid whose objects over $T$ are pairs $(E\\to T,u:E\\to J)$ with $E$ such a torsor and $u$ equivariant; arrows are equivariant torsor isomorphisms commuting with $u$, and pullback is scheme fibre product [def-pc-fibre-product]. Let $Q$ be a $k$-scheme and $q:J\\to Q$ a $G$-invariant morphism. Suppose that for every algebraic space $B/k$ [def-trf-algebraic-space] composition with $q$ is a bijection from $k$-maps $Q\\to B$ to $G$-invariant maps $J\\to B$, and for every algebraically closed extension $\\Omega/k$ [def-weil-algebraic-closure] it induces $J(\\Omega)/G(\\Omega)\\simeq Q(\\Omega)$. Here invariance means equality after composition with the action and the projection $G\\times_k J\\rightrightarrows J$, and the quotient of points is the set of orbits. There is a functor $\\pi:\\mathcal F\\to h_Q$ over $\\mathit{Sch}/k$, uniquely specified by requiring its value on each $x\\in\\mathcal F(T)$ with $e(x)=(E,u)$ to pull back along $E\\to T$ to $q u$. For every algebraic space $B/k$, restriction to the trivial torsors gives a bijection between maps $\\mathcal F\\to B$ and $G$-invariant maps $J\\to B$, under which precomposition with $\\pi$ corresponds to precomposition with $q$. For every algebraically closed extension $\\Omega/k$, the presentation identifies isomorphism classes in $\\mathcal F(\\Omega)$ with $J(\\Omega)/G(\\Omega)$, and $\\pi$ induces the specified bijection to $Q(\\Omega)$. Thus $(Q,\\pi)$ is a coarse moduli scheme in the precise algebraic-space universal and geometric-isomorphism-class sense of [def-sfb-stable-pointed-moduli-groupoids]. No assertion of projectivity, finite type, stack algebraicity or existence of $q$ is made.",
+ "source": {
+  "document": "literature/stacks-project/examples-stacks.tex",
+  "place": "Tag 04UV (section-group-quotient-stacks), torsor description; groupoids-quotients.tex Tags 048F (lemma-invariant) and 048J (definition-categorical). Agent expansion: descent to algebraic spaces on Zariski trivializing covers and comparison of geometric isomorphism classes."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "def-weil-algebraic-closure",
+  "def-sfb-zariski-torsor-groupoid"
+ ],
+ "proof": [
+  {
+   "text": "Work first with the presented torsor groupoid $\\mathcal P$. Regard an algebraic space $B$ as its fppf sheaf. By the Zariski-covering lemma, every open trivializing cover of a torsor is an fppf cover. The equalizer in the definition of a sheaf therefore says that compatible elements of $B(U_i)$ glue uniquely in $B(T)$, and that equality in $B(T)$ can be checked on this cover. Yoneda identifies $B(T)$ with maps $h_T\\to B$. This also applies with $B=h_Q$, since a scheme is its representable algebraic space. No separation hypothesis on $B$ is used.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-pc-zariski-coverings-are-fppf",
+    "lem-pc-yoneda",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 025Y (definition-algebraic-space); sites.tex Tag 00VM (definition-sheaf-sets); topologies.tex Tag 021N (lemma-zariski-etale-smooth-syntomic-fppf); categories.tex Tag 001P (lemma-yoneda)."
+   }
+  },
+  {
+   "text": "For $x:T\\to J$ write $P_x=(G\\times_k T,u_x)$ with $u_x(h,t)=h\\cdot x(t)$. For any torsor pair $(E,u)$ choose a trivializing open cover $U_i$ and its identity sections $s_i:U_i\\to E$. On an overlap, the $i$-th trivialization expresses $s_j$ uniquely as $g_{ij}\\cdot s_i$: explicitly $g_{ij}$ is the first coordinate of $s_j$ in $E|_{U_i}\\cong G\\times_kU_i$. This is a morphism of schemes, so equivariance gives $u s_j=g_{ij}\\cdot(u s_i)$ as morphisms. For every invariant $f:J\\to B$ it follows that $f u s_j=f u s_i$. The same coordinate formula compares any two choices of sections, on a common refinement of their open covers.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 04UV (section-group-quotient-stacks), objects and morphisms; elementary calculation with the Zariski trivializations stipulated in the item."
+   }
+  },
+  {
+   "text": "Glue the local elements $f u s_i\\in B(U_i)$ by step 1 and call the result $A_f(E,u)\\in B(T)$. The common-refinement calculation in step 2 and uniqueness of gluing make it independent of the cover and sections. If $p:E\\to T$, then $p^*A_f(E,u)=f u$: on $E|_{U_i}=G\\times_kU_i$ the assertion is exactly $f(h\\cdot u s_i)=f u s_i$, and these opens cover $E$. Conversely, any element with this pullback restricts along every $s_i$ to $f u s_i$, so it equals $A_f(E,u)$. This proves existence and uniqueness for each torsor pair, including an empty base via the empty-cover equalizer.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-pc-zariski-coverings-are-fppf",
+    "lem-pc-yoneda"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VM (definition-sheaf-sets), unique gluing; examples-stacks.tex Tag 04UV (section-group-quotient-stacks), restricted to the specified Zariski trivializations."
+   }
+  },
+  {
+   "text": "For a morphism $(E',u')\\to(E,u)$ over $v:T'\\to T$, the torsor isomorphism $E'\\cong T'\\times_TE$ pulls the sections $s_i$ back to sections over $v^{-1}U_i$. There $v^*A_f(E,u)$ and $A_f(E',u')$ both equal the pullback of $f u s_i$; hence they agree by the equalizer. Thus $A_f$ is a functor over the base from $\\mathcal P$ to the discrete fibred groupoid $B$. Identities and composition hold because there is only one target arrow above a given base map when the section equality holds. In particular, torsor automorphisms cause no ambiguity.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-pc-zariski-coverings-are-fppf",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 04UV (section-group-quotient-stacks), description of morphisms as pullback torsor isomorphisms; sites.tex Tag 00VM (definition-sheaf-sets)."
+   }
+  },
+  {
+   "text": "Conversely let $A:\\mathcal P\\to B$ be a functor over the base. Restrict to $P_x$ for all $T$ and $x:T\\to J$. The pullback compatibility of this family and Yoneda give a unique map $f:J\\to B$ with $A(P_x)=f x$. To prove invariance as morphisms, take $T=G\\times_kJ$, $x$ its $J$-projection and $g$ its $G$-projection. There is an isomorphism $P_x\\to P_{g\\cdot x}$ given by $(h,t)\\mapsto(hg(t)^{-1},t)$, since $(hg^{-1})\\cdot(g\\cdot x)=h\\cdot x$. Applying $A$ to this isomorphism gives $f x=f(g\\cdot x)$ in $B(G\\times_kJ)$, which is precisely invariance.",
+   "uses": [
+    "lem-pc-yoneda",
+    "def-trf-algebraic-space",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001P (lemma-yoneda); examples-stacks.tex Tag 04UV (section-group-quotient-stacks), proof of proposition-equal-quotient-stacks, the right-translation-by-inverse formula."
+   }
+  },
+  {
+   "text": "These constructions are inverse. Starting with invariant $f$, the global identity section of $P_x$ gives $A_f(P_x)=f x$, so restriction recovers $f$. Starting with $A$, each $s_i$ gives an isomorphism $P_{u s_i}\\to(E,u)|_{U_i}$, $(h,t)\\mapsto h\\cdot s_i(t)$. Functoriality of $A$ then gives $A(E,u)|_{U_i}=f u s_i$. Unique gluing implies $A=A_f$ on objects and hence on arrows. Precomposition by the given cartesian equivalence $e:\\mathcal F\\to\\mathcal P$ is also a bijection on these functors: a quasi-inverse gives its inverse, and its unit and counit become identities after mapping to a discrete groupoid. Thus the same correspondence holds for $\\mathcal F$. It is independent of choices, and natural in $B$, since composing $f$ with $B\\to B'$ gives the same local sections as composing $A_f$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-pc-zariski-coverings-are-fppf",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 04UV (section-group-quotient-stacks), torsor trivialization and equivariant morphisms; sites.tex Tag 00VM (definition-sheaf-sets). Elementary inverse and equivalence calculations."
+   }
+  },
+  {
+   "text": "Apply the construction to the invariant map $q:J\\to Q$, using the representable algebraic space $h_Q$, and put $\\pi=A_qe$. Step 3 proves the required identity after pullback to $E$ and its uniqueness. For $b:Q\\to B$, the functor $b\\pi$ restricts on $P_x$ to $bqx$, so under step 6 precomposition with $\\pi$ is exactly $b\\mapsto bq$. The assumed categorical bijection for $q$ and the bijection in step 6 therefore give the algebraic-space universal property for $\\pi$.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids-quotients.tex",
+    "place": "Tag 048J (definition-categorical), universal property applied as an explicit hypothesis; examples-stacks.tex Tag 04UV (section-group-quotient-stacks)."
+   }
+  },
+  {
+   "text": "Let $\\Omega/k$ be algebraically closed. Any open cover of the nonempty one-point scheme $\\operatorname{Spec}\\Omega$ contains its whole base, so every Zariski locally trivial torsor over it has a section $s$. The isomorphism $(h,t)\\mapsto h\\cdot s(t)$ identifies its pair with $P_x$, where $x=u(s)\\in J(\\Omega)$. Replacing $s$ by $g\\cdot s$ replaces $x$ by $g\\cdot x$. Every equivariant isomorphism $P_x\\to P_y$ is right multiplication by its value $a\\in G(\\Omega)$ at the identity, and commuting with the maps to $J$ says $x=a\\cdot y$. Conversely this equation defines such an isomorphism. Thus isomorphism classes are precisely $J(\\Omega)/G(\\Omega)$; the equivalence $e$ preserves and reflects these classes. The value of $\\pi$ on this class is $q(x)$ by step 3, hence is the assumed bijection to $Q(\\Omega)$. Together with step 7 this is exactly the coarse definition.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 04UV (section-group-quotient-stacks), torsor pairs and arrows; elementary triviality on a one-point Zariski space and the orbit calculation. The orbit bijection for q is a hypothesis, not a quotient-existence result."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-pc-zariski-coverings-are-fppf",
+  "lem-pc-yoneda",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/examples-stacks.tex",
+  "place": "Tag 04UV (section-group-quotient-stacks), explicit Zariski-trivial torsor argument; groupoids-quotients.tex Tag 048J (definition-categorical). The universal and orbit properties of q are hypotheses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A categorical geometric quotient of a scheme with group action is a coarse moduli space of its quotient stack",
+   "results": "Action.FintypeCat.term_⧸ₐ_; AlgebraicGeometry.Scheme.GlueData.glued; AlgebraicGeometry.Scheme.Hom.liftQuotient; AlgebraicGeometry.Flat.isQuotientMap_of_surjective; AlgebraicGeometry.Scheme.GlueData.gluedScheme; MulAction.orbitRel.Quotient; CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup; t2Space_quotient_mulAction_of_properSMul",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract orbit sets, topological covering trivializations, scheme gluing, descent of morphism properties and localization connectedness do not identify functors from a fibred torsor groupoid to algebraic spaces or prove the coarse geometric-class property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski locally trivial torsor presentations identify maps from a quotient groupoid to algebraic spaces with invariant maps, giving a coarse moduli space",
+   "results": "Topology.IsQuotientMap.trivializationOfSMulDisjoint_source; Topology.IsQuotientMap.trivializationOfVAddDisjoint_source; Topology.IsQuotientMap.trivializationOfVAddDisjoint_target; Topology.IsQuotientMap.trivializationOfSMulDisjoint_baseSet; AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget; Rep.ofQuotient; Topology.IsQuotientMap.trivializationOfVAddDisjoint_baseSet; AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract orbit sets, topological covering trivializations, scheme gluing, descent of morphism properties and localization connectedness do not identify functors from a fibred torsor groupoid to algebraic spaces or prove the coarse geometric-class property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant morphisms to algebraic spaces descend along torsors and identify maps out of a quotient stack",
+   "results": "AlgebraicGeometry.HasRingHomProperty.descendsAlong; AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd; AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact; CategoryTheory.MorphismProperty.instDescendsAlongOfIsStableUnderBaseChangeOfHasOfPrecompPropertyOfRespectsRight; CategoryTheory.MorphismProperty.DescendsAlong; AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact; Rep.quotientToInvariantsFunctor_map_hom; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract orbit sets, topological covering trivializations, scheme gluing, descent of morphism properties and localization connectedness do not identify functors from a fibred torsor groupoid to algebraic spaces or prove the coarse geometric-class property."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLocalization, CategoryTheory.IsConnected",
+   "results": "CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.Constructor.isConnected",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract orbit sets, topological covering trivializations, scheme gluing, descent of morphism properties and localization connectedness do not identify functors from a fibred torsor groupoid to algebraic spaces or prove the coarse geometric-class property."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]oarse[Mm]oduli|[Qq]uotient[Ss]tack|[Cc]ategorical[Qq]uotient",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract orbit sets, topological covering trivializations, scheme gluing, descent of morphism properties and localization connectedness do not identify functors from a fibred torsor groupoid to algebraic spaces or prove the coarse geometric-class property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps from the groupoid of Zariski locally trivial group scheme torsors with equivariant maps to J to an algebraic space are exactly invariant maps from J",
+   "results": "{\"t\": \"2026-10-23T09:56:00Z\", \"tool\": \"leanfinder\", \"query\": \"Maps from the groupoid of Zariski locally trivial group scheme torsors with equivariant maps to J to an algebraic space are exactly invariant maps from J\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.AffineSpace.homOfVector_over\", \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.hom_ext_of_forall\", \"AlgebraicGeometry.AffineSpace.homOverEquiv_symm_apply_coe\"], \"digest\": \"ce6dd0a4300ad731\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern representability, sheaf Hom or descent of morphism properties, not the torsor-groupoid invariant-map and coarse-class correspondence."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.yoneda",
+   "results": "{\"t\": \"2026-10-23T09:56:01Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, CategoryTheory.yoneda\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.preservesColimit_yoneda\", \"AlgebraicGeometry.continuousMapPresheafIsoUlift\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U\", \"AlgebraicGeometry.Scheme.LocalRepresentability.toGlued\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveFunYonedaGluedToSheaf\"], \"digest\": \"ef6aa7140d990b85\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern representability, sheaf Hom or descent of morphism properties, not the torsor-groupoid invariant-map and coarse-class correspondence."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]oarse[Mm]oduli|[Qq]uotient[Ss]tack|[Cc]ategorical[Qq]uotient",
+   "results": "{\"t\": \"2026-10-23T09:56:01Z\", \"tool\": \"grep\", \"query\": \"[Cc]oarse[Mm]oduli|[Qq]uotient[Ss]tack|[Cc]ategorical[Qq]uotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern representability, sheaf Hom or descent of morphism properties, not the torsor-groupoid invariant-map and coarse-class correspondence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant maps from a scheme descend through a Zariski torsor presentation to give the coarse moduli universal property",
+   "results": "{\"t\": \"2026-10-23T09:56:02Z\", \"tool\": \"leansearch\", \"query\": \"Invariant maps from a scheme descend through a Zariski torsor presentation to give the coarse moduli universal property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.topologically_isLocalAtSource'\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc\"], \"digest\": \"45132966ef68f591\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern representability, sheaf Hom or descent of morphism properties, not the torsor-groupoid invariant-map and coarse-class correspondence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations from a groupoid of locally trivial torsors to a sheaf correspond to invariant morphisms from the action scheme",
+   "results": "{\"t\": \"2026-10-23T09:59:08Z\", \"tool\": \"leanfinder\", \"query\": \"Natural transformations from a groupoid of locally trivial torsors to a sheaf correspond to invariant morphisms from the action scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.homEquivOfIsLocallyBijective\", \"CategoryTheory.Sheaf.ΓHomEquiv\", \"CategoryTheory.sheafHomSectionsEquiv\", \"PresheafOfModules.homEquivOfIsLocallyBijective_apply\", \"PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply\", \"CategoryTheory.Sheaf.ΓObjEquivHom_naturality\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left\", \"CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply\"], \"digest\": \"cb2f328f0a461d5e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern representability, sheaf Hom or descent of morphism properties, not the torsor-groupoid invariant-map and coarse-class correspondence."
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]orsor|[Ii]nvariant",
+   "results": "{\"t\": \"2026-10-23T09:59:08Z\", \"tool\": \"grep\", \"query\": \"[Tt]orsor|[Ii]nvariant\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern representability, sheaf Hom or descent of morphism properties, not the torsor-groupoid invariant-map and coarse-class correspondence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unpointed-stable-coarse-projective",
+  "date": "2026-10-22",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Old item step 7 only: descend an already supplied invariant categorical geometric quotient through the Zariski locally trivial torsor presentation.",
+   "via": [
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-zariski-torsor-categorical-coarse-descent",
+  "worker": "stage1",
+  "summary": "Expanded the torsor-local coarse-descent argument in eight explicit steps. Reused the existing cover-comparison Mathlib leaf, Yoneda Mathlib leaf, fppf sheaf equalizer definition and representable algebraic-space definition. Wrote the right-translation inverse formula, gluing uniqueness, base-change functoriality, inverse correspondence and geometric orbit classification. No new nodes, no new hypotheses; corrected doubled TeX escaping only.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Old item step 7 only: descend an already supplied invariant categorical geometric quotient through the Zariski locally trivial torsor presentation. The eight steps realize the final coarse-descent input of lem-sfb-unpointed-stable-coarse-projective step 7. The current latest blueprint direct-image proof (3) itself stops at compactification; the inherited alteration/moduli expansion is agent-written. The inherited created.item chain ends at Sheaf.SixFunctors.CtfStabilityDirectImages, so blueprint_refs.py ancestor reports None; retained that provenance rather than inventing a chain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-00a60528b",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-00a60528b (reviewer sub-agent of L); spot-checked: I read the item in full: 8 steps, no new nodes. Its statement is byte-identical to the unsplit item in clones/live and side-live, so it is unchanged and no other group has split it. I read every cited statement: def-trf-algebraic-space, def-weil-pbc-sites-and-cohomology (1), lem-pc-zariski-coverings-are-fppf, lem-pc-yoneda (any presheaf), def-trf-scheme-algebraic-space and def-sfb-stable-pointed-moduli-groupoids (coarse definition and 2-category of fibred groupoids). Sources checked at the cited places: Stacks 04UV (examples-stacks l.1192, whose arrow convention matches steps 4-6), 048F/048J (groupoids-quotients l.67/280), 021N and 001P. There is no SGA citation. Steps checked by hand: (2) s_j=g_ij s_i is a scheme-level identity, so invariance gives f u s_j=f u s_i; (3) gluing, independence of choices, p^*A_f=f u via f∘u∘φ_i=f u s_i∘pr, and the empty base; (5) Yoneda with F=B, and the left-equivariant arrow P_x→P_{gx}, (h,t)↦(hg^{-1},t), whose orientation I verified, giving invariance; (6) the local arrows P_{u s_i}→(E,u)|U_i, and transport along e, where unit and counit over the base become identities in a discrete target; (7) b∘π restricts to bqx, so composition with π is the q-bijection composed with step 6; (8) Spec Ω is a point, so torsors are trivial, equivariant automorphisms are right multiplication by a, and x=ay gives J(Ω)/G(Ω). Edge cases J=∅, trivial G, nontrivial stabilizers and empty base all hold. The parent's use in lem-sfb-unpointed-stable-coarse-projective step 7 (hypotheses from lem-sfb-projective-pgl-stable-quotient and lem-sfb-ten-canonical-hilbert-parameter) matches the item's hypotheses. Duplicate scan (action-groupoid torsor comparison and quotient criterion, abelian-level coarse moduli, flat-affine-action nodes): none states this result. Batch-5 flag: def-trf-scheme-algebraic-space is a general definition (h_T as an algebraic space), not part of the trace formula or Poincare duality proofs, so it is accepted. tool_uses: none. Changes: none."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZariskiTorsorCategoricalCoarseDescent",
+  "declaration": "AlgebraicGeometry.SchemeAction.zariski_torsor_categorical_coarse_descent",
+  "declarations": [
+   "AlgebraicGeometry.SchemeAction.zariski_torsor_categorical_coarse_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiTorsorCategoricalCoarseDescent.lean",
+  "statement": "theorem zariski_torsor_categorical_coarse_descent (k : Type u) [Field k] (G J Q : Over (Spec (.of k))) [GrpObj G] [ModObj G J] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (hF : IsFibredInGroupoids F) (e : BasedFunctor F (zariskiTorsorGroupoid G J)) (he : e.toFunctor.IsEquivalence) (q : J ⟶ Q) (hq : ModObj.smul (M := G) (X := J) ≫ q = snd G J ≫ q) (hcat : ∀ (B : AlgebraicSpace (Spec (.of k))) (f : yoneda.obj J ⟶ B.obj.obj), yoneda.map (ModObj.smul (M := G) (X := J)) ≫ f = yoneda.map (snd G J) ≫ f → ∃! b : yoneda.obj Q ⟶ B.obj.obj, yoneda.map q ≫ b = f) (hgeom : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (a : Spec (.of Ω) ⟶ Spec (.of k)), Function.Surjective (fun x : Over.mk a ⟶ J ↦ x ≫ q) ∧ ∀ x y : Over.mk a ⟶ J, (x ≫ q = y ≫ q ↔ ∃ g : Over.mk a ⟶ G, g • x = y)) : ∃ π : BasedFunctor F (discreteModuli (yoneda.obj Q)), (∀ X : F.obj, yoneda.map ((e.obj X).obj.projection ≫ eqToHom ((e.w_obj X).trans (π.w_obj X).symm)) ≫ (π.obj X).hom = yoneda.map ((e.obj X).obj.map ≫ q)) ∧ (∀ π' : BasedFunctor F (discreteModuli (yoneda.obj Q)), (∀ X : F.obj, yoneda.map ((e.obj X).obj.projection ≫ eqToHom ((e.w_obj X).trans (π'.w_obj X).symm)) ≫ (π'.obj X).hom = yoneda.map ((e.obj X).obj.map ≫ q)) → π' = π) ∧ (∀ B : AlgebraicSpace (Spec (.of k)), ∃ R : BasedFunctor F (discreteModuli B.obj.obj) ≃ {f : yoneda.obj J ⟶ B.obj.obj // yoneda.map (ModObj.smul (M := G) (X := J)) ≫ f = yoneda.map (snd G J) ≫ f}, (∀ (A : BasedFunctor F (discreteModuli B.obj.obj)) (f : yoneda.obj J ⟶ B.obj.obj), (R A).val = f ↔ ∃ AP : BasedFunctor (zariskiTorsorGroupoid G J) (discreteModuli B.obj.obj), e.comp AP = A ∧ (zariskiQuotientAtlas G J).comp AP = discreteModuliMap f) ∧ ∀ b : yoneda.obj Q ⟶ B.obj.obj, (R (π.comp (discreteModuliMap b))).val = yoneda.map q ≫ b) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (a : Spec (.of Ω) ⟶ Spec (.of k)), Function.Bijective ((moduliFiberMap e (Over.mk a)).mapSkeleton.obj) ∧ ∃ c : Skeleton (Functor.Fiber (zariskiTorsorGroupoid G J).p (Over.mk a)) ≃ MulAction.orbitRel.Quotient (Over.mk a ⟶ G) (Over.mk a ⟶ J), (∀ x : Over.mk a ⟶ J, c (toSkeleton (zariskiTrivialFiber G J (Over.mk a) x)) = Quotient.mk (MulAction.orbitRel (Over.mk a ⟶ G) (Over.mk a ⟶ J)) x) ∧ ∀ (X : Functor.Fiber F.p (Over.mk a)) (x : Over.mk a ⟶ J), c ((moduliFiberMap e (Over.mk a)).mapSkeleton.obj (toSkeleton X)) = Quotient.mk (MulAction.orbitRel (Over.mk a ⟶ G) (Over.mk a ⟶ J)) x → (moduliFiberMap π (Over.mk a)).mapSkeleton.obj (toSkeleton X) = toSkeleton (Functor.Fiber.mk (p := (discreteModuli (yoneda.obj Q)).p) (a := CostructuredArrow.mk (yoneda.map (x ≫ q))) rfl)) ∧ IsCoarseModuliScheme F Q π",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-327dbf81f",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Item node changes only lean + stmt_dep def-sfb-zariski-torsor-groupoid; statement/proof identical to side-live. Hypotheses match node: k field, GrpObj/ModObj over Spec k, F fibred in groupoids with free universes, e based with total-category IsEquivalence (fibrewise equivalence for fibred groupoids), hq invariance on actual product, hcat exists-unique for invariant f into every AlgebraicSpace (= Hom(Q,B) to invariant maps bijection with hq), hgeom surjectivity + fibre iff orbit for all alg-closed Omega:Type u and every a. Conclusions: pi with pullback formula and uniqueness (E->T locally split); R restriction pinned by e.comp AP = A and atlas.comp AP = discreteModuliMap f (AP exists/unique since vertical isos are identities in discrete target), R(pi.comp b) = q>>b; skeleton bijection via e, c pinned by c[P_x]=[x], pi-class = x>>q; IsCoarseModuliScheme exact recorded def. New def node: full subcategory of fppf TorsorObject by Zariski open-chart cartesian equivariant trivializations (equivalent to node; Zariski covers are fppf), real data, only sorry is stated true Prop law trivialObject_isZariskiTrivial (identity chart). No duplicate owner (TenCanonicalHilbert.Pair predicate is theorem-module local; RepresentedRightTorsor is a different notion); no parallel delivery. Docstrings/source/blueprint/proof steps present; Worker report + Second reading sections present. No compile needed (no change)."
+ }
+}

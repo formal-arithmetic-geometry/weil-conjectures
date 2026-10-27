@@ -1,0 +1,174 @@
+{
+ "kind": "lemma",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 3, arbitrary-base-change compatibility; proper/open comparison calculation of Stacks Tags 099R and 09AF; proetale.tex lemma-jshriek-comparison and etale-cohomology.tex lemma-shriek-base-change"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 3; the proper/open transport identity needed before inserting section-source and supported-constant normalizations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "([Cc]ompact[Ss]upport|[Ll]ower[Ss]hriek).*[Cc]omparison|[Cc]omparison.*([Cc]ompact[Ss]upport|[Ll]ower[Ss]hriek)",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "No exact match. Results concern condensed sheaves, stability of scheme properties, or algebraic scalar base change, rather than the specified compact-support comparison morphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"comparison\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "No exact match. Results concern condensed sheaves, stability of scheme properties, or algebraic scalar base change, rather than the specified compact-support comparison morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical etale proetale compact support site comparison intertwines compactification base change exchange on bounded below complexes",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "Condensed.profiniteSolid",
+     "Condensed.profiniteSolidification",
+     "Condensed.lanSheafProfinite",
+     "Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit",
+     "Condensed.profiniteSolidCounit",
+     "Condensed.ofSheafForgetProfinite",
+     "LightCondensed.lanLightCondSet",
+     "Condensed.lanCondensedSet"
+    ],
+    "note": "",
+    "digest": "378ad6bfaabce527",
+    "subdirectory": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "No exact match. Results concern condensed sheaves, stability of scheme properties, or algebraic scalar base change, rather than the specified compact-support comparison morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical etale proetale compact support comparison commutes with compactification base change exchange on bounded below complexes",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+     "RingHom.Etale.isStableUnderBaseChange",
+     "Algebra.Etale.baseChange",
+     "AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+     "Algebra.Etale.comp",
+     "AlgebraicGeometry.IsProper.isStableUnderBaseChange",
+     "ComplexShape.Embedding.AreComplementary.isStrictlySupportedOutside₂_iff",
+     "Algebra.FormallyEtale.of_restrictScalars"
+    ],
+    "note": "",
+    "digest": "be74e7e369e05a78",
+    "subdirectory": ""
+   },
+   "date": "2026-10-26",
+   "verdict": "No exact match. Results concern condensed sheaves, stability of scheme properties, or algebraic scalar base change, rather than the specified compact-support comparison morphisms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionSourceProExchange",
+  "date": "2026-10-26",
+  "group": "J6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "id": "lem-pur-section-source-pro-exchange-transport",
+ "title": "Supported endpoint transport of the compact-support exchange",
+ "statement": "Supported endpoint transport of the compact-support exchange. With the exact objects and canonical maps of [def-pur-section-compact-source-maps], for every finite commutative A and arbitrary schemes and base change, the following equation holds. No Noetherian, finite-type or nonempty hypothesis is required.\n\ntheorem sourceComparison_exchange\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {B X B' X' : Scheme.{u}} {h : X ⟶ B} {h' : X' ⟶ B'}\n    {v : X' ⟶ X} {g : B' ⟶ B} (sq : IsPullback v h' h g)\n    (c : Compactification h) (s : B ⟶ X) (s' : B' ⟶ X')\n    [IsClosedImmersion s] [IsClosedImmersion s']\n    (sqS : ChosenCartesianSquare g s' s v) :\n    (ProEtale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategoryPlus.map\n        (sourceComparison A c s) ≫ proExchange A sq c (proSupported A s) ≫\n      (ProEtale.rightDerivedLowerShriekOfCompactificationPlus\n        (ModuleCat.{u + 1} A) (c.ofIsPullback sq)).map (proBeta A sqS) =\n    (ProEtale.fixedComparisonPullbackPlus A g).inv.app\n        ((Etale.rightDerivedLowerShriekOfCompactificationPlus\n          (ModuleCat.{u + 1} A) c).obj (etaleSupported A s)) ≫\n      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) B').mapDerivedCategoryPlus.map\n        ((Etale.rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap A sq c).app\n            (etaleSupported A s) ≫\n          (Etale.rightDerivedLowerShriekOfCompactificationPlus\n            (ModuleCat.{u + 1} A) (c.ofIsPullback sq)).map (etaleBeta A sqS)) ≫\n      sourceComparison A (c.ofIsPullback sq) s'",
+ "stmt_deps": [
+  "def-pur-section-compact-source-maps",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply the canonical compact-support site-exchange square to the etale supported constant of the closed section. Naturality of proExchange moves the supported comparison through the exchange.",
+   "uses": [
+    "lem-pur-compact-support-site-exchange-square",
+    "def-pur-section-compact-source-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The closed supported-constant comparison square identifies the two endpoint maps. This uses only the etale open/closed exact sequence: its constant restriction is epi. Precompose by its image under the exact comparison and pullback. Exchange normalization and gamma normalization reduce the equality to the constant-unit comparison square. Thus the argument works for arbitrary finite A, not only the coefficient of PurityFiniteSetting.",
+   "uses": [
+    "lem-pur-supported-constant-exchange-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of compactSupportSiteComparisonPlus at etaleBeta, functoriality, and cancellation of the pullback comparison combine the previous squares into the displayed equation. There is no etale section-source equation or scalar-source endpoint in this statement.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-sf-class-compact-support-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-site-exchange-square",
+  "def-pur-section-compact-source-maps",
+  "lem-pur-supported-constant-exchange-normalization",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-sf-class-compact-support-comparison"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-thom",
+   "place": "Step 3, scalar and supported endpoint normalization of the transported source",
+   "via": [
+    "lem-pur-section-source-pro-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionSourceProExchangeTransport",
+  "file": "lean/Sheaf/Paper/SectionSourceProExchangeTransport.lean",
+  "declaration": "AlgebraicGeometry.SectionCompactSource.sourceComparison_exchange",
+  "statement": "theorem sourceComparison_exchange\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {B X B' X' : Scheme.{u}} {h : X ⟶ B} {h' : X' ⟶ B'}\n    {v : X' ⟶ X} {g : B' ⟶ B} (sq : IsPullback v h' h g)\n    (c : Compactification h) (s : B ⟶ X) (s' : B' ⟶ X')\n    [IsClosedImmersion s] [IsClosedImmersion s']\n    (sqS : ChosenCartesianSquare g s' s v) :\n    (ProEtale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategoryPlus.map\n        (sourceComparison A c s) ≫ proExchange A sq c (proSupported A s) ≫\n      (ProEtale.rightDerivedLowerShriekOfCompactificationPlus\n        (ModuleCat.{u + 1} A) (c.ofIsPullback sq)).map (proBeta A sqS) =\n    (ProEtale.fixedComparisonPullbackPlus A g).inv.app\n        ((Etale.rightDerivedLowerShriekOfCompactificationPlus\n          (ModuleCat.{u + 1} A) c).obj (etaleSupported A s)) ≫\n      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) B').mapDerivedCategoryPlus.map\n        ((Etale.rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap A sq c).app\n            (etaleSupported A s) ≫\n          (Etale.rightDerivedLowerShriekOfCompactificationPlus\n            (ModuleCat.{u + 1} A) (c.ofIsPullback sq)).map (etaleBeta A sqS)) ≫\n      sourceComparison A (c.ofIsPullback sq) s'",
+  "branch": "sheaf-dag",
+  "by": "J6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261025T211633-L-4004841",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261025T211633-L-4004841",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

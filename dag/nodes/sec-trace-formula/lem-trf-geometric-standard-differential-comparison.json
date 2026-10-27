@@ -1,0 +1,342 @@
+{
+ "id": "lem-trf-geometric-standard-differential-comparison",
+ "kind": "statement",
+ "title": "Geometric inverse image compares standard algebra resolutions and differential complexes",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small in a common universe of sheaf values and let $f:\\operatorname{Sh}(\\mathcal D)\\to\\operatorname{Sh}(\\mathcal C)$ be a geometric morphism [def-trf-geometric-morphism], with inverse image $F=f^{-1}$. For a ring sheaf $R$ and a sheaf of sets $E$ on $\\mathcal C$, write $R[E]$ for the sheafification [def-weil-pbc-sheafification] of $U\\mapsto R(U)[E(U)]$, the polynomial algebra whose variables are indexed by $E(U)$. There is a canonical isomorphism of $FR$-algebras $F(R[E])\\cong(FR)[FE]$ carrying the inverse images of the coefficient and variable maps to the coefficient and variable maps. It commutes with the evaluation counit and free-algebra unit.\nFor a map $\\mathcal A\\to\\mathcal B$ of commutative ring sheaves, let $P_0=\\mathcal A[\\mathcal B]$, $P_{n+1}=\\mathcal A[P_n]$ with the evaluation faces, unit degeneracies and iterated evaluation augmentation. Let $P'_\\bullet$ be this same augmented simplicial construction for $F\\mathcal A\\to F\\mathcal B$. The preceding comparisons induce an isomorphism $FP_\\bullet\\cong P'_\\bullet$ of augmented simplicial algebras, respecting every face and degeneracy. With sheaf differentials the sheafifications of the sectionwise modules [def-weil-pbc-kahler-differentials], there are compatible isomorphisms of simplicial $F\\mathcal B$-modules [def-weil-sheaf-of-modules-category]\n$$F(\\Omega^1_{P_\\bullet/\\mathcal A}\\otimes_{P_\\bullet}\\mathcal B)\\cong\\Omega^1_{P'_\\bullet/F\\mathcal A}\\otimes_{P'_\\bullet}F\\mathcal B.$$\nThey carry the inverse image of the universal differential and coefficient tensor maps to their corresponding maps for $P'_\\bullet$. If $s(M)^{-n}=M_n$, with alternating-face differential and zero positive terms, they induce an actual complex isomorphism $F s(\\Omega^1_{P_\\bullet/\\mathcal A}\\otimes_{P_\\bullet}\\mathcal B)\\cong s(\\Omega^1_{P'_\\bullet/F\\mathcal A}\\otimes_{P'_\\bullet}F\\mathcal B)$, and its isomorphism in the derived category [def-weil-abstract-derived-category]. All these comparisons are natural in commutative squares of ring sheaves. For the identity geometric morphism they are identities; for composite geometric morphisms they agree with the successive comparisons under the canonical inverse-image composition isomorphisms. The statement includes presheaf topoi, represented by sites with the topology in which only maximal sieves cover.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08SR (definition-standard-resolution-sheaves-rings), 08SS (definition-cotangent-complex-morphism-sheaves-rings), and 08SV (lemma-pullback-cotangent-morphism-topoi), including the free/forgetful square in its proof."
+ },
+ "stmt_deps": [
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-trf-comonad-standard-resolution",
+  "def-sfb-sheaf-differentials"
+ ],
+ "proof": [
+  {
+   "text": "First establish the free sheaf-algebra universal property. For an $R$-algebra sheaf $H$, a sheaf map $v:E\\to|H|$ extends on each object uniquely to $R(U)[E(U)]\\to H(U)$ by polynomial evaluation. Uniqueness on variables makes these extensions commute with every restriction. The sheafification universal property then extends them uniquely to an $R$-algebra map $R[E]\\to H$. Conversely restrict an algebra map to the variable map $i_E:E\\to|R[E]|$. These operations are inverse and natural. Thus $\\operatorname{Hom}_{R\\text{-Alg}}(R[E],H)=\\operatorname{Hom}(E,|H|)$; the unit is $i_E$, and the counit at $H$ evaluates the variable $[h]$ at $h$. No assertion that sheafification is computed sectionwise is used.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08SR and 08SV, free/forgetful adjunction preceding definition-standard-resolution-sheaves-rings"
+   }
+  },
+  {
+   "text": "Put $V=f_*$. Apply the lifted ring-object adjunction to $F\\dashv V$. For an $FR$-algebra $H$, regard $VH$ as an $R$-algebra through $R\\xrightarrow{\\eta_R}VFR\\to VH$. The lifted adjunction restricts to $\\operatorname{Hom}_{FR\\text{-Alg}}(FQ,H)=\\operatorname{Hom}_{R\\text{-Alg}}(Q,VH)$: the equation on structure maps on one side is adjoint to the equation on the other, by naturality of the adjunction. With $Q=R[E]$, step 1 and the underlying set adjunction give $\\operatorname{Hom}_{FR\\text{-Alg}}(F(R[E]),H)=\\operatorname{Hom}(E,V|H|)=\\operatorname{Hom}(FE,|H|)$. Restriction along $Fi_E$ is this bijection. Consequently $F(R[E])$ and $(FR)[FE]$ both freely represent the same generator sheaf. Extend the generator map of each to the other using these bijections; both composites fix the generators, hence are identities. Denote the resulting isomorphism by $\\theta_{R,E}:F(R[E])\\to(FR)[FE]$. It carries the coefficient map to the coefficient map because it is an $FR$-algebra map, and $\\theta_{R,E}Fi_E=i_{FE}$.",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SV, lemma-pullback-cotangent-morphism-topoi, free/forgetful square; lifted adjunction as in Sites Tag 00YV"
+   }
+  },
+  {
+   "text": "All free-algebra compatibility equations follow by the uniqueness in steps 1--2. For $r:R\\to S$ and $v:E\\to E'$, the two maps from $F(R[E])$ to $(FS)[FE']$ induced by $(r,v)$ have coefficient map $Fr$ and generator map $i_{FE'}Fv$, so they agree (view the target as an $FR$-algebra). For an $R$-algebra $Q$, the maps $F(R[|Q|])\\to FQ$ given by $F\\epsilon_Q$ and evaluation after $\\theta_{R,|Q|}$ both send the generator $F|Q|$ identically to $F|Q|$, so they agree. The unit equation is exactly $\\theta_{R,E}Fi_E=i_{FE}$. For $F=1$ this normalization forces $\\theta=1$. For another geometric inverse image $G$, the two comparisons $GF(R[E])\\to(GFR)[GFE]$ both carry the twice-transported coefficients and variable map to the prescribed ones. The representing property of step 2, applied also to $GF$, makes them equal. This proves composition coherence without assuming that transported local sections exhaust all sections.",
+   "uses": [
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SV, compatibility of the free/forgetful square; Tag 08SR, evaluation and generator maps"
+   }
+  },
+  {
+   "text": "Write $T(Q)=\\mathcal A[|Q|]$ and $T'(Q')=F\\mathcal A[|Q'|]$. Step 1 is a free/forgetful adjunction, so the standard-adjunction resolution theorem supplies its augmented simplicial object with faces $T^i\\epsilon T^{n-i}$ and degeneracies $T^i\\delta T^{n-i}$, where $\\delta$ is free applied to the unit. Start with $\\alpha_{-1}=1_{F\\mathcal B}$ and define recursively $\\alpha_n=T'(\\alpha_{n-1})\\theta_{\\mathcal A,|P_{n-1}|}$ for $n\\geq0$, taking $P_{-1}=\\mathcal B$. Each is an isomorphism. Step 3 intertwines both $\\epsilon$ and $\\delta$; inserting either in any one of the iterated factors and applying the recursion proves $\\alpha_{n-1}F(d_i)=d'_i\\alpha_n$ and $\\alpha_{n+1}F(s_i)=s'_i\\alpha_n$. The same counit equation proves augmentation compatibility. The operators reconstruction lemma now gives an augmented simplicial isomorphism. For a ring square $(a,b):(\\mathcal A\\to\\mathcal B)\\to(\\mathcal A_1\\to\\mathcal B_1)$ the map in degree $-1$ is $b$, and in degree $n$ it is the polynomial map on coefficients $a$ and the previous degree's variables. Step 3 and induction prove naturality of $\\alpha_n$. The identical recursion proves its identity and composition coherence.",
+   "uses": [
+    "lem-trf-adjunction-standard-simplicial-homotopy",
+    "lem-trf-simplicial-operators-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08SR, 08SV; Simplicial Tag 08NC (lemma-standard-simplicial), operator formulas preceding that lemma"
+   }
+  },
+  {
+   "text": "For each $n$, first use the differential comparison to identify $F\\Omega^1_{P_n/\\mathcal A}$ with $\\Omega^1_{FP_n/F\\mathcal A}$, preserving the universal derivation. Transport along the algebra isomorphism $\\alpha_n$ to get $\\Omega^1_{P'_n/F\\mathcal A}$. Apply the inverse-image tensor comparison over the ring sheaf $P_n$ to $\\Omega^1_{P_n/\\mathcal A}$ and $\\mathcal B$ (the latter is a $P_n$-module by the augmentation). The finite-product lift is an algebraic inverse-image presentation; its exactness/existence is supplied by the geometric inverse-image lemma. After transporting the scalar ring $FP_n$ by $\\alpha_n$, augmentation compatibility identifies the second tensor factor and its action with $F\\mathcal B$. This constructs the required degreewise $F\\mathcal B$-linear isomorphism $\\beta_n$. In terms of universal maps its normalization is $F(\\mathrm dp\\otimes b)\\mapsto\\mathrm d(\\alpha_n(Fp))\\otimes Fb$, an equation of transported derivation and bilinear-pairing maps, not a sectionwise formula for $F$. In particular the coefficient tensor map $\\omega\\mapsto\\omega\\otimes1$ is preserved.",
+   "uses": [
+    "lem-trf-topos-inverse-image-differentials",
+    "lem-pur-independent-inverse-image-tensor-comparison",
+    "def-weil-pbc-algebraic-inverse-image",
+    "lem-trf-geometric-inverse-image-exact",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 08TQ (lemma-pullback-differentials) and 03EL (lemma-tensor-product-pullback), applied degreewise to Tag 08SS"
+   }
+  },
+  {
+   "text": "Check compatibility of $\\beta_n$ using universal maps. The sheafified differential presentation says that module maps out of $\\Omega$ are determined by the universal derivation; the tensor universal property says that maps out of $\\Omega\\otimes\\mathcal B$ are determined by the associated bilinear map. For any face, degeneracy, or ring-square map $h:P_n\\to Q_m$ with coefficient map $b:\\mathcal B\\to\\mathcal B_1$, the differential-tensor map sends $\\mathrm dp\\otimes c$ to $\\mathrm d(hp)\\otimes b(c)$. This follows by differentiating $h$ and then using the balanced tensor pairing. Applying the normalization of step 5 on either side gives $\\mathrm d(\\alpha^Q_m F(hp))\\otimes F(bc)$, since step 4 gives $\\alpha^Q_m Fh=h'\\alpha^P_n$. The equations hold on universal derivation/pairing morphisms, so the two uniqueness properties imply equality of the module maps, including when the base ring changes. Thus the $\\beta_n$ are a simplicial isomorphism and natural in all the stated ring squares. For an identity inverse image the normalized pairing is unchanged. For $GF$, both the direct comparison and the successive comparisons have the same universal derivation and pure-pairing images by step 3 and the coherence of the differential comparison. The same uniqueness gives their equality. This proves tensor and simplicial coherence, rather than inferring it from a bare degreewise isomorphism.",
+   "uses": [
+    "lem-trf-sheafified-module-differentials-cokernel",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-trf-topos-inverse-image-differentials",
+    "lem-pur-independent-inverse-image-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 08TP, 08TQ, 03EL, and lemma-functoriality-differentials; Cotangent Tag 08SV, functorial free/forgetful square"
+   }
+  },
+  {
+   "text": "Let $M_\\bullet=\\Omega^1_{P_\\bullet/\\mathcal A}\\otimes_{P_\\bullet}\\mathcal B$. The transported module inverse image preserves addition and zero: these operations are transported by finite products; in particular it is additive on module morphisms. It takes the zero module to zero (its underlying terminal sheaf stays terminal). Consequently $F(\\sum_{i=0}^n(-1)^i d_i)=\\sum_{i=0}^n(-1)^i Fd_i$. Summing the face equations from step 6 gives $\\beta_{n-1}F(d^{-n})=d'^{-n}\\beta_n$ for every $n\\geq1$; the degree-zero differential and positive terms are zero. The inverse family obeys the same equations by multiplying by the inverse isomorphisms, so this is an actual complex isomorphism. Apply the derived-category localization functor to it to obtain the claimed derived isomorphism. Naturality and identity/composition equations persist under taking the alternating complex and under this functor. Every construction above uses only a geometric morphism of the given small topoi, so it applies also to the maximal-sieve topology; no points, flatness or topological-space presentation was used.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08SS (definition-cotangent-complex-morphism-sheaves-rings), 08SV (lemma-pullback-cotangent-morphism-topoi), and its use for presheaf topoi in Tag 08SW"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-trf-geometric-morphism",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-sheafification",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pur-independent-inverse-image-tensor-comparison",
+  "lem-trf-adjunction-standard-simplicial-homotopy",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-trf-sheafified-module-differentials-cokernel",
+  "lem-trf-simplicial-operators-reconstruction",
+  "lem-trf-topos-inverse-image-differentials",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08SR, 08SS, 08SV: expand the free/forgetful square using Sites Tag 00YV, Modules on Sites Tags 08TP, 08TQ, 03EL, and Simplicial Tag 08NC."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "geometric inverse image preserves free algebra standard simplicial resolution and its differential complex",
+   "results": "8 hits: classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule, AlgebraicTopology.DoldKan.Γ₀'_obj, AlgebraicTopology.DoldKan.Γ₀, AlgebraicTopology.DoldKan.Γ₀.obj, AlgebraicTopology.DoldKan.Γ₀_obj_obj, AlgebraicTopology.DoldKan.Γ₀', AlgebraicTopology.DoldKan.Γ₀.obj_obj, Rep.standardComplex.compForgetAugmentedIso. Search digest fab0dde4fb8601d4. Hits concern general sheafification, module adjunctions or Dold-Kan; none compares free sheaf algebras, the standard algebra comonad and its differential tensors. Read Mathlib/CategoryTheory/Sites/PreservesSheafification.lean:14-40.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "standardResolution|cotangentComplex|CotangentComplex [sub=CategoryTheory]",
+   "results": "0 hits: . Search digest 4f53cda18c2baa0c. Hits concern general sheafification, module adjunctions or Dold-Kan; none compares free sheaf algebras, the standard algebra comonad and its differential tensors. Read Mathlib/CategoryTheory/Sites/PreservesSheafification.lean:14-40.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheafification commutes with simplicial polynomial algebra resolution and Kahler differential complex",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.sheafification, CategoryTheory.GrothendieckTopology.sheafifyCompIso.congr_simp, CategoryTheory.sheafComposeIso_hom_fac, CategoryTheory.isoSheafify.congr_simp, PresheafOfModules.sheafifyMap, CategoryTheory.GrothendieckTopology.toSheafify_comp_sheafifyCompIso_inv_assoc, CategoryTheory.GrothendieckTopology.sheafifyCompIso, CategoryTheory.sheafifyComposeIso. Search digest ad23fa7af4c2ab8e. Hits concern general sheafification, module adjunctions or Dold-Kan; none compares free sheaf algebras, the standard algebra comonad and its differential tensors. Read Mathlib/CategoryTheory/Sites/PreservesSheafification.lean:14-40.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, MvPolynomial",
+   "results": "0 hits: . Search digest 4f53cda18c2baa0c. Hits concern general sheafification, module adjunctions or Dold-Kan; none compares free sheaf algebras, the standard algebra comonad and its differential tensors. Read Mathlib/CategoryTheory/Sites/PreservesSheafification.lean:14-40.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left exact left adjoint between sheaf topoi commutes with polynomial free algebra comonad and alternating differential tensors",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsLeftAdjointPullback, Condensed.freeForgetAdjunction, LightCondensed.freeForgetAdjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous. Search digest abc40894778d1077. Hits concern general sheafification, module adjunctions or Dold-Kan; none compares free sheaf algebras, the standard algebra comonad and its differential tensors. Read Mathlib/CategoryTheory/Sites/PreservesSheafification.lean:14-40.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "standardResolution|cotangentComplex|freeAlgebra [sub=CategoryTheory]",
+   "results": "{\"t\": \"2026-10-23T04:27:17Z\", \"tool\": \"grep\", \"query\": \"standardResolution|cotangentComplex|freeAlgebra\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read the returned types and Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:13-28, CategoryTheory/Sites/PreservesSheafification.lean:13-40, Algebra/Category/AlgCat/Basic.lean:196-212 and CategoryTheory/Monad/Adjunction.lean:224-234. Free-module comparisons, noncommutative FreeAlgebra adjunctions and coalgebra comparisons do not state this sheaf polynomial/comonad/differential comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A left exact inverse image between sheaf topoi commutes with the polynomial algebra resolution of a sheaf of rings and its cotangent complex",
+   "results": "{\"t\": \"2026-10-23T04:27:17Z\", \"tool\": \"leansearch\", \"query\": \"A left exact inverse image between sheaf topoi commutes with the polynomial algebra resolution of a sheaf of rings and its cotangent complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasSheafify.isLeftExact\", \"SheafOfModules.pullback\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"CategoryTheory.Equivalence.sheafCongr_inverse\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"CategoryTheory.GrothendieckTopology.isoSheafify_inv\"], \"digest\": \"9cb785b04e211987\"}. Read the returned types and Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:13-28, CategoryTheory/Sites/PreservesSheafification.lean:13-40, Algebra/Category/AlgCat/Basic.lean:196-212 and CategoryTheory/Monad/Adjunction.lean:224-234. Free-module comparisons, noncommutative FreeAlgebra adjunctions and coalgebra comparisons do not state this sheaf polynomial/comonad/differential comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, MvPolynomial",
+   "results": "{\"t\": \"2026-10-23T04:27:17Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, MvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read the returned types and Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:13-28, CategoryTheory/Sites/PreservesSheafification.lean:13-40, Algebra/Category/AlgCat/Basic.lean:196-212 and CategoryTheory/Monad/Adjunction.lean:224-234. Free-module comparisons, noncommutative FreeAlgebra adjunctions and coalgebra comparisons do not state this sheaf polynomial/comonad/differential comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric inverse image preserves free commutative sheaf algebras standard simplicial resolutions and their differential tensor complexes",
+   "results": "{\"t\": \"2026-10-23T04:27:23Z\", \"tool\": \"leanfinder\", \"query\": \"geometric inverse image preserves free commutative sheaf algebras standard simplicial resolutions and their differential tensor complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"CategoryTheory.Idempotents.DoldKan.Γ_obj_obj\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂\", \"AlgebraicTopology.DoldKan.Γ₀_obj_obj\", \"AlgebraicTopology.DoldKan.Γ₀.obj_obj\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand\", \"AlgebraicTopology.DoldKan.Γ₀.obj\"], \"digest\": \"499ec6b03836f450\"}. Read the returned types and Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:13-28, CategoryTheory/Sites/PreservesSheafification.lean:13-40, Algebra/Category/AlgCat/Basic.lean:196-212 and CategoryTheory/Monad/Adjunction.lean:224-234. Free-module comparisons, noncommutative FreeAlgebra adjunctions and coalgebra comparisons do not state this sheaf polynomial/comonad/differential comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite product preserving left adjoint commutes with free polynomial algebras on sheaves and their iterated free forgetful comonad",
+   "results": "{\"t\": \"2026-10-23T04:28:21Z\", \"tool\": \"leanfinder\", \"query\": \"finite product preserving left adjoint commutes with free polynomial algebras on sheaves and their iterated free forgetful comonad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.mapFree\", \"LightCondensed.freeForgetAdjunction\", \"Condensed.freeForgetAdjunction\", \"CategoryTheory.Comonad.left_comparison\", \"CommRingCat.adj\", \"Condensed.setAbAdjunction\", \"AlgCat.adj\", \"PresheafOfModules.freeAdjunction\"], \"digest\": \"e50bc8afdd25544f\"}. Read the returned types and Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:13-28, CategoryTheory/Sites/PreservesSheafification.lean:13-40, Algebra/Category/AlgCat/Basic.lean:196-212 and CategoryTheory/Monad/Adjunction.lean:224-234. Free-module comparisons, noncommutative FreeAlgebra adjunctions and coalgebra comparisons do not state this sheaf polynomial/comonad/differential comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-cotangent-comparison",
+  "date": "2026-10-22",
+  "group": "Q05"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Sheaf cotangent stalks, section maps and ring localization. Re-split of the supporting comparison: Old proof steps 1--4: the free-algebra adjunction comparison, iteration on the comonad resolution, differential/tensor comparison and identity/composition coherence.",
+   "via": [
+    "lem-trf-affine-cotangent-comparison",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-geometric-standard-differential-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the Stacks 08SV square into the free sheaf-algebra representing bijection, normalized counit/unit comparisons, recursive augmented simplicial comparison, universal differential/tensor compatibility and the actual alternating complex isomorphism. Reused existing tool nodes; no new nodes or statement correction.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Sheaf cotangent stalks, section maps and ring localization. Re-split of the supporting comparison: Old proof steps 1--4: the free-algebra adjunction comparison, iteration on the comonad resolution, differential/tensor comparison and identity/composition coherence. Steps 1--4 supply the standard algebra comparison; steps 5--7 supply differential tensors and alternating complexes, including the full coherence clauses.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "why": "Generic finite-product adjunction lifted to commutative rings is used to restrict the adjunction to R-algebras; no node of this unit supplies that lifted ring adjunction."
+   },
+   {
+    "node": "lem-pur-independent-inverse-image-tensor-comparison",
+    "why": "Generic normalized tensor comparison for a geometric algebraic inverse image; applies to arbitrary ring sheaves in a common value universe and does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic uniqueness of a map from a sheaf tensor by its bilinear pairing, needed for variable-scalar and composition equations; no node of this unit states the bilinear universal property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "lem-pur-independent-inverse-image-tensor-comparison",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-606abd6c4",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-606abd6c4 (reviewer sub-agent of L); spot-checked: I read the item, every cited node statement, and Stacks cotangent.tex at 08SR, 08SS, the square-functoriality paragraph, 08SV and its use in 08SW. The statement is the imported one. The three added stmt_deps (polynomial ring, sheaf tensor, algebraic inverse image) are notions it already uses. There are no new nodes, no cycle and no repair note. Step 1 is elementary: the polynomial universal property plus the sheafification universal property in rings. Step 2: F preserves finite products, so the lifted ring adjunction (2) applies. The R-algebra restriction is correct by naturality of the unit, and the composite bijection is restriction along Fi_E, so Yoneda gives θ. Step 3: naturality, the counit equation (|FQ|=F|Q|) and composite coherence (GF is a geometric inverse image; a^{-1}b^{-1} is literal) all follow by uniqueness. Step 4: the recursion α_n = T'(α_{n-1})θ is checked for d_0 via naturality of ε', for d_i = T(d_{i-1}) by induction, for degeneracies via θFi=i, and for the augmentation. The hypotheses of the operator-reconstruction and standard-resolution lemmas are met. Step 5: the hypotheses of lem-trf-topos-inverse-image-differentials and lem-pur-independent-inverse-image-tensor-comparison match the item's. ℬ is a P_n-module via the augmentation, and α intertwines it. Step 6: uniqueness from the derivation-representing and bilinear universal properties. Taking the universal generalized section (test sheaf |P|, p=id) avoids any assumption that sections are exhausted. Step 7: additivity is the graph condition of the algebraic inverse image. The face equations sum to the s(−) chain isomorphism, and Q gives the derived isomorphism. Edge cases checked: E=∅, the zero ring, F=id, the presheaf/chaotic topology, and degrees −1 and 0. No duplicates: the sfb flat-functorial/augmentation nodes are over topological spaces and cite the parent; simplicial-differential-base-change is ring base change only; sfb-internal-module-inverse-image-comparison is in the internal-module setting. I accept the three tool_uses as generic statements: the lifted ring adjunction, the normalized tensor comparison and the sheaf tensor bilinear universal property. No SGA is used."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.GeometricStandardDifferentialComparison",
+  "declaration": "CategoryTheory.GeometricStandardDifferentials.geometric_standard_differential_comparison",
+  "declarations": [
+   "CategoryTheory.GeometricStandardDifferentials.setsFunctor",
+   "CategoryTheory.GeometricStandardDifferentials.algebraSets",
+   "CategoryTheory.GeometricStandardDifferentials.AlgebraConstruction",
+   "CategoryTheory.GeometricStandardDifferentials.AlgebraConstruction.polynomial",
+   "CategoryTheory.GeometricStandardDifferentials.AlgebraConstruction.coefficient",
+   "CategoryTheory.GeometricStandardDifferentials.AlgebraConstruction.variableMap",
+   "CategoryTheory.GeometricStandardDifferentials.AlgebraConstruction.evaluate",
+   "CategoryTheory.GeometricStandardDifferentials.AlgebraConstruction.polynomialMap",
+   "CategoryTheory.GeometricStandardDifferentials.AlgebraConstruction.resolution",
+   "CategoryTheory.GeometricStandardDifferentials.AlgebraConstruction.base",
+   "CategoryTheory.GeometricStandardDifferentials.AlgebraConstruction.augment",
+   "CategoryTheory.GeometricStandardDifferentials.AlgebraConstruction.prior",
+   "CategoryTheory.GeometricStandardDifferentials.AlgebraConstruction.labels",
+   "CategoryTheory.GeometricStandardDifferentials.AlgebraConstruction.coordinates",
+   "CategoryTheory.GeometricStandardDifferentials.AlgebraConstruction.generator",
+   "CategoryTheory.GeometricStandardDifferentials.AlgebraConstruction.differentialTerm",
+   "CategoryTheory.GeometricStandardDifferentials.AlgebraConstruction.tensorSection",
+   "CategoryTheory.GeometricStandardDifferentials.AlgebraConstruction.tensorD",
+   "CategoryTheory.GeometricStandardDifferentials.DifferentialConstruction",
+   "CategoryTheory.GeometricStandardDifferentials.AlternatingConstruction",
+   "CategoryTheory.GeometricStandardDifferentials.InverseLift",
+   "CategoryTheory.GeometricStandardDifferentials.FreeComparison",
+   "CategoryTheory.GeometricStandardDifferentials.FreeComparison.arrow",
+   "CategoryTheory.GeometricStandardDifferentials.squareLabels",
+   "CategoryTheory.GeometricStandardDifferentials.ResolutionSquare",
+   "CategoryTheory.GeometricStandardDifferentials.Construction",
+   "CategoryTheory.GeometricStandardDifferentials.inverseLabels",
+   "CategoryTheory.GeometricStandardDifferentials.TermDifferentialIso",
+   "CategoryTheory.GeometricStandardDifferentials.termDifferentialArrow",
+   "CategoryTheory.GeometricStandardDifferentials.StandardComparison",
+   "CategoryTheory.GeometricStandardDifferentials.ringSheafification",
+   "CategoryTheory.GeometricStandardDifferentials.PolynomialPresentation",
+   "CategoryTheory.GeometricStandardDifferentials.ConstructionSquare",
+   "CategoryTheory.GeometricStandardDifferentials.StandardComparison.algebraArrow",
+   "CategoryTheory.GeometricStandardDifferentials.StandardComparison.moduleArrow",
+   "CategoryTheory.GeometricStandardDifferentials.StandardComparison.complexArrow",
+   "CategoryTheory.GeometricStandardDifferentials.ConstructionSquare.moduleArrow",
+   "CategoryTheory.GeometricStandardDifferentials.ConstructionSquare.complexArrow",
+   "CategoryTheory.GeometricStandardDifferentials.derived",
+   "CategoryTheory.GeometricStandardDifferentials.localization",
+   "CategoryTheory.GeometricStandardDifferentials.derivedComparison",
+   "CategoryTheory.GeometricStandardDifferentials.construction_exists",
+   "CategoryTheory.GeometricStandardDifferentials.constructionSquare_exists",
+   "CategoryTheory.GeometricStandardDifferentials.geometric_standard_differential_comparison",
+   "CategoryTheory.GeometricStandardDifferentials.comparison_naturality",
+   "CategoryTheory.GeometricStandardDifferentials.identityLift_exists",
+   "CategoryTheory.GeometricStandardDifferentials.comparison_identity",
+   "CategoryTheory.GeometricStandardDifferentials.compositeLift_exists",
+   "CategoryTheory.GeometricStandardDifferentials.comparison_composition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/GeometricStandardDifferentialComparison.lean",
+  "statement": "theorem geometric_standard_differential_comparison (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w))) (M : Construction J) (N : Construction K) : ∃ I : InverseLift f.inverse, Nonempty (FreeComparison M.algebra N.algebra I) ∧ ∀ {A B : Sheaf J CommRingCat.{w}} (φ : A ⟶ B), Nonempty (StandardComparison M N I φ)",
+  "branch": "sheaf-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The primary comparison is accompanied by the construction-existence, square-map, naturality, identity and composition statements in lean.declarations. Helper structures retain the free adjunction, exact standard comonad operators, actual sheaf differential tensors and actual complex isomorphisms. PolynomialPresentation identifies the free objects with sectionwise MvPolynomial sheafification. derivedComparison is the localization of the actual complex isomorphism; no object is chosen from a mere existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d50d7256e",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Re-delivery of the H2 RETURN of bf443b066338. Node diff: stmt_deps gains only def-trf-comonad-standard-resolution and def-sfb-sheaf-differentials (both landed, snapshot records equal side-live; brief-stage2 §177 permits this). Statement, proof, proof_deps and lean.statement are unchanged. Lean diff: all 13 SheafDifferentials.setsMap uses replaced by the item helper (setsFunctor J/K).map, which is the same sheafCompose functor; J/K sides checked in squareLabels, ResolutionSquare, inverseLabels, StandardComparison, algebraArrow and comparison_naturality. All remaining project identifiers (SheafDifferentials.*, Comonad.*, GeometricMorphism, ringedSiteModules, changeOfRingsOfUniverses, AlgebraicInverseImageOfUniverses) have their owners in stmt_deps. The mathematics was accepted clause by clause in the bf44 review and is unchanged. 8 theorems with sorry-only bodies, no hollow defs, docstrings OK, no pro-etale substitute, independent universes, report sections present. Delivery compile and dry run OK; I changed nothing and compiled nothing."
+ }
+}

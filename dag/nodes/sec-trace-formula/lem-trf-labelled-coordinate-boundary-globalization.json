@@ -1,0 +1,340 @@
+{
+ "id": "lem-trf-labelled-coordinate-boundary-globalization",
+ "kind": "statement",
+ "title": "Global components of a labelled etale coordinate boundary",
+ "statement": "Let $Y$ be a Noetherian scheme [pqf-def-locnoeth], meaning locally Noetherian and quasi-compact. Let $E,F_1,\\ldots,F_m\\hookrightarrow Y$ be reduced closed subschemes [def-weil-closed-immersion, def-weil-pbc-scheme-reduction], with $m\\ge0$, and suppose the $F_a$ are nonempty, pairwise distinct and irreducible [def-weil-irreducible-components]. Let $C\\hookrightarrow Y$ be a reduced closed subscheme containing $E$ and every $F_a$, and let $D=(E\\cup\\bigcup_a F_a)_{\\mathrm{red}}$. Suppose that for every $y\\in Y$ there exist an actual etale morphism $v:V\\to Y$ [def-weil-etale-morphism] and $z\\in V$ above $y$, with $\\mathcal O_{V,z}$ a regular local ring [def-weil-regular-scheme] having a regular system of parameters $s_1,\\ldots,s_d$ [def-weil-pbc-regular-system-of-parameters]. Assume that in this local scheme every member of the labelled family $E,F_1,\\ldots,F_m$ is empty or one coordinate hyperplane $V(s_i)$, with different nonempty members assigned different indices. Assume also that the reduced pullback of $C$ has equation $\\prod_{i\\in K}s_i=0$ for a subset $K\\subseteq\\{1,\\ldots,d\\}$ containing every assigned index. Every intersection of $q$ distinct coordinate hyperplanes in these equations is required to be empty or regular, with every irreducible component of codimension $q$ in $\\operatorname{Spec}\\mathcal O_{V,z}$; the empty intersection is this local scheme. Then $Y$ is regular, $E$ and each $F_a$ are regular, and $C$ and $D$ are effective Cartier divisors [def-nagata-effective-cartier-ideal]. The divisor $C$ has normal crossings [def-trf-normal-crossings-divisor]. The irreducible components of $E$ are finite and pairwise disjoint open and closed subschemes of $E$; the irreducible components of $D$ are exactly these components and the $F_a$, with their reduced structures. Every intersection of $q$ distinct components of $D$ is empty or regular of codimension $q$ in $Y$. Thus $D$ is a strict normal crossings boundary [def-trf-strict-normal-crossings-boundary] and a union of irreducible components of $C$ [def-trf-union-of-irreducible-components]. Empty $Y$, $E$, $C$, $D$, the empty labelled family, and disconnected $E$ are permitted.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 4.1.2--4.1.4(i), printed p. 117; Lemma 4.2.9 and its coordinate-chart proof, printed p. 121; the regular-intersection criterion is Remark 4.2.2(i), printed p. 118."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-irreducible-components",
+  "def-weil-etale-morphism",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-nagata-effective-cartier-ideal",
+  "def-trf-normal-crossings-divisor",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-trf-union-of-irreducible-components",
+  "def-trf-marked-ideal-order"
+ ],
+ "proof": [
+  {
+   "text": "Fix $y\\in Y$ and a stipulated chart $(V,z)$, and put $A=\\mathcal O_{Y,y}$ and $R=\\mathcal O_{V,z}$. Apply [lem-trf-finite-intersection-etale-stalk-model] with the empty subset: $A\\to R$ is a flat local map of Noetherian local rings. Since $R$ is regular, [lem-weil-pbc-flat-under-regular] makes $A$ regular. For a label $L\\in\\{E,F_1,\\ldots,F_m\\}$ and $y\\in L$, the same model identifies its stalk with $A/I_L$ and gives a flat local map $A/I_L\\to R/I_LR$. Here $I_LR=(s_i)$ for its assigned index. By [lem-sfb-transverse-prime-ideal-parameters](b), $R/(s_i)$ is regular local. A second application of flat descent makes $A/I_L$ regular. The model also gives local Noetherianity of each $L$. Thus every stalk of $Y,E,F_a$ is regular, which is exactly [def-weil-regular-scheme]; points outside a label require no stalk check.",
+   "uses": [
+    "lem-trf-finite-intersection-etale-stalk-model",
+    "lem-weil-pbc-flat-under-regular",
+    "lem-sfb-transverse-prime-ideal-parameters",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OF, lemma-flat-under-regular; etale.tex Tag 025N, proposition-etale-regular; ILO VIII 4.1.4(i)."
+   }
+  },
+  {
+   "text": "The closed subscheme $E$ is quasi-compact: add $Y\\setminus E$ to an open cover of $E$ and use quasi-compactness of $Y$. Together with step 1 this makes $E$ Noetherian. Apply [rem-pc-regular-normal](1)--(2) to $E$: its finitely many irreducible components $E_b$ are disjoint and open and closed in $E$, and integral. Each is regular because its local rings are those of $E$. Apply the same node to $Y$: its irreducible components are also open and closed. Each $F_a$ is integral because it is reduced and nonempty irreducible, by [def-pc-integral-scheme]. For a fixed $y$, any $E_b$ not containing $y$ has empty pullback to $\\operatorname{Spec}R$, since its closed ideal becomes the unit ideal at $y$. If $y\\in E$, exactly one $E_b$ contains it. The other finitely many components disappear in that local scheme, so the surviving $E_b$ has exactly the coordinate equation assigned to $E$. Thus the refined family $\\mathcal G=(E_b)_b,(F_a)_a$ still consists locally of distinct labelled coordinate hyperplanes or empty subschemes.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 4.1.4(i), 4.2.2(i); properties.tex Tags 0569 and 033M, regularity-normality and normal Noetherian decomposition."
+   }
+  },
+  {
+   "text": "For any subset $J$ of the finite refined family $\\mathcal G$, its local scheme-theoretic intersection is empty if one selected member is empty. Otherwise the equations are $s_{i(G)}=0$ for $G\\in J$, at $|J|$ distinct indices; this is an equality of ideals, not just of supports. The empty subset gives $\\operatorname{Spec}R$. The assumed regular-intersection condition supplies regularity and component codimension $|J|$ in each of these local schemes. Apply [lem-trf-etale-regular-intersection-descent] to $X=Y$ and the family $\\mathcal G$. It gives regularity of every global scheme-theoretic intersection and codimension $|J|$ for each of its irreducible components. This includes singleton intersections and the empty subset. The same actual etale chart may be used for every $J$ at a given $y$; a global labelling of the etale branches of $C$ is unnecessary.",
+   "uses": [
+    "lem-trf-etale-regular-intersection-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Remark 4.2.2(i), regular-intersection criterion; etale.tex Tags 025N and 039S."
+   }
+  },
+  {
+   "text": "We also need the local dimension equality, not only generic component codimension. Let $y\\in G_J=\\bigcap_{G\\in J}G$. By [lem-trf-finite-intersection-etale-stalk-model], its pulled-back stalk is $R/(s_{i(G)}:G\\in J)$. By [lem-sfb-transverse-prime-ideal-parameters](b), its dimension is $\\dim R-|J|$. Apply [lem-sc-etale-local-dimension] to $V\\to Y$ on affine neighbourhoods of $z,y$ to obtain $\\dim R=\\dim A$. The morphism $G_J\\times_YV\\to G_J$ is etale by [lem-weil-pbc-etale-scheme-base-change]. Applying the same local-dimension lemma on affine neighbourhoods for this morphism gives $\\dim\\mathcal O_{G_J,y}=\\dim R/(s_{i(G)}:G\\in J)$. Hence $\\dim\\mathcal O_{Y,y}=\\dim\\mathcal O_{G_J,y}+|J|$. These are applications to actual etale morphisms before taking local rings; no finite-presentation assertion about the map between stalks is needed.",
+   "uses": [
+    "lem-trf-finite-intersection-etale-stalk-model",
+    "lem-sfb-transverse-prime-ideal-parameters",
+    "lem-sc-etale-local-dimension",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QP, lemma-dimension-etale-extension; morphisms.tex Tag 02GO, lemma-base-change-etale; etale.tex Tag 0BIA, lemma-strict-normal-crossings."
+   }
+  },
+  {
+   "text": "The actual pullbacks $C\\times_YV$ and $D\\times_YV$ are reduced by the first assertion of [lem-trf-etale-reduced-cartier-descent]. Indeed $C,D$ are reduced closed subschemes, so by [lem-weil-pbc-reduced-induced-closed-subscheme](3) they are the reduced induced structures on their supports. Thus in $R$ the ideal of $C$ is the stipulated $(\\prod_{i\\in K}s_i)$, even though the hypothesis initially describes its reduced pullback. For $D$, its local support is the union of the hyperplanes assigned to the labels: inverse image commutes with finite union. Its ideal is therefore the intersection of their prime ideals, since the pullback is reduced. By [lem-sfb-transverse-prime-ideal-parameters](b), this intersection is $(\\prod_{i\\in H}s_i)$, where $H$ is the set of assigned indices. Both products are nonzerodivisors; the empty product is $1$. Consequently both local pullbacks are effective Cartier divisors on $\\operatorname{Spec}R$.",
+   "uses": [
+    "lem-trf-etale-reduced-cartier-descent",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sfb-transverse-prime-ideal-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 4.1.2 and Lemma 4.2.9; descent.tex Tag 034E, lemma-reduced-local-smooth; schemes.tex Tag 01J3, lemma-reduced-closed-subscheme."
+   }
+  },
+  {
+   "text": "For either ideal $I=I_C$ or $I_D$ in $A$, the flat local map $A\\to R$ is faithfully flat, with surjective spectrum, by [lem-weil-pbc-flat-local-hom-faithfully-flat]. The single affine morphism $\\operatorname{Spec}R\\to\\operatorname{Spec}A$ is an fpqc cover: it is flat and surjective, and inverse images of basic affine opens are affine, so the covering condition in [def-weil-pbc-fpqc-covering] holds. Step 5 says its pulled-back closed ideal is effective Cartier. Apply [lem-trf-fpqc-cartier-ideal-reflection] to $V(I)\\hookrightarrow\\operatorname{Spec}A$. It follows that $I$ is effective Cartier; at the closed point of this local scheme it is generated by a nonzerodivisor. Do this at every $y$. By [lem-sfb-stalk-nonzerodivisor-cartier-spreading], these stalk generators give effective Cartier ideals on $Y$. Thus $C$ and $D$ are effective Cartier divisors, including their empty cases.",
+   "uses": [
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "def-weil-pbc-fpqc-covering",
+    "lem-trf-fpqc-cartier-ideal-reflection",
+    "lem-sfb-stalk-nonzerodivisor-cartier-spreading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05B2, lemma-finite-locally-free-descends; divisors.tex Tag 0AG8, lemma-effective-Cartier-in-points; algebra.tex Tag 00HR, lemma-local-flat-ff."
+   }
+  },
+  {
+   "text": "The local equation for $C$ in step 5 uses an actual etale neighbourhood, a regular local ring, and a sublist of its regular system of parameters. An affine neighbourhood of $z$ exists because $V$ is a scheme, and its germ map gives precisely this ideal. With the effective Cartier property from step 6, these are all the conditions of [def-trf-normal-crossings-divisor]. Hence $C$ has normal crossings. This assertion permits unlabelled global components of $C$ to self-intersect; the labels are needed for the stricter assertion about $D$.",
+   "uses": [
+    "def-trf-normal-crossings-divisor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 4.1.1--4.1.2, etale-local product equations."
+   }
+  },
+  {
+   "text": "No two members of $\\mathcal G$ contain one another. Different $E_b$ are disjoint and nonempty. For two members from different original labels, a containment would, at any point of the smaller member, give containment of their local hyperplanes. Their ideals are distinct parameter primes, incomparable by [lem-sfb-transverse-prime-ideal-parameters](b), a contradiction. These members are finite, integral and closed, and their union is $|D|$. An irreducible closed subset of a finite union of closed subsets lies in one of them: intersect with each closed subset and use irreducibility, inducting on the number of subsets. Maximality and the preceding noncontainments therefore show that the irreducible components of $D$ are exactly $\\mathcal G$. Their reduced structures agree with the prescribed ones by [lem-weil-pbc-reduced-induced-closed-subscheme](3). Steps 3, 4 and 6 now verify every clause of [def-trf-strict-normal-crossings-boundary]: reduced Cartier ideal, finite distinct integral regular components, and all regular intersections with the required local dimension equality.",
+   "uses": [
+    "lem-sfb-transverse-prime-ideal-parameters",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-trf-strict-normal-crossings-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Remark 4.2.2(i), regular intersections of the actual irreducible components."
+   }
+  },
+  {
+   "text": "Finally each $G\\in\\mathcal G$ is a component of $C$. It is an irreducible closed subset of $C$, so lies in a component $T$ of $C$; finiteness and coverage of the component family follow from [lem-sc-noetherian-closed-subset-finite-components] applied to the closed subset $|C|\\subseteq Y$. Likewise $T$ lies in an irreducible component $W$ of $Y$. By step 2, $W$ is open in $Y$. Since $C$ is effective Cartier, [lem-pc-cartier-divisor-nowhere-dense] says it contains no nonempty open subset; hence $T\\subsetneq W$. If $G\\subsetneq T$, the chain $G\\subsetneq T\\subsetneq W$ of irreducible closed subsets would give codimension at least two for $G$ in $Y$, contrary to its singleton codimension one in step 3. Therefore $G=T$. By [def-trf-union-of-irreducible-components], $D$ is a union of components of $C$. If the family is empty this is vacuous. If $Y$ is empty every pointwise condition is vacuous, the ideals of $C,D$ are the unit ideals, and the same proof gives the empty component lists and all the asserted conclusions.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-pc-cartier-divisor-nowhere-dense",
+    "def-trf-union-of-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 4.1.4(i), 4.2.2(i); properties.tex Tag 0BA8; divisors.tex Tag 07ZU, lemma-complement-effective-Cartier-divisor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-finite-intersection-etale-stalk-model",
+  "lem-weil-pbc-flat-under-regular",
+  "lem-sfb-transverse-prime-ideal-parameters",
+  "def-weil-regular-scheme",
+  "rem-pc-regular-normal",
+  "def-pc-integral-scheme",
+  "lem-trf-etale-regular-intersection-descent",
+  "lem-sc-etale-local-dimension",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-trf-etale-reduced-cartier-descent",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "def-weil-pbc-fpqc-covering",
+  "lem-trf-fpqc-cartier-ideal-reflection",
+  "lem-sfb-stalk-nonzerodivisor-cartier-spreading",
+  "def-trf-normal-crossings-divisor",
+  "def-trf-strict-normal-crossings-boundary",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-pc-cartier-divisor-nowhere-dense",
+  "def-trf-union-of-irreducible-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expanded globalization of VIII 4.1.4(i), 4.2.2(i) and the chart proof of 4.2.9, using the cited Stacks descent and component facts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of closed subschemes etale locally equal to distinct coordinate hyperplanes has a strict normal crossings reduced union after splitting a possibly disconnected member into irreducible components.",
+   "results": "{\"t\": \"2026-10-22T06:08:55Z\", \"tool\": \"leanfinder\", \"query\": \"A finite family of closed subschemes etale locally equal to distinct coordinate hyperplanes has a strict normal crossings reduced union after splitting a possibly disconnected member into irreducible components.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.IsReduced.of_openCover\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization\"], \"digest\": \"9d6c2c12024e5590\"}; Read the returned signatures: standard etale presentations, smooth charts, reduced open covers and normalization do not give labelled blowup strict transforms or the component/intersection globalization asserted here. Loogle and the Mathlib AlgebraicGeometry grep give no hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of regularity and intersection codimension from etale coordinate charts, and identifying irreducible components of a reduced normal crossings divisor.",
+   "results": "{\"t\": \"2026-10-22T06:08:43Z\", \"tool\": \"leansearch\", \"query\": \"Descent of regularity and intersection codimension from etale coordinate charts, and identifying irreducible components of a reduced normal crossings divisor.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced.of_openCover\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.IsReduced.mk\", \"AlgebraicGeometry.IsEtale\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"890ee8148a542b43\"}; Read the returned signatures: standard etale presentations, smooth charts, reduced open covers and normalization do not give labelled blowup strict transforms or the component/intersection globalization asserted here. Loogle and the Mathlib AlgebraicGeometry grep give no hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NormalCrossing\"",
+   "results": "{\"t\": \"2026-10-22T06:08:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"NormalCrossing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: standard etale presentations, smooth charts, reduced open covers and normalization do not give labelled blowup strict transforms or the component/intersection globalization asserted here. Loogle and the Mathlib AlgebraicGeometry grep give no hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normal.crossing|coordinate.hyperplane|strict.normal|regular.*intersection",
+   "results": "{\"t\": \"2026-10-22T06:08:42Z\", \"tool\": \"grep\", \"query\": \"normal.crossing|coordinate.hyperplane|strict.normal|regular.*intersection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: standard etale presentations, smooth charts, reduced open covers and normalization do not give labelled blowup strict transforms or the component/intersection globalization asserted here. Loogle and the Mathlib AlgebraicGeometry grep give no hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normal.crossing|coordinate.hyperplane|strict.normal",
+   "results": "{\"t\": \"2026-10-23T09:34:32Z\", \"tool\": \"grep\", \"query\": \"normal.crossing|coordinate.hyperplane|strict.normal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Inspected returned signatures: etale/smooth definitions, loci and standard charts do not assert labelled-boundary globalization or its component and intersection clauses; the normal-crossings grep/Loogle searches returned no declarations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale local coordinate divisors descend to strict normal crossings when all labelled components are regular.",
+   "results": "{\"t\": \"2026-10-23T09:34:32Z\", \"tool\": \"leansearch\", \"query\": \"Etale local coordinate divisors descend to strict normal crossings when all labelled components are regular.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.of_isLocalizationAway\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"Algebra.etaleLocus\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\"], \"digest\": \"34cf5629646d9b5d\"}; Inspected returned signatures: etale/smooth definitions, loci and standard charts do not assert labelled-boundary globalization or its component and intersection clauses; the normal-crossings grep/Loogle searches returned no declarations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NormalCrossing\"",
+   "results": "{\"t\": \"2026-10-23T09:34:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"NormalCrossing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Inspected returned signatures: etale/smooth definitions, loci and standard charts do not assert labelled-boundary globalization or its component and intersection clauses; the normal-crossings grep/Loogle searches returned no declarations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global components and regular intersections of a reduced divisor whose labelled pieces are distinct coordinate hyperplanes in etale local regular rings.",
+   "results": "{\"t\": \"2026-10-23T09:34:43Z\", \"tool\": \"leanfinder\", \"query\": \"Global components and regular intersections of a reduced divisor whose labelled pieces are distinct coordinate hyperplanes in etale local regular rings.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"Algebra.etaleLocus_eq_compl_support\", \"StandardEtalePair\", \"Polynomial.instEtaleUniversalCoprimeFactorizationRing\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.mem_etaleLocus_iff\"], \"digest\": \"0cac9b754935b5b6\"}; Inspected returned signatures: etale/smooth definitions, loci and standard charts do not assert labelled-boundary globalization or its component and intersection clauses; the normal-crossings grep/Loogle searches returned no declarations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalCrossing|normal_crossing|simpleNormalCrossing|IsStrictNormal",
+   "results": "{\"t\": \"2026-10-23T09:37:45Z\", \"tool\": \"grep\", \"query\": \"normalCrossing|normal_crossing|simpleNormalCrossing|IsStrictNormal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Inspected returned signatures: etale/smooth definitions, loci and standard charts do not assert labelled-boundary globalization or its component and intersection clauses; the normal-crossings grep/Loogle searches returned no declarations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simple normal crossings divisor has regular irreducible components with transverse regular intersections; regularity and effective Cartier divisors descend under etale morphisms.",
+   "results": "{\"t\": \"2026-10-23T09:37:55Z\", \"tool\": \"leanfinder\", \"query\": \"A simple normal crossings divisor has regular irreducible components with transverse regular intersections; regularity and effective Cartier divisors descend under etale morphisms.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.etaleLocus\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"91ded65f8185efde\"}; Inspected returned signatures: etale/smooth definitions, loci and standard charts do not assert labelled-boundary globalization or its component and intersection clauses; the normal-crossings grep/Loogle searches returned no declarations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-permissible-boundary-preservation",
+  "date": "2026-10-22",
+  "group": "Q115"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "lem-trf-local-term-locality proof (1)--(2), nearby-duality alteration reduction through the nodal-pair modification; ILO VIII 4.1.4(i): regularity and the SNC accumulated exceptional boundary along a permissible tower. Specific subargument of lem-trf-permissible-boundary-preservation: old step 4 and component/finiteness part of step 5, regular intersections and splitting the exceptional divisor.",
+   "via": [
+    "lem-trf-permissible-boundary-preservation",
+    "lem-trf-normal-crossings-strictification",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-labelled-coordinate-boundary-globalization",
+  "worker": "stage1",
+  "summary": "Checked ILO VIII pp.117--121 and existing Stacks-based descent and component nodes. Kept the statement unchanged; supplied nine proof steps, using existing nodes only. Explicitly separated actual reduced pullback from reduced pullback, proved the local dimension equalities, and identified components by noncontainment and codimension-one chains. No new nodes or Mathlib leaves.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality proof (1)--(2), existing nearby-duality alteration branch; specifically the globalization of the permissible-boundary chart argument in VIII 4.1.4(i) and 4.2.9, with VIII 4.2.2(i). The latest ancestor proof has replaced the historical nearby-duality discussion by the contracting-correspondence theorem; this item keeps the assigned local boundary argument and does not alter the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-under-regular",
+    "why": "Regularity descends under flat local maps of Noetherian local rings; used in the local stalk calculation, not to replace a unit step."
+   },
+   {
+    "node": "lem-sfb-transverse-prime-ideal-parameters",
+    "why": "Only part (b), the elementary local algebra of a product of distinct regular parameters and parameter quotients, is used; no node of this unit states the full ring-local package."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Regularity implies normality and Noetherian normal schemes have finite clopen integral components; used as a generic geometric decomposition, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sc-etale-local-dimension",
+    "why": "Equality of stalk dimensions under actual etale morphisms, needed also on the intersection base changes; a generic local-dimension tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Uniqueness of reduced induced structure identifies the actual reduced closed subschemes and their component structures."
+   },
+   {
+    "node": "lem-sfb-stalk-nonzerodivisor-cartier-spreading",
+    "why": "Stalkwise Cartier generators spread on a locally Noetherian scheme; a generic descent-to-neighbourhood tool."
+   },
+   {
+    "node": "lem-pc-cartier-divisor-nowhere-dense",
+    "why": "An effective Cartier divisor contains no nonempty open; used to rule out an ambient component lying in C."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-under-regular",
+  "lem-sfb-transverse-prime-ideal-parameters",
+  "rem-pc-regular-normal",
+  "lem-sc-etale-local-dimension",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sfb-stalk-nonzerodivisor-cartier-spreading",
+  "lem-pc-cartier-divisor-nowhere-dense"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N9-86bef6ceb",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-86bef6ceb (reviewer sub-agent of L); spot-checked: FIX for one wrong source tag. I read the item and all nine steps in full; the statement is unchanged from live (live is still unsplit, no repair note). Step 9 cited Stacks 'Tag 01WT, lemma-complement-effective-Cartier-divisor-dense', but 01WT is definition-sum-effective-Cartier-divisors and that label does not exist. The fix changes it to Tag 07ZU, lemma-complement-effective-Cartier-divisor; nothing else is touched. Source checks: ILO VIII 4.1.2–4.1.4(i) on pp.117–118 and Remark 4.2.2(i) give the outline, and the proof is correctly marked agent-written. The other Stacks tag/label pairs (00OF, 025N, 039S, 07QP, 02GO, 0BIA, 0569, 033M, 034E, 01J3, 05B2, 0AG8, 00HR, 0BA8) match. Steps: (1) A→R from the stalk model at J=∅ meets every hypothesis of flat-under-regular, and with transverse-parameters (b) this makes Y, E and each F_a regular. (2) rem-pc-regular-normal splits E into finite clopen integral components; points of E×Spec R lie over generalizations of y, so exactly one E_b survives locally. (3) The hypotheses of the etale-regular-intersection descent node are met, including empty J and empty members. (4) etale local dimension, applied on affine charts and with 02GO, gives the dimension equality. (5) reduced descent plus uniqueness of the reduced structure shows the actual ideal of C in R is the product of the s_i, and (b) gives the product for D. (6) Spec R→Spec A is an fpqc cover, so fpqc reflection and stalk Cartier spreading make C and D effective Cartier. (7) normal crossings is a direct definition check. (8) incomparable parameter primes stop any containment or equality between members, so the components of D are exactly the family and D is an SNC boundary. (9) C contains no nonempty open and the components of Y are open, so a chain G⊊T⊊W would contradict codimension 1. Edge cases checked: empty Y, E, C, D and family; d=0; disconnected E; xy=0 works; xy(x+y) is excluded by the parameter hypothesis. No cycle (DFS over 695 nodes), proof_deps = union of uses, no SGA. No duplicate: snc-boundary-parameter-criterion is Zariski-local, component-coordinate-identification assumes the components are known. The declared tool uses are generic and accepted. Not this delivery's fault: the cited descent node lem-trf-etale-regular-intersection-descent has corrupted control characters in its statement TeX.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LabelledCoordinateBoundaryGlobalization",
+  "declaration": "AlgebraicGeometry.labelled_coordinate_boundary_globalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/LabelledCoordinateBoundaryGlobalization.lean",
+  "statement": "theorem labelled_coordinate_boundary_globalization (Y : Scheme.{u}) [IsNoetherian Y] {m : ℕ} (E C D : Y.IdealSheafData) (F : Fin m → Y.IdealSheafData) (hE : E.radical = E) (hC : C.radical = C) (hF : ∀ a : Fin m, (F a).radical = F a) (hirr : ∀ a : Fin m, IrreducibleSpace (F a).subscheme) (hdistinct : Function.Injective F) (hEC : C ≤ E) (hFC : ∀ a : Fin m, C ≤ F a) (hD : D = (E ⊓ ⨅ a : Fin m, F a).radical) (hcharts : ∀ y : Y, ∃ (V : Scheme.{u}) (v : V ⟶ Y) (z : V), Etale v ∧ v z = y ∧ ∃ (hN : IsNoetherianRing (V.presheaf.stalk z)) (d : ℕ) (s : Fin d → V.presheaf.stalk z) (K : Finset (Fin d)) (label : Fin (m + 1) → Option (Fin d)), IsRegularLocalRing (V.presheaf.stalk z) ∧ @IsLocalRing.IsRegularSystemOfParameters _ _ _ hN (List.ofFn s) ∧ (∀ (a b : Fin (m + 1)) (i : Fin d), label a = some i → label b = some i → a = b) ∧ (∀ a : Fin (m + 1), match label a with | none => HilbertSamuel.stalkIdeal ((Fin.cons (α := fun _ ↦ Y.IdealSheafData) E F a).comap v) z = ⊤ | some i => i ∈ K ∧ HilbertSamuel.stalkIdeal ((Fin.cons (α := fun _ ↦ Y.IdealSheafData) E F a).comap v) z = Ideal.span {s i}) ∧ (HilbertSamuel.stalkIdeal (C.comap v) z).radical = Ideal.span {∏ i ∈ K, s i} ∧ (∀ J : Finset (Fin d), J ⊆ K → IsRegularScheme (Spec (.of (V.presheaf.stalk z ⧸ Ideal.span (s '' (J : Set (Fin d)))))) ∧ ∀ p : PrimeSpectrum (V.presheaf.stalk z ⧸ Ideal.span (s '' (J : Set (Fin d)))), closure ({p} : Set (PrimeSpectrum (V.presheaf.stalk z ⧸ Ideal.span (s '' (J : Set (Fin d)))))) ∈ irreducibleComponents (PrimeSpectrum (V.presheaf.stalk z ⧸ Ideal.span (s '' (J : Set (Fin d))))) → Order.height (PrimeSpectrum.comap (Ideal.Quotient.mk (Ideal.span (s '' (J : Set (Fin d))))) p) = (J.card : ℕ∞))) : IsRegularScheme Y ∧ IsRegularScheme E.subscheme ∧ (∀ a : Fin m, IsRegularScheme (F a).subscheme) ∧ C.IsInvertible ∧ D.IsInvertible ∧ C.IsNormalCrossingsDivisor ∧ (∃ (n : ℕ) (G : Fin n → Y.IdealSheafData), (∀ b : Fin n, (G b).radical = G b ∧ (G b).support ≤ E.support ∧ IsClopen (E.subschemeι ⁻¹' ((G b).support : Set Y))) ∧ Function.Injective (fun b : Fin n ↦ (G b).support) ∧ Set.range (fun b : Fin n ↦ (G b).support : Fin n → Set Y) = (fun Z : Set E.subscheme ↦ E.subschemeι '' Z) '' irreducibleComponents E.subscheme ∧ (∀ b c : Fin n, b ≠ c → Disjoint (G b).support (G c).support) ∧ (fun Z : Set D.subscheme ↦ D.subschemeι '' Z) '' irreducibleComponents D.subscheme = Set.range (fun b : Fin n ↦ (G b).support : Fin n → Set Y) ∪ Set.range (fun a : Fin m ↦ (F a).support : Fin m → Set Y) ∧ (∀ J : Finset (Fin n ⊕ Fin m), IsRegularScheme (⨆ i ∈ J, Sum.elim G F i).subscheme ∧ ∀ p : (⨆ i ∈ J, Sum.elim G F i).subscheme, closure ({p} : Set (⨆ i ∈ J, Sum.elim G F i).subscheme) ∈ irreducibleComponents (⨆ i ∈ J, Sum.elim G F i).subscheme → Order.coheight ((⨆ i ∈ J, Sum.elim G F i).subschemeι p) = (J.card : ℕ∞))) ∧ IsStrictNormalCrossingsBoundary D ∧ IsUnionOfIrreducibleComponents D C",
+  "branch": "sheaf-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses HilbertSamuel.stalkIdeal from the landed def-trf-marked-ideal-order, added to stmt_deps. Closed subschemes are encoded by ideal sheaf data; no statement correction or duplicate notion. Prime-spectrum codimension uses height in the ideal-inclusion order; scheme-point codimension uses coheight in the specialization order."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7a697e2ef",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Only the item node changed (lean record plus stmt_dep def-trf-marked-ideal-order, owner of HilbertSamuel.stalkIdeal); the statement verbatim equals the file signature; one sorry theorem, no defs. Clause check: IsNoetherian Y; reduced ideal-sheaf encoding (radical=self); IrreducibleSpace includes nonempty; injective F; C≤E, C≤F_a; D=(E⊓⨅F).radical; actual Etale v with v z=y; IsRegularLocalRing plus the recorded RSOP (hN is only the Noetherian instance); label stalk ideals of comap (Mathlib comap = ker of fibre-product fst, so scheme-theoretic pullback) are ⊤ or span{s i} with injective indices in K; the radical of C's stalk ideal is the product over K; J⊆K intersections are regular with component height |J| (prime-ideal order). Conclusions: regular Y/E/F_a, C and D IsInvertible, C normal crossings, finite disjoint clopen reduced components G of E, components of D = range G ∪ range F, regular intersections with Order.coheight |J| (Scheme Preorder = specializationPreorder, so coheight = codimension), IsStrictNormalCrossingsBoundary D, IsUnionOfIrreducibleComponents D C. Edge cases (empty Y/E/K, d=0, m=0, J=∅, one universe u) fine; no duplicate, no hollow defs, docstrings carry source, blueprint and 9 steps; nothing compiled since no file changed. No findings."
+ }
+}

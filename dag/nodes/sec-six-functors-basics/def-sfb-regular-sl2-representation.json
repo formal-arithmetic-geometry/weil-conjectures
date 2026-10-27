@@ -1,0 +1,161 @@
+{
+ "id": "def-sfb-regular-sl2-representation",
+ "kind": "definition",
+ "title": "Natural regular SL2 representations over a ring",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $B$ be a commutative ring, and $V$ a $B$-module. Tensor products mean [def-weil-pbc-module-tensor-product]. A natural regular representation of $\\operatorname{SL}_{2,B}$ on a finite free module is a family of group homomorphisms $\\rho_C:\\operatorname{SL}_2(C)\\to\\operatorname{Aut}_C(C\\otimes_B V)$ for all commutative $B$-algebras $C$ [def-weil-pbc-algebra-hom-quotient], where $\\operatorname{SL}_2(C)$ consists of the $2\\times2$ matrices of determinant one [def-weil-pbc-matrix-determinant]. For every $B$-algebra map $f:C\\to D$, the canonical tensor map $f\\otimes\\mathrm{id}_V$ intertwines $\\rho_C(g)$ with $\\rho_D(f(g))$. Regularity means that there exist $n\\geq0$, a basis $b_1,\\ldots,b_n$ of $V$ [def-weil-pbc-free-module], and polynomials $p_{ij}\\in B[x_{00},x_{01},x_{10},x_{11}]$ [def-weil-pbc-mv-polynomial-ring] such that for every $C$ and $g\\in\\operatorname{SL}_2(C)$, the $i$-th coordinate of $\\rho_C(g)(1\\otimes b_j)$ in the scalar-extended basis is $p_{ij}(g_{00},g_{01},g_{10},g_{11})$. Thus the entries are regular functions modulo $x_{00}x_{11}-x_{01}x_{10}-1$; representatives need only exist. Write $x_+(z)=I+zE_{12}$, $x_-(z)=I+zE_{21}$, $w=x_+(1)x_-(-1)x_+(1)$ and $h(t)=\\mathrm{diag}(t,t^{-1})$ for a unit $t$; equivalently $h(t)=x_+(t)x_-(-t^{-1})x_+(t)w^{-1}$.",
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Printed p.466, paragraph preceding Proposition 22.14; explicit arbitrary-ring regular-action convention of lem-sfb-sl2-integral-orbit-coefficients. The natural family is the functor-of-points meaning of the action, and polynomial representatives express regularity on SL2."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "natural representations of SL2 over a commutative ring with regular matrix coefficients",
+   "results": "{\"t\": \"2026-10-24T13:50:38Z\", \"tool\": \"leansearch\", \"query\": \"natural representations of SL2 over a commutative ring with regular matrix coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.toLin'\", \"SpecialLinearGroup\", \"Matrix.SpecialLinearGroup.instCoeFun\", \"Matrix.SpecialLinearGroup\", \"Matrix.SpecialLinearGroup.hasCoeToMatrix\", \"SpecialLinearGroup.instCoeFunForall\", \"Matrix.SpecialLinearGroup.subsingleton_of_subsingleton\", \"Matrix.SpecialLinearGroup.instGroup\"], \"digest\": \"89a4173f1bbcefc8\"}",
+   "date": "2026-10-24",
+   "verdict": "No match: matrix groups and their standard point action do not give natural regular actions on arbitrary finite free modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a natural family of linear SL2 representations over all commutative base algebras with regular polynomial matrix entries",
+   "results": "{\"t\": \"2026-10-24T13:55:10Z\", \"tool\": \"leanfinder\", \"query\": \"a natural family of linear SL2 representations over all commutative base algebras with regular polynomial matrix entries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UpperHalfPlane.SLAction\", \"Matrix.SpecialLinearGroup.toLin'_apply\", \"Matrix.ProjectiveSpecialLinearGroup\", \"ModularGroup.SLOnGLPos\", \"ModularForm.SLAction\", \"SpecialLinearGroup\", \"Matrix.SpecialLinearGroup.toLin'_to_linearMap\", \"Matrix.SpecialLinearGroup.fin_two_induction\"], \"digest\": \"78a573f7b3ecfceb\"}",
+   "date": "2026-10-24",
+   "verdict": "No match: matrix groups and their standard point action do not give natural regular actions on arbitrary finite free modules."
+  },
+  {
+   "tool": "grep",
+   "query": "RegularSL2|SL2Representation|regular.*matrix.*entries",
+   "results": "{\"t\": \"2026-10-24T13:57:39Z\", \"tool\": \"grep\", \"query\": \"RegularSL2|SL2Representation|regular.*matrix.*entries\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No match: matrix groups and their standard point action do not give natural regular actions on arbitrary finite free modules."
+  },
+  {
+   "tool": "grep",
+   "query": "RegularSL2Representation|sl2Upper|sl2Lower|sl2Torus|sl2Weyl in lean/Sheaf, lean/WeilConjectures, Mathlib, dag/lean_names_upstream.json",
+   "results": "No hits. Broader searches for regular SL2 actions found only the field-only SL2Hom group-scheme map in RankOneRootInterfaces, whose codomain is group points rather than scalar-extended modules.",
+   "date": "2026-10-24",
+   "verdict": "No existing notion."
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*SL.?2|SL.?2.*regular|natural.*SL.?2 in definition nodes; blueprint_refs.py search SL2 representation",
+   "results": "Only def-sfb-rank-one-root-interfaces.json among definition nodes; blueprint search: 0 blueprint nodes match. The field-only group-scheme map is not the arbitrary-ring linear action of this input.",
+   "date": "2026-10-24",
+   "verdict": "No existing definition node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sl2-integral-orbit-coefficients",
+  "date": "2026-10-24",
+  "group": "Q50"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Regular SL2 action and root/torus/Weyl conventions in the polynomial orbit coefficient prerequisite.",
+   "via": [
+    "lem-sfb-sl2-integral-orbit-coefficients",
+    "lem-sfb-rank-two-integral-positive-adjoint-model",
+    "lem-sfb-rank-two-root-string-seed-calculus",
+    "lem-sfb-low-rank-universal-root-coordinates",
+    "lem-sfb-low-rank-pinned-root-hom",
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.RegularSL2Representation",
+  "declaration": "RepresentationTheory.RegularSL2Representation",
+  "file": "lean/Sheaf/RepresentationTheory/RegularSL2Representation.lean",
+  "statement": "structure RegularSL2Representation (B : Type u) [CommRing B] (V : Type v) [AddCommGroup V] [Module B V]",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "RepresentationTheory.sl2Upper",
+   "RepresentationTheory.sl2Lower",
+   "RepresentationTheory.sl2Weyl",
+   "RepresentationTheory.sl2Torus",
+   "RepresentationTheory.RegularSL2Representation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e509d05e8",
+  "group": "Q50",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e509d05e8",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Checked every hypothesis and conclusion against the node. x+/x- are Mathlib transvections at (0,1)/(1,0); w=[[0,1],[-1,0]]; the sl2Torus root word multiplies out to diag(t,t^-1) over any ring. Weight hypothesis on 1⊗a (a∈W i) is equivalent by C-linearity. Upper formula C(k,k-i)=C(i+j,j) and lower formula C(q-k,i-k)=C(q-i+j,j) reindex correctly; Weyl sign (-1)^i a_{q-i}; degree-one clause (i+1)•a_{i+1} via lcoeff 1. Uniqueness is slightly stronger than the node's (no v_0=v needed for competitors) and true. Base-change clauses use canonical cancelBaseChange. Node diff vs side-live: only lean added and stmt_deps gains the new def node (§1(A)); lean.statement verbatim. New def node def-sfb-regular-sl2-representation: all §5 fields present, five existing Mathlib-leaf stmt_deps, real data (natural group homomorphisms into C-linear automorphisms of C⊗V, naturality, regularity as existence), no sorry. No duplicate: NaturalRepresentation is field-only, IsCoordinateCoaction is a coaction, LinearGroupSchemes and Sl2RationalPolynomialModel are field/Lie only, and no sibling sl2 node has landed a definition. Edge cases covered: q=0, zero ring, zero summands, v=0, char 2. Docstrings carry source and blueprint; one sorry; 10-step proof plan present. Advisory only: successive-base-change clause is just cancelBaseChange_tmul; regular field is redundant given naturality."
+ }
+}

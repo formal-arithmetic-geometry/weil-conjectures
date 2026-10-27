@@ -1,0 +1,162 @@
+{
+ "id": "lem-sfb-normalized-exact-tensor-square",
+ "kind": "statement",
+ "title": "A normalized exact tensor square descends to arbitrary derived localizations",
+ "statement": "Let B,E,F,H be closed braided Grothendieck abelian monoidal categories with additive tensor, small colimits, functorial flat resolutions and chosen derived-category localization universes [def-weil-abstract-derived-category, lem-sfb-derived-monoidal]. Let L:B→E, Lprime:F→H, S:B→F and T:E→H be additive exact flat-preserving functors preserving countable colimits. Equip all four functors and their exact derived functors with strong monoidal structures. Suppose an ordinary natural isomorphism o:L⋙T≅S⋙Lprime satisfies TensorSquare [def-sfb-derived-projection-comparison-squares], the four chosen derived structures satisfy TensorNormalization, and i:DL⋙DT≅DS⋙DLprime satisfies LeftLocalizationCondition at o [def-sfb-constant-module-derived-comparison-data]. Then the four chosen derived structures satisfy TensorSquare at i. The assertion constructs no monoidal structure and has no geometric or constant-scalar data.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sfb-derived-monoidal",
+  "def-sfb-derived-projection-comparison-squares",
+  "def-sfb-constant-module-derived-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose functorial flat-term K-flat resolutions of both source complexes. Their images under L and S and the two composites are K-flat, since these exact flat-preserving functors preserve flat-term K-flat complexes. Their localization maps are isomorphisms.",
+   "uses": [
+    "lem-sfb-abstract-kflat-resolution",
+    "lem-sfb-flat-term-kflat-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+   }
+  },
+  {
+   "text": "On these models use the four TensorNormalization equations. Precompose with the image of the source localization tensorator and postcompose with the tensor of the exact-factorization isomorphisms and the target localization tensorator. These arrows are invertible on the chosen models. Substitute LeftLocalizationCondition at the two models and their tensor total. Naturality of the exact factors reduces the equality to localization of the cochain tensor square.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "def-sfb-constant-module-derived-comparison-data",
+    "def-sfb-derived-projection-comparison-squares"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+   }
+  },
+  {
+   "text": "The cochain square commutes on every degree p,q coproduct summand by the ordinary TensorSquare hypothesis. The standard cochain comparison is the signed total of the ordinary comparison; additivity respects signs and preservation of countable coproducts respects totals. Thus the entire cochain square commutes.",
+   "uses": [
+    "lem-sfb-termwise-strong-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+   }
+  },
+  {
+   "text": "Cancel the invertible arrows to obtain the derived square on the resolved models. Naturality transports along the resolution isomorphisms to arbitrary derived objects in both variables. The four normalizations leave no freedom to change the tensor maps, regardless of the chosen localization universes.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-abstract-kflat-resolution",
+  "lem-sfb-flat-term-kflat-functor",
+  "lem-sf-ringed-derived-native-tensor",
+  "def-sfb-constant-module-derived-comparison-data",
+  "def-sfb-derived-projection-comparison-squares",
+  "lem-sfb-termwise-strong-monoidal",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5. Original tensor-square descent proof steps 2 and 3, compatibility only after structures have been constructed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact monoidal square between categories of sheaves of modules descends to the unbounded derived categories with its tensor maps normalized on K-flat resolutions",
+   "results": "8 hits; ordinary flat-module exactness and sheaf monoidal structures, no representative-normalized derived square.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A mate between geometric inverse image of sheaves of modules over a constant ring and scalar restriction preserves the canonical tensor comparison",
+   "results": "Pullback and free-adjunction results; no constant-scalar tensor square.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMonoidal\", \"mapHomologicalComplex\"",
+   "results": "0 hits",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorSquare|normalized_exact_tensor_square|constant_module_ordinary_tensor_square",
+   "results": "0 Mathlib hits",
+   "date": "2026-10-27",
+   "verdict": "The comparison predicates and their representative equations are project-specific."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ConstantModuleTensorSquareDescent",
+  "date": "2026-10-27",
+  "group": "Y3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-finite",
+   "place": "Proof paragraph (3), canonical projection map: transport the etale projection formula through the constant-module realization, retaining its ordinary inverse-image tensor map and derived counit transpose. Substep: Original tensor-square descent proof steps 2 and 3, compatibility only after structures have been constructed.",
+   "via": [
+    "lem-sfb-constant-module-tensor-square-descent",
+    "lem-sfb-constant-module-derived-projection-identification",
+    "lem-sfb-projection-comparison-etale-proetale"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NormalizedExactTensorSquare",
+  "file": "lean/Sheaf/CategoryTheory/NormalizedExactTensorSquare.lean",
+  "declaration": "CategoryTheory.ConstantModuleDerivedProjection.normalized_exact_tensor_square",
+  "statement": "theorem normalized_exact_tensor_square\n    {B : Type a} [Category.{ha} B] [Abelian B] [IsGrothendieckAbelian.{ha} B]\n    [HasColimitsOfSize.{0, 0} B] [MonoidalCategory B] [MonoidalClosed B]\n    [MonoidalPreadditive B] [BraidedCategory B] [Abelian.HasFunctorialFlatResolution B]\n    [HasDerivedCategory.{wa} B]\n    {E : Type b} [Category.{hb} E] [Abelian E] [IsGrothendieckAbelian.{hb} E]\n    [HasColimitsOfSize.{0, 0} E] [MonoidalCategory E] [MonoidalClosed E]\n    [MonoidalPreadditive E] [BraidedCategory E] [Abelian.HasFunctorialFlatResolution E]\n    [HasDerivedCategory.{wb} E]\n    {F : Type c} [Category.{hc} F] [Abelian F] [IsGrothendieckAbelian.{hc} F]\n    [HasColimitsOfSize.{0, 0} F] [MonoidalCategory F] [MonoidalClosed F]\n    [MonoidalPreadditive F] [BraidedCategory F] [Abelian.HasFunctorialFlatResolution F]\n    [HasDerivedCategory.{wc} F]\n    {H : Type e} [Category.{he} H] [Abelian H] [IsGrothendieckAbelian.{he} H]\n    [HasColimitsOfSize.{0, 0} H] [MonoidalCategory H] [MonoidalClosed H]\n    [MonoidalPreadditive H] [BraidedCategory H] [Abelian.HasFunctorialFlatResolution H]\n    [HasDerivedCategory.{we} H]\n    (L : B ⥤ E) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]\n    [PreservesColimitsOfSize.{0, 0} L] [L.PreservesFlat]\n    (L' : F ⥤ H) [L'.Additive] [PreservesFiniteLimits L'] [PreservesFiniteColimits L']\n    [PreservesColimitsOfSize.{0, 0} L'] [L'.PreservesFlat]\n    (S : B ⥤ F) [S.Additive] [PreservesFiniteLimits S] [PreservesFiniteColimits S]\n    [PreservesColimitsOfSize.{0, 0} S] [S.PreservesFlat]\n    (T : E ⥤ H) [T.Additive] [PreservesFiniteLimits T] [PreservesFiniteColimits T]\n    [PreservesColimitsOfSize.{0, 0} T] [T.PreservesFlat]\n    (mL : L.Monoidal) (mL' : L'.Monoidal) (mS : S.Monoidal) (mT : T.Monoidal)\n    (nL : L.mapDerivedCategory.Monoidal) (nL' : L'.mapDerivedCategory.Monoidal)\n    (nS : S.mapDerivedCategory.Monoidal) (nT : T.mapDerivedCategory.Monoidal)\n    (o : L ⋙ T ≅ S ⋙ L')\n    (ho : TensorSquare L L' S T mL mL' mS mT o)\n    (hL : TensorNormalization B E L mL nL)\n    (hL' : TensorNormalization F H L' mL' nL')\n    (hS : TensorNormalization B F S mS nS)\n    (hT : TensorNormalization E H T mT nT)\n    (i : L.mapDerivedCategory ⋙ T.mapDerivedCategory ≅\n      S.mapDerivedCategory ⋙ L'.mapDerivedCategory)\n    (hi : LeftLocalizationCondition L L' S T o i) :\n    TensorSquare L.mapDerivedCategory L'.mapDerivedCategory S.mapDerivedCategory\n      T.mapDerivedCategory nL nL' nS nT i",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261026T222811-L-698133",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261026T222811-L-698133",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

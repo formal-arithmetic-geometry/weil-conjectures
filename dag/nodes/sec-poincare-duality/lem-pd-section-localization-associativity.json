@@ -1,0 +1,128 @@
+{
+ "id": "lem-pd-section-localization-associativity",
+ "kind": "statement",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "title": "Associativity of the fixed section localization tensorator",
+ "statement": "Let Λ be a commutative condensed ring and assume HasDerivedCategory for the section-module category over every scheme. Fix a scheme T and give its derived section-module category the fixed transported monoidal structure derivedMonoidal Λ T. Let Q denote cochain localization and s(P,Q)=modelTensor Λ T P Q, with the definitions of def-pd-section-resolving-oplax-constraint-data. For every three unbounded section complexes P,Q,H, the equation α(QP,QQ,QH)≫(QP◁s(Q,H))≫s(P,Q⊗H) = (s(P,Q)▷QH)≫s(P⊗Q,H)≫Q(α(P,Q,H)) holds, with composition in Lean order. No scheme morphism, tensor-pullback arrow or resolving assumption occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 0FPT; the normalized source and target qTensor associator equations required by the six-edge computation of lem-pd-section-resolving-oplax-model-edges (Tag 07A4)"
+ },
+ "stmt_deps": [
+  "def-pd-section-resolving-oplax-constraint-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved section_cochain_monoidal_data to obtain the strong monoidal termwise section equivalence with exactly cochainTensorComparison as oplax tensorator.",
+   "uses": [
+    "lem-pd-section-cochain-monoidal-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extract the derived section equivalence oplax structure from ConstraintCondition in section_kflat_tensor_comparison. Its unit is the identity and its tensorators are the invertible components of tensorComparison, so it is strong monoidal. Transfer this structure to the fixed derivedMonoidal structure using TensorFunctorTransport.monoidal_eq. The composite of internal localization and this strong equivalence is lax monoidal. Transfer its lax structure across the strong cochain section equivalence to section localization. The localization-factor isomorphism is monoidal: transport across the counit isomorphism and use naturality plus the equivalence triangle identity for the unit.",
+   "uses": [
+    "lem-pd-section-kflat-tensor-comparison",
+    "def-pd-section-derived-tensor-data",
+    "def-pd-section-cochain-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the generic monoidal_square to the monoidal localization-factor isomorphism. Its equation and qTensorArrow_normalization have the same right side. Cancel the invertible tensorComparison component and tensor of localization-factor components to identify qTensor with the transferred lax tensorator on termwise internal images. Naturality along the cochain equivalence counit and cancellation of its invertible tensor components extend the equality to all complex pairs. Rewrite the four modelTensor occurrences by this equality and apply the lax monoidal associativity axiom. This also covers zero complexes, zero coefficients and empty sites without inverting any modelTensor component.",
+   "uses": [
+    "lem-sfb-internal-section-tensor-localization",
+    "def-pd-section-representative-tensor-arrow"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-section-cochain-monoidal-data",
+  "lem-pd-section-kflat-tensor-comparison",
+  "def-pd-section-derived-tensor-data",
+  "def-pd-section-cochain-tensor-comparison",
+  "lem-sfb-internal-section-tensor-localization",
+  "def-pd-section-representative-tensor-arrow"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU, 0FPT and 07A4; fixed-comparison associativity step of the resolving oplax diagram proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a lax monoidal functor tensor comparison associativity and monoidal natural transformation",
+   "results": "Generic Functor.LaxMonoidal naturality results only. They do not identify the specified transported section qTensor.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.associativity",
+   "results": "The generic lax associativity law exists. The proof constructs a lax structure with precisely the fixed section modelTensor using Functor.LaxMonoidal.transport and the two section equivalences.",
+   "date": "2026-10-27",
+   "verdict": "generic law only"
+  },
+  {
+   "tool": "grep",
+   "query": "qTensor.*associ|localization.*associativity|LaxMonoidal.ofIso; rg qTensor and modelTensor in lean/Sheaf/Paper",
+   "results": "No existing normalized qTensor associator theorem. The adopted source provides Functor.LaxMonoidal.transport. The proved private section_monoidal_data and monoidal_square helpers of InternalSectionTensorLocalization supply the ordinary structure and the normalized square used in the proof.",
+   "date": "2026-10-27",
+   "verdict": "no existing exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionResolvingOplaxEdgeIdentifications",
+  "date": "2026-10-27",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pd-section-resolving-oplax-edge-identifications",
+   "place": "The normalized source and target associator equations in the six-edge proof; independent of f, mu and the representative equations",
+   "via": [
+    "lem-pd-section-resolving-oplax-edge-identifications",
+    "lem-pd-section-resolving-oplax-model-edges"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionLocalizationAssociativity",
+  "file": "lean/Sheaf/Paper/SectionLocalizationAssociativity.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.section_localization_associativity",
+  "statement": "theorem section_localization_associativity (T : Scheme.{u})\n    (P Q H : CochainComplex (modules Λ T) ℤ) :\n    letI := derivedMonoidal Λ T\n    (α_ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)\n        (DerivedCategory.Q.obj H)).hom ≫\n        DerivedCategory.Q.obj P ◁ modelTensor Λ T Q H ≫ modelTensor Λ T P (Q ⊗ H) =\n      modelTensor Λ T P Q ▷ DerivedCategory.Q.obj H ≫ modelTensor Λ T (P ⊗ Q) H ≫\n        DerivedCategory.Q.map (α_ P Q H).hom",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T034716-L-3677670",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T034716-L-3677670",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

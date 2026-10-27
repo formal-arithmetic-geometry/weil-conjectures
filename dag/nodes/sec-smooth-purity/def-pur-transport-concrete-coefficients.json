@@ -1,0 +1,113 @@
+{
+ "id": "def-pur-transport-concrete-coefficients",
+ "kind": "definition",
+ "title": "Coefficients coordinates for smooth purity",
+ "status": "split",
+ "import_flags": [
+  "unreachable"
+ ],
+ "statement": "Use [sk-def-sfb-dc-setting], [def-pur-conventions], [sk-def-sfb-constructible], [def-coefficient-twists-detailed]. Fix a prime $\\ell$. A coefficient presentation is one of: a finite commutative ring $A$ killed by $\\ell^{n+1}$ ($n\\ge0$), $\\mathbf Z_\\ell$, $\\mathbf Q_\\ell$, the valuation ring or field of a finite subextension of the fixed $\\overline{\\mathbf Q}_\\ell$, or that algebraic closure. Its condensed ring is respectively continuous functions into the discrete finite ring, the integral or rational topological ring, or the existing finite-subextension-valued closure. Write $R_{c,X}=p_X^*R_c$ on the small pro-etale site and $D_c(X)=D(\\operatorname{Mod}_{R_{c,X}})$. Its constructible finite-Tor subcategory is the recorded finite-constant-model subcategory. The canonical map $\\mathbf Z_\\ell\\to R_c$ gives $L_{c,X}=R_{c,X}\\otimes_{\\mathbf Z_{\\ell,X}}\\mathbf Z_{\\ell,X}(1)$, where the integral line is the existing root-tower limit. Define $L^{(0)}=R$, $L^{(d+1)}=L^{(d)}\\otimes_R L$, $T_c(d)=L^{(d)}[2d]$, and $J_{f,c,d}=Lf_c^*(-)\\otimes^L T_c(d)$. All rings, coefficient maps, categories and lines are these actual constructions.",
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-pur-conventions",
+  "sk-def-sfb-constructible",
+  "def-coefficient-twists-detailed"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Coefficient, functor, counit and normalization clauses; coordinate interface TransportCoefficients"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical normalized root Tate coefficient pullback scalar extension compact support adjunction counit equations",
+   "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.ExtendRestrictScalarsAdj.counit_app, .counit, .Counit.map, .Counit.map_hom_apply, RestrictionCoextensionAdj.counit'_app, CompHausLike.LocallyConstant.counit, .adjunction_counit. Generic scalar adjunctions only.",
+   "date": "2026-10-25",
+   "verdict": "No combined normalized pro-etale coordinate interface; reuse the generic scalar adjunction constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "12 hits in Mathlib.CategoryTheory.Adjunction.Unique: rightAdjointUniq and its identity, composition and counit laws.",
+   "date": "2026-10-25",
+   "verdict": "Reuse right-adjoint uniqueness; none is the coefficient/geometric/root/integration coordinate interface."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"PurityTransport|smooth_purity_transport|AffineNormalized|ScalarLineCoordinates|LinePullCoordinates\" lean/WeilConjectures lean/Sheaf lean/.lake/packages/mathlib/Mathlib; rg -l \"def-pur-transport-(concrete-coefficients|root-coordinates|finite-encoding)\" dag/nodes; blueprint_refs.py search \"normalized root Tate\"",
+   "results": "No declaration with these coordinate names; upstream blueprint marker hits SmoothPurity/Defs and EtaleCohomology/Purity/Smooth/Transport concern finite or discrete integral categories. The latter theorem only preserves derived completeness. No matching new node ids; blueprint search returned 0 nodes. Existing root, coefficient, derived and finite-encoding ingredients are imported, not reconstructed.",
+   "date": "2026-10-25",
+   "verdict": "Missing packaging and canonical comparison coordinates, not a replacement coefficient formalism."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "sk-thm-purity-transport",
+  "date": "2026-10-25",
+  "group": "NB"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "The canonical maps and restricted adjunctions in the smooth-purity transport statement: TransportCoefficients",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.TransportCoefficients",
+  "declaration": "AlgebraicGeometry.ProEtale.PurityTransport.Coefficient",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.PurityTransport.Coefficient",
+   "AlgebraicGeometry.ProEtale.PurityTransport.Coefficient.ring",
+   "AlgebraicGeometry.ProEtale.PurityTransport.Coefficient.obj",
+   "AlgebraicGeometry.ProEtale.PurityTransport.Coefficient.comm",
+   "AlgebraicGeometry.ProEtale.PurityTransport.Coefficient.fromIntegers",
+   "AlgebraicGeometry.ProEtale.PurityTransport.Coefficient.integralMap",
+   "AlgebraicGeometry.ProEtale.PurityTransport.Coefficient.integralMap_isMonHom",
+   "AlgebraicGeometry.ProEtale.PurityTransport.Coefficient.firstLine",
+   "AlgebraicGeometry.ProEtale.PurityTransport.Coefficient.line",
+   "AlgebraicGeometry.ProEtale.PurityTransport.Coefficient.derived",
+   "AlgebraicGeometry.ProEtale.PurityTransport.Coefficient.ctf",
+   "AlgebraicGeometry.ProEtale.PurityTransport.Coefficient.derivedLine",
+   "AlgebraicGeometry.ProEtale.PurityTransport.Coefficient.smoothSource"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/TransportCoefficients.lean",
+  "statement": "inductive Coefficient (ell : ℕ) [Fact ell.Prime]",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85feb8152",
+  "group": "NB",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85feb8152",
+  "group": "NB",
+  "result": "fix",
+  "note": "One fault, fixed: TransportSources.sourceComp took the derived braiding from DerivedCategory.nonempty_braidedCategory.some, an arbitrary braiding from a Nonempty, so the source compositor and the CompositionCompatible clause were not canonical (H3). fixes/TransportSources.lean is a complete replacement using the named Koszul braiding DerivedCategory.braidedCategory' (the witness of that Nonempty), with its import and one docstring sentence added; no signature or JSON change; compiled once via nt_compile --json with its six snapshot siblings, no errors (29.3 s). Otherwise correct: item statement verbatim; the Brown comparison gives the unique counit-compatible natural iso to every restricted Brown adjoint; the explicit adjunction family carries the scalar (listed maps, non-flat finite), base-change and composition counit equations and the finite affine-line integration normalization; étale clause follows the 10-25 correction (no d=0 claim); curve clause gives single(tateModule)[2] and H^i=0 for i≠-2. Every ∃ or choice is pinned: line-pullback, scalar-line and finite-line coordinates, ∃! rootComparison, the exists_extendScalarsMonoidal δ normalization, open exchange fixed by its inverse. No hollow definitions; sorry only in theorems with proofs in words; docstrings present; universes OK (finite A in CommRingCat.{0}, no loss); no pro-étale substitute; 24 new node statements match their files and have no dependency cycle; IsLocalizingAdmissibleCoefficient is an up-to-isomorphism predicate, not a duplicate of Coefficient. Advisory: CompositionCompatible quantifies over normalized interchanges whose existence is the published compositionInterchangeIsNormalized fact."
+ }
+}

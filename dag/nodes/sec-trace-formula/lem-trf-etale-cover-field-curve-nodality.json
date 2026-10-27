@@ -1,0 +1,303 @@
+{
+ "id": "lem-trf-etale-cover-field-curve-nodality",
+ "kind": "statement",
+ "title": "Etale covers of locally algebraic schemes: dimension and nodal singularities",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $C$ be a locally finite type $k$-scheme [def-pc-scheme, def-weil-finite-type-morphism], and let $(e_i:D_i\\to C)_{i\\in I}$ be jointly surjective etale morphisms [def-weil-etale-morphism]. Suppose each $D_i$ is locally of finite type over $k$ and $C,D_i$ are locally Noetherian [pqf-def-locnoeth]. For every $i$ and $y\\in D_i$, putting $x=e_i(y)$, the local topological dimensions [def-kun-topological-dimension-at-point] satisfy $\\dim_yD_i=\\dim_xC$. For every $n\\in\\mathbb N$, $C$ has pure dimension $n$ [def-weil-pure-dimension] if and only if every $D_i$ has pure dimension $n$. Smoothness at $x$ of $C\\to\\operatorname{Spec}k$ is equivalent to smoothness at $y$ of $D_i\\to\\operatorname{Spec}k$ [def-sbc-smooth-morphisms]; smoothness at a point means smoothness on an open neighbourhood. If $C$ has pure dimension one (equivalently all the $D_i$ do), then for every such nonsmooth pair $(x,y)$ one has $\\widehat{\\mathcal O}_{C,x}\\cong k[[u,v]]/(uv)$ as complete local $k$-algebras if and only if $\\widehat{\\mathcal O}_{D_i,y}\\cong k[[u,v]]/(uv)$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Consequently, under this purity assumption every nonsmooth point of $C$ has the displayed completed local algebra if and only if every nonsmooth point of every $D_i$ does. Completions are taken at maximal ideals. No separatedness or quasi-compactness is required; empty schemes and an empty cover of the empty scheme are included.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C5D, lemma-nodal-family-etale-local-source, dimension and singularity argument over a field (old steps 5--8); descent.tex Tag 04N4 lemma-dimension-at-point-local and Tag 04NL lemma-dimension-at-point; varieties.tex Tag 0A21 lemma-dimension-locally-algebraic (3), (5); curves.tex Tag 0C57 lemma-node-etale-local; descent.tex Tag 036U lemma-smooth-smooth-local-source"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-etale-morphism",
+  "pqf-def-locnoeth",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-pure-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-completed-local-scalar-map"
+ ],
+ "proof": [
+  {
+   "text": "Fix $i,y$ and put $x=e_i(y)$. By the etale definition $e_i$ is flat and locally finitely presented, hence locally finite type: a finite presentation is in particular a finite generating set. Apply flat-composite fibre-dimension additivity to $D_i\\xrightarrow{e_i}C\\to\\operatorname{Spec}k$. The fibres over the unique point of $\\operatorname{Spec}k$ identify with $D_i,C$: the residue-field map there is the identity of $k$, and the fibre-product universal property gives the inverse to each projection. The etale fibre at $x$ has dimension zero at $y$. Thus additivity reads $\\dim_yD_i=0+\\dim_xC=\\dim_xC$. All dimensions here are minima of dimensions of open neighbourhoods.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JS, lemma-dimension-fibre-at-a-point-additive, flat equality; gives the locally algebraic case of descent.tex Tag 04N4"
+   }
+  },
+  {
+   "text": "For any locally finite type $k$-scheme $Y$ in question, pure dimension $n$ implies $\\dim_zY=n$ at every $z$: the component-maximum formula takes the maximum of a nonempty family all equal to $n$. Conversely, if all these local dimensions equal $n$, apply the constant-local-dimension component theorem with $O=Y$; local Noetherianity is assumed. The definition of pure dimension gives the converse. The equality in step 1 therefore transfers purity from $C$ to every $D_i$. In reverse, joint surjectivity supplies a lift $y$ of each $x\\in C$, so step 1 makes every $\\dim_xC=n$ and the same criterion proves purity of $C$.",
+   "uses": [
+    "lem-trf-locally-algebraic-dimension-components",
+    "lem-sbc-constant-local-dimension-components",
+    "def-weil-pure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21, lemma-dimension-locally-algebraic (5), component maximum; topology.tex Tags 0052, 0055 for the converse criterion"
+   }
+  },
+  {
+   "text": "Apply the pointwise assertion of etale-source smoothness to $e_i$ and $C\\to\\operatorname{Spec}k$. It says exactly that smoothness at $x$ is equivalent to smoothness at $y$. Under pure dimension one, apply nodal-point etale locality to the same map and arbitrary point $y$; its completed-local-$k$-algebra equivalence gives the required nodal equivalence, in particular for every nonsmooth pair.",
+   "uses": [
+    "lem-trf-etale-source-smoothness",
+    "lem-trf-nodal-point-etale-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C5D, lemma-nodal-family-etale-local-source, last sentence; Tag 0C57, lemma-node-etale-local; descent.tex Tag 036U"
+   }
+  },
+  {
+   "text": "If every nonsmooth point of $C$ has the nodal completion, a nonsmooth $y\\in D_i$ has nonsmooth image by step 3, so the nodal equivalence gives its completion. Conversely, lift each nonsmooth $x\\in C$ by joint surjectivity; step 3 makes that lift nonsmooth and transfers its nodal completion back to $x$. Empty sources contribute no points. If the covering family is empty, joint surjectivity forces $C$ empty; purity and both universal nodality assertions are then vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C5D, final fibrewise argument and empty-case quantifiers"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "lem-trf-locally-algebraic-dimension-components",
+  "lem-sbc-constant-local-dimension-components",
+  "def-weil-pure-dimension",
+  "lem-trf-etale-source-smoothness",
+  "lem-trf-nodal-point-etale-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C5D, lemma-nodal-family-etale-local-source, field case; Tag 0C57; descent.tex 036U; morphisms.tex 02JS flat equality and varieties.tex 0A21 (5) supply the pointwise dimension/purity argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(etale.*(pure|dimension)|(pure|dimension).*etale)|IsPureDimension",
+   "results": "{\"t\": \"2026-10-22T07:21:00Z\", \"tool\": \"grep\", \"query\": \"(etale.*(pure|dimension)|(pure|dimension).*etale)|IsPureDimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\"], \"digest\": \"b95eac20b3913fab\"}. Hits are smooth/etale structure and relative-dimension-zero APIs, or Lagrange interpolation nodal polynomials; none gives the local-topological dimension/pure-component and nonsmooth-completion cover criterion. Read Etale.lean:99--114; smooth relative dimension zero does not state these dimension and completion comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"etale\", \"dimension\"",
+   "results": "{\"t\": \"2026-10-22T07:21:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"etale\\\", \\\"dimension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.etale_iff_isStandardSmoothOfRelativeDimension_zero\", \"AlgebraicGeometry.Etale.eq_smoothOfRelativeDimension_zero\", \"AlgebraicGeometry.Etale.instSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.Etale.iff_smoothOfRelativeDimension_zero\"], \"digest\": \"b4a2f3144f8bb702\"}. Hits are smooth/etale structure and relative-dimension-zero APIs, or Lagrange interpolation nodal polynomials; none gives the local-topological dimension/pure-component and nonsmooth-completion cover criterion. Read Etale.lean:99--114; smooth relative dimension zero does not state these dimension and completion comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an etale map of schemes locally of finite type over a field the dimensions at corresponding points agree and pure dimension is local on etale covers",
+   "results": "{\"t\": \"2026-10-22T07:21:01Z\", \"tool\": \"leansearch\", \"query\": \"For an etale map of schemes locally of finite type over a field the dimensions at corresponding points agree and pure dimension is local on etale covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"RingHom.Etale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"78744787101b871a\"}. Hits are smooth/etale structure and relative-dimension-zero APIs, or Lagrange interpolation nodal polynomials; none gives the local-topological dimension/pure-component and nonsmooth-completion cover criterion. Read Etale.lean:99--114; smooth relative dimension zero does not state these dimension and completion comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equidimensionality descends along jointly surjective etale maps of locally algebraic schemes using pointwise local dimension",
+   "results": "{\"t\": \"2026-10-22T07:21:12Z\", \"tool\": \"leanfinder\", \"query\": \"Equidimensionality descends along jointly surjective etale maps of locally algebraic schemes using pointwise local dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardEtale.of_surjective\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale\", \"Algebra.IsEtaleAt.comp\", \"Algebra.Etale.comp\"], \"digest\": \"33680784af5b68d1\"}. Hits are smooth/etale structure and relative-dimension-zero APIs, or Lagrange interpolation nodal polynomials; none gives the local-topological dimension/pure-component and nonsmooth-completion cover criterion. Read Etale.lean:99--114; smooth relative dimension zero does not state these dimension and completion comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale covering of a locally finite type scheme over a field preserves local topological dimensions and detects pure dimension n",
+   "results": "{\"t\": \"2026-10-22T07:21:13Z\", \"tool\": \"leanfinder\", \"query\": \"An etale covering of a locally finite type scheme over a field preserves local topological dimensions and detects pure dimension n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.etalePretopology\"], \"digest\": \"c4d82764437b0fdf\"}. Hits are smooth/etale structure and relative-dimension-zero APIs, or Lagrange interpolation nodal polynomials; none gives the local-topological dimension/pure-component and nonsmooth-completion cover criterion. Read Etale.lean:99--114; smooth relative dimension zero does not state these dimension and completion comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|semistable|IsPureDimension",
+   "results": "{\"t\": \"2026-10-22T07:24:36Z\", \"tool\": \"grep\", \"query\": \"nodal|semistable|IsPureDimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Hits are smooth/etale structure and relative-dimension-zero APIs, or Lagrange interpolation nodal polynomials; none gives the local-topological dimension/pure-component and nonsmooth-completion cover criterion. Read Etale.lean:99--114; smooth relative dimension zero does not state these dimension and completion comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale morphisms preserve local dimension and smoothness at points and nodal completed local rings of curves",
+   "results": "{\"t\": \"2026-10-22T07:24:37Z\", \"tool\": \"leansearch\", \"query\": \"Etale morphisms preserve local dimension and smoothness at points and nodal completed local rings of curves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"RingHom.Etale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.FormallyEtale.instFormallySmooth\", \"Algebra.FormallyEtale.iff_unramified_and_smooth\"], \"digest\": \"2a83161941b9c06c\"}. Hits are smooth/etale structure and relative-dimension-zero APIs, or Lagrange interpolation nodal polynomials; none gives the local-topological dimension/pure-component and nonsmooth-completion cover criterion. Read Etale.lean:99--114; smooth relative dimension zero does not state these dimension and completion comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nodal\"",
+   "results": "{\"t\": \"2026-10-22T07:24:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"nodal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lagrange.nodalWeight\", \"Lagrange.nodal\", \"Lagrange.nodal_monic\", \"Lagrange.natDegree_nodal\", \"Lagrange.degree_nodal\", \"Lagrange.nodal_empty\", \"Lagrange.nodal_ne_zero\", \"Lagrange.eval_nodal_at_node\"], \"digest\": \"6fe8341e0729cc44\"}. Hits are smooth/etale structure and relative-dimension-zero APIs, or Lagrange interpolation nodal polynomials; none gives the local-topological dimension/pure-component and nonsmooth-completion cover criterion. Read Etale.lean:99--114; smooth relative dimension zero does not state these dimension and completion comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For etale covers of a locally finite type scheme over an algebraically closed field pure dimension one and ordinary nodal singularities at nonsmooth points can be checked upstairs",
+   "results": "{\"t\": \"2026-10-22T07:24:43Z\", \"tool\": \"leanfinder\", \"query\": \"For etale covers of a locally finite type scheme over an algebraically closed field pure dimension one and ordinary nodal singularities at nonsmooth points can be checked upstairs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"04e100292bf2771d\"}. Hits are smooth/etale structure and relative-dimension-zero APIs, or Lagrange interpolation nodal polynomials; none gives the local-topological dimension/pure-component and nonsmooth-completion cover criterion. Read Etale.lean:99--114; smooth relative dimension zero does not state these dimension and completion comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale covering detects a pure one dimensional curve whose nonsmooth points have completed local algebra k[[u,v]]/(uv)",
+   "results": "{\"t\": \"2026-10-22T07:27:09Z\", \"tool\": \"leanfinder\", \"query\": \"An etale covering detects a pure one dimensional curve whose nonsmooth points have completed local algebra k[[u,v]]/(uv)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.instEtaleOfIsStandardEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.etaleLocus\", \"StandardEtalePair.instEtaleRing\", \"StandardEtalePair.instFormallyEtaleRing\"], \"digest\": \"d491568da6c2428d\"}. Hits are smooth/etale structure and relative-dimension-zero APIs, or Lagrange interpolation nodal polynomials; none gives the local-topological dimension/pure-component and nonsmooth-completion cover criterion. Read Etale.lean:99--114; smooth relative dimension zero does not state these dimension and completion comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(etale.*dimensionAt|dimensionAt.*etale|etale.*topologicalKrullDim|topologicalKrullDim.*etale)",
+   "results": "{\"t\": \"2026-10-23T09:59:16Z\", \"tool\": \"grep\", \"query\": \"(etale.*dimensionAt|dimensionAt.*etale|etale.*topologicalKrullDim|topologicalKrullDim.*etale)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read the returned etale, smooth and etale-locus APIs; Etale.lean lines 99--114 only identify etale with smooth relative dimension zero. None states local topological dimension invariance or the pure/nodal covering criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale morphisms preserve dimension at a point defined as the infimum of dimensions of open neighbourhoods",
+   "results": "{\"t\": \"2026-10-23T09:59:17Z\", \"tool\": \"leansearch\", \"query\": \"Etale morphisms preserve dimension at a point defined as the infimum of dimensions of open neighbourhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"RingHom.Etale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.FormallyEtale\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.formallyEtale\"], \"digest\": \"95e61650fdc174b1\"}. Read the returned etale, smooth and etale-locus APIs; Etale.lean lines 99--114 only identify etale with smooth relative dimension zero. None states local topological dimension invariance or the pure/nodal covering criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, \"dim\"",
+   "results": "{\"t\": \"2026-10-23T09:59:17Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, \\\"dim\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Etale.eq_smoothOfRelativeDimension_zero\", \"AlgebraicGeometry.Etale.instSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.Etale.iff_smoothOfRelativeDimension_zero\"], \"digest\": \"5019317a65b5c9c5\"}. Read the returned etale, smooth and etale-locus APIs; Etale.lean lines 99--114 only identify etale with smooth relative dimension zero. None states local topological dimension invariance or the pure/nodal covering criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism of schemes the local topological dimensions at a source point and its image are equal",
+   "results": "{\"t\": \"2026-10-23T09:59:27Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale morphism of schemes the local topological dimensions at a source point and its image are equal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale\", \"Algebra.mem_etaleLocus_iff\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale.toAlgebra\"], \"digest\": \"9197d42f295d4c59\"}. Read the returned etale, smooth and etale-locus APIs; Etale.lean lines 99--114 only identify etale with smooth relative dimension zero. None states local topological dimension invariance or the pure/nodal covering criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDimAt|dimension.*etale|etale.*dimension",
+   "results": "{\"t\": \"2026-10-23T10:01:15Z\", \"tool\": \"grep\", \"query\": \"topologicalKrullDimAt|dimension.*etale|etale.*dimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\"], \"digest\": \"b95eac20b3913fab\"}. Read the returned etale, smooth and etale-locus APIs; Etale.lean lines 99--114 only identify etale with smooth relative dimension zero. None states local topological dimension invariance or the pure/nodal covering criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale covering detects a pure one dimensional locally algebraic scheme with ordinary nodal completed local rings and preserves smooth points",
+   "results": "{\"t\": \"2026-10-23T10:01:16Z\", \"tool\": \"leanfinder\", \"query\": \"An etale covering detects a pure one dimensional locally algebraic scheme with ordinary nodal completed local rings and preserves smooth points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"bb68adde4d095473\"}. Read the returned etale, smooth and etale-locus APIs; Etale.lean lines 99--114 only identify etale with smooth relative dimension zero. None states local topological dimension invariance or the pure/nodal covering criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infimum of Krull dimensions of open neighbourhoods of a point is unchanged by an etale scheme map",
+   "results": "{\"t\": \"2026-10-23T10:01:19Z\", \"tool\": \"leanfinder\", \"query\": \"The infimum of Krull dimensions of open neighbourhoods of a point is unchanged by an etale scheme map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"Algebra.etaleLocus\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.IsEtaleAt.comp\"], \"digest\": \"801ff7a40332a5f3\"}. Read the returned etale, smooth and etale-locus APIs; Etale.lean lines 99--114 only identify etale with smooth relative dimension zero. None states local topological dimension invariance or the pure/nodal covering criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-family-etale-source-locality",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical semistable auxiliary branch of lem-trf-local-term-locality, Proof (1)--(2), via the strictification input to Temkin Remark 4.5.2: Nodal curves are etale local on the source. This is a general local tool for the explicit symmetric blowup calculation, not an alternate trace-formula route. Re-split of lem-trf-nodal-family-etale-source-locality: proof dimension and singularity argument over a field (old steps 5--8); descent.tex Tag 04N4 lemma-dimension-at-point-local and Tag 04NL lemma-dimension-at-point; curves.tex Tag 0C57 lemma-node-etale-local; descent.tex Tag 036U lemma-smooth-smooth-local-source",
+   "via": [
+    "lem-trf-nodal-family-etale-source-locality",
+    "lem-trf-valuation-symmetric-nodal-blowup",
+    "lem-trf-valuation-marked-strictification",
+    "lem-trf-valuation-common-strict-semistable-refinement",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-etale-cover-field-curve-nodality",
+  "worker": "stage1",
+  "summary": "Complete four-step proof with no new nodes. Specialize flat-composite fibre-dimension additivity and etale zero-dimensional fibres; derive purity using the existing component-maximum and constant-local-dimension theorems; use existing pointwise smoothness and nodal-completion locality; assemble the universal criteria, including empty cases. Statement unchanged.",
+  "blueprint": "Historical semistable auxiliary branch under lem-trf-local-term-locality Proof (1)--(2), via lem-trf-nodal-family-etale-source-locality: its dimension/singularity argument over a field (old steps 5--8). Latest blueprint uses contracting correspondences; this split only supplies the retained historical local tool and changes no unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "why": "General flat fibre-dimension equality specialized to D_i -> C -> Spec k; the trace-formula unit has no corresponding pointwise dimension statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "General etale zero-dimensional-fibre fact used with flat additivity; not a replacement for a trace-formula argument."
+   },
+   {
+    "node": "lem-sbc-constant-local-dimension-components",
+    "why": "General locally Noetherian constant-local-dimension criterion for component purity; no trace-formula-unit node states this converse."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-sbc-constant-local-dimension-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-adfe21ef7",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-adfe21ef7 (reviewer sub-agent of L); spot-checked: Read the whole item, all 4 steps and every cited statement; the delivery has no new nodes. The statement is unchanged, true, and is the field case of Stacks 0C5D (curves.tex l.4823–4847). Step 1: e_i is étale, so flat and LFP, hence LFT. lem-sbc-flat-composite-fibre-dimension-at-point (Stacks 02JS, morphisms.tex l.5396, equality in the flat case) and lem-weil-pbc-etale-smooth-zero-dimensional-fibres give dim_y D_i = 0 + dim_x C. The fibres over Spec k are D_i and C because the residue field is k with the identity map, and def-kun-dimension is the same notion as topological dim at a point. Step 2: lem-trf-locally-algebraic-dimension-components gives pure ⇒ local dim n. lem-sbc-constant-local-dimension-components with O=Y (locally Noetherian is assumed) gives the converse. Purity goes from C to D_i by step 1 and back by lifting each point through joint surjectivity. Step 3: the pointwise clause of lem-trf-etale-source-smoothness and lem-trf-nodal-point-etale-locality; all hypotheses of the latter (k algebraically closed, C LFT and pure of dim 1, arbitrary y) are present. Step 4: elementary assembly, with the empty cases included. Small cases checked: identity cover, C⊔C, the node uv=0, generic points, A¹⊔A², empty D_i, empty family. The 3 off-unit generic dimension facts are declared tool_uses and accepted. No cycle: a BFS over 291 nodes does not reach the item. No duplicate: the sfb nodal postcomposition, space chart-locality and trf local-model nodes are different statements, and lem-sc-etale-local-dimension is about local-ring dimension. No SGA source. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCoverFieldCurveNodality",
+  "declaration": "AlgebraicGeometry.etale_cover_field_curve_nodality",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoverFieldCurveNodality.lean",
+  "statement": "theorem etale_cover_field_curve_nodality {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f] [IsLocallyNoetherian C] {I : Type v} (D : I → Scheme.{u}) (e : ∀ i : I, D i ⟶ C) [∀ i : I, Etale (e i)] [∀ i : I, LocallyOfFiniteType (e i ≫ f)] [∀ i : I, IsLocallyNoetherian (D i)] (hcover : ∀ x : C, ∃ (i : I) (y : D i), e i y = x) : (∀ (i : I) (y : D i), topologicalKrullDimAt y = topologicalKrullDimAt (e i y)) ∧ (∀ n : ℕ, C.IsPureDimension n ↔ ∀ i : I, (D i).IsPureDimension n) ∧ (∀ (i : I) (y : D i), (∃ V : C.Opens, e i y ∈ V ∧ Smooth (V.ι ≫ f)) ↔ ∃ W : (D i).Opens, y ∈ W ∧ Smooth (W.ι ≫ e i ≫ f)) ∧ (C.IsPureDimension 1 → (∀ (i : I) (y : D i), ¬ (∃ V : C.Opens, e i y ∈ V ∧ Smooth (V.ι ≫ f)) → ¬ (∃ W : (D i).Opens, y ∈ W ∧ Smooth (W.ι ≫ e i ≫ f)) → (Nonempty (@AlgEquiv k (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk (e i y))) (C.presheaf.stalk (e i y))) (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}) _ _ _ (f.completedLocalScalarMap (e i y)).toAlgebra inferInstance) ↔ Nonempty (@AlgEquiv k (AdicCompletion (IsLocalRing.maximalIdeal ((D i).presheaf.stalk y)) ((D i).presheaf.stalk y)) (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}) _ _ _ ((e i ≫ f).completedLocalScalarMap y).toAlgebra inferInstance))) ∧ ((∀ x : C, ¬ (∃ V : C.Opens, x ∈ V ∧ Smooth (V.ι ≫ f)) → Nonempty (@AlgEquiv k (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x)) (C.presheaf.stalk x)) (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}) _ _ _ (f.completedLocalScalarMap x).toAlgebra inferInstance)) ↔ ∀ (i : I) (y : D i), ¬ (∃ W : (D i).Opens, y ∈ W ∧ Smooth (W.ι ≫ e i ≫ f)) → Nonempty (@AlgEquiv k (AdicCompletion (IsLocalRing.maximalIdeal ((D i).presheaf.stalk y)) ((D i).presheaf.stalk y)) (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}) _ _ _ ((e i ≫ f).completedLocalScalarMap y).toAlgebra inferInstance)))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b10f90c58",
+  "group": "NA",
+  "result": "pass",
+  "note": "Node diff vs side-live: only the new lean record and stmt_deps +def-trf-completed-local-scalar-map, which is already on the base (created 2026-10-18 by Q139, in the snapshot blueprint-index) and owns the completedLocalScalarMap used in the signature; H2 repair correct, lem-trf-nodal-point-etale-locality stays in proof_deps only; statement verbatim; lean.statement matches the file. Hypotheses match the node with nothing stronger: k algebraically closed, f locally of finite type, local Noetherianity of C and every D_i, (e i ≫ f) locally of finite type, Etale, joint surjectivity; no finite family, separatedness, quasi-compactness or nonemptiness; universes u and v independent. Conclusions: topologicalKrullDimAt is the infimum over open neighbourhoods; IsPureDimension quantifies over irreducible components, so the empty scheme is included; smoothness at a point via open neighbourhoods, as in the landed smooth_at_iff_of_etale; nodal AlgEquiv clauses identical in rendering to the landed nodalPoint_etale_locality with the canonical scalar map; universal criterion under the purity guard. Edge cases checked: empty cover, empty D_i, n=0, mixed dimensions, non-closed points. No hollow definitions, nothing proved beyond sorry, docstrings give source places and the 4 proof steps; imported modules exist. No compile run (no file changed); the report records compile and preflight passing at a64f961 with the module byte-identical. Cosmetic only: stale retry text in the report about which node was added to stmt_deps."
+ }
+}

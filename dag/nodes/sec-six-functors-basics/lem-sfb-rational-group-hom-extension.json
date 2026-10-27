@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-rational-group-hom-extension",
+ "kind": "statement",
+ "title": "Extension of relative rational group homomorphisms",
+ "statement": "Let $S$ be any scheme [def-pc-scheme], and let $G,H$ be smooth separated finite-type $S$-group schemes [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Group scheme means multiplication, identity and inverse morphisms over $S$ satisfying the group-object diagrams of [def-sc-group-scheme] with $S$ as base; separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Products and fibres are scheme-theoretic base changes [def-pc-base-change]. An $S$-dense open is one dense in every fibre. Let $U\\subset G$ be $S$-dense and open [def-weil-open-immersion], and let $a:U\\to H$ be an $S$-morphism. Assume that the two morphisms $a(xy)$ and $a(x)a(y)$ agree on an $S$-dense open in the domain $\\{(x,y)\\in U\\times_SU:xy\\in U\\}$ of $a(xy)$. Then there is a unique $S$-group homomorphism $\\bar a:G\\to H$ restricting to $a$ on $U$. In particular, if an $S$-birational map between $G$ and $H$ is compatible with multiplication as a rational map, it extends to a unique $S$-group isomorphism. Here $S$-birational means represented by an isomorphism between $S$-dense opens, and rational equality means equality on an $S$-dense common open. No normality, Noetherianity or field hypothesis on $S$ is imposed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "5.1 Lemma 4 and proof of Proposition 3, printed pp.113-114 (PDF pp.119-120), using faithfully flat domain descent in 2.5 Proposition 5; agent-extracted general rational-homomorphism formulation of the argument; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "We use the following density calculation throughout. A smooth map is flat and locally finitely presented, hence universally open. Thus, for a smooth $S$-map $p:Y\\to Z$ and an $S$-dense open $A\\subset Z$, every nonempty open $W\\subset Y_s$ has nonempty open image $p_s(W)$, which meets $A_s$; hence $p^{-1}(A)$ is $S$-dense in $Y$. Finite intersections of dense opens are dense, also inside any open. Base changes and open restrictions of smooth maps are smooth, and their composites are smooth, by the cited statements. For a smooth $S$-scheme $Y$, every $S$-dense open is schematically dense by the smooth-density node, including after arbitrary base change. Consequently two $S$-morphisms $Y\\to H$ agreeing on such an open are equal by the relative scheme-theoretically dominant separated-target lemma. That lemma needs only separatedness of $H\\to S$, not reducedness of $S$ or $Y$.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-pc-proper-base-change",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-trf-smooth-composition",
+    "lem-sfb-smooth-fibrewise-dense-open-base-change",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "2.5 preliminaries and Lemma 1(b), printed pp.55-56; Stacks 01VB (lemma-base-change-smooth), 01VC (lemma-open-immersion-smooth), 01VA (lemma-composition-smooth), 01VF (lemma-smooth-flat), 01VE (lemma-smooth-locally-finite-presentation), 01UA (lemma-fppf-open)"
+   }
+  },
+  {
+   "text": "Put $C_0=U\\times_SU$, $q:C_0\\to G$, $q(x,y)=xy$, and $b:C_0\\to H$, $b(x,y)=a(x)a(y)$. The automorphism $\\tau:G\\times_SG\\to G\\times_SG$, $(x,y)\\mapsto(xy,y)$, has inverse $(z,y)\\mapsto(zy^{-1},y)$; these identities are group-object identities and hold as morphisms. Thus multiplication is the first projection after $\\tau$, and is smooth by smooth base change and invariance under isomorphisms. Restricting its source to $C_0$ gives a smooth $q$. Also $C_0$ is smooth over $S$, by base change, open restriction and composition. For any geometric point $g$ of $G$, over a geometric base point $s$, the opens $U_s$ and $(U_s)^{-1}g$ are dense in $G_s$: base change preserves density, and inverse and translation are isomorphisms. Their intersection is nonempty, since $G_s$ contains $g$. Choosing a geometric point $y$ there gives $x=gy^{-1}\\in U_s$ and $xy=g$. Thus every geometric fibre of $q$ is nonempty, so $q$ is surjective. This does not require connected fibres or rational points over the residue field.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-trf-smooth-composition",
+    "lem-sfb-smooth-fibrewise-dense-open-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.1 Lemma 4, printed p.113; explicit universal translation proof; 2.5 base-change invariance of density"
+   }
+  },
+  {
+   "text": "Let $C_U=q^{-1}(U)\\subset C_0$. This is smooth over $S$ by open restriction. The hypothesis gives an $S$-dense open of $C_U$ on which $b=a\\circ q$. By schematic density and separated-target equality, these two morphisms agree on all of $C_U$. Moreover $C_U$ is $S$-dense in $C_0$, by the open-image calculation of step 1 applied to $q$ on each fibre.",
+   "uses": [
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-sfb-smooth-fibrewise-dense-open-base-change",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.1 Proposition 3 proof: rational compatibility; 2.5 Lemma 1(b), schematic density"
+   }
+  },
+  {
+   "text": "Form the actual scheme-theoretic kernel pair $R=C_0\\times_G C_0$, with projections $r_1,r_2$, and put $h=q r_1=q r_2$. Each $r_i$ is smooth, being a base change of $q$; hence $R\\to S$ and $h:R\\to G$ are smooth by composition. The open $R_U=h^{-1}(U)$ is $S$-dense in $R$ by step 1. On $R_U$, step 3 gives $b r_1=a h=b r_2$ as morphisms. Since $R$ is smooth over $S$, $R_U$ is schematically dense; separated-target equality therefore gives $b r_1=b r_2$ on all of $R$. This proves precisely the compatibility required for morphism descent, including nilpotents on the overlap.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "lem-sfb-smooth-fibrewise-dense-open-base-change",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.1 Proposition 3 proof, with the overlap check for its use of 2.5 Proposition 5 made explicit"
+   }
+  },
+  {
+   "text": "The singleton $\\{q\\}$ is an fpqc covering in the stated covering convention, even when $U$ is not quasi-compact. Indeed $q$ is flat and universally open by smoothness. For every affine open $A\\subset G$, take affine opens in $q^{-1}(A)$ covering it. Their images are open in $A$ and cover $A$ by surjectivity. Quasi-compactness of the affine scheme $A$ gives finitely many such affine opens whose images cover $A$, exactly the definition of an fpqc covering. Apply representable fpqc descent to $b$ and step 4 to obtain a unique morphism $\\bar a:G\\to H$ with $\\bar a q=b$. Its composite with $H\\to S$ equals $G\\to S$, since both composites agree after the fpqc cover $q$ and uniqueness of representable descent applies with target $S$. Thus $\\bar a$ is an $S$-morphism.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "2.5 Proposition 5 and 5.1 Proposition 3; Stacks 023Q (lemma-fpqc-universal-effective-epimorphisms), 022B (definition-fpqc-covering), 00E8 (lemma-quasi-compact)"
+   }
+  },
+  {
+   "text": "On $C_U$, step 3 and the descent equation give $\\bar a q=a q$. The base change $q_U:C_U\\to U$ is smooth and surjective (its geometric fibres are the fibres of $q$ over points of $U$), so the fpqc-cover argument in step 5 applies to $q_U$. Uniqueness in representable descent implies $\\bar a|_U=a$ on the entire prescribed open $U$, rather than merely on a smaller rational domain.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "2.5 Proposition 5, restriction of the descended morphism; Stacks 023Q (lemma-fpqc-universal-effective-epimorphisms)"
+   }
+  },
+  {
+   "text": "Let $W=(U\\times_SU)\\cap m_G^{-1}(U)$ in $G\\times_SG$. Each of the two projections and $m_G$ is smooth, so step 1 makes $W$ $S$-dense in the smooth $S$-scheme $G\\times_SG$. On $W=C_U$, steps 3 and 6 show $\\bar a(xy)=\\bar a(x)\\bar a(y)$. Schematic density and relative separated-target equality extend this identity to all of $G\\times_SG$. On every test $S$-scheme the resulting multiplicative map between groups sends the identity to an idempotent, hence to the identity, and then sends inverses to inverses by cancellation. These are natural identities, so they give the unit and inverse diagrams as morphisms. Finally any other $S$-morphism extending $a$ equals $\\bar a$ by schematic density of $U$ in $G$ and the same relative equality lemma. This proves the required homomorphism and its uniqueness.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "lem-sfb-smooth-fibrewise-dense-open-base-change",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.1 Proposition 3, printed pp.113-114: extension preserves the group law and is unique; 2.5 Lemma 1(b)"
+   }
+  },
+  {
+   "text": "For the final clause choose an isomorphism $\\alpha:U_0\\simeq V_0$ between $S$-dense opens representing the birational map, and let $A:G\\to H$ be its homomorphism extension just proved. The open $W_0=(U_0\\times_SU_0)\\cap m_G^{-1}(U_0)$ is $S$-dense in $U_0\\times_SU_0$ by step 1. Its image $E_0$ under $\\alpha\\times\\alpha$ is therefore $S$-dense in $V_0\\times_SV_0$. For $(v,w)=(\\alpha(x),\\alpha(y))$ in $E_0$, multiplicativity gives $vw=\\alpha(xy)\\in V_0$, and hence $\\alpha^{-1}(vw)=xy=\\alpha^{-1}(v)\\alpha^{-1}(w)$. These are identities of morphisms on $E_0$, not just equalities of geometric points. Since $E_0$ is dense in $V_0\\times_SV_0$, it is dense in the open domain of the left side. The proved extension result therefore applies to $\\alpha^{-1}$, giving $B:H\\to G$. The composites $BA$ and $AB$ agree with the identities on $U_0$ and $V_0$ respectively, hence agree everywhere by schematic density and relative separated-target equality, using separatedness of both $G$ and $H$. Thus $A$ is the unique group isomorphism extending the birational map.",
+   "uses": [
+    "lem-sfb-smooth-fibrewise-dense-open-base-change",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.1 Proposition 3, printed p.114: extend both inverse rational maps and compare their composites"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-pc-proper-base-change",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-trf-smooth-composition",
+  "lem-sfb-smooth-fibrewise-dense-open-base-change",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 5.1 Lemma 4 and Proposition 3 proof, with explicit fpqc descent replacing the domain argument in 2.5 Proposition 5",
+  "note": "Primary scan read online at the URL recorded in source.place; local PDF WANTED. The expanded overlap and rational-inverse arguments are written by O3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An S rational group homomorphism between smooth separated group schemes extends uniquely to an everywhere defined homomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [inst : X.Over S] [inst_1 : Y.Over S]\\n  [AlgebraicGeometry.IsReduced X] [AlgebraicGeometry.IsSeparated (Y ↘ S)] {f g : X ⟶ Y}\\n  [AlgebraicGeometry.Scheme.Hom.IsOver f S] [AlgebraicGeometry.Scheme.Hom.IsOver g S] {W : AlgebraicGeometry\", \"doc\": \"Let $S$ be a base scheme. If $X$ is a reduced scheme over $S$, $Y$ is a separated scheme over $S$, and $f,g : X \\\\to Y$ are morphisms over $S$, then $f = g$ provided there exists a dense open subscheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : X.Over S] [inst_1 : Y.Over S] [AlgebraicGeometry.IsReduced X]\\n  [S.IsSeparated] {f : X.PartialMap Y},\\n  AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap ↔ AlgebraicGeometry.Scheme.PartialMap.IsOver S f\", \"doc\": \"Let $X$ and $Y$ be schemes over a base scheme $S$, with $X$ being reduced and $S$ being separated. For any partial map $f$ from $X$ to $Y$, the rational map obtained from $f$ is over $S$ if and only i\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.ValuativeCriterion.Uniqueness f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is separated, then for any valuative commutative square involving $ f $, the lifting data is uniquely determined, i.e., any two compatible lifts in such diagram\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {W X Y Z : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsReduced X] {f g : X ⟶ Y} (s : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSeparated s],\\n  CategoryTheory.CategoryStruct.comp f s = CategoryTheory.CategoryStruct.comp g s →\\n    ∀ (ι : W ⟶ X) [AlgebraicGeometry.IsDominant ι],\\n      CategoryTheory.CategoryS\", \"doc\": \"Let $ X $ be a reduced scheme, and let $ f, g : X \\\\to Y $ be morphisms of schemes. Suppose $ s : Y \\\\to Z $ is a separated morphism with $ f \\\\circ s = g \\\\circ s $. If there exists a dominant morphism $\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {W X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsReduced X] {f g : X ⟶ Y} [Y.IsSeparated] (ι : W ⟶ X)\\n  [AlgebraicGeometry.IsDominant ι],\\n  CategoryTheory.CategoryStruct.comp ι f = CategoryTheory.CategoryStruct.comp ι g → f = g\", \"doc\": \"Let $X$ be a reduced scheme, $Y$ a separated scheme, and $\\\\iota: W \\\\to X$ a dominant morphism. If two morphisms $f,g: X \\\\to Y$ satisfy $f \\\\circ \\\\iota = g \\\\circ \\\\iota$, then $f = g$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.RationalMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: ext_of_isDominant_of_isSeparated and its variants compare existing morphisms (with reduced-source hypotheses); they do not construct an extension of a relative rational homomorphism. RationalMap constructors and rational-algebra homomorphisms do not supply it."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RationalMap\", \"Group\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: ext_of_isDominant_of_isSeparated and its variants compare existing morphisms (with reduced-source hypotheses); they do not construct an extension of a relative rational homomorphism. RationalMap constructors and rational-algebra homomorphisms do not supply it."
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*homomorphism|birational.*homomorphism|homomorphism.*rational",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: ext_of_isDominant_of_isSeparated and its variants compare existing morphisms (with reduced-source hypotheses); they do not construct an extension of a relative rational homomorphism. RationalMap constructors and rational-algebra homomorphisms do not supply it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational homomorphism of smooth algebraic groups extends to a morphism on the whole group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.toRatAlgHom_apply\", \"module\": \"Mathlib.Algebra.Algebra.Hom.Rat\", \"type\": \"[Ring R] [Ring S] [Algebra ℚ R] [Algebra ℚ S] (f : R →+* S) (x : R) : f.toRatAlgHom x = f x\", \"doc\": \"For any rings $ R $ and $ S $ equipped with $ \\\\mathbb{Q} $-algebra structures, and for any ring homomorphism $ f : R \\\\to S $, the corresponding $ \\\\mathbb{Q} $-algebra homomorphism obtained by converti\"}\n  {\"name\": \"RingHom.map_rat_algebraMap\", \"module\": \"Mathlib.Algebra.Algebra.Rat\", \"type\": \"[Semiring R] [Semiring S] [Algebra ℚ R] [Algebra ℚ S] (f : R →+* S) (r : ℚ) : f (algebraMap ℚ R r) = algebraMap ℚ S r\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ between $ \\\\mathbb{Q} $-algebras and any rational number $ r $, applying $ f $ to the canonical image of $ r $ in $ R $ yields the canonical image of $ r $ in \"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) : A →ₐ[R] B\", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"RatFunc.liftAlgHom_apply\", \"module\": \"Mathlib.FieldTheory.RatFunc.Basic\", \"type\": \"{L S : Type*} [Field L] [CommSemiring S] [Algebra S K[X]] [Algebra S L] (φ : K[X] →ₐ[S] L) (hφ : K[X]⁰ ≤ L⁰.comap φ)\\n  (f : RatFunc K) : liftAlgHom φ hφ f = φ f.num / φ f.denom\", \"doc\": \"Given a commutative ring $ K $, a field $ L $, a commutative semiring $ S $, and an $ S $-algebra homomorphism $ \\\\varphi : K[X] \\\\to L $ preserving non-zero divisors, the lifted $ S $-algebra homomorph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.compHom\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X ⤏ Y) (g : Y ⟶ Z) : X ⤏ Z\", \"doc\": \"Given a rational map $ f $ from a scheme $ X $ to a scheme $ Y $ and a morphism $ g $ from $ Y $ to $ Z $, this function constructs their composition as a rational map from $ X $ to $ Z $. The composi\"}\n  {\"name\": \"NormedAddGroupHom.completion_coe\", \"module\": \"Mathlib.Analysis.Normed.Group.HomCompletion\", \"type\": \"(f : NormedAddGroupHom G H) (g : G) : f.completion g = f g\", \"doc\": \"For any normed additive group homomorphism $ f : G \\\\to H $ between seminormed additive commutative groups and for every element $ g \\\\in G $, the extension of $ f $ to the completions of $ G $ and $ H \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X.Hom Y) : X ⤏ Y\", \"doc\": \"Given a morphism $ f : X \\\\to Y $ of schemes, this function constructs the corresponding rational map $ X \\\\dashrightarrow Y $ by first converting $ f $ into a partial map defined on the entire topologi\"}\n  {\"name\": \"AlgHom.toRingHom_toRatAlgHom\", \"module\": \"Mathlib.Algebra.Algebra.Hom.Rat\", \"type\": \"[Ring R] [Ring S] [Algebra ℚ R] [Algebra ℚ S] (f : R →ₐ[ℚ] S) : (f : R →+* S).toRatAlgHom = f\", \"doc\": \"For rings $ R $ and $ S $ equipped with $ \\\\mathbb{Q} $-algebra structures, any $ \\\\mathbb{Q} $-algebra homomorphism $ f : R \\\\to_\\\\mathbb{Q} S $ satisfies $ (f : R \\\\to+* S).\\\\text{toRatAlgHom} = f $, wher\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: ext_of_isDominant_of_isSeparated and its variants compare existing morphisms (with reduced-source hypotheses); they do not construct an extension of a relative rational homomorphism. RationalMap constructors and rational-algebra homomorphisms do not supply it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a rational homomorphism from a fibrewise dense open of a smooth group scheme using multiplication and faithfully flat descent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [inst : X.Over S] [inst_1 : Y.Over S]\\n  [AlgebraicGeometry.IsReduced X] [AlgebraicGeometry.IsSeparated (Y ↘ S)] {f g : X ⟶ Y}\\n  [AlgebraicGeometry.Scheme.Hom.IsOver f S] [AlgebraicGeometry.Scheme.Hom.IsOver g S] {W : AlgebraicGeometry\", \"doc\": \"Let $S$ be a base scheme. If $X$ is a reduced scheme over $S$, $Y$ is a separated scheme over $S$, and $f,g : X \\\\to Y$ are morphisms over $S$, then $f = g$ provided there exists a dense open subscheme\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {W X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsReduced X] {f g : X ⟶ Y} [Y.IsSeparated] (ι : W ⟶ X)\\n  [AlgebraicGeometry.IsDominant ι],\\n  CategoryTheory.CategoryStruct.comp ι f = CategoryTheory.CategoryStruct.comp ι g → f = g\", \"doc\": \"Let $X$ be a reduced scheme, $Y$ a separated scheme, and $\\\\iota: W \\\\to X$ a dominant morphism. If two morphisms $f,g: X \\\\to Y$ satisfy $f \\\\circ \\\\iota = g \\\\circ \\\\iota$, then $f = g$.\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {W X Y Z : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsReduced X] {f g : X ⟶ Y} (s : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSeparated s],\\n  CategoryTheory.CategoryStruct.comp f s = CategoryTheory.CategoryStruct.comp g s →\\n    ∀ (ι : W ⟶ X) [AlgebraicGeometry.IsDominant ι],\\n      CategoryTheory.CategoryS\", \"doc\": \"Let $ X $ be a reduced scheme, and let $ f, g : X \\\\to Y $ be morphisms of schemes. Suppose $ s : Y \\\\to Z $ is a separated morphism with $ f \\\\circ s = g \\\\circ s $. If there exists a dominant morphism $\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) [inst : IrreducibleSpace ↥X] {U : X.Opens} (hU : Dense ↑U)\\n  (hU' : U ≤ f.domain), (f.restrict U hU hU').fromFunctionField = f.fromFunctionField\", \"doc\": \"Let $X$ be an irreducible scheme, $Y$ be a scheme, and $f: X \\\\dashrightarrow Y$ be a rational map. Let $U$ be a dense open subset of $X$ that is contained in the domain of $f$. The morphism of schemes\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: ext_of_isDominant_of_isSeparated and its variants compare existing morphisms (with reduced-source hypotheses); they do not construct an extension of a relative rational homomorphism. RationalMap constructors and rational-algebra homomorphisms do not supply it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational homomorphism between smooth separated group schemes over an arbitrary base extends uniquely to a group scheme morphism",
+   "results": "Read 8 hits: AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated, AlgebraicGeometry.ext_of_isDominant_of_isSeparated', AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Scheme.Hom.ext', AlgebraicGeometry.AffineSpace.hom_ext, AlgebraicGeometry.ext_of_isDominant_of_isSeparated, AlgebraicGeometry.IsSeparated.valuativeCriterion, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representative constructors and reduced-source equality statements do not construct a global relative rational group homomorphism; no group-extension theorem was returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RationalMap\", \"Group\"",
+   "results": "Read 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representative constructors and reduced-source equality statements do not construct a global relative rational group homomorphism; no group-extension theorem was returned."
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*homomorphism|birational.*homomorphism|homomorphism.*rational",
+   "results": "Read 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representative constructors and reduced-source equality statements do not construct a global relative rational group homomorphism; no group-extension theorem was returned."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational homomorphism of smooth algebraic groups extends uniquely from a dense open subscheme",
+   "results": "Read 8 hits: IsDenseInducing.extendRingHom, AlgebraicGeometry.Scheme.PartialMap.restrict_toRationalMap, ContinuousAlgHom.ext_on, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict, AlgebraicGeometry.Scheme.PartialMap.mk, AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver, AlgebraicGeometry.Scheme.PartialMap.mk.noConfusion, AlgebraicGeometry.Scheme.PartialMap.mk.congr_simp",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representative constructors and reduced-source equality statements do not construct a global relative rational group homomorphism; no group-extension theorem was returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a rational homomorphism from a fibrewise dense open of a smooth group scheme using multiplication and faithfully flat descent",
+   "results": "Read 8 hits: AlgebraicGeometry.Scheme.RationalMap.exists_rep, AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap.dense_domain, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representative constructors and reduced-source equality statements do not construct a global relative rational group homomorphism; no group-extension theorem was returned."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-birational-law-realization",
+  "date": "2026-10-24",
+  "group": "Q90"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Theorem 6, printed p.108 (PDF p.114), equivalently 5.1 Theorem 5 including the no-shrinking clause, printed p.114 (PDF p.120). Supporting sublemma: BLR 5.2 Theorem 3 and the explicit translate construction of 5.3, printed pp.117-128 (PDF pp.123-134); descent to an arbitrary field or DVR in 6.5 Corollary 2, printed pp.157-158 (PDF pp.163-164); uniqueness in 5.1 Proposition 3; 5.1 Proposition 3 proof: smooth-surjective product of dense opens and extension of rational homomorphisms; applicable also to overlap bases",
+   "via": [
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rational-group-hom-extension",
+  "worker": "stage1",
+  "summary": "Expanded BLR smooth multiplication-cover argument into eight steps, checking schematic density over arbitrary bases, the scheme-theoretic kernel pair, fpqc covering without quasi-compactness of U, agreement on all of U, multiplicativity, and the inverse birational map. Reused existing DAG nodes; no new nodes and no statement change.",
+  "blueprint": "Inherited created-item chain has no blueprint ancestor (blueprint_refs.py ancestor prints None); preserved its from.node and via. The supporting BLR argument in from.place is realized by steps 1-8. Searched all imported blueprint nodes for rational homomorphism; no equivalent statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O3-bd7b690fc",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-bd7b690fc (reviewer sub-agent of L); spot-checked: I read the whole delivery. Only the item changed: unsplit becomes split with 8 steps and 11 existing proof_deps, no new nodes. The statement, stmt_deps, source and blueprint chain are identical to live. Steps checked: (1) smooth maps are flat, lfp and universally open, so preimages of S-dense opens are S-dense; the smooth-density node gives schematic density and the Nagata-ext lemma gives equality into a separated target with no reducedness needed. (2) Multiplication is pr1 composed with the automorphism (x,y)->(xy,y), so q on UxU is smooth; q is surjective because for each geometric point g the dense opens U and U^{-1}g of the geometric fibre meet in a k-bar point y. (3) b equals a∘q on all of q^{-1}(U), from the S-dense hypothesis plus schematic density. (4) On the kernel pair C0x_G C0, b r1 = b r2, via density of h^{-1}(U) and the separated target. (5) {q} matches the fpqc covering definition without quasi-compactness of U; representable descent gives the extension, and uniqueness with target S makes it an S-map. (6) Descent along q_U shows the extension equals a on all of U. (7) Multiplicativity holds on the S-dense open C_U of the smooth GxG and so everywhere; unit and inverse follow; uniqueness from density of U. (8) The inverse birational map meets the hypothesis on (alpha x alpha)(C_U0); both composites are identities by density, using that G and H are smooth and separated. Edge cases checked: empty S, non-reduced S, disconnected or finite etale G, noncommutative G. Stacks tags 01VB/01VC/01VA/01VF/01VE/01UA match. BLR is not local (WANTED, as before); the argument is self-contained. No duplicate found (relative-group-weil-extension and birational-law-strictification are different statements). Batch-5 flag on lem-trf-smooth-composition: accepted. It is the generic Stacks 01VA fact (status mathlib) that composites of smooth maps are smooth, not a step particular to the trace-formula or Poincare-duality proofs, so no assumption leaf is needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RationalHomExtension",
+  "declaration": "AlgebraicGeometry.existsUnique_groupHom_extension_of_fibrewiseDense_open",
+  "declarations": [
+   "AlgebraicGeometry.existsUnique_groupHom_extension_of_fibrewiseDense_open",
+   "AlgebraicGeometry.existsUnique_groupIso_extension_of_fibrewiseDense_open"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RationalHomExtension.lean",
+  "statement": "theorem existsUnique_groupHom_extension_of_fibrewiseDense_open {S : Scheme.{u}} (G H : Over S) [GrpObj G] [GrpObj H] [Smooth G.hom] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Smooth H.hom] [IsSeparated H.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] (U : Over S) (j : U ⟶ G) [IsOpenImmersion j.left] (hU : ∀ s : S, Dense ((G.hom.fiberι s) ⁻¹' Set.range j.left)) (a : U ⟶ H) (hcompat : ∃ (W : Over S) (k : W ⟶ pullback ((j ⊗ₘ j) ≫ μ[G]) j), IsOpenImmersion k.left ∧ (∀ s : S, Dense (((pullback ((j ⊗ₘ j) ≫ μ[G]) j).hom.fiberι s) ⁻¹' Set.range k.left)) ∧ k ≫ pullback.fst ((j ⊗ₘ j) ≫ μ[G]) j ≫ (a ⊗ₘ a) ≫ μ[H] = k ≫ pullback.snd ((j ⊗ₘ j) ≫ μ[G]) j ≫ a) : ∃! f : G ⟶ H, IsMonHom f ∧ j ≫ f = a",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The first declaration states the extension and uniqueness; the second states the in-particular birational group-isomorphism clause. Open subschemes are represented by open immersions in Over S. Fibrewise density uses the actual scheme-theoretic fibres, and rational multiplicativity is an equality of morphisms on a fibrewise dense open of the canonical pullback domain."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd8221df6",
+  "group": "O1",
+  "result": "pass",
+  "note": "Read item node (only lean changed vs live), module, report (Worker report + Second reading by O1), all 7 stmt_dep records and the Mathlib declarations (Smooth, fiberι, Over S cartesian monoidal = scheme pullback, GrpObj/IsMonHom). Clause-by-clause match: arbitrary S; G,H GrpObj in Over S with Smooth/IsSeparated/LocallyOfFiniteType+QuasiCompact; U open immersion with fibrewise density via fiberι preimage; a(xy) domain = pullback((j⊗j)≫μ) j; compatibility as morphism equality on fibrewise-dense open k of that domain; ∃! IsMonHom f with j≫f=a; second theorem gives the birational clause (V, jV, hV, α:U≅V, ∃! iso). lean.statement verbatim; both declarations listed; no defs; sorry proofs; source/blueprint docstrings with 8-step proof; no extra hypotheses or universe restriction; no S-dense def node or existing declaration (no H4). No findings; no compile needed (no file changed)."
+ }
+}

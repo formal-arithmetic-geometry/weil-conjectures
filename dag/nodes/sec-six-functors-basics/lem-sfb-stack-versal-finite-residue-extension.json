@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-stack-versal-finite-residue-extension",
+ "kind": "statement",
+ "title": "Versal rings after a finite residue-field extension",
+ "statement": "Let $(R,\\mathfrak m_R)$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], where local means having a unique maximal ideal. Let $k$ be a finite extension of $R/\\mathfrak m_R$ [def-weil-field]. Schemes and algebraic spaces are [def-pc-scheme, def-trf-algebraic-space], in the universes of [def-weil-size-convention]. An algebraic stack is a category fibred in groupoids with effective etale descent for objects and sheaf descent for isomorphisms, diagonal representable by algebraic spaces, and a smooth surjective scheme atlas. Representable means that every scheme-valued 2-base change is an algebraic space. Smoothness is tested on smooth scheme atlases by [def-sbc-smooth-morphisms]. Locally of finite type means that a smooth scheme atlas has locally finite type composite to the base [def-weil-finite-type-morphism]. Let $\\mathcal X\\to\\operatorname{Spec}R$ be an algebraic stack locally of finite type and let $x:\\operatorname{Spec}k\\to\\mathcal X$ be an $R$-point [def-weil-affine-spectrum]. For an Artinian local $R$-algebra $A$ with specified residue field $k$, let $\\mathcal F_x(A)$ be the groupoid of pairs $(\\eta,\\alpha)$ with $\\eta\\in\\mathcal X(A)$ and $\\alpha:\\eta|_k\\cong x$, with arrows respecting the marking. Artinian means descending chains of ideals stabilize; all maps between test algebras are local and induce the identity on their specified residue fields. Here a versal ring at $x$ means a complete Noetherian local $R$-algebra $C$ with residue field $k$, equipped with a marked formal object: objects $\\eta_n\\in\\mathcal F_x(C/\\mathfrak m_C^n)$, $n\\geq1$, with coherent transition isomorphisms $\\eta_{n+1}|_{C/\\mathfrak m_C^n}\\cong\\eta_n$. For a test algebra $A$ and a local $R$-map $v:C\\to A$ inducing the identity on $k$ (it kills some $\\mathfrak m_C^n$), write $\\eta_v\\in\\mathcal F_x(A)$ for the pullback of $\\eta_n$ along the induced map $C/\\mathfrak m_C^n\\to A$. Versality means: for every surjection $A'\\twoheadrightarrow A$ of test algebras, every such $v:C\\to A$, every $\\zeta'\\in\\mathcal F_x(A')$ and every isomorphism $\\zeta'|_A\\cong\\eta_v$ in $\\mathcal F_x(A)$, there exist a local $R$-map $v':C\\to A'$ lifting $v$ and an isomorphism $\\zeta'\\cong\\eta_{v'}$ in $\\mathcal F_x(A')$ restricting to the prescribed one. Let $C$ be a versal ring at $x$. Let $l/k$ be any specified finite field extension and let $x_l$ be the induced point. Then there exist a versal ring $C_l$ at $x_l$, complete Noetherian local with residue field $l$ and equipped with a marked formal object in the same sense, and a local $R$-map $C\\to C_l$ inducing the specified embedding $k\\hookrightarrow l$ and formally smooth for the $\\mathfrak m_{C_l}$-adic topology [def-weil-pbc-formally-smooth-adic].",
+ "source": {
+  "document": "literature/stacks-project/stacks-geometry.tex",
+  "place": "Tag 0DQY, lemma-versal-ring-field-extension; proof invokes Formal Deformation Theory, Lemma 0DQF, lemma-change-of-field-versal-ring, and Artin's Axioms, Lemma 07WX, lemma-change-of-field."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-adic-completion",
+  "def-sfb-algebraic-moduli-stack"
+ ],
+ "proof": [
+  {
+   "text": "Choose finitely many $k$-algebra generators $a_1,\\ldots,a_s$ of $l$: a finite $k$-basis is such a generating family, since every element is already a $k$-linear combination. Evaluation gives a surjection $e:P=C[Y_1,\\ldots,Y_s]\\twoheadrightarrow l$, using $C\\twoheadrightarrow k\\hookrightarrow l$ on coefficients [def-weil-pbc-mv-polynomial-ring]. Put $\\mathfrak q=\\ker(e)$ and $D=\\varprojlim_{n\\geq1}P/\\mathfrak q^n$. Apply [lem-sfb-artin-completed-polynomial-test-ring] with its base ring $C$, its residue field $l$, and its number $d$ of additional zero-valued variables equal to zero. It makes $D$ complete Noetherian local, with maximal ideal $\\mathfrak qD$ and residue field canonically $l$, and makes every $B_n=D/\\mathfrak m_D^n$ Artinian local with residue $l$. The structure map $j:C\\to D$ induces the specified $k\\hookrightarrow l$; its inverse image of $\\mathfrak m_D$ is $\\mathfrak m_C$, so it is local. Thus $D$ is a complete Noetherian local $R$-algebra.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-sfb-artin-completed-polynomial-test-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 0DQF, lemma-change-of-field-versal-ring, construction of S; Tag 06SM, lemma-exists-smooth, polynomial-completion construction."
+   }
+  },
+  {
+   "text": "The lifting clause of [lem-sfb-artin-completed-polynomial-test-ring], again with base $C$ and residue field $l$, says that every local residue-preserving $C$-map $D\\to B$ lifts through every surjection $B'\\twoheadrightarrow B$ of Artinian local $C$-algebras with residue field $l$. Apply [lem-sfb-adic-smooth-fixed-residue-lifting] with its base ring $C$, its finite residue extension $l/(C/\\mathfrak m_C)=l/k$, and its complete local algebra $D$. Its hypotheses hold by step 1 and the hypotheses on $C$. This proves that $j:C\\to D$ is formally smooth for the $\\mathfrak m_D$-adic topology, in the precise unrestricted square-zero lifting sense required by the item.",
+   "uses": [
+    "lem-sfb-artin-completed-polynomial-test-ring",
+    "lem-sfb-adic-smooth-fixed-residue-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 0DQF, construction of S and formal smoothness; Tag 0DYL, lemma-smooth, equivalence (1) and (2)."
+   }
+  },
+  {
+   "text": "For any Artinian local $R$-algebra $B$ with residue map $B\\twoheadrightarrow l$, put $A_B=B\\times_l k$. By [lem-sfb-artinian-finite-residue-restriction], $A_B$ is Artinian local with residue $k$, its projection to $B$ is injective, and $B'\\twoheadrightarrow B$ induces a surjection $A_{B'}\\twoheadrightarrow A_B$. The construction respects the $R$-structures. Since $k$ and $l$ are finite over $R/\\mathfrak m_R$, each is generated as an $R$-algebra by a finite vector-space basis. Hence [lem-sfb-artinian-finite-type-residue-criterion] makes $\\operatorname{Spec}A_B$ and $\\operatorname{Spec}B$ finite type over $\\operatorname{Spec}R$, as are $\\operatorname{Spec}k$ and $\\operatorname{Spec}l$. Finally [lem-weil-pbc-artinian-local-noetherian-nilpotent] makes $\\ker(B\\to l)=\\mathfrak m_B$ nilpotent. These assertions verify all the Artinian, finite-type, and nilpotence hypotheses needed in the next step.",
+   "uses": [
+    "lem-sfb-artinian-finite-residue-restriction",
+    "lem-sfb-artinian-finite-type-residue-criterion",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 07W8, situation-change-of-fields, comparison functor and its properties; artin.tex Tag 07WX, finite-type pushout hypotheses."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-closed-pinching-pushout] to $B\\twoheadrightarrow l\\leftarrow k$. It identifies $\\operatorname{Spec}A_B$ with the scheme pushout $\\operatorname{Spec}k\\amalg_{\\operatorname{Spec}l}\\operatorname{Spec}B$. Here $\\operatorname{Spec}l\\to\\operatorname{Spec}B$ is the nilpotent closed immersion just checked. Apply [lem-sfb-algebraic-stack-rim-schlessinger] over the Noetherian base ring $R$ to obtain the restriction equivalence\n$$\\mathcal X(A_B)\\simeq\\mathcal X(k)\\times_{\\mathcal X(l)}\\mathcal X(B).$$\nThe right side retains the specified isomorphism over $l$. All four schemes satisfy its finite-type hypothesis by step 3; the item supplies exactly its algebraic-stack hypothesis.",
+   "uses": [
+    "lem-sfb-affine-closed-pinching-pushout",
+    "lem-sfb-algebraic-stack-rim-schlessinger"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07WX, lemma-change-of-field, displayed pushout and restriction equivalence; Tag 07WQ, lemma-algebraic-stack-RS."
+   }
+  },
+  {
+   "text": "Fixing the object $x$ and its marking in the equivalence of step 4 gives an equivalence $E_B:\\mathcal F_x(A_B)\\simeq\\mathcal F_{x_l}(B)$: send $(w,\\alpha)$ to its restriction to $B$, marked by $\\alpha|_l$. Explicitly, a marked object $z$ over $B$ supplies the triple $(x,z,z|_l\\cong x_l)$ and therefore lifts by essential surjectivity in step 4. An arrow between two images, compatible with their markings, pairs with the identity of $x$ to give an arrow of triples, and thus lifts uniquely by full faithfulness in step 4. This proves full faithfulness on marked groupoids as well. Restriction along $B\\to B'$ commutes with $E$ up to the canonical pullback comparisons: both composites restrict the same object along $A_B\\to B'$. These comparisons inherit their coherence from the given pullback functors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07WX, lemma-change-of-field, restriction to marked fibre categories after the displayed equivalence."
+   }
+  },
+  {
+   "text": "Let $(\\eta_r)_{r\\geq1}$ be the given marked formal object over $C$. For $B_n$ from step 1 put $A_n=A_{B_n}$. The composite $C\\xrightarrow{j}D\\to B_n$ has residue image in $k\\subset l$, hence factors uniquely through the subring $A_n=B_n\\times_l k$. The resulting map $u_n:C\\to A_n$ is local and residue-preserving. By [lem-weil-pbc-artinian-local-noetherian-nilpotent], $\\mathfrak m_{A_n}^{r_n}=0$ for some $r_n$, so $u_n$ kills $\\mathfrak m_C^{r_n}$. Pull back $\\eta_{r_n}$ to $A_n$ and apply $E_{B_n}$ to obtain $\\theta_n\\in\\mathcal F_{x_l}(B_n)$. For $B_{n+1}\\to B_n$, the maps from $C$ to $A_n$ agree. Choose a common larger exponent for the two factorizations through quotients of $C$; the given transition isomorphisms of $\\eta$ identify the two restrictions. They satisfy the cocycle identities because those of $\\eta$ do, and the pullback comparisons in step 5 are coherent. Thus $(\\theta_n)$ is a marked formal object over $D$. In particular, for any local residue-preserving $b:D\\to B$, its pullback $\\theta_b$ is canonically $E_B(\\eta_{u_b})$, where $u_b:C\\to A_B$ is the factorization of $bj$.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 0DQF, lemma-change-of-field-versal-ring, transformation from the functor represented by S to the residue-changed functor represented by R."
+   }
+  },
+  {
+   "text": "We verify versality, retaining the prescribed isomorphism. Take $p:B'\\twoheadrightarrow B$, a local residue-preserving $b:D\\to B$, $\\zeta'\\in\\mathcal F_{x_l}(B')$, and an isomorphism $\\gamma:\\zeta'|_B\\xrightarrow{\\sim}\\theta_b$. By essential surjectivity of $E_{B'}$ choose $w'\\in\\mathcal F_x(A_{B'})$ and an isomorphism $\\delta:E_{B'}(w')\\xrightarrow{\\sim}\\zeta'$. By the naturality and full faithfulness in step 5, the composite $\\gamma\\circ\\delta|_B$ has a unique preimage\n$$\\beta:w'|_{A_B}\\xrightarrow{\\sim}\\eta_{u_b}.$$\nStep 3 makes $A_{B'}\\twoheadrightarrow A_B$ a surjection of the test algebras for $x$. Apply the assumed versality of $C$ to $u_b,w',\\beta$. It supplies a local residue-preserving $u':C\\to A_{B'}$ lifting $u_b$ and an isomorphism $\\varepsilon:w'\\xrightarrow{\\sim}\\eta_{u'}$ restricting to $\\beta$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 0DQF, smoothness after change of field; artin.tex Tag 07WX, identification of the two marked deformation categories."
+   }
+  },
+  {
+   "text": "Give $B'$ its $C$-algebra structure by $C\\xrightarrow{u'}A_{B'}\\to B'$ and give $B$ the compatible one $C\\xrightarrow{u_b}A_B\\to B$. Both have the specified $C$-algebra residue field $l$; the latter structure is $bj$, so $b:D\\to B$ is a $C$-map for these structures. Apply the lifting clause of [lem-sfb-artin-completed-polynomial-test-ring] with base $C$ to lift $b$ to a local residue-preserving $C$-map $b':D\\to B'$. Its composite with $j$ is the map just prescribed by $u'$, so the unique factorization $C\\to A_{B'}$ associated to $b'$ is precisely $u'$. Consequently $E_{B'}(\\varepsilon)\\circ\\delta^{-1}$ identifies $\\zeta'$ with $\\theta_{b'}$. Its restriction is $(\\gamma\\circ\\delta|_B)\\circ(\\delta|_B)^{-1}=\\gamma$, by the choice of $\\beta$ and the restriction condition on $\\varepsilon$. This is exactly the versality lifting property, including the prescribed isomorphism. Take $C_l=D$ with $(\\theta_n)$ and $C\\to C_l=j$. Step 1 gives its complete local Noetherian and residue-field clauses, and step 2 gives adic formal smoothness.",
+   "uses": [
+    "lem-sfb-artin-completed-polynomial-test-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 0DQF, lemma-change-of-field-versal-ring, final smoothness lifting diagram; polynomial-completion lifting clause of Tag 06SM."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-sfb-artin-completed-polynomial-test-ring",
+  "lem-sfb-adic-smooth-fixed-residue-lifting",
+  "lem-sfb-artinian-finite-residue-restriction",
+  "lem-sfb-artinian-finite-type-residue-criterion",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-sfb-affine-closed-pinching-pushout",
+  "lem-sfb-algebraic-stack-rim-schlessinger"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 0DQF, lemma-change-of-field-versal-ring, proof, applied to artin.tex Tag 07WX, lemma-change-of-field, as in stacks-geometry.tex Tag 0DQY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A versal ring of an algebraic stack extends along a finite residue field extension by a formally smooth local map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residue_descResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {K : Type u} [inst : Field K] {X : AlgebraicGeometry.Scheme} {x : ↥X}\\n  (f : X.presheaf.stalk x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [inst_1 : IsLocalHom (CommRingCat.Hom.hom f)],\\n  CategoryTheory.CategoryStruct.comp (X.residue x) (AlgebraicGeometry.Scheme.descResi\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, given a field $K$ and a local ring homomorphism $f : \\\\mathcal{O}_{X,x} \\\\to K$ from the stalk of the structure sheaf at $x$ to $K$, the composition of the canoni\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecResidueField x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ from the spectrum of the residue field $\\\\kappa(x)$ at $x$ to $X$ is a preimmersion in the sense \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : X.Over Y] (x : ↥X),\\n  AlgebraicGeometry.Scheme.Hom.IsOver\\n    (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap (X ↘ Y) x)) Y\", \"doc\": \"For a morphism of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, let $\\\\phi: k(f(x)) \\\\to k(x)$ be the induced homomorphism on residue fields. The induced morphism of schemes $\\\\mathrm{Spec}(\\\\phi): \\\\mathrm{\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.descResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"{K : Type u} →\\n  [inst : Field K] →\\n    {X : AlgebraicGeometry.Scheme} →\\n      {x : ↥X} →\\n        (f : X.presheaf.stalk x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing }) →\\n          [IsLocalHom (CommRingCat.Hom.hom f)] →\\n            X.residueField x ⟶ { carrier := K, commRing := \", \"doc\": \"Let $X$ be a scheme, $x$ a point in $X$, and $K$ a field. Given a local ring homomorphism $f \\\\colon \\\\mathcal{O}_{X,x} \\\\to K$ from the stalk of the structure sheaf at $x$, this function constructs the \"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField_1\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)]\\n  [Algebra.FormallyUnramified R S], Algebra.FormallyUnramified (IsLocalRing.ResidueField R) (IsLocalRing.Residue\", \"doc\": \"If $ S $ is formally unramified over $ R $, then the residue field of $ S $ is formally unramified over the residue field of $ R $. This instance asserts that the formal unramified property of a local\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (x : ↥X) → (AlgebraicGeometry.Spec (X.residueField x)).CanonicallyOver X\", \"doc\": \"For any scheme $ X $ and a point $ x \\\\in X $, the affine scheme $ \\\\operatorname{Spec} $ of the residue field at $ x $ is equipped with a canonical morphism to $ X $, thereby forming an object in the o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (x : ↥X) → (AlgebraicGeometry.Spec (X.residueField x)).Over X\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, there is a canonical morphism of schemes from the spectrum of the residue field at $x$, denoted $\\\\operatorname{Spec}(k(x))$, to the scheme $X$.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary formal smoothness, residue-field maps, generic universal properties, or Weierstrass uniqueness; none concerns versal deformation rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of residue field of a versal formal deformation ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalRing.ResidueField\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → [IsLocalRing R] → Type u_1\", \"doc\": \"The residue field of a local ring $ R $ is the quotient ring obtained by dividing $ R $ by its unique maximal ideal, which consists of all non-units of $ R $. This construction forms the field of equi\"}\n  {\"name\": \"IsLocalRing.ResidueField.map\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \"(f : R →+* S) [IsLocalHom f] : ResidueField R →+* ResidueField S\", \"doc\": \"Given a local ring homomorphism $ f : R \\\\to S $ between commutative local rings, this is the induced ring homomorphism from the residue field $ R/\\\\mathfrak{m}_R $ to the residue field $ S/\\\\mathfrak{m}\"}\n  {\"name\": \"IsLocalRing.instCommRingResidueField\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → [inst_1 : IsLocalRing R] → CommRing (IsLocalRing.ResidueField R)\", \"doc\": \"For any commutative ring $ R $ that is a local ring, the residue field of $ R $, defined as the quotient of $ R $ by its unique maximal ideal of non-units, inherits a commutative ring structure from $\"}\n  {\"name\": \"IsLocalRing.instInhabitedResidueField\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → [inst_1 : IsLocalRing R] → Inhabited (IsLocalRing.ResidueField R)\", \"doc\": \"The residue field of a local ring $ R $ is the quotient ring $ R $ modulo its unique maximal ideal consisting of all non-units. This construction yields a field where elements are equivalence classes \"}\n  {\"name\": \"IsLocalRing.ResidueField.lift_residue_apply\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \"{R S : Type*} [CommRing R] [IsLocalRing R] [Field S] (f : R →+* S) [IsLocalHom f] (x) : lift f (residue R x) = f x\", \"doc\": \"For any commutative local ring $ R $, field $ S $, and local ring homomorphism $ f : R \\\\to S $, the induced ring homomorphism from the residue field of $ R $ to $ S $ satisfies $ \\\\text{lift}(f)(\\\\text{\"}\n  {\"name\": \"PowerSeries.residueFieldOfPowerSeries\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": ResidueField k⟦X⟧ ≃+* k\", \"doc\": \"For any field $ k $, the residue field of the ring of univariate power series $ k[[X]] $ is isomorphic to $ k $. This isomorphism arises because the maximal ideal of $ k[[X]] $ consists of power serie\"}\n  {\"name\": \"IsLocalRing.residue\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \": R →+* ResidueField R\", \"doc\": \"The canonical ring homomorphism from a local ring $ R $ to its residue field, obtained by quotienting $ R $ by its unique maximal ideal consisting of all non-units.\"}\n  {\"name\": \"IsLocalRing.ResidueField.mapEquiv\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \"(f : R ≃+* S) : IsLocalRing.ResidueField R ≃+* IsLocalRing.ResidueField S\", \"doc\": \"Given a ring equivalence $ f : R ≃+* S $ between commutative local rings $ R $ and $ S $, this constructs a ring equivalence between their residue fields $ R/\\\\mathfrak{m}_R $ and $ S/\\\\mathfrak{m}_S $,\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary formal smoothness, residue-field maps, generic universal properties, or Weierstrass uniqueness; none concerns versal deformation rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, IsLocalRing",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [IsLocalRing S] [Algebra R S] (P : Type u_3) (K : Type u_4) [Field K] [CommRing P] [Algebra R P] [Algebra P S] [IsScalarTower R P S] [Algebra S K] [Algebra P K] [IsScalarTower P S K] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.\", \"doc\": \"The **Jacobian criterion** for smoothness of local algebras.\\nSuppose `S` is a local `R`-algebra, and `0 → I → P → S → 0` is a presentation such that\\n`P` is formally-smooth over `R`, `Ω[P⁄R]` is finite\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [IsLocalRing S] [Algebra R S] (P : Type u_3) [CommRing P] [Algebra R P] [Algebra P S] [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P Ω[P⁄R]] (h₁ : Function.Surjective ⇑(algebraMap P S)) (h₂ : (RingHo\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [IsLocalRing S] [Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]] [Module.Finite P.Ring Ω[P.Ring⁄R]] (h' : P.ker.FG) : Algebra.FormallySmooth R S ↔ Function.Injective ⇑(LinearMap.lTens\", \"doc\": \"The **Jacobian criterion** for smoothness of local algebras.\\nSuppose `S` is a local `R`-algebra, and `0 → I → P → S → 0` is a presentation such that\\n`P` is formally-smooth over `R`, `Ω[P⁄R]` is finite\"}\n  {\"name\": \"Algebra.FormallySmooth.of_formallySmooth_residueField_tensor\", \"module\": \"Mathlib.RingTheory.Smooth.Fiber\", \"type\": \" {R : Type u_1} {S : Type u_2} {P : Type u_3} [CommRing R] [CommRing S] [Algebra R S] [Module.Flat R S] [CommRing P] [Algebra R P] [Algebra P S] [IsScalarTower R P S] [IsLocalRing R] [IsLocalRing S] [IsLocalHom (algebraMap R S)] [Algebra.FormallySmooth (IsLocalRing.ResidueField R) (TensorProduct R (\", \"doc\": \"Let `(R, m, k)` be a local ring, `S` be a local `R`-algebra that is flat,\\nessentially of finite presentation, and `k ⊗[R] S` is `k`-formally smooth.\\nThen `S` is `R`-formally smooth.\\n\\nSince we don't ha\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary formal smoothness, residue-field maps, generic universal properties, or Weierstrass uniqueness; none concerns versal deformation rings"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bversal\\b|\\bVersalRing\\b|changeOfField",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"36\", \"text\": \"apply them to infinitesimal smooth (or versal) extensions later.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"line\": \"15\", \"text\": \"weak limit satisfies the same \\\"versal property\\\" as a limit, without the uniqueness\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"line\": \"194\", \"text\": \"/-- The versal morphism from any other cone to a weak limit cone. -/\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary formal smoothness, residue-field maps, generic universal properties, or Weierstrass uniqueness; none concerns versal deformation rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base extension of hulls in formal deformation theory for algebraic stacks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.localization_base\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {Rₘ : Type u_6} {Sₘ : Type u_7} [inst : CommRing R] [inst_1 : CommRing Rₘ] [inst_2 : CommRing Sₘ]\\n  (M : Submonoid R) [inst_3 : Algebra R Sₘ] [inst_4 : Algebra R Rₘ] [inst_5 : Algebra Rₘ Sₘ] [IsScalarTower R Rₘ Sₘ]\\n  [IsLocalization M Rₘ] [Algebra.FormallySmooth R Sₘ], Algebra.Forma\", \"doc\": \"If $ S $ is a formally smooth $ R $-algebra, then the localization $ S_m $ is a formally smooth $ R_m $-algebra, where $ R_m $ and $ S_m $ denote the localizations of $ R $ and $ S $ at a multiplicati\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"Algebra.FormallySmooth.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u_5) [inst_1 : CommRing A] [inst_2 : Algebra R A] (B : Type u_6)\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R B], Algebra.FormallySmooth A B\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ B $ is a formally smooth $ R $-algebra, then $ B $ is a formally smooth $ A $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary formal smoothness, residue-field maps, generic universal properties, or Weierstrass uniqueness; none concerns versal deformation rings"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bversal\\b|\\bVersalRing\\b|changeOfField",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"top\": [\"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary ring smoothness, residue fields, or weak limits; none states extension of a marked versal deformation ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of residue field of a versal formal deformation ring for an algebraic stack",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"IsLocalRing.ResidueField\", \"AlgebraicGeometry.LocallyRingedSpace.residueField\", \"IsLocalRing.instCommRingResidueField\", \"IsLocalRing.ResidueField.map\", \"AlgebraicGeometry.Scheme.residueField\", \"IsLocalRing.residue\", \"IsLocalRing.ResidueField.mapEquiv\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary ring smoothness, residue fields, or weak limits; none states extension of a marked versal deformation ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, IsLocalRing",
+   "results": "{\"ok\": true, \"n_hits\": 4, \"top\": [\"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.FormallySmooth.of_formallySmooth_residueField_tensor\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary ring smoothness, residue fields, or weak limits; none states extension of a marked versal deformation ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A versal formal deformation ring of an algebraic stack extends along a finite residue field extension by a formally smooth local map",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"Algebra.Extension.homInfinitesimal\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.FormallySmooth.of_restrictScalars\", \"RingHom.smooth_def\", \"Algebra.Smooth.formallySmooth\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary ring smoothness, residue fields, or weak limits; none states extension of a marked versal deformation ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base extension of hulls in formal deformation theory for algebraic stacks",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.Extension.homInfinitesimal\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.localization_base\", \"AlgebraicGeometry.isSmooth_iff\", \"Algebra.FormallySmooth.of_restrictScalars\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary ring smoothness, residue fields, or weak limits; none states extension of a marked versal deformation ring"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-versal-ring-smooth-span",
+  "date": "2026-10-23",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Common formally smooth extension of two stack versal rings. Supporting input: Versal rings after a finite residue-field extension.",
+   "via": [
+    "lem-sfb-stack-versal-ring-smooth-span",
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-versal-finite-residue-extension",
+  "worker": "stage1",
+  "summary": "Expanded the polynomial-completion proof of Stacks 0DQF and the marked-groupoid comparison of 07WX. Reused eight existing DAG inputs, proved the marked comparison directly from the existing pinching and RS statements, and checked the prescribed-isomorphism clause of versality. No new nodes, no statement change, no Lean attachment.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), open-direct-image preservation, through the inherited alteration/deformation prerequisite chain. The ancestor command returns None for this live created-node chain; the inherited exact supporting-place and via list are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N7-e4fd9516a",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-e4fd9516a (reviewer sub-agent of L); spot-checked: PASS. The statement, stmt_deps and blueprint are unchanged against clones/live. The delivery has no new nodes, no SGA citation and no re-split note, and no parallel group has superseded it (still unsplit live). Sources read: Stacks 0DQY (stacks-geometry), 0DQF (formal-defos 7476-7537) and 07WX (artin 686ff). The 8 steps follow 0DQF and 07WX faithfully. Step 1: test-ring with base C and residue l; l is finite type over C. Step 2: adic-smooth-fixed-residue-lifting with (R,k,C):=(C,l,D) gives m_D-adic formal smoothness; continuity comes from the test-ring clause. Step 3: A_B=B×_l k restriction, finite-type criterion and nilpotence, with R-structures compatible through l. Step 4: pinching pushout plus the stack RS lemma; the four Artinian finite-type spectra and the nilpotent closed immersion are checked, and the Sch pushout is an S-pushout by a one-line uniqueness argument. Step 5: the marked equivalence E_B is checked by hand and is elementary. Steps 6-8: the formal object θ via the factorisation u_n; the versality chase keeps the prescribed isomorphism; b and p are C-maps under the u'/u_b structures, so the test-ring lift applies and the restriction is γ. Edge cases: l=k, inseparable l/k, empty stack. Candidate duplicates (artin-versal-field-lifting, pointwise-versal-field-extension, versal-base-change pair, marked-deformation-tangent-field-extension) concern objects over lft schemes or tangent spaces only, so none duplicates the item. No cycle; all deps are in-unit or Mathlib, so no tool_uses. Batch-5: the RS node's closure reaches def-trf-algebraic-space (a general definition the item already cites) and only generic algebraic-space/fppf, finite-étale-trace and pod foundations, never a step of the trace formula or Poincaré duality, so the citation is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackVersalFiniteResidueExtension",
+  "declaration": "CategoryTheory.StackVersal.exists_versal_finite_residue_extension",
+  "declarations": [
+   "CategoryTheory.StackVersal.exists_versal_finite_residue_extension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackVersalFiniteResidueExtension.lean",
+  "statement": "theorem exists_versal_finite_residue_extension [IsLocalRing R] [IsNoetherianRing R] [Algebra (IsLocalRing.ResidueField R) k] [IsScalarTower R (IsLocalRing.ResidueField R) k] [Module.Finite (IsLocalRing.ResidueField R) k] (F : BasedCategory.{v, w} (Over (Spec (.of R)))) (hF : IsAlgebraicModuliStack F) (hft : ∃ (U : Over (Spec (.of R))) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F), IsSmoothModuliAtlas F U a ∧ LocallyOfFiniteType U.hom) (x : Object F k) (C : CompleteLocalAlgebra R k) (eta : FormalObject F x C) (heta : eta.IsVersal) (l : Type u) [Field l] [Algebra k l] [Algebra R l] [IsScalarTower R k l] [Module.Finite k l] (xl : Object F l) (xlToX : Arrow (IsScalarTower.toAlgHom R k l) xl x) : ∃ (D : CompleteLocalAlgebra R l) (theta : FormalObject F xl D), theta.IsVersal ∧ ∃ j : C.ring →ₐ[R] D.ring, IsLocalHom j ∧ (∀ c : C.ring, D.residueEquiv (IsLocalRing.residue D.ring (j c)) = algebraMap k l (C.residueEquiv (IsLocalRing.residue C.ring c))) ∧ (letI : Algebra C.ring D.ring := j.toRingHom.toAlgebra Algebra.FormallySmoothAdic C.ring D.ring (IsLocalRing.maximalIdeal D.ring))",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Lean-only ownership repair explicitly required by L on return of Q126 item lem-sfb-stack-versal-ring-existence at 46e940302212 (§1(B)). The old module owned the generic versal-ring definitions inside a theorem node; consumers could not cite a definition node. Those definitions now belong to def-sfb-stack-versal-ring in Sheaf.AlgebraicGeometry.StackVersalRing and are publicly imported here, retaining all names and types. This module now declares only the unchanged finite-residue-extension theorem; its natural-language statement, dependencies and theorem signature are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94fb83b63",
+  "group": "NA",
+  "result": "pass",
+  "note": "Read Tag 0DQY (situation-versal, definition-versal-ring-at-x, lemma-versal-ring-field-extension), the item node, all stmt_dep records and the module in full. Every hypothesis and conclusion clause matches the node with no extra assumptions: local Noetherian R; k finite over the residue field of R; the existing IsAlgebraicModuliStack predicate; lft via an existential smooth atlas with LocallyOfFiniteType; CompleteLocalAlgebra with IsAdicComplete and an R-algebra residue iso; FormalObject with transitions and markings whose directions were checked; the conclusion gives theta.IsVersal, a local j, the residue equation for algebraMap k l, and FormallySmoothAdic C D m_D, which matches the recorded upstream def. IsVersal keeps the prescribed isomorphism (b ≫ a' = a ≫ transition) and is equivalent to the node's versality in both directions; the q = id case is consistent. Edge cases l=k, inseparable extensions, any characteristic, n=0, the empty stack and the universes are all covered. stmt_deps gains the landed def-sfb-algebraic-moduli-stack, which the landed-node rule permits. lean.statement is verbatim and lean.declarations equals the 14 declarations of the file. No duplicate notion in Mathlib or the project. Definitions are real, sorry appears only in the theorem, docstrings and imports are fine, no pro-etale substitute. Not recompiled because no file changed. Advisory: two node ids are wrapped across lines in the proof docstring."
+ }
+}

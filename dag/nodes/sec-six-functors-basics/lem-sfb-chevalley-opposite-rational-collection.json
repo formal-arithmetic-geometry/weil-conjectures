@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-chevalley-opposite-rational-collection",
+ "kind": "statement",
+ "title": "Local rational collection of opposite root products",
+ "statement": "Let $V$ be a finite-dimensional rational vector space and $R\\subset V\\setminus\\{0\\}$ a reduced crystallographic root system spanning $V$, with coroot functionals $\\bar c_\\alpha$ and weight lattice $P=\\{v\\in V:\\bar c_\\alpha(v)\\in\\mathbf Z\\text{ for every }\\alpha\\in R\\}$ in the conventions of [lem-sfb-root-datum-lattice-embedding]. Let $\\mathfrak g,\\mathfrak h,h_\\delta,e_\\alpha,\\rho,W,\\Omega,\\Lambda$ satisfy the Chevalley-basis and faithful-representation conditions of [lem-sfb-chevalley-admissible-representation]: $\\mathfrak g$ is split semisimple over $\\mathbf Q$, $\\rho$ is faithful on finite-dimensional $W$, the nonzero weight spaces $W_\\lambda$ have weights $\\Omega\\subset P$ with $\\mathbf Z\\Omega=P$, and the full lattice $\\Lambda=\\bigoplus_{\\lambda\\in\\Omega}(\\Lambda\\cap W_\\lambda)$ is stable under every $D_{\\alpha,m}=\\rho(e_\\alpha)^m/m!$, with $\\rho(e_\\alpha)$ nilpotent. Fix a simple-root base $\\Delta$, meaning a subset $\\Delta\\subseteq R$ which is a basis of $V$ such that every root has integral coordinates in $\\Delta$ all nonnegative or all nonpositive. Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], $W_F=\\Lambda\\otimes_{\\mathbf Z}F$, and $T=D_F(P)=\\operatorname{Spec}F[P]$, where $F[P]$ has basis $e^\\lambda$, multiplication $e^\\lambda e^\\mu=e^{\\lambda+\\mu}$, comultiplication $e^\\lambda\\mapsto e^\\lambda\\otimes e^\\lambda$, counit $e^\\lambda\\mapsto1$, and antipode $e^\\lambda\\mapsto e^{-\\lambda}$. Embed $T$ in $\\operatorname{GL}(W_F)$ by its weight characters on the summands $(\\Lambda\\cap W_\\lambda)\\otimes F$. Define the finite polynomial matrices $x_\\alpha(a)=\\sum_{m\\geq0}(D_{\\alpha,m}\\otimes1)a^m$ for every commutative $F$-algebra. Group schemes and closed subgroups have the meanings of [def-sc-group-scheme, def-sc-group-scheme-subgroup], and $\\mathbf G_a,\\mathbf G_m$ those of [def-sc-gm-ga].  Put $R^+=R\\cap\\sum_{\\delta\\in\\Delta}\\mathbf Z_{\\geq0}\\delta$, $N=|R^+|$, and fix any order on $R^+$ refining nondecreasing height (the sum of the simple-root coefficients). Write $p_+(b)=\\prod_{\\beta\\in R^+}x_\\beta(b_\\beta)$ and $p_-(a)=\\prod_{\\beta\\in R^+}x_{-\\beta}(a_\\beta)$, using this order. There exist a polynomial $d\\in F[a_\\beta,b_\\beta:\\beta\\in R^+]$ with $d(0,0)=1$, morphisms $A,B:D(d)\\to\\mathbf A_F^N$, and a morphism $h:D(d)\\to T$, such that the identity of matrix-valued morphisms\n$$p_+(b)p_-(a)=p_-(A(a,b))\\,h(a,b)\\,p_+(B(a,b))$$\nholds on the principal open $D(d)=\\operatorname{Spec}F[a,b,1/d]$ [def-weil-ring-localization-away, def-weil-affine-spectrum]. At $(a,b)=(0,0)$ one has $A=B=0$ and $h=1$. In particular this is an identity after evaluation in any commutative $F$-algebra in which $d(a,b)$ is a unit, including nonreduced algebras and characteristics two and three. No generated group, its reductivity, or an open-immersion property is assumed or asserted. For $R=\\varnothing$ one may take $d=1$, the unique maps $A,B$, and $h=1$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, equation (153), Theorem 23.72 and Notes, printed pp.510-511. Agent-stated supporting lemma: Opposite-sign root-string collection localized at denominators equal to 1 at the zero parameters; the SL2 identity uses 1+ab. This is a local matrix identity, not the global open-cell theorem."
+ },
+ "stmt_deps": [
+  "lem-sfb-root-datum-lattice-embedding",
+  "lem-sfb-chevalley-admissible-representation",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga",
+  "def-weil-ring-localization-away",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\Delta=\\{\\delta_1,\\ldots,\\delta_r\\}$ and $H_i=h_{\\delta_i}$. The simple coroots are a rational basis and generate the coroot lattice by [lem-sfb-root-base-rational-integral-spans], applied to the root-coroot pairing; hence the hypotheses for [lem-sfb-kostant-integral-pbw] hold for the given Chevalley basis. In its integral enveloping algebra $U_{\\mathbf Z}$ denote the ordered PBW basis by $Q_{u,v,w}=\\prod_\\beta e_{-\\beta}^{(u_\\beta)}\\prod_i\\binom{H_i}{v_i}\\prod_\\beta e_\\beta^{(w_\\beta)}$. Use exactly the two orders in the item. Give the rational enveloping algebra the coproduct $\\mathcal D(e_\\gamma)=e_\\gamma\\otimes1+1\\otimes e_\\gamma$. This respects $xy-yx=[x,y]$, since the two tensor factors commute. The binomial identities give $\\mathcal D(e_\\gamma^{(m)})=\\sum_{j+k=m}e_\\gamma^{(j)}\\otimes e_\\gamma^{(k)}$ and $\\mathcal D\\binom{H_i}{m}=\\sum_{j+k=m}\\binom{H_i}{j}\\otimes\\binom{H_i}{k}$. Thus it preserves $U_{\\mathbf Z}$ and $\\mathcal D(Q_I)=\\sum_{J+K=I}Q_J\\otimes Q_K$, where $I=(u,v,w)$. These are finite equalities in the free integral PBW bases; no reduction of factorial denominators in $F$ has occurred.",
+   "uses": [
+    "lem-sfb-root-base-rational-integral-spans",
+    "lem-sfb-kostant-integral-pbw"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153), Theorem 23.72 and Notes, printed pp.510--511; agent expansion of the omitted local collection argument using integral PBW and block Gauss uniqueness."
+   }
+  },
+  {
+   "text": "For this coefficient calculation only, write $\\mathbf Z[[a,b]]$ for the ring of all formal series in the $2N$ parameters, with multiplication by the finite coefficient-convolution sums. In $U_{\\mathbf Z}[[a,b]]$ put $G=\\prod_\\beta(\\sum_{m\\ge0}e_\\beta^{(m)}b_\\beta^m)\\prod_\\beta(\\sum_{m\\ge0}e_{-\\beta}^{(m)}a_\\beta^m)$. Every parameter coefficient is an element of $U_{\\mathbf Z}$, so it has a finite PBW expansion. Write $G=\\sum_I c_IQ_I$ coefficientwise. Each root exponential is group-like by the divided-power coproduct from step 1; therefore $\\mathcal D(G)=G\\otimes G$, where the right side multiplies series with the same parameters. Comparing the coefficient of $Q_J\\otimes Q_K$ yields $c_{J+K}=c_Jc_K$. The augmentation taking each Lie generator to zero gives $c_0=1$. Set $A^\\wedge_\\beta=c_{(1_\\beta,0,0)}$, $z_i=c_{(0,1_i,0)}$, and $B^\\wedge_\\beta=c_{(0,0,1_\\beta)}$. They have zero constant term because $G(0)=1$. Repeatedly using the displayed recurrence gives $c_{u,v,w}=\\prod_\\beta(A^\\wedge_\\beta)^{u_\\beta}\\prod_i z_i^{v_i}\\prod_\\beta(B^\\wedge_\\beta)^{w_\\beta}$. This is a coefficient comparison, rather than a smoothness or group-generation argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153), Theorem 23.72 and Notes, printed pp.510--511; agent expansion of the omitted local collection argument using integral PBW and block Gauss uniqueness."
+   }
+  },
+  {
+   "text": "Reinsert the coefficients from step 2 into the ordered PBW expansion. It gives the formal identity $G=(\\prod_\\beta\\sum_m e_{-\\beta}^{(m)}(A^\\wedge_\\beta)^m)(\\prod_i\\sum_m\\binom{H_i}{m}z_i^m)(\\prod_\\beta\\sum_m e_\\beta^{(m)}(B^\\wedge_\\beta)^m)$. All products and substitutions are legitimate coefficientwise: each substituted parameter has zero constant term, so any fixed parameter degree involves only finitely many indices. The representation extends to $U_{\\mathbf Q}$ by [lem-sfb-kostant-integral-pbw]. Its $U_{\\mathbf Z}$ action preserves $\\Lambda$: the generators are precisely the divided powers assumed integral in the item, as recorded in [lem-sfb-chevalley-admissible-representation]. On a weight summand $\\Lambda\\cap W_\\lambda$, $\\binom{H_i}{m}$ acts by the integer $\\binom{\\bar c_{\\delta_i}(\\lambda)}{m}$. For negative integers $-k$, integrality follows from $\\binom{-k}{m}=(-1)^m\\binom{k+m-1}{m}$. Consequently the middle factor acts by $\\prod_i(1+z_i)^{\\bar c_{\\delta_i}(\\lambda)}$. The map $\\lambda\\mapsto\\prod_i(1+z_i)^{\\bar c_{\\delta_i}(\\lambda)}$ is a homomorphism $P\\to\\mathbf Z[[a,b]]^\\times$; it defines a point $h^\\wedge$ of the weight-character torus. Applying the integral matrices and then the coefficient map $\\mathbf Z\\to F$ gives $p_+(b)p_-(a)=p_-(A^\\wedge)h^\\wedge p_+(B^\\wedge)$ over $F[[a,b]]$. Nilpotence makes each represented root exponential finite. This construction works without inverting any integer in $F$.",
+   "uses": [
+    "lem-sfb-kostant-integral-pbw",
+    "lem-sfb-chevalley-admissible-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153), Theorem 23.72 and Notes, printed pp.510--511; agent expansion of the omitted local collection argument using integral PBW and block Gauss uniqueness."
+   }
+  },
+  {
+   "text": "Choose a rational functional $q$ positive on the simple roots and separating the finitely many distinct weights. Such a choice exists: in the dual coordinates of the simple-root basis, the positive rational orthant is not contained in any of the finitely many hyperplanes $q(\\lambda-\\mu)=0$; equivalently evaluate these finitely many nonzero rational polynomials at a sufficiently large positive integer using coordinates $(1,M,\\ldots,M^{r-1})$. Order the weight blocks by decreasing $q$. By [lem-sfb-chevalley-unipotent-polynomial-coordinates], $p_-$ and $p_+$ identify their affine coordinate spaces with closed subgroup schemes $U_-\\subset L$ and $U_+\\subset U$ of the corresponding block lower and upper unitriangular groups. The torus $T$ lies in the block diagonal group $D$. Its inclusion there is closed: in a weight basis, the coordinate functions given by a diagonal entry and the corresponding inverse-matrix entry restrict to $e^\\lambda,e^{-\\lambda}$. Since $\\mathbf Z\\Omega=P$, these functions generate $F[P]$ as an $F$-algebra. Hence the coordinate map $F[D]\\to F[P]$ is surjective, which explicitly gives a closed immersion. In particular $U_-\\times T\\times U_+$ is closed inside $L\\times D\\times U$.",
+   "uses": [
+    "lem-sfb-chevalley-unipotent-polynomial-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153), Theorem 23.72 and Notes, printed pp.510--511; agent expansion of the omitted local collection argument using integral PBW and block Gauss uniqueness."
+   }
+  },
+  {
+   "text": "Set $g(a,b)=p_+(b)p_-(a)$. Apply [lem-sfb-block-gauss-scheme-chart] with $E=W_F$ and the nonzero blocks $E_i=(\\Lambda\\cap W_{\\lambda_i})\\otimes F$ in the weight order of step 4, choosing a basis in each block. Each block is nonzero because its lattice has rank $\\dim_{\\mathbf Q}W_{\\lambda_i}>0$. Let $\\Delta_j(g)$ be the determinant of the leading block on $\\bigoplus_{i\\leq j}E_i$ and set $d=\\prod_j\\Delta_j(g)$. The matrices $x_\\alpha$ have polynomial entries and inverse $x_\\alpha(-a)$: the finite exponential identity over $\\mathbf Q$ is an equality of integral polynomial matrices on $\\Lambda$, hence remains valid after base change. Thus $g$ maps to $\\operatorname{GL}(E)$ and $g(0)=1$, so $d(0)=1$. In $S=F[a,b,1/d]$, every $\\Delta_j(g)$ is a unit: its inverse is $d^{-1}\\prod_{k\\ne j}\\Delta_k(g)$. The cited chart's inverse therefore gives morphisms $l:D(d)\\to L$, $t:D(d)\\to D$, $u:D(d)\\to U$ with $g=ltu$, unique functorially over every commutative $F$-algebra. The map $S\\to\\widehat S=F[[a,b]]$ is injective: $d$ has constant term one and is a formal unit, and a fraction $f/d^n$ mapping to zero has zero polynomial numerator after multiplication by $d^n$.",
+   "uses": [
+    "lem-sfb-block-gauss-scheme-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153), Theorem 23.72 and Notes, printed pp.510--511; agent expansion of the omitted local collection argument using integral PBW and block Gauss uniqueness."
+   }
+  },
+  {
+   "text": "Over the commutative $F$-algebra $\\widehat S=F[[a,b]]$, the formal factors of step 3 belong to $L(\\widehat S),D(\\widehat S),U(\\widehat S)$ by step 4. Uniqueness in [lem-sfb-block-gauss-scheme-chart] therefore identifies $(l,t,u)$ over $\\widehat S$ with $(p_-(A^\\wedge),h^\\wedge,p_+(B^\\wedge))$. Each equation defining the closed subschemes $U_-\\subset L$, $T\\subset D$, $U_+\\subset U$ consequently has zero image in $\\widehat S$ under the respective coordinate maps. Injectivity of $S\\to\\widehat S$ makes its image zero already in $S$. Those coordinate maps therefore factor through the defining quotient rings, giving $l\\in U_-(S)$, $t\\in T(S)$, $u\\in U_+(S)$ as scheme-theoretic assertions. Compose $l,u$ with the inverses of the closed-immersion coordinate identifications $p_\\pm:\\mathbf A^N\\simeq U_\\pm$ from [lem-sfb-chevalley-unipotent-polynomial-coordinates]. These are the required morphisms $A,B:D(d)\\to\\mathbf A^N$; put $h=t$. The identity $g=ltu$ becomes precisely the displayed identity $p_+(b)p_-(a)=p_-(A(a,b))h(a,b)p_+(B(a,b))$ over $S$.",
+   "uses": [
+    "lem-sfb-block-gauss-scheme-chart",
+    "lem-sfb-chevalley-unipotent-polynomial-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153), Theorem 23.72 and Notes, printed pp.510--511; agent expansion of the omitted local collection argument using integral PBW and block Gauss uniqueness."
+   }
+  },
+  {
+   "text": "The injection into formal series shows that the constant terms of $A,B,h$ are those of $A^\\wedge,B^\\wedge,h^\\wedge$, namely $0,0,1$ by steps 2--3. Alternatively Gauss uniqueness at $g(0)=1$ gives identity factors, whose $p_\\pm$ coordinates are zero. For any commutative $F$-algebra $C$ and parameters with $d(a,b)\\in C^\\times$, polynomial evaluation extends uniquely to $S\\to C$ by $f/d^n\\mapsto f(a,b)d(a,b)^{-n}$. Applying this ring map to the matrix identity proves it over $C$, including nilpotent elements and characteristics two and three. If $R$ is empty, then $V=0$, $P=0$, $N=0$, $T=1$, and all root products are $1$; take $d=1$ and the unique affine coordinate maps. No ambient generated group or reductivity assertion was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, equation (153), Theorem 23.72 and Notes, printed pp.510--511; agent expansion of the omitted local collection argument using integral PBW and block Gauss uniqueness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-root-base-rational-integral-spans",
+  "lem-sfb-kostant-integral-pbw",
+  "lem-sfb-chevalley-admissible-representation",
+  "lem-sfb-chevalley-unipotent-polynomial-coordinates",
+  "lem-sfb-block-gauss-scheme-chart"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, printed pp.510--511, omitted details after Theorem 23.72; integral PBW formal coefficient calculation followed by block Gauss descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Opposite Chevalley unipotent products admit rational Gauss refactorization near the identity over an arbitrary field",
+   "results": "{\"t\": \"2026-10-23T22:14:58Z\", \"tool\": \"leanfinder\", \"query\": \"Opposite Chevalley unipotent products admit rational Gauss refactorization near the identity over an arbitrary field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_induction\", \"Matrix.Pivot.exists_list_transvec_mul_diagonal_mul_list_transvec\", \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_aux\", \"Matrix.TransvectionStruct.reverse_inv_prod_mul_prod\", \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal\", \"Matrix.TransvectionStruct.prod_mul_reverse_inv_prod\", \"Matrix.Pivot.listTransvecCol\", \"Matrix.Pivot.listTransvecRow\"], \"digest\": \"2a895371a0b7a74b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general matrix transvection factorizations do not preserve the prescribed root subgroups or weight torus; GeckConstruction gives Lie-bracket identities; analytic exponentials require normed characteristic-zero settings. No hit gives this localized polynomial matrix identity in arbitrary characteristic."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational commutation of positive and negative root exponentials with denominators nonzero at zero in Chevalley matrix representations",
+   "results": "{\"t\": \"2026-10-23T22:15:31Z\", \"tool\": \"leanfinder\", \"query\": \"Rational commutation of positive and negative root exponentials with denominators nonzero at zero in Chevalley matrix representations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ω_mul_e\", \"RootPairing.GeckConstruction.ω_mul_h\", \"RootPairing.GeckConstruction.ω_mul_f\", \"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.lie_e_f_mul_ω\", \"RootPairing.GeckConstruction.isSl2Triple\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"RootPairing.GeckConstruction.e\"], \"digest\": \"da94d17cadb1dfda\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general matrix transvection factorizations do not preserve the prescribed root subgroups or weight torus; GeckConstruction gives Lie-bracket identities; analytic exponentials require normed characteristic-zero settings. No hit gives this localized polynomial matrix identity in arbitrary characteristic."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Opposite unipotent Chevalley exponential products can be reordered by rational functions regular at the identity",
+   "results": "{\"t\": \"2026-10-23T22:16:52Z\", \"tool\": \"leansearch\", \"query\": \"Opposite unipotent Chevalley exponential products can be reordered by rational functions regular at the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NormedSpace.exp_unop\", \"AddOpposite.unop_finsuppProd\", \"NormedSpace.exp_op\", \"NormedSpace.exp_units_conj\", \"MulOpposite.exponent\", \"MulOpposite.unop_mul\", \"MulOpposite.unop_list_prod\", \"IsNilpotent.exp_neg_mul_exp_self\"], \"digest\": \"925595a803c3c11d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general matrix transvection factorizations do not preserve the prescribed root subgroups or weight torus; GeckConstruction gives Lie-bracket identities; analytic exponentials require normed characteristic-zero settings. No hit gives this localized polynomial matrix identity in arbitrary characteristic."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"root\", \"exp\"",
+   "results": "{\"t\": \"2026-10-23T22:18:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"root\\\", \\\"exp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.SubExpr.Pos.root\", \"Lean.SubExpr.isRoot\", \"Lean.SubExpr.mkRoot\", \"Lean.SubExpr.Pos.isRoot\", \"Lean.SubExpr.GoalsLocation.rootExpr\", \"Mathlib.Tactic.ClickSuggestions.GrwInfo.rootExpr\", \"Mathlib.Tactic.ClickSuggestions.RwInfo.rootExpr\", \"Polynomial.rootMultiplicity_expand\"], \"digest\": \"54f966ea9816bacf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general matrix transvection factorizations do not preserve the prescribed root subgroups or weight torus; GeckConstruction gives Lie-bracket identities; analytic exponentials require normed characteristic-zero settings. No hit gives this localized polynomial matrix identity in arbitrary characteristic."
+  },
+  {
+   "tool": "grep",
+   "query": "Gauss.decomp|LDU|root.*commutator|Chevalley.group|unipotent.*root",
+   "results": "{\"t\": \"2026-10-23T22:15:29Z\", \"tool\": \"grep\", \"query\": \"Gauss.decomp|LDU|root.*commutator|Chevalley.group|unipotent.*root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Solvable.lean\", \"Mathlib/GroupTheory/Solvable.lean\", \"Mathlib/GroupTheory/Solvable.lean\", \"Mathlib/GroupTheory/Solvable.lean\", \"Mathlib/GroupTheory/Nilpotent.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean\", \"Mathlib/GroupTheory/IsPerfect.lean\"], \"digest\": \"ba87e33d501f003a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general matrix transvection factorizations do not preserve the prescribed root subgroups or weight torus; GeckConstruction gives Lie-bracket identities; analytic exponentials require normed characteristic-zero settings. No hit gives this localized polynomial matrix identity in arbitrary characteristic."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Opposite positive and negative Chevalley root exponential products admit rational Gauss factorization near the identity in every characteristic",
+   "results": "{\"t\": \"2026-10-23T22:59:20Z\", \"tool\": \"leanfinder\", \"query\": \"Opposite positive and negative Chevalley root exponential products admit rational Gauss factorization near the identity in every characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ω_mul_e\", \"RootPairing.chainBotCoeff_mul_chainTopCoeff\", \"RootPairing.GeckConstruction.ω_mul_f\", \"RootPairing.chainBotCoeff_mul_chainTopCoeff.isNotG2\", \"RootPairing.Base.exists_eq_sum_and_forall_sum_mem_of_isPos\", \"RootPairing.one_le_chainBotCoeff_of_root_add_mem\", \"RootPairing.one_le_chainTopCoeff_of_root_add_mem\", \"RootPairing.chainTopCoeff_if_one_zero\"], \"digest\": \"dfb8da467bed679b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction gives individual root matrices and bracket identities; Transvection decomposes unrestricted matrices. SchurComplement.lean:48--68 gives general two-block identities, not membership in the prescribed Chevalley root products or weight-character torus. No result states this local identity in arbitrary characteristic."
+  },
+  {
+   "tool": "grep",
+   "query": "Gauss.decomp|LDU|root.*commutator|Chevalley.group|unipotent.*root",
+   "results": "{\"t\": \"2026-10-23T22:59:51Z\", \"tool\": \"grep\", \"query\": \"Gauss.decomp|LDU|root.*commutator|Chevalley.group|unipotent.*root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\"], \"digest\": \"0ffee23ac30cb828\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction gives individual root matrices and bracket identities; Transvection decomposes unrestricted matrices. SchurComplement.lean:48--68 gives general two-block identities, not membership in the prescribed Chevalley root products or weight-character torus. No result states this local identity in arbitrary characteristic."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational Gauss factorization for products of opposite root subgroup exponentials in a Chevalley representation",
+   "results": "{\"t\": \"2026-10-23T22:59:51Z\", \"tool\": \"leansearch\", \"query\": \"Rational Gauss factorization for products of opposite root subgroup exponentials in a Chevalley representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"gaussSum_mul_gaussSum_pow_orderOf_sub_one\", \"gaussSum_pow_eq_prod_jacobiSum_aux\", \"gaussSum\", \"gaussSum_mulShift\", \"mul_gaussSum_inv_eq_gaussSum\", \"MulChar.IsQuadratic.gaussSum_frob_iter\", \"gaussSum_pow_eq_prod_jacobiSum\", \"Subgroup.periods\"], \"digest\": \"dc52bc0def19fb64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction gives individual root matrices and bracket identities; Transvection decomposes unrestricted matrices. SchurComplement.lean:48--68 gives general two-block identities, not membership in the prescribed Chevalley root products or weight-character torus. No result states this local identity in arbitrary characteristic."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Chevalley\", \"exp\"",
+   "results": "{\"t\": \"2026-10-23T22:59:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Chevalley\\\", \\\"exp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction gives individual root matrices and bracket identities; Transvection decomposes unrestricted matrices. SchurComplement.lean:48--68 gives general two-block identities, not membership in the prescribed Chevalley root products or weight-character torus. No result states this local identity in arbitrary characteristic."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral divided power Chevalley matrices positive negative unipotents have local rational triangular decomposition",
+   "results": "{\"t\": \"2026-10-23T23:01:49Z\", \"tool\": \"leanfinder\", \"query\": \"Integral divided power Chevalley matrices positive negative unipotents have local rational triangular decomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.e\", \"RootPairing.GeckConstruction.h\", \"RootPairing.GeckConstruction.f\", \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_induction\", \"RootPairing.GeckConstruction.h_def\", \"Matrix.Pivot.exists_list_transvec_mul_diagonal_mul_list_transvec\", \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_aux\", \"RootPairing.GeckConstruction.h_eq_diagonal\"], \"digest\": \"1d4e33d4898bc49d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction gives individual root matrices and bracket identities; Transvection decomposes unrestricted matrices. SchurComplement.lean:48--68 gives general two-block identities, not membership in the prescribed Chevalley root products or weight-character torus. No result states this local identity in arbitrary characteristic."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-exponential-big-cell",
+  "date": "2026-10-24",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Section 23h, Theorem 23.72 proof, pp.510-511: omitted details needed to use the weight-character torus rather than the full diagonal torus. The open-cell strengthening is an agent-stated construction lemma. Supporting calculation: Opposite-sign root-string collection localized at denominators equal to 1 at the zero parameters; the SL2 identity uses 1+ab. This is a local matrix identity, not the global open-cell theorem.",
+   "via": [
+    "lem-sfb-chevalley-exponential-big-cell",
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-chevalley-opposite-rational-collection",
+  "worker": "stage1",
+  "summary": "Kept the exact statement and its statement dependencies. Expanded the omitted local collection by integral PBW group-like coefficient comparison, formal weight-torus factorization, unique block Gauss factors and descent through closed coordinate embeddings. Reused existing DAG statements throughout; no new nodes, no reductivity/open-cell assumption, and no characteristic-zero reduction of matrix identities. Checked all cited statements and excluded dependency cycles. Repair after the return of head 27d8d256d12: reread every current proof dependency, revalidated the changed block-Gauss statement, and made its nonzero-block and unit-minor hypotheses explicit in step 5; step 6 applies its uniqueness to the formal-series F-algebra. Refreshed verbatim citations against the current DAG.",
+  "blueprint": "No blueprint node states this supporting matrix lemma (ancestor search returns null). The existing from.place/via chain leads to det-thm-sf-ctf-stability-direct-images proof (3); current latest blueprint direct-images.proof.md paragraph (3) supplies the enclosing direct-image route, not the local Lie-theoretic argument. Steps 1--3 realize the parent exponential-big-cell proof step 4 local collection input by integral PBW; steps 4--7 make its rational and all-algebra clauses precise."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-d0f318f3d",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-d0f318f3d (reviewer sub-agent of L); spot-checked: This re-delivers 27d8d256d122, which was PASSed and then refused at landing because the statement of lem-sfb-block-gauss-scheme-chart changed. The only change to that statement is the added [def-pc-fibre-product] reference. In the item only steps 5-6 and split_report changed. The statement, stmt_deps, source and blueprint are identical to the live item, which is still unsplit. There are no new nodes and no repair note. I read all 7 steps against the current statements of the 5 proof_deps. Step 1: the root-base node gives simple coroots forming a basis, as Kostant requires, and D(Q_I)=Σ_{J+K=I}Q_J⊗Q_K holds via Vandermonde. Step 2: group-likeness and the free basis give c_{J+K}=c_J c_K, and the counit gives c_0=1; this is genuinely elementary. Step 3: binomials act by integers on W_λ (including negative weights), h^ is a point of D(P), and nothing is inverted in F. Step 4: the orientation is right (p_+ upper, p_- lower under decreasing q, matching g=l·t·u), and T→D is closed since ZΩ=P. Steps 5-6: the Gauss hypotheses hold (field F, blocks nonzero because the lattice is full, Δ_j units in S). Uniqueness over the F-algebra F[[a,b]] plus injectivity of S→F[[a,b]] gives scheme-theoretic membership. Step 7 is elementary. Tested on SL2 (d=1+ab), R=∅, a single block, weight multiplicities, nonreduced algebras and characteristics 2 and 3. There is no cycle and no duplicate (rg -L), proof_deps equal the union of the uses, and there is no SGA. The source is Milne iAG pp.510-511, where Theorem 23.72 says 'We omit the details', so the agent-written proof is right under D5. Batch 5: lem-trf-fg-torsionfree-group-free, reached via root-datum-lattice-embedding, is a generic Mathlib leaf (f.g. torsion-free abelian groups are free) outside the trace-formula and Poincaré assumptions, so it is not a RETURN. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.ChevalleyOppositeRationalCollection",
+  "declaration": "LieAlgebra.ChevalleyCollection.exists_opposite_rational_collection",
+  "declarations": [
+   "LieAlgebra.ChevalleyCollection.latticeDividedPower",
+   "LieAlgebra.ChevalleyCollection.rootExponential",
+   "LieAlgebra.ChevalleyCollection.latticeWeightSpace",
+   "LieAlgebra.ChevalleyCollection.weightProjection",
+   "LieAlgebra.ChevalleyCollection.torusAction",
+   "LieAlgebra.ChevalleyCollection.origin",
+   "LieAlgebra.ChevalleyCollection.exists_opposite_rational_collection"
+  ],
+  "file": "lean/Sheaf/Algebra/Lie/ChevalleyOppositeRationalCollection.lean",
+  "statement": "theorem exists_opposite_rational_collection (V : Type u) [AddCommGroup V] [Module ℚ V] [FiniteDimensional ℚ V] (R : Set V) (c : R → Module.Dual ℚ V) (hfinite : R.Finite) (hne : ∀ a : R, (a : V) ≠ 0) (hspan : Submodule.span ℚ R = ⊤) (htwo : ∀ a : R, c a a = 2) (hint : ∀ a b : R, ∃ n : ℤ, c a b = (n : ℚ)) (hreflect : ∀ a : R, Set.BijOn (fun v : V ↦ v - c a v • (a : V)) R R) (hreduced : ∀ a : R, R ∩ (Submodule.span ℚ ({(a : V)} : Set V) : Set V) = {(a : V), -(a : V)}) (P : Submodule ℤ V) (hP : ∀ v : V, v ∈ P ↔ ∀ a : R, ∃ n : ℤ, c a v = (n : ℚ)) (g : Type v) [LieRing g] [LieAlgebra ℚ g] [FiniteDimensional ℚ g] [HasTrivialRadical ℚ g] (H : LieSubalgebra ℚ g) [IsLieAbelian H] (hmax : ∀ K : LieSubalgebra ℚ g, H ≤ K → IsLieAbelian K → K = H) (θ : H ≃ₗ[ℚ] Module.Dual ℚ V) (e : R → g) (he : ∀ a : R, e a ≠ 0 ∧ ∀ h : H, ⁅(h : g), e a⁆ = θ h a • e a) (hdecomp : DirectSum.IsInternal (Sum.elim (fun _ : Unit ↦ H.toSubmodule) (fun a : R ↦ Submodule.span ℚ ({e a} : Set g)))) (r : ℕ) (b : Module.Basis (Fin r) ℚ V) (hb : ∀ i, b i ∈ R) (hbase : ∀ a : R, (∀ i, ∃ n : ℤ, b.repr a i = (n : ℚ)) ∧ ((∀ i, 0 ≤ b.repr a i) ∨ (∀ i, b.repr a i ≤ 0))) (B : Module.Basis (Fin r ⊕ R) ℚ g) (Bh : ∀ i, B (Sum.inl i) = (θ.symm (c ⟨b i, hb i⟩) : g)) (Be : ∀ a : R, B (Sum.inr a) = e a) (hopp : ∀ a k : R, (k : V) = -(a : V) → ⁅e a, e k⁆ = (θ.symm (c a) : g)) (hadd : ∀ a k l : R, (a : V) + (k : V) = (l : V) → ∃ p : ℕ, (k : V) - p • (a : V) ∈ R ∧ (∀ n : ℕ, (k : V) - n • (a : V) ∈ R → n ≤ p) ∧ ∃ ε : ℤ, (ε = 1 ∨ ε = -1) ∧ ⁅e a, e k⁆ = ((ε : ℚ) * (p + 1 : ℚ)) • e l) (hzero : ∀ a k : R, (a : V) + (k : V) ≠ 0 → (a : V) + (k : V) ∉ R → ⁅e a, e k⁆ = 0) (W : Type w) [AddCommGroup W] [Module ℚ W] [LieRingModule g W] [LieModule ℚ g W] [FiniteDimensional ℚ W] [LieModule.IsFaithful ℚ g W] (Λ : Submodule ℤ W) [Submodule.IsLattice ℚ Λ] [Module.Free ℤ Λ] (Ω : Finset V) (hΩP : ∀ μ ∈ Ω, μ ∈ P) (hΩne : ∀ μ ∈ Ω, LieModule.weightSpace W (fun h : H ↦ θ h μ) ≠ ⊥) (hW : DirectSum.IsInternal (fun μ : Ω ↦ (LieModule.weightSpace W (fun h : H ↦ θ h μ)).toSubmodule)) (hgenerate : Submodule.span ℤ (Ω : Set V) = P) (hΛ : DirectSum.IsInternal (fun μ : Ω ↦ latticeWeightSpace H θ Λ μ)) (n : R → ℕ) (hn : ∀ a : R, (LieModule.toEnd ℚ g W (e a)) ^ n a = 0) (hstable : ∀ (a : R) (m : ℕ) (w : W), w ∈ Λ → ((Nat.factorial m : ℚ)⁻¹ • (LieModule.toEnd ℚ g W (e a)) ^ m) w ∈ Λ) (N : ℕ) (β : Fin N ≃ {a : R // ∀ i, 0 ≤ b.repr (a : V) i}) (horder : ∀ i j : Fin N, i ≤ j → (∑ k, b.repr ((β i).val : V) k) ≤ ∑ k, b.repr ((β j).val : V) k) (negative : Fin N → R) (hnegative : ∀ i, (negative i : V) = -((β i).val : V)) (F : Type t) [Field F] [IsAlgClosed F] : ∃ d : MvPolynomial (Fin N ⊕ Fin N) F, ∃ hd : MvPolynomial.aeval (fun _ : Fin N ⊕ Fin N ↦ (0 : F)) d = 1, ∃ (A B : Fin N → Localization.Away d) (h : AddMonoidAlgebra F P →ₐ[F] Localization.Away d), ((List.ofFn (fun i : Fin N ↦ rootExponential (fun m ↦ latticeDividedPower Λ (LieModule.toEnd ℚ g W (e (β i).val)) m (hstable (β i).val m)) (n (β i).val) (algebraMap (MvPolynomial (Fin N ⊕ Fin N) F) (Localization.Away d) (MvPolynomial.X (Sum.inr i))))).prod * (List.ofFn (fun i : Fin N ↦ rootExponential (fun m ↦ latticeDividedPower Λ (LieModule.toEnd ℚ g W (e (negative i))) m (hstable (negative i) m)) (n (negative i)) (algebraMap (MvPolynomial (Fin N ⊕ Fin N) F) (Localization.Away d) (MvPolynomial.X (Sum.inl i))))).prod = (List.ofFn (fun i : Fin N ↦ rootExponential (fun m ↦ latticeDividedPower Λ (LieModule.toEnd ℚ g W (e (negative i))) m (hstable (negative i) m)) (n (negative i)) (A i))).prod * torusAction (fun μ : Ω ↦ latticeWeightSpace H θ Λ μ) hΛ (fun μ : Ω ↦ (⟨μ.val, hΩP μ.val μ.property⟩ : P)) h * (List.ofFn (fun i : Fin N ↦ rootExponential (fun m ↦ latticeDividedPower Λ (LieModule.toEnd ℚ g W (e (β i).val)) m (hstable (β i).val m)) (n (β i).val) (B i))).prod) ∧ (∀ i, origin d hd (A i) = 0 ∧ origin d hd (B i) = 0) ∧ (∀ μ : P, origin d hd (h (AddMonoidAlgebra.single μ 1)) = 1) ∧ (R = ∅ → d = 1 ∧ (∀ i, A i = 0 ∧ B i = 0) ∧ ∀ μ : P, h (AddMonoidAlgebra.single μ 1) = 1)",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Affine-coordinate formulation: A and B are their localization-valued coordinate tuples; h is the F-algebra map from F[P]. Equality of endomorphisms over the universal localization is exactly the matrix-valued morphism identity and specializes to every algebra where d evaluates to a unit. Helpers construct the divided powers, finite exponentials, weight projections and character action with real data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8288410ad",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Every hypothesis matches the node and the recorded exists_chevalley_admissible_representation: root system, P, Chevalley brackets, faithful W, Λ and its weight splitting, divided powers, simple base, R+ and height order. Equivalent-form differences only: nilpotence as an explicit exponent, Free Λ implied by IsLattice. Conclusion matches: d(0)=1, A and B as coordinates in Localization.Away d, h : F[P]→S, the identity p+(b)p-(a)=p-(A)hp+(B) over the universal localization with a=inl, b=inr and order and composition checked, origin values, and an R=∅ clause that holds together with the identity. Helpers have real data (canonical IsInternal projections, truncated exponential exact by nilpotence). Edge cases R=∅, W=0, m=0, negative weights, characteristics 2 and 3 and universes all OK. Lean statement verbatim, only the lean field differs from live, no name clash or duplicate helper, source and blueprint docstrings present, 7 proof steps in the docstring, only sorry is the main proof. No file changed, so no compile; the worker reports clean compiles."
+ }
+}

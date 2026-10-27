@@ -1,0 +1,269 @@
+{
+ "id": "lem-trf-generic-rank-admissible-invariance",
+ "kind": "statement",
+ "title": "Generic fibre ranks and admissible invariance of the affine flattening hypotheses",
+ "statement": "Let $S$ be a quasi-compact and quasi-separated scheme, $f:X\\to S$ an affine flat morphism of finite presentation, and $\\mathcal F$ a finite-type quasi-coherent $\\mathcal O_X$-module. Suppose every fibre is geometrically integral, meaning integral after every field extension. Let $U\\subset S$ be a quasi-compact open such that $\\mathcal F|_{X_U}$ is of finite presentation and $\\mathcal F$ is flat over $S$ at every fibre generic point over $U$. For $u\\in U$ write $\\xi_u$ for the unique generic point of $X_u$ and set $r(u)=\\dim_{\\kappa(\\xi_u)}(\\mathcal F_{\\xi_u}\\otimes_{\\mathcal O_{X,\\xi_u}}\\kappa(\\xi_u))$. Then $\\mathcal F$ is free of rank $r(u)$ on an open neighbourhood of $\\xi_u$ in $X_U$, and $r:U\\to\\mathbf N$ is locally constant. Its nonempty level sets give a finite partition $U=\\coprod_{i\\in I}U_i$ into quasi-compact clopen opens. Moreover, after any finite sequence of admissible blowups with respect to the successive inverse images of $U$, the transformed base is quasi-compact and quasi-separated; the base-changed family is affine, flat, of finite presentation, with geometrically integral fibres; and the successive module strict transform is quasi-coherent of finite type. Over the inverse image of $U$ it identifies with $\\mathcal F|_{X_U}$, is of finite presentation, and is free at the fibre generic points with the same ranks $r(u)$. Admissible blowups and module strict transform retain their centres as in [def-nagata-admissible-blowup], [def-trf-module-strict-transform]. Schemes, morphism properties, quasi-coherent modules, finite type and finite presentation, relative module flatness, integral schemes, fibres, generic points and residue fields are as in [def-pc-scheme], [def-weil-pbc-scheme-conventions], [pqf-def-coherent], [def-weil-pbc-module-finite-type-presentation], [def-pc-scheme-module-flat-over], [def-pc-integral-scheme], [def-pc-scheme-fibre], [def-sc-generic-point], [def-weil-residue-field].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0811, lemma-flatten-module-pre, first two proof paragraphs; Tag 080Y, remark-successive-blowups, finite-sequence reduction."
+ },
+ "stmt_deps": [
+  "def-nagata-admissible-blowup",
+  "def-trf-module-strict-transform",
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-integral-scheme",
+  "def-pc-scheme-fibre",
+  "def-sc-generic-point",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Fix $u\\in U$. The integral fibre $X_u$ is nonempty and irreducible by [def-pc-integral-scheme], and has a unique generic point $\\xi_u$ by [lem-sc-scheme-sober]. Choose a nonempty affine open in $X_u$. By [lem-sc-integral-function-field-affine-fraction], $\\mathcal O_{X_u,\\xi_u}$ is a field. Consequently $(\\mathcal F_u)_{\\xi_u}$ is flat over that field by [lem-weil-pbc-module-over-field-flat]. The morphism $X_U\\to U$ is of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). The module $\\mathcal F|_{X_U}$ is finitely presented by hypothesis, and its stalk at $\\xi_u$ is flat over $\\mathcal O_{U,u}$ by the assumed relative flatness. Thus [lem-trf-flat-fibre-free-neighbourhood] gives an open $W_u\\subset X_U$ containing $\\xi_u$ and an isomorphism $\\mathcal F|_{W_u}\\cong\\mathcal O_{W_u}^{\\oplus n_u}$. Taking the stalk and then tensoring with $\\kappa(\\xi_u)$ sends the standard basis to a basis of $\\kappa(\\xi_u)^{\\oplus n_u}$, so $n_u=r(u)$, including when $n_u=0$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-sc-scheme-sober",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-trf-flat-fibre-free-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0811, lemma-flatten-module-pre, rank paragraph; more-morphisms.tex Tag 080Q, lemma-flat-and-free-at-point-fibre, with its preceding explanation about reduced fibre generic points"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-flat-lfp-open], $f$ is open. Therefore $V_u=f(W_u)$ is an open neighbourhood of $u$ contained in $U$. If $v\\in V_u$, then $W_u\\cap X_v$ is a nonempty open subset of the integral fibre $X_v$, so it contains $\\xi_v$: every open meeting the closure of a generic point contains that point. The same trivialization on $W_u$ now gives $\\mathcal F_{\\xi_v}\\otimes\\kappa(\\xi_v)\\cong\\kappa(\\xi_v)^{\\oplus r(u)}$. Its standard basis shows $r(v)=r(u)$. These $V_u$ prove local constancy of $r$.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0811, lemma-flatten-module-pre, rank paragraph; morphisms.tex Tag 01UA, lemma-fppf-open"
+   }
+  },
+  {
+   "text": "For each $i\\in\\mathbf N$ put $U_i=\\{u\\in U:r(u)=i\\}$. Local constancy makes $U_i$ open, and its complement, the union of the other level sets, is open too. The nonempty $U_i$ form a disjoint open cover of the quasi-compact space $U$. A finite subcover therefore contains all nonempty level sets. Each is closed in $U$, hence quasi-compact: add its open complement to any open cover and use quasi-compactness of $U$. This gives the asserted finite partition into quasi-compact clopen opens. For $U=\\varnothing$ the index set is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0811, lemma-flatten-module-pre, rank paragraph, finite open-and-closed partition"
+   }
+  },
+  {
+   "text": "For any morphism $g:T\\to S$, write $f_T:X_T\\to T$ for the second projection. It is affine by [lem-weil-pbc-affine-morphism-permanence](1), flat by [lem-weil-pbc-flat-morphism-base-change], and of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). For $t\\in T$ and $s=g(t)$, [lem-weil-pbc-fibre-of-base-change] identifies $(X_T)_t$ with $X_s\\times_{\\kappa(s)}\\kappa(t)$. If $L/\\kappa(t)$ is any field extension, the defining universal property of fibre products identifies its further extension with $X_s\\times_{\\kappa(s)}L$: on test schemes both are the same compatible maps to $X_s$ and $\\operatorname{Spec}L$. This is integral by the original geometric integrality hypothesis applied to the composite field extension $L/\\kappa(s)$. Thus the base-changed family again has geometrically integral fibres.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-fibre-of-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0811, lemma-flatten-module-pre, preservation of hypotheses in first proof paragraph; morphisms.tex Tags 01SD (lemma-base-change-affine), 01U9 (lemma-base-change-flat), 01TS (lemma-base-change-finite-presentation)"
+   }
+  },
+  {
+   "text": "Take one $U$-admissible blowup $b:S_1\\to S$ with its specified centre. By [lem-trf-module-admissible-blowup-calculus](2), $S_1$ is quasi-compact and quasi-separated and the module strict transform $\\mathcal F_1$ on $X\\times_SS_1$ is quasi-coherent and of finite type. By [lemma-nagata-admissible-blowup-over-open] the restriction $b^{-1}U\\to U$ is the specified isomorphism. In particular $b^{-1}U$ is quasi-compact. Under this isomorphism and the induced isomorphism $X\\times_S b^{-1}U\\cong X_U$, the agreement-over-$U$ clause of [lem-trf-module-admissible-blowup-calculus](2) identifies $\\mathcal F_1$ with $\\mathcal F|_{X_U}$. Hence its finite presentation there is unchanged. The same identification takes each fibre and its unique generic point over $u$ to $X_u$ and $\\xi_u$, and takes its stalk and residue field to the original ones. Restricting the trivializations of Step 1 along this isomorphism gives the claimed free neighbourhoods and the identical ranks $r(u)$.",
+   "uses": [
+    "lem-trf-module-admissible-blowup-calculus",
+    "lemma-nagata-admissible-blowup-over-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 080Y, remark-successive-blowups; divisors.tex Tag 080D, definition-strict-transform, and the preservation of the open complement of a blowup centre"
+   }
+  },
+  {
+   "text": "Induct on the sequence length. For length zero all assertions are the hypotheses and Steps 1--3. Suppose they hold on $S_j$, with $U^{(j)}$ the inverse image of $U$, $X_j=X\\times_SS_j$ and $\\mathcal F_j$ the successive strict transform. The induction hypothesis makes $S_j$ quasi-compact and quasi-separated, $U^{(j)}$ quasi-compact, and $\\mathcal F_j$ quasi-coherent of finite type. Thus [lem-trf-module-admissible-blowup-calculus](2) applies to the next $U^{(j)}$-admissible blowup, retaining its actual centre, and gives these same properties on $S_{j+1}$. Step 4 applied to $X_j\\to S_j$ gives all family properties after this base change. The isomorphism-over-the-open statement [lemma-nagata-admissible-blowup-over-open] and the agreement of strict transforms over that open identify the new restricted module with the previous one, and hence with $\\mathcal F|_{X_U}$. The restricted finite presentation, relative flatness at fibre generic points, free neighbourhoods and ranks are therefore exactly the original ones. This proves the induction and every asserted invariance for any finite sequence.",
+   "uses": [
+    "lem-trf-module-admissible-blowup-calculus",
+    "lemma-nagata-admissible-blowup-over-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 080Y, remark-successive-blowups, successive strict transforms; Tag 0811, lemma-flatten-module-pre, first proof paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "lem-sc-scheme-sober",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-trf-flat-fibre-free-neighbourhood",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-fibre-of-base-change",
+  "lem-trf-module-admissible-blowup-calculus",
+  "lemma-nagata-admissible-blowup-over-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0811, lemma-flatten-module-pre, first two proof paragraphs; Tag 080Y, remark-successive-blowups. The rank and finite-sequence arguments are written out using existing DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented sheaf on a flat finitely presented family with integral fibers, flatness at the generic points makes the generic fiber rank locally constant",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M] [Module.Flat R M], IsLocallyConstant (Module.rankAtStalk M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsLocallyConstant fun x => Module.rankAtStalk M ↑x\", \"doc\": \"For a finitely presented module $M$ over a commutative ring $R$, the function assigning to each prime ideal $\\\\mathfrak{p}$ in the free locus of $M$ the rank of the localized module $M_{\\\\mathfrak{p}}$ \"}\n  {\"name\": \"Module.rankAtStalk_eq\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] (p : PrimeSpectrum R),\\n  Module.rankAtStalk M p = Module.finrank p.asIdeal.ResidueField (TensorProduct R p.asIdeal.ResidueField M)\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in the prime spectrum of a commutative semiring $R$, the finite rank of the module $M$ localized at $\\\\mathfrak{p}$ (converted to a natural number) equals the finite ra\"}\n  {\"name\": \"Module.rankAtStalk_baseChange\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] {S : Type u_1} [inst_5 : CommRing S] [inst_6 : Algebra R S] (p : PrimeSpectrum S),\\n  Module.rankAtStalk (TensorProduct R S M) p = Module.rankAtStalk M (PrimeSpect\", \"doc\": \"For a commutative ring homomorphism $ R \\\\to S $, a prime ideal $ \\\\mathfrak{p} \\\\in \\\\text{Spec}(S) $, and an $ R $-module $ M $, the rank of the base-changed module $ S \\\\otimes_R M $ at $ \\\\mathfrak{p} $\"}\n  {\"name\": \"Module.rankAtStalk_tensorProduct_of_isScalarTower\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] {S : Type u_1} [inst_5 : CommRing S] [inst_6 : Algebra R S] (N : Type u_2)\\n  [inst_7 : AddCommGroup N] [inst_8 : Module R N] [inst_9 : Module S N] [inst_10 : IsSc\", \"doc\": \"Given commutative rings $R$ and $S$ with $S$ an $R$-algebra, an $S$-module $N$ that is finitely generated and flat over $S$ with compatible $R$-action (via scalar tower), and a prime ideal $\\\\mathfrak{\"}\n  {\"name\": \"Module.rankAtStalk_tensorProduct\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] (N : Type u_1) [inst_5 : AddCommGroup N] [inst_6 : Module R N] [Module.Finite R N]\\n  [Module.Flat R N], Module.rankAtStalk (TensorProduct R M N) = Module.rankAtSt\", \"doc\": \"For modules $M$ and $N$ over a commutative semiring $R$, if both are finitely generated and flat, then the rank of their tensor product $M \\\\otimes_R N$ at the stalk corresponding to a prime ideal $\\\\ma\"}\n  {\"name\": \"Module.rankAtStalk_pi\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} [inst : CommRing R] {ι : Type u_1} [Finite ι] (M : ι → Type u_2) [inst_2 : (i : ι) → AddCommGroup (M i)]\\n  [inst_3 : (i : ι) → Module R (M i)] [∀ (i : ι), Module.Flat R (M i)] [∀ (i : ι), Module.Finite R (M i)]\\n  (p : PrimeSpectrum R), Module.rankAtStalk ((i : ι) → M i) p = ∑ᶠ (i : ι\", \"doc\": \"Let $ R $ be a commutative semiring, and let $ \\\\{M_i\\\\}_{i \\\\in \\\\iota} $ be a finite family of finitely generated flat $ R $-modules, each equipped with an additive commutative group structure. For any \"}\n  {\"name\": \"Module.rankAtStalk_prod\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} (M : Type uM) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] (N : Type u_1) [inst_5 : AddCommGroup N] [inst_6 : Module R N] [Module.Flat R N]\\n  [Module.Finite R N], Module.rankAtStalk (M × N) = Module.rankAtStalk M + Module\", \"doc\": \"For a commutative semiring $R$ and flat, finitely generated $R$-modules $M$ and $N$, the rank at the stalk of the product module $M \\\\times N$ is equal to the sum of the ranks at the stalks of $M$ and \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rank-at-stalk results concern a module over a single ring; they do not descend fibre generic rank to the base of a family or identify admissible strict transforms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic rank strata of a coherent module are unchanged by admissible blowup and strict transform over the preserved open subset",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Grassmannian.rankAtStalk_eq\", \"module\": \"Mathlib/RingTheory/Grassmannian\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {M : Type v} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {k : ℕ}\\n  (self : Module.Grassmannian R M k) (p : PrimeSpectrum R), Module.rankAtStalk (M ⧸ self.toSubmodule) p = k\", \"doc\": \"For any commutative ring $ R $, $ R $-module $ M $, natural number $ k $, and a rank $ k $ submodule $ N $ of $ M $ (represented as an element of the Grassmannian), the rank of the quotient module $ M\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsLocallyConstant fun x => Module.rankAtStalk M ↑x\", \"doc\": \"For a finitely presented module $M$ over a commutative ring $R$, the function assigning to each prime ideal $\\\\mathfrak{p}$ in the free locus of $M$ the rank of the localized module $M_{\\\\mathfrak{p}}$ \"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M] [Module.Flat R M], IsLocallyConstant (Module.rankAtStalk M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ with injective germ map, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\\\\to Y$ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ where the germ map is injective, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\"}\n  {\"name\": \"Module.rankAtStalk_pos_iff_mem_support\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] (p : PrimeSpectrum R), 0 < Module.rankAtStalk M p ↔ p ∈ Module.support R M\", \"doc\": \"For any prime ideal $ \\\\mathfrak{p} $ in the prime spectrum of a commutative semiring $ R $, the rank of the module $ M $ localized at the complement of $ \\\\mathfrak{p} $ is positive if and only if $ \\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.ofFromSpecStalk_comp\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ where the germ map is injective, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {U : X.Opens} {x : ↥X} (hxU : x ∈ U) (φ : A ⟶ X.presheaf.stalk x)\\n  (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryTheory.CategoryStruct.com\", \"doc\": \"Given a point $x$ in an open subset $U$ of a scheme $X$, a morphism $\\\\phi: A \\\\to \\\\mathcal{F}_x$ to the stalk of a presheaf $\\\\mathcal{F}$ at $x$, and compatible ring homomorphisms $\\\\phi_{RA}: R \\\\to A$ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rank-at-stalk results concern a module over a single ring; they do not descend fibre generic rank to the base of a family or identify admissible strict transforms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rankAtStalk\", \"isLocallyConstant\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \" {R : Type uR} {M : Type uM} [CommRing R] [AddCommGroup M] [Module R M] [Module.FinitePresentation R M] [Module.Flat R M] : IsLocallyConstant (Module.rankAtStalk M)\", \"doc\": \"\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \" {R : Type uR} {M : Type uM} [CommRing R] [AddCommGroup M] [Module R M] [Module.FinitePresentation R M] : IsLocallyConstant fun x => Module.rankAtStalk M ↑x\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rank-at-stalk results concern a module over a single ring; they do not descend fibre generic rank to the base of a family or identify admissible strict transforms."
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*rank|rank.*locallyConstant|strictTransform",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Rank-at-stalk results concern a module over a single ring; they do not descend fibre generic rank to the base of a family or identify admissible strict transforms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic fiber rank of a finitely presented sheaf flat at fiber generic points is locally constant on the base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] [Module.Flat R M] : IsLocallyConstant (rankAtStalk (R := R) M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] : IsLocallyConstant (fun x : freeLocus R M ↦ rankAtStalk M x.1)\", \"doc\": \"For a finitely presented module $M$ over a commutative ring $R$, the function assigning to each prime ideal $\\\\mathfrak{p}$ in the free locus of $M$ the rank of the localized module $M_{\\\\mathfrak{p}}$ \"}\n  {\"name\": \"Module.free_of_flat_of_finrank_eq\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.Finite R M] [Flat R M] (n : ℕ) (rk : ∀ P : MaximalSpectrum R, finrank (R ⧸ P.1) ((R ⧸ P.1) ⊗[R] M) = n) :\\n  Free R M\", \"doc\": \"Let $ R $ be a commutative ring and $ M $ a finitely generated flat $ R $-module. If for every maximal ideal $ \\\\mathfrak{p} $ of $ R $, the rank of the tensor product $ (R/\\\\mathfrak{p}) \\\\otimes_R M $ \"}\n  {\"name\": \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.Finite R M] [Flat R M] (n : ℕ) (rk : ∀ P : MaximalSpectrum R, finrank (R ⧸ P.1) ((R ⧸ P.1) ⊗[R] M) = n) :\\n  Nonempty (Basis (Fin n) R M)\", \"doc\": \"If $ M $ is a finitely generated flat module over a commutative ring $ R $, and for every maximal ideal $ \\\\mathfrak{p} $ of $ R $ the rank of the tensor product $ M \\\\otimes_R (R/\\\\mathfrak{p}) $ over t\"}\n  {\"name\": \"Module.rankAtStalk_baseChange\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"{S : Type*} [CommRing S] [Algebra R S] (p : PrimeSpectrum S) :\\n  rankAtStalk (S ⊗[R] M) p = rankAtStalk M (p.comap (algebraMap R S))\", \"doc\": \"For a commutative ring homomorphism $ R \\\\to S $, a prime ideal $ \\\\mathfrak{p} \\\\in \\\\text{Spec}(S) $, and an $ R $-module $ M $, the rank of the base-changed module $ S \\\\otimes_R M $ at $ \\\\mathfrak{p} $\"}\n  {\"name\": \"Module.rankAtStalk\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"(p : PrimeSpectrum R) : ℕ\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in the prime spectrum of a commutative semiring $R$, this function returns the finite rank of the module $M$ localized at the complement of $\\\\mathfrak{p}$, converted t\"}\n  {\"name\": \"Module.rankAtStalk_prod\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"(N : Type*) [AddCommGroup N] [Module R N] [Module.Flat R N] [Module.Finite R N] :\\n  rankAtStalk (R := R) (M × N) = rankAtStalk M + rankAtStalk N\", \"doc\": \"For a commutative semiring $R$ and flat, finitely generated $R$-modules $M$ and $N$, the rank at the stalk of the product module $M \\\\times N$ is equal to the sum of the ranks at the stalks of $M$ and \"}\n  {\"name\": \"Module.rankAtStalk_pi\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"{ι : Type*} [Finite ι] (M : ι → Type*) [∀ i, AddCommGroup (M i)] [∀ i, Module R (M i)] [∀ i, Module.Flat R (M i)]\\n  [∀ i, Module.Finite R (M i)] (p : PrimeSpectrum R) : rankAtStalk (Π i, M i) p = ∑ᶠ i, rankAtStalk (M i) p\", \"doc\": \"Let $ R $ be a commutative semiring, and let $ \\\\{M_i\\\\}_{i \\\\in \\\\iota} $ be a finite family of finitely generated flat $ R $-modules, each equipped with an additive commutative group structure. For any \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rank-at-stalk results concern a module over a single ring; they do not descend fibre generic rank to the base of a family or identify admissible strict transforms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented module on a flat family with geometrically integral fibres the generic fibre rank is locally constant on the base and invariant under admissible blowups",
+   "results": "Search returned 8 hits: Module.isLocallyConstant_rankAtStalk, Module.isLocallyConstant_rankAtStalk_freeLocus, Module.rankAtStalk_eq, Module.rankAtStalk_baseChange, Module.free_of_flat_of_finrank_eq, IsBaseChange.finrank_eq_of_le_nonZeroDivisors, IsBaseChange.lift_rank_eq_of_le_nonZeroDivisors, IsBaseChange.rank_eq_of_le_nonZeroDivisors",
+   "date": "2026-10-23",
+   "verdict": "no match: rankAtStalk/free-locus results for one module over one ring do not assert local constancy of fibre generic rank on the base or admissible strict-transform invariance."
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*rank|rank.*locallyConstant|strictTransform",
+   "results": "Search returned 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: rankAtStalk/free-locus results for one module over one ring do not assert local constancy of fibre generic rank on the base or admissible strict-transform invariance."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic rank strata for a finitely presented sheaf on a flat family with integral fibres are locally constant on the base",
+   "results": "Search returned 8 hits: Module.isLocallyConstant_rankAtStalk, Module.isLocallyConstant_rankAtStalk_freeLocus, Module.free_of_flat_of_finrank_eq, Module.rankAtStalk_baseChange, SheafOfModules.isFinitePresentation, Module.nonempty_basis_of_flat_of_finrank_eq, SheafOfModules.IsFinitePresentation.mk, Module.Grassmannian.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: rankAtStalk/free-locus results for one module over one ring do not assert local constancy of fibre generic rank on the base or admissible strict-transform invariance."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rankAtStalk\", \"isLocallyConstant\"",
+   "results": "Search returned 2 hits: Module.isLocallyConstant_rankAtStalk, Module.isLocallyConstant_rankAtStalk_freeLocus",
+   "date": "2026-10-23",
+   "verdict": "no match: rankAtStalk/free-locus results for one module over one ring do not assert local constancy of fibre generic rank on the base or admissible strict-transform invariance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Admissible blowups preserve the ranks of a quasi-coherent strict transform over the open subset where the blowup is an isomorphism",
+   "results": "Search returned 8 hits: Module.isLocallyConstant_rankAtStalk_freeLocus, Module.isLocallyConstant_rankAtStalk, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, Module.Grassmannian.rankAtStalk_eq, Ideal.rank_pow_quot_aux, Module.rankAtStalk_self, Module.rankAtStalk_pos_iff_mem_support, Module.rankAtStalk_pi",
+   "date": "2026-10-23",
+   "verdict": "no match: rankAtStalk/free-locus results for one module over one ring do not assert local constancy of fibre generic rank on the base or admissible strict-transform invariance."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-generic-free-blowup",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 3: apply lemma-flatten-module-pre before subtracting a free module. Stacks 0811/080Y refinement: Generic fibre ranks and admissible invariance of the affine flattening hypotheses.",
+   "via": [
+    "lem-trf-generic-free-blowup",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-generic-rank-admissible-invariance",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0811 rank paragraph and 080Y admissible-invariance reduction into six steps. Reused existing finite-free-neighbourhood, open-map, generic-field, base-change and module blowup-calculus nodes; no new node or statement change. Explicit integral-fibre generic-point argument proves local constancy; compactness gives finite clopen rank strata; induction handles successive transforms with their actual centres.",
+  "blueprint": "The existing ancestor attribution is retained: lem-trf-local-term-locality, semistable-alteration input via the chain recorded in blueprint.from. This item implements Stacks 0811 first two proof paragraphs and 080Y, within the existing flattening subroute; the current blueprint locality proof was read without altering its contracting-correspondence route.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-admissible-blowup-over-open",
+    "why": "Uses only that an admissible blowup is the specified isomorphism over the preserved open; a generic blowup fact needed for the existing admissible-flattening route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-admissible-blowup-over-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-7d08220b9",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-7d08220b9 (reviewer sub-agent of L); spot-checked: PASS on a first split. The base item was unsplit with an empty proof, its statement is unchanged, it has no new nodes and no repair note; it is checked against Stacks flat.tex 0811 (lemma-flatten-module-pre, hyps (1)-(4) and first two proof paragraphs) and 080Y. Step 1: integral-scheme, sober, function-field-affine-fraction (fibre generic stalk is a field) and module-over-field-flat give the fibre flatness. qcqs-permanence(3) gives that X_U->U is of finite presentation. These are exactly the hypotheses of lem-trf-flat-fibre-free-neighbourhood (080Q); tensoring with the residue field gives n_u = r(u). Step 2: f is open by flat-lfp-open, f(W_u) is contained in U, W_u meets X_v in a nonempty open (fibre homeomorphism in the stmt_dep def-pc-scheme-fibre), so it contains xi_v and the rank is the same. Step 3 is elementary and correct: finitely many quasi-compact clopen strata, and U empty is fine. Step 4: affine(1), flat and finite-presentation(3) base change, the fibre-of-base-change cartesian square and fibre-product pasting carry geometric integrality. Steps 5-6: module-admissible-blowup-calculus(2) gives qcqs S_1, quasi-coherent finite-type strict transform and agreement over U; its global-flatness clause is correctly not used. Admissible-blowup-over-open gives b^-1U = U, which is quasi-compact. The induction has an explicit claim, base and step, and is not circular. Edge cases tested: U empty, F=0, disconnected U with two ranks, zero-dimensional fibres, a sequence of length 0, blowup of the unit ideal, non-reduced base. No cycle (819-node traversal), proof_deps = union of step uses, no SGA citation, no duplicate of the item in the DAG. Accepted tool use: lemma-nagata-admissible-blowup-over-open, Lean-closed (IsAdmissible.isIso_blowupMap_restrict) and already used this way by siblings in sk-i-curve-zero. Advisory: the report claims citations.json and searches.jsonl were written, but neither is in the delivery; the searches are recorded in mathlib_searches."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.GenericRankAdmissibleInvariance",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.generic_rank_admissible_invariance",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.moduleResidueRank",
+   "AlgebraicGeometry.Scheme.Modules.AdmissibleModuleTransformChain",
+   "AlgebraicGeometry.Scheme.Modules.generic_rank_admissible_invariance"
+  ],
+  "file": "lean/Sheaf/TraceFormula/GenericRankAdmissibleInvariance.lean",
+  "statement": "theorem generic_rank_admissible_invariance {X S : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S] (f : X ⟶ S) [IsAffineHom f] [Flat f] [LocallyOfFinitePresentation f] [GeometricallyIntegral f] (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType] (U : S.Opens) (hU : IsCompact (U : Set S)) (hfp : ((restrictFunctor (f ⁻¹ᵁ U).ι).obj F).IsFinitePresentation) (ξ : (s : U) → f.fiber s.val) (hξ : ∀ s : U, IsGenericPoint (ξ s) Set.univ) (hflat : ∀ s : U, letI x := f.fiberι s.val (ξ s) letI : Module (S.presheaf.stalk (f x)) ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F) := Module.compHom _ (f.stalkMap x).hom Module.Flat (S.presheaf.stalk (f x)) ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F)) : ∃ r : U → ℕ, (∀ s : U, r s = moduleResidueRank F (f.fiberι s.val (ξ s))) ∧ (∀ s : U, ∃ W : X.Opens, W ≤ f ⁻¹ᵁ U ∧ f.fiberι s.val (ξ s) ∈ W ∧ Nonempty (((restrictFunctor W.ι).obj F) ≅ (restrictFunctor W.ι).obj (SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin (r s)))))) ∧ IsLocallyConstant r ∧ Set.Finite (Set.range r) ∧ (∀ i ∈ Set.range r, IsClopen {s : U | r s = i} ∧ IsCompact {s : U | r s = i}) ∧ (∀ (n : ℕ) {Y T : Scheme.{u}} (q : Y ⟶ T) (G : Y.Modules) (b : T ⟶ S) (p : Y ⟶ X), AdmissibleModuleTransformChain f U F n q G b p → CompactSpace T ∧ QuasiSeparatedSpace T ∧ IsAffineHom q ∧ Flat q ∧ LocallyOfFinitePresentation q ∧ QuasiCompact q ∧ QuasiSeparated q ∧ GeometricallyIntegral q ∧ G.IsQuasicoherent ∧ G.IsFiniteType ∧ IsIso (b ∣_ U) ∧ ((restrictFunctor (q ⁻¹ᵁ (b ⁻¹ᵁ U)).ι).obj G).IsFinitePresentation ∧ Nonempty (((restrictFunctor (q ⁻¹ᵁ (b ⁻¹ᵁ U)).ι).obj G) ≅ (restrictFunctor (q ⁻¹ᵁ (b ⁻¹ᵁ U)).ι).obj ((tensorPullback p).obj F)) ∧ (∀ (t : T) (ht : b t ∈ U) (η : q.fiber t), IsGenericPoint η Set.univ → moduleResidueRank G (q.fiberι t η) = r ⟨b t, ht⟩ ∧ ∃ W : Y.Opens, W ≤ q ⁻¹ᵁ (b ⁻¹ᵁ U) ∧ q.fiberι t η ∈ W ∧ Nonempty (((restrictFunctor W.ι).obj G) ≅ (restrictFunctor W.ι).obj (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin (r ⟨b t, ht⟩)))))))",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary rank spells out the residue-field tensor in the statement. The finite-chain relation retains every admissible centre and uses the exact cokernel underlying moduleStrictTransform, via its existing restriction map. It imposes no intermediate quasi-coherence or finite-type hypotheses; these are conclusions. IsAffineHom supplies quasi-compactness and quasi-separatedness of the initial morphism, so LocallyOfFinitePresentation expresses its finite presentation without extra assumptions. Stage-2 review FIX: the pointwise relative flatness hypothesis inlines the body of moduleFlatAt (owned by the theorem node lem-trf-flat-associated-equidimensional, not a stmt_dep): flatness of the module stalk over the base stalk along f.stalkMap; the public import of that theorem module is replaced by WeilConjectures.Algebra.Homology.ModuleStalkFunctor and WeilConjectures.AlgebraicGeometry.TensorPullback.",
+  "fixed_by": "NT-stage2-cc-424150360"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-424150360",
+  "group": "Q85",
+  "result": "fix",
+  "note": "Read node, 11 stmt_deps, Stacks 0811/080Y, module, report (Worker report + Second reading by Q85 present). All hypotheses/clauses match: qcqs S; IsAffineHom+Flat+LOFP f; GeometricallyIntegral; qcoh finite-type F; compact U; fp over f⁻¹U; generic-point naming ξ; residue rank via moduleResidueRank (real data); free nbhd in X_U; IsLocallyConstant; finite range with clopen compact levels; AdmissibleModuleTransformChain retains centres B.I, module = exact moduleStrictTransform body without intermediate qcoh hypotheses; all invariance clauses incl. same ranks and free nbhds at new generic points. Edge cases U/S empty, rank 0, length-0 chain, universes OK. Fault H2/H4: hflat used AlgebraicGeometry.moduleFlatAt, owned by theorem node lem-trf-flat-associated-equidimensional (not a stmt_dep), via public import of its module. FIX: inlined the defeq body (stalk flatness along Module.compHom (f.stalkMap x)), replaced the import by WeilConjectures.Algebra.Homology.ModuleStalkFunctor + TensorPullback; record statement verbatim + note. Fixed file compiled once with nt_compile --json: 36.0 s, exit 0, clean. Advisory: identification over U is a Nonempty iso with p^*F (node names no map; citer only needs abstract iso)."
+ }
+}

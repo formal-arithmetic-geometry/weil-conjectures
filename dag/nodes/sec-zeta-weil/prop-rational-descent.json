@@ -138,7 +138,18 @@
   "def-weil-smooth-proper-cohomological-family"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-zeta-weil",
  "unit": "sk-thm-rationality",
  "split_report": {
@@ -164,5 +175,24 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-44172005d (reviewer sub-agent of L); spot-checked: I read the item and all four cited statements in full: def-weil-point-counts-zeta, def-weil-hankel-matrix, prop-weil-rationality-criterion and def-weil-rational-power-series. I also read the five original stmt_deps, unit sk-thm-rationality and chapter sec-zeta-weil. The master proof (order 2891) and the main-20261015 statement (order 3233) are identical to the node's statement, so nothing was changed or weakened. Finite Hankel rank over Q is a hypothesis of the statement. The item does not claim the Q_l-to-Q descent, which the unit step does elsewhere. Step 1 is correctly elementary: X_0 is proper, hence of finite type, so Z lies in 1+TQ[[T]], and the Hankel definition with K=Q, C=Z is exactly the hypothesis. Step 2 uses only the criterion's statement, its (2)=>(1) clause with K=Q, and every hypothesis is met. Step 3 is correctly elementary: Q(0)=1 is nonzero, so Z is a rational power series, which is what 'in Q(T)' means in the DAG. proof_deps equals the union of the uses. The criterion's unit sk-prop-criterion is cited by the item's unit, so the declared tool_use is on-route; I accept it. The dependency closure does not contain the item, so there is no cycle. No duplicate exists: a grep for Hankel over dag/nodes finds only stronger results (sk-thm-rationality, nt-target-zeta-rational) and the generic criterion, so same_as [] is right. There are no new nodes. All three search kinds are recorded. Edge cases check out: Spec F_q gives Z=1/(1-T) with Hankel rank 1, and P^1 gives Z=1/((1-T)(1-qT)) with rank 2. A rational matrix has the same rank over Q and over Q_l. This is not a target node, so no base-change morphism or coefficient category is involved. I made no fixes; details are in review.md."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Fix a prime $p$, $a\\in\\mathbf Z_{\\geq1}$, put $q=p^a$,\n$k_0=\\Fq$, and let $k=\\Fbar$ be the\nfixed algebraic closure of $k_0$.\nChoose a prime $\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$, and let\n$d\\in\\mathbf Z_{\\geq0}$. Let $X_0/k_0$ be\nsmooth and proper\nof pure dimension $d$, with $X=X_0\\times_{k_0}k$ and\n$(V_{i,\\ell},F_{i,\\ell},P_{i,\\ell})_{0\\leq i\\leq2d}$ the\nsmooth-proper\ncohomological family.\nFix an indeterminate $T$. For $n\\geq1$, put\n$N_n(X_0)=\\#X_0(\\mathbf F_{q^n})$ and define the\npoint-count zeta series\n\n$$\nZ(X_0,T)=\\exp\\left(\\sum_{n\\geq1}N_n(X_0)\\frac{T^n}{n}\\right).\n$$\n\nAssume the closed-point product\n\n$$\nZ(X_0,T)=\\prod_{x\\in|X_0|}(1-T^{\\deg(x)})^{-1}\n$$\n\nand the trace-to-determinant identity\n\n$$\nZ(X_0,T)=\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}}\n\\quad\\text{in }\\Ql(T).\n$$\n\nWriting\n$Z(X_0,T)=\\sum_{n\\geq0}z_nT^n$, assume that its Hankel matrix\n$\\mathcal H(Z)=(z_{r+s})_{r,s\\geq0}$ has finite rank, in the sense of the\nHankel-matrix definition; equivalently,\nthe sequence $(z_n)$ satisfies a linear recurrence over $\\mathbf Q$ from\nsome index onward. A normalized presentation is a pair\n$A,B\\in\\mathbf Z[T]$ satisfying\n\n$$\nZ(X_0,T)=A(T)/B(T),\\qquad A(0)=B(0)=1,\\qquad\n\\gcd(A,B)=1\\text{ in }\\mathbf Q[T],\n$$\n\nand this is the\nnormalized integral-fraction\ncondition. Then\n\n$$\nZ(X_0,T)\\in\\mathbf Q(T).\n$$",
+  "proof": [
+   {
+    "text": "The finite-rank hypothesis on $\\mathcal H(Z)=(z_{r+s})_{r,s\\geq0}$ in\nthe sense of [def-weil-hankel-matrix] is exactly the finite-rank\nhypothesis of [prop-weil-rationality-criterion] with\n$K=\\mathbf Q$, so the equivalence of its first two items gives\n$Z(X_0,T)\\in\\mathbf Q(T)$, which is the assertion.",
+    "uses": [
+     "def-weil-hankel-matrix",
+     "prop-weil-rationality-criterion"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
  }
 }

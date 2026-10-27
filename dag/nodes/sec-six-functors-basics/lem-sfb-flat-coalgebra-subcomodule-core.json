@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-flat-coalgebra-subcomodule-core",
+ "kind": "statement",
+ "title": "The stable core of a submodule of a flat coalgebra comodule",
+ "statement": "Let $R$ be a commutative ring. Let $C$ be an $R$-module flat over $R$, meaning that tensoring with $C$ preserves injections of $R$-modules, with $R$-linear maps $\\Delta:C\\to C\\otimes_R C$ and $\\epsilon:C\\to R$ satisfying coassociativity and both counit identities. Tensor products have the meaning of [def-weil-pbc-module-tensor-product]. Let $M$ be an $R$-module with an $R$-linear map $\\rho:M\\to M\\otimes_R C$ satisfying $(\\rho\\otimes1_C)\\rho=(1_M\\otimes\\Delta)\\rho$ and $(1_M\\otimes\\epsilon)\\rho=1_M$, under the canonical associativity and unit identifications. For an $R$-submodule $W\\subseteq M$, write $i_W:W\\hookrightarrow M$ and define $W^\\circ=\\{m\\in M:\\rho(m)\\in\\operatorname{im}(i_W\\otimes1_C)\\}$. Then $W^\\circ$ is an $R$-submodule contained in $W$. Writing $j:W^\\circ\\hookrightarrow M$, there is a unique $R$-linear map $\\rho_\\circ:W^\\circ\\to W^\\circ\\otimes_R C$ with $(j\\otimes1_C)\\rho_\\circ=\\rho j$; it satisfies $(\\rho_\\circ\\otimes1_C)\\rho_\\circ=(1_{W^\\circ}\\otimes\\Delta)\\rho_\\circ$ and $(1_{W^\\circ}\\otimes\\epsilon)\\rho_\\circ=1_{W^\\circ}$. Moreover, every $R$-submodule $U\\subseteq W$ satisfying $\\rho(U)\\subseteq\\operatorname{im}(i_U\\otimes1_C)$ is contained in $W^\\circ$, where $i_U:U\\hookrightarrow M$. No Noetherian, finite generation, or torsion-freeness hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-basic-affine-group-schemes.pdf",
+  "place": "Milne, Basic Theory of Affine Group Schemes (2012), VIII, Aside 4.7, printed p.117 (PDF p.117), the stable-core lemma preceding the finite-generation argument. Read https://www.jmilne.org/math/CourseNotes/AGS.pdf; local copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=W^\\circ$. The image of $i_W\\otimes1_C$ is a submodule, so its inverse image under the linear map $\\rho$ is a submodule. If $k\\in K$, write $\\rho(k)=\\sum_a w_a\\otimes c_a$ with $w_a\\in W$. Applying $1_M\\otimes\\epsilon$ gives $k=\\sum_a\\epsilon(c_a)w_a\\in W$ by counitality. Thus $K\\subseteq W$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent completion of Milne VIII Aside 4.7, stable-core lemma; tensor universal property and pure-tensor generation, Tag 00CX (lemma-tensor-product)."
+   }
+  },
+  {
+   "text": "Let $q:M\\to M/W$ be the quotient map and set $f=(q\\otimes1_C)\\rho:M\\to(M/W)\\otimes_R C$. The quotient sequence $W\\xrightarrow{i_W}M\\xrightarrow q M/W\\to0$ is exact: $q$ is surjective and its kernel is $W$. By [lem-weil-pbc-tensor-right-exact], $\\ker(q\\otimes1_C)=\\operatorname{im}(i_W\\otimes1_C)$, so $K=\\ker f$.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DF, lemma-tensor-product-exact, applied to the quotient sequence."
+   }
+  },
+  {
+   "text": "For $k\\in K$, coassociativity gives, under associativity identifications, $((f\\otimes1_C)\\rho)(k)=(q\\otimes1_C\\otimes1_C)(\\rho\\otimes1_C)\\rho(k)=(q\\otimes1_C\\otimes1_C)(1_M\\otimes\\Delta)\\rho(k)=(1_{M/W}\\otimes\\Delta)f(k)=0$. The penultimate equality holds on every pure tensor and hence on their span. Apply [lem-weil-pbc-flat-tensor-exact] with the flat module $C$ to the exact sequence $0\\to K\\xrightarrow j M\\xrightarrow f(M/W)\\otimes_R C$. Thus $j\\otimes1_C$ is injective with image $\\ker(f\\otimes1_C)$, which contains $\\rho(K)$ by the calculation. For each $k$ there is therefore exactly one $\\rho_\\circ(k)\\in K\\otimes_R C$ mapping to $\\rho(k)$. Injectivity and linearity of $\\rho$ imply that this assignment is linear (compare images of sums and scalar multiples); the same injectivity proves uniqueness of the linear map.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coassociativity calculation completing Milne VIII Aside 4.7; Tag 00HD (lemma-flat), with Tag 00HB (definition-flat), for tensor preservation of the kernel sequence."
+   }
+  },
+  {
+   "text": "To check counitality, postcompose $(1_K\\otimes\\epsilon)\\rho_\\circ$ with the injection $j$: its composite is $(1_M\\otimes\\epsilon)\\rho j=j$, so it equals $1_K$. For coassociativity postcompose both sides with $j\\otimes1_C\\otimes1_C$, which is injective by applying [lem-weil-pbc-flat-tensor-exact] twice to an injection and the flat module $C$. The two composites are $(\\rho\\otimes1_C)\\rho j$ and $(1_M\\otimes\\Delta)\\rho j$, respectively, by $(j\\otimes1_C)\\rho_\\circ=\\rho j$ and functoriality of tensor on pure tensors. They agree by coassociativity on $M$. Cancel the injection.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent verification of the restricted coaction identities; Tag 00HD (lemma-flat) for the two tensor injections, and Tag 00CX (lemma-tensor-product) for functoriality."
+   }
+  },
+  {
+   "text": "Finally, let $U\\subseteq W$ satisfy the stated stability condition. The inclusion $i_U:U\\to M$ factors through $i_W$, hence $\\operatorname{im}(i_U\\otimes1_C)\\subseteq\\operatorname{im}(i_W\\otimes1_C)$ by tensor functoriality. For $u\\in U$, stability puts $\\rho(u)$ in the first image, hence in the second; the definition of $K$ gives $u\\in K$. This proves maximality.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent maximality argument for Milne VIII Aside 4.7; tensor functoriality from Tag 00CX (lemma-tensor-product)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent completion of the stable-core lemma in Milne, Basic Theory of Affine Group Schemes, VIII Aside 4.7, printed p.117 (read online at https://www.jmilne.org/math/CourseNotes/AGS.pdf; local copy WANTED), using Stacks Tags 00DF and 00HD. The kernel/coassociativity calculation and restriction identities are written explicitly here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The largest subcomodule inside a submodule of a comodule over a flat coalgebra is the inverse image under the coaction of the tensor of that submodule",
+   "results": "{\"t\": \"2026-10-24T06:58:00Z\", \"tool\": \"leansearch\", \"query\": \"The largest subcomodule inside a submodule of a comodule over a flat coalgebra is the inverse image under the coaction of the tensor of that submodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.comap\", \"Module.Flat.tensorSubmoduleAlgebraEquivMul\", \"Submodule.comap_subtype_eq_top\", \"Submodule.comap_subtype_self\", \"Submodule.comapSubtypeEquivOfLe_apply_coe\", \"Module.Flat.iff_lTensor_injectiveₛ\", \"Submodule.isCoatom_comap_iff\", \"Submodule.comapSubtypeEquivOfLe\"], \"digest\": \"359982c4511e39d4\"}; Read the hits: comap only constructs a linear inverse image; PicardGroup submoduleAlgebra requires a faithful algebra and a rank-one tensor equivalence, not a coaction; coalgebra tensor instances construct coalgebras, not stable cores; Coalgebra.IsFrobenius.instFinite needs a Frobenius algebra. None states the stable-core assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "comodule|subcomodule|coaction|coalgebra.*kernel",
+   "results": "{\"t\": \"2026-10-24T06:58:47Z\", \"tool\": \"grep\", \"query\": \"comodule|subcomodule|coaction|coalgebra.*kernel\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: comap only constructs a linear inverse image; PicardGroup submoduleAlgebra requires a faithful algebra and a rank-one tensor equivalence, not a coaction; coalgebra tensor instances construct coalgebras, not stable cores; Coalgebra.IsFrobenius.instFinite needs a Frobenius algebra. None states the stable-core assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Coalgebra, LinearMap.ker",
+   "results": "{\"t\": \"2026-10-24T06:58:47Z\", \"tool\": \"loogle\", \"query\": \"Coalgebra, LinearMap.ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: comap only constructs a linear inverse image; PicardGroup submoduleAlgebra requires a faithful algebra and a rank-one tensor equivalence, not a coaction; coalgebra tensor instances construct coalgebras, not stable cores; Coalgebra.IsFrobenius.instFinite needs a Frobenius algebra. None states the stable-core assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a submodule W of a comodule M over a flat coalgebra C over any commutative ring, the elements m with coaction in W tensor C form a subcomodule contained in W",
+   "results": "{\"t\": \"2026-10-24T06:58:51Z\", \"tool\": \"leanfinder\", \"query\": \"Given a submodule W of a comodule M over a flat coalgebra C over any commutative ring, the elements m with coaction in W tensor C form a subcomodule contained in W\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra\", \"Module.Flat.submoduleAlgebra\", \"Submodule.LinearDisjoint.of_left_le_one_of_flat\", \"Module.Flat.top_mul_submoduleAlgebra\", \"Submodule.LinearDisjoint.of_right_le_one_of_flat\", \"TensorProduct.instCoalgebraStruct\", \"Module.Flat.instInvertibleSubtypeMemSubmoduleSubmoduleAlgebra\", \"Subbimodule.coe_toSubmodule\"], \"digest\": \"6c8a518658da93fc\"}; Read the hits: comap only constructs a linear inverse image; PicardGroup submoduleAlgebra requires a faithful algebra and a rank-one tensor equivalence, not a coaction; coalgebra tensor instances construct coalgebras, not stable cores; Coalgebra.IsFrobenius.instFinite needs a Frobenius algebra. None states the stable-core assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The preimage of W tensor C under a counital coassociative coaction is the largest stable submodule contained in W for a flat coalgebra over a commutative ring",
+   "results": "{\"t\": \"2026-10-24T06:59:36Z\", \"tool\": \"leanfinder\", \"query\": \"The preimage of W tensor C under a counital coassociative coaction is the largest stable submodule contained in W for a flat coalgebra over a commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.submoduleAlgebra\", \"Module.Flat.top_mul_submoduleAlgebra\", \"Module.Flat.tensorSubmoduleAlgebraEquiv\", \"Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra\", \"TensorProduct.counit_def\", \"CoalgCat.MonoidalCategoryAux.counit_tensorObj\", \"TensorProduct.instCoalgebra\", \"Module.Flat.submoduleAlgebraEquiv\"], \"digest\": \"5b433924dd0ce7bd\"}; Read the hits: comap only constructs a linear inverse image; PicardGroup submoduleAlgebra requires a faithful algebra and a rank-one tensor equivalence, not a coaction; coalgebra tensor instances construct coalgebras, not stable cores; Coalgebra.IsFrobenius.instFinite needs a Frobenius algebra. None states the stable-core assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "comodule|subcomodule|coaction",
+   "results": "{\"t\": \"2026-10-24T07:25:09Z\", \"tool\": \"grep\", \"query\": \"comodule|subcomodule|coaction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: coalgebra/comonoid structures are definitions only; PicardGroup submoduleAlgebra requires a tensor equivalence with an algebra, not a comodule; le_comap_range tensor statements do not establish coaction stability; the Equalizer hit preserves equalizers under flat tensor but supplies no coaction. No hit states the stable-core lemma.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a flat coalgebra over a commutative ring the stable core of a submodule is a subcomodule",
+   "results": "{\"t\": \"2026-10-24T07:25:10Z\", \"tool\": \"leansearch\", \"query\": \"For a flat coalgebra over a commutative ring the stable core of a submodule is a subcomodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Coalgebra.toCoalgebraStruct\", \"CoalgCat.instCoalgebra\", \"CoalgCat.ofComonObj\", \"Ideal.stableFiltration_stable\", \"CoalgCat.instComonObjModuleCatOfCarrier\", \"CoalgCat.toComonObj\", \"CoalgCat.ofComonObjCoalgebraStruct\", \"CoalgCat.toComonObj_X\"], \"digest\": \"c1f625af455e8999\"}; Read hits: coalgebra/comonoid structures are definitions only; PicardGroup submoduleAlgebra requires a tensor equivalence with an algebra, not a comodule; le_comap_range tensor statements do not establish coaction stability; the Equalizer hit preserves equalizers under flat tensor but supplies no coaction. No hit states the stable-core lemma.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Coalgebra, LinearMap.ker",
+   "results": "{\"t\": \"2026-10-24T07:25:10Z\", \"tool\": \"loogle\", \"query\": \"Coalgebra, LinearMap.ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: coalgebra/comonoid structures are definitions only; PicardGroup submoduleAlgebra requires a tensor equivalence with an algebra, not a comodule; le_comap_range tensor statements do not establish coaction stability; the Equalizer hit preserves equalizers under flat tensor but supplies no coaction. No hit states the stable-core lemma.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The largest subcomodule contained in a submodule W of a comodule over a flat coalgebra is the inverse image of W tensor C under the coaction",
+   "results": "{\"t\": \"2026-10-24T07:25:12Z\", \"tool\": \"leanfinder\", \"query\": \"The largest subcomodule contained in a submodule W of a comodule over a flat coalgebra is the inverse image of W tensor C under the coaction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.top_mul_submoduleAlgebra\", \"Module.Flat.submoduleAlgebra\", \"Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra\", \"le_comap_range_lTensor\", \"le_comap_range_rTensor\", \"Module.Flat.tensorSubmoduleAlgebraEquiv\", \"Module.Flat.tensorSubmoduleAlgebraEquivMul\", \"LinearMap.lTensor_eqLocus_subtype_tensoreqLocusEquiv_symm\"], \"digest\": \"bad50f992521419b\"}; Read hits: coalgebra/comonoid structures are definitions only; PicardGroup submoduleAlgebra requires a tensor equivalence with an algebra, not a comodule; le_comap_range tensor statements do not establish coaction stability; the Equalizer hit preserves equalizers under flat tensor but supplies no coaction. No hit states the stable-core lemma.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The preimage under a counital coassociative coaction of W tensor C is the largest stable submodule contained in W when C is flat",
+   "results": "{\"t\": \"2026-10-24T07:26:16Z\", \"tool\": \"leanfinder\", \"query\": \"The preimage under a counital coassociative coaction of W tensor C is the largest stable submodule contained in W when C is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.top_mul_submoduleAlgebra\", \"Module.Flat.submoduleAlgebra\", \"Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra\", \"Module.Flat.submoduleAlgebraEquiv\", \"Module.Flat.tensorSubmoduleAlgebraEquiv\", \"Submodule.LinearDisjoint.of_left_le_one_of_flat\", \"Submodule.LinearDisjoint.of_right_le_one_of_flat\", \"Module.Flat.tensorSubmoduleAlgebraEquivMul\"], \"digest\": \"dd5d7da3b9504604\"}; Read hits: coalgebra/comonoid structures are definitions only; PicardGroup submoduleAlgebra requires a tensor equivalence with an algebra, not a comodule; le_comap_range tensor statements do not establish coaction stability; the Equalizer hit preserves equalizers under flat tensor but supplies no coaction. No hit states the stable-core lemma.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-comodule-finite-free-lattice",
+  "date": "2026-10-24",
+  "group": "Q105"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Milne, Basic Theory of Affine Group Schemes, VIII, Aside 4.7, printed p.117, together with Aside 9.4, printed pp.125--126 (the finite torsion-free module is free over a DVR). WANTED local copy; read https://www.jmilne.org/math/CourseNotes/AGS.pdf. No field-only subcomodule lemma is being applied. Supporting lemma: Aside 4.7, the subcomodule core of an arbitrary submodule, before choosing a finitely generated coefficient module.",
+   "via": [
+    "lem-sfb-dvr-comodule-finite-free-lattice",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-coalgebra-subcomodule-core",
+  "worker": "stage1",
+  "summary": "Q13 verified the unchanged arbitrary-ring statement against Milne VIII Aside 4.7 and supplied its omitted stability argument by identifying the core as the kernel of (q tensor 1)rho. Coassociativity and existing Mathlib leaves for right exactness and flat exactness give the unique restricted coaction. Both coaction identities and maximality are proved explicitly. No new nodes.",
+  "blueprint": "The existing blueprint.from.place locates the stable-core prerequisite of the DVR comodule lattice argument, ultimately supporting det-thm-sf-ctf-stability-direct-images proof (3). The five steps realize the stable-core lemma of Milne VIII Aside 4.7 only, before its finite-generation argument; chapter and unit routes unchanged. Blueprint-wide subcomodule search found no duplicate. The existing ancestor lookup returns None because a prior created.item is a Lean declaration rather than a node id; inherited provenance is retained.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-module-tensor-product",
+    "why": "Generic module tensor universal property, pure-tensor generation, and functoriality; the comodule argument needs precisely these algebraic tools."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-right-exact",
+    "why": "Generic tensor right exactness for W to M to M/W; existing Mathlib leaf, no replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic tensor preservation of kernel sequences for flat C; existing Mathlib leaf, no replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-412b34745",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-412b34745 (reviewer sub-agent of L); spot-checked: I read the item, all three cited nodes and Stacks algebra.tex 00DF/00HD/00HB/00CX; there are no new nodes. The item statement is unchanged and holds over any commutative ring with C flat; inline flatness matches def-weil-pbc-flat-ring-map. Step 1 (W° ⊆ W by counitality) is correct. Step 2 (W° = ker((q⊗1)ρ)) uses the statement of lem-weil-pbc-tensor-right-exact on W→M→M/W→0. Step 3: I checked the coassociativity computation (f⊗1)ρ = (1⊗Δ)f, which vanishes on K; the flat node's 0→N1→N2→N3 clause then gives j⊗1 injective with image ker(f⊗1), so ρ_∘ exists, is unique and is linear, with flatness assumed only for C. Step 4 cancels j and the injection (j⊗1)⊗1 (flatness used twice). Step 5 (maximality) uses functoriality. Small cases: W=0, W=M, C=R trivial, and the group-like Re0⊕Re1 with W=R(e0+e1) all give the expected core. The DAG's subcomodule/comodule nodes are field-only finiteness results, not duplicates, and no blueprint snapshot has a subcomodule duplicate (same_as []). The sole citer, the DVR lattice step 2, matches the item's hypotheses and conclusions. The three tool_uses are generic Mathlib leaves and are accepted. Not a re-split; Milne local copy is WANTED and the proof is agent-written. Maintainer note: blueprint.from.node null is inherited from the base node."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatCoalgebraSubcomoduleCore",
+  "declaration": "Coalgebra.flat_subcomodule_core",
+  "file": "lean/Sheaf/RingTheory/FlatCoalgebraSubcomoduleCore.lean",
+  "statement": "theorem flat_subcomodule_core {R : Type u} [CommRing R] {C : Type v} [AddCommGroup C] [Module R C] [Coalgebra R C] [Module.Flat R C] {M : Type w} [AddCommGroup M] [Module R M] (ρ : M →ₗ[R] M ⊗[R] C) (hρassoc : (TensorProduct.assoc R M C C).toLinearMap ∘ₗ ρ.rTensor C ∘ₗ ρ = (Coalgebra.comul (R := R) (A := C)).lTensor M ∘ₗ ρ) (hρcounit : (TensorProduct.rid R M).toLinearMap ∘ₗ (Coalgebra.counit (R := R) (A := C)).lTensor M ∘ₗ ρ = LinearMap.id) (W K : Submodule R M) (hK : K = (LinearMap.range (W.subtype.rTensor C)).comap ρ) : K ≤ W ∧ (∃ ρK : K →ₗ[R] K ⊗[R] C, K.subtype.rTensor C ∘ₗ ρK = ρ ∘ₗ K.subtype ∧ (TensorProduct.assoc R K C C).toLinearMap ∘ₗ ρK.rTensor C ∘ₗ ρK = (Coalgebra.comul (R := R) (A := C)).lTensor K ∘ₗ ρK ∧ (TensorProduct.rid R K).toLinearMap ∘ₗ (Coalgebra.counit (R := R) (A := C)).lTensor K ∘ₗ ρK = LinearMap.id ∧ ∀ ρK' : K →ₗ[R] K ⊗[R] C, K.subtype.rTensor C ∘ₗ ρK' = ρ ∘ₗ K.subtype → ρK' = ρK) ∧ ∀ U : Submodule R M, U ≤ W → U ≤ (LinearMap.range (U.subtype.rTensor C)).comap ρ → U ≤ K",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-99677e6a1",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read node, stmt_dep def-weil-pbc-module-tensor-product (Mathlib TensorProduct/rTensor), module, report (Worker report + Second reading by Q23), Mathlib Coalgebra class (coassoc/counit axioms only) and Module.Flat. Clause match: CommRing R; C with [Coalgebra R C][Module.Flat R C] = flat coalgebra, no finiteness; hρassoc/hρcounit use assoc/rid exactly as Mathlib coassoc; K fixed by hK = comap ρ (range (W.subtype.rTensor C)); conclusions K ≤ W, ∃ ρK with square, coassoc, counit and uniqueness from the square alone, maximality over all U ≤ W with ρ(U) ⊆ im(i_U⊗1). Universes u v w independent, autoImplicit off, lean.statement verbatim in file, node unchanged apart from lean vs live. Edge cases W=0, W=M, M=0, zero ring, C=0, C=R, group-like diagonal line covered. No H4 duplicate (project comodule nodes are field/finite; Coaction structures are Hopf-specific, theorem-owned); stmt_deps complete. One sorry, docstrings with source + blueprint + 5-step plan, no definitions, no pro-etale. No file changed, so no recompile; worker reports a clean scompile."
+ }
+}

@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-unpointed-stable-coarse-projective",
+ "kind": "statement",
+ "title": "Projectivity of the unpointed stable coarse moduli scheme",
+ "statement": "Let $k$ be any field and $g\\geq2$. The unpointed stable genus-$g$ moduli groupoid $\\overline{\\mathcal M}_{g,0}$ over $k$, with objects, arrows and coarse-moduli convention as in [def-sfb-stable-pointed-moduli-groupoids], is a smooth Deligne--Mumford stack with a finite-type projective coarse moduli $k$-scheme $Q_g$. Projective for $Q_g$ is the finite-projective-space convention [def-kun-projective]. The smooth-family subcategory $\\mathcal M_{g,0}$ is a dense open substack. This holds in arbitrary characteristic and without a marking. The field, finite-type and etale notions are [def-weil-field], [def-weil-finite-type-morphism] and [def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0E9C, theorem-stable-smooth-proper, for the smooth Deligne--Mumford stack and dense smooth locus; projective coarse moduli: D. Mumford, The structure of the moduli spaces of curves and abelian varieties, ICM Nice (1970), printed p.462 (projectivity over Z, joint work with Knudsen and Seshadri). Also de Jong 1996 Section 2.24. Mumford PDF local WANTED; primary author scan read online.",
+  "url": "https://www.dam.brown.edu/people/mumford/alg_geom/papers/1970b--ICMNice-IMU.pdf"
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-kun-projective",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The nodal-stack theorem makes $\\mathfrak N_k$ algebraic and smooth over $k$. The stable-open theorem identifies our exact scheme/projective-bundle groupoid with its fixed-genus stable open. Restricting the smooth atlas to this open gives algebraicity and smoothness of $\\overline{\\mathcal M}_{g,0}$.",
+   "uses": [
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-stable-and-smooth-family-open-loci"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E9C, theorem-stable-smooth-proper, smoothness and DM arguments through 0E79 and 0E7A"
+   }
+  },
+  {
+   "text": "At a geometric stable $C/\\Omega$, take zero markings in the infinitesimal-fields theorem. Stability gives $2g(C_a)-2+\\#E_a>0$ on every normalized component: at least three branches in genus zero, at least one in genus one, and positivity in higher genus. Thus infinitesimal automorphisms vanish. The DM-locus criterion's final clause applies to this entire stable open, making it DM in every characteristic.",
+   "uses": [
+    "lem-sfb-marked-nodal-infinitesimal-fields",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "def-sfb-stable-pointed-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E9C, theorem-stable-smooth-proper, smoothness and DM arguments through 0E79 and 0E7A"
+   }
+  },
+  {
+   "text": "The smooth-family theorem supplies the base-change-compatible smooth open. For each geometric stable $C/\\Omega$, choose a projective frame of its rank-$19(g-1)$ ten-canonical section space, supplied by the parameter theorem. The existing framed-trait-smoothing theorem gives a stable family over $\\Omega[[t]]$ with special fibre $C$ and smooth generic fibre. Apply the trait/chart density lemma to this open: on any etale scheme atlas supplied by step 2 its pullback is dense. Smoothness from step 1 makes this atlas smooth over $k$.",
+   "uses": [
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-stable-curve-framed-trait-smoothing",
+    "lem-sfb-trait-specialization-etale-chart-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0E86 (lemma-smooth-dense), 0E87 (lemma-smooth-dense-in-stable), using examples-defos.tex Tag 0E7Y and curves.tex Tag 0C4E"
+   }
+  },
+  {
+   "text": "Set $r=19(g-1)\\geq19$ and $P(m)=20(g-1)m+1-g$. The parameter theorem supplies projective finite-type $Z$, invariant locally closed $J$ and $G=\\operatorname{PGL}_{r,k}$, with the equivalence to our moduli groupoid, preserving all arrows. Its projective-frame torsors are Zariski locally trivial and permit base-line twists.",
+   "uses": [
+    "lem-sfb-ten-canonical-hilbert-parameter"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.3, Definition 9, Proposition 10, Corollary 11 and paragraph thereafter; Section 3.4 projectivity, pp.15--18; local PDF WANTED, read online"
+   }
+  },
+  {
+   "text": "For sufficiently large $m$, Gieseker's theorem supplies an ample $G$-linearized positive Hilbert--Pluecker power $A$ with $J\\subset Z^s(A)$ and $J\\hookrightarrow Z^{ss}(A)$ closed. These give exactly the stable inclusion and semistable closedness required by the quotient theorem over our arbitrary field; no invertibility of $r$ is assumed.",
+   "uses": [
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.3, Definition 9, Proposition 10, Corollary 11 and paragraph thereafter; Section 3.4 projectivity, pp.15--18; local PDF WANTED, read online"
+   }
+  },
+  {
+   "text": "Apply the projective PGL quotient theorem to $(Z,A,J,G)$: step 4 gives projectivity and finite type of $Z$ and $r\\geq1$, and step 5 gives its polarized stable closed locus. Obtain finite-type projective $Q_g$ and invariant $q:J\\to Q_g$, with algebraic-space universality and geometric orbit bijections. Its Veronese clause gives exactly [def-kun-projective].",
+   "uses": [
+    "lem-sfb-projective-pgl-stable-quotient",
+    "def-kun-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.3, Definition 9, Proposition 10, Corollary 11 and paragraph thereafter; Section 3.4 projectivity, pp.15--18; local PDF WANTED, read online"
+   }
+  },
+  {
+   "text": "Use the parameter equivalence of step 4 with the Zariski torsors specified there. The coarse-descent lemma applied to $q$ of step 6 gives $\\pi:\\overline{\\mathcal M}_{g,0}\\to h_{Q_g}$. For every algebraic space $B/k$, its invariant-map correspondence and the categorical bijection for $q$ identify maps $Q_g\\to B$ with maps $\\overline{\\mathcal M}_{g,0}\\to B$. Its geometric-class clause gives the bijection to $Q_g(\\Omega)$. These are exactly the current coarse definition for $S=\\operatorname{Spec}k$ and zero markings. Steps 1--3 and 6 supply the remaining clauses.",
+   "uses": [
+    "lem-sfb-zariski-torsor-categorical-coarse-descent",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 04UV (section-group-quotient-stacks); groupoids-quotients.tex Tags 048F (lemma-invariant), 048J (definition-categorical); torsor descent expanded in the cited general lemma"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-nodal-curve-stack-smooth",
+  "lem-sfb-stable-and-smooth-family-open-loci",
+  "lem-sfb-marked-nodal-infinitesimal-fields",
+  "lem-sfb-curve-stack-infinitesimal-dm-locus",
+  "def-sfb-stable-pointed-curve",
+  "lem-sfb-ten-canonical-hilbert-parameter",
+  "lem-sfb-stable-curve-framed-trait-smoothing",
+  "lem-sfb-trait-specialization-etale-chart-density",
+  "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+  "lem-sfb-projective-pgl-stable-quotient",
+  "def-kun-projective",
+  "lem-sfb-zariski-torsor-categorical-coarse-descent",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tags 0E79, 0E7A, 0E86, 0E87; retained Hilbert/GIT assembly over existing nodes and torsor descent expansion of 04UV/048F/048J"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The coarse moduli space of stable curves of genus at least two over a field is a projective scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) [IsAffine X] : CompactSpace X\", \"doc\": \"Every affine scheme is a compact space, meaning its underlying topological space satisfies the finite open cover condition for compactness.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": IsStableUnderComposition @UniversallyClosed\", \"doc\": \"The property of being universally closed is stable under composition of morphisms of schemes. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are universally closed morphisms of schemes, then their comp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCoeSortType\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": CoeSort Scheme Type*\", \"doc\": \"Every scheme can be canonically coerced to its underlying topological space, given by the carrier function that extracts the spatial component of the scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty\", \"module\": \"Mathlib.AlgebraicGeometry.LimitsOver\", \"type\": \": HasFiniteCoproducts (P.Over ⊤ S)\", \"doc\": \"The category of morphisms over schemes with the top morphism property (which is always true for any morphism) has finite coproducts.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \": QuasiSober X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not define stable-curve moduli or assert this moduli theorem; scheme normalization, ordinary scheme covers, and elliptic Weierstrass models do not supply it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projectivity of the coarse moduli scheme of stable curves in arbitrary characteristic",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"CategoryTheory.Projective.projective_over\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Projective/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.EnoughProjectives C] (X : C),\\n  CategoryTheory.Projective (CategoryTheory.Projective.over X)\", \"doc\": \"For any object $X$ in a category with enough projectives, the projective object $P$ over $X$ (equipped with an epimorphism $P \\twoheadrightarrow X$) is projective. This asserts that in such a category,\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not define stable-curve moduli or assert this moduli theorem; scheme normalization, ordinary scheme covers, and elliptic Weierstrass models do not supply it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Coarse\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not define stable-curve moduli or assert this moduli theorem; scheme normalization, ordinary scheme covers, and elliptic Weierstrass models do not supply it"
+  },
+  {
+   "tool": "grep",
+   "query": "coarseModuli|coarse_moduli|moduli.*curve",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"57\", \"text\": \"* [N Katz and B Mazur, *Arithmetic Moduli of Elliptic Curves*][katz_mazur]\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not define stable-curve moduli or assert this moduli theorem; scheme normalization, ordinary scheme covers, and elliptic Weierstrass models do not supply it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coarse moduli scheme of stable unpointed curves of genus at least two is projective over any field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.toProjective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → WeierstrassCurve R → WeierstrassCurve.Projective R\", \"doc\": \"The function that maps a Weierstrass curve $ W $ over a ring $ R $ to its projective counterpart, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {K : Type u} [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.UniversallyClosed f], CompactSpace ↥X\", \"doc\": \"If $ f: X \\\\to \\\\operatorname{Spec}(K) $ is a universally closed morphism of schemes, where $ K $ is a field, then the underlying topological space of $ X $ is compact.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsProper g],\\n  AlgebraicGeometry.IsProper (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: none of the hits supplies stable-curve moduli or its projective coarse quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stable curves have a smooth Deligne Mumford moduli stack with projective coarse space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f] [AlgebraicGeometry.IsSmoothOfRelativeDimension 0 g],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are smooth of relative dimension 0 is also smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every open immersion of schemes is a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: none of the hits supplies stable-curve moduli or its projective coarse quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Moduli\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: none of the hits supplies stable-curve moduli or its projective coarse quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "coarseModuli|coarse_moduli|stableCurve|stable_curve",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: none of the hits supplies stable-curve moduli or its projective coarse quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coarse moduli scheme of stable unpointed curves of genus at least two is projective over any field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsIntegralHom f] : UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": IsStableUnderBaseChange @UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"CategoryTheory.Limits.HasFiniteCoproducts AlgebraicGeometry.Scheme\", \"doc\": \"The category of schemes has finite coproducts.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \": Scheme.IsSeparated (Proj 𝒜)\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: none of the hits supplies stable-curve moduli or its projective coarse quotient"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-stable-pointed-level-parameter",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme.",
+   "via": [
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-unpointed-stable-coarse-projective",
+  "worker": "stage1",
+  "summary": "Repair D1/G2 and C5: retain five assembly steps over existing nodes with their hypotheses; reuse the existing framed smoothing in step 3 and add only the general trait-to-etale-chart density argument and the categorical-quotient-to-coarse torsor descent argument. Two statement-only new nodes; no Mathlib leaves; statement unchanged. Repair of refused side-completion landing: rebased onto the current DAG, reread all thirteen cited statements, revalidated every literal citation, made the DM etale-atlas choice explicit in step 3, and corrected step 7 source to the actual quotient/descent references. Current statement, statement dependencies, Lean interface and maintainer metadata retained. Current-DAG repair retry (2026-10-23): rebuilt from the current repository node, re-read all cited statements and preserved both new nodes and their searches; step 7 now writes the resulting functor and both bijections explicitly, specialized to the current coarse-moduli definition. The supporting statements and target statement are unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. This is the projective unpointed coarse-moduli prerequisite for the level compactification used in stable generic extension; the new steps expand that prerequisite without changing the alteration route.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-trf-nodal-curve-lci-criterion",
+  "lem-trf-nodal-family-fitting-singular"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-5298c6df6",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-5298c6df6 (reviewer sub-agent of L); spot-checked: This is the third push of the Q102 split, after 24d9452a (PASS) and de3abe22 (PASS). Both landings were refused with 'completed in this project's DAG but not in the live DAG', which is a promotion issue, not a mathematical fault. I diffed this head against de3abe22 field by field. Both new nodes, lem-sfb-trait-specialization-etale-chart-density and lem-sfb-zariski-torsor-categorical-coarse-descent, are byte-identical (sha256 c83f0eaa, bb9bade0). In the item, only the step-7 text and the split_report changed. The statement, stmt_deps, proof_deps, all step uses and sources, and lean/tool_uses are unchanged, and all 13 cited statements have the same md5 as in the de3a snapshot. I re-read steps 1-6 against the cited nodes: nodal-stack smooth plus the stable open; n=0 infinitesimal fields giving DM; a frame plus framed-trait-smoothing plus the density node; r=19(g-1) with P(m)=20(g-1)m+1-g (g=2 gives r=19, P=20m-1); Gieseker stable/semistable-closed with no characteristic condition; the PGL quotient, projective via Veronese/def-kun-projective. I checked the new step-7 wording in full. The descent node gives Hom(F,B)≅Inv(J,B) with ∘π matching ∘q, and q's categorical bijection gives Hom(Q,B)≅Inv(J,B), so φ↦φ∘π is a bijection Hom(Q,B)→Hom(F,B) for every algebraic space B/k. The geometric-class clause gives F(Ω)/≅ ≅ Q(Ω). Together these are exactly the coarse clauses of def-sfb-stable-pointed-moduli-groupoids for S=Spec k and zero markings. The new nodes are true and are general lemmas, not restatements (Stacks 04GG/0E86 trait lift; 04UV/048F/048J torsor descent). The re-split shape matches the earlier RETURN repair. No SGA, no cycle, no duplicate. Advisory: tool_uses still lists the uncited lem-trf nodal lci/fitting nodes. Maintainer: this needs side-to-live promotion; it is the same mathematics PASSed three times."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnpointedStableCoarseProjective",
+  "declaration": "AlgebraicGeometry.unpointed_stable_coarse_projective",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnpointedStableCoarseProjective.lean",
+  "statement": "theorem unpointed_stable_coarse_projective (k : Type u) [Field k] (g : ℕ) (hg : 2 ≤ g) : IsDeligneMumfordModuliStack (BasedCategory.ofFunctor (StablePointedModuli.forget (Spec (.of k)) g 0)) ∧ (∃ (Q : Over (Spec (.of k))) (π : BasedFunctor (BasedCategory.ofFunctor (StablePointedModuli.forget (Spec (.of k)) g 0)) (discreteModuli (yoneda.obj Q))), IsCoarseModuliScheme (BasedCategory.ofFunctor (StablePointedModuli.forget (Spec (.of k)) g 0)) Q π ∧ LocallyOfFiniteType Q.hom ∧ QuasiCompact Q.hom ∧ IsHProjective Q.hom) ∧ (∀ X : StablePointedModuli (Spec (.of k)) g 0, ∃ V : X.base.left.Opens, ∀ (T : Over (Spec (.of k))) (b : T ⟶ X.base), Smooth (pullback.snd X.projection b.left) ↔ Set.range b.left ⊆ (V : Set X.base.left)) ∧ (∃ (U : Over (Spec (.of k))) (a : BasedFunctor (discreteModuli (yoneda.obj U)) (BasedCategory.ofFunctor (StablePointedModuli.forget (Spec (.of k)) g 0))), Smooth U.hom ∧ (∀ (T : Over (Spec (.of k))) (t : BasedFunctor (discreteModuli (yoneda.obj T)) (BasedCategory.ofFunctor (StablePointedModuli.forget (Spec (.of k)) g 0))), ∃ (Z : AlgebraicSpace (Spec (.of k))) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange a T t Z p ∧ SpaceMapIsEtale Z T p ∧ SpaceMapIsSurjective Z T p) ∧ ∃ V : U.left.Opens, Dense (V : Set U.left) ∧ ∀ (T : Over (Spec (.of k))) (b : T ⟶ U), Smooth (a.toFunctor.obj (CostructuredArrow.mk (yoneda.map b))).projection ↔ Set.range b.left ⊆ (V : Set U.left))",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf187cd2d",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Item node unchanged vs side-live except lean; statement verbatim in file. Clause check vs StablePointedModuliGroupoids: any field + 2≤g only; M̄_{g,0}=ofFunctor(StablePointedModuli.forget (Spec k) g 0) with Fin 0 markings; DM via the dep predicate; smoothness = étale surjective atlas with Smooth U.hom (equivalent for DM stacks); IsCoarseModuliScheme + LocallyOfFiniteType∧QuasiCompact (finite-type record) + IsHProjective (def-kun-projective record); smooth locus open via a uniquely pinned base open (pullback smooth ⇔ range ⊆ V, correct for flat proper curves); density on the étale atlas with V pinned by the pulled-back atlas family, equivalent to density in the stack. Edge cases g=2, char 2/3, imperfect k, empty T, universes OK. No hollow defs, sorry only, source/blueprint/7-step docstrings, no pro-étale substitute, report sections present. Advisory: second reading by the same worker; proof-only plain imports unused by the statement."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -188,7 +188,18 @@
   "thm-weil-pbc-site-comparison"
  ],
  "proof_split_by": "labels",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-comparison",
  "split_report": {
@@ -311,5 +322,40 @@
   "landing": "20261019T002614-L-2159645",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a ring and let $T$ be a scheme.\n\n1. *locality for covering families.* Let $\\{g_i\\colon W_i\\to T\\}$ be a\npro-etale covering family. A morphism $\\varphi\\colon F\\to G$ of sheaves of\n$\\Lambda$-modules on $T_{\\Proet}$ is an isomorphism if and only if every\ninverse image $g_i^*\\varphi$ is an isomorphism. Consequently a sheaf on\n$T_{\\Proet}$ vanishes if and only if its inverse images along all $g_i$\nvanish, and a morphism of complexes of $\\Lambda$-module sheaves on $T_{\\Proet}$\nis a quasi-isomorphism if and only if its inverse images along all $g_i$ are.\n1. *detection on the affine pro-etale site.* Call an object of $T_{\\Proet}$\naffine pro-etale if it is a cofiltered limit of affine etale $T$-schemes. A\nmorphism of sheaves on $T_{\\Proet}$ is an isomorphism if it induces an\nisomorphism on sections over every affine pro-etale object; in particular a\nsheaf vanishes if its sections over every affine pro-etale object vanish. A\nshort complex of sheaves on $T_{\\Proet}$ is exact if its sections over every\naffine pro-etale object form an exact sequence; consequently a morphism of\ncomplexes is a quasi-isomorphism if it induces quasi-isomorphisms of sections\nover every affine pro-etale object.\n1. *complexes of etale origin.* Let $\\nu_T\\colon T_{\\Proet}\\to T_{\\Et}$ be the\ncomparison morphism of [def-weil-pbc-site-comparison-morphism] and let\n$\\varphi\\colon F'\\to G'$ be a morphism of etale $\\Lambda$-module sheaves. Then\n$\\nu_T^*\\varphi$ is an isomorphism if and only if $\\varphi$ is, if and only if\n$\\varphi$ induces an isomorphism of geometric stalks at the geometric point\n$\\bar s$ over every point $s\\in T$, at an algebraic closure of\n$\\kappa(s)$. For a morphism $\\varphi$ of bounded-below complexes of etale\n$\\Lambda$-module sheaves, $\\nu_T^*\\varphi$ is an isomorphism in the derived\ncategory if and only if $\\varphi$ is. This applies to the bounded constructible\nobjects of $\\Dbc(T_{\\Proet},\\Lambda)$, which are of etale origin by\n[def-weil-pbc-proetale-modules].",
+  "proof": [
+   {
+    "text": "*Step 1 (clause (1)).* For a weakly etale $g_i$, the inverse image $g_i^*$ is\nrestriction to the slice of $T_{\\Proet}$ over $W_i$\n([lem-weil-pbc-proetale-restriction-injectives]). A morphism of sheaves is an\nisomorphism as soon as its restrictions to the slices over the members of a\nfamily covering the final object are isomorphisms: bijectivity on sections\nover an object $V$ follows from the sheaf condition for the covering\n$\\{V\\times_TW_i\\to V\\}$, on whose members the morphism is bijective. The\nconverse is functoriality. A sheaf vanishes if and only if its map to $0$ is\nan isomorphism. Inverse image along $g_i$ is exact, so it commutes with\ncohomology sheaves of complexes, and a morphism of complexes is a\nquasi-isomorphism if and only if it induces isomorphisms on all cohomology\nsheaves; apply the sheaf statement to these.",
+    "uses": [
+     "lem-weil-pbc-proetale-restriction-injectives"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 2 (clause (2)).* The affine pro-etale objects form a dense subsite of\n$T_{\\Proet}$: every object is covered by them ([lem-weil-pbc-ind-etale-basis],\napplied over the affine opens of $T$).\nRestriction to this subsite is therefore faithful and reflects isomorphisms of\nsheaves, and a morphism of sheaves which is bijective on sections over all\naffine pro-etale objects is an isomorphism. For a short complex, the\nrestriction to the subsite is the sheafification of the presheaf complex of\nsections, which is exact by hypothesis; sheafification is exact, and\nrestriction to the dense subsite reflects exactness. Applying this to the\nshort complexes computing the cohomology sheaves of the cone gives the\nassertion on quasi-isomorphisms.",
+    "uses": [
+     "lem-weil-pbc-ind-etale-basis"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 3 (clause (3)).* The functor $\\nu_T^*$ is fully faithful on module\nsheaves (the unit $F'\\to\\nu_{T,*}\\nu_T^*F'$ is an isomorphism), so it reflects\nisomorphisms: if $\\nu_T^*\\varphi$ is invertible with inverse $\\psi$, then\n$\\psi=\\nu_T^*\\chi$ for a unique $\\chi$, and $\\chi$ is inverse to $\\varphi$ by\nfaithfulness. The converse is functoriality. Isomorphisms of etale sheaves are\ndetected on the geometric stalks at the points $\\bar s$ by\n[lemma-weil-pbc-geometric-stalk-conservative]. For bounded-below complexes,\n$\\nu_T^*$ is fully faithful on $\\Dplus$ by [thm-weil-pbc-site-comparison], and\nthe same argument shows that it reflects isomorphisms. The last assertion is\nthe definition of $\\Dbc(T_{\\Proet},\\Lambda)$ in\n[def-weil-pbc-proetale-modules] as the pullbacks of the bounded constructible\netale objects.",
+    "uses": [
+     "lemma-weil-pbc-geometric-stalk-conservative",
+     "thm-weil-pbc-site-comparison",
+     "def-weil-pbc-proetale-modules"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

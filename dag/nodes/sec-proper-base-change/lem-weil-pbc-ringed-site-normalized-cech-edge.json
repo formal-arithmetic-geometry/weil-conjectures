@@ -1,0 +1,171 @@
+{
+ "id": "lem-weil-pbc-ringed-site-normalized-cech-edge",
+ "kind": "statement",
+ "title": "Unique normalized Cech edge for arbitrary module coefficients",
+ "statement": "For a small site C with precoverage J satisfying the site axioms, a sheaf of rings R with enough injectives in its module category, a module M, and a finite covering U_i → X with a chosen SiteCechComplex S, every natural degree q has a unique map from H^q(S.complex M) to right-derived evaluation of M at X satisfying S.IsNormalizedEdge. Neither terminality of X nor acyclicity of M is required. Notation: sites and their evaluation functors are [def-weil-pbc-sites-and-cohomology]; module categories are [def-weil-sheaf-of-modules-category]; injective resolutions are [def-sp-injective-resolutions]. The chosen Cech complex is [def-weil-pbc-site-cech-complex], its signed first-quadrant total is [def-sp-double-complex-total], and its augmentations and normalization are [def-weil-pbc-site-cech-edge-normalization].",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-site-cech-complex",
+  "def-sp-double-complex-total",
+  "def-weil-pbc-site-cech-edge-normalization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03AX (lemma-cech-cohomology) and 03FC (lemma-injective-module-trivial-cech); the proof reuses the proved private augmentation construction of AcyclicCechEdgeCompatibility without its coefficient-acyclicity hypothesis."
+ },
+ "proof": [
+  {
+   "text": "Construct restriction alpha and coefficient augmentation beta as actual maps to the Cech-first total. Degreewise naturality and the coefficient augmentation identity prove they are chain maps.",
+   "uses": [
+    "def-weil-pbc-site-cech-edge-normalization",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03AX (lemma-cech-cohomology) and 03FC (lemma-injective-module-trivial-cech); the proof reuses the proved private augmentation construction of AcyclicCechEdgeCompatibility without its coefficient-acyclicity hypothesis."
+   }
+  },
+  {
+   "text": "The sheaf equalizer identifies degree-zero row cohomology with global sections. Injective module Cech acyclicity kills all positive rows, so first-quadrant column augmentation proves alpha is a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+    "lem-sc-first-quadrant-column-augmentation",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03AX (lemma-cech-cohomology) and 03FC (lemma-injective-module-trivial-cech); the proof reuses the proved private augmentation construction of AcyclicCechEdgeCompatibility without its coefficient-acyclicity hypothesis."
+   }
+  },
+  {
+   "text": "Define the edge by H(beta), inverse H(alpha), and the inverse injective-resolution comparison. A strict resolution comparison commutes with alpha by restriction naturality and beta by its augmentation identity. Apply homology and the canonical resolution-comparison naturality to prove the edge equation for every resolution.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-site-cech-edge-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03AX (lemma-cech-cohomology) and 03FC (lemma-injective-module-trivial-cech); the proof reuses the proved private augmentation construction of AcyclicCechEdgeCompatibility without its coefficient-acyclicity hypothesis."
+   }
+  },
+  {
+   "text": "The prescribed degreewise formulas force any two augmentations to agree. Evaluate two normalized edges at one injective resolution and cancel its canonical comparison and invertible H(alpha), proving uniqueness.",
+   "uses": [
+    "def-weil-pbc-site-cech-edge-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03AX (lemma-cech-cohomology) and 03FC (lemma-injective-module-trivial-cech); the proof reuses the proved private augmentation construction of AcyclicCechEdgeCompatibility without its coefficient-acyclicity hypothesis."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-edge-normalization",
+  "def-sp-double-complex-total",
+  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+  "lem-sc-first-quadrant-column-augmentation",
+  "def-weil-pbc-site-cech-complex",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03AX (lemma-cech-cohomology) and 03FC (lemma-injective-module-trivial-cech); the proof reuses the proved private augmentation construction of AcyclicCechEdgeCompatibility without its coefficient-acyclicity hypothesis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cech to sheaf cohomology edge comparison commutes with cover refinement on ringed sites",
+   "results": "8 hits: module presentation and sheafification restriction identities; no normalized Cech edge or ringed-site roof theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNormalizedEdge\"",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(refinement|edge|comparison)",
+   "results": "Mathlib search: 0 hits. Local library: AcyclicCechEdgeCompatibility has proved private augmentation helpers; its public edge theorem assumes coefficient acyclicity and cannot give the arbitrary-coefficient result. No public ringed module replacement roof or SiteCechComplex refinement pentagon found.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech augmentation normalized edge exists for injective resolutions of module sheaves",
+   "results": "8 hits: injective resolution constructions and abstract augmented Cech conerve; no match for these comparison statements.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSiteCechRefinementSquare",
+  "date": "2026-10-25",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Tags 03AX (lemma-cech-cohomology) and 03FC (lemma-injective-module-trivial-cech); the proof reuses the proved private augmentation construction of AcyclicCechEdgeCompatibility without its coefficient-acyclicity hypothesis.",
+   "via": [
+    "lem-weil-pbc-ringed-site-cech-refinement-square",
+    "lem-weil-pbc-qcoherent-cohomology-comparison-pullback",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedSiteNormalizedCechEdge",
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteNormalizedCechEdge.lean",
+  "declaration": "CategoryTheory.ringedSite_normalized_cech_edge",
+  "statement": "theorem ringedSite_normalized_cech_edge\n    {C : Type u} [SmallCategory C]\n    (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]\n    [J.IsStableUnderBaseChange] [J.HasPullbacks]\n    (R : Sheaf J.toGrothendieck RingCat.{u})\n    [EnoughInjectives (ringedSiteModules.{u} R)]\n    (M : ringedSiteModules.{u} R)\n    {X : C} {I : Type u} [Finite I]\n    (U : I → C) (v : ∀ i, U i ⟶ X)\n    (hU : Presieve.ofArrows U v ∈ J X) (S : SiteCechComplex U v) (q : ℕ) :\n    ∃! e : (S.cohomologyFunctor q).obj M.val.presheaf ⟶\n      (((SheafOfModules.forget R ⋙ PresheafOfModules.toPresheaf R.obj) ⋙\n        (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op X)).rightDerived q).obj M,\n      S.IsNormalizedEdge (SheafOfModules.forget R ⋙\n        PresheafOfModules.toPresheaf R.obj) q e",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-06351",
+  "group": "W2",
+  "result": "fix",
+  "landing": "20261025T101719-L-3727611",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-06351",
+  "group": "W2",
+  "result": "fix",
+  "landing": "20261025T101719-L-3727611",
+  "kind": "interface",
+  "note": "independent cc review: rest/parent/abelian Lean and the 3 new modules against their nodes, the change record and the clone; roof/pentagon sorry statements against Stacks 01FD/03FC/08J6 and the existing direct-image acyclicity lemma; sandbox compile of the delivered modules + both direct importers + #print axioms"
+ }
+}

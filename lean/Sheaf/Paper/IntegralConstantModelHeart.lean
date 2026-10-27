@@ -19,22 +19,16 @@ public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
 public import Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import Mathlib.CategoryTheory.EssentiallySmall
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
-import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.IntegralModels
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.CartesianCoefficients
-import Sheaf.Paper.DerivedNakayamaFirstReduction
-import Sheaf.Paper.IntegralHeartLocalModel
-import Sheaf.Paper.IntegralModels
+import all Sheaf.Paper.IntegralConstantModelHeartClosure
+import Mathlib.CategoryTheory.Abelian.Subcategory
+import Sheaf.AlgebraicGeometry.ConstructibleModuleObjectsEssentiallySmall
+import Sheaf.Paper.CohomologyInWeakSerreSubcategory
+import Sheaf.Paper.ContinuousCoefficientModuleEncoding
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 
 /-!
 # The integral constant-model constructible category and its heart
@@ -54,6 +48,7 @@ set_option autoImplicit false
 universe u v
 
 open CategoryTheory CategoryTheory.Limits
+open scoped ZeroObject CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -74,6 +69,281 @@ noncomputable abbrev integralHeartCoefficientRingObj
   letI := spectralNorm.normedField (Padic ℓ) (Shrink.{0} E)
   Profinite.continuousMapRingObj (Padic.coefficientExtensionIntegers ℓ (Shrink.{0} E))
 
+private theorem smallIntegralCoefficientIso (ℓ : ℕ) [Fact ℓ.Prime]
+    (L : Type) [NormedField L] [NormedAlgebra ℚ_[ℓ] L]
+    [FiniteDimensional ℚ_[ℓ] L] :
+    Nonempty (Mon.mk (integralCondensedRing ℓ (ULift.{u} L)) ≅
+      Mon.mk (Profinite.continuousMapRingObj.{u} (Padic.coefficientExtensionIntegers ℓ L))) := by
+  let F := ULift.{u} L
+  let : NormedField F :=
+    { (inferInstance : Field F), (inferInstance : NormedCommRing F) with
+      dist_eq x y := dist_eq_norm_neg_add x.down y.down
+      norm_mul x y := norm_mul x.down y.down }
+  let : NormedAlgebra ℚ_[ℓ] F := ⟨fun a x ↦ by
+    change ‖a • x.down‖ ≤ ‖a‖ * ‖x.down‖
+    exact norm_smul_le a x.down⟩
+  let : FiniteDimensional ℚ_[ℓ] F :=
+    (ULift.moduleEquiv (R := ℚ_[ℓ]) (M := L)).symm.finiteDimensional
+  let A := latticeCoefficientIntegers ℓ F
+  let e : WithAbs (Padic.coefficientExtensionAbsoluteValue ℓ F) ≃+* L :=
+    (WithAbs.equiv _).trans ULift.ringEquiv
+  have he (x : WithAbs (Padic.coefficientExtensionAbsoluteValue ℓ F)) : ‖e x‖ = ‖x‖ := by
+    change ‖(WithAbs.equiv _ x).down‖ = spectralNorm ℚ_[ℓ] F (WithAbs.equiv _ x)
+    exact NormedAlgebra.norm_eq_spectralNorm ℚ_[ℓ] (L := F) (WithAbs.equiv _ x)
+  have hmem (x : WithAbs (Padic.coefficientExtensionAbsoluteValue ℓ F)) :
+      x ∈ A ↔ e x ∈ Padic.coefficientExtensionIntegers ℓ L := by
+    have hm := (Padic.extension_integers_dvr ℓ F
+      (Padic.coefficientExtensionAbsoluteValue ℓ F)
+      (spectralNorm_extends (K := ℚ_[ℓ]) (L := F))).choose_spec.choose_spec.1
+    change WithAbs.equiv _ x ∈ Padic.coefficientExtensionIntegers ℓ F ↔ _
+    change ∀ y : F, y ∈ Padic.coefficientExtensionIntegers ℓ F ↔
+      Padic.coefficientExtensionAbsoluteValue ℓ F y ≤ 1 at hm
+    have hmL := (Padic.extension_integers_dvr ℓ L
+      (Padic.coefficientExtensionAbsoluteValue ℓ L)
+      (spectralNorm_extends (K := ℚ_[ℓ]) (L := L))).choose_spec.choose_spec.1
+    change ∀ y : L, y ∈ Padic.coefficientExtensionIntegers ℓ L ↔
+      Padic.coefficientExtensionAbsoluteValue ℓ L y ≤ 1 at hmL
+    rw [hm, hmL]
+    change ‖x‖ ≤ 1 ↔ spectralNorm ℚ_[ℓ] L (e x) ≤ 1
+    rw [← NormedAlgebra.norm_eq_spectralNorm ℚ_[ℓ], he]
+  let ei : A ≃+* Padic.coefficientExtensionIntegers ℓ L :=
+    { toFun := fun x ↦ ⟨e x, (hmem x).mp x.property⟩
+      invFun := fun x ↦ ⟨e.symm x,
+        (hmem _).mpr (by simpa only [e.apply_symm_apply] using x.property)⟩
+      left_inv := fun x ↦ Subtype.ext (e.symm_apply_apply x)
+      right_inv := fun x ↦ Subtype.ext (e.apply_symm_apply x)
+      map_mul' := fun x y ↦ Subtype.ext (e.map_mul x y)
+      map_add' := fun x y ↦ Subtype.ext (e.map_add x y) }
+  have hei : Isometry ei := by
+    apply AddMonoidHomClass.isometry_of_norm ei
+    intro x
+    exact he x
+  have heis : Isometry ei.symm := by
+    intro x y
+    simpa only [ei.apply_symm_apply] using (hei (ei.symm x) (ei.symm y)).symm
+  let eR : Profinite.continuousMapRingSheafOfUniverse.{u,u} A ≅
+      Profinite.continuousMapRingSheaf.{u} (Padic.coefficientExtensionIntegers ℓ L) :=
+    { hom := ⟨{
+        app := fun S ↦ RingCat.ofHom
+          (ULift.ringEquiv.symm.toRingHom.comp
+            ((ei.toRingHom.compLeftContinuous S.unop hei.continuous).comp
+              ULift.ringEquiv.toRingHom))
+        naturality := fun _ _ _ ↦ rfl }⟩
+      inv := ⟨{
+        app := fun S ↦ RingCat.ofHom
+          (ULift.ringEquiv.symm.toRingHom.comp
+            ((ei.symm.toRingHom.compLeftContinuous S.unop
+              heis.continuous).comp
+              ULift.ringEquiv.toRingHom))
+        naturality := fun _ _ _ ↦ rfl }⟩
+      hom_inv_id := by
+        ext S f
+        apply ULift.ext
+        apply ContinuousMap.ext
+        intro x
+        exact ei.symm_apply_apply _
+      inv_hom_id := by
+        ext S f
+        apply ULift.ext
+        apply ContinuousMap.ext
+        intro x
+        exact ei.apply_symm_apply _ }
+  let eAb := (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso eR
+  have : IsMonHom eAb.hom := Sheaf.isMonHom_sheafCompose_map _ eR.hom
+  have : IsMonHom eAb.inv := Sheaf.isMonHom_sheafCompose_map _ eR.inv
+  refine ⟨{ hom := Mon.ofHom eAb.hom
+            inv := Mon.ofHom eAb.inv
+            hom_inv_id := ?_
+            inv_hom_id := ?_ }⟩
+  · apply Mon.Hom.ext
+    exact eAb.hom_inv_id
+  · apply Mon.Hom.ext
+    exact eAb.inv_hom_id
+
+
+private theorem smallIntegralSerre (ℓ : ℕ) [Fact ℓ.Prime]
+    (F : Type) [NormedField F] [NormedAlgebra ℚ_[ℓ] F]
+    [FiniteDimensional ℚ_[ℓ] F] (X : Scheme.{u}) [IsNoetherian X] :
+    let Q : ObjectProperty _ := IsConstructibleModuleObject
+      (condensedRingObj
+        (Profinite.continuousMapRingObj (Padic.coefficientExtensionIntegers ℓ F)) X)
+    Q.IsClosedUnderKernels ∧ Q.IsClosedUnderCokernels ∧ Q.IsClosedUnderExtensions := by
+  have hs := CondensedRing.integralConstructible_serre ℓ F X
+  dsimp [CondensedRing.integralCoeff] at hs
+  have transport (B C : Subring F) (h : B = C) :
+      let QB : ObjectProperty _ := IsConstructibleModuleObject
+        (condensedRingObj (Profinite.continuousMapRingObj.{u} B) X)
+      let QC : ObjectProperty _ := IsConstructibleModuleObject
+        (condensedRingObj (Profinite.continuousMapRingObj.{u} C) X)
+      QB.IsClosedUnderKernels ∧ QB.IsClosedUnderCokernels ∧ QB.IsClosedUnderExtensions →
+      QC.IsClosedUnderKernels ∧ QC.IsClosedUnderCokernels ∧ QC.IsClosedUnderExtensions := by
+    subst C
+    exact id
+  exact transport _ _ (CondensedRing.continuousIntegers_eq ℓ F) hs
+
+private theorem comparisonThroughIso
+    (ℓ : ℕ) [Fact ℓ.Prime] (F : Type) [NormedField F]
+    [NormedAlgebra ℚ_[ℓ] F] [FiniteDimensional ℚ_[ℓ] F]
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (φ : integralCondensedRing ℓ (ULift.{u} F) ⟶ Λ) [IsMonHom φ] [IsIso φ]
+    (X : Scheme.{u}) [IsNoetherian X]
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    IsConstantModelConstructible Λ X M ↔
+      IsConstructibleModuleObject (condensedRingObj Λ X) M := by
+  let ψ := coefficientMap φ X
+  have hp := integralLfpConstantModelComparison ℓ (ULift.{u} F) X
+    ((Mod.comap ψ).obj M)
+  refine (constantModel_comap_iff φ X M).symm.trans (hp.symm.trans ?_)
+  constructor
+  · intro h
+    exact _root_.constructible_of_iso
+      (((Mod.comapComp (inv ψ) ψ).symm ≪≫ Mod.comapCongr (by simp) ≪≫
+        Mod.comapId _).app M) (_root_.constructible_comap (inv ψ) h)
+  · exact _root_.constructible_comap ψ
+
+private theorem serreHeart
+    (A : Type*) [Category.{u + 1} A] [Abelian A] [HasDerivedCategory.{u + 1} A]
+    (P : ObjectProperty A) [P.ContainsZero] [P.IsClosedUnderIsomorphisms]
+    [P.IsClosedUnderKernels] [P.IsClosedUnderCokernels] [P.IsClosedUnderExtensions]
+    [ObjectProperty.EssentiallySmall.{u + 1} P] :
+    let T := DerivedCategory.TStructure.t.bounded ⊓ DerivedCategory.homologyProperty P
+    T.IsClosedUnderIsomorphisms ∧ T.IsTriangulated ∧
+    (∀ K, T K → DerivedCategory.TStructure.t.bounded K ∧ ∀ n : ℤ,
+      T ((DerivedCategory.TStructure.t.truncLE n).obj K) ∧
+      T ((DerivedCategory.TStructure.t.truncGE n).obj K)) ∧
+    (P.ι ⋙ DerivedCategory.singleFunctor A 0).Full ∧
+    (P.ι ⋙ DerivedCategory.singleFunctor A 0).Faithful ∧
+    (∀ K, (P.ι ⋙ DerivedCategory.singleFunctor A 0).essImage K ↔
+      T K ∧ DerivedCategory.TStructure.t.le 0 K ∧ DerivedCategory.TStructure.t.ge 0 K) ∧
+    Nonempty (Abelian P.FullSubcategory) ∧ P.IsClosedUnderKernels ∧
+    P.IsClosedUnderCokernels ∧ P.IsClosedUnderExtensions ∧
+    EssentiallySmall.{u + 1} P.FullSubcategory := by
+  let T := DerivedCategory.TStructure.t.bounded ⊓ DerivedCategory.homologyProperty P
+  have : T.IsClosedUnderIsomorphisms := by dsimp [T]; infer_instance
+  have : T.IsTriangulated := by dsimp [T]; infer_instance
+  have hf : (P.ι ⋙ DerivedCategory.singleFunctor A 0).Full := inferInstance
+  have hfaith : (P.ι ⋙ DerivedCategory.singleFunctor A 0).Faithful := inferInstance
+  refine ⟨inferInstance, inferInstance, ?_, hf, hfaith, ?_,
+    ?_, inferInstance, inferInstance, inferInstance, ?_⟩
+  · intro K hK
+    refine ⟨hK.1, fun n ↦ ?_⟩
+    obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hK.1
+    exact ⟨⟨⟨⟨a, inferInstance⟩, ⟨b, inferInstance⟩⟩,
+      DerivedCategory.homologyProperty_truncLE hK.2 n⟩,
+      ⟨⟨⟨a, inferInstance⟩, ⟨b, inferInstance⟩⟩,
+      DerivedCategory.homologyProperty_truncGE hK.2 n⟩⟩
+  · have hs (M : A) : T ((DerivedCategory.singleFunctor A 0).obj M) ↔ P M := by
+      constructor
+      · intro h
+        exact P.prop_of_iso ((DerivedCategory.singleFunctorCompHomologyFunctorIso A 0).app M)
+          (h.2 0)
+      · intro h
+        refine ⟨⟨⟨0, inferInstance⟩, ⟨0, inferInstance⟩⟩, fun n ↦ ?_⟩
+        by_cases hn : n = 0
+        · subst n
+          exact P.prop_of_iso
+            ((DerivedCategory.singleFunctorCompHomologyFunctorIso A 0).app M).symm h
+        · rcases lt_or_gt_of_ne hn with hn | hn
+          · exact P.prop_of_isZero (DerivedCategory.isZero_of_isGE _ 0 n hn)
+          · exact P.prop_of_isZero (DerivedCategory.isZero_of_isLE _ 0 n hn)
+    intro K
+    constructor
+    · rintro ⟨M, ⟨eM⟩⟩
+      change (DerivedCategory.singleFunctor A 0).obj M.obj ≅ K at eM
+      refine ⟨T.prop_of_iso eM ((hs M.obj).mpr M.property), ?_, ?_⟩
+      · have : ((DerivedCategory.singleFunctor A 0).obj M.obj).IsLE 0 := inferInstance
+        have : K.IsLE 0 := DerivedCategory.TStructure.t.isLE_of_iso eM 0
+        exact DerivedCategory.TStructure.t.le_of_isLE K 0
+      · have : ((DerivedCategory.singleFunctor A 0).obj M.obj).IsGE 0 := inferInstance
+        have : K.IsGE 0 := DerivedCategory.TStructure.t.isGE_of_iso eM 0
+        exact DerivedCategory.TStructure.t.ge_of_isGE K 0
+    · rintro ⟨hK, hle, hge⟩
+      have : K.IsLE 0 := ⟨hle⟩
+      have : K.IsGE 0 := ⟨hge⟩
+      obtain ⟨M, ⟨eM⟩⟩ := DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE K 0
+      exact ⟨⟨M, (hs M).mp (T.prop_of_iso eM hK)⟩, ⟨eM.symm⟩⟩
+  · have : P.IsClosedUnderBinaryProducts := by
+      constructor
+      rintro M ⟨b⟩
+      refine P.prop_of_iso ?_ (P.prop_biprod
+        (b.prop_diag_obj ⟨.left⟩) (b.prop_diag_obj ⟨.right⟩))
+      exact biprod.isoProd _ _ ≪≫ HasLimit.isoOfNatIso (diagramIsoPair b.diag).symm ≪≫
+        (limit.isLimit _).conePointUniqueUpToIso b.isLimit
+    have : P.IsClosedUnderFiniteProducts := .mk'
+    exact ⟨inferInstance⟩
+  · infer_instance
+
+private theorem smallFieldHeart
+    (ℓ : ℕ) [Fact ℓ.Prime] (F : Type) [NormedField F]
+    [NormedAlgebra ℚ_[ℓ] F] [FiniteDimensional ℚ_[ℓ] F]
+    (X : Scheme.{u}) [IsNoetherian X] :
+    let Λ := Profinite.continuousMapRingObj.{u} (Padic.coefficientExtensionIntegers ℓ F)
+    let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+    let P : ObjectProperty A := IsConstantModelConstructible Λ X
+    let T := constantModelBoundedConstructible Λ X
+    T.IsClosedUnderIsomorphisms ∧ T.IsTriangulated ∧
+    (∀ K, T K → DerivedCategory.TStructure.t.bounded K ∧ ∀ n : ℤ,
+      T ((DerivedCategory.TStructure.t.truncLE n).obj K) ∧
+      T ((DerivedCategory.TStructure.t.truncGE n).obj K)) ∧
+    (P.ι ⋙ DerivedCategory.singleFunctor A 0).Full ∧
+    (P.ι ⋙ DerivedCategory.singleFunctor A 0).Faithful ∧
+    (∀ K, (P.ι ⋙ DerivedCategory.singleFunctor A 0).essImage K ↔
+      T K ∧ DerivedCategory.TStructure.t.le 0 K ∧ DerivedCategory.TStructure.t.ge 0 K) ∧
+    Nonempty (Abelian P.FullSubcategory) ∧ P.IsClosedUnderKernels ∧
+    P.IsClosedUnderCokernels ∧ P.IsClosedUnderExtensions ∧
+    EssentiallySmall.{u + 1} P.FullSubcategory := by
+  let Λ := Profinite.continuousMapRingObj.{u} (Padic.coefficientExtensionIntegers ℓ F)
+  let R := condensedRingObj Λ X
+  let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R
+  let P : ObjectProperty A := IsConstantModelConstructible Λ X
+  let Q : ObjectProperty A := IsConstructibleModuleObject R
+  obtain ⟨e⟩ := smallIntegralCoefficientIso.{u} ℓ F
+  let φ := e.hom.hom
+  have : IsMonHom φ := inferInstanceAs (IsMonHom e.hom.hom)
+  have : IsIso φ := inferInstanceAs (IsIso e.hom.hom)
+  have cmp (M : A) : P M ↔ Q M := comparisonThroughIso ℓ F Λ φ X M
+  have hPQ : P = Q := funext fun M ↦ propext (cmp M)
+  have hserre : Q.IsClosedUnderKernels ∧ Q.IsClosedUnderCokernels ∧
+      Q.IsClosedUnderExtensions := by
+    exact smallIntegralSerre ℓ F X
+  have : P.IsClosedUnderKernels := hPQ.symm ▸ hserre.1
+  have : P.IsClosedUnderCokernels := hPQ.symm ▸ hserre.2.1
+  have : P.IsClosedUnderExtensions := hPQ.symm ▸ hserre.2.2
+  have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦
+    (cmp _).mpr ((cmp _).mp h |>.of_iso e)⟩
+  have : P.ContainsZero := ⟨⟨0, isZero_zero _,
+    (cmp _).mpr (isConstructibleModuleObject_of_isZero R (isZero_zero _))⟩⟩
+  have hsmall := constructibleModuleObjects_essentiallySmall X R
+  have : ObjectProperty.EssentiallySmall.{u + 1} P := hPQ.symm ▸ hsmall
+  exact serreHeart A P
+
+
+private theorem canonicalFieldHeart
+    (ℓ : ℕ) [Fact ℓ.Prime] (F : Type) [Field F]
+    [Algebra ℚ_[ℓ] F] [FiniteDimensional ℚ_[ℓ] F]
+    (X : Scheme.{u}) [IsNoetherian X] :
+    letI := spectralNorm.normedField (Padic ℓ) F
+    let Λ := Profinite.continuousMapRingObj.{u} (Padic.coefficientExtensionIntegers ℓ F)
+    let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+    let P : ObjectProperty A := IsConstantModelConstructible Λ X
+    let T := constantModelBoundedConstructible Λ X
+    T.IsClosedUnderIsomorphisms ∧ T.IsTriangulated ∧
+    (∀ K, T K → DerivedCategory.TStructure.t.bounded K ∧ ∀ n : ℤ,
+      T ((DerivedCategory.TStructure.t.truncLE n).obj K) ∧
+      T ((DerivedCategory.TStructure.t.truncGE n).obj K)) ∧
+    (P.ι ⋙ DerivedCategory.singleFunctor A 0).Full ∧
+    (P.ι ⋙ DerivedCategory.singleFunctor A 0).Faithful ∧
+    (∀ K, (P.ι ⋙ DerivedCategory.singleFunctor A 0).essImage K ↔
+      T K ∧ DerivedCategory.TStructure.t.le 0 K ∧ DerivedCategory.TStructure.t.ge 0 K) ∧
+    Nonempty (Abelian P.FullSubcategory) ∧ P.IsClosedUnderKernels ∧
+    P.IsClosedUnderCokernels ∧ P.IsClosedUnderExtensions ∧
+    EssentiallySmall.{u + 1} P.FullSubcategory := by
+  let : NormedField F := spectralNorm.normedField (Padic ℓ) F
+  let : NormedAlgebra (Padic ℓ) F := spectralNorm.normedAlgebra (Padic ℓ) F
+  exact smallFieldHeart ℓ F X
+
 /-- The integral bounded constructible category is full triangulated, bounded and stable
 under both standard truncations. The degree-zero single functor identifies its heart
 with the full abelian category of constructible module sheaves, which is closed under
@@ -81,48 +351,18 @@ ambient kernels, cokernels and extensions and is essentially small.
 Source: blueprint main-20261015, integral-heart-triangulated, assertions 1--2
 (blueprint: det-lem-int-integral-heart-triangulated).
 
-Proof (the nine steps of the DAG node):
-1. The coefficient DVR has finite residue field (lem-weil-l-adic-extension-integers-dvr).
-The scheme is Noetherian by pqf-lem-locnoeth-lft and quasi-compactness of its finite-type
-structure morphism. The actual integral-model equivalence sk-lem-integral-models(2)
-identifies bounded constructibility with derived completeness and bounded constructible
-etale-origin residue reduction. The zero object satisfies both conditions.
-2. Completeness is stable under all shifts (det-pe-derived-nakayama-first-reduction).
-Derived reduction is exact (lem-pur-derived-change-of-rings). The finite-coefficient
-triangulation and origin results (lem-weil-proetale-dbc-triangulated and
-lem-weil-pbc-finite-ring-constructible-derived-origin) give shift stability of the reduction;
-apply the integral-model equivalence again.
-3. For a distinguished triangle with constructible outside vertices, rotate it to use
-cone closure of completeness. Exact reduction gives a finite-coefficient triangle, whose
-middle vertex is bounded constructible and has etale origin by the same two results.
-The integral-model equivalence gives the middle vertex. This is precisely
-ObjectProperty.IsTriangulated, and the ambient full-subcategory inclusion is exact.
-4. Boundedness is part of sk-def-sfb-constructible. Both standard truncations preserve
-constructibility by det-lem-int-integral-heart-local-model(3). In degree zero, the
-cohomological definition says exactly that the single module is constructible. Conversely,
-lem-sf-derived-concentrated-single identifies every degree-zero complex with its H^0
-placed in degree zero; lem-weil-pbc-derived-single-fully-faithful identifies all morphisms.
-5. The cone of C to C' has H^-1 equal to its ambient kernel and H^0 equal to its ambient
-cokernel, by lem-sf-derived-homology-long-exact. Its cohomology is constructible by
-local-model(2), giving closure under the actual ambient kernels and cokernels.
-6. Zero and finite sums are constructible (use the cone of the zero map C[-1] to C').
-Fullness inherits addition and the ambient kernel/cokernel universal properties. The
-ambient coimage-image comparison is invertible with inverse in the full subcategory,
-so it is abelian. A module short exact sequence gives the distinguished triangle of
-lem-weil-pbc-complex-ses-triangle; outside-vertex closure proves extension closure.
-7. On a fixed stratum, finite scalar presentations form a set of finite matrices.
-Covers and overlap isomorphisms on the fixed small site also form sets. The sheaf
-axiom glues equal local data into a unique global isomorphism. Retain realizable data;
-this gives a set of representatives of finite constant local models on that stratum.
-8. For a stratification a_s and chosen models F_s, the adjunction units and their local
-identifications define C to the finite product of a_s* F_s. Pulling back each component
-has left inverse given by the counit and the inverse model identification, by the
-triangle identity. Exact pullback and cartesian coefficients reduce its kernel to zero
-on all strata. lem-weil-pbc-noetherian-stratum-detection kills the global kernel.
-9. Stratifications and tuples of models form sets. Subobjects of each fixed product
-are sectionwise subsheaves, specified by a subset of its sections on each site object.
-They form a set and contain representatives of all constructible sheaves, proving
-essential smallness in the chosen universe, including the empty scheme. -/
+Proof: finite type over a field makes X Noetherian. Identify the continuous condensed
+coefficient ring with the universe-lifted spectral valuation ring and use the integral
+finite-presentation comparison. Thus the constant-model predicate agrees with the
+stratified locally finitely presented predicate. Integral weak Serre closure supplies
+ambient kernels, cokernels and extensions. Cohomology in a weak Serre class is
+triangulated; intersect with the bounded part of the standard t-structure. Homology of a
+truncation is the original homology in surviving degrees and zero elsewhere. The fully faithful
+single functor has precisely the stated essential image, since every degree-zero complex is
+isomorphic to a single complex. Split extensions give finite biproducts, and the ambient
+kernel and cokernel closures make the full subcategory abelian. Finally, the proved
+smallness theorem for constructible module objects transfers across the equality of
+predicates. The counting argument in that theorem includes the empty scheme. -/
 theorem integralConstantModelHeart
     (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p)
     (ℓ : ℕ) [Fact ℓ.Prime] (_hℓ : ℓ ≠ p)
@@ -158,6 +398,15 @@ theorem integralConstantModelHeart
       (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧
     EssentiallySmall.{u + 1}
       (ConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) := by
-  sorry
+  let : Small.{0} E := Module.Finite.small (Padic ℓ) E
+  let F := Shrink.{0} E
+  let instFD : FiniteDimensional (Padic ℓ) F :=
+    (Shrink.algEquiv (Padic ℓ) E).symm.toLinearEquiv.finiteDimensional
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsNoetherian X := ⟨⟩
+  exact canonicalFieldHeart ℓ F X
 
 end AlgebraicGeometry.ProEtale

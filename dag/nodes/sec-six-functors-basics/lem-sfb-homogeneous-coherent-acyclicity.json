@@ -1,0 +1,302 @@
+{
+ "id": "lem-sfb-homogeneous-coherent-acyclicity",
+ "kind": "statement",
+ "title": "A nontrivial homogeneous invertible module on an abelian variety is coherently acyclic",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $A/k$ be an abelian variety [def-sc-abelian-variety], and let $P$ be an invertible $\\mathcal O_A$-module [def-sc-invertible-module]. For $a\\in A(k)$ let $t_a:A\\to A$ be the translation $x\\mapsto x+a$, and let $t_a^*$ be tensor inverse image [def-pc-module-pullback]. Assume $t_a^*P\\cong P$ for every $a\\in A(k)$ and $P\\not\\cong\\mathcal O_A$. Then $H^i(A,P)=0$ for every integer $i\\geq0$, where $H^i$ is coherent Zariski module-sheaf cohomology [pqf-def-cohomology]. There is no restriction on the characteristic of $k$ or the dimension of $A$; algebraic triviality is not a hypothesis.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I Proposition 8.4(b),(c), printed pp.35–36 (homogeneous-to-multiplicative equivalence), and Corollary 5.18, printed p.26 (seesaw). The acyclicity consequence is an agent-supplied supporting lemma for the proof of Proposition 8.14; it is not asserted to be the statement printed in those places."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "pqf-def-cohomology",
+  "def-sc-group-scheme-translate"
+ ],
+ "proof": [
+  {
+   "text": "Write $e\\in A(k)$ for the identity, $a:A\\to\\operatorname{Spec}k$ for the structure map, and $p_1,p_2:A\\times_kA\\to A$ for the projections. By [def-sc-abelian-variety], $A$ is proper, smooth and connected. By [lem-sc-abelian-variety-characterization] it is geometrically integral. Thus [lem-pc-h0-proper-variety](2) gives $\\Gamma(A,\\mathcal O_A)=k$ through the structure homomorphism. In particular every nonzero constant global function is a unit. The rational identity ensures nonemptiness; these assertions also apply when $\\dim A=0$.",
+   "uses": [
+    "def-sc-abelian-variety",
+    "lem-sc-abelian-variety-characterization",
+    "lem-pc-h0-proper-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BUG, lemma-proper-geometrically-reduced-global-sections (8); groupoid.tex Tags 0B7Q and 0BFC, geometric integrality of an abelian variety."
+   }
+  },
+  {
+   "text": "Let $m(x,y)=x+y$ and put $N=m^*P\\otimes(p_1^*P)^\\vee\\otimes(p_2^*P)^\\vee$. Pullbacks are the tensor pullbacks of [def-pc-module-pullback]; they commute with tensor products by [lem-weil-pbc-module-pullback-tensor]. They also commute with duals of invertible modules: for a morphism $g$ and an invertible $\\mathcal L$, $g^*\\mathcal O=\\mathcal O$ by the formula for $g^*$, so $g^*(\\mathcal L^\\vee)\\otimes g^*\\mathcal L\\cong g^*(\\mathcal L^\\vee\\otimes\\mathcal L)\\cong\\mathcal O$, and tensoring with $(g^*\\mathcal L)^\\vee$ and using the evaluation isomorphisms of [lem-pc-tensor-dual-invertible] gives $g^*(\\mathcal L^\\vee)\\cong(g^*\\mathcal L)^\\vee$. These two rules, with the composition clause of [def-pc-module-pullback], compute every restriction below. By [def-sc-invertible-module] and [lem-pc-tensor-dual-invertible], $N$ is invertible. Choose a basis of the one-dimensional fibre $P_e$. For each $y\\in A(k)$, the restriction of $N$ to $A\\times\\{y\\}$ is $t_y^*P\\otimes P^\\vee\\otimes_k P_y^\\vee$, which is trivial: use the given translation isomorphism, evaluation $P\\otimes P^\\vee\\cong\\mathcal O_A$, and a basis of $P_y$. The restriction to $\\{e\\}\\times A$ is $P\\otimes_kP_e^\\vee\\otimes P^\\vee$, also trivial. Apply [lem-sfb-rigidified-product-seesaw] to $V=T=A$, $x=e$, and $\\mathcal H=N$. Step 1 verifies proper geometric integrality of $V$; $T$ is smooth, separated and of finite type since $A$ is an abelian variety. Its conclusion $N\\cong p_2^*e^*N$ and the identity-axis trivialization give $N\\cong\\mathcal O_{A\\times A}$. Tensor with $p_1^*P\\otimes p_2^*P$ and cancel dual pairs, obtaining $m^*P\\cong p_1^*P\\otimes p_2^*P$. No algebraic-equivalence assertion is used.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-tensor",
+    "def-sc-invertible-module",
+    "lem-pc-tensor-dual-invertible",
+    "lem-sfb-rigidified-product-seesaw"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 8.4(b) implies (c), printed pp.35–36, using Corollary 5.18, printed p.26; fibre and identity-axis cancellations made explicit."
+   }
+  },
+  {
+   "text": "Fix $i\\geq0$ and set $V=H^i(A,P)$ in the cohomology of [pqf-def-cohomology]. The line module $P$ is quasi-coherent and finitely presented, being locally free of rank one. By [lem-fin-proper-coherent-finite-dimensional], $V$ has finite dimension $n$ over $k$. The map $a$ is flat by [lem-pc-flat-field] and is quasi-compact and quasi-separated by properness. Apply the sheaf form of [lem-pc-flat-base-change-cohom] to the base change of $a$ by itself, with coefficient $P$: $R^ip_{2*}p_1^*P\\cong V\\otimes_k\\mathcal O_A$. Here a module sheaf on $\\operatorname{Spec}k$ is its vector space of sections. Set $\\sigma(x,y)=(x+y,y)$; its inverse is $(z,y)\\mapsto(z-y,y)$, and $p_2\\sigma=p_2$, $p_1\\sigma=m$. Pullback by this isomorphism is an exact equivalence, with inverse pullback by $\\sigma^{-1}$, so it preserves injective resolutions. Applying $p_{2*}$ to a pulled-back resolution gives the original direct image, using $p_2\\sigma^{-1}=p_2$. Hence $R^ip_{2*}m^*P\\cong R^ip_{2*}p_1^*P$. By Step 2 and [lem-pc-projection-formula] for the invertible factor $P$, its left side is also $(R^ip_{2*}p_1^*P)\\otimes P$. Taking degree $i$ in that derived formula is legitimate since tensoring with $P$ is exact: locally it is tensoring with $\\mathcal O_A$. We obtain $V\\otimes_k\\mathcal O_A\\cong V\\otimes_kP$, and a basis of $V$ gives $\\mathcal O_A^{\\oplus n}\\cong P^{\\oplus n}$.",
+   "uses": [
+    "pqf-def-cohomology",
+    "lem-fin-proper-coherent-finite-dimensional",
+    "lem-pc-flat-field",
+    "lem-pc-flat-base-change-cohom",
+    "lem-pc-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 02KH (lemma-flat-base-change-cohomology) and 02O6 (lemma-proper-over-affine-cohomology-finite); cohomology.tex Tag 01E8 (lemma-projection-formula). The addition shear and its inverse are the explicit agent assembly."
+   }
+  },
+  {
+   "text": "If $V\\neq0$, then $n>0$. Write the isomorphism of Step 3 as $u:P^{\\oplus n}\\to\\mathcal O_A^{\\oplus n}$ with inverse $v$. The $(1,1)$ entry of $uv=1$ says $\\sum_{j=1}^n u_{1j}v_{j1}=1$ in $\\operatorname{End}(\\mathcal O_A)=\\Gamma(A,\\mathcal O_A)=k$. Thus some $c=u_{1j}v_{j1}$ is a nonzero element of $k$. The maps $s=v_{j1}:\\mathcal O_A\\to P$ and $t=c^{-1}u_{1j}:P\\to\\mathcal O_A$ satisfy $ts=1$. On each open trivializing $P$, these maps are multiplication by functions $f,g$ with $gf=1$. Since the local rings are commutative, also $fg=1$, so $s$ is an isomorphism there; the local inverses are the restrictions of $t$, giving $P\\cong\\mathcal O_A$ globally. This contradicts the hypothesis. Consequently $V=0$. Since $i\\geq0$ was arbitrary, every required cohomology group vanishes. The argument divides only by the nonzero scalar $c$, never by $n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent-supplied acyclicity consequence supporting I Proposition 8.14; elementary matrix and local-frame argument after the preceding comparisons, not a claim printed in Milne."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-abelian-variety",
+  "lem-sc-abelian-variety-characterization",
+  "lem-pc-h0-proper-variety",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-sc-invertible-module",
+  "lem-pc-tensor-dual-invertible",
+  "lem-sfb-rigidified-product-seesaw",
+  "pqf-def-cohomology",
+  "lem-fin-proper-coherent-finite-dimensional",
+  "lem-pc-flat-field",
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-projection-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Proposition 8.4(b),(c) and Corollary 5.18 supply multiplicativity; coherent acyclicity is the agent-supplied argument using Stacks Tags 02KH, 02O6, 01E8 and 0BUG."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nontrivial translation invariant line bundle on an abelian variety has zero coherent sheaf cohomology in every degree",
+   "results": "8 hits: isZero_groupCohomology_succ_of_subsingleton, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.Sheaf.H, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero, CategoryTheory.Sheaf.cohomologyPresheaf, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, groupCohomology.H1ofAutOnUnitsUnique, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_zero. No hit is a theorem about homogeneous invertible modules on abelian varieties. The group-cohomology hits concern representations, the sheaf-cohomology hits define cohomology, and ring Picard groups and affine Weierstrass point classes do not state this geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*(invertible|line bundle)|translation.invariant.*(invertible|line bundle)|abelian.variety.*cohomology",
+   "results": "0 hits: . No hit is a theorem about homogeneous invertible modules on abelian varieties. The group-cohomology hits concern representations, the sheaf-cohomology hits define cohomology, and ring Picard groups and affine Weierstrass point classes do not state this geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nontrivial homogeneous line bundles on an abelian variety have vanishing cohomology",
+   "results": "8 hits: isZero_groupCohomology_succ_of_subsingleton, groupCohomology.H0IsoOfIsTrivial_hom, groupCohomology.H0IsoOfIsTrivial.congr_simp, groupCohomology.H0IsoOfIsTrivial, CochainComplex.HomComplex.CohomologyClass.mk_zero, groupCohomology.H0IsoOfIsTrivial_inv_apply, Bundle.Trivial.contMDiffVectorBundle, VectorBundle.trivialization_linear'. No hit is a theorem about homogeneous invertible modules on abelian varieties. The group-cohomology hits concern representations, the sheaf-cohomology hits define cohomology, and ring Picard groups and affine Weierstrass point classes do not state this geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homogeneous invertible sheaves on abelian varieties which are not trivial are acyclic for Zariski cohomology",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.instAddCommGroupH, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CochainComplex.IsKProjective, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_zero. No hit is a theorem about homogeneous invertible modules on abelian varieties. The group-cohomology hits concern representations, the sheaf-cohomology hits define cohomology, and ring Picard groups and affine Weierstrass point classes do not state this geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|AbelianVariety|HomogeneousLine",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean. No hit is a theorem about homogeneous invertible modules on abelian varieties. The group-cohomology hits concern representations, the sheaf-cohomology hits define cohomology, and ring Picard groups and affine Weierstrass point classes do not state this geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"cohomology\"",
+   "results": "3 hits: AlgebraicGeometry.Scheme.EllAdicCohomology, AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology, AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat. No hit is a theorem about homogeneous invertible modules on abelian varieties. The group-cohomology hits concern representations, the sheaf-cohomology hits define cohomology, and ring Picard groups and affine Weierstrass point classes do not state this geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*(invertible|line bundle)|translation.invariant.*(invertible|line bundle)|abelian.variety.*cohomology",
+   "results": "0 hits; . Read the hits: group cohomology, sheaf cohomology definitions, abstract acyclic complexes, ring Picard groups and Weierstrass curves do not assert coherent acyclicity of homogeneous invertible modules on an abelian variety.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nontrivial homogeneous line bundles on abelian varieties have vanishing cohomology",
+   "results": "8 hits; isZero_groupCohomology_succ_of_subsingleton, groupCohomology.H0IsoOfIsTrivial_hom, groupCohomology.H0IsoOfIsTrivial.congr_simp, groupCohomology.H0IsoOfIsTrivial, groupCohomology.H0IsoOfIsTrivial_inv_apply, Bundle.Trivial.contMDiffVectorBundle, groupCohomology.d₀₁_eq_zero, VectorBundle.trivialization_linear'. Read the hits: group cohomology, sheaf cohomology definitions, abstract acyclic complexes, ring Picard groups and Weierstrass curves do not assert coherent acyclicity of homogeneous invertible modules on an abelian variety.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"cohomology\"",
+   "results": "3 hits; AlgebraicGeometry.Scheme.EllAdicCohomology, AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology, AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat. Read the hits: group cohomology, sheaf cohomology definitions, abstract acyclic complexes, ring Picard groups and Weierstrass curves do not assert coherent acyclicity of homogeneous invertible modules on an abelian variety.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nontrivial translation invariant line bundle on an abelian variety has zero coherent sheaf cohomology in every degree",
+   "results": "8 hits; isZero_groupCohomology_succ_of_subsingleton, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.Sheaf.H, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero, CategoryTheory.Sheaf.cohomologyPresheaf, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, groupCohomology.H1ofAutOnUnitsUnique, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_zero. Read the hits: group cohomology, sheaf cohomology definitions, abstract acyclic complexes, ring Picard groups and Weierstrass curves do not assert coherent acyclicity of homogeneous invertible modules on an abelian variety.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|AbelianVariety|HomogeneousLine",
+   "results": "23 hits; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean. Read the hits: group cohomology, sheaf cohomology definitions, abstract acyclic complexes, ring Picard groups and Weierstrass curves do not assert coherent acyclicity of homogeneous invertible modules on an abelian variety.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homogeneous invertible sheaves on abelian varieties which are not trivial are acyclic for Zariski cohomology",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.instAddCommGroupH, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CochainComplex.IsKProjective, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_zero. Read the hits: group cohomology, sheaf cohomology definitions, abstract acyclic complexes, ring Picard groups and Weierstrass curves do not assert coherent acyclicity of homogeneous invertible modules on an abelian variety.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ample-translation-difference-surjectivity",
+  "date": "2026-10-24",
+  "group": "Q24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Local rational lifting of generic semiabelian Picard classes modulo algebraic equivalence. Q73: Field-level polarization: second difference and diagonal class. Supporting input for Q79: the abelian quotient multiplication formula modulo algebraic equivalence, applied with n=2. Supporting input for Q101: identifying translation-invariant invertible modules with algebraically trivial classes, before the cube recurrence. Milne I Proposition 8.14: surjectivity for a fixed ample line module onto the homogeneous Picard classes; this supplies the point used in the family construction. Supporting lemma for the cohomological proof of Milne I Proposition 8.14: nontrivial homogeneous invertible modules are acyclic; multiplicativity follows from Proposition 8.4(c).",
+   "via": [
+    "lem-sfb-ample-translation-difference-surjectivity",
+    "lem-sfb-abelian-homogeneous-line-algebraic-triviality",
+    "lem-sfb-abelian-multiplication-algebraic-equivalence",
+    "lem-sfb-semiabelian-second-difference-diagonal",
+    "lem-sfb-semiabelian-generic-picard-class-lifting",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-homogeneous-coherent-acyclicity",
+  "worker": "stage1",
+  "group": "Q54",
+  "summary": "Derived multiplicativity directly by existing rigidified seesaw, then compared higher direct images by flat base change, the addition shear, and the invertible projection formula. Finite-dimensionality reduces nonvanishing to a finite matrix argument forcing triviality. Preserved the statement and original searches; no new nodes and no algebraic-triviality assumption.",
+  "blueprint": "Supporting acyclicity lemma in the inherited chain below det-thm-sf-ctf-stability-direct-images, proof (3), via ample-translation-difference-surjectivity: Step 2 realizes Milne I 8.4(b) to (c), and Steps 3–4 supply the supporting coherent-acyclicity argument. The current latest blueprint direct-image proof was read; its route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-abelian-variety-characterization",
+    "why": "Geometric integrality of the given abelian variety, needed to apply the existing seesaw lemma."
+   },
+   {
+    "node": "lem-pc-h0-proper-variety",
+    "why": "Constants are all global functions on the proper geometrically integral abelian variety; used in the elementary matrix argument."
+   },
+   {
+    "node": "lem-pc-tensor-dual-invertible",
+    "why": "Dual-pair evaluation and invertibility in the normalized difference used in seesaw."
+   },
+   {
+    "node": "lem-fin-proper-coherent-finite-dimensional",
+    "why": "Proper coherent finiteness for the single cohomology vector space, with no positivity or algebraic triviality."
+   },
+   {
+    "node": "lem-pc-flat-field",
+    "why": "Flatness of a scheme over the coefficient field, to apply the existing flat base-change theorem."
+   },
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "Its sheaf-valued flat base-change clause computes the higher image for the product projection."
+   },
+   {
+    "node": "lem-pc-projection-formula",
+    "why": "Its invertible-factor clause tensors the higher direct image by P."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-tensor",
+    "why": "Tensor compatibility of module pullback, needed to compute the fibre and identity-axis restrictions of the normalized difference N in step 2 (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-abelian-variety-characterization",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-tensor-dual-invertible",
+  "lem-fin-proper-coherent-finite-dimensional",
+  "lem-pc-flat-field",
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-projection-formula",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-6e811a0c5",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-6e811a0c5 (reviewer sub-agent of L); spot-checked: Read the whole item, all 12 cited statements, Milne AV I 8.4 (PDF pp.41-42) and 5.18. Not superseded: the item is still unsplit in live and side-live, and there is no repair note. The statement is unchanged from base and the citer (ample-translation-difference-surjectivity) uses it consistently. Not a duplicate: abelian-picard-zero-cohomology assumes algebraic triviality, which would be circular here. Step 1: geometric integrality and Gamma(O)=k come from the statements of the characterization node and h0-proper-variety(2). Step 2: Milne 8.4 (b)=>(c) via the seesaw with V=T=A, x=e; the fibre and axis restrictions of N were checked. Step 3: the flat base change square (f=g=a, g'=p1, f'=p2) is checked; the shear sigma has p2.sigma=p2 and p1.sigma=m; the projection formula is used for f=p2, E=p1^*P, N=P, and since P is flat, taking H^i is fine; result O^n = P^n. Step 4: the (1,1)-entry matrix argument is elementary and never divides by n. Edge cases tested: dim 0, i=0, P=O excluded, elliptic O(p-e), any characteristic. Fault (C1/C4): step 2 computes the restrictions using pullback-tensor and pullback-dual compatibility, which no cited node stated. FIX adds lem-weil-pbc-module-pullback-tensor (already cited by the parent) with a two-line dual derivation, updates proof_deps (= union of uses) and adds a tool_uses entry. All declared tool_uses are accepted as generic tools. Batch-5: h0-proper-variety, rigidified-product-seesaw and proper-coherent-finite-dimensional reach only def-trf definitions (schematically-dense-open, algebraic-space) through generic Chow/space chains. They are general results, not the trace formula, Poincare duality or steps of their proofs, so they are accepted. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.HomogeneousCoherentAcyclicity",
+  "declaration": "AlgebraicGeometry.isZero_moduleCohomology_of_homogeneous_nontrivial",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/HomogeneousCoherentAcyclicity.lean",
+  "statement": "theorem isZero_moduleCohomology_of_homogeneous_nontrivial {k : Type u} [Field k] [IsAlgClosed k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (P : A.left.Modules) [Scheme.Modules.IsInvertible P] (homogeneous : ∀ a : 𝟙_ (Over (Spec (.of k))) ⟶ A, Nonempty ((Scheme.Modules.tensorPullback (GrpObj.mulRight A a).left).obj P ≅ P)) (nontrivial : ¬ Nonempty (P ≅ SheafOfModules.unit A.left.ringCatSheaf)) (i : ℕ) : IsZero ((RingedSpace.moduleCohomology A.left.toRingedSpace i).obj P)",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-09f79299f",
+  "group": "Q101",
+  "result": "pass",
+  "note": "All clauses match: alg-closed k, IsAbelianVariety with GrpObj, IsInvertible P, ∀ rational a: tensorPullback (mulRight a) P ≅ P, ¬(P ≅ unit), IsZero moduleCohomology i for all i : ℕ (pqf-def-cohomology functor). No extra assumptions; single universe u. Verbatim statement checked; node differs from side-live (after Q54 S1 split) only in its lean record and the added stmt_dep def-sc-group-scheme-translate, whose record owns GrpObj.mulRight. Imports match proof-dep records. Docstrings give the Milne I 8.4/5.18 place, the blueprint tag and 4 proof steps; sorry only; no new defs. Not recompiled, as instructed; worker reports clean compiles."
+ }
+}

@@ -24,92 +24,29 @@
  ],
  "proof": [
   {
-   "text": "First prove the local-to-global construction needed below. Let $g:Z\\to X$ be quasi-compact, let $N$ be invertible, and suppose an open cover $(V_j)$ of $X$ has witnesses $i_j:Z_j=g^{-1}(V_j)\\to\\mathbf P_{V_j}(E_j)$ with $i_j$ an immersion and $i_j^*\\mathcal O(1)\\cong N|_{Z_j}$. No finite-type hypothesis on $E_j$ is used. By [lem-trf-projective-bundle-quotient-geometry], the projective-bundle projections are separated. Every immersion is separated: factor it as a closed immersion and an open immersion [def-weil-closed-immersion]; the former is separated by [lem-weil-pbc-closed-immersion-integral-separated-uc], and the latter is a monomorphism by [lem-weil-pbc-open-immersion-monomorphism], so its diagonal is an isomorphism, hence a closed immersion. Composition preserves separatedness by [lem-weil-pbc-proper-fp-permanence](e). Consequently each $g_j:Z_j\\to V_j$ is separated. The opens $Z_j\\times_{V_j}Z_j$ cover $Z\\times_XZ$ and restrict $\\Delta_g$ to $\\Delta_{g_j}$. Closed-immersion locality [lem-weil-pbc-closed-finite-etale-zariski-local](1) therefore makes $g$ separated; [lem-pc-separated-quasi-separated] makes it quasi-separated.",
+   "text": "Given local very ample witnesses for a quasi-compact $g$, [lem-trf-local-quotient-evaluation] gives $F=g_*N$, surjective evaluation and the maps $\\alpha_j$ with $q_j=\\varepsilon g_j^*\\alpha_j$. Apply [lem-trf-projective-quotient-comparison] to these data: the classifying map $r:Z\\to\\mathbf P_X(F)$ is an immersion and $r^*\\mathcal O(1)\\cong N$. This globalizes local witnesses; the one-member cover proves the moreover clause.",
    "uses": [
-    "lem-trf-projective-bundle-quotient-geometry",
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-closed-immersion-integral-separated-uc",
-    "lem-weil-pbc-open-immersion-monomorphism",
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-weil-pbc-closed-finite-etale-zariski-local",
-    "lem-pc-separated-quasi-separated"
+    "lem-trf-local-quotient-evaluation",
+    "lem-trf-projective-quotient-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01VR (lemma-relatively-very-ample), proof (2) implies (4), separatedness paragraph; Tag 01VQ (lemma-relatively-very-ample-separated)."
+    "place": "Tag 01VR (lemma-relatively-very-ample), assembly of (2) implies (4)."
    }
   },
   {
-   "text": "Put $F=g_*N$. Invertibility makes $N$ quasi-coherent [def-sc-invertible-module], so the quasi-compactness of $g$ and quasi-separatedness from Step 1 give quasi-coherence of $F$ by [pqf-lem-pushforward-qcoh]. The quotient interpretation [lem-trf-projective-bundle-quotient-geometry] associates to $i_j$ a surjection $q_j:g_j^*E_j\\to N|_{Z_j}$. Adjunction [lem-pc-module-pullback-adjunction] gives $\\alpha_j:E_j\\to(g_j)_*(N|_{Z_j})=F|_{V_j}$, the equality holding sectionwise. The adjunction identity says $q_j=\\varepsilon|_{Z_j}\\circ g_j^*\\alpha_j$, where $\\varepsilon:g^*F\\to N$ is evaluation. Since this composite is surjective, $\\varepsilon$ is surjective over every $Z_j$, hence everywhere. The same quotient interpretation now constructs $r:Z\\to\\mathbf P_X(F)$, with $r^*\\mathcal O(1)\\cong N$, from precisely this evaluation quotient.",
-   "uses": [
-    "def-sc-invertible-module",
-    "pqf-lem-pushforward-qcoh",
-    "lem-trf-projective-bundle-quotient-geometry",
-    "lem-pc-module-pullback-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01VR (lemma-relatively-very-ample), proof (2) implies (4), evaluation factorization display."
-   }
-  },
-  {
-   "text": "Here is the immersion check, including the comparison omitted in 01VR. On $P_j=\\mathbf P_X(F)|_{V_j}=\\mathbf P_{V_j}(F|_{V_j})$, compose the pullback of $\\alpha_j$ with the tautological quotient to obtain $p_j^*E_j\\to\\mathcal O_{P_j}(1)$. Its surjectivity locus $U_j$ is open: locally trivialize the target line, and take the union of the nonvanishing loci of the images of local sections of $E_j$ [def-weil-pbc-ample-invertible-module]. On $U_j$ the quotient property [lem-trf-projective-bundle-quotient-geometry] gives $h_j:U_j\\to\\mathbf P_{V_j}(E_j)$. Step 2's equation $q_j=\\varepsilon g_j^*\\alpha_j$ implies that $r|_{Z_j}$ factors through $U_j$: the pulled-back composite quotient is surjective at every point. Naturality of the quotient bijection then gives $h_j\\circ(r|_{Z_j})=i_j$, since both morphisms correspond to the identical quotient $q_j$, not merely to the same line bundle. By [lem-zl-immersion-cancellation], $Z_j\\to U_j$ is an immersion, and its composite into $P_j$ is an immersion by [lem-weil-pbc-proper-fp-permanence](e). The $P_j$ cover $\\mathbf P_X(F)$; [lem-zl-immersion-near-image-locality] proves that $r$ is an immersion. Thus Steps 1--3 prove global very ampleness from local witnesses. Taking the cover with its single member $X$ also proves the asserted evaluation clause, including quasi-coherence of $g_*N$, without any finite-type assumption on $g$.",
-   "uses": [
-    "lem-trf-projective-bundle-quotient-geometry",
-    "def-weil-pbc-ample-invertible-module",
-    "lem-zl-immersion-cancellation",
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-zl-immersion-near-image-locality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01VR (lemma-relatively-very-ample), proof (2) implies (4), comparison open U_j and the omitted factorization verification."
-   }
-  },
-  {
-   "text": "Assume now that $M$ is $f$-ample. Choose a finite affine cover $X=\\bigcup_{a=1}^mV_a$ by [lem-weil-pbc-qcqs-finite-affine-open-cover]. Set $Y_a=f^{-1}(V_a)$, $L_a=M|_{Y_a}$. Each $L_a$ is ample by the hypothesis. The finite-type definition [def-weil-finite-type-morphism] supplies local finite type of $Y_a\\to V_a$ and quasi-compactness of $Y_a$. Apply [lem-weil-pbc-ample-very-ample-immersion-affine-base] to obtain an integer $b_a\\ge1$ and an immersion $j_a:Y_a\\to\\mathbf P^{r_a}_{V_a}$ with $j_a^*\\mathcal O(1)\\cong L_a^{\\otimes b_a}$. The Proj presentation in that node agrees with this projective space and its twist by [lem-trf-projective-bundle-quotient-geometry]. If $Y_a$ is empty one may simply take $b_a=1$, $r_a=0$ and the empty immersion.",
+   "text": "If $M$ is $f$-ample, choose a finite affine cover $(V_a)$ of $X$ by [lem-weil-pbc-qcqs-finite-affine-open-cover]. By [def-weil-finite-type-morphism], $f_a:f^{-1}(V_a)\\to V_a$ is locally of finite type, and $f$ is quasi-compact. The ample restrictions $L_a$ therefore satisfy [lem-trf-affine-eventual-power-immersion]. Let $d_0=\\max(\\{1\\}\\cup\\{d_a\\})$ for its finitely many bounds. For each $d\\geq d_0$, the local projective-space immersions are bundle witnesses by [lem-trf-projective-bundle-quotient-geometry]. Step 1 globalizes them for $M^{\\otimes d}$. For an empty cover $X$, and hence $Y$, is empty; the bound remains $1$.",
    "uses": [
     "lem-weil-pbc-qcqs-finite-affine-open-cover",
     "def-weil-finite-type-morphism",
-    "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "lem-trf-affine-eventual-power-immersion",
     "lem-trf-projective-bundle-quotient-geometry"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01VU (lemma-finite-type-ample-very-ample), finite affine covering; Tag 01VS (lemma-quasi-projective-finite-type-over-S), first paragraph, one-power construction."
-   }
-  },
-  {
-   "text": "For each $a$, [lem-weil-pbc-coherent-twist-global-generation] applied to $L_a$ and $\\mathcal F=\\mathcal O_{Y_a}$ gives $c_a\\ge0$ such that $L_a^{\\otimes e}$ is generated by finitely many global sections whenever $e\\ge c_a$. The structure module is quasi-coherent and of finite type because locally it is free of rank one. Increase $c_a$ to at least $1$. For $d\\ge b_a+c_a$, choose generators of $L_a^{\\otimes(d-b_a)}$; their surjective quotient of a finite free sheaf defines $j'_a:Y_a\\to\\mathbf P^{t_a-1}_{V_a}$ with $(j'_a)^*\\mathcal O(1)\\cong L_a^{\\otimes(d-b_a)}$ by [lem-trf-projective-bundle-quotient-geometry]. When $Y_a$ is nonempty its generating family is nonempty; for the empty scheme choose one zero section. The pair $(j_a,j'_a)$ is an immersion because its composite with the first projection is $j_a$, by [lem-zl-immersion-cancellation]. Compose it with the Segre closed immersion [lem-chow-segre]; the result is an immersion by [lem-weil-pbc-proper-fp-permanence](e). By [def-chow-segre], Segre coordinates are the products of the two sets of coordinates, so its pulled-back $\\mathcal O(1)$ is $j_a^*\\mathcal O(1)\\otimes(j'_a)^*\\mathcal O(1)\\cong L_a^{\\otimes d}$, using the tensor/pullback identifications [lem-weil-pbc-invertible-pullback-tensor]. This proves relative very ampleness of every $L_a^{\\otimes d}$ for $d\\ge b_a+c_a$.",
-   "uses": [
-    "lem-weil-pbc-coherent-twist-global-generation",
-    "lem-trf-projective-bundle-quotient-geometry",
-    "lem-zl-immersion-cancellation",
-    "lem-chow-segre",
-    "def-chow-segre",
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-weil-pbc-invertible-pullback-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01VS (lemma-quasi-projective-finite-type-over-S), second paragraph; Properties Tag 01Q3 (proposition-characterize-ample), global-generation clause; Constructions Tag 01WD (lemma-segre-embedding)."
-   }
-  },
-  {
-   "text": "Take $d_0=\\max(\\{1\\}\\cup\\{b_a+c_a:1\\le a\\le m\\})$. For every $d\\ge d_0$, Step 5 supplies local projective-space witnesses for $M^{\\otimes d}$ over all $V_a$; projective spaces are projective bundles by [lem-trf-projective-bundle-quotient-geometry]. Since $f$ is quasi-compact by [def-weil-finite-type-morphism], apply the construction of Steps 1--3 with $g=f$ and $N=M^{\\otimes d}$. It gives an immersion $Y\\to\\mathbf P_X(f_*M^{\\otimes d})$ pulling back $\\mathcal O(1)$ to $M^{\\otimes d}$. Thus every $d\\ge d_0$ is relatively very ample. The maximum includes $1$ so the same argument covers an empty base and an empty covering; then $Y$ is empty as well.",
-   "uses": [
-    "lem-trf-projective-bundle-quotient-geometry",
-    "def-weil-finite-type-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01VU (lemma-finite-type-ample-very-ample), common bound and application of 01VR."
+    "place": "Tag 01VU (lemma-finite-type-ample-very-ample), (1) implies (3), using 01VS."
    }
   },
   {
@@ -129,7 +66,7 @@
    }
   },
   {
-   "text": "For every affine open $V\\subseteq X$, put $T=f^{-1}(V)$ and $L=M|_T$. Step 7 makes $L^{\\otimes n}$ ample, so $T$ is quasi-compact. Given $y\\in T$, choose $k\\ge1$ and $s\\in\\Gamma(T,(L^{\\otimes n})^{\\otimes k})$ with $y\\in T_s$ and $T_s$ affine, by [def-weil-pbc-ample-invertible-module]. Tensor reassociation views this very same section as a section of $L^{\\otimes nk}$, with the same germs and hence the same nonvanishing locus; $nk\\ge1$. The definition therefore says $L$ is ample. As $f$ is quasi-compact [def-weil-finite-type-morphism], this is $f$-ampleness of $M$. Finally, all sufficiently large positive powers being very ample implies that one positive power is very ample by choosing $d\\ge\\max(1,d_0)$, while the forward implication is Step 6. This completes both equivalences and the evaluation assertion proved in Steps 1--3.",
+   "text": "For an affine $V\\subseteq X$, set $T=f^{-1}(V)$ and $L=M|_T$. Step 3 makes $L^{\\otimes n}$ ample. Thus $T$ is quasi-compact, and each $y\\in T$ has a section $s$ of $(L^{\\otimes n})^{\\otimes k}$, $k\\geq1$, whose nonvanishing locus is affine and contains $y$ [def-weil-pbc-ample-invertible-module]. Reassociate tensors: $s$ is a section of $L^{\\otimes nk}$ with the same germs and nonvanishing locus, and $nk\\geq1$. Hence $L$ is ample. Quasi-compactness of $f$ gives $f$-ampleness. Finally eventual very ampleness gives one positive exponent by choosing $d\\geq\\max(1,d_0)$; Step 2 proves the converse.",
    "uses": [
     "def-weil-pbc-ample-invertible-module",
     "def-weil-finite-type-morphism"
@@ -142,29 +79,17 @@
   }
  ],
  "proof_deps": [
-  "def-chow-segre",
-  "def-sc-invertible-module",
   "def-trf-canonical-symmetric-graded-algebra",
-  "def-weil-closed-immersion",
   "def-weil-finite-type-morphism",
   "def-weil-pbc-ample-invertible-module",
-  "lem-chow-segre",
   "lem-pc-module-pullback-adjunction",
-  "lem-pc-separated-quasi-separated",
+  "lem-trf-affine-eventual-power-immersion",
   "lem-trf-graded-immersion-ample-criterion",
+  "lem-trf-local-quotient-evaluation",
   "lem-trf-projective-bundle-quotient-geometry",
-  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
-  "lem-weil-pbc-closed-finite-etale-zariski-local",
-  "lem-weil-pbc-closed-immersion-integral-separated-uc",
-  "lem-weil-pbc-coherent-twist-global-generation",
-  "lem-weil-pbc-invertible-pullback-tensor",
-  "lem-weil-pbc-open-immersion-monomorphism",
-  "lem-weil-pbc-proper-fp-permanence",
+  "lem-trf-projective-quotient-comparison",
   "lem-weil-pbc-qcqs-finite-affine-open-cover",
-  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
-  "lem-zl-immersion-cancellation",
-  "lem-zl-immersion-near-image-locality",
-  "pqf-lem-pushforward-qcoh"
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra"
  ],
  "proof_origin": {
   "by": "document",
@@ -266,12 +191,23 @@
   "is": null
  },
  "merged_into": null,
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-relative-ample-very-ample",
   "worker": "stage1",
-  "summary": "Preserved the complete statement and proved it in eight steps following 01VU/01VR. Reused the existing affine-base one-power immersion, eventual finite global generation, Segre, immersion cancellation/locality and quasi-coherent pushforward nodes. Expanded the 01VR rational-map comparison and used a finite affine maximum for the uniform bound. Added only two general statement-only prerequisites: projective-bundle quotient geometry for arbitrary quasi-coherent modules and the arbitrary graded-algebra Proj-immersion ampleness criterion. Proved positive-power reflection directly from the definition.",
+  "summary": "Repair of the 2026-10-22 re-split return: extracted three independent statement-only work items of comparable proof size. Old steps 1-2 become local quotient evaluation, old step 3 becomes the general projective quotient comparison, and old steps 4-5 become affine eventual-power immersion. Kept the original statement and all maintainer-owned fields. The parent assembles these nodes, retains the symmetric-algebra reverse argument verbatim and the explicit positive-power reflection. The complete returned argument, its citations and the work allocation are preserved in report.md.",
   "blueprint": "Historical ancestry is unchanged: lem-trf-local-term-locality proof (1)--(2), specialization-to-the-normal-cone route through the existing alteration/specialization chain, with the relative-ampleness/projectivity tool in lem-trf-proper-fibrewise-ample-projective Step 4. The current blueprint does not itself state this auxiliary theorem; its source route is Stacks 01VU/01VR.",
   "tool_uses": [
    {
@@ -285,12 +221,12 @@
   "lem-trf-graded-immersion-ample-criterion"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-N4-a3188a2e5",
-  "group": "N4",
+  "reviewer": "NT-cc-Q18-fd953c0b8",
+  "group": "Q18",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-a3188a2e5 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, unit/chapter route, governance files, and Stacks sources at Tags 01VU, 01VR, 01VJ, 01OB, 01OD, and 01OE. Checked every proof step, hypotheses, edge cases, searches, duplicates, route-pivot and SGA restrictions; no faults found. Wrote review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-fd953c0b8 (reviewer sub-agent of L); spot-checked: I read the re-split delivery in full and it passes; no fixes were written and nothing was dropped. Answers the 2026-10-22 human re-split note (old proof 7987 characters in 8 steps). Every old step text appears verbatim in the report's allocation. Old steps 1-2 go to lem-trf-local-quotient-evaluation (Stacks 01VQ/01VR (2)=>(4): separatedness, quasi-coherence of g_*N, surjective evaluation, the adjoint factorisations, the classifying map). Old step 3 goes to lem-trf-projective-quotient-comparison (the 01VR 'we omit the verification' step, generalised to an arbitrary line quotient q; checked that U_j is open, that r factors through U_j on Z_j, that h_j∘r~_j=i_j because both classify q_j, and that r is an immersion by cancellation and target locality). Old steps 4-5 go to lem-trf-affine-eventual-power-immersion (exactly Stacks 01VS over Spec A). The three nodes are of comparable size (about 1990, 1385 and 2100 characters), statement-only and unsplit, with all three search kinds, correct blueprint.from and correct Stacks tags/labels; they are true on the small cases (empty source, empty cover, zero ring, E_j=0). The parent (2678 characters, statement unchanged against live) assembles: step 1 = evaluation node + comparison node (one-member cover gives the moreover clause); step 2 = finite affine cover, the eventual-power node and d0=max(1,d_a); step 3 = old step 7 verbatim, one application of lem-trf-graded-immersion-ample-criterion to Sym(E), accepted as an assembly step as in earlier re-split PASSes; step 4 = elementary passage from L^n ample to L ample. No duplicates: the affine-base one-power node, the sfb very-ample realization, the sfb fibrewise evaluation, the sfb proper projective bundle, quotient-geometry and def-trf-relatively-very-ample were all read and none states a new node. No cited id is dropped or merged, and there is no SGA. Batch-5 flags: all three are this split's own new nodes, pure Stacks Morphisms scheme theory (01VR/01VS), neither a trace-formula/Poincaré statement nor a step of their proofs; their stmt_deps are already in the item's base closure, so all three are accepted. The declared tool_use lem-weil-pbc-quasi-coherent-symmetric-algebra is accepted. Live is not superseded: the live item still carries the old 8-step proof."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.RelativeAmpleVeryAmple",

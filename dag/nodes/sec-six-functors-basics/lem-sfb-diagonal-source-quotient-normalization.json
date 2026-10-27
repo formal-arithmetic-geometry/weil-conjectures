@@ -1,0 +1,137 @@
+{
+ "id": "lem-sfb-diagonal-source-quotient-normalization",
+ "kind": "statement",
+ "title": "Normalized ordinary supported source quotient",
+ "statement": "For a prime $\\ell$, an arbitrary scheme $Y$, and an ordinary reduction presentation $D$ of scalar extension from abelian sheaves to constant $\\mathbf Z_\\ell$-module sheaves on $W=\\mathbf P^1_Y\\times_Y\\mathbf P^1_Y$ [def-sfb-diagonal-system-interface], every level $n$ of $D(\\Delta_*\\mathbf Z)$ is isomorphic to the supported constant $\\mathbf Z/\\ell^{n+1}$, restricted to $\\mathbf Z_\\ell$. The isomorphism $s$ satisfies $\\mathrm{DiagonalSourceNormalization}$: its quotient map, preceded by the insertion-of-one scalar unit, is the specified supported integral generator. No invertibility hypothesis on $Y$ is imposed.",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), source paragraph: supported quotient and its quotient-unit normalization."
+ },
+ "proof": [
+  {
+   "text": "Identify scalar extension of the supported integral constant with the supported p-adic constant, with its specified insertion-of-one integral generator. This is an ordinary scalar-unit comparison and uses no invertibility hypothesis.",
+   "uses": [
+    "lem-sfb-supported-padic-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For A=ULift(Z_l), the lifted coefficient projection to ULift(ZMod(l^(n+1))) is surjective. PadicInt.ker_toZModPow identifies its kernel with the image of multiplication by l^(n+1), so it is a cokernel in ModuleCat A. Constant sheafification and finite direct image preserve that cokernel. The diagonal is finitely presented because it is the diagonal of the smooth projective line. The sheafification/restriction comparison identifies the cokernel target with the supported residue constant restricted to p-adic scalars.",
+   "uses": [
+    "def-sfb-diagonal-system-interface",
+    "lem-fd-proetale-finite-pushforward-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the coefficient cokernel through the supported p-adic scalar-extension isomorphism. Compare it with D.quotient by CokernelCofork.mapIsoOfIsColimit. The comparison preserves the quotient maps. The sheafification naturality and constant restriction comparison show that the coefficient map sends each constant generator a to its residue. Apply pro_supported_generator_scalar and the scalar-extension unit equation to obtain DiagonalSourceNormalization.",
+   "uses": [
+    "def-sfb-diagonal-system-interface",
+    "lem-sp-cartier-pro-integral-scalar"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-system-interface",
+  "lem-fd-proetale-finite-pushforward-exact",
+  "lem-sfb-supported-padic-scalar-extension",
+  "lem-sp-cartier-pro-integral-scalar"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), source paragraph: supported quotient and its quotient-unit normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The supported integral constant sheaf reduced modulo n is the supported constant ZMod n sheaf with its quotient generator",
+   "results": "8 hits, all concerning condensed locally constant module functors; no supported quotient normalization or Kummer strict-system formula.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cokernel\", \"adjunction\"",
+   "results": "1 hit: CategoryTheory.AbelianOfAdjunction.hasCokernels (Mathlib.CategoryTheory.Abelian.Transfer), which transfers existence of cokernels and does not identify this quotient.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*Derived|supported_integral_residue|pro_integral_residue",
+   "results": "0 hits from msearch. Direct project rg finds Etale.supported_integral_residue_sequence and ProEtale.pro_integral_residue_derived_unit, but no normalization for DiagonalReductionPresentation.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the supported residue sequence; strict-system and p-adic quotient comparisons remain."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction of the multiplicative group sheaf gives the roots of unity shifted by one and commutes with inverse systems and boundary maps",
+   "results": "8 hits: rootsOfUnity; MulChar.ofRootOfUnity_spec; IsCyclic.monoidHomMulEquivRootsOfUnityOfGenerator; modularCyclotomicCharacter.toFun; MulChar.apply_mem_rootsOfUnity; modularCyclotomicCharacter.toFun_spec; IsCyclic.monoidHom_mulEquiv_rootsOfUnity; CommGroup.monoidHom_mulEquiv_of_hasEnoughRootsOfUnity. All concern algebraic groups of roots, not sheaf derived reduction.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalKummerReduction",
+  "group": "M2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Step (3), source paragraph: supported quotient and its quotient-unit normalization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalSourceQuotientNormalization",
+  "file": "lean/Sheaf/Paper/DiagonalSourceQuotientNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonal_source_quotient_normalization",
+  "statement": "theorem diagonal_source_quotient_normalization (ℓ : ℕ) [Fact ℓ.Prime]\n    (Y : Scheme.{u})\n    (D : DiagonalReductionPresentation ℓ (diagonalScalarExtension ℓ (diagonalSurface Y)))\n    (n : ℕ) :\n    ∃ s : (D.E.obj (diagonalIntegralSource Y)).obj (op n) ≅\n      (diagonalFiniteToPadic ℓ n (diagonalSurface Y)).obj\n        ((lowerStar (ModuleCat.{u + 1} (diagonalResidue.{u} ℓ n)) (diagonalImmersion Y)).obj\n          (geoCartierConstant (diagonalResidue.{u} ℓ n) (ProjectiveLine Y))),\n      DiagonalSourceNormalization ℓ Y D n s",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T012904-L-2344169",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261027T034733-L-3680397",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

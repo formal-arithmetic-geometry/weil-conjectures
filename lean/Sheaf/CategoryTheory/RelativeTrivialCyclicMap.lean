@@ -53,6 +53,100 @@ Source: paragraph (3) (blueprint: def-sfb-relative-trivial-cyclic-map). -/
 def trivialTotal (K : TotalModel A PUnit.{u + 1}) (v : Z.{u} →ₜ* H) :=
   K.functor.obj (single A (PUnit.{u + 1} × Z) (trivialInput v)).obj
 
+private theorem trivialGenerator (v : Z.{u} →ₜ* H) (n : ℤ) :
+    generatorEnd ((single A (PUnit.{u + 1} × Z) (trivialInput v)).obj.X n) = 𝟙 _ := by
+  by_cases hn : n = 0
+  · subst n
+    symm
+    apply (Classical.choose_spec (generatorEndExist _)).2
+    intro S x
+    rfl
+  · exact ((retainResidual A PUnit.{u + 1} Z).map_isZero
+      (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 (trivialInput v) n hn)).eq_of_src _ _
+
+private theorem trivialTotalIsZero (K : TotalModel A PUnit.{u + 1})
+    (v : Z.{u} →ₜ* H) (n : ℤ) (hn : n ≠ 0) (hn' : n ≠ 1) :
+    IsZero ((((CondensedBar.forgetAction (A := A) (G := PUnit.{u + 1})).mapHomologicalComplex
+      (.up ℤ)).obj (trivialTotal K v)).X n) := by
+  apply (CondensedBar.forgetAction (A := A) (G := PUnit.{u + 1})).map_isZero
+  apply IsZero.of_iso _ (K.coordinates _ n)
+  apply (biprod_isZero_iff _ _).2
+  constructor
+  · exact (retainResidual A PUnit.{u + 1} Z).map_isZero
+      (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 (trivialInput v) n hn)
+  · exact (retainResidual A PUnit.{u + 1} Z).map_isZero
+      (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 (trivialInput v) (n - 1) (by omega))
+
+private theorem trivialTotalDifferential (K : TotalModel A PUnit.{u + 1})
+    (v : Z.{u} →ₜ* H) (n : ℤ) :
+    (trivialTotal K v).d n (n + 1) = 0 := by
+  let N := (single A (PUnit.{u + 1} × Z) (trivialInput v)).obj
+  have h := K.differential N n
+  have hg : generatorEnd (N.X n) = 𝟙 _ := trivialGenerator v n
+  have hd (i j : ℤ) : N.d i j = 0 := rfl
+  simp only [hg, sub_self, hd, Functor.map_zero, comp_zero, zero_comp] at h
+  replace h : (K.coordinates N n).inv ≫ (K.functor.obj N).d n (n + 1) ≫
+      (K.coordinates N (n + 1)).hom = 0 := by
+    rw [h]
+    apply biprod.hom_ext <;> simp
+  change (K.functor.obj N).d n (n + 1) = 0
+  apply (cancel_epi (K.coordinates N n).inv).1
+  apply (cancel_mono (K.coordinates N (n + 1)).hom).1
+  simpa only [comp_zero, zero_comp, Category.assoc] using h
+
+open scoped ZeroObject in
+private theorem trivialCyclicExtendedIsZero (n : ℤ) (hn : n ≠ 0) (hn' : n ≠ 1) :
+    IsZero ((extend (trivialCyclic A)).X n) := by
+  by_cases h : 0 ≤ n
+  · apply IsZero.of_iso _ ((trivialCyclic A).extendXIso
+      ComplexShape.embeddingUpNat (Int.toNat_of_nonneg h))
+    have hX : (trivialCyclic A).X n.toNat = (0 : Modules A) := if_neg (by omega)
+    rw [hX]
+    exact isZero_zero _
+  · apply (trivialCyclic A).isZero_extend_X ComplexShape.embeddingUpNat
+    intro i
+    change (i : ℤ) ≠ n
+    omega
+
+private theorem trivialCyclicExtendedDifferential (n : ℤ) :
+    (extend (trivialCyclic A)).d n (n + 1) = 0 := by
+  by_cases h : n = 0
+  · subst n
+    change ((trivialCyclic A).extend ComplexShape.embeddingUpNat).d 0 1 = 0
+    exact (HomologicalComplex.extend_d_eq (trivialCyclic A) ComplexShape.embeddingUpNat
+      (i := 0) (j := 1) (i' := 0) (j' := 1) rfl rfl).trans (by
+        simp only [show (trivialCyclic A).d 0 1 = 0 from rfl, comp_zero, zero_comp])
+  · by_cases h' : n = 1
+    · subst n
+      exact (trivialCyclicExtendedIsZero (A := A) 2 (by omega) (by omega)).eq_of_tgt _ _
+    · exact (trivialCyclicExtendedIsZero (A := A) n h h').eq_of_src _ _
+
+private def trivialTotalDegreeZero (K : TotalModel A PUnit.{u + 1})
+    (v : Z.{u} →ₜ* H) :
+    (((CondensedBar.forgetAction (A := A) (G := PUnit.{u + 1})).mapHomologicalComplex
+      (.up ℤ)).obj (trivialTotal K v)).X 0 ≅ (extend (trivialCyclic A)).X 0 :=
+  (CondensedBar.forgetAction (A := A) (G := PUnit.{u + 1})).mapIso
+    (K.coordinates (single A (PUnit.{u + 1} × Z) (trivialInput v)).obj 0 ≪≫
+      (isoBiprodZero ((retainResidual A PUnit.{u + 1} Z).map_isZero
+        (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 (trivialInput v) (-1)
+          (by omega)))).symm ≪≫
+      (retainResidual A PUnit.{u + 1} Z).mapIso
+        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (trivialInput v))) ≪≫
+    ((trivialCyclic A).extendXIso ComplexShape.embeddingUpNat (i := 0) rfl).symm
+
+private def trivialTotalDegreeOne (K : TotalModel A PUnit.{u + 1})
+    (v : Z.{u} →ₜ* H) :
+    (((CondensedBar.forgetAction (A := A) (G := PUnit.{u + 1})).mapHomologicalComplex
+      (.up ℤ)).obj (trivialTotal K v)).X 1 ≅ (extend (trivialCyclic A)).X 1 :=
+  (CondensedBar.forgetAction (A := A) (G := PUnit.{u + 1})).mapIso
+    (K.coordinates (single A (PUnit.{u + 1} × Z) (trivialInput v)).obj 1 ≪≫
+      (isoZeroBiprod ((retainResidual A PUnit.{u + 1} Z).map_isZero
+        (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 (trivialInput v) 1
+          (by omega)))).symm ≪≫
+      (retainResidual A PUnit.{u + 1} Z).mapIso
+        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (trivialInput v))) ≪≫
+    ((trivialCyclic A).extendXIso ComplexShape.embeddingUpNat (i := 1) rfl).symm
+
 /-- With trivial coefficients the total has its coordinate-normalized identification with
 [R -> 0 R]. The equations in degrees zero and one determine the isomorphism, since all
 other terms are zero by the total coordinates.
@@ -77,7 +171,62 @@ theorem trivialTotalIsoExist (K : TotalModel A PUnit.{u + 1}) (v : Z.{u} →ₜ*
             biprod.snd ≫
             (retainResidual A PUnit.{u + 1} Z).map
               (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (trivialInput v)).hom)) := by
-  sorry
+  let T := ((CondensedBar.forgetAction (A := A) (G := PUnit.{u + 1})).mapHomologicalComplex
+    (.up ℤ)).obj (trivialTotal K v)
+  let E := extend (trivialCyclic A)
+  let e (n : ℤ) : T.X n ≅ E.X n := by
+    by_cases hn : n = 0
+    · subst n
+      exact trivialTotalDegreeZero K v
+    · by_cases hn' : n = 1
+      · subst n
+        exact trivialTotalDegreeOne K v
+      · exact (trivialTotalIsZero K v n hn hn').iso
+          (trivialCyclicExtendedIsZero n hn hn')
+  let k : T ≅ E := HomologicalComplex.Hom.isoOfComponents e (by
+    intro i j hij
+    change i + 1 = j at hij
+    subst j
+    change (e i).hom ≫ E.d i (i + 1) =
+      (CondensedBar.forgetAction (A := A) (G := PUnit.{u + 1})).map
+        ((trivialTotal K v).d i (i + 1)) ≫ (e (i + 1)).hom
+    rw [trivialCyclicExtendedDifferential, trivialTotalDifferential]
+    simp only [Functor.map_zero, comp_zero]
+    exact (zero_comp : (0 : T.X i ⟶ T.X (i + 1)) ≫ (e (i + 1)).hom = 0).symm)
+  have hk0 : k.hom.f 0 ≫ ((trivialCyclic A).extendXIso ComplexShape.embeddingUpNat
+      (i := 0) (i' := 0) rfl).hom =
+      (CondensedBar.forgetAction (A := A) (G := PUnit.{u + 1})).map
+        ((K.coordinates (single A (PUnit.{u + 1} × Z) (trivialInput v)).obj 0).hom ≫
+          biprod.fst ≫ (retainResidual A PUnit.{u + 1} Z).map
+            (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (trivialInput v)).hom) := by
+    change (trivialTotalDegreeZero K v).hom ≫ _ = _
+    exact (((trivialCyclic A).extendXIso ComplexShape.embeddingUpNat
+      (i := 0) (i' := 0) rfl).eq_comp_inv).mp rfl
+  have hk1 : k.hom.f 1 ≫ ((trivialCyclic A).extendXIso ComplexShape.embeddingUpNat
+      (i := 1) (i' := 1) rfl).hom =
+      (CondensedBar.forgetAction (A := A) (G := PUnit.{u + 1})).map
+        ((K.coordinates (single A (PUnit.{u + 1} × Z) (trivialInput v)).obj 1).hom ≫
+          biprod.snd ≫ (retainResidual A PUnit.{u + 1} Z).map
+            (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (trivialInput v)).hom) := by
+    change (trivialTotalDegreeOne K v).hom ≫ _ = _
+    exact (((trivialCyclic A).extendXIso ComplexShape.embeddingUpNat
+      (i := 1) (i' := 1) rfl).eq_comp_inv).mp rfl
+  refine ⟨k, ⟨hk0, hk1⟩, ?_⟩
+  intro l hl
+  apply Iso.ext
+  apply HomologicalComplex.hom_ext
+  intro n
+  by_cases hn : n = 0
+  · subst n
+    apply (cancel_mono ((trivialCyclic A).extendXIso ComplexShape.embeddingUpNat
+      (i := 0) (i' := 0) rfl).hom).1
+    exact hl.1.trans hk0.symm
+  · by_cases hn' : n = 1
+    · subst n
+      apply (cancel_mono ((trivialCyclic A).extendXIso ComplexShape.embeddingUpNat
+        (i := 1) (i' := 1) rfl).hom).1
+      exact hl.2.trans hk1.symm
+    · exact (trivialCyclicExtendedIsZero n hn hn').eq_of_tgt _ _
 
 /-- The unique coordinate identification of the trivial cyclic total.
 Source: paragraph (3) (blueprint: def-sfb-relative-trivial-cyclic-map). -/
@@ -96,7 +245,10 @@ theorem forgetTrivialExist :
         (CondensedDerivedRestriction.regularTrivial A (PUnit.{u + 1} × H)) ≅
       CondensedDerivedRestriction.regularTrivial A H,
       e.hom.val = 𝟙 (Mod.regular A.X) := by
-  sorry
+  refine ⟨Iso.refl _, rfl, ?_⟩
+  intro e he
+  apply Iso.ext
+  exact Subtype.ext he
 
 /-- The identity-normalized trivial-group comparison.
 Source: paragraph (3) (blueprint: def-sfb-relative-trivial-cyclic-map). -/

@@ -1,0 +1,172 @@
+{
+ "id": "lem-trf-large-oriented-lift-rigidity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof of (1) and (2), normal-cone specialization: the external-product comparison used by lem-trf-trace-specialization; existence and universal property of the oriented product on which the vanishing topos of def-trf-oriented-nearby-cycles is built; ILO XI Lemma 1.5 and §1.6, uniqueness in Theorem 1.4",
+   "via": [
+    "lem-trf-oriented-product-universal",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pullback formula and rigidity of already-given compatible lifts",
+ "statement": "Use [def-trf-large-oriented-site-data] and the same finite-limit sites, F,G,f,g,etaF,etaG. Suppose p1,p2 and comparisons pi1,pi2 are given and tau satisfies LargeOrientationFormula. Every already-given compatible lift (h,alpha,beta) of every cone (a,b,t) has the exact structural pullback square in LargeHasLiftFormula. For any two compatible lifts (h,alpha,beta) and (h2,alpha2,beta2), there exists a unique gamma:h.direct≅h2.direct such that whiskering gamma with p1.direct followed by alpha2 is alpha, and similarly for p2 and beta. No existence of a lift, no projection construction and no site-independence theorem is asserted.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO XI Lemma 1.5 and §1.6, uniqueness in Theorem 1.4; Lean: lean/Sheaf/CategoryTheory/Sites/OrientedProductLargeLiftRigidity.lean"
+ },
+ "stmt_deps": [
+  "def-trf-large-oriented-site-data"
+ ],
+ "proof": [
+  {
+   "text": "Prove the cartesian formula of XI Lemma 1.5 directly. For $Z=(U\\to V\\leftarrow W)$ put $A=k_1(U)$, $B=k_2(W)$, $C_Z=(U\\to V\\leftarrow g^{-1}V)$ and $D_Z=(f^{-1}V\\to V\\leftarrow W)$. Componentwise pullbacks give $D_Z=T_V\\times_{G_V}B$ and $Z=C_Z\\times_{T_V}D_Z$. The arrow $C_Z\\to A$ is type (c). Representable presheaves preserve these pullbacks by the universal property of a limit, and sheafification preserves them by [lem-weil-pbc-sheafification-sets-exact]. Cancelling the type-(c) isomorphisms $C_Z^a\\cong A^a$ and $T_V^a\\cong F_V^a$ therefore yields $Z^a\\cong A^a\\times_{G_V^a}B^a$. The map $A^a\\to G_V^a$ here is $A^a\\to F_V^a\\xrightarrow{(r_V^a)^{-1}}T_V^a\\to G_V^a$, since $C_Z\\to T_V\\to F_V$ equals $C_Z\\to A\\to F_V$. By step 4 this is the map induced by $U\\to f^{-1}V$ followed by the inverse-image mate of $\\tau$. Thus the bottom object is $(gp_2)^{-1}(V^a)$; no direct-image functor is applied to $V$. All these identifications are natural in morphisms of triples because their projections are the structural arrows just specified.",
+   "uses": [
+    "def-trf-large-oriented-site-data",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI Lemma 1.5 and its cartesian-diagram proof"
+   }
+  },
+  {
+   "text": "Apply the inverse image of any compatible lift to the preceding pullback square. It preserves finite limits; projection comparisons identify its top arrows, and compatibility of pasted direct-image transformations identifies, after taking mates, the bottom arrows with those induced by t. This is exactly LargeHasLiftFormula, including the specified structural maps.",
+   "uses": [
+    "def-trf-large-oriented-site-data",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO XI §1.6 formula (1.a)"
+   }
+  },
+  {
+   "text": "For two compatible lifts the resulting squares have the same bottom and side objects and maps. The unique isomorphism of their pullbacks is natural in Z and respects both projections. By adjunction and Yoneda the values of either direct image at a triple Z and object M are Hom from that pullback to M. These isomorphisms therefore define an isomorphism of sheaves, natural in M, hence of direct-image functors. Any projection-compatible isomorphism induces the same map on these pullbacks; evaluating its sheaf components on every triple forces equality. This gives existence and uniqueness of the asserted gamma. No existence of a compatible lift is used or claimed. Apply largeDirectImageIsoFromRepresentables from [lem-trf-large-oriented-representable-comparison] to the natural isomorphisms on inverse-image restrictions. Its construction extends the isomorphism and its inverse and its uniqueness forces equality of any other projection-compatible comparison.",
+   "uses": [
+    "def-trf-large-oriented-site-data",
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-sheafification",
+    "lem-trf-large-oriented-representable-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO XI Theorem 1.4 and §1.6 uniqueness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-geometric-morphism",
+  "def-trf-large-oriented-site-data",
+  "def-weil-pbc-sheafification",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-trf-large-oriented-representable-comparison",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO XI Lemma 1.5 and §1.6, uniqueness in Theorem 1.4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Oriented product of topoi: triple category site projections and universal compatible lifts",
+   "results": "CategoryTheory.Functor.relativelyRepresentable.lift₃_p₃; CategoryTheory.CartesianMonoidalCategory.lift; CategoryTheory.Limits.Pi.lift_π; CategoryTheory.Functor.relativelyRepresentable.lift₃_p₃_assoc; CategoryTheory.Localization.Lifting₃; CategoryTheory.Limits.Pi.lift_π_assoc; CategoryTheory.CartesianMonoidalCategory.lift_lift_associator_hom; CategoryTheory.Localization.lift₃",
+   "date": "2026-10-23",
+   "verdict": "No same statement. Generic Mathlib site, adjunction and equivalence APIs are used where applicable; no oriented triple-site theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two compatible lifts to an oriented product of topoi have a unique projection compatible natural isomorphism",
+   "results": "ContinuousMap.piComparison_fac; CategoryTheory.Limits.map_lift_piComparison_assoc; CategoryTheory.Limits.map_lift_piComparison; TopCat.Presheaf.SheafConditionEqualizerProducts.piOpens.hom_ext; CategoryTheory.Limits.piPiIso_hom; CategoryTheory.FunctorToTypes.prod_ext'; CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prod_uniq; TopCat.Presheaf.SheafConditionEqualizerProducts.piOpens.hom_ext_iff",
+   "date": "2026-10-23",
+   "verdict": "No same statement. Generic Mathlib site, adjunction and equivalence APIs are used where applicable; no oriented triple-site theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "oriented.*(product|cone)|compatible.*lift",
+   "results": "Mathlib/MeasureTheory/Measure/Haar/InnerProductSpace.lean; Mathlib/RingTheory/WittVector/Truncated.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Rotation.lean",
+   "date": "2026-10-23",
+   "verdict": "No same statement. Generic Mathlib site, adjunction and equivalence APIs are used where applicable; no oriented triple-site theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"largeCompatibleLift|largeOrientationExists|largeSiteMorphism|largeAssociatedComparison|universalComparison|LargeOrientationFormula\" in Mathlib/CategoryTheory, lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search oriented product, compatible lift, universal cone",
+   "results": "No existing declaration with the new names or the corresponding oriented triple-site statements; no matching blueprint node. Existing original node contains the complete construction, not these separate results.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate. The definitions are moved from the assigned item rather than independently restated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.OrientedProductLargeSites",
+  "date": "2026-10-24",
+  "group": "P8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.OrientedProductLargeLiftRigidity",
+  "file": "lean/Sheaf/CategoryTheory/Sites/OrientedProductLargeLiftRigidity.lean",
+  "declaration": "CategoryTheory.OrientedProduct.largeCompatibleLiftRigidity",
+  "statement": "theorem largeCompatibleLiftRigidity\n    (hτ : LargeOrientationFormula F G J₁ J₂ K f g ηF ηG p₁ p₂ π₁ π₂ τ) :\n    LargeHasLiftFormula.{v, w, e, ve} F G J₁ J₂ K f g ηF ηG p₁ p₂ π₁ π₂ τ ∧\n    ∀ (E : Type e) [Category.{ve} E], IsGrothendieckTopos.{max v w} E →\n      ∀ (a : GeometricMorphism E (Sheaf J₁.toGrothendieck (Type (max v w))))\n        (b : GeometricMorphism E (Sheaf J₂.toGrothendieck (Type (max v w))))\n        (t : (b.comp g).direct ⟶ (a.comp f).direct)\n        (h h' : GeometricMorphism E (Sheaf (largeTopology J₁ J₂ F G) (Type (max v w))))\n        (α : (h.comp p₁).direct ≅ a.direct) (β : (h.comp p₂).direct ≅ b.direct)\n        (α' : (h'.comp p₁).direct ≅ a.direct) (β' : (h'.comp p₂).direct ≅ b.direct),\n        paste f g p₁ p₂ τ h a b α β = t →\n        paste f g p₁ p₂ τ h' a b α' β' = t →\n        ∃! γ : h.direct ≅ h'.direct,\n          Functor.isoWhiskerRight γ p₁.direct ≪≫ α' = α ∧\n          Functor.isoWhiskerRight γ p₂.direct ≪≫ β' = β",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-24"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-large-oriented-lift-rigidity",
+  "worker": "stage3",
+  "summary": "Pullback formula and rigidity of already-given compatible lifts. This is a separate part of the original ten-step argument, with the precise Lean statement attached. No replacement of the unit normal-cone route.",
+  "blueprint": "ILO XI Lemma 1.5 and §1.6, uniqueness in Theorem 1.4 of the oriented-product input to the normal-cone specialization in the ancestor proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheafification-sets-exact",
+    "why": "Generic sheaf or site tool in the explicit ILO triple-site construction; it does not replace the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-15aea",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261024T015523-L-2412674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-15aea",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261024T015523-L-2412674",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to live; 12 moved defs vs live item block (docstring tags only); 2 sorry lift lemmas vs ILO XI 1.5/1.6; 25 direct importers compiled against the delivered modules"
+ }
+}

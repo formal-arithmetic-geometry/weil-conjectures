@@ -1,0 +1,131 @@
+{
+ "id": "def-sfb-standard-group-coordinate-points",
+ "kind": "definition",
+ "title": "Coordinate points and values of the standard additive and multiplicative groups",
+ "status": "split",
+ "statement": "Let $k$ be a field, let $R$ be a commutative $k$-algebra, and use the standard group schemes $\\mathbf G_a=\\operatorname{Spec}k[y]$ and $\\mathbf G_m=\\operatorname{Spec}k[t,t^{-1}]$ of [def-sc-gm-ga], including their affine spectra and contravariant coordinate maps. For $x\\in R$, define the additive coordinate point $a_x:\\operatorname{Spec}R\\to\\mathbf G_a$ to be the $k$-scheme morphism induced by the $k$-algebra homomorphism $k[y]\\to R$ sending $y$ to $x$. For a $k$-scheme morphism $g:\\operatorname{Spec}R\\to\\mathbf G_m$, let $g^*:k[t,t^{-1}]\\to R$ be its corresponding $k$-algebra homomorphism and define its multiplicative coordinate value to be $g^*(t)\\in R$. This value is a unit because $g^*(t^{-1})$ is its inverse. These definitions allow the zero algebra and nonreduced algebras.",
+ "stmt_deps": [
+  "def-sc-gm-ga"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Examples 2.1--2.2, printed pp.39--40, for the additive and multiplicative coordinate representations; Example 14.40, printed p.292, and Theorem 15.34(d), printed p.319, for their use with additive subgroups and scalar actions."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "additiveCoordinatePoint|multiplicativeCoordinateValue|LaurentPolynomial.T",
+   "results": "{\"t\": \"2026-10-24T04:19:07Z\", \"tool\": \"grep\", \"query\": \"additiveCoordinatePoint|multiplicativeCoordinateValue|LaurentPolynomial.T\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib definition for this chosen pair of standard group schemes; reuse the two existing plain definitions in Sheaf.AlgebraicGeometry.AdditiveSubgroupPolynomialQuotient, without using its quotient theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The point of the additive group Spec k[y] with coordinate x is Spec of polynomial evaluation and the coordinate of a multiplicative group point is the image of the Laurent variable",
+   "results": "{\"t\": \"2026-10-24T04:19:07Z\", \"tool\": \"leansearch\", \"query\": \"The point of the additive group Spec k[y] with coordinate x is Spec of polynomial evaluation and the coordinate of a multiplicative group point is the image of the Laurent variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.openToLocalization\", \"LaurentPolynomial.eval₂\", \"AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\", \"MvPolynomial.pointToPoint\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst\", \"AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop\", \"AlgebraicGeometry.Scheme.evaluation\"], \"digest\": \"bed0c69e7f3ab071\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib definition for this chosen pair of standard group schemes; reuse the two existing plain definitions in Sheaf.AlgebraicGeometry.AdditiveSubgroupPolynomialQuotient, without using its quotient theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine points of the additive and multiplicative group schemes from polynomial evaluation and Laurent coordinate evaluation",
+   "results": "{\"t\": \"2026-10-24T04:19:09Z\", \"tool\": \"leanfinder\", \"query\": \"Affine points of the additive and multiplicative group schemes from polynomial evaluation and Laurent coordinate evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.coord\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom\", \"AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop\", \"WeierstrassCurve.Affine.CoordinateRing.mk\"], \"digest\": \"7677ada264e7d7ac\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib definition for this chosen pair of standard group schemes; reuse the two existing plain definitions in Sheaf.AlgebraicGeometry.AdditiveSubgroupPolynomialQuotient, without using its quotient theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n additiveCoordinatePoint|multiplicativeCoordinateValue lean/WeilConjectures lean/Sheaf dag/nodes",
+   "results": "No WeilConjectures occurrence. Sheaf/AlgebraicGeometry/AdditiveSubgroupPolynomialQuotient.lean:63 and :71 define the two helpers with explicit data. The DAG theorem node lem-sfb-additive-subgroup-polynomial-quotient lists them among declarations, but no existing definition node records them.",
+   "date": "2026-10-24",
+   "verdict": "Register the existing definitions with existing:true; create no Lean module or duplicate declaration."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "additive coordinate",
+   "results": "5 blueprint nodes match 'additive coordinate': d-ab-field, def-fd-kernel, def-sc-gm-ga, def-weil-pbc-completion-map, sk-d-ab-field.",
+   "date": "2026-10-24",
+   "verdict": "def-sc-gm-ga gives the underlying standard groups, and is the dependency of this coordinate interface; no existing coordinate helper node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-additive-subgroup-diagonalizable-extension-splitting",
+  "date": "2026-10-24",
+  "group": "Q69"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field. Supporting input in the present split: Milne Theorem 16.33 proof, use of 16.6 and 16.10; the concrete matrix kernel in present proof step 1, before descent. Supporting input: Milne Theorem 16.26(a), last paragraph: the pulled-back extension (118) splits by Theorem 15.34(d). Coordinate point and Laurent coordinate value in the scalar stability and conjugation hypotheses.",
+   "via": [
+    "lem-sfb-additive-subgroup-diagonalizable-extension-splitting",
+    "lem-sfb-triangular-diagonal-kernel",
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdditiveSubgroupPolynomialQuotient",
+  "declaration": "AlgebraicGeometry.StandardGroupSchemes.additiveCoordinatePoint",
+  "declarations": [
+   "AlgebraicGeometry.StandardGroupSchemes.additiveCoordinatePoint",
+   "AlgebraicGeometry.StandardGroupSchemes.multiplicativeCoordinateValue"
+  ],
+  "statement": "def additiveCoordinatePoint (R : Type u) [CommRing R] [Algebra k R] (x : R) :\n    affine k R ⟶ additive k",
+  "branch": "sheaf-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Records the two existing plain coordinate definitions at AdditiveSubgroupPolynomialQuotient.lean:63 and :71. additiveCoordinatePoint is map k (Polynomial.aeval x); multiplicativeCoordinateValue is evaluation of LaurentPolynomial.T 1 under the algSpec preimage of g. Both definitions have explicit data and do not use exists_additiveSubgroup_polynomial_quotient, its proof, or .choose. No declaration is copied or moved."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be04af62a",
+  "group": "Q69",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be04af62a",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 533ef869. Lean file byte-identical to the returned delivery (sha256 2a23c4e4), whose math/H3 was already correct; re-read the signature against the node: alg-closed k, FG M, D=diagonalizableGroup, affine finite-type N and E, closed N⊆Ga, IsMonHom chi, closed normal i, IsFppfGroupQuotient, hstable/hconj on all R:Type u, ∃ Grp-hom s with s≫q=𝟙; no added assumptions; lean.statement verbatim. Item node vs live: only stmt_deps and lean differ. Theorem nodes affine-normal-quotient-geometry and additive-subgroup-polynomial-quotient are removed from stmt_deps and kept in proof_deps; def-sfb-fppf-group-quotient-presentation (landed Q95 def, existing:true) and new def-sfb-standard-group-coordinate-points are cited. New node: existing:true on additiveCoordinatePoint (map k (aeval x)) and multiplicativeCoordinateValue (g*(T 1)), real data with no .choose, statement matches the Lean, verbatim def signature, stmt_dep def-sc-gm-ga, Milne §2.1-2.2 pp.39-40 and Ex 14.40 p.292 verified, no other owner node, no SGA citation. Docstrings carry all 8 proof steps; proof by sorry only. No file changed, nothing compiled. Advisory only: new node does not list def-weil-field."
+ }
+}

@@ -30,7 +30,7 @@
    }
   },
   {
-   "text": "The private helper derived_comp_eq applies the proved source theorem Adjunction.rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv to the three inverse-image/direct-image adjunctions and lowerStarComp. Its hypothesis is precisely conjugateIsoEquiv_upperStarComp. Unfolding rightDerivedLowerStarComp identifies its hom with Functor.rightDerivedFunctorCompIso' applied to lowerStarComp. The helper comp_fac then gives the equation obtained by precomposing each such derived comparison with rightDerivedFunctorCompUnit, using rightDerivedUnique and rightDerivedNatTrans_fac.",
+   "text": "The exposed helper derived_comp_eq, generalized to any Grothendieck abelian coefficient category, applies the proved source theorem Adjunction.rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv to the three inverse-image/direct-image adjunctions and lowerStarComp. Its hypothesis is precisely conjugateIsoEquiv_upperStarComp. Unfolding rightDerivedLowerStarComp identifies its hom with Functor.rightDerivedFunctorCompIso' applied to lowerStarComp. The helper comp_fac then gives the equation obtained by precomposing each such derived comparison with rightDerivedFunctorCompUnit, using rightDerivedUnique and rightDerivedNatTrans_fac. The existing comp_fac and comp_unit_app helpers are now exposed for reuse by module-valued finite Leray normalization; their statements and proofs are unchanged. The original abelian-valued argument specializes derived_comp_eq to AddCommGrpCat.",
    "uses": [
     "def-weil-pbc-scheme-conventions",
     "def-weil-pbc-inverse-image",
@@ -67,7 +67,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 05T2 and 015M; plan realized in Lean by C2 using the proved source derived-composition/mate interfaces and Mathlib rightDerived_ext. Terminal-section calculation follows the proved helper in Sheaf.AlgebraicGeometry.UnderivedGlobalGermExchange. Repair specializes the local underived helper to h = f ≫ g to avoid duplicating the existing private theorem statement."
+  "place": "Tags 05T2 and 015M; plan realized in Lean by C2 using the proved source derived-composition/mate interfaces and Mathlib rightDerived_ext. Terminal-section calculation follows the proved helper in Sheaf.AlgebraicGeometry.UnderivedGlobalGermExchange. Repair specializes the local underived helper to h = f ≫ g to avoid duplicating the existing private theorem statement. H6 repair exposes comp_fac and comp_unit_app and generalizes derived_comp_eq in place to Grothendieck abelian coefficients. The public derivedLeray_comp statement is unchanged."
  },
  "mathlib_searches": [
   {
@@ -134,7 +134,8 @@
   "declarations": [
    "AlgebraicGeometry.Etale.derivedLeray_comp",
    "AlgebraicGeometry.Etale.comp_fac",
-   "AlgebraicGeometry.Etale.comp_unit_app"
+   "AlgebraicGeometry.Etale.comp_unit_app",
+   "AlgebraicGeometry.Etale.derived_comp_eq"
   ]
  },
  "chapter": "sec-curve-estimates",
@@ -150,14 +151,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-23",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "H6",
   "result": "pass",
-  "landing": "20261016T150655-L-4176217",
+  "landing": "20261023T231430-L-3593856",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

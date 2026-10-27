@@ -1,0 +1,152 @@
+{
+ "id": "lem-sf-open-base-change-reduction-square",
+ "kind": "statement",
+ "title": "OpenBaseChange reduction Square",
+ "statement": "Under the original finite-type family, structural-square and admissibility hypotheses, the coefficient square Assertion holds for the openBaseChange generator whenever both endpoint words have length at most three. The normalized operation models are those of [def-sf-integral-system-canonical-bridge] and the typed-word domain is that of [def-sf-integral-system-expression-domain]; the operation data, finite words, generator kinds, admissibility predicates and the coefficient-square Assertion are those of [def-sf-generator-reduction-data]. This is only this forward generator case; it asserts neither the other three generators nor inverse-square or naturality clauses. StructuralSquares is the predicate of [def-sf-open-interchange-reduction-data].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Open-adjunction and clopen calculations, corresponding generator case."
+ },
+ "stmt_deps": [
+  "def-sf-open-interchange-reduction-data",
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-integral-system-expression-domain",
+  "def-sf-generator-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply canonicalReductionPullComposition to (g_U,j) and (j′,g). Transport the reduction/pullback comparison along the equality g_U j = j′ g and cancel the first geometric compositor. This gives compatibility with the inverse restriction square theta. The equality transport is proved by substitution; no scheme-map hypotheses are added.",
+   "uses": [
+    "lem-sf-canonical-reduction-pull-composition",
+    "def-sf-integral-system-canonical-bridge"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence; normalized open base-change mate calculation."
+   }
+  },
+  {
+   "text": "Prove the mate-pasting identity in arbitrary categories. Transpose the asserted square for the inverse beta through the target open adjunction. Substitute the two beta transpose equations. Naturality of theta moves the source open coefficient mate; its unit identity is unit_mateEquiv_symm. Naturality of the pullback comparison and the theta compatibility identify this with the integral beta transpose, followed by the second open mate unit identity. Injectivity of the adjunction hom equivalence gives the original square. The canonical open mates are invertible, so cancel them to obtain the square for their inverses.",
+   "uses": [
+    "def-sf-integral-system-canonical-bridge",
+    "lem-sf-canonical-open-reduction-is-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence; normalized open base-change mate calculation."
+   }
+  },
+  {
+   "text": "Naturality of the system beta inverse inserts the ordinary child coefficient arrow, without needing that arrow invertible. This gives the ordinary inverse-beta square for the two word endpoints. Cancel the two beta isomorphisms to obtain the forward square. Reuse assertion_of_ordinary_square from TensorAdjunctionReductionSquares: it identifies ordinaryR with reduction(completionMap) followed by the recursive r, then cancels reduction of the source completionMap. Short-word completion invertibility holds on precisely the original admissible domain.",
+   "uses": [
+    "lem-sf-tensor-adjunction-reduction-squares",
+    "lem-sf-short-word-completion-isomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence; normalized open base-change mate calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "lem-sf-canonical-open-reduction-is-iso",
+  "lem-sf-canonical-reduction-pull-composition",
+  "lem-sf-short-word-completion-isomorphism",
+  "lem-sf-tensor-adjunction-reduction-squares"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence; normalized open base-change mate calculation.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of reduction of open extension by zero, open base change and tensor projection formula",
+   "results": "Generic naturality and mate identities only; no comparison for the specified completed integral and strict semilinear system models. ModuleCat.Tilde.toOpen_res, ModuleCat.Tilde.res_apply, ModuleCat.Tilde.res_const, AlgebraicGeometry.Scheme.Hom.map_appLE",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Generic naturality and mate identities only; no comparison for the specified completed integral and strict semilinear system models. CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "inverse.*naturality|naturality.*inverse",
+   "results": "Generic naturality and mate identities only; no comparison for the specified completed integral and strict semilinear system models. Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/Tactic/CategoryTheory/Coherence/PureCoherence.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean, Mathlib/CategoryTheory/MorphismProperty/Composition.lean",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation between derived coefficient reduction functors respects pullback composition and tensor products",
+   "results": "Generic derived-natural-transformation composition identities; no result for the specified normalized operation models.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenInterchangeReductionSquares",
+  "date": "2026-10-25",
+  "group": "E3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Maps-used sentence; open-adjunction and four-factor clopen expansion of lem-sf-open-interchange-reduction-squares.",
+   "via": [
+    "lem-sf-open-interchange-reduction-squares",
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenBaseChangeReductionSquare",
+  "file": "lean/Sheaf/SixFunctors/OpenBaseChangeReductionSquare.lean",
+  "declaration": "WeilConjectures.OpenInterchangeReduction.openBaseChangeReductionSquare",
+  "statement": "theorem openBaseChangeReductionSquare\n    {D : FiniteFieldDatum.{u}} (Cf : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic Cf.l) E]\n    [FiniteDimensional (Padic Cf.l) E] (o : Operations Cf.l E)\n    (hStructural : StructuralSquares.{u, s, i} Cf.l E D o)\n    {S : Type s} (W : S → Scheme.{u}) (hW : FiniteTypeFamily W D.k)\n    {I : Type i} (location : I → S)\n    {a b c d : S}\n      (gU : W a ⟶ W b) (j' : W a ⟶ W c) (j : W b ⟶ W d) (g : W c ⟶ W d)\n      (h : gU ≫ j = j' ≫ g) (sq : IsPullback gU j' j g)\n      (hgU : IsSeparated gU) (htgU : LocallyOfFiniteType gU) (hqgU : QuasiCompact gU)\n      (hg : IsSeparated g) (htg : LocallyOfFiniteType g) (hqg : QuasiCompact g)\n      (hj' : IsOpenImmersion j') (hqj' : QuasiCompact j')\n      (hj : IsOpenImmersion j) (hqj : QuasiCompact j) (B : Word W location b)\n    (hSourceLength : (Word.pull g hg htg hqg (Word.open j hj hqj B)).length ≤ 3)\n    (hTargetLength : (Word.open j' hj' hqj' (Word.pull gU hgU htgU hqgU B)).length ≤ 3)\n    (K : ∀ k : I, DerivedCategory (scalarReductionSource Cf.l E (W (location k))))\n    (lo hi torLo torHi : ℤ)\n    (hInputs : ∀ k : I, Admissible Cf.l E\n      (IntegralSystemRealization.calculus Cf.l E (W (location k))) (K k)\n      lo hi torLo torHi)\n    (hSource : Word.admissible Cf.l E W location o K lo hi torLo torHi\n      (Word.pull g hg htg hqg\n      (Word.open j hj hqj B)))\n    (hTarget : Word.admissible Cf.l E W location o K lo hi torLo torHi\n      (Word.open j' hj' hqj'\n      (Word.pull gU hgU htgU hqgU B)))\n    (hGenerator : GeneratorKind.admissible Cf.l E W location o K lo hi torLo torHi\n      (GeneratorKind.openBaseChange gU j' j g h sq hgU htgU hqgU hg htg hqg hj' hqj' hj hqj B)) :\n    Assertion Cf.l E W location o K\n      (GeneratorKind.openBaseChange gU j' j g h sq hgU htgU hqgU hg htg hqg hj' hqj' hj hqj B)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.OpenInterchangeReduction.openBaseChangeReductionSquare"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a7731",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261025T201726-L-2608118",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261027T034657-L-3673479",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

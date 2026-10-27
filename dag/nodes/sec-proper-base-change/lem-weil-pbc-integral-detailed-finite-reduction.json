@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-integral-detailed-finite-reduction",
+ "kind": "statement",
+ "title": "Constructibility and intervals under normalized finite reduction",
+ "statement": "Fix a prime l, a finite extension E/Q_l [def-weil-l-adic-coefficient-extension], a noetherian scheme T [pqf-def-locnoeth], and an arbitrary complex K of detailed completed integral coefficient modules. For any n>=0 and integers a,b, its derived reduction modulo varpi^(n+1) [def-weil-integral-derived-reduction] is intrinsic finite-torsion constructible [def-weil-finite-torsion-constructibility] and has nonzero cohomological support contained in [a,b] if and only if the n-th constant derived reduction of integralDetailedTransport(K) [def-sfb-integral-completed-coefficient-transport] is IsGE a and IsLE b and has constructible cohomology over the finite quotient coefficient ring [def-weil-proetale-constructible-sheaf]. No order condition on a,b or completeness condition on K is needed.",
+ "stmt_deps": [
+  "def-sfb-integral-completed-coefficient-transport",
+  "def-weil-l-adic-coefficient-extension",
+  "pqf-def-locnoeth",
+  "def-weil-integral-derived-reduction",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-pbc-uniform-reduction-profile"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.5, convention before Definition 6.5.1; Lemma 4.2.12 and Lemma 6.8.2(1). Coefficient-presentation supplement to Proposition 6.8.11(3)."
+ },
+ "proof": [
+  {
+   "text": "Apply the normalized completed coefficient comparison and its derived restriction square to the quotient projection. The uniqueness of a left adjoint identifies the detailed derived scalar extension with the quotient extension. Compose with the constants-to-continuous-functions comparison to obtain an isomorphism from the transported constant reduction to restriction of the detailed reduction.",
+   "uses": [
+    "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "def-sfb-integral-completed-coefficient-transport",
+    "lem-weil-pbc-integral-coefficient-completeness-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact coefficient restriction commutes with each homology functor. As an equivalence it preserves and reflects zero objects. Thus vanishing below a and above b is equivalent on both reductions.",
+   "uses": [
+    "def-sfb-integral-completed-coefficient-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restriction along a coefficient ring isomorphism preserves finite constant module models on every stratum; use inverse restriction to reflect them. Its scalar action agrees with the fixed-coefficient encoding by naturality of sheafification. The two constructibility encodings identify the resulting predicates.",
+   "uses": [
+    "lem-weil-constructible-coefficient-serre",
+    "lem-weil-pbc-proetale-constant-module-constructibility"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Combine the cohomology comparison and the vanishing characterization of IsGE and IsLE. In the reverse direction the support is a subset of the finite integer interval, so its finiteness clause follows as well. This also handles empty intervals and the zero complex.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "def-sfb-integral-completed-coefficient-transport",
+  "lem-weil-pbc-integral-coefficient-completeness-transport",
+  "lem-weil-constructible-coefficient-serre",
+  "lem-weil-pbc-proetale-constant-module-constructibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Explicit comparison of the two normalized coefficient presentations in the detailed-category clause of Proposition 6.8.11(3); the proof is implemented completely in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction along a coefficient ring isomorphism preserves derived completeness and constructible finite reductions",
+   "date": "2026-10-23",
+   "results": "8 hits: instRingRestrictScalars, RingHom.finitePresentation_respectsIso, RingHom.finite_respectsIso, RingHom.QuasiFinite.respectsIso, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, Module.RestrictScalars.normedSpaceOrig, instCommRingRestrictScalars, RingHom.EssFiniteType.respectsIso",
+   "verdict": "No exact finite reduction comparison; the constant sheaf and bound APIs are used in the complete proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along an isomorphism of constant coefficient rings preserves and reflects constructible sheaves and the cohomological interval of finite derived reductions",
+   "date": "2026-10-23",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_congr, CategoryTheory.Sheaf.isConstant_iff_of_equivalence, CategoryTheory.Sheaf.isConstant_of_iso, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.isLE_of_iso, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CochainComplex.ConnectData.restrictionGEIso, CochainComplex.isGE_of_iso",
+   "verdict": "No exact finite reduction comparison; the constant sheaf and bound APIs are used in the complete proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDerivedLimitTriangle\"",
+   "date": "2026-10-23",
+   "results": "0 hits: ",
+   "verdict": "No exact finite reduction comparison; the constant sheaf and bound APIs are used in the complete proof."
+  },
+  {
+   "tool": "grep",
+   "query": "PbcIsIntrinsicallyComplete|PbcUniformReductionProfile",
+   "date": "2026-10-23",
+   "results": "0 hits: ",
+   "verdict": "No exact finite reduction comparison; the constant sheaf and bound APIs are used in the complete proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStratifiedPerfectCharacterization",
+  "date": "2026-10-23",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: Choose an integral lattice for K; prerequisite comparison of the integral categories.",
+   "via": [
+    "lem-weil-pbc-condensed-e-realization",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralDetailedFiniteReduction",
+  "file": "lean/Sheaf/Paper/IntegralDetailedFiniteReduction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.integralDetailedFiniteReduction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.integralDetailedFiniteReduction"
+  ],
+  "statement": "theorem integralDetailedFiniteReduction\n    (T : Scheme.{u}) [IsNoetherian T] (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (K : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T))\n    (n : ℕ) (a b : ℤ) :\n    (intrinsicFiniteTorsionConstructible l E (n + 1)\n        (Nat.succ_le_succ (Nat.zero_le n)) T\n        ((WeilConjectures.scalarReductionDerivedExtension.{u, u} l E T n).obj K) ∧\n      proEtaleCohomologicalSupport\n        ((WeilConjectures.scalarReductionDerivedExtension.{u, u} l E T n).obj K) ⊆\n          Set.Icc a b) ↔\n    (((pbcConstantReduction T (pbcIntegralDatum l E) n).obj\n        ((integralDetailedTransport T l E).obj K)).IsGE a ∧\n      ((pbcConstantReduction T (pbcIntegralDatum l E) n).obj\n        ((integralDetailedTransport T l E).obj K)).IsLE b ∧\n      DerivedCategory.homologyProperty\n        (@IsConstructibleProEtaleCoefficientModuleSheaf T\n          (PbcQuotient (pbcIntegralDatum l E) n) _\n          ((pbcIntegralDatum l E).quotientFinite n))\n        ((pbcConstantReduction T (pbcIntegralDatum l E) n).obj\n          ((integralDetailedTransport T l E).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-fd479",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261024T015708-L-2438656",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-fd479",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261024T015708-L-2438656",
+  "kind": "interface",
+  "note": "independent cc review: integralStratifiedPerfectDetailed proof and the two new proved lemmas against the item node step 5 and the new nodes; moved blocks diffed against live (verbatim except one internal proof step); all 6 delivered modules incl. importer CCPT compiled with lcompile --all; axioms checked (sorryAx only via pre-existing Roos-transport hole)"
+ }
+}

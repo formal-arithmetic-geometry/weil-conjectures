@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-ring-tensor-cech-coordinates",
+ "kind": "statement",
+ "title": "Ordered localization coordinates of the actual tensor complex over a ring",
+ "statement": "Let A be a commutative ring and f:Fin r to A a finite list. Specialize the actual tensor extended Cech construction [def-weil-pbc-ringed-extended-cech] to the one-point bottom-topology ring site. The resulting augmented ring-site complex has the ordered localization coordinates of [def-weil-pbc-ring-complex-cech-data]: negative terms are zero, degree zero is A, degree q+1 is the product over increasing maps t:Fin(q+1) into Fin r of A localized at product f(t i), the first differential is the diagonal localization map, later differentials are alternating sums of A-algebra localization maps, and the augmentation equals the degree-zero identification. No arbitrary complex, global sections of another site or scalar-extension functor occurs.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0996 and 099D(d); assigned node proof step 2, pure-ring subset expansion"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-extended-cech",
+  "def-weil-pbc-ring-complex-cech-data"
+ ],
+ "proof": [
+  {
+   "text": "Prove nonnegativity independently by induction on the actual tensor construction. A two-term localization factor vanishes in negative degrees. The tensor of two nonnegative complexes vanishes in negative degrees by CochainComplex.isStrictlyGE_tensorObj.",
+   "uses": [
+    "def-weil-pbc-ringed-extended-cech"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the degree-zero augmentation is an isomorphism for every list, independently of the coordinates. For any two nonnegative complexes, construct the inverse to the (0,0) tensor-summand inclusion using mapBifunctorDesc, zero on all other summands; a nonzero-degree summand with total degree zero has a negative factor and is zero. The tensor map induced by two maps invertible in degree zero is therefore invertible in degree zero, by naturality of this inclusion. Apply this inductively to the factor projections and the tensor left unitor.",
+   "uses": [
+    "def-weil-pbc-ringed-extended-cech"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on r. For r=0 the actual construction is A[0] with identity augmentation. Evaluate singleObjXSelf for the degree-zero linear equivalence. Every positive term is zero and its coordinate product is indexed by an empty type of positive-sized ordered subsets of Fin 0; LinearEquiv.ofSubsingleton gives these coordinates. Face maps and differential formulas have empty indexing types, and the augmentation equation is the identity calculation.",
+   "uses": [
+    "def-weil-pbc-ringed-extended-cech",
+    "def-weil-pbc-ring-complex-cech-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For r+1 apply the induction hypothesis to i maps to f(i+1), obtaining all tail coordinates and their equations. Apply the one-factor positive-coordinate theorem to that augmented tail complex and the actual first localization factor. Its tensor and augmentation are definitionally the successor of ringedExtendedCech. Use the independently proved invertibility of the actual degree-zero augmentation to define e0 by evaluating its composite with singleObjXSelf. Its value equals the augmentation value definitionally, so the new first-differential equation has precisely the required e0. Supply the independently proved nonnegative-degree vanishing. The alternating equation is supplied by the one-factor lemma and the augmentation equation is reflexivity.",
+   "uses": [
+    "lem-weil-pbc-ring-cech-coordinate-tensor-step",
+    "def-weil-pbc-ringed-extended-cech"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-extended-cech",
+  "def-weil-pbc-ring-complex-cech-data",
+  "lem-weil-pbc-ring-cech-coordinate-tensor-step"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J5",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0996 and 099D(d), induction on the ordered tensor construction",
+  "note": "Lean proves the empty case, tensor nonnegativity, the inverse of the degree-zero tensor-summand inclusion, invertibility of the actual degree-zero augmentation, and induction assembly. One residual theorem is the positive-coordinate single-factor calculation, assuming tail coordinates; it contains no recursive list construction or degree-zero equivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The ordered Cech localization complex is isomorphic to the tensor product of two term localization complexes",
+   "results": "HomologicalComplex tensor existence and monoidal localization results; no ordered localization coordinate theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for this augmented tensor-complex interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, Localization.Away",
+   "results": "OK 0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for this augmented tensor-complex interface."
+  },
+  {
+   "tool": "grep",
+   "query": "ordered.*[Cc]ech|[Cc]ech.*tensor",
+   "results": "OK 0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for this augmented tensor-complex interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordered Cech localization complex is the tensor product of two term localization complexes",
+   "results": "HomologicalComplex.tensorObj, tensorHom, HasTensor; IsLocalization.tensorProduct_isLocalizedModule; generic constructions only.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for this augmented tensor-complex interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "U9",
+  "date": "2026-10-26",
+  "item": "Sheaf.Paper.GlobalSectionOrderedCechTensor"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Assigned node lem-weil-pbc-global-section-ordered-cech-tensor, Tags 0996 and 099D(d); assigned node proof step 2, pure-ring subset expansion. Inherited blueprint ancestry is null: created.item chain stops at a module name. Serves the global augmented extended Cech construction under def-weil-pbc-completed-pullback.",
+   "via": [
+    "lem-weil-pbc-global-section-ordered-cech-tensor",
+    "lem-weil-pbc-global-section-scalar-cech-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingTensorCechCoordinates",
+  "file": "lean/Sheaf/Paper/RingTensorCechCoordinates.lean",
+  "declaration": "CategoryTheory.ringTensorCech_coordinates",
+  "statement": "theorem ringTensorCech_coordinates (A : CommRingCat.{u}) (r : ℕ) (f : Fin r → A) :\n    let K := (ringTensorCech A r f).1\n    let a := (ringTensorCech A r f).2\n    ∃ (e₀ : (K.X 0).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[A] A)\n      (e : ∀ q : ℕ, (K.X ((q : ℤ) + 1)).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[A]\n        ((t : Fin (q + 1) ↪o Fin r) → Localization.Away (∏ i, f (t i))))\n      (l : ∀ (q : ℕ) (t : Fin (q + 2) ↪o Fin r) (j : Fin (q + 2)),\n        Localization.Away (∏ i, f (t (Fin.succAboveOrderEmb j i))) →ₐ[A]\n          Localization.Away (∏ i, f (t i))),\n      (∀ n : ℤ, n < 0 → CategoryTheory.Limits.IsZero (K.X n)) ∧\n      (∀ (x : (K.X 0).val.obj (op ⟨PUnit.unit⟩)) (t : Fin 1 ↪o Fin r),\n        e 0 ((K.d 0 1).val.app (op ⟨PUnit.unit⟩) x) t =\n          algebraMap A (Localization.Away (∏ i, f (t i))) (e₀ x)) ∧\n      (∀ (q : ℕ) (x : (K.X ((q : ℤ) + 1)).val.obj (op ⟨PUnit.unit⟩))\n        (t : Fin (q + 2) ↪o Fin r),\n        e (q + 1) ((K.d ((q : ℤ) + 1) ((q : ℤ) + 2)).val.app (op ⟨PUnit.unit⟩) x) t =\n          ∑ j : Fin (q + 2), (-1 : ℤ) ^ j.val •\n            l q t j (e q x ((Fin.succAboveOrderEmb j).trans t))) ∧\n      (∀ x : (K.X 0).val.obj (op ⟨PUnit.unit⟩),\n        ringComplexAugmentationValue a x = e₀ x)",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-26",
+  "declarations": [
+   "CategoryTheory.ringTensorCechSection",
+   "CategoryTheory.ringTensorCech",
+   "CategoryTheory.ringTensorCech_coordinates"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261026T071316-L-3911986",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261026T091825-L-3379240",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

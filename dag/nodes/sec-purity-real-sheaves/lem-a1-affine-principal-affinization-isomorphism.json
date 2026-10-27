@@ -1,0 +1,247 @@
+{
+ "id": "lem-a1-affine-principal-affinization-isomorphism",
+ "kind": "statement",
+ "title": "Canonical affinization isomorphism on an affine principal open",
+ "statement": "Let $X$ be a quasi-compact scheme [def-weil-pbc-quasi-compact-scheme, def-pc-scheme] that is quasi-separated, meaning that the intersection of any two affine open subschemes is quasi-compact. Put $C=\\Gamma(X,\\mathcal O_X)$ and let $f\\in C$. Let $X_f=\\{x\\in X:f_x\\in\\mathcal O_{X,x}^{\\times}\\}$ and assume $X_f$ is affine. Let $j:X\\to\\operatorname{Spec}C$ be the canonical morphism corresponding to $\\mathrm{id}_C$ [lem-weil-pbc-morphism-into-affine-scheme, def-weil-affine-spectrum]. Then $j^{-1}(D(f))=X_f$, and the induced morphism $j_f:X_f\\to D(f)$ is an isomorphism of schemes. Under the canonical identification $\\Gamma(D(f),\\mathcal O)=C_f$, where $C_f$ is the localization at the powers of $f$ [def-weil-ring-localization-away], its section homomorphism is the ring isomorphism $C_f\\xrightarrow{\\sim}\\Gamma(X_f,\\mathcal O_X)$ sending $a/f^n$ to $a|_{X_f}/(f|_{X_f})^n$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 01P8, lemma-invert-f-affine, statement and proof (the canonical morphism on an affine principal open)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-pc-scheme",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Apply Scheme.toSpecΓ_preimage_basicOpen to identify the inverse image of D(f) with X_f. Mathlib isIso_ΓSpec_adjunction_unit_app_basicOpen, the qcqs section-localization theorem (Tag 01P7), says that the section map X.toSpecΓ.app D(f) is an isomorphism. The extra restriction in appLE is induced by the displayed equality of opens, hence is an isomorphism. Scheme.Hom.resLE_app_top conjugates this map by the two canonical top-section identifications, proving that the restricted morphism g has an isomorphism on global sections.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01P7, lemma-invert-f-sections; Tag 01P8, lemma-invert-f-affine. Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean, isIso_ΓSpec_adjunction_unit_app_basicOpen; Mathlib/AlgebraicGeometry/Restrict.lean, resLE_app_top."
+   }
+  },
+  {
+   "text": "The source X_f is affine by hypothesis and D(f) is affine by [lem-weil-pbc-affine-open-section-vanishing-prime]. Apply [lem-sc-affine-global-sections-iso]: concretely arrowIsoSpecΓOfIsAffine identifies g with Spec.map g.appTop, which is an isomorphism since g.appTop is one. This proves the required IsIso clause.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-sc-affine-global-sections-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01P8, lemma-invert-f-affine, proof."
+   }
+  },
+  {
+   "text": "Scheme.toSpecAway is g followed by basicOpenIsoSpecAway, hence is an isomorphism. Scheme.awayToBasicOpen is its global-section map preceded by the inverse of ΓSpecIso, so it too is an isomorphism. Convert asIso of this actual canonical ring map to a ring equivalence; its forward homomorphism is definitionally awayToBasicOpen. For a and n, multiply the proposed fraction formula by the unit (f restricted to X_f)^n. Scheme.awayToBasicOpen_algebraMap identifies images of global elements with restrictions, and IsLocalization.mk'_spec [def-weil-ring-localization-away] identifies the left side with the restriction of a. On the right use Ring.inverse_mul_cancel and the power law. Cancel only the restricted unit, never f in the original ring; this includes zero-divisors, nilpotent f and the empty scheme.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01P7, canonical localization map, and Tag 01P8; WeilConjectures/Mathlib/AlgebraicGeometry/AffineScheme.lean, toSpecAway, awayToBasicOpen and awayToBasicOpen_algebraMap."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-sc-affine-global-sections-iso",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 01P8, lemma-invert-f-affine, using Tag 01P7 directly through Mathlib isIso_ΓSpec_adjunction_unit_app_basicOpen. Formalized by F7; the former tensor-power specialization is unnecessary."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated scheme X with affine principal open X_f the canonical affinization morphism identifies X_f isomorphically with D(f)",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen; AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso; AlgebraicGeometry.Scheme.openCoverBasicOpenTop_f; AlgebraicGeometry.IsAffineOpen.fromSpec_top; AlgebraicGeometry.IsAffineOpen.isoSpec; AlgebraicGeometry.IsAffineOpen.isoSpec_hom; AlgebraicGeometry.IsAffineOpen.appBasicOpenIsoAwayMap; AlgebraicGeometry.Scheme.map_PrimeSpectrum_basicOpen_of_affine",
+   "date": "2026-10-22",
+   "verdict": "no match: isIso_ΓSpec_adjunction_unit_app_basicOpen (Morphisms/QuasiSeparated.lean:450-464) proves the section homomorphism is an isomorphism, not that the restricted scheme morphism is an isomorphism. AffineScheme.lean:445-461 concerns the spectrum of sections of an already affine open; the comparison of that spectrum with D(f) and the explicit fraction map still have to be made. These are components, not an exact declaration or a one-line specialization of the complete statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toSpecΓ\", \"IsAffineOpen\"",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.IsAffineOpen.toSpecΓ_fromSpec; AlgebraicGeometry.IsAffineOpen.toSpecΓ_isoSpec_inv; AlgebraicGeometry.IsAffineOpen.toSpecΓ_fromSpec_assoc; AlgebraicGeometry.IsAffineOpen.toSpecΓ_isoSpec_inv_assoc; AlgebraicGeometry.IsAffineOpen.isoSpec_inv_toSpecΓ_assoc; AlgebraicGeometry.IsAffineOpen.isoSpec_inv_toSpecΓ; AlgebraicGeometry.IsAffineOpen.fromSpec_toSpecΓ; AlgebraicGeometry.IsAffineOpen.fromSpec_toSpecΓ_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: isIso_ΓSpec_adjunction_unit_app_basicOpen (Morphisms/QuasiSeparated.lean:450-464) proves the section homomorphism is an isomorphism, not that the restricted scheme morphism is an isomorphism. AffineScheme.lean:445-461 concerns the spectrum of sections of an already affine open; the comparison of that spectrum with D(f) and the explicit fraction map still have to be made. These are components, not an exact declaration or a one-line specialization of the complete statement."
+  },
+  {
+   "tool": "grep",
+   "query": "fromSpec_toSpecΓ|toSpecΓ_fromSpec|isLocalization_basicOpen_of_qcqs|invert.f.affine",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "11 hits: Mathlib/AlgebraicGeometry/QuasiAffine.lean; Mathlib/AlgebraicGeometry/QuasiAffine.lean; Mathlib/AlgebraicGeometry/QuasiAffine.lean; Mathlib/AlgebraicGeometry/AffineScheme.lean; Mathlib/AlgebraicGeometry/AffineScheme.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: isIso_ΓSpec_adjunction_unit_app_basicOpen (Morphisms/QuasiSeparated.lean:450-464) proves the section homomorphism is an isomorphism, not that the restricted scheme morphism is an isomorphism. AffineScheme.lean:445-461 concerns the spectrum of sections of an already affine open; the comparison of that spectrum with D(f) and the explicit fraction map still have to be made. These are components, not an exact declaration or a one-line specialization of the complete statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stacks 01P8: restriction of X toSpecGamma to an affine basic open X_f is an isomorphism to the spectrum distinguished open D(f) for qcqs X",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso; AlgebraicGeometry.IsAffineOpen.appBasicOpenIsoAwayMap; AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen; AlgebraicGeometry.SpecMapRestrictBasicOpenIso; AlgebraicGeometry.IsAffineOpen.isoSpec; AlgebraicGeometry.Scheme.map_PrimeSpectrum_basicOpen_of_affine; AlgebraicGeometry.basicOpenIsoSpecAway; AlgebraicGeometry.IsAffineOpen.isoSpec_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: isIso_ΓSpec_adjunction_unit_app_basicOpen (Morphisms/QuasiSeparated.lean:450-464) proves the section homomorphism is an isomorphism, not that the restricted scheme morphism is an isomorphism. AffineScheme.lean:445-461 concerns the spectrum of sections of an already affine open; the comparison of that spectrum with D(f) and the explicit fraction map still have to be made. These are components, not an exact declaration or a one-line specialization of the complete statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If X is quasi compact quasi separated and X_f is affine then the restriction of the canonical morphism X to Spec Gamma X maps X_f isomorphically onto D(f)",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.IsAffine.mk; AlgebraicGeometry.Scheme.map_PrimeSpectrum_basicOpen_of_affine; AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen; AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion; AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso; AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine; AlgebraicGeometry.IsAffineOpen.fromSpec_top; AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat",
+   "date": "2026-10-22",
+   "verdict": "no match: isIso_ΓSpec_adjunction_unit_app_basicOpen (Morphisms/QuasiSeparated.lean:450-464) proves the section homomorphism is an isomorphism, not that the restricted scheme morphism is an isomorphism. AffineScheme.lean:445-461 concerns the spectrum of sections of an already affine open; the comparison of that spectrum with D(f) and the explicit fraction map still have to be made. These are components, not an exact declaration or a one-line specialization of the complete statement."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_ΓSpec_adjunction_unit_app_basicOpen|isIso.*[Rr]estrict.*toSpecΓ|toSpecΓ.*[Rr]estrict.*isIso",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean; Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: isIso_ΓSpec_adjunction_unit_app_basicOpen (Morphisms/QuasiSeparated.lean:450-464) proves the section homomorphism is an isomorphism, not that the restricted scheme morphism is an isomorphism. AffineScheme.lean:445-461 concerns the spectrum of sections of an already affine open; the comparison of that spectrum with D(f) and the explicit fraction map still have to be made. These are components, not an exact declaration or a one-line specialization of the complete statement."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_ΓSpec_adjunction_unit_app_basicOpen|isLocalization_basicOpen_of_qcqs|preimage_basicOpen|isIso_iff.*appTop",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Restrict.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the qcqs localization and affine-section criterion are components; reused existing DAG generalizations. No new node created."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated scheme X with affine basic open X_f the canonical map X to Spec Gamma X restricts to an isomorphism X_f to D(f)",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen; AlgebraicGeometry.SpecMapRestrictBasicOpenIso; AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso; AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_basicOpen'; AlgebraicGeometry.Scheme.map_PrimeSpectrum_basicOpen_of_affine; AlgebraicGeometry.IsAffineOpen.appBasicOpenIsoAwayMap; AlgebraicGeometry.IsAffineOpen.isoSpec; AlgebraicGeometry.instIsAffineHomιBasicOpen",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the qcqs localization and affine-section criterion are components; reused existing DAG generalizations. No new node created."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of the affinization map to an affine principal open in a quasi compact quasi separated scheme is an isomorphism to the corresponding principal open of the spectrum of global sections",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.IsAffineOpen.isoSpec.congr_simp; AlgebraicGeometry.IsAffineOpen.isoSpec; AlgebraicGeometry.IsAffineOpen.toSpecΓ_isoSpec_inv_assoc; AlgebraicGeometry.IsAffine.casesOn; AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso; AlgebraicGeometry.IsAffineOpen.isoSpec_hom; AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen; AlgebraicGeometry.IsAffineOpen.fromSpec_top",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the qcqs localization and affine-section criterion are components; reused existing DAG generalizations. No new node created."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocalization_basicOpen_of_qcqs|isIso_ΓSpec_adjunction_unit_app_basicOpen",
+   "subdirectory": "AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+   "results": "5 hits: 29; 401; 425; 450; 458",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the qcqs localization and affine-section criterion are components; reused existing DAG generalizations. No new node created."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isLocalization_basicOpen_of_qcqs\"",
+   "subdirectory": "",
+   "results": "1 hits: AlgebraicGeometry.isLocalization_basicOpen_of_qcqs",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the qcqs localization and affine-section criterion are components; reused existing DAG generalizations. No new node created."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On any quasi compact quasi separated scheme X, the canonical ring map from global sections localized at f to sections on X_f is an isomorphism",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen; AlgebraicGeometry.isLocalization_basicOpen_of_qcqs; AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen; AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso; AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated; AlgebraicGeometry.StructureSheaf.basicOpenIso; AlgebraicGeometry.IsAffineOpen.isLocalization_basicOpen; AlgebraicGeometry.isLocalization_away_of_isAffine",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the qcqs localization and affine-section criterion are components; reused existing DAG generalizations. No new node created."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a quasi compact quasi separated scheme, sections on the nonvanishing open of a global function are the localization of global sections at that function",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.Γ_restrict_isLocalization; AlgebraicGeometry.IsAffineOpen.isLocalization_of_eq_basicOpen; AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp; AlgebraicGeometry.isLocalization_basicOpen_of_qcqs; AlgebraicGeometry.IsAffineOpen.isLocalization_basicOpen; AlgebraicGeometry.StructureSheaf.basicOpenIso; AlgebraicGeometry.StructureSheaf.toBasicOpen; AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: the qcqs localization and affine-section criterion are components; reused existing DAG generalizations. No new node created."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-quasi-affine-open-affinization-square",
+  "date": "2026-10-22",
+  "group": "Q56"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Tag 0API canonical-embedding argument below lem-a1-affine-hc0, using Tag 0ARY: the application of Tag 01P8 identifying U_f with D(f) (returned proof step 4).",
+   "via": [
+    "lem-a1-quasi-affine-open-affinization-square",
+    "lem-a1-intersection-canonical-affine-embedding",
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-affine-principal-affinization-isomorphism",
+  "worker": "stage1",
+  "summary": "Repair of the current side-completion promotion refusal (returned head 75b5086af5f): compared the retained split with the current unsplit DAG item and re-read all seven current proof citations and their sources. All statements and citation quotes still agree. Preserved the statement and three-step route; explicitly factored the Laurent-localization equality and explained why its T factor may be removed without cancelling f. Reused existing nodes; no new nodes. Delivery is rebased by the required tool onto current origin/sheaf-dag.",
+  "blueprint": "The canonical embedding argument below lem-a1-affine-hc0, via the Tag 0API/0ARY route: the use of Tag 01P8 identifying an affine principal open with D(f).",
+  "tool_uses": [
+   {
+    "node": "lem-sc-p1-invertible-section-localization",
+    "why": "General qcqs section-localization theorem, used only for L=F=O_X; this is the ring-localization ingredient of the required Tag 01P8 route, and no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-1bdb2ff4f",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-1bdb2ff4f (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item and every cited statement in full. No new nodes; one commit with only the item and the report. The live and side-live clones still have the item unsplit, so it is not superseded. Compared with head 75b5086af5f4, only step 2 changes: it now factors (fT)^k(aT^n(fT)^m-bT^m(fT)^n)=f^k(af^m-bf^n)T^{n+m+k} and removes T as a unit. I checked this and it is correct. The statement and stmt_deps are unchanged. Source: properties.tex 01P8 (lemma-invert-f-affine, l.2433), whose proof uses 01P7 (l.2153). The item has the same qcqs and X_f-affine hypotheses as 01P8, plus a true explicit fraction-map clause, which the parent lem-a1-quasi-affine-open-affinization-square uses. Step 1: lem-weil-pbc-morphism-into-affine-scheme with rho=id_C gives j^{-1}D(f)=X_f. lem-weil-pbc-affine-open-section-vanishing-prime(b) on Spec C gives D(f) affine with sections C_f. Restriction compatibility and preservation of inverses give the fraction formula. Step 2: lem-sc-p1-invertible-section-localization (01PW(2)) with L=F=O_X and s=fT, so N=C[T,T^-1]. Degree-zero fractions are aT^k/(fT)^k, and their equality relation is exactly that of def-weil-ring-localization-away. X_s=X_f because the stalk is local. The bijection is step 1's ring map, so it is a ring isomorphism. Step 3: lem-sc-affine-global-sections-iso applies because both opens are affine. Edge cases checked: X empty, f=0 or nilpotent, f a unit, f a zero divisor. No duplicate: rg -L for 01P7/01P8/isLocalization_basicOpen_of_qcqs finds only this item and its parent. No cycle, no SGA. Accepted tool_use: lem-sc-p1-invertible-section-localization (sk-thm-picard-duality) as the generic qcqs localization tool, since no node of this unit states 01P7."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePrincipalAffinizationIsomorphism",
+  "declaration": "AlgebraicGeometry.affine_principal_affinization_isomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePrincipalAffinizationIsomorphism.lean",
+  "statement": "theorem affine_principal_affinization_isomorphism (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (f : Γ(X, ⊤)) (hf : IsAffineOpen (X.basicOpen f)) : X.toSpecΓ ⁻¹ᵁ (PrimeSpectrum.basicOpen f) = X.basicOpen f ∧ IsIso (X.toSpecΓ.resLE (PrimeSpectrum.basicOpen f) (X.basicOpen f) (X.toSpecΓ_preimage_basicOpen f).ge) ∧ ∃ e : Localization.Away f ≃+* Γ((X.basicOpen f).toScheme, ⊤), e.toRingHom = (X.awayToBasicOpen f).hom ∧ ∀ (a : Γ(X, ⊤)) (n : ℕ), e (IsLocalization.mk' (Localization.Away f) a (Submonoid.pow f n)) = (X.basicOpen f).ι.appTop a * Ring.inverse ((X.basicOpen f).ι.appTop f) ^ n",
+  "branch": "newtargets-dag",
+  "by": "Q121",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22e0d6a35",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Read node, 5 stmt_deps, Stacks 01P8 (properties.tex l.2433), delivered module and report, and upstream toSpecAway/awayToBasicOpen (side-live AffineScheme.lean). Hypotheses exact (CompactSpace, QuasiSeparatedSpace, IsAffineOpen basicOpen), nothing added. Preimage clause literal; IsIso of actual toSpecΓ.resLE; ring iso pinned to canonical awayToBasicOpen (= section map of restricted j under basicOpenIsoSpecAway), so not arbitrary; fraction formula for all a, n via Ring.inverse of a unit. Edge cases X empty, f=0/nilpotent/unit/zero-divisor ok. lean.statement verbatim in file; live node still split with no lean record (not superseded); snapshot differs from live only in lean; proof-dep imports exist; docstrings carry source, blueprint id and 3 proof steps; proof is sorry only; no new nodes/defs/SGA/pro-etale. No changes, so no compile; worker reports clean compiles."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261023T102724-L-2959654",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

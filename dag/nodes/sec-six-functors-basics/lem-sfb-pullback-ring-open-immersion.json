@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-pullback-ring-open-immersion",
+ "kind": "statement",
+ "title": "Open immersion from a ring fibre product on specified principal opens",
+ "statement": "Let $B,R,R^{\\prime}$ be commutative rings with identity and $s:B\\to R$, $t:R^{\\prime}\\to R$ ring homomorphisms. Set $B^{\\prime}=B\\times_RR^{\\prime}=\\{(b,r):s(b)=t(r)\\}$, with coordinatewise operations. Let $f_1,\\ldots,f_m\\in R^{\\prime}$ and $g_1,\\ldots,g_m\\in B$ satisfy $t(f_l)=s(g_l)$ and assume that each natural map $B_{g_l}\\to R_{s(g_l)}$ is an isomorphism [def-weil-ring-localization-away]. Put $h_l=(g_l,f_l)\\in B^{\\prime}$ and $Q^{\\prime}=\\bigcup_lD_{R^{\\prime}}(f_l)\\subset\\operatorname{Spec}R^{\\prime}$ [def-weil-affine-spectrum]. Then the natural maps $(B^{\\prime})_{h_l}\\to(R^{\\prime})_{f_l}$ are isomorphisms. The restriction of $\\operatorname{Spec}(B^{\\prime}\\to R^{\\prime})$ to $Q^{\\prime}$ is an open immersion [def-weil-open-immersion], identifying $Q^{\\prime}$ with $\\bigcup_lD_{B^{\\prime}}(h_l)$. These identifications use the projection homomorphisms just specified. No surjectivity of $s$ or $t$ is assumed; zero rings and empty families are allowed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01Z9 (lemma-diagram), with the principal-open localization identification supplied by More on Algebra, Tag 01Z8 (lemma-diagram-localize)"
+ },
+ "stmt_deps": [
+  "def-weil-ring-localization-away",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Fix an index $l$ and abbreviate $P=B^{\\prime}$, $g=g_l$, $f=f_l$, $d=s(g)=t(f)$ and $h=(g,f)$. Let $p:P\\to B$ and $q:P\\to R^{\\prime}$ be the projections. Regard $B$, $R^{\\prime}$ and $R$ as $P$-modules via $p$, $q$ and $s\\circ p=t\\circ q$. The maps $u:P\\to B\\oplus R^{\\prime}$, $u(b,r)=(b,r)$, and $v:B\\oplus R^{\\prime}\\to R$, $v(b,r)=s(b)-t(r)$, are $P$-linear. For $v$, linearity follows from $s(p(a))=t(q(a))$ for $a\\in P$. The map $u$ is injective and its image is exactly $\\ker(v)$ by the defining equality for $P$. Thus $0\\to P\\xrightarrow{u}B\\oplus R^{\\prime}\\xrightarrow{v}R$ is exact at $P$ and at $B\\oplus R^{\\prime}$; no assertion of surjectivity onto $R$ is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 01Z8 (lemma-diagram-localize), proof: exact sequence of fibre-product modules"
+   }
+  },
+  {
+   "text": "Localize these two exact pairs of $P$-modules at $T=\\{1,h,h^2,\\ldots\\}$ using [lem-weil-pbc-localization-module-exact]. The $T$-localizations of $B$, $R^{\\prime}$ and $R$ identify respectively with $B_g$, $(R^{\\prime})_f$ and $R_d$: the fraction maps are $b/h^n\\mapsto b/g^n$, $r/h^n\\mapsto r/f^n$ and $a/h^n\\mapsto a/d^n$. They are bijections because $h$ acts on the three modules by $g,f,d$, so their fraction equivalence relations coincide with [def-weil-ring-localization-away]. Also $(B\\oplus R^{\\prime})_h\\cong B_g\\oplus(R^{\\prime})_f$ by $(b,r)/h^n\\mapsto(b/g^n,r/f^n)$; the inverse sends $(b/g^n,r/f^k)$ to $(g^{N-n}b,f^{N-k}r)/h^N$ for $N=\\max(n,k)$. Equality of fractions verifies these formulas. The localized maps are therefore $P_h\\to B_g\\oplus(R^{\\prime})_f$, induced by $p,q$, and $(x,z)\\mapsto s_g(x)-t_f(z)$, where $s_g,t_f$ are the induced localization maps. Exactness at the first term makes the first map injective, and exactness at the middle makes its image precisely the pairs with $s_g(x)=t_f(z)$. Since it is also a ring homomorphism by coordinatewise operations, it identifies $P_h$ as a ring with $B_g\\times_{R_d}(R^{\\prime})_f$, compatibly with both projections.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 01Z8 (lemma-diagram-localize), proof; Algebra Tag 00CS (proposition-localization-exact)"
+   }
+  },
+  {
+   "text": "By hypothesis $s_g:B_g\\to R_d$ is a ring isomorphism. Projection $B_g\\times_{R_d}(R^{\\prime})_f\\to(R^{\\prime})_f$ is consequently a ring isomorphism with inverse $z\\mapsto(s_g^{-1}(t_f(z)),z)$. Indeed this pair satisfies the fibre-product equality, its second coordinate is $z$, and for every compatible pair $(x,z)$ the first coordinate is forced to be $s_g^{-1}(t_f(z))$. Composing with step 2 gives an isomorphism $q_h:P_h\\to(R^{\\prime})_f$ whose formula on fractions is $(b,r)/h^n\\mapsto r/f^n$. This is exactly the natural map specified in the statement. The argument applies to every $l$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01Z9 (lemma-diagram), proof: cancellation of the isomorphism in the localized cartesian square"
+   }
+  },
+  {
+   "text": "Write $j:\\operatorname{Spec}R^{\\prime}\\to\\operatorname{Spec}P$ for $\\operatorname{Spec}q$. Set $U_l=D_{R^{\\prime}}(f_l)$ and $V_l=D_P(h_l)$. By [lem-weil-pbc-principal-localization-open-immersion] and [def-weil-open-immersion], the canonical maps from $\\operatorname{Spec}(R^{\\prime})_{f_l}$ and $\\operatorname{Spec}P_{h_l}$ identify them as schemes with $U_l$ and $V_l$, respectively. Contravariant functoriality of [def-weil-affine-spectrum] sends the ring isomorphism of step 3 to a scheme isomorphism $U_l\\xrightarrow{\\sim}V_l$. It is the restriction of $j$: on rings the square commutes because $q_{h_l}((b,r)/1)=r/1$, so its two composites from $P$ coincide. Moreover $j^{-1}(V_l)=U_l$: at a prime $\\mathfrak p\\subset R^{\\prime}$, $h_l\\notin q^{-1}(\\mathfrak p)$ is equivalent to $q(h_l)=f_l\\notin\\mathfrak p$. Thus $j|_{U_l}$, considered as a map into $\\operatorname{Spec}P$, is an open immersion with image exactly $V_l$.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01Z9 (lemma-diagram), proof; Schemes Tag 01I3 (lemma-standard-open-affine), proof"
+   }
+  },
+  {
+   "text": "Restrict $j$ to $Q^{\\prime}=\\bigcup_lU_l$, and denote it by $j_Q$. Its underlying map is injective: if $x,y\\in Q^{\\prime}$ have the same image, choose $l$ with $x\\in U_l$. Their common image lies in $V_l$, hence $y\\in U_l$ by the inverse-image equality in step 4, and $x=y$ by the injectivity of $U_l\\xrightarrow{\\sim}V_l$. Every point of $Q^{\\prime}$ lies in such an open $U_l$, and each composite $U_l\\to Q^{\\prime}\\xrightarrow{j_Q}\\operatorname{Spec}P$ is an open immersion by step 4. Apply [lem-weil-pbc-open-immersion-injective-local-source] to conclude that $j_Q$ is an open immersion. Its image is $\\bigcup_lV_l$, since each $U_l$ maps onto $V_l$, giving the claimed identification. All maps are the original projection maps. If the family is empty, the same criterion has an injective empty underlying map and a vacuous local hypothesis, so it still applies. Zero rings or zero localization elements cause no change in the fraction calculations or in the empty principal opens.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-injective-local-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01Z9 (lemma-diagram), proof, with the local-source open-immersion criterion made explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-module-exact",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-open-immersion-injective-local-source"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01Z9 (lemma-diagram), proof, expanded using More on Algebra Tag 01Z8 and Algebra Tag 00CS"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a cartesian square of commutative rings Bprime equal B times R Rprime, a finite union of principal opens of Spec Rprime embeds openly in Spec Bprime when localization of B at matching elements is localization of R",
+   "results": "Actual recorded search: 8 hits; PrimeSpectrum.localization_away_isOpenEmbedding, AlgebraicGeometry.IsOpenImmersion.of_isLocalization, AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway, AlgebraicGeometry.Scheme.basic_open_isOpenImmersion, AlgebraicGeometry.instIsOpenImmersionSigmaSpec, AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap, PrimeSpectrum.localization_comap_isEmbedding, AlgebraicGeometry.instIsOpenImmersionMapOfHomForallEvalRingHom",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state localization open immersions and localization pushout/base-change theorems; none gives this pullback ring localization or the union of the specified principal opens."
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRingCat, IsLocalization.Away",
+   "results": "Actual recorded search: 9 hits; AlgebraicGeometry.StructureSheaf.IsLocalization.to_basicOpen, AlgebraicGeometry.IsAffineOpen.instAwayCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecPresheafOpOpensBasicOpen, AlgebraicGeometry.IsAffineOpen.isLocalization_basicOpen, AlgebraicGeometry.isLocalization_away_of_isAffine, AlgebraicGeometry.IsAffineOpen.isLocalization_of_eq_basicOpen, AlgebraicGeometry.Γ_restrict_isLocalization, AlgebraicGeometry.isLocalization_basicOpen_of_qcqs, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state localization open immersions and localization pushout/base-change theorems; none gives this pullback ring localization or the union of the specified principal opens."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback|fiberProduct|fibreProduct|localiz",
+   "results": "Actual recorded search: 25 hits; Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Pi.lean, Mathlib/RingTheory/Localization/Pi.lean, Mathlib/RingTheory/Localization/Pi.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state localization open immersions and localization pushout/base-change theorems; none gives this pullback ring localization or the union of the specified principal opens."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing a ring fiber product gives an isomorphism on principal opens when one of the maps becomes an isomorphism",
+   "results": "Actual recorded search: 8 hits; IsLocalization.Away.tensorRightEquiv, AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap, AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway, AlgebraicGeometry.Spec_map_localization_isIso, AlgebraicGeometry.basicOpenIsoSpecAway, AlgebraicGeometry.SpecMapRestrictBasicOpenIso, AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen, AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatLocalizationToStalk",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state localization open immersions and localization pushout/base-change theorems; none gives this pullback ring localization or the union of the specified principal opens."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization commutes with pullbacks of commutative rings in a cartesian square where B localized at g maps isomorphically to R localized at its image",
+   "results": "Actual recorded search: 8 hits; CommRingCat.isPushout_of_isLocalization, RingHom.IsStableUnderBaseChange.isLocalization_map, RingHom.IsStableUnderBaseChange.of_isLocalization, RingHom.IsStableUnderBaseChange.localizationPreserves, Algebra.isPushout_of_isLocalization, RingHom.IsStandardOpenImmersion.isStableUnderBaseChange, Algebra.isLocalization_iff_isPushout, RingHom.IsStandardOpenImmersion.holdsForLocalizationAway",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state localization open immersions and localization pushout/base-change theorems; none gives this pullback ring localization or the union of the specified principal opens."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback|fiber|fibre",
+   "results": "Actual recorded search: 1 hits; Mathlib/RingTheory/Localization/AtPrime/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state localization open immersions and localization pushout/base-change theorems; none gives this pullback ring localization or the union of the specified principal opens."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback|fiberProduct|fibreProduct",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: the candidates concern localization pushouts/base change, unlocalized ring pullbacks, or principal opens, rather than localization of a ring pullback followed by the specified open-union identification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing the pullback of two commutative ring homomorphisms gives the pullback of the localized rings",
+   "results": "8 hits: CommRingCat.pullbackConeIsLimit, AlgebraicGeometry.Scheme.Pullback.affine_hasPullback, CommRingCat.pullbackCone, IsLocalization.Away.map, Localization.localRingHom, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, IsLocalization.map, IsLocalization.map_map",
+   "date": "2026-10-24",
+   "verdict": "no match: the candidates concern localization pushouts/base change, unlocalized ring pullbacks, or principal opens, rather than localization of a ring pullback followed by the specified open-union identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, CategoryTheory.Limits.IsPullback",
+   "results": "0 hits. loogle: unknown identifier 'CategoryTheory.Limits.IsPullback'",
+   "date": "2026-10-24",
+   "verdict": "unavailable: query rejected for an unknown identifier; a valid CommRingCat, IsLocalization.Away query was subsequently run"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a fibre product of commutative rings at a compatible pair is the fibre product of the localizations",
+   "results": "8 hits: CommRingCat.isPushout_of_isLocalization, Algebra.isPushout_of_isLocalization, RingHom.IsStableUnderBaseChange.of_isLocalization, RingHom.IsStableUnderBaseChange.isLocalization_map, RingHom.IsStandardOpenImmersion.isStableUnderBaseChange, Algebra.isLocalization_iff_isPushout, PrimeSpectrum.PiLocalization, PrimeSpectrum.mapPiLocalization",
+   "date": "2026-10-24",
+   "verdict": "no match: the candidates concern localization pushouts/base change, unlocalized ring pullbacks, or principal opens, rather than localization of a ring pullback followed by the specified open-union identification"
+  },
+  {
+   "tool": "grep",
+   "query": "isPushout_of_isLocalization|pullbackConeIsLimit|namespace IsLocalization|theorem map|def map",
+   "results": "3 hits: 162, 171, 463",
+   "date": "2026-10-24",
+   "verdict": "no match: the candidates concern localization pushouts/base change, unlocalized ring pullbacks, or principal opens, rather than localization of a ring pullback followed by the specified open-union identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, IsPullback",
+   "results": "0 hits. loogle: unknown identifier 'IsPullback'",
+   "date": "2026-10-24",
+   "verdict": "unavailable: query rejected for an unknown identifier; a valid CommRingCat, IsLocalization.Away query was subsequently run"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If B localized at g is isomorphic to R localized at s(g), then projection from the ring fiber product B times R Rprime localized at (g,f) is an isomorphism to Rprime localized at f",
+   "results": "8 hits: RingHom.IsStandardOpenImmersion.isStableUnderBaseChange, RingHom.IsStableUnderBaseChange.of_isLocalization, RingHom.IsStableUnderBaseChange.isLocalization_map, TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway, Algebra.isPushout_of_isLocalization, RingHom.IsStableUnderBaseChange.localizationPreserves, CommRingCat.isPushout_of_isLocalization, Localization.AtPrime.mapPiEvalRingHom_bijective",
+   "date": "2026-10-24",
+   "verdict": "no match: the candidates concern localization pushouts/base change, unlocalized ring pullbacks, or principal opens, rather than localization of a ring pullback followed by the specified open-union identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRingCat, IsLocalization.Away",
+   "results": "9 hits: AlgebraicGeometry.StructureSheaf.IsLocalization.to_basicOpen, AlgebraicGeometry.IsAffineOpen.instAwayCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecPresheafOpOpensBasicOpen, AlgebraicGeometry.IsAffineOpen.isLocalization_basicOpen, AlgebraicGeometry.isLocalization_away_of_isAffine, AlgebraicGeometry.IsAffineOpen.isLocalization_of_eq_basicOpen, AlgebraicGeometry.Γ_restrict_isLocalization, AlgebraicGeometry.isLocalization_basicOpen_of_qcqs, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away",
+   "date": "2026-10-24",
+   "verdict": "no match: the candidates concern localization pushouts/base change, unlocalized ring pullbacks, or principal opens, rather than localization of a ring pullback followed by the specified open-union identification"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-approximation-prescribed-open",
+  "date": "2026-10-24",
+  "group": "Q110"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 07SU (proposition-approximate); Noetherian stages by spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian) over Spec Z, and finite type quasi-compactness. New supporting input: Tag 07RN (lemma-approximate), all clauses; cofinality of alpha follows from the constructed directed set J = coproduct P_i in the final proof paragraph; below Tag 07RN: Tag 01Z9 (lemma-diagram), with the principal-open localization identification supplied by More on Algebra, Tag 01Z8 (lemma-diagram-localize)",
+   "via": [
+    "lem-sfb-scheme-approximation-prescribed-open",
+    "lem-sfb-space-absolute-noetherian-approximation",
+    "lem-sfb-finite-surjective-affine-space-target",
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pullback-ring-open-immersion",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 01Z9 through its cited proof of 01Z8: write the exact sequence of P-modules, localize using the existing 00CS Mathlib leaf, identify the fraction modules, cancel the hypothesized localized isomorphism, and prove the global open-immersion assertion with explicit inverse-image and injectivity arguments. Reused existing nodes throughout; no new nodes and no change of statement. Checked arbitrary homomorphisms, zero rings, zero elements and empty index families.",
+  "blueprint": "Retained the inherited from.place and via chain through scheme approximation (07RN); this is the supporting 01Z9 argument below the direct-image route, not a change of the unit. Read latest sk-thm-sf-ctf-stability direct-images proof (3). Blueprint searches for 01Z8 and 01Z9 returned no matching blueprint nodes; same_as remains empty.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-9cfd823a9",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-9cfd823a9 (reviewer sub-agent of L); spot-checked: Live has the item unsplit and there is no repair note, so this delivery is not superseded and is not a re-split. The statement, stmt_deps, source and blueprint field are unchanged from live, and the statement matches Stacks 01Z9 (limits.tex lemma-diagram) hypothesis for hypothesis. Steps 1-2 reproduce the proof of 01Z8 (more-algebra lemma-diagram-localize): the exact sequence 0->P->B+R'->R of P-modules (P-linearity checked through sp=tq), then exactness of localization by the Mathlib leaf lem-weil-pbc-localization-module-exact. The fraction relations at h coincide with those at g, f and d, so P_h is identified with B_g x_{R_d} R'_f compatibly with both projections. Step 3 inverts the projection using s_g^{-1} and recovers the natural map q_h. Step 4: the ring square commutes ((b,r) maps to r/1), so j restricted to U_l is an isomorphism followed by the principal open immersion onto V_l; j^{-1}(V_l)=U_l because q(h)=f. Step 5 proves global injectivity before applying lem-weil-pbc-open-immersion-injective-local-source (IsOpenImmersion.of_forall_source_exists), and its hypotheses match. All six cited nodes are Mathlib leaves, so there is no off-route use and tool_uses=[]. proof_deps equals the union of the step uses. Edge cases checked: empty family, g or f zero or nilpotent, zero rings, s an isomorphism. lem-sfb-ring-fibre-product-spectrum assumes surjectivity, so it is not citable here and is not a duplicate. My Mathlib grep found no theorem on localization of a pullback. No SGA source is used. No new nodes, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PullbackRingOpenImmersion",
+  "declaration": "AlgebraicGeometry.pullbackRing_principalOpenUnion_isOpenImmersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackRingOpenImmersion.lean",
+  "statement": "theorem pullbackRing_principalOpenUnion_isOpenImmersion {B R R' : CommRingCat.{u}} (s : B ⟶ R) (t : R' ⟶ R) (m : ℕ) (f : Fin m → R') (g : Fin m → B) (hf : ∀ l : Fin m, t.hom (f l) = s.hom (g l)) (hs : ∀ l : Fin m, Function.Bijective (Localization.awayMap s.hom (g l))) : (∀ l : Fin m, Function.Bijective (Localization.awayMap (CommRingCat.pullbackCone s t).snd.hom ⟨(g l, f l), (hf l).symm⟩)) ∧ IsOpenImmersion (Scheme.Opens.ι (X := Spec R') (⨆ l : Fin m, PrimeSpectrum.basicOpen (f l)) ≫ Spec.map (CommRingCat.pullbackCone s t).snd) ∧ Set.range (Scheme.Opens.ι (X := Spec R') (⨆ l : Fin m, PrimeSpectrum.basicOpen (f l)) ≫ Spec.map (CommRingCat.pullbackCone s t).snd) = (⨆ l : Fin m, (PrimeSpectrum.basicOpen (⟨(g l, f l), (hf l).symm⟩ : (CommRingCat.pullbackCone s t).pt) : (Spec (CommRingCat.pullbackCone s t).pt).Opens)).carrier",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fa10a6fbb",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Node vs Lean checked clause by clause. CommRingCat.{u} B R R' with arbitrary s,t and no extra instances; B' = CommRingCat.pullbackCone.pt (Mathlib eqLocus, coordinatewise); Fin m families with hf in the node's orientation; hs = Bijective(Localization.awayMap s (g l)), the canonical map. Conclusions: Bijective awayMap snd at h_l=⟨(g l,f l),_⟩ (codomain defeq Away (f l)); IsOpenImmersion(Opens.ι (⨆ D(f l)) ≫ Spec.map snd); its range = carrier of ⨆ D(h_l). Matches Stacks 01Z9/01Z8. Edge cases: m=0, zero rings, nilpotent elements, s=id. Snapshot node = live + lean record only; statement verbatim; docstrings carry source, blueprint id and proof plan; sorry-only proof; imports justified. No duplicate: AffineTransitionLimit 01Z9 lemmas are ExtensionData-specific, ring-fibre-product-spectrum assumes surjectivity. No compile run (no file changed); relies on the worker's clean compile. No findings."
+ }
+}

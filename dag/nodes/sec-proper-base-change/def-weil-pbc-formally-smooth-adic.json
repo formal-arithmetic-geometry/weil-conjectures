@@ -124,7 +124,18 @@
   "item": "lem-weil-pbc-another-helper-g-ring",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -157,5 +168,22 @@
   "group": "H1",
   "result": "pass",
   "note": "R,S CommRing + Algebra R S, n : Ideal S; ∀ D : Type (max u v) CommRing+Algebra R (Mathlib iff_comp_surjective universe), J^2=⊥, g : S →ₐ[R] D⧸J killing n^k, k≥1; ∃ f : S →ₐ[R] D, mkₐ ∘ f = g; no Mathlib adic variant (Smooth/ only discrete + AdicCompletion consequences)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings, making $S$ an $R$-algebra, and $\\mathfrak n\\subseteq S$ an ideal. $S$ is *formally smooth over $R$ for the $\\mathfrak n$-adic topology* (also: $\\varphi$ is formally smooth for the $\\mathfrak n$-adic topology) if the following lifting property holds: for every commutative $R$-algebra $D$, every ideal $J\\subseteq D$ with $J^2=0$, with quotient map $q:D\\to D/J$, and every homomorphism of $R$-algebras $g:S\\to D/J$ with $g(\\mathfrak n^k)=0$ for some $k\\ge1$, there is a homomorphism of $R$-algebras $f:S\\to D$ with $q\\circ f=g$. (Compare Stacks Project, More on Algebra, Definition 07NI.)",
+  "proof": [
+   {
+    "text": "*The definition is well formed.* The condition quantifies over $R$-algebras $D$, ideals $J$ and maps $g$ and asks for the existence of $f$; no choice is made, so it is a property of the pair $(\\varphi,\\mathfrak n)$. It depends only on the isomorphism class of $S$ as an $R$-algebra together with $\\mathfrak n$: transport $g$ and $f$ along an $R$-algebra isomorphism $\\alpha:S'\\to S$ with $\\alpha(\\mathfrak n')=\\mathfrak n$, which carries $\\mathfrak n'^k$ onto $\\mathfrak n^k$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,148 @@
+{
+ "id": "lem-zl-canonical-immersion-cohomology",
+ "kind": "statement",
+ "title": "Canonical Weil cohomology commutes with immersion inverse image",
+ "statement": "Let D be a finite-field datum, l a prime distinct from its characteristic, and Qbar an algebraic closure of the l-adic field, in a universe independent of that of D. For every locally closed immersion h0 of separated finite-type finite-field schemes, every common-stage Weil complex K and every integer a, H^a of the canonical Weil pullback of K is isomorphic in the constructible Weil heart to the canonical pullback of H^a(K). Here H^a is sfWeilCohomology and the inverse-image Weil square is precisely zlFrobeniusSquare; no alternate shift or Frobenius structure is chosen. Uses [def-weil-constructible-heart; def-weil-weil-sheaf-complex; def-weil-complex-weights; def-weil-closed-immersion; def-weil-open-immersion; def-weil-derived-pullback-tensor-hom; sk-d-dl-general-weights; def-zl-weil-ind-sheaf-category].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/det-l-dl-general-excision.proof.md",
+  "place": "Restriction sentence: preservation of weights under open and closed inverse images; finite-model Frobenius and cohomology justification expanded by U3."
+ },
+ "stmt_deps": [
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-complex-weights",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-derived-pullback-tensor-hom",
+  "sk-d-dl-general-weights",
+  "def-zl-weil-ind-sheaf-category"
+ ],
+ "proof": [
+  {
+   "text": "The actual underlying inverse image is t-exact. Use upper and lower truncation comparisons characterized by their counit and unit equations, then the signed representative-normalized pullback shift.",
+   "uses": [
+    "lem-a1-constructible-pullback-t-exact",
+    "def-zl-field-weil-shriek-shift-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/det-l-dl-general-excision.proof.md",
+    "place": "Restriction sentence: preservation of weights under open and closed inverse images; finite-model Frobenius and cohomology justification expanded by U3."
+   }
+  },
+  {
+   "text": "The two composition comparisons making zlFrobeniusSquare commute with those normalized shifts: verify on signed integral representatives and descend through rational and common-stage coefficient passage. Truncation comparison naturality and composition then make the cohomology comparison Frobenius equivariant.",
+   "uses": [
+    "lem-pod-integral-pullback-composition",
+    "def-zl-field-weil-shriek-shift-data",
+    "lem-a1-cohomology-comparison-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/det-l-dl-general-excision.proof.md",
+    "place": "Restriction sentence: preservation of weights under open and closed inverse images; finite-model Frobenius and cohomology justification expanded by U3."
+   }
+  },
+  {
+   "text": "The underlying canonical cohomology isomorphism thus lifts to fixed pairs and then to the full constructible hearts. Its inverse gives the displayed direction. The construction works for identity, empty schemes, arbitrary degree and both independent universes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/det-l-dl-general-excision.proof.md",
+    "place": "Restriction sentence: preservation of weights under open and closed inverse images; finite-model Frobenius and cohomology justification expanded by U3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-pod-integral-pullback-composition",
+  "def-zl-field-weil-shriek-shift-data",
+  "lem-a1-cohomology-comparison-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/det-l-dl-general-excision.proof.md",
+  "place": "Restriction sentence: preservation of weights under open and closed inverse images; finite-model Frobenius and cohomology justification expanded by U3."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ZlImmersionPullbackWeightPreservation",
+  "date": "2026-10-25",
+  "group": "U3"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-excision",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-morphism-open-closed-reduction",
+   "place": "Restriction paragraph: preservation of weights under immersion inverse image, via the finite-model Frobenius and cohomology arguments.",
+   "via": [
+    "lem-zl-immersion-pullback-weight-preservation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ZlCanonicalImmersionCohomology",
+  "file": "lean/Sheaf/Paper/ZlCanonicalImmersionCohomology.lean",
+  "declaration": "WeilConjectures.zlCanonicalImmersionCohomology",
+  "statement": "theorem zlCanonicalImmersionCohomology (h₀ : W₀ ⟶ X₀) [IsImmersion h₀.left] :\n    ∀ (a : ℤ) (K : sfCommonStageWeilComplex D l hl X₀ Qbar),\n      Nonempty\n        (((sfWeilCohomology D l hl Qbar W₀ a).obj\n          ((IsoAlgebra.mapOfNatIso (zlFrobeniusSquare D l hl Qbar h₀)).obj K)) ≅\n          (zlWeilPull D l hl Qbar h₀).obj ((sfWeilCohomology D l hl Qbar X₀ a).obj K))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-25"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A t-exact pullback with its canonical Frobenius square commutes with cohomology of Weil pairs",
+   "results": "8 hits: module-sheaf pullback compositions and Witt-vector isocrystal equivariance; no common-stage Weil result.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; local library comparisons require identification with the specified canonical square and normalized shifts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasEigenvalue\", \"LinearEquiv\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "No exact match. Eigenvector transfer is written directly from Mathlib eigenvector definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "zlFrobeniusSquare|localClosedFrobeniusCohomology",
+   "results": "0 Mathlib hits; local rg finds constructions in WeilIndSheafCategory and LocalFrobeniusTrace.",
+   "date": "2026-10-25",
+   "verdict": "These define the required operators but do not state their immersion/cohomology identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A t-exact pullback with the canonical Frobenius square commutes with cohomology of Weil sheaves and preserves Frobenius eigenvalues on stalks",
+   "results": "8 hits: TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.stalkPullbackInv, TopCat.Presheaf.germ_stalkPullbackHom, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, TopCat.Presheaf.stalkPullbackIso, CategoryTheory.IsPullback.exact_shortComplex', AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
+   "date": "2026-10-25",
+   "verdict": "No common-stage Weil comparison. The results give topological stalk comparisons and exactness of site pullback, without the prescribed Frobenius structure and signed shift."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261025T015421-L-341801",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261025T015421-L-341801",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

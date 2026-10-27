@@ -1,0 +1,199 @@
+{
+ "id": "lem-trf-taylor-minor-derivative-bounds",
+ "kind": "statement",
+ "title": "Two determinant bounds for low formal derivatives",
+ "statement": "Let $L$ be a characteristic-zero field, $A=L[[X_1,\\ldots,X_d]]$ [def-weil-pbc-multivariate-power-series], and $f_1,\\ldots,f_s\\in A$ have respective finite orders $d_i\\ge0$. Choose pairwise incomparable vertices $a_i\\in\\mathbf N^d$ with $|a_i|=d_i$, ordered by nondecreasing degree, and set $D=\\bigcup_i(a_i+\\mathbf N^d)$ and $\\Delta_i=\\{\\beta:a_i+\\beta\\notin\\bigcup_{j<i}(a_j+\\mathbf N^d)\\}$. For $t\\ge0$, let $B_t$ have rows $|\\gamma|\\le t$ and columns $Y^\\beta f_i(X+Y)\\bmod(Y)^{t+1}$, $|\\beta|\\le t$, and let $B'_t$ restrict to $\\beta\\in\\Delta_i$. Suppose these matrices have the same column span, their constant matrices have rank $r_t=\\#\\{\\gamma\\in D:|\\gamma|\\le t\\}$, exactly $r_t$ columns of $B'_t$ satisfy $|\\beta|+d_i\\le t$, and the square submatrix $C_t$ on these columns and the rows $D\\cap\\{|\\gamma|\\le t\\}$ has unit determinant. Put $J_t$ equal to the ideal of $(r_t+1)$-minors of $B_t$ [def-trf-minor-ideal], and $E=(\\partial^\\nu f_i:|\\nu|<d_i)$ [def-trf-formal-power-series-partial-derivative]. Then the $(r_t+1)$-minors of $B'_t$ generate $J_t$, and\n$$J_t\\subseteq E\\quad\\text{for every }t\\ge0.$$\nFor every $i$, $0\\le t<d_i$ and $\\gamma\\notin D$ with $|\\gamma|\\le t$, one also has\n$$\\partial^\\gamma f_i\\in J_t+(\\partial^\\alpha f_i:\\alpha\\in D,\\ |\\alpha|\\le t).$$\nThese assertions hold with the empty determinant equal to $1$ and with oversized minors generating the zero ideal; no Jacobian or later-block derivative hypothesis is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11--2.3.13, pp.93--94, for the route only; BM Lemma 7.15 and the final determinant argument of Theorem 7.14, pp.267--268; the two bounds are isolated without the block hypotheses. No Stacks tag states the formal result. BM journal text read online; not present in literature/."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-formal-power-series-partial-derivative",
+  "def-trf-minor-ideal"
+ ],
+ "proof": [
+  {
+   "text": "Write $b_{\\gamma,i\\beta}$ for the entries of either Taylor matrix. Specialize [lem-trf-formal-transverse-shift-calculus] to $m=r=d$, no $T$ variables, $W=X$, $\\phi(W)=W$, and the single series $f_i$ depending only on its old $Y$ variables. The hypothesis $\\phi\\in(W)L[[W]]^d$ holds. Its coefficient formula, with the new variables renamed $Y$, gives $[Y^\\nu]f_i(X+Y)=\\partial^\\nu f_i(X)/\\nu!$, where $\\nu!=\\prod_j\\nu_j!$. Multiplication by $Y^\\beta$ therefore gives $b_{\\gamma,i\\beta}=0$ if $\\beta\\nleq\\gamma$, and $b_{\\gamma,i\\beta}=\\partial^{\\gamma-\\beta}f_i/(\\gamma-\\beta)!$ otherwise. Truncating does not change these entries for $|\\gamma|\\le t$. All these factorials are units because $L$ is a characteristic-zero field.",
+   "uses": [
+    "lem-trf-formal-transverse-shift-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Formal coefficient calculation specialized from lem-trf-formal-transverse-shift-calculus; Tag 0306 is power-series notation only, not a source for the Taylor formula."
+   }
+  },
+  {
+   "text": "Fix $t$ and put $k=r_t+1$. Since the two finite matrices have the same column span over $A$, choose column coefficients $H$ with $B_t=B'_tH$. For any $k$ chosen rows $I$ and columns $T$, apply [lem-weil-pbc-cauchy-binet] to $B'_t[I,:]H[:,T]$. Its determinant is a finite $A$-linear combination of $k$-minors of $B'_t$. Thus $J_k(B_t)\\subseteq J_k(B'_t)$ by [def-trf-minor-ideal]. Conversely every column of $B'_t$ is a selected column of $B_t$, so each of its minors is a minor of $B_t$, with the inherited ordering. Hence $J_k(B'_t)=J_k(B_t)=J_t$. Cauchy--Binet also covers fewer than $k$ columns by its empty-sum convention; if there are fewer than $k$ rows there are no such minors.",
+   "uses": [
+    "lem-weil-pbc-cauchy-binet",
+    "def-trf-minor-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0F0K (item-cauchy-binet); selected-product minor calculation."
+   }
+  },
+  {
+   "text": "Call the $r_t$ columns of $B'_t$ with $|\\beta|+d_i\\le t$ good. Every other column has $|\\beta|+d_i>t$. For any row $|\\gamma|\\le t$ with $\\beta\\le\\gamma$, its entry from step 1 has derivative order $|\\gamma-\\beta|=|\\gamma|-|\\beta|\\le t-|\\beta|<d_i$, hence belongs to $E$; the other entries are zero. Any selection of $r_t+1$ columns contains a column that is not good, since exactly $r_t$ are good. Expand the selected square determinant along that column, using [lem-trf-minor-laplace-coefficient-formula] with $s=1$. Every summand is an entry in $E$ times a signed complementary determinant, so the determinant belongs to $E$. Together with step 2 this proves $J_t\\subseteq E$. Oversized minors generate zero by [def-trf-minor-ideal].",
+   "uses": [
+    "lem-trf-minor-laplace-coefficient-formula",
+    "def-trf-minor-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07Z7 (lemma-ideals-generated-by-minors), row/column-expansion hint; explicit Taylor-column argument supplied by Q11."
+   }
+  },
+  {
+   "text": "Fix $i$, $t<d_i$ and $\\gamma\\notin D$, $|\\gamma|\\le t$. In $B_t$ select the good columns and the extra column $(i,0)$, and the pivot rows $R_t=D\\cap\\{|\\alpha|\\le t\\}$ and extra row $\\gamma$, retaining their original orders. These are distinct selections: $(i,0)$ is not good since $d_i>t$, and $\\gamma\\notin R_t$. The resulting $(r_t+1)$-minor has determinant in $J_t$ by [def-trf-minor-ideal]. Expand along $(i,0)$ by [lem-trf-minor-laplace-coefficient-formula] with $s=1$. The term at row $\\gamma$ is $\\varepsilon\\det(C_t)\\partial^\\gamma f_i/\\gamma!$, with $\\varepsilon\\in\\{1,-1\\}$; every other term is an $A$-multiple of $\\partial^\\alpha f_i/\\alpha!$ for some $\\alpha\\in R_t$, by step 1. The coefficient $\\varepsilon\\det(C_t)/\\gamma!$ is a unit, so solving this equality gives precisely $\\partial^\\gamma f_i\\in J_t+(\\partial^\\alpha f_i:\\alpha\\in D,|\\alpha|\\le t)$. For $r_t=0$ this is the $1\\times1$ expansion with complementary determinant $1$. If no such $i,t,\\gamma$ exists the assertion is vacuous.",
+   "uses": [
+    "lem-trf-minor-laplace-coefficient-formula",
+    "def-trf-minor-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07Z7 (lemma-ideals-generated-by-minors), cofactor-expansion hint; explicit unit-pivot argument supplied by Q11."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-formal-transverse-shift-calculus",
+  "lem-weil-pbc-cauchy-binet",
+  "def-trf-minor-ideal",
+  "lem-trf-minor-laplace-coefficient-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07Z7 (lemma-ideals-generated-by-minors), determinant-expansion hint, together with algebra.tex Tag 0F0K and the existing formal shift coefficient formula. Agent-written direct proof of the two Taylor bounds; ILO VIII 2.3.11--2.3.13 gives the historical resolution route only. Full BM section 7 remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-taylor-minor-derivative-bounds: a unit diagram pivot in a truncated Taylor matrix bounds low partial derivatives by its rank minors and diagram derivatives",
+   "results": "{\"t\": \"2026-10-22T06:43:35Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-taylor-minor-derivative-bounds: a unit diagram pivot in a truncated Taylor matrix bounds low partial derivatives by its rank minors and diagram derivatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousMultilinearMap.norm_iteratedFDeriv_le'\", \"ContinuousMultilinearMap.norm_iteratedFDeriv_le\", \"ContinuousMultilinearMap.norm_iteratedFDerivComponent_le\", \"norm_iteratedFDeriv_prod_le\", \"taylor_mean_remainder_bound\", \"norm_iteratedFDerivWithin_prod_le\", \"exists_taylor_mean_remainder_bound\", \"taylor_mean_remainder\"], \"digest\": \"a0d3908762814db0\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: det_succ_row and det_succ_column are the cofactor formula used inside the argument, not the two ideal bounds for supported formal Taylor matrices; analytic derivative estimates are unrelated."
+  },
+  {
+   "tool": "grep",
+   "query": "minorIdeal|det_succ_column|det_succ_row",
+   "results": "{\"t\": \"2026-10-22T06:44:18Z\", \"tool\": \"grep\", \"query\": \"minorIdeal|det_succ_column|det_succ_row\", \"sub\": \"LinearAlgebra/Matrix\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/Bird/Correctness.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/Misc.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/TotallyUnimodular.lean\", \"Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean\"], \"digest\": \"cb3c3cd28fff349b\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: det_succ_row and det_succ_column are the cofactor formula used inside the argument, not the two ideal bounds for supported formal Taylor matrices; analytic derivative estimates are unrelated."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.pderiv, Matrix.det",
+   "results": "{\"t\": \"2026-10-22T06:44:18Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.pderiv, Matrix.det\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: det_succ_row and det_succ_column are the cofactor formula used inside the argument, not the two ideal bounds for supported formal Taylor matrices; analytic derivative estimates are unrelated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-taylor-minor-derivative-bounds: cofactor expansion of an invertible submatrix expresses low formal partial derivatives modulo larger minors in terms of the pivot rows",
+   "results": "{\"t\": \"2026-10-22T06:44:19Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-taylor-minor-derivative-bounds: cofactor expansion of an invertible submatrix expresses low formal partial derivatives modulo larger minors in terms of the pivot rows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.det_succ_row\", \"Matrix.det_eq_sum_mul_adjugate_col\", \"Matrix.det_succ_row_zero\", \"Matrix.det_eq_sum_mul_adjugate_row\", \"Matrix.det_succ_column_zero\", \"Matrix.det_succ_column\", \"Matrix.adjugate\", \"Matrix.submatrixEquivInvertible\"], \"digest\": \"7d0e01ee87f9bdae\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: det_succ_row and det_succ_column are the cofactor formula used inside the argument, not the two ideal bounds for supported formal Taylor matrices; analytic derivative estimates are unrelated."
+  },
+  {
+   "tool": "grep",
+   "query": "minorIdeal|det_succ_column|det_succ_row",
+   "results": "{\"t\": \"2026-10-23T14:24:38Z\", \"tool\": \"grep\", \"query\": \"minorIdeal|det_succ_column|det_succ_row\", \"sub\": \"LinearAlgebra/Matrix\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/Determinant/Bird/Correctness.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/Misc.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/TotallyUnimodular.lean\", \"Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean\"], \"digest\": \"d256748b22fcfc3b\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits give polynomial Jacobian presentations, analytic Taylor calculus, or general cofactor identities; none gives these two formal Taylor-matrix ideal bounds. Matrix.det_succ_column_zero (Determinant/Basic.lean:732), det_succ_row (line 771), and the adjugate expansion are only the elementary matrix inputs already represented by existing DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.pderiv, Matrix.det",
+   "results": "{\"t\": \"2026-10-23T14:24:38Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.pderiv, Matrix.det\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits give polynomial Jacobian presentations, analytic Taylor calculus, or general cofactor identities; none gives these two formal Taylor-matrix ideal bounds. Matrix.det_succ_column_zero (Determinant/Basic.lean:732), det_succ_row (line 771), and the adjugate expansion are only the elementary matrix inputs already represented by existing DAG nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-taylor-minor-derivative-bounds: cofactor expansion of a unit minor in a Taylor matrix gives ideal membership of formal derivatives",
+   "results": "{\"t\": \"2026-10-23T14:24:38Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-taylor-minor-derivative-bounds: cofactor expansion of a unit minor in a Taylor matrix gives ideal membership of formal derivatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.det_eq_sum_mul_adjugate_row\", \"hasDerivAt_taylorWithinEval_succ\", \"ContinuousMultilinearMap.hasFTaylorSeriesUpTo_iteratedFDeriv\", \"hasDerivWithinAt_taylor_coeff_within\", \"Polynomial.taylor_coeff_one\", \"hasFTaylorSeriesUpToOn_top_iff_right\", \"HasFTaylorSeriesUpToOn.hasFDerivWithinAt\", \"HasFTaylorSeriesUpToOn.fderivWithin\"], \"digest\": \"57320c4d0aaf5991\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits give polynomial Jacobian presentations, analytic Taylor calculus, or general cofactor identities; none gives these two formal Taylor-matrix ideal bounds. Matrix.det_succ_column_zero (Determinant/Basic.lean:732), det_succ_row (line 771), and the adjugate expansion are only the elementary matrix inputs already represented by existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-taylor-minor-derivative-bounds: ideals of rank minors of a truncated formal Taylor matrix bound low order formal partial derivatives using a unit pivot submatrix",
+   "results": "{\"t\": \"2026-10-23T14:24:39Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-taylor-minor-derivative-bounds: ideals of rank minors of a truncated formal Taylor matrix bound low order formal partial derivatives using a unit pivot submatrix\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.jacobiMatrix_naive\", \"Algebra.SubmersivePresentation.jacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.jacobianRelations\", \"Algebra.SubmersivePresentation.jacobianRelations_spec\", \"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\", \"MvPolynomial.universalFactorizationMapPresentation_jacobiMatrix\", \"Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one\", \"Algebra.PreSubmersivePresentation.jacobian\"], \"digest\": \"64f7d01f768b9aa3\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits give polynomial Jacobian presentations, analytic Taylor calculus, or general cofactor identities; none gives these two formal Taylor-matrix ideal bounds. Matrix.det_succ_column_zero (Determinant/Basic.lean:732), det_succ_row (line 771), and the adjugate expansion are only the elementary matrix inputs already represented by existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-taylor-minor-derivative-bounds: determinantal ideal of a matrix containing an invertible submatrix expresses remaining entries modulo the pivot column entries",
+   "results": "{\"t\": \"2026-10-23T14:25:04Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-taylor-minor-derivative-bounds: determinantal ideal of a matrix containing an invertible submatrix expresses remaining entries modulo the pivot column entries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Norm.Transitivity.det_mul_corner_pow\", \"Algebra.SubmersivePresentation.jacobianRelations_spec\", \"Algebra.Norm.Transitivity.comp_det_mul_pow\", \"Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one\", \"Matrix.det_eq_of_forall_col_eq_smul_add_pred\", \"Algebra.Norm.Transitivity.det_det_aux\", \"Matrix.det_eq_of_forall_row_eq_smul_add_pred_aux\", \"Algebra.Norm.Transitivity.eval_zero_det_det\"], \"digest\": \"f60e80d0a3245ee6\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits give polynomial Jacobian presentations, analytic Taylor calculus, or general cofactor identities; none gives these two formal Taylor-matrix ideal bounds. Matrix.det_succ_column_zero (Determinant/Basic.lean:732), det_succ_row (line 771), and the adjugate expansion are only the elementary matrix inputs already represented by existing DAG nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-hilbert-stratum-minors",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Local Hilbert--Samuel presentations and their admissible transforms. Lower input in this split: Regular coefficient data with division and Jacobian conditions; Bierstone--Milman, Invent. Math. 128 (1997), 207--302, conditions (7.1)--(7.2), Theorem 9.6 and its block induction (9.7)--(9.14); Bierstone--Milman--Temkin, arXiv:0905.3580, section 6.2. No Stacks tag states this algebraization theorem. Further local input: Definitions 7.9, 7.12--7.13, Theorem 7.14 and Remarks 9.1 and 9.5 (pp.265--268,275--277) Repair extraction: BM Lemma 7.15 and the final determinant argument of Theorem 7.14, pp.267--268; the two bounds are isolated without the block hypotheses.",
+   "via": [
+    "lem-trf-formal-hilbert-stratum-minors",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-taylor-minor-derivative-bounds",
+  "worker": "stage1",
+  "summary": "Q11 supplied a four-step direct proof without changing the statement and without creating nodes: specialize the existing formal shift coefficient formula, use Cauchy--Binet for column-span independence, expand along a high column for the first bound, and expand the bordered unit pivot for the second. Verified exact cited statements, dependency acyclicity, characteristic-zero factorial units, distinct bordering selections and empty/oversized cases. Recorded fresh searches and WANTED full BM section 7.",
+  "blueprint": "Historical resolution branch recorded in blueprint.from.place, through the parent formal Hilbert-stratum minors lemma: realizes the two determinant calculations extracted from BM Lemma 7.15 and the final determinant argument of Theorem 7.14. Current latest local-term-locality proof was read; it uses the contracting-correspondence route, not a Taylor assertion. No unit route or blueprint field is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cauchy-binet",
+    "why": "Generic Cauchy--Binet over an arbitrary commutative ring expresses minors after the rectangular column-span factorization; no result in the unit states that general selected-product formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cauchy-binet"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-cf405d53c",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-cf405d53c (reviewer sub-agent of L); spot-checked: The item's four steps are correct as written; no faults, no fixes, no new nodes. Only proof, proof_deps, proof_origin, searches, split_report and status changed; statement, stmt_deps, source and blueprint are identical to live, which is still unsplit, so nothing is superseded. There is no repair note and no cycle. Step 1: the shift calculus with m=r=d, no T variables, phi=W and f_i(Y) gives the entries b = d^{gamma-beta} f_i/(gamma-beta)!, and the factorials are units in characteristic 0. Step 2: B_t = B'_t H, and Cauchy-Binet applied to the k x n' times n' x k product gives J(B_t) inside J(B'_t); the reverse holds because B'_t is a column restriction. Fitting (3) does not apply here because it needs a square C. Step 3: in a column with |beta|+d_i>t the entries have derivative order below d_i, so they lie in E. Exactly r_t columns are good, so any r_t+1 columns include a bad one; Laplace with s=1 along it gives J_t in E. If d_i=0 there are no bad columns from i. Step 4: border the good columns with column (i,0), which is not good since d_i>t, and the rows R_t with row gamma. The cofactor at gamma is ±det C_t, a unit, which gives the second bound. Small cases checked: X^2 with t=0,1,2, XY with t=1, and the empty and r_t=0 cases. Stacks tags 07Z7 and 0F0K match the tag table. The Cauchy-Binet tool use from sk-thm-p1 is accepted; its other cited nodes are in unit sk-i-curve-zero. No SGA citations."
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "id": "lem-sfb-integral-scalar-model-coordinates",
+ "kind": "statement",
+ "title": "Ordinary scalar coordinates for an integral constant model",
+ "statement": "Fix a prime l and a finite extension E of the l-adic numbers, with valuation ring A and its continuous condensed coefficient ring [def-sfb-finite-model-quotient-coordinates]. For any scheme T and any finitely presented internal module Q over the scalar ring Lambda(*) [det-def-sfb-constructible-local-model], there is a finitely presented ordinary A-module P such that the canonical finiteConstantScalarExtension of Q on T is isomorphic to the specified modelFunctor applied to P [def-sfb-finite-constant-model-data]. Zero ranks, torsion modules and empty schemes are included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+  "place": "Local models: the constant scalar module underlying each local model; first two sentences."
+ },
+ "stmt_deps": [
+  "def-sfb-finite-model-quotient-coordinates",
+  "det-def-sfb-constructible-local-model",
+  "def-sfb-finite-constant-model-data"
+ ],
+ "proof": [
+  {
+   "text": "Take a finite free presentation of Q. Use the regular-module universal property to express its matrix entries as sections of the scalar ring. The scalar realization identifies its cokernel with the cokernel of the scalar matrix on T. The same scalar entries give a finite free matrix over the continuous coefficient ring at the profinite point. Monoidal inverse image sends that matrix to the scalar matrix on T and preserves its cokernel. These are the existing scalarMatrix_map and pointMatrix_map comparisons.",
+   "uses": [
+    "det-def-sfb-constructible-local-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The pointwise matrix cokernel is finitely presented by its displayed presentation. Apply continuousScalarFinitePresentation to obtain a finitely presented ordinary A-module P and its continuous scalar realization. Pull this isomorphism to T and compose the cokernel comparisons. The resulting realization is definitionally the specified modelFunctor.",
+   "uses": [
+    "lem-sfb-continuous-scalar-finite-presentation",
+    "def-sfb-finite-constant-model-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-constructible-local-model",
+  "lem-sfb-continuous-scalar-finite-presentation",
+  "def-sfb-finite-constant-model-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/lem-integral-ctf-equals-bc.proof.md",
+  "place": "Local models, scalar coordinate identification; proof uses existing finite-presentation and scalar matrix comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented scalar modules over continuous functions on a point are ordinary finitely presented modules; their constant scalar extensions agree",
+   "results": "8 hits, including instFinitePresentationForall and instFinitePresentation, ordinary module finite presentation and condensed constant-module APIs. No canonical scalar realization comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use the proved project continuousScalarFinitePresentation and scalar matrix comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FinitePresentation\", \"cokernel\"",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "No exact comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBiproduct|PreservesCokernel.iso",
+   "results": "25 hits, including generic biproduct and cokernel preservation isomorphisms.",
+   "date": "2026-10-25",
+   "verdict": "Generic preservation APIs are used; no coefficient-specific comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteModelQuotientCohomologyDescent",
+  "date": "2026-10-25",
+  "group": "P3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Local models: identify the finite scalar model of the constructibility definition with the specified ordinary integral model before resolving it.",
+   "via": [
+    "lem-sfb-finite-model-quotient-cohomology-descent",
+    "lem-sfb-finite-model-sheaf-quotient-constructible",
+    "lem-sfb-qcqs-integral-finite-model-completeness",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarModelCoordinates",
+  "file": "lean/Sheaf/Paper/IntegralScalarModelCoordinates.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteModelQuotient.integral_scalar_model_coordinates",
+  "statement": "theorem integral_scalar_model_coordinates\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (T : Scheme.{u})\n    (Q : Mod Ab.{u + 1} (scalarRingObj (DerivedNakayama.integerRing l E)))\n    (hQ : Mod.IsFinitelyPresented (scalarRingObj (DerivedNakayama.integerRing l E)) Q) :\n    ∃ P : ModuleCat.{u + 1} (A l E), Module.FinitePresentation (A l E) P ∧\n      Nonempty ((finiteConstantScalarExtension (DerivedNakayama.integerRing l E) T).obj Q ≅\n        model l E T P)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-20d45",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T023654-L-590958",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-20d45",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T023654-L-590958",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/Constructible/item/IntegralScalarModelCoordinates vs clone base and nodes; ChartCalculation fields vs old 7 conjuncts; 12-module importer chain compiled (exit 0); axioms clean"
+ }
+}

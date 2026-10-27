@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-scalar-mate-restriction-counit-route",
+ "kind": "statement",
+ "title": "Restricted derived scalar mate on K-flat representatives",
+ "statement": "Let f:Z→T and a:A→B be as in the scalar mate data. Suppose an ordinary scalar isomorphism chi:F_B E_a≅E_(f⁻¹a) F_A satisfies the scalar-adjunction unit equation F_A(eta_a);b;r_Z(chi)=eta_(f⁻¹a). For every flat-term K-flat P, the prescribed derived scalarPullback, after the pulled-back A localization factor and the restricted scalar counit, equals pullback of the original restricted scalar counit followed by the exact A localization factor and Q of the ordinary restriction square and restricted degreewise chi. This is the scalar-counit comparison before ordinary tensor-coordinate isomorphisms are applied.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+ },
+ "stmt_deps": [
+  "lem-sfb-derived-scalar-tensor-identification",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-scalar-tensor-ordinary-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the comparison through the target derived scalar adjunction. Use the normalized universal scalar counits on P and its K-flat inverse image to identify the localized ordinary units. A generic categorical proof with independent object, morphism and derived universes moves the exact restriction square through its localization factors and uses the ordinary unit equation.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-derived-scalar-tensor-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+   }
+  },
+  {
+   "text": "Apply the unit formula for the inverse scalar mate, then invert the scalarPullback isomorphism to obtain the representative counit formula. Restrict this equality; expand tensorScalarCounit and use naturality of the exact restriction localization factors and the exact square factorization.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sfb-scalar-tensor-ordinary-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-derived-scalar-tensor-identification",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-scalar-tensor-ordinary-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "adjunction mate localization K flat universal counit unit comparison",
+   "results": "Eight localization-adjunction hits, including localization_unit_app, localization_counit_app and Adjunction.derivedε_fac_app. They do not directly identify the project selected representative counits with a scalar mate square.",
+   "date": "2026-10-27",
+   "verdict": "Use the project unit normalization and an explicit abstract adjunction calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv_symm",
+   "results": "One Mathlib hit in CategoryTheory.Adjunction.Mates; it gives the unit formula for the inverse mate.",
+   "date": "2026-10-27",
+   "verdict": "Apply the formula to scalarPullback.inv and compare transposes."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*mate|mate.*mapDerivedCategory",
+   "results": "No Mathlib hits. The adopted source MapDerivedCategoryMate supplies related functorial calculations; the independent-universe representative formula is proved privately here.",
+   "date": "2026-10-27",
+   "verdict": "Keep the representative unit calculation explicit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarMateOrdinaryTensorRoute",
+  "date": "2026-10-27",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof of sk-thm-sf-ctf-stability, direct-images paragraph (3); Restricted derived scalar mate on K-flat representatives.",
+   "via": [
+    "lem-sfb-scalar-mate-ordinary-tensor-route",
+    "lem-sfb-derived-scalar-pullback-tensor-normalization",
+    "lem-sfb-derived-scalar-projection-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarMateRestrictionCounitRoute",
+  "file": "lean/Sheaf/Paper/ScalarMateRestrictionCounitRoute.lean",
+  "declaration": "AlgebraicGeometry.Scheme.DerivedScalarMate.scalarMate_restriction_counit_route",
+  "statement": "theorem scalarMate_restriction_counit_route {Z T : Scheme.{u}} (f : Z ⟶ T)\n    {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)\n    (χ : proEtaleRingExtension a ⋙\n      proEtaleRingModulePullback f B (inverseRing f B) (Iso.refl _) ≅\n      proEtaleRingModulePullback f A (inverseRing f A) (Iso.refl _) ⋙\n        proEtaleRingExtension (inverseMap f a))\n    (hχ : ∀ M, (proEtaleRingModulePullback f A (inverseRing f A) (Iso.refl _)).map\n        ((proEtaleRingExtensionAdjunction a).unit.app M) ≫\n      (proEtaleRingRestrictionPullbackInv f A B (inverseRing f A) (inverseRing f B)\n        a (inverseMap f a) (Iso.refl _) (Iso.refl _) (by simp)).app\n          ((proEtaleRingExtension a).obj M) ≫\n      (restriction (inverseMap f a)).map (χ.hom.app M) =\n      (proEtaleRingExtensionAdjunction (inverseMap f a)).unit.app\n        ((proEtaleRingModulePullback f A (inverseRing f A) (Iso.refl _)).obj M))\n    (P : CochainComplex (proEtaleRingModules T A) ℤ)\n    (hp : proEtaleFlatRepresentatives T A P) :\n    let FA := proEtaleRingModulePullback f A (inverseRing f A) (Iso.refl _)\n    let rZ := restriction (inverseMap f a)\n    let EP := ((proEtaleRingExtension a).mapHomologicalComplex (.up ℤ)).obj P\n    (proEtaleRingRestrictionDerivedPullback f A B (inverseRing f A) (inverseRing f B)\n        a (inverseMap f a) (Iso.refl _) (Iso.refl _) (by simp)).inv.app\n          ((proEtaleRingDerivedExtension a).obj (DerivedCategory.Q.obj P)) ≫\n      rZ.mapDerivedCategory.map ((scalarPullback f a).hom.app (DerivedCategory.Q.obj P)) ≫\n      rZ.mapDerivedCategory.map ((proEtaleRingDerivedExtension (inverseMap f a)).map\n        ((proEtaleRingDerivedPullbackFactors f A (inverseRing f A) (Iso.refl _)).hom.app P)) ≫\n      tensorScalarCounit (inverseMap f a) ((FA.mapHomologicalComplex (.up ℤ)).obj P) =\n    (pull f A).map (tensorScalarCounit a P) ≫\n      (proEtaleRingDerivedPullbackFactors f A (inverseRing f A) (Iso.refl _)).hom.app\n        (((restriction a).mapHomologicalComplex (.up ℤ)).obj EP) ≫\n      DerivedCategory.Q.map\n        ((NatTrans.mapHomologicalComplex\n          (proEtaleRingRestrictionPullbackInv f A B (inverseRing f A) (inverseRing f B)\n            a (inverseMap f a) (Iso.refl _) (Iso.refl _) (by simp)) (.up ℤ)).app EP) ≫\n      DerivedCategory.Q.map\n        ((rZ.mapHomologicalComplex (.up ℤ)).map\n          ((CategoryTheory.Functor.mapHomologicalComplexCompIso χ (.up ℤ)\n            ).hom.app P))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T123517-L-2314334",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T123517-L-2314334",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

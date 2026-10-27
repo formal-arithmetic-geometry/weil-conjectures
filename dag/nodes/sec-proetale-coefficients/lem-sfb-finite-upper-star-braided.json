@@ -236,5 +236,53 @@
   "result": "pass",
   "note": "existing:true record for AlgebraicGeometry.ProEtale.laxBraided_upperStar (ModuleObject/UpperLowerStar/Monoidal.lean). The blueprint names this declaration and the node statement is verbatim. The declaration is fully proved by the mate route with no sorry; arbitrary g, no WeaklyEtale; needs only a braided coefficient category, weaker than the node's symmetric one; lean.statement verbatim. nt_compile --json consumer with only the node hypotheses, autoImplicit false: exit 0, no warnings. rfl: toLaxMonoidal = monoidal_upperStar's and toOplaxMonoidal = oplaxMonoidal_upperStar (same structure as the dependency); symmetric sheaf braiding = inferred braiding. Braiding equation; Functor.Braided assembled; IsCommMonObj(g^*B) via isCommMonObj_obj; transported multiplication formula; mapCommMon; identity case. Axioms propext/Classical.choice/Quot.sound. No duplicate DAG record; Worker report and Second reading by Q78 present; only the lean field changed. Cosmetic only: stale lean_not_found flags."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.laxBraided_upperStar"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.laxBraided_upperStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal",
+     "lines": [
+      87,
+      107
+     ],
+     "kind": "instance",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\mathcal A$ be a closed braided monoidal Grothendieck abelian category. The strong\nmonoidal functor $g^*$ of [def-sfb-finite-upper-star-monoidal] is compatible with the\nbraidings: it is a braided monoidal functor, hence symmetric monoidal when $\\mathcal A$ is\nsymmetric. In particular $g^*$ sends commutative ring objects to commutative ring objects.",
+  "proof": [
+   {
+    "text": "The structure map $\\delta_{F,G}\\colon g^*(F\\otimes G)\\to g^*F\\otimes g^*G$ is the\nadjoint of $(\\eta_F\\otimes\\eta_G)$ followed by the lax structure map of $g_*$, with $\\eta$\nthe unit of $g^*\\dashv g_*$. The braiding commutes with this composite by naturality of the\nbraiding and the compatibility of the lax structure of $g_*$ with the braiding\n([def-sfb-finite-lower-star-lax-monoidal]). Transposing back gives\n\n$$\n\\beta_{g^*F,g^*G}\\circ\\delta_{F,G}=\\delta_{G,F}\\circ g^*(\\beta_{F,G}).\n$$",
+    "uses": [
+     "def-sfb-finite-lower-star-lax-monoidal"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Since $\\delta$ is invertible, this is the compatibility of the strong monoidal structure with\nthe symmetries.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

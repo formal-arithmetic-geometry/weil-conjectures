@@ -11,6 +11,7 @@ public import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 import Sheaf.AlgebraicGeometry.EllAdicProperBoundedBelowCoproducts
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
+public import WeilConjectures.Compactification.Defs
 
 /-!
 # Proper pushforward and uniformly bounded coproducts

@@ -1,0 +1,146 @@
+{
+ "id": "lem-sf-twisted-action-site-core",
+ "kind": "statement",
+ "title": "Underlying twisted site with cocontinuous inclusion",
+ "statement": "Let $(C,J)$ be a small site with pullbacks, let $s:C\\simeq C$ have both directions continuous, let $R$ be a commutative ring sheaf, and let $a:(s^{-1})^*R\\simeq R$. Use the Site, module translation $\\sigma$, and fixed-pair definitions of [def-sf-twisted-action-presentation-data]. There exists $S:\\operatorname{Site}(J,s,R,a)$, consisting of the copied-object category with arrows $\\coprod_{n\\in\\mathbb Z}\\operatorname{Hom}(X,s^nY)$ and its normalized identity and composition, the degree-zero inclusion, the generated Grothendieck topology, and the coefficient sheaf with its prescribed minus-one ring map. Its inclusion is also cocontinuous.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Original twisted-site steps 1, 2, and the coefficient part of step 4. Agent variant motivated by Tag 00W0 (proposition-sheaves-on-group), not a claim that that tag proves the twisted assertion."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the coherent labelled category and its inclusion and normalized hom formulas from lem-sf-twisted-action-category.",
+   "uses": [
+    "lem-sf-twisted-action-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the generated topology, continuity, cocontinuity and restricted sheaf criterion from lem-sf-twisted-action-topology.",
+   "uses": [
+    "lem-sf-twisted-action-topology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the explicit ring presheaf of lem-sf-twisted-action-coefficient. Its restriction is R, hence the topology criterion makes it a sheaf. Package the coefficient restriction and minus-one normalization with the preceding category and topology into the prescribed Site structure, and retain the cocontinuity proof.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data",
+    "lem-sf-twisted-action-coefficient",
+    "lem-sf-twisted-action-topology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-twisted-action-category",
+  "lem-sf-twisted-action-topology",
+  "def-sf-twisted-action-presentation-data",
+  "lem-sf-twisted-action-coefficient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Z6",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Real construction from the existing coherent integer tensor powers, integer shift extension, and integer-action site normalization; all supporting lemmas are proved."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves with invertible semilinear action of an automorphism of a site are sheaves on its semidirect category with integers",
+   "results": "Eight hits, including SheafOfModules.instCategory, Sheaf.H, and generic sheaf algebraic-structure APIs. No construction of the twisted action site or its normalized restriction equivalences.",
+   "date": "2026-10-27",
+   "verdict": "related primitives only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.powFunctor",
+   "results": "Zero hits: unknown identifier CategoryTheory.Equivalence.powFunctor. Read Mathlib CategoryTheory/Equivalence.lean:506--540: integer powers exist, while their addition comparisons are explicitly marked TODO.",
+   "date": "2026-10-27",
+   "verdict": "no matching declared construction"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardPushforwardEquivalence|sheafEquivOfEquiv",
+   "results": "Seven hits, notably SheafOfModules.pushforwardPushforwardEquivalence in Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:388. Used for the translation equivalence and identity-site scalar equivalence. Local searches found no twisted action-site construction; ContinuousCocontinuousRingedRestriction supplies the geometric step.",
+   "date": "2026-10-27",
+   "verdict": "generic module equivalence reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "SheafOfModules.pushforwardPushforwardEquivalence",
+   "results": "Eight hits, including SheafOfModules.pushforward and pullbackPushforwardAdjunction; no complete twisted action-site construction. The explicit pushforward equivalence is read in Mathlib and used.",
+   "date": "2026-10-27",
+   "verdict": "generic APIs only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionSiteRestriction",
+  "date": "2026-10-27",
+  "group": "D5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The parent obligation has no created.item blueprint ancestor. Its recorded provenance is lem-a1-local-boundary-duality and the evaluation/biduality sentence of thm-coef-qbar-verdier. This site realization supplies the abelian-category foundation for the internal-Hom and evaluation argument of cor-coef-verdier-weil-equivariance, without replacing the native derived category by fixed pairs in a derived category. Original twisted-site proof steps 1--6; the topology and semilinear restriction calculation. Supporting step: Underlying twisted site with cocontinuous inclusion. The ancestor tool returns null for the parent; blueprint_refs search twisted action site and semidirect found no corresponding blueprint node.",
+   "via": [
+    "lem-sf-twisted-action-site-restriction",
+    "lem-sf-twisted-action-ringed-site",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionSiteCore",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionSiteCore.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.siteCore",
+  "declarations": [
+   "CategoryTheory.TwistedActionRingedSite.siteCore"
+  ],
+  "statement": "theorem siteCore [HasPullbacks C] :\n    ∃ S : Site J s R a,\n      letI := S.category\n      S.inclusion.IsCocontinuous J S.topology",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261027T064441-L-2179293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-ef98d",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261027T103529-L-1103929",
+  "kind": "interface",
+  "note": "independent cc review: siteCore proof and 3 new Z6 modules against node lem-sf-twisted-action-site-core and the 5 new nodes; IntegerActionSliceEquivalence diff vs clone (additions only, unclaimed, 0 importers) against change record Z6-integer-action-topology-criterion"
+ }
+}

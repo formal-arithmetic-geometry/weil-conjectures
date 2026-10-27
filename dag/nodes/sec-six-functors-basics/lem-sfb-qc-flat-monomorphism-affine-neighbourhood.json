@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-qc-flat-monomorphism-affine-neighbourhood",
+ "kind": "statement",
+ "title": "Affine locus of a quasi-compact flat monomorphism contains its image",
+ "statement": "Let $f:X\\to S$ be a quasi-compact flat monomorphism of schemes [def-pc-scheme, def-weil-flat-morphism, def-weil-pbc-scheme-conventions], where monomorphism means that postcomposition is injective on $\\operatorname{Hom}(T,X)$ for every scheme $T$. There is an open subscheme $U\\subseteq S$ [def-weil-open-immersion] containing $f(|X|)$ such that the induced morphism $X\\to U$ is affine [pqf-def-affine-morphism]. No quasi-affineness of $X$, quasi-separatedness of $S$, local finite presentation of $f$, or Noetherian hypothesis is assumed.",
+ "source": {
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "§1 Proposition 1.5(i), printed p.3; primary scan https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf, read in sandbox sources/raynaud.pdf; project archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-open-immersion",
+  "pqf-def-affine-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=f(|X|)$. By [lem-sfb-qc-flat-monomorphism-ringed-image], $f$ identifies $X$ with the ringed subspace induced by $S$ on $E$, in particular with the subspace topology on $E$. Fix $x\\in X$ and choose an affine open $A\\subseteq S$ containing $f(x)$. The open subscheme $f^{-1}(A)$ is a scheme; choose an affine chart $V$ of it containing $x$, using [def-pc-scheme]. Since $V$ is open in the subspace $E\\cap A$, there is an open $W\\subseteq A$ with $E\\cap W=V$. Under the ringed-subspace identification, $f^{-1}(W)=V$ and the restriction $f|_V:V\\to W$ is the induced morphism.",
+   "uses": [
+    "lem-sfb-qc-flat-monomorphism-ringed-image",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "§1, Proposition 1.5(i), printed p.3, first sentence of the proof (reduce to affine target and choose an affine neighbourhood in X); primary scan https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf"
+   }
+  },
+  {
+   "text": "The structure map $A\\to\\operatorname{Spec}\\mathbf Z$ is affine by [lem-weil-pbc-morphism-affine-schemes-affine], hence separated by [lem-weil-pbc-affine-morphism-permanence](3). An open-subscheme inclusion is monic directly from [def-weil-open-immersion]: its injective continuous map determines a lift uniquely, and its structure sheaf is a restriction, so the sheaf map of the lift is also determined. Thus $W\\times_AW\\cong W$, by the fibre-product universal property. Equivalently the diagonal of $W$ over $\\operatorname{Spec}\\mathbf Z$ is the pullback of the diagonal of $A$ along $W\\times W\\to A\\times A$. It is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. Hence $W$ is separated in the sense of [def-weil-proper-morphism]. Since $V$ is affine, [lem-weil-pbc-affine-source-separated-target-affine-morphism] makes $f|_V:V\\to W$ affine. By [pqf-def-affine-morphism], every affine open $B\\subseteq W$ has affine inverse image $f^{-1}(B)\\subseteq V$.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+    "pqf-def-affine-morphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "§1, Proposition 1.5(i), printed p.3, proof: W is contained in an affine target, hence separated, and the affine-source morphism is affine; primary scan https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf"
+   }
+  },
+  {
+   "text": "Let $U$ be the union in $S$ of the opens $W$ obtained in step 1, over all $x\\in X$. Then $U$ is open and contains $f(|X|)$, so $f$ factors through the open subscheme $U$ by restricting its continuous map and structure-sheaf homomorphism. For any $y\\in U$, choose one such $W$ containing $y$ and then an affine chart $B$ of the open subscheme $W$ containing $y$, using [def-pc-scheme]; step 2 gives that $f^{-1}(B)$ is affine. These opens $B$ form an affine open covering of $U$ with affine inverse images. Apply [pqf-lem-affine-local-target] to the induced morphism $X\\to U$. This proves that $X\\to U$ is affine. If $X=\\varnothing$, the union is $U=\\varnothing$ and the empty affine cover satisfies the same criterion.",
+   "uses": [
+    "pqf-lem-affine-local-target",
+    "def-weil-open-immersion",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "§1, Proposition 1.5(i), printed p.3, conclusion that the union of the local affine locus opens contains f(X); primary scan https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "lem-sfb-qc-flat-monomorphism-ringed-image",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "pqf-def-affine-morphism",
+  "pqf-lem-affine-local-target"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "Argument following Raynaud §1 Proposition 1.5(i), printed p.3, read online in the Numdam primary scan; project archival copy WANTED. The open-subscheme separatedness check and affine-cover assembly are expanded using Stacks Tags 01SH, 01S7, 01QR, 01SG and 01S8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact flat monomorphism is affine over an open neighborhood of its image",
+   "results": "{\"t\": \"2026-10-24T14:39:50Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact flat monomorphism is affine over an open neighborhood of its image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.isAffineHom_iff\", \"AlgebraicGeometry.isAffineHom_of_forall_exists_isAffineOpen\", \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\"], \"digest\": \"4b3dcda01d9c6bcf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give affine morphism criteria, affine charts, and the surjective flat-monomorphism isomorphism theorem, not an affine target neighbourhood containing the entire image."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"Mono\", \"IsAffineHom\"",
+   "results": "{\"t\": \"2026-10-24T14:39:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"Mono\\\", \\\"IsAffineHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give affine morphism criteria, affine charts, and the surjective flat-monomorphism isomorphism theorem, not an affine target neighbourhood containing the entire image."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*(neigh|[Mm]ono)|([Mm]ono|neigh).*affine",
+   "results": "{\"t\": \"2026-10-24T14:39:50Z\", \"tool\": \"grep\", \"query\": \"affine.*(neigh|[Mm]ono)|([Mm]ono|neigh).*affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\"], \"digest\": \"221893c47e1644e1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give affine morphism criteria, affine charts, and the surjective flat-monomorphism isomorphism theorem, not an affine target neighbourhood containing the entire image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given a quasi compact flat monomorphism X to Y there is an open subset U of Y containing its image such that X to U is affine",
+   "results": "{\"t\": \"2026-10-24T14:39:51Z\", \"tool\": \"leansearch\", \"query\": \"Given a quasi compact flat monomorphism X to Y there is an open subset U of Y containing its image such that X to U is affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.IsAffineOpen.preimage_of_isOpenImmersion\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.IsAffineOpen.preimage\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.IsAffineHom.mk\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\"], \"digest\": \"d6fb391e9c3a7f44\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give affine morphism criteria, affine charts, and the surjective flat-monomorphism isomorphism theorem, not an affine target neighbourhood containing the entire image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud flat quasi compact monomorphism has an affine locus containing the entire image",
+   "results": "{\"t\": \"2026-10-24T14:39:53Z\", \"tool\": \"leanfinder\", \"query\": \"Raynaud flat quasi compact monomorphism has an affine locus containing the entire image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat\"], \"digest\": \"603a36c80f1fe529\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give affine morphism criteria, affine charts, and the surjective flat-monomorphism isomorphism theorem, not an affine target neighbourhood containing the entire image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact flat monomorphism of schemes is affine over an open neighborhood of its image",
+   "results": "{\"t\": \"2026-10-24T15:07:07Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact flat monomorphism of schemes is affine over an open neighborhood of its image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\", \"AlgebraicGeometry.isAffineHom_of_forall_exists_isAffineOpen\"], \"digest\": \"b592c1ecada45302\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned affine criteria and the surjective or locally finitely presented flat-monomorphism theorems do not give the claimed open neighbourhood."
+  },
+  {
+   "tool": "loogle",
+   "query": "Flat Mono IsAffineHom",
+   "results": "{\"t\": \"2026-10-24T15:07:08Z\", \"tool\": \"loogle\", \"query\": \"Flat Mono IsAffineHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `Flat`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "inconclusive: Loogle returned the recorded unknown-identifier diagnostic; the other recorded semantic and source searches were used to assess absence."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*mono.*affine|affine.*flat.*mono",
+   "results": "{\"t\": \"2026-10-24T15:07:08Z\", \"tool\": \"grep\", \"query\": \"flat.*mono.*affine|affine.*flat.*mono\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned affine criteria and the surjective or locally finitely presented flat-monomorphism theorems do not give the claimed open neighbourhood."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact flat monomorphism is affine over an open neighborhood of its image",
+   "results": "{\"t\": \"2026-10-24T15:07:08Z\", \"tool\": \"leansearch\", \"query\": \"A quasi compact flat monomorphism is affine over an open neighborhood of its image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.quasiCompact_iff_forall_affine\"], \"digest\": \"2ce3d22cb99c0f36\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned affine criteria and the surjective or locally finitely presented flat-monomorphism theorems do not give the claimed open neighbourhood."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact flat monomorphism of schemes is affine over an open neighborhood of its image",
+   "results": "{\"t\": \"2026-10-24T15:17:31Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact flat monomorphism of schemes is affine over an open neighborhood of its image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\", \"AlgebraicGeometry.isAffineHom_of_forall_exists_isAffineOpen\"], \"digest\": \"b592c1ecada45302\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned affine criteria and the surjective or locally finitely presented flat-monomorphism theorems do not give the claimed open neighbourhood."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAffineHom Flat Mono QuasiCompact",
+   "results": "{\"t\": \"2026-10-24T15:17:32Z\", \"tool\": \"loogle\", \"query\": \"IsAffineHom Flat Mono QuasiCompact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `IsAffineHom`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "inconclusive: Loogle returned the recorded unknown-identifier diagnostic; the other recorded semantic and source searches were used to assess absence."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*mono.*affine|affine.*flat.*mono",
+   "results": "{\"t\": \"2026-10-24T15:17:32Z\", \"tool\": \"grep\", \"query\": \"flat.*mono.*affine|affine.*flat.*mono\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned affine criteria and the surjective or locally finitely presented flat-monomorphism theorems do not give the claimed open neighbourhood."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact flat monomorphism is affine over an open neighborhood of its image",
+   "results": "{\"t\": \"2026-10-24T15:17:32Z\", \"tool\": \"leansearch\", \"query\": \"A quasi compact flat monomorphism is affine over an open neighborhood of its image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.quasiCompact_iff_forall_affine\"], \"digest\": \"2ce3d22cb99c0f36\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned affine criteria and the surjective or locally finitely presented flat-monomorphism theorems do not give the claimed open neighbourhood."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-descent-flat-monomorphism-subset",
+  "date": "2026-10-24",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), the affine-neighbourhood branch; Raynaud §1 Proposition 1.5(i), printed p.3",
+   "via": [
+    "lem-sfb-integral-descent-flat-monomorphism-subset",
+    "lem-sfb-integral-finite-fibre-affine-neighbourhood-transfer",
+    "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-qc-flat-monomorphism-affine-neighbourhood",
+  "worker": "stage1",
+  "summary": "Read Raynaud Proposition 1.5(i) in the primary Numdam scan. Retained the statement and gave three steps: ringed-image/topological reduction, affine-source/separated-target criterion, and the affine-cover assembly on the union. Expanded separatedness of an open in an affine scheme using the diagonal pullback and existing Mathlib leaves. Reused the existing local-target node instead of creating a duplicate. No new nodes, no Lean writing or compilation.",
+  "blueprint": "Current literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3), affine-neighbourhood branch; no imported blueprint node has this exact statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+    "why": "Generic affine-source/separated-target criterion used to show each local restriction V -> W is affine; the current unit has no equivalent statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-source-separated-target-affine-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-62f0c33dd",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-62f0c33dd (reviewer sub-agent of L); spot-checked: I read the item, its three steps and every cited statement against Raynaud, Sém. Samuel 1967/68 exp. 5, Prop 1.2(i) and Prop 1.5(i) with its proof (5-02/5-03, Numdam scan text). Delivery shape: one commit, item plus report, no new nodes. The statement, stmt_deps and source are byte-identical to the base copy, where the item was unsplit. The existential statement follows from Raynaud's 'largest open' and has the same hypotheses (quasi-compact, flat, monomorphism). Step 1: the ringed-image node gives X≅S|_E with the subspace topology, so an affine V⊆f^{-1}(A) equals E∩W for an open W⊆A, and f^{-1}(W)=V by injectivity. Step 2: A→Spec Z is affine (01SH) and so separated (01S7(3)). An open immersion is monic, so Δ_W is the base change of Δ_A and is a closed immersion (01QR). So W is separated as in def-weil-proper-morphism, 01SG(4) gives V→W affine, and f^{-1}(B)⊆V is affine for affine B⊆W. Step 3: the B's form an affine cover of U=∪W, and 01S8 applies; the empty case is handled. Tested X empty, the identity of a non-quasi-separated S, and Spec A_p→Spec A; Raynaud's non-quasi-compact counterexample is excluded by the hypothesis. No duplicate: the quasiaffine-neighbourhood node needs quasi-affine X and quasi-separated T, and the affine-envelope node works on affine S only. All cited nodes from other units are Mathlib leaves, so no tool use needs recording; the worker's split_report tool_uses entry is unneeded but harmless. Minor: the inherited source.place still says 'sandbox pdf' although the scan was read online; that field was not touched by the split. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcFlatMonomorphismAffineNeighbourhood",
+  "declaration": "AlgebraicGeometry.Flat.exists_open_neighbourhood_isAffineHom_of_mono",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcFlatMonomorphismAffineNeighbourhood.lean",
+  "statement": "theorem Flat.exists_open_neighbourhood_isAffineHom_of_mono {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [Flat f] [Mono f] : ∃ (U : S.Opens) (hU : Set.range f ⊆ Set.range U.ι), IsAffineHom (IsOpenImmersion.lift U.ι f hU)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-52e5c665f",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Node differs from side-live only in the lean record; statement, stmt_deps, proof and source unchanged; no new nodes; one sorry theorem, no defs. Lean Flat.exists_open_neighbourhood_isAffineHom_of_mono {X S : Scheme.{u}} [QuasiCompact f] [Flat f] [Mono f] : ∃ U : S.Opens, ∃ hU : range f ⊆ range U.ι, IsAffineHom (IsOpenImmersion.lift U.ι f hU) matches every clause of the node (Raynaud §1 Prop 1.5(i), existence form as reviewed at S1) with no extra assumptions; notions are the recorded Mathlib owners; edge cases (empty X, identity of non-separated S, surjective, non-lfp) covered; lean.statement verbatim; docstrings carry source, blueprint id and the 3 proof steps; private imports exist; report has Worker report and Second reading sections. No findings; not recompiled (no change)."
+ }
+}

@@ -6,53 +6,12 @@ Authors: SHEAF group Q04
 module
 
 public import Sheaf.Paper.FiniteFieldFiber
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Topology.KrullDimension
-public import Mathlib.AlgebraicGeometry.Sites.Etale
-public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.Paper.FiniteTorAmplitudeSites
-public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import Sheaf.Paper.StrictPerfectCoefficientPackageOfUniverses
-public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.Paper.SiteRestrictionExact
-import Mathlib.Algebra.Category.Grp.Abelian
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.CategoryTheory.Abelian.ShortExact
-import Mathlib.CategoryTheory.Sites.Abelian
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.CategoryTheory.Sites.Over
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
-import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
-import Sheaf.CategoryTheory.RingedToposKFlatPullback
-import Sheaf.CategoryTheory.ModulePullbackTensorIso
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.Paper.FiniteCoefficientFlatModel
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleQcqsAffineLocal
-import Sheaf.Paper.FiniteConstructibleHom
-import Sheaf.AlgebraicGeometry.OpenImmersionHigherDirectImages
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import WeilConjectures.Algebra.Homology.HomComplex
-import Mathlib.Algebra.Homology.HomologySequence
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Paper.EtaleSitePerfectConstructibleHom
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.Algebra.Homology.SitePerfectTorWindow
-import Sheaf.AlgebraicGeometry.EtaleSheafZeroOnCover
-import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+
+import WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHom
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Derived internal Hom at finite coefficients on the etale site
@@ -77,52 +36,104 @@ open CategoryTheory Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace WeilConjectures
 
+-- Align the lifted coefficient Ring instance with the generic CommRing theorem.
+attribute [local instance 2000] CommRing.toRing
+
+private theorem boundedConstructible_iff
+    (A : Type (u + 1)) [CommRing A] [Finite A] (X : Scheme.{u})
+    (K : Etale.DerivedCategoryModule A X) :
+    Etale.DerivedCategory.isBoundedConstructible A X K ↔
+      Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) X K := by
+  constructor
+  · rintro ⟨hc, a, b, -, hz⟩
+    refine ⟨⟨⟨a, ?_⟩, ⟨b, ?_⟩⟩, fun i ↦
+      (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 (hc i)⟩
+    · exact (_root_.DerivedCategory.isGE_iff K a).2 (fun i hi ↦ hz i (.inl hi))
+    · exact (_root_.DerivedCategory.isLE_iff K b).2 (fun i hi ↦ hz i (.inr hi))
+  · rintro ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩
+    refine ⟨fun i ↦
+      (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 (hc i),
+      min a b, b, min_le_right _ _, fun i hi ↦ ?_⟩
+    rcases hi with hi | hi
+    · exact (_root_.DerivedCategory.isGE_iff K a).1 ha i
+        (hi.trans_le (min_le_left _ _))
+    · exact (_root_.DerivedCategory.isLE_iff K b).1 hb i hi
+
+private theorem coefficient_invertibleExponent
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (E : Type u) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E] (n : ℕ) :
+    HasInvertibleExponent (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))
+      (Spec (.of D.k)) := by
+  let : Fact D.p.Prime := ⟨D.prime⟩
+  let : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  let : CharP D.k₀ D.p := charP_of_card_eq_prime_pow
+    ((Nat.card_eq_fintype_card.symm.trans D.card_base).trans D.cardinality_eq)
+  let : CharP D.k D.p := charP_of_injective_algebraMap' D.k₀ D.p
+  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have habv : Padic.coefficientExtensionAbsoluteValue l E (l : E) < 1 := by
+    calc
+      Padic.coefficientExtensionAbsoluteValue l E (l : E) = ‖(l : Padic l)‖ := by
+        change spectralNorm (Padic l) E (l : E) = ‖(l : Padic l)‖
+        simpa only [map_natCast] using
+          (spectralNorm_extends (K := Padic l) (L := E) (l : Padic l))
+      _ < 1 := Padic.norm_p_lt_one
+  have hlm : (l : Padic.coefficientExtensionIntegers l E) ∈
+      Padic.coefficientExtensionMaximalIdeal l E :=
+    (h.2.1 _).2 (by simpa only [SubringClass.coe_natCast] using habv)
+  have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+      Set (Padic.coefficientExtensionIntegers l E)) =
+      Padic.coefficientExtensionMaximalIdeal l E :=
+    h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  have hpow : (l : Padic.coefficientExtensionIntegers l E) ^ n ∈
+      Padic.coefficientExtensionIdeal l E n := by
+    change _ ∈ Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+      Set (Padic.coefficientExtensionIntegers l E)) ^ n
+    rw [hgen]
+    exact Ideal.pow_mem_pow hlm n
+  have hkill : ((l ^ n : ℕ) : Padic.coefficientExtensionRing l E n) = 0 := by
+    change ((l ^ n : ℕ) :
+      Padic.coefficientExtensionIntegers l E ⧸ Padic.coefficientExtensionIdeal l E n) = 0
+    rw [← map_natCast (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n)),
+      Ideal.Quotient.eq_zero_iff_mem]
+    simpa only [Nat.cast_pow] using hpow
+  have hlk : (l : D.k) ≠ 0 := fun hz ↦
+    hl ((CharP.ringChar_of_prime_eq_zero (Fact.out : l.Prime) hz).symm.trans
+      (ringChar.eq D.k D.p))
+  have hu : IsUnit ((l ^ n : ℕ) : D.k) := by
+    rw [Nat.cast_pow]
+    exact (isUnit_iff_ne_zero.mpr hlk).pow n
+  refine ⟨l ^ n, pow_pos (Fact.out : l.Prime).pos n, ?_, ?_⟩
+  · exact ULift.down_injective hkill
+  · simpa only [map_natCast] using hu.map (Scheme.ΓSpecIso (.of D.k)).inv.hom
+
+
 /-- Internal Hom preserves finite-Tor bounded constructibility, with a dimension-dependent
 Tor interval and the sharper interval when the first argument is site-perfect.
 Source: Weil blueprint, thm-sf-hom-ctf, order 2199 (blueprint: thm-sf-hom-ctf).
 
 Proof:
-1. Slice restriction is exact by lem-weil-pbc-site-restriction-exact. Using K-flat models
-from lem-weil-pbc-site-derived-tensor-descent, their preservation under localized pullback
-(lem-weil-pbc-supplied-ringed-topos-kflat-pullback), and the degreewise tensor comparison
-(lem-weil-pbc-ringed-topoi-module-pullback-tensor), restriction commutes with derived tensor.
-The Hom restriction comparison is lem-weil-pbc-ringed-internal-hom-exact-restriction.
-2. Finite type over the affine field base gives a finite affine open cover of X. Each member
-is separated over k by lem-weil-pbc-affine-source-morphism-separated and has dimension at
-most m by lem-weil-pbc-open-subspace-dimension-monotone. The scheme is Noetherian, hence
-qcqs, by lem-weil-pbc-finite-type-over-noetherian. The empty scheme permits an empty cover.
-3. Restrict the bounded flat models in [a,b] and [c,d] from lem-sf-flat-model. Flatness
-is preserved by lem-weil-pbc-slice-restriction-flat, and Step 1 preserves their derived
-identifications. Constructibility restricts by lem-weil-pbc-constructible-qcqs-affine-local.
-4. Apply cor-weil-finite-constructible-hom on every affine member with the same parameter m.
-Its Verdier-biduality and tensor argument gives bounded constructibility and the common
-interval [c-b-2m,d-a+2m]. Step 1 identifies these with restrictions of the global Hom.
-5. Test tensor against any module sheaf in degree zero. Cohomology vanishes outside that
-interval after restriction to the cover, hence globally by the sheaf axiom. Testing the
-coefficient sheaf gives boundedness. For each cohomology sheaf G, its restrictions to the
-cover and overlaps are constructible. The overlaps are finite type by
-lem-weil-pbc-qc-open-immersion-finite-type. Apply thm-fin-open-immersion to the cover members
-and overlaps; their degree-zero direct images are constructible, with the section formula
-of def-weil-pbc-direct-image. Sheaf gluing expresses G as the kernel of the difference map
-between the two finite sums of these direct images. The finite-sum and kernel clauses of
-thm-constructible-serre give constructibility, including the empty-cover case.
-6. If K is site-perfect, lem-sf-site-perfect-tor-window gives local finite-projective models
-P in the prescribed interval [a,b]. Independently choose a bounded flat model F of M in
-[c,d] by lem-sf-flat-model; its restrictions remain flat by
-lem-weil-pbc-slice-restriction-flat.
-7. The Hom complex of def-pur-hom-complex computes derived Hom from bounded P to F.
-For a single finite-free retract P^i, sheaf Hom is a retract of a finite power, hence exact,
-and finite-projective evaluation identifies it with (P^i)-dual tensor. Induct on the number
-of terms of P, using the long exact sequence of
-lem-weil-pbc-complex-ses-homology-long-exact, to show Hom(P,-) preserves quasi-isomorphisms.
-Apply this to a K-injective replacement of F and use def-pur-derived-internal-hom.
-8. Degree r of Hom(P,F) is the finite sum of Hom(P^i,F^(i+r)). These are flat finite-free
-retracts of powers of F^(i+r), and vanish unless c-b <= r <= d-a. Induction on the endpoint
-filtration proves that this bounded flat complex is K-flat (def-pc-kflat-complex), so tensor
-against any degree-zero module is still supported in [c-b,d-a].
-9. Step 1 and the sheaf axiom descend the sharper tensor vanishing globally. Testing the
-coefficient sheaf gives boundedness; lem-sf-ext-sheaf-constructible supplies constructibility
-in this case independently of the general Verdier-duality argument. -/
+1. The coefficient ring. The finite base field has characteristic p (its cardinality is a
+power of p), and so has its algebraic closure k. The extension absolute value gives |l| < 1,
+so by lem-weil-l-adic-extension-integers-dvr l lies in the maximal ideal generated by the
+uniformizer; hence l^n = 0 in A = A_{E,n}. As l differs from p, l^n is a unit of k and of the
+global sections of Spec k. This is HasInvertibleExponent for the lifted ring, pulled back to X.
+2. The predicates. The finite-ring comparison of constructible etale module sheaves
+(lem-weil-pbc-constructible-etale-module-sheaf-comparison) identifies isBoundedConstructible
+with boundedConstructible (bounds via isGE_iff/isLE_iff, lower endpoint min a b in the
+reverse direction); hasTorAmplitudeIn is equivalent to torAmplitudeIn.
+3. General case. The proved source theorems Etale.boundedConstructible_derivedHom and
+Etale.torAmplitudeIn_derivedHom (the unit's declarations) give bounded constructibility and
+the interval [c-b-2m,d-a+2m]: a finite affine cover by separated finite-type charts of
+dimension at most m (lem-weil-pbc-affine-source-morphism-separated,
+lem-weil-pbc-open-subspace-dimension-monotone, lem-weil-pbc-finite-type-over-noetherian) and
+cor-weil-finite-constructible-hom (Verdier biduality) on each chart.
+4. Site-perfect case. IsSitePerfect.isDualizable (lem-sf-source-etale-site-perfect-dualizable)
+makes K dualizable; its dual has Tor interval [-b,-a] and RHom(K,M) is its derived tensor
+with M, so Etale.torAmplitudeIn_derivedHom_of_isDualizable_aux gives [c-b,d-a].
+5. From a <= b, c <= d and m >= 0, c-b-2m <= d-a+2m, which witnesses finite Tor amplitude in
+the first conclusion. -/
 theorem finiteCoefficient_derivedHom_ctf_etale
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -151,6 +162,27 @@ theorem finiteCoefficient_derivedHom_ctf_etale
         (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) X (c - b) (d - a)
         (((Etale.derivedHom (ModuleCat.{u + 1}
           (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) X).obj (op K)).obj M)) := by
-  sorry
+  let : Finite (Padic.coefficientExtensionRing l E n) :=
+    Padic.finite_coefficientExtensionRing l E n hn
+  let A := ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)
+  let : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
+  let : HasInvertibleExponent A (Spec (.of D.k)) :=
+    coefficient_invertibleExponent D l _hl E n
+  let : HasInvertibleExponent A X := .of_hom (X ↘ Spec (.of D.k))
+  have hK := (boundedConstructible_iff A X K).1 _hK.1
+  have hM := (boundedConstructible_iff A X M).1 _hM.1
+  have hKt := Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.1 _hKt
+  have hMt := Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.1 _hMt
+  have hc := Etale.boundedConstructible_derivedHom A (X ↘ Spec (.of D.k))
+    a b c d hK hKt hM hMt
+  have ht := Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.2
+    (Etale.torAmplitudeIn_derivedHom A (X ↘ Spec (.of D.k)) m _hm
+      a b c d hK hKt hM hMt)
+  refine ⟨⟨(boundedConstructible_iff A X _).2 hc,
+    c - b - 2 * (m : ℤ), d - a + 2 * (m : ℤ), by omega, ht⟩, ht, ?_⟩
+  intro hp
+  exact Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.2
+    (Etale.torAmplitudeIn_derivedHom_of_isDualizable_aux (ModuleCat.{u + 1} A)
+      hKt hp.isDualizable hMt)
 
 end WeilConjectures

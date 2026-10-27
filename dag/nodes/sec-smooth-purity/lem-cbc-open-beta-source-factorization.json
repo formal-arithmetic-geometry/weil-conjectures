@@ -1,0 +1,123 @@
+{
+ "id": "lem-cbc-open-beta-source-factorization",
+ "kind": "statement",
+ "title": "Source-open factorization of the normalized inverse open comparison",
+ "statement": "Let B be a commutative ring, and use the strict-tower operations of [def-cbc-strict-constant-tower-operations], the open adjunction and compositors of [def-cbc-strict-tower-open-extension], and the specified inverse comparison betaInv of [def-cbc-strict-tower-proper-open-arrows]. Let s:V→P, b:P→W, q:P→S, k:V→W, r:V→S, i:S→T, p:W→T satisfy s≫b=k, s≫q=r, k≫p=r≫i and q≫i=b≫p. Assume s,b,k,i are open immersions. For every M in D(Towers(B,S)), betaInv(r,k,i,p) at M equals the inverse open compositor J_k→J_s J_b (transported along s≫b=k), followed by J_b of J_s applied to the inverse-image compositor G_r→G_q G_s (transported along s≫q=r), followed by J_b of the open counit J_s G_s→identity at G_q M, followed by betaInv(q,b,i,p) at M. No properness, quasi-compactness, closedness or cartesianness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B (lemma-shriek-proper-and-open), open factorization and canonical composition; explicit normalized-transpose calculation in parent step 8, with Stacks 03DI and 07A7"
+ },
+ "stmt_deps": [
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-cbc-strict-tower-proper-open-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Prove the source-square compositor equation first for an arbitrary PullbackCoherentSystem: apply its associativity law to the triples (s,q,i) and (s,b,p), with the supplied square commutativity; a generic category cancellation lemma combines the two equations. Expand systemSquare only in this abstract setting. Specialize this proved generic equation to pullbackSystem B, identifying squareG with systemSquare by squareG_system and reflexive gCompEq with gComp. This avoids kernel normalization across large concrete derived functor terms.",
+   "uses": [
+    "lem-cbc-strict-tower-direct-image-coherence",
+    "def-cbc-strict-tower-proper-open-arrows",
+    "lem-cbc-strict-tower-pullback-square-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the proposed factorization under the open adjunction of s≫b. The normalized jComp is conjugate to gComp, so the conjugate unit identity replaces this transpose, after composing with gComp, by the transpose under the composite open adjunction. Its Hom equivalence is the composite of the two open Hom equivalences. Naturality and the counit-transpose identity cancel the inserted counit. The remaining expression is gComp(s,q) followed by G_s of the defining transpose of betaInv(q,b,i,p). Naturality of gComp moves the open unit across, and the source-square equation gives precisely the defining transpose of betaInv(s≫q,s≫b,i,p). Cancel the invertible compositor and apply injectivity of the Hom equivalence.",
+   "uses": [
+    "def-cbc-strict-tower-open-extension",
+    "def-cbc-strict-tower-proper-open-arrows",
+    "def-weil-pbc-adjunction-mate",
+    "lem-cbc-strict-tower-direct-image-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-strict-tower-direct-image-coherence",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-cbc-strict-tower-open-extension",
+  "def-weil-pbc-adjunction-mate",
+  "lem-cbc-strict-tower-pullback-square-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, strict-tower refinement of open source factorization; expanded by E1 as a generic coherent-family source-square calculation, specialization to the existing pullbackSystem, and the normalized open transpose calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Base change for extension by zero along open immersions is compatible with composition and isomorphisms",
+   "results": "Eight results about structure-sheaf restriction and open-immersion composition, none for the specified strict-tower comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use existing project compositors and adjunction Hom equivalences."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPullback.isoPullback",
+   "results": "No hits; the declaration was located directly in Mathlib Pullback/IsPullback/Defs.lean.",
+   "date": "2026-10-25",
+   "verdict": "Pullback isomorphism handles the parent geometry only, not this normalized factorization."
+  },
+  {
+   "tool": "grep",
+   "query": "betaInv_source_factorization|alpha_cartesian|properOpen_clopen_projector; leftAdjointCompIso.*unit|leftAdjointCompIso.*counit|conjugateEquiv.*unit",
+   "results": "Mathlib supplies conjugate unit/counit identities. Source/library rg finds alpha_cartesian only as an application of the parent unresolved theorem, so it is circular here. Existing gCompEq_coherence supplies the actual inverse-image associativity calculation.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate source-factorization theorem; prove this step from existing coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperOpenClopenProjector",
+  "date": "2026-10-25",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Compatibility of comparisons with completed maps, via proper/open strict-tower calculus; parent lem-cbc-proper-open-clopen-projector step 8, the compositor calculation recovering beta for a cartesian square.",
+   "via": [
+    "lem-cbc-proper-open-clopen-projector",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenBetaSourceFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenBetaSourceFactorization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.betaInv_source_factorization",
+  "statement": "theorem betaInv_source_factorization {V P W S T : Scheme.{u}}\n    (s : V ⟶ P) (b : P ⟶ W) (q : P ⟶ S)\n    (k : V ⟶ W) (r : V ⟶ S) (i : S ⟶ T) (p : W ⟶ T)\n    [IsOpenImmersion s] [IsOpenImmersion b] [IsOpenImmersion k] [IsOpenImmersion i]\n    (hk : s ≫ b = k) (hr : s ≫ q = r)\n    (h : k ≫ p = r ≫ i) (h₀ : q ≫ i = b ≫ p) (M : Derived B S) :\n    (betaInv B r k i p h.symm).app M =\n      ((jComp B s b ≪≫ jCongr B hk).inv.app ((G B r).obj M)) ≫\n      (J B b).map ((J B s).map\n        ((((eqToIso (congrArg (G B) hr)).symm) ≪≫ gComp B s q).hom.app M) ≫\n          (jAdj B s).counit.app ((G B q).obj M)) ≫\n      (betaInv B q b i p h₀).app M",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261025T211310-L-3921569",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261025T211310-L-3921569",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-first-root-line-pullback",
+ "kind": "statement",
+ "title": "First completed root-line module pullback",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a morphism $g:X\\to Y$ of schemes on which $\\ell$ is invertible. Use the completed coefficient sheaves and integral root lines of [def-coefficient-twists-detailed], and the specified root and coefficient maps of [def-weil-frobenius-coefficient-twists]. There exists an isomorphism from the ordinary coefficient-module pullback of the first integral root line on $Y$ to that on $X$. For every pro-etale object $V\\to Y$, completed scalar section $a$, and compatible root section $x$, its hom sends the module-adjunction unit image of $a\\cdot(1\\otimes x)$ to $\\alpha_g(a)\\cdot(1\\otimes\\sigma_g(x))$ on $V\\times_YX$. Here $\\alpha_g$ is the specified completed coefficient direct-image map, and $\\sigma_g$ is the root-limit inverse-image comparison evaluated after the additive inverse-image unit. These are fixed by all finite coefficient and root-tower projections, respectively.",
+ "stmt_deps": [
+  "def-coefficient-twists-detailed",
+  "def-weil-frobenius-coefficient-twists"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral twist and Powers and duals paragraphs; local pure-tensor uniqueness in the orientation coefficient conventions"
+ },
+ "proof": [
+  {
+   "text": "The specified completed coefficient pullback has the defining finite projections. The specified rootLineMap has the defining root projections, by the limit postcomposition and the root-tower map equations. The cartesian root comparison therefore equals rootLineMap, by joint monicity of those projections, making rootLineMap invertible.",
+   "uses": [
+    "def-pur-integral-compact-support-coefficient-data",
+    "lem-pur-integral-twist-line-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply pur_integral_tensor_transport to these coefficient and root maps. It gives an invertible additive line comparison whose adjunct satisfies the integral pure-tensor formula and completed semilinearity.",
+   "uses": [
+    "lem-pur-integral-tensor-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Make the adjunct into a morphism to the module direct image, using completed semilinearity for its linearity. Transpose under the module adjunction. Its forgotten map composed with the invertible adjunct of the forgotten module unit equals the original additive comparison; this follows by the additive adjunction and its unit formula. The unit adjunct is invertible by pullback_unit_mate_isIso. Cancel it and use reflection of isomorphisms by the forgetful functor.",
+   "uses": [
+    "det-prop-sfb-cartesian-coefficients-twists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module unit identity identifies the map on pulled sections with the original additive adjunct. Its scalar formula and its tensor formula at scalar one prove the stated root-generator equation. The coefficient adjunct cancels its adjunction inverse and both coefficient maps send one to one. All arguments are universal properties, including on the empty scheme.",
+   "uses": [
+    "lem-pur-integral-tensor-transport",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-pur-integral-twist-line-inverse-image",
+  "lem-pur-integral-tensor-transport",
+  "det-prop-sfb-cartesian-coefficients-twists"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral twist and Powers and duals: make the normalized module comparison and the generator uniqueness explicit."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized isomorphism of inverse image of integral Tate line for morphism of schemes",
+   "results": "Search executed via msearch.py: 8 hits. AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.inv_image, AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage, AlgebraicGeometry.Scheme.Hom.toNormalization. These supply general sheaf/tensor infrastructure but not the normalized completed root-line assertion.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.Hom",
+   "results": "Search executed via msearch.py: 5 hits. SheafOfModules.Hom, SheafOfModules.Hom.mk, SheafOfModules.Hom.val, SheafOfModules.Hom.ext, SheafOfModules.Hom.ext_iff. These supply general sheaf/tensor infrastructure but not the normalized completed root-line assertion.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "TensorProduct.ext|PresheafOfModules.hom_ext|SheafOfModules.hom_ext",
+   "results": "Search executed via msearch.py: 25 hits. Mathlib/LinearAlgebra/Coevaluation.lean, Mathlib/LinearAlgebra/Coevaluation.lean, Mathlib/Algebra/Algebra/Bilinear.lean, Mathlib/Algebra/Algebra/Bilinear.lean, Mathlib/Algebra/Algebra/Bilinear.lean, Mathlib/LinearAlgebra/TensorProduct/Associator.lean, Mathlib/LinearAlgebra/TensorProduct/Associator.lean, Mathlib/LinearAlgebra/TensorProduct/Associator.lean. These supply general sheaf/tensor infrastructure but not the normalized completed root-line assertion.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrientationIntegralCoefficientTwists",
+  "date": "2026-10-27",
+  "group": "G8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sf-orientation",
+   "place": "Coefficient-line comparison convention: inverse image of the first line and uniqueness on pure root tensors.",
+   "via": [
+    "def-sf-orientation-integral-line-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-def-sf-orientation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FirstRootLinePullback",
+  "file": "lean/Sheaf/Paper/FirstRootLinePullback.lean",
+  "declaration": "WeilConjectures.sfFirstRootLinePullback_exists",
+  "statement": "theorem sfFirstRootLinePullback_exists\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}} (g : X ⟶ Y)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)] :\n    ∃ t : (FrobeniusCoefficientTwists.modulePull l E g).obj\n        (purTwistIntegralModule Y l E) ≅ purTwistIntegralModule X l E,\n      ∀ (V : Y.ProEt)\n        (a : (completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj\n          (Opposite.op V)) (x : Fin 1 → (purTwistZlOne Y l).obj.obj (Opposite.op V)),\n        t.hom.val.app (Opposite.op ((proEtaleBaseChange g).obj V))\n          (FrobeniusCoefficientTwists.moduleSection l E g\n            (FrobeniusCoefficientTwists.positiveLine l E Y 1) V\n            (FrobeniusCoefficientTwists.generator l E Y (Opposite.op V) a 1 x)) =\n        FrobeniusCoefficientTwists.generator l E X\n          (Opposite.op ((proEtaleBaseChange g).obj V))\n          ((sfCompletedCoefficientMap l E g).hom.app (Opposite.op V) a) 1\n          (fun i ↦ FrobeniusCoefficientTwists.rootSection l g V (x i))",
+  "branch": "sheaf-dag",
+  "by": "G8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261026T195249-L-2926857",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261026T195249-L-2926857",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

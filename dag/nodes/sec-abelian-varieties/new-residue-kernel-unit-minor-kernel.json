@@ -24,7 +24,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",
  "id": "new-residue-kernel-unit-minor-kernel",
@@ -39,7 +50,9 @@
  "proof": [
   {
    "text": "Over A=R_p, finite projectivity gives finite freeness. This can be obtained directly from Mathlib Module.free_of_flat_of_isLocalRing, since base change preserves finiteness and projectivity implies flatness. Choose finite bases. Tensor associativity identifies the residue matrix of f⊗A with f⊗κ.",
-   "uses": [],
+   "uses": [
+    "new-residue-kernel-unit-minor-base-change-free"
+   ],
    "elementary": true
   },
   {
@@ -49,11 +62,16 @@
   },
   {
    "text": "Write the matrix [[B,b],[D,d]]. The source operation s(u,a)=(u-B⁻¹ba,a) and target operation t(y,z)=(B⁻¹y,z-DB⁻¹y) give t f s = diag(id,g), where g(a)=(d-DB⁻¹b)a. Let eX be s⁻¹ composed with the source coordinates and eY be t composed with the target coordinates. U is the selected coordinate module and C the remaining target coordinates, so C is free. Reversing the operations gives the inverses. When n=1, U=0 and B is empty; no inverse of a nonempty minor is needed.",
-   "uses": [],
+   "uses": [
+    "new-residue-kernel-unit-minor-matrix-core"
+   ],
    "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "new-residue-kernel-unit-minor-base-change-free",
+  "new-residue-kernel-unit-minor-matrix-core"
+ ],
  "proof_origin": {
   "by": "agent",
   "group": "K2",

@@ -1,0 +1,335 @@
+{
+ "id": "lem-sfb-ringed-global-hom-cup-comparison",
+ "kind": "statement",
+ "title": "Global-sections cup and evaluation comparison on shifted derived Hom",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site small in the module universe [def-weil-size-convention, def-weil-sheaf-of-modules-category], with $\\mathcal O$ a sheaf of commutative rings. Let $A$ be a commutative ring with a ring homomorphism $A\\to\\Gamma(\\mathcal C,\\mathcal O)$. The resulting ringed-topos morphism [def-weil-pbc-ringed-topos-morphism] $p:(\\operatorname{Sh}(\\mathcal C),\\mathcal O)\\to(\\operatorname{Set},A)$ has module direct image the global-sections functor with this $A$-action. Present $\\operatorname{Set}$ by the one-object site with only its identity and the maximal covering sieve. Use ordinary unbounded derived categories [def-weil-abstract-derived-category], K-flat derived tensor, K-injective derived global sections $G=Rp_*:D(\\mathcal O)\\to D(A)$ [def-pur-ringed-site-zeroth-hypercohomology], and internal Hom $H=R\\mathcal Hom_{\\mathcal O}$ [def-pur-derived-internal-hom], with evaluation and the tensor-Hom adjunction [lem-sf-ringed-derived-closed-symmetric-monoidal]. Let $Lp^*:D(A)\\to D(\\mathcal O)$ be the derived module pullback, computed on K-flat resolutions with flat terms, with its canonical tensor comparison $Lp^*(P\\otimes_A^{\\mathbf L}Q)\\cong Lp^*P\\otimes_{\\mathcal O}^{\\mathbf L}Lp^*Q$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and let $Lp^*\\dashv G$ be the derived adjunction obtained from the module adjunction $p^*\\dashv p_*$ [lem-weil-pbc-ringed-topoi-module-adjunction] by [lem-pc-pre-derived-adjoint-functors-general], with counit $Lp^*G\\to\\mathrm{id}$. Define the relative cup product $c_{K,L}:G(K)\\otimes_A^{\\mathbf L}G(L)\\to G(K\\otimes_{\\mathcal O}^{\\mathbf L}L)$ as the adjoint of the tensor of the two counits $Lp^*G(K)\\to K$, $Lp^*G(L)\\to L$, precomposed with this tensor comparison. For every $L,M\\in D(\\mathcal O)$ the pairing $G(H(L,M))\\otimes_A^{\\mathbf L}G(L)\\xrightarrow{c}G(H(L,M)\\otimes_{\\mathcal O}^{\\mathbf L}L)\\xrightarrow{G(\\mathrm{ev})}G(M)$ has a transpose\n$$\\chi_{L,M}:G(H(L,M))\\longrightarrow R\\operatorname{Hom}_A(G(L),G(M)),$$\nnatural contravariantly in $L$ and covariantly in $M$. There are canonical identifications $H^nG(H(L,M))\\cong\\operatorname{Hom}_{D(\\mathcal O)}(L,M[n])$ and $H^nR\\operatorname{Hom}_A(G(L),G(M))\\cong\\operatorname{Hom}_{D(A)}(G(L),G(M)[n])$. Under these identifications $H^n(\\chi_{L,M})$ sends $u:L\\to M[n]$ to $G(u):G(L)\\to G(M[n])\\cong G(M)[n]$, using the canonical derived shift comparison, for every integer $n$. No boundedness, quasi-coherence, perfectness or invertibility of $\\chi_{L,M}$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0B6C (remark-cup-product) and 0B6D (remark-projection-formula-for-internal-hom), specialized to the global-sections ringed-topos morphism; Tag 08JA (lemma-section-RHom-over-U), including its K-flat/K-injective proof, gives the shifted Hom identifications. The normalization follows by the two tensor-adjunction triangles."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-pur-derived-internal-hom",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "def-sfb-ringed-site-scalar-global-sections",
+  "def-sfb-ringed-site-global-hom-identification",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Write $F=Lp^*$, $T=H(L,M)$, $e:T\\otimes^{\\mathbf L}L\\to M$, and $\\varepsilon:FG\\to1$. Let $t_{X,Y}:F(X\\otimes^{\\mathbf L}Y)\\cong FX\\otimes^{\\mathbf L}FY$ be the specified canonical comparison. By [lem-weil-pbc-pullback-tensor-canonical-shift-unit] its unit comparison $j_0:F(A)\\cong\\mathcal O$ and integer-shift comparisons give $j_n:F(A[-n])\\cong\\mathcal O[-n]$, compatible with $t$ and the shifted left unitors. By [lem-weil-pbc-derived-adjunction-shift] the canonical shifts of $F,G$ make $\\varepsilon$ shift-compatible. These results apply to the specified one-object target site and to an arbitrary structural ring map; they impose neither flatness of $A\\to\\Gamma(\\mathcal O)$ nor boundedness.",
+   "uses": [
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "lem-weil-pbc-derived-adjunction-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; canonical unit and shift normalization on flat-term K-flat representatives; derived.tex Tag 05SU, lemma-derived-shift."
+   }
+  },
+  {
+   "text": "By definition and the inverse adjunction formula [lem-weil-pbc-adjunction-of-natural-bijection], $\\varepsilon_{K\\otimes L}F(c_{K,L})=(\\varepsilon_K\\otimes\\varepsilon_L)t_{GK,GL}$. Put $B=G(e)c_{T,L}:GT\\otimes_A^{\\mathbf L}GL\\to GM$. Apply [lem-sf-ringed-derived-closed-symmetric-monoidal] to the one-object ringed site $(\\operatorname{Set},A)$: its closed adjunction transposes $B$ to $\\chi:GT\\to R\\operatorname{Hom}_A(GL,GM)$. Naturality follows explicitly as follows. For $r:L'\\to L$ and $s:M\\to M'$, evaluation satisfies $e_{L',M'}(H(r,s)\\otimes1)=s\\,e_{L,M}(1\\otimes r)$. Tensor comparison and counit naturality, then injectivity of the adjunction bijection, give naturality of $c$. Applying $G$ to the evaluation equation and using that naturality gives $B_{L',M'}(GH(r,s)\\otimes1)=G(s)B_{L,M}(1\\otimes G(r))$. Closed transposition is natural, proving the stated variance of $\\chi$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B6C (remark-cup-product) and 0B6D (remark-projection-formula-for-internal-hom)."
+   }
+  },
+  {
+   "text": "The existing unbounded model [lem-sfb-derived-internal-hom-sections-model], applied to $(\\mathcal C,\\mathcal O)$, gives $H^nG(T)\\cong\\operatorname{Hom}(L,M[n])$. Applied to the one-object site with coefficient ring $A$, it gives $H^nR\\operatorname{Hom}_A(GL,GM)\\cong\\operatorname{Hom}(GL,GM[n])$. For any $Y\\in D(A)$, [lem-sc-module-cup-homology-representability] also identifies a class in $H^nY$ with a map $A[-n]\\to Y$, naturally in $Y$; on a representative complex this takes a degree-$n$ cocycle to the chain map sending $1$ to that cocycle. All maps in the global Hom model respect the $A$-action termwise, so its underlying abelian-group cohomology identifications are the ones for the stated $A$-valued $G$.",
+   "uses": [
+    "lem-sfb-derived-internal-hom-sections-model",
+    "lem-sc-module-cup-homology-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JA, lemma-section-RHom-over-U, including its Hom-complex computation; shifted free-module cocycle evaluation."
+   }
+  },
+  {
+   "text": "Fix $n\\in\\mathbf Z$. Choose a flat-term K-flat representative $P$ of $L$ and a K-injective representative $I$ of $M$, using [lem-pc-kflat-resolution, prop-pur-kinjective-resolutions-exist]. The sheaf complex $\\mathcal Hom^\\bullet(P,I)$ represents $T$ and is K-injective by [lem-pur-hom-kflat-into-kinjective]. The sections model [lem-sfb-derived-internal-hom-sections-model] represents $GT$ by the $A$-complex $C=\\operatorname{Hom}^\\bullet(P,I)$. Thus a class $u:L\\to M[n]$ is represented by a degree-$n$ cocycle $\\phi$ in $C$, and the corresponding $x:S=A[-n]\\to GT$ is represented by $1\\mapsto\\phi$, by [lem-sc-module-cup-homology-representability]. No K-injectivity of the section complex $C$ is asserted or needed.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-sfb-derived-internal-hom-sections-model",
+    "lem-sc-module-cup-homology-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JA, lemma-section-RHom-over-U, proof; its K-flat and K-injective choices and global Hom-complex representative."
+   }
+  },
+  {
+   "text": "Set $a=\\varepsilon_TF(x)j_n^{-1}:\\mathcal O[-n]\\to T$. The resolution-normalization statement [lem-sfb-resolving-derived-adjunction-normalization] computes its adjunction on the K-flat source $S$ and K-injective target $\\mathcal Hom^\\bullet(P,I)$. The ordinary module adjunction [lem-weil-pbc-ringed-topoi-module-adjunction] takes $1\\mapsto\\phi$ to the sheaf map $r\\mapsto r\\phi$ from $\\mathcal O[-n]$. The canonical componentwise uncurrying in [lem-sf-ringed-derived-tensor-hom-adjunction] therefore makes $e(a\\otimes1_L)$ the localization of the chain map $P[-n]\\to I$, $z\\mapsto\\phi(z)$, after the shifted left unitor. Write $d_Z:\\mathcal O[-n]\\otimes^{\\mathbf L}Z\\cong Z[-n]$ for that unitor/shift comparison. It follows that\n$$v=e(a\\otimes1_L)d_L^{-1}:L[-n]\\to M$$\nis precisely $u[-n]$, under the canonical shift-addition identifications: both are the map represented by the same Hom cocycle $\\phi$. This proves the normalization, rather than assuming it from an unspecified cohomology isomorphism.",
+   "uses": [
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9, lemma-internal-hom, componentwise tensor-Hom adjunction; derived.tex lemma-derived-adjoint-functors and its resolving-representative normalization."
+   }
+  },
+  {
+   "text": "Uncurrying $\\chi x$ in $D(A)$ gives $b=B(x\\otimes1_{GL}):S\\otimes_A^{\\mathbf L}GL\\to GM$. Its $F\\dashv G$-transpose is\n$$w=\\varepsilon_MF(b)=e(\\varepsilon_T\\otimes\\varepsilon_L)t_{GT,GL}F(x\\otimes1)=e((\\varepsilon_TF(x))\\otimes\\varepsilon_L)t_{S,GL}.$$\nThe first equality is the inverse adjunction formula. For the second use counit naturality for $e$ and the defining counit equation for $c$ in step 2. The third is naturality of $t$. Every arrow is defined for the unbounded objects in question. In particular the tensor factors remain in their original order; no symmetry is inserted.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B6C and 0B6D, expansion of the two adjunction transposes."
+   }
+  },
+  {
+   "text": "Let $d'_Y:S\\otimes_A^{\\mathbf L}Y\\cong Y[-n]$ be the point-site version of $d$. Write $\\sigma^F_Y:F(Y[-n])\\cong FY[-n]$ and $\\sigma^G_Z:G(Z[-n])\\cong GZ[-n]$. The shifted-unit coherence from step 1 gives\n$$(j_n\\otimes1)t_{S,GL}F((d'_{GL})^{-1})=d_{FGL}^{-1}\\sigma^F_{GL}.$$\nSubstitute $\\varepsilon_TF(x)=a j_n$ in step 6. Naturality of $d$ for $\\varepsilon_L:FGL\\to L$, followed by step 5, then gives\n$$wF((d'_{GL})^{-1})=v\\,\\varepsilon_L[-n]\\,\\sigma^F_{GL}.$$\nOn the other hand the adjoint of $G(v)(\\sigma^G_L)^{-1}:GL[-n]\\to GM$ is\n$$\\varepsilon_MF(G(v))F((\\sigma^G_L)^{-1})=v\\varepsilon_{L[-n]}F((\\sigma^G_L)^{-1})=v\\varepsilon_L[-n]\\sigma^F_{GL}.$$\nHere the first simplification is counit naturality and the last is exactly the counit/shift equation of [lem-weil-pbc-derived-adjunction-shift]. Injectivity of the adjunction bijection proves $b(d'_{GL})^{-1}=G(v)(\\sigma^G_L)^{-1}$.",
+   "uses": [
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 0B6D; tensor/unit/shift coherence and the derived-adjunction triangles."
+   }
+  },
+  {
+   "text": "Run steps 4–5 on the one-object site $(\\operatorname{Set},A)$, where $F=G=\\mathrm{id}$. Choose a flat-term K-flat representative $P'$ of $GL$ and a K-injective representative $I'$ of $GM$ [lem-pc-kflat-resolution, prop-pur-kinjective-resolutions-exist]; $R\\operatorname{Hom}_A(GL,GM)$ is represented by $\\operatorname{Hom}^\\bullet(P',I')$, which is its own global sections [lem-sfb-derived-internal-hom-sections-model]. By [lem-sc-module-cup-homology-representability] the class of $\\chi x$ in $H^n$ is that of a degree-$n$ cocycle $\\psi$ with $\\chi x$ represented by $1\\mapsto\\psi$. The closed adjunction [lem-sf-ringed-derived-closed-symmetric-monoidal] gives $b=B(x\\otimes1)=e'(\\chi x\\otimes1_{GL})$, and the componentwise uncurrying of [lem-sf-ringed-derived-tensor-hom-adjunction] represents it by $1\\otimes z\\mapsto\\psi(z)$; with the sign-free first-input unitor $d'$ (as in step 5) $b(d'_{GL})^{-1}$ is the chain map $P'[-n]\\to I'$, $z\\mapsto\\psi(z)$, i.e. the shift by $-n$ of the map $GL\\to GM[n]$ that $\\psi$ represents. So the second identification of step 3 takes the class of $\\chi x$ to the shift by $n$ of $b(d'_{GL})^{-1}$. Step 7 identifies this with the shift by $n$ of $G(v)(\\sigma^G_L)^{-1}$. Since $v=u[-n]$, naturality of $\\sigma^G$ and the zero and addition laws of the canonical derived shift comparisons (step 1) identify the latter with $G(u):GL\\to G(M[n])\\cong GM[n]$. Therefore $H^n(\\chi)$ has exactly the claimed action for every integer $n$. The constructions also cover zero objects, $n=0$, and negative $n$; no inversion of $\\chi$ or extra finiteness hypothesis has entered.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sfb-derived-internal-hom-sections-model",
+    "lem-sc-module-cup-homology-representability",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JA and 0B6D; conclusion from the two displayed transpose computations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-sc-module-cup-homology-representability",
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-sf-ringed-derived-tensor-hom-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0B6C, 0B6D, 08JA and 08J9; explicit shifted-counit calculation supplied by Q22 using the existing normalized representative and coherence statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "global.*[Hh]om.*[Cc]omparison|[Rr]hom.*[Ss]ections|[Ss]ections.*[Rr]hom",
+   "results": "6 hits; Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean; Mathlib/CategoryTheory/SmallObject/WellOrderInductionData.lean; Mathlib/CategoryTheory/SmallObject/WellOrderInductionData.lean; Mathlib/CategoryTheory/SmallObject/WellOrderInductionData.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary global sections, ordinary condensed internal Hom, Ext functoriality or derived-localization infrastructure; none constructs the unbounded ringed-site cup/evaluation comparison with its shifted Hom normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global Hom of sheaves has a natural morphism to derived Hom of global sections induced by evaluation and cup product",
+   "results": "8 hits; CategoryTheory.Sheaf.ΓObjEquivHom_naturality; CategoryTheory.Sheaf.ΓObjEquivHom_naturality_symm; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left; AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_apply; AlgebraicGeometry.Scheme.Γevaluation_naturality_apply; AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality; AlgebraicGeometry.Scheme.Γevaluation_naturality; SheafOfModules.unitHomEquiv_symm_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary global sections, ordinary condensed internal Hom, Ext functoriality or derived-localization infrastructure; none constructs the unbounded ringed-site cup/evaluation comparison with its shifted Hom normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Hom\"",
+   "results": "12 hits; DerivedCategory.instEssSurjHomotopyCategoryIntUpQh; DerivedCategory.instCommShiftHomotopyCategoryIntUpQh; DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso; DerivedCategory.instAdditiveHomotopyCategoryIntUpQh; DerivedCategory.singleFunctorIsoCompQ_hom_app; DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; DerivedCategory.singleFunctorsPostcompQIso_hom_hom; DerivedCategory.singleFunctorsPostcompQIso_inv_hom",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary global sections, ordinary condensed internal Hom, Ext functoriality or derived-localization infrastructure; none constructs the unbounded ringed-site cup/evaluation comparison with its shifted Hom normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections internal Hom comparison sends a derived morphism to its derived global sections map and is adjoint to cup product followed by evaluation",
+   "results": "8 hits; LightCondensed.ihom_map_val_app; LightCondensed.ihomPoints_apply; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right; LightCondensed.ihomPoints; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left; CategoryTheory.Sheaf.ΓHomEquiv; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary global sections, ordinary condensed internal Hom, Ext functoriality or derived-localization infrastructure; none constructs the unbounded ringed-site cup/evaluation comparison with its shifted Hom normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections is lax monoidal and its induced internal Hom comparison acts on Ext by applying the derived global sections functor",
+   "results": "8 hits; CategoryTheory.Abelian.Ext.homEquiv; CategoryTheory.Functor.mapExtLinearMap_apply; CategoryTheory.Abelian.Ext.homLinearEquiv; CategoryTheory.Abelian.Ext.homAddEquiv; CategoryTheory.Functor.mapExtAddHom_apply; CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom; CategoryTheory.Functor.mapExtLinearMap_coe; CategoryTheory.Functor.mapExtLinearMap",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary global sections, ordinary condensed internal Hom, Ext functoriality or derived-localization infrastructure; none constructs the unbounded ringed-site cup/evaluation comparison with its shifted Hom normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Hh]om.*global|internal.*[Hh]om.*sections|[Cc]up[Pp]roduct",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary global sections, ordinary condensed internal Hom, Ext functoriality or derived-localization infrastructure; none constructs the unbounded ringed-site cup/evaluation comparison with its shifted Hom normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-affine-global-trace-adjunction",
+  "date": "2026-10-23",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Derived global form of the sheafy trace comparison in the first and third paragraphs of Tag 0E5V; includes evaluation normalization. Supporting input: global-sections cup/evaluation comparison and its action on shifted morphisms, before using the supplied right adjunction.",
+   "via": [
+    "lem-sfb-space-affine-global-trace-adjunction",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ringed-global-hom-cup-comparison",
+  "worker": "stage1",
+  "summary": "Constructed the cup/evaluation transpose and proved its shifted action by two explicit adjunction calculations. Reused the unbounded global Hom model, resolving-adjunction normalization, canonical tensor-Hom uncurrying and ringed pullback tensor/unit/shift coherence. No exact Lean attachment or new supporting node was needed. Statement and statement dependencies retained.",
+  "blueprint": "Supports the inherited direct-image stability branch: the parent lem-sfb-space-affine-global-trace-adjunction needs the global Hom comparison with evaluation normalization before applying its supplied right adjunction. Current latest direct-images proof paragraph (3) supplies the direct-image context, not this detailed homological calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "why": "Canonical ringed pullback tensor/unit/shift coherence; needed for the explicit shifted-unit equation and not replaced by the stability unit."
+   },
+   {
+    "node": "lem-weil-pbc-derived-adjunction-shift",
+    "why": "Unbounded ringed derived-adjunction counit/shift compatibility, including a nonflat structural map."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Closed derived tensor-Hom adjunction on the ringed site and the coefficient point."
+   },
+   {
+    "node": "lem-sfb-derived-internal-hom-sections-model",
+    "why": "Unbounded global Hom complex and all-degree Hom identifications on arbitrary ringed sites."
+   },
+   {
+    "node": "lem-sc-module-cup-homology-representability",
+    "why": "Cohomology represented by the shifted free A-module, with its cocycle formula."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Flat-term K-flat representative existence for the source."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Unbounded K-injective representative existence for module sheaves on a small ringed site."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "K-injectivity of the internal Hom representative required for normalized derived adjunction."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Generic normalized derived-adjunction computation; no stability-unit node supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Ordinary coefficient-ringed module adjunction computing the section-to-sheaf transpose."
+   },
+   {
+    "node": "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "why": "Canonical componentwise uncurrying, rather than an arbitrary closed adjunction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-sc-module-cup-homology-representability",
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-sf-ringed-derived-tensor-hom-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-fb7d5bfba",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-fb7d5bfba (reviewer sub-agent of L); spot-checked: First stage-1 split. Live and side-live both have the item unsplit and there is no repair note. The delivery has 8 steps and 0 new nodes; the statement, stmt_deps and source are byte-identical to live, stmt_deps match the bracketed ids, and proof_deps equal the union of uses. Sources read: Stacks sites-cohomology 0B6C (remark-cup-product l.4190) is exactly the item's cup, the adjoint of (counit⊗counit)∘07A4; 0B6D (l.9136) is exactly χ for the global-sections morphism to (Set,A); 08JA (l.8874) gives the K-flat/K-injective Hom^•(P,I) model used in step 4. Steps 1–7 check by hand. The shift-unit node gives j_n=u[-n]σ^F_A and the coherence equation of step 7; adjunction-shift gives counit/shift compatibility; both apply to Sh(C)→Set with any ring map A→Γ(O), no flatness needed. A cocycle φ with d_Iφ=(−1)^nφd_P is a chain map P→I[n]. The resolving-normalization hypotheses hold (flat-term K-flat class; Mod(O) has K-injectives), so a=Q(r↦rφ). With def-coef-ringed-tensor-hom-model's uncurrying, Tot(O[-n]⊗P)≅P[-n] needs no sign and ev(ψ⊗z)=ψ(z) is a chain map, so v=u[-n]. I recomputed the step-6 and step-7 transposes and they are correct. Edge cases checked: point site with A=O (χ=id), n=0, n=±1, a non-flat ring map Z→Z/2, and L or M zero. FIX: step 8 was uses=[] and elementary while it reran steps 4–5 on the point site ('by the point-site version'). I wrote that argument out (P′, I′, a cocycle ψ, b=e′(χx⊗1), uncurrying) and cited lem-pc-kflat-resolution, prop-pur-kinjective-resolutions-exist, lem-sfb-derived-internal-hom-sections-model, lem-sc-module-cup-homology-representability, lem-sf-ringed-derived-closed-symmetric-monoidal and lem-sf-ringed-derived-tensor-hom-adjunction; the step is now elementary:false and 1606 characters. All 11 declared tool_uses are accepted as generic homological tools; no SGA source is used. Maintainer note: lem-sfb-ringed-site-global-hom-direct-image (unsplit, created by NO on 2026-10-23, same unit) states the same comparison and H^j normalization for an arbitrary ringed-topos morphism. This item is its D=point case, so a later split should cite this item, or the two should be merged. Advisory only, since the item existed before this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedGlobalHomCupComparison",
+  "declaration": "CategoryTheory.RingedGlobalHomCupComparison.globalHomCupComparison",
+  "declarations": [
+   "CategoryTheory.RingedGlobalHomCupComparison.moduleTensor",
+   "CategoryTheory.RingedGlobalHomCupComparison.ScalarFlat",
+   "CategoryTheory.RingedGlobalHomCupComparison.PullbackData",
+   "CategoryTheory.RingedGlobalHomCupComparison.cup",
+   "CategoryTheory.RingedGlobalHomCupComparison.scalarSymmetry",
+   "CategoryTheory.RingedGlobalHomCupComparison.transpose",
+   "CategoryTheory.RingedGlobalHomCupComparison.singleAction",
+   "CategoryTheory.RingedGlobalHomCupComparison.Comparison",
+   "CategoryTheory.RingedGlobalHomCupComparison.globalHomCupComparison"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedGlobalHomCupComparison.lean",
+  "statement": "theorem globalHomCupComparison : ∃ S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{u, u, u, u} J R), ∃ T : CoefficientTensorModels.{u, u, u, u} J R S, ∃ p : PullbackData R A s S T, Nonempty (Comparison R A s p)",
+  "branch": "sheaf-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing scalar-valued sections and cocycle-normalized global-Hom identification. PullbackData presents extension of scalars from the ringed point by its ordinary adjunction, its unit-normalized tensor comparison, and the derived representative formulas. Comparison states naturality, evaluation transposition, canonical all-degree identifications and application of derived global sections to every shifted morphism. All helper data are explicit structure fields or actual canonical formulas; the only postponed proof is the owning theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-087594499",
+  "group": "Q50",
+  "result": "fix",
+  "note": "Read item node, all 13 stmt_dep records, the delivered RingedGlobalHomCupComparison module, the report and the live dep sources (CoefficientClosedStructure/TensorModels, HomIdentification, scalar sections, ordinary internal Hom, CupHomologyRepresentability, the derived-tensor-pullback record) against Stacks 0B6C/0B6D/08JA. Clauses match. PullbackData is pinned by the ordinary adjunction, unit_formula, the derived-adjunction mate formula and the K-flat tensor_formula. cup is the adjoint of the counit tensor in the node's factor order. chi is pinned by its formula and the identifications by their normalizations. Signs checked: the Koszul braiding cancels through the shared transpose. Edge cases covered: n=0, negative n, zero objects, zero ring, empty site, non-flat s. The ∃ S T p form is pinned, as in the sibling globalHomDirectImage. Finding H2/H4: target_normalization quantified over CupHomologyRepresentability and singleAction used cupSingleModule, both owned by the theorem node lem-sc-module-cup-homology-representability, which is not and cannot be a stmt_dep. FIX: fixes/RingedGlobalHomCupComparison.lean states the normalization on chain-complex representatives with Mathlib only (complex K, map e, chain map f from single_n(A) with f(1)=z): equivalent and still pinning; cupSingleModule inlined; signature, declarations and stmt_deps unchanged; lean-record.json keeps the statement verbatim. nt_compile --json: 44.3 s, exit 0, no errors or warnings."
+ }
+}

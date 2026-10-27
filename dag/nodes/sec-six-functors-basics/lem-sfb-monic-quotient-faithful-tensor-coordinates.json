@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-monic-quotient-faithful-tensor-coordinates",
+ "kind": "statement",
+ "title": "Power-quotient tensor coordinates and faithful flatness",
+ "statement": "Let $R$ be a commutative ring, $d\\geq1$ an integer, and $a_0,\\ldots,a_{d-1}\\in R$. Put $f=T^d+\\sum_{i<d}a_iT^i\\in R[T]$ and $B=R[T]/(f)$, with its canonical $R$-algebra structure and $t$ the class of $T$ [def-weil-polynomial-ring], [def-weil-pbc-algebra-hom-quotient]. The family $(t^i)_{0\\leq i<d}$ is an $R$-basis of $B$ [def-weil-pbc-free-module]. Write $c_i:B\\to R$ for its unique coefficient maps, so $b=\\sum_{i<d}c_i(b)t^i$. For every $R$-module $N$ there is an $R$-linear isomorphism\n$$\\Phi_N:B\\otimes_RN\\xrightarrow{\\sim}N^d,\\qquad b\\otimes x\\longmapsto(c_i(b)x)_{i<d},\\qquad \\Phi_N^{-1}((x_i)_{i<d})=\\sum_{i<d}t^i\\otimes x_i,$$\nusing [def-weil-pbc-module-tensor-product]. For every $R$-linear $h:N\\to N'$, one has $\\Phi_{N'}(\\mathrm{id}_B\\otimes h)=h^d\\Phi_N$, where $h^d$ applies $h$ in each coordinate. For every pair of $R$-linear maps $N_1\\xrightarrow{h}N_2\\xrightarrow{k}N_3$ with $kh=0$, the tensor sequence with $B$ is exact at $B\\otimes_RN_2$ if and only if $\\operatorname{im}h=\\ker k$. Thus $R\\to B$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map]. All assertions include the zero ring, with the specified index set $\\{0,\\ldots,d-1\\}$ even there.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00HB (definition-flat), items (2) and (4), with Tag 04GG (lemma-characterize-henselian), proof of (10) implies (1), the finite free monic quotient; agent-extracted coordinate formulation of the positive-rank finite-free argument."
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "If R is nontrivial, Polynomial.degree_sum_fin_lt shows the lower-degree sum has degree less than d. Thus f is monic of natural degree d. The basis of AdjoinRoot.powerBasis' [lem-weil-pbc-monic-quotient-free] has the specified powers as vectors. If R is subsingleton, so is its unital module B; use the linear equivalence between the singleton modules B and (Fin d → R), and Basis.ofEquivFun. Its basis vectors equal the specified powers by subsingleton elimination. The polynomial and quotient are those of [def-weil-polynomial-ring] and [def-weil-pbc-algebra-hom-quotient], and the basis uses [def-weil-pbc-free-module].",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "lem-weil-pbc-monic-quotient-free",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG (lemma-characterize-henselian), proof of (10) implies (1), finite free monic quotient; Tag 00CX (lemma-tensor-product), universal property and bilinearity; Tag 00HB (definition-flat), items (2) and (4). Coordinate argument supplied by the agent."
+   }
+  },
+  {
+   "text": "Take c_i to be the coordinate maps of this basis [def-weil-pbc-free-module]. Basis.sum_repr, with the power formula substituted for each basis vector, gives the asserted reconstruction.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG (lemma-characterize-henselian), proof of (10) implies (1), finite free monic quotient; Tag 00CX (lemma-tensor-product), universal property and bilinearity; Tag 00HB (definition-flat), items (2) and (4). Coordinate argument supplied by the agent."
+   }
+  },
+  {
+   "text": "Use TensorProduct.equivFinsuppOfBasisLeft followed by Finsupp.linearEquivFunOnFinite for the displayed coordinate isomorphism [def-weil-pbc-module-tensor-product]. Its pure-tensor formula is TensorProduct.equivFinsuppOfBasisLeft_apply_tmul_apply.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG (lemma-characterize-henselian), proof of (10) implies (1), finite free monic quotient; Tag 00CX (lemma-tensor-product), universal property and bilinearity; Tag 00HB (definition-flat), items (2) and (4). Coordinate argument supplied by the agent."
+   }
+  },
+  {
+   "text": "The inverse formula follows from TensorProduct.equivFinsuppOfBasisLeft_symm_apply, changing its finitely supported sum into the sum over Fin d by Finsupp.sum_fintype, then substituting the basis-power formula. These are the canonical tensor equivalences of [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG (lemma-characterize-henselian), proof of (10) implies (1), finite free monic quotient; Tag 00CX (lemma-tensor-product), universal property and bilinearity; Tag 00HB (definition-flat), items (2) and (4). Coordinate argument supplied by the agent."
+   }
+  },
+  {
+   "text": "Prove naturality by TensorProduct.induction_on [def-weil-pbc-module-tensor-product]. On zero and sums use linearity; on a pure tensor use the coordinate formula, LinearMap.lTensor_tmul, and h.map_smul.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG (lemma-characterize-henselian), proof of (10) implies (1), finite free monic quotient; Tag 00CX (lemma-tensor-product), universal property and bilinearity; Tag 00HB (definition-flat), items (2) and (4). Coordinate argument supplied by the agent."
+   }
+  },
+  {
+   "text": "Since d ≥ 1, Fin d is nonempty. Mathlib Module.FaithfullyFlat.finsupp makes (Fin d →₀ R) faithfully flat, including when R is zero. Transfer this along e.repr using Module.FaithfullyFlat.of_linearEquiv. Then Module.FaithfullyFlat.lTensor_exact_iff_exact identifies tensor exactness with original exactness. LinearMap.exact_iff identifies the latter with ker k = range h; symmetry of equality yields the displayed range h = ker k. The supplied zero-composite assumption is unnecessary for this stronger Mathlib equivalence.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG (lemma-characterize-henselian), proof of (10) implies (1), finite free monic quotient; Tag 00CX (lemma-tensor-product), universal property and bilinearity; Tag 00HB (definition-flat), items (2) and (4). Coordinate argument supplied by the agent."
+   }
+  },
+  {
+   "text": "Apply RingHom.faithfullyFlat_algebraMap_iff to the module faithful flatness already obtained. This is the structure-map faithful flatness of [def-weil-pbc-faithfully-flat-ring-map], with no nontriviality hypothesis.",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG (lemma-characterize-henselian), proof of (10) implies (1), finite free monic quotient; Tag 00CX (lemma-tensor-product), universal property and bilinearity; Tag 00HB (definition-flat), items (2) and (4). Coordinate argument supplied by the agent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-monic-quotient-free",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 04GG and 00HB as above; agent assembly of Mathlib power-basis and tensor-coordinate formulas, with the positive-rank free-module criterion Module.FaithfullyFlat.finsupp and its exactness theorem replacing the explicit coordinatewise exactness argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "faithfullyFlat|basis.*[Tt]ensor|[Tt]ensor.*basis",
+   "results": "0 hits:  (Mathlib/RingTheory/AdjoinRoot)",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: AdjoinRoot.powerBasisAux' (AdjoinRoot.lean:593) and TensorProduct.equivFinsuppOfBasisLeft (TensorProduct/Basis.lean:130) give separate ingredients; the specified d-indexed zero-ring branch, naturality, and preservation/reflection of exactness for this polynomial quotient remain to assemble. The free-module FaithfullyFlat instance (Flat/FaithfullyFlat/Basic.lean:209) assumes Nontrivial B and does not itself cover the zero ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Positive degree monic polynomial quotient has natural tensor coordinates N^d and is faithfully flat over its coefficient ring",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdjoinRoot\", \"FaithfullyFlat\"",
+   "results": "loogle: Loogle is currently under load, please try again later.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a monic polynomial f of positive degree d over any commutative ring R, the power basis identifies (R[X]/f) tensor N with N^d naturally, and tensoring preserves and reflects exactness",
+   "results": "8 hits: AdjoinRoot.powerBasisAux', AdjoinRoot.powerBasisAux'_repr_symm_apply, Polynomial.Monic.free_quotient, PowerBasis.quotientEquivQuotientMinpolyMap_apply_mk, IsAdjoinRootMonic.basis, Polynomial.Monic.free_adjoinRoot, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: AdjoinRoot.powerBasisAux' (AdjoinRoot.lean:593) and TensorProduct.equivFinsuppOfBasisLeft (TensorProduct/Basis.lean:130) give separate ingredients; the specified d-indexed zero-ring branch, naturality, and preservation/reflection of exactness for this polynomial quotient remain to assemble. The free-module FaithfullyFlat instance (Flat/FaithfullyFlat/Basic.lean:209) assumes Nontrivial B and does not itself cover the zero ring."
+  },
+  {
+   "tool": "grep",
+   "query": "powerBasisAux|basis.*[Tt]ensor|[Tt]ensor.*[Bb]asis|[Ff]ree.*[Ff]aithfullyFlat|[Ff]aithfullyFlat.*[Ff]ree",
+   "results": "21 hits: Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/TensorProduct/Free.lean, Mathlib/RingTheory/TensorProduct/Free.lean (Mathlib/RingTheory)",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: AdjoinRoot.powerBasisAux' (AdjoinRoot.lean:593) and TensorProduct.equivFinsuppOfBasisLeft (TensorProduct/Basis.lean:130) give separate ingredients; the specified d-indexed zero-ring branch, naturality, and preservation/reflection of exactness for this polynomial quotient remain to assemble. The free-module FaithfullyFlat instance (Flat/FaithfullyFlat/Basic.lean:209) assumes Nontrivial B and does not itself cover the zero ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product with a quotient by a monic polynomial of positive degree is naturally a finite power functor, with explicit coefficient maps and preservation and reflection of exact sequences",
+   "results": "8 hits: Polynomial.instFiniteUniversalFactorizationRing, FGModuleCat.instIsMonoidalModuleCatIsFG, Algebra.Presentation.tensorModelOfHasCoeffsInv, Polynomial.UniversalFactorizationRing.fromTensor, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, Polynomial.Monic.finite_quotient, instFinitePresentationTensorProduct, FGModuleCat.tensorObj_obj",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: AdjoinRoot.powerBasisAux' (AdjoinRoot.lean:593) and TensorProduct.equivFinsuppOfBasisLeft (TensorProduct/Basis.lean:130) give separate ingredients; the specified d-indexed zero-ring branch, naturality, and preservation/reflection of exactness for this polynomial quotient remain to assemble. The free-module FaithfullyFlat instance (Flat/FaithfullyFlat/Basic.lean:209) assumes Nontrivial B and does not itself cover the zero ring."
+  },
+  {
+   "tool": "grep",
+   "query": "equivFinsuppOfBasisLeft|equivFinsuppOfBasisRight",
+   "results": "5 hits: Mathlib/LinearAlgebra/TensorProduct/Basis.lean, Mathlib/LinearAlgebra/TensorProduct/Basis.lean, Mathlib/LinearAlgebra/TensorProduct/Basis.lean, Mathlib/LinearAlgebra/TensorProduct/Basis.lean, Mathlib/LinearAlgebra/TensorProduct/Basis.lean (Mathlib/LinearAlgebra/TensorProduct)",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: AdjoinRoot.powerBasisAux' (AdjoinRoot.lean:593) and TensorProduct.equivFinsuppOfBasisLeft (TensorProduct/Basis.lean:130) give separate ingredients; the specified d-indexed zero-ring branch, naturality, and preservation/reflection of exactness for this polynomial quotient remain to assemble. The free-module FaithfullyFlat instance (Flat/FaithfullyFlat/Basic.lean:209) assumes Nontrivial B and does not itself cover the zero ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring with a monic polynomial quotient of specified positive degree has canonical power basis coordinates and reflects exactness, including the zero ring",
+   "results": "8 hits: AdjoinRoot.powerBasisAux', AdjoinRoot.powerBasis', IsAdjoinRootMonic.powerBasis, AdjoinRoot.powerBasisAux, AdjoinRoot.powerBasis, Polynomial.Monic.free_quotient, AdjoinRoot.powerBasisAux'_repr_apply_to_fun, IsAdjoinRootMonic.basis",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: AdjoinRoot.powerBasisAux' (AdjoinRoot.lean:593) and TensorProduct.equivFinsuppOfBasisLeft (TensorProduct/Basis.lean:130) give separate ingredients; the specified d-indexed zero-ring branch, naturality, and preservation/reflection of exactness for this polynomial quotient remain to assemble. The free-module FaithfullyFlat instance (Flat/FaithfullyFlat/Basic.lean:209) assumes Nontrivial B and does not itself cover the zero ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct.equivFinsuppOfBasisLeft\"",
+   "results": "6 hits: TensorProduct.equivFinsuppOfBasisLeft, TensorProduct.equivFinsuppOfBasisLeft_symm_apply, TensorProduct.equivFinsuppOfBasisLeft_apply_tmul_apply, TensorProduct.equivFinsuppOfBasisLeft_apply_tmul, TensorProduct.equivFinsuppOfBasisLeft_apply, TensorProduct.equivFinsuppOfBasisLeft_symm",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: AdjoinRoot.powerBasisAux' (AdjoinRoot.lean:593) and TensorProduct.equivFinsuppOfBasisLeft (TensorProduct/Basis.lean:130) give separate ingredients; the specified d-indexed zero-ring branch, naturality, and preservation/reflection of exactness for this polynomial quotient remain to assemble. The free-module FaithfullyFlat instance (Flat/FaithfullyFlat/Basic.lean:209) assumes Nontrivial B and does not itself cover the zero ring."
+  },
+  {
+   "tool": "grep",
+   "query": "powerBasisAux|equivFinsuppOfBasisLeft|iff_exact_iff_lTensor_exact",
+   "results": "23 hits: Mathlib/Algebra/Lie/Loop.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/Galois/NormalBasis.lean, Mathlib/LinearAlgebra/TensorProduct/Basis.lean, Mathlib/LinearAlgebra/TensorProduct/Basis.lean, Mathlib/LinearAlgebra/TensorProduct/Basis.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: separate power-basis, tensor-coordinate and faithful-flat exactness declarations; none gives the full specified-length quotient statement including the zero ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient of R[X] by a monic polynomial of positive degree has a power basis and natural tensor coordinates, and tensoring reflects exactness",
+   "results": "8 hits: AdjoinRoot.powerBasisAux', AdjoinRoot.powerBasis', IsAdjoinRootMonic.powerBasis, Polynomial.Monic.free_quotient, AdjoinRoot.powerBasis, AdjoinRoot.powerBasisAux, Polynomial.Monic.finite_quotient, IntermediateField.powerBasisAux",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: quotient power bases only; tensor coordinate formulas, naturality and exactness reflection still require assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdjoinRoot\", \"FaithfullyFlat\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: no matching AdjoinRoot/FaithfullyFlat declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a monic polynomial of positive degree d over a commutative ring R, tensoring its quotient algebra with any R-module is naturally N^d and preserves and reflects exactness",
+   "results": "8 hits: rTensor_exact, lTensor_exact, Polynomial.UniversalFactorizationRing.fromTensor, Module.free_of_lTensor_residueField_injective, Algebra.Generators.CotangentSpace.exact, Algebra.Generators.Cotangent.exact, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, Algebra.FinitePresentation.baseChange",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: general tensor finiteness/free-module or right-exactness ingredients only; none states the quotient coordinate theorem with reflection of exactness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free module with a nonempty specified basis tensors naturally to a finite power of any module, with coordinate formulas and reflection of exact sequences",
+   "results": "8 hits: Module.Finite.base_change, Module.Finite.tensorProduct, Algebra.FormallyUnramified.finite_of_free_aux, instNontrivialTensorProduct, Module.Free.tensor, Module.finrank_tensorProduct, Module.free_of_lTensor_residueField_injective, instFinitePresentationTensorProduct",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: general tensor finiteness/free-module or right-exactness ingredients only; none states the quotient coordinate theorem with reflection of exactness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unit-binomial-finite-etale",
+  "date": "2026-10-22",
+  "group": "Q64"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Supporting input: de Jong §3.5, p.607, the normalization cover is etale away from the zeros and poles; unit-root models supply that open cover.; Returned item steps 1 (module boundary case), 2 and 4: specified-length power basis, tensor-coordinate maps, naturality and coordinate-0 reflection of exactness.",
+   "via": [
+    "lem-sfb-unit-binomial-finite-etale",
+    "lem-sfb-tame-radical-curve-normalization",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-monic-quotient-faithful-tensor-coordinates",
+  "worker": "stage1 NR",
+  "summary": "Statement unchanged. Reuses the existing monic-quotient-free Mathlib leaf; writes the zero-ring fixed-index basis separately and supplies the bilinear coordinate construction, both inverse identities, naturality, and coordinate-zero reflection of exactness. No new nodes: the remaining arguments are explicit elementary computations from the cited basis and tensor definitions. No Lean written or compiled.",
+  "blueprint": "Realizes the power-basis/tensor-coordinate input extracted in lem-sfb-unit-binomial-finite-etale, step 1, on the recorded alteration branch of det-thm-sf-ctf-stability-direct-images proof (3). The inherited from.node is null, as blueprint_refs.py ancestor reports; its concrete from.place and via are retained. Whole-blueprint searches for monic, tensor coordinates, and faithfully flat found no full equivalent blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NR-e33187d5f",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-e33187d5f (reviewer sub-agent of L); spot-checked: I read the item and all 6 cited node statements in full; they are 5 Mathlib definitions plus lem-weil-pbc-monic-quotient-free (AdjoinRoot.powerBasis'). I compared the item with the copy in the Q64 run snapshot: statement, source, stmt_deps and blueprint are byte-identical, and only proof, proof_deps, proof_origin, mathlib_searches (the 9 earlier entries are kept, 14 now), split_report and status changed. There are no new nodes and no SGA. Sources: Stacks algebra.tex l.8621 definition-flat (00HB) items (2) and (4) match the faithfully-flat definition node and step 7. 04GG lemma-characterize-henselian l.42115, proof of 10=>1, only needs the monic quotient to be finite free; the coordinate proof is correctly marked agent. Steps: Step 1 handles R!=0 (monic of degree d, so the cited lemma gives the basis t^i) and R=0 (B=0, so the d-indexed family is a basis by unique expansion) correctly. Step 2 gets linear c_i and c_i(t^j)=delta_ij from uniqueness of coefficients. Step 3 checks bilinearity, with balance using that R is commutative, then uses the universal property. Step 4 checks both composites, extending from pure tensors by generation. Step 5 builds id_B tensor h itself, since the tensor definition node only gives f tensor id on the left factor, and checks naturality on generators. Step 6 matches im h = ker k with the coordinatewise statement, using coordinate 0 because d>=1 and kh=0 for the other containments. Step 7 is literally the definition. Edge cases: R=0 works with index set of size d. d=1 gives R tensor N = N. Z[T]/(T^2) gives (a+bt) tensor x -> (ax,bx). d=0 is excluded and the exclusion is needed (B=0 would make tensoring a non-exact complex exact). The citer lem-sfb-unit-binomial-finite-etale takes the basis and faithful flatness, and both are stated. No duplicate in the DAG (I scanned statements mentioning faithfully flat with free/basis). Not a one-line Mathlib leaf (the free faithfully-flat instance needs Nontrivial and the formulas and naturality need assembling). The proof uses only definitions and a Mathlib leaf, so no route or tool_uses question. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MonicQuotientFaithfulTensorCoordinates",
+  "declaration": "AdjoinRoot.exists_monicQuotient_faithful_tensor_coordinates",
+  "file": "lean/Sheaf/RingTheory/MonicQuotientFaithfulTensorCoordinates.lean",
+  "statement": "theorem exists_monicQuotient_faithful_tensor_coordinates (R : Type u) [CommRing R] (d : ℕ) (hd : 1 ≤ d) (a : Fin d → R) (f : R[X]) (hf : f = X ^ d + ∑ i : Fin d, C (a i) * X ^ (i : ℕ)) : ∃ e : Module.Basis (Fin d) R (AdjoinRoot f), (∀ i : Fin d, e i = root f ^ (i : ℕ)) ∧ (∀ b : AdjoinRoot f, b = ∑ i : Fin d, e.coord i b • root f ^ (i : ℕ)) ∧ (∀ (N : Type v) [AddCommGroup N] [Module R N], (∀ (b : AdjoinRoot f) (x : N) (i : Fin d), ((TensorProduct.equivFinsuppOfBasisLeft e).trans (Finsupp.linearEquivFunOnFinite R N (Fin d))) (b ⊗ₜ[R] x) i = e.coord i b • x) ∧ (∀ x : Fin d → N, ((TensorProduct.equivFinsuppOfBasisLeft e).trans (Finsupp.linearEquivFunOnFinite R N (Fin d))).symm x = ∑ i : Fin d, (root f ^ (i : ℕ)) ⊗ₜ[R] x i)) ∧ (∀ (N : Type v) [AddCommGroup N] [Module R N] (N' : Type w) [AddCommGroup N'] [Module R N'] (h : N →ₗ[R] N') (q : AdjoinRoot f ⊗[R] N) (i : Fin d), ((TensorProduct.equivFinsuppOfBasisLeft e).trans (Finsupp.linearEquivFunOnFinite R N' (Fin d))) (h.lTensor (AdjoinRoot f) q) i = h (((TensorProduct.equivFinsuppOfBasisLeft e).trans (Finsupp.linearEquivFunOnFinite R N (Fin d))) q i)) ∧ (∀ (N₁ : Type v) [AddCommGroup N₁] [Module R N₁] (N₂ : Type w) [AddCommGroup N₂] [Module R N₂] (N₃ : Type z) [AddCommGroup N₃] [Module R N₃] (h : N₁ →ₗ[R] N₂) (k : N₂ →ₗ[R] N₃), k.comp h = 0 → (Function.Exact (h.lTensor (AdjoinRoot f)) (k.lTensor (AdjoinRoot f)) ↔ LinearMap.range h = LinearMap.ker k)) ∧ RingHom.FaithfullyFlat (algebraMap R (AdjoinRoot f))",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c7c3b0b01",
+  "group": "O1",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: R comm ring with no Nontrivial assumption; d≥1 and a: Fin d→R; f given by hf; B=AdjoinRoot f, t=root f; ∃ basis e pinned by e i = root^i, so unique; c_i=e.coord i with reconstruction (• vs ^ precedence OK); Φ_N = equivFinsuppOfBasisLeft e ≪≫ linearEquivFunOnFinite (concrete) with both formulas; pointwise naturality via lTensor; exactness iff under k∘h=0 with universes v/w/z independent; RingHom.FaithfullyFlat(algebraMap), listed in the dep record's declarations. Zero ring is covered (Fin d basis of zero module; faithfully flat vacuous); d=0 excluded as in the node. lean.statement verbatim; one sorry; source/blueprint docstrings and 7-step proof plan present; node differs from live only in lean; no new nodes and no dep changes. Searched lean/Sheaf, lean/WeilConjectures and Mathlib: no duplicate (Mathlib ingredients need Nontrivial). Report has Worker report and Second reading by O1 (self re-reading, disclosed; noted only). No compile run since no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261026T070400-L-3569469",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,113 @@
+{
+ "id": "lem-pur-finite-etale-diagonal-coordinates",
+ "kind": "statement",
+ "title": "The etale diagonal base-change factor in coefficient-unit coordinates",
+ "statement": "Let A be a finite commutative ring and f:X→Y a compactifiable, separated, quasi-compact etale map between Noetherian schemes. Use the compact-support comparison coordinates of [def-pur-finite-smooth-comparison-coordinates]. For every comparison family C satisfying its graph and homotopy normalization, finiteSmoothDiagonalFactor A f followed by finiteSmoothSectionCoordinates A C (p₁,Delta) equals finiteSmoothOmegaCoordinates A C f. This compares only the exceptional diagonal factor and requires no deformation geometry, annihilating exponent, bundle integration, or supplied orientation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation.proof.md",
+  "place": "First factor of the displayed three-factor orientation; rank-zero calculation in lem-pur-finite-smooth-gamma-normalization, Steps 1 and 3."
+ },
+ "stmt_deps": [
+  "def-pur-finite-smooth-comparison-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Identify the supplied comparison with the constructed graph comparison: its sheaf normalization is unique after the monomorphism to direct image, and its homotopy normalization determines its derived inverse. Transport the support-exchange identity for the base change of f along f to the right adjoints. The two adjunction triangles identify the resulting right mate with inverse-image composition.",
+   "uses": [
+    "lem-pur-etale-support-map-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate at the coefficient unit and pull back by the diagonal. Naturality moves the unit comparison across the section compositor. The equation Delta followed by p₂ = id cancels that compositor and leaves precisely the claimed coefficient-unit equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-support-map-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation.proof.md",
+  "place": "First factor of the displayed three-factor orientation; rank-zero calculation in lem-pur-finite-smooth-gamma-normalization, Steps 1 and 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The exceptional base change of an etale map in counit preserving right adjoint coordinates equals the inverse image compositor on the coefficient unit",
+   "results": "Eight results: algebraic etale base change, adjunction rightOp counit, inv_counit_map, and monoidal equivalence unit laws; none compares these specified etale exceptional maps.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; reuse the existing categorical and geometric component declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointUniq\"",
+   "results": "Twelve results in Mathlib.CategoryTheory.Adjunction.Unique, including rightAdjointUniq and its counit law. These supply categorical tools, not the geometric coordinate identity.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; reuse the existing categorical and geometric component declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteSmoothSectionCoordinates|finiteSmoothDiagonalFactor|bundleSectionAdjoint",
+   "results": "msearch returned zero Mathlib hits. Local rg found the coordinate constructions and the prime-power finite_smooth_gamma_normalization in Sheaf.Paper.FiniteSmoothGammaNormalization, but no arbitrary-finite-ring factor identities.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; reuse the existing categorical and geometric component declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothZeroOrientationCoordinates",
+  "date": "2026-10-27",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "First factor of the displayed three-factor orientation; rank-zero calculation in lem-pur-finite-smooth-gamma-normalization, Steps 1 and 3.",
+   "via": [
+    "lem-pur-finite-smooth-zero-orientation-coordinates",
+    "lem-pur-finite-smooth-intrinsic-level-properties",
+    "lem-pur-finite-smooth-level-of-orientation",
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteEtaleDiagonalCoordinates",
+  "file": "lean/Sheaf/Paper/FiniteEtaleDiagonalCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Etale.finiteEtaleDiagonalCoordinates",
+  "statement": "theorem finiteEtaleDiagonalCoordinates\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsSeparated f] [Etale f]\n    (C : FiniteSmoothCompactSupportComparisons A)\n    (hC : FiniteSmoothComparisonNormalized A C) :\n    finiteSmoothDiagonalFactor A f ≫\n        (finiteSmoothSectionCoordinates A C (pullback.fst f f) (pullback.diagonal f)).hom =\n      (finiteSmoothOmegaCoordinates A C f).hom",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T103439-L-1079889",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T103439-L-1079889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,143 @@
+{
+ "id": "lem-trf-section-canonical-map-open-descent",
+ "kind": "statement",
+ "title": "Full generation and canonical section maps descend over base opens",
+ "statement": "Let $h:Z\\to S$ be a quasi-compact separated morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism, def-weil-proper-morphism], and let $N$ be an invertible module on $Z$ [def-sc-invertible-module]. Let $(U_i)_{i\\in I}$ be an affine open cover indexed by any type $I$, put $j_i:Z_i=h^{-1}U_i\\hookrightarrow Z$, $h_i:Z_i\\to U_i$, and $N_i=j_i^*N$ with tensor pullback [def-pc-module-pullback]. Let $A$ be a relative section algebra for $(h,N)$ and $A_i$ relative section algebras for $(h_i,N_i)$ [def-sfb-relative-section-algebra-canonical-map]. Suppose a coefficientwise pullback datum $D_i$ from $A.data$ to $A_i.data$ along $U_i\\hookrightarrow S$ is given for every $i$ [def-nagata-graded-algebra-pullback-data, def-nagata-relative-proj]. Assume its section maps are normalized as follows: for every affine $V\\subset S$, affine $W\\subset U_i$ with $W\\subset (U_i\\hookrightarrow S)^{-1}V$, $n\\geq0$, and $a\\in A(V)_n$, the section associated to $D_i(a)$ is the restriction to $h_i^{-1}W$ of boundaryPullbackPowIso applied to the actual tensor-pullback section $1\\otimes\\operatorname{sectionEquiv}_{V,n}(a)$ [def-sc-tensor-pullback-power-comparison, def-pur-sheaf-tensor-product], including degree zero. If every $A_i$ generates everywhere and $r_i:Z_i\\to\\operatorname{Proj}_{U_i}(A_i)$ is canonical for $A_i$, then $A$ generates everywhere and there is a canonical $r:Z\\to\\operatorname{Proj}_S(A)$ such that $j_i\\mathbin{\\gg}r=r_i\\mathbin{\\gg}D_i.\\mathrm{relProjComparison}$ for every $i$. There is no hypothesis or conclusion that the maps are open immersions.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01O9 (lemma-invertible-map-into-relative-proj)(3) and proof; Morphisms Tag 01VJ, (3) implies (5), adjunction-map and restriction paragraphs."
+ },
+ "stmt_deps": [
+  "def-nagata-graded-algebra-pullback-data",
+  "def-nagata-relative-proj",
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-module",
+  "def-sc-tensor-pullback-power-comparison",
+  "def-sfb-relative-section-algebra-canonical-map",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The specified comparison sends a homogeneous section s to its restriction, written as the tensor-pullback unit 1 tensor s followed by the power comparison. On a further trivializing open chart the adjunction evaluation therefore sends b tensor s to b times the same restricted section, both before and after the base restriction. Tensor multiplication and the degree-zero unit are preserved by this formula. Thus it identifies the graded evaluations, not only their sources. The scheme case of space_line_module_proj_map gives the generation-open and canonical map for this evaluation, and its base-change clause, with D_i, identifies their restrictions to h inverse U_i with the local generation opens and canonical maps. The stalk condition defining GeneratesEverywhere is precisely generation of the invertible homogeneous target: over a local ring its maximal-ideal quotient is a one-dimensional vector space, so a section generates exactly when its residue is nonzero. Since all local generation opens are full and the inverse images of U_i cover Z, the global generation open is all of Z. Its canonical map is consequently defined on Z. On each local trivializing principal chart, the normalized section formula makes its homogeneous fraction map identical to that of r_local i. The uniqueness/chart clause of the canonical-map theorem gives the displayed equality after composing with D_i.relProjComparison. The relative-Proj base-change theorem identifies this comparison with the canonical projection from the pullback. Chart uniqueness also verifies the all-chart predicate IsCanonicalMap, including degree zero, so the resulting map has exactly the asserted predicate. No open-immersion hypothesis on any local map is used. Empty Z and the empty cover are allowed.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-sc-tensor-pullback-power-comparison",
+    "lem-trf-space-line-module-proj-map",
+    "lemma-nagata-relative-proj-base-change-arbitrary",
+    "lemma-nagata-relative-proj-exists"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-tensor-pullback-power-comparison",
+  "lem-trf-space-line-module-proj-map",
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "lemma-nagata-relative-proj-exists"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01VJ (3) implies (5), expanded using Constructions Tag 01O9(3); original gluing node steps 2-3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The generation locus and canonical morphism to relative Proj of a section algebra commute with restriction to an affine open cover",
+   "results": "OK 8 hits: Proj.fromOfGlobalSections, Proj.fromOfGlobalSections_resLE, IsAffineOpen.algebraMap_Spec_obj, Proj.fromOfGlobalSections_morphismRestrict, Proj.res_apply, ProjectiveSpectrum.Proj.toSpec, Proj.affineOpenCoverOfIrrelevantLESpan, ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app.",
+   "date": "2026-10-26",
+   "verdict": "No match: fixed-ring Proj chart constructions do not provide this normalized relative evaluation and generation comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical relative section algebra of tensor powers restricts to base open subsets and its canonical Proj map is an open immersion locally on a cover",
+   "results": "OK 8 hits: Proj.instIsOpenImmersionAwayι, Proj.fromOfGlobalSections_morphismRestrict, Proj.fromOfGlobalSections_resLE, Proj.fromOfGlobalSections, Proj.toBasicOpenOfGlobalSections, ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, Proj.awayι, Proj.openCoverOfMapIrrelevantEqTop.",
+   "date": "2026-10-26",
+   "verdict": "No match. Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:435-515: these concern a fixed graded ring and its absolute Proj charts, not the relative section algebra and normalized tensor evaluations."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict",
+   "results": "OK 1 hit: AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic.",
+   "date": "2026-10-26",
+   "verdict": "No match. The statement restricts an absolute Proj morphism to a basic open; it does not construct or compare the relative section algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionAlgebra|section_algebra|generationLocus|relProj",
+   "results": "msearch returned OK 0 hits. Local rg additionally found the ProjectiveSpectrum Basic absolute chart constructions and the project RelativeSectionAlgebra definitions; no existing descent theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact match in Mathlib; the project definitions and specialized projective-polarization section ring do not state the affine-base-cover descent assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CanonicalProjOpenCoverGluing",
+  "date": "2026-10-26",
+  "group": "A6"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The polarized descent input in the specialization chain below lem-trf-local-term-locality, through lem-trf-algebraic-space-ample-local: its scheme-base-change step invokes Stacks 0893. This node supplies the affine-open-cover criterion 01VJ (3) implies (1) used at the beginning and end of the proof of 0893. Re-split of lem-trf-scheme-relative-ample-affine-cover: old proof steps 5-6, comparison of section algebras/evaluations and descent of the open canonical map. Stage-3 reduction of canonical-proj-open-cover-gluing, steps 2-3: identify evaluations and descend the full generation locus and canonical map.",
+   "via": [
+    "lem-trf-canonical-proj-open-cover-gluing",
+    "lem-trf-scheme-relative-ample-affine-cover",
+    "lem-trf-scheme-relative-ample-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionAlgebraCanonicalMapOpenDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionAlgebraCanonicalMapOpenDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.section_canonical_map_open_descent",
+  "statement": "theorem section_canonical_map_open_descent {Z S : Scheme.{u}} (h : Z ⟶ S)\n    [QuasiCompact h] [IsSeparated h] (N : Z.Modules) [N.IsInvertible]\n    {I : Type v} (U : I → S.Opens) (hU : ∀ i : I, IsAffineOpen (U i))\n    (hcover : iSup U = ⊤) (A : RelativeSectionAlgebra h N)\n    (A_local : ∀ i : I, RelativeSectionAlgebra (h ∣_ U i)\n      ((tensorPullback (h ⁻¹ᵁ U i).ι).obj N))\n    (D : ∀ i : I, Scheme.GradedAlgebraData.PullbackData (U i).ι A.data (A_local i).data)\n    (hD : ∀ (i : I) (V : S.affineOpens) (W : (U i).toScheme.affineOpens)\n      (hle : W.1 ≤ (U i).ι ⁻¹ᵁ V.1) (n : ℕ) (a : A.data.grading V n),\n      (A_local i).sectionEquiv W n\n          ⟨(D i).map hle a, ((D i).map hle).map_mem a.property⟩ =\n        (((tensorPullback (h ⁻¹ᵁ U i).ι).obj N).tensorPow n).val.map\n          (homOfLE (by\n            intro x hx\n            change h ((h ⁻¹ᵁ U i).ι x) ∈ V.1\n            rw [← Scheme.Hom.comp_apply, ← morphismRestrict_ι]\n            exact hle hx)).op\n          ((boundaryPullbackPowIso (h ⁻¹ᵁ U i).ι N n).hom.app _\n            (tensorPullbackSection (h ⁻¹ᵁ U i).ι (N.tensorPow n) (h ⁻¹ᵁ V.1)\n              (A.sectionEquiv V n a))))\n    (hgen : ∀ i : I, (A_local i).GeneratesEverywhere)\n    (r_local : ∀ i : I, (h ⁻¹ᵁ U i).toScheme ⟶ (A_local i).data.relProj)\n    (hcanonical : ∀ i : I, (A_local i).IsCanonicalMap (r_local i)) :\n    A.GeneratesEverywhere ∧ ∃ r : Z ⟶ A.data.relProj, A.IsCanonicalMap r ∧\n      ∀ i : I, (h ⁻¹ᵁ U i).ι ≫ r = r_local i ≫ (D i).relProjComparison",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T080823-L-1608203",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T080823-L-1608203",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

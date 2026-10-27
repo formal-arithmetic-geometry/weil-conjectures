@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-noetherian-dvr-closed-diagonal",
+ "kind": "statement",
+ "title": "DVR uniqueness closes the diagonal over a Noetherian base",
+ "statement": "Let $f:X\\to S$ be a finite-type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], and assume $S$ is Noetherian, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact (its underlying space has a finite subcover for every open cover). For every discrete valuation ring $A$ [def-sc-discrete-valuation-ring] with fraction field $K$, let $j:\\operatorname{Spec}K\\to\\operatorname{Spec}A$ be the morphism induced by $A\\hookrightarrow K$ [def-weil-affine-spectrum]. Suppose that for any two morphisms $h_1,h_2:\\operatorname{Spec}A\\to X$, the equalities $fh_1=fh_2$ and $h_1j=h_2j$ imply $h_1=h_2$. Then the diagonal $\\Delta_f:X\\to X\\times_S X$ [def-pc-fibre-product] is a closed immersion [def-weil-closed-immersion].",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0207 (lemma-Noetherian-dvr-valuative-separation), implication (3) to (1), finite-type Noetherian diagonal argument."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $Y=X\\times_S X$, with projections $p_1,p_2$, and write $\\Delta=\\Delta_f$. By [lem-weil-pbc-finite-type-over-noetherian], $X$ is Noetherian. The projection $p_1:Y\\to X$ is a base change of $f$, so is of finite type by [lem-sfb-finite-type-composition-base-change](2). Apply [lem-weil-pbc-finite-type-over-noetherian] again to see that $Y$ is Noetherian. By [lem-weil-pbc-diagonal-immersion], $\\Delta$ is an immersion.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-diagonal-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0207 (lemma-Noetherian-dvr-valuative-separation), finite-type Noetherian paragraph of the converse; Tag 0CM2 (lemma-reach-point-closure-Noetherian), restricted to points outside the image."
+   }
+  },
+  {
+   "text": "The immersion $\\Delta$ is locally of finite type by [lem-weil-pbc-immersion-base-change-lft](2). For every affine open $V\\subseteq Y$, its inverse image $\\Delta^{-1}(V)$ is an open subscheme of the Noetherian scheme $X$, hence is Noetherian and in particular quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Thus $\\Delta$ is quasi-compact and therefore of finite type, by [def-weil-finite-type-morphism].",
+   "uses": [
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0207 (lemma-Noetherian-dvr-valuative-separation), finite-type Noetherian paragraph of the converse; Tag 0CM2 (lemma-reach-point-closure-Noetherian), restricted to points outside the image."
+   }
+  },
+  {
+   "text": "If $\\Delta(|X|)$ is not closed in $|Y|$, choose $y\\in\\overline{\\Delta(|X|)}\\setminus\\Delta(|X|)$. Apply [lem-sfb-noetherian-image-boundary-dvr] to the finite-type map $\\Delta:X\\to Y$, with $Y$ locally Noetherian by step 1. It gives a DVR $A$, its fraction field $K$, and maps $u:\\operatorname{Spec}K\\to X$ and $v:\\operatorname{Spec}A\\to Y$ such that $vj=\\Delta u$ and $v(s_A)=y$.",
+   "uses": [
+    "lem-sfb-noetherian-image-boundary-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0207 (lemma-Noetherian-dvr-valuative-separation), finite-type Noetherian paragraph of the converse; Tag 0CM2 (lemma-reach-point-closure-Noetherian), restricted to points outside the image."
+   }
+  },
+  {
+   "text": "Set $h_i=p_i v$. The fibre-product relation gives $fh_1=fh_2$, while $p_i\\Delta=1_X$ and $vj=\\Delta u$ give $h_1j=u=h_2j$. The hypothesis therefore gives $h_1=h_2$. By the uniqueness in [def-pc-fibre-product], $v=\\Delta h_1$: both maps to $Y$ have projections $h_1,h_1$. Evaluating at $s_A$ gives $y=\\Delta(h_1(s_A))$, contrary to the choice of $y$. Hence $\\Delta(|X|)$ is closed.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0207 (lemma-Noetherian-dvr-valuative-separation), finite-type Noetherian paragraph of the converse; Tag 0CM2 (lemma-reach-point-closure-Noetherian), restricted to points outside the image."
+   }
+  },
+  {
+   "text": "The map $\\Delta$ is an immersion by step 1 and has closed image by steps 3–4. The equivalence in [lem-weil-pbc-immersion-closed-image-closed-immersion] now makes it a closed immersion, as required.",
+   "uses": [
+    "lem-weil-pbc-immersion-closed-image-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0207 (lemma-Noetherian-dvr-valuative-separation), finite-type Noetherian paragraph of the converse; Tag 0CM2 (lemma-reach-point-closure-Noetherian), restricted to points outside the image."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-noetherian-image-boundary-dvr",
+  "lem-weil-pbc-diagonal-immersion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0207 (lemma-Noetherian-dvr-valuative-separation), finite-type Noetherian paragraph of the converse; Tag 0CM2 (lemma-reach-point-closure-Noetherian), restricted to points outside the image."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dvr|discrete.*valuation|uniqueness.*[Ss]eparated",
+   "results": "{\"t\": \"2026-10-22T06:02:48Z\", \"tool\": \"grep\", \"query\": \"dvr|discrete.*valuation|uniqueness.*[Ss]eparated\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\"], \"digest\": \"53d512907b8107e3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSeparated.of_valuativeCriterion (Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:246-247) assumes uniqueness for ALL valuation rings (definition at lines 86-87), not just DVRs. The Noetherian DVR reduction is future work at line 29. Diagonal closed-immersion results assume separatedness already."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of lifts from discrete valuation rings implies separated for a finite type morphism over a Noetherian scheme",
+   "results": "{\"t\": \"2026-10-22T06:02:48Z\", \"tool\": \"leansearch\", \"query\": \"Uniqueness of lifts from discrete valuation rings implies separated for a finite type morphism over a Noetherian scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"AlgebraicGeometry.IsSeparated.of_valuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.ValuativeCriterion.iff\"], \"digest\": \"9955dbefd9b071ee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSeparated.of_valuativeCriterion (Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:246-247) assumes uniqueness for ALL valuation rings (definition at lines 86-87), not just DVRs. The Noetherian DVR reduction is future work at line 29. Diagonal closed-immersion results assume separatedness already."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, AlgebraicGeometry.ValuativeCriterion.Uniqueness",
+   "results": "{\"t\": \"2026-10-22T06:02:48Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSeparated, AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.IsSeparated.of_valuativeCriterion\", \"AlgebraicGeometry.IsSeparated.eq_valuativeCriterion\"], \"digest\": \"cbadd7c49b620543\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSeparated.of_valuativeCriterion (Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:246-247) assumes uniqueness for ALL valuation rings (definition at lines 86-87), not just DVRs. The Noetherian DVR reduction is future work at line 29. Diagonal closed-immersion results assume separatedness already."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism over a Noetherian scheme whose discrete valuation ring lifts are unique has closed immersion diagonal",
+   "results": "{\"t\": \"2026-10-22T06:02:57Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type morphism over a Noetherian scheme whose discrete valuation ring lifts are unique has closed immersion diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.IsSeparated.of_valuativeCriterion\", \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"AlgebraicGeometry.isSeparated_iff\", \"AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\", \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\"], \"digest\": \"ff9605f26e8e6e24\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSeparated.of_valuativeCriterion (Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:246-247) assumes uniqueness for ALL valuation rings (definition at lines 86-87), not just DVRs. The Noetherian DVR reduction is future work at line 29. Diagonal closed-immersion results assume separatedness already."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of finite type between Noetherian schemes is separated if two trait morphisms with equal generic restrictions and equal base maps coincide",
+   "results": "{\"t\": \"2026-10-22T06:03:20Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of finite type between Noetherian schemes is separated if two trait morphisms with equal generic restrictions and equal base maps coincide\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.IsSeparated.instMap\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated\", \"AlgebraicGeometry.IsProper.toIsSeparated\"], \"digest\": \"efba68de9b0a6384\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSeparated.of_valuativeCriterion (Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:246-247) assumes uniqueness for ALL valuation rings (definition at lines 86-87), not just DVRs. The Noetherian DVR reduction is future work at line 29. Diagonal closed-immersion results assume separatedness already."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism over a Noetherian scheme is separated if lifts from discrete valuation rings are unique",
+   "results": "{\"t\": \"2026-10-23T04:24:57Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type morphism over a Noetherian scheme is separated if lifts from discrete valuation rings are unique\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.of_valuativeCriterion\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.IsFinite.of_comp\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.isProper_iff\"], \"digest\": \"0f67e29cb35685aa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib ValuativeCriterion.lean:86–87 and 246–247 require uniqueness for every valuation ring, not just DVRs; the Noetherian DVR reduction is explicitly future work at line 29. The other hits characterize closed diagonal using already assumed separatedness, or concern unrelated coefficient DVRs."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, AlgebraicGeometry.ValuativeCriterion.Uniqueness",
+   "results": "{\"t\": \"2026-10-23T04:24:58Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSeparated, AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.IsSeparated.of_valuativeCriterion\", \"AlgebraicGeometry.IsSeparated.eq_valuativeCriterion\"], \"digest\": \"cbadd7c49b620543\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib ValuativeCriterion.lean:86–87 and 246–247 require uniqueness for every valuation ring, not just DVRs; the Noetherian DVR reduction is explicitly future work at line 29. The other hits characterize closed diagonal using already assumed separatedness, or concern unrelated coefficient DVRs."
+  },
+  {
+   "tool": "grep",
+   "query": "dvr|discrete.*valuation|uniqueness.*[Ss]eparated",
+   "results": "{\"t\": \"2026-10-23T04:24:58Z\", \"tool\": \"grep\", \"query\": \"dvr|discrete.*valuation|uniqueness.*[Ss]eparated\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\"], \"digest\": \"56028e9e9780cc85\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib ValuativeCriterion.lean:86–87 and 246–247 require uniqueness for every valuation ring, not just DVRs; the Noetherian DVR reduction is explicitly future work at line 29. The other hits characterize closed diagonal using already assumed separatedness, or concern unrelated coefficient DVRs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness for discrete valuation ring diagrams implies closed diagonal over a Noetherian scheme",
+   "results": "{\"t\": \"2026-10-23T04:24:58Z\", \"tool\": \"leansearch\", \"query\": \"Uniqueness for discrete valuation ring diagrams implies closed diagonal over a Noetherian scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.iff\", \"AlgebraicGeometry.ValuativeCriterion.eq\", \"AlgebraicGeometry.IsSeparated.of_valuativeCriterion\", \"of_isDiscreteValuationRing\"], \"digest\": \"ea7ce11287d9241f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib ValuativeCriterion.lean:86–87 and 246–247 require uniqueness for every valuation ring, not just DVRs; the Noetherian DVR reduction is explicitly future work at line 29. The other hits characterize closed diagonal using already assumed separatedness, or concern unrelated coefficient DVRs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal of a morphism to a Noetherian base is closed if two maps from every trait agreeing on the generic point and base are equal",
+   "results": "{\"t\": \"2026-10-23T04:27:24Z\", \"tool\": \"leanfinder\", \"query\": \"The diagonal of a morphism to a Noetherian base is closed if two maps from every trait agreeing on the generic point and base are equal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.isSeparated_iff\", \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"AlgebraicGeometry.QuasiSeparated\", \"AlgebraicGeometry.Scheme.IsSeparated\"], \"digest\": \"64ecc62779fdad85\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib ValuativeCriterion.lean:86–87 and 246–247 require uniqueness for every valuation ring, not just DVRs; the Noetherian DVR reduction is explicitly future work at line 29. The other hits characterize closed diagonal using already assumed separatedness, or concern unrelated coefficient DVRs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-dvr-properness",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Noetherian valuative properness test using discrete valuation rings; returned proof steps 3-4: finite-type diagonal and its boundary-point contradiction from DVR uniqueness",
+   "via": [
+    "lem-sfb-noetherian-dvr-properness",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-noetherian-dvr-closed-diagonal",
+  "worker": "stage1",
+  "summary": "Kept the statement and all statement dependencies. Reused existing nodes for finite-type Noetherian permanence, diagonal immersion, immersion finite type, Noetherian opens, DVR boundary selection and the closed-image criterion. Wrote out the projection and fibre-product uniqueness contradiction. No new nodes, no Lean writing or compilation.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Noetherian valuative properness test using discrete valuation rings; returned proof steps 3-4: finite-type diagonal and its boundary-point contradiction from DVR uniqueness This split realizes precisely the finite-type diagonal and boundary-point uniqueness contradiction already assigned here; it preserves the inherited rigidity prerequisite route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-d270f827a",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-d270f827a (reviewer sub-agent of L); spot-checked: Read the item in full, every cited statement, Stacks limits.tex Tag 0207 (lemma-Noetherian-dvr-valuative-separation, the finite-type paragraph of (4)⇒(1)) and the parent lem-sfb-noetherian-dvr-properness. The delivery has 0 new nodes. Compared with base dagsnap 73383d93, the statement, stmt_deps, source and blueprint are byte-identical; only the proof and split fields were added, so no target is weakened. There is no repair note for this item, so the 2026-10-21 re-split rule does not apply. Step 1: X is Noetherian (lem-weil-pbc-finite-type-over-noetherian); p1 is finite type as a base change (lem-sfb-finite-type-composition-base-change(2)); so Y=X×_S X is Noetherian; the diagonal is an immersion by 01KJ (lem-weil-pbc-diagonal-immersion). Step 2: the diagonal is locally of finite type (lem-weil-pbc-immersion-base-change-lft(2)). It is quasi-compact because Δ^{-1}(V) is an open of the Noetherian X (lem-weil-pbc-noetherian-open-subscheme-noetherian), which matches the definition in def-weil-finite-type-morphism. Step 3: lem-sfb-noetherian-image-boundary-dvr is in the same unit and its proof does not cycle back to the item. Its hypotheses (finite type, locally Noetherian target, y in the closure but not the image) are met. It returns a DVR A, its fraction field K, the map j, u, v with Δu=vj and v(s_A)=y. This replaces 0207's Krull–Akizuki construction on a reduced component; that is acceptable because the item assumes (3), uniqueness for all DVRs. Step 4 is genuinely elementary from def-pc-fibre-product: h_i=p_i v, the hypothesis gives h1=h2, uniqueness gives v=Δh1, and then y lies in the image, a contradiction. Step 5 uses 01IQ (lem-weil-pbc-immersion-closed-image-closed-immersion). proof_deps is exactly the union of the step uses. Every off-unit citation is a mathlib leaf, so no tool_uses are needed, and no SGA source is used. Duplicate scan: across all DAG statements and a grep for 0207, no other node states this criterion. The parent's step 3 use matches the hypothesis exactly. Edge cases checked: X empty, nonreduced X, and the affine line with a doubled origin (the hypothesis fails and the diagonal is indeed not closed). No fixes written. Maintainer note: blueprint.from.node is null on the base too, inherited from Q53's creation, so it is not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianDvrClosedDiagonal",
+  "declaration": "AlgebraicGeometry.isClosedImmersion_diagonal_of_dvr_uniqueness",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianDvrClosedDiagonal.lean",
+  "statement": "theorem isClosedImmersion_diagonal_of_dvr_uniqueness {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] [IsLocallyNoetherian S] [CompactSpace S] (huniq : ∀ (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K] (h₁ h₂ : Spec (CommRingCat.of A) ⟶ X), h₁ ≫ f = h₂ ≫ f → Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ h₁ = Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ h₂ → h₁ = h₂) : IsClosedImmersion (pullback.diagonal f)",
+  "branch": "sheaf-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13800d863",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Clause-by-clause check against the node and Stacks limits.tex Tag 0207 (3)=>(1): finite type = LocallyOfFiniteType+QuasiCompact; Noetherian base = IsLocallyNoetherian+CompactSpace; huniq ranges over every DVR A and every IsFractionRing K in Type u, with j = Spec.map(algebraMap A K) and the equalities h1≫f=h2≫f and j≫h1=j≫h2 in the right order; conclusion IsClosedImmersion (pullback.diagonal f). The Type u test-ring universe only narrows the hypothesis, and the boundary-DVR lemma exists_dvr_of_mem_closure_range_not_mem_range produces A,K in Type u, so the proof route types. lean.statement verbatim equal to the file; item node changed only by the lean field; the 7 stmt_dep nodes byte-identical to side-live; no new nodes or definitions; proof is sorry only; docstrings carry source place, blueprint tag and the 5 steps. No duplicate: Mathlib IsSeparated.of_valuativeCriterion needs all valuation rings; parent isProper_iff_unique_dvr_lift is a different statement. Edge cases (empty X or S, nonreduced X, doubled origin) fine. Not recompiled per instructions. No findings."
+ }
+}

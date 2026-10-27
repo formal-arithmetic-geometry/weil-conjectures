@@ -157,9 +157,10 @@ On every trivializing open form the exact cone
 `0 → A → B ⊕ V → W → 0`, with maps `(a,-dA)` and `(dB,v)`. If `M` is the matrix whose
 columns are the images of a basis of A followed by lifts of a basis of W, relative to
 the ordered bases of B and V, the determinant map carries the A,V orientation to
-`det(M)⁻¹` times the B,W orientation. The equation below avoids division and therefore
+`(-1)^(a*(b+1)) det(M)⁻¹` times the B,W orientation. The equation below avoids division, so it
 also applies over rings with zero divisors. Identity complexes give a triangular matrix
-of determinant one; adjoining `[E → E]` gives evaluation, including the empty wedge.
+of determinant one. The sign cancels the negative differential and relation-block
+permutation; adjoining or deleting `[E → E]` gives evaluation, including the empty wedge.
 Source: Stacks, Tags 0FJX, 0FJM (blueprint: lem-trf-flat-lci-canonical-adjunction). -/
 def IsFlatLCIDeterminantComparison {Y : Scheme.{u}}
     (A B V W : Y.Modules) (a b n m : ℕ) (hr : a + m = b + n)
@@ -187,6 +188,7 @@ def IsFlatLCIDeterminantComparison {Y : Scheme.{u}}
             (Fin.cast hr.symm j)) →
     M.det • e.hom.app O (Scheme.Modules.tmulSection (X := Y) α
       (Scheme.Modules.exteriorSheafSection V n O bv)) =
+        ((-1 : Γ(Y, O)) ^ (a * (b + 1))) •
         Scheme.Modules.tmulSection (X := Y)
           (M := SheafOfModules.homObj (R := Y.sheaf) (Scheme.Modules.exteriorSheaf B b)
             (SheafOfModules.unit Y.ringCatSheaf))

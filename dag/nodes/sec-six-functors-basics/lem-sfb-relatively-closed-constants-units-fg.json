@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-relatively-closed-constants-units-fg",
+ "kind": "statement",
+ "title": "Global units modulo relatively integrally closed constants are finitely generated",
+ "statement": "Let $k$ be a field [def-weil-field], and let $X$ be a nonempty connected reduced scheme [def-pc-scheme, def-weil-connected-scheme, def-pc-reduced-scheme] locally of finite type over $k$ [def-weil-finite-type-morphism]. Assume that $X$ has finitely many irreducible components [def-weil-irreducible-components]. Put $A=\\Gamma(X,\\mathcal O_X)$ and assume the induced map identifies $k$ with a subfield of $A$ which is integrally closed in $A$ [def-weil-pbc-integral-closure]. Then $A^\\times/k^\\times$ is a finitely generated abelian group: there are finitely many units whose classes generate the quotient. Here $A^\\times$ is the multiplicative group of invertible elements of $A$, and $k^\\times$ is its subgroup of nonzero constants.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 04L7 (proposition-units-general), alternative (1)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-connected-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "Choose an algebraic closure $K/k$. Apply [lem-sfb-geometric-connected-component-surjective] to $X$: choose a nonempty connected component $Y$ of $(X_K)_{\\mathrm{red}}$. It is reduced and locally of finite type over $K$, has finitely many irreducible components, and its map $p:Y\\to X$ is surjective. Put $B=\\Gamma(Y,\\mathcal O_Y)$ and let $\\alpha:A\\to B$ be pullback of functions.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-sfb-geometric-connected-component-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L7 (proposition-units-general), first paragraph, choice of Y and finiteness of its components."
+   }
+  },
+  {
+   "text": "The map $\\alpha$ is injective. Indeed if $\\alpha(a)=0$, for each $x\\in X$ choose $y\\in Y$ over $x$. The field map $\\kappa(x)\\to\\kappa(y)$ is injective, so $a(x)=0$. For any reduced scheme $W$, clauses (1) and (3) of [lem-weil-pbc-reduced-induced-closed-subscheme], applied to the whole closed subset $|W|$ and the identity immersion of $W$, say that the ideal sheaf of sections vanishing in every residue field is zero. Thus $a=0$ on $X$. The same criterion will detect equality of sections on $Y$.",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L7 (proposition-units-general), justification of the injection of global functions from reducedness and surjectivity; Tag 01J3 (lemma-reduced-closed-subscheme)."
+   }
+  },
+  {
+   "text": "Let $Y_i$, for $i$ in a finite nonempty set $I$, be the irreducible components of $Y$ with their reduced induced closed-subscheme structures, supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. Each is integral. It is locally of finite type over $K$: on an affine chart $\\operatorname{Spec}R$ of $Y$ with $R$ finitely generated over $K$, the closed subscheme is $\\operatorname{Spec}(R/\\mathfrak p_i)$, whose algebra generators are the images of those of $R$. Apply [lem-sfb-integral-units-finite-valuation-map] to obtain finite sets $J_i$ and homomorphisms $v_i:\\Gamma(Y_i,\\mathcal O_{Y_i})^\\times\\to\\mathbf Z^{J_i}$ with kernel $K^\\times$. The disjoint union $J=\\coprod_iJ_i$ is finite. Define $w:B^\\times\\to\\mathbf Z^J$ by restricting to $Y_i$ and applying $v_i$ in its coordinates.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-integral-units-finite-valuation-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L6 (lemma-units-general-algebraically-closed), component restriction map, with Tag 04L5/04L4 supplying finite integer coordinates."
+   }
+  },
+  {
+   "text": "The kernel of $w$ is exactly $K^\\times$. If $w(b)=0$, then $b|_{Y_i}=c_i\\in K^\\times$. For $Y_i\\cap Y_h\\ne\\varnothing$, evaluation at a point of the intersection gives $c_i=c_h$, since $K$ embeds in its residue field. The intersection graph of the finite closed cover $(Y_i)$ is connected: otherwise the unions indexed by a graph component and its complement are disjoint nonempty closed subsets covering $Y$, hence both open, contrary to connectedness. Consequently all $c_i$ equal one $c\\in K^\\times$. The section $b-c$ vanishes in every residue field of $Y$, so it is zero by step 2. Conversely constants are killed by each $v_i$.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-weil-connected-scheme",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L6 (lemma-units-general-algebraically-closed), equality of constants on intersecting components and connectedness argument."
+   }
+  },
+  {
+   "text": "Compose $w$ with $\\alpha$ on units, obtaining $h:A^\\times\\to\\mathbf Z^J$. If $h(u)=0$, step 4 gives $\\alpha(u)=\\lambda\\in K^\\times$. Since $K/k$ is algebraic, choose a nonzero polynomial over $k$ vanishing at $\\lambda$ and divide by its nonzero leading coefficient to obtain a monic polynomial $P\\in k[T]$. Compatibility of $\\alpha$ with the scalar maps and polynomial evaluation gives $\\alpha(P(u))=P(\\lambda)=0$. Step 2 yields $P(u)=0$ in $A$. Relative integral closedness forces $u\\in k$; because $u$ is a unit, this is a nonzero constant. Conversely $h$ kills $k^\\times$. Hence $[u]\\mapsto h(u)$ is a well-defined injection $A^\\times/k^\\times\\hookrightarrow\\mathbf Z^J$. By [lem-weil-subgroup-finite-free-abelian-group-free] this quotient is free of finite rank, in particular finitely generated. Representatives in $A^\\times$ of a finite basis give the requested finitely many units.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-subgroup-finite-free-abelian-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L7 (proposition-units-general), first paragraph, descent of a geometric scalar using alternative (1); finite free subgroup conclusion made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "lem-sfb-geometric-connected-component-surjective",
+  "def-weil-residue-field",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-integral-units-finite-valuation-map",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-subgroup-finite-free-abelian-group-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 04L7 (proposition-units-general), alternative (1), using the component argument of Tag 04L6 (lemma-units-general-algebraically-closed). The finite integer coordinates from the proofs of 04L5 and 04L4 replace the intermediate abstract finite-generation argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If X is a connected reduced scheme locally of finite type over k with finitely many irreducible components and k integrally closed in global functions, then global units modulo k units form a finitely generated abelian group",
+   "results": "Actual search returned 8 hits; inspected results: ClassGroup.fintypeOfAdmissibleOfFinite, NumberField.Units.instFGUnitsRingOfIntegers, FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers, NumberField.Units.instFiniteIntAdditiveQuotientUnitsRingOfIntegersSubgroupTorsion, NumberField.Units.instFiniteIntAdditiveUnitsRingOfIntegers, ClassGroup.fintypeOfAdmissibleOfAlgebraic, FunctionField.classNumber, NumberField.RingOfIntegers.instFintypeClassGroup; digest 239e7db1796f2bb2",
+   "date": "2026-10-23",
+   "verdict": "no match: Dirichlet unit theorems concern rings of integers of number fields, not arbitrary reduced schemes; finite_appTop_of_universallyClosed requires universal closedness and integral source, neither assumed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rosenlicht units theorem: for a finite type connected reduced scheme over a relatively algebraically closed field, invertible global regular functions modulo constant units are finitely generated",
+   "results": "Actual search returned 8 hits; inspected results: AlgebraicGeometry.finite_appTop_of_universallyClosed, FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec, Algebra.essFiniteType_iff, AlgebraicGeometry.Scheme.functionField, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.functionField_isFractionRing_of_affine; digest 93da8c05b3847d86",
+   "date": "2026-10-23",
+   "verdict": "no match: Dirichlet unit theorems concern rings of integers of number fields, not arbitrary reduced schemes; finite_appTop_of_universallyClosed requires universal closedness and integral source, neither assumed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Units\"",
+   "results": "Actual search returned 0 hits; inspected results: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: Dirichlet unit theorems concern rings of integers of number fields, not arbitrary reduced schemes; finite_appTop_of_universallyClosed requires universal closedness and integral source, neither assumed."
+  },
+  {
+   "tool": "grep",
+   "query": "Rosenlicht|units.*(FG|finitely)|unit.*quotient.*(FG|finite)",
+   "results": "Actual search returned 0 hits; inspected results: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: Dirichlet unit theorems concern rings of integers of number fields, not arbitrary reduced schemes; finite_appTop_of_universallyClosed requires universal closedness and integral source, neither assumed."
+  },
+  {
+   "tool": "grep",
+   "query": "Rosenlicht|global.*unit|unit.*global",
+   "results": "Actual search returned 4 hits; inspected results: Mathlib/FieldTheory/Differential/Liouville.lean, Mathlib/RingTheory/Derivation/Basic.lean, Mathlib/Geometry/Manifold/PartitionOfUnity.lean, Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean; digest dcf17c760f8ad14c",
+   "date": "2026-10-23",
+   "verdict": "no match: Dirichlet unit theorems concern rings of integers of number fields, not arbitrary reduced schemes; finite_appTop_of_universallyClosed requires universal closedness and integral source, neither assumed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rosenlicht theorem global units modulo constants are finitely generated for a reduced connected variety",
+   "results": "Actual search returned 8 hits; inspected results: NumberField.Units.instFiniteIntAdditiveUnitsRingOfIntegers, NumberField.Units.instFGUnitsRingOfIntegers, Submodule.fg_unit, NumberField.Units.instFiniteIntAdditiveQuotientUnitsRingOfIntegersSubgroupTorsion, Ideal.fg_of_isUnit, FractionalIdeal.fg_of_isUnit, AlgebraicGeometry.RingedSpace.isUnit_of_isUnit_germ, Algebra.FiniteType.of_span_eq_top_target; digest 00f5e8ba83dc2ad5",
+   "date": "2026-10-23",
+   "verdict": "no match: Dirichlet unit theorems concern rings of integers of number fields, not arbitrary reduced schemes; finite_appTop_of_universallyClosed requires universal closedness and integral source, neither assumed."
+  },
+  {
+   "tool": "grep",
+   "query": "Rosenlicht|units.*(FG|finitely)|finitely.*units",
+   "results": "Actual search returned 8 hits: Mathlib/NumberTheory/MulChar/Basic.lean, Mathlib/NumberTheory/MulChar/Basic.lean, Mathlib/Data/NNReal/Defs.lean, Mathlib/FieldTheory/Differential/Liouville.lean, Mathlib/RingTheory/Derivation/Basic.lean, Mathlib/RingTheory/UniqueFactorizationDomain/Finite.lean, Mathlib/RingTheory/UniqueFactorizationDomain/Finite.lean, Mathlib/RingTheory/Localization/Module.lean; digest a60875432bdd6765",
+   "date": "2026-10-24",
+   "verdict": "no match: no theorem for global units modulo relatively integrally closed constants; number-field and differential-algebra results have different objects and hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Units\"",
+   "results": "Actual search returned 0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "no match: no theorem for global units modulo relatively integrally closed constants; number-field and differential-algebra results have different objects and hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-connected-reduced-scalar-field-uniqueness",
+  "date": "2026-10-23",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Etale field cover of a reduced locally Noetherian singleton stack. Input for the field-cover construction: Identity component of an unramified field groupoid. Dimension input in the field-groupoid calculation: replace the arrow-space dimension by the stabilizer dimension (Stacks 06FF). Supporting input: Stacks 06FF, middle paragraph: identify k_a=k_b inside the global sections of the connected reduced chart T, and use that this ring is a field to inject it into the residue field at v. Supporting algebra input: 04MK, quasi-compact paragraph after replacing each ground field by its integral closure: invoke 04L7 for the quotient of global units.",
+   "via": [
+    "lem-sfb-connected-reduced-scalar-field-uniqueness",
+    "lem-sfb-field-groupoid-stabilizer-dimension",
+    "lem-sfb-field-groupoid-identity-finite-relation",
+    "lem-sfb-unramified-diagonal-singleton-field-cover",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relatively-closed-constants-units-fg",
+  "worker": "stage1",
+  "summary": "Q52: retained the exact statement; separated the geometric connected-component cover and integral algebraically closed finite valuation-map input as two statement-only nodes, and wrote out reduced-section injectivity, the component intersection graph, and monic scalar descent. Reused the existing finite-free subgroup Mathlib leaf, so no new group-theory node is needed. No statement dispute.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3), supporting the inherited alteration/moduli/groupoid chain through Stacks 06FF and 04MK. This item supplies the 04L7(1) units input. The ancestor command returns None, as already recorded on the parent, so the inherited null ancestor is retained. No change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic reduced induced closed-subscheme theorem, used for component structures and detection of zero sections by residues; the unit contains no replacement for this scheme-theoretic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-3ed875561",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-3ed875561 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited node statement and Stacks varieties.tex 04KZ(3), 04L4, 04L5, 04L6, 04L7. The item statement is unchanged and is exactly 04L7 alternative (1). Step 1: the geometric node's hypotheses match the item's. Step 2: injectivity of α comes from p being surjective, residue-field maps being injective, and clause (3) of the reduced-induced node with the identity immersion (statement use only). Step 3: reduced components are integral and locally of finite type through prime quotients, and the valuation node gives finite coordinates. Step 4: constants agree on intersections, the intersection graph of the finite closed cover is connected, and b=c by reduced detection. Step 5: a monic P from λ algebraic, α a k-algebra map plus injectivity give P(u)=0, so u∈k by integral closedness; the finite-free subgroup Mathlib leaf finishes. New geometric node: true via 04KZ(3)/038H finiteness, clopen components, p open (over a field) and closed (integral), connected X; tested on k=K and Spec C/R. New valuation node: true via 04L5 restriction to an affine open, normalized projective closure and the 04L4 valuation map (kernel B^×∩K^×=K^×); tested on Spec K, G_m, A^n. rg -L over dag/nodes for 04L4–04L7/04KZ, unit quotients and geometric-component covers found no duplicates (lem-zl-affine-geometric-components-finite-extension, pbc component-count, sbc descent nodes and sc curve unit quotients all differ). There is no blueprint same_as. tool_uses reduced-induced (sk-thm-p1) is generic: accepted. The inherited null from.node is kept. No SGA, no cycle, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativelyClosedConstantsUnitsFG",
+  "declaration": "AlgebraicGeometry.Scheme.relatively_closed_constants_units_fg",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativelyClosedConstantsUnitsFG.lean",
+  "statement": "theorem relatively_closed_constants_units_fg (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k))] [ConnectedSpace X] [IsReduced X] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k))] (hcomponents : (irreducibleComponents X).Finite) (hclosed : @IsIntegrallyClosedIn k Γ(X, ⊤) _ _ (((ΓSpecIso (CommRingCat.of k)).inv ≫ (X ↘ Spec (CommRingCat.of k)).appTop).hom.toAlgebra)) : Group.FG (Γ(X, ⊤)ˣ ⧸ (Units.map (((ΓSpecIso (CommRingCat.of k)).inv ≫ (X ↘ Spec (CommRingCat.of k)).appTop).hom.toMonoidHom)).range)",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fbc7f6e59",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Statement = Stacks 04L7(1) clause by clause: k:Type u Field; X:Scheme.{u} with X.Over Spec k; ConnectedSpace (includes Nonempty); IsReduced; LocallyOfFiniteType of the structure map (no QuasiCompact added); (irreducibleComponents X).Finite; IsIntegrallyClosedIn k Γ(X,⊤) via the canonical map (ΓSpecIso k).inv ≫ appTop (IsIntegralClosure k k A includes injectivity and closedness); conclusion Group.FG (Γˣ ⧸ (Units.map φ).range), neither weaker nor stronger. Edge cases: empty X excluded, Spec k trivial, G_m gives ℤ, reducible connected X allowed, common universe u standard. Gates: no new definitions, single sorry, source/blueprint docstrings with the 5-step proof, lean.statement verbatim, stmt_deps unchanged and the recorded declarations used, plain imports serve proof deps, no live clash, no repair note, no pro-étale content. Report has the Worker report and Second reading by Q08 sections. No file changed, so no compile run."
+ }
+}

@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-dm-quasicompact-atlas-criterion",
+ "kind": "statement",
+ "title": "Quasi-compact Deligne--Mumford stacks admit affine smooth presentations",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $\\mathcal X$ be a Deligne--Mumford stack over $S$ [def-sfb-stable-pointed-moduli-groupoids]. Use its field-valued point space $|\\mathcal X|$ and atlas topology as in [lem-sfb-stack-topology-open-substacks]. Call $\\mathcal X$ quasi-compact when every open covering of $|\\mathcal X|$ has a finite subcover. The following are equivalent: (1) $\\mathcal X$ is quasi-compact; (2) there is an affine $S$-scheme $A$ and a representable smooth surjective morphism $A\\to\\mathcal X$; (3) there is a quasi-compact $S$-scheme $U$ and a representable smooth surjective morphism $U\\to\\mathcal X$; (4) there is a quasi-compact Deligne--Mumford stack $\\mathcal V$ and a surjective morphism $\\mathcal V\\to\\mathcal X$. Here affine means isomorphic to $\\operatorname{Spec}R$ for a commutative ring $R$, and quasi-compact for a scheme means quasi-compactness of its usual topological space. Smooth representable means that each scheme base change is a smooth map of algebraic spaces, tested on etale scheme charts using [def-trf-algebraic-space, def-sbc-smooth-morphisms]. Surjective means surjective on field-valued point classes. No finite-type, field-base, separatedness or quasi-separatedness assumption is imposed, and the empty stack is allowed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 04YC (lemma-quasi-compact-stack), conditions (1), (2), (3), (5), restricted to Deligne--Mumford stacks."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-topology-open-substacks",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-stack-point-topological-space"
+ ],
+ "proof": [
+  {
+   "text": "Assume (1). Choose a representable etale surjective scheme atlas $p:U\\to\\mathcal X$ from [def-sfb-stable-pointed-moduli-groupoids]. Choose an affine open cover $U_i\\hookrightarrow U$ by [lem-pc-fppf-affine-open-cover]. Each inclusion is etale by [lem-weil-pbc-open-immersion-etale], so $q_i:U_i\\to\\mathcal X$ is representable etale by composition in [lem-sfb-stack-chartwise-smooth-etale-calculus]. The same calculus makes it smooth, flat and locally of finite presentation. Regarding each $U_i$ as an algebraic space via [def-trf-scheme-algebraic-space], apply [lem-sfb-stack-point-topology-flat-lfp-open]: its image $W_i\\subseteq|\\mathcal X|$ is open. That node's topology is the topology specified in the statement: the chosen etale atlas is smooth, and both topologies test opens by inverse image along this atlas. Surjectivity of $p$ gives a lift of every field object after a field extension by the chart-test equivalence in the calculus node; hence $|p|$ is surjective. Since the $U_i$ cover $U$, the $W_i$ cover $|\\mathcal X|$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-pc-fppf-affine-open-cover",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-point-topology-flat-lfp-open",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04YC (lemma-quasi-compact-stack), (1) implies (2), affine refinement of the atlas; Tag 04XL (lemma-topology-points)"
+   }
+  },
+  {
+   "text": "Choose a finite set $J$ of these indices whose $W_j$ cover $|\\mathcal X|$, using (1). Form $A=\\coprod_{j\\in J}U_j$ by [lem-weil-pbc-scheme-coproduct-family]. The etale maps $q_j$ glue to a representable etale map $q:A\\to\\mathcal X$ by the coproduct clause of [lem-sfb-stack-chartwise-smooth-etale-calculus]; that clause also makes it smooth. Its image contains every $W_j$, so it is surjective in the field-point convention specified in the statement. Write $U_j\\simeq\\operatorname{Spec}R_j$. By [lem-weil-pbc-finite-affine-coproduct-spectrum], $A\\simeq\\operatorname{Spec}(\\prod_{j\\in J}R_j)$, hence $A$ is affine. Its map to $S$ is the one induced by the component maps, and $q$ is over $S$. This proves (2). All coproducts are finite and lie in the standing universe. If the selected set is empty, its spectrum is that of the zero ring and its point image covers precisely when $\\mathcal X$ has no points; the empty scheme and its empty map give the required atlas.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04YC (lemma-quasi-compact-stack), last three sentences; schemes.tex Tag 01I5 (lemma-disjoint-union-affines)"
+   }
+  },
+  {
+   "text": "The affine scheme $A$ in (2) is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Keeping its representable smooth surjection proves (3).",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04YC (lemma-quasi-compact-stack), immediate implication (2) implies (3)"
+   }
+  },
+  {
+   "text": "Given (3), regard $U$ as its representable discrete fibred groupoid. This is a Deligne--Mumford stack in [def-sfb-stable-pointed-moduli-groupoids]: scheme fibre products [def-pc-fibre-product] represent the base changes of its diagonal, and its identity is a surjective etale atlas (the identity is an open immersion, hence etale by [lem-weil-pbc-open-immersion-etale]). The representable sheaf $h_U$ is an algebraic space with its identity etale atlas by [def-trf-scheme-algebraic-space]. A sheaf of sets, regarded as a discrete fibred groupoid, is a stack: a descent datum is a family of sections agreeing on overlaps, and the sheaf axiom gives its unique glued section; all arrows are identities. By [lem-sfb-stack-topology-open-substacks], its point space is the usual space of $U$. Thus $U$, with its given morphism to $\\mathcal X$, is a quasi-compact Deligne--Mumford stack as required in (4).",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-etale",
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-stack-topology-open-substacks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04YC (lemma-quasi-compact-stack), scheme-source case of the immediate implications to (5)"
+   }
+  },
+  {
+   "text": "Given (4), the map $|\\mathcal V|\\to|\\mathcal X|$ is continuous by [lem-sfb-stack-point-topology-flat-lfp-open]; its topology agrees with the atlas topology specified in the statement as in step 1. It is surjective by the hypothesis of (4). Pull any open cover of $|\\mathcal X|$ back to $|\\mathcal V|$. Quasi-compactness of $\\mathcal V$ selects finitely many inverse images covering $|\\mathcal V|$. The corresponding finitely many opens cover $|\\mathcal X|$: lift any point to $|\\mathcal V|$ and use the finite cover there. This proves (1), and closes the cycle (1) implies (2) implies (3) implies (4) implies (1). No separation assumption on either point space is used.",
+   "uses": [
+    "lem-sfb-stack-point-topology-flat-lfp-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04YC (lemma-quasi-compact-stack), (5) implies (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-pc-fppf-affine-open-cover",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-point-topology-flat-lfp-open",
+  "def-trf-scheme-algebraic-space",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-pc-fibre-product",
+  "lem-sfb-stack-topology-open-substacks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 04YC (lemma-quasi-compact-stack), proof, restricted to Deligne--Mumford stacks; use an etale atlas and its affine cover."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Deligne Mumford stack is quasi compact if and only if it has a smooth surjective atlas from an affine scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"For any compact scheme $ X $ and a Zariski-local-at-the-source morphism property $ P $ that holds for identity morphisms, there exists an affine scheme $ Y $ and a surjective morphism $ p : Y \\to X $ s\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_iff_exists\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  CompactSpace ↥X ↔ ∃ R f, Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A topological space $ X $ is compact if and only if there exists a commutative ring $ R $ and a surjective continuous map from the prime spectrum $ \\\\operatorname{Spec}(R) $ (endowed with the Zariski t\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.singleton\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompactCover (CategoryTheory.PreZeroHypercover.singleton f)\", \"doc\": \"A singleton pre-zero hypercover of a scheme $ S $, constructed from a surjective and quasi-compact morphism $ f: X \\to S $, satisfies the quasi-compactness predicate.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (hf : P f)\\n  [inst : AlgebraicGeometry.Surjective f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompactCover (AlgebraicGeometry.Scheme.Hom.cover f hf).toPreZeroHypercover\", \"doc\": \"Given a surjective morphism $ f: X \\to S $ of schemes that satisfies a morphism property $ P $ and is quasi-compact, the singleton presieve $\\\\{f\\\\}$ forms a quasi-compact covering sieve in the precovera\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y] [CompactSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f ↔ CompactSpace ↥X\", \"doc\": \"For any schemes $X$ and $Y$, and a morphism $f: X \\to Y$, if $Y$ is quasi-separated and compact, then $f$ is quasi-compact if and only if $X$ is compact.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [Y.IsQuasiAffine] [AlgebraicGeometry.IsImmersion f] [CompactSpace ↥X],\\n  X.IsQuasiAffine\", \"doc\": \"If $ X $ and $ Y $ are schemes, $ f: X \\to Y $ is an immersion, $ Y $ is quasi-affine, and $ X $ is a compact topological space, then $ X $ is a quasi-affine scheme.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern schemes, rings, ordinary-category localization or manifold charts; none states the asserted algebraic-space or Deligne--Mumford stack theorem or a one-line generalization of it."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiCompact\", \"Surjective\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f] : (CategoryTheory.Over.pullback f).Faithful\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" : AlgebraicGeometry.IsOpenImmersion.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"Being an open immersion satisfies fpqc descent.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyClosed) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"Universally closed satisfies fpqc descent.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"Universally injective satisfies fpqc descent.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"Universally open satisfies fpqc descent.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"Surjective satisfies fpqc descent.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" : (CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"Being an isomorphism satisfies fpqc descent.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)] [AlgebraicGeometry.IsZariskiLocalAtTarget P] : P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @Alg\", \"doc\": \"fpqc descent implies fppf descent\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeEtaleMinMorphismPropertySurjectiveFlatQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Etale) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeFormallyUnramifiedMinMorphismPropertySurjectiveFlatQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.FormallyUnramified) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.LocallyOfFinitePresentation) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFiniteTypeMinMorphismPropertySurjectiveFlatQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.LocallyOfFiniteType) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern schemes, rings, ordinary-category localization or manifold charts; none states the asserted algebraic-space or Deligne--Mumford stack theorem or a one-line generalization of it."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|DeligneMumford|quasi.compact.*atlas|atlas.*quasi.compact",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern schemes, rings, ordinary-category localization or manifold charts; none states the asserted algebraic-space or Deligne--Mumford stack theorem or a one-line generalization of it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact point space of an algebraic stack is equivalent to a quasi compact smooth scheme presentation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"(S : Scheme.{u}) (𝒰 : PreZeroHypercover.{v} S) : S.quasiCompactCover 𝒰 ↔ QuasiCompactCover 𝒰\", \"doc\": \"For a scheme $ S $ and a pre-zero hypercover $ \\\\mathcal{U} $ of $ S $, the quasi-compact cover property defined by $ S $ is equivalent to the general quasi-compact cover predicate applied to $ \\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_iff_compactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace Y] [CompactSpace Y] : QuasiCompact f ↔ CompactSpace X\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If the target scheme $Y$ is both quasi-separated and compact as a topological space, then the morphism $f$ is quasi-compact if and only if the source scheme \"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [CompactSpace Y] : CompactSpace X\", \"doc\": \"If $ f: X \\\\to Y $ is a quasi-compact morphism of schemes and $ Y $ is a compact space (i.e., every open cover of $ Y $ has a finite subcover), then the domain scheme $ X $ is also a compact space.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.QuasiCompact f ↔\\n    ∀ (U : Y.Opens), AlgebraicGeometry.IsAffineOpen U → IsCompact ↑((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact if and only if for every affine open subset $ U \\\\subseteq Y $, the preimage $ f^{-1}(U) $ is a compact subset of the topological space underlying \"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": QuasiSeparatedSpace X ↔ QuasiCompact (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"A scheme $X$ is quasi-separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(X : Scheme) : QuasiSeparatedSpace X ↔ QuasiSeparated (terminal.from X)\", \"doc\": \"A scheme $X$ has a quasi-separated underlying topological space (i.e., the intersection of any two quasi-compact open subsets is quasi-compact) if and only if the unique morphism from $X$ to the termi\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \": QuasiCompact f ↔ ∀ U : Y.Opens, IsAffineOpen U → IsCompact (f ⁻¹ᵁ U : Set X)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact if and only if for every affine open subset $ U $ of $ Y $, the preimage $ f^{-1}(U) $ is a compact subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"(S : Scheme.{u}) : ObjectProperty (PreZeroHypercover.{v} S)\", \"doc\": \"For a scheme $ S $, this defines the predicate on pre-zero hypercovers of $ S $ that determines whether a given pre-zero hypercover is quasi-compact.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern schemes, rings, ordinary-category localization or manifold charts; none states the asserted algebraic-space or Deligne--Mumford stack theorem or a one-line generalization of it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective morphism from a quasi compact Deligne Mumford stack has quasi compact target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.singleton\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompactCover (CategoryTheory.PreZeroHypercover.singleton f)\", \"doc\": \"A singleton pre-zero hypercover of a scheme $ S $, constructed from a surjective and quasi-compact morphism $ f: X \\to S $, satisfies the quasi-compactness predicate.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (hf : P f)\\n  [inst : AlgebraicGeometry.Surjective f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompactCover (AlgebraicGeometry.Scheme.Hom.cover f hf).toPreZeroHypercover\", \"doc\": \"Given a surjective morphism $ f: X \\to S $ of schemes that satisfies a morphism property $ P $ and is quasi-compact, the singleton presieve $\\\\{f\\\\}$ forms a quasi-compact covering sieve in the precovera\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiCompact @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.QuasiCompact\", \"doc\": \"The quasi-compactness property of morphisms of schemes is multiplicative, meaning that the composition of two quasi-compact morphisms is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CompactSpace ↥X] [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Any morphism $ f: X \\to Y $ of schemes is quasi-compact if $ X $ is a compact topological space and $ Y $ is a quasi-separated scheme. This follows from the property that compactness of $ X $ ensures f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern schemes, rings, ordinary-category localization or manifold charts; none states the asserted algebraic-space or Deligne--Mumford stack theorem or a one-line generalization of it."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|DeligneMumford|quasi.compact.*atlas|atlas.*quasi.compact",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms and covers, not the asserted Deligne--Mumford stack equivalences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective morphism from a quasi compact algebraic stack has quasi compact target and a quasi compact stack has an affine atlas",
+   "results": "8 hits: AlgebraicGeometry.instQuasiCompactOfIsAffineHom, AlgebraicGeometry.QuasiCompactCover.homCover, AlgebraicGeometry.QuasiCompact.mk, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.Surjective, AlgebraicGeometry.Surjective.mk, AlgebraicGeometry.quasiCompact_of_compactSpace, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms and covers, not the asserted Deligne--Mumford stack equivalences."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms and covers, not the asserted Deligne--Mumford stack equivalences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Deligne Mumford stack is quasi compact exactly when it has an affine smooth surjective scheme atlas",
+   "results": "8 hits: AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.quasiCompactCover_iff, AlgebraicGeometry.Scheme.quasiCompactCover, AlgebraicGeometry.instQuasiCompactOfIsAffineHom, AlgebraicGeometry.QuasiCompactCover.singleton, AlgebraicGeometry.quasiCompactCover_iff, AlgebraicGeometry.quasiCompact_over_affine_iff, AlgebraicGeometry.compactSpace_iff_exists",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms and covers, not the asserted Deligne--Mumford stack equivalences."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-finite-type-calculus",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Finite-type calculus and representable compatibility for stacks. Input to the present split: Quasi-compact atlas criterion used to pass from affine scheme tests to arbitrary quasi-compact stack tests; supports the finite-type clause without restating it.",
+   "via": [
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-dm-quasicompact-atlas-criterion",
+  "worker": "stage1",
+  "summary": "Read Stacks 04YC and its topology and scheme inputs. Preserved all four clauses and all hypotheses. Refined an etale atlas by affine opens, selected finitely many open images, and formed their affine finite coproduct. Proved the other implications explicitly, including the empty case. Reused existing nodes throughout; no new nodes. All cited statements read and quoted in citations.json. No complete matching project Lean declaration or Mathlib statement was found.",
+  "blueprint": "The inherited textual anchor det-thm-sf-ctf-stability-direct-images is now at literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3). This is the quasi-compact atlas tool below its Rj_* alteration/moduli prerequisite, via stack finite-type calculus. Ancestor tool reports None; preserved inherited from.node and via. Whole-blueprint searches found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic scheme fact used to restrict an etale atlas to affine opens and for the scheme identity atlas; no unit-specific replacement."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic scheme coproduct existence and component inclusions used to assemble finitely many chosen charts; no unit-specific replacement."
+   },
+   {
+    "node": "def-trf-scheme-algebraic-space",
+    "why": "Use the Yoneda sheaf of an arbitrary scheme as an algebraic space, for the flat-lfp open-map theorem and the discrete stack in (3) implies (4); this is a generic foundational embedding."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-a62d5f797",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-a62d5f797 (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full; there are no new nodes. The statement and stmt_deps are byte-identical to the live and side-live copies, where the item is still unsplit, so no target was weakened. Source: I read Stacks 04YC (stacks-properties.tex, lemma-quasi-compact-stack), statement and proof. The item matches conditions (1),(2),(3),(5), restricted to DM stacks. The proof follows the Stacks route: cover an étale atlas by affine opens, take their open images (lem-sfb-stack-point-topology-flat-lfp-open, via étale ⇒ smooth ⇒ flat+lfp in the chartwise calculus node), pick finitely many, and form a finite coproduct that is affine (Mathlib sigmaSpec node). Step 4 is the elementary scheme-as-DM-stack argument. Step 5 uses continuity plus surjectivity. I checked every cited statement against what its step takes from it: the étale and smooth atlas topologies agree by atlas independence, the chart test is equivalent to field-extension lifting, and the coproduct clause is set-indexed. Edge cases checked: the empty stack (J empty, Spec 0 is empty), an affine scheme with the identity atlas, a non-quasi-compact scheme, and BG over a field (lifting needs a field extension). proof_deps equals the union of the step uses, and there is no cycle. Duplicate search on 04YC and related keywords: lem-sfb-finite-type-stack-affine-smooth-atlas (field base, finite type) and def-sfb-stack-qcqs-morphism (atlas definition) are related but neither is a duplicate. Batch-5: lem-sfb-stack-chartwise-smooth-etale-calculus and def-trf-scheme-algebraic-space are generic algebraic-space foundations, not parts of the trace-formula or Poincaré-duality proofs, so both are accepted. Tool use: def-trf-scheme-algebraic-space (unit sk-i-curve-zero) is accepted as a general definition. No SGA cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DmQuasicompactAtlasCriterion",
+  "declaration": "CategoryTheory.dm_quasicompact_atlas_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/DmQuasicompactAtlasCriterion.lean",
+  "statement": "theorem dm_quasicompact_atlas_criterion {S : Scheme.{u}} (F : BasedCategory.{v₁, w₁} (Over S)) (hF : IsDeligneMumfordModuliStack F) : (CompactSpace (ModuliPoints F) ↔ ∃ (A : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj A)) F), IsAffine A.left ∧ ModuliSpaceTest @Smooth a ∧ Function.Surjective (moduliPointMap a)) ∧ (CompactSpace (ModuliPoints F) ↔ ∃ (U : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F), CompactSpace U.left ∧ ModuliSpaceTest @Smooth a ∧ Function.Surjective (moduliPointMap a)) ∧ (CompactSpace (ModuliPoints F) ↔ ∃ (V : BasedCategory.{max u v₁ v₂, max (u + 1) w₁ w₂} (Over S)) (f : BasedFunctor V F), IsDeligneMumfordModuliStack V ∧ CompactSpace (ModuliPoints V) ∧ Function.Surjective (moduliPointMap f))",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three biconditionals express equivalence of all four original conditions. CompactSpace uses the existing field-point topology, ModuliSpaceTest @Smooth includes actual algebraic-space representability, and every surjection is explicitly on field-point classes. Added two landed definition nodes as statement dependencies to name the existing chart-test and topology interfaces; no new notion or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6038c21f8",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Read node, Stacks 04YC (stacks-properties.tex l.1171-1205), all 7 stmt_deps and their Lean (ModuliPoints/moduliPointMap/ModuliSpaceTest, IsDeligneMumfordModuliStack/HasSpaceBaseChange, moduliPointTopologicalSpace). Statement text unchanged; node differs from live only in lean and two added, actually used, landed stmt_deps (def-sfb-dm-stack-morphism-properties, def-sfb-stack-point-topological-space); lean.statement verbatim. (1) CompactSpace on the field-point quotient with the only instance in scope (smooth-atlas topology, equal to the etale-atlas topology for DM stacks); (2)/(3) Over S source, IsAffine A.left / CompactSpace U.left, ModuliSpaceTest @Smooth = algebraic-space representable + smooth on etale charts (same as SpaceMapIsSmooth), surjective on point classes; (4) DM compact V, surjective on points, no smoothness on f; three iffs = 4-way equivalence. V universe max u v1 v2 explicit, needed for (1)->(4), not a silent restriction. Edge cases (empty stack, Spec 0, non-affine qc scheme, non-qc scheme, BG, arbitrary base) covered. No defs, sorry only, docstrings with source/blueprint/proof steps, no name clash, all imports published, report sections present. No compile (no file changed). Advisory: some plain imports unused."
+ }
+}

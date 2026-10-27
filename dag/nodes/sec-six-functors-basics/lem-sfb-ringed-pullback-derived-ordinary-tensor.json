@@ -1,0 +1,326 @@
+{
+ "id": "lem-sfb-ringed-pullback-derived-ordinary-tensor",
+ "kind": "statement",
+ "title": "Pullback compatibility of the derived-to-ordinary tensor comparison",
+ "statement": "Let $f:(\\operatorname{Sh}(\\mathcal C),R)\\to(\\operatorname{Sh}(\\mathcal D),S)$ be a morphism of ringed topoi with commutative ring sheaves on sites small in a common coefficient universe [def-weil-size-convention, def-weil-pbc-ringed-topos-morphism]. Use module sheaves and their unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Write $[A]$ for localization of a complex, $T(A,B)=\\operatorname{Tot}(A\\otimes B)$ for the signed direct-sum total [def-pc-tensor-complex-sheaves], and $\\rho_{A,B}:[A]\\otimes^{\\mathbf L}[B]\\to[T(A,B)]$ for the canonical map obtained by tensoring K-flat resolution augmentations [lem-weil-pbc-site-derived-tensor-descent, lem-sfb-ringed-derived-tensor-augmentation-naturality]. Let $\\alpha_A:Lf^*[A]\\to[f^*A]$ be the canonical left-derived comparison [lem-weil-pbc-ringed-topoi-derived-pullback], and let $\\mu_{[A],[B]}:Lf^*([A]\\otimes_S^{\\mathbf L}[B])\\xrightarrow{\\sim}Lf^*[A]\\otimes_R^{\\mathbf L}Lf^*[B]$ be the canonical pullback tensor isomorphism $\\mu$ of [lem-weil-pbc-ringed-projection-mate-exact] (the one used by the relative cup product), i.e. the canonical derived tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] computed on K-flat resolutions with flat terms by the representative normalization of [lem-weil-pbc-pullback-tensor-canonical-shift-unit]. Write $\\delta_{A,B}:f^*T(A,B)\\xrightarrow{\\sim}T(f^*A,f^*B)$ for the totalization of the ordinary tensor comparison normalized by $r\\otimes(a\\otimes b)\\mapsto(r\\otimes a)\\otimes(1\\otimes b)$ after the inverse-image tensor identification [def-weil-pbc-canonical-ringed-tensor-comparison, lem-weil-pbc-canonical-ringed-tensor-comparison-construction]. For arbitrary unbounded complexes $A,B$ of $S$-modules, the following equality holds in $D(R)$:\n$$[\\delta_{A,B}]\\circ\\alpha_{T(A,B)}\\circ Lf^*(\\rho_{A,B})=\\rho_{f^*A,f^*B}\\circ(\\alpha_A\\otimes^{\\mathbf L}\\alpha_B)\\circ\\mu_{[A],[B]}.$$\nThere is no flatness hypothesis on the structural ring map or on $A,B$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPH, label lemma-tensor-pull-compatibility, entire diagram."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sfb-ringed-derived-tensor-augmentation-naturality",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+ ],
+ "proof": [
+  {
+   "text": "Choose quasi-isomorphisms $p:P\\to A$, $q:Q\\to B$ with $P,Q$ K-flat and termwise flat. The resolution theorem applies on the two given small ringed sites, without a bound on the complexes. Put $C=T(P,Q)$ and $c=T(p,q):C\\to T(A,B)$. The total-tensor model theorem makes $C$ K-flat with flat terms. Pullback preserves these properties for $P,Q$. Consequently the derived pullback comparisons $\\alpha_P,\\alpha_Q,\\alpha_C$ are invertible. Neither $c$ nor its ordinary pullback is asserted to be a quasi-isomorphism.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPH, label lemma-tensor-pull-compatibility, proof: the resolution diagram."
+   }
+  },
+  {
+   "text": "Write $s=[p]\\otimes^{\\mathbf L}[q]$ and $e=\\rho_{P,Q}\\circ s^{-1}:[A]\\otimes^{\\mathbf L}[B]\\xrightarrow{\\sim}[C]$. The tensor augmentation theorem gives $\\rho_{A,B}=[c]\\circ e$. Set $\\theta=\\alpha_C\\circ Lf^*(e)$; this is an isomorphism onto $[f^*C]$. Naturality of the left-derived comparison, applied to the actual cochain map $c$, gives\n$$\\alpha_{T(A,B)}Lf^*(\\rho_{A,B})=[f^*c]\\theta.$$\nThis uses naturality before any cancellation; it does not require invertibility of $\\alpha_{T(A,B)}$.",
+   "uses": [
+    "lem-sfb-ringed-derived-tensor-augmentation-naturality",
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPH, label lemma-tensor-pull-compatibility, proof: the resolution diagram."
+   }
+  },
+  {
+   "text": "By the representative normalization of the canonical pullback tensor isomorphism [lem-weil-pbc-pullback-tensor-canonical-shift-unit], at the K-flat flat-term pair $P,Q$ with $C=T(P,Q)$ one has $\\mu_{[P],[Q]}=(\\alpha_P^{-1}\\otimes^{\\mathbf L}\\alpha_Q^{-1})\\,r_{f^*P,f^*Q}\\,[c_{P,Q}]\\,\\alpha_C\\,Lf^*(r_{P,Q}^{-1})$, where $r$ denotes the representative isomorphisms of the K-flat derived tensor and $c_{P,Q}$ the cochain comparison of [lem-pur-cochain-pullback-tensor-coherence]; $f^*P,f^*Q$ are again K-flat with flat terms by Step 1, so $r_{f^*P,f^*Q}$ is defined. The tensor augmentation theorem gives $\\rho_{P,Q}=r_{P,Q}^{-1}$ and $\\rho_{f^*P,f^*Q}=r_{f^*P,f^*Q}^{-1}$. The cochain maps $c_{P,Q}$ and $\\delta_{P,Q}$ agree: on each bidegree summand both are the ordinary module tensor comparison $r\\otimes(x\\otimes y)\\mapsto(r\\otimes x)\\otimes(1\\otimes y)$ on local pure tensors [def-weil-pbc-canonical-ringed-tensor-comparison], and maps out of a sheafified tensor product are determined by local pure tensors. Substituting and moving the invertible factors gives\n$$\\rho_{f^*P,f^*Q}(\\alpha_P\\otimes^{\\mathbf L}\\alpha_Q)\\mu_{[P],[Q]}=[\\delta_{P,Q}]\\alpha_C Lf^*(\\rho_{P,Q}).$$\nThe $\\mu$ of the projection-mate node is this canonical comparison, the unique natural transformation with these components, as the statement specifies; no independently chosen isomorphism is used.",
+   "uses": [
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-sfb-ringed-derived-tensor-augmentation-naturality",
+    "def-weil-pbc-canonical-ringed-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPH, label lemma-tensor-pull-compatibility, proof: the resolution diagram."
+   }
+  },
+  {
+   "text": "Apply naturality of $\\rho$ to $f^*p,f^*q$ and naturality of $\\alpha$ separately to $p,q$. Combining these equalities with Step 3 and cancelling the isomorphism $Lf^*s$ gives\n$$\\rho_{f^*A,f^*B}(\\alpha_A\\otimes^{\\mathbf L}\\alpha_B)\\mu_{[A],[B]}=[T(f^*p,f^*q)]\\,[\\delta_{P,Q}]\\theta.$$\nExplicitly, before cancellation naturality of $\\mu$ replaces $\\mu_{[A],[B]}Lf^*s$ by $(Lf^*[p]\\otimes^{\\mathbf L}Lf^*[q])\\mu_{[P],[Q]}$; naturality of $\\alpha$ replaces each $\\alpha_A Lf^*[p]$ by $[f^*p]\\alpha_P$; naturality of $\\rho$ then combines the two pulled-back maps into $[T(f^*p,f^*q)]$.",
+   "uses": [
+    "lem-sfb-ringed-derived-tensor-augmentation-naturality",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPH, label lemma-tensor-pull-compatibility, proof: the resolution diagram."
+   }
+  },
+  {
+   "text": "Ordinary tensor naturality gives the cochain equality\n$$\\delta_{A,B}\\,f^*c=T(f^*p,f^*q)\\,\\delta_{P,Q}.$$\nOn a summand of bidegree $(i,j)$ both sides send $r\\otimes(x\\otimes y)$ to $(r\\otimes p(x))\\otimes(1\\otimes q(y))$. The ordinary comparison is natural on module sheaves, and its totalization is the cochain comparison of [lem-pur-cochain-pullback-tensor-coherence], natural in both complex arguments, so these equalities pass to each direct-sum summand; the signed total differential agrees since the maps preserve bidegrees. Localize this equality and compose with $\\theta$. Step 2 identifies its left side with the left side of the required formula, and Step 4 identifies its right side with the right side. This proves the formula for arbitrary $A,B$ and arbitrary structural ring map.",
+   "uses": [
+    "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPH, label lemma-tensor-pull-compatibility, proof: the resolution diagram."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-sfb-ringed-derived-tensor-augmentation-naturality",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPH, label lemma-tensor-pull-compatibility, proof: the resolution diagram."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*(comparison|compatibility)|comparison.*tensor",
+   "results": "{\"t\": \"2026-10-23T22:32:48Z\", \"tool\": \"grep\", \"query\": \"tensor.*(comparison|compatibility)|comparison.*tensor\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary module pullback composition, monoidal localization with invertible lifting comparisons, or unrelated algebraic tensor inverses; none is the derived-to-ordinary pullback/tensor compatibility for arbitrary complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"tensor\"",
+   "results": "{\"t\": \"2026-10-23T22:32:49Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary module pullback composition, monoidal localization with invertible lifting comparisons, or unrelated algebraic tensor inverses; none is the derived-to-ordinary pullback/tensor compatibility for arbitrary complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor comparison for a left derived monoidal functor commutes with its localization augmentation on arbitrary cochain complexes",
+   "results": "{\"t\": \"2026-10-23T22:32:49Z\", \"tool\": \"leansearch\", \"query\": \"The tensor comparison for a left derived monoidal functor commutes with its localization augmentation on arbitrary cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"CategoryTheory.Functor.Monoidal.commTensorLeft_hom_app\", \"CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_μIso_hom\", \"CategoryTheory.Localization.Monoidal.tensor_comp\", \"CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Functor.Monoidal.commTensorLeft\", \"CategoryTheory.Functor.IsLeftDerivedFunctor\", \"CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal\"], \"digest\": \"56cce546c090170c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary module pullback composition, monoidal localization with invertible lifting comparisons, or unrelated algebraic tensor inverses; none is the derived-to-ordinary pullback/tensor compatibility for arbitrary complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of derived pullback with the derived to ordinary tensor comparison for complexes on a ringed topos",
+   "results": "{\"t\": \"2026-10-23T22:32:50Z\", \"tool\": \"leanfinder\", \"query\": \"Compatibility of derived pullback with the derived to ordinary tensor comparison for complexes on a ringed topos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"PresheafOfModules.pullbackComp\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.freeFunctorCompPullbackIso\"], \"digest\": \"c898489d58f57585\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary module pullback composition, monoidal localization with invertible lifting comparisons, or unrelated algebraic tensor inverses; none is the derived-to-ordinary pullback/tensor compatibility for arbitrary complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "derived|tensor",
+   "results": "{\"t\": \"2026-10-23T22:33:13Z\", \"tool\": \"grep\", \"query\": \"derived|tensor\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary module pullback composition, monoidal localization with invertible lifting comparisons, or unrelated algebraic tensor inverses; none is the derived-to-ordinary pullback/tensor compatibility for arbitrary complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from derived tensor to ordinary tensor commutes with derived inverse image and the ordinary inverse image tensor isomorphism",
+   "results": "{\"t\": \"2026-10-23T22:33:16Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical map from derived tensor to ordinary tensor commutes with derived inverse image and the ordinary inverse image tensor isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv\", \"Module.Invertible.rTensorInv\", \"rTensor.inverse_comp_rTensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\", \"rTensor.inverse_apply\", \"KaehlerDifferential.tensorKaehlerEquiv_left_inv\", \"rTensor.inverse_of_rightInverse_apply\", \"rTensor.inverse_of_rightInverse_comp_rTensor\"], \"digest\": \"f295471a453d0d40\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary module pullback composition, monoidal localization with invertible lifting comparisons, or unrelated algebraic tensor inverses; none is the derived-to-ordinary pullback/tensor compatibility for arbitrary complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor, \"tensor\"",
+   "results": "{\"t\": \"2026-10-23T22:35:31Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsLeftDerivedFunctor, \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary module pullback composition, monoidal localization with invertible lifting comparisons, or unrelated algebraic tensor inverses; none is the derived-to-ordinary pullback/tensor compatibility for arbitrary complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*(comparison|compatibility)|comparison.*tensor",
+   "results": "{\"t\": \"2026-10-23T23:29:32Z\", \"tool\": \"grep\", \"query\": \"tensor.*(comparison|compatibility)|comparison.*tensor\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary pullback composition, tensor complexes, projective Tor, Cartesian product comparisons and strong monoidal localization do not give the canonical unbounded module-sheaf derived-to-ordinary tensor comparison. Strong monoidal localization assumes tensor preserves all inverted maps, which fails for arbitrary non-flat complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"tensor\"",
+   "results": "{\"t\": \"2026-10-23T23:29:32Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary pullback composition, tensor complexes, projective Tor, Cartesian product comparisons and strong monoidal localization do not give the canonical unbounded module-sheaf derived-to-ordinary tensor comparison. Strong monoidal localization assumes tensor preserves all inverted maps, which fails for arbitrary non-flat complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor comparison for a left derived monoidal functor commutes with its localization augmentation on arbitrary cochain complexes",
+   "results": "{\"t\": \"2026-10-23T23:29:32Z\", \"tool\": \"leansearch\", \"query\": \"The tensor comparison for a left derived monoidal functor commutes with its localization augmentation on arbitrary cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"CategoryTheory.Functor.Monoidal.commTensorLeft_hom_app\", \"CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_μIso_hom\", \"CategoryTheory.Localization.Monoidal.tensor_comp\", \"CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Functor.Monoidal.commTensorLeft\", \"CategoryTheory.Functor.IsLeftDerivedFunctor\", \"CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal\"], \"digest\": \"56cce546c090170c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary pullback composition, tensor complexes, projective Tor, Cartesian product comparisons and strong monoidal localization do not give the canonical unbounded module-sheaf derived-to-ordinary tensor comparison. Strong monoidal localization assumes tensor preserves all inverted maps, which fails for arbitrary non-flat complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of derived pullback with the derived to ordinary tensor comparison for complexes on a ringed topos",
+   "results": "{\"t\": \"2026-10-23T23:29:33Z\", \"tool\": \"leanfinder\", \"query\": \"Compatibility of derived pullback with the derived to ordinary tensor comparison for complexes on a ringed topos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"PresheafOfModules.pullbackComp\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.freeFunctorCompPullbackIso\"], \"digest\": \"c898489d58f57585\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary pullback composition, tensor complexes, projective Tor, Cartesian product comparisons and strong monoidal localization do not give the canonical unbounded module-sheaf derived-to-ordinary tensor comparison. Strong monoidal localization assumes tensor preserves all inverted maps, which fails for arbitrary non-flat complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from derived tensor to ordinary tensor commutes with derived inverse image and the ordinary inverse image tensor isomorphism",
+   "results": "{\"t\": \"2026-10-23T23:30:17Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical map from derived tensor to ordinary tensor commutes with derived inverse image and the ordinary inverse image tensor isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv\", \"Module.Invertible.rTensorInv\", \"rTensor.inverse_comp_rTensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\", \"rTensor.inverse_apply\", \"KaehlerDifferential.tensorKaehlerEquiv_left_inv\", \"rTensor.inverse_of_rightInverse_apply\", \"rTensor.inverse_of_rightInverse_comp_rTensor\"], \"digest\": \"f295471a453d0d40\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary pullback composition, tensor complexes, projective Tor, Cartesian product comparisons and strong monoidal localization do not give the canonical unbounded module-sheaf derived-to-ordinary tensor comparison. Strong monoidal localization assumes tensor preserves all inverted maps, which fails for arbitrary non-flat complexes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-derived-naive-cup-comparison",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: the relative exterior coherent-cohomology theorem, before the reduced-coproduct calculation; not a Picard infinitesimal-lifting assertion. Reviewer-added input for lem-sfb-abelian-coherent-exterior-base-change steps 6-8: identification of the relative cup product on higher direct images with the global cup product over affine opens, and its compatibility with base change. Supporting input for this split: Tensor compatibility of the hypercohomology-to-sheaf-cohomology edge. Prerequisite for tensor compatibility: the derived-to-naive cup comparison of Stacks 0FPK. Supporting input in Tag 0FPK, final diagram, top polygon: compatibility of derived pullback with the derived-to-ordinary tensor arrow (Tag 0FPH).",
+   "via": [
+    "lem-sfb-ringed-derived-naive-cup-comparison",
+    "lem-sfb-ringed-hypercohomology-edge-tensor",
+    "lem-sfb-space-affine-relative-cup-sections",
+    "lem-sfb-abelian-coherent-exterior-base-change",
+    "lem-sfb-abelian-h2-reduced-coproduct-injective",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-pullback-derived-ordinary-tensor",
+  "worker": "stage1",
+  "summary": "Realized Stacks 0FPH by the two resolution naturality squares. Reused site-level flat-term K-flat tensor and pullback computations, and extracted only the missing natural tensor-augmentation interface. The conclusion and hypotheses are unchanged; no flatness of the ring map or original complexes is used.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: the relative exterior coherent-cohomology theorem, before the reduced-coproduct calculation; not a Picard infinitesimal-lifting assertion. Reviewer-added input for lem-sfb-abelian-coherent-exterior-base-change steps 6-8: identification of the relative cup product on higher direct images with the global cup product over affine opens, and its compatibility with base change. Supporting input for this split: Tensor compatibility of the hypercohomology-to-sheaf-cohomology edge. Prerequisite for tensor compatibility: the derived-to-naive cup comparison of Stacks 0FPK. Supporting input in Tag 0FPK, final diagram, top polygon: compatibility of derived pullback with the derived-to-ordinary tensor arrow (Tag 0FPH). The five steps realize the Stacks 0FPH input to the top polygon of the derived-to-naive cup comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site resolution, tensor, or pullback interface used in the Stacks 0FPH diagram; this unit supplies no replacement for this general homological-algebra tool."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic ringed-site resolution, tensor, or pullback interface used in the Stacks 0FPH diagram; this unit supplies no replacement for this general homological-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic ringed-site resolution, tensor, or pullback interface used in the Stacks 0FPH diagram; this unit supplies no replacement for this general homological-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic ringed-site resolution, tensor, or pullback interface used in the Stacks 0FPH diagram; this unit supplies no replacement for this general homological-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed-site resolution, tensor, or pullback interface used in the Stacks 0FPH diagram; this unit supplies no replacement for this general homological-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic ringed-site resolution, tensor, or pullback interface used in the Stacks 0FPH diagram; this unit supplies no replacement for this general homological-algebra tool."
+   },
+   {
+    "node": "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "why": "Generic ringed-site resolution, tensor, or pullback interface used in the Stacks 0FPH diagram; this unit supplies no replacement for this general homological-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "why": "Representative normalization of the canonical Tag 07A4 pullback tensor isomorphism on flat-term K-flat pairs (the defining computation of mu used in Step 3); generic ringed-topos tool, no node of this unit states it."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Cochain-level pullback tensor comparison on arbitrary complexes, natural in both arguments; generic ringed-topos tool used in Steps 3 and 5."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-pur-cochain-pullback-tensor-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-be8c0118c",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-be8c0118c (reviewer sub-agent of L); spot-checked: The item states Stacks 0FPH (sites-cohomology lemma-tensor-pull-compatibility) exactly: the left edge is μ then α⊗α then ρ, the right edge is Lf*ρ then α_Tot then δ, with no flatness or boundedness hypothesis. The proof follows the 0FPH resolution diagram, and 07A4 was read for how μ is built. Step 1 is right: resolutions on any site, total-tensor K-flatness, K-flat preservation without flatness of c, and ε_P invertible; c is never claimed to be a quasi-isomorphism. Step 2's factorization ρ_{A,B}=[c]e and naturality of ε for the arbitrary chain map c are correct. I checked Step 4's algebra (naturality of μ, then α, then ρ for the non-quasi-isomorphisms f*p,f*q, then cancelling Lf*s), and Step 5 (bidegree-preserving, no sign) is correct. Fault fixed (C3/C4): Step 3's formula for μ on K-flat pairs was not in any cited statement, and its closing claim that naturality shows the two μ agree proved nothing. lem-weil-pbc-pullback-tensor-canonical-shift-unit states exactly that μ_{QP,QQ}=(e⁻¹⊗e⁻¹)r_{f*P,f*Q}Q(c_{P,Q})e_V L(r⁻¹), with c from lem-pur-cochain-pullback-tensor-coherence. FIX: Step 3 now cites both and writes the substitution (ρ=r⁻¹ on both pairs; c=δ by the same local pure-tensor formula). The statement's μ phrase cites the same node (stmt_deps +1, no change to the mathematics), Step 5 cites the cochain-coherence node for naturality of δ, proof_deps is recomputed and both nodes are added to tool_uses; no cycle. The 7 tool_uses recorded by the delivery are accepted. New node augmentation-naturality: statement-only, self-contained and true (resolution independence via a homotopy fibre-product refinement). Tested on zero and identity cases, K-flat inputs and Z on a point with Z/2[0] (Tor killed, so not an isomorphism, and the node does not claim one). It is not a restatement of the item. The closest existing node, lem-sf-ringed-derived-native-tensor, gives the lax tensorator for the native Mathlib tensor rather than the selected descent tensor, so it is not a duplicate but is the natural route for splitting the new node later. No SGA. Details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedPullbackDerivedOrdinaryTensor",
+  "declaration": "SheafOfModules.ringedPullback_derived_ordinary_tensor",
+  "file": "lean/Sheaf/Algebra/Homology/RingedPullbackDerivedOrdinaryTensor.lean",
+  "statement": "theorem ringedPullback_derived_ordinary_tensor {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C] {D : Type uD} [Category.{vD} D] [EssentiallySmall.{r} D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} {R : Sheaf J CommRingCat.{r}} {S : Sheaf K CommRingCat.{r}} [HasDerivedCategory.{wR} (Modules R)] [HasDerivedCategory.{wS} (Modules S)] (f : RingedPullback.{r, uC, vC, uD, vD} R S) (k : Comparison.{r, uC, vC, uD, vD} (J := J) (K := K) (R := R) (S := S) f) (L : DerivedCategory (Modules R) ⥤ DerivedCategory (Modules S)) (epsilon : DerivedCategory.Q ⋙ L ⟶ pull (J := J) (K := K) (R := R) (S := S) f ⋙ DerivedCategory.Q) (hL : L.IsLeftDerivedFunctor epsilon (HomologicalComplex.quasiIso (Modules R) (.up ℤ))) (mu : PullbackTensorCanonical.Phi (R := R) L ≅ PullbackTensorCanonical.Psi (S := S) L) (hmu : PullbackTensorCanonical.IsNormalized (J := J) (K := K) (R := R) (S := S) f k L epsilon mu.hom) (A B : CochainComplex (Modules R) ℤ) : L.map ((ringedTensorAugmentation R).app (A, B)) ≫ epsilon.app (((totalTensor R).obj A).obj B) ≫ DerivedCategory.Q.map (comparison (J := J) (K := K) (R := R) (S := S) f k A B).hom = mu.hom.app (DerivedCategory.Q.obj A, DerivedCategory.Q.obj B) ≫ (Functor.uncurry.obj (derivedTensor S)).map (Prod.mkHom (epsilon.app A) (epsilon.app B)) ≫ (ringedTensorAugmentation S).app ((pull (J := J) (K := K) (R := R) (S := S) f).obj A, (pull (J := J) (K := K) (R := R) (S := S) f).obj B)",
+  "branch": "sheaf-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the published independent-universe RingedPullback/Comparison presentation and the canonical IsNormalized predicate from the recorded shift-unit dependency. L with its universal counit presents derived pullback, and mu is quantified together with its existing unique representative characterization, not an arbitrary isomorphism. The augmentation is the already selected ringedTensorAugmentation of the recorded naturality dependency. No definitions, mathematical hypotheses, or natural-language node fields are changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a964ab4db",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Item lem-sfb-ringed-pullback-derived-ordinary-tensor (Stacks 0FPH) rendered correctly: L.map ρ ≫ ε_T ≫ Q(δ) = μ ≫ (ε_A⊗^Lε_B) ≫ ρ_{f*A,f*B}, the six arrows in source order; arbitrary unbounded A,B; no flatness. μ pinned by IsNormalized, which is unique by pullback_tensor_canonical_shift_unit for every hL. ρ = existing ∃!-selected ringedTensorAugmentation. δ = comparison f k (insertion-of-one/pure-tensor-normalized totalIso.symm). f = RingedPullback (general presentation); L quantified over all IsLeftDerivedFunctor (L,ε). Universes uC vC uD vD r wR wS independent and bound. Only the item's lean record changed (JSON diff vs side-live; 13 dep nodes byte-identical); statement verbatim; docstrings with source, blueprint and 5-step proof; one sorry; no duplicate landed. Advisories: owner def nodes def-pur-cochain-tensor-coherence-data, def-pur-derived-tensor-pullback-normalization and def-sf-ringed-kflat-tensor-representative-data not in stmt_deps (reached via base theorem stmt_dep shift-unit, not added by this delivery; maintainer may add); some public imports used only for record cross-reference. No compile run (no file changed)."
+ }
+}

@@ -192,16 +192,14 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-3576d5033 (reviewer sub-agent of L); spot-checked: I read the item, all 4 steps and every cited statement in full, and checked the source in ILO XVII (pdftotext, printed pp. 281-282): Prop 4.2.1, Cor 4.2.3 (regular f between Noetherian Z[1/n]-schemes, closed i, every K in D+, evident map f'*i^!K -> i'^!f*K is an iso) and Lemma 4.3.1.1 (localize at X_(x), then take the fibre i^!). The item's hypotheses match 4.2.3 one for one, with no excellence or finite-type hypothesis. The statement is byte-identical to the live base, and the item cites no SGA. Step 1: lem-per-regular-supported-base-change (same unit, unsplit, created by Q30 the same day, Z/l^n with n>=1, no proof_deps, so no cycle) specializes at n=1 to the main iso and all its clauses; Z/l = F_l. Step 2: the cited 'commutes with closed counits' clause is the counit equation; with L1=i_*, R1=i^!, L2=i_P*, R2=i_P^!, G=q*, H=r* the mate goes q*i^! -> i_P^!r*, the right direction (def-weil-pbc-adjunction-mate). Step 3: regular compositions come from the cited composition clause; for closed k, i I worked out by hand that the mate-pasting clause 2 gives k_P^!(B_{r,i}) o B_{q,k}, which matches the step; q is regular as a base change of r; (ik)^! = k^!i^! by lem-cat-right-adjoint-composition. Step 4: localize first, then take the closed-point i^!, as in 4.3.1.1. Edge cases checked: Z empty, i=id, r=id, M=0, a point not closed in X, negative shifts. All citations are same-unit or Mathlib leaves, so no tool_uses. No blueprint duplicate found in a whole-DAG search. The stmt_deps change is justified: removed def-per-potential-dualizing (excellent-only, unused) and added the Tate-twist and mate definition nodes. Advisories: (a) the orientation of alpha needs the inverse of the closed-pushforward base-change iso, a stalkwise fact presupposed by both the item and the cited statement; (b) 'point costalk' is now described only in words (supported restriction after localization at points). Maintainer note: the item is the n=1 case of the same-day general node; consider merging, or pointing the item's citers (lem-per-regular-potential-pullback, lem-per-regular-pinnings-low-base-codimension) at the general node. No files changed."
  },
- "lean": {
+ "lean": null,
+ "lean_removed": {
+  "commit": "e7ce5f35a7d",
+  "path": "lean/Sheaf/AlgebraicGeometry/RegularClosedSupportBaseChange.lean",
   "module": "Sheaf.AlgebraicGeometry.RegularClosedSupportBaseChange",
   "declaration": "AlgebraicGeometry.Etale.regular_closedSupport_baseChange",
-  "file": "lean/Sheaf/AlgebraicGeometry/RegularClosedSupportBaseChange.lean",
-  "statement": "theorem regular_closedSupport_baseChange {Z' Z P X : Scheme.{u}} {q : Z' ⟶ Z} {i' : Z' ⟶ P} {i : Z ⟶ X} {r : P ⟶ X} [IsNoetherian X] [IsNoetherian P] [IsClosedImmersion i] [IsClosedImmersion i'] [Flat r] (hreg : ∀ (x : X) (k : Type u) [Field k] [Algebra (X.residueField x) k] [Module.Finite (X.residueField x) k], IsRegularScheme (pullback (r.fiberToSpecResidueField x) (Spec.map (CommRingCat.ofHom (algebraMap (X.residueField x) k))))) (hX : ∀ x : X, IsUnit (ell : X.presheaf.stalk x)) (hP : ∀ p : P, IsUnit (ell : P.presheaf.stalk p)) (sq : IsPullback q i' i r) : IsIso (derivedBaseChangeMapPlus (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell))) sq.toCommSq) ∧ IsIso (closedSupportBaseChangePlus (ULift.{u + 1} (ZMod ell)) sq.toCommSq) ∧ NatTrans.CommShift (closedSupportBaseChangePlus (ULift.{u + 1} (ZMod ell)) sq.toCommSq) ℤ ∧ ∀ M : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell)))), (derivedBaseChangeMapPlus (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell))) sq.toCommSq).app ((closedSupportPlus (ULift.{u + 1} (ZMod ell)) i).obj M) ≫ (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell))) i').rightDerivedFunctorPlus.map ((closedSupportBaseChangePlus (ULift.{u + 1} (ZMod ell)) sq.toCommSq).app M) ≫ (closedSupportPlusAdjunction (ULift.{u + 1} (ZMod ell)) i').counit.app ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell))) r).mapDerivedCategoryPlus.obj M) = (upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell))) r).mapDerivedCategoryPlus.map ((closedSupportPlusAdjunction (ULift.{u + 1} (ZMod ell)) i).counit.app M)",
-  "branch": "newtargets-dag",
-  "by": "NL",
-  "date": "2026-10-19",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.RegularClosedSupportBaseChange deleted (dead: no target reaches it); this node is not reached either."
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement",
+  "former_note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.RegularClosedSupportBaseChange deleted (dead: no target reaches it); this node is not reached either."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -211,5 +209,16 @@
   "result": "pass",
   "note": "Node clauses all rendered: Noetherian X,P; Flat r + hreg over every finite field ext of κ(x); ℓ invertible on X,P; closed i; IsPullback square (extra IsClosedImmersion i' follows from sq). Main theorem: IsIso of closed base change, IsIso of closedSupportBaseChangePlus (mate of inverse closed exchange), CommShift ℤ, counit equation = node's mate normalization. Tate twists via canonical supportTensorMatePlus + closedSupport_baseChange_tensor + finiteEtaleTateTwist isIso, with negative twists via tensor inverses; pasting via closedSupport_baseChange_comp/closed_comp with canonical closedSupportCompPlus, covering open/local/costalk clauses. No hollow defs; all theorems sorry; no H4 duplicates; stmt_deps unchanged; docstrings ok; no line over 100. nt_compile --json clean in 3.8 s, control copy errors as expected. Advisories: closedSupportPlus/closedSupportBaseChangePlus/derivedBaseChangeMapPlus owners not in stmt_deps (theorem-owned plain defs need an existing:true def node, maintainer note); lean.declarations absent; garbled report sentence; future Z/ℓ^n node should reuse these helpers."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

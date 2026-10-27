@@ -1,0 +1,199 @@
+{
+ "id": "lem-a1-ring-inverse-image-underlying-sets",
+ "kind": "statement",
+ "title": "Underlying sets of ring-valued inverse image, with its unit",
+ "statement": "Let $h:T\\to Z$ be a continuous map of topological spaces and $G$ a sheaf of commutative rings on $Z$. Write $|G|$ for its underlying sheaf of sets. Use the presheaf inverse images $h_p^{\\mathrm{ring}},h_p^{\\mathrm{set}}$, their sheafifications $h_{\\mathrm{ring}}^{-1},h_{\\mathrm{set}}^{-1}$, and adjunction units from [def-weil-pbc-topological-inverse-image]. For each open $W\\subseteq T$ there is a canonical bijection $$\\beta_W:\\varinjlim_{B\\supseteq h(W)}|G(B)|\\xrightarrow{\\sim}\\left|\\varinjlim_{B\\supseteq h(W)}G(B)\\right|,$$ where $B$ ranges over the set of open neighbourhoods of $h(W)$ ordered by reverse inclusion and the right colimit is in commutative rings [def-weil-pbc-category-colimit]. It sends each section representative to the same representative in the ring colimit, is compatible with restrictions in $W$, and is natural in $G$. Sheafifying these maps induces a canonical isomorphism of sheaves of sets $$\\alpha_{h,G}:h_{\\mathrm{set}}^{-1}|G|\\xrightarrow{\\sim}|h_{\\mathrm{ring}}^{-1}G|,$$ natural in $G$, such that for every open $B\\subseteq Z$ and $s\\in G(B)$, $$\\alpha_{h,G,h^{-1}B}(\\eta^{h,\\mathrm{set}}_{|G|,B}(s))=\\eta^{h,\\mathrm{ring}}_{G,B}(s).$$ No compactness, separation, nonemptiness or surjectivity assumption on $h,T,Z$ is required.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008F (lemma-pullback-presheaves), inverse image as neighbourhood colimit and sheafification; Tag 0087 (lemma-sheafify-presheaf-structures), underlying sets and unit; Categories Tag 04AX (section-directed-colimits)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "For each open W, the costructured-arrow category indexing the presheaf inverse image is filtered: use structuredArrowOpEquivalence for Opens.map h and the existing cofiltered structured-arrow instance (finite intersections and the whole space). The forgetful functor from commutative rings preserves these filtered colimits, as in the Mathlib match of lem-pc-filtered-colimit-commrings-elementwise. Therefore it preserves the pointwise left Kan extensions defining the inverse image. Define beta by whiskering the inverse of Functor.lanCompIsoOfPreserves with the sheaf-to-presheaf inclusion. This is already a natural presheaf isomorphism.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image",
+    "def-weil-pbc-category-colimit",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of beta with respect to the restriction W <= h^(-1)B moves beta before that restriction. Apply leftKanExtensionCompIsoOfPreserves_inv_fac_app at B to identify the composite of the set unit and beta with the underlying ring unit. Applying the ring restriction proves exactly the representative equation for every W, B, i, and s.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The general-site underlying-set sheafification comparison supplies preservation of sheafification by forgetting commutative rings. Apply the already proved canonical sheaf-pullback forgetful comparison to Opens.map h, and define alpha as its inverse. This construction is a natural isomorphism; it is set sheafification of beta followed by the canonical underlying-set sheafification comparison.",
+   "uses": [
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-sheaf-pullback-forget-comparison",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand alpha into sheafifyMap(beta) followed by sheafifyComposeIso. Naturality of toSheafify moves beta to the left, and sheafComposeIso_hom_fac identifies the remaining composite with the forgotten ring sheafification unit. This proves the required sheafification equation.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The unit equation for the canonical forgetful comparison sends the ring sheaf unit to the set sheaf unit. Apply alpha to this equation sectionwise at h^(-1)B and cancel the inverse comparison using its inverse-hom identity. The result is the required unit equation in the stated direction. All instances and equations apply to empty spaces and empty opens without extra assumptions.",
+   "uses": [
+    "lem-weil-pbc-sheaf-pullback-forget-comparison",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-pbc-category-colimit",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-sheaf-pullback-forget-comparison",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 008F, 0087 and Section 008P; canonical Mathlib left-Kan-extension and sheafification comparisons implement the same colimit and unit argument, using the proved general-site comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(pullback|inverseImage).*([Ff]orget|[Uu]nderlying)|([Ff]orget|[Uu]nderlying).*(pullback|inverseImage)",
+   "results": "3 hits: Mathlib/Topology/Sheaves/Functors.lean, Mathlib/Topology/Sheaves/Functors.lean, Mathlib/Topology/Sheaves/Functors.lean; source subdirectory Topology/Sheaves. The returned pullbackIso forgets sheaves to presheaves with unchanged coefficients; pushforwardForgetIso concerns direct image. Neither identifies ring and set inverse images with their actual units.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.pullback, CategoryTheory.forget",
+   "results": "5 hits: TopCat.Sheaf.pullback, TopCat.Sheaf.instIsLeftAdjointPullback, TopCat.Sheaf.pullbackPushforwardAdjunction, Topology.IsOpenEmbedding.sheafPullbackIso, TopCat.Sheaf.pullbackIso. The returned pullbackIso forgets sheaves to presheaves with unchanged coefficients; pushforwardForgetIso concerns direct image. Neither identifies ring and set inverse images with their actual units.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The forgetful functor from sheaves of commutative rings to sheaves of sets commutes with pullback and preserves its unit",
+   "results": "8 hits: CategoryTheory.sheafForget, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToTop_preservesPullback_of_left, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToPresheafedSpace_preservesPullback_of_right, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app, AlgebraicGeometry.Scheme.ringCatSheaf, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.sheafedSpace_forgetPreserves_of_left, AlgebraicGeometry.Scheme.Modules.toPresheafOfModules, SheafOfModules.forget. The returned pullbackIso forgets sheaves to presheaves with unchanged coefficients; pushforwardForgetIso concerns direct image. Neither identifies ring and set inverse images with their actual units.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous map of topological spaces inverse image of a sheaf of commutative rings has underlying sheaf of sets canonically isomorphic to the set valued inverse image compatibly with the adjunction unit",
+   "results": "8 hits: SheafOfModules.pullbackIso, TopCat.Sheaf.pullbackPushforwardAdjunction, TopCat.Sheaf.pullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, TopCat.Sheaf.pushforwardForgetIso, SheafOfModules.conjugateEquiv_pullbackComp_inv. The returned pullbackIso forgets sheaves to presheaves with unchanged coefficients; pushforwardForgetIso concerns direct image. Neither identifies ring and set inverse images with their actual units.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of a sheaf of commutative rings has underlying set sheaf equal to the inverse image of its underlying sheaf of sets and the comparison preserves adjunction units",
+   "results": "8 hits: SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.fullyFaithfulForget_preimage_val, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, AlgebraicGeometry.StructureSheaf.comap_id'; no declaration returned states all presheaf-colimit, sheaf-comparison and unit clauses. pullbackIso forgets sheaves to presheaves without changing coefficients; module pullbacks and scheme structure sheaves are different statements.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous map, inverse image of a sheaf of commutative rings commutes with forgetting to sets, including the presheaf colimit comparison and adjunction unit",
+   "results": "8 hits: TopCat.Sheaf.pushforwardForgetIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, TopCat.Sheaf.pullbackPushforwardAdjunction, TopCat.Sheaf.pushforward_forget, SheafOfModules.pullbackIso, TopCat.Sheaf.pullbackIso, AlgebraicGeometry.structurePresheafCompForget, AlgebraicGeometry.Scheme.restrictFunctorΓ; no declaration returned states all presheaf-colimit, sheaf-comparison and unit clauses. pullbackIso forgets sheaves to presheaves without changing coefficients; module pullbacks and scheme structure sheaves are different statements.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftKanExtensionCompIsoOfPreserves|sheafifyComposeIso|sheafComposeIso_hom_fac|sheafPullback.*[Cc]omp|[Cc]omp.*sheafPullback",
+   "results": "14 hits: Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallyInjective.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; source read: KanExtension/Preserves.lean:144,158,169 and Sites/PreservesSheafification.lean:233,239. These supply separate ingredients, not the full topological colimit and sheaf-unit statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A forgetful functor preserving filtered colimits and sheafification commutes with topological sheaf pullback with unit compatibility",
+   "results": "8 hits: CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility, SheafOfModules.sheafificationCompPullback, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility, TopCat.Sheaf.pullbackPushforwardAdjunction, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, CategoryTheory.toPresheafToSheafCompComposeAndSheafify; no declaration returned states all presheaf-colimit, sheaf-comparison and unit clauses. pullbackIso forgets sheaves to presheaves without changing coefficients; module pullbacks and scheme structure sheaves are different statements.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-sections-intersection-structure-colimit",
+  "date": "2026-10-22",
+  "group": "Q58"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67. In the Tag 0APK input, this is the equation-sections-of-intersection identification used to compute the section rings of the invariant intersection. Extracted argument: Underlying sets of ring-valued inverse image, with its unit.",
+   "via": [
+    "lem-a1-sections-intersection-structure-colimit",
+    "lem-a1-intersection-sections-flat-base-change",
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-ring-inverse-image-underlying-sets",
+  "worker": "stage1",
+  "summary": "Constructed the canonical presheaf comparison on representatives using existing elementwise colimit leaves, checked restrictions and naturality, and used the existing general-site underlying-set sheafification leaf to construct the sheaf comparison and verify its actual adjunction-unit equation. No new nodes, no statement change.",
+  "blueprint": "Gabber fpqc descent input to lem-a1-affine-hc0, through the existing sections-of-intersection chain: identifies ring inverse-image sections with set inverse-image sections and their specified restriction units. The current blueprint route is retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-85ff86d65",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-85ff86d65 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and every cited statement in full: def-weil-pbc-topological-inverse-image (2)/(3), def-weil-pbc-category-colimit, the commutative-ring and set elementwise filtered-colimit leaves, the general-site leaf lem-pc-sites-sheafification-underlying-sets, and def-weil-pbc-sheafification. The statement is unchanged and agrees with Stacks sheaves.tex 008F (l.2067), 0087 (1)(2) (l.1780) and 008P (l.2546), and with Categories 04AX. Step 1: the neighbourhood poset is small, nonempty and directed. Step 2: beta comes from the universal property; ring clause (1) gives surjectivity, and ring clause (2) followed by set clause (2) gives injectivity, with no circularity. Step 3: restriction and naturality hold on representatives. Step 4: |theta_Q| is a set sheafification on the open-set site of T, so |theta_Q|beta is one too, and alpha and delta come from uniqueness. Choosing the general-site leaf over the étale-only one is correct. Step 5: I wrote out the naturality chain through the defining equation for f^{-1}u. Step 6: the unit equation follows by substitution. Edge cases checked: W empty (the empty open is the final index and G(empty) is 0), T and Z empty, h not surjective. There are no new nodes. The only citer is lem-a1-sections-intersection-structure-colimit, so there is no cycle. My DAG search found no duplicate. All inputs from other units are Mathlib leaves, so no tool_uses are needed. The route is unchanged and cites no SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.RingInverseImageUnderlyingSets",
+  "declaration": "TopCat.Sheaf.ringInverseImage_underlyingSets",
+  "file": "lean/Sheaf/Topology/RingInverseImageUnderlyingSets.lean",
+  "statement": "theorem ringInverseImage_underlyingSets {T Z : TopCat.{u}} (h : T ⟶ Z) : ∃ β : (sheafToPresheaf (Opens.grothendieckTopology Z) CommRingCat.{u} ⋙ (Functor.whiskeringRight _ _ _).obj (CategoryTheory.forget CommRingCat.{u}) ⋙ TopCat.Presheaf.pullback (Type u) h) ≅ (sheafToPresheaf (Opens.grothendieckTopology Z) CommRingCat.{u} ⋙ TopCat.Presheaf.pullback CommRingCat.{u} h ⋙ (Functor.whiskeringRight _ _ _).obj (CategoryTheory.forget CommRingCat.{u})), ∃ α : (sheafCompose (Opens.grothendieckTopology Z) (CategoryTheory.forget CommRingCat.{u}) ⋙ Functor.sheafPullbackConstruction.sheafPullback (Opens.map h) (Type u) (Opens.grothendieckTopology Z) (Opens.grothendieckTopology T)) ≅ (Functor.sheafPullbackConstruction.sheafPullback (Opens.map h) CommRingCat.{u} (Opens.grothendieckTopology Z) (Opens.grothendieckTopology T) ⋙ sheafCompose (Opens.grothendieckTopology T) (CategoryTheory.forget CommRingCat.{u})), (∀ (G : Z.Sheaf CommRingCat.{u}) (W : Opens T) (B : Opens Z) (i : W ≤ (Opens.map h).obj B) (s : G.obj.obj (op B)), (β.hom.app G).app (op W) (((TopCat.Presheaf.pullback (Type u) h).obj (G.obj ⋙ CategoryTheory.forget CommRingCat.{u})).map (homOfLE i).op (((TopCat.Presheaf.pullbackPushforwardAdjunction (Type u) h).unit.app (G.obj ⋙ CategoryTheory.forget CommRingCat.{u})).app (op B) s)) = ((TopCat.Presheaf.pullback CommRingCat.{u} h).obj G.obj).map (homOfLE i).op (((TopCat.Presheaf.pullbackPushforwardAdjunction CommRingCat.{u} h).unit.app G.obj).app (op B) s)) ∧ (∀ G : Z.Sheaf CommRingCat.{u}, toSheafify (Opens.grothendieckTopology T) ((TopCat.Presheaf.pullback (Type u) h).obj (G.obj ⋙ CategoryTheory.forget CommRingCat.{u})) ≫ (α.hom.app G).hom = β.hom.app G ≫ Functor.whiskerRight (toSheafify (Opens.grothendieckTopology T) ((TopCat.Presheaf.pullback CommRingCat.{u} h).obj G.obj)) (CategoryTheory.forget CommRingCat.{u})) ∧ (∀ (G : Z.Sheaf CommRingCat.{u}) (B : Opens Z) (s : G.obj.obj (op B)), (α.hom.app G).hom.app (op ((Opens.map h).obj B)) (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Opens.map h) (Type u) (Opens.grothendieckTopology Z) (Opens.grothendieckTopology T)).unit.app ((sheafCompose (Opens.grothendieckTopology Z) (CategoryTheory.forget CommRingCat.{u})).obj G)).hom.app (op B) s) = ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Opens.map h) CommRingCat.{u} (Opens.grothendieckTopology Z) (Opens.grothendieckTopology T)).unit.app G).hom.app (op B) s)",
+  "branch": "newtargets-dag",
+  "by": "Q156",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22056bce9",
+  "group": "Q156",
+  "result": "pass",
+  "note": "Read node, both stmt_deps, Mathlib sheafPullbackConstruction/Presheaf.pullback, citer, report, module. Node unchanged except lean; statement verbatim. beta is a natural iso (bijection + restriction + naturality in G) pinned by the representative clause (restriction of the presheaf unit along homOfLE i = coprojection (B,i)). alpha is on sheafPullbackConstruction (explicit sheafification, as the dep mathlib_match prescribes), pinned by toSheafify P ≫ alpha = beta ≫ whiskerRight (toSheafify Q) forget. Unit clause at h⁻¹B uses the actual sheafAdjunctionContinuous units. No extra hypotheses; TopCat.{u}/CommRingCat.{u} matches the dependency convention; W/T/Z empty and nonsurjective h covered. Docstrings have source place, blueprint tag, 6 proof steps; sorry only. Advisory: toSheafify comes from def-weil-pbc-sheafification via the topological-inverse-image dep's θ, not a direct stmt_dep; the citer uses the abstract TopCat.Sheaf.pullback adjunction, so stage 3 needs the sheafPullbackIso transport. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261023T102721-L-2958795",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

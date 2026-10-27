@@ -1,0 +1,116 @@
+{
+ "id": "lem-sfb-continuous-set-proetale-descent",
+ "kind": "statement",
+ "title": "Pro-etale descent for continuous set functions",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $D$ any topological space, with $X$ in universe $u$ and $D$ in universe $u+1$ [def-weil-size-convention]. The presheaf $U\\mapsto C(|U|,D)$ on the small pro-etale site [def-weil-pbc-proetale-site], with restriction by precomposition [def-sfb-continuous-set-presheaf], is a sheaf. No separation, disconnectedness or nonemptiness hypothesis is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-continuous-set-presheaf"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12, first assertion, p. 30; restriction of the fpqc continuous-map sheaf to the small pro-etale site."
+ },
+ "proof": [
+  {
+   "text": "Mathlib proves fpqc descent for the actual continuous-map presheaf by quotient-map descent. The pro-etale topology is contained in the fpqc topology, so this presheaf is a sheaf for the big pro-etale topology. Restrict along the continuous forgetful functor from the small site to schemes; its presheaf is definitionally continuousSetPresheaf. This is the existing continuousSetPresheaf_isSheaf theorem, now proved before the bundled continuousSetSheaf is defined.",
+   "uses": [
+    "lem-sfb-set-continuous-functions-fpqc-sheaf",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-set-continuous-functions-fpqc-sheaf",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12, p. 30; Lean restriction of Mathlib fpqc descent by J1, 2026-10-23."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous maps from objects of the small pro etale site to any topological space form a sheaf",
+   "results": "8 hits, including CategoryTheory.Functor.op_comp_isSheaf, CategoryTheory.Presheaf.IsSheaf, TopCat.Presheaf.toType_isSheaf, TopCat.Sheaf.pushforward_sheaf_of_sheaf.",
+   "date": "2026-10-23",
+   "verdict": "The restriction tool is present. Combine it with the existing fpqc theorem and pro-etale topology comparison; no separate exact small-site theorem found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousMapPresheaf\"",
+   "results": "10 hits, including AlgebraicGeometry.isSheaf_fpqcTopology_continuousMapPresheaf, isSheaf_zariskiTopology_continuousMapPresheaf and continuousMapPresheafEquivOfTotallyDisconnectedSpace.",
+   "date": "2026-10-23",
+   "verdict": "Use the fpqc theorem and restrict; it is already the Mathlib leaf lem-sfb-set-continuous-functions-fpqc-sheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "continuousMapPresheaf|continuousSetRealization",
+   "results": "7 Mathlib hits in AlgebraicGeometry/Sites/ConstantSheaf.lean and ElladicCohomology.lean; ConstantSheaf.lean:68 is the fpqc sheaf theorem. Local project search finds the already-existing continuousSetPresheaf_isSheaf theorem in the assigned module; it was bundled with the downstream realization before extraction.",
+   "date": "2026-10-23",
+   "verdict": "Reuse the existing declaration without adding another Lean theorem. Record this strictly smaller, already-proved descent result as the supporting module node."
+  },
+  {
+   "tool": "grep",
+   "query": "blueprint_refs.py search 'continuous.*(functions|maps).*sheaf'; blueprint_refs.py ancestor lem-sfb-totally-disconnected-coefficient-realization; exact declaration lookup in dag/nodes",
+   "results": "0 blueprint matches; ancestor None. No existing primary attachment to continuousSetPresheaf_isSheaf; the old realization parent had a multi-declaration attachment. Existing descent-components groups this sheaf assertion with discrete and component facts, so cannot be imported to prove sheafness before the sheaf is defined.",
+   "date": "2026-10-23",
+   "verdict": "This node owns the existing prerequisite proof, rather than duplicating its Lean statement or construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TotallyDisconnectedCoefficientRealization",
+  "date": "2026-10-23",
+  "group": "J1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "HRS Example 3.1 continuous-function coefficient description and Bhatt--Scholze Lemma 4.2.12, first assertion; prerequisite sheaf descent in step 1 of lem-sfb-totally-disconnected-coefficient-realization.",
+   "via": [
+    "lem-sfb-totally-disconnected-coefficient-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousSetConstructions",
+  "file": "lean/Sheaf/Paper/ContinuousSetConstructions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousSetPresheaf_isSheaf",
+  "statement": "theorem continuousSetPresheaf_isSheaf (X : Scheme.{u}) (D : Type (u + 1))\n    [TopologicalSpace D] :\n    Presheaf.IsSheaf (Scheme.ProEt.topology X) (continuousSetPresheaf X D)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-3795d",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261023T102928-L-3007894",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-3795d",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261023T102928-L-3007894",
+  "kind": "interface",
+  "note": "independent cc review: item proofs vs node steps and the Kan-evaluation/coherence/descent-components dependency statements; 15 moved declarations vs the base item text (identical apart from 2 sorrys now filled); 3 import-only adaptations vs the import cycle; 8 direct importers compiled against the delivered modules in a sandbox"
+ }
+}

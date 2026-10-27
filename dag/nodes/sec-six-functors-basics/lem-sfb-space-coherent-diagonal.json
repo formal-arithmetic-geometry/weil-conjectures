@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-space-coherent-diagonal",
+ "kind": "statement",
+ "title": "Algebraic-space isomorphism functors for coherent families",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Let $f:X\\to B$ be a finitely presented morphism of algebraic spaces over $S$ [def-trf-algebraic-space, def-sfb-space-morphism-properties]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. For an $S$-scheme $T$, let $\\mathcal C(T)$ be the groupoid of pairs $(b:T\\to B,M)$, where $M$ is a finitely presented quasi-coherent $\\mathcal O_{X\\times_BT}$-module, flat over $T$, with support proper over $T$. Here finite presentation means etale locally a cokernel of a map between finite rank free modules; flatness is stalkwise flatness over base local rings on etale charts [def-pc-scheme-module-flat-over]; proper support means $M\\simeq i_*N$ for a closed immersion $i:Z\\hookrightarrow X\\times_BT$ with $Z\\to T$ proper and $N$ finite type quasi-coherent [def-sfb-space-proper-quot-functor]. Modules and tensor pullback use [def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors]. Arrows over $v:T\\to T_1$ are isomorphisms $v_X^*M_1\\simeq M$ with $b=b_1v$; composition uses canonical pullback composition isomorphisms. For every $S$-scheme $T$ and $x,y\\in\\mathcal C(T)$, the presheaf on $T$-schemes sending $a:T'\\to T$ to $\\operatorname{Isom}_{\\mathcal C(T')}(a^*x,a^*y)$ is represented by an algebraic space over $T$. Equivalently, the diagonal of this fibred groupoid is representable by algebraic spaces [def-sfb-stable-pointed-moduli-groupoids].",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 08W6 (lemma-coherent-diagonal), Situation 08KB (situation-coherent)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-space-coherent-family-groupoid"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x=(b:T\\to B,M)$ and $y=(c:T\\to B,N)$. Form the equality presheaf $E=h_T\\times_{B\\times_SB}B$, using $(b,c)$ and $\\Delta_B$. Since $B$ is an algebraic space, its diagonal is representable by schemes [def-trf-algebraic-space], so $E$ is a scheme over $T$. Its universal property says that a map $a:T\\prime\\to T$ factors through $E$ exactly when $ba=ca$, and that the factorization is unique. The requisite products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Every isomorphism of the two pulled-back objects requires this equality of their maps to $B$, by the definition of arrows in $\\mathcal C$. Thus their isomorphism presheaf has a canonical map to $E$; we will construct its representing space over $E$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08W6 (lemma-coherent-diagonal), equalizer reduction."
+   }
+  },
+  {
+   "text": "Write $e:E\\to T$ and $d=be=ce:E\\to B$. The two pullbacks of the underlying spaces are canonically $X_E=X\\times_BE$, and the pulled-back modules are $M_E,N_E$. By [lem-sfb-space-flat-proper-fp-locality], finite presentation of $f$ survives base change, first to $X\\times_{B,b}T\\to T$ and $X\\times_{B,c}T\\to T$, then to $X_E\\to E$. In particular each of the first two maps is locally of finite type: on a chart a finite presentation of an algebra supplies finitely many algebra generators. Apply [lem-sfb-space-module-base-change-flat-proper-support] to each of these two maps and $e$. It gives that $M_E,N_E$ are quasi-coherent, finitely presented, flat over $E$, and have support proper over $E$. This uses arbitrary base change of modules, not flatness of $e$ or of $f$.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-module-base-change-flat-proper-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08W6 (lemma-coherent-diagonal), pullback to equalizer; spaces-morphisms.tex Tag 03XR (lemma-base-change-finite-presentation), Tag 05VW (lemma-base-change-module-flat); spaces-perfect.tex Tag 0CZJ (lemma-base-change-module-support-proper-over-base)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-module-hom-affine] to $X_E\\to E$ and to the ordered pairs $(M_E,N_E)$, $(N_E,M_E)$, $(M_E,M_E)$, $(N_E,N_E)$. The target module in each pair is finitely presented, flat over $E$, with support proper over $E$, as established above. Obtain representing algebraic spaces $H,H\\prime,A,D$ over $E$ for these four Hom functors, with bijections natural on all schemes over $E$. We only need their algebraic-space representability; their affine and finite-presentation conclusions are stronger than needed here.",
+   "uses": [
+    "lem-sfb-space-module-hom-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08K9 (proposition-isom), first paragraph, using Tag 08K6 (proposition-hom)."
+   }
+  },
+  {
+   "text": "Let $P=H\\times_EH\\prime$ and $Q=A\\times_ED$. On each scheme $U\\to E$, define $k:P\\to Q$ by $(u:M_U\\to N_U,v:N_U\\to M_U)\\mapsto(vu,uv)$. Tensor pullback [def-trf-space-etale-module-functors] is a functor, so it preserves composition and identities; these formulas commute with restriction, hence define a natural transformation. As morphisms of algebraic spaces are precisely natural transformations [def-trf-algebraic-space], this is a morphism of spaces over $E$. The identities define a section $s:E\\to Q$. Form $J=P\\times_{Q,k,s}E$. All three fibre products in this construction are algebraic spaces by [lem-trf-space-fibre-products-etale-covers]. There is no need to prove that $s$ is a closed immersion, since the desired conclusion is only algebraic-space representability.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08K9 (proposition-isom), composition map and fibre-product construction; only representability is retained."
+   }
+  },
+  {
+   "text": "The fibre-product description gives $J(U)=\\{(u,v):vu=\\operatorname{id}_{M_U},\\ uv=\\operatorname{id}_{N_U}\\}$ for every $U\\to E$. Projection to $u$ identifies this with $\\operatorname{Isom}(M_U,N_U)$: its inverse assigns $(u,u^{-1})$, and an inverse is unique since $v=v(uv\\prime)=(vu)v\\prime=v\\prime$. These bijections commute with pullback, which preserves identities and composites. For an arbitrary $a:T\\prime\\to T$, a map $T\\prime\\to J$ over $T$ first chooses its unique factorization through $E$, and then just such an isomorphism. If no factorization exists, both sets are empty. Thus $J\\to E\\to T$ represents the entire isomorphism presheaf in the statement, including when $b\\ne c$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 08K9 (proposition-isom), inverse-pair identification; 08W6 (lemma-coherent-diagonal), equalizer reduction."
+   }
+  },
+  {
+   "text": "Finally unpack the diagonal using the groupoid and 2-fibre-product conventions of [def-sfb-stable-pointed-moduli-groupoids]. Its 2-base change along $(x,y):T\\to\\mathcal C\\times_S\\mathcal C$ has over $a:U\\to T$ objects $(z,\\alpha:z\\xrightarrow{\\sim}a^*x,\\beta:z\\xrightarrow{\\sim}a^*y)$. Send this object to $\\beta\\alpha^{-1}$. Every isomorphism $\\varphi:a^*x\\to a^*y$ occurs using $(a^*x,\\operatorname{id},\\varphi)$; two triples with the same isomorphism have the unique compatible arrow $\\alpha\\prime^{-1}\\alpha$ between them. This is an equivalence to the discrete groupoid of the isomorphism presheaf, natural in $U$. Since that presheaf is represented by $J$, every such 2-base change is an algebraic space. This proves precisely the diagonal formulation as well as its asserted equivalence.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 045G (lemma-representable-diagonal), equivalence of (1) and (2), expanded directly from the definitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-module-base-change-flat-proper-support",
+  "lem-sfb-space-module-hom-affine",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 08W6 (lemma-coherent-diagonal) and 08K9 (proposition-isom), expanding its inverse-pair construction using the existing Hom node; algebraic.tex Tag 045G for the definition-level equivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal of the moduli groupoid of flat finitely presented modules with proper support is representable by algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [Q.IsLocal], Q.diagonal.IsLocal\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then the diagonal property $ Q $ (preserved under pullbacks along open immersions from affine schemes) is also local\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any morphism $ f $ of schemes, the diagonal morphism from $ X $ to the pullback of $ f $ against itself is an immersion. This asserts that the canonical diagonal map associated to a morphism of sc\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q], AlgebraicGeometry.HasAffineProperty P.diagonal Q.diagonal\", \"doc\": \"If a morphism property $P$ has the affine property with respect to another property $Q$ in the category of schemes, then the diagonal morphism property of $P$ also has the affine property with respect\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  AlgebraicGeometry.IsZariskiLocalAtTarget P.diagonal\", \"doc\": \"If a morphism property $P$ on schemes is Zariski local at the target, then the diagonal morphism property $P.diagonal$ (defined via pullbacks) is also Zariski local at the target. This asserts that th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphism sheaf of coherent flat families with proper support on an algebraic space is representable",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.IsRepresentable\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [QuasiCompact f] [Surjective f] [Mono f] : IsIso f\", \"doc\": \"If $ f : X \\to Y $ is a morphism of schemes that is flat, quasi-compact, surjective, and a monomorphism, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"CategoryTheory.RepresentablyFlat.of_iso\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \"[RepresentablyFlat F] {G : C ⥤ D} (α : F ≅ G) : RepresentablyFlat G\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is representably flat and there exists an isomorphism $ \\\\alpha : F \\\\cong G $ between $ F $ and another functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"{M N : X.Modules} {φ : M ⟶ N} : IsIso φ ↔ ∀ U, IsIso (φ.app U)\", \"doc\": \"For any sheaves of modules $M$ and $N$ over a scheme $X$, a homomorphism $\\\\phi : M \\\\to N$ is an isomorphism in the category of sheaves if and only if for every open subset $U \\\\subseteq X$, the induced\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.isoSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \"{P : Cᵒᵖ ⥤ D} (hP : Presheaf.IsSheaf J P) : P ≅ J.sheafify P\", \"doc\": \"For a presheaf $ P $ on a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, if $ P $ satisfies the sheaf condition with respect to $ J $, then there exists an isomorphism between $\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.sheafIsoOfIso_hom\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {X Y : AlgebraicGeometry.PresheafedSpace C} (H : X ≅ Y),\\n  (AlgebraicGeometry.PresheafedSpace.sheafIsoOfIso H).hom = H.hom.c\", \"doc\": \"For any isomorphism $ H $ between presheafed spaces $ X $ and $ Y $ over a category $ \\\\mathcal{C} $, the hom-component of the induced sheaf isomorphism $ \\\\text{sheafIsoOfIso}(H) $ coincides with the p\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.RepresentableBy (glueData hf).glued\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isoOfSheafedSpaceIso\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : LocallyRingedSpace.{u}} (f : X.toSheafedSpace ≅ Y.toSheafedSpace) : X ≅ Y\", \"doc\": \"Given two locally ringed spaces $X$ and $Y$, if there exists an isomorphism between their underlying sheafed spaces over the category of commutative rings, then this constructs an isomorphism between \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Isom\", \"Quasicoherent\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"SheafOfModules.instIsClosedUnderIsomorphismsIsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] : (SheafOfModules.isQuasicoherent R).IsC\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "Cohstack|coherent.*diagonal|Isom.*AlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The isomorphism presheaf between flat finitely presented quasi-coherent sheaves with proper support over a finitely presented algebraic space family is an algebraic space",
+   "results": "OK 8 hits: AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.instDescScheme, AlgebraicGeometry.Flat, SheafOfModules.quasicoherentDataOfIsFinitePresentation, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned names and types; these concern scheme morphisms, categorical relative diagonals, or module isomorphisms, not representability for the algebraic-space coherent-family groupoid"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Isom\", \"Quasicoherent\"",
+   "results": "OK 1 hits: SheafOfModules.instIsClosedUnderIsomorphismsIsQuasicoherent",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned names and types; these concern scheme morphisms, categorical relative diagonals, or module isomorphisms, not representability for the algebraic-space coherent-family groupoid"
+  },
+  {
+   "tool": "grep",
+   "query": "Cohstack|coherent.*diagonal|Isom.*AlgebraicSpace",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned names and types; these concern scheme morphisms, categorical relative diagonals, or module isomorphisms, not representability for the algebraic-space coherent-family groupoid"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of the diagonal of the stack of coherent sheaves flat with proper support",
+   "results": "OK 8 hits: CategoryTheory.Functor.relativelyRepresentable.diag_iff, CategoryTheory.Functor.relativelyRepresentable.of_diag, CategoryTheory.Functor.relativelyRepresentable.diag_of_map_from_obj, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, CategoryTheory.RepresentablyFlat, CategoryTheory.RepresentablyFlat.casesOn, AlgebraicGeometry.HasAffineProperty.diagonal_iff, AlgebraicGeometry.IsImmersion.instDiagonalScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned names and types; these concern scheme morphisms, categorical relative diagonals, or module isomorphisms, not representability for the algebraic-space coherent-family groupoid"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor of invertible module homomorphisms between two coherent families is represented by an algebraic space over the base",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules, AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass, AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.Scheme.Modules.instFullPresheafOfModulesToPresheafOfModules",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned names and types; these concern scheme morphisms, categorical relative diagonals, or module isomorphisms, not representability for the algebraic-space coherent-family groupoid"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphism functor for finitely presented quasi-coherent modules on algebraic spaces with proper support",
+   "results": "OK 8 hits: CategoryTheory.isomorphismClasses, CategoryTheory.Functor.map_isIso, AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf, PresheafOfModules.isoMk, SheafOfModules.freeFunctorCompPullbackIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, CategoryTheory.Abelian.PreservesImage.iso, FGModuleRepr.instIsEquivalenceFGModuleCatEmbed",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned names and types; these concern scheme morphisms, categorical relative diagonals, or module isomorphisms, not representability for the algebraic-space coherent-family groupoid"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicSpace|AlgebraicSpace|[Ii]som.*[Qq]uasicoherent|[Qq]uasicoherent.*[Ii]som",
+   "results": "OK 1 hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned names and types; these concern scheme morphisms, categorical relative diagonals, or module isomorphisms, not representability for the algebraic-space coherent-family groupoid"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-stack-general",
+  "date": "2026-10-23",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tag 08W6 (lemma-coherent-diagonal), Situation 08KB (situation-coherent).",
+   "via": [
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-coherent-diagonal",
+  "worker": "stage1",
+  "group": "Q53",
+  "summary": "Retained the statement and all existing metadata. Reduced unequal base maps to their scheme equality locus; verified module and morphism hypotheses after arbitrary base change; reused the existing module-Hom representability theorem four times; constructed inverse pairs by fibre products and checked the natural representing bijection and diagonal equivalence. No new nodes.",
+  "blueprint": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tag 08W6 (lemma-coherent-diagonal), Situation 08KB (situation-coherent). Current latest blueprint: sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), proper/open direct images and compactification. The item supplies the inherited coherent-moduli prerequisite; it does not change the unit or chapter route. The ancestor command returns None; the inherited null ancestor and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre-product existence constructs the equality-locus products and the inverse-pair space. The unit has no replacement for this foundational space calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-da74edb1a",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-da74edb1a (reviewer sub-agent of L); spot-checked: I read all six steps against Stacks quot.tex 08KB/08W6 (l.879/952), 08K9 (l.821) and algebraic.tex 045G (l.1120). The statement and stmt_deps are byte-identical to the live node, which is still unsplit, so no other group has split it; there is no re-split note and there are no new nodes. Step 1: E = T×_{B×B}B is a scheme because def-trf-algebraic-space makes the diagonal representable, and factorization through E means exactly ba = ca, uniquely. Step 2: fp-locality gives fp under arbitrary base change, and fp implies lft chartwise; the module base-change node needs no flatness of g and gives fp, flatness and proper support for M_E, N_E. Step 3: the 08K6 node's hypotheses (target fp, flat, proper support) hold for all four ordered pairs, and its bijections are natural. Step 4: k(u,v) = (vu, uv) is correctly typed and natural by functoriality of pullback, and J = P×_{Q,k,s}E is algebraic. Step 5: the inverse-pair computation and the empty case are correct. Step 6: the 2-fibre-product computation w = α'^{-1}α checks out against def-sfb-stable-pointed-moduli-groupoids. Verified source error: 08K9 writes c(u',u) = (u∘u', u'∘u) ∈ I×I', but the correct typing is (u'∘u, u∘u'); this is a proof-display fix only. Edge cases checked: E empty, b = c, zero modules, k vs k², nonseparated B. No 08K9 duplicate exists in the DAG, no cited closure contains the item, and there is no SGA. Accepted tool_use: lem-trf-space-fibre-products-etale-covers (foundational, already in the item's stmt_deps). Batch-5: both flagged citations (fp-locality, module-base-change) reach sec-trace-formula only through def-trf-algebraic-space and foundational space-calculus nodes. Their closures add nothing beyond the closure of the item's existing deps, and contain no trace-formula or Poincaré statement or step of their proofs (the only 'trace' nodes are the finite-étale trace). They are genuinely outside the assumptions. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceCoherentDiagonal",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.coherent_diagonal",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceCoherentDiagonal.lean",
+  "statement": "theorem coherent_diagonal {S : Scheme.{u}} {X B : AlgebraicSpace S} (f : X ⟶ B) (hfp : ProperQuotFinitePresentation f) : HasAlgebraicSpaceDiagonal (CoherentModuli.category f)",
+  "branch": "sheaf-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing coherent-family category and the existing HasAlgebraicSpaceDiagonal two-fibre-product criterion; no separatedness or ambient flatness is imposed. Added a definition-only existing binding for the category to avoid a cyclic DAG dependency on the downstream algebraicity theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-04c38f03a",
+  "group": "N9",
+  "result": "fix",
+  "note": "Statement correct against Stacks 08KB/08W6: ProperQuotFinitePresentation (LFP+qc+qs, no separatedness or flatness), CoherentModuli.category keeps b, the module on the sheaf fibre product, fp/qcoh/flat/proper-support fields and the tensor-pullback arrow isos, conclusion HasAlgebraicSpaceDiagonal in the recorded 2-fibre-product convention; statement verbatim, sorry only, source and blueprint docstrings with 6-step proof. FIX on the new node def-sfb-space-coherent-family-groupoid (existing:true binding of CoherentModuli.category): (1) the combined citation [def-sfb-space-proper-quot-functor, def-pc-scheme-module-flat-over] failed check_new_node (b) twice; split into separate citations; (2) added stmt_deps and citations for the owners of moduleTensorPullbackId (def-sfb-space-derived-pullback), moduleTensorComposition (def-sfb-space-module-tensor-composition), schemeRestriction (def-trf-space-module-scheme-restriction) and MapIsProper (def-sfb-space-morphism-properties), all landed before the delivery and acyclic; extended lean.declarations with identity, composition, the law theorems, instCategory and forgetTest. Fixed record passes check_new_node and check_existing. No Lean change, no compile. Maintainer note: the item imports SpaceCoherentStackGeneral, whose theorem has the item in proof_deps (import cycle at stage 3); move CoherentModuli to its own def-node module then."
+ }
+}

@@ -11,9 +11,146 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-def-sf-orientation/def-sf-orientation.md",
   "place": "Comparison conventions and clauses 1-4, used by the component interface"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Obtain the first-line module pullback isomorphism from sfFirstRootLinePullback_exists. The coefficient and root maps are the prescribed finite-projection-normalized maps, rather than a chosen root trivialization.",
+   "uses": [
+    "lem-sf-first-root-line-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use purTwistIntegralLocalModels to obtain covers trivializing both first lines. The general signedComparison_exists construction extends the first-line isomorphism to signed powers, with its scalar-unit and tensor-recursion equations. Restrict to nonnegative exponents.",
+   "uses": [
+    "lem-pur-twist-integral-local-models",
+    "lem-pur-twist-sheaf-locally-free",
+    "det-prop-sfb-cartesian-coefficients-twists"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the requested root formula by two-step induction. At zero it is the scalar-unit formula and adjunction cancellation for completedPullMap. At one it is the first-line formula. At n+2 use the tensor-recursion equation, the formula at n+1, and the first-line formula on the last root with scalar one. The coefficient map preserves one.",
+   "uses": [
+    "lem-sf-first-root-line-pullback",
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For uniqueness compare each pair of isomorphism homs under the module pullback adjunction. Their adjuncts agree on every local pure root tensor by their normalization equations. sfPositiveRootGenerator_hom_ext makes the adjuncts equal; injectivity of the adjunction and Iso.ext give equality of the families.",
+   "uses": [
+    "lem-sf-positive-root-generator-ext"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For sfOrientationIntegralComplex_good, apply coefficientTwistLine_exact at the nonnegative integer d. Its finite-limit and finite-colimit assertions are exactly site-flatness of positiveLine. This treats d=0 by the same theorem.",
+   "uses": [
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The single complex has that positive line in degree -2d and zero terms at every other degree. Each zero term is site-flat by the local equational criterion: use the maximal covering sieve and a factorization with zero intermediate generators. Evaluation of an isZero module sheaf is a zero module, so all section equations hold.",
+   "uses": [
+    "lem-weil-pbc-site-flat-equational-criterion-universes"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The complex is strictly supported in degrees at most -2d. The bounded-above flat criterion gives independent-coefficient K-flatness. Pair this with the preceding termwise flatness to obtain integralOperationsGoodComplex. ",
+   "uses": [
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the ordinary complex product, first use normalized multiplication of unshifted positive root powers. The total tensor of single complexes is zero outside p+q: all other summands have a zero factor. At p+q the (p,q) inclusion is an isomorphism, with inverse given by the coproduct descendent that projects onto that summand. Conjugate by the single-object term identifications to identify this degree with the ordinary tensor of the two module sheaves. Extend that identification to a chain isomorphism using mkHomFromSingle; all other components are maps between zero objects. The degree identity p+q=-2(d+e) identifies the output single complex. Extraction of the degree component, conjugated by the same summand and single identifications, is injective on complex isomorphisms. The normalized formula under extraction is exactly the unshifted root-tensor formula, by naturality of the sheafification tensor generator. Existence and uniqueness therefore transfer from positiveRootTensorProduct_existsUnique.",
+   "uses": [
+    "lem-sf-positive-root-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For sfOrientationIntegralTensorUnit_isIso, use the existing ordinary complex-product isomorphism to identify its ordinary total tensor T with the line complex at d+e. The single-functor shift constraint identifies this with sfIntegralTwistingObject(d+e)[2(d+e)]. Intrinsic twist membership, shift stability and isomorphism stability imply intrinsic constructibility and thus IsSfDerivedComplete of Q(T).",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The tensor_good theorem makes T a flat-term K-flat representative. Choose an auxiliary prime p distinct from l and the adic coefficient datum supplied by coefficient_datum. The legacy comparison converts IsSfDerivedComplete to IsComplete. Conditions (i) and (v) of roosIntrinsicCompletenessEquivalence then make the specified completionUnit component at Q(T) invertible.",
+   "uses": [
+    "lem-pur-integral-ambient-operation-models",
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-pur-roos-intrinsic-completeness-equivalence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The representative normalization completionUnit_existsUnique expresses Q(roosUnit(T)) as this invertible completionUnit followed by completionComparison. The tensor operation unit is roosUnit(T) followed by the Roos image of tensorTowerIso. Functoriality gives invertibility. The ordinary product is reduced separately to unshifted module multiplication.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-pur-integral-ambient-operation-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the pullback augmentation, use integralPullbackAugmentation_ambient to compare the ordinary Frobenius coefficient pullback with IntegralAmbient.pull, and identify their specified augmentations for every complex. Apply the comparison to C_{Y,d}. The ordinary line-map isomorphism identifies the ambient pulled-back complex M with C_{X,d}; this uses the existing line-map theorem without proving or restating it.",
+   "uses": [
+    "lem-sf-integral-pullback-augmentation-ambient"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The one-term shift identifies Q(C_{X,d}) with sfIntegralTwistingObject(d)[2d]. Twist membership and triangulated shift and isomorphism stability imply IsSfDerivedComplete of Q(M). The ambient pull_good theorem supplies a good representative. Choose an auxiliary prime distinct from l, convert intrinsic completeness to legacy completeness, and use the normalized Roos criterion to make completionUnit at Q(M) invertible.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-pur-integral-ambient-operation-models",
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-pur-roos-intrinsic-completeness-equivalence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The representative normalization completionUnit_existsUnique gives invertibility of Q(roosUnit(M)). The Roos image of pullTowerIso is invertible, hence so is Q(pullOperationUnit(P)). The augmentation identity of the first step expresses the desired localized augmentation as the composite of this isomorphism with the localized ordinary-pullback comparison.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-pur-integral-ambient-operation-models",
+    "lem-sf-integral-pullback-augmentation-ambient"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-first-root-line-pullback",
+  "lem-pur-twist-integral-local-models",
+  "lem-pur-twist-sheaf-locally-free",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-sf-positive-root-generator-ext",
+  "def-coefficient-twists-detailed",
+  "lem-weil-pbc-site-flat-equational-criterion-universes",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-sf-positive-root-tensor-product",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-a1-principal-koszul-strict-replacement",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "def-pur-integral-derived-operations",
+  "lem-sf-integral-pullback-augmentation-ambient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-def-sf-orientation/def-sf-orientation.md",
+  "place": "Retain all shifted-complex and completion proofs. For the arbitrary-map line comparison, linearize the normalized first-line tensor transport, extend with the existing signed-power construction, prove the root equations by induction, and use local root-generator extensionality for uniqueness."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -62,10 +199,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors",
@@ -108,5 +249,15 @@
   "group": "Q23",
   "result": "pass",
   "note": "I read all 13 modules (item, the §1(B) SfOrientationDatum repair of def-sf-orientation, and 11 new def-sf-orientation-* nodes) against sk-def-sf-orientation (main-20261015, order 2487) and def-sf-orientation, clauses 1–4. The Lean component T_{X,d} ≅ f^!(T_{Y,0}) is the form the source permits. theta and beta are counit transposes of the datum's own projection and exchange maps, pinned by HEq; I checked directions against the live SixFunctorExchangeData. Base change, composition, the coefficient equation w∘C(γ)=γ'∘t (rationalization, integral→finite for E and every L, stage transitions, common stage), the realization through the derivedComparisonAdjunction unit, and the affine trace (open counit then projectiveLineTrace; HEq types match at X=A¹) all match the source. All coordinates are pinned; the unique-choice definitions are fixed on root tensors; sorry appears only in documented theorems. Records: statements verbatim; def-sf-orientation differs from live only in lean (replacing the lead's existing:true attachment); item stmt_deps add only the new nodes; no collisions. Edge cases covered: d=0, f=id, empty X, m=0 ramified, all r, nonseparated Noetherian Y. Accepted as equivalent: étale-companion presentation of finite geometry; integral normalization via reductions; no finite→finite field because A5 has none. No compile (no change); worker reports 13 clean compiles and dry run OK. Advisory: author-written second reading; the repair uses new-node declarations not in def-sf-orientation stmt_deps (no cycle); the étale family uses f^× without citing def-weil-exceptional-inverse-image."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261026T195249-L-2926857",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

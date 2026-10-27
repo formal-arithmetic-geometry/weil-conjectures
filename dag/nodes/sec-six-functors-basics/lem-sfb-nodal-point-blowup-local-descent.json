@@ -1,0 +1,356 @@
+{
+ "id": "lem-sfb-nodal-point-blowup-local-descent",
+ "kind": "statement",
+ "title": "Etale descent of one singular-point blowup on a nodal trait curve",
+ "statement": "Let $R$ be a discrete valuation ring with uniformizer $\\pi$, fraction field $K$, residue field $k$, and $S=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Let $f:X\\to S$ be flat and finitely presented [def-weil-flat-morphism, def-sbc-locally-finite-presentation], with smooth generic fibre [def-sbc-smooth-morphisms]. Suppose every nonempty geometric fibre is reduced of pure dimension one and every nonsmooth closed geometric point has completed local ring $\\Omega[[a,b]]/(ab)$, where $\\Omega$ is the algebraically closed geometric ground field [def-weil-geometric-fibre, def-pc-reduced-scheme, def-weil-pure-dimension, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series, def-weil-algebraic-closure]. No connectedness or nonemptiness of the geometric fibres is assumed. Fix a closed nonregular point $x\\in X_k$ and a diagram of etale $S$-maps $(X,x)\\leftarrow(U,u)\\to(M_n,o)$ with $n\\geq2$, where $R\\to R'$ is a local injective etale extension of DVRs, $\\pi$ is a uniformizer of $R'$, $M_n=\\operatorname{Spec}(R'[a,b]/(ab-\\pi^n))$, and $o=(\\pi,a,b)$ [def-weil-etale-morphism, def-weil-polynomial-ring, def-weil-regular-scheme]. Let $b:X^+=\\operatorname{Bl}_xX\\to X$ be the ordinary blowup of the reduced point [def-nagata-global-blowup]. After restricting $U$ to an open neighbourhood of $u$, the scheme-theoretic inverse images of both reduced points $x$ and $o$ are exactly the reduced point $u$. The two comparison squares obtained by blowing up $u$, $x$ and $o$ are Cartesian, their top maps are etale, and $\\operatorname{Bl}_uU\\to X^+$ covers every point above $x$ [def-pc-fibre-product]. The morphism $X^+\\to S$ is flat and locally of finite presentation with every nonempty geometric fibre reduced, pure-one-dimensional and nodal; here nodal means the same completed-local-ring condition just stated. Its generic fibre is isomorphic to $X_K$, and $b$ is an isomorphism over $X\\setminus\\{x\\}$. If $n=2$ or $3$, all points above $x$ are regular. If $n\\geq4$, exactly one point $x^+$ above $x$ is nonregular, it is closed in $X^+$, and it admits a common pointed etale neighbourhood with the origin of $\\operatorname{Spec}(R'[r,s]/(rs-\\pi^{n-2}))$. There are no new nonregular points away from $x$. No excellence, completeness, perfection or characteristic restriction is imposed.",
+ "source": {
+  "document": "literature/stacks-project/models.tex",
+  "place": "Tag 0CDE (lemma-blowup-at-worst-nodal), second and last paragraphs, with Tag 0CDC (example-blowup), and Divisors Tag 0805 (lemma-flat-base-change-blowing-up). The stopping cases are n=2 and n=3."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-weil-geometric-fibre",
+  "def-pc-reduced-scheme",
+  "def-weil-pure-dimension",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-etale-morphism",
+  "def-weil-polynomial-ring",
+  "def-weil-regular-scheme",
+  "def-nagata-global-blowup",
+  "def-pc-fibre-product",
+  "def-weil-algebraic-closure",
+  "def-sfb-surface-point-blowup-data",
+  "def-nagata-extended-ideal",
+  "def-trf-projective-nodal-tower",
+  "def-sfb-dvr-nodal-chart-data"
+ ],
+ "proof": [
+  {
+   "text": "Write $p:U\\to X$, $q:U\\to M_n$ and $L=\\kappa(u)$. The etale-fibre theorem says that each fibre over a point is a disjoint union of spectra of finite separable extensions of its residue field. In particular $u$ is open in both reduced fibres $p^{-1}(x)$ and $q^{-1}(o)$. Choose an open neighbourhood of $u$ inducing just that singleton in each fibre, and intersect the two neighbourhoods. Since the fibres are reduced, both scheme-theoretic inverse images are now $\\operatorname{Spec}L$, with their original embeddings into $U$. Thus their ideal sheaves coincide with the ideal of the reduced closed point $u$. The restricted maps remain etale by the open-immersion and composition clauses. Also $L/\\kappa(x)$ and $L/\\kappa(o)$ are finite separable; no equality of these fields is asserted.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDE (lemma-blowup-at-worst-nodal), second paragraph: shrink U and identify reduced centres; morphisms.tex Tag 02GL (lemma-etale-over-field)."
+   }
+  },
+  {
+   "text": "Put $B=\\operatorname{Bl}_oM_n$ and $U^+=\\operatorname{Bl}_uU$. Etale maps are flat by their definition. Apply the flat blowup comparison to $p$ and $q$, with the inverse-image centres just identified. The comparison theorem gives\n$$U^+\\cong U\\times_X X^+\\cong U\\times_{M_n}B$$\nover the indicated bases, so both squares are Cartesian. The two top arrows $p^+:U^+\\to X^+$ and $q^+:U^+\\to B$ are etale by stability under base change. Associating these fibre products gives\n$$U^+_u\\cong X^+_x\\times_{\\operatorname{Spec}\\kappa(x)}\\operatorname{Spec}L\n\\cong B_o\\times_{\\operatorname{Spec}\\kappa(o)}\\operatorname{Spec}L.$$\nThe morphism $\\operatorname{Spec}L\\to\\operatorname{Spec}\\kappa(x)$ is surjective, since both spaces have one point. Its base change $U^+_u\\to X^+_x$ is surjective. This proves that $p^+$ covers every point above $x$, even when $\\kappa(u)\\ne\\kappa(x)$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDE, Cartesian blowup diagram; divisors.tex Tag 0805 (lemma-flat-base-change-blowing-up); morphisms.tex Tag 01S1 (lemma-base-change-surjective)."
+   }
+  },
+  {
+   "text": "The global blowup complement theorem gives $b^{-1}(X\\setminus\\{x\\})\\cong X\\setminus\\{x\\}$. Since $x$ belongs to the special fibre, the whole generic fibre lies in this complement. Therefore $X^+_K\\cong X_K$. Local rings away from $x$ are unchanged, so no new nonregular point occurs there. Together with the previous step this gives the jointly surjective etale family consisting of $p^+:U^+\\to X^+$ and the open immersion $b^{-1}(X\\setminus\\{x\\})\\hookrightarrow X^+$.",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDE, descent paragraph; divisors.tex Tag 0802 (lemma-blowing-up), isomorphism off the centre."
+   }
+  },
+  {
+   "text": "Apply the existing DVR chart calculation over $R'$. The blowup $B$ is covered by\n$$\\operatorname{Spec}R'[a,t]/(at-\\pi),\\quad\n\\operatorname{Spec}R'[r,s]/(rs-\\pi^{n-2}),\\quad\n\\operatorname{Spec}R'[b,h]/(bh-\\pi).$$\nThe maps on the outer charts have $b=a^{n-1}t^n$ and $a=b^{n-1}h^n$, and on the middle chart $a=\\pi r$, $b=\\pi s$. These finite presentations give local finite presentation. The chart calculation gives flatness and nodality. More explicitly every geometric chart fibre is a binomial curve $C_c$, so the field calculation gives reducedness and pure dimension one, and smoothness away from its crossing. The monomial completion calculation with two variables and ideal $(ab)$ gives exactly $\\Omega[[a,b]]/(ab)$ at that crossing. Thus $B\\to\\operatorname{Spec}R'$ has the fibre condition required here, including purity. Both outer charts are regular. For $n=2$ the middle chart has $rs=1$ and is smooth; for $n=3$ it is the regular model $rs=\\pi$; for $n\\ge4$ its only nonregular point is $w^+=(\\pi,r,s)$, by the regularity criterion for $M_{n-2}$. Its residue field is $\\kappa(o)$, as is immediate from the displayed coordinates.",
+   "uses": [
+    "lem-sfb-dvr-nodal-chart-blowup-calculus",
+    "lem-sfb-binomial-geometric-fibres",
+    "lem-sfb-monomial-local-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDC (example-blowup), three affine charts; the n=3 regular stopping case follows from the same example at exponent one."
+   }
+  },
+  {
+   "text": "Use the scheme case of nodal chart locality for the diagram $B\\to\\operatorname{Spec}R'$ over $B\\to S$, whose left vertical arrow is the identity and whose right vertical arrow is the given etale map. Its existential-chart criterion applies because the identity is surjective. Hence $B\\to S$ is nodal of relative dimension one. Nodal source locality then gives $U^+\\to S$ nodal: to obtain preservation under the possibly nonsurjective $q^+$, apply that locality equivalence to the jointly surjective family $\\{\\mathrm{id}_B,q^+\\}$ on $B$. The complement from step 3 has the original nodal fibre condition, by restriction of $f$. Applying source locality once more to the two-member covering of $X^+$ in step 3 proves that $X^+\\to S$ is flat, locally of finite presentation, and has pure-one-dimensional geometric fibres with the specified completed local rings at nonsmooth points. These locality statements explicitly allow empty fibres and impose no connectedness requirement.",
+   "uses": [
+    "lem-sfb-space-nodal-chart-locality",
+    "lem-trf-nodal-family-etale-source-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDE, nodality descent paragraph; curves.tex Tags 0CD8 (lemma-nodal-family-postcompose-etale) and 0C5D (lemma-nodal-family-etale-local-source); spaces-more-morphisms.tex Tag 0DSG (lemma-nodal-local), scheme specialization."
+   }
+  },
+  {
+   "text": "Check reducedness explicitly as well. For a geometric point $\\operatorname{Spec}\\Omega\\to S$, the etale fibre theorem identifies $\\operatorname{Spec}(R'\\otimes_R\\Omega)$ with a disjoint union of copies of $\\operatorname{Spec}\\Omega$: its residue extensions are finite separable and $\\Omega$ is algebraically closed. Consequently $B_\\Omega$ has an open cover by the reduced binomial curves of step 4. Etale base change and the theorem that an etale scheme over a reduced scheme is reduced give reducedness of $U^+_\\Omega$. The other member of the geometric covering is reduced by the hypothesis on $X$. These two morphisms still cover: above $x$ this follows from the fibre formula in step 2 and stability of surjectivity under base change; elsewhere the open member covers. At any point of $X^+_\\Omega$ choose a point of this covering. The map of local rings $A\\to D$ is faithfully flat by etale stalk invariance and $D$ is reduced. It is injective: if $aD=0$, flatness gives $(aA)\\otimes_A D=0$, and faithfulness gives $aA=0$. Thus any nilpotent of $A$ is zero. All geometric fibres of $X^+\\to S$ are therefore reduced.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-sfb-binomial-geometric-fibres",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "etale-proposition-etale-reduced",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-sfb-etale-stalk-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDE, descent of the fibre condition; morphisms.tex Tags 02GL and 02GO; etale.tex Tag 025O (proposition-etale-reduced)."
+   }
+  },
+  {
+   "text": "Etale stalk invariance compares regularity at each point of $U^+$ with regularity at its images under both $p^+$ and $q^+$. If $n=2$ or $3$, all of $B$ is regular by step 4, so every point above $x$ is regular, since it lifts to $U^+_u$. If $n\\ge4$, any nonregular point of $U^+_u$ must map to $w^+$. The second fibre identification in step 2 shows that its full inverse image in $U^+_u$ is\n$$\\operatorname{Spec}\\bigl(\\kappa(w^+)\\otimes_{\\kappa(o)}L\\bigr)=\\operatorname{Spec}L,$$\nsince $\\kappa(w^+)=\\kappa(o)$. Thus there is exactly one such point $u^+$, and it is nonregular by the same etale stalk criterion. Its image $x^+=p^+(u^+)$ is nonregular. Every nonregular point above $x$ lifts to this same $u^+$, proving uniqueness. Notice that uniqueness uses the rationality of $w^+$ over $o$ and the Cartesian fibre formula; it does not follow merely from an arbitrary etale image containing one singular point.",
+   "uses": [
+    "lem-sfb-etale-stalk-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDE, last paragraph, residue-field argument for the unique residual singularity, applied only for n>=4; more-algebra.tex Tag 0AH0 (lemma-regular-etale-extension)."
+   }
+  },
+  {
+   "text": "For $n\\ge4$ restrict $U^+$ to the inverse image under $q^+$ of the middle chart in step 4. It contains $u^+$ and has etale maps to $X^+$ and to $\\operatorname{Spec}(R'[r,s]/(rs-\\pi^{n-2}))$, sending $u^+$ to $x^+$ and the origin. This is the required common pointed etale neighbourhood. Finally $x^+$ is closed, not just relatively isolated. A finite-presentation affine chart of $f$ through $x$, reduced modulo $\\pi$, is a finite-type $k$-scheme in which $x$ is closed. The closed-point field criterion therefore gives $\\kappa(x)/k$ finite. Step 1 gives $L/\\kappa(x)$ finite, and step 7 gives $\\kappa(u^+)=L$. The residue-field embedding $\\kappa(x^+)\\hookrightarrow L$ consequently makes $\\kappa(x^+)/k$ finite. Since $X^+\\to S$ is locally of finite presentation by step 5, it is locally of finite type (the local algebra presentations have finitely many generators). The finite-residue-point theorem makes $x^+$ closed in the special fibre, which is closed in $X^+$, hence closed in $X^+$. All inputs used apply to arbitrary DVRs and arbitrary residue characteristic.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-sbc-locally-finite-presentation",
+    "lem-kun-closed-point-field",
+    "lem-trf-finite-residue-point-closed-in-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDE, last paragraph, residual pointed neighbourhood; morphisms.tex Tags 01TE (lemma-algebraic-residue-field-extension-closed-point-fibre) and 01TF (lemma-closed-point-fibre-locally-finite-type)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-blowup-flat-base-change-map",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "etale-proposition-etale-reduced",
+  "lem-kun-closed-point-field",
+  "lem-sfb-binomial-geometric-fibres",
+  "lem-sfb-dvr-nodal-chart-blowup-calculus",
+  "lem-sfb-etale-stalk-invariants",
+  "lem-sfb-monomial-local-completion",
+  "lem-sfb-space-nodal-chart-locality",
+  "lem-trf-finite-residue-point-closed-in-fibre",
+  "lem-trf-nodal-family-etale-source-locality",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-surjective-base-change",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/models.tex",
+  "place": "Tag 0CDE (lemma-blowup-at-worst-nodal), second and last paragraphs, with Tag 0CDC (example-blowup); explicit fibre-product and closedness details filled in. The regular stopping cases are n=2 and n=3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Blowing up a singular point of a nodal curve over a discrete valuation ring preserves nodal fibres and decreases the local exponent xy equals pi to the n by two",
+   "results": "8 hits: WeierstrassCurve.IsGoodReduction, WeierstrassCurve.exists_isMinimal, WeierstrassCurve.minimal, WeierstrassCurve.IsMinimal, WeierstrassCurve.isGoodReduction_iff, WeierstrassCurve.IsGoodReduction.goodReduction, WeierstrassCurve.reduction, WeierstrassCurve.instIsMinimalMinimal",
+   "date": "2026-10-22",
+   "verdict": "no match: etale-locus localization and standard-smooth coordinate results do not construct point blowups, compare reduced centres or descend the residual singularity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale localization of point blowups on arithmetic surfaces with ordinary double singularities gives Cartesian blowup squares and a unique remaining singularity",
+   "results": "8 hits: Algebra.exists_etale_of_isEtaleAt, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.etaleLocus, Algebra.mem_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.Etale.of_isLocalization_Away",
+   "date": "2026-10-22",
+   "verdict": "no match: etale-locus localization and standard-smooth coordinate results do not construct point blowups, compare reduced centres or descend the residual singularity."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData.blowup",
+   "results": "0 hits: ; loogle: unknown identifier 'AlgebraicGeometry.Scheme.IdealSheafData.blowup'",
+   "date": "2026-10-22",
+   "verdict": "no match: etale-locus localization and standard-smooth coordinate results do not construct point blowups, compare reduced centres or descend the residual singularity."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blow.up|blowing",
+   "results": "Mathlib/AlgebraicGeometry: 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: etale-locus localization and standard-smooth coordinate results do not construct point blowups, compare reduced centres or descend the residual singularity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Point blowups of nodal arithmetic surfaces preserve nodality and decrease singular exponent",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blow.up|blowing",
+   "results": "{\"t\": \"2026-10-23T04:20:40Z\", \"tool\": \"grep\", \"query\": \"blowup|blow.up|blowing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowing up a node of a curve over a discrete valuation ring preserves nodal fibres and decreases the singular exponent by two",
+   "results": "{\"t\": \"2026-10-23T04:20:41Z\", \"tool\": \"leansearch\", \"query\": \"Blowing up a node of a curve over a discrete valuation ring preserves nodal fibres and decreases the singular exponent by two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective.baseChange_nonsingular\", \"WeierstrassCurve.Affine.baseChange_nonsingular\", \"WeierstrassCurve.IsGoodReduction.congr_simp\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.IsGoodReduction.mk\", \"WeierstrassCurve.valuation_Δ_aux.congr_simp\"], \"digest\": \"2006dab585827e83\"} Hits concern nonsingular points on Weierstrass curves and good reduction; none gives the point-blowup statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData.blowup",
+   "results": "{\"t\": \"2026-10-23T04:20:41Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.IdealSheafData.blowup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.Scheme.IdealSheafData.blowup'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale descent of a point blowup of a nodal curve over a discrete valuation ring, with local equation xy equals uniformizer to n and exponent decreasing by two",
+   "results": "{\"t\": \"2026-10-23T04:20:43Z\", \"tool\": \"leanfinder\", \"query\": \"Etale descent of a point blowup of a nodal curve over a discrete valuation ring, with local equation xy equals uniformizer to n and exponent decreasing by two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair\", \"StandardEtalePair.hasMap_X\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation\", \"StandardEtalePair.instEtaleRing\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.Etale.of_isLocalization_Away\", \"Algebra.Etale.of_isLocalizationAway\"], \"digest\": \"486923b4b23040ca\"} Hits concern standard etale presentations and coordinate maps; none concerns blowing up a nodal surface point.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change of blowing up a closed point and preservation of nodal geometric fibres under etale covers",
+   "results": "{\"t\": \"2026-10-23T04:20:44Z\", \"tool\": \"leanfinder\", \"query\": \"Flat base change of blowing up a closed point and preservation of nodal geometric fibres under etale covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\"], \"digest\": \"2b59f58ed61c4d95\"} Hits give stability of etale/flat/smooth morphisms under base change, but no point-blowup construction, nodal-fibre theorem or residual exponent calculation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-trait-regularization",
+  "date": "2026-10-22",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Regularization of smooth-generic nodal families; re-split of regularization: original steps 4--6 (one point blowup and residual exponent)",
+   "via": [
+    "lem-sfb-nodal-trait-regularization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-point-blowup-local-descent",
+  "worker": "stage1",
+  "summary": "Retained the complete statement. Split the two reduced-centre comparisons, coverage of every exceptional point, unchanged complement and generic fibre, existing DVR chart calculation, etale descent of nodality and reducedness, and the rational-residual-point uniqueness and closedness argument. Reused the existing model-calculus and locality nodes; created no nodes. Checked the source error at n=3 and retained the correct n>=4 residual-singularity range. All proof steps are below 2000 characters.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Regularization of smooth-generic nodal families; re-split of regularization: original steps 4--6 (one point blowup and residual exponent); this split realizes the one-point blowup comparison and residual-exponent argument from original regularization steps 4--6, with generic/complement and reducedness descent explicit.",
+  "tool_uses": [
+   {
+    "node": "etale-proposition-etale-reduced",
+    "why": "Generic reducedness ascent for etale geometric-fibre charts, needed because the nodal locality statement does not explicitly include reducedness."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic finite-type-over-a-field closed-point criterion gives the finite residue extension at the original closed point."
+   },
+   {
+    "node": "lem-trf-finite-residue-point-closed-in-fibre",
+    "why": "Generic finite-residue closedness criterion proves the unique remaining nonregular point is globally closed."
+   },
+   {
+    "node": "lem-trf-nodal-family-etale-source-locality",
+    "why": "Generic source locality of flatness, local finite presentation, purity and the completed-node condition assembles the local model with the unchanged complement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic stability of etale morphisms under the two blowup pullback squares and geometric-fibre base change."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic stability of etale maps on restricting a common pointed neighbourhood."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Isolates reduced centres, gives the finite separable residue extensions, and splits an etale fibre over an algebraically closed field; no unit-specific replacement exists."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic surjective base change of the residue-field point proves coverage of the entire exceptional fibre."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Generic ordinary-blowup comparison used for both etale charts; this is precisely the Stacks 0805 tool in the prescribed route."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic isomorphism of an ordinary blowup away from its centre gives the unchanged complement and generic fibre."
+   }
+  ]
+ },
+ "tool_uses": [
+  "etale-proposition-etale-reduced",
+  "lem-kun-closed-point-field",
+  "lem-trf-finite-residue-point-closed-in-fibre",
+  "lem-trf-nodal-family-etale-source-locality",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-surjective-base-change",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-50e6abcce",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-50e6abcce (reviewer sub-agent of L); spot-checked: First stage-1 split, not a re-split: the live node is unsplit with an identical statement and stmt_deps, and there is no repair note. No new nodes. Source: I read Stacks models.tex 0CDC and 0CDE in full; the 8 steps follow 0CDE's second and last paragraphs. Confirmed source error: 0CDE says that for n>2 there is a unique singular point, but for n=3 the middle chart rs=π is M_1 and regular. The item already handles this (n=2,3 regular; n>=4 has one residual point, exponent n-2), which matches what the parent regularization step 2 uses. Steps: (1) the étale-fibre node isolates u in both fibres, so the scheme-theoretic inverse images are the reduced point u. (2) For flat maps, J=I·O_U is the ideal of the inverse image, so the flat blowup comparison gives Cartesian squares; the top maps are étale by base change; U+_u = X+_x ×_κ(x) Spec L, and surjective base change gives coverage even when L≠κ(x). (3) The complement theorem gives X+_K ≅ X_K. (4) The DVR chart node applies over R' with π as uniformizer. Nodality is derived explicitly from binomial-fibres plus monomial-completion (r=2, α=(1,1)), which avoids the connectedness that def-trf-nodal-geometric-fibres imports. Regularity: outer charts are M_1, rs=1 is smooth, n=3 gives M_1, n>=4 gives M_{n-2}; κ(w+)=κ(o). (5) Space-chart locality with (id_B, Spec R'→S) gives B→S nodal; source locality on {id_B,q+} and then on {p+, complement} gives X+→S nodal. The closed versus all nonsmooth points difference is harmless, since generic points of a reduced curve over Ω are smooth. (6) Reducedness descends by faithfully flat injectivity, written out correctly. (7) The preimage of w+ is Spec(κ(w+)⊗L) = Spec L, one point; uniqueness follows by surjectivity. (8) The middle-chart preimage is the common neighbourhood; κ(x)/k is finite by Zariski on an affine chart of X_k, κ(x+) ⊂ L is finite, so 01TE makes x+ closed in X+_s, which is closed. Edge cases checked: n=2, 3, 4; κ(u)≠κ(x); imperfect k; characteristic 2. Duplicate search (0CDE, rg -L) finds only the parent and its Q56 siblings; none states the item. The declared tool_uses are all generic and accepted; no SGA. Batch-5 flags: def-trf-nodal-geometric-fibres is a general definition; lem-trf-finite-residue-point-closed-in-fibre (01TE/01TF) is generic, and its closure reaches no other trace-formula or Poincaré node; lem-trf-nodal-family-etale-source-locality (0C5D) is generic. The last one's large trf/pod/poincare closure comes only from a spurious stmt_dep def-trf-orgogozo-induction-data that its statement never uses; without it the closure has 107 nodes and contains only the two locality lemmas. Maintainer note: drop that stmt_dep from the existing node. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalPointBlowupLocalDescent",
+  "declaration": "AlgebraicGeometry.DvrNodal.nodal_point_blowup_local_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalPointBlowupLocalDescent.lean",
+  "statement": "theorem nodal_point_blowup_local_descent (R R' : CommRingCat.{u}) [IsDomain R] [IsDiscreteValuationRing R] [IsDomain R'] [IsDiscreteValuationRing R'] (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (φ : R →+* R') (hφ : Function.Injective φ) [IsLocalHom φ] [Etale (Spec.map (CommRingCat.ofHom φ))] (hπ' : IsLocalRing.maximalIdeal R' = Ideal.span {φ π}) (K : Type u) [Field K] [Algebra R K] [IsFractionRing R K] {X U : Scheme.{u}} (f : X ⟶ Spec R) [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (hgeneric : Smooth (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap R K))))) (hfibres : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec R), IsReduced (pullback (C := Scheme.{u}) f g) ∧ (pullback (C := Scheme.{u}) f g).IsPureDimension 1 ∧ ∀ z : ↥(pullback (C := Scheme.{u}) f g), IsClosed ({z} : Set (pullback (C := Scheme.{u}) f g)) → (¬ ∃ W : (pullback (C := Scheme.{u}) f g).Opens, z ∈ W ∧ Smooth (W.ι ≫ pullback.snd f g)) → IsGeometricOrdinaryDoublePoint Ω (pullback (C := Scheme.{u}) f g) z) (x : X) (hx : IsClosed ({x} : Set X)) (hspecial : f x = IsLocalRing.closedPoint R) (hnotregular : ¬ IsRegularLocalRing (X.presheaf.stalk x)) (n : ℕ) (hn : 2 ≤ n) (o : model R' (φ π) n) (ho : IsOrigin R' (φ π) n o) (p : U ⟶ X) (q : U ⟶ model R' (φ π) n) [Etale p] [Etale q] (hover : p ≫ f = q ≫ projection R' (φ π) n ≫ Spec.map (CommRingCat.ofHom φ)) (u : U) (hux : p u = x) (huo : q u = o) : (∃ (V : U.Opens) (v : V.toScheme), V.ι v = u ∧ ∃ hv : IsClosed ({v} : Set V.toScheme), (pointIdeal x hx).comap (V.ι ≫ p) = pointIdeal v hv ∧ (centre R' (φ π) n).comap (V.ι ≫ q) = pointIdeal v hv ∧ ∃ (pPlus : (pointIdeal v hv).blowup ⟶ (pointIdeal x hx).blowup) (qPlus : (pointIdeal v hv).blowup ⟶ (centre R' (φ π) n).blowup), IsPullback pPlus (pointIdeal v hv).blowupMap (pointIdeal x hx).blowupMap (V.ι ≫ p) ∧ IsPullback qPlus (pointIdeal v hv).blowupMap (centre R' (φ π) n).blowupMap (V.ι ≫ q) ∧ Etale pPlus ∧ Etale qPlus ∧ ∀ y : (pointIdeal x hx).blowup, (pointIdeal x hx).blowupMap y = x → ∃ w, pPlus w = y) ∧ Flat ((pointIdeal x hx).blowupMap ≫ f) ∧ LocallyOfFinitePresentation ((pointIdeal x hx).blowupMap ≫ f) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec R), IsReduced (pullback (C := Scheme.{u}) ((pointIdeal x hx).blowupMap ≫ f) g) ∧ (pullback (C := Scheme.{u}) ((pointIdeal x hx).blowupMap ≫ f) g).IsPureDimension 1 ∧ ∀ z : ↥(pullback (C := Scheme.{u}) ((pointIdeal x hx).blowupMap ≫ f) g), IsClosed ({z} : Set (pullback (C := Scheme.{u}) ((pointIdeal x hx).blowupMap ≫ f) g)) → (¬ ∃ W : (pullback (C := Scheme.{u}) ((pointIdeal x hx).blowupMap ≫ f) g).Opens, z ∈ W ∧ Smooth (W.ι ≫ pullback.snd ((pointIdeal x hx).blowupMap ≫ f) g)) → IsGeometricOrdinaryDoublePoint Ω (pullback (C := Scheme.{u}) ((pointIdeal x hx).blowupMap ≫ f) g) z) ∧ IsIso (pullback.map ((pointIdeal x hx).blowupMap ≫ f) (Spec.map (CommRingCat.ofHom (algebraMap R K))) f (Spec.map (CommRingCat.ofHom (algebraMap R K))) (pointIdeal x hx).blowupMap (𝟙 _) (𝟙 _) (Category.comp_id _) ((Category.comp_id _).trans (Category.id_comp _).symm)) ∧ IsIso ((pointIdeal x hx).blowupMap ∣_ (pointIdeal x hx).support.compl) ∧ ((n = 2 ∨ n = 3) → ∀ y : (pointIdeal x hx).blowup, (pointIdeal x hx).blowupMap y = x → IsRegularLocalRing ((pointIdeal x hx).blowup.presheaf.stalk y)) ∧ (4 ≤ n → ∃ xPlus : (pointIdeal x hx).blowup, (pointIdeal x hx).blowupMap xPlus = x ∧ ¬ IsRegularLocalRing ((pointIdeal x hx).blowup.presheaf.stalk xPlus) ∧ IsClosed ({xPlus} : Set (pointIdeal x hx).blowup) ∧ (∀ y : (pointIdeal x hx).blowup, (pointIdeal x hx).blowupMap y = x → ¬ IsRegularLocalRing ((pointIdeal x hx).blowup.presheaf.stalk y) → y = xPlus) ∧ ∃ (W : Scheme.{u}) (w : W) (a : W ⟶ (pointIdeal x hx).blowup) (c : W ⟶ model R' (φ π) (n - 2)), Etale a ∧ Etale c ∧ a w = xPlus ∧ IsOrigin R' (φ π) (n - 2) (c w) ∧ a ≫ (pointIdeal x hx).blowupMap ≫ f = c ≫ projection R' (φ π) (n - 2) ≫ Spec.map (CommRingCat.ofHom φ)) ∧ (∀ y : (pointIdeal x hx).blowup, (pointIdeal x hx).blowupMap y ≠ x → (IsRegularLocalRing ((pointIdeal x hx).blowup.presheaf.stalk y) ↔ IsRegularLocalRing (X.presheaf.stalk ((pointIdeal x hx).blowupMap y))))",
+  "branch": "sheaf-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8079e0173",
+  "group": "Q43",
+  "result": "fix",
+  "note": "Re-delivery after the 2630cb4f RETURN. Both findings are fixed as prescribed: existing:true def-sfb-dvr-nodal-chart-data (constant/coordinate/originIdeal/model/projection/centre/IsOrigin in the unchanged DvrNodalChartBlowupCalculus) replaces the theorem stmt_dep; the source-locality stmt_dep, its module repair and the proof-only imports are dropped. The theorem signature is byte-identical, and statement/proof/proof_deps equal live; stmt_deps only add owners. Every clause checked against node and 0CDE/0CDC (comap = ideal of the scheme-theoretic preimage; n=2,3 regular; n>=4 unique closed residual point with M_{n-2} neighbourhood; canonical generic-fibre iso; iso off {x}). Edge cases n=2/3/4, κ(u)≠κ(x), empty/disconnected fibres, any characteristic; single universe u. The new node's TeX matches the bodies, and def-trf-strict-semistable-curve owns strictNodalRing/StrictSemistableModel. FIX (record only): split the citation bracket [def-trf-strict-semistable-curve, def-weil-polynomial-ring] (check_new_node (b) failures), and trim the trailing ':=' from lean.statement (check_existing note). check_new_node/check_existing are clean after the fix. No Lean changed, no compile; the worker's timings look carried over, but the imports resolve on reading."
+ }
+}

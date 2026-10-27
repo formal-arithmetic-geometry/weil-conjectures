@@ -1,0 +1,95 @@
+{
+ "id": "def-pur-finite-reduction-tensor-source",
+ "kind": "definition",
+ "title": "Intrinsic finite-reduction input and tensor-source comparisons",
+ "statement": "Fix the finite setting P of [def-pur-conventions], 1 <= m <= P.level, and write Q for the smaller setting and red for the intrinsic derived coefficient quotient. Write E_T and E'_T for the specified intrinsic realization equivalences and S_T for fixed-scalar reduction. For any intrinsic input K on Y define the comparison S_Y(E_Y.inverse K) -> E'_Y.inverse(red_Y K) by fully faithful preimage of scalarPresentation inverse, followed by red of the E_Y counit and the inverse E'_Y counit [def-sp-finite-scalar-realization-presentations]. For f:X -> Y, X over the base, and d a natural number, define red_X(E_X(P.smoothPurityTensorSource f d K)) -> E'_X(Q.smoothPurityTensorSource f d (red_Y K)) by scalarPresentation, the realized finiteTensorPurityTargetComparison at E_Y.inverse K [def-pur-finite-tensor-fixed-comparisons], and tensoring the pullback of the input comparison with the identity on Q.diagonalTwist X d. These are the specified composites, independent of any purity morphism or diagonal orientation [def-pur-smooth-purity-map].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2: realization and counit transport of the tensor target before reassociation"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sp-finite-scalar-realization-presentations",
+  "def-pur-finite-tensor-fixed-comparisons",
+  "def-pur-smooth-purity-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient extension preserves the tensor form of smooth purity before twist reassociation",
+   "results": "8 hits: Algebra.Smooth.baseChange, TensorProduct.ext_fourfold, Algebra.FormallySmooth.instTensorProduct, MvPolynomial.coeff_rTensorAlgHom_tmul, Algebra.IsStandardSmoothOfRelativeDimension.baseChange, TensorProduct.ext_fourfold'', Algebra.IsStandardSmooth.baseChange, Derivation.tensorProductTo_mul. No smooth-purity coefficient-reduction square or intrinsic tensor-source realization comparison.",
+   "verdict": "no match",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intrinsic realization transports the coefficient extension tensor shift reassociation square",
+   "results": "8 hits: Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, ModuleCat.MonoidalCategory.tensorμ_apply, ModuleCat.extendScalarsComp_hom_app_one_tmul, TensorPower.cast_trans, TensorPower.cast_cast, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul, TensorAlgebra.mk_reindex_cast, CategoryTheory.TwistShiftData.assoc. No smooth-purity coefficient-reduction square or intrinsic tensor-source realization comparison.",
+   "verdict": "no match",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurityTensorMap|smoothPurityReassociation|scalarPresentation",
+   "results": "0 hits: . No smooth-purity coefficient-reduction square or intrinsic tensor-source realization comparison.",
+   "verdict": "no match",
+   "date": "2026-10-25"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteReductionOfPurity",
+  "date": "2026-10-25",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Step 2: realization and counit transport of the tensor target before reassociation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteReductionTensorSource",
+  "file": "lean/Sheaf/Paper/FiniteReductionTensorSource.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteReductionTensorInputComparison",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.finiteReductionTensorInputComparison",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionTensorSourceComparison"
+  ],
+  "statement": "def finiteReductionTensorInputComparison (P : PurityFiniteSetting.{u}) (m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ P.level) (Y : Scheme.{u}) (K : Scheme.proEtaleDerivedCategory Y P.Ring) : (P.finiteTensorReduction m hm hmn Y).obj ((Scheme.sfIntrinsicDerivedEquivalence Y P.Ring).inverse.obj K) ≅ (Scheme.sfIntrinsicDerivedEquivalence Y (P.finiteReductionSetting m hm).Ring).inverse.obj ((P.finiteReduction m hm hmn Y).obj K)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261025T143735-L-1080362",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261025T143735-L-1080362",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

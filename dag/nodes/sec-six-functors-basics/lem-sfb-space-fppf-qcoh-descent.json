@@ -1,0 +1,363 @@
+{
+ "id": "lem-sfb-space-fppf-qcoh-descent",
+ "kind": "statement",
+ "title": "Effective fppf descent of quasi-coherent modules on algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and work with algebraic spaces over $S$ [def-trf-algebraic-space] and small sites in the universes of [def-weil-size-convention]. Let $\\{q_i:X_i\\to X\\}_{i\\in I}$ be a small fppf covering: the maps are flat and locally of finite presentation on etale scheme charts and jointly surjective [lem-sfb-space-fppf-covering-calculus]. Use quasi-coherent modules on the small etale ringed sites [def-trf-space-quasi-coherent-module], tensor pullback and module morphisms [def-trf-space-etale-module-functors, def-weil-sheaf-of-modules-category]. A descent datum consists of modules $M_i\\in\\operatorname{QCoh}(X_i)$ and isomorphisms $\\varphi_{ij}:\\operatorname{pr}_i^*M_i\\xrightarrow{\\sim}\\operatorname{pr}_j^*M_j$ on $X_i\\times_X X_j$, such that $\\varphi_{ik}=\\varphi_{jk}\\circ\\varphi_{ij}$ on every triple fibre product, with canonical pullback composition comparisons understood. A morphism of descent data consists of maps $a_i:M_i\\to N_i$ satisfying $\\varphi^N_{ij}\\circ\\operatorname{pr}_i^*a_i=\\operatorname{pr}_j^*a_j\\circ\\varphi^M_{ij}$. The canonical functor from $\\operatorname{QCoh}(X)$ to this category, sending $M$ to $(q_i^*M,\\mathrm{can})$, is fully faithful and essentially surjective. Equivalently every such datum is effective, and compatible maps descend uniquely. No quasi-compactness, separatedness, Noetherian or finite-generation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 04W8, proposition-fpqc-descent-quasi-coherent, specialized to fppf coverings; spaces-topologies.tex Tag 0DFQ, lemma-zariski-etale-smooth-syntomic-fppf-fpqc, shows such coverings are fpqc."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-sfb-space-fppf-covering-calculus",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-space-module-tensor-composition",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Use tensor pullbacks throughout. They preserve quasi-coherence for arbitrary space morphisms, so the canonical functor $K$ and all pullbacks below have the required quasi-coherent values. Use the normalized composition maps: locally $a\\otimes(b\\otimes m)\\mapsto a f^\\sharp(b)\\otimes m$. Both associations of three successive pullbacks send $a\\otimes(b\\otimes(c\\otimes m))$ to $a f^\\sharp(b)(gf)^\\sharp(c)\\otimes m$; the unit maps send $a\\otimes m$ to $am$. Thus all composition and identity identifications used below obey the same associativity and unit equations. On schemes use the Zariski/etale equivalence, including its comparison for every scheme morphism, to apply ordinary scheme descent; no direct-image comparison is used.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "def-sfb-space-module-tensor-composition",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 04W8 (proposition-fpqc-descent-quasi-coherent), steps (1),(3),(4); pullback normalization and scheme comparison before applying 023T."
+   }
+  },
+  {
+   "text": "Choose a representable surjective etale scheme atlas $e_i:A_i\\to X_i$ for each $i$. The composites $r_i=q_ie_i:A_i\\to X$ are an fppf family by etale-to-fppf comparison and composition. For any scheme $t:T\\to X$, set $B_i(T)=T\\times_XA_i$, with projections $b_i:B_i(T)\\to T$ and $d_i:B_i(T)\\to A_i$. These are schemes by representability of the diagonal, even though $t$ need not be etale. Base change makes $\\{b_i\\}$ an fppf covering of schemes, hence an fpqc covering. The same applies to every scheme test and every iterated overlap used below. All families remain small; no finite subcover of $X$ or quasi-compact atlas is chosen.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-trf-fppf-covering-is-fpqc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 04W8 (proposition-fpqc-descent-quasi-coherent), step (3), refine the sources by scheme atlases, and step (4), pull back to scheme tests; spaces-topologies 03Y9 and topologies 022C."
+   }
+  },
+  {
+   "text": "For a datum $\\xi=(M_i,\\varphi_{ij})$, give $B_i(T)$ the module $L_i(T)=(e_id_i)^*M_i$. On $B_i(T)\\times_TB_j(T)$ use the pullback of $\\varphi_{ij}$ along its map to $X_i\\times_XX_j$ as the transition. The original triple equation pulls back to the triple equation for these modules, so this is scheme descent data. Scheme fpqc descent gives $H_T(\\xi)\\in\\operatorname{QCoh}(T)$ and isomorphisms $\\theta_{T,i}:b_i^*H_T(\\xi)\\simeq L_i(T)$ respecting those transitions. In particular on overlaps $\\theta_{T,j}=\\varphi_{ij}\\theta_{T,i}$, with all maps pulled back there. Retain these specified isomorphisms as part of the descent object. This construction is made for scheme tests in the fixed universe; only a small chart skeleton is needed to assemble a sheaf.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "def-sfb-space-module-tensor-composition",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 04W8 (proposition-fpqc-descent-quasi-coherent), step (4), application of scheme Tag 023T; retain the descent identifications."
+   }
+  },
+  {
+   "text": "For any scheme map $f:T'\\to T$ over $X$, let $f_i:B_i(T')\\to B_i(T)$ be its base change. The covered map from $b_i'^*f^*H_T$ to $b_i'^*H_{T'}$ is $\\theta_{T',i}^{-1}f_i^*\\theta_{T,i}$. On double overlaps its compatibility square reduces, after conjugating by the two $\\theta$'s, to the equality between the pullback of $\\varphi_{ij}$ along $f$ and the transition defining $L_i(T')$. Full faithfulness of scheme descent therefore gives a unique $c_f:f^*H_T\\simeq H_{T'}$; the inverses descend by the inverse square. For $f=1$ the covered map is the identity. For $g:T''\\to T'$, the covered composite $c_g g^*c_f$ is $\\theta_{T'',i}^{-1}(fg)_i^*\\theta_{T,i}$ by cancellation of $g_i^*\\theta_{T',i}$. Faithfulness gives $c_1=1$ and $c_{fg}=c_g g^*c_f$. Crucially, this construction includes maps between scheme tests that are not etale over $X$.",
+   "uses": [
+    "def-sfb-space-module-tensor-composition",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 04W8 (proposition-fpqc-descent-quasi-coherent), step (6), omitted compatibility with scheme morphisms, expanded by scheme descent full faithfulness."
+   }
+  },
+  {
+   "text": "A morphism $a:\\xi\\to\\zeta$ gives maps $L_i(T,\\xi)\\to L_i(T,\\zeta)$ by pulling back $a_i$. The morphism-of-data equation in the statement says exactly that these maps respect the overlap transitions. Descend them to $H_T(a)$ using full faithfulness. For $f:T'\\to T$, the transition square for $H_T(a)$ becomes the square for the same pulled-back $a_i$ on $B_i(T')$, hence commutes by faithfulness. Identities and composites descend to identities and composites for the same reason. Restricting $(H_T,c_f)$ to the etale scheme charts of $X$, the cartesian-chart equivalence now supplies a quasi-coherent module $B(\\xi)$, with compatible isomorphisms $\\rho_U:u^*B(\\xi)\\simeq H_U$ on each chart $u:U\\to X$. It also supplies the maps $B(a)$, making $B$ a functor.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-pc-fpqc-descent",
+    "lem-sfb-space-qcoh-cartesian-chart-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 04W8 (proposition-fpqc-descent-quasi-coherent), steps (5),(6), omitted functoriality in the datum and chartwise assembly; spaces-properties 03LY and 03LZ."
+   }
+  },
+  {
+   "text": "We need the comparison on a scheme test $t:T\\to X$ that is not necessarily etale. Choose an etale scheme atlas $u:U\\to X$ and put $W=T\\times_XU$, $a:W\\to U$, $b:W\\to T$. The map $b$ is a surjective etale scheme map. On $W$ define $b^*t^*B(\\xi)\\to b^*H_T$ by $c_b^{-1}c_a a^*\\rho_U$. On $W\\times_TW$, let $a_1,a_2$ be its maps to $U$. They factor through $R=U\\times_XU$. Compatibility of $\\rho$ on the etale charts $U,R$ and the identity $c_{fg}=c_g g^*c_f$ make the two displayed maps equal: both become $c_{b\\pi}^{-1}c_{a_1\\pi_1}(a_1\\pi_1)^*\\rho_U$, using the chart transition on $R$ to replace the second $U$ projection by the first. Scheme etale/fpqc descent descends this map and its inverse uniquely to $\\lambda_T:t^*B(\\xi)\\simeq H_T$. For $f:T'\\to T$, pull the claimed equality $\\lambda_{T'}=c_f f^*\\lambda_T$ back along $T'\\times_XU\\to T'$. Substitution of the displayed formula and cancellation of $c_b$ give that equality. The same substitution proves naturality in $\\xi$. For an etale chart $T$, this comparison is $\\rho_T$, by its chart compatibility and uniqueness.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-trf-fppf-covering-is-fpqc",
+    "def-sfb-space-module-tensor-composition",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-pc-fpqc-descent",
+    "lem-sfb-space-qcoh-cartesian-chart-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 04W8 (proposition-fpqc-descent-quasi-coherent), steps (6),(7), chart assembly compared with arbitrary tensor pullback; omitted inverse verification, expanded using etale localization and 023T."
+   }
+  },
+  {
+   "text": "Fix $i$ and an etale scheme chart $v:V\\to X_i$; write $t=q_iv$. On the scheme fpqc cover $B_j(V)=V\\times_XA_j\\to V$, the pullback of $\\varphi_{ij}$ identifies the pullback of $v^*M_i$ with $L_j(V)$. Hence the maps $\\varphi_{ij}^{-1}\\theta_{V,j}$ identify the pullbacks of $H_V$ with those of $v^*M_i$. On a double overlap the required equality is $\\varphi_{ik}^{-1}\\varphi_{jk}=\\varphi_{ij}^{-1}$, which follows by multiplying the original triple equation by inverses. Full faithfulness of scheme descent gives an isomorphism $\\eta_V:H_V\\simeq v^*M_i$. For a map $h:V'\\to V$ over $X_i$, the covered formulas give $\\eta_{V'}c_h=h^*\\eta_V$, so this equality holds by faithfulness. The maps $\\eta_V\\lambda_V:v^*q_i^*B(\\xi)\\simeq v^*M_i$ thus form compatible chart maps. The cartesian-chart equivalence on $X_i$ assembles them into $\\alpha_i:q_i^*B(\\xi)\\simeq M_i$. Their construction is natural in $\\xi$.",
+   "uses": [
+    "def-sfb-space-module-tensor-composition",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-pc-fpqc-descent",
+    "lem-sfb-space-qcoh-cartesian-chart-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 04W8 (proposition-fpqc-descent-quasi-coherent), step (7), recovery of the original components, including descent along the source atlases rather than assuming refinement is an equivalence."
+   }
+  },
+  {
+   "text": "The maps $\\alpha_i$ respect the original, unrefined datum. Indeed, take any etale scheme chart $V\\to X_i\\times_XX_j$ and then its scheme fpqc cover $B_k(V)\\to V$. Naturality of $\\lambda$ and $\\eta$ identifies the two maps from the pullback of $B(\\xi)$ to the pullback of $M_j$ with $\\varphi_{ij}\\varphi_{ik}^{-1}\\theta_{V,k}$ and $\\varphi_{jk}^{-1}\\theta_{V,k}$ respectively. They are equal because $\\varphi_{ik}=\\varphi_{jk}\\varphi_{ij}$. Scheme descent faithfulness gives equality on $V$, and the chart equivalence gives equality on $X_i\\times_XX_j$. Thus $\\alpha:KB\\simeq1$ is an isomorphism of descent-data functors, not just of their component modules.",
+   "uses": [
+    "def-sfb-space-module-tensor-composition",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-pc-fpqc-descent",
+    "lem-sfb-space-qcoh-cartesian-chart-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 04W8 (proposition-fpqc-descent-quasi-coherent), step (7), overlap compatibility of the counit; the displayed computation uses the original triple cocycle."
+   }
+  },
+  {
+   "text": "For $M\\in\\operatorname{QCoh}(X)$ apply the construction to $K(M)$. On every scheme test $T\\to X$, the canonical pullback comparisons identify $b_i^*t^*M$ with $L_i(T,K(M))$, compatibly with their transitions. Scheme descent full faithfulness supplies a unique $\\beta_T:t^*M\\simeq H_T(K(M))$ preserving these identifications. The uniqueness calculation of Step 4 makes these isomorphisms compatible with every scheme map and natural in $M$. On etale charts they assemble to $\\beta:M\\simeq BK(M)$. Moreover $\\alpha_{K(M)}K(\\beta_M)=1$: on the covers $B_j(V)$ of charts $V\\to X_i$, the formulas for $\\eta$, $\\theta$ and $\\beta_T$ cancel to the identity; scheme descent and chart faithfulness give the equality before those covers. Consequently for compatible maps $a:K(M)\\to K(N)$ the map $\\beta_N^{-1}B(a)\\beta_M$ pulls back to $a$; any other such map agrees by naturality of $\\beta$ and faithfulness of the chartwise scheme comparisons. This proves full faithfulness. The isomorphisms $\\alpha$ give essential surjectivity, proving the assertion.",
+   "uses": [
+    "def-sfb-space-module-tensor-composition",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-pc-fpqc-descent",
+    "lem-sfb-space-qcoh-cartesian-chart-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 04W8 (proposition-fpqc-descent-quasi-coherent), step (7), inverse identity and uniqueness of descended maps, expanded by 023T full faithfulness."
+   }
+  },
+  {
+   "text": "If $X=\\varnothing$, every $X_i$ is empty, and its small etale module category has just the zero module and its unique morphism: the empty covering forces sections to be the zero module. Thus both the descent category and $\\operatorname{QCoh}(X)$ are terminal, including when $I$ is empty. For nonempty $X$, the covering cannot have empty index set; empty members impose only zero-module data and the same construction applies. No step required quasi-compactness, separatedness, Noetherian hypotheses, or finite generation.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 04W8 (proposition-fpqc-descent-quasi-coherent), empty-cover boundary case, from the small-etale sheaf definition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "def-sfb-space-module-tensor-composition",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-trf-algebraic-space",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-pc-fpqc-descent",
+  "lem-sfb-space-qcoh-cartesian-chart-family"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 04W8 (proposition-fpqc-descent-quasi-coherent), fppf case; all omitted compatibility, morphism and inverse verifications expanded using scheme Tag 023T and chart characterization Tags 03LY, 03LZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on algebraic spaces form a stack for fppf covers: effective descent of objects and morphisms",
+   "results": "Hits: SheafOfModules.QuasicoherentData.X, SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.I, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.coversTop",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack equivalences require an IsStack hypothesis for the particular pseudofunctor; quasi-coherent presentation constructors do not establish effective fppf descent on algebraic spaces. Scheme gluing and one-hypercover section results do not state this result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"descent\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack equivalences require an IsStack hypothesis for the particular pseudofunctor; quasi-coherent presentation constructors do not establish effective fppf descent on algebraic spaces. Scheme gluing and one-hypercover section results do not state this result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithfully flat descent equivalence for quasi coherent modules and descent data",
+   "results": "Hits: CategoryTheory.Pseudofunctor.DescentData.ofObj, Module.Flat.of_flat_tensorProduct, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.IsQuasicoherent.mk, CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.Pseudofunctor.DescentData.exists_equivalence_of_sieve_eq, SheafOfModules.QuasicoherentData.ctorIdx",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack equivalences require an IsStack hypothesis for the particular pseudofunctor; quasi-coherent presentation constructors do not establish effective fppf descent on algebraic spaces. Scheme gluing and one-hypercover section results do not state this result."
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*quasi|quasi.*descent|fppf.*module",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack equivalences require an IsStack hypothesis for the particular pseudofunctor; quasi-coherent presentation constructors do not establish effective fppf descent on algebraic spaces. Scheme gluing and one-hypercover section results do not state this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules with isomorphic gluing data on a faithfully flat surjective locally finitely presented algebraic space cover glue uniquely including compatible maps",
+   "results": "Hits: AlgebraicGeometry.Scheme.Cover.RelativeGluingData.mk.inj, AlgebraicGeometry.LocallyRingedSpace.GlueData.toSheafedSpaceGlueData, AlgebraicGeometry.Scheme.GlueData, AlgebraicGeometry.LocallyRingedSpace.GlueData.mk.inj, AlgebraicGeometry.SheafedSpace.GlueData.mk.inj, AlgebraicGeometry.SheafedSpace.GlueData.ι_jointly_surjective, AlgebraicGeometry.PresheafedSpace.GlueData.mk.inj, AlgebraicGeometry.Scheme.GlueData.isoCarrier",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack equivalences require an IsStack hypothesis for the particular pseudofunctor; quasi-coherent presentation constructors do not establish effective fppf descent on algebraic spaces. Scheme gluing and one-hypercover section results do not state this result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pseudofunctor\", \"isEquivalence_toDescentData\"",
+   "results": "Hits: CategoryTheory.Pseudofunctor.DescentData.isEquivalence_toDescentData_iff_of_sieve_eq, CategoryTheory.Pseudofunctor.isEquivalence_toDescentDataAsCoalgebra_iff_isEquivalence_comonadComparison, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.Pseudofunctor.DescentData.isEquivalence_toDescentData_of_sieve_le",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack equivalences require an IsStack hypothesis for the particular pseudofunctor; quasi-coherent presentation constructors do not establish effective fppf descent on algebraic spaces. Scheme gluing and one-hypercover section results do not state this result."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulToDescentData|isEquivalence_toDescentData|pushforwardPushforwardEquivalence",
+   "results": "Hits: Mathlib/Topology/Sheaves/Module.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack equivalences require an IsStack hypothesis for the particular pseudofunctor; quasi-coherent presentation constructors do not establish effective fppf descent on algebraic spaces. Scheme gluing and one-hypercover section results do not state this result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"descent\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: no effective descent theorem for algebraic-space quasi-coherent modules; generic stack descent assumes IsStack, local presentation constructors supply no descent theorem, and scheme gluing results concern different categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective fppf descent of quasi coherent modules on algebraic spaces equivalence with descent data",
+   "results": "Hits: SheafOfModules.QuasicoherentData.mk.inj, SheafOfModules.QuasicoherentData.X, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.presentation, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, SheafOfModules.QuasicoherentData, SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: no effective descent theorem for algebraic-space quasi-coherent modules; generic stack descent assumes IsStack, local presentation constructors supply no descent theorem, and scheme gluing results concern different categories."
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*quasi|quasi.*descent|fppf.*module",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: no effective descent theorem for algebraic-space quasi-coherent modules; generic stack descent assumes IsStack, local presentation constructors supply no descent theorem, and scheme gluing results concern different categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent module sheaves on algebraic spaces satisfy faithfully flat descent for objects and morphisms",
+   "results": "Hits: SheafOfModules.IsQuasicoherent.mk, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.IsQuasicoherent.recOn",
+   "date": "2026-10-23",
+   "verdict": "no match: no effective descent theorem for algebraic-space quasi-coherent modules; generic stack descent assumes IsStack, local presentation constructors supply no descent theorem, and scheme gluing results concern different categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat covers of algebraic spaces glue arbitrary quasicoherent sheaves uniquely with compatible morphisms",
+   "results": "Hits: AlgebraicGeometry.LocallyRingedSpace.GlueData.toSheafedSpaceGlueData, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.mk.inj, SheafOfModules.QuasicoherentData.mk.inj, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val, AlgebraicGeometry.Flat.instDescScheme, AlgebraicGeometry.Scheme.Cover.gluedCover_t', AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: no effective descent theorem for algebraic-space quasi-coherent modules; generic stack descent assumes IsStack, local presentation constructors supply no descent theorem, and scheme gluing results concern different categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fppf-face-heart-descent",
+  "date": "2026-10-23",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site. Supporting lemma: hypothesis (2) in the unbounded descent argument: underived descent only; prerequisite: ordinary effective descent of quasi-coherent modules for an fppf cover of algebraic spaces, used on U_1 over U_0 times_Z U_0 and on U_0 over Z; present split realizes this prerequisite by scheme-source refinement, scheme fpqc descent, chart assembly, and explicit inverse comparisons (Stacks 04W8 steps (1)-(7)). The inherited creation chain has no machine-resolvable blueprint ancestor; blueprint_refs.py ancestor returns None. The named current blueprint proof is sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3).",
+   "via": [
+    "lem-sfb-fppf-face-heart-descent",
+    "lem-sfb-fppf-face-total-qcoh-equivalence",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-fppf-qcoh-descent",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 04W8 into scheme-source refinement, descent on every scheme test, functorial transitions, cartesian etale chart assembly, arbitrary-test tensor comparison, recovery of the original unrefined data and unique descent of maps. Reused existing DAG statements; no new nodes. Statement unchanged; all empty-cover cases retained.",
+  "blueprint": "Current blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), inherited alteration/moduli/duality prerequisite chain: this node supplies ordinary QCoh descent used by face-heart descent. Its direct source 04W8 steps (1)-(7) is realized in proof steps 1-9, with step 10 checking the boundary case. No nearest imported ancestor is machine-resolvable; retained the inherited null ancestor and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic tool: the functorial Zariski/small-etale scheme module equivalence needed to apply scheme descent."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic tool: representable-diagonal scheme fibre products and etale atlas base changes, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic tool: effective scheme fpqc descent and unique descent of compatible maps; the present unit only supplies the algebraic-space chart and covering steps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-pc-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-a932f721e",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-a932f721e (reviewer sub-agent of L); spot-checked: I read the item (statement unchanged; no new nodes), every cited statement, and the sources: Stacks 04W8 (spaces-descent l.208, 7-point strategy with points 5-7 omitted), 023T (descent l.1584) and 03LZ (spaces-properties l.5267). The 10 steps follow the 04W8 strategy, refining to scheme atlases. Step 2: coverings by covering-calculus clauses (1)-(4) and 022C; B_i(T)=T×_X A_i is a scheme by the scheme-source fibre-product clause, so T need not be étale. Steps 3-5: scheme descent gives H_T, θ and c_f; I checked c_{fg}=c_g g^*c_f by cancellation; the étale-chart restriction is a cartesian family assembled by 03LZ, objects and maps. Step 6 writes out the comparison 04W8 hides on non-étale tests T, via W=T×_X U and R=U×_X U. Steps 7-8 recover each M_i and φ_ij; I checked φ_ik^{-1}φ_jk=φ_ij^{-1} from the cocycle. Step 9 gives β:M≃BK(M) and the triangle identity, so K is an equivalence. Step 10 covers the empty cases. Small cases checked: identity cover forces φ_11=id; a scheme cover reduces to 023T. Duplicate search found nothing stating the item: groupoid-equivalence and invertible-descent are étale-only, big-fppf equivalence is for schemes, sc-etale-descent is sections only. Tool uses accepted as generic black boxes: lem-pc-fpqc-descent, lem-trf-scheme-zariski-etale-quasi-coherent-equivalence, lem-trf-space-representable-etale-scheme-tests. Batch-5 check: every listed citation is a foundational result or definition on algebraic spaces or schemes (03GA, the pullback composition definition, 03DX/03LC, 03EC/025W, 022C, 03LZ). None is given by, or part of the proof of, the trace formula or Poincaré duality. No SGA cited. proof_deps equals the union of uses; three kinds of search recorded. Advisory: the composition-compatibility of the Zariski/étale pullback comparison is used as part of 'canonical'. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFppfQCohDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_fppf_qcoh_descent",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.qcohDescentTransitionOn",
+   "AlgebraicGeometry.AlgebraicSpace.qcohCanonicalDescentTransition",
+   "AlgebraicGeometry.AlgebraicSpace.space_fppf_qcoh_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFppfQCohDescent.lean",
+  "statement": "theorem space_fppf_qcoh_descent {S : Scheme.{u}} {I : Type w} {X : AlgebraicSpace S} {Xᵢ : I → AlgebraicSpace S} (q : ∀ i : I, Xᵢ i ⟶ X) (hq : IsFppfCover q) : (∀ (Mᵢ : ∀ i : I, (Xᵢ i).QCoh) (φ : ∀ i j : I, (moduleTensorPullback (enlargedFibreProductFst (q i) (q j))).obj (Mᵢ i).obj ≅ (moduleTensorPullback (ObjectProperty.homMk (pullback.snd (q i).hom (q j).hom) : enlargedFibreProduct (q i) (q j) ⟶ Xᵢ j)).obj (Mᵢ j).obj), (∀ (i j k : I) (T : AlgebraicSpace S) (a : T ⟶ Xᵢ i) (b : T ⟶ Xᵢ j) (c : T ⟶ Xᵢ k) (rᵢⱼ : T ⟶ enlargedFibreProduct (q i) (q j)) (rⱼₖ : T ⟶ enlargedFibreProduct (q j) (q k)) (rᵢₖ : T ⟶ enlargedFibreProduct (q i) (q k)) (hᵢⱼ₁ : rᵢⱼ ≫ enlargedFibreProductFst (q i) (q j) = a) (hᵢⱼ₂ : rᵢⱼ ≫ ObjectProperty.homMk (pullback.snd (q i).hom (q j).hom) = b) (hⱼₖ₁ : rⱼₖ ≫ enlargedFibreProductFst (q j) (q k) = b) (hⱼₖ₂ : rⱼₖ ≫ ObjectProperty.homMk (pullback.snd (q j).hom (q k).hom) = c) (hᵢₖ₁ : rᵢₖ ≫ enlargedFibreProductFst (q i) (q k) = a) (hᵢₖ₂ : rᵢₖ ≫ ObjectProperty.homMk (pullback.snd (q i).hom (q k).hom) = c), qcohDescentTransitionOn (Mᵢ i).obj (Mᵢ k).obj _ _ (φ i k) rᵢₖ a c hᵢₖ₁ hᵢₖ₂ = qcohDescentTransitionOn (Mᵢ i).obj (Mᵢ j).obj _ _ (φ i j) rᵢⱼ a b hᵢⱼ₁ hᵢⱼ₂ ≪≫ qcohDescentTransitionOn (Mᵢ j).obj (Mᵢ k).obj _ _ (φ j k) rⱼₖ b c hⱼₖ₁ hⱼₖ₂) → ∃ (M : X.QCoh) (α : ∀ i : I, (moduleTensorPullback (q i)).obj M.obj ≅ (Mᵢ i).obj), ∀ i j : I, qcohCanonicalDescentTransition (q i) (q j) M.obj ≪≫ (moduleTensorPullback (ObjectProperty.homMk (pullback.snd (q i).hom (q j).hom) : enlargedFibreProduct (q i) (q j) ⟶ Xᵢ j)).mapIso (α j) = (moduleTensorPullback (enlargedFibreProductFst (q i) (q j))).mapIso (α i) ≪≫ φ i j) ∧ (∀ (M N : X.QCoh) (a : ∀ i : I, (moduleTensorPullback (q i)).obj M.obj ⟶ (moduleTensorPullback (q i)).obj N.obj), (∀ i j : I, (moduleTensorPullback (enlargedFibreProductFst (q i) (q j))).map (a i) ≫ (qcohCanonicalDescentTransition (q i) (q j) N.obj).hom = (qcohCanonicalDescentTransition (q i) (q j) M.obj).hom ≫ (moduleTensorPullback (ObjectProperty.homMk (pullback.snd (q i).hom (q j).hom) : enlargedFibreProduct (q i) (q j) ⟶ Xᵢ j)).map (a j)) → ∃! f : M.obj ⟶ N.obj, ∀ i : I, (moduleTensorPullback (q i)).map f = a i)",
+  "branch": "sheaf-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The equivalent formulation explicitly authorized in the statement: every overlap cocycle datum is effective with specified compatible identifications, and compatible maps between pullbacks of global QCoh modules descend uniquely. Two real-data helpers express transition transport and the canonical transition using the published tensor-normalized composition comparisons. No separate descent category, arbitrary comparison, or hypothesis is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1f8f63b5",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Read the node (10 steps, Stacks 04W8/0DFQ), the module, the report (Worker report and Second reading by Q40 present) and every dependency declaration in side-live: AlgebraicSpace (Type u), QCoh (Mathlib IsQuasicoherent), IsFppfCover (I : Type w, no nonemptiness), moduleTensorPullback, the uniquely pinned moduleTensorComposition, enlargedFibreProduct/Fst (actual sheaf pullback). Clause by clause: the datum uses actual fst/snd overlaps; the cocycle tested on all T with six leg equations is equivalent to the triple-product cocycle (universal property plus associativity of the normalized composition comparison), repeated indices included; effectivity = descent-data iso K(M) ≅ ξ with the canonical transition (real composite); full faithfulness = ∃! descent of compatible maps between QCoh pullbacks; no extra hypotheses; arbitrary index universe w only generalizes 'small'. Edge cases: empty I gives empty X and vacuous data; empty members; identity cover. lean.statement verbatim; node changed only in lean plus two definition stmt_deps used in the signature. Helper bodies have real data; theorem proof is sorry only; docstrings carry the source place, blueprint id and full proof. Note: qcohCanonicalDescentTransition equals moduleTensorSquare(...).app M (owned by def-sfb-space-module-base-change); same formula, not changeable in an S2 fix. No compile needed (no files changed)."
+ }
+}

@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-generated-sheaf-dg-submodule-size",
+ "kind": "statement",
+ "title": "Local description and size of a generated sheaf dg submodule",
+ "statement": "Fix the universes of [def-weil-size-convention]. Let $X$ be a topological space, $\\mathcal O$ a sheaf of commutative rings, $\\mathcal A$ a sheaf dg $\\mathcal O$-algebra and $M$ a left sheaf dg $\\mathcal A$-module, as in [def-sfb-sheaf-dg-module-localization]. For a graded sheaf $E$ put $\\|E\\|=|\\coprod_{U\\in\\operatorname{Op}(X),q\\in\\mathbf Z} E^q(U)|$. A dg subsheaf of $M$ means a sheaf dg $\\mathcal A$-submodule: a family of $\\mathcal O$-submodule sheaves $N^q\\subseteq M^q$, $q\\in\\mathbf Z$, with $d(N^q)\\subseteq N^{q+1}$ and $\\mathcal A^p(V)N^q(V)\\subseteq N^{p+q}(V)$ for all opens $V$ and all $p,q$. Let $F\\subseteq M$ be a dg subsheaf, and let $(U_k,q_k,x_k)_{k\\in K}$ be a set-indexed family with $x_k\\in M^{q_k}(U_k)$. There is a smallest dg subsheaf $G\\subseteq M$ containing $F$ and these sections. A section $z\\in M^q(U)$ belongs to $G^q(U)$ if and only if there is an open cover $U=\\bigcup_i V_i$ such that each restriction $z|_{V_i}$ is a finite sum\n$$y_i+\\sum_{t\\in T_i}\\bigl(a_{it}x_{k_t}|_{V_i}+b_{it}(d x_{k_t})|_{V_i}\\bigr),$$\nwhere $y_i\\in F^q(V_i)$, $V_i\\subseteq U_{k_t}$, $a_{it}\\in\\mathcal A^{q-q_{k_t}}(V_i)$ and $b_{it}\\in\\mathcal A^{q-q_{k_t}-1}(V_i)$. If $\\lambda\\geq\\max(\\aleph_0,|\\operatorname{Op}(X)|,\\|\\mathcal A\\|)$ is an infinite cardinal and $\\mu\\geq\\lambda$ satisfies $\\mu^\\lambda=\\mu$, then $\\|F\\|\\leq\\mu$ and $|K|\\leq\\mu$ imply $\\|G\\|\\leq\\mu$. All cardinals, indexing sets and sections are in the fixed universe.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tag 0FST (lemma-small-acyclics), proof, generated-submodule paragraph. Topological open-site version; replace the asserted arbitrary-cardinal maximum bound by the stated exponentiation-closed bound."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-sheaf-dg-module-localization",
+  "def-sfb-sheaf-dg-submodule"
+ ],
+ "proof": [
+  {
+   "text": "Dg subsheaves are sheaf dg $\\mathcal A$-submodules, as defined in the statement and in the source. For each open $V$ and integer $q$, let $P^q(V)\\subseteq M^q(V)$ be the set of finite expressions displayed in the statement, with $y\\in F^q(V)$ and every generator used defined on $V$. The empty sum gives $F^q(V)\\subseteq P^q(V)$; taking $y=0$, $a=1$, $b=0$ gives $x_k\\in P^{q_k}(U_k)$. Restriction restricts every coefficient and $y$. Concatenating lists, negating coefficients and multiplying coefficients by a homogeneous section of $\\mathcal A$ show that $P$ is a graded submodule presheaf.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FST (lemma-small-acyclics), proof, generated-submodule paragraph; details of its local-expression construction on the open site."
+   }
+  },
+  {
+   "text": "For a term with $x=x_k$ of degree $r$, the left Leibniz rule gives $d(ax+b\\,dx)=(da)x+\\bigl((-1)^{q-r}a+db\\bigr)dx$ in degree $q+1$, since $d^2x=0$. The new coefficients have degrees $q+1-r$ and $q-r$. Also $dy\\in F^{q+1}(V)$. Thus $d(P^q(V))\\subseteq P^{q+1}(V)$, without adjoining any further differential generators.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FST (lemma-small-acyclics), proof, generated-submodule paragraph; details of its local-expression construction on the open site."
+   }
+  },
+  {
+   "text": "Define $H^q(U)$ to consist of those $z\\in M^q(U)$ whose restrictions belong to $P^q$ on an open cover of $U$. This condition is preserved by restriction, by intersecting a witness cover with the smaller open. It is local: if it holds on each member $U_j$ of a cover, the union of their witness covers is a witness cover of $U$. For two such sections use pairwise intersections of their witness covers; then the submodule property of $P$ proves closure under addition. Negation, homogeneous scalar multiplication and $d$ are checked on one witness cover using steps 1 and 2.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FST (lemma-small-acyclics), proof, generated-submodule paragraph; details of its local-expression construction on the open site."
+   }
+  },
+  {
+   "text": "A compatible family in $H^q(U_j)$ glues uniquely in the sheaf $M^q$ to a section $z\\in M^q(U)$. The restriction of $z$ to each $U_j$ satisfies the defining local condition, so its locality from step 3 puts $z$ in $H^q(U)$. This also works for the empty cover of the empty open. Consequently $H$ is a dg submodule sheaf. If $N\\subseteq M$ is any dg submodule sheaf containing $F$ and all $x_k$, its closure under $d$ and the action puts $P^q(V)$ in $N^q(V)$. A section locally in $P$ is then locally in $N$; glue its local lifts in $N$ and use uniqueness in $M$ to see it lies in $N$. Thus $H\\subseteq N$, and $G=H$ is the required smallest subsheaf and has exactly the stated local description.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FST (lemma-small-acyclics), proof, generated-submodule paragraph; details of its local-expression construction on the open site."
+   }
+  },
+  {
+   "text": "Assume the size hypotheses. Form an alphabet $B$ as the disjoint union of $\\operatorname{Op}(X)$, $\\mathbf Z$, $K$, all sections of $F$ with their open and degree labels, all sections of $\\mathcal A$ with those labels, and finitely many punctuation symbols. Each summand has size at most $\\mu$. A finite tagged union of sets of size at most $\\mu$ embeds in $\\mu\\times\\mu$, so $|B|\\leq\\mu$ by the infinite-cardinal-square lemma. A raw expression is encoded by the finite word recording its open, degree, $y$, and the ordered list of triples $(k,a,b)$. Hence the set $E$ of well-typed raw expressions has $|E|\\leq|\\operatorname{List}(B)|\\leq\\mu$ by the finite-list lemma. Evaluation yields every element of $P$; no uniqueness of expression is required.",
+   "uses": [
+    "lem-sfb-infinite-cardinal-square",
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FST (lemma-small-acyclics), generated-submodule size assertion; finite-expression coding made explicit using the cited cardinal arithmetic."
+   }
+  },
+  {
+   "text": "Fix $U,q$. For every $z\\in G^q(U)$ choose a witness cover and expressions for its restrictions. Discard repeated opens, retaining one expression for each distinct open in the cover; its union is still $U$. Encode this witness by a function $c_z:\\operatorname{Op}(X)\\to E\\sqcup\\{*\\}$, assigning the chosen expression on used opens and the extra symbol elsewhere. If two sections have the same code, they agree on the used cover and hence are equal by the sheaf uniqueness axiom. Thus this choice gives an injection of $G^q(U)$ into the function set. By the square lemma, $|E\\sqcup\\{*\\}|\\leq\\mu$. Fix an injection $\\operatorname{Op}(X)\\hookrightarrow\\lambda$ and extend codes by a fixed value outside its image; this embeds the function set into a set of size $\\mu^\\lambda=\\mu$. Finally choose these injections for all $(U,q)$. There are at most $\\mu$ such pairs, since $|\\operatorname{Op}(X)|\\leq\\lambda\\leq\\mu$, $|\\mathbf Z|=\\aleph_0\\leq\\mu$, and $\\mu^2=\\mu$. The total section set embeds in $\\mu\\times\\mu$, again of size $\\mu$, proving $\\|G\\|\\leq\\mu$.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "lem-sfb-infinite-cardinal-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FST (lemma-small-acyclics), generated-submodule paragraph, corrected topological-site size estimate: code arbitrary local gluing data using the hypothesis mu^lambda=mu."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-sheaf-dg-module-localization",
+  "lem-sfb-infinite-cardinal-square",
+  "lem-weil-pbc-finite-list-cardinality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tag 0FST (lemma-small-acyclics), generated-submodule paragraph, filling the explicitly omitted details and proving the exponentiation-closed bound already in the item."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The subsheaf differential graded module generated by a bounded family of local sections has bounded cardinality after sheafification",
+   "results": "{\"t\": \"2026-10-24T08:32:37Z\", \"tool\": \"leanfinder\", \"query\": \"The subsheaf differential graded module generated by a bounded family of local sections has bounded cardinality after sheafification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.GeneratingSections.IsFiniteType.finite\", \"SheafOfModules.GeneratingSections.I\", \"SheafOfModules.LocalGeneratorsData.I\", \"SheafOfModules.LocalGeneratorsData.generators\", \"SheafOfModules.IsFiniteType\"], \"digest\": \"eead7029c4edf3ad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeneratingSections and its finite-type predicate encode generators but give no cardinal bound on all sections, no dg closure, and no local finite-expression characterization. Presentable.Presheaf concerns presentability of ordinary presheaf categories, not this dg subsheaf estimate. Read Sheaf/Generators.lean:40-58,94-98 and CategoryTheory/Presentable/Presheaf.lean:79-92; grep in the sheaf-module directory has no cardinality lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "(cardinal|mk_|lift_mk).*(sheaf|[sS]heaf)|[sS]heaf.*(cardinal|mk_|lift_mk)",
+   "results": "{\"t\": \"2026-10-24T08:33:12Z\", \"tool\": \"grep\", \"query\": \"(cardinal|mk_|lift_mk).*(sheaf|[sS]heaf)|[sS]heaf.*(cardinal|mk_|lift_mk)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/GluingOneHypercover.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Scheme.lean\", \"Mathlib/Geometry/RingedSpace/SheafedSpace.lean\", \"Mathlib/CategoryTheory/Sites/SheafHom.lean\", \"Mathlib/CategoryTheory/Sites/SheafHom.lean\", \"Mathlib/CategoryTheory/Sites/SheafHom.lean\", \"Mathlib/CategoryTheory/Sites/SheafHom.lean\"], \"digest\": \"4bc1bed829fdca22\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeneratingSections and its finite-type predicate encode generators but give no cardinal bound on all sections, no dg closure, and no local finite-expression characterization. Presentable.Presheaf concerns presentability of ordinary presheaf categories, not this dg subsheaf estimate. Read Sheaf/Generators.lean:40-58,94-98 and CategoryTheory/Presentable/Presheaf.lean:79-92; grep in the sheaf-module directory has no cardinality lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cardinal\"",
+   "results": "{\"t\": \"2026-10-24T08:33:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"cardinal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.instIsCardinalLocallyPresentableFunctorOppositeOfHasPullbacks\", \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeFreeYonedaOfHasColimitsOfSize\", \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeTypeObjUliftYonedaOfHasColimitsOfSize\"], \"digest\": \"5dfe41e184cbc309\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeneratingSections and its finite-type predicate encode generators but give no cardinal bound on all sections, no dg closure, and no local finite-expression characterization. Presentable.Presheaf concerns presentability of ordinary presheaf categories, not this dg subsheaf estimate. Read Sheaf/Generators.lean:40-58,94-98 and CategoryTheory/Presentable/Presheaf.lean:79-92; grep in the sheaf-module directory has no cardinality lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cardinality bound for a sheaf of differential graded modules generated by a set of local sections",
+   "results": "{\"t\": \"2026-10-24T08:33:13Z\", \"tool\": \"leansearch\", \"query\": \"Cardinality bound for a sheaf of differential graded modules generated by a set of local sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections.IsFiniteType.mk\", \"SheafOfModules.GeneratingSections.mk\", \"SheafOfModules.LocalGeneratorsData.generators\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.mk.sizeOf_spec\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"SheafOfModules.GeneratingSections.IsFiniteType.finite\", \"SheafOfModules.LocalGeneratorsData.ctorIdx\"], \"digest\": \"6c3ab73d7e51a5a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeneratingSections and its finite-type predicate encode generators but give no cardinal bound on all sections, no dg closure, and no local finite-expression characterization. Presentable.Presheaf concerns presentability of ordinary presheaf categories, not this dg subsheaf estimate. Read Sheaf/Generators.lean:40-58,94-98 and CategoryTheory/Presentable/Presheaf.lean:79-92; grep in the sheaf-module directory has no cardinality lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A differential graded subsheaf generated by mu local sections has at most mu sections if mu to the cardinality of the topology equals mu",
+   "results": "{\"t\": \"2026-10-24T08:33:14Z\", \"tool\": \"leanfinder\", \"query\": \"A differential graded subsheaf generated by mu local sections has at most mu sections if mu to the cardinality of the topology equals mu\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections.I\", \"SheafOfModules.LocalGeneratorsData.I\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.LocalGeneratorsData.generators\", \"SheafOfModules.GeneratingSections\", \"SheafOfModules.LocalGeneratorsData.X\"], \"digest\": \"754b1ccd28b5f206\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeneratingSections and its finite-type predicate encode generators but give no cardinal bound on all sections, no dg closure, and no local finite-expression characterization. Presentable.Presheaf concerns presentability of ordinary presheaf categories, not this dg subsheaf estimate. Read Sheaf/Generators.lean:40-58,94-98 and CategoryTheory/Presentable/Presheaf.lean:79-92; grep in the sheaf-module directory has no cardinality lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "cardinal|Cardinal",
+   "results": "{\"t\": \"2026-10-24T08:35:07Z\", \"tool\": \"grep\", \"query\": \"cardinal|Cardinal\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeneratingSections and its finite-type predicate encode generators but give no cardinal bound on all sections, no dg closure, and no local finite-expression characterization. Presentable.Presheaf concerns presentability of ordinary presheaf categories, not this dg subsheaf estimate. Read Sheaf/Generators.lean:40-58,94-98 and CategoryTheory/Presentable/Presheaf.lean:79-92; grep in the sheaf-module directory has no cardinality lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|dgModule|DGModule|DgModule",
+   "results": "{\"t\": \"2026-10-24T08:58:49Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|dgModule|DGModule|DgModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeneratingSections/LocalGeneratorsData (Generators.lean:43-48,94-98,140ff) concern ordinary module generators, not dg closure or cardinality of all local gluings; Submodule.spanRank_span_le_card bounds the size of an algebraic generating set, not the size of a sheaf. The second phrasing and sheaf-directory grep give no stronger result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The subsheaf of a differential graded module generated by a set of local sections has a cardinal bound",
+   "results": "{\"t\": \"2026-10-24T08:58:49Z\", \"tool\": \"leansearch\", \"query\": \"The subsheaf of a differential graded module generated by a set of local sections has a cardinal bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.spanRank_span_le_card\", \"SheafOfModules.GeneratingSections.mk\", \"SheafOfModules.GeneratingSections.mk.sizeOf_spec\", \"SheafOfModules.LocalGeneratorsData.I\", \"Submodule.spanFinrank_span_le_encard\", \"SheafOfModules.LocalGeneratorsData.ctorIdx\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.mk\", \"SheafOfModules.GeneratingSections.IsFiniteType\"], \"digest\": \"1a1e855cbe734052\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeneratingSections/LocalGeneratorsData (Generators.lean:43-48,94-98,140ff) concern ordinary module generators, not dg closure or cardinality of all local gluings; Submodule.spanRank_span_le_card bounds the size of an algebraic generating set, not the size of a sheaf. The second phrasing and sheaf-directory grep give no stronger result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"span\"",
+   "results": "{\"t\": \"2026-10-24T08:58:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"span\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeneratingSections/LocalGeneratorsData (Generators.lean:43-48,94-98,140ff) concern ordinary module generators, not dg closure or cardinality of all local gluings; Submodule.spanRank_span_le_card bounds the size of an algebraic generating set, not the size of a sheaf. The second phrasing and sheaf-directory grep give no stronger result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The differential graded submodule sheaf generated by local sections is locally a finite linear combination of these sections and their differentials",
+   "results": "{\"t\": \"2026-10-24T08:58:50Z\", \"tool\": \"leanfinder\", \"query\": \"The differential graded submodule sheaf generated by local sections is locally a finite linear combination of these sections and their differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.LocalGeneratorsData.generators\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.GeneratingSections.I\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.I\", \"SheafOfModules.LocalGeneratorsData.X\"], \"digest\": \"6690924e693a5827\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeneratingSections/LocalGeneratorsData (Generators.lean:43-48,94-98,140ff) concern ordinary module generators, not dg closure or cardinality of all local gluings; Submodule.spanRank_span_le_card bounds the size of an algebraic generating set, not the size of a sheaf. The second phrasing and sheaf-directory grep give no stronger result."
+  },
+  {
+   "tool": "grep",
+   "query": "(cardinal|Cardinal|span|generated)",
+   "results": "{\"t\": \"2026-10-24T08:59:20Z\", \"tool\": \"grep\", \"query\": \"(cardinal|Cardinal|span|generated)\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"813e40675db4eb55\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeneratingSections/LocalGeneratorsData (Generators.lean:43-48,94-98,140ff) concern ordinary module generators, not dg closure or cardinality of all local gluings; Submodule.spanRank_span_le_card bounds the size of an algebraic generating set, not the size of a sheaf. The second phrasing and sheaf-directory grep give no stronger result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cardinality estimate for the sheafification of a subpresheaf of differential graded modules generated by local sections",
+   "results": "{\"t\": \"2026-10-24T08:59:22Z\", \"tool\": \"leanfinder\", \"query\": \"Cardinality estimate for the sheafification of a subpresheaf of differential graded modules generated by local sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections.I\", \"SheafOfModules.LocalGeneratorsData.I\", \"SheafOfModules.LocalGeneratorsData.generators\", \"SheafOfModules.LocalGeneratorsData.X\", \"SheafOfModules.Presentation.map_generators_I\", \"SheafOfModules.GeneratingSections\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\"], \"digest\": \"8725e4fd8c9f16ac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeneratingSections/LocalGeneratorsData (Generators.lean:43-48,94-98,140ff) concern ordinary module generators, not dg closure or cardinality of all local gluings; Submodule.spanRank_span_le_card bounds the size of an algebraic generating set, not the size of a sheaf. The second phrasing and sheaf-directory grep give no stronger result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sheaf-dg-small-acyclic-subobjects",
+  "date": "2026-10-24",
+  "group": "Q107"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Affine passage to dg global modules, including the local-to-finite-cell perfectness theorem and the actual coefficient adjunction comparisons. Independent tool: Affine equivalence: construct the dg adjunction before checking its unit and counit by the ordinary affine equivalence. Resolution prerequisite: set of acyclic extension tests before the pushout construction of 0FT0. Independent prerequisite in the injectivity-test proof: nonzero small acyclic submodule in each nonzero quotient, used to make the transfinite filtration strictly increase. Size prerequisite: the generated-submodule paragraph of Stacks 0FST, before choosing the seed and adjoining local primitives.",
+   "via": [
+    "lem-sfb-sheaf-dg-small-acyclic-subobjects",
+    "lem-sfb-sheaf-dg-injectivity-tests",
+    "lem-sfb-flat-ringed-dg-pushpull",
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-generated-sheaf-dg-submodule-size",
+  "worker": "stage1",
+  "summary": "Proved the local finite-expression formula by constructing a dg submodule presheaf, checking the signed differential explicitly, and taking its local saturation inside M. Proved minimality directly by sheaf gluing. Counted finite expression codes using two existing Mathlib leaves, then injectively coded local gluings by functions on the topology. Retained the statement and its exponentiation-closed cardinal bound; made its dg A-submodule convention explicit in the proof. No new nodes: every closure check is a written elementary argument and both non-elementary cardinal facts already have leaves. Preserved earlier searches and added actual N7 search logs.",
+  "blueprint": "Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and both current direct-image and unit proofs. This is the inherited resolution-size prerequisite in the chain serving det-thm-sf-ctf-stability-direct-images proof (3); it fills the generated-submodule paragraph of 0FST. blueprint_refs ancestor returns None, so retain the null ancestor and full via chain. Whole-blueprint searches generated sheaf, differential graded and cardinal give no equivalent node; same_as remains [].",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N7-e54001867",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-e54001867 (reviewer sub-agent of L); spot-checked: I read the whole split: one commit with the item and report, and no new nodes. All six steps are correct against Stacks sdga.tex Tag 0FST lemma-small-acyclics, proof paragraph 2 (lines 3654-3690), whose omitted details the split writes out. Step 1: the expressions P are closed under restriction, sums and homogeneous A-multiples, since cy lies in F for an A-submodule F. Step 2: I checked the signed Leibniz rule, d(ax+b dx)=(da)x+((-1)^{q-r}a+db)dx, with correct degrees and d^2x=0. Steps 3-4: the local saturation is a subsheaf by gluing in M plus locality, and it is minimal via any N containing P and gluing in N. Step 5: the alphabet has size at most mu by lem-sfb-infinite-cardinal-square (Cardinal.mul_eq_self), and the expressions by lem-weil-pbc-finite-list-cardinality (Cardinal.mk_list_le_max, a Mathlib leaf of another unit, so it needs no tool_uses). Step 6: coding sections by functions Op->E+{*} is injective by separation, which gives mu^lambda=mu, and there are at most mu pairs (U,q). Edge cases checked: X empty, K empty, F=M, A=O, odd degrees, repeated opens. The exponent-closure hypothesis is needed, because Stacks' max bound fails, and the statement is not weakened. Duplicate search over the DAG (0FST, generated/smallest subsheaf, cardinal+subsheaf) found only the item's two 0FST citers, and the proof cites neither, so there is no cycle. FIX (B2/B3): the statement used 'dg subsheaf' without defining it, and step 1 had to fix the convention. Read as a plain subcomplex, the statement is false, since a*x_k need not lie in G. I added an inline definition to the statement: O-submodule sheaves stable under d and the A-action. This matches the source, the title and the citer lem-sfb-sheaf-dg-small-acyclic-subobjects. Step 1's first sentence now points to it; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GeneratedSheafDgSubmoduleSize",
+  "declaration": "CategoryTheory.SheafDg.exists_generated_subsheaf_size",
+  "declarations": [
+   "CategoryTheory.SheafDg.gradedSectionSet",
+   "CategoryTheory.SheafDg.generatedSectionTerm",
+   "CategoryTheory.SheafDg.IsGeneratedSectionExpression",
+   "CategoryTheory.SheafDg.IsLocallyGeneratedSection",
+   "CategoryTheory.SheafDg.exists_generated_subsheaf_size"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/GeneratedSheafDgSubmoduleSize.lean",
+  "statement": "theorem exists_generated_subsheaf_size (A : Algebra S) (M : LeftModule A) (F : Subsheaf A M) {K : Type u} (U : K → Opens X) (r : K → ℤ) (x : ∀ k : K, (M.X.X (r k)).val.obj (op (U k))) : ∃ G : Subsheaf A M, F.IsContained G ∧ (∀ k : K, x k ∈ (G.piece (r k)).val (op (U k))) ∧ (∀ N : Subsheaf A M, F.IsContained N → (∀ k : K, x k ∈ (N.piece (r k)).val (op (U k))) → G.IsContained N) ∧ (∀ (q : ℤ) (V : Opens X) (z : (M.X.X q).val.obj (op V)), z ∈ (G.piece q).val (op V) ↔ IsLocallyGeneratedSection A M F U r x q V z) ∧ (∀ κ μ : Cardinal.{u}, Cardinal.aleph0 ≤ κ → Cardinal.mk (Opens X) ≤ κ → Cardinal.mk (gradedSectionSet A.X.X) ≤ κ → κ ≤ μ → μ ^ κ = μ → Cardinal.mk F.sectionSet ≤ μ → Cardinal.mk K ≤ μ → Cardinal.mk G.sectionSet ≤ μ)",
+  "branch": "sheaf-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca7d5f806",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Read item, new def node def-sfb-sheaf-dg-submodule, both modules, deps SheafDgModuleLocalization (actionSection/tensorSection) and SmallSiteModuleSubsheafCodes, Stacks sdga.tex 0FST lines 3645-3690. Clauses match: Subsheaf = per-degree ModuleSubsheafCode with d_mem and action_mem; existence, containment, minimality, local finite-expression iff over Type u covers with y∈F, V≤U_k, a∈A^{q-r}, b∈A^{q-(r+1)}, restriction of x and dx, degree transport by XIsoOfEq; size bound with ℵ0≤κ, |Opens X|≤κ, ‖A‖≤κ, κ≤μ, μ^κ=μ, ‖F‖≤μ, |K|≤μ → ‖G‖≤μ. lean.statement verbatim; new node has §5 fields, no name clash, reuses ModuleSubsheafCode; single universe u as the node states; docstrings and proof steps present; only the theorem is sorried. Edge cases K empty, empty open/X, F=M, zero algebra checked. No findings; compile not reproduced per instruction."
+ }
+}

@@ -361,22 +361,13 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-a97ccdbf6 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is unchanged from the Q23 import. I checked all ten steps against ILO XIII 3.2.2, 3.3, Prop 3.4.2 (both stages) and 3.5.1 in the local PDF. The route is the same: induction hypothesis on X'; the height argument through the 02JU dimension inequality (dominant, birational, so trdeg 0, giving s=t and kappa(y)/kappa(t) algebraic); one-point generic fibres, then 02NW makes the components finite surjective, and intersections miss t because the fibres over t are distinct points; generic sections spread by the affine-neighbourhood limit plus lfp section descent; the proper-unit triangle C ≅ a_*H; the induction hypothesis on Zbar, where prefixing (0) gives height ≥ c+1 so t is not in A; proper base change for M in D^+ with ell-torsion cohomology; the h_! triangle on F with q proper; the octahedral axiom. Every cited statement says what its step takes from it. I checked the edge cases: K=0, p an isomorphism, no surviving component, T'=∅, Z=∅, c=1. The new node lem-per-proper-finite-coefficient-bounded-preservation is statement-only and self-contained. It is true: Stacks 0GL0 (theorem-constructible-shriek) with the identity compactification, plus 095U (lemma-cohomological-dimension-proper) with a uniform fibre-dimension bound from finitely many charts; no finite dimension or invertibility is needed. It matches ILO's proper finiteness input and is not a clause of the item. On duplicates: lem-per-quasi-excellent-etale-direct-image-finiteness contains the proper case, but its closure reaches this item, so citing it would make a cycle. The pbc proper-finiteness nodes need finite dimension and invertibility, and the fd node needs a base over a field. Advisory: a later split of the new node can cite lem-weil-pbc-etale-compactification-constructibility and lem-kun-proper-torsion-cd-bound; neither reaches the item. Batch 5: the closure from both targets, stopping at the assumption leaves, grows by only the new node. All three flagged citations are already in the closure without this item and are generic: det-properbasechange-modules is general proper base change, given by neither assumption; lem-per-quasi-excellent-finite-type-stability is Stacks 07QU algebra, reaching lem-trf-g-ring-affine-cover only through G-ring algebra; lem-trf-local-dimension-formula is the 02JU inequality. All three are accepted. I accept all 16 tool_uses as generic inputs. There is no SGA citation. I made no changes."
  },
- "lean": {
+ "lean": null,
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/AlgebraicGeometry/BirationalBadLocusComparison.lean",
   "module": "Sheaf.AlgebraicGeometry.BirationalBadLocusComparison",
   "declaration": "AlgebraicGeometry.Etale.birational_bad_locus_comparison",
-  "declarations": [
-   "AlgebraicGeometry.Etale.boundedConstructibleOff",
-   "AlgebraicGeometry.Etale.birationalBadLocusComparison",
-   "AlgebraicGeometry.Etale.BirationalBadLocusConclusion",
-   "AlgebraicGeometry.Etale.birational_bad_locus_comparison"
-  ],
-  "file": "lean/Sheaf/AlgebraicGeometry/BirationalBadLocusComparison.lean",
-  "statement": "theorem birational_bad_locus_comparison (ell : ℕ) [Fact ell.Prime] (B : Type (u + 1)) [Field B] [Finite B] [CharP B ell] (c : ℕ) (hc : 1 ≤ c) (ih : ∀ (Z : Scheme.{u}) [IsNoetherian Z], (∀ V : Z.affineOpens, IsQuasiExcellent Γ(Z, V.1)) → (∀ z : Z, IsUnit (ell : Z.presheaf.stalk z)) → ∀ (V : Scheme.{u}) (v : V ⟶ Z) [IsOpenImmersion v] (L : DerivedCategoryModule B V), DerivedCategory.isBoundedConstructible B V L → ∃ O : Z.Opens, (∀ z : Z, z ∉ O → (c : WithBot ℕ∞) ≤ ringKrullDim (Z.presheaf.stalk z)) ∧ DerivedCategory.isBoundedConstructible B O.toScheme (D(upperStar (ModuleCat.{u + 1} B) O.ι).obj ((rightDerivedLowerStar (ModuleCat.{u + 1} B) v).obj L))) {U X X' T : Scheme.{u}} [IsIntegral X] [IsNoetherian X] [IsIntegral X'] (hX : ∀ V : X.affineOpens, IsQuasiExcellent Γ(X, V.1)) (hinv : ∀ x : X, IsUnit (ell : X.presheaf.stalk x)) (j : U ⟶ X) [IsOpenImmersion j] (hdense : Dense (Set.range j)) (K : DerivedCategoryModule B U) (hK : DerivedCategory.isBoundedConstructible B U K) (i : T ⟶ X) [IsClosedImmersion i] [IsIntegral T] (t : T) (ht : IsGenericPoint t (Set.univ : Set T)) (hheight : ringKrullDim (X.presheaf.stalk (i t)) = (c : WithBot ℕ∞)) (hgood : boundedConstructibleOff B i ((rightDerivedLowerStar (ModuleCat.{u + 1} B) j).obj K)) (p : X' ⟶ X) [IsProper p] (hbir : ∃ V : X.Opens, Dense (V : Set X) ∧ IsIso (p ∣_ V)) (n : ℕ) (E : Fin n → Scheme.{u}) (e : ∀ k, E k ⟶ X') (he : ∀ k, IsSeparated (e k) ∧ LocallyOfFiniteType (e k) ∧ QuasiCompact (e k) ∧ Etale (e k)) (hcover : ∀ x' : X', ∃ (k : Fin n) (z : E k), e k z = x' ∧ IsIso ((e k).residueFieldMap z)) : ∃ W : X.Opens, i t ∈ W ∧ BirationalBadLocusConclusion B (j ∣_ W) (p ∣_ W) (i ∣_ W) (fun k ↦ ((e k) ⁻¹ᵁ (p ⁻¹ᵁ W)).toScheme) (fun k ↦ e k ∣_ (p ⁻¹ᵁ W)) (D(upperStar (ModuleCat.{u + 1} B) (j ⁻¹ᵁ W).ι).obj K)",
-  "branch": "newtargets-dag",
-  "by": "Q16",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.BirationalBadLocusComparison deleted (dead: no target reaches it); this node is not reached either."
+  "reason": "module deleted as dead (no target reaches it, node not reached); declaration exists nowhere else in lean/ or Mathlib, so the node has no Lean statement"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -386,5 +377,16 @@
   "result": "pass",
   "note": "Checked every clause of the node against the Lean: induction hypothesis (all Noetherian quasi-excellent Z, open immersions v, L in D^b_c), X/j/K/T/t height c, hgood via boundedConstructibleOff, proper birational p, finite completely decomposed etale family, shrinking ∃W ∋ i t with all data restricted, U' = pullback, T' = ∐D closed immersion with integral finite surjective components and sections, D^b_c off T', cone of the canonical comparison in D^b_c(T). The comparison is the q^*⊣Rq_* mate of exactDerivedSquareUpperStarIso ≫ a^* exactDerivedBaseChangeMap; orientations checked; it is the ILO 3.3.2 base-change unit plus restriction, not arbitrary. Edge cases: m=0, c=1, K=0, n=0 excluded by hcover. Only lean and stmt_deps changed; the stmt_dep gain def-kun-unbounded-exchange is a landed node, allowed. lean.statement verbatim. 16 plain imports = proof-dep modules. Docstrings with source, blueprint and all 10 steps. No hollow defs, sorry only in the theorem, no name collisions. nt_compile --json clean in 5.0 s. Advisory: upperStar (def-weil-pbc-inverse-image) is reached only transitively via def-kun-unbounded-exchange."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

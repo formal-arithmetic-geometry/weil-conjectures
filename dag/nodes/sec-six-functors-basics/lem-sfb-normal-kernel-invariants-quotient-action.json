@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-normal-kernel-invariants-quotient-action",
+ "kind": "statement",
+ "title": "Normal-kernel invariants as rational modules for an affine fppf quotient",
+ "statement": "Let $A$ be a commutative ring. Let $K,H,Q$ be flat affine finitely presented group schemes over $\\operatorname{Spec}A$ [def-sc-group-scheme, def-weil-affine-spectrum, pqf-def-affine-morphism, def-sbc-locally-finite-presentation, def-weil-flat-morphism], with homomorphisms $K\\to H\\xrightarrow{\\pi}Q$. Assume that $K=H\\times_{Q,e_Q}\\operatorname{Spec}A$, that $\\pi$ is faithfully flat and locally of finite presentation, and that $Q$ represents the fppf quotient sheaf $H/K$; fppf covers are jointly surjective families of flat locally finitely presented morphisms. For any of these groups $J$, put $C_J=\\Gamma(J,\\mathcal O_J)$ with the coordinate Hopf algebra maps induced by multiplication, identity and inverse, as in [def-sfb-affine-coordinate-hopf-algebra]. A rational $J$-module is an arbitrary $A$-module $V$ with an $A$-linear coaction $\\rho_V:V\\to V\\otimes_A C_J$ satisfying counit and coassociativity; tensor products are as in [def-weil-pbc-module-tensor-product]. Write $V^J=\\{v:\\rho_V(v)=v\\otimes1\\}$. An equivariant linear map commutes with coactions. Inflation of a rational $Q$-module means composing its coaction with $1\\otimes\\pi^*:V\\otimes_A C_Q\\to V\\otimes_A C_H$.\nFor every rational $H$-module $V$, the submodule $N=V^K=\\ker(\\rho_{V|K}-(v\\mapsto v\\otimes1))$ has a unique rational $Q$-module structure whose inflation makes $N\\hookrightarrow V$ equivariant. Every $H$-equivariant map $V\\to V'$ restricts to a $Q$-equivariant map $V^K\\to(V')^K$. For any rational $Q$-module $W$, inflation satisfies $(\\operatorname{Inf}_\\pi W)^H=W^Q$ as submodules of $W$; for any two rational $Q$-modules, an $A$-linear map is $Q$-equivariant if and only if it is $H$-equivariant after inflation. No finiteness or flatness is required of $V,V',W$ or $N$, and $K$ need not be smooth or reduced.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces.pdf",
+  "place": "Proposition 9.5.1 proof, printed p.525: the fully faithful pullback j^* along BH to BQ and kernel-invariant direct image j_*; the rational-module form of that descent input. Local PDF WANTED; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf",
+  "url": "https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf"
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-module-tensor-product",
+  "def-sfb-affine-coordinate-hopf-algebra",
+  "def-sfb-fppf-group-quotient-presentation",
+  "def-sfb-ring-rational-module-data"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=C_H$, $D=C_K$, $C=C_Q$ and $u=\\pi^*:C\\to B$. Apply the affine flatness criterion to the whole affine schemes: $B,D,C$ are flat $A$-modules and $u$ is flat. Since $\\pi$ is surjective, the flat-surjective-spectrum criterion makes $u$ faithfully flat. These applications use flatness of the three structural morphisms and faithful flatness of $\\pi$, not flatness of a representation module.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/algebra.tex",
+    "place": "Tags 01U5 (lemma-flat-characterize) and 00HQ (lemma-ff-rings)"
+   }
+  },
+  {
+   "text": "Use the coordinate Hopf description to evaluate a coaction at points: for an $A$-algebra $S$ and $h:B\\to S$, set $h\\cdot(v\\otimes s)=\\sum v_i\\otimes h(b_i)s$ when $\\rho_V(v)=\\sum v_i\\otimes b_i$. The counit and coassociativity identities give $e\\cdot x=x$ and $h\\cdot(h'\\cdot x)=(hh')\\cdot x$; the inverse gives the inverse operator. Equality at the universal point $B\\to B$ is precisely equality of coaction maps. The scheme-theoretic kernel hypothesis gives $\\pi(h^{-1}kh)=e$, so $h^{-1}kh\\in K(S)$. It also gives mutually inverse morphisms\n$$H\\times_AK\\longrightarrow H\\times_QH,\\quad(h,k)\\longmapsto(h,hk),\\qquad(h_1,h_2)\\longmapsto(h_1,h_1^{-1}h_2).$$\nThey are morphisms because multiplication and inversion are, and the second component of the inverse factors through the defining kernel fibre product. The two composites are identities by cancellation. Thus $B\\otimes_CB$ identifies with $B\\otimes_AD$, with the two projections corresponding to $h$ and $hk$.",
+   "uses": [
+    "def-sfb-affine-coordinate-hopf-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 022S, group-scheme laws; direct evaluation and kernel fibre-product calculation"
+   }
+  },
+  {
+   "text": "Write $d=\\rho_{V|K}-(v\\mapsto v\\otimes1)$ and $i:N=\\ker d\\hookrightarrow V$. Tensor the exact sequence $0\\to N\\xrightarrow{i}V\\xrightarrow{d}V\\otimes_AD$ with any flat $A$-algebra $S$. Exactness gives an injection $i_S:N\\otimes_AS\\hookrightarrow V\\otimes_AS$ with image exactly $\\ker(d\\otimes1_S)=(V\\otimes_AS)^{K_S}$. Here the latter invariants mean the kernel of the base-changed coaction minus the trivial coaction, under the tensor associativity and symmetry identifications. This is only a flat-base-change assertion. In particular it applies to $S=B$ and $S=D$. Also every image of $n\\in N$ is fixed by every $k\\in K(T)$ for every $A$-algebra $T$: evaluate the original equality $\\rho_{V|K}(n)=n\\otimes1$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HD (lemma-flat), applied to the defining kernel sequence"
+   }
+  },
+  {
+   "text": "For $n\\in N$ take $h\\in H(B)$ to be the universal point. Over $T=B\\otimes_AD$ let $k\\in K(T)$ be universal and extend $h$ to $T$. Normality from step 2 and the last equality of step 3 give\n$$k\\cdot(h\\cdot n)=h\\cdot((h^{-1}kh)\\cdot n)=h\\cdot n.$$\nThis is exactly $(d\\otimes1_B)(\\rho_V(n))=0$, with the tensor factors reordered. Step 3 therefore factors $\\rho_V i$ uniquely as $(i\\otimes1_B)\\alpha$ for an $A$-linear map $\\alpha:N\\to N\\otimes_AB$. The counit identity for $\\alpha$ follows after $i$; its coassociativity follows after $i\\otimes1_B\\otimes1_B$, injective by applying flat tensor exactness twice. Both then reduce to the corresponding identities of $\\rho_V$. Likewise, after the injection $i\\otimes1_D$, its restriction to $K$ is $n\\mapsto n\\otimes1$; hence $K$ acts trivially on this rational $H$-module $N$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/groupoids.tex",
+    "place": "Tag 00HD (lemma-flat); Tag 022S, conjugation identity at universal points"
+   }
+  },
+  {
+   "text": "Under the isomorphism $H\\times_AK\\simeq H\\times_QH$ of step 2, the two pullbacks of $\\alpha(n)$ are equal: they are $h\\cdot n$ and $(hk)\\cdot n=h\\cdot(k\\cdot n)=h\\cdot n$, since the restriction of $\\alpha$ to $K$ is trivial. This equality is in $N\\otimes_AB\\otimes_AD$, using the coaction laws for $\\alpha$ itself. Apply Amitsur exactness to the faithfully flat ring map $C\\to B$ and the $C$-module $M=N\\otimes_AC$. It identifies $M$ with the equalizer of\n$$N\\otimes_AB\\rightrightarrows N\\otimes_A(B\\otimes_CB).$$\nConsequently there is a unique element $\\beta(n)\\in N\\otimes_AC$ mapping to $\\alpha(n)$. Injectivity of the augmentation shows that these elements depend $A$-linearly on $n$, defining $\\beta:N\\to N\\otimes_AC$ with $(1\\otimes u)\\beta=\\alpha$. No flatness of $M$ is needed in the cited theorem.",
+   "uses": [
+    "lem-pc-cech-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023M (lemma-ff-exact), exactness at the augmentation and first differential"
+   }
+  },
+  {
+   "text": "For every $A$-module $X$, the same Amitsur theorem with $M=X\\otimes_AC$ makes $j_X=1_X\\otimes u:X\\otimes_AC\\to X\\otimes_AB$ injective. Applying this twice, first to $X=N\\otimes_AC$ and then to $X=N\\otimes_AB$, and reordering factors, makes $1_N\\otimes u\\otimes u$ injective. Since $\\pi$ is a group homomorphism, $u$ respects comultiplication and counit. Thus the two sides of the coassociativity equation for $\\beta$ become those of $\\alpha$ after this injection, and its counit equation is the counit equation for $\\alpha$. So $\\beta$ is a rational $Q$-coaction. Its inflation is $\\alpha$, making $i$ equivariant. Any other coaction with this property agrees after $N\\otimes_AC\\xrightarrow{j_N}N\\otimes_AB\\xrightarrow{i\\otimes1_B}V\\otimes_AB$; both arrows are injective, the second by flat tensor exactness. Hence the coaction is unique.",
+   "uses": [
+    "lem-pc-cech-exact",
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-sfb-affine-coordinate-hopf-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex; literature/stacks-project/algebra.tex; literature/stacks-project/groupoids.tex",
+    "place": "Tags 023M (lemma-ff-exact), 00HD (lemma-flat), 022S; descent of the coaction equations"
+   }
+  },
+  {
+   "text": "If $f:V\\to V'$ is $H$-equivariant, restriction of its coaction equation to $K$ gives $d'f(n)=(f\\otimes1_D)d(n)=0$ for $n\\in N$. Hence it restricts to an $A$-linear map $f_N:N\\to N'=(V')^K$. The two sides of its $Q$-equivariance equation agree after $N'\\otimes_AC\\to N'\\otimes_AB\\to V'\\otimes_AB$, by the original $H$-equivariance equation and the construction of $\\beta,\\beta'$. These arrows are injective by Amitsur exactness and flat tensor exactness, respectively. Thus $f_N$ is $Q$-equivariant. Restrictions preserve identities and composition because their underlying maps are the original restrictions.",
+   "uses": [
+    "lem-pc-cech-exact",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex; literature/stacks-project/algebra.tex",
+    "place": "Tags 023M (lemma-ff-exact) and 00HD (lemma-flat), applied to the equivariance equation"
+   }
+  },
+  {
+   "text": "For a rational $Q$-module $W$, its inflated coaction is $(1\\otimes u)\\rho_W$. The equation for an $H$-fixed element is therefore\n$$j_W(\\rho_W(w)-w\\otimes1)=0.$$\nInjectivity of $j_W$ from Amitsur exactness makes this equivalent to $\\rho_W(w)=w\\otimes1$, proving equality of the two invariant submodules of $W$. For an $A$-linear map $a:W\\to W'$ between rational $Q$-modules, the difference of the two sides of its coaction equation lies in $W'\\otimes_AC$; after $j_{W'}$ it is exactly the difference of the two inflated equations. The same injection proves that $a$ is $Q$-equivariant if and only if its inflation is $H$-equivariant. All tensor injections used were supplied by flat coordinate algebras or Amitsur exactness for arbitrary modules. There was no finite-generation, smoothness or reducedness argument.",
+   "uses": [
+    "lem-pc-cech-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023M (lemma-ff-exact), injectivity of the augmentation for arbitrary modules"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "def-sfb-affine-coordinate-hopf-algebra",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pc-cech-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces.pdf",
+  "place": "Proposition 9.5.1 proof, printed p.525 (read online); explicit coordinate-comodule proof of its quotient descent input, using Stacks Tags 01U5, 00HQ, 00HD, 023M and 022S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a faithfully flat quotient of affine group schemes H to Q with normal kernel K, the K invariants of an arbitrary rational H module form a rational Q module",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.quotientToInvariants\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] → [inst_1 : Group G] → Rep k G → (S : Subgroup G) → [inst_2 : S.Normal] → Rep k (G ⧸ S)\", \"doc\": \"Given a commutative semiring $ k $, group $ G $, $ k $-module $ V $ with representation $ \\\\rho: G \\\\to \\\\mathrm{End}_k(V) $, and a normal subgroup $ S \\\\trianglelefteq G $, this constructs the representa\"}\n  {\"name\": \"Rep.quotientToInvariantsFunctor\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"(k : Type u) →\\n  {G : Type u} →\\n    [inst : CommRing k] →\\n      [inst_1 : Group G] → (S : Subgroup G) → [inst_2 : S.Normal] → CategoryTheory.Functor (Rep k G) (Rep k (G ⧸ S))\", \"doc\": \"A functor from the category of representations of a group $ G $ over a commutative ring $ k $ to the category of representations of the quotient group $ G/S $, where $ S \\trianglelefteq G $ is a normal\"}\n  {\"name\": \"Rep.quotientToInvariantsFunctor_obj_V\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"∀ (k : Type u) {G : Type u} [inst : CommRing k] [inst_1 : Group G] (S : Subgroup G) [inst_2 : S.Normal] (X : Rep k G),\\n  ((Rep.quotientToInvariantsFunctor k S).obj X).V =\\n    ModuleCat.of k ↥(Representation.invariants (MonoidHom.comp X.ρ S.subtype))\", \"doc\": \"For a commutative ring $k$, group $G$, normal subgroup $S \\trianglelefteq G$, and a $k$-linear representation $X$ of $G$, the underlying module of the quotient-to-invariants functor applied to $X$ is t\"}\n  {\"name\": \"Rep.toCoinvariantsKer\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Rep k G → (S : Subgroup G) → [S.Normal] → Rep k G\", \"doc\": \"Given a representation $\\\\rho$ of a monoid $G$ on a module $V$ and a submodule $S \\\\subseteq V$, this constructs the subrepresentation of $G$ on the kernel of the composed linear map $\\\\rho \\\\circ \\\\iota_S\"}\n  {\"name\": \"Rep.toCoinvariants\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Rep k G → (S : Subgroup G) → [S.Normal] → Rep k G\", \"doc\": \"Given a representation $\\\\rho$ of a monoid $G$ on a module $V$ over a commutative ring $k$, and a submodule $S \\\\subseteq V$, this constructs the coinvariants representation as the quotient module $V / \"}\n  {\"name\": \"Rep.quotientToCoinvariantsFunctor\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"(k : Type u) →\\n  {G : Type u} →\\n    [inst : CommRing k] →\\n      [inst_1 : Group G] → (S : Subgroup G) → [inst_2 : S.Normal] → CategoryTheory.Functor (Rep k G) (Rep k (G ⧸ S))\", \"doc\": \"The functor from the category of representations $\\\\text{Rep}(k, G)$ to $\\\\text{Rep}(k, G/S)$, where $S \\\\trianglelefteq G$ is a normal subgroup, which sends each representation $V$ to its coinvariants m\"}\n  {\"name\": \"Rep.quotientToCoinvariants\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] → [inst_1 : Group G] → Rep k G → (S : Subgroup G) → [inst_2 : S.Normal] → Rep k (G ⧸ S)\", \"doc\": \"Given a commutative ring $k$, a group $G$, a normal subgroup $S \\trianglelefteq G$, and a $k$-linear representation $A$ of $G$, this constructs the quotient representation of the coinvariants module $A\"}\n  {\"name\": \"Representation.quotientToInvariants\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"{k : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : CommSemiring k] →\\n      [inst_1 : Group G] →\\n        {V : Type u_4} →\\n          [inst_2 : AddCommMonoid V] →\\n            [inst_3 : Module k V] →\\n              (ρ : Representation k G V) →\\n                (S : Subgroup G) →\\n                  [inst_4 : S\", \"doc\": \"Given a commutative semiring $k$, group $G$, $k$-module $V$ with representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, and a normal subgroup $S \\\\trianglelefteq G$, this constructs the representation of the \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: only abstract-group quotient representations and invariants, or unrelated symmetric-algebra and scheme facts; no rational affine group-scheme quotient descent or invariant-power lifting theorem. The abstract-group candidate Representation.quotientToInvariants in Mathlib/RepresentationTheory/Invariants.lean:170-172 was read: it does not supply a coaction or fppf descent, and is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"invariants\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"_private.Init.Data.String.Lemmas.Pattern.String.ForwardSearcher.0.String.Slice.Pattern.Model.ForwardSliceSearcher.Invariants.isEmpty_eq_false\", \"module\": \"Init.Data.String.Lemmas.Pattern.String.ForwardSearcher\", \"type\": \" {pat s : String.Slice} {needlePos stackPos : String.Pos.Raw} (self : String.Slice.Pattern.Model.ForwardSliceSearcher.Invariants✝ pat s needlePos stackPos) : pat.isEmpty = false\", \"doc\": \"\"}\n  {\"name\": \"_private.Init.Data.String.Lemmas.Pattern.String.ForwardSearcher.0.String.Slice.Pattern.Model.ForwardSliceSearcher.Invariants.isValidForSlice'\", \"module\": \"Init.Data.String.Lemmas.Pattern.String.ForwardSearcher\", \"type\": \" {pat s : String.Slice} {needlePos stackPos : String.Pos.Raw} (self : String.Slice.Pattern.Model.ForwardSliceSearcher.Invariants✝ pat s needlePos stackPos) : needlePos = 0 → String.Pos.Raw.IsValidForSlice s stackPos\", \"doc\": \"\"}\n  {\"name\": \"_private.Init.Data.String.Lemmas.Pattern.String.ForwardSearcher.0.String.Slice.Pattern.Model.ForwardSliceSearcher.Invariants.partialMatch\", \"module\": \"Init.Data.String.Lemmas.Pattern.String.ForwardSearcher\", \"type\": \" {pat s : String.Slice} {needlePos stackPos : String.Pos.Raw} (self : String.Slice.Pattern.Model.ForwardSliceSearcher.Invariants✝ pat s needlePos stackPos) : String.Slice.Pattern.Model.ForwardSliceSearcher.PartialMatch✝ pat.copy.toByteArray s.copy.toByteArray needlePos.byteIdx stackPos.byteIdx\", \"doc\": \"\"}\n  {\"name\": \"Lean.Parser.Tactic.invariantsKW\", \"module\": \"Std.WP.Tactic\", \"type\": \" : Lean.ParserDescr\", \"doc\": \"Either the contextual keyword ` invariants ` or its tracing form ` invariants? ` which suggests\\nskeletons for missing invariants as a hint.\"}\n  {\"name\": \"Aesop.checkInvariantsIfEnabled\", \"module\": \"Aesop.Tree.Check\", \"type\": \" : Aesop.TreeM Unit\", \"doc\": \"\"}\n  {\"name\": \"Aesop.MVarClusterRef.checkInvariants\", \"module\": \"Aesop.Tree.Check\", \"type\": \" (root : Aesop.MVarClusterRef) (rootMetaState : Lean.Meta.SavedState) : Lean.MetaM Unit\", \"doc\": \"\"}\n  {\"name\": \"Aesop.MVarClusterRef.checkInvariantsIfEnabled\", \"module\": \"Aesop.Tree.Check\", \"type\": \" (root : Aesop.MVarClusterRef) (rootMetaState : Lean.Meta.SavedState) : Lean.MetaM Unit\", \"doc\": \"\"}\n  {\"name\": \"Lean.Meta.Grind.Solvers.checkInvariants\", \"module\": \"Lean.Meta.Tactic.Grind.Types\", \"type\": \" : Lean.Meta.Grind.GoalM Unit\", \"doc\": \"Checks invariants of all registered solvers.\"}\n  {\"name\": \"Lean.Meta.Grind.checkInvariants\", \"module\": \"Lean.Meta.Tactic.Grind.Inv\", \"type\": \" (expensive : Bool := false) : Lean.Meta.Grind.GoalM Unit\", \"doc\": \"Checks invariants if `grind.debug` is enabled.\"}\n  {\"name\": \"Lean.Meta.Grind.Goal.checkInvariants\", \"module\": \"Lean.Meta.Tactic.Grind.Inv\", \"type\": \" (goal : Lean.Meta.Grind.Goal) (expensive : Bool := false) : Lean.Meta.Grind.GrindM Unit\", \"doc\": \"Checks invariants if `grind.debug` is enabled.\"}\n  {\"name\": \"IsInvariantSubring\", \"module\": \"Mathlib.Algebra.Ring.Action.Invariant\", \"type\": \" (M : Type u_1) {R : Type u_2} [Monoid M] [Ring R] [MulSemiringAction M R] (S : Subring R) : Prop\", \"doc\": \"A typeclass for subrings invariant under a `MulSemiringAction`.\"}\n  {\"name\": \"IsInvariantSubring.toMulSemiringAction\", \"module\": \"Mathlib.Algebra.Ring.Action.Invariant\", \"type\": \" (M : Type u_1) {R : Type u_2} [Monoid M] [Ring R] [MulSemiringAction M R] (S : Subring R) [IsInvariantSubring M S] : MulSemiringAction M ↥S\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: only abstract-group quotient representations and invariants, or unrelated symmetric-algebra and scheme facts; no rational affine group-scheme quotient descent or invariant-power lifting theorem. The abstract-group candidate Representation.quotientToInvariants in Mathlib/RepresentationTheory/Invariants.lean:170-172 was read: it does not supply a coaction or fppf descent, and is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "comodule|invariants.*quotient|quotient.*invariants",
+   "results": "[grep] OK 21 hit(s)\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean\", \"line\": \"550\", \"text\": \"  X₃ := H1 (quotientToCoinvariants A S)\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean\", \"line\": \"552\", \"text\": \"  g := map (QuotientGroup.mk' S) (Rep.toCoinvariantsMkQ A S) 1\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean\", \"line\": \"592\", \"text\": \"    (mapCycles₁_quotientGroupMk'_epi (A.toCoinvariants S) S) x with ⟨y, hy⟩\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean\", \"line\": \"867\", \"text\": \"    functor k G n ⟶ quotientToCoinvariantsFunctor k S ⋙ functor k (G ⧸ S) n where\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean\", \"line\": \"868\", \"text\": \"  app A := map (QuotientGroup.mk' S) (Rep.toCoinvariantsMkQ _ _) n\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"line\": \"368\", \"text\": \"  X₁ := groupCohomology (A.quotientToInvariants S) 1\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"line\": \"371\", \"text\": \"  f := map (QuotientGroup.mk' S) (ofHom <| A.ρ.quotientToInvariants_lift S) 1\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"line\": \"430\", \"text\": \"      cocycles₁.coe_mk (A := A.quotientToInvariants S), ← sub_sub]\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"line\": \"559\", \"text\": \"    quotientToInvariantsFunctor k S ⋙ functor k (G ⧸ S) n ⟶ functor k G n where\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"line\": \"560\", \"text\": \"  app A := map (QuotientGroup.mk' S) (ofHom <| A.ρ.quotientToInvariants_lift S) n\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Invariants.lean\", \"line\": \"170\", \"text\": \"abbrev quotientToInvariants :\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Invariants.lean\", \"line\": \"172\", \"text\": \"  ofQuotient (toInvariants ρ S) S\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Invariants.lean\", \"line\": \"175\", \"text\": \"abbrev quotientToInvariants_lift :\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Invariants.lean\", \"line\": \"176\", \"text\": \"    Representation.IntertwiningMap (MonoidHom.comp (quotientToInvariants ρ S)\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Invariants.lean\", \"line\": \"246\", \"text\": \"abbrev quotientToInvariants : Rep k (G ⧸ S) := Rep.of (A.ρ.quotientToInvariants S)\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"line\": \"19\", \"text\": \"of the form `ρ g x - x` for `x : V`, `g : G`. Then the coinvariants of `(V, ρ)` are the quotient of\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"line\": \"79\", \"text\": \"/-- The quotient map from a representation to its coinvariants as a linear map. -/\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"line\": \"165\", \"text\": \"the kernel of the quotient map to the coinvariants of `ρ|_S`. -/\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"line\": \"180\", \"text\": \"/-- The morphism from `ρ` to `toCoinvariants ρ S` induced by the quotient map. -/\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"line\": \"192\", \"text\": \"noncomputable abbrev quotientToCoinvariants :\"}\n  {\"file\": \"Mathlib/RepresentationTheory/FiniteIndex.lean\", \"line\": \"124\", \"text\": \"      (Submodule.Quotient.eq _).2 <| Coinvariants.mem_ker_of_eq s\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: only abstract-group quotient representations and invariants, or unrelated symmetric-algebra and scheme facts; no rational affine group-scheme quotient descent or invariant-power lifting theorem. The abstract-group candidate Representation.quotientToInvariants in Mathlib/RepresentationTheory/Invariants.lean:170-172 was read: it does not supply a coaction or fppf descent, and is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inflation of rational representations along a faithfully flat quotient of affine group schemes is fully faithful and preserves invariant elements",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"groupCohomology.H1InfRes_f\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G) (S : Subgroup G) [inst_2 : S.Normal],\\n  (groupCohomology.H1InfRes A S).f =\\n    groupCohomology.map (QuotientGroup.mk' S) (A.subtype (Representation.invariants (MonoidHom.comp A.ρ S.subtype)) ⋯) 1\", \"doc\": \"The morphism $ f $ in the inflation-restriction exact sequence for first group cohomology is the inflation map $ H^1(G/S, A^S) \\\\to H^1(G, A) $, induced by the quotient projection $ G \\\\to G/S $ and the\"}\n  {\"name\": \"Rep.quotientToInvariantsFunctor\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"(k : Type u) →\\n  {G : Type u} →\\n    [inst : CommRing k] →\\n      [inst_1 : Group G] → (S : Subgroup G) → [inst_2 : S.Normal] → CategoryTheory.Functor (Rep k G) (Rep k (G ⧸ S))\", \"doc\": \"A functor from the category of representations of a group $ G $ over a commutative ring $ k $ to the category of representations of the quotient group $ G/S $, where $ S \\trianglelefteq G $ is a normal\"}\n  {\"name\": \"groupCohomology.infNatTrans\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality\", \"type\": \"(S : Subgroup G) [S.Normal] (n : ℕ) : quotientToInvariantsFunctor k S ⋙ functor k (G ⧸ S) n ⟶ functor k G n\", \"doc\": \"For a fixed natural number $ n $, this natural transformation maps each $ k $-representation $ A $ of a group $ G $ to the inflation homomorphism from the $ n $-th cohomology of the quotient group $ G\"}\n  {\"name\": \"Rep.quotientToInvariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] → [inst_1 : Group G] → Rep k G → (S : Subgroup G) → [inst_2 : S.Normal] → Rep k (G ⧸ S)\", \"doc\": \"Given a commutative semiring $ k $, group $ G $, $ k $-module $ V $ with representation $ \\\\rho: G \\\\to \\\\mathrm{End}_k(V) $, and a normal subgroup $ S \\\\trianglelefteq G $, this constructs the representa\"}\n  {\"name\": \"groupCohomology.H1InfRes\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality\", \"type\": \": ShortComplex (ModuleCat k)\", \"doc\": \"A short complex in the category of modules over a commutative ring $ k $, consisting of the first group cohomology modules $ H^1(G/S, A^S) $, $ H^1(G, A) $, and $ H^1(S, A) $ for a group $ G $, its no\"}\n  {\"name\": \"Representation.quotientToInvariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{k : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : CommSemiring k] →\\n      [inst_1 : Group G] →\\n        {V : Type u_4} →\\n          [inst_2 : AddCommMonoid V] →\\n            [inst_3 : Module k V] →\\n              (ρ : Representation k G V) →\\n                (S : Subgroup G) →\\n                  [inst_4 : S\", \"doc\": \"Given a commutative semiring $k$, group $G$, $k$-module $V$ with representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, and a normal subgroup $S \\\\trianglelefteq G$, this constructs the representation of the \"}\n  {\"name\": \"Representation.invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{k : Type u_1} →\\n  {G : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : CommSemiring k] →\\n        [inst_1 : Group G] → [inst_2 : AddCommMonoid V] → [inst_3 : Module k V] → Representation k G V → Submodule k V\", \"doc\": \"For a commutative semiring $k$, group $G$, and $k$-module $V$ equipped with a representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, this is the submodule of $V$ consisting of all elements $v \\\\in V$ such tha\"}\n  {\"name\": \"Rep.invariantsFunctor\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Group G] → CategoryTheory.Functor (Rep k G) (ModuleCat k)\", \"doc\": \"The functor from the category of representations of a group $ G $ over a commutative ring $ k $ to the category of $ k $-modules, which sends each representation to its submodule of $ G $-invariant el\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: only abstract-group quotient representations and invariants, or unrelated symmetric-algebra and scheme facts; no rational affine group-scheme quotient descent or invariant-power lifting theorem. The abstract-group candidate Representation.quotientToInvariants in Mathlib/RepresentationTheory/Invariants.lean:170-172 was read: it does not supply a coaction or fppf descent, and is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of a comodule with trivial normal subgroup action to the quotient Hopf algebra; invariants under kernel and then quotient equal full invariants",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.toCoinvariantsKer\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Rep k G → (S : Subgroup G) → [S.Normal] → Rep k G\", \"doc\": \"Given a representation $\\\\rho$ of a monoid $G$ on a module $V$ and a submodule $S \\\\subseteq V$, this constructs the subrepresentation of $G$ on the kernel of the composed linear map $\\\\rho \\\\circ \\\\iota_S\"}\n  {\"name\": \"Rep.toCoinvariantsMkQ\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] → (A : Rep k G) → (S : Subgroup G) → [inst_2 : S.Normal] → A ⟶ A.toCoinvariants S\", \"doc\": \"Given a commutative ring $ k $, monoid $ G $, representation $ A $ in $ \\\\text{Rep}(k, G) $, and a $ G $-invariant submodule $ S \\\\subseteq A $, this constructs the canonical morphism from $ A $ to its \"}\n  {\"name\": \"Rep.coinvariantsShortComplex_g\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G) (S : Subgroup G) [inst_2 : S.Normal],\\n  (A.coinvariantsShortComplex S).g = A.toCoinvariantsMkQ S\", \"doc\": \"For any commutative ring $k$, group $G$, representation $A$ in $\\\\text{Rep}(k, G)$, and normal subgroup $S \\\\subseteq G$, the differential $g$ in the coinvariants short complex of $A$ and $S$ is the can\"}\n  {\"name\": \"Rep.quotientToInvariants\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] → [inst_1 : Group G] → Rep k G → (S : Subgroup G) → [inst_2 : S.Normal] → Rep k (G ⧸ S)\", \"doc\": \"Given a commutative semiring $ k $, group $ G $, $ k $-module $ V $ with representation $ \\\\rho: G \\\\to \\\\mathrm{End}_k(V) $, and a normal subgroup $ S \\\\trianglelefteq G $, this constructs the representa\"}\n  {\"name\": \"Rep.coinvariantsShortComplex_X₁\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G) (S : Subgroup G) [inst_2 : S.Normal],\\n  (A.coinvariantsShortComplex S).X₁ = A.toCoinvariantsKer S\", \"doc\": \"In the category of representations of a monoid $ G $ over a commutative ring $ k $, the first object $ X_1 $ of the coinvariants short complex associated with a representation $ A $ and a normal subgr\"}\n  {\"name\": \"Rep.toCoinvariants\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Rep k G → (S : Subgroup G) → [S.Normal] → Rep k G\", \"doc\": \"Given a representation $\\\\rho$ of a monoid $G$ on a module $V$ over a commutative ring $k$, and a submodule $S \\\\subseteq V$, this constructs the coinvariants representation as the quotient module $V / \"}\n  {\"name\": \"Rep.coinvariantsShortComplex_X₂\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G) (S : Subgroup G) [inst_2 : S.Normal],\\n  (A.coinvariantsShortComplex S).X₂ = A\", \"doc\": \"For a commutative ring $ k $, a group $ G $, a representation $ A $ in $ \\\\text{Rep}(k, G) $, and a normal subgroup $ S \\\\subseteq G $, the second object in the coinvariants short complex $ (A.\\\\text{coi\"}\n  {\"name\": \"Rep.resOfQuotientIso\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"{k : Type u} →\\n  [inst : CommRing k] →\\n    {G : Type u} →\\n      [inst_1 : Group G] →\\n        (A : Rep k G) →\\n          (S : Subgroup G) →\\n            [inst_2 : S.Normal] →\\n              [inst_3 : Representation.IsTrivial (MonoidHom.comp A.ρ S.subtype)] →\\n                (Action.res (ModuleCat k) (Qu\", \"doc\": \"Given a commutative ring $ k $, a group $ G $, a $ k $-linear representation $ A $ of $ G $, and a normal subgroup $ S \\trianglelefteq G $ acting trivially on $ A $, the restriction of the quotient rep\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: only abstract-group quotient representations and invariants, or unrelated symmetric-algebra and scheme facts; no rational affine group-scheme quotient descent or invariant-power lifting theorem. The abstract-group candidate Representation.quotientToInvariants in Mathlib/RepresentationTheory/Invariants.lean:170-172 was read: it does not supply a coaction or fppf descent, and is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation.quotientToInvariants",
+   "results": "[loogle] OK 2 hit(s): Representation.quotientToInvariants and Representation.quotientToInvariants_lift, module Mathlib.RepresentationTheory.Invariants. The first constructs a representation of the abstract quotient group G / S on invariants; the second gives its intertwining inclusion. Read Mathlib/RepresentationTheory/Invariants.lean:150-177.",
+   "date": "2026-10-24",
+   "verdict": "no match: these declarations take an abstract group G and subgroup S, not affine group schemes or coordinate comodules; constructing rational descent is an additional theorem, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientToInvariants|Comodule|comodule",
+   "results": "{\"t\": \"2026-10-24T09:08:21Z\", \"tool\": \"grep\", \"query\": \"quotientToInvariants|Comodule|comodule\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Invariants.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\"], \"digest\": \"20315f34771ec020\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group quotient representations do not give rational affine-group coactions. The second phrasing also returned general faithfully flat/comonadic descent, which still requires constructing the invariant submodule coaction and its descent compatibility. Read RepresentationTheory/Invariants.lean:150-177; no exact match or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariants of a normal affine group subscheme carry a rational representation of the quotient",
+   "results": "{\"t\": \"2026-10-24T09:08:21Z\", \"tool\": \"leansearch\", \"query\": \"Invariants of a normal affine group subscheme carry a rational representation of the quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.quotientToInvariants\", \"Representation.quotientToInvariants\", \"Representation.quotient\", \"Representation.quotient_apply\", \"Rep.quotientToCoinvariants\", \"Rep.quotient\", \"Representation.ofQuotient\", \"Representation.toInvariants\"], \"digest\": \"61737652b803dc28\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group quotient representations do not give rational affine-group coactions. The second phrasing also returned general faithfully flat/comonadic descent, which still requires constructing the invariant submodule coaction and its descent compatibility. Read RepresentationTheory/Invariants.lean:150-177; no exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation.quotientToInvariants",
+   "results": "{\"t\": \"2026-10-24T09:08:22Z\", \"tool\": \"loogle\", \"query\": \"Representation.quotientToInvariants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Representation.quotientToInvariants\", \"Representation.quotientToInvariants_lift\"], \"digest\": \"6029ab8c30cfa560\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group quotient representations do not give rational affine-group coactions. The second phrasing also returned general faithfully flat/comonadic descent, which still requires constructing the invariant submodule coaction and its descent compatibility. Read RepresentationTheory/Invariants.lean:150-177; no exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational representations of affine group schemes, invariants of a normal subgroup scheme descend to the faithfully flat quotient group scheme",
+   "results": "{\"t\": \"2026-10-24T09:08:22Z\", \"tool\": \"leanfinder\", \"query\": \"Rational representations of affine group schemes, invariants of a normal subgroup scheme descend to the faithfully flat quotient group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.quotientToInvariants\", \"Rep.quotientToInvariantsFunctor\", \"Rep.quotientToCoinvariants\", \"Rep.toCoinvariants\", \"Rep.toCoinvariantsMkQ\", \"Rep.ofQuotient\", \"Rep.quotientToCoinvariantsFunctor\", \"Representation.quotientToInvariants\"], \"digest\": \"96e7fce05efa5920\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group quotient representations do not give rational affine-group coactions. The second phrasing also returned general faithfully flat/comonadic descent, which still requires constructing the invariant submodule coaction and its descent compatibility. Read RepresentationTheory/Invariants.lean:150-177; no exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A comodule over a commutative Hopf algebra with trivial kernel coaction descends uniquely along a faithfully flat morphism of affine group schemes",
+   "results": "{\"t\": \"2026-10-24T09:10:03Z\", \"tool\": \"leanfinder\", \"query\": \"A comodule over a commutative Hopf algebra with trivial kernel coaction descends uniquely along a faithfully flat morphism of affine group schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FaithfullyFlat.codescendsAlong_injective\", \"comonadicExtendScalars\", \"RingHom.FaithfullyFlat.codescendsAlong_bijective\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"Module.FaithfullyFlat.of_specComap_surjective\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"Module.FaithfullyFlat.of_comap_surjective\", \"RingHom.FaithfullyFlat\"], \"digest\": \"c4bb8330e3c52050\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group quotient representations do not give rational affine-group coactions. The second phrasing also returned general faithfully flat/comonadic descent, which still requires constructing the invariant submodule coaction and its descent compatibility. Read RepresentationTheory/Invariants.lean:150-177; no exact match or one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-invariant-power-exact-sequences",
+  "date": "2026-10-24",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: pass from the simply connected cover to the semisimple quotient, and extend by the torus radical. Supporting module-theoretic input: descent of the normal-kernel invariant submodule to the fppf quotient, and detection of invariants and equivariance by inflation (Alper Proposition 9.5.1, proof).",
+   "via": [
+    "lem-sfb-invariant-power-exact-sequences",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-kernel-invariants-quotient-action",
+  "worker": "stage1",
+  "summary": "Expanded the quotient-invariants argument in eight steps using existing nodes only: affine flatness, the explicit kernel torsor, flat base change of the invariant kernel, universal conjugation to restrict the H-coaction, Amitsur descent of that coaction, its laws and uniqueness, and detection of functoriality, invariants and equivariance by universally injective coordinate pullback. The statement is unchanged and no flatness or finiteness of modules was introduced.",
+  "blueprint": "The inherited provenance points to det-thm-sf-ctf-stability-direct-images, proof (3), via the long supporting chain ending in Alper Proposition 9.5.1. The latest direct-image proof was read; this item realizes the normal-kernel descent input of the existing extension/power-lifting subargument, not a replacement of the unit route. No blueprint node states this rational affine-group quotient assertion; same_as is empty. The ancestor tool returns None, so the inherited from.node and via are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-98edbf2ad",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-98edbf2ad (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item and all 8 steps in full. The delivery adds a proof only: no new nodes, no Mathlib leaves, and the statement is unchanged. This is not a re-split (the item had no proof before). The five cited statements say exactly what each step takes from them: the affine flatness criterion; flat plus surjective on Spec gives faithfully flat (Stacks 00HQ, checked in algebra.tex); the Hopf-algebra definition (comultiplication, counit and antipode are pullbacks of multiplication, identity and inverse); flat tensor exactness including 0->N1->N2->N3; and lem-pc-cech-exact for an arbitrary module (Stacks 023M, checked in descent.tex). lem-pc-cech-exact is in another unit but is Lean-closed in slopmaster2 and already cited by 6 sfb nodes, so no tool_uses is needed. Step checks: (2) with comultiplication = pullback of multiplication, the coaction axioms give g.(g'.v)=(gg').v, so the left action is correct; the map H x K -> H x_Q H, (h,k)->(h,hk), with inverse (h1,h2)->(h1,h1^{-1}h2), is valid from the scheme-theoretic kernel. (3) and (4): the normality computation over the universal point of B tensor D is exactly (d tensor 1_B) rho_V(n)=0; B and D are flat, so rho_V maps N into N tensor B, and this works for non-reduced K. (5): Amitsur for C->B with M=N tensor_A C gives the equalizer description N tensor_A (B tensor_C B), and N is never assumed flat. (6): I recomputed the coassociativity of beta after the injective map 1 tensor u tensor u (two Amitsur injections); the counit law holds directly, and uniqueness follows after j_N and then i tensor 1_B. (7) and (8): checked after the same injections. The hypothesis that Q represents H/K is never used, which is harmless. Edge cases tested: K=H with Q trivial, K trivial, mu_p in G_m -> G_m by the p-th power on graded modules, and A=0. Duplicate search in the DAG found nothing that states the item; lem-sfb-affine-normal-quotient-geometry works only over a field. Alper is not available locally (marked WANTED); the steps are sourced to Stacks, and I checked the tags 023M, 00HQ, 00HD, 01U5 and 022S. No SGA; the blueprint provenance (B9) is inherited and present; the report's Review section is substantive."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.NormalKernelInvariantsQuotientAction",
+  "declaration": "AlgebraicGeometry.RingRationalModule.normalKernelInvariants_unique",
+  "declarations": [
+   "AlgebraicGeometry.RingRationalModule.normalKernelInvariants_unique",
+   "AlgebraicGeometry.RingRationalModule.normalKernelInvariants_maps",
+   "AlgebraicGeometry.RingRationalModule.inflation_invariants",
+   "AlgebraicGeometry.RingRationalModule.inflation_equivariant_iff"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/NormalKernelInvariantsQuotientAction.lean",
+  "statement": "theorem normalKernelInvariants_unique (V : Type v) [AddCommGroup V] [Module A V] (ρ : V →ₗ[A] V ⊗[A] Γ(H.X.left, ⊤)) (hρ : IsRational A H V ρ) : ∃! β : invariants A K V (restrict A H V i ρ) →ₗ[A] invariants A K V (restrict A H V i ρ) ⊗[A] Γ(Q.X.left, ⊤), IsRational A Q (invariants A K V (restrict A H V i ρ)) β ∧ IsEquivariant A H (invariants A K V (restrict A H V i ρ)) (restrict A Q (invariants A K V (restrict A H V i ρ)) π β) ρ (invariants A K V (restrict A H V i ρ)).subtype",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-75165982b",
+  "group": "Q153",
+  "result": "fix",
+  "note": "Item lem-sfb-normal-kernel-invariants-quotient-action is correct clause by clause: affine/flat/fp K,H,Q; π flat+surjective+lfp; kernel and fppf quotient via IsFppfGroupQuotient (owner cited); ∃! descended Q-coaction on V^K with inclusion equivariance; restriction of H-equivariant maps; equality of invariant submodules after inflation (plus a true rationality conjunct); equivariance iff. Modules arbitrary, universes independent; edge cases A=0, K=H, trivial K, non-reduced K checked; sorry-only proofs, docstrings and both report sections present; lean.statement verbatim. H4 finding: new RingRationalModule.IsRational restates the landed BorelDistributions.IsCoordinateCoaction (def-sfb-affine-group-distribution-calculus, Q27 LAND 16:20 CST, on base). FIX: fixes/RationalModuleData.lean makes IsRational an abbrev for IsCoordinateCoaction A G.X.left ρ (adds import); fixes/def-sfb-ring-rational-module-data.json adds that stmt_dep and citation, the new lean.statement and a lean.note. Item files and record unchanged. nt_compile --json of the fixed module, the item module and an iff check file (conjunct swap, so instances are defeq): exit 0, clean."
+ }
+}

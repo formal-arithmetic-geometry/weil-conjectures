@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-smooth-dvr-generic-line-extension",
+ "kind": "statement",
+ "title": "Extension of a generic-fibre line bundle over a smooth DVR scheme",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$ [def-sc-discrete-valuation-ring]. Let $Y\\to\\operatorname{Spec}R$ be a smooth morphism of finite type [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Put $Y_K=Y\\times_{\\operatorname{Spec}R}\\operatorname{Spec}K$ [def-pc-base-change]. Every invertible $\\mathcal O_{Y_K}$-module extends to an invertible $\\mathcal O_Y$-module [def-sc-invertible-module]: for each $L$ on $Y_K$ there exist $\\widetilde L$ on $Y$ and an isomorphism $\\widetilde L|_{Y_K}\\cong L$. No uniqueness, properness, excellence or hypothesis on residue characteristic is assumed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD9 (lemma-extend-invertible-module); smooth schemes over a regular base are regular, descent.tex Tag 036D (lemma-regular-local-smooth); regular local rings are UFDs, more-algebra.tex Tag 0AG0 (lemma-regular-local-UFD)."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose a uniformizer $\\pi$. The DVR definition makes $R$ Noetherian (each ideal is principal). Its dimension is one by [lem-sc-dvr-dimension-one], so its principal maximal ideal makes $R$ regular local by [def-weil-regular-scheme]. Every nonzero prime ideal of the local PID $R$ is maximal, hence is its maximal ideal; localization at it is $R$, while localization at $(0)$ is $K$, a regular local ring of dimension zero. Thus $R$ is a regular ring.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-sc-dvr-dimension-one",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), (1) implies (3); PID definition and regular-ring definition."
+   }
+  },
+  {
+   "text": "By the affine-local description of smoothness in [def-sbc-smooth-morphisms] (Stacks 01V5), every point of $Y$ has an affine open neighbourhood $W=\\operatorname{Spec}A$ mapping into an affine open $V=\\operatorname{Spec}B$ of $\\operatorname{Spec}R$ such that $\\operatorname{Spec}A\\to\\operatorname{Spec}B$ is smooth; by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] the ring map $B\\to A$ is smooth. By Step 1, $\\operatorname{Spec}R$ has exactly two points, $(0)$ and $\\pi R$, so $V$ is either $\\operatorname{Spec}R$ or the open point $\\{(0)\\}=D(\\pi)$, whose ring is $R[1/\\pi]=K$ (the identification of Step 4, which does not use this step). Both $B=R$ and $B=K$ are regular rings by Step 1 ($K$ is a field, regular local of dimension zero). Applying [lem-weil-pbc-regular-ring-smooth-ascent] to $B\\to A$ proves that $A$ is regular and Noetherian. These opens show that $Y$ is regular and locally Noetherian [def-weil-regular-scheme]. Since the morphism is of finite type, $Y$ is quasi-compact ([def-weil-finite-type-morphism], preimage of the affine $\\operatorname{Spec}R$), so finitely many such charts $W_1,\\ldots,W_n$ cover $Y$.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "def-weil-regular-scheme",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036D (lemma-regular-local-smooth), ascent direction; affine proof via Algebra Tag 07NF."
+   }
+  },
+  {
+   "text": "For every $y\\in Y$, [lem-weil-pbc-affine-open-stalk-localization] identifies $\\mathcal O_{Y,y}$ with the prime localization of the regular coordinate ring of a chart from Step 2. It is regular local by the definition of a regular ring. Apply [lem-trf-regular-local-ufd-boundary-factorization] with the empty parameter list ($r=0$); its first conclusion says that this local ring is a UFD. The extra boundary and localization conclusions are unused.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-regular-scheme",
+    "lem-trf-regular-local-ufd-boundary-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AG0 (lemma-regular-local-UFD)."
+   }
+  },
+  {
+   "text": "Every nonzero $s\\in R$ equals $u\\pi^m$ by [lem-weil-pbc-dvr-unit-times-uniformizer-power], so $a/s=(au^{-1})/\\pi^m$ for every fraction in $K$. Thus $K=R[1/\\pi]$: the map is injective since $R$ is a domain, and the displayed fractions prove surjectivity. By [lem-weil-pbc-principal-localization-open-immersion] and [lem-weil-pbc-open-immersion-base-change], $\\operatorname{Spec}K\\to\\operatorname{Spec}R$ and its pullback $Y_K\\to Y$ are open immersions. Identify $Y_K$ with this open $U$, and regard the given $L$ as an invertible module on $U$.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I3 (lemma-standard-open-affine), 01JY (lemma-base-change-immersion); Algebra Tag 00PD for the fraction calculation."
+   }
+  },
+  {
+   "text": "Induct on $i$ to extend $L$ to $U_i=U\\cup W_1\\cup\\cdots\\cup W_i$, starting with $M_0=L$. Given $M_i$, put $W=W_{i+1}$ and $V=U_i\\cap W$. The affine $W$ is Noetherian by Step 2; [lem-weil-pbc-noetherian-open-subscheme-noetherian] makes its open $V$ Noetherian. It is quasi-affine because it is open in the affine $W$. Apply [lem-sfb-quasiaffine-line-effective-divisor] to obtain an effective Cartier divisor $D\\subset V$ and an isomorphism $M_i|_V\\cong\\mathcal O_V(D)$. No intersection of affine opens is assumed affine.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-sfb-quasiaffine-line-effective-divisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD9 (lemma-extend-invertible-module), affine-neighbourhood step; Tag 0AYM (lemma-quasi-projective-Noetherian-pic-effective-Cartier), quasi-affine case."
+   }
+  },
+  {
+   "text": "Every local ring of $W$ outside $V$ is a UFD by Step 3 (restriction to an open preserves stalks). Apply [lem-sfb-cartier-extension-factorial-complement] to obtain an effective Cartier divisor $E\\subset W$ restricting to $D$. Put $N=\\mathcal O_W(E)$. Its restriction to $V$ is $\\mathcal O_V(D)$: locally an effective Cartier ideal is generated freely by a nonzerodivisor $f$, its dual is generated by $f^{-1}$, and restricting this generator and its transition units gives the dual of the restricted ideal. Therefore Step 5 gives an isomorphism $M_i|_V\\cong N|_V$.",
+   "uses": [
+    "lem-sfb-cartier-extension-factorial-complement",
+    "def-pc-divisor-line-bundle",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD8 (lemma-closure-effective-cartier-divisor); definition of the associated invertible module."
+   }
+  },
+  {
+   "text": "Glue $M_i$ on $U_i$ and $N$ on $W$ along that isomorphism by [lem-weil-pbc-site-module-sheaf-gluing], applied to the Zariski open site of $U_i\\cup W$. Use the isomorphism on one ordered overlap, its inverse on the reverse overlap, and identities on equal-index overlaps; the cocycle follows by cancellation. The glued module $M_{i+1}$ is locally free of rank one because its restrictions to both opens are, hence is invertible. Retain its isomorphism with $M_i$ on $U_i$, so its restriction to $U$ is still $L$. After $n$ steps $U_n=Y$; set $\\widetilde L=M_n$. For $Y=\\varnothing$ take its structure sheaf. This yields the required extension and restriction isomorphism.",
+   "uses": [
+    "lem-weil-pbc-site-module-sheaf-gluing",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD9 (lemma-extend-invertible-module), gluing argument, specialized to the finite affine cover in this item."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-sc-dvr-dimension-one",
+  "def-weil-regular-scheme",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sfb-quasiaffine-line-effective-divisor",
+  "lem-sfb-cartier-extension-factorial-complement",
+  "def-pc-divisor-line-bundle",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-site-module-sheaf-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD9 (lemma-extend-invertible-module), affine divisor construction and finite-cover gluing; Tags 0AYM, 0BD8, 036D and 0AG0."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every invertible sheaf on the generic fiber of a smooth finite type scheme over a discrete valuation ring extends to the whole scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.isFractionRing\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (self : AlgebraicGeometry.ValuativeCommSq f),\\n  IsFractionRing self.R self.K\", \"doc\": \"For any valuative commutative square involving a morphism of schemes $ f: X \\to Y $, the fraction field $ K $ of the commutative ring $ R $ associated to the square satisfies the universal property of \"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.domain\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (self : AlgebraicGeometry.ValuativeCommSq f), IsDomain self.R\", \"doc\": \"For any valuative commutative square involving a morphism of schemes $ f: X \\to Y $, the associated ring $ R $ is an integral domain (i.e., has no zero divisors).\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.field\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → (self : AlgebraicGeometry.ValuativeCommSq f) → Field self.K\", \"doc\": \"For a valuative commutative square involving schemes, this function equips the component $ K $ with the structure of a field, which is the fraction field of a valuation ring in the diagram.\"}\n  {\"name\": \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [inst : AlgebraicGeometry.IsIntegral X] → Field ↑X.functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (self : AlgebraicGeometry.ValuativeCommSq f), ValuationRing self.R\", \"doc\": \"For any valuative commutative square involving a morphism of schemes $ f: X \\\\to Y $, the associated ring $ R $ is a valuation ring, meaning it is an integral domain such that for every non-zero elemen\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.functionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [IrreducibleSpace ↥X] → CommRingCat\", \"doc\": \"For an irreducible scheme $X$, the function field is defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$. This corresponds to the commutative ring obtained by takin\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.algebra\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → (self : AlgebraicGeometry.ValuativeCommSq f) → Algebra self.R self.K\", \"doc\": \"For each valuative commutative square involving a morphism of schemes $f: X \\to Y$, this function equips the fraction field component $K$ with the structure of an algebra over the commutative ring $R$ \"}\n  {\"name\": \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsIntegral X] (x : ↥X),\\n  IsFractionRing ↑(X.presheaf.stalk x) ↑X.functionField\", \"doc\": \"For any integral scheme $X$ and any point $x$ in $X$, the function field of $X$ is the fraction ring of the stalk of the structure sheaf at $x$. This means every non-zero divisor in the stalk becomes \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuative diagrams, ring valuations and generic Picard groups do not extend an invertible sheaf on a scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of the Picard group from a smooth scheme over a DVR to its generic fiber is surjective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.residue_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (X.residue x))\", \"doc\": \"The canonical ring homomorphism from the local ring $\\\\mathcal{O}_{X,x}$ (the stalk of the structure sheaf at $x$) to its residue field $k(x)$, obtained by quotienting $\\\\mathcal{O}_{X,x}$ by its unique\"}\n  {\"name\": \"ClassGroup.mk0_surjective\", \"module\": \"Mathlib/RingTheory/ClassGroup\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDedekindDomain R],\\n  Function.Surjective ⇑ClassGroup.mk0\", \"doc\": \"For any Dedekind domain $ R $, the canonical group homomorphism from the multiplicative group of non-zero ideals of $ R $ to the class group of $ R $ is surjective. This means every element of the cla\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toBasicOpen_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (f : R), Function.Surjective ⇑(AlgebraicGeometry.StructureSheaf.toBasicOpen R f)\", \"doc\": \"The canonical ring homomorphism from the localization $ R_f $ of a commutative ring $ R $ at an element $ f $ to the ring of sections $ \\\\mathcal{O}(D(f)) $ in the structure sheaf over the basic open s\"}\n  {\"name\": \"ClassGroup.mkMMem_surjective\", \"module\": \"Mathlib/NumberTheory/ClassNumber/Finite\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : EuclideanDomain R] [inst_1 : CommRing S] [inst_2 : IsDomain S]\\n  [inst_3 : Algebra R S] {abv : AbsoluteValue R ℤ} {ι : Type u_5} [inst_4 : DecidableEq ι] [inst_5 : Fintype ι]\\n  (bS : Module.Basis ι R S) (adm : abv.IsAdmissible) [inst_6 : Infinite R] [inst_7 : \", \"doc\": \"For a Dedekind domain $ S $ that is algebraic over $ R $, the canonical map from ideals containing the product of non-zero pairwise differences of elements in an injective sequence to the class group \"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X] [∀ (i : ι), IsLocalRing ↑(R i)],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is a compact space and each $R_i$ is a local ring, then the function mapping morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\operatorname{Spec}(R_i) \\\\to X$ is surj\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_surjective\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R),\\n  Function.Surjective ⇑Valued.v\", \"doc\": \"The valuation function on the adic completion of the fraction field of a Dedekind domain at a height one prime ideal is surjective onto the multiplicative integers with zero (\\\\mathbb{Z}^\\\\times_0).\"}\n  {\"name\": \"Algebra.Extension.toKaehler_surjective\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, Function.Surjective ⇑P.toKaehler\", \"doc\": \"The canonical map from the cotangent space of an algebra extension $ S $ over a base ring $ R $ to the module of Kähler differentials $ \\\\Omega_{S/R} $ is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme}, Function.Surjective AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"doc\": \"The function converting partial maps between schemes $X$ and $Y$ to rational maps is surjective, meaning every rational map from $X$ to $Y$ can be represented by at least one partial map defined on an\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuative diagrams, ring valuations and generic Picard groups do not extend an invertible sheaf on a scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend line bundles from the generic fiber of a smooth scheme over a discrete valuation ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ValuativeRel.IsRankLeOne.of_valuativeExtension\", \"module\": \"Mathlib.RingTheory.Valuation.ValuativeRel.Basic\", \"type\": \"[IsRankLeOne B] : IsRankLeOne A\", \"doc\": \"Given a valuative extension of commutative rings with valuative relations, if the extension has rank at most one, then the base ring also has rank at most one.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \"{O : Type*} [CommRing O] [IsDomain O] [ValuationRing O] {K : Type*} [Field K] [Algebra O K] [IsFractionRing O K]\\n  (φ₀ : (𝒜 0) →+* O) (ι : Type*) [Finite ι] (x : ι → A) (h2 : Algebra.adjoin (𝒜 0) (Set.range x) = ⊤) (j : ι)\\n  (φ : Away 𝒜 (x j) →+* K) (hcomm : (algebraMap O K).comp φ₀ = φ.comp (fromZe\", \"doc\": \"Let $ O $ be a commutative valuation ring with fraction field $ K $, and let $ \\\\mathcal{A} $ be a graded $ O $-algebra. Given a finite set $ \\\\{x_i\\\\}_{i \\\\in I} $ of homogeneous elements in $ \\\\mathcal{A\"}\n  {\"name\": \"Valuation.Uniformizer.ext_iff\", \"module\": \"Mathlib.RingTheory.Valuation.Discrete.Basic\", \"type\": \"∀ {Γ : Type u_1} {inst : LinearOrderedCommGroupWithZero Γ} {A : Type u_2} {inst_1 : Ring A} {v : Valuation A Γ}\\n  {hv : v.IsRankOneDiscrete} {x y : v.Uniformizer}, x = y ↔ x.val = y.val\", \"doc\": \"For any two uniformizers $x$ and $y$ of a rank one discrete valuation $v$, $x = y$ if and only if their corresponding elements in the valuation ring $v.\\text{integer}$ are equal, i.e., $x.\\text{val} = y\"}\n  {\"name\": \"ValuativeExtension\", \"module\": \"Mathlib.RingTheory.Valuation.ValuativeRel.Basic\", \"type\": \"(A : Type u_1) →\\n  (B : Type u_2) →\\n    [inst : CommRing A] → [inst_1 : CommRing B] → [ValuativeRel A] → [ValuativeRel B] → [Algebra A B] → Prop\", \"doc\": \"Given commutative rings $ A $ and $ B $, each equipped with a valuative relation, and $ B $ is an algebra over $ A $, this proposition defines the valuative extension condition.\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (self : AlgebraicGeometry.ValuativeCommSq f), ValuationRing self.R\", \"doc\": \"For any valuative commutative square involving a morphism of schemes $ f: X \\\\to Y $, the associated ring $ R $ is a valuation ring, meaning it is an integral domain such that for every non-zero elemen\"}\n  {\"name\": \"Valuation.HasExtension.ofComapInteger\", \"module\": \"Mathlib.RingTheory.Valuation.Extension\", \"type\": \"(h : vA.integer.comap (algebraMap K A) = vK.integer) : vK.HasExtension vA\", \"doc\": \"If the preimage of the valuation ring of $ v_A $ under the canonical algebra homomorphism $ K \\to A $ equals the valuation ring of $ v_K $, then the valuation $ v_K $ extends to a valuation $ v_A $ on \"}\n  {\"name\": \"Valuation.HasExtension.val_smul\", \"module\": \"Mathlib.RingTheory.Valuation.Extension\", \"type\": \"(r : vR.integer) (a : vA.integer) : ↑(r • a : vA.integer) = (r : R) • (a : A)\", \"doc\": \"For elements $ r $ in the valuation ring of a commutative ring $ R $ and $ a $ in the valuation ring of an $ R $-algebra $ A $, the scalar multiplication $ r \\\\cdot a $ within the valuation ring of $ A\"}\n  {\"name\": \"VectorBundleCore.moduleFiber\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"(x : B) : Module R (Z.Fiber x)\", \"doc\": \"For each point $ x $ in the base space $ B $ of a vector bundle, the fiber over $ x $ is equipped with a module structure over the ring $ R $, inherited from the module structure on the typical fiber \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: valuative diagrams, ring valuations and generic Picard groups do not extend an invertible sheaf on a scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"IsDiscreteValuationRing\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: valuative diagrams, ring valuations and generic Picard groups do not extend an invertible sheaf on a scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "extend.*[Ii]nvertible|[Ii]nvertible.*extend|[Pp]ic.*[Vv]aluation",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: valuative diagrams, ring valuations and generic Picard groups do not extend an invertible sheaf on a scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "extend.*invertible|invertible.*extend|Picard.*surjective",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: valuative diagrams and affine ring Picard functors do not extend line bundles over this scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf on the generic fiber of a smooth scheme over a discrete valuation ring extends to the whole scheme",
+   "results": "8 hits: AlgebraicGeometry.ValuativeCommSq.isFractionRing, AlgebraicGeometry.ValuativeCommSq.field, AlgebraicGeometry.ValuativeCommSq.domain, AlgebraicGeometry.ValuativeCommSq.valuationRing, AlgebraicGeometry.ValuativeCommSq.algebra, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.Scheme.functionField, AlgebraicGeometry.Scheme.germToFunctionField",
+   "date": "2026-10-23",
+   "verdict": "no match: valuative diagrams and affine ring Picard functors do not extend line bundles over this scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of Picard group from a smooth scheme over a discrete valuation ring to its generic fiber is surjective",
+   "results": "8 hits: CommRing.relPic, CommRing.Pic.functor, ValuationSubring.surjective_unitGroupToResidueFieldUnits, CommRing.Pic.mapRingHom, Submodule.mulExact_unitsToPic_mapAlgebra, CommRing.Pic.instSubsingletonOfIsLocalRing, AlgebraicGeometry.Scheme.residue_surjective, Submodule.range_unitsToPic",
+   "date": "2026-10-23",
+   "verdict": "no match: valuative diagrams and affine ring Picard functors do not extend line bundles over this scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"IsDiscreteValuationRing\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: valuative diagrams and affine ring Picard functors do not extend line bundles over this scheme"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-picard-identity-representability",
+  "date": "2026-10-23",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: Extension of a generic-fibre line bundle over a smooth DVR scheme.",
+   "via": [
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-dvr-generic-line-extension",
+  "worker": "stage1",
+  "summary": "Read Stacks 0BD9 and its two divisor inputs; wrote the divisor-extension and finite-affine-cover gluing argument rather than restating the item in a general line-extension node. Reused regular-ring smooth ascent, the r=0 UFD theorem, DVR dimension and factorization, open Noetherianity and module gluing. Added two statement-only divisor inputs; reused the existing principal-localization and open-immersion-base-change leaves. No Lean written or compiled.",
+  "blueprint": "Realizes the recorded Picard representability prerequisite under the alteration route of det-thm-sf-ctf-stability-direct-images. The inherited ancestry chain ends in blueprint.from.node=null, and tools/blueprint_refs.py ancestor returns None; this metadata is preserved. The current latest blueprint direct-image proof (3) invokes the proper/open-immersion route; this split only supplies the inherited auxiliary line-bundle extension argument.",
+  "tool_uses": [
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "Step 2 uses its affine-local characterization of smoothness to select smooth affine charts; this is a generic notion, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Step 2 converts the smooth affine scheme morphisms to smooth ring maps before regular-ring ascent; the unit has no separate affine comparison input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Step 2 applies regularity ascent along R to A to make the affine charts regular and Noetherian; the unit has no commutative-algebra replacement."
+   },
+   {
+    "node": "lem-trf-regular-local-ufd-boundary-factorization",
+    "why": "Step 3 takes only the regular-local UFD conclusion with r=0; no trace-formula argument or boundary calculation is imported."
+   },
+   {
+    "node": "lem-weil-pbc-site-module-sheaf-gluing",
+    "why": "Step 7 glues two module sheaves on a two-open Zariski cover using an isomorphism and its inverse; the unit has no independent module-gluing theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-weil-pbc-site-module-sheaf-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-720c8d250",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-720c8d250 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited node's statement, and the sources: Stacks 0BD9 (divisors.tex l.7127), 0AYM (l.3216), 0BD8 (l.7093), 036D/07NF and 0AG0. The item's statement is unchanged and correct as 0BD9 applied to a regular Y. It matches the parent's use in step 5 of the projective Picard proof. There is no repair note for this item and no earlier run, so the re-split rule does not apply. New node lem-sfb-cartier-extension-factorial-complement has the same content as 0BD8. New node lem-sfb-quasiaffine-line-effective-divisor is 0AYM's quasi-affine clause, Noetherian with an open immersion into an affine scheme; that branch of the proof needs no ample sheaf. Both nodes are self-contained and cite their notions. I tested them on A^2 minus the origin, the empty case and the node xy=0 (where the hypothesis fails). Searching the DAG (rg -L) for 0AYM, 0BD8 and 0BD9 finds no duplicate. lem-sfb-regular-space-divisor-line-dictionary (algebraic spaces) and lem-sfb-affine-invertible-finite-set-section (0F20, affine only) are different statements. Neither new node restates a clause of the item. Steps 1 and 3-7 check out: the DVR is a regular ring; stalks are localizations, hence UFD by the trf node with r=0; K=R[1/pi]; Y_K is open in Y; overlaps are Noetherian and only quasi-affine (never assumed affine); the divisor extends; and two-open gluing keeps the identification with L. FIX in step 2: the affine-local description of smoothness (Stacks 01V5) only gives charts smooth over some affine open Spec B of Spec R, and B can be K. The old text claimed R->A smooth without citing anything for it. The new text puts B in {R, K}, both regular by Step 1, and applies regularity ascent to B->A. uses and proof_deps are unchanged. The fix is the whole item file at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-smooth-dvr-generic-line-extension.json. Batch-5 flag on lem-trf-regular-local-ufd-boundary-factorization: it is pure commutative algebra (0AG0, regular local implies UFD). Its closure contains only regular-local-ring lemmas and the Lean-closed IsRegularLocalRing.uniqueFactorizationMonoid. Neither the trace-formula assumption nor the Poincare-duality assumption gives it, and it is not a step of their proofs, so the flag is not a RETURN. I accept the tool_uses: smooth-ring-map-iff, regular-ring ascent, the trf UFD node and site-module gluing are all used as black boxes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothDVRGenericLineExtension",
+  "declaration": "AlgebraicGeometry.exists_invertible_extension_of_smooth_dvr",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothDVRGenericLineExtension.lean",
+  "statement": "theorem exists_invertible_extension_of_smooth_dvr (R K : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field K] [Algebra R K] [IsFractionRing R K] (Y : Scheme.{u}) (f : Y ⟶ Spec (CommRingCat.of R)) [Smooth f] [LocallyOfFiniteType f] [QuasiCompact f] (L : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).Modules) [L.IsInvertible] : ∃ M : Y.Modules, M.IsInvertible ∧ Nonempty ((Scheme.Modules.pullback (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap R K))))).obj M ≅ L)",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-755de5567",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: R DVR (IsDomain+IsDiscreteValuationRing), K fraction field (IsFractionRing), Smooth f, finite type = LocallyOfFiniteType+QuasiCompact (recorded conjunction; LOFT redundant given Smooth, harmless), Y_K = pullback f (Spec.map algebraMap), L invertible (Scheme.Modules.IsInvertible), conclusion ∃ M invertible with (Modules.pullback pullback.fst).obj M ≅ L; no extra hypotheses; empty Y covered; common universe u forced and harmless; true by Stacks 0BD9+036D+0AG0. lean.statement verbatim; only node change is the lean field; private imports = proof_dep modules; docstrings carry source place, blueprint tag and the 7 proof steps; no defs, only sorry, no pro-etale substitute; report has Worker report and Second reading sections; item not landed elsewhere. No file changed, no compile."
+ }
+}

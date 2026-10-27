@@ -1,0 +1,273 @@
+{
+ "id": "lem-sf-prescribed-residue-cell-cone-model",
+ "kind": "statement",
+ "title": "Cone model of a prescribed top cell over constant field coefficients",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], use its small pro-etale site [def-weil-pbc-proetale-site], and assume evaluation at $T$ sends epimorphisms of sheaves of sets to surjections. Let $k$ be a field and $k_T$ its constant sheaf of rings [def-weil-pbc-constant-sheaf]. Work in the unbounded derived category $D(\\operatorname{Mod}(k_T))$ of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $a\\leq b$ be integers, let $N$ have $H^q(N)=0$ outside $[a,b]$, and fix finite integers $r_q\\geq0$ and isomorphisms $\\theta_q:k_T^{\\oplus r_q}\\xrightarrow{\\sim}H^q(N)$ for $a\\leq q\\leq b$ [def-weil-derived-cohomology-sheaves]. Define zero-differential cochain complexes\n$$A=k_T^{\\oplus r_b}[-b],\\qquad V=\\bigoplus_{q=a}^b k_T^{\\oplus r_q}[-q],\\qquad W=\\bigoplus_{q=a}^{b-1}k_T^{\\oplus r_q}[-q],$$\nand let $i:A\\to V$ be the top summand inclusion. Write $Q$ for localization of complexes into the derived category. Let $u:Q(A)\\to N$ induce $\\theta_b$, and let $Q(A)\\xrightarrow{u}N\\to C\\to Q(A)[1]$ be any distinguished triangle. There exists an isomorphism $\\varphi:Q(V)\\xrightarrow{\\sim}N$ inducing the prescribed $\\theta_q$. For every such isomorphism, $u=\\varphi\\circ Q(i)$, and there is an isomorphism of distinguished triangles from the given triangle to the cone triangle of $Q(i)$ whose first two components are $\\mathrm{id}_{Q(A)}$ and $\\varphi^{-1}$. The literal mapping cone satisfies a chain isomorphism\n$$\\operatorname{Cone}(i)\\cong W\\oplus D,$$\nwhere $D^{b-1}=D^b=k_T^{\\oplus r_b}$, $d_D^{b-1}=\\mathrm{id}$, and all other terms and differentials of $D$ are zero. The degree-minus-one family $h$ with $h^b=\\mathrm{id}$ and all other components zero satisfies $d_Dh+hd_D=\\mathrm{id}_D$. In particular there are derived isomorphisms $C\\cong Q(\\operatorname{Cone}(i))\\cong Q(W)$. For every site object $U\\to T$, with $(-)|_U$ the termwise restriction to the localized site [def-pur-localized-ringed-site], $W|_U$ is K-flat [def-pc-kflat-complex], and for every degree-zero $k_U$-module sheaf $F$ there is a derived isomorphism\n$$ (C|_U)\\otimes^L_{k_U} F\\cong\\bigoplus_{q=a}^{b-1}F^{\\oplus r_q}[-q] $$\n[def-weil-derived-tensor]. Thus, when $a<b$, $C$ has Tor amplitude $[a,b-1]$ after every restriction [def-weil-proetale-tor-amplitude], and $H^q(C)$ is the constant free sheaf of rank $r_q$ for $a\\leq q<b$, zero otherwise. When $a=b$, $W$ and $C$ are zero. Zero ranks and the empty scheme are allowed. No integral coefficient ring, quotient tower, or completeness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, lemma-local-structure-constructible-complex, final induction paragraph. Residue cone amplitude assertion (details omitted in the source), expanded by old item proof steps 4-6 and the residue zero case of step 7; cone convention: derived.tex, definition-cone."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-pur-localized-ringed-site",
+  "def-pc-kflat-complex",
+  "def-weil-derived-tensor",
+  "def-weil-proetale-tor-amplitude",
+  "def-sf-prescribed-split-complex",
+  "def-weil-pbc-ringed-site-derived-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sf-projective-cohomology-split-model] with $U=T$ and $C=k_T$. Its evaluation hypothesis is exactly the hypothesis here, and its cohomology interval, finite ranks and specified isomorphisms are our $[a,b],r_q,\\theta_q$. For a representative $Z$ of $N$ it gives a quasi-isomorphism $V\\to Z$ inducing every $\\theta_q$. Localizing and composing with the representing isomorphism gives $\\varphi:Q(V)\\xrightarrow{\\sim}N$ with the required cohomology maps.",
+   "uses": [
+    "lem-sf-projective-cohomology-split-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, final induction paragraph; prescribed splitting expanded by the cited projective-cohomology lemma."
+   }
+  },
+  {
+   "text": "Now let $\\varphi$ be ANY isomorphism inducing the prescribed $\\theta_q$. The two maps $u$ and $\\varphi Q(i)$ from $k_T^{\\oplus r_b}[-b]$ induce the same $\\theta_b$. In the natural generator bijection of [lem-sf-projective-cohomology-split-model], their images are therefore the same $r_b$ global sections of $H^b(N)$. Injectivity gives $u=\\varphi Q(i)$. This proves the universal quantifier over $\\varphi$, rather than just the equality for the splitting chosen in step 1.",
+   "uses": [
+    "lem-sf-projective-cohomology-split-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 064B, lemma-morphisms-from-projective-complex; generator bijection as stated in the cited splitting lemma."
+   }
+  },
+  {
+   "text": "The cone triangle of $i$ is distinguished after $Q$ by [def-weil-abstract-derived-category]. The equality in step 2 is precisely the first commutative square with vertical maps $\\mathrm{id}_{Q(A)}$ and $\\varphi^{-1}$. Axiom TR3 of [def-weil-triangulated-category] completes these two maps to a morphism from the given distinguished triangle to that cone triangle. Both first components are isomorphisms, so [lem-sf-triangle-morphism-iso] makes the third component an isomorphism as well. Componentwise inverses give an isomorphism of triangles; in particular $C\\cong Q(\\operatorname{Cone}(i))$. No uniqueness of the third map is asserted.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "TR3 in definition-triangulated-category; Tag 014A, lemma-third-isomorphism-triangle; definition-cone and Tag 05RU, definition-unbounded-derived-category."
+   }
+  },
+  {
+   "text": "Use the literal mapping-cone matrix and the complementary lower/top inclusions and projections. Their four splitting identities give an explicit chain isomorphism Cone(i) ≅ W ⊕ Cone(id_A). The standard identity-cone homotopy contracts the second summand. Its components are zero unless the source is degree b; the displayed normalization follows from the cone inclusion/projection identities. The cone has free terms in b-1 and b and the differential is the identity under those identifications. Localization identifies homotopic maps, so Q(Cone(id_A)) is zero. Additivity of Q and biproduct cancellation give Q(Cone(i)) ≅ Q(W).",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "definition-cone, explicit matrix differential; Tag 05RU, definition-unbounded-derived-category."
+   }
+  },
+  {
+   "text": "For every site object U, use exact slice restriction [lem-sf-site-perfect-restriction-exact] and the derived-restriction comparison [lem-sf-site-perfect-derived-restriction-iso] to transport C ≅ Q(W) to C|U ≅ Q(W|U). Restriction is additive [lem-sf-site-perfect-restriction-additive] and preserves finite coproducts. Restrict the coproduct of units defining each finite free term and reindex ULift(Fin r_q) along Equiv.ulift. This identifies its restriction with the finite coproduct of slice units. Zero terms and zero differentials remain zero. No comparison with the pro-etale site of the scheme U is required.",
+   "uses": [
+    "lem-sf-site-perfect-restriction-exact",
+    "lem-sf-site-perfect-restriction-additive",
+    "lem-sf-site-perfect-derived-restriction-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03DH, definition-localize-ringed-site; sites.tex Tag 00XR, lemma-when-shriek, and Section 00XZ; proetale.tex Definition 09AE and the localized-site identification."
+   }
+  },
+  {
+   "text": "Each restricted term of W is a finite sum of tensor units, hence flat: the unit is flat, finite biproducts preserve flatness, and the site/monoidal tensor comparison [lem-weil-pbc-independent-sheaf-tensor-colimits] transfers categorical flatness to site flatness. Since W is bounded above, [lem-weil-pbc-independent-bounded-flat-kflat] makes W|U K-flat. Apply [lem-sf-ringed-kflat-single-tensor-comparison] to compute its tensor with a degree-zero module F by the additive termwise tensor functor. The tensor functor preserves finite coproducts and takes unit ⊗ F to F. A zero-differential complex supported on [a,b-1] is canonically the coproduct of its single-degree terms; construct this isomorphism by the degreewise coproduct universal property. This yields the asserted tensor model. Its support proves the Tor bound. The canonical cycles/homology maps of the zero-differential W identify its homology with its terms, giving the stated cohomology of C. If a=b every term of W is zero, so W and C vanish. Finite empty coproducts, zero ranks, negative degrees, and the empty scheme are covered by the same constructions.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "def-pc-kflat-complex",
+    "def-weil-derived-tensor",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, section-tensor-product, specialized to the finite free zero-differential model; sites-cohomology.tex definition-derived-tensor-product, K-flat representative formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-projective-cohomology-split-model",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso",
+  "lem-sf-site-perfect-restriction-exact",
+  "lem-sf-site-perfect-restriction-additive",
+  "lem-sf-site-perfect-derived-restriction-iso",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "def-pc-kflat-complex",
+  "def-weil-derived-tensor",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, lemma-local-structure-constructible-complex, final induction paragraph: explicit residue cone details omitted there, using derived.tex definition-cone and Tag 014A. R7 implementation: explicit split-cone maps and standard identity-cone homotopy; exact slice restriction, bounded-flat K-flatness, and the published K-flat/single tensor comparison. All clauses proved without new intermediate holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mappingCone.*(biprod|split|contract)|Homotopy.*mappingCone|mappingCone.*Homotopy",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean, Mathlib/Algebra/Homology/Factorizations/CM5b.lean, Mathlib/Algebra/Homology/Factorizations/CM5b.lean, Mathlib/Algebra/Homology/Factorizations/CM5b.lean, Mathlib/Algebra/Homology/Factorizations/CM5b.lean, Mathlib/Algebra/Homology/Factorizations/CM5b.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean (Mathlib/Algebra/Homology)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic identity-cone homotopies and degreewise-split cone comparisons do not provide the prescribed cohomology splitting, its equality for every model and the restricted derived tensor formula together."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"Homotopy\"",
+   "results": "12 hits: CochainComplex.mappingCone.descHomotopy, CochainComplex.mappingCone.liftHomotopy, HomotopyCategory.mappingCone_triangleh_distinguished, CochainComplex.mappingCone.mapOfHomotopy, CochainComplex.mappingCone.rotateHomotopyEquiv, CochainComplex.mappingCone.trianglehMapOfHomotopy, CochainComplex.mappingCone.trianglehMapOfHomotopy_hom₁, CochainComplex.mappingCone.trianglehMapOfHomotopy_hom₂",
+   "date": "2026-10-22",
+   "verdict": "no match: generic identity-cone homotopies and degreewise-split cone comparisons do not provide the prescribed cohomology splitting, its equality for every model and the restricted derived tensor formula together."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex with free cohomology splits over a weakly contractible site and the cone of its top cohomology basis inclusion has shorter Tor amplitude",
+   "results": "8 hits: CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, CategoryTheory.ShortComplex.Splitting.exact, CategoryTheory.ShortComplex.Splitting, CategoryTheory.ShortComplex.Splitting.mk.sizeOf_spec, CategoryTheory.ShortComplex.Splitting.rightHomologyData_ι, CategoryTheory.ShortComplex.Splitting.mk, CategoryTheory.ShortComplex.Splitting.shortExact, CategoryTheory.ShortComplex.Splitting.rightHomologyData_H",
+   "date": "2026-10-22",
+   "verdict": "no match: generic identity-cone homotopies and degreewise-split cone comparisons do not provide the prescribed cohomology splitting, its equality for every model and the restricted derived tensor formula together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the derived category of sheaves of vector spaces on a weakly contractible site the cone of a map from a top free cohomology basis is the lower split complex plus a contractible identity pair",
+   "results": "8 hits: CochainComplex.mappingCone.triangleRotateShortComplexSplitting, CochainComplex.cm5b.p, CochainComplex.mappingConeHomOfDegreewiseSplitIso, CochainComplex.cm5b.homotopyEquiv, CochainComplex.triangleOfDegreewiseSplit, CochainComplex.mappingCone.triangleRotateShortComplexSplitting_r, CochainComplex.mappingConeHomOfDegreewiseSplitXIso, CochainComplex.mappingCone.triangleRotateShortComplexSplitting_s",
+   "date": "2026-10-22",
+   "verdict": "no match: generic identity-cone homotopies and degreewise-split cone comparisons do not provide the prescribed cohomology splitting, its equality for every model and the restricted derived tensor formula together."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Identify a prescribed top cohomology cell under every splitting of a bounded free cohomology sheaf complex, contract its identity cone and compute all restricted tensor products",
+   "results": "8 hits: CochainComplex.mappingConeHomOfDegreewiseSplitIso_hom_f, SimplicialObject.Splitting.rec, CochainComplex.triangleOfDegreewiseSplit, SheafOfModules.ιFree, CochainComplex.homOfDegreewiseSplit_f, SimplicialObject.Splitting.d, CategoryTheory.ShortComplex.Splitting.mk, CochainComplex.mappingConeHomOfDegreewiseSplitXIso.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic identity-cone homotopies and degreewise-split cone comparisons do not provide the prescribed cohomology splitting, its equality for every model and the restricted derived tensor formula together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of sheaves with finite free cohomology on a weakly contractible site splits, and the cone of a prescribed top cell is the lower split complex",
+   "results": "8 hits: CochainComplex.mappingCone.triangleRotateShortComplexSplitting, CochainComplex.mappingConeHomOfDegreewiseSplitXIso, CochainComplex.triangleOfDegreewiseSplit, CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, CochainComplex.mappingConeHomOfDegreewiseSplitIso, CochainComplex.triangleOfDegreewiseSplit_obj₁, CochainComplex.isSplitMono_from_singleFunctor_obj_of_injective, CochainComplex.mappingCone.triangleRotateShortComplexSplitting_r",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic cone or short-complex splittings, not the full prescribed cohomology splitting, all-model equality and restricted tensor assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of sheaves with prescribed free cohomology splits on a weakly contractible site and a top-cell cone has shorter Tor amplitude",
+   "results": "8 hits: CategoryTheory.ShortComplex.Splitting, CategoryTheory.ShortComplex.Splitting.exact, CategoryTheory.ShortComplex.Splitting.mk, CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, CategoryTheory.ShortComplex.Splitting.mk.sizeOf_spec, CategoryTheory.ShortComplex.Splitting.rightHomologyData_H, CategoryTheory.ShortComplex.Splitting.shortExact, CochainComplex.triangleOfDegreewiseSplit_obj₁",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic cone or short-complex splittings, not the full prescribed cohomology splitting, all-model equality and restricted tensor assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-complete-top-residue-cell-cone",
+  "date": "2026-10-22",
+  "group": "Q151"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted local-model argument: A lifted top residue cell with a complete cone of shorter amplitude; old parent steps 5-6. Re-split: Residue cone amplitude assertion (details omitted in the source), expanded by old item proof steps 4-6 and the residue zero case of step 7; cone convention: derived.tex, definition-cone.",
+   "via": [
+    "lem-sf-complete-top-residue-cell-cone",
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-prescribed-residue-cell-cone-model",
+  "worker": "stage1",
+  "summary": "Q98 reuses the existing prescribed projective-cohomology splitting and shifted-free generator bijection; proves the all-model top-map equality, completes its square by TR3, explicitly decomposes and contracts the literal cone, and computes every restricted tensor by the finite zero-differential model. No new nodes and no statement changes.",
+  "blueprint": "The inherited ancestor lem-fix-weil-operations, evaluation paragraph, is realized through the local projective models of the parent: this split expands the residue top-cell cone and shorter Tor amplitude in Stacks 09C3, final induction paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the site on every pro-etale object with its slice and its constant coefficients; a generic site identification, not a replacement of the local-model route."
+   },
+   {
+    "node": "lem-pur-localized-module-restriction-quasi-iso",
+    "why": "Generic restriction of module complexes preserves quasi-isomorphisms, needed to restrict the explicitly constructed derived isomorphism; the unit contains no separate restriction theorem."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-eda1d795e",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-eda1d795e (reviewer sub-agent of L); spot-checked: Read in full: the item (6 steps), every cited statement (split-model, triangle-morphism-iso, weakly-etale-localization, localized-restriction-quasi-iso, site-constant-restriction, abstract-derived-category, triangulated-category, kflat, derived-tensor, tensor-complex-sheaves, sheaf-tensor-product, tor-amplitude, derived-cohomology) and Stacks proetale.tex 09C3 lines 5825-5940. The 'If b > a' paragraph says '(details omitted)' about the [a,b-1] tor amplitude; this item writes those details out. Compared against the parent's old steps 4-6 and old step 7's residue part (verbatim in the Q151 report): every argument is kept, and in more detail, here. Nothing was shortened. The item is not a restatement of its parent: it has a field k, a given triangle and no integral tower. No duplicate in the DAG; checked projective-top-cell-attachment, finite-zero-differential-assembly, zero-differential-free-coproduct, kinjective-cone-contractible and split-model. Checks: step 2 gives u=phi∘Q(i) for every phi through the generator bijection, which the split-model node's last sentence also states. Cone matrix (d_L f; 0 -d_K) with zero differentials gives D^{b-1}=D^b=k^{r_b} with d=id, and h^b=id satisfies dh+hd=id in both degrees. TR3 plus isIso3_of_isIso12 gives the triangle isomorphism. Step 5's restriction rests on the two declared generic tool uses, which I accept: unit sk-rem-sf-pf-done is a remark with uses=[]. Step 6's K-flat Tot computation is elementary. Tested a=b, a=b-1, r_b=0, all ranks zero, T empty and negative b: every formula holds. No SGA source. FIX (B3): the statement used W|_U and C|_U with no definition node for restriction to a site object. I added [def-pur-localized-ringed-site] (a Mathlib leaf) to the statement ('with (-)|_U the termwise restriction to the localized site') and to stmt_deps, in fixes/dag/nodes/sec-six-functors/lem-sf-prescribed-residue-cell-cone-model.json. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PrescribedResidueCellConeModel",
+  "declaration": "WeilConjectures.sf_prescribed_residue_cell_cone_model",
+  "declarations": [
+   "WeilConjectures.sfResidueSiteSmall",
+   "WeilConjectures.sfResidueSliceSmall",
+   "WeilConjectures.sfResidueAbSheafify",
+   "WeilConjectures.sfResidueAbLocallyBijective",
+   "WeilConjectures.sfResidueSliceAbSheafify",
+   "WeilConjectures.sfResidueSliceAbLocallyBijective",
+   "WeilConjectures.sfResidueCoefficients",
+   "WeilConjectures.sfResidueModules",
+   "WeilConjectures.sfResidueDerived",
+   "WeilConjectures.sfResidueSliceDerived",
+   "WeilConjectures.sfResidueAnySliceDerived",
+   "WeilConjectures.sfResidueFree",
+   "WeilConjectures.sfResidueCell",
+   "WeilConjectures.sfResidueComplexRestriction",
+   "WeilConjectures.sfResidueSplit",
+   "WeilConjectures.sfResidueInclusion",
+   "WeilConjectures.sfResidueIdentityPair",
+   "WeilConjectures.sfResidueTensorModel",
+   "WeilConjectures.sf_prescribed_residue_cell_cone_model"
+  ],
+  "file": "lean/Sheaf/Paper/PrescribedResidueCellConeModel.lean",
+  "statement": "theorem sf_prescribed_residue_cell_cone_model (T : Scheme.{u}) (k : Type v) [Field k] (_hEval : ∀ (F G : Sheaf (Scheme.ProEt.topology T) (Type (max (u + 1) v))) (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op (Scheme.ProEt.mk (𝟙 T))))) (a b : ℤ) (hab : a ≤ b) (rank : ℤ → ℕ) (N : DerivedCategory (sfResidueModules T k)) (_hN : ∀ q : ℤ, ¬ (a ≤ q ∧ q ≤ b) → IsZero ((DerivedCategory.homologyFunctor _ q).obj N)) (theta : ∀ (q : ℤ) (_hq : a ≤ q ∧ q ≤ b), sfResidueFree T k (rank q) ≅ (DerivedCategory.homologyFunctor _ q).obj N) (uTop : DerivedCategory.Q.obj (sfResidueCell T k b (rank b)) ⟶ N) (_huTop : sfFreeCohomologyMap (sfResidueCoefficients T k) b (rank b) uTop = (theta b ⟨hab, le_rfl⟩).hom) (C : DerivedCategory (sfResidueModules T k)) (g : N ⟶ C) (delta : C ⟶ (DerivedCategory.Q.obj (sfResidueCell T k b (rank b)))⟦(1 : ℤ)⟧) (_htriangle : Triangle.mk uTop g delta ∈ distTriang _) : (∃ phi : DerivedCategory.Q.obj (sfResidueSplit T k a b rank) ≅ N, ∀ (q : ℤ) (hq : a ≤ q ∧ q ≤ b), sfFreeCohomologyMap (sfResidueCoefficients T k) q (rank q) (DerivedCategory.Q.map (sfSplitCell (sfResidueCoefficients T k) a b rank q hq) ≫ phi.hom) = (theta q hq).hom) ∧ (∀ phi : DerivedCategory.Q.obj (sfResidueSplit T k a b rank) ≅ N, (∀ (q : ℤ) (hq : a ≤ q ∧ q ≤ b), sfFreeCohomologyMap (sfResidueCoefficients T k) q (rank q) (DerivedCategory.Q.map (sfSplitCell (sfResidueCoefficients T k) a b rank q hq) ≫ phi.hom) = (theta q hq).hom) → uTop = DerivedCategory.Q.map (sfResidueInclusion T k a b hab rank) ≫ phi.hom ∧ ∃ e : Triangle.mk uTop g delta ≅ DerivedCategory.Q.mapTriangle.obj (CochainComplex.mappingCone.triangle (sfResidueInclusion T k a b hab rank)), e.hom.hom₁ = 𝟙 _ ∧ e.hom.hom₂ = phi.inv) ∧ Nonempty (CochainComplex.mappingCone (sfResidueInclusion T k a b hab rank) ≅ sfResidueSplit T k a (b - 1) rank ⨿ sfResidueIdentityPair T k b (rank b)) ∧ (∃ (e₀ : (sfResidueIdentityPair T k b (rank b)).X (b - 1) ≅ sfResidueFree T k (rank b)) (e₁ : (sfResidueIdentityPair T k b (rank b)).X b ≅ sfResidueFree T k (rank b)), e₀.inv ≫ (sfResidueIdentityPair T k b (rank b)).d (b - 1) b ≫ e₁.hom = 𝟙 _) ∧ (∀ q : ℤ, q ≠ b - 1 → q ≠ b → IsZero ((sfResidueIdentityPair T k b (rank b)).X q)) ∧ (∀ p q : ℤ, p ≠ b - 1 ∨ q ≠ b → (sfResidueIdentityPair T k b (rank b)).d p q = 0) ∧ (∃ h : Homotopy (𝟙 (sfResidueIdentityPair T k b (rank b))) 0, (∀ p q : ℤ, p ≠ b → h.hom p q = 0) ∧ (CochainComplex.mappingCone.inr (𝟙 (sfResidueCell T k b (rank b)))).f b ≫ h.hom b (b - 1) ≫ (CochainComplex.mappingCone.fst (𝟙 (sfResidueCell T k b (rank b)))).1.v (b - 1) b (by omega) = 𝟙 _) ∧ Nonempty (C ≅ DerivedCategory.Q.obj (CochainComplex.mappingCone (sfResidueInclusion T k a b hab rank))) ∧ Nonempty (DerivedCategory.Q.obj (CochainComplex.mappingCone (sfResidueInclusion T k a b hab rank)) ≅ DerivedCategory.Q.obj (sfResidueSplit T k a (b - 1) rank)) ∧ (∀ U : T.ProEt, CochainComplex.IsKFlatIndependentCoefficients (R := (sfResidueCoefficients T k).over U) ((sfResidueComplexRestriction T k U).obj (sfResidueSplit T k a (b - 1) rank)) ∧ (∀ F : SheafOfModules.{max (u + 1) v} ((sfSplitRings (sfResidueCoefficients T k)).over U), Nonempty ((SheafOfModules.siteDerivedTensorIndependentCoefficients.{u + 1, u, max (u + 1) v, max (u + 2) (v + 1)} _ ((sfResidueCoefficients T k).over U)).obj (ringedSiteDerivedRestrictionOfUniverses.{u + 1, u, max (u + 1) v, max (u + 1) v, max (u + 2) (v + 1), max (u + 2) (v + 1)} (sfSplitRings (sfResidueCoefficients T k)) U C, (DerivedCategory.singleFunctor _ 0).obj F) ≅ DerivedCategory.Q.obj (sfResidueTensorModel F a (b - 1) rank))) ∧ (a < b → HasRingedSiteTorAmplitudeOfUniverses ((sfResidueCoefficients T k).over U) (ringedSiteDerivedRestrictionOfUniverses.{u + 1, u, max (u + 1) v, max (u + 1) v, max (u + 2) (v + 1), max (u + 2) (v + 1)} (sfSplitRings (sfResidueCoefficients T k)) U C) a (b - 1))) ∧ (∀ (q : ℤ) (_hq : a ≤ q ∧ q < b), Nonempty (sfResidueFree T k (rank q) ≅ (DerivedCategory.homologyFunctor _ q).obj C)) ∧ (∀ q : ℤ, ¬ (a ≤ q ∧ q < b) → IsZero ((DerivedCategory.homologyFunctor _ q).obj C)) ∧ (a = b → IsZero (sfResidueSplit T k a (b - 1) rank) ∧ IsZero C)",
+  "branch": "sheaf-dag",
+  "by": "Q120",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Returned-delivery repair F1: the statement uses the plain sfSplitRings, sfSplitComplex, sfSplitCell and sfFreeCohomologyMap definitions, now owned by def-sf-prescribed-split-complex; the splitting theorem remains solely a proof dependency, and no theorem choice is used to form these data. F2: the tensor is the intrinsic siteDerivedTensorIndependentCoefficients used by HasRingedSiteTorAmplitudeOfUniverses in the landed def-weil-proetale-tor-amplitude record (construction owner lem-weil-pbc-site-derived-tensor-descent). The fixed-ring def-weil-derived-tensor record is left unchanged; no rebinding or second tensor construction is delivered."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b22b13c79",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 09f94468ef69. The Lean module is byte-identical (the math was already judged correct) and lean.statement matches the file verbatim. F1 repaired: theorem stmt_dep replaced by new existing:true node def-sf-prescribed-split-complex owning sfSplitRings/sfSplitComplex/sfSplitCell/sfFreeCohomologyMap in the unchanged ProjectiveCohomologySplitModel (lines 46-91 read; no .choose; statement faithful; signature verbatim; no duplicate owner in live DAG); theorem stays in proof_deps only. F2 repaired: def-weil-derived-tensor and all other stmt_dep records are byte-identical to side-live; the note names the intrinsic siteDerivedTensorIndependentCoefficients of the landed Tor-amplitude record. Item differs from live only in lean and the added stmt_deps; statement, proof and proof_deps are unchanged. Clauses, edge cases (a=b, zero ranks, negative b, empty scheme, arbitrary U, independent universes) and gates (sorry only, docstrings with source and blueprint, six proof steps) all re-checked. No compile: nothing changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261024T190857-L-133507",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

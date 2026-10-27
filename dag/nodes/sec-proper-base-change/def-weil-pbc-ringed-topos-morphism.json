@@ -99,7 +99,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "lean": {
@@ -108,9 +119,14 @@
   "file": "lean/Sheaf/CategoryTheory/RingedToposMorphism.lean",
   "statement": "structure RingedToposMorphism {C D : Type u} [SmallCategory C] [SmallCategory D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} (A : Sheaf J RingCat.{u}) (B : Sheaf K RingCat.{u})",
   "branch": "newtargets-dag",
-  "by": "NH",
-  "date": "2026-10-15",
-  "existing": false
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.RingedToposMorphism",
+   "CategoryTheory.RingedToposMorphismOnSites"
+  ],
+  "note": "Section 1(B) superset repair of returned head 1016faa1c72f: preserve the live primary module, file, declaration and statement, and retain CategoryTheory.RingedToposMorphism verbatim in its owning module. Append RingedToposMorphismOnSites unchanged, and record both declarations. The original equal-universe interface cannot express Over Scheme.{u}, whose objects lie in u+1 but arrows and sections lie in u; RingedToposMorphismOfUniverses additionally needs EssentiallySmall in the coefficient universe, unavailable for that big site. The appended interface retains every original field with independent object and Hom universes and explicit HasSheafCompose instances. This extends the node without withdrawing ownership or changing any existing caller."
  },
  "reviewed": {
   "date": "2026-10-15",
@@ -121,11 +137,11 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-9add335fc",
-  "group": "NH",
+  "reviewer": "NT-stage2-cc-dc627b57d",
+  "group": "N0",
   "result": "pass",
-  "note": "Checked all statement clauses, dependencies, ringed-topos laws, normalization, universes, edge cases, exact signatures, docstrings, and report sections. Server compiles reproduced cleanly; no delivery errors found."
+  "note": "Re-delivery after H13 RETURN of 1016faa1c72f implements the preferred superset repair: the live RingedToposMorphism.lean is an exact byte prefix of the delivered module (cmp against live and side-live), and the appended RingedToposMorphismOnSites structure is identical to the returned one. The def-weil-pbc-ringed-topos-morphism record keeps the live module/file/declaration/statement and adds declarations [RingedToposMorphism, RingedToposMorphismOnSites] plus a §1(B) note. There is no name clash, only the two lean fields change, and there are no new nodes. Item rechecked against 070R/070S(1): arbitrary S and M with native universes; O, φ, p/d, P/s pinned by formulas; restriction clause via the unit-normalized tensorPullbackSectionComp.inv and h.w; the unit equation pins e. Edge cases covered; statement verbatim; imports exist; docstrings and sorry-only proof OK. No compile needed."
  }
 }

@@ -36,138 +36,30 @@
  ],
  "proof": [
   {
-   "text": "Use the affine-line datum [def-pur-affine-line-datum]: write $X=\\mathbf A^1_Y$, $Z=s(Y)$, $U=\\mathbf G_{m,Y}$ and $F=A_X(1)$. Retain the datum's hypothesis $e(E/\\mathbf Q_\\ell)\\mid n$ and write $N=n/e\\geq1$, $m=\\ell^N$; the coefficient map is $\\varphi(u)=\\theta^{-1}(u\\otimes1_A)$, and $\\kappa(t)$ is the pro-etale comparison image of $\\kappa_{\\mathrm{et}}(t)=H^1(\\varphi_U)(\\delta_U(t))$. The zero section is a closed immersion, and its complement is quasi-compact (locally it is the principal open $D(t)$). The base is the algebraic closure of a finite field, $X$ is finite type, hence has a finite dimension bound $d\\geq0$ by [lem-kun-dimension-finite-type] (choose $d=0$ if $X$ is empty), and the finite commutative ring $A=\\mathcal O_E/\\varpi_E^n$ is finite and killed by a power of $\\ell\\ne p$. Thus [lem-exc-open-complement-known] supplies the open-complement condition of [def-exc-open-complement-bound], with $c=2d$. For the coefficient input to these bounds, [lem-pur-twist-sheaf-locally-free](1),(3) and the datum's etale/pro-etale twist identification give an etale cover on which $F$ is the constant free rank-one $A$-module in degree zero. Thus $F$ is constructible, and for each $A$-module sheaf $M$, $F\\otimes_A^L M$ is locally $M$ in degree zero; its Tor amplitude is $[0,0]$. The ambient etale right adjoint exists by [lem-exc-closed-ambient]; [lem-exc-closed-amplitude] and [prop-exc-closed-tor] then give respectively the bounded constructible and finite-Tor assertions in the statement. On the stated pro-etale coefficient category, $Rs^!$ is the transported etale adjoint, exactly as defined in [def-weil-exceptional-inverse-image]. In particular the ambient etale adjoint is not being asserted to be an adjoint on all pro-etale complexes.",
+   "text": "Apply affine_line_boundary_realization. Extract its finite-Tor membership of the unit and shifted exceptional value, concentration, open complement bound, and normalized Gysin chart. Use the comparison chart supportBoundary, whose snake normalization is precisely supportBoundaryNormalization. The realization theorem gives m with the required boundary equation.",
    "uses": [
-    "def-pur-affine-line-datum",
-    "lem-kun-dimension-finite-type",
-    "lem-exc-open-complement-known",
-    "def-exc-open-complement-bound",
-    "lem-exc-closed-ambient",
-    "lem-exc-closed-amplitude",
-    "prop-exc-closed-tor",
-    "def-weil-exceptional-inverse-image",
-    "lem-pur-twist-sheaf-locally-free"
+    "lem-pur-affine-line-boundary-realization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "§16, discussion preceding Theorem 16.7; the relative ambient bounds are the cited DAG statements"
-   }
+   "elementary": false
   },
   {
-   "text": "The coordinate supplies the specified class $\\kappa(t)\\in H^1(U,A(1))$ of [def-pur-affine-line-datum]: the ordinary etale Kummer boundary of the unit $t\\in\\Gamma(U,\\mathcal O_U)^\\times$, followed by $H^1(\\varphi_U)$ and then the datum's canonical comparison to the pro-etale site. Apply [thm-pur-with-support-exactness] to the closed-open pair $(Z,X)$ and the finite-torsion twist $F$, and put $\\alpha=\\partial\\kappa(t)\\in H^2_Z(X,F)$. Let $K=Rs^!F[2]$. By [lem-pur-gysin-structure], $K$ belongs to $D^b_{ctf}(Y,A)$, is concentrated in degree zero, and the canonical identification of supported classes with sections of $\\mathcal H^0(K)$ identifies $\\alpha$ with a morphism $\\operatorname{pur}_s:A_Y\\to K$. Explicitly its degree-zero sheaf map sends $1$ to the section corresponding to $\\alpha$. $A_Y$ also belongs to $D^b_{ctf}(Y,A)$: it is a finite constant, hence constructible, sheaf, and $A_Y\\otimes_A^L M=M$ for every $A$-module sheaf $M$, so its Tor amplitude is $[0,0]$. Since $D^b_{ctf}$ is a full subcategory by [def-weil-finite-tor-amplitude], this is a morphism in precisely the category in the statement. This constructs the global orientation with the displayed twist and shift.",
+   "text": "For a geometric point, choose the local chart and residue of orientation_local_residue. Apply orientation_coordinate_boundary_pullback to this chart and the global chart, obtaining p and equality of their coordinate boundaries. Rewrite the realized global section using its boundary equation, apply rho to the pullback equality, and use the local value-one normalization. This proves both required residue equations.",
    "uses": [
-    "def-pur-affine-line-datum",
-    "thm-pur-with-support-exactness",
-    "lem-pur-gysin-structure",
-    "def-weil-finite-tor-amplitude"
+    "lem-pur-orientation-coordinate-boundary-pullback",
+    "lem-pur-orientation-local-residue"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Theorem 9.4 and its Ext description, Example 9.5; §16, Theorems 16.1 and 16.7"
-   }
-  },
-  {
-   "text": "Fix a geometric point $\\bar y=\\operatorname{Spec}\\Omega\\to Y$. Write $g:\\bar y\\to Y$, $h:X_{\\bar y}\\to X$, $h_U:U_{\\bar y}\\to U$, and $s':\\bar y\\hookrightarrow X_{\\bar y}$ for the base changes along $g$, and $t_{\\bar y}=h^*t$ for the coordinate of $X_{\\bar y}=\\mathbf A^1_\\Omega$. Clause (4) of [prop-pur-gm-relative-kummer], in its final sentence for a geometric point $g$ (no finite-type hypothesis on $\\operatorname{Spec}\\Omega$), says that the pullback of the Kummer class is the Kummer class; with $g'=h_U$ this is $h_U^*\\kappa(t)=\\kappa(t_{\\bar y})$. Both classes are formed by the formulas of [def-pur-affine-line-datum], with the same exponent $m=\\ell^N$ (the hypothesis $e\\mid n$ is retained, $N=n/e\\geq1$, and $m$ is invertible on $U_{\\bar y}$) and the same coefficient map $u\\mapsto\\theta^{-1}(u\\otimes1_A)$. On the etale site, $\\kappa_{\\mathrm{et}}(t_{\\bar y})=H^1(\\varphi^{\\mathrm{et}})(\\delta_{U_{\\bar y}}(t_{\\bar y}))$ is the Kummer boundary of the unit $t_{\\bar y}$ followed by $u\\mapsto u\\otimes1_A$; this is exactly the class $\\kappa_A(t)$ used in step 7, and the datum's comparison identifies its pro-etale image with $\\kappa(t_{\\bar y})$. The base-change clause is a statement of the item's own unit, so no generic torsor functoriality is used.",
-   "uses": [
-    "def-pur-affine-line-datum",
-    "prop-pur-gm-relative-kummer"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Section 9, Theorem 9.4, Example 9.5 and the Ext proof, pp. 66–67; Section 16, Kummer boundary"
-   }
-  },
-  {
-   "text": "Functoriality in the pair in [thm-pur-with-support-exactness] gives\n$$h^*\\alpha=h^*\\partial\\kappa(t)=\\partial_{\\bar y}h_U^*\\kappa(t)=\\partial_{\\bar y}\\kappa(t_{\\bar y}).$$\nThis is pullback on supported classes. The identification [lem-pur-supported-hom] represents $\\alpha$ by $m:s_*A_Y\\to F[2]$. Its compatibility with pullback of the pair is precisely [lem-pur-supported-hom-pullback]: under the canonical comparison of supported constants, $h^*\\alpha$ is represented by $m'=h^*m$. Thus the supported boundary square is also a square of the corresponding derived morphisms; no naturality in the scheme is being inferred from naturality in $F$ alone.",
-   "uses": [
-    "thm-pur-with-support-exactness",
-    "lem-pur-supported-hom",
-    "lem-pur-supported-hom-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Section 9, Theorem 9.4, Example 9.5 and the Ext proof, pp. 66–67; Section 16, Kummer boundary"
-   }
-  },
-  {
-   "text": "The zero section and its base change are finite: on an affine chart they are $R[t]\\to R[t]/(t)=R$, whose target is generated by $1$ as an $R[t]$-module. Apply [lemma-weil-pbc-finite-exchange] to this Cartesian square. Its canonical exchange, including its derived version, identifies $h^*Rs_*K$ with $Rs'_*g^*K$. These are comparisons on ordinary etale sites. For constant $A$, [prop-weil-pbc-inverse-image-modules-exact] supplies exact module inverse image and its ordinary pullback adjunction; the exchange respects the $A$-action because it is defined by that adjunction. Thus the comparison applies to the $A$-module complexes here. Set $K=Rs^!F[2]$ as above, $K'=Rs'^!h^*F[2]$ and let $\\varepsilon:s_*K\\to F[2]$ be the exceptional counit from [lem-exc-closed-ambient]. The identification of [lem-pur-gysin-structure](2) used in step 2 is the composite of degree-zero evaluation $\\Gamma(Y,\\mathcal H^0K)=\\operatorname{Hom}(A_Y,K)$, the exceptional adjunction $\\operatorname{Hom}(A_Y,Rs^!F[2])\\cong\\operatorname{Hom}(s_*A_Y,F[2])$ on the etale-origin objects of [def-weil-exceptional-inverse-image], and the supported-Hom identification [lem-pur-supported-hom] (this is how the source proof of that lemma, blueprint main-20261015, second paragraph, constructs it). So $\\operatorname{pur}_s$ is the exceptional adjunct of $m$. Since $\\nu^*$ is fully faithful on $D^+$ [thm-weil-pbc-site-comparison] and the site-comparison clause of [lem-pur-supported-hom-pullback] carries the etale representative of $\\alpha$ to $m$, both are images of their etale models; on those, [lem-weil-pbc-adjunct-counit-identity] gives $m=\\varepsilon\\circ s_*\\operatorname{pur}_s$.",
-   "uses": [
-    "lemma-weil-pbc-finite-exchange",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-exc-closed-ambient",
-    "lem-weil-pbc-adjunct-counit-identity",
-    "lem-pur-gysin-structure",
-    "lem-pur-supported-hom",
-    "lem-pur-supported-hom-pullback",
-    "def-weil-exceptional-inverse-image",
-    "thm-weil-pbc-site-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Section 9, Theorem 9.4, Example 9.5 and the Ext proof, pp. 66–67; Section 16, Kummer boundary"
-   }
-  },
-  {
-   "text": "Let $\\varepsilon':s'_*g^*K\\to h^*F[2]$ be $h^*\\varepsilon$ read through the exchange of the preceding step, and define $\\beta:g^*K\\to K'$ to be its exceptional adjunct. Naturality of that exchange gives $m'=\\varepsilon'\\circ s'_*g^*\\operatorname{pur}_s$. The counit identity [lem-weil-pbc-adjunct-counit-identity] says $\\varepsilon_{s'}\\circ s'_*\\beta=\\varepsilon'$, and functoriality gives\n$$\\varepsilon_{s'}\\circ s'_*(\\beta\\circ g^*\\operatorname{pur}_s)=\\varepsilon'\\circ s'_*g^*\\operatorname{pur}_s=m'.$$\nThe same identity now gives $\\operatorname{adj}(m')=\\beta\\circ g^*\\operatorname{pur}_s$. By [lem-pur-supported-hom-pullback] this morphism represents the supported class $h^*\\alpha$ computed above. This identifies the restriction of the orientation without assuming $\\beta$ invertible. The fibre adjunction of [lem-exc-closed-ambient] imposes no finite-type-over-$k$ condition on $\\Omega$. Finally [def-weil-exceptional-inverse-image] defines the chapter's pro-etale functor by transport from the etale adjoint; the pro-etale clause of [thm-pur-with-support-exactness] and the site-comparison clause of [lem-pur-supported-hom-pullback], applied on $X_{\\bar y}$ with full faithfulness [thm-weil-pbc-site-comparison], identify the transported restriction with this same boundary class.",
-   "uses": [
-    "lemma-weil-pbc-finite-exchange",
-    "lem-weil-pbc-adjunct-counit-identity",
-    "lem-pur-supported-hom-pullback",
-    "lem-exc-closed-ambient",
-    "def-weil-exceptional-inverse-image",
-    "thm-pur-with-support-exactness",
-    "thm-weil-pbc-site-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Section 9, Theorem 9.4, Example 9.5 and the Ext proof, pp. 66–67; Section 16, Kummer boundary"
-   }
-  },
-  {
-   "text": "Apply [thm-pur-rank-one-local-calculation] to $X_{\\bar y}=\\mathbf A^1_\\Omega$ with support $Z_{\\bar y}$ and the same finite-level coefficient twist. Its hypotheses hold: $\\Omega$ is algebraically closed, $\\ell$ is invertible in it, and $N=n/e\\geq1$ has $\\ell^N A=0$. Its coefficient sheaf is exactly $\\mu_{\\ell^N}\\otimes_{\\mathbf Z/\\ell^N}A$, and its $\\kappa_A(t)$ uses the same map $u\\mapsto u\\otimes1_A$ as the datum. Its residue isomorphism $\\rho:H^2_{Z_{\\bar y}}(X_{\\bar y},A(1))\\xrightarrow{\\sim}A$ sends $\\partial_{\\bar y}\\kappa(t_{\\bar y})$ to $1$, since $\\operatorname{ord}_0(t_{\\bar y})=1$. The preceding boundary square proves exactly the asserted normalization of $\\operatorname{pur}_s$ at every geometric point. The cited support exactness and local-calculation statements explicitly include the finite-torsion pro-etale formulation, so this conclusion is in the site's coefficient category fixed in the item.",
-   "uses": [
-    "thm-pur-rank-one-local-calculation",
-    "thm-pur-with-support-exactness"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Proposition 14.3, Example 16.3, and the rank-one case in the proof of Theorem 16.7"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-affine-line-datum",
-  "lem-kun-dimension-finite-type",
-  "lem-exc-open-complement-known",
-  "def-exc-open-complement-bound",
-  "lem-exc-closed-ambient",
-  "lem-exc-closed-amplitude",
-  "prop-exc-closed-tor",
-  "def-weil-exceptional-inverse-image",
-  "lem-pur-twist-sheaf-locally-free",
-  "thm-pur-with-support-exactness",
-  "lem-pur-gysin-structure",
-  "def-weil-finite-tor-amplitude",
-  "prop-pur-gm-relative-kummer",
-  "lem-pur-supported-hom",
-  "lem-pur-supported-hom-pullback",
-  "lemma-weil-pbc-finite-exchange",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-adjunct-counit-identity",
-  "thm-weil-pbc-site-comparison",
-  "thm-pur-rank-one-local-calculation"
+  "lem-pur-affine-line-boundary-realization",
+  "lem-pur-orientation-coordinate-boundary-pullback",
+  "lem-pur-orientation-local-residue"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-pur-affine-line-orientation.md",
-  "place": "Proof: global Kummer boundary and geometric-fibre normalization; expanded using Milne Theorem 9.4 and the existing support-Hom statement"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-affine-line-orientation.proof.md",
+  "place": "Explicit Lean assembly: boundary realization, supported coordinate pullback, local normalized residue. The conclusion has no separate exceptional-mate equality."
  },
  "mathlib_searches": [
   {
@@ -329,57 +221,27 @@
   "def-weil-exceptional-inverse-image"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "thm-pur-affine-line-orientation",
   "worker": "stage1",
-  "summary": "Repaired the 4,466-character geometric-fibre restriction step while preserving the statement, Lean record, route and other three original steps. The replacement cites existing torsor-H1 functoriality and finite exchange (including derived exchange), and one new unsplit lemma for the compatibility of the supported-Hom identification with pullback of the closed pair. The counit-mate calculation is explicit and short. Three provisional helpers were redundant with these existing statements and are not delivered. All non-elementary steps are shorter than 2,000 characters. Maintainer reader (Q128 S1): step 3 now cites the unit's own Kummer base-change clause prop-pur-gm-relative-kummer(4) instead of off-unit torsor functoriality; step 5 makes explicit that the Gysin identification is supported-Hom followed by exceptional adjunction, and steps 5-6 use the sharpened site-comparison clause of the new lemma with thm-weil-pbc-site-comparison.",
-  "blueprint": "Global Kummer boundary: step 2; geometric restriction of the supported coordinate boundary: steps 3–6; rank-one normalization: step 7; ambient qualifications: unchanged step 1. This refactors the returned proof on its original route and realizes the current blueprint proof sentences about naturality of the supported Cartier boundary and its normalized geometric fibre. No isomorphism or uniqueness clause is added.",
-  "tool_uses": [
-   {
-    "node": "lem-exc-open-complement-known",
-    "why": "Generic closed-immersion ambient existence or preservation bound explicitly used in the item statement; the affine-line unit has no replacement for this ambient tool."
-   },
-   {
-    "node": "lem-exc-closed-ambient",
-    "why": "Generic closed-immersion ambient existence or preservation bound explicitly used in the item statement; the affine-line unit has no replacement for this ambient tool."
-   },
-   {
-    "node": "lem-exc-closed-amplitude",
-    "why": "Generic closed-immersion ambient existence or preservation bound explicitly used in the item statement; the affine-line unit has no replacement for this ambient tool."
-   },
-   {
-    "node": "prop-exc-closed-tor",
-    "why": "Generic closed-immersion ambient existence or preservation bound explicitly used in the item statement; the affine-line unit has no replacement for this ambient tool."
-   },
-   {
-    "node": "lem-kun-dimension-finite-type",
-    "why": "Generic finiteness-of-Krull-dimension input needed to apply the open-complement bound to a finite-type scheme over the field k; not a replacement of the affine-line unit route."
-   },
-   {
-    "node": "prop-weil-pbc-inverse-image-modules-exact",
-    "why": "Step 5 uses exact module inverse image and its pullback adjunction to read the finite closed-pushforward exchange on A-module complexes; it does not replace the affine-line/Kummer calculation of the unit."
-   },
-   {
-    "node": "lem-pur-twist-sheaf-locally-free",
-    "why": "Step 1 uses finite-twist etale-local rank-one triviality to verify constructibility and Tor amplitude of the input F=A_X(1) before applying the ambient bounds. This is a coefficient tool, not a replacement of the affine-line unit route."
-   },
-   {
-    "node": "lemma-weil-pbc-finite-exchange",
-    "why": "Steps 5–6 use the canonical finite pushforward exchange and its derived version, a generic closed-section comparison tool rather than a replacement of the Kummer route."
-   },
-   {
-    "node": "lem-weil-pbc-adjunct-counit-identity",
-    "why": "Steps 5–6 use the generic adjunction counit identity to calculate the exceptional comparison mate; this is a categorical tool, not a purity assertion."
-   },
-   {
-    "node": "thm-weil-pbc-site-comparison",
-    "why": "Steps 5-6 use full faithfulness of the etale-to-pro-etale inverse image on D^+ to compute the transported orientation and its restriction on etale models; the current blueprint proof of the item cites the same comparison, and no node of the affine-line unit states it."
-   }
-  ]
+  "summary": "Repaired the 2026-10-22 work-distribution return by creating three statement-only unsplit tasks. Returned steps 1-2 go to boundary-realization, 3-4 to coordinate-boundary-geometric-pullback, 5-6 to closed-support-exceptional-mate; all seven original argument texts are retained verbatim in report.md with their allocation. The parent keeps its exact statement and assembles the tasks before the unchanged rank-one normalization. No compiler or Lean edit.",
+  "blueprint": "The first paragraph of the main-20261015 proof is realized by the first new lemma, the geometric coordinate-boundary sentence by the second, and its exceptional/site comparison by the third; parent step 3 applies the existing local residue calculation. The blueprint proves additional isomorphism and uniqueness claims, but the parent retains its exact statement as required.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-exc-open-complement-known",
@@ -398,41 +260,40 @@
   "thm-weil-pbc-site-comparison"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q128-7f6858fb9",
-  "group": "Q128",
+  "reviewer": "NT-cc-Q156-7b486085d",
+  "group": "Q156",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-7f6858fb9 (reviewer sub-agent of L); spot-checked: I read all of the mathematics: AGENTS, stage-1, brief, GOAL, dag-sync, delivery-errors A–H, the packet, the report, the item and the new node in full, every cited statement, the unit sk-prop-a1-kummer, the main-20261015 blueprint item and lem-pur-gysin-structure/lem-pur-supported-hom with their proofs, Milne LEC §9 (Thm 9.4, Ext paragraph, Ex. 9.5, Prop. 9.6, proof on p. 67), and the earlier NE return. The statement is byte-identical to the blueprint and is not weakened; no SGA is cited. Steps 1, 2, 4 and 7 check against their hypotheses. The step-6 counit algebra checks: adj(m') = β∘g^*pur_s, with no invertibility of β assumed. The new lemma lem-pur-supported-hom-pullback is true: I tested h=id, empty Z, Z=X, degree 0, zero F or A, and non-finite-type geometric points. It is not a duplicate (I compared supported-hom, amb-closed-support-hom, supported-cup-functoriality, cartier-kummer, asd-supported-kummer and finite-exchange) and is strictly smaller than the item. I repaired three faults. (1) Step 3 (E5/C7) relied on an unstated identification of the pulled-back root torsor, an inverse-image-of-representable fact, through off-unit torsor functoriality. It now cites the unit's own prop-pur-gm-relative-kummer(4), whose geometric-point clause needs no finite type; there is no cycle, and the tool use for lem-sc-etale-torsor-h1-functoriality is withdrawn. (2) The new node's vague clause that the étale-to-pro-étale comparisons 'identify these two equalities' is replaced by a precise compatibility: χ^proet(ν^*α) = ν^{-1}χ(α)∘γ^{-1}, commuting with h^* and c. Step 6 now cites that clause plus thm-weil-pbc-site-comparison, which I add as an accepted tool use (the current blueprint proof also cites it). (3) Step 5 used m = ε∘s_*pur_s without saying that the identification in lem-pur-gysin-structure(2) is supported-Hom followed by the exceptional adjunction. This is now explicit, citing the main-20261015 blueprint proof of that lemma, with transport through full faithfulness of ν^*. The maintainer must make sure the split of lem-pur-gysin-structure constructs its identification exactly this way. All steps are under 2000 characters, proof_deps equals the union of uses, and the graph is acyclic. Accepted tool uses: lem-exc-open-complement-known, lem-exc-closed-ambient, lem-exc-closed-amplitude, prop-exc-closed-tor, lem-kun-dimension-finite-type, lem-pur-twist-sheaf-locally-free, prop-weil-pbc-inverse-image-modules-exact, lemma-weil-pbc-finite-exchange, lem-weil-pbc-adjunct-counit-identity and thm-weil-pbc-site-comparison. Details are in review.md.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-7b486085d (reviewer sub-agent of L); spot-checked: PASS: the re-split follows the 2026-10-22 note. Old steps 1-2 become lem-pur-affine-line-boundary-realization, steps 3-4 become lem-pur-coordinate-boundary-geometric-pullback, steps 5-6 become lem-pur-closed-support-exceptional-mate, and step 7 stays in the parent as the rank-one residue application. Nothing was dropped or summarised. The parent is 1933 characters in 3 short assembly steps. The new statements carry about 2950, 1900 and 2950 characters of old argument, each is self-contained and statement-only, and none restates the item. All three statements are true. I checked the mate algebra by hand (M'=ε'∘i'_*g^*u by naturality of b, so adj(M')=β∘g^*u with no invertibility of β assumed). I also checked h^*α=α' via prop-pur-gm-relative-kummer's geometric-point clause and thm-pur-with-support-exactness, and that χ(α)=ε∘s_*u_α matches step 8 of the lem-pur-gysin-structure proof. Edge cases tested: Y empty, Z empty, Z=X, h=id, and a non-finite-type Ω. In parent step 3 the hypotheses hold: ℓ^{n/e}A=0, the coefficient map is x↦x⊗1 matching θ, and ord_0 t'=1. Not duplicates of the per-chapter closed-support base-change nodes, closed-finite-adjoint-counit-transport, finite-type-coordinate-support-orientation, or orientation-base-change (which would form a cycle). There are no cycles and no SGA citations. Sources checked: the main-20261015 blueprint proof, and Milne LEC pp. 66-67 and 109-113. Batch-5 flags accepted: lem-poincare-compatible-primitive-roots is a Tate-twist foundation and lem-trf-oriented-closed-base-localization is generic closed-subtopos exactness; neither is a step of the trace formula or Poincaré duality, and the base item already cited both entry nodes. The closure diff against base is exactly the 3 new nodes. Advisory for the maintainer: node 1's counit equation depends on how the lem-pur-gysin-structure proof constructs its identification (a C3 point inherited from base); exposing that construction in gysin(2) would let node 1's worker cite a statement. No new tool uses."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "proof"
+  ],
   "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting), let $Y$ be the separated finite-type $k$-scheme of the\naffine-line datum, and let\n$\\kappa(t)\\in H^1(\\mathbf G_{m,Y},A(1))$ be the\nKummer class of the global coordinate\n$t$. The boundary of $\\kappa(t)$, determined through the\nidentification of [lem-pur-gysin-structure] (which gives the\nsupport object $Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]\\in D^b_{ctf}(Y,\\Lambda)$\nconcentrated in degree zero), is the *global orientation* – a\nmorphism\n\n$$\n\\operatorname{pur}_s:\\Lambda_Y\\longrightarrow Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]\n$$\n\nin $D^b_{ctf}(Y,\\Lambda)$ with $\\Lambda=A$, where $Rs^!$ is the\nexceptional inverse image\nof the zero section $s:Y\\hookrightarrow\\mathbf A^1_Y$, a closed\nimmersion whose ambient right adjoint exists unconditionally\n([lem-exc-closed-ambient]) and preserves constructibility and\nfinite Tor amplitude, the open complement\n$\\mathbf G_{m,Y}\\hookrightarrow\\mathbf A^1_Y$ satisfying the\nopen-complement condition of\n[lem-exc-closed-amplitude], [prop-exc-closed-tor] by\n[lem-exc-open-complement-known],\nwith the shift $[2]$ and the twist\n$(1)$. Its restriction to every geometric point $\\bar y\\to Y$ is\nthe normalized class $1\\in H^2_{s(\\bar y)}(\\mathbf A^1_{\\bar y},\\Lambda(1))$ of\n[thm-pur-rank-one-local-calculation].",
   "proof": [
    {
-    "text": "The Kummer boundary defines the global morphism in the statement by\n[lem-pur-gysin-structure], [def-pur-affine-line-datum].\nIts target is already a sheaf in degree zero, identified there with\n$\\Lambda_Y$ through the boundary $\\delta$ of the localization triangle\nof [lem-pur-support-localization-triangle] pushed forward to $Y$:\n$\\delta$ carries $R^1\\pi_*\\Lambda(1)$, free of rank one on $\\kappa(t)$\nby [prop-pur-gm-relative-kummer](2), isomorphically onto\n$\\mathcal H^2(Rs^!\\Lambda(1))$. So $\\operatorname{pur}_s$, which sends\n$1$ to the boundary of $\\kappa(t)$, already maps $1$ to a generator of\nthis free rank-one sheaf.\nThe supported Cartier map of [lem-amb-cartier-kummer-map] is natural\nfor the base changes of the zero section, and its geometric fibre is\nthe coordinate boundary. By [thm-pur-rank-one-local-calculation]\nthat boundary is $1$. Consequently the morphism of degree-zero\nsheaves has every stalk equal to the identity, and is an isomorphism.\nThe etale-origin comparison of [thm-weil-pbc-site-comparison]\ntransports the assertion and its normalization to the stated site.\nUniqueness follows because a section of a sheaf is determined by its\nstalks; this does not require a conservativity assertion for morphisms\nof arbitrary derived objects.",
+    "text": "The Kummer boundary defines the global morphism in the statement by\n[lem-pur-gysin-structure], [def-pur-affine-line-datum].\nIts target is already a sheaf in degree zero, identified there with\n$\\Lambda_Y$ through the boundary $\\delta$ of the localization triangle\nof [lem-pur-support-localization-triangle] pushed forward to $Y$:\n$\\delta$ carries $R^1\\pi_*\\Lambda(1)$, free of rank one on $\\kappa(t)$\nby [prop-pur-gm-relative-kummer](2), isomorphically onto\n$\\mathcal H^2(Rs^!\\Lambda(1))$. So $\\operatorname{pur}_s$, which sends\n$1$ to the boundary of $\\kappa(t)$, already maps $1$ to a generator of\nthis free rank-one sheaf.\nThe Kummer class and the support boundary are natural for the base\nchanges of the zero section, so the geometric fibre of\n$\\operatorname{pur}_s$ at $\\bar y$ is the boundary of the Kummer class of\nthe coordinate of $\\mathbf A^1_{\\bar y}$. By\n[thm-pur-rank-one-local-calculation] that boundary is $1$. Consequently the morphism of degree-zero\nsheaves has every stalk equal to the identity, and is an isomorphism.\nThe etale-origin comparison of [thm-weil-pbc-site-comparison]\ntransports the assertion and its normalization to the stated site.\nUniqueness follows because a section of a sheaf is determined by its\nstalks; this does not require a conservativity assertion for morphisms\nof arbitrary derived objects.",
     "uses": [
      "lem-pur-gysin-structure",
      "def-pur-affine-line-datum",
      "lem-pur-support-localization-triangle",
      "prop-pur-gm-relative-kummer",
-     "lem-amb-cartier-kummer-map",
      "thm-pur-rank-one-local-calculation",
      "thm-weil-pbc-site-comparison"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
  },
  "lean": {
   "module": "Sheaf.Paper.PurityAffineLineOrientation",
   "declaration": "WeilConjectures.PurityFiniteSetting.affineLine_orientation",
   "declarations": [
-   "WeilConjectures.PurityFiniteSetting.OrientationSupportData",
-   "WeilConjectures.PurityFiniteSetting.OrientationSupportData.coordinateBoundary",
-   "WeilConjectures.PurityFiniteSetting.orientationInputPullback",
-   "WeilConjectures.PurityFiniteSetting.orientationSupportRestriction",
    "WeilConjectures.PurityFiniteSetting.affineLine_orientation"
   ],
   "file": "lean/Sheaf/Paper/PurityAffineLineOrientation.lean",
@@ -450,5 +311,15 @@
   "group": "Q35",
   "result": "pass",
   "note": "Wrote review.md. Checked sources, all 14 statement dependencies, canonical maps, hypotheses, conclusions, universes, edge cases, docstrings, and route-pivot compliance. Signature matches verbatim; scompile passed sandbox and library checks without diagnostics. No fixes required."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-125b4",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261025T122613-L-1789949",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean and node files (identical to the 5b85642a3aa delivery) against clone 57df89d; delivered and corrected Data module each compiled with the 6 direct importers + Uniqueness in a sandbox; orientationSupportRestriction delivered body against the old body; split statements against their nodes; fix-file naming against tools/batch_land.py fixes()"
  }
 }

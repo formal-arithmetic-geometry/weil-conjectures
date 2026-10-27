@@ -1,0 +1,333 @@
+{
+ "id": "lem-per-ordinary-alteration-cover-approximation",
+ "kind": "statement",
+ "title": "Ordinary alteration covering certificates persist under close henselian approximation",
+ "statement": "Let $(A,\\mathfrak m)$ be an excellent henselian Noetherian local domain [def-exc-excellent-ring], [def-weil-pbc-henselian-terminology], put $S=\\operatorname{Spec}A$, $\\widehat S=\\operatorname{Spec}\\widehat A$, where $\\widehat A$ is the maximal-ideal-adic completion [def-weil-affine-spectrum], [def-weil-pbc-adic-completion]. Write $\\widehat A=\\varinjlim_\\alpha A_\\alpha$ as the directed union of its finite type $A$-subalgebras, with inclusions $s_\\alpha:A_\\alpha\\to\\widehat A$. Give a finite ordinary alteration covering $(X_i\\to\\widehat S)_{i\\in I}$ [def-per-ordinary-alteration-topology] and any finite type model $(X_{i,\\alpha_0}\\to\\operatorname{Spec}A_{\\alpha_0})_i$ with specified base-change isomorphisms to the $X_i$ [def-weil-finite-type-morphism], [def-pc-fibre-product]. There exist $\\alpha_1\\geq\\alpha_0$ and $N_0\\geq1$ such that for every $\\alpha\\geq\\alpha_1$, $N\\geq N_0$, and $A$-algebra map $u:A_\\alpha\\to A$ satisfying $\\iota(u(b))-s_\\alpha(b)\\in\\mathfrak m^N\\widehat A$ for every $b\\in A_\\alpha$, the schemes $X_{i,u}=X_{i,\\alpha_0}\\times_{\\operatorname{Spec}A_{\\alpha_0}}S$ have finite generic fibres and $(X_{i,u}^{\\mathrm{dom}}\\to S)_i$ is an ordinary alteration covering. Here $\\iota:A\\to\\widehat A$ is canonical and $X_{i,u}^{\\mathrm{dom}}$ is the reduced induced closed subscheme on the union of global irreducible components dominating $S$ [def-pc-reduced-scheme], [def-weil-irreducible-components]; empty members may be omitted. No regularity or boundary assumption is imposed on the given family, and no prime or degree restriction is imposed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose III Proposition 3.1(i),(ii), printed pp.37--38, applied to the disjoint union of a finite family; ordinary-alt alternative, with no invertible prime assumption."
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-adic-completion",
+  "def-per-ordinary-alteration-topology",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-pc-reduced-scheme",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-per-henselian-excellent-completion-domain], $\\widehat A$ is a domain. By [lem-weil-pbc-completion-noetherian-quotient-noetherian] it is Noetherian and complete for $\\mathfrak m\\widehat A$: $\\mathfrak m$ is finitely generated and $A/\\mathfrak m$ is a field. By [lem-weil-pbc-local-completion-local-ring] that ideal is its maximal ideal. Thus [lem-per-complete-local-excellence] makes $\\widehat A$ excellent. Apply [lem-per-ordinary-alteration-proper-refinement] to the given family over $\\widehat S$. Obtain a nonempty integral $P$, a proper surjection $p:P\\to\\widehat S$ with finite function-field extension, a finite open cover $P=\\bigcup_jV_j$, and maps $h_j:V_j\\to X_{i(j)}$ over $\\widehat S$.",
+   "uses": [
+    "lem-per-henselian-excellent-completion-domain",
+    "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-per-complete-local-excellence",
+    "lem-per-ordinary-alteration-proper-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Proposition 3.1, pp.37--38, opening observation and ordinary standard refinement; II Theorem 3.2.1, p.29"
+   }
+  },
+  {
+   "text": "All schemes of finite type over the Noetherian bases here are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Their structure maps are locally of finite presentation by [pqf-lem-lft-fp-locnoeth], and quasi-compact by finite type; and quasi-separated as morphisms by [lem-weil-pbc-qcqs-morphism-permanence](1); hence they are of finite presentation, without any separatedness hypothesis on $X_i$. By [thm-pd-spreading-out], descend the objects $P,V_j$ to a common stage, retaining the prescribed models of $X_i$. Use [lem-weil-pbc-finite-diagram-lift-of-models] to descend $v_j:V_j\\to P$, $h_j$, and their equations over the base with these fixed object models. These are finite diagrams of finite-presentation schemes over affine qcqs bases with affine transition maps.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "pqf-lem-lft-fp-locnoeth",
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-finite-diagram-lift-of-models",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III section 2, p.36, finite models and morphisms; Stacks Tag 01ZM (limits.tex, lemma-descend-finite-presentation)"
+   }
+  },
+  {
+   "text": "Increase the stage so $p_\\alpha:P_\\alpha\\to S_\\alpha$ is proper, using [lem-weil-pbc-eventually-proper]. The original open cover is etale by [lem-weil-pbc-open-immersion-etale] and completely decomposed: for any $z\\in P$, an open containing $z$ gives a lift with identical local ring and residue field. Apply [lem-per-nisnevich-cover-limit-descent] to arrange that $(v_{j,\\alpha}:V_{j,\\alpha}\\to P_\\alpha)_j$ is a completely decomposed etale family. All its models are finite type over Noetherian $S_\\alpha$, as required there. At any further common stage properness persists by [lem-weil-pbc-proper-fp-permanence], and the completely decomposed etale assertion persists by the explicit quantifier of the Nisnevich descent node.",
+   "uses": [
+    "lem-weil-pbc-eventually-proper",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-per-nisnevich-cover-limit-descent",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III proof of Proposition 3.1(ii) and Lemma 3.1.1, p.38; Stacks Tag 081F (limits.tex, lemma-eventually-proper)"
+   }
+  },
+  {
+   "text": "Set $\\widehat K=\\operatorname{Frac}\\widehat A$. By [lem-per-generic-fibre-finiteness-criterion], each $X_i$ has finite generic fibre: the hypotheses on all component generic points are exactly its alteration-object condition. The same applies to $P$: its unique generic point maps to the generic point of $\\widehat S$ by surjectivity and continuity, and its function-field extension is finite. For $T=P$ and every $X_i$ let $d_T$ be the dimension of its finite generic-fibre algebra over $\\widehat K$. It is finite locally free of degree $d_T$ over this field [def-pc-finite-locally-free]; $d_P>0$ by surjectivity. Apply [lem-weil-pbc-descend-finite-locally-free] to $T\\to\\widehat S$ and the system $D(b)$, $0\\ne b\\in\\widehat A$, whose limit is $\\operatorname{Spec}\\widehat K$. It gives a nonzero $a_T$ on whose principal open $T$ is finite locally free of degree $d_T$.",
+   "uses": [
+    "lem-per-generic-fibre-finiteness-criterion",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-descend-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Proposition 3.1(i), pp.37--38, finite free restriction on a nonempty principal open; Stacks Tag 06AC (limits.tex, lemma-descend-finite-locally-free)"
+   }
+  },
+  {
+   "text": "Enlarge the index to include all the finitely many $a_T$ in $A_\\alpha$. Apply [lem-weil-pbc-descend-finite-locally-free] to the localized model system $(A_\\alpha)_{a_T}$, with limit $\\widehat A_{a_T}$, to descend each finite locally free restriction and its degree $d_T$. Choose a common stage $\\alpha_1\\geq\\alpha_0$ satisfying these conditions and Step 3. The finite locally free conditions survive increasing the stage: finiteness survives arbitrary base change by [lem-weil-pbc-finite-morphism-permanence], while on affine charts a local module basis tensors to the same basis and therefore preserves flatness, finite presentation and rank. This last assertion is the direct local-basis verification from [def-pc-finite-locally-free], not an extra approximation claim.",
+   "uses": [
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Proposition 3.1(i), pp.37--38, descent of finite free restrictions; Stacks Tag 06AC (limits.tex, lemma-descend-finite-locally-free)"
+   }
+  },
+  {
+   "text": "For every nonzero $a_T\\in\\widehat A$, choose $N_T\\geq1$ whose coordinate in $A/\\mathfrak m^{N_T}$ is nonzero. Such a coordinate exists since completion is the ring of compatible sequences [def-weil-pbc-adic-completion]. Put $N_0=\\max_TN_T$. For $N\\geq N_0$ and $u$ as in the statement, the values $\\iota(u(a_T))$ and $a_T$ have the same $N_T$-coordinate: $\\mathfrak m^N\\widehat A$ maps to zero in $A/\\mathfrak m^{N_T}$. Thus $u(a_T)\\ne0$ in $A$. For every $\\alpha\\geq\\alpha_1$ restrict $u$ to $A_{\\alpha_1}$; its congruence remains true, and all specialized diagrams are the same by the associativity of the fibre products defining them. Hence it suffices to use the fixed stage $\\alpha_1$ in the remaining steps.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Proposition 3.1(i), pp.37--38, the nonvanishing congruence bound"
+   }
+  },
+  {
+   "text": "Let $K=\\operatorname{Frac}A$. Since every $u(a_T)\\ne0$, the induced map $\\operatorname{Spec}K\\to S_{\\alpha_1}$ factors through every relevant $D(a_T)$. Each $(T_u)_\\eta$ is therefore finite by [lem-weil-pbc-finite-morphism-permanence], and has coordinate-algebra dimension $d_T$ by [def-pc-finite-locally-free]: first take its fibre at the image point, then extend the residue field to $K$, tensoring a basis. In particular $(P_u)_\\eta$ is nonempty since $d_P>0$. The scheme $P_u$ is proper over $S$ by [lem-weil-pbc-proper-fp-permanence]. By [lem-per-finite-generic-dominant-parts], $Q=P_u^{\\mathrm{dom}}$ and each $X_{i,u}^{\\mathrm{dom}}$ are objects of $\\operatorname{alt}/S$. The same node defines $Q$ as a reduced closed subscheme of $P_u$, so $Q\\to S$ is proper by closed-immersion properness and composition. By the generic-fibre identification in [lem-per-dominant-part-coreflection], $Q_\\eta\\simeq((P_u)_\\eta)_{\\mathrm{red}}$, so it is nonempty. Its image contains the generic point and is closed by [def-weil-proper-morphism], hence is all of the integral $S$. Thus $Q\\to S$ is a singleton ordinary alteration covering [def-per-ordinary-alteration-topology].",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-per-finite-generic-dominant-parts",
+    "def-weil-proper-morphism",
+    "def-per-ordinary-alteration-topology",
+    "lem-per-dominant-part-coreflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III proof of Proposition 3.1(ii), p.38, specialized proper covering certificate, with no degree restriction"
+   }
+  },
+  {
+   "text": "Base-changing the etale covering family of Step 3 along $u$ gives a jointly surjective etale family $(V_{j,u}\\to P_u)_j$ by [lem-weil-pbc-etale-covering-base-change]. Since $P_u$ has finite generic fibre, [lem-per-finite-generic-dominant-parts] gives finite generic fibres for every $V_{j,u}$ and makes each $V_{j,u}^{\\mathrm{dom}}$ an alteration object. By [lem-per-dominant-part-coreflection], its etale comparison identifies $V_{j,u}^{\\mathrm{dom}}$ with $V_{j,u}\\times_{P_u}Q$. Another application of [lem-weil-pbc-etale-covering-base-change] now makes $(V_{j,u}^{\\mathrm{dom}}\\to Q)_j$ jointly surjective etale. This is an ordinary covering by its defining generators [def-per-ordinary-alteration-topology].",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-per-finite-generic-dominant-parts",
+    "lem-per-dominant-part-coreflection",
+    "def-per-ordinary-alteration-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III proof of Proposition 3.1(ii), p.38, the covering leg after dominant reduction; II 1.2.5--1.2.8"
+   }
+  },
+  {
+   "text": "Functoriality in [lem-per-dominant-part-coreflection] restricts each $h_{j,u}$ to $V_{j,u}^{\\mathrm{dom}}\\to X_{i(j),u}^{\\mathrm{dom}}$. Let $R$ be the sieve generated by the latter family. Its pullback along $Q\\to S$ contains the covering family of Step 8. For every arrow in the sieve generated by $Q\\to S$, write that arrow as $Q\\to S$ composed with an arrow into $Q$; its pullback of $R$ is covering by stability under pullback. Transitivity in [def-weil-pbc-topos] therefore says $R$ is covering, since $Q\\to S$ covers by Step 7. Here upward closure follows directly from those axioms: a sieve containing a covering sieve pulls back to the maximal sieve along every arrow of the smaller sieve, so transitivity applies. This proves the desired family covers, with all its members already alteration objects by Step 7. Empty members may be omitted: their identity is covered by the empty etale family, and transitivity removes these arrows. No prime or degree condition was used.",
+   "uses": [
+    "lem-per-dominant-part-coreflection",
+    "def-weil-pbc-topos",
+    "def-per-ordinary-alteration-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III proof of Proposition 3.1(ii), p.38, functorial factorization and refinement; elementary Grothendieck-topology axioms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-henselian-excellent-completion-domain",
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-per-complete-local-excellence",
+  "lem-per-ordinary-alteration-proper-refinement",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "pqf-lem-lft-fp-locnoeth",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-finite-diagram-lift-of-models",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-eventually-proper",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-per-nisnevich-cover-limit-descent",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-per-generic-fibre-finiteness-criterion",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-descend-finite-locally-free",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-pbc-adic-completion",
+  "def-pc-fibre-product",
+  "lem-per-finite-generic-dominant-parts",
+  "def-weil-proper-morphism",
+  "def-per-ordinary-alteration-topology",
+  "lem-per-dominant-part-coreflection",
+  "lem-weil-pbc-etale-covering-base-change",
+  "def-weil-pbc-topos"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose III Proposition 3.1(i),(ii), printed pp.37--38, ordinary case; finite family version through a common proper covering refinement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "alteration|approximation.*cover|cover.*approximation",
+   "results": "Returned 2 hits: Mathlib/Analysis/Calculus/FDeriv/Measurable.lean, Mathlib/Analysis/Calculus/FDeriv/Measurable.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern henselian roots, ordinary scheme morphisms or limits, not ordinary alteration coverings or their marked regular models."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-ordinary-alteration-cover-approximation: approximation of proper surjective generically finite covers of a completed local ring by congruent henselian sections",
+   "results": "Returned 8 hits: HenselianLocalRing.is_henselian, HenselianLocalRing.TFAE, HenselianRing.mk, instHenselianRingMaximalIdeal, IsAdicComplete.henselianRing, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, HenselianLocalRing.recOn, HenselianLocalRing.toIsLocalRing",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern henselian roots, ordinary scheme morphisms or limits, not ordinary alteration coverings or their marked regular models."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianRing\", \"IsProper\"",
+   "results": "Returned 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern henselian roots, ordinary scheme morphisms or limits, not ordinary alteration coverings or their marked regular models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-ordinary-alteration-cover-approximation: ordinary alteration covering of the completion of an excellent henselian local domain stays covering after sufficiently close algebraic approximation",
+   "results": "Returned 8 hits: HenselianLocalRing, IsAdicComplete.henselianRing, HenselianRing, HenselianLocalRing.TFAE, Field.henselian, HenselianLocalRing.is_henselian, AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f, PreTilt.exists_smodEq_untiltAux",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern henselian roots, ordinary scheme morphisms or limits, not ordinary alteration coverings or their marked regular models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-ordinary-alteration-cover-approximation: sufficiently close specialization preserves the proper surjective finite generic fibre covering certificate over a henselian excellent ring",
+   "results": "Returned 8 hits: AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap, AlgebraicGeometry.ValuativeCriterion.Existence.eq, AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f, AlgebraicGeometry.Scheme.JointlySurjective, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.Scheme.Cover.exists_of_trans_eq_trans",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern henselian roots, ordinary scheme morphisms or limits, not ordinary alteration coverings or their marked regular models."
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|approximation.*cover|cover.*approximation",
+   "results": "Returned 2 hits: Mathlib/Analysis/Calculus/FDeriv/Measurable.lean, Mathlib/Analysis/Calculus/FDeriv/Measurable.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: these scheme-cover or affine-limit declarations do not assert persistence of alteration covering certificates under congruent henselian specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-ordinary-alteration-cover-approximation: close algebraic specialization preserves finite generic fibres and proper surjective covering refinements",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage, AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.Scheme.Hom.cover, AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp', AlgebraicGeometry.isClosedMap_iff_specializingMap, Algebra.QuasiFiniteAt.comap_algEquiv. ",
+   "date": "2026-10-24",
+   "verdict": "no match: these scheme-cover or affine-limit declarations do not assert persistence of alteration covering certificates under congruent henselian specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianRing\", \"IsProper\"",
+   "results": "Returned 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: these scheme-cover or affine-limit declarations do not assert persistence of alteration covering certificates under congruent henselian specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-ordinary-alteration-cover-approximation: ordinary alteration coverings remain coverings after sufficiently close henselian approximation of completion models",
+   "results": "Returned 8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f, AlgebraicGeometry.Scheme.Cover.ulift, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.Cover.exists_of_trans_eq_trans, AlgebraicGeometry.Scheme.Cover.changeProp, AlgebraicGeometry.Scheme.Cover.map_prop, AlgebraicGeometry.Scheme.Cover.Over. ",
+   "date": "2026-10-24",
+   "verdict": "no match: these scheme-cover or affine-limit declarations do not assert persistence of alteration covering certificates under congruent henselian specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-ordinary-alteration-cover-approximation: sufficiently close specialization of a finite type diagram over a completed excellent henselian local ring preserves its proper generically finite covering certificate",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.Scheme.Cover.exists_of_trans_eq_trans, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index. ",
+   "date": "2026-10-24",
+   "verdict": "no match: these scheme-cover or affine-limit declarations do not assert persistence of alteration covering certificates under congruent henselian specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-ordinary-uniformization-local-reduction",
+  "date": "2026-10-24",
+  "group": "Q119"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Step 3, regular local-model purity via the existing ordinary weak uniformization reduction; Expose III Proposition 3.1(i),(ii), printed pp.37--38, applied to the disjoint union of a finite family; ordinary-alt alternative, with no invertible prime assumption.",
+   "via": [
+    "lem-per-ordinary-uniformization-local-reduction",
+    "lem-per-qe-weak-uniformization-cover",
+    "lem-per-qe-alteration-regular-neighbourhood",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-ordinary-alteration-cover-approximation",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Split the ordinary covering approximation into a proper-refinement certificate, finite-diagram descent, preservation of nonzero finite-free localization coefficients, and dominant-part covering assembly. All inputs already have DAG nodes: no new nodes. Recorded real Mathlib searches and statement quotes for every citation.",
+  "blueprint": "Inherited ancestor lem-per-artin-gabber-affine-curve, regular local-model purity auxiliary ordinary-uniformization branch: III 3.1(i) is realized by Steps 4--7, III 3.1(ii) by Steps 1--3 and 7--9. Latest blueprint ef6f9619fdbffa59e88528fb56483d76c70258c8 read; the chapter and unit are untouched.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "why": "Noetherianity and completeness of the local completion, needed before applying the ordinary proper-refinement theorem."
+   },
+   {
+    "node": "lem-weil-pbc-finite-diagram-lift-of-models",
+    "why": "Descent of finitely many morphisms and equations with prescribed object models; no unit-local fixed-model diagram lemma supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-eventually-proper",
+    "why": "Descent of properness of the auxiliary covering certificate; no unit-local node supplies eventual properness."
+   },
+   {
+    "node": "lem-weil-pbc-descend-finite-locally-free",
+    "why": "Descent of finite locally free restrictions with their specified degrees, first from the generic point and then to a finite model."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-weil-pbc-finite-diagram-lift-of-models",
+  "lem-weil-pbc-eventually-proper",
+  "lem-weil-pbc-descend-finite-locally-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O2-eafb80e72",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-eafb80e72 (reviewer sub-agent of L); spot-checked: I read the item in full: all nine steps, every cited statement, and ILO III Prop 3.1(i)-(iii) with Lemme 3.1.1 (pp.37-38). There are no new nodes and the statement is unchanged. The item is the ordinary-alt case (ii) of ILO, stated for a finite family; ILO's Nisnevich standard form is replaced by the Zariski cover of lem-per-ordinary-alteration-proper-refinement. Hypotheses checked step by step. Step 1: Â is a domain (ILO I-6.3), Noetherian, local and excellent. Step 2: objects descend by 01ZM and the maps by finite-diagram-lift, using finite presentation from Noetherianity. Step 3: properness descends, and the open cover descends by Nisnevich limit descent with a Noetherian limit. Steps 4-5: 06AC is applied first to the system D(b) with limit Spec K̂, then to (A_α)_{a_T}. Step 6: m^NÂ maps to 0 in A/m^{N_T}, so u(a_T)≠0, with N_0 and α_1 fixed before u. Step 7: Q=P_u^dom is proper and surjective, since Q_η≅((P_u)_η)_red is nonempty. Step 8: étale base change plus the coreflection étale clause. Step 9: the upward-closure and transitivity derivation is correct, and empty members drop out. Edge cases tested: A a field, empty X_i (d=0), non-separated X_i, non-reduced generic algebra. The item does not duplicate the ℓ′ node lem-per-alteration-cover-approximation. Batch 5: the four flagged closures end in regular⇒universally catenary, the closed-point-in-fibre lemma, and the SNC and schematically-dense definitions. All are general algebra or geometry, not steps of the trace formula or Poincaré duality, so accepted. Artin-Gabber route: computed on the snapshot, none of the six flagged nodes nor the item is in the closure of lem-per-artin-gabber-affine-curve. The item reaches the targets through the sfb finiteness chain, and each flagged node is a generic tool used at a named step: excellence, I-6.3, III 3.1.1, generic finiteness, dominant parts, coreflection. All accepted. tool_uses: the four declared ones are accepted. thm-pd-spreading-out (01ZM, step 2) was not declared and should also be recorded, as in the ℓ′ sibling. Maintainer note: blueprint.from.via still carries the stale inherited artin-gabber/qbar-middle-tstructure chain, a base fault I left unchanged."
+ }
+}

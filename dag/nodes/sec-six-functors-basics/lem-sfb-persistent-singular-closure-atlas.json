@@ -1,0 +1,446 @@
+{
+ "id": "lem-sfb-persistent-singular-closure-atlas",
+ "kind": "statement",
+ "title": "Horizontal singular closure and two-branch conductor atlas",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$, uniformizer $\\pi$, and $S=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Let $f:X\\to S$ be projective, flat and finitely presented with nonempty reduced nodal geometric curve fibres [def-kun-projective, def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-geometric-fibre, def-pc-reduced-scheme, def-weil-pure-dimension]. Here nodal means every nonsmooth closed point over an algebraically closed field $\\Omega$ has completed local ring $\\Omega[[u,v]]/(uv)$ [def-sbc-smooth-morphisms, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Let $\\nu:C=X^\\nu\\to X$ be the componentwise normalization [def-weil-pbc-reduced-normalization]. Assume it is finite and has an etale covering by common affine charts over $R'$, an etale DVR extension of $R$ with uniformizer $\\pi'$, with models $Q=R'[u,v]/(uv)$ or $Q=R'[u,v]/(uv-\\pi'^n)$, $n\\geq0$, on which $\\nu$ is respectively the pullback of $\\operatorname{Spec}(R'[u]\\times R'[v])\\to\\operatorname{Spec}Q$ or the identity; over the remaining generic points assume smooth identity charts or the identical split-node description over finite separable extensions of $K$ [def-weil-etale-morphism, def-weil-polynomial-ring, def-pc-fibre-product, def-weil-finite-integral-morphism]. Let $N_K$ be the reduced closed subscheme of nonsmooth points of $X_K$, let $N\\hookrightarrow X$ be its scheme-theoretic closure (the scheme-theoretic image of $N_K\\to X$ [def-nagata-scheme-theoretic-image]), and put $B=C\\times_XN$. Call a chart persistent if its model is a split node $R'[u,v]/(uv)$ or, over the generic fibre, $K'[u,v]/(uv)$ with $K'/K$ finite separable; in the latter case read $K'$ for $R'$ below. The ideal of $N$ pulls back on a persistent chart to $(u,v)$ and on a smoothing or smooth chart to the unit ideal. On a persistent chart $N$ and $B$ are the pullbacks of $\\operatorname{Spec}R'$ and $\\operatorname{Spec}(R'\\times R')$, with the diagonal map on rings; on all other charts they are empty. In particular $N\\to S$ and $B\\to S$ are finite etale, $B\\to N$ is finite etale of constant degree two, $B\\hookrightarrow C$ is a closed immersion into the relative smooth locus [def-weil-closed-immersion], and $C\\setminus B\\to X\\setminus N$ is an isomorphism [def-weil-open-immersion]. The restriction $N\\times_SK=N_K$ is canonical. On the generic fibre its ideal is the conductor: for any affine $\\operatorname{Spec}T\\subseteq X_K$, with normalization algebra $\\overline T$, it is $\\{a\\in T:a\\overline T\\subseteq T\\}$. These assertions include nonsplit nodes and the empty singular locus; no ordering of global branches is required.",
+ "source": {
+  "document": "literature/stacks-project/models.tex",
+  "place": "Tag 0CDD (lemma-etale-local-at-worst-nodal), explicit persistent versus smoothing charts; agent kernel-of-generic-restriction and conductor calculations. Finiteness is the projective finite-fibres criterion, coherent.tex Tag 02OG (lemma-characterize-finite)."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-kun-projective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-sfb-persistent-normalization-atlas",
+  "def-trf-strict-semistable-curve",
+  "def-sfb-ordinary-geometric-node"
+ ],
+ "proof": [
+  {
+   "text": "First identify the generic singular subscheme on the supplied charts. Over a field $F$, the hypersurface $F[u,v]/(uv)$ has dimension one, so its displayed presentation is a relative global complete intersection. Its Jacobian row is $(v,u)$. By [lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian] and [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], its nonsmooth locus is exactly $V(u,v)$, with reduced structure $\\operatorname{Spec}F$. For $uv-a$ with $a\\ne0$ both $u,v$ are units, so this locus is empty. The pointwise assertion of [lem-trf-etale-source-smoothness] transfers these loci through the etale chart maps. Smoothness is also detected after extension to geometric fibres by [lem-sfb-scheme-flat-smooth-point-base-change]; thus the description over the finite separable fields in the atlas has the same meaning as nonsmoothness over $K$. Pullbacks of the reduced singular subscheme are reduced by [etale-proposition-etale-reduced], and therefore are precisely these reduced closed loci. In particular the pullback of $N_K$ is the zero section on persistent generic charts and empty on all others.",
+   "uses": [
+    "lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-trf-etale-source-smoothness",
+    "lem-sfb-scheme-flat-smooth-point-base-change",
+    "etale-proposition-etale-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TE (lemma-relative-global-complete-intersection-smooth); descent.tex Tag 036U (lemma-smooth-smooth-local-source); etale.tex Tag 025O (proposition-etale-reduced)."
+   }
+  },
+  {
+   "text": "The DVR is Noetherian by [def-sc-discrete-valuation-ring]. Projectivity gives properness by [lem-pc-projective-proper], hence finite type and quasi-compactness by [pqf-lem-proper-basic]. It follows from [pqf-lem-locnoeth-lft] that $X$ is Noetherian. Its generic fibre and all its closed subschemes are Noetherian too. Consequently the locally closed immersion $N_K\\to X$ is quasi-compact and quasi-separated. By [def-nagata-scheme-theoretic-image] and [lemma-nagata-scheme-image-ideal-qc], $N$ is closed in $X$ and $N_K\\to N$ is scheme-theoretically dense: its structure sheaf map is injective. In particular there are no arbitrary choices of a reduced special-fibre structure in this construction.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-pc-projective-proper",
+    "pqf-lem-proper-basic",
+    "pqf-lem-locnoeth-lft",
+    "def-nagata-scheme-theoretic-image",
+    "lemma-nagata-scheme-image-ideal-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian), 01R8 (lemma-quasi-compact-scheme-theoretic-image); closure defined by the kernel."
+   }
+  },
+  {
+   "text": "Let $U=\\operatorname{Spec}P\\to X$ be a supplied affine etale chart, and set $N_U=N\\times_XU$. The projection $N_U\\to N$ is etale by [lem-weil-pbc-etale-scheme-base-change], hence flat by [def-weil-etale-morphism]. Apply [lemma-nagata-dense-flat-pullback] to the quasi-compact quasi-separated dense map $N_K\\to N$. It says that $N_K\\times_XU\\to N_U$ is scheme-theoretically dense. Since $N_U$ is a closed subscheme of $U$, its ideal is therefore exactly the kernel of restriction from $\\mathcal O_U$ to the generic singular subscheme computed in step 1. This uses the dense-case statement of the cited node, not the more general assertion appearing only in its old proof. Thus closure can be calculated on each chart without assuming that arbitrary nonflat base change preserves an image.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-weil-etale-morphism",
+    "lemma-nagata-dense-flat-pullback",
+    "def-nagata-scheme-theoretic-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 081I (lemma-flat-base-change-scheme-theoretic-image), applied to the dense factor N_K -> N."
+   }
+  },
+  {
+   "text": "On a persistent trait chart write $Q=R'[u,v]/(uv)$ and $J=(u,v)$. The map $Q\\to P$ is flat by [lem-weil-pbc-etale-algebra-flat]. Put $H=P/JP=P\\otimes_QR'$; its map to $R'$ on spectra is etale by [lem-weil-pbc-etale-ring-base-change], so $H$ is flat over $R'$. The image of $\\pi$ is nonzero in the domain $R'$, so multiplication by $\\pi$ is injective on $R'$ and therefore on $H$, by [lem-weil-pbc-flat-tensor-exact]. Thus $H\\to H[1/\\pi]$ is injective: an element in its kernel is killed by a power of $\\pi$, and repeated injectivity makes it zero. The kernel of $P\\to H[1/\\pi]$ is consequently $JP$. Step 3 identifies this with the ideal of $N_U$. For a generic-only persistent chart the same calculation has $R'=K'$ and no localization, hence kernel $JP$. On smoothing and smooth charts the generic singular subscheme is empty, so its restriction map has zero target and kernel $P$. This proves all asserted ideal formulas.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD (lemma-etale-local-at-worst-nodal), the two displayed models; agent kernel-of-generic-restriction calculation."
+   }
+  },
+  {
+   "text": "On a persistent chart, [lem-sfb-split-node-normalization-conductor] gives $Q/J=R'$ and $E/JE=R'\\times R'$ for $E=R'[u]\\times R'[v]$, with the diagonal map $R'\\to R'\\times R'$. The assumed normalization chart is $\\operatorname{Spec}(P\\otimes_QE)$. Therefore, directly by the fibre-product rings,\n$$N_U=\\operatorname{Spec}H,\\qquad B_U=\\operatorname{Spec}(H\\times H),$$\nwhere $H=P/JP$. The map $B_U\\to N_U$ is the disjoint union of two identities. On other charts $N_U$ and $B_U$ are empty. These are pullbacks of exactly the two schemes in the statement, rather than an assertion that an etale chart itself equals the whole model.",
+   "uses": [
+    "lem-sfb-split-node-normalization-conductor",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD (lemma-etale-local-at-worst-nodal), persistent model; explicit conductor quotients in lem-sfb-split-node-normalization-conductor."
+   }
+  },
+  {
+   "text": "Each $N_U\\to S$ is etale: on persistent charts it is the composite of the etale zero-section base change $\\operatorname{Spec}H\\to\\operatorname{Spec}R'$ with the given etale map $\\operatorname{Spec}R'\\to S$ (or the generic open followed by the finite separable field extension, etale by [lem-weil-pbc-finite-separable-extension-etale]); the empty maps are etale too. Use [lem-weil-pbc-etale-composition-cancellation] for composition and open immersions. The maps $N_U\\to N$ form a jointly surjective etale family by [lem-weil-pbc-etale-scheme-base-change]. Their disjoint union is a surjective etale map: the disjoint components are an open cover and [lem-weil-pbc-etale-local-on-source] applies. Hence [lem-trf-etale-descent-through-source-cover] implies that $N\\to S$ is etale. Likewise $B_U\\to N_U$ is etale, so $B_U\\to N$ is etale by composition. Apply the same source descent to the jointly surjective etale cover $\\coprod B_U\\to B$; this proves $B\\to N$ etale, and its composite $B\\to S$ etale.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-local-on-source",
+    "lem-trf-etale-descent-through-source-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036W (lemma-etale-etale-local-source); morphisms.tex Tags 02GO, 02GN, 02GP, etale base change and composition."
+   }
+  },
+  {
+   "text": "The map $N\\to S$ is proper by [lem-weil-pbc-closed-immersion-proper], since $N$ is closed in the proper $X$. Its fibres are zero-dimensional by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]. Each fibre is Noetherian: by [pqf-lem-proper-basic] it is of finite type over its residue field, and [pqf-lem-locnoeth-lft] supplies local Noetherianity, with quasi-compactness again from properness. Hence each fibre has finitely many points by [lem-sc-zero-dim-noetherian-finite-discrete]. The base $S$ is locally Noetherian, so [thm-pqf-finite-iff-proper-finite-fibres] gives finiteness of $N\\to S$. The map $B\\to N$ is a base change of the assumed finite $\\nu$: on affine opens this tensors a finite algebra, whose finite generating set still generates after tensoring, so it is finite by [def-weil-finite-integral-morphism]. Finiteness of $B\\to S$ follows by [lem-weil-pbc-finite-composition]. Combined with step 6, this proves both finite etale assertions.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "pqf-lem-proper-basic",
+    "pqf-lem-locnoeth-lft",
+    "lem-sc-zero-dim-noetherian-finite-discrete",
+    "thm-pqf-finite-iff-proper-finite-fibres",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02OG (lemma-characterize-finite); morphisms.tex Tag 01W5 (lemma-closed-immersion-proper)."
+   }
+  },
+  {
+   "text": "For any point of $N$ choose a point of an etale cover $N_U$ above it. The base change of $B\\to N$ there is the two-copy cover in step 5, hence has fibre algebra of dimension two. Since $B\\to N$ is finite etale, [lem-weil-pbc-finite-flat-rank-iso] identifies its rank with that fibre dimension and says the rank is unchanged under this base change. Its rank is therefore two at every point of $N$. The map $B\\hookrightarrow C$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. On each persistent normalization chart the two origins lie on the two affine lines, smooth over $R'$ by [lem-sfb-split-node-normalization-conductor]. The charts are etale over these lines; etale maps are smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres], and smooth ring maps compose by [lem-weil-pbc-smooth-ring-map-base-change-composition], using [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] on affine opens. This includes the etale base $R'\\to R$. The pointwise assertion of [lem-trf-etale-source-smoothness] descends this smoothness to $C$ at every point of $B$.",
+   "uses": [
+    "lem-weil-pbc-finite-flat-rank-iso",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-split-node-normalization-conductor",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-trf-etale-source-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 04MH (lemma-finite-locally-free); descent.tex Tag 036U; models.tex persistent chart of Tag 0CDD."
+   }
+  },
+  {
+   "text": "Off $N$, the persistent model is covered by $D(u)$ and $D(v)$. In the equal-constant description $Q\\subset R'[u]\\times R'[v]$ of [lem-sfb-split-node-normalization-conductor], localization at $u$ kills the second factor and gives $Q_u=R'[u,u^{-1}]=E_u$; localization at $v$ similarly gives $Q_v=R'[v,v^{-1}]=E_v$. These identities remain identities after the tensor base change to $P$. On every other chart $\\nu$ is the identity by hypothesis. Thus the finite map $C\\setminus B\\to X\\setminus N$ is an isomorphism after the supplied etale cover. Here is descent explicitly: over an affine open $\\operatorname{Spec}A$ of the target, write its finite inverse image as $\\operatorname{Spec}D$. Etale openness [lem-weil-pbc-etale-morphism-open-map] and quasi-compactness allow finitely many affine cover charts $\\operatorname{Spec}P_i$ covering $\\operatorname{Spec}A$. The ring map $A\\to\\prod_iP_i$ is flat by [lem-weil-pbc-etale-algebra-flat] and surjective on spectra, hence faithfully flat by [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat]. By [lem-weil-pbc-flat-tensor-exact], the kernel and cokernel of $A\\to D$ vanish after this tensor product. They vanish already over $A$ by [lem-sc-faithfully-flat-tensor-zero]. Hence $A\\to D$ is an isomorphism and these canonical local inverses give the required global inverse.",
+   "uses": [
+    "lem-sfb-split-node-normalization-conductor",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-sc-faithfully-flat-tensor-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD persistent normalization chart; agent localization calculation and faithfully flat kernel/cokernel descent."
+   }
+  },
+  {
+   "text": "Localize the ideals in step 4 at $\\pi$. They become $(u,v)$ on the persistent generic charts and the unit ideal on all other charts, exactly the ideals of $N_K$ from step 1. Thus the canonical closed immersion $N_K\\to N\\times_SK$ is an isomorphism. Equality is equality of ideal sheaves: on affine opens it is detected by the same faithfully flat cover and vanishing of the quotient module used in step 9. In particular the identification is the restriction of the actual closure, not a selected isomorphism of abstract finite schemes.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-sc-faithfully-flat-tensor-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 081I (lemma-flat-base-change-scheme-theoretic-image), restriction to the generic open; agent ideal comparison."
+   }
+  },
+  {
+   "text": "It remains to identify the generic conductor on every affine $V=\\operatorname{Spec}T\\subset X_K$. First, $X$ is reduced, as the cited affine-normalization statement requires. An affine ring $T$ of $X_K$ embeds in $T\\otimes_K\\overline K$, a ring of the reduced geometric fibre [def-weil-geometric-fibre], by [lem-weil-pbc-flat-tensor-exact]; so $T$ is reduced and $T\\subseteq\\overline T$. On an affine ring $A$ of $X$, flatness [def-weil-flat-morphism] and the same node make $\\pi$ a nonzerodivisor, so $A\\subseteq A[1/\\pi]$ is reduced, and Noetherian by step 2. Normalization commutes with principal localization by [lem-sfb-split-node-normalization-conductor]; applying this to inversion of $\\pi$ shows that the assumed finite $C_K\\to X_K$ is the componentwise normalization. Thus its inverse image over $V$ has algebra $\\overline T$. Write $M=\\overline T/T$, a finite $T$-module. Its annihilator is exactly $\\{a\\in T:a\\overline T\\subseteq T\\}$. For a generic affine etale chart $\\operatorname{Spec}P\\to V$, [lem-weil-pbc-etale-algebra-flat] and [lem-weil-pbc-flat-tensor-exact] identify $M\\otimes_TP$ with the quotient of the chart normalization algebra by $P$. On a persistent chart $P$ is etale over $Q=K'[u,v]/(uv)$; with $E=K'[u]\\times K'[v]$, this quotient is $(E/Q)\\otimes_QP$. The module $E/Q$ is finite by [lem-sfb-split-node-normalization-conductor]. Apply [lem-trf-annihilator-finite-flat-base-change] first to $Q\\to P$ and then to $T\\to P$. Its assertion identifies the conductor extended from $T$ with $(u,v)P$ on persistent charts, since the cited split calculation gives $\\operatorname{Ann}_Q(E/Q)=(u,v)$. On identity charts the quotient is zero, so its annihilator is the unit ideal. These are exactly the ideals of $N_K$ already computed. Equality of the two ideals over $T$ follows by faithful flat detection as in step 10. This proves the claimed formula for every $V$.",
+   "uses": [
+    "lem-sfb-split-node-normalization-conductor",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-trf-annihilator-finite-flat-base-change",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "lem-sc-faithfully-flat-tensor-zero",
+    "def-weil-flat-morphism",
+    "def-weil-geometric-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07T8 (lemma-annihilator-flat-base-change), finite-module assertion; morphisms.tex normalization localization, Tag 035P."
+   }
+  },
+  {
+   "text": "Every assertion used only the supplied jointly surjective etale atlas and equality of canonical ideal sheaves or structural maps. A change of a split-node chart may interchange the two factors of $H\\times H$, but preserves its diagonal $H$, the ideal $(u,v)$ and the unordered two-copy cover. Hence the assertions descend for nonsplit nodes without choosing an ordering of branches. If $N_K$ is empty, step 3 has zero restriction target on every chart, so $N=B=\\varnothing$ and step 9 gives $C\\cong X$. A rank-two assertion over the empty $N$ is vacuous. Thus the empty case is included as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD, etale-local charts; agent canonicity and empty-case check."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-trf-etale-source-smoothness",
+  "lem-sfb-scheme-flat-smooth-point-base-change",
+  "etale-proposition-etale-reduced",
+  "def-sc-discrete-valuation-ring",
+  "lem-pc-projective-proper",
+  "pqf-lem-proper-basic",
+  "pqf-lem-locnoeth-lft",
+  "def-nagata-scheme-theoretic-image",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "def-weil-etale-morphism",
+  "lemma-nagata-dense-flat-pullback",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-sfb-split-node-normalization-conductor",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-trf-etale-descent-through-source-cover",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "thm-pqf-finite-iff-proper-finite-fibres",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-flat-rank-iso",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-sc-faithfully-flat-tensor-zero",
+  "lem-trf-annihilator-finite-flat-base-change",
+  "def-weil-flat-morphism",
+  "def-weil-geometric-fibre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/models.tex",
+  "place": "Tag 0CDD supplied models; kernel, conductor and descent assembly using Tags 081I, 07T8, 036W and 02OG."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Closure of generic singular points in a nodal curve over a trait is finite etale with two etale branches in the normalization",
+   "results": "{\"t\": \"2026-10-22T06:15:08Z\", \"tool\": \"leanfinder\", \"query\": \"Closure of generic singular points in a nodal curve over a trait is finite etale with two etale branches in the normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.instEtaleRing\", \"Algebra.IsEtaleAt\", \"Algebra.etaleLocus_eq_univ_iff_etale\"], \"digest\": \"b4e7c479c96c44b9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale-locus and conductor definitions do not identify the horizontal singular closure and its rank-two branches."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The conductor of a nodal family at persistent nodes has local ideal (u,v) and normalization branches give a degree two etale cover",
+   "results": "{\"t\": \"2026-10-22T06:15:08Z\", \"tool\": \"leansearch\", \"query\": \"The conductor of a nodal family at persistent nodes has local ideal (u,v) and normalization branches give a degree two etale cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"conductor\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"Algebra.etaleLocus\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"Algebra.IsEtaleAt\", \"mem_conductor_iff\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.unramifiedLocus\"], \"digest\": \"663f914b961c767d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale-locus and conductor definitions do not identify the horizontal singular closure and its rank-two branches."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-22T06:15:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Etale.etale_isStableUnderBaseChange\", \"AlgebraicGeometry.Etale.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Etale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.instHasFiniteLimitsEtale\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Etale\"], \"digest\": \"cfae1a59b4d042c3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale-locus and conductor definitions do not identify the horizontal singular closure and its rank-two branches."
+  },
+  {
+   "tool": "grep",
+   "query": "conductor|nodal|persistent",
+   "results": "{\"t\": \"2026-10-22T06:15:09Z\", \"tool\": \"grep\", \"query\": \"conductor|nodal|persistent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale-locus and conductor definitions do not identify the horizontal singular closure and its rank-two branches."
+  },
+  {
+   "tool": "grep",
+   "query": "conductor|nodal|persistent",
+   "results": "{\"t\": \"2026-10-23T09:56:31Z\", \"tool\": \"grep\", \"query\": \"conductor|nodal|persistent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the nodal closure and two-branch atlas assertion; conductor definitions and Weierstrass XY ideals are not this theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme theoretic closure of the generic singular locus of a nodal curve over a trait and its conductor in the normalization",
+   "results": "{\"t\": \"2026-10-23T09:56:32Z\", \"tool\": \"leansearch\", \"query\": \"Scheme theoretic closure of the generic singular locus of a nodal curve over a trait and its conductor in the normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\"], \"digest\": \"be700dad65574a8a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the nodal closure and two-branch atlas assertion; conductor definitions and Weierstrass XY ideals are not this theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conductor\", \"etale\"",
+   "results": "{\"t\": \"2026-10-23T09:56:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"conductor\\\", \\\"etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the nodal closure and two-branch atlas assertion; conductor definitions and Weierstrass XY ideals are not this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closure of generic nodal singularities over a discrete valuation ring is finite etale and its normalization has a degree two branch cover",
+   "results": "{\"t\": \"2026-10-23T09:56:42Z\", \"tool\": \"leanfinder\", \"query\": \"Closure of generic nodal singularities over a discrete valuation ring is finite etale and its normalization has a degree two branch cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.instEtaleRing\", \"Polynomial.instEtaleUniversalCoprimeFactorizationRing\", \"Algebra.IsEtaleAt\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"df0b2e9e76a900f0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the nodal closure and two-branch atlas assertion; conductor definitions and Weierstrass XY ideals are not this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For xy=0 over a trait the closure of the generic singular point is the zero section and the conductor is the ideal generated by x and y",
+   "results": "{\"t\": \"2026-10-23T10:07:52Z\", \"tool\": \"leanfinder\", \"query\": \"For xy=0 over a trait the closure of the generic singular point is the zero section and the conductor is the ideal generated by x and y\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.XYIdeal\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\", \"WeierstrassCurve.Affine.CoordinateRing.XIdeal\", \"conductor\", \"conductor_mul_differentIdeal\", \"WeierstrassCurve.Affine.CoordinateRing.YIdeal\", \"AlgebraicGeometry.Scheme.default_asIdeal\"], \"digest\": \"00e4cb05515ebf61\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the nodal closure and two-branch atlas assertion; conductor definitions and Weierstrass XY ideals are not this theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "conductor|nodal|schemeTheoreticClosure|schemeTheoreticImage",
+   "results": "{\"t\": \"2026-10-23T10:11:50Z\", \"tool\": \"grep\", \"query\": \"conductor|nodal|schemeTheoreticClosure|schemeTheoreticImage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/DirichletCharacter/GaussSum.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Basic.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Basic.lean\"], \"digest\": \"df81be3713045c56\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the nodal closure and two-branch atlas assertion; conductor definitions and Weierstrass XY ideals are not this theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-persistent-node-normalization",
+  "date": "2026-10-22",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. Separate xy=0 branches; retain normal xy=pi^n charts; descend finite normalization and reconstruct by the conductor fibre-product rings.; returned proof steps 4, 6 and generic-conductor part of step 9: closure kernels, finite etale branches, rank two, and generic ideal recognition",
+   "via": [
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-persistent-singular-closure-atlas",
+  "worker": "stage1",
+  "summary": "Kept the full statement and supplied normalization-atlas hypotheses. Calculated the generic singular locus by the Jacobian row, pulled the dense generic immersion through etale charts, computed its closure kernel by uniformizer-torsion-freeness, and obtained the two-copy branch charts. Descended etaleness, proved finiteness by properness and finite zero-dimensional fibres, identified rank two and the relative smooth locus, and verified the complement isomorphism and affine generic conductor by explicit faithfully flat kernel/cokernel and annihilator calculations. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "Inherited from.place refers to the older det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction, through the recorded persistent-node-normalization chain. The current latest direct-image proof (3) instead assembles proper and open direct images; this subsidiary algebraic-geometry node realizes the inherited supplied-atlas prerequisite and changes no unit route. The inherited null from.node and via list are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian",
+    "why": "Generic foundational tool: Jacobian criterion for smoothness of a relative global complete intersection at a prime. Used only for the explicit closure, etale descent, finiteness or conductor calculation; this unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic foundational tool: A ring map is smooth iff the morphism of spectra is smooth. Used only for the explicit closure, etale descent, finiteness or conductor calculation; this unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-trf-etale-source-smoothness",
+    "why": "Generic foundational tool: Smoothness is etale local on the source. Used only for the explicit closure, etale descent, finiteness or conductor calculation; this unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-trf-etale-descent-through-source-cover",
+    "why": "Generic foundational tool: Etaleness descends through a surjective etale source cover. Used only for the explicit closure, etale descent, finiteness or conductor calculation; this unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic foundational tool: An etale morphism is smooth with zero-dimensional fibres. Used only for the explicit closure, etale descent, finiteness or conductor calculation; this unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-sc-zero-dim-noetherian-finite-discrete",
+    "why": "Generic foundational tool: A Noetherian zero-dimensional scheme has finite discrete underlying space. Used only for the explicit closure, etale descent, finiteness or conductor calculation; this unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-trf-annihilator-finite-flat-base-change",
+    "why": "Generic foundational tool: Annihilator of a finite module under flat base change. Used only for the explicit closure, etale descent, finiteness or conductor calculation; this unit supplies no replacement for this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-trf-etale-source-smoothness",
+  "lem-trf-etale-descent-through-source-cover",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "lem-trf-annihilator-finite-flat-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-19c8601e9",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-19c8601e9 (reviewer sub-agent of L); spot-checked: I read the item and all 12 steps in full; there are no new nodes. It is the first split of a node Q123 created on 2026-10-22; there is no re-split note, and the item is still unsplit live. Sources checked: Stacks 0CDD models, 07T8 finite-module clause, 081I as its DAG dense special case lemma-nagata-dense-flat-pullback, and 02OG. Steps 1-10 and 12 are correct: the Jacobian row (v,u) gives the singular locus V(u,v); the kernel is JP because π-multiplication is injective on the flat H=P/JP; B_U=Spec(H×H) by the conductor node; étaleness descends through the surjective union of charts; finiteness comes from properness plus finite zero-dimensional Noetherian fibres; the rank is 2 by base change; localizing at u or v gives Q_u=E_u and Q_v=E_v; faithfully flat kernel/cokernel descent works over the separated X. Small cases tested: xy=p^n z^2, xy=0, and a nonsplit node x^2-dy^2 with d a unit; d=p is excluded by the hypotheses. FIX for E1 in step 11: it applies the affine-normalization node, which needs reduced Noetherian rings, to the rings of X and uses T⊆T̄, but never shows X or X_K reduced. I added that argument (T embeds in T⊗K̄; flatness makes π a nonzerodivisor) and def-weil-flat-morphism and def-weil-geometric-fibre to the uses and proof_deps. Batch 5: the three lem-trf nodes (036U, 036W, 07T8) and the sfb smooth-point base change, whose closure reaches 01V9, are generic sk-i-curve-zero foundations; their closures reach no assumption leaf, trace-formula theorem or Poincaré duality, so they are accepted. Tool uses accepted: the 7 declared, plus the generic etale-proposition-etale-reduced, pqf-lem-proper-basic, thm-pqf-finite-iff-proper-finite-fibres, lem-pc-projective-proper and lemma-nagata-dense-flat-pullback.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PersistentSingularClosureAtlas",
+  "declaration": "AlgebraicGeometry.PersistentNormalization.persistent_singular_closure_atlas",
+  "declarations": [
+   "AlgebraicGeometry.PersistentNormalization.genericSingularIdeal",
+   "AlgebraicGeometry.PersistentNormalization.genericSingularMap",
+   "AlgebraicGeometry.PersistentNormalization.closureIdeal",
+   "AlgebraicGeometry.PersistentNormalization.ChartConclusion",
+   "AlgebraicGeometry.PersistentNormalization.GenericConductor",
+   "AlgebraicGeometry.PersistentNormalization.persistent_singular_closure_atlas"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PersistentSingularClosureAtlas.lean",
+  "statement": "theorem persistent_singular_closure_atlas (R K : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field K] [Algebra R K] [IsFractionRing R K] (π : R) (_hπ : Irreducible π) (X : Scheme.{u}) (f : X ⟶ Spec (.of R)) [IsHProjective f] [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] [IsFinite X.fromReducedNormalization] (_hgeom : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), Nonempty (pullback (C := Scheme.{u}) f g) ∧ IsReduced (pullback (C := Scheme.{u}) f g) ∧ (pullback (C := Scheme.{u}) f g).IsPureDimension 1 ∧ ∀ x : pullback (C := Scheme.{u}) f g, x ∈ closedPoints (pullback (C := Scheme.{u}) f g) → x ∉ (pullback.snd f g).smoothLocus → IsOrdinaryNode Ω (pullback (C := Scheme.{u}) f g) x) (_atlas : Atlas (.of R) (.of K) (Spec.map (CommRingCat.ofHom (algebraMap R K))) f) : (∀ x : X, ChartConclusion (_atlas.chart x)) ∧ IsFinite ((closureIdeal f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).subschemeι ≫ f) ∧ Etale ((closureIdeal f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).subschemeι ≫ f) ∧ IsFinite (pullback.snd X.fromReducedNormalization (closureIdeal f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).subschemeι) ∧ Etale (pullback.snd X.fromReducedNormalization (closureIdeal f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).subschemeι) ∧ IsFinite (pullback.snd X.fromReducedNormalization (closureIdeal f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).subschemeι ≫ (closureIdeal f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).subschemeι ≫ f) ∧ Etale (pullback.snd X.fromReducedNormalization (closureIdeal f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).subschemeι ≫ (closureIdeal f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).subschemeι ≫ f) ∧ (∀ n : (closureIdeal f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).subscheme, (pullback.snd X.fromReducedNormalization (closureIdeal f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).subschemeι).finrank n = 2) ∧ IsClosedImmersion (pullback.fst X.fromReducedNormalization (closureIdeal f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).subschemeι) ∧ (∀ b : pullback (C := Scheme.{u}) X.fromReducedNormalization (closureIdeal f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).subschemeι, ∃ U : X.reducedNormalization.Opens, pullback.fst X.fromReducedNormalization (closureIdeal f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).subschemeι b ∈ U ∧ Smooth (U.ι ≫ X.fromReducedNormalization ≫ f)) ∧ IsIso (pullback.snd X.fromReducedNormalization (Scheme.Opens.ι (closureIdeal f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).support.compl)) ∧ (closureIdeal f (Spec.map (CommRingCat.ofHom (algebraMap R K)))).comap (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap R K)))) = genericSingularIdeal f (Spec.map (CommRingCat.ofHom (algebraMap R K))) ∧ GenericConductor f (Spec.map (CommRingCat.ofHom (algebraMap R K)))",
+  "branch": "sheaf-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-662fd5ef4",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Re-delivery fixes the earlier H2 RETURN (05d36cffb3a1): originIdeal moved into def-sfb-persistent-normalization-atlas's module (body identical to the old strictNodalCoordinate, listed in that node's lean.declarations); lem-trf-ordered-nodal-branch-overlap removed from stmt_deps and imports; theorem signature and both lean.statement strings unchanged and verbatim in their files. Independent reading against the node and Tag 0CDD found no mismatch: DVR/fraction field/uniformizer; projective+flat+fp (lfp+qc+qs); geometric-fibre clause with IsOrdinaryNode; finite reducedNormalization; atlas with étale DVR or finite-étale field coefficients, only uv=0 persistent (n=0 is a smoothing chart); N = ker of N_K→X with N_K the relative nonsmooth locus; ChartConclusion (u,v)/origin/diagonal pullbacks over U, empty otherwise; finite étale N→S, B→N, B→S; rank 2; closed immersion into the smooth locus; complement iso; generic restriction equality; conductor formula. Edge cases (empty locus, empty X, nonsplit nodes, generic-only charts) covered; no hollow defs, nothing proved beyond sorry, docstrings present, no pro-étale substitute, single universe. Advisory: conductor written explicitly rather than linked to conductorIdeal (acceptable). No file changed, so no compile."
+ }
+}

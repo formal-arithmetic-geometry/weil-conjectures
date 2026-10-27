@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-missing-fibre-finite-presentation-approximation",
+ "kind": "statement",
+ "title": "Approximate a closed subscheme missing one fibre over an affine base",
+ "statement": "Let $A$ be a commutative ring and $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Let $f:X\\to S$ be a quasi-compact morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], let $g:T\\to S$ be any scheme morphism, and let $t\\in T$. Write $X_T=X\\times_ST$ [def-pc-fibre-product]. Let $Z\\hookrightarrow X_T$ be a closed subscheme [def-weil-closed-immersion] with empty fibre over $t$ [def-pc-scheme-fibre]. There exist an affine open neighbourhood $V\\subseteq T$ of $t$, nonnegative integers $r,m$, polynomials $q_1,\\ldots,q_m\\in A[z_1,\\ldots,z_r]$ [def-weil-pbc-mv-polynomial-ring], an affine $S$-scheme $T\\prime=\\operatorname{Spec}(A[z_1,\\ldots,z_r]/(q_1,\\ldots,q_m))$, an $S$-morphism $a:V\\to T\\prime$, and a closed subscheme $Z\\prime\\hookrightarrow X\\times_ST\\prime$ such that the fibre of $Z\\prime$ over $a(t)$ is empty and the image of $Z\\times_TV$ under $X\\times_SV\\to X\\times_ST\\prime$ is contained in $Z\\prime$. The map $a$ is over $S$, so its composite with $T\\prime\\to S$ is $g|_V$. No finite-type, Noetherian or separatedness assumption is imposed on $X$, $T$ or $A$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 05BD, limits-lemma-separate, specialized to affine S=Spec A; the proof explicitly constructs Tprime=Spec B_lambda with B_lambda a finitely presented A-algebra, yielding the displayed polynomial quotient. This is the approximation input in the proof of Tag 05JX, limits-lemma-test-universally-closed."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open neighbourhood $V=\\operatorname{Spec}B$ of $t$ and replace $Z$ by $Z_V=Z\\times_TV$. Write $\\mathfrak q\\subset B$ for $t$. Since $S$ is affine and $f$ is quasi-compact, $X=f^{-1}(S)$ is quasi-compact. Apply [lem-pqf-finite-affine-cover-qc-open] to the open $X$ itself to obtain $X=\\bigcup_{i=1}^nU_i$, $U_i=\\operatorname{Spec}C_i$. By [lem-weil-pbc-fibre-product-affine-spectra], $U_i\\times_SV=\\operatorname{Spec}R_i$ with $R_i=C_i\\otimes_AB$. By [def-weil-closed-immersion], its inverse image in $Z_V$ is $\\operatorname{Spec}D_i$, $D_i=R_i/I_i$ for an ideal $I_i$. Its fibre at $\\mathfrak q$ is $\\operatorname{Spec}(D_i\\otimes_B\\kappa(\\mathfrak q))$ by [def-pc-scheme-fibre] and the affine-fibre-product formula. It is empty by hypothesis.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-finite-type-morphism",
+    "lem-pqf-finite-affine-cover-qc-open",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05BD, lemma-separate, proof; affine reduction and finite affine cover"
+   }
+  },
+  {
+   "text": "For each $i$, apply [lem-weil-pbc-fibre-ring-localization-quotient] to $B\\to D_i$ and $\\mathfrak q$. The fibre ring is $(B\\setminus\\mathfrak q)^{-1}D_i/\\mathfrak q(B\\setminus\\mathfrak q)^{-1}D_i$. It is the zero ring: its spectrum is empty by step 1, and [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](i), applied to the empty family of basic opens, gives $0=(1)$. Thus $1=\\sum_j f_{ij}(d_{ij}/s_{ij})$ in $(B\\setminus\\mathfrak q)^{-1}D_i$ with finitely many $f_{ij}\\in\\mathfrak q$, $d_{ij}\\in D_i$, $s_{ij}\\in B\\setminus\\mathfrak q$. Put $s_i=\\prod_js_{ij}$ and $e_{ij}=d_{ij}\\prod_{k\\ne j}s_{ik}$. The equality of fractions implies that some $h_i\\in B\\setminus\\mathfrak q$ kills $s_i-\\sum_jf_{ij}e_{ij}$ in $D_i$, by the fraction equality in the cited node. Lift $h_ie_{ij}$ to $c_{ij}\\in R_i$ and put $g_i=h_is_i\\notin\\mathfrak q$. Then $x_i:=g_i-\\sum_jf_{ij}c_{ij}\\in I_i$, so $x_i+\\sum_jf_{ij}c_{ij}=g_i$ in $R_i$. Empty sums and products cause no exception when $D_i$ is already zero.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-localization-quotient",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05BD, lemma-separate, proof; clearing denominators, before the optional localization of B"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-algebra-colimit-fp-algebras-over-it] to $A\\to B$, taking $\\mathcal P$ to be the set of all explicit polynomial quotients $A[z_1,\\ldots,z_r]/(q_1,\\ldots,q_m)$ for finite $r,m$. It gives a small filtered category $\\mathcal I$ of such algebras $B_\\lambda$ with compatible maps $\\alpha_\\lambda:B_\\lambda\\to B$ and colimit $B$. Work in a common universe large enough for $\\mathcal I$ and all these rings and the finitely many $C_i$, as required by the tensor-colimit node used next. This uses the set of presentations, rather than a potentially large category of all algebras.",
+   "uses": [
+    "lem-weil-pbc-algebra-colimit-fp-algebras-over-it"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05BD, lemma-separate, proof; write B as a filtered colimit of finitely presented A-algebras"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise](1), first with the $A$-module $N=A$ (identifying $B_\\lambda\\otimes_AA$ with $B_\\lambda$), to lift all $f_{ij},g_i$. Use it with $N=C_i$ to lift $x_i,c_{ij}$ to $C_i\\otimes_AB_\\lambda$; the switch $b\\otimes c\\mapsto c\\otimes b$ is the tensor symmetry, directly inverse to $c\\otimes b\\mapsto b\\otimes c$. There are only finitely many elements. Repeatedly use the common-target property of the filtered category supplied in step 3 and transport the chosen lifts, obtaining one object $\\lambda$ carrying them all. Denote them $x_{i\\lambda},c_{ij\\lambda},f_{ij\\lambda},g_{i\\lambda}$. Put $\\mathfrak q_\\lambda=\\alpha_\\lambda^{-1}(\\mathfrak q)$; then $f_{ij\\lambda}\\in\\mathfrak q_\\lambda$ and $g_{i\\lambda}\\notin\\mathfrak q_\\lambda$, simply because their images in $B$ are $f_{ij}$ and $g_i$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+    "lem-weil-pbc-algebra-colimit-fp-algebras-over-it"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05BD, lemma-separate, proof; lift finitely many coefficients and tensor elements"
+   }
+  },
+  {
+   "text": "The element $x_{i\\lambda}+\\sum_jf_{ij\\lambda}c_{ij\\lambda}-g_{i\\lambda}$ maps to zero in $C_i\\otimes_AB$. By [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise](2), it becomes zero after some arrow out of $\\lambda$. Impose these finitely many equations successively: after each arrow the remaining errors still map to zero in the colimit, and all equations already imposed remain zero because transition maps are ring homomorphisms (the same node's last clause). Replacing $\\lambda$ by the final object gives $x_{i\\lambda}+\\sum_jf_{ij\\lambda}c_{ij\\lambda}=g_{i\\lambda}$ for every $i$. All the image and prime-membership conditions of step 4 persist. No injectivity of the stage maps is used.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05BD, lemma-separate, proof; increase the stage until the finitely many equations hold"
+   }
+  },
+  {
+   "text": "Set $T'=\\operatorname{Spec}B_\\lambda$ and $a=\\operatorname{Spec}\\alpha_\\lambda:V\\to T'$. This is over $S$ by functoriality of affine spectra. Since the object $B_\\lambda$ was chosen from the explicit polynomial quotients in step 3, it has exactly the displayed presentation in the statement. Let $p:X\\times_SV\\to X\\times_ST'$ be the base change of $a$; it is affine by [lem-weil-pbc-morphism-affine-schemes-affine] and [lem-weil-pbc-affine-morphism-permanence](1). The map $Z_V\\hookrightarrow X\\times_SV$ is affine by [def-weil-closed-immersion]. Thus $h:Z_V\\to X\\times_ST'$ is affine by [lem-weil-pbc-affine-composition], hence quasi-compact by [lem-weil-pbc-affine-morphism-permanence](3). Apply [lem-weil-pbc-scheme-image-qc-kernel] to define its closed scheme-theoretic image $Z'$. On $U_i\\times_ST'=\\operatorname{Spec}(C_i\\otimes_AB_\\lambda)$ the cited kernel formula identifies the ideal $J_i$ of $Z'$ with $\\ker(C_i\\otimes_AB_\\lambda\\to D_i)$. Here the inverse image under $h$ is exactly $Z_V\\cap(U_i\\times_SV)=\\operatorname{Spec}D_i$, by the defining projection identities of the fibre product. In particular $x_{i\\lambda}\\in J_i$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-composition",
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05BD, lemma-separate, proof; take the scheme-theoretic image and compute its ideals on affine pieces"
+   }
+  },
+  {
+   "text": "The point $a(t)$ is $\\mathfrak q_\\lambda$ by the contravariant description of affine spectra. In the fibre of $Z'$ on the $i$th chart, $x_{i\\lambda}$ vanishes since it belongs to $J_i$, and each $f_{ij\\lambda}$ vanishes since it belongs to $\\mathfrak q_\\lambda$. Step 5 therefore makes $g_{i\\lambda}$ zero. But $g_{i\\lambda}\\notin\\mathfrak q_\\lambda$, so it is invertible in the residue field of $\\mathfrak q_\\lambda$ by [def-weil-pbc-localization-at-prime], and hence in this fibre algebra. That algebra has $1=0$ and its spectrum is empty, since a prime ideal is proper. The affine charts cover $X\\times_ST'$, so the whole fibre of $Z'$ is empty. Finally [lem-weil-pbc-scheme-image-qc-kernel] supplies a factorization of $h$ through $Z'$, which implies the required image containment (indeed scheme-theoretic factorization). This proves all clauses, with no condition on affine-open intersections of $X$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-scheme-image-qc-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05BD, lemma-separate, proof; the descended relation kills each fibre chart and the image factorization gives containment"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-pqf-finite-affine-cover-qc-open",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-closed-immersion",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-fibre-ring-localization-quotient",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-algebra-colimit-fp-algebras-over-it",
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-composition",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "def-pc-fibre-product",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 05BD, lemma-separate, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Approximate a closed subscheme missing a fibre of a quasi compact morphism by a closed subscheme after a finitely presented affine base change near that point",
+   "date": "2026-10-23",
+   "results": "{\"t\": \"2026-10-23T19:28:21Z\", \"tool\": \"leanfinder\", \"query\": \"Approximate a closed subscheme missing a fibre of a quasi compact morphism by a closed subscheme after a finitely presented affine base change near that point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι\", \"AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion\"], \"digest\": \"8234b41a9ac6dd94\"}; The hits in AffineTransitionLimit.lean concern points in closed inverse systems (lines 108,158) or factorization of morphisms (line 690), not closed-subscheme approximation preserving a missing fibre. Read these candidate statements. Neither semantic phrasing gives the specified finitely presented algebra and containing closed subscheme.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiCompact\", \"FinitePresentation\"",
+   "date": "2026-10-23",
+   "results": "{\"t\": \"2026-10-23T19:28:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiCompact\\\", \\\"FinitePresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\"], \"digest\": \"632bb001358d2c8f\"}; The hits in AffineTransitionLimit.lean concern points in closed inverse systems (lines 108,158) or factorization of morphisms (line 690), not closed-subscheme approximation preserving a missing fibre. Read these candidate statements. Neither semantic phrasing gives the specified finitely presented algebra and containing closed subscheme.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "05BD|separate.*[Ff]inite[Pp]resentation|[Cc]losed.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*[Cc]losed",
+   "date": "2026-10-23",
+   "results": "{\"t\": \"2026-10-23T19:28:19Z\", \"tool\": \"grep\", \"query\": \"05BD|separate.*[Ff]inite[Pp]resentation|[Cc]losed.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*[Cc]losed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The hits in AffineTransitionLimit.lean concern points in closed inverse systems (lines 108,158) or factorization of morphisms (line 690), not closed-subscheme approximation preserving a missing fibre. Read these candidate statements. Neither semantic phrasing gives the specified finitely presented algebra and containing closed subscheme.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed subscheme after arbitrary base change which misses a fibre descends near that fibre to some finitely presented affine scheme",
+   "date": "2026-10-23",
+   "results": "{\"t\": \"2026-10-23T19:28:20Z\", \"tool\": \"leansearch\", \"query\": \"A closed subscheme after arbitrary base change which misses a fibre descends near that fibre to some finitely presented affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed.mk\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\"], \"digest\": \"3d9f46c0e8105551\"}; The hits in AffineTransitionLimit.lean concern points in closed inverse systems (lines 108,158) or factorization of morphisms (line 690), not closed-subscheme approximation preserving a missing fibre. Read these candidate statements. Neither semantic phrasing gives the specified finitely presented algebra and containing closed subscheme.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a quasi compact scheme over Spec A and a closed subscheme over Spec B missing the fibre at a prime, find a finitely presented A algebra and a closed subscheme containing its image and still missing that fibre",
+   "date": "2026-10-23",
+   "results": "{\"t\": \"2026-10-23T19:28:22Z\", \"tool\": \"leanfinder\", \"query\": \"Given a quasi compact scheme over Spec A and a closed subscheme over Spec B missing the fibre at a prime, find a finitely presented A algebra and a closed subscheme containing its image and still missing that fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι\", \"AlgebraicGeometry.QuasiCompact.isCompact_preimage_singleton\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"babe58c2c5f5e5e4\"}; The hits in AffineTransitionLimit.lean concern points in closed inverse systems (lines 108,158) or factorization of morphisms (line 690), not closed-subscheme approximation preserving a missing fibre. Read these candidate statements. Neither semantic phrasing gives the specified finitely presented algebra and containing closed subscheme.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "05BD|missing.*fibre|missing.*fiber|separate.*finitePresentation",
+   "results": "{\"t\": \"2026-10-23T20:35:18Z\", \"tool\": \"grep\", \"query\": \"05BD|missing.*fibre|missing.*fiber|separate.*finitePresentation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: limit closed-point compactness, morphism equality descent, affine fibre compactness and fpqc descent do not approximate an arbitrary closed subscheme preserving an empty fibre. No exact statement or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed subscheme with empty fibre descends to a containing closed subscheme over a finitely presented affine base",
+   "results": "{\"t\": \"2026-10-23T20:35:18Z\", \"tool\": \"leansearch\", \"query\": \"Closed subscheme with empty fibre descends to a containing closed subscheme over a finitely presented affine base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isAffine_of_isEmpty\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsClosedImmersion.instOfIsEmptyCarrierCarrierCommRingCat\"], \"digest\": \"220774b632d7cff0\"}; Read hits: limit closed-point compactness, morphism equality descent, affine fibre compactness and fpqc descent do not approximate an arbitrary closed subscheme preserving an empty fibre. No exact statement or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiCompact\", \"FinitePresentation\"",
+   "results": "{\"t\": \"2026-10-23T20:35:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiCompact\\\", \\\"FinitePresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\"], \"digest\": \"632bb001358d2c8f\"}; Read hits: limit closed-point compactness, morphism equality descent, affine fibre compactness and fpqc descent do not approximate an arbitrary closed subscheme preserving an empty fibre. No exact statement or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximate a closed subscheme missing a fibre over an arbitrary affine base by a finitely presented base change for a quasi compact scheme",
+   "results": "{\"t\": \"2026-10-23T20:35:23Z\", \"tool\": \"leanfinder\", \"query\": \"Approximate a closed subscheme missing a fibre over an arbitrary affine base by a finitely presented base change for a quasi compact scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι\"], \"digest\": \"2863e1a08ca5b5f2\"}; Read hits: limit closed-point compactness, morphism equality descent, affine fibre compactness and fpqc descent do not approximate an arbitrary closed subscheme preserving an empty fibre. No exact statement or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact morphism X to Spec A and a closed Z in X times Spec B missing a prime fibre there is a finitely presented A algebra B0 mapping to B such that the schematic image of Z over B0 still misses that fibre",
+   "results": "{\"t\": \"2026-10-23T20:35:24Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi compact morphism X to Spec A and a closed Z in X times Spec B missing a prime fibre there is a finitely presented A algebra B0 mapping to B such that the schematic image of Z over B0 still misses that fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"AlgebraicGeometry.QuasiCompact\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.QuasiCompact.isCompact_preimage_singleton\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\"], \"digest\": \"fad5f706f549641c\"}; Read hits: limit closed-point compactness, morphism equality descent, affine fibre compactness and fpqc descent do not approximate an arbitrary closed subscheme preserving an empty fibre. No exact statement or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-curve-universal-closedness-test",
+  "date": "2026-10-24",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Sections 2.2--2.3, Proposition 1, Lemma 2(3), equation (5), and Lemma 4(3), printed pp.6--10; normalized weights and arithmetic uniformity are explicit agent expansions. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting input: Morrison Section 2.2, Proposition 1(1)--(2) and its proof, printed pp.6--7. Arbitrary-characteristic formulation of the Hilbert--Mumford criterion for SL and the determinant linearization; nonconstant weights explicitly exclude the trivial one-parameter subgroup. The elementary determinant-coordinate calculation is the one in Proposition 1; the underlying Hilbert--Mumford theorem is Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Theorem 2.1 (local book WANTED). Supporting input: Morrison Proposition 1, first sentence of the proof, citing GIT Theorem 2.1: the general numerical criterion, before its specialization to Pluecker monomial coordinates. Supporting input: Testing properness of affine finite-type morphisms by formal arcs. Supporting input: reduce the properness test to local rings at closed points of normal integral finite-type curves (Stacks 0GWX over a field), before completion. Proof of this prerequisite: Tag 0GWX reduces to Tag 0GWV, applied both to f and to its diagonal; this node is the universal-closedness criterion, including its affine-space test formulation. Supporting input: Tag 05BD (limits-lemma-separate), the missing-fibre approximation used by 05JX in the affine-space part of 0GWV.",
+   "via": [
+    "lem-sfb-normal-curve-universal-closedness-test",
+    "lem-sfb-properness-normal-curve-local-test",
+    "lem-sfb-affine-properness-formal-arc-test",
+    "lem-sfb-hilbert-mumford-projective-representation",
+    "lem-sfb-hilbert-monomial-numerical-criterion",
+    "lem-sfb-uniform-gieseker-codegree-criterion",
+    "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-missing-fibre-finite-presentation-approximation",
+  "worker": "stage1",
+  "summary": "Followed Stacks 05BD using existing finite-affine-cover, fibre-ring, filtered finitely presented algebra, tensor-colimit and scheme-image nodes. Retained the denominators g_i instead of shrinking to normalize them; their descended values are units at the selected point. All seven steps cite the precise statements used. No new nodes, no statement change, no Lean attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Sections 2.2--2.3, Proposition 1, Lemma 2(3), equation (5), and Lemma 4(3), printed pp.6--10; normalized weights and arithmetic uniformity are explicit agent expansions. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting input: Morrison Section 2.2, Proposition 1(1)--(2) and its proof, printed pp.6--7. Arbitrary-characteristic formulation of the Hilbert--Mumford criterion for SL and the determinant linearization; nonconstant weights explicitly exclude the trivial one-parameter subgroup. The elementary determinant-coordinate calculation is the one in Proposition 1; the underlying Hilbert--Mumford theorem is Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Theorem 2.1 (local book WANTED). Supporting input: Morrison Proposition 1, first sentence of the proof, citing GIT Theorem 2.1: the general numerical criterion, before its specialization to Pluecker monomial coordinates. Supporting input: Testing properness of affine finite-type morphisms by formal arcs. Supporting input: reduce the properness test to local rings at closed points of normal integral finite-type curves (Stacks 0GWX over a field), before completion. Proof of this prerequisite: Tag 0GWX reduces to Tag 0GWV, applied both to f and to its diagonal; this node is the universal-closedness criterion, including its affine-space test formulation. Supporting input: Tag 05BD (limits-lemma-separate), the missing-fibre approximation used by 05JX in the affine-space part of 0GWV.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-algebra-colimit-fp-algebras-over-it",
+    "why": "The general small filtered presentation of a ring as a colimit of finitely presented algebras is the algebraic input used in 05BD; this unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+    "why": "The general element and eventual-zero tests after tensoring implement the finite coefficient and relation descent in 05BD; this unit has no replacement for them."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-algebra-colimit-fp-algebras-over-it",
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-2d04305fb",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-2d04305fb (reviewer sub-agent of L); spot-checked: I read the item and all seven steps against Stacks limits.tex Tag 05BD (lemma-separate), statement and full proof. The item is 05BD specialised to an affine S=Spec A, with V and T' affine and T'=Spec A[z]/(q), and is not weakened. The statement is byte-identical to live. The item is still unsplit in clones/live and clones/side-live, there is no repair note, and the delivery has 0 new nodes. proof_deps equals the union of the step uses (17 nodes). Steps: (1) the finite affine cover comes from qc f over affine S and lem-pqf-finite-affine-cover-qc-open with U=X, with no quasi-separatedness used; the affine fibre-product node gives R_i, the closed-immersion definition gives D_i=R_i/I_i, and the fibre's homeomorphism clause makes Spec(D_i⊗κ(q)) empty. (2) The fibre-ring localization node plus clause (i) of the unit-ideal node applied to the empty family give 1∈q(D_i)_q; I checked the denominator algebra: s_i, e_ij, h_i from the node's fraction rule, and x_i=g_i−Σf_ij c_ij∈I_i. This writes out the source's 'clearing denominators'. (3) The fp-colimit node with the explicit polynomial-quotient set satisfies its hypotheses, and the category is nonempty (r=m=0). (4)-(5) Tensor-elementwise clauses (1) and (2), with N=A and N=C_i, filtered common targets and ring-hom transitions; f stays in q_λ and g stays outside q_λ. (6) The base change of the affine map a is affine, the closed immersion is affine, the composite is affine and hence qc; clause (1) of the scheme-image kernel node puts x_iλ in J_i, using the node's statement, not its proof. (7) On each chart fibre g_iλ is a unit and equals 0, so the fibre of Z' over a(t)=q_λ is empty; containment follows from the image factorisation. Edge cases checked: X empty, D_i=0, non-qs X, non-affine T. Duplicate grep for 05BD, lemma-separate and missing-fibre wording found only this item and its citer. tool_uses accepted: two generic sk-thm-p1 colimit-algebra nodes, with no unit-local replacement. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MissingFibreFinitePresentationApproximation",
+  "declaration": "AlgebraicGeometry.exists_missingFibre_finitePresentationApproximation",
+  "file": "lean/Sheaf/AlgebraicGeometry/MissingFibreFinitePresentationApproximation.lean",
+  "statement": "theorem exists_missingFibre_finitePresentationApproximation (A : Type u) [CommRing A] {X T Z : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) [QuasiCompact f] (g : T ⟶ Spec (CommRingCat.of A)) (t : T) (i : Z ⟶ pullback f g) [IsClosedImmersion i] (ht : IsEmpty ((i ≫ pullback.snd f g).fiber t)) : ∃ (V : T.Opens) (htV : t ∈ V) (r m : ℕ) (q : Fin m → MvPolynomial (Fin r) A) (a : V.toScheme ⟶ Spec (CommRingCat.of (MvPolynomial (Fin r) A ⧸ Ideal.span (Set.range q)))) (ha : a ≫ Spec.map (CommRingCat.ofHom (algebraMap A (MvPolynomial (Fin r) A ⧸ Ideal.span (Set.range q)))) = V.ι ≫ g) (Z' : Scheme.{u}) (i' : Z' ⟶ pullback f (Spec.map (CommRingCat.ofHom (algebraMap A (MvPolynomial (Fin r) A ⧸ Ideal.span (Set.range q)))))), IsAffineOpen V ∧ IsClosedImmersion i' ∧ IsEmpty ((i' ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap A (MvPolynomial (Fin r) A ⧸ Ideal.span (Set.range q)))))).fiber (a ⟨t, htV⟩)) ∧ Set.range (pullback.map (i ≫ pullback.snd f g) V.ι f (Spec.map (CommRingCat.ofHom (algebraMap A (MvPolynomial (Fin r) A ⧸ Ideal.span (Set.range q))))) (i ≫ pullback.fst f g) a g (by simp only [Category.assoc, pullback.condition]) ha.symm) ⊆ Set.range i'",
+  "branch": "sheaf-dag",
+  "by": "Q117",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3aac24c7",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Checked each clause against the node and Stacks 05BD (limits lemma-separate, specialized to affine S): QuasiCompact f only; Z closed in pullback f g with IsEmpty fibre of i≫snd at t; conclusion has V affine open containing t, q : Fin m → MvPolynomial (Fin r) A, T' the literal Spec of the quotient, a over S via ha, Z' closed in X×_S T' with empty fibre at a⟨t,htV⟩, and range of pullback.map (Z×_T V → X×_S T', argument order checked, eq2 = ha.symm) ⊆ range i'. Statement field verbatim equals the file signature; stmt_dep records match the declarations used; universe u is forced by Spec A; edge cases r=m=0, empty X/Z, A=0, non-affine T, non-qs X are covered. No definitions, proof is sorry only, docstrings have source and blueprint tags and 7 proof steps; the two proof-import modules exist in side-live; no duplicate found. Report has Worker report and Second reading sections. No findings; not recompiled because no file changed."
+ }
+}

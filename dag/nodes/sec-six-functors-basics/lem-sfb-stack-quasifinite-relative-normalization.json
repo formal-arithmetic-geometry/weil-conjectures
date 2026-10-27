@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-stack-quasifinite-relative-normalization",
+ "kind": "statement",
+ "title": "Relative normalization and Zariski main theorem for representable stack maps",
+ "statement": "Let $k$ be a field [def-weil-field] and let $f:\\mathcal U\\to\\mathcal V$ be a morphism of algebraic stacks over $k$ [def-sfb-algebraic-moduli-stack]. Suppose their diagonals are quasi-compact and separated, in the scheme-chart conventions of [def-sfb-stack-qcqs-morphism]. Suppose $f$ is representable by algebraic spaces [def-trf-algebraic-space], quasi-finite and separated: its scheme base changes are algebraic-space morphisms of finite type with finite geometric fibres and closed relative diagonal [def-weil-finite-type-morphism]. Form the quasi-coherent algebra $f_*\\mathcal O_{\\mathcal U}$ on the smooth-etale site of $\\mathcal V$ [def-sfb-stack-quasi-coherent-algebra]. Its integral-closure subalgebra $\\mathcal A$ is characterized as follows: on every smooth affine scheme chart $T\\to\\mathcal V$, its sections are the elements of $\\Gamma(\\mathcal U\\times_{\\mathcal V}T,\\mathcal O)$ satisfying a monic polynomial with coefficients in $\\Gamma(T,\\mathcal O_T)$. This prescription defines a quasi-coherent subalgebra and commutes with smooth base change. The relative spectrum $\\mathcal N=\\underline{\\operatorname{Spec}}_{\\mathcal V}\\mathcal A$ is the stack whose scheme base change to $T$ is the scheme obtained by gluing the spectra of this algebra on affine opens of $T$. It is an algebraic stack with quasi-compact separated diagonal. The projection $h:\\mathcal N\\to\\mathcal V$ is integral on scheme tests [def-weil-finite-integral-morphism], and the evaluation map $j:\\mathcal U\\to\\mathcal N$ is a quasi-compact open immersion with $hj\\simeq f$. Here open immersion means that every scheme base change is an open subscheme. Moreover $h_*\\mathcal O_{\\mathcal N}=\\mathcal A\\subseteq f_*\\mathcal O_{\\mathcal U}$, with inclusion induced by $j$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 082J (lemma-quasi-finite-separated-quasi-affine), Tag 082F (lemma-normalization-smooth-localization); spaces-morphisms.tex Tag 0820 (lemma-integral-closure) and Tag 0ABP (lemma-properties-normalization). Smooth descent gives the representable algebraic-stack form used in Alper Lemma 8.3.1, citing LMB Theorem 16.5. The explicit integral-closure version is the smooth-local extension of these Stacks statements."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-qcqs-morphism",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-sfb-stack-quasi-coherent-algebra"
+ ],
+ "proof": [
+  {
+   "text": "For every scheme $T\\to\\mathcal V$, put $U_T=\\mathcal U\\times_{\\mathcal V}T$. The hypothesis gives a separated finite-type algebraic space $U_T\\to T$ whose geometric fibres $U_T\\times_T\\operatorname{Spec}\\Omega$ have finitely many points. By the finite-fibre criterion for separated finite-type spaces, applied at every $t\\in T$ with $K$ an algebraic closure of $\\kappa(t)$, the map is quasi-finite at every point of $|U_T|$; that is, every representable etale scheme chart $V\\to U_T$ has $V\\to T$ locally quasi-finite. With the closed-immersion diagonal, the schemehood lemma makes $U_T$ a scheme. Its morphism to $T$ is separated and finite type, hence quasi-compact. The scheme-test criterion makes $f$ quasi-compact as a stack map. Its relative diagonal is a closed immersion on scheme tests, hence affine and quasi-compact; its own diagonal is an isomorphism, so it is also quasi-separated. Thus $f$ satisfies the quasi-compact quasi-separated hypotheses of the algebra direct-image theorem. Apply that theorem to obtain $\\mathcal B=f_{\\mathrm{QCoh},*}\\mathcal O_{\\mathcal U}$, whose restriction on every smooth scheme test $T$ is $\\Gamma(U_T,\\mathcal O)$. This is the $f_*\\mathcal O$ of the statement, on its specified smooth-etale site.",
+   "uses": [
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-sfb-space-finite-fibre-quasifinite-criterion",
+    "lem-sfb-representable-stack-quasicompact-tests",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-sfb-stack-qcqs-algebra-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XX; stacks-morphisms.tex Tag 050T; stacks-cohomology.tex Tags 077A and 0GQQ; decent-spaces.tex Tag 0ACK (lemma-conditions-on-fibre-and-qf) for the finite-fibre criterion."
+   }
+  },
+  {
+   "text": "Choose a smooth surjective scheme atlas $P\\to\\mathcal V$ and replace $P$ by the disjoint union of its affine opens. Write $R=P\\times_{\\mathcal V}P$; its projections are smooth. On $P$ take the integral-closure subalgebra $C=\\operatorname{IC}_P(\\mathcal B|_P)$ supplied by the existing closure lemma. The smooth-pullback comparison identifies each $p_i^*C$ with the integral closure in $\\mathcal B|_R$. Consequently the canonical descent isomorphism of $\\mathcal B$ restricts to an isomorphism $p_1^*C\\simeq p_2^*C$. Its identity and cocycle equations hold because both sides are restrictions of the same equations in $\\mathcal B$, and the inclusions on these smooth relation spaces are injective. Smooth-atlas algebra descent now produces a quasi-coherent algebra $\\mathcal A$ and a map $\\mathcal A\\to\\mathcal B$, injective on the smooth-etale site. This constructs a subalgebra on exactly the site in the statement; no nonflat pullback of a monomorphism is asserted.",
+   "uses": [
+    "lem-sfb-space-quasicoherent-integral-closure",
+    "lem-sfb-space-integral-closure-smooth-pullback",
+    "lem-sfb-smooth-atlas-algebra-descent",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WV(1),(5), using spaces-morphisms.tex Tag 0820 and spaces-more-morphisms.tex Tag 082E."
+   }
+  },
+  {
+   "text": "For any smooth scheme test $T\\to\\mathcal V$, the projections from $P\\times_{\\mathcal V}T$ to $P$ and to $T$ are smooth, and the latter is surjective. Apply smooth pullback of integral closure on this relation space. It identifies the pullback of $\\mathcal A|_T$ with the pullback of $\\operatorname{IC}_T(\\mathcal B|_T)$, compatibly with inclusions into $\\mathcal B$. Take a surjective etale scheme chart of this relation space; its composite to $T$ is a smooth surjective scheme atlas. Full faithfulness of smooth descent on this atlas identifies the two algebras on $T$. If $T$ is affine, the closure lemma and the smooth-test direct-image formula give precisely the stated monic-polynomial description. The same comparison for a further smooth morphism of stacks can be checked on smooth scheme atlases of its source, so the prescription commutes with smooth base change. The canonical identifications satisfy composition because their maps into the ambient algebra agree. They also prove independence of the chosen atlas and uniqueness of $\\mathcal A$.",
+   "uses": [
+    "lem-sfb-space-integral-closure-smooth-pullback",
+    "lem-sfb-smooth-atlas-algebra-descent",
+    "lem-sfb-space-quasicoherent-integral-closure",
+    "lem-sfb-stack-qcqs-algebra-direct-image",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 082E and Tag 082F, smooth-local algebra comparison; stacks-sheaves.tex Tag 06WV."
+   }
+  },
+  {
+   "text": "Form $\\mathcal N=\\underline{\\operatorname{Spec}}_{\\mathcal V}\\mathcal A$ using the existing stack relative-spectrum construction. It is algebraic, $h$ is representable by schemes and affine, and for every scheme $t:T\\to\\mathcal V$ its pullback is $\\underline{\\operatorname{Spec}}_T(t^*\\mathcal A)$ with the required affine-open gluing and arbitrary-base-change compatibility. The same theorem identifies $h_{\\mathrm{QCoh},*}\\mathcal O_{\\mathcal N}$ with $\\mathcal A$. Under the algebra adjunction for $f$, the inclusion $\\mathcal A\\to f_{\\mathrm{QCoh},*}\\mathcal O_{\\mathcal U}$ gives an algebra map $f^*\\mathcal A\\to\\mathcal O_{\\mathcal U}$. On objects this sends $u\\in\\mathcal U(T)$ to $(f(u),u^*f^*\\mathcal A\\to\\mathcal O_T)$ in the defining pair description of $\\mathcal N(T)$; naturality gives its arrows. It is the evaluation morphism $j$, with $hj\\simeq f$. Its induced structure-sheaf map is the original inclusion by adjunction.",
+   "uses": [
+    "lem-sfb-stack-relative-spec-construction",
+    "lem-sfb-stack-qcqs-algebra-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LX; algebraic.tex Tag 05UM; the stack extension is by the pair functor and algebra adjunction."
+   }
+  },
+  {
+   "text": "Let $T\\to\\mathcal V$ be smooth affine. Step 1 supplies a separated finite-type quasi-finite scheme map $U_T\\to T$; $T$ is quasi-compact and quasi-separated. Its relative normalization has affine ring over $T$ equal to the integral closure of $\\Gamma(T,\\mathcal O_T)$ in $\\Gamma(U_T,\\mathcal O)$. Moreover the canonical map from $U_T$ pulls back functions by the inclusion of this ring. Steps 3 and 4 therefore identify this normalization, including its canonical map, with $\\mathcal N_T$ and $j_T$. The scheme Zariski main theorem makes $h_T$ integral and $j_T$ a quasi-compact open immersion. All its hypotheses are verified here on an affine base; no global quasi-compactness of $\\mathcal V$ is used.",
+   "uses": [
+    "lem-weil-pbc-relative-normalization",
+    "pqf-lem-normalization-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LR; morphisms.tex Tags 035F, 035H and 035I, including the affine-ring identification."
+   }
+  },
+  {
+   "text": "For an arbitrary affine scheme $T\\to\\mathcal V$, pull back the smooth atlas $P\\to\\mathcal V$. Smooth local sections supply an etale cover of $T$ lifting to $P$. Refine it by affine opens mapping to individual affine components of $P$, and take a finite subfamily covering the quasi-compact $T$. This is an fpqc cover by affine schemes $T_i$. Each $h_{T_i}$ is a base change of the integral scheme map over that affine component of $P$ from step 5. The ring base-change theorem preserves integrality, so fpqc descent of integral scheme morphisms makes $h_T$ integral. Integrality for nonaffine $T$ is the same affine-open condition in the definition of an integral morphism. Thus $h$ is integral on every scheme test. Notice that $t^*\\mathcal A$ on a nonsmooth test is tensor pullback; we have not replaced it by an integral closure computed after a possibly nonflat base change.",
+   "uses": [
+    "lem-sfb-smooth-space-cover-etale-sections",
+    "lem-weil-pbc-integral-base-change",
+    "lem-weil-pbc-fpqc-descend-integral",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02L9; more-morphisms.tex Tag 0CFV; tensor pullback in Tag 01LX."
+   }
+  },
+  {
+   "text": "The scheme $\\mathcal N_P$ is a smooth surjective atlas of $\\mathcal N$, since it is the base change of $P\\to\\mathcal V$. Step 5 identifies $\\mathcal U\\times_{\\mathcal N}\\mathcal N_P=\\mathcal U\\times_{\\mathcal V}P$ with an open subscheme of $\\mathcal N_P$. Its two pullbacks to the relation space agree: both are pullbacks of the global morphism $j$ and its image. Invariant-open descent therefore gives an open substack $W\\subseteq\\mathcal N$ through which $j$ factors. This factor $\\mathcal U\\to W$ becomes an isomorphism after the smooth atlas just used. To see it is an equivalence, pull objects and arrows to that cover: arrows descend uniquely by the sheaf condition on Isom, and the locally unique lifts of objects have a unique compatible descent datum, effective by fppf stack descent. Hence $\\mathcal U\\simeq W$, and $j$ is an open immersion on every scheme test. The fppf-descent theorem applies to both algebraic stacks; it does not assume a Deligne--Mumford atlas.",
+   "uses": [
+    "lem-sfb-invariant-open-substack-descent",
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507 (open case); criteria.tex Tag 076V for effective fppf descent."
+   }
+  },
+  {
+   "text": "For any scheme $T\\to\\mathcal V$, the factorization $U_T\\xrightarrow{j_T}\\mathcal N_T\\xrightarrow{h_T}T$ has quasi-compact composite, since $f_T$ is finite type. Its second map is affine, hence separated and quasi-separated. Quasi-compact cancellation for algebraic spaces gives that $j_T$ is quasi-compact. For a scheme $Q\\to\\mathcal N$, put $T=Q$ with its composite map to $\\mathcal V$. The map $\\mathcal U\\times_{\\mathcal N}Q\\to Q$ is the pullback of $j_T$ along the section $Q\\to\\mathcal N_T$ determined by $Q\\to\\mathcal N$. Base-change stability gives its quasi-compactness. The representable scheme-test criterion proves that $j$ is quasi-compact as a stack morphism.",
+   "uses": [
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-qc-cancellation",
+    "lem-sfb-space-quasicompact-fppf-local",
+    "lem-sfb-representable-stack-quasicompact-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03WI, 03HF and 03KT (quasi-compact cancellation); stacks-morphisms.tex Tag 050T."
+   }
+  },
+  {
+   "text": "Finally factor the absolute diagonal as $\\mathcal N\\xrightarrow{\\Delta_h}\\mathcal N\\times_{\\mathcal V}\\mathcal N\\to\\mathcal N\\times_k\\mathcal N$. The second arrow is the pullback of $\\Delta_{\\mathcal V}$ by the diagonal fibre-product identity. The first is a closed immersion on scheme tests: $h$ is affine, so its scheme-test diagonals are closed immersions. Thus the first is affine and quasi-compact, and the second is quasi-compact by hypothesis and base-change stability. The stack quasi-compact quasi-separated composition theorem gives quasi-compactness of their composite (each factor is quasi-separated, the first being affine and the second being a base change of a separated representable map). Separation of both representable factors and separation permanence give separation of this composite. Consequently $\\mathcal N$ has quasi-compact separated diagonal. Together with steps 4, 6, 7 and 8 this proves every asserted property, with the specified inclusion on the smooth-etale site.",
+   "uses": [
+    "lem-sfb-groupoid-diagonal-two-pullback-identities",
+    "lem-sfb-space-affine-locality",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-sfb-space-quasicompact-fppf-local",
+    "lem-sfb-stack-qcqs-composition-affine",
+    "lem-sfb-stack-separation-compactness-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050K, factorization of a composite diagonal; Tags 04Z1, 050F and 04YS; spaces-morphisms.tex Tag 03WG."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-separated-locally-qf-space-representable",
+  "lem-sfb-space-finite-fibre-quasifinite-criterion",
+  "lem-sfb-representable-stack-quasicompact-tests",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-sfb-stack-qcqs-algebra-direct-image",
+  "lem-sfb-space-quasicoherent-integral-closure",
+  "lem-sfb-space-integral-closure-smooth-pullback",
+  "lem-sfb-smooth-atlas-algebra-descent",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-relative-spec-construction",
+  "lem-weil-pbc-relative-normalization",
+  "pqf-lem-normalization-open",
+  "lem-sfb-smooth-space-cover-etale-sections",
+  "lem-weil-pbc-integral-base-change",
+  "lem-weil-pbc-fpqc-descend-integral",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-invariant-open-substack-descent",
+  "lem-sfb-etale-smooth-atlas-fppf-descent",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-qc-cancellation",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "lem-sfb-groupoid-diagonal-two-pullback-identities",
+  "lem-sfb-stack-qcqs-composition-affine",
+  "lem-sfb-stack-separation-compactness-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Smooth-atlas assembly of Tags 082E, 082F and 082J, with scheme Tag 02LR and algebra descent Tag 06WV. The stack extension is written explicitly in this proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A representable quasi finite separated morphism of algebraic stacks factors as a schematically dense open immersion followed by an integral morphism",
+   "results": "{\"t\": \"2026-10-23T10:27:26Z\", \"tool\": \"leanfinder\", \"query\": \"A representable quasi finite separated morphism of algebraic stacks factors as a schematically dense open immersion followed by an integral morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsIntegralHom.of_comp\", \"AlgebraicGeometry.IsFinite.of_comp\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\"], \"digest\": \"8ba0fd87bc5b5af8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative normalization of a separated quasi finite map of algebraic stacks is integral and the source is an open substack",
+   "results": "{\"t\": \"2026-10-23T11:08:17Z\", \"tool\": \"leanfinder\", \"query\": \"The relative normalization of a separated quasi finite map of algebraic stacks is integral and the source is an open substack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"28b3c985d4213006\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski main theorem for a representable quasi finite separated morphism of algebraic stacks via integral closure",
+   "results": "{\"t\": \"2026-10-23T11:25:59Z\", \"tool\": \"leansearch\", \"query\": \"Zariski main theorem for a representable quasi finite separated morphism of algebraic stacks via integral closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.ZariskisMainProperty.of_isIntegral\", \"Algebra.ZariskisMainProperty\", \"Algebra.zariskisMainProperty_iff_exists_saturation_eq_top\", \"Algebra.zariskisMainProperty_iff'\", \"Algebra.zariskisMainProperty_iff\", \"integralClosure\", \"Algebra.ZariskisMainProperty.restrictScalars\", \"Algebra.ZariskisMainProperty.trans\"], \"digest\": \"a6c1f3d1a56d773f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"toNormalization\"",
+   "results": "{\"t\": \"2026-10-23T10:48:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"toNormalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\"], \"digest\": \"a3165bbd48b94d68\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*normalization|toNormalization|AlgebraicStack",
+   "results": "{\"t\": \"2026-10-23T11:25:59Z\", \"tool\": \"grep\", \"query\": \"relative.*normalization|toNormalization|AlgebraicStack\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"7522ba22582e8754\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern schemes, rings or abstract topology and do not supply this algebraic-stack assertion or specialize to it in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-integral-comparison-finite",
+  "date": "2026-10-23",
+  "group": "Q149"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: Lemma 8.3.1 applied to the diagonal, keeping its closed-point and integral-base hypotheses explicit Supporting input: the integral Zariski-main factorization in Alper Lemma 8.3.1, with its actual relative-normalization algebra retained.",
+   "via": [
+    "lem-sfb-adequate-integral-comparison-finite",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-quasifinite-relative-normalization",
+  "worker": "stage1",
+  "summary": "Retained the statement. Constructed the actual integral-closure algebra by smooth descent, used the existing stack relative spectrum, identified each smooth affine normalization and evaluation with the scheme normalization, then descended integrality and the open image. Created only smooth pullback of the existing space integral closure and general smooth-atlas algebra descent. No finite or DM hypothesis is imported; nonflat base changes use tensor pullback, not integral closure.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: Lemma 8.3.1 applied to the diagonal, keeping its closed-point and integral-base hypotheses explicit Supporting input: the integral Zariski-main factorization in Alper Lemma 8.3.1, with its actual relative-normalization algebra retained. Latest blueprint sk-thm-sf-ctf-stability and inherited direct-image alteration/moduli route read. Ancestor command returns None for the inherited creation chain; retained null and its via list. No blueprint node states either new tool.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-separated-locally-qf-space-representable",
+    "why": "Generic schemehood of separated locally quasi-finite spaces over schemes, used only on scheme tests."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "why": "Only affine and separated clauses for closed scheme-test diagonals."
+   },
+   {
+    "node": "lem-weil-pbc-relative-normalization",
+    "why": "Actual affine algebra and evaluation of scheme relative normalization, identifying the smooth affine test."
+   },
+   {
+    "node": "pqf-lem-normalization-open",
+    "why": "Generic scheme Zariski main theorem applied only to smooth affine tests; this does not replace the stack descent argument."
+   },
+   {
+    "node": "lem-weil-pbc-integral-base-change",
+    "why": "Generic tensor base change of integral ring algebras on affine scheme tests."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-integral",
+    "why": "Generic fpqc descent of integral scheme morphisms, only after h has scheme tests."
+   },
+   {
+    "node": "def-weil-finite-integral-morphism",
+    "why": "Generic foundational notion or representable morphism calculus used on scheme tests, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-separated-locally-qf-space-representable",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-relative-normalization",
+  "pqf-lem-normalization-open",
+  "lem-weil-pbc-integral-base-change",
+  "lem-weil-pbc-fpqc-descend-integral",
+  "def-weil-finite-integral-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NC-806528fdc",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-806528fdc (reviewer sub-agent of L); spot-checked: Read the whole item (9 steps), both new nodes, every cited statement, Stacks 082E/082F/082J, 06WV(1),(5)/06WT and decent-spaces 0ACK. The live item is still unsplit with no repair note; statement and stmt_deps match live exactly, so no target is weakened. One C1 fault, repaired: step 1 turned 'finite type, finite geometric fibres' into chartwise local quasi-finiteness for algebraic spaces with no citation, and lem-a1-separated-locally-qf-space-representable needs that hypothesis. That is not elementary (Stacks 0ACK). FIX: step 1 now cites the existing, reviewed same-unit node lem-sfb-space-finite-fibre-quasifinite-criterion; the text and source (decent-spaces 0ACK) are updated, proof_deps equals the union of uses, and there is no cycle. Other steps check out: B from the qcqs direct image; A from 082E on R plus smooth-atlas descent; monic-polynomial description on smooth affine tests; relative Spec and the evaluation j, with the function map equal to the inclusion; on smooth affine T, identification with the scheme relative normalization (iii) and ZMT 02LR; integrality on all scheme tests by etale-local lifts to the affine atlas, ring base change and fpqc descent (no integral closure after a nonflat base change); openness by invariant-open descent; qc of j by qc cancellation and the section Q to N_Q; diagonal of N = base change of Delta_V composed with the affine Delta_h. New nodes: lem-sfb-space-integral-closure-smooth-pullback matches 082E and is not a duplicate of the scheme-only lem-sbc-relative-normalization-smooth-base-change or of the etale ring node; lem-sfb-smooth-atlas-algebra-descent is general 06WV smooth-atlas algebra descent and not a duplicate of the DM, scheme-groupoid or affine-groupoid variants. Both are statement-only, self-contained, carry three kinds of Mathlib search, were tested on small cases, and neither restates a clause of the item. Accepted tool_uses: lem-a1 schemehood, lem-weil-pbc-fpqc-descend-integral, and Mathlib leaves or definitions. Batch-5 flags: every listed citation reaches sec-trace-formula only through the definitions def-trf-algebraic-space, def-trf-space-quasi-coherent-module and def-trf-projective-bundle-morphism, plus generic algebraic-space foundations; none is a step of the trace formula or Poincare duality, so they are not a RETURN. No SGA citations.; 1 file(s) fixed by the reviewer"
+ }
+}

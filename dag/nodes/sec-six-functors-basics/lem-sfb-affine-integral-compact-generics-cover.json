@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-affine-integral-compact-generics-cover",
+ "kind": "statement",
+ "title": "An integral reduced affine cover with quasi-compact generic points",
+ "statement": "Let $Y$ be an affine scheme [def-pc-scheme]. There exist a reduced affine scheme $C$ [def-pc-reduced-scheme] and a surjective integral morphism $p:C\\to Y$ [def-weil-surjective-morphism, def-weil-finite-integral-morphism] such that the set $C_{\\mathrm{gen}}$ of generic points of the irreducible components [def-weil-irreducible-components] of $C$, with the subspace Zariski topology, is quasi-compact: every cover of this subspace by open subsets has a finite subcover. The scheme $Y$ need not be reduced or Noetherian; the empty scheme is allowed.",
+ "source": {
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Definition (3.8), Properties (3.9)(iii),(vi), printed pp.13-14, and the first two sentences of the affine case in the proof of Theorem (3.10), printed p.14 Read online at the source URL; local PDF WANTED.",
+  "url": "https://davidrydh.se/papers/submersion20100305.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-surjective-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "Write $Y=\\operatorname{Spec}A$. For each prime $\\mathfrak p$ of $A$ let $K_{\\mathfrak p}=\\kappa(\\mathfrak p)$ and $u_{\\mathfrak p}:A\\to K_{\\mathfrak p}$ be the canonical residue map. Clause (1) of [lem-weil-pbc-spec-field-point-residue-field] says that $K_{\\mathfrak p}$ is a field and $\\ker u_{\\mathfrak p}=\\mathfrak p$. Form the set-indexed product ring $P=\\prod_{\\mathfrak p\\in\\operatorname{Spec}A}K_{\\mathfrak p}$ and the ring map $u=(u_{\\mathfrak p})$. Define $B$ to be the set of elements of $P$ integral over $A$ via $u$. By [def-weil-pbc-integral-closure] this is a subring containing $u(A)$. Thus $u$ factors as $A\\xrightarrow{v}B\\hookrightarrow P$, and every $b\\in B$ satisfies a monic polynomial over $A$. Set $C=\\operatorname{Spec}B$ and $p=\\operatorname{Spec}v$ using [def-weil-affine-spectrum]. No injectivity of $u$ or reducedness of $A$ is asserted.",
+   "uses": [
+    "lem-weil-pbc-spec-field-point-residue-field",
+    "def-weil-pbc-integral-closure",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Agent construction for Theorem (3.10), affine-case compact-generics reduction; compare Properties (3.9)(vi). Integral-elements subring: Stacks algebra.tex, Tag 00GO, lemma-integral-closure-is-ring."
+   }
+  },
+  {
+   "text": "The ring $B$ is reduced: if $b^n=0$, every coordinate of $b$ in the product of fields $P$ is zero, hence $b=0$. To verify that $C$ is reduced as a scheme, [lem-weil-pbc-affine-open-stalk-localization](c), applied to the whole affine open $C$, identifies each local ring with $B_{\\mathfrak q}$. If $(b/s)^n=0$ there, choose $t\\notin\\mathfrak q$ with $tb^n=0$. Then $(tb)^n=t^{n-1}(tb^n)=0$ in $B$, so $tb=0$ and $b/s=0$. Thus all these local rings are reduced, which is exactly [def-pc-reduced-scheme]. This is the explicit localization argument in Stacks Tag 01J2, lemma-affine-reduced.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J2, lemma-affine-reduced, with the localization calculation written out; Tag 01HV, lemma-spec-sheaves (6), for the affine stalk."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-integral-affine-cover-criterion] to the one-member affine covering $\\{Y\\}$ of $Y$. Its inverse image is the affine scheme $C$, and its map on global sections is $v:A\\to B$ by the spectrum construction of [def-weil-affine-spectrum]. The defining monic equations for $B$ in step 1 give exactly the ring-integrality hypothesis. Consequently $p:C\\to Y$ is integral. The criterion assumes no finiteness of $A$ or of the product indexing set.",
+   "uses": [
+    "lem-sfb-integral-affine-cover-criterion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02K8, lemma-integral-local, equivalence (1) and (2), specialized to the whole affine target."
+   }
+  },
+  {
+   "text": "For every $\\mathfrak p\\in\\operatorname{Spec}A$, restrict the coordinate projection $P\\to K_{\\mathfrak p}$ to a homomorphism $w_{\\mathfrak p}:B\\to K_{\\mathfrak p}$. Its composite with $v$ is $u_{\\mathfrak p}$. By clause (3) of [lem-weil-pbc-spec-field-point-residue-field], $\\operatorname{Spec}(w_{\\mathfrak p})$ sends the point of $\\operatorname{Spec}K_{\\mathfrak p}$ to a point of $C$, and $\\operatorname{Spec}(u_{\\mathfrak p})$ sends it to $\\ker u_{\\mathfrak p}=\\mathfrak p$ in $Y$. Contravariant functoriality in [def-weil-affine-spectrum] gives $p\\circ\\operatorname{Spec}(w_{\\mathfrak p})=\\operatorname{Spec}(u_{\\mathfrak p})$. Hence every point of $Y$ has a preimage, proving surjectivity. This also shows why nilpotents in $A$ cause no difficulty.",
+   "uses": [
+    "lem-weil-pbc-spec-field-point-residue-field",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J5, section Points of schemes, discussion before Tag 01J9, lemma-characterize-points; algebra.tex, discussion following Tag 00CT, residue map at a prime."
+   }
+  },
+  {
+   "text": "For $b\\in B$ define an element $e_b\\in P$ coordinatewise: its $\\mathfrak p$-coordinate is $1$ when $b_{\\mathfrak p}=0$ and $0$ otherwise. It satisfies $e_b^2=e_b$ and hence the monic equation $T^2-T=0$ over the image of $A$. The definition [def-weil-pbc-integral-closure] therefore places $e_b$ in $B$. Coordinatewise $be_b=0$. If $bc=0$ with $c\\in B$, then $c_{\\mathfrak p}=0$ whenever $b_{\\mathfrak p}\\ne0$, since $K_{\\mathfrak p}$ is a field. Therefore $c=e_bc$. Conversely every multiple of $e_b$ annihilates $b$. We have proved $\\{c\\in B:bc=0\\}=e_bB$ by an explicit coordinate calculation, without assuming that the whole product $P$ is integral over $A$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hochster-totally-integrally-closed-rings-extremal-spaces.pdf",
+    "place": "Agent coordinate proof for the weaker ring needed here; compare the idempotent-annihilator observation after Proposition 5, p.776, and the product-of-fields construction in section 1, pp.768-769."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-idempotent-annihilator-generic-retraction] to $B$, whose reducedness was proved in step 2 and whose principal annihilators were computed in step 5. It gives a continuous retraction $r:C\\to C_{\\mathrm{gen}}$ onto exactly the generic points of the irreducible components, with their subspace topology. The affine scheme $C$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Given an open cover of $C_{\\mathrm{gen}}$, its inverse images under $r$ form an open cover of $C$, so finitely many suffice. Since $r$ is the identity on $C_{\\mathrm{gen}}$, the corresponding original opens cover $C_{\\mathrm{gen}}$. This is the required quasi-compactness. If $Y$ is empty, the product $P$ over its empty prime set and its subring $B$ are the zero ring, so $C$ and its generic-point space are empty and all assertions remain valid.",
+   "uses": [
+    "lem-sfb-idempotent-annihilator-generic-retraction",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Agent assembly of the compact-generics reduction in Theorem (3.10), compare Property (3.9)(iii); quasi-compactness of spectra: Stacks algebra.tex, Tag 00E8, lemma-quasi-compact."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-field-point-residue-field",
+  "def-weil-pbc-integral-closure",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-pc-reduced-scheme",
+  "lem-sfb-integral-affine-cover-criterion",
+  "lem-sfb-idempotent-annihilator-generic-retraction",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Explicit integral-elements construction in a product of residue fields, proving the conclusion of the affine compact-generics reduction in Theorem (3.10), pp.13-14. The local source PDF is WANTED. Uses only the weaker annihilator property of the usual total-integral-closure construction; does not change the inherited unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "totally.integrally.closed|subtrus|quasi.?compact.*(generic|minimal)|(generic|minimal).*quasi.?compact",
+   "results": "{\"t\": \"2026-10-23T22:14:23Z\", \"tool\": \"grep\", \"query\": \"totally.integrally.closed|subtrus|quasi.?compact.*(generic|minimal)|(generic|minimal).*quasi.?compact\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine open covers, ordinary normalization and geometrically integral morphisms do not give a reduced integral covering with quasi-compact generic-point subspace."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine scheme admits a reduced integral covering with compact space of minimal primes",
+   "results": "{\"t\": \"2026-10-23T22:14:24Z\", \"tool\": \"leansearch\", \"query\": \"An affine scheme admits a reduced integral covering with compact space of minimal primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.IsReduced.of_openCover\", \"AlgebraicGeometry.affine_isReduced_iff\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.IsNoetherian.toCompactSpace\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\"], \"digest\": \"eb04eafac6593a5e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine open covers, ordinary normalization and geometrically integral morphisms do not give a reduced integral covering with quasi-compact generic-point subspace."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Integral\", \"Surjective\"",
+   "results": "{\"t\": \"2026-10-23T22:14:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Integral\\\", \\\"Surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instSurjectiveOfGeometricallyIntegral\"], \"digest\": \"4bbb29753c87b68e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine open covers, ordinary normalization and geometrically integral morphisms do not give a reduced integral covering with quasi-compact generic-point subspace."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every affine scheme has a surjective integral morphism from a reduced affine scheme whose set of generic points is quasi compact",
+   "results": "{\"t\": \"2026-10-23T22:14:27Z\", \"tool\": \"leanfinder\", \"query\": \"Every affine scheme has a surjective integral morphism from a reduced affine scheme whose set of generic points is quasi compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"9946df641d135792\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine open covers, ordinary normalization and geometrically integral morphisms do not give a reduced integral covering with quasi-compact generic-point subspace."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral surjective affine cover with quasi compact generic points exists for every affine scheme via total integral closure",
+   "results": "{\"t\": \"2026-10-23T22:14:53Z\", \"tool\": \"leanfinder\", \"query\": \"An integral surjective affine cover with quasi compact generic points exists for every affine scheme via total integral closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.Scheme.isAffine_affineCover\", \"AlgebraicGeometry.Scheme.isAffine_affineBasisCover\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\"], \"digest\": \"483fecd7e7c1eba8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine open covers, ordinary normalization and geometrically integral morphisms do not give a reduced integral covering with quasi-compact generic-point subspace."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegralHom|genericPoints|minimalPrimes",
+   "results": "{\"t\": \"2026-10-23T22:46:50Z\", \"tool\": \"grep\", \"query\": \"IsIntegralHom|genericPoints|minimalPrimes\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\"], \"digest\": \"b89d50cc3eda125b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: affine open covers, domains and normalization do not assert all of reducedness, integral surjectivity, and quasi-compactness of the generic-point subspace. pointsPi_surjective is an extension of maps from products, not an integral covering theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.Surjective",
+   "results": "{\"t\": \"2026-10-23T22:46:50Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: affine open covers, domains and normalization do not assert all of reducedness, integral surjectivity, and quasi-compactness of the generic-point subspace. pointsPi_surjective is an extension of maps from products, not an integral covering theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every affine scheme admits a reduced affine integral surjective cover with quasi compact generic point subspace",
+   "results": "{\"t\": \"2026-10-23T22:46:52Z\", \"tool\": \"leanfinder\", \"query\": \"Every affine scheme admits a reduced affine integral surjective cover with quasi compact generic point subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.Scheme.isAffine_affineCover\", \"AlgebraicGeometry.Scheme.isAffine_affineBasisCover\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.AffineOpenCover\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\"], \"digest\": \"2350c100991d1ff9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: affine open covers, domains and normalization do not assert all of reducedness, integral surjectivity, and quasi-compactness of the generic-point subspace. pointsPi_surjective is an extension of maps from products, not an integral covering theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct an integral surjective cover of Spec A by a reduced affine scheme with compact minimal prime subspace",
+   "results": "{\"t\": \"2026-10-23T22:50:44Z\", \"tool\": \"leansearch\", \"query\": \"Construct an integral surjective cover of Spec A by a reduced affine scheme with compact minimal prime subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.AffineCover.mk\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"AlgebraicGeometry.Scheme.AffineCover.cover_X\", \"RingHom.IsIntegral.specComap_surjective\", \"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.Scheme.affineBasisCover\"], \"digest\": \"73cb0cf81d06c5ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: affine open covers, domains and normalization do not assert all of reducedness, integral surjectivity, and quasi-compactness of the generic-point subspace. pointsPi_surjective is an extension of maps from products, not an integral covering theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure of a ring in a product of fields gives a reduced integral surjective affine cover with compact minimal primes",
+   "results": "{\"t\": \"2026-10-23T22:50:45Z\", \"tool\": \"leanfinder\", \"query\": \"The integral closure of a ring in a product of fields gives a reduced integral surjective affine cover with compact minimal primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.affine_isIntegral_iff\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.pointsPi_surjective\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\"], \"digest\": \"b5fc0dd633ded7bc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: affine open covers, domains and normalization do not assert all of reducedness, integral surjectivity, and quasi-compactness of the generic-point subspace. pointsPi_surjective is an extension of maps from products, not an integral covering theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-subtrusive-fp-flat-proper-refinement",
+  "date": "2026-10-24",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route, through Alper Proposition 7.1.1 Hom exactness and Rydh (5.19)(i); supporting Rydh (5.17) proof, printed p.22: the sentence applying Theorem (3.10) to the finitely presented affine cover; Theorem (3.10) supporting input: Definition (3.8), Properties (3.9)(iii),(vi), printed pp.13-14, and the first two sentences of the affine case in the proof of Theorem (3.10), printed p.14",
+   "via": [
+    "lem-sfb-subtrusive-fp-flat-proper-refinement",
+    "lem-sfb-space-qc-subtrusive-etale-descent",
+    "lem-sfb-space-open-surjection-etale-descent",
+    "lem-sfb-homeomorphism-separated-etale-equivalence",
+    "lem-sfb-separated-space-homeomorphism-affine",
+    "lem-sfb-stein-submersive-reduced-descent",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-integral-compact-generics-cover",
+  "worker": "stage1",
+  "summary": "Constructed B explicitly as the integral closure of A in the product of all residue fields; coordinate projections prove surjectivity and coordinate idempotents generate every principal annihilator. Reducedness and integrality are checked separately. One new statement-only general retraction lemma isolates the non-elementary topology. The statement and statement dependencies are unchanged; no Lean was written or compiled.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route, through Alper Proposition 7.1.1 Hom exactness and Rydh (5.19)(i); supporting Rydh (5.17) proof, printed p.22: the sentence applying Theorem (3.10) to the finitely presented affine cover; Theorem (3.10) supporting input: Definition (3.8), Properties (3.9)(iii),(vi), printed pp.13-14, and the first two sentences of the affine case in the proof of Theorem (3.10), printed p.14; realized by the explicit affine cover and retraction construction in steps 1-6. Current blueprint latest was read; no equivalent blueprint node was found.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-field-point-residue-field",
+    "why": "General affine residue-field evaluation with kernel the given prime, used to construct the product and to prove surjectivity. This is a scheme-theoretic tool, not a replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-field-point-residue-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-47ad39356",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-47ad39356 (reviewer sub-agent of L); spot-checked: Read the item's 6 steps, the new node and every cited statement. Step 1: P is the product of the residue fields κ(p); spec-field-point-residue-field(1) gives kernel p; B is the integral closure (def-weil-pbc-integral-closure gives a subring containing u(A)). Step 2: B lies in a product of fields, so it is reduced; its stalks are B_q by affine-open-stalk-localization(c), and (b/s)^n=0 gives t b^n=0, so tb=0; matches Stacks 01J2. Step 3: integral-affine-cover-criterion applied to the single cover {Y}. Step 4: the projections w_p and clause (3) send the point to ker u_p=p, so p is surjective. Step 5: the indicator e_b solves T^2-T, so it lies in B, and Ann(b)=e_bB is a coordinate check. Step 6: the retraction plus quasi-compactness of affine C (affine-scheme-qcqs) give quasi-compact C_gen; the empty case also holds. New node lem-sfb-idempotent-annihilator-generic-retraction, proved independently: for minimal q, a∈q iff e_a∉q (qR_q=0); minimal primes are unique (1-e_a and e_a both in p is impossible); r^{-1}(D(a)∩G)=D(1-e_a). Tested on the zero ring, a domain, an infinite product of fields, and k[x,y]/(xy), which the hypothesis rightly excludes. Statement only, self-contained, strictly smaller than the item, and not a restated clause. rg -L duplicate search (annihilator+idempotent, TIC/Baer/Rickart, compact generic points/minimal primes) found no duplicate. No SGA. The citer subtrusive-fp-flat-proper-refinement is unaffected because the statement is unchanged. Accepted tool use: lem-weil-pbc-spec-field-point-residue-field (generic). The Rydh and Hochster PDFs are not local (WANTED); the new node is honestly labelled an agent generalization, and I checked its mathematics in full myself. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineIntegralCompactGenericsCover",
+  "declaration": "AlgebraicGeometry.exists_affine_integral_surjective_compact_genericPoints",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineIntegralCompactGenericsCover.lean",
+  "statement": "theorem exists_affine_integral_surjective_compact_genericPoints (Y : Scheme.{u}) [IsAffine Y] : ∃ (C : Scheme.{u}) (p : C ⟶ Y), IsReduced C ∧ IsAffine C ∧ Surjective p ∧ IsIntegralHom p ∧ CompactSpace (genericPoints C)",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e8043ad1c",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Statement (Y : Scheme.{u}) [IsAffine Y] : ∃ C p, IsReduced C ∧ IsAffine C ∧ Surjective p ∧ IsIntegralHom p ∧ CompactSpace (genericPoints C) matches every clause of the node; genericPoints (Sober.lean:277) = generic points of irreducible components with subspace topology; recorded Mathlib decls of all 5 stmt_deps used; no added hypotheses; empty/non-reduced/non-Noetherian Y and universe u checked; node unchanged except complete lean record, statement verbatim; no live supersession; no duplicate found (rg side-live Sheaf/WeilConjectures + Mathlib); plain imports are proof_dep modules (SpecFieldPointResidueField is a module file); lines ≤100, autoImplicit false, docstrings with Rydh (3.8)-(3.10) pp.13-14, blueprint tag and six proof steps; proof sorry; report has Worker report and clause-matching Second reading. No fixes."
+ }
+}

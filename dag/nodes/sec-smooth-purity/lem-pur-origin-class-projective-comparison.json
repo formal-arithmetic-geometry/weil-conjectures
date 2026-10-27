@@ -32,107 +32,26 @@
  ],
  "proof": [
   {
-   "text": "Put $U_0=D(x_0)=X$ and $U_1=D(x_1)=P-D_0$. The ideal of $D_0$ has frames $f_0=t$ on $U_0$ and $f_1=1$ on $U_1$. These generate Cartier ideals: $t$ is a non-zero-divisor in $\\Omega[t]$, and $1$ is a non-zero-divisor on $U_1$. For the dual ideal [def-pc-divisor-line-bundle], the dual frames satisfy $g_0=t^{-1}g_1$ on the overlap. The frame identifications $g_a\\mapsto e_a^{(1)}$ therefore glue to an isomorphism $\\mathcal O_P(D_0)\\cong\\mathcal O_P(1)$ by the transition rule of [def-pc-projective-space-twist]. The canonical divisor section has coordinates $t$ and $1$ in these frames, respectively; it is thus the section $x_1$ of the positive twist. Restriction to $X$ gives precisely the divisor pair used to define $c_{0,X}$.",
+   "text": "Construct the boundary/counit data and its positive Chern/source normalization. Use their first four equations. Apply derived sections to the counit square and compose with the source normalization; functoriality and the unit-boundary equation give the final compact-image identity.",
    "uses": [
-    "def-pc-divisor-line-bundle",
-    "def-pc-projective-space-twist"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 2, supported origin; unit sk-prop-an Step 5(d), divisor normalization"
-   }
-  },
-  {
-   "text": "Write $F=\\bar i_{0*}A_S$ and $G=i_{0*}A_S$. Open inverse image is restriction, as specified in [lem-weil-pbc-extension-by-zero-adjunction]. Thus on every etale $V\\to X$ the two sheaves $j^{-1}F$ and $G$ are both $A_S(V\\times_XS)$, by [def-weil-pbc-direct-image]; this gives the canonical identification in the statement. The same direct-image formula shows that $F|_{U_1}=0$, since $U_1\\times_PS=\\varnothing$. In particular its inverse image at infinity is zero, since infinity lies in $U_1$. Apply the module-sheaf version of [lem-weil-pbc-open-closed-short-exact] to $j:X\\hookrightarrow P$ and its closed complement infinity, with coefficient sheaf $F$. Its last term is zero, so its first map $\\epsilon_F:j_!j^{-1}F\\to F$ is an isomorphism. Under $j^{-1}F=G$ this map is exactly $e$, not an arbitrary support isomorphism.",
-   "uses": [
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-open-closed-short-exact"
+    "lem-pur-origin-boundary-counit-data",
+    "lem-pur-origin-projective-normalization"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03S3 definition-extension-zero and 095L lemma-ses-associated-to-open"
-   }
-  },
-  {
-   "text": "Use [lem-weil-pbc-extension-by-zero-adjunction] for the actual sheaf adjunction $j_!\\dashv j^{-1}$. Both functors are additive and exact, by [lem-weil-pbc-extension-by-zero-exact] and [prop-weil-pbc-inverse-image-modules-exact]. Its localization to derived categories is the specified exact derived adjunction of [def-weil-exact-derived-adjunction]. In particular its derived counit is the localized original counit on sheaves and is a natural transformation on the whole ordinary derived category, including morphisms to shifted sheaves. We use this normalization for every $\\epsilon_M$ below.",
-   "uses": [
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-exact-derived-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S3 definition-extension-zero; exact localization as in derived.tex Tag 015F"
-   }
-  },
-  {
-   "text": "The pullback clause of [lem-asd-ordinary-supported-kummer], applied to $j$ and the Cartier pair of Step 1, identifies $j^{-1}c_{0,P}$ with $c_{0,X}$. The target identification $j^{-1}L_P[2]=L_X[2]$ is the roots- and tensor-normalized comparison of [lem-asd-etale-finite-twist-pullback]; the source is the restriction identification of Step 2. Naturality of the counit of Step 3 at the actual arrow $c_{0,P}:F\\to L_P[2]$ reads\n$$c_{0,P}\\circ\\epsilon_F=\\epsilon_{L_P[2]}\\circ j_!j^{-1}(c_{0,P}).$$\nSubstituting these identifications gives exactly $c_{0,P}\\circ e=\\epsilon_{L_P[2]}\\circ j_!c_{0,X}$. This uses no equality deduced merely from equality of restrictions of derived morphisms.",
-   "uses": [
-    "lem-asd-ordinary-supported-kummer",
-    "lem-asd-etale-finite-twist-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
-    "place": "Final paragraphs: Cartier pullback and forgetting support; Stacks Tag 03PL"
-   }
-  },
-  {
-   "text": "We check the source generator of the compact image. The closed immersion $\\bar i_0$ is finite by [lem-weil-pbc-closed-immersion-finite]. On abelian sheaves its direct image is exact by [lemma-weil-pbc-finite-direct-image-exact]; the derived direct-image composition of [def-weil-pbc-derived-direct-image-composition], for $S\\xrightarrow{\\bar i_0}P\\to S$ whose composite is the identity, gives $H^q(P,F)=H^q(S,A_S)$. Here the equality is first for underlying abelian sheaves, then for module cohomology by [lem-weil-pbc-etale-module-cohomology-forget]. By [lem-weil-pbc-geometric-point-cohomology], these groups vanish for $q>0$ and are $A$ in degree zero, with identification given by sections on $S$. There is no negative cohomology for a sheaf in degree zero under right derived sections. Thus $R\\Gamma(P,F)=A[0]$, normalized by the section $1$. By the chosen compactification definition [def-amb-etale-compact-support], $R\\Gamma_c(X,G)=R\\Gamma(P,j_!G)$; $R\\Gamma(e)$ gives its canonical identification with $A[0]$. Let $\\lambda:A\\to R\\Gamma(P,j_!G)$ be its inverse and $\\eta:A\\to R\\Gamma(P,A_P)$ the constant-section map. If $u:A_P\\to F$ is the closed unit, then\n$$R\\Gamma(e)\\lambda=R\\Gamma(u)\\eta.$$\nIndeed both sides are maps $A[0]\\to A[0]$ sending $1$ to $1$: the formula for direct image and its unit sends the constant section $1$ to its restriction on $D_0=S$. An $A$-linear map $A\\to A$ is determined by this value.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-finite",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "def-weil-pbc-derived-direct-image-composition",
-    "lem-weil-pbc-etale-module-cohomology-forget",
-    "lem-weil-pbc-geometric-point-cohomology",
-    "def-amb-etale-compact-support"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03QT theorem-equivalence-sheaves-point and 03QU lemma-compare-cohomology-point; sites-cohomology.tex Tag 0D6E lemma-derived-pushforward-composition"
-   }
-  },
-  {
-   "text": "Apply derived global sections to the equality of Step 4 and precompose with $\\lambda$ of Step 5. By [def-amb-etale-compact-support], $R\\Gamma(j_!c_{0,X})\\lambda=\\tau_X^e$ and $R\\Gamma(\\epsilon_{L_P[2]})=a$. Step 5 therefore gives\n$$a\\tau_X^e=R\\Gamma(c_{0,P})R\\Gamma(e)\\lambda=R\\Gamma(c_{0,P}u)\\eta.$$\nThe forgetting-support clause of [lem-asd-ordinary-supported-kummer] says $c_{0,P}u=c_1(\\mathcal O_P(D_0))$. By the explicit line-bundle isomorphism of Step 1 this is $c_1(\\mathcal O_P(1))$ with the positive Kummer boundary convention in the statement. Hence the last displayed morphism is the specified $h$. No generator was rescaled: the equality is with this Chern class itself, so its coefficient is $+1$.",
-   "uses": [
-    "def-amb-etale-compact-support",
-    "lem-asd-ordinary-supported-kummer"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 2, compact image of the origin; unit sk-prop-an Step 5(d), positive projective Chern class"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 2: compact image of the origin class; sk-prop-an Step 5(d), positive divisor Chern normalization"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-divisor-line-bundle",
-  "def-pc-projective-space-twist",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "def-weil-pbc-direct-image",
-  "lem-weil-pbc-open-closed-short-exact",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "def-weil-exact-derived-adjunction",
-  "lem-asd-ordinary-supported-kummer",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "def-weil-pbc-derived-direct-image-composition",
-  "lem-weil-pbc-etale-module-cohomology-forget",
-  "lem-weil-pbc-geometric-point-cohomology",
-  "def-amb-etale-compact-support"
+  "lem-pur-origin-boundary-counit-data",
+  "lem-pur-origin-projective-normalization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-  "place": "Step 2, repaired compact-generator comparison; expanded using sk-prop-an Step 5(d), the supported Cartier Kummer pullback/forgetting identities, and counit naturality"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 2: compact image of the origin class; sk-prop-an Step 5(d), positive divisor Chern normalization"
  },
  "mathlib_searches": [
   {
@@ -318,53 +237,21 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pur-origin-class-projective-comparison",
   "worker": "stage1",
-  "summary": "Q89: retain the full statement and prove it in six steps with no new nodes: calculate the positive divisor twist, prove the actual support counit invertible, localize its exact adjunction, use counit naturality and Cartier pullback, normalize the compact source at section one, and apply the supported-Chern identity. All citations were read clause by clause; ordinary etale modules are retained throughout.",
+  "summary": "Q125 repair: retain the statement verbatim and extract two comparable independent statement-only tasks: closed-support actual derived counit (old steps 2--3 and formal naturality in 4), and section-one compact-source normalization (old step 5). Retain the explicit elementary coordinate calculation and assemble the Kummer pullback and forgetting-support clauses. The report preserves every old argument verbatim with its allocation; no Lean changes.",
   "blueprint": "thm-pur-rank-one-thom Step 2, geometric-fibre generator, made precise by sk-prop-an Step 5(d) zero-divisor Chern normalization; the argument compares compact image with projective Chern class rather than identifying supported and compact cohomology.",
-  "tool_uses": [
-   {
-    "node": "def-weil-exact-derived-adjunction",
-    "why": "Localize the specified exact open adjunction with its actual counit; generic formal construction, not a replacement of the purity route."
-   },
-   {
-    "node": "prop-weil-pbc-inverse-image-modules-exact",
-    "why": "Exact constant-coefficient inverse image needed to localize the open adjunction; no same-unit statement supplies this module-level exactness."
-   },
-   {
-    "node": "lem-weil-pbc-etale-module-cohomology-forget",
-    "why": "Carry the abelian finite-pushforward and geometric-point cohomology computations to constant-A modules; generic coefficient-forgetting tool."
-   },
-   {
-    "node": "lem-weil-pbc-geometric-point-cohomology",
-    "why": "Normalize the compact source at section one on Spec of the given algebraically closed field; generic geometric-point computation."
-   },
-   {
-    "node": "lem-weil-pbc-closed-immersion-finite",
-    "why": "Apply finite direct-image exactness to the closed origin; generic scheme-morphism property."
-   },
-   {
-    "node": "lemma-weil-pbc-finite-direct-image-exact",
-    "why": "Compute the cohomology of the closed origin pushforward using exact abelian direct image; generic tool, with module transport explicitly cited."
-   }
-  ]
+  "tool_uses": []
  },
- "tool_uses": [
-  "def-weil-exact-derived-adjunction",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-etale-module-cohomology-forget",
-  "lem-weil-pbc-geometric-point-cohomology",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lemma-weil-pbc-finite-direct-image-exact"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q89-5232be712",
-  "group": "Q89",
+  "reviewer": "NT-cc-Q125-e7a6dacb1",
+  "group": "Q125",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-5232be712 (reviewer sub-agent of L); spot-checked: PASS, no changes. Q89 splits lem-pur-origin-class-projective-comparison into 6 steps with 0 new nodes. Shape: the statement is byte-identical to live; the only stmt_dep added is def-pc-projective-space-twist, which is needed for O_P(1). The item is not in the drop list and has no repair note; its only citer is thm-pur-rank-one-thom. No cycle, no missing or merged ids, uses = proof_deps, no SGA. Route: every cited statement is on the sk-prop-an route (sk-thm-p1, sk-prop-sf-cbc, sk-def-exchange, sk-prop-h2, sk-prop-cd, sk-thm-reduction, sk-thm-picard-*). The one off-route citation is the definition def-weil-exact-derived-adjunction; its declared tool use is accepted. Step 1: O(D_0) ≅ O(1) via dual frames g0=t^-1 g1, which matches e0=(x0/x1)e1, and the divisor section is x1; checked by hand. Step 2: F|U1=0 (U1×_P S empty), and lem-weil-pbc-open-closed-short-exact (module version) makes ε_F an isomorphism. Step 3: the exact derived adjunction has the localized counit. Step 4: the Kummer pullback clause applies (D' is Cartier); the twist-pullback node and counit naturality give the equation. I checked that the open-immersion exchange agrees with restriction, and the argument stays consistent under any fixed identification. Step 5: ī finite and exact, rī=id, the derived composition, module-forget and geometric-point nodes give RΓ(P,F)=A[0] normalized at 1, and RΓ(e)λ=RΓ(u)η is fixed by the image of 1. Step 6: c_D u_D = c_1(O(D_0)) is a statement clause of lem-asd-ordinary-supported-kummer, so aτ = h with coefficient +1. Sources checked: current thm-pur-rank-one-thom.proof Step 2 and master sk-prop-an Step 5(d), lines 248-257. Edge cases A=0, N=1, non-flat A and the chart orientation all hold."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-e7a6dacb1 (reviewer sub-agent of L); spot-checked: Re-split under the human's decision of 2026-10-21 (repair note released 2026-10-22 in live and side-live). The item is not dropped and not superseded: live is still the Q89 split. Item statement and stmt_deps are byte-identical to live; only proof, proof_deps and split_report changed. Old step 1 (O(D0)=O(1), frames t,1, g0=t^-1 g1, section x1) stays as the elementary parent step 1; I checked it by hand. Old steps 2-3 and the naturality in step 4 became lem-pur-closed-support-open-counit. It is true and general: rho is sectionwise the identity because V x_Y Z = V x_U Z; F vanishes on the open set Y minus k(Z); e is an isomorphism by Stacks 095L, or by the existing sheaf-level lem-weil-pbc-extension-by-zero-open-characterization, which is only an ingredient; eps_M Dj_!(c_U) = c e is counit naturality. Old step 5 became lem-pur-compact-point-source-normalization. It is true: k is finite and qk=id, so 03QP, 0D6E, 03QT/03QU and 03FD give RGamma(Y,k_*A)=A[0]; Hom_D(A)(A[0],A[0])=A, so beta RGamma(u) eta = id, and RGamma(e) lambda = beta^-1. Its proper and Noetherian hypotheses are those of def-amb-etale-compact-support, and it takes e invertible as a hypothesis, so the two nodes are independent. The new nodes are about 1600 and 1900 characters, so comparable in size, and neither restates the item or one of its clauses. The parent is the assembly plus one elementary step, 2532 characters after the fix. I searched the DAG for duplicates and found none. Edge cases checked: Z empty, U=Y, A=0, N=1, Y disconnected. The Kummer pullback hypothesis holds (t is a non-zero-divisor) and N is invertible on P. Sources read: blueprint main-20261015 thm-pur-rank-one-thom Step 2, master sk-prop-an Step 5(d), Stacks 095L; tags 03S3/015F/03QP/03QT/03QU/03FD/0D6E checked in the tags file. No SGA. Fixes, all citations only: (1) the counit node's 'specified sheaf adjunction' now cites lem-weil-pbc-extension-by-zero-adjunction, plus the exactness nodes lem-weil-pbc-extension-by-zero-exact and prop-weil-pbc-inverse-image-modules-exact (B3); (2) the point node's e now cites the same adjunction node; (3) parent step 3 again says that the Kummer pullback's source identification, the closed exchange of def-asd-ordinary-supported-kummer-boundary, is the restriction rho of Step 2. The delivery had dropped this sentence from old step 4; it is now restored, and that definition is added to uses and proof_deps. No tool_uses declared.; 3 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.OriginClassProjectiveComparison",
@@ -387,5 +274,27 @@
   "group": "Q110",
   "result": "pass",
   "note": "Q110 lem-pur-origin-class-projective-comparison fabede180106: Nonempty(OriginProjectiveComparison) with every data field pinned: transport by its normalizations plus the landed uniqueness theorem; restriction.hom = supportedConstantExchange; boundary classes unique via ordinary_supported_kummer_uniqueBoundary; chern via ordinaryFiniteP1ChernSpec (O(1)); sourceIso via λ≫RΓ(e)=η≫RΓ(u) with IsIso e. e and ε are the actual sheaf counits, localized. Counit square and a∘τ=h present; chart orientation checked (infinityChart = D+(T0), infinity = zeroSection≫infinityChart = [1:0]). Verbatim statements; def-sc-p1-standard is a landed stmt_dep addition (allowed); new def node fields ok; one sorry; docstrings ok. Edge cases N=1, A=0, positive characteristic ok; u+1 coefficient convention. Advisories: non-stmt_dep owner decls, local RΓ(P,j_!-) compact model, Nonempty TwistData clause redundant, unused proof-plan imports, brief second reading. No compile (no changes)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261025T142913-L-834094",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

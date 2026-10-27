@@ -84,7 +84,30 @@
   "prop-weil-pbc-geometric-stalks-exact"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.geometricStalk_preservesColimits",
+     "module": "WeilConjectures.AlgebraicGeometry.GeometricStalkColimits",
+     "lines": [
+      29,
+      60
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-kunneth-ordinary",
  "split_report": {
@@ -147,5 +170,25 @@
   "landing": "20261012T041234-L-1711133",
   "kind": "interface",
   "note": "independent Codex review: Matched the unchanged stalk-and-complex colimit theorem with its node and Mathlib adjunction/degreewise instances; delivery and direct importer compile without warnings, axioms are only propext, Classical.choice, Quot.sound, and import pruning is documented."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $T$ be a scheme and $\\bar t$ a geometric point of $T$. The\nstalk functor $F\\mapsto F_{\\bar t}$ of\n[def-weil-pbc-geometric-stalks] commutes with arbitrary colimits\nof abelian sheaves on $T_{\\Et}$; consequently, in each degree, it commutes with\ncolimits of complexes of abelian sheaves, computed termwise.",
+  "proof": [
+   {
+    "text": "By [def-weil-pbc-geometric-stalks] the stalk $F_{\\bar t}$ is\nthe filtered colimit of the groups $F(U)$ over pointed etale\nneighbourhoods of $\\bar t$. Colimits of sheaves are computed as the\nsheafification of the objectwise colimit of the underlying presheaves,\nand sheafification is left adjoint to the inclusion of sheaves, so\nevaluation at a fixed etale object $U$ preserves colimits of sheaves;\na filtered colimit of functors preserving colimits preserves colimits,\nwhence the stalk functor preserves colimits. The exactness of the\nstalk functors recorded in\n[prop-weil-pbc-geometric-stalks-exact] is the finite case of the\nsame statement, and sheaves are those of\n[def-weil-pbc-etale-sheaves].",
+    "uses": [
+     "def-weil-pbc-geometric-stalks",
+     "prop-weil-pbc-geometric-stalks-exact",
+     "def-weil-pbc-etale-sheaves"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

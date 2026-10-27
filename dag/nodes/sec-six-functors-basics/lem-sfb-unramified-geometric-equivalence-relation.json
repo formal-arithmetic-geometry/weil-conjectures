@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-unramified-geometric-equivalence-relation",
+ "kind": "statement",
+ "title": "Geometric-point criterion for an etale equivalence relation",
+ "statement": "Let $S,U,R$ be schemes [def-pc-scheme] and let $j=(s,t):R\\to U\\times_SU$ be a morphism, with fibre products as in [def-pc-fibre-product]. Assume $s$ and $t$ are etale [def-weil-etale-morphism]. Suppose there are morphisms $e:U\\to R$, $i:R\\to R$ and $c:R\\times_{t,U,s}R\\to R$ satisfying $je=\\Delta_U$, $ji=\\mathrm{flip}\\circ j$, and $jc=(s\\circ\\mathrm{pr}_1,t\\circ\\mathrm{pr}_2)$. Assume that for every algebraically closed field $K$ [def-weil-field, def-weil-algebraic-closure] and map $\\operatorname{Spec}K\\to S$, $j$ identifies $R(K)$ with an equivalence relation on $U(K)$. Then $j$ is a monomorphism, and for every $S$-scheme $T$ the image of $R(T)$ in $U(T)\\times U(T)$ is an equivalence relation. A monomorphism means a map cancellable on the left in every Hom set. Here $V(K)=\\operatorname{Hom}_S(\\operatorname{Spec}K,V)$ and $V(T)=\\operatorname{Hom}_S(T,V)$.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0DT7, lemma-etale-equivalence-relation, specialized from unramified to etale projections."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-weil-field",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=U\\times_SU$, let $p_1:B\\to U$ be the first projection, and put $P=R\\times_B R$. The etale hypothesis on $s$ implies that $s$ is unramified by [def-weil-etale-morphism]. Since $p_1\\circ j=s$, the cancellation clause of [lem-sfb-scheme-unramified-composition-cancellation] implies that $j$ is unramified, without any hypothesis on $p_1$. Thus its diagonal $d=\\Delta_j:R\\to P$ is an open immersion by [def-weil-unramified-morphism]. The fibre products and $d$ are given by [def-pc-fibre-product].",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-sfb-scheme-unramified-composition-cancellation",
+    "def-weil-unramified-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT7 (lemma-etale-equivalence-relation), proof, first two sentences (Tags 02GG and 02GE)"
+   }
+  },
+  {
+   "text": "For any algebraically closed field $K$ and any $K$-point $q$ of $P$ over $S$, write $a,b:\\operatorname{Spec}K\\to R$ for its two projections. They satisfy $ja=jb$ by [def-pc-fibre-product]. The hypothesis that $j$ identifies $R(K)$ with an equivalence relation includes injectivity of $R(K)\\to U(K)\\times U(K)$, so $a=b$. The universal property then gives $q=d\\circ a$. Thus every such $q$ lifts through $d$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT7 (lemma-etale-equivalence-relation), proof, geometric-point argument"
+   }
+  },
+  {
+   "text": "Let $z\\in P$. Choose an algebraic closure $K$ of $\\kappa(z)$ by [def-weil-algebraic-closure]. The pair consisting of $z$ and the embedding $\\kappa(z)\\to K$ determines a morphism $q:\\operatorname{Spec}K\\to P$ whose image is $z$, by [lem-weil-pbc-morphism-from-spec-field]. Its composite with $P\\to S$ supplies the required $S$-structure on $\\operatorname{Spec}K$. Step 2 lifts $q$ through $d$, hence $z$ is in the image of $d$. Therefore $d$ is surjective. By [def-weil-open-immersion], $d$ identifies $R$ with the open subscheme on its image; since that image is all of $P$, $d$ is an isomorphism.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT7 (lemma-etale-equivalence-relation), proof, surjectivity and isomorphism of the open diagonal; Schemes Tag 01J9"
+   }
+  },
+  {
+   "text": "To verify the asserted monomorphism in every Hom set, take any scheme $T$ and morphisms $a,b:T\\to R$ with $ja=jb$. By [def-pc-fibre-product] they define $h=(a,b):T\\to P$. Set $r=d^{-1}\\circ h$. Both projections of $d$ are $\\mathrm{id}_R$, so $a=r=b$. This proves left cancellation for $j$, including test schemes $T$ with nilpotents.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT7 (lemma-etale-equivalence-relation), proof, monomorphism conclusion, expanded using the fibre product"
+   }
+  },
+  {
+   "text": "Fix an $S$-scheme $T$, and define $x\\sim y$ for $x,y\\in U(T)$ to mean that some $r:T\\to R$ has $(sr,tr)=(x,y)$. For each $x$, the map $e\\circ x$ witnesses $x\\sim x$ by $je=\\Delta_U$. If $r$ witnesses $x\\sim y$, then $i\\circ r$ witnesses $y\\sim x$ by $ji=\\mathrm{flip}\\circ j$. If $r$ witnesses $x\\sim y$ and $r\\prime$ witnesses $y\\sim z$, then $tr=sr\\prime$ gives $(r,r\\prime):T\\to R\\times_{t,U,s}R$ by [def-pc-fibre-product], and $c\\circ(r,r\\prime)$ witnesses $x\\sim z$ by the stipulated formula for $jc$. These witnesses are over $S$ because their composites with $j$ have the displayed $S$-valued coordinates. Thus the image is reflexive, symmetric and transitive. Left cancellation from step 4 also identifies $R(T)$ with this image.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT7 (lemma-etale-equivalence-relation), proof, last sentence: the three diagrams on arbitrary test schemes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-sfb-scheme-unramified-composition-cancellation",
+  "def-weil-unramified-morphism",
+  "def-pc-fibre-product",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0DT7 (lemma-etale-equivalence-relation), proof; the last sentence expanded using the given maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An unramified relation on a scheme with identity inverse and composition maps is an equivalence relation if it is an equivalence relation on algebraically closed field points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.instSetoid\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → Setoid (X.PartialMap Y)\", \"doc\": \"The setoid structure on partial maps between two schemes $X$ and $Y$, where two partial maps are equivalent if they agree on an open subset of the source scheme.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {X : AlgebraicGeometry.Scheme}\\n  {f₁ f₂ : (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })},\\n  f₁ = f₂ ↔\\n    ∃ (e : f₁.fst = f₂.fst),\\n      f₁.snd = CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.residueF\", \"doc\": \"For a scheme $X$ and points $x, y \\\\in X$, if $x = y$, then the residue fields $\\\\kappa(x)$ and $\\\\kappa(y)$ are isomorphic via the identity isomorphism on $\\\\kappa(x)$.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The composition of two formally unramified morphisms of schemes is also formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is multiplicative; that is, the composition of two formally unramified morphisms of schemes is again formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X) ≃\\n        (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etaleness, unramifiedness and monomorphism instances do not give the geometric equivalence-relation criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EquivalenceRelation\", \"unramified\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etaleness, unramifiedness and monomorphism instances do not give the geometric equivalence-relation criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "equivalence.relation|unramified",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"22\", \"text\": \"- formally unramified\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"44\", \"text\": \"instance : DescendsAlong @FormallyUnramified (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"45\", \"text\": \"  HasRingHomProperty.descendsAlong_flat RingHom.FormallyUnramified.codescendsAlong_faithfullyFlat\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"118\", \"text\": \"instance (priority := 900) [Etale f] : FormallyUnramified f where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"119\", \"text\": \"  formallyUnramified_appLE {_} hU {_} hV e :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"120\", \"text\": \"    (f.etale_appLE hU hV e).formallyUnramified\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"124\", \"text\": \"    @Etale (@LocallyOfFiniteType ⊓ @FormallyUnramified) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.RingTheory.RingHom.Unramified\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Unramified.LocalRing\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"14\", \"text\": \"# Formally unramified morphisms\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"16\", \"text\": \"A morphism of schemes `f : X ⟶ Y` is formally unramified if for each affine `U ⊆ Y` and\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"17\", \"text\": \"`V ⊆ f ⁻¹' U`, the induced map `Γ(Y, U) ⟶ Γ(X, V)` is formally unramified.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"line\": \"239\", \"text\": \"/-- An equivalence relation on `Σ i, D.U i` that holds iff `𝖣.ι i x = 𝖣.ι j y`.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etaleness, unramifiedness and monomorphism instances do not give the geometric equivalence-relation criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric point criterion for an etale pre relation of schemes to be a monomorphic equivalence relation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \"[Mono f] : UniversallyInjective f\", \"doc\": \"Every monomorphism in the category of schemes is universally injective. That is, if $ f : X \\to Y $ is a monomorphism (i.e., a left-cancellative morphism in the category of schemes), then for every bas\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [IsEtale (f ≫ g)] [LocallyOfFiniteType g] [FormallyUnramified g] : IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[Mono f] : IsSeparated f\", \"doc\": \"Every monomorphism of schemes is a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instMonoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Preimmersion\", \"type\": \"{X Y} (f : X ⟶ Y) [IsPreimmersion f] : Mono f\", \"doc\": \"Every preimmersion between schemes is a monomorphism in the category of schemes, meaning that for any pair of morphisms $ Z \\to X $ with a common domain, if their compositions with the preimmersion $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSeparatedOfMonoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [Mono f] : QuasiSeparated f\", \"doc\": \"Every monomorphism $ f : X \\to Y $ of schemes is quasi-separated, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etaleness, unramifiedness and monomorphism instances do not give the geometric equivalence-relation criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme relation with etale projections, injectivity on algebraically closed field points implies monomorphism, and identity inverse composition yield an equivalence relation",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme, AlgebraicGeometry.instIsZariskiLocalAtTargetMonomorphismsScheme, AlgebraicGeometry.IsPreimmersion.instMonoScheme, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsSeparated.isSeparated_of_mono. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give morphism properties or instances, not the relation criterion with its three operations"
+  },
+  {
+   "tool": "grep",
+   "query": "equivalence.relation|diagonal.*(mono|unramified)|mono.*diagonal",
+   "results": "Actual logged search: 7 hits; Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Gluing.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give morphism properties or instances, not the relation criterion with its three operations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An unramified morphism of schemes injective on algebraically closed field valued points is a monomorphism",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme, AlgebraicGeometry.IsOpenImmersion.mono, AlgebraicGeometry.IsPreimmersion.instMonoScheme, AlgebraicGeometry.Scheme.Hom.injective, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.UniversallyInjective.mk, AlgebraicGeometry.instQuasiSeparatedOfMonoScheme, AlgebraicGeometry.IsSeparated.isSeparated_of_mono. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give morphism properties or instances, not the relation criterion with its three operations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mono, AlgebraicGeometry.IsEtale",
+   "results": "Actual logged search: 0 hits; . loogle: unknown identifier 'AlgebraicGeometry.IsEtale'",
+   "date": "2026-10-23",
+   "verdict": "no usable result: Loogle does not recognize the supplied IsEtale identifier"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallyUnramified\", \"Mono\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: second Loogle pattern does not find a relation criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-keel-mori-finite-inertia-quotient",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Geometric-point criterion for an etale equivalence relation.",
+   "via": [
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-unramified-geometric-equivalence-relation",
+  "worker": "stage1",
+  "summary": "Checked Tag 0DT7 and the scheme-level cancellation input; all inputs already exist as Mathlib leaves or definitions. Expanded geometric-point surjectivity, diagonal left cancellation, and all three equivalence-relation axioms. No statement change and no new nodes.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/coarse-quotient prerequisite chain is retained. This item realizes the Keel--Mori geometric equivalence-relation input, using the exact Tag 0DT7 diagonal proof. No matching statement found in the current complete blueprint."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-853de6b64",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-853de6b64 (reviewer sub-agent of L); spot-checked: Read Stacks groupoids.tex Tag 0DT7 (lemma-etale-equivalence-relation) with its proof, and morphisms.tex 02GG(1) and 02GE. The statement is unchanged from live (étale is a stronger hypothesis than the source's unramified; the c-convention t(r)=s(r') matches the source's j=(t,s)/pr_02; 'identifies' means injective, as Stacks intends). There are no new nodes and no re-split note; the base proof was empty. Step 1: s is unramified, p_1∘j=s, and lem-sfb-scheme-unramified-composition-cancellation (same unit, Mathlib leaf; its statement has no condition on v) makes j unramified; def-weil-unramified-morphism (LFT plus open-immersion diagonal) makes Δ_j an open immersion. Steps 2-4 are correctly marked elementary: injectivity on K-points over S gives q=d∘a; every z∈P is reached through the algebraic closure of κ(z) by the bijection in lem-weil-pbc-morphism-from-spec-field; a surjective open immersion is an iso by def-weil-open-immersion; left cancellation holds for every T, including non-reduced T. Step 5 gives the witnesses e∘x, i∘r and c∘(r,r') as S-maps. Route: no statement outside the unit, no SGA. Duplicate search (rg -L for 0DT7 and for monomorphism/geometric-point/unramified) found only the parent and lem-sfb-etale-local-moduli-gluing, an unsplit stack-gluing statement that is not a duplicate. Edge cases: U empty, R=U, and two copies of U (excluded by the injectivity hypothesis, which is essential). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleGeometricEquivalenceRelation",
+  "declaration": "AlgebraicGeometry.etale_geometric_equivalence_relation",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGeometricEquivalenceRelation.lean",
+  "statement": "theorem etale_geometric_equivalence_relation (S U R : Scheme.{u}) (f : U ⟶ S) (j : R ⟶ pullback f f) (e : U ⟶ R) (i : R ⟶ R) (c : pullback (j ≫ pullback.snd f f) (j ≫ pullback.fst f f) ⟶ R) [Etale (j ≫ pullback.fst f f)] [Etale (j ≫ pullback.snd f f)] (he₁ : e ≫ j ≫ pullback.fst f f = 𝟙 U) (he₂ : e ≫ j ≫ pullback.snd f f = 𝟙 U) (hi₁ : i ≫ j ≫ pullback.fst f f = j ≫ pullback.snd f f) (hi₂ : i ≫ j ≫ pullback.snd f f = j ≫ pullback.fst f f) (hc₁ : c ≫ j ≫ pullback.fst f f = pullback.fst (j ≫ pullback.snd f f) (j ≫ pullback.fst f f) ≫ (j ≫ pullback.fst f f)) (hc₂ : c ≫ j ≫ pullback.snd f f = pullback.snd (j ≫ pullback.snd f f) (j ≫ pullback.fst f f) ≫ (j ≫ pullback.snd f f)) (hgeom : ∀ (K : Type u) [Field K] [IsAlgClosed K] (k : Spec (.of K) ⟶ S), (∀ (a b : Spec (.of K) ⟶ R), a ≫ j ≫ pullback.fst f f ≫ f = k → b ≫ j ≫ pullback.fst f f ≫ f = k → a ≫ j ≫ pullback.fst f f = b ≫ j ≫ pullback.fst f f → a ≫ j ≫ pullback.snd f f = b ≫ j ≫ pullback.snd f f → a = b) ∧ (∀ (x : Spec (.of K) ⟶ U), x ≫ f = k → ∃ (r : Spec (.of K) ⟶ R), r ≫ j ≫ pullback.fst f f = x ∧ r ≫ j ≫ pullback.snd f f = x) ∧ (∀ (x y : Spec (.of K) ⟶ U), x ≫ f = k → y ≫ f = k → (∃ (r : Spec (.of K) ⟶ R), r ≫ j ≫ pullback.fst f f = x ∧ r ≫ j ≫ pullback.snd f f = y) → ∃ (r : Spec (.of K) ⟶ R), r ≫ j ≫ pullback.fst f f = y ∧ r ≫ j ≫ pullback.snd f f = x) ∧ (∀ (x y z : Spec (.of K) ⟶ U), x ≫ f = k → y ≫ f = k → z ≫ f = k → (∃ (r : Spec (.of K) ⟶ R), r ≫ j ≫ pullback.fst f f = x ∧ r ≫ j ≫ pullback.snd f f = y) → (∃ (r : Spec (.of K) ⟶ R), r ≫ j ≫ pullback.fst f f = y ∧ r ≫ j ≫ pullback.snd f f = z) → ∃ (r : Spec (.of K) ⟶ R), r ≫ j ≫ pullback.fst f f = x ∧ r ≫ j ≫ pullback.snd f f = z)) : Mono j ∧ ∀ (T : Scheme.{u}) (g : T ⟶ S), (∀ (x : T ⟶ U), x ≫ f = g → ∃ (r : T ⟶ R), r ≫ j ≫ pullback.fst f f = x ∧ r ≫ j ≫ pullback.snd f f = x) ∧ (∀ (x y : T ⟶ U), x ≫ f = g → y ≫ f = g → (∃ (r : T ⟶ R), r ≫ j ≫ pullback.fst f f = x ∧ r ≫ j ≫ pullback.snd f f = y) → ∃ (r : T ⟶ R), r ≫ j ≫ pullback.fst f f = y ∧ r ≫ j ≫ pullback.snd f f = x) ∧ (∀ (x y z : T ⟶ U), x ≫ f = g → y ≫ f = g → z ≫ f = g → (∃ (r : T ⟶ R), r ≫ j ≫ pullback.fst f f = x ∧ r ≫ j ≫ pullback.snd f f = y) → (∃ (r : T ⟶ R), r ≫ j ≫ pullback.fst f f = y ∧ r ≫ j ≫ pullback.snd f f = z) → ∃ (r : T ⟶ R), r ≫ j ≫ pullback.fst f f = x ∧ r ≫ j ≫ pullback.snd f f = z)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-71850dc6c",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0DT7 (groupoids.tex l.196-237): j:R→pullback f f; Etale on both projections (deliberate specialisation from unramified); e/i/c pinned by coordinate equations; c domain pullback t s = R×_{t,U,s}R with c≫s=pr1≫s, c≫t=pr2≫t, matching the source's pr02 after the j=(s,t) renaming. hgeom has injectivity of R(K)→U(K)² on S-points plus refl/symm/trans (redundant given e,i,c but faithful). Conclusion: Mono j, plus refl/symm/trans of the image of R(T) for every S-scheme T, non-reduced T included. K:Type u is forced by Scheme.{u}; it only weakens the hypothesis and the theorem stays true (proof uses algebraic closures of residue fields, which live in Type u). lean.statement equals the file signature verbatim (script check); stmt_deps unchanged and all Mathlib leaves; only the lean field differs from live; no duplicate in Mathlib or side-live lean/Sheaf; docstrings give source place and blueprint id; proof is sorry; report has Worker report and Second reading by Q04. Nothing compiled because no file was changed. No findings."
+ }
+}

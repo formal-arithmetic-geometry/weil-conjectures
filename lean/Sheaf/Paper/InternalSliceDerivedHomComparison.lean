@@ -5,6 +5,7 @@ Authors: SHEAF group Q30
 -/
 module
 
+public import Sheaf.Paper.InternalSectionDerivedTensorComparison
 public import Sheaf.Paper.InternalSectionTotalComparison
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.CategoryTheory.InternalSectionTensorComparison
@@ -25,6 +26,8 @@ comparison (blueprint: def-sfb-internal-slice-derived-hom-comparison).
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
+set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
@@ -36,6 +39,9 @@ open CategoryTheory.InternalAbelianSheafModule CategoryTheory.MonObj WeilConject
 open scoped TensorProduct
 
 namespace AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison
+
+attribute [local instance 1000001] sectionRingHasSheafCompose
+attribute [local instance] sectionFunctorAdditiveForSite sectionFunctorEquivalenceForSite
 
 universe u₀ v₀ u₁ v₁ u₂ v₂ u₃ v₃
 
@@ -152,6 +158,8 @@ theorem sliceSectionRing_eq :
   delta sliceRingObject sliceRingMonObj
   exact sectionRing_over_eq (Scheme.ProEt.topology X) U (condensedRingObj Λ X)
 
+attribute [local irreducible] sliceRingMonObj
+
 /-- The actual section-action equivalence for B restricted to U. Equality transport
 changes only the two presentations of its section ring, retaining the functor's data.
 Source: Stacks 00YV, 03DH (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
@@ -162,6 +170,33 @@ def sliceEquivalence : SliceInternal Λ X U ≌ SheafOfModules.{u + 1}
     ((sheafCompose ((Scheme.ProEt.topology X).over U)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))
     (sliceSectionRing_eq Λ X U))
+    (sectionModuleEquivalence.{u + 1, u + 1, u} ((Scheme.ProEt.topology X).over U)
+      (sliceRingObject Λ X U))
+
+private theorem section_equivalence_cast_functor_heq
+    {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
+    {A : Type*} [Category.{u + 1} A] (R B : Sheaf J CommRingCat.{u + 1}) (e : R = B)
+    (E : A ≌ SheafOfModules.{u + 1}
+      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :
+    HEq ((Eq.mp (congrArg (fun B ↦ A ≌ SheafOfModules.{u + 1}
+      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj B)) e) E).functor)
+      E.functor := by
+  subst B
+  rfl
+
+/-- The literal-ring equivalence retains the reconstructed-ring forward functor.
+Source: Stacks 00YV, 03DH (blueprint: def-sfb-internal-slice-derived-hom-comparison).
+Proof: equality elimination commutes with projecting the forward functor. -/
+theorem sliceEquivalence_functor_heq :
+    HEq (sliceEquivalence Λ X U).functor
+      (sectionModuleEquivalence.{u + 1, u + 1, u} ((Scheme.ProEt.topology X).over U)
+        (sliceRingObject Λ X U)).functor := by
+  unfold sliceEquivalence
+  exact section_equivalence_cast_functor_heq.{u, u + 2}
+    ((Scheme.ProEt.topology X).over U)
+    (sectionRingSheaf.{u + 1, u + 1, u} ((Scheme.ProEt.topology X).over U)
+      (sliceRingObject Λ X U))
+    ((ring Λ X).over U) (sliceSectionRing_eq Λ X U)
     (sectionModuleEquivalence.{u + 1, u + 1, u} ((Scheme.ProEt.topology X).over U)
       (sliceRingObject Λ X U))
 
@@ -294,7 +329,7 @@ def sliceNativeTensor :
 
 /-- The native total tensor on local internal complexes.
 Source: Stacks 06YL (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-abbrev sliceTotalTensor (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
+def sliceTotalTensor (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
     CochainComplex (SliceInternal Λ X U) ℤ :=
   (sliceCochainMonoidal Λ X U).tensorObj P Q
 
@@ -305,97 +340,12 @@ instance sliceTotalExists (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
     P.HasMapBifunctor Q (curriedTensor (SliceInternal Λ X U)) :=
   comparison_internalTotalExists ((Scheme.ProEt.topology X).over U) (sliceRingObject Λ X U) P Q
 
-section GenericTensorComparison
-
-set_option backward.isDefEq.respectTransparency false
-
-variable {C : Type u₀} [Category.{v₀} C] (J : GrothendieckTopology C)
-  [UnivLE.{max u₀ v₀, u + 1}] [HasSheafify J AddCommGrpCat.{u + 1}]
-  [(J.W (A := AddCommGrpCat.{u + 1})).IsMonoidal]
-  (R : Sheaf J AddCommGrpCat.{u + 1}) [MonObj R] [IsCommMonObj R]
-
-/-- The normalized ordinary witness and its sum-total comparisons.
-Source: Stacks 03EK and 06YL; internal_section_tensor_comparison
-(blueprint: def-sfb-internal-slice-derived-hom-comparison).
-Proof: retain its ordinary witness, its pure-tensor formula and its sum-total
-conjunct. The pure-tensor formula fixes the ordinary isomorphisms uniquely, since
-relative tensor products are generated locally by pure tensors. The sum-total
-formula then fixes each complex isomorphism on all coproduct summands. -/
-theorem sectionTensorWitness :
-    ∃ e : ∀ M N : Mod (Sheaf J AddCommGrpCat.{u + 1}) R,
-      (sectionModuleEquivalence J R).functor.obj (M ⊗ N) ≅
-        (sectionModuleEquivalence J R).functor.obj M ⊗
-          (sectionModuleEquivalence J R).functor.obj N,
-    (∀ (M N : Mod (Sheaf J AddCommGrpCat.{u + 1}) R) (U : Cᵒᵖ)
-        (x : M.X.obj.obj U) (y : N.X.obj.obj U),
-      ((e M N).hom.val.app U) (comparison_internalTmul J R M N U x y) =
-        comparison_sectionTmul J R
-          ((sectionModuleEquivalence J R).functor.obj M)
-          ((sectionModuleEquivalence J R).functor.obj N) U x y) ∧
-    (∀ K L : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u + 1}) R) ℤ,
-      ∃ t : ((sectionModuleEquivalence J R).functor.mapHomologicalComplex
-          (ComplexShape.up ℤ)).obj (CochainComplex.mapBifunctor K L (curriedTensor _)) ≅
-        CochainComplex.mapBifunctor
-          (((sectionModuleEquivalence J R).functor.mapHomologicalComplex
-            (ComplexShape.up ℤ)).obj K)
-          (((sectionModuleEquivalence J R).functor.mapHomologicalComplex
-            (ComplexShape.up ℤ)).obj L) (curriedTensor _),
-      ∀ (p q n : ℤ) (h : p + q = n),
-        (sectionModuleEquivalence J R).functor.map
-            (CochainComplex.ιMapBifunctor K L (curriedTensor _) p q n h) ≫ t.hom.f n =
-          (e (K.X p) (L.X q)).hom ≫ CochainComplex.ιMapBifunctor
-            (((sectionModuleEquivalence J R).functor.mapHomologicalComplex
-              (ComplexShape.up ℤ)).obj K)
-            (((sectionModuleEquivalence J R).functor.mapHomologicalComplex
-              (ComplexShape.up ℤ)).obj L) (curriedTensor _) p q n h) := by
-  obtain ⟨e, e₀, h⟩ := (internal_section_tensor_comparison J R).2
-  exact ⟨e, h.1, h.2.2.2.2.2.2.2.1⟩
-
-/-- The normalized ordinary comparison, chosen before specializing the site.
-This keeps the large normalization proposition out of concrete choice expressions.
-Source: Stacks 03EK; internal_section_tensor_comparison
-(blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-def sectionOrdinaryTensorIso
-    (M N : Mod (Sheaf J AddCommGrpCat.{u + 1}) R) :=
-  (sectionTensorWitness J R).choose M N
-
-attribute [local irreducible] sectionOrdinaryTensorIso
-
-set_option backward.isDefEq.respectTransparency false in
-private theorem sectionRawTensorComparison
-    (P Q : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u + 1}) R) ℤ) :
-    ∃ t : ((sectionModuleEquivalence J
-        R).functor.mapHomologicalComplex (.up ℤ)).obj
-          (CochainComplex.mapBifunctor P Q
-            (curriedTensor (Mod (Sheaf J AddCommGrpCat.{u + 1}) R))) ≅
-      CochainComplex.mapBifunctor
-        (((sectionModuleEquivalence J
-          R).functor.mapHomologicalComplex (.up ℤ)).obj P)
-        (((sectionModuleEquivalence J
-          R).functor.mapHomologicalComplex (.up ℤ)).obj Q)
-        (curriedTensor _),
-      ∀ (p q n : ℤ) (h : p + q = n),
-        (sectionModuleEquivalence J
-          R).functor.map
-            (CochainComplex.ιMapBifunctor P Q (curriedTensor _) p q n h) ≫ t.hom.f n =
-          (sectionOrdinaryTensorIso J R (P.X p) (Q.X q)).hom ≫
-            CochainComplex.ιMapBifunctor
-              (((sectionModuleEquivalence J
-                R).functor.mapHomologicalComplex (.up ℤ)).obj P)
-              (((sectionModuleEquivalence J
-                R).functor.mapHomologicalComplex (.up ℤ)).obj Q)
-              (curriedTensor _) p q n h := by
-  delta sectionOrdinaryTensorIso
-  exact (sectionTensorWitness J R).choose_spec.2 P Q
-
-end GenericTensorComparison
-
 set_option backward.isDefEq.respectTransparency false in
 /-- Ordinary local tensor comparison with the dependency's pure-tensor normalization.
 Its target uses the reconstructed presentation of the restricted section ring.
 Source: Stacks 03EK (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
 def sliceOrdinaryTensorIso (M N : SliceInternal Λ X U) :=
-  sectionOrdinaryTensorIso ((Scheme.ProEt.topology X).over U) (sliceRingObject Λ X U) M N
+  ordinaryTensorIsoForSite ((Scheme.ProEt.topology X).over U) (sliceRingObject Λ X U) M N
 
 attribute [local irreducible] sliceOrdinaryTensorIso
 
@@ -403,12 +353,10 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The local sum-total comparison with the dependency's fixed ordinary witness.
 Source: Stacks 03EK, 06YL; internal_section_tensor_comparison
 (blueprint: def-sfb-internal-slice-derived-hom-comparison).
-Proof: retain the pure-tensor and sum-total clauses together in
-sectionTensorWitness, then specialize the sum-total clause to B restricted to U
-and its selected normalized ordinary tensor witness. The resulting summand
-equations are precisely the displayed equations. Each total degree is
-a coproduct of these summands, so these equations determine the isomorphism
-uniquely, and the ordinary witness is fixed by its pure-tensor formula. -/
+Proof: specialize the generic pure-tensor-normalized ordinary map and its
+signed-total comparison to the restricted ring object. The generic summand
+formula is precisely the displayed equation. Each total degree is a coproduct
+of these summands, so the equations uniquely determine the comparison. -/
 theorem sliceRawComplexTensorComparison (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
     ∃ t : ((sectionModuleEquivalence ((Scheme.ProEt.topology X).over U)
         (sliceRingObject Λ X U)).functor.mapHomologicalComplex (.up ℤ)).obj
@@ -430,15 +378,35 @@ theorem sliceRawComplexTensorComparison (P Q : CochainComplex (SliceInternal Λ 
               (((sectionModuleEquivalence ((Scheme.ProEt.topology X).over U)
                 (sliceRingObject Λ X U)).functor.mapHomologicalComplex (.up ℤ)).obj Q)
               (curriedTensor _) p q n h := by
-  delta sliceOrdinaryTensorIso
-  exact sectionRawTensorComparison ((Scheme.ProEt.topology X).over U) (sliceRingObject Λ X U) P Q
+  refine ⟨ordinaryComplexTensorIsoForSite ((Scheme.ProEt.topology X).over U)
+    (sliceRingObject Λ X U) P Q, ?_⟩
+  simpa only [sliceOrdinaryTensorIso, sectionModuleEquivalence, Functor.asEquivalence] using
+    ordinaryComplexTensorIsoForSite_summand ((Scheme.ProEt.topology X).over U)
+      (sliceRingObject Λ X U) P Q
+
+/-- Termwise sections before changing the presentation of the restricted section ring.
+Source: Stacks 03DH, 06YL (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
+def sliceRawComplexForward :=
+  (sectionModuleFunctor.{u + 1, u + 1, u} ((Scheme.ProEt.topology X).over U)
+    (sliceRingObject Λ X U)).mapHomologicalComplex (.up ℤ)
+
+/-- The fixed raw total-map type, named before transporting its coefficient presentation.
+Source: Stacks 06YL (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
+def SliceRawComplexTensorType (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :=
+  (sliceRawComplexForward Λ X U).obj (sliceTotalTensor Λ X U P Q) ≅
+    (coefficientTotalTensor.{u, u + 1, u} ((Scheme.ProEt.topology X).over U)
+      (sectionRingSheaf.{u + 1, u + 1, u} ((Scheme.ProEt.topology X).over U)
+        (sliceRingObject Λ X U))).obj
+      ((sliceRawComplexForward Λ X U).obj P, (sliceRawComplexForward Λ X U).obj Q)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The actual summand-normalized comparison supplied by the dependency. Every
 summand equation in sliceRawComplexTensorComparison determines this map uniquely.
 Source: Stacks 03EK, 06YL (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-def sliceRawComplexTensorIso (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :=
-  (sliceRawComplexTensorComparison Λ X U P Q).choose
+def sliceRawComplexTensorIso (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
+    SliceRawComplexTensorType Λ X U P Q :=
+  ordinaryComplexTensorIsoForSite ((Scheme.ProEt.topology X).over U)
+    (sliceRingObject Λ X U) P Q
 
 -- Vary only the presentation of the section ring. Explicit functor equalities
 -- keep equality transport from unfolding native tensor constructions.
@@ -467,15 +435,6 @@ private def totalTypeAt
     (coefficientTotalTensor.{u, u + 1, u} ((Scheme.ProEt.topology X).over U) S).obj
       ((complexAt Λ X U S e).obj P, (complexAt Λ X U S e).obj Q)
 
-private def rawNative (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
-    totalTypeAt Λ X U P Q _ rfl := by
-  exact sliceRawComplexTensorIso Λ X U P Q
-
-private theorem unique_heq_of_type_eq {A B : Type (u + 1)} (h : A = B) (b : B) :
-    ∃! a : A, HEq a b := by
-  cases h
-  exact ⟨b, HEq.rfl, fun a ha ↦ eq_of_heq ha⟩
-
 private theorem family_type_eq {A : Type u₀} (a : A)
     (T : ∀ b : A, a = b → Type (u + 1)) (b : A) (h : a = b) :
     T b h = T a rfl := by
@@ -498,6 +457,38 @@ private theorem totalTypeAt_eq (P Q : CochainComplex (SliceInternal Λ X U) ℤ)
   unfold totalTypeAt
   rw [complexAt_eq]
 
+/-- The literal and reconstructed section-ring presentations give equal total-map types.
+Source: Stacks 03DH, 06YL (blueprint: def-sfb-internal-slice-derived-hom-comparison).
+Proof: the generic dependent family of total-map types transports along
+sliceSectionRing_eq; equality elimination identifies it with the raw type. -/
+theorem sliceTotalComparison_type_eq (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
+    ((sliceComplexForward Λ X U).obj (sliceTotalTensor Λ X U P Q) ≅
+      (coefficientTotalTensor.{u, u + 1, u} ((Scheme.ProEt.topology X).over U)
+        ((ring Λ X).over U)).obj
+        ((sliceComplexForward Λ X U).obj P, (sliceComplexForward Λ X U).obj Q)) =
+      SliceRawComplexTensorType Λ X U P Q := by
+  rw [← totalTypeAt_eq]
+  exact family_type_eq _ (totalTypeAt Λ X U P Q) _ (sliceSectionRing_eq Λ X U)
+
+/-- The uniquely summand-normalized local total comparison.
+Source: Stacks 03EK, 06YL (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
+@[irreducible]
+def sliceTotalComparison (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
+    (sliceComplexForward Λ X U).obj (sliceTotalTensor Λ X U P Q) ≅
+      (coefficientTotalTensor.{u, u + 1, u} ((Scheme.ProEt.topology X).over U)
+        ((ring Λ X).over U)).obj
+        ((sliceComplexForward Λ X U).obj P, (sliceComplexForward Λ X U).obj Q) :=
+  cast (sliceTotalComparison_type_eq Λ X U P Q).symm
+    (sliceRawComplexTensorIso Λ X U P Q)
+
+/-- The explicit equality transport retains the entire fixed raw comparison.
+Source: Stacks 03DH, 06YL (blueprint: def-sfb-internal-slice-derived-hom-comparison).
+Proof: heterogeneous equality of a value and its cast follows by equality elimination. -/
+theorem sliceTotalComparison_heq (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
+    HEq (sliceTotalComparison Λ X U P Q) (sliceRawComplexTensorIso Λ X U P Q) := by
+  unfold sliceTotalComparison
+  exact cast_heq _ _
+
 /-- The uniquely transported local total comparison, retaining every summand map.
 HEq bridges only the explicit/native totals and the two presentations of the same
 section ring; it compares with the entire fixed raw isomorphism.
@@ -513,19 +504,10 @@ theorem sliceTotalComparison_existsUnique (P Q : CochainComplex (SliceInternal �
         ((ring Λ X).over U)).obj
         ((sliceComplexForward Λ X U).obj P, (sliceComplexForward Λ X U).obj Q),
       HEq c (sliceRawComplexTensorIso Λ X U P Q) := by
-  rw [← totalTypeAt_eq]
-  exact unique_heq_of_type_eq
-    (family_type_eq _ (totalTypeAt Λ X U P Q) _ (sliceSectionRing_eq Λ X U))
-    (rawNative Λ X U P Q)
+  refine ⟨sliceTotalComparison Λ X U P Q, sliceTotalComparison_heq Λ X U P Q, ?_⟩
+  intro a ha
+  exact eq_of_heq (ha.trans (sliceTotalComparison_heq Λ X U P Q).symm)
 
-/-- The uniquely summand-normalized local total comparison.
-Source: Stacks 03EK, 06YL (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-def sliceTotalComparison (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
-    (sliceComplexForward Λ X U).obj (sliceTotalTensor Λ X U P Q) ≅
-      (coefficientTotalTensor.{u, u + 1, u} ((Scheme.ProEt.topology X).over U)
-        ((ring Λ X).over U)).obj
-        ((sliceComplexForward Λ X U).obj P, (sliceComplexForward Λ X U).obj Q) :=
-  (sliceTotalComparison_existsUnique Λ X U P Q).choose
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The actual lax localization map for the native local tensor.
@@ -539,59 +521,56 @@ def sliceLocalizationTensorMap (P Q : CochainComplex (SliceInternal Λ X U) ℤ)
 
 set_option backward.isDefEq.respectTransparency true
 
+/-- An isomorphism with a fixed normalization condition, independent of its endpoints.
+Source: Stacks 06YS (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
+structure NormalizedSliceTensorComparisonData {I : Type u₀} (condition : I → Prop) where
+  iso : I
+  normalization : condition iso
+
+/-- Closed structures for the fixed local ringed-site Hom, with named endpoints.
+Source: Stacks 08J9 (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
+def SliceClosedStructureType := CoefficientClosedStructure
+  (derivedInternalHomOfUniverses.{u + 1, u, u, u + 1}
+    ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U))
+
+/-- Tensor models for that fixed local closed structure.
+Source: Stacks 06YS (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
+def SliceTensorModelsType (SU : SliceClosedStructureType Λ X U) :=
+  CoefficientTensorModels.{u, u + 1, u, u + 1}
+    ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U) SU
+
+/-- Natural comparisons of the fixed native slice tensor.
+Source: Stacks 06YS (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
+def SliceTensorComparisonIsoType (SU : SliceClosedStructureType Λ X U) :=
+  sliceNativeTensor Λ X U ⋙ (sliceForward Λ X U) ≅
+    ((sliceForward Λ X U).prod (sliceForward Λ X U)) ⋙ SU.tensor
+
 /-- Representative normalization of the local derived tensor comparison, for every
 pair with K-flat section images. No derived input is required to be flat.
 Source: Stacks 06YS, 08J9 (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
 def sliceTensorComparisonNormalized
-    (SU : CoefficientClosedStructure
-      (derivedInternalHomOfUniverses.{u + 1, u, u, u + 1}
-        ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U)))
-    (TU : CoefficientTensorModels.{u, u + 1, u, u + 1}
-      ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U) SU)
-    (iso : sliceNativeTensor Λ X U ⋙ (sliceForward Λ X U) ≅
-      ((sliceForward Λ X U).prod
-        (sliceForward Λ X U)) ⋙ SU.tensor) : Prop :=
-  ∀ (P Q : CochainComplex (SliceInternal Λ X U) ℤ)
-      (hP : CochainComplex.IsKFlatIndependentCoefficients
-        (J := (Scheme.ProEt.topology X).over U) (R := (ring Λ X).over U)
-        ((sliceComplexForward Λ X U).obj P))
-      (hQ : CochainComplex.IsKFlatIndependentCoefficients
-        (J := (Scheme.ProEt.topology X).over U) (R := (ring Λ X).over U)
-        ((sliceComplexForward Λ X U).obj Q)),
-    HEq (iso.hom.app ((DerivedCategory.Q (C := SliceInternal Λ X U)).obj P,
-        (DerivedCategory.Q (C := SliceInternal Λ X U)).obj Q) ≫
-      SU.tensor.map
-        (X := ((sliceForward Λ X U).obj
-            ((DerivedCategory.Q (C := SliceInternal Λ X U)).obj P),
-          (sliceForward Λ X U).obj
-            ((DerivedCategory.Q (C := SliceInternal Λ X U)).obj Q)))
-        (Y := ((DerivedCategory.Q (C := SliceModules Λ X U)).obj
-            ((sliceComplexForward Λ X U).obj P),
-          (DerivedCategory.Q (C := SliceModules Λ X U)).obj
-            ((sliceComplexForward Λ X U).obj Q)))
-        ((sliceLocalizationIso Λ X U).hom.app P, (sliceLocalizationIso Λ X U).hom.app Q))
-      ((sliceForward Λ X U).map (sliceLocalizationTensorMap Λ X U P Q) ≫
-        (sliceLocalizationIso Λ X U).hom.app (sliceTotalTensor Λ X U P Q) ≫
-        (DerivedCategory.Q (C := SliceModules Λ X U)).map
-          (sliceTotalComparison Λ X U P Q).hom ≫
-        (CoefficientTensorModels.iso.{u, u + 1, u, u + 1}
-          ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U) SU TU
-          ((sliceComplexForward Λ X U).obj P) ((sliceComplexForward Λ X U).obj Q) hP hQ).hom)
+    (SU : SliceClosedStructureType Λ X U)
+    (TU : SliceTensorModelsType Λ X U SU)
+    (iso : SliceTensorComparisonIsoType Λ X U SU) : Prop :=
+  tensorLocalizationSquareHEq DerivedCategory.Q DerivedCategory.Q
+    (sliceComplexForward Λ X U) (sliceForward Λ X U) (sliceLocalizationIso Λ X U)
+    (sliceNativeTensor Λ X U)
+    (MonoidalCategory.tensor (CochainComplex (SliceInternal Λ X U) ℤ)) SU.tensor
+    (coefficientTotalTensor.{u, u + 1, u} ((Scheme.ProEt.topology X).over U)
+      ((ring Λ X).over U))
+    (sliceLocalizationTensorMap Λ X U) (sliceTotalComparison Λ X U)
+    (CochainComplex.IsKFlatIndependentCoefficients
+      (J := (Scheme.ProEt.topology X).over U) (R := (ring Λ X).over U))
+    (CoefficientTensorModels.iso.{u, u + 1, u, u + 1}
+      ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U) SU TU) iso
 
 /-- Comparison of native local derived tensors, fixed by their K-flat models.
 Source: Stacks 06YS, 08J9 (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-structure SliceTensorComparison
-    (SU : CoefficientClosedStructure
-      (derivedInternalHomOfUniverses.{u + 1, u, u, u + 1}
-        ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U)))
-    (TU : CoefficientTensorModels.{u, u + 1, u, u + 1}
-      ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U) SU) where
-  /-- Natural tensor comparison for all local derived objects. -/
-  iso : sliceNativeTensor Λ X U ⋙ (sliceForward Λ X U) ≅
-    ((sliceForward Λ X U).prod
-      (sliceForward Λ X U)) ⋙ SU.tensor
-  /-- The localization square with the canonical summand comparison. -/
-  normalization : sliceTensorComparisonNormalized Λ X U SU TU iso
+abbrev SliceTensorComparison
+    (SU : SliceClosedStructureType Λ X U)
+    (TU : SliceTensorModelsType Λ X U SU) :=
+  NormalizedSliceTensorComparisonData (I := SliceTensorComparisonIsoType Λ X U SU)
+    (sliceTensorComparisonNormalized Λ X U SU TU)
 
 private theorem nativeMonoidal_eq_localization
     (C : Type u₀) [Category.{v₀} C] [Abelian C] [IsGrothendieckAbelian.{v₀} C]

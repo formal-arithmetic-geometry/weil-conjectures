@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-compact-support-ordinary-direct-evaluation-sections",
+ "kind": "statement",
+ "title": "Section normalization of ordinary native direct evaluation",
+ "statement": "For a prime $l$, a finite extension $E/\\mathbf Q_l$, and the positive coefficient system $A_n=\\mathcal O_E/\\mathfrak m_E^{n+1}$, let $g:Z\\to Y$ be any scheme morphism. Compose the native ordinary module evaluation comparison moduleEvalP [def-sp-varying-ring-operations] with compactSupportDirectModel [def-weil-compact-support-native-system-evaluation], obtaining $c_n:g_*^{\\mathrm{sys}};e_n^Y\\cong e_n^Z;g_*^{A_n}$. For every coefficient-system module $M$, pro-etale object $V$ on $Y$, and section $x$ of $e_n^Y(g_*^{\\mathrm{sys}}M)$ on $V$, the section $(c_{n,M})_V(x)$ is heterogeneously equal to $x$ under the unchanged underlying section carriers. This also specifies the real construction compactSupportOrdinaryDirectEvaluation of $c_n$.",
+ "stmt_deps": [
+  "def-sp-varying-ring-operations",
+  "def-weil-compact-support-native-system-evaluation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03DI and 0D6E; section formula for ordinary direct-image evaluation."
+ },
+ "proof": [
+  {
+   "text": "The unique normalization defining moduleEvalP states that its underlying section map is identity. compactSupportDirectModel is constructed with identity underlying section maps. Unfold the composite only far enough to see the latter identity, and apply the normalization of moduleEvalP. The resulting equality is stated heterogeneously to retain the two named module structures on the same section carrier.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-weil-compact-support-native-system-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-operations",
+  "def-weil-compact-support-native-system-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03DI and 0D6E; the two ordinary comparisons are identity on section carriers."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image evaluation of inverse systems commutes with coefficient restriction transitions",
+   "results": "8 hits, including AdicCompletion.transitionMap_comp_eval, Module.DirectLimit.of_f and InverseSystem.limit; none concerns derived module-sheaf direct image.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a derived system commutes with coefficient transitions under extension by zero and direct image",
+   "results": "8 hits, including AdicCompletion.transitionMap_comp_eval and InverseSystem.globalEquiv_compatibility; none treats module-sheaf derived evaluation.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits, including CategoryTheory.NatTrans.naturality. It supplies the categorical naturality used to paste squares but not either geometric square.",
+   "date": "2026-10-27",
+   "verdict": "Generic naturality only."
+  },
+  {
+   "tool": "grep",
+   "query": "evalP.*[Tt]ransition|evalJ.*[Tt]ransition|[Tt]ransition.*eval[JP]",
+   "results": "0 hits in Mathlib. Local project search finds SystemPushforwardRestrictionTransition in different Geometry coordinates, and the assigned compact-support theorem.",
+   "date": "2026-10-27",
+   "verdict": "No native single-operation statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Heterogeneously equal functions take heterogeneously equal arguments to equal values",
+   "results": "8 hits; congr_heq gives exactly the application of the heterogeneous section formulas, without equality of function-domain presentations.",
+   "date": "2026-10-27",
+   "verdict": "Use Mathlib.Logic.Basic congr_heq for the pointwise section calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "congr_heq",
+   "results": "1 hit: congr_heq.",
+   "date": "2026-10-27",
+   "verdict": "Use to apply the two horizontal section formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "congr_heq",
+   "results": "3 hits, including Mathlib/Logic/Basic.lean:114 (congr_heq) and :122 (dcongr_heq).",
+   "date": "2026-10-27",
+   "verdict": "The nondependent congr_heq suffices."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportNativeDirectTransition",
+  "date": "2026-10-27",
+  "group": "C9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-ordinary-direct-transition",
+   "place": "The identity-on-sections property of ordinary evaluation used in the section square.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportOrdinaryDirectEvaluationSections",
+  "file": "lean/Sheaf/Paper/CompactSupportOrdinaryDirectEvaluationSections.lean",
+  "declaration": "WeilConjectures.compactSupportOrdinaryDirectEvaluation_sections",
+  "declarations": [
+   "WeilConjectures.compactSupportOrdinaryDirectEvaluation",
+   "WeilConjectures.compactSupportOrdinaryDirectEvaluation_sections"
+  ],
+  "statement": "theorem compactSupportOrdinaryDirectEvaluation_sections {Z Y : Scheme.{u}} (g : Z ⟶ Y)\n    (n : ℕ) (M : coefficientSequenceModules.{u, u} l E Z) (V : Y.ProEtᵒᵖ)\n    (x : ((coefficientSequenceEvaluation l E Y n).obj\n      ((ProEtale.VaryingRing.push (compactSupportSystemLevel l E)\n        (compactSupportSystemQuotient l E) g).obj M)).val.obj V) :\n    HEq (((compactSupportOrdinaryDirectEvaluation l E g n).hom.app M).val.app V x) x",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261027T034626-L-3667110",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261027T034626-L-3667110",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

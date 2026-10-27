@@ -1,0 +1,324 @@
+{
+ "id": "lem-sfb-pinned-split-root-base-change",
+ "kind": "statement",
+ "title": "Base change preserves pinned split realizations and their based data",
+ "statement": "Let $A\\to C$ be a unital homomorphism between nonzero commutative rings and let $P=(G,T,M,\\Phi,\\Phi^\\vee,\\Delta,(X_\\alpha))$ be a pinned split realization over $A$ of a finite reduced based root datum $\\mathcal R$ [def-sfb-pinned-split-root-realization]. Pullback of the group scheme, torus, characters, cocharacters and named simple-root tangent vectors along $\\operatorname{Spec}C\\to\\operatorname{Spec}A$ [def-weil-affine-spectrum, def-pc-fibre-product] gives a pinned split realization $P_C$ over $C$ of the same abstract based datum $\\mathcal R$. Under the canonical tangent comparison, its root spaces are $C\\otimes_A\\mathfrak g_\\alpha$ and its pinning generators are $1\\otimes X_\\alpha$. This conclusion holds for arbitrary $A\\to C$, including nonflat maps, and respects successive base changes and base change of pinning-compatible isomorphisms.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Section 3.1 and Definition 5.1.1, printed pp.81-84 and 136; Section 4.1, root groups and coroots, pp.107-110; Definition 6.1.1, p.186; the base-change use immediately after Theorem 6.1.17, p.197 Read online; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}A$, $S_C=\\operatorname{Spec}C$ and $G_C=G\\times_S S_C$, $T_C=T\\times_S S_C$. Pull back multiplication, identity and inverse by the fibre-product universal property. Each group identity remains an equality: its two sides have identical projections to $G$ and $S_C$, so uniqueness in that universal property equates them. The same argument pulls back the inclusion and any group homomorphism, and preserves composition and inverses.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Section 3.1, definition of reductive group schemes; elementary pullback of the group diagrams."
+   }
+  },
+  {
+   "text": "The base-changed $G_C\\to S_C$ is smooth by clause (2) of [lem-pc-proper-base-change], affine by clause (1) of [lem-weil-pbc-affine-morphism-permanence], and of finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. The base change of the closed immersion $T\\to G$ is closed by [lem-weil-pbc-closed-immersion-base-change]. These statements allow an arbitrary base morphism.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VB (lemma-base-change-smooth), 01SD (lemma-base-change-affine), 01TS (lemma-base-change-finite-presentation), 01QR (lemma-base-change-closed-immersion)."
+   }
+  },
+  {
+   "text": "A geometric point $\\operatorname{Spec}\\Omega\\to S_C$ is also a geometric point of $S$ by composition. The universal property identifies $(G_C)_\\Omega$ with $G_\\Omega$ and $(T_C)_\\Omega$ with $T_\\Omega$, compatibly with inclusion and all group maps: both iterated products classify the same pairs of maps. Thus connectedness, reductivity, maximality of the torus, and the prescribed geometric root--coroot correspondence hold on this fibre because they hold for $P$ at that same geometric point of $S$. This uses every geometric point in the given definition, not only one chosen algebraic closure per point.",
+   "uses": [
+    "def-weil-geometric-point",
+    "def-pc-fibre-product",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Section 3.1, printed p.81, Definition 3.1.1; Definition 5.1.1, printed p.136: check the given fibrewise conditions on the identical geometric fibre."
+   }
+  },
+  {
+   "text": "The affine fibre-product formula gives $T_C=\\operatorname{Spec}(C\\otimes_A A[M])$. The maps $c\\otimes\\sum_m a_m e_m\\mapsto\\sum_m c f(a_m)e_m$ and $\\sum_m c_m e_m\\mapsto\\sum_m c_m\\otimes e_m$ are inverse algebra maps to $C[M]$ by the finite-basis expansion and the tensor relations. They preserve coproduct, counit and antipode on each $e_m$. Consequently $T_C=D_C(M)$. A character $m$ and a cocharacter $y\\in M^\\vee$ retain the maps $t\\mapsto e_m$ on character coordinates and $e_m\\mapsto t^{\\langle m,y\\rangle}$ on cocharacter coordinates. The integer pairing, roots, coroots and the chosen base in the abstract lattice are unchanged.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sfb-ring-diagonalizable-group",
+    "def-weil-pbc-module-tensor-product",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Appendix B.1, printed p.280, group algebra construction; Definition 5.1.1, printed p.136. Explicit basis calculation."
+   }
+  },
+  {
+   "text": "Write $G=\\operatorname{Spec}B$ and $u:B\\to A$ for its identity. The smooth-affine criterion makes $B$ a smooth $A$-algebra. A tangent point is exactly $b\\mapsto u(b)+\\epsilon d(b)$; comparing products modulo $\\epsilon^2$ gives $d(bb')=u(b)d(b')+u(b')d(b)$. Hence $\\mathfrak g=T(B,u)$. This identification respects its module structure: if $\\mu^*b=\\sum_i b_i\\otimes b_i'$, multiplication of tangent points has coefficient $\\sum_i d(b_i)u(b_i')+u(b_i)d'(b_i')=d(b)+d'(b)$ by the two unit identities, and $\\epsilon\\mapsto a\\epsilon$ gives $ad$. Apply [lem-sfb-smooth-augmented-tangent-scalar-extension] to obtain $\\theta_C:C\\otimes_A\\mathfrak g\\simeq\\operatorname{Lie}(G_C)$, with coefficient formula $c\\otimes d$ acting on $c'\\otimes b$ as $cc'f(d(b))$. The affine fibre-product formula identifies its coordinate algebra with $C\\otimes_A B$.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-sfb-smooth-augmented-tangent-scalar-extension",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sfb-pinned-split-root-realization",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00RO, 00RV and 00T2; affine smoothness comparison in more-morphisms.tex, Tag 02H6. Dual-number and multiplication coefficient calculations written out."
+   }
+  },
+  {
+   "text": "Let $\\rho:\\mathfrak g\\to A[M]\\otimes_A\\mathfrak g$ be the given coaction of $T=D_A(M)$: conjugation by the universal point $t_A\\in T(A[M])$, whose coordinate map is the identity of $A[M]$ [def-sfb-ring-diagonalizable-group], is an $A[M]$-algebra automorphism $\\kappa_A$ of $B_{A[M]}=A[M]\\otimes_AB$ fixing the identity augmentation, and $\\rho$ is precomposition with $\\kappa_A$ read through $\\theta_{A[M]}$. By step 2 for the base changes along $A\\to A[M]$ and $A\\to C[M]$, with [lem-pc-proper-base-change] and [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] on the affine fibre products [lem-weil-pbc-fibre-product-affine-spectra], $B_{A[M]}$ is smooth over $A[M]$ and $B_C$ over $C$, so the new lemma applies to them. The universal point $t_C\\in T_C(C[M])$ is the image of $t_A$ under $A[M]\\to C[M]$, $ae_m\\mapsto f(a)e_m$, since both send $e_m\\mapsto e_m$; hence the conjugation automorphism $\\kappa_C$ of $C[M]\\otimes_AB=C[M]\\otimes_{A[M]}B_{A[M]}$ is $C[M]\\otimes_{A[M]}\\kappa_A$. Naturality in [lem-sfb-smooth-augmented-tangent-scalar-extension] over the base $A[M]$, with $q=\\kappa_A$ and coefficient ring $C[M]$, says precomposition with $\\kappa_C$ is $C[M]\\otimes_{A[M]}$ of precomposition with $\\kappa_A$. Its tower compatibility for $A\\to A[M]\\to C[M]$ and for $A\\to C\\to C[M]$ identifies both sides with $C[M]\\otimes_A\\mathfrak g$ compatibly with $\\theta_C$. As $t_C$ has the identity of $C[M]$ as coordinate map, equality at this point is equality of coaction maps: the coaction of $T_C$ on $\\operatorname{Lie}(G_C)\\cong C\\otimes_A\\mathfrak g$ is $C\\otimes\\rho$. Every $t\\in T_C(R)$ is a specialization of $t_C$, so this is the full scheme-theoretic action, not its restriction to residue-field points.",
+   "uses": [
+    "lem-sfb-smooth-augmented-tangent-scalar-extension",
+    "def-sfb-ring-diagonalizable-group",
+    "def-sfb-pinned-split-root-realization",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Section 4 opening, printed p.107: Lie algebra as an M-graded vector bundle; tangent naturality applied at the universal torus point."
+   }
+  },
+  {
+   "text": "Tensor the given finite decomposition $\\mathfrak g=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\alpha\\in\\Phi}\\mathfrak g_\\alpha$ by $C$. Its summand inclusions $j_m$ and projections $p_m$ still satisfy $p_mj_n=\\delta_{mn}$ and $\\sum_mj_mp_m=1$ after tensoring, so it remains a direct decomposition without flatness. In the coaction of step 6 each summand has its original monomial $e_m$. If $w=\\sum_mw_m$ has weight $\\alpha$, comparing coefficients in the free basis $(e_m)$ of $C[M]$ gives $w_m=0$ for $m\\ne\\alpha$, hence the root space is exactly $C\\otimes_A\\mathfrak g_\\alpha$. Coefficient comparison is valid for every module $V$: the maps $v\\otimes\\sum c_me_m\\mapsto(c_mv)_m$ and $(v_m)_m\\mapsto\\sum v_m\\otimes e_m$ are inverse on finitely supported families. For the torus itself a tangent point has $e_m\\mapsto1+\\epsilon z(m)$, with $z:M\\to A$ additive, since $e_me_n=e_{m+n}$. A finite lattice basis identifies these maps with $A^r$, and after base change with $C^r$, by the same coefficient formula. The formula for $\\theta_C$ commutes with the inclusion $T\\to G$ on dual-number points, so the zero summand is exactly $\\operatorname{Lie}(T_C)$.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization",
+    "def-sfb-ring-diagonalizable-group",
+    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-smooth-augmented-tangent-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Section 4 opening, printed p.107 and Theorem 3.3.4 proof, p.99: weight decomposition under base change. Split-projection and coefficient argument supplied here."
+   }
+  },
+  {
+   "text": "For each root choose the given rank-one trivialization $A\\simeq\\mathfrak g_\\alpha$. Tensoring its inverse and forward maps yields inverse maps $C\\simeq C\\otimes_A\\mathfrak g_\\alpha$, since $c\\otimes a\\mapsto cf(a)$ identifies $C\\otimes_A A$ with $C$. For a simple root use the specified map $a\\mapsto aX_\\alpha$; its tensor is $c\\mapsto c(1\\otimes X_\\alpha)$. Thus every root space is free of rank one and every named simple-root vector is a generator. Together with steps 1--7 these are exactly all the conditions for a pinned split realization of the unchanged based datum.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Definitions 5.1.1 and 6.1.1, printed pp.136 and 186; tensor the specified trivializations and their inverses."
+   }
+  },
+  {
+   "text": "For $A\\to C\\xrightarrow h D$, successive scheme pullbacks have the same projections and are uniquely isomorphic by the fibre-product property. On group-algebra coordinates the identification sends $d\\otimes(c\\otimes e_m)$ to $dh(c)\\otimes e_m$. The tangent lemma gives the same formula on $d\\otimes(c\\otimes v)$, including each root summand, so both constructions send the pinning to $1\\otimes X_\\alpha$. Finally, for a pinning-compatible isomorphism $F:P\\simeq P'$, its pullback is an isomorphism by step 1, its torus map is the same lattice map on monomials, and tangent naturality gives $dF_C(1\\otimes X_\\alpha)=1\\otimes dF(X_\\alpha)=1\\otimes X'_{\\sigma(\\alpha)}$. These equations prove the asserted compatibility on morphisms as well as on objects, with identity and composition inherited from pullback.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sfb-smooth-augmented-tangent-scalar-extension",
+    "def-sfb-ring-diagonalizable-group",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Definitions 5.1.1 and 6.1.1; base-change use following Theorem 6.1.17, printed p.197. Explicit tower and pinning equations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sfb-pinned-split-root-realization",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-geometric-point",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-sfb-smooth-augmented-tangent-scalar-extension",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Definitions 3.1.1, 5.1.1, 6.1.1 and opening of Section 4; explicit arbitrary-base assembly from existing permanence nodes and an augmented smooth tangent lemma. Read online, local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pinned split reductive group schemes retain the same based root datum under arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.restrictScalars_coe_root\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"∀ {ι : Type u_1} {L : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field L] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : Module L M] [inst_4 : Module L N] (P : RootPairing ι L M N) (K : Type u_5)\\n  [inst_5 : Field K] [inst_6 : Algebra K L] [inst_7 : Module K M] [inst_8 : Module\", \"doc\": \"For any index $i$, the root embedding of the scalar-restricted root pairing $(P.restrictScalars' K)$ at $i$ coincides with the original root embedding $P.root(i)$ in the module $N$.\"}\n  {\"name\": \"RootPairing.mk.hcongr_17\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Basic\", \"type\": \"∀ (ι ι' : Type u_1),\\n  ι = ι' →\\n    ∀ (R R' : Type u_2),\\n      R = R' →\\n        ∀ (M M' : Type u_3),\\n          M = M' →\\n            ∀ (N N' : Type u_4),\\n              N = N' →\\n                ∀ (inst : CommRing R) (inst' : CommRing R'),\\n                  inst ≍ inst' →\\n                    ∀ (inst_1 \", \"doc\": \"Given commutative rings $ R $ and $ R' $, additive commutative groups $ M, N $ and $ M', N' $ with compatible module structures, and congruent linear maps, roots, coroots, and reflection permutations \"}\n  {\"name\": \"RootPairing.Base.apply_mem_range_root_of_cartanMatrixEq\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/CartanMatrix\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] [CharZero R] [IsDomain R] [Finite ι]\\n  {ι₂ : Type u_6} {M₂ : Type u_7} {N₂ : Type u_8} [inst_8 : AddCommGroup M₂] [inst_\", \"doc\": \"Given a linear isomorphism $ f : M \\to M_2 $ between $ R $-modules preserving roots up to a permutation $ e $ of indices, and assuming the Cartan matrices satisfy $ C_{e(i),e(j)} = C_{i,j} $ for all $ \"}\n  {\"name\": \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseExists\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [Finite ι] [inst : AddCommGroup M]\\n  [inst_1 : AddCommGroup N] [inst_2 : Field R] [CharZero R] [inst_4 : Module R M] [inst_5 : Module R N]\\n  (P : RootPairing ι R M N) [P.IsRootSystem] [P.IsCrystallographic] [P.IsReduced] (f : M →+ ℚ),\\n  (\", \"doc\": \"Given a root pairing $ P $ between $ R $-modules $ M $ and $ N $, additive monoid homomorphisms $ f : M → ℚ $ and $ g : N → ℚ $ that are non-vanishing on all roots $ P.\\text{root}(i) $ and coroots $ P.\"}\n  {\"name\": \"RootPairing.Base.mk.inj\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Base\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} {inst : CommRing R} {inst_1 : AddCommGroup M}\\n  {inst_2 : Module R M} {inst_3 : AddCommGroup N} {inst_4 : Module R N} {P : RootPairing ι R M N} {support : Finset ι}\\n  {linearIndepOn_root : LinearIndepOn R ⇑P.root ↑support} {linearIndepOn_\", \"doc\": \"If two instances of the RootPairing.Base structure are equal, then their underlying support sets must be equal. This establishes that the constructor for RootPairing.Base is injective with respect to \"}\n  {\"name\": \"RootPairing.restrictScalars\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"{ι : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : Field L] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : Module L M] →\\n                [inst_4 : Module L N] →\\n                  (P : RootPairing ι \", \"doc\": \"Given a crystallographic root pairing $ P $ over a field $ L $, this constructs a new root pairing over a subfield $ K $ by restricting scalars. The resulting pairing has root and coroot embeddings va\"}\n  {\"name\": \"RootPairing.restrictScalars'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"{ι : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : Field L] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : Module L M] →\\n                [inst_4 : Module L N] →\\n                  (P : RootPairing ι \", \"doc\": \"Given a root pairing over a field $ L $, this constructs a new root pairing over a subfield $ K $ by restricting scalars. The resulting pairing has root and coroot embeddings valued in the $ K $-span \"}\n  {\"name\": \"RootPairing.instIsRootSystemSubtypeMemSubmoduleSpanRangeCoeEmbeddingRootCorootRestrictScalars'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"∀ {ι : Type u_1} {L : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field L] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : Module L M] [inst_4 : Module L N] (P : RootPairing ι L M N) (K : Type u_5)\\n  [inst_5 : Field K] [inst_6 : Algebra K L] [inst_7 : Module K M] [inst_8 : Module\", \"doc\": \"Given a root pairing over a field $ L $, restricting scalars to a subfield $ K $ yields a new root pairing over $ K $. The new pairing has root and coroot embeddings valued in the $ K $-span of the or\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of root spaces coroots and pinnings for a split reductive group scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.coroot'In\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_4} →\\n      {N : Type u_5} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  (P : RootPairing\", \"doc\": \"For a root pairing valued in an $ S $-algebra over $ R $, the flipped dual coroot functional $ \\\\text{coroot'}(i) $ maps each root index $ i $ to the dual space of the coroot span $ N $, with the image\"}\n  {\"name\": \"RootPairing.root'In\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_4} →\\n      {N : Type u_5} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  (P : RootPairing\", \"doc\": \"For a root pairing valued in an $ S $-algebra over $ R $, the dual root functional $ \\\\text{root'}(i) $ maps each root index $ i $ to the dual space of the coroot span $ N $, with the image lying in th\"}\n  {\"name\": \"RootPairing.algebraMap_coroot'In_apply\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_4} {N : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) (S : Type u_6)\\n  [inst_5 : CommRing S] [inst_6 : Algebra S R] [inst_7 : Module S M] [inst_8 : \", \"doc\": \"For a root pairing valued in an $ S $-algebra over $ R $, applying the canonical algebra homomorphism $ S \\to R $ to the dual coroot functional $ \\\\text{coroot'}_{S}(i) $ evaluated at $ x \\\\in \\\\text{root\"}\n  {\"name\": \"RootPairing.restrictScalars_coe_coroot\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"∀ {ι : Type u_1} {L : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field L] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : Module L M] [inst_4 : Module L N] (P : RootPairing ι L M N) (K : Type u_5)\\n  [inst_5 : Field K] [inst_6 : Algebra K L] [inst_7 : Module K M] [inst_8 : Module\", \"doc\": \"For each index $ i $, the coroot embedding of the root pairing after restricting scalars from $ L $ to $ K $ at $ i $ is equal to the original coroot embedding at $ i $. This equality demonstrates tha\"}\n  {\"name\": \"RootPairing.algebraMap_root'In_apply\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_4} {N : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) (S : Type u_6)\\n  [inst_5 : CommRing S] [inst_6 : Algebra S R] [inst_7 : Module S N] [inst_8 : \", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a commutative ring $ S $ equipped with an $ S $-algebra structure on $ R $, the root pairing between $ M $ and $ N $ takes values in \"}\n  {\"name\": \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseExists\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [Finite ι] [inst : AddCommGroup M]\\n  [inst_1 : AddCommGroup N] [inst_2 : Field R] [CharZero R] [inst_4 : Module R M] [inst_5 : Module R N]\\n  (P : RootPairing ι R M N) [P.IsRootSystem] [P.IsCrystallographic] [P.IsReduced] (f : M →+ ℚ),\\n  (\", \"doc\": \"Given a root pairing $ P $ between $ R $-modules $ M $ and $ N $, additive monoid homomorphisms $ f : M → ℚ $ and $ g : N → ℚ $ that are non-vanishing on all roots $ P.\\text{root}(i) $ and coroots $ P.\"}\n  {\"name\": \"RootPairing.root'In_corootSpanMem_eq_pairingIn\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_4} {N : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) (i j : ι)\\n  (S : Type u_6) [inst_5 : CommRing S] [inst_6 : Algebra S R] [inst_7 : Module S N] \", \"doc\": \"For a root pairing between $ R $-modules $ M $ and $ N $ valued in an $ S $-algebra over $ R $, the evaluation of the dual root functional $ \\\\text{root'}(i) $ at the coroot $ \\\\alpha_j $ equals the pai\"}\n  {\"name\": \"RootPairing.restrictScalars'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"{ι : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : Field L] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : Module L M] →\\n                [inst_4 : Module L N] →\\n                  (P : RootPairing ι \", \"doc\": \"Given a root pairing over a field $ L $, this constructs a new root pairing over a subfield $ K $ by restricting scalars. The resulting pairing has root and coroot embeddings valued in the $ K $-span \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"baseChange\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "root.*baseChange|baseChange.*root|pinning",
+   "results": "[grep] OK 15 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"line\": \"724\", \"text\": \"def _root_.Module.End.baseChangeHom : Module.End R M →ₐ[R] Module.End A (A ⊗[R] M) :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"line\": \"732\", \"text\": \"def _root_.LinearEquiv.baseChange (e : M ≃ₗ[R] N) : A ⊗[R] M ≃ₗ[A] A ⊗[R] N :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"line\": \"736\", \"text\": \"theorem _root_.LinearEquiv.coe_baseChange (f : M ≃ₗ[R] N) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"line\": \"740\", \"text\": \"@[simp] lemma _root_.LinearEquiv.baseChange_tmul {e : M ≃ₗ[R] N} (a : A) (m : M) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"line\": \"744\", \"text\": \"@[simp] lemma _root_.LinearEquiv.baseChange_symm_tmul {e : M ≃ₗ[R] N} (a : A) (n : N) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.LinearAlgebra.RootSystem.BaseChange\"}\n  {\"file\": \"Mathlib/Algebra/Order/Group/Lattice.lean\", \"line\": \"14\", \"text\": \"underpinnings of vector lattices, Banach lattices, AL-space, AM-space etc.\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"line\": \"573\", \"text\": \"theorem _root_.IsBaseChange.map_smul_top_ne_top_iff_of_faithfullyFlat (hf : IsBaseChange S f)\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Basic.lean\", \"line\": \"266\", \"text\": \"lemma _root_.LinearMap.baseChangeHom_injective [FaithfulSMul R S] [Flat R N] :\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"line\": \"254\", \"text\": \"      ≪≫ₗ _root_.TensorProduct.comm _ _ _ ≪≫ₗ AlgebraTensorModule.cancelBaseChange ..\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/Free.lean\", \"line\": \"94\", \"text\": \"lemma _root_.Module.Basis.baseChange_linearMap (b : Basis ι R M) (b' : Basis ι' R N) (ij : ι × ι') :\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/Free.lean\", \"line\": \"104\", \"text\": \"lemma _root_.Module.Basis.baseChange_end (b : Basis ι R M) (ij : ι × ι) :\"}\n  {\"file\": \"Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean\", \"line\": \"185\", \"text\": \"theorem _root_.IsBaseChange.end {α : M →ₗ[R] P} (j : IsBaseChange S α) :\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"83\", \"text\": \"def _root_.KaehlerDifferential.cotangentComplexBaseChange\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"91\", \"text\": \"lemma _root_.KaehlerDifferential.cotangentComplexBaseChange_tmul\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Root datum and pinning of a split reductive group scheme commute with base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RootPairing.restrictScalars_coe_coroot\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseChange\", \"type\": \"(i : ι) : (P.restrictScalars' K).coroot i = P.coroot i\", \"doc\": \"For each index $ i $, the coroot embedding of the root pairing after restricting scalars from $ L $ to $ K $ at $ i $ is equal to the original coroot embedding at $ i $. This equality demonstrates tha\"}\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"(X₁ X₂ : Type*) [AddCommGroup X₁] [AddCommGroup X₂]\", \"doc\": \"A root datum is a root pairing between two additive commutative groups $X_1$ and $X_2$ over the integers $\\\\mathbb{Z}$, where each group is equipped with its canonical $\\\\mathbb{Z}$-module structure. Th\"}\n  {\"name\": \"RootPairing.restrictScalars_coe_root\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseChange\", \"type\": \"(i : ι) : (P.restrictScalars' K).root i = P.root i\", \"doc\": \"For any index $i$, the root embedding of the scalar-restricted root pairing $(P.restrictScalars' K)$ at $i$ coincides with the original root embedding $P.root(i)$ in the module $N$.\"}\n  {\"name\": \"RootPairing.restrictScalars_pairing\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseChange\", \"type\": \"(i j : ι) : algebraMap K L ((P.restrictScalars' K).pairing i j) = P.pairing i j\", \"doc\": \"For any indices $i$ and $j$, the pairing $\\\\langle \\\\alpha_i, \\\\alpha_j^\\\\vee \\\\rangle$ in the base-changed root pairing over $K$ satisfies $\\\\phi(\\\\langle \\\\alpha_i, \\\\alpha_j^\\\\vee \\\\rangle_K) = \\\\langle \\\\alpha\"}\n  {\"name\": \"RootPairing.restrictScalars\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseChange\", \"type\": \"[P.IsCrystallographic] : RootPairing ι K (span K (range P.root)) (span K (range P.coroot))\", \"doc\": \"Given a crystallographic root pairing $ P $ over a field $ L $, this constructs a new root pairing over a subfield $ K $ by restricting scalars. The resulting pairing has root and coroot embeddings va\"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHomProperties\", \"type\": \": Prop\", \"doc\": \"For any commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a property $ P $ holds for the canonical ring homomorphism $ R \\\\to S $, then $ P $ also ho\"}\n  {\"name\": \"RootPairing.instIsRootSystemSubtypeMemSubmoduleSpanRangeCoeEmbeddingRootCorootRestrictScalars'\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseChange\", \"type\": \": (P.restrictScalars' K).IsRootSystem\", \"doc\": \"Given a root pairing over a field $ L $, restricting scalars to a subfield $ K $ yields a new root pairing over $ K $. The new pairing has root and coroot embeddings valued in the $ K $-span of the or\"}\n  {\"name\": \"RootPairing.restrictScalars'\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseChange\", \"type\": \": RootPairing ι K (span K (range P.root)) (span K (range P.coroot))\", \"doc\": \"Given a root pairing over a field $ L $, this constructs a new root pairing over a subfield $ K $ by restricting scalars. The resulting pairing has root and coroot embeddings valued in the $ K $-span \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebras, etale ring maps or measurable Borel structures do not supply this group-scheme notion or theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pinned split reductive group schemes preserve root datum and pinning under arbitrary nonflat base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"RingHom.IsStableUnderBaseChange @RingHom.IsStandardSmooth\", \"doc\": \"The property of a ring homomorphism being standard smooth is stable under base change. That is, if $ f : R \\\\to S $ is standard smooth, then for any commutative rings $ R', S' $ with compatible algebra\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"RootPairing.restrictScalars_coe_root\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"∀ {ι : Type u_1} {L : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field L] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : Module L M] [inst_4 : Module L N] (P : RootPairing ι L M N) (K : Type u_5)\\n  [inst_5 : Field K] [inst_6 : Algebra K L] [inst_7 : Module K M] [inst_8 : Module\", \"doc\": \"For any index $i$, the root embedding of the scalar-restricted root pairing $(P.restrictScalars' K)$ at $i$ coincides with the original root embedding $P.root(i)$ in the module $N$.\"}\n  {\"name\": \"RootPairing.restrictScalars\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"{ι : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : Field L] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : Module L M] →\\n                [inst_4 : Module L N] →\\n                  (P : RootPairing ι \", \"doc\": \"Given a crystallographic root pairing $ P $ over a field $ L $, this constructs a new root pairing over a subfield $ K $ by restricting scalars. The resulting pairing has root and coroot embeddings va\"}\n  {\"name\": \"RootPairing.restrictScalars'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"{ι : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : Field L] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : Module L M] →\\n                [inst_4 : Module L N] →\\n                  (P : RootPairing ι \", \"doc\": \"Given a root pairing over a field $ L $, this constructs a new root pairing over a subfield $ K $ by restricting scalars. The resulting pairing has root and coroot embeddings valued in the $ K $-span \"}\n  {\"name\": \"RootPairing.instIsRootSystemSubtypeMemSubmoduleSpanRangeCoeEmbeddingRootCorootRestrictScalars'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"∀ {ι : Type u_1} {L : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field L] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : Module L M] [inst_4 : Module L N] (P : RootPairing ι L M N) (K : Type u_5)\\n  [inst_5 : Field K] [inst_6 : Algebra K L] [inst_7 : Module K M] [inst_8 : Module\", \"doc\": \"Given a root pairing over a field $ L $, restricting scalars to a subfield $ K $ yields a new root pairing over $ K $. The new pairing has root and coroot embeddings valued in the $ K $-span of the or\"}\n  {\"name\": \"WeierstrassCurve.VariableChange.map_baseChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (C : WeierstrassCurve.VariableChange R) {S : Type s} [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] {A : Type v} [inst_3 : CommRing A] [inst_4 : Algebra R A] [inst_5 : Algebra S A]\\n  [IsScalarTower R S A] {B : Type w} [inst_7 : CommRing B] [inst_8 : Algebra R B] [i\", \"doc\": \"Given commutative rings $R$, $S$, $A$, and $B$ with compatible algebra structures and a scalar tower $R \\to S \\to A \\to B$, and an $S$-algebra homomorphism $\\\\psi : A \\\\to B$, the variable change map appli\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: group-object pullback, abstract root pairings or Lie weights do not give pinned reductive schemes and all the stated clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "RootDatum",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \" (ι : Type u_1) (X₁ : Type u_5) (X₂ : Type u_6) [AddCommGroup X₁] [AddCommGroup X₂] : Type (max (max u_1 u_5) u_6)\", \"doc\": \"Informally a root datum is a root pairing with coefficients in the integers, for which the root\\nand coroot spaces are finitely-generated free Abelian groups.\\n\\nFormally `RootDatum` does not demand the \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: group-object pullback, abstract root pairings or Lie weights do not give pinned reductive schemes and all the stated clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "pinned|pinning|reductive.*group.*scheme|tangent.*baseChange",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: group-object pullback, abstract root pairings or Lie weights do not give pinned reductive schemes and all the stated clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pulling back a pinned split reductive group scheme preserves its based root datum and root vectors",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GrpObjAsOverPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"[GrpObj (asOver M S)] : GrpObj (asOver (pullback (M ↘ S) f) T)\", \"doc\": \"Given a group object in the over category of schemes over a base scheme $ S $ and a morphism $ f : T \\to S $, the pullback of this group object along $ f $ forms a group object in the over category of \"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instFstScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ S) (g : Y ⟶ S) [IsProper g] : IsProper (Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instSndScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ S) (g : Y ⟶ S) [IsProper f] : IsProper (Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.instHasPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) : HasPullback f g\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"RootPairing.restrictScalars_coe_root\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseChange\", \"type\": \"(i : ι) : (P.restrictScalars' K).root i = P.root i\", \"doc\": \"For any index $i$, the root embedding of the scalar-restricted root pairing $(P.restrictScalars' K)$ at $i$ coincides with the original root embedding $P.root(i)$ in the module $N$.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [Flat f] : Flat (pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instSndScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [IsFinite f] : IsFinite (Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback $ X \\\\times_Z Y $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.canonicallyOverPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \": (pullback (M ↘ S) f).CanonicallyOver T\", \"doc\": \"For any scheme $M$ equipped with a morphism to a base scheme $S$, and for any morphism $f : T \\to S$ between schemes, the cospan diagram formed by $M \\to S$ and $T \\to S$ admits a pullback in the categor\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: group-object pullback, abstract root pairings or Lie weights do not give pinned reductive schemes and all the stated clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a split maximal torus root spaces and chosen simple root generators over commutative rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.h'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"For a root pairing $ P $ with finite support indexed by $ \\\\iota $ over a commutative ring $ R $, the element $ h'(i) $ is the matrix $ h(i) $ constructed from $ P $, which belongs to the Cartan subalg\"}\n  {\"name\": \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"The Lie subalgebra over $ R $ obtained as the preimage of the Cartan subalgebra under the canonical inclusion map from the Geck-constructed Lie algebra into the ambient matrix algebra $ \\\\text{Mat}_{(S\"}\n  {\"name\": \"RootPairing.Base.apply_mem_range_root_of_cartanMatrixEq\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/CartanMatrix\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] [CharZero R] [IsDomain R] [Finite ι]\\n  {ι₂ : Type u_6} {M₂ : Type u_7} {N₂ : Type u_8} [inst_8 : AddCommGroup M₂] [inst_\", \"doc\": \"Given a linear isomorphism $ f : M \\to M_2 $ between $ R $-modules preserving roots up to a permutation $ e $ of indices, and assuming the Cartan matrices satisfy $ C_{e(i),e(j)} = C_{i,j} $ for all $ \"}\n  {\"name\": \"RootPairing.Base.toWeightBasis_apply\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Base\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N} (b : P.Base)\\n  [inst_5 : P.IsRootSystem] (i : ↥b.support), b.toWeightBasis i = P.root ↑i\", \"doc\": \"For a given index $i$ in the finite support set of the base structure, the $i$-th element of the weight basis of the $R$-module $M$ constructed from the root vectors $\\\\{\\\\alpha_i\\\\}$ is equal to the cor\"}\n  {\"name\": \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Fintype ι] [inst_7 : DecidableEq ι] (\", \"doc\": \"For any index $i$ in the finite support of a root pairing $b$ over a commutative ring $R$, the Geck construction matrix $h(i)$ associated to $i$ is an element of the Cartan subalgebra generated by all\"}\n  {\"name\": \"LieAlgebra.rootSpaceProduct\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"(R : Type u_1) →\\n  (L : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : LieRing L] →\\n        [inst_2 : LieAlgebra R L] →\\n          (H : LieSubalgebra R L) →\\n            [inst_3 : LieRing.IsNilpotent ↥H] →\\n              (χ₁ χ₂ χ₃ : ↥H → R) →\\n                χ₁ + χ₂ = χ₃ →\\n                  Tens\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with a subalgebra $H$, and weights $\\\\chi_1, \\\\chi_2, \\\\chi_3 : H \\\\to R$ satisfying $\\\\chi_1 + \\\\chi_2 = \\\\chi_3$, this defines an $R$-linear Lie\"}\n  {\"name\": \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"For a root pairing $ P $ with finite support indexed by $ \\\\iota $ over a commutative ring $ R $, the matrix $ h(i) $ constructed from the Geck construction lies in the Cartan subalgebra $ \\\\mathfrak{h}\"}\n  {\"name\": \"LieAlgebra.rootSpaceProduct_def\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : LieRing.IsNilpotent ↥H],\\n  LieAlgebra.rootSpaceProduct R L H = LieAlgebra.rootSpaceWeightSpaceProduct R L H L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with a subalgebra $H$, and weights $\\\\chi_1, \\\\chi_2, \\\\chi_3 : H \\\\to R$ satisfying $\\\\chi_1 + \\\\chi_2 = \\\\chi_3$, there exists an $R$-linear Lie\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: group-object pullback, abstract root pairings or Lie weights do not give pinned reductive schemes and all the stated clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pinning\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: group-object pullback, abstract root pairings or Lie weights do not give pinned reductive schemes and all the stated clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-etale-integral-models",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Section 3.1 and Definition 5.1.1, printed pp.81-84 and 136; Section 4.1, root groups and coroots, pp.107-110; Definition 6.1.1, p.186; the base-change use immediately after Theorem 6.1.17, p.197",
+   "via": [
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pinned-split-root-base-change",
+  "worker": "stage1",
+  "summary": "Nine-step proof preserving the statement, using one new statement-only augmented smooth tangent comparison. Pullback diagrams and identical geometric fibres prove the group and based-fibre conditions; explicit Hopf-basis and split-projection calculations handle the split torus and nonflat root weights; tensoring trivializations and naturality prove pinning and tower/morphism compatibility. The existing Noetherian tangent-weight theorem is not applied to arbitrary bases.",
+  "blueprint": "Retains the inherited null ancestor and via chain (confirmed by blueprint_refs.py ancestor). Realizes the pinned-base-change prerequisite under the inherited det-thm-sf-ctf-stability-direct-images (3) alteration chain; read the current latest unit and direct-image proof. No chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme permanence or affine smoothness criterion, used on the given group scheme as a black box; no same-unit statement supplies this general geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic scheme permanence or affine smoothness criterion, used on the given group scheme as a black box; no same-unit statement supplies this general geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-c18a04595",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-c18a04595 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and Stacks 00RO/00RV/00T2 in full. The item statement is unchanged and matches live, which is still unsplit with no re-split note. Steps 1-5 and 7-9 are correct. I checked them against the pinned-split-realization and diagonalizable-group definitions, and every permanence node they cite allows an arbitrary base morphism. Steps 4 and 7 (Hopf basis and split-projection/coefficient comparison) need no flatness, and distinct roots keep their weight summands apart in characteristic 2. The new node lem-sfb-smooth-augmented-tangent-scalar-extension is statement-only and true. Proof route: Q=A⊗_BΩ is finite projective, a finite dual basis gives the dual base change without flatness, and the θ_C formula is a u_C-derivation and natural. It is strictly smaller than the item and is not a duplicate: lem-sfb-relative-tangent-weight-base-change assumes a Noetherian base, and lem-sfb-affine-group-lie-tangent-calculus works only over fields. I accept both declared tool_uses, lem-pc-proper-base-change and lem-weil-pbc-smooth-ring-map-iff-smooth-affine. FIX (E5/C1): step 6 relied on smoothness of R⊗_A B over R without proving it, and only implied which universal point and which towers it used. I rewrote it: conjugation κ_A by the universal point over A[M], smoothness of B_{A[M]} and B_C from step 2 plus the smooth-base-change node, the smooth-affine criterion and affine fibre products, κ_C = C[M]⊗κ_A, naturality over A[M], and tower compatibility for A→A[M]→C[M] and A→C→C[M]. The step now cites those three nodes, which were already in proof_deps. Conrad's text is not in the local literature and is WANTED.; 1 file(s) fixed by the reviewer"
+ }
+}

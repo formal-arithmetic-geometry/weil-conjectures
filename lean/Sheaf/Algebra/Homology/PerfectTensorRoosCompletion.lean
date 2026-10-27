@@ -15,16 +15,15 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.AdicCompletion.Basic
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
-import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
-import Sheaf.Algebra.Homology.KFlatScalarTowerRealization
-import Sheaf.Algebra.Homology.ExactProductsRoosComparison
-import Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck
-import Sheaf.CategoryTheory.CompactSupportRoosCofinality
-import Mathlib.Algebra.Homology.DerivedCategory.KProjective
-import Mathlib.RingTheory.Flat.Basic
-import Sheaf.Algebra.Homology.SurjectiveModuleComplexTowerLimit
+import all Sheaf.CategoryTheory.StrictRoosAdditiveComparison
+import Mathlib.CategoryTheory.Functor.OfSequence
+import Mathlib.LinearAlgebra.TensorProduct.RightExactness
+import Mathlib.LinearAlgebra.TensorProduct.Quotient
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Descent
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import Sheaf.CategoryTheory.StrictRoosHomotopyFunctor
+import all Sheaf.CategoryTheory.CompactSupportRoosCofinality
+import all Sheaf.CategoryTheory.RoosTransitionHomotopy
 
 /-! # Perfect tensor quotient coaugmentation
 
@@ -62,7 +61,12 @@ def towerFunctor (I : Ideal R) : ModuleCat.{u} R ⥤ (ℕᵒᵖ ⥤ ModuleCat.{u
 Source: Tag 0941 (blueprint: lem-sf-perfect-tensor-roos-completion).
 Proof: evaluate at every level and use additivity of the ordinary quotient functor. -/
 theorem towerFunctor_additive (I : Ideal R) : (towerFunctor I).Additive := by
-  sorry
+  constructor
+  intro M N f g
+  apply NatTrans.ext
+  funext n
+  change (AdicCohomology.quotient I (n.unop + 1)).map (f + g) = _
+  exact (AdicCohomology.quotient I (n.unop + 1)).map_add
 
 attribute [instance] towerFunctor_additive
 
@@ -85,7 +89,14 @@ theorem quotient_compatible (I : Ideal R) (K : CochainComplex (ModuleCat.{u} R) 
     (n : ℕ) :
     quotient I K (n + 1) ≫ ((tower I).obj K).asFunctor.map
       (homOfLE (Nat.le_succ n)).op = quotient I K n := by
-  sorry
+  apply HomologicalComplex.hom_ext
+  intro q
+  change (AdicCohomology.projection I (n + 1 + 1)).app (K.X q) ≫
+    ((Functor.ofOpSequence (X := fun n : ℕ ↦ AdicCohomology.quotient I (n + 1))
+      (fun n ↦ AdicCohomology.transition I (Nat.le_succ (n + 1)))).map
+        (homOfLE (Nat.le_succ n)).op).app (K.X q) = _
+  rw [Functor.ofOpSequence_map_homOfLE_succ]
+  rfl
 
 /-- The coaugmentation with actual quotient projections and zero shifted coordinate.
 Source: Tag 0941 (blueprint: lem-sf-perfect-tensor-roos-completion). -/
@@ -133,7 +144,11 @@ Proof: the all-level compatibility follows by composing consecutive quotient tra
 theorem quotient_natural (I : Ideal R) (K : CochainComplex (ModuleCat.{u} R) ℤ) :
     ∀ (n m : ℕᵒᵖ) (f : n ⟶ m), quotient I K n.unop ≫
       ((tower I).obj K).asFunctor.map f = quotient I K m.unop := by
-  sorry
+  intro n m f
+  have h := roos_compatible ((tower I).obj K).asFunctor (quotient I K)
+    (quotient_compatible I K) (leOfHom f.unop)
+  simpa only [show (homOfLE (leOfHom f.unop)).op = f from Subsingleton.elim _ _]
+    using h
 
 /-- The quotient cone whose vertex is the specified complex, rather than an arbitrary limit.
 Source: Tag 0941 (blueprint: lem-sf-perfect-tensor-roos-completion). -/
@@ -214,6 +229,34 @@ theorem perfect_tensor_roos_completion [IsDomain R] [IsDiscreteValuationRing R]
   sorry
 
 
+private theorem augmentation_natural (I : Ideal R)
+    {K L : CochainComplex (ModuleCat.{u} R) ℤ} (f : K ⟶ L) : Square I f := by
+  have hn (n : ℕ) : f ≫ quotient I L n = quotient I K n ≫
+      (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
+        ((tower I).map f)).app (op n) := by
+    ext q x
+    rfl
+  have hp : f ≫ Pi.lift (quotient I L) =
+      Pi.lift (quotient I K) ≫ roosPmap ((tower I).map f) := by
+    apply Pi.hom_ext
+    intro n
+    simpa [roosPmap] using hn n
+  unfold Square augmentation completion
+  apply HomologicalComplex.hom_ext
+  intro k
+  obtain ⟨q, rfl⟩ := (Equiv.addRight (1 : ℤ)).surjective k
+  change (f ≫ roosAugment (quotient I L) _).f (q + 1) =
+    (roosAugment (quotient I K) _ ≫ roosF.map ((tower I).map f)).f (q + 1)
+  apply (cancel_mono (roosχ ((tower I).obj L) q).hom).mp
+  simp only [HomologicalComplex.comp_f, Category.assoc,
+    roosAugment_χ, roosF_map_χ]
+  rw [← Category.assoc, roosAugment_χ]
+  apply biprod.hom_ext
+  · simp
+  · simp only [Category.assoc, biprod.lift_snd, biprod.map_snd,
+      biprod.lift_snd_assoc]
+    exact congrArg (fun a ↦ a.f (q + 1)) hp
+
 /-- Both actual coordinates, strict naturality, homotopy invariance, and every further
 quotient of the completion augmentation. These equations hold before localization.
 Source: Tag 0941, DAG steps 4, 7--9
@@ -234,7 +277,18 @@ theorem augmentation_coordinates (I : Ideal R)
       (NatTrans.mapHomologicalComplex
         (AdicCohomology.transition I (Nat.add_le_add_right h 1)) (.up ℤ)).app K =
       quotient I K n) := by
-  sorry
+  refine ⟨fun q ↦ roosAugment_χ _ _ q, ?_, fun L f ↦ augmentation_natural I f,
+    ?_, ?_⟩
+  · intro n
+    unfold augmentation
+    rw [roosAugment_eq, Category.assoc, roosι_eval, roosAugmentLimit_π]
+  · intro L f g h
+    obtain ⟨H, _⟩ := (roosF_homotopy_functor.{u + 1, u, 0} (A := ModuleCat.{u} R)).2.1
+      _ _ _ _ ((towerFunctor I).mapHomotopy h)
+    exact ⟨H⟩
+  · intro n m h
+    ext q x
+    rfl
 
 /-- The tensor coaugmentation intertwines associators, Koszul symmetry, both unitors
 and the coefficient unit. The functor on the bottom sides is the actual quotient
@@ -252,7 +306,9 @@ theorem tensor_coherence (I : Ideal R)
     (∀ n : ℕ, augmentation I (𝟙_ (CochainComplex (ModuleCat.{u} R) ℤ)) ≫
       roosEval ((tower I).obj (𝟙_ (CochainComplex (ModuleCat.{u} R) ℤ))) n =
       quotient I (𝟙_ (CochainComplex (ModuleCat.{u} R) ℤ)) n) := by
-  sorry
+  exact ⟨augmentation_natural I _, augmentation_natural I _,
+    augmentation_natural I _, augmentation_natural I _,
+    (augmentation_coordinates I _).2.1⟩
 
 /-- Localization identifies the specified tensor completion with ordinary derived tensor,
 and gives naturality and independence for every derived morphism of the perfect models.
@@ -301,6 +357,46 @@ theorem derived_completion [IsDomain R] [IsDiscreteValuationRing R]
   sorry
 
 
+private def scalarQuotientModuleIso {S : Type u} [CommRing S] (f : R →+* S)
+    (I : Ideal R) (M : ModuleCat.{u} R) (n : ℕ) :
+    (ModuleCat.extendScalars f).obj ((AdicCohomology.quotient I n).obj M) ≅
+      (AdicCohomology.quotient (I.map f) n).obj ((ModuleCat.extendScalars f).obj M) := by
+  let := f.toAlgebra
+  exact ((TensorProduct.tensorQuotMapSMulEquivTensorQuot M S (I ^ n)).symm ≪≫ₗ
+    Submodule.quotEquivOfEq _ _ (by rw [Ideal.map_pow]; rfl)).toModuleIso
+
+private theorem scalarQuotientModuleIso_tmul {S : Type u} [CommRing S] (f : R →+* S)
+    (I : Ideal R) (M : ModuleCat.{u} R) (n : ℕ) (s : S) (x : M) :
+    (scalarQuotientModuleIso f I M n).hom
+        (s ⊗ₜ[R, f] (AdicCohomology.power I M n).mkQ x) =
+      (AdicCohomology.power (I.map f) ((ModuleCat.extendScalars f).obj M) n).mkQ
+        (s ⊗ₜ[R, f] x) := by
+  let := f.toAlgebra
+  let e := TensorProduct.tensorQuotMapSMulEquivTensorQuot M S (I ^ n)
+  have hq : (Ideal.qoutMapEquivTensorQout S (I := I ^ n))
+      (1 : S ⧸ (I ^ n).map (algebraMap R S)) =
+        (1 : S) ⊗ₜ[R] (1 : R ⧸ I ^ n) := by
+    change (TensorProduct.tensorQuotEquivQuotSMul S (I ^ n)).symm
+      (Submodule.Quotient.mk (1 : S)) = _
+    simp
+  have hm : (TensorProduct.tensorQuotEquivQuotSMul M (I ^ n))
+      (x ⊗ₜ[R] (1 : R ⧸ I ^ n)) = Submodule.Quotient.mk x := by
+    simpa using TensorProduct.tensorQuotEquivQuotSMul_tmul_mk (I ^ n) x 1
+  have ht : e (Submodule.Quotient.mk (s ⊗ₜ[R] x)) =
+      s ⊗ₜ[R] (AdicCohomology.power I M n).mkQ x := by
+    simp [e, TensorProduct.tensorQuotMapSMulEquivTensorQuot, hq, hm,
+      TensorProduct.smul_tmul']
+  have hi := congrArg e.symm ht
+  simp only [LinearEquiv.symm_apply_apply] at hi
+  change (Submodule.quotEquivOfEq
+    ((I ^ n).map (algebraMap R S) • (⊤ : Submodule S (S ⊗[R] M)))
+    ((I.map f) ^ n • (⊤ : Submodule S (S ⊗[R] M)))
+    (by rw [Ideal.map_pow]; rfl))
+      (e.symm (s ⊗ₜ[R] (AdicCohomology.power I M n).mkQ x)) =
+        Submodule.Quotient.mk (s ⊗ₜ[R] x)
+  rw [← hi]
+  rfl
+
 /-- The canonical levelwise quotient/base-change identification is uniquely determined
 by the quotient projection. This supplies canonically determined data.
 Source: Tag 0941, DAG step 10 (blueprint: lem-sf-perfect-tensor-roos-completion).
@@ -313,7 +409,43 @@ theorem scalarQuotientIso_existsUnique {S : Type u} [CommRing S]
         ((tower (I.map f)).obj ((extend f).obj K)).asFunctor.obj (op n),
       (extend f).map (quotient I K n) ≫ β.hom =
         quotient (I.map f) ((extend f).obj K) n := by
-  sorry
+  let e : (extend f).obj (((tower I).obj K).asFunctor.obj (op n)) ≅
+      ((tower (I.map f)).obj ((extend f).obj K)).asFunctor.obj (op n) :=
+    HomologicalComplex.Hom.isoOfComponents
+      (fun q ↦ scalarQuotientModuleIso f I (K.X q) (n + 1)) (by
+        intro p q _
+        symm
+        apply ModuleCat.ExtendScalars.hom_ext
+        intro x
+        obtain ⟨x, rfl⟩ := (AdicCohomology.power I (K.X p) (n + 1)).mkQ_surjective x
+        change (scalarQuotientModuleIso f I (K.X q) (n + 1)).hom
+            ((1 : S) ⊗ₜ[R, f] (AdicCohomology.power I (K.X q) (n + 1)).mkQ
+              (K.d p q x)) = _
+        rw [scalarQuotientModuleIso_tmul]
+        change _ = (((tower (I.map f)).obj ((extend f).obj K)).asFunctor.obj
+          (op n)).d p q ((scalarQuotientModuleIso f I (K.X p) (n + 1)).hom
+            ((1 : S) ⊗ₜ[R, f] (AdicCohomology.power I (K.X p) (n + 1)).mkQ x))
+        rw [scalarQuotientModuleIso_tmul]
+        rfl)
+  have he : (extend f).map (quotient I K n) ≫ e.hom =
+      quotient (I.map f) ((extend f).obj K) n := by
+    apply HomologicalComplex.hom_ext
+    intro q
+    apply ModuleCat.ExtendScalars.hom_ext
+    intro x
+    exact scalarQuotientModuleIso_tmul f I (K.X q) (n + 1) 1 x
+  refine ⟨e, he, ?_⟩
+  intro β hβ
+  apply Iso.ext
+  have : Epi ((extend f).map (quotient I K n)) := by
+    apply HomologicalComplex.epi_of_epi_f
+    intro q
+    apply (ModuleCat.epi_iff_surjective _).mpr
+    let := f.toAlgebra
+    exact LinearMap.lTensor_surjective S
+      (AdicCohomology.power I (K.X q) (n + 1)).mkQ_surjective
+  exact (cancel_epi ((extend f).map (quotient I K n))).mp (hβ.trans he.symm)
+
 
 /-- The uniquely specified balanced quotient/base-change isomorphism at a level.
 Source: Tag 0941, DAG step 10 (blueprint: lem-sf-perfect-tensor-roos-completion). -/
@@ -322,6 +454,12 @@ def scalarQuotientIso {S : Type u} [CommRing S]
     (extend f).obj (((tower I).obj K).asFunctor.obj (op n)) ≅
       ((tower (I.map f)).obj ((extend f).obj K)).asFunctor.obj (op n) :=
   Classical.choose (scalarQuotientIso_existsUnique f I K n)
+
+private theorem scalarQuotient_property {S : Type u} [CommRing S] (f : R →+* S)
+    (I : Ideal R) (K : CochainComplex (ModuleCat.{u} R) ℤ) (n : ℕ) :
+    (extend f).map (quotient I K n) ≫ (scalarQuotientIso f I K n).hom =
+      quotient (I.map f) ((extend f).obj K) n :=
+  (Classical.choose_spec (scalarQuotientIso_existsUnique f I K n)).1
 
 /-- The canonical product comparison, using the extended product projections followed
 by their balanced quotient identifications. This is piComparison expressed by projections.
@@ -346,6 +484,98 @@ def ScalarCoordinates {S : Type u} [CommRing S]
         ((roosP ((tower I).obj K)).X q) ((roosP ((tower I).obj K)).X (q + 1)) ≫
       biprod.map ((scalarProduct f I K).f q) ((scalarProduct f I K).f (q + 1))
 
+private theorem scalarQuotient_transition {S : Type u} [CommRing S] (f : R →+* S)
+    (I : Ideal R) (K : CochainComplex (ModuleCat.{u} R) ℤ) (n : ℕ) :
+    (extend f).map (((tower I).obj K).asFunctor.map (homOfLE (Nat.le_succ n)).op) ≫
+        (scalarQuotientIso f I K n).hom =
+      (scalarQuotientIso f I K (n + 1)).hom ≫
+        ((tower (I.map f)).obj ((extend f).obj K)).asFunctor.map
+          (homOfLE (Nat.le_succ n)).op := by
+  have hE : Epi ((extend f).map (quotient I K (n + 1))) := by
+    apply HomologicalComplex.epi_of_epi_f
+    intro q
+    apply (ModuleCat.epi_iff_surjective _).mpr
+    let := f.toAlgebra
+    exact LinearMap.lTensor_surjective S
+      (AdicCohomology.power I (K.X q) (n + 1 + 1)).mkQ_surjective
+  apply (cancel_epi ((extend f).map (quotient I K (n + 1)))).mp
+  rw [← Category.assoc, ← Functor.map_comp, quotient_compatible,
+    scalarQuotient_property, ← Category.assoc, scalarQuotient_property,
+    quotient_compatible]
+
+private theorem scalarProduct_comm {S : Type u} [CommRing S] (f : R →+* S)
+    (I : Ideal R) (K : CochainComplex (ModuleCat.{u} R) ℤ) :
+    (extend f).map (roosU ((tower I).obj K)) ≫ scalarProduct f I K =
+      scalarProduct f I K ≫ roosU ((tower (I.map f)).obj ((extend f).obj K)) := by
+  let : (ModuleCat.extendScalars.{u, u, u} f).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj f).left_adjoint_additive
+  let : (extend f).Additive := by unfold extend; infer_instance
+  apply Pi.hom_ext
+  intro n
+  simp only [scalarProduct, roosU, towerTransitionEndomorphism, towerProductShift,
+    Functor.map_sub, Preadditive.sub_comp, Preadditive.comp_sub,
+    Category.assoc, Pi.lift_π, Pi.lift_π_assoc, Category.id_comp]
+  rw [← Functor.map_comp_assoc]
+  simp only [Category.id_comp]
+  rw [← Functor.map_comp_assoc, Pi.lift_π, Functor.map_comp,
+    Category.assoc, scalarQuotient_transition]
+
+private def scalarCone {S : Type u} [CommRing S] (f : R →+* S)
+    (I : Ideal R) (K : CochainComplex (ModuleCat.{u} R) ℤ) :
+    (extend f).obj ((completion I).obj K) ⟶
+      (completion (I.map f)).obj ((extend f).obj K) := by
+  let : (ModuleCat.extendScalars.{u, u, u} f).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj f).left_adjoint_additive
+  let X := (tower I).obj K
+  let Y := (tower (I.map f)).obj ((extend f).obj K)
+  exact (((ModuleCat.extendScalars.{u, u, u} f).mapHomologicalComplex (.up ℤ)).commShiftIso
+    (-1 : ℤ)).hom.app (CochainComplex.mappingCone (roosU X)) ≫
+    (CategoryTheory.shiftFunctor (CochainComplex (ModuleCat.{u} S) ℤ) (-1 : ℤ)).map
+      ((HomologicalComplex.homotopyCofiber.mapHomologicalComplexObjIso
+        (roosU X) (ModuleCat.extendScalars f)).hom ≫
+        HomologicalComplex.homotopyCofiber.mapArrowHom _ (roosU Y)
+          (fun j : ℤ ↦ ⟨j - 1, by change j - 1 + 1 = j; omega⟩)
+          (Arrow.homMk (scalarProduct f I K) (scalarProduct f I K)
+            (scalarProduct_comm f I K).symm))
+
+private theorem scalarCone_coordinates {S : Type u} [CommRing S] (f : R →+* S)
+    (I : Ideal R) (K : CochainComplex (ModuleCat.{u} R) ℤ) :
+    ScalarCoordinates f I K (scalarCone f I K) := by
+  let : (ModuleCat.extendScalars.{u, u, u} f).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj f).left_adjoint_additive
+  intro p
+  change (scalarCone f I K).f (p + 1) ≫
+    (roosχ ((tower (I.map f)).obj ((extend f).obj K)) p).hom = _
+  dsimp only [scalarCone, HomologicalComplex.comp_f]
+  simp only [Functor.mapHomologicalComplex_commShiftIso_hom_app_f,
+    CochainComplex.shiftFunctor_map_f', HomologicalComplex.comp_f]
+  dsimp only [roosχ, Iso.trans_hom, CochainComplex.shiftFunctorObjXIso]
+  simp only [Category.assoc]
+  erw [HomologicalComplex.XIsoOfEq_hom_naturality_assoc]
+  erw [HomologicalComplex.XIsoOfEq_hom_naturality_assoc]
+  simp only [CategoryTheory.roos_XIsoOfEq, Functor.map_comp, Category.assoc]
+  dsimp only [Functor.comp_obj, Functor.mapHomologicalComplex_obj_X,
+    roosF, roosConeFunctor, CochainComplex.shiftFunctor_obj_X']
+  erw [Category.id_comp]
+  apply (cancel_epi ((ModuleCat.extendScalars f).map ((CochainComplex.mappingCone
+    (roosU ((tower I).obj K))).XIsoOfEq
+      (show p + 1 + -1 = p from by omega)).hom)).mpr
+  rw [CategoryTheory.roosConeMap_coordinates]
+  change (HomologicalComplex.homotopyCofiber.mapHomologicalComplexObjXIso
+    (roosU ((tower I).obj K)) (ModuleCat.extendScalars f) p).hom ≫ _ = _
+  rw [← Category.assoc, CategoryTheory.roosConeFunctor_coordinates]
+  simp only [Category.assoc]
+  congr 1
+  apply biprod.hom_ext
+  · simp only [Category.assoc]
+    erw [biprod.map_fst, Functor.biprodComparison_fst_assoc]
+    erw [biprod.braiding_hom, biprod.lift_fst_assoc,
+      Functor.biprodComparison_snd_assoc, ← Functor.map_comp_assoc, biprod.lift_fst]
+  · simp only [Category.assoc]
+    erw [biprod.map_snd, Functor.biprodComparison_snd_assoc]
+    erw [biprod.braiding_hom, biprod.lift_snd_assoc,
+      Functor.biprodComparison_fst_assoc, ← Functor.map_comp_assoc, biprod.lift_snd]
+
 /-- There is a unique scalar Roos map with the prescribed two product coordinates.
 Source: Tag 0941, DAG step 10 (blueprint: lem-sf-perfect-tensor-roos-completion).
 Proof: use the additive comparison for the mapping cone with its projection product
@@ -355,7 +585,14 @@ theorem scalarComparison_existsUnique {S : Type u} [CommRing S]
     (f : R →+* S) (I : Ideal R) (K : CochainComplex (ModuleCat.{u} R) ℤ) :
     ∃! c : (extend f).obj ((completion I).obj K) ⟶
       (completion (I.map f)).obj ((extend f).obj K), ScalarCoordinates f I K c := by
-  sorry
+  refine ⟨scalarCone f I K, scalarCone_coordinates f I K, ?_⟩
+  intro c hc
+  apply HomologicalComplex.hom_ext
+  intro k
+  obtain ⟨q, rfl⟩ := (Equiv.addRight (1 : ℤ)).surjective k
+  change c.f (q + 1) = (scalarCone f I K).f (q + 1)
+  apply (cancel_mono (roosχ ((tower (I.map f)).obj ((extend f).obj K)) q).hom).mp
+  exact (hc q).trans (scalarCone_coordinates f I K q).symm
 
 /-- The actual scalar Roos comparison, specified by its two canonical product coordinates.
 Source: Tag 0941, DAG step 10 (blueprint: lem-sf-perfect-tensor-roos-completion). -/
@@ -401,7 +638,102 @@ theorem scalar_extension {S : Type u} [CommRing S] [Algebra R S]
           ((extend (algebraMap R S)).obj P ⊗ (extend (algebraMap R S)).obj Q) ≫
         (completion (I.map (algebraMap R S))).map
           (scalarTensorator (algebraMap R S) P Q) := by
-  sorry
+  let f := algebraMap R S
+  let G := ModuleCat.extendScalars.{u, u, u} f
+  let : (ModuleCat.extendScalars.{u, u, u} f).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj f).left_adjoint_additive
+  have hfin : letI := f.toAlgebra; Module.Finite R S := by
+    rw [toAlgebra_algebraMap]
+    infer_instance
+  have hproj : letI := f.toAlgebra; Module.Projective R S := by
+    rw [toAlgebra_algebraMap]
+    infer_instance
+  let : PreservesLimits G :=
+    ModuleCat.preservesLimits_extendScalars_of_finite_projective f hfin hproj
+  let : PreservesLimitsOfSize.{0, 0} G := preservesSmallestLimits_of_preservesLimits G
+  let : PreservesBinaryBiproducts (ModuleCat.extendScalars f) :=
+    preservesBinaryBiproducts_of_preservesBinaryProducts (ModuleCat.extendScalars f)
+  let : PreservesLimitsOfShape (Discrete ℕ) (extend f) := by
+    apply HomologicalComplex.preservesLimitsOfShape_of_eval
+    intro q
+    change PreservesLimitsOfShape (Discrete ℕ)
+      (HomologicalComplex.eval (ModuleCat R) (.up ℤ) q ⋙ G)
+    infer_instance
+  have hp (K : CochainComplex (ModuleCat.{u} R) ℤ) :
+      IsIso (scalarProduct f I K) := by
+    have he : scalarProduct f I K =
+        piComparison (extend f) (fun n : ℕ ↦ ((tower I).obj K).asFunctor.obj (op n)) ≫
+          Limits.Pi.map (fun n ↦ (scalarQuotientIso f I K n).hom) := by
+      apply Pi.hom_ext
+      intro n
+      simp [scalarProduct, Category.assoc]
+    rw [he]
+    infer_instance
+  have hc (K : CochainComplex (ModuleCat.{u} R) ℤ) :
+      ScalarCoordinates f I K (scalarComparison f I K) :=
+    (Classical.choose_spec (scalarComparison_existsUnique f I K)).1
+  have hi (K : CochainComplex (ModuleCat.{u} R) ℤ) :
+      IsIso (scalarComparison f I K) := by
+    have := hp K
+    have (j : ℤ) : IsIso ((scalarProduct f I K).f j) := by infer_instance
+    have (k : ℤ) : IsIso ((scalarComparison f I K).f k) := by
+      obtain ⟨q, rfl⟩ := (Equiv.addRight (1 : ℤ)).surjective k
+      change IsIso ((scalarComparison f I K).f (q + 1))
+      have h := hc K q
+      have : IsIso ((scalarComparison f I K).f (q + 1) ≫
+          (roosχ ((tower (I.map f)).obj ((extend f).obj K)) q).hom) := by
+        rw [h]
+        exact (((ModuleCat.extendScalars f).mapIso (roosχ ((tower I).obj K) q)) ≪≫
+          (ModuleCat.extendScalars f).mapBiprod _ _ ≪≫
+          biprod.mapIso (asIso ((scalarProduct f I K).f q))
+            (asIso ((scalarProduct f I K).f (q + 1)))).isIso_hom
+      exact IsIso.of_isIso_comp_right _
+        (roosχ ((tower (I.map f)).obj ((extend f).obj K)) q).hom
+    exact HomologicalComplex.Hom.isIso_of_components _
+  have ha (K : CochainComplex (ModuleCat.{u} R) ℤ) :
+      (extend f).map (augmentation I K) ≫ scalarComparison f I K =
+        augmentation (I.map f) ((extend f).obj K) := by
+    apply HomologicalComplex.hom_ext
+    intro k
+    obtain ⟨q, rfl⟩ := (Equiv.addRight (1 : ℤ)).surjective k
+    change ((extend f).map (augmentation I K) ≫ scalarComparison f I K).f (q + 1) =
+      (augmentation (I.map f) ((extend f).obj K)).f (q + 1)
+    apply (cancel_mono
+      (roosχ ((tower (I.map f)).obj ((extend f).obj K)) q).hom).mp
+    simp only [HomologicalComplex.comp_f, Category.assoc]
+    rw [hc K q]
+    change (ModuleCat.extendScalars f).map ((augmentation I K).f (q + 1)) ≫ _ = _
+    rw [← Category.assoc, ← Functor.map_comp, augmentation, roosAugment_χ]
+    rw [show (augmentation (I.map f) ((extend f).obj K)).f (q + 1) ≫
+        (roosχ ((tower (I.map f)).obj ((extend f).obj K)) q).hom =
+        biprod.lift 0 ((Pi.lift (quotient (I.map f) ((extend f).obj K))).f (q + 1))
+      from roosAugment_χ _ _ q]
+    apply biprod.hom_ext
+    · simp only [Category.assoc, biprod.map_fst,
+        Functor.biprodComparison_fst_assoc]
+      rw [← Functor.map_comp_assoc, biprod.lift_fst, Functor.map_zero,
+        zero_comp, biprod.lift_fst]
+    · simp only [Category.assoc, biprod.map_snd,
+        Functor.biprodComparison_snd_assoc, ← Functor.map_comp_assoc, biprod.lift_snd]
+      change (G.map ((Pi.lift (quotient I K)).f (q + 1))) ≫
+        (scalarProduct f I K).f (q + 1) = _
+      have hprod : (extend f).map (Pi.lift (quotient I K)) ≫ scalarProduct f I K =
+          Pi.lift (quotient (I.map f) ((extend f).obj K)) := by
+        apply Pi.hom_ext
+        intro n
+        simp only [scalarProduct, Category.assoc, Pi.lift_π]
+        rw [← Functor.map_comp_assoc, Pi.lift_π, scalarQuotient_property]
+      simpa only [HomologicalComplex.comp_f, extend, Functor.mapHomologicalComplex_map_f]
+        using congrArg (fun t ↦ t.f (q + 1)) hprod
+  refine ⟨hp _, hi _, hc _, ha _, ?_⟩
+  rw [ha]
+  have hn {A B : CochainComplex (ModuleCat.{u} S) ℤ} (t : A ⟶ B) :
+      t ≫ augmentation (I.map (algebraMap R S)) B =
+        augmentation (I.map (algebraMap R S)) A ≫
+          (completion (I.map (algebraMap R S))).map t :=
+    augmentation_natural (I.map (algebraMap R S)) t
+  dsimp only [f]
+  exact hn (scalarTensorator (algebraMap R S) P Q)
 
 
 /-- The canonical arithmetic Roos map, formed using the existing selection/block square.
@@ -442,7 +774,57 @@ theorem arithmetic_coherence (X : CochainComplex (ℕᵒᵖ ⥤ ModuleCat.{u} R)
             γ (e * (n + 1) - 1),
         roosAugment γ hγ ≫ arithmetic X e he =
           roosAugment (fun n ↦ γ (e * (n + 1) - 1)) hγe) := by
-  sorry
+  have hc (e : ℕ) (he : 1 ≤ e) (q : ℤ) :
+      (arithmetic X e he).f (q + 1) ≫
+        (roosχ ((complexRestriction (ModuleCat.{u} R) e).obj X) q).hom =
+      (roosχ X q).hom ≫ biprod.map
+        ((block e X.asFunctor).f q) ((selection e X.asFunctor).f (q + 1)) :=
+    strictRoosMapOfSquare_coordinates (X := X)
+      (Y := (complexRestriction (ModuleCat.{u} R) e).obj X) _ _ _ q
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro e he
+    have hq : QuasiIso (arithmetic X e he) := by
+      let := HasDerivedCategory.standard (ModuleCat.{u} R)
+      obtain ⟨res, delta, H, hr, _⟩ :=
+        CategoryTheory.RoosTransition.transitionHomotopy_all (D := ModuleCat.{u} R) e he
+      have hres : arithmetic X e he = res X := by
+        apply HomologicalComplex.hom_ext
+        intro k
+        obtain ⟨q, rfl⟩ := (Equiv.addRight (1 : ℤ)).surjective k
+        change (arithmetic X e he).f (q + 1) = (res X).f (q + 1)
+        apply (cancel_mono (roosχ ((complexRestriction (ModuleCat.{u} R) e).obj X) q).hom).mp
+        exact (hc e he q).trans ((hr X).2.2.1 q).symm
+      rw [hres]
+      rcases hr X with ⟨_, _, _, _, _, _, _, _, _, hq, _⟩
+      exact hq
+    exact ⟨hq, hc e he⟩
+  · exact CategoryTheory.rho_one X
+  · intro e f he hf
+    exact CategoryTheory.rho_mul X e he f hf
+  · intro K γ hγ e he
+    have hγe : ∀ n : ℕ, γ (e * (n + 1 + 1) - 1) ≫
+        X.asFunctor.map ((index e).map (homOfLE (Nat.le_succ n)).op) =
+          γ (e * (n + 1) - 1) := by
+      intro n
+      exact roos_compatible X.asFunctor γ hγ
+        (Nat.sub_le_sub_right (Nat.mul_le_mul_left e (Nat.le_succ (n + 1))) 1)
+    refine ⟨hγe, ?_⟩
+    obtain ⟨b, hb, b', hb', heq⟩ := CategoryTheory.rho_augment X e he K γ hγ
+    have hbe : b = roosAugment γ hγ := by
+      apply HomologicalComplex.hom_ext
+      intro k
+      obtain ⟨q, rfl⟩ := (Equiv.addRight (1 : ℤ)).surjective k
+      change b.f (q + 1) = (roosAugment γ hγ).f (q + 1)
+      apply (cancel_mono (roosχ X q).hom).mp
+      exact (hb q).trans (roosAugment_χ γ hγ q).symm
+    have hb'e : b' = roosAugment (fun n ↦ γ (e * (n + 1) - 1)) hγe := by
+      apply HomologicalComplex.hom_ext
+      intro k
+      obtain ⟨q, rfl⟩ := (Equiv.addRight (1 : ℤ)).surjective k
+      change b'.f (q + 1) = (roosAugment _ hγe).f (q + 1)
+      apply (cancel_mono (roosχ ((complexRestriction (ModuleCat.{u} R) e).obj X) q).hom).mp
+      exact (hb' q).trans (roosAugment_χ _ hγe q).symm
+    simpa only [hbe, hb'e, CategoryTheory.rho, arithmetic] using heq
 
 /-- Ramified finite-free local extension: the completion comparison uses the cofinal
 quotient maps, rather than identifying the two indexed uniformizer towers.
@@ -566,7 +948,82 @@ theorem scalar_tensorator_formula {S : Type u} [CommRing S] (f : R →+* S)
           p q (p + q) rfl) ((a ⊗ₜ[R, f] x) ⊗ₜ[S] (b ⊗ₜ[R, f] y))) =
         (a * b) ⊗ₜ[R, f] ((HomologicalComplex.ιTensorObj P Q p q (p + q) rfl)
           (x ⊗ₜ[R] y)) := by
-  sorry
+  let : (ModuleCat.extendScalars.{u, u, u} f).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj f).left_adjoint_additive
+  let G := ModuleCat.extendScalars f
+  let D := ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) G).app P).app Q
+  have hD : IsIso D := inferInstance
+  have hβ : scalarTensorator f P Q = inv D := rfl
+  refine ⟨by rw [hβ]; infer_instance, ?_⟩
+  intro p q x y a b
+  have hc : G.map (HomologicalComplex.ιTensorObj P Q p q (p + q) rfl) ≫ D.f (p + q) =
+      Functor.OplaxMonoidal.δ G (P.X p) (Q.X q) ≫
+        HomologicalComplex.ιTensorObj ((extend f).obj P) ((extend f).obj Q)
+          p q (p + q) rfl := by
+    exact HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX
+      (Functor.OplaxMonoidal.δNatTrans G) (.up ℤ) P Q p q (p + q) rfl
+  have hi : HomologicalComplex.ιTensorObj ((extend f).obj P) ((extend f).obj Q)
+        p q (p + q) rfl ≫ (scalarTensorator f P Q).f (p + q) =
+      inv (Functor.OplaxMonoidal.δ G (P.X p) (Q.X q)) ≫
+        G.map (HomologicalComplex.ιTensorObj P Q p q (p + q) rfl) := by
+    apply (cancel_mono (D.f (p + q))).mp
+    erw [hβ, Category.assoc, ← HomologicalComplex.comp_f, IsIso.inv_hom_id,
+      HomologicalComplex.id_f, Category.comp_id, Category.assoc, hc,
+      IsIso.inv_hom_id_assoc]
+  have hv := congrArg (fun k ↦ k
+    ((a ⊗ₜ[R, f] x) ⊗ₜ[S] (b ⊗ₜ[R, f] y))) hi
+  simp only [ModuleCat.comp_apply] at hv
+  refine hv.trans ?_
+  let := f.toAlgebra
+  simp only [Functor.Monoidal.inv_δ, G, ModuleCat.extendScalars_μ]
+  change (G.map (HomologicalComplex.ιTensorObj P Q p q (p + q) rfl))
+    ((TensorProduct.AlgebraTensorModule.distribBaseChange R S (P.X p) (Q.X q)).symm
+      ((a ⊗ₜ[R] x) ⊗ₜ[S] (b ⊗ₜ[R] y))) = _
+  rw [TensorProduct.AlgebraTensorModule.distribBaseChange_symm_tmul]
+  rfl
+
+private theorem quotient_map (I : Ideal R) {K L : CochainComplex (ModuleCat.{u} R) ℤ}
+    (a : K ⟶ L) (n : ℕ) : a ≫ quotient I L n = quotient I K n ≫
+      (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
+        ((tower I).map a)).app (op n) := by
+  ext q x
+  rfl
+
+private theorem scalarQuotient_natural {S : Type u} [CommRing S] (f : R →+* S)
+    (I : Ideal R) {K L : CochainComplex (ModuleCat.{u} R) ℤ} (a : K ⟶ L) (n : ℕ) :
+    (extend f).map ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
+      ((tower I).map a)).app (op n)) ≫ (scalarQuotientIso f I L n).hom =
+        (scalarQuotientIso f I K n).hom ≫
+          (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
+            ((tower (I.map f)).map ((extend f).map a))).app (op n) := by
+  have hE : Epi ((extend f).map (quotient I K n)) := by
+    apply HomologicalComplex.epi_of_epi_f
+    intro q
+    apply (ModuleCat.epi_iff_surjective _).mpr
+    let := f.toAlgebra
+    exact LinearMap.lTensor_surjective S
+      (AdicCohomology.power I (K.X q) (n + 1)).mkQ_surjective
+  apply (cancel_epi ((extend f).map (quotient I K n))).mp
+  rw [← Category.assoc, ← Functor.map_comp, ← quotient_map,
+    Functor.map_comp, Category.assoc, scalarQuotient_property,
+    ← Category.assoc, scalarQuotient_property]
+  exact quotient_map (I.map f) ((extend f).map a) n
+
+private theorem scalarProduct_natural {S : Type u} [CommRing S] (f : R →+* S)
+    (I : Ideal R) {K L : CochainComplex (ModuleCat.{u} R) ℤ} (a : K ⟶ L) :
+    (extend f).map (roosPmap ((tower I).map a)) ≫ scalarProduct f I L =
+      scalarProduct f I K ≫ roosPmap ((tower (I.map f)).map ((extend f).map a)) := by
+  apply Pi.hom_ext
+  intro n
+  simp only [scalarProduct, roosPmap, Category.assoc, Pi.lift_π,
+    Pi.lift_π_assoc, Pi.map_π]
+  rw [← Functor.map_comp_assoc, Pi.map_π, Functor.map_comp, Category.assoc,
+    scalarQuotient_natural]
+
+private theorem scalarComparison_coordinates {S : Type u} [CommRing S] (f : R →+* S)
+    (I : Ideal R) (K : CochainComplex (ModuleCat.{u} R) ℤ) :
+    ScalarCoordinates f I K (scalarComparison f I K) :=
+  (Classical.choose_spec (scalarComparison_existsUnique f I K)).1
 
 /-- The canonical scalar completion comparison is natural in maps of representatives.
 Source: Tag 0941, DAG steps 7 and 10
@@ -579,6 +1036,40 @@ theorem scalar_naturality {S : Type u} [CommRing S] (f : R →+* S)
     (I : Ideal R) {K L : CochainComplex (ModuleCat.{u} R) ℤ} (a : K ⟶ L) :
     (extend f).map ((completion I).map a) ≫ scalarComparison f I L =
       scalarComparison f I K ≫ (completion (I.map f)).map ((extend f).map a) := by
-  sorry
+  let : (ModuleCat.extendScalars.{u, u, u} f).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj f).left_adjoint_additive
+  apply HomologicalComplex.hom_ext
+  intro k
+  obtain ⟨q, rfl⟩ := (Equiv.addRight (1 : ℤ)).surjective k
+  change ((extend f).map ((completion I).map a) ≫ scalarComparison f I L).f (q + 1) =
+    (scalarComparison f I K ≫
+      (completion (I.map f)).map ((extend f).map a)).f (q + 1)
+  apply (cancel_mono (roosχ ((tower (I.map f)).obj ((extend f).obj L)) q).hom).mp
+  simp only [HomologicalComplex.comp_f, Category.assoc]
+  rw [scalarComparison_coordinates f I L q]
+  change (ModuleCat.extendScalars f).map ((roosF.map ((tower I).map a)).f (q + 1)) ≫ _ = _
+  rw [← Functor.map_comp_assoc, roosF_map_χ, Functor.map_comp, Category.assoc]
+  have hb {M N M' N' : ModuleCat.{u} R} (b : M ⟶ M') (c : N ⟶ N') :
+      (ModuleCat.extendScalars f).map (biprod.map b c) ≫
+        (ModuleCat.extendScalars f).biprodComparison M' N' =
+      (ModuleCat.extendScalars f).biprodComparison M N ≫
+        biprod.map ((ModuleCat.extendScalars f).map b) ((ModuleCat.extendScalars f).map c) := by
+    apply biprod.hom_ext <;>
+      simp [← Functor.map_comp, Functor.biprodComparison_fst,
+        Functor.biprodComparison_snd]
+  rw [reassoc_of% hb]
+  erw [roosF_map_χ, reassoc_of% scalarComparison_coordinates f I K q]
+  congr 2
+  have hn (j : ℤ) :
+      (ModuleCat.extendScalars f).map ((roosPmap ((tower I).map a)).f j) ≫
+        (scalarProduct f I L).f j =
+      (scalarProduct f I K).f j ≫
+        (roosPmap ((tower (I.map f)).map ((extend f).map a))).f j :=
+    congrArg (fun k ↦ k.f j) (scalarProduct_natural f I a)
+  apply biprod.hom_ext
+  · simp only [Category.assoc, biprod.map_fst, biprod.map_fst_assoc]
+    exact congrArg (fun t ↦ biprod.fst ≫ t) (hn q)
+  · simp only [Category.assoc, biprod.map_snd, biprod.map_snd_assoc]
+    exact congrArg (fun t ↦ biprod.snd ≫ t) (hn (q + 1))
 
 end CochainComplex.PerfectTensorRoos

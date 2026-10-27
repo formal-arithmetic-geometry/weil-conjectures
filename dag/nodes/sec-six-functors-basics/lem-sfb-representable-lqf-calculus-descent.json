@@ -1,0 +1,382 @@
+{
+ "id": "lem-sfb-representable-lqf-calculus-descent",
+ "kind": "statement",
+ "title": "Local quasi-finiteness: representable base change, source locality and fppf target tests",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Algebraic stacks mean [def-sfb-algebraic-moduli-stack], fibred groupoids and $2$-fibre products mean [def-sfb-stable-pointed-moduli-groupoids], and algebraic spaces mean [def-trf-algebraic-space]. A morphism is representable if every scheme base change is an algebraic space. Properties of representable maps are tested after scheme base change on etale scheme charts. Local quasi-finiteness means [pqf-def-quasifinite] on the specified scheme charts. For representable morphisms of algebraic stacks, local quasi-finiteness is preserved by arbitrary base change and composition and is local for open covers of the source: a map is locally quasi-finite if and only if its restrictions to an open cover are. If $f:\\mathcal A\\to\\mathcal B$ is representable and $q:V\\to\\mathcal B$ is a representable surjective flat locally finitely presented morphism from an algebraic space, then $f$ is locally quasi-finite if and only if $\\mathcal A\\times_{\\mathcal B}V\\to V$ is locally quasi-finite. Flatness and local finite presentation mean [def-weil-flat-morphism, def-sbc-locally-finite-presentation]; surjective means field-extension local lifting. Finally, for composable morphisms $A\\to B\\to C$ of algebraic spaces, local quasi-finiteness of $A\\to C$ implies local quasi-finiteness of $A\\to B$, without any hypothesis on $B\\to C$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 04XD (lemma-check-property-covering), P = locally quasi-finite; spaces-descent.tex Tag 0427 (lemma-descending-property-quasi-finite), locally quasi-finite assertion; spaces-morphisms.tex Tags 03XK (lemma-composition-quasi-finite), 03XL (lemma-base-change-quasi-finite), 03XN (lemma-permanence-quasi-finite). Open-source locality follows from the etale-chart definition."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "pqf-def-quasifinite",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "Write $P$ for local quasi-finiteness in the scheme sense [pqf-def-quasifinite]. It is invariant under isomorphism, and local for open source covers, directly from its pointwise affine-neighbourhood definition. Identities have $P$: on an affine open the identity ring map is finite type and its fibres are one-point spectra of fields. Precomposing a map having $P$ by an etale map preserves $P$, by [lem-a1-scheme-lqf-etale-source-locality]. In particular etale scheme maps have $P$ by applying this to an identity. Arbitrary scheme base change preserves $P$ by clause (2) of [lem-weil-pbc-separated-lqf-base-change]; that clause does not assume separatedness. Composites have $P$ by [lem-a1-scheme-lqf-composition], and $P(bh)$ implies $P(h)$ by [lem-sfb-scheme-lqf-cancellation], without any assumption on $b$.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "lem-a1-scheme-lqf-etale-source-locality",
+    "lem-weil-pbc-separated-lqf-base-change",
+    "lem-a1-scheme-lqf-composition",
+    "lem-sfb-scheme-lqf-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03XJ and 040Z; scheme inputs Tags 03X4, 01TM, 01TL, 03WR."
+   }
+  },
+  {
+   "text": "We check condition (iii) of [lem-sfb-space-etale-presentation-property-criterion] for $P$. In a compatible etale scheme diagram $fa=bh$, $P(f)$ implies $P(fa)$ and hence $P(h)$ by Step 1. Conversely suppose that every $x\\in X$ has the witnesses $(a:U\\to X,b:V\\to Y,h,u)$ in that condition, with $a(u)=x$ and $P(h)$. Since $b$ is etale, Step 1 gives $P(fa)=P(bh)$. Regard schemes as spaces by [def-trf-scheme-algebraic-space]. By [lem-a1-etale-scheme-map-open-image], $a$ factors as a surjective etale map $U\\to I$ followed by an open immersion $I\\hookrightarrow X$, and $x\\in I$. The scheme-test definition of an open immersion makes $I$ an open subscheme of the scheme $X$. The reverse implication of [lem-a1-scheme-lqf-etale-source-locality] gives $P(f|_I)$. Thus $f$ is quasi-finite at $x$, by [pqf-def-quasifinite]; doing this for every $x$ gives $P(f)$. With (i) and (ii) from Step 1, the cited presentation criterion now applies. Consequently a space map is locally quasi-finite if and only if one compatible etale scheme presentation with surjective source chart has $P$, and then every compatible presentation has $P$. It also agrees with $P$ on schemes. We use this established criterion below.",
+   "uses": [
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "def-trf-scheme-algebraic-space",
+    "lem-a1-etale-scheme-map-open-image",
+    "lem-a1-scheme-lqf-etale-source-locality",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03MJ, 03XJ, 040Z; explicit verification of etale locality using scheme Tag 03X4 and the open image of an etale map."
+   }
+  },
+  {
+   "text": "For space maps $X\\xrightarrow{f}Y\\xrightarrow{g}Z$, choose a surjective etale scheme atlas $W\\to Z$, then a surjective etale scheme atlas $V\\to Y\\times_ZW$, then $U\\to X\\times_YV$. These choices exist by [def-trf-algebraic-space] and [lem-trf-space-fibre-products-etale-covers]. The maps $V\\to Y$ and $U\\to X$ are surjective etale by the base-change and composition assertions of [lem-trf-space-representable-etale-scheme-tests]. We obtain compatible scheme maps $U\\xrightarrow{h}V\\xrightarrow{k}W$ presenting $f,g,gf$ simultaneously. If $f,g$ are locally quasi-finite, Step 2 gives $P(h),P(k)$; [lem-a1-scheme-lqf-composition] gives $P(kh)$, so Step 2 gives local quasi-finiteness of $gf$. If only $gf$ is locally quasi-finite, Step 2 gives $P(kh)$; [lem-sfb-scheme-lqf-cancellation] gives $P(h)$, so Step 2 gives local quasi-finiteness of $f$. No property of $g$ was used in this latter argument. This proves the final cancellation clause of the item as well as space composition.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-a1-scheme-lqf-composition",
+    "lem-sfb-scheme-lqf-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XK, lemma-composition-quasi-finite; Tag 03XN, lemma-permanence-quasi-finite; compatible presentations as in Tag 02X1."
+   }
+  },
+  {
+   "text": "Let $f:X\\to Y$ be a locally quasi-finite space map and let $Y\\prime\\to Y$ be arbitrary. Choose a scheme atlas $V\\to Y$ and a scheme atlas $U\\to X\\times_YV$, both surjective etale, so $P(U\\to V)$ by Step 2. Choose also a surjective etale scheme atlas $V\\prime\\to Y\\prime\\times_YV$. All these spaces and atlases exist by [def-trf-algebraic-space] and [lem-trf-space-fibre-products-etale-covers]. The scheme $U\\prime=U\\times_VV\\prime$ has a surjective etale map to $X\\times_YY\\prime$: first its map to $X\\times_YV\\prime$ is the base change of $U\\to X\\times_YV$, and then $X\\times_YV\\prime\\to X\\times_YY\\prime$ is the base change of $V\\prime\\to Y\\prime$. Their properties follow from [lem-trf-space-representable-etale-scheme-tests]; the same node makes $V\\prime\\to Y\\prime$ surjective etale. The scheme map $U\\prime\\to V\\prime$ is the base change of $U\\to V$, so it has $P$ by clause (2) of [lem-weil-pbc-separated-lqf-base-change]. Step 2 applied to this presentation proves local quasi-finiteness of $X\\times_YY\\prime\\to Y\\prime$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-weil-pbc-separated-lqf-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03XL, lemma-base-change-quasi-finite, and 0ABM, lemma-base-change-quasi-finite-locus, atlas proof."
+   }
+  },
+  {
+   "text": "For a space map $f:X\\to Y$ and an open cover $(X_i)$ of $X$, fix a surjective etale scheme atlas $V\\to Y$ and a surjective etale scheme atlas $U\\to X\\times_YV$. Pulling back the opens gives open subschemes $U_i$ covering $U$. The meaning of open cover is the scheme-test meaning in [lem-sfb-stack-chartwise-smooth-etale-calculus], and the atlases and their pullbacks use [def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers]. Each $U_i\\to X_i$ is an etale scheme chart by [lem-trf-space-representable-etale-scheme-tests]. If every $f|_{X_i}$ is locally quasi-finite, Step 2 gives $P(U_i\\to V)$ for each $i$. For each $u\\in U$, choose $i$ with $u\\in U_i$; the affine-neighbourhood witnesses for $U_i\\to V$ at $u$ are also witnesses for $U\\to V$. Thus $P(U\\to V)$ by [pqf-def-quasifinite], and Step 2 gives local quasi-finiteness of $f$. Conversely any compatible presentation of $f|_{X_i}$ is one of $f$, because an open inclusion is etale ([lem-weil-pbc-etale-composition-cancellation]); hence all such presentations have $P$. This proves both directions of open source locality, also for the empty cover of an empty source.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XJ, definition-locally-quasi-finite; Tag 040Z and pointwise scheme definition Tag 01TD."
+   }
+  },
+  {
+   "text": "We next prove the scheme-target descent calculation needed below. Let $Z\\to T$ be a space map with $T$ a scheme, and let $u:D\\to T$ be a surjective flat locally finitely presented scheme map. Suppose $Z_D\\to D$ is locally quasi-finite. The singleton $\\{u\\}$ is an fppf covering by [def-pc-fppf-site], and therefore an fpqc covering by [lem-trf-fppf-covering-is-fpqc]; this does not assume $u$ quasi-compact. Choose a surjective etale scheme atlas $E\\to Z$ by [def-trf-algebraic-space]. Its base change $E_D\\to Z_D$ is a surjective etale scheme atlas by [lem-trf-space-fibre-products-etale-covers]; $E_D=E\\times_TD$ is a scheme. Step 2 gives $P(E_D\\to D)$ using target chart $\\operatorname{id}_D$. Apply [lem-sfb-scheme-lqf-fpqc-descent] to $E\\to T$ and the covering $\\{u\\}$ to obtain $P(E\\to T)$. Step 2 with charts $E\\to Z$ and $\\operatorname{id}_T$ gives local quasi-finiteness of $Z\\to T$.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-scheme-lqf-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "spaces-descent.tex Tag 0427, lemma-descending-property-quasi-finite, scheme-atlas reduction; descent.tex Tag 02VI."
+   }
+  },
+  {
+   "text": "For a representable stack map $f:\\mathcal A\\to\\mathcal B$, its definition tests local quasi-finiteness on every scheme base change. The same test is valid with any algebraic space $H\\to\\mathcal B$. Indeed $A_H=\\mathcal A\\times_{\\mathcal B}H$ is an algebraic space by [lem-sfb-representable-pullback-over-space]. Choose surjective etale scheme atlases $D\\to H$ and $E\\to A_H\\times_HD$ by [def-trf-algebraic-space]. The map $E\\to A_H$ is surjective etale by [lem-trf-space-representable-etale-scheme-tests]. The map $A_H\\times_HD\\to D$ identifies with the scheme test $\\mathcal A\\times_{\\mathcal B}D\\to D$, using the triple definition of [def-sfb-stable-pointed-moduli-groupoids]. It is locally quasi-finite, so Step 2 gives $P(E\\to D)$. Step 2 again, now for the compatible presentation $E\\to D$ of $A_H\\to H$, gives local quasi-finiteness of that map. Conversely the algebraic-space tests include all scheme tests, since schemes are spaces by [def-trf-scheme-algebraic-space]. For space maps themselves this scheme-test interpretation agrees with the chart property: one direction is Step 4, and the other uses one surjective etale scheme target atlas and Step 2.",
+   "uses": [
+    "lem-sfb-representable-pullback-over-space",
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "stacks-properties.tex Tag 04XC, lemma-property-spaces-too, specialized to local quasi-finiteness."
+   }
+  },
+  {
+   "text": "Representability is preserved by arbitrary $2$-base change and composition by [lem-sfb-fibred-groupoid-representable-smooth-calculus], and the required base changes of algebraic stacks exist by [lem-sfb-algebraic-stack-fibre-products]. For an arbitrary $\\mathcal B\\prime\\to\\mathcal B$, the test of $f\\prime:\\mathcal A\\times_{\\mathcal B}\\mathcal B\\prime\\to\\mathcal B\\prime$ at a scheme $T\\to\\mathcal B\\prime$ is $\\mathcal A\\times_{\\mathcal B}T\\to T$: on triples forget the redundant $\\mathcal B\\prime$-object identified with the given one from $T$, and conversely insert it and its identity. These inverse operations on objects and arrows are the $2$-fibre-product definition in [def-sfb-stable-pointed-moduli-groupoids]. Hence local quasi-finiteness of $f$ proves that of every $f\\prime$.",
+   "uses": [
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sfb-algebraic-stack-fibre-products",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Representable scheme-test definition in stacks-properties.tex Section 04XB; associativity of 2-fibre products."
+   }
+  },
+  {
+   "text": "For representable locally quasi-finite maps $\\mathcal A\\xrightarrow{f}\\mathcal B\\xrightarrow{g}\\mathcal C$ and a scheme $T\\to\\mathcal C$, put $B_T=\\mathcal B\\times_{\\mathcal C}T$ and $A_T=\\mathcal A\\times_{\\mathcal C}T$. Both are spaces by [lem-sfb-representable-pullback-over-space], representability of the composite having been established in Step 8. The map $B_T\\to T$ is locally quasi-finite by the test for $g$, and $A_T\\to B_T$ is so by Step 7 applied to $f$ and $B_T\\to\\mathcal B$. Step 3 gives local quasi-finiteness of $A_T\\to T$. This holds for every $T$, proving stack composition. For an open cover of the source of a representable map, every scheme base change carries the pulled-back open cover. The definition of open cover in [lem-sfb-stack-chartwise-smooth-etale-calculus] says exactly that these opens cover the space on scheme charts. Apply Step 5 to each test. It proves both directions of open source locality for the stack map.",
+   "uses": [
+    "lem-sfb-representable-pullback-over-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Space composition Tag 03XK transferred by scheme tests; open source locality of the chart definition."
+   }
+  },
+  {
+   "text": "Finally let $f:\\mathcal A\\to\\mathcal B$ be representable and let $q:V\\to\\mathcal B$ be representable, surjective, flat and locally finitely presented, with $V$ an algebraic space, and put $A_V=\\mathcal A\\times_{\\mathcal B}V$. The forward implication is Step 7. For the converse assume $A_V\\to V$ locally quasi-finite and fix any scheme $t:T\\to\\mathcal B$. Put $Z=\\mathcal A\\times_{\\mathcal B}T$, $H=V\\times_{\\mathcal B}T$, spaces by [lem-sfb-representable-pullback-over-space]. The map $H\\to T$ is surjective flat locally finitely presented by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Choose a surjective etale scheme atlas $D\\to H$ by [def-trf-algebraic-space]. The same calculus makes $u:D\\to H\\to T$ surjective flat locally finitely presented. Let $v:D\\to V$ be the other map and $\\beta:qv\\xrightarrow{\\sim}tu$ its specified isomorphism. There is an isomorphism over $D$, $Z\\times_TD\\simeq A_V\\times_VD$: send an object $(a,d,\\alpha:f(a)\\xrightarrow{\\sim}t(u(d)))$ to $(a,v(d),\\beta(d)^{-1}\\alpha,d)$, and invert this by composing with $\\beta(d)$. These inverse operations preserve arrows and pullback, by [def-sfb-stable-pointed-moduli-groupoids]. Step 4 makes the right side locally quasi-finite over $D$, as a base change of $A_V\\to V$. Step 6 descends through $u$ and gives local quasi-finiteness of $Z\\to T$. Since $t$ was arbitrary this is local quasi-finiteness of $f$. The covering used is $H\\to T$, not $Z\\times_TH\\to T$, so no surjectivity of $f$ is presumed.",
+   "uses": [
+    "lem-sfb-representable-pullback-over-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-trf-algebraic-space",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XD, lemma-check-property-covering, converse proof; Tag 0427 via the scheme-target descent calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "lem-a1-etale-scheme-map-open-image",
+  "lem-a1-scheme-lqf-composition",
+  "lem-a1-scheme-lqf-etale-source-locality",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "lem-sfb-representable-pullback-over-space",
+  "lem-sfb-scheme-lqf-cancellation",
+  "lem-sfb-scheme-lqf-fpqc-descent",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tags 04XC and 04XD; spaces-morphisms.tex Tags 03XJ, 03MJ, 040Z, 03XK, 03XL, 03XN; spaces-descent.tex Tag 0427, reduced to scheme Tag 02VI. Chart reductions written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Locally quasi finite representable morphisms of algebraic stacks descend along surjective flat locally finitely presented covers and are local on source",
+   "results": "OK; 8 hits; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local quasi finiteness of algebraic space morphisms is stable under base change and left cancellation and descends under fppf covers",
+   "results": "OK; 8 hits; AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite.of_comp, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.LocallyQuasiFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally quasi finite morphisms representable by algebraic spaces satisfy flat locally finitely presented descent",
+   "results": "OK; 8 hits; AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite.mk, Algebra.QuasiFinite.recOn, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.LocallyQuasiFinite.rec, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite",
+   "results": "OK; 12 hits; AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.instRespectsSchemeLocallyQuasiFiniteIsOpenImmersion, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyQuasiFinite|locallyQuasiFinite",
+   "results": "OK; 10 hits; Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only results do not state this algebraic-space or algebraic-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable locally quasi finite morphisms of algebraic stacks are stable under base change composition and fppf descent",
+   "results": "OK; 8 hits; AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.LocallyQuasiFinite.of_comp, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instLocallyQuasiFiniteCompScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: results only concern schemes and do not give representable algebraic-stack or algebraic-space calculus/descent; no algebraic-space/stack source declarations found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properties of algebraic space morphisms local quasi finite composition cancellation arbitrary base change",
+   "results": "OK; 8 hits; AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite.of_comp, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.instLocallyQuasiFiniteCompScheme, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: results only concern schemes and do not give representable algebraic-stack or algebraic-space calculus/descent; no algebraic-space/stack source declarations found."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|AlgebraicStack",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: results only concern schemes and do not give representable algebraic-stack or algebraic-space calculus/descent; no algebraic-space/stack source declarations found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quasidm-flat-locally-quasifinite-atlas",
+  "date": "2026-10-23",
+  "group": "Q94"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The stabilizer-preserving etale cover preceding the local invariant-ring quotients. Supporting proof input: first sentence of Tag 0DUE: choose the pointwise affine groupoid chart from Tag 0DU4. Supporting split input: Tag 0DU4 (lemma-etale-local-quasi-DM-at-x), first proof paragraph and the first part of lemma-etale-local-quasi-DM to which it refers: preparation of the flat locally quasi-finite scheme self-relation. Inputs: Tag 0CL0 (lemma-diagonal-diagonal), parts (1),(5); Tag 06MF (theorem-quasi-DM); spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme). Supporting input: Tag 06MF (theorem-quasi-DM), equivalence (1)--(2); relative over S, as in the chapter conventions; quasi-DM expanded as locally quasi-finite diagonal. Auxiliary input: Tag 04XD (lemma-check-property-covering), P = locally quasi-finite; spaces-descent.tex Tag 0427 (lemma-descending-property-quasi-finite), locally quasi-finite assertion; spaces-morphisms.tex Tags 03XK (lemma-composition-quasi-finite), 03XL (lemma-base-change-quasi-finite), 03XN (lemma-permanence-quasi-finite). Open-source locality follows from the etale-chart definition.",
+   "via": [
+    "lem-sfb-quasidm-flat-locally-quasifinite-atlas",
+    "lem-sfb-finite-inertia-flat-quasifinite-presentation",
+    "lem-sfb-finite-inertia-pointwise-groupoid-chart",
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-representable-lqf-calculus-descent",
+  "worker": "stage1",
+  "summary": "Q53: proved all clauses by compatible etale scheme charts and scheme tests. Reused existing scheme composition/base-change/source-locality and generic presentation/fppf conversion nodes. Added only the scheme cancellation and scheme fpqc local-quasi-finiteness descent inputs; recorded the Mathlib-definition mismatch rather than declaring a false leaf. Corrected doubled TeX escaping only. All cited statements were read and their used clauses copied to citations.json.",
+  "blueprint": "The inherited from.place locates the auxiliary quasi-DM atlas argument below the marked-plurinodal alteration input of det-thm-sf-ctf-stability-direct-images (3). This item supplies only its local-quasi-finiteness calculus: Steps 1--2 prepare the scheme-chart criterion, 3--5 prove space calculus, 6 supplies scheme-target descent, and 7--10 transfer to representable stack maps and prove Tag 04XD. The current latest blueprint was read; no separate blueprint node states either new scheme input. The original null ancestor is preserved, as blueprint_refs.py ancestor reports None.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-scheme-lqf-etale-source-locality",
+    "why": "Scheme etale precomposition and surjective etale source descent used to verify the hypotheses of the general chart criterion; no same-unit scheme lqf locality node exists."
+   },
+   {
+    "node": "lem-a1-scheme-lqf-composition",
+    "why": "Generic scheme lqf composition applied to the top row of compatible charts, exactly the 03XK source route."
+   },
+   {
+    "node": "lem-weil-pbc-separated-lqf-base-change",
+    "why": "Only clause (2), scheme local-quasi-finiteness base change, used to prove space base change; it assumes no separatedness."
+   },
+   {
+    "node": "def-trf-scheme-algebraic-space",
+    "why": "Canonical scheme-to-space identification, needed to apply the etale open-image lemma to schemes."
+   },
+   {
+    "node": "lem-a1-etale-scheme-map-open-image",
+    "why": "Generic etale map factorization onto its open image, used only in verifying pointwise scheme locality."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and etale-cover base change for algebraic spaces; used to construct the presentations, not to replace the alteration route."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic representable etale chart composition/base change and comparison with schemes, needed to justify the displayed chart constructions."
+   },
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Generic conversion of a scheme fppf family to an fpqc family; avoids a false quasi-compactness assumption on the covering morphism."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Only open immersions being etale, used for open-source restrictions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-scheme-lqf-etale-source-locality",
+  "lem-a1-scheme-lqf-composition",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "def-trf-scheme-algebraic-space",
+  "lem-a1-etale-scheme-map-open-image",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-8456a5d60",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-8456a5d60 (reviewer sub-agent of L); spot-checked: Read in full: the item (10 steps), both new nodes and every cited statement. Sources checked: 04XD (stacks-properties.tex:465-496), 03XN (spaces-morphisms.tex:5308), 03WR (morphisms.tex:4002) and 02VI (descent.tex:6117). The item's statement and stmt_deps are identical to live, so nothing is weakened. Live and side-live are still unsplit, there is no repair note, and the base had no proof. Step checks: Step 2 verifies the criterion's (i)-(iii) correctly, including the open-image argument, and reads (1)⇔(2) with only a surjective, not b. Step 3 is the 03XN top-row argument; cancellation uses nothing about g. I verified the Step 4 fibre-product identifications U×_VV′=U×_{X×_YV}(X×_YV′) and X×_YV′=(X×_YY′)×_{Y′}V′. In Step 6, u is not assumed quasi-compact. Step 7 uses an arbitrary space H. Step 10 uses the correct cover H→T, and the β(d)^{-1}α comparison checks out. The report's source error in the 04XD proof is correct: it writes T×_Y V where T×_Y W is meant, and f:∅→Spec k refutes the written version. New nodes: the cancellation node is true per 03WR. Mathlib's LocallyQuasiFinite omits locally finite type, so unsplit is right (B8). Advisory: the candidate is not in a mathlib_candidate field. The fpqc-descent node is true per 02VI with no quasi-compactness on f. Neither node duplicates anything: I scanned the snapshot and live DAG and read the candidates (four-property fppf descent, the representable-stack fppf locality node, the DM lqf atlas test, ring-level permanence). Neither restates an item clause. Small cases tested: identities, empty source or target, closed immersion into A², Spec kbar→Spec k, and an infinite disjoint union of points. All 9 declared tool_uses are accepted as generic scheme or algebraic-space tools. Batch-5 flags: the trf citations (scheme-as-space definition, fppf⇒fpqc leaf, space fibre products and etale covers, representable etale tests) and the a1/sfb closures reaching only the definition def-trf-algebraic-space are foundations, not steps of the trace formula or Poincaré duality proofs, so no assumption leaf is needed. No SGA anywhere. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RepresentableLocallyQuasiFiniteCalculus",
+  "declaration": "CategoryTheory.representable_lqf_baseChange",
+  "declarations": [
+   "CategoryTheory.representable_lqf_baseChange",
+   "CategoryTheory.representable_lqf_comp",
+   "CategoryTheory.representable_lqf_openCover",
+   "CategoryTheory.representable_lqf_fppf_target",
+   "CategoryTheory.space_lqf_of_comp"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RepresentableLocallyQuasiFiniteCalculus.lean",
+  "statement": "theorem representable_lqf_baseChange {S : Scheme.{u}} {A : BasedCategory.{v₁, w₁} (Over S)} {B : BasedCategory.{v₂, w₂} (Over S)} {C : BasedCategory.{v₃, w₃} (Over S)} (hA : IsAlgebraicModuliStack A) (hB : IsAlgebraicModuliStack B) (hC : IsAlgebraicModuliStack C) (f : BasedFunctor A B) (g : BasedFunctor C B) (hf : IsRepresentableByAlgebraicSpaces f) (hq : ModuliSpaceTest @Scheme.Hom.IsLocallyQuasiFinite f) : ModuliSpaceTest @Scheme.Hom.IsLocallyQuasiFinite (moduliTwoFiberFst g f)",
+  "branch": "sheaf-dag",
+  "by": "Q38",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The five declarations respectively render arbitrary base change, composition, open-source locality, fppf algebraic-space target descent, and unrestricted cancellation for space maps. All use the existing source-local space test, scheme local quasi-finiteness, open-substack and field-point definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3ef42c4fe",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Diffed against side-live: only the lean record and two landed stmt_deps (def-sfb-dm-stack-morphism-properties, def-sfb-open-moduli-substack) were added; lean.statement matches the file verbatim. Five sorried theorems match the node clause by clause. Base change concludes for the actual moduliTwoFiberFst g f with no property of g. Composition is f.comp g. Open-source locality uses OpenModuliSubstack with a field-object cover condition, checked equivalent to covering every scheme test (fibred pullback to residue fields plus open_pullback), and is consistent for an empty index. The fppf target test uses representable q from an algebraic space, ModuliSpaceTest for Flat and LocallyOfFinitePresentation, and surjectivity on moduliPointMap, which equals field-extension lifting given hB by Stacks 04XF/04ZS; no quasi-compactness or surjectivity of f. Cancellation uses SpaceMapIsLocallyQuasiFinite with no hypothesis on g. The lqf predicate includes finite type (Tag 01TD), not Mathlib's LocallyQuasiFinite. No duplicate: StackProperLocallyQuasiFiniteComposition is a different statement. No definitions, sorry-only proofs, source and blueprint docstrings with the 10-step proof, all imports exist. No compile, since no file changed; worker scompile is clean. Advisory: Step 8 of the docstring names lemmas by description rather than node id."
+ }
+}

@@ -1,0 +1,359 @@
+{
+ "id": "lem-sfb-general-flag-isolated-linear-action",
+ "kind": "statement",
+ "title": "A linear one-parameter action with isolated fixed points on a general Borel quotient",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a smooth connected affine $F$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Let $B\\subseteq G$ be a Borel subgroup, meaning a maximal smooth connected solvable closed subgroup [def-sc-group-scheme-subgroup]; solvable means that successive scheme-theoretic derived subgroups eventually become trivial, and the derived subgroup is the smallest closed subgroup through which the commutator morphism factors. Let $Q$ be the $F$-scheme representing the fppf sheafification of $A\\mapsto G(A)/B(A)$ on commutative $F$-algebras, for jointly surjective flat finitely presented coverings [def-pc-fppf-site, def-weil-pbc-sheafification]. Give $Q$ the left $G$-action induced by multiplication on $G$. There exist a nonzero finite-dimensional $F$-vector space $E$ [def-weil-finite-dimensional-subspace], a rational representation $\\rho:G\\to\\operatorname{GL}(E)$ (a homomorphism of $F$-group schemes, with $\\operatorname{GL}(E)(A)=\\operatorname{Aut}_A(E\\otimes_F A)$), a $G$-equivariant closed immersion $i:Q\\hookrightarrow\\mathbf P(E)$ [def-weil-closed-immersion, def-pc-projective-morphism], and a homomorphism $\\lambda:\\mathbf G_{m,F}\\to G$ [def-sc-gm-ga] for which the fixed subscheme $Q^{\\lambda}$ is a finite nonempty disjoint union of reduced $F$-points. Here $\\mathbf P(E)$ parametrizes one-dimensional subspaces; equivariance means $i(gx)=\\rho(g)i(x)$ after every commutative $F$-algebra extension. The subscheme $Q^{\\lambda}$ represents the functor whose $A$-points are those $x\\in Q(A)$ such that $\\lambda(t)x_{A^{\\prime}}=x_{A^{\\prime}}$ for every commutative $A$-algebra $A^{\\prime}$ and every $t\\in(A^{\\prime})^\\times$. A finite disjoint union of reduced $F$-points means an $F$-scheme isomorphic to $\\coprod_{a=1}^r\\operatorname{Spec}F$ for some integer $r\\geq1$. The homomorphism $\\lambda$ may be trivial, and $G=B$ is allowed. No reductivity hypothesis on $G$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 4.27, printed pp.94--95 (linear projective orbit); Theorem 17.9(a), p.354 (completeness), Section 17f, pp.368--369 (general flag variety), Lemma 17.52 and Proposition 17.53, p.369 (finite torus-fixed flags); Theorem 13.1, p.254 (smooth fixed subscheme), Lemma 13.51 and the paragraph preceding Proposition 13.52, pp.274--275 (separating cocharacter). Applied to the general connected group as in the proof of Theorem 17.65, p.374."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-closed-immersion",
+  "def-pc-projective-morphism",
+  "def-sc-gm-ga",
+  "def-sfb-borel-subgroup-scheme",
+  "def-sc-general-linear-group",
+  "def-sfb-standard-projective-linear-action"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-general-borel-flag-variety] to obtain the smooth connected proper finite-type flag scheme $Y=\\mathcal B(G)$ and $b_B\\in Y(F)$, whose scheme stabilizer is $B$. By [lem-sfb-smooth-group-orbit-geometry] its reduced orbit $O\\subseteq Y$ is locally closed. It contains every $F$-point of $Y$, since the flag lemma says that $G(F)$ acts transitively on $Y(F)$. All closed points of $Y$ are $F$-rational by [lem-weil-pbc-closed-point-residue-field-base], and they are dense by [lem-sc-lft-over-field-jacobson-space]. Thus the closure of $O$ is $Y$. The scheme $Y$ is reduced: smooth affine coordinate algebras over the reduced field $F$ are reduced by [lem-sfb-smooth-algebra-over-reduced-ring]. The locally closed reduced orbit with dense image is therefore open in $Y$. If its closed complement were nonempty, Jacobson density in that complement would give a closed point of $Y$ there, a contradiction. Hence $O=Y$; the reduced scheme structures agree because $Y$ is smooth and $O$ is its reduced orbit (the reduced induced structure on an open of a reduced scheme is the open subscheme structure). Now [lem-sfb-homogeneous-orbit-quotient-geometry] identifies $O$ with the represented fppf quotient $G/B=Q$, equivariantly by $gB\\mapsto g b_B$. In particular $Q$ is nonempty, smooth, connected, proper and of finite type, and its rational points are labelled by the Borels, with the scheme-theoretic torus-fixed-point description of the flag lemma.",
+   "uses": [
+    "lem-sfb-general-borel-flag-variety",
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-smooth-algebra-over-reduced-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 17f, printed pp.368--369; Theorem 7.18, p.142. Closed-point argument: Stacks Tags 0478 and 00FV."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-chevalley-scheme-line-stabilizer] with $H=B$. It gives $E\\ne0$, $\\rho:G\\to\\operatorname{GL}(E)$ and a line $D\\subseteq E$ with scheme stabilizer exactly $B$. By [lem-sfb-smooth-group-orbit-geometry] the reduced orbit of $[D]$ in $\\mathbf P(E)$ is locally closed. By [lem-sfb-homogeneous-orbit-quotient-geometry] it is canonically $G/B=Q$. Its inclusion therefore gives a $G$-equivariant immersion $i:Q\\to\\mathbf P(E)$, with $i(gB)=\\rho(g)[D]$. The orbit isomorphism and the inclusion are morphisms of $G$-schemes, so this equality holds on every test algebra, including nonreduced algebras.",
+   "uses": [
+    "lem-sfb-chevalley-scheme-line-stabilizer",
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-sfb-homogeneous-orbit-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.27 and Remark 4.30, printed pp.94--96; Theorem 7.18, p.142; first paragraph of the proof of Theorem 17.65, p.374."
+   }
+  },
+  {
+   "text": "Projective space is separated by [lem-weil-pbc-projective-space-proj-separated]. Since $Q$ is proper over $F$, [lem-weil-pbc-proper-over-separated] makes $i$ proper. An immersion is a monomorphism: open inclusions are monomorphisms, and on affine opens a closed immersion is induced by a surjective ring map, so a map into its source is uniquely determined by its composite [def-weil-closed-immersion]. Apply [lem-pc-proper-monomorphism-closed] to conclude that $i$ is a closed immersion.",
+   "uses": [
+    "lem-weil-pbc-projective-space-proj-separated",
+    "lem-weil-pbc-proper-over-separated",
+    "def-weil-closed-immersion",
+    "lem-pc-proper-monomorphism-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.65, p.374, projective embedding; Stacks Tags 01W6 (lemma-image-proper-scheme-closed) and 04XV (lemma-characterize-closed-immersion)."
+   }
+  },
+  {
+   "text": "Choose a maximal torus $T\\subseteq B$, maximal in $G$, by [lem-sfb-borel-maximal-torus-conjugacy]; over $F$ it is a split torus, possibly of rank zero. By step 1 and [lem-sfb-general-borel-flag-variety], the scheme-theoretically $T$-fixed rational points of $Q$ correspond exactly to the Borels $B'\\supseteq T$. This set is nonempty because it contains $B$. By [lem-sfb-torus-normalizer-borel-transitivity] every such $B'$ is $nBn^{-1}$ for some $n\\in N_G(T)(F)$. By [lem-sfb-maximal-torus-centralizer-borel], $C_G(T)(F)\\subseteq B(F)$. Thus the map $n\\mapsto nBn^{-1}$ is constant on right cosets of $C_G(T)(F)$: replacing $n$ by $nc$ gives $n(cBc^{-1})n^{-1}=nBn^{-1}$ since $c\\in B(F)$. The quotient $N_G(T)(F)/C_G(T)(F)$ is finite by [lem-sfb-torus-normalizer-components]. Its surjection onto these Borels proves finiteness of the fixed rational-point set. No reductivity is used.",
+   "uses": [
+    "lem-sfb-borel-maximal-torus-conjugacy",
+    "lem-sfb-general-borel-flag-variety",
+    "lem-sfb-torus-normalizer-borel-transitivity",
+    "lem-sfb-maximal-torus-centralizer-borel",
+    "lem-sfb-torus-normalizer-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.11, printed p.355; Corollary 17.39(b), p.364; Lemma 17.52 and Proposition 17.53, p.369; finiteness of the Weyl group from Corollary 12.40, p.244."
+   }
+  },
+  {
+   "text": "Fix a splitting $T\\simeq\\mathbf G_m^r$ and restrict $\\rho$ to $T$. Repeated application of [lem-sfb-gm-representation-weight-basis] to its $r$ commuting factors gives a simultaneous weight basis of $E$. At each stage the remaining factors preserve each previous weight subspace, because their actions commute with that factor; decompose each such subspace for the next factor. After $r$ stages the scalar character on a simultaneous weight space is the product $t_1^{a_1}\\cdots t_r^{a_r}$. Combine the spaces having the same exponent vector to obtain $E=\\bigoplus_{\\chi\\in\\Omega}E_\\chi$ with pairwise distinct monomial characters and nonzero summands. For $r=0$ this is the single space $E$ with trivial character.",
+   "uses": [
+    "lem-sfb-gm-representation-weight-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12, printed pp.234--235; the decomposition used in Lemma 13.51, p.274."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-projective-torus-fixed-weight-schemes] to this decomposition. It supplies $\\lambda_T:\\mathbf G_m\\to T$ separating its characters. Put $\\lambda:\\mathbf G_m\\xrightarrow{\\lambda_T}T\\hookrightarrow G$. That lemma gives a closed subscheme $Z=\\coprod_{\\chi\\in\\Omega}\\mathbf P(E_\\chi)$ representing both ambient fixed functors. Since $i$ is equivariant and a closed immersion, its asserted pullback $H=Q\\times_{\\mathbf P(E)}Z$ represents both $Q^T$ and $Q^\\lambda$, with exactly the universal quantifiers over algebra extensions in the item. The preimages $U_j=i^{-1}(D_+(z_j))$ of its eigenbasis charts are $T$-invariant affine opens covering $Q$: affineness follows from the quotient-ring characterization of a closed immersion in [def-weil-closed-immersion]. The intersections $H\\cap U_j$ represent $U_j^T$ and are closed in $U_j$.",
+   "uses": [
+    "lem-sfb-projective-torus-fixed-weight-schemes",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 13.51 and the following paragraph, printed pp.274--275; fixed functor Theorem 7.1, pp.138--139."
+   }
+  },
+  {
+   "text": "Every $U_j$ is smooth over $F$ by [lem-pc-open-immersion-smooth-composition], since it is open in the smooth scheme $Q$. It is affine of finite type: its coordinate algebra is a quotient of the polynomial coordinate algebra of the corresponding standard affine chart of $\\mathbf P(E)$, since $i$ is closed. Apply [lem-sfb-torus-fixed-scheme-smooth] to $T,U_j$ and the represented closed fixed subscheme $H\\cap U_j$. Each $H\\cap U_j$ is smooth. Smoothness is local on the source, in the affine-local characterization of [def-sbc-smooth-morphisms], so their covering proves that $H$ is smooth over $F$. This applies also to the rank-zero torus and does not infer reducedness from a point count.",
+   "uses": [
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-sfb-torus-fixed-scheme-smooth",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.1, printed p.254, applied on invariant affine eigenbasis charts; affine proof through Theorem 13.7, p.256."
+   }
+  },
+  {
+   "text": "The closed subscheme $H\\subseteq Q$ is of finite type over $F$: the finite family of affine charts from step 6 presents it by quotients of finitely generated polynomial algebras [def-weil-closed-immersion]. By [lem-weil-pbc-closed-point-residue-field-base] all its closed points have residue field $F$, so the set of closed points is exactly its finite, nonempty set $H(F)=Q^T(F)$ from step 4. By [lem-sc-lft-over-field-jacobson-space] these closed points are dense in $H$. Their finite union is already closed, hence equals $|H|$. Thus $|H|$ is a finite discrete space (each point is closed, and its complement is a finite union of closed points). In particular it has dimension zero.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sc-lft-over-field-jacobson-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.1 plus Lemma 17.52 and Proposition 17.53; Stacks varieties.tex Tag 0478 (lemma-locally-finite-type-Jacobson), algebra.tex Tag 00FV (theorem-nullstellensatz)."
+   }
+  },
+  {
+   "text": "Regard $H$ as its represented algebraic space [def-trf-scheme-algebraic-space]. The scheme case of [lem-sfb-zero-dimensional-field-space-components] applies, by finite type and dimension zero from step 8. It writes $H$ as a disjoint union of open-and-closed one-point schemes $\\operatorname{Spec}A_a$, with $A_a$ local Artinian and finite-dimensional over $F$. There are finitely many and at least one, by step 8. Smoothness of $H$ implies regularity of every local ring by [lem-weil-pbc-smooth-scheme-over-field-regular]. The local ring at the sole point of $\\operatorname{Spec}A_a$ is $A_a$ itself. It has dimension zero, so its maximal ideal is generated by zero elements by [def-weil-regular-scheme]; consequently that ideal is zero and $A_a$ is a field. Its residue field is $F$ by step 8, hence its structural map identifies $A_a$ with $F$. Therefore $Q^\\lambda=H\\simeq\\coprod_{a=1}^s\\operatorname{Spec}F$ for some $s\\geq1$. Together with steps 2--3 this is all the asserted data and equivariance. If $G=B$, then $Q$ is a point and the construction allows a trivial cocharacter, as required.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-zero-dimensional-field-space-components",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Fixed-scheme smoothness: Theorem 13.1, p.254; Stacks varieties.tex Tags 056S (lemma-smooth-regular), 06LH (lemma-algebraic-scheme-dim-0), and spaces-over-fields.tex Tag 06LZ (lemma-locally-finite-type-dim-zero); algebra.tex Tag 00KU (regular local rings)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-general-borel-flag-variety",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-smooth-algebra-over-reduced-ring",
+  "lem-sfb-chevalley-scheme-line-stabilizer",
+  "lem-weil-pbc-projective-space-proj-separated",
+  "lem-weil-pbc-proper-over-separated",
+  "def-weil-closed-immersion",
+  "lem-pc-proper-monomorphism-closed",
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "lem-sfb-torus-normalizer-borel-transitivity",
+  "lem-sfb-maximal-torus-centralizer-borel",
+  "lem-sfb-torus-normalizer-components",
+  "lem-sfb-gm-representation-weight-basis",
+  "lem-sfb-projective-torus-fixed-weight-schemes",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-sfb-torus-fixed-scheme-smooth",
+  "def-sbc-smooth-morphisms",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-zero-dimensional-field-space-components",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "def-weil-regular-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.65, first paragraph, p.374, through Theorem 4.27, Section 17f, Proposition 17.53, Theorem 13.1 and Lemma 13.51, with standard scheme-theoretic details and Stacks dimension-zero lemmas made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cocharacter|BorelSubgroup|fixed.*(torus|flag)",
+   "results": "{\"t\": \"2026-10-23T20:24:58Z\", \"tool\": \"grep\", \"query\": \"cocharacter|BorelSubgroup|fixed.*(torus|flag)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract or topological group actions and Galois categories, invariant subalgebras and fields, root-pairing scalar restriction, or scheme preimmersions; none gives a linear one-parameter algebraic action on a general Borel quotient with isolated reduced fixed points"
+  },
+  {
+   "tool": "leansearch",
+   "query": "There is a cocharacter of a maximal torus with isolated fixed points on the variety of Borel subgroups and an equivariant projective embedding",
+   "results": "{\"t\": \"2026-10-23T20:24:58Z\", \"tool\": \"leansearch\", \"query\": \"There is a cocharacter of a maximal torus with isolated fixed points on the variety of Borel subgroups and an equivariant projective embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.invariants_eq_inter\", \"RootPairing.restrictScalars_coe_root\", \"FixedPoints.subalgebra\", \"AlgebraicGeometry.isPreimmersion_eq_inf\", \"BoundedContinuousFunction.char_mem_charPoly\", \"FixedPoints.normal\", \"AlgebraicGeometry.isClosedEmbedding_isZariskiLocalAtTarget\", \"MulSemiringAction.charpoly\"], \"digest\": \"2670b4ad4d71a414\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract or topological group actions and Galois categories, invariant subalgebras and fields, root-pairing scalar restriction, or scheme preimmersions; none gives a linear one-parameter algebraic action on a general Borel quotient with isolated reduced fixed points"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Fixed\"",
+   "results": "{\"t\": \"2026-10-23T20:24:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Fixed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract or topological group actions and Galois categories, invariant subalgebras and fields, root-pairing scalar restriction, or scheme preimmersions; none gives a linear one-parameter algebraic action on a general Borel quotient with isolated reduced fixed points"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The flag variety of a connected affine algebraic group admits a linear one parameter torus action with finitely many reduced fixed points",
+   "results": "{\"t\": \"2026-10-23T20:24:59Z\", \"tool\": \"leanfinder\", \"query\": \"The flag variety of a connected affine algebraic group admits a linear one parameter torus action with finitely many reduced fixed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.FintypeCat.Action.pretransitive_of_isConnected\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois\", \"CategoryTheory.PreGaloisCategory.isPretransitive_of_surjective\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive\"], \"digest\": \"0d461bbb5e87f6fb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract or topological group actions and Galois categories, invariant subalgebras and fields, root-pairing scalar restriction, or scheme preimmersions; none gives a linear one-parameter algebraic action on a general Borel quotient with isolated reduced fixed points"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any Borel quotient of a connected linear algebraic group there exists an equivariant projective embedding and a multiplicative group action whose fixed subscheme is finite reduced",
+   "results": "{\"t\": \"2026-10-23T20:25:34Z\", \"tool\": \"leanfinder\", \"query\": \"For any Borel quotient of a connected linear algebraic group there exists an equivariant projective embedding and a multiplicative group action whose fixed subscheme is finite reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"t2Space_quotient_mulAction_of_properSMul\", \"isCoveringMapOn_quotientMk_of_properlyDiscontinuousSMul\"], \"digest\": \"8e1a0d609eab0538\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract or topological group actions and Galois categories, invariant subalgebras and fields, root-pairing scalar restriction, or scheme preimmersions; none gives a linear one-parameter algebraic action on a general Borel quotient with isolated reduced fixed points"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine algebraic group has a linear projective Borel quotient with a one parameter subgroup having finite reduced fixed scheme",
+   "results": "{\"t\": \"2026-10-23T21:35:49Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected affine algebraic group has a linear projective Borel quotient with a one parameter subgroup having finite reduced fixed scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"Subgroup.quotient_finite_of_isOpen\", \"Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace\", \"Subgroup.quotient_finite_of_isOpen'\"], \"digest\": \"d6fdf87330ad2a8f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Galois-category, abstract topological quotient and Borel measurable-space declarations do not assert a scheme-theoretic linear action on a Borel quotient; Loogle and AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|cocharacter|fixedSubscheme|FlagVariety",
+   "results": "{\"t\": \"2026-10-23T21:36:44Z\", \"tool\": \"grep\", \"query\": \"BorelSubgroup|cocharacter|fixedSubscheme|FlagVariety\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Galois-category, abstract topological quotient and Borel measurable-space declarations do not assert a scheme-theoretic linear action on a Borel quotient; Loogle and AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Borel quotient of any connected linear algebraic group has an equivariant projective embedding and a multiplicative group action with isolated fixed points",
+   "results": "{\"t\": \"2026-10-23T21:36:44Z\", \"tool\": \"leansearch\", \"query\": \"A Borel quotient of any connected linear algebraic group has an equivariant projective embedding and a multiplicative group action with isolated fixed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.borelSpace\", \"QuotientAddGroup.borelSpace\", \"AddCosetSpace.borelSpace\", \"QuotientAddGroup.measurableVAdd\", \"Quotient.borelSpace\", \"CosetSpace.borelSpace\", \"QuotientGroup.measurableSMul\", \"t2Space_quotient_mulAction_of_properSMul\"], \"digest\": \"8b9cbe6bb8823550\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Galois-category, abstract topological quotient and Borel measurable-space declarations do not assert a scheme-theoretic linear action on a Borel quotient; Loogle and AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BorelSubgroup\", \"Representation\"",
+   "results": "{\"t\": \"2026-10-23T21:36:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"BorelSubgroup\\\", \\\"Representation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Galois-category, abstract topological quotient and Borel measurable-space declarations do not assert a scheme-theoretic linear action on a Borel quotient; Loogle and AlgebraicGeometry grep returned no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-borel-quotient-affine-cell",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.22 (Iversen 1976, 2.7), printed pp.392--393, under the standing split connected group-variety hypothesis (automatic over F); definitions 18.1 and 18.7. Supporting Proposition 18.22 input: Lemma 18.21 and its proof, printed p.392: divisor classes supported on the boundary of the affine-space cell, using Proposition 13.52 and the proof of Theorem 17.65. Geometric prerequisite in Milne Lemma 18.21: the open affine-space cell of the general Borel quotient, via Proposition 13.52 and the proof of Theorem 17.65. Supporting input before applying Proposition 13.52: the general flag quotient has a linear one-parameter action with a finite reduced fixed subscheme (Milne Theorem 4.27, Section 17f and Proposition 17.53, Theorem 13.1 and Lemma 13.51).",
+   "via": [
+    "lem-sfb-borel-quotient-affine-cell",
+    "lem-sfb-flag-effective-picard-generators",
+    "lem-sfb-picard-trivial-multiplicative-cover",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-general-flag-isolated-linear-action",
+  "worker": "stage1",
+  "summary": "Checked Milne on arbitrary smooth connected affine groups, not only reductive ones. Constructed the equivariant embedding through the scheme-theoretic Chevalley stabilizer and properness. Proved finiteness from normalizer transitivity and the finite Weyl quotient, and reducedness from affine fixed-scheme smoothness followed by dimension-zero regularity. Added one generic projective torus fixed-scheme/cocharacter lemma, statement-only. Normalized inherited doubled TeX backslashes without changing mathematical content.",
+  "blueprint": "Realizes the inherited supporting input in blueprint.from.place for Milne Theorem 17.65 and Proposition 13.52. Read the latest det-thm-sf-ctf-stability-direct-images proof (3) and current unit; this auxiliary algebraic-group input is not separately stated there. blueprint_refs ancestor reports None, so the inherited null from.node is retained for this item and its new child.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Nullstellensatz over an algebraically closed field identifies closed points with rational points; generic scheme tool, not a change of the unit route."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Closed points are dense in every closed subset of a locally finite-type field scheme; generic scheme tool needed for the orbit and finite-locus arguments."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-proj-separated",
+    "why": "Separatedness of ordinary projective space for the proper-map argument; generic projective geometry."
+   },
+   {
+    "node": "lem-weil-pbc-proper-over-separated",
+    "why": "Any map from a proper field scheme to a separated field scheme is proper; generic scheme tool."
+   },
+   {
+    "node": "lem-pc-proper-monomorphism-closed",
+    "why": "A proper immersion is closed, by the characterization as a proper monomorphism; generic scheme tool."
+   },
+   {
+    "node": "lem-pc-open-immersion-smooth-composition",
+    "why": "Invariant open charts of the smooth flag quotient are smooth; generic locality tool."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "The smooth fixed scheme has regular local rings; generic local geometry needed to remove nilpotents."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-projective-space-proj-separated",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-pc-proper-monomorphism-closed",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-smooth-scheme-over-field-regular"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-d3a71d913",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-d3a71d913 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. The proof follows Milne iAG2017 Thm 17.65 (first paragraph), Thm 4.27, Prop 13.52/17.53, Thm 13.1 and Lemma 13.51, all checked in the local pdf, and no step uses reductivity. Item statement unchanged apart from A\\prime -> A^{\\prime}; live and side-live still have the item unsplit; no dependency cycle. Steps: S1 shows the orbit of b_B is all of the flag variety Y and equals Q, using orbit local closedness, Nullstellensatz, Jacobson density and reducedness of a smooth scheme. S2 builds the equivariant immersion from the Chevalley line stabilizer with H=B. S3 makes it a closed immersion: proper over separated P(E), and a proper monomorphism is closed. S4 proves the T-fixed rational points are finite and nonempty: Borels containing T are normalizer-conjugate, C_G(T) lies in B, and N(F)/C(F) is finite. S5 is the elementary simultaneous weight basis. S6 uses the new node on T-invariant affine eigen-charts. S7 applies the affine-only fixed-scheme smoothness lemma with all its hypotheses met. S8 gives a finite discrete fixed scheme. S9 gives zero-dimensional local Artinian components, which are regular, hence fields, hence F. New node lem-sfb-projective-torus-fixed-weight-schemes is statement-only and self-contained, and matches Milne 13.51 at the scheme level: ideal (z_j/z_i : chi_j != chi_i), a separating lambda exists, and it pulls back to a closed invariant X. Tested on r=0, a scalar representation, G_m on k^2 with weights 0 and 1, weights differing by p, and empty X. No duplicate: torus-extreme-weight-affine-chart, flag-torus-fixed-geometry (reductive) and projective-attracting-cells state different results. It is strictly smaller than the item. Batch-5 flags: all reached trf nodes (split lattice torus, fppf covering base change, vector subspace complement, smooth fpqc descent, scheme/algebraic-space definitions, smooth-at-point fibre criterion) are generic, not trace-formula or Poincaré-duality steps. I accept the 7 declared tool uses as generic scheme tools. No SGA citation. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.GeneralFlagIsolatedLinearAction",
+  "declaration": "AlgebraicGeometry.exists_general_flag_isolated_linear_action",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/GeneralFlagIsolatedLinearAction.lean",
+  "statement": "theorem exists_general_flag_isolated_linear_action {F : Type u} [Field F] [IsAlgClosed F] (G B : Over (Spec (.of F))) [GrpObj G] [GrpObj B] [Smooth G.hom] [ConnectedSpace G.left] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (iB : B ⟶ G) (hB : IsBorelGroupScheme iB) (Q : Over (Spec (.of F))) [ModObj G Q] (q : G ⟶ Q) (ηQ : coequalizer (yoneda.map (fst G B)) (yoneda.map (lift (fst G B) (snd G B ≫ iB) ≫ μ[G])) ⟶ yoneda.obj Q) (hηq : coequalizer.π _ _ ≫ ηQ = yoneda.map q) (hηQ : ∀ Z : Sheaf (Scheme.fppfTopology.over (Spec (.of F))) (Type u), Function.Bijective (fun f : yoneda.obj Q ⟶ Z.obj ↦ ηQ ≫ f)) (hq : μ[G] ≫ q = (𝟙 G ⊗ₘ q) ≫ γ[G, Q]) : ∃ (n : ℕ) (ρ : G ⟶ GeneralLinearGroup (ULift.{u} (Fin (n + 1))) F), IsMonHom ρ ∧ ∃ a : ModObj (GeneralLinearGroup (ULift.{u} (Fin (n + 1))) F) (linearProjectiveSpace F (ULift.{u} (Fin (n + 1)))), IsStandardProjectiveLinearAction F (ULift.{u} (Fin (n + 1))) a ∧ ∃ j : Q ⟶ linearProjectiveSpace F (ULift.{u} (Fin (n + 1))), IsClosedImmersion j.left ∧ γ[G, Q] ≫ j = (ρ ⊗ₘ j) ≫ a.smul ∧ ∃ cochar : StandardGroupSchemes.multiplicative F ⟶ G, IsMonHom cochar ∧ ∃ (H : Over (Spec (.of F))) (jH : H ⟶ Q), IsClosedImmersion jH.left ∧ (∀ (A : CommAlgCat.{u} F) (x : (algSpec (.of F)).obj (op A) ⟶ Q), (∃ z : (algSpec (.of F)).obj (op A) ⟶ H, z ≫ jH = x) ↔ ∀ (A' : CommAlgCat.{u} F) (f : A ⟶ A') (t : (algSpec (.of F)).obj (op A') ⟶ StandardGroupSchemes.multiplicative F), (t ≫ cochar) • ((algSpec (.of F)).map f.op ≫ x) = (algSpec (.of F)).map f.op ≫ x) ∧ ∃ r : ℕ, Nonempty (H ≅ ∐ fun _ : Fin (r + 1) ↦ 𝟙_ (Over (Spec (.of F))))",
+  "branch": "sheaf-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a044b483",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Item exists_general_flag_isolated_linear_action matches the node clause by clause: alg. closed F; smooth, connected, affine, finite-type (LFT+QC) GrpObj G; IsBorelGroupScheme iB; Q given by a presheaf coset coequalizer plus the fppf sheafification universal property (same convention as landed homogeneous-orbit-quotient and borel-quotient-affine-cell); G-action pinned by hq; E=F^(n+1) nonzero; IsMonHom rho into upstream GL (owner record of def-sc-general-linear-group); closed immersion j with equivariance as equality of morphisms; IsMonHom cocharacter (trivial allowed); closed H representing the fixed functor over all A'/units; H iso to a coproduct of r+1 copies of Spec F over F. New def-sfb-standard-projective-linear-action is real and not hollow: substitution z_i -> sum_j x_ij z_j pinned via the unique base-change comparison; convention checked against GL comultiplication and homMulEquiv, giving a left action on column lines, so the existential action is satisfiable; irrelevant-ideal conditions hold; no existing GL action on Proj in project or Mathlib; no name clash. Statements verbatim; only the item lean field and stmt_dep changed, plus the one new node; docstrings, sources and blueprint tags present; sorry only; report sections present; imports exist. Edge cases G=B, n=0, rank-zero torus, any characteristic covered. Cosmetic only: duplicate ZariskisMainTheorem import; global gradedAlgebra instance (precedent in two landed modules). No compile (no file changed)."
+ }
+}

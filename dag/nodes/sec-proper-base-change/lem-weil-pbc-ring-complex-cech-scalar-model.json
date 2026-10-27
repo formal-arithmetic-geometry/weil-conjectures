@@ -1,0 +1,184 @@
+{
+ "id": "lem-weil-pbc-ring-complex-cech-scalar-model",
+ "kind": "statement",
+ "title": "Scalar extension preserves an augmented localization model",
+ "statement": "For commutative rings A,B with ordinary derived categories on their one-object bottom sites, a ring homomorphism φ:A→B, finitely generated ideals I,J with φ(I)B=J, and a K-flat augmented complex (P,εP) satisfying RingComplexHasCechModel(A,I,P,εP), there exists an augmentation εE:Eφ(P)→B[0] satisfying RingComplexHasCechModel(B,J,Eφ(P),εE), normalized by εE(1 tensor x)=φ(εP(x)) on degree-zero sections. Eφ is the actual scalar-extension functor of [def-weil-pbc-ring-complex-semilinear-extension], the model predicate is [def-weil-pbc-ring-complex-cech-data], and K-flatness is [def-pc-kflat-complex].",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0ALZ and 099D(c); the original node proof steps 1 and 2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-pbc-ring-complex-semilinear-extension",
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite generating list f of I. Extract its ordered complex C and augmented derived isomorphism C≅P from the model predicate. Its coordinates imply boundedness and flatness: terms above the list length are empty products, and all nonzero terms are finite products of flat localizations. Thus C is K-flat.",
+   "uses": [
+    "def-weil-pbc-ring-complex-cech-data",
+    "lem-weil-pbc-localization-flat",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent the augmented derived isomorphism by a right roof. Refine the roof until the augmentation equation is an actual cochain homotopy, then choose a K-flat resolution of the refined source. Both composite legs are quasi-isomorphisms between K-flat complexes; actual scalar extension preserves them. Apply its additive action to the homotopy and invert the two legs, retaining the augmented equation.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-change-of-rings-kflat-quasi-iso",
+    "def-weil-pbc-ring-complex-semilinear-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image list φ∘f generates J. The Godement model supplies an explicit ordered complex D for that image list and an augmented derived isomorphism from D to the fixed Godement model. The explicit ordered scalar isomorphism identifies Eφ(C) with D and respects the canonical scalar augmentation. Compose this comparison with the preceding roof to obtain an augmented derived isomorphism from the Godement model to Eφ(P).",
+   "uses": [
+    "lem-weil-pbc-ring-complex-godement-cech",
+    "lem-weil-pbc-ring-complex-ordered-scalar-iso",
+    "def-weil-pbc-ring-complex-scalar-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary generating list of J, take its model and augmented derived isomorphism to the same Godement complex. Compose with the comparison to Eφ(P). This supplies every coordinate and augmentation required by RingComplexHasCechModel. The pure-tensor normalization is the proved canonical augmentation formula.",
+   "uses": [
+    "lem-weil-pbc-ring-complex-godement-cech",
+    "def-weil-pbc-ring-complex-scalar-augmentation",
+    "def-weil-pbc-ring-complex-cech-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ring-complex-cech-data",
+  "lem-weil-pbc-localization-flat",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-kflat-resolution",
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "def-weil-pbc-ring-complex-semilinear-extension",
+  "lem-weil-pbc-ring-complex-godement-cech",
+  "lem-weil-pbc-ring-complex-ordered-scalar-iso",
+  "def-weil-pbc-ring-complex-scalar-augmentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0ALZ via explicit localization tensor isomorphisms and augmented K-flat roofs; Godement comparison for independence of generators"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An augmented localization Cech complex is the coreflection onto complexes supported on an ideal and commutes with derived scalar extension",
+   "results": "localCohomology.diagram; localCohomology.ofDiagram; localCohomology; localCohomology.ofSelfLERadical; Ext; CochainComplex.cm5b.I; DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp; DerivedCategory.Q",
+   "date": "2026-10-25",
+   "verdict": "No matching augmented localization-model transport or torsion-coreflection Hom bijection."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away.tensorEquiv",
+   "results": "IsLocalization.Away.tensorEquiv",
+   "date": "2026-10-25",
+   "verdict": "Termwise tensor/localization isomorphism only; not either augmented derived statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Cech.*(coreflect|quasiIso)|localCohomology.*adj",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "No augmented localization-model theorem; tensorEquiv supplies only termwise algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived Hom from an ideal torsion complex to its augmented Cech localization complex equals derived Hom to the ring",
+   "results": "HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences; CategoryTheory.Functor.mapDerivedCategoryFactors; DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic; DerivedCategory.Q; DerivedCategory.homologyFunctorFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso; DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso",
+   "date": "2026-10-25",
+   "verdict": "No matching augmented localization-model transport or torsion-coreflection Hom bijection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite augmented localization Cech complex is the right adjoint for complexes with ideal power torsion cohomology",
+   "results": "localCohomology.diagram; localCohomology; localCohomology.ofSelfLERadical; localCohomology.ofDiagram; LightCondMod.LocallyConstant.adjunction; CondensedMod.LocallyConstant.adjunction; localCohomology.hasColimitDiagram; localCohomology.isoSelfLERadical",
+   "date": "2026-10-25",
+   "verdict": "No matching augmented localization-model transport or torsion-coreflection Hom bijection."
+  },
+  {
+   "tool": "grep",
+   "query": "RingComplexHasCechModel; local.cohomology; augmentation.*bijective; tensorEquiv",
+   "results": "Read RingComplexCechData, SemilinearExtension, ExtendedCechReflectorCore, FlatRingedCechLocalComparison, Mathlib LocalCohomology and Localization/BaseChange. The reflector is for derived completeness and RHom; the flat unit theorem assumes flatness and quotient compatibility. Neither gives the torsion coreflection or arbitrary scalar transport here.",
+   "date": "2026-10-25",
+   "verdict": "No existing declaration states either new step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingComplexCechBaseChange",
+  "date": "2026-10-25",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Tags 0ALZ and 099D(c); the original node proof steps 1 and 2",
+   "via": [
+    "lem-weil-pbc-ring-complex-cech-base-change",
+    "lem-weil-pbc-ring-complex-functorial",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingComplexCechScalarModel",
+  "file": "lean/Sheaf/Paper/RingComplexCechScalarModel.lean",
+  "declaration": "AlgebraicGeometry.ringComplex_cech_scalar_model",
+  "declarations": [
+   "AlgebraicGeometry.ringComplex_cech_scalar_model"
+  ],
+  "statement": "theorem ringComplex_cech_scalar_model\n    (A B : CommRingCat.{u}) [HasDerivedCategory.{w} (RingSiteModules A)]\n    [HasDerivedCategory.{w} (RingSiteModules B)] (φ : A →+* B)\n    (I : {I : Ideal A // I.FG}) (J : {J : Ideal B // J.FG})\n    (h : I.val.map φ = J.val)\n    (P : CochainComplex (RingSiteModules A) ℤ)\n    (εP : P ⟶ ringComplexSingle A)\n    (hCA : RingComplexHasCechModel A I.val P εP) (hP : P.IsAcyclicTensorKFlat) :\n    ∃ εE : ringComplexExtensionComplex φ P ⟶ ringComplexSingle B,\n      RingComplexHasCechModel B J.val (ringComplexExtensionComplex φ P) εE ∧\n      ∀ x : (P.X 0).val.obj (op ⟨PUnit.unit⟩),\n        ringComplexAugmentationValue εE\n          ((toSheafify ⊥ (SheafOfModules.changeOfRingsPresheaf\n            (ringSiteMap φ) (P.X 0)).presheaf).app (op ⟨PUnit.unit⟩)\n              ((1 : B) ⊗ₜ[A, φ] x)) = φ (ringComplexAugmentationValue εP x)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261025T124328-L-1975342",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T092116-L-3401753",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

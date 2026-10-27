@@ -1,0 +1,150 @@
+{
+ "id": "lem-sf-clopen-preserves-residue-tor",
+ "kind": "statement",
+ "title": "Clopen restriction preserves the objectwise residue Tor interval",
+ "statement": "Fix the prime l, finite coefficient extension E, scheme T, clopen open U and normalized datum d [def-weil-l-adic-coefficient-extension, def-pc-scheme, def-weil-open-immersion, def-sf-clopen-restriction-data]. Let M be any completed-coefficient derived object and a,b arbitrary integers. If its exponent-one derived reduction [lem-pur-derived-change-of-rings] has Tor amplitude [a,b] after restriction to every global pro-etale site object [def-weil-proetale-tor-amplitude], then the exponent-one reduction of sfClopenDerivedRestriction d applied to M has the same Tor amplitude on every object of the component site. No completeness or tensor comparison data is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FZ, definition-tor-amplitude; pro-etale slice relocalization and Tag 06YY, as expanded in lem-sf-clopen-derived-compatibility."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-sf-clopen-restriction-data",
+  "def-weil-integral-reduction-tower",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-complete",
+  "def-weil-derived-limit",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Apply sf_clopen_scalar_quotient_comparison at exponent zero (the exponent-one quotient) to identify scalar reduction after clopen restriction with finite-coefficient restriction after global scalar reduction.",
+   "uses": [
+    "lem-sf-clopen-scalar-quotient-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For V on the local pro-etale site put W equal to its composite object on T. Compose Over.post of the inclusion with sliceEquiv at W: this composite is definitionally the sliceEquiv functor at V. Cancellation of equivalences shows that Over.post is an equivalence. It is also continuous and cocontinuous. Pull d.finite 0 to the slice; the induced module restriction F is an additive equivalence, by the inverse site equivalence and inverse ring isomorphism. Cocontinuity and invertibility of the ring map give F its ordinary tensor comparison.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-ringed-cocontinuous-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the derived tensor comparison for an additive tensor equivalence, specialized to a module in degree zero. Every local test module L is isomorphic to F(N). Exactness of F identifies homology of the derived image with F of homology. The global Tor test at W therefore gives zero local homology outside the same interval. Keep the ordered-interval conjunct unchanged.",
+   "uses": [
+    "lem-sf-ringed-equivalence-derived-tensor-comparison",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary functors restricting to W and then along the slice equivalence agree with clopen restriction followed by restriction to V. Apply the exact-functor derived composition isomorphisms, then the scalar-reduction comparison from the first step. Tor amplitude is invariant under an isomorphism of its input since derived tensor and homology are functors. This proves the required objectwise bound for every V, including empty objects and the impossible ordered-interval premise when a>b.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sf-clopen-scalar-quotient-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-clopen-scalar-quotient-comparison",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-ringed-cocontinuous-monoidal",
+  "lem-sf-ringed-equivalence-derived-tensor-comparison",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FZ and the relocalization argument recorded in this node; use the explicit weakly-etale slice equivalences and K-flat single-tensor comparison, without any finite-product tensor calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact restriction functor to an open and closed component commutes with derived extension of scalars and preserves derived completeness and Tor amplitude",
+   "results": "Eight hits: scheme structure-sheaf restriction, its adjunction, abstract exactFunctor and restrictScalars. None states the arbitrary pro-etale coefficient comparison or augmented completeness or objectwise Tor result.",
+   "verdict": "No exact Mathlib result.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to an open and closed subscheme commutes with derived scalar extension, quotients and homotopy inverse limits",
+   "results": "Eight hits on Scheme.Modules.restrictFunctorComp, restrictFunctorIsoPullback and restriction of schemes. These concern structure-sheaf modules, not the coefficient sheaves and normalized towers here.",
+   "verdict": "No exact result.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.ofOpSequence",
+   "results": "The remote Loogle index does not contain that identifier. The checked-out Mathlib source defines it in CategoryTheory/Functor/OfSequence.lean.",
+   "verdict": "Use the source API to assemble the tower; this does not supply the geometric comparisons.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors.*naturality|IsDerivedLimitTriangle.*map|ofOpSequence",
+   "results": "Mathlib ExactFunctor.lean supplies mapDerivedCategoryFactors_hom_naturality; OfSequence.lean supplies NatTrans.ofOpSequence. Sheaf ChangeOfRings.lean supplies ordinary restrictScalars only. No normalized arbitrary-coefficient clopen comparison, augmented-completeness preservation, or local residue Tor statement found. Blueprint searches for clopen and completeness yielded no duplicate.",
+   "verdict": "The tower assembly is proved using these APIs; the three geometric steps need their own statements.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfClopenDerivedCompatibility",
+  "date": "2026-10-27",
+  "group": "W9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted local-model argument: Simultaneous clopen lisse trivialization and complete restriction; old parent steps 2-3. Substep: Clopen restriction preserves the objectwise residue Tor interval.",
+   "via": [
+    "lem-sf-clopen-derived-compatibility",
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion",
+    "lem-sf-clopen-lisse-complete-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfClopenPreservesResidueTor",
+  "file": "lean/Sheaf/Paper/SfClopenPreservesResidueTor.lean",
+  "declaration": "WeilConjectures.sf_clopen_preserves_residue_tor",
+  "statement": "theorem sf_clopen_preserves_residue_tor\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] (T : Scheme.{t}) (U : T.Opens)\n    (hU : IsClosed (U : Set T)) (d : SfClopenCoefficientRestriction l E T U) :\n    ∀ (M : DerivedCategory (scalarReductionSource l E T)) (a b : ℤ),\n    SfResidueTorAmplitudeOnEveryObject (l := l) (E := E) T\n      ((scalarReductionDerivedExtension l E T 0).obj M) a b →\n    SfResidueTorAmplitudeOnEveryObject (l := l) (E := E) U.toScheme\n      ((scalarReductionDerivedExtension l E U.toScheme 0).obj\n        ((sfClopenDerivedRestriction d).obj M)) a b",
+  "branch": "sheaf-dag",
+  "by": "W9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261027T013003-L-2356382",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261027T084510-L-3686649",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -28,16 +28,7 @@ public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
-import Sheaf.AlgebraicGeometry.ShriekTensorComposition
-import Sheaf.AlgebraicGeometry.ProperProjectionFormula
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Topology.Defs.Filter
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.EtaleSupportMapCompatibility
-import WeilConjectures.Compactification.NagataCompactification
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
+import Sheaf.SmoothPurity.EtalePrecompProjection
 
 /-!
 # Canonical tensor mates under etale precomposition
@@ -58,6 +49,87 @@ set_option autoImplicit false
 universe v
 
 open CategoryTheory CategoryTheory.MonoidalCategory
+
+private theorem conjugate_composite_counit
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    {L : C ⥤ D} {V : D ⥤ C} {F : D ⥤ E} {G : E ⥤ D}
+    {H : C ⥤ E} {J : E ⥤ C}
+    (adjL : L ⊣ V) (adjF : F ⊣ G) (adjH : H ⊣ J)
+    (c : L ⋙ F ≅ H) (B : E) :
+    c.hom.app (V.obj (G.obj B)) ≫
+        H.map (((conjugateIsoEquiv adjH (adjL.comp adjF) c).symm).hom.app B) ≫
+        adjH.counit.app B =
+      F.map (adjL.counit.app (G.obj B)) ≫ adjF.counit.app B := by
+  change c.hom.app _ ≫
+    H.map ((conjugateEquiv (adjL.comp adjF) adjH c.inv).app B) ≫ _ = _
+  rw [conjugateEquiv_counit, Iso.hom_inv_id_app_assoc]
+  exact Adjunction.comp_counit_app adjL adjF B
+
+private theorem tensor_mate_calculation
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (L : C ⥤ D) (V : D ⥤ C) (F : D ⥤ E) (G : E ⥤ D)
+    (H : C ⥤ E) (J : E ⥤ C)
+    (adjL : L ⊣ V) (adjF : F ⊣ G) (adjH : H ⊣ J)
+    (c : L ⋙ F ≅ H) (locality : G ⋙ V ⟶ J)
+    (hc : ∀ B, c.hom.app (V.obj (G.obj B)) ≫
+      H.map (locality.app B) ≫ adjH.counit.app B =
+      F.map (adjL.counit.app (G.obj B)) ≫ adjF.counit.app B)
+    (T : D ⥤ D) (U W : C ⥤ C) (S : E ⥤ E)
+    (qF : T ⋙ F ⟶ F ⋙ S) (qH : W ⋙ H ⟶ H ⋙ S)
+    (Q : ∀ M, L.obj (U.obj M) ⟶ T.obj (L.obj M))
+    (t : U ⟶ W)
+    (hprojection : ∀ M, F.map (Q M) ≫ qF.app (L.obj M) ≫ S.map (c.hom.app M) =
+      c.hom.app (U.obj M) ≫ H.map (t.app M) ≫ qH.app M)
+    (B K : E) (r : S.obj B ⟶ K)
+    (theta : U.obj (V.obj (G.obj B)) ⟶ V.obj (T.obj (G.obj B)))
+    (hfold : L.map theta ≫ adjL.counit.app (T.obj (G.obj B)) =
+      Q (V.obj (G.obj B)) ≫ T.map (adjL.counit.app (G.obj B))) :
+    theta ≫ V.map (adjF.homEquiv _ K
+        (qF.app (G.obj B) ≫ S.map (adjF.counit.app B) ≫ r)) ≫ locality.app K =
+      t.app (V.obj (G.obj B)) ≫ W.map (locality.app B) ≫
+        adjH.homEquiv _ K (qH.app (J.obj B) ≫ S.map (adjH.counit.app B) ≫ r) := by
+  let a := adjF.homEquiv _ K
+    (qF.app (G.obj B) ≫ S.map (adjF.counit.app B) ≫ r)
+  have ha : F.map a ≫ adjF.counit.app K =
+      qF.app (G.obj B) ≫ S.map (adjF.counit.app B) ≫ r :=
+    (adjF.homEquiv _ K).symm_apply_apply _
+  apply (adjH.homEquiv _ K).symm.injective
+  apply (cancel_epi (c.hom.app (U.obj (V.obj (G.obj B))))).1
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  have hcn := c.hom.naturality (theta ≫ V.map a)
+  change F.map (L.map (theta ≫ V.map a)) ≫ c.hom.app _ =
+    c.hom.app _ ≫ H.map (theta ≫ V.map a) at hcn
+  have hen := adjL.counit.naturality a
+  change L.map (V.map a) ≫ adjL.counit.app _ =
+    adjL.counit.app _ ≫ a at hen
+  have hnF := qF.naturality (adjL.counit.app (G.obj B))
+  change F.map (T.map (adjL.counit.app (G.obj B))) ≫ qF.app _ =
+    qF.app _ ≫ S.map (F.map (adjL.counit.app (G.obj B))) at hnF
+  have hnH := qH.naturality (locality.app B)
+  change H.map (W.map (locality.app B)) ≫ qH.app _ =
+    qH.app _ ≫ S.map (H.map (locality.app B)) at hnH
+  have hleft :
+      c.hom.app (U.obj (V.obj (G.obj B))) ≫ H.map theta ≫
+        H.map (V.map a) ≫ H.map (locality.app K) ≫ adjH.counit.app K =
+      F.map (Q (V.obj (G.obj B))) ≫ qF.app (L.obj (V.obj (G.obj B))) ≫
+        S.map (F.map (adjL.counit.app (G.obj B))) ≫
+        S.map (adjF.counit.app B) ≫ r := by
+    rw [← H.map_comp_assoc, ← reassoc_of% hcn, hc K]
+    simp only [Functor.map_comp, Category.assoc]
+    have hfhen := congrArg F.map hen
+    simp only [Functor.map_comp] at hfhen
+    rw [reassoc_of% hfhen, ha]
+    have hffold := congrArg F.map hfold
+    simp only [Functor.map_comp] at hffold
+    rw [reassoc_of% hffold, reassoc_of% hnF]
+  have hb : H.map (adjH.homEquiv _ K
+        (qH.app (J.obj B) ≫ S.map (adjH.counit.app B) ≫ r)) ≫
+      adjH.counit.app K = qH.app (J.obj B) ≫ S.map (adjH.counit.app B) ≫ r :=
+    (adjH.homEquiv _ K).symm_apply_apply _
+  rw [hleft, hb, reassoc_of% hnH]
+  rw [← S.map_comp_assoc, ← hc B, S.map_comp, S.map_comp]
+  rw [← reassoc_of% hprojection]
+  simp only [Category.assoc]
 
 namespace AlgebraicGeometry.Etale
 
@@ -89,6 +161,7 @@ noncomputable def tensorMateEtalePrecompLocalityIso
       (HasCompactification.compactification f)
       (HasCompactification.compactification (u ≫ f)))).symm
 
+set_option maxRecDepth 4096 in
 /-- Canonical tensor mates commute with separated finite-type etale precomposition, with
 its specified sum/evaluation counit. Source: the blueprint thm-asd-smooth-tensor proof,
 paragraph 3 (blueprint: lem-asd-tensor-mate-etale-precomp).
@@ -263,6 +336,46 @@ theorem tensorMateEtalePrecomp
           inferInstance).mapDerivedCategoryAdjunction).counit.app
           (R(f)^![ModuleCat A].obj B)) ≫
         (rightDerivedUpperShriekAdjunction (ModuleCat A) f).counit.app B) := by
-  sorry
+  let L := (etaleLowerShriek (ModuleCat A) u inferInstance).mapDerivedCategory
+  let V := (u)^*[ModuleCat A].mapDerivedCategory
+  let F := R(f)_![ModuleCat A]
+  let G := R(f)^![ModuleCat A]
+  let H := R(u ≫ f)_![ModuleCat A]
+  let J := R(u ≫ f)^![ModuleCat A]
+  let adjL : L ⊣ V := (etaleLowerShriekUpperStarAdjunction (ModuleCat A) u
+    inferInstance).mapDerivedCategoryAdjunction
+  let adjF : F ⊣ G := rightDerivedUpperShriekAdjunction (ModuleCat A) f
+  let adjH : H ⊣ J := rightDerivedUpperShriekAdjunction (ModuleCat A) (u ≫ f)
+  let c : L ⋙ F ≅ H := etaleAmbientLeftComparison A N u f
+    (HasCompactification.compactification f)
+    (HasCompactification.compactification (u ≫ f))
+  let locality : G ⋙ V ⟶ J := (tensorMateEtalePrecompLocalityIso A N u f).hom
+  have hc (B : DerivedCategoryModule A S) :
+      c.hom.app (V.obj (G.obj B)) ≫ H.map (locality.app B) ≫ adjH.counit.app B =
+        F.map (adjL.counit.app (G.obj B)) ≫ adjF.counit.app B :=
+    conjugate_composite_counit adjL adjF adjH c B
+  refine ⟨?_, hc⟩
+  intro K
+  let B := (f)^*[ModuleCat A].mapDerivedCategory.obj K
+  let T := (derivedTensor (ModuleCat A) X).obj B
+  let UP := (derivedTensor (ModuleCat A) U).obj (V.obj B)
+  let WP := (derivedTensor (ModuleCat A) U).obj
+    ((u ≫ f)^*[ModuleCat A].mapDerivedCategory.obj K)
+  let SK := (derivedTensor (ModuleCat A) S).obj K
+  let unitS := 𝟙_ (DerivedCategoryModule A S)
+  have hfold := ((isIso_etaleSumExtensionTensorComparison A u B
+    (V.obj (G.obj unitS))).2 (G.obj unitS)).symm
+  have calculation := tensor_mate_calculation L V F G H J adjL adjF adjH c locality hc
+    T UP WP SK (tensorMateInverseProjection A f K)
+    (tensorMateInverseProjection A (u ≫ f) K)
+    (fun M ↦ etaleSumExtensionTensorComparison A u B M)
+    ((derivedTensor (ModuleCat A) U).map
+      ((unboundedEtaleUpperStarCompIso A u f).inv.app K))
+    (fun M ↦ etalePrecompProjection A N u f K M)
+    unitS K (derivedTensorRightUnitor (ModuleCat A) S K).hom
+    (etaleSumExtensionTensorPullbackIso A u B (G.obj unitS)).hom hfold
+  simpa only [tensorMateInverseProjection, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, evaluation_obj_map, flipFunctor_map_app_app,
+    Category.assoc] using calculation
 
 end AlgebraicGeometry.Etale

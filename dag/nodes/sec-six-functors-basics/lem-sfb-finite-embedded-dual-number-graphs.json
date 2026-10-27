@@ -1,0 +1,338 @@
+{
+ "id": "lem-sfb-finite-embedded-dual-number-graphs",
+ "kind": "statement",
+ "title": "Graph description of flat embedded dual-number deformations",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a projective $k$-scheme [def-pc-scheme, def-kun-projective], and let $i:Z\\hookrightarrow X$ be a closed subscheme finite over $k$ [def-weil-closed-immersion, def-weil-finite-integral-morphism], with ideal sheaf $\\mathcal I$ [def-sbc-closed-immersion-ideal-sheaf]. Set $A=k[\\epsilon]/(\\epsilon^2)$ [def-sc-dual-numbers] and $X_A=X\\times_k\\operatorname{Spec}A$ [def-pc-base-change], and identify its structure sheaf on $|X|$ with $\\mathcal O_X\\oplus\\epsilon\\mathcal O_X$. For every $\\mathcal O_X$-linear map $h:\\mathcal I\\to i_*\\mathcal O_Z$ [def-weil-sheaf-of-modules-category], define a sheaf of ideals by the local condition\n$$\\mathcal I_h=\\{a+\\epsilon b:a\\in\\mathcal I,\\ b\\bmod\\mathcal I=h(a)\\}.$$\nThen $h\\mapsto\\mathcal I_h$ is a bijection onto the quasi-coherent ideals $\\mathcal J\\subset\\mathcal O_{X_A}$ whose quotient is flat over $A$ [def-weil-flat-morphism] and whose reduction modulo $\\epsilon$ is the specified quotient $\\mathcal O_X/\\mathcal I=i_*\\mathcal O_Z$. The corresponding closed subscheme $Z_h\\subset X_A$ is finite locally free over $A$ of degree $\\dim_k\\Gamma(Z,\\mathcal O_Z)$ [def-pc-finite-locally-free]. The bijection commutes with restriction to open subschemes of $X$ and with scalar substitutions $\\epsilon\\mapsto\\lambda\\epsilon$; for two maps $h_1,h_2$, the ideal defined by $a+\\epsilon_1b_1+\\epsilon_2b_2$ with $b_j\\bmod\\mathcal I=h_j(a)$ is flat over $k[\\epsilon_1,\\epsilon_2]/(\\epsilon_1,\\epsilon_2)^2$ and pulls back along $\\epsilon_1,\\epsilon_2\\mapsto\\epsilon$ to $\\mathcal I_{h_1+h_2}$.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0CZV, quot-remark-q-defos (Deformations of quotients), with F=O_X, Q=i_*O_Z, the trivial lift as origin, and J=k epsilon; explicit graph convention and finite-support specialization."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-kun-projective",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sc-dual-numbers",
+  "def-pc-base-change",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-flat-morphism",
+  "def-pc-finite-locally-free",
+  "def-pc-scheme-module-flat-over",
+  "def-nagata-extended-ideal"
+ ],
+ "proof": [
+  {
+   "text": "Put $Q=\\mathcal O_X/\\mathcal I=i_*\\mathcal O_Z$. It is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-cokernel-closure], applied to the inclusion of the quasi-coherent ideal in [def-sbc-closed-immersion-ideal-sheaf]. On $|X|$ form the $\\mathcal O_X$-linear map $d_h:\\mathcal I\\oplus\\mathcal O_X\\to Q$, $(a,b)\\mapsto\\bar b-h(a)$. Its kernel is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-kernel]. Embed that kernel in $\\mathcal O_X\\oplus\\epsilon\\mathcal O_X$ by $(a,b)\\mapsto a+\\epsilon b$. Multiplication by $r+\\epsilon s$ sends it into itself: $ra\\in\\mathcal I$ and $\\overline{rb+sa}=r\\bar b=rh(a)=h(ra)$. Thus it is an ideal, exactly $\\mathcal I_h$. The projection $p:X_A\\to X$ is affine (over $U=\\operatorname{Spec}R$ it is $\\operatorname{Spec}(R\\oplus\\epsilon R)\\to\\operatorname{Spec}R$). Its direct-image ring is the specified split ring sheaf. Clauses (1)--(2) of [lem-weil-pbc-affine-module-correspondence] now show that this ideal is quasi-coherent as an $\\mathcal O_{X_A}$-module, since its underlying $\\mathcal O_X$-module is quasi-coherent.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-affine-module-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0CZV, remark-q-defos, construction of K_phi; the trivial lift has quotient Q plus epsilon Q. Quasi-coherence: schemes.tex Tags 01IC/01ID and morphisms.tex Tag 01SB."
+   }
+  },
+  {
+   "text": "Here is the affine graph calculation, also used below with two parameters. Let $V$ be $k\\epsilon$, or $k\\epsilon_1\\oplus k\\epsilon_2$, let $B=k\\oplus V$ with $V^2=0$, and on an affine open of $X$ put $I=\\mathcal I(U)\\subset R=\\mathcal O_X(U)$, $C=R/I$. For an $R$-linear $H:I\\to C\\otimes_k V$ set $J_H=\\{(a,t):a\\in I,\\ \\bar t=H(a)\\}\\subset R\\oplus(R\\otimes_k V)$. The product formula $(r,u)(a,t)=(ra,rt+au)$ makes this an ideal: $au$ maps to zero in $C\\otimes V$. Its projection to $R$ has image $I$, since each coordinate of $H(a)$ has a representative in $R$, and $J_H\\cap(R\\otimes V)=I\\otimes V$ (coordinatewise). Consequently for $M=(R\\oplus(R\\otimes V))/J_H$, reduction gives $M/VM=C$, while $VM$ is identified with $C\\otimes V$ by $\\bar r\\otimes v\\mapsto[(0,r\\otimes v)]$. Both surjectivity and injectivity of the latter map follow from the displayed intersection. These coordinate formulas describe the affine quotient of the sheaf in Step 1: [lem-weil-pbc-affine-tilde-gamma-adjunction] identifies maps of quasi-coherent sheaves on $U$ with their $R$-linear maps, and [lem-weil-pbc-spec-module-tilde-sections] identifies restrictions with localization.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0CZV, remark-q-defos, graph of phi relative to the trivial quotient; explicit coordinate verification for one or two square-zero parameters."
+   }
+  },
+  {
+   "text": "For this $B$-module $M$, the multiplication map $V\\otimes_B M\\to M$ is injective. Indeed there is an explicit isomorphism $V\\otimes_B M\\cong V\\otimes_k(M/VM)$: send $v\\otimes m$ to $v\\otimes\\bar m$; inversely choose any representative of $\\bar m$, since replacing it by $m+wm'$ changes the tensor by $v\\otimes wm'=wv\\otimes m'=0$. Balancing is valid because $V$ acts trivially on both $V$ and $M/VM$. Under $M/VM=C$ this map is the injection onto $VM$ calculated in Step 2 (with tensor factors interchanged). The reduced module $C$ is flat over $k$ by [lem-weil-pbc-module-over-field-flat]. Apply [lem-sfb-nilpotent-ideal-module-flatness] with coefficient ring $B$, ideal $V$ and $V^2=0$: $M$ is flat over $B$. For $V=k\\epsilon$ the quotient sheaf is therefore flat over $A$ by [lem-pc-affine-chart-relative-flat-criterion], on each affine chart of $X_A$. The associated closed subscheme $Z_h$ exists, with these affine quotient rings, by [lem-weil-pbc-quasi-coherent-ideal-closed-subscheme]. Its reduction is exactly the specified quotient $R/I$ by Step 2. The ideal $J_H$ itself is also flat over $B$, so the literal ideal-flatness wording is covered. Indeed $VJ_H=I\\otimes_k V$: multiplying a lift of $a\\in I$ by $v$ gives $(0,a\\otimes v)$, and these generate the intersection in Step 2. Hence projection gives $J_H/VJ_H=I$. The same tensor identification now makes $V\\otimes_B J_H\\to J_H$ the inclusion $V\\otimes_k I\\cong I\\otimes_k V\\hookrightarrow R\\otimes_k V$, injective coordinatewise since $V$ has the displayed basis. Apply the field-flat and nilpotent-ideal criteria again, this time to $J_H$; the same affine-chart criterion gives flatness of the ideal sheaf over $B$.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-sfb-nilpotent-ideal-module-flatness",
+    "lem-pc-affine-chart-relative-flat-criterion",
+    "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 051C (lemma-what-does-it-mean), 00M6 (remark-Tor-ring-mod-ideal); quot.tex Tag 0CZV; morphisms.tex Tag 01U4 (lemma-flat-module-characterize)."
+   }
+  },
+  {
+   "text": "Conversely let $\\mathcal J$ be an ideal as in the statement and work on $U=\\operatorname{Spec}R$. Quasi-coherent affine correspondence [lem-weil-pbc-affine-tilde-gamma-adjunction] and [lem-weil-pbc-quasi-coherent-module-cokernel-image] identify its quotient with $M=R[\\epsilon]/J$, where $J=\\mathcal J(U_A)$. The flat-quotient hypothesis gives an $A$-flat module $M$ by [lem-pc-affine-chart-relative-flat-criterion]. The specified reduction is $M/\\epsilon M=R/I$; hence the image of $J$ in $R$ is exactly $I$. Tensor the injection $(\\epsilon)\\hookrightarrow A$ with $M$. By the definition [def-weil-pbc-flat-ring-map], multiplication $(\\epsilon)\\otimes_A M\\to M$ is injective. Identify $(\\epsilon)\\otimes_A M$ with $M/\\epsilon M$ by $\\epsilon\\otimes m\\mapsto\\bar m$ (inverse $\\bar m\\mapsto\\epsilon\\otimes m$); both maps respect balancing since $\\epsilon^2=0$. It follows that $\\ker(\\epsilon:M\\to M)=\\epsilon M$. In particular, for $b\\in R$, $\\epsilon b\\in J$ iff $[b]\\in\\epsilon M$ iff $b\\in I$. Thus $J\\cap\\epsilon R=\\epsilon I$.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-pc-affine-chart-relative-flat-criterion",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0CZV, remark-q-defos, exact diagram for a flat quotient; explicit dual-number multiplication kernel from flatness."
+   }
+  },
+  {
+   "text": "For $a\\in I$, choose $a+\\epsilon b\\in J$ and put $h_U(a)=\\bar b\\in R/I$. Such a lift exists because $J\\to R$ has image $I$. Two lifts differ by $\\epsilon(b-b')\\in J$, so Step 4 gives $b-b'\\in I$; hence $h_U$ is well-defined. Adding lifts gives additivity, and multiplying a lift by $r\\in R$ gives $h_U(ra)=rh_U(a)$. By construction $J\\subseteq J_{h_U}$. Conversely if $a+\\epsilon c\\in J_{h_U}$, subtract a chosen lift $a+\\epsilon b\\in J$: $c-b\\in I$ and $\\epsilon I\\subseteq J$, proving the reverse inclusion. Under localization, a lift of $a/f^n$ is $(a+\\epsilon b)/f^n$, whose second component modulo $I_f$ is $h_U(a)/f^n$. This proves compatibility on principal opens; by the sheaf axiom it gives compatibility on arbitrary overlaps. The affine correspondence and localization formulas in [lem-weil-pbc-affine-tilde-gamma-adjunction, lem-weil-pbc-spec-module-tilde-sections] therefore glue the $h_U$ to an $\\mathcal O_X$-linear $h:\\mathcal I\\to Q$ with $\\mathcal J=\\mathcal I_h$. Starting from $h$, the same lift formula recovers it, so the constructions are inverse bijections. Their definitions are local, proving the restriction clause as well.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0CZV, remark-q-defos, converse assertion; explicit lift, independence and restriction calculation, schemes.tex Tags 01I7/01HV."
+   }
+  },
+  {
+   "text": "The closed subscheme $Z\\hookrightarrow Z_h$ cut out by $\\epsilon$ is a thickening: its ideal squares to zero, and every prime contains every square-zero element. Since $Z$ is finite over $k$, it is affine by [def-weil-finite-integral-morphism]. Apply [lem-weil-pbc-thickening-affine-scheme] to conclude that $Z_h$ is affine, say $\\operatorname{Spec}D$. Put $C_0=\\Gamma(Z,\\mathcal O_Z)$. Then $D/\\epsilon D=C_0$ by the affine closed-immersion description [def-weil-closed-immersion], and $D$ is flat over $A$ by [lem-weil-pbc-flat-morphism-affine-criterion] applied to the flat $Z_h\\to\\operatorname{Spec}A$. Thus the same injection and tensor identification as in Step 4 give $\\ker(\\epsilon:D\\to D)=\\epsilon D$. Moreover $C_0$ is a finite-dimensional $k$-vector space by finiteness of $Z\\to\\operatorname{Spec}k$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-flat-morphism-affine-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 06AD, lemma-thickening-affine-scheme; morphisms.tex Tags 01WH and 01U5; finite-support specialization of quot.tex Tag 0CZV."
+   }
+  },
+  {
+   "text": "Let $d=\\dim_k C_0$, choose a basis $\\bar x_1,\\ldots,\\bar x_d$ and lift it to $x_i\\in D$. These $x_i$ form an $A$-basis. For generation, reduce any $z\\in D$ modulo $\\epsilon$ to write $z=\\sum a_i x_i+\\epsilon y$, $a_i\\in k$. Reduce $y$ similarly, $y=\\sum b_i x_i+\\epsilon w$; then $z=\\sum(a_i+\\epsilon b_i)x_i$. For independence, a relation $\\sum(a_i+\\epsilon b_i)x_i=0$ first gives all $a_i=0$ modulo $\\epsilon$. Now $\\epsilon\\sum b_i x_i=0$ implies $\\sum b_i x_i\\in\\epsilon D$ by Step 6, so reducing again gives all $b_i=0$. This also proves $D=0$ if $d=0$, with an empty basis. Apply [lem-weil-pbc-finite-free-algebra-spectrum] to $A\\to D$ to obtain finite locally free. Every prime of $A=k[\\epsilon]$ contains $\\epsilon$, and $A/(\\epsilon)=k$ is a field, so $\\operatorname{Spec}A$ has a single point with residue field $k$. Its fibre is $Z$; therefore the degree is $d$, exactly as defined in [def-pc-finite-locally-free].",
+   "uses": [
+    "lem-weil-pbc-finite-free-algebra-spectrum",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KB, lemma-finite-flat, affine finite free case; explicit basis lifting over dual numbers, including the empty basis."
+   }
+  },
+  {
+   "text": "For $\\lambda\\in k$ base change along $\\epsilon\\mapsto\\lambda\\epsilon$ sends the ideal locally to the ideal generated by $a+\\lambda\\epsilon b$ for $\\bar b=h(a)$, together with $\\lambda\\epsilon I$. This equals $J_{\\lambda h}$. The indicated generators satisfy its graph condition. Conversely, given $a+\\epsilon c\\in J_{\\lambda h}$, choose $b$ with $\\bar b=h(a)$ and subtract $a+\\lambda\\epsilon b$: the difference is in $\\epsilon I$. The generated ideal contains $\\epsilon I$ even when $\\lambda=0$, because multiplication of $a+\\lambda\\epsilon b$ by the target $\\epsilon$ gives $\\epsilon a$ for every $a\\in I$. This proves equality without assuming that the scalar substitution is flat or invertible. The construction of the inverse in Step 5 consequently intertwines scalar substitutions with $h\\mapsto\\lambda h$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0CZV, remark-q-defos, linear coefficient action; direct generated-ideal calculation for epsilon mapped to lambda epsilon."
+   }
+  },
+  {
+   "text": "For $B=k[\\epsilon_1,\\epsilon_2]/(\\epsilon_1,\\epsilon_2)^2$ use $V=k\\epsilon_1\\oplus k\\epsilon_2$ and $H(a)=h_1(a)\\epsilon_1+h_2(a)\\epsilon_2$. Steps 1--3 apply verbatim with two coordinates: the kernel map is $(a,b_1,b_2)\\mapsto(\\bar b_1-h_1(a),\\bar b_2-h_2(a))$, the ideal intersection is $I\\epsilon_1\\oplus I\\epsilon_2$, and $V\\otimes_B M\\to M$ is the injection computed there. Thus the displayed two-parameter ideal is quasi-coherent and flat over $B$, with flat quotient as well. Base change along $B\\to A$, $\\epsilon_1,\\epsilon_2\\mapsto\\epsilon$, gives the ideal generated by $a+\\epsilon(b_1+b_2)$ with $\\bar b_j=h_j(a)$. These elements satisfy the graph condition for $h_1+h_2$. Every element $a+\\epsilon c$ of that graph differs from one such generator by $\\epsilon(c-b_1-b_2)\\in\\epsilon I$, and the latter ideal is in the generated ideal by multiplying a generator with first coordinate $a\\in I$ by target $\\epsilon$. This proves equality with $J_{h_1+h_2}$ and hence the required closed-subscheme pullback. Neither $2$ nor any scalar was inverted, so the argument includes characteristic two.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0CZV, remark-q-defos, coefficient module J=k epsilon_1 plus k epsilon_2; direct two-parameter graph and addition pullback calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-affine-module-correspondence",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-sfb-nilpotent-ideal-module-flatness",
+  "lem-pc-affine-chart-relative-flat-criterion",
+  "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-thickening-affine-scheme",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "def-pc-finite-locally-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0CZV (remark-q-defos), graph construction relative to the trivial lift, with the flatness, finite-support and coefficient formulas expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat first order embedded deformations of a closed subscheme Z in X over dual numbers are Hom of its ideal sheaf to O_Z",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  (CategoryTheory.MorphismProperty.Over @AlgebraicGeometry.IsClosedImmersion ⊤ X)ᵒᵖ ≌ X.IdealSheafData\", \"doc\": \"For any scheme $X$, there is an equivalence of categories between the opposite category of the over category of closed immersions into $X$ with the top morphism property and the category of ideal shea\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (I : X.IdealSheafData) → I.subscheme ⟶ X\", \"doc\": \"The canonical morphism from the closed subscheme defined by an ideal sheaf $\\\\mathcal{I}$ on a scheme $X$ to $X$ itself, constructed via the gluing data of local models $\\\\operatorname{Spec}(\\\\mathcal{O}\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor_map\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ (Y : AlgebraicGeometry.Scheme) {I J : Y.IdealSheafDataᵒᵖ} (h : I ⟶ J),\\n  (AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor Y).map h =\\n    CategoryTheory.Over.homMk (AlgebraicGeometry.Scheme.IdealSheafData.inclusion ⋯) ⋯\", \"doc\": \"For a scheme $Y$, the subscheme functor maps each morphism $\\\\mathcal{I} \\\\to \\\\mathcal{J}$ in the opposite category of ideal sheaf data (corresponding to an inclusion $\\\\mathcal{J} \\\\subseteq \\\\mathcal{I}$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionSubschemeι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData), AlgebraicGeometry.IsPreimmersion I.subschemeι\", \"doc\": \"For any scheme $ X $ and ideal sheaf $ \\\\mathcal{I} $ on $ X $, the canonical morphism from the closed subscheme defined by $ \\\\mathcal{I} $ to $ X $ satisfies the conditions of a preimmersion in algebr\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor_obj\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ (Y : AlgebraicGeometry.Scheme) (I : Y.IdealSheafDataᵒᵖ),\\n  (AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor Y).obj I =\\n    CategoryTheory.Over.mk (Opposite.unop I).subschemeι\", \"doc\": \"For a scheme $Y$ and an ideal sheaf data $\\\\mathcal{I}$ on $Y$ (considered in the opposite category), the object mapping of the subscheme functor sends $\\\\mathcal{I}$ to the closed subscheme $\\\\operatorn\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  AlgebraicGeometry.Scheme.Hom.app I.subschemeι ↑U =\\n    CategoryTheory.CategoryStruct.comp (CommRingCat.ofHom (Ideal.Quotient.mk (I.ideal U))) (I.subschemeObjIso U).inv\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $ and a closed subscheme defined by an ideal sheaf $ \\\\mathcal{I} $, the component of the canonical morphism $ \\\\iota: \\\\text{Subscheme}(\\\\mathcal{I}) \\\\to X\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-immersion ideal equivalence and flat tensor kernel lemmas do not classify flat embedded deformations; the dual-number ideal trichotomy is only for ideals in the coefficient field dual numbers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tangent vectors to the Hilbert functor are O_X linear maps from the ideal of Z to O_Z",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.cotangentEquivIdeal\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \": I.Cotangent ≃ₗ[R] I.cotangentIdeal\", \"doc\": \"The canonical $ R $-linear map from the cotangent module $ I/I^2 $ to the quotient ring $ R/I^2 $ is bijective, establishing an isomorphism between the cotangent module and the corresponding ideal in \"}\n  {\"name\": \"Algebra.Presentation.differentials.hom₁\", \"module\": \"Mathlib.Algebra.Module.Presentation.Differentials\", \"type\": \": (σ →₀ S) →ₗ[S] pres.toExtension.Cotangent\", \"doc\": \"The $ S $-linear map from the module of formal $ S $-linear combinations of relations $ \\\\sigma $ to the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $, defined by sending each relation $ r \\\\in \\\\sigma $ \"}\n  {\"name\": \"Ideal.instInhabitedCotangent\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → Inhabited I.Cotangent\", \"doc\": \"The cotangent module of an ideal $ I $ in a commutative ring $ R $ is the quotient of $ I $ by the submodule $ I^2 $ generated by products of elements of $ I $. This construction generalizes the cotan\"}\n  {\"name\": \"Ideal.toCotangent_apply\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (a : ↥I), I.toCotangent a = Submodule.Quotient.mk a\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, the canonical $ R $-linear map sends each element $ a $ of $ I $ to its equivalence class $ [a] $ in the cotangent module $ I/I^2 $, where $ I^2 $ denot\"}\n  {\"name\": \"Ideal.isTorsionBySet_cotangent\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \": Module.IsTorsionBySet R I.Cotangent I\", \"doc\": \"For every element $ x $ in the cotangent module $ I/I^2 $ and every element $ a $ in the ideal $ I $, the scalar multiplication $ a \\\\cdot x $ equals zero.\"}\n  {\"name\": \"Ideal.toCotangent\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \": I →ₗ[R] I.Cotangent\", \"doc\": \"The canonical $ R $-linear map sending each element of an ideal $ I $ in a commutative ring $ R $ to its equivalence class in the cotangent module $ I/I^2 $, where $ I^2 $ denotes the submodule genera\"}\n  {\"name\": \"KaehlerDifferential.D_tensorProductTo\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"(x : KaehlerDifferential.ideal R S) :\\n  (KaehlerDifferential.D R S).tensorProductTo x = (KaehlerDifferential.ideal R S).toCotangent x\", \"doc\": \"For any element $x$ in the ideal of the module of Kähler differentials $\\\\Omega_{S/R}$, the canonical $S$-linear map induced by the tensor product construction coincides with the quotient map sending $\"}\n  {\"name\": \"inCoordinates_tangent_bundle_core_model_space\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Tangent\", \"type\": \"(x₀ x : H) (y₀ y : H') (ϕ : E →L[𝕜] E') : inCoordinates E (TangentSpace I) E' (TangentSpace I') x₀ x y₀ y ϕ = ϕ\", \"doc\": \"For model spaces $ H $ and $ H' $ with associated normed vector spaces $ E $ and $ E' $, and a linear map $ \\\\phi: E \\\\to E' $, the coordinate representation of the tangent bundle core model space evalu\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-immersion ideal equivalence and flat tensor kernel lemmas do not classify flat embedded deformations; the dual-number ideal trichotomy is only for ideals in the coefficient field dual numbers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ideal\", \"DualNumber\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"DualNumber.instIsPrincipalIdealRing\", \"module\": \"Mathlib.RingTheory.DualNumber\", \"type\": \" {K : Type u_2} [DivisionRing K] : IsPrincipalIdealRing (DualNumber K)\", \"doc\": \"\"}\n  {\"name\": \"DualNumber.maximalIdeal_eq_span_singleton_eps\", \"module\": \"Mathlib.RingTheory.DualNumber\", \"type\": \" {K : Type u_2} [Field K] : IsLocalRing.maximalIdeal (DualNumber K) = Ideal.span {DualNumber.eps}\", \"doc\": \"\"}\n  {\"name\": \"DualNumber.ideal_trichotomy\", \"module\": \"Mathlib.RingTheory.DualNumber\", \"type\": \" {K : Type u_2} [DivisionRing K] (I : Ideal (DualNumber K)) : I = ⊥ ∨ I = Ideal.span {DualNumber.eps} ∨ I = ⊤\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-immersion ideal equivalence and flat tensor kernel lemmas do not classify flat embedded deformations; the dual-number ideal trichotomy is only for ideals in the coefficient field dual numbers."
+  },
+  {
+   "tool": "grep",
+   "query": "embeddedDeformation|embedded.deformation|hilbert.*tangent|tangent.*hilbert|quotient.*deformation",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-immersion ideal equivalence and flat tensor kernel lemmas do not classify flat embedded deformations; the dual-number ideal trichotomy is only for ideals in the coefficient field dual numbers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat ideals in O_X tensor k epsilon lifting I are graphs of homomorphisms I to O_X modulo I",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.FormallyUnramified R S]\\n  [Algebra.EssFiniteType R S],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.lmul' R).toRingHom))\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ S $ that is formally unramified and of essential finite type, the morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(S \\\\otimes_R S) $ induced\"}\n  {\"name\": \"Algebra.kerTensorProductMapIdToAlgHomEquiv\", \"module\": \"Mathlib/RingTheory/Flat/Equalizer\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (T : Type u_3) →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [inst_6 : IsSc\", \"doc\": \"Given a surjective algebra homomorphism $ S \\\\to T $, there is a linear equivalence between the kernel of the induced ring homomorphism $ A \\\\otimes_R S \\\\to A \\\\otimes_R T $ and the tensor product $ (A \\\\\"}\n  {\"name\": \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"module\": \"Mathlib/RingTheory/Flat/Tensor\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Module.Flat R M ↔\\n    ∀ ⦃I : Ideal R⦄, I.FG → Function.Injective ⇑(TensorProduct.lift (LinearMap.lsmul R M ∘ₗ Submodule.subtype I))\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. Then $M$ is a flat module if and only if for every finitely generated ideal $I$ of $R$, the canonical linear map from the tensor product $I \\\\oti\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Module.Flat.ker_lTensor_eq\", \"module\": \"Mathlib/RingTheory/Flat/Equalizer\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [inst_6 : IsScalarTower R S M] {N : Type u_4}\\n  {P : Type u_5} [inst_7 : AddCommGroup N] [inst_8 : AddCommGroup P] [\", \"doc\": \"For a flat $ R $-module $ M $, the kernel of the $ A $-linear map $ M \\\\otimes_R N \\\\to M \\\\otimes_R Q $ induced by an $ R $-linear map $ f: N \\\\to Q $ is equal to the image of the $ A $-linear map $ M \\\\o\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/TensorProduct\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T],\\n  (algebraMap R T).SurjectiveOnStalks → Topology.IsEmbedding (PrimeSpectrum.tensorProductTo R S T)\", \"doc\": \"If the ring homomorphism $ R \\\\to S $ is surjective on stalks, then the induced continuous map $ \\\\operatorname{Spec}(S \\\\otimes_R T) \\\\to \\\\operatorname{Spec}(S) \\\\times \\\\operatorname{Spec}(T) $ is a topol\"}\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-immersion ideal equivalence and flat tensor kernel lemmas do not classify flat embedded deformations; the dual-number ideal trichotomy is only for ideals in the coefficient field dual numbers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat embedded deformations over dual numbers are graphs of maps from an ideal to its quotient",
+   "results": "Actual hits: Algebra.FormallySmooth.exists_lift, derivationToSquareZeroOfLift, Algebra.FormallySmooth.lift, derivationToSquareZeroEquivLift, liftOfDerivationToSquareZero, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, liftOfDerivationToSquareZero_mk_apply, Algebra.FormallyEtale.comp_bijective",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern lifts of algebra homomorphisms or the ideal/subscheme correspondence, not flat embedded deformations; tensor flatness alone is only an input."
+  },
+  {
+   "tool": "grep",
+   "query": "embeddedDeformation|embedded.deformation|graphIdeal|Hilbert.*tangent|tangent.*Hilbert",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern lifts of algebra homomorphisms or the ideal/subscheme correspondence, not flat embedded deformations; tensor flatness alone is only an input."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ideals defining flat deformations over a square zero extension of a field classified by maps from the ideal to the quotient",
+   "results": "Actual hits: derivationToSquareZeroOfLift_apply, Algebra.FormallySmooth.iff_comp_surjective, Algebra.Extension.infinitesimal, Ideal.cotangentIdeal, Ideal.cotangentToQuotientSquare, derivationToSquareZeroEquivLift, TrivSqZeroExt.map, derivationToSquareZeroEquivLift_symm_apply_apply_coe",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern lifts of algebra homomorphisms or the ideal/subscheme correspondence, not flat embedded deformations; tensor flatness alone is only an input."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Flat\", \"TensorProduct\"",
+   "results": "Actual hits: Module.Flat.instTensorProduct, Module.Flat.tensorProduct_mk_injective, Module.Flat.tensorProduct_mapIncl_injective_of_left, Module.Flat.tensorProduct_mapIncl_injective_of_right, Module.Flat.of_flat_tensorProduct, Module.Flat.iff_flat_tensorProduct",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern lifts of algebra homomorphisms or the ideal/subscheme correspondence, not flat embedded deformations; tensor flatness alone is only an input."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tangent space to Hilbert scheme is Hom of the ideal sheaf to the quotient structure sheaf",
+   "results": "Actual hits: AlgebraicGeometry.Scheme.Hom.ker, AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AlgebraicGeometry.Scheme.kerFunctor, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app, AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor, AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor_map, AlgebraicGeometry.Scheme.IdealSheafData.map",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern lifts of algebra homomorphisms or the ideal/subscheme correspondence, not flat embedded deformations; tensor flatness alone is only an input."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abel-differential-boundary",
+  "date": "2026-10-23",
+  "group": "Q140"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Pointed Abel maps, their divisor images, and the universal Picard family. Proof prerequisite: Chapter III Theorem 5.1(b), pp.101–103, especially the kernel-dimension computation at the end of p.103; the boundary-map formulation is the first-order local-equation refinement of that computation (explained in report.md), with Picard tangent space from Proposition 2.1, pp.90–91. Supporting general lemma: Local first-order equation description used for the divisor-to-Picard differential in the Abel geometry prerequisite.",
+   "via": [
+    "lem-sfb-abel-differential-boundary",
+    "lem-sfb-symmetric-abel-image-geometry",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-embedded-dual-number-graphs",
+  "worker": "stage1",
+  "summary": "Q02: retain the statement and give nine proof steps, including the explicit square-zero graph flatness test, inverse from flatness, finite-free basis lifting and generated-ideal formulas for scalar and sum pullbacks. Reuse existing nodes throughout; no new nodes. No project declaration states this complete classification.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Pointed Abel maps, their divisor images, and the universal Picard family. Proof prerequisite: Chapter III Theorem 5.1(b), pp.101–103, especially the kernel-dimension computation at the end of p.103; the boundary-map formulation is the first-order local-equation refinement of that computation (explained in report.md), with Picard tangent space from Proposition 2.1, pp.90–91. Supporting general lemma: Local first-order equation description used for the divisor-to-Picard differential in the Abel geometry prerequisite. The nine steps supply this local first-order equation prerequisite for the Abel differential. The ancestor tool returns None; the inherited null ancestor is retained. The current latest blueprint direct-image proof (3) is the outer route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-chart-relative-flat-criterion",
+    "why": "Generic affine module, flatness or finite-thickening input used only in the embedded-deformation calculation; no constructibility, alteration, trace-formula or duality step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-thickening-affine-scheme",
+    "why": "Generic affine module, flatness or finite-thickening input used only in the embedded-deformation calculation; no constructibility, alteration, trace-formula or duality step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-algebra-spectrum",
+    "why": "Generic affine module, flatness or finite-thickening input used only in the embedded-deformation calculation; no constructibility, alteration, trace-formula or duality step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-chart-relative-flat-criterion",
+  "lem-weil-pbc-thickening-affine-scheme",
+  "lem-weil-pbc-finite-free-algebra-spectrum"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-95ebb4845",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-95ebb4845 (reviewer sub-agent of L); spot-checked: This is a first split, not an answer to a re-split note. The statement and stmt_deps are kept, there are no new nodes, and there is one commit with a report. Source: quot.tex Tag 0CZV remark-q-defos, lines 2134-2181. Specialized to F=O_X, Q=i_*O_Z and J=k·ε, its K'_φ is exactly I_h with a plus sign. The remark omits its proof, and the nine steps write that proof out. I read all 18 cited statements against their steps. Step 1: Q and ker d_h are quasi-coherent; affine-module-correspondence (1) gives quasi-coherence of the ideal. Step 2: J_H∩(R⊗V)=I⊗V, VM≅C⊗V and M/VM=C, all verified. Step 3: V⊗_B M≅V⊗_k C injects into M; with the nilpotent-ideal criterion (no finiteness hypothesis) M is flat over B; the ideal J_H is flat too (VJ_H=I⊗V, J_H/VJ_H=I); the affine-chart criterion turns this into stalk flatness. Step 4: (ε)⊗M≅M/εM, so ker ε=εM and J∩εR=εI. Step 5: the inverse h_U is well-defined, linear and compatible with localization, and the two maps are mutually inverse. Steps 6-7: Z is affine, Z→Z_h is a thickening, so Z_h=Spec D; a lifted basis of D/εD is an A-basis; degree = dim Γ(Z,O_Z) at the single point of Spec A. Steps 8-9: the generated-ideal computation includes εI through multiplication by the target ε; checked λ=0, h2=-h1 and characteristic 2. Two small citation gaps, both harmless: Step 3 uses the section identification Γ(U_A,O/J)=M from cokernel-image, which only Step 4 cites; Step 6 uses D/εD=C0 although the closed-immersion definition gives only some ideal (it is εD because the ideal sheaf is εO). No duplicate: grep of the snapshot for 0CZV, remark-q-defos, embedded deformation and I_h finds only the item and its citer. The three tool_uses (affine-chart flat criterion, thickening-affine, finite-free spectrum) are generic and accepted. No SGA source is cited. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEmbeddedDualNumberGraphs",
+  "declaration": "AlgebraicGeometry.FiniteEmbeddedDualNumberGraphs.classification",
+  "declarations": [
+   "AlgebraicGeometry.FiniteEmbeddedDualNumberGraphs.TwoCoefficients",
+   "AlgebraicGeometry.FiniteEmbeddedDualNumberGraphs.coefficientQuotient",
+   "AlgebraicGeometry.FiniteEmbeddedDualNumberGraphs.structureMap",
+   "AlgebraicGeometry.FiniteEmbeddedDualNumberGraphs.iteratedStructureMap",
+   "AlgebraicGeometry.FiniteEmbeddedDualNumberGraphs.twoAmbient",
+   "AlgebraicGeometry.FiniteEmbeddedDualNumberGraphs.twoAmbientι",
+   "AlgebraicGeometry.FiniteEmbeddedDualNumberGraphs.twoStructureMap",
+   "AlgebraicGeometry.FiniteEmbeddedDualNumberGraphs.TangentMap",
+   "AlgebraicGeometry.FiniteEmbeddedDualNumberGraphs.IsGraph",
+   "AlgebraicGeometry.FiniteEmbeddedDualNumberGraphs.IsOpenGraph",
+   "AlgebraicGeometry.FiniteEmbeddedDualNumberGraphs.IsTwoGraph",
+   "AlgebraicGeometry.FiniteEmbeddedDualNumberGraphs.degree",
+   "AlgebraicGeometry.FiniteEmbeddedDualNumberGraphs.classification"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEmbeddedDualNumberGraphs.lean",
+  "statement": "theorem classification {k : Type u} [Field k] {X Z : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsHProjective f] (i : Z ⟶ X) [IsClosedImmersion i] [IsFinite (i ≫ f)] : IsPullback X.dualNumbersProj (structureMap f) f (Spec.map (CommRingCat.ofHom (TrivSqZeroExt.inlHom k k))) ∧ ∃ F : TangentMap i → X.dualNumbers.IdealSheafData, (∀ h : TangentMap i, IsGraph i h (F h)) ∧ Function.Injective F ∧ (∀ J : X.dualNumbers.IdealSheafData, (∃ h : TangentMap i, F h = J) ↔ Flat (J.subschemeι ≫ structureMap f) ∧ J.comap X.dualNumbersι = i.ker) ∧ (∀ h : TangentMap i, ((F h).subschemeι ≫ structureMap f).IsFiniteLocallyFreeOfDegree (degree f i)) ∧ (∀ (h : TangentMap i) (U : X.Opens) (J : U.toScheme.dualNumbers.IdealSheafData), IsOpenGraph i h U J ↔ J = (F h).comap U.ι.dualNumbers) ∧ (∀ (c : k) (h : TangentMap i), ∃ hc : TangentMap i, (∀ (U : X.Opens) (a : Γ(i.ker.toModules, U)), hc.app U a = X.presheaf.map (homOfLE (le_top : U ≤ ⊤)).op (f.appTop ((Scheme.ΓSpecIso (.of k)).inv c)) • h.app U a) ∧ F hc = (F h).comap (X.dualNumbersScale (f.appTop ((Scheme.ΓSpecIso (.of k)).inv c)))) ∧ (∃ d : X.dualNumbers ⟶ twoAmbient f, d ≫ twoAmbientι f = X.dualNumbersFold ∧ ∀ h₁ h₂ : TangentMap i, ∃ J : (twoAmbient f).IdealSheafData, IsTwoGraph f i h₁ h₂ J ∧ J.toModules.IsFlatOver (twoStructureMap f) ∧ Flat (J.subschemeι ≫ twoStructureMap f) ∧ J.comap d = F (h₁ + h₂))",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The same-space dual-number model is identified with the stated base change by IsPullback. Local graph conditions characterize the existential bijection; every operation is on the existing canonical ideal pullback. The two-parameter coefficient quotient kills the mixed monomial. All helper definitions have explicit data and belong to this graph-classification interface."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-71fb6e32d",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Read node, 13 stmt_dep records, quot.tex 0CZV remark-q-defos (2133-2184), module and upstream DualNumbers/IdealSheaf.Module/FiberDegree/IsFlatOver sources. Statement unchanged; stmt_deps +def-pc-scheme-module-flat-over, +def-nagata-extended-ideal (landed, used); lean.statement verbatim. Hypotheses Field/IsHProjective/IsClosedImmersion/IsFinite(i≫f) match the node, nothing stronger. X_A = X.dualNumbers with an IsPullback conjunct to X×_k Spec A. IsGraph uses idealOfOpens on every open (= ideal-sheaf sections), the correct a∈I, b mod I=h(a) condition. Injective F plus a range iff (Flat quotient, comap ι = i.ker) gives the bijection; degree via finrank Γ(Z) over k; open restriction via IsOpenGraph; scale ε↦cε gives graph c·h (comap direction correct, c=0 ok). Two-parameter base k[ε][δ]/(εδ), d pinned by d≫twoAmbientι=fold, ideal and quotient flatness, comap d = F(h1+h2). Edge cases: Z empty, h=0, λ=0, char 2, non-affine opens. No hollow defs, sorry only, docstrings and 9-step proof present, report sections present, no H4 duplicate (citer AbelDifferentialBoundary uses the same model). No file changed, so no compile."
+ }
+}

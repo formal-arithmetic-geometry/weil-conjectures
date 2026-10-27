@@ -1,0 +1,385 @@
+{
+ "id": "lem-route-native-section-closed-forgetful",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-local-boundary-duality",
+   "via": [
+    "lem-sf-weil-verdier-exchange"
+   ],
+   "place": "Current cor-coef-verdier-weil-equivariance.proof.md, internal Hom and evaluation-transpose comparison; section-module refinement used by lem-sf-weil-verdier-exchange in fix-cor-verdier-exchange.proof.md"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The evaluation-normalized native closed comparison remains valid after changing from the chosen closure to D.k and from internal modules to section mo",
+ "statement": "Fix a finite-field datum D (finite field k₀ of characteristic p with its specified algebraic closure k), a prime l≠p, a normalized realization Family R, and a separated finite-type k₀-scheme X₀ [def-weil-finite-field-fiber, def-sf-adic-realization-isomorphism-data]. Let Y₀=X₀×_{k₀}AlgebraicClosure(k₀), Y=X₀×_{k₀}k, and h:Y₀≅Y the specified closure isomorphism. Let U₀ be the native derived Weil forgetful functor, E the section-module equivalence in R.data(Y), V=R h_* followed by D(E), U=U₀ followed by V, and F the termwise complex functor E_Ch∘(h_*)_Ch. Use the ordinary section-module closed structure S and symmetry specified by that realization, including its K-flat total-tensor models. All derived categories here are unbounded and ambient, with the coefficient and size conventions in the realization, not only their bounded constructible subcategories [def-sf-native-weil-closed-models, def-weil-abstract-derived-category].\n\nThere exist a NativeClosedComparison N and its full Compatible laws [def-sf-native-weil-closed-models], natural isomorphisms v_{A,B}:V(A⊗_N B)≅VA⊗_S VB and t_{K,L}:U(K⊗_N L)≅UK⊗_S UL, and e:U(1_N)≅1_S, with these properties. Write composition in diagrammatic order using ';'.\n\n(1) Normalization on every pair of ordinary native K-flat complexes P,Q: FP,FQ are K-flat. For every complex T there is a natural factor a_T:V(Q₀T)≅Q_s(FT), whose inverse is exactly λ_T, the fixed section localization-factor inverse followed by D(E) of the actual right-derived unit Q(h_*T)→R h_*(Q₀T). There is a chain isomorphism c_{P,Q}:F(Tot_o(P,Q))≅Tot_s(FQ,FP). Here Tot_o is the actual reversed-curried ordinary tensor total: its (p,q) summand is Q^q⊗P^p and its differential is the P differential plus (-1)^p times the Q differential; Tot_s is the usual total with its displayed factor order. For every local pure section x∈(FQ)^q, y∈(FP)^p, c sends the transported (p,q) summand generator x⊗y to (-1)^(pq) times the (q,p) generator x⊗y. If m_o(P,Q):Q₀Q⊗_N Q₀P≅Q₀Tot_o(P,Q) is N's specified ordinary model and m_s(FQ,FP):Q_sTot_s(FQ,FP)≅Q_sFQ⊗_S Q_sFP is S's specified model, then\nV(m_o(P,Q)^{-1});v_{Q₀Q,Q₀P}=a_{Tot_o(P,Q)};Q_s(c_{P,Q});m_s(FQ,FP);(λ_Q⊗_Sλ_P).\n\n(2) t_{K,L}=V(N.tensorComparison_{K,L});v_{U₀K,U₀L}. The comparison t and unit e respect associators and both unitors: the path from U((K⊗L)⊗M) through U's associator and t_{K,L⊗M} then 1⊗t_{L,M} equals the path through t_{K⊗L,M}, then t_{K,L}⊗1, then S's associator. Moreover U(leftUnitor_K)=t_{1,K};(e⊗1);leftUnitor_{UK}, and U(rightUnitor_K)=t_{K,1};(1⊗e);rightUnitor_{UK}. They preserve symmetry: U(β^N_{K,L});t_{L,K}=t_{K,L};β^S_{UK,UL}.\n\n(3) For every native derived K,L, the specific map U(H_N(K,L))→H_S(UK,UL) obtained by S-transposing t_{H_N(K,L),K}^{-1};U(ev^N_{K,L}) is an isomorphism, natural contravariantly in K and covariantly in L. This is the evaluation-defined sectionHomComparison. No invertibility of a bidual arrow is asserted.\n\nSTATEMENT-DISPUTED correction to the imported Lean TransportNormalized: its unsigned generator formula must contain the factor (-1)^(pq) displayed in (1). All other clauses of NativeSectionClosed.Comparison are retained. The unsigned formula fails the chain-map equation already for P=(O→O) in degrees 0,1 with differential identity and Q=O in degree 1 over a nonempty coefficient point: the source differential is +1 and the target differential is -1, while the demanded components of c are both +1.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/fix-cor-verdier-exchange.md",
+  "place": "lem-sf-weil-verdier-exchange: the Lean of this node (its module WeilConjectures.WeilSheaf.VerdierDual uses) reaches WeilConjectures.NativeSectionClosed.native_section_closed_forgetful, a sorry on the sorry route of batch5 with no node; Lean: SHEAF file lean/Sheaf/WeilSheaf/NativeSectionClosedForgetful.lean, declaration WeilConjectures.NativeSectionClosed.native_section_closed_forgetful (module Sheaf.WeilSheaf.NativeSectionClosedForgetful, lines 248-271, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-sf-adic-realization-isomorphism-data",
+  "def-sf-native-weil-closed-models",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the Frobenius-action resolutions theorem for the twisted ringed-site presentation, exactness, products and K-injective preservation of U₀. Fix the canonical derived closed structure and its specified tensor-Hom adjunction by the ringed closed and adjunction theorems. The ringed two-injective theorem now applies, including its native specialization, and supplies the native and ordinary derived Hom bifunctors with their two-injective representatives. Apply the row-sign representative conversion to these very bifunctors and their derived comparison, obtaining M and eta with NativeHomRepresentativeCompatibility. The conversion retains the derived arrows, changing only the product-Hom convention. The hypotheses are exactly finite k₀, l away from its characteristic and separated finite-type X₀; finite type over a field also gives the quasi-compactness required by the model theorem. Work throughout in the native derived category of module pairs, not pairs in an already formed derived category.",
+   "uses": [
+    "lem-sf-weil-frobenius-action-resolutions",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sf-ringed-forget-two-injective-hom",
+    "lem-sf-weil-native-row-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Internal Hom, evaluation and transposition paragraph; exact-equivalence refinement"
+   }
+  },
+  {
+   "text": "Choose the ordinary tensor model explicitly before choosing its adjunction. Let B=ordinaryTensorBifunctor and let s_{P,Q}:Tot_o(P,Q)≅Tot(Q⊗P) be the inverse of the signed flip for B, identifying B.flip with the standard tensor through the canonical balanced tensor isomorphism. Its (p,q) component is (-1)^(pq) times the (q,p) inclusion. The same isomorphism identifies the native acyclic K-flat test with the standard one. Use the generic derived-monoidal theorem for the native module-object category and its two-variable derived-tensor statement; these fix its canonical localization tensorator. Equivalently its section presentation has the ringed native tensor maps. The canonical localization tensorator μ_{Q,P}:Q₀Q⊗Q₀P≅Q₀Tot(Q⊗P) is invertible when P is K-flat. Set m⁰(P,Q)=μ_{Q,P};Q₀(s_{P,Q}^{-1}). It is natural by naturality of μ and s. Apply the representative-currying theorem to this particular m⁰ and M.ordinaryRepresentatives. Use its natural bijections e as the adjunction bijections defining S_o on the canonical monoidal structure: unit and counit are the inverse-bijection images of identities, so their triangle identities follow from inverse bijectivity and naturality. The stated inverse-currying naturality gives evaluation_naturality. Thus S_o.transpose=e exactly. The theorem's unsigned equation is NativeAdjunctionNormalization for m⁰. Choose the canonical Koszul symmetry and swap s_{P,Q};β_{Q,P};s_{Q,P}^{-1}; its three homogeneous signs multiply to (-1)^(pq). The localization tensorator's braiding equation gives the required model/swap square. Hence m⁰ and this swap witness NativeOrdinaryTensorModels for this specific S_o, whose monoidal constraints are canonical.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-sf-total-bifunctor-signed-flip",
+    "lem-sf-native-ordinary-representative-currying",
+    "def-sf-native-weil-closed-models",
+    "lem-sfb-derived-monoidal",
+    "lem-sfb-derived-tensor-modules-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Internal Hom, evaluation and transposition paragraph; exact-equivalence refinement"
+   }
+  },
+  {
+   "text": "Apply the native tensor lift to M, eta and the specific S_o, its canonical symmetry and ordinary models from step 2. Keep the lift's native and ordinary units and tau. In its uncurry identity set f=id_H: uncurrying the identity is evaluation, so eta is exactly the mapped-evaluation transpose. Closed transposition gives evaluation and bidual compatibility and bidual naturality, without bidual invertibility. Together with the lift's coherence, symmetry and retained representative square this gives N and its full Compatible laws. The existential witness selected by N.ordinaryTensorModels.choose is not assumed to be m⁰. Its specification and m⁰ both satisfy NativeAdjunctionNormalization for the same unchanged S_o and M.ordinaryRepresentatives. Apply fixed-adjunction model uniqueness: for every K-flat P,Q the actual selected m_o(P,Q) equals μ_{Q,P};Q₀(s_{P,Q}^{-1}). Thus m_o(P,Q)^{-1}=Q₀(s_{P,Q});μ_{Q,P}^{-1}. This equality pins exactly the map used by TransportNormalized, even if a different existential proof was stored in N.",
+   "uses": [
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-native-closed-transposition",
+    "def-sf-native-weil-closed-models",
+    "lem-sf-native-ordinary-model-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Internal Hom, evaluation and transposition paragraph; exact-equivalence refinement"
+   }
+  },
+  {
+   "text": "The specified equivalence of algebraic closures is an isomorphism over k₀; its base change h has inverse the base change of the inverse (the two composites are identities by the fiber-product universal property). The pro-etale isomorphism lemma reindexes objects and covers and gives inverse sheaf equivalences. Reindexing preserves the pulled-back coefficient ring: on an object (Z→Y) the ring consists of the same continuous finite-subextension-valued functions on |Z|, so the coefficient isomorphism and its inverse are identities on those functions. This equivalence is continuous and cocontinuous. The ringed tensor-restriction theorem therefore supplies its invertible pure-tensor and rank-one unit maps. Under the internal/section operations comparison it is the actual internal h_*. Thus h_* is an additive exact equivalence with the indicated tensor maps, not a replacement direct image.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-sf-cocontinuous-ringed-tensor-restriction",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, tensor product; ringed-site isomorphism reindexing as in the cited transport nodes"
+   }
+  },
+  {
+   "text": "Apply the internal-section tensor comparison to E on the small pro-etale site in the coefficient universe fixed by R. It is the realization's exact section equivalence and sends local m⊗n to m⊗n. Compose it with h_* to obtain the additive exact symmetric strong monoidal equivalence F on modules, with exact inverse obtained by reversing the two equivalences. Its coefficient unit map is the composite of the two prescribed rank-one unit maps. Associativity, both unit and symmetry diagrams can be checked on a local tensor m⊗n⊗z (respectively a scalar times m, or m⊗n): both paths have the same images, and balanced tensors generate locally before sheafification. These checks also fix the maps on sheafified tensors.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sf-cocontinuous-ringed-tensor-restriction",
+    "def-sf-adic-realization-isomorphism-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK and 0GMW, balanced tensor and sheafification"
+   }
+  },
+  {
+   "text": "Apply the flip leaf first in the source: with B=ordinaryTensorBifunctor, its inverse is s_{P,Q}:Tot_o(P,Q)≅Tot(Q⊗P), with the canonical identification of B.flip with standard tensor. Apply F_Ch to s. Only now apply the exact-monoidal-equivalence theorem's standard-total map τ_{Q,P}:F_Ch Tot(Q⊗P)≅Tot(FQ⊗FP). Define c_{P,Q}=F_Ch(s_{P,Q});τ_{Q,P}. This uses τ solely on the standard total, exactly as its statement permits. The source flip contributes (-1)^(pq); τ sends each same-indexed pure tensor x⊗y to x⊗y. Therefore c has the signed local formula in (1), with target indices (q,p), and is natural. The inverse flip identifies NativeOrdinaryKFlat with the standard acyclic-test condition. The exact-monoidal-equivalence theorem preserves that condition and its equivalent two-sided quasi-isomorphism test. Hence FP,FQ have the required target K-flatness, with no flat-term or boundedness hypothesis. Tensor is additive and preserves the countable coproducts on both module categories in the specified coefficient universe.",
+   "uses": [
+    "lem-sfb-exact-monoidal-equivalence-total-kflat",
+    "lem-sf-total-bifunctor-signed-flip"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNG, item-flip-tensor-product; signed totalization"
+   }
+  },
+  {
+   "text": "Exact-functor derived comparison makes the actual right-derived unit for h_* invertible on every complex. Combine its D(E)-image with the fixed section localization factor to obtain λ_T and set a_T=λ_T^{-1}, naturally for all T. Resolving tensor descent for E∘h_* gives the derived equivalence V, a coherent symmetric tensor comparison v and its localized coefficient unit. Its ringed-site hypothesis is met by passing internal modules to section modules at both ends. Both monoidal structures are the canonical ones carrying the canonical models; the theorem also identifies the supplied realization models and covers all K-flat representatives without flat terms.\nFor K-flat P,Q, step 3 pins the actual chosen model: m_o^{-1}=Q₀(s);μ^{-1}. Consequently the left side of (1) is V(Q₀s);V(μ^{-1});v. The standard resolving-descent square for (Q,P) rewrites its last two factors as a_{Tot(Q⊗P)};Q_s(τ_{Q,P});m_s(FQ,FP);(λ_Q⊗λ_P). Naturality of a replaces V(Q₀s);a_{Tot(Q⊗P)} by a_{Tot_o};Q_s(F_Chs). The middle composite is Q_s(c) by step 6. This is exactly (1), with the actual .choose model and the prescribed λ, without assuming that an arbitrary model is canonical. Coherence of v comes from descent on the fixed canonical monoidal structures, independently of the Hom adjunction.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-sfb-ringed-equivalence-resolving-tensor-descent",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sf-native-ordinary-model-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; combined with the cited resolving tensor descent"
+   }
+  },
+  {
+   "text": "Define t_{K,L}=V(tau_{K,L});v_{U₀K,U₀L}, and define e by V of N's coefficient-unit comparison followed by V's coefficient-unit comparison. These are natural isomorphisms. Paste the two associator diagrams for tau and v; naturality of v moves V(tau) through the middle tensor maps, giving exactly the two associator paths in (2). Pasting the two left-unit diagrams and then the two right-unit diagrams gives the displayed unit equations. Similarly insert V(tau_{L,K});v after U of native symmetry, apply symmetry compatibility of tau, then that of v: the result is t_{K,L};β^S. Thus tensor_transport, coherent and symmetric all hold. These are identities of composites, so no further geometric or resolution assertion enters this step.",
+   "uses": [
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sfb-ringed-equivalence-resolving-tensor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Internal Hom, evaluation and transposition paragraph; exact-equivalence refinement"
+   }
+  },
+  {
+   "text": "The canonical evaluation-transpose Hom comparison b_{A,B}:V(H_o(A,B))→H_S(VA,VB) is invertible by the monoidal-equivalence Hom theorem, since V is the strong monoidal equivalence constructed in step 7. That theorem uses left-tensor evaluation; conjugate with the preserved symmetries to express it in the Hom-first evaluation convention used here. Put d_{K,L}=V(eta_{K,L});b_{U₀K,U₀L}; it is natural and invertible. Its evaluation composite is\n(d_{K,L}⊗1);ev_S = (V(eta_{K,L})⊗1);v_{H_o(U₀K,U₀L),U₀K}^{-1};V(ev_o)\n= v_{U₀H_N(K,L),U₀K}^{-1};V((eta_{K,L}⊗1);ev_o)\n= v^{-1};V(tau_{H_N(K,L),K}^{-1});U(ev_N)\n= t_{H_N(K,L),K}^{-1};U(ev_N).\nThe second equality is naturality of v and the third is N.Compatible's evaluation square. Uniqueness of the specified tensor-Hom transpose identifies d with sectionHomComparison for this very t. Hence the required hom_isIso holds for all ambient K,L, without a dualizability, constructibility or reflexivity assumption. Together with steps 2–3, 6–8 this supplies every field of the corrected Comparison.",
+   "uses": [
+    "lem-pur-monoidal-equivalence-hom-comparison",
+    "def-sf-native-weil-closed-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9, internal Hom and evaluation; canonical monoidal-equivalence comparison as cited"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-weil-frobenius-action-resolutions",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-sf-ringed-forget-two-injective-hom",
+  "lem-sf-weil-native-row-hom-comparison",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sf-total-bifunctor-signed-flip",
+  "lem-sf-native-ordinary-representative-currying",
+  "def-sf-native-weil-closed-models",
+  "lem-sfb-derived-monoidal",
+  "lem-sfb-derived-tensor-modules-derived",
+  "lem-sf-native-weil-tensor-lift",
+  "lem-sf-native-closed-transposition",
+  "lem-sf-native-ordinary-model-uniqueness",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-sf-cocontinuous-ringed-tensor-restriction",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-sf-adic-realization-isomorphism-data",
+  "lem-sfb-exact-monoidal-equivalence-total-kflat",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sfb-ringed-equivalence-resolving-tensor-descent",
+  "lem-pur-monoidal-equivalence-hom-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Evaluation-transpose and forgetful tensor compatibility; explicit exact-equivalence and signed-totalization refinement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'native_section_closed_forgetful' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-27",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of module sheaf categories transports the normalized K-flat derived tensor and the evaluation defined internal Hom comparison",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_rTensor_exact, Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-27",
+   "verdict": "no match for the whole item: generic exact-functor/closed-category or total-complex facts only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Equivalence",
+   "results": "CategoryTheory.cartesianClosedOfEquiv, CategoryTheory.MonoidalClosed.instTransported, CategoryTheory.equivPUnit",
+   "date": "2026-10-27",
+   "verdict": "no match for the whole item: generic exact-functor/closed-category or total-complex facts only"
+  },
+  {
+   "tool": "grep",
+   "query": "Closed.*[Ee]quiv|[Ee]quiv.*[Cc]losed|isIso.*(closed|ihom|expComparison)|class Closed",
+   "results": "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean, Mathlib/CategoryTheory/Monoidal/Closed/Zero.lean, Mathlib/CategoryTheory/Monoidal/Closed/Zero.lean, Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean; grep directory Mathlib/CategoryTheory/Monoidal",
+   "date": "2026-10-27",
+   "verdict": "no match for the whole item: generic exact-functor/closed-category or total-complex facts only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A strong monoidal equivalence preserves the internal Hom by the canonical evaluation transpose comparison",
+   "results": "CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.curryHomEquiv', CategoryTheory.expComparison, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.FunctorToTypes.functorHomEquiv, CategoryTheory.Functor.homObjEquiv, CategoryTheory.MonoidalClosed.instTransported",
+   "date": "2026-10-27",
+   "verdict": "no match for the whole item: generic exact-functor/closed-category or total-complex facts only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right derived functor of an exact equivalence of abelian categories agrees with termwise localization and its derived functor unit is an isomorphism",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory",
+   "date": "2026-10-27",
+   "verdict": "no match for the whole item: generic exact-functor/closed-category or total-complex facts only"
+  },
+  {
+   "tool": "grep",
+   "query": "def (mapBifunctor|d₁|d₂)|ι.*_d|ι.*d_eq|d_eq",
+   "results": "none; grep directory Mathlib/Algebra/Homology/TotalComplex",
+   "date": "2026-10-27",
+   "verdict": "no match for the whole item: generic exact-functor/closed-category or total-complex facts only"
+  },
+  {
+   "tool": "grep",
+   "query": "ιMapBifunctor.*d|mapBifunctor.*d|d.*ιMapBifunctor|def mapBifunctor",
+   "results": "Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorAssociator.lean, Mathlib/Algebra/Homology/BifunctorAssociator.lean, Mathlib/Algebra/Homology/BifunctorAssociator.lean; grep directory Mathlib/Algebra/Homology",
+   "date": "2026-10-27",
+   "verdict": "no match for the whole item: generic exact-functor/closed-category or total-complex facts only"
+  },
+  {
+   "tool": "grep",
+   "query": "ε₁|ε₂|σ.*(up|negOnePow)|negOnePow",
+   "results": "none; grep directory Mathlib/Algebra/Homology/TotalComplexShape.lean",
+   "date": "2026-10-27",
+   "verdict": "no match for the whole item: generic exact-functor/closed-category or total-complex facts only"
+  },
+  {
+   "tool": "grep",
+   "query": "ε₁|ε₂|negOnePow",
+   "results": "none; grep directory Mathlib/Algebra/Homology/TotalComplexShape",
+   "date": "2026-10-27",
+   "verdict": "no match for the whole item: generic exact-functor/closed-category or total-complex facts only"
+  },
+  {
+   "tool": "grep",
+   "query": "ε₁.*up|ε₂.*up|σ.*negOnePow|ε₁.*negOnePow|ε₂.*negOnePow",
+   "results": "Mathlib/Algebra/Homology/ComplexShapeSigns.lean; grep directory Mathlib/Algebra/Homology",
+   "date": "2026-10-27",
+   "verdict": "no match for the whole item: generic exact-functor/closed-category or total-complex facts only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There is a natural signed isomorphism between total complexes of a bifunctor applied in the two opposite argument orders; the bidegree p q summand is multiplied by minus one to p times q",
+   "results": "HomologicalComplex₂.totalFlipIsoX, HomologicalComplex₂.totalFlipIso, HomologicalComplex.mapBifunctorFlipIso, HomologicalComplex₂.flip_totalFlipIso, HomologicalComplex.mapBifunctorFlipIso_flip, HomologicalComplex.ι_mapBifunctorFlipIso_hom, HomologicalComplex₂.ιTotal_totalFlipIso_f_hom, HomologicalComplex₂.totalFlipIso_hom_f_D₂",
+   "date": "2026-10-27",
+   "verdict": "no match for the whole item: generic exact-functor/closed-category or total-complex facts only"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorFlipIso",
+   "results": "HomologicalComplex.mapBifunctorFlipIso, HomologicalComplex.mapBifunctorFlipIso_flip, HomologicalComplex.mapBifunctorFlipIso_hom_naturality, HomologicalComplex.mapBifunctorFlipIso_hom_naturality_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom, HomologicalComplex.ι_mapBifunctorFlipIso_hom_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_inv, HomologicalComplex.ι_mapBifunctorFlipIso_inv_assoc",
+   "date": "2026-10-27",
+   "verdict": "no match for the whole item: generic exact-functor/closed-category or total-complex facts only"
+  },
+  {
+   "tool": "grep",
+   "query": "def mapBifunctorFlipIso|lemma ι_mapBifunctorFlipIso|lemma mapBifunctorFlipIso_hom_naturality|σ p q",
+   "results": "Mathlib/Algebra/Homology/ComplexShapeSigns.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean; grep directory Mathlib/Algebra/Homology",
+   "date": "2026-10-27",
+   "verdict": "no match for the whole item: generic exact-functor/closed-category or total-complex facts only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total complex of the flipped bifunctor is isomorphic to the original total complex by the Koszul sign on each summand",
+   "results": "HomologicalComplex.ι_mapBifunctorFlipIso_hom, HomologicalComplex.mapBifunctorFlipIso, HomologicalComplex.mapBifunctorFlipIso_flip, HomologicalComplex₂.totalFlipIso, HomologicalComplex₂.totalFlipIsoX, HomologicalComplex.mapBifunctorFlipIso_hom_naturality_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom_assoc, HomologicalComplex₂.flip_totalFlipIso",
+   "date": "2026-10-27",
+   "verdict": "no match for the whole item: generic exact-functor/closed-category or total-complex facts only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-sf-weil-verdier-exchange",
+  "date": "2026-10-27",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.WeilSheaf.NativeSectionClosedForgetful",
+  "file": "lean/Sheaf/WeilSheaf/NativeSectionClosedForgetful.lean",
+  "declaration": "WeilConjectures.NativeSectionClosed.native_section_closed_forgetful",
+  "declarations": [
+   "WeilConjectures.NativeSectionClosed.native_section_closed_forgetful"
+  ],
+  "statement": "theorem native_section_closed_forgetful : Nonempty (NativeSectionClosed.Comparison D l R X) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-27",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-route-native-section-closed-forgetful",
+  "worker": "stage1",
+  "group": "NA",
+  "summary": "Repair of returned b23ef86c08a: retain the accepted signed statement and flip leaf. Construct the ordinary model m⁰=μ;Q(s^{-1}) first and its adjunction by the existing representative-currying theorem; add fixed-adjunction model uniqueness so every existential .choose model used by N equals m⁰ on K-flat pairs. Apply the source flip before the standard-total τ and expand the normalized descent square. Two new nodes in total, one Mathlib leaf. No Lean changes or compilation.",
+  "blueprint": "Realizes the current cor-coef-verdier-weil-equivariance first Hom comparison and evaluation normalization used by fix-cor-verdier-exchange; does not assert general bidual invertibility. This route-created item has no blueprint.is; the ancestor command returns None for its new nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-algebraic-closure-exists-unique",
+    "why": "Existence of the chosen field-closure isomorphism; generic field tool, no native closed theorem supplies this."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Reindexing a pro-etale site along a scheme isomorphism; generic site-equivalence tool."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Identifies the actual internal direct image with sectionwise reindexing and its adjunction."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Exact symmetric monoidal internal-to-section equivalence, including pure sections and K-flatness."
+   },
+   {
+    "node": "lem-sfb-exact-monoidal-equivalence-total-kflat",
+    "why": "Generic total-complex and K-flat invariance for an exact symmetric monoidal equivalence."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Exact functors have the actual invertible derived-unit comparison on every complex."
+   },
+   {
+    "node": "lem-sfb-ringed-equivalence-resolving-tensor-descent",
+    "why": "Generic normalized localization of tensor under a ringed-module equivalence."
+   },
+   {
+    "node": "lem-pur-monoidal-equivalence-hom-comparison",
+    "why": "Canonical evaluation-transpose Hom comparison for a strong monoidal equivalence, with no dualizability hypothesis."
+   },
+   {
+    "node": "lem-sfb-derived-monoidal",
+    "why": "Applies the derived monoidal construction to the native Grothendieck module-object category, so its canonical localization tensorator is used, not a tensor map limited to another category."
+   },
+   {
+    "node": "lem-sfb-derived-tensor-modules-derived",
+    "why": "Identifies the native relative module tensor and its lax localization map as the two-variable left-derived tensor, computed on K-flat representatives."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-exact-monoidal-equivalence-total-kflat",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sfb-ringed-equivalence-resolving-tensor-descent",
+  "lem-pur-monoidal-equivalence-hom-comparison",
+  "lem-sfb-derived-monoidal",
+  "lem-sfb-derived-tensor-modules-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NA-be683b1b7",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-be683b1b7 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, the Lean NativeWeilClosedModels.lean:120-460 (NativeAdjunctionNormalization :333, NativeOrdinaryTensorModels :362), NativeSectionClosedForgetful.lean (TransportNormalized uses N.ordinaryTensorModels.choose), CoefficientClosedStructure at CoefficientRingedTensorHomModel.lean:43, the row-sign differential at BifunctorHomComplex.lean:50-125, and Stacks 0A96 (sites-cohomology.tex:8789). Both return points of b23ef86c are repaired. (C4/E5) The item is ∃ Comparison, so step 2 may choose S_o. Its monoidal structure is the canonical one and its adjunction is the bijection e of representative-currying applied to the explicit m⁰=μ_{Q,P};Q₀(s⁻¹). The Furthermore clause of that node is exactly NativeAdjunctionNormalization. I checked evaluation_naturality from the naturality of e⁻¹, and the swap signs multiply to (-1)^{pq}. The new lemma lem-sf-native-ordinary-model-uniqueness is true; I proved it: currying a K-injective resolution j of T_o under the row-sign differential gives a chain map φ, ψ=j for both models by the coproduct universal property, and q(j) is invertible. It matches the Lean predicate exactly, is not a clause of the item and duplicates no node (rg over the DAG; native-hom-representative-uniqueness pins η, not the model). Step 3 then pins .choose on K-flat pairs, the only place TransportNormalized uses it. (C4) Step 6 is c=F(s);τ_{Q,P} with τ used only on the standard total. Step 7's descent square plus naturality of a gives (1) exactly. Steps 1, 4, 5, 8 and 9 re-checked; I re-derived the four equalities of step 9. The (-1)^{pq} correction is re-checked on P=(O→O), Q=O[-1]: unsigned forces id=-id. Batch-5 flag: def-sf-adic-realization-isomorphism-data is the definition package of the item's hypothesis R, with no existence assertion. Its reach to def-pod-partial-closed-interfaces is also only a general definition, not a Poincaré-duality or trace-formula step, so it is not a RETURN. The ten generic tool_uses are accepted. FIX (B3): the uniqueness node used CoefficientClosedStructure without its defining node. Added [def-coef-ringed-tensor-hom-model] with a gloss to the statement and to stmt_deps (fixes/dag/nodes/sec-six-functors/lem-sf-native-ordinary-model-uniqueness.json); the mathematics is unchanged.; 1 file(s) fixed by the reviewer"
+ }
+}

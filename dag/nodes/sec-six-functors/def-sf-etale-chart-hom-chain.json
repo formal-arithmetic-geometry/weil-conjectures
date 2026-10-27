@@ -1,0 +1,112 @@
+{
+ "id": "def-sf-etale-chart-hom-chain",
+ "kind": "definition",
+ "title": "The normalized ordinary etale chart Hom chain",
+ "status": "split",
+ "statement": "Let $A$ be a finite commutative ring and let $D(Z)=D(Z_{\\mathrm{et}},A)$ and $D^+(Z)$ be the ordinary and bounded-below derived categories [def-weil-pbc-derived-categories]. Let $f:X\\to Y$ be a morphism and let $s:U\\hookrightarrow X$ and $v:V\\hookrightarrow Y$ be open immersions, $i:U\\hookrightarrow P$ a closed immersion, and $p:P\\to V$, with $s f=i p v$; here $s,v$ are open, while $f,p$ are separated of finite type and $s,v$ are quasi-compact [def-weil-open-immersion] [def-weil-closed-immersion] [def-weil-finite-type-morphism] [def-weil-scheme-morphism-properties]. Use the chosen compact-support functors $F_a=Ra_!$ [def-amb-etale-compact-support] for $a=f,s,v,i,p,sf,ip,ipv,(ip)v$, with compactifications [def-weil-compactifications-refinements]. For an open $a$, define $F_a^+\\cong D^+(a_!)$ by its canonical $(a,\\mathrm{id})$ compactification comparison and identity normalization. For closed $i$, define $F_i^+\\cong D^+(i_*)$ using $(\\mathrm{id},i)$, the identity normalization and exactness of $i_*$ [def-weil-pbc-extension-by-zero] [def-weil-pbc-direct-image]. Define $\\gamma^+:D^+(s_!)F_f^+\\cong D^+(i_*)F_p^+D^+(v_!)$ by, in order, the inverse open normalization at $s$, the compact-support compositor for $s,f$, transport along $sf=ipv$, inverse associativity transport, inverse compositors for $ip,v$ and $i,p$, and the closed $i$ and open $v$ normalizations. Define $\\gamma_H:F_fD(s_!)H\\cong D(v_!)F_pD(i_*)H$ for $H\\in D^+(U)$ by the canonical bounded-below/ambient compatibility maps around $\\gamma_H^+$. Define similarly $F_iH\\cong D(i_*)H$ in the ambient category. Given functors $R_f:D(Y)\\to D(X)$, $R_p:D(V)\\to D(P)$, $R_i:D(P)\\to D(U)$ and specified adjunctions $F_f\\dashv R_f$, $F_p\\dashv R_p$, $F_i\\dashv R_i$, define for every $H\\in D^+(U)$ and arbitrary $K\\in D(Y)$ the equivalence\n$$\\operatorname{Hom}(H,s^*R_fK)\\cong\\operatorname{Hom}(D(s_!)H,R_fK)\\cong\\operatorname{Hom}(F_fD(s_!)H,K)\\cong\\operatorname{Hom}(D(v_!)F_pD(i_*)H,K)\\cong\\operatorname{Hom}(F_pD(i_*)H,v^*K)\\cong\\operatorname{Hom}(D(i_*)H,R_pv^*K)\\cong\\operatorname{Hom}(F_iH,R_pv^*K)\\cong\\operatorname{Hom}(H,R_iR_pv^*K).$$\nUse the ordinary open adjunctions and the specified adjunctions, precomposition by $\\gamma_H^{-1}$, and the displayed closed normalization, in that order [def-weil-pbc-inverse-image]. No boundedness of $K$ or either representing target, no Noetherian hypothesis, and no assertion about representing objects is part of this definition.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-scheme-morphism-properties",
+  "def-amb-etale-compact-support",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+  "place": "Step 1, compact-support composition and the open adjunction; expanded ordinary etale Hom chain in lem-pur-witnessed-open-chart-transport and the opening/final paragraphs of sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homChain|leftComparisonPlus|closedNormalizationAmbient; rg -n of Mathlib, lean/WeilConjectures and lean/Sheaf; rg of dag/nodes; tools/blueprint_refs.py search \"Hom chain\"",
+   "results": "0 hits: . Upstream WeilConjectures has only unrelated private Koszul homChainClass lemmas. Sheaf has the six canonical definitions in EtaleChartAdjointComparison and unrelated private boundary-chain lemmas. No definition node records these six declarations; only lem-sf-etale-chart-adjoint-comparison does. The blueprint search returns 0 nodes. The existing def-per-site-comparison-pullback-data owns the other site-comparison constructions needed by the item and is reused.",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib match. Reuse the published chart constructions through an existing:true definition record, without copying any declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical ordinary etale chart Hom adjunction chain compact support open closed normalization",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization.",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib match. Reuse the published chart constructions through an existing:true definition record, without copying any declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom equivalence for etale exceptional adjoints along a factored open closed chart",
+   "results": "8 hits: writtenInExtChartAt, writtenInExtChartAt_comp, TopologicalSpace.Opens.chartAt_inclusion_symm_eventuallyEq, writtenInExtChartAt_sumInr_eventuallyEq_id, writtenInExtChartAt_sumInl_eventuallyEq_id, extChartAt_comp, writtenInExtChartAt_extChartAt_symm, TopologicalSpace.Opens.chartAt_subtype_val_symm_eventuallyEq.",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib match. Reuse the published chart constructions through an existing:true definition record, without copying any declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-witnessed-open-chart-transport",
+  "date": "2026-10-22",
+  "group": "Q152"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-general-admissibility",
+   "place": "Step 1: the normalized ordinary etale Hom chain defining the affine chart comparison.",
+   "via": [
+    "lem-pur-witnessed-open-chart-transport",
+    "lem-pur-affine-chart-exceptional-identification"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleChartAdjointComparison",
+  "declaration": "AlgebraicGeometry.Etale.ChartAdjointComparison.homChain",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ChartAdjointComparison.openNormalization",
+   "AlgebraicGeometry.Etale.ChartAdjointComparison.closedNormalization",
+   "AlgebraicGeometry.Etale.ChartAdjointComparison.leftComparisonPlus",
+   "AlgebraicGeometry.Etale.ChartAdjointComparison.leftComparison",
+   "AlgebraicGeometry.Etale.ChartAdjointComparison.closedNormalizationAmbient",
+   "AlgebraicGeometry.Etale.ChartAdjointComparison.homChain"
+  ],
+  "statement": "noncomputable def homChain\n    (H : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)))\n    (K : DerivedCategoryModule A Y) :\n    (H.obj ⟶ D((s)^*[ModuleCat.{u + 1} A]).obj (F.obj K)) ≃\n      (H.obj ⟶ I.obj (G.obj (D((v)^*[ModuleCat.{u + 1} A]).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "Q152",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Records all six existing canonical definitions in their published owning module, without copying or changing them. This node defines the forward equivalence and its normalizations; it does not use exists_homEquiv or assert its naturality theorem. All data are the existing explicit constructions."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cd5ca9a2",
+  "group": "Q152",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cd5ca9a2",
+  "group": "Q152",
+  "result": "pass",
+  "note": "Re-delivery of the 16525712 RETURN; both Lean modules byte-identical (sha 98c6da53, 89395fc5). F1 fixed: item stmt_deps now cite the new existing:true def-sf-etale-chart-hom-chain (6 EtaleChartAdjointComparison defs; hypotheses and chain order checked against the source) and the landed def-per-site-comparison-pullback-data (lists supportSiteComparisonCoefficientPullbackIso, ProEtaleComparisonId/Comp, EtaleComparisonComp) in place of the two theorem nodes, which stay in proof_deps. F2 fixed: def-sf-etale-origin-subcategory record is a superset (6 Q19 + 2 Fixed* decls) on a module that publicly imports the unchanged old one; old module has no sorry; live record equals base; check_lean_text clean with import resolution. Offline check_new_node/check_existing/check_record clean except a noncomputable note. Item clauses and edge cases (d=0, n=1, empty, non-separated X, non-constructible witnesses, no universe equality) re-verified. Advisories: compositor rightDerivedLowerShriekPlusCompIso owned only by theorem lem-amb-etale-compact-comparisons; Etale.upperStarId owned only by theorem lem-weil-pbc-inverse-image-composition; six chart decls listed by both theorem and def node. No compile (Lean unchanged, no file changed)."
+ }
+}

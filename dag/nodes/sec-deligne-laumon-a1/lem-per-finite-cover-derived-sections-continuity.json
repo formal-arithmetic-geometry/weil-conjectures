@@ -1,0 +1,359 @@
+{
+ "id": "lem-per-finite-cover-derived-sections-continuity",
+ "kind": "statement",
+ "title": "Derived sections continuity for bounded-below systems on finite-cover sites",
+ "statement": "Let $I$ be a small nonempty cofiltered category [def-weil-size-convention]. For every $i$ let $\\mathcal C_i$ be a small site with finite limits and finite covering families, and for $a:j\\to i$ let $f_a:\\mathcal C_j\\to\\mathcal C_i$ be a morphism of sites induced by a finite-limit-preserving functor $u_a:\\mathcal C_i\\to\\mathcal C_j$ taking covering families to covering families. Assume the identities and composition laws hold, and put $\\mathcal C=\\varinjlim_i\\mathcal C_i$, $p_i:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal C_i)$, as in [lem-weil-pbc-colimit-of-sites]. Write $R\\Gamma$ for total right derived global sections of abelian sheaves [def-sp-kinjective-bridge, def-weil-abstract-derived-category]. Fix an integer $b$. Let $K_i^\\bullet$ be complexes of abelian sheaves on $\\mathcal C_i$ which are zero in degrees below $b$, and let $\\alpha_a:f_a^{-1}K_i^\\bullet\\to K_j^\\bullet$ be maps of complexes satisfying the identity and cocycle laws, using inverse image on abelian sheaves [lem-weil-pbc-site-pullback-abelian-exact]. Set $K^\\bullet=\\varinjlim_{i\\in I^{\\mathrm{op}}}p_i^{-1}K_i^\\bullet$, the termwise colimit of complexes of sheaves [def-weil-pbc-category-colimit]. There is a canonical isomorphism in $D(\\mathbf{Ab})$\n$$\\operatorname*{colim}^{\\mathrm{der}}_{i\\in I^{\\mathrm{op}}}R\\Gamma(\\mathcal C_i,K_i^\\bullet)\\xrightarrow{\\sim}R\\Gamma(\\mathcal C,K^\\bullet).$$\nHere the source is the exact filtered derived colimit: choose compatible bounded-below injective-resolution complexes for the system and take the termwise filtered colimit of their global-section complexes. The arrow is induced by the projection pullbacks followed by the actual coprojections to $K^\\bullet$. The isomorphism is natural for maps of the coefficient systems, compatible finite-cover site functors between such systems, and cofinal reindexing. In particular its cohomology maps are the canonical filtered-colimit maps, and the same construction for every canonical truncation $\\tau_{\\le r}K_i^\\bullet$ [def-kun-truncations] is compatible with the truncation inclusions and their maps to the untruncated complexes. No uniform bound on cohomological dimensions is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 09YP (lemma-colimit), using Tag 0EXZ (lemma-colim-sites-injective); bounded-below derived extension by the canonical truncation spectral sequence, derived.tex lemma-two-ss-complex-functor. This is the general finite-cover tool underlying ILO XX 4.4, printed p.373, passage from (**) to (**)lim."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "lem-weil-pbc-colimit-of-sites",
+  "def-sp-kinjective-bridge",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "def-weil-pbc-category-colimit",
+  "def-kun-truncations",
+  "def-per-finite-cover-derived-sections-data"
+ ],
+ "proof": [
+  {
+   "text": "Regard $(K_i,\\alpha_a)$ as the bounded-below complex $K_{\\mathscr S}$ of the system category in [lem-per-varying-site-system-injective-resolutions]. Choose its monomorphic quasi-isomorphism $s:K_{\\mathscr S}\\to J_{\\mathscr S}$ there, preserving the lower bound $b$. Evaluation gives compatible maps $s_i:K_i\\to J_i$, with all $J_i^n$ injective. Thus $R\\Gamma(\\mathcal C_i,K_i)$ is represented by $\\Gamma(\\mathcal C_i,J_i)$, and the transition chain maps are the actual adjunction-unit section maps followed by the transitions of $J$. Their identity and composition laws hold because those of the system and of the adjunction units hold. These models therefore form an actual diagram of complexes, rather than an independently chosen family of resolutions.",
+   "uses": [
+    "lem-per-varying-site-system-injective-resolutions",
+    "lem-sp-kinjective-computes",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K (lemma-injective-resolutions-exist), 070J (lemma-bounded-below-injectives-K-injective); system embedding construction: sites-cohomology.tex Tag 0EXZ"
+   }
+  },
+  {
+   "text": "Put $L=\\varinjlim_i p_i^{-1}J_i$ termwise, and let $t:K\\to L$ be induced by the $s_i$. Exactness of every $p_i^{-1}$ and of filtered colimits of abelian sheaves shows that cohomology of these complexes commutes with these operations: kernels and images are preserved, so $H^n(t)=\\varinjlim_i p_i^{-1}H^n(s_i)$ is an isomorphism. Thus $t$ is a quasi-isomorphism and $L^n=0$ for $n<b$. For every $q>0$, apply [lem-weil-pbc-cohomology-colimit-of-sites] to the sheaf system $(J_i^n)_i$ and a terminal object at any fixed stage. Finite-limit preservation makes its images terminal. Its stage cohomology groups vanish because $J_i^n$ is injective; hence $H^q(\\mathcal C,L^n)=0$. Every term of $L$ is consequently global-section acyclic.",
+   "uses": [
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "lem-weil-pbc-cohomology-colimit-of-sites",
+    "lemma-weil-pbc-leray-acyclicity",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 09YP (lemma-colimit), applied to the terms of the compatible injective resolution; exactness as in its proof"
+   }
+  },
+  {
+   "text": "The degree-zero continuity theorem [lem-weil-pbc-colimit-of-sites-sections], applied to each $J_i^n$ at a stage terminal object, gives the canonical isomorphism $\\varinjlim_i\\Gamma(\\mathcal C_i,J_i^n)\\cong\\Gamma(\\mathcal C,L^n)$. To pass from the arrow category over a fixed $i_0$ to all indices, a cocone on the former extends to an index $j$ by choosing $k\\to i_0$ and $k\\to j$ and using the $k$-component. Two choices give the same map after a common refinement equalizing the relevant arrows; existence and independence follow from cofilteredness. This proves the colimit identification by the cocone universal property. The displayed degreewise maps commute with differentials: each is the section map of $J_i^n\\to p_i^{-1}J_i^n\\to L^n$, and these are chain maps. We obtain an isomorphism of complexes $A:=\\varinjlim_i\\Gamma(\\mathcal C_i,J_i)\\xrightarrow{e}\\Gamma(\\mathcal C,L)$.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites-sections",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 09YN (sites.tex lemma-colimit), the degree-zero case used in Tag 09YP"
+   }
+  },
+  {
+   "text": "By exactness of filtered colimits in $\\mathbf{Ab}$, termwise filtered colimit preserves quasi-isomorphisms: it preserves the kernel, image and quotient defining each $H^n$. Thus $Q A$ represents the exact filtered derived colimit in the statement. Let $\\eta_L:Q\\Gamma(L)\\to R\\Gamma(QL)$ be the derived-functor unit. By [sk-thm-acyclicity] it is invertible, since $L$ is bounded below and termwise acyclic. Therefore $R\\Gamma(Qt)^{-1}\\circ\\eta_L\\circ Qe$ is an isomorphism $Q A\\to R\\Gamma(QK)$ in $D(\\mathbf{Ab})$. This constructs the derived comparison itself; taking cohomology is a consequence.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "def-weil-abstract-derived-category",
+    "def-sfb-right-derived-functor",
+    "sk-thm-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015E (lemma-leray-acyclicity), canonical comparison for a bounded-below acyclic complex"
+   }
+  },
+  {
+   "text": "We identify this arrow with the prescribed pullback/coprojection arrow. Resolve $K\\to R$ on $\\mathcal C$ by a bounded-below injective complex, chosen monomorphically. Since $t:K\\to L$ is a monomorphic quasi-isomorphism, [lem-weil-pbc-lift-along-injective-quasi-iso] gives $v:L\\to R$ extending $K\\to R$. The $i$-th leg of $\\Gamma(v)e$ is exactly $\\Gamma(J_i)\\to\\Gamma(p_i^{-1}J_i)\\to\\Gamma(L)\\to\\Gamma(R)$. This is the resolution formula for pullback followed by the actual coprojection $p_i^{-1}K_i\\to K$: the map $p_i^{-1}J_i\\to R$ extends that coprojection after the augmentations. By the derived-unit naturality equation $R\\Gamma(Qv)\\eta_L=\\eta_R Q\\Gamma(v)$, its localization equals the arrow in Step 4. Consequently all its cohomology maps are the canonical filtered-colimit maps.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-per-varying-site-system-injective-resolutions",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K (monomorphic resolutions), 013P (lemma-morphisms-lift), 015E (canonical derived unit)"
+   }
+  },
+  {
+   "text": "For a map $h$ of coefficient systems, choose monomorphic system resolutions $K\\to J$ and $K'\\to J'$. The lift theorem in the abelian system category gives $\\widetilde h:J\\to J'$ extending $h$. On sections the square of $e$ maps commutes termwise, since both composites are induced by the same coprojections and $\\widetilde h_i$. Apply derived-unit naturality to the induced map of the $L$ complexes. This gives naturality of the comparison of Step 4. Two lifts are homotopic by [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy]; applying additive inverse image, sections and termwise colimit preserves the homotopy equation. Taking $h=1$ and exchanging the two resolutions proves independence of all resolutions and the identity and composition laws.",
+   "uses": [
+    "lem-per-varying-site-system-injective-resolutions",
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013P (lemma-morphisms-lift), 013S (lemma-morphisms-equal-up-to-homotopy), 015E (naturality of the comparison)"
+   }
+  },
+  {
+   "text": "For compatible site functors between two such diagrams, form the small combined index category with both copies of the original indices and the connecting site morphisms, imposing the given commuting-square relations. The two coefficient systems and their specified comparison form one system on this category. Apply [lem-per-varying-site-system-injective-resolutions] once on the combined category. Its restrictions have injective terms at every site and give STRICT commuting transition and connecting maps. They therefore compute both derived-colimit diagrams. The ordinary section maps commute with the maps $e$ because the adjunction units and the actual coprojections commute with the connecting morphisms. Apply the construction of Step 5 on the two limit sites: each resulting map into a receiving injective resolution extends the same coefficient/coprojection map, so homotopy uniqueness identifies it with the canonical site-pullback map. Thus the derived continuity square commutes. To compare these restricted models with system-injective models used earlier, lift their monomorphic quasi-isomorphisms into those system-injective models; Step 6 then gives the same derived square.",
+   "uses": [
+    "lem-per-varying-site-system-injective-resolutions",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013P, 013S; sites-cohomology.tex Remark 08J6 (remark-before-Leray), adjunction-unit construction of cohomology pullback"
+   }
+  },
+  {
+   "text": "For cofinal_reindexing, take homology in each integer degree. Exactness of filtered colimits in abelian groups makes the homology functor preserve the section-diagram colimits. Objectwise quasi-isomorphisms therefore give an objectwise invertible natural transformation on homology; its colimit is invertible. The naturality equation colimit.post A H followed by H(colim.map v.sections) equals colim.map (whiskerRight v.sections H) followed by colimit.post B H. Both colimit.post maps are invertible, so cancellation proves colim.map v.sections is a quasi-isomorphism. The final-functor theorem makes the actual map colimit.pre N.sections.diagram U.index invertible. Their composite is v.sourceMap; localization makes it invertible. The previously stated naturality theorem supplies v.Commutes. This is a complete Lean proof and uses no boundedness beyond the given models. For each integer $r$, exact inverse image and exact filtered colimit commute with $\\tau_{\\le r}$: its only modified term is $\\ker(d^r)$, with its induced differential and inclusion. Apply the coefficient-map naturality of Step 6 to every inclusion $\\tau_{\\le r}K_i\\to K_i$ and $\\tau_{\\le r}K_i\\to\\tau_{\\le s}K_i$ for $r\\le s$. All these systems retain the lower bound $b$ (and are zero when $r<b$). This gives exactly the asserted truncation squares. Only bounded-below acyclic computation has been used, so no cohomological-dimension bound enters.",
+   "uses": [
+    "lem-weil-pbc-initial-functor-limit",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "def-weil-abstract-derived-category",
+    "def-kun-truncations",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015E (bounded-below hypothesis); homology.tex section-truncations (canonical upper truncation); categories.tex initial-functor limit theorem"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-varying-site-system-injective-resolutions",
+  "lem-sp-kinjective-computes",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-cohomology-colimit-of-sites",
+  "lemma-weil-pbc-leray-acyclicity",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-colimit-of-sites-sections",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "def-weil-abstract-derived-category",
+  "sk-thm-acyclicity",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-initial-functor-limit",
+  "def-kun-truncations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 09YP, 0EXZ; bounded-below derived enhancement by compatible system resolutions and derived.tex Tag 015E, rather than a cohomological-dimension argument. R6 stage 3: cofinal_reindexing is proved using exact filtered-colimit homology, Mathlib colimit.map_post and Functor.Final.colimit_pre_isIso, followed by the existing naturality theorem; the other eight proofs remain the stated plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of uniformly bounded below complexes on a cofiltered system of finite cover sites commute with the filtered colimit on the limit site",
+   "results": "{\"t\": \"2026-10-24T10:09:58Z\", \"tool\": \"leanfinder\", \"query\": \"Derived global sections of uniformly bounded below complexes on a cofiltered system of finite cover sites commute with the filtered colimit on the limit site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"Condensed.isColimitLocallyConstantPresheaf\", \"CategoryTheory.GrothendieckTopology.liftToPlusObjLimitObj_fac\", \"CategoryTheory.GrothendieckTopology.liftToPlusObjLimitObj\", \"CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux_fac\", \"CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux_fac_assoc\", \"LightCondensed.isColimitLocallyConstantPresheaf\", \"CategoryTheory.GrothendieckTopology.preservesLimitsOfShape_plusFunctor\"], \"digest\": \"901a46a0c459f665\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern locally constant functions, continuous group cohomology, or formal etale algebra; none gives this derived sheaf-cohomology comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hypercohomology continuity for varying coefficient complexes on an inverse limit of sites, with a common lower cohomological bound",
+   "results": "{\"t\": \"2026-10-24T10:09:54Z\", \"tool\": \"leansearch\", \"query\": \"Hypercohomology continuity for varying coefficient complexes on an inverse limit of sites, with a common lower cohomological bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousCohomology.MultiInd.complex\", \"HomologicalComplex.instHasLimit\", \"CategoryTheory.Functor.instIsContinuousOfPreservesOneHypercovers\", \"CochainComplex.isZero_of_isGE\", \"CategoryTheory.Functor.IsContinuous.mk\", \"CategoryTheory.instIsContinuousOverLeftDiscretePUnitIteratedSliceBackwardOver\", \"CategoryTheory.Functor.isContinuous_of_preservesOneHypercovers\", \"continuousCohomology\"], \"digest\": \"f1afaed6e02ddd65\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern locally constant functions, continuous group cohomology, or formal etale algebra; none gives this derived sheaf-cohomology comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.Limits.colimit",
+   "results": "{\"t\": \"2026-10-24T10:09:54Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf.H, CategoryTheory.Limits.colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern locally constant functions, continuous group cohomology, or formal etale algebra; none gives this derived sheaf-cohomology comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology|cohomology.*colimit|colimit.*cohomology",
+   "results": "{\"t\": \"2026-10-24T10:09:54Z\", \"tool\": \"grep\", \"query\": \"hypercohomology|cohomology.*colimit|colimit.*cohomology\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean\"], \"digest\": \"e5e85254713439d9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern locally constant functions, continuous group cohomology, or formal etale algebra; none gives this derived sheaf-cohomology comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology|cohomology.*colimit|colimit.*cohomology",
+   "results": "{\"t\": \"2026-10-24T11:01:55Z\", \"tool\": \"grep\", \"query\": \"hypercohomology|cohomology.*colimit|colimit.*cohomology\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean\"], \"digest\": \"e5e85254713439d9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: site-continuity and nonabelian H1 constructions do not provide bounded-below derived-sections continuity on varying sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hypercohomology continuity on a limit site with finite coverings for varying complexes with a common lower bound",
+   "results": "{\"t\": \"2026-10-24T11:01:56Z\", \"tool\": \"leansearch\", \"query\": \"Hypercohomology continuity on a limit site with finite coverings for varying complexes with a common lower bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsContinuous\", \"CategoryTheory.Functor.isContinuous_of_coverPreserving\", \"CategoryTheory.Functor.IsContinuous.mk\", \"CategoryTheory.Functor.instIsContinuousOfPreservesOneHypercovers\", \"ContinuousCohomology.MultiInd.complex\", \"CategoryTheory.Functor.isContinuous_of_preservesOneHypercovers\", \"HomologicalComplex.instHasLimit\", \"CategoryTheory.GrothendieckTopology.OneHypercover\"], \"digest\": \"4e4fdc578088b953\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: site-continuity and nonabelian H1 constructions do not provide bounded-below derived-sections continuity on varying sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.Limits.colimit",
+   "results": "{\"t\": \"2026-10-24T11:01:56Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf.H, CategoryTheory.Limits.colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: site-continuity and nonabelian H1 constructions do not provide bounded-below derived-sections continuity on varying sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections commute with filtered colimits of uniformly bounded below complexes on a cofiltered inverse system of finite cover sites",
+   "results": "{\"t\": \"2026-10-24T11:01:59Z\", \"tool\": \"leanfinder\", \"query\": \"Derived global sections commute with filtered colimits of uniformly bounded below complexes on a cofiltered inverse system of finite cover sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"Condensed.isColimitLocallyConstantPresheaf\", \"LightCondensed.isColimitLocallyConstantPresheaf_desc_apply\", \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"LightCondensed.isColimitLocallyConstantPresheaf\", \"LightCondensed.isColimitLocallyConstantPresheafDiagram\", \"Condensed.isColimitLocallyConstantPresheafDiagram\", \"CategoryTheory.GrothendieckTopology.liftToPlusObjLimitObj\"], \"digest\": \"fdf4e4b5a07239e9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: site-continuity and nonabelian H1 constructions do not provide bounded-below derived-sections continuity on varying sites."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-admissible-modification-cohomology-presentation",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "The passage from finite-stage Leray to the limit spectral sequence in ILO XX 4.4, used in the completion part of proof Step 3 of the blueprint ancestor.",
+   "via": [
+    "lem-per-admissible-modification-cohomology-presentation",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-finite-cover-derived-sections-continuity",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused finite-cover cohomology and degree-zero continuity. Extracted only the general varying-site system-category resolution lemma. Constructed the actual derived arrow via the acyclic-resolution unit and checked coprojections, resolution independence, naturality, site functors, cofinality and smart truncations.",
+  "blueprint": "The inherited ancestor completion/limit passage, realized by Steps 1–5; Steps 6–8 provide the functorial derived and truncation normalizations used by the parent tool. The latest ancestor proof Step 3 is duality; the completion passage is in the existing downstream node chain, not literally in the current ancestor text.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "General site/derived-category tool: K-injective resolutions compute derived functors. This supplies a general resolution or continuity fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "General site/derived-category tool: The inverse image of abelian sheaves along a morphism of sites is exact. This supplies a general resolution or continuity fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "why": "General site/derived-category tool: Filtered colimits of abelian sheaves on a site are exact. This supplies a general resolution or continuity fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-colimit-of-sites",
+    "why": "General site/derived-category tool: Cohomology on a colimit of sites. This supplies a general resolution or continuity fact; it does not replace the unit route."
+   },
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "General site/derived-category tool: Leray acyclicity criterion. This supplies a general resolution or continuity fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-of-sites-sections",
+    "why": "General site/derived-category tool: Sections of the colimit sheaf on a colimit of sites (degree 0). This supplies a general resolution or continuity fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "why": "General site/derived-category tool: Filtered colimits of abelian groups are exact. This supplies a general resolution or continuity fact; it does not replace the unit route."
+   },
+   {
+    "node": "sk-thm-acyclicity",
+    "why": "General site/derived-category tool: Acyclic resolutions. This supplies a general resolution or continuity fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "why": "General site/derived-category tool: Extending a morphism into a bounded below complex of injectives along a degreewise injective quasi-isomorphism. This supplies a general resolution or continuity fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "General site/derived-category tool: Lifts along a quasi-isomorphism into a bounded below complex of injectives are unique up to homotopy. This supplies a general resolution or continuity fact; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-initial-functor-limit",
+    "why": "General site/derived-category tool: An initial functor induces an isomorphism of limits. This supplies a general resolution or continuity fact; it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-kinjective-computes",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-cohomology-colimit-of-sites",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-colimit-of-sites-sections",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "sk-thm-acyclicity",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-initial-functor-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-f63952736",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-f63952736 (reviewer sub-agent of L); spot-checked: The item and its one new node are correct and well split; I made no changes. The item is not a 2026-10-21 re-split: Q49 created it on 2026-10-24 as an unsplit node with no proof. Its statement is word for word the base statement; only def-kun-truncations was added to stmt_deps, and that node does define tau<=r in any abelian category. It is a true derived form of Stacks 09YP for bounded-below complexes of abelian sheaves. The base change is pullback then coprojection, in the same coefficient category as 09YP and the pbc nodes. No duplicate exists: the etale-limit-complex-systems node covers schemes and H^p only, and cohomology-colimit-of-sites covers sheaves only. Sources read: sites-cohomology.tex 0EXZ (l.2855, the product of f_{b*}A_k), 09YP (l.2905), derived.tex 013K(3) (l.6280), and the tags 015E, 070J, 013P, 013S. Steps: (1) the system resolution makes each J_i K-injective by kinjective-computes(2), so RGamma(C_i,K_i) is Gamma(C_i,J_i) by def-sfb-right-derived-functor; the transitions are unit then system map, using terminal objects preserved by u_a. (2) Exact p_i^{-1} and filtered colimits make t a monomorphic quasi-isomorphism; cohomology-colimit-of-sites at a terminal X_{i0} plus vanishing on injectives makes L termwise acyclic; u_{i0}X_{i0} is terminal in C. (3) Degree-zero sections continuity, extended from the arrow category over i0 to all of I by cofinality, gives an isomorphism of complexes. (4) Filtered colimits in Ab are exact and sk-thm-acyclicity inverts the unit, giving the derived-form isomorphism. (5) Lift along the monomorphic quasi-isomorphism into a bounded-below injective R, then unit naturality, identifies it with the pullback/coprojection arrow; the pullback map for complexes is written out through resolutions rather than cited from a node, which I accept. (6) Lifting and homotopy uniqueness in the abelian system category give naturality and independence of resolutions. (7) One resolution on a combined index category gives strict squares, without assuming restriction keeps system-injectivity. (8) Initial-functor-limit handles cofinal reindexing, and tau<=r commutes with the exact functors. The new node lem-per-varying-site-system-injective-resolutions is true. The system category S is abelian with kernels and cokernels computed at each site because each f_a^{-1} is exact. Evaluation at k has a right adjoint built from products of pushforwards, which gives enough injectives as in 0EXZ but at the level of systems. Evaluation at i has an exact left adjoint built from sums of pullbacks, so it preserves injectives. 013K(3) applied in S gives the monomorphic resolutions. Edge cases checked: empty I, one object, loops in I, any bound b. B1-B9 hold (statement only, self-contained, definitions cited, three kinds of Mathlib search recorded). D1 holds: the node makes no continuity claim. Duplicate candidates were checked and differ (colimit-of-sites-injective-system, semisimplicial-ringed-total-category, complex-injective-resolution-mono). I accept the declared tool_uses: they are generic tools from sk-thm-p1, sk-thm-acyclicity, kinjective-computes and initial-functor-limit. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteCoverDerivedSectionsContinuity",
+  "declaration": "CategoryTheory.FiniteCoverDerivedSections.continuity",
+  "declarations": [
+   "CategoryTheory.FiniteCoverDerivedSections.exists_coefficient_colimit",
+   "CategoryTheory.FiniteCoverDerivedSections.exists_model",
+   "CategoryTheory.FiniteCoverDerivedSections.continuity",
+   "CategoryTheory.FiniteCoverDerivedSections.naturality",
+   "CategoryTheory.FiniteCoverDerivedSections.exists_change_lift",
+   "CategoryTheory.FiniteCoverDerivedSections.coefficient_naturality",
+   "CategoryTheory.FiniteCoverDerivedSections.common_refinement",
+   "CategoryTheory.FiniteCoverDerivedSections.cofinal_reindexing",
+   "CategoryTheory.FiniteCoverDerivedSections.truncation_compatibility"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FiniteCoverDerivedSectionsContinuity.lean",
+  "statement": "theorem continuity {S : Sites.{u}} {K : System S} {C : K.Colimit} {b : ℤ} [HasDerivedCategory.{w} AddCommGrpCat.{u}] (M : Model K C b) : IsIso (DerivedCategory.Q.map M.comparison) ∧ ∀ n : ℤ, Nonempty (IsColimit ((HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℤ) n).mapCocone M.sectionCocone.cocone))",
+  "branch": "sheaf-dag",
+  "by": "Q96",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a0e9f4e16",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Read the item, all 8 stmt_deps, both delivered modules and the report against Stacks 09YL/0A35/0EXZ/09YP/013K/013P/013S/015E. Main conclusion is the derived-form IsIso (Q.map M.comparison) of the actual colimit.desc of section maps; it is true for every Model (L = colim p_i^-1 J_i is termwise Γ-acyclic and L->R is a quasi-iso). Cohomology clause is a colimit for every n in Z. Coefficient, site-change, cofinal-reindexing, refinement and truncation (Mathlib truncLE/ιTruncLE) clauses are complete; the forall-lift squares hold in D(Ab) by homotopy into K-injective pushforwards. The Sites fields are 09YL consequences with universes matching exists_colimit_site; coefficient colimit and section maps are pinned, nothing hollow; all 9 theorems are sorry. Dependency nodes unchanged; item changed only in lean plus one added stmt_dep, the new node def-per-finite-cover-derived-sections-data, which passes the H12 field rules. lean.statement fields verbatim, all declarations listed, docstrings complete, no line over 100 chars, no duplicate in Mathlib or the project. Advisories: the Second reading is a self-review (Worker report is clause by clause, so not H11 grounds); continuity is slightly more general (no bound hypothesis on K); some imports are proof-only. No changes made, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261026T092504-L-3435823",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,215 @@
+{
+ "id": "lem-sfb-kflat-derived-adjunction-transport-shifts",
+ "kind": "statement",
+ "title": "Transport normalization of the K-flat module derived adjunction",
+ "statement": "Let $R$ be a commutative condensed ring [sk-def-sfb-condensed-ring] and $u:X\\to Y$ a morphism of schemes. Put $D_T=D(\\operatorname{Mod}_{R_T})$ for the ordinary unbounded derived category [def-weil-abstract-derived-category] of module objects [sk-def-sfb-module-objects], with $R_T$ pulled back from the point [sk-def-sfb-pulled-back-coefficients]. Let $P=Lu^*:D_Y\\to D_X$ and $G=Ru_*:D_X\\to D_Y$ be the specified total derived functors on K-flat and K-injective resolutions [sk-def-sfb-module-derived-pushpull]. Let $A=D(u^*)$ be the exact termwise derived functor and $c:P\\xrightarrow{\\sim}A$ its canonical comparison [def-sfb-left-derived-exact]. Equip $A$ with termwise shifts, $P$ with their transport along $c$, and $G$ with its fixed canonical K-injective shifts.\nLet $a^P:P\\dashv G$ be exactly the adjunction derived from the specified ordinary module adjunction $u^*\\dashv u_*$, as in [def-sfb-module-upper-lower-adjunction, def-sfb-module-derived-pushpull-adjunction], and let $a^A:A\\dashv G$ be the canonical exact-left/K-injective-right derived adjunction of that same ordinary adjunction. Use the same right derived comparison $\\beta:Q_YC(u_*)\\to GQ_X$ for both, where $Q_T$ localizes cochain complexes and $C(H)$ denotes termwise application. Their left derived comparisons $\\alpha^P:P Q_Y\\to Q_XC(u^*)$ and $\\alpha^A:A Q_Y\\to Q_XC(u^*)$ obey $\\alpha^A\\circ cQ_Y=\\alpha^P$.\nThen $a^P$ is the transport of $a^A$ along $c$, with the same right adjoint and right derived comparison. Precisely, writing $\\eta^P,\\varepsilon^P$ and $\\eta^A,\\varepsilon^A$ for their units and counits, for every $M\\in D_Y$ and $N\\in D_X$ one has\n$$\\eta^P_M=G(c_M^{-1})\\circ\\eta^A_M,\\qquad \\varepsilon^P_N=\\varepsilon^A_N\\circ c_{GN}.$$\nThe unit and counit of the specified adjunction $a^P$ commute with all the fixed integer shifts; the shift on $G$ is its canonical K-injective shift, not a newly chosen adjoint shift.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0DVC (lemma-pre-derived-adjoint-functors), canonical derived adjunction; comparison of its two left-derived presentations and fixed K-injective shift normalization",
+  "external": [
+   {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3); expanded canonical normalization argument extracted from lem-sfb-derived-exchange-exact-normalization"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-left-derived-exact",
+  "def-sfb-module-upper-lower-adjunction",
+  "def-sfb-module-derived-pushpull-adjunction",
+  "def-weil-triangulated-category",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-sfb-module-derived-comparison-shifts"
+ ],
+ "proof": [
+  {
+   "text": "Let P be the specified K-flat left-derived pullback, A the exact termwise pullback, G the fixed K-injective pushforward, and c = modulePullbackExactComparison. The construction of c is definitionally leftDerivedFunctorIsoMapDerivedCategory. Its equation leftDerivedFunctorIsoMapDerivedCategory_hom_fac identifies the two left-derived counits. Apply the proved source-library tool Adjunction.derived_eq_ofNatIsoLeft to the same ordinary homotopy adjunction and the same right comparison beta. This tool uses the derived-counit normalization of lem-sc-derived-adjunction-from-underived and right-derived uniqueness to obtain aP = aA.ofNatIsoLeft c.symm.",
+   "uses": [
+    "def-sfb-left-derived-exact",
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate this equality of adjunctions at the unit and counit components. The definition of ofNatIsoLeft gives etaP_M = etaA_M followed by G(c.inv_M), and epsilonP_N = c.hom_(GN) followed by epsilonA_N. These are precisely the two displayed formulas.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply canonicalRightDerivedAdjunctionShift to the specified ordinary module adjunction. It supplies CommShift for aA with the fixed K-injective shift on G. Since the published shift on P is CommShift.ofIso c.symm, Functor.CommShift.ofIso_compatibility proves that c.inv commutes with every integer shift. Adjunction.commShift_ofNatIsoLeft transports CommShift along c.symm by composition and whiskering of the unit and counit shift squares. Rewrite with the adjunction equality from step 1. This uses the existing shift on G throughout, for every integer without sign or positivity restrictions.",
+   "uses": [
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "def-sfb-module-derived-comparison-shifts",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-left-derived-exact",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "def-sfb-module-derived-comparison-shifts",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0DVC and 0FND; F4 Lean proof specializes the proved derived_eq_ofNatIsoLeft and commShift_ofNatIsoLeft tools, the canonical exact counit factorization, and canonicalRightDerivedAdjunctionShift."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derived.*[Cc]ounit|derived.*[Cc]ommShift|[Cc]ommShift.*derived|ofNatIsoLeft",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"198\", \"text\": \"noncomputable def totalLeftDerivedCounit : L ⋙ F.totalLeftDerived L W ⟶ F :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"203\", \"text\": \"    (F.totalLeftDerivedCounit L W) W where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"205\", \"text\": \"    dsimp [totalLeftDerived, totalLeftDerivedCounit]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derived_counit and derivedε_fac_app give the general factorization, not equality of these two specified module derived adjunctions under c or compatibility with the already fixed K-injective shifts. commShift_of_leftAdjoint installs a right-adjoint shift and does not identify it with this fixed one."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical K-flat left derived module pullback adjunction is the transport of the exact termwise left adjoint and K-injective right derived adjunction, preserving its fixed shifts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_unit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, localization functors $L_1: \\\\mathcal{C}_1 \\\\to\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_unit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"The natural transformation from the identity functor on $\\\\mathcal{D}_1$ to the composition $G' \\\\circ F'$, constructed via the left-derived lift involving associators, whiskering operations, and the un\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derived_counit and derivedε_fac_app give the general factorization, not equality of these two specified module derived adjunctions under c or compatibility with the already fixed K-injective shifts. commShift_of_leftAdjoint installs a right-adjoint shift and does not identify it with this fixed one."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport a derived adjunction along the canonical comparison from a left derived exact functor to its termwise derived functor without changing the right adjoint shifts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$, $F : \\\\mathcal{C}_2 \\\\to \\\\mathcal{C}_1$ forming an adjunction $G \\\\dashv \"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_unit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"[G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\\n  [(G' ⋙ F').IsLeftDerivedFunctor ((Functor.associator _ _ _).inv ≫ whiskerRight α F') W₁]\\n  [(F' ⋙ G').IsRightDerivedFunctor (whiskerRight β G' ≫ (Functor.associator _ _ _).hom) W₂] : G' ⊣ F'\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.commShift_of_leftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"[F.CommShift A] :\\n  letI := adj.rightAdjointCommShift A\\n  adj.CommShift A\", \"doc\": \"Given an adjunction between categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ equipped with shift operations parameterized by an additive monoid $A$, if the left adjoint functor $F$ commutes with the shift, \"}\n  {\"name\": \"CategoryTheory.Adjunction.rightAdjointCommShift_commShiftIso\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  (adj : F ⊣ G) (A : Type u_3) [inst_2 : AddGroup A] [inst_3 : CategoryTheory.HasShift C A]\\n  [inst_4 : Ca\", \"doc\": \"Given an adjunction $ F ⊣ G $ between categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ equipped with shift operations parameterized by an additive monoid $A$, if the left adjoint $F$ commutes with the shift\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \": 𝟭 D₁ ⟶ G' ⋙ F'\", \"doc\": \"The natural transformation from the identity functor on $\\\\mathcal{D}_1$ to the composition $G' \\\\circ F'$, constructed via the left-derived lift involving associators, whiskering operations, and the un\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$, $F : \\\\mathcal{C}_2 \\\\to \\\\mathcal{C}_1$ forming an adjunction $G \\\\dashv \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derived_counit and derivedε_fac_app give the general factorization, not equality of these two specified module derived adjunctions under c or compatibility with the already fixed K-injective shifts. commShift_of_leftAdjoint installs a right-adjoint shift and does not identify it with this fixed one."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived_counit",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derived_counit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D₁] [CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {F : CategoryTheory.Functor C₂ C₁} (adj \", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derived_counit and derivedε_fac_app give the general factorization, not equality of these two specified module derived adjunctions under c or compatibility with the already fixed K-injective shifts. commShift_of_leftAdjoint installs a right-adjoint shift and does not identify it with this fixed one."
+  },
+  {
+   "tool": "grep",
+   "query": "derived_counit|derivedε_fac_app",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"125\", \"line\": \"lemma derivedε_fac_app (X₂ \", \"text\": \" C₂) :\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derived_counit and derivedε_fac_app give the general factorization, not equality of these two specified module derived adjunctions under c or compatibility with the already fixed K-injective shifts. commShift_of_leftAdjoint installs a right-adjoint shift and does not identify it with this fixed one."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of a derived adjunction under comparison of left derived functors, counits agree on K-injective resolutions and units commute with canonical shifts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derived_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, localization functors $L_1: \\\\mathcal{C}_1 \\\\to\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"The natural transformation from the identity functor on $\\\\mathcal{D}_1$ to the composition $G' \\\\circ F'$, constructed via the left-derived lift involving associators, whiskering operations, and the un\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_unit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_unit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_1$ in category $\\\\mathcal{C}_1$, the composition of the derived unit transformation $\\\\eta'$ evaluated at $L_1(X_1)$ followed by $F'$ applied to $\\\\alpha_{X_1}$ equals the composition o\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derived_counit and derivedε_fac_app give the general factorization, not equality of these two specified module derived adjunctions under c or compatibility with the already fixed K-injective shifts. commShift_of_leftAdjoint installs a right-adjoint shift and does not identify it with this fixed one."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived adjunction comparison between left derived exact functor and termwise functor preserves specified units counits and canonical integer shifts",
+   "results": "8 hits; CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'_counit. Source read at Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:96-109,144-151.",
+   "date": "2026-10-22",
+   "verdict": "no match for full item: abstract derived formulas do not identify both specified module adjunctions or retain the already specified K-injective shifts; the unit formula is isolated as a Mathlib leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "derived_counit|derivedη_fac_app|commShift_of_leftAdjoint",
+   "results": "3 hits; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean. Source read at Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:96-109,144-151.",
+   "date": "2026-10-22",
+   "verdict": "no match for full item: abstract derived formulas do not identify both specified module adjunctions or retain the already specified K-injective shifts; the unit formula is isolated as a Mathlib leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived_counit",
+   "results": "1 hits; CategoryTheory.Adjunction.derived_counit. Source read at Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:96-109,144-151.",
+   "date": "2026-10-22",
+   "verdict": "no match for full item: abstract derived formulas do not identify both specified module adjunctions or retain the already specified K-injective shifts; the unit formula is isolated as a Mathlib leaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived adjunction of exact left adjoint commutes with shifts and comparison of left derived functor",
+   "results": "8 hits; CategoryTheory.Adjunction.IsTriangulated.commShift, CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.LeftAdjointCommShift.iso_hom_app_assoc, CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated, CategoryTheory.Adjunction.isTriangulated_leftAdjoint, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.LeftAdjointCommShift.iso_inv_app_assoc, CategoryTheory.Adjunction.derived. Source read at Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:96-109,144-151.",
+   "date": "2026-10-22",
+   "verdict": "no match for full item: abstract derived formulas do not identify both specified module adjunctions or retain the already specified K-injective shifts; the unit formula is isolated as a Mathlib leaf"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-exchange-exact-normalization",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-rational",
+   "place": "proof paragraph (3), \"all functors are exact and the maps are natural transformations of exact functors\": Transport normalization of the K-flat module derived adjunction",
+   "via": [
+    "lem-sfb-derived-exchange-exact-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-kflat-derived-adjunction-transport-shifts",
+  "worker": "stage1",
+  "summary": "Compared both specified units using the same beta and the canonical exact left comparison; cancelled the invertible exact factorization, proved the counit identity by transposition, and checked both fixed shift squares explicitly. Reused the existing canonical-right-derived shift theorem; one generic unit-factorization Mathlib leaf. No statement change.",
+  "blueprint": "proof paragraph (3), natural transformations of exact functors; derived adjunction normalization needed for shift compatibility",
+  "tool_uses": [
+   {
+    "node": "lem-sp-canonical-right-derived-adjunction-shift",
+    "why": "Generic unbounded exact-left/K-injective-right adjunction theorem preserves its fixed canonical shifts; the proper-base-change unit has no such normalization theorem."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic termwise adjunction supplies the original unit on complexes and homotopy categories; used as a tool without changing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-a79a54289",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-a79a54289 (reviewer sub-agent of L); spot-checked: Not a re-split (no repair note); the item statement is identical to Q38's. New leaf lem-sfb-abstract-derived-unit-factorization is an exact match of Mathlib Adjunction.derivedη_fac_app (Functor/Derived/Adjunction.lean:101-109). Its left-derived-pair hypothesis is the section instance for G'⋙F', the orientation is correct, and it is not a duplicate: lem-sc-derived-adjunction-from-underived gives only derivedε_fac_app, and pc-normalization-unique and the resolving/transport nodes differ. Step 1: α^A is the exact-functor iso, so α^P = α^A∘cQ_Y is invertible and (GT,Gα^T) is absolutely left derived by localization (2)/(3). The specified units equal derivedη by universal uniqueness; project Lean confirms mapDerivedCategoryRightDerivedAdjunction is Adjunction.derived with mapDerivedCategoryFactorsh and rightDerivedFunctorUnit. Steps 2-3: I re-derived the cancellation, localization faithfulness and transpose/triangle arguments; the unit and counit formulas are correct. Step 4: lem-sp-canonical-right-derived-adjunction-shift applies (abelian categories, K-injectives on Mod_{R_X}, u^* exact additive). Both shift chains check for every n with the fixed K-injective shift on G and the transported shift on P. Tested on u=id/c=id, the zero ring and n=0 or negative n; the scalar-twisted identity adjunction shows why β must stay fixed. No cycles and no SGA citation. The off-unit tool uses (sp canonical shift, termwise adjunction) are accepted as generic tools. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.KFlatDerivedAdjunctionTransportShifts",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.kflat_derived_adjunction_transport_shifts",
+  "file": "lean/Sheaf/Paper/KFlatDerivedAdjunctionTransportShifts.lean",
+  "statement": "theorem kflat_derived_adjunction_transport_shifts : (∀ M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj R.X Y)), (derivedUpperStarLowerStarAdjunction R.X f).unit.app M = (upperStarLowerStarAdjunction R.X f).mapDerivedCategoryRightDerivedAdjunction.unit.app M ≫ (moduleObjectDerivedPushforward R.X f).map ((modulePullbackExactComparison R.X f).inv.app M)) ∧ (∀ N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj R.X X)), (derivedUpperStarLowerStarAdjunction R.X f).counit.app N = (modulePullbackExactComparison R.X f).hom.app ((moduleObjectDerivedPushforward R.X f).obj N) ≫ (upperStarLowerStarAdjunction R.X f).mapDerivedCategoryRightDerivedAdjunction.counit.app N) ∧ Adjunction.CommShift (F := moduleObjectDerivedPullback R.X f) (G := moduleObjectDerivedPushforward R.X f) (derivedUpperStarLowerStarAdjunction R.X f) ℤ",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the canonical exact comparison and the two fixed shift structures owned by def-sfb-module-derived-comparison-shifts, recorded there by existing: true in their published module. The theorem node lem-sfb-module-derived-functor-compositor-shifts is not a statement dependency: none of its theorem proofs is used to construct this statement. The two adjunctions are the published canonical constructions sharing rightDerivedFunctorUnit. Explicit named F and G make CommShift elaborate with exactly the recorded shift instances."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69b47b0e5",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Re-delivery fixes the only earlier RETURN (H2/H13): new def node def-sfb-module-derived-comparison-shifts records modulePullbackExactComparison, modulePullbackDerivedCommShift and modulePushforwardDerivedCommShift with existing:true in the unchanged ModuleDerivedFunctorCompositorShifts module; the item cites it instead of the theorem node. Item module unchanged apart from one docstring line. Re-checked: aP = derivedAdjunction and aA = mapDerivedCategoryRightDerivedAdjunction share rightDerivedFunctorUnit (same G and beta); c = leftDerivedUnique, so alphaA∘cQ = alphaP by construction; unit and counit formula directions correct; CommShift uses the transported P-shift and the fixed K-injective G-shift for all n in Z; no extra hypotheses or universe constraints; lean.statement verbatim; Stacks sources exist. Advisories: stale blueprint tag in the existing module docstrings; pre-existing upstream duplicate leftDerivedFunctorIsoMapDerivedCategory. No compile needed (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261023T135007-L-2822325",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

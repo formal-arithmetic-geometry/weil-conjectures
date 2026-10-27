@@ -1,0 +1,135 @@
+{
+ "id": "def-sfb-artin-limit-preservation-versality",
+ "kind": "definition",
+ "title": "Limit preservation and pointwise versality over the integers",
+ "status": "split",
+ "statement": "Work over $S=\\operatorname{Spec}\\mathbf Z$ in the universes of [def-weil-size-convention], with schemes and affine spectra [def-pc-scheme, def-weil-affine-spectrum]. Let $\\mathcal F$ be a category fibred in groupoids on $\\mathit{Sch}/S$ in the total-category convention of [def-sfb-stable-pointed-moduli-groupoids]. Its fibre over $T$ consists of objects lying over $T$ and arrows over the identity; an arrow over $a:T\\to U$ records a pullback identification. Call $\\mathcal F$ limit preserving if for every small nonempty directed inverse system of affine schemes $T_i$ over $S$, with affine limit $T$, every object of $\\mathcal F(T)$ descends to a stage, every isomorphism between stage objects descends to a later common stage, and equality of such isomorphisms over $T$ holds at a later common stage. For a scheme $U/S$, a point $u\\in U$ is of finite type when $\\operatorname{Spec}\\kappa(u)\\to U$ is locally of finite type and quasi-compact [def-weil-residue-field, def-weil-finite-type-morphism]. For $x\\in\\mathcal F(U)$ define versality at $u$ by the following Artinian lifting condition: for every surjection $g:A'\\to A$ of Artinian local rings with nilpotent kernel, surjective residue maps $\\rho:A\\to\\kappa(u)$ and $\\rho':A'\\to\\kappa(u)$ with maximal-ideal kernels and $\\rho g=\\rho'$, every $a:\\operatorname{Spec}A\\to U$ reducing to the canonical point $u$, and every object $y'$ over $A'$ with a specified isomorphism $y'|_A\\cong a^*x$, there is $a':\\operatorname{Spec}A'\\to U$ extending $a$ and an isomorphism $y'\\cong(a')^*x$ restricting to the specified one. Artinian means descending chains of ideals stabilize, and local means having a unique maximal ideal. This is a definition; no existence, smoothness, or algebraicity assertion is made.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-residue-field",
+  "def-weil-finite-type-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tags 07XL (definition-limit-preserving) and 07XF (definition-versal), over Spec Z; equation-hat-x and its Artinian lifting interpretation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Category fibred in groupoids limit preserving on affine inverse limits and versal at a scheme point",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ i, IsAffine (D.obj i)] (s : Γ(c.pt, ⊤)) : ∃ (i : I) (t : Γ(D.obj i, ⊤)), (c.π.app i).appTop t = s\", \"doc\": \"In a limit cone over a diagram of affine schemes, every global section of the apex is the image of a global section from some object in the diagram under the projection map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.compactSpace_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, CompactSpace (D.obj i)] : CompactSpace c.pt\", \"doc\": \"If $ I $ is a cofiltered category and $ D : I \\to \\text{Scheme} $ is a diagram where each object $ D(i) $ is a compact space and each morphism $ D(f) $ is an affine morphism, then the limit of $ D $ (i.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"{I : Type*} [Category* I] {D : I ⥤ Scheme.{u}} (c : Cone D) (hc : IsLimit c) [∀ i, IsAffine (D.obj i)] : IsAffine c.pt\", \"doc\": \"If $\\\\{X_i\\\\}_{i \\\\in I}$ is a diagram of affine schemes indexed by a category $I$, and $c$ is a limit cone over this diagram in the category of schemes, then the apex of the cone $c$ is also an affine s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ (i : I), CompactSpace (D.obj i)]\\n  [∀ (i : I), QuasiSeparatedSpace (D.obj i)] [IsAffine c.pt] : ∃ i, IsAffine (D.obj i)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n  {\"name\": \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofilteredOrEmpty I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] {j : I} (Z : ∀ (i : I), (i ⟶ j) → Set (D.obj i))\\n  (hZc : ∀ i hij, IsClosed (Z i hij)) (hZne : ∀ i hij, (Z i hij).Nonempty) (hZcpt : ∀ i hij, IsCompact (Z i hij))\\n  (hstab : ∀ (i i' : I) (hi'i : i' ⟶ i) (hij : i ⟶ j), Set.MapsTo (D\", \"doc\": \"Given a cofiltered or empty category $\\\\mathcal{I}$ and a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes where all transition morphisms are affine, let $j$ be an object in $\\\\mathcal{I}$. Suppose fo\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, QuasiSeparatedSpace (D.obj i)] (U : c.pt.Opens)\\n  (hU : IsAffineOpen U) : ∃ (i : I) (V : (D.obj i).Opens), IsAffineOpen V ∧ c.π.app i ⁻¹ᵁ V = U\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n  {\"name\": \"AlgebraicGeometry.preservesLimit_rightOp_Γ\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{I : Type w} [Category.{v} I] (D : I ⥤ Scheme.{u}) [∀ i, IsAffine (D.obj i)] : PreservesLimit D Scheme.Γ.rightOp\", \"doc\": \"The right opposite of the global sections functor for schemes preserves limits when restricted to diagrams where every object is an affine scheme. This means that for any diagram of affine schemes, th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \": IsColimit (cocone X)\", \"doc\": \"For any scheme $X$, the cocone in the category of schemes constructed by composing the inclusion functor from the affine Zariski site of $X$ to its open subsets, the right-opposite presheaf functor, a\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Only affine scheme limit results; no fibred-groupoid versality definition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Versality of a family in a fibred groupoid at a point defined by lifting Artinian local ring surjections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.jointly_surjective\", \"module\": \"Mathlib/CategoryTheory/Sites/Point/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (self : J.Point)\\n  {X : C}, ∀ R ∈ J X, ∀ (x : self.fiber.obj X), ∃ Y f, ∃ (_ : R.arrows f), ∃ y, self.fiber.map f y = x\", \"doc\": \"For any object $X$ in a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, any covering sieve $R$ on $X$ in $J$, and any element $x$ in the fiber of $X$ at a point $p$ of $J$, there exi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_jointly_surjective\", \"module\": \"Mathlib/CategoryTheory/Sites/Point/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point)\\n  {A : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} A]\\n  [inst_2 : CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] {FC : A → A → Type u_1} {CC : A → Type w'}\\n  [inst_3 \", \"doc\": \"For any element $ p $ in the colimit $ \\\\Phi.\\\\text{presheafFiber}(P) $, there exists an object $ X $ in $ \\\\mathcal{C} $, an element $ x $ in the fiber $ \\\\Phi.\\\\text{fiber}(X) $, and an element $ z $ in \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) →\\n        (D ⟶ (CategoryTheory.Functor.const I).obj S) → (X ⟶ S) → Type (u + 1)\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, this inductive type encode\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_fiber\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  (x : (F.obj X).carrier),\\n  ∃ A f a, CategoryTheory.PreGaloisCategory.IsGalois A ∧ (CategoryTh\", \"doc\": \"For any object $X$ in a pre-Galois category $\\\\mathcal{C}$ and any element $x$ in the image of $X$ under a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists a Galois object $A$, a mor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.ulift\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X →\\n      AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X\", \"doc\": \"Given a scheme $X$ and a cover $\\\\mathcal{U}$ of $X$ defined by the precoverage generated by a morphism property $P$, this function lifts $\\\\mathcal{U}$ from universe level $v$ to universe level $u$ whi\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No match; the project has the exact definitions in ArtinRepresentableDiagonalCriterion."
+  },
+  {
+   "tool": "grep",
+   "query": "IsVersalAt|IsLimitPreserving|FiniteTypePoint",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "Reuse existing declarations without writing any Lean module; new definition node provides the missing DAG attachment."
+  },
+  {
+   "tool": "grep",
+   "query": "rg of IsVersalAt|IsLimitPreserving|FiniteTypePoint in WeilConjectures, Sheaf and DAG definition records",
+   "results": "WeilConjectures: no matches.\nSheaf/AlgebraicGeometry/ArtinRepresentableDiagonalCriterion.lean:117:def IsLimitPreserving\nSheaf/AlgebraicGeometry/ArtinRepresentableDiagonalCriterion.lean:284:def FiniteTypePoint\nSheaf/AlgebraicGeometry/ArtinRepresentableDiagonalCriterion.lean:293:def IsVersalAt\nNo existing definition node records these three full names.",
+   "date": "2026-10-24",
+   "verdict": "Existing project declarations found and reused; only the DAG definition attachment is missing."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-versal-base-change-smooth",
+  "date": "2026-10-24",
+  "group": "NP"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, representable fibre product Z and application of lemma-base-change-versal at z_0=i(u_0). Definition attachment for the limit-preservation and versality hypotheses, reusing existing Lean declarations.",
+   "via": [
+    "lem-sfb-artin-versal-base-change-smooth",
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinRepresentableDiagonalCriterion",
+  "declaration": "AlgebraicGeometry.ArtinCriterion.IsVersalAt",
+  "declarations": [
+   "AlgebraicGeometry.ArtinCriterion.Base",
+   "AlgebraicGeometry.ArtinCriterion.integerScheme",
+   "AlgebraicGeometry.ArtinCriterion.overMap",
+   "AlgebraicGeometry.ArtinCriterion.Object",
+   "AlgebraicGeometry.ArtinCriterion.Lift",
+   "AlgebraicGeometry.ArtinCriterion.ObjectsDescend",
+   "AlgebraicGeometry.ArtinCriterion.ArrowsDescend",
+   "AlgebraicGeometry.ArtinCriterion.ArrowEqualitiesDescend",
+   "AlgebraicGeometry.ArtinCriterion.IsLimitPreserving",
+   "AlgebraicGeometry.ArtinCriterion.FiniteTypePoint",
+   "AlgebraicGeometry.ArtinCriterion.IsVersalAt"
+  ],
+  "statement": "def IsVersalAt (F : BasedCategory.{v, w} (Over Base.{u}))\n    (U : Scheme.{u}) (x : Object F (integerScheme U)) (u₀ : U) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing definitions, read with docstrings and full bodies. No new Lean declaration: these definitions were attached only to the Artin criterion theorem node; this definition node supplies their missing definitional DAG interface."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d5e19199c",
+  "group": "NP",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d5e19199c",
+  "group": "NP",
+  "result": "pass",
+  "note": "Read item, all 17 stmt_deps' declarations, new node, module, report against Stacks 0CXM/0CXU/07XL/07XF. All clauses match: HasSquareZeroGluing (all rings, surjective, ker^2=0, total-category IsPushout over any base pushout) is equivalent to the groupoid equivalence incl. arrows; HasAlgebraicSpaceDiagonal; landed IsLimitPreserving/FiniteTypePoint/IsVersalAt (prescribed-iso extension b≫d=c); Z pinned by equivalence with moduliTwoFiberProduct and ModuliTwoIso for both p and q; SpaceFiniteTypePoint = closed lift on étale chart; SpaceSmoothNear = open subspace with all étale charts smooth; section i pinned to moduliTwoFiberLift id j σ, finite-type image unconditional, smoothness under versality. No extra hypotheses, universes bound, statement verbatim, stmt_deps all used, helpers real, sorry only. New existing:true def node owns 11 ArtinCriterion decls previously only theorem-owned (as prescribed by the Q88 RETURN); no def-node owner on base/live. Maintainer notes: equivalent parallel notions def-sfb-fibred-groupoid-limit-preserving (Q06), def-sfb-pointwise-versal-lifting (Q05) and ArtinVersality.* (Q50) landed 12:56 CST, after the base (04:26 UTC), so they need unifying later; stage 3 needs an IsVersalAt↔IsVersalAtField bridge for proof dep lem-sfb-artin-pointwise-versal-field-extension. No compile (no file changed)."
+ }
+}

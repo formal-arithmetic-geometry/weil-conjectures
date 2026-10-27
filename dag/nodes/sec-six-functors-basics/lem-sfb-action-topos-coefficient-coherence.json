@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-action-topos-coefficient-coherence",
+ "kind": "statement",
+ "title": "Classifying action topoi and normalized scalar compatibility",
+ "statement": "Let $A$ be a commutative condensed ring [sk-def-sfb-condensed-ring] on the small coherent profinite site [def-weil-size-convention]. For a profinite group $P$, write $\\mathcal A_P(A)$ for internal $A$-modules with condensed $P$-action [def-sfb-condensed-action-module], and $\\Gamma_P$ for sections fixed after every profinite base change. Use ordinary unbounded derived categories and K-injective total right derived functors [sk-def-sfb-derived-categories]. Let $G,L$ be profinite groups, let $K\\triangleleft G$ be open normal, and put $Q=G/K$. Write $T(M)=M^K$, with residual $Q\\times L$-action, $U$ for forgetting this residual action, and $r=\\operatorname{Res}_K$ for action restriction along $k\\mapsto(k,1)$. All invariant inclusions and inflation adjunctions have the normalized transposes of [def-sfb-normal-invariant-comparison-data]: restrict codomain to invariants, with inverse given by composing the inclusion. Let $B_P$ denote sheaves of sets with internal condensed $P$-action, meaning sheaves $X$ with natural operations $C(S,P)\\times X(S)\\to X(S)$ satisfying the action laws. By [lem-sfb-action-topos-geometric-restriction], applied to the group sheaf $S\\mapsto C(S,P)$, this is a topos presented by the small action site of [lem-sfb-internal-action-site-presentation], using the same arrows and covering sieves as there and the restriction $x\\mapsto a f^*x$ along $(f,a)$. Inflations for $P\\to1$ and $G\\times L\\to Q\\times L$ are the inverse images of its geometric morphisms $p_P$ and $q_\\pi$ for the projection $\\pi$; they preserve finite limits. With the trivial action on $A$, their module direct images are respectively $\\Gamma_P$ and $T$, in the ringed-topos sense [def-weil-pbc-ringed-topos-morphism]. A condensed ring map $\\sigma:A\\to A'$ gives the ringed-topos morphism on the identity $B_P$ with exact module direct image $s_P$, scalar restriction; its squares with these projections commute as ringed-topos morphisms, with identity comparison on underlying sheaves, as in [lem-sfb-action-topos-geometric-restriction].\n\nFor any of these projections $f:B_P\\to B_R$, there is a canonical natural derived isomorphism\n$$\\theta_f:Rf_{*,A}D(s_P)\\xrightarrow{\\sim}D(s_R)Rf_{*,A'}.$$\nFor an $A'$-K-injective $I'$ and an $A$-K-injective resolution $a:s_PI'\\to J$, the map $f_{*,A}(a)$ from $s_R f_{*,A'}I'$ to $f_{*,A}J$ is a quasi-isomorphism and represents $\\theta_f^{-1}$. The isomorphisms for composable projections and coefficient maps satisfy the normalized ringed-topos composition cocycle, including coefficient maps on identity underlying topoi.\n\nTake $\\beta,c,\\eta$ and derived inflation with the resolution normalizations of [lem-sfb-open-normal-action-injective-models, lem-sfb-normal-inflation-resolution-naturality]. For every equivariant coefficient map $v:N\\to s_{G\\times L}N'$, define the coefficient transformation for each invariant functor by its derived image of $v$ followed by the corresponding $\\theta_f$, and use $\\theta_T$ for $T$; for full invariants this is the coefficient map $c_J$ of [lem-sfb-condensed-derived-restriction-calculus] induced by $v$. All squares of these transformations with $\\beta,c$, and, for modules in degree zero, $\\eta$ and inflation, commute. Their normalization is specified as follows: on $I'$ and $a$ as above, the inverse coefficient square for $\\beta$ is represented by $(sI')^K\\to J^K$, and that for $c$ by $(sI')^{G\\times L}\\to J^{G\\times L}$, also written as quotient invariants of $T_A(a)$. These normalizations agree with the conjugate-of-inflation normalization of $c$. The unit square is the naturality square of the canonical derived unit, and the inflation square uses the original invariant inclusions composed with $a$. The assertion holds for arbitrary $v$ and $\\sigma$, without flatness or preservation of K-injectives by scalar restriction.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated tame-boundary quotient input; extraction of returned normal-subgroup-comparison proof steps 10–11. The blueprint does not state this condensed-action lemma explicitly."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "def-sfb-condensed-action-module",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-normal-invariant-comparison-data",
+  "lem-sfb-internal-action-site-presentation",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-sfb-open-normal-action-injective-models",
+  "lem-sfb-normal-inflation-resolution-naturality",
+  "lem-sfb-action-topos-geometric-restriction",
+  "lem-sfb-condensed-derived-restriction-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Apply the internal-action topos theorem to the small coherent profinite site and the group sheaf $S\\mapsto C(S,P)$. It gives exactly $B_P$, its stated action-site restrictions, and the commuting coefficient squares. For $P\\to1$ the inverse image is trivial inflation; its right adjoint on modules is $\\Gamma_P$, because an equivariant map out of a trivial action has image fixed after every base change. For $G\\times L\\to Q\\times L$, use the normalized quotient adjunction: its right adjoint is $T$. Thus these are the module direct images of the stated ringed morphisms, not just abstract right adjoints. Both adjunctions use restriction of codomain to the fixed subsheaf, with inverse composition with its inclusion.",
+   "uses": [
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-sfb-internal-action-site-presentation",
+    "lem-sfb-open-normal-action-injective-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent specialization to the commuting coefficient square on internal-action topoi"
+   }
+  },
+  {
+   "text": "Let $e_P:(B_P,A')\\to(B_P,A)$ and $e_R:(B_R,A')\\to(B_R,A)$ be the coefficient morphisms. Their module direct images are $s_P,s_R$ by the restriction-of-scalars ringed-topos theorem. Scalar restriction is exact by the action calculus; the exact-functor factorization therefore identifies $Re_{P,*}=D(s_P)$ and $Re_{R,*}=D(s_R)$, termwise on every complex. The geometric coefficient square says $f_Ae_P=e_Rf_{A'}$, including its structural ring map. Write $h$ for this common ringed morphism.",
+   "uses": [
+    "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-action-topos-geometric-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent specialization to the commuting coefficient square on internal-action topoi"
+   }
+  },
+  {
+   "text": "With $\\kappa$ the canonical ringed direct-image comparison, define $\\theta_f=\\kappa_{e_R,f_{A'}}\\kappa_{f_A,e_P}^{-1}$. Its source and target are precisely those in the statement, by step 2. Both factors are isomorphisms by ringed-topos derived composition. On an $A'$-K-injective $I'$ and a resolution $a:s_PI'\\to J$, the normalization of $\\kappa_{f_A,e_P}$ says that $f_{*,A}(a)$ is a quasi-isomorphism. For the other factor, $f_{*,A'}I'$ is K-injective: for our projections this is the K-injective preservation of $T$ or $\\Gamma_P$. We may consequently choose its identity resolution in $\\kappa_{e_R,f_{A'}}$. This factor is the identity on $s_Rf_{*,A'}I'$. Hence $f_{*,A}(a)$ represents $\\theta_f^{-1}$, with the asserted orientation, for every such $a$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sfb-open-normal-action-injective-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent specialization to the commuting coefficient square on internal-action topoi"
+   }
+  },
+  {
+   "text": "Apply the cocycle law for $\\kappa$ to strings made from projections and $e_P$. Replacing an adjacent coefficient/projection pair by the commuting ringed square of step 2 changes the derived word by $\\kappa_{e_R,f_{A'}}\\kappa_{f_A,e_P}^{-1}$. For two adjacent replacements the two composites agree by the displayed three-morphism cocycle; cancelling inverse $\\kappa$ factors gives the composition law for $\\theta$. This applies both to two projections and to two coefficient maps. The identity law gives the identity coefficient comparison. Coefficient morphisms have identity underlying topoi, and are expressly included in the cited cocycle theorem.",
+   "uses": [
+    "lem-pur-ringed-derived-composition-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent specialization to the commuting coefficient square on internal-action topoi"
+   }
+  },
+  {
+   "text": "First test the coefficient squares on $I'$ using $a:sI'\\to J$ as in step 3. For $\\beta$, both inverse coefficient routes are the map $U T_A(a)=(r a)^K$ from $U(sT_{A'}I')$ to $UT_AJ$. Indeed $\\beta$ is the identity on $UTI=(rI)^K$; $rI'$ and $rJ$ are K-injective, and $r(a)$ is a resolution of $s(rI')$ since $r$ is exact. Step 3 applied to the $K$-invariant projection therefore computes its scalar comparison by this very map. Taking fixed sections and forgetting scalar actions do not alter any section or differential. This proves the $\\beta$ square with its stipulated inverse normalization.",
+   "uses": [
+    "lem-sfb-open-normal-action-injective-models",
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent specialization to the commuting coefficient square on internal-action topoi"
+   }
+  },
+  {
+   "text": "For $c$, $T_A(a):sT_{A'}I'\\to T_AJ$ is a quasi-isomorphism by step 3 for the quotient projection. Moreover $T_{A'}I'$ and $T_AJ$ are K-injective by the quotient model theorem, so $T_A(a)$ is an allowed resolution for applying step 3 to $\\Gamma_{Q\\times L}$. The inverse coefficient routes are consequently $\\Gamma_{G\\times L}(a)$ and $\\Gamma_{Q\\times L}(T_A(a))$. They are literally equal: a section fixed by $G\\times L$ is exactly a $K$-fixed section fixed by $Q\\times L$, and both maps send it by $a$. The normalized $c$ is the identity on this complex, by the inflation-resolution theorem. This proves the square and also identifies its $c$ with the conjugate-of-inflation normalization, rather than an unspecified isomorphism.",
+   "uses": [
+    "lem-sfb-open-normal-action-injective-models",
+    "lem-sfb-normal-inflation-resolution-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent specialization to the commuting coefficient square on internal-action topoi"
+   }
+  },
+  {
+   "text": "For a degree-zero module $N'$, choose $i':N'[0]\\to I'$ and $a:sI'\\to J$. The composite $a\\,s(i')$ is a resolution of $sN'[0]$. The two routes in the inverse coefficient square for the canonical unit are $T_A(a)\\,sT_{A'}(i')$ and $T_A(a\\,s(i'))$; functoriality and the literal scalar identification make them equal. This uses the unit model $T(i)$, so it proves the unit square with its canonical normalization. Inflation satisfies $c\\,\\operatorname{inf}=R\\Gamma_{Q\\times L}(\\eta)$ by the inflation-resolution theorem. Its square follows from the unit square, the $c$ square of step 6 and invertibility of $c$. To check the claimed representative as well, the underived inclusion commutes with every equivariant map: $a\\,\\iota_{sI'}=\\iota_J\\,\\operatorname{Inf}T_A(a)$. This is equality on each invariant section. The theorem's description of derived inflation as the transpose of the resolution lift therefore uses exactly the original inclusion followed by $a$.",
+   "uses": [
+    "lem-sfb-normal-inflation-resolution-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent specialization to the commuting coefficient square on internal-action topoi"
+   }
+  },
+  {
+   "text": "For arbitrary $v:N\\to sN'$, factor each coefficient transformation as $RF(v)$ followed by $\\theta_f$. The normalized $\\beta,c$ are natural on the entire derived category, and the unit and inflation are natural on modules, by the two normalized model theorems. Precompose the scalar squares of steps 5--7 by these naturality squares for $v$. This proves the claimed squares for arbitrary coefficient maps. For full invariants, compare $\\theta_{p_P}$ with the comparison $d_P:F_Ps\\simeq sF_P$ of the scalar-interchange theorem through their normalizations, not their constructions (the latter uses pullback composition comparisons). Let $I'$ be $A'$-K-injective and $a:sI'\\to J$ an $A$-K-injective resolution. By the K-injective map-computation theorem the computation unit $\\alpha^A_{P,sI'}$ is the class of $\\Gamma_P(a):\\Gamma_P(sI')\\to\\Gamma_P(J)$, and $\\alpha^{A'}_{P,I'}$ is invertible. Since $\\Gamma_P(a)$ is a quasi-isomorphism by step 3, the interchange equation $d_{P,I'}\\alpha^A_{P,sI'}=s(\\alpha^{A'}_{P,I'})$ says that $d_{P,I'}$ is the inverse of the class of $\\Gamma_P(a)$, which is $\\theta_{p_P,I'}$ by step 3. Both are natural and every object is isomorphic to a K-injective complex, so $\\theta_{p_P}=d_P$, the comparison fixed by the computation-unit equation in [def-sfb-condensed-derived-invariants]. Hence $d_P R\\Gamma_P(v)=c_J(v)$ there, which is the $c_J$ of the restriction calculus. Resolution computations determine derived arrows and their transitions by the K-injective map-computation theorem, so all these equalities are independent of the chosen resolutions. The only exactness used for coefficients was that of scalar restriction; no step assumes flatness or that $sI'$ is K-injective.",
+   "uses": [
+    "lem-sfb-open-normal-action-injective-models",
+    "lem-sfb-normal-inflation-resolution-naturality",
+    "lem-sfb-condensed-scalar-restriction-interchange",
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sf-kinjective-derived-map-computation",
+    "def-sfb-condensed-derived-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent specialization to the commuting coefficient square on internal-action topoi"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-action-topos-geometric-restriction",
+  "lem-sfb-internal-action-site-presentation",
+  "lem-sfb-open-normal-action-injective-models",
+  "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pur-ringed-derived-composition-cocycle",
+  "lem-sfb-normal-inflation-resolution-naturality",
+  "lem-sfb-condensed-scalar-restriction-interchange",
+  "lem-sf-kinjective-derived-map-computation",
+  "def-sfb-condensed-derived-invariants"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent specialization to the commuting coefficient square on internal-action topoi"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(restrictScalars|[Ii]nvariant|[Cc]omposition)",
+   "results": "0 hits: ; searched Mathlib/CategoryTheory/Sites/SheafOfModules",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract representations, topological or constant-ring condensed modules, or underived sheaf functors; they do not state this internal condensed normalized resolution assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.restrictScalars\", \"rightDerived\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract representations, topological or constant-ring condensed modules, or underived sheaf functors; they do not state this internal condensed normalized resolution assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct images action topos invariants coefficient restriction scalars composition coherence",
+   "results": "8 hits: PresheafOfModules.pushforward, SheafOfModules.pushforwardNatTrans_comp, PresheafOfModules.restrictScalars, SheafOfModules.restrictScalars, PresheafOfModules.restrictScalarsObj, PresheafOfModules.pushforward_obj_map_apply', ContAction.resComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract representations, topological or constant-ring condensed modules, or underived sheaf functors; they do not state this internal condensed normalized resolution assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal condensed group action classifying topoi: derived kernel invariants commute with scalar restriction along arbitrary ring maps with normalized coefficient cocycles",
+   "results": "8 hits: groupCohomology.resNatTrans_app, groupCohomology.infNatTrans_app, groupCohomology.resNatTrans, groupCohomology.coindIso, groupCohomology.infNatTrans, groupCohomology.H1InfRes_g, groupCohomology.H1InfRes_f, groupCohomology.H1InfRes_X₃",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract representations, topological or constant-ring condensed modules, or underived sheaf functors; they do not state this internal condensed normalized resolution assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(restrictScalars|pushforwardComp|rightDerived)",
+   "results": "13 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; searched Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract representations, topological or constant-ring condensed modules, or underived sheaf functors; they do not state this internal condensed normalized resolution assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(restrictScalars|pushforwardComp|rightDerived)",
+   "results": "13 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates give underived module pushforward/scalar restriction, abstract derived natural transformations, ordinary representations, or constant-ring condensed modules; none states the internal condensed-action assertion and all its normalized squares"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived invariant functors for internal condensed group actions commute with arbitrary coefficient restriction and normalized inflation comparisons",
+   "results": "8 hits: ContinuousCohomology.invariants, Rep.invariantsFunctor_map_hom, Rep.invariantsFunctor, Rep.quotientToInvariantsFunctor_map_hom, Rep.instIsRightAdjointModuleCatInvariantsFunctor, groupCohomology.H1InfRes, ContinuousCohomology.instLinearActionTopModuleCatInvariants, groupCohomology.map_id_comp_H0Iso_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates give underived module pushforward/scalar restriction, abstract derived natural transformations, ordinary representations, or constant-ring condensed modules; none states the internal condensed-action assertion and all its normalized squares"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"comp\"",
+   "results": "12 hits: CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc, CategoryTheory.LocalizerMorphism.isRightDerivedFunctor_iff_precomp, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates give underived module pushforward/scalar restriction, abstract derived natural transformations, ordinary representations, or constant-ring condensed modules; none states the internal condensed-action assertion and all its normalized squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct images of ringed topoi commute with restriction of coefficients, with composition cocycles and normalized maps on K-injective resolutions",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.sheafComposeIso_inv_fac, CategoryTheory.sheafComposeIso_hom_fac",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates give underived module pushforward/scalar restriction, abstract derived natural transformations, ordinary representations, or constant-ring condensed modules; none states the internal condensed-action assertion and all its normalized squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of rings and internal profinite group actions, derived fixed submodules are compatible with restriction of scalars and quotient inflation without flatness",
+   "results": "8 hits: CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, LightCondensed.forget_obj_val_map, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CondensedMod.ofSheafCompHaus, Condensed.profiniteFree, LightCondMod.LocallyConstant.functorToPresheaves, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates give underived module pushforward/scalar restriction, abstract derived natural transformations, ordinary representations, or constant-ring condensed modules; none states the internal condensed-action assertion and all its normalized squares"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-invariants-normal-subgroup-comparison",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), agent-formulated tame-boundary quotient input; extraction of returned normal-subgroup-comparison proof steps 10–11. The blueprint does not state this condensed-action lemma explicitly.",
+   "via": [
+    "lem-sfb-derived-invariants-normal-subgroup-comparison",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-action-topos-coefficient-coherence",
+  "worker": "stage1",
+  "summary": "Constructed scalar comparison from the two factorizations of the same ringed-topos morphism. Checked its inverse on arbitrary K-injective replacement after scalar restriction; verified beta and c by actual invariant maps, and the unit/inflation equations on inclusions. Reused existing nodes throughout; no statement change and no new nodes.",
+  "blueprint": "Realizes the agent-formulated internal-action coefficient infrastructure extracted from normal-subgroup comparison steps 10--11, beneath paragraph (3) of the current direct-images proof. The blueprint itself does not state this lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+    "why": "Generic ringed-topos derived composition, coefficient restriction, or resolution computation used as a categorical tool; no node of this unit supplies this general theorem. This does not replace the constructibility route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic ringed-topos derived composition, coefficient restriction, or resolution computation used as a categorical tool; no node of this unit supplies this general theorem. This does not replace the constructibility route."
+   },
+   {
+    "node": "lem-pur-ringed-derived-composition-cocycle",
+    "why": "Generic ringed-topos derived composition, coefficient restriction, or resolution computation used as a categorical tool; no node of this unit supplies this general theorem. This does not replace the constructibility route."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Generic ringed-topos derived composition, coefficient restriction, or resolution computation used as a categorical tool; no node of this unit supplies this general theorem. This does not replace the constructibility route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pur-ringed-derived-composition-cocycle",
+  "lem-sf-kinjective-derived-map-computation"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-def5bff65",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-def5bff65 (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps and the statement of every cited node; there are no new nodes. The statement and stmt_deps are byte-identical to side-live, where the item is unsplit with no repair note, so this is no re-split order and nothing supersedes it. No SGA citation. Source: Stacks 0D6E, lemma-derived-pushforward-composition in sites-cohomology.tex; the item relies on its normalized DAG form lem-weil-pbc-ringed-topoi-derived-pushforward-composition. Checked θ_f=κ_{e_R,f_A'}κ_{f_A,e_P}^{-1}: on K-injective I', κ_{f_A,e_P}=f_{A*}(a), and κ_{e_R,f_A'} is the identity because T and Γ_P preserve K-injectives (open-normal node), so f_{A*}(a) represents θ^{-1}. No flatness and no K-injectivity of sI' are needed. Checked by hand: the β square ((ra)^K, using that r is exact and preserves K-injectives), the c square (Γ_{G×L}(a)=Γ_Q(T a), with T(a) a qis between K-injectives), the unit square (T(a)sT(i')=T(a s(i'))), and the inf square via c·inf=RΓ_Q(η). Edge cases: σ=id, K=G, K=1, non-flat σ. Duplicate search (field-action-topos, derived-scalar-mate-composition, scalar-restriction-interchange) found no restatement. Accepted the declared tool uses: ringed-topos direct image, ringed composition, cocycle, K-injective map computation. One repaired fault, in step 8 (C3/C4): it said the interchange theorem identifies θ with d_P, but there d_P is the conjugate of pullback comparisons, not of the pushforward κ. The fix proves θ_{p_P}=d_P from the computation-unit equation d·α_{sI'}=s(α_{I'}) together with α_{sI'}=[Γ_P(a)] (a qis by step 3), and cites def-sfb-condensed-derived-invariants, where c_J(f)=F(f);d_J is defined (same unit, no cycle; proof_deps updated).; 1 file(s) fixed by the reviewer"
+ }
+}

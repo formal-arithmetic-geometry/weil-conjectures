@@ -1,0 +1,323 @@
+{
+ "id": "lem-trf-pointed-devissage-affine-translation",
+ "kind": "statement",
+ "title": "Affine sections turn a scheme devissage chain into an algebra devissage",
+ "statement": "Let $R\\to S$ be a finite type homomorphism of commutative rings, $\\mathfrak q\\subset S$ a prime with inverse image $\\mathfrak p\\subset R$, and $N$ a finite $S$-module [def-weil-finitely-generated-module]. Put $B=\\operatorname{Spec}R$, $X=\\operatorname{Spec}S$ [def-weil-affine-spectrum], and let $\\widetilde N$ be the associated quasi-coherent module of [lem-weil-pbc-spec-module-tilde-sections]. Suppose a pointed affine devissage chain of $\\widetilde N/X/B$ at the point $\\mathfrak q$ over $\\mathfrak p$ is given [def-trf-pointed-scheme-devissage-data]. Write $A_j=\\Gamma(Z_j,\\mathcal O_{Z_j})$, $C_j=\\Gamma(Y_j,\\mathcal O_{Y_j})$, and $M_j=\\Gamma(Z_j,\\mathcal G_j)$. Taking affine global sections of its ring maps, module isomorphisms and $\\alpha_j$ gives a complete algebra devissage of $N/S/R$ over $\\mathfrak p$ in [def-trf-complete-algebra-devissage], with the same length and ranks, $B_j=C_j$, and $\\alpha_j:C_j^{\\oplus r_j}\\to M_j$. In particular $\\mathfrak p C_j$ is prime and the residue-field map of this $\\alpha_j$ is an isomorphism. The length-zero case gives the empty algebra devissage. No relative-dimension/support equalities beyond those in the auxiliary chain definition are needed for this implication.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tags 05I0 (remark-same-notion), first assertion, and 05HX (definition-complete-devissage-algebra): affine sections of the scheme conditions after forgetting pointing and support-dimension equalities."
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-trf-pointed-scheme-devissage-data",
+  "def-trf-complete-algebra-devissage"
+ ],
+ "proof": [
+  {
+   "text": "Assume first that the chain has positive length $n$. Set $B_j=C_j$ and retain its ranks $r_j$. All schemes in the chain are affine by [def-trf-pointed-scheme-devissage-data]. The contravariant affine-spectrum dictionary gives $R$-algebra maps $S\\to A_1$, $C_j\\to A_j$, and $C_j\\to A_{j+1}$, with the required scalar compatibilities because the scheme maps are over $\\operatorname{Spec}R$. For $i_1$ and $i_{j+1}$, the affine closed-immersion criterion makes the first and third maps surjective. They are of finite presentation by the affine-opens finite-presentation lemma, since these immersions are of finite presentation and hence locally of finite presentation. Finiteness of $\\pi_j$ gives finiteness of $A_j$ over $C_j$ directly from [def-weil-finite-integral-morphism]. The affine finite-type criterion applied to $\\mathcal G_j$ makes $M_j$ finite over $A_j$. Finally $\\operatorname{Spec}C_j\\to\\operatorname{Spec}R$ is the given smooth morphism with geometrically irreducible fibres.",
+   "uses": [
+    "def-trf-pointed-scheme-devissage-data",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I0 (remark-same-notion), first assertion; Tag 05HX (definition-complete-devissage-algebra), conditions (1)--(4); Morphisms Tags 01QO and 01TQ; Properties Tag 01PB."
+   }
+  },
+  {
+   "text": "Write $\\mathcal H_j=\\pi_{j,*}\\mathcal G_j$. The finite map $\\pi_j$ is affine by definition, so [lem-weil-pbc-affine-pushforward-base-change] gives that $\\mathcal H_j$ is quasi-coherent. The pushforward global-sections identification is the identity on elements and identifies $\\Gamma(Y_j,\\mathcal H_j)$ with $M_j$ carrying the restricted $C_j$-action. Under [lem-weil-pbc-affine-tilde-gamma-adjunction], $\\mathcal H_j\\cong\\widetilde{M_j}$ and $\\mathcal O_{Y_j}^{\\oplus r_j}\\cong\\widetilde{C_j^{\\oplus r_j}}$; the latter also follows from preservation of finite direct sums there. Thus global sections of the given $\\alpha_j$ define a $C_j$-linear map $a_j:C_j^{\\oplus r_j}\\to M_j$, and the sheaf map is precisely $\\widetilde{a_j}$ under these identifications, by the natural Hom bijection in that adjunction.",
+   "uses": [
+    "def-trf-pointed-scheme-devissage-data",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-weil-pbc-pushforward-spec-global-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I7 (lemma-compare-constructions), 01I9 (lemma-widetilde-pullback), part (2), and 01IB (lemma-equivalence-quasi-coherent); Cohomology of Schemes Tag 02KG (lemma-affine-base-change), quasi-coherence assertion; flat.tex Tag 05I0."
+   }
+  },
+  {
+   "text": "For $j<n$, put $\\mathcal Q_j=\\operatorname{coker}(\\alpha_j)$. Both source and target of $\\alpha_j$ are quasi-coherent by the preceding step, so the affine cokernel formula of [lem-weil-pbc-quasi-coherent-module-cokernel-image] gives $\\Gamma(Y_j,\\mathcal Q_j)\\cong\\operatorname{coker}(a_j)$, using the quotient by the image of this very section map. The chain provides $i_{j+1,*}\\mathcal G_{j+1}\\cong\\mathcal Q_j$. Its global sections and the pushforward section formula therefore give $\\operatorname{coker}(a_j)\\cong M_{j+1}$ over $C_j$, with action through $C_j\\to A_{j+1}$. Similarly the first sheaf isomorphism $i_{1,*}\\mathcal G_1\\cong\\widetilde N$ yields $M_1\\cong N$ over $S$, since the tilde adjunction identifies $\\Gamma(X,\\widetilde N)$ with $N$. At the final index the same cokernel formula and $\\mathcal Q_n=0$ give $\\operatorname{coker}(a_n)=0$.",
+   "uses": [
+    "def-trf-pointed-scheme-devissage-data",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-pushforward-spec-global-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IC (lemma-kernel-cokernel-quasi-coherent), 01IB (lemma-equivalence-quasi-coherent), 01HV (lemma-spec-sheaves), part (2), and 01I9 (lemma-widetilde-pullback), part (2); flat.tex Tag 05HH, conditions (3)--(4)."
+   }
+  },
+  {
+   "text": "Fix an index $j$ and abbreviate $C=C_j$. The affine fibre-product formula identifies $(Y_j)_b$ with $\\operatorname{Spec}D$, where $D=C\\otimes_R\\kappa(\\mathfrak p)$, and its projection to $Y_j$ is induced by $c\\mapsto c\\otimes1$. Smoothness gives geometrically reduced fibres by [sbc-lem-smooth-geometrically-reduced]; geometric irreducibility of the given fibre implies irreducibility and nonemptiness over $\\kappa(\\mathfrak p)$ itself. Consequently this fibre is integral by [def-pc-integral-scheme], and its affine coordinate ring $D$ is a nonzero domain. This uses no support-dimension equality.",
+   "uses": [
+    "def-trf-pointed-scheme-devissage-data",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-geometrically-irreducible",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I0 (remark-same-notion), generic-fibre translation in condition (7) of 05HX; Schemes Tag 01I4 (lemma-fibre-product-affine-schemes); Varieties Tag 056T (lemma-smooth-geometrically-normal); Properties Tag 01ON (lemma-characterize-integral)."
+   }
+  },
+  {
+   "text": "The smooth affine dictionary and [lem-weil-pbc-smooth-ring-map-flat] imply that $C$ is flat over $R$. By [lem-weil-pbc-flat-module-quotient-flat], $E=C/\\mathfrak p C$ is flat over the domain $R/\\mathfrak p$. By [lem-trf-flat-module-torsionfree-domain], multiplication by any nonzero element of $R/\\mathfrak p$ on $E$ is injective. The fibre-ring formula in [def-weil-pbc-localization-at-prime] identifies $D$ with the localization of $E$ at those nonzero elements. The map $E\\to D$ is injective: an element in its kernel is killed by one of these elements, and torsion-freeness makes it zero. Since $D$ is a nonzero domain and is a localization of $E$, $E$ is nonzero and has no zero divisors. Thus $P=\\mathfrak p C$ is prime. The generic point of $\\operatorname{Spec}D$ is $(0)$ by [lem-weil-pbc-spec-domain-stalks-function-field], and its image in $\\operatorname{Spec}C$ is exactly $P$, the kernel of $C\\to E\\hookrightarrow D$. Hence the chain's $\\xi_j$ maps to the prime $\\mathfrak p C_j$.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "lem-weil-pbc-flat-module-quotient-flat",
+    "lem-trf-flat-module-torsionfree-domain",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I0 and Tag 05HX condition (7); Algebra Tag 00TA (lemma-smooth-syntomic), Tag 00HI (lemma-flat-base-change); Schemes Tag 01HV (lemma-spec-sheaves). The injection into the localized domain is written out."
+   }
+  },
+  {
+   "text": "At $P=\\mathfrak p C_j$, the tilde stalk formula identifies the stalk map of $\\widetilde{a_j}$ with $(a_j)_P:(C_j)_P^{\\oplus r_j}\\to(M_j)_P$. Indeed on germs of global sections it sends $m/1$ to $a_j(m)/1$, and $C_j$-linearity then determines its values on all fractions. Tensoring with $\\kappa(P)$ identifies the resulting map with $a_j\\otimes_{C_j}\\kappa(P)$. Explicitly, the tensor identification sends $(m/s)\\otimes\\lambda$ to $m\\otimes\\bar s^{-1}\\lambda$ and its inverse sends $m\\otimes\\lambda$ to $(m/1)\\otimes\\lambda$; $s\\notin P$ makes $\\bar s$ invertible. These formulas commute with $a_j$ and identify the source with $\\kappa(P)^{\\oplus r_j}$ coordinatewise, including $r_j=0$. Thus the chain's stipulated residue-field isomorphism at $\\xi_j$, now identified with $P$, is exactly the isomorphism $\\kappa(P)^{\\oplus r_j}\\to M_j\\otimes_{C_j}\\kappa(P)$ required by the algebra definition.",
+   "uses": [
+    "def-trf-pointed-scheme-devissage-data",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), parts (6)--(7), and Tag 01I7 (lemma-compare-constructions); flat.tex Tags 05HH condition (2) and 05HX condition (7)."
+   }
+  },
+  {
+   "text": "Use $a_j$ as the algebraic $\\alpha_j$. Step 1 supplies all the algebra maps, finiteness, smoothness and geometric irreducibility. Steps 2--3 supply their scalar actions and the initial, successive and final module identifications. Steps 4--6 supply primality of $\\mathfrak p C_j$ and the required residue-field isomorphisms. These are precisely all the clauses of [def-trf-complete-algebra-devissage], with the same indices and ranks. If instead $n=0$, the scheme-chain definition requires $\\widetilde N=0$; the unit isomorphism $N\\cong\\Gamma(X,\\widetilde N)$ gives $N=0$, so the algebra definition permits the empty list. The pointing, purely transcendental residue extensions, and relative dimensions impose no further condition on this conclusion.",
+   "uses": [
+    "def-trf-pointed-scheme-devissage-data",
+    "def-trf-complete-algebra-devissage",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I0 (remark-same-notion), first assertion and final paragraph, and Tag 05HX (definition-complete-devissage-algebra); length-zero convention of the two DAG definitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-pointed-scheme-devissage-data",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-pushforward-spec-global-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-weil-pbc-flat-module-quotient-flat",
+  "lem-trf-flat-module-torsionfree-domain",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "def-trf-complete-algebra-devissage"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05I0 (remark-same-notion), first assertion; detailed affine bookkeeping filling the remark using Tags 05HX, 05HH, 01HV, 01IB, 01IC and 01TQ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Taking affine sections of a scheme complete devissage gives finite algebra maps smooth algebras generic fibre bases and successive module cokernels",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"Algebra.Smooth.exists_subalgebra_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1, Algebra.FiniteType R ↥A₀ ∧ Algebra.Smooth (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $ and a smooth $ A_0 $-algebra $ B_0 $ such that $ B $ is isomorphic to\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n\nThe affineAnd and quasicoherent-sheaf hits give individual affine property translations or definitions. None states the simultaneous conversion of devissage ring maps, module cokernels, and generic-fibre maps; the devissage name searches are empty.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence between complete devissage diagrams of quasi coherent module sheaves on affine schemes and algebraic module devissages",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.recOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A recursor that enables definitions or proofs by recursion on the quasicoherence structure of a sheaf of modules over a ring sheaf, which is established via sheaf composition properties, weak sheafifi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \": Sheaf (grothendieckTopology X) A ≌ TopCat.Sheaf A X\", \"doc\": \"For a scheme $X$ and a category $\\\\mathcal{A}$, this establishes an equivalence between the category of sheaves on the affine Zariski site of $X$ (equipped with the Grothendieck topology induced by the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  {inst : CategoryTheory.Category.{v', u'} C} →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)} →\\n          {inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this definition constructs the data required to define a quasicoherent sheaf over $\"}\n  {\"name\": \"SheafOfModules.Presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [J.HasSheafCompo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n\nThe affineAnd and quasicoherent-sheaf hits give individual affine property translations or definitions. None states the simultaneous conversion of devissage ring maps, module cokernels, and generic-fibre maps; the devissage name searches are empty.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"devissage\"",
+   "results": "[loogle] OK 0 hit(s)\n\nThe affineAnd and quasicoherent-sheaf hits give individual affine property translations or definitions. None states the simultaneous conversion of devissage ring maps, module cokernels, and generic-fibre maps; the devissage name searches are empty.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|Devissage|dévissage",
+   "results": "[grep] OK 0 hit(s)\n\nThe affineAnd and quasicoherent-sheaf hits give individual affine property translations or definitions. None states the simultaneous conversion of devissage ring maps, module cokernels, and generic-fibre maps; the devissage name searches are empty.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine scheme devissage and algebraic devissage correspond through global sections and the associated module sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.affineAnd_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ (Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) {X Y : AlgebraicGeometry.Scheme}\\n  (f : X ⟶ Y) [inst : AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.affineAnd (fun {R S} [CommRing R] [CommRing S] => Q) f ↔\\n    AlgebraicGeometry.IsAffine X ∧ Q (CommRingCat\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ with affine target $ Y $ satisfies the affineAnd $ Q $ property if and only if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism in\"}\n  {\"name\": \"AlgebraicGeometry.isAffine_affineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.AffineScheme), AlgebraicGeometry.IsAffine X.obj\", \"doc\": \"The category of affine schemes is the full subcategory of the category of schemes consisting of schemes isomorphic to the prime spectrum of a commutative ring. This subcategory is the essential image \"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.affineAnd_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme),\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => Q) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R] [CommRing S] => Q\", \"doc\": \"For a morphism property $ P $ of schemes and a ring homomorphism property $ Q $ satisfying compatibility conditions (respecting isomorphisms, localization preservation, and spanning), the property $ P\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  {X : AlgebraicGeometry.Scheme} →\\n    (X ⟶\\n        AlgebraicGeometry.Spec\\n          { carrier := MvPolynomial n (ULift.{u, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial }) ≃\\n      (n → ↑(X.presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"There is a natural equivalence between the set of morphisms from a scheme $ X $ to the affine space $ \\\\mathbb{A}^n_\\\\mathbb{Z} $ (realized as $ \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\dots, x_n]) $) and t\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.affine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsAffine X], CategoryTheory.IsIso X.toSpecΓ\", \"doc\": \"For any affine scheme $X$, the canonical morphism from $X$ to $\\\\operatorname{Spec}(\\\\Gamma(X))$ is an isomorphism, establishing a natural correspondence between affine schemes and the spectra of their \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    {X : AlgebraicGeometry.Scheme} →\\n      [inst : X.Over S] → { f // AlgebraicGeometry.Scheme.Hom.IsOver f S } ≃ (n → ↑(X.presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"For any scheme $ S $ and any scheme $ X $ over $ S $, there is a natural equivalence between morphisms from $ X $ to the affine space $ \\\\mathbb{A}^n_S $ over $ S $ and $ n $-tuples of global sections \"}\n\nThe affineAnd and quasicoherent-sheaf hits give individual affine property translations or definitions. None states the simultaneous conversion of devissage ring maps, module cokernels, and generic-fibre maps; the devissage name searches are empty.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine scheme complete devissage induces algebraic devissage on global sections",
+   "results": "Hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.affineAnd_apply, AlgebraicGeometry.HasRingHomProperty.of_iSup_eq_top, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.isAffine_affineScheme, AlgebraicGeometry.HasRingHomProperty.iff_of_iSup_eq_top, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.affineAnd AffineAnd only unfolds an affine morphism property, and quasicoherent-sheaf definitions do not state devissage conversion. Read Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean:39-47.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"devissage\"",
+   "results": "No hits. AffineAnd only unfolds an affine morphism property, and quasicoherent-sheaf definitions do not state devissage conversion. Read Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean:39-47.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|Devissage|dévissage",
+   "results": "No hits. AffineAnd only unfolds an affine morphism property, and quasicoherent-sheaf definitions do not state devissage conversion. Read Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean:39-47.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence between complete devissage of quasi coherent sheaves on affine schemes and algebraic module devissage",
+   "results": "Hits: SheafOfModules.IsQuasicoherent.mk, SheafOfModules.isQuasicoherent, AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent, AlgebraicGeometry.Scheme.Modules, SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.IsQuasicoherent.recOn AffineAnd only unfolds an affine morphism property, and quasicoherent-sheaf definitions do not state devissage conversion. Read Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean:39-47.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of an affine scheme devissage preserve cokernels and generic fibre bases",
+   "results": "Hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.affineBasisCoverRing, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE, AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine AffineAnd only unfolds an affine morphism property, and quasicoherent-sheaf definitions do not state devissage conversion. Read Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean:39-47.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "affineAnd_apply|def IsQuasicoherent|class IsQuasicoherent",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean AffineAnd only unfolds an affine morphism property, and quasicoherent-sheaf definitions do not state devissage conversion. Read Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean:39-47.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-complete-algebra-devissage-etale-existence",
+  "date": "2026-10-24",
+  "group": "Q101"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical supporting algebra in the semistable-alteration ancestry of lem-trf-local-term-locality, clauses (1)--(2), recorded in the parent: the flat-tensor weak-assassin argument uses an etale projective neighborhood. In the proof of that neighborhood, the first localization produces complete devissage, before projectivity is proved. Supporting the 05I1 existence step via the 05HR dimension induction: Affine sections turn a scheme devissage chain into an algebra devissage.",
+   "via": [
+    "lem-trf-complete-algebra-devissage-etale-existence",
+    "lem-trf-flat-algebra-etale-projective-neighborhood",
+    "lem-trf-flat-tensor-weakass-fibre",
+    "lem-trf-vertical-principal-ideal-fibre-detection",
+    "lem-trf-valuation-smooth-branches-strict-chart",
+    "lem-trf-valuation-marked-strictification",
+    "lem-trf-valuation-common-strict-semistable-refinement",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-pointed-devissage-affine-translation",
+  "worker": "stage1",
+  "summary": "Expanded the affine bookkeeping in 05I0 into seven steps using existing nodes only. Verified surjective finitely presented ring maps, finite modules and scalar restriction, sectionwise cokernels, primality of the extended prime via flatness and localization into the integral fibre, and the actual residue-field map on fractions. Preserved the statement and all inherited records; no new nodes.",
+  "blueprint": "Retains the inherited historical algebra branch of lem-trf-local-term-locality, through the full existing ancestry in blueprint.from: the parent complete-algebra-devissage-etale-existence uses this affine translation after the 05HR construction. The current latest ancestor instead proves contracting-correspondence locality, and has no duplicate of 05I0; no unit or chapter route is changed. Steps 1--7 realize the affine-sections sentence recorded in blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pushforward-spec-global-sections",
+    "why": "Identity-on-elements global sections of pushforward with restriction of scalars; this generic affine tool fixes the module actions."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Translation of the affine smooth morphism into a smooth ring map for the flatness tool; no replacement of a unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pushforward-spec-global-sections",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N0-78a2d136e",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-78a2d136e (reviewer sub-agent of L); spot-checked: Read the item's seven steps, all 22 cited statements (plus the stmt_dep tilde-sections node and def-weil-irreducible-components) and flat.tex 05I0 (remark-same-notion) and 05HX (definition-complete-devissage-algebra). The statement is identical to live and still unsplit there and on side-live. There are no new nodes, no repair note, no SGA, and no cycle (BFS over 189 reachable nodes). A grep for 05I0 and for both def ids finds no node stating this translation. Checks: (1) the closed-immersion criterion with affine V gives surjective maps; 'finite presentation' implies lfp, so the 01TQ node gives finitely presented maps; the finite definition for every affine V gives A_j finite over C_j; 01PB gives M_j finite. (2) Clause (1) of the affine pushforward node gives quasi-coherence; counit and Hom bijection give alpha_j = tilde a_j. (3) Cokernel node clause (3) on the affine Y_j gives coker a_j = M_{j+1}; the unit gives N = M_1; Q_n = 0 gives coker a_n = 0. (4) Smooth fibres are reduced, irreducible includes nonempty, so the fibre is integral and D is a domain. (5) C is flat over R, so E = C/pC is flat over R/p and torsion-free; D is E localized at the image of R minus p; E -> D is injective, so pC is prime and xi_j = pC_j by the generic-point clause. (6) The tilde stalk node gives the residue map a_j tensor kappa(P), with the tensor identification and its inverse written out. (7) Assembly clause by clause; n = 0 via F = 0 and the unit. Edge cases: R = k[e]/e^2, R = Z, field base, r_j = 0, n = 0. The DAG definition's extra primality condition is proved. Accepted tool_uses: six generic affine/algebra dictionary nodes (quasi-coherent-finite-type-affine, affine-pushforward-base-change clause 1, pushforward-spec-global-sections, cokernel-image, sbc smooth-geometrically-reduced, smooth-ring-map-iff-smooth-affine); split_report lists two, so the maintainer should record all six."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.PointedDevissageAffineTranslation",
+  "declaration": "AlgebraicGeometry.PointedAffineDevissage.exists_affineSections",
+  "declarations": [
+   "AlgebraicGeometry.PointedAffineDevissage.Entry",
+   "AlgebraicGeometry.PointedAffineDevissage.entry",
+   "AlgebraicGeometry.PointedAffineDevissage.Entry.presentationSection",
+   "AlgebraicGeometry.PointedAffineDevissage.Entry.quotientSection",
+   "AlgebraicGeometry.PointedAffineDevissage.Entry.basisSection",
+   "AlgebraicGeometry.PointedAffineDevissage.IsAffineSections",
+   "AlgebraicGeometry.PointedAffineDevissage.exists_affineSections"
+  ],
+  "file": "lean/Sheaf/TraceFormula/PointedDevissageAffineTranslation.lean",
+  "statement": "theorem exists_affineSections (R S : CommRingCat.{u}) [Algebra R S] [Algebra.FiniteType R S] (N : ModuleCat.{u} S) [Module.Finite S N] (q : PrimeSpectrum S) (n : ℕ) (c : PointedAffineDevissage (Spec R) (Spec.map (CommRingCat.ofHom (algebraMap R S))) (tilde N) q n) : ∃ D : CompleteAlgebraDevissage R S (Ideal.comap (algebraMap R S) q.asIdeal) N, IsAffineSections R S N q n c D",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e38f95d2",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Read item node, the 5 stmt_deps and their Lean (PointedAffineDevissage and CompleteAlgebraDevissage in full), and the delivered module and report. Hypotheses match the node exactly: finite-type R→S, q with p=comap q, finite N, tilde N, the recorded chain c. The conclusion ∃ D : CompleteAlgebraDevissage with IsAffineSections pins length, ranks, coordinate rings (R-compatible), modules (semilinear), bToA/sToA/bToAnext as appTop maps, alpha on the standard basis via freeHomEquiv, firstIso via presentation+tilde unit, and cokerIso via cokernel.π sections; primality and residue come from D's fields. HEqs are between propositionally equal types through the irreducible entry accessor, so they are meaningful and satisfiable by the canonical choice. Edge cases n=0, r=0, nonreduced R and the common universe u are fine. Helpers have real bodies and docstrings, the only proof is sorry, lean.statement is verbatim, the report has both required sections, and the item is not landed elsewhere. No compile needed (no change)."
+ }
+}

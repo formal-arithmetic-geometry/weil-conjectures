@@ -1,0 +1,245 @@
+{
+ "id": "lem-trf-space-enlarged-chart-ringed-morphism",
+ "kind": "statement",
+ "title": "Chart-normalized ringed morphism on enlarged etale sites",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with every site small relative to its sheaves. Use chartwise etale morphisms as in [lem-trf-space-chartwise-etale-permanence]: every representable etale scheme chart remains representable etale after composition. For a space $A$, let $\\mathcal C_A$ have objects chartwise etale maps $T\\to A$ from algebraic spaces, arrows all maps over $A$, and coverings jointly surjective chartwise etale families [def-weil-pbc-sites-and-cohomology]. Write $i_A:A_{\\mathrm{et}}\\to\\mathcal C_A$ for the scheme-object inclusion, regarding schemes as their representable sheaves [def-trf-scheme-algebraic-space]. Let $f:X\\to Y$ be any morphism. For $A=X,Y$, choose a sheaf of commutative rings $R_A$ on $\\mathcal C_A$ with a specified ring-sheaf isomorphism $i_A^*R_A\\simeq\\mathcal O_A$, where $\\mathcal O_A(U)=\\Gamma(U,\\mathcal O_U)$ on scheme objects. The fibre-product functor $v_f:\\mathcal C_Y\\to\\mathcal C_X$, $V\\mapsto X\\times_YV$ [lem-trf-space-fibre-products-etale-covers], preserves finite limits and coverings and is continuous. Precomposition $f_*G(V)=G(X\\times_YV)$ is right adjoint to a left exact functor $f^{-1}$; it defines a geometric morphism [def-trf-geometric-morphism] which, transported through the scheme-restriction equivalences, is the small etale morphism of topoi of $f$. There is a unique map of ring sheaves $\\alpha_f:R_Y\\to f_*R_X$ with the following normalization. For every scheme object $V\\to Y$, every surjective representable etale scheme chart $p:U\\to X\\times_YV$, and $s\\in\\Gamma(V,\\mathcal O_V)$, restriction of $\\alpha_f(s)$ to $U$ is the pullback of $s$ along the scheme map $U\\to V$. These pulled-back sections agree on $U\\times_{X\\times_YV}U$, are independent of the chart, commute with every map $V'\\to V$, and preserve the ring operations. Under the sheaf adjunction, $\\alpha_f$ corresponds to a map of ring objects $f^\\sharp:f^{-1}R_Y\\to R_X$. This gives the canonical morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism] normalized by scheme pullback of regular functions.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03G2 (lemma-functoriality-etale-site), (1),(3), and Tag 03G8 (lemma-morphism-ringed-topoi), proof; chart descent Tag 03H7 (remark-explain-equivalence)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-trf-scheme-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pur-ringed-topos-morphism-of-universes",
+  "def-pur-cochain-coefficient-universe-transport"
+ ],
+ "proof": [
+  {
+   "text": "Lift each given normalization through the fully faithful canonical ring restriction equivalence. Conjugation by these isomorphisms identifies morphisms between the arbitrary extensions with morphisms between the canonical enlarged structure sheaves. Naturality of the lifted isomorphisms and their restriction equations identify the two chart predicates. Apply [lem-trf-space-canonical-enlarged-structural-map] to obtain existence and uniqueness. Forgetting commutativity is fully faithful, so the unique underlying ring-sheaf map lifts uniquely to a commutative-ring-sheaf map.",
+   "uses": [
+    "lem-trf-space-canonical-enlarged-structural-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03G8 (lemma-morphism-ringed-topoi), proof, and 03H7 (remark-explain-equivalence)."
+   }
+  },
+  {
+   "text": "Use the terminal and actual sheaf-pullback clauses of [lem-trf-space-enlarged-site-scheme-density] to prove that the fully faithful inclusion of the enlarged site into the sheaf over-category preserves finite limits. Base change followed by that inclusion is naturally isomorphic, by pullback symmetry, to inclusion followed by Over.pullback f.hom. The latter is a right adjoint, so it preserves finite limits. Full faithfulness reflects limits and gives the required finite-limit preservation for enlargedBaseChange f.",
+   "uses": [
+    "lem-trf-space-enlarged-site-scheme-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03G2 (lemma-functoriality-etale-site), proof of (1)."
+   }
+  },
+  {
+   "text": "Cancellation in [lem-trf-space-chartwise-etale-permanence] makes every arrow in the enlarged target site chartwise etale. For joint surjectivity, take a field section of X times_Y V and project it to V. Lift this projected section through the given covering after a field extension. The pullback square for the base-changed covering arrow produces a section with that lift and with first projection the restricted original section. This proves covering preservation including the empty covering. Continuity is the existing enlargedBaseChange_continuous theorem; alternatively it follows from these finite-limit and covering checks.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-enlarged-base-change-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03G2 (lemma-functoriality-etale-site), proof of (1); spaces-topologies.tex Tag 041F(3)."
+   }
+  },
+  {
+   "text": "Finite-limit preservation makes enlargedBaseChange f representably flat. Construct the inverse image by the sheaf pullback adjunction, namely left Kan extension followed by sheafification. Exact filtered colimits of sets at size u+1 imply finite-limit preservation of the Kan extension; sheaf inclusion and sheafification preserve finite limits as well. Lift the given commutative-ring map sectionwise by [def-pur-cochain-coefficient-universe-transport]. Apply [def-trf-continuous-ringed-topos-construction] with this very lifted map and the constructed set adjunction. Its ringMap is the inverse adjoint transpose, so applying homEquiv recovers exactly chartNormalizedUnderlyingMap. Transport the resulting geometric adjunction through the two enlargedSetEquivalence functors; equivalences preserve limits and their adjunctions compose. The direct functor is literally the functor in the conclusion.",
+   "uses": [
+    "def-trf-continuous-ringed-topos-construction",
+    "def-pur-cochain-coefficient-universe-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00X6 for site inverse image; Tag 00YV for transposition of ring operations; spaces-properties.tex Tags 03G2(3) and 03G8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-canonical-enlarged-structural-map",
+  "lem-trf-space-enlarged-site-scheme-density",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-base-change-continuous",
+  "def-trf-continuous-ringed-topos-construction",
+  "def-pur-cochain-coefficient-universe-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03G2, 03G8 and 03H7. A9: transport the existing canonical structural map through arbitrary normalized ring extensions; actual sheaf over-category base change and the existing continuous ringed-topos construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces induces a geometric morphism on enlarged etale sites by fibre products with unique structural ring map given by regular function pullback on charts",
+   "results": "{\"t\": \"2026-10-22T06:48:32Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of algebraic spaces induces a geometric morphism on enlarged etale sites by fibre products with unique structural ring map given by regular function pullback on charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\"], \"digest\": \"93fe086372cad7f5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or abstract site tools, without the algebraic-space fibre-product presentation and its uniquely chart-normalized structural ring map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change preserves finite limits and etale covers of algebraic spaces and gives the canonical morphism of ringed topoi via descent of functions",
+   "results": "{\"t\": \"2026-10-22T06:48:22Z\", \"tool\": \"leansearch\", \"query\": \"Base change preserves finite limits and etale covers of algebraic spaces and gives the canonical morphism of ringed topoi via descent of functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.IsStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.LocallyRingedSpace.comp_base\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\"], \"digest\": \"bf6f7e931fefc651\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or abstract site tools, without the algebraic-space fibre-product presentation and its uniquely chart-normalized structural ring map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsContinuous\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-22T06:48:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsContinuous\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or abstract site tools, without the algebraic-space fibre-product presentation and its uniquely chart-normalized structural ring map."
+  },
+  {
+   "tool": "grep",
+   "query": "enlargedBaseChange|enlargedStructuralMap|algebraic.space.*ringed",
+   "results": "{\"t\": \"2026-10-22T06:48:21Z\", \"tool\": \"grep\", \"query\": \"enlargedBaseChange|enlargedStructuralMap|algebraic.space.*ringed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or abstract site tools, without the algebraic-space fibre-product presentation and its uniquely chart-normalized structural ring map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces induces a geometric morphism of enlarged etale sites by base change, with unique structural ring map normalized by scheme charts",
+   "results": "{\"t\": \"2026-10-23T09:25:43Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of algebraic spaces induces a geometric morphism of enlarged etale sites by base change, with unique structural ring map normalized by scheme charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\"], \"digest\": \"76a3cdd51052ed20\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale categories and general sheaf pullback/module adjunctions do not supply the algebraic-space chart construction or its unique normalization. Read Mathlib/CategoryTheory/Sites/Pullback.lean:55–99 and Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:53–61; the latter is module pullback and assumes the structural ring map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback functor on algebraic space etale sites induces left exact inverse image and structural morphism of ring sheaves by descent of regular functions",
+   "results": "{\"t\": \"2026-10-23T09:28:09Z\", \"tool\": \"leansearch\", \"query\": \"Pullback functor on algebraic space etale sites induces left exact inverse image and structural morphism of ring sheaves by descent of regular functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.pullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"SheafOfModules.pullback\", \"TopCat.Sheaf.pullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"CategoryTheory.GrothendieckTopology.overMapPullback\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\"], \"digest\": \"714ecf7dc53ce0a2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale categories and general sheaf pullback/module adjunctions do not supply the algebraic-space chart construction or its unique normalization. Read Mathlib/CategoryTheory/Sites/Pullback.lean:55–99 and Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:53–61; the latter is module pullback and assumes the structural ring map."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|spacesEtale|enlargedEtale|enlargedStructuralMap",
+   "results": "{\"t\": \"2026-10-23T09:28:47Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|spacesEtale|enlargedEtale|enlargedStructuralMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale categories and general sheaf pullback/module adjunctions do not supply the algebraic-space chart construction or its unique normalization. Read Mathlib/CategoryTheory/Sites/Pullback.lean:55–99 and Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:53–61; the latter is module pullback and assumes the structural ring map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsContinuous\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-23T09:28:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsContinuous\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale categories and general sheaf pullback/module adjunctions do not supply the algebraic-space chart construction or its unique normalization. Read Mathlib/CategoryTheory/Sites/Pullback.lean:55–99 and Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:53–61; the latter is module pullback and assumes the structural ring map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The etale topos of an algebraic space is functorial and its structure sheaf morphism is uniquely determined by pullback of regular functions on scheme atlases",
+   "results": "{\"t\": \"2026-10-23T09:33:21Z\", \"tool\": \"leanfinder\", \"query\": \"The etale topos of an algebraic space is functorial and its structure sheaf morphism is uniquely determined by pullback of regular functions on scheme atlases\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\"], \"digest\": \"5c114ce017082bcf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale categories and general sheaf pullback/module adjunctions do not supply the algebraic-space chart construction or its unique normalization. Read Mathlib/CategoryTheory/Sites/Pullback.lean:55–99 and Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:53–61; the latter is module pullback and assumes the structural ring map."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-enlarged-etale-ringed-site-model",
+  "date": "2026-10-22",
+  "group": "Q09"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C), through the section-algebra etale-base-change step: present the small etale ringed topoi by enlarged etale sites before applying ringed-site localization. Historical imported ancestry retained. Re-split of lem-trf-space-enlarged-etale-ringed-site-model, old proof steps 6–7: Chart-normalized ringed morphism on enlarged etale sites.",
+   "via": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-space-enlarged-chart-ringed-morphism",
+  "worker": "stage1",
+  "summary": "Preserved the statement and gave six proof steps: finite-limit/cover preservation, the site adjunction and restriction comparison, construction by atlas equalizers, explicit common-refinement naturality, extension and uniqueness by ring-sheaf full faithfulness, and the ring-object adjunction. Reused existing DAG inputs; no new nodes. Searched the current Lean and Mathlib; no attachment or Mathlib match for the item.",
+  "blueprint": "Historical ancestry lem-trf-local-term-locality, through the polarized ampleness/section-algebra descent chain recorded in blueprint.from: realize enlarged ringed-site-model old proof steps 6–7, following Stacks 03G2, 03G8 and 03H7. The newest blueprint locality proof concerns contracting correspondences and does not itself state this site tool. Its chapter and unit are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic small-site theorem: finite-limit and covering preservation give a left exact sheaf inverse image. It supplies site theory, not a replacement of the trace-formula unit route."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "why": "Generic finite-product adjunction theorem for ring objects, needed to transpose the constructed structural ring map. No assertion about algebraic spaces or local terms is taken from it."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NO-f1ba6e7c5",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-f1ba6e7c5 (reviewer sub-agent of L); spot-checked: I read the item and its six steps in full; there are no new nodes. The statement, stmt_deps, source and blueprint are byte-identical to Q09's version, and proof_deps equals the union of the step uses. The six steps carry all of the parent's old steps 6–7, and none is shortened. I checked them against Stacks spaces-properties 03H7 (l.2523, atlas equalizer), 03G2 (l.2609, V↦X×_Y V on spaces-étale sites via 00X6, f_small by transport) and 03G8 (l.3798, f-map g^♯). The item's chart normalization is the same datum as the 03G8 f-map, so the base-change morphism and structure rings match the source. Step 1: finite limits and continuity are correct; the pasting is over X×_Y W and covers base-change along X×_Y V→V. Step 2: the hypotheses of the left-exact-site theorem are met. Steps 3–4: the overlaps are schemes because charts are representable; chart independence uses H=U×_T U' and naturality uses H=U'×_T U with two injectivity steps. Step 5: the ring-sheaf restriction equivalence gives the lift by full faithfulness and uniqueness on non-scheme objects. Step 6: the ring-object adjunction gives f^♯ in the right direction. Edge cases checked: identity f, empty X or V, the scheme case and nonrepresentable f. No duplicate (rg -L over the snapshot), no cycle, no SGA. I accept the two generic tool_uses, left-exact-site-inverse-image-tensor and adjunction-lifts-group-ring-objects. Advisory: step 6 treats ring sheaves as ring objects in Sh without citing lem-weil-pbc-sheaf-algebraic-structures-objects; I judge this definitional. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EnlargedChartRingedMorphism",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.enlarged_chart_ringed_morphism",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.chartNormalizedRing",
+   "AlgebraicGeometry.AlgebraicSpace.chartNormalizedLiftedRing",
+   "AlgebraicGeometry.AlgebraicSpace.chartNormalizedUnderlyingMap",
+   "AlgebraicGeometry.AlgebraicSpace.IsChartNormalizedRingMap",
+   "AlgebraicGeometry.AlgebraicSpace.enlarged_chart_ringed_morphism"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EnlargedChartRingedMorphism.lean",
+  "statement": "theorem enlarged_chart_ringed_morphism (f : X ⟶ Y) (RX : Sheaf X.enlargedEtaleTopology CommRingCat.{u}) (RY : Sheaf Y.enlargedEtaleTopology CommRingCat.{u}) (eX : (enlargedRestriction X RingCat.{u}).obj (chartNormalizedRing X RX) ≅ X.structureSheaf) (eY : (enlargedRestriction Y RingCat.{u}).obj (chartNormalizedRing Y RY) ≅ Y.structureSheaf) : PreservesFiniteLimits (enlargedBaseChange f) ∧ (∀ (V : Y.EnlargedEtaleSite) (P : Presieve V), P ∈ Y.enlargedEtalePrecoverage V → P.map (enlargedBaseChange f) ∈ X.enlargedEtalePrecoverage ((enlargedBaseChange f).obj V)) ∧ (enlargedBaseChange f).IsContinuous Y.enlargedEtaleTopology X.enlargedEtaleTopology ∧ (∃! α : RY ⟶ (enlargedDirectImage f CommRingCat.{u}).obj RX, IsChartNormalizedRingMap f RX RY eX eY α) ∧ (∀ α : RY ⟶ (enlargedDirectImage f CommRingCat.{u}).obj RX, IsChartNormalizedRingMap f RX RY eX eY α → ∃ (g : RingedToposMorphismOfUniverses (chartNormalizedLiftedRing.{u, w} X RX) (chartNormalizedLiftedRing.{u, w} Y RY)) (hd : g.direct = enlargedDirectImage f (Type (max (u + 1) w))), g.adj.homEquiv _ _ g.ringMap ≫ eqToHom (congrArg (fun F ↦ F.obj ((sheafCompose X.enlargedEtaleTopology (forget RingCat.{max (u + 1) w})).obj (chartNormalizedLiftedRing.{u, w} X RX))) hd) = chartNormalizedUnderlyingMap.{u, w} f α ∧ ∃ h : GeometricMorphism (Sheaf X.etaleTopology (Type (max (u + 1) w))) (Sheaf Y.etaleTopology (Type (max (u + 1) w))), h.direct = (enlargedSetEquivalence X).inverse ⋙ g.direct ⋙ (enlargedSetEquivalence Y).functor)",
+  "branch": "sheaf-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Arbitrary commutative-ring extensions with specified restriction isomorphisms. The chart formula is the equivalent all-scheme-triangle f-map formula of Stacks 03G8. Uses the landed independent-site-universe ringed-topos interface and existing sectionwise coefficient ULift; the original coefficient universe u and the sheaf universe max (u+1) w remain distinct. The structural ring map is tied to its adjoint transpose, and the small-site morphism is its transport through scheme restriction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-014233a8a",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Only the item changed. stmt_deps gain two landed def nodes (allowed by brief §5); the lean.statement is verbatim in the file; the report has Worker report and Second reading sections. Clauses checked against Stacks 03G2/03G8/03H7: finite limits, covering preservation and continuity of enlargedBaseChange; ∃! α over the whole enlarged site, for arbitrary CommRingCat.{u} RX/RY with specified isos eX/eY; normalization on all chart triangles, which is the 03G8 f-map form and equivalent to the node's atlas form (both directions, same shape as the landed IsEnlargedStructuralMap); the ringed-topos morphism has g.direct pinned and ringMap pinned by its adjoint transpose to α through the landed ULift transport. RingedToposMorphismOfUniverses is needed because RingedToposMorphism requires SmallCategory and the site's objects live in u+1. The small-site h.direct is the transport, equal to enlargedSmallDirectImage. The four helpers are non-hollow, the only sorry is the theorem's, and docstrings carry the source and proof steps 1-6. Edge cases: identity/scheme f, empty spaces, zero ring, non-representable f, non-surjective triangles. No recompile (2026-10-21 rule); the worker reports clean 4.8-5.8 s compiles. Advisories: (1) the enlarged-site plain defs are owned only by the parent theorem lem-trf-space-enlarged-etale-ringed-site-model, whose proof_deps contain the item (citing it would be a cycle); suggest an existing:true def node on EnlargedEtaleRingedSite. (2) The ∃h small-site clause follows formally from g."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261026T080913-L-1673565",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

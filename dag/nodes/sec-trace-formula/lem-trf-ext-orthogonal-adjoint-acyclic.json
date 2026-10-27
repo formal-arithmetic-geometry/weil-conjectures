@@ -1,0 +1,219 @@
+{
+ "id": "lem-trf-ext-orthogonal-adjoint-acyclic",
+ "kind": "statement",
+ "title": "Ext-orthogonal families transfer bounded-above acyclicity across an adjunction",
+ "statement": "Let $\\mathcal C$ be a small site in the common module universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], $S$ a sheaf of commutative rings, and $\\mathcal A=\\operatorname{Mod}(S)$ [def-weil-sheaf-of-modules-category]. Let $\\mathcal B$ be an abelian category [def-sp-abelian] with enough injectives, meaning that every object admits a monomorphism to an injective object [def-sp-injective-resolutions]. Fix additive functors $L:\\mathcal A\\to\\mathcal B$ and $T:\\mathcal B\\to\\mathcal A$ with an adjunction $L\\dashv T$, and a small family $(E_i)_{i\\in I}$ of $S$-module sheaves. Suppose that for every injective $J\\in\\mathcal B$, every $i\\in I$ and every integer $p>0$ one has $\\operatorname{Ext}_S^p(E_i,TJ)=0$, where $\\operatorname{Ext}_S^p(E_i,F)=H^p\\operatorname{Hom}_S(E_i,I_F^\\bullet)$ for an injective resolution $F\\to I_F^\\bullet$ [def-sp-injective-resolutions]. Let $P^\\bullet$ be any bounded above acyclic cochain complex of $S$-module sheaves [def-pc-cochain-complex-modules, def-pc-acyclic-complex-modules] whose terms are isomorphic to small coproducts of members of $(E_i)$, with repetitions allowed. Then the termwise complex $L(P^\\bullet)$ is acyclic. More precisely, for every injective $J\\in\\mathcal B$ the adjunction identifies the acyclic cochain complexes\n$$\\operatorname{Hom}_{\\mathcal A}(P^\\bullet,TJ)\\cong\\operatorname{Hom}_{\\mathcal B}(L(P^\\bullet),J),$$\nwith term $\\operatorname{Hom}(P^{-n},TJ)$, respectively $\\operatorname{Hom}(L(P^{-n}),J)$, in degree $n$ and differential $h\\mapsto(-1)^{n+1}h\\circ d^{-n-1}$. No exactness of $L$ and no injectivity of $TJ$ are assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07AC, lemma-existence-derived-lower-shriek, proof of condition (2): the Hom-complex adjunction and injective test; abstracted to an arbitrary additive adjunction out of module sheaves."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-pc-cochain-complex-modules",
+  "def-pc-acyclic-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Fix an injective $J\\in\\mathcal B$. Apply [lem-trf-acyclic-coproduct-ext-orthogonal-hom] with $R=S$, $F=TJ$ and $K^\\bullet=P^\\bullet$. Its small-site and universe hypotheses are those of the item; its Ext vanishing, bounded-above acyclicity and small-coproduct term hypotheses are precisely the assumptions here. It gives acyclicity of $\\operatorname{Hom}_{\\mathcal A}(P^\\bullet,TJ)$ with exactly the degree convention and differential in the statement.",
+   "uses": [
+    "lem-trf-acyclic-coproduct-ext-orthogonal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AC, lemma-existence-derived-lower-shriek, proof of condition (2): Hom-complex adjunction and testing against injectives."
+   }
+  },
+  {
+   "text": "Write $\\eta$ for the adjunction unit. For each $X\\in\\mathcal A$ the adjunction bijection $\\alpha_X:\\operatorname{Hom}_{\\mathcal B}(LX,J)\\to\\operatorname{Hom}_{\\mathcal A}(X,TJ)$ is $f\\mapsto T(f)\\circ\\eta_X$. This is additive since $T$ is additive and the categories are preadditive [def-sp-abelian]. For $a:X\\to Y$, naturality of $\\eta$ gives $\\alpha_X(f\\circ L(a))=T(f)\\circ TL(a)\\circ\\eta_X=T(f)\\circ\\eta_Y\\circ a=\\alpha_Y(f)\\circ a$. Taking $a=d_P^{-n-1}$ and multiplying by $(-1)^{n+1}$ proves compatibility with the differentials. Thus the inverse degreewise bijections give the stated isomorphism of cochain complexes of abelian groups. The right-hand complex is acyclic by step 1.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AC, lemma-existence-derived-lower-shriek, proof of condition (2): Hom-complex adjunction and testing against injectives."
+   }
+  },
+  {
+   "text": "Put $C^\\bullet=L(P^\\bullet)$, $d_C^r=L(d_P^r)$; additivity makes $d_C^{r+1}d_C^r=L(0)=0$. Fix $r$. In the abelian category $\\mathcal B$ [def-sp-abelian], let $q:C^r\\twoheadrightarrow Q=\\operatorname{coker}(d_C^{r-1})$ and $\\bar d:Q\\to C^{r+1}$ satisfy $\\bar d q=d_C^r$. Its kernel $i:H\\hookrightarrow Q$ is $\\ker(d_C^r)/\\operatorname{im}(d_C^{r-1})=H^r(C)$. By [def-sp-enough-injectives] choose a monomorphism $u:H\\hookrightarrow J$ with $J$ injective and extend it across $i$ to $v:Q\\to J$, so $vi=u$. The map $h=vq$ kills $d_C^{r-1}$, hence is a cocycle in degree $-r$ of $\\operatorname{Hom}(C^\\bullet,J)$. By step 2 it is a boundary: after absorbing the differential sign there is $g:C^{r+1}\\to J$ with $h=g d_C^r$. Thus $vq=g\\bar d q$; since $q$ is epic, $v=g\\bar d$, and $u=vi=g\\bar d i=0$. A zero monomorphism has zero domain, so $H^r(C)=0$. This holds for every integer $r$, proving acyclicity. This kernel/cokernel argument expands the injective test directly from its defining extension property.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-enough-injectives"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AC, lemma-existence-derived-lower-shriek, proof of condition (2): Hom-complex adjunction and testing against injectives."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-acyclic-coproduct-ext-orthogonal-hom",
+  "def-sp-abelian",
+  "def-sp-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07AC, lemma-existence-derived-lower-shriek, proof of condition (2): Hom-complex adjunction and testing against injectives. The Ext calculation is supplied by the existing 07AA/07AC node; the injective test is expanded from homology.tex Tags 0135 and 0138 (definition-injective and definition-enough-injectives), abstracting the same argument to the stated additive adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive adjunction transfers acyclicity of bounded above complexes from Ext orthogonal generators by testing Hom complexes against injectives",
+   "results": "8 hits; CategoryTheory.hasInjectiveDimensionLT_iff, CategoryTheory.HasInjectiveDimensionLT.mk, CategoryTheory.HasInjectiveDimensionLT.mk', CategoryTheory.HasInjectiveDimensionLT.subsingleton, CochainComplex.IsKProjective.leftOrthogonal, CategoryTheory.HasInjectiveDimensionLT.subsingleton', CochainComplex.isKInjective_iff_rightOrthogonal, CochainComplex.IsKInjective.rightOrthogonal.  Digest e54eb39c8a74368b.",
+   "date": "2026-10-22",
+   "verdict": "no match: KInjective orthogonality and injective dimension results do not give this Ext-orthogonal-family criterion for the image of a bounded-above acyclic complex under a possibly nonexact left adjoint."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let L be left adjoint to R between abelian categories with enough injectives. If Ext to R of injectives vanishes on a family, L preserves bounded above acyclic complexes of sums of that family",
+   "results": "8 hits; CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.hasInjectiveDimensionLT_iff, CategoryTheory.hasExt_of_enoughInjectives, CategoryTheory.HasInjectiveDimensionLT.mk, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.HasInjectiveDimensionLT.mk', CochainComplex.isKInjective_iff_rightOrthogonal, CochainComplex.IsKInjective.rightOrthogonal.  Digest 77c3f33f0316dcb6.",
+   "date": "2026-10-22",
+   "verdict": "no match: KInjective orthogonality and injective dimension results do not give this Ext-orthogonal-family criterion for the image of a bounded-above acyclic complex under a possibly nonexact left adjoint."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"acyclic\", \"Injective\"",
+   "results": "0 hits; none.  Digest 4f53cda18c2baa0c.",
+   "date": "2026-10-22",
+   "verdict": "no match: KInjective orthogonality and injective dimension results do not give this Ext-orthogonal-family criterion for the image of a bounded-above acyclic complex under a possibly nonexact left adjoint."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomologicalComplex\", \"Exact\", \"Injective\"",
+   "results": "0 hits; none.  Digest 4f53cda18c2baa0c.",
+   "date": "2026-10-22",
+   "verdict": "no match: KInjective orthogonality and injective dimension results do not give this Ext-orthogonal-family criterion for the image of a bounded-above acyclic complex under a possibly nonexact left adjoint."
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]cyclic.*[Ii]njective|[Ii]njective.*[Aa]cyclic|[Ee]xt.*orthogonal",
+   "results": "3 hits; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean.  Digest 165b406869f89c94. Mathlib subdirectory: Algebra/Homology.",
+   "date": "2026-10-22",
+   "verdict": "no match: KInjective orthogonality and injective dimension results do not give this Ext-orthogonal-family criterion for the image of a bounded-above acyclic complex under a possibly nonexact left adjoint."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]njective.*([Aa]cyclic|[Ee]xact)|([Aa]cyclic|[Ee]xact).*[Ii]njective|[Ee]xt.*[Cc]oproduct",
+   "results": "17 hits; Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Injective/Extend.lean, Mathlib/CategoryTheory/Abelian/Injective/Extend.lean, Mathlib/CategoryTheory/Abelian/EpiWithInjectiveKernel.lean.  Digest fa3c22075e992112. Mathlib subdirectory: CategoryTheory/Abelian.",
+   "date": "2026-10-22",
+   "verdict": "no match: KInjective orthogonality and injective dimension results do not give this Ext-orthogonal-family criterion for the image of a bounded-above acyclic complex under a possibly nonexact left adjoint."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If Hom of a complex into every injective object is acyclic then the complex is acyclic under an additive adjunction",
+   "results": "8 hits; CochainComplex.IsKInjective.nonempty_homotopy_zero, CochainComplex.IsKInjective.homotopyZero_def, CochainComplex.isKInjective_iff_rightOrthogonal, CochainComplex.isKInjective_of_injective, HomologicalComplex.Acyclic, CochainComplex.IsKInjective, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic, HomologicalComplex.acyclic_iff.  Digest 27a89306901d4238.",
+   "date": "2026-10-22",
+   "verdict": "no match: KInjective orthogonality and injective dimension results do not give this Ext-orthogonal-family criterion for the image of a bounded-above acyclic complex under a possibly nonexact left adjoint."
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]cyclic.*[Ii]njective|[Ii]njective.*[Aa]cyclic|[Ee]xt.*orthogonal",
+   "results": "3 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean. Digest 165b406869f89c94. Mathlib subdirectory: Algebra/Homology.",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits on K-injectivity, injective dimension, derived Ext existence or vanishing on injectives do not state preservation of acyclicity by a possibly nonexact left adjoint under this termwise Ext-orthogonality hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If Hom from a complex into each injective object is acyclic then the complex is acyclic",
+   "results": "8 hits: CochainComplex.IsKInjective.nonempty_homotopy_zero, CategoryTheory.InjectiveResolution.self, CochainComplex.IsKInjective.homotopyZero_def, HomologicalComplex.acyclic_iff, CochainComplex.IsKInjective, HomotopyCategory.mem_subcategoryAcyclic_iff, CochainComplex.isKInjective_iff_rightOrthogonal, CochainComplex.isKInjective_of_injective. Digest 31d158a4761760ec.",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits on K-injectivity, injective dimension, derived Ext existence or vanishing on injectives do not state preservation of acyclicity by a possibly nonexact left adjoint under this termwise Ext-orthogonality hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"acyclic\", \"Injective\"",
+   "results": "0 hits: . Digest 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits on K-injectivity, injective dimension, derived Ext existence or vanishing on injectives do not state preservation of acyclicity by a possibly nonexact left adjoint under this termwise Ext-orthogonality hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive adjunction transfers acyclicity of bounded above complexes of coproducts of Ext orthogonal objects by testing against injectives",
+   "results": "8 hits: CategoryTheory.hasInjectiveDimensionLT_iff, CategoryTheory.HasInjectiveDimensionLT.mk, CategoryTheory.HasInjectiveDimensionLT.mk', CochainComplex.IsKInjective.rightOrthogonal, CochainComplex.isKInjective_iff_rightOrthogonal, CochainComplex.IsKProjective.leftOrthogonal, HomologicalComplex.isGrothendieckAbelian, CategoryTheory.HasInjectiveDimensionLT.subsingleton. Digest 6141c30eecfd579d.",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits on K-injectivity, injective dimension, derived Ext existence or vanishing on injectives do not state preservation of acyclicity by a possibly nonexact left adjoint under this termwise Ext-orthogonality hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let L be left adjoint to T. Vanishing of positive Ext from generators to T of injectives implies L sends bounded above acyclic complexes of sums of generators to acyclic complexes",
+   "results": "8 hits: DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.hasExt_of_enoughInjectives, CategoryTheory.HasInjectiveDimensionLT.mk', CategoryTheory.HasInjectiveDimensionLT.mk, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CochainComplex.IsKInjective, CochainComplex.IsKProjective.leftOrthogonal, CategoryTheory.hasInjectiveDimensionLT_iff. Digest c6dfe12df5f655bf.",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits on K-injectivity, injective dimension, derived Ext existence or vanishing on injectives do not state preservation of acyclicity by a possibly nonexact left adjoint under this termwise Ext-orthogonality hypothesis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-continuous-cocontinuous-derived-shriek",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Extracted argument: Returned proof step 5, including differential compatibility and detection of acyclicity by injectives; its Ext hypothesis is supplied by returned step 4.",
+   "via": [
+    "lem-trf-continuous-cocontinuous-derived-shriek",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-ext-orthogonal-adjoint-acyclic",
+  "worker": "stage1",
+  "summary": "Reused the already reviewed Ext-orthogonal coproduct Hom-acyclicity node with all hypotheses and the exact differential convention checked. Wrote the additive adjunction formula and its differential compatibility, then expanded the enough-injectives test by a cokernel and kernel extension argument. No new nodes, no statement change, no exactness hypothesis on L, and no injectivity hypothesis on TJ.",
+  "blueprint": "Retains the supplied lem-trf-local-term-locality ancestry through the generic derived-colimit/lower-shriek branch. Realizes precisely the extracted returned step 5: Hom-complex adjunction, supplied Ext orthogonality and injective detection in the proof of Stacks 07AC condition (2). No unit or chapter route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-19f6e1c74",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-19f6e1c74 (reviewer sub-agent of L); spot-checked: I read the item and its three steps in full. The delivery has no new nodes. Statement, stmt_deps, blueprint, chapter and unit are byte-identical to live and side-live, where the item is still unsplit; no repair note exists, so this is not a re-split. Source: Stacks sites-cohomology.tex l.9309-9420, Tag 07AC proof of (2): Hom adjunction, g^{-1}I not injective, Ext vanishing on generators, 07AA spectral sequence. The item abstracts this to an additive adjunction L -| T without adding hypotheses. The citer lem-trf-continuous-cocontinuous-derived-shriek step 2 (L=g_!, T=g^{-1}) matches. Step 1: lem-trf-acyclic-coproduct-ext-orthogonal-hom (same unit, reviewed PASS) matches clause by clause with R=S, F=TJ, K=P, including the differential (-1)^{n+1}h∘d^{-n-1}. Only its statement is used. Step 2: alpha_X(f)=T(f)∘eta_X, and naturality gives alpha_X(f∘La)=alpha_Y(f)∘a, so this is a chain isomorphism (elementary). Step 3: injective test via Q=coker d^{r-1}, ker(dbar)=H^r, extend the mono u to v, vq is a cocycle in degree -r, a boundary g∘d^r, q epi gives v=g∘dbar, so u=0 and H^r=0. Indices and signs are correct; it uses additivity, not exactness, of L. It is cited to def-sp-enough-injectives and acceptably elementary. Edge cases checked: empty family, degrees above the bound, zero B, and Z/2 tensoring (the hypothesis correctly excludes F_2). Duplicate grep over the DAG found no injective-detection or adjoint-transfer node. No SGA; no tool_uses needed. Advisory only: the statement points 'enough injectives' to def-sp-injective-resolutions, which has def-sp-enough-injectives as its stmt_dep, and the meaning is written inline; the statement is unchanged from base. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExtOrthogonalAdjointAcyclic",
+  "declaration": "CategoryTheory.acyclic_map_of_coproduct_ext_orthogonal_adjunction",
+  "file": "lean/Sheaf/CategoryTheory/ExtOrthogonalAdjointAcyclic.lean",
+  "statement": "theorem acyclic_map_of_coproduct_ext_orthogonal_adjunction {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (S : Sheaf J CommRingCat.{u}) {B : Type uB} [Category.{vB} B] [Abelian B] [EnoughInjectives B] (L : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj S) ⥤ B) (T : B ⥤ ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) [L.Additive] [T.Additive] (adj : L ⊣ T) {I : Type w} (E : I → ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) (hExt : ∀ (V : B) [Injective V], ∃ Q : InjectiveResolution (T.obj V), ∀ (i : I) (p : ℕ), 0 < p → IsZero ((((preadditiveCoyoneda.obj (op (E i))).mapHomologicalComplex (ComplexShape.up ℕ)).obj Q.cocomplex).homology p)) (P : CochainComplex (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) ℤ) (hbounded : ∃ b : ℤ, ∀ n : ℤ, b < n → IsZero (P.X n)) (hacyclic : P.Acyclic) (hterms : ∀ n : ℤ, ∃ (A : Type u) (i : A → I), Nonempty (P.X n ≅ ∐ (fun a : A ↦ E (i a)))) : ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P).Acyclic ∧ ∀ (V : B) [Injective V], (CochainComplex.HomComplex P ((CochainComplex.singleFunctor _ 0).obj (T.obj V))).Acyclic ∧ (CochainComplex.HomComplex ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ((CochainComplex.singleFunctor B 0).obj V)).Acyclic ∧ ∃ e : (AddCommGrpCat.uliftFunctor.{max u vB, u}.mapHomologicalComplex (ComplexShape.up ℤ)).obj (CochainComplex.HomComplex P ((CochainComplex.singleFunctor _ 0).obj (T.obj V))) ≅ (AddCommGrpCat.uliftFunctor.{max u vB, vB}.mapHomologicalComplex (ComplexShape.up ℤ)).obj (CochainComplex.HomComplex ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ((CochainComplex.singleFunctor B 0).obj V)), ∀ (n : ℤ) (h : P.X (-n) ⟶ T.obj V), e.hom.f n (ULift.up (CochainComplex.HomComplex.Cochain.toSingleMk h (neg_add_cancel n))) = ULift.up (CochainComplex.HomComplex.Cochain.toSingleMk ((adj.homEquiv (P.X (-n)) V).symm h) (neg_add_cancel n))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-317316970",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim. Clause-by-clause: small site u / ringedSiteModules, B abelian+EnoughInjectives with free universes, additive L⊣T without exactness, hExt ∃ injective resolution of T V with vanishing positive Hom cohomology (equivalent; matches proof-dep acyclic_hom_of_coproduct_ext_orthogonal), hbounded/hacyclic/hterms (Type u coproducts, repetitions). Conclusion: L(P) acyclic, both Hom complexes acyclic, chain iso e pinned on toSingleMk generators to adj.homEquiv.symm (fully determined), δ_toSingleMk sign (-1)^{n+1} matches node; ulift only to common universe. Edge cases: empty I/A, P=0, unbounded below, all degrees. No defs, sorry only, source+blueprint docstrings with steps 1-3, no duplicate, report has Worker report and Second reading sections. Advisory: second reading was same-session."
+ }
+}

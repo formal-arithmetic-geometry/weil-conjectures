@@ -1,0 +1,344 @@
+{
+ "id": "lem-sfb-relative-torus-character-reconstruction",
+ "kind": "statement",
+ "title": "Character reconstruction of relative tori from etale lattice sheaves",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Use its small etale site [def-weil-pbc-etale-site] and sheaves of abelian groups [def-weil-pbc-abelian-etale-sheaves]. A lattice sheaf $\\mathcal M$ means a sheaf which is etale locally isomorphic to a constant sheaf $\\underline{\\mathbf Z^r}$ for some finite $r\\geq0$ [def-weil-pbc-constant-sheaf]; the rank may vary between connected components. For a scheme $T$ write $\\mathbf G_{m,T}$ for the group scheme obtained by gluing $\\operatorname{Spec}A[t,t^{-1}]$ over affine opens $\\operatorname{Spec}A\\subseteq T$, with comultiplication $t\\mapsto t\\otimes t$, counit $t\\mapsto1$, and inverse $t\\mapsto t^{-1}$. A torus over $S$ means a commutative $S$-group scheme (with multiplication, inverse and unit satisfying the group diagrams) which is fppf locally [def-pc-fppf-site] isomorphic to $\\mathbf G_{m,S}^r$, locally on $S$, for finite $r$. For an $S$-group scheme $P$, let $X^*(P)$ be the etale sheaf $U\\mapsto\\operatorname{Hom}_{U\\text{-grp}}(P\\times_SU,\\mathbf G_{m,U})$.\n\nThe functor $X^*$ is a contravariant equivalence between tori over $S$ and lattice sheaves. A quasi-inverse sends $\\mathcal M$ to the scheme $D_S(\\mathcal M)$ representing the functor on $S$-schemes\n$$T\\longmapsto\\operatorname{Hom}_{\\operatorname{Ab}(T_{\\mathrm{et}})}(\\mathcal M|_T,\\mathbf G_{m,T}),$$\nwhere $\\mathcal M|_T$ is the ordinary etale inverse image sheaf [def-weil-pbc-inverse-image] and the second argument denotes the units sheaf of the displayed group scheme. There are natural identifications $X^*(D_S(\\mathcal M))\\simeq\\mathcal M$ and $D_S(X^*(P))\\simeq P$. The construction and these identifications commute with arbitrary scheme base change [def-pc-base-change]. If $\\mathcal M|_U\\simeq\\underline{\\mathbf Z^r}$ then $D_S(\\mathcal M)\\times_SU\\simeq\\mathbf G_{m,U}^r$. The structure map $D_S(\\mathcal M)\\to S$ is smooth [def-sbc-smooth-morphisms], affine, faithfully flat and of finite presentation [def-sbc-locally-finite-presentation] [def-weil-pbc-scheme-conventions]; affine means that inverse images of affine opens are affine. Over every algebraically closed geometric point $s$ its fibre is $\\mathbf G_{m,s}^r$, where $r=\\operatorname{rank}\\mathcal M_s$. Rank zero is included.",
+ "source": {
+  "document": "literature/lan-structures-semi-abelian-schemes.pdf",
+  "place": "Lan, §3.1.1, Definitions 3.1.1.1, 3.1.1.4–5 and Lemma 3.1.1.6; online revised thesis printed p.61 read. Explicit relative representability and smooth affine finite-presentation properties from the local split model; local text WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fppf-site",
+  "def-weil-pbc-inverse-image",
+  "def-sfb-relative-character-duality-data",
+  "def-sfb-relative-split-torus-laurent-model"
+ ],
+ "proof": [
+  {
+   "text": "For the split model, the relative matrix lemma identifies $X^*(\\mathbf G_{m,B}^r)$ with $\\underline{\\mathbf Z^r}$ and identifies its automorphism sheaf on arbitrary test schemes with locally constant $\\operatorname{GL}_r(\\mathbf Z)$-valued maps. The constant-sheaf sections lemma identifies integer-matrix functions with sections of the constant additive matrix sheaf; invertibility is the pointwise condition of lying in $\\operatorname{GL}_r(\\mathbf Z)$. A homomorphism between finite free constant abelian sheaves is determined by the images of the finitely many standard generators: locally these images form an integer matrix, and every such matrix defines a homomorphism. Thus the contravariant correspondence on split models is exactly precomposition of characters, with composition and addition as in the matrix lemma. This uses locally constant matrices, not a single matrix on a possibly disconnected base.",
+   "uses": [
+    "lem-sfb-relative-split-torus-matrix-sheaf",
+    "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent relative descent argument, using Lemma 12.4 and Theorem 12.9(a), pp.232–234; Lan §3.1.1 local text WANTED."
+   }
+  },
+  {
+   "text": "Let $P$ be an fppf torus, trivialized on $U_i$ with ranks $r_i$. On a nonempty overlap the two ranks agree at every geometric point: the split matrix lemma gives inverse maps between $\\mathbf Z^{r_i}$ and $\\mathbf Z^{r_j}$; reducing modulo $2$ gives $2^{r_i}=2^{r_j}$. The labelled-clopen descent lemma descends the rank labels to clopen subsets of $S$. Its fpqc hypothesis holds because on each affine open the fppf affine-refinement lemma supplies a finite jointly surjective affine refinement. Work on one rank-$r$ subset. The functor $I(T)=\\operatorname{Isom}_{T\\text{-grp}}(\\mathbf G_{m,T}^r,P_T)$ is an fppf sheaf: compatible maps and inverse maps descend by representable fpqc descent, and their group equations are tested on the pulled-back covers. A chosen frame identifies $I|_{U_i}$ with $\\coprod_{\\operatorname{GL}_r(\\mathbf Z)}U_i$ by Step 1. Fppf-local algebraic-space representability therefore applies, with this set-indexed coproduct as charts in the chosen universe. The projection $I\\to S$ is etale by fppf descent of etaleness, applied to the surjective flat locally finitely presented map $\\coprod U_i\\to S$. It is surjective: a geometric point lifts after field extension to a trivializing cover and then to its identity frame. The smooth-surjection sections lemma, etale being smooth of relative dimension zero, supplies an etale covering of $S$ with frames. Hence $P$ is etale locally split and $X^*(P)$ is a lattice by Step 1.",
+   "uses": [
+    "lem-sfb-fpqc-labelled-clopen-descent",
+    "lem-pc-fppf-affine-refinement",
+    "lem-sfb-relative-split-torus-matrix-sheaf",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-sfb-fppf-local-algebraic-space",
+    "lem-sfb-representable-fppf-etale-open-descent",
+    "lem-sfb-smooth-space-cover-etale-sections",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "04SK, lemma-locally-algebraic-space; spaces-descent.tex 042B, lemma-descending-property-etale; spaces-topologies.tex 0CFV; agent application to the frame sheaf."
+   }
+  },
+  {
+   "text": "Choose an etale cover $U_i\\to S$ and trivializations $\\mathcal M|_{U_i}\\cong\\underline{\\mathbf Z^{r_i}}$. On overlaps let $a_{ij}$ take coordinates in frame $i$ to coordinates in frame $j$, so $a_{jk}a_{ij}=a_{ik}$. A tuple of units defines a functional on these coordinates. Transport it from $i$ to $j$ by $h\\mapsto h\\circ a_{ij}^{-1}$. Step 1 represents this transport by an isomorphism between the split tori. The displayed cocycle gives the scheme descent cocycle. On each affine open $V\\subset S$, choose a finite affine refinement of the cover; its coproduct $W\\to V$ is a flat surjective map between affine schemes. The disjoint union of split models over its components is affine over $W$. Effective affine descent gives a $V$-scheme with these models; affineness descends from $W$. The descended multiplication, identity and inverse exist by morphism descent, since the transition maps are group maps; their diagrams hold because they hold after pullback. For two such local models, morphism descent gives the unique comparison inducing the prescribed transitions. These comparisons satisfy the cocycle, and Zariski gluing gives a commutative $S$-group scheme $D$. No intersection of affine opens is presumed affine: comparisons restrict to an affine cover of the intersection and glue uniquely.",
+   "uses": [
+    "lem-pc-fppf-affine-refinement",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-galois-fpqc-affine-descent-effective",
+    "lem-weil-pbc-fpqc-descend-affine",
+    "lem-galois-fpqc-morphisms-descend",
+    "lem-galois-glue",
+    "lem-sfb-relative-split-torus-matrix-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "0245, lemma-affine; 02W0, lemma-refine-coverings-fully-faithful; 02L5, lemma-descending-property-affine. Agent application to the inverse-dual frame cocycle."
+   }
+  },
+  {
+   "text": "Over each affine open $V\\subset S$, the affine pieces $V_j$ of Step 3 are open in $U_{i(j)}\\times_SV$, hence etale over $S$, and their images cover $V$; on each of them $D$ is the split model of rank $r_{i(j)}$ and $\\mathcal M$ is trivialized by the restricted frame. For an arbitrary $S$-scheme $T$, pull back this etale cover $\\{V_j\\to S\\}$ (over all $V$ and $j$) to $T$. Constant sheaves pull back to constant sheaves, so on each pulled-back chart a sheaf homomorphism $\\mathcal M|_T\\to\\mathbf G_{m,T}$ is precisely an $r_i$-tuple of units: by the sheafification universal property, a map from $\\underline{\\mathbf Z^{r_i}}$ is uniquely specified by the images of its basis, and the split point formula represents these images. On intersections the tuple changes by $h\\mapsto h\\circ a_{ij}^{-1}$, exactly the transition used for $D$. Maps from sheaves glue uniquely on an etale covering by the sheaf axiom, and maps $T\\to D$ glue uniquely by representable fpqc descent (an etale cover is fpqc). Consequently $D(T)$ is naturally the Hom group in the question. These bijections respect the group operations and every test-scheme pullback. This proves representability, and identifies its group law with pointwise multiplication of functionals. It also proves the asserted split model whenever $\\mathcal M|_U$ is constant, independently of the originally chosen cover.",
+   "uses": [
+    "lem-sfb-relative-split-torus-matrix-sheaf",
+    "def-weil-pbc-sheafification",
+    "lem-kun-pullback-constant",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-weil-pbc-fpqc-finer-than-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent relative descent argument, using Lemma 12.4 and Theorem 12.9(a), pp.232–234; Lan §3.1.1 local text WANTED."
+   }
+  },
+  {
+   "text": "For a section $m$ of $\\mathcal M$, evaluation $h\\mapsto h(m)$ defines a character of $D$ and gives $\\mathcal M\\to X^*(D)$. On every splitting chart this sends the standard basis to the coordinate characters, so Step 1 makes it an isomorphism. For $P$, evaluation sends $p\\in P(T)$ to the homomorphism $\\chi\\mapsto\\chi(p)$ from its pulled-back character lattice to the units sheaf. By Step 2 there is an etale splitting cover; on its pullback this map is the identity identification between tuples of units and functionals on $\\mathbf Z^r$. Step 4 and Yoneda therefore give an isomorphism $P\\to D_S(X^*(P))$: the local inverse scheme maps glue by representable descent, and both inverse identities hold on the cover. For a lattice map $b:\\mathcal M\\to\\mathcal N$, define $D(b)(h)=h\\circ b$. For a group map $f:P\\to Q$, define $X^*(f)(\\chi)=\\chi\\circ f$. The equations $h(b(m))=(h\\circ b)(m)$ and $\\chi(f(p))=(\\chi\\circ f)(p)$ prove naturality of the two evaluation maps. They give the claimed contravariant equivalence, with every clause on morphisms included.",
+   "uses": [
+    "lem-sfb-relative-split-torus-matrix-sheaf",
+    "lem-pc-yoneda",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-weil-pbc-fpqc-finer-than-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent relative descent argument, using Lemma 12.4 and Theorem 12.9(a), pp.232–234; Lan §3.1.1 local text WANTED."
+   }
+  },
+  {
+   "text": "For $g:S'\\to S$, compare $D_S(\\mathcal M)\\times_SS'$ and $D_{S'}(g^{-1}\\mathcal M)$ on the pullback of a lattice-trivializing cover. By constant pullback and Step 1 both are the same split torus, with the same inverse-dual transition matrix. The identity maps on the split models therefore glue uniquely to an isomorphism. Similarly there is a natural comparison $g^{-1}X^*(P)\\to X^*(P_{S'})$, induced by pulling back characters. After pulling back a splitting cover of $P$, constant pullback and the split matrix lemma identify this comparison with the identity of $\\underline{\\mathbf Z^r}$, so it is an isomorphism. On each such chart the two evaluation maps are $m\\mapsto(h\\mapsto h(m))$ and $p\\mapsto(\\chi\\mapsto\\chi(p))$ before and after base change. The formulas are unchanged on pulled-back tuples; hence the comparisons preserve both evaluation maps. Uniqueness of gluing gives compatibility with successive base changes. This argument uses no assertion that arbitrary inverse image carries the entire units sheaf to the units sheaf.",
+   "uses": [
+    "lem-sfb-relative-split-torus-matrix-sheaf",
+    "lem-kun-pullback-constant",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-weil-pbc-fpqc-finer-than-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent relative descent argument, using Lemma 12.4 and Theorem 12.9(a), pp.232–234; Lan §3.1.1 local text WANTED."
+   }
+  },
+  {
+   "text": "On an affine splitting chart the split model has algebra $A[x_1,y_1,\\ldots,x_r,y_r]/(x_iy_i-1)_i$, a finite presentation. It is formally smooth: a tuple of units modulo a square-zero ideal lifts to a tuple of units, since a lifted product equal to $1+e$ has inverse corrected by $1-e$; assign each $y_i$ the inverse of the lifted $x_i$. Thus it is smooth by the definition, and flat and locally of finite presentation by smooth-flat. The tuple $(1,\\ldots,1)$ gives a section, so the model is surjective. Over each affine open of $S$, the same finite affine refinement as Step 3 is a single flat quasi-compact surjection. Smooth fpqc base descent applies to $D$ there. Smoothness is Zariski local by its affine-local definition, so $D\\to S$ is smooth globally, hence flat and locally of finite presentation. Affineness descends on these covers and is local on the target. An affine map is quasi-compact and separated, hence quasi-separated; together with local finite presentation this is finite presentation. The identity section gives global surjectivity, hence faithful flatness. Over an algebraically closed geometric point choose a field-valued point on the pulled-back etale cover; the etale-lift factorization lemma over the separably closed geometric field gives a section of that cover. The fibre is therefore the split torus of the stalk rank. For rank zero every local model and every transition is the identity of its base; the construction gives $S$ with the trivial group. The empty base is covered by the empty family and yields the empty scheme, consistently with all assertions.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-pc-smooth-flat",
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-pc-fppf-affine-refinement",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-fpqc-descend-affine",
+    "lem-exc-etale-lift-separably-closed-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "022U, example-multiplicative-group; descent.tex 02VL, lemma-descending-property-smooth; explicit Laurent presentation and square-zero lifting argument by agent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-split-torus-matrix-sheaf",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "def-weil-pbc-sheafification",
+  "lem-sfb-fpqc-labelled-clopen-descent",
+  "lem-pc-fppf-affine-refinement",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-sfb-fppf-local-algebraic-space",
+  "lem-sfb-representable-fppf-etale-open-descent",
+  "lem-sfb-smooth-space-cover-etale-sections",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-galois-fpqc-morphisms-descend",
+  "lem-galois-glue",
+  "lem-kun-pullback-constant",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-pc-yoneda",
+  "def-sbc-smooth-morphisms",
+  "lem-pc-smooth-flat",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-exc-etale-lift-separably-closed-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Relative extension of Lemma 12.4 and Theorem 12.9(a), pp.232–234; affine/fppf descent by the cited Stacks nodes. Lan §3.1.1 cited by the item is absent locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torus\"",
+   "results": "0 hits; ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the signatures. Semantic hits concern condensed locally constant sheaves or smooth/etale morphisms, without representing a lattice by a torus. The broad grep had incidental functoriality/toRingEquiv text; the word-boundary refinement returned only GammaSpecAdjunction, a sheaf-hom characterization on basic opens, not this theorem. A second semantic formulation was tried."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|tori|multiplicative.type|character.*sheaf",
+   "results": "25 hits; ; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: read the signatures. Semantic hits concern condensed locally constant sheaves or smooth/etale morphisms, without representing a lattice by a torus. The broad grep had incidental functoriality/toRingEquiv text; the word-boundary refinement returned only GammaSpecAdjunction, a sheaf-hom characterization on basic opens, not this theorem. A second semantic formulation was tried."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale locally constant lattice on a scheme defines a smooth affine group scheme locally isomorphic to a product of multiplicative groups",
+   "results": "8 hits; ; AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, LocallyConstant.instCommGroup, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, Algebra.FormallyEtale.instFormallySmooth, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero",
+   "date": "2026-10-24",
+   "verdict": "no match: read the signatures. Semantic hits concern condensed locally constant sheaves or smooth/etale morphisms, without representing a lattice by a torus. The broad grep had incidental functoriality/toRingEquiv text; the word-boundary refinement returned only GammaSpecAdjunction, a sheaf-hom characterization on basic opens, not this theorem. A second semantic formulation was tried."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tori over an arbitrary scheme are contravariantly equivalent to locally constant etale sheaves of finite free abelian groups, by characters",
+   "results": "8 hits; ; CondensedSet.LocallyConstant.iso, CondensedMod.isDiscrete_tfae, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, CondensedMod.LocallyConstant.functorIsoDiscrete, LightCondMod.LocallyConstant.functorIsoDiscrete, LightCondSet.LocallyConstant.iso, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, LightCondMod.LocallyConstant.functorIsoDiscreteComponents",
+   "date": "2026-10-24",
+   "verdict": "no match: read the signatures. Semantic hits concern condensed locally constant sheaves or smooth/etale morphisms, without representing a lattice by a torus. The broad grep had incidental functoriality/toRingEquiv text; the word-boundary refinement returned only GammaSpecAdjunction, a sheaf-hom characterization on basic opens, not this theorem. A second semantic formulation was tried."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Represent the sheaf Hom of a locally constant finite free integer lattice into the multiplicative group by a relative torus compatible with base change",
+   "results": "8 hits; ; CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functor_obj_val, CondensedMod.LocallyConstant.functor, LightCondMod.LocallyConstant.functorToPresheaves, CondensedMod.LocallyConstant.functorToPresheaves, CompHausLike.LocallyConstantModule.functorToPresheaves, LightCondAb.ofSheafLightProfinite",
+   "date": "2026-10-24",
+   "verdict": "no match: read the signatures. Semantic hits concern condensed locally constant sheaves or smooth/etale morphisms, without representing a lattice by a torus. The broad grep had incidental functoriality/toRingEquiv text; the word-boundary refinement returned only GammaSpecAdjunction, a sheaf-hom characterization on basic opens, not this theorem. A second semantic formulation was tried."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(torus|tori)\\b|multiplicative.type|character.*sheaf",
+   "results": "1 hits; ; Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: read the signatures. Semantic hits concern condensed locally constant sheaves or smooth/etale morphisms, without representing a lattice by a torus. The broad grep had incidental functoriality/toRingEquiv text; the word-boundary refinement returned only GammaSpecAdjunction, a sheaf-hom characterization on basic opens, not this theorem. A second semantic formulation was tried."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-generic-toric-abstract-good-reduction",
+  "date": "2026-10-24",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Abstract good reduction input, reconstruction: turn the extended character lattice into a relative torus, and identify its generic fibre by characters.",
+   "via": [
+    "lem-sfb-generic-toric-abstract-good-reduction",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-torus-character-reconstruction",
+  "worker": "stage1",
+  "summary": "Built the relative character equivalence explicitly by inverse-dual lattice transitions and effective affine descent. Audited arbitrary bases, fppf-to-etale splitting via the discrete frame sheaf, evaluation, arbitrary base change and geometric properties. Reused the existing descent nodes and created only the arbitrary-base split matrix lemma. Statement unchanged.",
+  "blueprint": "Current latest main-20261024, sk-thm-sf-ctf-stability-direct-images.proof.md (3), direct-image/open-coefficient route through the inherited alteration/semiabelian chain. This item supplies reconstruction in abstract toric good reduction. The ancestor command returns None; retain the inherited explicit chain and null ancestor. Steps 1–7 realize its relative character reconstruction input without changing the chapter or unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "why": "Generic sections of a constant etale sheaf are locally constant maps used in steps 1; the unit has no replacement for this foundational descent/sheaf tool."
+   },
+   {
+    "node": "lem-sfb-fpqc-labelled-clopen-descent",
+    "why": "Generic descent and test-morphism comparison for fpqc-compatible labelled clopen partitions used in steps 2; the unit has no replacement for this foundational descent/sheaf tool."
+   },
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic affine refinement of an fppf covering used in steps 2, 3, 7; the unit has no replacement for this foundational descent/sheaf tool."
+   },
+   {
+    "node": "lem-galois-fpqc-affine-descent-effective",
+    "why": "Generic descent data on affine morphisms are effective for an fpqc covering $\\{x\\to s\\}$ (stacks 0245) used in steps 3; the unit has no replacement for this foundational descent/sheaf tool."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-affine",
+    "why": "Generic being affine descends along fpqc coverings (stacks 02l5) used in steps 3, 7; the unit has no replacement for this foundational descent/sheaf tool."
+   },
+   {
+    "node": "lem-galois-fpqc-morphisms-descend",
+    "why": "Generic morphisms of schemes descend along an fpqc covering $\\{x\\to s\\}$ (stacks 02w0) used in steps 3; the unit has no replacement for this foundational descent/sheaf tool."
+   },
+   {
+    "node": "lem-galois-glue",
+    "why": "Generic glueing of schemes along open immersions used in steps 3; the unit has no replacement for this foundational descent/sheaf tool."
+   },
+   {
+    "node": "lem-kun-pullback-constant",
+    "why": "Generic inverse image of a constant sheaf used in steps 4, 6; the unit has no replacement for this foundational descent/sheaf tool."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Generic every small etale covering family is an fpqc covering used in steps 4, 5, 6; the unit has no replacement for this foundational descent/sheaf tool."
+   },
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "Generic smooth morphisms used in steps 7; the unit has no replacement for this foundational descent/sheaf tool."
+   },
+   {
+    "node": "lem-exc-etale-lift-separably-closed-factorization",
+    "why": "Generic etale lifts descend along extensions of a separably closed field used in steps 7; the unit has no replacement for this foundational descent/sheaf tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "lem-sfb-fpqc-labelled-clopen-descent",
+  "lem-pc-fppf-affine-refinement",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-galois-fpqc-morphisms-descend",
+  "lem-galois-glue",
+  "lem-kun-pullback-constant",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "def-sbc-smooth-morphisms",
+  "lem-exc-etale-lift-separably-closed-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-3e7eec246",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-3e7eec246 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged vs live, which is still unsplit; no re-split note) and the one new node lem-sfb-relative-split-torus-matrix-sheaf, checked against Milne iAG Lemma 12.4 / Thm 12.9(a) and Stacks 022U. The new node is true over any base: a group-like f=Σa_m x^m forces a complete set of orthogonal idempotents. Tested on r or s=0, the empty base, A1×A2, k[ε] and Frobenius p·I. It is unsplit and self-contained. It duplicates nothing in the DAG: the existing matrix and antiduality nodes are over a field, and the normal-torus splitting node needs a normal Noetherian base. It is not a restatement of the item. Steps 1-3 and 5-7 check against the cited statements. Step 2 builds the frame sheaf I with I|U_i ≅ ∐_{GL_r(Z)}U_i, then uses 04SK, étale descent and 0CFV sections, with no Noetherian assumption. Step 3 uses affine descent plus descend-affine and never assumes intersections of affines are affine. Step 7 uses square-zero unit lifting, 02VL on the single map W→V, and the separably closed étale lift for geometric fibres. FIX in step 4: it glued over 'the chosen cover' U_i, but step 3 only shows D is split on the refinement pieces V_j. Step 4 now names the étale cover {V_j→S}; whole corrected item JSON in fixes/dag/nodes/sec-six-functors-basics/. Batch-5: the three sfb algebraic-space lemmas reach trf only through the general def-trf-algebraic-space, and lem-trf-smooth-fpqc-base-descent is the generic Stacks 02VL Mathlib leaf. None is a step of the trace formula or Poincaré duality, so this is accepted. I accept the tool_uses (generic descent and sheaf tools). No SGA citations.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeTorusCharacterReconstruction",
+  "declaration": "AlgebraicGeometry.RelativeCharacter.reconstruction",
+  "declarations": [
+   "AlgebraicGeometry.RelativeCharacter.reconstruction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeTorusCharacterReconstruction.lean",
+  "statement": "theorem reconstruction : Nonempty Reconstruction.{u}",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4bda66e6",
+  "group": "NY",
+  "result": "pass",
+  "note": "The H2 return f0a2f5276586 is repaired. The new def node def-sfb-relative-split-torus-laurent-model is existing:true on the unchanged module Sheaf.AlgebraicGeometry.RelativeSplitTorusMatrixSheaf (LaurentAlgebra, integerModel, model, integralProjection, coordinate); its lean.statement is verbatim live line 57 and its text matches each def. It replaces the theorem lem-sfb-relative-split-torus-matrix-sheaf in the stmt_deps of the item and of def-sfb-relative-character-duality-data (TeX too); the theorem stays in proof_deps. The advisory direct def-sfb-relative-torus edge was dropped. The item statement is verbatim unchanged vs live; stmt_deps add only the two new def nodes. Both Lean files are byte-identical to the returned delivery (sha256 49eb4d87…, 9e15df09…). Independent re-read of DualityData against every clause: lattice, torus, characters, equivalence, representability with the non-invertible units comparison, both evaluation maps, base-change naturality and coherence, local_split for every f, smooth/affine/faithfully flat/finite presentation, geometric fibres. Edge cases rank 0, empty base, varying ranks, any characteristic; universe u only; no hollow defs; sorry only; docstrings and blueprint tags present. No competing owner of the module. No compile: no file changed."
+ }
+}

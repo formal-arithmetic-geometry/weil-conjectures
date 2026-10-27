@@ -1,0 +1,143 @@
+{
+ "id": "lem-sf-p1-coordinate-integrals",
+ "kind": "statement",
+ "title": "Normalized projective-line kernel in standard-chart coordinates",
+ "statement": "Let A be a finite commutative ring, N>0 with NA=0, and S an affine scheme on whose stalks N is invertible. Put P=ProjectiveSpace(Option(ULift(Fin 1)),S), q:P->S and B=A_P(1)[2], with A_T(1) the finite etale Tate line [lem-asd-finite-etale-twist-line]. There exist a trace-diagonal datum d for (q,B), namely the pair of arrows specified below and e:B~q*(A_S(1)[2]) such that A_S(1) is lisse of rank one and both coordinate integrals are identity. More explicitly, use W=P times_S P, its diagonal Delta and projections p_i. The datum consists of t:Rq!B->A_S and delta:RDelta!A_P->p2*B. For the canonical compact-support exchanges beta_i:q*Rq!~Rp_i!p_(3-i)*, put t1=beta1^(-1) then q*t and the unit comparison, and t2=Rp2!(coordinate_e^(-1)) then beta2^(-1), q*t and the unit comparison. If alpha_i:A_P~Rp_i!RDelta!A_P are the identity/composition comparisons, alpha_i followed by Rp_i!(delta) and t_i is identity for both i. No statement about a unit, counit, arbitrary complexes, triangles or adjunction is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Both coordinate diagonal integrals and their two triangle computations, followed by the inverse-projection trace counit."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-derived-categories",
+  "lem-asd-finite-etale-twist-line",
+  "lem-sf-diagonal-kernel-integral-triangles"
+ ],
+ "proof": [
+  {
+   "text": "Stalkwise invertibility implies global invertibility by isUnit_of_isUnit_germ. Obtain t,d, the base-change equation and the two ordinary diagonal integrals from exists_arbitraryBaseFiniteP1Integrals.",
+   "uses": [
+    "lem-sp-tower-p1-arbitrary-base-integrals"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the coordinate isomorphism over S explicitly: graded polynomial renaming preserves the homogeneous pieces and irrelevant ideals, Proj.map supplies mutually inverse arrows, and pullback.map base-changes them to S. The index equivalence is ULift(Fin 2) ~ Option(ULift(Fin 1)). The projection equation follows from pullback.map_fst.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply sfP1IntegralTransport to the existing splitting and its supported Ext witness. It compares the compact composites with pullbacks of the ordinary composites, without evaluating them. Insert the ordinary integral equations for false and true; functoriality and the inverse identities of c give the two identity equations.",
+   "uses": [
+    "lem-sf-p1-integral-transport",
+    "lem-sp-tower-p1-arbitrary-base-integrals"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the inverse normalized shifted-line pullback for e. Apply the finite twist line theorem in degree one, and transport its slice trivializations through overSheafEquivFunctorObjOverIso and constantSheafSheafCongrIso to prove IsLisseRankOneSheaf. Combine this with the two equations.",
+   "uses": [
+    "lem-sp-tower-p1-arbitrary-base-integrals",
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-tower-p1-arbitrary-base-integrals",
+  "lem-sf-p1-integral-transport",
+  "lem-asd-finite-etale-twist-line"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "D6: ordinary integral computation retained; explicit coordinate rename and slice comparison; map-comparison step isolated as lem-sf-p1-integral-transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Projective line finite torsion etale coefficients diagonal class integrates to identity after proper base change and coordinate renaming",
+   "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; WeierstrassCurve.Projective.baseChange_dblY, baseChange_addY, baseChange_add, baseChange_neg, baseChange_addX, baseChange_dblXYZ, baseChange_addXYZ.",
+   "date": "2026-10-25",
+   "verdict": "no match: base change of etale morphisms and elliptic-curve coordinates do not give derived projective-line trace integrals."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction between derived pushforward on the projective line and Tate twisted pullback with trace counit",
+   "results": "SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullbackPushforwardAdjunction, Scheme.Modules.pullbackPushforwardAdjunction; no projective-line duality.",
+   "date": "2026-10-25",
+   "verdict": "no match: the inverse-image/direct-image adjunction has the other direction and no Tate shift or diagonal integral."
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*[Aa]djunction|[Tt]race.*[Dd]iagonal",
+   "results": "16 hits, on matrix diagonal traces, matrix group traces and general preservation of projective objects; none on etale diagonal kernels.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfAffineBaseP1TraceAdjunction",
+  "date": "2026-10-25",
+  "group": "U8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Inherited null ancestor; Both coordinate diagonal integrals and their two triangle computations, followed by the inverse-projection trace counit.",
+   "via": [
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfP1CoordinateIntegrals",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfP1CoordinateIntegrals.lean",
+  "declaration": "AlgebraicGeometry.Etale.sfP1CoordinateIntegrals",
+  "statement": "theorem sfP1CoordinateIntegrals\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    (S : Scheme.{u}) [IsAffine S]\n    (hInvertible : ∀ s : S, IsUnit (N : S.presheaf.stalk s)) :\n    ∃ d : TraceDiagonalDatum A\n        (ProjectiveSpace (Option (ULift.{u} (Fin 1))) S ↘ S)\n        (((_root_.DerivedCategory.singleFunctor _ 0).obj\n          (Scheme.finiteEtaleTateLine\n            (ProjectiveSpace (Option (ULift.{u} (Fin 1))) S) N A hA))⟦(2 : ℤ)⟧),\n      ∃ e : (((_root_.DerivedCategory.singleFunctor _ 0).obj\n          (Scheme.finiteEtaleTateLine\n            (ProjectiveSpace (Option (ULift.{u} (Fin 1))) S) N A hA))⟦(2 : ℤ)⟧) ≅\n        (CoordinateTrace.pull A\n          (ProjectiveSpace (Option (ULift.{u} (Fin 1))) S ↘ S)).obj\n            (CoordinateTrace.shiftedLine A (Scheme.finiteEtaleTateLine S N A hA) 1),\n        Scheme.IsLisseRankOneSheaf (Scheme.finiteEtaleTateLine S N A hA) ∧\n          SfDiagonalKernel.Integrals A d\n            (CoordinateTrace.shiftedLine A (Scheme.finiteEtaleTateLine S N A hA) 1) e",
+  "branch": "sheaf-dag",
+  "by": "U8",
+  "date": "2026-10-25"
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261025T203401-L-2811201",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T001235-L-4177555",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

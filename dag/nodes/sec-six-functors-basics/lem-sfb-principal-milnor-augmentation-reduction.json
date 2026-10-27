@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-principal-milnor-augmentation-reduction",
+ "kind": "statement",
+ "title": "Reduction of a specified principal quotient Milnor triangle morphism",
+ "statement": "Let J be an essentially small site, R a commutative ring, r a nonzerodivisor, I=(r), and K,Y objects of the unbounded derived category of sheaves of R-modules. Let F be the constant tower at K and G the principal derived quotient tower K tensor^L R/I^n, with canonical augmentation a:F->G [lem-sfb-source-reduced-koszul-successor-lifts]. Let PK and PG be limiting product fans [def-sfb-source-principal-reduction-product]. Suppose distinguished Milnor triangles at K and Y for these fans are given; the first arrow of the constant triangle is the diagonal identity lift. If u:K->Y and the product map m induced by a satisfy both triangle squares cK m = u cY and deltaK u[1] = m deltaY [lem-sfb-source-milnor-proisomorphism-invertibility], then reductionModIdeal(J,I)(u) is an isomorphism. No ordinary quotient presentation, torsion-free representative, derived-limit functor, coefficient equivalence, or normalization-existence assertion is assumed or concluded.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Principal case of lemma-derived-completion-koszul; proetale.tex Tag 099M, lemma-naive-completion"
+ },
+ "stmt_deps": [
+  "def-sfb-source-principal-reduction-product",
+  "lem-sfb-source-reduced-koszul-successor-lifts",
+  "lem-sfb-source-milnor-proisomorphism-invertibility"
+ ],
+ "proof": [
+  {
+   "text": "Tensor both limiting product fans with the first principal quotient. The source isLimit_fan_whiskerRight_quot proves these are limiting. Product extensionality, applied after each projection, identifies the images of both tower-shift endomorphisms with the new shifts and identifies the mapped product-tower map. The triangulated structure of tensoring therefore gives distinguished reduced Milnor triangles.",
+   "uses": [
+    "def-sfb-source-principal-reduction-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the backward successor lifts of exists_lift_whiskerRight_derivedCompletionCone with the given nonzerodivisor and principal ideal. They give both composite identities for the reduced augmentation. Apply isIso_of_proIso to the two reduced triangles. The first square is the image of cK m = u cY. For the last square, use naturality of the tensor functor commShiftIso to move the shift comparison past the shifted image of u, then map deltaK u[1] = m deltaY. This proves the image of this specific u invertible.",
+   "uses": [
+    "lem-sfb-source-reduced-koszul-successor-lifts",
+    "lem-sfb-source-milnor-proisomorphism-invertibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical module isomorphism R/I^1 -> R/I induced by pow_one gives, under constantSheaf and singleFunctor, an isomorphism of coefficient objects. Applying the right-tensor functor gives an isomorphism between tensoring by the first quotient and reductionModIdeal. Its naturality expresses reductionModIdeal(u) as a composite of the just-proved isomorphism and the two coefficient-comparison components.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-source-principal-reduction-product",
+  "lem-sfb-source-reduced-koszul-successor-lifts",
+  "lem-sfb-source-milnor-proisomorphism-invertibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Principal case of lemma-derived-completion-koszul; source Principal.lean successor-lift and Milnor pro-isomorphism argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism from the constant Milnor triangle to the tower of principal derived quotients is invertible after reduction modulo the regular generator",
+   "results": "Eight hits for mapping-cone and short-exact triangle morphisms, and derived localization of quasi-isomorphisms. No theorem for reduced principal Milnor morphisms.",
+   "date": "2026-10-27",
+   "verdict": "Combine the source principal product comparison, successor lifts and general Milnor pro-isomorphism theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from the constant Milnor triangle to the tower of principal derived quotients is invertible after reduction modulo the regular generator",
+   "results": "Eight hits for representation resolutions, local-cohomology radical invariance, and derived-category representatives. No reduced principal Milnor morphism theorem.",
+   "date": "2026-10-27",
+   "verdict": "The existing source tools prove this general combination; no direct Mathlib match was found."
+  },
+  {
+   "tool": "grep",
+   "query": "Milnor.*reduction|reduction.*Milnor",
+   "results": "No search-service hits. Local source Principal.lean contains the needed calculation inside rightOrthogonal_and_exists_smulInvertible_cone; the public isIso_of_proIso criterion and product/successor declarations are reused.",
+   "date": "2026-10-27",
+   "verdict": "Extract the argument for the specified map and both squares, without an orthogonality hypothesis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOrdinaryAugmentationReduction",
+  "date": "2026-10-27",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Proof step 2, functorial derived completion: first reduction of the specified Milnor augmentation",
+   "via": [
+    "lem-sfb-integral-ordinary-augmentation-reduction",
+    "lem-sfb-integral-strict-limit-augmentation-triangle"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.PrincipalMilnorAugmentationReduction",
+  "file": "lean/Sheaf/CategoryTheory/PrincipalMilnorAugmentationReduction.lean",
+  "declaration": "DerivedCategory.isIso_reductionModIdeal_of_principalMilnorMorphism",
+  "statement": "theorem isIso_reductionModIdeal_of_principalMilnorMorphism\n    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]\n    (J : GrothendieckTopology C) {R : Type (u + 1)} [CommRing R]\n    {I : Ideal R} {r : R} (hr : r ∈ nonZeroDivisors R) (hI : I = Ideal.span {r})\n    (K Y : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) (u : K ⟶ Y)\n    (PK : Fan fun _ : ℕ ↦ K) (hPK : IsLimit PK)\n    (PG : Fan fun n : ℕ ↦ (DerivedCategory.derivedCompletionDiagram J I K).obj (op n))\n    (hPG : IsLimit PG)\n    (δK : PK.pt ⟶ K⟦(1 : ℤ)⟧) (cY : Y ⟶ PG.pt) (δY : PG.pt ⟶ Y⟦(1 : ℤ)⟧)\n    (hTK : Triangle.mk (Fan.IsLimit.lift hPK (fun _ ↦ 𝟙 K))\n      (𝟙 PK.pt - towerShift (F := (Functor.const ℕᵒᵖ).obj K) hPK) δK ∈\n        distTriang (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))))\n    (hTY : Triangle.mk cY\n      (𝟙 PG.pt - towerShift (F := DerivedCategory.derivedCompletionDiagram J I K) hPG)\n      δY ∈ distTriang (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))))\n    (hu₁ : Fan.IsLimit.lift hPK (fun _ ↦ 𝟙 K) ≫ productTowerMap (PF := PK) hPG\n      (DerivedCategory.derivedCompletionCone J I K).π = u ≫ cY)\n    (hu₃ : δK ≫ u⟦(1 : ℤ)⟧' = productTowerMap (PF := PK) hPG\n      (DerivedCategory.derivedCompletionCone J I K).π ≫ δY) :\n    IsIso ((DerivedCategory.reductionModIdeal J I).map u)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261026T235945-L-1473581",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261026T235945-L-1473581",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

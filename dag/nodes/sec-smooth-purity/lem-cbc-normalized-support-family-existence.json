@@ -1,0 +1,231 @@
+{
+ "id": "lem-cbc-normalized-support-family-existence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-qbar",
+   "place": "Isomorphism and composition paragraphs, specialized to finite coefficient fields; original coefficient-coherence proof steps 1--4, 14, 16.",
+   "via": [
+    "lem-cbc-rational-compact-support-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Existence of the normalized compact-support coefficient family",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, and noetherian finite-dimensional schemes $X,Y$ with $\\ell$ invertible in every stalk. Let $f:X\\to Y$ be separated of finite type and $c=(j,p)$ a compactification. On the raw rational finite coefficient stages of [def-weil-pbc-rational-category, prop-weil-pbc-scalar-extension], there exists a normalized compact-support coefficient family [def-cbc-normalized-coefficient-families]. Concretely its exact coherent functors are the localizations of the actual integral $Rp_*j_!$ restricted to [def-weil-pbc-bounded-constructible-complete]; their localization and shift equations are the specified ones. Its inverse beta is the localization of the inverse open-unit mate followed by the inverse proper counit-tensor comparison, namely cbcScalarCompactSupportInverse; its repeated-field beta is the identity. This is the existence of one operation family, with no base-change or exchange clause.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+  "place": "Isomorphism and composition paragraphs, specialized to finite coefficient fields; original coefficient-coherence proof steps 1--4, 14, 16."
+ },
+ "stmt_deps": [
+  "def-cbc-normalized-coefficient-families",
+  "def-weil-pbc-rational-category",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-pbc-projection-compactification"
+ ],
+ "proof": [
+  {
+   "text": "Work first with integral ambient derived categories, writing $R_W=\\widehat{\\mathcal O}_{E,W}$, $S_W=\\widehat{\\mathcal O}_{L,W}$, $t=\\varpi_E$, $v=\\varpi_L$, and $C_W=(-)\\otimes^L_{R_W}S_W$. By [lem-weil-finite-free-completed-scalar-comparison], $S_W$ is finite free over $R_W$, $C_W$ preserves complete objects, and its specified quotient-tower comparison $\\chi$ is the natural isomorphism with the actual integral coefficient extension. Choose an $R_W$-module basis of $S_W$ only for checking isomorphisms at a fixed scheme: it identifies the underlying $R_W$-module functor $C_W$ with a finite biproduct of copies of the identity. Tensor with $S_W$ is therefore exact. All maps below are the canonical balanced maps, independent of this checking basis. The coefficient identifications for scheme inverse image, open restriction and quotient maps are those of [lem-weil-pbc-profinite-coefficient-inverse-image]; its naturality in the inverse system identifies the two coefficient maps in every square. Work at intermediate compactification schemes in ambient categories: no constructibility assertion for an intermediate factor is being assumed.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Isomorphism and composition paragraphs, specialized to finite coefficient fields; original coefficient-coherence proof steps 1--4, 14, 16."
+   }
+  },
+  {
+   "text": "For $k:U\\hookrightarrow W$ equal to $j$ or $j'$, construct $\\lambda_k:C_Wk_{!,R}\\longrightarrow k_{!,S}C_U$. On the direct-sum extension presheaf its formula is $(i_\\alpha x)\\otimes s\\mapsto i_\\alpha(x\\otimes s)$, where $i_\\alpha$ denotes a summand indexed by a map to the open. The inverse of the natural tensor isomorphism in [lem-weil-pbc-ringed-slice-extension-tensor], with $\\mathcal F=S_W$, is exactly this map after sheafification. It is $S_W$-linear: multiplying $s$ by $s'$ on either side gives $i_\\alpha(x\\otimes ss')$; balancing over $R_W$ gives the same formula. Thus it is an isomorphism of $S_W$-module sheaves, not merely of underlying $R_W$-modules. Extension by zero is exact by [lem-pur-site-restriction-module-adjunction-exact], and tensor with $S_W$ is exact by step 1. Applying the isomorphism degreewise computes both derived functors; [lem-sf-exact-functor-derived-triangulated] supplies the exact derived functors and their shift comparisons. This proves the required derived coefficient-change version without treating the underived tensor lemma itself as a derived or completed assertion.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Isomorphism and composition paragraphs, specialized to finite coefficient fields; original coefficient-coherence proof steps 1--4, 14, 16."
+   }
+  },
+  {
+   "text": "Check the coherence of $\\lambda$ on the same summands. For $E\\subset L\\subset N$ the successive-extension composite sends $((i_\\alpha x)\\otimes s)\\otimes z$ to $i_\\alpha(x\\otimes sz)$ after the balanced associators; the one-step comparison sends it to precisely that element. These maps respect restrictions and therefore descend to sheafification and complexes. For the repeated field, the tensor unit sends $(i_\\alpha x)\\otimes1$ to $i_\\alpha x$; after the literal identity normalization of [prop-weil-pbc-scalar-extension] this is the identity. The maps have degree zero and are degreewise, so commuting them with a cochain shift introduces no sign; their shift square is the one supplied in step 2. This establishes the open-factor unit, successive-field and shift equations, with the specified balanced associators.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Isomorphism and composition paragraphs, specialized to finite coefficient fields; original coefficient-coherence proof steps 1--4, 14, 16."
+   }
+  },
+  {
+   "text": "For every scheme map $q:Z\\to W$ used here, use the canonical compatible coefficient identifications from step 1 and apply [lem-sp-finite-free-direct-image-coherence] to $R_T=\\widehat{\\mathcal O}_{E,T}$ and $S_T=\\widehat{\\mathcal O}_{L,T}$. Step 1 supplies finite freeness; the lemma imposes no dimension or constructibility hypotheses on intermediate schemes. It gives the actual $S_W$-linear counit-tensor comparison $\\pi_q:C_WRq_{*,R}\\xrightarrow{\\sim}Rq_{*,S}C_Z$, its input-shift square, tensor-unit normalization and successive-coefficient equation. This is the proper direct-image coefficient comparison specified by [prop-weil-pbc-scalar-extension], because both are defined by that canonical scalar-extension/projection map. Use this construction for $p,p'$ in the ambient categories.",
+   "uses": [
+    "lem-sp-finite-free-direct-image-coherence",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Isomorphism and composition paragraphs, specialized to finite coefficient fields; original coefficient-coherence proof steps 1--4, 14, 16."
+   }
+  },
+  {
+   "text": "Define $b^h=Rp_{h,*,S}(\\lambda_{j_h})\\,\\pi_{p_h,j_{h,!}(-)}$. The compactification definition [def-weil-pbc-projection-compactification] says $H_h=Rp_{h,*}j_{h,!}$. Steps 2 and 4 give an exact natural isomorphism. Its endpoints lie in the required integral categories by [lem-cbc-integral-compact-support-uniform-restriction] for $H_h$ and [prop-weil-pbc-scalar-extension] for scalar extension. No separate constructibility claim for the intermediate factors is needed. Compose their unit and shift squares to obtain those for $b^h$. For a tower of fields substitute the successive-field equations for $\\lambda$ and $\\pi$ into $Rp_*(\\lambda)\\pi$. Naturality of $\\pi$ moves the inner $\\lambda$ past $\\pi$; the adjacent inverse associators cancel. The surviving factors are $H_{h,N}(a^{\\mathrm{source}(h)})$, $b^h_{N/L,C_{L/E}K}$, $C_{N/L}(b^h_{L/E,K})$, $(a^{\\mathrm{target}(h)})^{-1}$, in this order. These give exactly the stated $b^h$ equation.",
+   "uses": [
+    "def-weil-pbc-projection-compactification",
+    "lem-cbc-integral-compact-support-uniform-restriction",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Isomorphism and composition paragraphs, specialized to finite coefficient fields; original coefficient-coherence proof steps 1--4, 14, 16."
+   }
+  },
+  {
+   "text": "Finally localize the integral functors and comparisons. By [def-weil-pbc-rational-category] there are no new objects: a rational arrow is a finite sum of $u\\otimes a$, with integral $u$ and $a\\in E$. By [prop-weil-pbc-rational-transport], the exact $\\mathcal O_E$-linear $H,P$ and all their integral natural transformations extend, with component $\\eta_K\\otimes1$. For the scalar functor the extension on such an arrow is $C(u)\\otimes\\iota_{L/E}(a)$; this is well defined by balancing, since $C(ru)=\\iota(r)C(u)$ and every nonzero $r\\in\\mathcal O_E$ becomes invertible in $L$. Thus an integral naturality square multiplied by $\\iota(a)$ is the required rational naturality square for $u\\otimes a$, and additivity handles a general arrow. Apply localization to the equations of steps 3, 4, 14 and 15: it preserves compositions, identities, inverses and shifts. The scalar associators and shifts are those of [prop-weil-pbc-scalar-extension], whose integral comparisons were used above. Consequently the rational $b^h$ have the displayed unit, shift and successive-extension laws, their composite comparisons are the stated $b^U,b^V$, and step 15 becomes $\\eta_{L,TK}b^U=b^V T(\\eta_{E,K})$ for the rationalization of precisely the specified strict-normalized exchange. All hypotheses used were the stated integral-operation domains, finite coefficient extensions and the compactification geometry; no base-field or smoothness assumption was introduced.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "prop-weil-pbc-rational-transport",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Isomorphism and composition paragraphs, specialized to finite coefficient fields; original coefficient-coherence proof steps 1--4, 14, 16."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projection-compactification",
+  "def-weil-pbc-rational-category",
+  "lem-cbc-integral-compact-support-uniform-restriction",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sp-finite-free-direct-image-coherence",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "prop-weil-pbc-rational-transport",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+  "place": "Isomorphism and composition paragraphs, specialized to finite coefficient fields; original coefficient-coherence proof steps 1--4, 14, 16. Precise normalization and localization argument supplied by P5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact compact support and completed pullback form normalized coherent coefficient families; scalar extension intertwines their completed base change exchange",
+   "results": "TestFunction.coe_mk and ordinary PresheafOfModules.pullback; none states normalized completed coefficient families or exchange compatibility.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized exact coefficient families for compact support and completed pullback and the compatibility square of localized exchange transformations",
+   "results": "Profinite.NobelingProof.succ_exact, IsLocalizedModule.map_exact, Scheme.Hom.preservesLocalization_normalizationDiagramMap; none has the required categories or specified transformations.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.?support.*scalar|scalar.*compact.?support|completedPull|coefficientFamily in Mathlib/CategoryTheory; normalized coefficient families in lean/Sheaf, lean/WeilConjectures and dag/nodes; blueprint_refs.py searches for coefficient compact support and completed pullback family",
+   "results": "No Mathlib theorem matches. Existing PbcPullbackCoherentFamily supplies a reflector pullback family but not the strict datum completionUnit/localization/shift interface. Existing finiteExtension_compactSupportBaseChange uses the unlifted coefficient datum, not the normalized small-stage families. Generic localization and natural-transformation tools are used in the single-stage proof. No duplicate of these four precise parts was found.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalCompactSupportCoefficientCoherence",
+  "date": "2026-10-25",
+  "group": "P5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CbcCompactSupportCoefficientFamilyExistence",
+  "file": "lean/Sheaf/Paper/CbcCompactSupportCoefficientFamilyExistence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cbcCompactSupportCoefficientFamily_exists",
+  "statement": "theorem cbcCompactSupportCoefficientFamily_exists {f : X ⟶ Y}\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) :\n    Nonempty (CbcCompactSupportCoefficientFamily l Ω c)",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-cbc-normalized-support-family-existence",
+  "worker": "P5",
+  "summary": "One strict part of the original coefficient-coherence argument. Its source and full proof are also in the theorem docstring.",
+  "blueprint": "Preserves the original open/proper mate and strict completion normalization route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic Finite free completed coefficient extension is ordinary derived scalar extension is used only through its stated ambient ringed-site, coefficient, derived-category or localization interface; the compact-support unit supplies no replacement for this tool. The unit route through j_!, proper direct image and the specified exchange is retained."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Generic Compatible inverse image of profinite coefficient sheaves is used only through its stated ambient ringed-site, coefficient, derived-category or localization interface; the compact-support unit supplies no replacement for this tool. The unit route through j_!, proper direct image and the specified exchange is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Generic Tensor projection formula for extension by zero on a ringed-site slice is used only through its stated ambient ringed-site, coefficient, derived-category or localization interface; the compact-support unit supplies no replacement for this tool. The unit route through j_!, proper direct image and the specified exchange is retained."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic Restriction and extension by zero for modules on a localized site is used only through its stated ambient ringed-site, coefficient, derived-category or localization interface; the compact-support unit supplies no replacement for this tool. The unit route through j_!, proper direct image and the specified exchange is retained."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic An exact functor of abelian categories induces a triangulated functor on derived categories is used only through its stated ambient ringed-site, coefficient, derived-category or localization interface; the compact-support unit supplies no replacement for this tool. The unit route through j_!, proper direct image and the specified exchange is retained."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Generic Compatibility with finite scalar extension is used only through its stated ambient ringed-site, coefficient, derived-category or localization interface; the compact-support unit supplies no replacement for this tool. The unit route through j_!, proper direct image and the specified exchange is retained."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic Functorial transport to a finite field is used only through its stated ambient ringed-site, coefficient, derived-category or localization interface; the compact-support unit supplies no replacement for this tool. The unit route through j_!, proper direct image and the specified exchange is retained."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b299e",
+  "group": "P5",
+  "result": "fix",
+  "landing": "20261025T164027-L-938248",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b299e",
+  "group": "P5",
+  "result": "fix",
+  "landing": "20261025T164027-L-938248",
+  "kind": "interface",
+  "note": "independent cc review: item rationalCompactSupportCoefficientCoherence (statement byte-identical) and its 4 new split statements against def-cbc-normalized-coefficient-families (β/functors pinned), the parent 16-step plan and the unit sk-thm-sf-compatibility (realized empty); axioms of the stage theorem and of localization_full in scratch compiles"
+ }
+}

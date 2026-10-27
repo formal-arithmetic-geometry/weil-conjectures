@@ -1,0 +1,320 @@
+{
+ "id": "lem-sfb-discrete-condensed-action-equivalence",
+ "kind": "statement",
+ "title": "Ordinary discrete actions and internal condensed actions",
+ "statement": "Fix the small coherent site of profinite sets, whose covers are finite jointly surjective families, and compatible coefficient universes [def-weil-size-convention]. Let $R$ be a commutative condensed ring [sk-def-sfb-condensed-ring], let $\\mathcal M_R$ be its internal module category [sk-def-sfb-module-objects], and use the section modules of [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Let $G$ be any group with underlying set in the coefficient universe, equipped with the discrete topology, and let $BG$ be the category with one object and automorphism group $G$. Write $\\mathcal A_R(G)$ for the category of internal modules with natural linear $C(S,G)$-actions [def-sfb-condensed-action-module]. There is an additive equivalence\n$$\\Phi_G:\\operatorname{Fun}(BG,\\mathcal M_R)\\simeq\\mathcal A_R(G)$$\nwhich leaves every underlying internal module and every morphism unchanged. For an ordinary action $\\rho:G\\to\\operatorname{Aut}_{\\mathcal M_R}(M)$, a profinite set $S$, a continuous $g:S\\to G$, and $m\\in M(S)$, its action is characterized by\n$$(g\\cdot m)|_{S_a}=\\rho(a)_{S_a}(m|_{S_a}),\\qquad S_a=g^{-1}(a),\\quad a\\in g(S).$$\nHere $g(S)$ is finite, each $S_a$ is clopen, and these inclusions form a finite covering family. The inverse equivalence takes the action of $a\\in G$ to that of the constant map $S\\to G$ with value $a$ on every $S$. In particular the equivalence preserves the specified underlying-module functors and trivial-action functors. This includes the trivial group, the empty test profinite set, the zero ring and the zero module.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; algebraic discrete-lattice input below tame-boundary invariants: comparison of ordinary discrete actions and sectionwise condensed actions. Agent-formulated comparison; exact external reference WANTED. Mathlib/Condensed/Discrete/LocallyConstant.lean, proof sketch and fiber-partition gluing, supplies related background but does not assert this action equivalence."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-condensed-action-module"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-internal-abelian-sheaf-module-equivalence], work with the sectionwise module sheaf of each internal module, without changing sections or morphisms. Its underlying abelian sheaf satisfies [lem-sfb-profinite-coherent-sheaf-criterion]. Consequently, for every finite disjoint clopen partition $S=\\coprod_i S_i$, restriction gives a bijection $M(S)\\to\\prod_i M(S_i)$ of abelian groups. It is $R(S)$-linear, where $R(S)$ acts through restriction on each factor: this follows by restricting $rm$ to every $S_i$. Its inverse is therefore linear too. In particular sections are equal if their restrictions to all partition members are equal, every tuple has a unique glued section, and $M(\\varnothing)=0$ (the empty product). These facts apply to every module below.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-sfb-profinite-coherent-sheaf-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written algebraic input; finite disjoint-partition gluing; compare Mathlib/Condensed/Discrete/LocallyConstant.lean, proof sketch, and Sites/Coherent/SheafComparison.lean:236-243"
+   }
+  },
+  {
+   "text": "For $g:S\\to G$ continuous with $G$ discrete, each fiber $S_a=g^{-1}(a)$ is open, and closed because its complement is the inverse image of the open subset $G\\setminus\\{a\\}$. The fibers cover $S$; compactness gives finitely many fibers covering $S$, so every nonempty fiber is one of these and $g(S)$ is finite. Each clopen fiber is profinite: Hausdorffness and total disconnectedness are inherited by subspaces, and an open cover of a closed subset extends to one of $S$ by adjoining its complement, proving compactness. The inclusions are jointly surjective and hence a finite cover by [sk-def-sfb-condensed-ring]. The same applies to common refinements $S_a\\cap S_b'$ and to inverse images of fibers along arbitrary maps of profinite sets. Empty parts may be retained, since their section modules are zero by step 1.",
+   "uses": [
+    "sk-def-sfb-condensed-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written algebraic input; compactness and the finite clopen fiber partition"
+   }
+  },
+  {
+   "text": "Let $\\rho:G\\to\\operatorname{Aut}(M)$ be the ordinary action. For $g\\in C(S,G)$ define $A_S(g)m$ to be the unique section whose restriction to every $S_a$, $a\\in g(S)$, is $\\rho(a)_{S_a}(m|_{S_a})$, using step 1. This proves existence and the stated characterization, including uniqueness of an extension with that formula. Every $\\rho(a)$ is an internal linear morphism, so these local formulas preserve sums and multiplication by $r|_{S_a}$ for $r\\in R(S)$. Restriction is injective, hence $A_S(g)$ is an $R(S)$-linear endomorphism.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-sfb-profinite-coherent-sheaf-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written algebraic input; construction and linearity of the action by the fiber formula"
+   }
+  },
+  {
+   "text": "The constant function with value $1$ acts identically, since its local formula is $\\rho(1)=1$. For $g,h\\in C(S,G)$ use the finite disjoint refinement $S_{a,b}=g^{-1}(a)\\cap h^{-1}(b)$. Naturality of each internal map $\\rho(a)$ shows that on this part $A_S(g)A_S(h)m$ restricts to $\\rho(a)_{S_{a,b}}\\rho(b)_{S_{a,b}}(m|_{S_{a,b}})=\\rho(ab)_{S_{a,b}}(m|_{S_{a,b}})$. The fiber formula for $gh$, restricted further to this part, gives exactly the same expression. By step 1, $A_S(gh)=A_S(g)A_S(h)$. Thus $A_S$ is a group action; $A_S(g^{-1})$ is its inverse.",
+   "uses": [
+    "lem-sfb-profinite-coherent-sheaf-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written algebraic input; identity and multiplication checked on the common fiber partition"
+   }
+  },
+  {
+   "text": "For a continuous map $u:T\\to S$, partition $T$ by $T_a=u^{-1}(S_a)$. On $T_a$, naturality of $\\rho(a)$ gives $u^*(A_S(g)m)|_{T_a}=\\rho(a)_{T_a}((u^*m)|_{T_a})$. This is also the restriction of $A_T(g\\circ u)(u^*m)$ by its defining formula. Equality on the partition gives $u^*A_S(g)m=A_T(g\\circ u)u^*m$. Consequently the $A_S$ satisfy exactly the natural sectionwise linear action definition [def-sfb-condensed-action-module], and determine an object of $\\mathcal A_R(G)$. No continuity condition on a topology of $M(S)$ is being imposed.",
+   "uses": [
+    "lem-sfb-profinite-coherent-sheaf-criterion",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written algebraic input; naturality under every profinite test morphism"
+   }
+  },
+  {
+   "text": "If $f:M\\to N$ is equivariant for the ordinary actions, restrict $f_S A_S(g)m$ and $A'_S(g)f_Sm$ to $S_a$. Naturality of $f$ and $f\\rho(a)=\\rho'(a)f$ make both restrictions $\\rho'(a)_{S_a} f_{S_a}(m|_{S_a})$. By step 1 they agree. Therefore retain $f$ itself as the morphism of the extended actions. Identities and composition are retained, defining $\\Phi_G$. Since addition and zero of equivariant maps are the underlying ones in [def-sfb-condensed-action-module], and likewise pointwise in $\\operatorname{Fun}(BG,\\mathcal M_R)$, this functor is additive.",
+   "uses": [
+    "lem-sfb-profinite-coherent-sheaf-criterion",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written algebraic input; extension of equivariant morphisms and additivity"
+   }
+  },
+  {
+   "text": "Conversely, for an object with action $A$ as in [def-sfb-condensed-action-module], set $\\rho(a)_S=A_S(\\operatorname{const}_S a)$. Naturality of $A$ makes this a natural sectionwise linear morphism. The equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence], whose forward functor is the identity on underlying sheaves and section maps, yields the corresponding internal linear map. The group law gives $\\rho(1)=1$, $\\rho(ab)=\\rho(a)\\rho(b)$ and inverse $\\rho(a^{-1})$, hence a functor from $BG$. An equivariant internal-action morphism commutes with constant actions, so retaining its underlying map defines the inverse functor $\\Psi_G$, which is additive by the same underlying-map calculation.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written algebraic input; restriction to constant functions and reconstruction of the ordinary action"
+   }
+  },
+  {
+   "text": "Starting with $\\rho$, the extension evaluated at a constant $a$ is $\\rho(a)_S$ on every nonempty $S$; on the empty test both are the unique endomorphism of zero. Hence $\\Psi_G\\Phi_G$ is the original ordinary action. Starting with $A$, naturality along $S_a\\hookrightarrow S$ gives $(A_S(g)m)|_{S_a}=A_{S_a}(\\operatorname{const}_{S_a}a)(m|_{S_a})$. These are exactly the local formulas of the reconstructed extension, so uniqueness in step 1 gives $\\Phi_G\\Psi_G=A$. Both composites fix morphisms; the identity underlying module maps give unit and counit and their triangle identities. This proves the additive equivalence over the specified underlying-module functors.",
+   "uses": [
+    "lem-sfb-profinite-coherent-sheaf-criterion",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written algebraic input; both inverse identities and equivalence coherence"
+   }
+  },
+  {
+   "text": "If the ordinary action is trivial, every local formula is $m|_{S_a}$, so gluing returns $m$ and the extended action is trivial. Restricting the trivial internal action to constants is also trivial; thus both specified trivial-action functors are preserved. For $G=1$ all functions are the constant identity. For the empty test set the partition is empty and the module of sections is zero by step 1. For the zero module all formulas are unique; for the zero coefficient ring every unital section module is zero because $m=1m=0m=0$. Thus none of the constructions excludes the edge cases stated in the item.",
+   "uses": [
+    "lem-sfb-profinite-coherent-sheaf-criterion",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written algebraic input; trivial actions, trivial group, empty test, zero module and zero ring"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-profinite-coherent-sheaf-criterion",
+  "sk-def-sfb-condensed-ring",
+  "def-sfb-condensed-action-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), algebraic input below open finiteness; original finite-fiber gluing argument, guided by Mathlib/Condensed/Discrete/LocallyConstant.lean:26-49. The blueprint does not itself state this comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Actions of a discrete group on a sheaf are equivalent to internal actions of its locally constant group sheaf via gluing on clopen fibers",
+   "results": "Available; 8 hits: CompHausLike.LocallyConstant.functorToPresheavesIso, CompHausLike.LocallyConstant.functorIso, LightCondMod.LocallyConstant.functorIsoDiscrete, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, CondensedMod.LocallyConstant.functorIsoDiscrete, CondensedMod.LocallyConstant.functorIsoDiscreteAux₂, CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstant.functor",
+   "date": "2026-10-23",
+   "verdict": "no match: locally constant condensed objects and ordinary Action.ρAut are present, but none identifies ordinary actions on arbitrary internal ring modules with natural C(S,G)-actions"
+  },
+  {
+   "tool": "grep",
+   "query": "(discrete|Discrete|locallyConstant).*(Action|action|equiv)|(Action|action).*(discrete|Discrete)",
+   "results": "Available; 2 hits: Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: locally constant condensed objects and ordinary Action.ρAut are present, but none identifies ordinary actions on arbitrary internal ring modules with natural C(S,G)-actions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An action of a discrete group by sheaf automorphisms is equivalent to an internal action of its associated condensed group",
+   "results": "Available; 8 hits: Action.ρAut, CondensedMod.isDiscrete_tfae, CondensedSet.isDiscrete_tfae, Action.ρAut_apply_hom, Condensed.IsDiscrete, CondensedSet.LocallyConstant.iso, ContAction.IsDiscrete, Condensed.discrete_map",
+   "date": "2026-10-23",
+   "verdict": "no match: locally constant condensed objects and ordinary Action.ρAut are present, but none identifies ordinary actions on arbitrary internal ring modules with natural C(S,G)-actions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Action\", \"Condensed\"",
+   "results": "Available; 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: locally constant condensed objects and ordinary Action.ρAut are present, but none identifies ordinary actions on arbitrary internal ring modules with natural C(S,G)-actions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extending group automorphisms of a condensed module to locally constant group valued functions defines an equivalence with internal group actions",
+   "results": "Available; 8 hits: LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, CondensedMod.LocallyConstant.functorIsoDiscreteAux₂, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, CondensedMod.LocallyConstant.functorIsoDiscreteComponents, LightCondMod.LocallyConstant.functorIsoDiscreteComponents, CondensedMod.LocallyConstant.functorIsoDiscrete, LightCondMod.LocallyConstant.functorIsoDiscrete",
+   "date": "2026-10-23",
+   "verdict": "no match: locally constant condensed objects and ordinary Action.ρAut are present, but none identifies ordinary actions on arbitrary internal ring modules with natural C(S,G)-actions"
+  },
+  {
+   "tool": "grep",
+   "query": "(discrete|Discrete|locallyConstant).*(Action|action|equiv)|(Action|action).*(discrete|Discrete)",
+   "results": "Available; 25 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/Topology/DiscreteQuotient.lean, Mathlib/Topology/LocallyConstant/Algebra.lean, Mathlib/Topology/LocallyConstant/Algebra.lean, Mathlib/Topology/LocallyConstant/Algebra.lean, Mathlib/Topology/LocallyConstant/Algebra.lean, Mathlib/Topology/LocallyConstant/Algebra.lean, Mathlib/Topology/MetricSpace/PiNat.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the action equivalence; finite-range results support the elementary compactness step"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An action of a discrete group by sheaf automorphisms is equivalent to an internal action of its associated condensed group",
+   "results": "Available; 8 hits: Action.ρAut, CondensedMod.isDiscrete_tfae, CondensedSet.isDiscrete_tfae, Action.ρAut_apply_hom, Condensed.IsDiscrete, CondensedSet.LocallyConstant.iso, ContAction.IsDiscrete, Condensed.discrete_map",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the action equivalence; finite-range results support the elementary compactness step"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Action\", \"Condensed\"",
+   "results": "Available; 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the action equivalence; finite-range results support the elementary compactness step"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Actions of a discrete group on a sheaf are equivalent to internal actions of its locally constant group sheaf via gluing on clopen fibers",
+   "results": "Available; 8 hits: CompHausLike.LocallyConstant.functorToPresheavesIso, CompHausLike.LocallyConstant.functorIso, LightCondMod.LocallyConstant.functorIsoDiscrete, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, CondensedMod.LocallyConstant.functorIsoDiscrete, CondensedMod.LocallyConstant.functorIsoDiscreteAux₂, CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstant.functor",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the action equivalence; finite-range results support the elementary compactness step"
+  },
+  {
+   "tool": "grep",
+   "query": "Action|action",
+   "results": "Available; 1 hits: Mathlib/Condensed/Light/Sequence.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the action equivalence; finite-range results support the elementary compactness step"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extending group automorphisms of a condensed module to locally constant group valued functions defines an equivalence with internal group actions",
+   "results": "Available; 8 hits: LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, CondensedMod.LocallyConstant.functorIsoDiscreteAux₂, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, CondensedMod.LocallyConstant.functorIsoDiscreteComponents, LightCondMod.LocallyConstant.functorIsoDiscreteComponents, CondensedMod.LocallyConstant.functorIsoDiscrete, LightCondMod.LocallyConstant.functorIsoDiscrete",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the action equivalence; finite-range results support the elementary compactness step"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_range|finite_image",
+   "results": "Available; 25 hits: Mathlib/Topology/Bornology/Absorbs.lean, Mathlib/Topology/Basic.lean, Mathlib/Topology/Bornology/Basic.lean, Mathlib/Topology/MetricSpace/Pseudo/Basic.lean, Mathlib/Topology/Sets/VietorisTopology.lean, Mathlib/Topology/Sets/VietorisTopology.lean, Mathlib/Topology/NhdsWithin.lean, Mathlib/Topology/Closure.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the action equivalence; finite-range results support the elementary compactness step"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous function from a compact space to a discrete space has finite range",
+   "results": "Available; 8 hits: IsLocallyConstant.range_finite, continuous_top, finite_of_compact_of_discrete, continuous_discrete_rng, DiscreteQuotient.instFiniteQuotientOfCompactSpace, LocallyConstant.range_finite, continuous_of_discreteTopology, IsLocallyConstant.iff_continuous",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the action equivalence; finite-range results support the elementary compactness step"
+  },
+  {
+   "tool": "loogle",
+   "query": "Continuous, Set.finite_range",
+   "results": "Available; 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the action equivalence; finite-range results support the elementary compactness step"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The range of a continuous map from a compact topological space to a discrete space is finite",
+   "results": "Available; 8 hits: LocallyConstant.range_finite, IsLocallyConstant.range_finite, TopologicalSpace.Fiber.instFiniteFiberCoeLocallyConstant, finite_of_compact_of_discrete, DiscreteQuotient.instFiniteQuotientOfCompactSpace, IsCompact.finite, IsCompact.finite_of_discrete, exists_nat_bool_continuous_surjective_of_compact",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the action equivalence; finite-range results support the elementary compactness step"
+  },
+  {
+   "tool": "grep",
+   "query": "range_finite|iff_continuous",
+   "results": "Available; 5 hits: 98, 154, 284, 323, 324",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the action equivalence; finite-range results support the elementary compactness step"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocallyConstant.range_finite",
+   "results": "Available; 1 hits: IsLocallyConstant.range_finite",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the action equivalence; finite-range results support the elementary compactness step"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lattice-cubical-sheaf-resolution",
+  "date": "2026-10-23",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; algebraic discrete-lattice input below tame-boundary invariants: comparison of ordinary discrete actions and sectionwise condensed actions.",
+   "via": [
+    "lem-sfb-lattice-cubical-sheaf-resolution",
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-discrete-condensed-action-equivalence",
+  "worker": "stage1",
+  "summary": "Q56: no project attachment found; proved the comparison directly by finite clopen partitions, reusing the existing Mathlib coherent-sheaf criterion. No new nodes. Checked naturality, multiplication on common refinements, morphisms, both inverses, additivity and all stated degenerate cases. Statement unchanged.",
+  "blueprint": "latest blueprint direct-images proof, paragraph (3), quasi-compact open direct image; realizes the discrete-action categorical input along the existing tame-boundary/lattice dependency chain. No change of route; blueprint search found no equivalent imported node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-3f6cb1c17",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-3f6cb1c17 (reviewer sub-agent of L); spot-checked: I read the item in full: the unchanged statement and all 9 steps. I also read every cited statement (size convention, condensed ring/coherent site, module objects, the internal-sectionwise module equivalence, def-sfb-condensed-action-module) and the Mathlib leaf lem-sfb-profinite-coherent-sheaf-criterion (finite disjoint coproducts to products, including the empty one). Shape is clean: one commit with the item and the report (it has Review by Q56) and no new nodes. Only the split fields differ from live. Live and side-live still hold the item unsplit, and there is no repair note. proof_deps equals the union of the step uses. No SGA. The only statement cited is the Mathlib leaf, so there is no route issue and no tool_uses are needed. Source: main-20261015 direct-images proof paragraph (3) is only the open direct-image step. The node is correctly marked agent-written with a WANTED reference. The step sources use the latest/ path, which is byte-identical to main-20261015. I also read the fibre-gluing sketch at Mathlib Condensed/Discrete/LocallyConstant.lean:20-49. Step checks: (1) a clopen partition is a coproduct, so M(S) is the product of the M(S_i), the map is R(S)-linear, and M(empty)=0. (2) The fibres of g:S->G are clopen and finitely many by compactness, and G=Z on the Cantor set works. (3) The glued action is R(S)-linear. (4) On S_{a,b}, rho(a)rho(b)=rho(ab) by naturality along the S_{a,b} inclusions, in the correct left-action order. (5) Naturality holds via T_a=u^{-1}(S_a). (6)-(7) Equivariant maps carry over, and rho(a)=A(const a) is an internal automorphism through the module equivalence. (8) Both composites are the identity; the empty S case is handled. This is an isomorphism over M_R. (9) Trivial actions are preserved, and the cases G=1, empty S, zero module and zero ring all hold. Duplicates: lem-sfb-lattice-sectionwise-action-bridge (unsplit) contains the Z^r case as one clause of a larger bridge. It is not a duplicate and can cite this item later (advisory). Note for the maintainer: Q09 delivered a parallel split of the same item (b6c0a817), which its reviewer passed. Neither has landed; whichever lands first supersedes the other. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DiscreteCondensedActionEquivalence",
+  "declaration": "Profinite.CondensedAction.Universe.exists_discreteActionEquivalence",
+  "declarations": [
+   "Profinite.CondensedAction.Universe.exists_discreteActionEquivalence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DiscreteCondensedActionEquivalence.lean",
+  "statement": "theorem exists_discreteActionEquivalence (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X] (G : Type (u + 1)) [Group G] [TopologicalSpace G] [DiscreteTopology G] : ∃ (E : (SingleObj G ⥤ Modules R) ≌ ActionModule R G) (hforward : E.functor ⋙ forgetAction = (evaluation (SingleObj G) (Modules R)).obj (SingleObj.star G)) (hinverse : E.inverse ⋙ (evaluation (SingleObj G) (Modules R)).obj (SingleObj.star G) = forgetAction), E.functor.Additive ∧ E.inverse.Additive ∧ Functor.const (SingleObj G) ⋙ E.functor = trivial ∧ trivial ⋙ E.inverse = Functor.const (SingleObj G) ∧ (∀ (S : Profinite.{u}) (g : C(S, G)), (Set.range g).Finite ∧ ∀ a : G, IsClopen (g ⁻¹' {a})) ∧ (∀ (F : SingleObj G ⥤ Modules R) (S T : Profinite.{u}) (f : T ⟶ S) (g : C(S, G)) (a : G), a ∈ Set.range g → (∀ t : T, g (f t) = a) → ∀ m : sectionModule R (E.functor.obj F).module S, ((eqToHom (Functor.congr_obj hforward F)).hom.hom.app (op T)).hom (((E.functor.obj F).module.X.obj.map f.op).hom ((E.functor.obj F).act S g m)) = ((F.map a).hom.hom.app (op T)).hom (((F.obj (SingleObj.star G)).X.obj.map f.op).hom (((eqToHom (Functor.congr_obj hforward F)).hom.hom.app (op S)).hom m))) ∧ (∀ (M : ActionModule R G) (S : Profinite.{u}) (a : G) (m : sectionModule R ((E.inverse.obj M).obj (SingleObj.star G)) S), ((eqToHom (Functor.congr_obj hinverse M)).hom.hom.app (op S)).hom ((((E.inverse.obj M).map a).hom.hom.app (op S)).hom m) = M.act S (ContinuousMap.const S a) (((eqToHom (Functor.congr_obj hinverse M)).hom.hom.app (op S)).hom m))",
+  "branch": "sheaf-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-569a02bf4",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Read item, 5 stmt_deps, both delivered modules, the report (it has Worker report and Second reading by Q50) and the live ND CondensedActionModule. Clause match: arbitrary commutative condensed ring; discrete G : Type (u+1) with no finiteness; SingleObj G ⥤ Modules R ≌ Universe.ActionModule R G with both directions additive; strict functor equalities hforward/hinverse fix underlying modules and maps; fibre formula over every f with g∘f ≡ a pins the action (finite clopen fibres); inverse = constant-map action; trivial functors preserved both ways; trivial group, empty S, zero ring and zero module not excluded. lean.statement verbatim. §1(B) dependency module UniverseCondensedActionModule is a verbatim universe generalization of ND's module (P : Type v, Q/H : Type w, namespace .Universe), reusing Modules and sectionModule by public import, with no name clash in live. Maintainer note: the def-sfb-condensed-action-module record now lists only the Universe.* declarations; the old Type-u declarations are still used by 29 live importers and should be consolidated later (Q140 precedent). Advisory: the 'finite covering family' clause is implicit; one unused proof-only import. No fixes; no compile run because nothing was changed."
+ }
+}

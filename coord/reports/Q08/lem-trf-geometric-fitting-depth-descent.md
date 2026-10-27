@@ -1,0 +1,49 @@
+## Worker report
+
+Files written: `dag/nodes/sec-trace-formula/lem-trf-geometric-fitting-depth-descent.json`, the unchanged statement with a complete nine-step proof, and `citations.json`, with a verbatim statement quotation for every node used by every step. No new nodes and no Mathlib leaves are delivered. `searches.jsonl` preserves the five actual searches made in this session; the item's inherited searches are retained as well.
+
+Attachments: none. The project-source search for the exact blueprint tag and Fitting/depth notions under `lean/WeilConjectures/` found no exact project declaration. The two Fitting grep hits in Mathlib are the endomorphism Fitting decomposition in `RingTheory/Artinian/Module.lean:314,323`, unrelated to presentation-minor Fitting ideals. LeanFinder in two phrasings found smooth/unramified local criteria, not the conjunction of first-Fitting descent, separability and depth. Loogle returned no hits; LeanSearch returned general flatness results. I read the returned result statements and the Artinian and Unramified/LocalRing sources. No result states the item or gives a one-line specialization.
+
+WANTED: none.
+
+The item had no proof. Its statement is preserved verbatim, including all hypotheses, the arbitrary given geometric prime, the finite separability conclusion and the completion-depth clause. Stacks 0C4D is phrased for a one-dimensional scheme, but the arbitrary-field descent argument used here requires only the hypotheses actually stated in this item: the stronger hypothesis that the geometric first-Fitting quotient is a field supplies the descent input. No curve-dimension hypothesis has been smuggled into this algebraic argument.
+
+The proof passes to T = S/J. It does not assume the entire geometric singular scheme is reduced merely because one stalk is a field; it applies the existing local field-stalk descent theorem at the specified prime. The finite separable evaluation theorem is applied only after separability has been proved. The explicit quotient and tensor calculations prevent confusion between a residue field and a geometric fibre ring.
+
+Nothing remains unfinished in this one-level split. The separable evaluation theorem is an existing unsplit dependency, which this delivery cites without splitting or modifying it.
+
+## Blueprint and existing-node searches
+
+I read the chapter `sec-trace-formula` and unit `sk-i-curve-zero`, and the current main-20261015 ancestor text. `blueprint_refs.py ancestor lem-trf-geometric-fitting-depth-descent` returns `lem-trf-local-term-locality`. Searches of the whole imported blueprint for `Fitting depth`, `geometric Fitting`, and `geometric field stalk` returned no matching blueprint nodes. Searches of the whole DAG for the source tags 0C4D, 00RV, 00RT and the geometric-field, flat-depth and completion notions located the existing lemmas used here. The item already has a precise ancestor place describing its nodal-geometry chain; I preserved that field and supplied the split_report blueprint explanation.
+
+The proof follows Curves 0C4D's first-Fitting singular-scheme descent and depth argument, the already assigned route below the nodal-geometry descendants of the local-term ancestor. Generic algebra tools from `sk-thm-p1` are listed in split_report.tool_uses with their mathematical purpose; no maintainer-owned top-level tool_uses field is set. In particular, the flat local depth theorem is the exact Algebra 0337 tool explicitly cited by 0C4D, and completion Noetherianity provides its necessary target hypothesis. No route through SGA is used.
+
+## Not duplicates
+
+No new nodes: every non-elementary input already has a node. In particular, I reuse `lem-trf-geometric-field-stalk-descent` for the quotient rather than create another separability-descent lemma, and `lem-trf-separable-evaluation-local-base-change` for the geometric local map rather than create another flatness-and-fibre lemma.
+
+## Review by Q08
+
+I read Curves Tag 0C4D, label lemma-nodal, including both arbitrary-field paragraphs. The source first takes the subscheme defined by the first Fitting ideal, descends its geometric field stalk to a separable residue field, then uses the flat local depth formula. I also read Algebra 00RV (lemma-differentials-base-change), 00RZ (lemma-differentials-finitely-generated), More on Algebra 07Z8 (lemma-fitting-ideal) and 07ZA (lemma-fitting-ideal-basics), Varieties 0C4Y/0C50 (lemma-change-fields-flat / lemma-change-fields-algebraic-unramified) and 0384 (lemma-geometrically-reduced-upstairs), and Algebra 0337, 00MB, 0316, 05GG, 05GI. There are no new-node sources to check. Every cited DAG statement was opened; citations.json copies those statements without paraphrase.
+
+Step 1 uses the actual symbol construction and derivation relations in def-weil-pbc-kahler-differentials. Polynomial differentiation proves finite generation in a few lines; no finite-presentation hypothesis is required. I checked the zero-generator case too. During source checking I corrected the differential-finite-generation tag from 00S2 to 00RZ; 00S2 is a different theorem.
+
+Step 2 uses the isomorphism in lem-weil-pbc-kahler-differentials-base-change and the general ring-map clause (2) in lem-trf-fitting-ideal-independence-base-change, which explicitly covers localization as well as field extension. The preceding finite-generation argument verifies that Fitting theorem's hypothesis. Localization at a prime has contraction of its maximal ideal equal to that prime, as encoded by def-weil-pbc-localization-at-prime. Thus J is contained in p before forming p/J.
+
+Step 3 uses only the unconditional clauses of lem-trf-geometric-field-stalk-descent on S: finite residue extension, maximality of the given geometric prime, and its structural Omega residue field. It does not prematurely invoke that theorem's field-stalk hypothesis for S. The field stalk is the quotient B/J_B, by the hypothesis J_B = n.
+
+Step 4 uses the right-exact sequence clause of lem-weil-pbc-tensor-right-exact on J -> S -> S/J -> 0 over k. I wrote both inclusions showing that the image is the extended ideal JC, rather than assuming an identification of a module cokernel with an algebra quotient. T is finite type by the images of the original finite algebra generators; p/J is maximal and has residue F, directly from the quotient maps.
+
+Step 5 gives the maps and the denominator test for localizing the quotient; this is a routine fraction argument from the localization definition, not a separate hidden comparison theorem. The contractions and Omega-algebra structures are checked. Only now is the conditional clause of lem-trf-geometric-field-stalk-descent applied to T, whose selected geometric local ring was shown to be Omega. Its statement supplies both the residue-map isomorphism T_(p/J) = F and finite separability, with exactly the required hypotheses.
+
+Step 6 applies the same fraction formulas to the original quotient. Since the resulting map is the residue map, its kernel is m; since the quotient is by JA, its kernel is JA. This proves the actual ideal equality and the stated quotient isomorphism, not just an abstract field isomorphism.
+
+Step 7 identifies the ORIGINAL q as an evaluation kernel using the structural Omega-algebra residue isomorphism, and obtains the k-embedding F -> Omega by contraction to p. The statement of lem-trf-separable-evaluation-local-base-change explicitly supplies Noetherianity of A and B, faithful flatness and locality of their canonical map, and the field closed fibre. Its finite separability hypothesis is established in step 5. It is not being used to infer separability. This existing unsplit theorem has no dependency back to the item.
+
+Step 8 uses the exact flat-local Noetherian hypotheses of lem-weil-pbc-flat-local-depth-formula, all provided by step 7. The depth-zero field calculation is written out from def-weil-pbc-depth and def-weil-pbc-regular-sequence; fields are nonzero, so zero multiplication is not injective. It then uses the hypothesis depth(B) = 1. Neither a dimension equality nor Cohen--Macaulayness is assumed.
+
+Step 9 uses lem-weil-pbc-local-completion-local-ring for locality, maximal ideal and the residue-field isomorphism, lem-weil-pbc-adic-completion-noetherian for Noetherianity, and lem-weil-pbc-noetherian-completion-flat for flatness. Each of these statements actually says the indicated fact. The maximal-ideal assertion makes the canonical map local. The closed fibre is F, so the same depth-zero argument and the same depth formula give depth(Ahat) = depth(A) = 1. No excellence or regularity of the completion map is invoked.
+
+I tested the split on S = k[x,y]/(xy) at (x,y): J = (x,y), the geometric fibre quotient is Omega, and both depths are one. This also works in characteristic two. For a smooth polynomial point the index-1 Fitting ideal is the unit ideal in relative dimension one, so J_B = n fails, as it should. For a purely inseparable finite field F/k viewed as S, its geometric local ring is a nonreduced Artinian ring of depth zero; the hypothesis depth(B) = 1 excludes it. The argument never replaces a purely inseparable fibre with a reduced field, and does not assume that the given q is chosen by a separable embedding before proving separability. Empty/zero algebra presentations cannot satisfy the geometric prime and depth hypotheses and introduce no missing case.
+
+I checked delivery-errors B--E against the files: no new elementary/duplicate/clause nodes; no unstated non-elementary inputs; no quotation from a cited proof instead of its statement; every step under 800 characters; no modified statement or maintainer field. All nine cited theorem dependency closures were checked for a path back to this item and none has one. Only the sandbox was written, and no Lean, Lake or compiler command was run.

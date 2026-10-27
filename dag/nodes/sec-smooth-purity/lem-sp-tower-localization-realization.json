@@ -1,0 +1,145 @@
+{
+ "id": "lem-sp-tower-localization-realization",
+ "kind": "statement",
+ "title": "Transport of the strict counit-unit complex sequence to the derived localization triangle",
+ "statement": "Fix ell, E, Base b and Operations o of def-sp-tower-shriek-data. For any closed immersion i:Z->T and complementary quasi-compact open immersion a:U->T, LocalizationData b o i a exists: the closed pushforward is exact, and for every bounded-below complex C of strict coefficient systems the specified termwise derived open counit and closed unit extend to one distinguished triangle. Derived evaluation at every n sends that same triangle, including the connecting morphism, to a distinguished finite coefficient triangle.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "paragraph (2)"
+ },
+ "stmt_deps": [
+  "def-sp-tower-shriek-data"
+ ],
+ "proof": [
+  {
+   "text": "Use tower_ordinary_localization for the specified ordinary counit-unit sequence and right exactness of closed pushforward. Closed pushforward is left exact as the ordinary right adjoint. Apply the three additive exact endofunctors open-pull-then-extension, identity, and closed-pull-then-push termwise to an arbitrary cochain representative K of C. The given ordinary short exact sequence in each degree makes the resulting short complex of complexes short exact.",
+   "uses": [
+    "lem-sp-tower-ordinary-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply DerivedCategory.triangleOfSES_distinguished. For each of the three exact functors F, use F.mapDerivedCategory.mapIso(Q.objObjPreimageIso C).symm followed by F.mapDerivedCategoryFactors.app K. Localization.liftNatTrans_app and naturality prove the two arrow squares for deriveMap. Transport the SES connecting morphism by these three isomorphisms; Triangle.isoMk proves the transported triangle distinguished. This works on the unbounded derived category and needs no injective or bounded representative.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the resulting triangle by mapDerivedCategoryCompIso for the open and closed composites and mapDerivedCategoryIdIso for the middle vertex. Open.counit_termwise identifies the first arrow; the second is exactly the displayed localized ordinary unit. Transport the boundary by e3.inv followed by the old boundary and shift(e1.hom). Triangle.isoMk and cancellation of isomorphisms prove distinguishedness with these precise arrows.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Each Ev is the termwise derived functor of exact evaluation, with its canonical shift comparison and triangulated instance. Apply map_distinguished to the same triangle, retaining its connecting map.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-tower-ordinary-localization",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "paragraph (2), final sentence; explicit unbounded representative and exact-localization transport in the Lean proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact evaluation jointly reflects isomorphisms on unbounded derived categories of sequence site modules",
+   "results": "Eight generic results about exact functors, Ext, bounded-below representatives and condensed abelian categories. None supplies the normalized finite projection or the strict open-closed localization.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ReflectsIsomorphisms",
+   "results": "Generic reflection and functor isomorphism lemmas; no coefficient tower geometric construction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Rr]eflect|isIso_iff.*homology",
+   "results": "Only ModuleCat.Topology.Homology hit. Local source search found Data.detects, strict comparison realization, and semilinearOpenClosedComplexSequence, which are reused.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "open closed decomposition ringed site distinguished localization triangle of module sheaf complexes",
+   "results": "Eight scheme ring localization and GammaSpec results; no strict system localization triangle.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projection formula compactification scheme morphism finite coefficient constructible complexes finite Tor amplitude",
+   "results": "Eight scheme affine limit and Spec factorization results; no finite derived compactification formula. The existing source-library formula and normalized strict comparison dependency are reused.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSES_distinguished|projection.*[Ff]ormula",
+   "results": "Mathlib triangleOfSES_distinguished found at Algebra/Homology/DerivedCategory/ShortExact.lean:92 and generic SES applications; projection formula hits concern Witt vectors. The SES triangle is reused, but it does not identify the normalized strict open/closed functors and maps.",
+   "date": "2026-10-25",
+   "verdict": "generic tool only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerShriekLevels",
+  "date": "2026-10-25",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-shriek-levels",
+   "place": "Operations proof (2c): apply the strict open-closed short exact sequence degreewise and pass to its derived distinguished triangle, including evaluated boundary.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-bound",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityTowerLocalization",
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerLocalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerShriek.tower_localization_realization",
+  "statement": "theorem tower_localization_realization (b : Base l E) (o : Operations l E b) {Z U T : Scheme.{u}} (i : Z ⟶ T) (a : U ⟶ T) [IsClosedImmersion i] [IsOpenImmersion a] [QuasiCompact a] (complement : Set.range a = (Set.range i)ᶜ) : Nonempty (LocalizationData l E b o i a complement)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d3de1",
+  "group": "S2",
+  "result": "fix",
+  "landing": "20261025T203044-L-2779831",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261026T001822-L-33093",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

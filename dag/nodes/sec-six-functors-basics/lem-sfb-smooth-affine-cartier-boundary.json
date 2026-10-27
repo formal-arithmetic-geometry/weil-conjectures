@@ -1,0 +1,216 @@
+{
+ "id": "lem-sfb-smooth-affine-cartier-boundary",
+ "kind": "statement",
+ "title": "An affine open in a smooth integral variety has a Cartier boundary",
+ "statement": "Let $k$ be a field [def-weil-field] and let $X/k$ be a smooth integral separated scheme of finite type [def-sbc-smooth-morphisms], [def-pc-integral-scheme], [def-weil-finite-type-morphism]; separated means that the diagonal is a closed immersion. For every nonempty affine open subscheme $U\\subseteq X$ [def-pc-scheme], [def-weil-open-immersion], there is an effective Cartier divisor $D\\subseteq X$ [def-pc-divisor-line-bundle] with $|D|=|X|\\setminus|U|$. Thus $U=X\\setminus|D|$. The empty effective Cartier divisor is permitted.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BCW, divisors-lemma-complement-open-affine-effective-cartier-divisor, applied using smooth regularity (Varieties Tag 056S, varieties-lemma-smooth-regular) and regular local unique factorization (More on Algebra Tag 0AG0, more-algebra-lemma-regular-local-UFD); this is the affine-complement step in groupoids.tex, lemma-algebraic-quasi-projective."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sbc-smooth-morphisms",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-pc-divisor-line-bundle"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-smooth-scheme-over-field-regular], $X$ is regular and locally Noetherian, since its structure morphism to the field $k$ is smooth. Finite type in [def-weil-finite-type-morphism] includes quasi-compactness over the affine base $\\operatorname{Spec}k$, so $X$ is quasi-compact. Thus $X$ is Noetherian (locally Noetherian and quasi-compact).",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCW, Noetherian hypothesis; Varieties Tag 056S, varieties-lemma-smooth-regular; Properties Tag 01OV, properties-definition-noetherian"
+   }
+  },
+  {
+   "text": "Put $E=|X|\\setminus|U|$. Integrality means irreducibility and reducedness by [def-pc-integral-scheme]. Every nonempty open in an irreducible space is dense: otherwise it and the nonempty open complement of its closure would be disjoint, contradicting irreducibility. Hence $U$ is dense. By [lem-sc-noetherian-closed-subset-finite-components], write $E=Z_1\\cup\\cdots\\cup Z_r$ with the $Z_i$ its irreducible components, allowing $r=0$. Give each $Z_i$ the reduced induced closed subscheme structure of [lem-weil-pbc-reduced-induced-closed-subscheme]. It is nonempty, reduced and irreducible, hence integral by [def-pc-integral-scheme]. By [lem-weil-pbc-scheme-sober], each closed irreducible subset $Z_i\\subseteq X$ has a generic point $\\xi_i$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCW, first sentence of proof; Properties Tag 0BA8, properties-lemma-Noetherian-irreducible-components; Schemes Tag 01J4, schemes-definition-reduced-induced-scheme"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-open-boundary-codimension-one] to $X$ and $U$: separatedness is assumed, local Noetherianity was obtained in step 1, affineness is assumed and density was proved in step 2. Thus $\\dim\\mathcal O_{X,\\xi_i}=1$ for every $i$. The scheme $X$ is integral, regular and locally Noetherian, and $Z_i\\hookrightarrow X$ is an integral closed subscheme with that generic-local dimension. Therefore [lem-per-regular-prime-divisor-local-equations] says that its ideal $\\mathcal I_i$ is an effective Cartier ideal.",
+   "uses": [
+    "lem-sfb-affine-open-boundary-codimension-one",
+    "lem-per-regular-prime-divisor-local-equations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCW, second and third sentences of proof: Tag 0BCV, divisors-lemma-complement-affine-open; Tag 0AGA, divisors-lemma-weil-divisor-is-cartier-UFD, in the regular-scheme case"
+   }
+  },
+  {
+   "text": "Construct the closed subscheme $D$ with ideal $\\mathcal I=\\mathcal I_1\\cdots\\mathcal I_r$ by repeated application of [lem-weil-pbc-product-ideal-closed-subscheme-union]; for $r=0$ take the empty closed subscheme with unit ideal $\\mathcal O_X$. That statement also gives $|D|=\\bigcup_iZ_i=E$, so $X\\setminus|D|=U$. Cartier condition: fix $x\\in X$. By step 3 and [def-nagata-effective-cartier-ideal] choose affine opens $V_i\\ni x$ with $\\mathcal I_i(V_i)=f_i\\mathcal O_X(V_i)$, $f_i$ a non-zero-divisor. Apply [lem-sc-affine-inter-principal-both] $r$ times, using that a principal open of a principal open is principal ($D_{D_V(g)}(a/g^n)=D_V(ag)$): this gives an affine open $W\\ni x$ which is a principal open $D_{V_i}(g_i)$ of every $V_i$. By [lem-weil-pbc-affine-ideals-closed-subscheme] (0), $\\mathcal O_X(W)=\\mathcal O_X(V_i)_{g_i}$, and by quasi-coherence $\\mathcal I_i(W)$ is generated by the image of $f_i$. That image is still a non-zero-divisor: if $f_i\\,a/g_i^n=0$ then $g_i^mf_ia=0$ for some $m$, so $g_i^ma=0$ and $a/g_i^n=0$. By [def-sbc-ideal-sheaf-powers], $\\mathcal I(W)=\\mathcal I_1(W)\\cdots\\mathcal I_r(W)=(f_1\\cdots f_r)$, and $f_1\\cdots f_r$ is a non-zero-divisor of $\\mathcal O_X(W)$: if $(f_1\\cdots f_r)a=0$, cancel $f_1$, then $f_2$, and so on, obtaining $a=0$. For $r=0$ the generator is $1$. Thus $D$ is an effective Cartier divisor by [def-pc-divisor-line-bundle].",
+   "uses": [
+    "lem-weil-pbc-product-ideal-closed-subscheme-union",
+    "def-nagata-effective-cartier-ideal",
+    "lem-sc-affine-inter-principal-both",
+    "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "def-sbc-ideal-sheaf-powers",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCW, last sentence of proof; Tag 01WU, divisors-lemma-sum-effective-Cartier-divisors, whose elementary local cancellation argument is written here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-scheme-sober",
+  "lem-sfb-affine-open-boundary-codimension-one",
+  "lem-per-regular-prime-divisor-local-equations",
+  "lem-weil-pbc-product-ideal-closed-subscheme-union",
+  "def-nagata-effective-cartier-ideal",
+  "lem-sc-affine-inter-principal-both",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "def-sbc-ideal-sheaf-powers",
+  "def-pc-divisor-line-bundle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BCW, divisors-lemma-complement-open-affine-effective-cartier-divisor; applied using Varieties Tag 056S and the regular-scheme case of Divisors Tag 0AGA."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a regular separated Noetherian scheme the complement of a dense affine open is the support of an effective Cartier divisor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_univ\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens}, X.zeroLocus Set.univ = (↑U)ᶜ\", \"doc\": \"For any open subset $U$ of a scheme $X$, the zero locus of the universal set of sections over $U$ is equal to the complement of $U$ in the underlying topological space of $X$. Formally, $X.\\text{zeroLo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_singleton\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens} (f : ↑(X.presheaf.obj (Opposite.op U))),\\n  X.zeroLocus {f} = (↑(X.basicOpen f))ᶜ\", \"doc\": \"For any open subset $ U $ of a scheme $ X $ and any section $ f $ of the structure sheaf over $ U $, the zero locus of the singleton set $ \\\\{f\\\\} $ is equal to the complement of the basic open set defi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (ideal : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U)))\\n  (map_ideal_basicOpen :\\n    ∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n      Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (ideal U) =\\n  \", \"doc\": \"For a scheme $X$, when constructing ideal sheaf data via the specified method using a family of ideals on affine open subsets, compatibility conditions under restriction to basic open subsets, and a s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (ideal : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U)))\\n  (map_ideal_basicOpen :\\n    ∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n      Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (ideal U) =\\n  \", \"doc\": \"For a scheme $X$, given compatible ideals $\\\\mathfrak{a}_U$ on affine open subsets $U \\\\subseteq X$ and a support set defined as the intersection $\\\\bigcap_U V(\\\\mathfrak{a}_U)$ of their zero loci, the su\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff_of_mem\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {I : X.IdealSheafData} {x : ↥X} {U : ↑X.affineOpens},\\n  x ∈ ↑U → (x ∈ I.support ↔ x ∈ X.zeroLocus ↑(I.ideal U))\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$, an affine open subset $U \\\\subseteq X$, and a point $x \\\\in U$, the point $x$ lies in the support of $\\\\mathcal{I}$ if and only if $x$ lies in the ze\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.supportSet_subset_zeroLocus\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens), I.supportSet ⊆ X.zeroLocus ↑(I.ideal U)\", \"doc\": \"For a scheme $X$ with an ideal sheaf data $I$ and an affine open subset $U$ of $X$, the support set of $I$ is a subset of the zero locus of the ideal $I(U)$ on $U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.mem_supportSet_iff_of_mem\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {I : X.IdealSheafData} {x : ↥X} {U : ↑X.affineOpens},\\n  x ∈ ↑U → (x ∈ I.supportSet ↔ x ∈ X.zeroLocus ↑(I.ideal U))\", \"doc\": \"For a scheme $X$, an ideal sheaf data $\\\\mathcal{I}$ on $X$, a point $x \\\\in X$, and an affine open subset $U \\\\subseteq X$ containing $x$, the point $x$ lies in the support set of $\\\\mathcal{I}$ if and o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {I : X.IdealSheafData} {x : ↥X},\\n  x ∈ I.support ↔ ∀ (U : ↑X.affineOpens), x ∈ X.zeroLocus ↑(I.ideal U)\", \"doc\": \"A point $x$ lies in the support of an ideal sheaf $\\\\mathcal{I}$ on a scheme $X$ if and only if, for every affine open subset $U \\\\subseteq X$ containing $x$, the point $x$ is contained in the zero locu\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: basic opens and ideal-sheaf supports do not construct a Cartier boundary for an arbitrary affine open in a smooth separated variety."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a smooth integral separated variety over a field every nonempty affine open has effective Cartier divisor complement",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) : Set X.Opens\", \"doc\": \"For a scheme $ X $, the set of affine open subsets of $ X $, i.e., open subsets $ U $ for which the restricted scheme structure is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme} (U : X.Opens) : Prop\", \"doc\": \"A predicate indicating that an open subset $ U $ of a scheme $ X $ is affine, meaning the restricted scheme structure on $ U $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] [IsIntegral Y] [Nonempty X] : IsIntegral X\", \"doc\": \"If $X$ is a non-empty scheme equipped with an open immersion into an integral scheme $Y$, then $X$ is also an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{U : X.Opens} (hU : IsAffineOpen U) : IsQuasiSeparated (U : Set X)\", \"doc\": \"Every affine open subset $ U $ of a scheme $ X $ is quasi-separated, meaning that the intersection of any two quasi-compact open subsets of $ U $ is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isAffine_affineCover\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) (i : X.affineCover.I₀) : IsAffine (X.affineCover.X i)\", \"doc\": \"For any scheme $X$ and any index $i$ in the zeroth component of its affine open cover, the corresponding open subscheme $X.\\\\text{affineCover}.X(i)$ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isCompact\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": IsCompact (U : Set X)\", \"doc\": \"Every affine open subset $ U $ of a scheme $ X $ is compact in the topological sense, meaning that every non-trivial filter on $ U $ has a cluster point within $ U $.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_affine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, QuasiSeparatedSpace ↥X ↔ ∀ (U V : ↑X.affineOpens), IsCompact (↑↑U ∩ ↑↑V)\", \"doc\": \"A scheme $X$ has a quasi-separated underlying topological space if and only if the intersection of any two affine open subsets $U$ and $V$ of $X$ is a compact set.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsLocallyNoetherian X] (U : ↑X.affineOpens),\\n  IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))\", \"doc\": \"For a locally Noetherian scheme $ X $, the ring of sections over every affine open subset $ U $ of $ X $ is a Noetherian ring, i.e., $ \\\\mathcal{O}_X(U) $ is Noetherian.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: basic opens and ideal-sheaf supports do not construct a Cartier boundary for an arbitrary affine open in a smooth separated variety."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EffectiveCartierDivisor\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: basic opens and ideal-sheaf supports do not construct a Cartier boundary for an arbitrary affine open in a smooth separated variety."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartier|complement.*affine|affine.*complement",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: basic opens and ideal-sheaf supports do not construct a Cartier boundary for an arbitrary affine open in a smooth separated variety."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine open in a smooth separated integral scheme of finite type is the nonvanishing locus of the canonical section of an effective divisor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"(X : AlgebraicGeometry.Scheme) → {U : ↑X.affineOpens} → ↑(X.presheaf.obj (Opposite.op ↑U)) → ↑X.affineOpens\", \"doc\": \"For a scheme $ X $, given an affine open subset $ U $ of $ X $ and a section $ f $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, the basic open subset $ D(f) = \\\\{x \\\\in U \\\\mid f_x \\\\in \\\\mathcal{O\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))), AlgebraicGeometry.IsAffineOpen (X.basicOpen f)\", \"doc\": \"For a scheme $X$, the basic open set associated to a section $f$ of the structure sheaf over an open subset $U$ is an affine open subset of $X$. This means the restricted scheme structure on $\\\\text{ba\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.Spec_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {R : CommRingCat} (f : ↑R), AlgebraicGeometry.IsAffineOpen (PrimeSpectrum.basicOpen f)\", \"doc\": \"For any commutative ring $ R $ and element $ f \\\\in R $, the basic open set $ D(f) = \\\\{ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) \\\\mid f \\\\notin \\\\mathfrak{p} \\\\} $ in the prime spectrum $ \\\\operatorname{Spe\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.instIsAffineToSchemeBasicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] (r : ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  AlgebraicGeometry.IsAffine ↑(X.basicOpen r)\", \"doc\": \"For any affine scheme $X$ and global section $r$ of its structure sheaf, the basic open subset $X_{\\text{basicOpen}}(r)$ defined by $r$ is also an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (g : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ f', X.basicOpen f' = X.basicOpen g\", \"doc\": \"For any affine scheme $X$ and basic open subset $X_{f}$ defined by a section $f$ of the structure sheaf, the open subset $X_{f}$ is itself an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isAffineOpen_of_isAffineOpen_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens) (s : Set ↑(X.presheaf.obj (Opposite.op U))),\\n  Ideal.span s = ⊤ → (∀ i ∈ s, AlgebraicGeometry.IsAffineOpen (X.basicOpen i)) → AlgebraicGeometry.IsAffineOpen U\", \"doc\": \"Let $ U $ be an open subset of a scheme $ X $. If there exists a set $ S $ of sections over $ U $ such that the ideal generated by $ S $ is the unit ideal in the ring of sections $ \\\\Gamma(U, \\\\mathcal{\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: basic opens and ideal-sheaf supports do not construct a Cartier boundary for an arbitrary affine open in a smooth separated variety."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nonempty affine open in a smooth integral separated finite type scheme over a field has effective Cartier divisor complement",
+   "results": "Eight hits, read: powers clearing denominators and zero sections on basic opens, IsAffineOpen.basicOpen/basicOpen_basicOpen_is_basicOpen/instIsAffineToSchemeBasicOpen/Spec_basicOpen, Scheme.affineBasicOpen, IsIntegral.component_integral. None constructs a Cartier boundary.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-translated-cartier-parameter-family",
+  "date": "2026-10-24",
+  "group": "Q45"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3, printed p.53, opening parenthesis: the generic line is a difference of two ample lines; Stacks supplies this for all finite-type algebraic groups, not only abelian varieties. Supporting input for the present split: existence of one ample invertible module on a finite-type group scheme, before choosing a high twist of the supplied line. Smooth irreducible geometric construction in Groupoids Tag 0BF7, before Picard rigidity. Supporting input: Affine-complement step: choose a nonempty affine open U of the smooth integral group; its boundary is an effective Cartier divisor D.",
+   "via": [
+    "lem-sfb-translated-cartier-parameter-family",
+    "lem-sfb-finite-type-group-ample-line",
+    "lem-sfb-algebraic-group-ample-difference",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-affine-cartier-boundary",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0BCW component by component, reusing smooth regularity, finite boundary decomposition, reduced induced subschemes, sobriety and regular prime-divisor Cartier equations. One new unsplit input is the general affine-boundary dimension theorem 0BCV; the finite sum and empty divisor are constructed explicitly. Statement unchanged.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), inherited alteration/group-ampleness supporting chain: realizes the affine-complement input from Groupoids 0BF7. Steps 1-3 establish the hypotheses and Cartier boundary components in Divisors 0BCW; step 4 is its sum construction. The inherited ancestor chain is broken (ancestor command prints None); its existing from.node=null and via list are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Smooth-over-field regularity is exactly the general input cited in the Groupoids 0BF7 paragraph; no same-unit node states it in arbitrary dimension."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Gives the actual reduced closed subschemes on the boundary components; this generic scheme construction has no same-unit replacement."
+   },
+   {
+    "node": "lem-per-regular-prime-divisor-local-equations",
+    "why": "Its effective-Cartier-ideal clause is the regular-scheme specialization of 0AGA needed by the 0BCW proof; the item has already established regularity and dimension one."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-per-regular-prime-divisor-local-equations"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-6b215fec4",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-6b215fec4 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-affine-open-boundary-codimension-one and every cited statement against Stacks divisors.tex 0BCV (l.3485) and 0BCW (l.3504). Steps 1-3 hold: smooth over k gives regular and locally Noetherian; finite type gives quasi-compact, so Noetherian; U nonempty in irreducible X gives U dense; the boundary has finitely many components, each with its reduced induced integral structure and a generic point; the new node gives dim O_{X,xi}=1; the regular-prime-divisor node gives the effective Cartier ideal. The new node is the dense clause of 0BCV with the same hypotheses. It has no duplicate (scanned all nodes for 0BCV/0BCU and the label), does not restate the item, and passes small cases: U=X, P^1 minus a point, A^2 with U=D(x), and the non-dense counterexample Spec k ⊔ A^1. FIX (E5): step 4 said 'refine the covers' without showing that a common neighbourhood exists on which each f_i still generates I_i and is still a non-zero-divisor. Rewrote it with lem-sc-affine-inter-principal-both (a common principal open W), lem-weil-pbc-affine-ideals-closed-subscheme(0) (O(W) is a localization), a non-zero-divisor stays one after localization, def-sbc-ideal-sheaf-powers (I(W)=(f_1...f_r)) and def-nagata-effective-cartier-ideal; elementary=false, proof_deps recomputed. Batch-5 flag (lem-trf-ufd-height-one): a generic Mathlib-leaf UFD/height-one criterion (0AFT), not part of the trace-formula or Poincaré statements or proofs; the cited node already has three live citers in the same unit, and the target closure gains 0 nodes. Accepted. Dropped-route flag: lem-per-regular-prime-divisor-local-equations is listed only as unreached after Q144 was dropped. It is generic Stacks 0AGA/0AG9 algebra using none of the forbidden ingredients, the item is not a child of lem-per-artin-gabber-affine-curve, and step 3 uses only its Cartier clause. Accepted as a tool use. The three declared tool_uses are accepted; no SGA cited.; 1 file(s) fixed by the reviewer"
+ }
+}

@@ -1,0 +1,302 @@
+{
+ "id": "lem-sfb-group-difference-diagonal-domain",
+ "kind": "statement",
+ "title": "The diagonal detects extension of the group difference map",
+ "statement": "Let $k$ be a field [def-weil-field], $X$ a nonempty integral separated finite-type $k$-scheme smooth over $k$ [def-pc-integral-scheme, def-weil-pbc-scheme-conventions, def-sbc-smooth-morphisms], and $G$ a smooth connected separated finite-type $k$-group scheme with identity $e$ [def-sc-group-scheme]. Let $U\\subseteq X$ be a dense open and $f:U\\to G$ a $k$-morphism. Write $\\Delta:X\\to X\\times_kX$ for the diagonal [def-pc-fibre-product], and let $\\Omega\\subseteq X\\times_kX$ be any open subscheme containing $\\Delta(X)$. Put $H=\\Omega\\cap(U\\times_kU)$ and let $\\phi:H\\to G$ be the morphism $\\phi(x,y)=f(x)f(y)^{-1}$, formed from the multiplication and inverse of $G$. Define\n$$D=\\bigcup\\{V\\subseteq X\\text{ open}:\\ \\exists F_V:V\\to G\\text{ over }k,\\ F_V|_{V\\cap U}=f|_{V\\cap U}\\},$$\n$$B=\\bigcup\\{N\\subseteq\\Omega\\text{ open}:\\ \\exists b_N:N\\to G\\text{ over }k,\\ b_N|_{N\\cap H}=\\phi|_{N\\cap H}\\}.$$\nThere is a unique $k$-morphism $b:B\\to G$ restricting to every $b_N$, and\n$$\\Delta^{-1}(B)=D,\\qquad b\\circ\\Delta|_D=e\\circ(D\\to\\operatorname{Spec}k).$$\nThese are assertions about scheme morphisms and all scheme points; no $k$-rational point of $U$ and no geometric integrality of $X$ is assumed.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Lemma 3.3, printed p.17, first paragraph of the proof: difference map and its diagonal extension criterion; scheme-theoretic formulation over arbitrary k, with the descent argument detailed in the report."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-sc-group-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "First record the density needed below. The field spectrum is Noetherian (its affine coordinate ring has only the ideals $0,k$), so $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Thus $U\\hookrightarrow X$ is quasi-compact: the ascending-chain condition on opens forces every open covering of an open to have a finite subcover. Since $X$ is integral, it is reduced; [lemma-nagata-reduced-dense-image-schematic], applied to this dense open immersion, says its scheme-theoretic image is $X$. Here an open immersion is quasi-separated since its diagonal is an isomorphism. Consequently $U$ is schematically dense. We will use density on open restrictions and its transitivity: on each open these assert respectively restriction of an injective section map and composition of two injective section maps. These observations also identify the image formulation with $\\mathcal O_X\\to j_*\\mathcal O_U$ injective.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lemma-nagata-reduced-dense-image-schematic",
+    "def-nagata-scheme-theoretically-dense-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian), 056D (lemma-reduced-scheme-theoretically-dense), 01RE (lemma-characterize-scheme-theoretically-dense)"
+   }
+  },
+  {
+   "text": "The structure morphism $X\\to\\operatorname{Spec}k$ is smooth, hence so is $U\\to\\operatorname{Spec}k$ by [lem-pc-open-immersion-smooth-composition]; both are flat and locally of finite presentation by [lem-pc-smooth-flat]. The second projection $X\\times_kX\\to X$ and the first projection $X\\times_kU\\to X$ are their base changes along $X\\to\\operatorname{Spec}k$, hence flat by [lem-weil-pbc-flat-morphism-base-change]. Apply [lemma-nagata-dense-flat-pullback] first to $U\\hookrightarrow X$ and the second projection $X\\times_kX\\to X$ to obtain the dense open $X\\times_kU$. Apply it again to $U\\hookrightarrow X$ and the first projection $X\\times_kU\\to X$. Transitivity from step 1 gives schematic density of $U\\times_kU$ in $X\\times_kX$. Restriction to any open $N\\subseteq\\Omega$ gives schematic density of $N\\cap H$ in $N$. The quasi-compactness and quasi-separatedness assumptions in the density lemma concern the original open immersion $U\\hookrightarrow X$, verified in step 1. Also $G$ is separated as an absolute scheme: $\\operatorname{Spec}k$ is separated since its diagonal is given by the surjective multiplication map $k\\otimes_{\\mathbf Z}k\\to k$, and composition of separated morphisms is separated by [lem-weil-pbc-proper-fp-permanence](e). Thus even the absolute separated-target version of the equality lemma below applies.",
+   "uses": [
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lemma-nagata-dense-flat-pullback",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VA (lemma-composition-smooth), 01VB (lemma-base-change-smooth), 01VC (lemma-open-immersion-smooth), 01VF (lemma-smooth-flat), 081I (lemma-flat-base-change-scheme-theoretic-image)"
+   }
+  },
+  {
+   "text": "Two extensions $b_N,b_{N'}$ agree on $N\\cap N'\\cap H$, schematically dense in $N\\cap N'$ by step 2. Hence they agree on the whole overlap by [lem-chow-agree-on-dense-open]. The separated-target hypothesis is verified in step 2. Gluing the underlying continuous maps and, on each target open, the compatible homomorphisms of structure sheaves produces a morphism $b:B\\to G$; its local-ring property and its being over $k$ hold on the covering by the $N$. Uniqueness holds on that same covering. In particular $b|_H=\\phi$, since $H$ itself is one of the extension opens.",
+   "uses": [
+    "lem-chow-agree-on-dense-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RH (lemma-equality-of-morphisms); gluing of morphisms on an open covering by the sheaf axiom"
+   }
+  },
+  {
+   "text": "Let $V\\subseteq X$ admit an extension $F_V$. On $N=\\Omega\\cap(V\\times_kV)$ the group operations [def-sc-group-scheme] define $c= m(F_Vp_1,\\operatorname{inv}(F_Vp_2))$. On $N\\cap H$ this is $\\phi$, so $N\\subseteq B$. Since $\\Omega$ contains the diagonal, $\\Delta^{-1}(N)=V$. Taking the union over all such $V$ gives $D\\subseteq\\Delta^{-1}(B)$. Moreover $c\\Delta|_V=e$ by the group inverse identity, as an identity of morphisms, valid on every test scheme.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 3.3, printed p.17, forward diagonal implication"
+   }
+  },
+  {
+   "text": "For the converse take any scheme point $x$ with $\\Delta(x)\\in B$. Choose an extension open $N\\subseteq\\Omega$ containing $\\Delta(x)$, with extension $c:N\\to G$. Put $T=N\\cap(X\\times_kU)$, and $q=p_1|_T:T\\to X$. The fibre $N_x$ is a nonempty open of $X_{\\kappa(x)}$: it contains the point supplied by the diagonal. The morphism $\\operatorname{Spec}\\kappa(x)\\to\\operatorname{Spec}k$ is flat: its unique local-ring map is the field extension, whose tensor functor is exact by [lem-weil-field-scalar-extension-exact]. Its base change $X_{\\kappa(x)}\\to X$ is flat by [lem-weil-pbc-flat-morphism-base-change]. Thus [lemma-nagata-dense-flat-pullback] makes $U_{\\kappa(x)}$ schematically, hence topologically, dense in $X_{\\kappa(x)}$. It meets $N_x$, proving $T_x\\ne\\varnothing$ and $x\\in q(T)$. The projection $X\\times_kU\\to X$ is the base change of the flat, locally finitely presented $U\\to\\operatorname{Spec}k$ (step 2), so it is flat and, by [lem-weil-pbc-flat-lfp-open], an open map. Its restriction $q$ to the open $T$ has the same local rings and maps opens of $T$ to opens; thus $q$ is flat and open, and $W=q(T)$ is an open neighbourhood of $x$.",
+   "uses": [
+    "lem-weil-field-scalar-extension-exact",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lemma-nagata-dense-flat-pullback",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 081H (lemma-flat-morphism-scheme-theoretically-dense-open), 081I (lemma-flat-base-change-scheme-theoretic-image); Milne I Lemma 3.3, p.17, converse, replacing a chosen rational point by the whole covering T"
+   }
+  },
+  {
+   "text": "View $q:T\\to W$ as a surjection; it is flat, its local rings being those of step 5. It is a singleton fpqc covering in [def-weil-pbc-fpqc-covering]: for an affine open $W_0\\subseteq W$, affine opens of $q^{-1}W_0$ have open images covering $W_0$, since $q$ is open by step 5 and [lem-weil-pbc-flat-lfp-open]; quasi-compactness of $W_0$ gives finitely many such images. Define $a:T\\to G$ by $a=m(c,f p_2)$ using [def-sc-group-scheme]. On $q^{-1}(W\\cap U)=N\\cap(U\\times_kU)$ the identity $(f(x)f(y)^{-1})f(y)=f(x)$ gives $a=fq$. This is an identity of morphisms by associativity and inverse in the group object, without a commutativity assumption.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-flat-lfp-open",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022B (definition-fpqc-covering); Milne I Lemma 3.3, p.17, formula f(x)=Phi(x,u) f(u)"
+   }
+  },
+  {
+   "text": "Put $R=T\\times_WT$ with projections $r_1,r_2$. The projection $r_1$ is the base change of the flat $q$ along $q$, hence flat by [lem-weil-pbc-flat-morphism-base-change], so $R\\to W$, which is $q r_1$, is flat by [lem-pc-flat-compose]. The open $W\\cap U$ is schematically dense in $W$ by step 1; its immersion is quasi-compact because $W\\subseteq X$ is Noetherian. Therefore [lemma-nagata-dense-flat-pullback] makes its inverse image schematically dense in $R$. On this inverse image, step 6 gives $ar_1=fqr_1=fqr_2=ar_2$. By the separated-target equality principle [lem-chow-agree-on-dense-open], $ar_1=ar_2$ on $R$. Apply [lem-galois-fpqc-morphisms-descend] with base $W$, covering $T\\to W$, source the identity $W$-scheme, and target $G\\times_kW$. Its compatibility equation is precisely this equality, so it produces $F_W:W\\to G$ over $k$ with $F_Wq=a$. On $W\\cap U$ it equals $f$: the uniqueness clause of the same descent lemma, applied to the restricted covering, identifies them after the equality in step 6. Thus $x\\in W\\subseteq D$. This proves $\\Delta^{-1}(B)\\subseteq D$ for all scheme points.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-pc-flat-compose",
+    "lemma-nagata-dense-flat-pullback",
+    "lem-chow-agree-on-dense-open",
+    "lem-galois-fpqc-morphisms-descend"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 0241 (lemma-fully-faithful), 02W0 (lemma-refine-coverings-fully-faithful); morphisms.tex Tag 01RH (lemma-equality-of-morphisms)"
+   }
+  },
+  {
+   "text": "Steps 4 and 7 prove equality of the two open subschemes $\\Delta^{-1}(B)=D$. For each extension open $V$ in the definition of $D$, the map $c$ constructed in step 4 agrees with $b$ on $\\Omega\\cap(V\\times_kV)$ by step 3. Pulling back along $\\Delta|_V$ and using step 4 gives $b\\Delta|_V=e$. These opens cover $D$, so the morphism equality holds on $D$. All constructions used scheme morphisms and residue fields; none required $U(k)\\ne\\varnothing$, or integrality of any product or field extension of $X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 3.3, printed p.17, diagonal value and extension equivalence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lemma-nagata-reduced-dense-image-schematic",
+  "def-nagata-scheme-theoretically-dense-open",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lemma-nagata-dense-flat-pullback",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-chow-agree-on-dense-open",
+  "def-sc-group-scheme",
+  "lem-weil-field-scalar-extension-exact",
+  "lem-weil-pbc-flat-lfp-open",
+  "def-weil-pbc-fpqc-covering",
+  "lem-pc-flat-compose",
+  "lem-galois-fpqc-morphisms-descend"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I Lemma 3.3, printed p.17, first paragraph; scheme-theoretic completion by flat density and fpqc descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A rational map from a smooth variety to an algebraic group extends at x if and only if its difference map extends at the diagonal point (x,x)",
+   "results": "{\"t\": \"2026-10-23T18:03:28Z\", \"tool\": \"leanfinder\", \"query\": \"A rational map from a smooth variety to an algebraic group extends at x if and only if its difference map extends at the diagonal point (x,x)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.instIsOverToPartialMapOfIsSeparatedOfIsOver\", \"AlgebraicGeometry.Scheme.RationalMap.isOver_iff\"], \"digest\": \"ad82e34eb6984b9f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RationalMap.domain, mem_domain, toPartialMap and IsOver describe representatives and their maximal domains. None compares the domain of a group-valued map with its two-variable difference along the diagonal. The elliptic-curve point-map hits concern field extension of individual points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil group variety rational difference map maximal domain diagonal",
+   "results": "{\"t\": \"2026-10-23T18:03:31Z\", \"tool\": \"leanfinder\", \"query\": \"Weil group variety rational difference map maximal domain diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.domain\", \"WeierstrassCurve.Affine.Point.map_some\", \"AlgebraicGeometry.Scheme.Pullback.diagonalCoverDiagonalRange_eq_top_of_injective\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"WeierstrassCurve.Affine.FunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"WeierstrassCurve.Affine.Point.map\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\"], \"digest\": \"2ec308bcffccbb20\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RationalMap.domain, mem_domain, toPartialMap and IsOver describe representatives and their maximal domains. None compares the domain of a group-valued map with its two-variable difference along the diagonal. The elliptic-curve point-map hits concern field extension of individual points."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational maps to algebraic groups difference map extension along the diagonal",
+   "results": "{\"t\": \"2026-10-23T18:03:27Z\", \"tool\": \"leansearch\", \"query\": \"Rational maps to algebraic groups difference map extension along the diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.mk\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.diagonal_Spec_map\"], \"digest\": \"8f7cec00f9d5b5ee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RationalMap.domain, mem_domain, toPartialMap and IsOver describe representatives and their maximal domains. None compares the domain of a group-valued map with its two-variable difference along the diagonal. The elliptic-curve point-map hits concern field extension of individual points."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"RationalMap\"",
+   "results": "{\"t\": \"2026-10-23T18:03:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"RationalMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.id\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\"], \"digest\": \"17fc852bc34c880c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RationalMap.domain, mem_domain, toPartialMap and IsOver describe representatives and their maximal domains. None compares the domain of a group-valued map with its two-variable difference along the diagonal. The elliptic-curve point-map hits concern field extension of individual points."
+  },
+  {
+   "tool": "grep",
+   "query": "RationalMap|PartialMap",
+   "results": "{\"t\": \"2026-10-23T18:03:27Z\", \"tool\": \"grep\", \"query\": \"RationalMap|PartialMap\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\", \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\"], \"digest\": \"2248a9e5841e4f34\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RationalMap.domain, mem_domain, toPartialMap and IsOver describe representatives and their maximal domains. None compares the domain of a group-valued map with its two-variable difference along the diagonal. The elliptic-curve point-map hits concern field extension of individual points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational map to a group scheme extends at a point if its difference map extends at the corresponding diagonal point",
+   "results": "{\"t\": \"2026-10-23T19:02:25Z\", \"tool\": \"leanfinder\", \"query\": \"A rational map to a group scheme extends at a point if its difference map extends at the corresponding diagonal point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.instIsOverToPartialMapOfIsSeparatedOfIsOver\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\"], \"digest\": \"5e201b9c2adda11c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: domain and partial-map representatives do not compare a group difference domain with the original domain along the diagonal"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"RationalMap\"",
+   "results": "{\"t\": \"2026-10-23T19:02:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"RationalMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.id\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\"], \"digest\": \"17fc852bc34c880c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: domain and partial-map representatives do not compare a group difference domain with the original domain along the diagonal"
+  },
+  {
+   "tool": "grep",
+   "query": "RationalMap|PartialMap",
+   "results": "{\"t\": \"2026-10-23T19:02:26Z\", \"tool\": \"grep\", \"query\": \"RationalMap|PartialMap\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\"], \"digest\": \"7196ee390b3fbeda\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: domain and partial-map representatives do not compare a group difference domain with the original domain along the diagonal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational maps to algebraic groups extension of the difference map at the diagonal",
+   "results": "{\"t\": \"2026-10-23T19:02:45Z\", \"tool\": \"leansearch\", \"query\": \"Rational maps to algebraic groups extension of the difference map at the diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.IsOver.mk\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.recOn\", \"Algebra.Extension.Hom.subToKer\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\"], \"digest\": \"c40b2a585d7d6fd9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: domain and partial-map representatives do not compare a group difference domain with the original domain along the diagonal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Domain of a rational map into an algebraic group detected by the domain of its two variable quotient along the diagonal",
+   "results": "{\"t\": \"2026-10-23T19:02:46Z\", \"tool\": \"leanfinder\", \"query\": \"Domain of a rational map into an algebraic group detected by the domain of its two variable quotient along the diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.PartialMap.le_domain_toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.domain\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap\"], \"digest\": \"d8308948492d5def\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: domain and partial-map representatives do not compare a group difference domain with the original domain along the diagonal"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-group-rational-divisorial-indeterminacy",
+  "date": "2026-10-24",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: An abelian inclusion retracts up to a positive integer. Supporting input: 8.18, printed p.152 (combine 8.16 and 8.17). Uniqueness is the separated-target equality principle on an integral source. This is the extension theorem, not extension to an arbitrary proper target. Sublemma: Milne 8.17, divisorial indeterminacy for a smooth source and a group target, combined with 8.16 in 8.18. Auxiliary: The diagonal detects extension of the group difference map.",
+   "via": [
+    "lem-sfb-group-rational-divisorial-indeterminacy",
+    "lem-sfb-weil-extension-to-abelian-variety",
+    "lem-sfb-abelian-inclusion-multiple-retraction",
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-group-difference-diagonal-domain",
+  "worker": "stage1",
+  "summary": "No new nodes. Proved density of H, glued all difference extensions, and replaced the rational-point argument of Milne by smooth fpqc descent of c(x,y) f(y). All points and arbitrary fields are covered without geometric integrality. Statement retained.",
+  "blueprint": "Supports the difference-map prerequisite of the existing via chain for det-thm-sf-ctf-stability-direct-images, proof (3), the alteration/abelian-extension inputs. Current latest unit and direct-images proof read; this is a generic geometry sublemma and changes no unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-fpqc-morphisms-descend",
+    "why": "Generic scheme geometry/descent tool for the difference-map extension argument; no replacement of a six-functor unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-morphisms-descend"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-eb830dd78",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-eb830dd78 (reviewer sub-agent of L); spot-checked: FIX for one citation fault (C4); full review in review.md. There are no new nodes, and the statement and stmt_deps are unchanged. Source checked: Milne AV I Lemma 3.3, printed pp.17-18. The difference map Φ(x,y)=φ(x)φ(y)^{-1} and the rule Φ(x,x)=e match step 4. Milne's converse picks a point u and sets φ(x)=Φ(x,u)φ(u); the delivery replaces this with fpqc descent of a=c·f(p2) along q:T→W, and that replacement is a faithful scheme-theoretic version. I read all 8 steps against each cited statement. Density: U is schematically dense because X is integral and Noetherian, then flat pullbacks give density of U×U in X×X, of U_κ(x) in X_κ(x) and in R. Equality on R uses the absolutely separated G (Spec k→Spec Z is separated, plus proper-fp-permanence (e)). The fpqc condition holds through open images of affine opens, so q need not be quasi-compact. The cocycle condition of lem-galois-fpqc-morphisms-descend reduces exactly to a r1=a r2, and its uniqueness on W∩U gives F_W=f there. The group identity a=f q needs no commutativity. Edge cases tested: U=X, constant f, X=Spec L with L/k finite separable and X×X disconnected, non-closed x. Fault: steps 2, 5 and 7 took scheme smoothness, flatness and base change from the stack node lem-sfb-stack-chartwise-smooth-etale-calculus, which does not state that its chart-tested properties agree with the scheme properties. Repaired with the Mathlib leaves lem-pc-open-immersion-smooth-composition, lem-pc-smooth-flat, lem-weil-pbc-flat-morphism-base-change and lem-pc-flat-compose, plus the base-change clause of lem-weil-pbc-flat-lfp-open for openness of q. Steps 2 and 5-7 are rewritten and uses/proof_deps rebuilt in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-group-difference-diagonal-domain.json. Batch-5 finding: the stack node reaches only def-trf-algebraic-space, a general definition and not part of the trace formula or Poincaré duality, so it would not force a RETURN; after the FIX the item no longer cites it. Tool use lem-galois-fpqc-morphisms-descend accepted as generic descent of morphisms. No SGA cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupDifferenceDiagonalDomain",
+  "declaration": "AlgebraicGeometry.group_difference_diagonal_domain",
+  "declarations": [
+   "AlgebraicGeometry.groupDifferenceOnOpen",
+   "AlgebraicGeometry.group_difference_diagonal_domain"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupDifferenceDiagonalDomain.lean",
+  "statement": "theorem group_difference_diagonal_domain (k : Type u) [Field k] (X : Over (Spec (.of k))) [IsIntegral X.left] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [Smooth X.hom] (G : Over (Spec (.of k))) [GrpObj G] [Smooth G.hom] [ConnectedSpace G.left] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (U : X.left.Opens) (hU : Dense (U : Set X.left)) (f : U.toScheme ⟶ G.left) (hf : f ≫ G.hom = U.ι ≫ X.hom) (Ω H : (pullback X.hom X.hom).Opens) (hΩ : (pullback.diagonal X.hom) ⁻¹ᵁ Ω = ⊤) (hH : H = Ω ⊓ (pullback.fst X.hom X.hom) ⁻¹ᵁ U ⊓ (pullback.snd X.hom X.hom) ⁻¹ᵁ U) (φ : H.toScheme ⟶ G.left) (hφ : φ = groupDifferenceOnOpen X G U f hf H (hH.le.trans (inf_le_left.trans inf_le_right)) (hH.le.trans inf_le_right)) (D : X.left.Opens) (hD : D = sSup {V : X.left.Opens | ∃ F : V.toScheme ⟶ G.left, F ≫ G.hom = V.ι ≫ X.hom ∧ X.left.homOfLE (inf_le_left : V ⊓ U ≤ V) ≫ F = X.left.homOfLE (inf_le_right : V ⊓ U ≤ U) ≫ f}) (B : (pullback X.hom X.hom).Opens) (hB : B = sSup {N : (pullback X.hom X.hom).Opens | N ≤ Ω ∧ ∃ c : N.toScheme ⟶ G.left, c ≫ G.hom = N.ι ≫ pullback.fst X.hom X.hom ≫ X.hom ∧ (pullback X.hom X.hom).homOfLE (inf_le_left : N ⊓ H ≤ N) ≫ c = (pullback X.hom X.hom).homOfLE (inf_le_right : N ⊓ H ≤ H) ≫ φ}) : ∃ hδ : (pullback.diagonal X.hom) ⁻¹ᵁ B = D, ∃ b : B.toScheme ⟶ G.left, (∀ b' : B.toScheme ⟶ G.left, ((b' ≫ G.hom = B.ι ≫ pullback.fst X.hom X.hom ≫ X.hom) ∧ (∀ (N : (pullback X.hom X.hom).Opens) (hNB : N ≤ B) (c : N.toScheme ⟶ G.left), c ≫ G.hom = N.ι ≫ pullback.fst X.hom X.hom ≫ X.hom → (pullback X.hom X.hom).homOfLE (inf_le_left : N ⊓ H ≤ N) ≫ c = (pullback X.hom X.hom).homOfLE (inf_le_right : N ⊓ H ≤ H) ≫ φ → (pullback X.hom X.hom).homOfLE hNB ≫ b' = c)) ↔ b' = b) ∧ (pullback.diagonal X.hom).resLE B D (le_of_eq hδ.symm) ≫ b = D.ι ≫ X.hom ≫ (MonObj.one (X := G)).left",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Second reader (maintainer review): uniqueness of b is stated among all k-morphisms compatible with every extension (iff form), not only among those also satisfying the diagonal identity, as in the node.",
+  "fixed_by": "NT-stage2-cc-09b9e9de2"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-09b9e9de2",
+  "group": "Q12",
+  "result": "fix",
+  "note": "Read the node, all 6 stmt_dep records (Field, IsIntegral, scheme conventions, Smooth, GrpObj on Over (Spec k), pullback/diagonal), the module, the report (real Worker report and Second reading by Q12 sections) and the Milne I.3.3 source place. Hypotheses match exactly: X integral (nonempty), separated, finite type and smooth; G a smooth, connected, separated, finite-type GrpObj with no commutativity; no rational point or geometric integrality. H = Ω⊓p1⁻¹U⊓p2⁻¹U; φ = lift(f∘p1, inv∘f∘p2)≫mul, which is f(x)f(y)⁻¹ with real data; D and B are the node's sSup unions; Δ⁻¹B=D and Δ.resLE≫b = e are correct. H3 finding: `∃! b, over ∧ compat ∧ diag` restricted uniqueness to maps that also satisfy the diagonal identity. FIX rewrites it as `∃ hδ, ∃ b, (∀ b', (over ∧ compat) ↔ b' = b) ∧ diag b`. Fix files: fixes/GroupDifferenceDiagonalDomain.lean and fixes/<item>.lean-record.json with the verbatim statement. The fixed file compiles clean via nt_compile --json (1.8 s). Docstrings, the 8 proof steps, no-hollow and edge cases all OK."
+ }
+}

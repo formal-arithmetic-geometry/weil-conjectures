@@ -1,0 +1,152 @@
+{
+ "id": "lem-sf-system-refinement-finite-coordinates",
+ "kind": "statement",
+ "title": "Single finite evaluation of the directed coefficient-system refinement",
+ "statement": "Fix finite-field data D,C,E, m≥0, normalized finite operations F at exponent m+1, IsUnit(C.l:D.k), simultaneous operations o and their canonical realization z, separated finite-type quasi-compact f:X→Y, compactifications c,d and refinement r:c→d. Let M be an arbitrary coefficient system on X and K a finite bounded constructible object at exponent m+1, with an isomorphism e from the mth evaluation of M to K. Evaluate systemComparison(r,M), then use supportEvaluation for c and finite support of e. This equals supportEvaluation for d followed by finite support of e, the inverse F finite-support realization for d, the inverse finite compactification comparison F.comparison(f,c,d) at K, and the F finite-support realization for c. Only one finite evaluation is computed; no integral input, system normalization, support reconstruction or equality detection is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence: compatibility of individual refinement maps with counits and j_!, before the projection square is deduced. Integral-system realization steps 1 and 3 of lem-sf-integral-projection-refinement-square."
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-integral-system-operations",
+  "lem-sf-refinement-projection-counit"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded constructible etale origin of K by finiteRing_constructibleDerived_origin. Apply finiteRefinementNormalization, reverse its isomorphism square, and use refinementComparisonAtWitness_inv_eq. Naturality removes the retained witness, yielding the fixed-scalar support-refinement square.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-sf-operation-stages",
+    "lem-sf-finite-refinement-ambient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence: compatibility of individual refinement maps with counits and j_!, before the projection square is deduced. Integral-system realization steps 1 and 3 of lem-sf-integral-projection-refinement-square."
+   }
+  },
+  {
+   "text": "Pass the proper/open-factor square and the direct-compositor square to fixed coordinates using the inverse coefficient equivalence and its unit. Naturality of direct coordinates pastes them; naturality of the fixed compositor moves the open coordinate through it. This proves the system-to-fixed finite refinement square.",
+   "uses": [
+    "def-sf-system-finite-evaluation-coordinates",
+    "lem-sf-system-finite-compositor-coordinates",
+    "lem-sf-system-finite-refinement-mate-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence: compatibility of individual refinement maps with counits and j_!, before the projection square is deduced. Integral-system realization steps 1 and 3 of lem-sf-integral-projection-refinement-square."
+   }
+  },
+  {
+   "text": "Transport both support coordinates along e by naturality and use naturality of the finite comparison. Combine the resulting square with the support-refinement square from the first step. Cancel the right support coordinate isomorphism and the finiteSupport isomorphism for d to obtain exactly the stated equation.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-sf-system-finite-evaluation-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence: compatibility of individual refinement maps with counits and j_!, before the projection square is deduced. Integral-system realization steps 1 and 3 of lem-sf-integral-projection-refinement-square."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-operation-stages",
+  "def-sf-system-finite-evaluation-coordinates",
+  "lem-sf-finite-refinement-ambient-normalization",
+  "lem-sf-system-finite-compositor-coordinates",
+  "lem-sf-system-finite-refinement-mate-coordinates",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence: compatibility of individual refinement maps with counits and j_!, before the projection square is deduced. Integral-system realization steps 1 and 3 of lem-sf-integral-projection-refinement-square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluate a proper open compactification refinement comparison under derived finite coefficient evaluation and the normalized support comparison",
+   "results": "{\"t\": \"2026-10-26T20:10:11Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluate a proper open compactification refinement comparison under derived finite coefficient evaluation and the normalized support comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_gt_t2space\", \"Profinite.NobelingProof.Products.isGood\", \"Profinite.NobelingProof.GoodProducts.max_eq_eval\", \"Profinite.NobelingProof.GoodProducts.eval\", \"Profinite.NobelingProof.eval_eq_\\u03c0J\", \"ShrinkingLemma.PartialRefinement.exists_gt\", \"Profinite.NobelingProof.GoodProducts.SumEval\", \"ShrinkingLemma.PartialRefinement.le_chainSup\"], \"digest\": \"d0f89f083fe0638e\"}",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction results only; the project-specific normalized geometric identity is absent from Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite evaluation of a compactification refinement comparison defined by proper open adjunction mates agrees with its finite coefficient comparison",
+   "results": "{\"t\": \"2026-10-26T20:10:32Z\", \"tool\": \"leansearch\", \"query\": \"Finite evaluation of a compactification refinement comparison defined by proper open adjunction mates agrees with its finite coefficient comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedSet.compactlyGeneratedAdjunction\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"paracompact_of_compact\", \"CompHausLike.sigmaComparison\", \"ContinuousMap.instContinuousEvalOfLocallyCompactPair\", \"AlgebraicGeometry.IsFinite.instMorphismRestrict\", \"Profinite.toProfiniteAdjToCompHaus\"], \"digest\": \"9fd591897484c8e0\"}",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction results only; the project-specific normalized geometric identity is absent from Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.Functor.map",
+   "results": "{\"t\": \"2026-10-26T20:10:32Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv, CategoryTheory.Functor.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv_apply\", \"CategoryTheory.Adjunction.homEquiv_unit\", \"CategoryTheory.Adjunction.homEquiv_counit\", \"CategoryTheory.Adjunction.homEquiv_symm_apply\", \"CategoryTheory.Adjunction.homEquiv_naturality_left\", \"CategoryTheory.Adjunction.homEquiv_naturality_right\", \"CategoryTheory.Adjunction.homEquiv_naturality_left_symm\", \"CategoryTheory.Adjunction.homEquiv_naturality_right_symm\"], \"digest\": \"2f77510ec29e9716\"}",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction results only; the project-specific normalized geometric identity is absent from Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality_right|homEquiv_counit",
+   "results": "{\"t\": \"2026-10-26T20:10:31Z\", \"tool\": \"grep\", \"query\": \"homEquiv_naturality_right|homEquiv_counit\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Comma.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\"], \"digest\": \"c449f395277bfda7\"}",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction results only; the project-specific normalized geometric identity is absent from Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralSupportReductionNormalization",
+  "date": "2026-10-27",
+  "group": "D5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"the projection transformation of [def-exchange-projection] is a composite of precisely these tensor and counit maps, hence is equivariant as well\": the Frobenius-transported compactification differs from the chosen one, so the two projection composites must be compared through the refinement comparison. Individual-arrow integral system realization of these tensor and counit maps, before their compactification comparison square is deduced. The one-input support/refinement part of the individual-arrow normalization, independent of tensor and projection. Finite scalar coordinates of the one-input support/refinement argument.",
+   "via": [
+    "lem-sf-integral-projection-system-coordinates",
+    "lem-sf-integral-projection-refinement-square",
+    "lem-fix-projection-compactification-comparison",
+    "lem-sf-integral-support-reduction-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemRefinementFiniteCoordinates",
+  "file": "lean/Sheaf/Paper/SystemRefinementFiniteCoordinates.lean",
+  "declaration": "WeilConjectures.FixProjectionCompactification.systemRefinementFiniteCoordinates",
+  "statement": "theorem systemRefinementFiniteCoordinates\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (m : ℕ)\n    (F : SixFunctorFiniteOperations D C E (m + 1) (Nat.le_add_left 1 m))\n    (hl : IsUnit (C.l : D.k)) (o : Operations C.l E) (z : Realizations C.l E D o)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left]\n    (c d : Compactification f.hom.left) (r : c.Refinement d)\n    (M : System C.l E X.obj.left)\n    (K : sixFunctorFiniteCategory D C E (m + 1) (Nat.le_add_left 1 m) X)\n    (e : (coefficientSequenceDerivedEvaluation C.l E X.obj.left m).obj M ≅ K.obj) :\n    (coefficientSequenceDerivedEvaluation C.l E Y.obj.left m).map\n        (RefinementProjection.systemComparison C.l E D o z r M) ≫\n      (supportEvaluation C.l E o c m).hom.app M ≫\n      (sixFunctorFiniteSupport D C E (m + 1) (Nat.le_add_left 1 m) f c).map e.hom =\n    (supportEvaluation C.l E o d m).hom.app M ≫\n      (sixFunctorFiniteSupport D C E (m + 1) (Nat.le_add_left 1 m) f d).map e.hom ≫\n      (F.finiteSupport f d).inv.app K ≫\n      ((F.finite.comparison f c d).inv.app K).hom ≫\n      (F.finiteSupport f c).hom.app K",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261027T021308-L-2753937",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261027T103520-L-1095809",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

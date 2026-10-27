@@ -12,9 +12,8 @@ public import Sheaf.Paper.IntegralScalarExtensionUniverses
 public import Sheaf.Paper.IntegralPullbackComparisonRealization
 public import Sheaf.Paper.SpecifiedPullbackComparisonAlpha
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Paper.EffectiveComparisonRealizationModels
-import Sheaf.Paper.IntegralComparisonSequenceSystems
-import Sheaf.Paper.IntegralComparisonRealizationModels
+import Sheaf.Paper.PodCounitScalarWordCoordinates
+import Sheaf.Paper.ExplicitScalarConeWordCoordinates
 
 /-!
 # Agreement of the specified integral pullback scalar comparisons
@@ -85,6 +84,26 @@ theorem isomorphismScalarComparisonAgreement
     (integralComparisonScalar l E L ι D g K).hom =
       (scalarPullbackCompleted l E L ι g K.obj K.property.1
         (specifiedPullbackComparisonAlpha l E L ι g K.obj K.property).choose).hom := by
-  sorry
+  let e : CounitRealization.Coefficient.{u} l := ⟨E, inferInstance, inferInstance, inferInstance⟩
+  let f : CounitRealization.Coefficient.{u} l := ⟨L, inferInstance, inferInstance, inferInstance⟩
+  have h := (podCounitScalarWordCoordinates l).2 D e f ι g
+  have hα := ExplicitScalarCone.explicitScalarConeWordCoordinates l E L ι g
+    ((D.coefficient E).system Y) ((D.coefficient E).system X)
+    ((D.coefficient L).system Y) ((D.coefficient E).roos X)
+    ((D.coefficient L).roos X) ((D.coefficient L).roos Y)
+    ((D.coefficient E).pullback g) ((D.coefficient L).pullback g)
+    ((D.scalar E L ι).model X) ((D.scalar E L ι).model Y)
+    ((D.coefficient L).system X) K.obj K.property
+    (h.initial K) (h.pullback K) (h.scalar K) (h.sourceWord K) (h.targetWord K)
+  have hβ := (h.coordinates K).2
+  apply (cancel_mono (podCounitScalarBetaB l D e f ι g K.obj)).1
+  rw [h.comparison K]
+  simpa only [podCounitScalarBetaA, podCounitScalarBetaB,
+    CounitRealization.Primitive.comparison, CounitRealization.Primitive.model,
+    CounitRealization.Primitive.system, podCounitWordModels,
+    ExplicitScalarCone.betaA, ExplicitScalarCone.betaB,
+    ExplicitScalarCone.pullbackSystem, ExplicitScalarCone.scalarSystem,
+    ExplicitScalarCone.sourceSystem, ExplicitScalarCone.targetSystem,
+    Category.assoc] using hα.symm
 
 end WeilConjectures

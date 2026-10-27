@@ -1,0 +1,132 @@
+{
+ "id": "lem-qcqs-compact-support-native-tower-comparison",
+ "kind": "statement",
+ "title": "Whole strict-tower comparison for native compact support",
+ "statement": "Let l be prime and invertible in a field K₀, E a finite extension of Q_l, X and Y finite-type K₀-schemes, f : X → Y a separated finite-type K₀-morphism, and c = (j,p) a compactification. Let SX be any coefficient derived-system calculus on X. Let T and eT be exactly the chosen coherent completed-coefficient tower and its evaluation comparisons from exists_compactSupportReductionTower. Put N = SX.reduction followed by native varying-ring extension by zero along j and derived proper image along p. Let e_n identify the nth finite evaluation of N with finite compact support of the nth scalar reduction, using compactSupportSystemEvaluation and SX.reductionEvaluation. There exists a natural isomorphism α : T ≅ N followed by exact derived restriction to completed-coefficient towers. For every ambient derived K and n, evaluation of α_K, followed by coefficientRestrictedEvaluationIso and restriction of e_n(K), equals eT_n(K). This comparison is an isomorphism of derived strict towers before any total inverse limit; it asserts no recorded integral compact-support action or scalar-adjunction formula.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Paragraphs 1–2: compatible canonical coefficient comparisons along the whole compact-support quotient tower; precise bridge for the recorded coherent tower"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-compactifications-refinements",
+  "def-compact-support-direct-image-detailed",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sp-varying-ring-operations",
+  "def-coef-ringed-sequence-site",
+  "def-weil-compact-support-native-system-evaluation",
+  "lem-weil-compact-support-reduction-tower-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized flat-term K-flat reduction model in the coefficient calculus to compare SX.reduction with the quotient reduction used in the coherent compact-support tower. Both compute derived extension of coefficients on the entire sequence site, with the universal derived counit and the actual quotient maps. The universal comparison of those left-derived pairs is natural on the unbounded derived category and preserves finite evaluation.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-sequence-site-completion-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exact sequence-site open extension, separately right-derived proper image, and exact completed-scalar restriction to this whole comparison. Compare with the coherent tower realization by the universal resolution comparisons before evaluation. The recorded geometric evaluation is fixed by the open unit and the proper derived unit. Thus its component after coefficientRestrictedEvaluationIso and the SX finite evaluation is exactly eT_n, giving the displayed normalization. The inverse construction uses the inverse universal comparisons.",
+   "uses": [
+    "lem-weil-compact-support-reduction-tower-functor",
+    "def-weil-compact-support-native-system-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-sequence-site-completion-projection",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "def-weil-compact-support-native-system-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q5",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Whole-system refinement of the quotient-compatibility paragraph; separates the strict realization bridge from total-limit uniqueness and scalar-adjunction transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison between strict quotient coefficient reduction systems before taking the derived inverse limit",
+   "results": "Eight unrelated order-quotient and model-theoretic direct-limit declarations; no coefficient-system or compact-support comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedUnique",
+   "results": "One generic right-derived uniqueness theorem. It proves the limit comparison already packaged in compactSupportNormalizedTowerLimit, not the required strict compact-support tower comparison.",
+   "date": "2026-10-27",
+   "verdict": "generic tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*(Native|Recorded)|nativeTowerComparison",
+   "results": "No matches in the msearch source index. Direct rg finds the native evaluation and transition APIs but no comparison to the recorded chosen coherent tower.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between strict derived towers of quotient coefficient modules preserving all finite evaluation maps",
+   "results": "Eight generic quotient-localization and derived-functor comparison declarations, including Quotient.natIsoLift, Functor.leftDerivedNatIso and Functor.rightDerivedNatIso; no whole compact-support tower comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsCompactSupportStrictReductionGamma",
+  "date": "2026-10-27",
+  "group": "Q5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-qcqs-compact-support-strict-reduction-gamma",
+   "place": "Whole strict-tower comparison in the first sentence of the projection-normalization proof"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QcqsCompactSupportNativeTowerComparison",
+  "file": "lean/Sheaf/Paper/QcqsCompactSupportNativeTowerComparison.lean",
+  "declaration": "WeilConjectures.qcqsCompactSupport_nativeTowerComparison",
+  "statement": "theorem qcqsCompactSupport_nativeTowerComparison\n    (SX : CoefficientDerivedSystemCalculus l E X) :\n    let hT := exists_compactSupportReductionTower l E K₀ X Y f hl c\n    let T := hT.choose_spec.choose_spec.2.2.choose\n    let eT := hT.choose_spec.choose_spec.2.2.choose_spec.2.choose_spec.2.choose\n    let N := SX.reduction ⋙ ProEtale.VaryingRing.J (compactSupportSystemLevel l E)\n        (compactSupportSystemQuotient l E) c.i ⋙\n      ProEtale.VaryingRing.P (compactSupportSystemLevel l E)\n        (compactSupportSystemQuotient l E) c.g\n    let e (n : ℕ) :=\n      Functor.isoWhiskerLeft SX.reduction (compactSupportSystemEvaluation l E c n) ≪≫\n        Functor.isoWhiskerRight (SX.reductionEvaluation n)\n          (sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1)))\n    ∃ α : T ≅ N ⋙ coefficientSequenceDerivedRestriction l E Y,\n      ∀ (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ),\n        (coefficientConstantTowerEvaluation l E Y n).map (α.hom.app K) ≫\n            (coefficientRestrictedEvaluationIso l E Y n).hom.app (N.obj K) ≫\n            (coefficientFiniteDerivedRestriction l E Y n).map ((e n).hom.app K) =\n          (eT n).hom.app K",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261027T034728-L-3679794",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261027T034728-L-3679794",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

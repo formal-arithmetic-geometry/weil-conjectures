@@ -1,0 +1,204 @@
+{
+ "id": "lem-trf-source-hom-double-complex-model",
+ "kind": "statement",
+ "title": "Signed first-quadrant Hom model for a module target",
+ "statement": "Let $A$ be a commutative ring, let $M^\\bullet$ be an integer-indexed cochain complex of $A$-modules [def-weil-abstract-derived-category], let $u\\in\\mathbf Z$ satisfy $M^a=0$ for $a>u$, and let $N$ be an $A$-module. Then there exists an injective resolution $N[0]\\to I^\\bullet$ [def-sp-injective-resolutions] with $I^i=0$ for $i<0$. For every such resolution, the following data define a commuting first-quadrant double complex [def-sp-double-complex-total] in $A$-modules:\n$$D^{i,b}=\\operatorname{Hom}_A(M^{u-b},I^i)\\quad(i,b\\geq0),\\qquad D^{i,b}=0\\quad\\text{otherwise},$$\n$$d_\\mathrm{I}(f)=d_I^i\\circ f,\\qquad d_\\mathrm{II}(f)=(-1)^{b-u+1}f\\circ d_M^{u-b-1}.$$\nPut $T^\\bullet=\\operatorname{Hom}_A^\\bullet(M^\\bullet,I^\\bullet)$ with the product terms and differential $d_T(f)=d_If-(-1)^t f d_M$ in degree $t$ [def-pur-hom-complex], interpreted on the one-object identity-covering ringed site with coefficient ring $A$. Let $Q^t=\\operatorname{Tot}(D)^{t+u}$ with $d_Q^t=d_{\\operatorname{Tot}(D)}^{t+u}$; this specifies degree translation with unchanged differential, independently of signed-shift conventions. The finite-coordinate reindexing $a=u-b$, $i=a+t$ gives an $A$-linear isomorphism of complexes $T^\\bullet\\cong Q^\\bullet$. In the ordinary derived category $D(A)$ it induces an isomorphism\n$$Q^\\bullet\\simeq R\\operatorname{Hom}_A(M^\\bullet,N[0]),$$\nwhere derived internal Hom is [def-pur-derived-internal-hom] on that same ringed site. No boundedness below, projectivity or finite-generation assumption on $M^\\bullet$, and no Noetherian assumption on $A$, is required.",
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 0G1Z, remark-ext-from-filtered-complex: the K-injective Hom-complex model, specialized to a module target and realized by a signed first-quadrant total complex; resolution construction in derived.tex lemma-injective-resolutions-exist (1), total convention in homology.tex section-double-complex."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions",
+  "def-sp-double-complex-total",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom",
+  "def-sc-module-total-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-ring-modules-enough-injectives], the category of $A$-modules is abelian and has enough injectives. Apply clause (1) of [lem-weil-pbc-left-exact-injective-resolution-degree-zero] to the object $N$ in this category (with the auxiliary abelian category also chosen to be $\\operatorname{Mod}(A)$). It gives an injective resolution $N[0]\\to I^\\bullet$ with $I^i=0$ for $i<0$. This proves the existence assertion. Fix any such resolution for the remaining steps.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013K, lemma-injective-resolutions-exist (1); module-category hypothesis: more-algebra.tex Tag 01DD, lemma-injectives-modules"
+   }
+  },
+  {
+   "text": "Define $D$ and its two differentials by the formulas in the statement, with all maps involving a zero term outside the quadrant equal to zero. Composition is $A$-linear because $A$ is commutative. We have $d_{\\mathrm I}^2(f)=d_I^{i+1}d_I^i f=0$ and $d_{\\mathrm{II}}^2(f)=(-1)^{b-u+1}(-1)^{b-u+2}f d_M^{u-b-1}d_M^{u-b-2}=0$. The two mixed composites both send $f\\in D^{i,b}$ to $(-1)^{b-u+1}d_I^i f d_M^{u-b-1}$: increasing $i$ does not change the sign of $d_{\\mathrm{II}}$. The same identities hold at the boundary since the missing terms are zero. Thus these are commuting differentials and $D$ is a first-quadrant double complex in precisely the convention of [def-sp-double-complex-total].",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0FNB, section-double-complexes, definition-double-complex; explicit verification for this signed Hom family"
+   }
+  },
+  {
+   "text": "Write $T^t=\\prod_{a\\in\\mathbf Z}\\operatorname{Hom}_A(M^a,I^{a+t})$ using [def-pur-hom-complex]. A factor is zero for $a>u$ because its source is zero, and for $a<-t$ because its target is zero. Hence only the finite interval $-t\\leq a\\leq u$ can contribute. Set $i=a+t$ and $b=u-a$; this bijects that interval with the pairs $i,b\\geq0$, $i+b=t+u$. Define $\\phi^t:T^t\\to Q^t$ by placing $f^a$ in the summand $(a+t,u-a)$ of the finite direct sum in [def-sp-double-complex-total]. Its inverse assigns that coordinate to $f^a$ for $-t\\leq a\\leq u$ and the unique zero map to every other factor. These maps are $A$-linear and inverse coordinatewise. If $t+u<0$, both the interval and the diagonal are empty, and this is the unique isomorphism between zero modules.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A8H, section-hom-complexes, product formula; homology.tex Tag 012Z, definition-associated-simple-complex, finite direct-sum formula"
+   }
+  },
+  {
+   "text": "Check the differentials on a coordinate $f^a:M^a\\to I^i$, where $i=a+t$, $b=u-a$. The $d_{\\mathrm I}$ contribution of the total differential is $d_I^i f^a$ in position $(i+1,b)$, corresponding to source degree $a$ in $T^{t+1}$. The $d_{\\mathrm{II}}$ contribution lies in position $(i,b+1)$, corresponding to source degree $a-1$, and equals $(-1)^i(-1)^{b-u+1}f^a d_M^{a-1}=(-1)^{t+1}f^a d_M^{a-1}$, since $i+b-u=t$. Combining the incoming contributions at source degree $a$, the inverse coordinate map therefore gives $d_I^{a+t}f^a+(-1)^{t+1}f^{a+1}d_M^a$, exactly $(d_Tf)^a$ by [def-pur-hom-complex]. Coordinates outside the interval are zero on both sides. Thus $d_Q^t\\phi^t=\\phi^{t+1}d_T^t$, using the total sign in [def-sp-double-complex-total]. As $Q$ uses the unchanged differential, no extra shift sign occurs. The coordinatewise inverse also commutes with the differentials by this equality, proving the asserted isomorphism of complexes.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012Z, definition-associated-simple-complex; more-algebra.tex Tag 0A8H, section-hom-complexes, differential sign rule"
+   }
+  },
+  {
+   "text": "The chosen $I^\\bullet$ is bounded below and each $I^i$ is injective, so [lem-weil-pbc-bounded-below-injectives-kinjective] makes it K-injective. On the one-object category with only the identity morphism and identity covering, a sheaf of modules over $A$ is just an $A$-module: there is one module to specify, identity restriction, and no additional sheaf condition; sheaf Hom and its product complex are the ordinary module Hom and the product complex $T$. Consequently [def-pur-derived-internal-hom], including its assertion for any K-injective representative of the target, identifies $T$ with $R\\operatorname{Hom}_A(M^\\bullet,N[0])$ in $D(A)$. Apply the localization functor of [def-weil-abstract-derived-category] to the complex isomorphism $\\phi:T\\cong Q$ and compose its inverse with this identification. This gives $Q\\simeq R\\operatorname{Hom}_A(M^\\bullet,N[0])$. Only the upper bound on $M$ and nonnegative injective terms of $I$ were used; the source modules need no projectivity or finite generation, and the ring need not be Noetherian.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-pur-derived-internal-hom",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070J, lemma-bounded-below-injectives-K-injective; sites-cohomology.tex Section Tag 08J7, section-internal-hom; injectives.tex Tag 0G1Z, remark-ext-from-filtered-complex, K-injective Hom model"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-modules-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "def-sp-double-complex-total",
+  "def-pur-hom-complex",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-pur-derived-internal-hom",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 0G1Z, remark-ext-from-filtered-complex, Hom model; the signed reindexing is written out by Q99 from homology.tex Tag 012Z and more-algebra.tex Tag 0A8H, with resolution existence from derived.tex Tag 013K and K-injectivity from Tag 070J."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above complex and a module admit a first quadrant Hom double complex using a nonnegative injective resolution whose reindexed total complex represents derived Hom",
+   "results": "{\"t\": \"2026-10-22T06:01:01Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded above complex and a module admit a first quadrant Hom double complex using a nonnegative injective resolution whose reindexed total complex represents derived Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.InjectiveResolution.extMk_hom\", \"CategoryTheory.InjectiveResolution.cochainComplex\", \"CategoryTheory.InjectiveResolution.ι'\", \"CategoryTheory.InjectiveResolution.extMk\", \"CategoryTheory.InjectiveResolution.extMk_surjective\", \"CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt\"], \"digest\": \"bd1aef75ff6edcbb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits construct injective resolutions, their K-injectivity and Ext classes, but none states the signed double-complex/translated-total comparison for an arbitrary bounded-above source. The source grep found no total/HomComplex comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Hom cochain complex from a bounded above complex to an injective resolution is a degree translation of the total complex of a first quadrant double complex",
+   "results": "{\"t\": \"2026-10-22T06:01:01Z\", \"tool\": \"leanfinder\", \"query\": \"The Hom cochain complex from a bounded above complex to an injective resolution is a degree translation of the total complex of a first quadrant double complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.ι'\", \"CategoryTheory.InjectiveResolution.cochainComplex\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CochainComplex.cm5b.i\", \"CategoryTheory.InjectiveResolution.ι\", \"CochainComplex.cm5b.I\", \"CategoryTheory.InjectiveResolution.cochainComplex_d\", \"CategoryTheory.InjectiveResolution.cocomplex\"], \"digest\": \"4e916a607e97eeae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits construct injective resolutions, their K-injectivity and Ext classes, but none states the signed double-complex/translated-total comparison for an arbitrary bounded-above source. The source grep found no total/HomComplex comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex, HomologicalComplex₂.total",
+   "results": "{\"t\": \"2026-10-22T06:00:49Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.HomComplex, HomologicalComplex₂.total\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits construct injective resolutions, their K-injectivity and Ext classes, but none states the signed double-complex/translated-total comparison for an arbitrary bounded-above source. The source grep found no total/HomComplex comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "HomComplex.*total|total.*HomComplex|double.*complex.*[Hh]om|[Hh]om.*double.*complex",
+   "results": "{\"t\": \"2026-10-22T06:00:49Z\", \"tool\": \"grep\", \"query\": \"HomComplex.*total|total.*HomComplex|double.*complex.*[Hh]om|[Hh]om.*double.*complex\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits construct injective resolutions, their K-injectivity and Ext classes, but none states the signed double-complex/translated-total comparison for an arbitrary bounded-above source. The source grep found no total/HomComplex comparison.",
+   "subdirectory": "Algebra/Homology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Represent derived Hom of a bounded above complex into a module by the total Hom double complex of its injective resolution",
+   "results": "{\"t\": \"2026-10-22T06:00:49Z\", \"tool\": \"leansearch\", \"query\": \"Represent derived Hom of a bounded above complex into a module by the total Hom double complex of its injective resolution\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: LeanSearch returned a rate-limit error; no absence claim is inferred."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-source-hyperext-module-target",
+  "date": "2026-10-22",
+  "group": "Q35"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: First paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Expanded input: Tag 0G4H proof, final application of perfect.tex lemma-coherent-internal-hom (Tag 0D0C); the algebra assertion explicitly stated in the proof of that lemma. First of the two algebraic reductions in the displayed spectral-sequence argument: the source-truncation sequence of Injectives Tag 0G20, with second argument a module in degree zero. Extracted source-hyper-Ext model argument: nonnegative injective resolution, K-injective Hom model and signed total-complex comparison (returned proof steps 2--4).",
+   "via": [
+    "lem-trf-source-hyperext-module-target",
+    "lem-trf-bounded-above-coherent-rhom",
+    "lem-trf-coherent-rhom-finite-injective-dimension",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-source-hom-double-complex-model",
+  "worker": "stage1",
+  "summary": "Reused existing module-category, nonnegative resolution and bounded-below K-injectivity leaves. Wrote the commuting-square, finite-coordinate inverse and full differential sign checks as elementary steps, followed by the existing derived-Hom model on the identity site. No new nodes or statement changes; retained the original recorded Mathlib searches after reading their results.",
+  "blueprint": "The item retains its inherited ancestor lem-trf-local-term-locality, proof (1)--(2), via the recorded nearby-cycle/duality chain. It realizes the source-hyper-Ext model extracted by lem-trf-source-hyperext-module-target: steps 1 and 5 supply the resolution/K-injective Hom model; steps 2--4 supply the signed first-quadrant total comparison. The ancestor connection is an auxiliary algebraic input, not a new assertion about stalks."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-4fceb3f8a",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-4fceb3f8a (reviewer sub-agent of L); spot-checked: Read the item's 5 steps in full against the statement of every cited node and against Stacks 0G1Z/013K/070J/01DD/0A8H/012Z/08J7, all with correct labels. No new nodes, statement unchanged, no SGA citation, no repair note (this is the first split, not a re-split). proof_deps equals the union of the step uses. Step 1: enough injectives in Mod(A) plus clause (1) of lem-weil-pbc-left-exact-injective-resolution-degree-zero (with B=Mod(A)) give I^{<0}=0 with injective terms. Step 2: checked by hand that D^{i,b}=Hom(M^{u-b},I^i) commutes, since the d_II sign (-1)^{b-u+1} does not depend on i, matching the commuting convention of def-sp-double-complex-total; first-quadrant holds. Step 3: the bijection of [-t,u] with {i,b>=0, i+b=t+u} turns the finite product into the direct sum; t+u<0 gives zero on both sides. Step 4: the total sign is (-1)^i(-1)^{b-u+1}=(-1)^{t+1}, and d_II goes to coordinate a-1, so the result is d_I f^a-(-1)^t f^{a+1}d_M^a = d_T(f)^a as in def-pur-hom-complex; translation adds no shift sign. Step 5: bounded-below injective implies K-injective (Mathlib leaf), the one-object identity site is small with Mod(O)=Mod(A), and the 'any other K-injective quasi-isomorphic complex' clause of def-pur-derived-internal-hom gives T=RHom; apply Q to the isomorphism. Advisory only: the leaf's K-injective (Hom^• acyclic) and def-pur-kinjective-complex (null-homotopic maps) agree in one line via H^0 Hom^•=Hom_K. Edge cases checked: u=-1,t=1; N=0 with a nonzero acyclic I; M=0; A=0; characteristic 2. The citer lem-trf-source-hyperext-module-target step 2 gets exactly what it uses. DAG grep for Hom/double-complex terms and 0G1Z finds no duplicate. All citations are definitions or Mathlib leaves, so there are no tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SourceHomDoubleComplexModel",
+  "declaration": "CochainComplex.source_hom_double_complex_model",
+  "file": "lean/Sheaf/Algebra/Homology/SourceHomDoubleComplexModel.lean",
+  "statement": "theorem source_hom_double_complex_model (A : Type u) [CommRing A] (M : CochainComplex (ModuleCat.{u} A) ℤ) (u₀ : ℤ) (hM : ∀ a : ℤ, u₀ < a → IsZero (M.X a)) (N : ModuleCat.{u} A) : (∃ I : CochainComplex (ModuleCat.{u} A) ℤ, ∃ s : (CochainComplex.singleFunctor (ModuleCat.{u} A) 0).obj N ⟶ I, QuasiIso s ∧ (∀ i : ℤ, Injective (I.X i)) ∧ (∀ i : ℤ, i < 0 → IsZero (I.X i))) ∧ (∀ (I : CochainComplex (ModuleCat.{u} A) ℤ) (s : (CochainComplex.singleFunctor (ModuleCat.{u} A) 0).obj N ⟶ I), QuasiIso s → (∀ i : ℤ, Injective (I.X i)) → (∀ i : ℤ, i < 0 → IsZero (I.X i)) → ∃ D : HomologicalComplex₂ (ModuleCat.{u} A) (ComplexShape.up ℤ) (ComplexShape.up ℤ), (∀ i b : ℤ, i < 0 ∨ b < 0 → IsZero ((D.X i).X b)) ∧ ∃ e : ∀ (i b : ℤ) (_hi : 0 ≤ i) (_hb : 0 ≤ b), ((D.X i).X b ≅ ModuleCat.of A (M.X (u₀ - b) →ₗ[A] I.X i)), (∀ (i b : ℤ) (hi : 0 ≤ i) (hb : 0 ≤ b) (f : M.X (u₀ - b) →ₗ[A] I.X i), (e (i + 1) b (by omega) hb).hom (((D.d i (i + 1)).f b) ((e i b hi hb).inv f)) = (I.d i (i + 1)).hom.comp f) ∧ (∀ (i b : ℤ) (hi : 0 ≤ i) (hb : 0 ≤ b) (f : M.X (u₀ - b) →ₗ[A] I.X i), (e i (b + 1) hi (by omega)).hom (((D.X i).d b (b + 1)) ((e i b hi hb).inv f)) = (b - u₀ + 1).negOnePow • (f.comp (M.d (u₀ - (b + 1)) (u₀ - b)).hom)) ∧ ∃ Q : CochainComplex (ModuleCat.{u} A) ℤ, ∃ q : ∀ t : ℤ, Q.X t ≅ (D.total (ComplexShape.up ℤ)).X (t + u₀), (∀ t : ℤ, Q.d t (t + 1) ≫ (q (t + 1)).hom = (q t).hom ≫ (D.total (ComplexShape.up ℤ)).d (t + u₀) ((t + 1) + u₀)) ∧ ∃ φ : moduleHomComplex M I ≅ Q, (∀ (t i b : ℤ) (hi : 0 ≤ i) (hb : 0 ≤ b) (h : i + b = t + u₀) (f : (D.X i).X b), (φ.inv.f t) ((q t).inv ((D.ιTotal (ComplexShape.up ℤ) i b (t + u₀) h) f)) = HomComplex.Cochain.single (ModuleCat.ofHom ((e i b hi hb).hom f)) t) ∧ Nonempty (DerivedCategory.Q.obj Q ≅ (ordinaryModuleDerivedInternalHom A).obj (op (DerivedCategory.Q.obj M), DerivedCategory.Q.obj ((CochainComplex.singleFunctor (ModuleCat.{u} A) 0).obj N))))",
+  "branch": "sheaf-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The signed bicomplex is specified by term isomorphisms and the exact differential formulas. The degree translation is specified with unchanged differential. The inverse comparison on every total coprojection is the corresponding single homogeneous cochain, fixing the finite-coordinate reindexing. The ordinary-module Hom and derived Hom are the existing moduleHomComplex and ordinaryModuleDerivedInternalHom presentations; the already landed definition node def-sc-module-total-hom-complex is added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-554565f2e",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Delivery = report + item record (lean/stmt_deps only) + new module SourceHomDoubleComplexModel.lean; stmt_deps adds the long-landed def-sc-module-total-hom-complex; lean.statement matches the file verbatim. All node clauses rendered: upper bound hM is the only hypothesis on M; resolution existence plus ∀ resolutions with QuasiIso/Injective/I^{<0}=0; HomologicalComplex₂ D vanishing off the quadrant, term isos e, d_I=d_I∘f, d_II=(b-u₀+1).negOnePow•f∘d_M^{u-b-1} (no dependence on i); Q translated with unchanged Tot differential; φ: moduleHomComplex M I ≅ Q with inverse coprojections = Cochain.single at (u₀-b → i); Nonempty Q(Q)≅ordinaryModuleDerivedInternalHom(M,N[0]). Signs checked against Mathlib ε₂=p.negOnePow and HomComplex δ: (-1)^i(-1)^{b-u+1}=(-1)^{t+1}. Edge cases u₀<0, t+u₀<0, M=0, N=0, A=0, char 2 covered. No duplicate (rg side-live); citer hyperext step 2 satisfied. No definitions, sorry only, docstrings and blueprint ok. Advisory: final iso is Nonempty, not pinned to φ (project convention); second reading by the same worker. Not compiled (no change)."
+ }
+}

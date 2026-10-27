@@ -1,0 +1,221 @@
+{
+ "id": "lem-sfb-scheme-quasicoherent-integral-closure",
+ "kind": "statement",
+ "title": "Stalkwise integral sections of a quasi-coherent algebra on a scheme",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme] and $\\mathcal B$ a sheaf of commutative $\\mathcal O_Y$-algebras whose underlying Zariski module is quasi-coherent [def-weil-pbc-quasi-coherent-algebra]. For every open $V\\subseteq Y$, define $\\mathcal D(V)=\\{b\\in\\mathcal B(V): b_y\\text{ is integral over }\\mathcal O_{Y,y}\\text{ for every }y\\in V\\}$, where $b_y$ is the germ in the module stalk [def-weil-pbc-module-stalk] and integral means satisfying a monic polynomial under the stalk structure map [def-weil-pbc-integral-closure]. With the restrictions inherited from $\\mathcal B$, this is a quasi-coherent Zariski $\\mathcal O_Y$-subalgebra. For each $y\\in Y$, the inclusion identifies $\\mathcal D_y$ with the integral closure of $\\mathcal O_{Y,y}$ in $\\mathcal B_y$. For every affine open $V\\subseteq Y$, its sections $\\mathcal D(V)\\subseteq\\mathcal B(V)$ are the integral closure of $\\Gamma(V,\\mathcal O_Y)$ in $\\mathcal B(V)$. No reducedness, Noetherian, separation, finite-type, or nonemptiness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 035F (lemma-integral-closure), statement and proof at lines 13844-13880."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "Restriction preserves the condition defining $\\mathcal D$, because the germ of a restriction at a point is the same germ. Compatible sections in $\\mathcal D(V_i)$ glue uniquely in $\\mathcal B(V)$, and the glued germ at $y\\in V_i$ is the given integral germ; hence the glued section lies in $\\mathcal D(V)$. In each stalk, the integral elements form a subring containing the image of $\\mathcal O_{Y,y}$ by [def-weil-pbc-integral-closure]. Thus addition, negation, multiplication, the unit, and multiplication by a section of $\\mathcal O_Y$ preserve the condition pointwise. This makes $\\mathcal D$ an $\\mathcal O_Y$-subalgebra sheaf of $\\mathcal B$.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035F (lemma-integral-closure), proof, lines 13860-13875."
+   }
+  },
+  {
+   "text": "Fix any affine open $V=\\operatorname{Spec}R$ and put $A=\\mathcal B(V)$. Apply [lem-weil-pbc-affine-tilde-gamma-adjunction](3) to the underlying quasi-coherent module: its restriction to $V$ is canonically $\\widetilde A$. The principal-open and stalk calculations [lem-weil-pbc-spec-module-tilde-sections] and [lem-weil-pbc-spec-tilde-stalk-localization] identify sections on $D(f)$ with $A_f$ and the germ map at $\\mathfrak p$ with $A\\to A_{\\mathfrak p}$, over $R\\to R_{\\mathfrak p}$. These are algebra identifications: products of fractions are $a/f^i\\cdot b/f^j=ab/f^{i+j}$, and germ maps preserve multiplication. Consequently the condition $a\\in\\mathcal D(V)$ says precisely that $a/1$ is integral over $R_{\\mathfrak p}$ for every $\\mathfrak p$. By [lem-sfb-integral-element-prime-local-criterion], this is equivalent to $a$ being integral over $R$. Thus $\\mathcal D(V)=C$, the integral closure of $R$ in $A$.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-sfb-integral-element-prime-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035F (lemma-integral-closure), proof, lines 13860-13875."
+   }
+  },
+  {
+   "text": "For the same affine $V$ and any $f\\in R$, step 2 applied to the affine $D(f)$ identifies $\\mathcal D(D(f))$ with the integral closure of $R_f$ in $A_f$. By [lem-weil-pbc-integral-closure-commutes-localization], this is $C_f$ as a submodule of $A_f$, and restriction sends $c$ to $c/1$. In particular every section on $D(f)$ is $c/f^n$, so multiplying it by $f^n$ extends to $c\\in\\mathcal D(V)$; if $c\\in C$ restricts to zero, the fraction equality in [def-weil-pbc-module-localization] gives $f^n c=0$ for some $n$. These are the two hypotheses of [pqf-lem-qcoh-principal-open-criterion], on every affine open. That criterion proves that the underlying module of $\\mathcal D$ is quasi-coherent; by [def-weil-pbc-quasi-coherent-algebra] this is the required quasi-coherent algebra.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "def-weil-pbc-module-localization",
+    "pqf-lem-qcoh-principal-open-criterion",
+    "def-weil-pbc-quasi-coherent-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035F (lemma-integral-closure), proof, lines 13860-13875."
+   }
+  },
+  {
+   "text": "Fix $y\\in V=\\operatorname{Spec}R$, corresponding to $\\mathfrak p$. The map $\\mathcal D_y\\to\\mathcal B_y$ is injective: equality of the two image germs means their representatives agree on a common neighbourhood in $\\mathcal B$, hence in the subsheaf $\\mathcal D$ [def-weil-pbc-module-stalk]. Its image consists of integral germs by the definition of $\\mathcal D$. Conversely identify $\\mathcal B_y=A_{\\mathfrak p}$ by the affine module and stalk calculations cited in step 2. By [lem-weil-pbc-integral-closure-commutes-localization], any element integral over $R_{\\mathfrak p}$ is $c/s$ for $c\\in C$ and $s\\notin\\mathfrak p$. Step 2 gives $c\\in\\mathcal D(V)$. On $D(s)$ the section $s$ of the structure sheaf is invertible, so the subalgebra property in step 1 gives $s^{-1}c\\in\\mathcal D(D(s))$ with the prescribed germ. Thus the image is exactly the integral closure, as an algebra over $\\mathcal O_{Y,y}$. This argument is local to one affine neighbourhood and uses no separation or finiteness hypothesis.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035F (lemma-integral-closure), proof, lines 13860-13875."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-sfb-integral-element-prime-local-criterion",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "def-weil-pbc-module-localization",
+  "pqf-lem-qcoh-principal-open-criterion",
+  "def-weil-pbc-quasi-coherent-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 035F (lemma-integral-closure), proof, lines 13860-13875."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi coherent algebra on a scheme, the sections whose germs are integral form a quasi coherent subalgebra computed by integral closure on affine opens",
+   "results": "{\"t\": \"2026-10-23T14:47:19Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi coherent algebra on a scheme, the sections whose germs are integral form a quasi coherent subalgebra computed by integral closure on affine opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral.component_integral\", \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"AlgebraicGeometry.IsIntegralHom.integral_app\", \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\"], \"digest\": \"9af84a15a74f4784\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring integral closure and scheme relative normalization exist, but neither states the stalkwise integral-closure subsheaf construction for an arbitrary quasi-coherent algebra; normalization requires a separate relative-spectrum realization, not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"AlgebraicGeometry\"",
+   "results": "{\"t\": \"2026-10-23T14:47:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"AlgebraicGeometry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring integral closure and scheme relative normalization exist, but neither states the stalkwise integral-closure subsheaf construction for an arbitrary quasi-coherent algebra; normalization requires a separate relative-spectrum realization, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure|integral.closure",
+   "results": "{\"t\": \"2026-10-23T14:47:19Z\", \"tool\": \"grep\", \"query\": \"integralClosure|integral.closure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"9256e981c6d08dc0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring integral closure and scheme relative normalization exist, but neither states the stalkwise integral-closure subsheaf construction for an arbitrary quasi-coherent algebra; normalization requires a separate relative-spectrum realization, not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure subsheaf of a quasi coherent algebra on the Zariski site of a scheme",
+   "results": "{\"t\": \"2026-10-23T14:47:20Z\", \"tool\": \"leansearch\", \"query\": \"Integral closure subsheaf of a quasi coherent algebra on the Zariski site of a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"completeIntegralClosure\", \"IsIntegralClosure.rec\", \"IsIntegralClosure\", \"integralClosure.isIntegral\", \"integralClosure\", \"integralClosure.isIntegralClosure\", \"IsIntegralClosure.of_isIntegrallyClosed\", \"integralClosure.AlgebraIsIntegral\"], \"digest\": \"f97a259e0600a051\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring integral closure and scheme relative normalization exist, but neither states the stalkwise integral-closure subsheaf construction for an arbitrary quasi-coherent algebra; normalization requires a separate relative-spectrum realization, not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stalkwise integral sections of a sheaf of algebras on a scheme give a quasi coherent module with affine sections the integral elements",
+   "results": "{\"t\": \"2026-10-23T14:47:21Z\", \"tool\": \"leanfinder\", \"query\": \"Stalkwise integral sections of a sheaf of algebras on a scheme give a quasi coherent module with affine sections the integral elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.integral_app\", \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"ModuleCat.tilde\", \"AlgebraicGeometry.Scheme.Modules\", \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"AlgebraicGeometry.IsIntegral.component_integral\", \"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\"], \"digest\": \"84fce4e21af302d8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ring integral closure and scheme relative normalization exist, but neither states the stalkwise integral-closure subsheaf construction for an arbitrary quasi-coherent algebra; normalization requires a separate relative-spectrum realization, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure|quasi.coherent.*integral|integral.*quasi.coherent",
+   "results": "{\"t\": \"2026-10-23T19:26:19Z\", \"tool\": \"grep\", \"query\": \"integralClosure|quasi.coherent.*integral|integral.*quasi.coherent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"8c8a4c7a5b3387ae\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative normalization for a qcqs scheme morphism is not the integral-closure subsheaf of an arbitrary quasi-coherent algebra without a relative-spectrum realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalkwise integral closure subsheaf of an arbitrary quasi coherent algebra on a scheme is quasi coherent with integral closure as affine sections",
+   "results": "{\"t\": \"2026-10-23T19:26:20Z\", \"tool\": \"leanfinder\", \"query\": \"The stalkwise integral closure subsheaf of an arbitrary quasi coherent algebra on a scheme is quasi coherent with integral closure as affine sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.IsIntegralHom.integral_app\", \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.IsIntegral.component_integral\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\"], \"digest\": \"2d5eee879d2e2581\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: relative normalization for a qcqs scheme morphism is not the integral-closure subsheaf of an arbitrary quasi-coherent algebra without a relative-spectrum realization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-quasicoherent-integral-closure",
+  "date": "2026-10-23",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1). Supporting input to Tag 09YB: extend the integral scheme obtained by induction over the open image V. Supporting input to Tag 0G2D: restriction of relative normalization along the open immersion, via etale base change. Supporting input to the etale restriction argument: Tag 0820 constructs the quasi-coherent integral-closure subalgebra on affine etale objects. Scheme-chart construction in the proof of Tag 0820, invoking Morphisms Tag 035F.",
+   "via": [
+    "lem-sfb-space-quasicoherent-integral-closure",
+    "lem-sfb-space-integral-factorization-etale-base-change",
+    "lem-sfb-space-integral-extension-qc-open",
+    "lem-sfb-qcqs-space-integral-scheme-cover",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scheme-quasicoherent-integral-closure",
+  "worker": "stage1",
+  "summary": "Verified Tag 035F and retained its statement. Wrote the subsheaf/subalgebra gluing, affine integral-element calculation, localization criterion for quasi-coherence, and explicit stalk surjectivity. Reused all existing affine and localization inputs; created only the ring-theoretic prime-local integrality criterion (034K).",
+  "blueprint": "Scheme-chart prerequisite in the inherited det-thm-sf-ctf-stability-direct-images (3) alteration-support chain: the invocation of Morphisms Tag 035F by algebraic-space Tag 0820. The current latest blueprint direct-image proof (3) is the ancestor context; no same-statement blueprint node was found.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-qcoh-principal-open-criterion",
+    "why": "Generic scheme module criterion converts the explicit localization calculation to quasi-coherence; this unit contains no replacement criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-qcoh-principal-open-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-6f39c5764",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-6f39c5764 (reviewer sub-agent of L); spot-checked: PASS with no changes. The item is unchanged against live (statement, stmt_deps and blueprint identical; live is still unsplit), and its statement agrees exactly with Stacks Morphisms Tag 035F (morphisms.tex:13843-13875). The proof follows the source. Step 1 is the elementary subsheaf/subalgebra argument; Tag 00GO is carried by the def-weil-pbc-integral-closure leaf. Step 2 obtains the affine sections from the tilde counit iso, D(f)-sections and stalk localization, then the new 034K node. Step 3 checks both hypotheses of pqf-lem-qcoh-principal-open-criterion for every affine W and a, using 0307 (lem-weil-pbc-integral-closure-commutes-localization) and fraction equality. Step 4 gets stalk injectivity from germ equality and surjectivity from writing an integral element as c/s via 0307 and inverting s on D(s). Every step's uses match proof_deps, and each cited statement says what its step takes from it. The declared tool use of pqf-lem-qcoh-principal-open-criterion (a Lean-backed generic qc criterion from unit sk-prop-av-pqf-finite) is accepted. The new node lem-sfb-integral-element-prime-local-criterion is exactly Algebra Tag 034K (algebra.tex:7629-7663) for an arbitrary ring map R→A. It is self-contained and statement-only, is a real lemma rather than an elementary fact or a clause of the item, and has blueprint via = [item]+via. It holds on small cases: R=0, Z→Q with a=1/2, Z→F_p[x] with a=x, and k[t]→k[t,1/t] with a=1/t. Mathlib has no element-wise version: LocalProperties/IntegrallyClosed covers domains only, and RingHom.isIntegral_ofLocalizationSpan is about whole ring maps and is not a one-line specialization. rg for 034K and statement scans found no duplicate of the new node or of the item. No SGA citations."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeQuasiCoherentIntegralClosure",
+  "declaration": "AlgebraicGeometry.Scheme.exists_quasiCoherent_stalkwiseIntegralClosure",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeQuasiCoherentIntegralClosure.lean",
+  "statement": "theorem exists_quasiCoherent_stalkwiseIntegralClosure (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf) (hB : Y.IsQuasiCoherentAlgebra B) : ∃ (D : Y.CommAlgebraSheaf) (ι : D ⟶ B), Y.IsQuasiCoherentAlgebra D ∧ (∀ V : Y.Opens, Function.Injective (ι.right.hom.app (op V))) ∧ (∀ (V : Y.Opens) (b : B.right.obj.obj (op V)), b ∈ Set.range (ι.right.hom.app (op V)) ↔ ∀ (y : Y) (hy : y ∈ V), ((TopCat.Presheaf.stalkFunctor CommRingCat y).map B.hom.hom).hom.IsIntegralElem (TopCat.Presheaf.germ (C := CommRingCat) B.right.obj V y hy b)) ∧ (∀ y : Y, Function.Injective ((TopCat.Presheaf.stalkFunctor CommRingCat y).map ι.right.hom) ∧ ∀ b : (TopCat.Presheaf.stalkFunctor CommRingCat y).obj B.right.obj, b ∈ Set.range ((TopCat.Presheaf.stalkFunctor CommRingCat y).map ι.right.hom) ↔ ((TopCat.Presheaf.stalkFunctor CommRingCat y).map B.hom.hom).hom.IsIntegralElem b) ∧ (∀ (V : Y.Opens), IsAffineOpen V → ∀ b : B.right.obj.obj (op V), b ∈ Set.range (ι.right.hom.app (op V)) ↔ (B.hom.hom.app (op V)).hom.IsIntegralElem b)",
+  "branch": "sheaf-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60b8084b7",
+  "group": "Q41",
+  "result": "pass",
+  "note": "The Lean statement matches the node and Stacks Morphisms Tag 035F (morphisms.tex 13844-13875) clause by clause. Hypotheses: arbitrary Scheme.{u}, B : Y.CommAlgebraSheaf, hB : Y.IsQuasiCoherentAlgebra B (the dependency's own predicate, A.toModule.IsQuasicoherent); no extra assumptions. D: ∃ D (ι : D ⟶ B) in Under Y.sheaf, injective on every open, with range on every open V exactly the sections whose germs are IsIntegralElem under the stalk of B.hom; this fixes D up to unique iso. Conclusions: Y.IsQuasiCoherentAlgebra D; at every point the stalk map of ι is injective with range exactly the integral elements; on affine V the range is the elements integral under B.hom.app V. Edge cases (empty Y, empty open, zero ring, non-injective structure maps, nilpotents, universes) checked. Only the item's lean field changed against live; lean.statement is verbatim in the file; single theorem by sorry; source and blueprint docstrings carry the four proof steps; proof-plan imports exist; no duplicate (the space version is a separate consumer, Mathlib Normalization is a different statement); report has Worker report and Second reading by Q41. Notes: CommRingCat stalks render the node's module stalk (integrality needs the ring structure; carriers canonically equal); unused public import of PresheafModuleStalkFunctor is harmless. No file changed, so no compile."
+ }
+}

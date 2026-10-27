@@ -1,0 +1,113 @@
+{
+ "id": "def-pur-ordinary-scalar-associator",
+ "kind": "definition",
+ "title": "Ordinary scalar associator fixed by adjunction units",
+ "statement": "For composable morphisms a:R to S and b:S to T of commutative ring sheaves on the small pro-etale site of any scheme W, and d:R to T equal to a followed by b, ordinaryScalarAssociator is the unique left-adjoint comparison from successive ordinary scalar extension to direct extension for the unit-normalized pbcScalarAdjunction and identity-on-sections pbcRestrictComp.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6 (lemma-adjoint), Tag 06YY (lemma-derived-base-change); ordinary tensor associativity: sites-modules.tex, Tag 03EK."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 06YY; auxiliary exact-localization argument for constant/completed scalar associativity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of mates for composite adjunctions and scalar restriction extension natural transformations",
+   "results": "msearch leanfinder found mateEquiv and mateEquiv_hcomp; no prescribed scalarCompletion normalization or associativity square.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Mathlib leftAdjointUniq and homEquiv_leftAdjointUniq_hom_app supply uniqueness and unit characterization.",
+   "date": "2026-10-26",
+   "verdict": "usable ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*comp|mate.*comp",
+   "results": "Existing exact-derived square pasting, universal left-derived uniqueness, and normalized ordinary/derived scalar adjunctions. No specialized model comparison.",
+   "date": "2026-10-26",
+   "verdict": "usable ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For exact functors, localization preserves the unit-normalized associator of composite adjunctions and the universal left derived counit comparison.",
+   "results": "Adjunction.localization, localization_unit_app, localization_counit_app, derived_unit and derived_counit. These supply generic adjunction localization, not the specialized pbc normalization and associator comparison.",
+   "date": "2026-10-26",
+   "verdict": "ingredients, no exact specialized match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantCompletedScalarAssociativity",
+  "date": "2026-10-26",
+  "group": "P7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Auxiliary Step 9 of strict scalar composition, serving coefficient compatibility: Ordinary scalar associator fixed by adjunction units.",
+   "via": [
+    "lem-pur-constant-completed-scalar-associativity",
+    "lem-pur-compact-support-strict-scalar-composition",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantCompletedOrdinaryAssociativity",
+  "file": "lean/Sheaf/Paper/ConstantCompletedOrdinaryAssociativity.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.ordinaryScalarAssociator",
+  "statement": "def ordinaryScalarAssociator {W : Scheme.{u}}\n    {R S T : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}\n    (a : R ⟶ S) (b : S ⟶ T) (d : R ⟶ T) (h : a ≫ b = d) :\n    pbcExtend a ⋙ pbcExtend b ≅ pbcExtend d",
+  "branch": "sheaf-dag",
+  "by": "P7",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261025T204812-L-3012368",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261025T204812-L-3012368",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

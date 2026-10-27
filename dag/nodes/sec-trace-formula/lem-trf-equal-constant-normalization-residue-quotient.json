@@ -1,0 +1,237 @@
+{
+ "id": "lem-trf-equal-constant-normalization-residue-quotient",
+ "kind": "statement",
+ "title": "Integral closure and residue quotient of equal-constant pairs",
+ "statement": "Let $k$ be a field [def-weil-field]. Put $P=k[[u]]\\times k[[v]]$ [def-weil-pbc-multivariate-power-series], $L=k((u))\\times k((v))$ [def-weil-pbc-laurent-series], and $S=\\{(f,g)\\in P:f(0)=g(0)\\}$, regarded as a subring of $L$. The integral closure of $S$ in $L$ [def-weil-pbc-integral-closure] is exactly $P$. For $\\epsilon=(1,0)\\in P$ one has $P=S+S\\epsilon=S[\\epsilon]$ and $\\epsilon^2=\\epsilon$. The ring $S$ is local with unique maximal ideal $\\mathfrak m=\\{(f,g)\\in S:f(0)=g(0)=0\\}$ and residue map $c:S\\to k$, $c(f,g)=f(0)=g(0)$. Give $k$ its $S$-module structure via $c$. The map $d:P\\to k$, $d(f,g)=f(0)-g(0)$, is a surjective $S$-linear map with kernel $S$; hence it induces an $S$-linear isomorphism $P/S\\cong k$. In particular $\\mathfrak m(P/S)=0$ and $P/S$ is free of rank one over $S/\\mathfrak m$, with basis the class of $\\epsilon$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4A (lemma-2-branches-delta-1), proof Case I: explicit algebra of the split completed node."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-laurent-series",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "For $p=(f,g)\\in P$ put $a=f(0)-g(0)\\in k$, $\\widetilde a=(a,a)\\in S$ and $s=(f-a,g)\\in S$. Then $p=s+\\widetilde a\\epsilon$. Since $\\epsilon=(1,0)$ belongs to $P$ and $\\epsilon^2=\\epsilon$, this proves $P=S+S\\epsilon=S[\\epsilon]$. Moreover $(p-s)(p-s-\\widetilde a)=\\widetilde a^2\\epsilon(\\epsilon-1)=0$. Thus every $p\\in P$ satisfies the monic polynomial $(T-s)(T-s-\\widetilde a)\\in S[T]$ and is integral over $S$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Case I and the subsequent by-hand delta calculation; explicit equal-constant algebra supplied by NE."
+   }
+  },
+  {
+   "text": "Conversely let $z=(h_1,h_2)\\in L$ satisfy $z^N+\\sum_{i<N}s_i z^i=0$ with $N\\ge1$ and $s_i\\in S$. Project this equality to either Laurent coordinate $h$. All projected coefficients $b_i$ lie in $k[[t]]$. If $h\\ne0$ has lowest exponent $n<0$ and coefficient $b\\ne0$, the coefficient of $t^{Nn}$ in $h^N$ is $b^N\\ne0$: in the convolution product the only $N$ exponents at least $n$ summing to $Nn$ are all $n$. Every exponent occurring in $b_i h^i$ is at least $in>Nn$, so those terms have zero coefficient there. This contradicts the equation. Consequently each coordinate is zero or has no negative exponents, hence belongs to its power-series subring. Therefore $z\\in P$, giving the reverse inclusion in the integral closure.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-laurent-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Case I and the subsequent by-hand delta calculation; explicit equal-constant algebra supplied by NE."
+   }
+  },
+  {
+   "text": "Constant-coefficient evaluation is a ring homomorphism, since the degree-zero convolution has just the term $f(0)g(0)$. Thus $c:S\\to k$ is a ring homomorphism, surjective via $a\\mapsto(a,a)$, with kernel $\\mathfrak m$. If $c(f,g)=a\\ne0$, the cited power-series unit criterion over the local ring $k$ gives inverses $f^{-1},g^{-1}$; their constant coefficients are both $a^{-1}$, so $(f^{-1},g^{-1})\\in S$. If $c(f,g)=0$, an inverse in $S$ would map to an inverse of zero in the nonzero field $k$, impossible. Finally any ideal properly containing $\\mathfrak m$ contains such a unit, so $\\mathfrak m$ is maximal; every proper ideal is contained in $\\mathfrak m$ since its elements are nonunits. Hence it is the unique maximal ideal, and $c$ identifies $S/\\mathfrak m$ with $k$.",
+   "uses": [
+    "def-weil-field",
+    "def-weil-pbc-multivariate-power-series",
+    "lem-weil-pbc-power-series-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Case I and the subsequent by-hand delta calculation; explicit equal-constant algebra supplied by NE."
+   }
+  },
+  {
+   "text": "The map $d$ is additive and for $s\\in S$, $p=(f,g)\\in P$ one has $d(sp)=c(s)f(0)-c(s)g(0)=c(s)d(p)$, proving $S$-linearity. Also $d(a,0)=a$ and $d(p)=0$ precisely when $p\\in S$. Define the induced map $\\bar d:P/S\\to k$ by $[p]\\mapsto d(p)$; replacing $p$ by $p+s$ leaves this value unchanged. Its inverse is $a\\mapsto[(a,0)]$: the difference $p-(d(p),0)$ lies in $S$, and $d(a,0)=a$. For $s\\in S$, $s(a,0)-(c(s)a,0)$ has both constant terms zero, so the inverse is also $S$-linear. For $s\\in\\mathfrak m$, $d(sp)=0$, whence $s[p]=0$. Under $S/\\mathfrak m\\cong k$, $[\\epsilon]$ maps to $1$; explicitly $[p]=d(p)[\\epsilon]$, uniquely since $\\bar d([\\epsilon])=1$. This is the asserted rank-one basis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Case I and the subsequent by-hand delta calculation; explicit equal-constant algebra supplied by NE."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-laurent-series",
+  "def-weil-field",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-power-series-local-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Case I and the subsequent by-hand delta calculation; explicit equal-constant algebra supplied by NE."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(integralClosure|IsIntegralClosure).*(PowerSeries|Prod)|constantCoeff.*(sub|quotient)|quotient.*constantCoeff",
+   "results": "{\"t\": \"2026-10-22T06:37:11Z\", \"tool\": \"grep\", \"query\": \"(integralClosure|IsIntegralClosure).*(PowerSeries|Prod)|constantCoeff.*(sub|quotient)|quotient.*constantCoeff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/FormalGroup/Basic.lean\", \"Mathlib/RingTheory/FormalGroup/Basic.lean\", \"Mathlib/RingTheory/FormalGroup/Basic.lean\", \"Mathlib/RingTheory/FormalGroup/Basic.lean\", \"Mathlib/RingTheory/FormalGroup/Basic.lean\", \"Mathlib/NumberTheory/BernoulliPolynomials.lean\", \"Mathlib/RingTheory/WittVector/WittPolynomial.lean\", \"Mathlib/RingTheory/WittVector/Complete.lean\"], \"digest\": \"0ef316cf14b73599\"}. Read the hits: PowerSeries.residueFieldOfPowerSeries identifies the residue field of a single power-series ring, and Weierstrass division/preparation concerns a principal quotient in one variable. TensorProduct.toIntegralClosure declarations concern base change, not normalization of the equal-constant subring. None gives the product integral closure together with the S-linear difference quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "normalization of a split node has quotient of length one given by difference of constant coefficients",
+   "results": "{\"t\": \"2026-10-22T06:37:11Z\", \"tool\": \"leansearch\", \"query\": \"normalization of a split node has quotient of length one given by difference of constant coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ONote.nf_repr_split\", \"ONote.nf_repr_split'\", \"ONote.split_eq_scale_split'\", \"Polynomial.Splits.C\", \"Ordnode.splitAtAux\", \"Polynomial.degree_normalize\", \"Polynomial.Splits.coeff_zero_eq_leadingCoeff_mul_prod_roots\", \"Ordnode.split\"], \"digest\": \"c03433a176ee3902\"}. Read the hits: PowerSeries.residueFieldOfPowerSeries identifies the residue field of a single power-series ring, and Weierstrass division/preparation concerns a principal quotient in one variable. TensorProduct.toIntegralClosure declarations concern base change, not normalization of the equal-constant subring. None gives the product integral closure together with the S-linear difference quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries, integralClosure",
+   "results": "{\"t\": \"2026-10-22T06:37:11Z\", \"tool\": \"loogle\", \"query\": \"PowerSeries, integralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read the hits: PowerSeries.residueFieldOfPowerSeries identifies the residue field of a single power-series ring, and Weierstrass division/preparation concerns a principal quotient in one variable. TensorProduct.toIntegralClosure declarations concern base change, not normalization of the equal-constant subring. None gives the product integral closure together with the S-linear difference quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral closure of the equal constant subring of k[[u]] times k[[v]] is the product and its quotient is the residue field via difference of constant terms",
+   "results": "{\"t\": \"2026-10-22T06:37:14Z\", \"tool\": \"leanfinder\", \"query\": \"integral closure of the equal constant subring of k[[u]] times k[[v]] is the product and its quotient is the residue field via difference of constant terms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.residueFieldOfPowerSeries\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"Polynomial.residueFieldMapCAlgEquiv\", \"instIsFractionRingQuotientIdealResidueField\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"LaurentSeries.powerSeries_ext_subring\"], \"digest\": \"725adbae76c28ee1\"}. Read the hits: PowerSeries.residueFieldOfPowerSeries identifies the residue field of a single power-series ring, and Weierstrass division/preparation concerns a principal quotient in one variable. TensorProduct.toIntegralClosure declarations concern base change, not normalization of the equal-constant subring. None gives the product integral closure together with the S-linear difference quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "node|equal.constant|fiber[Pp]roduct|fibre[Pp]roduct",
+   "results": "{\"t\": \"2026-10-22T06:37:41Z\", \"tool\": \"grep\", \"query\": \"node|equal.constant|fiber[Pp]roduct|fibre[Pp]roduct\", \"sub\": \"RingTheory/PowerSeries\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read the hits: PowerSeries.residueFieldOfPowerSeries identifies the residue field of a single power-series ring, and Weierstrass division/preparation concerns a principal quotient in one variable. TensorProduct.toIntegralClosure declarations concern base change, not normalization of the equal-constant subring. None gives the product integral closure together with the S-linear difference quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"prod\"",
+   "results": "{\"t\": \"2026-10-22T06:37:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"prod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure\", \"TensorProduct.toIntegralClosure_bijective_of_smooth\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"TensorProduct.toIntegralClosure_bijective_of_tower\"], \"digest\": \"a935f45cd469c5d8\"}. Read the hits: PowerSeries.residueFieldOfPowerSeries identifies the residue field of a single power-series ring, and Weierstrass division/preparation concerns a principal quotient in one variable. TensorProduct.toIntegralClosure declarations concern base change, not normalization of the equal-constant subring. None gives the product integral closure together with the S-linear difference quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalization conductor quotient for two power series branches glued at their common residue field",
+   "results": "{\"t\": \"2026-10-22T06:37:52Z\", \"tool\": \"leanfinder\", \"query\": \"normalization conductor quotient for two power series branches glued at their common residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.weierstrassDiv\", \"PowerSeries.weierstrassMod\", \"PowerSeries.weierstrassDistinguished_mul\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.IsWeierstrassDivisorAt.mod\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.weierstrassUnit\"], \"digest\": \"fd8bdb3562c8879b\"}. Read the hits: PowerSeries.residueFieldOfPowerSeries identifies the residue field of a single power-series ring, and Weierstrass division/preparation concerns a principal quotient in one variable. TensorProduct.toIntegralClosure declarations concern base change, not normalization of the equal-constant subring. None gives the product integral closure together with the S-linear difference quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(integralClosure|IsIntegralClosure).*(PowerSeries|Prod)|equal.constant|constantCoeff.*quotient",
+   "results": "{\"t\": \"2026-10-23T04:51:30Z\", \"tool\": \"grep\", \"query\": \"(integralClosure|IsIntegralClosure).*(PowerSeries|Prod)|equal.constant|constantCoeff.*quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\"], \"digest\": \"a3dd906d7a5eadca\"}. Read the returned hits: single-branch Laurent embeddings, power-series residue fields and Weierstrass division do not state the equal-constant product normalization or its S-linear quotient. TensorProduct.toIntegralClosure is a tensor base-change map; product hits concern finite products of integral elements, not product rings.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "normalization of the fiber product of two power series rings over their common residue field",
+   "results": "{\"t\": \"2026-10-23T04:51:31Z\", \"tool\": \"leansearch\", \"query\": \"normalization of the fiber product of two power series rings over their common residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.instNormalizationMonoid\", \"PowerSeries.divXPowOrderHom\", \"PowerSeries.instIsDiscreteValuationRing\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"PowerSeries.residueFieldOfPowerSeries\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"PowerSeries.X_eq_normalizeX\"], \"digest\": \"f2757aa08a1af81b\"}. Read the returned hits: single-branch Laurent embeddings, power-series residue fields and Weierstrass division do not state the equal-constant product normalization or its S-linear quotient. TensorProduct.toIntegralClosure is a tensor base-change map; product hits concern finite products of integral elements, not product rings.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries, integralClosure",
+   "results": "{\"t\": \"2026-10-23T04:51:31Z\", \"tool\": \"loogle\", \"query\": \"PowerSeries, integralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read the returned hits: single-branch Laurent embeddings, power-series residue fields and Weierstrass division do not state the equal-constant product normalization or its S-linear quotient. TensorProduct.toIntegralClosure is a tensor base-change map; product hits concern finite products of integral elements, not product rings.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"prod\"",
+   "results": "{\"t\": \"2026-10-23T04:51:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"prod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure\", \"TensorProduct.toIntegralClosure_bijective_of_smooth\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"TensorProduct.toIntegralClosure_bijective_of_tower\"], \"digest\": \"a935f45cd469c5d8\"}. Read the returned hits: single-branch Laurent embeddings, power-series residue fields and Weierstrass division do not state the equal-constant product normalization or its S-linear quotient. TensorProduct.toIntegralClosure is a tensor base-change map; product hits concern finite products of integral elements, not product rings.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral closure of pairs of power series with equal constant coefficients in the product of Laurent series fields and quotient by the subring",
+   "results": "{\"t\": \"2026-10-23T04:51:32Z\", \"tool\": \"leanfinder\", \"query\": \"integral closure of pairs of power series with equal constant coefficients in the product of Laurent series fields and quotient by the subring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.powerSeries_as_subring\", \"LaurentSeries.powerSeries_ext_subring\", \"LaurentSeries.RatFuncAdicCompl\", \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"LaurentSeries.mem_integers_of_powerSeries\", \"LaurentSeries.instIsFractionRingPowerSeries\", \"LaurentSeries.powerSeriesEquivSubring_apply\", \"LaurentSeries.exists_powerSeries_of_memIntegers\"], \"digest\": \"22d8d129710a3e64\"}. Read the returned hits: single-branch Laurent embeddings, power-series residue fields and Weierstrass division do not state the equal-constant product normalization or its S-linear quotient. TensorProduct.toIntegralClosure is a tensor base-change map; product hits concern finite products of integral elements, not product rings.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two power series branches glued at constant coefficients normalization quotient is one dimensional residue field",
+   "results": "{\"t\": \"2026-10-23T04:51:33Z\", \"tool\": \"leanfinder\", \"query\": \"two power series branches glued at constant coefficients normalization quotient is one dimensional residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.residueFieldOfPowerSeries\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.weierstrassMod\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.weierstrassUnit\"], \"digest\": \"234ae84e9d4df46f\"}. Read the returned hits: single-branch Laurent embeddings, power-series residue fields and Weierstrass division do not state the equal-constant product normalization or its S-linear quotient. TensorProduct.toIntegralClosure is a tensor base-change map; product hits concern finite products of integral elements, not product rings.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-normalization-quotient",
+  "date": "2026-10-22",
+  "group": "Q85"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Numerical exceptional-fibre normalization calculation in the descendant lem-trf-nodal-normalization-quotient: old proof step 3 and the local difference-of-constants part of step 4.",
+   "via": [
+    "lem-trf-nodal-normalization-quotient",
+    "lem-trf-nodal-curve-normalization-euler",
+    "lem-trf-nodal-contraction-euler-defect",
+    "lem-trf-smooth-target-modification-exceptional-tree",
+    "lem-trf-valuation-marking-semistable-separation",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-equal-constant-normalization-residue-quotient",
+  "worker": "stage1",
+  "summary": "Explicit monic quadratic gives integrality of P; Laurent coefficients give the reverse inclusion. Reuse the existing power-series unit criterion for locality, and construct inverse maps for the residue quotient. No new nodes needed.",
+  "blueprint": "The inherited ancestor lem-trf-local-term-locality is served through the nodal exceptional-fibre Euler calculation: lem-trf-nodal-normalization-quotient, old step 3 and the difference-of-constants part of step 4. The present proof expands precisely that equal-constant local algebra, without changing the route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NE-b55a9d6a4",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-b55a9d6a4 (reviewer sub-agent of L); spot-checked: I read the whole item, all 4 steps and every cited statement. There are no new nodes. Statement, stmt_deps, blueprint and source are byte-identical to live, where the item is still unsplit with no repair note, so this is not a supersession and not a re-split. I read the source, Stacks curves.tex 0C4A (lemma-2-branches-delta-1) Case I; this proof supplies its 'verified by hand' algebra over an arbitrary field. Step 1: s=(f-a,g) is in S, p=s+(a,a)ε, and (T-s)(T-s-ã) is a monic polynomial over S that kills p. This uses only the definition of integrality and gives P=S[ε]. Step 2: on a Laurent coordinate of order n<0, the t^{Nn} coefficient is b^N≠0, and in>Nn for every i<N including i=0, so the integral equation fails. Step 3: lem-weil-pbc-power-series-local-ring(a) over the local ring k inverts f and g; both inverses have constant term a^{-1}, so S is local with maximal ideal m=ker c. Step 4: d(sp)=c(s)d(p), ker d=S, the inverse a↦[(a,0)] is S-linear, and [p]=d(p)[ε]. I checked k=F_2, a=0, a zero coordinate, N=1, and that S is never assumed to be a domain. All cited nodes are mathlib leaves, so there is no route issue or tool use; proof_deps equals the union of the uses; no SGA is cited. The parent lem-trf-nodal-normalization-quotient step 2 gets exactly what it uses. Duplicates: lem-sfb-split-node-normalization-conductor is about polynomial rings, and lem-sfb-nodal-completed-normalization-model (unsplit) contains the algebraically closed closure clause inside a curve statement. Neither is the same statement. Maintainer note: lem-sfb-nodal-completed-normalization-model could cite this item when it is split."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EqualConstantNormalizationResidueQuotient",
+  "declaration": "RingTheory.equalConstant_normalization_residue_quotient",
+  "file": "lean/Sheaf/RingTheory/EqualConstantNormalizationResidueQuotient.lean",
+  "statement": "theorem equalConstant_normalization_residue_quotient (k : Type u) [Field k] (S : Subring (PowerSeries k × PowerSeries k)) (hS : ∀ p : PowerSeries k × PowerSeries k, p ∈ S ↔ PowerSeries.constantCoeff p.1 = PowerSeries.constantCoeff p.2) : (∀ z : LaurentSeries k × LaurentSeries k, ((RingHom.prodMap (HahnSeries.ofPowerSeries ℤ k) (HahnSeries.ofPowerSeries ℤ k)).comp S.subtype).IsIntegralElem z ↔ z ∈ (⊤ : Subring (PowerSeries k × PowerSeries k)).map (RingHom.prodMap (HahnSeries.ofPowerSeries ℤ k) (HahnSeries.ofPowerSeries ℤ k))) ∧ (∀ p : PowerSeries k × PowerSeries k, ∃ s t : S, p = s.val + t.val * (1, 0)) ∧ Algebra.adjoin S ({(1, 0)} : Set (PowerSeries k × PowerSeries k)) = ⊤ ∧ ((1, 0) : PowerSeries k × PowerSeries k) ^ 2 = (1, 0) ∧ IsLocalRing S ∧ ∃ (m : Ideal S) (c : S →+* k), (∀ s : S, s ∈ m ↔ PowerSeries.constantCoeff s.val.1 = 0 ∧ PowerSeries.constantCoeff s.val.2 = 0) ∧ m.IsMaximal ∧ (∀ I : Ideal S, I.IsMaximal → I = m) ∧ (∀ s : S, c s = PowerSeries.constantCoeff s.val.1 ∧ c s = PowerSeries.constantCoeff s.val.2) ∧ Function.Surjective c ∧ RingHom.ker c = m ∧ (∃ ρ : (S ⧸ m) ≃+* k, ∀ s : S, ρ (Ideal.Quotient.mk m s) = c s) ∧ ∃ (_ : Module S k), (∀ (s : S) (a : k), s • a = c s * a) ∧ ∃ d : (PowerSeries k × PowerSeries k) →ₗ[S] k, (∀ p : PowerSeries k × PowerSeries k, d p = PowerSeries.constantCoeff p.1 - PowerSeries.constantCoeff p.2) ∧ Function.Surjective d ∧ LinearMap.ker d = Submodule.span S (S : Set (PowerSeries k × PowerSeries k)) ∧ (∃ e : ((PowerSeries k × PowerSeries k) ⧸ Submodule.span S (S : Set (PowerSeries k × PowerSeries k))) ≃ₗ[S] k, ∀ p : PowerSeries k × PowerSeries k, e (Submodule.Quotient.mk p) = d p) ∧ (∀ (s : S), s ∈ m → ∀ q : (PowerSeries k × PowerSeries k) ⧸ Submodule.span S (S : Set (PowerSeries k × PowerSeries k)), s • q = 0) ∧ ∃ (_ : Module (S ⧸ m) ((PowerSeries k × PowerSeries k) ⧸ Submodule.span S (S : Set (PowerSeries k × PowerSeries k)))), (∀ (s : S) (q : (PowerSeries k × PowerSeries k) ⧸ Submodule.span S (S : Set (PowerSeries k × PowerSeries k))), (Ideal.Quotient.mk m s) • q = s • q) ∧ ∃ b : Module.Basis (Fin 1) (S ⧸ m) ((PowerSeries k × PowerSeries k) ⧸ Submodule.span S (S : Set (PowerSeries k × PowerSeries k))), b 0 = Submodule.Quotient.mk ((1, 0) : PowerSeries k × PowerSeries k)",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Integral closure is expressed elementwise by RingHom.IsIntegralElem for the canonical coordinatewise Laurent embedding; this is the defining predicate of integralClosure. The submodule in P/S is Submodule.span S (S : Set P), which equals S as a set. The scalar structures on k and P/S are existentially supplied with their exact residue-action formulas, not assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3134c0bd7",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Read node, 4 stmt_dep records, module, report (Worker report + Second reading by Q73 present). Snapshot node differs from live only in lean; lean.statement verbatim equals the file signature. Every clause matches: integral-closure iff via RingHom.IsIntegralElem (Mathlib's IsIntegral is defined as this predicate) along the prodMap ofPowerSeries embedding; P=S+Sε, adjoin=⊤, ε²=ε; IsLocalRing; m membership/maximal/unique; c formulas, surjective, ker=m, ρ pinned; Module S k pinned by c; d formula/surjective/ker=span S S (=S); e pinned on representatives; m kills P/S; S/m-module pinned, Fin 1 basis b0=[ε]. S given by a satisfiable iff-hypothesis, no extra assumptions, universe u bound, docstrings carry source and blueprint, proof is sorry only, no new nodes or defs. No duplicate in Sheaf/WeilConjectures/Mathlib. No compile needed (no change)."
+ }
+}

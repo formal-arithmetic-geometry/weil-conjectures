@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-affine-invertible-section-fibre-correction",
+ "kind": "statement",
+ "title": "Correct a section in one residue fibre while preserving its values on a zero set",
+ "statement": "Let $X$ be an affine scheme [def-pc-scheme] and $L$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. For $y\\in |X|$, write $L(y)=L_y/\\mathfrak m_yL_y$, a vector space over $\\kappa(y)=\\mathcal O_{X,y}/\\mathfrak m_y$ [def-weil-residue-field], and write $s(y)$ and $f(y)$ for the residue values of sections of $L$ and $\\mathcal O_X$, respectively. Let $F\\subseteq |X|$ be any subset, $z\\in |X|$, $s\\in\\Gamma(X,L)$, and $f\\in\\Gamma(X,\\mathcal O_X)$ satisfy $s(z)=0$, $f(z)\\ne0$, and $f(x)=0$ for every $x\\in F$. There exists $t\\in\\Gamma(X,L)$ such that the section $v=s+ft$ satisfies $v(z)\\ne0$ and $v(x)=s(x)$ for every $x\\in F$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0F20, properties-lemma-quasi-affine-invertible-nonvanishing-section, proof: affine specialization with W=X; base case, global generation gives a section nonvanishing at the chosen point; induction step, multiply this section by a separating scalar and add it to the old section (old item steps 2, 4 and 6)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-residue-field",
+  "def-weil-pbc-module-residue-fiber"
+ ],
+ "proof": [
+  {
+   "text": "By [def-sc-invertible-module], $L$ is quasi-coherent and locally free of rank one. On each trivializing open the isomorphism $\\mathcal O_U\\simeq L|_U$ is in particular a surjection, so $L$ is of finite type by [pqf-def-coherent]. Since $X$ is affine, apply [lem-weil-pbc-affine-finite-type-generating-sections] to obtain a finite family $h_1,\\ldots,h_k$ of global sections generating $L$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "pqf-def-coherent",
+    "lem-weil-pbc-affine-finite-type-generating-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0F20, properties-lemma-quasi-affine-invertible-nonvanishing-section, proof, base case (global generation) and induction step (addition of sections); affine global generation follows Tags 01PB (properties-lemma-finite-type-module) and 01IA (schemes-lemma-quasi-coherent-affine)."
+   }
+  },
+  {
+   "text": "Adjoin $h_0=0$ to that family. It still generates: the associated map from $\\mathcal O_X\\oplus\\mathcal O_X^{\\oplus k}$ is the old surjection composed with the surjective projection. Apply [lem-weil-pbc-invertible-generating-sections-fibre] to this $(k+1)$-element family. At $z$ it gives an index $i$ with $z\\in X_{h_i}$, meaning explicitly $(h_i)_z\\notin\\mathfrak m_zL_z$. By the defining criterion for zero in a quotient this says $h_i(z)\\ne0$ in $L_z/\\mathfrak m_zL_z$. Choose $t=h_i$.",
+   "uses": [
+    "lem-weil-pbc-invertible-generating-sections-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01AM (modules-definition-globally-generated) and 01CY (modules-lemma-s-open), as carried by the cited fibre-criterion node; use its explicit germ-outside-maximal-ideal formulation, followed by the definition of the quotient."
+   }
+  },
+  {
+   "text": "Define $v=s+ft$. Germ maps preserve addition and the module action, and passage to the quotient by $\\mathfrak m_yL_y$ therefore gives $v(y)=s(y)+f(y)t(y)$ for every $y$. In the field $\\kappa(z)$ of [def-weil-residue-field], the scalar $f(z)$ has an inverse. Since $s(z)=0$, if $v(z)=f(z)t(z)$ were zero, multiplying by $f(z)^{-1}$ would give $t(z)=0$, contrary to the choice of $t$. Hence $v(z)\\ne0$.",
+   "uses": [
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0F20, properties-lemma-quasi-affine-invertible-nonvanishing-section, proof, base case (global generation) and induction step (addition of sections); affine global generation follows Tags 01PB (properties-lemma-finite-type-module) and 01IA (schemes-lemma-quasi-coherent-affine)."
+   }
+  },
+  {
+   "text": "For each $x\\in F$, substitute the assumed $f(x)=0$ into the same identity: $v(x)=s(x)+0\\,t(x)=s(x)$. Together with $v(z)\\ne0$ this proves both required clauses for the chosen global section $t$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0F20, properties-lemma-quasi-affine-invertible-nonvanishing-section, proof, base case (global generation) and induction step (addition of sections); affine global generation follows Tags 01PB (properties-lemma-finite-type-module) and 01IA (schemes-lemma-quasi-coherent-affine)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "pqf-def-coherent",
+  "lem-weil-pbc-affine-finite-type-generating-sections",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0F20, properties-lemma-quasi-affine-invertible-nonvanishing-section, affine base-case global generation and induction-step addition; explicit residue-fibre scalar calculation supplied by Q110."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "([Ss]ection|[Gg]lobal).*(correct|interpol)|nonvanish.*(add|mul)|exists.*section.*(fibre|fiber)",
+   "results": "No hits. Searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give scalar evaluation, local fraction descriptions, or invertible-module local freeness, without constructing the global line-bundle correction with the prescribed residue-fibre identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A globally generated line bundle admits a section s plus f times t nonzero at a point where s is zero and f is nonzero",
+   "results": "Read hits: IsLocalFrameOn.coeff_apply_zero_at, SheafOfModules.GeneratingSections.mk, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_ne_zero_iff_mem_basicOpen, AlgebraicGeometry.RingedSpace.zeroLocus, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero, AlgebraicGeometry.StructureSheaf.exists_const, AlgebraicGeometry.RingedSpace.isUnit_of_isUnit_germ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give scalar evaluation, local fraction descriptions, or invertible-module local freeness, without constructing the global line-bundle correction with the prescribed residue-fibre identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Invertible, \"exists\"",
+   "results": "Read hits: Module.Invertible.exists_finset_free_localization, Module.Invertible.exists_linearEquiv_ideal",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give scalar evaluation, local fraction descriptions, or invertible-module local freeness, without constructing the global line-bundle correction with the prescribed residue-fibre identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an invertible sheaf on an affine scheme and a global function f nonzero at z, a section vanishing at z can be corrected by f times another section to be nonzero at z",
+   "results": "Read hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_ne_zero_iff_mem_basicOpen, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero, AlgebraicGeometry.LocallyRingedSpace.evaluation_eq_zero_iff_notMem_basicOpen",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give scalar evaluation, local fraction descriptions, or invertible-module local freeness, without constructing the global line-bundle correction with the prescribed residue-fibre identities"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation_(eq_zero|ne_zero)_iff|exists_finset_free_localization|exists_linearEquiv_ideal",
+   "results": "Read hits: Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give scalar evaluation, local fraction descriptions, or invertible-module local freeness, without constructing the global line-bundle correction with the prescribed residue-fibre identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme\", \"exists\", \"section\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give scalar evaluation, local fraction descriptions, or invertible-module local freeness, without constructing the global line-bundle correction with the prescribed residue-fibre identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation from global sections of an invertible module sheaf on an affine scheme to the fibre at a point is surjective and allows correction s plus f times t",
+   "results": "Read hits: ModuleCat.Tilde.exists_const, AlgebraicGeometry.StructureSheaf.toBasicOpen_surjective, ModuleCat.Tilde.isUnit_toStalk, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, ModuleCat.Tilde.const, ModuleCat.Tilde.isFraction, ModuleCat.Tilde.const_apply, ModuleCat.Tilde.isLocallyFraction_pred",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give scalar evaluation, local fraction descriptions, or invertible-module local freeness, without constructing the global line-bundle correction with the prescribed residue-fibre identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Invertible, \"exists\"",
+   "results": "Read returned hits: Module.Invertible.exists_finset_free_localization, Module.Invertible.exists_linearEquiv_ideal",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar evaluation, module local triviality, and smooth vector-bundle operations do not construct a global correction section of an arbitrary invertible module sheaf on an affine scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "nonvanish.*(add|mul)|exists.*section.*(fibre|fiber)|section.*correction",
+   "results": "No hits. Search subdirectory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar evaluation, module local triviality, and smooth vector-bundle operations do not construct a global correction section of an arbitrary invertible module sheaf on an affine scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Correct a section of a line bundle by a function times a global section preserving its values on the zero locus of the function",
+   "results": "Read returned hits: mdifferentiable_smul_const_section, ContMDiffOn.smul_section, mdifferentiable_smul_section, MDifferentiableWithinAt.smul_section, ModuleCat.Tilde.smul_section_apply, AlgebraicGeometry.RingedSpace.zeroLocus, Bundle.zeroSection, Bundle.mdifferentiableAt_zeroSection",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar evaluation, module local triviality, and smooth vector-bundle operations do not construct a global correction section of an arbitrary invertible module sheaf on an affine scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an affine scheme an invertible sheaf has a global section t such that s plus f times t is nonzero at a point where s is zero and f is nonzero",
+   "results": "Read returned hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.isLocalization_away_of_isAffine, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_ne_zero_iff_mem_basicOpen, AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar evaluation, module local triviality, and smooth vector-bundle operations do not construct a global correction section of an arbitrary invertible module sheaf on an affine scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of global sections of a line bundle on an affine scheme generates its one dimensional residue fibre at any prime",
+   "results": "Read returned hits: AlgebraicGeometry.Scheme.Γevaluation, AlgebraicGeometry.Scheme.evaluation, AlgebraicGeometry.LocallyRingedSpace.Γevaluation, AlgebraicGeometry.Γ_restrict_isLocalization, AlgebraicGeometry.StructureSheaf.to_global_factors_apply, AlgebraicGeometry.Scheme.residueField, AlgebraicGeometry.Scheme.residue, AlgebraicGeometry.Scheme.germ_residue",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar evaluation, module local triviality, and smooth vector-bundle operations do not construct a global correction section of an arbitrary invertible module sheaf on an affine scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_finset_free_localization|exists_linearEquiv_ideal|smul_section_apply|evaluation_ne_zero_iff_mem_basicOpen",
+   "results": "Read returned hits: Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar evaluation, module local triviality, and smooth vector-bundle operations do not construct a global correction section of an arbitrary invertible module sheaf on an affine scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-invertible-finite-set-section",
+  "date": "2026-10-22",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "base case, global generation gives a section nonvanishing at the chosen point; induction step, multiply this section by a separating scalar and add it to the old section (old item steps 2, 4 and 6); Stacks 0BUT, divisors-lemma-finite-trivialize-invertible-upstairs: the sentence choosing a global section nonvanishing on the finite fibre, by Properties 0F20. This serves Auxiliary local trivialization for the norm construction in Stacks 0BCY: divisors-lemma-norm-invertible, first paragraph, choose a base cover whose inverse images trivialize the invertible sheaf; the ancestor route is det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Auxiliary input: Existence of an ample invertible sheaf descends through a finite cover of a normal integral scheme. Tags 0BCY (divisors-lemma-norm-invertible) and 0BCZ (divisors-lemma-norm-map-invertible), applied to sections of tensor powers; Section 0BCX (divisors-section-norms) specifies the norm hypotheses.",
+   "via": [
+    "lem-sfb-affine-invertible-finite-set-section",
+    "lem-sfb-finite-trivialize-invertible-upstairs",
+    "lem-sfb-finite-norm-invertible-sections",
+    "lem-sfb-finite-normal-ample-descent",
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-invertible-section-fibre-correction",
+  "worker": "stage1",
+  "summary": "Repair of the returned delivery, rebased by deliver.py onto the current DAG. Re-read all six statement/proof dependencies and checked their current statements. Retain the statement and statement dependencies and the four-step route through affine finite global generation and the invertible generating-sections fibre criterion. Simplify step 2 to use the cited criterion directly in its germ-outside-maximal-ideal formulation, so no tensor/quotient comparison is required. Zero padding and residue-field scalar calculations are explicit. No new nodes; reuse the recorded Mathlib searches.",
+  "blueprint": "Realizes the existing from.place chain: Stacks 0F20 affine base case supplies a section nonzero at the chosen point; multiplying by the given separating function and adding realizes the finite-set induction correction used for 0BUT and 0BCY. ancestor reports None, so the inherited null from.node and precise from.place/via are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-invertible-generating-sections-fibre",
+    "why": "Generic rank-one global-generation fibre criterion, used only to choose one member nonzero at z; no node of this unit states that criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-generating-sections-fibre"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-407321e24",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-407321e24 (reviewer sub-agent of L); spot-checked: PASS, no changes. The delivery is one commit holding only the item and its report; there are no new nodes. The item is still unsplit in the live and side-live clones, there is no repair or re-split note, and the statement, stmt_deps and blueprint fields are unchanged. proof_deps equals the union of the step uses. Compared with the earlier PASSed head 8377, which was returned only because the side completion was not promoted, only step 2 changed: it now uses the criterion's germ condition (h_i)_z not in m_zL_z directly instead of the tensor/quotient identification, so this is not a re-push. Source: Stacks 0F20 (properties.tex l.5325); its base case uses global generation and its induction step adds s'. The item is the affine form with s'=f*t, and the parent lem-sfb-affine-invertible-finite-set-section step 4 cites it exactly. Step 1: invertible means locally O_U onto L, hence finite type (pqf-def-coherent clause 2); the hypotheses of lem-weil-pbc-affine-finite-type-generating-sections (affine, quasi-coherent, finite type) hold, and that node is closed in slopmaster2. Step 2: padding with h_0=0 keeps surjectivity under def-weil-pbc-generating-sections and covers k=0. The fibre criterion is used only through its statement and gives h_i(z) nonzero, not surjective evaluation. Steps 3-4: v(y)=s(y)+f(y)t(y), and cancellation happens in the field kappa(z), not in Gamma, so zero divisors do not matter; f(x)=0 on F gives v(x)=s(x). Edge cases checked: F empty; z cannot lie in F; non-closed z; non-reduced X; Spec Z with z=(0), f=2, F={(2)}. rg -L over the DAG finds no duplicate and there is no cycle. The declared tool_use lem-weil-pbc-invertible-generating-sections-fibre (generic rank-one criterion from another unit) is accepted. No SGA source is used. Advisory: def-weil-pbc-generating-sections is not listed in step 2's uses, but it is reached through the cited statements and the padding check takes one line."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineInvertibleSectionFibreCorrection",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affine_invertible_section_fibre_correction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineInvertibleSectionFibreCorrection.lean",
+  "statement": "theorem exists_affine_invertible_section_fibre_correction (X : Scheme.{u}) [IsAffine X] (L : X.Modules) [L.IsInvertible] (F : Set X) (z : X) (s : Γ(L, ⊤)) (f : Γ(X, ⊤)) (hs : residueValue s z trivial = 0) (hf : X.Γevaluation z f ≠ 0) (hF : ∀ x ∈ F, X.Γevaluation x f = 0) : ∃ t : Γ(L, ⊤), residueValue (s + f • t) z trivial ≠ 0 ∧ ∀ x ∈ F, residueValue (s + f • t) x trivial = residueValue s x trivial",
+  "branch": "newtargets-dag",
+  "by": "Q114",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-121ed7e78",
+  "group": "Q114",
+  "result": "pass",
+  "note": "First S2 delivery; one new module, item record gains the landed stmt_dep def-weil-pbc-module-residue-fiber plus its lean record, no new nodes. Every clause matches the node: affine X : Scheme.{u}; IsInvertible = Zariski locally ≅ unit; s(y) = residueValue (1⊗germ in κ(y)⊗L_y, canonically L_y/m_yL_y); f(y) = Γevaluation; f • t is Mathlib's sheaf-of-modules action on Γ(L,⊤); F arbitrary; hs/hf/hF and both conclusion clauses exact. Edge cases (empty X, empty or infinite F, z∈F, s=0, non-closed z, non-reduced X) covered. No duplicate in side-live, only sorry, docstrings give source and blueprint, the 3 plain imports are proof_dep modules that exist, statement field verbatim, report sections present. No compile needed (no file changed)."
+ }
+}

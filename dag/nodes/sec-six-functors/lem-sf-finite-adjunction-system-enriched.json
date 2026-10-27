@@ -1,0 +1,220 @@
+{
+ "id": "lem-sf-finite-adjunction-system-enriched",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Enriched adjunction from the actual system transpose; first two proof paragraphs, parent finite-system refinement.",
+   "via": [
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+  "place": "Finite dual formula, enriched adjunction, and canonical coefficient transposes; concrete ordinary-system refinement in the parent node proof."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+  "place": "Finite dual formula, enriched adjunction, and canonical coefficient transposes; concrete ordinary-system refinement in the parent node proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Verdier dual pullback dual formula on normalized derived coefficient systems with structural counit trace and canonical finite evaluations",
+   "results": [
+    "CategoryTheory.Adjunction.derivedε",
+    "CategoryTheory.Functor.totalLeftDerivedCounit",
+    "CategoryTheory.Adjunction.derivedε.congr_simp",
+    "CategoryTheory.ExactPairing.coevaluation_evaluation'",
+    "CategoryTheory.ChosenPullbacksAlong.fst'",
+    "LinearEquiv.trans_dualMap_symm_flip",
+    "SheafOfModules.conjugateEquiv_pullbackId_hom",
+    "Module.symm_dualMap_evalEquiv"
+   ],
+   "date": "2026-10-25",
+   "verdict": "No exact match for the concrete coefficient-system interface; generic derived adjunction, monoidal or condensed-module results do not supply its normalized comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct proper open compact support and its right adjoint on normalized coefficient systems with absolute dualizing objects and integral support comparison",
+   "results": [
+    "CondensedSet.compactlyGeneratedAdjunction",
+    "CondensedMod.LocallyConstant.adjunction",
+    "Condensed.setAbAdjunction",
+    "Condensed.profiniteSolidification",
+    "LightCondMod.LocallyConstant.adjunction",
+    "Condensed.profiniteSolidCounit",
+    "Condensed.profiniteSolid",
+    "LightCondSet.LocallyConstant.adjunction"
+   ],
+   "date": "2026-10-25",
+   "verdict": "No exact match for the concrete coefficient-system interface; generic derived adjunction, monoidal or condensed-module results do not supply its normalized comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientUnit|CoefficientDerivedSystemCoherence|FiniteAdjunctionDiagram|SectionsPush|DualizingSpec|RingedDerivedTensorCoherence",
+   "results": "No matches",
+   "date": "2026-10-25",
+   "verdict": "No exact match for the concrete coefficient-system interface; generic derived adjunction, monoidal or condensed-module results do not supply its normalized comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteAdjunctionDiagramRealization",
+  "date": "2026-10-25",
+  "group": "H1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "title": "Enriched adjunction from the actual system transpose",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, uniformizer $\\varpi$, and positive quotients $A_{n+1}=R/\\varpi^{n+1}$ [def-weil-l-adic-coefficient-extension]. For a scheme $W$, use strict semilinear coefficient systems and their ordinary derived category and exact evaluations [lem-coef-derived-system-evaluation-calculus, def-coef-finite-adjunction-system-data]. Fix a finite-field datum $D$ with algebraically closed field $k$ of characteristic $p\\ne\\ell$ [def-weil-finite-field-fiber]. Let $X,Y$ be separated finite-type $k$-schemes, $f:X\\to Y$ a separated finite-type $k$-morphism and $c=(j,p)$ a compactification [def-weil-scheme-morphism-properties, def-nagata-compactification]. The domain is the full category of normalized systems whose every finite evaluation is finite-Tor constructible, with no common bound [def-coef-finite-adjunction-system-data]. Supply coherent calculus witnesses SX,SZ,SY,SS on X,c.Z,Y,Spec k and symmetric structures betaX,betaY with their canonical ringed tensor coherence [lem-coef-derived-system-evaluation-calculus, lem-sf-ringed-derived-closed-symmetric-monoidal]. For any Realization r, Geometry g, and SectionsPush s, there exists Enriched r g s betaX betaY [def-sf-finite-adjunction-diagram-data]. Its components are precisely r.globalMap, and its finite isomorphisms induce the already specified finite adjunction on H-zero and satisfy the full finite evaluation square before inverse limits.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-finite-adjunction-system-data",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-nagata-compactification",
+  "def-sf-finite-adjunction-diagram-data",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "For the enriched assertion work first with the corresponding normalized etale systems $M,N$, using the equivalence of Step 5. Write $H=R\\mathcal Hom_{A_\\bullet}(M,G_f^{\\mathrm{et}}N)$ and $Q=Rf_{*,\\bullet}H$. The first input $M$ is normalized, so the system internal-Hom evaluation theorem applies even if $H$ or $Q$ is not normalized. We need projection for this arbitrary $Q$, rather than an unproved finite-Tor hypothesis on it. Construct\n$$\\Pi_{Q,M}:Q\\otimes^LF_f^{\\mathrm{et}}M\\longrightarrow F_f^{\\mathrm{et}}(f^*Q\\otimes^LM)$$\nas the proper counit projection followed by open tensor comparison. The ordinary system calculus supplies this transformation on all systems. Each evaluation is invertible by the UNBOUNDED proper projection theorem [lem-amb-proper-coproducts-projection] and open tensor theorem [lem-pur-etale-open-derived-tensor]. Thus this actual system projection map is invertible. No boundedness or normalization of $Q$ is needed.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-amb-proper-coproducts-projection",
+    "lem-pur-etale-open-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Finite duality, coefficient-change compatibility, and enriched adjunction before total inverse limits."
+   }
+  },
+  {
+   "text": "Let $d_H:f^*Rf_{*,\\bullet}H\\to H$ be the ordinary direct-image counit and $e:H\\otimes^LM\\to G_f^{\\mathrm{et}}N$ the internal-Hom evaluation. The following composite is an actual morphism of derived etale systems:\n$$Q\\otimes^LF_f^{\\mathrm{et}}M\\xrightarrow{\\Pi_{Q,M}}F_f^{\\mathrm{et}}(f^*Q\\otimes^LM)\\xrightarrow{F_f^{\\mathrm{et}}(d_H\\otimes1)}F_f^{\\mathrm{et}}(H\\otimes^LM)\\xrightarrow{F_f^{\\mathrm{et}}(e)}F_f^{\\mathrm{et}}G_f^{\\mathrm{et}}N\\xrightarrow{\\epsilon_N}N.$$\nTranspose only under the closed tensor-Hom adjunction on the ringed SYSTEM topos. It defines\n$$B_{M,N}:Rf_{*,\\bullet}R\\mathcal Hom(M,G_f^{\\mathrm{et}}N)\\longrightarrow R\\mathcal Hom(F_f^{\\mathrm{et}}M,N).$$\nThis construction uses $F_f^{\\mathrm{et}}$ on actual morphisms and the actual exceptional counit. It never applies the Brown right adjoint to an internal mapping object or promotes an ordinary Hom-group bijection to a complex morphism. Functoriality of these displayed operations makes $B$ natural.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-pur-etale-coefficient-system-adjoint",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Finite duality, coefficient-change compatibility, and enriched adjunction before total inverse limits."
+   }
+  },
+  {
+   "text": "Both first inputs $M$ and $F_f^{\\mathrm{et}}M$ of the internal Homs are normalized, so evaluation identifies $B_{M,N}$ with the finite internal-adjunction map. The formula in [lem-asd-internal-adjunction-evaluation], with its test object equal to $Q_n$ and the identity map of $Q_n=Rf_*R\\mathcal Hom(M_n,f_n^\\times N_n)$, is exactly the evaluated composite of Step 15. Thus [prop-asd-internal-adjunction] makes every $e_nB$ invertible. Evaluations detect isomorphisms of derived systems, so $B$ is invertible there, with an inverse natural in $M,N$. Apply total termwise derived global sections and the derived direct-image composition isomorphism $R\\Gamma_YRf_{*,\\bullet}\\cong R\\Gamma_X$. This gives an actual isomorphism from $\\mathcal H_X(M,\\mathcal E_fN)$ to $\\mathcal H_Y(\\mathcal F_fM,N)$ on etale systems; define $\\mathcal A_{M,N}$ to be its inverse. Its inverse identities are those of this actual isomorphism after applying a functor, not an inference that evaluations detect equality.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-asd-internal-adjunction-evaluation",
+    "prop-asd-internal-adjunction",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Finite duality, coefficient-change compatibility, and enriched adjunction before total inverse limits."
+   }
+  },
+  {
+   "text": "Transport the preceding mapping-system isomorphism to the pro-etale realizations using actual comparison maps. The internal-Hom comparison is the transpose of comparison pullback applied to evaluation, constructed on systems by the tensor-Hom calculus. At every level its first input is finite-Tor constructible and its second is bounded constructible, so [lem-weil-finite-duality-site-comparison] makes it invertible. The unbounded comparison unit and derived direct-image composition identify its termwise global sections with the etale mapping system. These are isomorphisms of systems by evaluation conservativity. Together with the compact-support and exceptional comparison of Step 5 they transport $\\mathcal A$ and its inverse as actual maps in $D(\\operatorname{Tow}(\\operatorname{Ab}))$. Their evaluation at $n$ is the inverse of the canonical internal-adjunction map followed by $R\\Gamma$, hence exactly the displayed finite enriched adjunction. Its finite units and counits are those identified in Steps 4 and 7; the pairing formulas used to construct $B$ preserve the specified evaluation and transposition identities.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-finite-duality-site-comparison",
+    "lem-sfb-unbounded-site-comparison",
+    "lem-sf-class-compact-support-comparison",
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-coef-finite-exceptional"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Finite duality, coefficient-change compatibility, and enriched adjunction before total inverse limits."
+   }
+  },
+  {
+   "text": "The compact-support system transition is $F_mM_m\\to F_m\\operatorname{Res}_{m,n}M_n\\cong\\operatorname{Res}_{m,n}F_nM_n$; the restriction-of-scalars theorem identifies this with the specified finite quotient transition. Its scalar-extension adjoint is the normalization composite in Step 6. Consequently its total limit is the functor $\\mathcal L_Y\\mathcal F_f\\mathcal R_X$ with the stated finite projections whenever integral compact support is defined in this way. Step 9 gives the dualizing total-limit identification. Applying total derived inverse limit to the actual mapping-system isomorphism and its inverse preserves their inverse identities and naturality. For $f=1$ the maps are the tensor-Hom evaluation transpose and biduality; zero inputs and empty source give zero systems, and $m=n$ gives the identity quotient map. No uniform bound or integral exceptional functor has been introduced.",
+   "uses": [
+    "lem-sf-compact-support-restriction-of-scalars",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-integral-rational-qbar-compact-support",
+    "prop-coef-integral-dualizing",
+    "lem-coef-finite-exceptional"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Finite duality, coefficient-change compatibility, and enriched adjunction before total inverse limits."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-amb-proper-coproducts-projection",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-pur-etale-coefficient-system-adjoint",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-asd-internal-adjunction-evaluation",
+  "prop-asd-internal-adjunction",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-sfb-unbounded-site-comparison",
+  "lem-sf-class-compact-support-comparison",
+  "thm-weil-pbc-site-comparison",
+  "lem-coef-finite-exceptional",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-integral-rational-qbar-compact-support",
+  "prop-coef-integral-dualizing"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteAdjunctionSystemEnriched",
+  "file": "lean/Sheaf/SixFunctors/FiniteAdjunctionSystemEnriched.lean",
+  "declaration": "WeilConjectures.FiniteAdjunctionDiagram.finiteAdjunctionSystemEnriched",
+  "declarations": [
+   "WeilConjectures.FiniteAdjunctionDiagram.finiteAdjunctionSystemEnriched"
+  ],
+  "statement": "theorem finiteAdjunctionSystemEnriched (hX : CoefficientDerivedSystemCoherence l E X SX) (hZ : CoefficientDerivedSystemCoherence l E c.Z SZ) (hY : CoefficientDerivedSystemCoherence l E Y SY) (hS : CoefficientDerivedSystemCoherence l E (Spec (.of D.k)) SS) (βX : @SymmetricCategory (coefficientSequenceDerived l E X) _ SX.systemClosed.monoidal) (βY : @SymmetricCategory (coefficientSequenceDerived l E Y) _ SY.systemClosed.monoidal) (tX : RingedDerivedTensorCoherence.{u + 1, u, u} (coefficientSequenceTopology (Scheme.ProEt.topology X)) (coefficientSequenceCommRingSheaf l E X) SX.systemClosed SX.systemTensorModel βX) (tY : RingedDerivedTensorCoherence.{u + 1, u, u} (coefficientSequenceTopology (Scheme.ProEt.topology Y)) (coefficientSequenceCommRingSheaf l E Y) SY.systemClosed SY.systemTensorModel βY) (r : Realization l E D hl f c SX SZ SY) (g : Geometry l E f SX SY) (s : SectionsPush g) : Nonempty (Enriched r g s βX βY)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1f636",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T101124-L-3659846",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1f636",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T101124-L-3659846",
+  "kind": "interface",
+  "note": "independent cc review: item stmt byte-identical to clone; moved decls diffed verbatim vs clone (only coefficientUnit_mem/structure_isOver proofs changed); 7 direct importers + 9 delivered modules compiled together (exit 0); axioms: sorryAx only via the 6 new sorry lemmas, structure_isOver clean; node records match Lean signatures"
+ }
+}

@@ -93,7 +93,18 @@
   "item": "def-weil-finite-tor-amplitude",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "split_report": {
@@ -116,16 +127,16 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-33172fd5a (reviewer sub-agent of L); spot-checked: Read the item, all six cited statements, sources, and unit/chapter route in full. Definition matches Stacks 08FZ and passes zero, empty-scheme, shift, and nonregular-coefficient tests. Added the missing supplementary 0652 source label in split_report only. No new nodes, accepted attachments, tool uses, or target weakening. Concrete checks and inherited graph issues are recorded in review.md.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-stage2-cc-cf3edf3ff",
-  "group": "Q28",
+  "reviewer": "NT-stage2-cc-a3edad6cc",
+  "group": "Q104",
   "result": "pass",
-  "note": "Re-delivery after the d79b H2/H13 RETURN. Lean delta is exactly the requested inlining of the Mathlib pushforward bodies, plus the theorem modules becoming plain proof-plan imports; the signature is byte-identical and the Tor module is unchanged. Item stmt_deps: the three theorem nodes are dropped (kept in proof_deps), and five landed def nodes are added, each with a live lean record. The def-weil-integral-reduction-tower record is a superset existing:true record (NW's 5 + unrestrictedTower* = P_n, γ_n, τ_n, publicly re-exported). The tor-amplitude record is a superset (NK's 5 + 2 ringed-site predicates; public import of NK's module). Other item fields equal live; the item is not dropped. Every clause matches the node. Coefficient isos are pinned by constant sections and limit projections; reduction/quotient/tower are pinned by pure tensors, counits (K-flat plus naturality) and the augmentation; no hollow field. Edge cases (empty T and J, rank 0, exponent one, no ℓ-invertibility, independent universes) hold. Advisories: scalarReduction* are owned by the theorem lem-weil-derived-scalar-extension-restriction-adjunction (base-era, outside stmt_deps); some re-exported decls are unlisted in records; empty partition pieces are harmless; the second reading is an author self-reread. No compile (no file changed)."
+  "note": "Re-delivery of RETURNed 27623fd8. (1) Theorem stmt_dep lem-sp-supported-etale-tensor-origin replaced by new def node def-sp-coefficient-scalar-representatives (existing:true over the explicit homEquiv.symm representative arrows, pro-etale plus the etale Etale.scalarExtensionRepresentative; statement verbatim; no duplicate owner). (2) §1(C) correction names pbcComparisonReduction.inv via def-weil-pbc-witness-compatibility in stmt_deps; direction and types consistent; both real citers (finite-coefficient-input-models, etale-open-counit-flat-models) audited and hold; tensor-pullback identification kept as proof Step 6. (3) Etale Tor clauses use the recorded Etale.DerivedCategory.hasTorAmplitudeIn; pro-etale clauses use the repaired HasFixedCoefficientProEtaleTorAmplitude. Both dependency records are superset repairs by public import of the live modules. Clause table, edge cases (empty X, P=0, a=b, B=0, A=B, Z/4->F2), lean.statement verbatim and gates all ok; no file changed, no compile. Advisories: self second reading; naturality in P implicit; no copyright headers in the dependency modules."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.RingedProEtaleTorAmplitudeOfUniverses",
-  "declaration": "CategoryTheory.HasRingedSiteTorAmplitudeOfUniverses",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleTorAmplitudePresentations",
+  "declaration": "AlgebraicGeometry.Scheme.HasFixedCoefficientProEtaleTorAmplitude",
   "declarations": [
    "AlgebraicGeometry.Scheme.HasProEtaleTorAmplitude",
    "AlgebraicGeometry.Scheme.HasFiniteProEtaleTorAmplitude",
@@ -133,14 +144,15 @@
    "AlgebraicGeometry.Scheme.HasCoefficientProEtaleTorAmplitude",
    "AlgebraicGeometry.Scheme.HasFiniteCoefficientProEtaleTorAmplitude",
    "CategoryTheory.HasRingedSiteTorAmplitudeOfUniverses",
-   "CategoryTheory.HasFiniteRingedSiteTorAmplitudeOfUniverses"
+   "CategoryTheory.HasFiniteRingedSiteTorAmplitudeOfUniverses",
+   "AlgebraicGeometry.Scheme.HasFixedCoefficientProEtaleTorAmplitude"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/RingedProEtaleTorAmplitudeOfUniverses.lean",
-  "statement": "def HasRingedSiteTorAmplitudeOfUniverses {C : Type c} [Category.{h} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r}) [HasSheafify J AddCommGrpCat.{r}] [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasDerivedCategory.{w} (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))] (K : DerivedCategory (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) (a b : ℤ) : Prop",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleTorAmplitudePresentations.lean",
+  "statement": "abbrev HasFixedCoefficientProEtaleTorAmplitude (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] (K : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} A))) (a b : ℤ) : Prop",
   "branch": "sheaf-dag",
-  "by": "Q28",
-  "date": "2026-10-21",
+  "by": "Q104",
+  "date": "2026-10-22",
   "existing": false,
-  "note": "§1(B): the recorded coefficient-model predicate takes a derived object on an equivalent coefficient-sized small model, while this consumer tests the ordinary restriction of its actual residue reduction on every slice of the original small pro-etale site. The older original-site predicate identifies coefficient and scheme universes. This module retains the recorded module by public import and supplies the same ordered-interval, universal degree-zero module Tor test directly on the ringed site and its slices, with independent site, coefficient and derived-localization universes. It uses the existing canonical siteDerivedTensorIndependentCoefficients and homologyFunctor, and also gives the finite-amplitude predicate. No tensor functor or cohomology object is copied. Superset repair of H13: all five declarations of NK's landed CoefficientProEtaleTorAmplitude record remain listed and publicly imported, including both original-site predicates and all three coefficient-model predicates; the two original-ringed-site predicates are added without rebinding or removing those interfaces."
+  "note": "§1(B): the recorded primary predicate takes a ringed-module derived object, while this consumer uses the ordinary fixed-ring module-sheaf presentation of constant coefficients on the original small pro-etale site. This module publicly retains the full recorded module and all seven older declarations, and adds the same ordered-interval universal degree-zero module test directly for fixed-ring derived objects, by abbreviation to the existing DerivedCategory.torAmplitudeIn. No tensor or cohomology is copied, and no restriction is placed on a test module. Returned-delivery repair: preserve every declaration in the current primary record. The item now uses this recorded specialization directly."
  }
 }

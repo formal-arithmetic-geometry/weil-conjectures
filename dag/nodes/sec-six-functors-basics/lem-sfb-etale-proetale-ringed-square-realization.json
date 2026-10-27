@@ -1,0 +1,349 @@
+{
+ "id": "lem-sfb-etale-proetale-ringed-square-realization",
+ "kind": "statement",
+ "title": "Constant-coefficient realization of the etale/pro-etale ringed square",
+ "statement": "Let $A$ be a finite discrete commutative ring and $p:X\\to Y$ any morphism of schemes. Use small representatives of their etale and pro-etale sites in the common universe [def-weil-size-convention, def-weil-pbc-derived-categories, def-weil-pbc-proetale-operations]. Write $R_{T,s}=\\underline A_{T_s}$ for the constant ring sheaf, normalized by its constant sections [def-weil-pbc-constant-sheaf]. Equip $p_{\\mathrm{et}},p_{\\mathrm{proet}},\\nu_X,\\nu_Y$ with the structure-ring maps $c_w:w^{-1}R_{\\mathrm{target}}\\to R_{\\mathrm{source}}$ preserving every constant section [def-weil-pbc-ringed-topos-morphism, def-weil-pbc-site-comparison-morphism]. Let $c_R$ be the geometric commutation comparison $\\nu_X^{-1}p_{\\mathrm{et}}^{-1}R_{Y,\\mathrm{et}}\\xrightarrow{\\sim}p_{\\mathrm{proet}}^{-1}\\nu_Y^{-1}R_{Y,\\mathrm{et}}$ induced by base change of site objects.\nAll four $c_w$ are isomorphisms, and the structural maps satisfy\n$$c_{\\nu_X}\\circ\\nu_X^{-1}(c_{p_{\\mathrm{et}}})=c_{p_{\\mathrm{proet}}}\\circ p_{\\mathrm{proet}}^{-1}(c_{\\nu_Y})\\circ c_R.$$\nThus this specified geometric square is a commutative square of ringed topoi; cartesianness is not asserted. Under the constant-section-preserving equivalences between fixed-$A$ module sheaves and $R_{T,s}$-modules [lem-weil-pbc-site-module-sheaf-constant-ring-equivalence], the induced module commutation comparison preserves zero, addition and each scalar action and equals the specified fixed-coefficient comparison. In ordinary uncompleted derived categories put $F_T=\\nu_T^*$, $u=p_{\\mathrm{et}}^*$ and $v=p_{\\mathrm{proet}}^*$. The ringed square's derived comparison $\\theta:vF_Y\\xrightarrow{\\sim}F_Xu$ is precisely $a^{-1}$, where $a:F_Xu\\xrightarrow{\\sim}vF_Y$ is the termwise localization of the ordinary fixed-$A$ module comparison of [lem-weil-pbc-comparison-pullback] to these uncompleted derived categories, as an equality of the specified natural isomorphisms under these equivalences.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A6, lemma-morphism-comparison, commutative square immediately preceding the lemma; its constant-section ring/module realization"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-cbc-constant-ring-module-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "For each original site use its terminal object. The composite of the constant-sheaf/global-sections adjunction with the edge ring-sheaf adjunction has the same right adjoint as the constant-sheaf adjunction on the destination. Uniqueness of left adjoints gives an invertible map. The Hom-equivalence computation identifies its component with ringMap, since both adjuncts are the extension of the constant-section sheafification unit. This proves ringMap_isIso, including for the empty scheme and the zero ring.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-maps-global-sections",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WX and 0H7J"
+   }
+  },
+  {
+   "text": "Transpose the two coefficient-square paths through the composite ring adjunctions. The unit equation for the conjugate comparison changes the desired equality into equality of the two composite direct-section maps. The sheafification adjunction detects it after precomposition by the constant-presheaf unit. Apply ringDirectMap_unit on each edge; both sides are then the same constant section on the same chosen base change.",
+   "uses": [
+    "def-per-site-comparison-pullback-data",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, square before Tag 09A6; sites.tex Tag 0H7J"
+   }
+  },
+  {
+   "text": "Restricting module scalars through the constant sections identifies modulePush followed by restriction with restriction followed by fixedPush: construct directComparisonAux by identity linear maps on sections, using ringDirectMap_unit to check scalar linearity. The constant-ring restriction is an additive equivalence. Transport the fixed-coefficient adjunction across it to prove modulePushIsRightAdjoint. The inverse mate of the identity-section comparison is invertible because both vertical functors are equivalences. Its unit equation and injectivity of the adjunction Hom equivalence prove pullComparison_existsUnique; sectionwise extensionality proves directComparison_existsUnique.",
+   "uses": [
+    "lem-cbc-constant-ring-module-sheaves",
+    "lem-stage3-inverse-mate-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D1, 03D2, 03D3 and 093I; categories.tex Tag 0B65"
+   }
+  },
+  {
+   "text": "Paste the two directComparisonAux isomorphisms on each path with the canonical fixed-coefficient direct-image square. Cancel the fully faithful constant-ring restriction to obtain squareDirectComparison; it is identity on sections, which also proves uniqueness. Apply the mates equivalence to the desired ordinary square. Compatibility of mates with horizontal and vertical composition reduces it to the equality of these identity-section direct-image comparisons. Cancel the inverse pullComparison components to obtain precisely ordinary.",
+   "uses": [
+    "lem-cbc-constant-ring-module-sheaves",
+    "def-per-site-comparison-pullback-data",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65; proetale.tex Tag 09A5"
+   }
+  },
+  {
+   "text": "The fixed-coefficient inverse images are additive and exact. Transport additivity and finite limits through pullComparison and the faithful constant-ring equivalence; finite colimits follow from the actual module adjunction. Apply the exact-derived square-composition theorem to each two-edge path, with their common ordinary comparison q. The ordinary equation supplies its hypothesis on the second path. Cancel the common derived composition factors to identify the forward derived squares, and invert that equation to get the stated theta = a inverse with all four specified derivedPullComparison factors. All functors here are termwise localizations on the ordinary unbounded derived categories.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pod-derived-exact-square-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F; categories.tex localization universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-sheaf-maps-global-sections",
+  "def-weil-pbc-composite-adjunction",
+  "def-per-site-comparison-pullback-data",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-cbc-constant-ring-module-sheaves",
+  "lem-stage3-inverse-mate-equivalences",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pod-derived-exact-square-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A5 square; sites.tex 00WX and 0H7J; sites-modules.tex 03D1-03D3 and 093I; categories.tex 0B65; derived.tex 015F. Direct adjunction and mate proof written by S3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constant.*(ring|module).*(equiv|pullback)|proetale.*comparison",
+   "results": "Hits read: Mathlib/Topology/LocallyConstant/Algebra.lean, Mathlib/Topology/LocallyConstant/Algebra.lean, Mathlib/Topology/Category/Profinite/Nobeling/Induction.lean, Mathlib/LinearAlgebra/PiTensorProduct/Finsupp.lean, Mathlib/LinearAlgebra/PiTensorProduct/Dual.lean, Mathlib/LinearAlgebra/PiTensorProduct/Dual.lean, Mathlib/LinearAlgebra/PiTensorProduct/Dual.lean, Mathlib/LinearAlgebra/PiTensorProduct/Basis.lean.  The hits concern ordinary module pullback, sheafification, scalar adjunctions or etale algebras; none states this derived constant-module realization with its specified maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SheafOfModules, CategoryTheory.Adjunction",
+   "results": "No hits. loogle: unknown identifier 'CategoryTheory.SheafOfModules' The hits concern ordinary module pullback, sheafification, scalar adjunctions or etale algebras; none states this derived constant-module realization with its specified maps.",
+   "date": "2026-10-22",
+   "verdict": "invalid query: unknown identifier; no absence conclusion; corrected by SheafOfModules.pullback, SheafOfModules.pushforward"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical constant coefficient ringed topos comparison square identifies the module inverse images and their derived tensor comparisons",
+   "results": "Hits read: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackIso, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforwardCongr_inv_app_val_app, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.pushforward₀CompToPresheaf.  The hits concern ordinary module pullback, sheafification, scalar adjunctions or etale algebras; none states this derived constant-module realization with its specified maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The etale to proetale comparison square lifts to a commutative square of constant ring sheaf module pullbacks compatible with derived tensor products",
+   "results": "Hits read: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.IsEtale.of_comp.  The hits concern ordinary module pullback, sheafification, scalar adjunctions or etale algebras; none states this derived constant-module realization with its specified maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.pushforward",
+   "results": "Hits read: SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.conjugateEquiv_pullbackId_hom, SheafOfModules.pullback_assoc.  The hits concern ordinary module pullback, sheafification, scalar adjunctions or etale algebras; none states this derived constant-module realization with its specified maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural commutation isomorphism between etale and proetale module inverse images preserves scalar action and is a morphism of ringed topoi",
+   "results": "Hits read: SheafOfModules.ιFree_mapFree_inv, SheafOfModules.pushforwardNatIso_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, AlgebraicGeometry.Scheme.Etale.forget, LightCondensed.ihomPoints_symm_comp, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, StandardEtalePair.homEquiv_symm_apply.  The hits concern ordinary module pullback, sheafification, scalar adjunctions or etale algebras; none states this derived constant-module realization with its specified maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric commutative square of etale and proetale topoi lifts to constant ring module inverse images and the same derived natural comparison",
+   "results": "Hits read: CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, LightCondensed.ihomPoints_symm_comp, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, Condensed.profiniteSolidCounit, Condensed.profiniteSolidification, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom. General module pullback compositors, constant-sheaf forgetful comparison and exact-derived factorization are available, but no hit states this specified etale/proetale ringed square and its normalization. Relevant sources read: PullbackContinuous.lean:167-182, ConstantSheaf.lean:184-191, DerivedCategory/ExactFunctor.lean:36-45.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(ring|module).*(comparison|pullback)|ringed.*square",
+   "results": "No hits. General module pullback compositors, constant-sheaf forgetful comparison and exact-derived factorization are available, but no hit states this specified etale/proetale ringed square and its normalization. Relevant sources read: PullbackContinuous.lean:167-182, ConstantSheaf.lean:184-191, DerivedCategory/ExactFunctor.lean:36-45.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "Hits read: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv. General module pullback compositors, constant-sheaf forgetful comparison and exact-derived factorization are available, but no hit states this specified etale/proetale ringed square and its normalization. Relevant sources read: PullbackContinuous.lean:167-182, ConstantSheaf.lean:184-191, DerivedCategory/ExactFunctor.lean:36-45.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant ring sheaf inverse image identifies the ringed topos module commutation isomorphism with the geometric inverse image comparison",
+   "results": "Hits read: AlgebraicGeometry.StructureSheaf.comap_id', CategoryTheory.constantCommuteCompose, AlgebraicGeometry.Scheme.inv_app, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc, AlgebraicGeometry.StructureSheaf.globalSectionsIso, SheafOfModules.pullbackIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal. General module pullback compositors, constant-sheaf forgetful comparison and exact-derived factorization are available, but no hit states this specified etale/proetale ringed square and its normalization. Relevant sources read: PullbackContinuous.lean:167-182, ConstantSheaf.lean:184-191, DerivedCategory/ExactFunctor.lean:36-45.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism of inverse image functors preserves constants and scalar multiplication and induces the same natural isomorphism after localization to the derived category",
+   "results": "Hits read: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.singleFunctorIsoCompQ, CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app. General module pullback compositors, constant-sheaf forgetful comparison and exact-derived factorization are available, but no hit states this specified etale/proetale ringed square and its normalization. Relevant sources read: PullbackContinuous.lean:167-182, ConstantSheaf.lean:184-191, DerivedCategory/ExactFunctor.lean:36-45.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projection-comparison-etale-proetale",
+  "date": "2026-10-22",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-finite",
+   "place": "Proof paragraph (3): transport of the etale projection map; realization of the comparison square and direction of its pullback comparison (returned item step 1).",
+   "via": [
+    "lem-sfb-projection-comparison-etale-proetale"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-etale-proetale-ringed-square-realization",
+  "worker": "stage1",
+  "summary": "No new nodes: reused general constant coefficient geometric inverse image, constant-sheaf uniqueness, module equivalence, mate uniqueness and exact localization. Established the ring-square equality on constants, the scalar insertion normalization, and equality of the specified ordinary and derived comparisons. STATEMENT-DISPUTED: made explicit that a in the final derived sentence is the localization of the ordinary comparison; the old reference alone was not typed in the derived category. No mathematical hypothesis or conclusion changed.",
+  "blueprint": "Ancestor det-thm-sfb-proper-base-change-finite, transport and paragraph (3): canonical pullback-square normalization needed to transport the projection map. Steps 1-2 give its constant ring square, steps 3-4 its module realization, step 5 its ordinary derived localization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic Comparison inverse image commutes with scheme pullback used for the constant-coefficient square normalization; it does not replace the unit transport/projection-formula route."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic Exact geometric inverse image with arbitrary constant left-module coefficients used for the constant-coefficient square normalization; it does not replace the unit transport/projection-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-maps-global-sections",
+    "why": "Generic Morphisms out of a constant sheaf are maps into global sections used for the constant-coefficient square normalization; it does not replace the unit transport/projection-formula route."
+   },
+   {
+    "node": "def-weil-pbc-ringed-topos-morphism",
+    "why": "Generic Ringed-topos morphism and its induced module direct image used for the constant-coefficient square normalization; it does not replace the unit transport/projection-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence",
+    "why": "Generic Constant-ring module sheaves and module-valued sheaves on a small site used for the constant-coefficient square normalization; it does not replace the unit transport/projection-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic Derived pullback on ringed topoi computed by K-flat resolutions used for the constant-coefficient square normalization; it does not replace the unit transport/projection-formula route."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Generic Composite of two adjunctions; the identity adjunction used for the constant-coefficient square normalization; it does not replace the unit transport/projection-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic An isomorphism of right adjoints determines a unique isomorphism of left adjoints compatible with the units used for the constant-coefficient square normalization; it does not replace the unit transport/projection-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic The functor induced on derived categories by an exact functor, with its factorization through the localization functors used for the constant-coefficient square normalization; it does not replace the unit transport/projection-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic The functor induced by an exact functor is its own right and left derived functor used for the constant-coefficient square normalization; it does not replace the unit transport/projection-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic Universal property of a localization of categories: functors and natural transformations inverting W factor through it used for the constant-coefficient square normalization; it does not replace the unit transport/projection-formula route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-sheaf-maps-global-sections",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-ad404483b",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-ad404483b (reviewer sub-agent of L); spot-checked: Read the item in full: it has 0 new nodes and 5 steps. I read every cited statement and proetale.tex 09A5 (the square before 09A6, for any scheme map; qcqs only in 09A6). Live and side-live have the item unsplit with an empty proof, there is no repair note and it is not dropped. The only statement change is in the last sentence: the base wrote a=[lem-weil-pbc-comparison-pullback], which is a sheaf-level isomorphism and does not type as a derived map; the head says a is its termwise localization. All four pullbacks are exact with identified constant coefficients, so this is the only meaningful reading. It matches how the reviewed citer lem-sfb-projection-comparison-etale-proetale uses a (theta=a^{-1}). Nothing is added or weakened, and the report records the change. Step 1: constants are preserved by lem-pe-constant-left-module-inverse-image, and the adjunct is unique by the constant-sheaf bijection on the target's final object (also for X empty). Step 2: both paths send L1(a) to a, so their quotient is a ring endomorphism of the constant sheaf fixing constants, which is the identity. Step 3: tensor balancing and linearity from naturality are correct. Step 4: delta=id on N(X x_Y W), and uniqueness follows from the unit equation. Step 5: exact termwise functors and descent through the localization; the directions check (b=a, theta=Q(b^{-1})=a^{-1}). Edge cases tested: A=0, X empty, p=id, disconnected X. Not duplicates: lem-sfb-coefficient-ringed-square-normalization (condensed coefficient change); the ringed-square localization and transport nodes have different hypotheses. Two repairs, C1/C4 and C3: step 1 now cites lem-weil-pbc-adjunction-lifts-group-ring-objects for the ring-object adjunction. Step 4 took the unit-equation normalization of the pullback comparison from that node's proof; it now cites def-per-site-comparison-pullback-data, a definition (no route), which defines the comparison as the adjunction mate of the restriction direct-image comparison and binds the same published declarations. proof_deps is updated, with no cycle. Accepted tool_uses are generic: lem-pe-constant-left-module-inverse-image, the sk-def-exchange adjunction, constant-sheaf and exact-derived tools, lem-weil-pbc-ringed-topoi-derived-pullback, the module equivalence, the ringed-topos definition and the localization universal property. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleProEtaleRingedSquareRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.SfbRingedSquare.derived",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.Corner",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.Edge",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.Site",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.siteCategory",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.topology",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.fromCorner",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.toCorner",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.siteFunctor",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.siteFunctorContinuous",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.ringSheafify",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.RingSheaf",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.ringDirectMap",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.ringPull",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.ringAdj",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.ringMap",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.coefficients",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.abSheafify",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.abLocallyBijective",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.fixedSheafify",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.Modules",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.Fixed",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.restriction",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.restrictionIsEquivalence",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.restrictionAdditive",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.modulePush",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.modulePushIsRightAdjoint",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.modulePull",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.moduleAdj",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.fixedPull",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.fixedPush",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.fixedAdj",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.directComparison_existsUnique",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.directComparison",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.pullComparison_existsUnique",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.pullComparison",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.squareDirectComparison_existsUnique",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.squareDirectComparison",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.moduleSquare",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.ordinary",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.fixedPullAdditive",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.fixedPullLimits",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.fixedPullColimits",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.modulePullAdditive",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.modulePullLimits",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.modulePullColimits",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.derivedRestriction",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.derivedModulePull",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.derivedFixedPull",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.derivedPullComparison",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.theta",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.a",
+   "AlgebraicGeometry.ProEtale.SfbRingedSquare.derived"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleProEtaleRingedSquareRealization.lean",
+  "statement": "theorem derived (A : Type (u + 1)) [CommRing A] [Finite A] {X Y : Scheme.{u}} (p : X ⟶ Y) [∀ c : Corner, HasDerivedCategory.{w} (Modules A X Y c)] [∀ c : Corner, HasDerivedCategory.{w} (Fixed A X Y c)] (K : DerivedCategory (Modules A X Y .yEt)) : (derivedRestriction A (X := X) (Y := Y) .xPro).map ((theta A p).hom.app K) ≫ (derivedPullComparison A p .comparisonX).hom.app ((derivedModulePull A p .etale).obj K) ≫ (derivedFixedPull A p .comparisonX).map ((derivedPullComparison A p .etale).hom.app K) = (derivedPullComparison A p .proetale).hom.app ((derivedModulePull A p .comparisonY).obj K) ≫ (derivedFixedPull A p .proetale).map ((derivedPullComparison A p .comparisonY).hom.app K) ≫ (a A p).inv.app ((derivedRestriction A (X := X) (Y := Y) .yEt).obj K)",
+  "branch": "sheaf-dag",
+  "by": "Q73",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The coefficients, ordinary and derived declarations together state the node. Auxiliary constructions retain the four original sites and the constant-section structure maps; the ringed module square is the mate of the uniquely identity-on-sections direct-image square. All choices are uniquely normalized natural isomorphisms or universal-property adjoints. The added landed constant-ring module-sheaves dependency exposes the canonical scalar-restriction equivalence with independent site object/Hom universes. Derived localizations use a common arbitrary universe w via explicit HasDerivedCategory binders."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-746824514",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Read the item, all 9 stmt_deps and their Lean, proetale.tex 09A5 (square for any f; qcqs only in 09A6), the module (606 lines) and the report. Clauses match the node: finite CommRing A : Type (u+1), the project convention; any p; the 4 actual sites; constant ring sheaves; canonical constant-section ringDirectMap/ringMap; IsIso and the ring equation with c_R = supportSiteComparisonCoefficientPullbackIso; moduleSquare = conjugateIsoEquiv mate of the ∃!-identity-on-sections square (site base change is Iso.refl), equated in `ordinary` with the recorded fixed-A comparison via the unit-normalized pullComparisons; θ = mapDerivedCategorySquareIso(moduleSquare.symm), a from the recorded iso, `derived` gives θ = a⁻¹ for all K, unbounded, arbitrary HasDerivedCategory.{w}. Item statement byte-identical to base; only lean/stmt_deps changed; statement verbatim; declarations match; lines ≤97; 10 sorry, all theorems; no hollow def; docstrings carry the steps; no dep record touched. Mechanical finding: lem-cbc-constant-ring-module-sheaves is genuine, since its .choose_spec gives the IsEquivalence/Additive instances needed for mapDerivedCategory → PASS on the point; adding a landed node to stmt_deps is allowed (brief l.167). Advisories: cite def-sfb-constant-ring-module-restriction for constantRingModuleRestriction; modulePushIsRightAdjoint restates the landed module_pushforward_isRightAdjoint_of_universes; unused stmt_dep public imports. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261024T020242-L-2574029",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

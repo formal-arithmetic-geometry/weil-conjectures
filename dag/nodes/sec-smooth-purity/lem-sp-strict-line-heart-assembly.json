@@ -1,0 +1,230 @@
+{
+ "id": "lem-sp-strict-line-heart-assembly",
+ "kind": "statement",
+ "title": "Lifting compatible shifted line orientations in strict coefficient towers",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, and a scheme $T$ on which $\\ell$ is invertible [def-weil-l-adic-coefficient-extension, def-weil-scheme-morphism-properties]. Put $R_n=\\mathcal O_E/\\ell^n$ for $n\\geq1$. Use strict semilinear coefficient towers [sk-def-sp-coefficient-towers], their Grothendieck abelian category with exact evaluations and canonical derived reduction maps [det-sp-coefficient-towers-abelian], and its ordinary derived category [def-weil-abstract-derived-category]. Let $L_\\bullet$ be a tower of locally free rank-one $R_{n,T}$-module sheaves with transitions $q^L_{n,m}$ such that $L_n\\otimes_{R_n}R_m\\to L_m$ is an isomorphism for all $m\\leq n$; locally free rank one means locally isomorphic to $R_{n,T}$. Let $V\\in D(\\operatorname{Tow}(T,\\mathcal O_E))$, let $s\\in\\mathbf Z$, and suppose there are derived isomorphisms $a_n:L_n[s]\\xrightarrow{\\sim}V_n$ whose reduction squares commute:\n$$\\rho^V_{n,m}\\circ(a_n)_{R_m}=a_m\\circ q^L_{n,m}[s],$$\nwhere $q^L$ on this formula denotes the induced scalar-extension map and derived scalar extension is [det-sp-scalar-extension-functor]. Then $V[-s]$ has cohomology only in degree zero. Put $W_\\bullet=H^0(V[-s])$ with its induced strict transitions $t^W_{n,m}$, and use the canonical single-degree identification $W_\\bullet[0]\\simeq V[-s]$. Each $a_n[-s]$ corresponds to a unique sheaf isomorphism $\\alpha_n:L_n\\xrightarrow{\\sim}W_n$, and\n$$t^W_{n,m}\\circ\\alpha_n=\\alpha_m\\circ q^L_{n,m},\\qquad\n\\alpha_m^{-1}\\circ t^W_{n,m}=q^L_{n,m}\\circ\\alpha_n^{-1}.$$\nThus these sheaf maps give an isomorphism $\\alpha:L_\\bullet\\xrightarrow{\\sim}W_\\bullet$, whose shift and the single-degree identification give an isomorphism $a:L_\\bullet[s]\\xrightarrow{\\sim}V$ evaluating to each prescribed $a_n$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(1), removing the common shift and assembling an isomorphism of rank-one tower sheaves; retained proof step 3"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-abstract-derived-category",
+  "det-sp-scalar-extension-functor"
+ ],
+ "proof": [
+  {
+   "text": "For K=V[-s], exact evaluation and shift cancellation identify ev_n(K) with L_n[0]. The canonical exact-derived homology comparison shows every evaluation of H^i(K) is zero for i≠0. Faithfulness of A.equivalence.functor and componentwise extensionality prove id_{H^i K}=0. Apply the standard concentration theorem. For K≅Y[0], use the induced H^0(K)≅Y to obtain j:H^0(K)[0]≅K; naturality of singleFunctorCompHomologyFunctorIso proves its required normalization.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-sf-derived-concentrated-single",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set W=H^0(K) and J=shiftedIdentification(j). The composite a_n, then ev_n(J^{-1}), then the evaluation single/shift comparison is an isomorphism L_n[0][s]≅W_n[0][s]. Lift it through the fully faithful composite singleFunctor ⋙ shiftFunctor to obtain beta_n. The map_preimage identity proves its prescribed level equation. Naturality of A.reduction at J^{-1} transports the assumed reduction square to these shifted single maps. Apply lem-sp-shifted-single-reduction-detects-transition to obtain the actual strict transition equations for beta_n.",
+   "uses": [
+    "lem-sp-shifted-single-reduction-detects-transition",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Make the strict map f with components beta_n and the compatibility just proved. Componentwise invertibility makes f invertible. Lift asIso(f) through the equivalence to alpha:L≅W; map_preimage identifies its components with beta_n. Faithfulness of singleFunctor ⋙ shiftFunctor and cancellation of the evaluation comparison and ev_n(J) prove the required iff for arbitrary beta. The forward and inverse strict transition identities are the comm fields of the images of alpha.hom and alpha.inv. Finally let b=alpha[0][s] followed by J. Naturality of the exact-evaluation single and shift comparisons, followed by the defining level equation of beta_n, proves ev_n(b)=a_n in the stated normalization.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-coefficient-towers-abelian",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-derived-concentrated-single",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-sp-shifted-single-reduction-detects-transition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(1), Lean proof by R9: concentration, normalized identification, fully faithful lifting, strict assembly and evaluation; only the reduction-to-transition calculation is split off."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible rank one sheaf isomorphisms to the degree zero cohomology of a strict derived tower lift to an isomorphism in the derived category of towers",
+   "results": "8 hit(s): DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CochainComplex.isIso_liftCycles_iff, CategoryTheory.Sheaf.H, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.singleFunctorIsoCompQ. DerivedCategory concentration/singleFunctor facts and PresheafOfModules.isoMk are ingredients only; no hit states the semilinear reduction-to-heart assembly with specified derived evaluations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor",
+   "results": "12 hit(s): DerivedCategory.singleFunctor, DerivedCategory.instAdditiveSingleFunctor, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.singleFunctorIsoCompQh, DerivedCategory.Q_obj_single_obj, DerivedCategory.singleFunctorIsoCompQ_hom_app, DerivedCategory.singleFunctorIsoCompQ_inv_app, DerivedCategory.Q_map_single_map. DerivedCategory concentration/singleFunctor facts and PresheafOfModules.isoMk are ingredients only; no hit states the semilinear reduction-to-heart assembly with specified derived evaluations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tower.*cohomology|singleFunctor.*FullyFaithful",
+   "results": "1 hit(s): Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean. DerivedCategory concentration/singleFunctor facts and PresheafOfModules.isoMk are ingredients only; no hit states the semilinear reduction-to-heart assembly with specified derived evaluations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In the derived category of sheaves of modules over an inverse system of rings a compatible family of isomorphisms between objects concentrated in one degree defines a strict tower isomorphism",
+   "results": "8 hit(s): HasDerivedCategory.standard, PresheafOfModules.isoMk, DerivedCategory.exists_iso_Q_obj_of_isGE, CategoryTheory.GradedObject.isoMk, CochainComplex.instIsIsoIntπTruncGEOfIsStrictlyGE, DerivedCategory.instIsIsoMapCochainComplexIntQ, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.singleFunctorsPostcompQhIso. DerivedCategory concentration/singleFunctor facts and PresheafOfModules.isoMk are ingredients only; no hit states the semilinear reduction-to-heart assembly with specified derived evaluations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the derived category of sheaves of modules over an inverse system of rings a compatible family of isomorphisms between objects concentrated in one degree defines a strict tower isomorphism",
+   "results": "8 hit(s): DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE. DerivedCategory concentration/singleFunctor facts and PresheafOfModules.isoMk are ingredients only; no hit states the semilinear reduction-to-heart assembly with specified derived evaluations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible shifted locally free line orientations in a derived strict semilinear coefficient tower lift to a strict tower isomorphism",
+   "results": "8 hit(s): IsBaseChange.of_lift_unique, IsLocalizedModule.lift_iso, IsBaseChange.iff_lift_unique, IsLocalizedModule.lift_comp_iso, Orientation.map_apply, IsBaseChange.lift_eq, IsBaseChange.lift_comp, CommRing.Pic.mapAlgebra_mapAlgebra. No full match: these give single-complex or unrelated scalar facts, not strict varying-ring tower assembly with prescribed evaluations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tower.*[Hh]eart|semilinear.*[Dd]erived|singleFunctor.*FullyFaithful",
+   "results": "1 hit(s): Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean. No full match: these give single-complex or unrelated scalar facts, not strict varying-ring tower assembly with prescribed evaluations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphisms concentrated in degree zero assemble in the derived category of strict systems of sheaves over varying rings",
+   "results": "8 hit(s): HasDerivedCategory, HasDerivedCategory.standard, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.leftDerivedZeroIsoSelf.congr_simp, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom, CategoryTheory.instIsIsoAppFromLeftDerivedZero. No full match: these give single-complex or unrelated scalar facts, not strict varying-ring tower assembly with prescribed evaluations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor",
+   "results": "12 hit(s): DerivedCategory.singleFunctor, DerivedCategory.instAdditiveSingleFunctor, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.singleFunctorIsoCompQh, DerivedCategory.Q_obj_single_obj, DerivedCategory.singleFunctorIsoCompQ_hom_app, DerivedCategory.singleFunctorIsoCompQ_inv_app, DerivedCategory.Q_map_single_map. No full match: these give single-complex or unrelated scalar facts, not strict varying-ring tower assembly with prescribed evaluations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived object of strict inverse systems concentrated in one degree is reconstructed from its cohomology system and compatible level isomorphisms",
+   "results": "8 hit(s): DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.exists_iso_Q_obj_of_isGE, CochainComplex.exists_iso_single, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective. No full match: these give single-complex or unrelated scalar facts, not strict varying-ring tower assembly with prescribed evaluations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-tower-gamma",
+  "date": "2026-10-22",
+  "group": "Q112"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization and Purity paragraphs; tower-geometric gamma proof (1), removing the common shift and assembling an isomorphism of rank-one tower sheaves; retained proof step 3",
+   "via": [
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-strict-line-heart-assembly",
+  "worker": "stage1",
+  "summary": "Q146 supplies a five-step proof without new nodes. Exact evaluation detects concentration; the normalized single-degree identification recovers the unique level sheaf maps. The prescribed derived reduction square is transposed to the actual semilinear transition equality using the existing normalized scalar Hom comparison, and componentwise inverse maps assemble the strict isomorphism. Statement and imported search records retained. Reviewer FIX (Q146 maintainer reader): step 3's removal of the common shift needs the canonical tower reductions to commute with shifts, which det-sp-coefficient-towers-abelian does not state; added the statement-only node lem-sp-tower-reduction-shift-compatibility and cited exact evaluation's single/shift compatibility in steps 2 and 5.",
+  "blueprint": "Nearest ancestor det-sp-integral-adjunction-bijection, Purity paragraph via det-sp-tower-gamma; the direct source is tower-geometric-gamma proof (1), its assertion that removing the common shift produces a rank-one tower sheaf and that its maps are determined levelwise. Steps 1--2 remove the shift, steps 3--4 justify compatibility, and step 5 assembles the orientation.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-system-level-left-extension",
+    "why": "Generic exact evaluation and componentwise cohomological detection for strict semilinear systems; applies to the specified quotient-ring tower and supplies no replacement purity route."
+   },
+   {
+    "node": "lem-pur-exact-derived-cohomology-coherence",
+    "why": "Generic normalized cohomology comparison for exact evaluations, natural on all derived morphisms; no constructibility or boundedness assumption."
+   },
+   {
+    "node": "lem-sfb-locally-free-derived-scalars",
+    "why": "Generic ringed-site K-flatness and derived scalar comparison for the given locally rank-one sheaves, without flatness of the quotient coefficients."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-hom-comparison",
+    "why": "Generic representative-normalized derived scalar adjunction, needed to recover the actual semilinear maps from the derived reduction equality."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "why": "Generic sheaf scalar adjunction with its sectionwise pure-tensor formula."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-e5e8adcce",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-e5e8adcce (reviewer sub-agent of L); spot-checked: Read the item, its five steps and every cited statement in full. The statement matches blueprint main-20261015 sk-prop-sp-tower-geometric-gamma.proof.md (1): after removing the shift, a map of rank-one tower sheaves is determined by its levels. The citer det-sp-tower-gamma step 1 (L=1(d), V=omega, s=2d) meets every hypothesis. No new nodes were delivered, no SGA source is used, there is no re-split note for this item, and I found no duplicate in the DAG. The Stacks tags 08J5, 06XS, 015F, 03CZ, 06YY, 07A6 and 09T5 exist with the cited labels. I accept the five declared generic tool_uses. Step 1: lem-pur-system-level-left-extension applies because Tow is its S(B) on the small site T_proet, and it gives componentwise cohomology and joint detection of cohomological bounds. Step 2: concentration plus the fully faithful single embedding give alpha_n, with invertibility from lifting b_n^{-1}. Step 4: the transpose argument via def-coef-semilinear-system-models (the same model as det-sp-coefficient-towers-abelian(1), whose proof builds rho the same way), lem-pur-sheaf-ring-derived-hom-comparison and the pure-tensor ordinary adjunction is correct and uses no flatness of R_m over R_n. Step 5 is elementary. Small cases checked: s=0, m=n, empty T, unit-multiplication towers, and Z/l^2 to F_l (not flat). FIX 1 (C4): step 3 removes the common shift, which needs rho^{V[-s]} = rho^V[-s] under the evaluation and scalar-extension shift comparisons. det-sp-coefficient-towers-abelian states only naturality and composition, and no node in the DAG states this. I added the statement-only unsplit node lem-sp-tower-reduction-shift-compatibility (created.item = this item, from det-sp-integral-adjunction-bijection via [item, det-sp-tower-gamma], same_as [], Mathlib grep no match; LeanSearch/LeanFinder were not available here, so those searches are still to be run) and cited it in step 3. FIX 2: steps 2 and 5 use the single/shift clause of exact evaluation, so lem-sf-exact-functor-derived-triangulated (a Mathlib leaf) is added to their uses and proof_deps is recomputed. Whole corrected files are under fixes/dag/nodes/sec-smooth-purity/.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StrictLineHeartAssembly",
+  "declaration": "AlgebraicGeometry.ProEtale.SpStrictLineHeart.strict_line_heart_assembly",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpStrictLineHeart.D",
+   "AlgebraicGeometry.ProEtale.SpStrictLineHeart.single",
+   "AlgebraicGeometry.ProEtale.SpStrictLineHeart.H",
+   "AlgebraicGeometry.ProEtale.SpStrictLineHeart.evaluation",
+   "AlgebraicGeometry.ProEtale.SpStrictLineHeart.ev",
+   "AlgebraicGeometry.ProEtale.SpStrictLineHeart.singleH",
+   "AlgebraicGeometry.ProEtale.SpStrictLineHeart.evaluationSingleShift",
+   "AlgebraicGeometry.ProEtale.SpStrictLineHeart.shiftedIdentification",
+   "AlgebraicGeometry.ProEtale.SpStrictLineHeart.strict_line_heart_assembly"
+  ],
+  "file": "lean/Sheaf/Paper/StrictLineHeartAssembly.lean",
+  "statement": "theorem strict_line_heart_assembly (_hT : IsUnit (l : Γ(T, ⊤))) (L : spCoefficientTowers l E T) (_hline : ∀ (n : ℕ) (X : T.ProEt), ∃ S : Sieve X, S ∈ Scheme.ProEt.topology T X ∧ ∀ (U : T.ProEt) (f : U ⟶ X), S f → Nonempty (((evaluation A n).obj L).over U ≅ unit (((spCoefficientRings l E T).obj (op n)).over U))) (_hcart : ∀ {m n : ℕ} (h : m ≤ n), IsIso ((A.ordinaryReduction h).app L)) (V : D A) (s : ℤ) (a : ∀ n : ℕ, ((DerivedCategory.singleFunctor _ 0).obj ((evaluation A n).obj L))⟦s⟧ ≅ (ev A n).obj V) (_ha : ∀ {m n : ℕ} (h : m ≤ n), (systemDerivedTensor A.scalar (spCoefficientCommRings l E T) h).map ((evaluationSingleShift A L n s).hom ≫ (a n).hom) ≫ (A.reduction h).app V = (A.reduction h).app (((single A).obj L)⟦s⟧) ≫ (evaluationSingleShift A L m s).hom ≫ (a m).hom) : (∀ i : ℤ, i ≠ 0 → IsZero ((H A i).obj (V⟦-s⟧))) ∧ ∃ (j : (single A).obj ((H A 0).obj (V⟦-s⟧)) ≅ V⟦-s⟧) (alpha : L ≅ (H A 0).obj (V⟦-s⟧)), (H A 0).map j.hom = (singleH A).hom.app ((H A 0).obj (V⟦-s⟧)) ∧ (∀ (n : ℕ) (beta : (evaluation A n).obj L ≅ (evaluation A n).obj ((H A 0).obj (V⟦-s⟧))), ((DerivedCategory.singleFunctor _ 0).map beta.hom)⟦s⟧' ≫ (evaluationSingleShift A ((H A 0).obj (V⟦-s⟧)) n s).inv ≫ (ev A n).map (shiftedIdentification A V s j).hom = (a n).hom ↔ beta = (evaluation A n).mapIso alpha) ∧ (∀ {m n : ℕ} (h : m ≤ n), ((A.equivalence.functor.mapIso alpha).hom.app n) ≫ (A.equivalence.functor.obj ((H A 0).obj (V⟦-s⟧))).transition h = (A.equivalence.functor.obj L).transition h ≫ (systemRestriction (spCoefficientCommRings l E T) h).map ((A.equivalence.functor.mapIso alpha).hom.app m)) ∧ (∀ {m n : ℕ} (h : m ≤ n), (A.equivalence.functor.obj ((H A 0).obj (V⟦-s⟧))).transition h ≫ (systemRestriction (spCoefficientCommRings l E T) h).map ((A.equivalence.functor.mapIso alpha).inv.app m) = ((A.equivalence.functor.mapIso alpha).inv.app n) ≫ (A.equivalence.functor.obj L).transition h) ∧ ∃ b : ((single A).obj L)⟦s⟧ ≅ V, b = (shiftFunctor _ s).mapIso ((single A).mapIso alpha) ≪≫ shiftedIdentification A V s j ∧ ∀ n : ℕ, (evaluationSingleShift A L n s).inv ≫ (ev A n).map b.hom = (a n).hom",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ff4c86d88",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Node JSON differs from the live copy only by the added lean field (no stmt/proof_deps change); lean.statement is word-for-word the signature. Every clause matches: IsUnit ℓ; tower datum A is pinned (ordinaryReduction_eq, reduction_rep), same convention as other landed consumers; _hline covering-sieve local triviality to unit; _hcart iso of the actual linearization; _ha uses the canonical rho on single L shifted by s, equal to q^L[s] by reduction_rep and lem-sp-tower-reduction-shift-compatibility (already a proof dep), so not stronger, types checked; conclusions: concentration, W literally H0(V[-s]), j pinned by H0 normalization, per-level iff giving existence and uniqueness of alpha_n, typed transition equations (automatic from Hom.comm, harmless), and b evaluating to each a_n. Edge cases s=0, negative s, m=n, empty T, non-flat Z/l^2 to F_l, ramified E all covered. Docstrings with source and blueprint tag present, helpers are thin wrappers, theorem is sorry only, real pro-etale site. No changes made, so no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261025T143912-L-1106776",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

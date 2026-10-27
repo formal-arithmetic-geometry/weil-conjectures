@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-ringed-site-m-pseudocoherent-triangle",
+ "kind": "statement",
+ "title": "m-pseudo-coherence in ringed-site distinguished triangles",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a site with a sheaf of commutative rings and use its unbounded derived category of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Restrictions to an object mean restrictions to the slice site [def-pur-localized-ringed-site]. A strictly perfect complex is a bounded cochain complex whose terms are direct summands of finite free $\\mathcal O$-modules. For $a\\in\\mathbf Z$, call $K\\in D(\\mathcal O)$ $a$-pseudo-coherent if locally on each site object there is a strictly perfect $P$ and a morphism $P\\to K$ inducing cohomology isomorphisms in degrees $>a$ and a surjection in degree $a$. Let $m\\in\\mathbf Z$ and let $K\\to L\\to M\\to K[1]$ be a distinguished triangle in $D(\\mathcal O)$. (1) If $K$ is $(m+1)$-pseudo-coherent and $L$ is $m$-pseudo-coherent, then $M$ is $m$-pseudo-coherent. (2) If $K$ and $M$ are $m$-pseudo-coherent, then $L$ is $m$-pseudo-coherent. (3) If $L$ is $(m+1)$-pseudo-coherent and $M$ is $m$-pseudo-coherent, then $K$ is $(m+1)$-pseudo-coherent.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FV (lemma-cone-pseudo-coherent), parts (1), (2), (3)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-localized-ringed-site",
+  "def-sfb-ringed-site-pseudocoherent-complex",
+  "def-weil-pbc-strict-perfect-coefficient-package"
+ ],
+ "proof": [
+  {
+   "text": "Fix an object $U$. Restriction of module sheaves to any slice is exact; applying it degreewise gives a triangulated restriction on derived categories and commutes with cohomology. Thus the given triangle restricts to every further slice. For (1), choose a covering of $U$ with strictly perfect approximations $\\alpha:P\\to K$ at degree $m+1$. On each member choose a covering carrying a strictly perfect approximation $\\beta:Q\\to L$ at degree $m$. We work on a member of this composite covering and suppress restrictions. Further restrictions preserve these properties: finite free sheaves and their retracts restrict to finite free sheaves and their retracts, and exact restriction preserves the cohomology isomorphisms and epimorphisms.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FV, lemma-cone-pseudo-coherent, proof (1)"
+   }
+  },
+  {
+   "text": "Replace $P$ by its stupid truncation $P'=\\sigma_{\\ge m+1}P$: it has the same terms and differentials from degree $m+1$ onwards and zero terms below. The canonical inclusion $P'\\to P$ is a chain map, is an isomorphism on cohomology above $m+1$, and is surjective in degree $m+1$, since it removes the incoming boundaries in that degree without changing cycles. Hence $\\alpha':P'\\to K$ still has exactly the required approximation properties. Its terms are unchanged or zero, so $P'$ remains strictly perfect and is zero below $m+1$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FV, lemma-cone-pseudo-coherent, proof (1)"
+   }
+  },
+  {
+   "text": "Choose any cochain representative $F$ of $L$. Apply the local-actual lemma to $\\beta:Q\\to L\\cong Q(F)$ and then to $f\\alpha':P'\\to L\\cong Q(F)$; refine the covering to obtain actual chain maps $b:Q\\to F$ and $c:P'\\to F$ representing these two arrows. The chain map $b$ is an isomorphism on cohomology above $m$ and a surjection at $m$. Apply the local homotopy-lifting lemma to $E=P'$, $G=Q$, $u=c$, $v=b$, and $a=m+1$. Its support condition holds by the previous step, and $H^j(b)$ is an isomorphism for every $j\\ge m+1$, hence in particular surjective at $a$. After one more covering it gives a chain map $\\gamma:P'\\to Q$ with $b\\gamma$ homotopic to $c$. Localization identifies homotopic maps, so $\\beta\\,Q(\\gamma)=f\\alpha'$ in the derived category. This supplies the actual chain map omitted in the source's diagram argument, without imposing global projectivity on sheaves.",
+   "uses": [
+    "lem-sfb-ringed-site-strict-perfect-local-actual",
+    "lem-sfb-ringed-site-strict-perfect-local-lift",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FV, lemma-cone-pseudo-coherent, proof (1)"
+   }
+  },
+  {
+   "text": "Put $C=\\operatorname{Cone}(\\gamma)$. Its degree-$j$ term is $Q^j\\oplus P'^{j+1}$, so it is zero outside a finite interval; the direct sum of two finite-free retracts is a retract of the direct sum of their finite free ambient modules. Thus $C$ is strictly perfect, directly from the cone formula. The image of the cone triangle $P'\\to Q\\to C\\to P'[1]$ is distinguished. TR3 applied to the commutative square from the previous step completes $(\\alpha',\\beta)$ to a morphism of this triangle into $K\\to L\\to M\\to K[1]$; denote its third component by $\\theta:Q(C)\\to M$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FV, lemma-cone-pseudo-coherent, proof (1)"
+   }
+  },
+  {
+   "text": "Apply the long exact cohomology sequence and its naturality for morphisms of triangles. For $j>m$, use the five-term rows $H^j(P')\\to H^j(Q)\\to H^j(C)\\to H^{j+1}(P')\\to H^{j+1}(Q)$ and $H^j(K)\\to H^j(L)\\to H^j(M)\\to H^{j+1}(K)\\to H^{j+1}(L)$. The first vertical arrow is epic (including $j=m+1$); the second and fourth are isomorphisms and the fifth is monic. The five lemma makes $H^j(\\theta)$ an isomorphism. At degree $m$ use instead the four-term rows $H^m(Q)\\to H^m(C)\\to H^{m+1}(P')\\to H^{m+1}(Q)$ and their target row. The first and third vertical arrows are epic and the fourth monic. The epi four lemma therefore makes the second vertical arrow $H^m(\\theta)$ epic. All assertions take place in the abelian category of module sheaves, not in section groups.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "lem-weil-pbc-five-lemma",
+    "lem-pc-four-lemma-epi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FV, lemma-cone-pseudo-coherent, proof (1)"
+   }
+  },
+  {
+   "text": "We have constructed on a covering of every initially arbitrary $U$ a strictly perfect $C$ and a map to $M$ which is a cohomology isomorphism above $m$ and an epimorphism at $m$. The successive coverings used above compose to a covering by the site axiom; slice coverings and relocalization are precisely those in the localized-site definition. This is exactly the stated local approximation definition of $m$-pseudo-coherence, proving (1).",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FV, lemma-cone-pseudo-coherent, proof (1)"
+   }
+  },
+  {
+   "text": "For any integer $r$, shifting a strictly perfect approximation and shifting it back shows directly that $X[r]$ is $a$-pseudo-coherent if and only if $X$ is $(a+r)$-pseudo-coherent: the terms are reindexed with sign $(-1)^r$ on the differential, $H^j(X[r])=H^{j+r}(X)$, and the same holds for the approximation map. For (2), inverse rotation gives the distinguished triangle $M[-1]\\to K\\to L\\to M$. Since $M$ is $m$-pseudo-coherent, $M[-1]$ is $(m+1)$-pseudo-coherent; apply the already proved (1) with middle term $K$ to deduce that $L$ is $m$-pseudo-coherent. For (3), rotation gives $L\\to M\\to K[1]\\to L[1]$. Apply (1) to get $K[1]$ $m$-pseudo-coherent, hence $K$ $(m+1)$-pseudo-coherent by the same shift calculation. The rotation signs do not change any cohomology isomorphism or epimorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FV, lemma-cone-pseudo-coherent, proof of (2) and (3) by rotation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-pc-four-lemma-epi",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-ringed-site-strict-perfect-local-actual",
+  "lem-sfb-ringed-site-strict-perfect-local-lift",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-five-lemma"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FV, lemma-cone-pseudo-coherent; omitted chain-map detail supplied using Tags 08FR(1) and 08FQ; TR3 and the four/five lemmas expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a distinguished triangle of complexes on a ringed site m pseudo coherence of two objects implies m pseudo coherence of the third",
+   "results": "OK: 8 hits; CategoryTheory.ObjectProperty.trW_iff_of_distinguished, CategoryTheory.Triangulated.TStructure.triangle_map_exists, DerivedCategory.triangleOfSES_distinguished, DerivedCategory.mem_distTriang_iff, CategoryTheory.ObjectProperty.trW_iff, CategoryTheory.Triangulated.TStructure.instIsGEObj₃ObjTriangleTriangleLTGE, DerivedCategory.instIsTriangulated, CategoryTheory.ObjectProperty.trW_iff'",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract triangulated tools do not prove the shifted pseudo-coherence hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A distinguished triangle of sheaves on a ringed site preserves m pseudo coherence with the appropriate one degree shift",
+   "results": "OK: 8 hits; DerivedCategory.mem_distTriang_iff, DerivedCategory.triangleOfSES_distinguished, HomotopyCategory.Pretriangulated.shift_distinguished_triangle, DerivedCategory.TStructure.t, CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished, CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished, DerivedCategory.instIsTriangulated, DerivedCategory.instPretriangulated",
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived triangles and t-structures, not pseudo-coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudo coherence of complexes of sheaves satisfies two out of three in a distinguished triangle",
+   "results": "OK: 8 hits; HomologicalComplex.instHasTwoOutOfThreePropertyQuasiIso, CategoryTheory.ObjectProperty.IsTriangulatedClosed₁.ext₁', CategoryTheory.Triangulated.Subcategory.ext₁, CategoryTheory.ObjectProperty.instHasTwoOutOfThreePropertyIsoModSerre, CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₂', CategoryTheory.ObjectProperty.IsTriangulatedClosed₃.mk, CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₃, HomotopyCategory.Pretriangulated.distinguishedTriangles",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract closure of an already triangulated property, whereas fixed m pseudo-coherence has shifted bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration with this name"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|[Ii]sMPseudo",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no pseudo-coherence declarations in the searched Mathlib source directory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a distinguished triangle of sheaves on a ringed site m pseudo coherence of two objects implies pseudo coherence of the third with shifted bounds",
+   "results": "OK: 8 hits; CategoryTheory.Triangulated.TStructure.triangle_map_exists, CategoryTheory.Triangulated.TStructure.isGE_of_shift, CategoryTheory.Triangulated.TStructure.instIsGEObj₃ObjTriangleTriangleLTGE, DerivedCategory.triangleOfSES_distinguished, DerivedCategory.mem_distTriang_iff, DerivedCategory.TStructure.t, CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished, CategoryTheory.Triangulated.TStructure.exists_triangle",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract triangulated-category and cohomology tools do not assert pseudo-coherence on ringed sites with the stated shifted bounds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherent complexes on a ringed site are closed under cones with one degree shifted approximation",
+   "results": "OK: 8 hits; DerivedCategory.TStructure.t, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.IsGE, CochainComplex.cm5b, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract triangulated-category and cohomology tools do not assert pseudo-coherence on ringed sites with the stated shifted bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract triangulated-category and cohomology tools do not assert pseudo-coherence on ringed sites with the stated shifted bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|[Ii]sMPseudo",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract triangulated-category and cohomology tools do not assert pseudo-coherence on ringed sites with the stated shifted bounds"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two out of three for m pseudo coherent sheaf complexes in a distinguished triangle",
+   "results": "OK: 8 hits; HomologicalComplex.instHasTwoOutOfThreePropertyQuasiIso, CategoryTheory.ShortComplex.ShortExact.singleTriangle, CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₃, CategoryTheory.ObjectProperty.IsTriangulatedClosed₃.ext₃', HomotopyCategory.Pretriangulated.distinguishedTriangles, DerivedCategory.mem_distTriang_iff, CategoryTheory.Pretriangulated.shortComplexOfDistTriangle_X₃, CategoryTheory.Triangulated.Octahedron.m₁",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract triangulated-category and cohomology tools do not assert pseudo-coherence on ringed sites with the stated shifted bounds"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-pseudocoherence-descent",
+  "date": "2026-10-23",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 08HG (lemma-descend-perfect), with the ringed-site perfectness convention of sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input for 08HG: Tag 08HE (lemma-descend-pseudo-coherent), with the convention of sites-cohomology.tex Tag 08FT (definition-pseudo-coherent) and its lemma-pseudo-coherent-independent-representative. Supporting input to 08HE: lemma-descend-pseudo-coherent, final paragraph: the two applications of sites-cohomology lemma-cone-pseudo-coherent.",
+   "via": [
+    "lem-sfb-etale-pseudocoherence-descent",
+    "lem-sfb-etale-detects-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ringed-site-m-pseudocoherent-triangle",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Split Tag 08FV into local approximation, stupid truncation, local actual representatives and homotopy lifting, strictly perfect cone, four/five lemma comparison, and explicit shifted rotations. Two statement-only ringed-site inputs, Tags 08FR(1) and 08FQ; no new Mathlib leaves. Reused existing exact restriction, cohomology ladder, and diagram lemmas.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 08HG (lemma-descend-perfect), with the ringed-site perfectness convention of sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input for 08HG: Tag 08HE (lemma-descend-pseudo-coherent), with the convention of sites-cohomology.tex Tag 08FT (definition-pseudo-coherent) and its lemma-pseudo-coherent-independent-representative. Supporting input to 08HE: lemma-descend-pseudo-coherent, final paragraph: the two applications of sites-cohomology lemma-cone-pseudo-coherent. This is the 08FV triangle input to the final descent induction of Tag 08HE, ultimately serving the recorded constructible direct-image alteration route. The current latest blueprint has no separate node for these generic site lemmas; the inherited null ancestor and via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact module restriction to arbitrary site slices; generic infrastructure, not an alternative to the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-ec58de51a",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-ec58de51a (reviewer sub-agent of L); spot-checked: Read Stacks sites-cohomology.tex 08FL l.11717, 08FQ l.11848, 08FR l.11881, 08FT l.12039 with independent-representative lemma, and 08FV l.12177, statement and proof; tags checked in tags/tags. Item statement unchanged and matches 08FV(1)-(3) under 08FT. Every cited statement read. Step 1 restriction: exact (lem-pur-site-restriction-module-adjunction-exact), triangulated with termwise representatives (exact-functor-derived-factorization), commutes with cohomology. Step 2: sigma>=m+1 inclusion is a chain map, iso above m+1, epi at m+1. Step 3: 08FR(1) applied to beta and f.alpha' with unbounded F; 08FQ applied with a=m+1, hypotheses verified; Q sends the homotopy to an equality. This supplies the 08FV 'details omitted'. Step 4: cone Q^j+P'^{j+1} is strictly perfect; TR3 gives theta. Step 5: five-lemma thresholds for j>m and epi four lemma at m re-checked against both node orientations; ladder squares from the existing leaf. Step 7: shift and rotation indices for (2) and (3) recomputed. New nodes are exact restatements of 08FR(1) and 08FQ: self-contained, statement-only, explicit homotopy equation, not item clauses. Small cases: trivial site, single-degree E, v=id. rg -L over the snapshot and the live/side-live clones found only constant, etale or affine special cases, so no duplicates. Item is still unsplit live, so not superseded; no repair note, so not a re-split. The off-unit tool lies in sk-def-sf-operations, which the unit cites, so it is on route; tool_use accepted. No SGA source. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSiteMPseudoCoherentTriangle",
+  "declaration": "SheafOfModules.mPseudoCoherent_distinguishedTriangle",
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteMPseudoCoherentTriangle.lean",
+  "statement": "theorem mPseudoCoherent_distinguishedTriangle {C : Type c} [Category.{v} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max c v r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}] [∀ U : C, HasSheafify (J.over U) AddCommGrpCat.{max c v r}] [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}] (R : Sheaf J CommRingCat.{max c v r}) [HasDerivedCategory.{w} (ringedSiteModules.{max c v r} (scalarPerfectRingUnderlying.{c, v, max c v r} J R))] [∀ U : C, HasDerivedCategory.{w'} (ringedSiteModules.{max c v r} ((scalarPerfectRingUnderlying.{c, v, max c v r} J R).over U))] (m : ℤ) (T : Triangle (DerivedCategory (ringedSiteModules.{max c v r} (scalarPerfectRingUnderlying.{c, v, max c v r} J R)))) (hT : T ∈ distTriang _) : (IsMPseudoCoherentOnRingedSite.{c, v, r, w, w'} R (m + 1) T.obj₁ → IsMPseudoCoherentOnRingedSite.{c, v, r, w, w'} R m T.obj₂ → IsMPseudoCoherentOnRingedSite.{c, v, r, w, w'} R m T.obj₃) ∧ (IsMPseudoCoherentOnRingedSite.{c, v, r, w, w'} R m T.obj₁ → IsMPseudoCoherentOnRingedSite.{c, v, r, w, w'} R m T.obj₃ → IsMPseudoCoherentOnRingedSite.{c, v, r, w, w'} R m T.obj₂) ∧ (IsMPseudoCoherentOnRingedSite.{c, v, r, w, w'} R (m + 1) T.obj₂ → IsMPseudoCoherentOnRingedSite.{c, v, r, w, w'} R m T.obj₃ → IsMPseudoCoherentOnRingedSite.{c, v, r, w, w'} R (m + 1) T.obj₁)",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e1cf4678e",
+  "group": "Q37",
+  "result": "fix",
+  "note": "Lean exact vs Stacks 08FV(1)-(3): three conjuncts K(m+1),L(m)=>M(m); K(m),M(m)=>L(m); L(m+1),M(m)=>K(m+1) on T.obj1/2/3 with hT distinguished. Reuses landed IsMPseudoCoherentOnRingedSite (def-sfb-ringed-site-pseudocoherent-complex); body read = item's inline convention (covering sieve, bounded finite-free-retract P, alpha into canonical derived restriction, iso >m, epi at m); returned duplicate removed (H4 resolved). scalarPerfectRingUnderlying is a reducible abbrev of the same forget2 ring; universes c v r w w' independent; no extra hypotheses; edge cases (m<=0, zero ring, empty site/cover, rank 0) covered. lean.statement verbatim x1; stmt_deps gain only landed owners; proof_deps/statement unchanged; docstring has source+blueprint+7-step proof; sorry only. Sole fault H11: second reading was a dispatcher placeholder -> fixes/lem-sfb-ringed-site-m-pseudocoherent-triangle.report.md (worker report verbatim + independent clause-by-clause reading). No Lean changed, no compile."
+ }
+}

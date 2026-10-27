@@ -1,0 +1,100 @@
+{
+ "id": "def-sf-strict-direct-image-integral-coherence",
+ "kind": "definition",
+ "title": "Integral shift and scalar cocycle predicate",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, schemes $Z,X$ and $f:Z\\to X$. Given integral strict direct-image comparison data $D$ [def-sf-strict-direct-image-scalar-data], define $a^W_{E,L,M}$ by the published integral scalar associator followed by equality transport along the coefficient-inclusion composition law. HasIntegralCoherence requires that each comparison commute with native shifts, and that for $E\\subset L\\subset M$ the two composites $I_M S^Z_{M/L}S^Z_{L/E}\\to S^X_{M/E}I_E$ agree: first use the two direct-image comparisons then $a^X$, or first apply $I_M(a^Z)$ then the comparison for $M/E$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/prop-sf-closed-unit-all-stages.proof.md",
+  "place": "Agent-expanded strict scalar comparison argument, original DAG Steps 1--8; current blueprint retains only the underlying closed-immersion argument."
+ },
+ "stmt_deps": [
+  "def-sf-strict-direct-image-scalar-data",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "dag/nodes/sec-smooth-purity/lem-sf-strict-direct-image-scalar-comparison.json",
+  "place": "Expansion of its normalized strict-model, integral conjugation and raw rationalization proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent integral direct image scalar comparison and raw rational localization",
+   "results": "8 hits: isIntegral_localization', Algebra.intNorm_eq_of_isLocalization, Localization.AtPrime.instIsScalarTower, IsLocalizedModule.isInteger_smul, instIsScalarTowerAtPrimeFractionRing_1, IsLocalization.instIsScalarTowerAtPrimeFractionRing, IsLocalization.isInteger_smul, IsLocalization.Away.isIntegral_of_isIntegral_map",
+   "date": "2026-10-25",
+   "verdict": "No exact match: these results do not construct the normalized strict direct-image models or their scalar and rational coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strict integral derived direct image has a functorial normalized reconstruction and coherent scalar comparisons",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.ι_toNormalization",
+   "date": "2026-10-25",
+   "verdict": "No exact match: these results do not construct the normalized strict direct-image models or their scalar and rational coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*comparison|direct.*image",
+   "results": "25 hits: Mathlib/Geometry/Euclidean/Volume/Measure.lean, Mathlib/RingTheory/MvPolynomial/Homogeneous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Topology/Order/ScottTopology.lean, Mathlib/LinearAlgebra/LinearPMap.lean, Mathlib/LinearAlgebra/LinearPMap.lean, Mathlib/LinearAlgebra/LinearPMap.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact match: these results do not construct the normalized strict direct-image models or their scalar and rational coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfStrictDirectImageScalarComparison",
+  "date": "2026-10-25",
+  "group": "Y8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-closed-unit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-closed-unit-all-stages",
+   "place": "Original rational-stage and algebraically closed scalar-comparison expansion: Integral shift and scalar cocycle predicate",
+   "via": [
+    "lem-sf-strict-direct-image-scalar-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfStrictDirectImageScalarCoherence",
+  "file": "lean/Sheaf/Paper/SfStrictDirectImageScalarCoherence.lean",
+  "declaration": "WeilConjectures.SfStrictDirectImageScalar.HasIntegralCoherence",
+  "declarations": [
+   "WeilConjectures.SfStrictDirectImageScalar.integralAssociator",
+   "WeilConjectures.SfStrictDirectImageScalar.HasIntegralCoherence"
+  ],
+  "statement": "def HasIntegralCoherence {Z X : Scheme.{u}} (f : Z ⟶ X) (D : IntegralComparisons l Ω f) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Y8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-46419",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T124514-L-2044117",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-46419",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T124514-L-2044117",
+  "kind": "interface",
+  "note": "independent cc review: the 16 moved declarations, diffed against the published item module (byte-identical, re-exported by public import); the three new sorry statements read against their nodes and the published rational associator/unitor; all 7 delivered modules and the 5 direct importers compiled in a sandbox; axioms traced to upstream sorryAx"
+ }
+}

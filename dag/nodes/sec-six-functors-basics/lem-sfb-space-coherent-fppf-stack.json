@@ -1,0 +1,331 @@
+{
+ "id": "lem-sfb-space-coherent-fppf-stack",
+ "kind": "statement",
+ "title": "Fppf descent of flat finitely presented proper-support families",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Let $f:X\\to B$ be a finitely presented morphism of algebraic spaces over $S$ [def-trf-algebraic-space, def-sfb-space-morphism-properties]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. For an $S$-scheme $T$, let $\\mathcal C(T)$ be the groupoid of pairs $(b:T\\to B,M)$, where $M$ is a finitely presented quasi-coherent $\\mathcal O_{X\\times_BT}$-module, flat over $T$, with support proper over $T$. Here finite presentation means etale locally a cokernel of a map between finite rank free modules; flatness is stalkwise flatness over base local rings on etale charts [def-pc-scheme-module-flat-over]; proper support means $M\\simeq i_*N$ for a closed immersion $i:Z\\hookrightarrow X\\times_BT$ with $Z\\to T$ proper and $N$ finite type quasi-coherent [def-sfb-space-proper-quot-functor]. Modules and tensor pullback use [def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors]. Arrows over $v:T\\to T_1$ are isomorphisms $v_X^*M_1\\simeq M$ with $b=b_1v$; composition uses canonical pullback composition isomorphisms. These groupoids and pullback transitions form a stack in groupoids on the big fppf site of $S$: isomorphism presheaves are sheaves, and every covering descent datum for objects is effective [def-pc-fppf-site, def-sfb-stable-pointed-moduli-groupoids].",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 08W5 (lemma-coherent-fibred-in-groupoids), 08KC (lemma-coherent-stack), in Situation 08KB (situation-coherent)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "def-pc-fppf-site",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-fppf-stackification"
+ ],
+ "proof": [
+  {
+   "text": "For any $T\\to B$, the projection $X_T\\to T$ is locally of finite type: this is the chartwise base-change assertion explicitly included in [def-sfb-space-proper-quot-functor] for a finitely presented space morphism. Hence [lem-sfb-space-module-base-change-flat-proper-support] applies to every scheme map $v:T'\\to T$. It shows that $(bv,v_X^*M)$ again satisfies all four module conditions, even when $v$ is not flat. Thus the displayed transitions are defined on objects and, by functoriality of tensor pullback, on isomorphisms.",
+   "uses": [
+    "def-sfb-space-proper-quot-functor",
+    "lem-sfb-space-module-base-change-flat-proper-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08W5, lemma-coherent-fibred-in-groupoids, first lifting condition; Situation 08KB"
+   }
+  },
+  {
+   "text": "Use [lem-trf-space-chart-adjunction-tensor-realization] for the canonical pullback composition comparisons. On local tensor representatives these send $a\\otimes(b\\otimes m)$ to $a\\,v^\\sharp(b)\\otimes m$. For three pullbacks both parenthesizations send a triple tensor to the product of its scalar factors times $m$; the identity comparison sends $1\\otimes m$ to $m$. These identities respect balancing and hence sheafification, giving the unit and associativity identities. The fibre arrows are invertible by definition. For arrows $(v_1,\\phi_1):x_1\\to x$ and $(v_2,\\phi_2):x_2\\to x$ and $h$ with $v_2h=v_1$, the unique filler $x_1\\to x_2$ is $(h,\\phi_1\\circ h_X^*(\\phi_2^{-1}))$, with the composition comparison understood. Applying $\\phi_2$ proves the required factorization and also uniqueness. This verifies both lifting conditions for a category fibred in groupoids as defined in [def-sfb-stable-pointed-moduli-groupoids].",
+   "uses": [
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08W5, lemma-coherent-fibred-in-groupoids, second lifting condition"
+   }
+  },
+  {
+   "text": "Fix two objects over $T$ and an fppf cover $\\{U_i\\to U\\}$ of any $T$-scheme $U$, with compatible isomorphisms between their restrictions. Their base maps $U\\to B$ agree: they agree on every $U_i$, and $B$ is an fppf sheaf by [def-trf-algebraic-space]. Call the common base map $b$. By [lem-sfb-space-fppf-covering-calculus], $\\{X_U\\times_U U_i\\to X_U\\}$ is an fppf cover. Full faithfulness in [lem-sfb-space-fppf-qcoh-descent] descends the compatible module maps uniquely. It also descends their inverses; faithfulness gives both inverse identities since these hold on the cover. Conversely restrictions of any global isomorphism are compatible. This proves the entire isomorphism presheaf is a sheaf, including uniqueness and the case where no isomorphism exists.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-space-fppf-qcoh-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08KC, lemma-coherent-stack, isomorphism sheaves; direct fully faithful descent in place of the diagonal argument"
+   }
+  },
+  {
+   "text": "Let $\\{a_i:T_i\\to T\\}$ be an fppf cover and let $(b_i:T_i\\to B,M_i,\\varphi_{ij})$ be an object descent datum. Its overlap arrows force $b_i\\operatorname{pr}_i=b_j\\operatorname{pr}_j$. The fppf sheaf condition for $B$ in [def-trf-algebraic-space] gives a unique $b:T\\to B$ with $ba_i=b_i$. Set $Y=X\\times_B T$ and $Y_i=Y\\times_T T_i=X\\times_B T_i$, with projections $q_i:Y_i\\to Y$. The fibre-product identities also identify $Y_i\\times_Y Y_j$ with $X\\times_B(T_i\\times_T T_j)$, and similarly for triples. By [lem-sfb-space-fppf-covering-calculus] the $q_i$ form an fppf cover. Thus the $\\varphi_{ij}$ are exactly a module descent datum on that cover. Essential surjectivity in [lem-sfb-space-fppf-qcoh-descent] gives a quasi-coherent $M$ on $Y$ and isomorphisms $q_i^*M\\simeq M_i$ realizing the prescribed overlap maps. It remains to verify the three additional conditions on $M$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-space-fppf-qcoh-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08KC, lemma-coherent-stack, descent of the base map and effectivity via Tag 04W8"
+   }
+  },
+  {
+   "text": "For an etale scheme chart $U\\to Y$, put $U_i=U\\times_T T_i$. These are schemes and form an fppf cover of $U$ by [lem-sfb-space-fppf-covering-calculus]. It is an fpqc scheme cover by [lem-trf-fppf-covering-is-fpqc]. The small-etale module $M|_U$ corresponds to a quasi-coherent Zariski module $G$; [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identifies its ordinary pullback to $U_i$ with the tensor pullback of $M|_U$ along $U_i\\to U$; the composition comparisons of [lem-trf-space-chart-adjunction-tensor-realization] for the square $U_i\\to U\\to Y$, $U_i\\to Y_i\\to Y$, together with $q_i^*M\\simeq M_i$, identify this with $M_i|_{U_i}$. Each is finitely presented, since $U_i\\to Y_i$ is etale; the etale and Zariski finite-presentation conditions agree by [lem-sfb-scheme-etale-module-exact-finiteness-comparison]. Clause (2) of [lem-pc-fpqc-descent] now gives finite presentation of $G$. The same comparison gives finite presentation of $M|_U$. Doing this for an etale atlas of $Y$ proves that $M$ is finitely presented by the chart criterion of [lem-sfb-space-qcoh-affine-chart-calculus].",
+   "uses": [
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-pc-fpqc-descent",
+    "lem-sfb-space-qcoh-affine-chart-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08KC, finite-presentation verification; spaces-descent.tex Tag 060V, lemma-finite-presentation-descends, realized by scheme descent on charts"
+   }
+  },
+  {
+   "text": "Keep any etale scheme chart $U\\to Y$ and its quasi-coherent Zariski module $G$. By [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] and the composition comparisons of [lem-trf-space-chart-adjunction-tensor-realization], its pullback $G_i$ to $U_i=U\\times_T T_i$ is the Zariski module of $M_i|_{U_i}$. For every $u\\in U$, choose $i$ and $u_i\\in U_i$ above $u$, using joint surjectivity from [lem-sfb-space-fppf-covering-calculus]. The module $(G_i)_{u_i}$ is flat over $\\mathcal O_{T_i,t_i}$ by the relative flatness of $M_i$. The scheme map $a_i$ is flat at $t_i$. Apply clause (2) of [lem-sfb-pointwise-module-flatness-base-change] to the cartesian square $U_i\\to U$, $T_i\\to T$: it gives that $G_u$ is flat over $\\mathcal O_{T,t}$. This holds on every chart and at every point, exactly the relative flatness required of $M$. No flatness of $Y\\to T$ is assumed.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-pointwise-module-flatness-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08KC, relative-flatness verification; spaces-morphisms.tex Tag 05VW, lemma-base-change-module-flat, reduced to more-morphisms.tex Tag 047C"
+   }
+  },
+  {
+   "text": "Finite presentation implies finite type by the local finite presentation, so [lem-sfb-space-module-proper-carrier-support] defines $Z=V(\\operatorname{Ann}M)\\hookrightarrow Y$. We verify that $Z\\times_T T_i$ is the scheme-theoretic support $Z_i$ of $M_i$. On any affine etale chart $U=\\operatorname{Spec}A\\to Y$ let $N=M(U)$, a finite $A$-module by [lem-sfb-space-qcoh-affine-chart-calculus]. Cover $U_i=U\\times_T T_i$ by affine opens $V=\\operatorname{Spec}C$. The scheme map $U_i\\to U$ is flat by [lem-sfb-space-fppf-covering-calculus], so $A\\to C$ is flat by [lem-weil-pbc-flat-morphism-affine-criterion]. The chart tensor comparison [lem-trf-space-chart-adjunction-tensor-realization], the Zariski-etale comparison [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], and [lem-weil-pbc-module-pullback-affine-sections] identify $M_i(V)$ with $N\\otimes_A C$. Since $M|_U$ is the module associated with $N$, a function on $U$ kills every local section of $M$ iff it kills $N$, so $\\operatorname{Ann}(M)(U)=\\operatorname{Ann}_A(N)$; likewise $\\operatorname{Ann}(M_i)(V)=\\operatorname{Ann}_C(M_i(V))$. Hence [lem-trf-annihilator-finite-flat-base-change] gives $\\operatorname{Ann}_C(M_i(V))=\\operatorname{Ann}_A(N)C$. By [lem-sfb-space-closed-ideal-correspondence] the ideal of the pulled-back closed subspace is the image of $q_i^*\\operatorname{Ann}(M)\\to\\mathcal O_{Y_i}$, whose sections on $V$ are, by [lem-weil-pbc-module-pullback-affine-sections] and the image clause of [lem-sfb-space-qcoh-affine-chart-calculus], the image of $\\operatorname{Ann}_A(N)\\otimes_AC\\to C$, namely $\\operatorname{Ann}_A(N)C$. Equality on these covering charts gives $Z_i=Z\\times_T T_i$ as closed subspaces, rather than only equality of underlying supports.",
+   "uses": [
+    "lem-sfb-space-module-proper-carrier-support",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-trf-annihilator-finite-flat-base-change",
+    "lem-sfb-space-closed-ideal-correspondence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08KC, scheme-theoretic support; spaces-morphisms.tex Tag 089C, lemma-flat-pullback-support, from algebra.tex Tag 07T8 on affine charts"
+   }
+  },
+  {
+   "text": "Each $M_i$ has a proper closed carrier by hypothesis. Applying [lem-sfb-space-module-proper-carrier-support] to $Y_i\\to T_i$ shows that $Z_i\\to T_i$ is proper. Its local-finite-type hypothesis holds for $Y_i=X\\times_B T_i\\to T_i$ by the assertion in [def-sfb-space-proper-quot-functor]; the same holds for $Y\\to T$. Step 7 identifies $Z_i$ with $Z\\times_T T_i$. Properness in [lem-sfb-space-flat-proper-fp-locality] therefore gives that $Z\\to T$ is proper. The converse implication of [lem-sfb-space-module-proper-carrier-support] supplies a finite type module on this proper closed carrier whose pushforward is $M$. Thus $(b,M)$ is an object of $\\mathcal C(T)$ and the isomorphisms from step 4 realize the original object descent datum. Together with steps 2 and 3 this proves the fppf stack assertion.",
+   "uses": [
+    "lem-sfb-space-module-proper-carrier-support",
+    "def-sfb-space-proper-quot-functor",
+    "lem-sfb-space-flat-proper-fp-locality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08KC, final properness descent and the effective global object"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-proper-quot-functor",
+  "lem-sfb-space-module-base-change-flat-proper-support",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-sfb-space-fppf-qcoh-descent",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-pc-fpqc-descent",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-sfb-pointwise-module-flatness-base-change",
+  "lem-sfb-space-module-proper-carrier-support",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-trf-annihilator-finite-flat-base-change",
+  "lem-sfb-space-closed-ideal-correspondence",
+  "lem-sfb-space-flat-proper-fp-locality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 08W5 and 08KC; explicit chart reductions for the local conditions and direct full-faithfulness proof of the isomorphism sheaf condition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat finitely presented quasi coherent modules with proper support form a stack for fppf descent on algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective faithfully flat descent for finitely presented flat sheaves with proper support",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"Module.FaithfullyFlat.toFlat\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"∀ {R : Type u} {M : Type v} {inst : CommRing R} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  [self : Module.FaithfullyFlat R M], Module.Flat R M\", \"doc\": \"If $ M $ is a faithfully flat module over a commutative ring $ R $, then $ M $ is flat over $ R $. Faithful flatness implies flatness as a module property.\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"RingHom.FaithfullyFlat\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces an $ R $-module structure on $ S $ via scalar multiplication defined by $ f $. The property that $ S $ is a faithfully \"}\n  {\"name\": \"RingHom.FaithfullyFlat.flat\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \"(hf : f.FaithfullyFlat) : f.Flat\", \"doc\": \"If $ f : R \\\\to S $ is a faithfully flat ring homomorphism between commutative rings, then $ f $ is flat as a ring homomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"Module.FaithfullyFlat.finsupp\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(ι : Type v) [Nonempty ι] : FaithfullyFlat R (ι →₀ R)\", \"doc\": \"For any non-empty index type $\\\\iota$, the module of finite support functions $\\\\iota \\\\to_0 R$ is faithfully flat over the commutative ring $R$. This means the module is flat and the tensor product func\"}\n  {\"name\": \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Descent\", \"type\": \": CodescendsAlong (fun f ↦ Function.Surjective f) FaithfullyFlat\", \"doc\": \"Given a pushout diagram of commutative rings with a faithfully flat homomorphism $ R \\to R' $ and a surjective homomorphism $ R' \\to S' $, the induced homomorphism $ R \\to S $ is surjective. This establi\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStack\", \"Quasicoherent\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*stack|stack.*coherent|Cohstack",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat finitely presented quasi coherent modules with proper support form a stack for fppf descent on algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme morphisms, ordinary module flatness or local presentations of abstract sheaves; none gives descent for this algebraic-space proper-support family groupoid"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective faithfully flat descent for flat finitely presented sheaves with proper support on algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"Module.FaithfullyFlat.toFlat\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"∀ {R : Type u} {M : Type v} {inst : CommRing R} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  [self : Module.FaithfullyFlat R M], Module.Flat R M\", \"doc\": \"If $ M $ is a faithfully flat module over a commutative ring $ R $, then $ M $ is flat over $ R $. Faithful flatness implies flatness as a module property.\"}\n  {\"name\": \"Module.FaithfullyFlat.finsupp\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(ι : Type v) [Nonempty ι] : FaithfullyFlat R (ι →₀ R)\", \"doc\": \"For any non-empty index type $\\\\iota$, the module of finite support functions $\\\\iota \\\\to_0 R$ is faithfully flat over the commutative ring $R$. This means the module is flat and the tensor product func\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"RingHom.FaithfullyFlat\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces an $ R $-module structure on $ S $ via scalar multiplication defined by $ f $. The property that $ S $ is a faithfully \"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"RingHom.FaithfullyFlat.flat\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \"(hf : f.FaithfullyFlat) : f.Flat\", \"doc\": \"If $ f : R \\\\to S $ is a faithfully flat ring homomorphism between commutative rings, then $ f $ is flat as a ring homomorphism.\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme morphisms, ordinary module flatness or local presentations of abstract sheaves; none gives descent for this algebraic-space proper-support family groupoid"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStack\", \"Quasicoherent\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme morphisms, ordinary module flatness or local presentations of abstract sheaves; none gives descent for this algebraic-space proper-support family groupoid"
+  },
+  {
+   "tool": "grep",
+   "query": "(fppf|fpqc|Fppf|Fpqc).*(descent|Descent|stack|Stack)|(descent|Descent|stack|Stack).*(fppf|fpqc|Fppf|Fpqc)",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"14\", \"text\": \"# Local properties satisfying fpqc descent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"line\": \"13\", \"text\": \"We show the titular result `AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono` by fpqc descent.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"15\", \"text\": \"# Properties of morphisms satisfying fpqc descent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"17\", \"text\": \"In this file we show some global properties satisfy fpqc descent.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"40\", \"text\": \"/-- Surjective satisfies fpqc descent. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"46\", \"text\": \"/-- Universally closed satisfies fpqc descent. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"64\", \"text\": \"/-- Universally open satisfies fpqc descent. -/\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme morphisms, ordinary module flatness or local presentations of abstract sheaves; none gives descent for this algebraic-space proper-support family groupoid"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-stack-general",
+  "date": "2026-10-23",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 08W5 (lemma-coherent-fibred-in-groupoids), 08KC (lemma-coherent-stack), in Situation 08KB (situation-coherent).",
+   "via": [
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-coherent-fppf-stack",
+  "worker": "stage1",
+  "summary": "Read Stacks 08W5 and 08KC in Situation 08KB. Reused existing fppf QCoh descent and pullback stability. Expanded finite presentation and relative flatness into scheme-chart applications of existing nodes, and wrote the annihilator calculation proving support compatibility before properness descent. No new node is needed. No exact project Lean declaration was found.",
+  "blueprint": "The inherited chain serves compactification/direct-image preservation in sk-thm-sf-ctf-stability, via algebraicity of coherent families. The current latest blueprint proof has the compactification paragraph rather than the old numbered proof (3). This split supplies fppf descent of that supporting moduli groupoid. The ancestry tool returns null for the existing chain, retained verbatim; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Generic canonical tensor realization and composition comparisons for space pullbacks; used as a tool, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre-product construction used unchanged on the unit route; used as a tool, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic comparison of small-etale modules on scheme charts with ordinary Zariski modules; used as a tool, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic scheme quasi-coherent finite-presentation descent on a scheme chart; the unit has no scheme-descent substitute; used as a tool, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic affine formula for scheme tensor pullback, used on etale charts; used as a tool, not as a replacement for a unit step."
+   },
+   {
+    "node": "lem-trf-annihilator-finite-flat-base-change",
+    "why": "Generic annihilator equality for a finite module under flat ring extension, required for the support calculation; used as a tool, not as a replacement for a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-pc-fpqc-descent",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-trf-annihilator-finite-flat-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-00b154b7d",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-00b154b7d (reviewer sub-agent of L); spot-checked: Read the item in full. It has no new nodes and its statement is unchanged from base (checked against the Q65 run snapshot). Checked against quot.tex 08KB/08W5/08KC: the hypotheses are exactly a scheme S and f: X→B finitely presented. The proper-carrier convention agrees with scheme-theoretic support through lem-sfb-space-module-proper-carrier-support. Steps checked: 1 stability (pullback node, lft from the Quot def); 2 fibred groupoid with the 08W5 filler; 3 Isom sheaf by fppf sheaf B plus full faithfulness of lem-sfb-space-fppf-qcoh-descent (replaces the diagonal citation validly); 4 gluing by essential surjectivity; 5 finite presentation by reduction to the scheme cover U×_T T_i and fpqc descent (2); 6 flatness by clause (2) of pointwise flatness base change with g=T_i→T flat; 7 support by 07T8 Ann(N⊗C)=Ann(N)C plus the closed-ideal correspondence; 8 properness by fp-locality on the fppf cover plus the carrier equivalence. Edge cases checked: empty T and cover, M=0, non-flat test maps, non-Noetherian base. Duplicate search (rg 08KC/08W5/Cohstack/stack in groupoids): no node states this; lem-sfb-space-coherent-diagonal and lem-sfb-coherent-stack-algebraic-lfp are distinct. Batch-5 flags: def-trf-algebraic-space (general definition), chart tensor realization, fibre products, fppf⇒fpqc leaf, Zariski–étale QCoh equivalence and its finiteness comparison, and 07T8 annihilator are all generic foundational or algebra tools. None is the trace formula, Poincaré duality or a step of their proofs, so they are accepted. The declared tool_uses are accepted. FIX (C1-level, citations only): step 5 now cites lem-trf-space-chart-adjunction-tensor-realization for the pullback-composition identification with M_i|_{U_i}. Step 7 now writes out Ann(M)(U)=Ann_A(N) and the sections on V of the pulled-back ideal = Ann_A(N)C, using its existing citations. proof_deps is unchanged and equals the union of uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceCoherentFppfStack",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.coherent_fppf_stack",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceCoherentFppfStack.lean",
+  "statement": "theorem coherent_fppf_stack {S : Scheme.{u}} {X B : AlgebraicSpace S} (f : X ⟶ B) (hfp : ProperQuotFinitePresentation f) : IsFppfModuliStack (CoherentModuli.category f)",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already landed CoherentModuli.category, with actual proper-support modules and canonical tensor-pullback-isomorphism arrows. No separatedness or ambient flatness is assumed. The conclusion is the existing big-fppf stack predicate from def-sfb-fppf-stackification; no new definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d7cdac35",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Statement matches node/Stacks 08KB/08W5/08KC: S scheme, f finitely presented = ProperQuotFinitePresentation (lfp+qc+qc diagonal, no separatedness/flatness added); objects via landed CoherentModuli (qcoh, fp, IsFlatOver on every étale chart, proper support M≅i_*N with closed immersion Z→T proper, G finite type); arrows = tensor-pullback isos in node direction, canonical id/comp; conclusion = landed IsFppfModuliStack (fibred in groupoids + colimit over every fppf covering sieve = Isom sheaves + effective descent). Only record change: lean + added landed def stmt_dep def-sfb-fppf-stackification; statement verbatim; one sorry; docstrings with source/blueprint/8 steps; edge cases (empty T/cover, zero module, non-flat maps) kept. Maintainer note: CoherentModuli.* is owned only by downstream theorem lem-sfb-space-coherent-stack-general (proof_deps ∋ item + 5 siblings), so the stage-3 import is cyclic (worker listed it per stages/2 §3.7). Recommend def node def-sfb-space-coherent-moduli-groupoid owning those decls, re-imported by SpaceCoherentStackGeneral, before the siblings are stated. No compile (no file changed)."
+ }
+}

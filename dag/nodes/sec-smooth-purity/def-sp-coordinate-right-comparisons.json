@@ -1,0 +1,111 @@
+{
+ "id": "def-sp-coordinate-right-comparisons",
+ "kind": "definition",
+ "title": "Canonical coordinate right comparisons",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the prime, coefficient extension, coefficient-tower base and operations, and Tate-tower family of [def-sp-coordinate-adjunction-categories]. Using the categories and right functors of [def-sp-coordinate-adjunction-categories] and the tensor comparisons of [def-sp-coordinate-tate-tensor-comparisons], define PullTwist as an ordinary Tate-line pullback isomorphism together with the right-functor comparison fixed by tensor pullback, the shift comparison and the derived single-functor comparison. Define RootLines by finite Kummer isomorphisms normalized on root-limit projections and coefficient tensors. Define AffineRestriction by ordinary pullback of the projective line, normalized on the finite root tensors, together with the derived right-functor comparison fixed by pullback/tensor and total shift maps. Define the explicit successor coordinate isomorphism, both right evaluation arrows, and the zero-coordinate comparison from identity pullback, the coefficient unit and zero shift. No existence of these comparison data is asserted. The ordinary root-section adjunct and its diagonal line use [def-sp-tower-class-pullback] and [def-sp-tower-class-diagonal].",
+ "stmt_deps": [
+  "def-sp-coordinate-adjunction-categories",
+  "def-sp-coordinate-tate-tensor-comparisons",
+  "def-sp-tower-class-pullback",
+  "def-sp-tower-class-diagonal"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs and Levels: finite root normalization and coordinate pullback comparisons"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized coordinate-chart adjunction data on ordinary strict coefficient towers with Tate tensor comparison",
+   "results": "{\"n_hits\": 8, \"top\": [\"TangentBundle.symmL_trivializationAt_eq_core\", \"TangentBundle.coe_chartAt_fst\", \"inTangentCoordinates_eq\", \"tangentCoordChange.congr_simp\", \"tangentCoordChange_comp\", \"TangentBundle.chartAt_toPartialEquiv\", \"coe_achart\", \"tangentMap_chart\"], \"note\": \"\", \"digest\": \"ebec5fe0456fae14\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact coordinate tower comparison interface; generic adjunction API reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "{\"n_hits\": 12, \"top\": [\"CategoryTheory.Adjunction.id\", \"CategoryTheory.Adjunction.instInhabitedId\", \"CategoryTheory.Adjunction\", \"CategoryTheory.Equivalence.toAdjunction\", \"CategoryTheory.Equivalence.toAdjunction'\", \"CategoryTheory.Adjunction.isLeftAdjoint\", \"CategoryTheory.Adjunction.isRightAdjoint\", \"CategoryTheory.Adjunction.mk'\"], \"note\": \"\", \"digest\": \"b2038ff05fe43306\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact coordinate tower comparison interface; generic adjunction API reused."
+  },
+  {
+   "tool": "grep",
+   "query": "coordinate.*[Aa]djunction|[Tt]ate.*[Tt]ensor",
+   "results": "{\"n_hits\": 3, \"top\": [\"Mathlib/LinearAlgebra/TensorAlgebra/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Comon_.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\"], \"note\": \"\", \"digest\": \"8e4fb381532eafb8\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact coordinate tower comparison interface; generic adjunction API reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-tower-coordinate-adjunction",
+  "date": "2026-10-24",
+  "group": "Q31"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs and Levels: coordinate comparison data",
+   "via": [
+    "lem-sp-tower-coordinate-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityCoordinateRightComparisons",
+  "declaration": "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.PullTwist",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.composeRight",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.PullTwist",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.RootLines",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.pullSection",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.stepComponent",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.projectiveTensor",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.AffineRestriction",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.rightEvaluation",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.projectionEvaluation",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.ZeroComparison",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.ZeroComparison.component"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityCoordinateRightComparisons.lean",
+  "statement": "structure PullTwist (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b) {X T Y : Scheme.{u}} (e : X ⟶ T) (p : T ⟶ Y) (wT : SpChartAdmissibility.Twists l E T) (wX : SpChartAdmissibility.Twists l E X) (d : ℕ)",
+  "branch": "sheaf-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ab12251e",
+  "group": "Q31",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ab12251e",
+  "group": "Q31",
+  "result": "fix",
+  "note": "Lean statement exact against node and gluing.proof.md Local pairs/Levels: Construction ∃-chain fully pinned (P1 Hom via AdjunctionData + open adjunction + pinned AffineRestriction; CompositeEquation with cal.composition; chart counit alpha^-1, then F(etale_shriek then fibre-sum counit), then eps_{p_d}; RootLines/pulled/Products/TensorShifts/step/iteration normalized; LevelCompatibility with supportEvaluation and projection/rightEvaluation; d=0 identity). Edge cases d=0/1, e=id, empty, n=0, ramified checked; no hollow defs, only sorry is the theorem; docstrings/line lengths ok; stmt_deps only gain landed def nodes plus 3 new def nodes. Sole fault H11: the Second reading section was a dispatcher-wording self-audit. FIX = fixes/lem-sp-tower-coordinate-adjunction.report.md (worker report verbatim plus independent second reading). Advisories: inherited Preservation/arbitrary calculus inputs; new nodes do not cite owners (SpEllTwistProducts theorem-owned, spEllTwist*, tateFiniteTensor, purTwist*, SignedLineProductNormalized); proof-only private imports in def modules; existential finite adjunction per P1 convention. No compile run (no Lean changed)."
+ }
+}

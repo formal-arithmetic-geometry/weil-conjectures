@@ -1,0 +1,120 @@
+{
+ "id": "lem-sfb-brown-varying-heart-ext-bound",
+ "kind": "statement",
+ "title": "Eventual Hom vanishing for varying shifted heart objects under Brown compactness",
+ "statement": "Let X be a scheme and Λ a commutative condensed coefficient ring. Put S=Dctf(X,Λ) and L=Loc(S) [sk-def-localizing-closure]. Assume BrownHypothesesFor Λ X [lem-sfb-brown-hypotheses-criterion]. Let K belong to L and have underlying object in S. For every sequence F_n of module objects over Λ_X with F_n[0] in L, there is a natural N such that Hom(K,F_n[0][n])=0 for every n≥N. Shifts and Hom groups in the conclusion are ambient; no uniformity or constructibility of the F_n is assumed.",
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "lem-sfb-brown-hypotheses-criterion"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/NotPreservesCoproducts.lean",
+  "place": "finite-support argument in not_preservesColimitsOfShape_of_forall_hom_ne_zero, generalized using DegreewiseLimits.lean, HomologicalComplex.isLimitFanMkProjOfIsColimit"
+ },
+ "proof": [
+  {
+   "text": "Set M_n=F_n[0][n]. If its degree-d term is nonzero, d+n=0, so its degree supports are disjoint. Shift closure and the canonical shift comparison of Q put each Q(M_n) in L. Apply the finite-support theorem for degreewise disjoint complexes.",
+   "uses": [
+    "lem-sfb-brown-disjoint-complex-hom-support",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take N one greater than the maximum exceptional natural index. For n at least N the Hom group to Q(M_n) is a subsingleton. Compose a given map to F_n[0][n] with the inverse canonical comparison, make it zero by subsingleton elimination, and cancel the comparison isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-brown-disjoint-complex-hom-support",
+  "sk-def-localizing-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/NotPreservesCoproducts.lean",
+  "place": "finite-support argument in not_preservesColimitsOfShape_of_forall_hom_ne_zero, with DegreewiseLimits.lean, HomologicalComplex.isLimitFanMkProjOfIsColimit, and Products.lean, DerivedCategory.isLimitFanMkQObj",
+  "note": "P5: specialize the degreewise-disjoint theorem instead of repeating product and coproduct restriction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A compact object in an unbounded derived category with exact countable products has uniformly bounded Ext into objects of the heart",
+   "results": "Eight derived-category size and t-structure results; no uniform vanishing theorem. Local source has the fixed-heart nonpreservation argument and the needed general degreewise-disjoint product lemma.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObj\"",
+   "results": "Zero hits. Read the source compactness equivalence and the finite-support theorem in the item.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "eventually.*[Ee]xt|uniform.*[Ee]xt|[Ee]xt.*uniform",
+   "results": "No relevant Mathlib hit; local source search finds no varying-heart or uniform-heart Brown bound. Blueprint uniform constructible Ext results establish sufficient geometric bounds with extra assumptions, rather than this necessary consequence of Brown compactness.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "date": "2026-10-25",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-brown-hypotheses",
+   "place": "proof paragraph 2, checking the compactness of the constructible finite-Tor representatives",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-brown-hypotheses",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypotheses.lean",
+  "declaration": "CategoryTheory.BrownHypothesesFor.eventually_hom_single_shift_eq_zero",
+  "declarations": [
+   "CategoryTheory.BrownHypothesesFor.eventually_hom_single_shift_eq_zero"
+  ],
+  "statement": "theorem BrownHypothesesFor.eventually_hom_single_shift_eq_zero\n    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}\n    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} (hB : BrownHypothesesFor Λ X)\n    (K : (localizingClosureProEtale Λ X).FullSubcategory)\n    (hK : constantModelBoundedConstructible Λ X K.obj ∧\n      DerivedCategory.finiteTorAmplitude _ K.obj)\n    (F : ℕ → Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))\n    (hF : ∀ n, localizingClosureProEtale Λ X\n      ((DerivedCategory.singleFunctor _ 0).obj (F n))) :\n    ∃ N : ℕ, ∀ n ≥ N, ∀ f : K.obj ⟶\n      ((DerivedCategory.singleFunctor _ 0).obj (F n))⟦(n : ℤ)⟧, f = 0",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261025T033841-L-120540",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T112403-L-1578020",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.brownHypotheses"
+  ],
+  "sorry_after": [
+   "CategoryTheory.brownHypotheses"
+  ]
+ }
+}

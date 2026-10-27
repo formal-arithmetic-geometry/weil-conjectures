@@ -1,0 +1,292 @@
+{
+ "id": "lem-sp-nilpotent-action-koszul-unit",
+ "kind": "statement",
+ "title": "Nilpotent action and the specified principal Koszul completion unit",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe, $R$ a sheaf of commutative rings, and $t\\in\\Gamma(\\mathcal C,R)$. Assume countable products of $R$-module sheaves are exact and use unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. For a strict inverse sequence $X$, use the Roos complex $\\mathsf R(X)=\\operatorname{Cone}(1-s:\\prod_jX_j\\to\\prod_jX_j)[-1]$ [def-weil-strict-roos-model], in reordered coordinates $(v,u)$ with differential $(dv,-du-(1-s)v)$. For $j\\geq1$ put $L_j=[R\\xrightarrow{t^j}R]$ in degrees $[-1,0]$, with transitions $(t,1)$ [def-pur-principal-koszul-quotient-towers], and use right total tensor [def-pc-tensor-complex-sheaves].\n\nFor every unbounded complex $Q$ there is a natural short exact sequence of complexes of strict towers\n$$0\\to\\operatorname{const}(Q)\\xrightarrow{i}(Q\\otimes_RL_j)_j\\to Z(Q)\\to0,$$\nwhere $i_j(x)=(x,0)$, each $Z(Q)_j=Q[1]$, and its transitions are $t$. In degree $k$, $(Q\\otimes L_j)^k=Q^k\\oplus Q^{k+1}$ has differential $(x,y)\\mapsto(dx+(-1)^{k+1}t^jy,dy)$, and the quotient map to $Q[1]^k$ is $(x,y)\\mapsto(-1)^ky$. If $t^rQ^k=0$ for every $k$ for some $r\\geq1$, then $R\\!\\lim_j Z(Q)_j=0$ and the specific chain map\n$$u_Q:Q\\longrightarrow\\mathsf R_j(Q\\otimes_RL_j),\\qquad x\\longmapsto((i_jx)_j,0),$$\nis a quasi-isomorphism. Here the total derived inverse limit of strict towers is that of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The maps $u_Q$ form a natural transformation on all complexes and all $R$-linear chain maps, independent of the choice of $r$. Thus for any strict tower $Q_n$ on which powers $t^{r_n}$ vanish termwise, they form a strict map of $n$-towers which is a quasi-isomorphism at each level, without a common exponent or any cohomological bound.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Completeness sentence: nilpotent-action principal Koszul calculation; returned proof steps 2--3 (with the Roos normalization of step 1). Bhatt--Scholze Lemma 3.4.12; Stacks 0941 (sites-cohomology.tex, lemma-derived-limit-is-ok), 012Z (homology.tex, definition-associated-simple-complex)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-strict-roos-model",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof": [
+  {
+   "text": "Use the signed right-tensor coordinate theorem to obtain Z, level isomorphisms, i, p, hi and chi, with the canonical inverse coordinates, strict short exact sequence, signed differential, and transitions. These are constructed without any nilpotence hypothesis.",
+   "uses": [
+    "lem-sp-nilpotent-koszul-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate i at every tower level and apply the explicit zero-homotopy Roos augmentation. This defines u on every complex. For a chain map b the naturality of i identifies b followed by every target level inclusion with the source inclusion followed by the tower map. The Roos map acts diagonally on both product coordinates. Product extensionality and the coordinate isomorphisms prove the naturality equality for u. The augmentation formula gives its required (0,Pi.lift i) coordinates.",
+   "uses": [
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Fix an exponent a>=1 annihilating every term of Q. Induction on a proves that the a-th endomorphism power of scalar multiplication acts on a section x by t^a x, so this power is the zero sheaf morphism. Let e_n identify Z(Q)_n^k with Q^(k+1). Induction on b, using the quotient transition identity, gives s^b pi_n e_n = pi_(n+b) e_(n+b) t^b for the product shift s. For b=a this is zero. Cancel e_n and use product extensionality to obtain s^a=0 in every degree.",
+   "uses": [
+    "lem-sp-nilpotent-koszul-coordinates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The module-sheaf category is Grothendieck abelian after passage to its equivalent coefficient-universe small site, as in the existing total derived-limit construction. Apply the generic Roos nilpotent exact-augmentation lemma to the short exact sequence and the product-shift nilpotence just proved. It gives QuasiIso(u_Q) and vanishing of RF(Q Z(Q)) for every total right derived limit RF with unit eta.",
+   "uses": [
+    "lem-sp-roos-nilpotent-exact-augmentation",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary outer strict tower, whisker the natural transformation u with the tower functor. At level n apply the preceding argument with a_n, using only the annihilation hypothesis at that level. This gives every required quasi-isomorphism with no common exponent or cohomological bound.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-nilpotent-koszul-coordinates",
+  "def-weil-strict-roos-model",
+  "lem-sp-roos-nilpotent-exact-augmentation",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.12, proof of (1) iff (2), principal cone transition; Stacks 012Z and 0941. D4 stage-3 reduction separates signed tensor coordinates from scalar-independent Roos exactness; naturality and product-shift nilpotence are proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site an unbounded complex killed termwise by a power of a global section is quasi-isomorphic to its principal Koszul completion by the zero homotopy augmentation",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CochainComplex.cm5b.instQuasiIsoIntP",
+     "CategoryTheory.InjectiveResolution.instQuasiIsoIntι'",
+     "CochainComplex.cm5b",
+     "CochainComplex.quasiIso_πTruncGE_iff",
+     "Rep.standardComplex.quasiIso_forget₂_εToSingle₀",
+     "CochainComplex.instQuasiIsoIntπTruncGEOfIsGE",
+     "HomologicalComplex.isSupported_iff_of_quasiIso",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic resolutions, truncations, homology and vanishing derived functors, not a nilpotent section acting on an unbounded sheaf complex or its specified Koszul unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": {
+    "subdirectory": "",
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic resolutions, truncations, homology and vanishing derived functors, not a nilpotent section acting on an unbounded sheaf complex or its specified Koszul unit."
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*(koszul|completion)|(koszul|completion).*nilpotent",
+   "results": {
+    "subdirectory": "",
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic resolutions, truncations, homology and vanishing derived functors, not a nilpotent section acting on an unbounded sheaf complex or its specified Koszul unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf complex with nilpotent scalar action is canonically isomorphic to the homotopy inverse limit of its two term Koszul tensor complexes",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CategoryTheory.ShortComplex.HomologyData.canonical",
+     "HomologicalComplex.instHasLimitsOfShape",
+     "HomologicalComplex.instHasFiniteLimits",
+     "SheafOfModules.Presentation.isColimit",
+     "CategoryTheory.ShortComplex.homology",
+     "CategoryTheory.ShortComplex.LeftHomologyData.canonical",
+     "HomologicalComplex.homologyIsCokernel",
+     "CategoryTheory.ShortComplex.isoCyclesOfIsLimit"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic resolutions, truncations, homology and vanishing derived functors, not a nilpotent section acting on an unbounded sheaf complex or its specified Koszul unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex annihilated by a power of t has vanishing derived limit of its constant tower with transition t and its Koszul completion unit is invertible",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ",
+     "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+     "CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ",
+     "CategoryTheory.isZero_Tor'_succ_of_projective",
+     "CategoryTheory.isZero_Tor_succ_of_projective",
+     "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+     "Rep.isZero_Tor_succ_of_projective",
+     "CochainComplex.cm5b.I_d"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern generic resolutions, truncations, homology and vanishing derived functors, not a nilpotent section acting on an unbounded sheaf complex or its specified Koszul unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex killed termwise by a power of a scalar is quasi-isomorphic via its Koszul inclusions to the inverse limit of its principal Koszul tensor tower",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CochainComplex.cm5b.instQuasiIsoIntP",
+     "Rep.standardComplex.instQuasiIsoNatεToSingle₀",
+     "Rep.standardComplex.quasiIso_forget₂_εToSingle₀",
+     "HomologicalComplex.quasiIsoAt_πTruncGE",
+     "CochainComplex.instQuasiIsoIntιTruncLEOfIsLE",
+     "HomologicalComplex.quasiIsoAt_extendMap_iff",
+     "CochainComplex.instQuasiIsoIntπTruncGEOfIsGE",
+     "HomologicalComplex.instQuasiIsoShortComplexTruncLEX₃ToTruncGE"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic resolutions, truncations, ordinary adic completion and homotopy/category lemmas do not state the specified sheaf Koszul unit or its strict naturality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An unbounded complex annihilated by a power of t is quasi-isomorphic to its principal Koszul completion through the natural unit",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "HomologicalComplex.instIsMultiplicativeQuasiIso",
+     "quasiIso_of_isIso",
+     "AdicCompletion",
+     "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
+     "CochainComplex.quasiIso_ιTruncLE_iff",
+     "HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso",
+     "CochainComplex.instQuasiIsoIntιTruncLEOfIsLE",
+     "HomologicalComplex.quasiIso_ιTruncLE_iff_isSupported"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic resolutions, truncations, ordinary adic completion and homotopy/category lemmas do not state the specified sheaf Koszul unit or its strict naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The zero homotopy augmentation from a complex with nilpotent t action to the shifted cone of one minus transition on its Koszul tower is a quasi-isomorphism",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CochainComplex.cm5b.instQuasiIsoIntP",
+     "CochainComplex.cm5b.homotopyEquiv",
+     "CochainComplex.mappingCone.quasiIso_descShortComplex",
+     "homotopyEquivalences_le_quasiIso",
+     "HomotopyCategory.quasiIso_eq_subcategoryAcyclic_W",
+     "CochainComplex.quasiIsoAt₀_iff",
+     "ChainComplex.quasiIsoAt₀_iff",
+     "CochainComplex.IsKProjective.nonempty_homotopy_zero"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic resolutions, truncations, ordinary adic completion and homotopy/category lemmas do not state the specified sheaf Koszul unit or its strict naturality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-power-torsion-sheaf-limit-complete",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Completeness sentence: nilpotent-action principal Koszul calculation; returned proof steps 2--3 (with the Roos normalization of step 1). Bhatt--Scholze Lemma 3.4.12; Stacks 0941 (sites-cohomology.tex, lemma-derived-limit-is-ok), 012Z (homology.tex, definition-associated-simple-complex).",
+   "via": [
+    "lem-sp-power-torsion-sheaf-limit-complete"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-nilpotent-action-koszul-unit",
+  "worker": "stage1",
+  "summary": "Checked the full statement against the principal cone tower in Bhatt--Scholze Lemma 3.4.12, Stacks 012Z and 0941. Retained the statement and its definition dependencies. Proved the signed strict short exact sequence, quotient contraction, constant diagonal homotopy equivalence, specified unit and strict naturality. Reused existing Mathlib triangle and splitting nodes and the normalized strict Roos comparison; no new nodes are needed.",
+  "blueprint": "Realizes sk-lem-sp-tower proof paragraph, sentence that the limit is derived complete as a limit of complexes killed by powers of ell: the single nilpotent-action Koszul unit calculation, before the separate iterated-limit interchange.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic normalized Roos computation of total derived inverse limit on a small ringed site with exact countable products, used only to identify the explicitly contracted quotient Roos complex with the specified derived limit; this does not replace the unit reconstruction route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-8456b97c0",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-8456b97c0 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps, every cited statement, the Mathlib sources behind the two leaves (Pretriangulated.lean:579, DegreewiseSplit.lean:253, DerivedCategory/Basic.lean:173), and Bhatt–Scholze Lemmas 3.4.12–3.4.13. Stacks 012Z and 0941 resolve to the labels cited. The statement and stmt_deps are byte-identical to the O4 base; only the proof fields changed. The item is still unsplit in live and side-live, so the delivery is not superseded. The parent's old steps 2–3 (Q129) are fully kept and made more explicit. Step-by-step checks: (1) The tensor differential sign is (−1)^{k+1}, d²=0, and p^k=(−1)^k y is a chain map to Q[1] with differential −d. (2) The transitions (x,ty) are chain maps, p_j a_j=t p_{j+1} and a_j i_{j+1}=i_j. (3) The reordered Roos coordinates match def-weil-strict-roos-model, and the Roos sequence is degreewise split. (4) s_Z^r=0, A=Σs^a inverts 1−s, and h=(−Au,0) gives dh+hd=1. (5) fB=1, Bf=1−Δpr_1 and dH+Hd=1−δe, so δ is a homotopy equivalence. (6) The degreewise-split triangle plus the zero-third splitting with R(Z)≅0 make R(i) a quasi-isomorphism, and R(i)δ=u_Q. (7) b⊗1=(b^k,b^{k+1}) gives strict naturality with no exponent. Edge cases checked: t=0, Q=0, t a unit, unbounded Q, varying r_n. I accept the tool use of lem-weil-strict-roos-comparison (unit sk-def-sf-operations) as the generic R lim normalization. There are no new nodes, no duplicate of the item was found, and no SGA is used. Advisory only: the wording 'on cycles … differs by a boundary' in step 5 is clumsy. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.NilpotentActionKoszulUnit",
+  "declaration": "CategoryTheory.nilpotentActionKoszulUnit",
+  "declarations": [
+   "CategoryTheory.nilpotentActionKoszulUnit"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/NilpotentActionKoszulUnit.lean",
+  "statement": "theorem nilpotentActionKoszulUnit [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))] [HasDerivedCategory.{w} (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)))] (t : (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)).sections) : ∃ (Z : CochainComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ ⥤ CochainComplex (ℕᵒᵖ ⥤ (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) ℤ) (ζ : ∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (m : ℕ), (Z.obj Q).asFunctor.obj (op m) ≅ Q⟦(1 : ℤ)⟧) (i : (Functor.const ℕᵒᵖ : (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ⥤ (ℕᵒᵖ ⥤ (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)))).mapHomologicalComplex (ComplexShape.up ℤ) ⟶ spKoszulRightTower R t) (p : spKoszulRightTower R t ⟶ Z) (hi : i ≫ p = 0) (χ : ∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (m : ℕ) (k : ℤ), (((spKoszulRightTower R t).obj Q).X k).obj (op m) ≅ Q.X k ⊞ Q.X (k + 1)) (u : 𝟭 (CochainComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) ⟶ spKoszulRightTower R t ⋙ roosF), (∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (m : ℕ) (k : ℤ), (χ Q m k).inv = spKoszulRightCoordinatesInv R t Q m k) ∧ (∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ), (ShortComplex.mk (i.app Q) (p.app Q) (NatTrans.congr_app hi Q)).ShortExact) ∧ (∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (m : ℕ) (k : ℤ), ((i.app Q).f k).app (op m) ≫ (χ Q m k).hom = biprod.inl) ∧ (∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (m : ℕ) (k : ℤ), ((p.app Q).f k).app (op m) ≫ (ζ Q m).hom.f k ≫ (Q.shiftFunctorObjXIso (1 : ℤ) k (k + 1) rfl).hom = (χ Q m k).hom ≫ (k.negOnePow • biprod.snd)) ∧ (∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (m : ℕ) (k : ℤ), (((spKoszulRightTower R t).obj Q).d k (k + 1)).app (op m) ≫ (χ Q m (k + 1)).hom = (χ Q m k).hom ≫ biprod.desc (Q.d k (k + 1) ≫ biprod.inl) (((k + 1).negOnePow • endoPow (spKoszulScalar R t (Q.X (k + 1))) (m + 1)) ≫ biprod.inl + Q.d (k + 1) ((k + 1) + 1) ≫ biprod.inr)) ∧ (∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (m : ℕ) (k : ℤ), (((spKoszulRightTower R t).obj Q).X k).map (homOfLE (Nat.le_succ m)).op ≫ (χ Q m k).hom = (χ Q (m + 1) k).hom ≫ biprod.map (𝟙 _) (spKoszulScalar R t (Q.X (k + 1)))) ∧ (∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (m : ℕ) (k : ℤ), ((Z.obj Q).X k).map (homOfLE (Nat.le_succ m)).op ≫ (ζ Q m).hom.f k ≫ (Q.shiftFunctorObjXIso (1 : ℤ) k (k + 1) rfl).hom = (ζ Q (m + 1)).hom.f k ≫ (Q.shiftFunctorObjXIso (1 : ℤ) k (k + 1) rfl).hom ≫ spKoszulScalar R t (Q.X (k + 1))) ∧ (∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (k : ℤ), (u.app Q).f (k + 1) ≫ (roosχ ((spKoszulRightTower R t).obj Q) k).hom = biprod.lift 0 ((@id (Q ⟶ roosP ((spKoszulRightTower R t).obj Q)) (Pi.lift (fun m : ℕ ↦ (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (i.app Q)).app (op m)))).f (k + 1))) ∧ (∀ (Q : CochainComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (a : ℕ), 1 ≤ a → (∀ (k : ℤ) (U : Cᵒᵖ) (x : (Q.X k).val.obj U), (@id (R.obj.obj U) (t.val U)) ^ a • x = 0) → QuasiIso (u.app Q) ∧ ∀ (RF : DerivedCategory.{w} (ℕᵒᵖ ⥤ (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) ⥤ DerivedCategory.{w} (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) (η : (lim : (ℕᵒᵖ ⥤ (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) ⥤ (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶ DerivedCategory.Q.{w} ⋙ RF), RF.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) (ComplexShape.up ℤ)) → IsZero (RF.obj (DerivedCategory.Q.{w}.obj (Z.obj Q)))) ∧ (∀ (T : ℕᵒᵖ ⥤ CochainComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (a : ℕ → ℕ), (∀ n : ℕ, 1 ≤ a n) → (∀ (n : ℕ) (k : ℤ) (U : Cᵒᵖ) (x : ((T.obj (op n)).X k).val.obj U), (@id (R.obj.obj U) (t.val U)) ^ (a n) • x = 0) → ∀ n : ℕ, QuasiIso ((Functor.whiskerLeft T u).app (op n)))",
+  "branch": "sheaf-dag",
+  "by": "Q112",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The five concrete definitions have moved verbatim to NilpotentKoszulCoordinates and are publicly reexported; theorem signature unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e8a918edf",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Every node clause matches its Lean conjunct: natural ShortExact SES in tower complexes; χ.inv pinned to the canonical summand inclusions (unitor, singleObjXSelf, cone inr/inl, ιMapBifunctor); i=(x,0); p=(-1)^k y via the shift X-iso; d=(dx+(-1)^{k+1}t^{m+1}y,dy), sign checked against Mathlib ε₂=(-1)^p and mappingCone.inl_v_d; transitions (x,ty); Z levels ≅Q[1] with transition t; u pinned via roosχ to lift 0 (Pi.lift i) like the dependency's own augmentation shape; termwise local annihilation ⇒ QuasiIso and IsZero of every right derived limit of Z; outer tower with level-dependent a_n≥1. Universes are independent (uC, vC, r, w); no extra assumptions. lean.statement matches the file verbatim; only the lean field changed versus side-live, which still has lean null. The five helpers are real (spKoszulScalar wraps upstream sectionsSMul); one sorry; docstrings complete; no duplicate (Paper.NilpotentKoszulCompletionUnit is the scheme case). I changed no file and ran no compile. Advisory: the Q112 second-reading section is terse."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5c920",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T163612-L-717281",
+  "kind": "interface",
+  "note": "independent cc review: item proof of nilpotentActionKoszulUnit vs node lem-sp-nilpotent-action-koszul-unit; moved defs diffed verbatim vs clone; new sorried statements nilpotentKoszulCoordinates / roosNilpotentExactAugmentation checked true against Mathlib sign conventions, principalKoszulTransition, and their node lean.statement records"
+ }
+}

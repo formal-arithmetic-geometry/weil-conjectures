@@ -1,0 +1,261 @@
+{
+ "id": "lem-trf-polynomial-simplicial-tensor-model",
+ "kind": "statement",
+ "title": "Augmented simplicial polynomial scalar-extension model",
+ "statement": "Let $A\\to B$ and $A\\to A'$ be homomorphisms of commutative rings. Let $\\epsilon:P_\\bullet\\to B$ be an augmented simplicial $A$-algebra [def-trf-cotangent-resolution-data], with each $\\epsilon_n$ surjective and with chosen $A$-algebra identifications $P_n\\cong A[X_i:i\\in I_n]$ [def-weil-pbc-mv-polynomial-ring], where $I_n$ is any set. No quasi-isomorphism hypothesis on $\\epsilon$ is imposed. Write $C=s(P_\\bullet)$ for the alternating-face cochain complex, $C^{-n}=P_n$, with zero positive terms and differential $\\sum_i(-1)^id_i$, and let $q:C\\to B[0]$ be its augmentation. Then each $C^{-n}$ is free over $A$ on its monomials, and is flat: tensoring it with modules preserves exact sequences. More precisely, for every $A$-module $M$, coefficient expansion gives a natural module isomorphism $P_n\\otimes_A M\\cong\\bigoplus_{\\alpha\\in\\mathbf N^{(I_n)}}M$, sending $(\\sum_\\alpha a_\\alpha X^\\alpha)\\otimes m$ to $(a_\\alpha m)_\\alpha$, with inverse $(m_\\alpha)_\\alpha\\mapsto\\sum_\\alpha X^\\alpha\\otimes m_\\alpha$ [def-weil-pbc-module-tensor-product]. Put $B'=B\\otimes_A A'$ and $P'_n=P_n\\otimes_A A'$ [def-weil-module-base-change]. Tensoring the faces, degeneracies and augmentations defines an augmented simplicial $A'$-algebra $\\epsilon':P'_\\bullet\\to B'$. Every $\\epsilon'_n$ is surjective, and $P'_n\\cong A'[X_i:i\\in I_n]$ as an $A'$-algebra by the map $X^\\alpha\\otimes a'\\mapsto a'X^\\alpha$. Let $q':s(P'_\\bullet)\\to B'[0]$ be the resulting augmentation, let $T$ be termwise scalar extension, and let $Q_{A'}$ denote localization to $D(A')$ [def-weil-abstract-derived-category]. The identity maps on $P_n\\otimes_A A'$ represent an isomorphism $\\phi:Q_{A'}(TC)\\xrightarrow{\\sim}Q_{A'}s(P'_\\bullet)$ satisfying $Q_{A'}(q')\\circ\\phi=Q_{A'}(Tq)$, with $T(B[0])=B'[0]$.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QP (lemma-flat-base-change), proof: the monomial-free terms of s(P) and the equality s(P) tensor A-prime = s(P tensor A-prime), with the prescribed augmentation; Tag 08QI (remark-resolution), polynomial and surjectivity conditions."
+ },
+ "stmt_deps": [
+  "def-trf-cotangent-resolution-data",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Fix $n$ and put $E=\\mathbf N^{(I_n)}$. Under the chosen polynomial identification, every element of $P_n$ has exactly one finite coefficient expansion $\\sum_{\\alpha\\in E}a_\\alpha X^\\alpha$. Thus the family $(X^\\alpha)_{\\alpha\\in E}$ is a basis by the definition of basis, and $C^{-n}=P_n$ is free. This uses no finiteness of $I_n$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP (lemma-flat-base-change), proof: P_n is a free A-module; expand using the polynomial definition."
+   }
+  },
+  {
+   "text": "For an $A$-module $M$, the rule $(p,m)\\mapsto(\\operatorname{coeff}_\\alpha(p)m)_\\alpha$ is bilinear and finitely supported, so the tensor universal property gives $F_M:P_n\\otimes_A M\\to M^{(E)}$. Define $G_M((m_\\alpha))=\\sum_\\alpha X^\\alpha\\otimes m_\\alpha$. It is linear. On a single supported coordinate $F_MG_M$ is the identity; on a pure tensor, $G_MF_M(p\\otimes m)=\\sum_\\alpha X^\\alpha\\otimes a_\\alpha m=p\\otimes m$ by balancing. Pure tensors generate, so these are inverse isomorphisms. For $u:M\\to N$, both routes send $p\\otimes m$ to $(\\operatorname{coeff}_\\alpha(p)u(m))_\\alpha$; this proves naturality.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), universal property and bilinearity relations; explicit coefficient calculation supplying the monomial model in Tag 08QP."
+   }
+  },
+  {
+   "text": "If $u:M\\hookrightarrow N$ is injective, naturality identifies $P_n\\otimes u$ with the map $(m_\\alpha)\\mapsto(u(m_\\alpha))$, which is injective coordinatewise. The swap $m\\otimes p\\mapsto p\\otimes m$ is a linear isomorphism with inverse the same swap, by the tensor universal property. Hence $u\\otimes P_n$ is also injective, proving flatness by its definition. Now apply the cited flat-tensor exactness theorem with the commutative ring $A$ and the flat module $P_n$: tensoring on either side preserves every exact sequence.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HD (lemma-flat), equivalence of injectivity preservation and exactness; explicit coordinatewise proof of injectivity."
+   }
+  },
+  {
+   "text": "For every simplicial operator $h$ define $h'(p\\otimes a')=h(p)\\otimes a'$, and set $\\epsilon'_n=\\epsilon_n\\otimes1$. Multiplication after scalar extension is $(p\\otimes a')(r\\otimes b')=pr\\otimes a'b'$ with unit $1\\otimes1$; it is induced by the bilinear extension of multiplication. Associativity, commutativity and the unit law follow on pure tensors from those of $P_n,A'$. Each $h'$ and $\\epsilon'_n$ preserves these products and the unit. Scalar extension preserves composition and identities, so every simplicial and augmentation identity remains true. For $z=\\sum_{j=1}^r b_j\\otimes a'_j\\in B'$, choose $p_j\\in P_n$ with $\\epsilon_n(p_j)=b_j$; then $\\epsilon'_n(\\sum_jp_j\\otimes a'_j)=z$. Thus each new augmentation is surjective.",
+   "uses": [
+    "def-trf-cotangent-resolution-data",
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QI (remark-resolution), polynomial and surjective augmentation data; Tag 08QP (lemma-flat-base-change), tensoring that data."
+   }
+  },
+  {
+   "text": "Take $M=A'$ in Step 2. Its coefficient isomorphism identifies $P_n\\otimes_A A'$ with $A'[X_i:i\\in I_n]$ as an $A'$-module and sends $X^\\alpha\\otimes a'$ to $a'X^\\alpha$. It is an algebra isomorphism: on two monomial tensors both the image of the product and the product of the images are $a'b'X^{\\alpha+\\beta}$, and $1\\otimes1$ maps to $1$. Bilinearity and finite expansion give multiplicativity on all elements. This also proves the asserted normalization of the polynomial scalar-extension map.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP (lemma-flat-base-change), proof: the polynomial terms after scalar extension; monomial multiplication checks the specified map."
+   }
+  },
+  {
+   "text": "In degree $-n$, both $TC$ and $s(P'_\\bullet)$ have term $P_n\\otimes_A A'$. For $n\\ge1$, their differentials agree on $p\\otimes a'$ because $(\\sum_{i=0}^n(-1)^id_i)(p)\\otimes a'=\\sum_{i=0}^n(-1)^i(d_i(p)\\otimes a')$. At degree $0$ and in positive degrees their differentials are zero. Thus the identity components form a chain isomorphism $e:TC\\to s(P'_\\bullet)$ with inverse the same components. Both augmentations are zero away from degree $0$ and send $p\\otimes a'$ to $\\epsilon_0(p)\\otimes a'$ at degree $0$, so $q'e=Tq$ with the specified target $T(B[0])=B'[0]$. The functor $Q_{A'}$ sends $e$ and its inverse to inverse arrows; set $\\phi=Q_{A'}(e)$ and apply functoriality to obtain the required augmentation equality.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP (lemma-flat-base-change), displayed equality s(P) tensor A-prime = s(P tensor A-prime), with augmentation checked explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-trf-cotangent-resolution-data",
+  "def-weil-module-base-change",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QP (lemma-flat-base-change), proof; Tag 08QI (remark-resolution); elementary coefficient and augmentation details expanded by Q111 using Algebra 00CX and 00HD."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "simplicial.*(tensor|baseChange)|alternating.*(tensor|baseChange)",
+   "results": "2 hits; top=['Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean', 'Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean']; note=; digest=9248ba53fd0af70c. Read Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean:182-202, 226-240 and RingTheory/TensorProduct/MvPolynomial.lean:65-90. These give additive commutation, the augmentation construction, and polynomial scalar extension separately; none states the full augmented polynomial model, its coefficient-expansion identification and its preserved surjectivity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The alternating face complex of a simplicial polynomial algebra is termwise free and commutes with extension of scalars",
+   "results": "8 hits; top=['AlgebraicTopology.AlternatingFaceMapComplex.obj', 'AlgebraicTopology.alternatingFaceMapComplex', 'AlgebraicTopology.AlternatingCofaceMapComplex.obj', 'Algebra.TensorProduct.instFree', 'AlgebraicTopology.map_alternatingFaceMapComplex', 'AlgebraicTopology.AlternatingFaceMapComplex.objD', 'AlgebraicTopology.alternatingFaceMapComplex_obj_d', 'AlgebraicTopology.AlternatingFaceMapComplex.map']; note=; digest=c71fdd1204b9cfdd. Read Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean:182-202, 226-240 and RingTheory/TensorProduct/MvPolynomial.lean:65-90. These give additive commutation, the augmentation construction, and polynomial scalar extension separately; none states the full augmented polynomial model, its coefficient-expansion identification and its preserved surjectivity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"tensor\"",
+   "results": "12 hits; top=['MvPolynomial.algebraTensorAlgEquiv', 'MvPolynomial.scalarRTensorAlgEquiv', 'MvPolynomial.rTensorAlgEquiv', 'MvPolynomial.rTensorAlgHom', 'MvPolynomial.tensorEquivSum', 'MvPolynomial.algebraTensorAlgEquiv_tmul', 'MvPolynomial.algebraTensorAlgEquiv_symm_X', 'MvPolynomial.algebraTensorAlgEquiv_symm_map']; note=; digest=f09a26b3964ce106. Read Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean:182-202, 226-240 and RingTheory/TensorProduct/MvPolynomial.lean:65-90. These give additive commutation, the augmentation construction, and polynomial scalar extension separately; none states the full augmented polynomial model, its coefficient-expansion identification and its preserved surjectivity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of simplicial algebras commutes with the unnormalized chain complex including its augmentation",
+   "results": "8 hits; top=['AlgebraicTopology.AlternatingFaceMapComplex.ε', 'AlgebraicTopology.DoldKan.N₁_map_f', 'Rep.standardComplex.compForgetAugmentedIso', 'classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule', 'CategoryTheory.Idempotents.DoldKan.N_map', 'CategoryTheory.Idempotents.DoldKan.η_hom_app_f', 'AlgebraicTopology.DoldKan.N₁Γ₀_hom_app', 'AlgebraicTopology.DoldKan.N₂_map_f_f']; note=; digest=585429eed99f0995. Read Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean:182-202, 226-240 and RingTheory/TensorProduct/MvPolynomial.lean:65-90. These give additive commutation, the augmentation construction, and polynomial scalar extension separately; none states the full augmented polynomial model, its coefficient-expansion identification and its preserved surjectivity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of an augmented simplicial polynomial algebra preserves polynomial terms and surjective augmentations and commutes with the alternating face complex",
+   "results": "8 hits; top=['classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule', 'Algebra.Generators.baseChange_val', 'AlgebraicTopology.AlternatingFaceMapComplex.ε', 'LinearMap.toMvPolynomial_baseChange', 'Algebra.Generators.baseChange', 'LinearMap.polyCharpolyAux_baseChange', 'Algebra.Presentation.baseChange_toGenerators', 'classifyingSpaceUniversalCover.compForgetAugmented.toModule']; note=; digest=e1f2775bb3dc8be6. Read Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean:182-202, 226-240 and RingTheory/TensorProduct/MvPolynomial.lean:65-90. These give additive commutation, the augmentation construction, and polynomial scalar extension separately; none states the full augmented polynomial model, its coefficient-expansion identification and its preserved surjectivity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "simplicial.*(tensor|baseChange)|alternating.*(tensor|baseChange)",
+   "results": "2 hits; top=['Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean', 'Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean']; note=; digest=673aaea3c68cbe77. Read Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean:182-202,226-246 and RingTheory/TensorProduct/MvPolynomial.lean:65-113: additive comparison and augmentation, or polynomial scalar extension, separately. None gives the complete augmented polynomial model and its coefficient, surjectivity and normalization clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The alternating face complex of a simplicial polynomial algebra is termwise free and commutes with extension of scalars",
+   "results": "8 hits; top=['AlgebraicTopology.AlternatingFaceMapComplex.obj', 'AlgebraicTopology.alternatingFaceMapComplex', 'AlgebraicTopology.AlternatingCofaceMapComplex.obj', 'Algebra.TensorProduct.instFree', 'AlgebraicTopology.map_alternatingFaceMapComplex', 'AlgebraicTopology.AlternatingFaceMapComplex.objD', 'AlgebraicTopology.alternatingFaceMapComplex_obj_d', 'AlgebraicTopology.AlternatingFaceMapComplex.map']; note=; digest=c71fdd1204b9cfdd. Read Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean:182-202,226-246 and RingTheory/TensorProduct/MvPolynomial.lean:65-113: additive comparison and augmentation, or polynomial scalar extension, separately. None gives the complete augmented polynomial model and its coefficient, surjectivity and normalization clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"tensor\"",
+   "results": "12 hits; top=['MvPolynomial.algebraTensorAlgEquiv', 'MvPolynomial.scalarRTensorAlgEquiv', 'MvPolynomial.rTensorAlgEquiv', 'MvPolynomial.rTensorAlgHom', 'MvPolynomial.tensorEquivSum', 'MvPolynomial.algebraTensorAlgEquiv_tmul', 'MvPolynomial.algebraTensorAlgEquiv_symm_X', 'MvPolynomial.algebraTensorAlgEquiv_symm_map']; note=; digest=f09a26b3964ce106. Read Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean:182-202,226-246 and RingTheory/TensorProduct/MvPolynomial.lean:65-113: additive comparison and augmentation, or polynomial scalar extension, separately. None gives the complete augmented polynomial model and its coefficient, surjectivity and normalization clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of an augmented simplicial polynomial algebra preserves polynomial terms and surjective augmentations and commutes with the alternating face complex",
+   "results": "8 hits; top=['Algebra.Generators.baseChange_val', 'Algebra.Generators.baseChange', 'Algebra.PreSubmersivePresentation.baseChange', 'LinearMap.toMvPolynomial_baseChange', 'Algebra.Presentation.baseChange_relation', 'LinearMap.polyCharpolyAux_baseChange', 'Algebra.PreSubmersivePresentation.baseChange_toPresentation', 'Algebra.PreSubmersivePresentation.baseChange_ring']; note=; digest=38319f2789676cda. Read Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean:182-202,226-246 and RingTheory/TensorProduct/MvPolynomial.lean:65-113: additive comparison and augmentation, or polynomial scalar extension, separately. None gives the complete augmented polynomial model and its coefficient, surjectivity and normalization clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of simplicial algebras commutes with the unnormalized chain complex including its augmentation",
+   "results": "8 hits; top=['AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_naturality_assoc', 'AlgebraicTopology.DoldKan.N₁_map_f', 'AlgebraicTopology.AlternatingFaceMapComplex.ε', 'AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_naturality', 'Rep.standardComplex.compForgetAugmentedIso', 'AlgebraicTopology.DoldKan.Γ₂N₁.natTrans_app_f_app', 'AlgebraicTopology.DoldKan.Γ₀_obj_map', 'CategoryTheory.Idempotents.DoldKan.Γ_obj_map']; note=; digest=24a0bd58e0487844. Read Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean:182-202,226-246 and RingTheory/TensorProduct/MvPolynomial.lean:65-113: additive comparison and augmentation, or polynomial scalar extension, separately. None gives the complete augmented polynomial model and its coefficient, surjectivity and normalization clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tor-independent-cotangent-base-change",
+  "date": "2026-10-22",
+  "group": "Q34"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Polynomial resolutions remain resolutions under Tor-independent tensoring. Re-split component: returned proof Steps 1, 3 and 4: monomial tensor model, simplicial scalar extension and augmented alternating-face comparison.",
+   "via": [
+    "lem-trf-tor-independent-cotangent-base-change",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-polynomial-simplicial-tensor-model",
+  "worker": "stage1",
+  "summary": "No new nodes: expanded the monomial tensor isomorphism, proved injectivity coordinatewise and cited the existing flat-tensor exactness leaf, constructed all scalar-extended algebra/simplicial maps, lifted finite tensor sums, checked multiplicativity, and checked the identity chain comparison including its augmentation. No resolution or flat-base-change hypothesis is needed.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality, proof (1)--(2), auxiliary nearby-cycle/semistable-modification branch recorded by blueprint.from.via: the immediate parent lem-trf-tor-independent-cotangent-base-change needs precisely the polynomial tensor model and augmented alternating-face equality of Stacks 08QP. Latest blueprint ancestor read; this auxiliary split changes no unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-465ab01ac",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-465ab01ac (reviewer sub-agent of L); spot-checked: Read the item, its 6 steps, all 8 cited statements, Stacks cotangent.tex 08QP (proof: 'P_n is a free A-module', 's(P) tensor A' = s(P tensor A')') and 08QI, and both citers (lem-trf-tor-independent-cotangent-base-change step 1; lem-trf-derived-square-polynomial-resolution steps 1 and 5). The delivery has no new nodes and no repair note, and this is the node's first split. Steps 1-6 are correct. Step 1 gives the monomial basis. Step 2 gives the coefficient isomorphism P_n tensor M = M^(E), with both composites and naturality checked on pure tensors. Step 3 gets injectivity coordinatewise, uses the swap to match the side in def-weil-pbc-flat-ring-map, then the Mathlib leaf lem-weil-pbc-flat-tensor-exact gives exactness on both sides. Step 4 builds the products from the base-change node's beta_A, keeps the simplicial identities by functoriality, and gets surjectivity by finite lifts with no flatness. Step 5 proves A'-linearity and multiplicativity on monomial tensors. Step 6 shows the identity components form a chain isomorphism with q'e = Tq; the degree-0 augmentation and T(B[0]) = B'[0] were checked. Edge cases checked: empty I_n, A' = 0, infinite I_n, and the non-resolution constant example Z[t] -> Z. The unit route is clean: only definitions and Mathlib leaves are cited, so no tool_uses are needed. No duplicate node was found. Advisory: the Mathlib leaf lem-weil-pbc-polynomial-scalar-extension (algebraTensorAlgEquiv) states what step 5 proves directly; the direct proof is correct and short, so nothing was changed. def-weil-pbc-simplicial-object could optionally be added to stmt_deps."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialSimplicialTensorModel",
+  "declaration": "Algebra.CotangentResolution.polynomial_simplicial_tensor_model",
+  "declarations": [
+   "Algebra.CotangentResolution.tensorModelAlgebra",
+   "Algebra.CotangentResolution.tensorModelCocone",
+   "Algebra.CotangentResolution.tensorModelModule",
+   "Algebra.CotangentResolution.tensorModelExtension",
+   "Algebra.CotangentResolution.tensorModelAugmentation",
+   "Algebra.CotangentResolution.tensorModelTermIso",
+   "Algebra.CotangentResolution.tensorModelTarget",
+   "Algebra.CotangentResolution.tensorModelTargetIso",
+   "Algebra.CotangentResolution.polynomial_simplicial_tensor_model"
+  ],
+  "file": "lean/Sheaf/RingTheory/PolynomialSimplicialTensorModel.lean",
+  "statement": "theorem polynomial_simplicial_tensor_model {f : Arrow CommRingCat.{u}} (P : Augmentation f) (A' : CommAlgCat.{u} f.left) (I : ℕ → Type v) (e : ∀ n : ℕ, MvPolynomial (I n) f.left ≃ₐ[f.left] (tensorModelAlgebra P).obj (op ⦋n⦌)) (hε : ∀ n : ℕ, Function.Surjective (P.augmentation.app (op ⦋n⦌))) [HasDerivedCategory.{z} (ModuleCat.{u} A')] : (∀ n : ℕ, (∃ b : Module.Basis (I n →₀ ℕ) f.left ((tensorModelAlgebra P).obj (op ⦋n⦌)), ∀ α : I n →₀ ℕ, b α = e n (MvPolynomial.monomial α 1)) ∧ Module.Free f.left ((tensorModelAlgebra P).obj (op ⦋n⦌)) ∧ Module.Flat f.left ((tensorModelAlgebra P).obj (op ⦋n⦌))) ∧ (∀ (n : ℕ) (M N K : ModuleCat.{w} f.left) (g : M ⟶ N) (h : N ⟶ K), Function.Exact g h → Function.Exact (g.hom.lTensor ((tensorModelAlgebra P).obj (op ⦋n⦌))) (h.hom.lTensor ((tensorModelAlgebra P).obj (op ⦋n⦌))) ∧ Function.Exact (g.hom.rTensor ((tensorModelAlgebra P).obj (op ⦋n⦌))) (h.hom.rTensor ((tensorModelAlgebra P).obj (op ⦋n⦌)))) ∧ (∀ n : ℕ, ∃ F : ∀ M : ModuleCat.{w} f.left, ((tensorModelAlgebra P).obj (op ⦋n⦌) ⊗[f.left] M) ≃ₗ[f.left] ((I n →₀ ℕ) →₀ M), (∀ (M : ModuleCat.{w} f.left) (p : (tensorModelAlgebra P).obj (op ⦋n⦌)) (m : M) (α : I n →₀ ℕ), F M (p ⊗ₜ m) α = MvPolynomial.coeff α ((e n).symm p) • m) ∧ (∀ (M : ModuleCat.{w} f.left) (x : (I n →₀ ℕ) →₀ M), (F M).symm x = x.sum (fun α m ↦ e n (MvPolynomial.monomial α 1) ⊗ₜ m)) ∧ (∀ (M N : ModuleCat.{w} f.left) (g : M ⟶ N) (x : (tensorModelAlgebra P).obj (op ⦋n⦌) ⊗[f.left] M), F N (g.hom.lTensor _ x) = Finsupp.mapRange.linearMap g.hom (F M x))) ∧ (∀ n : ℕ, Function.Surjective (((tensorModelExtension A').mapCocone (tensorModelCocone P)).ι.app (op ⦋n⦌))) ∧ (∀ n : ℕ, ∃ e' : (tensorModelExtension A').obj ((tensorModelAlgebra P).obj (op ⦋n⦌)) ≃ₐ[A'] MvPolynomial (I n) A', ∀ (α : I n →₀ ℕ) (a' : A'), e' (a' ⊗ₜ[f.left] e n (MvPolynomial.monomial α 1)) = MvPolynomial.monomial α a') ∧ (∃ ψ : ((ModuleCat.extendScalars (algebraMap f.left A')).mapHomologicalComplex (ComplexShape.up ℤ)).obj ((negativeComplex (ModuleCat.{u} f.left)).obj (tensorModelModule (tensorModelCocone P)).left) ≅ (negativeComplex (ModuleCat.{u} A')).obj (tensorModelModule ((tensorModelExtension A').mapCocone (tensorModelCocone P))).left, (∀ (n : ℕ) (a' : A') (p : (tensorModelAlgebra P).obj (op ⦋n⦌)), (tensorModelTermIso (tensorModelModule ((tensorModelExtension A').mapCocone (tensorModelCocone P))) n).hom (ψ.hom.f (-(n : ℤ)) (a' ⊗ₜ[f.left] (tensorModelTermIso (tensorModelModule (tensorModelCocone P)) n).inv p)) = a' ⊗ₜ[f.left] p) ∧ ∃ τ : ((ModuleCat.extendScalars (algebraMap f.left A')).mapHomologicalComplex (ComplexShape.up ℤ)).obj (tensorModelTarget (tensorModelModule (tensorModelCocone P))) ≅ (tensorModelTarget (tensorModelModule ((tensorModelExtension A').mapCocone (tensorModelCocone P)))), (∀ (a' : A') (b : (tensorModelModule (tensorModelCocone P)).right), (tensorModelTargetIso (tensorModelModule ((tensorModelExtension A').mapCocone (tensorModelCocone P)))).hom (τ.hom.f 0 (a' ⊗ₜ[f.left] (tensorModelTargetIso (tensorModelModule (tensorModelCocone P))).inv b)) = a' ⊗ₜ[f.left] b) ∧ ∃ φ : DerivedCategory.Q.obj (((ModuleCat.extendScalars (algebraMap f.left A')).mapHomologicalComplex (ComplexShape.up ℤ)).obj ((negativeComplex (ModuleCat.{u} f.left)).obj (tensorModelModule (tensorModelCocone P)).left)) ≅ DerivedCategory.Q.obj ((negativeComplex (ModuleCat.{u} A')).obj (tensorModelModule ((tensorModelExtension A').mapCocone (tensorModelCocone P))).left), φ = DerivedCategory.Q.mapIso ψ ∧ φ.hom ≫ DerivedCategory.Q.map (tensorModelAugmentation (tensorModelModule ((tensorModelExtension A').mapCocone (tensorModelCocone P)))) = DerivedCategory.Q.map (((ModuleCat.extendScalars (algebraMap f.left A')).mapHomologicalComplex (ComplexShape.up ℤ)).map (tensorModelAugmentation (tensorModelModule (tensorModelCocone P)))) ≫ DerivedCategory.Q.map τ.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded Augmentation and negativeComplex. Helper definitions construct the underlying simplicial algebra, its augmented module, and scalar extension without any choices or postponed data. Tensor factor order follows the recorded Mathlib scalar-extension convention, identified with the node by tensor symmetry. The derived comparison is explicitly the localization of the chain isomorphism with identity tensor components."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b11375c05",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Read node, all 7 stmt_dep records (Augmentation/negativeComplex in CotangentResolutionCoherence l.41/49, MvPolynomial, TensorProduct, baseChange A'⊗M convention, DerivedCategory, Module.Free, Module.Flat), Stacks 08QP/08QI, Under.liftCocone. Every clause matches: P : Augmentation f with A-structure via P.base, hε surjectivity, e n : MvPolynomial (I n) A ≃ₐ P_n with I : ℕ → Type v free, no QuasiIso; basis b α = e(X^α), Free, Flat, lTensor/rTensor exactness; coefficient iso F with both formulas and naturality; tensorModelExtension (id⊗h) + mapCocone gives P' with vertex A'⊗B, surjective ε', e'(a'⊗X^α)=monomial α a'; ψ chain iso pinned to identity in every degree -n, τ pinned in degree 0, φ = Q.mapIso ψ with φ ≫ Q q' = Q(Tq) ≫ Q τ (derived iso, not per-degree). Tensor order A'⊗P is the recorded base-change convention. Edge cases (empty/infinite I_n, A'=0, non-resolution, n=0, universes v/w/z) covered. One sorry, real helper data, docstrings with source and blueprint, statement verbatim, lines ≤98, no name clash, no live lean record. No fix, no compile needed."
+ }
+}

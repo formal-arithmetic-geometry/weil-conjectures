@@ -21,188 +21,46 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine open $S^a\\subset S$ containing $s$, and an affine open $Z^a\\subset p^{-1}(S^a)$ containing $z$. The affine-pairs criterion makes $Z^a\\to S^a$ finite type. The germ of the fibre at $z$ has not changed: by the open fibre-product identification, $(Z^a)_s=Z^a\\times_{S^a}\\operatorname{Spec}\\kappa(s)$ is the open subscheme of $Z_s$ lying over $Z^a$, and open neighbourhoods inside an open neighbourhood form a cofinal system in the definition of topological dimension at a point. Thus its dimension is still $n$. Work with this affine pair; every later map to it will be composed with the open immersions into the original pair.",
+   "text": "Apply [lem-trf-finite-smooth-preliminary-chart] to $p,z,n$. Obtain an affine open $j:S_0\\hookrightarrow S$, the marked diagram $W_0\\xrightarrow{\\pi_0}Y_0\\xrightarrow{h_0}S_0$, and $b_0:W_0\\to Z$. This supplies finite $\\pi_0$ with singleton marked fibre, elementary etale $b_0$, affine $Y_0,S_0$, finite presentation and relative dimension $n$ for $h_0$, and the purely transcendental marked residue extension. Its marked equations are $b_0(w_0)=z$, $\\pi_0(w_0)=y_0$, $h_0(y_0)=s_0$, $j(s_0)=s$, and $pb_0=jh_0\\pi_0$.",
    "uses": [
-    "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-lft-affine-pairs",
-    "def-kun-dimension",
-    "lem-weil-pbc-open-fibre-product"
+    "lem-trf-finite-smooth-preliminary-chart"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tags 052E and 057K, initial affine reduction"
+    "place": "Tag 052E, lemma-local-structure-finite-type, proof; Tag 057K, lemma-local-local-structure-finite-type, proof through the affine choice of Y and finite presentation of h."
    }
   },
   {
-   "text": "Apply the refined chart lemma to obtain $S_0,Z_0$ and $q:Z_0\\to A=\\mathbf A^n_{S_0}$, quasi-finite, with $t=q(z)$ and $\\kappa(t)/\\kappa(s)$ purely transcendental. The projection $A\\to S_0$ is smooth of relative dimension $n$. Because the fibre of $q$ is finite discrete, $z$ is an isolated point in that fibre, so the hypotheses for the elementary etale finite-neighbourhood lemma hold for $q$ at $z$.",
+   "text": "Apply [lem-trf-finite-smooth-integral-base-refinement] to $\\pi_0,h_0,w_0$. Its affine, finite-presentation, smooth-dimension, rational-residue-extension and singleton-fibre hypotheses all come from step 1. Write $e:S_1\\to S_0$, $v:V\\to Y_0$, $\\rho:W_1\\to W_0$, $\\pi_1:W_1\\to V$, and $h_1:V\\to S_1$ for its output. Set $b_1=b_0\\rho$ and $a_1=je$. The open immersion $j$ and these etale maps compose to make $b_1,a_1$ etale by [lem-weil-pbc-etale-composition-cancellation]. The marked residue maps are $\\kappa(z)\\to\\kappa(w_0)\\to\\kappa(w_1)$ and $\\kappa(s)\\to\\kappa(s_0)\\to\\kappa(s_1)$; each arrow is an isomorphism, the one for $j$ being the identical local ring on its open neighbourhood. From $h_0v=eh_1$ and $\\pi_0\\rho=v\\pi_1$ we get $pb_1=jh_0\\pi_0\\rho=jeh_1\\pi_1=a_1h_1\\pi_1$. The refinement gives $e(s_1)=s_0$, $\\rho(w_1)=w_0$, $\\pi_1(w_1)=y_1$, $h_1(y_1)=s_1$, so $b_1(w_1)=z$ and $a_1(s_1)=s$. It also supplies the singleton fibre, geometric integrality, relative dimension $n$ and purely transcendental residue extension.",
    "uses": [
-    "lem-trf-refined-quasi-finite-polynomial-pure-transcendental",
-    "sbc-lem-affine-space-smooth"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 052E, refined polynomial chart before the elementary etale construction"
-   }
-  },
-  {
-   "text": "Apply the elementary etale finite-neighbourhood lemma to $q:Z_0\\to A$. It gives $e:(Y_0,y_0)\\to(A,t)$ etale with $\\kappa(t)\\simeq\\kappa(y_0)$ and an open $W_0\\subset Z_0\\times_A Y_0$, finite over $Y_0$, whose fibre at $y_0$ is the single point $w_0$, mapping to $z$, with $\\kappa(z)\\simeq\\kappa(w_0)$. The map $b_0:W_0\\to Z$ is etale: it is an open immersion followed by the base change of $e$, then the open inclusion $Z_0\\to Z$. The composite $h_0:Y_0\\to A\\to S_0$ is smooth of relative dimension $n$ by permanence, since $e$ has relative dimension zero. Its marked residue extension is purely transcendental.",
-   "uses": [
-    "lem-weil-pbc-etale-local-finite-at-point-elementary",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-sbc-smooth-relative-dimension-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 052E, apply Tag 02LK over affine space, not over S"
-   }
-  },
-  {
-   "text": "Replace $Y_0$ by an affine open neighbourhood of $y_0$ and $W_0$ by its inverse image. Finiteness persists by base change, and this inverse image is open in the former $W_0$; hence the etale map to $Z$, the singleton fibre and marked residue fields persist. The restricted $h_0$ still has relative dimension $n$, since an open immersion is etale. Affine $Y_0$ and $S_0$ are quasi-compact and quasi-separated, so $h_0$ is quasi-compact and quasi-separated. Smoothness gives local finite presentation. Consequently $h_0$ is of finite presentation.",
-   "uses": [
-    "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-finite-morphism-permanence",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-pc-smooth-flat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 057K, affine neighbourhood of y and finite presentation of h"
-   }
-  },
-  {
-   "text": "The fibre $C=(Y_0)_s$ is smooth over $k=\\kappa(s)$ by base change; it is finite type since it is affine and its structure map is locally of finite presentation. Its point $y_0$ has purely transcendental residue field over $k$. Apply the smooth component lemma: the connected component $T$ of $y_0$ is an open quasi-compact geometrically integral $k$-scheme. In particular it is geometrically irreducible, as required for the next step.",
-   "uses": [
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-pc-smooth-flat",
-    "lem-trf-smooth-component-pure-transcendental",
-    "def-pc-geometrically-irreducible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 057K, component T; Tags 04KV, 056T and 033M"
-   }
-  },
-  {
-   "text": "Apply elementary etale spreading to the finitely presented smooth $h_0:Y_0\\to S_0$ and the geometrically irreducible open $T\\subset (Y_0)_s$. It gives affine $(S_1,s_1)\\to(S_0,s)$ etale with $\\kappa(s_1)\\simeq\\kappa(s)$, and a quasi-compact open $V\\subset Y_0\\times_{S_0}S_1$ with geometrically integral fibres and $V_{s_1}=T\\times_s s_1$. The map $V\\to Y_0$ is etale, being the restriction of the base change of $S_1\\to S_0$. The morphism $h_1:V\\to S_1$ is smooth of relative dimension $n$ by base change and restriction to an open.",
-   "uses": [
-    "lem-trf-geometrically-integral-fibre-neighbourhood",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-sbc-smooth-relative-dimension-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 057K, application of Tag 057J"
-   }
-  },
-  {
-   "text": "There is exactly one point $y_1$ of $Y_0\\times_{S_0}S_1$ over the pair $(y_0,s_1)$: the fibre-product point correspondence identifies these points with primes of $\\kappa(y_0)\\otimes_{\\kappa(s)}\\kappa(s_1)\\simeq\\kappa(y_0)$, a field. Its residue field is $\\kappa(y_0)$ compatibly with the projections, by the fibre-product residue-field theorem. Since $y_0\\in T$ and $V_{s_1}=T\\times_s s_1$, this point belongs to $V$. Therefore $\\kappa(y_1)/\\kappa(s_1)$ is the original purely transcendental extension under these field identifications.",
-   "uses": [
-    "lem-weil-pbc-fibre-product-points",
-    "lem-weil-pbc-fibre-product-point-residue-field"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 057K, point (y,s′) and its residue field"
-   }
-  },
-  {
-   "text": "Set $W_1=W_0\\times_{Y_0}V$, with projection $\\pi_1:W_1\\to V$. It is finite by base change. A point of its fibre at $y_1$ must map to $w_0$, since $w_0$ is the only point of $W_0$ over $y_0$. Points over $(w_0,y_1)$ correspond to primes of $\\kappa(w_0)\\otimes_{\\kappa(y_0)}\\kappa(y_1)\\simeq\\kappa(w_0)$. Thus there is exactly one such point $w_1$, and its residue field is $\\kappa(w_0)$ compatibly with the projection; in particular $\\kappa(z)\\to\\kappa(w_1)$ is an isomorphism. The map $W_1\\to W_0$ is etale, as a base change of $V\\to Y_0$, so $b_1:W_1\\to Z$ is etale. The morphism $a_1:S_1\\to S_0\\to S$ is etale and elementary at $s_1$. The pullback identities give $pb_1=a_1h_1\\pi_1$.",
-   "uses": [
-    "lem-weil-pbc-finite-morphism-permanence",
-    "lem-weil-pbc-fibre-product-points",
-    "lem-weil-pbc-fibre-product-point-residue-field",
-    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-trf-finite-smooth-integral-base-refinement",
     "lem-weil-pbc-etale-composition-cancellation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 057K, final pullback and the omitted marked-point details"
+    "place": "Tag 057K, lemma-local-local-structure-finite-type, proof from the connected component T through the outer pullback diagram and the marked residue-field identifications."
    }
   },
   {
-   "text": "For the affine refinement choose affine opens $U'\\subset S_1$ around $s_1$ and $V'\\subset h_1^{-1}(U')$ around $y_1$. Smoothness of $h_1$ implies flatness and local finite presentation, so $h_1$ is open. Hence $h_1(V')$ is an open neighbourhood of $s_1$ inside $U'$. Choose an affine open $U''\\subset h_1(V')$ containing $s_1$, and set $Y=V'\\cap h_1^{-1}(U'')$. The open fibre-product identification gives $Y=V'\\times_{U'}U''$. All three schemes on the right are affine, so $Y$ is affine by the affine fibre-product formula. Put $S_1^{\\mathrm{fin}}=U''$. By its choice, $Y\\to U''$ is surjective; it is still smooth of relative dimension $n$, since the open immersion $Y\\to V$ is etale and permanence applies with $m=0$.",
+   "text": "Apply [lem-trf-marked-finite-smooth-affine-refinement] to $W_1\\xrightarrow{\\pi_1}V\\xrightarrow{h_1}S_1,w_1$; step 2 supplies finiteness, singleton fibre, smooth relative dimension $n$ and geometrically integral fibres. Let $U,Y,W$ be its affine output, with inclusions $i_U,i_Y,i_W$ and marked points $s_1,y,w$. Put $a=a_1i_U$, $b=b_1i_W$ and use its restricted maps $\\pi,h$. By [lem-weil-pbc-etale-composition-cancellation], these composites are etale. The inclusions induce the residue-field identifications stated by the refinement, so both marked residue isomorphisms and the rational function extension persist. Its equations yield $pb=pb_1i_W=a_1h_1\\pi_1i_W=a_1i_Uh\\pi=ah\\pi$. Since the inclusions preserve the marked points, $b(w)=z$, $\\pi(w)=y$ and $h(y)=s_1$. Its conclusion supplies finiteness, singleton fibre, relative dimension $n$ and geometric integrality; rename $U$ as the final $S_1$.",
    "uses": [
-    "lem-weil-pbc-affine-opens-basis",
-    "lem-pc-smooth-flat",
-    "lem-weil-pbc-flat-lfp-open",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-trf-marked-finite-smooth-affine-refinement",
     "lem-weil-pbc-etale-composition-cancellation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 057L, affine opens U′,V′,U′′"
-   }
-  },
-  {
-   "text": "Every fibre of $Y\\to U''$ is a nonempty open subscheme of the corresponding geometrically integral fibre of $V\\to S_1$. After any extension of the residue field it is still an open subscheme, by the open fibre-product formula, and remains nonempty by base-change stability of surjectivity. A nonempty open of an irreducible space is irreducible: two nonempty relatively open subsets are nonempty opens in the ambient space and must meet. Reducedness persists since its local rings are unchanged on passing to an open subscheme. Thus every extended fibre is nonempty, irreducible and reduced, hence integral by definition. This proves geometric integrality of the final fibres.",
-   "uses": [
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-surjective-base-change",
-    "def-pc-integral-scheme",
-    "def-pc-geometrically-irreducible"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 057L, nonempty opens in geometrically integral fibres"
-   }
-  },
-  {
-   "text": "Finally let $W=W_1\\times_VY$ and restrict $\\pi_1$ to $\\pi:W\\to Y$. This is finite, so $W$ is affine because $Y$ is affine. The points $y_1,w_1$ remain in these open subschemes; rename them $y,w$. The fibre at $y$ is still $\\{w\\}$. Open restrictions preserve all three marked residue fields, and the maps $b:W\\to Z$ and $a:U''\\to S$ remain etale by composition with open immersions. The relative dimension, geometric integrality and purely transcendental residue extension were retained in the preceding steps, while the commutative identity restricts to $pb=ah\\pi$. Renaming $U''$ as $S_1$ gives every assertion of the item.",
-   "uses": [
-    "lem-weil-pbc-finite-morphism-permanence",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 057L, finite source over affine Y and restriction of the marked diagram"
+    "place": "Tag 057L, lemma-local-local-structure-finite-type-affine, proof: U prime, V prime, image W prime, U double prime, and the finite inverse image."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-opens-basis",
-  "lem-weil-pbc-lft-affine-pairs",
-  "def-kun-dimension",
-  "lem-trf-refined-quasi-finite-polynomial-pure-transcendental",
-  "sbc-lem-affine-space-smooth",
-  "lem-weil-pbc-etale-local-finite-at-point-elementary",
-  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-trf-finite-smooth-preliminary-chart",
+  "lem-trf-finite-smooth-integral-base-refinement",
   "lem-weil-pbc-etale-composition-cancellation",
-  "lem-sbc-smooth-relative-dimension-permanence",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-finite-morphism-permanence",
-  "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-pc-smooth-flat",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-trf-smooth-component-pure-transcendental",
-  "def-pc-geometrically-irreducible",
-  "lem-trf-geometrically-integral-fibre-neighbourhood",
-  "lem-weil-pbc-fibre-product-points",
-  "lem-weil-pbc-fibre-product-point-residue-field",
-  "lem-weil-pbc-flat-lfp-open",
-  "lem-weil-pbc-surjective-base-change",
-  "def-pc-integral-scheme"
+  "lem-trf-marked-finite-smooth-affine-refinement"
  ],
  "proof_origin": {
   "by": "document",
@@ -272,6 +130,34 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsEtale\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"]}",
    "date": "2026-10-18",
    "verdict": "no match: definitions and smooth/etale instances do not construct the finite-over-smooth diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type scheme morphism is etale locally finite over a smooth morphism with geometrically integral fibres, with affine source middle and base and a singleton marked finite fibre",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.isOpen_etaleLocus\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the marked finite-over-smooth construction or refinement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elementary etale finite over smooth local structure with geometrically integral fibres and purely transcendental marked residue field",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth\", \"Algebra.FormallyEtale.iff_unramified_and_smooth\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the marked finite-over-smooth construction or refinement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"finite\", \"smooth\"",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfSmooth\", \"AlgebraicGeometry.AffineSpace.instSmoothOverSchemeInferInstanceOverClassOfFinite\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the marked finite-over-smooth construction or refinement"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*smooth.*(factor|structure)|exists.*finite.*smooth|local.*structure.*finite",
+   "results": "{\"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/Geometry/Manifold/PartitionOfUnity.lean\", \"Mathlib/Geometry/Manifold/PartitionOfUnity.lean\", \"Mathlib/Geometry/Manifold/WhitneyEmbedding.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the marked finite-over-smooth construction or refinement"
   }
  ],
  "mathlib_match": null,
@@ -305,33 +191,24 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-etale-finite-smooth-local-structure",
   "worker": "stage1",
-  "summary": "Eleven steps following 052E, 057K and 057L. Three genuine geometric/algebraic inputs remain statement-only nodes; reuse the existing elementary etale finite-neighbourhood theorem and all permanence tools. No change to the statement. Both base changes and all marked residue fields are explicit.",
-  "blueprint": "The 057K--057L ingredient of the 057S flatification route under lem-trf-local-term-locality, recorded by the existing blueprint.from chain.",
-  "tool_uses": [
-   {
-    "node": "sbc-lem-affine-space-smooth",
-    "why": "The polynomial chart needs affine space smooth of the stated dimension; this is a general scheme tool, not a replacement of the trace route."
-   },
-   {
-    "node": "lem-sbc-smooth-relative-dimension-permanence",
-    "why": "Base change and composition with etale/open morphisms preserve the exact relative dimension; the current unit has no separate permanence theorem."
-   }
-  ]
+  "summary": "Repair of the 6406-character proof: three comparable independent statement-only work packages carry old steps 1--4, 5--8 and 9--11, respectively. The item statement is unchanged and its proof is now a short three-step assembly. The report preserves all eleven old arguments verbatim, with their citations and work-package mapping. Rebased for the side-completion promotion return: current read-copy item and retained returned snapshot agree; re-read current cited statements, and made both residue-map composites and restricted commutative-diagram equations explicit in assembly steps 2--3. On the resumed promotion-return repair, compared the retained returned head with the current read-copy item again and explicitly recorded all marked-point equations in the three assembly steps; the item statement and all three work-package interfaces remain unchanged. Rechecked against the current DAG on 2026-10-23; the two newly present 057K component/field-theory nodes do not subsume either geometric interface, with all four comparisons recorded in the report. All assembly citations and induced marked maps revalidated.",
+  "blueprint": "The 057K--057L ingredient of the 057S flatification route under lem-trf-local-term-locality, recorded by the existing blueprint.from chain. The three new nodes subdivide the existing 052E/057K/057L geometric input; the unit route is unchanged.",
+  "tool_uses": []
  },
  "tool_uses": [
   "sbc-lem-affine-space-smooth",
   "lem-sbc-smooth-relative-dimension-permanence"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q29-62e9524e5",
-  "group": "Q29",
+  "reviewer": "NT-cc-Q103-be0a1b2a0",
+  "group": "Q103",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-62e9524e5 (reviewer sub-agent of L); spot-checked: FIX: the mathematics is correct and complete; two citations were missing, now added. Sources read: Stacks 052E, 057J (with 055W), 057K, 057L, algebra 0520, varieties 04KV and 056T, and Properties 033M via 057J's and 057K's proofs. The item statement is unchanged and matches 057K clauses (1)-(6) plus 057L clause (7). Geometrically integral includes nonempty fibres; step 9 makes h surjective, so this holds. Not a target node, so the coefficient-category check does not apply. No SGA is cited. All 11 steps were checked against the cited node statements. Step 3 applies the elementary etale lemma over A^n, as 052E does. Steps 7 and 8 compute the unique points over (y0,s1) and (w0,y1) from tensor products of residue fields that are fields, which writes out 057K's omitted details. Steps 9 and 10 give surjectivity and nonempty open fibres. New nodes are all true, statement-only and not duplicates. (1) refined-quasi-finite: 0520 in scheme form; the image prime (p,x_{r+1},...,x_n) has residue field kappa(p)(x_1..x_r) and r<=n; tested at n=0, the generic point of A^n and a closed point of A^1. The 00QE and lem-sbc chart nodes have no prescribed image prime. (2) smooth-component: 04KV, 056T and 033M; checked at r=0, disconnected C and Spec C over R. (3) fibre-neighbourhood: 057J with 056W; not a restatement of the item. The two declared tool uses (sbc-lem-affine-space-smooth, lem-sbc-smooth-relative-dimension-permanence) are accepted. Fixes in fixes/dag/nodes/sec-trace-formula/lem-trf-etale-finite-smooth-local-structure.json: step 1 now cites lem-weil-pbc-open-fibre-product for (Z^a)_s being open in Z_s, and step 9 cites lem-weil-pbc-etale-composition-cancellation for 'open immersion is etale' in the relative-dimension claim. proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-be0a1b2a0 (reviewer sub-agent of L); spot-checked: This is the fourth delivery of the 2026-10-21 re-split; the earlier heads were fbc4942f, 92f57608 and 7182833f. Against 7182833f, the three new nodes are byte-identical. The item changes only in split_report.date and split_report.summary. The report adds pairwise comparisons with three nodes that appeared on the base since then: lem-trf-finite-type-component-open-qc and lem-trf-pure-transcendental-relatively-algebraically-closed (created by Q48 for smooth-component), and lem-trf-coordinate-prime-affine-chart-realization (created by Q74 for refined-quasi-finite). These are splits of the item's dependencies, not duplicates of the new nodes. I re-read the mathematics in full, with more-morphisms.tex at 052E, 057J, 057K and 057L, each checked against tags/tags. The item statement is unchanged and matches 057K (1)-(6) plus 057L (7). The re-split order is met. The old 11-step, 6406-character proof is carried by three independent, statement-only, unsplit nodes of comparable size (about 2.2k, 2.2k and 2.0k characters of argument), and the assembly is 3 steps and 2447 characters. Node 1, preliminary-chart: 052E over an affine open, then an affine Y0, which gives h0 of finite presentation (qcqs + lfp). Node 2, integral-base-refinement: the component T is geometrically integral because the residue field is purely transcendental (04KV/056T). 057J (DAG lem-trf-geometrically-integral-fibre-neighbourhood) gives V with all fibres geometrically integral, including nonempty. The unique y1 and w1 come from tensor products of residue fields that are fields, and v and rho are etale. Node 3, affine-refinement (057L): smooth is open; U'' is chosen inside h1(V'), which makes Y surjective; Y = V'x_{U'}U'' is affine; the open fibres stay nonempty and integral after field extension; W is affine because it is finite over Y. Assembly: each step's hypotheses are the previous outputs. lem-weil-pbc-etale-composition-cancellation clause (1) makes j etale and clause (2) composes the etale maps. The residue composites are isomorphisms, and pb = ah*pi follows from the fibre-product squares. Edge cases checked: n=0, r=0, a disconnected fibre, Spec C/R (excluded by hypothesis), and non-Noetherian bases. rg -L over dag/nodes for 052E/057K/057L and finite-over-smooth found no duplicates; I also opened the synchronized-chart-shrink, geonormal-geoconnected, normalized-prime-lift, connected-point and devissage-flatness nodes. No parallel split of the item exists. No SGA is cited. No new tool_uses and no fixes."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.EtaleFiniteSmoothLocalStructure",
@@ -352,5 +229,16 @@
   "result": "fix",
   "note": "Statement checked clause by clause against the node and Stacks 057K (1)-(6) and 057L (7). The fibre dimension is fixed as a natural number at p.asFiber z; residue-field isos are the maps induced by b and a; finite pi with singleton fibre; SmoothOfRelativeDimension n; Mathlib GeometricallyIntegral, which includes nonempty fibres; the landed purely-transcendental predicate with the algebra induced by h (finite generating set since kappa(y) is finitely generated). No extra hypotheses, no universe restriction; edge cases n=0, r=0, any characteristic and non-reduced schemes covered. Recorded dependency declarations are the ones used; no duplicate definition. The node diff adds only the lean record, whose statement is verbatim in the file. Docstrings carry source, blueprint id and all 11 proof steps; proof is sorry; no hollow definition. Delivered and fixed files compile cleanly with nt_compile.py --json; a deliberately broken copy did print its error. Only finding: H9, unused imports Mathlib.RingTheory.MvPolynomial.Basic and Mathlib.RingTheory.Localization.FractionRing. fixes/EtaleFiniteSmoothLocalStructure.lean is the complete module with these removed and the statement unchanged."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

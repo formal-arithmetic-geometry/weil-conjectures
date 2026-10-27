@@ -58,7 +58,43 @@
   "def-weil-geometric-hypotheses",
   "def-weil-scheme-morphism-properties"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Compactification.Refinement",
+    "AlgebraicGeometry.Compactification.category"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Compactification.Refinement",
+     "module": "WeilConjectures.Compactification.RefinementCategory",
+     "lines": [
+      48,
+      57
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Compactification.category",
+     "module": "WeilConjectures.Compactification.RefinementCategory",
+     "lines": [
+      97,
+      122
+     ],
+     "kind": "instance",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "def-weil-compactifications-refinements",
@@ -93,5 +129,15 @@
   "group": "Q52",
   "result": "pass",
   "note": "Re-delivery after RETURN d3438d3454a7; both findings repaired. H2/H12: dropped theorem stmt_deps prop-finite-compact-support-constructibility and cor-exc-base-change-open-immersion-general; finiteLevelCompactSupport inlined as its exact sfIntrinsicCompactSupport body (pure unfolding, checked by line diff); comparison owned via def-sf-intrinsic-compact-support-realization, HasProEtaleTorAmplitude via def-weil-proetale-tor-amplitude (CoefficientProEtaleTorAmplitude imported). H2/H13: def-weil-finite-tor-amplitude byte-identical to live NW record. def-weil-compactifications-refinements lean-only RefinementCategory rebind kept (accepted). Only item and that dep differ from side-live; all 13 stmt_deps are def nodes, no cycle, none dropped. H3 clause table, edge cases (X empty, n=1, d=0, a=b, f=id, extra components, nonreduced) and universes ok; statement verbatim; single sorry; helpers non-hollow; docstrings ok. No compile (no change). Advisory: sfIntrinsicDerivedEquivalence has no node record (pre-existing); redundant ∃ α binder."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $f:X\\to Y$ be a morphism of schemes (typically $X$ and $Y$ are\nfinite-type [def-weil-scheme-morphism-properties] schemes over a base $S$ and\n$f$ is a separated finite-type $S$-morphism). A *compactification*\n$c=(j,\\bar f)$ of $f$ is a factorization\n\n$$\n X\\xrightarrow{j}\\overline X\\xrightarrow{\\bar f}Y\n$$\n\nwith $j$ an open immersion, $\\bar f$ proper, and $\\bar f\\circ j=f$. A\n*refinement* $u:c_1\\to c_2$ is a $Y$-morphism\n\n$$\n u:\\overline X_1\\longrightarrow\\overline X_2\n$$\n\nsuch that $u\\circ j_1=j_2$; it is automatically proper, since $\\overline X_1$\nis proper and $\\overline X_2$ is separated over $Y$. Compactifications and\nrefinements, with composition of the underlying morphisms, form a category\n$\\operatorname{Comp}(f)$.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

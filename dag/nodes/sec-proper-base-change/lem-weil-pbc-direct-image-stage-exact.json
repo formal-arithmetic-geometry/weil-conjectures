@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-direct-image-stage-exact",
+ "kind": "statement",
+ "title": "Unique normalized exact shift on each direct-image stage",
+ "statement": "Fix universes u and w, a prime natural number l, and an algebraic closure Ω : Type w of ℚ_[l], with its given field and algebra structures. Let X and Y be schemes in universe u, each Noetherian and of finite topological Krull dimension, with l invertible in every stalk. Write dT and iT for the respective dimension and invertibility witnesses for each scheme T. All preservation hypotheses, functors, comparisons and conclusions are quantified exactly as follows.\n\ntheorem pbcDirectImageStageShift_exists (f : X ⟶ Y)\n    (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω)\n      (K : pbcIntegralStage l Ω X E),\n      PbcIsBoundedConstructibleComplete Y (pbcStageDatum.{u} l Ω E)\n        ((pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)).obj K.obj))\n    (E : Padic.FiniteCoefficientFields l Ω) :\n    ∃! s : (pbcDescentDirectImage l Ω f pres E).CommShift ℤ,\n      PbcDirectImageStageShiftSpec l Ω f pres E s\n\nThe normalized shifts use the stated integral and rational operations, without a changed triangulation. Definitions are those of [def-weil-pbc-descent-interfaces], [def-per-rational-direct-image-family] and [def-weil-pbc-finite-stage-pair-category].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+  "place": "Final operations paragraph, direct-image exactness and compatibility with coefficient shifts; PbcDirectImageStageExact"
+ },
+ "stmt_deps": [
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-rational-transport",
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-descent-interfaces",
+  "def-per-rational-direct-image-family"
+ ],
+ "proof": [
+  {
+   "text": "the full integral subcategories inherit their triangulations from the\nambient derived categories. Ordinary right-derived direct image is exact, so\nits restriction is exact by full faithfulness. The universal localization shift\nis uniquely fixed by its identity integral square. Every distinguished rational\ntriangle is isomorphic to the image of an integral distinguished triangle.\nThe restriction takes that integral triangle to a distinguished triangle, and\nits rational image is distinguished. The localization square identifies it\nwith the image under rational direct image, proving exactness. Uniqueness of\nshift already follows from the normalized integral square, without any\nnonvanishing or nonempty-scheme hypothesis.",
+   "uses": [
+    "prop-weil-pbc-common-stage-calculus",
+    "thm-weil-pbc-verdier-axioms",
+    "prop-weil-pbc-rational-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-common-stage-calculus",
+  "thm-weil-pbc-verdier-axioms",
+  "prop-weil-pbc-rational-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+  "place": "Final operations paragraph, direct-image exactness and compatibility with coefficient shifts; PbcDirectImageStageExact"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact scalar compatible direct image and completed pullback families descend from integral derived categories to rational coefficient stages, and their exchange is scalar compatible",
+   "results": "8 hits: IsScalarTower.rat, PresheafOfModules.pullback and pullbackPushforwardAdjunction, sheafificationCompPullback, scalar towers and scalar-localized modules. None provides the normalized derived coefficient family or its exchange compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scalar compatible family of direct image or completed pullback functors on derived coefficient categories is coherent and exact after rational localization",
+   "results": "8 hits about linear derived functors, derived localization, and Ext; none supplies normalized coefficient-stage coherence or exchange compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "12 hits: CommShift, identities, composition, ofIso_compatibility and ofComp_compatibility; useful local shift interfaces, no coefficient-family theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*[Ee]xchange|[Ee]xchange.*scalar",
+   "results": "No Mathlib hits. Project search finds the ambient pbcScalarCompletedExchange and rationalized equation, but no normalized StageSystem.Morphism.Hom construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcDescentFunctors",
+  "date": "2026-10-22",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-descent-functors",
+   "place": "Final operations paragraph, direct-image exactness and compatibility with coefficient shifts; PbcDirectImageStageExact",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PbcDirectImageStageExact",
+  "file": "lean/Sheaf/Paper/PbcDirectImageStageExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbcDirectImageStageShift_exists",
+  "statement": "theorem pbcDirectImageStageShift_exists (f : X ⟶ Y)\n    (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω)\n      (K : pbcIntegralStage l Ω X E),\n      PbcIsBoundedConstructibleComplete Y (pbcStageDatum.{u} l Ω E)\n        ((pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)).obj K.obj))\n    (E : Padic.FiniteCoefficientFields l Ω) :\n    ∃! s : (pbcDescentDirectImage l Ω f pres E).CommShift ℤ,\n      PbcDirectImageStageShiftSpec l Ω f pres E s",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-22",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcDirectImageStageShift_exists",
+   "AlgebraicGeometry.Scheme.PbcDirectImageStageShiftSpec",
+   "AlgebraicGeometry.Scheme.pbcDirectImageStageCommShift"
+  ]
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-direct-image-stage-exact",
+  "worker": "stage3",
+  "summary": "Unique normalized exact shift on each direct-image stage. The stage exactness theorem is proved; the comparison theorem is the remaining separate scalar-shift equation.",
+  "blueprint": "The final operations paragraph uses rational exact transport and shift compatibility. Whole-blueprint searches for direct-image family and shift equations return no equivalent blueprint statement.",
+  "edge_cases": "Identity morphisms, empty schemes, repeated coefficient fields, independently sized coefficient algebraic closures, and proof-irrelevant preservation witnesses keep the same statement."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-f13bb",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T113810-L-253425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-f13bb",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T113810-L-253425",
+  "kind": "interface",
+  "note": "independent cc review: delivered PbcDescentFunctors + 8 new modules and nodes against the clone (moved defs byte-identical), the item/sorry statements against PbcScalarExtension exchange routes, and the 9 direct importers compiled against the delivered modules (all rc 0); #print axioms only upstream sorryAx"
+ }
+}

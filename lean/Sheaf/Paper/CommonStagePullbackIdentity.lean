@@ -22,6 +22,7 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u v
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
+attribute [local irreducible] ScalarLocalization.category
 open AlgebraicallyClosedCoefficients (Index Coefficient)
 open GeneralAlgebraicallyClosedCoefficients
 

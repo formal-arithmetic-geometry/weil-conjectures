@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-flag-projective-linear-system",
+ "kind": "statement",
+ "title": "Projective complete linear systems on a Borel quotient",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Group schemes and their homomorphisms are as in [def-sc-group-scheme]. All algebraic groups in this statement are affine and of finite type over $F$ [def-pc-scheme, def-weil-finite-type-morphism]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A Borel subgroup of a smooth connected group $G$ is a maximal smooth connected solvable closed subgroup; solvable means that iterating the derived subgroup eventually gives the trivial group, and the derived subgroup is the smallest closed subgroup through which the commutator morphism factors. Let $G$ be smooth connected and $B\\subseteq G$ a Borel subgroup. The quotient $Q=G/B$ means the $F$-scheme representing the fppf sheafification of $A\\mapsto G(A)/B(A)$ on commutative $F$-algebras; here fppf coverings are jointly surjective faithfully flat finitely presented coverings. Write $\\pi:G\\to Q$ for the quotient morphism. Let $\\mathcal L$ be an invertible $\\mathcal O_Q$-module (Zariski locally isomorphic to $\\mathcal O_Q$), with $V=\\Gamma(Q,\\mathcal L)\\ne0$. For a nonzero finite-dimensional $F$-vector space $V$, $\\mathbf P(V)$ is the scheme of one-dimensional quotients of $V$, with tautological quotient line bundle $\\mathcal O_{\\mathbf P(V)}(1)$; $\\operatorname{GL}(V)$ is the group scheme $A\\mapsto\\operatorname{Aut}_A(V\\otimes_F A)$, $\\operatorname{SL}(V)$ is its determinant-one subgroup, and $\\operatorname{PGL}(V)$ is the fppf sheaf quotient of $\\operatorname{GL}(V)$ by its scalar subgroup $\\mathbf G_m$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. Then $V$ is finite-dimensional, evaluation $V\\otimes_F\\mathcal O_Q\\to\\mathcal L$ is surjective, and there is a group-scheme homomorphism $a:G\\to\\operatorname{PGL}(V)$ for which its evaluation morphism $t:Q\\to\\mathbf P(V)$ is equivariant for left translation of $G$ on $Q$, and $t^*\\mathcal O_{\\mathbf P(V)}(1)\\simeq\\mathcal L$. The tautological line has its natural $\\operatorname{GL}(V)$-linearization: an algebraic left action on its total space, linear on fibres and covering the projective action, satisfying the group action identities. All equivariance assertions are identities of scheme morphisms, hence hold after every commutative $F$-algebra extension.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 18.22, proof, printed p.393, paragraph beginning Let V, and 18.12--18.13, printed p.390: projective complete-linear-system maps and the homogeneous tautological line (Iversen 1976, 1.2--1.3)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-homogeneous-orbit-quotient-geometry], the represented quotient $Q$ is separated and of finite type over $F$. By [lem-sfb-borel-characteristic-picard-sequence], $\\pi$ is a Zariski locally trivial $B$-torsor. Its local product description makes it of finite presentation (on a trivializing open it is projection from the finite-type $F$-group $B$), and gives the ratio and local-lifting conditions of [lem-sfb-borel-quotient-proper-geometry]. That node therefore makes $G$ and $Q$ smooth geometrically integral, and $Q$ proper and Noetherian. By [lem-sfb-borel-quotient-affine-space-cell], $Q$ has a dense affine-space open. An invertible sheaf is quasi-coherent and finitely presented: on each trivializing open it is the free module of rank one. Thus [lem-fin-proper-coherent-finite-dimensional], in degree zero, gives $\\dim_F V<\\infty$. By [lem-pc-h0-proper-variety], $\\Gamma(Q,\\mathcal O_Q)=F$.",
+   "uses": [
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-borel-characteristic-picard-sequence",
+    "lem-sfb-borel-quotient-proper-geometry",
+    "lem-sfb-borel-quotient-affine-space-cell",
+    "lem-fin-proper-coherent-finite-dimensional",
+    "lem-pc-h0-proper-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22, printed p.393, construction of f and t; expanded using the cited generic inputs."
+   }
+  },
+  {
+   "text": "Write $c:Q\\times_FG\\to Q$, $c(x,g)=g^{-1}x$. Apply [lem-sfb-affine-cell-picard-product] to $X=Q$, $T=G$, $t_0=e$ and $H=c^*\\mathcal L$. Its hypotheses hold by step 1, and $H_e=\\mathcal L$ by the action identity. We obtain a line bundle $N$ on $G$ and an isomorphism $c^*\\mathcal L\\cong p_Q^*\\mathcal L\\otimes p_G^*N$. Trivialize $N$ on an affine open cover $G_i=\\operatorname{Spec}A_i$ of $G$. This gives isomorphisms $\\phi_i:c^*\\mathcal L\\to p_Q^*\\mathcal L$ on $Q\\times G_i$; on each overlap their ratio is multiplication by a unit pulled back from the overlap. In particular every translation by an element of $G(F)$ preserves the isomorphism class of $\\mathcal L$.",
+   "uses": [
+    "lem-sfb-affine-cell-picard-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22, printed p.393, construction of f and t; expanded using the cited generic inputs."
+   }
+  },
+  {
+   "text": "Choose $0\\ne s\\in V$. It is nonvanishing on a nonempty open of $Q$: on a trivializing open a nonzero local representative is a nonzero regular function on the integral scheme $Q$, so its principal open is nonempty. By [lem-sc-lft-over-field-jacobson-space] and [lem-weil-pbc-closed-point-residue-field-base] this open has a point $y\\in Q(F)$. By [lem-sfb-homogeneous-orbit-quotient-geometry], $Q(F)=G(F)/B(F)$; hence for every $x\\in Q(F)$ there is $g\\in G(F)$ with $g^{-1}x=y$. The isomorphism in step 2 sends the inverse-translate of $s$ to a global section nonzero at $x$. Thus the evaluation map is surjective at every closed point. In a local trivialization its cokernel is $\\mathcal O_Q/(s_1,\\ldots,s_r)$ for a basis of $V$; its support is closed. If that support were nonempty it would contain a closed point by the same Jacobson node, a contradiction. Evaluation is therefore surjective everywhere.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sfb-homogeneous-orbit-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22, printed p.393, construction of f and t; expanded using the cited generic inputs."
+   }
+  },
+  {
+   "text": "The quotient classification [lem-trf-projective-bundle-quotient-geometry], for $S=\\operatorname{Spec}F$ and the quasi-coherent module associated to $V$, now turns evaluation into $t:Q\\to\\mathbf P(V)$ with a quotient-compatible isomorphism $t^*\\mathcal O(1)\\cong\\mathcal L$. We use exactly its convention $\\mathbf P(V)=\\operatorname{Proj}(\\operatorname{Sym}V)$, classifying rank-one quotients, rather than the convention of lines in $V$.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22, printed p.393, construction of f and t; expanded using the cited generic inputs."
+   }
+  },
+  {
+   "text": "By [lem-pc-flat-base-change-cohom] in degree zero, for every $F$-algebra $A$ the pullback map identifies $\\Gamma(Q_A,\\mathcal L_A)$ with $V\\otimes_FA$, naturally in $A$. On $G_i$, compose inverse-translation pullback with $\\phi_i$ to obtain an invertible $A_i$-linear operator\n$$R_i(g)s(x)=\\phi_{i,(x,g)}\\bigl(s(g^{-1}x)\\bigr).$$\nInvertibility follows by applying the inverse isomorphism of line bundles and the inverse of the automorphism $(x,g)\\mapsto(g^{-1}x,g)$ of $Q\\times G_i$ over $G_i$. Choose an $F$-basis of $V$. The matrix entries of $R_i$ and its inverse belong to $A_i$, so $R_i:G_i\\to\\operatorname{GL}(V)$ is a scheme morphism. On overlaps the operators differ by the scalar transition unit of $N$. Their images therefore glue in the quotient sheaf $\\operatorname{GL}(V)/\\mathbf G_m=\\operatorname{PGL}(V)$ to a scheme morphism $a:G\\to\\operatorname{PGL}(V)$, independent of the trivializations.",
+   "uses": [
+    "lem-pc-flat-base-change-cohom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22, printed p.393, construction of f and t; expanded using the cited generic inputs."
+   }
+  },
+  {
+   "text": "To check multiplication, work on affine opens of $G\\times G$ where the line $N$ is trivial on both factors and after multiplication. Both $R(g)R(h)$ and $R(gh)$ are obtained from isomorphisms from $\\mathcal L_{h^{-1}g^{-1}x}$ to $\\mathcal L_x$, because $h^{-1}g^{-1}=(gh)^{-1}$. Their ratio is an automorphism of an invertible sheaf, hence a unit on $Q\\times\\operatorname{Spec}A$. By [lem-pc-h0-proper-variety] and [lem-pc-flat-base-change-cohom] applied to $\\mathcal O_Q$, this ring is $A$; the ratio is a scalar unit from $A$. Consequently $[R(g)R(h)]=[R(gh)]$ in PGL on these opens, and thus globally. The same calculation at $e$ makes $R(e)$ scalar, so $a(e)=1$. These are identities of scheme morphisms, proving that $a$ is a group-scheme homomorphism. The scalar argument was over the universal parameter opens, so it is valid after arbitrary, including nonreduced, base change.",
+   "uses": [
+    "lem-pc-h0-proper-variety",
+    "lem-pc-flat-base-change-cohom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22, printed p.393, construction of f and t; expanded using the cited generic inputs."
+   }
+  },
+  {
+   "text": "The natural left action of $u\\in\\operatorname{GL}(V)$ on a quotient $q:V_A\\twoheadrightarrow M$ sends it to $q\\circ u^{-1}$. Quotient functoriality in [lem-trf-projective-bundle-quotient-geometry] makes this an algebraic action, and scalar matrices fix its projective point, so it descends to PGL. On $Q\\times G_i$, the defining formula for $R_i$ gives\n$$\\operatorname{ev}_{gx}\\circ R_i(g)=\\phi_{i,(gx,g)}\\circ\\operatorname{ev}_x.$$\nThus $\\operatorname{ev}_{gx}$ and $\\operatorname{ev}_x\\circ R_i(g)^{-1}$ are isomorphic quotient pairs. The quotient classification identifies their morphisms: $t(gx)=a(g)t(x)$. This is an identity over $G_i\\times Q$, and hence over $G\\times Q$ after gluing. Its pullback gives the asserted equivariance for every $F$-algebra.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22, printed p.393, construction of f and t; expanded using the cited generic inputs."
+   }
+  },
+  {
+   "text": "Finally the same quotient functor supplies the tautological $\\operatorname{GL}(V)$-linearization: over a point $q:V_A\\twoheadrightarrow M$, send the fibre $M$ linearly by the identity to the fibre presented by $q\\circ u^{-1}:V_A\\twoheadrightarrow M$. This rule respects isomorphisms of quotient pairs and arbitrary pullbacks, so [lem-trf-projective-bundle-quotient-geometry] makes it an algebraic isomorphism between the two pulled-back tautological lines on $\\operatorname{GL}(V)\\times\\mathbf P(V)$. The formula for two successive operations is $q\\circ v^{-1}\\circ u^{-1}=q\\circ(uv)^{-1}$; identity matrices give the identity. These equalities also hold on the fibres, proving the action and cocycle identities. Thus the induced action on the total line is algebraic and linear on fibres, as in Milne 18.12--18.13.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "18.12--18.13, printed p.390; tautological homogeneous line, in the quotient convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-borel-characteristic-picard-sequence",
+  "lem-sfb-borel-quotient-proper-geometry",
+  "lem-sfb-borel-quotient-affine-space-cell",
+  "lem-fin-proper-coherent-finite-dimensional",
+  "lem-pc-h0-proper-variety",
+  "lem-sfb-affine-cell-picard-product",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-pc-flat-base-change-cohom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 18.22, printed p.393 and 18.12--18.13, printed p.390; explicit product-Picard, local-matrix and quotient-functor construction of the asserted canonical maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every line bundle with nonzero sections on the flag variety of a connected linear algebraic group has an equivariant complete linear system for a projective representation of the group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.instEnoughProjectives\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Monoid G], CategoryTheory.EnoughProjectives (Rep k G)\", \"doc\": \"For any commutative ring $ k $ and monoid $ G $, the category $ \\\\text{Rep}(k, G) $ of representations of $ G $ over $ k $ has enough projective objects. Specifically, for every representation $ X $ in\"}\n  {\"name\": \"Rep.diagonal_succ_projective\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G] {n : ℕ},\\n  CategoryTheory.Projective (Rep.diagonal k G (n + 1))\", \"doc\": \"For any commutative ring $k$, group $G$, and natural number $n$, the diagonal representation in $\\\\text{Rep}(k, G)$ constructed from $n + 1$ copies of a $k$-module is a projective object in the categor\"}\n  {\"name\": \"Rep.leftRegular_projective\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G], CategoryTheory.Projective (Rep.leftRegular k G)\", \"doc\": \"For any commutative ring $ k $ and group $ G $, the left regular representation of $ G $ over $ k $ is a projective object in the category $ \\\\text{Rep}(k, G) $ of representations of $ G $ over $ k $.\"}\n  {\"name\": \"Rep.free_projective\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G α : Type u} [inst_1 : Group G], CategoryTheory.Projective (Rep.free k G α)\", \"doc\": \"For any commutative ring $k$, group $G$, and type $\\\\alpha$, the free representation $\\\\text{Rep}(k, G)$ constructed on the module of finite support functions $\\\\alpha \\\\to_0 (G \\\\to_0 k)$ is a projective \"}\n  {\"name\": \"Rep.instProjective\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [NeZero ↑(Fintype.card G)]\\n  (V : Rep k G), CategoryTheory.Projective V\", \"doc\": \"Every object $ V $ in the category $ \\\\text{Rep}(k, G) $ of representations of a monoid $ G $ over a ring $ k $ is a projective object. This means that for any epimorphism $ e : A \\\\to B $ in $ \\\\text{Re\"}\n  {\"name\": \"Rep.trivial_projective_of_subsingleton\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G] [Subsingleton G],\\n  CategoryTheory.Projective (Rep.trivial k G k)\", \"doc\": \"If $ G $ is a trivial group (i.e., a subsingleton), then the trivial representation of $ G $ over the commutative ring $ k $ is a projective object in the category of representations $ \\\\text{Rep}(k, G\"}\n  {\"name\": \"FDRep.instProjectiveOfNeZeroCastCard\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [NeZero ↑(Fintype.card G)]\\n  (V : FDRep k G), CategoryTheory.Projective V\", \"doc\": \"Every finitely generated representation of a finite group $ G $ over a field $ k $ is projective in the category of finitely generated representations, provided that the cardinality of $ G $ (interpre\"}\n  {\"name\": \"Rep.standardResolution\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Group G] → CategoryTheory.ProjectiveResolution (Rep.trivial k G k)\", \"doc\": \"For a commutative ring $k$ and group $G$, this constructs a projective resolution of the trivial $G$-representation on $k$ within the category $\\\\text{Rep}(k, G)$. The resolution uses the standard chai\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: projective objects in Rep and abstract actions on projective points do not construct the group-scheme projective action of an unlinearized flag line bundle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The action of an algebraic group on its flag variety induces an action on the projective space of global sections of any effective invertible sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Projectivization.instMulAction\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"{G : Type u_1} →\\n  {K : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : AddCommGroup V] →\\n        [inst_1 : DivisionRing K] →\\n          [inst_2 : Module K V] →\\n            [inst_3 : Group G] →\\n              [inst_4 : DistribMulAction G V] → [SMulCommClass G K V] → MulAction G (Projectivization K V)\", \"doc\": \"For a group $G$ acting distributively on a module $V$ over a division ring $K$ (with commuting scalar multiplications between $G$ and $K$), this constructs a group action of $G$ on the projectivizatio\"}\n  {\"name\": \"Projectivization.smul_def\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"∀ {G : Type u_1} {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  [inst_3 : Group G] [inst_4 : DistribMulAction G V] [inst_5 : SMulCommClass G K V] (g : G) (x : Projectivization K V),\\n  SMul.smul g x = Projectivization.map ((DistribMulAction.toM\", \"doc\": \"Given a group $G$ acting distributively on a module $V$ over a division ring $K$ with commuting scalar multiplications between $G$ and $K$, there exists a well-defined group action of $G$ on the proje\"}\n  {\"name\": \"Projectivization.smul_mk\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"∀ {G : Type u_1} {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  [inst_3 : Group G] [inst_4 : DistribMulAction G V] [inst_5 : SMulCommClass G K V] (g : G) {v : V} (hv : v ≠ 0),\\n  g • Projectivization.mk K v hv = Projectivization.mk K (g • v) ⋯\", \"doc\": \"For a group $ G $ acting distributively on a module $ V $ over a division ring $ K $, the induced action of $ G $ on the projectivization $ \\\\mathbb{P}_K(V) $ satisfies that for any non-zero vector $ v\"}\n  {\"name\": \"Projectivization.generalLinearGroup_smul_def\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"∀ {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  (g : LinearMap.GeneralLinearGroup K V) (x : Projectivization K V), g • x = Projectivization.map ↑g.toLinearEquiv ⋯ x\", \"doc\": \"For any invertible linear transformation $ g \\\\in \\\\mathrm{GL}(K, V) $ and any projective point $ x \\\\in \\\\mathbb{P}_K(V) $ (represented by a nonzero vector $ v \\\\in V $), the group action $ g \\\\cdot x $ is\"}\n  {\"name\": \"OnePoint.instGLAction\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"{K : Type u_1} → [inst : Field K] → [DecidableEq K] → MulAction (GL (Fin 2) K) (OnePoint K)\", \"doc\": \"The general linear group $ \\\\mathrm{GL}(2, K) $ acts on the one-point compactification $ \\\\text{OnePoint}\\\\, K $ of a field $ K $, induced by its natural action on the projective line over $ K $. This ac\"}\n  {\"name\": \"Projectivization.exists_smul_eq_mk_rep\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Basic\", \"type\": \"∀ (K : Type u_1) {V : Type u_2} [inst : DivisionRing K] [inst_1 : AddCommGroup V] [inst_2 : Module K V] (v : V)\\n  (hv : v ≠ 0), ∃ a, a • v = (Projectivization.mk K v hv).rep\", \"doc\": \"Let $V$ be a module over a division ring $K$. For any non-zero vector $v \\\\in V$, there exists an invertible scalar $a \\\\in K^\\\\times$ such that $a \\\\cdot v$ is equal to the representative of the projecti\"}\n  {\"name\": \"instMulActionRayVector\", \"module\": \"Mathlib/LinearAlgebra/Ray\", \"type\": \"{M : Type u_2} →\\n  [inst : AddCommMonoid M] →\\n    {G : Type u_5} → [inst_1 : Group G] → [DistribMulAction G M] → {R : Type u_6} → MulAction G (RayVector R M)\", \"doc\": \"Given a group $G$ and an additive commutative monoid $M$ equipped with a distributive multiplicative action of $G$, there is an induced group action of $G$ on the non-zero vectors (rays) in $M$. This \"}\n  {\"name\": \"instMulActionRay\", \"module\": \"Mathlib/LinearAlgebra/Ray\", \"type\": \"{R : Type u_1} →\\n  [inst : CommSemiring R] →\\n    [inst_1 : PartialOrder R] →\\n      [inst_2 : IsStrictOrderedRing R] →\\n        {M : Type u_2} →\\n          [inst_3 : AddCommMonoid M] →\\n            [inst_4 : Module R M] →\\n              {G : Type u_5} →\\n                [inst_5 : Group G] →\\n              \", \"doc\": \"For any group $ G $ and module $ M $ over a strictly ordered commutative semiring $ R $, there is a group action of $ G $ on the rays of $ M $. This action is defined by scalar multiplication, where e\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: projective objects in Rep and abstract actions on projective points do not construct the group-scheme projective action of an unlinearized flag line bundle"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\", \"Representation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: projective objects in Rep and abstract actions on projective points do not construct the group-scheme projective action of an unlinearized flag line bundle"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]rojective[Rr]epresentation|[Ll]inear[Ss]ystem|[Ll]inearization",
+   "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"24\", \"text\": \"`k`-linear `G`-representation. This simplicial object is the `linearization` of the simplicial\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"172\", \"text\": \"    (classifyingSpaceUniversalCover G ⋙ linearization k G)\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"245\", \"text\": \"      (classifyingSpaceUniversalCover G ⋙ linearization k G))\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"line\": \"41\", \"text\": \"  linearizationOfMulActionIso k G (Fin (n + 1) → G) ≪≫ (linearization k G).mapIso\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"line\": \"43\", \"text\": \"    (Functor.Monoidal.μIso (linearization k G) _ _).symm ≪≫\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"line\": \"44\", \"text\": \"    tensorIso (linearizationOfMulActionIso k G G) (linearizationTrivialIso k G (Fin n → G))\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"line\": \"892\", \"text\": \"noncomputable section Linearization\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"line\": \"964\", \"text\": \"abbrev linearization : Action (Type w) G ⥤ Rep.{max w u} k G where\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"line\": \"969\", \"text\": \"instance : (linearization k G).LaxMonoidal where\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"line\": \"979\", \"text\": \"instance : (linearization k G).OplaxMonoidal where\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"line\": \"989\", \"text\": \"instance : (linearization k G).Monoidal where\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: projective objects in Rep and abstract actions on projective points do not construct the group-scheme projective action of an unlinearized flag line bundle"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every line bundle with nonzero sections on the flag variety of a connected linear algebraic group has an equivariant complete linear system for a projective representation of the group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Representation.linHom.mem_invariants_iff_comm\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{X Y : Rep k G} (f : X.V →ₗ[k] Y.V) (g : G) : (linHom X.ρ Y.ρ) g f = f ↔ f.comp (X.ρ g) = (Y.ρ g).comp f\", \"doc\": \"For representations $X$ and $Y$ of a group $G$ over a commutative ring $k$, a linear map $f : X \\to Y$ is invariant under the action of $G$ (i.e., $\\\\rho_Y(g) \\\\circ f = f \\\\circ \\\\rho_X(g)$ for all $g \\\\in\"}\n  {\"name\": \"Projectivization.instMulAction.congr_simp\", \"module\": \"Mathlib.Topology.Compactification.OnePoint.ProjectiveLine\", \"type\": \"∀ {G : Type u_1} {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  [inst_3 : Group G] [inst_4 : DistribMulAction G V] [inst_5 : SMulCommClass G K V],\\n  Projectivization.instMulAction = Projectivization.instMulAction\", \"doc\": \"For a group $G$ acting distributively on a module $V$ over a division ring $K$ with commuting scalar multiplications between $G$ and $K$, there exists a well-defined group action of $G$ on the project\"}\n  {\"name\": \"Projectivization.generalLinearGroup_smul_def\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Action\", \"type\": \"(g : LinearMap.GeneralLinearGroup K V) (x : ℙ K V) :\\n  g • x = x.map g.toLinearEquiv.toLinearMap g.toLinearEquiv.injective\", \"doc\": \"For any invertible linear transformation $ g \\\\in \\\\mathrm{GL}(K, V) $ and any projective point $ x \\\\in \\\\mathbb{P}_K(V) $ (represented by a nonzero vector $ v \\\\in V $), the group action $ g \\\\cdot x $ is\"}\n  {\"name\": \"Rep.ihom_obj_V_isAddCommGroup\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A B : Rep k G),\\n  (A.ihom.obj B).V.isAddCommGroup = LinearMap.addCommGroup\", \"doc\": \"For any representations $ A $ and $ B $ in $ \\\\text{Rep}(k, G) $, the underlying set of the internal Hom object $ [A, B] $ (consisting of $ G $-equivariant $ k $-linear maps from $ A $ to $ B $) is equ\"}\n  {\"name\": \"FDRep.instProjectiveOfNeZeroCastCard\", \"module\": \"Mathlib.RepresentationTheory.FinGroupCharZero\", \"type\": \"[NeZero (Fintype.card G : k)] (V : FDRep k G) : Projective V\", \"doc\": \"Every finitely generated representation of a finite group $ G $ over a field $ k $ is projective in the category of finitely generated representations, provided that the cardinality of $ G $ (interpre\"}\n  {\"name\": \"Rep.instInjective\", \"module\": \"Mathlib.RepresentationTheory.FinGroupCharZero\", \"type\": \"(V : Rep k G) : Injective V\", \"doc\": \"Every representation of a finite group over a field of characteristic zero is an injective object in the category of representations of the group over that field.\"}\n  {\"name\": \"Rep.instProjective\", \"module\": \"Mathlib.RepresentationTheory.FinGroupCharZero\", \"type\": \"(V : Rep k G) : Projective V\", \"doc\": \"Every object $ V $ in the category $ \\\\text{Rep}(k, G) $ of representations of a monoid $ G $ over a ring $ k $ is a projective object. This means that for any epimorphism $ e : A \\\\to B $ in $ \\\\text{Re\"}\n  {\"name\": \"LinearMap.sumOfConjugatesEquivariant\", \"module\": \"Mathlib.RepresentationTheory.Maschke\", \"type\": \": W →ₗ[k[G]] V\", \"doc\": \"The $k[G]$-linear map from $W$ to $V$ constructed by summing the conjugates of a linear map $\\\\pi: W \\\\to V$ over all elements of a finite group $G$, ensuring equivariance under the $G$-action. This map\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: projective objects in Rep and abstract actions on projective points do not construct the group-scheme projective action of an unlinearized flag line bundle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero complete linear system on a Borel quotient gives an equivariant morphism to the projective space of sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Projectivization.lift\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Basic\", \"type\": \"{K : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : DivisionRing K] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module K V] →\\n          {α : Type u_3} →\\n            (f : { v // v ≠ 0 } → α) →\\n              (∀ (a b : { v // v ≠ 0 }) (t : K), ↑a = t • ↑b → f a = f b) → Projectivization K V → α\", \"doc\": \"Given a function $ f $ defined on non-zero vectors of a module $ V $ over a division ring $ K $, if $ f(a) = f(b) $ whenever $ a $ and $ b $ are scalar multiples by a non-zero element of $ K $, then $\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"Projectivization.mk'\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Basic\", \"type\": \"(K : Type u_1) →\\n  {V : Type u_2} →\\n    [inst : DivisionRing K] → [inst_1 : AddCommGroup V] → [inst_2 : Module K V] → { v // v ≠ 0 } → Projectivization K V\", \"doc\": \"The function maps a non-zero vector $ v $ of the module $ V $ over the division ring $ K $ to its equivalence class in the projectivization $ \\\\mathbb{P}(V) $, where two vectors are equivalent if they \"}\n  {\"name\": \"Projectivization.lift_mk\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Basic\", \"type\": \"∀ {K : Type u_1} {V : Type u_2} [inst : DivisionRing K] [inst_1 : AddCommGroup V] [inst_2 : Module K V] {α : Type u_3}\\n  (f : { v // v ≠ 0 } → α) (hf : ∀ (a b : { v // v ≠ 0 }) (t : K), ↑a = t • ↑b → f a = f b) (v : V) (hv : v ≠ 0),\\n  Projectivization.lift f hf (Projectivization.mk K v hv) = f ⟨v, h\", \"doc\": \"For a function $ f $ defined on non-zero vectors of a module $ V $ over a division ring $ K $, if $ f $ is invariant under scalar multiplication by elements of $ K^\\times $, then the lift of $ f $ to t\"}\n  {\"name\": \"Projectivization.rep\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Basic\", \"type\": \"{K : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : DivisionRing K] → [inst_1 : AddCommGroup V] → [inst_2 : Module K V] → Projectivization K V → V\", \"doc\": \"The function maps each element of the projectivization of a module $ V $ over a division ring $ K $ to a representative non-zero vector in $ V $, selected via the quotient construction that identifies\"}\n  {\"name\": \"Projectivization.mk\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Basic\", \"type\": \"(K : Type u_1) →\\n  {V : Type u_2} →\\n    [inst : DivisionRing K] → [inst_1 : AddCommGroup V] → [inst_2 : Module K V] → (v : V) → v ≠ 0 → Projectivization K V\", \"doc\": \"The function maps a non-zero vector $ v $ in a module $ V $ over a division ring $ K $ to its equivalence class in the projectivization $ \\\\mathbb{P} K V $, where two vectors are identified if they are\"}\n  {\"name\": \"Projectivization\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Basic\", \"type\": \"(K : Type u_1) → (V : Type u_2) → [inst : DivisionRing K] → [inst_1 : AddCommGroup V] → [Module K V] → Type u_2\", \"doc\": \"The projectivization of a module $ V $ over a division ring $ K $, defined as the quotient of the non-zero vectors in $ V $ under the equivalence relation where two vectors are identified if they are \"}\n  {\"name\": \"Projectivization.map\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Basic\", \"type\": \"{K : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : DivisionRing K] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module K V] →\\n          {L : Type u_3} →\\n            {W : Type u_4} →\\n              [inst_3 : DivisionRing L] →\\n                [inst_4 : AddCommGroup W] →\\n                  [inst_5 \", \"doc\": \"Given an injective $\\\\sigma$-linear map $f: V \\\\to W$ between modules over division rings $K$ and $L$, this constructs the induced function from the projectivization $\\\\mathbb{P}_K(V)$ to $\\\\mathbb{P}_L(W\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: point projectivization actions and maps to Proj from a graded ring map do not supply invariance of an unlinearized line bundle or an algebraic group-scheme projective representation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic group action on a flag variety induces a group scheme projective representation on global sections of an invertible sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Projectivization.instMulAction\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"{G : Type u_1} →\\n  {K : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : AddCommGroup V] →\\n        [inst_1 : DivisionRing K] →\\n          [inst_2 : Module K V] →\\n            [inst_3 : Group G] →\\n              [inst_4 : DistribMulAction G V] → [SMulCommClass G K V] → MulAction G (Projectivization K V)\", \"doc\": \"For a group $G$ acting distributively on a module $V$ over a division ring $K$ (with commuting scalar multiplications between $G$ and $K$), this constructs a group action of $G$ on the projectivizatio\"}\n  {\"name\": \"Rep.leftRegular_projective\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G], CategoryTheory.Projective (Rep.leftRegular k G)\", \"doc\": \"For any commutative ring $ k $ and group $ G $, the left regular representation of $ G $ over $ k $ is a projective object in the category $ \\\\text{Rep}(k, G) $ of representations of $ G $ over $ k $.\"}\n  {\"name\": \"Projectivization.smul_def\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"∀ {G : Type u_1} {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  [inst_3 : Group G] [inst_4 : DistribMulAction G V] [inst_5 : SMulCommClass G K V] (g : G) (x : Projectivization K V),\\n  SMul.smul g x = Projectivization.map ((DistribMulAction.toM\", \"doc\": \"Given a group $G$ acting distributively on a module $V$ over a division ring $K$ with commuting scalar multiplications between $G$ and $K$, there exists a well-defined group action of $G$ on the proje\"}\n  {\"name\": \"Rep.standardComplex.x_projective\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ (k : Type u) [inst : CommRing k] (G : Type u) [inst_1 : Group G] (n : ℕ),\\n  CategoryTheory.Projective ((Rep.standardComplex k G).X n)\", \"doc\": \"For any commutative ring $k$, group $G$, and natural number $n$, the $n$-th term of the standard chain complex in the category $\\\\text{Rep}(k, G)$ is a projective object. This term is the free $k$-modu\"}\n  {\"name\": \"Projectivization.smul_mk\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"∀ {G : Type u_1} {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  [inst_3 : Group G] [inst_4 : DistribMulAction G V] [inst_5 : SMulCommClass G K V] (g : G) {v : V} (hv : v ≠ 0),\\n  g • Projectivization.mk K v hv = Projectivization.mk K (g • v) ⋯\", \"doc\": \"For a group $ G $ acting distributively on a module $ V $ over a division ring $ K $, the induced action of $ G $ on the projectivization $ \\\\mathbb{P}_K(V) $ satisfies that for any non-zero vector $ v\"}\n  {\"name\": \"Rep.diagonal_succ_projective\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G] {n : ℕ},\\n  CategoryTheory.Projective (Rep.diagonal k G (n + 1))\", \"doc\": \"For any commutative ring $k$, group $G$, and natural number $n$, the diagonal representation in $\\\\text{Rep}(k, G)$ constructed from $n + 1$ copies of a $k$-module is a projective object in the categor\"}\n  {\"name\": \"Rep.free_projective\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G α : Type u} [inst_1 : Group G], CategoryTheory.Projective (Rep.free k G α)\", \"doc\": \"For any commutative ring $k$, group $G$, and type $\\\\alpha$, the free representation $\\\\text{Rep}(k, G)$ constructed on the module of finite support functions $\\\\alpha \\\\to_0 (G \\\\to_0 k)$ is a projective \"}\n  {\"name\": \"Projectivization.generalLinearGroup_smul_def\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Action\", \"type\": \"∀ {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  (g : LinearMap.GeneralLinearGroup K V) (x : Projectivization K V), g • x = Projectivization.map ↑g.toLinearEquiv ⋯ x\", \"doc\": \"For any invertible linear transformation $ g \\\\in \\\\mathrm{GL}(K, V) $ and any projective point $ x \\\\in \\\\mathbb{P}_K(V) $ (represented by a nonzero vector $ v \\\\in V $), the group action $ g \\\\cdot x $ is\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: point projectivization actions and maps to Proj from a graded ring map do not supply invariance of an unlinearized line bundle or an algebraic group-scheme projective representation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\", \"Representation\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: point projectivization actions and maps to Proj from a graded ring map do not supply invariance of an unlinearized line bundle or an algebraic group-scheme projective representation."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]inear[Ss]ystem|[Ll]inearization|[Pp]rojective[Rr]epresentation",
+   "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"24\", \"text\": \"`k`-linear `G`-representation. This simplicial object is the `linearization` of the simplicial\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"172\", \"text\": \"    (classifyingSpaceUniversalCover G ⋙ linearization k G)\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"245\", \"text\": \"      (classifyingSpaceUniversalCover G ⋙ linearization k G))\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"line\": \"41\", \"text\": \"  linearizationOfMulActionIso k G (Fin (n + 1) → G) ≪≫ (linearization k G).mapIso\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"line\": \"43\", \"text\": \"    (Functor.Monoidal.μIso (linearization k G) _ _).symm ≪≫\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"line\": \"44\", \"text\": \"    tensorIso (linearizationOfMulActionIso k G G) (linearizationTrivialIso k G (Fin n → G))\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"line\": \"892\", \"text\": \"noncomputable section Linearization\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"line\": \"964\", \"text\": \"abbrev linearization : Action (Type w) G ⥤ Rep.{max w u} k G where\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"line\": \"969\", \"text\": \"instance : (linearization k G).LaxMonoidal where\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"line\": \"979\", \"text\": \"instance : (linearization k G).OplaxMonoidal where\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"line\": \"989\", \"text\": \"instance : (linearization k G).Monoidal where\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: point projectivization actions and maps to Proj from a graded ring map do not supply invariance of an unlinearized line bundle or an algebraic group-scheme projective representation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic group flag variety complete linear system projective representation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Rep.leftRegular_projective\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G], CategoryTheory.Projective (Rep.leftRegular k G)\", \"doc\": \"For any commutative ring $ k $ and group $ G $, the left regular representation of $ G $ over $ k $ is a projective object in the category $ \\\\text{Rep}(k, G) $ of representations of $ G $ over $ k $.\"}\n  {\"name\": \"Rep.diagonal_succ_projective\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G] {n : ℕ},\\n  CategoryTheory.Projective (Rep.diagonal k G (n + 1))\", \"doc\": \"For any commutative ring $k$, group $G$, and natural number $n$, the diagonal representation in $\\\\text{Rep}(k, G)$ constructed from $n + 1$ copies of a $k$-module is a projective object in the categor\"}\n  {\"name\": \"Rep.instProjective\", \"module\": \"Mathlib.RepresentationTheory.FinGroupCharZero\", \"type\": \"(V : Rep k G) : Projective V\", \"doc\": \"Every object $ V $ in the category $ \\\\text{Rep}(k, G) $ of representations of a monoid $ G $ over a ring $ k $ is a projective object. This means that for any epimorphism $ e : A \\\\to B $ in $ \\\\text{Re\"}\n  {\"name\": \"Rep.free_projective\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G α : Type u} [inst_1 : Group G], CategoryTheory.Projective (Rep.free k G α)\", \"doc\": \"For any commutative ring $k$, group $G$, and type $\\\\alpha$, the free representation $\\\\text{Rep}(k, G)$ constructed on the module of finite support functions $\\\\alpha \\\\to_0 (G \\\\to_0 k)$ is a projective \"}\n  {\"name\": \"Projectivization.generalLinearGroup_smul_def\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Action\", \"type\": \"(g : LinearMap.GeneralLinearGroup K V) (x : ℙ K V) :\\n  g • x = x.map g.toLinearEquiv.toLinearMap g.toLinearEquiv.injective\", \"doc\": \"For any invertible linear transformation $ g \\\\in \\\\mathrm{GL}(K, V) $ and any projective point $ x \\\\in \\\\mathbb{P}_K(V) $ (represented by a nonzero vector $ v \\\\in V $), the group action $ g \\\\cdot x $ is\"}\n  {\"name\": \"FDRep.instProjectiveOfNeZeroCastCard\", \"module\": \"Mathlib.RepresentationTheory.FinGroupCharZero\", \"type\": \"[NeZero (Fintype.card G : k)] (V : FDRep k G) : Projective V\", \"doc\": \"Every finitely generated representation of a finite group $ G $ over a field $ k $ is projective in the category of finitely generated representations, provided that the cardinality of $ G $ (interpre\"}\n  {\"name\": \"Projectivization.independent_iff\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Independence\", \"type\": \": Independent f ↔ LinearIndependent K (Projectivization.rep ∘ f)\", \"doc\": \"A family of points in the projectivization of a module over a division ring is independent if and only if the corresponding family of representative vectors in the module is linearly independent over \"}\n  {\"name\": \"LinearAlgebra.Projectivization.termℙ\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Basic\", \"type\": \": Lean.ParserDescr✝\", \"doc\": \"The notation $\\\\mathbb{P}$ for projective spaces in linear algebra.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: point projectivization actions and maps to Proj from a graded ring map do not supply invariance of an unlinearized line bundle or an algebraic group-scheme projective representation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-picard-trivial-multiplicative-cover",
+  "date": "2026-10-23",
+  "group": "Q112"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.22 (Iversen 1976, 2.7), printed pp.392--393, under the standing split connected group-variety hypothesis (automatic over F); definitions 18.1 and 18.7. Supporting Proposition 18.22 input: Proposition 18.22, proof, printed p.393, paragraph beginning Let V, and 18.12--18.13, printed p.390: projective complete-linear-system maps and the homogeneous tautological line (Iversen 1976, 1.2--1.3).",
+   "via": [
+    "lem-sfb-picard-trivial-multiplicative-cover",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flag-projective-linear-system",
+  "worker": "stage1",
+  "summary": "Expanded Milne 18.22 into a scheme-level projective action via affine-cell Picard product splitting, proved basepoint freeness by translation and a closed-support argument, and constructed the evaluation morphism and tautological linearization using quotient pairs. Added two statement-only prerequisites; reused newly landed general Borel geometry. No statement change, no Lean writing or compilation.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.22 (Iversen 1976, 2.7), printed pp.392--393, under the standing split connected group-variety hypothesis (automatic over F); definitions 18.1 and 18.7. Supporting Proposition 18.22 input: Proposition 18.22, proof, printed p.393, paragraph beginning Let V, and 18.12--18.13, printed p.390: projective complete-linear-system maps and the homogeneous tautological line (Iversen 1976, 1.2--1.3). The split supplies the complete-linear-system input to Milne 18.22 in the supporting multiplicative-cover construction; the latest det-thm-sf-ctf-stability-direct-images proof (3) remains the compactification/direct-image route.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-proper-coherent-finite-dimensional",
+    "why": "Degree-zero proper coherent finiteness supplies finite dimensionality of sections; this is a generic cohomology tool, with no replacement of a constructible finite-Tor unit step."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "The generic Proj-of-Sym quotient universal property supplies the map and its tautological line and checks equality of quotient pairs; no trace-formula statement is used."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Closed points test the empty support of evaluation cokernel; generic finite-type geometry not provided by this unit."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Identifies closed points of the flag quotient with F-points for the transitive-translation argument; generic Nullstellensatz tool."
+   },
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "The canonical qcqs coherent flat base-change map identifies section modules after every F-algebra extension and, for the structure sheaf, scalar functions; this generic base-change tool constructs the local matrices and detects scalar discrepancies."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-proper-coherent-finite-dimensional",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-pc-flat-base-change-cohom"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-d80f80f38",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-d80f80f38 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement in full. Item statement is identical to live; the item is unsplit in live and side-live with no repair note, so this is not a re-split and not superseded. Milne 18.21-18.22 (pp.392-393) and 18.12-18.13 (p.390) match. Milne's P(V) is the quotient convention, as in the item. Steps checked against what the cited statements say. Step 1: homogeneous-orbit gives separated finite type and q fppf; the Zariski B-torsor (characteristic-picard) supplies the hypotheses of borel-quotient-proper-geometry (smooth, geom. integral, proper); 02O5-type finiteness; H0(O_Q)=F. Step 2: product node with X=Q, T=G, t0=e applied to c*L. Step 3: Jacobson density plus Q(F)=G(F)/B(F), with a closed cokernel support. Step 4: Proj Sym universal property. Steps 5-6: R_i = phi_i∘sigma*; I recomputed R(g)R(h) vs R(gh): they differ by a unit of Γ(Q_A,O)=A (flat base change + h0). Step 7: recomputed (R(g)s)(gx)=phi(s(x)), so t(gx)=a(g)t(x) in the q∘u^{-1} convention. Step 8 (tautological GL-linearization) is genuinely elementary. New nodes: the affine-space cell is true for any smooth connected G (radical lies in every Borel, reduces to the Bruhat big cell; Milne 18.21). It generalizes the reductive-only lem-sfb-bruhat-longest-cell-charts / longest-weyl-open-cell; a future split should cite those. The Pic product is true by 02TT + 0BE9 + boundary divisors D_i×T irreducible over algebraically closed F, with injectivity via F-points; it fails without the cell (E×E). Neither node is a clause of the item. Batch-5 flags are all generic: fppf covering base change, two definitions, and the Proj Sym quotient property; none is a trace-formula or Poincaré step. Tool uses accepted. No fixes."
+ }
+}

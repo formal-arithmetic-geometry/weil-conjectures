@@ -1,0 +1,247 @@
+{
+ "id": "lem-sf-completed-augmentation-adjunct",
+ "kind": "statement",
+ "title": "The specified completed augmentation is the normalized derived adjunct",
+ "statement": "Let $g:Y\\to X$ be a morphism of schemes [def-pc-scheme] with small pro-etale sites [def-weil-pbc-proetale-site]. Fix a Noetherian adic datum $(A,I)$ with $P_n=A/I^n$ and $B_T=\\varprojlim_n(P_n)_T$ for $T=X,Y$ [def-weil-pbc-adic-coefficient-datum]. Assume the projection-defined coefficient map $c_g:g^{-1}B_X\\to B_Y$ is an isomorphism [def-weil-pbc-completed-pullback]. Let $F(M)=g^{-1}M\\otimes_{g^{-1}B_X,c_g}B_Y$ be additive and exact. Use module sheaves, unbounded derived categories, and strict inverse sequences [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-weil-inverse-system]. Let $H=F_D$ and $\\widetilde H=F_D^{\\mathrm{Tow}}$ be exact termwise descent, identified with the specified left-derived pullbacks by the original universal counits [lem-sf-exact-pullback-counit-normalization]. Write $\\Delta_T$ for constant towers, $L_T=R\\lim$ for the K-injective total derived limit, and $v_T$ for the unit of the canonical adjunction $\\Delta_T\\dashv L_T$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-coef-derived-tower-counit-projections]. Let $j:\\widetilde H\\Delta_X\\xrightarrow{\\sim}\\Delta_YH$ be induced by the ordinary constant-tower identity with these normalized comparisons.\n\nFor every $K\\in D(\\operatorname{Mod}(B_X))$, let $i_K:\\Delta_XK\\to K_\\bullet$ be the strict quotient augmentation and let $\\alpha^F_K:HK\\to L_Y\\widetilde H K_\\bullet$ be the actual ambient comparison specified in [def-weil-pbc-completed-pullback], transported by the preceding counit-normalized identifications. Put $a_K=\\widetilde H(i_K)j_K^{-1}$. Then, as actual morphisms in the unbounded derived category,\n$$\\alpha^F_K=L_Y(a_K)v_{Y,HK}.$$\nThis equality is natural for every derived morphism $K\\to K'$.\n\nMore precisely, on the flat-term K-flat representative $P$ used in the specified construction, put $P_\\bullet=(P\\otimes_{B_X}(P_n)_X)_n$ and choose a K-injective tower resolution $r:F(P_\\bullet)\\to J_\\bullet$. After the canonical localization and resolution isomorphisms, both sides of the displayed equality are represented by the chain map $FP\\to\\lim_nJ_n$ with components $r_nF(P\\to P_n)$. The identity is independent of these representatives and resolutions. No completeness of $K$, preservation of products by $F$, or preservation of K-injectives by $F$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Returned localization Step 6 / immersion comparison Step 5; old parent proof Step 1, actual strict augmentation and its K-injective representative. Derived adjunct calculation: Stacks derived.tex, Tag 0FND (lemma-pre-derived-adjoint-functors-general), with the unbounded adjunction of Tag 09T5 (lemma-derived-adjoint-functors); completed construction supplied by the cited definition."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "lem-sf-exact-pullback-counit-normalization",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-derived-tower-counit-projections"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sf-exact-pullback-counit-normalization] to identify both specified left-derived pullbacks with exact termwise $F$, including their comparisons on constant towers. In that lemma the tensor pullback written $F$ here is called $G$, and its exact functor is the scalar transport $F'(M)=g^{-1}M$ with scalars along $c_g^{-1}$; its module isomorphism $m:F\\xrightarrow{\\sim}F'$, $x\\otimes b\\mapsto b\\cdot x$, shows that $F$ is exact and descends termwise to isomorphisms $F_D\\cong F'_D$ and $F_D^{\\mathrm{Tow}}\\cong F'^{\\mathrm{Tow}}_D$ compatible with $\\Delta$. Since $m$ is natural on complexes, it carries the augmentation and the K-injective factorization below for $F'$ to those for $F$, so the lemma's comparison $\\alpha^{F'}_K$ corresponds to the $\\alpha^F_K$ of the statement. On the specified flat-term K-flat representative $P$ of $K$, put $C=FP$, $M=F(P_\\bullet)$ and $u:\\Delta C\\to M$, with $u_n=F(P\\to P\\otimes_{B_X}(P_n)_X)$. The normalized constant-tower comparison identifies $Qu$ with $a_K=\\widetilde H(i_K)j_K^{-1}$, not with an arbitrarily chosen isomorphic augmentation. By [def-weil-pbc-completed-pullback], the actual exact augmented comparison is $L_Y(Qu)z_{QC}$, where $z$ is its projection-defined constant-tower map. The normalization theorem explicitly extends this ambient construction to every unbounded $K$.",
+   "uses": [
+    "lem-sf-exact-pullback-counit-normalization",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general), its chain-level transpose; Tag 09T5 (lemma-derived-adjoint-functors). Applied to the augmented comparison of def-weil-pbc-completed-pullback in returned localization Step 6 / immersion comparison Step 5."
+   }
+  },
+  {
+   "text": "We identify $z$ with $v_Y$. Apply the transpose formula in [lem-weil-pbc-exact-square-derived-counit] with both copies of its abelian categories equal to $\\mathcal A=\\operatorname{Tow}(\\operatorname{Mod}(B_Y))$ and $\\mathcal B=\\operatorname{Mod}(B_Y)$, both left adjoints $\\Delta$, both right adjoints $\\lim$, and $r,s,\\beta$ identities. Identity functors preserve K-injectives and the required square and normalization are identities. Constant towers are exact, and [lem-weil-pbc-ringed-strict-tower-homotopy-limit] supplies all unbounded tower resolutions and $L_Y$. This is the canonical adjunction induced by ordinary $\\Delta\\dashv\\lim$, as specified in [lem-coef-derived-tower-counit-projections]. Write $\\delta_N:Q\\lim N\\to L_YQN$ for the universal right-derived comparison. For a tower K-injective resolution $q:\\Delta C\\to I$, the ordinary transpose is the chain map $z^q:C\\to\\lim I$ whose components are $q_n$. The cited transpose formula and the definition of adjunct give\n$$L_Y(Qq)v_{Y,QC}=\\delta_I Q(z^q).$$\nSince $Qq$ is invertible, this says $v_{Y,QC}=(L_Y(Qq))^{-1}\\delta_I Q(z^q)$. The right side is exactly $z_{QC}$ with its resolution identification in [def-weil-pbc-completed-pullback]. Hence $z=v_Y$ on every complex representative.",
+   "uses": [
+    "lem-weil-pbc-exact-square-derived-counit",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-coef-derived-tower-counit-projections",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general), its chain-level transpose; Tag 09T5 (lemma-derived-adjoint-functors). Applied to the augmented comparison of def-weil-pbc-completed-pullback in returned localization Step 6 / immersion comparison Step 5."
+   }
+  },
+  {
+   "text": "Substitute Step 2 into Step 1 to obtain $\\alpha^F_K=L_Y(a_K)v_{Y,HK}$. For the promised representative take any tower K-injective resolution $r:M\\to J$ and apply the same transpose formula to $ru:\\Delta C\\to J$. If $b:C\\to\\lim J$ is its ordinary transpose, then\n$$L_Y(Qr)L_Y(Qu)v_{Y,QC}=\\delta_J Q(b).$$\nThus under the canonical resolution isomorphism $L_YQM\\cong Q\\lim J$ the displayed derived adjunct is $Q(b)$. Ordinary inverse-limit adjunction means precisely $\\pi_n b=r_nu_n$ in every cochain degree. These compatible maps commute with differentials because $ru$ is a chain map, and the ordinary limit property determines $b$ uniquely. This proves the asserted chain representative for both sides; no claim that derived projections detect arbitrary morphisms is used. For every choice of $P,r$, the same computation gives the already fixed derived adjunct, so the resulting derived morphism is independent of these choices under the canonical localization and resolution comparisons.",
+   "uses": [
+    "lem-weil-pbc-exact-square-derived-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general), its chain-level transpose; Tag 09T5 (lemma-derived-adjoint-functors). Applied to the augmented comparison of def-weil-pbc-completed-pullback in returned localization Step 6 / immersion comparison Step 5."
+   }
+  },
+  {
+   "text": "For a derived morphism $f:K\\to K'$, let $T(f):K_\\bullet\\to K'_\\bullet$ be the map of the derived quotient-tower functor [def-weil-pbc-adic-coefficient-datum]. Its augmentation satisfies $T(f)i_K=i_{K'}\\Delta_Xf$: on K-flat chain representatives this is $(f\\otimes1)(x\\otimes1)=f(x)\\otimes1$, and the equality descends with the quotient construction. Naturality of $j$ therefore gives $\\widetilde H(T(f))a_K=a_{K'}\\Delta_Y(Hf)$. Naturality of the adjunction unit and functoriality now give\n$$L_Y\\widetilde H(T(f))\\alpha^F_K=L_Y(a_{K'})L_Y\\Delta_Y(Hf)v_{Y,HK}=\\alpha^F_{K'}Hf.$$\nThe computations use exact termwise pullback, tower resolutions, and the ordinary constant/limit adjunction only. They use neither completeness of $K$, preservation of products by $F$, nor preservation of K-injectives by $F$.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general), its chain-level transpose; Tag 09T5 (lemma-derived-adjoint-functors). Applied to the augmented comparison of def-weil-pbc-completed-pullback in returned localization Step 6 / immersion comparison Step 5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exact-pullback-counit-normalization",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-exact-square-derived-counit",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-derived-tower-counit-projections",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general), its chain-level transpose; Tag 09T5 (lemma-derived-adjoint-functors). Applied to the augmented comparison of def-weil-pbc-completed-pullback in returned localization Step 6 / immersion comparison Step 5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Cc]ompleted.*[Aa]ugment|[Aa]ugment.*[Kk][Ii]nject|constantRlim",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not identify the specified normalized sheaf pullback augmentation with its K-injective derived adjunct"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K injective limit of an augmented strict inverse sequence computes the canonical derived adjunction unit",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.injectivePresentationOfMap, CategoryTheory.Adjunction.functorialityUnit', CategoryTheory.Limits.constLimAdj, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_unit_app, CategoryTheory.Adjunction.functorialityUnit, CategoryTheory.Adjunction.functorialityAdjunction, CategoryTheory.LiftRightAdjoint.unitEqualises",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not identify the specified normalized sheaf pullback augmentation with its K-injective derived adjunct"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived_unit",
+   "results": "1 hits: CategoryTheory.Adjunction.derived_unit",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not identify the specified normalized sheaf pullback augmentation with its K-injective derived adjunct"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-injective strict tower resolution identifies the actual augmented completed pullback with the adjoint under the derived constant tower inverse limit adjunction",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.instIsIsoToRightDerivedZero', CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.Functor.toRightDerivedZero",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not identify the specified normalized sheaf pullback augmentation with its K-injective derived adjunct"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an exact functor pulled quotient augmentation followed by completion unit agrees with compatible maps into a K injective tower limit",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, Profinite.NobelingProof.succ_exact, IsAdicComplete.of_comp_lift, IsAdicComplete.StrictMono.of_comp_lift, AdicCompletion.eval_lift, AdicCompletion.eval_comp_of, IsAdicComplete.StrictMono.of_lift, IsAdicComplete.mkQ_comp_lift",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not identify the specified normalized sheaf pullback augmentation with its K-injective derived adjunct"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.constLimAdj",
+   "results": "2 hits: CategoryTheory.Limits.constLimAdj, CategoryTheory.Localization.HasProductsOfShapeAux.adj_counit_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not identify the specified normalized sheaf pullback augmentation with its K-injective derived adjunct"
+  },
+  {
+   "tool": "grep",
+   "query": "derived_unit|derivedη",
+   "results": "4 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the general adjunction and exact-localization APIs do not state the specified completed sheaf pullback augmentation identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K injective tower resolution augmentation map is adjunct under the derived constant tower inverse limit adjunction",
+   "results": "8 hits: CategoryTheory.Limits.constLimAdj, CategoryTheory.Localization.HasProductsOfShapeAux.adj, CategoryTheory.Limits.colimConstAdj, CategoryTheory.Adjunction.mapInjectivePresentation, CategoryTheory.Abelian.LeftResolution.π, CategoryTheory.Abelian.LeftResolution.epi_π_app, CategoryTheory.injectiveResolutions, CategoryTheory.Limits.isLimitConeOfAdj_lift",
+   "date": "2026-10-22",
+   "verdict": "no match: the general adjunction and exact-localization APIs do not state the specified completed sheaf pullback augmentation identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived_unit",
+   "results": "1 hits: CategoryTheory.Adjunction.derived_unit",
+   "date": "2026-10-22",
+   "verdict": "no match: the general adjunction and exact-localization APIs do not state the specified completed sheaf pullback augmentation identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The specified augmented completed pullback map equals the derived constant tower inverse limit adjunction unit followed by the pulled quotient augmentation",
+   "results": "8 hits: CompHausLike.pullback.cone_π, CategoryTheory.Arrow.augmentedCechNerve_hom_app, CategoryTheory.SimplicialObject.augmentedCechNerve_map_left_app, CompHausLike.pullback.isLimit_lift, CategoryTheory.SimplicialObject.augmentedCechNerve_obj_hom_app, CategoryTheory.SimplicialObject.augmentedCechNerve_obj_left_map, CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_hom_comp_pi, CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s_comp_base",
+   "date": "2026-10-22",
+   "verdict": "no match: the general adjunction and exact-localization APIs do not state the specified completed sheaf pullback augmentation identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor applied to a strict quotient tower augmentation has derived adjoint represented by the map into the inverse limit of a K injective tower resolution",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Adjunction.derivedη, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Adjunction.derived, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: the general adjunction and exact-localization APIs do not state the specified completed sheaf pullback augmentation identity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-completed-pullback-mate-factorization",
+  "date": "2026-10-22",
+  "group": "Q79"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Returned localization proof Step 6 / old immersion-comparison Step 5; old factorization Step 1: the actual augmented completed map and its K-injective adjoint formula",
+   "via": [
+    "lem-sf-completed-pullback-mate-factorization",
+    "lem-sf-immersion-completed-pullback-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-completed-augmentation-adjunct",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim. Reused the existing exact-square derived transpose formula with the identity square to identify the actual projection-defined constant-tower map with the canonical derived unit. Applied it to the normalized pulled quotient augmentation, computed the chain representative before localization, and wrote the naturality equation for all derived morphisms. No new nodes, Lean edits or compilation.",
+  "blueprint": "prop-sf-localization-all-stages returned localization Step 6 / immersion comparison Step 5: actual strict quotient augmentation, universal-counit-normalized exact pullback, K-injective representative and derived adjunct.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-square-derived-counit",
+    "why": "Its chain-level derived transpose formula, specialized to the identity square and constant/limit adjunction; the localization unit has no such formula."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Supplies the unbounded K-injective tower model for modules on the small ringed site; a generic homological tool."
+   },
+   {
+    "node": "lem-coef-derived-tower-counit-projections",
+    "why": "Fixes the canonical ordinary-induced constant-tower/derived-limit adjunction used by the item; a generic tower tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-square-derived-counit",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-derived-tower-counit-projections"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-c872b09dd",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-c872b09dd (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement and stmt_deps are verbatim from the Q79 creation; there are no new nodes and no unit edits. This is the first split of a node that was statement-only, so it is not a re-split order. The proof covers everything in the old NK parent Step 1 and also writes out z=v, which that step only asserted. Step 1 uses the exact-pullback normalization for every unbounded K and the completed-pullback def; I checked that Q(u)=a_K and that alpha=L_Y(Qu)z. Step 2 applies lem-weil-pbc-exact-square-derived-counit with A'=A=Tow(Mod B_Y), B'=B=Mod B_Y, Delta -| lim, and r=s=beta=id. All hypotheses hold, with K-injective tower resolutions supplied by lem-weil-pbc-ringed-strict-tower-homotopy-limit. The transpose formula gives L(Qq)v=delta_I Q(z^q), so z=v. One identification is not mechanical: that this adjunction is the canonical one of lem-coef-derived-tower-counit-projections, whose statement pins it only by e_n(eps)=pi_n. Both name the Stacks 0FND/09T5 adjunction induced by the ordinary one (derived.tex l.9517/9596 checked), and I accept that. Step 3 builds the chain representative b with pi_n b=r_n u_n before localization and does not use projection detection. In Step 4 I recomputed the naturality L H~(Tf)alpha_K=alpha_K' Hf. Edge cases checked: K=0, g=id, K=B[1/l] (zero tower, no completeness used), and no product or K-injective preservation by F. lem-cbc-constant-derived-limit-resolution-unit only gives descent of z, so it is not a duplicate. There is no cycle (closure of 1148 nodes), and no SGA source is used. The three declared tool_uses are accepted as generic homological tools: exact-square, ringed tower homotopy limit, and counit-projections. FIX: the item writes F for the tensor pullback, which the cited normalization lemma calls G (its F is scalar transport). I added a sentence to Step 1 identifying them via m, which also carries the augmented construction across. Minor, no action: the report names citations.json and searches.jsonl, which are not in the commit.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfCompletedAugmentationAdjunct",
+  "declaration": "AlgebraicGeometry.Scheme.ExactPullbackNormalization.completed_augmentation_adjunct",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.pulledAugmentation",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.pulledReductionComplex",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.pulledChainAugmentation",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.resolvedChainAugmentation",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.pulledResolutionComparison",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.completed_augmentation_adjunct"
+  ],
+  "file": "lean/Sheaf/Paper/SfCompletedAugmentationAdjunct.lean",
+  "statement": "theorem completed_augmentation_adjunct : (∀ K : DerivedCategory (pbcModules X (pbcAdicCompletion X d)), exactAugmentation d g K = (d.constantRlimAdjunction Y).unit.app ((moduleFunctor d g).mapDerivedCategory.obj K) ≫ (completedTowerRlim d Y).map (pulledAugmentation d g K)) ∧ (∀ (K K' : DerivedCategory (pbcModules X (pbcAdicCompletion X d))) (f : K ⟶ K'), (moduleFunctor d g).mapDerivedCategory.map f ≫ exactAugmentation d g K' = exactAugmentation d g K ≫ (completedTowerRlim d Y).map ((towerFunctor d g).mapDerivedCategory.map ((completedReductionTower X d).map f))) ∧ (∀ (P : CbcStrictKFlatRepresentative d X) (J : CochainComplex (pbcTowers Y (pbcAdicCompletion Y d)) ℤ) (r : pulledReductionComplex d g P.complex ⟶ J) [QuasiIso r] [J.IsKInjective], IsIso (pulledResolutionComparison d g P.complex J r) ∧ (∀ (q : ℤ) (n : ℕ), (resolvedChainAugmentation d g P.complex J r).f q ≫ limit.π (J.X q) (op n) = (moduleFunctor d g).map (((cbcStrictAugmentation d X P.complex).f q).app (op n)) ≫ (r.f q).app (op n)) ∧ exactAugmentation d g (DerivedCategory.Q.obj P.complex) ≫ (completedTowerRlim d Y).map (pulledResolutionComparison d g P.complex J r) = (moduleFunctor d g).mapDerivedCategoryFactors.hom.app P.complex ≫ DerivedCategory.Q.map (resolvedChainAugmentation d g P.complex J r) ≫ (completedRlimUnit Y (pbcAdicCompletion Y d)).app ((HomotopyCategory.quotient _ (.up ℤ)).obj J))",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the tensor-generator/counit-normalized scalar-transport presentation of exact pullback from lem-sf-exact-pullback-counit-normalization, as in the recorded mate-factorization interface. Includes the actual morphism equality, naturality for all derived morphisms, and the compatible-family chain representative for every flat-term K-flat representative and every K-injective tower resolution."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7f7709a1",
+  "group": "NL",
+  "result": "pass",
+  "note": "Node delta is the lean field only; statement verbatim; 6 declarations present; first S2 delivery, no repair note. Hypotheses (IsIso c_g, Additive, finite limits/colimits on moduleFunctor) are identical to lem-sf-exact-pullback-counit-normalization. Conjunct 1: exactAugmentation = completedConstantRlimUnit(z, a .choose) followed by Rlim(a_K); RHS uses constantRlimAdjunction.unit (induced from constLimAdj), so it asserts the node's z=v content and is not a tautology; pulledAugmentation = constantIso.hom (j^-1) then H~(i_K) = a_K. Conjunct 2 is the node's naturality, left-to-right order checked. Conjunct 3 quantifies over every CbcStrictKFlatRepresentative and every quasi-iso r into a K-injective J; the component formula is r_n F(P->P_n); the final equation's types and directions were checked by hand and follow from completedConstantRlimUnit_exists plus transpose naturality. No hollow helpers, only the theorem is sorry, docstrings carry source and blueprint tags and 4 proof steps, real ProEt sites, universes as in the deps. Advisory: naturality clause duplicates the parent mate-factorization conjunct (expected after the split); three plain proof-only imports. No compile (no file changed); worker scompile clean 22.3 s."
+ }
+}

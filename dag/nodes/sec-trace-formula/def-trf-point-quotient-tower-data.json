@@ -1,0 +1,149 @@
+{
+ "id": "def-trf-point-quotient-tower-data",
+ "kind": "definition",
+ "title": "The existing point quotient tower constructions and comparison predicate",
+ "statement": "Fix a finite-field datum D, a prime l and a finite extension E of the l-adic rationals [def-trf-coefficient-conventions]. On s=Spec D.k and its pro-etale site [def-weil-pbc-proetale-site], use the completed integral ring sheaf R and its positive quotient sheaves S_n [def-weil-completed-integral-coefficients]. For an R-complex P, sourceSheafTower(P) is the complex of entire strict diagrams of the published tensor quotient complexes P tensor_R S_n, with their actual transitions [def-weil-integral-reduction-tower, def-weil-inverse-system]. For an automorphism g of s, targetSheafTower applies the published coefficient pullback before reordering degree and tower index [def-weil-inverse-image-pullback-comparison]. Exact point sections, with their constant integral coefficient action [lem-weil-point-proetale-sections-exact], give source and target. sourceLevel and targetLevel are their underlying module functors. The good homotopy relation is existence of a chain homotopy on flat-term K-flat representatives [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. Module towers have the standard derived category [def-weil-abstract-derived-category]. Given normalized coefficient presentations q and a completed coefficient isomorphism e [lem-weil-pbc-integral-coefficient-presentation-comparison], presentedSheafTower restricts along e, forms the ordinary coherent quotient tower, then restricts back on every level. coherentSections uses the canonical derived coherent tower [def-weil-pbc-adic-coefficient-datum] followed by exact restriction and sections. CoherentSourceComparison is the predicate that each good P has a strict tower isomorphism r, normalized on every local pure tensor, and an isomorphism from coherentSections([P]) to [source(P)] whose homomorphism is the literal image of the canonical coherent tower counit composed with the exact-functor factorization maps and [r]. These are unchanged existing constructions, not new choices or assertions of existence.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, tensor product of module sheaves; original lem-trf-point-quotient-tower-homotopy proof steps 1-3 and 7; unchanged definitions extracted from quarantine/Sheaf/Paper/PointQuotientTowerHomotopy.lean lines 59-222."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "def-weil-integral-reduction-tower",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the published quotient and coefficient pullback functors and their actual adjacent transitions. Reorder degree and tower index by HomologicalComplex.functorEquivalence. Apply exact point sections to construct source and target, retaining the whole diagram. Restriction of coefficients on diagrams preserves finite limits and colimits componentwise. Use the standard derived category of module towers. The comparison predicate records, without asserting existence, the normalized strict isomorphism and the literal counit-derived factor composite. All definition and instance bodies are copied verbatim from the archived item. No data are taken from a new existence theorem.",
+   "uses": [
+    "def-weil-integral-reduction-tower",
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "def-weil-inverse-system",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-integral-reduction-tower",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, tensor product of module sheaves; original lem-trf-point-quotient-tower-homotopy proof steps 1-3 and 7; unchanged definitions extracted from quarantine/Sheaf/Paper/PointQuotientTowerHomotopy.lean lines 59-222."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison of a coherent derived quotient tower with the strict quotient tower of a K flat complex and exact sections",
+   "results": "OK 8 hits: DerivedCategory.right_fac_of_isStrictlyLE, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isIso_Q_map_iff_quasiIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso, exactAt_iff_of_quasiIsoAt, DerivedCategory.instEssSurjCochainComplexIntQ. These supply generic flatness, localization or inverse sequence infrastructure, not the completed coefficient sheaf tower construction and its normalized whole-diagram comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict quotient towers of coefficient sheaves and their coherent derived reduction comparison via exact sections",
+   "results": "OK 8 hits: Profinite.NobelingProof.succ_exact, SheafOfModules.Presentation.map_π_eq, SheafOfModules.relationsOfIsCokernelFree_I, SheafOfModules.relationsOfIsCokernelFree_s, localCohomology.diagram, IsAdicComplete.StrictMono.mkQ_comp_lift, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, SheafOfModules.Presentation.mapRelations_mapGenerators_assoc. These supply generic flatness, localization or inverse sequence infrastructure, not the completed coefficient sheaf tower construction and its normalized whole-diagram comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*[Tt]ower|[Qq]uotient.*[Tt]ower|mapDerivedCategoryFactors|ofOpSequence",
+   "results": "OK 25 hits: Mathlib/NumberTheory/RamificationInertia/Inertia.lean, Mathlib/NumberTheory/RamificationInertia/Basic.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/RingTheory/Derivation/ToSquareZero.lean, Mathlib/Topology/Algebra/ConstMulAction.lean. These supply generic flatness, localization or inverse sequence infrastructure, not the completed coefficient sheaf tower construction and its normalized whole-diagram comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointQuotientTowerHomotopy",
+  "date": "2026-10-27",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "Clause (3), common representative quotient towers; extraction from the existing implementation of lem-trf-point-quotient-tower-homotopy.",
+   "via": [
+    "lem-trf-point-quotient-tower-homotopy"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointQuotientTowerData",
+  "file": "lean/Sheaf/Paper/PointQuotientTowerData.lean",
+  "declaration": "WeilConjectures.PointQuotientTower.sourceSheafTower",
+  "declarations": [
+   "WeilConjectures.PointQuotientTower.sourceSheafTower",
+   "WeilConjectures.PointQuotientTower.targetSheafTower",
+   "WeilConjectures.PointQuotientTower.sectionsTowers",
+   "WeilConjectures.PointQuotientTower.sectionsTowersLimits",
+   "WeilConjectures.PointQuotientTower.sectionsTowersColimits",
+   "WeilConjectures.PointQuotientTower.source",
+   "WeilConjectures.PointQuotientTower.target",
+   "WeilConjectures.PointQuotientTower.sourceLevel",
+   "WeilConjectures.PointQuotientTower.targetLevel",
+   "WeilConjectures.PointQuotientTower.goodHomotopyRelation",
+   "WeilConjectures.PointQuotientTower.moduleTowersHasDerived",
+   "WeilConjectures.PointQuotientTower.restrictTowers",
+   "WeilConjectures.PointQuotientTower.restrictTowersLimits",
+   "WeilConjectures.PointQuotientTower.restrictTowersColimits",
+   "WeilConjectures.PointQuotientTower.presentedSheafTower",
+   "WeilConjectures.PointQuotientTower.coherentSections",
+   "WeilConjectures.PointQuotientTower.CoherentSourceComparison"
+  ],
+  "statement": "def sourceSheafTower",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f1485",
+  "group": "E4",
+  "result": "fix",
+  "landing": "20261026T222629-L-675688",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f1485",
+  "group": "E4",
+  "result": "fix",
+  "landing": "20261026T222629-L-675688",
+  "kind": "interface",
+  "note": "independent cc review: E4 PointQuotientTowerHomotopy f148: verbatim extraction of 17 defs to PointQuotientTowerData + proved coherentSource (via proved pbcIsoRestriction_isKFlat, published towerCounit_isIso, new true hole strictPresentationComparison) against lem-trf-point-quotient-tower-homotopy and the 4 new nodes; sandbox compile of all 5 modules OK, axioms clean apart from sorryAx from the new hole; item 0 importers"
+ }
+}

@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.RingHom.FaithfullyFlat
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 
 /-!
 # Faithful flatness of localized field extension base change
@@ -45,7 +46,17 @@ theorem localRingHom_tensorProduct_fieldExtension_faithfullyFlat
     [Algebra.FinitePresentation A B]
     (q : Ideal B) [q.IsPrime] (qK : Ideal (B ⊗[k] K)) [qK.IsPrime]
     (h : q = qK.comap (Algebra.TensorProduct.includeLeftRingHom : B →+* B ⊗[k] K)) :
-    (Localization.localRingHom q qK Algebra.TensorProduct.includeLeftRingHom h).FaithfullyFlat :=
-  sorry
+    (Localization.localRingHom q qK Algebra.TensorProduct.includeLeftRingHom h).FaithfullyFlat := by
+  have hf : (Algebra.TensorProduct.includeLeftRingHom : B →+* B ⊗[k] K).FaithfullyFlat := by
+    change (algebraMap B (B ⊗[k] K)).FaithfullyFlat
+    rw [RingHom.faithfullyFlat_algebraMap_iff]
+    infer_instance
+  let f := Localization.localRingHom q qK Algebra.TensorProduct.includeLeftRingHom h
+  let : Algebra (Localization.AtPrime q) (Localization.AtPrime qK) := f.toAlgebra
+  have : Module.Flat (Localization.AtPrime q) (Localization.AtPrime qK) :=
+    hf.flat.localRingHom qK q h
+  have : IsLocalHom (algebraMap (Localization.AtPrime q) (Localization.AtPrime qK)) :=
+    inferInstanceAs (IsLocalHom f)
+  exact Module.FaithfullyFlat.of_flat_of_isLocalHom
 
 end Localization

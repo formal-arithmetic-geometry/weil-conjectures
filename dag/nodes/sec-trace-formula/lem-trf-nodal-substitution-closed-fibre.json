@@ -1,0 +1,302 @@
+{
+ "id": "lem-trf-nodal-substitution-closed-fibre",
+ "kind": "statement",
+ "title": "Nodal substitution and compatibility with the chosen closed fibre",
+ "statement": "Let $(A,\\mathfrak m)$ and $(B,\\mathfrak n)$ be complete Noetherian commutative local rings [def-weil-pbc-noetherian-ring, def-weil-pbc-adically-complete-ring], let $\\alpha:A\\to B$ be local ($\\alpha(\\mathfrak m)\\subseteq\\mathfrak n$), put $k=A/\\mathfrak m$, and fix a $k$-algebra isomorphism $\\theta:k[[x,y]]/(xy)\\xrightarrow{\\sim}B/\\mathfrak mB$. Assume $h\\in\\mathfrak m$ and $u,v\\in\\mathfrak n$ satisfy $uv=\\alpha(h)$ and reduce to $\\theta(x),\\theta(y)$. Put $R=A[[x,y]]$, $\\mathfrak a=\\mathfrak mR+(x,y)$, $C=R/(xy-h)$, and let $\\mathfrak a_C$ be the image of $\\mathfrak a$ [def-weil-pbc-multivariate-power-series]. Then $R$ and $C$ are Noetherian local rings with maximal ideals $\\mathfrak a$ and $\\mathfrak a_C$, and are complete for those ideals. There is a local $A$-algebra homomorphism $\\phi:C\\to B$ induced by adic substitution $x\\mapsto u$, $y\\mapsto v$: for $F=\\sum c_{ij}x^iy^j$, its image modulo $\\mathfrak n^N$ is $\\sum_{i+j<N}\\alpha(c_{ij})u^iv^j$. Coefficient reduction induces an isomorphism $\\rho:C/\\mathfrak mC\\xrightarrow{\\sim}k[[x,y]]/(xy)$ preserving constants and variables, and the induced homomorphism $\\bar\\phi:C/\\mathfrak mC\\to B/\\mathfrak mB$ equals $\\theta\\circ\\rho$. In particular $\\bar\\phi$ is an isomorphism. Moreover $\\mathfrak n=\\mathfrak a_CB=\\mathfrak mB+(u,v)B$, and the residue fields of $C$ and $B$ are both $k$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBX, lemma-formal-local-structure-nodal-family, third paragraph: adic substitution and the asserted isomorphism after dividing by the base maximal ideal."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-power-series-noetherian], $R=A[[x,y]]$ is Noetherian. By [lem-weil-pbc-power-series-local-ring] it is local with maximal ideal consisting of the series whose constant coefficient lies in $\\mathfrak m$. Every series is $F(0)+xG+yH$: assign each nonconstant monomial divisible by $x$ to $xG$ and the remaining monomials to $yH$. Thus this maximal ideal is exactly $\\mathfrak a=\\mathfrak mR+(x,y)$. Apply [lem-weil-pbc-power-series-complete-over-complete-base] with $\\Lambda=A$, $J=\\mathfrak m$ and $d=2$ to obtain $\\mathfrak a$-adic completeness of $R$.",
+   "uses": [
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-power-series-local-ring",
+    "lem-weil-pbc-power-series-complete-over-complete-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBX, lemma-formal-local-structure-nodal-family, proof: displayed completed nodal substitution map and its reduction modulo the base maximal ideal; details supplied using the cited algebra lemmas."
+   }
+  },
+  {
+   "text": "Since $h\\in\\mathfrak m$, $xy-h\\in\\mathfrak a$, so $(xy-h)$ is a proper ideal. Apply [lem-weil-pbc-complete-local-quotient] to $R$ and this ideal. It gives that $C$ is Noetherian local, has maximal ideal $\\mathfrak a_C$, and is complete for that ideal.",
+   "uses": [
+    "lem-weil-pbc-complete-local-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBX, lemma-formal-local-structure-nodal-family, proof: displayed completed nodal substitution map and its reduction modulo the base maximal ideal; details supplied using the cited algebra lemmas."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-power-series-adic-evaluation] to the coefficient map $\\alpha:A\\to B$, the ideal $\\mathfrak n$, and the elements $u,v\\in\\mathfrak n$. This gives a ring homomorphism $E:R\\to B$ extending $\\alpha$, with $E(x)=u$, $E(y)=v$ and the specified formula modulo every $\\mathfrak n^N$. Since $E(xy-h)=uv-\\alpha(h)=0$, define $\\phi([F])=E(F)$; this is well-defined because $E$ kills every multiple of $xy-h$. It is an $A$-algebra homomorphism with the asserted substitution formula. Moreover $E(\\mathfrak a)\\subseteq\\mathfrak n$, since $\\alpha$ is local. The proper ideal $\\phi^{-1}(\\mathfrak n)$ contains the maximal ideal $\\mathfrak a_C$ and therefore equals it. Hence $\\phi$ is local.",
+   "uses": [
+    "lem-weil-pbc-power-series-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBX, lemma-formal-local-structure-nodal-family, proof: displayed completed nodal substitution map and its reduction modulo the base maximal ideal; details supplied using the cited algebra lemmas."
+   }
+  },
+  {
+   "text": "Let $r:R\\to k[[x,y]]$ be coefficient reduction. It is surjective by choosing a lift in $A$ of each coefficient in $k$. The ideal $\\mathfrak m$ is finitely generated because $A$ is Noetherian, so [lem-sbc-mv-power-series-quotient-kernel] gives $\\ker r=\\mathfrak mR$. Since $r(xy-h)=xy$, the inverse image of $(xy)$ is $\\mathfrak mR+(xy-h)$: if $r(F)=xyG$, lift $G$ to $\\widetilde G\\in R$ and then $F-(xy-h)\\widetilde G\\in\\ker r$. Consequently the formula $\\rho([[F]])=[r(F)]$ is well-defined, surjective and injective on $C/\\mathfrak mC$. This proves the required isomorphism, including its values on constants and variables.",
+   "uses": [
+    "lem-sbc-mv-power-series-quotient-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBX, lemma-formal-local-structure-nodal-family, proof: displayed completed nodal substitution map and its reduction modulo the base maximal ideal; details supplied using the cited algebra lemmas."
+   }
+  },
+  {
+   "text": "Put $D=B/\\mathfrak mB$ and let $\\pi:B\\to D$ be the quotient. The ideal $\\mathfrak mB$ is proper since it is contained in $\\mathfrak n$. By [lem-weil-pbc-complete-local-quotient], $D$ is complete for its maximal ideal $\\mathfrak n_D=\\mathfrak n/\\mathfrak mB$. Consider the two ring homomorphisms $\\pi E$ and $\\theta\\circ q\\circ r$ from $A[[x,y]]$ to $D$, where $q:k[[x,y]]\\to k[[x,y]]/(xy)$. They have the same coefficient map $A\\to k\\to D$ because $\\theta$ is a $k$-algebra map, and the same images $\\pi(u),\\pi(v)\\in\\mathfrak n_D$ of the variables by hypothesis. The uniqueness clause of [lem-weil-pbc-power-series-universal-property-complete], applied with coefficient ring $A$, target $D$ and ideal $\\mathfrak n_D$, gives $\\pi E=\\theta q r$. Descending to the common quotient $C/\\mathfrak mC$ proves $\\bar\\phi=\\theta\\rho$. Both factors are isomorphisms, so $\\bar\\phi$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-complete-local-quotient",
+    "lem-weil-pbc-power-series-universal-property-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBX, lemma-formal-local-structure-nodal-family, proof: displayed completed nodal substitution map and its reduction modulo the base maximal ideal; details supplied using the cited algebra lemmas."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-power-series-local-ring], $k[[x,y]]$ is local with maximal ideal $(x,y)$, using the same constant-plus-variables decomposition as in step 1. By [lem-weil-pbc-quotient-local-structure], $k[[x,y]]/(xy)$ has maximal ideal generated by $x,y$, and $D$ has maximal ideal $\\mathfrak n/\\mathfrak mB$. An isomorphism sends the unique maximal ideal onto the unique maximal ideal; hence $\\theta$ identifies $(x,y)/(xy)$ with $\\mathfrak n/\\mathfrak mB$. As $\\theta(x)=\\pi(u)$ and $\\theta(y)=\\pi(v)$, taking inverse images under $\\pi$ gives $\\mathfrak n=\\mathfrak mB+(u,v)B$. Since $\\mathfrak a_C$ is generated by the images of $\\mathfrak m,x,y$, this is also $\\mathfrak a_CB$. Finally $C/\\mathfrak a_C=R/\\mathfrak a\\cong k$ by constant coefficient modulo $\\mathfrak m$, and $B/\\mathfrak n\\cong (k[[x,y]]/(xy))/(x,y)\\cong k$ via $\\theta$. These identifications respect the given maps from $A$.",
+   "uses": [
+    "lem-weil-pbc-power-series-local-ring",
+    "lem-weil-pbc-quotient-local-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBX, lemma-formal-local-structure-nodal-family, proof: displayed completed nodal substitution map and its reduction modulo the base maximal ideal; details supplied using the cited algebra lemmas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-sbc-mv-power-series-quotient-kernel",
+  "lem-weil-pbc-power-series-universal-property-complete",
+  "lem-weil-pbc-quotient-local-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBX, lemma-formal-local-structure-nodal-family, proof: displayed completed nodal substitution map and its reduction modulo the base maximal ideal; details supplied using the cited algebra lemmas. Agent-written expansion of the algebra suppressed in the source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Ideal.Quotient",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Ideal.Quotient'",
+   "date": "2026-10-22",
+   "verdict": "No match: coefficient-kernel and adic-evaluation tools cover parts, but no hit supplies the nodal hypersurface map together with its agreement with an arbitrary chosen special-fibre isomorphism and the local maximal-ideal comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "MvPowerSeries.*(eval|map|quotient)|coeff.*ker|ker.*coeff",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/FormalGroup/Basic.lean\", \"line\": \"185\", \"text\": \"  toPowerSeries := (F : MvPowerSeries (Fin 2) R).map f\"}\n  {\"file\": \"Mathlib/RingTheory/FormalGroup/Basic.lean\", \"line\": \"190\", \"text\": \"    have (g₁ g₂ : MvPowerSeries (Fin 3) R) : ![g₁.map f, g₂.map f] =\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"203\", \"text\": \"  norm_num [E_qExpansion_coeff _ ⟨2, rfl⟩, show bernoulli 4 = -1 / 30 by decide +kernel]\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"206\", \"text\": \"  norm_num [E_qExpansion_coeff _ ⟨3, rfl⟩, show bernoulli 6 = 1 / 42 by decide +kernel]\"}\n  {\"file\": \"Mathlib/NumberTheory/HeckeRing/Defs.lean\", \"line\": \"180\", \"text\": \"Hecke ring `𝕋 Δ H Z` (see `HeckeRing`). The coefficients `Z` need only carry a `Zero` for the\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.RingTheory.MvPowerSeries.Evaluation\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"line\": \"35\", \"text\": \"power series `f : MvPowerSeries σ R` by a map `a : σ → R`\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"line\": \"43\", \"text\": \"in `Mathlib/RingTheory/MvPowerSeries/Evaluation.lean`.\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"line\": \"51\", \"text\": \"If users need to enter the API, they can use `MvPowerSeries.subst_eq_eval₂`\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"line\": \"198\", \"text\": \"    (subst : (σ → MvPowerSeries τ S) → (MvPowerSeries σ R) → _) = eval₂ (algebraMap _ _) := by\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Complete.lean\", \"line\": \"98\", \"text\": \"lemma ker_constantCoeff : RingHom.ker constantCoeff = Ideal.span {(p : 𝕎 k)} := by\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Complete.lean\", \"line\": \"106\", \"text\": \"  (Ideal.quotEquivOfEq ker_constantCoeff.symm).trans\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Complete.lean\", \"line\": \"107\", \"text\": \"    (RingHom.quotientKerEquivOfSurjective (constantCoeff_surjective p))\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Truncated.lean\", \"line\": \"309\", \"text\": \"    x ∈ RingHom.ker (truncate (p := p) n) ↔ ∀ i < n, x.coeff i = 0 := by\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Truncated.lean\", \"line\": \"396\", \"text\": \"  simp only [WittVector.mem_ker_truncate, Ideal.mem_iInf, WittVector.zero_coeff] at hx ⊢\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Order.lean\", \"line\": \"509\", \"text\": \"theorem le_order_map (f : R →+* S) {φ : MvPowerSeries σ R} : φ.order ≤ (φ.map f).order :=\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Expand.lean\", \"line\": \"87\", \"text\": \"here, but we don't have `rename` for `MvPowerSeries`. And for `eval₂Hom`, `eval₂`\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Expand.lean\", \"line\": \"241\", \"text\": \"      MvPowerSeries.map (frobenius R p) ((trunc' R (p • n) f).expand p) := by\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"line\": \"51\", \"text\": \"* `MvPowerSeries.trunc'_map` : image of a truncation under a change of rings\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"line\": \"26\", \"text\": \"`MvPowerSeries.eval₂ f φ a` is the evaluation of the multivariate power series `f` at `a`.\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"line\": \"30\", \"text\": \"bundled in `MvPowerSeries.HasEval a` :\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"line\": \"37\", \"text\": \"* `MvPowerSeries.eval₂Hom`: the evaluation of multivariate power series, as a ring morphism,\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"line\": \"38\", \"text\": \"* `MvPowerSeries.aeval`: the evaluation map as an algebra morphism\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"line\": \"39\", \"text\": \"* `MvPowerSeries.uniformContinuous_eval₂`: uniform continuity of the evaluation\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Basic.lean\", \"line\": \"44\", \"text\": \"- `MvPowerSeries.map`: apply a `RingHom` to the coefficients of a `MvPowerSeries` (as a `RingHom`).\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: coefficient-kernel and adic-evaluation tools cover parts, but no hit supplies the nodal hypersurface map together with its agreement with an arbitrary chosen special-fibre isomorphism and the local maximal-ideal comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For h in the maximal ideal of a complete Noetherian local ring the local algebra A[[x,y]]/(xy-h) reduces to k[[x,y]]/(xy)",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        {g : PowerSeries A} →\\n          (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0) →\\n            (Polynomial A ⧸ Ideal.span {g.weierstrassDistinguished\", \"doc\": \"Given a power series $ g $ over a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero, then there exists \"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : PowerSeries A} →\\n      {f : Polynomial A} →\\n        {h : PowerSeries A} →\\n          {I : Ideal A} →\\n            g.IsWeierstrassFactorizationAt f h I →\\n              [IsAdicComplete I A] → (Polynomial A ⧸ Ideal.span {f}) ≃ₐ[A] PowerSeries A ⧸ Ideal.sp\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A}\\n  (H : g.IsWeierstrassFactorizationAt f h I) [inst_1 : IsAdicComplete I A] (a : Polynomial A ⧸ Ideal.span {f}),\\n  H.algEquivQuotient a =\\n    (Ideal.quotientEquivAlgOfEq A ⋯) ((Ideal.quotient\", \"doc\": \"Let $A$ be a commutative ring that is $I$-adically complete for some ideal $I \\\\subseteq A$. Let $g \\\\in A⟦X⟧$ be a power series that has a Weierstrass factorization $g = \\\\hat{f} \\\\cdot h$, where $f \\\\in \"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : Polynomial A} →\\n      {I : Ideal A} →\\n        g.IsDistinguishedAt I →\\n          [IsAdicComplete I A] → (Polynomial A ⧸ Ideal.span {g}) ≃ₐ[A] PowerSeries A ⧸ Ideal.span {↑g}\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n  {\"name\": \"isLocalRing_of_isAdicComplete_maximal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/LocalRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (m : Ideal R) [hmax : m.IsMaximal] [IsAdicComplete m R], IsLocalRing R\", \"doc\": \"If a commutative ring $ R $ is adic complete with respect to a maximal ideal $ \\\\mathfrak{m} $, then $ R $ is a local ring.\"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassFactorization\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A}, (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ f h, g.IsWeierstrassFactorization f h\", \"doc\": \"For a local ring $ A $ and a power series $ g $ over $ A $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the maximal ideal of $ A $) is non-zero, the\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A}\\n  (H : g.IsWeierstrassFactorizationAt f h I) [inst_1 : IsAdicComplete I A] (x : PowerSeries A ⧸ Ideal.span {g}),\\n  H.algEquivQuotient.symm x = (Ideal.Quotient.mk (Ideal.span {f})) (⋯.mod' ((\", \"doc\": \"The inverse of the algebra isomorphism between the polynomial quotient ring $ A[X]/(g) $ and the power series quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial. For any element $ x\"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassDivision\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] (f : PowerSeries A) {g : PowerSeries A}\\n  [IsAdicComplete (IsLocalRing.maximalIdeal A) A],\\n  (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ q r, f.IsWeierstrassDivision g q r\", \"doc\": \"Let $ A $ be a local ring whose maximal ideal is adic complete. If $ g $ is a power series in $ A[[X]] $ whose image in the residue field of $ A $ is nonzero, then for any power series $ f $, there ex\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: coefficient-kernel and adic-evaluation tools cover parts, but no hit supplies the nodal hypersurface map together with its agreement with an arbitrary chosen special-fibre isomorphism and the local maximal-ideal comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Substitution into A formal power series x y modulo xy minus h gives a local homomorphism inducing the chosen split node isomorphism on the closed fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        {g : PowerSeries A} →\\n          (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0) →\\n            (Polynomial A ⧸ Ideal.span {g.weierstrassDistinguished\", \"doc\": \"Given a power series $ g $ over a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero, then there exists \"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A}\\n  (H : g.IsWeierstrassFactorizationAt f h I) [inst_1 : IsAdicComplete I A] (a : Polynomial A ⧸ Ideal.span {f}),\\n  H.algEquivQuotient a =\\n    (Ideal.quotientEquivAlgOfEq A ⋯) ((Ideal.quotient\", \"doc\": \"Let $A$ be a commutative ring that is $I$-adically complete for some ideal $I \\\\subseteq A$. Let $g \\\\in A⟦X⟧$ be a power series that has a Weierstrass factorization $g = \\\\hat{f} \\\\cdot h$, where $f \\\\in \"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A}\\n  (H : g.IsWeierstrassFactorizationAt f h I) [inst_1 : IsAdicComplete I A] (x : PowerSeries A ⧸ Ideal.span {g}),\\n  H.algEquivQuotient.symm x = (Ideal.Quotient.mk (Ideal.span {f})) (⋯.mod' ((\", \"doc\": \"The inverse of the algebra isomorphism between the polynomial quotient ring $ A[X]/(g) $ and the power series quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial. For any element $ x\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : PowerSeries A} →\\n      {f : Polynomial A} →\\n        {h : PowerSeries A} →\\n          {I : Ideal A} →\\n            g.IsWeierstrassFactorizationAt f h I →\\n              [IsAdicComplete I A] → (Polynomial A ⧸ Ideal.span {f}) ≃ₐ[A] PowerSeries A ⧸ Ideal.sp\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : Polynomial A} →\\n      {I : Ideal A} →\\n        g.IsDistinguishedAt I →\\n          [IsAdicComplete I A] → (Polynomial A ⧸ Ideal.span {g}) ≃ₐ[A] PowerSeries A ⧸ Ideal.span {↑g}\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : Polynomial A} {I : Ideal A} (H : g.IsDistinguishedAt I)\\n  [inst_1 : IsAdicComplete I A] (a : PowerSeries A ⧸ Ideal.span {↑g}),\\n  H.algEquivQuotient.symm a = (Ideal.Quotient.mk (Ideal.span {g})) (⋯.mod' a)\", \"doc\": \"For a commutative ring $ A $, a polynomial $ g $ distinguished at an ideal $ I $, and an element $ a $ in the quotient ring $ A⟦X⟧ / (g) $, the inverse of the algebra equivalence $ \\\\phi $ satisfies $ \"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.algEquivQuotient_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : Polynomial A} {I : Ideal A} (H : g.IsDistinguishedAt I)\\n  [inst_1 : IsAdicComplete I A] (a : Polynomial A ⧸ Ideal.span {g}),\\n  H.algEquivQuotient a = (Ideal.quotientMapₐ (Ideal.span {↑g}) (Polynomial.coeToPowerSeries.algHom A) ⋯) a\", \"doc\": \"For a commutative ring $ A $, a distinguished polynomial $ g $ at an ideal $ I $, and an element $ a $ in the quotient ring $ A[X]/(g) $, the algebra isomorphism $ H.\\\\text{algEquivQuotient} $ maps $ a\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorization\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} → [inst : CommRing A] → PowerSeries A → Polynomial A → PowerSeries A → [IsLocalRing A] → Prop\", \"doc\": \"For a local commutative ring $ A $, this proposition asserts that a power series $ g $ factors as a polynomial $ f $ multiplied by a power series $ h $, where $ h $ is a unit modulo the maximal ideal \"}",
+   "date": "2026-10-22",
+   "verdict": "No match: coefficient-kernel and adic-evaluation tools cover parts, but no hit supplies the nodal hypersurface map together with its agreement with an arbitrary chosen special-fibre isomorphism and the local maximal-ideal comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete nodal hypersurface substitution map agrees with the special fibre isomorphism by truncating power series",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PowerSeries.trunc\", \"module\": \"Mathlib.RingTheory.PowerSeries.Trunc\", \"type\": \"(n : ℕ) : R⟦X⟧ →ₗ[R] R[X]\", \"doc\": \"For a natural number $ n $ and a power series $ \\\\varphi \\\\in R\\\\llbracket X \\\\rrbracket $, this linear map returns the polynomial obtained by summing the coefficients $ a_m $ of $ \\\\varphi $ multiplied by\"}\n  {\"name\": \"MvPowerSeries.truncFun'\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Trunc\", \"type\": \"(φ : MvPowerSeries σ R) : MvPolynomial σ R\", \"doc\": \"For each natural number $ n $, the function that maps a multivariate power series $ \\\\varphi $ to the polynomial obtained by summing, over all monomials $ m $ of total degree at most $ n $, the product\"}\n  {\"name\": \"MvPowerSeries.trunc'\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Trunc\", \"type\": \": MvPowerSeries σ R →+ MvPolynomial σ R\", \"doc\": \"For each natural number $ n $, this is a semiring homomorphism that maps a multivariate power series to its truncation as a polynomial, retaining only terms of total degree at most $ n $. It preserves\"}\n  {\"name\": \"PowerSeries.subst\", \"module\": \"Mathlib.RingTheory.PowerSeries.Substitution\", \"type\": \"(a : MvPowerSeries τ S) (f : PowerSeries R) : MvPowerSeries τ S\", \"doc\": \"The function substitutes the variable in a univariate power series $ f $ over a commutative ring $ R $ with a multivariate power series $ a $ in variables indexed by $ \\\\tau $ over a ring $ S $, result\"}\n  {\"name\": \"PowerSeries.subst_coe\", \"module\": \"Mathlib.RingTheory.PowerSeries.Substitution\", \"type\": \"(ha : HasSubst a) (p : Polynomial R) : subst a (p : PowerSeries R) = (Polynomial.aeval a p)\", \"doc\": \"For any polynomial $ p $ over a commutative ring $ R $ and a multivariate power series $ a $ with nilpotent constant term, substituting the polynomial $ p $ (viewed as a power series) into $ a $ is eq\"}\n  {\"name\": \"PowerSeries.subst_X\", \"module\": \"Mathlib.RingTheory.PowerSeries.Substitution\", \"type\": \"(ha : HasSubst a) : subst a (X : R⟦X⟧) = a\", \"doc\": \"If a multivariate power series $ a $ satisfies the substitution condition (i.e., its constant term is nilpotent), then substituting $ a $ into the variable $ X $ of the univariate power series $ X $ r\"}\n  {\"name\": \"MvPowerSeries.substAlgHom_eq_aeval\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Substitution\", \"type\": \"[UniformSpace R] [DiscreteUniformity R] [UniformSpace S] [DiscreteUniformity S] (ha : HasSubst a) :\\n  (substAlgHom ha : MvPowerSeries σ R → MvPowerSeries τ S) = MvPowerSeries.aeval ha.hasEval\", \"doc\": \"Under the discrete uniformity on commutative rings $R$ and $S$, the substitution algebra homomorphism $\\\\mathrm{substAlgHom}$ for multivariate power series equals the evaluation algebra homomorphism $\\\\\"}\n  {\"name\": \"MvPowerSeries.subst_eq_eval₂\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Substitution\", \"type\": \"[UniformSpace R] [DiscreteUniformity R] [UniformSpace S] [DiscreteUniformity S] :\\n  (subst : (σ → MvPowerSeries τ S) → (MvPowerSeries σ R) → _) = eval₂ (algebraMap _ _)\", \"doc\": \"For multivariate power series over commutative rings $ R $ and $ S $ equipped with discrete uniformity, the substitution operation $ \\\\operatorname{subst} $ that replaces variables indexed by $ \\\\sigma \"}",
+   "date": "2026-10-22",
+   "verdict": "No match: coefficient-kernel and adic-evaluation tools cover parts, but no hit supplies the nodal hypersurface map together with its agreement with an arbitrary chosen special-fibre isomorphism and the local maximal-ideal comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "map.*(surjective|ker)|ker.*map|eval₂|substAlgHom",
+   "results": "OK 15 hits: Mathlib/RingTheory/MvPowerSeries/Substitution.lean; Mathlib/RingTheory/MvPowerSeries/Substitution.lean; Mathlib/RingTheory/MvPowerSeries/Substitution.lean; Mathlib/RingTheory/MvPowerSeries/Substitution.lean; Mathlib/RingTheory/MvPowerSeries/Substitution.lean; Mathlib/RingTheory/MvPowerSeries/Expand.lean; Mathlib/RingTheory/MvPowerSeries/Expand.lean; Mathlib/RingTheory/MvPowerSeries/Expand.lean. The kernel results concern coefficient maps; the evaluation hits concern substitution into an arbitrary complete topological ring.",
+   "date": "2026-10-22",
+   "verdict": "No match: coefficient-kernel and adic-evaluation tools cover parts, but no hit supplies the nodal hypersurface map together with its agreement with an arbitrary chosen special-fibre isomorphism and the local maximal-ideal comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, RingHom.ker",
+   "results": "OK 2 hits: MvPowerSeries.ker_map_of_fg; MvPowerSeries.ker_mapAlgHom_of_fg. The kernel results concern coefficient maps; the evaluation hits concern substitution into an arbitrary complete topological ring.",
+   "date": "2026-10-22",
+   "verdict": "No match: coefficient-kernel and adic-evaluation tools cover parts, but no hit supplies the nodal hypersurface map together with its agreement with an arbitrary chosen special-fibre isomorphism and the local maximal-ideal comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "ker_map_of_fg|eval₂Hom|nodal|xy.*-",
+   "results": "6 hits: Mathlib/RingTheory/MvPowerSeries/Expand.lean; Mathlib/RingTheory/MvPowerSeries/Evaluation.lean; Mathlib/RingTheory/MvPowerSeries/Evaluation.lean; Mathlib/RingTheory/MvPowerSeries/Evaluation.lean; Mathlib/RingTheory/MvPowerSeries/Evaluation.lean; Mathlib/RingTheory/MvPowerSeries/Evaluation.lean. Source grep limited to Mathlib/RingTheory/MvPowerSeries",
+   "date": "2026-10-23",
+   "verdict": "No match for the full item. Hits supply coefficient-map kernels, general evaluation, local coefficient maps or one-variable Weierstrass division, not the specified nodal quotient and all closed-fibre identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Substitution into a complete local ring induces a nodal power series quotient map compatible with the residue field coefficient quotient",
+   "results": "8 hits: PowerSeries.subst; MvPowerSeries.map_subst; MvPowerSeries.subst; PowerSeries.substAlgHom; IsLocalRing.residue; PowerSeries.subst_coe; IsLocalRing.ResidueField.map; MvPowerSeries.subst_eq_eval₂",
+   "date": "2026-10-23",
+   "verdict": "No match for the full item. Hits supply coefficient-map kernels, general evaluation, local coefficient maps or one-variable Weierstrass division, not the specified nodal quotient and all closed-fibre identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, RingHom.ker",
+   "results": "2 hits: MvPowerSeries.ker_map_of_fg; MvPowerSeries.ker_mapAlgHom_of_fg",
+   "date": "2026-10-23",
+   "verdict": "No match for the full item. Hits supply coefficient-map kernels, general evaluation, local coefficient maps or one-variable Weierstrass division, not the specified nodal quotient and all closed-fibre identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete Noetherian local nodal hypersurface A[[x,y]]/(xy-h) maps by substitution to B and identifies its closed fibre with k[[x,y]]/(xy)",
+   "results": "8 hits: PowerSeries.algEquivQuotientWeierstrassDistinguished; PowerSeries.weierstrassDistinguished; PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply; PowerSeries.exists_isWeierstrassFactorization; PowerSeries.weierstrassMod; PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient; Polynomial.IsDistinguishedAt.algEquivQuotient; PowerSeries.isDistinguishedAt_weierstrassDistinguished",
+   "date": "2026-10-23",
+   "verdict": "No match for the full item. Hits supply coefficient-map kernels, general evaluation, local coefficient maps or one-variable Weierstrass division, not the specified nodal quotient and all closed-fibre identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local homomorphism from a formal power series quotient in two variables commutes with reduction modulo the base maximal ideal and with evaluation in a complete ring",
+   "results": "8 hits: PowerSeries.weierstrassDiv; PowerSeries.exists_isWeierstrassDivision; PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod; PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod; PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self; PowerSeries.IsWeierstrassDivisorAt.mod'; MvPowerSeries.map.isLocalHom; PowerSeries.exists_isWeierstrassFactorization",
+   "date": "2026-10-23",
+   "verdict": "No match for the full item. Hits supply coefficient-map kernels, general evaluation, local coefficient maps or one-variable Weierstrass division, not the specified nodal quotient and all closed-fibre identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-local-structure-nodal-family",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nodal local-equation input below lem-trf-local-term-locality, Stacks lemma-etale-local-structure-nodal-family: First proof using Artin approximation, third paragraph: the completed local equation supplied by lemma-formal-local-structure-nodal-family. Extracted subargument: Tag 0CBX, lemma-formal-local-structure-nodal-family, third paragraph: adic substitution and the asserted isomorphism after dividing by the base maximal ideal.",
+   "via": [
+    "lem-trf-formal-local-structure-nodal-family",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-nodal-substitution-closed-fibre",
+  "worker": "stage1",
+  "summary": "Expanded the nodal substitution and closed-fibre compatibility argument in six steps using eight existing algebra nodes. Proved the coefficient-quotient isomorphism by its explicit kernel, compared maps by complete-target power-series uniqueness, and deduced maximal-ideal and residue-field identities. No statement correction and no new nodes.",
+  "blueprint": "Historical nodal-local-equation subargument recorded in blueprint.from.place below lem-trf-local-term-locality; the current latest blueprint uses contracting correspondences instead. This item proves only the inherited Stacks 0CBX algebra input and changes no unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-noetherian",
+    "why": "Noetherianity of the finite-variable ambient ring. This is a generic algebra tool; no node of sk-i-curve-zero supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-local-ring",
+    "why": "Local structure from constant coefficient for A and k. This is a generic algebra tool; no node of sk-i-curve-zero supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-complete-over-complete-base",
+    "why": "Completeness for the combined maximal ideal over the complete base. This is a generic algebra tool; no node of sk-i-curve-zero supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-quotient",
+    "why": "Completeness and Noetherian local structure of the hypersurface and of B/mB. This is a generic algebra tool; no node of sk-i-curve-zero supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-adic-evaluation",
+    "why": "Substitution of u,v in the complete target and its truncation formula. This is a generic algebra tool; no node of sk-i-curve-zero supplies it."
+   },
+   {
+    "node": "lem-sbc-mv-power-series-quotient-kernel",
+    "why": "Kernel of coefficient reduction modulo the finitely generated base maximal ideal. This is a generic algebra tool; no node of sk-i-curve-zero supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-universal-property-complete",
+    "why": "Uniqueness of the two maps into the complete closed fibre with fixed coefficients and variables. This is a generic algebra tool; no node of sk-i-curve-zero supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-quotient-local-structure",
+    "why": "Identification of maximal ideals in the two closed-fibre quotients. This is a generic algebra tool; no node of sk-i-curve-zero supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-sbc-mv-power-series-quotient-kernel",
+  "lem-weil-pbc-power-series-universal-property-complete",
+  "lem-weil-pbc-quotient-local-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-f5ef80d3a",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-f5ef80d3a (reviewer sub-agent of L); spot-checked: I read Stacks 0CBX (curves.tex, lemma-formal-local-structure-nodal-family) in full. The item is the algebra behind the source's last paragraph: the substitution map A[[x,y]]/(xy-h) -> B and the fact that it is an isomorphism mod m. Its statement is unchanged from live, where the item is still unsplit with no proof; there is no repair note and no supersession. The parent's step 3 uses exactly what the item states. I checked all six steps against the full statements of the eight cited nodes. Step 1: R=A[[x,y]] is Noetherian and local with maximal ideal {F(0) in m} = mR+(x,y), and complete-over-complete-base (Lambda=A, J=m, d=2) gives completeness for that ideal. Step 2: complete-local-quotient applies because xy-h lies in the maximal ideal (h in m), so the ideal is proper. Step 3: adic evaluation (T=B, I=n, u,v in n) gives E with E(xy-h)=uv-alpha(h)=0. Locality: phi^-1(n) is a proper ideal containing a_C, so it equals a_C. Step 4: ker r = mR for finitely generated m; r^-1((xy)) = mR+(xy-h) via a lift of G; surjectivity is shown separately. Step 5: D=B/mB is complete by the quotient lemma. The maps pi E and theta q r agree on A because theta is k-linear and the k-structure on D is induced by alpha, and agree on x, y by hypothesis. The uniqueness clause (no continuity needed) gives phi-bar = theta rho. Step 6: theta matches the maximal ideals, so n = mB+(u,v)B = a_C B, and both residue fields are k. Edge cases checked: A=k with h=0 (phi=theta), the standard model xy-t over k[[t]], nonreduced A with h=0, and arbitrary theta; no step needs h regular, alpha injective or flatness. Searching the DAG with rg -L found no duplicate, and there are no new nodes. All 8 declared tool_uses are accepted: they are generic commutative-algebra nodes from sk-thm-p1 and sk-sbc used as black boxes, and none replaces a step of sk-i-curve-zero. No cycles, no SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NodalSubstitutionClosedFibre",
+  "declaration": "MvPowerSeries.NodalSubstitution.closed_fibre",
+  "declarations": [
+   "MvPowerSeries.NodalSubstitution.relationIdeal",
+   "MvPowerSeries.NodalSubstitution.Model",
+   "MvPowerSeries.NodalSubstitution.ambientIdeal",
+   "MvPowerSeries.NodalSubstitution.modelIdeal",
+   "MvPowerSeries.NodalSubstitution.closed_fibre"
+  ],
+  "file": "lean/Sheaf/RingTheory/NodalSubstitutionClosedFibre.lean",
+  "statement": "theorem closed_fibre (A : Type u) (B : Type v) [CommRing A] [CommRing B] [IsLocalRing A] [IsLocalRing B] [IsNoetherianRing A] [IsNoetherianRing B] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] [IsAdicComplete (IsLocalRing.maximalIdeal B) B] [Algebra A B] [IsLocalHom (algebraMap A B)] (θ : (MvPowerSeries (Fin 2) (A ⧸ IsLocalRing.maximalIdeal A) ⧸ Ideal.span {(X 0 : MvPowerSeries (Fin 2) (A ⧸ IsLocalRing.maximalIdeal A)) * X 1}) ≃+* (B ⧸ (IsLocalRing.maximalIdeal A).map (algebraMap A B))) (hθ : ∀ a : A, θ (Ideal.Quotient.mk _ (C (Ideal.Quotient.mk (IsLocalRing.maximalIdeal A) a))) = Ideal.Quotient.mk _ (algebraMap A B a)) (h : A) (hh : h ∈ IsLocalRing.maximalIdeal A) (u v : B) (hu : u ∈ IsLocalRing.maximalIdeal B) (hv : v ∈ IsLocalRing.maximalIdeal B) (huv : u * v = algebraMap A B h) (hvars : ∀ i : Fin 2, Ideal.Quotient.mk ((IsLocalRing.maximalIdeal A).map (algebraMap A B)) (![u, v] i) = θ (Ideal.Quotient.mk _ (X i))) : (IsNoetherianRing (MvPowerSeries (Fin 2) A) ∧ IsLocalRing (MvPowerSeries (Fin 2) A) ∧ IsLocalRing.maximalIdeal (MvPowerSeries (Fin 2) A) = ambientIdeal A ∧ IsAdicComplete (ambientIdeal A) (MvPowerSeries (Fin 2) A)) ∧ IsNoetherianRing (Model A h) ∧ ∃ localC : IsLocalRing (Model A h), @IsLocalRing.maximalIdeal (Model A h) _ localC = modelIdeal A h ∧ IsAdicComplete (modelIdeal A h) (Model A h) ∧ ∃ φ : Model A h →ₐ[A] B, IsLocalHom φ ∧ (∀ i : Fin 2, φ (Ideal.Quotient.mk _ (X i)) = ![u, v] i) ∧ (∀ (F : MvPowerSeries (Fin 2) A) (N : ℕ), Ideal.Quotient.mk (IsLocalRing.maximalIdeal B ^ N) (φ (Ideal.Quotient.mk _ F)) = Ideal.Quotient.mk (IsLocalRing.maximalIdeal B ^ N) (MvPolynomial.eval₂ (algebraMap A B) ![u, v] (F.truncTotal N))) ∧ ∃ ρ : (Model A h ⧸ (IsLocalRing.maximalIdeal A).map (algebraMap A (Model A h))) ≃+* (MvPowerSeries (Fin 2) (A ⧸ IsLocalRing.maximalIdeal A) ⧸ Ideal.span {(X 0 : MvPowerSeries (Fin 2) (A ⧸ IsLocalRing.maximalIdeal A)) * X 1}), (∀ F : MvPowerSeries (Fin 2) A, ρ (Ideal.Quotient.mk _ (Ideal.Quotient.mk (relationIdeal A h) F)) = Ideal.Quotient.mk _ (MvPowerSeries.map (Ideal.Quotient.mk (IsLocalRing.maximalIdeal A)) F)) ∧ ∃ φbar : (Model A h ⧸ (IsLocalRing.maximalIdeal A).map (algebraMap A (Model A h))) →+* (B ⧸ (IsLocalRing.maximalIdeal A).map (algebraMap A B)), (∀ c : Model A h, φbar (Ideal.Quotient.mk _ c) = Ideal.Quotient.mk _ (φ c)) ∧ φbar = θ.toRingHom.comp ρ.toRingHom ∧ Function.Bijective φbar ∧ IsLocalRing.maximalIdeal B = (modelIdeal A h).map φ ∧ IsLocalRing.maximalIdeal B = (IsLocalRing.maximalIdeal A).map (algebraMap A B) ⊔ Ideal.span {u, v} ∧ ∃ (eC : (Model A h ⧸ modelIdeal A h) ≃+* (A ⧸ IsLocalRing.maximalIdeal A)) (eB : (B ⧸ IsLocalRing.maximalIdeal B) ≃+* (A ⧸ IsLocalRing.maximalIdeal A)), (∀ a : A, eC (Ideal.Quotient.mk _ (algebraMap A (Model A h) a)) = Ideal.Quotient.mk _ a) ∧ (∀ a : A, eB (Ideal.Quotient.mk _ (algebraMap A B a)) = Ideal.Quotient.mk _ a)",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Concrete abbreviations name the equation ideal, its actual quotient, and the two ideals in the node. The k-linearity of theta is expressed on representatives from A; rho and phibar are characterized on every quotient representative. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-27c1c765b",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Only the item's lean record changes; its statement field matches the file verbatim. Every node clause is rendered: A,B complete Noetherian local in independent universes; algebraMap is a local hom; θ is a ring equiv whose k-linearity is required on constants from A (hθ); h∈m, u,v∈n, uv=α(h), and the variables reduce to θ(x),θ(y). Conclusions: R is Noetherian and local with maximal ideal mR+(x,y) and complete for it; C=Model is Noetherian, local (an existential conclusion) with maximal ideal a_C and complete for it; φ is a local A-algebra map with x↦u, y↦v and the truncTotal formula mod n^N (i+j<N, N=0 trivial); ρ is pinned on every representative to coefficient reduction; φbar is pinned by the quotient square, equals θ∘ρ and is bijective; n=a_C·B=mB+(u,v); residue isos eC, eB commute with A. No extra hypotheses (flatness, injectivity, regularity, coefficient field). Edge cases A=k with h=0, nonreduced A, any characteristic and N=0 are covered. The plain imports are the five recorded proof-dep modules (brief l.114). Docstrings, sorry-only proof and line widths are fine. Note: Model A h duplicates, by definitional equality, the abbrev formalNodalPowerSeriesQuotient in the parent theorem module FormalLocalStructureNodalFamily; it cannot be imported because the parent's proof_deps include this item (cycle), so this is not an H4 fault. No compile run because no file was changed."
+ }
+}

@@ -1,0 +1,193 @@
+{
+ "id": "lem-sfb-algebraic-integer-root-unity-congruence",
+ "kind": "statement",
+ "title": "An algebraic-integer congruence forces a root of unity to be one",
+ "statement": "Let $K$ be a field of characteristic zero and let $\\zeta,\\alpha\\in K$. Assume $\\alpha$ is an algebraic integer [def-weil-algebraic-integer], meaning that it satisfies a monic polynomial with integer coefficients. Let $n\\geq3$ and $r\\geq1$ be integers. If $\\zeta^r=1$ and $\\zeta=1+n\\alpha$, then $\\zeta=1$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Lemma 14.5, printed p.63 (PDF p.69); the root-of-unity statement over a characteristic-zero field."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-integer"
+ ],
+ "proof": [
+  {
+   "text": "If $\\zeta\\ne1$, choose the least positive $m$ with $\\zeta^m=1$; it exists since $r\\geq1$. Then $m>1$. Choose a prime divisor $p$ of $m$, put $s=m/p$ and $\\eta=\\zeta^s$. We have $\\eta^p=1$. For $1\\leq j<p$, the equality $\\eta^j=1$ would give $0<sj<m$ and $\\zeta^{sj}=1$, contradicting minimality. Thus $\\eta$ has order exactly $p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Milne, Chapter I, Lemma 14.5, printed p.63 (PDF p.69), proof: prime-order reduction and the norm equation."
+   }
+  },
+  {
+   "text": "Expand $(1+n\\alpha)^s$ and set $\\beta=\\sum_{j=1}^{s}\\binom{s}{j}n^{j-1}\\alpha^j$. Then $\\eta=1+n\\beta$. By [def-weil-pbc-integral-closure], integral elements form a subring containing the integers; hence each summand and their finite sum $\\beta$ are algebraic integers. Since $n\\ne0$, we also have $\\beta=(\\eta-1)/n\\in E:=\\mathbf Q(\\eta)$. The same monic integer polynomial annihilates $\\beta$ in $E$, because the inclusion $E\\hookrightarrow K$ is injective.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Milne, Chapter I, Lemma 14.5, printed p.63 (PDF p.69), proof: prime-order reduction and the norm equation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-prime-cyclotomic-degree-norm] to $\\eta$: the field $E$ is finite over $\\mathbf Q$, has degree $p-1$, and $N_{E/\\mathbf Q}(\\eta-1)=(-1)^{p-1}p$. Its hypotheses hold by step 1 and characteristic zero of $K$.",
+   "uses": [
+    "lem-sfb-prime-cyclotomic-degree-norm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Milne, Chapter I, Lemma 14.5, printed p.63 (PDF p.69), proof: prime-order reduction and the norm equation."
+   }
+  },
+  {
+   "text": "By [lem-sfb-field-norm-preserves-integrality], $N_{E/\\mathbf Q}(\\beta)$ is an algebraic integer in $\\mathbf Q$. Apply [lem-weil-rational-algebraic-integer] with $\\Omega=\\mathbf Q$ and the rational number itself as witness. Obtain $b\\in\\mathbf Z$ with $N_{E/\\mathbf Q}(\\beta)=b$.",
+   "uses": [
+    "lem-sfb-field-norm-preserves-integrality",
+    "lem-weil-rational-algebraic-integer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Milne, Chapter I, Lemma 14.5, printed p.63 (PDF p.69), proof: prime-order reduction and the norm equation."
+   }
+  },
+  {
+   "text": "Use multiplicativity and the scalar formula of [lem-sfb-finite-field-norm-minpoly] on $\\eta-1=n\\beta$: $$(-1)^{p-1}p=n^{p-1}b.$$ This is an equality of integers by injectivity of $\\mathbf Z\\hookrightarrow\\mathbf Q$. Thus $n^{p-1}$ divides $p$. Since $p\\geq2$, also $n\\mid p$. Primality of $p$ and $n\\geq3$ force $n=p$, hence $p\\geq3$. Now $p-1\\geq2$, so $p^2\\mid p$, impossible for $p>1$. This contradicts $\\zeta\\ne1$ and proves $\\zeta=1$.",
+   "uses": [
+    "lem-sfb-finite-field-norm-minpoly"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Milne, Chapter I, Lemma 14.5, printed p.63 (PDF p.69), proof: prime-order reduction and the norm equation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-closure",
+  "lem-sfb-prime-cyclotomic-degree-norm",
+  "lem-sfb-field-norm-preserves-integrality",
+  "lem-weil-rational-algebraic-integer",
+  "lem-sfb-finite-field-norm-minpoly"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Milne, Chapter I, Lemma 14.5, printed p.63 (PDF p.69), proof: prime-order reduction and the norm equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A root of unity equal to one plus n times an algebraic integer for n at least three is one",
+   "results": "{\"t\": \"2026-10-22T07:12:52Z\", \"tool\": \"leanfinder\", \"query\": \"A root of unity equal to one plus n times an algebraic integer for n at least three is one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPrimitiveRoot.toInteger_cube_eq_one\", \"IsCyclotomicExtension.Rat.Three.eta_sq_add_eta_add_one\", \"IsPrimitiveRoot.primitiveRoots_one\", \"IsCyclotomicExtension.Rat.Three.coe_eta\", \"IsCyclotomicExtension.zeta_pow\", \"IsCyclotomicExtension.Rat.Three.eta_sq\", \"IsCyclotomicExtension.zeta_spec\", \"FermatLastTheoremForThreeGen.Solution'.u\"], \"digest\": \"6b2c0f5b8dcaf3cd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned roots-of-unity membership, cyclotomic integrality/norm formulas and rootsOfUnity_eq_one do not state congruence rigidity; the last requires coprimality to the torsion order. Norm formulas would require a further prime-order reduction and divisibility argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If zeta is a root of unity and (zeta - 1) / n is an algebraic integer for n >= 3 then zeta = 1",
+   "results": "{\"t\": \"2026-10-22T07:13:52Z\", \"tool\": \"leansearch\", \"query\": \"If zeta is a root of unity and (zeta - 1) / n is an algebraic integer for n >= 3 then zeta = 1\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsCyclotomicExtension.Rat.Three.coe_eta\", \"IsPrimitiveRoot.toInteger.congr_simp\", \"IsPrimitiveRoot.toInteger\", \"IsPrimitiveRoot.associated_sub_one_map_sub_one\", \"mem_rootsOfUnity_iff_mem_nthRoots\", \"Polynomial.isRoot_of_unity_of_root_cyclotomic\", \"IsPrimitiveRoot.integralPowerBasis'_gen\", \"IsPrimitiveRoot.adjoinEquivRingOfIntegers\"], \"digest\": \"e5d2556ef8c71c6f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned roots-of-unity membership, cyclotomic integrality/norm formulas and rootsOfUnity_eq_one do not state congruence rigidity; the last requires coprimality to the torsion order. Norm formulas would require a further prime-order reduction and divisibility argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegral, \"IsOfFinOrder\"",
+   "results": "{\"t\": \"2026-10-22T07:26:59Z\", \"tool\": \"loogle\", \"query\": \"IsIntegral, \\\"IsOfFinOrder\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned roots-of-unity membership, cyclotomic integrality/norm formulas and rootsOfUnity_eq_one do not state congruence rigidity; the last requires coprimality to the torsion order. Norm formulas would require a further prime-order reduction and divisibility argument."
+  },
+  {
+   "tool": "grep",
+   "query": "congruen.*(root|torsion)|rootsOfUnity_eq_one|eq_one.*[Ii]ntegral",
+   "results": "{\"t\": \"2026-10-22T07:26:24Z\", \"tool\": \"grep\", \"query\": \"congruen.*(root|torsion)|rootsOfUnity_eq_one|eq_one.*[Ii]ntegral\", \"sub\": \"NumberTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/MahlerMeasure.lean\", \"Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean\", \"Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean\", \"Mathlib/NumberTheory/NumberField/Units/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Units/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/Basic.lean\"], \"digest\": \"89839e9796027dbb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned roots-of-unity membership, cyclotomic integrality/norm formulas and rootsOfUnity_eq_one do not state congruence rigidity; the last requires coprimality to the torsion order. Norm formulas would require a further prime-order reduction and divisibility argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A root of unity congruent to one modulo an integer at least three in the ring of algebraic integers is one",
+   "results": "{\"t\": \"2026-10-23T09:24:23Z\", \"tool\": \"leanfinder\", \"query\": \"A root of unity congruent to one modulo an integer at least three in the ring of algebraic integers is one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.Units.rootsOfUnity_eq_one\", \"IsCyclotomicExtension.Rat.Three.coe_eta\", \"IsPrimitiveRoot.primitiveRoots_one\", \"IsCyclotomicExtension.Rat.Three.Units.mem\", \"FermatLastTheoremForThreeGen.Solution'.u\", \"IsPrimitiveRoot.toInteger\", \"IsPrimitiveRoot.toInteger_cube_eq_one\", \"IsPrimitiveRoot.coe_toInteger\"], \"digest\": \"350ff9d5e08b5528\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rootsOfUnity_eq_one requires coprimality to a torsion order and does not concern integral congruences; root norms and membership results do not prove this conclusion directly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A root of unity congruent to one modulo n with n at least three in algebraic integers equals one",
+   "results": "{\"t\": \"2026-10-23T09:25:16Z\", \"tool\": \"leansearch\", \"query\": \"A root of unity congruent to one modulo n with n at least three in algebraic integers equals one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"rootsOfUnity.mkOfPowEq\", \"NumberField.Units.rootsOfUnity_eq_one\", \"IsPrimitiveRoot.primitiveRoots_one\", \"Units.val_set_image_rootsOfUnity_one\", \"Complex.norm_eq_one_of_pow_eq_one\", \"Complex.norm_eq_one_of_mem_rootsOfUnity\", \"IsPrimitiveRoot.nnnorm_eq_one\", \"IsCyclotomicExtension.Rat.Three.coe_eta\"], \"digest\": \"0002b4dcb0abed35\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rootsOfUnity_eq_one requires coprimality to a torsion order and does not concern integral congruences; root norms and membership results do not prove this conclusion directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-free-ring-congruence-torsion",
+  "date": "2026-10-22",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Lemma 14.5, printed p.63, and the eigenvalue argument of Proposition 14.4(b), printed p.62: general finite-free-ring formulation using its left regular representation; the finite-order conclusion uses characteristic-zero semisimplicity. Auxiliary linear/arithmetic input: Chapter I, Lemma 14.5, printed p.63 (PDF p.69); the root-of-unity statement over a characteristic-zero field.",
+   "via": [
+    "lem-sfb-finite-free-ring-congruence-torsion",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-algebraic-integer-root-unity-congruence",
+  "worker": "stage1",
+  "summary": "Read Milne Lemma 14.5 and expanded the prime-order reduction, preservation of the integral congruence, the field-norm equation, and the integer divisibility contradiction. Reused existing integral-closure, rational-integrality and norm nodes. Added a statement-only prime cyclotomic degree/norm lemma and a direct Mathlib leaf for integrality of norms. Statement unchanged.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) arithmetic prerequisite in the alteration/level-rigidity chain. The current latest sk-thm-sf-ctf-stability-direct-images.proof.md (3) retains the direct-image route. blueprint_refs ancestor prints None, retained faithfully; Milne Lemma 14.5 supplies this auxiliary argument."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-ff1310944",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-ff1310944 (reviewer sub-agent of L); spot-checked: Read Milne AV Ch. I Lemma 14.5 (printed p.63, PDF p.69). The item statement matches it and is unchanged. The proof is complete in five steps. Step 1: ζ≠1 gives a least order m>1, a prime p|m, and η=ζ^{m/p} of order exactly p. Step 2: β=Σ_{j=1}^s C(s,j)n^{j-1}α^j satisfies η=1+nβ, is integral by the subring clause of def-weil-pbc-integral-closure, and lies in E=Q(η). Step 3: the new node gives [E:Q]=p-1 and N(η-1)=(-1)^{p-1}p. Step 4: N(β) is an algebraic integer by the new leaf, and lem-weil-rational-algebraic-integer with Ω=Q gives b∈Z. Step 5: multiplicativity and N(a)=a^d from lem-sfb-finite-field-norm-minpoly give n^{p-1}|p, so n=p≥3 and p²|p, a contradiction; p=2 is excluded by n≥3. New node lem-sfb-prime-cyclotomic-degree-norm is unsplit and true, since the minimal polynomial of η-1 is Φ_p(X+1); checked at p=2 (norm -2) and p=3 (X²+3X+3, norm 3). Its Mathlib candidates were read at PrimitiveRoots.lean:180 and 465-470 and Cyclotomic/Basic.lean:941; the odd-prime-only norm lemma and the generated-field setup justify keeping it unsplit. New node lem-sfb-field-norm-preserves-integrality is an exact specialization of Algebra.isIntegral_norm (Transitivity.lean:213-214) with R=ℤ, K=ℚ, L=E. Following-symlinks greps of dag/nodes and the main-20261015 blueprint found no duplicate. Neither new node restates the item. The route stays within sk-thm-sf-ctf-stability apart from Mathlib-leaf tools. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.AlgebraicIntegerRootUnityCongruence",
+  "declaration": "eq_one_of_isIntegral_root_unity_congruence",
+  "file": "lean/Sheaf/NumberTheory/AlgebraicIntegerRootUnityCongruence.lean",
+  "statement": "theorem eq_one_of_isIntegral_root_unity_congruence {K : Type u} [Field K] [CharZero K] {ζ α : K} (hα : IsIntegral ℤ α) (n r : ℤ) (hn : 3 ≤ n) (hr : 1 ≤ r) (hζ : ζ ^ r = 1) (hcongr : ζ = 1 + (n : K) * α) : ζ = 1",
+  "branch": "sheaf-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-728edd8aa",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Matches Milne AV I Lemma 14.5 (p.63, PDF p.69) clause by clause: K a char-0 field in universe u; IsIntegral ℤ α is the recorded mathlib_match of def-weil-algebraic-integer; n r : ℤ with 3 ≤ n and 1 ≤ r; ζ^r = 1 is zpow, equal to the ordinary power for r ≥ 1; ζ = 1 + n·α with the Int cast; conclusion ζ = 1. No added hypotheses. Edge cases r=1, n=3, α=0 are covered; the bounds and char 0 are each necessary. Item node changed only by its complete lean record, and the statement field matches the file verbatim. Dep record is byte-identical to live; no other group has stated the item; the theorem name has no hits in Mathlib or the project. Proof is sorry only; docstrings give the source, the blueprint id and the 5 proof steps; no line over 100 chars; plain imports are proof-dep modules. No file changed, so no compile. Advisory: the second reading is the worker's own self-review."
+ }
+}

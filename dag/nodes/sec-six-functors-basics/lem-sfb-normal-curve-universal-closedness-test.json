@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-normal-curve-universal-closedness-test",
+ "kind": "statement",
+ "title": "Universal closedness tested by normal finite-type curves",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ and $Y$ be schemes locally of finite type over $k$ [def-pc-scheme, def-weil-finite-type-morphism], and let $g:X\\to Y$ be a quasi-compact $k$-morphism. The following three conditions are equivalent.\n\n(1) $g$ is universally closed [def-weil-proper-morphism].\n\n(2) For every integer $n\\geq0$, the map $1\\times g:\\mathbf A^n_k\\times_k X\\to\\mathbf A^n_k\\times_k Y$ is closed on underlying topological spaces, where $\\mathbf A^n_k=\\operatorname{Spec}k[t_1,\\ldots,t_n]$ and the products are fibre products [def-weil-affine-spectrum, def-weil-pbc-mv-polynomial-ring, def-pc-fibre-product].\n\n(3) Let $C$ be any integral scheme of finite type over $k$ [def-pc-integral-scheme] such that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $c\\in C$ be closed with $\\dim\\mathcal O_{C,c}=1$ [def-weil-pbc-krull-dimension-ring], put $U=C\\setminus\\{c\\}$, $R=\\mathcal O_{C,c}$ and $F=\\operatorname{Frac}R$. For every pair of $k$-morphisms $a:U\\to X$ and $b:C\\to Y$ with $ga=b|_U$, there exists a $k$-morphism $h:\\operatorname{Spec}R\\to X$ such that $gh=b|_{\\operatorname{Spec}R}$ and $h|_{\\operatorname{Spec}F}=a|_{\\operatorname{Spec}F}$. The restriction to $\\operatorname{Spec}R$ uses the canonical map from the spectrum of a local ring [lem-weil-pbc-spec-local-ring-canonical-morphism]; the generic map is its restriction along $R\\hookrightarrow F$. No uniqueness, separatedness, or reducedness assumption is made on $g$, $X$, or $Y$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0GWV (limits-lemma-essentially-finite-type-criterion-universally-closed), equivalence (1)--(3), specialized to S=Spec k; fields are Nagata by algebra.tex Tag 0335 (algebra-proposition-ubiquity-nagata), item (1)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "proof": [
+  {
+   "text": "(1) implies (2): $1\\times g$ is the base change of $g$ along $\\mathbf A^n_k\\times_kY\\to Y$, as seen by pairing the two components in the fibre-product universal property [def-pc-fibre-product]. It is closed by the definition of universal closedness [def-weil-proper-morphism].",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, proof, specialized to Spec k."
+   }
+  },
+  {
+   "text": "Assume (2). Closedness is local on the target, so to verify universal closedness work over an affine open $S=\\operatorname{Spec}A\\subseteq Y$; its source $X_S$ is quasi-compact over $S$ by [lem-pc-quasi-compact-base-change]. Take any $T\\to S$ and closed subset $D\\subseteq X_S\\times_ST$. If its image $E$ is not closed, choose $t\\in\\overline E\\setminus E$ and give $D$ its reduced closed-subscheme structure by [lem-weil-pbc-reduced-induced-closed-subscheme]. Apply [lem-sfb-missing-fibre-finite-presentation-approximation] to this closed subscheme and $t$. It supplies $V,a:T\\supset V\\to T\\prime,Z\\prime$ with empty fibre at $a(t)$ and $a(E\\cap V)\\subseteq\\operatorname{image}(Z\\prime\\to T\\prime)$. Continuity and $t\\in\\overline{E\\cap V}$ imply that $a(t)$ lies in the closure of this latter image. But the displayed polynomial quotient for $T\\prime$ gives a closed immersion $T\\prime\\hookrightarrow\\mathbf A^r_S$ by [def-weil-closed-immersion]. Its base change on sources is a closed immersion by [lem-weil-pbc-closed-immersion-base-change], so $Z\\prime$ is a closed subset of $\\mathbf A^r_S\\times_SX_S$. Condition (2), restricted to $\\mathbf A^r_S$, makes its image closed there, hence closed in the subspace $T\\prime$. That image omits $a(t)$ by the empty-fibre assertion, a contradiction. Thus every $E$ is closed; the affine opens $S$ cover every base change, proving (1).",
+   "uses": [
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sfb-missing-fibre-finite-presentation-approximation",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, proof, specialized to Spec k."
+   }
+  },
+  {
+   "text": "Assume (1) and take a test $C,c,R,F,a,b$ from (3). Choose an affine neighbourhood $V=\\operatorname{Spec}B$ of $c$. By [lem-weil-pbc-lft-affine-pairs], $B$ is finitely generated over $k$, hence Noetherian by [lem-wf-affine-noetherian-components]. By [lem-weil-pbc-spec-local-ring-canonical-morphism], $R\\cong B_{\\mathfrak p}$, so [lem-weil-pbc-localization-noetherian] makes $R$ Noetherian. It is a normal local domain of dimension one by the test hypotheses, so [lem-sc-normal-dim1-dvr] makes it a DVR, hence a valuation ring by [def-sc-discrete-valuation-ring]. The generic map from $\\operatorname{Spec}F$ lands in $U$, since it maps to the generic point of the positive-dimensional integral $C$. Apply [lem-sfb-universally-closed-valuative-existence] to $a|_{\\operatorname{Spec}F}$ and $b|_{\\operatorname{Spec}R}$. Their square commutes because $ga=b|_U$. Its lift is exactly the $h$ required by (3).",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-wf-affine-noetherian-components",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-sc-normal-dim1-dvr",
+    "def-sc-discrete-valuation-ring",
+    "lem-sfb-universally-closed-valuative-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, proof, specialized to Spec k."
+   }
+  },
+  {
+   "text": "Assume (3). Its extension property is preserved by products with $\\mathbf A^n_k$: write a test map to $\\mathbf A^n_k\\times Y$ as $(b_0,b_1)$, apply (3) to the $X$-component of the punctured map and $b_1$, and pair the resulting lift with $b_0|_{\\operatorname{Spec}R}$. The generic restrictions agree componentwise. The same property is inherited by $g_V:g^{-1}(V)\\to V$ for an open $V\\subseteq Y$: compose a test with the inclusions, apply (3), and factor the lift through $g^{-1}(V)$ since its composite with $g$ equals the given map into $V$. These factorizations are the defining universal property of open inverse images and fibre products [def-pc-fibre-product].",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, proof, specialized to Spec k."
+   }
+  },
+  {
+   "text": "For each $n$, put $g_n=1\\times g$. It is quasi-compact by [lem-pc-quasi-compact-base-change]. Its source and target are locally of finite type over $k$: on an affine chart $\\operatorname{Spec}B$ of $X$ or $Y$, $B$ is finitely generated over $k$ by [lem-weil-pbc-lft-affine-pairs]; the polynomial ring $B[t_1,\\ldots,t_n]$ is generated by those generators and $t_1,\\ldots,t_n$. Equivalently, the product over this chart is finite type by base change of $\\mathbf A^n_k\\to\\operatorname{Spec}k$ and composition, [lem-sfb-finite-type-composition-base-change]. To show $g_n$ is closed it suffices to work over each affine open $V$ of its target: for a closed subset $Z$ of its source, the image intersected with $V$ equals the image of the relatively closed subset $Z\\cap g_n^{-1}(V)$. The restricted map $f:g_n^{-1}(V)\\to V$ remains quasi-compact by [lem-pc-quasi-compact-base-change], and inherits (3) by step 4.",
+   "uses": [
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, proof, specialized to Spec k."
+   }
+  },
+  {
+   "text": "Fix such $f:X_V\\to V$ and a closed subset $Z\\subseteq X_V$. Suppose $f(Z)$ is not closed. Apply [lem-sfb-finite-type-image-immediate-boundary-point]. Step 5 supplies exactly its affine-target, local-finite-type and quasi-compactness hypotheses. Obtain $y\\notin f(Z)$, $t$, $x\\in Z$, the integral affine $T=\\overline{\\{t\\}}$ of finite type, its closed point $y$ of local dimension one, and the finite extension $L=\\kappa(x)/K$ with $K=\\kappa(t)$. The node also supplies the generic map $u:\\operatorname{Spec}L\\to X_V$ over $T\\hookrightarrow V$. Apply [lem-sfb-normal-curve-punctured-generic-model] with $W=X_V$, $Y=V$ and $i:T\\hookrightarrow V$. All its hypotheses, including the exact generic compatibility, have now been supplied. Obtain $C,c,p,a$ and put $b=i p:C\\to V$. Then $b(c)=y$, $fa=b|_{C\\setminus\\{c\\}}$, and the generic image of $a$ is $x$.",
+   "uses": [
+    "lem-sfb-finite-type-image-immediate-boundary-point",
+    "lem-sfb-normal-curve-punctured-generic-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, proof, specialized to Spec k."
+   }
+  },
+  {
+   "text": "Apply the inherited condition (3) for $f$ to this $C,c,a,b$. The model node ensures that $C$ is integral and finite type over $k$, all its local rings are integrally closed domains, $c$ is closed, and $\\dim\\mathcal O_{C,c}=1$. Thus it gives $h:\\operatorname{Spec}\\mathcal O_{C,c}\\to X_V$ over $b$ agreeing with $a$ generically. Its generic point maps to $x\\in Z$. By continuity, $h^{-1}(Z)$ is a closed subset containing the generic point of the spectrum of this domain; it is therefore the entire spectrum. In particular its closed point maps into $Z$. The canonical local-spectrum morphism sends that closed point to $c$, by [lem-weil-pbc-spec-local-ring-canonical-morphism], so its image under $f h$ is $b(c)=y$. This contradicts $y\\notin f(Z)$. Hence all these restricted maps are closed, then all $g_n$ are closed by step 5. Condition (2) follows and step 2 gives (1). No uniqueness of a lift or extension to the whole of $C$ is used.",
+   "uses": [
+    "lem-sfb-normal-curve-punctured-generic-model",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, proof, specialized to Spec k."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sfb-missing-fibre-finite-presentation-approximation",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sc-normal-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-universally-closed-valuative-existence",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-finite-type-image-immediate-boundary-point",
+  "lem-sfb-normal-curve-punctured-generic-model"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0GWV, limits-lemma-essentially-finite-type-criterion-universally-closed, proof, specialized to Spec k."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "essentially.*finite.*type.*criterion|normal.*curve.*closed|curve.*criterion.*closed",
+   "results": "{\"t\": \"2026-10-23T15:05:20Z\", \"tool\": \"grep\", \"query\": \"essentially.*finite.*type.*criterion|normal.*curve.*closed|curve.*criterion.*closed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the general valuative criterion using all valuation rings, or basic permanence of universal closedness; they do not reduce to normal finite-type test schemes with a codimension-one closed point. In particular UniversallyClosed.of_valuativeCriterion (ValuativeCriterion.lean:237) requires all valuative squares, not only squares arising from a C,U,c diagram. The second semantic phrasing found no restricted-curve criterion either."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact morphism of schemes locally of finite type over a field is universally closed if maps from punctured normal finite type curves extend over the local ring",
+   "results": "{\"t\": \"2026-10-23T15:05:21Z\", \"tool\": \"leansearch\", \"query\": \"A quasi compact morphism of schemes locally of finite type over a field is universally closed if maps from punctured normal finite type curves extend over the local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.UniversallyClosed.mk\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.universallyClosedTypeComp\"], \"digest\": \"21a92d612f1dc2fb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the general valuative criterion using all valuation rings, or basic permanence of universal closedness; they do not reduce to normal finite-type test schemes with a codimension-one closed point. In particular UniversallyClosed.of_valuativeCriterion (ValuativeCriterion.lean:237) requires all valuative squares, not only squares arising from a C,U,c diagram. The second semantic phrasing found no restricted-curve criterion either."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"UniversallyClosed\"",
+   "results": "{\"t\": \"2026-10-23T15:05:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"UniversallyClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyClosed\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.universallyClosed_isStableUnderComposition\", \"AlgebraicGeometry.universallyClosed_respectsIso\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\"], \"digest\": \"8b3682762c602207\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the general valuative criterion using all valuation rings, or basic permanence of universal closedness; they do not reduce to normal finite-type test schemes with a codimension-one closed point. In particular UniversallyClosed.of_valuativeCriterion (ValuativeCriterion.lean:237) requires all valuative squares, not only squares arising from a C,U,c diagram. The second semantic phrasing found no restricted-curve criterion either."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal closedness can be tested by existence of lifts over local rings at codimension one closed points of normal finite type schemes over a field",
+   "results": "{\"t\": \"2026-10-23T15:05:22Z\", \"tool\": \"leanfinder\", \"query\": \"Universal closedness can be tested by existence of lifts over local rings at codimension one closed points of normal finite type schemes over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.universallyClosed_iff\"], \"digest\": \"d3e08d121dc9fe6c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the general valuative criterion using all valuation rings, or basic permanence of universal closedness; they do not reduce to normal finite-type test schemes with a codimension-one closed point. In particular UniversallyClosed.of_valuativeCriterion (ValuativeCriterion.lean:237) requires all valuative squares, not only squares arising from a C,U,c diagram. The second semantic phrasing found no restricted-curve criterion either."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal closedness of a finite type morphism detected by normal curve extension tests",
+   "results": "{\"t\": \"2026-10-23T15:05:23Z\", \"tool\": \"leanfinder\", \"query\": \"Universal closedness of a finite type morphism detected by normal curve extension tests\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\"], \"digest\": \"c3792ad9873fc6b7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give the general valuative criterion using all valuation rings, or basic permanence of universal closedness; they do not reduce to normal finite-type test schemes with a codimension-one closed point. In particular UniversallyClosed.of_valuativeCriterion (ValuativeCriterion.lean:237) requires all valuative squares, not only squares arising from a C,U,c diagram. The second semantic phrasing found no restricted-curve criterion either."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyClosed\"",
+   "results": "{\"t\": \"2026-10-23T19:12:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"UniversallyClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyClosed\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.universallyClosed_isStableUnderComposition\", \"AlgebraicGeometry.universallyClosed_respectsIso\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\"], \"digest\": \"8b3682762c602207\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal closedness of a finite type scheme morphism can be tested by normal finite type curves at closed points",
+   "results": "{\"t\": \"2026-10-23T19:12:23Z\", \"tool\": \"leanfinder\", \"query\": \"Universal closedness of a finite type scheme morphism can be tested by normal finite type curves at closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\"], \"digest\": \"17c6db177aa5e9fc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normal.*curve.*closed|curve.*criterion|affine.*space.*closed|UniversallyClosed.of_valuativeCriterion",
+   "results": "{\"t\": \"2026-10-23T19:13:17Z\", \"tool\": \"grep\", \"query\": \"normal.*curve.*closed|curve.*criterion|affine.*space.*closed|UniversallyClosed.of_valuativeCriterion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\"], \"digest\": \"709f141f58528043\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact morphism of schemes over a field is universally closed if all its affine space products are closed maps",
+   "results": "{\"t\": \"2026-10-23T19:13:18Z\", \"tool\": \"leansearch\", \"query\": \"A quasi compact morphism of schemes over a field is universally closed if all its affine space products are closed maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed.mk\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.universallyClosed_eq_universallySpecializing\"], \"digest\": \"8df2e00b4e216ce4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal curve extension tests detect universal closedness of a morphism locally of finite type over a field",
+   "results": "{\"t\": \"2026-10-23T19:13:18Z\", \"tool\": \"leanfinder\", \"query\": \"Normal curve extension tests detect universal closedness of a morphism locally of finite type over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\"], \"digest\": \"bfa3cac509857344\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-properness-normal-curve-local-test",
+  "date": "2026-10-24",
+  "group": "Q112"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Sections 2.2--2.3, Proposition 1, Lemma 2(3), equation (5), and Lemma 4(3), printed pp.6--10; normalized weights and arithmetic uniformity are explicit agent expansions. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting input: Morrison Section 2.2, Proposition 1(1)--(2) and its proof, printed pp.6--7. Arbitrary-characteristic formulation of the Hilbert--Mumford criterion for SL and the determinant linearization; nonconstant weights explicitly exclude the trivial one-parameter subgroup. The elementary determinant-coordinate calculation is the one in Proposition 1; the underlying Hilbert--Mumford theorem is Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Theorem 2.1 (local book WANTED). Supporting input: Morrison Proposition 1, first sentence of the proof, citing GIT Theorem 2.1: the general numerical criterion, before its specialization to Pluecker monomial coordinates. Supporting input: Testing properness of affine finite-type morphisms by formal arcs. Supporting input: reduce the properness test to local rings at closed points of normal integral finite-type curves (Stacks 0GWX over a field), before completion. Proof of this prerequisite: Tag 0GWX reduces to Tag 0GWV, applied both to f and to its diagonal; this node is the universal-closedness criterion, including its affine-space test formulation.",
+   "via": [
+    "lem-sfb-properness-normal-curve-local-test",
+    "lem-sfb-affine-properness-formal-arc-test",
+    "lem-sfb-hilbert-mumford-projective-representation",
+    "lem-sfb-hilbert-monomial-numerical-criterion",
+    "lem-sfb-uniform-gieseker-codegree-criterion",
+    "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-curve-universal-closedness-test",
+  "worker": "stage1",
+  "group": "Q09",
+  "summary": "Checked 0GWV over a field and preserved its statement. Seven steps explicitly prove the affine-space equivalence using the missing-fibre approximation 05BD, and separate image-boundary selection from the normalized punctured generic model. Valuative existence is a Mathlib leaf. Wrote out product/open-target inheritance, local Noetherianity and DVR hypotheses, and the closed-subset argument on the local spectrum. No global extension/gluing or separatedness is used.",
+  "blueprint": "Realizes the inherited direct-image alteration chain at the supporting 0GWX/0GWV properness test, retaining the precise inherited place and via chain. blueprint_refs.py ancestor reports None; the inherited null ancestor is retained rather than fabricated. Whole imported-blueprint searches for 05JX, 01KF, normal curve, curve selection, immediate specialization, punctured, generic point, affine space closed and normalization finite extension found no exact replacement. The affine-space proof realizes 05JX using the smaller 05BD approximation input, not a node restating the equivalence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme or ring tool for the explicit affine/local argument; no node of the alteration unit replaces this auxiliary property."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic scheme or ring tool for the explicit affine/local argument; no node of the alteration unit replaces this auxiliary property."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Generic scheme or ring tool for the explicit affine/local argument; no node of the alteration unit replaces this auxiliary property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-sc-normal-dim1-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-652110a7d",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-652110a7d (reviewer sub-agent of L); spot-checked: Read Stacks 0GWV (statement, both footnotes, full proof), 05JX and 05BD in full. The item statement equals live and side-live (both still unsplit); it is 0GWV over Spec k, (3) asks only for some arrow Spec A→X, no uniqueness. Steps cover 1⇒2 (step 1, base change), 2⇒1 (step 2, the 05JX argument), 1⇒3 (step 3) and 3⇒2 (steps 4-7). Step 2: the new 05BD node gives V, T'=Spec(A[z]/(q)), a and Z' with empty fibre at a(t); T'→A^r_S is a closed immersion, closed immersions survive base change, and closedness of A^r×X→A^r×Y restricted over the open A^r×S gives the contradiction at a(t). Step 3: R=B_p is Noetherian, normal of dimension 1, so a DVR and a valuation ring; it then uses the Mathlib leaf (ValuativeCriterion.lean lines 78 and 231-234, eq_valuativeCriterion, first conjunct). Step 4: componentwise product and open-restriction inheritance checked. Steps 5-7: boundary node, then model node, then h^{-1}(Z) contains the generic point, so the closed point maps into Z over y, a contradiction. New nodes checked true: 05BD with affine S matches the source's proof (B_λ finitely presented); boundary node checked via Chevalley, Jacobson punctured spectrum, closed fibre point with finite residue extension (Nullstellensatz), dim O_{T,y}=1; model node checked via Nagata normalization in L, surjectivity, choice of c over y, spreading u by 0BX8 and removing finitely many points, with finiteness of p rightly not asserted. Small cases checked: G_m⊂A^1, the map 1/t on A^1, empty Z. No duplicates: the proper-only valuative nodes (nagata-*), lem-sfb-noetherian-image-boundary-dvr, lem-per-immediate-specialization-criterion and the normalization nodes all differ. Batch 5: def-trf-valuation-ring is a general definition, not part of the trace-formula or Poincaré proofs; accepted for both listed citations. tool_uses accepted as generic tools: reduced-induced, spec-local-ring canonical, normal-dim1-dvr. No SGA cited, no doubled backslashes, unsplit nodes carry statements only. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalCurveUniversalClosednessTest",
+  "declaration": "AlgebraicGeometry.normal_curve_universal_closedness_test",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalCurveUniversalClosednessTest.lean",
+  "statement": "theorem normal_curve_universal_closedness_test (k : Type u) [Field k] (X Y : Scheme.{u}) (p : X ⟶ Spec (CommRingCat.of k)) (q : Y ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType p] [LocallyOfFiniteType q] (g : X ⟶ Y) [QuasiCompact g] (hg : g ≫ q = p) : List.TFAE [ UniversallyClosed g, ∀ n : ℕ, IsClosedMap (pullback.map (Spec.map (CommRingCat.ofHom (MvPolynomial.C : k →+* MvPolynomial (Fin n) k))) p (Spec.map (CommRingCat.ofHom (MvPolynomial.C : k →+* MvPolynomial (Fin n) k))) q (𝟙 _) g (𝟙 _) (by simp) (by simpa using hg.symm)), ∀ (C : Scheme.{u}) (s : C ⟶ Spec (CommRingCat.of k)) [IsIntegral C] [LocallyOfFiniteType s] [QuasiCompact s], (∀ z : C, IsDomain (C.presheaf.stalk z) ∧ IsIntegrallyClosed (C.presheaf.stalk z)) → ∀ (c : C), IsClosed ({c} : Set C) → ringKrullDim (C.presheaf.stalk c) = 1 → ∀ (U : C.Opens), (U : Set C) = {c}ᶜ → ∀ (a : U.toScheme ⟶ X) (b : C ⟶ Y), a ≫ p = U.ι ≫ s → b ≫ q = s → a ≫ g = U.ι ≫ b → ∃ h : Spec (C.presheaf.stalk c) ⟶ X, h ≫ p = C.fromSpecStalk c ≫ s ∧ h ≫ g = C.fromSpecStalk c ≫ b ∧ pullback.snd U.ι (Spec.map (CommRingCat.ofHom (algebraMap (C.presheaf.stalk c) (FractionRing (C.presheaf.stalk c)))) ≫ C.fromSpecStalk c) ≫ Spec.map (CommRingCat.ofHom (algebraMap (C.presheaf.stalk c) (FractionRing (C.presheaf.stalk c)))) ≫ h = pullback.fst U.ι (Spec.map (CommRingCat.ofHom (algebraMap (C.presheaf.stalk c) (FractionRing (C.presheaf.stalk c)))) ≫ C.fromSpecStalk c) ≫ a]",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6034192c",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Stmt equals Stacks 0GWV over Spec k; node diff vs side-live = lean field only, statement verbatim with file signature. (1) UniversallyClosed g; (2) ∀ n IsClosedMap of pullback.map A^n×X→A^n×Y (n=0 ok); (3) IsIntegral+LOFT+QC C, stalks domain∧IsIntegrallyClosed (domain implied), c closed, ringKrullDim=1, U={c}ᶜ, k-morphisms a,b with square, ∃h with h≫p, h≫g=fromSpecStalk≫b and generic agreement via pullback U.ι along Spec F→C (snd iso since generic point≠c, not vacuous). Universe u forced by Spec k. Proof sorry, docstrings with 0GWV/0335 + blueprint + 7 steps. fromSpecStalk is the Mathlib canonical map the theorem dep records, not a project plain def. No Mathlib or project duplicate. Advisory: FunctionField public import likely redundant; def-weil-field lacks a lean record (base). No compile: no file changed."
+ }
+}

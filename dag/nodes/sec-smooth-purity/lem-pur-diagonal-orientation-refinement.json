@@ -1,0 +1,238 @@
+{
+ "id": "lem-pur-diagonal-orientation-refinement",
+ "kind": "statement",
+ "title": "Zero-section Tate comparison and affine-refinement compatibility",
+ "statement": "Work in the finite coefficient setting of [def-pur-conventions], with $k=\\overline{\\mathbf F}_q$, $A=\\Lambda=A_{E,n}$, $n\\geq1$. Let $X,Y$ be finite-type $k$-schemes, and let $f:X\\to Y$ be separated, of finite type and smooth of pure relative dimension $d\\geq0$ [def-pc-scheme, def-weil-finite-type-morphism, def-weil-proper-morphism, def-sbc-smooth-morphisms]. Use $\\omega_h=Rh^!A$ and the exceptional inverse image and derived pullback of [def-weil-exceptional-inverse-image, def-weil-derived-pullback-tensor-hom], with the finite Tate sheaves $A_T(d)$ of [def-coefficient-twists-detailed].\n\nFor each finite-type affine open $V\\subseteq Y$, set $X_V=X\\times_YV$, $j_V:X_V\\hookrightarrow X$, $W_V=X_V\\times_VX_V$, with first projection $p_{1,V}$, diagonal $\\Delta_V$, normal bundle $\\pi_V:N_V\\to X_V$ and zero section $z_V$ [def-pc-fibre-product, def-weil-open-immersion, def-pur-normal-bundle]. Let $\\rho_V,\\alpha_V,\\delta_V$ be the canonical restriction, diagonal base-change and normalized DNC maps specified in [lem-pur-affine-target-diagonal-dnc]; $C(g,s)=Ls^*\\omega_g$ is [def-pur-section-invariant]. Restriction of the canonical vector-bundle purity comparison [cor-pur-vector-bundle-purity] to $z_V$, followed by the finite-coefficient Tate pullback comparison $Lz_V^*A_{N_V}(d)\\cong A_{X_V}(d)$ of [det-prop-sfb-cartesian-coefficients-twists], is a canonical isomorphism\n$$\\beta_V:C(\\pi_V,z_V)=Lz_V^*\\omega_{\\pi_V}\\xrightarrow{\\sim}A_{X_V}(d)[2d].$$\nTogether with the canonical identification $Lj_V^*A_X(d)\\cong A_{X_V}(d)$ of the same [det-prop-sfb-cartesian-coefficients-twists], it defines the specified local isomorphism\n$$\\theta_V=\\beta_V\\delta_V\\alpha_V^{-1}\\rho_V:\nLj_V^*\\omega_f\\xrightarrow{\\sim}A_{X_V}(d)[2d].$$\nFor every inclusion of finite-type affine target opens $V'\\subseteq V$, put $a:X_{V'}\\hookrightarrow X_V$. There is the canonical identification of section pairs\n$$(W_V\\times_{X_V,p_{1,V}}X_{V'}\\to X_{V'},\\Delta_V\\times_{X_V}X_{V'})\\cong(W_{V'}\\to X_{V'},\\Delta_{V'}),$$\nand $N_{V'}\\cong N_V\\times_{X_V}X_{V'}$ with its zero section. Under these identifications and the canonical source and Tate restriction maps, $\\rho_V,\\alpha_V,\\delta_V,\\beta_V$ restrict to the respective maps for $V'$. In particular $\\theta_V|_{X_{V'}}=\\theta_{V'}$, compatibly with further affine restriction.\nFor any two finite-type affine opens $V_1,V_2\\subseteq Y$, their intersection has a cover by finite-type affine opens $V'$, and on every such $V'$ the restrictions of $\\theta_{V_1}$ and $\\theta_{V_2}$ both equal $\\theta_{V'}$. No affineness of $V_1\\cap V_2$, and no absolute separatedness of $X,Y$, is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Step 2, pulling vector-bundle purity back along the zero section; combining paragraph, base-change compatibility of the diagonal, DNC and vector-bundle comparisons (returned proof Steps 3--4)"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-section-invariant",
+  "def-pur-normal-bundle",
+  "def-coefficient-twists-detailed",
+  "lem-pur-affine-target-diagonal-dnc",
+  "cor-pur-vector-bundle-purity",
+  "det-prop-sfb-cartesian-coefficients-twists"
+ ],
+ "proof": [
+  {
+   "text": "Construct a normalized chart for every finite-type affine target open using the integration-normalized chart existence theorem.",
+   "uses": [
+    "lem-pur-diagonal-orientation-chart-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For nested affine opens use all four factor equations from chart compatibility. Cancel adjacent source, section and normal comparisons in the four-factor composite to prove Agrees.",
+   "uses": [
+    "lem-pur-affine-diagonal-orientation-chart-compatibility",
+    "def-pur-diagonal-orientation-refinement-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the source comparison in Agrees to identify every restricted orientation with the smaller chart orientation. Applying this identification twice proves successive restriction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the Mathlib affine-open basis on the intersection. Local finite type of aY makes each affine open satisfy the required appTop finite-type condition. The two restrictions both equal its chart orientation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-diagonal-orientation-chart-existence",
+  "lem-pur-affine-diagonal-orientation-chart-compatibility",
+  "def-pur-diagonal-orientation-refinement-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Step 2 and the combining paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The zero section restriction of vector bundle purity gives a Tate twist and the diagonal deformation orientations agree on common affine target refinements",
+   "results": "8 hits. AlgebraicGeometry.AffineSpace.reindex_over; AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.AffineSpace.homOfVector_over; AlgebraicGeometry.AffineSpace.map_reindex; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map; AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal; AlgebraicGeometry.AffineSpace.homOverEquiv. The affine-space and scheme diagonal-restriction results identify geometric diagrams, and mapIso preserves a given isomorphism. None proves the exceptional zero-section Tate comparison or naturality of all three specified orientation factors. The ordinary scheme structure-sheaf pullbacks are different coefficient objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso, CategoryTheory.Functor.mapIso",
+   "results": "12 hits. CategoryTheory.Functor.mapIso; CategoryTheory.Functor.mapIso_refl; CategoryTheory.Functor.mapIso_symm; CategoryTheory.Functor.mapIso_hom; CategoryTheory.Functor.mapIso_inv; CategoryTheory.Functor.mapIso_trans; CategoryTheory.Functor.mapIso_injective; CategoryTheory.Functor.preimageIso_mapIso. The affine-space and scheme diagonal-restriction results identify geometric diagrams, and mapIso preserves a given isomorphism. None proves the exceptional zero-section Tate comparison or naturality of all three specified orientation factors. The ordinary scheme structure-sheaf pullbacks are different coefficient objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|zeroSection.*purity|diagonal.*orientation|normalBundle.*purity",
+   "results": "0 hits. . The affine-space and scheme diagonal-restriction results identify geometric diagrams, and mapIso preserves a given isomorphism. None proves the exceptional zero-section Tate comparison or naturality of all three specified orientation factors. The ordinary scheme structure-sheaf pullbacks are different coefficient objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical smooth diagonal orientations formed from normal cone deformation and vector bundle purity commute with restriction to affine open subschemes",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extraordinary dualizing section invariant of a tangent bundle has its zero section Tate identification natural under affine open restriction",
+   "results": "8 hits. AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine; AlgebraicGeometry.IsAffineOpen.algebraMap_Spec_obj; AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen; AlgebraicGeometry.IsAffineOpen.fromSpec_app_self_apply; AlgebraicGeometry.IsAffineOpen.fromSpec_app_of_le; AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map; AlgebraicGeometry.IsAffineOpen.fromSpec_app_self; AlgebraicGeometry.IsAffineOpen.fromSpec_toSpecΓ. The affine-space and scheme diagonal-restriction results identify geometric diagrams, and mapIso preserves a given isomorphism. None proves the exceptional zero-section Tate comparison or naturality of all three specified orientation factors. The ordinary scheme structure-sheaf pullbacks are different coefficient objects.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The zero section restriction of vector bundle extraordinary purity is the shifted Tate twist and is compatible with open base change",
+   "results": "{\"t\": \"2026-10-22T06:58:12Z\", \"tool\": \"leanfinder\", \"query\": \"The zero section restriction of vector bundle extraordinary purity is the shifted Tate twist and is compatible with open base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.res_const\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"ModuleCat.Tilde.res_apply\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"ModuleCat.Tilde.toOpen_res\"], \"digest\": \"e5fd08b57f7283fa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; ordinary module pullback, topological or manifold vector bundles, and mapIso do not state exceptional purity or its finite Tate/diagonal compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|dualizingComplex|deformationToNormalCone",
+   "results": "{\"t\": \"2026-10-22T07:04:36Z\", \"tool\": \"grep\", \"query\": \"TateTwist|dualizingComplex|deformationToNormalCone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; ordinary module pullback, topological or manifold vector bundles, and mapIso do not state exceptional purity or its finite Tate/diagonal compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vector bundle purity pulled back along the zero section gives the Tate orientation and commutes with open restriction",
+   "results": "{\"t\": \"2026-10-22T07:04:36Z\", \"tool\": \"leansearch\", \"query\": \"Vector bundle purity pulled back along the zero section gives the Tate orientation and commutes with open restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bundle.mdifferentiableOn_zeroSection\", \"Bundle.zeroSection\", \"VectorField.mpullback_zero\", \"Bundle.contMDiffOn_zeroSection\", \"Bundle.mdifferentiable_zeroSection\", \"Bundle.contMDiff_zeroSection\", \"VectorBundle.pullback\", \"Bundle.mdifferentiableAt_zeroSection\"], \"digest\": \"7811c35329715c8a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; ordinary module pullback, topological or manifold vector bundles, and mapIso do not state exceptional purity or its finite Tate/diagonal compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso, CategoryTheory.Iso",
+   "results": "{\"t\": \"2026-10-22T07:04:37Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.mapIso, CategoryTheory.Iso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapIso\", \"CategoryTheory.Functor.mapIso_refl\", \"CategoryTheory.Functor.mapIso_symm\", \"CategoryTheory.Functor.mapIso_hom\", \"CategoryTheory.Functor.mapIso_inv\", \"CategoryTheory.Functor.mapIso_trans\", \"CategoryTheory.Functor.mapIso_injective\", \"CategoryTheory.Functor.preimageIso_mapIso\"], \"digest\": \"84c93b8069f66a9f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; ordinary module pullback, topological or manifold vector bundles, and mapIso do not state exceptional purity or its finite Tate/diagonal compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical orientation of a relative dualizing complex using deformation to the normal cone commutes with restriction to smaller affine schemes",
+   "results": "{\"t\": \"2026-10-22T07:05:20Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical orientation of a relative dualizing complex using deformation to the normal cone commutes with restriction to smaller affine schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.liftCoborder_app\", \"AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.toOpen_toSpecΓ_app_assoc\", \"AlgebraicGeometry.morphismRestrictRestrictBasicOpen\", \"AlgebraicGeometry.IsAffineOpen.app_basicOpen_eq_away_map\"], \"digest\": \"a2c75a0d012c81f5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; ordinary module pullback, topological or manifold vector bundles, and mapIso do not state exceptional purity or its finite Tate/diagonal compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-diagonal-dualizing-object",
+  "date": "2026-10-22",
+  "group": "Q82"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Step 2, pulling vector-bundle purity back along the zero section; combining paragraph, base-change compatibility of the diagonal, DNC and vector-bundle comparisons (returned proof Steps 3--4)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-diagonal-orientation-refinement",
+  "worker": "stage1",
+  "summary": "Q56 split into nine steps using existing DAG nodes only. Constructed beta from the integration-normalized vector-bundle orientation and the actual finite Tate comparison, made its etale/pro-etale realization explicit, wrote the section-pair and normal-bundle restriction identifications, used exchange/mate pasting for rho and alpha and normalized DNC for delta, proved the beta restriction equation and cancelled the four intermediate comparisons. Distinguished affine opens give common refinements of possibly nonaffine overlaps. Statement unchanged; no Lean written or compiled.",
+  "blueprint": "Realizes main-20261015 thm-pur-diagonal-dualizing-object.proof.md Step 2 and its combining paragraph. Zero-section restriction gives the Tate side; factorwise base-change compatibility gives the affine refinement equality. No unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Bounded-below finite-coefficient comparison unit identifies the etale-origin coefficient unit in the definition of exceptional inverse image. No statement in the current unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic site comparison commutes with scheme pullback; needed to carry the ordinary-etale vector-purity equality to the pro-etale maps. No statement in the current unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic derived pullback composition identifies restrictions of the section invariants; it does not replace a purity argument. No statement in the current unit supplies this generic tool."
+   },
+   {
+    "node": "fix-lem-exchanges",
+    "why": "Generic compact-support exchange identity/pasting controls the specified smooth dualizing counit mates for nested opens. No statement in the current unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Formal mate-pasting converts compact-support exchange pasting to the defining smooth dualizing counit-transpose equation. No statement in the current unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-spec-localization-away-basic-open",
+    "why": "Generic distinguished-open basis supplies common affine refinements of an arbitrary overlap. No statement in the current unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "why": "Generic scheme-theoretic basic-open affine/localization result identifies the rings of the chosen refinements. No statement in the current unit supplies this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "fix-lem-exchanges",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-fe9fe84e4",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-fe9fe84e4 (reviewer sub-agent of L); spot-checked: I read the item, its 9 steps and every cited statement in full. This is the first split of the Q82 re-split child, with no new nodes; the statement and stmt_deps are byte-identical to the Q82 fixes version. The route is main-20261015 thm-pur-diagonal-dualizing-object.proof.md Step 2 plus its combining paragraph; no SGA source is used. Every step's cited ids match its uses, proof_deps match, and there is no cycle (the closure contains neither the item nor its parent). Step checks: (1) the affine-target node gives separated finite-type X_V and W_V, so DNC's B and B' hypotheses hold. (2) The corollary's γ points from Tate to ω, which I confirmed by type-checking its base-change equation, so η=γ^{-1}; Rπ^!=ν^*π^×Rν_*, the unit of thm-weil-pbc-site-comparison and lem-amb Tate descent (all a≥0) give the pro-étale β_V=t_z∘Lz^*η. (4) A point (x1,x2) of the fibre product has f(x2)=f(x1)∈V', so the fibre product is the open p1^{-1}(X_{V'}); open restriction preserves the ideal powers, so the normal bundle and zero section restrict. (5) Pasting the big square in its two decompositions (fix-lem-exchanges(2) with mate pasting(1)) and pulling back by Δ' gives e_f·La^*α=α'·e_C; ρ follows in the same way. (6) The DNC base-change clause holds for any b with separated finite-type source. (8) The four substitutions cancel correctly. (9) The D(h) basis and R_h≅O(D(h)) give a cover of the overlap; R_h is finitely generated. I checked d=0, empty overlaps and nonseparated X,Y. Grepping the DAG found no duplicate. FIX for one fault, which I repaired: Step 6 left e_N unspecified, and Step 7 carried the corollary's ordinary-étale base-change equation over to the pro-étale e_π with no reason given (C3/E5). I now define e_π as the def-pur-co-smoothness(3) exchange and e_N as Lz'^*e_π; Step 7 now cites def-weil-exceptional-inverse-image (transported adjunction), def-pur-co-smoothness(3) and thm-weil-pbc-site-comparison. The statement is untouched and proof_deps are unchanged. I accept the split_report tool declarations (site comparison, comparison-pullback, pullback composition, exchanges, mate pasting, basic opens) as generic bookkeeping.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DiagonalOrientationRefinement",
+  "declaration": "WeilConjectures.PurityFiniteSetting.diagonalOrientationRefinement",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.diagonalOrientationRefinement"
+  ],
+  "file": "lean/Sheaf/Paper/DiagonalOrientationRefinement.lean",
+  "statement": "theorem diagonalOrientationRefinement (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] (aX : X ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] (f : X ⟶ Y) (hf : f ≫ aY = aX) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ) [SmoothOfRelativeDimension d f] : ∃ D : ∀ (V : Y.affineOpens), (V.1.ι ≫ aY).appTop.hom.FiniteType → OrientationRefinement.Chart P f aY d V, (∀ (V V' : Y.affineOpens) (hV : (V.1.ι ≫ aY).appTop.hom.FiniteType) (hV' : (V'.1.ι ≫ aY).appTop.hom.FiniteType) (h : V'.1 ≤ V.1), OrientationRefinement.Compatible P f aY d (D V hV) (D V' hV') h ∧ OrientationRefinement.Agrees P f aY d (D V hV) (D V' hV') h) ∧ (∀ (V V' V'' : Y.affineOpens) (hV : (V.1.ι ≫ aY).appTop.hom.FiniteType) (hV' : (V'.1.ι ≫ aY).appTop.hom.FiniteType) (hV'' : (V''.1.ι ≫ aY).appTop.hom.FiniteType) (h₁ : V'.1 ≤ V.1) (h₂ : V''.1 ≤ V'.1), OrientationRefinement.restricted P f aY d (D V hV) (h₂.trans h₁) = (OrientationRefinement.sourceComposition P f aY h₂).symm ≪≫ (OrientationRefinement.pull P (OrientationRefinement.inclusion f h₂)).mapIso (OrientationRefinement.restricted P f aY d (D V hV) h₁) ≪≫ OrientationRefinement.tate P (OrientationRefinement.inclusion f h₂) ((f ∣_ V'.1) ≫ V'.1.ι ≫ aY) d) ∧ (∀ (V₁ V₂ : Y.affineOpens) (hV₁ : (V₁.1.ι ≫ aY).appTop.hom.FiniteType) (hV₂ : (V₂.1.ι ≫ aY).appTop.hom.FiniteType), (⨆ W : {W : Y.affineOpens // (W.1.ι ≫ aY).appTop.hom.FiniteType ∧ W.1 ≤ V₁.1 ⊓ V₂.1}, W.val.1) = V₁.1 ⊓ V₂.1 ∧ ∀ (W : Y.affineOpens) (hW : (W.1.ι ≫ aY).appTop.hom.FiniteType) (h₁ : W.1 ≤ V₁.1) (h₂ : W.1 ≤ V₂.1), OrientationRefinement.restricted P f aY d (D V₁ hV₁) h₁ = OrientationRefinement.theta P f aY d W (D W hW).geometry (D W hW).betaEtale ∧ OrientationRefinement.restricted P f aY d (D V₂ hV₂) h₂ = OrientationRefinement.theta P f aY d W (D W hW).geometry (D W hW).betaEtale)",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-09f160e85",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Read item, 15 stmt_dep records, module (751 lines), report, and live deps (AffineTargetDiagonalDnc, PurityDncInvariance/Comparisons, VectorBundlePurity, VectorPurityNormalization, FixedFinitePositiveCoefficientTwist, OrdinaryFiniteP1Arrows, SectionReesBaseChangeEtale). First S2 delivery; only lean field changed; statement verbatim; single sorry. rho/alpha = dep's affineDiagonalRho/Alpha; delta = existsUnique_dncInvariance (proved) .choose with predicate identical to AffineDiagonalDncNormalized; beta pinned by BetaNormalized over all vector models plus HasVectorModel non-vacuity, so the ∃ D Chart family is unique; Geometry pinned by fst/snd and mono normal_eq; the four Compatible equations, Agrees, successive restriction and the overlap-cover clause match Steps 4-9 with correct directions. Edge cases d=0, empty schemes/overlap, nonseparated X/Y, all n>=1, universes OK. Accepted: integration normalization at diagonalExponent l^n instead of the cor's ringChar gamma (same atom, Kummer-compatible, landed precedent det-sp-orientation-vector-bundle); Dnc.* helpers reached via the stmt_dep lem-pur-affine-target-diagonal-dnc statement. No compile needed (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8202d",
+  "group": "T8",
+  "result": "fix",
+  "landing": "20261026T024055-L-635898",
+  "kind": "interface",
+  "note": "independent cc review: 8202 Lean files vs the 655d delivery (byte-identical) and the clone's published module; item node and change record vs the proof's use of the Data node and the packet's 161 computed users; reader gate: all delivered modules and 7 direct importers compiled in /tmp/rev-T8-8202"
+ }
+}

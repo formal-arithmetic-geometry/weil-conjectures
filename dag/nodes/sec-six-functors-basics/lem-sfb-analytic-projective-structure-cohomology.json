@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-analytic-projective-structure-cohomology",
+ "kind": "statement",
+ "title": "Analytic structure-sheaf vanishing on projective space",
+ "statement": "Let $n\\geq0$, and let $P^{\\mathrm{an}}=\\mathbf P^n(\\mathbf C)$ be complex projective space, with its standard holomorphic charts and sheaf $\\mathcal O_{P^{\\mathrm{an}}}$ of holomorphic functions. Every global holomorphic function on $P^{\\mathrm{an}}$ is a unique constant. For every integer $q>0$ the analytic sheaf cohomology group $H^q(P^{\\mathrm{an}},\\mathcal O_{P^{\\mathrm{an}}})$ is zero, where cohomology is right derived global sections in sheaves of $\\mathbf C$-vector spaces. This includes $n=0$, the one-point analytic space. Use module cohomology [def-sc-ringed-space-module-cohomology] with the constant ring sheaf $\\mathbf C$.",
+ "source": {
+  "document": "literature/serre-gaga.pdf",
+  "place": "WANTED: Serre, Géométrie algébrique et géométrie analytique, §13 Lemma 4 and its Dolbeault proof, printed pp.20--21."
+ },
+ "stmt_deps": [
+  "def-sc-ringed-space-module-cohomology",
+  "def-sfb-projective-holomorphic-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=\\mathbf P^n(\\mathbf C)$. Apply [lem-sfb-analytic-projective-kahler-geometry] to equip this very analytic space, with the charts of the statement, with its compact Kähler metric; in particular it is Hausdorff and second-countable. Use the site of its open subsets, in a universe containing that set, with terminal object $P$, and the constant ring sheaf $\\mathbf C$. The module category has enough injectives by [lem-sc-ringed-space-module-sheaves-enough-injectives]. By [lem-sfb-dolbeault-acyclic-resolution] with $p=0$, $\\mathcal O_P[0]\\to\\mathcal A_P^{0,\\bullet}$ is an exact augmented resolution with global-section-acyclic terms. Apply the acyclic-resolution comparisons in [lem-sfb-ringed-acyclic-resolution-derived-maps] with identity ringed-topos morphism, both modules equal to $\\mathcal O_P$, both resolutions this one and $u=\\mathrm{id}$. Taking cohomology identifies the underlying groups of $H^q(P,\\mathcal O_P)$ with $\\ker(\\bar\\partial:A^{0,q}\\to A^{0,q+1})/\\bar\\partial A^{0,q-1}$. Thus vanishing of this Dolbeault quotient implies the requested vanishing in complex-vector-space sheaves; no change to algebraic cohomology is being made.",
+   "uses": [
+    "lem-sfb-analytic-projective-kahler-geometry",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-ringed-acyclic-resolution-derived-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: Serre, Géométrie algébrique et géométrie analytique, §13 Lemma 4, printed pp.20--21; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf. Agent expansion of the Dolbeault/Kähler argument."
+   }
+  },
+  {
+   "text": "Suppose $n\\geq1$. For a holomorphic function $f$ on $P$, the function $u=f\\circ\\pi$ is holomorphic on $\\mathbf C^{n+1}\\setminus\\{0\\}$: in $z_j\\ne0$ it is $f$ in chart coordinates composed with $(z_k/z_j)_{k\\ne j}$, using [lem-sfb-complex-analytic-function-operations]. By [lem-sfb-hartogs-punctured-affine-extension] it extends to an entire $F$. Scalar multiplication does not change $\\pi$, so for $z\\ne0$ and real $t>0$ one has $F(tz)=F(z)$. Continuity of $F$ at $0$, supplied by [lem-sfb-complex-analytic-function-operations], gives $F(z)=F(0)$ as $t\\to0$. Surjectivity of $\\pi$ gives $f=F(0)$. Conversely every constant is holomorphic by the same operations node, and evaluating at $[1:0:\\cdots:0]$ proves uniqueness.",
+   "uses": [
+    "lem-sfb-analytic-projective-kahler-geometry",
+    "lem-sfb-hartogs-punctured-affine-extension",
+    "lem-sfb-complex-analytic-function-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: Serre, Géométrie algébrique et géométrie analytique, §13 Lemma 4, printed pp.20--21; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf. Agent expansion of the Dolbeault/Kähler argument."
+   }
+  },
+  {
+   "text": "Still let $n\\geq1$ and $1\\leq r\\leq n$. For a global holomorphic $r$-form $\\beta$ on $P$, write $\\pi^*\\beta=\\sum_{|I|=r}b_I(z)\\,dz_I$ on $\\mathbf C^{n+1}\\setminus\\{0\\}$. Each $b_I$ is holomorphic: on $z_j\\ne0$ substitute the chart functions $z_k/z_j$ into the coefficients of $\\beta$ and expand $d(z_k/z_j)=(z_jdz_k-z_kdz_j)/z_j^2$, using [lem-sfb-complex-analytic-function-operations] and [lem-sfb-complex-analytic-derivative-rules]. Hartogs extension [lem-sfb-hartogs-punctured-affine-extension] gives entire coefficients $B_I$. Since $\\pi(tz)=\\pi(z)$, substituting $tz$ and $d(tz)=t\\,dz$ gives $t^r B_I(tz)=B_I(z)$ for $z\\ne0$, $t>0$. Continuity at the origin and $r>0$ force $B_I(z)=0$ by letting $t\\to0$. Hence $\\pi^*\\beta=0$, and pulling this back by each explicitly given local section $s_j$ in [lem-sfb-analytic-projective-kahler-geometry] gives $\\beta|_{U_j}=0$. These opens cover $P$, so $\\beta=0$.",
+   "uses": [
+    "lem-sfb-analytic-projective-kahler-geometry",
+    "lem-sfb-hartogs-punctured-affine-extension",
+    "lem-sfb-complex-analytic-function-operations",
+    "lem-sfb-complex-analytic-derivative-rules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: Serre, Géométrie algébrique et géométrie analytique, §13 Lemma 4, printed pp.20--21; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf. Agent expansion of the Dolbeault/Kähler argument."
+   }
+  },
+  {
+   "text": "For $1\\leq q\\leq n$, choose a Dolbeault cocycle $a\\in A^{0,q}(P)$. The orthogonal decomposition [lem-sfb-hermitian-dolbeault-orthogonal-decomposition], applicable to the compact Hermitian manifold from step 1, writes $a=h+\\bar\\partial u+\\bar\\partial^*v$ with $\\Delta_{\\bar\\partial}h=0$. By the defining formal-adjoint identity, $0=\\langle\\Delta_{\\bar\\partial}h,h\\rangle=\\|\\bar\\partial h\\|^2+\\|\\bar\\partial^*h\\|^2$, so $\\bar\\partial h=0$. As $\\bar\\partial^2=0$ by [lem-sfb-dolbeault-acyclic-resolution] and $\\bar\\partial a=0$, the residual term $w=\\bar\\partial^*v$ is closed. Then $\\|w\\|^2=\\langle\\bar\\partial w,v\\rangle=0$, so $a$ and $h$ represent the same class. Here norms are the $L^2$ norms on smooth forms; zero norm implies the form is zero since a smooth nonzero form is nonzero on an open set of positive metric volume.",
+   "uses": [
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-dolbeault-acyclic-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: Serre, Géométrie algébrique et géométrie analytique, §13 Lemma 4, printed pp.20--21; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf. Agent expansion of the Dolbeault/Kähler argument."
+   }
+  },
+  {
+   "text": "The Kähler hypothesis from step 1 allows [lem-sfb-kahler-laplacian-identity] to give $\\Delta_d h=2\\Delta_{\\bar\\partial}h=0$. Its formal adjoints therefore give $0=\\langle\\Delta_dh,h\\rangle=\\|dh\\|^2+\\|d^*h\\|^2$, whence $dh=0$. Coefficientwise complex conjugation commutes with $d$ (differentiate real coordinates), so $\\beta=\\overline h$ is a closed smooth form of type $(q,0)$. The distinct-type components of $d\\beta=\\partial\\beta+\\bar\\partial\\beta=0$ imply $\\bar\\partial\\beta=0$. Exactness at $\\mathcal A^{q,0}$ in [lem-sfb-dolbeault-acyclic-resolution] says precisely that $\\beta$ is a holomorphic $q$-form. Step 3 gives $\\beta=0$, hence $h=0$ and the class of $a$ is zero. Step 1 now gives $H^q(P,\\mathcal O_P)=0$.",
+   "uses": [
+    "lem-sfb-kahler-laplacian-identity",
+    "lem-sfb-dolbeault-acyclic-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: Serre, Géométrie algébrique et géométrie analytique, §13 Lemma 4, printed pp.20--21; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf. Agent expansion of the Dolbeault/Kähler argument."
+   }
+  },
+  {
+   "text": "For $q>n$, $A^{0,q}(P)=0$ by its definition as alternating forms in $n$ antiholomorphic coordinate differentials, so the quotient in step 1 vanishes. If $n=0$, $P$ is a single point, with $\\mathcal O_P(P)=\\mathbf C$, and all positive-degree smooth forms vanish for the same reason. Thus the same comparison in step 1 proves every positive-degree vanishing also in this case; evaluation at that point identifies its holomorphic functions with unique constants.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: Serre, Géométrie algébrique et géométrie analytique, §13 Lemma 4, printed pp.20--21; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf. Agent expansion of the Dolbeault/Kähler argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-analytic-projective-kahler-geometry",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sfb-dolbeault-acyclic-resolution",
+  "lem-sfb-ringed-acyclic-resolution-derived-maps",
+  "lem-sfb-hartogs-punctured-affine-extension",
+  "lem-sfb-complex-analytic-function-operations",
+  "lem-sfb-complex-analytic-derivative-rules",
+  "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+  "lem-sfb-kahler-laplacian-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/serre-gaga.pdf",
+  "place": "WANTED locally: Serre, Géométrie algébrique et géométrie analytique, §13 Lemma 4, printed pp.20--21; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf. Agent expansion of the Dolbeault/Kähler argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Holomorphic structure sheaf on complex projective space has only constant global sections and zero higher sheaf cohomology",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.ext_iff, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.Proj.ext, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.zero_mem', AlgebraicGeometry.Proj.zero_apply, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.one_mem', AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj, AlgebraicGeometry.Proj.toSheafedSpace.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of the analytic structure sheaf of complex projective space is complex numbers in degree zero",
+   "results": "OK 8 hits: AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.LocallyRingedSpace.Γ_obj_op, AlgebraicGeometry.Proj.zero_apply, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier, AlgebraicGeometry.Proj.one_apply, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ_ΓToStalk, AlgebraicGeometry.Proj.toSheafedSpace.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher coherent cohomology of the holomorphic structure sheaf of complex projective space vanishes",
+   "results": "OK 8 hits: CochainComplex.isZero_of_isStrictlyGE, CochainComplex.HomComplex.CohomologyClass.mk, CochainComplex.cm5b.instIsStrictlyGEI, groupCohomology, CochainComplex.HomComplex.CohomologyClass, CochainComplex.isZero_of_isGE, CochainComplex.HomComplex.CohomologyClass.mk_zero, CochainComplex.HomComplex.CohomologyClass.mk_sub.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Dolbeault\"",
+   "results": "OK 0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Dolbeault|holomorphic.*cohomology|projective.*analytic",
+   "results": "OK 0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Holomorphic structure sheaf of complex projective space has constant global sections and vanishing higher cohomology",
+   "results": "[leanfinder] OK 8 hit(s) AlgebraicGeometry.Proj.ext_iff, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.Proj.ext, AlgebraicGeometry.Proj.one_apply, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.one_mem', AlgebraicGeometry.Proj.zero_apply, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj, AlgebraicGeometry.Proj.toSheafedSpace",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic Proj and abstract derived cohomology do not compute analytic projective cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dolbeault cohomology of projective space in bidegree zero q vanishes for positive q",
+   "results": "[leanfinder] OK 8 hit(s) Rep.standardComplex.x_projective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, isZero_Ext_succ_of_projective, Rep.isZero_Tor_succ_of_projective, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_zero, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic Proj and abstract derived cohomology do not compute analytic projective cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Dolbeault\"",
+   "results": "[loogle] OK 0 hit(s) ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic Proj and abstract derived cohomology do not compute analytic projective cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Analytic structure sheaf cohomology of complex projective space is concentrated in degree zero",
+   "results": "[leansearch] OK 8 hit(s) CategoryTheory.Sheaf.H, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, AlgebraicGeometry.LocallyRingedSpace.𝒪, AlgebraicGeometry.Proj.ext, AlgebraicGeometry.Spec.structureSheaf, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.add_mem', AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic Proj and abstract derived cohomology do not compute analytic projective cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "Dolbeault|holomorphic.*cohomology|projective.*analytic",
+   "results": "[grep] OK 0 hit(s) ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic Proj and abstract derived cohomology do not compute analytic projective cohomology"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gaga-derived-coherent-sections",
+  "date": "2026-10-24",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain; Analytic structure-sheaf vanishing on projective space.",
+   "via": [
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-analytic-projective-structure-cohomology",
+  "worker": "stage1",
+  "summary": "Kept the statement and coefficient category unchanged. Expanded Serre Lemma 4 by Dolbeault acyclic resolutions, the existing Hermitian orthogonal decomposition and Kahler identity, and the explicit punctured-affine pullback calculation. Created only Hartogs extension and projective Kahler geometry as statement-only inputs. Avoided the circular projective-harmonic-representatives dependency through GAGA. Checked n=0, n=1 and q>n.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain; Analytic structure-sheaf vanishing on projective space. The current latest blueprint direct-images proof (3) is the ancestor support route; these steps discharge its inherited GAGA structure-sheaf input without changing any chapter or unit.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "why": "Generic ringed-space enough-injectives theorem for the constant C ring sheaf; needed by the acyclic-resolution comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-ringed-space-module-sheaves-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N6-b64d552d5",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-b64d552d5 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and all 10 cited statements in full. Statement and stmt_deps are unchanged against clones/live, where the item is still unsplit: this is a first split with no repair note, the coefficient category stays the constant sheaf C, and no SGA is cited. Source: fetched Serre GAGA from numdam into /tmp. Lemme 4 (printed pp.20-21) is constants for q=0, and for q>0 Dolbeault plus vanishing of type-(0,q) cohomology of projective space; footnote 4 gives the Frenkel Laurent-series alternative. The split expands this route. Demailly is not available locally and was not read; both new statements were checked mathematically instead. Cycles: the transitive closure of every cited node avoids the item; the worker correctly avoided projective-harmonic-representatives, which reaches the item through algebraic-dolbeault and GAGA. Steps: step 1 combines enough-injectives, the Dolbeault acyclic resolution and acyclic-resolution-derived-maps with f=id, which identifies H^q with Dolbeault (0,q) cohomology. Step 2 uses Hartogs with m=n+1>=2, real scaling and continuity at 0 to get constants. Step 3 checks the scaling b_I(z)=t^r b_I(tz) so B_I=0, and pulls back along the sections s_j to get beta=0. Step 4 applies the Hermitian orthogonal decomposition and the adjoint norm argument to get a=h+dbar u with dbar h=0. Step 5 uses the Kahler identity Delta_d=2Delta_dbar to get dh=0, so conj(h) is a holomorphic q-form and step 3 kills it. Step 6 covers q>n and n=0. New nodes: Hartogs is true and m=1 is correctly excluded (1/z); Fubini-Study is positive with omega(d_x,d_y)=1/pi at w=0 and glues because overlapping potentials differ by a pluriharmonic term. Neither is a duplicate: DAG Hartogs hits are algebraic depth-two results, and algebraic-dolbeault proves Kahler only inline and through GAGA. Neither restates the item. Accepted tool_use: lem-sc-ringed-space-module-sheaves-enough-injectives, generic; the worker wrote the tool_uses entry itself (C8), a harmless form point. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Geometry.Complex.AnalyticProjectiveStructureCohomology",
+  "declaration": "ComplexGeometry.analytic_projective_structure_cohomology",
+  "file": "lean/Sheaf/Geometry/Complex/AnalyticProjectiveStructureCohomology.lean",
+  "statement": "theorem analytic_projective_structure_cohomology (n : ℕ) (P : ProjectiveHolomorphicModule.{u} n) : (∀ f : P.holomorphic.val.obj (op ⊤), ∃! c : ℂ, ∀ x : (⊤ : Opens P.coefficients), P.eval ⊤ f x = c) ∧ (∀ q : ℕ, 0 < q → IsZero ((AlgebraicGeometry.RingedSpace.moduleCohomology P.coefficients q).obj P.holomorphic))",
+  "branch": "sheaf-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e70f69e4",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Item stmt matches node and Serre GAGA §13 Lemme 4: ∃! constant for global sections via actual eval; ∀ q>0 IsZero of RingedSpace.moduleCohomology over the constant-ℂ ringed space (ℂ-vector-space sheaf cohomology, recorded dep decl). Base diff: only lean + stmt_deps adding the new def node. New def-sfb-projective-holomorphic-module: exact-section presentation (Projectivization carrier, quotient topology, LocallyConstant coefficients with restriction, sections = functions analytic in all standard charts insertNth j 1, smul/restrict pinned); determined up to unique iso, exists in every universe via ULift, not hollow (only sorry is Prop chart-vector ≠ 0 with docstring proof); H12 fields OK; no duplicate on live (SmoothAnalytic.Atlas/IsHolomorphic generic, FunctionSheaf is a ring presentation). Edge cases n=0, q>n, empty opens, universe u OK. Statements verbatim, docstrings/steps, ≤100 cols, report sections present. Advisory only: moduleRings owner (def-trf-ringed-derived-open-hom-restriction) uncited, same as def-sc-ringed-space-module-cohomology. No compile (no change)."
+ }
+}

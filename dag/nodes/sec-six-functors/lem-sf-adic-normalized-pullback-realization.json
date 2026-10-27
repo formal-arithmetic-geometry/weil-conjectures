@@ -1,0 +1,184 @@
+{
+ "id": "lem-sf-adic-normalized-pullback-realization",
+ "kind": "statement",
+ "title": "Balanced normalized common-stage inverse-image realization",
+ "statement": "Fix a finite-field datum D, a prime l unequal to D.p, and a normalized realization Family F [lem-sf-adic-qbar-constructible-realization]. For any geometric spaces Z,T of F and any k-morphism p:Z→T, the inverse-image comparison admits Operations and IntegralComparison [def-sf-native-proper-coefficient-operations], TensorComparison [def-sf-native-proper-tensor-comparison], and a natural isomorphism a: commonStageDerivedPullback(p) ⋙ ordinary_Z ≅ ordinary_T ⋙ ContinuousRational.derivedPull(p,coefficient). It satisfies IntegralAgreement at each finite coefficient index and the specified tensor and coefficient-unit compatibility equations, using F.data Z.tensor and F.data T.tensor. This asserts no direct-image comparison or preservation and no unit or counit comparison of adjunctions.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15 (pp. 61-62), with the proper finiteness of Lemma 6.7.2: finite-field continuous realization and its actual ambient operations. Common-stage, tensor-normalized adjunction comparison is an agent-formulated consequence, not a verbatim statement of the proposition.; proper-adjunction proof Steps 1--4 only."
+ },
+ "stmt_deps": [
+  "lem-sf-adic-qbar-constructible-realization",
+  "def-sf-native-proper-coefficient-operations",
+  "def-sf-native-proper-tensor-comparison",
+  "def-sf-adic-realization-isomorphism-data",
+  "def-sf-native-adic-realization-data",
+  "def-weil-finite-field-fiber",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-a1-common-stage-coefficient-unit",
+  "def-per-continuous-rational-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Both schemes are Noetherian by lem-weil-pbc-finite-type-over-noetherian (the spectrum of a field is Noetherian), and finite dimensional by lem-kun-dimension-finite-type. The prime $\\ell$ is invertible since both are $k$-schemes and $\\ell\\ne\\operatorname{char}k$. Use the canonical $\\theta_T:s_T^*C\\xrightarrow{\\sim}B_T$ of lem-sf-locally-finite-coefficient-ring-realization, writing $s_T$ for the coefficient projection. Its finite-$E$ clause identifies $s_T^*C(-,E)\\to B_T$ with postcomposition by $E\\hookrightarrow\\Omega$. Its scheme-map clause specifies $\\eta_p:s_Y^*C\\to p_*s_Z^*C$ as the mate of the canonical coefficient pullback comparison and asserts\n$$(p_*\\theta_Z)\\circ\\eta_p=\\beta_p\\circ\\theta_Y,$$\nwhere $\\beta_p:B_Y\\to p_*B_Z$ is precomposition of functions. Taking adjoints under $p^{-1}\\dashv p_*$ therefore identifies the structural map $p^{-1}B_Y\\to B_Z$ with exactly the coefficient map used in ordinary balanced module pullback. No identification of naive coefficient inverse images is needed. Under this identification the functors $\\rho_T$ of lem-sf-adic-qbar-constructible-realization and $J_T$ of lem-sf-locally-finite-adic-constructible-realization agree canonically: both send an integral representative $K_E$ to $B_T\\otimes^L_{\\widehat{\\mathcal O}_{E,T}}K_E$, send a fraction to the same inverse scalar times its numerator, and use balanced multiplication for passage to a common field. These formulas identify their actions on all common-stage arrows. Construct Operations from the ordinary module adjunction and its normalized derived computation maps; balanced tensor associativity gives IntegralComparison. Fix the given Family throughout; its finite normalizations fix the tensor data.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-sf-locally-finite-coefficient-ring-realization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-locally-finite-adic-constructible-realization",
+    "def-sf-native-proper-coefficient-operations",
+    "def-sf-native-proper-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15, pp. 61–62; agent assembly of the specified comparison from existing DAG lemmas"
+   }
+  },
+  {
+   "text": "For a finite $E\\subset\\Omega$ put $R_{T,E}=\\widehat{\\mathcal O}_{E,T}$ and $E_T=R_{T,E}[1/\\varpi_E]$. On an integral representative $K$, lem-per-rational-realization-pullback-comparison identifies $J_{Z,E}Lp_E^*K$ with $E_Z\\otimes^L_{p^{-1}E_Y}p^{-1}J_{Y,E}K$: the comparison first inverts the actual completion unit $P_pK\\to\\widehat P_pK$ and then flattens balanced tensors. Extend to $B_Z$. By the derived pullback composition comparisons of lem-sfb-ringed-derived-monoidal-comparisons, both resulting routes identify with $B_Z\\otimes^L_{p^{-1}R_{Y,E}}p^{-1}K$. This constructs $a_p$ at $E$. Lem-per-rational-realization-scalar-coherence supplies the commutative square for every $E\\subset L$, with the prescribed completed scalar/pullback comparisons. Its multiplication associators, including the case of final coefficient ring $B$, identify the two maps after extension to $B_Z$. Therefore these components descend to the common-stage category: represent an arrow over one common $L$, apply this square, and enlarge $L$ if two representatives have to be compared. They define a natural isomorphism $a_p:\\rho_ZLp^*\\to Lp_B^*\\rho_Y$. Its source is bounded constructible, so essential surjectivity of $\\rho_Y$ shows that $Lp_B^*$ preserves $\\mathcal D_Y$.",
+   "uses": [
+    "lem-per-rational-realization-pullback-comparison",
+    "lem-per-rational-realization-scalar-coherence",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sf-adic-qbar-constructible-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15, pp. 61–62; agent assembly of the specified comparison from existing DAG lemmas"
+   }
+  },
+  {
+   "text": "Check the tensor normalization first at an integral representative, retaining the entire quotient tower. Lem-tw-ordinary-completed-integral-pullback identifies the ordinary and completed pullbacks by the actual quotient-map completion unit; lem-fix-constructible-tensor-completion does the same for ordinary and completed tensor. In each case the map to the Roos complex has the quotient-map coordinate in the unshifted product and zero in the shifted product. The scalar/pullback/tensor equations of lem-pur-cochain-pullback-tensor-coherence commute with the actual quotient transitions as chain maps. Apply the derived limit to these equations of whole diagrams, using the functorial primitive identifications and natural counit in lem-pur-completed-primitive-counit-comparison. Substituting the invertible completion units on both sides therefore identifies the completed pullback tensor comparison with the ordinary one. This is an equality of realized diagram morphisms, not an inference from equality on separate reductions. At the coefficient unit the quotient maps send $1$ to $1$, so the same argument identifies the action-unit comparisons.",
+   "uses": [
+    "lem-tw-ordinary-completed-integral-pullback",
+    "lem-fix-constructible-tensor-completion",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-completed-primitive-counit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15, pp. 61–62; agent assembly of the specified comparison from existing DAG lemmas"
+   }
+  },
+  {
+   "text": "After rationalization and extension to $B$, the composition comparisons of lem-sfb-ringed-derived-monoidal-comparisons are monoidal, including their unit comparisons. Use the symmetric strong monoidal structure of $\\rho$ from lem-sf-adic-qbar-constructible-realization. Together with Step 3 this proves that $a_p$ preserves the specified tensor unit and pullback tensor comparison. Explicitly, on homogeneous local representatives its comparison flattens scalar tensors, and the pullback tensor map sends $b\\otimes(x\\otimes y)$ to $(b\\otimes x)\\otimes(1\\otimes y)$. Both orders of applying the comparisons give that same tensor; scalar factors have degree zero, so the signed symmetry is unchanged. The coefficient-field squares in Step 2 and the definition of the common-stage tensor imply the same equality after passing to a common finite coefficient field. Thus the equality holds on the actual common-stage functors and their morphisms.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sf-adic-qbar-constructible-realization",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15, pp. 61–62; agent assembly of the specified comparison from existing DAG lemmas"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "lem-sf-adic-qbar-constructible-realization",
+  "lem-sf-locally-finite-adic-constructible-realization",
+  "lem-per-rational-realization-pullback-comparison",
+  "lem-per-rational-realization-scalar-coherence",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-tw-ordinary-completed-integral-pullback",
+  "lem-fix-constructible-tensor-completion",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-completed-primitive-counit-comparison",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-native-proper-coefficient-operations",
+  "def-sf-native-proper-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15, pp. 61–62; agent assembly of the specified comparison from existing DAG lemmas",
+  "note": "Agent-formulated strict subargument of the proper-adjunction assembly, retaining the named source and its normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized scalar extension comparison of constructible adic derived pullback preserves the tensor unit and tensor product",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AdicCompletion.ofTensorProduct_tmul and generic scalar/tensor declarations; none includes the completed integral/common-stage normalization",
+   "date": "2026-10-27",
+   "verdict": "No match: the project-specific normalized native derived statement is not in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism between pullbacks of continuous adic realization and right adjoint mate",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackIso, PresheafOfModules.pullbackComp and other underived pullback comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No match for the specified common-stage realization or constructible preservation."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|adic_proper_adjunction_realization",
+   "results": "20 hits in Mathlib CategoryTheory.Adjunction.Mates and its applications; abstract mate formulas only. Local rg of Adic modules and six-functor DAG found no duplicate of either new statement.",
+   "date": "2026-10-27",
+   "verdict": "The categorical identities are available; the geometric comparison/preservation statements are absent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicProperAdjunctionRealization",
+  "date": "2026-10-27",
+  "group": "G3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md, Step 1, second Hom bijection: realize the proper factor of the compactification projection formula on native continuous-coefficient modules, including the counit. The seeded root has no blueprint ancestor (blueprint_refs.py ancestor returns None). Subargument: Balanced normalized common-stage inverse-image realization.",
+   "via": [
+    "lem-sf-derived-weil-compact-projection-formula",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicNormalizedPullbackRealization",
+  "file": "lean/Sheaf/Paper/AdicNormalizedPullbackRealization.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.Proper.adic_normalized_pullback_realization",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.Proper.PullbackComparison",
+   "WeilConjectures.AdicQbarRealization.Proper.adic_normalized_pullback_realization"
+  ],
+  "statement": "theorem adic_normalized_pullback_realization (D : FiniteFieldDatum.{u})\n    (hl : l ≠ D.p) (F : Family l D) (Z T : GeometricSpace D)\n    (p : Z.base ⟶ T.base) :\n    letI := (F.data Z).units\n    letI := (F.data T).units\n    Nonempty (PullbackComparison l p.left (F.data Z).realization\n      (F.data T).realization (F.data Z).tensor (F.data T).tensor)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e55ba",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261027T094408-L-222429",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e55ba",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261027T094408-L-222429",
+  "kind": "interface",
+  "note": "independent cc review: item proof (mate helper + Mathlib mate unit/counit) and two new sorry lemmas against Comparison fields, DAG nodes, unit sk-prop-sf-biduality-general (realized empty)"
+ }
+}

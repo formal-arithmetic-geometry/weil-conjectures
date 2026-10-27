@@ -31,252 +31,80 @@
  ],
  "proof": [
   {
-   "text": "Put $X'=X\\times_TT'$ and $D'=D\\times_TT'$. Apply [lem-weil-pbc-flat-morphism-base-change] and clause (3) of [lem-weil-pbc-qcqs-morphism-permanence] to both structural morphisms. They remain flat and of finite presentation. The marking $D'\\to X'$ is the base change of $D\\to X$ along $X'\\to X$, by the universal property of the fibre product, and is a closed immersion by [lem-weil-pbc-closed-immersion-base-change].",
+   "text": "For both structural maps, [lem-weil-pbc-flat-morphism-base-change], [lem-weil-pbc-qcqs-morphism-permanence](3) and [lem-trf-relative-dimension-base-change] preserve flatness, finite presentation and pure fibre dimensions $1,0$. The induced marking is the base change of the old closed immersion, hence closed by [lem-weil-pbc-closed-immersion-base-change]. This gives multipointedness. Under the generic-point condition the new generic fibres are scalar extensions along $\\kappa(\\eta_T)\\to\\kappa(\\eta_{T\\prime})$; [lem-pc-proper-base-change](2) and [lem-weil-pbc-etale-scheme-base-change] preserve smoothness and etaleness.",
    "uses": [
     "lem-weil-pbc-flat-morphism-base-change",
     "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-trf-relative-dimension-base-change",
     "lem-weil-pbc-closed-immersion-base-change",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Structural permanence; Morphisms Tags 01U9, 01TS, 01QR."
-   }
-  },
-  {
-   "text": "For either structural morphism $Z\\to T$, write $d=1$ for $Z=X$ and $d=0$ for $Z=D$. Its fibres are finite type over fields and hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Pure dimension $d$ implies constant local topological dimension $d$ by [lem-sbc-equidimensional-open-local-dimension], with the whole fibre as the open. For every $z'\\in Z\\times_TT'$, [lem-sc-fibre-dimension-after-base-change] identifies the local dimension of the fibre at $z'$ with that at its image $z$. The new fibre is also finite type and Noetherian. Apply [lem-sbc-constant-local-dimension-components] to this whole fibre to recover pure dimension $d$. Empty fibres satisfy this assertion vacuously. Thus Step 1 gives a multipointed curve for every base change.",
-   "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-sbc-equidimensional-open-local-dimension",
-    "lem-sc-fibre-dimension-after-base-change",
-    "lem-sbc-constant-local-dimension-components"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Morphisms Tag 02FY; Varieties Tag 0A21; local dimension of fibres."
-   }
-  },
-  {
-   "text": "Under the extra integral-base hypothesis, the generic-point condition induces a field map $\\kappa(\\eta_T)\\to\\kappa(\\eta_{T'})$. Associating the fibre products identifies $X'_{\\eta_{T'}}$ and $D'_{\\eta_{T'}}$ with the scalar extensions of $X_{\\eta_T}$ and $D_{\\eta_T}$ along this map. Clause (2) of [lem-pc-proper-base-change] preserves smoothness of the first, and [lem-weil-pbc-etale-scheme-base-change] preserves etaleness of the second. This proves precisely the generic assertion, without using properness.",
-   "uses": [
-    "def-pc-fibre-product",
     "lem-pc-proper-base-change",
     "lem-weil-pbc-etale-scheme-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Generic fibres; Morphisms Tags 01VB and 02GO."
+    "place": "Tags 0C59, 0C5B and 0CBY; assembly of the five extracted arguments."
    }
   },
   {
-   "text": "Now take the semistable source $Y\\to T$. First verify the hypotheses of [lem-trf-nodal-family-fitting-singular] and [lem-trf-nodal-family-etale-local-model], which quantify over every algebraically closed field, whereas semistability is a condition on the chosen geometric fibres $Y_{\\bar t}$, $\\bar t:\\operatorname{Spec}\\overline{\\kappa(t)}\\to T$. Let $\\operatorname{Spec}\\Omega\\to T$ be any geometric point, over $t\\in T$. By [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] the chosen algebraic closure $\\overline{\\kappa(t)}$ embeds into $\\Omega$ over $\\kappa(t)$, and associating fibre products identifies $Y\\times_T\\operatorname{Spec}\\Omega$ with the base change of $Y_{\\bar t}$ to $\\Omega$. The scheme $Y_{\\bar t}$ is locally of finite presentation, hence locally of finite type, over $\\overline{\\kappa(t)}$ by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], and its nonsmooth points have completed local ring $\\overline{\\kappa(t)}[[u,v]]/(uv)$; so [lem-trf-node-algebraically-closed-extension] gives completed local ring $\\Omega[[u,v]]/(uv)$ at every nonsmooth point of $Y_\\Omega$. Step 2, applied to $\\operatorname{Spec}\\Omega\\to T$, makes $Y_\\Omega$ empty or pure of dimension $1$. Now apply [lem-trf-nodal-family-fitting-singular]. Its remaining hypotheses are flatness and local finite presentation; it imposes no properness or Noetherian condition on $T$. It supplies an open relative smooth locus $U\\subset Y$ and says that the nonsmooth locus after every base change is the inverse image of $Y\\setminus U$. Taking complements gives exactly $U'=U\\times_TT'$, including the assertion that the relative smooth locus commutes with base change.",
+   "text": "For $Y\\to T$, semistability and Step 1 give the hypotheses of [lem-trf-chosen-nodal-fibres-universal]: flat, locally finitely presented, nonempty fibres pure of dimension $1$, and nodes on the chosen-closure geometric fibres. It shows that for every algebraically closed field $\\Omega$ and every $\\operatorname{Spec}\\Omega\\to T$ each nonsmooth point of $Y_\\Omega$ has completed local ring $\\Omega[[u,v]]/(uv)$, and that the relative smooth locus $U$ of $Y\\to T$ satisfies $U\\prime=U\\times_TT\\prime$. For $t\\prime\\in T\\prime$ with chosen closure $\\Omega$ of $\\kappa(t\\prime)$, associating fibre products [def-pc-fibre-product] identifies $Y\\prime\\times_{T\\prime}\\operatorname{Spec}\\Omega$ over $\\Omega$ with $Y\\times_T\\operatorname{Spec}\\Omega$ for the composite $\\operatorname{Spec}\\Omega\\to T\\prime\\to T$, so every nonsmooth point of every geometric fibre of $Y\\prime$ is an ordinary node. The structural properties come from Step 1; [lem-weil-pbc-etale-scheme-base-change] preserves the marking's etaleness, and $E\\subset U$ gives $E\\prime=E\\times_TT\\prime\\subset U\\times_TT\\prime=U\\prime$.",
    "uses": [
-    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-trf-node-algebraically-closed-extension",
-    "lem-trf-nodal-family-fitting-singular"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tags 0C59 and 0C5B, via the first-Fitting singular subscheme."
-   }
-  },
-  {
-   "text": "We will use completed local rings only on schemes locally of finite type over an algebraically closed field $\\Omega$. For an etale map between such schemes and a closed $\\Omega$-point upstairs, its image is also a rational closed point, and the residue-field maps are identities on $\\Omega$, by [lem-weil-pbc-closed-point-residue-field-base] (or by evaluation of the coordinates in affine charts). The local rings are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied to affine charts. Etaleness gives flatness; [lem-weil-pbc-etale-prime-generates-maximal] gives $\\mathfrak m_A B=\\mathfrak m_B$. Consequently [lem-weil-pbc-flat-local-completion-iso] identifies the completed local rings. This is a direct application of that lemma with identical residue fields.",
-   "uses": [
-    "lem-weil-pbc-closed-point-residue-field-base",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-etale-prime-generates-maximal",
-    "lem-weil-pbc-flat-local-completion-iso"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Etale Tag 039M; Algebra Tag 00U4; More on Algebra Tag 0AGX."
-   }
-  },
-  {
-   "text": "Fix a singular closed point $y'$ on a geometric fibre of $Y'=Y\\times_TT'$, over an algebraically closed field $\\Omega$. By Step 4 its image $y\\in Y$ is nonsmooth. Apply [lem-trf-nodal-family-etale-local-model] at $y$, whose hypotheses for every algebraically closed field were verified in Step 4, obtaining etale maps $U_0\\to Y$, $V\\to T$ and $U_0\\to W=\\operatorname{Spec}_V\\mathcal O_V[u,v]/(uv-h)$ and a point of $U_0$ over $y$. Pull these back to the geometric point under consideration, using [lem-weil-pbc-etale-scheme-base-change]. The fibre of $U_0\\to Y$ over $y'$ is nonempty: the original nonempty etale fibre is a disjoint union of finite separable field spectra by [lem-trf-unramified-field-fibre-decomposition], and tensoring a nonzero vector space with a field extension is nonzero. Over $\\Omega$ its points are rational by the same decomposition. A chosen lift therefore maps to a rational point of the plane curve $uv=a$, where $a$ is the image of $h$ in $\\Omega$.",
-   "uses": [
-    "lem-trf-nodal-family-etale-local-model",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-trf-unramified-field-fibre-decomposition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBY (lemma-etale-local-structure-nodal-family), pullback of the displayed diagram."
-   }
-  },
-  {
-   "text": "The lift in Step 6 cannot be smooth over $\\Omega$ when $y'$ is nonsmooth. Indeed an open smooth neighbourhood of the lift has open image under its etale map, by [lem-weil-pbc-flat-lfp-open]; its map onto that image is flat, surjective and locally finitely presented. [lem-sbc-smooth-flat-surjective-source-descent] would make that image smooth. On $uv=a$, away from $u=v=0$ one coordinate is invertible and the other is determined, so that this open is an open of $\\mathbf A^1_\\Omega$; it is smooth of dimension one. Smoothness of its etale inverse image follows from [lem-weil-pbc-etale-smooth-zero-dimensional-fibres] and [lem-sbc-smooth-relative-dimension-permanence]. Hence the point of $uv=a$ from Step 6 must be the origin, and $a=0$.",
-   "uses": [
-    "lem-weil-pbc-flat-lfp-open",
-    "lem-sbc-smooth-flat-surjective-source-descent",
-    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-    "lem-sbc-smooth-relative-dimension-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBY, geometric fibre of the local model; Descent Tag 05B5."
-   }
-  },
-  {
-   "text": "At that origin, the completion of $\\Omega[u,v]_{(u,v)}$ is $\\Omega[[u,v]]$: compatible polynomial residues modulo $(u,v)^n$ specify exactly one coefficient of each monomial, and localization does not change these quotients since polynomials with nonzero constant term are units in them. [lem-weil-pbc-local-completion-quotient] therefore gives the completion of $\\Omega[u,v]_{(u,v)}/(uv)$ as $\\Omega[[u,v]]/(uv)$. Apply Step 5 to both etale arrows from the lifted point, one to $Y'_\\Omega$ and the other to the plane-curve model. The completed local ring at $y'$ is thus $\\Omega[[u,v]]/(uv)$. Steps 1--2 give flatness, finite presentation and pure dimension for $Y'$ and $E'$. Etaleness of $E'\\to T'$ follows from [lem-weil-pbc-etale-scheme-base-change], and $E'\\subset U'$ from Step 4. This proves all the semistability clauses.",
-   "uses": [
-    "lem-weil-pbc-local-completion-quotient",
+    "lem-trf-chosen-nodal-fibres-universal",
+    "def-pc-fibre-product",
     "lem-weil-pbc-etale-scheme-base-change"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBY, completion at the origin of the model; Algebra Tag 00MA."
+    "place": "Tags 0C59, 0C5B and 0CBY; assembly of the five extracted arguments."
    }
   },
   {
-   "text": "To compare the chosen algebraic-closure fibres in the definition with larger algebraically closed fibres, let $k\\subset L$ be algebraically closed fields and let $C$ be a finite-type $k$-scheme. By [lem-weil-pbc-algebraic-over-algebraically-closed-subfield], $k$ is algebraically closed in $L$; [lem-zl-field-extension-algebraically-closed-geometric] makes $\\operatorname{Spec}L$ geometrically irreducible over $k$. [lem-sc-product-irreducible-components-bijection] gives a bijection of irreducible components after scalar extension, both for $C$ and separately for each reduced component $R\\subset C$. In particular each $R_L$ is irreducible: it is nonempty and has exactly one irreducible component. The closed sets $|R_L|$ cover $C_L$, and none is contained in another since projection is surjective on each $R$. This surjectivity follows affine-locally from [lem-weil-pbc-field-extension-base-change-faithfully-flat] and [lem-weil-pbc-faithfully-flat-surjective-spectrum]. Since $k$ is perfect, [lem-kun-geometric-reduced-perfect] says $R_L$ is reduced. Thus $R\\mapsto R_L$ identifies the reduced component schemes themselves.",
+   "text": "For algebraically closed $k\\subset L$, [lem-trf-geometric-components-projective-line-descent] identifies the reduced components and preserves and reflects being $\\mathbf P^1$. [lem-trf-nodal-marking-special-point-incidence] preserves each component's number of distinct marked or singular points, and [lem-trf-projective-line-contraction-scalar-extension] preserves and reflects contraction. Thus no forbidden component can appear after extension. For $t\\prime\\mapsto t$, embed the chosen closure of $\\kappa(t)$ into that of $\\kappa(t\\prime)$ by [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed]; associating fibre products [def-pc-fibre-product] identifies the new fibre morphism with that scalar extension. This proves geometric stability under arbitrary base change.",
    "uses": [
-    "lem-weil-pbc-algebraic-over-algebraically-closed-subfield",
-    "lem-zl-field-extension-algebraically-closed-geometric",
-    "lem-sc-product-irreducible-components-bijection",
-    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-    "lem-kun-geometric-reduced-perfect"
+    "lem-trf-geometric-components-projective-line-descent",
+    "lem-trf-nodal-marking-special-point-incidence",
+    "lem-trf-projective-line-contraction-scalar-extension",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "def-pc-fibre-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Algebra Tag 037P; Varieties Tag 038F; component schemes under algebraically closed scalar extension."
+    "place": "Tags 0C59, 0C5B and 0CBY; assembly of the five extracted arguments."
    }
   },
   {
-   "text": "For a reduced component $R$ of such a finite-type scheme, suppose $R_L\\cong\\mathbf P^1_L$. The component $R$ is closed in a finite-type Noetherian scheme, hence quasi-compact and quasi-separated (intersections of affine opens are Noetherian opens and quasi-compact). Both $R$ and $\\mathbf P^1_k$ are of finite presentation over the field $k$ (use finite-type Noetherian affine charts). Write $L$ as the directed union of its finitely generated $k$-subalgebras. Apply [lemma-nagata-morphism-descends] to the isomorphism and its inverse, then [def-nagata-morphism-equality-stage] and [lemma-nagata-morphism-eq-eventually] to the two inverse equations. At one common stage $A\\subset L$ this gives inverse $A$-morphisms $R_A\\rightleftarrows\\mathbf P^1_A$. The nonzero finite-type $k$-algebra $A$ has a maximal ideal; [lem-weil-pbc-closed-point-residue-field-base] identifies its residue field with $k$. Pulling the two inverse morphisms back to this point gives $R\\cong\\mathbf P^1_k$. Conversely such an isomorphism pulls back to one over $L$, with projective-space base change supplied by [lemma-nagata-projective-space-base-change-pullback]. This uses only the two cited morphism-descent assertions, their equality assertion, and specialization.",
+   "text": "Apply [lem-trf-structural-fibrewise-open-locality] to the structural maps, marking and fibre morphism. Use its geometric-diagram predicate first for nodality and then for absence of the forbidden contracted component. Its smooth-locus clause checks the marking inclusion. These equivalences give all asserted open-cover locality statements. They do not assert preservation of modifications.",
    "uses": [
-    "lemma-nagata-morphism-descends",
-    "def-nagata-morphism-equality-stage",
-    "lemma-nagata-morphism-eq-eventually",
-    "lem-weil-pbc-closed-point-residue-field-base",
-    "lemma-nagata-projective-space-base-change-pullback",
-    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+    "lem-trf-structural-fibrewise-open-locality"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Limits Tag 01ZM, parts (2)--(3), and Algebra Tag 00FV; specialization of inverse morphisms."
-   }
-  },
-  {
-   "text": "For a semistable marked geometric curve $(C,F)$ over $k$, its marking and its singular subscheme are finite disjoint unions of $k$-points: use [lem-trf-unramified-field-fibre-decomposition] for the etale marking and for the unramified singular subscheme supplied by [lem-trf-nodal-family-fitting-singular], applied to $C\\to\\operatorname{Spec}k$. Its hypotheses hold for every algebraically closed extension $\\Omega$ of $k$: $C_\\Omega$ is pure of dimension one by Step 2 and nodal by [lem-trf-node-algebraically-closed-extension]. They are quasi-compact closed subschemes of the finite-type Noetherian curve, so the disjoint decompositions have finitely many terms. Scalar extension replaces each $\\operatorname{Spec}k$ by one $\\operatorname{Spec}L$. Step 4 identifies the pulled-back singular locus, and a marking is pulled back as a closed subscheme. Therefore on corresponding components $R,R_L$ the number of distinct points in the union of marking and singular locus is unchanged. Intersections are fibre products of the same closed subschemes, so a given rational point belongs to $R$ if and only if its unique lift belongs to $R_L$. This counts points on the component, as distinct points of the component; it does not count branches of the normalization.",
-   "uses": [
-    "lem-trf-unramified-field-fibre-decomposition",
-    "lem-trf-nodal-family-fitting-singular",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "def-pc-fibre-product",
-    "def-weil-etale-morphism",
-    "lem-trf-node-algebraically-closed-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tags 02G7 and 0C59; geometric markings and first-Fitting singular subscheme."
-   }
-  },
-  {
-   "text": "For a morphism of the geometric pairs and a corresponding component $R$, contraction is unchanged by $k\\subset L$. If $R\\cong\\mathbf P^1_k$ and its image is a point, that point is $k$-rational (evaluate at a rational point of $R$); the morphism is constant. Indeed choose an affine neighbourhood $\\operatorname{Spec}B$ of its image. On the two affine charts of [def-sc-p1-standard] its maps are ring maps $B\\to k[t]$ and $B\\to k[t^{-1}]$, by [def-weil-affine-spectrum]. They agree in $k[t,t^{-1}]$, whose two subrings have intersection $k$. Thus both chart morphisms factor through the same rational point and glue to the constant morphism. Its scalar extension is constant too. Conversely if $R_L$ is contracted, projection of its image and the surjectivity $R_L\\to R$ from Step 9 show that the image of $R$ has one point. Together with Step 10 and Step 11, every exceptional contracted $\\mathbf P^1$ component after extension would give exactly such a component before extension, with the same number of special points. Thus a fibre with no exceptional component remains without one.",
-   "uses": [
-    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-    "def-sc-p1-standard",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Temkin geometric exceptional-component condition; algebraically closed field extension."
-   }
-  },
-  {
-   "text": "Let $t'\\in T'$ map to $t\\in T$. Choose an embedding of an algebraic closure $k$ of $\\kappa(t)$ into an algebraic closure $L$ of $\\kappa(t')$, extending the residue-field map; [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] supplies it. Associating fibre products identifies the geometric pair and its morphism over $t'$ with the scalar extension to $L$ of the geometric pair and morphism over $t$. Steps 9--12 show that its forbidden-component predicate cannot appear. This proves stability under arbitrary base change, for exactly the geometric stability condition in the statement.",
-   "uses": [
-    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
-    "def-weil-geometric-fibre",
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Temkin section 1.2, geometric-fibre formulation; residue-field base change."
-   }
-  },
-  {
-   "text": "Finally let $(T_i)$ be an open cover of $T$. Flatness and local finite presentation are pointwise affine-local conditions. Quasi-compactness is local on the target by [lem-pc-quasi-compact-local-on-target]; apply the same lemma to the diagonal to check quasi-separatedness locally, using that an open cover of $T$ pulls back to an open cover of the diagonal target. Thus finite presentation is local on $T$. Closed immersion and etaleness are local on the target by [lem-weil-pbc-closed-finite-etale-zariski-local], applying closed-immersion locality over the inverse-image cover of the curve. Every point of $T$ belongs to a $T_i$, and its fibre, marking and fibre morphism are identical to those of the restricted pair. Hence pure dimensions, nodes and the no-exceptional-component condition are local as well; the marking's inclusion in the smooth locus is pointwise. These arguments allow empty marking and nonproper, nonseparated curves. They assert nothing about schematic density or preservation of modifications.",
-   "uses": [
-    "def-weil-flat-morphism",
-    "def-sbc-locally-finite-presentation",
-    "lem-pc-quasi-compact-local-on-target",
-    "lem-weil-pbc-closed-finite-etale-zariski-local"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Open-cover locality of the defining conditions."
+    "place": "Tags 0C59, 0C5B and 0CBY; assembly of the five extracted arguments."
    }
   }
  ],
  "proof_deps": [
-  "def-nagata-morphism-equality-stage",
   "def-pc-fibre-product",
-  "def-sbc-locally-finite-presentation",
-  "def-sc-p1-standard",
-  "def-weil-affine-spectrum",
-  "def-weil-etale-morphism",
-  "def-weil-flat-morphism",
-  "def-weil-geometric-fibre",
-  "lem-kun-geometric-reduced-perfect",
   "lem-pc-proper-base-change",
-  "lem-pc-quasi-compact-local-on-target",
-  "lem-sbc-constant-local-dimension-components",
-  "lem-sbc-equidimensional-open-local-dimension",
-  "lem-sbc-smooth-flat-surjective-source-descent",
-  "lem-sbc-smooth-relative-dimension-permanence",
-  "lem-sc-fibre-dimension-after-base-change",
-  "lem-sc-product-irreducible-components-bijection",
-  "lem-trf-nodal-family-etale-local-model",
-  "lem-trf-nodal-family-fitting-singular",
-  "lem-trf-node-algebraically-closed-extension",
-  "lem-trf-unramified-field-fibre-decomposition",
+  "lem-trf-chosen-nodal-fibres-universal",
+  "lem-trf-geometric-components-projective-line-descent",
+  "lem-trf-nodal-marking-special-point-incidence",
+  "lem-trf-projective-line-contraction-scalar-extension",
+  "lem-trf-relative-dimension-base-change",
+  "lem-trf-structural-fibrewise-open-locality",
   "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
-  "lem-weil-pbc-algebraic-over-algebraically-closed-subfield",
-  "lem-weil-pbc-closed-finite-etale-zariski-local",
   "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-closed-point-residue-field-base",
-  "lem-weil-pbc-etale-prime-generates-maximal",
   "lem-weil-pbc-etale-scheme-base-change",
-  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-flat-lfp-open",
-  "lem-weil-pbc-flat-local-completion-iso",
   "lem-weil-pbc-flat-morphism-base-change",
-  "lem-weil-pbc-local-completion-quotient",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-zl-field-extension-algebraically-closed-geometric",
-  "lemma-nagata-morphism-descends",
-  "lemma-nagata-morphism-eq-eventually",
-  "lemma-nagata-projective-space-base-change-pullback"
+  "lem-weil-pbc-qcqs-morphism-permanence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/curves.tex",
-  "place": "Tags 0C59 and 0CBY; explicit combination of existing DAG permanence, completion, component, and approximation statements. The Temkin PDF named in the imported source is unavailable locally."
+  "place": "Short assembly of five extracted arguments from returned Steps 1--14; full old arguments and their exact allocation retained in report.md. Tags 0C59, 0C5B and 0CBY."
  },
  "mathlib_searches": [
   {
@@ -365,131 +193,39 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-semistable-marked-base-change",
   "worker": "stage1",
-  "summary": "Expanded the arbitrary-base-change and open-locality argument using existing general permanence, local-dimension, first-Fitting, etale-node-chart, completion, and scalar-extension/approximation nodes. No new nodes or hypotheses; kept the distinction between fibrewise stability and modifications.",
-  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Arbitrary base change of semistable marked curves and fibrewise stability.",
+  "summary": "Repair of the mandatory re-split: retained the statement verbatim, extracted six (five after review) independently stated unsplit arguments, and replaced the 13020-character proof by a short assembly. Every returned step and its citations is retained verbatim in the report; Steps 1--3 reuse existing permanence and pure-dimension nodes, and Steps 4--14 are allocated among six statement-only children and the short residue-closure assembly. No Lean written or compiled. Rebased for the side-completion promotion refusal: current live item equals the retained original baseline, all 18 citation quotes agree with current statements, and eight newly relevant same-tag pairs were read and distinguished in the repaired report. The six-child split and complete retained argument briefs are preserved. Current-DAG repair continued 2026-10-23: reread every assembly citation and the child sources; reordered Step 2 to establish rational closed nonsmooth fibre points and nonsmoothness of their images before invoking the local model and completion statement. The first resumed dry run passed at e90fdd7b126; the revised proof and report require a fresh final preflight. Maintainer review (Q117 55230eb6, re-applying the lost c68ceb23/88b35a17 fix): the chart-completion child (old Steps 5--8) dropped as unneeded, since lem-trf-chosen-nodal-fibres-universal already gives nodality of every geometric fibre of the base change; Step 2 rewritten accordingly.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Arbitrary base change of semistable marked curves and fibrewise stability. Six arguments below the historical semistable-modification input, allocated from returned Steps 1--14; current blueprint ancestor text read without changing its route.",
   "tool_uses": [
    {
-    "node": "lem-kun-geometric-reduced-perfect",
-    "why": "Generic tool for this semistable-curve permanence argument: Geometric reducedness over a perfect field. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-pc-proper-base-change",
-    "why": "Generic tool for this semistable-curve permanence argument: Proper and smooth morphisms are stable under base change. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-pc-quasi-compact-local-on-target",
-    "why": "Generic tool for this semistable-curve permanence argument: Quasi-compactness is local on the target. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-sbc-constant-local-dimension-components",
-    "why": "Generic tool for this semistable-curve permanence argument: Pure component dimension from constant finite local dimension. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-sbc-equidimensional-open-local-dimension",
-    "why": "Generic tool for this semistable-curve permanence argument: Local dimension of a pure-dimensional locally algebraic open. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-sbc-smooth-flat-surjective-source-descent",
-    "why": "Generic tool for this semistable-curve permanence argument: Smoothness descends along flat surjective locally finitely presented source maps. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-sbc-smooth-relative-dimension-permanence",
-    "why": "Generic tool for this semistable-curve permanence argument: Base change and composition of smooth morphisms of fixed relative dimension. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-sc-fibre-dimension-after-base-change",
-    "why": "Generic tool for this semistable-curve permanence argument: Fibre dimensions are preserved by base change. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-sc-product-irreducible-components-bijection",
-    "why": "Generic tool for this semistable-curve permanence argument: Components of a product with a geometrically irreducible scheme. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
     "node": "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
-    "why": "Generic tool for this semistable-curve permanence argument: An algebraic extension embeds into an algebraically closed extension. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
+    "why": "Generic field-embedding tool for comparison of chosen geometric fibres; no replacement of the unit route."
    },
    {
-    "node": "lem-weil-pbc-algebraic-over-algebraically-closed-subfield",
-    "why": "Generic tool for this semistable-curve permanence argument: An element algebraic over an algebraically closed subfield lies in it. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-weil-pbc-closed-finite-etale-zariski-local",
-    "why": "Generic tool for this semistable-curve permanence argument: Closed immersion, finiteness and etaleness are local on the target. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-weil-pbc-closed-immersion-base-change",
-    "why": "Generic tool for this semistable-curve permanence argument: Base change of a closed immersion is a closed immersion. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-weil-pbc-closed-point-residue-field-base",
-    "why": "Generic tool for this semistable-curve permanence argument: Residue fields of closed points over an algebraically closed field. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-weil-pbc-etale-prime-generates-maximal",
-    "why": "Generic tool for this semistable-curve permanence argument: For an etale algebra the prime below generates the maximal ideal of the local ring. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-weil-pbc-etale-scheme-base-change",
-    "why": "Generic tool for this semistable-curve permanence argument: Base change of an etale morphism of schemes is etale (Stacks 02GO). No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-    "why": "Generic tool for this semistable-curve permanence argument: An etale morphism is smooth with zero-dimensional fibres. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-    "why": "Generic tool for this semistable-curve permanence argument: A faithfully flat ring map is surjective on spectra. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-    "why": "Generic tool for this semistable-curve permanence argument: Base change along a field extension is faithfully flat. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-    "why": "Generic tool for this semistable-curve permanence argument: Finite type over a Noetherian ring is finite presentation. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Generic tool for this semistable-curve permanence argument: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-weil-pbc-flat-lfp-open",
-    "why": "Generic tool for this semistable-curve permanence argument: Flat finite-presentation morphisms are open. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-weil-pbc-flat-local-completion-iso",
-    "why": "Generic tool for this semistable-curve permanence argument: A flat local map with the same maximal ideal and residue field is an isomorphism on completions. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
+    "node": "lem-trf-relative-dimension-base-change",
+    "why": "Generic pure-fibre-dimension base-change tool already on the trace-formula route."
    },
    {
     "node": "lem-weil-pbc-flat-morphism-base-change",
-    "why": "Generic tool for this semistable-curve permanence argument: Base change of a flat morphism of schemes is flat. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lem-weil-pbc-local-completion-quotient",
-    "why": "Generic tool for this semistable-curve permanence argument: Completion of a quotient of a Noetherian local ring. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
+    "why": "Structural permanence tool; does not replace the unit route."
    },
    {
     "node": "lem-weil-pbc-qcqs-morphism-permanence",
-    "why": "Generic tool for this semistable-curve permanence argument: Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
+    "why": "Finite-presentation base-change tool."
    },
    {
-    "node": "lem-zl-field-extension-algebraically-closed-geometric",
-    "why": "Generic tool for this semistable-curve permanence argument: Algebraic closure in a field extension implies geometric irreducibility. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Closed-marking permanence tool."
    },
    {
-    "node": "lemma-nagata-morphism-descends",
-    "why": "Generic tool for this semistable-curve permanence argument: Property of the descended morphism, [stacks-project]. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
+    "node": "lem-pc-proper-base-change",
+    "why": "Only smooth base change, clause (2), is used for the generic curve; no properness hypothesis is imposed."
    },
    {
-    "node": "lemma-nagata-morphism-eq-eventually",
-    "why": "Generic tool for this semistable-curve permanence argument: Eventual equality of morphisms, [stacks-project]. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
-   },
-   {
-    "node": "lemma-nagata-projective-space-base-change-pullback",
-    "why": "Generic tool for this semistable-curve permanence argument: Projective space commutes with base change. No step of the trace-formula unit is replaced; this supplies geometry below its existing stable-modification input."
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Etale base-change tool for the generic marking and marking."
    }
   ]
  },
@@ -523,15 +259,16 @@
   "lem-zl-field-extension-algebraically-closed-geometric",
   "lemma-nagata-morphism-descends",
   "lemma-nagata-morphism-eq-eventually",
-  "lemma-nagata-projective-space-base-change-pullback"
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-trf-relative-dimension-base-change"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q88-a608d6d07",
-  "group": "Q88",
+  "reviewer": "NT-cc-Q117-55230eb65",
+  "group": "Q117",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-a608d6d07 (reviewer sub-agent of L); spot-checked: I read all 14 steps against the full statements of the 41 cited nodes, Stacks curves.tex Tags 0C59, 0C5B, 0C56 and lemma-nodal-lci, the unit sk-i-curve-zero and the parent lem-trf-temkin-stable-modification. The Temkin PDF is not in literature/, so the worker's WANTED line and proof_origin=agent are correct. One fault, E1 (a hypothesis that is never verified): the item defines semistability on def-weil-geometric-fibre, the chosen algebraic closure, and Step 13 relies on that reading. Steps 4, 6 and 11 apply lem-trf-nodal-family-fitting-singular and lem-trf-nodal-family-etale-local-model, which both need nodal fibres over every algebraically closed Ω, and the split never derives that. Nodality over every Ω is the item's own conclusion for T'=Spec Ω, so the argument assumed what it proves. Repair: a new statement-only, unsplit node lem-trf-node-algebraically-closed-extension (Stacks 0C56, direction (1)⇒(2): for algebraically closed k⊆Ω, nodal nonsmooth points of a locally finite type C give nodal nonsmooth points of C_Ω). I checked it on small cases and through the completion argument; no DAG node, blueprint node or Mathlib declaration states it. Step 4 now verifies both hypotheses for every geometric point: it embeds the chosen closure into Ω, cites qcqs-permanence (3) and the new node, and uses Step 2 for dimension. Step 6 refers back to Step 4, Step 11 cites the new node, and proof_deps is again the union of uses. review_split passes on the fixed files. All 30 declared tool_uses are generic permanence, dimension, completion and approximation tools, and I accept them. The other steps were checked hypothesis by hypothesis and are correct; there is no SGA source and the statement is unchanged.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-55230eb65 (reviewer sub-agent of L); spot-checked: S1 re-split of 2026-10-21. The live item still has the 14-step, 13020-character base proof, and none of the new ids is live, so the delivery is not superseded. The statement is unchanged, and all 14 base step texts are verbatim in the report. The 6 new node JSONs are byte-identical to heads 88b35a17 and c68ceb23; only item Step 2 was reordered. The FIX of those two reviews (dropping the chart node) was lost when landing was refused, and I re-checked it myself. lem-trf-chosen-nodal-fibres-universal already concludes that every nonsmooth point of Y_Omega is Omega[[u,v]]/(uv) for every Spec Omega->T (Stacks 0C56 (1)=>(2), read at curves.tex l.4388). The chosen geometric fibre of Y'=Y x_T T' over t' is Y x_T Spec Omega for the composite Spec Omega->T'->T. So old Steps 5-8 re-derived a fact old Step 4 had already proved, and the chart node's 'More generally' clause duplicates lem-trf-etale-completed-local-ring-iso. I dropped the node and rewrote Step 2 as: chosen-nodal, then fibre-product associativity, then etale base change, then E'=E x T' inside U x T'=U'. Step 2 no longer cites fitting-singular, unramified-decomposition, local-model or chart. proof_deps equals the union of uses, sources and proof_origin say five, and the assembly is 2887 characters. Five new nodes of comparable size remain (at least the 4 the note requires), none restating the item. Allocation of old steps: 1 and 3 stay in parent Step 1; 2 goes to the existing lem-trf-relative-dimension-base-change; 4 to chosen-nodal; 9-10 to components-P1-descent; 11 to incidence; 12 to contraction; 13 is parent Step 3; 14 to open-locality. All five kept nodes are true. Small cases tested: empty fibres, cover and marking; uv=a with a a unit; a self-node counted once; crossing lines; the line with doubled origin; k=L; a constant map to Spec k[eps]; the identity map of P1. Sources read: Stacks 0C56, 0C59, 0C5B, 038F, 02G7, 01JE and 01ZM. No SGA source is used; the Temkin WANTED line and proof_origin=agent are correct. Batch 5: all listed citations are generic scheme and curve geometry, not trace-formula or Poincare-duality statements or proof steps, so they are accepted. The item enters b5 via lem-sfb-equivariant-nodal-smooth-pair-resolution. Tool uses accepted. Maintainer note: this is the fourth review of identical child content; please land with this fix applied.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange",
@@ -561,5 +298,16 @@
   "result": "pass",
   "note": "Reviewed the immutable node, dependencies, source places, both Lean modules, docstrings, edge cases, route-pivot compliance, and required scompile path. No substantive or mechanical defects found; review.md records the checks."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

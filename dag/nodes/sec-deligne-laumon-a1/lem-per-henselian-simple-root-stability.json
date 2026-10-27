@@ -14,86 +14,54 @@
  ],
  "proof": [
   {
-   "text": "Write $v(0)=+\\infty$. If $\\{0\\}$ is open, the topology of $F$ is discrete, and $V=\\{(c_0,\\ldots,c_{n-1})\\}$ works with $b=a$. Otherwise every ball about zero contains a nonzero element: for every bound $\\lambda$ we can choose $t\\ne0$ with $v(t)>\\lambda$. Put $R=\\{x:v(x)\\geq0\\}$ and $\\mathfrak m=\\{x:v(x)>0\\}$. The valuation inequalities show that $R$ is a subring and $\\mathfrak m$ an ideal; an element of $R$ outside $\\mathfrak m$ has valuation zero and its inverse lies in $R$, whereas an element of $\\mathfrak m$ cannot be a unit. Thus $R$ is local with maximal ideal $\\mathfrak m$, and is the assumed henselian valuation ring. The fraction-field valuation-ring property follows since either $v(x)\\geq0$ or $v(x^{-1})>0$ for $x\\ne0$.",
-   "uses": [
-    "def-trf-valuation-ring",
-    "def-weil-pbc-henselian-terminology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Definition Tag 04GF (definition-henselian) and Lemma Tag 04GG (lemma-characterize-henselian), monic simple-root criterion; agent-written valuation rescaling and reciprocal-polynomial argument for the topological application in ILO XX 4.4, printed p.374."
-   }
-  },
-  {
-   "text": "Choose $\\gamma$ such that $\\{x:v(x-a)>\\gamma\\}\\subseteq U$. Set $c_n=1$ and expand, by the binomial formula, $f(a+Z)=\\sum_{j=0}^n A_jZ^j$, with $A_j=\\sum_{i=j}^n\\binom{i}{j}c_i a^{i-j}$. Then $A_0=0$ and $A_1=e=f^{\\prime}(a)\\ne0$. Choose nonzero $t$ with $\\delta=v(t)>\\max(0,\\gamma)$ and $\\delta>v(e)-v(A_j)$ for every nonzero $A_j$ with $2\\leq j\\leq n$. This is possible by the preceding ball observation and finiteness. Consequently $v(A_j)+(j-1)\\delta-v(e)>0$ for all $j\\geq2$ with $A_j\\ne0$. No multiples of a fixed positive value are asserted to be cofinal.",
-   "uses": [
-    "def-weil-polynomial-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Definition Tag 04GF (definition-henselian) and Lemma Tag 04GG (lemma-characterize-henselian), monic simple-root criterion; agent-written valuation rescaling and reciprocal-polynomial argument for the topological application in ILO XX 4.4, printed p.374."
-   }
-  },
-  {
-   "text": "For a coefficient tuple $d$, set $d_n=1$ and $B_j(d)=\\sum_{i=j}^n\\binom{i}{j}d_i a^{i-j}$. Put $\\theta_j=v(e)-(j-1)\\delta$ for $0\\leq j\\leq n$ (so $\\theta_0=v(te)$). Choose $\\beta$ strictly larger than all bounds $\\theta_j-v(\\binom{i}{j}a^{i-j})$ for nonzero multipliers with $0\\leq j\\leq i<n$. Such a bound exists because the list is finite and the nontrivial valuation provides a positive value to add to its maximum. Let $V$ be the product of the open balls $v(d_i-c_i)>\\beta$. Since $B_j(d)-A_j=\\sum_{i=j}^{n-1}\\binom{i}{j}(d_i-c_i)a^{i-j}$, the valuation inequality for a finite sum gives $v(B_j(d)-A_j)>\\theta_j$ for every $j$, including empty sums. This proves the required uniform coefficient control directly.",
+   "text": "If F has discrete topology, so does F^(Fin n), since Fin n is finite. Take V={c} and b=a; all three assertions are the original hypotheses.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Definition Tag 04GF (definition-henselian) and Lemma Tag 04GG (lemma-characterize-henselian), monic simple-root criterion; agent-written valuation rescaling and reciprocal-polynomial argument for the topological application in ILO XX 4.4, printed p.374."
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374, root-perturbation form of Krasner used in the cited Bourbaki VI section 8 exercises 12 and 14(a). Stacks algebra.tex Tag 04GG (lemma-characterize-henselian), part (2), is the simple-root input, not itself this topological conclusion."
    }
   },
   {
-   "text": "Fix $d\\in V$ and its polynomial $g$. Define $h(X)=g(a+tX)/(te)=\\sum_{j=0}^n h_jX^j$, where $h_j=B_j(d)t^{j-1}/e$. The preceding inequalities give $h_0\\in\\mathfrak m$, $h_1-1\\in\\mathfrak m$ and $h_j\\in\\mathfrak m$ for $j\\geq2$: for the last assertion apply the valuation inequality to $B_j=A_j+(B_j-A_j)$ and use the bound on $A_j$ from step 2. Hence $h\\in R[X]$ and $\\overline h=X$. Its degree is $n$, since its leading coefficient is $t^{n-1}/e\\ne0$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Definition Tag 04GF (definition-henselian) and Lemma Tag 04GG (lemma-characterize-henselian), monic simple-root criterion; agent-written valuation rescaling and reciprocal-polynomial argument for the topological application in ILO XX 4.4, printed p.374."
-   }
-  },
-  {
-   "text": "The polynomial $h$ need not be monic, so form the explicit polynomial $Q(Y)=h(1)^{-1}\\sum_{j=0}^n h_jY^{n-j}(Y+1)^j\\in R[Y]$. Here $h(1)\\equiv1\\pmod{\\mathfrak m}$ is a unit. The coefficient of $Y^n$ is $h(1)^{-1}\\sum_jh_j=1$, so $Q$ is monic. Reducing the displayed expression gives $\\overline Q=Y^{n-1}(Y+1)$. Therefore $-1$ is a residue root and $\\overline Q^{\\prime}(-1)=(-1)^{n-1}\\ne0$, also when $n=1$ or the residue characteristic is two.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Definition Tag 04GF (definition-henselian) and Lemma Tag 04GG (lemma-characterize-henselian), monic simple-root criterion; agent-written valuation rescaling and reciprocal-polynomial argument for the topological application in ILO XX 4.4, printed p.374."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-henselian-local-root-lifting], implication (i) to (ii), to the henselian local ring $R$, the monic polynomial $Q$, and the simple residue root $-1$. It gives $y\\in R$ with $Q(y)=0$ and $\\overline y=-1$. Thus $y$ is a unit, $z=1+y^{-1}\\in\\mathfrak m$, and the defining expression for $Q$ gives $0=Q(y)=h(1)^{-1}y^nh(1+y^{-1})$. Both factors outside $h$ are units, whence $h(z)=0$.",
+   "text": "Otherwise apply [lem-per-simple-root-perturbation-normalization] to the given ball basis, f, a and U. Obtain V,s,t and, for each d in V, an integral H with Hbar=X, g(a+sX)=tH, and the inclusion a+s*m subset U. This step uses no henselianity.",
    "uses": [
-    "lem-weil-pbc-henselian-local-root-lifting"
+    "lem-per-simple-root-perturbation-normalization"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Definition Tag 04GF (definition-henselian) and Lemma Tag 04GG (lemma-characterize-henselian), monic simple-root criterion; agent-written valuation rescaling and reciprocal-polynomial argument for the topological application in ILO XX 4.4, printed p.374."
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374, root-perturbation form of Krasner used in the cited Bourbaki VI section 8 exercises 12 and 14(a). Stacks algebra.tex Tag 04GG (lemma-characterize-henselian), part (2), is the simple-root input, not itself this topological conclusion."
    }
   },
   {
-   "text": "Put $b=a+tz$. The identity defining $h$ gives $g(b)=teh(z)=0$, and $v(b-a)=\\delta+v(z)>\\gamma$ (with $v(0)=+\\infty$), so $b\\in U$. Since $\\overline h=X$ and $z\\in\\mathfrak m$, reducing the derivative evaluation gives $\\overline{h^{\\prime}(z)}=1$; in particular $h^{\\prime}(z)\\ne0$. Differentiating the finite polynomial identity $h(X)=g(a+tX)/(te)$ term by term yields $h^{\\prime}(X)=g^{\\prime}(a+tX)/e$. Hence $g^{\\prime}(b)=e h^{\\prime}(z)\\ne0$, so $b$ is simple. All constructions used finite sums and ordered-group inequalities, with no completeness or rank hypothesis.",
+   "text": "Apply [lem-per-henselian-residue-X-root] to the henselian valuation subring and H. It gives z in its maximal ideal with H(z)=0 and H prime(z) a unit.",
+   "uses": [
+    "lem-per-henselian-residue-X-root"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374, root-perturbation form of Krasner used in the cited Bourbaki VI section 8 exercises 12 and 14(a). Stacks algebra.tex Tag 04GG (lemma-characterize-henselian), part (2), is the simple-root input, not itself this topological conclusion."
+   }
+  },
+  {
+   "text": "Set b=a+s*z. The maximal-ideal inclusion puts b in U. Apply evaluation at z to g.comp(C(a)+C(s)*X)=C(t)*H; the mapped root equality H(z)=0 yields g(b)=0. Apply formal differentiation and then evaluation to the same identity to get s*g prime(b)=t*H prime(z). The image of H prime(z), being a unit, is nonzero in the field. As t is nonzero, the right side is nonzero; hence g prime(b) is nonzero.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Definition Tag 04GF (definition-henselian) and Lemma Tag 04GG (lemma-characterize-henselian), monic simple-root criterion; agent-written valuation rescaling and reciprocal-polynomial argument for the topological application in ILO XX 4.4, printed p.374."
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374, root-perturbation form of Krasner used in the cited Bourbaki VI section 8 exercises 12 and 14(a). Stacks algebra.tex Tag 04GG (lemma-characterize-henselian), part (2), is the simple-root input, not itself this topological conclusion."
    }
   }
  ],
  "proof_deps": [
-  "def-trf-valuation-ring",
-  "def-weil-pbc-henselian-terminology",
-  "def-weil-polynomial-ring",
-  "lem-weil-pbc-henselian-local-root-lifting"
+  "lem-per-simple-root-perturbation-normalization",
+  "lem-per-henselian-residue-X-root"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Definition Tag 04GF (definition-henselian) and Lemma Tag 04GG (lemma-characterize-henselian), monic simple-root criterion; agent-written valuation rescaling and reciprocal-polynomial argument for the topological application in ILO XX 4.4, printed p.374."
+  "place": "Tag 04GG, monic simple-root lifting; explicit reciprocal reduction and valuation estimates reconstructed for the ILO XX 4.4 input"
  },
  "mathlib_searches": [
   {
@@ -165,6 +133,41 @@
    "results": "{\"t\": \"2026-10-18T23:41:39Z\", \"tool\": \"leanfinder\", \"query\": \"The coefficient to simple root map is locally solvable in the valuation topology of any henselian valued field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.henselian\", \"HenselianLocalRing.TFAE\", \"hensels_lemma\", \"HenselianLocalRing.is_henselian\", \"HenselianLocalRing\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianRing.is_henselian\", \"instHenselianRingMaximalIdeal\"], \"digest\": \"3b0908bd916b291f\"}",
    "date": "2026-10-19",
    "verdict": "no match: returned monic henselian root lifting, p-adic Hensel and field instances do not state arbitrary-rank coefficient stability; read Mathlib/RingTheory/Henselian.lean:94-153. The subdirectory grep RingTheory/Henselian had no hits; corrected to RingTheory/Henselian.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "HenselianLocalRing|simple.root|Krasner",
+   "results": "{\"t\": \"2026-10-24T10:00:22Z\", \"tool\": \"grep\", \"query\": \"HenselianLocalRing|simple.root|Krasner\", \"sub\": \"RingTheory/Henselian.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"23\", \"34\", \"92\", \"108\", \"114\"], \"digest\": \"76abbb0ba324a126\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: henselian hits lift monic residue roots only; p-adic Hensel requires p-adic integers, and the covering-map hit requires a proper normed field. Read Mathlib/RingTheory/Henselian.lean:94-153. None supplies arbitrary-rank coefficient stability."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simple root of a polynomial over a henselian valued field persists in every neighbourhood after sufficiently small coefficient perturbation",
+   "results": "{\"t\": \"2026-10-24T10:00:23Z\", \"tool\": \"leansearch\", \"query\": \"A simple root of a polynomial over a henselian valued field persists in every neighbourhood after sufficiently small coefficient perturbation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.is_henselian\", \"hensels_lemma\", \"HenselianLocalRing.TFAE\", \"Polynomial.IsRoot.def\", \"HenselianRing.is_henselian\", \"IsAlgClosed.exists_root\", \"Polynomial.IsRoot\", \"HenselianLocalRing.mk\"], \"digest\": \"cdbc615bcec967c7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: henselian hits lift monic residue roots only; p-adic Hensel requires p-adic integers, and the covering-map hit requires a proper normed field. Read Mathlib/RingTheory/Henselian.lean:94-153. None supplies arbitrary-rank coefficient stability."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Polynomial.eval",
+   "results": "{\"t\": \"2026-10-24T10:00:23Z\", \"tool\": \"loogle\", \"query\": \"HenselianLocalRing, Polynomial.eval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"HenselianLocalRing.is_henselian\", \"HenselianLocalRing.mk\"], \"digest\": \"d713896019a4a6db\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: henselian hits lift monic residue roots only; p-adic Hensel requires p-adic integers, and the covering-map hit requires a proper normed field. Read Mathlib/RingTheory/Henselian.lean:94-153. None supplies arbitrary-rank coefficient stability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simple roots over an arbitrary rank henselian valued field persist under small changes of polynomial coefficients",
+   "results": "{\"t\": \"2026-10-24T10:00:26Z\", \"tool\": \"leanfinder\", \"query\": \"Simple roots over an arbitrary rank henselian valued field persist under small changes of polynomial coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"hensels_lemma\", \"HenselianLocalRing.is_henselian\", \"HenselianLocalRing.TFAE\", \"HenselianRing.is_henselian\", \"Field.henselian\", \"WittVector.RecursionMain.root_exists\", \"HenselianLocalRing\", \"WittVector.RecursionMain.succNthVal_spec\"], \"digest\": \"0590babcf5ff6ff0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: henselian hits lift monic residue roots only; p-adic Hensel requires p-adic integers, and the covering-map hit requires a proper normed field. Read Mathlib/RingTheory/Henselian.lean:94-153. None supplies arbitrary-rank coefficient stability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local openness of the polynomial root projection at a simple root in a henselian valuation topology",
+   "results": "{\"t\": \"2026-10-24T10:02:22Z\", \"tool\": \"leanfinder\", \"query\": \"Local openness of the polynomial root projection at a simple root in a henselian valuation topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.is_henselian\", \"HenselianLocalRing.TFAE\", \"HenselianRing.is_henselian\", \"hensels_lemma\", \"Polynomial.isCoveringMapOn_eval\", \"Field.henselian\", \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\", \"HenselianLocalRing\"], \"digest\": \"e965482f31487859\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: henselian hits lift monic residue roots only; p-adic Hensel requires p-adic integers, and the covering-map hit requires a proper normed field. Read Mathlib/RingTheory/Henselian.lean:94-153. None supplies arbitrary-rank coefficient stability."
   }
  ],
  "mathlib_match": null,
@@ -197,16 +200,35 @@
   "same_as": [],
   "is": null
  },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/FieldTheory/HenselianSimpleRootStability.lean",
+  "module": "Sheaf.FieldTheory.HenselianSimpleRootStability",
+  "declaration": "Valued.exists_open_coefficients_simple_root",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "item": "lem-per-henselian-simple-root-stability",
   "worker": "stage1",
-  "summary": "Explicit finite valuation bounds normalize the perturbed polynomial to residue X. A reciprocal translation makes it monic, allowing reuse of the existing henselian-local monic-root lifting equivalence. The root is translated back and its derivative checked. No new nodes; no completeness or rank-one restriction. Removed unused field-extension statement dependency.",
-  "blueprint": "Realizes the simple-root perturbation input to the dense henselian field comparison beneath the ancestor lem-per-artin-gabber-affine-curve, Step 3 (strict-completion test), via ILO XX 4.4, printed p.374.",
+  "summary": "Reconstructed the reopened interface without using withdrawn historical proofs: explicit finite valuation bounds, polynomial normalization, monic reciprocal transformation, existing henselian root lifting, and direct verification of root simplicity. Statement, source, statement dependencies and blueprint provenance preserved; no new nodes. Repair review: expanded the ordered-group estimate and normalized coefficients explicitly; checked the released Q112 boundary against the current exclusion list. The historical blueprint via list remains provenance only and supplies no proof dependency. Rebased the retained d4a6a303afe split onto the current DAG after the landing promotion refusal; re-read the cited root-lifting interface and all statement dependencies, and made integrality of the monic normalization explicit.",
+  "blueprint": "Recorded ancestor lem-per-artin-gabber-affine-curve proof Step 3, local-model purity input via strict completion: reconstructs the ILO XX 4.4 simple-root perturbation prerequisite named by the preserved blueprint.from.place. Current latest blueprint was read; it does not separately state this valued-field lemma.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-henselian-local-root-lifting",
-    "why": "Generic henselian-local-ring root-lifting criterion; the curve-perverse unit has no commutative-algebra replacement and its route is unchanged."
+    "why": "Generic henselian algebra tool: implication (i) to (ii) lifts a simple residue root of the explicitly constructed monic Q. The perverse-heart unit has no root-lifting statement."
    }
   ]
  },
@@ -214,32 +236,40 @@
   "lem-weil-pbc-henselian-local-root-lifting"
  ],
  "reviewed": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-cc-Q17-a07b702f9",
-  "group": "Q17",
+  "reviewer": "NT-cc-Q146-e4fa1ca88",
+  "group": "Q146",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-a07b702f9 (reviewer sub-agent of L); spot-checked: I read the whole item. It has 7 steps and no new nodes; the statement is unchanged from base, and dropping the unused stmt_dep def-pc-field-extension is correct. I checked each step by hand. Step 1: if {0} is open (ambient value group bounded), the topology is discrete and V={c} works; otherwise small nonzero t exist for every bound, and R is local and henselian as assumed. Steps 2-3: the bounds on A_j, θ_j and β are correct, using the ultrametric inequality on finite sums; zero multipliers and empty sums are harmless. Step 4: h_0∈𝔪, h_1−1∈𝔪, h_j∈𝔪 for j≥2, and the leading coefficient t^{n−1}/e is nonzero, so h̄=X. Step 5: Q=h(1)^{-1}Y^n h(1+1/Y) is monic in R[Y] with Q̄=Y^{n−1}(Y+1) and Q̄'(−1)=(−1)^{n−1}≠0. Step 6: this applies the monic statement (i)⇒(ii) of lem-weil-pbc-henselian-local-root-lifting with every hypothesis met; that statement is monic-only while Stacks 04GG(2) is for arbitrary f, which is why the reciprocal trick is needed. Step 7: b=a+tz lies in U because v(b−a)>δ>γ, and g'(b)=e·h'(z) with h'(z)≡1 mod 𝔪, so b is a simple root. Edge cases checked: n=1, a=0, z=0, g=f, residue characteristic 2, higher rank and non-cofinal ambient group. The citer lem-per-dense-henselian-field-etale-comparison Step 3 uses exactly this statement. Sources: ILO XX 4.4 p.374 only cites Bourbaki AC VI §8 ex. 12 and 14a, so proof_origin agent and the WANTED for Bourbaki are right; I read Stacks lemma-characterize-henselian. No duplicate in the DAG: lem-per-henselian-krasner-neighbourhood is a different statement. No SGA anywhere. Accepted tool use: the generic local root-lifting criterion lem-weil-pbc-henselian-local-root-lifting (unit sk-thm-p1) as a black box; the unit route is unchanged. No changes made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-e4fa1ca88 (reviewer sub-agent of L); spot-checked: I read the whole item: five steps, no new nodes, statement unchanged from base. The only change from d4a6 (whose landing was refused because the item was completed in this project's DAG but not in the live DAG the queue reads, a promotion problem, not a math return) is step 4: it now writes the Y^n coefficient H(1), shows it is a unit with residue 1, and so shows Q=H(1)^{-1}P lies in O[Y]. So this is not A6. No LAND after 18:36, so A7 does not apply. I re-derived every step by hand. Step 1: f(a+Z)=λZ+ΣA_jZ^j; s comes from a finite maximum (a nonzero element exists when the topology is not discrete; the discrete case only arises for an oversized ambient group and is handled with V={c}); v(A_js^{j-1}/λ)>0. Step 2: the E_j formula follows from the binomial expansion, η>t_j−v(mult) gives v(E_j)>t_j, and V is a finite product of balls. Step 3: v(H_0)>0, v(H_1−1)>0 (E_n=0 for n=1), and v(H_j)>0 for j≥2 including A_n=1; O is local, so H̄=X. Step 4: P=Y^nH(1−1/Y), Q̄=Y^{n−1}(Y−1) with Q̄'(1)=1 in any characteristic; I checked n=2. Step 5: z=1−y^{-1}∈𝔪, H(z)=0, g(b)=λsH(z)=0, v(b−a)>γ, and g'(b)=λH'(z)≠0. The cited lem-weil-pbc-henselian-local-root-lifting is used only through its statement: (i) is the item's henselian hypothesis and (ii) applies to monic f. I checked Stacks 04GG (2) at algebra.tex l.42115 and ILO XX 4.4 at PDF p.380 (Krasner via Bourbaki VI §8 ex. 12, 14a; provenance only, Bourbaki WANTED, proof_origin agent). An rg -L duplicate sweep found no duplicate: krasner-neighbourhood, finite-extension-topology, separable-monic-approximation, complete-local-domain-root-perturbation, roots-coefficient-proximity and dense-subfield-algebraic-root-approximation all differ. The citers use the item as stated, there is no cycle, and no SGA source is used. I accept the existing tool_use of the sk-thm-p1 root-lifting node. No fixes."
  },
  "lean": {
   "module": "Sheaf.FieldTheory.HenselianSimpleRootStability",
-  "declaration": "Valued.exists_open_coefficients_simple_root",
+  "declaration": "AddValuation.exists_open_coefficients_simple_root",
   "file": "lean/Sheaf/FieldTheory/HenselianSimpleRootStability.lean",
-  "statement": "theorem exists_open_coefficients_simple_root (F : Type u) [Field F] (Γ₀ : Type v) [LinearOrderedCommGroupWithZero Γ₀] [vF : Valued F Γ₀] [vF.v.IsNontrivial] [HenselianLocalRing vF.v.integer] (n : ℕ) (hn : 1 ≤ n) (c : Fin n → F) (a : F) (ha : (Polynomial.X ^ n + ∑ i : Fin n, Polynomial.C (c i) * Polynomial.X ^ (i : ℕ)).eval a = 0) (hda : (Polynomial.X ^ n + ∑ i : Fin n, Polynomial.C (c i) * Polynomial.X ^ (i : ℕ)).derivative.eval a ≠ 0) (U : Set F) (hU : IsOpen U) (haU : a ∈ U) : ∃ V : Set (Fin n → F), IsOpen V ∧ c ∈ V ∧ ∀ d ∈ V, ∃ b ∈ U, (Polynomial.X ^ n + ∑ i : Fin n, Polynomial.C (d i) * Polynomial.X ^ (i : ℕ)).eval b = 0 ∧ (Polynomial.X ^ n + ∑ i : Fin n, Polynomial.C (d i) * Polynomial.X ^ (i : ℕ)).derivative.eval b ≠ 0",
+  "statement": "theorem exists_open_coefficients_simple_root (F : Type u) [Field F] (Γ : Type v) [LinearOrderedAddCommGroupWithTop Γ] (v : AddValuation F Γ) [v.toValuation.IsNontrivial] [HenselianLocalRing v.toValuation.valuationSubring] [TopologicalSpace F] (hvaltop : ∀ x : F, (𝓝 x).HasBasis (fun γ : Γ ↦ γ ≠ ⊤) (fun γ ↦ {y : F | γ < v (y - x)})) (n : ℕ) (hn : 1 ≤ n) (c : Fin n → F) (a : F) (ha : (X ^ n + ∑ i : Fin n, C (c i) * X ^ (i : ℕ)).IsRoot a) (hda : (X ^ n + ∑ i : Fin n, C (c i) * X ^ (i : ℕ)).derivative.eval a ≠ 0) : ∀ U : Set F, IsOpen U → a ∈ U → ∃ V : Set (Fin n → F), IsOpen V ∧ c ∈ V ∧ ∀ d : Fin n → F, d ∈ V → ∃ b : F, b ∈ U ∧ (X ^ n + ∑ i : Fin n, C (d i) * X ^ (i : ℕ)).IsRoot b ∧ (X ^ n + ∑ i : Fin n, C (d i) * X ^ (i : ℕ)).derivative.eval b ≠ 0",
   "branch": "newtargets-dag",
-  "by": "Q29",
-  "date": "2026-10-19",
+  "by": "Q04",
+  "date": "2026-10-24",
   "existing": false,
-  "fixed_by": "NT-stage2-cc-5cf603a08",
-  "note": "2026-10-20 (U): module Sheaf.FieldTheory.HenselianSimpleRootStability deleted (dead: no target reaches it); this node is not reached either."
+  "note": "Uses Mathlib AddValuation with the explicitly stated ambient-value ball basis, rather than Valued (whose topology uses the actual value group). The finite elements of Γ form the additive ordered group and ⊤ is the valuation of zero. Henselianity is imposed on the canonical valuation subring, not on the field."
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-5cf603a08",
-  "group": "Q29",
-  "result": "fix",
-  "note": "Statement matches the node clause by clause: Valued F Γ₀ (independent universes), v.IsNontrivial, HenselianLocalRing v.integer, explicit monic Xⁿ+Σ C(c i)Xⁱ with 1≤n, simple root via derivative, ∀ open U∋a ∃ open V∋c in the Pi topology, ∀ d∈V ∃ b∈U simple root. No stronger hypotheses (no completeness or rank). Mathlib's intrinsic ValueGroup₀ topology drops only the node's trivial discrete case, accepted. Statement verbatim, sorry only, docstrings carry source, blueprint and 7 steps, lines ≤95, no definitions, no duplicate. Node differs from live only in lean. Proof checked, true. FIX F1: proof-dep import Sheaf.RingTheory.HenselianLocalRootLifting is a retired re-export shim in live; replaced by the recorded WeilConjectures.RingTheory.HenselianLocalRootLifting in fixes/HenselianSimpleRootStability.lean (only line 11 changed). nt_compile --json: delivered clean 2.0 s, broken control errors, fixed file clean 2.0 s, both imports together clean."
+  "reviewer": "NT-stage2-cc-6c9a0deaa",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Node unchanged except the new lean field; lean.statement is verbatim equal to the file signature. Clause check: Field F; AddValuation into LinearOrderedAddCommGroupWithTop Γ (arbitrary rank, top = v(0)); IsNontrivial; HenselianLocalRing on v.toValuation.valuationSubring (the recorded def-weil-pbc-henselian-terminology notion; valuationSubring = {additive >= 0}); hvaltop ambient-ball basis, which covers the node (Γ = WithTop of the value group gives the standard topology; the discrete case is trivial); monic X^n + sum C(c i) X^i with n >= 1; IsRoot plus formal derivative nonzero; for all open U containing a there is an open V containing c in the Pi topology such that every d in V has a root b in U with nonzero derivative. Universes u, v independent. Edge cases n=1, any characteristic, a=0, discrete topology all fine. Re-derived the five proof steps (s estimate, E_j bounds, H integral with residue X, monic reciprocal Q with residue Y^(n-1)(Y-1) lifted by the root-lifting node, z = 1 - 1/y gives a simple root). Docstrings carry the source place, blueprint tag and proof steps; no definitions, sorry only, root-lifting module imported as a plain proof import, no duplicate found, no pro-etale substitute. Not recompiled (no change). Note: the parallel Q57 delivery 4a2498368f75 uses the same module path (multiplicative Valuation encoding), passed S2 and is not landed; both are correct and the first lander owns the item."
  },
- "lean_audit": {}
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T092553-L-3443616",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

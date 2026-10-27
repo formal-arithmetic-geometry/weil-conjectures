@@ -1,0 +1,221 @@
+{
+ "id": "lem-a1-signed-fiber-roos-normalization",
+ "kind": "statement",
+ "title": "Signed product fibers and normalized augmented Roos limits",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe, $R$ a sheaf of commutative rings, and $\\mathcal A=\\operatorname{Mod}(R)$ [def-weil-sheaf-of-modules-category]. Assume countable products in $\\mathcal A$ are exact, and use unbounded derived categories for $\\mathcal A$ and its strict towers $\\operatorname{Tow}(\\mathcal A)=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\mathcal A)$ [def-weil-abstract-derived-category, lem-weil-tower-category-levelwise-abelian]. For a strict tower complex $X$, put $B_X=\\prod_nX_n$ and $f_X=1-s_X$, where $\\operatorname{pr}_ns_X=t_n\\operatorname{pr}_{n+1}$. Define $\\Phi(X)^i=B_X^i\\oplus B_X^{i-1}$ and $d_\\Phi(x,y)=(dx,f_Xx-dy)$, acting diagonally on strict tower morphisms. Let $\\mathsf C(X)=\\operatorname{Cone}(f_X)[-1]$ have differential $d(y,x)=(-dy-f_Xx,dx)$ [def-weil-strict-roos-model]. Write $Q$ for derived localization, and let $\\rho_X:Q\\mathsf C(X)\\xrightarrow{\\sim}R\\lim X$ be the comparison normalized on a K-injective tower resolution $q:X\\to I$ by the inverse of the ordinary-limit inclusion $\\lim I\\to\\mathsf C(I)$, $z\\mapsto(0,z)$ [lem-weil-strict-roos-comparison].\n\nThe maps $j_X:\\Phi(X)\\to\\mathsf C(X)$, $(x,y)\\mapsto(-y,x)$, with inverses $(y,x)\\mapsto(x,-y)$, are natural chain isomorphisms. They induce a natural isomorphism of derived functors $Q\\Phi(X)\\xrightarrow{\\rho_XQ(j_X)}R\\lim X$. If $P$ is a complex and $\\gamma_n:P\\to X_n$ are strictly compatible chain maps, $u_\\gamma=(\\gamma_n)_n$, $\\zeta_\\gamma=(u_\\gamma,0):P\\to\\Phi(X)$ and $\\eta_\\gamma=(0,u_\\gamma):P\\to\\mathsf C(X)$, then\n$$j_X\\zeta_\\gamma=\\eta_\\gamma,\\qquad \\rho_XQ(j_X)Q(\\zeta_\\gamma)=\\operatorname{aug}_\\gamma,$$\nwhere $\\operatorname{aug}_\\gamma$ is the canonical derived strict augmentation $QP\\to R\\lim X$.\n\nFor any category $\\mathcal H$, class $\\mathcal W$ of its morphisms and localization $L:\\mathcal H\\to\\mathcal D$ (the universal functor inverting $\\mathcal W$), let $P$ and $X$ vary functorially on $\\mathcal H$, with the $\\gamma_n$ natural; assume $P(w)$ is a quasi-isomorphism and $X(w)$ a levelwise quasi-isomorphism for $w\\in\\mathcal W$. Then the displayed functors, units, isomorphisms and both equations descend uniquely through $L$, relative to the chosen functor factorizations. In particular their descended values do not depend on a representative or on the K-injective resolution.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, proof, ordinary-limit inclusion and Roos triangle; explicit signed natural-transformation and localization refinement of returned steps 2, 4 and 5, written by Q28 from Q67."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-weil-strict-roos-model",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The cone coordinates and diagonal maps are those of [def-weil-strict-roos-model]. Since $f_X$ is a chain map, $d_\\Phi^2(x,y)=(0,f_Xdx-df_Xx)=0$. Directly,\n$$d_{\\mathsf C}j_X(x,y)=(dy-f_Xx,dx)=j_Xd_\\Phi(x,y).$$\nThe stated inverse has both composites equal to the identity. For a strict tower map $a:X\\to Y$, its product map $b$ satisfies $bf_X=f_Yb$, and both $\\mathsf C(a)j_X$ and $j_Y\\Phi(a)$ send $(x,y)$ to $(-by,bx)$. Thus $j$ is a natural chain isomorphism.",
+   "uses": [
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, proof; explicit signed-coordinate refinement written by Q25"
+   }
+  },
+  {
+   "text": "By [lem-weil-strict-roos-comparison], $Q\\mathsf C$ factors through $D(\\operatorname{Tow}(\\mathcal A))$ and has the specified natural isomorphism $\\rho$ to $R\\lim$. Naturality of $j$ gives $Q\\Phi(a)=Q(j_Y)^{-1}Q\\mathsf C(a)Q(j_X)$; hence $Q\\Phi$ inverts quasi-isomorphisms. Apply [lem-weil-pbc-localization-universal-property] to the derived localization of [def-weil-abstract-derived-category]: $Q\\Phi$ and $Qj$ descend, and composing with $\\rho$ gives the asserted natural derived isomorphism.",
+   "uses": [
+    "lem-weil-strict-roos-comparison",
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, proof; explicit signed-coordinate refinement written by Q25"
+   }
+  },
+  {
+   "text": "Strict compatibility gives $\\operatorname{pr}_nf_Xu_\\gamma=\\gamma_n-t_n\\gamma_{n+1}=0$, so $f_Xu_\\gamma=0$. Since $u_\\gamma$ commutes with differentials, both $\\zeta_\\gamma$ and $\\eta_\\gamma$ are chain maps, and $j_X\\zeta_\\gamma=(0,u_\\gamma)=\\eta_\\gamma$. This is precisely the strict augmentation constructed in [def-weil-strict-roos-model]. Its naturality follows by applying the product projections to the assumed naturality of each $\\gamma_n$.",
+   "uses": [
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, proof; explicit signed-coordinate refinement written by Q25"
+   }
+  },
+  {
+   "text": "The last paragraph of [lem-weil-strict-roos-comparison] says $\\rho_XQ(\\eta_\\gamma)=\\operatorname{aug}_\\gamma$. Substituting step 3 proves the second equation. More explicitly, for its resolution $q:X\\to I$, let $h:P\\to\\lim I$ have projections $q_n\\gamma_n$ and let $\\iota_I(z)=(0,z)$. Then $\\mathsf C(q)\\eta_\\gamma=\\iota_Ih$, so the stated normalization gives $\\rho_XQ(\\eta_\\gamma)=Q(\\iota_I)^{-1}Q(\\iota_I)Qh=Qh$. The cited comparison asserts that this is the canonical augmentation independently of $q$.",
+   "uses": [
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, proof; explicit signed-coordinate refinement written by Q25"
+   }
+  },
+  {
+   "text": "For the final localization, kernels and cokernels in [lem-weil-tower-category-levelwise-abelian] are levelwise, so cohomology is levelwise and $X(w)$ is a quasi-isomorphism of tower complexes. Thus $QP$, $QX$, $Q\\mathsf C X$, $Q\\Phi X$ and $R\\lim QX$ invert $\\mathcal W$. By [lem-weil-pbc-localization-universal-property], relative to chosen factorizations all the natural maps of steps 1--4 descend uniquely; inverses, compositions and identities descend as well. Faithfulness there preserves both equations. Consequently representatives yield the same descended data under the factorization identifications; resolution independence was already supplied in step 4.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, proof; explicit signed-coordinate refinement written by Q25"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-strict-roos-model",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-abstract-derived-category",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, ordinary-limit inclusion; signed coordinates and localization refinement using the existing comparison and universal-property nodes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary augmented strict tower of complexes, the signed product mapping fiber and the negative shifted cone have a natural isomorphism carrying the actual unit to the normalized total derived inverse limit unit",
+   "results": "Hits: CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingCone.mapTriangleIso, CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: MappingCocone defines a cone model, and liftNatIso descends an already constructed isomorphism; neither supplies the signed augmented tower comparison with the normalized total-limit unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCocone\"",
+   "results": "Hits: CochainComplex.mappingCocone.inl, CochainComplex.mappingCocone.inr, CochainComplex.mappingCocone.snd, CochainComplex.mappingCocone, CochainComplex.mappingCocone.triangle, CochainComplex.mappingCocone.triangle_obj₂, CochainComplex.mappingCocone.triangle_obj₃, CochainComplex.mappingCocone.descCochain",
+   "date": "2026-10-22",
+   "verdict": "no match: MappingCocone defines a cone model, and liftNatIso descends an already constructed isomorphism; neither supplies the signed augmented tower comparison with the normalized total-limit unit."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone|mapping[Ff]iber|[Rr]oos",
+   "results": "Hits: Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean Directory: Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: MappingCocone defines a cone model, and liftNatIso descends an already constructed isomorphism; neither supplies the signed augmented tower comparison with the normalized total-limit unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural signed fiber to cone isomorphism preserves strict augmentation units and descends uniquely through localization",
+   "results": "Hits: IsLocalization.atUnits, CategoryTheory.Localization.Monoidal.ε', CategoryTheory.Localization.liftNatIso, IsLocalization.atUnit, localization_unit_isIso', AddSubmonoid.LocalizationMap.lift, Submonoid.LocalizationMap.map, CategoryTheory.Localization.instInhabitedStrictUniversalPropertyFixedTargetLocalizationQ",
+   "date": "2026-10-22",
+   "verdict": "no match: MappingCocone defines a cone model, and liftNatIso descends an already constructed isomorphism; neither supplies the signed augmented tower comparison with the normalized total-limit unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compare the product fiber with differential (dx, f x minus dy) with Cone(f)[-1] by (x,y) maps to (-y,x), naturally for towers and their units",
+   "results": "Hits: CochainComplex.mappingCone.δ_snd, CochainComplex.mappingCone.d_fst_v', CochainComplex.mappingCone.d_fst_v, CochainComplex.mappingCone.d_snd_v', CochainComplex.mappingCone.d_snd_v, HomotopyCategory.spectralObjectMappingCone_δ'_app, CochainComplex.mappingCone.fst, CochainComplex.mappingCone.triangleRotateShortComplexSplitting_s",
+   "date": "2026-10-22",
+   "verdict": "no match: MappingCocone defines a cone model, and liftNatIso descends an already constructed isomorphism; neither supplies the signed augmented tower comparison with the normalized total-limit unit."
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatTrans|liftNatIso|fullyFaithfulWhiskeringLeft",
+   "results": "Hits: Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Bifunctor.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole signed augmented Roos statement; localization hits are supplied by the existing Mathlib leaf, cone hits only give generic constructions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformation between functors inverting weak equivalences descends uniquely to their localizations",
+   "results": "Hits: CategoryTheory.Localization.natTrans_ext, CategoryTheory.Localization.natTrans₂_ext, CategoryTheory.Localization.Construction.natTransExtension, CategoryTheory.Localization.Construction.uniq, CategoryTheory.Localization.liftNatTrans, CategoryTheory.Localization.lift, CategoryTheory.Localization.liftNatIso_inv, CategoryTheory.Localization.liftNatTrans.congr_simp. ",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole signed augmented Roos statement; localization hits are supplied by the existing Mathlib leaf, cone hits only give generic constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"liftNatTrans\"",
+   "results": "Hits: CategoryTheory.Paths.liftNatTrans, CategoryTheory.Paths.liftNatTrans_app, CategoryTheory.Localization.liftNatTrans, CategoryTheory.Localization.liftNatTrans_id, CategoryTheory.Localization.comp_liftNatTrans, CategoryTheory.Localization.comp_liftNatTrans_assoc, CategoryTheory.Localization.liftNatTrans_app, CategoryTheory.NatTrans.CommShift.liftNatTrans. ",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole signed augmented Roos statement; localization hits are supplied by the existing Mathlib leaf, cone hits only give generic constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed product mapping fiber of one minus shift on a strict tower is naturally isomorphic to the shifted mapping cone and preserves the canonical derived inverse limit augmentation",
+   "results": "Hits: CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.mapTriangleIso, CochainComplex.mappingCone.shiftIso. ",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole signed augmented Roos statement; localization hits are supplied by the existing Mathlib leaf, cone hits only give generic constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone|mappingFiber|[Rr]oos",
+   "results": "Hits: Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole signed augmented Roos statement; localization hits are supplied by the existing Mathlib leaf, cone hits only give generic constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The chain map (x,y) to (-y,x) identifies the mapping fiber differential (dx, f x minus dy) with the negative shifted mapping cone differential and carries compatible strict tower augmentations",
+   "results": "Hits: CochainComplex.mappingCone.δ_inl, CochainComplex.mappingCone.δ_snd, CochainComplex.mappingCone.inl_v_d, CochainComplex.mappingCone.d_snd_v, CochainComplex.mappingCone.d_snd_v', CochainComplex.mappingCone.d_fst_v', CochainComplex.mappingCone.d_fst_v, CochainComplex.mappingCone.inr_f_d. ",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole signed augmented Roos statement; localization hits are supplied by the existing Mathlib leaf, cone hits only give generic constructions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-roos-intrinsic-unit-comparison",
+  "date": "2026-10-22",
+  "group": "Q28"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "First paragraph of the finite-map-purity proof: geometric-stalk restriction, via the canonical completed-pullback comparison; returned unit-comparison steps 2, 4 and the signed-fiber localization part of 5.",
+   "via": [
+    "lem-a1-roos-intrinsic-unit-comparison",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-signed-fiber-roos-normalization",
+  "worker": "stage1",
+  "summary": "Wrote the signed-coordinate calculation, actual strict augmentation equation, normalized resolution calculation and localization descent. Reused the existing normalized strict Roos comparison and the Mathlib localization universal-property leaf; no new nodes and no statement change.",
+  "blueprint": "Realizes the canonical completed-pullback refinement of the first paragraph of lem-a1-finite-map-purity (geometric-stalk restriction), via the recorded ancestor chain: signed-fiber and strict-unit normalization in returned intrinsic-unit steps 2, 4, 5.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic exact-product strict tower comparison, including its actual augmentation normalization; the affine-line unit has no replacement for this homological tool."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Generic levelwise abelian structure of strict towers detects the quasi-isomorphisms in the localization hypothesis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-50fae1e07",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-50fae1e07 (reviewer sub-agent of L); spot-checked: I read the item, all five steps and every cited statement in full: def-weil-strict-roos-model, lem-weil-strict-roos-comparison, lem-weil-pbc-localization-universal-property, def-weil-abstract-derived-category, lem-weil-tower-category-levelwise-abelian and def-weil-sheaf-of-modules-category. I also read Stacks 0941 (sites-cohomology.tex l.5067). The delivery adds no new nodes, keeps the statement and stmt_deps, and proof_deps equals the union of the step uses. There is no cycle. Signs: the cone convention gives C(X)^i=B^{i-1}⊕B^i and d(y,x)=(-dy-fx,dx), which matches the model's coordinates. I recomputed d_Φ²=0, d_C j=j d_Φ with j(x,y)=(-y,x), the inverse (y,x)↦(x,-y), f u_γ=0, that ζ and η are chain maps, and jζ=η. Step 4: C(q)η=ι_I h gives ρQ(η)=Qh, and the comparison's own last paragraph supplies the canonical augmentation and resolution independence. Step 5: levelwise kernels and cokernels make a levelwise quasi-isomorphism a tower quasi-isomorphism; descent uses localization-leaf clauses (2) and (3). Edge cases checked: zero tower, zero and identity transitions, characteristic 2, unbounded complexes. No duplicate: lem-amb-signed-fibre-cone, lem-pe-endomorphism-fibre-double-cone, lem-weil-strict-roos-normalization and lem-a1-normalized-roos-shift-comparison state different things. I accept the tool_use of the generic lem-weil-strict-roos-comparison; the levelwise-abelian tool_use is unnecessary (it is a Mathlib leaf) but harmless. No SGA. The statement fits the parent's steps 2 and 3. No fixes."
+ }
+}

@@ -25,107 +25,113 @@
  ],
  "proof": [
   {
-   "text": "First make the standing hypotheses explicit. The field $k$ is Noetherian since its only ideals are $0$ and $k$, so $\\operatorname{Spec}k$ is locally Noetherian. Apply [pqf-lem-locnoeth-lft] to the structure maps of $X$ and $Y$. Their sources are quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine], so they are Noetherian (locally Noetherian and quasi-compact). The rational-coefficient statement [sk-lem-coefficient-heart] identifies $\\Dctf=\\Dbc$ and describes constructibility as being lisse on finitely many strata. Thus $\\Loc(\\Dctf)=\\Loc(\\Dbc)$ as full subcategories by the definition [sk-def-localizing-closure]. This comparison is in the pulled-back condensed module-object categories, without replacing them by discrete field-module sheaves. The rational coefficient is the one fixed in the statement: for $\\Qlb$ it is the condensed ring of [sk-def-sfb-qlbar-condensed], the blueprint's condensed $\\Qlb$, which is also the coefficient of [sk-lem-coefficient-heart] and of the local statement used in step 4. The admissible coefficient $\\Qlb$ of [sk-def-localizing-closure], and hence of the existence and coherence statements used in steps 5–6, is read as this same ring, as in the blueprint's text of that definition, whose condensed $\\Qlb$ is the one just named; it is not the ring $S\\mapsto C(S,\\Qlb)$ of all continuous maps, which is a different condensed ring (a convergent sequence of elements of unbounded degree gives a continuous map on the one-point compactification of $\\mathbf N$ that lies in no finite subextension).",
+   "text": "The standing finite-type schemes are Noetherian by locallyOfFiniteType.isLocallyNoetherian and compactSpace_of_compactSpace. Apply localizingClosure_ctf_equals_bc for the specified rational coefficient, transported by the given monoid-object isomorphism. This gives Dctf=Dbc and hence the inclusion of Dbc in its localizing closure. The finite-subextension-valued Qbar coefficient is retained.",
    "uses": [
     "pqf-lem-locnoeth-lft",
     "lem-weil-pbc-qcqs-over-affine",
-    "sk-lem-coefficient-heart",
+    "det-def-localizing-closure-ctf-equals-bc",
     "sk-def-localizing-closure",
     "sk-def-sfb-qlbar-condensed"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
-    "place": "Standing hypotheses implicit in both paragraphs; rational identification needed for paragraph (2)."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
+    "place": "Paragraphs (1)–(2)."
    }
   },
   {
-   "text": "For (1), restriction to an open immersion is exact on coefficient modules by [sk-prop-sfb-cartesian-coefficients]. Consequently it preserves kernels and images of the differentials of a representative complex, giving $\\mathcal H^q(M)|_{U_\\alpha}=\\mathcal H^q(M|_{U_\\alpha})$. If $X$ is empty, every coefficient-module sheaf is zero by the empty-cover sheaf axiom, so $M=0$ and (1) holds; this includes both an empty index set and covers consisting entirely of empty opens. Henceforth assume $X$ nonempty, so the finite index set is nonempty. Choose intervals $[a_\\alpha,b_\\alpha]$ with $a_\\alpha\\le b_\\alpha$ bounding the restricted complexes, taking $[0,0]$ on an empty cover member. Put $a=\\min_\\alpha a_\\alpha$ and $b=\\max_\\alpha b_\\alpha$. For $q\\notin[a,b]$, the sheaf $\\mathcal H^q(M)$ vanishes on every cover member, hence is zero: for any pro-étale object $T\\to X$, its opens $T\\times_XU_\\alpha$ cover it, and the sheaf axiom detects zero sections there. This proves boundedness in the sense of [sk-def-sfb-constructible].",
+   "text": "Forget module objects to their underlying abelian sheaves. upperStarObjXIso identifies the forgetful image of each coefficient restriction with the abelian-sheaf inverse image. The finite jointly-surjective quasi-compact pullback detection theorem makes a module with zero restrictions zero. Apply this to each cohomology module using the exact-functor homology comparison. The finite ranges of local lower and upper bounds have common bounds, also for an empty index type; these give global boundedness.",
    "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-constructible"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
-    "place": "Paragraph (1), Boundedness; exactness and the empty-cover case written out."
-   }
-  },
-  {
-   "text": "Continue with $X$ nonempty as in step 2. Only finitely many $q$ in $[a,b]$ can contribute. For each $\\alpha$ and each such $q$, choose a finite stratification of $U_\\alpha$ on which $\\mathcal H^q(M|_{U_\\alpha})$ is lisse, using [sk-lem-coefficient-heart]. Regard its scheme strata as immersions into $X$ by composing with $U_\\alpha\\hookrightarrow X$, using clause (e) of [lem-weil-pbc-proper-fp-permanence]. Adjoin the complement $X\\setminus U_\\alpha$ with its reduced induced closed subscheme structure from [lem-weil-pbc-reduced-induced-closed-subscheme]. This makes a finite scheme stratification of $X$ for each pair $(\\alpha,q)$. By clause (1) of [det-lem-coefficient-heart-common-stratification], these finitely many stratifications have a common finite refinement. Each nonempty refined stratum lies in some $U_\\alpha$, because the opens cover $X$, and lies in one adapted stratum there for each $q$. For such an $\\alpha$, the refined strata lying in $U_\\alpha$ form a scheme stratification of $U_\\alpha$ refining each chosen adapted stratification. Apply clause (2) of that same node to the already constructible sheaf $\\mathcal H^q(M|_{U_\\alpha})$ on $U_\\alpha$, not to a sheaf whose global constructibility is still being proved. It is lisse on each of these refined strata, including its given scheme structure. Exact restriction from step 2 identifies this sheaf there with the restriction of $\\mathcal H^q(M)$; hence every $\\mathcal H^q(M)$ is lisse on the refinement. By the lisse characterization of constructibility in [sk-lem-coefficient-heart] (the strata are constructible locally closed subsets since $X$ is Noetherian, as [sk-def-sfb-constructible] notes), every $\\mathcal H^q(M)$ is constructible, and the boundedness in the preceding step gives $M\\in\\Dbc(X,\\Lambda)$. Empty strata are discarded; if all cohomology is zero the conclusion follows directly from the same definition.",
-   "uses": [
-    "sk-lem-coefficient-heart",
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "det-lem-coefficient-heart-common-stratification",
+    "lem-pod-finite-qc-proetale-abelian-detection",
+    "def-sfb-exact-derived-cohomology-comparison",
     "sk-def-sfb-constructible"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
-    "place": "Paragraph (1), Constructibility; finite common refinement, actual scheme strata, and lisse restriction."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
+    "place": "Paragraphs (1)–(2)."
    }
   },
   {
-   "text": "For (2), fix $K\\in\\Dbc(Y,\\Lambda)$. The statement [det-thm-restriction-local] supplies finitely many affine opens $u_\\alpha:U_\\alpha\\hookrightarrow X$ covering $X$, together with affine $V_\\alpha\\subset Y$ and closed embeddings into affine spaces over $V_\\alpha$, and it asserts $u_\\alpha^*f^!K\\in\\Dbc(U_\\alpha,\\Lambda)$. Its hypotheses hold for the standing schemes and for $\\Lambda=E$ or $\\Qlb$; the rational identification in step 1 puts $K$ in the domain of $f^!$. Apply (1), now proved in steps 2–3, to $M=f^!K$. This gives $f^!K\\in\\Dbc(X,\\Lambda)$.",
+   "text": "For each cohomology module apply the affine-local clause of finiteConstantStratified_zariski_locality. Pull the finite given open cover back to each affine open W. Pull back each local finite stratification and its unchanged finite constant scalar models along the morphism restricting W into the given open; the inverse-image composition comparison identifies this with restriction along the composite into X. The finite-cover assembly clause yields constructibility on W, and the affine-local criterion gives global constructibility. Exact restriction identifies the local cohomology modules with cohomology of the restricted complexes. Combine with the boundedness just proved; empty covers and schemes are included.",
    "uses": [
-    "det-thm-restriction-local"
+    "lem-sfb-constructible-zariski-locality",
+    "lemma-constructible-pullback-stratification",
+    "new-unbounded-pullback-finite-constant-local-model",
+    "def-sfb-exact-derived-cohomology-comparison",
+    "sk-def-sfb-constructible"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
-    "place": "Paragraph (2), first sentence; unit sk-thm-restriction step 2."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
+    "place": "Paragraphs (1)–(2)."
    }
   },
   {
-   "text": "Let $f=p\\circ j$ be the chosen compactification in [sk-def-sfb-dc-setting], using the compactification convention in [sk-prop-sf-existence]. The latter specifies $j$ to be quasi-compact and $p$ proper, and defines $Rf_!$ as $Rp_*D(j_!)$ on the localizing closures. Step 1 showed $Y$ qcqs. The compactification convention [sk-def-nagata-sketch-data] cited by both nodes makes $j$ a quasi-compact open immersion. Thus [det-sf-comp-coherence-single] applies to this compactification and to the admissible rational coefficient $\\Lambda$ (with $\\Qlb$ read as in step 1): its composite sends $\\Dctf(X,\\Lambda)$ into $\\Dctf(Y,\\Lambda)$. Using $\\Dctf=\\Dbc$ from step 1 gives $Rf_!A\\in\\Dbc(Y,\\Lambda)$ for every $A\\in\\Dbc(X,\\Lambda)$.",
+   "text": "Apply restrictionLocal to the supplied compactification and adjunction. Its finite affine chart family covers X. Give each chart and affine target its inherited finite-type-over-k structure. The chosen boundary compactifications and exists_localizingExceptionalAdjoint supply the projection and closed-immersion adjunctions required by its local clause. Thus the restriction of G(K) to each chart is bounded constructible. Replace each chart by its isomorphic opensRange: pull back its stratification and unchanged finite constant local models along the inverse isomorphism, and use exact derived inverse-image composition and cohomology comparisons. Apply the finite-cover assertion just proved.",
    "uses": [
-    "sk-def-sfb-dc-setting",
+    "det-thm-restriction-local",
     "sk-prop-sf-existence",
+    "def-sfb-compactification-over-field",
+    "def-sfb-exact-derived-cohomology-comparison",
+    "det-def-sfb-constructible-tor-amplitude",
+    "lemma-constructible-pullback-stratification",
+    "new-unbounded-pullback-finite-constant-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
+    "place": "Paragraphs (1)–(2)."
+   }
+  },
+  {
+   "text": "The final clause of compactification_localizing preserves Dctf along the given boundary compactification. The Dctf=Dbc equality from step 1 therefore supplies the required Dbc preservation of its actual compact-support composite.",
+   "uses": [
     "det-sf-comp-coherence-single",
+    "det-def-localizing-closure-ctf-equals-bc",
     "sk-def-nagata-sketch-data"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
-    "place": "Paragraph (2), compact-support preservation; unit step 3, using the existing single-compactification component of the missing imported coherence id."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
+    "place": "Paragraphs (1)–(2)."
    }
   },
   {
-   "text": "For $A,K$ as above, use the natural Hom bijection of [sk-prop-sf-existence] on $\\Loc(\\Dctf)$. Steps 4–5 show that its four objects $A,f^!K,Rf_!A,K$ lie in the relevant bounded constructible subcategories. These subcategories are full in the ambient derived categories by [sk-def-sfb-constructible], as are the localizing closures by [sk-def-localizing-closure]; their Hom sets, identities and compositions on these objects are therefore exactly the same. The unchanged bijection consequently is $\\Hom_{\\Dbc(Y,\\Lambda)}(Rf_!A,K)\\simeq\\Hom_{\\Dbc(X,\\Lambda)}(A,f^!K)$. Its naturality equations are unchanged equations of the same morphisms, so it gives the asserted restricted adjunction.",
+   "text": "Use the two full inclusion functors induced by the Dbc-to-localizing-closure inclusions. Both squares with the concrete restricted functors commute definitionally. Apply Adjunction.restrictFullyFaithful to the supplied adjunction. Its homEquiv formula, with identity comparison isomorphisms, gives exactly the original homEquiv after forgetting membership proofs, as required.",
    "uses": [
-    "sk-prop-sf-existence",
-    "sk-def-sfb-constructible",
-    "sk-def-localizing-closure"
+    "sk-prop-sf-existence"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
-    "place": "Paragraph (2), last three sentences; explicit full-subcategory Hom calculation."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
+    "place": "Paragraphs (1)–(2)."
    }
   }
  ],
  "proof_deps": [
   "pqf-lem-locnoeth-lft",
   "lem-weil-pbc-qcqs-over-affine",
-  "sk-lem-coefficient-heart",
+  "det-def-localizing-closure-ctf-equals-bc",
   "sk-def-localizing-closure",
   "sk-def-sfb-qlbar-condensed",
-  "sk-prop-sfb-cartesian-coefficients",
+  "lem-pod-finite-qc-proetale-abelian-detection",
+  "def-sfb-exact-derived-cohomology-comparison",
   "sk-def-sfb-constructible",
-  "lem-weil-pbc-proper-fp-permanence",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "det-lem-coefficient-heart-common-stratification",
+  "lem-sfb-constructible-zariski-locality",
+  "lemma-constructible-pullback-stratification",
+  "new-unbounded-pullback-finite-constant-local-model",
   "det-thm-restriction-local",
-  "sk-def-sfb-dc-setting",
   "sk-prop-sf-existence",
+  "def-sfb-compactification-over-field",
+  "det-def-sfb-constructible-tor-amplitude",
   "det-sf-comp-coherence-single",
   "sk-def-nagata-sketch-data"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
-  "place": "Paragraphs (1)–(2), expanded with the cited existing nodes and explicit standing assumptions."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
+  "place": "Paragraphs (1)–(2); B2 Lean proof using proved constant-model Zariski locality, finite-cover zero detection, chart isomorphism transport, and fully faithful adjunction restriction."
  },
  "mathlib_searches": [
   {
@@ -270,12 +276,7 @@
    }
   ]
  },
- "tool_uses": [
-  "sk-lem-coefficient-heart",
-  "det-lem-coefficient-heart-common-stratification",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "sk-prop-sfb-cartesian-coefficients"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -284,7 +285,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-a0a9c65ab (reviewer sub-agent of L); spot-checked: Read in full: the item, the blueprint item, its proof, the unit and its local/unit proofs from main-20261015, every cited node's statement, and the master Proper.lean docstring for the condensed Qlb (padicAlgClRingObj). The item statement adds the standing setting of sk-def-sfb-dc-setting, which sk-prop-sf-existence needs for f^! to exist. The worker's counterexample (an infinite disjoint union of Spec k) shows why that setting is needed. Both conclusions are kept and nothing is weakened. Step checks: step 1 uses 01T6 and 01K4 for Noetherian X and Y, and the heart node for Dctf=Dbc. Step 2 uses exact module pullback from sk-prop-sfb-cartesian-coefficients, and the zero check is done on the open cover T×_X U_α. Step 3 builds strata of X with immersion composition (e) and reduced complements (2), takes a common refinement by clause (1), and restricts lisse sheaves by clause (2). Each nonempty stratum lies in some U_α. Step 4 uses det-thm-restriction-local (finite chart cover plus local Dbc) and then clause (1). Step 5 uses the same Rp_*∘j_! as sk-prop-sf-existence and det-sf-comp-coherence-single with Y qcqs. Step 6 is elementary because the subcategories are full. No cycle; proof_deps equals the union of the uses. No new nodes and no duplicates (det-thm-int-restriction-glue is the O_E analogue). I accept all four declared tool_uses. No SGA source. FIX, three repairs: (1) Step 1 now states the Qlb coefficient explicitly as the finite-subextension ring, which matches the master and the heart and local nodes. It differs from C(-,Qlb): x_n=ℓ^{n+1/n}→0 gives a continuous map whose image lies in no finite subextension. Before this, the item silently applied sk-def-localizing-closure and det-sf-comp-coherence-single, whose DAG wording ('ℓ-adic topology') literally gives C(-,Qlb). This is a pre-existing imprecision in those reviewed nodes, outside this delivery, reported to the maintainer: they should cite sk-def-sfb-qlbar-condensed. (2) Step 3 now takes constructibility from the heart node's lisse characterization, not from sk-def-sfb-constructible's local-model definition. (3) Step 5 now cites sk-def-nagata-sketch-data for the quasi-compactness of j. Uses and proof_deps are updated; the statement is unchanged.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -307,5 +319,15 @@
   "by": "Q01",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-ccaad",
+  "group": "B2",
+  "result": "fix",
+  "landing": "20261024T204528-L-3790228",
+  "kind": "interface",
+  "note": "independent cc review: rationalRestrictionGlue proof vs node det-thm-restriction-glue steps/proof_deps, unit sk-thm-restriction (realized empty), clone HEAD source, axioms scratch check, both importers compiled"
  }
 }

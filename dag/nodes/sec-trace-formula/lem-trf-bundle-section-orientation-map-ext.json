@@ -1,0 +1,173 @@
+{
+ "id": "lem-trf-bundle-section-orientation-map-ext",
+ "kind": "statement",
+ "title": "Affine frames detect equality of section orientation maps",
+ "statement": "In the setting of [def-trf-bundle-section-orientation-data], let N>0 annihilate finite A and be invertible on Noetherian S. Let f,g:L->B be arbitrary maps from the shifted finite Tate coefficient to the zero-section dualizing object. If for every affine open V and every rank-d linear frame e on V the inverse images of f and g become equal after postcomposition with the canonical bundleSectionChartComparison, then f=g.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4; expanded in lem-trf-finite-ring-bundle-section-orientation, proof Steps 1--10"
+ },
+ "stmt_deps": [
+  "def-trf-bundle-section-orientation-data"
+ ],
+ "proof": [
+  {
+   "text": "Finite Tate lines are flat. Induct on d using the single-flat-tensor and tensor/shift comparisons and the normalized Tate products to identify L with A_S(d)[2d].",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "lem-amb-affine-trace-right-normal-form",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical unit purity map is invertible, so its zero-section pullback composed with the inverse coefficient comparison identifies L with B. Hence both objects have cohomology in the single degree -2d.",
+   "uses": [
+    "lem-trf-bundle-section-purity-unit-isIso",
+    "def-trf-bundle-section-orientation-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Refine local module frames by affine opens. The exceptional base-change mate in each frame is invertible by the open-base-change theorem, so cancel the chart comparison to get equality after ordinary restriction. The cohomology functor is injective on Hom between objects concentrated at -2d, and its restriction comparison is natural. The upper-star functors of the affine cover are jointly faithful on sheaves, proving equality of cohomology maps and hence f=g. Empty S uses the empty jointly surjective family.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-etale-sheaf-jointly-surjective-conservative",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-finite-etale-twist-line",
+  "lem-amb-affine-trace-right-normal-form",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-trf-bundle-section-purity-unit-isIso",
+  "def-trf-bundle-section-orientation-data",
+  "def-asd-vector-bundle-zero-section",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-etale-sheaf-jointly-surjective-conservative",
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4; expanded in lem-trf-finite-ring-bundle-section-orientation, proof Steps 1--10"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived category tensor product of flat sheaves concentrated in degree zero is concentrated in degree zero",
+   "results": "Flat tensor exactness results; no zero-section orientation theorem.",
+   "date": "2026-10-25",
+   "verdict": "tool only; no theorem identifying these specified orientation maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized vector-bundle integration induces an orientation of its zero section",
+   "results": "Eight linear algebra orientation hits, unrelated to ordinary etale duality.",
+   "date": "2026-10-25",
+   "verdict": "tool only; no theorem identifying these specified orientation maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "Generic adjunction naturality.",
+   "date": "2026-10-25",
+   "verdict": "tool only; no theorem identifying these specified orientation maps"
+  },
+  {
+   "tool": "grep",
+   "query": "bundleSection|vectorIntegration.*Unit|rankZero",
+   "results": "The original module is the only occurrence of bundleSection; VectorIntegrationMate supplies invertibility, AffineTraceRightNormalForm supplies tensor normal forms.",
+   "date": "2026-10-25",
+   "verdict": "tool only; no theorem identifying these specified orientation maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms between derived objects concentrated in one degree are equal if their restrictions to a cover agree",
+   "results": "PreOneHypercover.Hom.ext and DifferentialObject.Hom.ext hits; none detects unbounded derived etale maps on affine frames.",
+   "date": "2026-10-25",
+   "verdict": "no exact match; use existing source-library cohomology injectivity and sheaf conservativity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.naturality_2",
+   "results": "CategoryTheory.NatIso.naturality_2, Mathlib.CategoryTheory.NatIso; read and used its conjugation equation.",
+   "date": "2026-10-25",
+   "verdict": "generic naturality only; used in the proved comparison step"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteRingBundleSectionOrientation",
+  "date": "2026-10-25",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Orientation-charts Step 4; canonical zero-section maps and frame normalization",
+   "via": [
+    "lem-trf-finite-ring-bundle-section-orientation",
+    "lem-trf-finite-ring-section-deformation",
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-trf-nearby-duality-operation-squares",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BundleSectionOrientationMapExt",
+  "file": "lean/Sheaf/AlgebraicGeometry/BundleSectionOrientationMapExt.lean",
+  "declaration": "AlgebraicGeometry.Etale.bundleSectionOrientation_map_ext",
+  "statement": "theorem bundleSectionOrientation_map_ext (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] (f g : affineLinearBaseCoefficient A N hA S d ⟶ bundleSectionObject A S d M) (h : ∀ (V : S.Opens) (_hV : IsAffine V.toScheme) (e : VectorBundleZeroSection.Trivialization S d M V), (ordinaryFinitePullback A V.ι).map f ≫ bundleSectionChartComparison A S d M V e = (ordinaryFinitePullback A V.ι).map g ≫ bundleSectionChartComparison A S d M V e) : f = g",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb15e",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261025T100811-L-3625154",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb15e",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261025T100811-L-3625154",
+  "kind": "interface",
+  "note": "independent cc review: 18 moved decls in FiniteRingBundleSectionOrientationData vs published item module (byte-identical); 4 item theorem signatures vs published (identical); importer FiniteRingSectionDeformation compiled on delivered modules (exit 0); #print axioms on proved theorems (sorryAx only via the new normalization hole and upstream vectorIntegrationMate_isIso); node proof uses == proof_deps"
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "id": "def-trf-height-one-fraction-order",
+ "kind": "definition",
+ "title": "Normalized order of a fraction at a height-one prime",
+ "status": "split",
+ "statement": "Let $R$ be a Noetherian normal commutative domain [def-weil-pbc-noetherian-ring], [def-weil-pbc-normal-ring], and let $K=\\operatorname{Frac}(R)$. Let $\\mathfrak q$ be a height-one prime and let $\\operatorname{ord}_{\\mathfrak q}$ be the existing length order on ring elements of [def-trf-affine-weil-divisor-class-group], computed in $R_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime]. For $x\\in K$, take the standard fraction presentation $(a,b)=\\operatorname{IsLocalization.sec}(x)$, where $b$ is a nonzero divisor and $x\\,b=a$, and define $v_{\\mathfrak q}(x)=\\operatorname{ord}_{\\mathfrak q}(a)-\\operatorname{ord}_{\\mathfrak q}(b)\\in\\mathbf Z$. For $x\\ne0$ this is the normalized additive valuation of the discrete valuation ring $R_{\\mathfrak q}$ [def-sc-discrete-valuation-ring]: both local orders are finite and their difference is independent of the fraction presentation. No valuation property at $x=0$ is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-trf-affine-weil-divisor-class-group",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-discrete-valuation-ring"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/divisors.tex",
+  "place": "Tag 00PD (lemma-characterize-dvr), proof extending v(a/b)=v(a)-v(b); Tag 02MD (order of vanishing), and Divisors Tag 02RJ (order along a prime divisor)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized order of a fraction at a height one prime of a Noetherian normal ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.intValuation\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \": Valuation R ℤᵐ⁰\", \"doc\": \"For a Dedekind domain $ A $ and a height one prime ideal $ v $, this valuation maps elements of $ A $ to the multiplicative integers with zero ($\\\\mathbb{Z}^\\\\times_0$) by assigning to each nonzero elem\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicValued\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \": Valued K ℤᵐ⁰\", \"doc\": \"For a Dedekind domain $ R $ with fraction field $ K $, this valuation maps elements of $ K $ to the multiplicative integers with zero ($\\\\mathbb{Z}^\\times_0$) by extending the discrete valuation defined\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuation\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \"(v : HeightOneSpectrum R) : Valuation K ℤᵐ⁰\", \"doc\": \"For a Dedekind domain $ R $ and its fraction field $ K $, this valuation maps elements of $ K $ to the multiplicative integers with zero ($\\\\mathbb{Z}^\\\\times_0$) by extending the integer valuation defi\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuation_of_mk'\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \"{r : R} {s : nonZeroDivisors R} : v.valuation K (IsLocalization.mk' K r s) = v.intValuation r / v.intValuation s\", \"doc\": \"For a Dedekind domain $ R $ with fraction field $ K $, and a height one prime ideal $ v $, the valuation of the element $ \\\\frac{r}{s} \\\\in K $ (where $ r \\\\in R $ and $ s $ is a non-zero divisor in $ R \"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuationOfNeZeroToFun\", \"module\": \"Mathlib.RingTheory.DedekindDomain.SelmerGroup\", \"type\": \"(x : Kˣ) : Multiplicative ℤ\", \"doc\": \"For a nonzero element $x$ in the fraction field $K$ of a Dedekind domain $A$, this function computes the valuation associated to a height one prime ideal $\\\\mathfrak{p}$ by taking the representative $(\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuation_le_one\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \"(r : R) : v.valuation K r ≤ 1\", \"doc\": \"For any element $ r $ in the Dedekind domain $ R $, the valuation $ v(r) $ associated with a height one prime ideal is less than or equal to 1.\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.maxPowDividing\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Factorization\", \"type\": \"(I : Ideal R) : Ideal R\", \"doc\": \"In a Dedekind domain, for a nonzero ideal $ I $ and a height one prime ideal $ v $, this function returns the maximal power $ v^{k} $ dividing $ I $, where $ k $ is the number of times $ v $ appears i\"}\n  {\"name\": \"Ring.ordFrac\", \"module\": \"Mathlib.RingTheory.OrderOfVanishing\", \"type\": \": K →*₀ ℤᵐ⁰\", \"doc\": \"The function defines a monoid homomorphism from the fraction field $ K $ of a nontrivial commutative ring $ R $ to the multiplicative monoid $ \\\\mathbb{Z}_{\\\\geq 0} $ extended with zero. It maps each el\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No exact match: ordFrac needs a dimension bound on its base ring; the general normal-domain height-one fraction order is not named. Reuse the project length orders and Mathlib fraction presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend the length order of a ring element at a height one prime to fractions by subtracting numerator and denominator orders",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ring.ordFrac\", \"module\": \"Mathlib/RingTheory/OrderOfVanishing\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [Nontrivial R] →\\n      [IsNoetherianRing R] →\\n        [Ring.KrullDimLE 1 R] →\\n          {K : Type u_3} →\\n            [inst_4 : Field K] → [inst_5 : Algebra R K] → [IsFractionRing R K] → K →*₀ WithZero (Multiplicative ℤ)\", \"doc\": \"The function defines a monoid homomorphism from the fraction field $ K $ of a nontrivial commutative ring $ R $ to the multiplicative monoid $ \\\\mathbb{Z}_{\\\\geq 0} $ extended with zero. It maps each el\"}\n  {\"name\": \"Ring.ordFrac_eq_div\", \"module\": \"Mathlib/RingTheory/OrderOfVanishing\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : Nontrivial R] [inst_2 : IsNoetherianRing R]\\n  [inst_3 : Ring.KrullDimLE 1 R] {K : Type u_3} [inst_4 : Field K] [inst_5 : Algebra R K] [inst_6 : IsFractionRing R K]\\n  (a b : ↥(nonZeroDivisors R)),\\n  (Ring.ordFrac R) (IsLocalization.mk' K (↑a) b) = (Ring.\", \"doc\": \"For non-zero divisors $a$ and $b$ in a nontrivial commutative ring $R$, the order of the fraction $a/b$ in the fraction field $K$ is equal to the order of $a$ divided by the order of $b$.\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuationOfNeZeroToFun\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    [IsDedekindDomain R] →\\n      {K : Type v} →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] → [IsFractionRing R K] → IsDedekindDomain.HeightOneSpectrum R → Kˣ → Multiplicative ℤ\", \"doc\": \"For a nonzero element $x$ in the fraction field $K$ of a Dedekind domain $A$, this function computes the valuation associated to a height one prime ideal $\\\\mathfrak{p}$ by taking the representative $(\"}\n  {\"name\": \"Ring.ordFrac_eq_ord\", \"module\": \"Mathlib/RingTheory/OrderOfVanishing\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : Nontrivial R] [inst_2 : IsNoetherianRing R]\\n  [inst_3 : Ring.KrullDimLE 1 R] {K : Type u_3} [inst_4 : Field K] [inst_5 : Algebra R K] [inst_6 : IsFractionRing R K]\\n  (x : R), x ≠ 0 → (Ring.ordFrac R) ((algebraMap R K) x) = (Ring.ordMonoidWithZeroHom R) \", \"doc\": \"For any non-zero element $x$ in a nontrivial commutative ring $R$, the order of the image of $x$ under the canonical embedding $R \\\\to K$ into the fraction field $K$ equals the order of $x$ in $R$. For\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.intValuationDef\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] → [IsDedekindDomain R] → IsDedekindDomain.HeightOneSpectrum R → R → WithZero (Multiplicative ℤ)\", \"doc\": \"For a nonzero element $ r $ in a Dedekind domain $ A $ and a height one prime ideal $ v $, the valuation $ v(r) $ is defined as the exponent of $ v $ in the unique factorization of the principal ideal\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicAbv_of_mk'\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type u_2} [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R) {b : NNReal}\\n  (hb : 1 < b) (r : R) {s : ↥(nonZeroDivisors R)},\\n  (v.adicAbv hb) (IsLocalization.mk' \", \"doc\": \"For any non-zero divisor $ s $ in a Dedekind domain $ R $, the adic absolute value associated to a height one prime ideal $ \\\\mathfrak{p} $ and base $ b > 1 $ of the localization element $ \\\\frac{r}{s} \"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.intAdicAbvDef\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] → [IsDedekindDomain R] → IsDedekindDomain.HeightOneSpectrum R → {b : NNReal} → 1 < b → R → NNReal\", \"doc\": \"The function maps an element $ r $ of a Dedekind domain $ R $ to the non-negative real number $ b^{v(r)} $, where $ v $ is the integer valuation at a height one prime ideal and $ b > 1 $ is a fixed re\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuation\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    [IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] →\\n            [IsFractionRing R K] → IsDedekindDomain.HeightOneSpectrum R → Valuation K (WithZero (Multiplicative ℤ))\", \"doc\": \"For a Dedekind domain $ R $ and its fraction field $ K $, this valuation maps elements of $ K $ to the multiplicative integers with zero ($\\\\mathbb{Z}^\\\\times_0$) by extending the integer valuation defi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No exact match: ordFrac needs a dimension bound on its base ring; the general normal-domain height-one fraction order is not named. Reuse the project length orders and Mathlib fraction presentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ring.ordFrac, IsIntegrallyClosed",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No exact match: ordFrac needs a dimension bound on its base ring; the general normal-domain height-one fraction order is not named. Reuse the project length orders and Mathlib fraction presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "weilFractionOrder|WeilHeightOnePrime|ordFrac",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"line\": \"37\", \"text\": \"  Ring.ordFrac (X.presheaf.stalk z)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"line\": \"44\", \"text\": \"  exact Ring.ordFrac_of_isUnit (hf.map (X.presheaf.germ U x hx').hom)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"line\": \"117\", \"text\": \"  exact inf_le_iff.mp <| Ring.ordFrac_add (R := X.presheaf.stalk x) _ _ hfg\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"line\": \"132\", \"text\": \"  simp [ordHom, Ring.ordFrac_le_smul, RingHom.algebraMap_toAlgebra, map_ne_zero_iff,\"}\n  {\"file\": \"Mathlib/RingTheory/OrderOfVanishing/Noetherian.lean\", \"line\": \"116\", \"text\": \"This is relevant since when we're working with `ordFrac` we work with `ℤᵐ⁰`, where the\"}\n  {\"file\": \"Mathlib/RingTheory/OrderOfVanishing/Noetherian.lean\", \"line\": \"124\", \"text\": \"section ordFrac\"}\n  {\"file\": \"Mathlib/RingTheory/OrderOfVanishing/Noetherian.lean\", \"line\": \"130\", \"text\": \"For any nonzero `x : R`, `ordFrac R (algebraMap R K x) ≥ 1`. Note here that this last\"}\n  {\"file\": \"Mathlib/RingTheory/OrderOfVanishing/Noetherian.lean\", \"line\": \"137\", \"text\": \"lemma ordFrac_ge_one_of_ne_zero {x : R} (hx : x ≠ 0) :\"}\n  {\"file\": \"Mathlib/RingTheory/OrderOfVanishing/Noetherian.lean\", \"line\": \"138\", \"text\": \"    1 ≤ ordFrac R (algebraMap R K x) := by\"}\n  {\"file\": \"Mathlib/RingTheory/OrderOfVanishing/Basic.lean\", \"line\": \"324\", \"text\": \"def ordFrac : K →*₀ ℤᵐ⁰ :=\"}\n  {\"file\": \"Mathlib/RingTheory/OrderOfVanishing/Basic.lean\", \"line\": \"328\", \"text\": \"lemma ordFrac_eq_ord {x : R} (hx : x ≠ 0) :\"}\n  {\"file\": \"Mathlib/RingTheory/OrderOfVanishing/Basic.lean\", \"line\": \"329\", \"text\": \"    ordFrac R (algebraMap R K x) = ordMonoidWithZeroHom R x := by\"}\n  {\"file\": \"Mathlib/RingTheory/OrderOfVanishing/Basic.lean\", \"line\": \"334\", \"text\": \"lemma ordFrac_eq_div (a : nonZeroDivisors R) (b : nonZeroDivisors R) :\"}\n  {\"file\": \"Mathlib/RingTheory/OrderOfVanishing/Basic.lean\", \"line\": \"335\", \"text\": \"    ordFrac R (IsLocalization.mk' K a.1 b) =\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No exact match: ordFrac needs a dimension bound on its base ring; the general normal-domain height-one fraction order is not named. Reuse the project length orders and Mathlib fraction presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"weilFractionOrder|WeilHeightOnePrime|ordFrac|normal_boundary_fraction_clearing\" lean/WeilConjectures lean/Sheaf; definition-node statement scan for fraction orders",
+   "results": "No WeilConjectures declaration. Sheaf.RingTheory.WeilDivisorClassGroup defines Ring.WeilHeightOnePrime and Ring.weilOrder on R only; CompleteToricBoundaryClassInjectivity uses these orders for chart monomials. DvrNormValuationSum and DvrLatticeDistanceDeterminant use ordFrac on a given DVR. No definition node of normalized fraction orders at arbitrary normal-domain height-one primes. The theorem node lem-trf-normal-domain-principal-divisor-kernel states properties but has no Lean record.",
+   "date": "2026-10-23",
+   "verdict": "Reuse Ring.WeilHeightOnePrime and Ring.weilOrder; supply only their canonical fraction extension."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "fraction order",
+   "results": "0 blueprint nodes match 'fraction order'",
+   "date": "2026-10-23",
+   "verdict": "no duplicate definition node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-normal-boundary-fraction-clearing",
+  "date": "2026-10-23",
+  "group": "N8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) nearby-duality alteration ancestry of lem-trf-local-term-locality, through log-regular divisorial structure: Class-group input to the complete-local recognition equality: the cokernel of the primitive facet-valuation map injects into the Weil divisor class group of the completed model (the Mori-type injectivity issue in the return). Auxiliary Clearing a boundary-supported fraction and its inverse in a normal domain; original boundary-class proof steps 7, 8. The normalized valuations in the boundary-clearing statement, extended from the existing local length orders.",
+   "via": [
+    "lem-trf-normal-boundary-fraction-clearing",
+    "lem-trf-complete-toric-boundary-class-injectivity",
+    "lem-trf-complete-toric-kato-recognition",
+    "lem-trf-complete-toric-monomial-factors",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.HeightOneFractionOrder",
+  "declaration": "Ring.weilFractionOrder",
+  "file": "lean/Sheaf/RingTheory/HeightOneFractionOrder.lean",
+  "statement": "def weilFractionOrder {R : Type u} [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsIntegrallyClosed R] (q : WeilHeightOnePrime R) (x : FractionRing R) : ℤ",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0cface098",
+  "group": "N8",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0cface098",
+  "group": "N8",
+  "result": "pass",
+  "note": "Every clause matches the node (Noetherian integrally closed domain, finite distinct height-one primes indexed by an independent universe v, τ≠0 positive on the list and zero off it, f a unit with zero order off the list, existence clause and every-admissible-N,H clause, product in R); no extra hypotheses. New def-trf-height-one-fraction-order (weilFractionOrder = weilOrder of numerator minus denominator via IsLocalization.sec) is real data and the normalized DVR valuation for x≠0 (00PD); no duplicate in Sheaf/WeilConjectures; Ring.ordFrac needs KrullDimLE 1 and the Dedekind valuation needs Dedekind. Both lean.statement fields verbatim in their files; item node unchanged apart from lean and the added stmt_dep; public statement imports and plain proof_dep imports correct; docstrings carry source tags, blueprint id and the 4 proof steps; Stacks 031T/00PD/031S/02MD/02RJ confirmed. Edge cases (empty I, R a field, τ a unit) covered. No file changed, no compile run; worker reports clean compiles."
+ }
+}

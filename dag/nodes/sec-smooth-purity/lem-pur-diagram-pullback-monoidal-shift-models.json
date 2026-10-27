@@ -1,0 +1,310 @@
+{
+ "id": "lem-pur-diagram-pullback-monoidal-shift-models",
+ "kind": "statement",
+ "title": "Resolving models for pullback and monoidal integer-shift squares on ring diagrams",
+ "statement": "Let $C_1\\leftarrow C_2\\leftarrow\\cdots$ be an inverse sequence of commutative rings. For a scheme $W$ choose a small skeleton of its pro-etale site and put $B_{n,W}=(C_n)_W$. Let $\\mathscr S_W$ be the abelian category of strict semilinear module systems: objects are $B_{n,W}$-module sheaves $M_n$ with $B_{n+1,W}$-linear maps $M_{n+1}\\to\\operatorname{Res}_{n+1,n}M_n$, and morphisms commute with transitions. Identify it with modules over $B_\\bullet$ on the simultaneous ringed diagram site and use $D(\\mathscr S_W)$, the ordinary unbounded derived category [lem-coef-semilinear-derived-sections]. For a scheme morphism $v$ let $P_v$ be exact termwise inverse image. For a complex $M$, use $M[r]^p=M^{p+r}$ with differential $(-1)^r d_M$, and give $P_v$ its termwise shift comparison.\n\nUse the canonical pullback compositors, including their inverses and the identifications from equality of scheme composites. Use the K-flat derived tensor, its canonical representative comparisons, unsigned associator $\\alpha$, action unitors $\\lambda,\\rho$, and Koszul symmetry $\\sigma(x\\otimes y)=(-1)^{pq}y\\otimes x$ in degrees $p,q$ [lem-pur-derived-tensor-additive-constraints]. Fix $t_{a,b}:M[a]\\otimes^LN[b]\\cong(M\\otimes^LN)[a+b]$ whose coefficient on shifted bidegree $(p,q)$ is $(-1)^{bp}$. The pullback/tensor comparison $\\mu_v:P_v(M\\otimes^LN)\\cong P_vM\\otimes^LP_vN$ is the canonical total of the ordinary pure-tensor comparison [lem-pur-cochain-pullback-tensor-coherence].\n\nThese specified comparisons admit simultaneous resolving representatives with the following properties. A pullback compositor on $M[r]$ in degree $p$ is the ordinary compositor on $M^{p+r}$, and the same holds for the identifications from equality of composites. The map representing $\\mu_v$ preserves bidegrees and all coefficient transition maps; its two shift-square routes on shifted bidegree $(p,q)$ have the same coefficient $(-1)^{bp}$. Reassociation and action unitors are the unsigned rebracketing and scalar-action maps on the total models. On triple shifted degrees $(p,q,h)$ with shifts $(a,b,c)$ the two associator routes have exponents $bp+c(p+q)$ and $cq+(b+c)p$; the unitors with the degree-zero ring unit have coefficient $1$. For symmetry the representative identity is\n$$\\sigma_{M,N}[a+b]\\,t^{M,N}_{a,b}=(-1)^{ab}t^{N,M}_{b,a}\\,\\sigma_{M[a],N[b]}.$$\nOn shifted bidegree $(p,q)$ the two exponents in this identity are $bp+(p+a)(q+b)$ and $ab+pq+aq$ (equal modulo $2$).\n\nThe representative identifications descend naturally to the specified derived system maps. For every listed map $\\tau:F\\to G$, every integer $r$, and any one input occurrence replaced by $M[r]$, the derived identity is $\\chi_G\\tau_{M[r]}=\\tau_M[r]\\chi_F$, where $\\chi$ is the composite of the specified operation shifts; the shifted occurrence of a symmetry is followed to its permuted position. The comparisons are natural in all inputs and obey the zero-shift and addition laws in each slot, with the displayed $(-1)^{ab}$ rule for interchanging two tensor shifts. All identities hold before coefficient evaluation or restriction of scalars, including the quotient transitions when $C_n=R/t^n$. No normalized-system or cohomological boundedness assumption is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence: primitive pullback and tensor identifications; retains original item steps 1-3 and the intrinsic-equality part of step 7; agent-formulated chain/section-model refinement, not a theorem quoted from the blueprint"
+ },
+ "stmt_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-derived-tensor-additive-constraints",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Apply diagramTensorShiftConstraints at every scheme and choose the family T with its intrinsic tensor coherence. Apply diagramGeometricTensorPresentations to T, obtaining Models S with S.constraints=T.",
+   "uses": [
+    "lem-pur-diagram-tensor-shift-constraints",
+    "lem-pur-diagram-geometric-tensor-presentations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every finite list of complexes apply exists_isKFlatResolutionIndependentCoefficients to each complex on the full sequence site. Transport term flatness through siteSheafTensorRightIso and choose the finite family of bundled Model objects and their quasi-isomorphisms. This also covers Fin 0.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize totalTensor_signed_coherence to the whole sequence site. For the two chain action-unit summand formulas, cancel the inverse module unitor and inverse singleObjXSelf; Mathlib leftUnitor'_inv and rightUnitor'_inv identify the remaining inverse complex-unit components, and the inverse identities finish.",
+   "uses": [
+    "lem-pur-total-tensor-signed-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use diagramTensorPullbackShiftDescent for every v and S.tensorPullback v; its two conclusions are exactly chain_pullback and derived_pullback.",
+   "uses": [
+    "lem-pur-diagram-tensor-pullback-shift-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The compositor on shifted complexes is termwise by definition, for hom and inv. The exact-functor source-library instances commShift_mapDerivedCategoryNatIso_hom and commShift_mapDerivedCategoryCompIso_hom, composition and inversion show compositor_shifts. For equality_shifts eliminate the equality of scheme maps; the chain equality is reflexivity and the derived equality reduces to the identity and functor map_id laws.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Rewrite the constraints family using S.constraints=T, insert the tensor coherence proved for T and assemble all nine Models.Coherence fields.",
+   "uses": [
+    "def-pur-diagram-pullback-shift-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-diagram-tensor-shift-constraints",
+  "lem-pur-diagram-geometric-tensor-presentations",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-total-tensor-signed-coherence",
+  "lem-pur-diagram-tensor-pullback-shift-descent",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-pur-diagram-pullback-shift-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "F7 Lean decomposition: simultaneous model choice and direct chain-unit/compositor/equality proofs, with three smaller geometric/tensor descent statements from the original six-step proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "commShift.*(CompIso|[Tt]ensor)|[Tt]ensor.*commShift",
+   "results": "No hits; searched Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]ssociator.*[Ss]hift|[Ss]hift.*[Aa]ssociator|[Ss]hift.*[Bb]raiding",
+   "results": "No hits; searched Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.associator, CategoryTheory.Functor.CommShift",
+   "results": "No hits; loogle: unknown identifier 'CategoryTheory.MonoidalCategory.associator'",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived exact inverse image pullback compositors and tensor comparison commute with integer shifts on module systems",
+   "results": "CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; SheafOfModules.pullbackComp; CategoryTheory.pullbackShiftFunctorZero_inv_app; CategoryTheory.Functor.CommShift.OfComp.map_iso_inv_app; CategoryTheory.NatTrans.commShiftPullback; CategoryTheory.Equivalence.commShiftInverse; CategoryTheory.pullbackShiftFunctorZero'_inv_app",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul symmetry and tensor associator compatibility with shifting either variable in unbounded derived categories",
+   "results": "CategoryTheory.shiftFunctorComm_symm; CategoryTheory.NatTrans.CommShift.associator; CategoryTheory.shiftFunctorComm; HomologicalComplex.associator; CochainComplex.shiftFunctorComm_hom_app_f; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Pretriangulated.Opposite.UnopUnopCommShift.iso_hom_app_assoc; HomologicalComplex₂.totalShift₁Iso_trans_totalShift₂Iso",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift, CategoryTheory.NatTrans.CommShift",
+   "results": "CategoryTheory.NatTrans.CommShift.id; CategoryTheory.NatTrans.CommShift.isoRefl_hom; CategoryTheory.NatTrans.CommShift; CategoryTheory.Functor.CommShift.ofIso_compatibility; CategoryTheory.NatTrans.CommShift.of_core; CategoryTheory.NatTrans.CommShift.leftUnitor; CategoryTheory.NatTrans.CommShift.rightUnitor; CategoryTheory.NatTrans.CommShift.of_iso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image on ringed diagram sites commutes with integer cochain shifts compatibly with pullback composition and derived tensor comparison on strict semilinear module systems",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullback_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed total tensor cochain shift isomorphism with sign (-1)^(b*p) commutes with associators unitors and Koszul symmetry on derived module sheaves",
+   "results": "HomologicalComplex₂.totalShift₁Iso_hom_totalShift₂Iso_hom; HomologicalComplex₂.totalShift₁Iso_trans_totalShift₂Iso; HomologicalComplex₂.ι_totalShift₂Iso_hom_f; HomologicalComplex₂.ι_totalShift₂Iso_inv_f; HomologicalComplex₂.ι_totalShift₁Iso_inv_f; CochainComplex.ι_mapBifunctorShift₂Iso_hom_f; CochainComplex.ι_mapBifunctorShift₁Iso_hom_f; HomologicalComplex.leftUnitor'_inv_comm_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "totalShift|mapBifunctorShift|[Cc]ommShift",
+   "results": "10; 17; 19; 22; 77; searched Mathlib/Algebra/Homology/BifunctorShift.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.associator",
+   "results": "HomologicalComplex.associator",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localized degree zero composition identification for exact functors on strict inverse systems and the bidegree preserving pullback tensor comparison are compatible with all shifts",
+   "results": "CategoryTheory.Functor.commShiftOfLocalization; CategoryTheory.Functor.commShiftOfLocalization.iso; CategoryTheory.Functor.commShiftOfLocalization_iso_hom_app; CategoryTheory.Functor.commShiftOfLocalization.iso_hom_app; CategoryTheory.Functor.commShiftOfLocalization_iso_inv_app; CategoryTheory.Functor.commShiftOfLocalization.iso_hom_app_assoc; CategoryTheory.Functor.commShiftOfLocalization.iso_inv_app_assoc; CategoryTheory.Functor.commShiftOfLocalization.iso_inv_app",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical tensor associator and left and right action unitors commute with the signed cochain shifts in each of three slots and symmetry moves the shifted slot to the permuted position",
+   "results": "CochainComplex.shiftShortComplexFunctor'_hom_app_τ₃; CochainComplex.shiftShortComplexFunctor'_inv_app_τ₃; CochainComplex.shiftShortComplexFunctorIso_hom_app_τ₃; CochainComplex.ι_mapBifunctorShift₂Iso_hom_f_assoc; CategoryTheory.Functor.commShiftIso_map₂CochainComplex_inv_app; CochainComplex.shiftShortComplexFunctorIso_inv_app_τ₃; CochainComplex.ι_mapBifunctorShift₁Iso_hom_f_assoc; CategoryTheory.Functor.instCommShift₂IntCochainComplexIntMap₂CochainComplex",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image on strict semilinear ring diagrams preserves flat term K flat resolutions and its tensor and composition comparisons commute with integer shifts",
+   "results": "CategoryTheory.Tor'; CategoryTheory.Tor; Module.Flat.lTensor_shortComplex_exact; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; Module.Flat.rTensor_shortComplex_exact; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact. Read the pertinent BifunctorShift formulas and project monoidal-shift sources; no declaration states the full diagram-site resolving and descent assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "totalShift|mapBifunctorShift",
+   "results": "17; 19; 22; 77; 95 ; searched Mathlib/Algebra/Homology/BifunctorShift.lean. Read the pertinent BifunctorShift formulas and project monoidal-shift sources; no declaration states the full diagram-site resolving and descent assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical tensor associator unitors and Koszul symmetry commute with cochain integer shifts on module sheaves over a diagram of rings",
+   "results": "CochainComplex.shiftFunctorComm_hom_app_f; CategoryTheory.Functor.commShiftIso_map₂CochainComplex_inv_app; CategoryTheory.Functor.commShiftIso_map₂CochainComplex_hom_app; CategoryTheory.Functor.commShiftMapCochainComplex; CochainComplex.HomComplex.Cochain.shift; HomologicalComplex.rightUnitor; CochainComplex.singleFunctors; CochainComplex.HomComplex.Cochain.shiftLinearMap. Read the pertinent BifunctorShift formulas and project monoidal-shift sources; no declaration states the full diagram-site resolving and descent assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift, CategoryTheory.NatTrans.CommShift",
+   "results": "CategoryTheory.NatTrans.CommShift.id; CategoryTheory.NatTrans.CommShift.isoRefl_hom; CategoryTheory.NatTrans.CommShift; CategoryTheory.Functor.CommShift.ofIso_compatibility; CategoryTheory.NatTrans.CommShift.of_core; CategoryTheory.NatTrans.CommShift.leftUnitor; CategoryTheory.NatTrans.CommShift.rightUnitor; CategoryTheory.NatTrans.CommShift.of_iso_inv. Read the pertinent BifunctorShift formulas and project monoidal-shift sources; no declaration states the full diagram-site resolving and descent assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "commShift.*(CompIso|[Tt]ensor)|[Tt]ensor.*commShift",
+   "results": "No hits ; searched Mathlib/CategoryTheory. Read the pertinent BifunctorShift formulas and project monoidal-shift sources; no declaration states the full diagram-site resolving and descent assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The signed total tensor shift isomorphism with coefficient (-1)^(b*p) is compatible with associators Koszul braiding unitors and bidegree preserving pullback tensor comparison on ringed sites",
+   "results": "HomologicalComplex₂.totalShift₁Iso_hom_totalShift₂Iso_hom; HomologicalComplex₂.totalShift₁Iso_trans_totalShift₂Iso; CategoryTheory.Sheaf.symmetricCategory; HomologicalComplex₂.ι_totalShift₂Iso_hom_f; CategoryTheory.CommShift₂Setup.int_ε; CochainComplex.ι_mapBifunctorShift₂Iso_hom_f; HomologicalComplex₂.ι_totalShift₁Iso_inv_f; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc. Read the pertinent BifunctorShift formulas and project monoidal-shift sources; no declaration states the full diagram-site resolving and descent assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-system-primitive-comparison-shift",
+  "date": "2026-10-22",
+  "group": "Q128"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Maps-used sentence: primitive pullback and tensor identifications; retains original item steps 1-3 and the intrinsic-equality part of step 7",
+   "via": [
+    "lem-pur-system-primitive-comparison-shift",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pur-diagram-pullback-monoidal-shift-models",
+  "worker": "stage1",
+  "summary": "Repair of the approved delivery whose side completion was not promoted to the live DAG. Compared the retained returned artifact with the current live item: its statement, statement dependencies, source and blueprint provenance agree, while live still has no proof. Re-read all eight current dependency statements and checked every citation. Retained the six-step argument, made the compositor transition/differential naturality and semilinear tensor balancing explicit, and preserved the intrinsic resolving-descent argument. Reused the recorded searches; no new nodes or statement change.",
+  "blueprint": "Nearest ancestor thm-pur-rational-and-qbar-purity, through lem-pur-adic-projection-shift-coherence, lem-pur-integral-realization-shift-coherence and lem-pur-system-primitive-comparison-shift: primitive pullback and tensor identifications in the maps-used sentence of fix-prop-coherence.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "General ringed-site resolving, cochain tensor, or semilinear-system tool applied to the simultaneous diagram site; the unit requires these primitive comparison calculations and supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General ringed-site resolving, cochain tensor, or semilinear-system tool applied to the simultaneous diagram site; the unit requires these primitive comparison calculations and supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "General ringed-site resolving, cochain tensor, or semilinear-system tool applied to the simultaneous diagram site; the unit requires these primitive comparison calculations and supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-pur-derived-tensor-additive-constraints",
+    "why": "General ringed-site resolving, cochain tensor, or semilinear-system tool applied to the simultaneous diagram site; the unit requires these primitive comparison calculations and supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "General ringed-site resolving, cochain tensor, or semilinear-system tool applied to the simultaneous diagram site; the unit requires these primitive comparison calculations and supplies no replacement for this tool."
+   },
+   {
+    "node": "lem-pur-total-tensor-signed-coherence",
+    "why": "General ringed-site resolving, cochain tensor, or semilinear-system tool applied to the simultaneous diagram site; the unit requires these primitive comparison calculations and supplies no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-derived-tensor-additive-constraints",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-total-tensor-signed-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-52c6f1598",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-52c6f1598 (reviewer sub-agent of L); spot-checked: Re-delivery after a promotion refusal; the earlier head 5c8ead245d14 was a PASS. The item is still unsplit with an empty proof in clones/live and side-live, and there is no repair note. The statement and stmt_deps are identical to live, and there are no new nodes. Compared with 5c8e, proof_deps and all step uses are identical; only the texts of steps 2 and 3 changed. Step 2 now spells out transition and differential naturality (a P_vP_w(f) = P_{wv}(f) a, also with (-1)^r d). Step 3 now spells out semilinear balancing (f(cx) = c̄ f(x)). Both are correct. I read the full current statements of all 8 cited nodes, and each step's claim is backed by them: K-flat with flat terms is preserved by u*; the resolving class is closed under tensor, shifts and the unit; the termwise shift comparison τ is the identity; c_u preserves degrees and is natural; s^2_b carries (-1)^{bp} and s^1 is unsigned; the associator exponents bp+c(p+q) and cq+(b+c)p and the symmetry exponents bp+(p+a)(q+b) and ab+pq+aq are stated verbatim and I recomputed both (symmetry exponents differ by 2bp); additive-constraints gives full faithfulness for any finite number of variables. Edge cases checked: zero ring/complex/transition, shifts -1/0/1, odd/odd shifts, R/t^n transitions. No SGA. Cosmetic: the report mentions a citations.json that is not in the commit. A maintainer should promote this delivery rather than loop it again."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.DiagramPullbackMonoidalShiftModels",
+  "declaration": "WeilConjectures.DiagramPullbackShift.diagramPullbackMonoidalShiftModels",
+  "declarations": [
+   "WeilConjectures.DiagramPullbackShift.diagramPullbackMonoidalShiftModels"
+  ],
+  "file": "lean/Sheaf/SixFunctors/DiagramPullbackMonoidalShiftModels.lean",
+  "statement": "theorem diagramPullbackMonoidalShiftModels : ∃ S : Models A δ, S.Coherence A δ",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Definitions extracted unchanged to DiagramPullbackShiftData and publicly reexported. The original theorem signature is unchanged. Its complete assembly proof uses three strictly smaller split statements plus proved resolution, signed-chain, unit, compositor and equality helpers."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30e400f95",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Item node changes only in lean and stmt_deps; the two added stmt_deps are landed def nodes (allowed). Dependency nodes are unchanged; no new nodes or statement change. All 14 clauses match the Lean. Pinned: Pullback (rho by components, uPush/V by equalities, moduleAdj by unit_normalization); compositor = conjugate mate of rightModules pinned to pullbackComp.inv on sections; CompositorModels and CompositorShifts for hom and inv; EqualityShifts; t/alpha/sigma by the unique IsNormalized; unitors and mu_v on models. Recomputed associator exponents bp+c(p+q)=cq+(b+c)p and symmetry exponents bp+(p+a)(q+b) vs ab+pq+aq (differ by 2bp); checked the (-1)^(ab) interchange and the extraction order. Edge cases: zero rings and complexes, empty scheme, Fin 0, shifts 0/+-1, negative degrees, odd/odd shifts, R/t^n. One sorry, docstrings OK, lines <=100, statement verbatim, plain imports are proof_dep modules. Not superseded. No compile (no file changed). Advisories: coefficientProEtaleDirectRingMap is not in any record; it is identical to the recorded proEtaleConstantDirectImageMap of def-weil-proetale-inverse-image. TotalTensorSignedCoherence comes from a proof_dep that is not a stmt_dep; it recalls the node's chain sentence, not a hollow clause. The dependency's AlgebraicInverseImage allows a -1 twist of moduleUnderlying, which leaves the module adjunction, compositor and mu determined only up to sign; harmless because every clause is linear in them. The second reading is a self-review."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3a9b2",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261025T205446-L-3251048",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean+node files vs reviewed head e47c86c6c2cd (byte-identical; only change record/report differ); item node vs earlier reviewer fix; reader gate: delivered modules + direct importer SystemTensorShiftCoherence compiled (exit 0)"
+ }
+}

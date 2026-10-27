@@ -1,0 +1,127 @@
+{
+ "id": "def-sfb-dg-graded-split-short-exact",
+ "kind": "definition",
+ "title": "Graded-split short exact sequences of right DG modules",
+ "status": "split",
+ "statement": "Work in the universes of [def-weil-size-convention]. For an associative unital differential graded integer algebra $A$ and right differential graded modules $K,L,M$ as in [def-sfb-dg-derived-category], a graded-split short exact sequence consists of DG maps $i:K\\to L$, $v:L\\to M$ which in every integer degree are respectively injective and surjective and satisfy $\\ker v=\\operatorname{im}i$, together with additive maps $s^n:M^n\\to L^n$ such that $v^n s^n=1$ and $s^{n+m}(xa)=s^n(x)a$ for every homogeneous $x\\in M^n$, $a\\in A^m$. The section has degree zero and preserves the right $A$-action; it need not commute with the differentials. This is an admissible short exact sequence with its chosen graded splitting.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-dg-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09JT, definition-admissible-ses (3)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "GradedSplitShortExact|DGModule.*Splitting|GradedSplitExact",
+   "results": "{\"t\": \"2026-10-24T11:26:30Z\", \"tool\": \"grep\", \"query\": \"GradedSplitShortExact|DGModule.*Splitting|GradedSplitExact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No specialized Mathlib definition: ordinary ShortComplex splittings are chain maps if applied inside DG modules. Reuse the existing project structure GradedSplitShortExact."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An admissible short exact sequence of differential graded right modules is split on graded modules without commuting with the differential",
+   "results": "{\"t\": \"2026-10-24T11:26:30Z\", \"tool\": \"leansearch\", \"query\": \"An admissible short exact sequence of differential graded right modules is split on graded modules without commuting with the differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.Splitting.r_f\", \"CategoryTheory.ShortComplex.Splitting.shortExact\", \"CategoryTheory.ShortComplex.Splitting.isSplitEpi_g\", \"CategoryTheory.ShortComplex.Splitting.s_g\", \"CategoryTheory.ShortComplex.Splitting.g_s\", \"CategoryTheory.ShortComplex.Splitting.splitEpi_g\", \"CategoryTheory.ShortComplex.Splitting.splitEpi_g_section_\", \"CategoryTheory.ShortComplex.Splitting.epi_g\"], \"digest\": \"1da24c93a1eb6baf\"}",
+   "date": "2026-10-24",
+   "verdict": "No specialized Mathlib definition: ordinary ShortComplex splittings are chain maps if applied inside DG modules. Reuse the existing project structure GradedSplitShortExact."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GradedSplitShortExact\"",
+   "results": "{\"t\": \"2026-10-24T11:26:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"GradedSplitShortExact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No specialized Mathlib definition: ordinary ShortComplex splittings are chain maps if applied inside DG modules. Reuse the existing project structure GradedSplitShortExact."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l GradedSplitShortExact dag/nodes; rg GradedSplitShortExact|DGModule.*Splitting|GradedSplitExact lean/WeilConjectures lean/Sheaf; blueprint_refs.py search graded split short exact",
+   "results": "Only lem-sfb-dg-good-character-embedding records the helper declaration, as part of its theorem module. Sheaf/CategoryTheory/DgGoodCharacterEmbedding.lean:26 defines GradedSplitShortExact, and line 114 uses it. No WeilConjectures hit; 0 blueprint nodes match graded split short exact; no existing definition node owns this notion.",
+   "date": "2026-10-24",
+   "verdict": "New definition node records the existing structure without redeclaring it or depending on its unrelated embedding theorem."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-derived-admissible-triangles",
+  "date": "2026-10-24",
+  "group": "O1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): Tag 09R3, proposition-compact, implication (2) to (1), with the identity retraction of P. Supporting input for the finite-filtration induction: admissible exact triangles in the DG derived category (09K8, 09KW, 09KX). Definition of the graded-split sequence in the admissible-triangle assertion (Stacks 09JT).",
+   "via": [
+    "lem-sfb-dg-derived-admissible-triangles",
+    "lem-sfb-dg-finite-cell-compact",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgGoodCharacterEmbedding",
+  "declaration": "CategoryTheory.DgAlgebra.GradedSplitShortExact",
+  "statement": "structure GradedSplitShortExact (A : Algebra.{u})\n    (E' E E'' : RightModule A)",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": true
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20ae095b0",
+  "group": "O1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20ae095b0",
+  "group": "O1",
+  "result": "pass",
+  "note": "Re-delivery fixes both faults from the eb26 RETURN. H2: the theorem-node stmt_dep is replaced by the new def node def-sfb-dg-graded-split-short-exact, which matches Stacks 09JT(3) and records GradedSplitShortExact as existing:true on branch newtargets-dag; no other node owns it. H3: shiftComparison ties localization.commShiftIso to HomotopyStructure.shiftIso, DerivedStructure.shiftIso and factorIso for every n, M, S, e (types checked by hand), so exact refers to the canonical comparison. Node clauses checked: localization at cohomology isomorphisms via IsLocalization with cohomology pinned by cohomology_factors; triangulation from DerivedStructure with signed shifts and unchanged action; admissible triangle with first arrows literally Q.map of inclusion and projection and the section not required to commute with differentials. No extra hypotheses on A; single universe u. Statement field verbatim; only the theorem's sorry; docstrings and 7-step proof plan present; H4 searches found no duplicate. Edge cases A=0, zero modules and sequences, unbounded complexes, n=0 covered. Non-blocking: the landed DerivedStructure bundles HasCoproducts.{u}, which goes beyond the node but is true by Stacks 09QI (now cited). No file changed, so no compile."
+ }
+}

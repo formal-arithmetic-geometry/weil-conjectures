@@ -1,0 +1,355 @@
+{
+ "id": "lem-sfb-space-fp-over-space-limit-descent",
+ "kind": "statement",
+ "title": "Finitely presented spaces descend over inverse limits of algebraic-space bases",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and atlas point topology [def-a1-space-point-topology]. A space is quasi-compact if every open cover of its point space has a finite subcover, and quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. A morphism is quasi-compact if its pullback to every affine scheme test has quasi-compact source, and quasi-separated if its relative diagonal is quasi-compact. An affine morphism is representable by schemes and has affine source after every affine scheme test. Local finite presentation and local finite type are tested on compatible etale scheme charts [def-sfb-space-morphism-properties]; finite presentation means local finite presentation, quasi-compactness and quasi-separatedness. Let $I$ be a small nonempty directed set, let $(B_i)_{i\\in I}$ be an inverse system of quasi-compact quasi-separated algebraic spaces with affine transitions, and put $B=\\varprojlim_i B_i$. For every finitely presented morphism $Z\\to B$, there exist $i\\in I$, a finitely presented morphism $Z_i\\to B_i$, and a $B$-isomorphism $Z_i\\times_{B_i}B\\cong Z$. For finitely presented spaces $Z_i,W_i$ over one stage $B_i$, every $B$-morphism between their pullbacks descends to a morphism over some $B_j$ with $j\\geq i$; two such stage morphisms that become equal over $B$ become equal after pullback to some later common stage. The bases $B_i$ need not be schemes.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07SK (lemma-descend-finite-presentation), full algebraic-space base statement, object, morphism and equality clauses."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-affine-quasifinite-properties"
+ ],
+ "proof": [
+  {
+   "text": "Fix $0\\in I$ and work on $I_{\\ge0}$. This tail has the same limit: a compatible cone on the tail has its component at $a\\in I$ obtained by choosing $b\\ge a,0$ and composing with $B_b\\to B_a$; a common upper bound proves independence. By [lem-sfb-qc-space-affine-etale-atlas] choose an affine scheme $U_0$ and a representable surjective etale map $U_0\\to B_0$. Put $U_i=B_i\\times_{B_0}U_0$, $R_i=U_i\\times_{B_i}U_i$, and $T_i=U_i\\times_{B_i}U_i\\times_{B_i}U_i$. The scheme-test assertion of [lem-trf-space-representable-etale-scheme-tests] makes $R_0,T_0$ schemes. Associating the fibre products identifies $R_i=B_i\\times_{B_0}R_0$ and $T_i=B_i\\times_{B_0}T_0$. All these identifications are over $B_i$ and retain the projections, diagonal and triple-overlap maps.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK (lemma-descend-finite-presentation), choice of an affine atlas and its relation; use the triple fibre product as well."
+   }
+  },
+  {
+   "text": "The affine scheme $U_0$ is qcqs by [lem-weil-pbc-affine-scheme-qcqs]. Since $B_0$ is qcqs, [lem-sfb-qcqs-space-fibre-product] makes $R_0,T_0$ qcqs. The maps $U_i\\to U_0$, $R_i\\to R_0$, $T_i\\to T_0$, and all transition maps are affine base changes. By [lem-sfb-space-affine-locality], $U_i$ is affine and $R_i,T_i$ are qcqs schemes. By [lem-sfb-space-affine-limits-schematic-stages], $B$ exists, $B\\to B_0$ is affine, and base change to $U_0,R_0,T_0$ gives the respective limits $U,R,T$. Thus $U=B\\times_{B_0}U_0$, $R=U\\times_BU$, and $T=U\\times_BU\\times_BU$. By [lem-trf-space-fibre-products-etale-covers], every $U_i\\to B_i$ and $U\\to B$ is surjective etale. Consequently the three inverse systems of schemes meet every qcqs and affine-transition hypothesis of scheme-base descent; $R_i$ and $T_i$ are not assumed affine.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-qcqs-space-fibre-product",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK, atlas limit identifications; Tag 07SF (lemma-directed-inverse-system-has-limit), including arbitrary base change."
+   }
+  },
+  {
+   "text": "Let $Z\\to B$ be finitely presented. Put $V=Z\\times_BU$. By base-change stability in [lem-sfb-space-flat-proper-fp-locality], $V\\to U$ is finitely presented. Apply the object clause of [lem-sfb-fp-space-qcqs-base-limit-descent] to the qcqs scheme system $(U_i)$ to obtain a finitely presented algebraic space $V_i\\to U_i$ with $V_i\\times_{U_i}U\\simeq V$. The cited node works over $\\operatorname{Spec}\\mathbf Z$: by [lem-sfb-space-change-base-to-integers](1)--(3), viewing algebraic spaces over $S$ as algebraic spaces over $\\operatorname{Spec}\\mathbf Z$ with a map to $S$ preserves fibre products and surjective etale scheme charts and identifies small etale sites and structure sheaves, hence preserves quasi-compactness, quasi-separatedness and finite presentation; apply the cited node to the spaces so viewed, and by the equivalence (2) the resulting $V_i\\to U_i$ and the isomorphism $V_i\\times_{U_i}U\\simeq V$ come from spaces and maps over $S$, recovered through $V_i\\to U_i\\to B_i\\to S$. All later pullbacks of $V_i$ and its overlap pullbacks remain finitely presented by the same base-change theorem.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-fp-space-qcqs-base-limit-descent",
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK, essential surjectivity after passage to the affine atlas; scheme-base form of 07SK applied over U_i."
+   }
+  },
+  {
+   "text": "On $R=U\\times_BU$, the two pullbacks of $V=Z\\times_BU$ have the canonical isomorphism $\\theta:p_1^*V\\simeq p_2^*V$, given by keeping the $Z$-coordinate. Their models $p_1^*V_i,p_2^*V_i$ are finitely presented over the qcqs schemes $R_i$. Apply the morphism clause of [lem-sfb-fp-space-qcqs-base-limit-descent] on $(R_j)_{j\\ge i}$ to $\\theta$ and to $\\theta^{-1}$. At a common later stage they are maps $\\theta_j,\\eta_j$ in opposite directions. Apply its equality clause over the same scheme system to the two identities $\\eta\\theta=\\mathrm{id}$ and $\\theta\\eta=\\mathrm{id}$. After enlargement, $\\theta_j$ and $\\eta_j$ are inverse. These are applications to morphisms of algebraic spaces over scheme bases, not to scheme-source maps only. Each application of [lem-sfb-fp-space-qcqs-base-limit-descent] in this step is made over $\\operatorname{Spec}\\mathbf Z$ and transported back to $S$ by [lem-sfb-space-change-base-to-integers](2), as in step 3.",
+   "uses": [
+    "lem-sfb-fp-space-qcqs-base-limit-descent",
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK, descend the finite presentation data and their maps; make the inverse equations hold at a finite stage."
+   }
+  },
+  {
+   "text": "On $T$ the isomorphism satisfies $p_{23}^*\\theta\\circ p_{12}^*\\theta=p_{13}^*\\theta$: both maps keep the $Z$-coordinate and replace the first $U$-coordinate by the third. The two sides at stage $j$ are maps between the same two finitely presented spaces over $T_j$, by base-change stability [lem-sfb-space-flat-proper-fp-locality]. The equality clause of [lem-sfb-fp-space-qcqs-base-limit-descent] on the qcqs scheme system $(T_k)_{k\\ge j}$ makes this cocycle identity hold at some later stage. Its equality clause on $(U_k)$ likewise makes $\\Delta^*\\theta_j=\\mathrm{id}$ hold. Choose a common upper bound for these finitely many enlargements. All equations persist under further pullback. We have therefore obtained an actual descent datum $(V_j,\\theta_j)$ along $U_j\\to B_j$, rather than just an invertible overlap map. Each application of [lem-sfb-fp-space-qcqs-base-limit-descent] in this step is made over $\\operatorname{Spec}\\mathbf Z$ and transported back to $S$ by [lem-sfb-space-change-base-to-integers](2), as in step 3.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-fp-space-qcqs-base-limit-descent",
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK, finite data and equality descent; the cocycle and identity equations omitted in the presentation argument are made explicit."
+   }
+  },
+  {
+   "text": "The singleton $U_j\\to B_j$ is an fppf covering by [lem-sfb-space-fppf-covering-calculus](1). Apply [lem-sfb-fppf-space-datum-sheaf-realization] to $(V_j,\\theta_j)$. It gives an fppf sheaf $F\\to B_j$ with $F\\times_{B_j}U_j\\simeq V_j$ inducing exactly $\\theta_j$. To check algebraicity, use the map $q:V_j\\to F$. For any scheme $A$ and section $A\\to F$, the sheaf $A\\times_FV_j$ is $A\\times_{B_j}U_j$, by the displayed local isomorphism. It is a scheme with a surjective etale map to $A$, since $U_j\\to B_j$ is representable surjective etale and [lem-trf-space-fibre-products-etale-covers] preserves this under base change. By [lem-sfb-space-fppf-covering-calculus](1), its map to $A$ is flat and locally finitely presented. Thus every scheme-test hypothesis of [lem-sfb-fppf-space-atlas-bootstrap] holds for $q$, and $F$ is an algebraic space. Denote it by $Z_j$. The sheaf-descent node alone was not used to assert algebraicity.",
+   "uses": [
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-fppf-space-datum-sheaf-realization",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-fppf-space-atlas-bootstrap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0ADV (lemma-descend-algebraic-space), proof (1), singleton covering; it uses spaces-descent Tag 0ADT and bootstrap Tag 04S6 (theorem-final-bootstrap), condition (3)."
+   }
+  },
+  {
+   "text": "We verify finite presentation over the space $B_j$ using only scheme-base locality. For any scheme $A\\to B_j$, put $Q=A\\times_{B_j}U_j$. It is a scheme and $Q\\to A$ is surjective etale by [lem-trf-space-fibre-products-etale-covers], hence an fppf covering of schemes by [lem-sfb-space-fppf-covering-calculus](1),(4). The pullback of $Z_j\\times_{B_j}A\\to A$ to $Q$ is the base change of $V_j\\to U_j$, so it is finitely presented by [lem-sfb-space-flat-proper-fp-locality]. Apply that node's fppf locality assertion with scheme target $A$: $Z_j\\times_{B_j}A\\to A$ is finitely presented. No locality assertion with an algebraic-space target has been taken from that node.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-space-flat-proper-fp-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041V (lemma-descending-property-finite-presentation), applied after every scheme test A -> B_j."
+   }
+  },
+  {
+   "text": "It follows that $Z_j\\to B_j$ is finitely presented. Quasi-compactness is exactly the conclusion of step 7 for affine tests. For quasi-separatedness let $A\\to Z_j\\times_{B_j}Z_j$ be any affine scheme test of the relative diagonal. The induced map $A\\to B_j$ lets us form $E=Z_j\\times_{B_j}A$. The diagonal of $E\\to A$ is quasi-compact by step 7. Pull it back along $A\\to E\\times_AE$ given by the two chosen maps to $Z_j$. This pullback is exactly the tested diagonal of $Z_j\\to B_j$, and is quasi-compact by [lem-sfb-space-quasicompact-fppf-local]. Local finite presentation follows from [lem-sfb-space-local-properties-chart-test]: choose a scheme atlas of $V_j=Z_j\\times_{B_j}U_j$, whose map to the scheme target $U_j$ is locally finitely presented since $V_j\\to U_j$ is. Together these are the three defining conditions.",
+   "uses": [
+    "lem-sfb-space-quasicompact-fppf-local",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041V, expansion of the three defining conditions using scheme tests; quasi-compact base change Tag 03HF."
+   }
+  },
+  {
+   "text": "Base change $Z_j$ to $B$. By [lem-trf-space-fibre-products-etale-covers] this is an algebraic space, whose pullback to $U$ is $V$ and whose overlap isomorphism is $\\theta$. The given $Z$ has exactly the same datum, by the construction of $\\theta$. Full faithfulness of [lem-sfb-fppf-space-datum-sheaf-realization], applied to the fppf covering $U\\to B$ from [lem-sfb-space-fppf-covering-calculus](1), gives mutually inverse maps between $Z_j\\times_{B_j}B$ and $Z$: the identity on their identified local objects respects $\\theta$, and uniqueness makes both composites identities. They are maps over $B$. This proves the object clause.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-fppf-space-datum-sheaf-realization",
+    "lem-sfb-space-fppf-covering-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK, essential surjectivity: identify the descended space after pullback using its atlas datum."
+   }
+  },
+  {
+   "text": "For the morphism clause fix finitely presented spaces $Y_i,W_i$ over $B_i$ and a $B$-map $f:Y\\to W$ of their pullbacks. Repeat steps 1--2 on the tail starting at $i$. By [lem-sfb-space-flat-proper-fp-locality], their pullbacks $Y_i\\times_{B_i}U_i$ and $W_i\\times_{B_i}U_i$ are finitely presented over $U_i$. The morphism clause of [lem-sfb-fp-space-qcqs-base-limit-descent] on $(U_k)$ descends $f|_U$ to a map $g_j$ over $U_j$. On $R_j$ its compatibility with the canonical descent data is the equation $\\theta_W\\circ p_1^*g_j=p_2^*g_j\\circ\\theta_Y$. These are maps between finitely presented spaces over $R_j$; they agree over $R$ because $f$ is a map over $B$. The equality clause of the same scheme-base descent node, now on $(R_k)$, makes this equation hold at some later stage $k$. By [lem-sfb-space-fppf-covering-calculus] the atlas $U_k\\to B_k$ is fppf. Full faithfulness of [lem-sfb-fppf-space-datum-sheaf-realization] then gives a map $Y_k\\to W_k$ over $B_k$. Its pullback to $B$ is $f$, since both maps restrict to $f|_U$ and that same full faithfulness over $B$ detects equality. Each application of [lem-sfb-fp-space-qcqs-base-limit-descent] in this step is made over $\\operatorname{Spec}\\mathbf Z$ and transported back to $S$ by [lem-sfb-space-change-base-to-integers](2), as in step 3.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-fp-space-qcqs-base-limit-descent",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-fppf-space-datum-sheaf-realization",
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK, full faithfulness paragraph: descend a map on an atlas and descend its overlap compatibility."
+   }
+  },
+  {
+   "text": "Finally, put any two stage morphisms in the equality clause over a common stage $i$ by directedness. Their restrictions along $U_i\\to B_i$ are maps between finitely presented algebraic spaces over the qcqs scheme $U_i$, by [lem-sfb-space-flat-proper-fp-locality]. If their pullbacks to $B$ agree, their pullbacks to $U$ agree. The equality clause of [lem-sfb-fp-space-qcqs-base-limit-descent] on $(U_j)_{j\\ge i}$ makes the restrictions equal over some $U_j$. Full faithfulness of [lem-sfb-fppf-space-datum-sheaf-realization] for the fppf atlas $U_j\\to B_j$ supplied by [lem-sfb-space-fppf-covering-calculus] makes the original maps equal over $B_j$. This proves eventual equality and completes all clauses without assuming any $B_i$ is a scheme. Each application of [lem-sfb-fp-space-qcqs-base-limit-descent] in this step is made over $\\operatorname{Spec}\\mathbf Z$ and transported back to $S$ by [lem-sfb-space-change-base-to-integers](2), as in step 3.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-fp-space-qcqs-base-limit-descent",
+    "lem-sfb-fppf-space-datum-sheaf-realization",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK, full faithfulness and essential uniqueness of the descended morphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-qcqs-space-fibre-product",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-fp-space-qcqs-base-limit-descent",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-sfb-fppf-space-datum-sheaf-realization",
+  "lem-sfb-fppf-space-atlas-bootstrap",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-space-change-base-to-integers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07SK (lemma-descend-finite-presentation), atlas reduction elaborated using the existing qcqs scheme-base descent theorem and explicit descent of the overlap isomorphism, its inverse and cocycle; effectivity via Tags 0ADT and 04S6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented algebraic space over a directed inverse limit of qcqs algebraic spaces with affine transitions descends to one stage",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.exists_map_eq_top",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"LocallyOfFinitePresentation\", \"IsLimit\"",
+   "results": "Actual logged search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Dd]escend.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*[Ll]imit",
+   "results": "Actual logged search: 5 hits; Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation algebraic spaces over an inverse limit of algebraic space bases descend together with morphisms and equalities",
+   "results": "Actual logged search: 8 hits; Algebra.FinitePresentation.baseChange, RingHom.FinitePresentation, Algebra.FinitePresentation.mk, AlgebraicGeometry.LocallyOfFinitePresentation, AlgHom.FinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Algebra.IsStandardSmooth.finitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of objects in the category of finitely presented algebraic spaces along affine inverse systems of algebraic spaces",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|descend.*finitePresentation|finitePresentation.*[Ll]imit",
+   "results": "Actual logged search: 5 hits; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Scheme-only AffineTransitionLimit.lean:635-645, Morphisms/FinitePresentation.lean:35-57,91-96 and Morphisms/FlatDescent.lean:175-185; none handles algebraic-space bases. CategoryTheory/Presentable/Finite.lean:84-94 requires an already finitely presentable object and a categorical colimit and does not give finite-presentation geometric descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of finitely presented algebraic spaces over an inverse limit of algebraic spaces is the filtered colimit of the categories at the stages",
+   "results": "Actual logged search: 8 hits; CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit, CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable, CategoryTheory.Limits.IndObjectPresentation.mk, CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under, CategoryTheory.Limits.colimitLimitIso, CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag, GrpCat.FilteredColimits.colimit, AlgebraicGeometry.PresheafedSpace.colimit",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Scheme-only AffineTransitionLimit.lean:635-645, Morphisms/FinitePresentation.lean:35-57,91-96 and Morphisms/FlatDescent.lean:175-185; none handles algebraic-space bases. CategoryTheory/Presentable/Finite.lean:84-94 requires an already finitely presentable object and a categorical colimit and does not give finite-presentation geometric descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsLimit\", \"FinitePresentation\"",
+   "results": "Actual logged search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Scheme-only AffineTransitionLimit.lean:635-645, Morphisms/FinitePresentation.lean:35-57,91-96 and Morphisms/FlatDescent.lean:175-185; none handles algebraic-space bases. CategoryTheory/Presentable/Finite.lean:84-94 requires an already finitely presentable object and a categorical colimit and does not give finite-presentation geometric descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented algebraic spaces descend along directed inverse limits of qcqs algebraic spaces with affine transition morphisms",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.Scheme.nonempty_of_isLimit, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Scheme-only AffineTransitionLimit.lean:635-645, Morphisms/FinitePresentation.lean:35-57,91-96 and Morphisms/FlatDescent.lean:175-185; none handles algebraic-space bases. CategoryTheory/Presentable/Finite.lean:84-94 requires an already finitely presentable object and a categorical colimit and does not give finite-presentation geometric descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spreading out finite presentation algebraic spaces and maps using etale atlases over a cofiltered limit",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, Algebra.Etale.finitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.locallyOfFinitePresentation_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Scheme-only AffineTransitionLimit.lean:635-645, Morphisms/FinitePresentation.lean:35-57,91-96 and Morphisms/FlatDescent.lean:175-185; none handles algebraic-space bases. CategoryTheory/Presentable/Finite.lean:84-94 requires an already finitely presentable object and a categorical colimit and does not give finite-presentation geometric descent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-surjective-affine-space-target",
+  "date": "2026-10-23",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 07SK (lemma-descend-finite-presentation), full algebraic-space base statement, object, morphism and equality clauses.",
+   "via": [
+    "lem-sfb-finite-surjective-affine-space-target",
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-fp-over-space-limit-descent",
+  "worker": "stage1",
+  "summary": "Retained the full algebraic-space-base statement and all three clauses. Reduced to the existing qcqs scheme-base descent theorem using the affine atlas and its qcqs double/triple overlaps, descended the isomorphism/inverse/cocycle by its map/equality clauses, established algebraicity by the existing sheaf realization and bootstrap nodes, and checked finite presentation by scheme tests. No new nodes. No project Lean declaration found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 07SK (lemma-descend-finite-presentation), full algebraic-space base statement, object, morphism and equality clauses. The supplied ancestor command reports no imported ancestor; preserve its inherited null from.node and via chain. Latest blueprint direct-image proof (3) checked; this is a generic supporting limit theorem below its alteration prerequisite, with no unit-route replacement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic algebraic-space atlas, inverse-limit, scheme-base descent or sheaf-descent tool in the proof of Stacks 07SK; no step of the constructible-stability unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic algebraic-space atlas, inverse-limit, scheme-base descent or sheaf-descent tool in the proof of Stacks 07SK; no step of the constructible-stability unit is replaced."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space atlas, inverse-limit, scheme-base descent or sheaf-descent tool in the proof of Stacks 07SK; no step of the constructible-stability unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NA-84fe0fadb",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-84fe0fadb (reviewer sub-agent of L); spot-checked: I read Stacks 07SK (spaces-limits.tex l.1926-2010) and all 14 cited statements. The statement matches 07SK clause by clause and is unchanged. No duplicate: of the 50 nodes that mention 07SK, lem-sfb-fp-space-qcqs-base-limit-descent covers only scheme bases and lem-sfb-fp-space-limit-category only affine bases. There are no new nodes and no cycle. The route is atlas descent instead of the source's W/R′ presentation, and it is sound. It descends V=Z×_BU over the qcqs schemes (U_i) and descends θ, θ^{-1} and the cocycle over (R_i), (T_i) with the morphism and equality clauses; R_i and T_i are qcqs but not necessarily affine, which the scheme-base node allows. Effectivity: the sheaf-realization node gives a sheaf F with no algebraicity claimed, and the bootstrap applies because A×_F V_j = A×_{B_j}U_j is a scheme, surjective étale over A, hence flat and lfp by covering-calculus (1). Finite presentation is checked on scheme tests: the qs diagonal is the pullback of Δ_{E/A} along a section, and lfp uses the chart test. The morphism and equality clauses follow from full faithfulness of the realization. Fault (C1), fixed: step 3 forgot the S-structure to apply the Spec Z-stated scheme-base node without citing anything. That is Stacks 03I4, which the DAG has as lem-sfb-space-change-base-to-integers (same unit, on base). Steps 3, 4, 5, 10 and 11 now cite it, and proof_deps includes it. Accepted tool_uses: lem-trf-space-representable-etale-scheme-tests and lem-trf-space-fibre-products-etale-covers (generic algebraic-space foundations); lem-weil-pbc-affine-scheme-qcqs is a Mathlib leaf. Batch-5: the closures of all 10 flagged citations reach only generic space and scheme foundation nodes, such as def-trf-algebraic-space, fibre products, atlas tests and fppf locality; none is a trace-formula or Poincaré-duality step. The item's statement already reached these on the base, and all of them are already in the parent's closure without the item. Accepted. Edge cases checked: empty bases, singleton I, a non-scheme constant system, and a non-separated B_0.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFpOverSpaceLimitDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.fp_over_space_limit_descent",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.spaceLimitPullbackIso",
+   "AlgebraicGeometry.AlgebraicSpace.fp_over_space_limit_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFpOverSpaceLimitDescent.lean",
+  "statement": "theorem fp_over_space_limit_descent {S : Scheme.{u}} {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ AlgebraicSpace S) (c : Cone D) (hc : IsLimit c) (hqc : ∀ i : I, CompactSpace (Point (D.obj (op i)).obj.obj)) (hqs : ∀ (i : I) (U V : Over S) (a : yoneda.obj U ⟶ (D.obj (op i)).obj.obj) (b : yoneda.obj V ⟶ (D.obj (op i)).obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) (ha : ∀ (i j : I) (h : i ≤ j), MapIsAffine (D.map (homOfLE h).op)) : (∀ (Z : AlgebraicSpace S) (f : Z ⟶ c.pt), MapIsLocallyOfFinitePresentation f → MapIsQuasiCompact f.hom.hom → MapIsQuasiCompact (pullback.diagonal f.hom.hom) → ∃ (i : I) (Zi : AlgebraicSpace S) (fi : Zi ⟶ D.obj (op i)), MapIsLocallyOfFinitePresentation fi ∧ MapIsQuasiCompact fi.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal fi.hom.hom) ∧ Nonempty ((Over.pullback (c.π.app (op i)).hom).obj (Over.mk fi.hom) ≅ Over.mk f.hom)) ∧ (∀ (i : I) (Z W : AlgebraicSpace S) (f : Z ⟶ D.obj (op i)) (g : W ⟶ D.obj (op i)), MapIsLocallyOfFinitePresentation f → MapIsQuasiCompact f.hom.hom → MapIsQuasiCompact (pullback.diagonal f.hom.hom) → MapIsLocallyOfFinitePresentation g → MapIsQuasiCompact g.hom.hom → MapIsQuasiCompact (pullback.diagonal g.hom.hom) → ∀ α : (Over.pullback (c.π.app (op i)).hom).obj (Over.mk f.hom) ⟶ (Over.pullback (c.π.app (op i)).hom).obj (Over.mk g.hom), ∃ (j : I) (h : i ≤ j) (β : (Over.pullback (D.map (homOfLE h).op).hom).obj (Over.mk f.hom) ⟶ (Over.pullback (D.map (homOfLE h).op).hom).obj (Over.mk g.hom)), α = (spaceLimitPullbackIso _ _ _ (congrArg (fun k ↦ k.hom) (c.w (homOfLE h).op))).hom.app (Over.mk f.hom) ≫ (Over.pullback (c.π.app (op j)).hom).map β ≫ (spaceLimitPullbackIso _ _ _ (congrArg (fun k ↦ k.hom) (c.w (homOfLE h).op))).inv.app (Over.mk g.hom)) ∧ (∀ (i : I) (Z W : AlgebraicSpace S) (f : Z ⟶ D.obj (op i)) (g : W ⟶ D.obj (op i)), MapIsLocallyOfFinitePresentation f → MapIsQuasiCompact f.hom.hom → MapIsQuasiCompact (pullback.diagonal f.hom.hom) → MapIsLocallyOfFinitePresentation g → MapIsQuasiCompact g.hom.hom → MapIsQuasiCompact (pullback.diagonal g.hom.hom) → ∀ α β : Over.mk f.hom ⟶ Over.mk g.hom, (Over.pullback (c.π.app (op i)).hom).map α = (Over.pullback (c.π.app (op i)).hom).map β → ∃ (j : I) (h : i ≤ j), (Over.pullback (D.map (homOfLE h).op).hom).map α = (Over.pullback (D.map (homOfLE h).op).hom).map β)",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The theorem is the conjunction of object descent, morphism descent with the canonical iterated-pullback comparison, and eventual equality. Finite presentation is expanded into the three existing predicates. Absolute quasi-separatedness uses the equivalent affine-pair criterion of spaces-properties.tex, lemma-characterize-quasi-separated, as in IntegralSpaceFinitePresentationLimit. The helper is only Mathlib pullbackComp transported along the cone equation. Added the already-landed affineness definition node to statement dependencies."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd224cde7",
+  "group": "NR",
+  "result": "pass",
+  "note": "Read node, Stacks 07SK source, module, report, and all stmt_dep declarations (MapIsQuasiCompact, MapIsLocallyOfFinitePresentation via MapIsLocally, MapIsAffine, Point topology, AlgebraicSpace). Hypotheses match: I : Type u nonempty directed preorder; qc via CompactSpace Point; absolute qs via the affine-pair criterion (lemma-characterize-quasi-separated, same as landed IntegralSpaceFinitePresentationLimit); affine transitions; a limit cone in AlgebraicSpace S. Finite presentation = LFP + qc + qc diagonal throughout. Object clause: Nonempty B-iso of the actual pullback; morphism clause pinned by the canonical comparison eqToIso(c.w) followed by Mathlib Over.pullbackComp; equality clause at a common stage. No stronger assumptions. Records: statement field matches the signature; only added stmt_dep def-sfb-space-affine-quasifinite-properties is landed on base and used; helper is real data, only sorry, docstrings present, no duplicate found. Advisory only: proof-only plain imports. No compile (no file changed)."
+ }
+}

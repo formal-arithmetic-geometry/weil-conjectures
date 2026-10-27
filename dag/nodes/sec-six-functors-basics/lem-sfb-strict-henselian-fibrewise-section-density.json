@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-strict-henselian-fibrewise-section-density",
+ "kind": "statement",
+ "title": "Geometric fibre density of strict-henselian sections",
+ "statement": "Let $R$ be a Noetherian strictly henselian local ring [def-weil-pbc-noetherian-ring, def-weil-pbc-henselian-terminology]. Let $f:X\\to\\operatorname{Spec}R$ be a smooth separated morphism of finite presentation of schemes [def-pc-scheme, def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], equipped with a section $e:\\operatorname{Spec}R\\to X$. Separated means that the diagonal is a closed immersion. Assume that every residue-field fibre of $f$ is geometrically irreducible [def-pc-geometrically-irreducible, def-weil-residue-field]. For every prime $\\mathfrak q\\subset R$, every algebraically closed extension field $\\Omega$ of $\\kappa(\\mathfrak q)$ [def-weil-algebraic-closure], and every nonempty open subset $W\\subset X_\\Omega=X\\times_R\\operatorname{Spec}\\Omega$ [def-pc-fibre-product], there is an $R$-section $a:\\operatorname{Spec}R\\to X$ whose induced $\\Omega$-point lies in $W$. Equivalently, the values in $X_\\Omega(\\Omega)$ of all $R$-sections are Zariski dense in every geometric fibre. No group structure on $X$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Agent-formulated section-density input, motivated by Slicing smooth morphisms (Tag 055U, lemma-etale-nbhd-dominates-smooth) and henselian lifting. That Stacks lemma is not itself the density assertion; the present unsplit node includes the additional density assertion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-geometrically-irreducible",
+  "def-weil-residue-field",
+  "def-pc-fibre-product",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}R$, let $s$ be its closed point and $k=R/\\mathfrak m$. By the smooth normal-form node choose an affine open $U\\subseteq X$ containing $e(s)$ and an etale $S$-map $\\pi:U\\to\\mathbf A^d_S$. The base neighbourhood in that node is all of $S$: an open containing the closed point of a local spectrum contains every prime. The same observation applied to $e^{-1}(U)$ gives $e:S\\to U$. Write $\\alpha=\\pi e\\in R^d$. For the given $\\mathfrak q,\\Omega$, the open $U_\\Omega\\subseteq X_\\Omega$ contains $e_\\Omega$ and is nonempty. Geometric irreducibility makes $X_\\Omega$ irreducible, so $V=U_\\Omega\\cap W$ is a nonempty open of the irreducible affine scheme $U_\\Omega$.",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "def-sbc-affine-space",
+    "def-pc-geometrically-irreducible",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent-written section-density argument using Tag 054L (lemma-smooth-etale-over-affine-space), Tag 03J2 (lemma-image-nowhere-dense-quasi-finite), and strict-henselian etale lifting as in etale-cohomology.tex Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)."
+   }
+  },
+  {
+   "text": "The affine base-change lemma makes $\\pi_\\Omega:U_\\Omega\\to\\mathbf A^d_\\Omega$ etale. Its affine ring map is finite type and quasi-finite at every prime by the etale ring-map lemma; the ring-map definition says that every point of every fibre is isolated, and the scheme definition therefore makes $\\pi_\\Omega$ quasi-finite as a scheme morphism. The closed set $Z=U_\\Omega\\setminus V$ is nowhere dense: in an irreducible space every nonempty open meets $V$. Apply the quasi-finite nowhere-dense-image node to $Z$. Thus $O=\\mathbf A^d_\\Omega\\setminus\\overline{\\pi_\\Omega(Z)}$ is nonempty open. Choose a nonempty principal open $D(P)\\subseteq O$, with $0\\ne P\\in\\Omega[t_1,\\ldots,t_d]$. Principal opens form the defining basis of the affine spectrum. Consequently every point of $U_\\Omega$ whose coordinate vector evaluates $P$ nontrivially lies in $V$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "pqf-def-quasifinite",
+    "lem-sfb-quasifinite-closed-nowhere-dense-image",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent-written section-density argument using Tag 054L (lemma-smooth-etale-over-affine-space), Tag 03J2 (lemma-image-nowhere-dense-quasi-finite), and strict-henselian etale lifting as in etale-cohomology.tex Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)."
+   }
+  },
+  {
+   "text": "We will use the elementary polynomial test: if $D_1,\\ldots,D_d$ are infinite subsets of a field $L$, no nonzero polynomial in $L[t_1,\\ldots,t_d]$ vanishes on their product. Induct on $d$: choose the first $d-1$ coordinates where a nonzero coefficient in the last variable does not vanish, then avoid the finitely many roots of that nonzero one-variable polynomial in $D_d$. For $d=0$ a nonzero constant already has nonzero value. The field $k$ is infinite. Indeed it is separably closed by strict henselianity; if it had cardinality $N$, the polynomial $T^N-T-1$ would have derivative $-1$ and no root in $k$, contrary to separable closedness.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent-written section-density argument using Tag 054L (lemma-smooth-etale-over-affine-space), Tag 03J2 (lemma-image-nowhere-dense-quasi-finite), and strict-henselian etale lifting as in etale-cohomology.tex Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)."
+   }
+  },
+  {
+   "text": "First suppose $\\mathfrak q\\ne\\mathfrak m$. Choose $t\\in\\mathfrak m\\setminus\\mathfrak q$. The domain $R/\\mathfrak q$ is infinite, since it surjects onto the infinite field $k$. Multiplication by the nonzero image of $t$ is injective, so the image of $\\mathfrak m$ in $\\kappa(\\mathfrak q)\\subseteq\\Omega$ is infinite. For each coordinate, the image $D_i$ of $\\alpha_i+\\mathfrak m$ in $\\Omega$ is therefore infinite. The polynomial test supplies $r_i\\in\\alpha_i+\\mathfrak m$ such that $P(r_1,\\ldots,r_d)\\ne0$ after mapping to $\\Omega$. Form $E=U\\times_{\\mathbf A^d_S,r}S$. The affine base-change lemma makes $E\\to S$ etale. Its closed fibre is nonempty, because $r\\bmod\\mathfrak m=\\alpha\\bmod\\mathfrak m$ and $e(s)$ lies above that vector. The strict-henselian etale-neighbourhood section node gives a section $S\\to E$. Its composite $a:S\\to U\\to X$ is an $R$-section with $\\pi a=r$. Its $\\Omega$-value evaluates $P$ nontrivially, so Step 2 places it in $V\\subseteq W$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-sbc-strict-henselian-etale-neighbourhood-section",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent-written section-density argument using Tag 054L (lemma-smooth-etale-over-affine-space), Tag 03J2 (lemma-image-nowhere-dense-quasi-finite), and strict-henselian etale lifting as in etale-cohomology.tex Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)."
+   }
+  },
+  {
+   "text": "Now suppose $\\mathfrak q=\\mathfrak m$, so $\\Omega$ extends $k$. The affine base-change lemma makes $\\pi_k:U_k\\to\\mathbf A^d_k$ etale, and its image $J$ is a nonempty open by the etale open-map lemma (it contains $\\pi(e(s))$). Choose $0\\ne h\\in k[t_1,\\ldots,t_d]$ with nonempty $D(h)\\subseteq J$. The polynomial $P h_\\Omega$ is nonzero. Apply the polynomial test with every $D_i$ the infinite subfield $k\\subseteq\\Omega$ to obtain $b\\in k^d$ with $P(b)h(b)\\ne0$. Lift its coordinates to $r\\in R^d$. Since $b\\in J$, the closed fibre of $E=U\\times_{\\mathbf A^d_S,r}S$ is nonempty. As before, affine etale base change and the strict-henselian section node produce a section $S\\to E$, hence an $R$-section $a$ of $X$ with $\\pi a=r$. Its $\\Omega$-value has coordinates $b$, and $P(b)\\ne0$ puts it in $V\\subseteq W$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-sbc-strict-henselian-etale-neighbourhood-section",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent-written section-density argument using Tag 054L (lemma-smooth-etale-over-affine-space), Tag 03J2 (lemma-image-nowhere-dense-quasi-finite), and strict-henselian etale lifting as in etale-cohomology.tex Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)."
+   }
+  },
+  {
+   "text": "Every prime of the local ring is contained in $\\mathfrak m$, so Steps 4 and 5 cover all primes. They show that the values of $R$-sections meet every nonempty open of each $X_\\Omega$, which is exactly Zariski density. The argument uses only the given section and smooth charts, and imposes no group structure.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Agent-written section-density argument using Tag 054L (lemma-smooth-etale-over-affine-space), Tag 03J2 (lemma-image-nowhere-dense-quasi-finite), and strict-henselian etale lifting as in etale-cohomology.tex Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sbc-thm-etale-local-normal-form",
+  "def-sbc-affine-space",
+  "def-pc-geometrically-irreducible",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "pqf-def-quasifinite",
+  "lem-sfb-quasifinite-closed-nowhere-dense-image",
+  "def-weil-affine-spectrum",
+  "lem-sbc-strict-henselian-etale-neighbourhood-section",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-morphism-open-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Agent-written section-density argument using Tag 054L (lemma-smooth-etale-over-affine-space), Tag 03J2 (lemma-image-nowhere-dense-quasi-finite), and strict-henselian etale lifting as in etale-cohomology.tex Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "henselian.*dense|dense.*henselian|dense.*section|section.*dense",
+   "results": "{\"t\": \"2026-10-23T23:19:25Z\", \"tool\": \"grep\", \"query\": \"henselian.*dense|dense.*henselian|dense.*section|section.*dense\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Birational/Birational.lean\"], \"digest\": \"0b1a0ef32b4570bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; dense rational-map domains, dominant morphisms, smooth charts, and definitions of henselian rings do not prove density of values of global sections in geometric fibres."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of a smooth scheme over a strictly henselian local ring are dense in each geometrically irreducible fibre",
+   "results": "{\"t\": \"2026-10-23T23:19:25Z\", \"tool\": \"leansearch\", \"query\": \"Sections of a smooth scheme over a strictly henselian local ring are dense in each geometrically irreducible fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.mk\"], \"digest\": \"f21d2eee65dce45d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; dense rational-map domains, dominant morphisms, smooth charts, and definitions of henselian rings do not prove density of values of global sections in geometric fibres."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsHenselianLocalRing\", \"Dense\"",
+   "results": "{\"t\": \"2026-10-23T23:19:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsHenselianLocalRing\\\", \\\"Dense\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; dense rational-map domains, dominant morphisms, smooth charts, and definitions of henselian rings do not prove density of values of global sections in geometric fibres."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsHenselianLocalRing\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-23T23:19:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsHenselianLocalRing\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; dense rational-map domains, dominant morphisms, smooth charts, and definitions of henselian rings do not prove density of values of global sections in geometric fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth scheme with geometrically irreducible fibres over a strictly henselian local ring and a section has global sections whose values are Zariski dense in every geometric fibre",
+   "results": "{\"t\": \"2026-10-23T23:19:26Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth scheme with geometrically irreducible fibres over a strictly henselian local ring and a section has global sections whose values are Zariski dense in every geometric fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.IsDominant.denseRange\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.isDominant_iff\", \"AlgebraicGeometry.dominant_eq_topologically\"], \"digest\": \"5026600928c167fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; dense rational-map domains, dominant morphisms, smooth charts, and definitions of henselian rings do not prove density of values of global sections in geometric fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a strictly henselian local ring reductions of rational sections of a smooth connected group are geometrically dense at every prime",
+   "results": "{\"t\": \"2026-10-23T23:19:27Z\", \"tool\": \"leanfinder\", \"query\": \"Over a strictly henselian local ring reductions of rational sections of a smooth connected group are geometrically dense at every prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"HenselianLocalRing\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"HenselianLocalRing.TFAE\", \"Algebra.smoothLocus\", \"Field.henselian\", \"AlgebraicGeometry.IsDominant.denseRange\", \"Algebra.IsSmoothAt\"], \"digest\": \"d9aa7c92d4aa0c9a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; dense rational-map domains, dominant morphisms, smooth charts, and definitions of henselian rings do not prove density of values of global sections in geometric fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a smooth scheme over a strictly henselian local ring are Zariski dense in each geometrically irreducible geometric fibre",
+   "results": "{\"t\": \"2026-10-24T00:06:13Z\", \"tool\": \"leanfinder\", \"query\": \"Sections of a smooth scheme over a strictly henselian local ring are Zariski dense in each geometrically irreducible geometric fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.IsDominant.denseRange\", \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.dominant_eq_topologically\", \"AlgebraicGeometry.isDominant_iff\"], \"digest\": \"f543180d201400a5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: denseRange of dominant morphisms and rational-map domains do not give density of global sections in geometric fibres; smooth structure and integral scheme instances do not state the assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth scheme with geometrically irreducible fibres over a henselian local ring with infinite separably closed residue field has dense integral points in every geometric fibre",
+   "results": "{\"t\": \"2026-10-24T00:06:13Z\", \"tool\": \"leansearch\", \"query\": \"A smooth scheme with geometrically irreducible fibres over a henselian local ring with infinite separably closed residue field has dense integral points in every geometric fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\"], \"digest\": \"a22c2a674118de21\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: denseRange of dominant morphisms and rational-map domains do not give density of global sections in geometric fibres; smooth structure and integral scheme instances do not state the assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*dense|dense.*henselian|dense.*section|section.*dense",
+   "results": "{\"t\": \"2026-10-24T00:08:42Z\", \"tool\": \"grep\", \"query\": \"henselian.*dense|dense.*henselian|dense.*section|section.*dense\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Birational/Birational.lean\"], \"digest\": \"0b1a0ef32b4570bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: denseRange of dominant morphisms and rational-map domains do not give density of global sections in geometric fibres; smooth structure and integral scheme instances do not state the assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"Dense\"",
+   "results": "{\"t\": \"2026-10-24T00:10:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"HenselianLocalRing\\\", \\\"Dense\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: denseRange of dominant morphisms and rational-map domains do not give density of global sections in geometric fibres; smooth structure and integral scheme instances do not state the assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cubical-fibrewise-ample-criterion",
+  "date": "2026-10-24",
+  "group": "Q06"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Relative ampleness of the inversion norm of a supplied line. Q15 support: Fibrewise ampleness criterion for cubical lines on semiabelian schemes. Q06 supporting input: Geometric fibre density of strict-henselian sections.",
+   "via": [
+    "lem-sfb-cubical-fibrewise-ample-criterion",
+    "lem-sfb-semiabelian-supplied-norm-ampleness",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-strict-henselian-fibrewise-section-density",
+  "worker": "stage1",
+  "summary": "Proved the unchanged density statement by an affine etale chart around the given section, quasi-finite avoidance of a closed nowhere dense complement, polynomial-grid avoidance, and strict-henselian etale lifting. Treated closed and nonclosed fibres separately; created one statement-only Stacks 03J2 input. Searched live Lean, the whole DAG, current blueprint and Mathlib; checked every cited statement and edge cases.",
+  "blueprint": "The inherited ancestry has from.node=null (blueprint_refs.py ancestor prints None). This split supplies the strict-henselian fibrewise-section-density prerequisite recorded at the end of the inherited from.place, below the cubical fibrewise-ampleness input to det-thm-sf-ctf-stability-direct-images proof (3). The chapter/unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "Generic smooth-morphism chart theorem, giving affine etale coordinates around the supplied section; this unit contains no replacement for the chart construction."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "why": "Generic etale algebra theorem, converting the affine chart into a quasi-finite map; no group or six-functor argument is substituted."
+   },
+   {
+    "node": "lem-sbc-strict-henselian-etale-neighbourhood-section",
+    "why": "Generic etale section theorem over a strictly henselian local ring, used after coordinate specialization; this unit has no henselian lifting theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-thm-etale-local-normal-form",
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "lem-sbc-strict-henselian-etale-neighbourhood-section"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NO-4814f2146",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-4814f2146 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, and each cited statement. The item is still unsplit with no proof on live and side-live, and its statement and stmt_deps are identical to the delivery, so nothing is weakened. There is no repair note, so this is a first split, not a re-split. Steps: (1) The 054L chart: any open of Spec R containing the closed point is all of Spec R, so the base neighbourhood is S and e factors through U. Geometric irreducibility of X_{κ(q)} with k'=Ω makes U_Ω irreducible and V=U_Ω∩W nonempty. (2) 00U2 base change gives an étale Ω[t]→A⊗Ω. 00U5 gives finite type and isolated fibre points, which is pqf-def-quasifinite (3). Z=U_Ω∖V is nowhere dense, so the new 03J2 node makes π_Ω(Z) nowhere dense, giving D(P) disjoint from its closure. The step uses only the closure, never closedness of the image. (3) Elementary: a polynomial vanishing on a product of infinite sets is zero, and k is infinite because T^N−T−1 is separable with no root. (4) q≠m: pick t∈m∖q; t·(R/q) shows the image of m in Ω is infinite, so r≡α mod m with P(r)≠0 exists. E=U×_{A^d,r}S is étale and has a point over s from e(s). The strict-henselian section gives a with πa=r, so a_Ω∈V⊆W. (5) q=m: the étale open map gives J, then D(h)⊆J and b∈k^d with P(b)h(b)≠0, and the same lifting applies. (6) The two cases cover every prime, which gives density. Small cases: a separably closed field with A^1, and a strictly henselian DVR with G_m. New node: it is exactly Stacks morphisms.tex 03J2 lemma-image-nowhere-dense-quasi-finite, which is true and is a real lemma (ZMT reduction to 03HX). It is self-contained, statement-only, and has four search kinds recorded. It is not a duplicate: 03HX needs a finite morphism and the section-cover node is special. It is not a clause of the item. Accepted tool uses: sbc-thm-etale-local-normal-form, lem-weil-pbc-etale-ring-map-quasi-finite, lem-sbc-strict-henselian-etale-neighbourhood-section. No SGA; proof_deps equals the union of uses; from.node=null is inherited. Minor: the item's source.place still says 'unsplit', harmless."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselianFibrewiseSectionDensity",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselian_fibrewiseSection_dense",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselianFibrewiseSectionDensity.lean",
+  "statement": "theorem AlgebraicGeometry.Scheme.strictHenselian_fibrewiseSection_dense (R : Type u) [CommRing R] [IsNoetherianRing R] [IsStrictlyHenselianLocalRing R] {X : Scheme.{u}} (f : X ⟶ Spec (.of R)) [Smooth f] [QuasiCompact f] [IsSeparated f] [GeometricallyIrreducible f] (e : Spec (.of R) ⟶ X) (he : e ≫ f = 𝟙 _) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of R)) (W : Set ↥(pullback f t)) (hW : IsOpen W) (hWne : W.Nonempty) : ∃ (a : Spec (.of R) ⟶ X), a ≫ f = 𝟙 _ ∧ ∃ b : Spec (.of Ω) ⟶ pullback f t, b ≫ pullback.fst f t = t ≫ a ∧ b ≫ pullback.snd f t = 𝟙 _ ∧ b default ∈ W",
+  "branch": "sheaf-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e35ff229e",
+  "group": "N6",
+  "result": "pass",
+  "note": "Node copy differs from side-live only in lean; lean.statement verbatim in file. Clause-by-clause: IsNoetherianRing, IsStrictlyHenselianLocalRing (dep record), Smooth+QuasiCompact+IsSeparated = smooth separated finite presentation, section e/he, GeometricallyIrreducible f ⇔ all residue-field fibres geometrically irreducible (Mathlib iff_geometricallyIrreducible_fiber), arbitrary t : Spec Ω ⟶ Spec R with IsAlgClosed Ω ⇔ (q, κ(q)→Ω) via SpecToEquivOfField, nonempty open W ⊆ pullback f t; conclusion has R-section a and b pinned by both pullback projection equations (the induced Ω-point) with b default ∈ W. No extra hypotheses; same-universe Ω is Mathlib convention (as Q27). Edge cases (sep. closed field, DVR, nonreduced Artinian, dim 0, char p, transcendental Ω, empty W/X) fine. No new defs, sorry only, docstrings carry source place, blueprint id and all 6 proof steps; no duplicate (denseRange_fieldPoints is over a field base). Not recompiled per instructions; report shows clean scompile and deliver2 dry-run OK. Notes: second reading by the same worker; source.place still says 'unsplit' (harmless)."
+ }
+}

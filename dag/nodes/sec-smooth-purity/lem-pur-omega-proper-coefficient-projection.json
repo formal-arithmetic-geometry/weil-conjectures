@@ -1,0 +1,107 @@
+{
+ "id": "lem-pur-omega-proper-coefficient-projection",
+ "kind": "lemma",
+ "title": "Proper direct image and finite-valued algebraic-closure scalar extension",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "statement": "Let $\\ell$ be prime, let $E/\\mathbf Q_\\ell$ be a finite normed coefficient field, and let $a:E\\hookrightarrow\\overline{\\mathbf Q}_\\ell$ be a coefficient embedding [def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be a proper morphism of topologically noetherian schemes [def-weil-pbc-scheme-conventions], and let $K$ be a bounded constructible complex of $E_X^c$-modules [def-weil-pbc-condensed-e-module-category]. Use the finite-subfield-valued closure coefficient, the coefficient map $\\omega_a$, and its scalar extension $T_a$ from [lem-pur-compact-support-condensed-realization-setup]. The specified counit transpose $T_a^Y Rg_{*,E}K\\longrightarrow Rg_{*,\\Omega}(T_a^X K)$, namely $\\operatorname{condensedPushScalar}(\\omega_a,g)_K$ of [def-pur-condensed-compact-support-projection], is an isomorphism.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-pur-condensed-compact-support-projection",
+  "lem-pur-compact-support-condensed-realization-setup"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "6.8.14(1)--(2), 6.8.15; proper factor of the agent-formulated compact-support realization proof Step 13"
+ },
+ "proof": [
+  {
+   "text": "Apply the homology-level comparison theorem in every integer degree. Mathlib's DerivedCategory.isIso_iff then detects that the displayed proper coefficient comparison is an isomorphism.",
+   "uses": [
+    "lem-pur-omega-proper-coefficient-projection-homology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-omega-proper-coefficient-projection-homology"
+ ],
+ "proof_origin": {
+  "by": "agent V4",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "6.8.14(1)--(2), 6.8.15; reduction through homology"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportCondensedRealization",
+  "date": "2026-10-27",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-pur-compact-support-condensed-realization, proof Step 13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper derived pushforward commutes with extension from a finite p-adic coefficient field to its algebraic closure on bounded constructible complexes",
+   "results": "8 hits, including Condensed.profiniteSolid and underived SheafOfModules.pushforwardComp; no closure coefficient projection theorem.",
+   "date": "2026-10-27",
+   "verdict": "No match: these statements supply neither the specified derived coefficient mate nor its bounded-below filtered continuity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "12 hits: Adjunction.toEquivalence and its components, fullyFaithfulLOfIsIsoUnit, fullyFaithfulROfIsIsoCounit, and unit/counit instances for equivalences.",
+   "date": "2026-10-27",
+   "verdict": "No match: none concerns the proper coefficient mate, finite-valued algebraic closure, or bounded-below geometric continuity."
+  },
+  {
+   "tool": "grep",
+   "query": "condensedPushScalar|padicAlgCl.*[Pp]ush|[Pp]ush.*padicAlgCl",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib statement for this coefficient projection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a proper morphism of schemes, the canonical coefficient projection from a finite p-adic field to its finite-valued algebraic closure is invertible on bounded constructible complexes",
+   "results": "8 hits including finite morphisms are proper, the p-adic algebraic-closure embedding, and constructibility of a preimage.",
+   "date": "2026-10-27",
+   "verdict": "No derived coefficient projection or continuity statement among these hits."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OmegaProperCoefficientProjection",
+  "file": "lean/Sheaf/Paper/OmegaProperCoefficientProjection.lean",
+  "declaration": "WeilConjectures.CompactSupportCondensedRealization.omegaProperCoefficientProjection_isIso",
+  "statement": "theorem omegaProperCoefficientProjection_isIso (l : ℕ) [Fact l.Prime]\n    (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] (a : E →ₐ[ℚ_[l]] PadicAlgCl l)\n    {X Y : Scheme.{u}} [TopologicalSpace.NoetherianSpace X]\n    [TopologicalSpace.NoetherianSpace Y] (g : X ⟶ Y) [IsProper g]\n    (K : CondensedERealization.Constructible E X) :\n    IsIso ((condensedPushScalar (omegaMap l E a) g).app K.obj)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T112345-L-1575430",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261027T123549-L-2320553",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

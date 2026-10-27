@@ -1,0 +1,218 @@
+{
+ "id": "lem-sf-fixed-pair-free-integer-adjunction",
+ "kind": "statement",
+ "title": "Integer-orbit free pairs and the explicit adjunction",
+ "statement": "Fix a universe $\\mathcal V$. Let $\\mathcal A$ be a category with $\\mathcal V$-small morphism sets and $\\mathbf Z$-indexed coproducts, and let $T:\\mathcal A\\to\\mathcal A$ be an autoequivalence with a chosen quasi-inverse. Write $P_n=T^n$ for integer powers, $P_0=\\mathrm{id}$, and $c_{n,M}:T(P_nM)\\xrightarrow{\\sim}P_{n+1}M$ for the identity or quasi-inverse counit identifications. Let $\\mathcal A^T$ and $U$ denote the fixed-pair category and forgetting [def-weil-endofunctor-fixed-pair-category]. There is a functor $A:\\mathcal A\\to\\mathcal A^T$ with carrier $UA(M)=\\bigoplus_{n\\in\\mathbf Z}P_nM$, carrier map $UA(f)=\\bigoplus_nP_n(f)$, and structure isomorphism $\\sigma_M:T(UA(M))\\xrightarrow{\\sim}UA(M)$ characterized, for the coprojections $\\iota_{n,M}$, by $\\sigma_M\\circ T(\\iota_{n,M})=\\iota_{n+1,M}\\circ c_{n,M}$. The functor $A$ is left adjoint to $U$. The adjunction bijection is restriction to the zeroth summand:\n$$\\operatorname{Hom}_{\\mathcal A^T}(A(M),(X,\\theta))\\xrightarrow{\\sim}\\operatorname{Hom}_{\\mathcal A}(M,X),\\qquad a\\longmapsto Ua\\circ\\iota_{0,M}.$$\nFor each $a_0:M\\to X$ there is a unique family $a_n:P_nM\\to X$, indexed by all integers and having prescribed zeroth member $a_0$, with $a_{n+1}\\circ c_{n,M}=\\theta\\circ T(a_n)$. The inverse bijection has carrier $\\coprod_na_n$. These bijections are natural in both variables. If $\\mathcal A$ is preadditive with biproducts and $T$ is additive, $A$ is additive for the inherited addition on morphisms of fixed pairs.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/Endofunctor/IsoAlgebra.lean",
+  "place": "Free.obj, objSucc, str, map, functor and adjunction, namespace Free, lines 120-360 (posObj/negObj/obj, objSucc, posHom/negHom, str, map, functor at 335, adjunction at 345); returned item steps 3-4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "stmt_deps": [
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-pbc-category-colimit",
+  "def-weil-preadditive-category",
+  "def-weil-pbc-additive-functor"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the existing Free.functor, Free.objMap and Free.str constructions in the source library. The carrier and carrier-map identities are definitional. Free.map_ι_comp_str gives the displayed shift equation. These are the fixed-pair and coproduct constructions [def-weil-endofunctor-fixed-pair-category, def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For uniqueness of the structure isomorphism, apply Iso.ext and Free.map_hom_ext. The latter is coproduct extensionality after applying the coproduct-preserving equivalence [lem-galois-equivalence-preserves-limits]. The two composites with each F(ι_n) coincide by the assumed equation and Free.map_ι_comp_str.",
+   "uses": [
+    "lem-galois-equivalence-preserves-limits",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove local family extensionality: if a and b obey the recurrence, then a_m=b_m if and only if a_(m+1)=b_(m+1). Forward, cancel the epimorphism c_m and use the two recurrence equations. Backward, cancel the monomorphism θ and use faithfulness of F [lem-sf-quasi-inverse-hom-bijection]. Integer induction starting at zero proves equality at every index, including the negative-to-zero crossing. Take Free.hom K a0 as the family; Free.hom_zero and Free.map_hom_comp_str give its properties, and local family extensionality gives uniqueness.",
+   "uses": [
+    "lem-sf-quasi-inverse-hom-bijection"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the existing Free.adjunction F, constructed by Adjunction.mkOfHomEquiv [lem-weil-pbc-adjunction-of-natural-bijection]. The mkOfHomEquiv_homEquiv equation exposes its hom equivalence: restriction to the zeroth summand, with inverse Free.desc. The carrier of Free.desc is Sigma.desc (Free.hom K a0). Local family extensionality identifies Free.hom K a0 with every family satisfying the prescribed zeroth member and recurrence, yielding the required inverse formula. Apply homEquiv_naturality_left and homEquiv_naturality_right for the two naturality clauses.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-weil-endofunctor-fixed-pair-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Under the additive hypotheses [def-weil-preadditive-category, def-weil-pbc-additive-functor], use the inherited preadditive structure on fixed pairs. To show Free.functor.map(f+g)=Free.functor.map(f)+Free.functor.map(g), apply Free.hom_ext, so only restrictions to the zeroth summand remain. On this summand objMap is the original morphism, and Sigma.ι_map together with bilinearity gives the equality. This is exactly Functor.Additive; separate proofs of additivity for the quasi-inverse and all nonzero iterates are unnecessary.",
+   "uses": [
+    "def-weil-preadditive-category",
+    "def-weil-pbc-additive-functor",
+    "def-weil-endofunctor-fixed-pair-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-galois-equivalence-preserves-limits",
+  "def-weil-endofunctor-fixed-pair-category",
+  "lem-sf-quasi-inverse-hom-bijection",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-weil-preadditive-category",
+  "def-weil-pbc-additive-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/Endofunctor/IsoAlgebra.lean",
+  "place": "Existing Free constructions and lemmas, lines 122-356; family extensionality by integer induction as in Free.hom_ext. Additivity by zeroth-summand extensionality, as in lean/Sheaf/CategoryTheory/EquivalenceOrbitInduction.lean:182-187. Formalized by J1, 2026-10-24."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The free fixed pair of an autoequivalence is the coproduct of all positive and negative integer iterates and is left adjoint to forgetting",
+   "results": "CategoryTheory.ReflQuiv.adj; CategoryTheory.Quiv.adj; CategoryTheory.Grpd.freeForgetAdjunction; MonCat.adj; pointedToTwoPFstForgetCompBipointedToPointedFstAdjunction; pointedToTwoPSndForgetCompBipointedToPointedSndAdjunction; CategoryTheory.Cat.typeToCatObjectsAdj; CategoryTheory.Grpd.freeForgetAdjunction_counit_app",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from the sum of all integer translates are determined by the zeroth summand using an invertible structure map",
+   "results": "CochainComplex.HomComplex.Cochain.toSingleEquiv; CochainComplex.HomComplex.Cochain.fromSingleEquiv; CochainComplex.HomComplex.Cochain.toSingleEquiv_toSingleMk; CochainComplex.HomComplex.Cochain.fromSingleEquiv_fromSingleMk; CochainComplex.HomComplex.Cochain.toSingleMk_v; ChainComplex.fromSingle₀Equiv; CochainComplex.fromSingle₀Equiv_apply_coe; CochainComplex.toSingle₀Equiv",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Endofunctor\", \"Free\"",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|objSucc|negHom|Free.adjunction",
+   "results": "Mathlib/NumberTheory/Height/MvPolynomial.lean; Mathlib/NumberTheory/Height/MvPolynomial.lean; Mathlib/NumberTheory/Height/MvPolynomial.lean; Mathlib/NumberTheory/Height/MvPolynomial.lean; Mathlib/NumberTheory/Height/MvPolynomial.lean; Mathlib/NumberTheory/Height/Basic.lean; Mathlib/NumberTheory/Height/Basic.lean; Mathlib/NumberTheory/Height/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The free fixed pair of an autoequivalence is the coproduct of all positive and negative integer iterates and is left adjoint to forgetting",
+   "results": "MonCat.adj; AddMonCat.adj; AddCommGrpCat.adj; CategoryTheory.Monad.adj; GrpCat.adj; PresheafOfModules.freeAdjunction; AddCommMonCat.adj; AlgCat.adj",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state all hypotheses and conclusions of this node; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|objSucc|negHom|Free.adjunction",
+   "results": "{\"t\": \"2026-10-22T09:40:27Z\", \"tool\": \"grep\", \"query\": \"IsoAlgebra|objSucc|negHom|Free.adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Bernoulli.lean\", \"Mathlib/NumberTheory/Bernoulli.lean\", \"Mathlib/NumberTheory/Bernoulli.lean\", \"Mathlib/NumberTheory/Bernoulli.lean\", \"Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean\", \"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\", \"Mathlib/NumberTheory/Height/MvPolynomial.lean\", \"Mathlib/NumberTheory/Height/MvPolynomial.lean\"], \"digest\": \"c41f40a07634d36c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: free monoids, free linear categories and transfinite successor objects do not give this integer-orbit fixed-pair adjunction with its additive clause"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The free fixed pair of an autoequivalence is the coproduct of all integer iterates left adjoint to forgetting and is additive",
+   "results": "{\"t\": \"2026-10-22T09:40:27Z\", \"tool\": \"leansearch\", \"query\": \"The free fixed pair of an autoequivalence is the coproduct of all integer iterates left adjoint to forgetting and is additive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonCat.adj\", \"AddMonCat.adj\", \"AddCommMonCat.adj\", \"AddCommGrpCat.adj\", \"CategoryTheory.Monad.adj\", \"CategoryTheory.Quiv.adj\", \"AlgCat.adj\", \"CommRingCat.adj\"], \"digest\": \"a0106f54515d8c7c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: free monoids, free linear categories and transfinite successor objects do not give this integer-orbit fixed-pair adjunction with its additive clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsoAlgebra\", \"Free\"",
+   "results": "{\"t\": \"2026-10-22T09:40:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsoAlgebra\\\", \\\"Free\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: free monoids, free linear categories and transfinite successor objects do not give this integer-orbit fixed-pair adjunction with its additive clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The free fixed pair of an autoequivalence is the coproduct of all integer iterates left adjoint to forgetting and is additive",
+   "results": "{\"t\": \"2026-10-22T09:40:29Z\", \"tool\": \"leanfinder\", \"query\": \"The free fixed pair of an autoequivalence is the coproduct of all integer iterates left adjoint to forgetting and is additive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddCommMonCat.adj\", \"AddMonCat.adj\", \"CategoryTheory.ReflQuiv.adj\", \"AddCommMonCat.instIsLeftAdjointFree\", \"CategoryTheory.Idempotents.KaroubiKaroubi.equivalence.additive_functor\", \"CategoryTheory.Free.lift_additive\", \"CategoryTheory.Quiv.adj\", \"Condensed.setAbAdjunction\"], \"digest\": \"bdae0a75feb6eebb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: free monoids, free linear categories and transfinite successor objects do not give this integer-orbit fixed-pair adjunction with its additive clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free object with an invertible map from an endofunctor and morphisms determined by the zeroth summand of integer powers",
+   "results": "{\"t\": \"2026-10-22T09:40:30Z\", \"tool\": \"leanfinder\", \"query\": \"Free object with an invertible map from an endofunctor and morphisms determined by the zeroth summand of integer powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Free\", \"CategoryTheory.Free.of\", \"CategoryTheory.Free.embedding\", \"CategoryTheory.Free.liftUnique\", \"CategoryTheory.categoryFree\", \"CategoryTheory.Free.lift\", \"CategoryTheory.Free.ext\", \"CategoryTheory.Free.lift_obj\"], \"digest\": \"b39530688ba94e5b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: free monoids, free linear categories and transfinite successor objects do not give this integer-orbit fixed-pair adjunction with its additive clause"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|objSucc|negHom|Free.adjunction",
+   "results": "{\"t\": \"2026-10-22T09:40:49Z\", \"tool\": \"grep\", \"query\": \"IsoAlgebra|objSucc|negHom|Free.adjunction\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/SmallObject/TransfiniteIteration.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteIteration.lean\", \"Mathlib/CategoryTheory/SmallObject/Iteration/ExtendToSucc.lean\", \"Mathlib/CategoryTheory/SmallObject/Iteration/ExtendToSucc.lean\", \"Mathlib/CategoryTheory/SmallObject/Iteration/ExtendToSucc.lean\", \"Mathlib/CategoryTheory/SmallObject/Iteration/ExtendToSucc.lean\", \"Mathlib/CategoryTheory/SmallObject/Iteration/ExtendToSucc.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\"], \"digest\": \"b73dd469180feed4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: free monoids, free linear categories and transfinite successor objects do not give this integer-orbit fixed-pair adjunction with its additive clause"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-fixed-pair-derived-forget-comparison",
+  "date": "2026-10-22",
+  "group": "Q125"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Parent returned proof steps 3-4: Integer-orbit free pairs and the explicit adjunction; open-immersion comparison for package clause (2), following inherited provenance.",
+   "via": [
+    "lem-sf-fixed-pair-derived-forget-comparison",
+    "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-fixed-pair-free-integer-adjunction",
+  "worker": "stage1",
+  "summary": "Expanded the existing Free construction into explicit coproduct inverse, functor equations, two-sided recursion, inverse hom bijections, naturality and the additive calculation. Reused existing Mathlib leaves only; no new nodes or statement change. The project implements the adjunction but has no declaration for the full additive clause, so this is not an attachment.",
+  "blueprint": "Inherited synthetic ancestry has from.node=null; retains the parent provenance through fixed-pair-derived-forget-comparison and open-immersion compact-image extension by zero, realizing package clause (2), with no route replacement. Whole-blueprint searches free, autoequivalence, coproduct, fixed pair found no same statement."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-cbe7e1c6f",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-cbe7e1c6f (reviewer sub-agent of L); spot-checked: Clean stage-1 split with no new nodes, no fixes and no tool_uses. Statement is byte-identical to the Q125-created node (only status, proof, proof_deps, searches, source place and split_report changed). Added stmt_deps are the colimit, preadditive and additive-functor definitions the statement uses. Checked against IsoAlgebra.lean Free (lines 120-356): posObj/negObj, objSucc (refl for n>=0, counit at negatives, so c_{-1}: TG(M)->M), map_ι_comp_str (the sigma formula), posHom/negHom (the two-sided recursion), hom_ext and adjunction (restriction to iota_0). The source has no additivity declaration, so no attach (B10). Recomputed every step: sigma∘tau and tau∘sigma on generators; the fixed-pair equation for B(f) via counit naturality; the type of E_n and its inverse (fullness on Hom(T P_n M, TX)); the recursions at -1->0; extension and restriction as inverse bijections; both naturality equations for lem-weil-pbc-adjunction-of-natural-bijection; fixed-pair Hom sets as subgroups; G additive via epsilon naturality and faithfulness; carrier additivity by coproduct uniqueness. The cited nodes say what each step takes (colimit 002F, equivalence preserves colimits, quasi-inverse Hom bijection, 00ZY). Nodes from other units are Mathlib leaves. Edge cases checked: T=id with theta=id, T=id with arbitrary theta, M=0. No duplicate in the DAG (fixed-object-free-arrow, adjunction-lift and right-adjoint-comparison are different statements). No SGA, no re-split note. Advisory only: the statement does not cite the colimit and preadditive definitions inline."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FixedPairFreeIntegerAdjunction",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra.fixedPairFreeIntegerAdjunction",
+  "file": "lean/Sheaf/CategoryTheory/FixedPairFreeIntegerAdjunction.lean",
+  "statement": "theorem fixedPairFreeIntegerAdjunction {C : Type u} [Category.{v} C] (F : C ⥤ C) [F.IsEquivalence] [HasColimitsOfShape (Discrete ℤ) C] : (∀ M : C, ((Free.functor F).obj M).carrier = ∐ (Free.obj F M)) ∧ (∀ (M N : C) (f : M ⟶ N), ((Free.functor F).map f).hom.f = Limits.Sigma.map (Free.objMap F f)) ∧ (∀ (M : C) (n : ℤ), F.map (Sigma.ι (Free.obj F M) n) ≫ ((Free.functor F).obj M).str.hom = (Free.objSucc F M n).hom ≫ Sigma.ι (Free.obj F M) (n + 1)) ∧ (∀ (M : C) (σ : F.obj (∐ (Free.obj F M)) ≅ ∐ (Free.obj F M)), (∀ n : ℤ, F.map (Sigma.ι (Free.obj F M) n) ≫ σ.hom = (Free.objSucc F M n).hom ≫ Sigma.ι (Free.obj F M) (n + 1)) → σ = ((Free.functor F).obj M).str) ∧ (∀ (M : C) (K : IsoAlgebra F) (a0 : M ⟶ K.carrier), ∃! a : (n : ℤ) → (Free.obj F M n ⟶ K.carrier), a 0 = a0 ∧ ∀ n : ℤ, (Free.objSucc F M n).hom ≫ a (n + 1) = F.map (a n) ≫ K.str.hom) ∧ (∃ adj : Free.functor F ⊣ forget F, (∀ (M : C) (K : IsoAlgebra F) (a : (Free.functor F).obj M ⟶ K), adj.homEquiv M K a = Sigma.ι (Free.obj F M) 0 ≫ a.hom.f) ∧ (∀ (M : C) (K : IsoAlgebra F) (a0 : M ⟶ K.carrier) (a : (n : ℤ) → (Free.obj F M n ⟶ K.carrier)), a 0 = a0 → (∀ n : ℤ, (Free.objSucc F M n).hom ≫ a (n + 1) = F.map (a n) ≫ K.str.hom) → ((adj.homEquiv M K).symm a0).hom.f = Sigma.desc a) ∧ (∀ (M N : C) (f : M ⟶ N) (K : IsoAlgebra F) (a : (Free.functor F).obj N ⟶ K), adj.homEquiv M K ((Free.functor F).map f ≫ a) = f ≫ adj.homEquiv N K a) ∧ (∀ (M : C) (K L : IsoAlgebra F) (a : (Free.functor F).obj M ⟶ K) (b : K ⟶ L), adj.homEquiv M L (a ≫ b) = adj.homEquiv M K a ≫ (forget F).map b)) ∧ (∀ [Preadditive C] [HasFiniteBiproducts C] [F.Additive], (Free.functor F).Additive)",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5586c58f9",
+  "group": "Q136",
+  "result": "pass",
+  "note": "Read node, 4 stmt_deps (unchanged vs live; IsoAlgebra/forget existing:true record used exactly), source IsoAlgebra.lean Free 120-360, module, report. Every clause matches: carrier = ∐ Free.obj, map = Sigma.map objMap, shift formula and uniqueness of σ among isos, ∃! Z-indexed family with a0 and recursion (objSucc = refl for n≥0, counit for n<0), ∃ adj with homEquiv = ι_0 restriction, inverse carrier Sigma.desc for every recursive family, both naturalities, additivity under binder-scoped [Preadditive][HasFiniteBiproducts][F.Additive] with inherited IsoAlgebra preadditive instance. No extra hypotheses; universes u/v independent; statement verbatim; only lean field changed; live item lean null. Edge cases T=id (θ arbitrary, negative powers), n=-1→0, zero object, empty category. H4: EquivalenceOrbitInduction/FreeDerivedWeilResolution need Abelian+Grothendieck and lack these clauses, so not duplicates. Docstrings (source + blueprint, 11-step proof) and report sections OK; sorry only; no defs. Not recompiled per instruction. Advisory: HasFiniteBiproducts is unused by the additivity clause but stated in the node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261024T190043-L-3887605",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

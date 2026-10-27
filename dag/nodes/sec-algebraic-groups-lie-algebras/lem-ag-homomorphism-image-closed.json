@@ -66,7 +66,42 @@
   "lem-wf-algebraic-component-cosets"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.GeneralLinearGroup.RationalHom.mem_range_points_iff"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.GeneralLinearGroup.RationalHom.mem_range_points_iff",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Image",
+     "lines": [
+      338,
+      353
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.GeneralLinearGroup.mem_of_mem_closure_of_isConstructible",
+     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Product",
+     "lines": [
+      60,
+      133
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-p-geometry",
  "lean": {
@@ -79,5 +114,54 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:G\\to K$ be a homomorphism of group schemes over an algebraically\nclosed field $L$, where $G$ is of finite type and $K$ is locally of\nfinite type over $L$. Then the image $f(G)$ is a closed subset of $K$.\n\n*Complement.* Let $G\\subseteq\\operatorname{GL}(V)$ and\n$K\\subseteq\\operatorname{GL}(W)$ be closed reduced matrix groups over\n$L$, and let $\\varphi:G\\to K$ be a regular homomorphism, that is, a\nmorphism of varieties which is a group homomorphism on $L$-points. Then\n$S=\\varphi(G(L))$ is a closed subgroup of $K(L)$: it is the set of\n$L$-points of a closed subgroup of $K$, which we equip with its reduced\nstructure.",
+  "proof": [
+   {
+    "text": "Put $S=f(G(L))$; since $f$ is a homomorphism, $S$ is a subgroup of\n$K(L)$. Let $W\\subseteq K$ be an affine open. Since $G$ is of finite\ntype, $f^{-1}(W)$ is covered by finitely many affine opens of finite type\nover $L$, so Chevalley's theorem, part (1) of\n[lem-wf-affine-constructible-open], shows that $f(G)\\cap W$ is\nconstructible in $W$; thus $f(G)$ is locally constructible in $K$.\nThe closed points of $K$ are its $L$-points, and a closed point\n$t\\in f(G)$ has a nonempty fibre, which is a scheme of finite type over\n$L$ and therefore has an $L$-point\n([lem-wf-affine-nullstellensatz-vanishing]). Hence the $L$-points of\n$f(G)$ are exactly $S$.",
+    "uses": [
+     "lem-wf-affine-constructible-open",
+     "lem-wf-affine-nullstellensatz-vanishing"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Let $J$ be the closure of $f(G)$ in $K$, with its reduced structure.\nClosed points are dense in every locally constructible subset of a scheme\nlocally of finite type over $L$, so $J$ is the closure of $S$ and $J(L)$\nis the closure of $S$ in $K(L)$. The closure of a\nsubgroup $H\\subseteq K(L)$ is again a subgroup: for fixed $y\\in H$ the\nclosed condition $xy\\in\\overline H$ holds on $H$, hence on $\\overline H$;\nthen for fixed $x\\in\\overline H$ the closed condition $xy\\in\\overline H$\nholds on $H$, hence on $\\overline H$; inversion is the same argument.\nSince $J\\times_LJ$ is reduced and its closed points are the pairs of\n$L$-points ([lem-wf-affine-product-reduced], applied to products of\naffine opens of $J$), the vanishing principle of\n[lem-wf-affine-nullstellensatz-vanishing] shows that multiplication and\ninversion of $K$ restrict to $J$. Thus $J$ is a closed subgroup scheme\nof $K$.",
+    "uses": [
+     "lem-wf-affine-product-reduced",
+     "lem-wf-affine-nullstellensatz-vanishing"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The locally constructible set $f(G)$ is dense in $J$, so by part (2) of\n[lem-wf-affine-constructible-open], applied in an affine open of $J$\nmeeting $f(G)$, it contains a nonempty open $U\\subseteq J$; then $U(L)\\subseteq S$ and $U(L)\\neq\\varnothing$. Pick\n$u\\in U(L)$. Translations of $J$ by its $L$-points are automorphisms of\n$J$ ([lem-sc-translation-automorphism]), so $u^{-1}U$ is an open\nneighbourhood of $1$ in $J$ with $L$-points in $S$, and the translates\n$s\\,u^{-1}U$ with $s\\in S$ show that $S$ is open in $J(L)$. The other\ncosets of $S$ in $J(L)$ are open for the same reason, so $S$ is also\nclosed in $J(L)$. Since $S$ is dense in $J(L)$, we get $S=J(L)$.",
+    "uses": [
+     "lem-wf-affine-constructible-open",
+     "lem-sc-translation-automorphism"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Finally, $J\\smallsetminus f(G)$ is locally constructible and contains no\nclosed point. A nonempty constructible subset of an affine scheme of\nfinite type over $L$ contains a nonempty locally closed subset, hence a\nclosed point; applying this in the affine opens of $J$ shows that\n$J\\smallsetminus f(G)$ is empty, so $f(G)=J$ is closed. In summary, the\nclosure $J$ of $f(G)$, with its reduced structure, is a closed subgroup\nscheme of $K$ with $f(G)=J$ and $J(L)=f(G(L))$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For the complement, a closed reduced matrix group is a group scheme of\nfinite type over $L$, and a regular homomorphism between reduced matrix\ngroups is a homomorphism of group schemes, because the identities\nexpressing it are identities of regular maps on reduced varieties that\nhold on $L$-points ([lem-wf-affine-nullstellensatz-vanishing],\n[lem-wf-affine-product-reduced]). Applying the argument above to\n$f=\\varphi$, the set $S=\\varphi(G(L))$ is the set of $L$-points of the\nclosure $J$ of $\\varphi(G)$, which with its reduced structure is a\nclosed subgroup of $K$. In particular $S$ is a closed subgroup of\n$K(L)$.",
+    "uses": [
+     "lem-wf-affine-nullstellensatz-vanishing",
+     "lem-wf-affine-product-reduced"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
  }
 }

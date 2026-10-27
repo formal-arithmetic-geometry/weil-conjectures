@@ -1,0 +1,316 @@
+{
+ "id": "lem-trf-binary-quadratic-successive-limit",
+ "kind": "statement",
+ "title": "Limiting coordinates from successive corrections and exact quadratic evaluation",
+ "statement": "Let $F$ be a field, $S=F[[u,v]]$ [def-weil-pbc-multivariate-power-series], and $\\mathfrak p=(u,v)$. Let $(x_r,y_r)_{r\\ge2}$ be a sequence in $S^2$ satisfying $x_2-u,y_2-v\\in\\mathfrak p^2$ and $x_{r+1}-x_r,y_{r+1}-y_r\\in\\mathfrak p^r$ for every $r\\ge2$. There is a unique pair $(x_\\infty,y_\\infty)\\in S^2$ such that $x_\\infty-x_r,y_\\infty-y_r\\in\\mathfrak p^r$ for every $r\\ge2$. It satisfies $x_\\infty-u,y_\\infty-v\\in\\mathfrak p^2$; for a monomial of total degree $d$, its coefficients in $x_r,y_r$ are constant for $r>d$ and equal those in $x_\\infty,y_\\infty$. There exists an $F$-algebra automorphism $\\beta:S\\xrightarrow{\\sim}S$ with $\\beta(u)=x_\\infty$ and $\\beta(v)=y_\\infty$. Both $\\beta$ and $\\beta^{-1}$ preserve every $\\mathfrak p^N$ and are continuous for the topology with neighbourhood basis $\\{\\mathfrak p^N\\}_{N\\ge0}$. For any $a,b,c\\in F$, put $Q(U,V)=aU^2+bUV+cV^2$. Then $Q(x_r,y_r)-Q(x_\\infty,y_\\infty)\\in\\mathfrak p^{r+1}$ for every $r\\ge2$. In particular, for every $f\\in S$ such that $f-Q(x_r,y_r)\\in\\mathfrak p^{r+1}$ for all $r\\ge2$, one has $f=Q(x_\\infty,y_\\infty)=\\beta(Q(u,v))$. No discriminant or characteristic hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), the passage from corrections in successively higher powers to x_infinity, y_infinity, the resulting coordinate map, and the vanishing of Q; specialized coefficientwise to F[[u,v]] and allowing a fixed approximation target f."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-power-series-combined-ideal-coefficients] with coefficient ring $F$, coefficient ideal $J=0$ and two variables. Since $N-|E|>0$ whenever $|E|<N$, it says that $h\\in\\mathfrak p^N$ exactly when every coefficient of $h$ of total degree less than $N$ vanishes (also for $N=0$, when the condition is empty). In particular $\\bigcap_N\\mathfrak p^N=0$, since every coefficient is tested by some $N$. Also [lem-weil-pbc-power-series-variables-complete] gives $\\mathfrak p$-adic completeness of $S$: by [def-weil-pbc-adically-complete-ring], every compatible family of residues in $S/\\mathfrak p^N$ has a unique lift in $S$. These inputs require only a commutative coefficient ring and finitely many variables, so apply to the given field and the pair $u,v$.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "lem-weil-pbc-power-series-variables-complete",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), passage from successively higher-order corrections to limiting coordinates. Agent-written coefficientwise details and explicit inverse calculation in the specialized ring F[[u,v]]."
+   }
+  },
+  {
+   "text": "Fix a monomial $u^iv^j$ of degree $d=i+j$. For every $r\\ge2$ with $r>d$, its coefficient in $x_{r+1}-x_r$ and $y_{r+1}-y_r$ is zero by step 1. Finite telescoping therefore makes the coefficients constant over all indices $r\\ge2$ with $r>d$. Define $x_\\infty,y_\\infty$ to have these eventual coefficients, which define series by [def-weil-pbc-multivariate-power-series]. For fixed $r\\ge2$ all coefficients of degree $d<r$ already have their eventual values, so step 1 gives $x_\\infty-x_r,y_\\infty-y_r\\in\\mathfrak p^r$. Another pair with these congruences has the same coefficient in every degree (choose $r>\\max(d,1)$), proving uniqueness. Taking $r=2$ and adding the initial congruences gives $x_\\infty-u,y_\\infty-v\\in\\mathfrak p^2$. Each $x_r,y_r$, as well as the limits, lies in $\\mathfrak p$: for a finite index $r$, telescope from $2$ using $\\mathfrak p^j\\subseteq\\mathfrak p^2$ for $j\\ge2$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), passage from successively higher-order corrections to limiting coordinates. Agent-written coefficientwise details and explicit inverse calculation in the specialized ring F[[u,v]]."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-power-series-adic-evaluation] with $C=F$, $T=S$, $I=\\mathfrak p$, coefficient map the inclusion of constant series and variable images $x_\\infty,y_\\infty\\in\\mathfrak p$. Its completeness hypothesis is [lem-weil-pbc-power-series-variables-complete]. It yields an $F$-algebra endomorphism $b:S\\to S$ with $b(u)=x_\\infty$, $b(v)=y_\\infty$; for $h=\\sum h_{ij}u^iv^j$ it gives, for every $M\\ge1$,\n$$b(h)\\equiv\\sum_{i+j<M}h_{ij}x_\\infty^iy_\\infty^j\\pmod{\\mathfrak p^M}.$$\nHere its ring homomorphism is an $F$-algebra map precisely because it fixes constant series. We prove its bijectivity in the following finite calculations rather than assuming an inverse function theorem.",
+   "uses": [
+    "lem-weil-pbc-power-series-adic-evaluation",
+    "lem-weil-pbc-power-series-variables-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), passage from successively higher-order corrections to limiting coordinates. Agent-written coefficientwise details and explicit inverse calculation in the specialized ring F[[u,v]]."
+   }
+  },
+  {
+   "text": "Write $x_\\infty=u+h_1$, $y_\\infty=v+h_2$ with $h_1,h_2\\in\\mathfrak p^2$. For a monomial of positive degree $d=i+j$, expand $(u+h_1)^i(v+h_2)^j-u^iv^j$: every summand replaces at least one of the $d$ degree-one factors by a factor in $\\mathfrak p^2$, so belongs to $\\mathfrak p^{d+1}$. For degree zero the difference is zero. For $g\\in\\mathfrak p^k$ its coefficients of degree less than $k$ vanish by step 1. Apply the finite evaluation formula of step 3 with $M=k+1$; the terms of degree $k$ have unchanged degree-$k$ parts and the lower terms vanish. Thus $b(g)-g\\in\\mathfrak p^{k+1}$ for every $k\\ge1$. For $k=0$ the same formula with $M=1$ shows that the constant coefficient is unchanged, hence $b(g)-g\\in\\mathfrak p$. Consequently the $F$-linear map $D=1-b$ satisfies $D(\\mathfrak p^k)\\subseteq\\mathfrak p^{k+1}$ for every $k\\ge0$, and $b$ preserves each $\\mathfrak p^k$. No infinite expansion is used here: each congruence comes from a finite truncation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), passage from successively higher-order corrections to limiting coordinates. Agent-written coefficientwise details and explicit inverse calculation in the specialized ring F[[u,v]]."
+   }
+  },
+  {
+   "text": "For $M\\ge1$, the maps $b,D$ descend to $F$-linear maps $b_M,D_M$ on $S/\\mathfrak p^M$, and $D_M^M=0$ by step 4 applied repeatedly starting at $\\mathfrak p^0=S$. Set $T_M=1+D_M+\\cdots+D_M^{M-1}$. Finite telescoping gives\n$$b_MT_M=(1-D_M)T_M=1-D_M^M=1=T_Mb_M.$$\nThese are equalities of linear maps; in particular $b_M$ is bijective. Its inverse $T_M$ is an $F$-algebra map: for $a,c$ in the quotient, apply the injective ring map $b_M$ to $T_M(ac)$ and $T_M(a)T_M(c)$ to obtain $ac$ in both cases, and similarly for addition, constants and $1$. For the quotient projection $q_M:S/\\mathfrak p^{M+1}\\to S/\\mathfrak p^M$, the identity $q_MD_{M+1}=D_Mq_M$ gives $q_MT_{M+1}=T_Mq_M$, since its extra summand $D_M^M q_M$ is zero. Thus these explicit inverses are compatible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), passage from successively higher-order corrections to limiting coordinates. Agent-written coefficientwise details and explicit inverse calculation in the specialized ring F[[u,v]]."
+   }
+  },
+  {
+   "text": "For $g\\in S$, the residues $T_M(g\\bmod\\mathfrak p^M)$ are compatible by step 5. Completeness in [lem-weil-pbc-power-series-variables-complete], interpreted by [def-weil-pbc-adically-complete-ring], gives a unique element $t(g)\\in S$ having exactly these residues for all $M\\ge1$. Since $b$ preserves $\\mathfrak p^M$, the residues of $b(t(g))$ and $t(b(g))$ are respectively $b_MT_M(g\\bmod\\mathfrak p^M)$ and $T_Mb_M(g\\bmod\\mathfrak p^M)$, hence both equal $g\\bmod\\mathfrak p^M$. The zero intersection in step 1 proves $bt=tb=1$. The same comparison of residues, using that each $T_M$ is an $F$-algebra map, proves that $t$ is an $F$-algebra map. Thus $\\beta=b$ is the required $F$-algebra automorphism and $\\beta^{-1}=t$, with the prescribed images of $u,v$.",
+   "uses": [
+    "lem-weil-pbc-power-series-variables-complete",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), passage from successively higher-order corrections to limiting coordinates. Agent-written coefficientwise details and explicit inverse calculation in the specialized ring F[[u,v]]."
+   }
+  },
+  {
+   "text": "Fix $N\\ge1$ and $g\\in\\mathfrak p^N$. Each power of $D$ preserves $\\mathfrak p^N$, since $D$ raises its exponent, so $T_M$ preserves the image of $\\mathfrak p^N$ in $S/\\mathfrak p^M$. At $M=N$ that image is zero, giving $t(g)\\bmod\\mathfrak p^N=T_N(0)=0$. Therefore $t(\\mathfrak p^N)\\subseteq\\mathfrak p^N$; the forward inclusion for $b$ was proved in step 4. In fact both maps take $\\mathfrak p^N$ onto itself by their inverse identities. For $N=0$ this just says both maps preserve $S$. For the topology specified in the statement, these inclusions show continuity at zero (take the same exponent $N$ as source neighbourhood), and at any point because both maps are additive: differences of images are the images of differences.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), passage from successively higher-order corrections to limiting coordinates. Agent-written coefficientwise details and explicit inverse calculation in the specialized ring F[[u,v]]."
+   }
+  },
+  {
+   "text": "Fix $r\\ge2$, and put $\\delta=x_r-x_\\infty$, $\\epsilon=y_r-y_\\infty\\in\\mathfrak p^r$. In the commutative ring $S$ the exact identity is\n$$Q(x_r,y_r)-Q(x_\\infty,y_\\infty)=a\\delta(x_r+x_\\infty)+b(\\delta y_r+x_\\infty\\epsilon)+c\\epsilon(y_r+y_\\infty).$$\nEvery parenthesized linear coordinate factor is in $\\mathfrak p$ by step 2, so this belongs to $\\mathfrak p^{r+1}$. If $f-Q(x_r,y_r)\\in\\mathfrak p^{r+1}$ for every $r\\ge2$, addition gives $f-Q(x_\\infty,y_\\infty)\\in\\mathfrak p^{r+1}$ for every such $r$. Their intersection is zero by step 1 (every coefficient is tested for some $r$), proving equality. Since $\\beta$ is an $F$-algebra map with the given variable images, $\\beta(au^2+buv+cv^2)=a x_\\infty^2+b x_\\infty y_\\infty+c y_\\infty^2$. This proves the final identity, also when some or all of $a,b,c$ vanish and in characteristic $2$, since neither the identity nor any preceding construction divides by a coefficient or by $2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), passage from successively higher-order corrections to limiting coordinates. Agent-written coefficientwise details and explicit inverse calculation in the specialized ring F[[u,v]]."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "lem-weil-pbc-power-series-variables-complete",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-power-series-adic-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), passage from successively higher-order corrections to limiting coordinates. Agent-written coefficientwise details and explicit inverse calculation in the specialized ring F[[u,v]]."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Successive corrections to two formal power series in increasing powers of the variable ideal have unique coefficientwise limits and quadratic polynomial evaluation commutes with those limits",
+   "results": "[leanfinder] OK 8 hit(s); PowerSeries.IsWeierstrassDivisorAt.divCoeff; PowerSeries.IsWeierstrassDivision; PowerSeries.IsWeierstrassFactorization.elim; PowerSeries.IsWeierstrassDivisionAt; PowerSeries.IsWeierstrassDivisorAt.seq; PowerSeries.IsWeierstrassDivision.elim; PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem; PowerSeries.IsWeierstrassDivisorAt.seq_one",
+   "date": "2026-10-22",
+   "verdict": "no match: adic completeness, adic Cauchy sequence definitions and univariate Weierstrass coefficient limits are useful ingredients, but none supplies the two-coordinate tail estimates together with the quadratic evaluation congruence and exact limit identity by a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adically Cauchy sequences with differences in successive powers of the maximal ideal of a multivariate power series ring have unique limits preserving quadratic approximation identities",
+   "results": "[leanfinder] OK 8 hit(s); PowerSeries.IsWeierstrassDivision.unique; PowerSeries.IsWeierstrassDivisorAt.divCoeff; PowerSeries.IsWeierstrassDivision.elim; PowerSeries.IsWeierstrassFactorization.elim; IsAdicComplete.henselianRing; AdicCompletion.AdicCauchySequence.mk_coe; AdicCompletion.isAdicCauchy_iff; AdicCompletion.AdicCauchySequence.mk_eq_mk",
+   "date": "2026-10-22",
+   "verdict": "no match: adic completeness, adic Cauchy sequence definitions and univariate Weierstrass coefficient limits are useful ingredients, but none supplies the two-coordinate tail estimates together with the quadratic evaluation congruence and exact limit identity by a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, IsAdicComplete",
+   "results": "[loogle] OK 1 hit(s); MvPowerSeries.instIsAdicCompleteSpanRangeXOfFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: adic completeness, adic Cauchy sequence definitions and univariate Weierstrass coefficient limits are useful ingredients, but none supplies the two-coordinate tail estimates together with the quadratic evaluation congruence and exact limit identity by a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isAdicComplete|IsAdicComplete|Cauchy|isComplete|coeff.*eventually|eventually.*coeff",
+   "results": "[grep] OK 1 hit(s); Mathlib/RingTheory/MvPowerSeries/PiTopology.lean; Mathlib subdirectory RingTheory/MvPowerSeries",
+   "date": "2026-10-22",
+   "verdict": "no match: adic completeness, adic Cauchy sequence definitions and univariate Weierstrass coefficient limits are useful ingredients, but none supplies the two-coordinate tail estimates together with the quadratic evaluation congruence and exact limit identity by a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicComplete|isAdicComplete|exists.*limit|exists.*Limit",
+   "results": "[grep] OK 25 hit(s); Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Noetherian.lean; Mathlib/RingTheory/AdicCompletion/LocalRing.lean; Mathlib/RingTheory/AdicCompletion/LocalRing.lean; Mathlib subdirectory RingTheory/AdicCompletion",
+   "date": "2026-10-22",
+   "verdict": "no match: adic completeness, adic Cauchy sequence definitions and univariate Weierstrass coefficient limits are useful ingredients, but none supplies the two-coordinate tail estimates together with the quadratic evaluation congruence and exact limit identity by a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal power series coordinate sequences whose successive differences have increasing order converge and their quadratic evaluations converge",
+   "results": "[leansearch] OK 8 hit(s); PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem; PowerSeries.hasSum_aeval; HasFPowerSeriesAt.eventually_hasSum_of_comp; HasFPowerSeriesAt.eventually_hasSum; PowerSeries.eval₂_eq_tsum; PowerSeries.WithPiTopology.summable_of_tendsto_order_atTop_nhds_top; PowerSeries.WithPiTopology.hasSum_iff_hasSum_coeff; HasFPowerSeriesWithinOnBall.tendstoLocallyUniformlyOn",
+   "date": "2026-10-22",
+   "verdict": "no match: adic completeness, adic Cauchy sequence definitions and univariate Weierstrass coefficient limits are useful ingredients, but none supplies the two-coordinate tail estimates together with the quadratic evaluation congruence and exact limit identity by a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Successive adic approximations to coordinates tangent to the identity in a formal power series ring converge to a continuous algebra automorphism that preserves exact quadratic evaluation identities",
+   "results": "[leanfinder] OK 8 hit(s); PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply; PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply; PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self; PowerSeries.IsWeierstrassDivisorAt.mod'; PowerSeries.IsWeierstrassDivisorAt.seq_one; PowerSeries.algEquivQuotientWeierstrassDistinguished; PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod; PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass quotient equivalences, variable renaming equivalences, continuous algebra equivalence types, and continuity of substitution do not construct limiting coordinates from the prescribed successive approximations or prove the exact evaluated identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sequence of pairs of binary power series tangent to the variables with increasing order increments determines limiting formal coordinates and a continuous algebra equivalence",
+   "results": "[leansearch] OK 8 hit(s); ContinuousAlgEquivClass; ContinuousAlgEquiv; contDiff_iff_ftaylorSeries; LaurentSeries.LaurentSeriesAlgEquiv; LaurentSeries.powerSeriesAlgEquiv; PowerSeries.aeval_unique; formalMultilinearSeries_geometric; binomialSeries",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass quotient equivalences, variable renaming equivalences, continuous algebra equivalence types, and continuity of substitution do not construct limiting coordinates from the prescribed successive approximations or prove the exact evaluated identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, AlgEquiv",
+   "results": "[loogle] OK 12 hit(s); MvPolynomial.toMvPowerSeries_pUnitAlgEquiv; MvPowerSeries.renameEquiv; MvPowerSeries.renameEquiv_refl; MvPowerSeries.renameEquiv_symm; MvPowerSeries.renameEquiv_trans; MvPowerSeries.renameEquiv_apply; MvPowerSeries.isEmptyEquiv; MvPowerSeries.optionEquivLeft",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass quotient equivalences, variable renaming equivalences, continuous algebra equivalence types, and continuity of substitution do not construct limiting coordinates from the prescribed successive approximations or prove the exact evaluated identity."
+  },
+  {
+   "tool": "grep",
+   "query": "equiv|inverse|invertible|bijective|continuous",
+   "results": "[grep] OK 5 hit(s); 74; 240; 297; 299; 301; Mathlib subdirectory RingTheory/MvPowerSeries/Substitution.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass quotient equivalences, variable renaming equivalences, continuous algebra equivalence types, and continuity of substitution do not construct limiting coordinates from the prescribed successive approximations or prove the exact evaluated identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Successive adic approximations in a multivariate power series ring converge to formal coordinates giving an automorphism and exact quadratic evaluation identities",
+   "results": "{\"t\": \"2026-10-23T09:53:06Z\", \"tool\": \"leanfinder\", \"query\": \"Successive adic approximations in a multivariate power series ring converge to formal coordinates giving an automorphism and exact quadratic evaluation identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"PowerSeries.IsWeierstrassDivisorAt.seq_one\", \"PowerSeries.IsWeierstrassDivisorAt.seq\", \"PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\", \"PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod\", \"PowerSeries.exists_isWeierstrassDivision\"], \"digest\": \"c592d53e05df81aa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned completeness instance, substitution/evaluation formulas, renaming equivalences, analytic inverse theorems and univariate Weierstrass results do not give all successive-limit tail congruences, the tangent-to-identity automorphism, and the quadratic congruence/exact identity in one line. Existing DAG nodes supply completeness and evaluation; the remaining arguments are written explicitly."
+  },
+  {
+   "tool": "grep",
+   "query": "equiv|inverse|invertible|bijective|continuous",
+   "results": "{\"t\": \"2026-10-23T09:54:31Z\", \"tool\": \"grep\", \"query\": \"equiv|inverse|invertible|bijective|continuous\", \"sub\": \"RingTheory/MvPowerSeries/Substitution.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"74\", \"240\", \"297\", \"299\", \"301\"], \"digest\": \"c7f6e18fe6c4fc47\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned completeness instance, substitution/evaluation formulas, renaming equivalences, analytic inverse theorems and univariate Weierstrass results do not give all successive-limit tail congruences, the tangent-to-identity automorphism, and the quadratic congruence/exact identity in one line. Existing DAG nodes supply completeness and evaluation; the remaining arguments are written explicitly."
+  },
+  {
+   "tool": "grep",
+   "query": "mem.*span.*X|span.*X.*pow|truncTotal.*(sub|map)|IsAdicComplete",
+   "results": "{\"t\": \"2026-10-23T09:54:31Z\", \"tool\": \"grep\", \"query\": \"mem.*span.*X|span.*X.*pow|truncTotal.*(sub|map)|IsAdicComplete\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\"], \"digest\": \"ee290e1a49d8b5c0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned completeness instance, substitution/evaluation formulas, renaming equivalences, analytic inverse theorems and univariate Weierstrass results do not give all successive-limit tail congruences, the tangent-to-identity automorphism, and the quadratic congruence/exact identity in one line. Existing DAG nodes supply completeness and evaluation; the remaining arguments are written explicitly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adically convergent sequence of coordinate changes tangent to the identity has an invertible formal power series substitution as its limit",
+   "results": "{\"t\": \"2026-10-23T09:54:31Z\", \"tool\": \"leansearch\", \"query\": \"An adically convergent sequence of coordinate changes tangent to the identity has an invertible formal power series substitution as its limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.subst_X\", \"HasFPowerSeriesOnBall.eventually_hasSum_sub\", \"HasFPowerSeriesAt.eventually_hasSum\", \"PowerSeries.subst_comp_subst\", \"HasFPowerSeriesAt.eventually_hasSum_of_comp\", \"HasFPowerSeriesWithinAt.comp_sub\", \"HasFPowerSeriesAt.eventually_hasSum_sub\", \"HasFPowerSeriesOnBall.tendstoLocallyUniformlyOn'\"], \"digest\": \"b5e121aa0baccca1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned completeness instance, substitution/evaluation formulas, renaming equivalences, analytic inverse theorems and univariate Weierstrass results do not give all successive-limit tail congruences, the tangent-to-identity automorphism, and the quadratic congruence/exact identity in one line. Existing DAG nodes supply completeness and evaluation; the remaining arguments are written explicitly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Successive approximations to formal power series coordinates converge coefficientwise and yield an algebra automorphism with exact polynomial evaluation",
+   "results": "{\"t\": \"2026-10-23T09:54:32Z\", \"tool\": \"leansearch\", \"query\": \"Successive approximations to formal power series coordinates converge coefficientwise and yield an algebra automorphism with exact polynomial evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.hasSum_aeval\", \"MvPowerSeries.hasSum_aeval\", \"PowerSeries.aeval\", \"MvPowerSeries.aeval\", \"MvPowerSeries.aeval_coe\", \"PowerSeries.aeval_coe\", \"PowerSeries.coe_aeval\", \"PowerSeries.eval₂_eq_tsum\"], \"digest\": \"e24e11e680aa5698\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned completeness instance, substitution/evaluation formulas, renaming equivalences, analytic inverse theorems and univariate Weierstrass results do not give all successive-limit tail congruences, the tangent-to-identity automorphism, and the quadratic congruence/exact identity in one line. Existing DAG nodes supply completeness and evaluation; the remaining arguments are written explicitly."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, AlgEquiv",
+   "results": "{\"t\": \"2026-10-23T09:54:32Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, AlgEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPolynomial.toMvPowerSeries_pUnitAlgEquiv\", \"MvPowerSeries.renameEquiv\", \"MvPowerSeries.renameEquiv_refl\", \"MvPowerSeries.renameEquiv_symm\", \"MvPowerSeries.renameEquiv_trans\", \"MvPowerSeries.renameEquiv_apply\", \"MvPowerSeries.isEmptyEquiv\", \"MvPowerSeries.optionEquivLeft\"], \"digest\": \"64fd67940ce2cfb1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned completeness instance, substitution/evaluation formulas, renaming equivalences, analytic inverse theorems and univariate Weierstrass results do not give all successive-limit tail congruences, the tangent-to-identity automorphism, and the quadratic congruence/exact identity in one line. Existing DAG nodes supply completeness and evaluation; the remaining arguments are written explicitly."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, IsAdicComplete",
+   "results": "{\"t\": \"2026-10-23T09:54:32Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, IsAdicComplete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MvPowerSeries.instIsAdicCompleteSpanRangeXOfFinite\"], \"digest\": \"02d1df22a5eb21e1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned completeness instance, substitution/evaluation formulas, renaming equivalences, analytic inverse theorems and univariate Weierstrass results do not give all successive-limit tail congruences, the tangent-to-identity automorphism, and the quadratic congruence/exact identity in one line. Existing DAG nodes supply completeness and evaluation; the remaining arguments are written explicitly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal coordinates tangent to the identity obtained by increasing order corrections define an invertible substitution preserving quadratic approximation limits",
+   "results": "{\"t\": \"2026-10-23T09:54:33Z\", \"tool\": \"leanfinder\", \"query\": \"Formal coordinates tangent to the identity obtained by increasing order corrections define an invertible substitution preserving quadratic approximation limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.seq_one\", \"FormalMultilinearSeries.taylorComp_sub_taylorComp_isLittleO\", \"FormalMultilinearSeries.taylorComp_sub_taylorComp_isBigO\", \"HasFPowerSeriesAt.has_fpower_series_iterate_dslope_fslope\", \"HasFPowerSeriesWithinAt.hasStrictFDerivWithinAt\", \"HasFPowerSeriesOnBall.isBigO_image_sub_image_sub_deriv_principal\", \"HasFPowerSeriesAt.has_fpower_series_dslope_fslope\", \"OpenPartialHomeomorph.hasFPowerSeriesAt_symm\"], \"digest\": \"c1ae41a71b421975\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned completeness instance, substitution/evaluation formulas, renaming equivalences, analytic inverse theorems and univariate Weierstrass results do not give all successive-limit tail congruences, the tangent-to-identity automorphism, and the quadratic congruence/exact identity in one line. Existing DAG nodes supply completeness and evaluation; the remaining arguments are written explicitly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-binary-morse",
+  "date": "2026-10-22",
+  "group": "Q86"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Successive coordinate corrections removing cubic and higher terms in the nondegenerate-quadratic completion argument, Curves 0C49, below the imported pointwise nodal ingredient. Completeness, the limiting coordinate automorphism, and the exact quadratic identity (returned proof steps 4-5).",
+   "via": [
+    "lem-trf-formal-binary-morse",
+    "lem-trf-formal-jacobian-quadratic-criterion",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-binary-quadratic-successive-limit",
+  "worker": "stage1",
+  "summary": "Q135: kept the statement and ancestry. Checked Stacks 0C49 and the current blueprint; excluded an exact project Lean attachment and a Mathlib match. Reused existing coefficient, completeness and evaluation nodes. Constructed the limits coefficientwise, proved the degree-raising property of 1-b, constructed compatible finite geometric-sum inverses, lifted them by completeness, and wrote the quadratic difference identity. No new nodes: every residual step is an explicit finite calculation or a direct use of the cited statements/definition. All cited interfaces were read and quoted in citations.json.",
+  "blueprint": "Inherited pointwise nodal-completion ingredient below lem-trf-local-term-locality, via lem-trf-formal-binary-morse: the successive-correction limit and exact quadratic identity of Curves 0C49. The latest ancestor blueprint itself supplies no additional power-series lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "why": "Coefficient criterion for powers of the variable ideal, used with J=0; this generic commutative algebra tool is absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-adic-evaluation",
+    "why": "The generic adic evaluation universal property constructs the substitution with its truncation congruence; this unit gives no such power-series construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "lem-weil-pbc-power-series-adic-evaluation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-d956003bd",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-d956003bd (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps in full against Stacks curves.tex Tag 0C49 (lemma-nodal-algebraic), proof of (2)⇒(3): the completeness passage to x_∞, y_∞ and the map κ[[x,y]]→A. Nondegeneracy is used only upstream, to produce the corrections, so the item's lack of a discriminant or characteristic hypothesis is right. The statement is unchanged from base, and live still has the item unsplit. There are no new nodes. I read each cited statement: combined-ideal-coefficients with J=0 gives 'h∈𝔭^N iff all coefficients of degree <N vanish' (0^{N−|E|}=0), and hence ⋂𝔭^N=0; variables-complete and the adically-complete definition give unique lifts of compatible residues; adic-evaluation with C=F, T=S, I=𝔭 and images x_∞, y_∞∈𝔭 gives an F-algebra endomorphism b with the truncation formula. Step 2 builds the limits coefficientwise, with tail bounds, uniqueness and x_∞−u∈𝔭^2. Step 4: D=1−b raises the 𝔭-order, via the finite binomial expansion and truncation at M=k+1, with k=0 handled separately. Step 5: T_M=Σ_{i<M} D_M^i inverts b_M on S/𝔭^M, is multiplicative by injectivity of b_M, and is compatible with the projections. Step 6 lifts these inverses to t with bt=tb=1. Step 7 gives preservation of 𝔭^N and continuity. Step 8: the exact identity aδ(x_r+x_∞)+b(δy_r+x_∞ε)+cε(y_r+y_∞) gives 𝔭^{r+1}, then f=Q(x_∞,y_∞)=β(Q) by separatedness. Small cases checked: x=u+v^2 (β^{-1}(u)=u−v^2), Q=0, uv in characteristic 2, M=1. I accept the tool_uses of the two generic sk-thm-p1 nodes, since unit sk-i-curve-zero does not cite that unit and no node of the unit gives these facts. No duplicate found: lem-trf-split-node-coordinate-lifting is a different relative statement. Advisory: the letter b names both the evaluation endomorphism and the coefficient of Q."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.BinaryQuadraticSuccessiveLimit",
+  "declaration": "MvPowerSeries.exists_binary_quadratic_successive_limit",
+  "file": "lean/Sheaf/RingTheory/BinaryQuadraticSuccessiveLimit.lean",
+  "statement": "theorem exists_binary_quadratic_successive_limit (F : Type u) [Field F] (z : ℕ → MvPowerSeries (Fin 2) F × MvPowerSeries (Fin 2) F) (h₂ : (z 2).1 - X 0 ∈ (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ 2 ∧ (z 2).2 - X 1 ∈ (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ 2) (hstep : ∀ r : ℕ, 2 ≤ r → (z (r + 1)).1 - (z r).1 ∈ (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ r ∧ (z (r + 1)).2 - (z r).2 ∈ (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ r) : ∃ zLim : MvPowerSeries (Fin 2) F × MvPowerSeries (Fin 2) F, (∀ r : ℕ, 2 ≤ r → zLim.1 - (z r).1 ∈ (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ r ∧ zLim.2 - (z r).2 ∈ (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ r) ∧ (∀ w : MvPowerSeries (Fin 2) F × MvPowerSeries (Fin 2) F, (∀ r : ℕ, 2 ≤ r → w.1 - (z r).1 ∈ (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ r ∧ w.2 - (z r).2 ∈ (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ r) → w = zLim) ∧ (zLim.1 - X 0 ∈ (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ 2 ∧ zLim.2 - X 1 ∈ (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ 2) ∧ (∀ (E : Fin 2 →₀ ℕ) (r : ℕ), 2 ≤ r → E.degree < r → coeff E (z r).1 = coeff E zLim.1 ∧ coeff E (z r).2 = coeff E zLim.2) ∧ ∃ β : MvPowerSeries (Fin 2) F ≃ₐ[F] MvPowerSeries (Fin 2) F, β (X 0) = zLim.1 ∧ β (X 1) = zLim.2 ∧ (∀ (N : ℕ) (g : MvPowerSeries (Fin 2) F), g ∈ (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ N → β g ∈ (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ N ∧ β.symm g ∈ (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ N) ∧ @Continuous _ _ (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))).adicTopology (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))).adicTopology β ∧ @Continuous _ _ (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))).adicTopology (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))).adicTopology β.symm ∧ ∀ a b c : F, (∀ r : ℕ, 2 ≤ r → (C a * (z r).1 ^ 2 + C b * (z r).1 * (z r).2 + C c * (z r).2 ^ 2) - (C a * zLim.1 ^ 2 + C b * zLim.1 * zLim.2 + C c * zLim.2 ^ 2) ∈ (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ (r + 1)) ∧ (∀ f : MvPowerSeries (Fin 2) F, (∀ r : ℕ, 2 ≤ r → f - (C a * (z r).1 ^ 2 + C b * (z r).1 * (z r).2 + C c * (z r).2 ^ 2) ∈ (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))) ^ (r + 1)) → f = C a * zLim.1 ^ 2 + C b * zLim.1 * zLim.2 + C c * zLim.2 ^ 2 ∧ C a * zLim.1 ^ 2 + C b * zLim.1 * zLim.2 + C c * zLim.2 ^ 2 = β (C a * X 0 ^ 2 + C b * X 0 * X 1 + C c * X 1 ^ 2))",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-381089077",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Statement-only theorem MvPowerSeries.exists_binary_quadratic_successive_limit; lean.statement verbatim; node change is only the added lean field. Every clause matches the node: unique tail limit (uniqueness depends only on tails), tangent congruences, coefficient stabilization for degree < r with r >= 2, AlgEquiv beta with the two variable images, beta and beta.symm preserve every power of (u,v) including N=0, continuity in Ideal.adicTopology on both sides, the r+1 quadratic congruence, and f = Q(lim) = beta(Q(u,v)). No extra hypotheses; universe only on F; all clauses true; N=0, zero form, char 2 and constant sequence covered. No defs, sorry only, source and blueprint docstrings with all 8 steps, proof-dep imports exist live, no duplicate in Sheaf/WeilConjectures. Single stmt_dep is the Mathlib MvPowerSeries leaf. Not recompiled per instructions. Advisory only: the second reading was by the same agent."
+ }
+}

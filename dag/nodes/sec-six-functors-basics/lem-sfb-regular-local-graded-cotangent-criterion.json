@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-regular-local-graded-cotangent-criterion",
+ "kind": "statement",
+ "title": "Regular local rings characterized by canonical symmetric cotangent multiplication",
+ "statement": "Let $(R,\\mathfrak n)$ be a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring], with residue field $k=R/\\mathfrak n$ and cotangent vector space $V=\\mathfrak n/\\mathfrak n^2$. Put $e=\\dim_k V$ [def-weil-vector-space-dimension]. Let $\\operatorname{Sym}_k(V)$ be the symmetric algebra, the quotient of the tensor algebra by the relations $v\\otimes w-w\\otimes v$ [lem-weil-pbc-symmetric-algebra-universal-property], and let $\\operatorname{Sym}^q_k(V)$ be its degree-$q$ subspace spanned by products of $q$ vectors [lem-weil-pbc-symmetric-algebra-graded]. Multiplication of representatives defines canonical $k$-linear maps\n$$\\mu_{R,q}:\\operatorname{Sym}^q_k(V)\\longrightarrow\\mathfrak n^q/\\mathfrak n^{q+1},\\qquad\n\\bar a_1\\cdots\\bar a_q\\longmapsto a_1\\cdots a_q\\bmod\\mathfrak n^{q+1}\\quad(q\\geq1),$$\nwhere $a_i\\in\\mathfrak n$ represents $\\bar a_i\\in V$. Together with $\\mu_{R,0}=\\mathrm{id}_k$ these define the canonical graded $k$-algebra map from $\\operatorname{Sym}_k(V)$ to $\\operatorname{gr}_{\\mathfrak n}R$ [def-weil-pbc-associated-graded-ring]. The ring $R$ is regular local [def-weil-regular-scheme] if and only if $\\mu_{R,q}$ is an isomorphism for every $q\\geq1$. Whenever these equivalent conditions hold, $\\dim R=e$ [def-weil-pbc-krull-dimension-ring].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "13.2(a), printed p.254 (canonical Sym_k(n/n^2) to gr(R) criterion); 13.2 introductory paragraph and (b). Supporting Stacks Project algebra.tex Tag 00NO (lemma-regular-graded) and Tag 00KQ (proposition-dimension)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-vector-space-dimension",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=\\operatorname{gr}_{\\mathfrak n}R$. By [lem-weil-pbc-associated-graded-ring-structure], $G$ is a commutative $k$-algebra and its degree-one inclusion $V\\to G$ is $k$-linear. Apply [lem-weil-pbc-symmetric-algebra-universal-property] to obtain $\\mu:\\operatorname{Sym}_k(V)\\to G$. By [lem-weil-pbc-symmetric-algebra-graded], its degree-$q$ source is spanned by products of $q$ vectors. Multiplication in $G$ sends such a product to the class of the product of representatives, exactly the displayed $\\mu_{R,q}$. Changing one representative by $b\\in\\mathfrak n^2$ changes that product by an element of $\\mathfrak n^{q+1}$; changing a scalar lift by an element of $\\mathfrak n$ does the same. Thus the formula is well defined, $k$-linear, degree preserving, and the degree-zero map is the identity.",
+   "uses": [
+    "lem-weil-pbc-associated-graded-ring-structure",
+    "lem-weil-pbc-symmetric-algebra-universal-property",
+    "lem-weil-pbc-symmetric-algebra-graded"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 061N (equation-quasi-regular), multiplication formula; Tag 00DM (section-tensor-algebra), symmetric universal map. Milne 13.2(a), printed p.254, canonical map."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-regular-local-cotangent-dimension], $e$ is finite. Choose a basis $v_1,\\ldots,v_e$ of $V$ and lifts $a_i\\in\\mathfrak n$. Noetherianity makes $\\mathfrak n$ finitely generated, so [lem-weil-pbc-nakayama-local-generators], applied to the module $\\mathfrak n$ with $\\mathfrak n\\mathfrak n=\\mathfrak n^2$, shows that the $a_i$ generate it. Identifying $V$ with $k^{\\oplus e}$ via this basis, [lem-weil-pbc-symmetric-algebra-free-module-polynomial] gives $\\beta:\\operatorname{Sym}_k(V)\\xrightarrow{\\sim}P=k[T_1,\\ldots,T_e]$, $v_i\\mapsto T_i$. This is graded: products of $q$ vectors map to degree-$q$ polynomials, and every degree-$q$ monomial maps back to a product of $q$ basis vectors. Put $\\theta=\\mu\\beta^{-1}$. Its degree-$q$ map is onto, since [lem-trf-maximal-adic-graded-length-bridge] says that products of the $a_i$ span $G_q$. It is the identity in degree zero.",
+   "uses": [
+    "lem-weil-pbc-regular-local-cotangent-dimension",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+    "lem-trf-maximal-adic-graded-length-bridge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NO (lemma-regular-graded), first two proof sentences; Tag 00DV (lemma-NAK), generators; Tag 00DM (section-tensor-algebra), finite free symmetric algebra."
+   }
+  },
+  {
+   "text": "First dispose of $e=0$. Step 2 says that the empty list generates $\\mathfrak n$, hence $\\mathfrak n=0$. Therefore $R=k$ is a field, $G_0=k$, and $G_q=0$ for $q>0$; the same holds for $\\operatorname{Sym}_k(0)$. Every positive-degree map is an isomorphism. The only prime of a field is $(0)$, so $\\dim R=0$, and the empty generating list makes $R$ regular by [def-weil-regular-scheme]. This proves both directions and the dimension assertion when $e=0$. Henceforth $e\\geq1$.",
+   "uses": [
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KU (definition-regular-local), dimension-zero case of Tag 00NO; explicit empty-variable case."
+   }
+  },
+  {
+   "text": "Suppose $R$ is regular. Then [lem-weil-pbc-regular-local-cotangent-dimension] gives $\\dim R=e$. Let $I=\\ker\\theta\\subset P$. Since $\\theta$ respects degrees, if a finite sum of homogeneous polynomials lies in $I$, each summand does, by uniqueness of components in $G$. Thus $I$ is homogeneous, and it is proper because $\\theta|_k=\\mathrm{id}_k$. In each degree, $P_q/(I\\cap P_q)\\to G_q$ is a linear bijection: surjectivity is step 2 and its kernel is exactly $I\\cap P_q$. If $I\\ne0$, [lem-sfb-homogeneous-quotient-cumulative-growth] supplies a nonzero eventual polynomial $Q_I$ of degree less than $e$ for $\\sum_{q<n}\\dim_kG_q$. By [lem-trf-maximal-adic-graded-length-bridge] that sum is $H_R(n)=\\mathrm{length}_R(R/\\mathfrak n^n)$, whereas [lem-trf-hilbert-samuel-growth-dimension] gives an eventual polynomial $Q_R$ of degree $\\dim R=e$ for the same function. They agree at every sufficiently large integer, so [lem-trf-polynomial-infinite-evaluation-identity] over $\\mathbf Q$ gives $Q_I=Q_R$, a contradiction. Therefore $I=0$. Each $\\theta_q$ is bijective and, through $\\beta$, so is each canonical $\\mu_{R,q}$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-cotangent-dimension",
+    "lem-sfb-homogeneous-quotient-cumulative-growth",
+    "lem-trf-maximal-adic-graded-length-bridge",
+    "lem-trf-hilbert-samuel-growth-dimension",
+    "lem-trf-polynomial-infinite-evaluation-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NO (lemma-regular-graded), Hilbert-function contradiction, using Tag 00K3 (lemma-quotient-smaller-d) and Tag 00KQ (proposition-dimension)."
+   }
+  },
+  {
+   "text": "Conversely assume every $\\mu_{R,q}$, $q\\geq1$, is an isomorphism. Through $\\beta$ and the identity in degree zero, $G_q$ has the monomial basis of the degree-$q$ part of $P$ [def-weil-pbc-mv-polynomial-ring]. By [lem-trf-maximal-adic-graded-length-bridge], $H_R(n)$ is therefore the number of tuples $\\alpha\\in\\mathbf N^e$ with $|\\alpha|<n$. This number is $\\binom{n+e-1}{e}$: partition into tuples with first coordinate zero and positive to obtain $c(e,n)=c(e-1,n)+c(e,n-1)$, with $c(0,n)=1$ for $n\\geq1$ and $c(e,1)=1$; Pascal's identity gives the formula by induction. Thus for all $n\\geq1$,\n$$H_R(n)=B_e(n),\\qquad B_e(X)=\\frac{X(X+1)\\cdots(X+e-1)}{e!},$$\na polynomial over $\\mathbf Q$ of degree $e$ and leading coefficient $1/e!$. The eventual polynomial $Q_R$ of [lem-trf-hilbert-samuel-growth-dimension] agrees with $B_e$ at infinitely many rational integers; [lem-trf-polynomial-infinite-evaluation-identity] gives equality. Consequently $\\dim R=\\deg Q_R=e$, and [lem-weil-pbc-regular-local-cotangent-dimension] implies that $R$ is regular. Together with steps 3 and 4 this proves the equivalence and the stated dimension in every case.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-trf-maximal-adic-graded-length-bridge",
+    "lem-trf-hilbert-samuel-growth-dimension",
+    "lem-trf-polynomial-infinite-evaluation-identity",
+    "lem-weil-pbc-regular-local-cotangent-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Milne 13.2(a), printed p.254, converse; Tag 00KQ (proposition-dimension), via cumulative monomial Hilbert function and Tag 00K8 (proposition-hilbert-function-polynomial)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-regular-scheme",
+  "lem-sfb-homogeneous-quotient-cumulative-growth",
+  "lem-trf-hilbert-samuel-growth-dimension",
+  "lem-trf-maximal-adic-graded-length-bridge",
+  "lem-trf-polynomial-infinite-evaluation-identity",
+  "lem-weil-pbc-associated-graded-ring-structure",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "lem-weil-pbc-symmetric-algebra-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00NO (lemma-regular-graded) with Tags 00K3 and 00KQ; the reverse implication in Milne 13.2(a) is written out by the same Hilbert-function calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Regular local ring characterized by associated graded ring being the symmetric algebra of the cotangent vector space",
+   "results": "8 hits; IsLocalRing.finrank_CotangentSpace_eq_one_iff, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallySmooth.iff_subsingleton_and_projective, IsLocalRing.subsingleton_cotangentSpace_iff, IsLocalRing.finrank_cotangentSpace_eq_zero_iff, IsLocalRing.CotangentSpace, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, IsLocalRing.CotangentSpace.map_eq_top_iff.  Read RegularLocalRing/Defs.lean:42-85: cotangent dimension characterization only, not the associated-graded criterion or approximation lemma. Logged digest 467668ab68aa7601.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SymmetricAlgebra\", \"IsRegularLocalRing\"",
+   "results": "0 hits; .  Read RegularLocalRing/Defs.lean:42-85: cotangent dimension characterization only, not the associated-graded criterion or approximation lemma. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian local ring is regular if and only if the symmetric algebra of its cotangent space maps isomorphically to its associated graded ring",
+   "results": "8 hits; IsLocalRing.subsingleton_cotangentSpace_iff, IsLocalRing.finrank_cotangentSpace_eq_zero_iff, IsLocalRing.finrank_cotangentSpace_le_one_iff, IsLocalRing.finrank_CotangentSpace_eq_one_iff, IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.FormallySmooth.iff_injective_lTensor_residueField.  Read RegularLocalRing/Defs.lean:42-85: cotangent dimension characterization only, not the associated-graded criterion or approximation lemma. Logged digest 90aee0f4512a4d35.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AssociatedGraded|associated.?graded|SymmetricAlgebra.*Cotangent|regular.*graded",
+   "results": "0 hits; .  Read RegularLocalRing/Defs.lean:42-85: cotangent dimension characterization only, not the associated-graded criterion or approximation lemma. Searched Mathlib/RingTheory. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tangent cone of a regular local ring is a polynomial ring on any basis of its maximal ideal modulo its square, and this characterizes regularity",
+   "results": "8 hits; IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, IsLocalRing.CotangentSpace.span_image_eq_top_iff, Algebra.IsSmoothAt, Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential, Algebra.IsStandardSmooth, IsLocalRing.finrank_cotangentSpace_le_one_iff, IsLocalRing.subsingleton_cotangentSpace_iff, Algebra.IsStandardSmooth.of_basis_kaehlerDifferential.  Read RegularLocalRing/Defs.lean:42-85: cotangent dimension characterization only, not the associated-graded criterion or approximation lemma. Logged digest f78de7fb145c776c.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AssociatedGraded|associated.?graded|regular.*graded|graded.*regular",
+   "results": "{\"t\": \"2026-10-23T22:29:50Z\", \"tool\": \"grep\", \"query\": \"AssociatedGraded|associated.?graded|regular.*graded|graded.*regular\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; cotangent dimension, smoothness and formal Hilbert-series polynomials do not state this graded-algebra criterion or homogeneous-quotient growth theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The associated graded ring of a Noetherian local ring is a polynomial ring on a cotangent basis exactly when the local ring is regular",
+   "results": "{\"t\": \"2026-10-23T22:29:50Z\", \"tool\": \"leansearch\", \"query\": \"The associated graded ring of a Noetherian local ring is a polynomial ring on a cotangent basis exactly when the local ring is regular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"Polynomial.isNoetherianRing\", \"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\", \"IsLocalRing.subsingleton_cotangentSpace_iff\", \"IsLocalRing.finrank_cotangentSpace_le_one_iff\", \"SetLike.GradeZero.instRing\", \"IsLocalRing.CotangentSpace.span_image_eq_top_iff\", \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\"], \"digest\": \"4b68f1a575cdae52\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; cotangent dimension, smoothness and formal Hilbert-series polynomials do not state this graded-algebra criterion or homogeneous-quotient growth theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SymmetricAlgebra\", \"IsRegularLocalRing\"",
+   "results": "{\"t\": \"2026-10-23T22:29:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"SymmetricAlgebra\\\", \\\"IsRegularLocalRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; cotangent dimension, smoothness and formal Hilbert-series polynomials do not state this graded-algebra criterion or homogeneous-quotient growth theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular local ring if and only if symmetric algebra of cotangent space maps isomorphically to associated graded ring",
+   "results": "{\"t\": \"2026-10-23T22:29:51Z\", \"tool\": \"leanfinder\", \"query\": \"Regular local ring if and only if symmetric algebra of cotangent space maps isomorphically to associated graded ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.IsStandardSmooth\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\"], \"digest\": \"368b8afe5dd4a729\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; cotangent dimension, smoothness and formal Hilbert-series polynomials do not state this graded-algebra criterion or homogeneous-quotient growth theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert Samuel polynomial detects regular local rings from dimensions of symmetric powers of the maximal ideal modulo its square",
+   "results": "{\"t\": \"2026-10-23T22:29:53Z\", \"tool\": \"leanfinder\", \"query\": \"Hilbert Samuel polynomial detects regular local rings from dimensions of symmetric powers of the maximal ideal modulo its square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"IsLocalRing.finrank_cotangentSpace_le_one_iff\", \"IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim_of_mem_jacobson\"], \"digest\": \"29e8135e642fd7d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; cotangent dimension, smoothness and formal Hilbert-series polynomials do not state this graded-algebra criterion or homogeneous-quotient growth theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-regular-quotient-parameter-approximation",
+  "date": "2026-10-24",
+  "group": "Q107"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Theorem 13.1, printed p.254, with proof through Theorem 13.7, printed p.256; tori are linearly reductive (opening sentence of Chapter 13, and Theorem 12.30). This is the general fixed-scheme smoothness input, not Corollary 13.10 restated. Supporting input: Lemma 13.3, printed p.255, together with 13.2, printed p.254: lifts of a cotangent basis form a regular system of parameters; the approximation criterion permits the system to depend on n. Supporting criterion: Milne 13.2(a), the canonical symmetric-cotangent associated-graded characterization used in Lemma 13.3.",
+   "via": [
+    "lem-sfb-regular-quotient-parameter-approximation",
+    "lem-sfb-torus-fixed-scheme-smooth",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-regular-local-graded-cotangent-criterion",
+  "worker": "stage1",
+  "summary": "Checked Milne 13.2(a), printed p.254, and Stacks 00NO, 00K3, 00KQ. Constructed the canonical map, used a cotangent basis and Nakayama, and proved injectivity by strict Hilbert-growth drop. The converse counts cumulative monomials and compares Hilbert-Samuel degree. One new statement-only generic homogeneous quotient growth lemma; all other inputs reused. Handled zero embedding dimension explicitly and avoided the implicit 00NO dependency of the regular-sequence/domain route. No statement change.",
+  "blueprint": "The inherited from.place identifies the Milne 13.2(a) supporting input to det-thm-sf-ctf-stability-direct-images (3), through regular-quotient parameter approximation. This split realizes the canonical associated-graded criterion without changing that route. Searched current latest blueprint and imported blueprint for regular graded, cotangent, 00K3 and homogeneous ideal; no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-maximal-adic-graded-length-bridge",
+    "why": "Finite homogeneous dimensions, degree-one monomial spanning, and the exact cumulative length identity for a Noetherian local ring; no local-ring Hilbert theorem occurs in this six-functor unit."
+   },
+   {
+    "node": "lem-trf-hilbert-samuel-growth-dimension",
+    "why": "Krull dimension is the degree of the cumulative maximal-adic length polynomial; a generic commutative-algebra tool below the fixed unit route."
+   },
+   {
+    "node": "lem-weil-pbc-associated-graded-ring-structure",
+    "why": "Actual graded algebra multiplication and scalar structure, not just its definition; a generic algebra construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-maximal-adic-graded-length-bridge",
+  "lem-trf-hilbert-samuel-growth-dimension",
+  "lem-weil-pbc-associated-graded-ring-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-bc1344dc9",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-bc1344dc9 (reviewer sub-agent of L); spot-checked: I read all the mathematics. Statement: it matches Milne 13.2(a) (printed p.254, PDF p.266) with Noetherian made explicit, and is unchanged from the base. Stacks tag/label pairs 00NO, 00K3, 00KQ, 00JZ, 061N, 00DM, 00DV, 00KU and 00K8 all match. Step 1: the universal property and associated-graded structure (2)/(3) give mu, and the graded Sym lemma gives the product formula and degree preservation. Step 2: the cotangent-dimension leaf gives e finite; Nakayama applied to n with mn = n^2 shows the lifts generate n; the free-module polynomial leaf gives beta; the bridge's spanning by degree-q monomials gives surjectivity. Step 3: e=0 means n=0, R is a field, dim R = 0 and R is regular. Step 4: ker theta is homogeneous (theta is graded, G a direct sum) and proper (theta(1)=1); M_q is isomorphic to G_q. If I is nonzero, the new node gives deg Q_I < e while Hilbert-Samuel gives deg Q_R = dim R = e; the two agree on all large integers, so the evaluation leaf over Q gives a contradiction. Step 5: the monomial count C(n+e-1,e) has a correct recurrence and boundaries, and with Hilbert-Samuel and the evaluation leaf gives dim R = e, so R is regular. New node lem-sfb-homogeneous-quotient-cumulative-growth: Stacks 00K3 summed via 00JZ; it is true and positive because M_0=k. Small cases tested: d=1 with I=(T^r) gives min(n,r); d=2 with I=(T_1) gives n; powers of the maximal ideal give an eventual constant; the nonzero and proper hypotheses are both needed. B1-B9 hold. It is not a clause of the item. No duplicate: I read polynomial-nonzero-ideal-quotient-dimension-bound, graded-coordinate-polynomial-degree-emptiness, projective-cone-hilbert-standard-degrees, standard-graded-hilbert-function, graded-injective-multiplication-polynomial-lift and projective-hilbert-polynomial-dimension. Not reusing regular-hypersurface-initial-form is justified, because that route goes through lem-sc-regular-local-domain (Stacks 00NP, which uses 00NO). No cycle: the 50-node dependency closure does not contain the item. Batch 5: lem-trf-hilbert-samuel-growth-dimension (33-node closure), lem-trf-maximal-adic-graded-length-bridge (12-node closure) and the Mathlib leaf lem-trf-polynomial-infinite-evaluation-identity are generic local or polynomial algebra, neither assumed statement nor part of their proofs; accepted. Accepted tool_uses: the bridge, Hilbert-Samuel, and associated-graded-ring-structure (Lean-closed). No SGA is cited. No changes."
+ }
+}

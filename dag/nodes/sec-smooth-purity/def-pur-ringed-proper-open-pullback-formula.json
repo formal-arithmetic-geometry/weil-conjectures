@@ -1,0 +1,108 @@
+{
+ "id": "def-pur-ringed-proper-open-pullback-formula",
+ "kind": "definition",
+ "title": "Clopen factorization, pullback comparison and its coefficient compatibility predicate",
+ "statement": "For normalized ringed data c,o,sp,e of [def-pur-ringed-refinement-data] and arrows k:U→V,r:U→W,p:V→Z,i:W→Z, Factorization is the data of H over T and b:H→V,q:H→W,s:U→H, with pullback properties over T and on underlying schemes, equations sb=k,sq=r, b and s open and s with clopen image. For k,i open and a Factorization d, define t_R:i_!,R⋙p_R^*→r_R^*⋙k_!,R as beta, followed by the clopen projector, the pullback compositor for sq=r and the open compositor for sb=k. These are the original explicit definitions, moved unchanged so the pre-mate theorem and its consumer can name the same map without a cycle. PullbackCompatibility is the proposition structure with the single field equation λ_p(i_A N);S_V(t_A N);δ_k(r_A^*N)=p_B^*(δ_i N);t_B(S_W N);k_B(λ_r N), universally in N. It is only a named presentation of this pre-mate equation and does not assert that it holds.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, open case, with Tags 08FJ and 0GL1 for the normalized clopen extension construction."
+ },
+ "stmt_deps": [
+  "def-pur-ringed-refinement-data"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A scalar extension preserves the clopen projector and open pullback base change comparison on derived sheaves of modules",
+   "results": "ModuleCat.ExtendScalars.obj', ModuleCat.preservesFiniteLimits_extendScalars_of_flat, LinearEquiv.extendScalarsOfIsLocalizationEquiv, Algebra.FormallyUnramified.projective_of_restrictScalars, PresheafOfModules.pullback, AlgHom.extendScalars, PresheafOfModules.restrictScalarsObj, ModuleCat.restrictCoextendScalarsAdj.",
+   "date": "2026-10-25",
+   "verdict": "No match: ordinary module scalar APIs do not assert the normalized clopen derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of rings preserves a proper open mate by adjunction and a compatible left adjoint square",
+   "results": "CategoryTheory.mateEquiv_apply, mateEquiv, mateEquiv_counit, mateEquiv_square, iterated_mateEquiv_conjugateEquiv, mateEquiv_conjugateEquiv_vcomp, mateEquiv_counit_symm, mateEquiv_symm_apply.",
+   "date": "2026-10-25",
+   "verdict": "The mates equivalence exists in Mathlib, but the explicit unit/whiskering/counit word is recorded as a direct generic constructor so its specialized use does not kernel-normalize derived functor constructions. No arbitrary mate data is introduced."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*coefficient|mateEquiv_square",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean:245 and Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:362 give mateEquiv_square. Repository searches find RingedRefinementClopen (only identity-left refinement compatibility), SemilinearScalarProperOpen and SemilinearAlphaPullback (constant coefficient towers), not this arbitrary ring-sheaf pullback identity. blueprint_refs.py search \"clopen coefficient\" returns 0 blueprint nodes. blueprint_refs.py search \"adjunction mate\" returned det-ctf-finite-proper-localizing, det-sp-reduction-compatibilities, lem-cbc-extension-zero-base-change, lem-sf-projection-finite-constant; none is this generic constructor.",
+   "date": "2026-10-25",
+   "verdict": "No existing arbitrary ring-sheaf general-square pullback identity. Reuse the existing normalized operations and split only the geometric compatibility step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProperOpenCoefficientSquare",
+  "group": "M9",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Intended source recorded by the item: thm-pur-rational-and-qbar-purity; current sk-prop-sp-composition proof, Towers and passage by Rlim, inversion of ell and finite-extension descent; sk-thm-purity-transport proof Steps 2–3, identifying the reconstructed compact-support adjunction with the specified condensed one. The created.item chain ends at the launcher-created nt-target-smooth-purity-qbar, whose created.item is a human description, so the computed nearest imported blueprint ancestor is null. This auxiliary supplies the single proper/open coefficient square used when reducing the completed compositor and then changing to E and Omega coefficients. The explicit mate formula, Steps 4–5; generic constructor avoids repeated kernel expansion of derived functors. The beta/projector/compositor word before transposition, parent Steps 1–3.",
+   "via": [
+    "lem-pur-ringed-proper-open-coefficient-square",
+    "lem-pur-condensed-compositor-realization",
+    "lem-route-smooth-purity-iso-comp-open-immersion",
+    "def-pur-condensed-smooth-purity-iso",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProperOpenPullbackCoefficients",
+  "file": "lean/Sheaf/Paper/RingedProperOpenPullbackCoefficients.lean",
+  "declaration": "SheafOfModules.RingedProperOpen.t",
+  "statement": "def t {m : Mode} {T : Scheme.{u}} {c : Coefficients m T} {o : Calculus c}\n    {sp : Spatial o} (e : OpenComparisons sp)\n    {U V W Z : Over T} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n    [IsOpenImmersion k.left] [IsOpenImmersion i.left]\n    (d : Factorization k r p i) (R : Rings m T) :\n    o.shriek i R ⋙ (o.operation p R).left ⟶\n      (o.operation r R).left ⋙ o.shriek k R",
+  "branch": "sheaf-dag",
+  "by": "M9",
+  "date": "2026-10-26",
+  "note": "Original Factorization and t moved verbatim from the item to this public dependency; no changed map, signature or proof hole. PullbackCompatibility contains exactly the pre-mate equation as a Prop field; it is a performance interface, not assumed data.",
+  "declarations": [
+   "SheafOfModules.RingedProperOpen.PullbackCompatibility",
+   "SheafOfModules.RingedProperOpen.Factorization",
+   "SheafOfModules.RingedProperOpen.t"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-24263",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T211954-L-4179387",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-24263",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T211954-L-4179387",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + new RingedProperOpenPullbackCoefficients module and 4 node files vs clone sheaf-dag (68b8e04) and lem-pur-ringed-proper-open-coefficient-square Steps 1-5; defeq of new gamma/left/right with old bodies checked by rfl in a scratch compile"
+ }
+}

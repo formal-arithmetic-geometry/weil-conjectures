@@ -1,0 +1,342 @@
+{
+ "id": "lem-trf-tate-root-finite-rank-bseparation",
+ "kind": "statement",
+ "title": "Bounded separation of finite-rank Tate root modules",
+ "statement": "Let $k$ be a field [def-weil-field] complete for a nontrivial real-valued multiplicative nonarchimedean absolute value, with $\\operatorname{char}(k)=p>0$. Let $n\\ge1$, $T=k\\langle X_1,\\ldots,X_n\\rangle$ be the restricted-series ring [def-trf-restricted-series-presentation] with Gauss absolute value $G(\\sum_\\nu a_\\nu X^\\nu)=\\sup_\\nu|a_\\nu|$ (multiplicative and definite, so $T$ is an integral domain), and put $F=\\operatorname{Frac}(T)$. In an algebraic closure $\\overline F$, put $T^{1/p}=\\{z\\in\\overline F:z^p\\in T\\}$ with norm $N(z)=G(z^p)^{1/p}$. Let $M\\subseteq T^{1/p}$ be a $T$-submodule of finite rank, meaning that its $F$-linear span inside $F^{1/p}=\\{z\\in\\overline F:z^p\\in F\\}$ has finite dimension. For every nonzero $x\\in M$, there exist a $T$-linear map $\\lambda:M\\to T$ and a real $B>0$ with $\\lambda(x)\\ne0$ and $$G(\\lambda(y))\\le B N(y)\\qquad(y\\in M).$$ No finite-degree hypothesis on $k^{1/p}/k$ is imposed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Lemma 5.3.1/2 and its proof, printed pp.212-213 (scan PDF pp.218-219); bounded separation is the expanded meaning of b-separable.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Fix $0\\ne x\\in M$. Put $k_1=\\{c\\in\\overline F:c^p\\in k\\}$ with $|c|_1=|c^p|^{1/p}$, and $A=k_1\\langle Y_1,\\ldots,Y_n\\rangle$. The field $k_1$ is complete: if $(c_j)$ is Cauchy then $(c_j^p)$ is Cauchy in $k$, and the unique $p$th root of its limit is a limit of $(c_j)$, since $|c_i-c_j|_1^p=|c_i^p-c_j^p|$. The characteristic-$p$ identity for series is $(\\sum c_\\nu Y^\\nu)^p=\\sum c_\\nu^pY^{p\\nu}$: for each coefficient it is the finite multinomial identity, whose mixed coefficients vanish modulo $p$. Thus $T\\to A$, $X_i\\mapsto Y_i^p$, identifies $A$ with $T^{1/p}$: take the unique coefficient roots of any $\\sum a_\\nu X^\\nu\\in T$ and then its unique root in $\\overline F$. Restrictedness in both directions is exactly $|a_\\nu|=|a_\\nu^{1/p}|_1^p$. This is a ring identification over $T$, and $N(\\sum c_\\nu Y^\\nu)=\\sup_\\nu|c_\\nu|_1$, because raising this supremum to $p$ gives $G(\\sum c_\\nu^pX^\\nu)$. The Gauss norm is finite and definite by [lem-trf-restricted-series-gauss-completion].",
+   "uses": [
+    "def-trf-restricted-series-presentation",
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "5.3.1/2 proof, printed pp.212-213: root-series identification, with the coefficient calculation written out."
+   }
+  },
+  {
+   "text": "Choose $m_1,\\ldots,m_r\\in M$ which form an $F$-basis of its finite-dimensional $F$-span. Their series coefficients constitute an at most countable set $D\\subset k_1$, since $r$ and $n$ are finite. Let $B_0=k[D]\\subset k_1$. Every $b\\in B_0$ satisfies $b^p\\in k$; if $b\\ne0$, then $b^{-1}=b^{p-1}/b^p\\in B_0$. Hence $B_0$ is a field. It is spanned over $k$ by the countable set of finite monomials in $D$. Let $k^{\\prime}$ be its metric closure in $k_1$. This closure is a field: addition and multiplication pass to limits, and if $b_j\\to a\\ne0$, eventually $|b_j|_1=|a|_1$, so $|b_j^{-1}-a^{-1}|_1=|b_j-a|_1/|a|_1^2\\to0$. It is complete as a closed subset of the complete $k_1$, contains $k$ and $D$, and has the countable monomials as a set with dense $k$-linear span. Its absolute value is nontrivial on $k$. Set $S=k^{\\prime}\\langle Y_1,\\ldots,Y_n\\rangle\\subset A$; all $m_i$ belong to $S$, and $T\\subset S$ via $X_i=Y_i^p$.",
+   "uses": [
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "5.3.1/2 proof, printed p.213: choose a maximal independent family and its smallest complete coefficient field; countable-type assertion expanded."
+   }
+  },
+  {
+   "text": "For every $m\\in M$, its basis expression $m=\\sum_i f_i m_i$ with $f_i\\in F=\\operatorname{Frac}(T)$ puts $m$ in $\\operatorname{Frac}(S)$, since $T\\subset S$ and $m_i\\in S$. Also $m^p\\in T\\subset S$, so $m$ satisfies the monic polynomial $Z^p-m^p\\in S[Z]$. Apply [lem-trf-tate-integrally-closed] with the complete field $K=k^{\\prime}$ and $d=n$: this proves $m\\in S$. Thus $M\\subset S$, including elements outside the $T$-span of the chosen basis. The Gauss norm of $S$ is its inherited norm from $A$, so it is precisely $N$ on $M$.",
+   "uses": [
+    "lem-trf-tate-integrally-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "5.3.1/2 proof, printed p.213, last paragraph: rational-span containment and monic integrality; BGR 5.2.6/2 normality input replaced by its existing DAG node."
+   }
+  },
+  {
+   "text": "Partition exponents into residue classes modulo $p$. For $s=\\sum_\\nu c_\\nu Y^\\nu\\in S$ and $\\alpha\\in\\{0,\\ldots,p-1\\}^n$, put $s_\\alpha(X)=\\sum_\\mu c_{p\\mu+\\alpha}X^\\mu\\in k^{\\prime}\\langle X\\rangle$. These series are restricted because their coefficients are subfamilies of the coefficients of $s$. Comparing coefficients gives $s=\\sum_\\alpha Y^\\alpha s_\\alpha(X)$, uniquely, and $N(s)=\\max_\\alpha G_{k^{\\prime}}(s_\\alpha)$; here $G_{k^{\\prime}}$ is the coefficient supremum over $k^{\\prime}$. For $t\\in T$, the finite Cauchy convolution gives $(ts)_\\alpha=t s_\\alpha$, so every projection $s\\mapsto s_\\alpha$ is $T$-linear and decreases the norm. Since $x\\ne0$, choose a nonzero coefficient $c$ of some $x_\\alpha$. Apply [lem-trf-countable-type-bounded-dual] to the $k$-normed space $k^{\\prime}$ from step 2 to get a $k$-linear $h:k^{\\prime}\\to k$ and $C>0$ with $h(c)\\ne0$ and $|h(a)|\\le C|a|_1$ for all $a\\in k^{\\prime}$.",
+   "uses": [
+    "def-trf-restricted-series-presentation",
+    "lem-trf-countable-type-bounded-dual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "5.3.1/2 proof, printed p.213: countable-type bounded dual and norm-direct residue-class decomposition; Proposition 2.7.1/2."
+   }
+  },
+  {
+   "text": "Define $H:k^{\\prime}\\langle X\\rangle\\to T$ by $H(\\sum_\\mu a_\\mu X^\\mu)=\\sum_\\mu h(a_\\mu)X^\\mu$. It lands in restricted series and satisfies $G(H(f))\\le C G_{k^{\\prime}}(f)$, since $|h(a_\\mu)|\\le C|a_\\mu|_1$. It is additive, and for $t=\\sum_\\beta b_\\beta X^\\beta\\in T$ the coefficient at $\\nu$ of $H(tf)$ is $h(\\sum_{\\beta+\\mu=\\nu}b_\\beta a_\\mu)=\\sum_{\\beta+\\mu=\\nu}b_\\beta h(a_\\mu)$, exactly the coefficient of $tH(f)$. All sums here are finite, so only $k$-linearity is used; $h$ need not be multiplicative. Hence $\\lambda(y)=H(y_\\alpha)$ is a $T$-linear map $M\\to T$. Its value on $x$ has the selected coefficient $h(c)\\ne0$, and $G(\\lambda(y))\\le C G_{k^{\\prime}}(y_\\alpha)\\le C N(y)$ for every $y\\in M$. Take $B=C$. If $M=0$ the assertion has no nonzero $x$ and is vacuous. No step bounds $[k_1:k]$.",
+   "uses": [
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "BGR 2.2.6/3 proof, printed p.88 (scan PDF p.96), coefficientwise bounded-map calculation; 5.3.1/2 proof, printed p.213, restriction of separating maps to M."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-restricted-series-presentation",
+  "lem-trf-restricted-series-gauss-completion",
+  "lem-trf-tate-integrally-closed",
+  "lem-trf-countable-type-bounded-dual"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "BGR 5.3.1/2, printed pp.212-213, and 2.7.1/2, printed p.110, read from the online primary scan; local archival copy WANTED. Agent expands the root, countable-coefficient and convolution calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every finite rank submodule of the pth root ring of a Tate algebra is separated by bounded Tate algebra linear functionals to the Tate algebra",
+   "results": {
+    "t": "2026-10-24T15:38:25Z",
+    "tool": "leanfinder",
+    "query": "Every finite rank submodule of the pth root ring of a Tate algebra is separated by bounded Tate algebra linear functionals to the Tate algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "krullTopology_isTotallySeparated",
+     "BDeRham",
+     "BDeRhamPlus",
+     "krullTopology_t2",
+     "Field.span_map_pow_expChar_pow_eq_top_of_isSeparable",
+     "instCommRingBDeRhamPlus",
+     "IsHausdorff.of_isTorsionFree",
+     "IsHausdorff.of_map"
+    ],
+    "digest": "98738a133244d6e3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Finite generation, purely inseparable bases, and adic separatedness do not supply bounded T-linear functionals for the Gauss norm."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite rank submodule of the pth root of a Tate algebra is b-separable by bounded linear functionals",
+   "results": {
+    "t": "2026-10-24T15:40:24Z",
+    "tool": "leanfinder",
+    "query": "Every finite rank submodule of the pth root of a Tate algebra is b-separable by bounded linear functionals",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Field.span_map_pow_expChar_pow_eq_top_of_isSeparable",
+     "exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType",
+     "Module.Basis.mapPowExpCharPowOfIsSeparable",
+     "exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow'",
+     "exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow",
+     "exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top",
+     "IsPurelyInseparable.hasExponent_of_finiteDimensional",
+     "Algebra.FormallyUnramified.isSeparable"
+    ],
+    "digest": "69eff2e1f3a48197"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Finite generation, purely inseparable bases, and adic separatedness do not supply bounded T-linear functionals for the Gauss norm."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite generated module over Tate algebra inside pth root extension separated by bounded linear maps",
+   "results": {
+    "t": "2026-10-24T15:40:24Z",
+    "tool": "leansearch",
+    "query": "finite generated module over Tate algebra inside pth root extension separated by bounded linear maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Finite.map",
+     "Module.Finite.linearMap",
+     "ModuleCat.isFG",
+     "FiniteField.instFiniteExtension_1",
+     "Module.Finite.finiteType",
+     "MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictTotalDegreeOfFinite",
+     "Module.Finite.range",
+     "MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictDegreeOfFinite"
+    ],
+    "digest": "ddb8f230b5883b72"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Finite generation, purely inseparable bases, and adic separatedness do not supply bounded T-linear functionals for the Gauss norm."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"b-separable\"",
+   "results": {
+    "t": "2026-10-24T15:40:25Z",
+    "tool": "loogle",
+    "query": "\"b-separable\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Finite generation, purely inseparable bases, and adic separatedness do not supply bounded T-linear functionals for the Gauss norm."
+  },
+  {
+   "tool": "grep",
+   "query": "b.separ|Tate.*root|p.?root",
+   "results": {
+    "t": "2026-10-24T15:40:25Z",
+    "tool": "grep",
+    "query": "b.separ|Tate.*root|p.?root",
+    "sub": "Analysis/Normed",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Finite generation, purely inseparable bases, and adic separatedness do not supply bounded T-linear functionals for the Gauss norm."
+  },
+  {
+   "tool": "grep",
+   "query": "b.separ|Tate.*root|p.?root",
+   "results": {
+    "t": "2026-10-24T16:20:27Z",
+    "tool": "grep",
+    "query": "b.separ|Tate.*root|p.?root",
+    "sub": "Analysis/Normed",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: hits concern unrelated perfectoid rings, purely algebraic ranks or adic separatedness, not bounded Tate-module separation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"b-separable\"",
+   "results": {
+    "t": "2026-10-24T16:20:27Z",
+    "tool": "loogle",
+    "query": "\"b-separable\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: hits concern unrelated perfectoid rings, purely algebraic ranks or adic separatedness, not bounded Tate-module separation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded separation of finite rank root modules of restricted series rings",
+   "results": {
+    "t": "2026-10-24T16:20:27Z",
+    "tool": "leansearch",
+    "query": "Bounded separation of finite rank root modules of restricted series rings",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LieModule.rank_le_finrank",
+     "Ideal.finrank_eq_finrank",
+     "IsAdjoinRootMonic.finrank",
+     "Module.rank_lt_aleph0_iff",
+     "Submodule.finrank_le",
+     "iSupIndep.subtype_ne_bot_le_finrank_aux",
+     "Matroid.IsRkFinite",
+     "Module.finite_of_finrank_pos"
+    ],
+    "digest": "22c6d0347b62aa93"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: hits concern unrelated perfectoid rings, purely algebraic ranks or adic separatedness, not bounded Tate-module separation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite rank submodules of the pth root of a Tate algebra are separated by bounded Tate linear maps",
+   "results": {
+    "t": "2026-10-24T16:20:30Z",
+    "tool": "leanfinder",
+    "query": "Finite rank submodules of the pth root of a Tate algebra are separated by bounded Tate linear maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "BDeRham",
+     "BDeRhamPlus",
+     "PreTilt.exists_smodEq_untiltAux",
+     "PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_isPrime",
+     "IsHausdorff.of_isTorsionFree",
+     "IsAdicComplete.toIsHausdorff",
+     "Field.span_map_pow_expChar_pow_eq_top_of_isSeparable",
+     "instCommRingBDeRhamPlus"
+    ],
+    "digest": "b4697883fdb9a707"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: hits concern unrelated perfectoid rings, purely algebraic ranks or adic separatedness, not bounded Tate-module separation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tate-fraction-weak-stability",
+  "date": "2026-10-24",
+  "group": "ND"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Theorem 5.3.1/1 and its proof, printed pp.212–213 (scan PDF pp.218–219); Definition 3.5.2/1, printed p.153 (scan PDF p.161), gives weak stability. The displayed inequalities spell out the weakly cartesian topology for a finite basis. Proof of BGR 5.3.1/1: Lemma 5.3.1/2 and its proof, printed pp.212-213 (scan PDF pp.218-219); bounded separation is the expanded meaning of b-separable.",
+   "via": [
+    "lem-trf-tate-fraction-weak-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-tate-root-finite-rank-bseparation",
+  "worker": "stage1",
+  "summary": "Retained the statement and followed BGR: identify the root ring, choose a countable-type complete coefficient subfield, use existing Tate normality to contain M, then construct bounded separating maps by residue projections and coefficientwise scalar functionals. One new generic countable-type bounded-dual node; no Lean changes.",
+  "blueprint": "The inherited historical analytic branch below lem-trf-local-term-locality, specifically BGR 5.3.1/2 in the weak-stability input; not a replacement of the current contracting-correspondence unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-80e42b1d3",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-80e42b1d3 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-trf-countable-type-bounded-dual, the cited statements (def-trf-restricted-series-presentation, lem-trf-restricted-series-gauss-completion, lem-trf-tate-integrally-closed; all in unit sk-i-curve-zero, so no tool_uses needed) and parent lem-trf-tate-fraction-weak-stability step 2. The parent's use is covered: a finitely generated M has finite rank. The item statement is BGR 5.3.1/2 b-separability written out; it is not weakened and assumes neither finite generation nor finite [k^{1/p}:k]. Step 1: k_1=k^{1/p} is complete, and Frobenius gives A=k_1<Y> ≅ T^{1/p} with N = coefficient supremum (checked). Step 2: the coefficients D are countable, k[D] is a field since b^p is in k, and its closure k' is a complete field (the inverse estimate is correct) of countable type. Step 3: m = sum of f_i m_i lies in Frac(S) and is a root of Z^p-m^p in S[Z]; integral closedness with K=k' gives M in S, including elements outside the T-span of the basis. Step 4: the residue decomposition is unique and preserves norms; (ts)_alpha = t s_alpha checked; the new node applies because |a|_1=|a| on k. Step 5: coefficientwise H is T-linear through finite sums and k-linearity, gives G(lambda y) <= C N(y), and lambda(x) has the coefficient h(c), which is nonzero. New node: true (t-orthogonal sequence starting at v over complete nontrivial k; completion and restriction for incomplete V). Small cases checked: V=k, finite-dimensional V, dense incomplete span. It is self-contained, statement-only, with all three kinds of search and correct blueprint fields, and is generic rather than a restatement of the item. A whole-DAG duplicate scan found only finite-E/Q_l countable-basis nodes and finite orthogonal-basis nodes, none a duplicate. A slower first version of that scan hit its time limit and was stopped; the single-script rerun completed. BGR is not in literature/, so I could not check the cited pages; the worker records it as WANTED and the proof is correctly marked agent-written. No SGA citation. No fixes written."
+ }
+}

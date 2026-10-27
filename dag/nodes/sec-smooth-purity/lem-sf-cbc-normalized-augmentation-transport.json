@@ -1,0 +1,246 @@
+{
+ "id": "lem-sf-cbc-normalized-augmentation-transport",
+ "kind": "statement",
+ "title": "Transport of augmentations through a normalized comparison",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "statement": "Let $\\mathcal D_U,\\mathcal D_V,\\mathcal E_U,\\mathcal E_V$ be categories [def-nagata-category]. All functors and natural transformations below use their ordinary categorical meaning: a natural transformation $a:S\\Rightarrow T$ has components satisfying $T(t)a_X=a_YS(t)$ for every $t:X\\to Y$. For $T=U,V$ let $\\Delta_T,B_T:\\mathcal D_T\\to\\mathcal E_T$, $L_T:\\mathcal E_T\\to\\mathcal D_T$, $i_T:\\Delta_T\\Rightarrow B_T$, and natural isomorphisms $j_T:L_T\\Delta_T\\xrightarrow{\\sim}1_{\\mathcal D_T}$. Let $P:\\mathcal D_U\\to\\mathcal D_V$ and $Q:\\mathcal E_U\\to\\mathcal E_V$ be functors, with natural isomorphisms $\\chi:\\Delta_VP\\xrightarrow{\\sim}Q\\Delta_U$ and $b:PL_U\\xrightarrow{\\sim}L_VQ$. Let $h:B_VP\\Rightarrow QB_U$ be a natural transformation. Assume, for every $F\\in\\mathcal D_U$, the augmentation equation\n$$h_F\\circ i_{V,PF}=Q(i_{U,F})\\circ\\chi_F$$\nand the constant-object normalization\n$$b_{\\Delta_UF}\\circ P(j_{U,F}^{-1})=L_V(\\chi_F)\\circ j_{V,PF}^{-1}.$$\nSet $C_T=L_TB_T$ and $\\eta_{T,H}=L_T(i_{T,H})\\circ j_{T,H}^{-1}$ for $H\\in\\mathcal D_T$, and define\n$$\\rho_F=b_{B_UF}^{-1}\\circ L_V(h_F):C_V(PF)\\to P(C_UF).$$\nThen $\\rho:C_VP\\Rightarrow PC_U$ is natural, and for every $F$ one has both equalities\n$$L_V(h_F)\\circ\\eta_{V,PF}=b_{B_UF}\\circ P(\\eta_{U,F}),\\qquad \\rho_F\\circ\\eta_{V,PF}=P(\\eta_{U,F}).$$\nExplicitly, for every $t:F\\to F'$,\n$$P(C_Ut)\\circ\\rho_F=\\rho_{F'}\\circ C_V(Pt).$$\nNo limit universal property, abelian or derived structure, or invertibility of $h$, $i_T$ or $\\eta_T$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+  "place": "Step 5, direct-image ingredient: abstract categorical extraction of normalized-augmentation pasting and naturality from lem-sf-cbc-direct-image-reduction-unit old Steps 2 and 3. Agent lemma; derived specialization uses sites-cohomology.tex Tag 0A07 (lemma-Rf-commutes-with-Rlim)."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "Fix $F\\in\\mathcal D_U$. All compositions below are well typed: $\\eta_{V,PF}:PF\\to L_VB_VPF$, $L_V(h_F):L_VB_VPF\\to L_VQB_UF$, and $b_{B_UF}:PL_UB_UF\\xrightarrow{\\sim}L_VQB_UF$. Expanding $\\eta_V$ and applying $L_V$ to the assumed augmentation equation gives\n$$L_V(h_F)\\circ\\eta_{V,PF}=L_V(h_F\\circ i_{V,PF})\\circ j_{V,PF}^{-1}=L_V(Q(i_{U,F}))\\circ L_V(\\chi_F)\\circ j_{V,PF}^{-1}.$$\nThis uses only preservation of composition by the given functor $L_V$ and associativity from [def-nagata-category].",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "fix-lem-exchanges Proof Step 5, direct-image ingredient; agent expansion of the extracted normalized-augmentation transport calculation."
+   }
+  },
+  {
+   "text": "The assumed constant-object normalization replaces the last two factors in Step 1:\n$$L_V(h_F)\\circ\\eta_{V,PF}=L_V(Q(i_{U,F}))\\circ b_{\\Delta_UF}\\circ P(j_{U,F}^{-1}).$$\nHere both $L_V(\\chi_F)\\circ j_{V,PF}^{-1}$ and $b_{\\Delta_UF}\\circ P(j_{U,F}^{-1})$ have source $PF$ and target $L_VQ\\Delta_UF$; this is direct substitution, with reassociation as in [def-nagata-category].",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "fix-lem-exchanges Proof Step 5, direct-image ingredient; agent expansion of the extracted normalized-augmentation transport calculation."
+   }
+  },
+  {
+   "text": "Apply the stated naturality condition of $b:PL_U\\Rightarrow L_VQ$ to the morphism $i_{U,F}:\\Delta_UF\\to B_UF$. It says exactly\n$$L_V(Q(i_{U,F}))\\circ b_{\\Delta_UF}=b_{B_UF}\\circ P(L_U(i_{U,F})).$$\nSubstituting this into Step 2, reassociating by [def-nagata-category], and using preservation of composition by $P$, the result is\n$$L_V(h_F)\\circ\\eta_{V,PF}=b_{B_UF}\\circ P\\bigl(L_U(i_{U,F})\\circ j_{U,F}^{-1}\\bigr)=b_{B_UF}\\circ P(\\eta_{U,F}).$$\nThis proves the first required equality directly from the hypotheses.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "fix-lem-exchanges Proof Step 5, direct-image ingredient; agent expansion of the extracted normalized-augmentation transport calculation."
+   }
+  },
+  {
+   "text": "Compose the equality of Step 3 on the left with $b_{B_UF}^{-1}$. By the definition of $\\rho$ and the inverse identity $b_{B_UF}^{-1}\\circ b_{B_UF}=\\mathrm{id}_{P(C_UF)}$, associativity and the identity law [def-nagata-category] give\n$$\\rho_F\\circ\\eta_{V,PF}=b_{B_UF}^{-1}\\circ b_{B_UF}\\circ P(\\eta_{U,F})=P(\\eta_{U,F}).$$\nOnly the stipulated invertibility of $b$ is used in this cancellation.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "fix-lem-exchanges Proof Step 5, direct-image ingredient; agent expansion of the extracted normalized-augmentation transport calculation."
+   }
+  },
+  {
+   "text": "The comparison is already constructed as the composite of the natural transformations Functor.whiskerRight h L_V and Functor.whiskerLeft B_U b.inv. Its component at F is L_V.map (h.app F) followed by b.inv.app (B_U.obj F), exactly the stated rho. Whiskering and composition use only functoriality, the given naturality of h and b.inv, and the category laws [def-nagata-category]. Thus the separate conjugation calculation of inverse naturality is supplied by the natural-isomorphism API.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "fix-lem-exchanges Proof Step 5, direct-image ingredient; agent expansion of the extracted normalized-augmentation transport calculation."
+   }
+  },
+  {
+   "text": "Apply Mathlib CategoryTheory.NatTrans.naturality to normalizedAugmentationComparison B_U L_V b h and t : F ⟶ F′. Its source map is L_V.map (B_V.map (P.map t)) and its target map is P.map (L_U.map (B_U.map t)). Symmetry gives exactly the displayed naturality equality for rho. This is the defining naturality condition, instantiated at the composite natural transformation of Step 5; no additional lemma or hypothesis is needed beyond [def-nagata-category] and the given categorical data.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "fix-lem-exchanges Proof Step 5, direct-image ingredient; agent expansion of the extracted normalized-augmentation transport calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+  "place": "fix-lem-exchanges Proof Step 5, direct-image ingredient; agent expansion of the extracted normalized-augmentation transport calculation. Lean proof by M8: Steps 1–4 are explicit component calculations; Steps 5–6 use the naturality of the constructed whiskered composite."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For functors between four categories a natural augmentation comparison and a normalized natural limit comparison induce a natural transformation that intertwines the induced units",
+   "results": "8 hits: CategoryTheory.Limits.limit.lift_map, CategoryTheory.Adjunction.functorialityUnit', CategoryTheory.NatTrans, CategoryTheory.Limits.prodComparisonNatIso, CategoryTheory.Limits.prodComparisonNatTrans, CategoryTheory.Limits.HasLimit.isoOfNatIso, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_unit_app, CategoryTheory.Adjunction.functorialityUnit_app_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality and whiskering are available, but no hit states the two prescribed-square hypotheses and the resulting normalized unit equations for arbitrary four categories."
+  },
+  {
+   "tool": "grep",
+   "query": "augmentation.*(limit|comparison)|comparison.*augmentation",
+   "results": "0 hits: ; directory Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality and whiskering are available, but no hit states the two prescribed-square hypotheses and the resulting normalized unit equations for arbitrary four categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transporting an augmented natural transformation across a normalized functor comparison gives a natural transformation commuting with the augmentation unit",
+   "results": "8 hits: CategoryTheory.SimplicialObject.augment_hom_app, CategoryTheory.SimplicialObject.Augmented.whiskering, CategoryTheory.SimplicialObject.Augmented.whiskeringObj, CategoryTheory.SimplicialObject.Augmented.toArrow, CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.map, CategoryTheory.SimplicialObject.Augmented.whiskering_map_app_right, CategoryTheory.SimplicialObject.Augmented.whiskering_map_app_left, CategoryTheory.WithInitial.map₂",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality and whiskering are available, but no hit states the two prescribed-square hypotheses and the resulting normalized unit equations for arbitrary four categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If h i equals Q i chi and b is natural with b on constant objects equal to L chi then b inverse L h preserves the units L i",
+   "results": "8 hits: CategoryTheory.Idempotents.DoldKan.η_inv_app_f, AlgebraicTopology.DoldKan.Compatibility.υ_inv_app, CategoryTheory.Idempotents.karoubiCochainComplexEquivalence_unitIso_inv_app_f_f, CategoryTheory.Idempotents.karoubiChainComplexEquivalence_unitIso_inv_app_f_f, AlgebraicTopology.DoldKan.Γ₀NondegComplexIso_inv_f, HomologicalComplex.singleMapHomologicalComplex_inv_app_self, CategoryTheory.Idempotents.KaroubiHomologicalComplexEquivalence.unitIso_inv_app_f_f, ModuleCat.FreeMonoidal.εIso_inv_freeMk",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality and whiskering are available, but no hit states the two prescribed-square hypotheses and the resulting normalized unit equations for arbitrary four categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality and whiskering are available, but no hit states the two prescribed-square hypotheses and the resulting normalized unit equations for arbitrary four categories."
+  },
+  {
+   "tool": "grep",
+   "query": "augmentation.*(compar|normal)|normalized.*augmentation|naturality.*inv|inv.*naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean, Mathlib/CategoryTheory/EqToHom.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits provide naturality, whiskering, and inverse cancellation individually; none states both normalized augmentation equations and naturality under the specified two hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commuting square of natural transformations and a normalized natural isomorphism imply that the conjugated natural transformation commutes with the induced augmentation",
+   "results": "8 hits: CategoryTheory.CatCommSq.iso_hom_naturality_assoc, CategoryTheory.CatCommSq.iso_inv_naturality_assoc, CategoryTheory.CatCommSq.iso_inv_naturality, CategoryTheory.NatTrans.mapSquare, CategoryTheory.NatTrans.naturality_2_assoc, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.e, CategoryTheory.CatCommSq.iso_hom_naturality, CategoryTheory.NatTrans.naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits provide naturality, whiskering, and inverse cancellation individually; none states both normalized augmentation equations and naturality under the specified two hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits provide naturality, whiskering, and inverse cancellation individually; none states both normalized augmentation equations and naturality under the specified two hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural comparison b between P composed L and L composed Q normalized on constant objects transports an augmentation L i j inverse and the composite b inverse L h is natural and preserves augmentations",
+   "results": "8 hits: AlgebraicTopology.DoldKan.Compatibility.τ₁, CategoryTheory.SimplicialObject.Augmented.whiskering, AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app, CategoryTheory.Abelian.DoldKan.comparisonN_inv_app_f, AlgebraicTopology.DoldKan.Compatibility.υ, CategoryTheory.SimplicialObject.Augmented.w₀, CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.map, CategoryTheory.SimplicialObject.augment_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits provide naturality, whiskering, and inverse cancellation individually; none states both normalized augmentation equations and naturality under the specified two hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "naturality|hom_inv_id_app|inv_hom_id_app",
+   "results": "5 hits: 22, 25, 61, 65, 69; directory Mathlib/CategoryTheory/NatIso.lean; single-file rg output lacks a filename prefix, so the helper parsed line numbers as filenames; inspected NatIso.lean lines 15-72 directly, and repeated the grep on the whole CategoryTheory directory for correct file-and-line results.",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits provide naturality, whiskering, and inverse cancellation individually; none states both normalized augmentation equations and naturality under the specified two hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given natural transformations h and i and natural isomorphisms b j chi satisfying h i = Q i chi and b P j inverse = L chi j inverse, prove b inverse L h L i j inverse = P of L i j inverse",
+   "results": "8 hits: CategoryTheory.Iso.inv_hom_id_app_app_app, CategoryTheory.Iso.map_hom_inv_id_app_assoc, CategoryTheory.Iso.map_inv_hom_id_app_assoc, CategoryTheory.NatIso.naturality_2', CategoryTheory.NatIso.naturality_1', CategoryTheory.Iso.inv_hom_id_app_assoc, CategoryTheory.Iso.map_inv_hom_id_app, CategoryTheory.Iso.hom_inv_id_app_app_app",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits provide naturality, whiskering, and inverse cancellation individually; none states both normalized augmentation equations and naturality under the specified two hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "^(structure NatTrans|theorem hom_inv_id_app|theorem inv_hom_id_app|def whiskerLeft|def whiskerRight|theorem naturality)",
+   "results": "25 hits: Mathlib/CategoryTheory/FiberedCategory/BasedCategory.lean, Mathlib/CategoryTheory/FiberedCategory/BasedCategory.lean, Mathlib/CategoryTheory/NatIso.lean, Mathlib/CategoryTheory/NatIso.lean, Mathlib/CategoryTheory/NatIso.lean, Mathlib/CategoryTheory/NatIso.lean, Mathlib/CategoryTheory/NatIso.lean, Mathlib/CategoryTheory/Functor/Category.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits provide naturality, whiskering, and inverse cancellation individually; none states both normalized augmentation equations and naturality under the specified two hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-cbc-direct-image-reduction-unit",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "blueprint": {
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Proof Step 5, proper/direct-image ingredient; normalization and naturality calculation formerly in direct-image-reduction-unit Steps 2 and 3",
+   "via": [
+    "lem-sf-cbc-direct-image-reduction-unit",
+    "lem-sf-cbc-compact-support-composition-limit"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-cbc-normalized-augmentation-transport",
+  "worker": "stage1",
+  "summary": "NU gives six elementary steps proving both augmentation equalities and naturality from the two stipulated equations, functor laws, and the naturality of b and h. The statement and its dependencies are unchanged; no new nodes are needed. Exact project attachment and whole-blueprint searches found no match; logged Mathlib searches find only individual categorical ingredients.",
+  "blueprint": "fix-lem-exchanges Proof Step 5, direct-image ingredient of the proper-composition law: realizes the normalized augmentation and naturality calculation extracted through lem-sf-cbc-direct-image-reduction-unit and lem-sf-cbc-compact-support-composition-limit."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NU-84ddd117f",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-84ddd117f (reviewer sub-agent of L); spot-checked: I read the item and the delivery in full. There are no new nodes. Compared with clones/live and side-live, where the item is still unsplit, the statement, stmt_deps, source, created and blueprint fields are byte-identical; only status, proof, proof_deps, proof_origin, mathlib_searches and split_report changed. No other group has split the item, it is not in the 2026-10-19 dropped list, and no re-split note applies because the item was created on 2026-10-22 and had no earlier proof. I checked all six steps by hand, tracking source and target of every map. Step 1 uses functoriality of L_V and the augmentation equation. Step 2 substitutes the normalization; both sides run from PF to L_V Q Δ_U F. Step 3 uses naturality of b at i_{U,F} and P-functoriality to get the first equality. Step 4 cancels b^{-1}b to get the second. Step 5 conjugates naturality of b at B_U t to get the inverse-naturality identity. Step 6 applies L_V to naturality of h and uses Step 5 to get naturality of rho. The proof uses every hypothesis and needs no hidden theorem, so the elementary marks are accurate. The only citation, def-nagata-category (Stacks 0014), supplies exactly the identity and associativity laws it is cited for. The parent lem-sf-cbc-direct-image-reduction-unit uses the item in Step 2 with the same orientation of b, j, chi and rho; it takes the normalization from clause (3) of lem-sf-cbc-constant-tower-direct-image-normalization. Small cases: with all data identity the result reduces to h i_V = i_U. With b = -1 and chi = 1 the normalization fails, and without it rho eta = P(eta) would be false, so the hypothesis is needed. With b = chi = h = -1 the hypotheses hold and rho = 1. With i = h = 0 everything is 0, so non-invertible eta and h are allowed. Searches with LeanSearch, LeanFinder, Loogle and grep are all recorded; the composite statement is not a one-line Mathlib specialization, so status split is correct. The source provenance is fix-lem-exchanges.proof.md Step 5, which I checked; proof_origin by=agent is correct, and no SGA is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NormalizedAugmentationTransport",
+  "declaration": "CategoryTheory.normalized_augmentation_transport",
+  "declarations": [
+   "CategoryTheory.normalizedAugmentationUnit",
+   "CategoryTheory.normalizedAugmentationComparison",
+   "CategoryTheory.normalized_augmentation_transport"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/NormalizedAugmentationTransport.lean",
+  "statement": "theorem normalized_augmentation_transport (Δ_U B_U : D_U ⥤ E_U) (Δ_V B_V : D_V ⥤ E_V) (L_U : E_U ⥤ D_U) (L_V : E_V ⥤ D_V) (i_U : Δ_U ⟶ B_U) (i_V : Δ_V ⟶ B_V) (j_U : Δ_U ⋙ L_U ≅ 𝟭 D_U) (j_V : Δ_V ⋙ L_V ≅ 𝟭 D_V) (P : D_U ⥤ D_V) (Q : E_U ⥤ E_V) (χ : P ⋙ Δ_V ≅ Δ_U ⋙ Q) (b : L_U ⋙ P ≅ Q ⋙ L_V) (h : P ⋙ B_V ⟶ B_U ⋙ Q) (augmentation : ∀ F : D_U, i_V.app (P.obj F) ≫ h.app F = χ.hom.app F ≫ Q.map (i_U.app F)) (normalization : ∀ F : D_U, P.map (j_U.inv.app F) ≫ b.hom.app (Δ_U.obj F) = j_V.inv.app (P.obj F) ≫ L_V.map (χ.hom.app F)) : (∀ F : D_U, (normalizedAugmentationUnit L_V i_V j_V).app (P.obj F) ≫ L_V.map (h.app F) = P.map ((normalizedAugmentationUnit L_U i_U j_U).app F) ≫ b.hom.app (B_U.obj F) ∧ (normalizedAugmentationUnit L_V i_V j_V).app (P.obj F) ≫ (normalizedAugmentationComparison B_U L_V b h).app F = P.map ((normalizedAugmentationUnit L_U i_U j_U).app F)) ∧ (∀ (F F' : D_U) (t : F ⟶ F'), (normalizedAugmentationComparison B_U L_V b h).app F ≫ P.map ((B_U ⋙ L_U).map t) = (B_V ⋙ L_V).map (P.map t) ≫ (normalizedAugmentationComparison B_U L_V b h).app F')",
+  "branch": "sheaf-dag",
+  "by": "Q48",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The two helper definitions are the actual induced augmentation and comparison, constructed by Mathlib whiskering and composition. The main theorem states both augmentation equations and the explicit component naturality equality; the comparison itself is a natural transformation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f63b3392d",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Only the lean field changed vs side-live; lean.statement matches the file verbatim; no new nodes or dependency changes; declaration names unused in side-live. All objects and both hypotheses match the node, including composition order, isomorphism directions and 4 independent universe pairs. η = j.inv ≫ whiskerRight i L and ρ = whiskerRight h L_V ≫ whiskerLeft B_U b.inv have exactly the node's components and are real data. Both equalities and the explicit naturality square are stated in the node's orientation; ρ's naturality comes from building it out of the given natural h and b, which is the node's claim, not a hollow clause. No extra assumptions; docstrings carry the source place and the 6 proof steps; only sorry is the theorem proof; autoImplicit off; edge cases (empty categories, identity data, non-invertible i/h/η) covered; report has Worker report and Second reading sections. Not recompiled (2026-10-21 rule); no files changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261022T144015-L-1478787",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

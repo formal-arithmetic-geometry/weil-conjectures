@@ -1,0 +1,259 @@
+{
+ "id": "lem-weil-isomorphism-limit-scalar-chain-comparison",
+ "kind": "statement",
+ "title": "Inverse-limit coefficient transport and scalar chain comparison",
+ "statement": "Let $g:X\\to Y$ be a scheme isomorphism [def-weil-scheme-morphism-properties]. Use the small pro-etale sites and compatible small skeletons in the module universe [def-weil-pbc-proetale-site, def-weil-size-convention], and write $F=g^{-1}$ for inverse image [def-weil-proetale-inverse-image]. Use sheaves of modules [def-weil-sheaf-of-modules-category], sheafified balanced tensor [def-pur-sheaf-tensor-product], and cochain complexes with the direct-sum total tensor [def-pc-tensor-complex-sheaves].\n\nFor $W=X,Y$ let $(A_{W,m})_{m\\geq1}$ and $(B_{W,m})_{m\\geq1}$ be inverse systems of commutative ring sheaves with transitions $q^A_{W,m},q^B_{W,m}$ and compatible ring maps $i_{W,m}:A_{W,m}\\to B_{W,m}$. Put $R_W=\\varprojlim_m A_{W,m}$ and $S_W=\\varprojlim_m B_{W,m}$, with projections $\\pi^A_{W,m},\\pi^B_{W,m}$ and induced map $j_W:R_W\\to S_W$ [def-pur-sheaf-inverse-limit]. Suppose given ring isomorphisms $c_{A,m}:FA_{Y,m}\\simeq A_{X,m}$, $c_{B,m}:FB_{Y,m}\\simeq B_{X,m}$ compatible with transitions and satisfying\n$$c_{B,m}F(i_{Y,m})=i_{X,m}c_{A,m}.$$\nSuppose given ring isomorphisms $c_R:FR_Y\\simeq R_X$, $c_S:FS_Y\\simeq S_X$ with\n$$\\pi^A_{X,m}c_R=c_{A,m}F(\\pi^A_{Y,m}),\\qquad \\pi^B_{X,m}c_S=c_{B,m}F(\\pi^B_{Y,m}).$$\nWrite $G_R,G_S$ for inverse image of modules or complexes with the scalar action transported along $c_R,c_S$, respectively. Then\n$$c_SF(j_Y)=j_Xc_R.$$\nFor every, possibly unbounded, $R_Y$-module complex $P$ there is an $S_X$-linear isomorphism of complexes\n$$b_P:G_RP\\otimes_{R_X}S_X\\xrightarrow{\\sim}G_S(P\\otimes_{R_Y}S_Y),$$\nnatural for all chain maps. It is characterized on local tensors by\n$$b_P(Fp\\otimes c_S(Fs_0))=F(p\\otimes s_0).$$\nIts inverse has the reverse displayed rule. Both maps commute with the differential $d_P\\otimes1$ and carry chain homotopies to chain homotopies under the two termwise functors. No flatness or K-flatness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback; agent inverse-limit coefficient-transport calculation and termwise chain extension (returned item Steps 1 and 3)."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-proetale-iso-sectionwise-inverse-image",
+  "def-pur-cochain-coefficient-arrows",
+  "def-pur-cochain-tensor-coherence-data"
+ ],
+ "proof": [
+  {
+   "text": "Compose both proposed limit ring maps with every projection of BX. Apply hS, the limMap projection identity, the stage square, and hR. Limit.hom_ext yields the coefficient square, without interchanging inverse image and limit.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; agent inverse-limit coefficient-transport calculation and termwise chain extension (returned item Steps 1 and 3)."
+   }
+  },
+  {
+   "text": "Invert the coefficient identifications to obtain cR inverse followed by F(jY) equals jX followed by cS inverse. Construct the restriction-of-scalars square with identity linear equivalences on underlying local sections; linearity is precisely this inverse coefficient square. Restrictions and module-map naturality preserve the same underlying elements.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-pur-cochain-coefficient-arrows"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; agent inverse-limit coefficient-transport calculation and termwise chain extension (returned item Steps 1 and 3)."
+   }
+  },
+  {
+   "text": "Use the normalized scalar-extension adjunctions. Transpose F(unit M) followed by the restriction square to construct a natural map F(M) extended along jX to G(M extended along jY). For targets G(N), composition with this map is the composite of the hom bijections for the two fully faithful transports, the two scalar adjunctions, and the restriction square. Essential surjectivity of G extends bijectivity to every target, so the map is invertible by the coyoneda criterion. The site and coefficient transports are equivalences by the existing site equivalence and Mathlib pushforwardPushforwardEquivalence.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-pur-cochain-coefficient-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; agent inverse-limit coefficient-transport calculation and termwise chain extension (returned item Steps 1 and 3)."
+   }
+  },
+  {
+   "text": "The adjunction unit equation evaluated at U gives the required comparison formula on 1 tensor p. Every s tensor p equals s acting on 1 tensor p, directly by linearity of the sheafification unit. Linearity of the comparison and cS inverse(cS(s))=s give the formula on cS(s) tensor p. Applying the inverse comparison gives its reverse formula. The scalar-extension adjunction also shows two maps equal if they agree on all 1 tensor p.",
+   "uses": [
+    "def-pur-cochain-coefficient-arrows",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; agent inverse-limit coefficient-transport calculation and termwise chain extension (returned item Steps 1 and 3)."
+   }
+  },
+  {
+   "text": "Apply NatIso.mapHomologicalComplex to the module comparison, in every integer degree. Naturality supplies differential and chain-map compatibility. Naturality applied to each homotopy component gives both intertwining identities. For any other normalized natural isomorphism, compare its hom components degreewise using the preceding extension adjunction extensionality at scalar 1; then homological-complex, natural-transformation and isomorphism extensionality prove uniqueness.",
+   "uses": [
+    "def-pur-cochain-coefficient-arrows"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; agent inverse-limit coefficient-transport calculation and termwise chain extension (returned item Steps 1 and 3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-cochain-coefficient-arrows",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback: its Hom/adjunction argument specialized to the sectionwise site equivalence; explicit inverse-limit projections, scalar-extension unit normalization and termwise homotopy calculation by P7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image under a scheme isomorphism commutes with scalar extension on complexes when the coefficient ring identifications are obtained from compatible inverse limit projections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.inv_app\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : CategoryTheory.IsIso f] (U : X.Opens),\\n  AlgebraicGeometry.Scheme.Hom.app (CategoryTheory.inv f) U =\\n    CategoryTheory.CategoryStruct.comp (X.presheaf.map (CategoryTheory.eqToHom ⋯).op)\\n      (CategoryTheory.inv\\n        (AlgebraicGeometry.Schem\", \"doc\": \"For any isomorphism $ f : X \\to Y $ of schemes and for every open subset $ U $ of $ Y $, the ring homomorphism induced by the inverse morphism $ f^{-1} $ on the sections of the structure sheaf over $ U\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.inv_app\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : CategoryTheory.IsIso f] (U : X.Opens),\\n  AlgebraicGeometry.Scheme.Hom.app (CategoryTheory.inv f) U =\\n    CategoryTheory.CategoryStruct.comp (X.presheaf.map (CategoryTheory.eqToHom ⋯).op)\\n      (CategoryTheory.inv\\n        (AlgebraicGeometry.Schem\", \"doc\": \"Let $f: X \\\\to Y$ be an isomorphism of schemes, and let $f^{-1}: Y \\\\to X$ be its inverse. Associated with $f$ and $f^{-1}$ are morphisms of sheaves of rings, denoted $f^\\\\#$ and $(f^{-1})^\\\\#$ respective\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S),\\n  CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.Scheme.ΓSpecIso S).inv =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso R).inv\\n      (AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.Spec.map f))\", \"doc\": \"For any ring homomorphism $f : R \\\\to S$ in the category of commutative rings, the inverse of the canonical isomorphism $\\\\Gamma(\\\\operatorname{Spec}(R), \\\\mathcal{O}_{\\\\operatorname{Spec}(R)}) \\\\cong R$ sa\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y),\\n  (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).inv =\\n    (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯).hom\", \"doc\": \"For any two pullback triplets $x$ and $y$ with an equality $e : x = y$, the inverse of the isomorphism $\\\\text{tensorCongr}(e)$ between their tensor pushouts is equal to the isomorphism $\\\\text{tensorCo\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_inv_fst'\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackSpecIso R S T).inv\\n      (CategoryTheory.Limits.pullback.fst (AlgebraicGeometry.Spec.map (CommRingCat.of\", \"doc\": \"The composition of the inverse of the pullback isomorphism $\\\\operatorname{Spec}(S \\\\otimes_R T) \\\\to \\\\operatorname{Spec}(S) \\\\times_{\\\\operatorname{Spec}(R)} \\\\operatorname{Spec}(T)$ with the first project\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.inv_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : CategoryTheory.IsIso f],\\n  AlgebraicGeometry.Scheme.Hom.appTop (CategoryTheory.inv f) =\\n    CategoryTheory.inv (AlgebraicGeometry.Scheme.Hom.appTop f)\", \"doc\": \"For any isomorphism $ f : X \\to Y $ of schemes, the inverse of $ f $ evaluated on the entire space (i.e., the induced ring homomorphism on global sections) equals the inverse of the ring homomorphism $\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackSpecIso R S T).hom\\n      (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R (TensorProduct R S\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$ induced by $R$-algebra structures on $S$ and $T$ is isomorphic\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.inv_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {M N : X.Modules} {φ : M ⟶ N} {U : X.Opens} [inst : CategoryTheory.IsIso φ],\\n  AlgebraicGeometry.Scheme.Modules.Hom.app (CategoryTheory.inv φ) U =\\n    CategoryTheory.inv (AlgebraicGeometry.Scheme.Modules.Hom.app φ U)\", \"doc\": \"For any isomorphism $\\\\phi$ between sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq X$, the inverse of $\\\\phi$ evaluated at $U$ coincides with the inverse of the section map $\\\\phi_\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state inverse-limit coefficient transport together with its normalized natural chain comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "[loogle] OK 10 hit(s)\n  {\"name\": \"PresheafOfModulesOfCommRing.Monoidal.tensorObj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} (M₁ M₂ : PresheafOfModulesOfCommRing R) : PresheafOfModulesOfCommRing R\", \"doc\": \"The tensor product of two presheaves of modules.\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} (M₁ M₂ : PresheafOfModulesOfCommRing R) (X : Cᵒᵖ) : (PresheafOfModulesOfCommRing.Monoidal.tensorObj M₁ M₂).obj X = CategoryTheory.MonoidalCategoryStruct.tensorObj (M₁.obj X) (M₂.obj X)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.tensorObj_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} (M₁ M₂ : PresheafOfModulesOfCommRing R) (X : Cᵒᵖ) : (CategoryTheory.MonoidalCategoryStruct.tensorObj M₁ M₂).obj X = CategoryTheory.MonoidalCategoryStruct.tensorObj (M₁.obj X) (M₂.obj X)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} (F : PresheafOfModulesOfCommRing R) : CategoryTheory.Limits.PreservesColimitsOfSize.{u, u, max u u_1, max u u_1, max (max (u + 1) u_1) v_1, max (max (u + 1) u_1) v_1} (CategoryTheory.MonoidalCategory.\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} (F : PresheafOfModulesOfCommRing R) : CategoryTheory.Limits.PreservesColimitsOfSize.{u, u, max u u_1, max u u_1, max (max (u + 1) u_1) v_1, max (max (u + 1) u_1) v_1} (CategoryTheory.MonoidalCategory.\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.Monoidal.tensorHom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} {M₁ M₂ M₃ M₄ : PresheafOfModulesOfCommRing R} (f : M₁ ⟶ M₂) (g : M₃ ⟶ M₄) : PresheafOfModulesOfCommRing.Monoidal.tensorObj M₁ M₃ ⟶ PresheafOfModulesOfCommRing.Monoidal.tensorObj M₂ M₄\", \"doc\": \"The tensor product of two morphisms of presheaves of modules.\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.Monoidal.tensorObjMap\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} (M₁ M₂ : PresheafOfModulesOfCommRing R) {X Y : Cᵒᵖ} (f : X ⟶ Y) : CategoryTheory.MonoidalCategoryStruct.tensorObj (M₁.obj X) (M₂.obj X) ⟶ (ModuleCat.restrictScalars (CommRingCat.Hom.hom (R.map f))).ob\", \"doc\": \"Auxiliary definition for `tensorObj`.\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.Monoidal.tensorHom_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} {M₁ M₂ M₃ M₄ : PresheafOfModulesOfCommRing R} (f : M₁ ⟶ M₂) (g : M₃ ⟶ M₄) (X : Cᵒᵖ) : (PresheafOfModulesOfCommRing.Monoidal.tensorHom f g).app X = CategoryTheory.MonoidalCategoryStruct.tensorHom (Pres\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.tensorHom_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} {M₁ M₂ M₃ M₄ : PresheafOfModulesOfCommRing R} (f : M₁ ⟶ M₂) (g : M₃ ⟶ M₄) (X : Cᵒᵖ) : PresheafOfModules.Hom.app' (CategoryTheory.MonoidalCategoryStruct.tensorHom f g) X = CategoryTheory.MonoidalCatego\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.Monoidal.tensorObj_map_tmul\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} {M₁ M₂ : PresheafOfModulesOfCommRing R} {X Y : Cᵒᵖ} (f : X ⟶ Y) (m₁ : ↑(M₁.obj X)) (m₂ : ↑(M₂.obj X)) : (ModuleCat.Hom.hom ((PresheafOfModulesOfCommRing.Monoidal.tensorObj M₁ M₂).map f)) (m₁ ⊗ₜ[↑(R.ob\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state inverse-limit coefficient transport together with its normalized natural chain comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*(tensor|limit)|tensor.*inverseImage",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"line\": \"262\", \"text\": \"    [PreservesLimitsOfShape J F] : (P.inverseImage F).IsClosedUnderLimitsOfShape J :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"line\": \"267\", \"text\": \"    (P.inverseImage e.functor).IsClosedUnderLimitsOfShape J ↔ P.IsClosedUnderLimitsOfShape J := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"line\": \"271\", \"text\": \"      ((P.inverseImage e.functor).inverseImage e.inverse).IsClosedUnderLimitsOfShape J)\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"line\": \"110\", \"text\": \"lemma ind_inverseImage_le [PreservesFilteredColimitsOfSize.{w, w} F] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean\", \"line\": \"259\", \"text\": \"    [PreservesColimitsOfShape J F] : (P.inverseImage F).IsClosedUnderColimitsOfShape J :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean\", \"line\": \"264\", \"text\": \"    (P.inverseImage e.functor).IsClosedUnderColimitsOfShape J ↔\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean\", \"line\": \"269\", \"text\": \"      ((P.inverseImage e.functor).inverseImage e.inverse).IsClosedUnderColimitsOfShape J)\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state inverse-limit coefficient transport together with its normalized natural chain comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible isomorphisms of inverse systems of sheaves of rings induce a coefficient compatible natural tensor comparison on cochain complexes",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of inverse limits of ring sheaves and transported balanced tensor products of complexes under a ringed site equivalence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓNatIsoLim\", \"module\": \"Mathlib/CategoryTheory/Sites/GlobalSections\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (A : Type u₂) →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} A] →\\n          [inst_2 : CategoryTheory.HasWeakSheafify J A] →\\n            [inst_3 : CategoryTheory.Limits.HasLimits\", \"doc\": \"Given that the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ has all limits of shape $J$, there exists a natural isomorphism between the global sections functor $\\\\Gamma_{J,A}$ and the composition of the\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"TopCat.Presheaf.SheafConditionEqualizerProducts.diagram.isoOfIso\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/EqualizerProducts\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasProducts C] →\\n      {X : TopCat} →\\n        {F : TopCat.Presheaf C X} →\\n          {ι : Type v'} →\\n            (U : ι → TopologicalSpace.Opens ↑X) →\\n              {G : TopCat.Presheaf C X} →\\n           \", \"doc\": \"Given a natural isomorphism $\\\\alpha: F \\\\cong G$ between presheaves $F$ and $G$ on a topological space $X$, the equalizer diagrams encoding the sheaf condition for $F$ and $G$ are isomorphic. This isom\"}\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state inverse-limit coefficient transport together with its normalized natural chain comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of ring sheaves along an isomorphism commutes with scalar extension on all cochain complexes with coefficient ring identifications compatible with inverse limit projections",
+   "results": "SheafOfModules.ιFree_mapFree_inv; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pushforwardCongr; SheafOfModules.pushforwardCongr_symm; AlgebraicGeometry.Scheme.Modules.inv_app; CochainComplex.ConnectData.restrictionGEIso_inv_f; CochainComplex.HomComplex.Cochain.v_comp_XIsoOfEq_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the inverse-limit-normalized comparison for ring-sheaf modules, all cochain complexes, and homotopies"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*(tensor|limit)|tensor.*inverseImage",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/Ind.lean; Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean; Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the inverse-limit-normalized comparison for ring-sheaf modules, all cochain complexes, and homotopies"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves of rings commutes with extension of scalars naturally on unbounded cochain complexes and chain homotopies",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply; AlgebraicGeometry.StructureSheaf.comap_id'; PresheafOfModules.pullback; SheafOfModules.pullback; ModuleCat.extendRestrictScalarsAdj; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; PresheafOfModules.Sheafify.map_smul_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the inverse-limit-normalized comparison for ring-sheaf modules, all cochain complexes, and homotopies"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "PresheafOfModulesOfCommRing.Monoidal.tensorObj; PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj; PresheafOfModulesOfCommRing.tensorObj_obj; PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft; PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight; PresheafOfModulesOfCommRing.Monoidal.tensorHom; PresheafOfModulesOfCommRing.Monoidal.tensorObjMap; PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the inverse-limit-normalized comparison for ring-sheaf modules, all cochain complexes, and homotopies"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of tensor product sheaves under inverse image and change of coefficient ring by ring isomorphisms",
+   "results": "SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; PresheafOfModules.Monoidal.tensorObjMap; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the inverse-limit-normalized comparison for ring-sheaf modules, all cochain complexes, and homotopies"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-isomorphism-scalar-tensor-kflat-model",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "First cohomology-transport arrows in def-weil-global-geometric-frobenius: the integral inverse-image component has a coefficient-compatible ordinary tensor model (returned parent proof Steps 1–2 and the K-flat setup of Step 4). Extracted returned tensor-model proof Steps 1 and 3 (coefficient transport and completed chain comparison).",
+   "via": [
+    "lem-weil-isomorphism-scalar-tensor-kflat-model",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-isomorphism-limit-scalar-chain-comparison",
+  "worker": "stage1",
+  "summary": "Proved coefficient compatibility by projecting to every finite level, constructed balanced scalar transport in both directions, reused the existing normalized pro-etale tensor comparison, and checked differentials, arbitrary chain maps and degree-minus-one homotopy maps explicitly. No statement change and no new nodes. Existing searches preserved and five logged searches appended. Repair of the 2026-10-22 landing return: rebased split-owned fields onto the current DAG, reread all cited statements, and made the site-object and algebraic-operation identifications in Step 3 explicit; retained the statement, proof route, citations and logged searches.",
+  "blueprint": "Realizes the inverse-image component of the first cohomology-transport arrows in def-weil-global-geometric-frobenius via the returned parent tensor-model Steps 1 and 3; retains the unit and chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-proetale-inverse-image-tensor-comparison",
+    "why": "Clause 1 supplies ordinary inverse-image tensor comparison on the pro-etale sites, including its generator formula and naturality; it is a generic tensor tool, not a replacement of the unit proof."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Clause 1 identifies inverse-image sections with source sections along a scheme isomorphism, to verify scalar linearity and additive homotopy identities; no node in this unit supplies that generic site fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-49da94588",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-49da94588 (reviewer sub-agent of L); spot-checked: I read the whole item and all 5 steps; there are no new nodes. This head re-delivers a41be19e after a landing return. Against that run's snapshot the only changes are the Step 3 text (explicit V=Φ_g(U), U≅X×_Y V, and identification of the ring and module operations) and the split_report summary. The statement, stmt_deps and proof_deps are unchanged. In clones/live and clones/side-live the item is still unsplit, and only split-owned fields differ, so no other group has superseded it. There is no repair note and no SGA. Stacks 03EL (sites-modules.tex:3649) gives the ordinary f*(F⊗G) comparison. Step 1: the projections of def-pur-sheaf-inverse-limit are jointly injective (it also covers rings); I checked all five equalities, and no limit interchange is used. Step 2: the balancing of t_M reduces to j̃c_R^{-1}=c_S^{-1}j_X from Step 1, and the maps extend through the universal property of def-weil-presheaf-modules-sheafification. Step 3: clause 1 of lem-pur-proetale-inverse-image-tensor-comparison gives σ_M, and S̃-linearity checks out on pure tensors. Local generation by η-images comes from iso-lemma (1) and also directly from the inverse-image definition, so this is adequate. b=σ^{-1}t has the rule as oriented. Step 4: with S in degree 0, Tot has one summand and differential d⊗1, also for unbounded P. Step 5: I checked the homotopy indices, and naturality applied to h^n transports the homotopy. proof_deps equal the union of the step uses. Small cases tested: identity g, zero ring, a single degree, non-flat Z→Z/2, unbounded P. The parent kflat-model cites the item exactly as stated. I found no duplicate (read lem-weil-isomorphism-comparison-scalar-extension, lem-pod-pullback-identities-scalar-extension and lem-fix-tensor-pullback-square). I accept the two declared sec-smooth-purity tool uses (C8)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.LimitScalarChainComparison",
+  "declaration": "AlgebraicGeometry.Scheme.limitScalarChainComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.scalarChainTransport",
+   "AlgebraicGeometry.Scheme.scalarChainSection",
+   "AlgebraicGeometry.Scheme.scalarChainLeft",
+   "AlgebraicGeometry.Scheme.scalarChainRight",
+   "AlgebraicGeometry.Scheme.ScalarChainComparisonRules",
+   "AlgebraicGeometry.Scheme.limitScalarChainComparison",
+   "AlgebraicGeometry.Scheme.scalarChainTransportAdditive",
+   "AlgebraicGeometry.Scheme.scalarChainLeftAdditive",
+   "AlgebraicGeometry.Scheme.scalarChainRightAdditive"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/LimitScalarChainComparison.lean",
+  "statement": "theorem limitScalarChainComparison {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g] (AX BX : ℕᵒᵖ ⥤ Sheaf (ProEt.topology X) CommRingCat.{max r (t + 1)}) (AY BY : ℕᵒᵖ ⥤ Sheaf (ProEt.topology Y) CommRingCat.{max r (t + 1)}) (iX : AX ⟶ BX) (iY : AY ⟶ BY) (cA : AY ⋙ isoSectionwiseInverseImage g CommRingCat.{max r (t + 1)} ≅ AX) (cB : BY ⋙ isoSectionwiseInverseImage g CommRingCat.{max r (t + 1)} ≅ BX) (hstage : Functor.whiskerRight iY (isoSectionwiseInverseImage g CommRingCat.{max r (t + 1)}) ≫ cB.hom = cA.hom ≫ iX) (cR : (isoSectionwiseInverseImage g CommRingCat.{max r (t + 1)}).obj (limit AY) ≅ limit AX) (cS : (isoSectionwiseInverseImage g CommRingCat.{max r (t + 1)}).obj (limit BY) ≅ limit BX) (hR : ∀ m : ℕᵒᵖ, cR.hom ≫ limit.π AX m = (isoSectionwiseInverseImage g CommRingCat.{max r (t + 1)}).map (limit.π AY m) ≫ cA.hom.app m) (hS : ∀ m : ℕᵒᵖ, cS.hom ≫ limit.π BX m = (isoSectionwiseInverseImage g CommRingCat.{max r (t + 1)}).map (limit.π BY m) ≫ cB.hom.app m) : (isoSectionwiseInverseImage g CommRingCat.{max r (t + 1)}).map (limMap iY) ≫ cS.hom = cR.hom ≫ limMap iX ∧ ∃! b : (scalarChainLeft g cR (limMap iX)).mapHomologicalComplex (.up ℤ) ≅ (scalarChainRight g (limMap iY) cS).mapHomologicalComplex (.up ℤ), ScalarChainComparisonRules g (limMap iX) (limMap iY) cR cS b",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "H2 repair of returned head c4f540dc7154: cite the now-landed definition node def-weil-proetale-iso-sectionwise-inverse-image for the existing sectionwise site/sheaf/module constructions, replacing the theorem node in stmt_deps. The theorem remains in proof_deps. Also cite def-pur-cochain-tensor-coherence-data for its Modules and Complex abbreviations. Lean source and signature are unchanged; scalar extension remains the existing sheafified balanced tensor functor applied termwise, with both pure-tensor rules and homotopy compatibility for unbounded complexes. P7: the three scalar functors are semireducible definitions; transport uses the inverse of the supplied coefficient isomorphism, equal to the previous generic inverse by inverse uniqueness. Explicit proved additivity instances avoid repeated instance unfolding. See coord/changes/P7-limit-scalar-chain-transport.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c7093b77f",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of c4f540dc7154. The item .lean is byte-identical (sha256 6fda1bbb); the node changes only stmt_deps and lean.note. The theorem stmt_dep lem-weil-proetale-isomorphism-inverse-image is replaced by the landed Q15 definition node def-weil-proetale-iso-sectionwise-inverse-image, whose existing:true record owns proEtaleIsoPostcompose, its continuity instance, isoSectionwiseInverseImage, isoSectionwiseModuleInverseImage and the additive instance; the theorem stays in proof_deps. Adding def-pur-cochain-tensor-coherence-data resolves the Modules/Complex advisory. Side-live shows no supersession, and the dep records are identical to live. Clause-by-clause re-read found everything faithful: the hstage/hR/hS/conclusion orientations, the forward and inverse extensionTmul rules, the ∃! characterization, mapHomotopy intertwining, unbounded complexes, and no flatness assumption. Edge cases checked: empty schemes, identity g, zero rings, non-flat j, m=1. Proof is sorry only; docstrings complete. No compile run (no change made)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-31902",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261024T190617-L-4158064",
+  "kind": "interface",
+  "note": "independent cc review: delivered LimitScalarChainComparison.lean and node lem-weil-isomorphism-limit-scalar-chain-comparison against the clone, IsoSectionwiseInverseImage.isoSectionwiseModuleInverseImage (old body), the unit sk-prop-sf-rf-shriek-preservation and #print axioms of a scratch copy"
+ }
+}

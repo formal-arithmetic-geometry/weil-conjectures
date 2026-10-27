@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-simply-connected-multiplicative-lifting",
+ "kind": "statement",
+ "title": "Universal lifting from a multiplicatively simply connected group",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are smooth connected affine $F$-group schemes of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism], and subgroup schemes are closed [def-sc-group-scheme-subgroup]. Call a homomorphism a multiplicative isogeny if it is faithfully flat and its scheme-theoretic kernel is finite, central and diagonalizable. Faithfully flat means that the induced map of coordinate algebras makes extension of scalars exact and detects zero modules. Finite means that the coordinate algebra is finite dimensional over $F$; central means commuting with all group elements after every algebra extension; diagonalizable means isomorphic to $D_F(M)=\\operatorname{Spec}F[M]$ for a finite abelian group $M$, with basis $e_m$, multiplication $e_me_n=e_{m+n}$ and comultiplication $e_m\\mapsto e_m\\otimes e_m$. Let $H$ be multiplicatively simply connected: every multiplicative isogeny $H_1\\to H$ from a smooth connected affine group of finite type is an isomorphism. For any two multiplicative isogenies $q:H\\to G$ and $p:E\\to G$, there is a unique group-scheme homomorphism $u:H\\to E$ such that $p\\circ u=q$. Kernels need not be reduced.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 18.5, Proposition 18.6(a), Definition 18.7 and Proposition 18.8, printed pp.388--389; algebraically closed fields are perfect."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-finite-diagonalizable-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=\\ker p$ and form $P=H\\times_G E$, with projections $a:P\\to H$ and $b:P\\to E$ [def-pc-fibre-product]. Componentwise multiplication and inverse make $P$ a group scheme: for every $F$-algebra $A$, its points are the pairs $(h,e)$ satisfying $q(h)=p(e)$, and this condition is preserved by those operations [def-sc-group-scheme]. By [lem-weil-pbc-fibre-product-affine-spectra], $F[P]=F[H]\\otimes_{F[G]}F[E]$. It is generated over $F$ by the images of finite sets of algebra generators for $F[H]$ and $F[E]$, hence $P$ is affine of finite type. By [lem-weil-pbc-faithfully-flat-base-change], $a^*:F[H]\\to F[P]$ is faithfully flat. The kernel of $a$ is scheme-theoretically $K$, via $e\\mapsto(1,e)$; this follows from the same equations on points over every algebra. It is central in $P$, since $K$ is central in $E$. No smoothness or reducedness of $P$ is asserted.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-faithfully-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.8, printed p.389, pullback construction; affine computation: Stacks Tags 01I4 and 01JQ; faithful-flat base change: Tags 00HI and 00HQ."
+   }
+  },
+  {
+   "text": "Let $C=P^0$ have its open-subscheme structure. By [lem-sfb-group-neutral-component-translates], $C$ is an open and closed subgroup, and $|P|$ is the disjoint union of finitely many translates $g_iC$, with $g_i\\in P(F)$. By [lem-sfb-locally-algebraic-group-identity-component], $R=C_{\\mathrm{red}}$ is a smooth connected group scheme of finite type and has the same underlying space as $C$. Its inclusion $j:R\\to P$ is closed: $C\\to P$ is closed, and reduction is a closed subscheme. On affine coordinates these inclusions are quotient maps [def-weil-closed-immersion], so $R$ is affine. Put $r=a\\circ j$. In particular the finitely many closed translates of $|R|$ cover $|P|$.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.6(a), printed p.388; Propositions 1.34, 1.38 and Corollary 1.39, pp.16--18; Stacks Tags 0B7R and 047R."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algebraic-group-homomorphism-factorization] to $r:R\\to H$. Both groups are affine and hence separated: the diagonal on affine coordinates is induced by the surjection $A\\otimes_F A\\to A$, $x\\otimes y\\mapsto xy$. The factorization gives a closed subgroup $I\\hookrightarrow H$ with $|I|=r(|R|)$, because its first map is surjective. By [lem-weil-pbc-faithfully-flat-surjective-spectrum] applied to $a^*$, $a$ is surjective on underlying spaces. Thus $|H|$ is the finite union of the closed translates $a(g_i)|I|$: on $g_iR$, the homomorphism $a$ is translation by $a(g_i)$ followed by $r$. Since $H$ is connected, its identity component is all of $H$; [lem-sfb-locally-algebraic-group-identity-component] makes $H$ geometrically irreducible, hence irreducible. An irreducible space covered by finitely many closed subsets equals one of them (induct on the number of subsets using the definition of irreducibility). Therefore one translate of $|I|$ is $|H|$, and translating back gives $|I|=|H|$. Consequently $r$ is surjective.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-sfb-locally-algebraic-group-identity-component"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Expansion of the assertion that the reduced neutral component maps onto the connected target in Proposition 18.6(a), p.388, using the Homomorphism Theorem 5.39, p.108 and components/translations of 1.34--1.35, pp.16--17."
+   }
+  },
+  {
+   "text": "The scheme $H$ is reduced by [sbc-lem-smooth-geometrically-reduced], applied to its smooth structure morphism over $F$. Surjectivity of $r$ implies that $r^*:F[H]\\to F[R]$ is injective: if $r^*(f)=0$, then $f$ belongs to every prime of $F[H]$, since each such prime is the inverse image of a prime of $F[R]$. By [lem-weil-pbc-zero-locus-eq-iff-radical-eq] for the zero ideal, $f$ is nilpotent and is zero by reducedness. This is a homomorphism of finitely generated commutative Hopf $F$-algebras, since $r$ is a group-scheme homomorphism. The reduced-target theorem [lem-sfb-reduced-target-dominant-group-flatness] therefore says exactly that $r^*$ is faithfully flat, in the coordinate-algebra sense required in the statement.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sfb-reduced-target-dominant-group-flatness",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.6(a), p.388; the faithful-flatness justification is Corollary 1.69 and Proposition 1.70, p.28; reducedness: Stacks Tag 056T."
+   }
+  },
+  {
+   "text": "By the kernel fibre-product description, $L=\\ker r=R\\times_P K$ is a closed subgroup of $K=\\ker a$. Indeed it is obtained by pulling back the closed inclusion $R\\hookrightarrow P$; on coordinates its algebra is a quotient of $F[K]$, so it is finite dimensional [def-weil-closed-immersion]. For every $F$-algebra $A$, its elements commute with $R(A)$ since their images in $P(A)$ lie in the central subgroup $K(A)$. Thus $L$ is central in $R$, scheme-theoretically. Write $K\\simeq D_F(M)$ as in the hypothesis, and choose generators $m_1,\\ldots,m_t$ of the finite abelian group $M$ (allow $t=0$ when $M=0$). Sending $z_i$ to $e_{m_i}$ defines a surjection $F[z_1^{\\pm1},\\ldots,z_t^{\\pm1}]\\to F[M]$, compatible with all Hopf operations, and hence a closed group immersion $K\\hookrightarrow\\mathbf G_m^t$. The composite embeds $L$ as a finite closed subgroup of this split torus. By [lem-sfb-split-torus-subgroups-diagonalizable], $L\\simeq D_F(N)$ for a finite abelian group $N$. Together with steps 2 and 4, this proves that $r:R\\to H$ is a multiplicative isogeny.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sfb-split-torus-subgroups-diagonalizable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.6(a), p.388, kernel of the restricted map; Theorem 12.9(c), printed pp.233--234 (closed subgroups of diagonalizable groups)."
+   }
+  },
+  {
+   "text": "By the stated simple-connectedness hypothesis on $H$, the multiplicative isogeny $r:R\\to H$ is an isomorphism. Its inverse is a group homomorphism: applying the injective map $r$ to the proposed multiplication identity reduces it to that for $r$. Let $u=b\\circ j\\circ r^{-1}:H\\to E$. The pullback identity $p\\circ b=q\\circ a$ gives $p\\circ u=q\\circ r\\circ r^{-1}=q$ [def-pc-fibre-product]. This constructs the required lift.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.6(a), p.388, inverse of the restricted isogeny; Proposition 18.8, p.389, composition with the second projection."
+   }
+  },
+  {
+   "text": "For uniqueness, let $v:H\\to E$ also satisfy $p\\circ v=q$. Multiplication and inversion define a scheme morphism $\\delta:H\\to E$, $h\\mapsto u(h)v(h)^{-1}$, with $p\\circ\\delta=1$; hence it factors through $K=\\ker p$. By [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] with base ring $F$ and finite algebra $F[K]$, $|K|$ is finite discrete. The continuous image of the connected space $|H|$ in this discrete space is a singleton: inverse images of any chosen point and its complement would otherwise separate $H$. As both homomorphisms preserve identity, that singleton is the identity point. The unit $e_K:\\operatorname{Spec}F\\to K$ is a closed immersion: on coordinates its counit is surjective, since it splits the inclusion of constants [def-weil-closed-immersion]. The source $H$ is reduced by step 4. Therefore [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] applied to this unit makes $\\delta$ factor through $\\operatorname{Spec}F$, so $\\delta=e_K$ as a scheme morphism. For every $F$-algebra $A$ and every $h\\in H(A)$, this says $u(h)v(h)^{-1}=1$, and thus $u=v$. This proves equality on all algebra-valued points, including in positive characteristic with nonreduced $K$.",
+   "uses": [
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.8, p.389, uniqueness; expanded scheme-theoretically using Stacks Tag 0356 and the finite-spectrum facts in the proof of Tag 06RS (Tags 05DR and 00GT)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sfb-reduced-target-dominant-group-flatness",
+  "lem-sfb-split-torus-subgroups-diagonalizable",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 18.6(a) and 18.8, printed pp.388--389; detailed neutral-component surjectivity and nonreduced-kernel uniqueness expanded using the cited existing nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A universal multiplicative covering of connected algebraic groups lifts uniquely through any multiplicative isogeny",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.connected_component_unique\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] {X A B : C}\\n  [CategoryTheory.PreGaloisCategory.IsConnected A] [CategoryTheory.PreGaloisCategory.IsConn\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ equipped with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, if $A$ and $B$ are connected objects, and there exist monomorphisms $i : A \\\\to X$ and $j :\"}\n  {\"name\": \"Abelianization.lift_unique\", \"module\": \"Mathlib/GroupTheory/Abelianization/Defs\", \"type\": \"∀ {G : Type u} [inst : Group G] {A : Type v} [inst_1 : CommGroup A] (f : G →* A) (φ : Abelianization G →* A),\\n  (∀ (x : G), φ (Abelianization.of x) = f x) → ∀ {x : Abelianization G}, φ x = (Abelianization.lift f) x\", \"doc\": \"Given a group $G$, its abelianization $G^{\\\\text{ab}} = G/[G, G]$, and an abelian group $A$, if two group homomorphisms $\\\\varphi, \\\\psi : G^{\\\\text{ab}} \\\\to A$ satisfy $\\\\varphi \\\\circ \\\\text{of} = \\\\psi \\\\ci\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"Abelianization.lift.unique\", \"module\": \"Mathlib/GroupTheory/Abelianization/Defs\", \"type\": \"∀ {G : Type u} [inst : Group G] {A : Type v} [inst_1 : CommGroup A] (f : G →* A) (φ : Abelianization G →* A),\\n  (∀ (x : G), φ (Abelianization.of x) = f x) → ∀ {x : Abelianization G}, φ x = (Abelianization.lift f) x\", \"doc\": \"For any group $G$ and abelian group $A$, if a group homomorphism $\\\\phi : G^{\\\\text{ab}} \\\\to A$ satisfies $\\\\phi \\\\circ \\\\text{of}_G = f$ for a homomorphism $f : G \\\\to A$, then $\\\\phi$ must equal the unique\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_autMap\", \"module\": \"Mathlib/CategoryTheory/Galois/GaloisObjects\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C] {A B : C}\\n  (f : A ⟶ B) [CategoryTheory.PreGaloisCategory.IsConnected A] [CategoryTheory.PreGaloisCategory.IsGalois B]\\n  (σ : CategoryTheory.Aut A),\\n  ∃! τ, CategoryTheory.CategoryStruct.comp f τ.h\", \"doc\": \"For any connected object $A$ and Galois object $B$ in a category $\\\\mathcal{C}$, given a morphism $f : A \\\\to B$ and an automorphism $\\\\sigma \\\\in \\\\text{Aut}(A)$, there exists a unique automorphism $\\\\tau \"}\n  {\"name\": \"IsCoveringMap.existsUnique_continuousMap_lifts_of_range_le\", \"module\": \"Mathlib/Topology/Homotopy/Lifting\", \"type\": \"∀ {E : Type u_1} {X : Type u_2} {A : Type u_3} [inst : TopologicalSpace E] [inst_1 : TopologicalSpace X]\\n  [inst_2 : TopologicalSpace A] {p : E → X} (cov : IsCoveringMap p) [PathConnectedSpace A] [LocPathConnectedSpace A]\\n  {f : C(A, X)} {a₀ : A} {e₀ : E} (he : p e₀ = f a₀),\\n  (FundamentalGroup.map \", \"doc\": \"Let $ p : E \\\\to X $ be a covering map, $ A $ a path-connected and locally path-connected topological space, $ f : A \\\\to X $ a continuous map, $ a_0 \\\\in A $, and $ e_0 \\\\in E $ such that $ p(e_0) = f(a_\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_mono_of_isConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Full\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  (Y : Action FintypeCat (CategoryTheory.Aut F)) (i : Y ⟶ (CategoryTheory.PreGaloisCategory.\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ with a fiber functor $F$, if $Y$ is a connected object in the category of finite $\\\\mathrm{Aut}(F)$-sets and there exists a monomorphism $i: Y \\\\to F(X)$ for some \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autMap_unique\", \"module\": \"Mathlib/CategoryTheory/Galois/GaloisObjects\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C] {A B : C}\\n  [inst_2 : CategoryTheory.PreGaloisCategory.IsConnected A] [inst_3 : CategoryTheory.PreGaloisCategory.IsGalois B]\\n  (f : A ⟶ B) (σ : CategoryTheory.Aut A) (τ : CategoryTheory.Aut B),\\n  C\", \"doc\": \"For any connected object $A$ and Galois object $B$ in a category $\\\\mathcal{C}$, given a morphism $f : A \\\\to B$ and an automorphism $\\\\sigma \\\\in \\\\text{Aut}(A)$, there exists a unique automorphism $\\\\tau \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological coverings, abstract-group quotients and pullback group objects do not give algebraic-group isogeny lifting"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Isogeny\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: topological coverings, abstract-group quotients and pullback group objects do not give algebraic-group isogeny lifting"
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.isogen|simply.connected.*(group|cover)|universal.*cover",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"141\", \"text\": \"    rw [IsZariskiLocalAtTarget.iff_of_openCover (P := @UniversallyClosed) Y.affineCover] at H₁\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological coverings, abstract-group quotients and pullback group objects do not give algebraic-group isogeny lifting"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simply connected algebraic group mapping to a quotient lifts uniquely through a finite diagonalizable central isogeny",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"connectedComponents_lift_unique'\", \"module\": \"Mathlib.Topology.Connected.TotallyDisconnected\", \"type\": \"{β : Sort*} {g₁ g₂ : ConnectedComponents α → β} (hg : g₁ ∘ ((↑) : α → ConnectedComponents α) = g₂ ∘ (↑)) : g₁ = g₂\", \"doc\": \"If two functions $ g_1, g_2 : \\\\text{ConnectedComponents}(\\\\alpha) \\\\to \\\\beta $ satisfy $ g_1 \\\\circ \\\\pi = g_2 \\\\circ \\\\pi $, where $ \\\\pi : \\\\alpha \\\\to \\\\text{ConnectedComponents}(\\\\alpha) $ is the quotient ma\"}\n  {\"name\": \"QuotientAddGroup.lift.congr_simp\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"∀ {G : Type u_1} {M : Type u_4} [inst : AddGroup G] [inst_1 : AddMonoid M] (N : AddSubgroup G) [nN : N.Normal]\\n  (φ φ_1 : G →+ M) (e_φ : φ = φ_1) (HN : N ≤ φ.ker), QuotientAddGroup.lift N φ HN = QuotientAddGroup.lift N φ_1 ⋯\", \"doc\": \"If two additive monoid homomorphisms $\\\\varphi, \\\\varphi_1 : G \\\\to M$ are equal and a normal additive subgroup $N \\\\trianglelefteq G$ is contained in their kernels, then the induced homomorphisms from th\"}\n  {\"name\": \"NormedAddGroupHom.lift_unique\", \"module\": \"Mathlib.Analysis.Normed.Group.Quotient\", \"type\": \"{N : Type*} [SeminormedAddCommGroup N] (S : AddSubgroup M) (f : NormedAddGroupHom M N) (hf : ∀ s ∈ S, f s = 0)\\n  (g : NormedAddGroupHom (M ⧸ S) N) (h : g.comp S.normedMk = f) : g = lift S f hf\", \"doc\": \"Given a seminormed additive commutative group $ M $, an additive subgroup $ S $, and a normed additive group homomorphism $ f : M \\\\to N $ that vanishes on $ S $, any normed additive group homomorphism\"}\n  {\"name\": \"Abelianization.lift_unique\", \"module\": \"Mathlib.GroupTheory.Abelianization.Defs\", \"type\": \"(φ : Abelianization G →* A)\\n    -- hφ : φ agrees with f on the image of G in Gᵃᵇ\\n    \\n  (hφ : ∀ x : G, φ (Abelianization.of x) = f x) {x : Abelianization G} : φ x = lift f x\", \"doc\": \"Given a group $G$, its abelianization $G^{\\\\text{ab}} = G/[G, G]$, and an abelian group $A$, if two group homomorphisms $\\\\varphi, \\\\psi : G^{\\\\text{ab}} \\\\to A$ satisfy $\\\\varphi \\\\circ \\\\text{of} = \\\\psi \\\\ci\"}\n  {\"name\": \"IsCoveringMapOn.existsUnique_continuousMap_lifts\", \"module\": \"Mathlib.Topology.Homotopy.Lifting\", \"type\": \"[SimplyConnectedSpace A] [LocPathConnectedSpace A] {s : Set X} (cov : IsCoveringMapOn p s) (f : C(A, X)) {a₀ : A}\\n  {e₀ : E} (he : p e₀ = f a₀) (hs : ∀ a, f a ∈ s) : ∃! F : C(A, E), F a₀ = e₀ ∧ p ∘ F = f\", \"doc\": \"Let $ p: E \\\\to X $ be a continuous map that is a covering map on a subset $ s \\\\subseteq X $. If $ A $ is a simply connected and locally path-connected topological space, $ f: A \\\\to X $ is a continuous\"}\n  {\"name\": \"Con.lift_unique\", \"module\": \"Mathlib.GroupTheory.Congruence.Hom\", \"type\": \"(H : c ≤ ker f) (g : c.Quotient →* P) (Hg : g.comp c.mk' = f) : g = c.lift f H\", \"doc\": \"Given a congruence relation $\\\\sim$ on a monoid $M$ and a monoid homomorphism $f : M \\\\to P$ whose kernel congruence contains $\\\\sim$, any monoid homomorphism $g : M/\\\\sim \\\\to P$ satisfying $g \\\\circ \\\\pi =\"}\n  {\"name\": \"Abelianization.lift.unique\", \"module\": \"Mathlib.GroupTheory.Abelianization.Defs\", \"type\": \"∀ {G : Type u} [inst : Group G] {A : Type v} [inst_1 : CommGroup A] (f : G →* A) (φ : Abelianization G →* A),\\n  (∀ (x : G), φ (Abelianization.of x) = f x) → ∀ {x : Abelianization G}, φ x = (Abelianization.lift f) x\", \"doc\": \"For any group $G$ and abelian group $A$, if a group homomorphism $\\\\phi : G^{\\\\text{ab}} \\\\to A$ satisfies $\\\\phi \\\\circ \\\\text{of}_G = f$ for a homomorphism $f : G \\\\to A$, then $\\\\phi$ must equal the unique\"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[FormallyUnramified R A] (I : Ideal B) (hI : IsNilpotent I) (g₁ g₂ : A →ₐ[R] B)\\n  (h : (Ideal.Quotient.mkₐ R I).comp g₁ = (Ideal.Quotient.mkₐ R I).comp g₂) : g₁ = g₂\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally unramified $ R $-algebra, and $ B $ an $ R $-algebra with a nilpotent ideal $ I $. If $ g_1, g_2 : A \\\\to B $ are $ R $-algebra homomorphisms such that\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological coverings, abstract-group quotients and pullback group objects do not give algebraic-group isogeny lifting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a finite central isogeny admits a section over a simply connected smooth connected algebraic group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GrpObjAsOverPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{M S T : AlgebraicGeometry.Scheme} →\\n  [inst : M.Over S] →\\n    {f : T ⟶ S} →\\n      [CategoryTheory.GrpObj (M.asOver S)] → CategoryTheory.GrpObj ((CategoryTheory.Limits.pullback (M ↘ S) f).asOver T)\", \"doc\": \"Given a group object in the over category of schemes over a base scheme $ S $ and a morphism $ f : T \\to S $, the pullback of this group object along $ f $ forms a group object in the over category of \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X], ∃ A x, CategoryTheory.PreGaloisCategory.IsG\", \"doc\": \"For any connected object $ X $ in a pre-Galois category $ \\\\mathcal{C} $, there exists a Galois object $ A $ in $ \\\\mathcal{C} $ and a morphism $ A \\\\to X $.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]\\n  [CategoryTh\", \"doc\": \"Let $\\\\mathcal{C}$ be a pre-Galois category with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, and let $G$ be a group acting on $F$. For any finite family of Galois objects $\\\\{X_i\\\\}_{i \\\\in I\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]\\n  [CategoryTh\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ with fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, if $X$ is a Galois object and the group $G$ acts transitively on $F(X)$, then every automorphism $t :\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  {H : Set (CategoryTheory.Aut F)},\\n  1 ∈ H →\\n    IsOpen H →\\n      ∃ I x,\\n        (∀ X ∈ I, CategoryThe\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, if $H \\\\subseteq \\\\mathrm{Aut}(F)$ is an open subset containing the identity automorphism, then there\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_autMap\", \"module\": \"Mathlib/CategoryTheory/Galois/GaloisObjects\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C] {A B : C}\\n  (f : A ⟶ B) [CategoryTheory.PreGaloisCategory.IsConnected A] [CategoryTheory.PreGaloisCategory.IsGalois B]\\n  (σ : CategoryTheory.Aut A),\\n  ∃! τ, CategoryTheory.CategoryStruct.comp f τ.h\", \"doc\": \"For any connected object $A$ and Galois object $B$ in a category $\\\\mathcal{C}$, given a morphism $f : A \\\\to B$ and an automorphism $\\\\sigma \\\\in \\\\text{Aut}(A)$, there exists a unique automorphism $\\\\tau \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_fiber_nonempty\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C),\\n  Nonempty (F.obj X).carrier → ∃ A x, CategoryTheory.PreGaloisCategory.IsGalois A\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ equipped with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, for any object $X \\\\in \\\\mathcal{C}$ such that the fiber $F(X)$ is non-empty, there exists a Ga\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_fiber\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  (x : (F.obj X).carrier),\\n  ∃ A f a, CategoryTheory.PreGaloisCategory.IsGalois A ∧ (CategoryTh\", \"doc\": \"For any object $X$ in a pre-Galois category $\\\\mathcal{C}$ and any element $x$ in the image of $X$ under a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists a Galois object $A$, a mor\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: topological coverings, abstract-group quotients and pullback group objects do not give algebraic-group isogeny lifting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simply connected smooth connected affine algebraic group has a unique lift through a finite central diagonalizable isogeny",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Abelianization.lift.unique\", \"module\": \"Mathlib/GroupTheory/Abelianization/Defs\", \"type\": \"∀ {G : Type u} [inst : Group G] {A : Type v} [inst_1 : CommGroup A] (f : G →* A) (φ : Abelianization G →* A),\\n  (∀ (x : G), φ (Abelianization.of x) = f x) → ∀ {x : Abelianization G}, φ x = (Abelianization.lift f) x\", \"doc\": \"For any group $G$ and abelian group $A$, if a group homomorphism $\\\\phi : G^{\\\\text{ab}} \\\\to A$ satisfies $\\\\phi \\\\circ \\\\text{of}_G = f$ for a homomorphism $f : G \\\\to A$, then $\\\\phi$ must equal the unique\"}\n  {\"name\": \"Abelianization.lift_unique\", \"module\": \"Mathlib/GroupTheory/Abelianization/Defs\", \"type\": \"∀ {G : Type u} [inst : Group G] {A : Type v} [inst_1 : CommGroup A] (f : G →* A) (φ : Abelianization G →* A),\\n  (∀ (x : G), φ (Abelianization.of x) = f x) → ∀ {x : Abelianization G}, φ x = (Abelianization.lift f) x\", \"doc\": \"Given a group $G$, its abelianization $G^{\\\\text{ab}} = G/[G, G]$, and an abelian group $A$, if two group homomorphisms $\\\\varphi, \\\\psi : G^{\\\\text{ab}} \\\\to A$ satisfy $\\\\varphi \\\\circ \\\\text{of} = \\\\psi \\\\ci\"}\n  {\"name\": \"groupCohomology.H1ofAutOnUnitsUnique\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"(K L : Type) →\\n  [inst : Field K] →\\n    [inst_1 : Field L] →\\n      [inst_2 : Algebra K L] → [FiniteDimensional K L] → Unique ↑(groupCohomology.H1 (Rep.ofAlgebraAutOnUnits K L))\", \"doc\": \"For any finite field extension $ L/K $, the first group cohomology module $ H^1(\\text{Aut}(L/K), L^\\times) $ is trivial, meaning it contains only the zero element. This implies every 1-cocycle in this c\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.connected_component_unique\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] {X A B : C}\\n  [CategoryTheory.PreGaloisCategory.IsConnected A] [CategoryTheory.PreGaloisCategory.IsConn\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ equipped with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, if $A$ and $B$ are connected objects, and there exist monomorphisms $i : A \\\\to X$ and $j :\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_mono_of_isConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Full\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  (Y : Action FintypeCat (CategoryTheory.Aut F)) (i : Y ⟶ (CategoryTheory.PreGaloisCategory.\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ with a fiber functor $F$, if $Y$ is a connected object in the category of finite $\\\\mathrm{Aut}(F)$-sets and there exists a monomorphism $i: Y \\\\to F(X)$ for some \"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique'\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyUnramified R A] {C : Type u_1} [inst_6 : Ring C]\\n  [inst_7 : Algebra R C] (f : B →ₐ[R] C),\\n  IsNilpotent (RingHom.ker ↑f) → ∀ (g₁ \", \"doc\": \"Let $ R $ be a commutative ring and $ A $ a formally unramified $ R $-algebra. Suppose $ B $ and $ C $ are rings equipped with $ R $-algebra structures, and $ f : B \\\\to C $ is an $ R $-algebra homomor\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_autMap\", \"module\": \"Mathlib/CategoryTheory/Galois/GaloisObjects\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C] {A B : C}\\n  (f : A ⟶ B) [CategoryTheory.PreGaloisCategory.IsConnected A] [CategoryTheory.PreGaloisCategory.IsGalois B]\\n  (σ : CategoryTheory.Aut A),\\n  ∃! τ, CategoryTheory.CategoryStruct.comp f τ.h\", \"doc\": \"For any connected object $A$ and Galois object $B$ in a category $\\\\mathcal{C}$, given a morphism $f : A \\\\to B$ and an automorphism $\\\\sigma \\\\in \\\\text{Aut}(A)$, there exists a unique automorphism $\\\\tau \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X], ∃ A x, CategoryTheory.PreGaloisCategory.IsG\", \"doc\": \"For any connected object $ X $ in a pre-Galois category $ \\\\mathcal{C} $, there exists a Galois object $ A $ in $ \\\\mathcal{C} $ and a morphism $ A \\\\to X $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, topological coverings or nilpotent formal lifting; none states multiplicative isogeny lifting for affine group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Isogeny\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, topological coverings or nilpotent formal lifting; none states multiplicative isogeny lifting for affine group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.isogen|simply.connected.*algebraic|universal.*multiplicative",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Torsor/Defs.lean\", \"line\": \"29\", \"text\": \"universal cover. Both the additive and multiplicative notation will be useful to formalise\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, topological coverings or nilpotent formal lifting; none states multiplicative isogeny lifting for affine group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal multiplicative covering of an algebraic group lifts uniquely through every multiplicative isogeny",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WithOne.lift_unique\", \"module\": \"Mathlib.Algebra.Group.WithOne.Basic\", \"type\": \"(f : WithOne α →* β) : f = lift (f.toMulHom.comp coeMulHom)\", \"doc\": \"Every monoid homomorphism $ f : \\\\text{WithOne}\\\\, \\\\alpha \\\\to \\\\beta $ is uniquely determined by its restriction to $ \\\\alpha $ as a multiplicative homomorphism, composed with the canonical embedding $ \\\\a\"}\n  {\"name\": \"WithOne.lift\", \"module\": \"Mathlib.Algebra.Group.WithOne.Basic\", \"type\": \": (α →ₙ* β) ≃ (WithOne α →* β)\", \"doc\": \"There is a canonical bijection between multiplicative homomorphisms from $\\\\alpha$ to a monoid $\\\\beta$ and monoid homomorphisms from $\\\\text{WithOne}\\\\, \\\\alpha$ to $\\\\beta$. Specifically, any multiplicati\"}\n  {\"name\": \"IsCoveringMap.existsUnique_continuousMap_lifts_of_range_le\", \"module\": \"Mathlib.Topology.Homotopy.Lifting\", \"type\": \"[PathConnectedSpace A] [LocPathConnectedSpace A] {f : C(A, X)} {a₀ : A} {e₀ : E} (he : p e₀ = f a₀)\\n  (le : (map f a₀).range ≤ (mapOfEq ⟨p, cov.continuous⟩ he).range) : ∃! F : C(A, E), F a₀ = e₀ ∧ p ∘ F = f\", \"doc\": \"Let $ p : E \\\\to X $ be a covering map, $ A $ a path-connected and locally path-connected topological space, $ f : A \\\\to X $ a continuous map, $ a_0 \\\\in A $, and $ e_0 \\\\in E $ such that $ p(e_0) = f(a_\"}\n  {\"name\": \"Magma.AssocQuotient.lift\", \"module\": \"Mathlib.Algebra.Free\", \"type\": \": (α →ₙ* β) ≃ (AssocQuotient α →ₙ* β)\", \"doc\": \"There is a natural equivalence between the set of multiplicative homomorphisms from a magma $\\\\alpha$ to a semigroup $\\\\beta$ and the set of multiplicative homomorphisms from the associative quotient $\\\\\"}\n  {\"name\": \"Algebra.FormallySmooth.liftOfSurjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (f : A →ₐ[R] C) (g : B →ₐ[R] C) (hg : Function.Surjective g)\\n  (hg' : IsNilpotent <| RingHom.ker (g : B →+* C)) : A →ₐ[R] B\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, and surjective $ R $-algebra homomorphisms $ f : A → C $ and $ g : B → C $ with nilpotent kernel, there exists an $ R $-algebra homomorphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.ulift\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"(𝒰 : Cover.{v} (precoverage P) X) : Cover.{u} (precoverage P) X\", \"doc\": \"Given a scheme $X$ and a cover $\\\\mathcal{U}$ of $X$ defined by the precoverage generated by a morphism property $P$, this function lifts $\\\\mathcal{U}$ from universe level $v$ to universe level $u$ whi\"}\n  {\"name\": \"NormedAddGroupHom.lift_unique\", \"module\": \"Mathlib.Analysis.Normed.Group.Quotient\", \"type\": \"{N : Type*} [SeminormedAddCommGroup N] (S : AddSubgroup M) (f : NormedAddGroupHom M N) (hf : ∀ s ∈ S, f s = 0)\\n  (g : NormedAddGroupHom (M ⧸ S) N) (h : g.comp S.normedMk = f) : g = lift S f hf\", \"doc\": \"Given a seminormed additive commutative group $ M $, an additive subgroup $ S $, and a normed additive group homomorphism $ f : M \\\\to N $ that vanishes on $ S $, any normed additive group homomorphism\"}\n  {\"name\": \"CommGrpCat.uliftFunctorFullyFaithful\", \"module\": \"Mathlib.Algebra.Category.Grp.Ulift\", \"type\": \": uliftFunctor.{u, v}.FullyFaithful\", \"doc\": \"The universe-lifting functor in the category of commutative groups, which maps each commutative group to its universe-lifted counterpart and each group homomorphism to the corresponding lifted homomor\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, topological coverings or nilpotent formal lifting; none states multiplicative isogeny lifting for affine group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sl2-universal-multiplicative-cover",
+  "date": "2026-10-24",
+  "group": "Q92"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Proposition 20.31, printed p.418; definition of universal covering in 18.7 and the lifting property in Proposition 18.8. The scalar centre is computed by commuting a matrix with the two unit transvections. Supporting prerequisite: The lifting property in Proposition 18.8, used after establishing simple connectedness by 18.19--18.20.",
+   "via": [
+    "lem-sfb-sl2-universal-multiplicative-cover",
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-simply-connected-multiplicative-lifting",
+  "worker": "stage1",
+  "summary": "Checked the exact statement against Milne 18.5--18.8 and the live Lean source; no attachment. Wrote the pullback/reduced-neutral-component proof, justified its surjectivity by finite translates and the closed-image theorem, verified coordinate faithful flatness and finite central diagonalizable kernel, and proved uniqueness as an equality of schemes using reduced-source factorization. Reused all existing nodes; no new nodes. Statement and statement dependencies unchanged.",
+  "blueprint": "Realizes the inherited from.place chain to det-thm-sf-ctf-stability-direct-images, proof (3), through the rank-one SL2 covering prerequisite: Milne Proposition 18.8. The current latest blueprint has the same direct-image step (3); this item is a supporting lemma below that unit. The ancestor tool returns None, matching the inherited blueprint.from.node; its precise existing place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Identifies the affine pullback with the tensor-product algebra, needed to apply faithful-flat base change; the unit has no replacement algebraic geometry foundation."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-base-change",
+    "why": "Preserves coordinate faithful flatness in the group pullback; generic ring base-change tool."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Passes from coordinate faithful flatness to underlying-space surjectivity; generic ring spectrum tool."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Supplies reducedness of the smooth source H for faithful flatness and uniqueness; generic smooth-geometry tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "why": "A finite algebra over the field F has finite discrete spectrum; generic commutative algebra tool for uniqueness."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Upgrades set-theoretic identity-valuedness to schematic factorization through the unit; generic reduced-scheme tool."
+   },
+   {
+    "node": "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "why": "Identifies the intersection of primes with the nilradical, to prove injectivity of the coordinate homomorphism into the reduced target; generic commutative algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-3c2e97787",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-3c2e97787 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps against the full statement of every cited node and against Milne iAG2017 Def. 18.5, Prop. 18.6(a), Def. 18.7 and Prop. 18.8 (printed pp.388-389). The statement matches 18.8 over an algebraically closed (so perfect) field and is unchanged. Step 1: the coordinate algebra of P is F[H]⊗_{F[G]}F[E], a* is faithfully flat by base change, and ker a = K is central. Step 2: P° and R = (P°)_red are smooth and connected, with finitely many translates covering P (neutral-component-translates and identity-component nodes). Step 3: the hypotheses of homomorphism-factorization hold (affine, so separated); the translates argument with H irreducible gives r surjective, which is correct for disconnected or nonreduced P. Step 4: H is reduced, r* is injective via the radical, and reduced-target flatness applies with reduced domain F[H]. Step 5: ker r is a quotient of F[K], central, and sits in a split torus through K ⊂ G_m^t, so the split-torus node gives a finite D(N). Step 6 is an elementary lift. Step 7: uniqueness holds at the scheme level, since δ lands in the finite discrete |K|, H is connected and reduced, and δ factors through the closed unit by reduced-source factorization; this handles μ_p kernels. Edge cases checked: H=1, p=id, q=id, char p with μ_p kernel, G_m not simply connected. No new nodes. The DAG search found no duplicate; the only citer is lem-sfb-sl2-universal-multiplicative-cover, whose use matches. No SGA. The 7 generic tool_uses are accepted. Batch-5 flag: lem-sfb-algebraic-group-homomorphism-factorization reaches lem-trf-fppf-covering-base-change, a Mathlib leaf for Stacks 021O(3) (base change of fppf coverings). That is a generic topology fact, neither of the assumed statements nor part of their proofs, so it is not a RETURN. The inherited blueprint.from.node = null comes from the base node and is unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SimplyConnectedMultiplicativeLifting",
+  "declaration": "AlgebraicGeometry.simplyConnected_multiplicative_lifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/SimplyConnectedMultiplicativeLifting.lean",
+  "statement": "theorem simplyConnected_multiplicative_lifting {F : Type u} [Field F] [IsAlgClosed F] (H G E : Over (Spec (.of F))) [GrpObj H] [GrpObj G] [GrpObj E] [IsAffine H.left] [IsAffine G.left] [IsAffine E.left] [Smooth H.hom] [Smooth G.hom] [Smooth E.hom] [ConnectedSpace H.left] [ConnectedSpace G.left] [ConnectedSpace E.left] [LocallyOfFiniteType H.hom] [LocallyOfFiniteType G.hom] [LocallyOfFiniteType E.hom] [QuasiCompact H.hom] [QuasiCompact G.hom] [QuasiCompact E.hom] (hH : ∀ (H1 : Over (Spec (.of F))) [GrpObj H1] [IsAffine H1.left] [Smooth H1.hom] [ConnectedSpace H1.left] [LocallyOfFiniteType H1.hom] [QuasiCompact H1.hom] (r : H1 ⟶ H) [IsMonHom r], r.left.appTop.hom.FaithfullyFlat → IsFinite (GrpObj.ker r).hom → IsFiniteDiagonalizableGroupScheme (GrpObj.ker r) → (∀ (T : Over (Spec (.of F))) (x : T ⟶ GrpObj.ker r) (h : T ⟶ H1), (x ≫ GrpObj.kerι r) * h = h * (x ≫ GrpObj.kerι r)) → IsIso r) (q : H ⟶ G) (p : E ⟶ G) [IsMonHom q] [IsMonHom p] (hq : q.left.appTop.hom.FaithfullyFlat) (hp : p.left.appTop.hom.FaithfullyFlat) [IsFinite (GrpObj.ker q).hom] [IsFinite (GrpObj.ker p).hom] (hqdiag : IsFiniteDiagonalizableGroupScheme (GrpObj.ker q)) (hpdiag : IsFiniteDiagonalizableGroupScheme (GrpObj.ker p)) (hqcentral : ∀ (T : Over (Spec (.of F))) (x : T ⟶ GrpObj.ker q) (h : T ⟶ H), (x ≫ GrpObj.kerι q) * h = h * (x ≫ GrpObj.kerι q)) (hpcentral : ∀ (T : Over (Spec (.of F))) (x : T ⟶ GrpObj.ker p) (e : T ⟶ E), (x ≫ GrpObj.kerι p) * e = e * (x ≫ GrpObj.kerι p)) : ∃! u : H ⟶ E, IsMonHom u ∧ u ≫ p = q",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6860c23ce",
+  "group": "NX",
+  "result": "pass",
+  "note": "Lean matches node and Milne 18.5-18.8 clause by clause. H,G,E affine/smooth/connected/finite type (LocallyOfFiniteType+QuasiCompact). q,p: IsMonHom, appTop FaithfullyFlat, IsFinite + IsFiniteDiagonalizableGroupScheme of GrpObj.ker (scheme-theoretic, no reducedness), centrality over all T. hH repeats the exact four isogeny conditions for H1 and gives IsIso r. Conclusion: single ∃! u, IsMonHom u ∧ u ≫ p = q. One universe u, as in the landed def. Node changes vs live: only the lean record and the landed stmt_dep def-sfb-finite-diagonalizable-group-scheme; statement field verbatim; docstrings carry source, blueprint and the 7-step proof; sorry only; follows the landed NI multiplicativeIsogeny_comp convention; no duplicate predicate; imports match proof_dep records. Edge cases: H=1, p=id, q=id, trivial M, mu_p, G_m fails hH, empty excluded. Advisory: second reading by the same worker; no copyright header. No compile (no changes)."
+ }
+}

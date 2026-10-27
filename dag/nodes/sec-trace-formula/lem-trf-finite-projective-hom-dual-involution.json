@@ -1,0 +1,278 @@
+{
+ "id": "lem-trf-finite-projective-hom-dual-involution",
+ "kind": "statement",
+ "title": "Bounded finite-projective product-Hom dual involution",
+ "statement": "Let $B$ be a commutative ring and $P$ an integer cochain complex [def-weil-abstract-derived-category], zero outside $[a,b]$ for integers $a\\leq b$, with finitely generated [def-weil-finitely-generated-module] projective [def-weil-pbc-projective-module] terms. Write $O=B[0]$ and $H$ for the product total module Hom complex [def-sc-module-total-hom-complex]. Put $E=H(P,O)$ and $F=H(E,O)$. Projection to the sole possibly nonzero product coordinate gives natural module isomorphisms $E^r\\cong\\operatorname{Hom}_B(P^{-r},B)$ and $F^p\\cong(P^p)^{**}$, where $M^*=\\operatorname{Hom}_B(M,B)$. Under these identifications $d_E^r(\\phi)=(-1)^{r+1}\\phi d_P^{-r-1}$ and $d_F^p=-(d_P^p)^{**}$; $E$ vanishes outside $[-b,-a]$ and has finitely generated projective terms. The homogeneous formula $\\delta_P(x)(\\phi)=(-1)^{p q}\\phi(x)$ for $x\\in P^p$, $\\phi\\in E^q$, $p+q=0$, with zero in all other Hom coordinates, defines a chain isomorphism $\\delta_P:P\\xrightarrow{\\sim}F$. Its component in degree $p$ is $(-1)^p\\operatorname{ev}_{P^p}$ and its inverse component is $(-1)^p\\operatorname{ev}_{P^p}^{-1}$, where $\\operatorname{ev}_M(x)(\\phi)=\\phi(x)$. These chain isomorphisms are natural in chain maps between such complexes: $H(H(f,O),O)\\delta_P=\\delta_{P'}f$ for $f:P\\to P'$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07VI, lemma-dual-perfect-complex, bounded finite-projective Hom dual and signed double evaluation; Tag 0FNG, section-sign-rules; actual Hom coordinates and differential in section-hom-complexes (Tag 0A8H)."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sc-module-total-hom-complex",
+  "def-weil-pbc-projective-module",
+  "def-weil-finitely-generated-module",
+  "def-trf-module-hom-precomposition"
+ ],
+ "proof": [
+  {
+   "text": "By [def-sc-module-total-hom-complex], $E^r=\\prod_i\\operatorname{Hom}_B(P^i,O^{i+r})$. For $i\\ne-r$ the target is zero, so projection to $i=-r$ is an isomorphism with inverse inserting a map at $-r$ and zero elsewhere. Likewise $F^p\\cong\\operatorname{Hom}_B(E^{-p},B)\\cong(P^p)^{**}$. Projection and insertion commute with precomposition, so these module identifications are natural. If $r\\notin[-b,-a]$, then $P^{-r}=0$, hence $E^r=0$.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A8H, section-hom-complexes; Tag 0FNG, section-sign-rules, item-evaluation; Tag 07VI, lemma-dual-perfect-complex, first paragraph of proof."
+   }
+  },
+  {
+   "text": "The differential of $O=B[0]$ is zero. Substituting in the differential of [def-sc-module-total-hom-complex], the coordinate at $i=-r-1$ of $d_E^r(\\phi)$ is $-(-1)^r\\phi\\circ d_P^{-r-1}=(-1)^{r+1}\\phi\\circ d_P^{-r-1}$. All other coordinates have zero target. This proves the asserted first differential formula.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A8H, section-hom-complexes; Tag 0FNG, section-sign-rules, item-evaluation; Tag 07VI, lemma-dual-perfect-complex, first paragraph of proof."
+   }
+  },
+  {
+   "text": "Apply the same differential formula to $F=H(E,O)$. For $u\\in F^p=(P^p)^{**}$ and $\\psi\\in E^{-p-1}=(P^{p+1})^*$, Step 2 gives $d_F^p(u)(\\psi)=(-1)^{p+1}u(d_E^{-p-1}\\psi)=(-1)^{p+1}(-1)^{-p}u(\\psi\\circ d_P^p)=-u(\\psi\\circ d_P^p)$. By the definition of double transpose, this is $-(d_P^p)^{**}(u)(\\psi)$. Equality on every $\\psi$ proves the asserted second differential formula.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A8H, section-hom-complexes; Tag 0FNG, section-sign-rules, item-evaluation; Tag 07VI, lemma-dual-perfect-complex, first paragraph of proof."
+   }
+  },
+  {
+   "text": "For every integer $r$, the hypotheses make $P^{-r}$ a finitely generated projective $B$-module. Apply [lem-sf-finite-projective-dual] to this module: its dual is finitely generated and projective. The projection isomorphism of Step 1 therefore proves these properties for $E^r$. Together with its support calculation this proves the bounded finite-projectivity assertion.",
+   "uses": [
+    "lem-sf-finite-projective-dual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A8H, section-hom-complexes; Tag 0FNG, section-sign-rules, item-evaluation; Tag 07VI, lemma-dual-perfect-complex, first paragraph of proof."
+   }
+  },
+  {
+   "text": "Define $\\delta_P^p(x)$ by inserting $(-1)^p\\operatorname{ev}_{P^p}(x)$ in the sole coordinate $E^{-p}\\to B$, and zero elsewhere. This is $B$-linear. If $q=-p$, then $pq=-p^2\\equiv p\\pmod2$, so its value on $\\phi\\in E^q$ is precisely $(-1)^{pq}\\phi(x)$. For $x\\in P^p$ and $\\psi\\in(P^{p+1})^*$, Step 3 yields $d_F^p(\\delta_P^p x)(\\psi)=(-1)^{p+1}\\psi(d_P^p x)=\\delta_P^{p+1}(d_P^p x)(\\psi)$. Extensionality and Step 1 give the chain-map identity in every degree.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A8H, section-hom-complexes; Tag 0FNG, section-sign-rules, item-evaluation; Tag 07VI, lemma-dual-perfect-complex, first paragraph of proof."
+   }
+  },
+  {
+   "text": "Apply the evaluation-isomorphism clause of [lem-sf-finite-projective-dual] to each $P^p$. Since $(-1)^p(-1)^p=1$, the component $\\eta^p=(-1)^p\\operatorname{ev}_{P^p}^{-1}:F^p\\to P^p$ satisfies $\\eta^p\\delta_P^p=1$ and $\\delta_P^p\\eta^p=1$. Multiplying the chain identity $d_F^p\\delta_P^p=\\delta_P^{p+1}d_P^p$ on the left by $\\eta^{p+1}$ and on the right by $\\eta^p$ gives $\\eta^{p+1}d_F^p=d_P^p\\eta^p$. Thus $\\eta$ is a chain map and a two-sided inverse, proving the specified chain isomorphism and inverse formula.",
+   "uses": [
+    "lem-sf-finite-projective-dual"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A8H, section-hom-complexes; Tag 0FNG, section-sign-rules, item-evaluation; Tag 07VI, lemma-dual-perfect-complex, first paragraph of proof."
+   }
+  },
+  {
+   "text": "Let $f:P\\to P'$ be a chain map and put $E'=H(P',O)$. Precomposition gives $H(f,O)^r(\\phi')=\\phi'\\circ f^{-r}$; its chain identity follows by replacing $d_{P'}f$ by $fd_P$ in Step 2. Applying precomposition twice therefore gives $H(H(f,O),O)^p(u)(\\phi')=u(\\phi'\\circ f^p)$ for $\\phi'\\in E'^{-p}$. At $u=\\delta_P^p(x)$ this equals $(-1)^p\\phi'(f^p x)=\\delta_{P'}^p(f^p x)(\\phi')$. Equality in every coordinate proves $H(H(f,O),O)\\delta_P=\\delta_{P'}f$.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A8H, section-hom-complexes; Tag 0FNG, section-sign-rules, item-evaluation; Tag 07VI, lemma-dual-perfect-complex, first paragraph of proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-total-hom-complex",
+  "lem-sf-finite-projective-dual"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A8H, section-hom-complexes; Tag 0FNG, section-sign-rules, item-evaluation; Tag 07VI, lemma-dual-perfect-complex, first paragraph of proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "bidual|double.?dual|evalEquiv|dual_projective|dual_finite",
+   "results": "{\"t\": \"2026-10-23T10:27:07Z\", \"tool\": \"grep\", \"query\": \"bidual|double.?dual|evalEquiv|dual_projective|dual_finite\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give component module duality or general homological infrastructure, not this normalized module-complex statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, Module.Dual.eval",
+   "results": "{\"t\": \"2026-10-23T10:27:07Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex, Module.Dual.eval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give component module duality or general homological infrastructure, not this normalized module-complex statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a bounded cochain complex of finite projective modules the signed evaluation into its double Hom complex is a natural chain isomorphism",
+   "results": "{\"t\": \"2026-10-23T10:27:08Z\", \"tool\": \"leansearch\", \"query\": \"For a bounded cochain complex of finite projective modules the signed evaluation into its double Hom complex is a natural chain isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.ι_mapBifunctorFlipIso_hom\", \"HomologicalComplex.mapBifunctorFlipIso\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply\", \"CochainComplex.HomComplex\", \"CochainComplex.ι_mapBifunctorShift₂Iso_hom_f\", \"CategoryTheory.ProjectiveResolution.cochainComplexXIso\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply\", \"CategoryTheory.ProjectiveResolution.cochainComplexXIso.congr_simp\"], \"digest\": \"5e35de7d7ea6f470\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give component module duality or general homological infrastructure, not this normalized module-complex statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Double dual evaluation for a bounded finite projective cochain complex with Koszul signs is an isomorphism of complexes",
+   "results": "{\"t\": \"2026-10-23T10:27:10Z\", \"tool\": \"leanfinder\", \"query\": \"Double dual evaluation for a bounded finite projective cochain complex with Koszul signs is an isomorphism of complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.cochainComplexXIso\", \"CochainComplex.isKProjective_of_projective\", \"HomologicalComplex.dgoEquivHomologicalComplex_counitIso\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply\", \"CochainComplex.IsKProjective\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply\", \"CochainComplex.isKProjective_iff_of_iso\", \"CochainComplex.isKProjective_of_iso\"], \"digest\": \"4df4ff76ef0cb22f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give component module duality or general homological infrastructure, not this normalized module-complex statement"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDual|leftDual|bidual|double.?dual|toIhomIhom",
+   "results": "{\"t\": \"2026-10-23T10:36:43Z\", \"tool\": \"grep\", \"query\": \"rightDual|leftDual|bidual|double.?dual|toIhomIhom\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give component module duality or general homological infrastructure, not this normalized module-complex statement"
+  },
+  {
+   "tool": "grep",
+   "query": "dual_projective|dual_finite|eval_naturality|evalEquiv",
+   "results": "{\"t\": \"2026-10-23T10:36:43Z\", \"tool\": \"grep\", \"query\": \"dual_projective|dual_finite|eval_naturality|evalEquiv\", \"sub\": \"LinearAlgebra/Dual\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\"], \"digest\": \"3b92e5ff6b096337\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give component module duality or general homological infrastructure, not this normalized module-complex statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Hom complex dual of a bounded finite projective complex is bounded finite projective and signed double evaluation is a chain isomorphism natural in chain maps",
+   "results": "{\"t\": \"2026-10-23T10:36:43Z\", \"tool\": \"leansearch\", \"query\": \"The Hom complex dual of a bounded finite projective complex is bounded finite projective and signed double evaluation is a chain isomorphism natural in chain maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.forgetEval\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply\", \"CochainComplex.HomComplex\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply\", \"HomologicalComplex.cyclesOpNatIso\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId\", \"HomologicalComplex.opcyclesOpNatIso\", \"CategoryTheory.ShortComplex.homologyOpIso_hom_naturality\"], \"digest\": \"6d371dfc910dc2be\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give component module duality or general homological infrastructure, not this normalized module-complex statement"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|double.?dual|toIhomIhom|evalEquiv",
+   "results": "{\"t\": \"2026-10-23T12:22:56Z\", \"tool\": \"grep\", \"query\": \"bidual|double.?dual|toIhomIhom|evalEquiv\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no bounded module-complex signed biduality statement; the component module-duality facts are reused through lem-sf-finite-projective-dual"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dual Hom complex of a bounded finite projective complex is finite projective and double dual evaluation is a natural chain isomorphism",
+   "results": "{\"t\": \"2026-10-23T12:22:56Z\", \"tool\": \"leansearch\", \"query\": \"The dual Hom complex of a bounded finite projective complex is finite projective and double dual evaluation is a natural chain isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.dual_projective\", \"LinearMap.IsPerfPair.dualEval\", \"Module.Dual.instIsReflecive\", \"Module.dual_finite\", \"CochainComplex.HomComplex\", \"HomologicalComplex.forgetEval\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply\", \"FinBddDistLat.dualEquiv\"], \"digest\": \"7cc83851bd351985\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no bounded module-complex signed biduality statement; the component module-duality facts are reused through lem-sf-finite-projective-dual"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex, Module.Dual.eval",
+   "results": "{\"t\": \"2026-10-23T12:22:56Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.HomComplex, Module.Dual.eval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no bounded module-complex signed biduality statement; the component module-duality facts are reused through lem-sf-finite-projective-dual"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite projective modules is naturally isomorphic to its double Hom complex by signed evaluation",
+   "results": "{\"t\": \"2026-10-23T12:22:57Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded complex of finite projective modules is naturally isomorphic to its double Hom complex by signed evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply\", \"CochainComplex.isKProjective_of_projective\", \"CategoryTheory.ProjectiveResolution.cochainComplexXIso\", \"CategoryTheory.ProjectiveResolution.isoExt\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_f\", \"HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_apply\"], \"digest\": \"bc268d4e04bd3206\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no bounded module-complex signed biduality statement; the component module-duality facts are reused through lem-sf-finite-projective-dual"
+  },
+  {
+   "tool": "grep",
+   "query": "dual_projective|dual_finite|eval_naturality|evalEquiv",
+   "results": "{\"t\": \"2026-10-23T12:25:40Z\", \"tool\": \"grep\", \"query\": \"dual_projective|dual_finite|eval_naturality|evalEquiv\", \"sub\": \"LinearAlgebra/Dual\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\"], \"digest\": \"057e497a6cb1179e\"}",
+   "date": "2026-10-23",
+   "verdict": "partial match: Module.dual_projective, Module.dual_finite and Module.evalEquiv are the module input already stated by lem-sf-finite-projective-dual, not the whole item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, Module.Dual",
+   "results": "{\"t\": \"2026-10-23T12:25:40Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex, Module.Dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no bounded module-complex signed biduality statement; the component module-duality facts are reused through lem-sf-finite-projective-dual"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cochain complex dual differential d phi equals minus signed precomposition and double dual differential is negative transpose transpose",
+   "results": "{\"t\": \"2026-10-23T12:25:41Z\", \"tool\": \"leanfinder\", \"query\": \"Cochain complex dual differential d phi equals minus signed precomposition and double dual differential is negative transpose transpose\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cochain.δ_toSingleMk\", \"CochainComplex.HomComplex.Cochain.diff\", \"CochainComplex.HomComplex.Cochain.δ_single\", \"CochainComplex.HomComplex.δ_neg\", \"CochainComplex.ConnectData.d_sub_two_sub_one\", \"CochainComplex.HomComplex.δ_v\", \"CochainComplex.HomComplex_d_hom_apply\", \"CochainComplex.HomComplex.δ\"], \"digest\": \"0c40f6d951338357\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no bounded module-complex signed biduality statement; the component module-duality facts are reused through lem-sf-finite-projective-dual"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-perfect-complex-derived-biduality",
+  "date": "2026-10-23",
+  "group": "Q109"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: coherent relative-duality polynomial-chart input; the algebraic upper-shriek relative-perfection calculation used before the marked dualizing construction. Returned biduality proof steps 2 and 4: bounded product-Hom dual and signed chain involution.",
+   "via": [
+    "lem-trf-perfect-complex-derived-biduality",
+    "lem-trf-algebraic-shriek-relative-perfect",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-projective-hom-dual-involution",
+  "worker": "stage1",
+  "summary": "Expanded the bounded product-Hom calculation into seven explicit steps: projection/insertion, both signed differentials, finite-projectivity via the existing Mathlib leaf lem-sf-finite-projective-dual, signed evaluation, the inverse chain identity, and naturality. Statement and existing ancestry retained; no new nodes. Read Stacks 0A8H, 0FNG item-evaluation, 07VI and the actual statements of all cited nodes; searched project and Mathlib sources.",
+  "blueprint": "Realizes the existing ancestry from lem-trf-local-term-locality proof (1)--(2), through the nearby-cycle/coherent-relative-duality branch and lem-trf-perfect-complex-derived-biduality: its bounded product-Hom representative and signed chain involution. The current latest blueprint has no standalone node with this statement; no chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-10edfcecf",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-10edfcecf (reviewer sub-agent of L); spot-checked: Read the item in full; it adds no new nodes. Statement and stmt_deps are identical to side-live, where the item is still unsplit with no reviewed record, so the delivery is not superseded. Sources checked: Stacks more-algebra 0A8H line 17866 (d(f)=d_M f-(-1)^n f d_L, same as def-sc-module-total-hom-complex), 0FNG item-evaluation lines 18590-18599 ((-1)^{nm} f(x)), and 07VI proof lines 19188-19204. I recomputed every step. Step 1: only coordinate i=-r survives, E^r=0 outside [-b,-a]. Step 2: d_E^r=(-1)^{r+1} phi d_P^{-r-1}. Step 3: (-1)^{p+1}(-1)^{-p}=-1, so d_F=-(d_P)**. Step 4: the leaf's dual clause gives finite projective terms. Step 5: -p^2 = p mod 2, and the chain identity holds by evaluating on psi. Step 6: the leaf's ev-isomorphism clause gives the inverse, and the chain identity for eta follows by conjugation. Step 7: H(f,O) is a chain map, and applying precomposition twice gives (-1)^p phi'(f^p x). Tested P=0, B[0], B[-1], a two-term complex with multiplication by a over Z, characteristic 2 and the zero ring. No hypothesis was added and nothing was weakened. The cited lem-sf-finite-projective-dual is a Mathlib leaf whose statement contains both clauses used, so no step relies on its proof (C3 ok). proof_deps equals the union of the steps' uses. The earlier 7 Mathlib searches are kept and all four search kinds are present. Duplicate search over 07VI, bidual and double dual: the parent derived biduality, the representative comparison, the Noetherian canonical biduality and the zl ev/coev nodes all differ, so there is no duplicate. No route issue and no tool_uses needed, because only definitions and a Mathlib leaf are cited. No SGA cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FiniteProjectiveHomDualInvolution",
+  "declaration": "CochainComplex.finiteProjective_homDual_involution",
+  "declarations": [
+   "CochainComplex.moduleScalarDualTarget",
+   "CochainComplex.moduleScalarDual",
+   "CochainComplex.moduleScalarDualCoordinates",
+   "CochainComplex.moduleScalarBidualCoordinates",
+   "CochainComplex.finiteProjective_homDual_involution"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FiniteProjectiveHomDualInvolution.lean",
+  "statement": "theorem finiteProjective_homDual_involution (P : CochainComplex (ModuleCat.{u} B) ℤ) (a b : ℤ) (hab : a ≤ b) (hP : ∀ p : ℤ, p < a ∨ b < p → IsZero (P.X p)) [∀ p : ℤ, Module.Finite B (P.X p)] [∀ p : ℤ, Module.Projective B (P.X p)] : (∀ (r : ℤ) (z : (moduleScalarDual P).X r), moduleScalarDualCoordinates P (-(r + 1)) (r + 1) (neg_add_cancel (r + 1)) ((moduleScalarDual P).d r (r + 1) z) = (r + 1).negOnePow • (moduleScalarDualCoordinates P (-r) r (neg_add_cancel r) z).comp (P.d (-(r + 1)) (-r)).hom) ∧ (∀ (p : ℤ) (z : (moduleScalarDual (moduleScalarDual P)).X p), moduleScalarBidualCoordinates P (p + 1) ((moduleScalarDual (moduleScalarDual P)).d p (p + 1) z) = -(P.d p (p + 1)).hom.dualMap.dualMap (moduleScalarBidualCoordinates P p z)) ∧ (∀ r : ℤ, r < -b ∨ -a < r → IsZero ((moduleScalarDual P).X r)) ∧ (∀ r : ℤ, Module.Finite B ((moduleScalarDual P).X r) ∧ Module.Projective B ((moduleScalarDual P).X r)) ∧ ∃ δ : P ≅ moduleScalarDual (moduleScalarDual P), (∀ (p : ℤ) (x : P.X p), moduleScalarBidualCoordinates P p (δ.hom.f p x) = p.negOnePow • Module.Dual.eval B (P.X p) x) ∧ (∀ (p : ℤ) (z : (moduleScalarDual (moduleScalarDual P)).X p), δ.inv.f p z = p.negOnePow • (Module.evalEquiv B (P.X p)).symm (moduleScalarBidualCoordinates P p z)) ∧ (∀ (p q : ℤ) (hpq : p + q = 0) (x : P.X p) (φ : (moduleScalarDual P).X q), (((δ.hom.f p x).v q 0 ((add_comm q p).trans hpq)) ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 (ModuleCat.of B B)).hom).hom φ = (p * q).negOnePow • (moduleScalarDualCoordinates P p q hpq φ) x) ∧ (∀ (p q r : ℤ) (h : q + p = r) (hr : r ≠ 0) (x : P.X p), (δ.hom.f p x).v q r h = 0) ∧ (∀ (Q : CochainComplex (ModuleCat.{u} B) ℤ) (c d : ℤ) (hcd : c ≤ d) (hQ : ∀ p : ℤ, p < c ∨ d < p → IsZero (Q.X p)) [∀ p : ℤ, Module.Finite B (Q.X p)] [∀ p : ℤ, Module.Projective B (Q.X p)] (f : P ⟶ Q), (∀ (r : ℤ) (z : (moduleScalarDual Q).X r), moduleScalarDualCoordinates P (-r) r (neg_add_cancel r) ((moduleHomPrecomp (moduleScalarDualTarget B) f).f r z) = (moduleScalarDualCoordinates Q (-r) r (neg_add_cancel r) z).comp (f.f (-r)).hom) ∧ (∀ (p : ℤ) (z : (moduleScalarDual (moduleScalarDual P)).X p), moduleScalarBidualCoordinates Q p ((moduleHomPrecomp (moduleScalarDualTarget B) (moduleHomPrecomp (moduleScalarDualTarget B) f)).f p z) = (f.f p).hom.dualMap.dualMap (moduleScalarBidualCoordinates P p z)) ∧ ∃ ε : Q ≅ moduleScalarDual (moduleScalarDual Q), (∀ (p : ℤ) (x : Q.X p), moduleScalarBidualCoordinates Q p (ε.hom.f p x) = p.negOnePow • Module.Dual.eval B (Q.X p) x) ∧ δ.hom ≫ moduleHomPrecomp (moduleScalarDualTarget B) (moduleHomPrecomp (moduleScalarDualTarget B) f) = f ≫ ε.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-447527166",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Node unchanged vs side-live except lean record and added stmt_dep def-trf-module-hom-precomposition (landed def owner of moduleHomPrecomp; fixes prior H2). lean.statement verbatim; one sorry. Checked vs Stacks 0A8H, 0FNG item-evaluation (l.18590), 07VI proof (l.19188-19204): d_E coordinate = (r+1).negOnePow • φ∘d_P (Mathlib δ, m=n+1), d_F = -(d_P)** ((-1)^{p+1}(-1)^{-p}=-1), support [-b,-a], finite projective E^r, δ is a chain iso P≅F pinned by (-1)^p ev / (-1)^p evalEquiv⁻¹ components, homogeneous (-1)^{pq} formula via (p,0) coordinate consistent (-p²≡p), other coordinates zero, naturality over all bounded fin-proj Q with ε pinned by the same formula and δ≫H(H(f,O),O)=f≫ε (direction checked). Coordinate equivs are real (toSingleEquiv + homLinearEquiv, dualMap of inverse). Universe matches moduleHomComplex. Edge cases P=0, a=b, negative degrees, char 2, zero ring OK. No name clash/duplicate; docstrings carry source+blueprint and all 7 proof steps. No compile (no change)."
+ }
+}

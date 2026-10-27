@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-group-scheme-differentials-from-identity",
+ "kind": "statement",
+ "title": "The differential sheaf of a group scheme is pulled back from the identity",
+ "statement": "Let $K$ be a field [def-weil-field] and $G$ a group scheme over $K$ [def-sc-group-scheme], with structure morphism $f:G\\to\\operatorname{Spec}K$ and identity $e:\\operatorname{Spec}K\\to G$. For the relative differential sheaf $\\Omega^1_{G/K}$ [def-sc-relative-differential-sheaf] there is a canonical isomorphism of $\\mathcal O_G$-modules $$\\Omega^1_{G/K}\\cong f^*e^*\\Omega^1_{G/K},$$ where both pullbacks are ordinary module pullbacks [def-pc-module-pullback]. No finite-type, smoothness, reducedness, commutativity, or restriction on the characteristic is assumed.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 047I, label lemma-group-scheme-module-differentials, the canonical isomorphism Omega_{G/S} = f^*e^*Omega_{G/S}, specialized to S = Spec K."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}K$ and $P=G\\times_SG$, with projections $p_0,p_1$, and write $m$ and $i$ for multiplication and inverse. Since $m$ and $i$ are morphisms over $S$, both pairs below have equal composites to $S$. The morphisms $\\tau=(m,p_1):P\\to P$ and $\\sigma=(m\\circ(p_0,i\\circ p_1),p_1):P\\to P$ are defined by the fibre-product universal property. The first coordinates of $\\sigma\\tau$ and $\\tau\\sigma$ on a test scheme are $(gh)h^{-1}=g$ and $(gh^{-1})h=g$, respectively, by associativity, inverse and unit laws; their second coordinates are $h$. These identities are identities of morphisms by the group diagrams and the product universal property. Thus $\\sigma\\tau=\\tau\\sigma=\\mathrm{id}_P$, and $p_1\\tau=p_1\\sigma=p_1$. No commutativity is used.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047I, label lemma-group-scheme-module-differentials, proof (shearing map and pullback along (e f, id))"
+   }
+  },
+  {
+   "text": "Apply the arbitrary cartesian base-change clause of [lem-trf-relative-differential-sheaf-base-change] to $G\\xrightarrow f S$ and the base morphism $G\\xrightarrow f S$. Regard $P$ as a scheme over the second $G$ via $p_1$. With $\\Omega=\\Omega^1_{G/S}$ and $D=\\Omega^1_{P/G}$ this gives the canonical isomorphism $c:p_0^*\\Omega\\xrightarrow\\sim D$. Its local rule is $1\\otimes da\\mapsto d(p_0^\\sharp a)$. The theorem applies without finite type, flatness, or smoothness.",
+   "uses": [
+    "lem-trf-relative-differential-sheaf-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V0, label lemma-base-change-differentials; application in groupoids.tex Tag 047I"
+   }
+  },
+  {
+   "text": "The square with top map $\\tau:P\\to P$, both vertical maps $p_1:P\\to G$, and bottom map $\\mathrm{id}_G$ is cartesian. Indeed, for a compatible pair $a:T\\to P$, $b:T\\to G$ with $p_1a=b$, the lift $\\sigma a$ satisfies $\\tau\\sigma a=a$ and $p_1\\sigma a=p_1a=b$, since $p_1\\sigma=p_1$. Any lift $u$ with $\\tau u=a$ must equal $\\sigma\\tau u=\\sigma a$. Thus this square satisfies the cartesian universal property, including uniqueness. In [lem-trf-relative-differential-sheaf-base-change] take $X=P$, $S=S'=G$, $f=p_1$, $g=\\mathrm{id}_G$, $p=\\tau$, and $f'=p_1$. The just-proved universal property identifies this square with the chosen fibre-product square, so that theorem applies to it. We get the canonical differential isomorphism $c_\\tau:\\tau^*D\\xrightarrow\\sim D$, locally $1\\otimes dz\\mapsto d(\\tau^\\sharp z)$. This obtains invariance under the shearing automorphism directly from the same base-change theorem.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-trf-relative-differential-sheaf-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047I, label lemma-group-scheme-module-differentials, proof (shearing map and pullback along (e f, id))"
+   }
+  },
+  {
+   "text": "Ordinary pullback is a functor and has the composition comparison in [def-pc-module-pullback]. Pulling $c$ back along $\\tau$ and composing gives the isomorphism $\\tau^*p_0^*\\Omega\\xrightarrow{\\tau^*c}\\tau^*D\\xrightarrow{c_\\tau}D\\xrightarrow{c^{-1}}p_0^*\\Omega$. Since $p_0\\tau=m$, its source is canonically $m^*\\Omega$. Denote the resulting isomorphism $a:m^*\\Omega\\xrightarrow\\sim p_0^*\\Omega$. Every arrow here is specified, so no choice of a trivialization or of a basis enters.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047I, label lemma-group-scheme-module-differentials, proof (shearing map and pullback along (e f, id))"
+   }
+  },
+  {
+   "text": "Let $s=(e\\circ f,\\mathrm{id}_G):G\\to P$. This pair is compatible over $S$ since $f e=\\mathrm{id}_S$. The left unit diagram gives $m s=\\mathrm{id}_G$, and $p_0s=e f$. Apply $s^*$ to $a$ and the identity/composition comparisons of [def-pc-module-pullback]: $\\Omega\\cong s^*m^*\\Omega\\xrightarrow{s^*a}s^*p_0^*\\Omega\\cong(e f)^*\\Omega\\cong f^*e^*\\Omega$. This is the required canonical $\\mathcal O_G$-linear isomorphism. Only the group diagrams, product universal property and ordinary pullback were used; the argument imposes none of the finiteness, smoothness, reducedness, commutativity or characteristic restrictions excluded by the statement.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-pc-fibre-product",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047I, label lemma-group-scheme-module-differentials, proof (shearing map and pullback along (e f, id))"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-sc-group-scheme",
+  "lem-trf-relative-differential-sheaf-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 047I, label lemma-group-scheme-module-differentials, proof (shearing map and pullback along (e f, id))"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For any group scheme G over S its sheaf of relative Kahler differentials is the pullback of the cotangent sheaf along the identity section",
+   "results": "8 hits; KaehlerDifferential.D_apply, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj, KaehlerDifferential.cotangentComplexBaseChange, KaehlerDifferential.DLinearMap_apply, KaehlerDifferential.D_tensorProductTo, Algebra.H1Cotangent, Algebra.Extension.toKaehler, CommRingCat.KaehlerDifferential",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ring or presheaf differentials and algebra extensions; none gives the group-scheme differential sheaf isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "group.*differential|differential.*group|cotangent.*identity|identity.*cotangent",
+   "results": "0 hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ring or presheaf differentials and algebra extensions; none gives the group-scheme differential sheaf isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"relativeDifferentials\", \"GrpObj\"",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ring or presheaf differentials and algebra extensions; none gives the group-scheme differential sheaf isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For any group scheme G over S its sheaf of relative Kahler differentials is the pullback of the cotangent sheaf along the identity section",
+   "results": "8 hits; PresheafOfModules.DifferentialsConstruction.relativeDifferentials', PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj, KaehlerDifferential.D_apply, KaehlerDifferential.D, KaehlerDifferential, KaehlerDifferential.tensorKaehlerEquivBase, CommRingCat.KaehlerDifferential.map, PresheafOfModules.DifferentialsConstruction.derivation'",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ring or presheaf differentials and algebra extensions; none gives the group-scheme differential sheaf isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant differentials trivialize the cotangent sheaf of an algebraic group: Omega G over k is isomorphic to O G tensor e pullback Omega G over k, without smoothness",
+   "results": "8 hits; KaehlerDifferential.kerCotangentToTensor_toCotangent, Algebra.H1Cotangent.δ, KaehlerDifferential.kerCotangentToTensor, Algebra.Extension.cotangentComplex_mk, KaehlerDifferential.endEquivAuxEquiv, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, Algebra.Extension.tensorCotangentSpace, Algebra.Extension.cotangentEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ring or presheaf differentials and algebra extensions; none gives the group-scheme differential sheaf isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials|[Gg]roup.*differential|differential.*[Gg]roup",
+   "results": "0 hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ring or presheaf differentials and algebra extensions; none gives the group-scheme differential sheaf isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "group.*differential|differential.*group|cotangent.*identity",
+   "results": "0 hits; ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: no group-scheme sheaf isomorphism; returned ring/presheaf facts do not state the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheaf of differentials of a group scheme is pulled back from its cotangent space at the identity",
+   "results": "0 hits; ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"relativeDifferentials\", \"GrpObj\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: no group-scheme sheaf isomorphism; returned ring/presheaf facts do not state the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any group scheme over a field, the sheaf of relative Kahler differentials is canonically the structure morphism pullback of its fibre at the identity",
+   "results": "8 hits; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.Extension.cotangentComplex_mk, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, CommRingCat.KaehlerDifferential, PresheafOfModules.DifferentialsConstruction.relativeDifferentials', PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d",
+   "date": "2026-10-22",
+   "verdict": "no match: no group-scheme sheaf isomorphism; returned ring/presheaf facts do not state the item"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials|cotangentSheaf|invariantDifferential",
+   "results": "0 hits; ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: no group-scheme sheaf isomorphism; returned ring/presheaf facts do not state the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant differentials trivialize the cotangent sheaf on any algebraic group, without smoothness: Omega equals O G tensor the identity fibre",
+   "results": "8 hits; Algebra.Extension.cotangentComplex_mk, KaehlerDifferential.endEquivDerivation', Algebra.H1Cotangent, KaehlerDifferential.quotientCotangentIdeal, Algebra.Extension.H1Cotangent, Algebra.Extension.toKaehler, instInhabitedKaehlerDifferential, KaehlerDifferential.quotientCotangentIdealRingEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: no group-scheme sheaf isomorphism; returned ring/presheaf facts do not state the item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-group-scheme-identity-dual-unramified",
+  "date": "2026-10-22",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified group schemes detected by dual numbers at the identity. Supporting input: The vanishing of differentials from vanishing at the identity, as used in moduli-curves.tex Tag 0E6G, first proof paragraph (via Tag 047I).",
+   "via": [
+    "lem-sfb-group-scheme-identity-dual-unramified",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-group-scheme-differentials-from-identity",
+  "worker": "stage1",
+  "summary": "Checked Stacks 047I in groupoids.tex and its input 01V0 in morphisms.tex. Reused the existing arbitrary differential-sheaf base-change node, including its application to the shearing automorphism square, so no new nodes are needed. Wrote the shearing inverse and product identities, then the canonical pullback composite explicitly. The statement is unchanged and requires no smoothness, finiteness or commutativity. No exact proved project attachment was found. Repair of the side-completion promotion return: compared the retained split with the current unsplit live item, reread all four cited current statements, and retained the same dependencies and hypotheses. Clarified that the two coordinate calculations are for the composites of the shearing maps. Delivery is rebuilt on current origin/sheaf-dag by the required delivery tool. On the renewed repair, expanded step 3 to exhibit the second-projection identity and prove uniqueness of the cartesian lift by applying the specified inverse; no extra dependency is needed. Current repair: explicitly checked the two shearing pairs are compatible over the base before applying the fibre-product universal property, and recorded that both inverse maps preserve the second projection; reread all current cited statements and revalidated all nine quotes after the initial passing rebase dry run. Rebased again after the live-promotion return on 2026-10-23: current live item remains unsplit and its statement and lineage agree. Reread the current cited statements and checked all citation quotes. Specified all six scheme and morphism arguments of the automorphism-square base-change application in step 3, retaining the source route and prior searches.",
+  "blueprint": "Realizes the supporting differential-vanishing input at the identity in the inherited from.place chain, ultimately the alteration input to det-thm-sf-ctf-stability-direct-images proof (3). The inherited ancestor tool returns None because the upstream created.item chain has no imported blueprint ancestor; the existing from.node is preserved. The actual local argument is Stacks 047I, also invoked in moduli-curves.tex Tag 0E6G. Whole-blueprint searches for differentials, group scheme, invariant differentials and 047I found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-relative-differential-sheaf-base-change",
+    "why": "The generic arbitrary-base-change theorem for ordinary relative differential sheaves supplies both p0 pullback and the shearing-automorphism square. This is the exact input cited by Stacks 047I, not a substitute for the unit route; no node of the item unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-relative-differential-sheaf-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NF-f7f04833b",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-f7f04833b (reviewer sub-agent of L); spot-checked: PASS with no fixes, no new nodes and no drops. This is the 5th push of the same split in a side-completion promotion loop; heads 2a7c, 68f8, 6b49 and 3e13 were all PASSed. Compared with 3e13, only step 3 and the split_report date/summary changed. Step 3 now spells out the substitution into lem-trf-relative-differential-sheaf-base-change: X=P, S=S'=G, f=p1, g=id_G, p=τ, f'=p1. This matches the node's variables. The square commutes since p1τ=p1. It is cartesian because the lift σa exists and is unique (u=στu=σa), so def-pc-fibre-product identifies X' with P, and the node gives c_τ: τ^*Ω_{P/G}≅Ω_{P/G}. I re-read Stacks groupoids.tex 047I (lemma-group-scheme-module-differentials) with its proof; steps 1-5 follow it exactly. Step 1: σ is inverse to τ, (gh)h^{-1}=g and (gh^{-1})h=g, no commutativity used. Step 2: base change gives p0^*Ω≅Ω_{P/G}. Step 4: p0τ=m gives m^*Ω≅p0^*Ω. Step 5: pulling back along (ef,id), with m(ef,id)=id, gives Ω≅f^*e^*Ω, with the right direction and endpoints. I re-read the current statements of all six cited nodes. Edge cases checked: Spec K, G_a, G_m, α_p (non-reduced), finite étale, GL_n, non-finite-type. No duplicates: an rg -L search for 047I finds only the item and its two citers. Batch-5 check: lem-trf-relative-differential-sheaf-base-change is Stacks 01V0 base change of Kähler differentials for arbitrary morphisms, a general commutative-algebra result. Neither assumption gives it, and it is not a step of the trace-formula statement. It is unsplit with proof_deps [] and its stmt_deps are general definitions, so citing it imports no part of the proof of either assumption; accepted. Maintainer note: its eventual proof should stay at that level. The declared tool_use is accepted because it is the exact input of 047I and the unit route is not replaced. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupSchemeDifferentialsFromIdentity",
+  "declaration": "AlgebraicGeometry.groupDifferentialsFromIdentityIso",
+  "declarations": [
+   "AlgebraicGeometry.groupDifferentialsIdentitySection",
+   "AlgebraicGeometry.groupDifferentialsIdentityComparison",
+   "AlgebraicGeometry.existsUnique_groupDifferentialsFromIdentity",
+   "AlgebraicGeometry.groupDifferentialsFromIdentityIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupSchemeDifferentialsFromIdentity.lean",
+  "statement": "def groupDifferentialsFromIdentityIso {K : Type u} [Field K] (G : Over (Spec (.of K))) [GrpObj G] : G.hom.relativeDifferentials ≅ (Scheme.Modules.tensorPullback G.hom).obj ((Scheme.Modules.tensorPullback (MonObj.one (X := G)).left).obj G.hom.relativeDifferentials)",
+  "branch": "sheaf-dag",
+  "by": "Q149",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existence-and-uniqueness theorem characterizes the canonical isomorphism by the local differential formulas for the base-change and shearing maps, followed by pullback along (e f,id). The final definition selects this uniquely determined isomorphism, with no arbitrary trivialization."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-41731d975",
+  "group": "Q149",
+  "result": "pass",
+  "note": "The statement matches the node clause by clause (Field K at arbitrary universe u; G as an object over Spec K with a group-object instance; f = G.hom, e = MonObj.one.left; Omega = relativeDifferentials; f*e*Omega via the recorded tensorPullback, in the right order and direction; no extra hypotheses). The existence-and-uniqueness theorem pins the Stacks 047I construction: c by 1⊗dz ↦ d(p0♯z), a by (a≫c)(1⊗dz) = d(m♯z), and phi as a pulled back along (e f, id) with the section-normalized identity and composition comparisons. Uniqueness is genuine (dz generate locally, determining c, then a, then phi). Real data, a single sorry, docstrings and the 5-step proof are present, and the statement field is verbatim. Mathlib fibre products appear only in the canonicity condition. No duplicate in side-live lean. The node diff is the lean record only. Second reading is an author self-pass (noted). No compile re-run since no file changed."
+ }
+}

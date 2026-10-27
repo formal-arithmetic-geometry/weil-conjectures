@@ -1,0 +1,421 @@
+{
+ "id": "lem-sfb-etale-relative-tor-comparison",
+ "kind": "statement",
+ "title": "Relative Tor amplitude across the Zariski and small etale sites",
+ "statement": "Let $f:X\\to Y$ be any morphism of schemes [def-pc-scheme]. Write $\\epsilon_X:(X_{\\mathrm{et}},\\mathcal O_{X,\\mathrm{et}})\\to(X_{\\mathrm{Zar}},\\mathcal O_X)$ for the canonical ringed-site morphism with exact tensor pullback $\\epsilon_X^*$, and $f_{\\mathrm{et}}$ for the induced morphism of small etale ringed topoi [lem-sfb-derived-etale-zariski-equivalence], [lem-trf-zariski-etale-functor-comparison-square]. Let $E\\in D(\\mathcal O_X)$ be arbitrary [def-pc-derived-category]. Regard $E$ as a complex of $f^{-1}\\mathcal O_Y$-modules and $\\epsilon_X^*E$ as a complex of $f_{\\mathrm{et}}^{-1}\\mathcal O_{Y,\\mathrm{et}}$-modules. For every pair of integers $a\\le b$, $E$ has Tor amplitude in $[a,b]$ over $f^{-1}\\mathcal O_Y$ if and only if $\\epsilon_X^*E$ has Tor amplitude in $[a,b]$ over $f_{\\mathrm{et}}^{-1}\\mathcal O_{Y,\\mathrm{et}}$. Tor amplitude in an interval means that the derived tensor with every degree-zero module over the indicated inverse-image ring sheaf has cohomology zero outside that interval [def-pc-finite-tor-dimension-over], with derived tensors computed by K-flat resolutions [def-pc-kflat-complex]. Consequently $E$ locally has finite Tor dimension over $Y$ if and only if $\\epsilon_X^*E$ locally has finite Tor dimension over $Y_{\\mathrm{et}}$; on the left locality means a Zariski open neighbourhood of every point of $X$, and on the right locality is on the small etale site. No quasi-coherence, boundedness, flatness, finite presentation or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0DK7, lemma-tor-dimension-rel, clauses (1) and (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-trf-zariski-etale-functor-comparison-square",
+  "def-pc-derived-category",
+  "def-pc-finite-tor-dimension-over",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Fix a geometric point $\\bar x$ over $x$, put $y=f(x)$, $\\bar y=f\\bar x$, $R=\\mathcal O_{Y,y}$ and $A=\\mathcal O_{X,x}$. The inverse-image stalk comparisons [lem-weil-pbc-sets-inverse-image-stalk] and [lemma-openclosed-stalk-upperstar] give\n$$ (f^{-1}\\mathcal O_Y)_x=R,\\qquad (f_{\\mathrm{et}}^{-1}\\mathcal O_{Y,\\mathrm{et}})_{\\bar x}=\\mathcal O_{Y,\\mathrm{et},\\bar y}=R^{\\mathrm{sh}}. $$\nThese are ring identifications: the comparisons are natural in the sheaf, so commute with addition, multiplication and the unit. The last identification is [lem-sfb-etale-zariski-module-geometric-stalk] applied to $Y$. Applied to $X$, the same node identifies the structure stalk with $A^{\\mathrm{sh}}$. The induced $R^{\\mathrm{sh}}$-action is through the compatible map $R^{\\mathrm{sh}}\\to A^{\\mathrm{sh}}$ supplied by [lem-weil-pbc-strict-henselization-functoriality]; its neighbourhood-compatibility clause identifies this map with the one on etale structure-sheaf stalks.",
+   "uses": [
+    "lem-weil-pbc-sets-inverse-image-stalk",
+    "lemma-openclosed-stalk-upperstar",
+    "lem-sfb-etale-zariski-module-geometric-stalk",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0DK7, proof: the two inverse-image ring stalks; 04HX and 03PS."
+   }
+  },
+  {
+   "text": "Represent $E$ by any complex $C$ of $\\mathcal O_X$-modules. Exactness of $\\epsilon_X^*$ on all modules [lem-sfb-derived-etale-zariski-equivalence] allows its termwise application to compute the derived object, by [lem-weil-pbc-exact-functor-derived-factorization]. The natural module isomorphisms [lem-sfb-etale-zariski-module-geometric-stalk] commute with the differentials, so they identify the representing stalk complex with $C_x\\otimes_A A^{\\mathrm{sh}}$. By [lem-sc-strict-henselization-faithfully-flat], $A\\to A^{\\mathrm{sh}}$ is faithfully flat. The exact scalar-extension assertion of [lem-sfb-relative-tensor-faithfully-flat-comparison] therefore gives, in $D(A^{\\mathrm{sh}})$ and hence after restriction to $R^{\\mathrm{sh}}$,\n$$ (\\epsilon_X^*E)_{\\bar x}\\cong E_x\\otimes_A^{\\mathbf L}A^{\\mathrm{sh}}. $$\nNo quasi-coherence of $C$ is involved in the cited module stalk formula.",
+   "uses": [
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-etale-zariski-module-geometric-stalk",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-sfb-relative-tensor-faithfully-flat-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0DK7, displayed derived stalk formula; 08H8 and 0DJF."
+   }
+  },
+  {
+   "text": "For the $A^{\\mathrm{sh}}$-complex $L=E_x\\otimes_A^{\\mathbf L}A^{\\mathrm{sh}}$, regarded also as an $R^{\\mathrm{sh}}$-complex via Step 1, [lem-sfb-strict-henselization-tor-interval] says that its Tor interval over $R^{\\mathrm{sh}}$ is exactly its Tor interval over $R$. By [lem-sfb-relative-tensor-faithfully-flat-comparison], applied to $R\\to A\\to A^{\\mathrm{sh}}$, this is exactly the Tor interval of $E_x$ over $R$. Thus for each $\\bar x$ the etale stalk has interval $[a,b]$ over the inverse-image ring stalk if and only if the Zariski stalk $E_x$ has that interval over $(f^{-1}\\mathcal O_Y)_x$. Both implications use the same integers.",
+   "uses": [
+    "lem-sfb-strict-henselization-tor-interval",
+    "lem-sfb-relative-tensor-faithfully-flat-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0DK7, proof: 0DK0 and 0DJF; use both directions of their equivalences."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-ringed-tor-amplitude-stalk-test] to the ringed space $(X,f^{-1}\\mathcal O_Y)$ and the restricted complex $E$. Apply [lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test] to the scheme $X$, viewed as an algebraic space, with the arbitrary ring sheaf $f_{\\mathrm{et}}^{-1}\\mathcal O_{Y,\\mathrm{et}}$ and complex $\\epsilon_X^*E$. Step 3 equates the two stalk tests. Every $x$ admits a geometric point above it: take an algebraic closure of $\\kappa(x)$ using [lem-pc-algebraic-closure-exists-unique], and the geometric-point description [def-weil-geometric-point]. Consequently the two global Tor-interval conditions are equivalent. If $X$ is empty both stalk tests are vacuous and all module sheaves are zero.",
+   "uses": [
+    "lem-trf-ringed-tor-amplitude-stalk-test",
+    "lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test",
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-weil-geometric-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0DK7(1), concluding stalk test; 09U9 and 0DJJ."
+   }
+  },
+  {
+   "text": "We now work locally, without choosing a bound uniform on $X$. For an open immersion $j:U\\hookrightarrow X$, [lem-weil-pbc-open-immersion-module-pullback-restriction] identifies $j^*$ with restriction. The etale inverse image along $j$ is restriction by [lem-weil-pbc-etale-inverse-image-restriction]; the structure ring on the slice is sectionwise the same structure ring, and [lem-weil-pbc-etale-site-localization-open] identifies that slice with $U_{\\mathrm{et}}$. Thus [lem-trf-zariski-etale-functor-comparison-square], with $a=j$, gives $\\epsilon_U^*(E|_U)\\cong(\\epsilon_X^*E)|_U$: apply its module comparison termwise, using exactness and [lem-weil-pbc-exact-functor-derived-factorization]. The inverse-base ring sheaves restrict to those for $f|_U$, since both composite inverse images are left adjoints to the same composite direct image. For any site slice, exactness of restriction [lem-pur-site-restriction-module-adjunction-exact] and [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] give\n$$ (K\\otimes_B^{\\mathbf L}F)|_V\\cong K|_V\\otimes_{B|_V}^{\\mathbf L}F|_V. $$\nHere $B$ is any ring sheaf, including either inverse-base ring in the statement. The tensor comparison is the cited derived isomorphism for the localization morphism; exact restriction also commutes with cohomology by [lem-weil-pbc-exact-functor-complex-cohomology].",
+   "uses": [
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-trf-zariski-etale-functor-comparison-square",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0DK7(2), local restriction identifications; 03FH, 03S2/03S3, 03WT and the ringed-site tensor comparison."
+   }
+  },
+  {
+   "text": "If $E$ has finite relative Tor dimension on Zariski open neighbourhoods $U_i$ covering $X$, Step 4 applied to $f|_{U_i}$ and Step 5 give the same local intervals for $(\\epsilon_X^*E)|_{U_i}$. These opens cover on the small etale site as well [def-weil-pbc-etale-site]. For an arbitrary etale object $V\\to X$, their base changes $V\\times_X U_i$ cover $V$; [lem-sf-site-tor-interval-restriction] preserves each corresponding Tor interval after restriction. Successive restrictions agree sectionwise by [def-pur-localized-ringed-site]. This is local finite Tor dimension on the etale site.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-sf-site-tor-interval-restriction",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0DK7(2), Zariski-local implies etale-local."
+   }
+  },
+  {
+   "text": "Conversely fix a nonempty affine open $U\\subset X$. By etale-local finite Tor dimension and Step 5, $K=\\epsilon_U^*(E|_U)$ has a cover $V_i\\to U$ with intervals $[a_i,b_i]$ relative to $B=(f|_U)_{\\mathrm{et}}^{-1}\\mathcal O_{Y,\\mathrm{et}}$. The images of $V_i$ are open by [lem-weil-pbc-etale-morphism-open-map] and cover $U$ by [def-weil-pbc-etale-site]. Quasi-compactness of the affine scheme [lem-weil-pbc-affine-scheme-qcqs] and its definition [def-weil-pbc-quasi-compact-scheme] give finitely many covering members $V_{i_1},\\ldots,V_{i_n}$, with $n\\ge1$. Put $a=\\min_k a_{i_k}$ and $b=\\max_k b_{i_k}$. Each selected interval lies in $[a,b]$, so each restriction of $K$ has that enlarged interval. No quasi-compactness of $X$ or $V_i$ was used.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0DK7(2), finite-subcover argument for local finite Tor dimension."
+   }
+  },
+  {
+   "text": "For any degree-zero $B$-module sheaf $F$, the comparison and exactness from Step 5 give\n$$H^j(K\\otimes_B^{\\mathbf L}F)|_{V_{i_k}}\\cong H^j(K|_{V_{i_k}}\\otimes_{B|_{V_{i_k}}}^{\\mathbf L}F|_{V_{i_k}})=0\\quad(j\\notin[a,b]).$$\nThese restrictions are to a covering family. For every etale $W\\to U$, the base changes $W\\times_U V_{i_k}$ cover $W$ [def-weil-pbc-etale-site]; every section of the displayed cohomology sheaf restricts to zero there, so is zero by sheaf separatedness. Hence $K$ has interval $[a,b]$ against every $F$. Step 4 for $f|_U$ gives the same relative interval for $E|_U$. Empty affine opens may use $[0,0]$. The affine opens form a basis [lem-weil-pbc-affine-opens-basis], so such neighbourhoods exist around every point, proving Zariski-local finite relative Tor dimension. This completes both implications without a uniform bound on $X$.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0DK7(2), gluing the tensor-cohomology vanishings and applying (1) on each affine open."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sets-inverse-image-stalk",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-sfb-etale-zariski-module-geometric-stalk",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sfb-relative-tensor-faithfully-flat-comparison",
+  "lem-sfb-strict-henselization-tor-interval",
+  "lem-trf-ringed-tor-amplitude-stalk-test",
+  "lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test",
+  "lem-pc-algebraic-closure-exists-unique",
+  "def-weil-geometric-point",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-trf-zariski-etale-functor-comparison-square",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-pbc-etale-site",
+  "lem-sf-site-tor-interval-restriction",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0DK7, lemma-tor-dimension-rel; the same stalk argument in both directions, and the finite-subcover proof of its local clause."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme morphism relative Tor amplitude of a complex over the inverse image of the base structure sheaf is equivalent on the Zariski and small etale sites",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.smallEtaleTopology', 'AlgebraicGeometry.Scheme.etaleTopology', 'AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme', 'AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme', 'AlgebraicGeometry.Scheme.smallEtalePretopology', 'AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified', 'AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE', 'AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong']; digest=0a44e5fb3ca5fb1a; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the etale topology, ordinary etale morphisms, or unrelated relative functors; no relative Tor-amplitude comparison of ringed sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale Zariski comparison preserves and reflects relative finite Tor dimension",
+   "results": "8 hits; top=['Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero', 'AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified', 'RingHom.Etale.propertyIsLocal', 'Algebra.Etale.comp', 'Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat', 'RingHom.Etale.ofLocalizationSpanTarget', 'RingHom.Etale.ofLocalizationSpan', 'AlgebraicGeometry.IsEtale.of_comp']; digest=dffb8b440b6f38f2; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the etale topology, ordinary etale morphisms, or unrelated relative functors; no relative Tor-amplitude comparison of ringed sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\"",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the etale topology, ordinary etale morphisms, or unrelated relative functors; no relative Tor-amplitude comparison of ringed sites"
+  },
+  {
+   "tool": "grep",
+   "query": "tor.*[Aa]mplitude.*[Ee]tale|[Ee]tale.*[Tt]or|relative.*[Tt]or",
+   "results": "25 hits; top=['Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean', 'Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean', 'Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean', 'Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean', 'Mathlib/AlgebraicTopology/EilenbergSteenrod.lean', 'Mathlib/AlgebraicTopology/EilenbergSteenrod.lean', 'Mathlib/AlgebraicTopology/EilenbergSteenrod.lean', 'Mathlib/Order/BooleanAlgebra/Defs.lean']; digest=75a4eb947599e7b1; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the etale topology, ordinary etale morphisms, or unrelated relative functors; no relative Tor-amplitude comparison of ringed sites"
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|torAmplitude|TorDimension|torDimension|Etale.*derivedTensor",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the etale topology, ordinary etale morphisms, or unrelated relative functors; no relative Tor-amplitude comparison of ringed sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative finite Tor dimension Zariski etale comparison of schemes",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology', 'AlgebraicGeometry.Scheme.Etale', 'Algebra.Etale.finitePresentation', 'AlgebraicGeometry.IsEtale', 'Algebra.isOpen_etaleLocus', 'Algebra.basicOpen_subset_etaleLocus_iff', 'AlgebraicGeometry.Scheme.etalePretopology', 'Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero']; digest=e781e719548c2a3d; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the etale topology, ordinary etale morphisms, or unrelated relative functors; no relative Tor-amplitude comparison of ringed sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\"",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar restriction, Henselian terminology or ordinary tensor identities do not state this unbounded derived comparison or its Tor-interval assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|torAmplitude|tor_amplitude|torDimension|TorDimension",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar restriction, Henselian terminology or ordinary tensor identities do not state this unbounded derived comparison or its Tor-interval assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski etale relative finite Tor dimension comparison for arbitrary complexes",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology', 'Algebra.Etale.finitePresentation', 'Algebra.Etale.formallyEtale', 'Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero', 'RingHom.Etale', 'AlgebraicGeometry.Scheme.Etale', 'AlgebraicGeometry.IsEtale', 'Algebra.isOpen_etaleLocus']; digest=1537106086006aed; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar restriction, Henselian terminology or ordinary tensor identities do not state this unbounded derived comparison or its Tor-interval assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Tor amplitude of an arbitrary scheme complex agrees on Zariski and small etale sites over the inverse image of the base structure ring",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.smallEtaleTopology', 'AlgebraicGeometry.Scheme.etaleTopology', 'AlgebraicGeometry.Scheme.smallEtalePretopology', 'AlgebraicGeometry.Scheme.etalePretopology', 'AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified', 'AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected', 'DerivedCategory.isGE_Q_obj_iff', 'DerivedCategory.isLE_Q_obj_iff']; digest=5a29cb10ed4e4e00; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module flatness, scalar restriction, Henselian terminology or ordinary tensor identities do not state this unbounded derived comparison or its Tor-interval assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-adjoint-diagonal-pair",
+  "date": "2026-10-23",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Diagonal pair associated to proper flat duality over a qcqs base. Supporting input: Relative Tor amplitude across the Zariski and small etale sites.",
+   "via": [
+    "lem-sfb-proper-adjoint-diagonal-pair",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-relative-tor-comparison",
+  "worker": "stage1",
+  "summary": "Read 0DK7, 0DK0 and 0DJF. Kept the arbitrary-complex statement unchanged. The two new statement-only algebraic inputs serve the stalk comparison; existing arbitrary-ring-sheaf etale and Zariski stalk tests are reused. Wrote out local finite-Tor descent using finite subcovers on affine opens. No Lean attachment or Mathlib leaf was found.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), inherited auxiliary chain through proper flat duality: relative Tor comparison. The ancestor command returns None; inherited from.node=null and via are retained. No latest-blueprint statement duplicates this auxiliary.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sets-inverse-image-stalk",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lemma-openclosed-stalk-upperstar",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-etale-zariski-module-geometric-stalk",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-derived-etale-zariski-equivalence",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-trf-ringed-tor-amplitude-stalk-test",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-pc-algebraic-closure-exists-unique",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "def-weil-geometric-point",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-trf-zariski-etale-functor-comparison-square",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "def-weil-pbc-etale-site",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sf-site-tor-interval-restriction",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "def-pur-localized-ringed-site",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-morphism-open-map",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "def-weil-pbc-quasi-compact-scheme",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic ringed-space, ringed-site, scalar, or local-geometry tool used in the explicit Tor/stalk and restriction argument; it does not replace the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sets-inverse-image-stalk",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-sfb-etale-zariski-module-geometric-stalk",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-trf-ringed-tor-amplitude-stalk-test",
+  "lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test",
+  "lem-pc-algebraic-closure-exists-unique",
+  "def-weil-geometric-point",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-trf-zariski-etale-functor-comparison-square",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-pbc-etale-site",
+  "lem-sf-site-tor-interval-restriction",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NO-f35224d7c",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-f35224d7c (reviewer sub-agent of L); spot-checked: I read Stacks 0DK7 (spaces-perfect l.3008), 0DJF (more-algebra l.17262) and 0DK0 (flat l.244, (1)<=>(3) and its proof). The item statement matches 0DK7 (1)+(2) and is unchanged. Steps 1-4 are the source's stalk chain, written for both directions. The cited nodes say what each step takes: 008H, the etale stalk, and the geometric-stalk node for all modules giving O^sh and C_x⊗A^sh. Clause (3) of the functoriality node makes R->R^sh->A^sh equal R->A->A^sh. Exactness of epsilon^* on all modules comes from derived-etale-zariski-equivalence. Both stalk tests allow arbitrary ring sheaves (09U9 ringed space, 0DJJ space). Steps 5-8 write out the 'formal' clause (2): restriction commutes with epsilon^* and with the derived tensor (all-module comparison square, localization tensor pullback, 03DJ exactness). Zariski-local to etale-local uses 08H5 restriction. For the converse, the open images of etale maps have a finite subcover on an affine, the interval is enlarged, and sheaf separatedness and the affine basis finish. New node 0DJF is correct for any R->A->B with A->B faithfully flat; I checked A=B, non-flat Z->F_p, B=0 excluded and the zero complex. New node 0DK0 is correct for any local R with L not descending; I checked the field case and R strictly henselian. Neither is a duplicate: the DAG grep for 0DK0/0DJF/0DK7, the tor/faithfully-flat ids and the blueprint all came up clean. lem-sfb-etale-tor-dimension-descent is absolute (08HF), not relative. Neither new node restates an item clause. On batch 5, the geometric-stalk node (via trf-zariski-etale-tensor-sections), the 09U9 ringed Tor stalk test and the 0DJJ space stalk test (via def-trf-algebraic-space) are generic tools outside the trace-formula and Poincare assumptions. No SGA. The 25 generic tool_uses are accepted. No changes."
+ }
+}

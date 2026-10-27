@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-finite-derived-comparison-normalization-composition-tensor",
+ "kind": "statement",
+ "title": "Tensor component of the canonical pullback compositor",
+ "statement": "theorem tensorComparison_composition_tensor {X Y Z : Site.{u, w}}\n    (f : RingedPullback.{u, u, u, u, u} Z.A Y.A)\n    (g : RingedPullback.{u, u, u, u, u} Y.A X.A)\n    (h : RingedPullback.{u, u, u, u, u} Z.A X.A)\n    (kf : CochainPullback.Comparison.{u, u, u, u, u} f) (kg : CochainPullback.Comparison.{u, u, u,\n      u, u} g) (kh : CochainPullback.Comparison.{u, u, u, u, u} h)\n    (a : CochainPullback.CompositePresentation.{u, u, u, u, u, u, u} f g h kf kg kh)\n    (df : Pullback.{u, w} f) (dg : Pullback.{u, w} g) (dh : Pullback.{u, w} h)\n    (c : dh.F ≅ df.F ⋙ dg.F)\n    (hc : (∀ (P : CochainPullback.Complex.{u, u, u} Z.A), Resolving Z P →\n        c.hom.app (DerivedCategory.Q.obj P) ≫ dg.F.map (df.epsilon.app P) ≫\n            dg.epsilon.app ((CochainPullback.pull.{u, u, u, u, u} f).obj P) =\n          dh.epsilon.app P ≫ DerivedCategory.Q.map (CochainPullback.composition.{u, u, u, u, u, u,\n            u} f g h a P).hom)) :\n      (∀ M N : Z.D,\n        (tensorComparison h kh dh).hom.app (M, N) ≫\n            X.closed.tensor.map (Prod.mkHom (c.hom.app M) (c.hom.app N)) =\n          c.hom.app (Z.closed.tensor.obj (M, N)) ≫\n            dg.F.map ((tensorComparison f kf df).hom.app (M, N)) ≫\n            (tensorComparison g kg dg).hom.app (df.F.obj M, df.F.obj N))",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0D6D and the balanced cochain comparison equations; split from the parent normalization theorem."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Paste the two already proved tensor representative squares by naturality of the second tensor comparison and its counit. This proves the representative normalization for the composite pullback word. Resolving computation and preservation of flat-term K-flat complexes make both composite counits invertible. The generic pasting calculation is now comparison_tensor_descends in the extracted proof-support module. The native tensor-model naturality and cochain compositor tensor equation are called through the extracted proved API, avoiding repeated unfolding of their constructions.",
+   "uses": [
+    "lem-weil-pbc-pullback-resolving-computation",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a resolving pair cancel the source model isomorphism and the tensor of the two invertible composite counits. Substitute the supplied normalization of c at P, Q and their tensor. Naturality of the target tensor model and the cochain composition equation identify the remaining two routes.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-kflat-total-tensor-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Regard the two sides as natural transformations of derived bifunctors. Fully faithful restriction to resolving pairs makes their equality follow from the preceding representative calculation. Evaluate the resulting equality at (M,N).",
+   "uses": [
+    "lem-pur-finite-tensor-comparison-proof-support",
+    "lem-pur-derived-resolving-pair-restriction",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-derived-resolving-pair-restriction",
+  "lem-pur-finite-tensor-comparison-proof-support",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-pullback-resolving-computation",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "G1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D and 07A4. Existing proof retained, with its generic square-pasting and instance support moved to FiniteTensorComparisonProofSupport to meet the per-file compile limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor component of the canonical pullback compositor normalized derived tensor comparison",
+   "results": "No direct specialized theorem found; the cited project comparison declarations are the applicable interfaces.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality tensor comparison monoidal",
+   "results": "Only generic naturality and monoidal coherence lemmas; no theorem for this normalized ringed-topos comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorComparison_coherence tensorComparison_composition",
+   "results": "The parent module is the only declaration of these specialized components.",
+   "date": "2026-10-26",
+   "verdict": "No existing duplicate."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDerivedComparisonNormalization",
+  "date": "2026-10-26",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-derived-comparison-normalization",
+   "place": "Strict component extracted from the parent proof plan",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDerivedComparisonNormalization",
+  "declaration": "CategoryTheory.FiniteDerivedComparison.tensorComparison_composition_tensor",
+  "declarations": [
+   "CategoryTheory.FiniteDerivedComparison.tensorComparison_composition_tensor"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteDerivedComparisonNormalization.lean",
+  "statement": "theorem tensorComparison_composition_tensor {X Y Z : Site.{u, w}}\n    (f : RingedPullback.{u, u, u, u, u} Z.A Y.A)\n    (g : RingedPullback.{u, u, u, u, u} Y.A X.A)\n    (h : RingedPullback.{u, u, u, u, u} Z.A X.A)\n    (kf : CochainPullback.Comparison.{u, u, u, u, u} f) (kg : CochainPullback.Comparison.{u, u, u,\n      u, u} g) (kh : CochainPullback.Comparison.{u, u, u, u, u} h)\n    (a : CochainPullback.CompositePresentation.{u, u, u, u, u, u, u} f g h kf kg kh)\n    (df : Pullback.{u, w} f) (dg : Pullback.{u, w} g) (dh : Pullback.{u, w} h)\n    (c : dh.F ≅ df.F ⋙ dg.F)\n    (hc : (∀ (P : CochainPullback.Complex.{u, u, u} Z.A), Resolving Z P →\n        c.hom.app (DerivedCategory.Q.obj P) ≫ dg.F.map (df.epsilon.app P) ≫\n            dg.epsilon.app ((CochainPullback.pull.{u, u, u, u, u} f).obj P) =\n          dh.epsilon.app P ≫ DerivedCategory.Q.map (CochainPullback.composition.{u, u, u, u, u, u,\n            u} f g h a P).hom)) :\n      (∀ M N : Z.D,\n        (tensorComparison h kh dh).hom.app (M, N) ≫\n            X.closed.tensor.map (Prod.mkHom (c.hom.app M) (c.hom.app N)) =\n          c.hom.app (Z.closed.tensor.obj (M, N)) ≫\n            dg.F.map ((tensorComparison f kf df).hom.app (M, N)) ≫\n            (tensorComparison g kg dg).hom.app (df.F.obj M, df.F.obj N))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T002546-L-97923",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T135344-L-4025431",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

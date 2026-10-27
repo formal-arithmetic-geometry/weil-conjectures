@@ -1,0 +1,220 @@
+{
+ "id": "lem-sf-projection-system-generating-equations",
+ "kind": "statement",
+ "title": "Four normalized projection equations before integral realization",
+ "statement": "Fix a finite-field datum $D$, a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$. On every scheme over $D.k$, use the derived category $\\mathscr S_W$ of strict quotient-semilinear systems, with its normalized tensor and pullback [lem-coef-derived-system-evaluation-calculus]. Fix the actual simultaneous operations $o$ and realization datum $\\rho$ [lem-sf-integral-compactification-system-realization], with compositors and unit-normalized open comparisons [def-sf-integral-system-operations] and canonical bridge [def-sf-integral-system-canonical-bridge]. All schemes here are arbitrary schemes over $D.k$; no finite-type hypothesis on their structure maps is imposed. Put $F_c=J_{c.i}S_{c.g}$ and let $\\operatorname{PF}^c:F_cM\\otimes N\\to F_c(M\\otimes P_fN)$ be its specified proper-counit/open-tensor projection. Define $a_{c_f,c_g,d}$ by $S_{c_g.g}(\\Gamma)$ followed by the direct-image compositor and the image of the open compositor, exactly as in projectionSystemCompositor. Define $\\theta_{c_1,c_2,v}$ by equality transport along $v.g$, inverse direct-image composition, image of inverse $\\Gamma$ and the canonical identity direct image, exactly as in projectionSystemRefinement. Define $\\sigma$ and $\\lambda$ as the support and pullback identity comparisons through the canonical bridge. The following four equations hold in the system category, naturally in arbitrary unbounded inputs $M,N$ (the attached Lean statement retains every compositor, equality transport and outer functor explicitly): (1) For composable arrows $f,g$, compactifications $c_f,c_g,d$ with quasi-compact open factors and the displayed Cartesian middle square, $\\operatorname{PF}^{c_g}F_{c_g}(\\operatorname{PF}^{c_f})a_TF_{c_{gf}}(1\\otimes\\mathrm{pullComp}^{-1})=(a_M\\otimes1)\\operatorname{PF}^{c_{gf}}$. (2) For a commuting square $kp=ri$ with quasi-compact open $k,i$ and proper $r,p$, $\\delta_iJ_i(\\pi_r)J_iS_r(1\\otimes\\mathrm{square})\\Gamma_T=(\\Gamma_M\\otimes1)\\pi_pS_p(\\delta_k)$. (3) For a proper refinement $v:c_1\\to c_2$, whose two components of $\\Gamma$ occurring on $M$ and its tensor input are invertible, $\\operatorname{PF}^{c_1}\\theta_T=(\\theta_M\\otimes1)\\operatorname{PF}^{c_2}$. (4) For the identity compactification, $\\operatorname{PF}^{id}=(\\sigma_M\\otimes1)(1\\otimes\\lambda_N^{-1})\\sigma_{M\\otimes P_{id}N}^{-1}$. Products in these formulas are written in the order of application. No inverse of a proper projection or of the raw composition map is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "The composition and refinement paragraphs, and the identity/mate normalization paragraph; intrinsic system equations needed by fix-prop-projection-formula integral coherence."
+ },
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-integral-compactification-system-realization",
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-canonical-bridge"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual system pullback, tensor, proper adjunction and open adjunction of [lem-sf-integral-compactification-system-realization]. Their comparisons are fixed by the ordinary section maps and the open-unit transposes of [def-sf-integral-system-operations]; their identity comparisons are fixed by [def-sf-integral-system-canonical-bridge]. Write $P_f,S_f,J_j$ for these functors, $T_W$ for tensor, $\\pi_f$ for the proper counit projection, $\\delta_j$ for the forward open tensor map, and $c,e$ for the proper and open compositors. Thus $\\operatorname{PF}^{c}=\\pi_{c.g}S_{c.g}(\\delta_{c.i}(1\\otimes P_{c.i}P_{c.g}\\simeq 1\\otimes P_f))$. No boundedness or finite-type condition is used to define these maps.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "def-sf-integral-system-operations",
+    "def-sf-integral-system-canonical-bridge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "The composition and refinement paragraphs, and the identity/mate normalization paragraph; intrinsic system equations needed by fix-prop-projection-formula integral coherence."
+   }
+  },
+  {
+   "text": "For the proper/open square $kp=ri$, let $\\alpha:P_pJ_i\\to J_kP_r$ be the proper-adjunction inverse mate of the specified $\\Gamma:J_iS_r\\to S_pJ_k$. Its canonical bridge identifies it with open base change followed by the clopen projector. Apply [lem-sf-clopen-comparison-tensor-square] on the vertical ringed diagram sites. Its first square is open base-change compatibility; its second is the identity/zero projector compatibility; its last square is their composite. The coefficients here are the actual quotient-ring sheaves, with their non-flat transition maps retained. The normalized inverse open tensor comparisons have precisely the transposes of [lem-sf-open-tensor-normalization], so these are the supplied system maps, not choices of new maps. This proves the mixed tensor-action square for $\\alpha$.",
+   "uses": [
+    "lem-sf-clopen-comparison-tensor-square",
+    "lem-sf-open-tensor-normalization",
+    "def-sf-integral-system-canonical-bridge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "The composition and refinement paragraphs, and the identity/mate normalization paragraph; intrinsic system equations needed by fix-prop-projection-formula integral coherence."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-tensor-square-mate-transfer] to the square just established. Both proper-adjunction transposes are $P_p(\\delta_i)$ followed by $\\alpha$ and $J_k((\\varepsilon_r\\otimes1)\\mu_r)$. Insert the pullback square comparison and its inverse in the indicated directions. Their cancellation gives exactly the proper/open clause of the Lean statement. Its hypotheses are only the quasi-compact open and proper square hypotheses; this calculation applies to arbitrary schemes over the field and arbitrary unbounded systems.",
+   "uses": [
+    "lem-sf-tensor-square-mate-transfer",
+    "def-sf-integral-system-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "The composition and refinement paragraphs, and the identity/mate normalization paragraph; intrinsic system equations needed by fix-prop-projection-formula integral coherence."
+   }
+  },
+  {
+   "text": "Transpose the projection for a composite proper image. The composite adjunction counit is the first counit followed by inverse image of the second; naturality of the tensor comparison moves it through the first tensor factor. This identifies the composite projection with the two successive proper projections under $c$ and the pullback compositor. For two opens, transpose the inverse tensor map under the composite open adjunction: the composite unit is the two successive units. Substitution of the open projection transpose therefore identifies the two successive open tensor maps with the single open tensor map under $e$. The pullback tensor comparisons respect composition because their ordinary scalar maps send the same pure tensor to the same tensor and their derived comparisons are pinned to these maps on simultaneous K-flat representatives. Thus the displayed proper and open projection combination laws hold with the specified compositors.",
+   "uses": [
+    "def-sf-integral-system-operations",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "The composition and refinement paragraphs, and the identity/mate normalization paragraph; intrinsic system equations needed by fix-prop-projection-formula integral coherence."
+   }
+  },
+  {
+   "text": "Expand $\\alpha_{cf,cg,d}$ as $S_{cg.g}(\\Gamma)$ followed by $c$ and $S(e)$. Move the first open tensor map and the second proper projection through these factors by their naturality. Apply the proper/open equation of step 3 to the central square, with input $J_{cf.i}M$ and pulled-back second input. Combine the two proper projections and two open tensor maps by step 4. The compactification commutativity equations identify their pullback comparisons; after cancellation the remaining factor is exactly $P_{gf}\\to P_fP_g$ in the direction displayed in the first clause. This proves the composition equation. The Cartesian hypothesis in that clause is permitted but invertibility of the raw compositor is not needed.",
+   "uses": [
+    "def-sf-integral-system-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "The composition and refinement paragraphs, and the identity/mate normalization paragraph; intrinsic system equations needed by fix-prop-projection-formula integral coherence."
+   }
+  },
+  {
+   "text": "In step 3 set $(k,r,p,i)=(c_1.i,\\mathrm{id},v,c_2.i)$ and apply $S_{c_2.g}$. Use $v c_2.g=c_1.g$ and the proper projection combination law of step 4 to identify the outside proper factors. Move the resulting comparison through tensor by naturality. Cancel only the two supplied invertible components of $\\Gamma$, one on $M$ and one on its tensor input. The remaining identity direct image is the canonical bridge identity, so the resulting equality is precisely the forward refinement equation with $\\theta$ as displayed, including its equality transport.",
+   "uses": [
+    "def-sf-integral-system-canonical-bridge",
+    "def-sf-integral-system-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "The composition and refinement paragraphs, and the identity/mate normalization paragraph; intrinsic system equations needed by fix-prop-projection-formula integral coherence."
+   }
+  },
+  {
+   "text": "For the identity compactification, use the pullback identity fixed by the canonical bridge. Its proper-image identity is the adjunction conjugate; the open-extension identity is the other adjunction conjugate. Transpose the proper projection and inverse open tensor map and cancel their units and counits using the triangle identities. Pullback identity carries the tensor comparison to identity on the ordinary pure tensors, hence on the normalized K-flat models. The resulting forward map is $(\\sigma_M\\otimes1)(1\\otimes\\lambda_N^{-1})\\sigma_{M\\otimes P_{id}N}^{-1}$, with $\\sigma=\\texttt{projectionSystemSupportIdentity}$ and $\\lambda=\\texttt{projectionSystemPullIdentity}$. This is the fourth clause. These arguments check identity maps and zero inputs; the projector check also includes the empty open, where the relevant maps are zero.",
+   "uses": [
+    "def-sf-integral-system-canonical-bridge",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "The composition and refinement paragraphs, and the identity/mate normalization paragraph; intrinsic system equations needed by fix-prop-projection-formula integral coherence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-compactification-system-realization",
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-canonical-bridge",
+  "lem-sf-clopen-comparison-tensor-square",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-tensor-square-mate-transfer",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "The composition and refinement paragraphs, and the identity/mate normalization paragraph; intrinsic system equations needed by fix-prop-projection-formula integral coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equality of canonical projection formula morphisms for composite functors and refinement of compactifications in a category of coefficient systems",
+   "results": "8 hits concerning coequalizers, Abelian coimage/image and generic functorial constructions; no strict-system projection coherence theorem.",
+   "date": "2026-10-25",
+   "verdict": "No match for these four normalized system equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula coherence for composition, proper open exchange, compactification refinement, identity, and pentagon in derived coefficient systems",
+   "results": "8 hits, including LightProfinite projections and Nobeling results; no theorem about the supplied system projection maps.",
+   "date": "2026-10-25",
+   "verdict": "No match. Generic projection-map conjugation and mate lemmas still require the geometric tensor-normalization equations."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*coherence|properOpenProjection|compactificationProjection",
+   "results": "0 Mathlib hits. Project grep found the finite-type properOpenProjectionMateSystems and composition/refinement declarations, whose additional scheme hypotheses do not fit the route constructors.",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib statement of these geometric system equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProjectionIntegralCoherenceRealization",
+  "date": "2026-10-25",
+  "group": "D2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Integral coherence sentence: composition and refinement identities are prop-sf-pf-coherence; the required before-limit generating equations.",
+   "via": [
+    "lem-sf-projection-integral-coherence-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProjectionSystemCoherence",
+  "file": "lean/Sheaf/SixFunctors/ProjectionSystemCoherence.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.projectionSystemGeneratingEquations",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.projectionSystemPushIdentity",
+   "WeilConjectures.IntegralSystemRealization.projectionSystemPullIdentity",
+   "WeilConjectures.IntegralSystemRealization.projectionSystemSupportIdentity",
+   "WeilConjectures.IntegralSystemRealization.projectionSystemCompositor",
+   "WeilConjectures.IntegralSystemRealization.projectionSystemRefinement",
+   "WeilConjectures.IntegralSystemRealization.ProjectionCoherenceRoutes",
+   "WeilConjectures.IntegralSystemRealization.projectionSystemGeneratingEquations"
+  ],
+  "statement": "theorem projectionSystemGeneratingEquations\n    (D : FiniteFieldDatum.{u})\n    (o : Operations l E) (ρ : Realizations l E D o) :\n    (∀ {U V W : Over (Spec (CommRingCat.of D.k))}\n      (f : U ⟶ V) (g : V ⟶ W)\n      (cf : Compactification f.left) (cg : Compactification g.left)\n      (d : Compactification (cf.overG ≫ cg.overI).left)\n      [QuasiCompact cf.i] [QuasiCompact cg.i] [QuasiCompact d.i]\n      (_sq : IsPullback cf.g d.i cg.i d.g)\n      (M : System l E U.left) (N : System l E W.left),\n      (compactificationProjection l E o ρ.compositors ρ.openComparisons cg\n          ((Operations.shriek l E o cf.i ⋙ Operations.push l E o cf.g).obj M) N ≫\n        (Operations.shriek l E o cg.i ⋙ Operations.push l E o cg.g).map\n          (compactificationProjection l E o ρ.compositors ρ.openComparisons cf M\n            ((pull l E g.left).obj N)) ≫\n        projectionSystemCompositor l E o ρ.compositors ρ.openComparisons\n          ρ.canonicalBridge ρ.properOpen cf cg d\n          ((calculus l E U.left).systemClosed.tensor.obj\n            (M, (pull l E f.left).obj ((pull l E g.left).obj N))) ≫\n        (Operations.shriek l E o (Compactification.overComp cf cg d).i ⋙\n          Operations.push l E o (Compactification.overComp cf cg d).g).map\n          ((calculus l E U.left).systemClosed.tensor.map\n            (Prod.mkHom (𝟙 M) ((ρ.compositors.pullComp f.left g.left).inv.app N)))) =\n      ((calculus l E W.left).systemClosed.tensor.map\n          (Prod.mkHom (projectionSystemCompositor l E o ρ.compositors ρ.openComparisons\n            ρ.canonicalBridge ρ.properOpen cf cg d M) (𝟙 N)) ≫\n        compactificationProjection l E o ρ.compositors ρ.openComparisons\n          (Compactification.overComp cf cg d) M N)) ∧\n    (∀ {U V W Z : Over (Spec (CommRingCat.of D.k))}\n      (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)\n      [IsOpenImmersion k.left] [IsOpenImmersion i.left]\n      [QuasiCompact k.left] [QuasiCompact i.left]\n      [IsProper r.left] [IsProper p.left]\n      (h : k.left ≫ p.left = r.left ≫ i.left)\n      (M : System l E U.left) (N : System l E Z.left),\n      ((ρ.openComparisons.projection i.left).hom.app\n          ((Operations.push l E o r.left).obj M, N) ≫\n        (Operations.shriek l E o i.left).map\n          (((properProjection l E o r.left).app M).app ((pull l E i.left).obj N)) ≫\n        (Operations.shriek l E o i.left).map ((Operations.push l E o r.left).map\n          ((calculus l E U.left).systemClosed.tensor.map\n            (Prod.mkHom (𝟙 M) ((ρ.compositors.square l E k.left r.left p.left i.left h).hom.app\n              N)))) ≫\n        (ρ.properOpen.gamma k.left r.left p.left i.left h).app\n          ((calculus l E U.left).systemClosed.tensor.obj\n            (M, (pull l E k.left).obj ((pull l E p.left).obj N)))) =\n      ((calculus l E Z.left).systemClosed.tensor.map\n          (Prod.mkHom ((ρ.properOpen.gamma k.left r.left p.left i.left h).app M) (𝟙 N)) ≫\n        ((properProjection l E o p.left).app\n          ((Operations.shriek l E o k.left).obj M)).app N ≫\n        (Operations.push l E o p.left).map\n          ((ρ.openComparisons.projection k.left).hom.app (M, (pull l E p.left).obj N)))) ∧\n    (∀ {U V : Over (Spec (CommRingCat.of D.k))} (f : U ⟶ V)\n      (c₁ c₂ : Compactification f.left) (v : c₁.Refinement c₂)\n      [QuasiCompact c₁.i] [QuasiCompact c₂.i]\n      (w : c₁.i ≫ v.hom = (𝟙 U.left) ≫ c₂.i)\n      (M : System l E U.left) (N : System l E V.left)\n      (hM : IsIso ((ρ.properOpen.gamma c₁.i (𝟙 U.left) v.hom c₂.i w).app M))\n      (hT : IsIso ((ρ.properOpen.gamma c₁.i (𝟙 U.left) v.hom c₂.i w).app\n        ((calculus l E U.left).systemClosed.tensor.obj (M, (pull l E f.left).obj N)))),\n      (compactificationProjection l E o ρ.compositors ρ.openComparisons c₁ M N ≫\n        projectionSystemRefinement l E o ρ.compositors ρ.openComparisons\n          ρ.canonicalBridge ρ.properOpen c₁ c₂ v w\n          ((calculus l E U.left).systemClosed.tensor.obj (M, (pull l E f.left).obj N)) hT) =\n      ((calculus l E V.left).systemClosed.tensor.map\n          (Prod.mkHom (projectionSystemRefinement l E o ρ.compositors ρ.openComparisons\n            ρ.canonicalBridge ρ.properOpen c₁ c₂ v w M hM) (𝟙 N)) ≫\n        compactificationProjection l E o ρ.compositors ρ.openComparisons c₂ M N)) ∧\n    (∀ (W : Over (Spec (CommRingCat.of D.k)))\n      (M N : System l E W.left),\n      (compactificationProjection l E o ρ.compositors ρ.openComparisons\n        (Compactification.ofIsProper (𝟙 W.left)) M N) =\n      ((calculus l E W.left).systemClosed.tensor.map\n          (Prod.mkHom ((projectionSystemSupportIdentity l E o ρ.canonicalBridge W.left).hom.app\n            M) (𝟙 N)) ≫\n        (calculus l E W.left).systemClosed.tensor.map\n          (Prod.mkHom (𝟙 M)\n            ((projectionSystemPullIdentity l E o ρ.canonicalBridge W.left).inv.app N)) ≫\n        (projectionSystemSupportIdentity l E o ρ.canonicalBridge W.left).inv.app\n          ((calculus l E W.left).systemClosed.tensor.obj\n            (M, (pull l E (𝟙 W.left)).obj N))))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-25",
+  "note": "The five definitions and route inductive move verbatim from the integral-coherence module, which publicly reexports this module. The sole new postponed theorem contains only the four concrete generating equations; it has no route derivation, integral comparison or coefficient-resolution clause."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-08f85",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261025T095015-L-3282411",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a6f5c",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261026T003232-L-155711",
+  "kind": "interface",
+  "note": "independent cc review: projection_change proof vs node lem-pur-system-projection-change-compatibility; removal of unused _hl : l ≠ D.p from sorried projectionSystemGeneratingEquations vs Realizations/Operations (no D.p dependence), change record, node statement_change and the single adapted caller; sandbox compile of delivered + adapted modules with #print axioms"
+ },
+ "statement_change": {
+  "date": "2026-10-26",
+  "by": "X7 stage 3",
+  "old_statement": "Fix a finite-field datum $D$, a prime $\\ell\\ne D.p$ and a finite extension $E/\\mathbf Q_\\ell$. On every scheme over $D.k$, use the derived category $\\mathscr S_W$ of strict quotient-semilinear systems, with its normalized tensor and pullback [lem-coef-derived-system-evaluation-calculus]. Fix the actual simultaneous operations $o$ and realization datum $\\rho$ [lem-sf-integral-compactification-system-realization], with compositors and unit-normalized open comparisons [def-sf-integral-system-operations] and canonical bridge [def-sf-integral-system-canonical-bridge]. All schemes here are arbitrary schemes over $D.k$; no finite-type hypothesis on their structure maps is imposed. Put $F_c=J_{c.i}S_{c.g}$ and let $\\operatorname{PF}^c:F_cM\\otimes N\\to F_c(M\\otimes P_fN)$ be its specified proper-counit/open-tensor projection. Define $a_{c_f,c_g,d}$ by $S_{c_g.g}(\\Gamma)$ followed by the direct-image compositor and the image of the open compositor, exactly as in projectionSystemCompositor. Define $\\theta_{c_1,c_2,v}$ by equality transport along $v.g$, inverse direct-image composition, image of inverse $\\Gamma$ and the canonical identity direct image, exactly as in projectionSystemRefinement. Define $\\sigma$ and $\\lambda$ as the support and pullback identity comparisons through the canonical bridge. The following four equations hold in the system category, naturally in arbitrary unbounded inputs $M,N$ (the attached Lean statement retains every compositor, equality transport and outer functor explicitly): (1) For composable arrows $f,g$, compactifications $c_f,c_g,d$ with quasi-compact open factors and the displayed Cartesian middle square, $\\operatorname{PF}^{c_g}F_{c_g}(\\operatorname{PF}^{c_f})a_TF_{c_{gf}}(1\\otimes\\mathrm{pullComp}^{-1})=(a_M\\otimes1)\\operatorname{PF}^{c_{gf}}$. (2) For a commuting square $kp=ri$ with quasi-compact open $k,i$ and proper $r,p$, $\\delta_iJ_i(\\pi_r)J_iS_r(1\\otimes\\mathrm{square})\\Gamma_T=(\\Gamma_M\\otimes1)\\pi_pS_p(\\delta_k)$. (3) For a proper refinement $v:c_1\\to c_2$, whose two components of $\\Gamma$ occurring on $M$ and its tensor input are invertible, $\\operatorname{PF}^{c_1}\\theta_T=(\\theta_M\\otimes1)\\operatorname{PF}^{c_2}$. (4) For the identity compactification, $\\operatorname{PF}^{id}=(\\sigma_M\\otimes1)(1\\otimes\\lambda_N^{-1})\\sigma_{M\\otimes P_{id}N}^{-1}$. Products in these formulas are written in the order of application. No inverse of a proper projection or of the raw composition map is assumed.",
+  "what": "The unused hypothesis ell != D.p prevents applying the existing intrinsic refinement equation to projection_change, whose statement correctly has no such restriction. These are equalities of unit/counit/tensor composites on ringed diagram sites, not assertions of invertibility of projection formula maps. The proof uses neither invertibility of ell on the schemes nor constructible realization. Remove only this redundant hypothesis; all four conclusions and all geometric hypotheses stay identical.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+   "place": "The composition and refinement paragraphs, and the identity/mate normalization paragraph; intrinsic system equations needed by fix-prop-projection-formula integral coherence."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-projection-integral-coherence-realization",
+    "holds": true,
+    "note": "Removing the unused coefficient-characteristic restriction strengthens the same four system map equations; all previously allowed specializations remain available."
+   }
+  ]
+ }
+}

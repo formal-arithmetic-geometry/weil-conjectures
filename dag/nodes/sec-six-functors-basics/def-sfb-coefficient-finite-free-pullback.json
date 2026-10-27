@@ -1,0 +1,135 @@
+{
+ "id": "def-sfb-coefficient-finite-free-pullback",
+ "kind": "definition",
+ "title": "Canonical finite-free coefficient pullback comparison",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], with pulled-back coefficient rings $\\Lambda_Z$ [sk-def-sfb-pulled-back-coefficients] and internal module objects and their regular modules [sk-def-sfb-module-objects]. For every morphism of schemes $f:Y\\to X$, use the actual ringed-topos module pullback $f^*$ [sk-def-sfb-module-pushforward-pullback]. For $n\\in\\mathbf N$, put $\\Lambda_Z^n=\\bigoplus_{i\\in\\operatorname{Fin}(n)}\\Lambda_Z$. Define the canonical comparison $\\kappa_{f,n}:f^*(\\Lambda_X^n)\\xrightarrow{\\sim}\\Lambda_Y^n$ as the finite-biproduct comparison of $f^*$ followed on each regular summand by extension/restriction along the canonical coefficient isomorphism and the regular-module comparison induced by that same coefficient map. This is the specified composite, with no choice of basis or arbitrary isomorphism; $n=0$ and all schemes and scheme morphisms are allowed.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent ringed-site lemma extracted from returned parent proof steps 6–7 and the uniqueness/base-change argument in step 8. Full affine trivialization, matrix extension and overlap gluing argument is retained in the Q12 report; this is not asserted verbatim by the blueprint."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sfbCoefficientSectionMap|sfbCoefficientGlobalMap|sfbSectionOne|coefficientHeartFiniteFreePullbackIso",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "The Mathlib candidates concern sectionwise module sheaves, not these internal coefficient-module constructions. Exact project definitions are reused by existing:true records."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical coefficient section maps from the coefficient mate and finite free module pullback comparison for commutative condensed rings on the pro etale site",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.sheafificationCompPullback, Condensed.freeForgetAdjunction, SheafOfModules.pushforwardSections_coe, Condensed.free, LightCondensed.ihomPoints, PresheafOfModules.sheafifyMap; digest 0c2d36aa70abd449",
+   "date": "2026-10-22",
+   "verdict": "The Mathlib candidates concern sectionwise module sheaves, not these internal coefficient-module constructions. Exact project definitions are reused by existing:true records."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod\", \"finiteFree\"",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "The Mathlib candidates concern sectionwise module sheaves, not these internal coefficient-module constructions. Exact project definitions are reused by existing:true records."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"sfbCoefficientSectionMap|sfbCoefficientGlobalMap|sfbSectionOne|coefficientHeartFiniteFreePullbackIso\" dag/nodes lean/WeilConjectures lean/Sheaf",
+   "results": "Only theorem-node helper lists carry these names in the DAG; no definition node owns them. Exact real-data definitions occur in Sheaf.AlgebraicGeometry.CoefficientSectionsLocalization (sfbSectionOne, sfbCoefficientSectionMap, sfbCoefficientGlobalMap) and Sheaf.Paper.CoefficientHeartCurveLisseDescent (coefficientHeartFiniteFreePullbackIso). No declaration with these names in WeilConjectures.",
+   "date": "2026-10-22",
+   "verdict": "Reuse the existing project definitions; add definition-node ownership without copying Lean data."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "search 'coefficient section'; search 'finite free'; ancestor lem-sfb-sectionwise-open-lisse-hom-descent",
+   "results": "2 and 38 blueprint matches respectively, none owns these helpers; ancestor command: a node created for lem-sfb-sectionwise-open-lisse-hom-descent has blueprint.from.node = None",
+   "date": "2026-10-22",
+   "verdict": "New definition nodes use the inherited null ancestor and prepend the item to its via chain."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sectionwise-open-lisse-hom-descent",
+  "date": "2026-10-22",
+  "group": "Q109"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Auxiliary coefficient-section and free-basis conventions for direct-images paragraph (3), item proof steps 1 and 3. The inherited ancestor is null, as confirmed by blueprint_refs.py.",
+   "via": [
+    "lem-sfb-sectionwise-open-lisse-hom-descent",
+    "lem-sfb-root-tower-lisse-morphism-extension",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientHeartCurveLisseDescent",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientHeartFiniteFreePullbackIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.coefficientHeartFiniteFreePullbackIso"
+  ],
+  "statement": "def coefficientHeartFiniteFreePullbackIso\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X) (n : ℕ) :\n    (CondensedRing.upperStar Λ f).obj (Mod.finiteFree (condensedRingObj Λ X) n) ≅\n      Mod.finiteFree (condensedRingObj Λ Y) n",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition-node ownership of existing real-data helpers, as requested in the return of immutable head 0a481d34ddc3. No Lean declarations are copied or changed. The theorem in the source module is not a statement dependency of this definition."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a1858d54",
+  "group": "Q109",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a1858d54",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Re-delivery after the L return on 0a481d34 (H2: theorem stmt_deps used only for plain defs). The module is byte-identical to the returned head (sha256 374d81b7…), and the node differs only in stmt_deps: lem-sfb-coefficient-sections-localization and lem-sfb-coefficient-heart-curve-lisse-descent are replaced by the new existing:true definition nodes def-sfb-coefficient-section-maps (sfbCoefficientSectionMap, sfbCoefficientGlobalMap, sfbSectionOne) and def-sfb-coefficient-finite-free-pullback (coefficientHeartFiniteFreePullbackIso). Their signatures match the side-live source verbatim, and their bodies are the canonical mate, biproduct and regular comparisons. The used decls are exactly the union of the two declarations lists. No other owner node exists in side-live, and the new nodes' stmt_deps are all definitions. Re-checked the substance: hsec, the pinned forward map, the entrywise inverse (θ(r⁻¹d) = g♯⁻¹d), cover and basis independence, unique gluing, the base-change square, and the edge cases (rank 0, empty X, V = ∅, V = X, Λ = 0). No compile: no file changed, and the worker's compile and dry run are clean. Advisory: the HEq overlap clause is automatic; the free-matrix proof dependency has no Lean binding."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261023T151805-L-409499",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.coefficientHeart_curve_lisse_descent"
+  ],
+  "sorry_after": []
+ }
+}

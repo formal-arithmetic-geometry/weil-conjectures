@@ -1,0 +1,285 @@
+{
+ "kind": "statement",
+ "proof": [
+  {
+   "text": "Choose a minimal finite generating set of the maximal ideal with cardinality its spanFinrank. Regularity identifies that number d with dim B. Enumerate it by Fin d. The existing regular-local generator theorem proves regularity of the resulting list, without coefficient coordinates or completeness.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the prime-field polynomial parameter-map regularity lemma to the chosen tuple. Install the evaluation P-algebra structure on B. Popescu gives a small filtered diagram of smooth P-algebras with the specified ring colimit.",
+   "uses": [
+    "lem-per-prime-field-parameter-regular-map",
+    "lem-weil-pbc-popescu-smoothing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Mathlib IsFiltered.exists_directed, which already returns a partial order and a final functor. Restrict scalars on each P-algebra to k and whisker along this functor. The structure maps give τ, the Popescu cocone gives β, and P-linearity gives β_a∘τ_a=aeval t. Finality preserves the specified ring colimit. No preorder-to-poset replacement is needed.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-exists-directed-final",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the parameter-quotient diagram theorem to the supplied smooth diagram and colimit. It constructs normalized quotient stages and their residue colimit, and proves every stage regularity, regular-sequence, smoothness and codimension assertion.",
+   "uses": [
+    "lem-per-smooth-parameter-quotient-diagram"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If an integer ℓ is a unit in B, its image in k is nonzero: otherwise its image in B would be zero. Its inverse exists in the field k and maps to an inverse in every k-algebra C_a. This argument works for every field k and does not need primality of ℓ.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-per-prime-field-parameter-regular-map",
+  "lem-weil-pbc-popescu-smoothing",
+  "lem-weil-pbc-filtered-category-exists-directed-final",
+  "def-weil-pbc-category-colimit",
+  "lem-per-smooth-parameter-quotient-diagram"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex; literature/stacks-project/smoothing.tex; literature/stacks-project/categories.tex",
+  "place": "2026-10-26 M4: minimal regular parameters, regular polynomial parameter map, Popescu 07GC, Mathlib directed-final 0032, and explicit quotient colimit. Completeness and Cohen coordinates are not needed for this argument."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-trait-test-prime-field-local-input",
+  "date": "2026-10-24",
+  "group": "Q109"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "id": "lem-per-prime-local-smooth-parameter-models",
+ "title": "Smooth polynomial-parameter models of an equicharacteristic complete regular local ring",
+ "statement": "Let $k_0$ be $\\mathbf Q$ or $\\mathbf F_p$ for a prime $p$. Let $(B,\\mathfrak n)$ be a nonzero Noetherian regular local $k_0$-algebra [def-weil-pbc-noetherian-ring, def-weil-regular-scheme], complete for $\\mathfrak n$ [def-weil-pbc-adic-completion], and let $d=\\dim B$ and $F=B/\\mathfrak n$ [def-weil-pbc-krull-dimension-ring, def-weil-residue-field]. There are generators $t_1,\\ldots,t_d$ of $\\mathfrak n$ and a small nonempty directed poset $I$ with a directed system of commutative $P=k_0[T_1,\\ldots,T_d]$-algebras $C_a$ [def-weil-pbc-mv-polynomial-ring, def-weil-pbc-category-colimit] and compatible $P$-algebra maps $C_a\\to B$, where $T_i\\mapsto t_i$, with the following properties. Each $\\operatorname{Spec}C_a\\to\\operatorname{Spec}P$ is smooth [def-sbc-smooth-morphisms]. Every $C_a$ and $D_a=C_a/(T_1,\\ldots,T_d)C_a$ is a nonzero regular Noetherian ring. The images of $T_1,\\ldots,T_d$ form a $C_a$-regular sequence [def-weil-pbc-regular-sequence], preserved by every transition map. The quotient $\\operatorname{Spec}D_a$ is smooth over $k_0$ and the closed immersion $\\operatorname{Spec}D_a\\hookrightarrow\\operatorname{Spec}C_a$ has constant codimension $d$ [def-weil-affine-spectrum, def-per-regular-closed-immersion-codimension]. The specified maps induce isomorphisms of rings\n$$\\varinjlim_a C_a\\xrightarrow{\\sim}B,\\qquad\\varinjlim_a D_a\\xrightarrow{\\sim}F,$$\nand the second is the quotient of the first by the parameters, identifying the limiting immersion with $\\operatorname{Spec}F\\hookrightarrow\\operatorname{Spec}B$. The $t_i$ form a $B$-regular sequence. If a prime $\\ell$ is invertible in $B$, then $\\ell$ is invertible in every $C_a$. This includes $d=0$, with empty parameters and $D_a=C_a$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex; literature/stacks-project/smoothing.tex",
+  "place": "Agent simultaneous model consequence of Tag 0C0S, lemma-regular-complete-containing-coefficient-field, Tag 032A, theorem-cohen-structure-theorem; Tag 0AH2, lemma-map-G-ring-to-completion-regular; Tag 07GC, theorem-popescu. The compatible parameter/quotient package and directed-poset indexing are part of this new algebraic assertion, not asserted verbatim by one source."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-residue-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-category-colimit",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-affine-spectrum",
+  "def-per-regular-closed-immersion-codimension"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A complete equicharacteristic regular local ring with parameters is a filtered colimit of smooth algebras over a polynomial ring preserving the parameters and the residue quotient",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"Algebra.instSmoothOfIsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.Smooth R S\", \"doc\": \"Every standard smooth algebra over a commutative ring $ R $ is smooth over $ R $. A standard smooth algebra is one isomorphic to a localized polynomial ring $ R[x_1,\\\\ldots,x_n]_f $ with maximal rank J\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"ℕ → {R : Type u} → {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, this proposition asserts that $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, where the a\"}\n  {\"name\": \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.Smooth R S],\\n  ∃ s, Ideal.span s = ⊤ ∧ ∀ x ∈ s, Algebra.IsStandardSmooth R (Localization.Away x)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $S$ be a smooth $R$-algebra. Then there exists a set of elements $s \\\\subseteq S$ such that the ideal generated by $s$ is the whole ring $S$, and for every\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern standard smooth charts, power-series division, ordinary residue fields or spectrum coordinate maps; none states the simultaneous parameter-model theorem or the supported derived Kummer purity map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen structure and Popescu approximation of a power series local ring over a field by smooth polynomial algebras with smooth quotient at the origin",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.IsWeierstrassDivision\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] → PowerSeries A → PowerSeries A → PowerSeries A → Polynomial A → [IsLocalRing A] → Prop\", \"doc\": \"Given a local ring $ A $, the Weierstrass division of a power series $ f $ by another power series $ g $ yields quotient $ q $, remainder $ r $, and the maximal ideal of $ A $ as part of the division \"}\n  {\"name\": \"PowerSeries.weierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        (g : PowerSeries A) → (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → Polynomial A\", \"doc\": \"Given a local ring $ A $ and a power series $ g $ over $ A $ whose image under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the maximal ideal) is non-zero, this function returns\"}\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorization\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} → [inst : CommRing A] → PowerSeries A → Polynomial A → PowerSeries A → [IsLocalRing A] → Prop\", \"doc\": \"For a local commutative ring $ A $, this proposition asserts that a power series $ g $ factors as a polynomial $ f $ multiplied by a power series $ h $, where $ h $ is a unit modulo the maximal ideal \"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassFactorization\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A}, (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ f h, g.IsWeierstrassFactorization f h\", \"doc\": \"For a local ring $ A $ and a power series $ g $ over $ A $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the maximal ideal of $ A $) is non-zero, the\"}\n  {\"name\": \"PowerSeries.weierstrassMod\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      PowerSeries A → PowerSeries A → [IsPrecomplete (IsLocalRing.maximalIdeal A) A] → Polynomial A\", \"doc\": \"Given a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $ and a power series $ g $ over $ A $, this function computes the Weierstrass modulus of $ g $ with respect to another power seri\"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassDivision\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] (f : PowerSeries A) {g : PowerSeries A}\\n  [IsAdicComplete (IsLocalRing.maximalIdeal A) A],\\n  (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ q r, f.IsWeierstrassDivision g q r\", \"doc\": \"Let $ A $ be a local ring whose maximal ideal is adic complete. If $ g $ is a power series in $ A[[X]] $ whose image in the residue field of $ A $ is nonzero, then for any power series $ f $, there ex\"}\n  {\"name\": \"PowerSeries.weierstrassDiv\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      PowerSeries A → PowerSeries A → [IsPrecomplete (IsLocalRing.maximalIdeal A) A] → PowerSeries A\", \"doc\": \"Given a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, and power series $ f, g \\\\in A[[X]] $, the Weierstrass division of $ f $ by $ g $ is defined as follows: if the image of $ g $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern standard smooth charts, power-series division, ordinary residue fields or spectrum coordinate maps; none states the simultaneous parameter-model theorem or the supported derived Kummer purity map"
+  },
+  {
+   "tool": "grep",
+   "query": "Popescu|popescu|coefficientField|coefficient_field|CohenStructure",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"line\": \"16\", \"text\": \"# The Gabriel-Popescu theorem\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"line\": \"18\", \"text\": \"We prove the following Gabriel-Popescu theorem: if `C` is a Grothendieck abelian category and\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"line\": \"61\", \"text\": \"namespace GabrielPopescuAux\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"line\": \"111\", \"text\": \"end GabrielPopescuAux\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"line\": \"113\", \"text\": \"open GabrielPopescuAux\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern standard smooth charts, power-series division, ordinary residue fields or spectrum coordinate maps; none states the simultaneous parameter-model theorem or the supported derived Kummer purity map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular local rings containing a perfect field admit smooth polynomial parameter approximations and residue field quotients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalRing.ResidueField\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → [IsLocalRing R] → Type u_1\", \"doc\": \"The residue field of a local ring $ R $ is the quotient ring obtained by dividing $ R $ by its unique maximal ideal, which consists of all non-units of $ R $. This construction forms the field of equi\"}\n  {\"name\": \"IsLocalRing.instCommRingResidueField\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → [inst_1 : IsLocalRing R] → CommRing (IsLocalRing.ResidueField R)\", \"doc\": \"For any commutative ring $ R $ that is a local ring, the residue field of $ R $, defined as the quotient of $ R $ by its unique maximal ideal of non-units, inherits a commutative ring structure from $\"}\n  {\"name\": \"IsLocalRing.ResidueField.field\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \": Field (ResidueField R)\", \"doc\": \"For any commutative local ring $ R $, the residue field obtained by quotienting $ R $ by its unique maximal ideal (the set of all non-units) is a field. This follows because the maximality of the idea\"}\n  {\"name\": \"IsLocalRing.instInhabitedResidueField\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → [inst_1 : IsLocalRing R] → Inhabited (IsLocalRing.ResidueField R)\", \"doc\": \"The residue field of a local ring $ R $ is the quotient ring $ R $ modulo its unique maximal ideal consisting of all non-units. This construction yields a field where elements are equivalence classes \"}\n  {\"name\": \"IsLocalRing.residue\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \": R →+* ResidueField R\", \"doc\": \"The canonical ring homomorphism from a local ring $ R $ to its residue field, obtained by quotienting $ R $ by its unique maximal ideal consisting of all non-units.\"}\n  {\"name\": \"instIsAlgebraicQuotientIdealResidueField\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Instances\", \"type\": \"[p.IsPrime] : Algebra.IsAlgebraic (A ⧸ p) p.ResidueField\", \"doc\": \"For any commutative ring $ A $ and a prime ideal $ p $ in $ A $, the residue field of $ p $ is algebraic over the quotient ring $ A/p $. This means every element in the residue field satisfies a polyn\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib.RingTheory.Unramified.LocalRing\", \"type\": \": FormallyUnramified S (ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}\n  {\"name\": \"Algebra.FormallySmooth.polynomial\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(R : Type*) [CommRing R] : FormallySmooth R R[X]\", \"doc\": \"For any commutative ring $ R $, the polynomial ring $ R[X] $ is a formally smooth $ R $-algebra. This instance asserts that the canonical algebra structure on $ R[X] $ over $ R $ satisfies the formal \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern standard smooth charts, power-series division, ordinary residue fields or spectrum coordinate maps; none states the simultaneous parameter-model theorem or the supported derived Kummer purity map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern standard smooth charts, power-series division, ordinary residue fields or spectrum coordinate maps; none states the simultaneous parameter-model theorem or the supported derived Kummer purity map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete regular local algebra over a prime field is a directed colimit of smooth polynomial algebras preserving parameters and residue quotient",
+   "results": "Actual msearch result: 8 hits; BDeRham, Algebra.IsStandardSmooth, Algebra.Smooth, Algebra.IsSmoothAt, Algebra.IsStandardSmoothOfRelativeDimension, instCommRingBDeRhamPlus, RingHom.IsStandardSmoothOfRelativeDimension, Algebra.Smooth.exists_span_eq_top_isStandardSmooth",
+   "date": "2026-10-24",
+   "verdict": "no match: none constructs Cohen coordinates together with smooth approximations over the fixed prime-field polynomial parameter ring and their nonzero regular quotient models"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"Smooth\"",
+   "results": "Actual msearch result: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: none constructs Cohen coordinates together with smooth approximations over the fixed prime-field polynomial parameter ring and their nonzero regular quotient models"
+  },
+  {
+   "tool": "grep",
+   "query": "Popescu|CohenStructure|coefficientField|smooth.*parameter",
+   "results": "Actual msearch result: 6 hits; Mathlib/Geometry/Manifold/IsManifold/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: none constructs Cohen coordinates together with smooth approximations over the fixed prime-field polynomial parameter ring and their nonzero regular quotient models"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete equicharacteristic regular local rings are filtered colimits of smooth algebras with a fixed polynomial parameter map",
+   "results": "Actual msearch result: 8 hits; CommRingCat.FilteredColimits.colimitCoconeIsColimit, RingHom.Smooth, Algebra.Smooth.mk, Algebra.Smooth.recOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Algebra.Smooth.finitePresentation, Algebra.Smooth.formallySmooth, Algebra.Smooth.of_isLocalization_Away",
+   "date": "2026-10-24",
+   "verdict": "no match: none constructs Cohen coordinates together with smooth approximations over the fixed prime-field polynomial parameter ring and their nonzero regular quotient models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen structure theorem followed by Popescu approximation of formal power series over a prime field with chosen regular parameters",
+   "results": "Actual msearch result: 8 hits; BDeRham, BDeRhamPlus, PreTilt.exists_smodEq_untiltAux, PowerSeries.exists_isWeierstrassFactorization, instCommRingBDeRhamPlus, PowerSeries.weierstrassDistinguished, PowerSeries.IsWeierstrassDivision, PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit",
+   "date": "2026-10-24",
+   "verdict": "no match: none constructs Cohen coordinates together with smooth approximations over the fixed prime-field polynomial parameter ring and their nonzero regular quotient models"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: regular finite-torsion local purity input; ILO XVI Proposition 3.2.5 in the admitted trait-test reduction. Fresh local proof replacing excluded Q45 prime-field punctual purity. Algebraic Cohen/Popescu reduction preserving polynomial parameters and the residue quotient.",
+   "via": [
+    "lem-per-trait-test-prime-field-local-input",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-prime-local-smooth-parameter-models",
+  "worker": "stage1",
+  "summary": "NK retains the statement, reuses all existing algebraic and indexing inputs, and supplies ten checked proof steps. No new nodes. Uses the local G-ring closed-fibre criterion to prove the prime-field polynomial parameter map regular before applying Popescu; explicitly checks nonzero smooth quotients, regular sequences, poset indexing, quotient colimits, invertible primes, and d=0.",
+  "blueprint": "lem-per-artin-gabber-affine-curve, Proof Step 3: regular local purity input through the admitted trait-test reduction. This item supplies the algebraic simultaneous parameter/quotient models below lem-per-trait-test-prime-field-local-input; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-polynomial-ring-origin-regular-local",
+    "why": "Generic commutative-algebra or directed-index tool used in the indicated proof steps; the perverse-curve unit has no substitute for this algebraic approximation input."
+   },
+   {
+    "node": "lem-weil-pbc-flat-over-regular",
+    "why": "Generic commutative-algebra or directed-index tool used in the indicated proof steps; the perverse-curve unit has no substitute for this algebraic approximation input."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-g-ring",
+    "why": "Generic commutative-algebra or directed-index tool used in the indicated proof steps; the perverse-curve unit has no substitute for this algebraic approximation input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-g-ring",
+    "why": "Generic commutative-algebra or directed-index tool used in the indicated proof steps; the perverse-curve unit has no substitute for this algebraic approximation input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-maximal",
+    "why": "Generic commutative-algebra or directed-index tool used in the indicated proof steps; the perverse-curve unit has no substitute for this algebraic approximation input."
+   },
+   {
+    "node": "lem-weil-pbc-popescu-smoothing",
+    "why": "Generic commutative-algebra or directed-index tool used in the indicated proof steps; the perverse-curve unit has no substitute for this algebraic approximation input."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-category-directed-cofinal",
+    "why": "Generic commutative-algebra or directed-index tool used in the indicated proof steps; the perverse-curve unit has no substitute for this algebraic approximation input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "why": "Generic commutative-algebra or directed-index tool used in the indicated proof steps; the perverse-curve unit has no substitute for this algebraic approximation input."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "why": "Generic commutative-algebra or directed-index tool used in the indicated proof steps; the perverse-curve unit has no substitute for this algebraic approximation input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Generic commutative-algebra or directed-index tool used in the indicated proof steps; the perverse-curve unit has no substitute for this algebraic approximation input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-flat",
+    "why": "Generic commutative-algebra or directed-index tool used in the indicated proof steps; the perverse-curve unit has no substitute for this algebraic approximation input."
+   },
+   {
+    "node": "lem-weil-pbc-cohen-coefficient-ring-exists",
+    "why": "Cohen coefficient ring (Stacks 032A(1)), generic commutative algebra; replaces the dropped 2026-10-19 route node lem-per-prime-field-complete-coordinate-model (maintainer review FIX)."
+   },
+   {
+    "node": "lem-trf-regular-complete-coefficient-coordinates",
+    "why": "Stacks 0C0S(2) power-series coordinates, generic commutative algebra housed in the trace-formula chapter; not a statement or proof step of the trace formula or Poincare duality; already in this item's closure via the Andre criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-polynomial-ring-origin-regular-local",
+  "lem-weil-pbc-flat-over-regular",
+  "lem-weil-pbc-complete-local-g-ring",
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "lem-weil-pbc-regular-local-maximal",
+  "lem-weil-pbc-popescu-smoothing",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-weil-pbc-cohen-coefficient-ring-exists",
+  "lem-trf-regular-complete-coefficient-coordinates"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NK-a509f5ca4",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-a509f5ca4 (reviewer sub-agent of L); spot-checked: The statement is unchanged from base 2aff91a7 and the delivery adds no new nodes. I read all 10 steps against the cited node statements and the Stacks sources: 032A/0C0S in algebra.tex l.44929/45036, 07DY, 0H7U in more-algebra l.12119, 07PS, 07PV, 07C0, and 07GC in smoothing l.3113. The mathematics is correct. Checks: the local map A=P_m->B; F is geometrically regular over the prime field, since (a-c)^{p^r}=0; the Andre criterion followed by the maximal-ideal test gives P->B regular; Popescu plus directed reindexing; the J x N poset is antisymmetric and directed with legs agreeing on copies; smooth base change and regular ascent; flatness carries the regular sequence; the quotient-colimit bijection; ell != p; d=0. Edge cases tested: B=Q[[t]], F_p(s)[[t]] with imperfect F, and d=0. Batch-5 finding: lem-per-g-ring-local-closed-fibre-criterion reaches lem-trf-regular-complete-coefficient-coordinates. That node is Stacks 0C0S Cohen coordinates, generic commutative algebra that is neither a statement nor a proof step of the trace formula or Poincare duality, so I accept it. Artin-Gabber finding: Step 1 cited lem-per-prime-field-complete-coordinate-model, which is on coord/route-pivot-dropped.txt (2026-10-19). Q84 did not re-admit it and its note forbids still-excluded prerequisites. The report did not justify this. FIX: Step 1 now cites lem-weil-pbc-cohen-coefficient-ring-exists, def-weil-regular-scheme and lem-trf-regular-complete-coefficient-coordinates. The coefficient ring is a field because its intersection with the maximal ideal is pA = 0 in equal characteristic. proof_deps and tool_uses are updated. The item's route runs through the Q84 re-admitted finite purity chain, not artin-gabber-affine-curve, and uses no Qbar_l or SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PrimeLocalSmoothParameterModels",
+  "declaration": "IsLocalRing.exists_prime_local_smooth_parameter_models",
+  "file": "lean/Sheaf/RingTheory/PrimeLocalSmoothParameterModels.lean",
+  "statement": "theorem exists_prime_local_smooth_parameter_models (k₀ B : Type u) [Field k₀] [CommRing B] [Algebra k₀ B] (hprime : Nonempty (k₀ ≃+* ℚ) ∨ ∃ p : ℕ, p.Prime ∧ Nonempty (k₀ ≃+* ZMod p)) [IsRegularLocalRing B] [IsAdicComplete (maximalIdeal B) B] : ∃ (d : ℕ), ringKrullDim B = (d : WithBot ℕ∞) ∧ ∃ (t : Fin d → B), Ideal.span (Set.range t) = maximalIdeal B ∧ RingTheory.Sequence.IsRegular B (List.ofFn t) ∧ ∃ (I : Type u) (_ : PartialOrder I) (_ : IsDirected I (· ≤ ·)) (_ : Nonempty I) (C : I ⥤ CommAlgCat.{u} k₀) (τ : (Functor.const I).obj (CommAlgCat.of k₀ (MvPolynomial (Fin d) k₀)) ⟶ C) (β : C ⟶ (Functor.const I).obj (CommAlgCat.of k₀ B)), (∀ a : I, (β.app a).hom.comp (τ.app a).hom = MvPolynomial.aeval t) ∧ (∀ a : I, Smooth (Spec.map (CommRingCat.ofHom (τ.app a).hom.toRingHom))) ∧ (∀ a : I, Nontrivial (C.obj a) ∧ IsRegularRing (C.obj a) ∧ RingTheory.Sequence.IsRegular (C.obj a) (List.ofFn fun i : Fin d ↦ (τ.app a).hom (MvPolynomial.X i))) ∧ (∀ (ℓ : ℕ), ℓ.Prime → IsUnit (ℓ : B) → ∀ a : I, IsUnit (ℓ : C.obj a)) ∧ Nonempty (IsColimit ((forget₂ (CommAlgCat.{u} k₀) CommRingCat.{u}).mapCocone { pt := CommAlgCat.of k₀ B, ι := β })) ∧ ∃ (D : I ⥤ CommAlgCat.{u} k₀) (q : C ⟶ D) (γ : D ⟶ (Functor.const I).obj (CommAlgCat.of k₀ (ResidueField B))), (∀ a : I, ∃ e : (C.obj a ⧸ Ideal.span (Set.range fun i : Fin d ↦ (τ.app a).hom (MvPolynomial.X i))) ≃ₐ[k₀] D.obj a, ∀ x : C.obj a, e (Ideal.Quotient.mk (Ideal.span (Set.range fun i : Fin d ↦ (τ.app a).hom (MvPolynomial.X i))) x) = (q.app a).hom x) ∧ (∀ a : I, Nontrivial (D.obj a) ∧ IsRegularRing (D.obj a) ∧ Smooth (Spec.map (CommRingCat.ofHom (algebraMap k₀ (D.obj a)))) ∧ IsRegularClosedImmersionWithCodimension (Spec.map (CommRingCat.ofHom (q.app a).hom.toRingHom)) (fun _ ↦ d)) ∧ Nonempty (IsColimit ((forget₂ (CommAlgCat.{u} k₀) CommRingCat.{u}).mapCocone { pt := CommAlgCat.of k₀ (ResidueField B), ι := γ })) ∧ (∀ a : I, (γ.app a).hom.toRingHom.comp (q.app a).hom.toRingHom = (residue B).comp (β.app a).hom.toRingHom)",
+  "branch": "sheaf-dag",
+  "by": "NH",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-619c22493",
+  "group": "NH",
+  "result": "pass",
+  "note": "Only the lean record changed vs live; lean.statement matches the file verbatim; one theorem, sorry only, no defs. All clauses match the node: prime field up to iso; IsRegularLocalRing (local, nonzero, Noetherian); IsAdicComplete; ∃ d = ringKrullDim; generators of the maximal ideal and B-regularity; small nonempty directed PartialOrder I; C over P via natural τ with β∘τ = aeval t; Smooth(Spec.map τ_a); C_a nontrivial, IsRegularRing, regular parameter list (transitions preserve it by naturality); D_a = actual quotient via e normalized on mk = q_a; D_a nontrivial, regular, smooth over k₀; IsRegularClosedImmersionWithCodimension (Spec.map q_a) (const d); two IsColimit statements with the given legs and the square γ∘q = residue∘β; invertible primes carried to stages; d=0 covered. Universe k₀=B=I=u is no loss (ULift prime fields). All stmt_deps used; imports exist; docstrings carry source and blueprint. Maintainer note: Q53 delivered the same module path and declaration in parallel (c09d29e3, PASS at 15:48); land only one, drop the second on collision."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T082508-L-2182808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

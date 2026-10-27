@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-rho-regular-weyl-orbit",
+ "kind": "statement",
+ "title": "Regularity and Weyl orbit of the half sum of positive roots",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $G$ be a reductive $F$-group scheme [def-sc-group-scheme], meaning smooth, connected, affine and of finite type with trivial smooth connected normal unipotent radical. Fix a split maximal torus $T$, a Borel subgroup $B\\supseteq T$, and its finite reduced crystallographic root datum, character lattice $X=X^*(T)$, positive roots $\\Phi^+$, simple roots $\\Delta$ and coroots as in [lem-sfb-reductive-borel-pair-structure]. In the rational span $E$ of the roots inside $X\\otimes_{\\mathbf Z}\\mathbf Q$, put $\\rho=\\tfrac12\\sum_{\\alpha\\in\\Phi^+}\\alpha$. Let $W=N_G(T)(F)/T(F)$ act by $(w\\chi)(t)=\\chi(n_w^{-1}tn_w)$. Then $\\langle\\rho,\\alpha^\\vee\\rangle=1$ for every $\\alpha\\in\\Delta$, and the only $w\\in W$ satisfying $w\\rho=\\rho$ is $1$. There is a unique $w_0\\in W$ with $w_0\\Phi^+=-\\Phi^+$; it satisfies $w_0^2=1$ and $w_0\\rho=-\\rho$, and $$w\\rho=-\\rho\\quad\\Longleftrightarrow\\quad w=w_0.$$ These are identities in the rational character space, so hold for groups in any characteristic. When $\\Phi$ is empty, $E=0$, $W=\\{1\\}$ and $w_0=1$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix C.21--C.22 (p.613), Weyl chambers and the simply transitive Weyl action; Summary 21.41 and Definition 21.72 (p.447). Agent-formulated consequence: a simple reflection permutes the positive roots other than its simple root, hence s_alpha(rho)=rho-alpha, so rho is in the open dominant chamber, with trivial stabilizer."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-sfb-rank-one-root-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "The Borel-pair node gives the finite reduced crystallographic root datum and its simple-root base $\\Delta$, so every positive root is an integral nonnegative combination of $\\Delta$. By [lem-sfb-weyl-reflection-realization], the given quotient $W$ acts faithfully on $E$ and is exactly its root reflection group. In particular it is finite. These are the group and root system to which the chamber theorem will be applied; no faithfulness of a Lie algebra differential is asserted.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-weyl-reflection-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.37--21.38, pp.435--436; C.21, p.612."
+   }
+  },
+  {
+   "text": "Fix $\\alpha\\in\\Delta$. If $\\beta\\in\\Phi^+\\setminus\\{\\alpha\\}$, some coefficient of $\\beta$ at a simple root other than $\\alpha$ is positive: otherwise reducedness would give $\\beta=\\alpha$. In $s_\\alpha\\beta=\\beta-\\langle\\beta,\\alpha^\\vee\\rangle\\alpha$ that coefficient is unchanged. As this is a root and all simple coefficients of a root have the same sign, it is positive. It cannot equal $\\alpha$, since applying the involution $s_\\alpha$ would give $\\beta=-\\alpha$. Thus $s_\\alpha$ permutes $\\Phi^+\\setminus\\{\\alpha\\}$ and sends $\\alpha$ to $-\\alpha$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "C.21, p.612; elementary coefficient argument from the base and reflection definitions."
+   }
+  },
+  {
+   "text": "Reindex the finite sum using the preceding permutation. Then $s_\\alpha\\rho=\\rho-\\alpha$. The reflection formula also gives $s_\\alpha\\rho=\\rho-\\langle\\rho,\\alpha^\\vee\\rangle\\alpha$. Subtracting and using $\\alpha\\ne0$ in the rational vector space gives $\\langle\\rho,\\alpha^\\vee\\rangle=1$. This calculation takes place in $X\\otimes\\mathbf Q$, where $2$ is invertible, regardless of the characteristic of $F$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "C.21, p.612; explicit half-sum calculation following the source of the item."
+   }
+  },
+  {
+   "text": "Put $V=E\\otimes_{\\mathbf Q}\\mathbf R$. In any real basis choose the usual dot product $(\\ ,\\ )_0$ and set $(x,y)=\\sum_{w\\in W}(wx,wy)_0$. Reindexing proves $W$-invariance, and the identity summand makes this form positive definite. For a root $\\alpha$, invariance and $s_\\alpha\\alpha=-\\alpha$ give $(s_\\alpha x,\\alpha)=-(x,\\alpha)$. Substituting the reflection formula yields $\\langle x,\\alpha^\\vee\\rangle=2(x,\\alpha)/(\\alpha,\\alpha)$. Hence these are the orthogonal root reflections of the chamber lemma. The roots span $V$, are reduced, and their reflection coefficients are integers, by the root datum. Its rational base $\\Delta$ remains a real basis after scalar extension. Real proportionality of two rational roots implies rational proportionality by comparing a nonzero rational coordinate, so reducedness also holds over $\\mathbf R$. Extending a rational linear map to this real basis preserves its matrix, so the faithful quotient action remains faithful on $V$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-weyl-reflection-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "C.19--C.20, p.611; finite averaging and the displayed reflection computation."
+   }
+  },
+  {
+   "text": "The pairing identity gives $(\\rho,\\alpha)=(\\alpha,\\alpha)/2>0$ for $\\alpha\\in\\Delta$. Apply [lem-sfb-root-chamber-simple-transitivity] to the preceding real root system: $C=C_\\Delta$ is a chamber containing $\\rho$. If $w\\rho=\\rho$, the chambers $wC$ and $C$ contain the same point, hence coincide as connected components. Simple transitivity makes the induced reflection-group element the identity; faithfulness in [lem-sfb-weyl-reflection-realization] then gives $w=1$ in the normalizer quotient.",
+   "uses": [
+    "lem-sfb-root-chamber-simple-transitivity",
+    "lem-sfb-weyl-reflection-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "C.9--C.10, pp.609--610; C.22, p.612; 21.38, p.436."
+   }
+  },
+  {
+   "text": "The base $-\\Delta$ has chamber $-C$. By the chamber theorem and the identification of $W$, there is a unique $w_0\\in W$ with $w_0C=-C$. For $x\\in C$ and $\\beta\\in\\Phi^+$, invariance gives $(w_0x,w_0\\beta)=(x,\\beta)>0$. The positive roots for $-C$ are $-\\Phi^+$, so $w_0\\Phi^+\\subseteq-\\Phi^+$ and equality follows from the finite equal cardinalities. Conversely, if $w\\Phi^+=-\\Phi^+$, then for $x\\in C$ and $\\gamma\\in\\Phi^+$ one has $w^{-1}\\gamma\\in-\\Phi^+$ and $(wx,\\gamma)=(x,w^{-1}\\gamma)<0$. Thus $wC$ meets $-C$, so the two chambers coincide; uniqueness gives $w=w_0$. Finally $w_0(-C)=-w_0C=C$, so $w_0^2C=C$ and simple transitivity and faithfulness give $w_0^2=1$.",
+   "uses": [
+    "lem-sfb-root-chamber-simple-transitivity",
+    "lem-sfb-weyl-reflection-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.41, p.436, and Definition 21.72, p.447; explicit positive-root/chamber comparison."
+   }
+  },
+  {
+   "text": "Reindexing the half sum by $w_0\\Phi^+=-\\Phi^+$ gives $w_0\\rho=-\\rho$. If $w\\rho=-\\rho=w_0\\rho$, then $(w_0^{-1}w)\\rho=\\rho$; the stabilizer calculation gives $w_0^{-1}w=1$, hence $w=w_0$. The converse is the displayed sum identity. All equalities are rational character-space equalities, so do not require a restriction on $\\operatorname{char}F$. If $\\Phi=\\varnothing$, its span is zero, and the faithful identification with the empty reflection-generated group gives $W=\\{1\\}$, $\\rho=0$ and $w_0=1$; the pairing assertion is vacuous.",
+   "uses": [
+    "lem-sfb-weyl-reflection-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 21.72, p.447; elementary finite-sum and stabilizer assembly, including rank zero."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-weyl-reflection-realization",
+  "lem-sfb-root-chamber-simple-transitivity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "C.19--C.22, pp.611--612; 21.37--21.41, pp.435--436; 21.72, p.447. Explicit elementary half-sum and chamber assembly from these results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The half sum of positive roots pairs to one with simple coroots and has trivial Weyl stabilizer and the longest Weyl element sends it to its negative",
+   "results": "Read returned hits: RootPairing.EmbeddedG2.longRoot, RootPairing.EmbeddedG2.shortAddLong, RootPairing.baseOf_root_eq_baseOf_coroot, RootPairing.EmbeddedG2.twoShortAddLong, RootPairing.EmbeddedG2.threeShortAddLong, RootPairing.EmbeddedG2.threeShortAddTwoLong, RootPairing.EmbeddedG2.ofPairingInThree_long, RootPairing.RootPositiveForm.rootLength_reflectionPerm_self; search digest 8f19caec80ede6f6",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are abstract root-pairing or Lie-algebra facts, not this Weyl chamber conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "RootPairing.Base, \"sum\"",
+   "results": "Read returned hits: RootPairing.Base.height_eq_sum, RootPairing.Base.not_nonneg_iff_neg_of_sum_mem_range_root, RootPairing.Base.not_nonpos_iff_pos_of_sum_mem_range_root, RootPairing.Base.exists_root_eq_sum_int, RootPairing.Base.pos_or_neg_of_sum_smul_root_mem, RootPairing.Base.exists_eq_sum_and_forall_sum_mem_of_isPos, RootPairing.Base.exists_root_eq_sum_nat_or_neg, RootPairing.GeckConstruction.apply_sum_inl_eq_zero_of_mem_span_h; search digest 72be38c3724cb3d2",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are abstract root-pairing or Lie-algebra facts, not this Weyl chamber conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "weylVector|halfSum|half_sum|sum_pos|sum_positive",
+   "results": "Read returned hits: Mathlib/LinearAlgebra/RootSystem/Base.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean, Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean; search digest b555966d259eb465",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are abstract root-pairing or Lie-algebra facts, not this Weyl chamber conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A regular dominant weight has trivial stabilizer in the Weyl group and rho is strictly dominant",
+   "results": "Read returned hits: RootPairing.reflection_mem_weylGroup, RootPairing.isSimpleModule_weylGroupRootRep_iff, RootPairing.span_orbit_eq_top, LieAlgebra.IsKilling.corootSpace_eq_bot_iff, LieModule.Weight.genWeightSpace_ne_bot, LieModule.injOn_genWeightSpace, RootPairing.weylGroupRootRep, RootPairing.Base.toWeightBasis.congr_simp; search digest 55f1c8c98d43d768",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are abstract root-pairing or Lie-algebra facts, not this Weyl chamber conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finite reduced crystallographic root system rho the half sum of positive roots lies in the open Weyl chamber and only the longest element carries rho to negative rho",
+   "results": "Read returned hits: RootPairing.Base.IsPos.reflectionPerm, RootPairing.Base.IsPos.induction_on_reflect, RootPairing.baseOf_pairwise_pairing_le_zero, RootPairing.EmbeddedG2.ofPairingInThree_long, RootPairing.chainBotCoeff_reflectionPerm_right, RootPairing.chainTopCoeff_reflectionPerm_right, RootPairing.chainTopCoeff_reflectionPerm_left, RootPairing.chainBotCoeff_reflectionPerm_left; search digest 817c88841441909f",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are abstract root-pairing or Lie-algebra facts, not this Weyl chamber conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "weylVector|halfSum|half_sum|chamber|simply_transitive",
+   "results": "Read hits: none; ; search digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration proves the full rho and longest-element statement for the algebraic-group Weyl quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A regular vector in a Weyl chamber has trivial stabilizer under the Weyl group",
+   "results": "Read hits: RootPairing.weylGroup_apply_root, RootPairing.isSimpleModule_weylGroupRootRep_iff, IsCancelSMul.stabilizer_eq_bot, RootPairing.weylGroup, RootPairing.weylGroup.induction', LieAlgebra.isRegular_iff_coeff_polyCharpoly_rank_ne_zero, RootPairing.InvariantForm.apply_weylGroup_smul, RootPairing.weylGroup.ofIdx_smul; ; search digest ee14584e5e64fecc",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration proves the full rho and longest-element statement for the algebraic-group Weyl quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "RootPairing.Base, \"sum\"",
+   "results": "Read hits: RootPairing.Base.height_eq_sum, RootPairing.Base.not_nonneg_iff_neg_of_sum_mem_range_root, RootPairing.Base.not_nonpos_iff_pos_of_sum_mem_range_root, RootPairing.Base.exists_root_eq_sum_int, RootPairing.Base.pos_or_neg_of_sum_smul_root_mem, RootPairing.Base.exists_eq_sum_and_forall_sum_mem_of_isPos, RootPairing.Base.exists_root_eq_sum_nat_or_neg, RootPairing.GeckConstruction.apply_sum_inl_eq_zero_of_mem_span_h; ; search digest 72be38c3724cb3d2",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration proves the full rho and longest-element statement for the algebraic-group Weyl quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The half sum of positive roots pairs to one with every simple coroot and has trivial Weyl stabilizer",
+   "results": "Read hits: RootPairing.baseOf_root_eq_baseOf_coroot, RootPairing.IsReduced, RootPairing.Base.exists_eq_sum_and_forall_sum_mem_of_isPos, LieAlgebra.IsKilling.rootSpace_one_div_two_smul, RootPairing.pairingIn_same, RootPairing.InvariantForm.exists_apply_eq_or, RootPairing.Base.IsPos.add_zsmul, RootPairing.EmbeddedG2.ofPairingInThree_long; ; search digest c9c50f7780841b90",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration proves the full rho and longest-element statement for the algebraic-group Weyl quotient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-double-flag-invariant-boundary",
+  "date": "2026-10-23",
+  "group": "Q158"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Large rho tensor squares detect a nonzero invariant vector. Geometric input: opposite flags form the nonvanishing locus of the invariant rho external-square section. Supporting input: Regularity and Weyl orbit of the half sum of positive roots.",
+   "via": [
+    "lem-sfb-double-flag-invariant-boundary",
+    "lem-sfb-rho-tensor-square-eventual-detection",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-rho-regular-weyl-orbit",
+  "worker": "stage1",
+  "summary": "Checked Milne and the current blueprint route. Proved the simple-reflection half-sum identity directly from root coefficients, constructed the invariant real inner product by finite averaging, and deduced the stabilizer and longest-element claims from chamber geometry. Created two strictly supporting general lemmas; retained the complete mathematical statement, rank-zero case and inherited searches, normalizing doubled TeX escapes. No Lean attachment or Mathlib leaf found.",
+  "blueprint": "Supporting root-system input along det-thm-sf-ctf-stability-direct-images proof (3), through the inherited alteration/projectivity/Haboush/double-flag chain. Steps 1--4 set up Milne C.19--C.22; steps 5--7 supply exactly the rho regularity and opposite-orbit input of lem-sfb-double-flag-invariant-boundary."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-762afb92e",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-762afb92e (reviewer sub-agent of L); spot-checked: PASS, no fixes. Read Milne (pdftotext): 21.37/21.38 and 21.41 on pp.435-436, 21.72, C.9-C.10 on pp.609-610, C.15/C.19/C.20 on p.611, C.21-C.22 on p.612 (the item's inherited source says p.613, a maintainer-owned field, noted only), C.45-C.46 on pp.618-619. Not a re-split: live and side-live have the item unsplit with no proof and there is no repair note. Statement and stmt_deps are identical to live. Steps 1-7 checked. Step 2: reducedness forces a nonzero coefficient at another simple root, and same-sign coefficients make s_alpha permute Phi+ minus alpha. Step 3 gives <rho,alpha^vee>=1 in X tensor Q. Step 4: the averaged invariant form and 2(x,a)/(a,a) as in C.20; every hypothesis of the chamber node holds (real reducedness comes from rational reducedness via a nonzero rational coordinate). Steps 5-6: the stabilizer is trivial; w0 exists and is unique via the chamber of -Delta, with the converse argued; w0^2=1. Step 7 and the empty case are correct. Small cases A1, GL2, A1xA1, A2 (w0 != -1) and SL2 in characteristic 2 all pass. New node weyl-reflection-realization is true (21.37/21.38, faithfulness on X, X tensor Q = E plus the annihilator of the coroots) and is not a duplicate of rank-one-reflections, longest-weyl-open-cell or torus-normalizer-components. New node root-chamber-simple-transitivity is the true standard theorem, self-contained, with no Mathlib match (Base.lean mentions simple transitivity only in prose). Neither new node restates a clause of the item. Blueprint fields, created and searches are fine, and all citations stay in unit sk-thm-sf-ctf-stability. Batch-5 flag (realization -> reductive-borel-pair-structure -> lem-trf-fppf-covering-base-change): that node is a generic Mathlib-leaf fact about fppf coverings under base change, not part of the trace formula or Poincare duality, and the cite is a stmt_dep for notation only; accepted. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RhoRegularWeylOrbit",
+  "declaration": "AlgebraicGeometry.rho_regular_weyl_orbit",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RhoRegularWeylOrbit.lean",
+  "statement": "theorem rho_regular_weyl_orbit {F : Type u} [Field F] [IsAlgClosed F] (G T B : Grp (Over (Spec (.of F)))) (hG : ReductiveTorusCentralizer.IsReductive G) (iT : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (iB : B ⟶ G) (hB : IsBorelGroupScheme iB.hom.hom) (j : T ⟶ B) (hj : j ≫ iB = iT) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (aG : ModObj T.X G.X) (aB : ModObj T.X B.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) (b : P.Base) [P.IsReduced] (hconjG : aG.smul = (iT.hom.hom ⊗ₘ 𝟙 G.X) ≫ GrpObj.conj G.X) (hconjB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (hroot : ∀ α : Φ, P.root α = α.val) (hpair : ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) (hweights : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T G aG χ.toMul ≠ ⊥) (hpos : ∀ α : Φ, b.IsPos α ↔ @TorusCharacterTangent.weightSpace F _ T B aB α.val.toMul ≠ ⊥) (ρ : TensorProduct ℤ ℚ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (hρ : ρ = (1 / 2 : ℚ) • ∑ β ∈ (@Finset.filter Φ b.IsPos (Classical.decPred _) Finset.univ), TensorProduct.tmul ℤ (1 : ℚ) (P.root β)) : (∀ α ∈ b.support, (1 / 2 : ℚ) * ∑ β ∈ (@Finset.filter Φ b.IsPos (Classical.decPred _) Finset.univ), (P.toLinearMap (P.root β) (P.coroot α) : ℚ) = 1) ∧ ∃ (act : RankOneRoots.Weyl iT →* Aut T) (ract : RankOneRoots.Weyl iT →* (TensorProduct ℤ ℚ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) ≃ₗ[ℚ] TensorProduct ℤ ℚ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))))), (∀ (n : RankOneRoots.normalizer iT) (A : CommAlgCat.{u} F) (t : StandardGroupSchemes.affine F A ⟶ T.X), t ≫ (act (QuotientGroup.mk n)).hom.hom.hom ≫ iT.hom.hom = (toUnit (StandardGroupSchemes.affine F A) ≫ n.val) * (t ≫ iT.hom.hom) * (toUnit (StandardGroupSchemes.affine F A) ≫ n.val)⁻¹) ∧ (∀ (w : RankOneRoots.Weyl iT) (q : ℚ) (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))), ract w (TensorProduct.tmul ℤ q χ) = TensorProduct.tmul ℤ q (Additive.ofMul ((act w).inv ≫ χ.toMul))) ∧ (∀ w : RankOneRoots.Weyl iT, ract w ρ = ρ ↔ w = 1) ∧ ∃ w₀ : RankOneRoots.Weyl iT, (∀ w : RankOneRoots.Weyl iT, Set.image (fun β : Φ ↦ Additive.ofMul ((act w).inv ≫ β.val.toMul)) {β : Φ | b.IsPos β} = Set.image (fun β : Φ ↦ -β.val) {β : Φ | b.IsPos β} ↔ w = w₀) ∧ w₀ ^ 2 = 1 ∧ ract w₀ ρ = -ρ ∧ (∀ w : RankOneRoots.Weyl iT, ract w ρ = -ρ ↔ w = w₀) ∧ (Φ = ∅ → Submodule.span ℚ (Set.range (fun β : Φ ↦ TensorProduct.tmul ℤ (1 : ℚ) (P.root β))) = ⊥ ∧ (∀ w : RankOneRoots.Weyl iT, w = 1) ∧ w₀ = 1)",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The statement uses the recorded reductive Borel-pair root datum and the recorded normalizer quotient Weyl group. The rational root space is the explicit tensor product TensorProduct ℤ ℚ of the additive character lattice; hρ identifies the supplied rho with the half-sum."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8327997a8",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Node diff vs live: lean record + stmt_dep def-sfb-rank-one-root-interfaces (used via RankOneRoots.Weyl/normalizer); statement verbatim, sorry only, no defs. Hypotheses = exact data/pins of landed reductive_borel_pair_structure (Module.Finite dropped, weaker). W = actual normalizer quotient; act pinned by n t n^-1 on all A-points (same convention as landed reductive_rankOne_reflections), ract pinned on pure tensors, hom property checked against Aut mul. All clauses present: <rho,alpha^vee>=1 on b.support via Q-linear pairing, stabilizer iff w=1, unique w0 with w0 Phi+ = -Phi+ (iff form), w0^2=1, w0 rho=-rho, w rho=-rho iff w=w0, Phi=empty -> span=bot, W trivial, w0=1. Coroot pinning sufficient (Cartan integers determined). Universe u only, no char hypothesis. No duplicate rho/longest-element notion in project or Mathlib. Docstrings carry source and blueprint tag. Advisory H9: plain imports ReductiveRankOneReflections and RootSystem.WeylGroup unused by the statement."
+ }
+}

@@ -1,0 +1,149 @@
+{
+ "id": "lem-sfb-log-infinitesimal-pullback",
+ "kind": "statement",
+ "title": "Etale-local logarithmic lifts through a log fibre product",
+ "statement": "Let $p:X'\\to X$, $q:X'\\to Y'$, $f:X\\to Y$ and $h:Y'\\to Y$ be arbitrary log maps [def-trf-log-ideal-chart-presentation], with composites as in [lem-sfb-log-morphism-operations]. Suppose $f\\circ p=h\\circ q$, and the square has the universal factorization property for all test log structures [lem-sfb-strict-log-pullback-universal]. If $f$ has etale-local infinitesimal lifts [def-sfb-log-infinitesimal-lifting-properties], then so does $q$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 3.3.5--3.3.6, p.107; X 1.2, pp.136--139. Explicit pairing-of-lifts argument by F3."
+ },
+ "stmt_deps": [
+  "def-trf-log-ideal-chart-presentation",
+  "def-sfb-log-infinitesimal-lifting-properties",
+  "lem-sfb-log-morphism-operations",
+  "lem-sfb-strict-log-pullback-universal"
+ ],
+ "proof": [
+  {
+   "text": "Project a strict fine square-zero test for q along p and h. Associativity and the square equation make it a test for f. Use the local lifting property of f, keeping exactly its etale neighbourhood, restricted log structures, strict etale restriction maps and test immersion.",
+   "uses": [
+    "def-sfb-log-infinitesimal-lifting-properties",
+    "lem-sfb-log-morphism-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pair the chosen lift to X with the fixed neighbourhood map to Yprime by the log pullback property. Its projection to Yprime is the required bottom map. Its restriction to the test thickening equals the prescribed top map because both projections agree; uniqueness in the same product property gives equality. This supplies every witness in the local lifting predicate.",
+   "uses": [
+    "def-sfb-log-infinitesimal-lifting-properties",
+    "lem-sfb-log-morphism-operations",
+    "lem-sfb-strict-log-pullback-universal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-log-infinitesimal-lifting-properties",
+  "lem-sfb-log-morphism-operations",
+  "lem-sfb-strict-log-pullback-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 3.3.5--3.3.6, p.107; X 1.2, pp.136--139. Explicit pairing-of-lifts argument by F3. The proof text records the construction, not a claim that ILO writes every relative-section detail."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Formal logarithmic smoothness is stable under composition and strict base change and chart smoothness is etale local",
+   "results": "OK 8 hits: RingHom.isStandardSmooth_stableUnderComposition, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.isStandardSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, Algebra.FormallySmooth.comp, RingHom.FormallySmooth.stableUnderComposition, RingHom.Smooth.isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "No logarithmic match. Returned results concern ordinary schemes or rings; these log interfaces are project definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Log morphisms form a category, unique and local infinitesimal lifts compose, strict log fibre products preserve lifts, strict etale chart transport, and saturated blowup chart covers",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instCategory, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.IsSmoothOfRelativeDimension",
+   "date": "2026-10-23",
+   "verdict": "No logarithmic match. Returned results concern ordinary schemes or rings; these log interfaces are project definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EtaleLogMap\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No logarithmic match. Returned results concern ordinary schemes or rings; these log interfaces are project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "EtaleLogMap|FSLogChart|IsSaturatedLogBlowup|EtaleLogHom",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No logarithmic match. Returned results concern ordinary schemes or rings; these log interfaces are project definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FSLogSmoothCompositionStrictBaseChange",
+  "date": "2026-10-23",
+  "group": "F3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; log-smooth composition in step 6 and preservation under the saturated log-blowup tower in step 9. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Supporting input: Etale-local logarithmic lifts through a log fibre product.",
+   "via": [
+    "lem-sfb-log-smooth-composition-strict-base-change",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LogInfinitesimalPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/LogInfinitesimalPullback.lean",
+  "declaration": "AlgebraicGeometry.EtaleLogMap.localLifts_pullback",
+  "declarations": [
+   "AlgebraicGeometry.EtaleLogMap.localLifts_pullback"
+  ],
+  "statement": "theorem EtaleLogMap.localLifts_pullback {X X' Y Y' : Scheme.{u}}\n    {M : EtaleLogStructure X} {M' : EtaleLogStructure X'}\n    {N : EtaleLogStructure Y} {N' : EtaleLogStructure Y'}\n    (p : EtaleLogMap M' M) (q : EtaleLogMap M' N')\n    (f : EtaleLogMap M N) (h : EtaleLogMap N' N)\n    (hs : p.comp f = q.comp h) (hu : p.IsLogPullback q f h)\n    (hf : f.HasEtaleLocalInfinitesimalLifts) : q.HasEtaleLocalInfinitesimalLifts",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261023T151841-L-417408",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261023T151841-L-417408",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

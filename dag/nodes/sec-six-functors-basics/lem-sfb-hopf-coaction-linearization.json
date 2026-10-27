@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-hopf-coaction-linearization",
+ "kind": "statement",
+ "title": "Semilinear coactions and linearizations on an affine action groupoid",
+ "statement": "Let $k$ be a field [def-weil-field] and $H$ an affine group scheme over $k$ [def-sc-group-scheme]. Write $C=k[H]$, with comultiplication $\\Delta$, counit $\\epsilon$ and antipode $S$ induced by multiplication, identity and inversion of $H$. Let $E$ be a commutative $k$-algebra with a $k$-algebra map $\\rho_E:E\\to E\\otimes_k C$ satisfying $(\\rho_E\\otimes1)\\rho_E=(1\\otimes\\Delta)\\rho_E$ and $(1\\otimes\\epsilon)\\rho_E=1_E$. Put $L=E\\otimes_k C$, $s^\\sharp=\\rho_E$ and $t^\\sharp(e)=e\\otimes1$. The associated affine action groupoid has arrows $(x,h):x\\cdot h\\to x$, with composition $(x,h)\\circ(x\\cdot h,g)=(x,hg)$; its identity and composition maps are dual to $\\epsilon,\\Delta$. For every $E$-module $M$, the formula $\\theta(m)=\\delta(m\\otimes1)$ is a bijection between (i) $L$-linear isomorphisms $\\delta:M\\otimes_{E,s^\\sharp}L\\simeq M\\otimes_{E,t^\\sharp}L=M\\otimes_k C$ whose identity pullback is $1_M$ and whose pullbacks along composable arrows satisfy $\\delta_a\\delta_b=\\delta_{a\\circ b}$, and (ii) $k$-linear maps $\\theta:M\\to M\\otimes_k C$ such that $\\theta(em)=\\rho_E(e)\\theta(m)$, $(1\\otimes\\epsilon)\\theta=1_M$, and $(\\theta\\otimes1)\\theta=(1\\otimes\\Delta)\\theta$. The inverse bijection is $\\delta(m\\otimes l)=\\theta(m)l$. Its inverse $L$-linear map, in finite-sum Sweedler notation $\\theta(m)=\\sum m_{(0)}\\otimes m_{(1)}$, is\n$$m\\otimes h\\longmapsto\\sum m_{(0)}\\otimes(1\\otimes S(m_{(1)})h).$$\nAn $E$-linear map of modules commutes with the linearizations if and only if it commutes with their coactions. The correspondence takes the unit module with canonical datum to $(E,\\rho_E)$, and the tensor-product datum to the coaction\n$$\\theta_{M\\otimes_E N}(m\\otimes n)=\\sum(m_{(0)}\\otimes n_{(0)})\\otimes m_{(1)}n_{(1)}.$$\nTensor products have the meaning in [def-weil-pbc-module-tensor-product]. No finite type, smoothness, or finiteness assumption on $E$ or $M$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03LF (definition-equivariant-module), affine translation of its identity and cocycle diagrams. The stated explicit Hopf inverse and tensor formulas are the algebraic expansion of these diagrams and the inverse group law."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-sfb-hopf-action-module-data"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-affine-group-coordinate-hopf] for the coassociative algebra map $\\Delta$, counit $\\epsilon$, algebra map $S$, and both antipode cancellations. All sums below denote finite presentations of tensor elements, not a basis or a completion. Write $\\Delta(c)=\\sum c_1\\otimes c_2$, $\\rho_E(e)=\\sum e_0\\otimes e_1$, and $\\theta(m)=\\sum m_0\\otimes m_1$. Repeated indices mean application of the specified linear maps to these presentations; equality is equality in a tensor product. Multiplication of coefficients uses [lem-weil-pbc-algebra-tensor-pushout-universal-property](1), so $(e\\otimes c)(f\\otimes d)=ef\\otimes cd$.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 022S (definition-group-scheme), affine group-law identities needed for the expansion of Tag 03LF."
+   }
+  },
+  {
+   "text": "For $r=s^\\sharp$ or $t^\\sharp$, let $M_r=M\\otimes_{E,r}L$, with its $L$-action as in [def-weil-module-base-change]. For $t^\\sharp(e)=e\\otimes1$ there is an explicit $L$-linear identification $M_t\\simeq M\\otimes_k C$: send $m\\otimes(e\\otimes c)$ to $em\\otimes c$, with inverse $m\\otimes c\\mapsto m\\otimes(1\\otimes c)$. Both respect the tensor relations of [def-weil-pbc-module-tensor-product], and their composites fix the displayed generators. On the right $(e\\otimes c)(m\\otimes d)=em\\otimes cd$. Apply [lem-weil-pbc-module-base-change-universal-property] to $E\\xrightarrow{\\rho_E}L$, $M$, and this target $M_t$, swapping the two tensor factors to match that lemma's convention. It gives a bijection between $L$-linear maps $d:M_s\\to M_t$ (without an invertibility condition yet) and additive maps $\\theta:M\\to M\\otimes_k C$ with $\\theta(em)=\\rho_E(e)\\theta(m)$. Since $\\rho_E$ is a $k$-algebra map this is precisely $k$-linearity plus the stated semilinearity. The maps of the bijection are $\\theta(m)=d(m\\otimes1)$ and $d(m\\otimes l)=\\theta(m)l$.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-module-base-change-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03LF (definition-equivariant-module), affine interpretation of the map alpha; algebra.tex Tag 00CX, lemma-tensor-product, for balancing."
+   }
+  },
+  {
+   "text": "Pull back along the identity by the algebra map $u_L:L\\to E$, $e\\otimes c\\mapsto e\\epsilon(c)$. Since $u_Ls^\\sharp=u_Lt^\\sharp=1_E$, both pulled-back modules identify with $M$: on a tensor generator the identification is $(m\\otimes l)\\otimes e\\mapsto u_L(l)em$, with inverse $m\\mapsto(m\\otimes1)\\otimes1$. These formulas respect the tensor relations and compose to the identity by [def-weil-pbc-module-tensor-product]. For the map $d$ of step 2, its identity pullback sends $m$ to $\\sum m_0\\epsilon(m_1)$. Thus it is $1_M$ if and only if $(1\\otimes\\epsilon)\\theta=1_M$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03LF, identity diagram (2), evaluated on generators."
+   }
+  },
+  {
+   "text": "The coordinate ring of composable arrows $((x,h),(x\\cdot h,g))$ is $P=E\\otimes_k C\\otimes_k C$. Indeed [lem-weil-pbc-fibre-product-affine-spectra] makes it $L_a\\otimes_E L_b$, using $s^\\sharp:E\\to L_a$ and $t^\\sharp:E\\to L_b$. The isomorphism is\n$$(e\\otimes c)\\otimes(f\\otimes d)\\longmapsto\\sum ef_0\\otimes cf_1\\otimes d,$$\nwith inverse $e\\otimes c\\otimes d\\mapsto(e\\otimes c)\\otimes(1\\otimes d)$. The balancing relation moves $f$ from the second factor to $\\rho_E(f)$ in the first; the formulas are inverse on pure tensors, by [def-weil-pbc-module-tensor-product] and the product formula of [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Under this identification, pullback along the first arrow, second arrow and composite uses, respectively,\n$$p_a(e\\otimes c)=e\\otimes c\\otimes1,\\quad p_b(e\\otimes c)=\\sum e_0\\otimes e_1\\otimes c,\\quad p_{ab}(e\\otimes c)=\\sum e\\otimes c_1\\otimes c_2.$$\nThe first two formulas are the two inclusions into the balanced product; the third is multiplication of the group coordinate, hence $\\Delta$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03LF, cocycle diagram (1); schemes.tex Tag 01I4, lemma-fibre-product-affine-schemes, for the composable-pair affine ring."
+   }
+  },
+  {
+   "text": "Use the maps $p_a,p_b,p_{ab}$ from step 4. The source of the two composite maps is extension of $M$ along $E\\to P$, $e\\mapsto\\sum e_{00}\\otimes e_{01}\\otimes e_1$; by the assumed coassociativity of $\\rho_E$ this also equals $\\sum e_0\\otimes(e_1)_1\\otimes(e_1)_2$. The target is $M\\otimes_k C\\otimes_k C$. On its source generator $m\\otimes1$, the pullback of $d_b$ gives $\\sum m_0\\otimes1\\otimes m_1$ in the intermediate module, and the pullback of $d_a$ then gives $\\sum m_{00}\\otimes m_{01}\\otimes m_1$. The composite-arrow map gives $\\sum m_0\\otimes(m_1)_1\\otimes(m_1)_2$. These formulas follow by substituting the three ring maps into $d(m\\otimes l)=\\theta(m)l$; all extensions and their identifications send a pure tensor to the indicated product of coefficients by [def-weil-module-base-change] and [def-weil-pbc-module-tensor-product]. The source is generated over $P$ by $m\\otimes1$, so the cocycle equation is equivalent, in both directions, to $(\\theta\\otimes1)\\theta=(1\\otimes\\Delta)\\theta$.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03LF, cocycle diagram (1), both sides computed on a generating tensor."
+   }
+  },
+  {
+   "text": "For a coaction $\\theta$ satisfying (ii), step 2 constructs $d$. Before checking its inverse, record the coefficient identity\n$$\\sum\\rho_E(e_0)(1\\otimes S(e_1))=e\\otimes1.$$\nIn fact the left side is $\\sum e_{00}\\otimes e_{01}S(e_1)=\\sum e_0\\otimes(e_1)_1S((e_1)_2)=\\sum e_0\\otimes\\epsilon(e_1)1=e\\otimes1$. These equalities use, in order, the assumed coassociativity of $\\rho_E$, the $\\mu(1\\otimes S)\\Delta=u\\epsilon$ clause of [lem-sfb-affine-group-coordinate-hopf], and the assumed counit of $\\rho_E$. No cancellation of a scalar and no flatness argument is involved.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 022S, right inverse law, applied after the given algebra coaction; explicit algebraic calculation supporting Tag 03LF."
+   }
+  },
+  {
+   "text": "Define $b:M\\otimes_k C\\to M_s$ by $b(m\\otimes c)=\\sum m_0\\otimes_{E,s^\\sharp}(1\\otimes S(m_1)c)$. This is well defined and $k$-linear: it is the composite of $\\theta\\otimes1$, $1\\otimes S\\otimes1$, multiplication of the two $C$ factors, and $m\\otimes c\\mapsto m\\otimes_{E,s^\\sharp}(1\\otimes c)$, all linear maps obtained from the tensor universal property [def-weil-pbc-module-tensor-product]. It commutes with multiplication by $1\\otimes c$ directly. For $e\\in E$, semilinearity and multiplicativity of $S$ give\n$$b(em\\otimes c)=\\sum e_0m_0\\otimes_s(1\\otimes S(e_1)S(m_1)c)=\\sum m_0\\otimes_s\\rho_E(e_0)(1\\otimes S(e_1)S(m_1)c)=(e\\otimes1)b(m\\otimes c).$$\nThe middle equality is the defining balancing relation in $M_s$, and the last is step 6. By [lem-weil-pbc-algebra-tensor-pushout-universal-property](1), pure products of $e\\otimes1$ and $1\\otimes c$ additively generate $L$, so $b$ is $L$-linear. This proves the required balancing of the inverse, rather than presuming it from the displayed formula.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 022S, inverse law; Tag 03LF, affine inverse calculation; the formula is an agent-written expansion."
+   }
+  },
+  {
+   "text": "Both inverse composites are explicit. On $m\\otimes c\\in M_t$,\n$$db(m\\otimes c)=\\sum m_{00}\\otimes m_{01}S(m_1)c=\\sum m_0\\otimes(m_1)_1S((m_1)_2)c=m\\otimes c.$$\nOn the $L$-module generators $m\\otimes_s1\\in M_s$,\n$$bd(m\\otimes_s1)=\\sum m_{00}\\otimes_s(1\\otimes S(m_{01})m_1)=\\sum m_0\\otimes_s(1\\otimes S((m_1)_1)(m_1)_2)=m\\otimes_s1.$$\nIn each line coassociativity of $\\theta$ gives the second expression; the corresponding antipode identity of [lem-sfb-affine-group-coordinate-hopf] and the counit of $\\theta$ give the last. Generation by pure tensors is in [def-weil-pbc-module-tensor-product]. Thus $d$ is an isomorphism with exactly the inverse asserted. Steps 3 and 5 supply its identity and cocycle conditions. Conversely those conditions on an isomorphism supply (ii). Step 2 already proves the assignments are inverse bijections, so no choice of tensor presentations enters them.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 022S, both inverse laws; Tag 03LF, identity and cocycle axioms; explicit inverse compositions."
+   }
+  },
+  {
+   "text": "Let $f:M\\to N$ be $E$-linear. On the source generator $m\\otimes_s1$, the equation $(f\\otimes1)d_M=d_N(f\\otimes1)$ reads $(f\\otimes1)\\theta_M(m)=\\theta_N(f(m))$. These generators suffice, so the equation for linearizations holds if and only if that for coactions does. The induced maps on both scalar extensions have the formula of [def-weil-module-base-change], and equality on generators follows from [def-weil-pbc-module-tensor-product]. This also checks compatibility with composition and identities of module maps.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03LF, morphisms commuting with the equivariance datum, affine generator calculation."
+   }
+  },
+  {
+   "text": "For the unit module $M=E$, identify $E\\otimes_{E,r}L$ with $L$ by $e\\otimes l\\mapsto r(e)l$ for either $r=s^\\sharp,t^\\sharp$. These maps have inverse $l\\mapsto1\\otimes l$, as their composites agree on pure tensors by [def-weil-pbc-module-tensor-product]. The canonical unit datum is the identity of $L$ under these identifications. Hence it takes $e\\otimes_s1$ to $1\\otimes_t\\rho_E(e)$, and step 2 associates precisely $\\theta_E(e)=\\rho_E(e)$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03LF, structure-module datum, computed under scalar extension."
+   }
+  },
+  {
+   "text": "For either $r=s^\\sharp,t^\\sharp$, the tensor comparison is\n$$(M\\otimes_E N)\\otimes_{E,r}L\\simeq(M\\otimes_{E,r}L)\\otimes_L(N\\otimes_{E,r}L),\\qquad (m\\otimes n)\\otimes l\\mapsto(m\\otimes1)\\otimes(n\\otimes l).$$\nIts inverse sends $(m\\otimes a)\\otimes(n\\otimes b)$ to $(m\\otimes n)\\otimes ab$. The $E$-balancing relations on both sides map to multiplication by $r(e)$ and the $L$-balancing relation maps to $ab$; the composites fix the displayed generators. Thus [def-weil-pbc-module-tensor-product] proves these formulas define inverse linear maps. Under them the tensor-product datum is $d_M\\otimes_L d_N$, with inverse $b_M\\otimes_L b_N$. Evaluation on $(m\\otimes n)\\otimes1$ gives exactly\n$$\\theta_{M\\otimes_E N}(m\\otimes n)=\\sum(m_0\\otimes n_0)\\otimes m_1n_1.$$\nThe construction of induced bilinear maps under scalar extension is also explicitly stated in [def-weil-module-base-change].",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03LF, tensoring equivariance maps; algebra.tex Tag 00CX, universal property, for the tensor comparisons."
+   }
+  },
+  {
+   "text": "Check the displayed tensor formula on the quotient and its axioms. Replacing $em\\otimes n$ by $m\\otimes en$ gives respectively $\\sum(e_0m_0\\otimes n_0)\\otimes e_1m_1n_1$ and $\\sum(m_0\\otimes e_0n_0)\\otimes m_1e_1n_1$; these are equal by $E$-balancing and commutativity of $C$. Multiplying $m\\otimes n$ by $e$ therefore multiplies its coaction by $\\rho_E(e)$. Counitality follows by multiplying the two counit sums, using multiplicativity of $\\epsilon$. For coassociativity, both sides, after using the individual coassociativity equations, are\n$$\\sum(m_0\\otimes n_0)\\otimes(m_1)_1(n_1)_1\\otimes(m_1)_2(n_1)_2,$$\nsince $\\Delta$ is multiplicative by [lem-sfb-affine-group-coordinate-hopf]. Thus the tensor datum has exactly the asserted coaction, including all its axioms. The computations are finite on each element and use neither finite generation nor smoothness; they cover zero modules and the zero algebra $E$ as well.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03LF, tensor-product datum; Tag 022S, multiplicativity of the coordinate coproduct and counit; explicit balancing and coassociativity calculations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-module-base-change-universal-property",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tags 03LF (definition-equivariant-module) and 022S (definition-group-scheme), affine coordinate calculations written out. Stacks supplies the axioms, not these finite-sum inverse and balancing calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "comodule|linearization|linearisation|semilinear.*coaction",
+   "results": "Actual returned hits: Mathlib/Algebra/Jordan/Basic.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/RepresentationTheory/Rep/Iso.lean, Mathlib/RepresentationTheory/Rep/Iso.lean, Mathlib/RepresentationTheory/Rep/Iso.lean, Mathlib/RepresentationTheory/Rep/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: Hopf antipode identities and abstract-group linearizations do not state this semilinear comodule/action-groupoid equivalence, its balanced inverse, or its tensor comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hopf comodule semilinear modules and descent isomorphisms for affine group scheme actions",
+   "results": "Actual returned hits: SemilinearEquivClass.semilinearEquiv, SemilinearEquivClass, HopfAlgCat.of_comul, ModuleCat.semilinearMapAddEquiv, BialgEquiv.toHopfAlgIso_hom, GroupLike.instCommGroup, HopfAlgebraStruct.noConfusionType, HopfAlgebra.mul_antipode_rTensor_comul",
+   "date": "2026-10-23",
+   "verdict": "no match: Hopf antipode identities and abstract-group linearizations do not state this semilinear comodule/action-groupoid equivalence, its balanced inverse, or its tensor comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\", \"equiv\"",
+   "results": "Actual returned hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: Hopf antipode identities and abstract-group linearizations do not state this semilinear comodule/action-groupoid equivalence, its balanced inverse, or its tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Hopf algebra action on an algebra, equivariant modules are modules with a counital coassociative coaction and the descent map inverse uses the antipode",
+   "results": "Actual returned hits: HopfAlgebra.ofAlgHom, HopfAlgebra.mul_antipode_lTensor_comul_apply, HopfAlgebra.mul_antipode_rTensor_comul_apply, HopfAlgebra.mul_antipode_lTensor_comul, HopfAlgebra.mul_antipode_rTensor_comul, HopfAlgebra.sum_antipode_mul_eq_smul, HopfAlgebra.sum_mul_antipode_eq_smul, HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit",
+   "date": "2026-10-23",
+   "verdict": "no match: Hopf antipode identities and abstract-group linearizations do not state this semilinear comodule/action-groupoid equivalence, its balanced inverse, or its tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semilinear Hopf comodule over a comodule algebra is equivalent to an invertible linearization on the affine action groupoid using the antipode",
+   "results": "Actual returned hits: Rep.linearizationOfMulActionIso, HopfAlgebra.ofAlgHom, HopfAlgebra.mul_antipode_lTensor_comul_apply, MonoidAlgebra.antipode_single, MonoidAlgebra.instHopfAlgebra, HopfAlgCat.of_comul, HopfAlgCat.MonoidalCategory.inducingFunctorData, MonoidAlgebra.instHopfAlgebraStruct",
+   "date": "2026-10-23",
+   "verdict": "no match: Hopf antipode identities and abstract-group linearizations do not state this semilinear comodule/action-groupoid equivalence, its balanced inverse, or its tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semilinear comodules over a Hopf comodule algebra correspond to linearization isomorphisms on the affine action groupoid",
+   "results": "Actual returned hits: Rep.linearizationOfMulActionIso, Rep.linearization, Rep.linearization_ε_hom, Rep.linearizationTrivialIso_hom_hom, Rep.linearization_δ_hom, Rep.linearizationTrivialIso_inv_hom, Rep.linearizationTrivialIso, Action.functorCategoryEquivalence_linear (8 hits).",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Rep.linearization constructions freely linearize abstract monoid actions on types; they do not state a semilinear comodule/action-groupoid equivalence or its inverse over the balanced E-tensor product. The Hopf coordinate-ring prerequisite is separately a Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\", \"equiv\"",
+   "results": "Actual returned hits:  (0 hits).",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Rep.linearization constructions freely linearize abstract monoid actions on types; they do not state a semilinear comodule/action-groupoid equivalence or its inverse over the balanced E-tensor product. The Hopf coordinate-ring prerequisite is separately a Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "comodule|semilinear.*coaction|coaction.*linearization",
+   "results": "Actual returned hits:  (0 hits).",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Rep.linearization constructions freely linearize abstract monoid actions on types; they do not state a semilinear comodule/action-groupoid equivalence or its inverse over the balanced E-tensor product. The Hopf coordinate-ring prerequisite is separately a Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semilinear Hopf coactions correspond to linearizations of modules over an affine action groupoid",
+   "results": "Actual returned hits: Rep.linearization, Rep.linearizationOfMulActionIso, Rep.coe_linearization_obj_ρ, Rep.coe_linearization_obj, Rep.instMonoidalActionTypeLinearization, Rep.linearization_μ_hom, SemilinearMapClass.distribMulActionSemiHomClass, Rep.linearization_δ_hom (8 hits).",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Rep.linearization constructions freely linearize abstract monoid actions on types; they do not state a semilinear comodule/action-groupoid equivalence or its inverse over the balanced E-tensor product. The Hopf coordinate-ring prerequisite is separately a Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant module on an affine group action is a counital coassociative semilinear coaction with inverse descent map defined by the antipode",
+   "results": "Actual returned hits: Rep, Representation, Rep.of, Rep.ofDistribMulAction, Rep.ofMulAction, Representation.ofDistribMulAction, Rep.ρ, Rep.leftRegular (8 hits).",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Rep.linearization constructions freely linearize abstract monoid actions on types; they do not state a semilinear comodule/action-groupoid equivalence or its inverse over the balanced E-tensor product. The Hopf coordinate-ring prerequisite is separately a Mathlib leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-affine-action-algebra-descent",
+  "date": "2026-10-23",
+  "group": "Q92"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Translate power lifting to quasi-coherent algebras on the quotient stack. Affine coordinate conversion between groupoid linearizations and rational coactions.",
+   "via": [
+    "lem-sfb-flat-affine-action-algebra-descent",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-hopf-coaction-linearization",
+  "worker": "stage1",
+  "summary": "Preserved the statement, added the explicit scalar-extension and commutative-algebra tensor conventions as statement dependencies, and proved the affine linearization/coaction dictionary by generator calculations. The only new node is a Mathlib leaf for the Hopf structure on an arbitrary affine group coordinate ring. The proof computes the composable-arrow ring, both cocycle maps, balancing of the antipode inverse, both inverse composites, morphisms, the unit, and tensor coactions. No smoothness, finite-type, or finiteness assumption was added.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Translate power lifting to quasi-coherent algebras on the quotient stack. Affine coordinate conversion between groupoid linearizations and rational coactions. The affine coordinate conversion supporting the quotient-stack algebra argument is realized by proof steps 1-12; the latest blueprint direct-image proof (3) remains the ancestor route. Its imported nearest-blueprint id is null and is retained unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-f2dbe9b68",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-f2dbe9b68 (reviewer sub-agent of L); spot-checked: Read in full: the item (12 steps, statement unchanged from side-live; added stmt_deps def-weil-module-base-change and the algebra-tensor pushout, both used by the statement), the new Mathlib leaf lem-sfb-affine-group-coordinate-hopf, every cited statement and Stacks 03LF (groupoids.tex:2245). Live is unsplit with no repair note, so nothing is superseded. 03LF uses alpha: a^*F -> pr_1^*F, the same direction as the item's delta: s^*M -> t^*M and as its citer lem-sfb-groupoid-module-descent-tensor-cokernel. I recomputed every step: the universal-property bijection of step 2 (R=E, S=L via rho_E, N=M_t = M tensor C); the counit of step 3 via u_L; the composable-arrow ring L_a tensor_E L_b = E tensor C tensor C in step 4 (forward map well defined since rho is multiplicative; inverse checked; p_a, p_b, p_ab match (x,h), (xh,g), (x,hg)); the cocycle being equivalent to coassociativity of theta in step 5; the coefficient identity of step 6; L-linearity of the antipode inverse b in step 7 (s-balancing plus step 6); and both composites db=1 and bd=1 with the two antipode identities in step 8. Morphisms, unit and tensor formula (steps 9-12) also check. I tested the trivial group, G_m with weight n and E=k[z^{±1}], alpha_p/G_a, M=0, E=0 and infinite rank. Every cited node is a definition or a mathlib node, so no route departure and no tool_uses. proof_deps equals the union of uses. New leaf: Mathlib lines verified (Affine.lean:337-343 HopfAlgebra R Γ(G,⊤); CommHopfAlgCat.lean antipode = inversion; Coalgebra 82/84/86, Bialgebra 122/127, HopfAlgebra/Basic 71/74/103/108, Convolution 80). Four kinds of search recorded. Not a duplicate of def-sc-gm-ga, def-sc-general-linear-group, lem-wf-hopf-augmentation-height or sk-d-geometry, and not a clause of the item. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HopfCoactionLinearization",
+  "declaration": "HopfAction.hopfCoactionLinearization",
+  "declarations": [
+   "HopfAction.affineCoordinateHopfAlgebra",
+   "HopfAction.coordinateHopfAlgebra",
+   "HopfAction.hopfCoactionLinearization",
+   "HopfAction.hopfCoactionLinearization_morphisms",
+   "HopfAction.hopfCoactionLinearization_unit",
+   "HopfAction.hopfCoactionLinearization_tensor"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/HopfCoactionLinearization.lean",
+  "statement": "theorem hopfCoactionLinearization : ∃ F : Linearization k Γ(H, ⊤) E M ρ ≃ ModuleCoaction k Γ(H, ⊤) E M ρ, (∀ (d : Linearization k Γ(H, ⊤) E M ρ) (m : M), (F d).map m = d.iso (extensionTensor k Γ(H, ⊤) E M ρ.map 1 m)) ∧ (∀ (θ : ModuleCoaction k Γ(H, ⊤) E M ρ) (l : E ⊗[k] Γ(H, ⊤)) (m : M), (F.symm θ).iso (extensionTensor k Γ(H, ⊤) E M ρ.map l m) = targetAction k Γ(H, ⊤) E M l (θ.map m)) ∧ (∀ (θ : ModuleCoaction k Γ(H, ⊤) E M ρ) (m : M) (h : Γ(H, ⊤)) (n : ℕ) (a : Fin n → M) (b : Fin n → Γ(H, ⊤)), θ.map m = ∑ i, a i ⊗ₜ[k] b i → (F.symm θ).iso.symm (m ⊗ₜ[k] h) = ∑ i, extensionTensor k Γ(H, ⊤) E M ρ.map (1 ⊗ₜ[k] (HopfAlgebra.antipode k (b i) * h)) (a i))",
+  "branch": "sheaf-dag",
+  "by": "Q86",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The primary theorem states the bijection and both explicit formulas. The three further theorem declarations state the morphism, unit and tensor clauses of this same node. The two real-data helpers expose Mathlib's canonical coordinate Hopf instance with an unbundled field."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6058af356",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Re-delivery of 078a1404 (RETURN H3/H12) repairs it: Linearization.counit/cocycle are now IdentityDiagram/CocycleDiagram, with actual pullbacks on balanced scalar extensions over u_L and P=(E⊗C)⊗C, p_a=includeLeft, p_b=ρ⊗1, p_ab=assoc⁻¹(1⊗Δ). IsPullback pins F(1⊗m)=Σp(1⊗b_i)⊗a_i over all finite presentations (n=0 included), and transports are pinned to a⊗m↦a⊗m. The transports are justified by ρ's counit/coassoc and Δ1=1⊗1, and the cocycle equation Tt∘Fa∘Tm∘Fb=Fab∘Ts has the 03LF direction for the right action. Generator calculations reduce the two diagrams to counitality and coassociativity of θ, so steps 3-5 are now stated and nothing is hollow. Main Equiv conjuncts (θ(m)=δ(1⊗m), δ(l⊗m)=θ(m)l, antipode inverse on all presentations), the morphisms iff, and the unit/tensor existentials (pinned by L-linearity) all check. targetAction, identityMap and tensorCoefficients were checked against Mathlib (lsmul, productMap). Item JSON vs side-live differs only in lean and the new stmt_dep. Statement verbatim; no HopfAction name clash; no sorry in defs; docstrings carry source and blueprint tags. Edge cases E=0, M=0, nonreduced or noncommutative H, arbitrary rank; universes free except k=H forced by Spec. No compile run (no file changed)."
+ }
+}

@@ -1,0 +1,253 @@
+{
+ "id": "lem-trf-flat-resolution-canonical-tensor-comparison",
+ "kind": "statement",
+ "title": "Flat-resolution scalar extension with the canonical comparison",
+ "statement": "Let $A\\to A'$ be a homomorphism of commutative rings and let $N$ be an $A$-module. Let $q:C\\to N[0]$ be a quasi-isomorphism of cochain complexes of $A$-modules [def-pc-cochain-complex-modules, def-weil-abstract-derived-category]. Suppose $C^i=0$ for all $i>b$ for some integer $b$, and every $C^i$ is flat, meaning that tensoring with it preserves exact sequences. Write $T(K)=K\\otimes_A A'$ for termwise scalar extension [def-weil-module-base-change] and $Q_A:K(A)\\to D(A)$, $Q_{A'}:K(A')\\to D(A')$ for localization; maps of complexes in these categories mean their homotopy images. There exists a universal total left derived pair $(L,\\gamma)$ for $Q_{A'}T$, with $L:D(A)\\to D(A')$ and natural counit $\\gamma:LQ_A\\to Q_{A'}T$ in the convention of [lem-pur-left-derived-from-kflat-class]. In particular the sheaf scalar-extension pair [lem-pur-derived-change-of-rings], transported by the exact tensor evaluation equivalence [lem-trf-one-point-derived-ring-identification], is such a pair. For every such pair, $C$ is K-flat [def-pc-module-kflat-complex], $\\gamma_C$ is invertible, and\n$$j_q=L(Q_Aq)\\circ\\gamma_C^{-1}:Q_{A'}(C\\otimes_A A')\\xrightarrow{\\sim}L(Q_A(N[0]))$$\nis an isomorphism in $D(A')$. It identifies the tensor augmentation with the canonical derived-to-ordinary counit: with $T(N[0])=(N\\otimes_A A')[0]$, the equality in $D(A')$ is\n$$\\gamma_{N[0]}\\circ j_q=Q_{A'}(q\\otimes1).$$\nHere $\\gamma_{N[0]}$ is the counit of the supplied universal pair, not an independently chosen comparison map. No flatness of $A'$ over $A$, projectivity of the terms of $C$, or finite generation is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QP (lemma-flat-base-change), proof, computation of derived scalar extension using the free resolution s(P); generalized here to a bounded-above flat resolution and made counit-compatible."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-derived-change-of-rings",
+  "lem-trf-one-point-derived-ring-identification",
+  "def-pc-module-kflat-complex",
+  "def-trf-singleton-site-operations"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pc-module-bounded-flat-kflat] with $R=A$ and $P=C$. Its hypotheses are exactly the given upper bound and termwise tensor-flatness. Thus $C$ is K-flat in the ordinary acyclic-total-tensor sense.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064K (lemma-derived-tor-quasi-isomorphism), bounded-above flat K-flat criterion."
+   }
+  },
+  {
+   "text": "On the one-object site, use [lem-trf-ringed-scalar-universal-resolution-comparison] for $\\underline A\\to\\underline {A\\prime}$ and transport its pair by [lem-trf-one-point-derived-ring-identification]. The site is small. Evaluation and its inverse preserve K-flatness, termwise scalar extension and the universal counit. We obtain a universal ordinary-module pair $(L_0,\\varepsilon)$ with $\\varepsilon_C$ invertible. Its functor is precisely the transported sheaf derived change of rings specified in the statement.",
+   "uses": [
+    "lem-trf-ringed-scalar-universal-resolution-comparison",
+    "lem-trf-one-point-derived-ring-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY (lemma-derived-base-change), fixed-site change of rings; derived.tex Tag 06XN (lemma-find-existence-computes), dual assertion; terminal-site specialization and counit transport."
+   }
+  },
+  {
+   "text": "For any supplied universal pair $(L,\\gamma)$, the universal property in [lem-pur-left-derived-from-kflat-class] gives unique $a:L\\to L_0$ and $b:L_0\\to L$ with $\\varepsilon\\circ(aQ_A)=\\gamma$ and $\\gamma\\circ(bQ_A)=\\varepsilon$. Their composites satisfy the same counit equations as the identities, so uniqueness gives $ba=1_L$ and $ab=1_{L_0}$. Hence $a$ is a natural isomorphism and $\\gamma_C=\\varepsilon_C\\circ a_{Q_AC}$ is invertible.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN (lemma-find-existence-computes) and equation-everywhere; uniqueness of a universal pair, written out from its universal property."
+   }
+  },
+  {
+   "text": "By [def-weil-abstract-derived-category], $Q_Aq$ is invertible since $q$ is a quasi-isomorphism. A functor preserves inverses: applying $L$ to the two inverse equations shows that $L(Q_Aq)$ is invertible. Therefore $j_q=L(Q_Aq)\\circ\\gamma_C^{-1}$ is an isomorphism with source $Q_{A\\prime}T(C)$ and target $L(Q_A(N[0]))$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP (lemma-flat-base-change), proof: compute derived scalar extension with a flat resolution; localization and composition of inverses."
+   }
+  },
+  {
+   "text": "Naturality of the supplied $\\gamma$ at $q$ says $\\gamma_{N[0]}\\circ L(Q_Aq)=Q_{A\\prime}T(q)\\circ\\gamma_C$. Compose on the right with $\\gamma_C^{-1}$ to obtain $\\gamma_{N[0]}\\circ j_q=Q_{A\\prime}T(q)$. By [def-weil-module-base-change], $T(q)=q\\otimes1$ on each term and $T(N[0])=(N\\otimes_A A\\prime)[0]$: tensoring a zero term gives zero, and the sole remaining differential is zero. This is the required equality with the very counit of the supplied pair; no exactness of $T$ on arbitrary complexes was used.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN (lemma-find-existence-computes), universal counit of equation-everywhere; naturality and cancellation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-trf-ringed-scalar-universal-resolution-comparison",
+  "lem-trf-one-point-derived-ring-identification",
+  "lem-pur-left-derived-from-kflat-class",
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QP (lemma-flat-base-change), flat-resolution computation; counit normalization assembled from Tag 06XN (derived.tex) and Tag 06YY (sites-cohomology.tex), not claimed as the verbatim statement of Tag 08QP."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsLeftDerivedFunctor|kFlat|KFlat",
+   "results": "14 hits; top=['Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean', 'Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean', 'Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean', 'Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean', 'Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean']; note=; digest=4c4ef03719c471f5. Read Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean:48-79, PointwiseLeftDerived.lean:174-198, and Algebra/Homology/DerivedCategory/ExactFunctor.lean:28-78. These give universal derived-pair machinery or exact-functor descent; ordinary scalar extension here need not be exact, and none gives the bounded-above flat-resolution computation with the specified counit equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\", \"iso\"",
+   "results": "5 hits; top=['CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift', 'CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_iso', 'CategoryTheory.Functor.isIso_of_isLeftDerivedFunctor_of_inverts', 'CategoryTheory.LocalizerMorphism.Derives.isLeftDerivedFunctor_of_isIso', 'CategoryTheory.LocalizerMorphism.Derives.isLeftDerivedFunctor_iff_isIso']; note=; digest=1bdd814791f5d69d. Read Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean:48-79, PointwiseLeftDerived.lean:174-198, and Algebra/Homology/DerivedCategory/ExactFunctor.lean:28-78. These give universal derived-pair machinery or exact-functor descent; ordinary scalar extension here need not be exact, and none gives the bounded-above flat-resolution computation with the specified counit equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the left derived scalar extension counit identifies a flat resolution tensor augmentation with the canonical derived to ordinary map",
+   "results": "8 hits; top=['CategoryTheory.Functor.totalLeftDerivedCounit', 'CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality', 'ModuleCat.ExtendRestrictScalarsAdj.Counit.map', \"ModuleCat.RestrictionCoextensionAdj.counit'\", 'CategoryTheory.Functor.fromLeftDerivedZero', \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality\", 'ModuleCat.ExtendRestrictScalarsAdj.counit_app', 'ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply']; note=; digest=6b363fc6ea753fb5. Read Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean:48-79, PointwiseLeftDerived.lean:174-198, and Algebra/Homology/DerivedCategory/ExactFunctor.lean:28-78. These give universal derived-pair machinery or exact-functor descent; ordinary scalar extension here need not be exact, and none gives the bounded-above flat-resolution computation with the specified counit equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above flat module resolution computes derived extension of scalars with its canonical counit and tensor augmentation",
+   "results": "8 hits; top=['Module.Flat.iff_rTensor_preserves_shortComplex_exact', 'Module.Flat.iff_lTensor_preserves_shortComplex_exact', 'comonadicExtendScalars', 'ModuleCat.preservesFiniteLimits_extendScalars_of_flat', 'Module.Flat.rTensor_shortComplex_exact', 'Module.Flat.lTensor_shortComplex_exact', \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact'\"]; note=; digest=87ffd59ae3cc474d. Read Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean:48-79, PointwiseLeftDerived.lean:174-198, and Algebra/Homology/DerivedCategory/ExactFunctor.lean:28-78. These give universal derived-pair machinery or exact-functor descent; ordinary scalar extension here need not be exact, and none gives the bounded-above flat-resolution computation with the specified counit equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi isomorphism from a bounded above flat complex the derived tensor comparison equals the localized tensor map composed with the K flat computation isomorphism",
+   "results": "8 hits; top=['CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app', 'CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc', 'CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh', 'CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors', 'CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app', \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor'_obj_obj\", 'CategoryTheory.Functor.mapDerivedCategoryFactorsh']; note=; digest=723f21660bee4bed. Read Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean:48-79, PointwiseLeftDerived.lean:174-198, and Algebra/Homology/DerivedCategory/ExactFunctor.lean:28-78. These give universal derived-pair machinery or exact-functor descent; ordinary scalar extension here need not be exact, and none gives the bounded-above flat-resolution computation with the specified counit equation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLeftDerivedFunctor|kFlat|KFlat",
+   "results": "14 hits; top=['Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean', 'Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean', 'Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean', 'Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean', 'Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean']; note=; digest=4c4ef03719c471f5. Read Derived/LeftDerived.lean:48-79,125-140,188-205 and PointwiseLeftDerived.lean:174-198; generic universal-pair machinery does not prove bounded-flat scalar extension. ProjectiveResolution.isoLeftDerivedObj_hom_naturality (Abelian/LeftDerived.lean:123) concerns degreewise derived functors on projective resolutions, not this total derived statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\", \"iso\"",
+   "results": "5 hits; top=['CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift', 'CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_iso', 'CategoryTheory.Functor.isIso_of_isLeftDerivedFunctor_of_inverts', 'CategoryTheory.LocalizerMorphism.Derives.isLeftDerivedFunctor_of_isIso', 'CategoryTheory.LocalizerMorphism.Derives.isLeftDerivedFunctor_iff_isIso']; note=; digest=1bdd814791f5d69d. Read the universal-pair declarations in CategoryTheory/Functor/Derived/LeftDerived.lean and PointwiseLeftDerived.lean; inverts hypothesis for all quasi-isomorphisms is stronger than available for nonflat scalar extension.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the left derived scalar extension counit on a bounded above flat module resolution",
+   "results": "8 hits; top=['CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality', 'CategoryTheory.ProjectiveResolution.leftDerived_app_eq', 'CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc', 'CategoryTheory.Functor.totalLeftDerivedCounit', 'ModuleCat.ExtendRestrictScalarsAdj.counit', 'CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality', 'CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality', \"ModuleCat.RestrictionCoextensionAdj.counit'\"]; note=; digest=88a6b41e100e657e. Hits concern Tor, projective resolutions, the generic totalLeftDerivedCounit, or exact-functor descent; none provides the stated bounded-flat total scalar-extension comparison with the supplied counit. ExactFunctor.lean requires exactness of ordinary scalar extension, which is not assumed.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above flat resolution computes derived extension of scalars and identifies its tensor augmentation with the natural derived counit",
+   "results": "8 hits; top=['comonadicExtendScalars', \"CategoryTheory.Tor'_obj_obj\", 'CategoryTheory.Tor_obj', 'CategoryTheory.Functor.totalLeftDerivedCounit', \"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor'_map_app\", 'CategoryTheory.Tor', \"CategoryTheory.Tor'\"]; note=; digest=3e4fd3eb1cd26f13. Hits concern Tor, projective resolutions, the generic totalLeftDerivedCounit, or exact-functor descent; none provides the stated bounded-flat total scalar-extension comparison with the supplied counit. ExactFunctor.lean requires exactness of ordinary scalar extension, which is not assumed.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUnique|totalLeftDerivedCounit|isoLeftDerivedObj_hom_naturality",
+   "results": "8 hits; top=['Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean', 'Mathlib/CategoryTheory/Abelian/LeftDerived.lean', 'Mathlib/CategoryTheory/Abelian/LeftDerived.lean', 'Mathlib/CategoryTheory/Abelian/LeftDerived.lean']; note=; digest=e4829c1099f317d5. Read Derived/LeftDerived.lean:48-79,125-140,188-205 and PointwiseLeftDerived.lean:174-198; generic universal-pair machinery does not prove bounded-flat scalar extension. ProjectiveResolution.isoLeftDerivedObj_hom_naturality (Abelian/LeftDerived.lean:123) concerns degreewise derived functors on projective resolutions, not this total derived statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi isomorphism from a bounded above flat complex computes the total left derived tensor functor with its specified right Kan extension counit",
+   "results": "8 hits; top=['CategoryTheory.Functor.mapDerivedCategoryFactorsh', 'CategoryTheory.Functor.mapDerivedCategoryFactors', \"CategoryTheory.Tor'\", 'CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh', 'CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors', 'CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app', 'CategoryTheory.Tor', 'CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app']; note=; digest=5226500c35e14067. Hits concern Tor, projective resolutions, the generic totalLeftDerivedCounit, or exact-functor descent; none provides the stated bounded-flat total scalar-extension comparison with the supplied counit. ExactFunctor.lean requires exactness of ordinary scalar extension, which is not assumed.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tor-independent-cotangent-base-change",
+  "date": "2026-10-22",
+  "group": "Q34"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Polynomial resolutions remain resolutions under Tor-independent tensoring. Re-split component: returned proof Steps 2, 5 and 6: bounded-above flat K-flat criterion, terminal-site derived-pair identification, and canonical counit naturality calculation.",
+   "via": [
+    "lem-trf-tor-independent-cotangent-base-change",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-flat-resolution-canonical-tensor-comparison",
+  "worker": "stage1",
+  "summary": "Reused the existing ordinary bounded-above flat K-flat criterion, ringed-scalar universal-pair comparison and one-point derived identification. Wrote the universal-property argument for every supplied pair and the naturality cancellation yielding the exact augmentation equation. No new nodes or statement changes.",
+  "blueprint": "Auxiliary scalar-extension input in the inherited semistable/nearby-cycle branch of lem-trf-local-term-locality: the bounded-flat resolution and canonical comparison component recorded in blueprint.from.place. Latest blueprint contracting-correspondence route retained; no unit or chapter changes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Ordinary-module bounded-above flat K-flat criterion (Tag 064K), a general homological-algebra tool not supplied by this trace-formula unit."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Universal-pair/right-Kan-extension convention used only for its universal property, to compare supplied pairs; the trace-formula unit supplies no alternative definition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-left-derived-from-kflat-class"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-d0aee4c7e",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-d0aee4c7e (reviewer sub-agent of L); spot-checked: I read the item in full. The delivery adds a 5-step proof to the existing statement-only node and creates no new nodes. The statement and stmt_deps are identical to the node in all four Q34 snapshots, and there is no repair note. Step 1 applies lem-pc-module-bounded-flat-kflat with exactly the given hypotheses (bounded above, flat terms); the source matches Stacks 064K (more-algebra.tex lemma-derived-tor-quasi-isomorphism). Step 2 applies lem-trf-ringed-scalar-universal-resolution-comparison on the one-object site. That node needs no flatness or boundedness, and the trivial site is small. lem-trf-one-point-derived-ring-identification explicitly transports the functor and its counit and identifies K-flat complexes, so the resulting ordinary pair has eps_C invertible. Step 3 is the uniqueness of a right Kan extension, written out from the universal property of lem-pur-left-derived-from-kflat-class; it is correct. Step 4 inverts Q_A q because Q_A is a localization; correct. Step 5 is naturality of gamma at q followed by composing with gamma_C^{-1}; the identity T(N[0])=(N⊗A')[0] is correct. Small case checked: Z→Z/2 with N=Z/2 and C=[Z -2-> Z] gives an augmentation that is not a quasi-isomorphism, and the statement correctly does not claim that it is. j_q is the inverse of theta_q in the ringed node. The item is the ordinary-ring, bounded-flat analogue of that node, not a duplicate; lem-sc-kflat-scalar-extension-derived-iso and lem-pc-flat-complex-derived-pullback state different things. proof_deps equals the union of the uses. The transitive closure of the dependencies does not contain the item, and every cited node is unmerged. I accept both declared tool_uses (lem-pc-module-bounded-flat-kflat, lem-pur-left-derived-from-kflat-class) as generic homological-algebra tools. No SGA is cited, and the Stacks labels 08QP, 06XN and 06YY exist at the cited places. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatResolutionCanonicalTensorComparison",
+  "declaration": "ModuleCat.flatResolution_canonical_tensor_comparison",
+  "declarations": [
+   "ModuleCat.flatResolution_canonical_tensor_comparison",
+   "ModuleCat.flatResolution_sheaf_pair_transport"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FlatResolutionCanonicalTensorComparison.lean",
+  "statement": "theorem flatResolution_canonical_tensor_comparison {A A' : Type u} [CommRing A] [CommRing A'] [HasDerivedCategory.{u + 1} (ModuleCat.{u} A)] [HasDerivedCategory.{u + 1} (ModuleCat.{u} A')] (φ : A →+* A') (N : ModuleCat.{u} A) (C : CochainComplex (ModuleCat.{u} A) ℤ) (q : C ⟶ (HomologicalComplex.single (ModuleCat.{u} A) (.up ℤ) 0).obj N) [QuasiIso q] (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (C.X i)) (hflat : ∀ i : ℤ, Module.Flat A (C.X i)) : (∃ (L : DerivedCategory (ModuleCat.{u} A) ⥤ DerivedCategory (ModuleCat.{u} A')) (γ : DerivedCategory.Qh ⋙ L ⟶ (extendScalars φ).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh), L.IsLeftDerivedFunctor γ (HomotopyCategory.quasiIso (ModuleCat.{u} A) (.up ℤ))) ∧ ∀ (L : DerivedCategory (ModuleCat.{u} A) ⥤ DerivedCategory (ModuleCat.{u} A')) (γ : DerivedCategory.Qh ⋙ L ⟶ (extendScalars φ).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh), L.IsLeftDerivedFunctor γ (HomotopyCategory.quasiIso (ModuleCat.{u} A) (.up ℤ)) → (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat C ∧ ∃ (hγ : IsIso (γ.app ((HomotopyCategory.quotient _ _).obj C))) (j : DerivedCategory.Qh.obj (((extendScalars φ).mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj C)) ≅ L.obj (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj ((HomologicalComplex.single (ModuleCat.{u} A) (.up ℤ) 0).obj N)))), j.hom = @CategoryTheory.inv _ _ _ _ (γ.app ((HomotopyCategory.quotient _ _).obj C)) hγ ≫ L.map (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map q)) ∧ j.hom ≫ γ.app ((HomotopyCategory.quotient _ _).obj ((HomologicalComplex.single (ModuleCat.{u} A) (.up ℤ) 0).obj N)) = DerivedCategory.Qh.map (((extendScalars φ).mapHomotopyCategory (.up ℤ)).map ((HomotopyCategory.quotient _ _).map q))",
+  "branch": "sheaf-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6196f62c3",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Re-delivery of 52f9540999e7, which was returned under H2. Compared with the old snapshot, the only changes are: def-trf-singleton-site-operations added to stmt_deps; a public import of its module Sheaf.ProperBaseChange.SingletonSiteModuleComparison; and the one-point identification module made a private (proof) import. The signatures and the sorry proofs are byte-identical, and lean.statement matches the file verbatim. The owner record is existing:true, identical to live, and lists all five singleton definitions used; I checked them in the live source. Main theorem: every hypothesis and conclusion clause matches the node, with IsLeftDerivedFunctor for universality, kFlat, IsIso γ_C, j.hom = inv γ_C ≫ L(Qq) and j.hom ≫ γ_N = Q(Tq), and no extra assumptions. The transport theorem is adequate; pinning s through singletonScalarUnitCompatible is an optional advisory. The report has the Worker report and Second reading sections. No new nodes, no definitions, sorry proofs only. I did not compile because I made no change; the worker reports clean compiles."
+ }
+}

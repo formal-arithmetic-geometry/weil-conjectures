@@ -1,0 +1,123 @@
+{
+ "id": "lem-sf-tensor-hom-comparison-precomposition",
+ "kind": "statement",
+ "title": "Tensor-Hom comparison and precomposition under a natural tensor functor",
+ "statement": "Let $(C,J)$ and $(D,K)$ be small sites in a common universe, $R$ and $S$ sheaves of commutative rings on them, and $U:\\operatorname{Mod}(S)\\to\\operatorname{Mod}(R)$ a functor. Use the tensor and evaluation notation of [def-sf-twisted-action-presentation-data], with the ordinary sheaf tensor [def-pur-sheaf-tensor-product] and internal Hom [def-pur-sheaf-hom]. Suppose $t_{M,Q}:U(M\\otimes Q)\\simeq UM\\otimes UQ$ are isomorphisms satisfying $U(1_M\\otimes f)t_{M,H}=t_{M,Q}(1_{UM}\\otimes U(f))$ for every $f:Q\\to H$. For $M,N$, write $H=\\mathcal Hom_S(M,N)$ and $b=\\operatorname{curry}(t_{M,H}^{-1}U(\\mathrm{ev}_{M,N}))$. Then for every $f:Q\\to H$, one has $U(\\operatorname{uncurry}(f))=t_{M,Q}(1_{UM}\\otimes (U(f)b))\\mathrm{ev}_{UM,UN}$, in diagrammatic composition order. No faithfulness or preservation of internal Hom by U is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-internal-hom-adjoint-tensor and its naturality in the tensor factor; explicit functorial transpose calculation written by D4."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Express uncurrying f as (1 tensor f) followed by evaluation, using the tensor-Hom adjunction. Apply U and its composition law. Naturality of t moves U(1 tensor f) to the right of t and introduces t inverse at the Hom object. By the inverse laws of the adjunction, t inverse followed by U evaluation is the untranspose of b. Tensor functoriality combines U(f) and b, yielding the displayed identity. Every step is a functoriality or adjunction identity, and no nonemptiness or nonzero assumption is needed.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data",
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-twisted-action-presentation-data",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-internal-hom-adjoint-tensor and its naturality in the tensor factor; explicit functorial transpose calculation written by D4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "naturality of canonical internal Hom comparison for tensor preserving functor and uncurrying",
+   "results": "MonoidalClosed.uncurry_natural_left, uncurry_eq, uncurry_expComparison, functor-category homEquiv. These give the adjunction identities, but not the explicit formula for a supplied module-sheaf tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.uncurry",
+   "results": "uncurry_injective, uncurry_curry, curry_uncurry, uncurry_natural_left and uncurry_natural_right. The source SheafOfModules.tensorHomEquiv API implements the needed adjunction; no functor-and-tensor-comparison lemma is present.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "whiskerLeft_comp|tensorHomEquiv_whiskerLeft_comp|tensorHomComparison_precomp",
+   "results": "Read the source MonoidalClosed tensorHomEquiv_whiskerLeft_comp and Mathlib Monoidal.Category whiskerLeft_comp. These supply the calculation used in the proof. The other twisted-action files only contain private specialized calculations or consumers of the assigned theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionRestrictionHomComparison",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The parent obligation has no created.item blueprint ancestor. Its recorded provenance is lem-a1-local-boundary-duality and the evaluation/biduality sentence of thm-coef-qbar-verdier. This site realization supplies the abelian-category foundation for the internal-Hom and evaluation argument of cor-coef-verdier-weil-equivariance, without replacing the native derived category by fixed pairs in a derived category. Original twisted-site proof steps 9--13; sheafification and localized-site Hom calculation. Substep: Original closed-comparisons proof steps 3--4 and evaluation portion of step 5 (original action-site steps 11--13); sites-modules.tex, section-internal-hom, lemma-internal-hom-restriction and lemma-internal-hom-adjoint-tensor. Restriction-only substep: invertibility of the transpose of restricted evaluation; translation preservation and both evaluation equations are proved in the parent.",
+   "via": [
+    "lem-sf-twisted-action-restriction-hom-comparison-iso",
+    "lem-sf-twisted-action-hom-evaluation-comparisons",
+    "lem-sf-twisted-action-closed-comparisons",
+    "lem-sf-twisted-action-ringed-site",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionTensorHomNaturality",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionTensorHomNaturality.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.tensorHomComparison_precomp",
+  "statement": "theorem tensorHomComparison_precomp\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}}\n    (U : Modules S ⥤ Modules R)\n    (t : ∀ M N : Modules S, U.obj (tensorObj M N) ≅ tensorObj (U.obj M) (U.obj N))\n    (ht : ∀ (M Q H : Modules S) (f : Q ⟶ H),\n      U.map (tensorMap (𝟙 M) f) ≫ (t M H).hom =\n        (t M Q).hom ≫ tensorMap (𝟙 (U.obj M)) (U.map f))\n    (M N Q : Modules S) (f : Q ⟶ SheafOfModules.homObj (R := S) M N) :\n    U.map ((SheafOfModules.tensorHomEquiv (R := S) M Q N).symm f) =\n      (t M Q).hom ≫ tensorMap (𝟙 (U.obj M))\n        (U.map f ≫ SheafOfModules.tensorHomEquiv (R := R) _ _ _\n          ((t M (SheafOfModules.homObj (R := S) M N)).inv ≫\n            U.map (evaluationMap M N))) ≫ evaluationMap (U.obj M) (U.obj N)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T094343-L-217340",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T094343-L-217340",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

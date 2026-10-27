@@ -1,0 +1,122 @@
+{
+ "id": "def-per-normal-cone-fibre-piece",
+ "kind": "definition",
+ "title": "Degree piece of the normal-cone residue fibre",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative local ring and let $I\\subseteq\\mathfrak m$ be an ideal. Put $A=R/I$, $k=R/\\mathfrak m$, and $F=k\\otimes_A\\operatorname{gr}_I R$, with its canonical residue-fibre initial classes $c_j(a)=1\\otimes\\iota_j(a\\bmod I^{j+1})$ for $a\\in I^j$ [def-trf-normal-cone-residue-fibre]. For each $j\\in\\mathbf N$, define the degree-$j$ vector subspace of $F$ by $F_j=\\operatorname{span}_k\\{c_j(a):a\\in I^j\\}$ [def-weil-submodule-span]. No Noetherianity, flatness, reducedness, characteristic or finite-dimensionality assumption is imposed.",
+ "stmt_deps": [
+  "def-trf-normal-cone-residue-fibre",
+  "def-weil-submodule-span"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Associated-graded construction, Section 00JM and proof of Lemma 05GH, followed by tensoring with the residue field. The degree-j piece is the k-span of 1 tensor the degree-j initial classes. Also Hironaka, Certain numerical characters of singularities (1970), section 2, p.153, normal-cone fibre construction, as cited in the existing Ideal.normalConeFibrePiece docstring. This node owns only the subspace construction, not the normal-flat Hilbert convolution theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "degree component of normal cone residue fibre spanned by initial classes of powers of ideal",
+   "results": "{\"t\": \"2026-10-24T12:05:06Z\", \"tool\": \"leansearch\", \"query\": \"degree component of normal cone residue fibre spanned by initial classes of powers of ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"reesAlgebra\", \"Ideal.mem_span_pow_iff_exists_isHomogeneous\", \"localCohomology.ideal_powers_initial\", \"Ideal.degreeLE\", \"PowerSeries.IsWeierstrassFactorization.natDegree_eq_toNat_order_map\", \"IsLocalRing.CotangentSpace.span_image_eq_top_iff\", \"PowerSeries.IsWeierstrassFactorization.degree_eq_coe_lift_order_map\", \"Polynomial.degree_integralNormalization\"], \"digest\": \"50d8c40b58ca94d7\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the existing project definition Ideal.normalConeFibrePiece without duplicating it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree n piece of associated graded algebra tensor residue field span of homogeneous initial classes",
+   "results": "{\"t\": \"2026-10-24T12:05:07Z\", \"tool\": \"leanfinder\", \"query\": \"degree n piece of associated graded algebra tensor residue field span of homogeneous initial classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"HomogeneousIdeal.irrelevant_eq_span\", \"HomogeneousIdeal.irrelevant\", \"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\"], \"digest\": \"cee6545be991d283\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the existing project definition Ideal.normalConeFibrePiece without duplicating it."
+  },
+  {
+   "tool": "grep",
+   "query": "normalConeFibrePiece|normalConeFibreClass|normalConeResidueAlgebra",
+   "results": "{\"t\": \"2026-10-24T12:05:07Z\", \"tool\": \"grep\", \"query\": \"normalConeFibrePiece|normalConeFibreClass|normalConeResidueAlgebra\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the existing project definition Ideal.normalConeFibrePiece without duplicating it."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n normalConeFibrePiece|normalConeFibreClass lean/Sheaf/RingTheory lean/WeilConjectures/RingTheory; rg -n normalConeFibrePiece lean/.lake/packages/mathlib/Mathlib; rg -l normalConeFibrePiece|degree.*normal.cone.*fibre dag/nodes; python3 tools/blueprint_refs.py search normalConeFibrePiece; python3 tools/blueprint_refs.py search normal-cone",
+   "results": "Project: Ideal.normalConeFibrePiece is defined in Sheaf/RingTheory/NormalFlatHilbertConvolution.lean:36-39 as the k-span of the range of normalConeFibreClass I hI j. No WeilConjectures or Mathlib occurrence. DAG mentions are theorem records/reports and def-trf-normal-cone-residue-fibre, whose owned declarations omit normalConeFibrePiece. No definition node owns the piece. Blueprint: zero name matches; four normal-cone matches concern deformation/global cones and do not define these local residue-fibre pieces.",
+   "date": "2026-10-24",
+   "verdict": "New ownership node required by return H2; existing:true binding avoids a duplicate definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-scheme-near-point-additive-action",
+  "date": "2026-10-24",
+  "group": "Q130"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "The homogeneous degree pieces of the normal-cone residue fibre used in the arbitrary graded polynomial presentation and canonical Rees/Proj point correspondence of lem-per-scheme-near-point-additive-action. Ancestor proof Step 3, regular-resolution branch: BMT §6.3 common-presentation assertion and Remark 6.2, near-point component-profile survival under permissible histories and auxiliary tests. Structural input: Normal cone at a Hilbert--Samuel near point without reducedness. Lower local input: Homogeneous translation symmetry at a near point without reducedness.",
+   "via": [
+    "lem-per-scheme-near-point-additive-action",
+    "lem-per-scheme-near-point-normal-cone",
+    "lem-per-hilbert-test-component-retention",
+    "lem-per-scheme-normalized-hilbert-head",
+    "lem-per-generically-reduced-rational-invariant-calculus",
+    "lem-per-rig-variety-strong-resolution",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalFlatHilbertConvolution",
+  "declaration": "Ideal.normalConeFibrePiece",
+  "statement": "def normalConeFibrePiece {R : Type u} [CommRing R] [IsLocalRing R]\n    (I : Ideal R) (hI : I ≤ IsLocalRing.maximalIdeal R) (j : ℕ) :\n    Submodule (IsLocalRing.ResidueField R) (normalConeFibre I hI)",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Owning definition node for the existing unconditional span construction. Return H2 on 4b58fa1cc37a requires this ownership instead of a statement dependency on the Hilbert-convolution theorem. The body is Submodule.span k (Set.range (normalConeFibreClass I hI j)), with real data and only CommRing/IsLocalRing/I/hI/j parameters. No new module or copy of the definition."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0925bf27",
+  "group": "Q130",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0925bf27",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Re-delivery of RETURN H2 head 4b58fa1cc37a. The Lean module is byte-identical; the item node changes only stmt_deps (theorem lem-trf-normal-flat-hilbert-convolution replaced by new def node def-per-normal-cone-fibre-piece) and lean.note. The new node is existing:true on Ideal.normalConeFibrePiece (Sheaf.RingTheory.NormalFlatHilbertConvolution lines 36-39, Submodule.span k (range normalConeFibreClass I hI j), real data, only CommRing/IsLocalRing/I/hI/j). Its statement matches the Lean; stmt_deps def-trf-normal-cone-residue-fibre and def-weil-submodule-span are both live. No other definition node owns the declaration (def-trf-normal-cone-residue-fibre lists five other declarations), so it is not an H4 duplicate. The statement re-check found all hypotheses (any-characteristic F, EssFiniteType Noetherian local R, prime I <= m, regular R/I, non-component condition, flat gr, no reducedness), the canonical t pinned by hpoint, the raw near equality summation^[trdeg] h_y = h_R, an arbitrary graded surjection, and the conclusion (L proper, homogeneous, L <= q_y, zero/negation/addition, K-translation clause) correct. Edge cases delta=0, n=0, N=0, K=0, I=m and non-closed y are covered; universes u/v are fine. Proof is sorry only; docstrings complete; report sections present. Parallel Q10 edd6 was superseded and did not land. No compile, since no file was changed."
+ }
+}

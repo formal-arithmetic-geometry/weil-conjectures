@@ -6,6 +6,7 @@ Authors: SHEAF group NB
 module
 
 public import Sheaf.Paper.CompletedIntegralCoefficients
+public import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 public import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
@@ -115,7 +116,7 @@ Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.4; Stacks, Tag 06YY
 noncomputable def integralDerivedReduction :
     completedIntegralDerivedCategory l E Y D hl ⥤
       DerivedCategory (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n)) :=
-  (integralReductionDerivedExistence l E Y D hl n).choose
+  scalarReductionDerivedExtension l E Y n
 
 /-- The universal comparison to termwise change of rings on homotopy complexes.
 Source: Stacks, Tag 06YY (blueprint: def-weil-integral-derived-reduction). -/

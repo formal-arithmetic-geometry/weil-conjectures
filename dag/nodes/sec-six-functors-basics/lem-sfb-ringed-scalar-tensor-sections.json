@@ -1,0 +1,129 @@
+{
+ "id": "lem-sfb-ringed-scalar-tensor-sections",
+ "kind": "statement",
+ "title": "Pure-section formulas for the constructed scalar tensor comparison",
+ "statement": "Let (C,T) be a small site, f:R→S a map of commutative ring sheaves, B_f the restricted rank-one S-module, and M an R-module sheaf. The specified module isomorphism of [lem-sfb-ringed-scalar-tensor-comparison] sends the ordinary sheaf pure tensor x tensor s over a site object V to the sheafified scalar-extension tensor s tensor x. Also, the right unitor inverse on M sends x to x tensor 1. These identities hold without flatness assumptions.",
+ "stmt_deps": [
+  "lem-sfb-ringed-scalar-tensor-comparison",
+  "lem-pur-module-tensor-generator-calculus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section tensor-product (03EK), the sheafified tensor formulas; lemma-adjointness-tensor-restrict (03CZ), scalar adjunction. For derived comparisons: sites-cohomology.tex, lemma-derived-base-change (06YY). For quotient transitions: proetale.tex, lemma-naive-completion (099M)."
+ },
+ "proof": [
+  {
+   "text": "Apply the normalized cancellation formula to m=1, invert the resulting equation, and precede it by the sheaf tensor braiding. The scalar left unitor sends 1 tensor (s tensor x) to s tensor x. For the second formula, apply the right unitor inverse to the established pure-section formula for its forward map and use the inverse identity and one_smul.",
+   "uses": [
+    "lem-sfb-ringed-scalar-tensor-comparison",
+    "lem-pur-change-of-rings-tensor-cancellation-independent",
+    "lem-pur-module-tensor-generator-calculus",
+    "lem-sf-ringed-tensor-complex-constraints"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-scalar-tensor-comparison",
+  "lem-pur-change-of-rings-tensor-cancellation-independent",
+  "lem-pur-module-tensor-generator-calculus",
+  "lem-sf-ringed-tensor-complex-constraints"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY; the ordinary balancing and localization calculation used before the limit in Tag 099M."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a cochain complex with the scalar ring in degree zero is isomorphic to restriction of its extension of scalars",
+   "results": "8 hits, including HomologicalComplex.tensorUnitIso and rightUnitor; no ringed scalar-extension comparison.",
+   "verdict": "Use the ordinary unitor and the existing single-factor totalization API; no complete matching normalized comparison.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctor\", \"single\"",
+   "results": "10 hits for GradedObject single-object tensor computations and unitors.",
+   "verdict": "These are building blocks; they do not state the scalar insertion or derived quotient successor equation.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*single|single.*tensor",
+   "results": "25 hits, primarily representation-theoretic module tensor calculations.",
+   "verdict": "No matching ringed-site scalar comparison or normalized quotient successor. Local source search additionally found the proved generic pure-section calculations in QuotientTensorScalarTowerComparison and RingedTensorComplexConstraints.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules, tensor with a coefficient ring in degree zero computes scalar extension, preserving its insertion of one and quotient transitions",
+   "results": "8 hits: ModuleCat.extendScalars, ModuleCat.ExtendScalars.obj', scalar sheaf restriction, and sheafification scalar-action lemmas.",
+   "verdict": "No normalized sheaf-complex unit or derived successor identity.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueQuotientTensorModel",
+  "date": "2026-10-26",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof: the reductions of K and of Res K modulo pi_E coincide; the scalar tensor comparison and its quotient transitions.",
+   "via": [
+    "lem-sfb-adic-residue-quotient-tensor-model",
+    "lem-sfb-adic-residue-strict-koszul-augmentation",
+    "lem-sfb-adic-residue-quotient-finite-projection",
+    "lem-sfb-adic-residue-quotient-unit-universal",
+    "lem-sfb-adic-residue-cech-quotient-cone",
+    "lem-sfb-adic-complete-reduction-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedScalarTensorSections",
+  "file": "lean/Sheaf/CategoryTheory/RingedScalarTensorSections.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.scalarTensorModuleIso_pure",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.scalarTensorModuleIso_pure",
+   "CategoryTheory.ConstantCompletion.scalarTensorRightUnit_pure"
+  ],
+  "statement": "theorem scalarTensorModuleIso_pure (f : R ⟶ S) (M : Mod R)\n    (V : Cᵒᵖ) (x : M.val.obj V) (s : S.obj.obj V) :\n    (scalarTensorModuleIso f M).hom.val.app V\n        (moduleTmul (R := R) M (scalarTensorModule f) V x s) =\n      tensorSection f M V s x",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T114151-L-2270233",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T114151-L-2270233",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

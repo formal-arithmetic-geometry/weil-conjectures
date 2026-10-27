@@ -1,0 +1,118 @@
+{
+ "id": "def-sfb-etale-pushout-triples",
+ "kind": "definition",
+ "title": "Compatible etale triples and the canonical pushout restriction functor",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $T,S,T^+,P$ be schemes [def-pc-scheme] and $a:T\\to S$, $i:T\\to T^+$ morphisms. The category of etale triples has objects $(X\\to S,Y\\to T^+,\\phi)$ with both morphisms etale [def-weil-etale-morphism] and $\\phi:X\\times_ST\\simeq Y\\times_{T^+}T$ an isomorphism over $T$, using scheme fibre products [def-pc-fibre-product]. Morphisms are pairs of morphisms over $S$ and $T^+$ whose base changes commute with $\\phi$; identities and composition are componentwise. Given $j:S\\to P$ and $b:T^+\\to P$ with $ja=bi$, the canonical restriction functor sends an etale scheme $W\\to P$ to its base changes to $S$ and $T^+$ and the comparison identifying their further base changes to $T$ with $W\\times_PT$. It acts on morphisms by base change. The comparison is the composite of the canonical iterated-pullback isomorphisms.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 07RV, lemma-equivalence-categories-schemes-over-pushout: fibre-product category and the base-change functor, restricted to etale objects as in Tag 07RX(5)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Category of triples of schemes over two bases with an isomorphism of their base changes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.noConfusionType\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \"Sort u_1 →\\n  {X Y S : AlgebraicGeometry.Scheme} →\\n    {f : X ⟶ S} →\\n      {g : Y ⟶ S} →\\n        AlgebraicGeometry.Scheme.Pullback.Triplet f g →\\n          {X' Y' S' : AlgebraicGeometry.Scheme} →\\n            {f' : X' ⟶ S'} → {g' : Y' ⟶ S'} → AlgebraicGeometry.Scheme.Pullback.Triplet f' g' → Sort u_1\", \"doc\": \"Given schemes $X$, $Y$, and $S$, along with morphisms $f: X \\to S$ and $g: Y \\to S$, this inductive type represents the data of a pullback diagram, encoding the pair of morphisms with common codomain $S\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} → (X ⟶ S) → (Y ⟶ S) → Type u\", \"doc\": \"Given schemes $X$, $Y$, and $S$, along with morphisms $f: X \\\\to S$ and $g: Y \\\\to S$, this inductive type represents the data of a pullback diagram, encoding the pair of morphisms with common codomain \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.ctorIdx\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} → {f : X ⟶ S} → {g : Y ⟶ S} → AlgebraicGeometry.Scheme.Pullback.Triplet f g → ℕ\", \"doc\": \"The inductive type representing the data of a pullback diagram in the category of schemes, consisting of schemes $X$, $Y$, $S$ and morphisms $f: X \\\\to S$ and $g: Y \\\\to S$ with common codomain $S$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.mk.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (x x_1 : ↥X) (e_x : x = x_1) (y y_1 : ↥Y) (e_y : y = y_1)\\n  (s s_1 : ↥S) (e_s : s = s_1) (hx : (CategoryTheory.ConcreteCategory.hom f.base) x = s)\\n  (hy : (CategoryTheory.ConcreteCategory.hom g.base) y = s),\\n  { x := x, y := y, s := s, hx \", \"doc\": \"If $x = x_1$ in $X$, $y = y_1$ in $Y$, $s = s_1$ in $S$, and the morphisms $f: X \\to S$ and $g: Y \\to S$ satisfy $f(x) = s$ and $g(y) = s$, then the pullback triplet $(x, y, s)$ is equal to the triplet \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} →\\n    {g : Y ⟶ S} →\\n      {motive : AlgebraicGeometry.Scheme.Pullback.Triplet f g → Sort u_1} →\\n        (t : AlgebraicGeometry.Scheme.Pullback.Triplet f g) →\\n          ((x : ↥X) →\\n              (y : ↥Y) →\\n                (s : ↥S) →\\n                 \", \"doc\": \"Given schemes $X$, $Y$, and $S$, along with morphisms $f: X \\to S$ and $g: Y \\to S$, this inductive type represents the data of a pullback diagram, encoding the pair of morphisms with common codomain $S\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.ext\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \"{t₁ t₂ : Triplet f g} (ex : t₁.x = t₂.x) (ey : t₁.y = t₂.y) : t₁ = t₂\", \"doc\": \"If two pullback triplets in the category of schemes have equal X-components and equal Y-components, then the triplets themselves are equal.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} →\\n    {g : Y ⟶ S} →\\n      {motive : AlgebraicGeometry.Scheme.Pullback.Triplet f g → Sort u_1} →\\n        (t : AlgebraicGeometry.Scheme.Pullback.Triplet f g) →\\n          ((x : ↥X) →\\n              (y : ↥Y) →\\n                (s : ↥S) →\\n                 \", \"doc\": \"Given schemes $X$, $Y$, and $S$, along with morphisms $f: X \\to S$ and $g: Y \\to S$, this inductive type represents the data of a pullback diagram, encoding the pair of morphisms with common codomain $S\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.ext_iff\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {t₁ t₂ : AlgebraicGeometry.Scheme.Pullback.Triplet f g},\\n  t₁ = t₂ ↔ t₁.x = t₂.x ∧ t₁.y = t₂.y\", \"doc\": \"Two pullback triplet data $ t_1 $ and $ t_2 $ in the category of schemes, defined by morphisms $ f: X \\to S $ and $ g: Y \\to S $, are equal if and only if their respective $ X $-components $ t_1.x = t_2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results supply etale schemes, base change and scheme pullbacks, but not compatible etale triples or this restriction functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category of compatible etale scheme morphisms with isomorphic restrictions over a common scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results supply etale schemes, base change and scheme pullbacks, but not compatible etale triples or this restriction functor"
+  },
+  {
+   "tool": "grep",
+   "query": "EtalePushoutTriples|etalePushoutRestriction|[Ee]tale.*[Pp]atching|[Ee]tale.*[Tt]riples",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the results supply etale schemes, base change and scheme pullbacks, but not compatible etale triples or this restriction functor"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-infinitesimal-etale-patching",
+  "date": "2026-10-24",
+  "group": "NO"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Stacks 07RV category of compatible triples and its canonical restriction functor, used in the scheme etale-patching input to the infinitesimal algebraic-space pushout construction.",
+   "via": [
+    "lem-sfb-scheme-infinitesimal-etale-patching",
+    "lem-sfb-space-affine-thickening-pushout",
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtalePushoutTriples",
+  "declaration": "AlgebraicGeometry.EtalePushoutTriples",
+  "declarations": [
+   "AlgebraicGeometry.EtalePushoutTriples",
+   "AlgebraicGeometry.etalePushoutComparison",
+   "AlgebraicGeometry.etalePushoutRestriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtalePushoutTriples.lean",
+  "statement": "abbrev EtalePushoutTriples {T S T' : Scheme.{u}} (a : T ⟶ S) (i : T ⟶ T')",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-640c0f21f",
+  "group": "NO",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-640c0f21f",
+  "group": "NO",
+  "result": "fix",
+  "note": "Lean exact vs node and Stacks 07RV/07RX(5): IsThickening (closed immersion + surjective), IsAffineHom a, arbitrary IsPushout square; EtalePushoutTriples = full subcategory of comma of etale base-change functors on IsIso (phi over T); restriction functor uses canonical pullbackComp/pullbackCongr comparison; G ⊣ F with IsIso unit/counit, G pinned by IsPushout of the triple plus structural equations, unit by projections to the glued scheme, counit by restrictions = pullback.fst. New def node has real data, docstrings and searches; statement unchanged; lean.statement verbatim; no duplicates in live/Mathlib. Sole fault H11: dispatcher-wording second reading -> FIX fixes/lem-sfb-scheme-infinitesimal-etale-patching.report.md (worker report verbatim + clause-by-clause second reading). Advisory: base stmt_deps do not cite IsThickening owner def-sbc-first-order-thickening."
+ }
+}

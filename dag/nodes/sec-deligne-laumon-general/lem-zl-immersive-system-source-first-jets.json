@@ -1,0 +1,137 @@
+{
+ "id": "lem-zl-immersive-system-source-first-jets",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Paragraph 3: an immersive linear system separates first differentials, before etale pullback",
+   "via": [
+    "lem-zl-immersive-system-local-cotangent-pair",
+    "lem-zl-bertini-finite-cover-transverse-component"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "First jets of an immersive linear system at its source",
+ "statement": "Let k be algebraically closed, X a scheme locally of finite type over k, U0 an open of X, L an invertible module, V a k-vector space with finite basis b, and psi:V -> Gamma(X,L) k-linear. Assume its basis sections generate L on U0 and their associated projective morphism is an immersion [def-weil-pbc-morphism-to-projective-space-by-sections]. Let x be a closed point of U0. On any open U containing x, let e be a free generator of L [def-sc-local-free-generator]. For every a in O_{X,x}, there is v in V whose coefficient relative to e has germ congruent to a modulo m_x^2. Thus the local coefficient map realizes every first jet at x. Invertibility, generation and schemes use [def-sc-invertible-module], [def-weil-pbc-generating-sections] and [def-weil-pbc-scheme-conventions]. There is no etale map or dimension assumption.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-lem-wgen-bertini-cover/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Paragraph 3: an immersive linear system separates first differentials, before etale pullback"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sc-invertible-module",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-pc-module-pullback",
+  "def-sc-local-free-generator"
+ ],
+ "proof": [
+  {
+   "text": "Construct the k-algebra structure on R=O_(X,x) by taking germs of the base scalars. Restriction, the free-generator coefficient map, and the germ map turn ψ into a k-linear map f:V→R. The displayed hlinear equation gives scalar compatibility after the germ-restriction identity. The residue-field structure map agrees with the residue of this scalar map by the scheme stalk-map identities.",
+   "uses": [
+    "def-sc-local-free-generator",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The residue field at the closed point x is finite over k, already under the local finite-type assumption. Algebraic closedness makes its structure map from k surjective. Thus for every a∈R there is c∈k with a-ρ(c)∈m. This is proved directly using finite_residueField_of_isClosed and IsAlgClosed.algebraMap_bijective_of_isIntegral, without a quasi-compactness assumption.",
+   "uses": [
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the local-fraction presentation to the basis-section family s_j=ψ(b_j). It gives an index i, a unit u=f(b_i), and polynomial-fraction presentations of every element of R in u⁻¹f(b_j).",
+   "uses": [
+    "lem-zl-immersive-system-source-local-fractions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private Lean theorem linear_image_firstOrder completes the algebraic argument. Put g=u⁻¹f, J=m² and M=range(g)+J as k-submodules of R. Then 1∈M. If a,b∈M, choose residues c,d∈k. The product (a-ρ(c))(b-ρ(d)) is in J; expanding it shows ab∈M. If z is a unit in M, choose residues c,d of z,z⁻¹. The first is nonzero because z is a unit. Expanding (z-ρ(c))(z⁻¹-ρ(d))∈J expresses c z⁻¹ as a linear combination of 1 and z plus an element of J, so z⁻¹∈M. Polynomial induction puts each evaluated polynomial in M, and the fraction presentations then give M=R. Apply this to u⁻¹a, obtain g(v)-u⁻¹a∈J, and multiply by u to get f(v)-a∈m². This is the requested coefficient in the original frame; every step is implemented without sorry.",
+   "uses": [
+    "lem-zl-immersive-system-source-local-fractions",
+    "def-sc-local-free-generator"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-local-free-generator",
+  "def-weil-pbc-scheme-conventions",
+  "lem-kun-closed-point-field",
+  "lem-zl-immersive-system-source-local-fractions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-lem-wgen-bertini-cover/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Paragraph 3. The chart/localization part is isolated as lem-zl-immersive-system-source-local-fractions; the rational-residue, first-order algebra and frame normalization are proved in Lean by M8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The sections of a line bundle defining an immersion surject onto the local ring modulo the square of the maximal ideal at a rational point",
+   "results": "Scheme.Hom.app_surjective, IsClosedImmersion.toSurjectiveOnStalks, open-immersion and structure-sheaf APIs; no first-jet theorem for the given linear system.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sections of a line bundle defining an immersion surject onto the local ring modulo the square of the maximal ideal at a rational point",
+   "results": "StructureSheaf.toBasicOpen_surjective, Scheme.IdealSheafData.subschemeι_app_surjective, IsPreimmersion.toSurjectiveOnStalks, Scheme.residue_surjective and related stalk surjectivity APIs; none identifies jets with coefficients of the generating sections.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homOfGeneratingSections|firstJet|first_jet|mapCotangent",
+   "results": "Thirteen hits: Ideal.mapCotangent and its surjectivity lemmas, completion and smooth quotient applications. No homOfGeneratingSections or first-jet theorem. The DAG search also found BertiniSingularFibreEquations, which requires smoothness and does not specify the evaluation map, so does not apply here. Blueprint search for first jet returned zero nodes.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ImmersiveSystemLocalCotangentPair",
+  "date": "2026-10-26",
+  "group": "A4"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ImmersiveSystemSourceFirstJets",
+  "file": "lean/Sheaf/AlgebraicGeometry/ImmersiveSystemSourceFirstJets.lean",
+  "declaration": "AlgebraicGeometry.immersiveSystem_source_first_jets",
+  "statement": "theorem immersiveSystem_source_first_jets\n    (k : Type u) [Field k] [IsAlgClosed k]\n    (X : Scheme.{u}) [X.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    (U₀ : X.Opens)\n    (L : X.Modules) [L.IsInvertible]\n    (V : Type v) [AddCommGroup V] [Module k V]\n    (r : ℕ) (b : Module.Basis (Fin r) k V) (ψ : V →+ Γ(L, ⊤))\n    (hlinear : ∀ (c : k) (v : V),\n      ψ (c • v) = (X ↘ Spec (.of k)).appTop ((Scheme.ΓSpecIso (.of k)).inv c) • ψ v)\n    (hgen : Epi (((Scheme.Modules.tensorPullback U₀.ι).obj L).freeHomEquiv.symm\n      (fun i : ULift.{u} (Fin r) ↦ SheafOfModules.unitHomEquiv _\n        (Scheme.Modules.homOfGlobalSection _\n          (Scheme.Modules.tensorSectionsUnit U₀.ι L (ψ (b i.down)))))))\n    [IsImmersion (@ProjectiveSpace.homOfGeneratingSections\n      (ULift.{u} (Fin r)) inferInstance U₀.toScheme (Spec (.of k))\n      (U₀.ι ≫ (X ↘ Spec (.of k))) ((Scheme.Modules.tensorPullback U₀.ι).obj L)\n      (Scheme.Modules.IsInvertible.of_iso\n        (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction U₀.ι)).leftAdjointUniq\n          (Scheme.Modules.pullbackPushforwardAdjunction U₀.ι)).app L).symm)\n      (fun i : ULift.{u} (Fin r) ↦ SheafOfModules.unitHomEquiv _\n        (Scheme.Modules.homOfGlobalSection _\n          (Scheme.Modules.tensorSectionsUnit U₀.ι L (ψ (b i.down))))) hgen)]\n    (x : X) (hx : IsClosed ({x} : Set X)) (hxU₀ : x ∈ U₀)\n    (U : X.Opens) (hxU : x ∈ U) (e : Γ(L, U))\n    (he : Scheme.Modules.IsFreeGenerator e) :\n    ∀ a : X.presheaf.stalk x, ∃ v : V,\n      X.presheaf.germ U x hxU\n          (he.coeff (L.presheaf.map (homOfLE (le_top : U ≤ ⊤)).op (ψ v))) - a ∈\n        IsLocalRing.maximalIdeal (X.presheaf.stalk x) ^ 2",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T000905-L-4146013",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261026T023544-L-581347",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

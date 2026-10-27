@@ -1,0 +1,367 @@
+{
+ "id": "lem-sfb-dvr-nodal-chart-blowup-calculus",
+ "kind": "statement",
+ "title": "Arithmetic nodal charts and their singular-point blowups",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], let $\\pi$ generate its maximal ideal, let $k=R/(\\pi)$, and let $n\\geq1$. Put $M_n=\\operatorname{Spec}(R[x,y]/(xy-\\pi^n))$ and let $o$ be the closed point $(\\pi,x,y)$ [def-weil-affine-spectrum] [def-weil-polynomial-ring]. Then $M_n$ is integral and normal (all its local rings are integrally closed domains), is flat over $R$, and has reduced nodal geometric curve fibres [def-trf-nodal-geometric-fibres] [def-pc-integral-scheme] [def-weil-flat-morphism] [def-weil-geometric-fibre]. It is regular outside $o$, and is regular at $o$ exactly when $n=1$ [def-weil-regular-scheme]. Every local ring of $M_n$ has dimension at most $2$, and its local ring at $o$ has dimension $2$ [def-weil-pbc-krull-dimension-ring]. A smooth $R$-scheme of pure relative dimension one is regular and normal, and all its local rings have dimension at most $2$; at every closed point of its special fibre its local ring has dimension $2$ [def-sbc-smooth-morphisms] [def-weil-pure-dimension]. These normality, regularity and local-dimension assertions hold in any pointed etale local model: if pointed schemes have a common pointed etale neighbourhood over $\\operatorname{Spec}R$, one with a map etale to the indicated model and the specified image point, then the other has the same asserted local properties [def-weil-etale-morphism].\n\nFor $n\\geq2$, let $b:B_n=\\operatorname{Bl}_oM_n\\to M_n$ be the ordinary blowup of the reduced closed point [def-nagata-global-blowup]. Its three affine charts, with their maps to $M_n$, are\n$$R[x,t]/(xt-\\pi),\\quad y=x^{n-1}t^n;\\qquad R[r,s]/(rs-\\pi^{n-2}),\\quad x=\\pi r,\\ y=\\pi s;\\qquad R[y,t']/ (yt'-\\pi),\\quad x=y^{n-1}(t')^n.$$\nThe middle chart when $n=2$ means $rs=1$. Thus $B_n$ is flat with reduced nodal geometric curve fibres, and the only possibly nonregular point above $o$ is the origin in the middle chart when $n-2\\geq2$; its local model is $M_{n-2}$. The geometric exceptional fibre is a smooth conic isomorphic to $\\mathbf P^1$ if $n=2$, and two copies of $\\mathbf P^1$ meeting in one point if $n>2$ [def-sc-p1-standard]. The map is an isomorphism off $o$. These chart and exceptional-fibre descriptions remain valid after etale pullback, with the blowup center the inverse image of $o$ and the exceptional fibre taken over a chosen point above $o$; they also apply to a blowup of the corresponding reduced point in a common pointed etale neighbourhood. No excellence, completeness, perfection, or restriction on the residue characteristic is assumed.",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Lemma 3.13 proof, printed p.609, local equation xy=pi^n; agent-explicit local algebra and blowup-chart version. Supporting Stacks tags: 0CBY (curves.tex, lemma-etale-local-structure-nodal-family), 0805 (divisors.tex, lemma-flat-base-change-blowing-up), 033C/033G/07NF/07NG (algebra.tex: normal/regular ascent and descent); the regular-point comparison is 0AGQ/0AGR in resolve.tex. The de Jong archival PDF is WANTED; primary PDF read online.",
+  "url": "https://aif.centre-mersenne.org/item/10.5802/aif.1575.pdf"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-polynomial-ring",
+  "def-pc-integral-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-geometric-fibre",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pure-dimension",
+  "def-weil-etale-morphism",
+  "def-nagata-global-blowup",
+  "def-sc-p1-standard",
+  "def-trf-nodal-geometric-fibres",
+  "def-trf-strict-semistable-curve",
+  "def-nagata-blowup-chart-ring",
+  "def-nagata-blowup-flat-base-change-map",
+  "def-nagata-extended-ideal",
+  "def-pc-zero-scheme",
+  "def-sfb-projective-coordinate-section"
+ ],
+ "proof": [
+  {
+   "text": "The binomial normal-form theorem at $a=\\pi^n$ makes $A_n$ a domain and all its local rings normal; its spectrum is integral. The DVR model lemma supplies Noetherianity, finite presentation and flatness.",
+   "uses": [
+    "lem-sfb-binomial-laurent-normal-form",
+    "lem-sfb-dvr-binomial-local-geometry",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Base steps 1--3; coefficient normal form and DVR algebra."
+   }
+  },
+  {
+   "text": "Apply the fibre calculation over each algebraically closed residue field: the fibre is a Laurent line or two transverse axes. At the crossing apply monomial completion with $J=(xy)$ to obtain $\\Omega[[x,y]]/(xy)$. These are the required connected nodal geometric fibres.",
+   "uses": [
+    "lem-sfb-binomial-geometric-fibres",
+    "lem-sfb-monomial-local-completion",
+    "def-trf-nodal-geometric-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Base step 4; geometric fibres and compatible monomial truncations."
+   }
+  },
+  {
+   "text": "The DVR model lemma gives all local dimensions and the regular Laurent complement. In its regular ambient ring $P$, the displayed initial forms have order one exactly for $n=1$; the hypersurface criterion therefore gives regularity at $o$ exactly in that case. The smooth-trait-curve lemma gives the separate smooth-curve assertions.",
+   "uses": [
+    "lem-sfb-dvr-binomial-local-geometry",
+    "lem-sfb-regular-hypersurface-initial-form",
+    "lem-sfb-smooth-trait-curve-local-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Base steps 5--7; algebra.tex Tags 00ON, 07NF, 00NO and 00KW."
+   }
+  },
+  {
+   "text": "For $n\\ge2$ the blowup $B_n$ of the affine scheme $M_n$ is computed on the one-piece affine cover $\\{M_n\\}$: its local model is the affine blowup $\\operatorname{Bl}_I\\operatorname{Spec}A_n$, $I=(\\pi,x,y)$ the ideal of the reduced point $o$, and the cover-independence theorem identifies the glued blowup with it over $M_n$. Specialize the chart-algebra theorem to $a=\\pi$. It gives precisely the three stated charts, structure maps, overlaps and extended centre ideals. Apply the three-chart gluing theorem to this cover: the blowup is flat with connected reduced nodal geometric fibres and has exactly the stated possible middle singularity.",
+   "uses": [
+    "def-nagata-global-blowup-local-model",
+    "prop-nagata-global-blowup-cover-independent",
+    "lem-sfb-binomial-blowup-chart-algebras",
+    "lem-sfb-nodal-three-chart-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Base steps 8--10; divisors.tex Tag 0804 and explicit three-chart fibre gluing."
+   }
+  },
+  {
+   "text": "The chart-algebra theorem identifies the exceptional scheme with the reciprocal gluing over $k$, with $\\epsilon=1$ for $n=2$ and $0$ otherwise. The exceptional-curve theorem gives the smooth conic or two projective lines, including their reduced intersection, after algebraic closure. Through the identification of step 4, the affine complement theorem gives the isomorphism off $V(I)=\\{o\\}$.",
+   "uses": [
+    "lem-sfb-binomial-blowup-chart-algebras",
+    "lem-sfb-three-chart-exceptional-curve",
+    "lemma-nagata-affine-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Base steps 10--12 and complement part of 13."
+   }
+  },
+  {
+   "text": "Etale maps are flat, so the chartwise flat-pullback theorem identifies each displayed chart and overlap and extends each exceptional fibre along the actual residue-field map. Apply the stalk-invariants theorem to both legs of a common pointed etale neighbourhood. Over a closed point, the etale-fibre theorem makes the chosen fibre singleton open and reduced. Choose an ambient open inducing that singleton; the pulled-back centre there is exactly the reduced chosen point. Intersect the opens for the two legs. The comparison thus identifies the blowups at those reduced points.",
+   "uses": [
+    "lem-sfb-flat-pullback-blowup-chart-restrictions",
+    "lem-sfb-etale-stalk-invariants",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Base steps 13--15; divisors.tex Tag 0805 and morphisms.tex Tag 02GL."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-global-blowup-local-model",
+  "def-pc-integral-scheme",
+  "def-trf-nodal-geometric-fibres",
+  "def-weil-etale-morphism",
+  "lem-sfb-binomial-blowup-chart-algebras",
+  "lem-sfb-binomial-geometric-fibres",
+  "lem-sfb-binomial-laurent-normal-form",
+  "lem-sfb-dvr-binomial-local-geometry",
+  "lem-sfb-etale-stalk-invariants",
+  "lem-sfb-flat-pullback-blowup-chart-restrictions",
+  "lem-sfb-monomial-local-completion",
+  "lem-sfb-nodal-three-chart-gluing",
+  "lem-sfb-regular-hypersurface-initial-form",
+  "lem-sfb-smooth-trait-curve-local-properties",
+  "lem-sfb-three-chart-exceptional-curve",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lemma-nagata-affine-blowup-complement",
+  "prop-nagata-global-blowup-cover-independent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit arithmetic-nodal local algebra and affine blowup calculations supporting de Jong, Families of curves and alterations, Lemma 3.13, printed p.609; general input lemmas from algebra.tex, more-algebra.tex and divisors.tex as cited stepwise. The de Jong PDF was read online and remains WANTED locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The nodal surface xy equals a uniformizer to power n is normal and blowing up its singular point reduces n by two with rational exceptional curves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} →\\n      {x y : F} → W.Nonsingular x y → (FractionalIdeal (nonZeroDivisors W.CoordinateRing) W.FunctionField)ˣ\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, this constructs the unit in the group of invertible fractional ideals of the coordinate ring $W.\\text{CoordinateRin\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.instIsMinimalMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K},\\n  WeierstrassCurve.IsMinimal R (WeierstrassCurve.minimal R W)\", \"doc\": \"For any Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the minimal Weierstrass curve obtained by applying the minimal transformation to $ W $ satisfies the m\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F},\\n  W.Equation x₁ y₁ →\\n    W.Equation x₂ y₂ →\\n      ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂) →\\n        WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x₂ (Polynomial.C y₂) =\\n          WeierstrassCurve.Af\", \"doc\": \"For two distinct points $(x_1, y_1)$ and $(x_2, y_2)$ on an affine Weierstrass curve $W$ over a field $F$ that are not symmetric with respect to the curve's group law (i.e., $y_1 \\neq -y_2 - a_1 x_2 - \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F} (h : W.Nonsingular x y),\\n  ↑(WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h) =\\n    ↑(WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x (Polynomial.C y))\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the invertible fractional ideal $XYIdeal'$ constructed from the nonsingular condition equals the ideal generated b\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: The normalization construction, StandardEtalePair and Weierstrass minimal-model declarations do not state normality and point-blowup charts of xy=pi^n."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsNormal\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: The normalization construction, StandardEtalePair and Weierstrass minimal-model declarations do not state normality and point-blowup charts of xy=pi^n."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|semistable|rationalDouble|RationalDouble|exceptionalDivisor",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: The normalization construction, StandardEtalePair and Weierstrass minimal-model declarations do not state normality and point-blowup charts of xy=pi^n."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowup charts of the arithmetic surface xy equals pi power n and its normality",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": f.toNormalization ≫ f.fromNormalization = f\", \"doc\": \"The composition of the canonical morphism from a scheme $ X $ to the normalization of a morphism $ f: X \\\\to Y $ and the canonical morphism from the normalization to $ Y $ equals the original morphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": f.toNormalization.ker = ⊥\", \"doc\": \"For a scheme morphism $ f: X \\to Y $, the kernel of the morphism from $ X $ to its normalization is equal to the bottom element $ \\bot $ in the relevant order structure of subschemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegral X] : IsIntegral f.normalization\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.toNormalization ≫ f.normalizationDesc f₁ f₂ H = f₁\", \"doc\": \"Given a morphism $ f $ that factors as $ f = f_1 \\\\circ f_2 $, the composition of the normalization morphism $ f.toNormalization $ and the normalization description morphism $ f.normalizationDesc(f_1, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : IsIntegralHom (f.normalizationDesc f₁ f₂ H)\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalizationDesc f₁ f₂ H ≫ f₂ = f.fromNormalization\", \"doc\": \"For a scheme morphism $ f $ factoring as $ f_1 $ followed by $ f_2 $, the composition of the normalization morphism $ \\\\text{normalizationDesc} $ from the normalization of $ f $ to a target scheme $ T \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: The normalization construction, StandardEtalePair and Weierstrass minimal-model declarations do not state normality and point-blowup charts of xy=pi^n."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Desingularization of the A n minus one surface singularity over a discrete valuation ring by blowing up the closed point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.instIsMinimalMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K},\\n  WeierstrassCurve.IsMinimal R (WeierstrassCurve.minimal R W)\", \"doc\": \"For any Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the minimal Weierstrass curve obtained by applying the minimal transformation to $ W $ satisfies the m\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] →\\n                (W : WeierstrassCurve K) →\\n    \", \"doc\": \"Given a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, its reduction is the Weierstrass curve obtained by first constructing the integral model of $ \"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and a minimal Weierstrass curve $ W $ over $ K $, the curve $ W $ has good reduction if and only if the valuation of its discriminant $ \\\\\"}\n  {\"name\": \"StandardEtalePair\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_1) → [CommRing R] → Type u_1\", \"doc\": \"A structure for a commutative ring $ R $ equipped with data defining a standard étale pair, used in the context of étale morphisms in algebraic geometry.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: The normalization construction, StandardEtalePair and Weierstrass minimal-model declarations do not state normality and point-blowup charts of xy=pi^n."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normality and ordinary point blowup charts of xy equals a uniformizer to power n over an arbitrary discrete valuation ring",
+   "results": "OK; 8 hits; declarations/files: Valuation.exists_pow_Uniformizer, Valuation.Uniformizer.val, Valuation.IsUniformizer.val, Valuation.IsUniformizer.iff, IsDedekindDomain.HeightOneSpectrum.valuation_exists_uniformizer, PowerSeries.weierstrassDistinguished, PowerSeries.isDistinguishedAt_weierstrassDistinguished, PowerSeries.IsWeierstrassDivision.isWeierstrassFactorization; ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern valuations, Weierstrass curves, standard smooth algebras, or unrelated nodal interpolation, not this arithmetic surface and its point blowup."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|semistable|rationalDouble|RationalDouble|exceptionalDivisor",
+   "results": "OK; 5 hits; declarations/files: Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern valuations, Weierstrass curves, standard smooth algebras, or unrelated nodal interpolation, not this arithmetic surface and its point blowup."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary blowup of the point on the arithmetic nodal surface xy equals pi power n",
+   "results": "OK; 8 hits; declarations/files: WeierstrassCurve.Affine.Point.some.congr_simp, AlgebraicGeometry.Proj.pow_apply, WeierstrassCurve.Projective.Point.nonsingular, WeierstrassCurve.Projective.nonsingularLift_zero, WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv, WeierstrassCurve.Projective.Point.toAffineLift_some, WeierstrassCurve.Projective.nonsingular_neg, AlgebraicGeometry.RingedSpace.basicOpen_pow; ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern valuations, Weierstrass curves, standard smooth algebras, or unrelated nodal interpolation, not this arithmetic surface and its point blowup."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowup\"",
+   "results": "OK; 0 hits; declarations/files: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern valuations, Weierstrass curves, standard smooth algebras, or unrelated nodal interpolation, not this arithmetic surface and its point blowup."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Resolution of arithmetic A n singularities xy equals pi power n by successive blowups of the maximal ideal",
+   "results": "OK; 8 hits; declarations/files: WeierstrassCurve.Affine.CoordinateRing.XYIdeal', WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul, WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₁, WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv, WeierstrassCurve.Affine.CoordinateRing.XYIdeal_neg_mul, Algebra.IsStandardSmoothOfRelativeDimension, WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂; ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern valuations, Weierstrass curves, standard smooth algebras, or unrelated nodal interpolation, not this arithmetic surface and its point blowup."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-trait-rational-domination",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; de Jong Lemma 3.13: explicit local equation and one singular-point blowup, before global resolution or domination",
+   "via": [
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-dvr-nodal-chart-blowup-calculus",
+  "worker": "stage1",
+  "summary": "Q51 repairs the returned re-split: seven further searched statement-only nodes extract every remaining base-proof argument, in addition to the four retained generic algebra/stalk nodes. Explicit chart injections, all overlaps, characteristic-two conic cover, special-fibre dimension chain, global fibre connectedness and chartwise etale comparison are retained. Item statement, statement dependencies and Q17 Lean record remain verbatim. Six short assembly steps replace the returned compression. Landing-refusal repair of b44c0919fb7: rebased through the prescribed current-origin delivery path, re-read every external assembly citation, and made the reduced-singleton shrinking argument explicit in step 6. Preserved live statement and metadata; eleven independent unsplit nodes and all fifteen retained arguments remain.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images clause (3) along the recorded alteration/plurinodal route, specifically de Jong Lemma 3.13 local equation xy=pi^n and rational exceptional curves. The inherited blueprint.from.node is null, and blueprint_refs.py ancestor confirms None; retained its recorded via chain and exact from.place. The new steps realize inherited steps 1--15 in order; new nodes extract the indicated subarguments, without changing the alteration/plurinodal route. Repair: base steps 2,4--13 are now carried by seven further nodes, with the full base-step-to-node map and retained arguments in report.md.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic etale-fibre discreteness and reduced singleton theorem for the actual reduced point centre; the fixed alteration route uses this tool and supplies no separate replacement."
+   },
+   {
+    "node": "lemma-nagata-affine-blowup-complement",
+    "why": "Generic affine blowup complement theorem for the isomorphism off the centre; the fixed alteration route uses this tool and supplies no separate replacement."
+   },
+   {
+    "node": "prop-nagata-global-blowup-cover-independent",
+    "why": "Generic identification of the glued global blowup with the affine blowup on the one-piece cover of the affine scheme M_n, needed to read the affine chart algebras and the affine complement theorem on Bl_o M_n; the fixed alteration route supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-nagata-affine-proj",
+  "def-nagata-blowup-chart-ring",
+  "def-nagata-blowup-flat-base-change-map",
+  "def-nagata-homogeneous-away-to-chart",
+  "def-pc-integral-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sc-discrete-valuation-ring",
+  "def-sc-p1-standard",
+  "def-trf-nodal-geometric-fibres",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-polynomial-ring",
+  "def-weil-pure-dimension",
+  "def-weil-regular-scheme",
+  "lem-pc-smooth-flat",
+  "lem-sc-dvr-dimension-one",
+  "lem-sc-etale-local-dimension",
+  "lem-sc-p1-polynomial-dimension-one",
+  "lem-trf-valuation-torsionfree-flat",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-polynomial-ring-normal-domain",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-ring-faithfully-flat-descent",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-standard-smooth-is-smooth",
+  "lemma-nagata-affine-blowup-complement",
+  "prop-nagata-affine-blowup-chart-cover",
+  "thm-nagata-blowup-flat-base-change",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "prop-nagata-global-blowup-cover-independent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-d691f1dac",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-d691f1dac (reviewer sub-agent of L); spot-checked: This is the third delivery of this re-split (after b44c and 3500), now on base 4689428. All 11 new nodes are byte-identical to the 3500 delivery. The chart-algebras node, the flat-pullback node and the item differ from the 3500 fix files only by reverting that FIX, so the 3500 FIX was lost again. The report adds only 4 overlap paragraphs, against lem-trf-supported-kernel-blowup-charts and lem-sfb-point-blowup-local-chart-package; I checked both and neither is a duplicate. I re-read the item and all 11 statements and tested them on small cases. Laurent normal form: monomial basis for any a including 0, image R[T,a/T] as an intersection of Laurent rings, normal. DVR model: free over R, chain 0⊂(π,x)⊂o, initial forms −Π, XY−Π² and XY. Geometric fibres: (xy)=(x)∩(y), reduced crossing, (x)⊊(x,y). Monomial completion: P̂/JP̂ with support outside D. Hypersurface: in((f))=(F) because gr is a domain. Smooth trait curve: 07NF, 00ON. Stalk invariants: read 07QP, 0AH0 (no Noetherian hypothesis), 033C, 033G. Chart algebras: t=a/x, y/x=x^{n−2}t^n, rs=a^{n−2}, s=x^{n−2}t^{n−1}, quotients R̄[t], R̄[r,s]/(rs−ε), R̄[h]; tested n=2,3,4. Gluing: generic fibre is one Laurent line; the middle origin is the only possible nonregular point, and it is nonregular iff n≥4. Exceptional curve: [1:t:t²], [r:1:s], [h²:h:1]; D+(X)∪D+(Y) covers the conic in characteristic 2; ε=0 gives two P¹ meeting in one reduced point. Flat pullback: chartwise 0805, and 02GL shrinking to a reduced centre. All 15 base steps are carried by node statements, and the item proof is a 6-step assembly of them. rg -L found no duplicate (Q56 nodal-point-blowup-local-descent is a sibling descent statement already in the 3500 base). No SGA citation. Batch-5 flag: def-trf-nodal-geometric-fibres is a general definition (nonempty connected 1-dim fibres with uv=0 completions), not part of the proof of the trace formula or of Poincaré duality, and the item already cites it on the base; accepted. Re-applied the 2 citation faults by copying the 3500 fix files. (1) The chart node is about the affine blowup, but B_n is def-nagata-global-blowup. Step 4 now cites def-nagata-global-blowup-local-model and prop-nagata-global-blowup-cover-independent (added to tool_uses); step 5 refers to that identification; proof_deps is the union of the uses. (2) def-pc-zero-scheme (zero scheme of a section of an invertible module) was cited for V(IO). The chart node now uses def-nagata-extended-ideal; the flat-pullback node uses def-sbc-closed-immersion-ideal-sheaf and def-weil-closed-immersion. Accepted tool_uses: the étale-fibre theorem, the affine blowup complement, and global blowup cover-independence.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DvrNodalChartBlowupCalculus",
+  "declaration": "AlgebraicGeometry.DvrNodal.blowup_geometry",
+  "declarations": [
+   "AlgebraicGeometry.DvrNodal.constant",
+   "AlgebraicGeometry.DvrNodal.coordinate",
+   "AlgebraicGeometry.DvrNodal.originIdeal",
+   "AlgebraicGeometry.DvrNodal.model",
+   "AlgebraicGeometry.DvrNodal.projection",
+   "AlgebraicGeometry.DvrNodal.centre",
+   "AlgebraicGeometry.DvrNodal.IsOrigin",
+   "AlgebraicGeometry.DvrNodal.conicIdeal",
+   "AlgebraicGeometry.DvrNodal.ExceptionalGeometry",
+   "AlgebraicGeometry.DvrNodal.model_properties",
+   "AlgebraicGeometry.DvrNodal.smooth_properties",
+   "AlgebraicGeometry.DvrNodal.pointed_etale_properties",
+   "AlgebraicGeometry.DvrNodal.chart_rings",
+   "AlgebraicGeometry.DvrNodal.blowup_geometry",
+   "AlgebraicGeometry.DvrNodal.etale_blowup",
+   "AlgebraicGeometry.DvrNodal.pointed_reduced_centre"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DvrNodalChartBlowupCalculus.lean",
+  "statement": "theorem blowup_geometry (R : CommRingCat.{u}) [IsDomain R] [IsDiscreteValuationRing R] (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (n : ℕ) (hn : 2 ≤ n) (o : model R π n) (ho : IsOrigin R π n o) : Flat ((centre R π n).blowupMap ≫ projection R π n) ∧ ∃ hfp : LocallyOfFinitePresentation ((centre R π n).blowupMap ≫ projection R π n), @HasNodalGeometricFibres _ _ ((centre R π n).blowupMap ≫ projection R π n) hfp ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec R), IsReduced (pullback ((centre R π n).blowupMap ≫ projection R π n) g)) ∧ (∃ (j₀ : model R π 1 ⟶ (centre R π n).blowup) (j₁ : model R π (n - 2) ⟶ (centre R π n).blowup) (j₂ : model R π 1 ⟶ (centre R π n).blowup), IsOpenImmersion j₀ ∧ IsOpenImmersion j₁ ∧ IsOpenImmersion j₂ ∧ Set.range j₀ ∪ Set.range j₁ ∪ Set.range j₂ = Set.univ ∧ j₀ ≫ (centre R π n).blowupMap ≫ projection R π n = projection R π 1 ∧ j₁ ≫ (centre R π n).blowupMap ≫ projection R π n = projection R π (n - 2) ∧ j₂ ≫ (centre R π n).blowupMap ≫ projection R π n = projection R π 1 ∧ (j₀ ≫ (centre R π n).blowupMap).appTop ((Scheme.ΓSpecIso (.of (strictNodalRing R (π ^ n)))).inv (coordinate R (π ^ n) 0)) = (Scheme.ΓSpecIso (.of (strictNodalRing R (π ^ 1)))).inv (coordinate R (π ^ 1) 0) ∧ (j₀ ≫ (centre R π n).blowupMap).appTop ((Scheme.ΓSpecIso (.of (strictNodalRing R (π ^ n)))).inv (coordinate R (π ^ n) 1)) = (Scheme.ΓSpecIso (.of (strictNodalRing R (π ^ 1)))).inv (coordinate R (π ^ 1) 0 ^ (n - 1) * coordinate R (π ^ 1) 1 ^ n) ∧ (j₁ ≫ (centre R π n).blowupMap).appTop ((Scheme.ΓSpecIso (.of (strictNodalRing R (π ^ n)))).inv (coordinate R (π ^ n) 0)) = (Scheme.ΓSpecIso (.of (strictNodalRing R (π ^ (n - 2))))).inv (constant R (π ^ (n - 2)) π * coordinate R (π ^ (n - 2)) 0) ∧ (j₁ ≫ (centre R π n).blowupMap).appTop ((Scheme.ΓSpecIso (.of (strictNodalRing R (π ^ n)))).inv (coordinate R (π ^ n) 1)) = (Scheme.ΓSpecIso (.of (strictNodalRing R (π ^ (n - 2))))).inv (constant R (π ^ (n - 2)) π * coordinate R (π ^ (n - 2)) 1) ∧ (j₂ ≫ (centre R π n).blowupMap).appTop ((Scheme.ΓSpecIso (.of (strictNodalRing R (π ^ n)))).inv (coordinate R (π ^ n) 1)) = (Scheme.ΓSpecIso (.of (strictNodalRing R (π ^ 1)))).inv (coordinate R (π ^ 1) 0) ∧ (j₂ ≫ (centre R π n).blowupMap).appTop ((Scheme.ΓSpecIso (.of (strictNodalRing R (π ^ n)))).inv (coordinate R (π ^ n) 0)) = (Scheme.ΓSpecIso (.of (strictNodalRing R (π ^ 1)))).inv (coordinate R (π ^ 1) 0 ^ (n - 1) * coordinate R (π ^ 1) 1 ^ n) ∧ ∀ z : (centre R π n).blowup, (¬ IsRegularLocalRing ((centre R π n).blowup.presheaf.stalk z) ↔ 4 ≤ n ∧ ∃ q : model R π (n - 2), IsOrigin R π (n - 2) q ∧ j₁ q = z)) ∧ IsIso ((centre R π n).blowupMap ∣_ (centre R π n).support.compl) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ model R π n), Set.range g = {o} → ExceptionalGeometry n Ω (pullback.snd (centre R π n).blowupMap g)",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "F1 repair: the elementary quotient constants, coordinates and origin ideal are defined in this module, as explicitly permitted by the return; no statement dependency on the symmetric-blowup theorem remains. F2 repair: cites the owners of chartRing, blowupFlatBaseChange, comap, zeroLocus and coordinateSection. The seven theorem statements retain every clause of the node, with real helper definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ab30b237",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 6970892c66b3 fixes both findings. F1: the theorem dependency lem-trf-valuation-symmetric-nodal-blowup is dropped; constant, coordinate and originIdeal are defined in the item module, as the return allowed, with bodies identical to symmetricNodal*. F2: stmt_deps gain def-nagata-blowup-chart-ring, def-nagata-blowup-flat-base-change-map (closed slopmaster2 audit on blowupFlatBaseChange), def-nagata-extended-ideal, def-pc-zero-scheme and def-trf-strict-semistable-curve, plus the new existing:true node def-sfb-projective-coordinate-section (CoordinateSection.lean:109, pullback of unitToTwist X_i, owned by no other node). Line-by-line diff of the Lean: only renames otherwise, all seven statements unchanged. Independent reading confirms every clause: integral, normal, flat, nodal and reduced fibres; regular at o iff n=1; dim 2 at o; smooth pure curves; pointed etale transport; saturated charts (y=x^(n-1)t^n, x=pi r, rs=pi^(n-2), rs=1 at n=2); nonregular point iff n>=4 at the middle origin; conic or P1 for n=2, two P1 meeting in a reduced point for n>2; iso off o; etale blowupFlatBaseChange; reduced centre. No hollow definitions, sorry-only proofs, docstrings present, statement verbatim, report sections present, only lean/stmt_deps changed on the item node. Advisory maintainer note: the item-module definitions duplicate symmetricNodal* (H4, authorized by the return). No compile, since no file changed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

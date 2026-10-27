@@ -1,0 +1,121 @@
+{
+ "id": "lem-pur-strict-tensor-augmentation-normalization",
+ "kind": "statement",
+ "title": "The unique strict tensor quotient augmentation with prescribed coordinates",
+ "status": "split",
+ "statement": "For a prime ell, a finite coefficient extension E and any scheme T, there exists exactly one natural transformation from the actual ordinary signed total tensor to the actual completed strict tensor complex whose product coordinates on every pure total tensor are the tensor of the two finite quotient units and whose shifted mapping-cocone coordinate is zero. The normalization predicate is the literal pair of those equations. No geometric, constructibility or completeness hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pur-integral-operations-well-defined",
+  "def-pur-integral-derived-operations",
+  "lem-pur-strict-tensor-augmentation-construction"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+  "place": "The tensor-product operation in the proof, specialized to the strict quotient completion augmentation; the representative formula of def-pur-canonical-purity-source-transports."
+ },
+ "proof": [
+  {
+   "text": "The constructed map of lem-pur-strict-tensor-augmentation-construction has the prescribed coordinates by lem-pur-strict-tensor-augmentation-coordinates, and so supplies the witness.",
+   "uses": [
+    "lem-pur-strict-tensor-augmentation-construction",
+    "lem-pur-strict-tensor-augmentation-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two normalized maps, compare each product projection in every degree. The pure total tensor generators determine the degree morphisms by the pure-tensor extensionality theorem of lem-pur-strict-tensor-augmentation-coordinates. Product extensionality identifies the first coordinates. The second coordinates are both zero; mapping-cocone extensionality identifies the full components, and natural-transformation extensionality identifies the two maps. Apply this to the constructed witness to establish uniqueness.",
+   "uses": [
+    "lem-pur-strict-tensor-augmentation-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-strict-tensor-augmentation-construction",
+  "lem-pur-strict-tensor-augmentation-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+  "place": "The strict tensor quotient augmentation and its uniqueness in def-pur-canonical-purity-source-transports; the complete proof is partitioned to respect the per-file compile-time limit."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A chain map from a total tensor complex into a Roos mapping cocone is determined by pure tensor values of product coordinates and its zero shifted coordinate",
+   "results": "8 hits including HomologicalComplex.ιTensorObj, HomologicalComplex.mapBifunctorMap and CochainComplex.HomComplex.Cocycle.homOf. No strict quotient tensor augmentation statement.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing library quotient units and tensor tower comparison; the remaining argument is formal."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.lift",
+   "results": "8 hits for mapping-cocone lifts and their coordinates.",
+   "date": "2026-10-27",
+   "verdict": "Supplies the generic cone API but no normalized pro-etale tensor augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*augmentation|augmentation.*tensor",
+   "results": "The msearch Mathlib grep returned no matches; library rg found IntegralAmbient.tensorOperationUnit and tensorOperationUnit_coordinates. blueprint_refs search tensor augmentation returned zero blueprint nodes.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing operation unit, and prove its naturality/normalization and elementary extensionality."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PuritySourceTransports",
+  "date": "2026-10-27",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "The tensor product operation: strict quotient augmentation and its representative normalization",
+   "via": [
+    "def-pur-canonical-purity-source-transports"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictTensorAugmentationNormalization",
+  "file": "lean/Sheaf/Paper/StrictTensorAugmentationNormalization.lean",
+  "declaration": "WeilConjectures.StrictTensorAugmentation.existsUnique_normalized",
+  "declarations": [
+   "WeilConjectures.StrictTensorAugmentation.Normalized",
+   "WeilConjectures.StrictTensorAugmentation.existsUnique_normalized"
+  ],
+  "statement": "theorem existsUnique_normalized (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (T : Scheme.{u}) :\n    ∃! eta : (@coefficientTotalTensor.{u, u + 1, u} T.ProEt _ (ProEt.topology T)\n      (integralOperationsAbSheafify.{u, u} T)\n      (integralOperationsAbLocallyBijective.{u, u} T)\n      (completedIntegralCommRingSheafUnrestricted.{u, u} l E T)) ⟶\n        integralOperationsTensorComplexFunctor.{u, u} l E T, Normalized l E T eta",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T012827-L-2336931",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T012827-L-2336931",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

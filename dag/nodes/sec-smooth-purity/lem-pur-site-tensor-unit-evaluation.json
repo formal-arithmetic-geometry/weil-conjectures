@@ -1,0 +1,138 @@
+{
+ "id": "lem-pur-site-tensor-unit-evaluation",
+ "kind": "statement",
+ "title": "Derived site comparison preserves evaluation into the coefficient unit",
+ "statement": "Let A be a finite commutative ring and Y a scheme. In the ordinary derived categories of small etale and pro-etale A-module sheaves [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules], let C be exact comparison pullback [def-sf-comparison-derived-pullback], t its canonical derived tensor comparison, and c:C(A_Y) ≅ A_Y its canonical coefficient-unit comparison. For any Q,K and e:Q → A_Y, one has t_{Q,K};((C(e);c) tensor 1);lambda_{C(K)} = C((e tensor 1);lambda_K). Tensor is the ordinary K-flat derived tensor [def-kun-derived-tensor]. No exceptional inverse image, compact support or projection formula occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-pullback-tensor-product (Stacks Tag 07A4), its proof on K-flat complexes; unit coherence for its degreewise tensor map. Also sites-modules.tex, lemma-tensor-product-pullback."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-sf-comparison-derived-pullback",
+  "def-kun-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Choose K-flat models for Q and K. Comparison is exact and preserves flat objects, and therefore carries these models and their direct-sum total tensor to the defining comparison models. The characterizing square of leftDerivedTensorComparison identifies the tensor comparison on these models with the degreewise ordinary sheaf tensor comparison.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "def-sf-comparison-derived-pullback",
+    "lem-pc-kflat-resolution",
+    "lem-exc-constant-inverse-image-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality in Q moves the arrow e through this tensor comparison. At Q equal to the coefficient unit, the canonical coefficient-unit comparison followed by the left unitor is the image of the etale left unitor: both send each pure tensor a tensor k to a k, including the total-complex differential signs. The unit is concentrated in degree zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The resulting equality on K-flat representatives descends along localization and the characterizing square to the stated equality in the derived category. Zero objects and the zero coefficient ring obey the same formulas.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor",
+  "def-sf-comparison-derived-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-exc-constant-inverse-image-flat",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-pullback-tensor-product (Stacks Tag 07A4), its proof on K-flat complexes; unit coherence for its degreewise tensor map. Also sites-modules.tex, lemma-tensor-product-pullback. A potential shorter Lean route is mapDerivedCategoryOplaxMonoidal plus identification of its unit map with the displayed single-functor coefficient-unit composite. Blueprint-wide searches for tensor unit and unitor returned no duplicate comparison-evaluation statement; lem-kun-tensor-unit is only the individual unitor isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived exact monoidal functor tensor comparison is compatible with the tensor unit and the left unitor",
+   "results": "Functor.Monoidal.map_leftUnitor and CoreMonoidal.left_unitality: generic coherence; no identification with these two separately specified derived comparison maps.",
+   "date": "2026-10-26",
+   "verdict": "No exact match: a compatibility theorem for the specified derived tensor/unit maps remains needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal functor preserves evaluation into the tensor unit and left unitors",
+   "results": "Generic monoidal functor lemmas. A later local search also found Functor.mapDerivedCategoryOplaxMonoidal, but its unit map still needs identification with mapDerivedCategoryComparisonUpperStarUnitIso.",
+   "date": "2026-10-26",
+   "verdict": "No exact match: a compatibility theorem for the specified derived tensor/unit maps remains needed."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedTensorComparison.*[Uu]nit|[Uu]nit.*leftDerivedTensorComparison",
+   "results": "No match in remote msearch. Local search found MapDerivedCategoryMonoidal and its oplax structure, but no identification of its unit map with the specific coefficient-unit isomorphism.",
+   "date": "2026-10-26",
+   "verdict": "No exact match: a compatibility theorem for the specified derived tensor/unit maps remains needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.BoundedSiteTensorTransposes",
+  "date": "2026-10-26",
+  "group": "Q7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Steps 1 and 3; extracted tensor/unit preservation, Step 2 of lem-pur-bounded-site-tensor-transposes",
+   "via": [
+    "lem-pur-bounded-site-tensor-transposes",
+    "lem-pur-finite-site-counit-projection-transport",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-pur-diagonal-section-pasting"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SiteTensorUnitEvaluation",
+  "file": "lean/Sheaf/Paper/SiteTensorUnitEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.siteTensorUnitEvaluation",
+  "statement": "theorem siteTensorUnitEvaluation\n    (A : Type (u + 1)) [CommRing A] [Finite A] (Y : Scheme.{u})\n    (Q K : Etale.DerivedCategoryModule A Y) (e : Q ⟶ 𝟙_ _) :\n    ((derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso\n      (ModuleCat.{u + 1} A) Q).hom.app K) ≫\n        ((derivedTensor (ModuleCat.{u + 1} A) Y).map\n          (D(comparisonUpperStar (ModuleCat.{u + 1} A) Y).map e ≫\n            (DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso A Y).hom)).app\n              (D(comparisonUpperStar (ModuleCat.{u + 1} A) Y).obj K) ≫\n        (λ_ (D(comparisonUpperStar (ModuleCat.{u + 1} A) Y).obj K)).hom =\n      D(comparisonUpperStar (ModuleCat.{u + 1} A) Y).map\n        (((Etale.derivedTensor (ModuleCat.{u + 1} A) Y).map e).app K ≫ (λ_ K).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q7",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261025T205542-L-3287101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261025T205542-L-3287101",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

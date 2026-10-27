@@ -1,0 +1,270 @@
+{
+ "id": "lem-trf-nodal-marking-special-point-incidence",
+ "kind": "statement",
+ "title": "Special-point incidence on nodal components under closed-field extension",
+ "statement": "Let $k\\subseteq L$ be algebraically closed fields [def-weil-algebraic-closure, def-pc-field-extension]. Let $C$ be a finite type $k$-scheme [def-weil-finite-type-morphism], empty or pure of dimension $1$ [def-weil-pure-dimension], such that every nonsmooth point [def-sbc-smooth-morphisms] has completed local ring $k[[u,v]]/(uv)$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Let $i:F\\hookrightarrow C$ be a closed immersion [def-weil-closed-immersion] with $F\\to\\operatorname{Spec}k$ etale [def-weil-etale-morphism] and image in the smooth locus. Let $Z=\\operatorname{Sing}(C/k)$ be the first-Fitting singular subscheme [def-trf-first-fitting-singular-subscheme]. Then $F$ and $Z$ are finite disjoint unions of copies of $\\operatorname{Spec}k$, their scalar extensions replace each copy by exactly one $\\operatorname{Spec}L$, and $Z_L$ has support equal to the nonsmooth locus of $C_L=C\\times_kL$ [def-pc-fibre-product]. For any reduced irreducible component $R\\hookrightarrow C$ [def-weil-irreducible-components, lem-weil-pbc-reduced-induced-closed-subscheme] whose scalar extension is a reduced component of $C_L$, each point of $F\\cup |Z|$ lies on $R$ if and only if its unique scalar-extended point lies on $R_L$. Consequently $|R\\cap(F\\cup |Z|)|=|R_L\\cap(F_L\\cup |Z_L|)|$. These are numbers of distinct points on the component itself; a self-node counts once, not twice as its two branches. No properness or separatedness is required; the marking and singular set can be empty.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C59 (lemma-nodal-family), first-Fitting singular subscheme; morphisms.tex Tag 02G7 (lemma-unramified-over-field); returned Step 11, rational-point incidence under scalar extension."
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-field-extension",
+  "def-sbc-smooth-morphisms",
+  "def-trf-first-fitting-singular-subscheme",
+  "def-weil-algebraic-closure",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pure-dimension",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof": [
+  {
+   "text": "If $C$ is empty, its closed subschemes $F$ and $Z$ are empty, as are their base changes, and there is no component $R$; all assertions follow. Suppose henceforth that $C$ is pure of dimension $1$. Write $f:C\\to\\operatorname{Spec}k$. By [lem-pc-flat-field], $f$ is flat. The field $k$ is Noetherian since its only ideals are $(0)$ and $(1)$, so [pqf-lem-lft-fp-locnoeth] makes the finite-type $f$ locally finitely presented. Apply [lem-trf-chosen-nodal-fibres-universal] with $S=\\operatorname{Spec}k$ and with $k$ itself as the chosen algebraic closure of its residue field. Its hypotheses are exactly the dimension and completed-local-ring assumptions on $C$. It gives pure dimension one and nodality for every nonempty geometric fibre of $f$, including extensions by algebraically closed fields.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-trf-first-fitting-singular-subscheme",
+    "lem-pc-flat-field",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-trf-chosen-nodal-fibres-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C56 (lemma-node-field-extension), as assembled in lem-trf-chosen-nodal-fibres-universal; flatness over a field and local finite presentation over a Noetherian field"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-nodal-family-fitting-singular] to $f$, whose flatness, local finite presentation and geometric-fibre assumptions were established in step 1. It states that $Z\\to\\operatorname{Spec}k$ is unramified and $|Z|$ is the complement of the smooth locus of $C/k$. Apply its arbitrary-base-change clause to $\\operatorname{Spec}L\\to\\operatorname{Spec}k$: the first-Fitting singular subscheme of $C_L/L$ is canonically $Z\\times_k L$, and its support is exactly the nonsmooth locus of $C_L/L$. Thus the symbol $Z_L$ denotes this actual scalar extension, without replacing any subscheme by its reduction.",
+   "uses": [
+    "lem-trf-nodal-family-fitting-singular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C59 (lemma-nodal-family) and 0C5B (lemma-base-change-nodal-family); Divisors Tag 0C3I (lemma-base-change-and-fitting-ideal-omega)"
+   }
+  },
+  {
+   "text": "The morphism $F\\to\\operatorname{Spec}k$ is unramified by [def-weil-etale-morphism]. Apply [lem-trf-unramified-field-fibre-decomposition] separately to $F$ and $Z$: each is a disjoint union of spectra of finite separable extensions of $k$. Every such extension is $k$ by [lem-weil-pbc-alg-closed-finite-extension-trivial]. The finite-type hypothesis makes $C$ quasi-compact by [def-weil-finite-type-morphism]. Both $F$ and $Z$ are closed subschemes, so their underlying spaces are quasi-compact: add the open complement to any open cover and take a finite subcover of $C$. Their singleton summands form an open cover, hence only finitely many summands occur. This proves the finite disjoint-union assertions, including the empty union. The two images are disjoint because the marking is smooth and step 2 identifies the support of $Z$ with the nonsmooth locus.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-trf-unramified-field-fibre-decomposition",
+    "lem-weil-pbc-alg-closed-finite-extension-trivial",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "def-trf-first-fitting-singular-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Morphisms Tag 02G7 (lemma-unramified-over-field)(1); Fields Tag 09GR (lemma-algebraically-closed); elementary finite-subcover argument"
+   }
+  },
+  {
+   "text": "For either $H=F$ or $H=Z$, write the result of step 3 over $k$ as $H\\cong\\coprod_{a\\in I_H}\\operatorname{Spec}k$, with $I_H$ finite. Apply [lem-weil-pbc-sets-etale-inverse-image-constant-base-change] with $U=\\operatorname{Spec}k$, $V=\\operatorname{Spec}L$ and $E=I_H$. It identifies $H_L$ with $\\coprod_{a\\in I_H}\\operatorname{Spec}L$, compatibly with every summand and the projection to $H$. In particular exactly one point $a_L$ lies over each $a\\in H$. By [lem-weil-pbc-closed-immersion-base-change], $F_L$, $Z_L$ and $R_L$ embed as closed subschemes of $C_L$. Distinct points within either special subscheme stay distinct by these embeddings; points from $F_L$ and $Z_L$ cannot coincide because their projections lie in the disjoint original images. Thus $a\\mapsto a_L$ is a bijection from $F\\cup|Z|$ to $F_L\\cup|Z_L|$, with the projection to $C$ sending $a_L$ to $a$.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-constant-base-change",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), and Morphisms Tag 01QR (lemma-base-change-closed-immersion)"
+   }
+  },
+  {
+   "text": "Fix $a\\in F\\cup|Z|$ and let $s_a:\\operatorname{Spec}k\\to C$ be its summand map from step 3. If $a\\in|R|$, [lem-weil-pbc-field-point-factors-through-closed-immersion] applied to $R\\hookrightarrow C$ factors $s_a$ through $R$. This factorization is over $k$, since its composite with $R\\to C\\to\\operatorname{Spec}k$ is the original structural map. The fibre-product universal property [def-pc-fibre-product] then gives a map $\\operatorname{Spec}L\\to R_L$ whose composite into $C_L$ is the scalar extension of $s_a$; its point is $a_L$ by step 4. Hence $a_L\\in|R_L|$. Conversely, if $a_L$ lies on $R_L$, project its point in $R_L$ to $R$ and then to $C$. The pullback square shows its image is $a$, so $a\\in|R|$. The incidence equivalence therefore uses no claim about normalization or branches, and applies in fact to any closed subscheme $R$ with the stated scalar extension.",
+   "uses": [
+    "lem-weil-pbc-field-point-factors-through-closed-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes Tag 0356 (lemma-map-into-reduction), specialized to Spec k, and the fibre-product universal property"
+   }
+  },
+  {
+   "text": "Restrict the finite bijection $a\\mapsto a_L$ of step 4 to the points lying on $R$. The forward implication in step 5 places its image on $R_L$; the reverse implication shows that the inverse image of any special point on $R_L$ lies on $R$. This is a bijection $R\\cap(F\\cup|Z|)\\simeq R_L\\cap(F_L\\cup|Z_L|)$, giving the required equality of cardinalities. It counts underlying points, so a self-node contributes one element even when it has two branches. Empty special sets or empty intersections give the empty bijection. Every construction used closed immersions and scalar extension, with no properness or separatedness assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Conclusion of the rational-point incidence argument; elementary restriction of a finite bijection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-first-fitting-singular-subscheme",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-pc-flat-field",
+  "lem-trf-chosen-nodal-fibres-universal",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-trf-unramified-field-fibre-decomposition",
+  "lem-weil-pbc-alg-closed-finite-extension-trivial",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-field-point-factors-through-closed-immersion",
+  "lem-weil-pbc-sets-etale-inverse-image-constant-base-change",
+  "pqf-lem-lft-fp-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Assembly of Tags 0C56, 0C59, 0C5B and Morphisms 02G7, with the rational-point factorization from Schemes 0356 and the fibre-product universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Marking and singular locus of a finite type nodal curve over an algebraically closed field are finite unions of rational points and their incidence on components and number of distinct points is unchanged by algebraically closed scalar extension",
+   "results": "{\"t\": \"2026-10-22T06:10:07Z\", \"tool\": \"leanfinder\", \"query\": \"Marking and singular locus of a finite type nodal curve over an algebraically closed field are finite unions of rational points and their incidence on components and number of distinct points is unchanged by algebraically closed scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.Affine.nonsingular_negAdd_of_eval_derivative_ne_zero\", \"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.Affine.nonsingular_add\", \"WeierstrassCurve.Affine.nonsingular_negAdd\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"WeierstrassCurve.Affine.nonsingular_iff\", \"WeierstrassCurve.Affine.Nonsingular\"], \"digest\": \"be6026c8e13bdab0\"}; Weierstrass nonsingularity and unramified local-algebra results do not state the finite special-point incidence comparison for arbitrary nodal curves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite unramified scheme over an algebraically closed field is a finite disjoint union of rational points and scalar extension preserves their intersections with reduced components",
+   "results": "{\"t\": \"2026-10-22T06:10:07Z\", \"tool\": \"leanfinder\", \"query\": \"A finite unramified scheme over an algebraically closed field is a finite disjoint union of rational points and scalar extension preserves their intersections with reduced components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"Algebra.Unramified.finiteType\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"Algebra.isOpen_unramifiedLocus\", \"Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing\", \"Algebra.unramifiedLocus\"], \"digest\": \"2fa253b282326665\"}; Weierstrass nonsingularity and unramified local-algebra results do not state the finite special-point incidence comparison for arbitrary nodal curves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Marking and singular locus of a finite type nodal curve over an algebraically closed field are finite unions of rational points and their incidence on components and number of distinct points is unchanged by algebraically closed scalar extension",
+   "results": "{\"t\": \"2026-10-22T06:09:56Z\", \"tool\": \"leansearch\", \"query\": \"Marking and singular locus of a finite type nodal curve over an algebraically closed field are finite unions of rational points and their incidence on components and number of distinct points is unchanged by algebraically closed scalar extension\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Weierstrass nonsingularity and unramified local-algebra results do not state the finite special-point incidence comparison for arbitrary nodal curves.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Unramified, IsAlgClosed",
+   "results": "{\"t\": \"2026-10-22T06:09:57Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Unramified, IsAlgClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.Unramified'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Weierstrass nonsingularity and unramified local-algebra results do not state the finite special-point incidence comparison for arbitrary nodal curves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|special.points|singular.*(finite|[Bb]ase)|unramified.*[Aa]lg[Cc]losed",
+   "results": "{\"t\": \"2026-10-22T06:09:56Z\", \"tool\": \"grep\", \"query\": \"nodal|special.points|singular.*(finite|[Bb]ase)|unramified.*[Aa]lg[Cc]losed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean\"], \"digest\": \"8140acf0d03f7872\"}; Weierstrass nonsingularity and unramified local-algebra results do not state the finite special-point incidence comparison for arbitrary nodal curves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite marked and singular points of a nodal curve over an algebraically closed field retain incidence with closed subschemes after scalar extension",
+   "results": "{\"t\": \"2026-10-23T09:29:15Z\", \"tool\": \"leanfinder\", \"query\": \"Finite marked and singular points of a nodal curve over an algebraically closed field retain incidence with closed subschemes after scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.Affine.Point.baseChange\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"WeierstrassCurve.Jacobian.baseChange_nonsingular\", \"WeierstrassCurve.Affine.baseChange_nonsingular\", \"WeierstrassCurve.Affine.Point.map_baseChange\", \"WeierstrassCurve.Affine.Point.map_map\", \"WeierstrassCurve.Affine.Point.map\"], \"digest\": \"e28f243fc11a274b\"}; Read the hits: Weierstrass point maps/nonsingularity, general finiteness of components and fibres, and local unramified algebra do not state this scheme-level special-point incidence result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|firstFitting|singularSubscheme|unramified.*[Aa]lg[Cc]losed",
+   "results": "{\"t\": \"2026-10-23T09:30:51Z\", \"tool\": \"grep\", \"query\": \"nodal|firstFitting|singularSubscheme|unramified.*[Aa]lg[Cc]losed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: Weierstrass point maps/nonsingularity, general finiteness of components and fibres, and local unramified algebra do not state this scheme-level special-point incidence result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type nodal curve has finitely many rational singular points over an algebraically closed field and incidence with components is invariant under field extension",
+   "results": "{\"t\": \"2026-10-23T09:30:51Z\", \"tool\": \"leansearch\", \"query\": \"A finite type nodal curve has finitely many rational singular points over an algebraically closed field and incidence with components is invariant under field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"WeierstrassCurve.Affine.Point.map_some\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"WeierstrassCurve.Jacobian.nonsingular_of_equiv\", \"WeierstrassCurve.Projective.Point.nonsingular\", \"WeierstrassCurve.Projective.nonsingular_of_equiv\", \"WeierstrassCurve.Projective.Point.noConfusion\", \"WeierstrassCurve.Projective.nonsingularLift_iff\"], \"digest\": \"fadc60ebc0a98589\"}; Read the hits: Weierstrass point maps/nonsingularity, general finiteness of components and fibres, and local unramified algebra do not state this scheme-level special-point incidence result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified, IsAlgClosed",
+   "results": "{\"t\": \"2026-10-23T09:30:51Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.FormallyUnramified, IsAlgClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: Weierstrass point maps/nonsingularity, general finiteness of components and fibres, and local unramified algebra do not state this scheme-level special-point incidence result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An unramified quasi compact scheme over an algebraically closed field is a finite disjoint union of copies of the field spectrum",
+   "results": "{\"t\": \"2026-10-23T09:30:59Z\", \"tool\": \"leanfinder\", \"query\": \"An unramified quasi compact scheme over an algebraically closed field is a finite disjoint union of copies of the field spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isField_of_universallyClosed\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"AlgebraicGeometry.instIsAffineTerminalScheme\"], \"digest\": \"32d397a191f49748\"}; Read the hits: Weierstrass point maps/nonsingularity, general finiteness of components and fibres, and local unramified algebra do not state this scheme-level special-point incidence result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-semistable-marked-base-change",
+  "date": "2026-10-22",
+  "group": "Q117"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Arbitrary base change of semistable marked curves and fibrewise stability. Re-split argument: Special-point incidence on nodal components under closed-field extension (returned item Steps 11).",
+   "via": [
+    "lem-trf-semistable-marked-base-change",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-nodal-marking-special-point-incidence",
+  "worker": "stage1",
+  "summary": "Kept the statement and its dependencies unchanged. Six proof steps establish the geometric-fibre hypotheses, invoke the existing first-Fitting singular-family theorem, split the quasi-compact unramified special schemes into rational points, base-change their summands, prove incidence by field-point factorization and the pullback square, and restrict the resulting finite bijection. No new nodes or Mathlib leaves.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality, proof (1)--(2), specialization/nearby-cycle alteration route, via semistable marked base change: this item realizes its special-point incidence argument. The current latest blueprint does not contain a separate nodal-incidence statement; searched nodal, unramified and incidence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-constant-base-change",
+    "why": "Generic base change of a constant coproduct of schemes, used only to identify each Spec k special-point summand with one Spec L summand; it does not replace any trace-formula unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sets-etale-inverse-image-constant-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NU-4fd642b08",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-4fd642b08 (reviewer sub-agent of L); spot-checked: I read all six steps in full against the statements of every cited node and against Stacks curves 0C59 (lemma-nodal-family, l.4662) and morphisms 02G7(1) (lemma-unramified-over-field, l.7790). Shape: one commit; no new nodes. Compared with the live item (still unsplit, so no other group has superseded it), only status, proof, proof_deps, proof_origin, searches and split_report changed. The statement and stmt_deps are byte-identical, so the target is not weakened. There is no cycle: the closure of 1511 nodes does not contain the item. Step-by-step checks. Step 1: the empty case comes from the definitions. Flatness comes from lem-pc-flat-field. Spec k is Noetherian, so pqf-lem-lft-fp-locnoeth gives local finite presentation. lem-trf-chosen-nodal-fibres-universal applies with S=Spec k and k_s=k; its pure-dimension and nodal-completion hypotheses are exactly the item's hypotheses. It yields nodal geometric fibres over every algebraically closed Ω. Step 2: all hypotheses of lem-trf-nodal-family-fitting-singular are met. That node gives Z unramified, |Z| equal to the nonsmooth locus, and Sing(C_L/L)=Z×_kL with the right support. Step 3: F is étale, hence unramified, and 02G7 together with the finite-extension-triviality leaf gives copies of Spec k. Finiteness follows because F and Z are closed in the quasi-compact C, and their disjoint open singletons therefore form a finite set. Disjointness follows from the smooth marking. Step 4: the constant-coproduct base-change lemma with its coprojection clause, plus base change of closed immersions, gives a bijection a↦a_L. I checked independently that the fibre of C_L→C over the k-rational point a is the single point Spec(k⊗_kL). Step 5: the factorization lemma is applied only to the field point Spec k→C, so it avoids the E3 trap. The fibre-product universal property then gives the forward direction, and the pullback square gives the converse. Step 6 is genuinely elementary. Edge cases tested: empty C; a smooth line with an empty marking; xy=0; a nodal cubic, where the self-node counts once; the non-separated doubled origin; and L=k. Nonreduced C is excluded by the hypotheses. The citer lem-trf-semistable-marked-base-change, step 3, uses exactly the item's final clause. No duplicate exists in sec-trace-formula and no SGA source is used. I accept the declared tool use lem-weil-pbc-sets-etale-inverse-image-constant-base-change (unit sk-thm-iff) as generic coproduct base change. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalMarkingSpecialPointIncidence",
+  "declaration": "AlgebraicGeometry.nodal_marking_special_point_incidence",
+  "declarations": [
+   "AlgebraicGeometry.nodalMarkingScalarInclusion",
+   "AlgebraicGeometry.nodal_marking_special_point_incidence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalMarkingSpecialPointIncidence.lean",
+  "statement": "theorem nodal_marking_special_point_incidence (k L : Type u) [Field k] [IsAlgClosed k] [Field L] [IsAlgClosed L] (φ : k →+* L) {C F : Scheme.{u}} (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] (hpure : C.IsPureDimension 1) (hnodal : ∀ x : C, ¬ (f.stalkMap x).hom.FormallySmooth → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk x)) (C.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X (0 : Fin 2) * MvPowerSeries.X (1 : Fin 2) : MvPowerSeries (Fin 2) k)}))) (i : F ⟶ C) [IsClosedImmersion i] [Etale (i ≫ f)] (hmark : ∀ x : F, (f.stalkMap (i x)).hom.FormallySmooth) : (∃ (nF nZ : ℕ) (eF : (∐ fun _ : Fin nF ↦ Spec (.of k)) ≅ F) (eZ : (∐ fun _ : Fin nZ ↦ Spec (.of k)) ≅ (Scheme.firstFittingIdealSheaf f).subscheme) (eFL : (∐ fun _ : Fin nF ↦ Spec (.of L)) ≅ pullback (C := Scheme.{u}) (i ≫ f) (Spec.map (CommRingCat.ofHom φ))) (eZL : (∐ fun _ : Fin nZ ↦ Spec (.of L)) ≅ pullback (C := Scheme.{u}) (Scheme.firstFittingSingularSubscheme f ≫ f) (Spec.map (CommRingCat.ofHom φ))), eF.hom ≫ i ≫ f = Sigma.desc (fun _ : Fin nF ↦ 𝟙 (Spec (.of k))) ∧ eZ.hom ≫ Scheme.firstFittingSingularSubscheme f ≫ f = Sigma.desc (fun _ : Fin nZ ↦ 𝟙 (Spec (.of k))) ∧ eFL.hom ≫ pullback.snd (i ≫ f) (Spec.map (CommRingCat.ofHom φ)) = Sigma.desc (fun _ : Fin nF ↦ 𝟙 (Spec (.of L))) ∧ eZL.hom ≫ pullback.snd (Scheme.firstFittingSingularSubscheme f ≫ f) (Spec.map (CommRingCat.ofHom φ)) = Sigma.desc (fun _ : Fin nZ ↦ 𝟙 (Spec (.of L))) ∧ (∀ a : Fin nF, Sigma.ι (fun _ : Fin nF ↦ Spec (.of L)) a ≫ eFL.hom ≫ pullback.fst (i ≫ f) (Spec.map (CommRingCat.ofHom φ)) = Spec.map (CommRingCat.ofHom φ) ≫ Sigma.ι (fun _ : Fin nF ↦ Spec (.of k)) a ≫ eF.hom) ∧ (∀ a : Fin nZ, Sigma.ι (fun _ : Fin nZ ↦ Spec (.of L)) a ≫ eZL.hom ≫ pullback.fst (Scheme.firstFittingSingularSubscheme f ≫ f) (Spec.map (CommRingCat.ofHom φ)) = Spec.map (CommRingCat.ofHom φ) ≫ Sigma.ι (fun _ : Fin nZ ↦ Spec (.of k)) a ≫ eZ.hom)) ∧ Disjoint (Set.range i) (Set.range (Scheme.firstFittingSingularSubscheme f)) ∧ Set.range (nodalMarkingScalarInclusion f (Spec.map (CommRingCat.ofHom φ)) (Scheme.firstFittingSingularSubscheme f)) = {x | ¬ ((pullback.snd f (Spec.map (CommRingCat.ofHom φ))).stalkMap x).hom.FormallySmooth} ∧ Set.BijOn (pullback.fst f (Spec.map (CommRingCat.ofHom φ))) (Set.range (nodalMarkingScalarInclusion f (Spec.map (CommRingCat.ofHom φ)) i) ∪ Set.range (nodalMarkingScalarInclusion f (Spec.map (CommRingCat.ofHom φ)) (Scheme.firstFittingSingularSubscheme f))) (Set.range i ∪ Set.range (Scheme.firstFittingSingularSubscheme f)) ∧ (∀ (R : Scheme.{u}) (r : R ⟶ C) [IsClosedImmersion r] [IsReduced R], Set.range r ∈ irreducibleComponents C → IsReduced (pullback (C := Scheme.{u}) (r ≫ f) (Spec.map (CommRingCat.ofHom φ))) → Set.range (nodalMarkingScalarInclusion f (Spec.map (CommRingCat.ofHom φ)) r) ∈ irreducibleComponents (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom φ))) → (∀ aL : pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom φ)), aL ∈ Set.range (nodalMarkingScalarInclusion f (Spec.map (CommRingCat.ofHom φ)) i) ∪ Set.range (nodalMarkingScalarInclusion f (Spec.map (CommRingCat.ofHom φ)) (Scheme.firstFittingSingularSubscheme f)) → (pullback.fst f (Spec.map (CommRingCat.ofHom φ)) aL ∈ Set.range r ↔ aL ∈ Set.range (nodalMarkingScalarInclusion f (Spec.map (CommRingCat.ofHom φ)) r))) ∧ Nat.card ↥(Set.range r ∩ (Set.range i ∪ Set.range (Scheme.firstFittingSingularSubscheme f))) = Nat.card ↥(Set.range (nodalMarkingScalarInclusion f (Spec.map (CommRingCat.ofHom φ)) r) ∩ (Set.range (nodalMarkingScalarInclusion f (Spec.map (CommRingCat.ofHom φ)) i) ∪ Set.range (nodalMarkingScalarInclusion f (Spec.map (CommRingCat.ofHom φ)) (Scheme.firstFittingSingularSubscheme f)))))",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3247f876f",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Node diff vs side-live adds only the lean field; lean.statement is verbatim in the module, the single sorry is the theorem proof, and both report sections are present. Every hypothesis matches the node and none is stronger: IsPureDimension is vacuous on the empty scheme; nonsmooth is written as Mathlib's smoothLocus condition (equal by definition, smoothLocus needs an lfp instance not available here); the ring-iso completion condition is equivalent to the k-algebra one at closed points; Z is the existing firstFittingIdealSheaf subscheme; F is a closed immersion with Etale (i ≫ f) and smooth image. All conclusion clauses are rendered: finite Spec k coproducts with the same index sets after extension to L and summand-wise projection compatibility, disjointness, support of the actual Z_L equals the nonsmooth locus of C_L, BijOn of the projection on special points, incidence iff and Nat.card equality for reduced components whose extension is a reduced component. Edge cases covered: empty C, empty marking, smooth C, L = k, char 2, non-separated C. Single universe u. Advisory only: the helper repeats pullback.map, which also exists as flatClosedFamilyBaseChangeImmersion and closedIdealBaseChangeMap in theorem-node modules (citing those would add a theorem stmt_dep, H2), so the local helper is acceptable. No compile run and no files changed."
+ }
+}

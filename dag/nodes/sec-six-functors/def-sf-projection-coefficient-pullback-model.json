@@ -1,0 +1,136 @@
+{
+ "id": "def-sf-projection-coefficient-pullback-model",
+ "kind": "definition",
+ "title": "Projection-induced completed coefficient pullback and its normalized quotient tower",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], schemes $X,Y$ and a morphism $f:X\\to Y$. Use the completed coefficient sheaves $B_X,B_Y$, the projection-induced ring map $B_Y\\to f_*B_X$, and ordinary module direct image $f_*$ with this scalar action [def-sf-projection-coefficient-direct-image]. In the categories of module sheaves [def-weil-sheaf-of-modules-category], define $f^*=B_X\\otimes_{f^{-1}B_Y}f^{-1}(-)$ as the left adjoint IntegralAmbient.pull of that direct image, with its specified adjunction IntegralAmbient.adjunction. Its additive termwise extension to unbounded cochain complexes [def-weil-abstract-derived-category] is pullComplex. For a module $M$, a pro-etale object $V\\to Y$ and $x\\in M(V)$, define pullSection by the adjunction unit $M\\to f_*f^*M$ on $x$. Let $A_{W,n}$ denote the finite coefficient sheaf at exponent $n+1$, $n\\geq0$, with projection $\\pi_n:B_W\\to A_{W,n}$. Define pullTower on a complex $P$ as the actual reduction tower $((f^*P)\\otimes_{B_X}A_{X,n})_n$ with its quotient augmentation and transitions [def-pur-integral-derived-operations]. Let $V_f(P)$ be the finite pulled reduction tower [def-a1-integral-finite-pullback-tower]. Define pullTowerIso to be the unique natural strict tower isomorphism $\\operatorname{pullTower}\\cong V_f$ characterized in every degree, on every base-changed object and for every finite scalar $a$ and section $x$ by $(\\operatorname{pullSection}(x))\\otimes a\\mapsto a\\otimes(x\\otimes1)$ (finitePullSection); equivalently $(r\\otimes x)\\otimes a\\mapsto\\pi_n(r)a\\otimes(x\\otimes1)$. The existence-and-uniqueness specification is pullTowerModel. Define pullOperationUnit on $P$ as the canonical quotient Roos unit of $f^*P$ followed by the strict Roos functor [def-sf-strict-roos-functor] applied to pullTowerIso. Its product coordinate is the quotient augmentation followed by pullTowerIso and its shifted coordinate is zero. All strict transitions, differentials and chain maps are retained. There is no boundedness, flatness, completeness, constructibility or invertibility hypothesis and no relation between scheme and coefficient universes.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-projection-coefficient-direct-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-integral-derived-operations",
+  "def-a1-integral-finite-pullback-tower",
+  "def-sf-strict-roos-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D7 and 03EL: ordinary ringed module pullback, its adjunction and balanced scalar association; sites-cohomology.tex Tags 06YY and 0941 for complexes and quotient Roos augmentation. Applied to the current blueprint prop-sf-pf-coherence proof, open factor, both restrict to the identity."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullTowerIso|pullOperationUnit|pullTowerModel|IntegralAmbient",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib notion; reuse the existing IntegralAmbient pullback definitions with a new definition ownership record."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordinary module pullback for completed integral coefficients has a generator-normalized strict quotient tower comparison preserving the quotient augmentation into the Roos complex",
+   "results": "8 hits: AdicCompletion.module, AdicCompletion, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, SheafOfModules.pullbackObjFreeIso, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, IsAdicComplete.of_comp_lift, Condensed.instAB4CondensedMod",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib notion; reuse the existing IntegralAmbient pullback definitions with a new definition ownership record."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary ringed pullback over projection-induced completed integral coefficient sheaves with its adjunction-unit section generators and normalized strict quotient tower isomorphism and Roos augmentation",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.AffineSpace.over_over",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib notion; reuse the existing IntegralAmbient pullback definitions with a new definition ownership record."
+  },
+  {
+   "tool": "grep",
+   "query": "rg IntegralAmbient.(pull|adjunction|pullComplex|pullSection|pullTowerModel|pullTowerIso|pullOperationUnit) dag/nodes; rg pullTowerIso|pullOperationUnit|namespace IntegralAmbient lean/WeilConjectures lean/Sheaf; blueprint_refs.py search ordinary pullback quotient",
+   "results": "DAG hits only lem-tw-integral-quotient-augmentation and lem-pur-integral-ambient-operation-models, both theorem nodes; def-sf-projection-coefficient-direct-image owns coefficientMap/push only. No WeilConjectures hit; exact definitions at Sheaf/Paper/IntegralAmbientOperationModels.lean:210-330. Blueprint search returned 14 broader matches, including completed pullback, with no definition owning this ordinary pullback and strict generator normalization.",
+   "date": "2026-10-24",
+   "verdict": "The declarations already exist but no DAG definition owns them. Add existing:true node; do not copy or redefine them."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-open-square-quotient-augmentation",
+  "date": "2026-10-24",
+  "group": "Q34"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Open-factor base-change comparison, retaining the actual quotient augmentations of ordinary pullback before the strict Roos limit.",
+   "via": [
+    "lem-sf-open-square-quotient-augmentation",
+    "lem-sf-open-exchange-roos-restriction",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralAmbientOperationModels",
+  "declaration": "WeilConjectures.IntegralAmbient.pull",
+  "declarations": [
+   "WeilConjectures.IntegralAmbient.pull",
+   "WeilConjectures.IntegralAmbient.adjunction",
+   "WeilConjectures.IntegralAmbient.pull_additive",
+   "WeilConjectures.IntegralAmbient.pullComplex",
+   "WeilConjectures.IntegralAmbient.pullSection",
+   "WeilConjectures.IntegralAmbient.finitePullSection",
+   "WeilConjectures.IntegralAmbient.pullTower",
+   "WeilConjectures.IntegralAmbient.pullTowerModel",
+   "WeilConjectures.IntegralAmbient.pullTowerIso",
+   "WeilConjectures.IntegralAmbient.pullOperationUnit"
+  ],
+  "statement": "def pull {X Y : Scheme.{t}} (f : X ⟶ Y)",
+  "branch": "sheaf-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "§1(A) definition ownership for the existing ordinary pullback, its adjunction-unit generators, and its uniquely generator-normalized strict quotient tower comparison and Roos augmentation. pullTowerModel determines the chosen isomorphism uniquely; no arbitrary map or unpinned existence choice is introduced. coefficientMap and push remain owned by def-sf-projection-coefficient-direct-image. The theorem integralAmbientOperationModels is not used or owned by this node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ec6e7d44",
+  "group": "Q34",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ec6e7d44",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Re-delivery of 667ecb1f (H2 RETURN); Lean module byte-identical to 667e, whose maths was accepted; I re-read every clause against the node and agree (all data in the conclusion, pinned by counit/unit/generator/Roos-coordinate equations; UnitTransport is a real statement about the other presentation's actual normalized unit, not a cancelling tautology; no extra hypotheses; independent universes). H2 repaired: lem-pur-integral-ambient-operation-models removed from stmt_deps; new existing:true definition node def-sf-projection-coefficient-pullback-model over Sheaf.Paper.IntegralAmbientOperationModels; all 10 declarations exist, lean.statement occurs verbatim once, prose matches (pullTowerIso = choose of the exists-unique pullTowerModel), bracket citations = stmt_deps, all definition nodes, same shape as the Q66 direct-image precedent; no owner race. def-sf-projection-coefficient-direct-image, def-a1-flat-term-kflat-complex, def-a1-integral-finite-pullback-tower, def-sf-strict-roos-functor and def-pur-integral-derived-operations added; item differs from side-live only in lean and added stmt_deps. Gates ok (verbatim statement, declarations list exact, only main theorem sorried, docstrings carry source and 8 steps). No compile (no file changed). Advisory: some used declarations (integralDerivedPullback, roosU, towerStep, ...) have no definition-node owner (none theorem-owned); def-weil-pbc-completed-pullback's recorded declarations are not used, so the consumer may need a bridge to pbcIntegralDatum.completedPull."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-bdbf9",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261026T130259-L-3445421",
+  "kind": "interface",
+  "note": "independent cc review: delivered NormalizedIntegralPullbackTower + item against clone (moved block byte-identical except blueprint tags; pullTowerModel statement identical); 9 direct importers compiled against the delivered modules (all OK); #print axioms clean; node stmt_deps against the owners of the Lean statement's constants",
+  "sorry_before": [
+   "WeilConjectures.IntegralAmbient.pullTowerModel"
+  ],
+  "sorry_after": []
+ }
+}

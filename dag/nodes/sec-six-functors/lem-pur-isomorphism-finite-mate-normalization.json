@@ -1,0 +1,267 @@
+{
+ "id": "lem-pur-isomorphism-finite-mate-normalization",
+ "kind": "statement",
+ "title": "Finite reindexing identifies the normalized proper and open exchange factors",
+ "statement": "Fix the finite-field and coefficient datum of [def-pur-conventions], with $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, $E/\\mathbf Q_\\ell$ finite, valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, and $A_n=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$. Let $f:X\\to Y$ be separated of finite type between separated finite-type $k$-schemes. Let $g:Y'\\xrightarrow{\\sim}Y$ be an isomorphism of underlying schemes, with Cartesian pullback $f':X'\\to Y'$ and $g':X'\\xrightarrow{\\sim}X$ [def-weil-pbc-cartesian-square]; $g,g'$ need not be $k$-linear. Choose a compactification $c=(X\\xrightarrow j\\overline X\\xrightarrow pY)$ and its base change $c'=(j',p')$, with induced isomorphism $\\bar g:\\overline X'\\to\\overline X$ [def-weil-compactifications-refinements]. Use the finite-coefficient unbounded small pro-etale derived categories and canonical adjunctions of [def-weil-pbc-proetale-operations], with $A=A_n$. All squares and exchange maps are those of [def-exchange-projection] over $S=Y$. For an isomorphism $u$ among $g,g',\\bar g$, write $G_u=u^{-1}$ for site reindexing [lem-weil-proetale-isomorphism-inverse-image].\n\nFor every $M\\in D(\\overline X_{\\mathrm{proet}},A)$ the specified proper direct-image mate is precisely the natural isomorphism\n$$\\operatorname{Ex}_{*,p}(M)=r_M:G_gRp_*M\\xrightarrow{\\sim}Rp'_*G_{\\bar g}M.$$\nIts underived representative, for an $A$-module sheaf $F$ and $V\\to Y'$ in the small pro-etale site, is the canonical identification\n$$(g^{-1}p_*F)(V)=F(\\overline X\\times_YV)\\cong F(\\overline X'\\times_{Y'}V\\to\\overline X)=(p'_*\\bar g^{-1}F)(V).$$\nThe transpose of $r_M$ under $Lp'^*\\dashv Rp'_*$ is $G_{\\bar g}(\\varepsilon_{p,M})\\circ\\theta_{Rp_*M}$, where $\\theta:Lp'^*G_g\\simeq G_{\\bar g}Lp^*$ is the canonical square comparison. Thus this identifies the map for the specified derived unit and counit [def-weil-pbc-adjunction-mate].\n\nFor every $K\\in D(X_{\\mathrm{proet}},A)$ the canonical open comparison $\\beta_K:G_{\\bar g}j_!K\\xrightarrow{\\sim}j'_!G_{g'}K$ is the reindexing comparison, with inverse the $j'_!\\dashv j'^{-1}$ transpose of\n$$G_{g'}K\\longrightarrow G_{g'}j^{-1}j_!K\\cong j'^{-1}G_{\\bar g}j_!K.$$\nConsequently the specified finite compact-support exchange is exactly the ordered reindexing isomorphism $\\operatorname{Ex}_!^c(K)=Rp'_*(\\beta_K)\\circ r_{j_!K}$, natural in $K$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+  "place": "Constituent-compatibility assembly paragraph; agent-extracted auxiliary argument, original reviewed lem-pur-weil-semilinear-exchange-reindexing steps 1,2,3,4,5."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-operations",
+  "def-exchange-projection",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "The fixed-scalar base-change transformation is the mate of the canonical pullback square (pro_baseChange_eq_mate). Transport this equality through the canonical intrinsic module equivalences using trMate and sfSquare_transport. Changing the transported right adjoints to the published direct-image coordinates conjugates the mate by those coordinate isomorphisms. fixed_restriction_eq_baseChange identifies the middle map with the ordinary section restriction, giving proper_underived. The section formula in the statement is then definitional.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-fix-site-open-exchange-sheaf",
+    "lem-trf-open-square-exchange",
+    "lem-exc-etale-origin-open-restriction-transport",
+    "prop-exc-base-change-proper"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved generic derived_mate_exact_eq_square to the intrinsic ordinary adjunctions and square. The published sfCartesianOpenPullPushAdjunction is their right-derived adjunction. intrinsic_restriction_eq_square identifies the right-derived ordinary restriction with the published proper restriction. Substitution of proper_underived therefore proves equality of the specified derived mate and that restriction.",
+   "uses": [
+    "lem-kun-unbounded-abelian-exchange-comparison",
+    "lem-exc-etale-origin-open-restriction-transport",
+    "lem-sf-cartesian-open-adjunction-restriction",
+    "prop-exc-base-change-proper"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The mate counit identity applied to the equality from Step 2 is exactly the displayed counit-transpose equation, evaluated at an arbitrary unbounded object.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any two adjunctions with isomorphic right adjoints, the inverse of the leftAdjointUniq comparison is the inverse conjugate of that right-adjoint isomorphism; prove this by the homEquiv unit equation. The iterated-mate identity and sfOpenMate_mate then identify the inverse ordinary finiteMateOpenReindexing with sfIntrinsicOpenMate, using Step 1 for its other mate. Termwise localization and its composition isomorphisms identify their derived maps.",
+   "uses": [
+    "lem-trf-open-square-exchange",
+    "def-weil-pbc-adjunction-mate",
+    "prop-exc-base-change-proper"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The ordinary mate unit equation gives the open-unit square for this inverse reindexing. Apply the proved exact_unit_square transport lemma and exactAdj_unit_Qh to the actual exceptionalOpenAdjunctions, which are the termwise localized intrinsic open adjunctions. Injectivity of their homEquiv identifies the inverse reindexing component with the displayed inverse transpose.",
+   "uses": [
+    "lem-trf-open-square-exchange",
+    "lem-exc-etale-origin-open-restriction-transport",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unfold compactificationExchangeFromData, evaluate its whiskerings, and substitute the proper comparison from Step 2. Removing identity associators gives precisely the ordered proper/open reindexing composite. Every construction uses only underlying scheme maps.",
+   "uses": [
+    "def-exchange-projection"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-fix-site-open-exchange-sheaf",
+  "lem-trf-open-square-exchange",
+  "lem-exc-etale-origin-open-restriction-transport",
+  "prop-exc-base-change-proper",
+  "lem-kun-unbounded-abelian-exchange-comparison",
+  "lem-sf-cartesian-open-adjunction-restriction",
+  "def-weil-pbc-adjunction-mate",
+  "def-exchange-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+  "place": "Constituent-compatibility assembly; K7 Lean proof via existing transport, iterated mates and exact localization calculus."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On small proetale sites the proper direct image base change mate along scheme isomorphisms equals section reindexing and open extension by zero has the open adjunction normalization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.Scheme) {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)) (V : (TopologicalSpace.Opens ↥X)ᵒᵖ),\\n  (AlgebraicGeometry.Scheme.Hom.toLRSHom (X.ofRestrict h)).c.app V =\\n \", \"doc\": \"For a scheme $X$, open subset $U$, open immersion $h: U \\\\to X$, and open set $V$ in $X$, the sheaf component of the morphism $X|_U \\\\to X$ at $V$ equals the map induced by the counit of the adjunction \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ≅ AlgebraicGeometry.Scheme.Modules.pullback f\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ of schemes, the restriction functor from the category of sheaves of modules over $ Y $'s structure sheaf to those over $ X $'s structure sheaf is naturally isom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_app\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.Scheme) {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)) (V : X.Opens),\\n  AlgebraicGeometry.Scheme.Hom.app (X.ofRestrict h) V = X.presheaf.map (⋯.adjunction.counit.\", \"doc\": \"For a scheme $X$, an open subset $U$ with open immersion $h: U \\to X$, and an open set $V$ in $X$, the component of the morphism $X|_U \\to X$ at $V$ is equal to the presheaf map of $X$ applied to the co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : X.Modules)\\n  (U : X.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit.app M) U =\\n    M.presheaf.map (CategoryTheory.eqToHom ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\mathbf{Mod}(\\\\mathcal{O}_Y) \\\\to \\\\mathbf{Mod}(\\\\mathcal{O}_X)$ and $f_*: \\\\mathbf{Mod}(\\\\mathcal{O}_X) \\\\to \\\\mathbf{O}_Y)$ be the restriction and\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrictFunctorΓ\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  X.restrictFunctor.op.comp ((CategoryTheory.Over.forget X).op.comp AlgebraicGeometry.Scheme.Γ) ≅ X.presheaf\", \"doc\": \"The composition of the opposite restriction functor from open subsets of a scheme $X$ to the over category $\\\\mathcal{T}/X$, followed by the opposite forgetful functor to topological spaces and the glo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes, the counit of the adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mappi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified pro-etale reindexing/strict-tower/coefficient/refinement comparison; generic categorical infrastructure alone is not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image base change along equivalent sites is the section comparison with the canonical adjunction unit and counit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derived_unit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$, $F : \\\\mathcal{C}_2 \\\\to \\\\mathcal{C}_1$ forming an adjunction $G \\\\dashv \"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \": pushforward.{v} φ ⊣ pushforward.{v} ψ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \": F' ⋙ G' ⟶ 𝟭 D₂\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"(M U x) : ((pushforwardPushforwardAdj adj φ ψ H₁ H₂).unit.app M).val.app U x = M.val.map (adj.counit.app U.unop).op x\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an adju\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \": 𝟭 D₁ ⟶ G' ⋙ F'\", \"doc\": \"The natural transformation from the identity functor on $\\\\mathcal{D}_1$ to the composition $G' \\\\circ F'$, constructed via the left-derived lift involving associators, whiskering operations, and the un\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_counit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, localization functors $L_1: \\\\mathcal{C}_1 \\\\to\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified pro-etale reindexing/strict-tower/coefficient/refinement comparison; generic categorical infrastructure alone is not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardNatIso, CategoryTheory.Adjunction",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified pro-etale reindexing/strict-tower/coefficient/refinement comparison; generic categorical infrastructure alone is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardNatIso|sheafPushforwardContinuousIso|[Ee]xchange.*[Ii]so",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"line\": \"85\", \"text\": \"    ← whisker_exchange_assoc, id_whiskerLeft_assoc, Iso.inv_hom_id_assoc]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"line\": \"117\", \"text\": \"    whisker_exchange_assoc, MonoidalCategory.whiskerRight_id_assoc, Iso.inv_hom_id_assoc]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"line\": \"158\", \"text\": \"    whisker_exchange_assoc, MonoidalCategory.whiskerRight_id_assoc, Iso.inv_hom_id_assoc]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Limits/Basic.lean\", \"line\": \"90\", \"text\": \"      simp only [tensorHom_def, ← whisker_exchange, whiskerRight_id, Category.assoc, Iso.inv_hom_id,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Continuous.lean\", \"line\": \"402\", \"text\": \"def sheafPushforwardContinuousIso [IsContinuous F' J K] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Continuous.lean\", \"line\": \"416\", \"text\": \"  sheafPushforwardContinuousIso eF'' _ _ _ ≪≫ sheafPushforwardContinuousId _ _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Continuous.lean\", \"line\": \"429\", \"text\": \"  sheafPushforwardContinuousComp _ _ _ _ _ _ ≪≫ sheafPushforwardContinuousIso eFG _ _ _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Over.lean\", \"line\": \"439\", \"text\": \"  Functor.sheafPushforwardContinuousIso (Over.mapCongr _ _ h) _ _ _\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified pro-etale reindexing/strict-tower/coefficient/refinement comparison; generic categorical infrastructure alone is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A base change square whose horizontal functors are equivalences has direct image mate given by the natural identity on sections; identify the canonical derived units and counits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackId_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  (S : CategoryTheory.Sheaf J RingCat),\\n  (CategoryTheory.conjugateEquiv CategoryTheory.Adjunction.id\\n        (SheafOfModules.pullbackPushforwardAdjunction (CategoryTheory.CategoryStruct.id S)))\\n \", \"doc\": \"The conjugate equivalence between the identity adjunction and the pullback-pushforward adjunction implies that the hom-component of the pullback identity functor is equal to the inverse of the hom-com\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme),\\n  (CategoryTheory.conjugateEquiv CategoryTheory.Adjunction.id\\n        (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction (CategoryTheory.CategoryStruct.id X)))\\n      (AlgebraicGeometry.Scheme.Modules.pullbackId X).hom =\\n    (AlgebraicGeometry.Scheme.Mod\", \"doc\": \"For the identity morphism on a scheme $X$, the conjugate equivalence associated with the pullback-pushforward adjunction relates the natural transformation from the pullback identity functor to the in\"}\n  {\"name\": \"CategoryTheory.unit_mateEquiv\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram $ α $ between functors involving these adjoints, for any object $ c $ in category $ \\\\mathcal{C} $, the composition of the mate e\"}\n  {\"name\": \"PresheafOfModules.pullback_id_comp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat}\\n  (φ : S ⟶ F.op.comp R) [inst_2 : (PresheafOfModules.pushforwar\", \"doc\": \"The composition of the pullback functor associated to the identity natural transformation with another pullback functor is naturally isomorphic to the original pullback functor, via the left unitor is\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The hom-set equivalence of the pullback-pushforward adjunction between sheaves of modules maps the canonical morphism from the pullback of the unit sheaf to the unit sheaf to the canonical morphism fr\"}\n  {\"name\": \"CategoryTheory.unit_mateEquiv_symm\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram $ α $ between functors involving these adjoints, the inverse mate equivalence $ (\\\\text{mateEquiv})^{-1}(α) $ satisfies the ident\"}\n  {\"name\": \"PresheafOfModules.pullback_comp_id\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat}\\n  (φ : S ⟶ F.op.comp R) [inst_2 : (PresheafOfModules.pushforwar\", \"doc\": \"For functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and natural transformations $\\\\phi : R \\\\to S$, $\\\\psi : S \\\\to T$ between presheaves of rings, the composition of pullba\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified pro-etale reindexing/strict-tower/coefficient/refinement comparison; generic categorical infrastructure alone is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardNatIso|pushforwardPushforwardAdj",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"228\", \"text\": \"noncomputable def pushforwardNatIso (α : F ≅ G) :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"247\", \"text\": \"/-- More flexible variant of `SheafOfModules.pushforwardNatIso`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"253\", \"text\": \"  pushforwardNatIso _ e ≪≫ pushforwardCongr he\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"274\", \"text\": \"def pushforwardPushforwardAdj : pushforward.{v} φ ⊣ pushforward.{v} ψ where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"298\", \"text\": \"lemma pushforwardPushforwardAdj_unit_app_val_app (M U x) :\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified pro-etale reindexing/strict-tower/coefficient/refinement comparison; generic categorical infrastructure alone is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "pro[Ee]tale.*[Ii]so|[Ii]so.*pro[Ee]tale|j[Ss]hriek|extensionByZero",
+   "results": "0 hits; actual logged top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical mate identities or unrelated scheme/sheaf comparisons; none states the finite pro-etale direct-image and extension-by-zero reindexing normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The exact equivalence induced by an isomorphism of schemes identifies proetale direct image base change and extension by zero with canonical adjunction mates",
+   "results": "8 hits; actual logged top results: AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.arrowIsoSpecΓOfIsAffine, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom, AlgebraicGeometry.Scheme.Cover.pushforwardIso_I₀, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical mate identities or unrelated scheme/sheaf comparisons; none states the finite pro-etale direct-image and extension-by-zero reindexing normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": "12 hits; actual logged top results: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical mate identities or unrelated scheme/sheaf comparisons; none states the finite pro-etale direct-image and extension-by-zero reindexing normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For pro-etale module sheaves, base change along scheme isomorphisms is reindexing and equals the specified derived direct image mate",
+   "results": "8 hits; actual logged top results: AlgebraicGeometry.Scheme.Modules.pushforwardCongr, SheafOfModules.pushforwardCongr, AlgebraicGeometry.Scheme.Modules.pushforwardCongr_inv_app_app, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, KaehlerDifferential.isBaseChange_of_formallyEtale, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical mate identities or unrelated scheme/sheaf comparisons; none states the finite pro-etale direct-image and extension-by-zero reindexing normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical Beck Chevalley map for direct image and extension by zero on small proetale sites along an isomorphism is the identity on reindexed sections",
+   "results": "8 hits; actual logged top results: AlgebraicGeometry.PresheafedSpace.ofRestrict_top_c, AlgebraicGeometry.Scheme.presheaf_map_eqToHom_op, AlgebraicGeometry.PresheafedSpace.map_id_c_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorId, AlgebraicGeometry.PresheafedSpace.toRestrictTop_c, lightProfiniteToLightCondSetIsoTopCatToLightCondSet_inv_app_val_app_hom_hom, TopCat.Presheaf.presheafEquivOfIso_counitIso_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical mate identities or unrelated scheme/sheaf comparisons; none states the finite pro-etale direct-image and extension-by-zero reindexing normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|def derived|derived_counit|derived_unit",
+   "results": "8 hits; actual logged top results: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical mate identities or unrelated scheme/sheaf comparisons; none states the finite pro-etale direct-image and extension-by-zero reindexing normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|derived_counit|derived_unit",
+   "results": "4 hits; actual logged top results: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical mate identities or unrelated scheme/sheaf comparisons; none states the finite pro-etale direct-image and extension-by-zero reindexing normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-weil-semilinear-exchange-reindexing",
+  "date": "2026-10-22",
+  "group": "Q156"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Constituent-compatibility assembly paragraph: semilinear compact-support exchange; extracted argument of lem-pur-weil-semilinear-exchange-reindexing, reviewed proof steps 1,2,3,4,5.",
+   "via": [
+    "lem-pur-weil-semilinear-exchange-reindexing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-isomorphism-finite-mate-normalization",
+  "worker": "stage1",
+  "summary": "Q87 proves finite normalization by the existing unbounded open-restriction counit equation specialized to an isomorphism, and identifies the open factor by reindexing the extension presheaf and the existing open-unit normalization. No new nodes, statement changes, or Lean edits.",
+  "blueprint": "Constituent-compatibility assembly paragraph of prop-pur-weil-equivariance-compatibilities; finite proper/open portion of lem-pur-weil-semilinear-exchange-reindexing (original reviewed steps 1-5).",
+  "tool_uses": [
+   {
+    "node": "lem-sf-cartesian-open-adjunction-restriction",
+    "why": "Generic unbounded open-restriction identity-on-sections and counit equation, specialized to the isomorphism g. This preserves the finite proper-mate normalization route; the package unit has no separate lemma supplying that equation."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic derived open-unit normalization and full faithfulness identify the given beta with the explicit presheaf reindexing map; no package-unit statement supplies this normalization separately."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-cartesian-open-adjunction-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-c337246c4",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-c337246c4 (reviewer sub-agent of L); spot-checked: I read the item, its 6 steps and the statements of all 11 cited nodes in full. The statement and stmt_deps are byte-identical to the copy that Q156 created; nothing was weakened, and there are no new nodes. proof_deps equals the union of the uses, and the item is not in its own dependency closure, so there is no cycle. Compared with old parent steps 1-5, every argument is still present. The old K-injective/fraction derivation is now carried by the counit equation of lem-sf-cartesian-open-adjunction-restriction. Step 2 applies that lemma with (V,Z,W,i,b,q)=(Xbar,Y,Y',g,gbar,p'): an isomorphism is an open immersion, Lambda=A_n is finite, and it holds for arbitrary p and unbounded pro-etale complexes. Its theta direction matches def-exchange-projection, and open restriction along an isomorphism is the site reindexing of lem-weil-proetale-isomorphism-inverse-image (1). Step 3 gets r_M=Ex_{*,p}(M) from the mate bijection. Step 4 reindexes the extension-by-zero presheaf, using X'=X x_Xbar Xbar' and the universal property of sheafification. Step 5 uses lem-sf-open-tensor-normalization with (j,g,g_U)=(j,gbar,g'): its inverse-adjunct formula, full faithfulness and constant-finite clause identify b with the beta of def-exchange-projection. Step 6 is the definition. Checked the def-exchange-projection hypotheses over S=Y: ell invertible, finite type and separatedness all hold, and no k-linearity is needed. Small cases g=id, j=id, X empty and a non-k-linear g all behave correctly. Stacks tags 09A5, 0D6D, 07A6, 03DI/03DJ and 08FJ match their labels. No SGA is used. No duplicate statement exists in the DAG. Two tool uses from other units are accepted: lem-sf-cartesian-open-adjunction-restriction (sk-rem-sf-pf-done) and lem-sf-open-tensor-normalization (sk-thm-sf-compatibility), both declared in split_report.tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IsomorphismFiniteMateNormalization",
+  "declaration": "WeilConjectures.PurityFiniteSetting.isomorphismFiniteMateNormalization",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.finiteMateCartesian",
+   "WeilConjectures.PurityFiniteSetting.finiteMateOpenReindexing",
+   "WeilConjectures.PurityFiniteSetting.finiteMateDerivedOpenReindexing",
+   "WeilConjectures.PurityFiniteSetting.isomorphismFiniteMateNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/IsomorphismFiniteMateNormalization.lean",
+  "statement": "theorem isomorphismFiniteMateNormalization (P : PurityFiniteSetting.{u}) {X X' Y Y' : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [IsSeparated (Y ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (f' : X' ⟶ Y') (g : Y' ≅ Y) (g' : X' ≅ X) (c : Compactification f) (c' : Compactification f') (b : c'.Z ≅ c.Z) (sqP : ChosenCartesianSquare b.hom c'.g c.g g.hom) (sqJ : ChosenCartesianSquare g'.hom c'.i c.i b.hom) : (mateEquiv (sfCartesianOpenPullPushAdjunction P.Ring c.g) (sfCartesianOpenPullPushAdjunction P.Ring c'.g) (TwoSquare.mk _ _ _ _ (sfIntrinsicDerivedSquarePullback P.Ring c'.g b.hom g.hom c.g sqP.w.symm).hom) ).natTrans = (sfProperOpenDerivedRestriction P.Ring c'.g b.hom g.hom c.g (finiteMateCartesian sqP).flip).hom ∧ (∀ M : proEtaleDerivedCategory c.Z P.Ring, (sfIntrinsicDerivedPullback P.Ring c'.g).map ((sfProperOpenDerivedRestriction P.Ring c'.g b.hom g.hom c.g (finiteMateCartesian sqP).flip).hom.app M) ≫ (sfCartesianOpenPullPushAdjunction P.Ring c'.g).counit.app ((sfIntrinsicDerivedPullback P.Ring b.hom).obj M) = (sfIntrinsicDerivedSquarePullback P.Ring c'.g b.hom g.hom c.g sqP.w.symm).hom.app ((proEtaleConstantDerivedDirectImage c.g P.Ring).obj M) ≫ (sfIntrinsicDerivedPullback P.Ring b.hom).map ((sfCartesianOpenPullPushAdjunction P.Ring c.g).counit.app M)) ∧ (finiteMateDerivedOpenReindexing P.Ring g'.hom c'.i c.i b.hom (finiteMateCartesian sqJ)).inv = sfIntrinsicDerivedOpenMate P.Ring g'.hom c'.i c.i b.hom sqJ.w ∧ (∀ K : proEtaleDerivedCategory X P.Ring, (finiteMateDerivedOpenReindexing P.Ring g'.hom c'.i c.i b.hom (finiteMateCartesian sqJ)).inv.app K = ((exceptionalOpenAdjunction c'.i P.Ring).homEquiv _ _).symm ((sfIntrinsicDerivedPullback P.Ring g'.hom).map ((exceptionalOpenAdjunction c.i P.Ring).unit.app K) ≫ (sfIntrinsicDerivedSquarePullback P.Ring g'.hom c'.i c.i b.hom sqJ.w).hom.app ((sfIntrinsicDerivedOpen P.Ring c.i).obj K))) ∧ (∀ K : proEtaleDerivedCategory X P.Ring, (CategoryTheory.SuppliedExchangeProjection.compactificationExchangeFromData (sfIntrinsicDerivedOpen P.Ring c.i) (sfIntrinsicDerivedOpen P.Ring c'.i) (sfIntrinsicDerivedPullback P.Ring c.g) (proEtaleConstantDerivedDirectImage c.g P.Ring) (sfCartesianOpenPullPushAdjunction P.Ring c.g) (sfIntrinsicDerivedPullback P.Ring c'.g) (proEtaleConstantDerivedDirectImage c'.g P.Ring) (sfCartesianOpenPullPushAdjunction P.Ring c'.g) (sfIntrinsicDerivedPullback P.Ring g.hom) (sfIntrinsicDerivedPullback P.Ring g'.hom) (sfIntrinsicDerivedPullback P.Ring b.hom) (sfIntrinsicDerivedSquarePullback P.Ring c'.g b.hom g.hom c.g sqP.w.symm) (finiteMateDerivedOpenReindexing P.Ring g'.hom c'.i c.i b.hom (finiteMateCartesian sqJ))).app K = (sfProperOpenDerivedRestriction P.Ring c'.g b.hom g.hom c.g (finiteMateCartesian sqP).flip).hom.app ((sfIntrinsicDerivedOpen P.Ring c.i).obj K) ≫ (proEtaleConstantDerivedDirectImage c'.g P.Ring).map ((finiteMateDerivedOpenReindexing P.Ring g'.hom c'.i c.i b.hom (finiteMateCartesian sqJ)).hom.app K)) ∧ (∀ (F : Sheaf (Scheme.ProEt.topology c.Z) (ModuleCat.{u + 1} (ULift.{u + 1, u} P.Ring))) (V : Y'.ProEt), ((sfProperOpenFixedRestrictionIso P.Ring c'.g b.hom g.hom c.g (finiteMateCartesian sqP).flip).hom.app F).hom.app (Opposite.op V) = F.obj.map ((MorphismProperty.Over.pullbackMapComparison (inferInstance : WeaklyEtale g.hom) (inferInstance : WeaklyEtale b.hom) (finiteMateCartesian sqP).flip.toCommSq).app V).op)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The proper comparison reuses sfProperOpenDerivedRestriction, whose ordinary map is the canonical fibre-product section map. The open comparison is constructed from that sectionwise right-adjoint square by leftAdjointUniq, then descended termwise; its inverse is identified with the specified derived open mate. The recorded supplied-domain compactificationExchangeFromData is specialized to the actual finite operations. The final conjunct explicitly records the underived proper section map. No boundedness or k-linearity hypothesis is imposed on the reindexing isomorphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9287aa0ab",
+  "group": "N7",
+  "result": "pass",
+  "note": "Only the item's lean record changed (statement, stmt_deps and proof_deps byte-identical to side-live; 7 stmt_dep records identical); new module IsomorphismFiniteMateNormalization with 3 real helpers + 1 sorry theorem; lean.statement verbatim. H3: k-schemes sep+LFT+QC, f over k; g, g', b isos with no IsOver; sqP/sqJ chosen Cartesian squares paste to the base-change square. (1) mateEquiv of sfIntrinsicDerivedSquarePullback under sfCartesianOpenPullPushAdjunction = sfProperOpenDerivedRestriction.hom, roles (c'.g, b, g, c.g) checked; (2) counit transpose Lp'^*(r) then eps = theta then G_b(eps); (3) inverse of the reindexing beta (leftAdjointUniq of the sectionwise square, termwise descent, canonical) = sfIntrinsicDerivedOpenMate; (4) beta^-1 = homEquiv.symm of G_g'(unit) then theta'; (5) compactificationExchangeFromData = r at j_!K then Rp'_*(beta_K); (6) underived section map = F.map(pullbackMapComparison). No k-linearity, boundedness or étale-origin hypothesis; universes as in the published finite framework; edge cases ok; no SGA. Advisories: decls owned by nodes outside stmt_deps (sfCartesianOpenPullPushAdjunction, sfProperOpen*Restriction, sfIntrinsic* open-square/adjunction defs); unused recorded decls of def-weil-compactifications-refinements and def-weil-pbc-proetale-operations; Second reading is a self-reread under the dispatcher policy (H11 advisory). No change, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261024T190248-L-4008256",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

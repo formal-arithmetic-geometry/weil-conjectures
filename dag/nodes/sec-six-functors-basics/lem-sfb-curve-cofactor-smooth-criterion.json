@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-curve-cofactor-smooth-criterion",
+ "kind": "statement",
+ "title": "Smoothness detected by the conormal cofactor map of a curve",
+ "statement": "Let $R$ be a commutative ring, $c\\geq0$, $P=R[x_0,\\ldots,x_c]$, and $I=(f_1,\\ldots,f_c)$ for an ordered regular sequence [def-weil-pbc-regular-sequence]. Put $B=P/I$, $C=I/I^2$, $V=\\bigoplus_{j=0}^c B\\,dx_j$ and $u:C\\to V$, $u(\\bar f_i)=\\sum_j\\overline{\\partial f_i/\\partial x_j}dx_j$. Differentials mean [def-weil-pbc-kahler-differentials], and exterior powers mean [def-weil-pbc-exterior-algebra]. Write $E=[C\\xrightarrow{u}V]$ in degrees $-1,0$ and $D(E)=(\\bigwedge^c C)^\\vee\\otimes_B\\bigwedge^{c+1}V$, with $M^\\vee=\\operatorname{Hom}_B(M,B)$. Assume additionally that $B$ is flat over $R$ [def-weil-pbc-flat-ring-map] and every nonempty geometric fibre of $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ is pure of dimension one [def-weil-geometric-fibre, def-kun-topological-krull-dimension]. Let $w:\\Omega^1_{B/R}\\to D(E)$ be the map with the displayed wedge formula of [lem-sfb-affine-conormal-jacobian-realization]. For every prime $\\mathfrak p\\subset B$ the following are equivalent: $w_{\\mathfrak p}$ is an isomorphism; $w_{\\mathfrak p}$ is surjective; at least one $c\\times c$ minor of $(\\overline{\\partial f_i/\\partial x_j})$ is a unit of $B_{\\mathfrak p}$; and $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ is smooth at $\\mathfrak p$ [def-sbc-smooth-morphisms]. More precisely, if $h\\in P$ is a selected minor whose image avoids $\\mathfrak p$, then, after ordering the selected variables first, the presentation\n$$B_h=R[x_0,\\ldots,x_c,z]/(f_1,\\ldots,f_c,zh-1)$$\nhas invertible selected $(c+1)\\times(c+1)$ Jacobian determinant $\\bar h^2$, so it is standard smooth [def-weil-pbc-standard-smooth-algebra]. On any smooth open subset the sequence $0\\to C\\xrightarrow{u}V\\to\\Omega^1_{B/R}\\to0$ is exact and locally split, with last term a line. Under its relation-first determinant identification $D(E)\\simeq\\Omega^1_{B/R}$, the map $w$ is the identity. Equivalently, a conormal basis followed by a lift of a local differential generator is a basis of $V$, and its top wedge is the image of that generator under $w$. For $c=0$ the selected empty minor is $1$ and these statements apply to $B=R[x_0]$.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E9Z (lemma-fundamental-class-lci), both smooth-locus implications; morphisms.tex Tag 02G1; algebra.tex Tags 00T6, 00T7, 00T8. Extracts old proof steps 5-6, including the explicit zh-1 presentation."
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-standard-smooth-algebra",
+  "lem-sfb-affine-conormal-jacobian-realization",
+  "def-weil-geometric-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-singular-ideal"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-affine-conormal-jacobian-realization] to identify $C=B^c$, $V=B^{c+1}$, $\\Omega^1_{B/R}=\\operatorname{coker}u$ and $D(E)=B\\epsilon$, where $\\epsilon=(\\bar f_1\\wedge\\cdots\\wedge\\bar f_c)^\\vee\\otimes(dx_0\\wedge\\cdots\\wedge dx_c)$. Expanding its displayed determinant formula along the last row gives $w(d\\bar x_j)=(-1)^{c+j}\\Delta_j\\epsilon$, where $\\Delta_j$ deletes column $j$ of the Jacobian (indices $0,\\ldots,c$). The $d\\bar x_j$ generate the cokernel, so the image of $w$ is exactly $(\\Delta_0,\\ldots,\\Delta_c)\\epsilon$. Over $B_{\\mathfrak p}$ this image is the whole line precisely when one $\\Delta_j$ is a unit: a finite sum of elements in the maximal ideal cannot be $1$. Thus surjectivity is equivalent to the minor condition; an isomorphism is necessarily surjective.",
+   "uses": [
+    "lem-sfb-affine-conormal-jacobian-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Y (lemma-determinant), wedge formula; Tag 0E9Z (lemma-fundamental-class-lci), last paragraph; elementary cofactor expansion."
+   }
+  },
+  {
+   "text": "On $B_h$, where $h$ is any selected maximal minor, permute the variables so its $c$ columns come first and write the matrix of $u$ as $\\binom{M}{b}$, with $M$ square and $b$ one row. By [lem-weil-pbc-matrix-adjugate-identity], $M^{-1}=h^{-1}\\operatorname{adj}(M)$. The map $v=(v_{\\rm sel},v_{\\rm last})\\mapsto v_{\\rm last}-bM^{-1}v_{\\rm sel}$ has kernel $u(C_h)$: explicitly subtract $u(M^{-1}v_{\\rm sel})$ to leave only the last coordinate. Also $M^{-1}$ followed by selected-coordinate projection is a left inverse of $u$. Therefore $V_h=u(C_h)\\oplus B_h dx_{\\rm last}$, the cokernel is free on $d\\bar x_{\\rm last}$, and the sequence is split exact. By the wedge formula of [lem-sfb-affine-conormal-jacobian-realization], $w$ sends this generator to the dual conormal wedge tensored with $u(\\bar f_1)\\wedge\\cdots\\wedge u(\\bar f_c)\\wedge dx_{\\rm last}$. Its coefficient is the unit $h$, up to the variable-permutation sign. Hence $w_h$, and thus $w_{\\mathfrak p}$ whenever $h\\notin\\mathfrak p$, is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-matrix-adjugate-identity",
+    "lem-sfb-affine-conormal-jacobian-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Y (lemma-determinant), free-cokernel implication; algebra.tex Tag 07DQ (lemma-matrix-left-inverse), adjugate calculation."
+   }
+  },
+  {
+   "text": "The algebra $R[x_0,\\ldots,x_c,z]/(f_1,\\ldots,f_c,zh-1)$ is $B_h$: send $z$ to $h^{-1}$, with inverse furnished by the invertibility of $h$ and the quotient map. Order the selected variables first, then $z$, then the one remaining variable. The selected Jacobian, with relations indexing rows, is $\\left(\\begin{smallmatrix}M&0\\\\ z(\\partial h/\\partial x_{\\rm sel})&h\\end{smallmatrix}\\right)$ and has determinant $\\det(M)h=h^2$, a unit. Thus this is a standard smooth presentation by [def-weil-pbc-standard-smooth-algebra]. By [lem-weil-pbc-standard-smooth-is-smooth] and [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], $D(h)\\to\\operatorname{Spec}R$ is smooth. In particular a unit minor at $\\mathfrak p$ proves smoothness there.",
+   "uses": [
+    "def-weil-pbc-standard-smooth-algebra",
+    "lem-weil-pbc-standard-smooth-is-smooth",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00T6 (definition-standard-smooth), 00T7 (lemma-standard-smooth), 00T8 (example-make-standard-smooth); morphisms.tex Tag 01V6 (lemma-smooth-characterize)."
+   }
+  },
+  {
+   "text": "Conversely, suppose the morphism is smooth at $\\mathfrak p$. Choose a principal neighbourhood $D(a)$ of $\\mathfrak p$ contained in its smooth open neighbourhood. By [lem-weil-pbc-smooth-restrict-open-subschemes] and [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], $B_a$ is a smooth $R$-algebra. Apply [lem-weil-pbc-smooth-localization-conormal-split] to this original polynomial presentation: $u_a$ has a left inverse. In the conormal basis of [lem-sfb-affine-conormal-jacobian-realization] write these maps as matrices $A$ of size $(c+1)\\times c$ and $L$ of size $c\\times(c+1)$, with $LA=1_c$. Part (2) of [lem-weil-pbc-matrix-left-inverse-minors], with $f=1$, says $1=1^c$ belongs to the ideal of maximal minors of $A$. Localize at $\\mathfrak p$; if every minor were in its maximal ideal, their ideal could not contain $1$. Thus one minor is a unit at $\\mathfrak p$. Together with steps 1--3 this proves all four equivalences.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-localization-conormal-split",
+    "lem-sfb-affine-conormal-jacobian-realization",
+    "lem-weil-pbc-matrix-left-inverse-minors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07EZ (lemma-compare-standard), proof (e), split conormal sequence; algebra.tex Tag 07DQ (lemma-matrix-left-inverse), part (2); morphisms.tex Tag 01V6 (lemma-smooth-characterize)."
+   }
+  },
+  {
+   "text": "At every point of a smooth open subset, step 4 supplies a minor avoiding that point. The corresponding principal neighbourhoods, intersected with the given open, carry the explicit split sequence and line cokernel of step 2. Hence the original sequence on that smooth open is exact and locally split, with last term a line. On any such chart choose a generator $\\omega$ of the cokernel and a lift $v$. The splitting shows that $u(\\bar f_1),\\ldots,u(\\bar f_c),v$ is a basis: in split coordinates the last coordinate of $v$ is a unit. The relation-first determinant comparison sends $\\omega$ to $(\\bar f_1\\wedge\\cdots\\wedge\\bar f_c)^\\vee\\otimes(u(\\bar f_1)\\wedge\\cdots\\wedge u(\\bar f_c)\\wedge v)$. Adding $u(t)$ to $v$ changes this wedge by zero; replacing the conormal basis multiplies its dual wedge and its image wedge by inverse determinants. Thus these comparisons agree on overlaps. They are exactly $w$ by [lem-sfb-affine-conormal-jacobian-realization], so under the inverse comparison $D(E)\\simeq\\Omega^1_{B/R}$ the map is the identity, with sign $+1$ in relation-first order.",
+   "uses": [
+    "lem-sfb-affine-conormal-jacobian-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Y (lemma-determinant), displayed relation-first formula and free-cokernel implication; elementary basis and lift checks."
+   }
+  },
+  {
+   "text": "For $c=0$ one has $I=C=0$, $B=R[x_0]$ and $u=0$. The sole empty minor is $1$, the cokernel is $V=B\\,dx_0$, and [lem-sfb-affine-conormal-jacobian-realization] gives $w(dx_0)=dx_0$. The presentation of step 3 is $R[x_0,z]/(z-1)$ with selected derivative $1$. Thus all arguments include this case. If $B$ is the zero ring there are no primes and all assertions on open subsets concern the empty scheme.",
+   "uses": [
+    "lem-sfb-affine-conormal-jacobian-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00T6 (definition-standard-smooth), 00T8 (example-make-standard-smooth), empty relation case; duality.tex Tag 0E9Y (lemma-determinant), empty wedge convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-conormal-jacobian-realization",
+  "lem-weil-pbc-matrix-adjugate-identity",
+  "def-weil-pbc-standard-smooth-algebra",
+  "lem-weil-pbc-standard-smooth-is-smooth",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-localization-conormal-split",
+  "lem-weil-pbc-matrix-left-inverse-minors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E9Y (lemma-determinant) and 0E9Z (lemma-fundamental-class-lci), local algebraic argument; explicit split-matrix, maximal-minor, and zh-1 calculations as in algebra.tex Tags 07DQ and 00T8. No use of the Noetherian duality theorem outside its hypotheses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The cofactor map from relative differentials of a flat complete intersection curve to the determinant of its cotangent complex is an isomorphism exactly at smooth points",
+   "results": "{\"t\": \"2026-10-22T07:26:46Z\", \"tool\": \"leanfinder\", \"query\": \"The cofactor map from relative differentials of a flat complete intersection curve to the determinant of its cotangent complex is an isomorphism exactly at smooth points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.smoothLocus\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth\", \"Algebra.smoothLocus_eq_univ_iff\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\"], \"digest\": \"925e7029643737e2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/RingTheory/Extension/Presentation/Submersive.lean:154-169 and RingTheory/Extension/Cotangent/Free.lean:112-131. The unit-Jacobian tests concern a selected square map; the node concerns isomorphism/surjectivity of the rectangular conormal cofactor map, its full invertibility locus, and its normalized smooth exact-sequence comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra.Smooth\", \"KaehlerDifferential\"",
+   "results": "{\"t\": \"2026-10-22T07:26:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Algebra.Smooth\\\", \\\"KaehlerDifferential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/RingTheory/Extension/Presentation/Submersive.lean:154-169 and RingTheory/Extension/Cotangent/Free.lean:112-131. The unit-Jacobian tests concern a selected square map; the node concerns isomorphism/surjectivity of the rectangular conormal cofactor map, its full invertibility locus, and its normalized smooth exact-sequence comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "cofactor.*smooth|smooth.*cofactor|jacobian.*(isUnit|IsUnit)|isUnit.*jacobian",
+   "results": "{\"t\": \"2026-10-22T07:26:47Z\", \"tool\": \"grep\", \"query\": \"cofactor.*smooth|smooth.*cofactor|jacobian.*(isUnit|IsUnit)|isUnit.*jacobian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/RingHom/StandardSmooth.lean\", \"Mathlib/RingTheory/RingHom/StandardSmooth.lean\", \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\"], \"digest\": \"240c6f90522e62d9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/RingTheory/Extension/Presentation/Submersive.lean:154-169 and RingTheory/Extension/Cotangent/Free.lean:112-131. The unit-Jacobian tests concern a selected square map; the node concerns isomorphism/surjectivity of the rectangular conormal cofactor map, its full invertibility locus, and its normalized smooth exact-sequence comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth locus of complete intersection curve equals invertibility locus of determinant map on Kahler differentials",
+   "results": "{\"t\": \"2026-10-22T07:26:47Z\", \"tool\": \"leansearch\", \"query\": \"Smooth locus of complete intersection curve equals invertibility locus of determinant map on Kahler differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"Algebra.unramifiedLocus_eq_compl_support\", \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"Algebra.smoothLocus_eq_compl_support_inter\"], \"digest\": \"48f4218a03b109ff\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/RingTheory/Extension/Presentation/Submersive.lean:154-169 and RingTheory/Extension/Cotangent/Free.lean:112-131. The unit-Jacobian tests concern a selected square map; the node concerns isomorphism/surjectivity of the rectangular conormal cofactor map, its full invertibility locus, and its normalized smooth exact-sequence comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of the determinant valued conormal wedge map is equivalent to a unit maximal Jacobian minor and smoothness for a relative complete intersection curve",
+   "results": "{\"t\": \"2026-10-22T07:26:58Z\", \"tool\": \"leanfinder\", \"query\": \"Surjectivity of the determinant valued conormal wedge map is equivalent to a unit maximal Jacobian minor and smoothness for a relative complete intersection curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.isUnit_jacobian_iff_aevalDifferential_bijective\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top\", \"Algebra.SubmersivePresentation.jacobian_isUnit\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.PreSubmersivePresentation.ofBijectiveAlgebraMap_jacobian\", \"Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one\", \"Algebra.SubmersivePresentation.jacobianRelations_spec\"], \"digest\": \"6b20f19ff3bd7842\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/RingTheory/Extension/Presentation/Submersive.lean:154-169 and RingTheory/Extension/Cotangent/Free.lean:112-131. The unit-Jacobian tests concern a selected square map; the node concerns isomorphism/surjectivity of the rectangular conormal cofactor map, its full invertibility locus, and its normalized smooth exact-sequence comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "smooth_iff|isSmooth_iff",
+   "results": "{\"t\": \"2026-10-22T07:26:58Z\", \"tool\": \"grep\", \"query\": \"smooth_iff|isSmooth_iff\", \"sub\": \"RingTheory/Extension\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/RingTheory/Extension/Presentation/Submersive.lean:154-169 and RingTheory/Extension/Cotangent/Free.lean:112-131. The unit-Jacobian tests concern a selected square map; the node concerns isomorphism/surjectivity of the rectangular conormal cofactor map, its full invertibility locus, and its normalized smooth exact-sequence comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "cofactor.*smooth|smooth.*cofactor|isUnit.*jacobian|jacobian.*isUnit",
+   "results": "{\"t\": \"2026-10-23T09:26:33Z\", \"tool\": \"grep\", \"query\": \"cofactor.*smooth|smooth.*cofactor|isUnit.*jacobian|jacobian.*isUnit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RingHom/StandardSmooth.lean\", \"Mathlib/RingTheory/RingHom/StandardSmooth.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\"], \"digest\": \"da35b7d69552f55a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Presentation/Submersive.lean:154--169 and Cotangent/Free.lean:112--131; these test square restricted differentials, not the determinant-valued cofactor map from the cokernel or its normalized smooth-locus identification. Second phrasing finds determinant inverses and Cramer maps only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rectangular Jacobian cofactor map on differentials of a complete intersection is surjective if and only if the algebra is smooth at a prime",
+   "results": "{\"t\": \"2026-10-23T09:26:34Z\", \"tool\": \"leansearch\", \"query\": \"A rectangular Jacobian cofactor map on differentials of a complete intersection is surjective if and only if the algebra is smooth at a prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_iff_aevalDifferential_bijective\", \"Algebra.smoothLocus\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.FormallySmooth.iff_split_injection\", \"Algebra.Presentation.differentials.surjective_hom₁\", \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"Algebra.FormallySmooth.iff_comp_surjective\"], \"digest\": \"6fc6351f7ac6c59c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Presentation/Submersive.lean:154--169 and Cotangent/Free.lean:112--131; these test square restricted differentials, not the determinant-valued cofactor map from the cokernel or its normalized smooth-locus identification. Second phrasing finds determinant inverses and Cramer maps only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"jacobian\", \"IsUnit\"",
+   "results": "{\"t\": \"2026-10-23T09:26:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"jacobian\\\", \\\"IsUnit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.jacobian_isUnit\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_iff_aevalDifferential_bijective\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\", \"WeierstrassCurve.Jacobian.isUnit_X_of_Z_eq_zero\", \"WeierstrassCurve.Jacobian.isUnit_Y_of_Z_eq_zero\", \"WeierstrassCurve.Jacobian.isUnit_addZ_of_X_ne\", \"WeierstrassCurve.Jacobian.isUnit_addU_of_Y_ne\"], \"digest\": \"7eecaa410d4ffb2f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Presentation/Submersive.lean:154--169 and Cotangent/Free.lean:112--131; these test square restricted differentials, not the determinant-valued cofactor map from the cokernel or its normalized smooth-locus identification. Second phrasing finds determinant inverses and Cramer maps only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a complete intersection curve the conormal cofactor map from Kahler differentials to its determinant line is invertible exactly at smooth points",
+   "results": "{\"t\": \"2026-10-23T09:26:37Z\", \"tool\": \"leanfinder\", \"query\": \"For a complete intersection curve the conormal cofactor map from Kahler differentials to its determinant line is invertible exactly at smooth points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\", \"Algebra.IsStandardSmooth.free_kaehlerDifferential\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.smoothLocus\", \"Algebra.SubmersivePresentation.aevalDifferentialEquiv\"], \"digest\": \"a45b69535c3d7b69\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Presentation/Submersive.lean:154--169 and Cotangent/Free.lean:112--131; these test square restricted differentials, not the determinant-valued cofactor map from the cokernel or its normalized smooth-locus identification. Second phrasing finds determinant inverses and Cramer maps only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from the cokernel of a rank c by c plus one matrix to its determinant line given by maximal minors is invertible on the unit minor locus",
+   "results": "{\"t\": \"2026-10-23T09:27:41Z\", \"tool\": \"leanfinder\", \"query\": \"A map from the cokernel of a rank c by c plus one matrix to its determinant line given by maximal minors is invertible on the unit minor locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearEquiv.ofIsUnitDet\", \"LinearMap.detAux_def\", \"Matrix.cramer\", \"LinearMap.coe_equivOfIsUnitDet\", \"Algebra.SubmersivePresentation.aevalDifferentialEquiv\", \"LinearEquiv.coe_ofIsUnitDet\", \"Matrix.cramer_is_linear\", \"LinearEquiv.ofIsUnitDet_apply\"], \"digest\": \"da723dd0da956c30\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Presentation/Submersive.lean:154--169 and Cotangent/Free.lean:112--131; these test square restricted differentials, not the determinant-valued cofactor map from the cokernel or its normalized smooth-locus identification. Second phrasing finds determinant inverses and Cramer maps only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lci-curve-fundamental-class",
+  "date": "2026-10-22",
+  "group": "Q133"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families; local adjunction normalization: the conormal determinant fundamental class, before the marking twist or any ampleness argument; Tag 0E9Z (lemma-fundamental-class-lci), both smooth-locus implications; morphisms.tex Tag 02G1; algebra.tex Tags 00T6, 00T7, 00T8. Extracts old proof steps 5-6, including the explicit zh-1 presentation.",
+   "via": [
+    "lem-sfb-lci-curve-fundamental-class",
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-curve-cofactor-smooth-criterion",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Six proof steps reuse existing affine conormal realization, adjugate, smooth localization split-conormal, matrix-minors and smoothness comparison nodes. Cofactor expansion, block-matrix splitting, explicit localization presentation and relation-first normalization are written out. No new nodes. Source Noetherian duality hypotheses are avoided by its local algebra argument, valid over arbitrary rings.",
+  "blueprint": "Inherited origin det-thm-sf-ctf-stability-direct-images proof (3), auxiliary marked plurinodal reduction, via lem-sfb-lci-curve-fundamental-class: realizes its smooth-locus step and the extracted old steps 5--6. Latest blueprint direct-images proof (3) now cites proper base change; retain inherited auxiliary origin rather than change the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Affine equivalence of ring and scheme smoothness, needed in both implications; a generic comparison, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-localization-conormal-split",
+    "why": "Smooth localization makes the original presentation conormal map a split injection; generic commutative-algebra tool, not supplied in the six-functor unit."
+   },
+   {
+    "node": "lem-weil-pbc-matrix-left-inverse-minors",
+    "why": "Part (2) turns a left inverse into the unit ideal of maximal minors; generic matrix algebra used in the reverse implication."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-localization-conormal-split",
+  "lem-weil-pbc-matrix-left-inverse-minors"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-8c10441bf",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-8c10441bf (reviewer sub-agent of L); spot-checked: I read the item and all 8 cited statements in full; there are no new nodes. The statement and stmt_deps are identical to the live and side-live nodes, both still unsplit, and there is no repair note, so this is an ordinary split. Step 1: expanding along the last row gives w(dx_j)=(-1)^{c+j}Δ_j ε (sign checked for c=1), so im w is the minor ideal times ε, and surjectivity is equivalent to some minor being a unit locally. Step 2: on B_h the map v_last−bM^{-1}v_sel has kernel exactly im u, M^{-1}pr_sel is a left inverse, and the cokernel is free with w([dx_last])=±hε, so w_p is an isomorphism. Step 3: the block Jacobian of (f, zh−1) with variables ordered selected, z, rest has determinant h², matching Stacks 00T8's variable order; standard smooth implies smooth. Step 4: restriction plus the affine comparison makes B_a smooth; the split-conormal node gives a left inverse with no Noetherian hypothesis; left-inverse-minors (2) with f=1 and n=c+1≥m=c puts 1 in the minor ideal, so some minor is a unit at p. Step 5: the relation-first comparison is independent of the lift and the basis, and is literally w's formula. Step 6: the c=0 case is correct. Small cases match: the nodal curve x0x1 is not smooth at the origin, x1−x0² is smooth. The source 0E9Z (duality.tex) needs global Noetherian/proper hypotheses; the delivery avoids them and uses only its local Jacobian argument, so the proof is correctly marked agent-origin. No duplicates found (lem-trf formal-Jacobian, field-curve-Fitting and zl-hypersurface nodes differ). I accept the three generic tool_uses (smooth-ring-map-iff-smooth-affine, smooth-localization-conormal-split, matrix-left-inverse-minors). No SGA citations. The flatness and fibre-purity hypotheses are unused but kept; the statement is not weakened. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CurveCofactorSmoothCriterion",
+  "declaration": "Algebra.AffineConormal.curve_cofactor_smooth_criterion",
+  "declarations": [
+   "Algebra.AffineConormal.curveJacobianMinor",
+   "Algebra.AffineConormal.curveLocalizationEquations",
+   "Algebra.AffineConormal.curveLocalizationColumns",
+   "Algebra.AffineConormal.curveGeometricFibre",
+   "Algebra.AffineConormal.Chart.curveProjection",
+   "Algebra.AffineConormal.Chart.CurveSmoothSplitting",
+   "Algebra.AffineConormal.curve_cofactor_smooth_criterion"
+  ],
+  "file": "lean/Sheaf/RingTheory/CurveCofactorSmoothCriterion.lean",
+  "statement": "theorem curve_cofactor_smooth_criterion (R : Type u) [CommRing R] (c : ℕ) (f : Fin c → PolynomialRing R c) (_hr : RingTheory.Sequence.IsRegular (PolynomialRing R c) (List.ofFn f)) [Module.Flat R (QuotientRing f)] (_hfib : ∀ (y : Spec (CommRingCat.of R)) (Z : Set (curveGeometricFibre f y)), Z ∈ irreducibleComponents (curveGeometricFibre f y) → topologicalKrullDim Z = 1) (C : Coherence.{u}) (κ : Naive.Comparison C) (H : Chart f C κ (CommRingCat.of (QuotientRing f)) (AlgHom.id R (QuotientRing f))) : (∀ p : PrimeSpectrum (QuotientRing f), (Function.Bijective (H.w.baseChange (Localization.AtPrime p.asIdeal)) ↔ Function.Surjective (H.w.baseChange (Localization.AtPrime p.asIdeal))) ∧ (Function.Surjective (H.w.baseChange (Localization.AtPrime p.asIdeal)) ↔ ∃ s : Fin c ↪ Fin (c + 1), IsUnit (algebraMap (QuotientRing f) (Localization.AtPrime p.asIdeal) (Ideal.Quotient.mk (ideal f) (curveJacobianMinor f s)))) ∧ ((∃ s : Fin c ↪ Fin (c + 1), IsUnit (algebraMap (QuotientRing f) (Localization.AtPrime p.asIdeal) (Ideal.Quotient.mk (ideal f) (curveJacobianMinor f s)))) ↔ IsSmoothAtPrime R p)) ∧ (∀ (s : Fin c ↪ Fin (c + 1)) (p : PrimeSpectrum (QuotientRing f)), Ideal.Quotient.mk (ideal f) (curveJacobianMinor f s) ∉ p.asIdeal → ∃ P : SubmersivePresentation R (Localization.Away (Ideal.Quotient.mk (ideal f) (curveJacobianMinor f s))) (Fin (c + 2)) (Fin (c + 1)), P.relation = curveLocalizationEquations f s ∧ P.map = curveLocalizationColumns s ∧ (∀ j : Fin (c + 1), P.val j.castSucc = algebraMap (QuotientRing f) (Localization.Away (Ideal.Quotient.mk (ideal f) (curveJacobianMinor f s))) (Ideal.Quotient.mk (ideal f) (MvPolynomial.X j))) ∧ P.val (Fin.last (c + 1)) = IsLocalization.Away.invSelf (Ideal.Quotient.mk (ideal f) (curveJacobianMinor f s)) ∧ P.jacobian = (algebraMap (QuotientRing f) (Localization.Away (Ideal.Quotient.mk (ideal f) (curveJacobianMinor f s))) (Ideal.Quotient.mk (ideal f) (curveJacobianMinor f s))) ^ 2 ∧ IsStandardSmooth R (Localization.Away (Ideal.Quotient.mk (ideal f) (curveJacobianMinor f s)))) ∧ (∀ (A : CommRingCat.{u}) [Algebra R A] (φ : QuotientRing f →ₐ[R] A) (_ho : IsOpenImmersion (Spec.map (CommRingCat.ofHom φ.toRingHom))) (H' : Chart f C κ A φ), Smooth R A → H'.CurveSmoothSplitting) ∧ (c = 0 → (∀ s : Fin c ↪ Fin (c + 1), curveJacobianMinor f s = 1) ∧ H.w (KaehlerDifferential.D R (QuotientRing f) (Ideal.Quotient.mk (ideal f) (MvPolynomial.X 0))) = topDual H.negBasis ⊗ₜ[QuotientRing f] exteriorPower.ιMulti (QuotientRing f) (c + 1) H.zeroBasis)",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded affine conormal Chart and its actual cofactor map. The sole added stmt_dep is the landed singular-ideal node for its Algebra.IsSmoothAtPrime, equivalent to scheme smoothness at the affine point. Helpers spell out the selected minor, zh-1 equations, geometric fibre pullback and all smooth-open clauses; no new independent notion or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-75d6bb383",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Only the item node changed (lean + stmt_deps gaining the landed def-weil-pbc-singular-ideal); statement verbatim; one sorry. H.w is canonical: omega is pinned on generators and TwoTermCofactorPresentation.formula pins the cofactor map, so any Chart gives the dependency's unique w. All clauses checked: bij↔surj↔some minor a unit in B_p↔IsSmoothAtPrime (00TB, equivalent to scheme smoothness at p); zh-1 SubmersivePresentation with relations/columns/val pinned, jacobian=h̄² recomputed (block-triangular, same column order as curveJacobianMinor), IsStandardSmooth; smooth affine opens: exact, split, rank one at every prime, e∘w=id with relation-first wedge sign +1, basis/top-wedge clause; c=0 minors 1 and w(dx0)=dx0. Flat via Module.Flat; fibre purity via the recorded pullback geometric fibre and topologicalKrullDim of every irreducible component. Edge cases: c=0, R=0 excluded by the IsRegular convention, empty affine, empty fibres, characteristic, universes. Docstrings and 6 proof steps present; imports per brief; no duplicate found. Advisory: the smooth-open clause uses Algebra.Smooth, equivalent to the cited scheme smoothness for affines. No file changed, no compile run."
+ }
+}

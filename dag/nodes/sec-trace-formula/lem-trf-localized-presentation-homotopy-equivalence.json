@@ -1,0 +1,246 @@
+{
+ "id": "lem-trf-localized-presentation-homotopy-equivalence",
+ "kind": "statement",
+ "title": "Homotopy equivalence for localized polynomial presentations",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings, let $R=A[V]\\twoheadrightarrow B$ be a surjective $A$-algebra map on any set $V$ of variables, and let $P=W^{-1}A[E]\\twoheadrightarrow B$ be another surjective $A$-algebra map on any set $E$ [def-weil-pbc-mv-polynomial-ring]. Here $W$ is a multiplicative subset containing $1$ and closed under multiplication, and $W^{-1}A[E]$ is the ring of fractions $f/w$, with $f/w=g/v$ exactly when $u(vf-wg)=0$ for some $u\\in W$. Put $I=\\ker(R\\to B)$, $J=\\ker(P\\to B)$, and define $N(R)=[I/I^2\\xrightarrow{\\delta_R}\\Omega^1_{R/A}\\otimes_RB]$ and $N(P)=[J/J^2\\xrightarrow{\\delta_P}\\Omega^1_{P/A}\\otimes_PB]$ in degrees $-1,0$, with $\\delta([h])=\\mathrm dh\\otimes1$ [def-weil-pbc-kahler-differentials]. There exists an $A$-algebra map $a:R\\to P$ over $B$. For every such $a$, its induced chain map $N(a)$, sending $[h]$ to $[a(h)]$ and $\\mathrm dr\\otimes b$ to $\\mathrm d(a(r))\\otimes b$, is a homotopy equivalence. More precisely, there exists an $A$-algebra map $\\ell:P\\to R/I^2$ reducing to $P\\to B$. It induces a $B$-linear chain map $g:N(P)\\to N(R)$ whose degree $-1$ map sends $[h]$ to $\\ell(h)\\in I/I^2$, and whose degree $0$ map sends $\\mathrm dp\\otimes b$ to $b\\overline{\\mathrm d}(\\ell(p))$, where $\\overline{\\mathrm d}:R/I^2\\to\\Omega^1_{R/A}\\otimes_RB$ is the derivation induced by $r\\mapsto\\mathrm dr\\otimes1$. There exist $B$-linear maps $H_R:N(R)^0\\to N(R)^{-1}$ and $H_P:N(P)^0\\to N(P)^{-1}$ with $gN(a)-1=\\delta_RH_R+H_R\\delta_R$ and $N(a)g-1=\\delta_PH_P+H_P\\delta_P$, interpreted degreewise. No inverse ring map $P\\to R$ is assumed. The assertion includes $W=\\{1\\}$ and arbitrarily many variables.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00S1 (lemma-NL-homotopy), proof of part (4), with Tag 04EG (lemma-localization-formally-etale) for the square-zero lift: extension of the polynomial-presentation argument to localized polynomial presentations."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\epsilon_R:R\\twoheadrightarrow B$ and $\\epsilon_P:P\\twoheadrightarrow B$ for the augmentations. Choose for each $v\\in V$ a preimage in $P$ of $\\epsilon_R(v)$. The polynomial universal property gives $a:R\\to P$ over $B$. Fix any such $a$. The arbitrary-surjection chain-map assertion of [lem-trf-conormal-semilinear-difference-homotopy], with both coefficient maps identities, gives exactly the asserted $B$-linear chain map $N(a)$ on the two displayed kinds of generators.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-trf-conormal-semilinear-difference-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00S1 (lemma-NL-homotopy), parts (1),(3)."
+   }
+  },
+  {
+   "text": "Put $D=R/I^2$, $q_R:R\\to D$, and $M=\\ker(D\\to B)=I/I^2$. Multiplication in $D$ gives $M^2=0$ and the $D$-action on $M$ factors through $B$. Lift the images of the variables $E$ from $B$ to $D$. By [def-weil-pbc-mv-polynomial-ring] this defines $u:A[E]\\to D$ lifting $A[E]\\to P\\to B$. Regard $D$ as an $A[E]$-algebra via $u$, so $D/M\\cong B$ compatibly with $A[E]$. Apply [lem-weil-pbc-localization-square-zero-lifting] to $A[E]\\to W^{-1}A[E]=P$, $D$, and the square-zero ideal $M$, with the given map $P\\to B\\cong D/M$. It gives $\\ell:P\\to D$ reducing to $\\epsilon_P$. In particular $\\ell(J)\\subset M$ and $\\ell(J^2)=0$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-localization-square-zero-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04EG (lemma-localization-formally-etale), square-zero lifting; Tag 00S1 (lemma-NL-homotopy), polynomial-variable lifting in part (1)."
+   }
+  },
+  {
+   "text": "For $x,y\\in I$, the Leibniz identity gives $\\mathrm d(xy)\\otimes1=x\\,\\mathrm dy\\otimes1+y\\,\\mathrm dx\\otimes1=0$ in $\\Omega^1_{R/A}\\otimes_RB$. By additivity this derivation annihilates $I^2$ and hence factors through $\\overline{\\mathrm d}_R:D\\to\\Omega^1_{R/A}\\otimes_RB$. The identical calculation with $J\\subset P$ gives $\\overline{\\mathrm d}_P:P/J^2\\to\\Omega^1_{P/A}\\otimes_PB$. Their restrictions to $M=I/I^2$ and $J/J^2$ are respectively $\\delta_R$ and $\\delta_P$, by evaluating a representative. These are derivations for the module actions through $B$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 07BK (definition-differentials) and 00RO (lemma-universal-omega), Leibniz relations."
+   }
+  },
+  {
+   "text": "The restriction of $\\ell$ gives $g^{-1}:J/J^2\\to M$: it is well defined since $\\ell(J^2)=0$. It is $B$-linear since for $p\\in P$ and $h\\in J$, $\\ell(ph)=\\ell(p)\\ell(h)=\\epsilon_P(p)\\ell(h)$ in the square-zero ideal $M$. The composite $\\overline{\\mathrm d}_R\\ell$ is an $A$-derivation with $P$ acting through $B$. By the universal property of differentials it defines $g^0(\\mathrm dp\\otimes b)=b\\overline{\\mathrm d}_R(\\ell(p))$. On $[h]\\in J/J^2$ both $\\delta_Rg^{-1}([h])$ and $g^0\\delta_P([h])$ equal $\\overline{\\mathrm d}_R(\\ell(h))$. Thus $g$ is the required chain map.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO (lemma-universal-omega); Tag 00S1 (lemma-NL-homotopy), chain-map formulas with a lift modulo the squared kernel."
+   }
+  },
+  {
+   "text": "Choose an $A$-algebra map $t:R\\to R$ lifting $\\ell a:R\\to D$, by lifting each variable through $q_R$ and using the polynomial universal property. Then $t$ lies over $B$. For $i\\in I$, $[t(i)]=\\ell(a(i))=g^{-1}N(a)^{-1}([i])$ in $M$. For $r\\in R$, $\\mathrm dt(r)\\otimes1=\\overline{\\mathrm d}_R(\\ell(a(r)))=g^0N(a)^0(\\mathrm dr\\otimes1)$, by step 3. Hence $N(t)=gN(a)$. Apply [lem-trf-conormal-semilinear-difference-homotopy] to $t$ and $1_R$ to obtain $H_R(\\mathrm dr\\otimes b)=b[t(r)-r]$, with $(gN(a))^{-1}-1=H_R\\delta_R$ in degree $-1$ and $(gN(a))^0-1=\\delta_RH_R$ in degree $0$. Superscripts $-1$ denote degree components, not inverse maps.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-trf-conormal-semilinear-difference-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00S1 (lemma-NL-homotopy), part (2), applied to two actual maps out of the polynomial presentation."
+   }
+  },
+  {
+   "text": "Since $a(I^2)\\subset J^2$, $a$ induces $\\bar a:D\\to P/J^2$. Put $q_P:P\\to P/J^2$ and $D_P=\\bar a\\ell-q_P:P\\to J/J^2$. It is additive, vanishes on $A$, and satisfies $D_P(pp\\prime)=\\epsilon_P(p)D_P(p\\prime)+\\epsilon_P(p\\prime)D_P(p)$: expand the product using $\\bar a\\ell=q_P+D_P$ and use $(J/J^2)^2=0$. Thus the universal property gives a $B$-linear $H_P$ with $H_P(\\mathrm dp\\otimes b)=bD_P(p)$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00RO (lemma-universal-omega) and 00S1 (lemma-NL-homotopy), difference-derivation calculation in part (2)."
+   }
+  },
+  {
+   "text": "For $h\\in J$, $H_P\\delta_P([h])=D_P(h)=N(a)^{-1}g^{-1}([h])-[h]$. For the other degree, evaluate $\\overline{\\mathrm d}_P\\bar a=N(a)^0\\overline{\\mathrm d}_R$ on $q_R(r)$: both sides equal $\\mathrm d(a(r))\\otimes1$, so they agree on every element of $D$. Consequently $\\delta_PH_P(\\mathrm dp\\otimes b)=b\\overline{\\mathrm d}_P(\\bar a\\ell(p)-q_P(p))=N(a)^0g^0(\\mathrm dp\\otimes b)-\\mathrm dp\\otimes b$. These generator equalities give $N(a)g-1=\\delta_PH_P+H_P\\delta_P$ degreewise. Together with step 5 they prove the homotopy equivalence. The construction works for arbitrary sets $V,E$ and for $W=\\{1\\}$; it requires only $P\\to R/I^2$, never $P\\to R$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-trf-conormal-semilinear-difference-homotopy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00S1 (lemma-NL-homotopy), parts (2),(4): the two explicit homotopy identities, adapted to the square-zero lift."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-trf-conormal-semilinear-difference-homotopy",
+  "lem-weil-pbc-localization-square-zero-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00S1 (lemma-NL-homotopy), 04EG (lemma-localization-formally-etale), 00RO (lemma-universal-omega): explicit extension to localized polynomial presentations, with the modulo-square homotopy identities written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "localized polynomial presentation and free polynomial presentation of quotient have homotopy equivalent conormal differential complexes",
+   "results": "8 hits; top=['Algebra.Generators.cotangentCompLocalizationAwayEquiv', 'Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv', 'Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv', 'Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_comp_inl', 'Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inr', 'Algebra.Presentation.differentialsSolution_isPresentation', 'Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inl', 'Algebra.Generators.map_comp_cotangentCompAwaySec']; note=; digest=ca84cb3f05e3e610. Full results retained in lem-trf-localized-presentation-homotopy-equivalence.search-0.txt. No match: localization-away conormal splittings and homInfinitesimal are ingredients, not the asserted full chain homotopy equivalence with inverse modulo I squared; read Extension/Cotangent/LocalizationAway.lean:188-219 and Smooth/Basic.lean:202-224.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal smoothness localization lifts presentation map modulo squared ideal giving homotopy inverse of naive cotangent complex",
+   "results": "8 hits; top=['Algebra.Generators.cotangentCompAwaySec_apply', 'Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv', 'Algebra.Generators.cotangentCompLocalizationAwayEquiv', 'Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv', 'Algebra.Generators.map_comp_cotangentCompAwaySec', 'Algebra.Extension.homInfinitesimal', 'Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_comp_inl', 'Algebra.Generators.cotangentCompAwaySec']; note=; digest=8cbe1e85b2abb887. Full results retained in lem-trf-localized-presentation-homotopy-equivalence.search-1.txt. No match: localization-away conormal splittings and homInfinitesimal are ingredients, not the asserted full chain homotopy equivalence with inverse modulo I squared; read Extension/Cotangent/LocalizationAway.lean:188-219 and Smooth/Basic.lean:202-224.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "localization polynomial presentation naive cotangent complex homotopy equivalence square zero lifting",
+   "results": "8 hits; top=['derivationToSquareZeroEquivLift', 'derivationToSquareZeroEquivLift_symm_apply_apply_coe', 'TrivSqZeroExt.liftEquiv', 'liftOfDerivationToSquareZero', 'TrivSqZeroExt.liftEquivOfComm', 'Algebra.Generators.cotangentCompLocalizationAwayEquiv.congr_simp', 'derivationToSquareZeroOfLift', 'Algebra.Generators.cotangentCompLocalizationAwayEquiv']; note=; digest=c7bb067c73da2d28. Full results retained in lem-trf-localized-presentation-homotopy-equivalence.search-2.txt. No match: localization-away conormal splittings and homInfinitesimal are ingredients, not the asserted full chain homotopy equivalence with inverse modulo I squared; read Extension/Cotangent/LocalizationAway.lean:188-219 and Smooth/Basic.lean:202-224.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyEtale, IsLocalization",
+   "results": "3 hits; top=['Algebra.FormallyEtale.of_isLocalization', 'Algebra.FormallyEtale.localization_base', 'Algebra.FormallyEtale.localization_map']; note=; digest=2f59c50d8d3511f3. Full results retained in lem-trf-localized-presentation-homotopy-equivalence.search-3.txt. No match: localization-away conormal splittings and homInfinitesimal are ingredients, not the asserted full chain homotopy equivalence with inverse modulo I squared; read Extension/Cotangent/LocalizationAway.lean:188-219 and Smooth/Basic.lean:202-224.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentCompLocalization|homotop|FormallyEtale [sub=RingTheory/Extension]",
+   "results": "11 hits; top=['Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean', 'Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean', 'Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean', 'Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean', 'Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean', 'Mathlib/RingTheory/Extension/Cotangent/Basis.lean', 'Mathlib/RingTheory/Extension/Cotangent/Basis.lean', 'Mathlib/RingTheory/Extension/Cotangent/Basis.lean']; note=; digest=f5bb42f3bbb9a411. Full results retained in lem-trf-localized-presentation-homotopy-equivalence.search-4.txt. No match: localization-away conormal splittings and homInfinitesimal are ingredients, not the asserted full chain homotopy equivalence with inverse modulo I squared; read Extension/Cotangent/LocalizationAway.lean:188-219 and Smooth/Basic.lean:202-224.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homotop|homInfinitesimal|cotangentCompLocalization [sub=RingTheory/Extension]",
+   "results": "11 hits; top=['Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean', 'Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean', 'Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean', 'Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean', 'Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean', 'Mathlib/RingTheory/Extension/Cotangent/Basis.lean', 'Mathlib/RingTheory/Extension/Cotangent/Basis.lean', 'Mathlib/RingTheory/Extension/Cotangent/Basis.lean']; note=; digest=f5bb42f3bbb9a411. Read Extension/Cotangent/Basic.lean:142-319, Extension/Cotangent/LocalizationAway.lean:188-219 and Smooth/Basic.lean:195-230. The difference-homotopy and localization-lift ingredients are existing leaves; neither H1 equivalence nor the localization-away conormal splitting states the full two-degree homotopy inverse requested here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.Cotangent.map_sub_map",
+   "results": "1 hits; top=['Algebra.Extension.Cotangent.map_sub_map']; note=; digest=1b5d0cb85e261516. Read Extension/Cotangent/Basic.lean:142-319, Extension/Cotangent/LocalizationAway.lean:188-219 and Smooth/Basic.lean:195-230. The difference-homotopy and localization-lift ingredients are existing leaves; neither H1 equivalence nor the localization-away conormal splitting states the full two-degree homotopy inverse requested here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naive cotangent complexes of a polynomial presentation and a localized polynomial presentation are homotopy equivalent",
+   "results": "8 hits; top=['Algebra.Generators.cotangentCompLocalizationAwayEquiv.congr_simp', 'Algebra.tensorH1CotangentOfIsLocalization', 'Algebra.Generators.cotangentCompLocalizationAwayEquiv', 'Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv', 'Algebra.H1Cotangent.isLocalizedModule', 'Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inr', 'Ideal.mapCotangent.congr_simp', 'Algebra.tensorH1CotangentOfIsLocalization.congr_simp']; note=; digest=4d31785ae1fca5c8. Read Extension/Cotangent/Basic.lean:142-319, Extension/Cotangent/LocalizationAway.lean:188-219 and Smooth/Basic.lean:195-230. The difference-homotopy and localization-lift ingredients are existing leaves; neither H1 equivalence nor the localization-away conormal splitting states the full two-degree homotopy inverse requested here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homotopy inverse for naive cotangent complex induced by formally smooth presentation square zero quotient",
+   "results": "8 hits; top=['Algebra.Extension.formallySmooth_iff_split_injection', 'Algebra.FormallySmooth.iff_split_injection', 'Algebra.Extension.homInfinitesimal', 'Algebra.SubmersivePresentation.cotangentEquiv_apply', 'Algebra.FormallySmooth.of_split', 'retractionKerCotangentToTensorEquivSection', 'Algebra.SubmersivePresentation.sectionCotangent_comp', 'Algebra.PreSubmersivePresentation.cotangentComplexAux']; note=; digest=90ac0bb05a2acab0. Read Extension/Cotangent/Basic.lean:142-319, Extension/Cotangent/LocalizationAway.lean:188-219 and Smooth/Basic.lean:195-230. The difference-homotopy and localization-lift ingredients are existing leaves; neither H1 equivalence nor the localization-away conormal splitting states the full two-degree homotopy inverse requested here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localized polynomial and polynomial presentations of an algebra have chain homotopy equivalent conormal differential complexes using a lift to the quotient by the square of the kernel",
+   "results": "8 hits; top=['Algebra.Generators.cotangentCompLocalizationAwayEquiv', 'Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv', 'Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv', 'Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_comp_inl', 'Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inr', 'Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inl', 'Algebra.Generators.map_comp_cotangentCompAwaySec', 'Algebra.Presentation.differentials.comm₁₂']; note=; digest=3df62e60733b6746. Read Extension/Cotangent/Basic.lean:142-319, Extension/Cotangent/LocalizationAway.lean:188-219 and Smooth/Basic.lean:195-230. The difference-homotopy and localization-lift ingredients are existing leaves; neither H1 equivalence nor the localization-away conormal splitting states the full two-degree homotopy inverse requested here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-lci-naive-cotangent-model",
+  "date": "2026-10-22",
+  "group": "Q83"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Natural projection to the two-term naive cotangent truncation. Repair extraction: old proof step 8 and inverse part of step 9, with the modulo-square clause of step 7: localized presentation homotopy inverse.",
+   "via": [
+    "lem-trf-lci-naive-cotangent-model",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-localized-presentation-homotopy-equivalence",
+  "worker": "stage1",
+  "summary": "Constructed the square-zero lift and explicit inverse chain map, using the existing localization square-zero lifting and semilinear difference-homotopy Mathlib leaves. Wrote out both degree identities, including the P-side difference derivation where no ring map P to R exists. No new nodes and no statement change. Searched the current library, whole DAG, blueprint and Mathlib.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Natural projection to the two-term naive cotangent truncation. Repair extraction: old proof step 8 and inverse part of step 9, with the modulo-square clause of step 7: localized presentation homotopy inverse.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-5a9284ed9",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-5a9284ed9 (reviewer sub-agent of L); spot-checked: Live item unsplit with no repair note, so not superseded. The statement, stmt_deps, source and blueprint are identical to live, so the statement is not weakened. proof_deps equals the union of the step uses, and all four cited nodes are Mathlib leaves, so the empty tool_uses is correct. Sources read: Stacks 00S1 (lemma-NL-homotopy) statement and proof of (1)-(2), which covers polynomial P only, and 04EG via the localization square-zero-lifting leaf (FormallySmooth.of_isLocalization + comp_surjective). Each step checked. Step 1: the variable lift gives a, and the difference leaf with identity coefficient maps gives N(a). Step 2: D=R/I^2 with M^2=0; u: A[E]->D lifts the variables, so D is an A[E]-algebra and P->B=D/M is an A[E]-algebra map; the leaf gives the A-algebra map ell with ell(J^2)=0. Step 3: d(xy)⊗1=0 for x,y in I, giving the quotient derivations. Step 4: g^-1 is B-linear and g^0 comes from the universal property applied to d̄_R∘ell; the chain identity holds. Step 5: t lifts ell∘a and lies over B; N(t)=gN(a), and the leaf with a0=t, a1=id gives H_R with the right sign. Step 6: D_P = ā∘ell - q_P lands in J/J^2 and is a derivation because (J/J^2)^2=0. Step 7: d̄_P∘ā = N(a)^0∘d̄_R holds on q_R(r) and q_R is surjective; both degree identities verified. Edge cases checked: W={1}, E empty, 0 in W, B=0, characteristic 2. No duplicates: nl-presentations-homotopy-equivalent (polynomial P' only), principal-localization-naive-cotangent, smooth-localization-conormal-split and two-term direct-sum each state something else, and Mathlib has only ingredients. The parent lem-trf-lci-naive-cotangent-model step 2 uses exactly the existence of a and the homotopy equivalence. delivery-errors A-F pass; no new nodes; no changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalizedPresentationHomotopyEquivalence",
+  "declaration": "Algebra.Extension.localizedPresentation_homotopy_equivalence",
+  "file": "lean/Sheaf/RingTheory/LocalizedPresentationHomotopyEquivalence.lean",
+  "statement": "theorem localizedPresentation_homotopy_equivalence {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B] (R : Extension.{w} A B) (P : Extension.{w'} A B) (V : Type i) (E : Type j) (eR : R.Ring ≃ₐ[A] MvPolynomial V A) [Algebra (MvPolynomial E A) P.Ring] [IsScalarTower A (MvPolynomial E A) P.Ring] (W : Submonoid (MvPolynomial E A)) [IsLocalization W P.Ring] : Nonempty (R.Hom P) ∧ ∀ a : R.Hom P, ∃ (ell : P.Hom R.infinitesimal) (dbar : R.infinitesimal.Ring →ₗ[A] R.CotangentSpace) (gMinus : P.Cotangent →ₗ[B] R.Cotangent) (gZero : P.CotangentSpace →ₗ[B] R.CotangentSpace) (HR : R.CotangentSpace →ₗ[B] R.Cotangent) (HP : P.CotangentSpace →ₗ[B] P.Cotangent), (∀ r : R.Ring, dbar (R.toInfinitesimal r) = (1 : B) ⊗ₜ[R.Ring] KaehlerDifferential.D A R.Ring r) ∧ (∀ h : P.ker, R.ker.cotangentToQuotientSquare (gMinus (Cotangent.mk h)).val = ell h) ∧ (∀ (p : P.Ring) (b : B), gZero (b ⊗ₜ[P.Ring] KaehlerDifferential.D A P.Ring p) = b • dbar (ell p)) ∧ R.cotangentComplex ∘ₗ gMinus = gZero ∘ₗ P.cotangentComplex ∧ gMinus ∘ₗ Cotangent.map a - LinearMap.id = HR ∘ₗ R.cotangentComplex ∧ gZero ∘ₗ CotangentSpace.map a - LinearMap.id = R.cotangentComplex ∘ₗ HR ∧ Cotangent.map a ∘ₗ gMinus - LinearMap.id = HP ∘ₗ P.cotangentComplex ∧ CotangentSpace.map a ∘ₗ gZero - LinearMap.id = P.cotangentComplex ∘ₗ HP",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-154bb2020",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Clause-by-clause check of Algebra.Extension.localizedPresentation_homotopy_equivalence against the node and Stacks 00S1/04EG. Extension R with eR : R.Ring ≃ₐ[A] MvPolynomial V A, Extension P with IsLocalization W over MvPolynomial E A plus the scalar tower, Nonempty (R.Hom P), then for every a: ell : P.Hom R.infinitesimal (ring R/ker^2), dbar determined on toInfinitesimal r, gMinus determined via injective cotangentToQuotientSquare, gZero(b⊗dp)=b•dbar(ell p), chain identity, and four degreewise homotopy equations with correct signs, B-linear. ∃ell inside ∀a matches the node's 'more precisely' (proof gives ell independent of a). Statement is true (04EG formal étaleness, Leibniz, proof steps 5-7). Edge cases: empty/infinite V,E; W={1}; 0∈W; B=0; char 2; six independent universes. Node differs from side-live only in lean; statement verbatim in file; stmt_dep records identical to side-live. No new defs/nodes, no duplicate (landed PresentationsHomotopyEquivalent is polynomial-only), no name clash; source/blueprint docstrings and 7-step stage-3 proof present; sorry only; report has Worker report and Second reading by Q28. No recompile (no file changed); the worker reports a clean compile."
+ }
+}

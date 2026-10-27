@@ -1,0 +1,204 @@
+{
+ "id": "lem-weil-pbc-stationary-bottom-row",
+ "kind": "statement",
+ "title": "Canonical stationary comparisons along the bottom row",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and let $(E_r^{p,q},d_r)_{r\\ge2}$ be a cohomological spectral sequence [def-sp-spectral-sequence] indexed by $\\mathbb Z^2$, with $d_r$ of bidegree $(r,1-r)$ and specified homology-to-next-page isomorphisms $e_r^{p,q}$. Assume $E_r^{p,q}=0$ for every $r\\ge2$ whenever $p<0$ or $q\\ne0$. At a bidegree $(p,q)$ form the short complex $E_r^{p-r,q+r-1}\\to E_r^{p,q}\\to E_r^{p+r,q-r+1}$; let $Z_r^{p,q}$ be the kernel of its outgoing differential, $i_r^{p,q}:Z_r^{p,q}\\to E_r^{p,q}$ its inclusion, and $\\pi_r^{p,q}:Z_r^{p,q}\\to\\mathcal H(E_r)^{p,q}$ its homology quotient. For all $p,q\\in\\mathbb Z$ and $r\\ge2$ with $r>\\max(p,q+1)$, both adjacent differentials are zero, $i_r^{p,q}$ and $\\pi_r^{p,q}$ are isomorphisms, and $t_r^{p,q}=e_r^{p,q}\\circ\\pi_r^{p,q}\\circ(i_r^{p,q})^{-1}$ is a canonical isomorphism to $E_{r+1}^{p,q}$. Their iterated composites canonically identify all such late pages $E_r^{p,q}$, $r>\\max(p,q+1)$, with one another. Moreover, for every $n\\ge0$ the same conclusions about adjacent differentials, $i_r^{n,0}$, $\\pi_r^{n,0}$ and $t_r^{n,0}$ hold for every $r\\ge2$. The maps $a_{n,2}=1$ and $a_{n,r+1}=t_r^{n,0}\\circ a_{n,r}$ are isomorphisms $E_2^{n,0}\\to E_r^{n,0}$ for all $r\\ge2$; at $r=n+2>\\max(n,1)$ they identify $E_2^{n,0}$ with the stable bottom entry. For $n=0$, $a_{0,2}$ is the identity.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 011N (definition-spectral-sequence), 011O (definition-limit-spectral-sequence) and 0BDV (lemma-relate-boundedness). Isolates old row-collapse Step 2, using all-page support as a hypothesis; no abutment is assumed."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-spectral-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Fix $r\\ge2$ and $(p,q)$. If $q\\ne0$, the middle object $E_r^{p,q}$ is zero by hypothesis, so every morphism into or out of it is zero, by the defining uniqueness of morphisms to and from a zero object [def-sp-abelian]. If $q=0$, the incoming source has second coordinate $r-1>0$ and the outgoing target has second coordinate $1-r<0$; both are zero by the support hypothesis. Thus both adjacent differentials vanish at every bidegree for every $r\\ge2$, in particular under the stated late-page bound.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011N (definition-spectral-sequence), page homology; Tag 011O (definition-limit-spectral-sequence), degeneration and stationary identifications."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-short-complex-zero-homology] to the short complex at $(p,q)$: the outgoing map is zero, so $i_r^{p,q}$ is an isomorphism; the incoming map is zero, so $\\pi_r^{p,q}$ is an isomorphism. The specified $e_r^{p,q}$ is an isomorphism by [def-sp-spectral-sequence]. Consequently $t_r^{p,q}=e_r^{p,q}\\circ\\pi_r^{p,q}\\circ(i_r^{p,q})^{-1}$ is an isomorphism, with inverse $i_r^{p,q}\\circ(\\pi_r^{p,q})^{-1}\\circ(e_r^{p,q})^{-1}$. This uses the canonical kernel inclusion and homology quotient of the item, so introduces no arbitrary isomorphism.",
+   "uses": [
+    "lem-weil-pbc-short-complex-zero-homology",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011N (definition-spectral-sequence), page homology; Tag 011O (definition-limit-spectral-sequence), degeneration and stationary identifications."
+   }
+  },
+  {
+   "text": "For each bidegree define A_r from page two to page r by integer induction starting with A_2=1 and setting A_{r+1}=A_r followed by t_r. Define T_{r,s}=A_r^{-1} followed by A_s, restricting to the late pages in the conclusion. This is the forward finite composite for r≤s and its inverse for s<r: adjacent inverse factors cancel. The identities T_{r,r}=1 and T_{r,s} followed by T_{s,t}=T_{r,t} follow by associativity and the inverse identities, for arbitrary orders of pages. The recursion for A gives T_{r,r+1}=t_r, so its cycles square is the square from Step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011N (definition-spectral-sequence), page homology; Tag 011O (definition-limit-spectral-sequence), degeneration and stationary identifications."
+   }
+  },
+  {
+   "text": "For n≥0 put a(n,k)=A_{k+2} at bidegree (n,0). The base equation for the integer induction gives a(n,0)=1. Steps 1 and 2 give both zero differentials and the two isomorphism assertions on every page k+2. The recursion for A, cancellation of a(n,k) with its inverse, and the cycles square for t_{k+2} give the final required square. The integer n+2 is at least 2 and strictly exceeds both n and 1, so a(n,n) reaches a stable bottom entry; a(0,0) is the identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011N (definition-spectral-sequence), page homology; Tag 011O (definition-limit-spectral-sequence), degeneration and stationary identifications."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "lem-weil-pbc-short-complex-zero-homology",
+  "def-sp-spectral-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "G6 Lean realization of the zero-differential calculation from Tags 011N and 011O; finite composites are anchored at page two, and arbitrary-page comparisons are obtained by cancellation through this common anchor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "iCyclesIso|isoHomologyπ|stationary|degener|pageXIso",
+   "results": "Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean; searched Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: page homology and zero-differential short-complex isomorphisms are available separately, but the support/index argument and canonical iterated spectral-page comparison are not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cohomological spectral sequence with zero incoming and outgoing differentials has canonical stationary page isomorphisms from cycles and homology",
+   "results": "HomologicalComplex.isoHomologyπ, CategoryTheory.ShortComplex.asIsoHomologyπ, CategoryTheory.ShortComplex.asIsoHomologyπ.congr_simp, CochainComplex.isoHomologyπ₀, CategoryTheory.ShortComplex.cyclesIsoLeftHomology, CategoryTheory.ShortComplex.isIso_homologyπ, CategoryTheory.ShortComplex.asIsoHomologyπ_hom, HomologicalComplex.iCyclesIso",
+   "date": "2026-10-22",
+   "verdict": "no match: page homology and zero-differential short-complex isomorphisms are available separately, but the support/index argument and canonical iterated spectral-page comparison are not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence.iso",
+   "results": "CategoryTheory.SpectralSequence.iso, CategoryTheory.SpectralSequence.pageHomologyNatIso_hom_app, CategoryTheory.SpectralSequence.pageHomologyNatIso_inv_app, CategoryTheory.SpectralSequence.Hom.comm, CategoryTheory.SpectralSequence.Hom.mk, CategoryTheory.SpectralSequence.Hom.comm_assoc, CategoryTheory.Abelian.SpectralObject.spectralSequence_iso",
+   "date": "2026-10-22",
+   "verdict": "no match: page homology and zero-differential short-complex isomorphisms are available separately, but the support/index argument and canonical iterated spectral-page comparison are not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First quadrant spectral sequence row zero E2 to Er canonical transition isomorphism homology cycles",
+   "results": "ChainComplex.isoHomologyι₀, ChainComplex.isIso_homologyι₀, CochainComplex.isoHomologyπ₀, HomologicalComplex.singleObjCyclesSelfIso_inv_homologyπ, HomologicalComplex.singleObjCyclesSelfIso_hom_singleObjOpcyclesSelfIso_hom, HomologicalComplex.homologyπ_singleObjHomologySelfIso_hom, HomologicalComplex.singleObjHomologySelfIso_inv_homologyι, HomologicalComplex.singleObjCyclesSelfIso_inv_homologyπ_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: page homology and zero-differential short-complex isomorphisms are available separately, but the support/index argument and canonical iterated spectral-page comparison are not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical isomorphisms between bottom row entries on consecutive pages of a first quadrant cohomological spectral sequence with all positive rows zero",
+   "results": "CochainComplex.ConnectData.homologyIsoPos, HomologicalComplex.isoSc', HomologicalComplex₂.XXIsoOfEq_hom_ιTotal, HomologicalComplex₂.XXIsoOfEq_inv_ιTotal, HomologicalComplex.doubleXIso₁, HomologicalComplex.xNextIsoSelf, HomologicalComplex.xNextIso, HomologicalComplex.XIsoOfEq_hom_comp_XIsoOfEq_inv_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: page homology and zero-differential short-complex isomorphisms are available separately, but the support/index argument and canonical iterated spectral-page comparison are not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cohomological spectral sequence supported on row zero has canonical isomorphisms between all pages from page two induced by cycles and homology",
+   "results": "CochainComplex.ConnectData.homologyIsoPos, CochainComplex.isIso_homologyπ₀, CochainComplex.isoHomologyπ₀, CochainComplex.ConnectData.homologyIsoNeg, HomologicalComplex.isIso_pOpcycles, HomologicalComplex.pOpcyclesIso, ChainComplex.isIso_homologyι₀, HomologicalComplex.singleObjHomologySelfIso_inv_homologyι_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give individual complex or page homology isomorphisms, not the support argument together with canonical page composites and the specified stable-page bound"
+  },
+  {
+   "tool": "grep",
+   "query": "stationary|degener|pageXIso|isIso_iCycles|isIso_homologyπ",
+   "results": "Mathlib/Algebra/Homology/SingleHomology.lean, Mathlib/Algebra/Homology/SpectralSequence/Basic.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/SpectralObject/FirstPage.lean; searched Algebra/Homology",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give individual complex or page homology isomorphisms, not the support argument together with canonical page composites and the specified stable-page bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical stationary page isomorphisms of a cohomological spectral sequence supported in the bottom row",
+   "results": "CochainComplex.isStrictlyGE_of_iso, HomologicalComplex.pOpcyclesIso.congr_simp, HomologicalComplex.singleObjOpcyclesSelfIso, HomologicalComplex.pOpcyclesIso, HomologicalComplex.XIsoOfEq, CochainComplex.XIsoOfEq_shift, CochainComplex.isIso_πTruncGE_iff, CategoryTheory.ShortComplex.HomologyData.canonical_iso_hom",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give individual complex or page homology isomorphisms, not the support argument together with canonical page composites and the specified stable-page bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence.iso",
+   "results": "CategoryTheory.SpectralSequence.iso, CategoryTheory.SpectralSequence.pageHomologyNatIso_hom_app, CategoryTheory.SpectralSequence.pageHomologyNatIso_inv_app, CategoryTheory.SpectralSequence.Hom.comm, CategoryTheory.SpectralSequence.Hom.mk, CategoryTheory.SpectralSequence.Hom.comm_assoc, CategoryTheory.Abelian.SpectralObject.spectralSequence_iso",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give individual complex or page homology isomorphisms, not the support argument together with canonical page composites and the specified stable-page bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A spectral sequence with all differentials zero has canonical consecutive page isomorphisms and finite composites identify the second page with every later page",
+   "results": "HomologicalComplex.xNextIsoSelf, HomologicalComplex.dFrom_comp_xNextIsoSelf, HomologicalComplex.xPrevIsoSelf, HomologicalComplex.dFrom_comp_xNextIsoSelf_assoc, HomologicalComplex.xNextIso, HomologicalComplex.xPrevIsoSelf_comp_dTo_assoc, HomologicalComplex.xPrevIsoSelf_comp_dTo, ChainComplex.mkXIso",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give individual complex or page homology isomorphisms, not the support argument together with canonical page composites and the specified stable-page bound"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-first-quadrant-row-collapse",
+  "date": "2026-10-22",
+  "group": "Q60"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-cancellation",
+   "place": "First paragraph, sentence \"the spectral sequence ... collapses to the q=0 row and yields\": stationary-page identifications; old row-collapse Step 2.",
+   "via": [
+    "lem-weil-pbc-first-quadrant-row-collapse"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-weil-pbc-stationary-bottom-row",
+  "worker": "stage1",
+  "summary": "All-page support forces the adjacent differentials to vanish by a two-case argument. Reused the existing short-complex Mathlib leaf for invertibility of the actual cycles inclusion and homology quotient, then wrote the inverse, finite composites, composition rule, bottom-row induction and n=0 endpoint explicitly. Statement unchanged; no new nodes. Searches found no exact project attachment or whole-item Mathlib match.",
+  "blueprint": "Latest blueprint lemma-weil-pbc-cancellation.proof.md, part (1), sentence that the Grothendieck spectral sequence collapses to its row q=0: this item supplies stationary page comparisons only, not propagation of support or the abutment filtration.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-ND-84a9c05dd",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-84a9c05dd (reviewer sub-agent of L); spot-checked: S1 split of lem-weil-pbc-stationary-bottom-row with 0 new nodes; the statement is unchanged and the 4 new proof steps are correct. Step 1: when q≠0 the middle term is zero; when q=0 the incoming map comes from row r−1≥1 and the outgoing map goes to row 1−r≤−1, so all-page support kills both differentials for every r≥2 (checked r=2, p<0, q=±(r−1), the zero category). Step 2: lem-weil-pbc-short-complex-zero-homology applies because d∘d=0; g=0 makes i an isomorphism and f=0 makes π an isomorphism, and e_r is the def-sp-spectral-sequence isomorphism H(E_r)→E_{r+1}; the explicit inverse is correct. Step 3: finite composites T_{r,s} are isomorphisms by induction and satisfy the composition rule. Step 4: a_{n,r}=T_{2,r}; since n+2>max(n,1) this reaches the stable entry as defined in the parent; a_{0,2}=1. The parent first-quadrant-row-collapse Step 2 uses exactly these clauses; no cycle. Blueprint main-20261015 lemma-weil-pbc-cancellation proof paragraph 1 ('collapses to the q=0 row') matches blueprint.from. Stacks homology.tex definition-spectral-sequence (5164) and definition-limit-spectral-sequence (5219) read; 0BDV is background only; no SGA. Duplicate search over stationary/bottom-row/collapse and spectral-sequence nodes found nothing. mathlib_match null is justified. tool_uses empty."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.StationaryBottomRow",
+  "declaration": "CategoryTheory.spectralSequence_stationary_bottom_row",
+  "file": "lean/Sheaf/CategoryTheory/StationaryBottomRow.lean",
+  "statement": "theorem spectralSequence_stationary_bottom_row {C : Type u} [Category.{v} C] [Abelian C] (E : E₂CohomologicalSpectralSequence C) (hsupport : ∀ (r : ℤ) (hr : 2 ≤ r) (p q : ℤ), p < 0 ∨ q ≠ 0 → IsZero ((E.page r hr).X (p, q))) : (∀ (p q r : ℤ) (hr : 2 ≤ r), max p (q + 1) < r → (E.page r hr).d (p - r, q + r - 1) (p, q) = 0 ∧ (E.page r hr).d (p, q) (p + r, q - r + 1) = 0 ∧ IsIso ((E.page r hr).iCycles (p, q)) ∧ IsIso ((E.page r hr).homologyπ (p, q))) ∧ (∃ T : ∀ (p q r : ℤ) (hr : 2 ≤ r) (_hl : max p (q + 1) < r) (s : ℤ) (hs : 2 ≤ s) (_hsl : max p (q + 1) < s), (E.page r hr).X (p, q) ≅ (E.page s hs).X (p, q), (∀ (p q r : ℤ) (hr : 2 ≤ r) (hl : max p (q + 1) < r), T p q r hr hl r hr hl = Iso.refl _) ∧ (∀ (p q r s t : ℤ) (hr : 2 ≤ r) (hs : 2 ≤ s) (ht : 2 ≤ t) (hlr : max p (q + 1) < r) (hls : max p (q + 1) < s) (hlt : max p (q + 1) < t), T p q r hr hlr s hs hls ≪≫ T p q s hs hls t ht hlt = T p q r hr hlr t ht hlt) ∧ (∀ (p q r : ℤ) (hr : 2 ≤ r) (hl : max p (q + 1) < r), (E.page r hr).iCycles (p, q) ≫ (T p q r hr hl (r + 1) (by omega) (by omega)).hom = (E.page r hr).homologyπ (p, q) ≫ (E.iso r (r + 1) (p, q) rfl hr).hom)) ∧ (∃ a : ∀ n k : ℕ, (E.page 2).X (n, 0) ≅ (E.page ((k : ℤ) + 2)).X (n, 0), (∀ n : ℕ, a n 0 = Iso.refl _) ∧ (∀ n k : ℕ, (E.page ((k : ℤ) + 2)).d ((n : ℤ) - (k + 2), (k : ℤ) + 2 - 1) (n, 0) = 0 ∧ (E.page ((k : ℤ) + 2)).d (n, 0) ((n : ℤ) + (k + 2), -((k : ℤ) + 2) + 1) = 0 ∧ IsIso ((E.page ((k : ℤ) + 2)).iCycles (n, 0)) ∧ IsIso ((E.page ((k : ℤ) + 2)).homologyπ (n, 0)) ∧ (E.page ((k : ℤ) + 2)).iCycles (n, 0) ≫ (a n k).inv ≫ (a n (k + 1)).hom = (E.page ((k : ℤ) + 2)).homologyπ (n, 0) ≫ (E.iso ((k : ℤ) + 2) (((k + 1 : ℕ) : ℤ) + 2) (n, 0)).hom))",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-557fb929b",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Statement verbatim in file; node unchanged vs side-live except lean record. Hypotheses: Abelian C (free universes), E₂CohomologicalSpectralSequence (bidegree (r,1-r), E.iso homology→next page), hsupport = exact all-page support. Late clause: both d at (p-r,q+r-1),(p+r,q-r+1) zero, iCycles/homologyπ iso. T: refl + composition + iCycles≫T(r,r+1)=homologyπ≫e pins T uniquely (t_r = i⁻¹π e; reverse = inverses), not free. Bottom row n:ℕ, r=k+2: d's zero, isos, a n 0 = refl, recursion square ⇒ a(k+1)=a k ≫ t, a n n reaches page n+2, a 0 0 = id. Edge cases r=2,q=0; q≠0; negative p,q with hr kept; n=k=0. No defs, sorry only, Stacks 011N/011O/0BDV verified, blueprint tags present, no duplicate in Mathlib or side-live (FirstQuadrantRowCollapse is the abutment-based parent). No findings; no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261025T050754-L-3839960",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

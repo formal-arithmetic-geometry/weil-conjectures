@@ -126,12 +126,15 @@ class Preparation:
                 else:cur.pop(k,None)
         elif D.get('added_deps'):
             sd=list(cur.get('stmt_deps') or []);cur['stmt_deps']=sd+[x for x in D['added_deps'] if x not in sd]
+        if not D.get('corrected') and D.get('removed_deps'):   # 2026-10-25 (deliverfix): a delivered stmt_deps removal
+            cur['stmt_deps']=[x for x in cur.get('stmt_deps') or [] if x not in D['removed_deps']]
         docs={o.item:cur};paths={o.item:D['node_path']}
         for nid,x in D['new'].items():
             nd=copy.deepcopy(x['node']);nd['lean']=records[nid];nd['reviewed']=reviewed_new;nd['reviewed_lean']=reviewed
             docs[nid]=nd;paths[nid]=x['path']
         for nid,x in D['deps'].items():
             nd=copy.deepcopy(NODES[nid]);nd['lean']=records[nid];nd['reviewed_lean']=reviewed
+            nd.update(copy.deepcopy(x.get('dep_fields') or {}))   # 2026-10-25 (deliverfix): delivered dependency edges
             docs[nid]=nd;paths[nid]=x['path']
         backfill(docs,NODES)
         view=dict(NODES);view.update(docs);files=dict(FILES);files.update({n:P/p for n,p in paths.items()})
@@ -328,9 +331,9 @@ def commit(plans,receipts,promote,bulk=False):
         freeze_config();index=cached_index();accepted=[]
         for p in ready:
             changed=[rel for rel,old in p['expected'].items() if read(rel)!=old]
-            for rel,stamp in p.get('imports',{}).items():
-                path=P/rel
-                if not path.is_file() or [path.stat().st_mtime_ns,path.stat().st_size]!=stamp:changed.append(rel)
+            # 2026-10-25 (the human): an imported module that changed is no reason to prepare again: the landing compiles
+            # nothing (trusted worker compile, 2026-10-21) and the global build verifies; only the files the plan writes
+            # matter. Plans are prepared ahead of the landing now, and stage-3 landings change imports all the time.
             if changed:
                 results[p['row']['head']]={'result':'retry','note':'delivery or compile dependency changed: '+', '.join(changed)};continue
             try:
@@ -362,19 +365,28 @@ def commit(plans,receipts,promote,bulk=False):
                     def _stale(pl):
                         for rel,old in (pl.get('expected') or {}).items():
                             if read(rel)!=old:return True
-                        for rel,(mt,sz) in (pl.get('imports') or {}).items():
-                            q=P/rel
-                            if not q.is_file():return True
-                            st=q.stat()
-                            if (st.st_mtime_ns,st.st_size)!=(mt,sz):return True
                         return False
                     stale=[pl for pl in ready if _stale(pl)]
                     for pl in stale:results[pl['row']['head']]={'result':'retry','note':'its own inputs changed before write'}
                     ready=[pl for pl in ready if pl not in stale]
                 changed_heads={p['row']['head'] for p in ready if md.git('rev-parse','-q','--verify','refs/heads/deliver/'+p['row']['group']+'/'+p['row']['item'],check=False)!=p['row']['head']}
                 if changed_heads:
-                    for p in ready:results[p['row']['head']]={'result':'retired' if p['row']['head'] in changed_heads else 'retry','note':'batch heads changed before write'}
-                    ready=[]
+                    # 2026-10-24: one re-delivered branch used to send the WHOLE batch back ("batch heads changed before
+                    # write", 2323 retries in one hour, nothing landed from 19:00 while repairs re-delivered all the
+                    # time). Only the moved plans are retired, and with them every plan that reads or imports a file a
+                    # moved plan writes; the rest land.
+                    gone={p['row']['head'] for p in ready if p['row']['head'] in changed_heads}
+                    while True:
+                        w=set().union(*[set(p['writes']) for p in ready if p['row']['head'] in gone]) if gone else set()
+                        more={p['row']['head'] for p in ready if p['row']['head'] not in gone
+                              and (set(p.get('expected') or {})|set(p.get('imports') or {}))&w}
+                        if not more:break
+                        gone|=more
+                    for p in ready:
+                        h=p['row']['head']
+                        if h in changed_heads:results[h]={'result':'retired','note':'its delivery branch moved before write'}
+                        elif h in gone:results[h]={'result':'retry','note':'reads a file of a plan whose branch moved before write'}
+                    ready=[p for p in ready if p['row']['head'] not in gone]
                 tx=batch.Batch([p['row'] for p in ready]);tx.defer_queue=not bulk;tx.defer_claims=True
                 inventory={'coord/ledger.md','coord/deliveries.log'}
                 if bulk:inventory.update(('coord/queue.tsv','coord/queue.md','coord/blueprint-index.tsv'))

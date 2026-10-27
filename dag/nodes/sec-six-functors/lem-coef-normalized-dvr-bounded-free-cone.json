@@ -1,0 +1,167 @@
+{
+ "id": "lem-coef-normalized-dvr-bounded-free-cone",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-dvr-adic-cone-model",
+   "place": "Only the bounded-free tensor calculation and canonical augmented projection, after strictification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Bounded-free comparison of the Roos cone with multiplication cones",
+ "statement": "Let T be a normalized DVR tower [def-coef-normalized-dvr-tower], M with p and delta its given Roos triangle [def-weil-derived-limit], n a finite index and adj a specified tensor--restriction adjunction [lem-weil-derived-scalar-extension-restriction-adjunction]. Assume countable products in the completed derived category. Suppose a strict normalized tower U for the canonical completed uniformizer [def-sp-completed-uniformizer-section] is already supplied, with specified isomorphisms Q(U_(j+1)) to evaluation_j(T) respecting successor maps [lem-coef-strict-normalized-adic-cone-limit]. At the selected n require a finite-coefficient complex N, a chain isomorphism iN:U_(n+1) to its completed restriction, a finite-derived isomorphism eN:Q(N) to T.M n, and equality of the restricted comparison with eU_n followed by evaluationIso. There is a homotopy-limit cone c for cone(v^(n+1):U_(m+n+1) to U_(m+n+1)), an isomorphism from restricted derived reduction of M to c.pt, and equality between the restricted adjoint of the nth Roos projection and the composite of this isomorphism, the zeroth cone projection, rho, desc, the normalized cokernel map and the supplied level isomorphism. The scalar ring, strict tower, normalization and countable products are fixed inputs, not constructed here.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+  "place": "Only the bounded-free tensor calculation and canonical augmented projection, after strictification"
+ },
+ "stmt_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-weil-derived-limit",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-coef-strict-normalized-adic-cone-limit",
+  "def-sp-completed-uniformizer-section"
+ ],
+ "proof": [
+  {
+   "text": "The localized two-term scalar cone is triangulated and preserves countable products.",
+   "uses": [
+    "lem-coef-linear-scalar-cone-exact-products"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the repaired scalar-cone augmentation comparison to the supplied strict finite-coefficient model N, its chain isomorphism iN, finite-derived isomorphism eN and compatibility equation.",
+   "uses": [
+    "lem-coef-normalized-dvr-roos-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the given Roos triangle to the canonical homotopy-limit cone, apply the scalar-cone functor, and rewrite the projection identity by naturality of the chosen adjunction.",
+   "uses": [
+    "lem-coef-linear-scalar-cone-exact-products",
+    "lem-coef-normalized-dvr-roos-augmentation",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-linear-scalar-cone-exact-products",
+  "lem-coef-normalized-dvr-roos-augmentation",
+  "def-weil-derived-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+  "place": "W3: strict finite coefficient adjoint formula and naturality; finiteModel supplies repaired compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with a two term free complex commutes with homotopy inverse limits and their projections",
+   "results": "8 hits: HomologicalComplex.unit_tensor_d₁, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.tensor_unit_d₂, HomologicalComplex.mapBifunctorMapHomotopy.comm₁_aux, HomologicalComplex.ιTensorObj, HomologicalComplex.mapBifunctorMapHomotopy.comm₁, HomologicalComplex.leftUnitor'_inv_comm",
+   "date": "2026-10-25",
+   "verdict": "No matching Mathlib statement; this is a strictly smaller source step."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsHomotopyLimit\", \"mapCone\"",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No matching Mathlib statement; this is a strictly smaller source step."
+  },
+  {
+   "tool": "grep",
+   "query": "IsNormalizedAdicTower|quasiIso_cokernelDesc|tensor.*homotopy.*limit",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No matching Mathlib statement; this is a strictly smaller source step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedDVRAdicConeModel",
+  "date": "2026-10-25",
+  "group": "W9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedDVRBoundedFreeCone",
+  "file": "lean/Sheaf/Paper/NormalizedDVRBoundedFreeCone.lean",
+  "declaration": "WeilConjectures.normalizedDVR_bounded_free_cone",
+  "statement": "theorem normalizedDVR_bounded_free_cone\n    (T : NormalizedDVRTower l E X D hl)\n    (M : completedIntegralDerivedCategory l E X D hl)\n    [HasProduct (fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower)]\n    (p : M ⟶ ∏ᶜ fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower)\n    (δ : (∏ᶜ fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower) ⟶\n      M⟦(1 : ℤ)⟧)\n    (hc : IsDerivedLimitTriangle\n      (fun n : ℕ ↦ (normalizedDVRTowerTransition l E X D hl n.le_succ).app T.tower)\n      M p δ) (n : ℕ)\n    (adj : scalarReductionDerivedExtension l E X n ⊣\n      scalarReductionDerivedRestriction l E X n)\n    [HasLimitsOfShape (Discrete ℕ) (completedIntegralDerivedCategory l E X D hl)]\n    (U : ℕᵒᵖ ⥤ CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ)\n    (hU : CochainComplex.IsNormalizedAdicTower (normalizedDVRUniformizer l E X) U)\n    (eU : ∀ j : ℕ, DerivedCategory.Q.obj (U.obj (op (j + 1))) ≅\n      (normalizedDVRTowerEvaluation l E X D hl j).obj T.tower)\n    (heU : ∀ j : ℕ,\n      DerivedCategory.Q.map (U.map (homOfLE (Nat.succ_le_succ j.le_succ)).op) ≫\n          (eU j).hom = (eU (j + 1)).hom ≫\n        (normalizedDVRTowerTransition l E X D hl j.le_succ).app T.tower)\n    (N : CochainComplex (normalizedDVRModules l E X n) ℤ)\n    (iN : U.obj (op (n + 1)) ≅\n      ((completedIntegralRestrictScalars l E X D hl n).mapHomologicalComplex\n        (.up ℤ)).obj N)\n    (eN : (@DerivedCategory.Q _ _ _ (HasDerivedCategory.standard _)).obj N ≅ T.M n)\n    (hN : (eU n).hom ≫ (T.evaluationIso n).hom =\n      DerivedCategory.Q.map iN.hom ≫\n        (completedIntegralRestrictScalars l E X D hl n).mapDerivedCategoryFactors.inv.app N ≫\n        (normalizedDVRResCompleted l E X D hl n).map eN.hom) :\n    ∃ (c : Cone (CochainComplex.IsNormalizedAdicTower.arrowTower\n      (ϖ := normalizedDVRUniformizer l E X) (T := U) (n + 1) ⋙\n        CochainComplex.ConeCoimage.cone ⋙ DerivedCategory.Q)),\n    CategoryTheory.Pretriangulated.IsHomotopyLimit c ∧\n    ∃ (a : (scalarReductionDerivedRestriction l E X n).obj\n          ((scalarReductionDerivedExtension l E X n).obj M) ≅ c.pt),\n      (scalarReductionDerivedRestriction l E X n).map\n          ((adj.homEquiv M (T.M n)).symm\n            (p ≫ Pi.π _ n ≫ (T.evaluationIso n).hom)) =\n        a.hom ≫ c.π.app (op 0) ≫ DerivedCategory.Q.map\n          (CochainComplex.ConeCoimage.ρ.app _ ≫ CochainComplex.ConeCoimage.desc.app _ ≫\n            hU.cokerDesc (n + 1) (op 0)) ≫ (eU n).hom ≫\n            (T.evaluationIso n).hom",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261025T124306-L-1968354",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6b4d4",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261026T003059-L-144950",
+  "kind": "interface",
+  "note": "independent cc review: item lem-coef-normalized-dvr-roos-augmentation (STATEMENT-DISPUTED repair, Bockstein counterexample verified) and new nodes lem-cbc-regular-quotient-cone-adjoint / lem-coef-normalized-dvr-strict-coefficient-adjoint against delivered Lean; adapted unclaimed BoundedFreeCone/AdicConeModel against clone (adic statement byte-identical); sandbox --all build of 5 delivered modules + importer RoosFiniteReduction compiled; item axioms clean"
+ },
+ "statement_change": {
+  "date": "2026-10-26",
+  "by": "W3 stage 3",
+  "old_statement": "Let T be a normalized DVR tower [def-coef-normalized-dvr-tower], M with p and delta its given Roos triangle [def-weil-derived-limit], n a finite index and adj a specified tensor--restriction adjunction [lem-weil-derived-scalar-extension-restriction-adjunction]. Assume countable products in the completed derived category. Suppose a strict normalized tower U for the canonical completed uniformizer [def-sp-completed-uniformizer-section] is already supplied, with specified isomorphisms Q(U_(j+1)) to evaluation_j(T) respecting successor maps [lem-coef-strict-normalized-adic-cone-limit]. There is a homotopy-limit cone c for cone(v^(n+1):U_(m+n+1) to U_(m+n+1)), an isomorphism from restricted derived reduction of M to c.pt, and equality between the restricted adjoint of the nth Roos projection and the composite of this isomorphism, the zeroth cone projection, rho, desc, the normalized cokernel map and the supplied level isomorphism. The scalar ring, strict tower, normalization and countable products are fixed inputs, not constructed here.",
+  "what": "Completed-derived successor compatibility alone does not preserve the finite coefficient action. For R a DVR, twist eU_0 on B_1 direct-sum B_1[1] by the nonzero Bockstein B_1 -> B_1[1] and leave higher level comparisons canonical. Precomposition with B_2 -> B_1 kills this Bockstein, so successor compatibility remains. The limit is R direct-sum R[1] and its projection kills the twist, while the cone augmentation sees it. Naturality with summand idempotents prevents a natural comparison from absorbing this off-diagonal twist. Require the selected level comparison to arise from a strict finite-coefficient complex and a finite-derived isomorphism instead. The canonical finiteModel supplies this.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-normalized-dvr-effectivity.proof.md",
+   "place": "regular-quotient tensor calculation on strict finite-coefficient models, paragraphs 3--4"
+  },
+  "citers": [
+   {
+    "id": "lem-coef-normalized-dvr-adic-cone-model",
+    "holds": true,
+    "note": "The unchanged conclusion follows from finiteModel n, Iso.refl, finiteModel.iso and modelTowerIso compatibility; adapted in the same delivery."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "The localized two-term scalar cone is triangulated and preserves countable products.",
+    "uses": [
+     "lem-coef-linear-scalar-cone-exact-products"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The canonical normalized DVR Roos object has the scalar-cone augmentation comparison and projection identity.",
+    "uses": [
+     "lem-coef-normalized-dvr-roos-augmentation"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Transport the given Roos triangle to the canonical homotopy-limit cone, apply the scalar-cone functor, and rewrite the projection identity by naturality of the chosen adjunction.",
+    "uses": [
+     "lem-coef-linear-scalar-cone-exact-products",
+     "lem-coef-normalized-dvr-roos-augmentation",
+     "def-weil-derived-limit"
+    ],
+    "elementary": false
+   }
+  ]
+ }
+}

@@ -37,6 +37,7 @@ set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 -- Reuse the inherited coefficient-universe sheafification instead of small-site transport.
+section
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
 universe u
@@ -959,5 +960,5 @@ structure Calculus (k : Type u) [Field k] (b : SpTowerShriek.Base l E)
 
 end AlgebraicGeometry.ProEtale.SpTowerCalculus
 
--- Restore the inherited instance priority for importing modules.
-attribute [instance high] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+end
+

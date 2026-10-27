@@ -24,108 +24,65 @@
  ],
  "proof": [
   {
-   "text": "For clause 1, [lem-cbc-proetale-extension-zero] gives exact degreewise pro-etale $j_!$ and its compatibility with restriction of finite coefficients. Thus it acts on strict towers and complexes with $(j_{!,\\bullet}C)_n=j_!C_n$. Its exactness follows componentwise from [det-sp-coefficient-towers-abelian], so it preserves the lower bound. Apply [det-sp-tower-injective-components] to the bounded-below complex $j_{!,\\bullet}C$: its derived direct-image comparison gives $(Rp_{*,\\bullet}j_{!,\\bullet}C)_n\\simeq Rp_*j_!C_n$. This is exactly clause 1, naturally in $C$.",
+   "text": "Obtain b,o,x and the normalized finite and bounded-below comparison data from strictCompactificationComparisonRealization. The shared interfaces live in def-sp-tower-shriek-data to avoid an import cycle. The injective-components and coefficient-tower constructions remain used through this existing realization theorem.",
    "uses": [
-    "lem-cbc-proetale-extension-zero",
-    "det-sp-coefficient-towers-abelian",
-    "det-sp-tower-injective-components"
+    "lem-sp-strict-compactification-comparison-realization",
+    "def-sp-tower-shriek-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
-    "place": "(1): exact extension by zero followed by the injective-components comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "Prove clause 3 before using it. Exact derived evaluation is triangulated by [lem-sf-exact-functor-derived-triangulated]. For an actual derived tower morphism $v$, let $D$ be a cone. If every $v_n$ is invertible, its evaluated distinguished triangle has zero third term by [lem-kun-distinguished-cone-zero], so $\\mathcal H^r(D)_n=0$ for every $r,n$. Evaluation commutes with cohomology because kernels and cokernels are levelwise and evaluation is exact [det-sp-coefficient-towers-abelian]. Therefore every cohomology tower of $D$ is zero, hence $D$ is the zero object of the derived category and the same cone criterion makes $v$ invertible. Conversely, a functor sends a morphism and its inverse to mutually inverse maps. This detects isomorphisms of already constructed morphisms; it is not an assertion that evaluation is faithful.",
+   "text": "Exact open extension maps D+ into D+. Apply the ordinary unbounded/rightDerivedFunctorPlus compatibility to the pushforward of that bounded-below object. Its image has a lower bound by definition of D+; transport that bound through the canonical compatibility isomorphism.",
    "uses": [
-    "det-sp-coefficient-towers-abelian",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-kun-distinguished-cone-zero"
+    "lem-sp-strict-compactification-comparison-realization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
-    "place": "(3): cone argument for arbitrary derived morphisms"
-   }
+   "elementary": false
   },
   {
-   "text": "Use the fixed small pro-etale sites underlying [det-sp-coefficient-towers-abelian] and the strict ring systems $B_n=(R_n)_T$, with the actual quotient homomorphisms. Its tower category is exactly $\\mathscr S(B)$ of [lem-coef-semilinear-derived-sections]: both have $B_n$-modules and semilinear transitions, not modules over a fixed ring. That node identifies its enhanced localization with coherent semilinear sections, over all evaluations, and gives simultaneous derived tensor, inverse image, right derived direct image, open extension, units and counits on these section models. In particular its scope is all unbounded complexes, without flat quotient maps and without normalized inputs. For $m\\geq n$, write $T_{mn}=-\\otimes^L_{B_m}B_n$ and $t^C_{mn}:T_{mn}C_m\\to C_n$ for the transition adjunct. The tensor transition is $T_{mn}(K_m\\otimes^L L_m)\\simeq T_{mn}K_m\\otimes^LT_{mn}L_m\\xrightarrow{t^K_{mn}\\otimes t^L_{mn}}K_n\\otimes^LL_n$. The associator is the derived tensor/pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the identity underlying topos and the ring quotient. The coherent models in the section lemma supply the composition homotopies for all $m\\geq n\\geq r$. Thus evaluation of the actual derived tower tensor is $K_n\\otimes^L_{R_n}L_n$, including its transition data, rather than merely evaluation of the underived tensor. This also applies when one input is a specified twist tower.",
+   "text": "Joint conservativity is precisely Data.detects of the published semilinear calculus b.calculus T. The converse follows because evaluation is a functor and therefore preserves isomorphisms. This proves the unbounded detects field, not any faithfulness assertion.",
    "uses": [
-    "det-sp-coefficient-towers-abelian",
-    "lem-coef-semilinear-derived-sections",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "def-coef-semilinear-derived-calculus"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
-    "place": "(2): levelwise flatness/tensor assertion replaced by the coherent varying-ring derived calculus"
-   }
+   "elementary": true
   },
   {
-   "text": "Construct the specified maps using [lem-coef-semilinear-derived-sections], not by lifting a family of finite derived maps. For a geometric inverse image $V=u^{-1}$ with right derived adjoint $G=Ru_*$, its coefficient comparison $b_{mn}:T_{mn}G_m\\to G_nT_{mn}$ is the counit transpose of $V_nT_{mn}G_m\\simeq T_{mn}V_mG_m\\xrightarrow{T_{mn}\\varepsilon_m}T_{mn}$; hence the transition of $G(C)$ is $G_n(t^C_{mn})b_{mn}$. The section lemma gives this specified counit transpose, the coherent section adjunction, and evaluation of its units and counits. Form the projection transformation by the compactification formula of [def-exchange-projection]: the proper counit-tensor transpose $\\pi_p$ followed by $Rp_*$ of the canonical open tensor comparison. Only that definition's projection clause is used (take its auxiliary $g=\\operatorname{id}_Y$); its extra finite-type assumption on that auxiliary map imposes no restriction on the arbitrary base map in part (b). Form the compact-support exchange by the formula in [def-cbc-exchange-map]: $\\eta_{p'}$, then $Rp'_*$ of the pullback square identification, then $Rp'_*\\bar g'^{-1}\\varepsilon_p$, followed by $Rp'_*$ of the open base-change comparison. The section lemma explicitly supplies coherent models for these mates, open-adjunction comparisons and composites. Its preservation of evaluation, composition and transposes says that evaluating these exact formulas yields the finite specified $\\operatorname{PF}^c$ and $\\operatorname{Ex}_!^c$, including their adjunction normalization. Coefficient-transition compatibility thus comes from the coherent geometric constructions just cited, rather than from naturality at one fixed coefficient ring. The derived tower direct image here restricts to $Rp_{*,\\bullet}$ on $D^+$: it is the right adjoint of the same exact termwise inverse image, with the canonical derived adjunction, and clause 1 identifies its finite evaluations.",
+   "text": "At each n use finite_level_projection_criterion on both GoodLevel inputs and their retained origins. The tower projection evaluation equation identifies evaluation of the tower map followed by comparison isomorphisms with a composite of isomorphisms. Cancel those comparisons, then apply joint conservativity.",
    "uses": [
-    "lem-coef-semilinear-derived-sections",
-    "def-exchange-projection",
-    "def-cbc-exchange-map"
+    "lem-sp-finite-level-projection-criterion",
+    "lem-sp-strict-compactification-comparison-realization",
+    "def-sp-strict-compactification-comparison-interfaces"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
-    "place": "(2): construction and evaluation of the projection and base-change mates"
-   }
+   "elementary": false
   },
   {
-   "text": "At each level of part (a), the ring is the finite ring $R_n=A_{E,en}$, and BOTH inputs are bounded constructible finite-Tor etale realizations with witnesses. Thus [sk-thm-sf-pf-proetale] makes the evaluated projection transformation invertible. At each level of part (b), exact evaluation preserves bounded-below inputs; the ring is finite commutative, $f$ is separated finite type, the square is cartesian with arbitrary $g$, and the input has its specified etale-origin witness. Therefore [thm-cbc-finite-level-proetale] makes the evaluated exchange invertible. These theorems are applied only after step 4 constructs the actual tower maps and identifies their evaluations. Clause 3 (step 2) now makes each tower map invertible. No compatibility of the witnesses is used to build the maps, since those were constructed from geometric tower adjunctions before witnesses were used to test invertibility.",
+   "text": "Apply tower_exchange_laws to the same normalized word comparisons and finite exchange comparisons. This residual supplies precisely the exchange field, independently of projection and localization. Combine it with the proved boundedness and detection and the other residual clauses into Laws.",
    "uses": [
-    "sk-thm-sf-pf-proetale",
-    "thm-cbc-finite-level-proetale"
+    "lem-sp-tower-exchange-realization",
+    "lem-sp-strict-compactification-comparison-realization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
-    "place": "(2): finite-level invertibility and joint conservativity"
-   }
+   "elementary": false
   },
   {
-   "text": "For part (c), choose ONE bounded-below representative complex $C^\\cdot$ in the abelian category of towers. For every degree $q$ and level $n$, apply [lem-weil-pbc-proetale-ringed-open-closed] with ring sheaf $(R_n)_T$ to $C_n^q$, using the assumed quasi-compactness of $a$. It gives $0\\to a_!a^{-1}C_n^q\\to C_n^q\\to i_*i^{-1}C_n^q\\to0$, whose maps are the open counit and closed unit. They commute with the differentials by naturality. They also commute with the semilinear transitions: restriction of the scalar action does not change the underlying inverse/direct image maps or these topoi units and counits; open extension commutes with finite-ring restriction of scalars by [lem-cbc-proetale-extension-zero]. Applying naturality to $C_m^q\\to\\operatorname{Res}_{m,n}C_n^q$ therefore gives the transition squares. By [det-sp-coefficient-towers-abelian] these are a degreewise short exact sequence of complexes of towers. [lem-weil-pbc-complex-ses-triangle] produces its distinguished triangle. The immersion functors here are exact (open extension and closed direct image by the ringed open–closed lemma, inverse images by [def-weil-pbc-proetale-operations]); [lem-weil-pbc-exact-functor-derived-functor] identifies their derived operations with these termwise ones. Finally, exact evaluation is triangulated by [lem-sf-exact-functor-derived-triangulated], so it carries this triangle, with its counit and unit, to the same finite open–closed triangle. No short exact sequence of abstract derived objects, or gluing of unrelated distinguished triangles, is asserted.",
+   "text": "Apply tower_localization_realization to each complementary closed/open pair. Combine boundedness, projection, exchange, localization and detection into the existing Laws structure for the same b,o,x.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-cbc-proetale-extension-zero",
-    "det-sp-coefficient-towers-abelian",
-    "lem-weil-pbc-complex-ses-triangle",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-sf-exact-functor-derived-triangulated",
-    "def-weil-pbc-proetale-operations"
+    "lem-sp-tower-localization-realization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
-    "place": "(2): localization on one representative complex; Stacks proetale.tex Tags 09AH (lemma-ses-associated-to-open) and 09BM (lemma-closed-immersion-complement-retrocompact-exact) and the ringed open–closed statement"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-cbc-exchange-map",
-  "def-exchange-projection",
-  "def-weil-pbc-proetale-operations",
-  "det-sp-coefficient-towers-abelian",
-  "det-sp-tower-injective-components",
-  "lem-cbc-proetale-extension-zero",
-  "lem-coef-semilinear-derived-sections",
-  "lem-kun-distinguished-cone-zero",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "sk-thm-sf-pf-proetale",
-  "thm-cbc-finite-level-proetale"
+  "lem-sp-strict-compactification-comparison-realization",
+  "def-sp-strict-compactification-comparison-interfaces",
+  "def-sp-tower-shriek-data",
+  "def-coef-semilinear-derived-calculus",
+  "lem-sp-finite-level-projection-criterion",
+  "lem-sp-tower-exchange-realization",
+  "lem-sp-tower-localization-realization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
-  "place": "Paragraphs (1), (3), (2), expanded using existing coherent varying-ring section and ringed-site tools"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "Paragraphs (1), (3), (2); Lean assembly from normalized finite words, with three strictly smaller residual steps."
  },
  "mathlib_searches": [
   {
@@ -229,20 +186,12 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-lem-sp-tower-bound",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "item": "det-sp-tower-shriek-levels",
   "worker": "stage1",
-  "summary": "Repair of returned head 253042477b50: explicitly state both finite-Tor hypotheses and the finite projection geometric domain; replace fixed-ring naturality by the existing coherent varying-coefficient section calculus, with explicit tensor and direct-image transition formulas and normalized mates; construct localization from one strict complex and its degreewise ringed sequence; correct the cone test and blueprint/Mathlib search records. STATEMENT-DISPUTED: the literal unrestricted D+ tensor claim is ill-typed for the residue-field tower over Z/ell^2 (unbounded negative Tor); the repaired projection domain is the finite-Tor domain of the parent unit. General clause 1 and unbounded conservativity are retained.",
-  "blueprint": "Realizes operations.proof.md (1), (3), and (2), in this order; steps 3–5 supply the missing derived tensor and coherent mate justification in paragraph (2), and step 6 supplies its degreewise localization construction. Source clause (2) needs a tensor domain: residue-field self-tensor at level 2 lies outside D+. No chapter/unit route is replaced.",
+  "summary": "Repair of the human re-split return: keep the statement unchanged; extract the strict-tower compactification comparison realization (old steps 3–4) and scalar-compatible open-closed complex sequence (old step 6) as two statement-only unsplit nodes. Retain the level-computation and cone-conservativity arguments and assemble finite invertibility and localization in under 3000 characters. The complete old six-step argument and its allocation are preserved in report.md.",
+  "blueprint": "operations.proof.md (1) is step 1; (3) is step 2; (2) is assembled by steps 3–5 from two independent new lemma statements. Old steps 3–4 belong to the comparison-realization node, old step 6 to the open-closed complex node plus the existing SES/derived-exact/triangulation tools. No change to statement or unit route.",
   "tool_uses": [
-   {
-    "node": "def-cbc-exchange-map",
-    "why": "Specified compactification exchange formula for arbitrary base change."
-   },
-   {
-    "node": "def-exchange-projection",
-    "why": "Specified finite compactification projection formula, used only for the projection construction with auxiliary g=id."
-   },
    {
     "node": "det-sp-coefficient-towers-abelian",
     "why": "Varying-ring abelian tower description and exact evaluation, following the blueprint tower route."
@@ -254,10 +203,6 @@
    {
     "node": "lem-cbc-proetale-extension-zero",
     "why": "Exact pro-etale open extension and compatibility with restriction of finite scalars, required before the compactification composite."
-   },
-   {
-    "node": "lem-coef-semilinear-derived-sections",
-    "why": "Generic varying-ring coherent derived operations, transitions, units/counits, tensor and mate evaluation; the unit itself does not supply their construction."
    },
    {
     "node": "lem-kun-distinguished-cone-zero",
@@ -276,24 +221,12 @@
     "why": "Exact immersion functors have their termwise derived models."
    },
    {
-    "node": "lem-weil-pbc-proetale-ringed-open-closed",
-    "why": "General ringed pro-etale sheaf-level exact counit–unit sequence for a quasi-compact complementary open."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Derived strong monoidal coefficient extension, used in the explicit tensor transition formula."
-   },
-   {
     "node": "sk-thm-sf-pf-proetale",
     "why": "Finite projection invertibility after the coherent tower map has been constructed and evaluated; both finite-Tor hypotheses are retained."
    },
    {
     "node": "thm-cbc-finite-level-proetale",
     "why": "Finite compact-support base-change invertibility on etale-origin inputs, with arbitrary base map."
-   },
-   {
-    "node": "def-weil-pbc-proetale-operations",
-    "why": "Exact identified-coefficient inverse images and their underlying module actions, used to identify the localization functors and semilinear transition squares."
    }
   ]
  },
@@ -315,52 +248,29 @@
   "def-weil-pbc-proetale-operations"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q57-e183e5e06",
-  "group": "Q57",
+  "reviewer": "NT-cc-Q62-ae99b3d06",
+  "group": "Q62",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q57-e183e5e06 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements and source passages. All six steps check out, including nonflat varying-coefficient constructions, arbitrary-base exchange, both projection Tor hypotheses, and localization. No new nodes or repairs. Accepted tool uses and target coefficient distinctions are documented in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-ae99b3d06 (reviewer sub-agent of L); spot-checked: Human re-split (repair note 2026-10-22): the item statement is byte-identical; the proof is now 5 steps, 2986 chars, with 2 new unsplit nodes. Old steps 1–2 stay verbatim as short assemblies of existing nodes. Old steps 3–4 became lem-sp-strict-compactification-comparison-realization. Old step 5 became step 4: both finite-Tor/origin inputs, the field setting, the supplied compactification, arbitrary g and individual witnesses are kept, and sk-thm-sf-pf-proetale and thm-cbc-finite-level-proetale have their hypotheses met. Old step 6 became lem-sp-semilinear-open-closed-complex-sequence plus step 5 (SES-triangle, exact-derived, triangulated evaluation). Nothing was blurred or dropped, and no node restates the item. Node A checks: the tensor-transition adjunct is correct; b_mn equals the mate of lem-coef-semilinear-derived-sections with the right types; PF^c=G_p(γ)π_p matches def-exchange-projection; Ex_!^c=G_p'(β)G_p'(V ε_p)G_p'(θ)η_p' matches def-cbc-exchange-map term by term; no invertibility is claimed, arbitrary g is allowed, and identity and ramified cases check. Node A is not a duplicate of lem-cbc-strict-tower-proper-open-calculus (constant ring), the strict-tower exchange-mate normalization (proper/adic), the sf-package tower comparisons, compact-projection-tower-operations (conditional), or lem-sp-coefficient-tower-shriek-calculus (depends on the item). Node B checks: Stacks proetale 09AH needs a quasi-compact j, and B keeps it; scalar compatibility follows from naturality applied to M_m→Res M_n; the U=∅, Z=∅ and zero cases check; it is not a duplicate of lem-pur-sequence-site-open-extension (open only) or the single-ring open-closed lemma. A BFS over dependencies finds no cycle, there is no SGA, and the searches have real output. FIX (B3): node B used a_! for an arbitrary ring sheaf B_n with no definition cited (def-weil-pbc-proetale-operations defines only u^*, u_*). I added a clause defining a_! via def-weil-extension-by-zero-presheaf and def-weil-presheaf-modules-sheafification, and added both to stmt_deps, in fixes/dag/nodes/sec-smooth-purity/lem-sp-semilinear-open-closed-complex-sequence.json. Tool uses accepted. Advisory: node A (~3.4k chars of old argument) is larger than B (~1k) and could have been split further, but it is not a restatement of the item.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.SmoothPurityTowerShriekLevels",
   "declaration": "AlgebraicGeometry.ProEtale.SpTowerShriek.tower_shriek_levels",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.R",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.B",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.tau",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.small",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.sequenceSmall",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.S",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.D",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.ev",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.Ev",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.Base",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.tensor",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.Geometry",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.pull",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.push",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.adjunction",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.deriveMap",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.finiteOpenAdjunction",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.Open",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.openD",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.openEvaluation",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.Operations",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.F",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.projection",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.square",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.openMate",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.OpenExchange",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.exchange",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.finiteF",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.Fcomparison",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.Origin",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.quotientTransport",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.GoodLevel",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.LocalizationData",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.Laws",
    "AlgebraicGeometry.ProEtale.SpTowerShriek.tower_shriek_levels"
   ],
   "file": "lean/Sheaf/Paper/SmoothPurityTowerShriekLevels.lean",
@@ -369,7 +279,7 @@
   "by": "N8",
   "date": "2026-10-21",
   "existing": false,
-  "note": "§1(B): restore the recorded module, deleted as outside the target closure on 2026-10-20, because the coefficient compatibility item now needs its normalized interface. Archived source retained; retired forwarding imports are replaced by their published upstream modules. No mathematical statement change."
+  "note": "S2: existing interface declarations R through Laws moved verbatim to SmoothPurityTowerShriekData and remain publicly reexported here; the unchanged theorem now assembles the strict comparison dependency without an import cycle."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -378,5 +288,15 @@
   "group": "N8",
   "result": "pass",
   "note": "Read the item, all 19 modules, the 15 new def nodes, the 3 dependency records (via git show of the head), the report and the live dependencies. H3: hypotheses equal diagonalTower_trace token for token; δ fixed by IsDiagonalLimit; clause 1: Family/ScalarCompatibility pinned by adjoint-normalized Endpoints and full-unit ExactSquareOfUniverses squares, Reference ties the Z_l stage to the completed δ and Results (the free underlying iso cancels), FiniteReductions covers every E, π and n through the derived quotient extension and asserts the canonical geoCartier class and geoP1Trace; clause 2: rational/closure stages and all transitions are Diagrams with both identities; clause 3: FamilyPullback at Z_l/O_E/E/Q̄/quotients with exchangeRight mates, PullEndpoints and pinned CartesianAdicComparison line maps; no flatness; edge cases ∅, n=0, ℓ=2, bottom E, ramified, nonflat ok; universes unchanged. (B): DiagonalTowerTrace restores U's 2026-10-20 deleted module (= O1 PASSed text minus one import); TraceModels is a pure superset (ExactSquareOfUniverses, Q53 form). Advisory: SmoothPurityTowerShriekLevels needlessly drops a private import, record note false and by NY→N8 (optional --revert-nodes det-sp-tower-shriek-levels); TraceModels note's first sentence inaccurate; new def nodes cite theorem nodes for plain defs as the landed framework does; proof-route private imports; item was pruned as unreachable; finite p_i traces follow from δ plus the identities; exchange node overlaps generic def-trf-topos-derived-base-change-map (exchangeRight only). No recompile: no file changed; worker compile and dry run clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d3de1",
+  "group": "S2",
+  "result": "fix",
+  "landing": "20261025T203044-L-2779831",
+  "kind": "interface",
+  "note": "independent cc review: delivered SmoothPurityTowerShriekData vs live item lines 39-620 (only blueprint tags differ); residual statements vs Laws fields and ComparisonData interfaces; new/item nodes vs Lean; 6 ComparisonData importers + CoefficientTowerShriekCalculus compiled rc 0"
  }
 }

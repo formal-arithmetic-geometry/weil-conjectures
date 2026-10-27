@@ -1,0 +1,206 @@
+{
+ "id": "lem-sfb-derived-scalar-tensor-identification",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Scalar-mate subargument of direct-image proof paragraph (3): Normalized derived scalar/tensor identification",
+   "via": [
+    "lem-sfb-derived-scalar-mate-thick-locus",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normalized derived scalar/tensor identification",
+ "statement": "Let $W$ be a scheme with its small pro-etale site [def-weil-pbc-proetale-site], and let $\\varphi:A\\to B$ be a map of commutative ring sheaves. Use module sheaves and their ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $E$ be ordinary scalar extension and $T$ its canonical K-flat left derived functor with its specified counit [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Let $r$ be exact restriction and $C=r(B)$ [def-pc-sheaf-restrict-scalars]. Let $a$ be any signed-total tensor presentation on flat-term K-flat representatives [def-sfb-proetale-tensor-model]. There is a unique natural isomorphism\n$$h:rT\\xrightarrow{\\sim}(-\\otimes_A^{\\mathbf L}C[0])$$\nwith the following normalization. The ordinary comparison $c_P:r(E P)\\cong P\\otimes_A C[0]$ sends $b\\otimes x$ to $x\\otimes b$ degreewise. Write $Q_A,Q_B$ for localization and $\\kappa_P:rT(Q_A P)\\to Q_A(r E P)$ for restriction of the specified universal scalar-derived counit followed by the exact-restriction factorization. For every pair of flat-term K-flat complexes $P,Q$ and every quasi-isomorphism $q:Q\\to C[0]$,\n$$\\kappa_P\\circ h_{Q_A P}^{-1}\\circ a.\\mathrm{tensor}(1,Q_Aq)\\circ a.\\mathrm{representative}_{P,Q}=Q_A(c_P^{-1}\\circ(1_P\\otimes q)).$$\nThis is the predicate IsDerivedTensor in the attached Lean declaration. Resolving $C$ is required only after tensoring with K-flat $P$, so no flatness of $B$ is assumed. The attached module also retains the existing ordinary comparison, scalar mate, source/target identifications and their definitions unchanged; these are constructions rather than additional unresolved assertions.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-pbc-four-corners",
+  "def-sfb-proetale-tensor-model",
+  "def-weil-pbc-projection-formula-arrows",
+  "def-weil-pbc-projection-formula-map",
+  "lem-sfb-scalar-tensor-ordinary-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized ordinary scalar/tensor comparison and its degreewise complex extension from the extracted ordinary module. It is the same construction on balanced pure tensors: scalar extension sends b tensor x to x tensor b under the inverse comparison. This part is fully proved, with unchanged definitions and normalization.",
+   "uses": [
+    "lem-sfb-scalar-tensor-ordinary-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+   }
+  },
+  {
+   "text": "Use the fully proved representative scalar/tensor comparison, constructed from a coefficient resolution, fixed-factor tensor normalization, the specified scalar counit and the ordinary complex comparison. It supplies a natural isomorphism b on flat-term K-flat representatives and the original normalization for every coefficient resolution.",
+   "uses": [
+    "lem-sfb-scalar-tensor-representative-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+   }
+  },
+  {
+   "text": "Flat-term K-flat resolutions and resolving-representative full faithfulness give full faithfulness of restriction of bifunctors. Restriction of unary functors is also fully faithful: inflate a transformation through the first projection and recover it on the diagonal. Descend the representative isomorphism with preimageIso. Its representative components are exactly those constructed above. Substitute these components in the normalization equation and cancel the comparison isomorphisms; functoriality of Q gives the prescribed right side. For uniqueness, use one flat K-flat resolution q of C[0]. The representative isomorphism and tensor(1,Qq) are invertible, as is the restricted scalar counit. Cancel them in the two normalization equations to identify inverse components on every representative. Faithful restriction identifies the inverse natural transformations and hence the isomorphisms.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "def-weil-pbc-four-corners",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-pur-site-sheaf-tensor-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scalar-tensor-ordinary-normalization",
+  "lem-sfb-scalar-tensor-representative-normalization",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-pur-site-sheaf-tensor-presentation-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source. F3: explicit construction and descent using the proved fixed-factor representative comparison; cancellation proves the original normalization and uniqueness. The already proved ordinary part is extracted to DerivedScalarTensorOrdinary to keep single-file compilation below the limit; no definition or declaration name is changed. The fully proved comparison on representatives is extracted to DerivedScalarTensorRepresentatives; the original module performs descent and uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On sheaves of modules, derived extension of scalars followed by restriction is derived tensor with the new coefficient ring",
+   "results": "SheafOfModules.restrictScalars; PresheafOfModules.restrictScalarsObj; ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.ExtendScalars.obj'",
+   "date": "2026-10-27",
+   "verdict": "No match for the normalized unbounded derived sheaf-ring comparison; ordinary maps and generic shift infrastructure do not supply its representative normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars followed by restriction of scalars is naturally isomorphic to the derived tensor product with the new coefficient ring",
+   "results": "ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.extendRestrictScalarsAdj_unit_app_apply",
+   "date": "2026-10-27",
+   "verdict": "No exact match. The project already defines the scalar adjunctions and tensor presentations; this node isolates their remaining compatibility calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*(projection|shift)|projection.*scalar|tensor.*(changeOfRings|restrictScalars)",
+   "results": "Broad Mathlib grep returned 25 hits, including Algebra/Algebra/Epi.lean, RingTheory/PicardGroup.lean, RingTheory/Localization/BaseChange.lean and RingTheory/IsTensorProduct.lean. These concern ordinary linear tensor maps. Targeted grep of Mathlib sheaf modules, DerivedCategory and Adjunction found no normalized derived scalar projection/shift comparison. Project and DAG matches are the parent and its constant/condensed specializations; isoLocus supplies only categorical closure.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate. Blueprint search for scalar projection normalization returned zero nodes; the parent supplies precisely the argument split here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedScalarMateThickLocus",
+  "date": "2026-10-27",
+  "group": "H6"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedScalarMateData",
+  "file": "lean/Sheaf/Paper/DerivedScalarMateData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.DerivedScalarMate.derivedTensorIso_existsUnique",
+  "statement": "theorem derivedTensorIso_existsUnique\n    {W : Scheme.{u}}\n    {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}\n    (φ : A ⟶ B)\n    (a : Scheme.ProEtaleTensorModel W A) :\n    ∃! h : Scheme.proEtaleRingDerivedExtension φ ⋙ (restriction φ).mapDerivedCategory ≅\n        (Functor.curryObj a.tensor).flip.obj\n          (DerivedCategory.Q.obj (coefficientComplex φ)),\n      IsDerivedTensor φ a h",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.IsDerivedTensor",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.derivedTensorIso_existsUnique",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.derivedTensorIso",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.inverseRing",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.inverseMap",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.pull",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.push",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.adjunction",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.scalarPullback",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.beta",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.restrictionPush",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.coefficientPullback",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.derivedCoefficientPullback",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.locus",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.CanonicalTensorShifts",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.sourceIso",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.targetIso"
+  ],
+  "note": "Relocation of the unchanged auxiliary declarations from DerivedScalarMateThickLocus to prevent an import cycle with the two new geometric proof dependencies. This is the same pre-existing derivedTensorIso_existsUnique hole, not an additional hole or a proof of it. The item publicly reexports every moved name."
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.DerivedScalarMateThickLocus",
+  "worker": "stage3",
+  "summary": "Extract a strictly smaller part of the already reviewed scalar-mate plan. No hypothesis is added, no canonical map is changed, and no thickness conclusion is assumed.",
+  "blueprint": "Retain the original small-pro-etale scalar-comparison argument used in the direct-image step (3).",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "The same generic tool and specialization as in the parent node’s reviewed plan; extracted into the argument step which actually uses it."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "The same generic tool and specialization as in the parent node’s reviewed plan; extracted into the argument step which actually uses it."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "The same generic tool and specialization as in the parent node’s reviewed plan; extracted into the argument step which actually uses it."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d53ab",
+  "group": "H6",
+  "result": "fix",
+  "landing": "20261027T050605-L-241597",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cd860",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261027T065848-L-2482355",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules vs clone f87ce49 (verbatim move of 9 ordinary decls, only the sorry replaced) and the 4 new/changed nodes vs the Lean; 4 direct importers compiled OK in sandbox with delivered modules; axioms clean"
+ }
+}

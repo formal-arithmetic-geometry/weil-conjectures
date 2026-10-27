@@ -1,0 +1,129 @@
+{
+ "id": "lem-sf-open-dvr-derived-tower-comparison",
+ "kind": "statement",
+ "title": "Natural derived DVR tower comparison on K-flat resolutions",
+ "statement": "Fix l, E, an adic datum d, a scheme T and its coefficient model C of [def-sf-open-quotient-koszul-models], a coefficient calculus S of [lem-coef-derived-system-evaluation-calculus], and an ordinary quotient tensor model M of [def-trf-completion-unit-models]. Given an ordinary natural tensor-tower comparison nu from completed-adic tensor after C.modules to M.tensor after exact scalar restriction and C.ordinaryTowers, and any natural comparison epsilon from Q followed by S.reduction to M.quotient followed by Q which is invertible on flat-term K-flat complexes, there exists a natural isomorphism t between completed-adic reduction after C.derived and S.reduction after exact restriction and C.towers. On every flat-term K-flat Q it identifies the completed-adic reduction counit followed by Q(nu_Q) with t_Q followed by C.towers applied to epsilon_Q and the exact restriction localization factor, followed by the exact coefficient-tower localization factor. This constructs no augmentation and proves no total-limit unit formula.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XN (lemma-find-existence-computes), comparison on a resolving class, as formalized by comparison_from_resolutions."
+ },
+ "stmt_deps": [
+  "def-sf-open-quotient-koszul-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-trf-completion-unit-models"
+ ],
+ "proof": [
+  {
+   "text": "Flat-term K-flat resolutions exist. The canonical coefficient ring isomorphism preserves independent-coefficient K-flatness by ringIso_tensor_transport; translate to the acyclic tensor K-flat API. Hence the completed-adic counit is an isomorphism on these complexes by Koszul reconstruction. The tensor presentation isomorphism converts exactness of tensorRight into the site-sheaf flatness convention.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sfb-ring-isomorphism-tensor-transport",
+    "prop-weil-pbc-koszul-reconstruction",
+    "def-pur-site-sheaf-tensor-presentation-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the exact restriction and coefficient localization factors to make epsilon, followed by nu inverse, a natural transformation to the same localized ordinary tower functor as the completed-adic counit. It is invertible on the resolving class by the hypothesis on epsilon. Apply comparison_from_resolutions to the two natural transformations. Its representative equality gives the counit square after cancelling Q(nu inverse); functoriality combines the two restricted maps.",
+   "uses": [
+    "lem-cbc-derived-constant-tower-normalization",
+    "def-trf-completion-unit-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "prop-weil-pbc-koszul-reconstruction",
+  "lem-cbc-derived-constant-tower-normalization",
+  "def-trf-completion-unit-models",
+  "def-pur-site-sheaf-tensor-presentation-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XN (lemma-find-existence-computes), comparison on a resolving class, as formalized by comparison_from_resolutions. Q8: exact coefficient transport of the two counits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "comparison_from_resolutions|leftDerivedFunctorUniq",
+   "results": "{\"t\": \"2026-10-27T01:25:11Z\", \"tool\": \"grep\", \"query\": \"comparison_from_resolutions|leftDerivedFunctorUniq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib match for this coefficient tower assertion. The project already proves comparison_from_resolutions; the new theorem applies it to the two normalized coefficient counits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comparison_from_resolutions\"",
+   "results": "{\"t\": \"2026-10-27T01:25:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"comparison_from_resolutions\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib match for this coefficient tower assertion. The project already proves comparison_from_resolutions; the new theorem applies it to the two normalized coefficient counits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two natural derived functors with comparison isomorphisms on a class of resolutions are uniquely isomorphic",
+   "results": "{\"t\": \"2026-10-27T01:25:14Z\", \"tool\": \"leanfinder\", \"query\": \"Two natural derived functors with comparison isomorphisms on a class of resolutions are uniquely isomorphic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftDerivedUnique\", \"CategoryTheory.Functor.rightDerivedUnique\", \"CategoryTheory.Functor.leftDerivedNatIso_hom\", \"CategoryTheory.Functor.leftDerived_ext\", \"CategoryTheory.Functor.leftDerivedNatIso\", \"CategoryTheory.Functor.rightDerivedNatIso_hom\", \"CategoryTheory.Functor.rightDerivedNatIso\", \"CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso\"], \"digest\": \"8805db985a6f9b8b\"}",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib match for this coefficient tower assertion. The project already proves comparison_from_resolutions; the new theorem applies it to the two normalized coefficient counits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenDvrStrictReductionComparison",
+  "date": "2026-10-27",
+  "group": "Q8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Natural derived tower comparison and its representative counit square, obtained from the ordinary tensor comparison on K-flat resolutions.",
+   "via": [
+    "lem-sf-open-dvr-strict-reduction-comparison",
+    "lem-sf-open-dvr-augmented-reduction-comparison",
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenDvrDerivedTowerComparison",
+  "file": "lean/Sheaf/SixFunctors/OpenDvrDerivedTowerComparison.lean",
+  "declaration": "WeilConjectures.openDvrDerivedTowerComparison",
+  "declarations": [
+   "WeilConjectures.openDvrDerivedTowerComparison"
+  ],
+  "statement": "theorem openDvrDerivedTowerComparison\n    (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))\n    (T : Scheme.{u}) (C : OpenDvrCoefficientModel l E d T)\n    (S : CoefficientDerivedSystemCalculus.{u, u} l E T)\n    (M : CompletionUnit.OrdinaryModel l E T)\n    (ν : C.modules.functor ⋙ completedAdicOrdinaryTower T d ≅\n      M.tensor ⋙ coefficientSequenceRestriction.{u, u} l E T ⋙ C.ordinaryTowers)\n    (ε : DerivedCategory.Q ⋙ S.reduction ⟶ M.quotient l E T ⋙ DerivedCategory.Q)\n    (hε : ∀ Q : CochainComplex (scalarReductionSource.{u, u} l E T) ℤ,\n      CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n        (J := ProEt.topology T)\n        (R := completedIntegralCommRingSheafUnrestricted.{u, u} l E T) Q →\n      (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}\n        (J := ProEt.topology T)\n        (R := completedIntegralCommRingSheafUnrestricted.{u, u} l E T) (Q.X i)) →\n      IsIso (ε.app Q)) :\n    ∃ t : C.derived.functor ⋙ completedAdicReduction T d ≅\n        S.reduction ⋙ coefficientSequenceDerivedRestriction.{u, u} l E T ⋙ C.towers,\n      ∀ (Q : CochainComplex (scalarReductionSource.{u, u} l E T) ℤ)\n        (_hQ : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n          (J := ProEt.topology T)\n          (R := completedIntegralCommRingSheafUnrestricted.{u, u} l E T) Q)\n        (_hflat : ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}\n          (J := ProEt.topology T)\n          (R := completedIntegralCommRingSheafUnrestricted.{u, u} l E T) (Q.X i)),\n      let I := (M.quotient l E T).obj Q\n      let B := (CompletionUnit.tower l E T).obj I\n      (completedAdicReduction T d).map\n          (C.modules.functor.mapDerivedCategoryFactors.hom.app Q) ≫\n        reconstructionReductionComplexCounit T d (C.complexes.obj Q) ≫\n        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex ν (.up ℤ)).hom.app Q) =\n      t.hom.app (DerivedCategory.Q.obj Q) ≫\n        C.towers.map ((coefficientSequenceDerivedRestriction.{u, u} l E T).map\n          (ε.app Q) ≫\n            (Functor.mapDerivedCategoryFactors.{u+2, u+2, u+1, u+1, u+2, u+2}\n              (coefficientSequenceRestriction.{u, u} l E T)).hom.app I) ≫\n        C.ordinaryTowers.mapDerivedCategoryFactors.hom.app B",
+  "branch": "sheaf-dag",
+  "by": "Q8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261027T021353-L-2762671",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261027T021353-L-2762671",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

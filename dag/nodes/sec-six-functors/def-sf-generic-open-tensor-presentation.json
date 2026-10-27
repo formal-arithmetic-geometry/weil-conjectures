@@ -1,0 +1,102 @@
+{
+ "id": "def-sf-generic-open-tensor-presentation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1 and fix-cor-verdier-exchange.proof.md Steps 1-2: the unchanged tensor and normalized open constructions used in the structural Hom chain; factoring the existing bundled construction into compilation layers.",
+   "via": [
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Generic open tensor presentation and normalization records",
+ "statement": "Let A,B be abelian categories with chosen ordinary derived categories and localization Q as in [def-weil-abstract-derived-category]. Fix exact additive functors E:A→B and R:B→A, sheaf tensor bifunctors, curried total-complex tensor bifunctors, derived tensor bifunctors, predicates flatA and flatB on complexes, preservation witnesses for E and R, and tensor-model isomorphisms on pairs of flat complexes. The generic open tensor presentation record consists of these data, actual total-summand insertions, sheaf open and restriction tensor comparisons, their chain comparisons, and natural derived open and restriction comparisons. Its summand predicates equate the composite with a chain comparison on every p+q=n summand to the supplied sheaf comparison followed by the actual insertion. Its representative predicates equate the derived comparison on QP,QT, followed by exact-functor factors and the target tensor model, with the source tensor model followed by Q of the supplied chain comparison. The unit normalization for any given E⊣R equates the transpose of the inverse open comparison with tensor of the adjunction unit followed by the inverse restriction comparison. For four categories with specified forgetting and tensor comparisons, the generic forgetting record requires the ordinary unit-normalized comparison and equality of the actual forgetting square. The specified exact-derived factors are those of [def-weil-exact-derived-adjunction]. These records only define data and equality predicates; they assert neither the existence of this data nor any native realization. They are exactly the generic component of the existing native open tensor presentation data.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1; the tensor-only component of def-sf-derived-weil-category-and-operations or the generic/concrete components of def-sf-native-open-tensor-presentation-data, using the original existing Lean declaration bodies unchanged."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Presentation records for a derived open tensor isomorphism with unit transpose and K flat representative normalization",
+   "results": "OK 8 hits; HomologicalComplex.rightUnitor', CategoryTheory.unitOfTensorIsoUnit, CategoryTheory.GlueData.t_isIso, CategoryTheory.MonoidalCategory.tensorIso, CategoryTheory.GradedObject.Monoidal.tensorIso, TensorProduct.tensorTensorTensorComm, CategoryTheory.MonoidalCategory.tensor_isIso, HomologicalComplex.rightUnitor",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match: the project-specific construction is reused from its existing Lean declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"OpenTensorPresentation\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match: the project-specific construction is reused from its existing Lean declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "OpenTensorPresentation|OpenTensorRepresentativeNormalization",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match: the project-specific construction is reused from its existing Lean declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.WeilSheaf.VerdierDual",
+  "date": "2026-10-27",
+  "group": "C4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOpenTensorPresentation",
+  "file": "lean/Sheaf/Paper/NativeOpenTensorPresentation.lean",
+  "declaration": "CategoryTheory.OpenTensorPresentation",
+  "declarations": [
+   "CategoryTheory.OpenTensorUnitNormalization",
+   "CategoryTheory.OpenTensorRepresentativeNormalization",
+   "CategoryTheory.OpenTensorRestrictionNormalization",
+   "CategoryTheory.OpenTensorForgetNormalization",
+   "CategoryTheory.OpenTensorSummandNormalization",
+   "CategoryTheory.OpenTensorPresentation",
+   "CategoryTheory.OpenTensorForgetData"
+  ],
+  "statement": "structure OpenTensorPresentation (A B : Type a) [Category.{b} A] [Category.{b} B] [Abelian A] [Abelian B] [HasDerivedCategory.{b} A] [HasDerivedCategory.{b} B]",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-27",
+  "note": "Construction component factored from existing bundled definitions, whose exact declaration names, signatures and bodies are preserved. There is no new mathematical object or unproved theorem; the original module re-exports this module."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1eafb",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T034622-L-3666564",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1eafb",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T034622-L-3666564",
+  "kind": "interface",
+  "note": "independent cc review: Item exchange proof and the verbatim tensor-block and NativeOpenDerivedTensor extractions vs the clone (byte/line diff); sandbox compile of all 10 delivered modules plus VerdierDualLocalization, NativeWeilDualizingHomTransposition and root WeilConjectures, all OK; axioms propext/Classical.choice/Quot.sound plus sorryAx from existing holes"
+ }
+}

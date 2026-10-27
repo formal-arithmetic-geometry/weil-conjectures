@@ -1,0 +1,127 @@
+{
+ "id": "lem-a1-balanced-finite-tower-scalar-comparison",
+ "kind": "statement",
+ "title": "Normalized balanced scalar comparison of finite towers",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf{Q}_\\ell$, its valuation ring $A$ and uniformizer $t$ [def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be any morphism of schemes [def-weil-scheme-morphism-properties]. On the small pro-etale site of $W$, write $R_W=\\varprojlim_n S_{W,n}$ and $S_{W,n}=(A/t^{n+1})_W$ with their specified projections and quotient transitions [def-weil-completed-integral-coefficients]. The scheme and coefficient universes are independent. Use the functors $G$, $F_W$ (reductions), $H_W$ (koszuls), $D_g$ (diagramPull), $B_g$ (finite), and the predicates BalancedNormalization, QuotientUnitNormalization, KoszulNormalization, ReductionNormalization, with their literal section formulas, from [def-a1-finite-pullback-strict-tower-data]. These act on all unbounded cochain complexes of $R_W$-module sheaves; tensor products are the sheafified tensor and their signed direct-sum totalization [def-pur-sheaf-tensor-product, def-pc-tensor-complex-sheaves]. There exists a natural isomorphism $\\lambda:F_X\\circ G\\cong B_g$ (in Lean functor order, $G\\mathbin{\\ggg}F_X$) such that for every complex $P$, BalancedNormalization holds for $\\lambda_P$. Thus $(x\\otimes b)\\otimes1$ maps to the finite quotient-unit generator multiplied by $\\pi_{X,n}(b)$, at every level and degree.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK (section-tensor-product), 03EL (lemma-tensor-product-pullback); parent steps 2, 3 and 5."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-a1-finite-pullback-strict-tower-data",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Identify the inverse image of each finite coefficient sheaf with the target finite coefficient sheaf through the constant-preserving structural isomorphism. Its projection square commutes. Apply normalized inverse-image tensor comparison to identify the finite target with (g-inverse P tensor_D U_n) tensor_{U_n} V_n, retaining the adjunction-unit generators.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "def-pur-integral-finite-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the strict coefficient-square calculus to the projection square. Both scalar-extension orders identify with g-inverse P tensor_D V_n by multiplying the two coefficients after projection; their inverses insert 1. Balancing is exactly the projection square. The calculus supplies chain naturality and quotient-transition compatibility, so this is a natural isomorphism of the actual strict towers. Evaluating at the quotient unit gives precisely BalancedNormalization.",
+   "uses": [
+    "lem-pur-strict-coefficient-comparison-calculus",
+    "def-a1-integral-finite-pullback-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "def-pur-integral-finite-pullback",
+  "lem-pur-strict-coefficient-comparison-calculus",
+  "def-a1-integral-finite-pullback-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK (section-tensor-product), 03EL (lemma-tensor-product-pullback); parent steps 2, 3 and 5. Explicit extraction by Q2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison between completed scalar extension followed by quotient and finite pullback of quotient tensor complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\\n  TensorProduct.Alge\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : TensorProduct R (AdicCompletion I R) M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) x = (AdicCompletion.o\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M).symm ((AdicCompletion.of I M) x) = 1 ⊗ₜ[R] x\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, applying the inverse of the linear equivalence between $ \\\\hat{R} \\\\otimes_R M $ and the $ I $-adic \"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\\n  ↑(AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) = AdicCompletion.ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_naturality\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N),\\n  AdicCompletion.map I f ∘ₗ AdicCompletion.ofTensorProduct I M =\\n    AdicCompletion.ofTensorProduct I N \", \"doc\": \"For any $ R $-linear map $ f : M \\to N $, the diagram involving the $ I $-adic completion maps and tensor products commutes, i.e., $\\\\text{map}_I(f) \\\\circ \\\\text{ofTensorProduct}_I(M) = \\\\text{ofTensorPro\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u_2) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] → TensorProduct R (AdicCompletion I R) M →ₗ[AdicCompletion I R] AdicCompletion I M\", \"doc\": \"A linear map from the tensor product of the $ I $-adic completion of a commutative ring $ R $ with an $ R $-module $ M $ to the $ I $-adic completion of $ M $, defined by scalar multiplication. This m\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_tmul\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (r : AdicCompletion I R) (x : M), (AdicCompletion.ofTensorProduct I M) (r ⊗ₜ[R] x) = r • (AdicCompletion.of I M) x\", \"doc\": \"For any element $ r $ in the $ I $-adic completion of a commutative ring $ R $ and any element $ x $ in an $ R $-module $ M $, the canonical linear map from the tensor product $ (\\\\varprojlim R/I^nR) \\\\\"}\n No exact match: these ordinary module/tensor or completion constructions do not include this strict tower and generator normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackIso",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"The pullback functor on sheaves of modules can be described as a composition\\nof the forget functor to presheaves, the pullback on presheaves of modules, and\\nthe sheafification functor.\"}\n No exact match: these ordinary module/tensor or completion constructions do not include this strict tower and generator normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackIso|extendScalarsComp",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"line\": \"67\", \"text\": \"    (fun f g ↦ Cat.Hom.isoMk <| extendScalarsComp f.hom g.hom) ?_ ?_ ?_\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"line\": \"106\", \"text\": \"noncomputable def pullbackIso :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"line\": \"28\", \"text\": \"`freeFunctorCompPullbackIso`.\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"line\": \"142\", \"text\": \"noncomputable def freeFunctorCompPullbackIso : freeFunctor ⋙ pullback φ ≅ freeFunctor :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"984\", \"text\": \"noncomputable def extendScalarsComp :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"992\", \"text\": \"lemma homEquiv_extendScalarsComp (M : ModuleCat R₁) :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"994\", \"text\": \"      ((extendScalarsComp f₁₂ f₂₃).hom.app M) =\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"998\", \"text\": \"  dsimp [extendScalarsComp, conjugateIsoEquiv, conjugateEquiv]\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"1006\", \"text\": \"lemma extendScalarsComp_hom_app_one_tmul (M : ModuleCat R₁) (m : M) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"line\": \"179\", \"text\": \"noncomputable def pullbackPullbackIso {p : 𝒳 ⥤ 𝒮} [IsFibered p]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"394\", \"text\": \"    injective_of_mono (Types.pullbackIsoPullback (forget.map f) (forget.map g)).hom\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"398\", \"text\": \"  · simp only [Function.comp_apply, Types.pullbackIsoPullback_hom_fst]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"400\", \"text\": \"  · simp only [Function.comp_apply, Types.pullbackIsoPullback_hom_snd]\"}\n  {\"file\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean\", \"line\": \"29\", \"text\": \"- `toOverPullbackIsoToOver` shows that in a category with chosen pullbacks, for any morphism\"}\n  {\"file\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean\", \"line\": \"350\", \"text\": \"def toOverPullbackIsoToOver {X Y : C} (f : Y ⟶ X) [ChosenPullbacksAlong f] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean\", \"line\": \"348\", \"text\": \"noncomputable def pullbackIsoOverPullback : ChosenPullbacksAlong.pullback g ≅ Over.pullback g :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean\", \"line\": \"352\", \"text\": \"theorem pullbackIsoOverPullback_hom_app_comp_fst (T : Over X) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean\", \"line\": \"353\", \"text\": \"    ((pullbackIsoOverPullback g).hom.app T).left ≫ pullback.fst _ _ = fst _ _ := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean\", \"line\": \"359\", \"text\": \"theorem pullbackIsoOverPullback_hom_app_comp_snd (T : Over X) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean\", \"line\": \"360\", \"text\": \"    ((pullbackIsoOverPullback g).hom.app T).left ≫ pullback.snd _ _ = snd _ _ :=\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean\", \"line\": \"350\", \"text\": \"noncomputable def PIsoUnopOpP' : S.P ≅ Opposite.unop S.op.P' := pullbackIsoUnopPushout _ _\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean\", \"line\": \"361\", \"text\": \"    pushoutIsoUnopPullback_inr_hom, pullbackIsoUnopPushout_inv_snd_assoc,\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean\", \"line\": \"362\", \"text\": \"    pushoutIsoUnopPullback_inl_hom, pullbackIsoUnopPushout_inv_fst_assoc]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"line\": \"123\", \"text\": \"  .of_hom (PreZeroHypercover.pullbackIso f 𝒰).hom\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Over/Pullback.lean\", \"line\": \"189\", \"text\": \"noncomputable def starPullbackIsoStar [HasPullbacks C] {X Y : C} (f : X ⟶ Y) :\"}\n No exact match: these ordinary module/tensor or completion constructions do not include this strict tower and generator normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.BalancedFiniteTowerGeneratorComparison",
+  "date": "2026-10-26",
+  "group": "Q2"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "First paragraph, geometric-stalk restriction by finite-map pullback; Old proof steps 6, 7 and 9, and the tower part of step 11: ordinary completed-ring pullback, balanced finite comparison, localization naturality and shifts. Extracted argument: Tag 03EL, lemma-tensor-product-pullback; balanced coefficient-square and fixed-generator strict-tower refinement, old proof steps 6-7. Refinement here: Tags 03EK (section-tensor-product), 03EL (lemma-tensor-product-pullback); parent steps 2, 3 and 5.",
+   "via": [
+    "lem-a1-balanced-finite-tower-generator-comparison",
+    "lem-a1-finite-pullback-strict-tower-comparison",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BalancedFiniteTowerScalarComparison",
+  "file": "lean/Sheaf/Paper/BalancedFiniteTowerScalarComparison.lean",
+  "declaration": "WeilConjectures.BalancedFiniteTower.balanced_scalar_comparison",
+  "statement": "theorem balanced_scalar_comparison :\n    ∃ lambda : G l E g ⋙ reductions l E X ≅ finite l E g,\n      ∀ P : CochainComplex (Modules l E Y) ℤ,\n        BalancedNormalization l E g P (lambda.app P)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T070543-L-3612358",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T070543-L-3612358",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

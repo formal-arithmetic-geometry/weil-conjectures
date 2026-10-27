@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-chevalley-birational-integral-envelope",
+ "kind": "statement",
+ "title": "Smooth integral envelope of a rational Chevalley root cell",
+ "statement": "Let $\\mathcal R=(M,\\Phi,M^\\vee,\\Phi^\\vee)$ be a finite reduced root datum as in [def-sfb-pinned-split-root-realization], with $\\Phi$ spanning $M\\otimes_{\\mathbf Z}\\mathbf Q$ and $\\mathbf Z\\Phi^\\vee=M^\\vee$. Let $(G,T=D_{\\mathbf Q}(M))$ be a split realization over $\\mathbf Q$ of this datum, with no prescribed base or pinning. There exist a base $\\Delta$, its positive roots $\\Phi^+$, orderings of $\\Phi^+$ and $-\\Phi^+$, a smooth separated $\\mathbf Z$-group scheme $H$ of finite presentation, an immersed torus homomorphism $j:D_{\\mathbf Z}(M)\\to H$, and immersed homomorphisms $x_\\alpha:\\mathbf G_{a,\\mathbf Z}\\to H$ for all $\\alpha\\in\\Phi$. Immersed means identifying the source with a locally closed subscheme. Here $\\mathbf G_a(R)=(R,+)$ and $D_R(M)=\\operatorname{Spec}R[M]$ has the Hopf operations of [def-sfb-ring-diagonalizable-group]; smoothness and finite presentation have the meanings of [def-sbc-smooth-morphisms], [def-sbc-locally-finite-presentation], and separatedness means that the diagonal is a closed immersion. Multiplication gives an open immersion\n$$\\prod_{\\alpha\\in-\\Phi^+}\\mathbf A^1_{\\mathbf Z}\\times D_{\\mathbf Z}(M)\\times\\prod_{\\alpha\\in\\Phi^+}\\mathbf A^1_{\\mathbf Z}\\longrightarrow H,\\quad (a,t,b)\\longmapsto\\left(\\prod x_\\alpha(a_\\alpha)\\right)j(t)\\left(\\prod x_\\alpha(b_\\alpha)\\right),$$\nwhose image is dense in every geometric fibre. Write $\\chi_\\alpha(t)=t(e^\\alpha)$ and write $j\\alpha^\\vee$ for the monomial cocharacter $t\\mapsto j(D(\\alpha^\\vee)(t))$. On points over every commutative $\\mathbf Z$-algebra one has\n$$j(t)x_\\alpha(z)j(t)^{-1}=x_\\alpha(\\chi_\\alpha(t)z),$$\nand, whenever $1+uv$ is a unit,\n$$x_\\alpha(u)x_{-\\alpha}(v)=x_{-\\alpha}\\left(\\frac v{1+uv}\\right)j\\alpha^\\vee(1+uv)x_\\alpha\\left(\\frac u{1+uv}\\right).$$\nFor $n_\\alpha=x_\\alpha(1)x_{-\\alpha}(-1)x_\\alpha(1)$ one has $n_\\alpha x_\\alpha(z)n_\\alpha^{-1}=x_{-\\alpha}(-z)$. There is a $\\mathbf Q$-group isomorphism $H_{\\mathbf Q}\\simeq G$ restricting on the displayed torus to the identity and carrying each $x_{\\alpha,\\mathbf Q}$ to a parametrization of the root subgroup labelled $\\alpha$. Neither affineness of $H$ nor reductivity of its special fibres is assumed or asserted here. The zero datum is allowed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Section 6.3, Proposition 6.3.4, Lemmas 6.3.7--6.3.9, Proposition 6.3.11, Proposition 6.3.13 and the following paragraph, equation (6.3.5), printed pp.214--227; root-cell construction and smooth birational envelope before fibral semisimplicity Read online; local PDF WANTED. No Stacks tag states this group-theoretic input."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "def-sfb-ring-diagonalizable-group",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-chevalley-integral-birational-law] to the given rational realization. It supplies the base, orders, parameters, explicit smooth integral cell $C$, and a strict integral partial multiplication agreeing with $G$ over $\\mathbf Q$. All lattice hypotheses are exactly those assumed here; no pinning is prescribed. The fibre rings of $C$ are polynomial Laurent polynomial rings, including the rank-zero case.",
+   "uses": [
+    "lem-sfb-chevalley-integral-birational-law"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Propositions 6.3.4, 6.3.11 and 6.3.13, printed pp.215--226"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dedekind-strict-law-realization] with $R=\\mathbf Z$ and $X=C$ to obtain $i:C\\hookrightarrow H$. The Euclidean algorithm makes every ideal of $\\mathbf Z$ principal, so $\\mathbf Z$ is Noetherian; in $\\mathbf Z_{(p)}$ every nonzero ideal is $(p^r)$, and the unique maximal ideal is the nonzero $(p)$, verifying the DVR hypothesis. The preceding node supplies smoothness, separatedness, finite presentation, nonempty fibres and precisely the required strictness. Thus $H$ is smooth separated and finitely presented, and $i(C)$ is dense in every fibre. By [lem-sfb-smooth-fibrewise-dense-open-base-change] applied to the smooth $H$ and its open chart, this remains dense after any base change, in particular on every geometric fibre. Let $j=i q_T$ and $x_\\alpha=i q_\\alpha$. Each coordinate map identifies an explicit closed coordinate subscheme of $C$, so its composite with the open chart is an immersion.",
+   "uses": [
+    "lem-sfb-dedekind-strict-law-realization",
+    "lem-sfb-chevalley-integral-birational-law",
+    "lem-sfb-smooth-fibrewise-dense-open-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Discussion before Proposition 6.3.13, printed pp.224--225"
+   }
+  },
+  {
+   "text": "The two group schemes $H_{\\mathbf Q}$ and $G$ contain the same dense open $C_{\\mathbf Q}$, and its multiplications agree as rational maps. By [lem-sfb-rational-group-hom-extension], $c\\circ i_{\\mathbf Q}^{-1}$ extends uniquely to a group isomorphism $H_{\\mathbf Q}\\simeq G$. On the coordinate axes and torus it has the prescribed restrictions. Its restriction to the torus is the identity under the given $D_{\\mathbf Q}(M)$ identifications.",
+   "uses": [
+    "lem-sfb-rational-group-hom-extension",
+    "lem-sfb-chevalley-integral-birational-law",
+    "lem-sfb-dedekind-strict-law-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Paragraph after Proposition 6.3.13, printed p.226"
+   }
+  },
+  {
+   "text": "All required remaining claims are equalities of morphisms into the separated $H$ and hold over $\\mathbf Q$ by [lem-sfb-chevalley-integral-birational-law] and the preceding isomorphism. For the homomorphism assertions the domains are $\\mathbf A^2_{\\mathbf Z}$ and $T\\times T$; for the product-chart equality the domain is $C$; for torus conjugation it is $T\\times\\mathbf A^1$; for the opposite-root formula it is $\\operatorname{Spec}\\mathbf Z[u,v,(1+uv)^{-1}]$; and for Weyl conjugation it is $\\mathbf A^1$. Each coordinate ring is a polynomial Laurent polynomial ring or its indicated localization, hence injects into its tensor product with $\\mathbf Q$. The generic fibre is therefore scheme-theoretically dominant in each domain. Apply [lemma-nagata-ext-scheme-theoretically-dominant-separated] to conclude these equalities over $\\mathbf Z$. In particular the ordered product map is exactly $i$, so is the required open immersion. Equality of these morphisms gives the identities on points over every commutative $\\mathbf Z$-algebra, including nonreduced ones. The construction also applies when the root datum is zero, with $C=\\operatorname{Spec}\\mathbf Z$.",
+   "uses": [
+    "lem-sfb-chevalley-integral-birational-law",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Paragraph after Proposition 6.3.13 and equation (6.3.5), printed pp.226--227"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-chevalley-integral-birational-law",
+  "lem-sfb-dedekind-strict-law-realization",
+  "lem-sfb-smooth-fibrewise-dense-open-base-change",
+  "lem-sfb-rational-group-hom-extension",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Section 6.3, root-cell law and Dedekind realization followed by generic-density extension, pp.215--227; local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A split simply connected semisimple rational group has a smooth separated integral group envelope of its Chevalley big cell",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"RootPairing.GeckConstruction.instIsIrreducible\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"For any non-empty type $\\\\iota$, the Lie module structure on the space of functions $b.\\\\text{support} \\\\oplus \\\\iota \\\\to K$ over the Geck-constructed Lie algebra $\\\\mathfrak{g}_b$ associated to the root p\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.booleanGenerators\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], IsCompactlyGenerated.BooleanGenerators {I | IsAtom I}\", \"doc\": \"The set of atomic Lie ideals in a semisimple Lie algebra forms a set of Boolean generators for the complete lattice of Lie submodules. This means the set is closed under finite meets, joins, and compl\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  [Infinite K], ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For an infinite field $ K $, there exists an element $ x $ in the Lie algebra $ L $ such that the Engel subalgebra associated with $ x $ forms a Cartan subalgebra of $ L $. This means the maximal gene\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    (F : CategoryTheory.Functor C FintypeCat) →\\n      [CategoryTheory.GaloisCategory C] →\\n        (G : Type u_1) →\\n          [inst_2 : Group G] →\\n            [(X : C) → MulAction G (F.obj X).carrier] →\\n              [inst : TopologicalS\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"instTotallySeparatedSpaceAlgEquivOfIsIntegral\", \"module\": \"Mathlib/FieldTheory/KrullTopology\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [Algebra.IsIntegral K L],\\n  TotallySeparatedSpace Gal(L/K)\", \"doc\": \"If $ L $ is an integral algebra over a field $ K $, then the Galois group $ \\\\text{Gal}(L/K) $ equipped with the Krull topology is a totally separated space. This means that for any two distinct automo\"}\n  {\"name\": \"instDiscreteTopologySubtypeGeneralLinearGroupMemSubgroupAdjoinNegOneOfIsTopologicalRingOfT2Space\", \"module\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups\", \"type\": \"∀ {n : Type u_1} [inst : Fintype n] [inst_1 : DecidableEq n] {R : Type u_2} [inst_2 : Ring R]\\n  [inst_3 : TopologicalSpace R] [IsTopologicalRing R] [T2Space R] (𝒢 : Subgroup (GL n R)) [DiscreteTopology ↥𝒢],\\n  DiscreteTopology ↥𝒢.adjoinNegOne\", \"doc\": \"Let $ R $ be a topological ring that is also a Hausdorff space. If $ \\\\mathcal{G} $ is a discrete subgroup of the general linear group $ \\\\mathrm{GL}(n, R) $, then the subgroup $ \\\\mathcal{G}.\\\\text{adjoi\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L],\\n  ↑(Module.finrank K L) ≤ Cardinal.mk K → ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$, if the dimension of $\\\\mathfrak{g}$ as a vector space over $K$ satisfies $\\\\dim_K(\\\\mathfrak{g}) \\\\leq |K|$, then there exists an element $x \\\\in \\\\mathfra\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, abstract root pairings, birationality definitions, or general scheme morphisms; none constructs or characterizes the stated algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend the rational multiplication on a product of root groups and a split torus to a strict birational law over the integers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.instIsValuedInRatOfIsCrystallographic\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_4} {N : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [P.IsCrystallographic]\\n  [inst_6 : Algebra ℚ R], P.IsValuedIn ℚ\", \"doc\": \"If a root pairing $ P $ between $ R $-modules is crystallographic and $ R $ has a $ \\\\mathbb{Q} $-algebra structure, then $ P $ takes values in the rational numbers $ \\\\mathbb{Q} $.\"}\n  {\"name\": \"RootPairing.pairingIn_rat\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_4} {N : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [Nontrivial R]\\n  [inst_6 : P.IsCrystallographic] [inst_7 : Algebra ℚ R] (i j : ι), P.pairingIn\", \"doc\": \"For a nontrivial commutative ring $ R $ equipped with a $ \\\\mathbb{Q} $-algebra structure and a crystallographic root pairing $ P $ between $ R $-modules, the pairing values of any indices $ i, j $ com\"}\n  {\"name\": \"NumberField.mixedEmbedding.fundamentalCone.integerSetTorsionSMul\", \"module\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] →\\n    [inst_1 : NumberField K] →\\n      SMul ↥(NumberField.Units.torsion K) ↑(NumberField.mixedEmbedding.fundamentalCone.integerSet K)\", \"doc\": \"The torsion subgroup of the unit group of the ring of integers of a number field $ K $ acts on the intersection of the fundamental cone (preimage of the unit lattice's fundamental domain under the log\"}\n  {\"name\": \"RootPairing.restrictScalarsRat\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"{ι : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : Field L] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : Module L M] →\\n                [inst_4 : Module L N] →\\n                  (P : RootPairing ι \", \"doc\": \"Given a crystallographic root pairing $ P $ over a field $ L $ of characteristic zero, this constructs a new root pairing over $ \\\\mathbb{Q} $ by restricting scalars via the canonical embedding $ \\\\math\"}\n  {\"name\": \"RootPairing.EmbeddedG2.toIsValuedIn\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} {inst : CommRing R} {inst_1 : AddCommGroup M}\\n  {inst_2 : Module R M} {inst_3 : AddCommGroup N} {inst_4 : Module R N} {P : RootPairing ι R M N} [self : P.EmbeddedG2],\\n  P.IsValuedIn ℤ\", \"doc\": \"For any commutative ring $ R $, $ R $-modules $ M $ and $ N $, and an embedded $ G_2 $ root system defined by a root pairing $ P $ between $ M $ and $ N $, the root pairing $ P $ takes values in the i\"}\n  {\"name\": \"NumberField.mixedEmbedding.fundamentalCone.integerSetTorsionSMul_smul_coe\", \"module\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] (x : ↥(NumberField.Units.torsion K))\\n  (x_1 : ↑(NumberField.mixedEmbedding.fundamentalCone.integerSet K)), ↑(x • x_1) = ↑x • ↑x_1\", \"doc\": \"For any root of unity $ u $ in the unit group of the ring of integers $ \\\\mathcal{O}_K $ of a number field $ K $, and any element $ x $ in the intersection of the fundamental cone and integer lattice w\"}\n  {\"name\": \"RootPairing.IsG2.toIsValuedIn\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} {inst : CommRing R} {inst_1 : AddCommGroup M}\\n  {inst_2 : Module R M} {inst_3 : AddCommGroup N} {inst_4 : Module R N} {P : RootPairing ι R M N} [self : P.IsG2],\\n  P.IsValuedIn ℤ\", \"doc\": \"Any root pairing satisfying the G2 root system axioms is valued in the integers $\\\\mathbb{Z}$, meaning its pairing values lie within the subring $\\\\mathbb{Z}$ of the base commutative ring $R$.\"}\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Defs\", \"type\": \"Type u_1 →\\n  (X₁ : Type u_5) → (X₂ : Type u_6) → [AddCommGroup X₁] → [AddCommGroup X₂] → Type (max (max (max u_1 0) u_5) u_6)\", \"doc\": \"A root datum is a root pairing between two additive commutative groups $X_1$ and $X_2$ over the integers $\\\\mathbb{Z}$, where each group is equipped with its canonical $\\\\mathbb{Z}$-module structure. Th\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, abstract root pairings, birationality definitions, or general scheme morphisms; none constructs or characterizes the stated algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"birational\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" (X Y : AlgebraicGeometry.Scheme) : Prop\", \"doc\": \"`X` and `Y` are birational if there exists a partial isomorphism between them.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational.refl\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" (X : AlgebraicGeometry.Scheme) : X.Birational X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational.partialIso\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (h : X.Birational Y) : X.PartialIso Y\", \"doc\": \"Choose a partial isomorphism witnessing that `X` and `Y` are birational.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational.symm\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (h : X.Birational Y) : Y.Birational X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Birational.trans\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (h₁ : X.Birational Y) (h₂ : Y.Birational Z) : X.Birational Z\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.refl\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X : AlgebraicGeometry.Scheme} (sX : X ⟶ S) : AlgebraicGeometry.Scheme.BirationalOver sX sX\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) : Prop\", \"doc\": \"`X` and `Y` are birational over `S` if there exists a partial isomorphism between them\\nthat is compatible with the structure maps to `S`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.birational\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {X U : AlgebraicGeometry.Scheme} (f : U ⟶ X) [AlgebraicGeometry.IsOpenImmersion f] [AlgebraicGeometry.IsDominant f] : U.Birational X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.partialIso\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) (h : AlgebraicGeometry.Scheme.BirationalOver sX sY) : X.PartialIso Y\", \"doc\": \"Choose a partial isomorphism witnessing that `X` and `Y` are birational over `S`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.symm\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} {sX : X ⟶ S} {sY : Y ⟶ S} (h : AlgebraicGeometry.Scheme.BirationalOver sX sY) : AlgebraicGeometry.Scheme.BirationalOver sY sX\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.isRationalOver\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.Scheme.IsRationalOver sY] (h : AlgebraicGeometry.Scheme.BirationalOver sX sY) : AlgebraicGeometry.Scheme.IsRationalOver sX\", \"doc\": \"If a scheme `X` is `S`-birational to an `S`-rational scheme `Y`, then `X` is `S`-rational.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.BirationalOver.partialIso_isOver\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Birational\", \"type\": \" {S X Y : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) (h : AlgebraicGeometry.Scheme.BirationalOver sX sY) : AlgebraicGeometry.Scheme.PartialIso.IsOver sX sY (AlgebraicGeometry.Scheme.BirationalOver.partialIso sX sY h)\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, abstract root pairings, birationality definitions, or general scheme morphisms; none constructs or characterizes the stated algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|birational.*group|group.*birational",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Dynamics/Newton.lean\", \"line\": \"17\", \"text\": \"as Hensel's lemma and the Jordan-Chevalley decomposition.\"}\n  {\"file\": \"Mathlib/Dynamics/Newton.lean\", \"line\": \"28\", \"text\": \"  Jordan-Chevalley decomposition of linear endomorphisms.\"}\n  {\"file\": \"Mathlib/Dynamics/Newton.lean\", \"line\": \"105\", \"text\": \"This can be used to prove the Jordan-Chevalley decomposition of linear endomorphisms. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"13\", \"text\": \"# Jordan-Chevalley-Dunford decomposition\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"15\", \"text\": \"Given a finite-dimensional linear endomorphism `f`, the Jordan-Chevalley-Dunford theorem provides a\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"31\", \"text\": \"* `Module.End.isNilpotent_isSemisimple_unique`: the Jordan-Chevalley-Dunford decomposition is\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"72\", \"text\": \"/-- **Jordan-Chevalley-Dunford decomposition**: an endomorphism of a finite-dimensional vector space\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"82\", \"text\": \"/-- **Uniqueness of Jordan-Chevalley-Dunford decomposition**: if `n₁ + s₁ = n₂ + s₂` with `nᵢ`\"}\n  {\"file\": \"Mathlib/Algebra/LieRinehartAlgebra/Defs.lean\", \"line\": \"17\", \"text\": \"terms of the Chevalley-Eilenberg algebra of a Lie-Rinehart algebra.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.LinearAlgebra.JordanChevalley\"}\n  {\"file\": \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"line\": \"12\", \"text\": \"# Jordan–Chevalley decomposition and the adjoint action\"}\n  {\"file\": \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"line\": \"15\", \"text\": \"the Jordan–Chevalley decomposition.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"line\": \"16\", \"text\": \"`h i`, `e i`, `f i` indexed by `ι`, each forming an `sl₂` triple, and satisfying the Chevalley-Serre\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"line\": \"25\", \"text\": \"`⁅e i, e j⁆`, `⁅f i, f j⁆`) one obtains the concept of a Weyl or Chevalley basis.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"line\": \"37\", \"text\": \"* Define Weyl, Chevalley bases.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/CartanCriterion.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Algebra.Lie.AdjointAction.JordanChevalley\"}\n  {\"file\": \"Mathlib/Algebra/Lie/CartanCriterion.lean\", \"line\": \"85\", \"text\": \"  /- Using Jordan-Chevalley, let `s` and `n` be the semisimple and nilpotent parts of `φ x`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"line\": \"13\", \"text\": \"public import Mathlib.LinearAlgebra.JordanChevalley\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"line\": \"327\", \"text\": \"  /- Using Jordan-Chevalley, write `ad K L x` as a sum of its semisimple and nilpotent parts. -/\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Cochain.lean\", \"line\": \"26\", \"text\": \"* comparison to the Chevalley-Eilenberg complex.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Extension.lean\", \"line\": \"18\", \"text\": \"Because our sign convention for differentials is opposite that of Chevalley-Eilenberg, there is a\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Extension.lean\", \"line\": \"39\", \"text\": \"* [Chevalley, Eilenberg, *Cohomology Theory of Lie Groups and Lie\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Extension.lean\", \"line\": \"40\", \"text\": \"  Algebras*](chevalley_eilenberg_1948)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"line\": \"239\", \"text\": \"developing the theory of Beck-Chevalley transformations.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"line\": \"648\", \"text\": \"isomorphism if and only if the original 2-morphism is. This explains why some Beck-Chevalley\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, abstract root pairings, birationality definitions, or general scheme morphisms; none constructs or characterizes the stated algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral Chevalley big cell birational group law and smooth group scheme envelope",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"smoothLeftMul\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": C^∞⟮I, G; I, G⟯\", \"doc\": \"For a group $G$ modeled as a charted space with a model with corners structure over a nontrivially normed field, the left multiplication map $\\\\lambda x. g \\\\cdot x : G \\\\to G$ is smooth ($C^\\\\infty$) whe\"}\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  autoParam (Nonempty ↥X) AlgebraicGeometry.IsIntegral.nonempty._autoParam →\\n    autoParam (∀ (U : X.Opens) [Nonempty ↥↑U], IsDomain ↑(X.presheaf.obj (Opposite.op U)))\\n        AlgebraicGeometry.IsIntegral.component_integral._autoParam →\\n      AlgebraicGeometry.IsInt\", \"doc\": \"A scheme $ X $ is integral if it is non-empty and for every non-empty open subset $ U $ of $ X $, the ring of sections over $ U $ is an integral domain.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"smoothSheafGroup\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \": TopCat.Sheaf GrpCat.{u} (TopCat.of M)\", \"doc\": \"The sheaf on a manifold $ M $ with corners, assigning to each open set $ U $ the group of smooth maps from $ U $ to a Lie group $ G $, constructed from the smooth group presheaf and proven to satisfy \"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, abstract root pairings, birationality definitions, or general scheme morphisms; none constructs or characterizes the stated algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|[Bb]irational.*[Gg]roup|[Gg]roup.*[Bb]irational",
+   "results": "{\"t\": \"2026-10-24T10:27:06Z\", \"tool\": \"grep\", \"query\": \"Chevalley|[Bb]irational.*[Gg]roup|[Gg]roup.*[Bb]irational\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\"], \"digest\": \"94219d14698fc6fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: focused AlgebraicGeometry search has no group-scheme theorem with the required hypotheses and conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split simply connected semisimple rational group has a smooth separated integral group envelope of its Chevalley big cell",
+   "results": "Read returned hits: RootPairing.GeckConstruction.instHasTrivialRadical, RootPairing.GeckConstruction.instIsIrreducible, LieAlgebra.IsSemisimple.booleanGenerators, LieAlgebra.exists_isCartanSubalgebra_engel, CategoryTheory.PreGaloisCategory.IsFundamentalGroup, instTotallySeparatedSpaceAlgEquivOfIsIntegral, instDiscreteTopologySubtypeGeneralLinearGroupMemSubgroupAdjoinNegOneOfIsTopologicalRingOfT2Space, LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card. ",
+   "date": "2026-10-24",
+   "verdict": "no match: no construction of a Chevalley root-cell group envelope"
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|birational.*group|group.*birational",
+   "results": "Read returned hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: no construction of a Chevalley root-cell group envelope"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral Chevalley big cell birational group law and smooth group scheme envelope",
+   "results": "Read returned hits: AlgebraicGeometry.IsSmooth.casesOn, smoothLeftMul, LibraryNote.Design_choices_about_smooth_algebraic_structures, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsIntegral.mk, AlgebraicGeometry.IsIntegral, smoothSheafGroup, AlgebraicGeometry.IsIntegralHom. ",
+   "date": "2026-10-24",
+   "verdict": "no match: no construction of a Chevalley root-cell group envelope"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-split-integral-prolongation",
+  "date": "2026-10-24",
+  "group": "Q118"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for existence in Theorem 6.1.17: Integral prolongation of a given split rational reductive group Supporting input: Section 6.3, Proposition 6.3.4, Lemmas 6.3.7--6.3.9, Proposition 6.3.11, Proposition 6.3.13 and the following paragraph, equation (6.3.5), printed pp.214--227; root-cell construction and smooth birational envelope before fibral semisimplicity",
+   "via": [
+    "lem-sfb-rational-split-integral-prolongation",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-chevalley-birational-integral-envelope",
+  "worker": "stage1",
+  "summary": "Separate the strict partial law on explicit root coordinates from general Dedekind-base group realization; use the existing rational homomorphism extension and scheme-theoretic density equality theorem to obtain all integral identities. Statement unchanged; no affine or reductive special-fibre construction used. Geometric density is supplied by the existing smooth-base-change density lemma.",
+  "blueprint": "Realizes the inherited alteration/moduli/invariant-theory prerequisite at det-thm-sf-ctf-stability-direct-images proof (3), specifically the integral-root-model prerequisite and the root-cell envelope in the parent prolongation proof. The ancestor command returns None for this created-node chain; its existing from.node=null and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-rational-group-hom-extension",
+    "why": "Extension of a birational group homomorphism is used only to identify the already constructed rational fibre; it does not replace any geometric route."
+   },
+   {
+    "node": "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "why": "Generic-density equality into a separated scheme is a generic tool for the explicit integral identities."
+   },
+   {
+    "node": "lem-sfb-smooth-fibrewise-dense-open-base-change",
+    "why": "Generic smooth-density tool ensures the open chart is dense on geometric fibres, rather than just residue-field fibres."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-rational-group-hom-extension",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-sfb-smooth-fibrewise-dense-open-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-5f9d85c2e",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-5f9d85c2e (reviewer sub-agent of L); spot-checked: I read the whole item and both new nodes against Conrad's Reductive Group Schemes, using the text copy at /tmp/conradtxt/c.txt because literature/ has no local copy. Sources checked: Thm 4.2.6 and eq. (4.2.1), and §6.3 Prop 6.3.4, Lemmas 6.3.6-6.3.9, Def 6.3.10, Prop 6.3.11, Example 6.3.12 with the strictness definition, the paragraph before Prop 6.3.13 on the Dedekind realization, and the proof of 6.3.13. Step 1: the law node supplies all the data under the same hypotheses; the zero datum gives C=Spec Z. Step 2: Z is Noetherian and each Z_(p) is a DVR. Strictness makes the two translation maps S-birational, because D is dense in every fibre of the open projection. The density lemma gives density on geometric fibres, and each coordinate map is a closed immersion followed by the open chart, hence an immersion. Step 3: I checked every hypothesis of lem-sfb-rational-group-hom-extension over Q, including a(i(x)i(y)) = c(m(x,y)) = c(x)c(y) on a dense open. Step 4: the Nagata equality lemma holds for any scheme-theoretically dominant map. Each domain ring (Z[u,v], Z[M+M], O(C), Z[M][z], Z[u,v,(1+uv)^-1], Z[z]) is torsion-free, so its generic fibre is dominant, and the target H is separated. This is Conrad's 'check over Q'. Small cases checked in SL2: the rank-one formula for both alpha and -alpha, the Weyl relation for both, u=0 or v=0, and no characteristic constant is inverted. The Dedekind node is true: spread the generic solution over a dense open, handle the finitely many remaining closed points by the DVR solutions, and glue using uniqueness. It strictly generalizes the existing field/DVR node, which cannot be applied with R=Z. Duplicate search over the DAG (Chevalley system, birational law, strict, big cell, root cell, about 100 nodes sourced from Conrad) found no existing node for either new statement, and neither new node restates the item. One FIX, file fixes/dag/nodes/sec-six-functors-basics/lem-sfb-chevalley-integral-birational-law.json: I added [def-weil-open-immersion] and [def-pc-fibre-product] to the statement and stmt_deps (B3). I also reworded 'The rational parameters can be chosen so that' to 'These same parameters p_alpha, used in c, satisfy', so the identities are for the parameters that define c; this is not a weakening. Batch-5 flags accepted: smooth-fibrewise-dense-open-base-change reaches only the trf fibre smoothness criterion, rational-group-hom-extension only trf smooth composition, and def-sfb-pinned-split-root-realization only trf fpqc descent of smoothness. These are generic results, not trace-formula or Poincare-duality steps, and they are already in the parent's closure. tool_uses: the maintainer should record lemma-nagata-ext-scheme-theoretically-dominant-separated (another unit's generic separatedness tool, not Lean-closed); step 4 cites it. The item's blueprint from.node is null, inherited from the base, not a delivery fault.; 1 file(s) fixed by the reviewer"
+ }
+}

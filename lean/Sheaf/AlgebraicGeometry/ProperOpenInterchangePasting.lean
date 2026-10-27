@@ -9,8 +9,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
-import Sheaf.AlgebraicGeometry.ProperSupportSheafComposition
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import all Sheaf.AlgebraicGeometry.EtaleProperOpenHorizontalNormalization
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChangeNaturality
 
 
 /-!
@@ -27,6 +27,11 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+set_option backward.defeqAttrib.useBackward true
+
+set_option linter.unusedVariables false in
 /-- Horizontal pasting for normalized proper/open interchange.
 The ordinary and derived isomorphisms are supplied. The derived map is the
 canonical rightDerivedFunctorPlusBaseChange of the ordinary map;
@@ -103,6 +108,47 @@ theorem properOpenInterchangeHorizontalPasting_of_normalization (Λ : Type (u + 
         h₁).hom.app K) ≫
         (γ l j p q h₂).hom.app ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ)
         k).mapDerivedCategoryPlus.obj K)) := by
-  sorry
+  intro A B C D E F k l i j r p q _ _ _ _ _ _ _ h₁ h₂ h K
+  let e₁ := (δ k i r p h₁).hom
+  let e₂ := (δ l j p q h₂).hom
+  let e := (δ (k ≫ l) (i ≫ j) r q h).hom
+  let ck := openImmersionLowerShriekComp (ModuleCat.{u + 1} Λ) k l
+  let ci := openImmersionLowerShriekComp (ModuleCat.{u + 1} Λ) i j
+  have ho := ordinary_horizontal Λ k l r p q i j ⟨h₁⟩ ⟨h₂⟩
+    (δ k i r p h₁) (δ l j p q h₂) (δ (k ≫ l) (i ≫ j) r q h)
+    (hδ k i r p h₁) (hδ l j p q h₂) (hδ (k ≫ l) (i ≫ j) r q h)
+  have hn : Functor.baseChangePaste e₁ e₂ ≫
+      Functor.whiskerRight ck.inv (lowerStar (ModuleCat.{u + 1} Λ) q) =
+      Functor.whiskerLeft (lowerStar (ModuleCat.{u + 1} Λ) r) ci.inv ≫ e := by
+    apply NatTrans.ext
+    funext M
+    apply (cancel_mono ((lowerStar (ModuleCat.{u + 1} Λ) q).map (ck.hom.app M))).1
+    simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Functor.baseChangePaste, Functor.associator_inv_app, Functor.associator_hom_app,
+      Category.id_comp, Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
+    rw [ho M]
+    simp only [ci, e₁, e₂, Iso.inv_hom_id_app_assoc]
+    rw [(lowerStar (ModuleCat.{u + 1} Λ) q).map_id]
+    erw [Category.comp_id]
+  have hnD := Functor.rightDerivedFunctorPlusBaseChange_naturality
+    (Functor.baseChangePaste e₁ e₂) e ci.symm ck.symm hn K
+  have hpD := Functor.rightDerivedFunctorPlusBaseChange_paste e₁ e₂ K
+  rw [hγ, hγ, hγ]
+  change (extensionZeroCompDerivedPlusIso Λ i j).hom.app
+      ((lowerStar (ModuleCat.{u + 1} Λ) r).rightDerivedFunctorPlus.obj K) ≫
+      (Functor.rightDerivedFunctorPlusBaseChange e).app K ≫
+      (lowerStar (ModuleCat.{u + 1} Λ) q).rightDerivedFunctorPlus.map
+        ((extensionZeroCompDerivedPlusIso Λ k l).inv.app K) = _
+  dsimp only [extensionZeroCompDerivedPlusIso, Iso.trans_hom, Iso.trans_inv,
+    Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app]
+  simp only [Category.assoc, Functor.map_comp]
+  rw [← reassoc_of% hnD]
+  dsimp only [ck]
+  rw [← (lowerStar (ModuleCat.{u + 1} Λ) q).rightDerivedFunctorPlus.map_comp_assoc,
+    Iso.hom_inv_id_app, (lowerStar (ModuleCat.{u + 1} Λ) q).rightDerivedFunctorPlus.map_id,
+    Category.id_comp]
+  rw [hpD]
+  simp only [Iso.inv_hom_id_app_assoc]
+  rfl
 
 end AlgebraicGeometry.Etale

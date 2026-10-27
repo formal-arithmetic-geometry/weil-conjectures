@@ -136,7 +136,18 @@
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-18",
   "item": "thm-sfb-dc-open-base-change-iso",
@@ -151,5 +162,28 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-285dc2a1e (reviewer sub-agent of L); spot-checked: This is a re-delivery after the landing was refused because def-sfb-dc-open-base-change-morphism changed its statement. I compared the item with both the earlier snapshot and the earlier FIX at 045eb478aa54. NH changed only the step-1 text and split_report.summary. The statement, stmt_deps, steps 2-3 and the searches are unchanged, and the delivery adds no new nodes. The earlier FIX content was lost: the places again say the blueprint has no proof. I checked step 1 against the current def node. It copies the component formula ε'∘j'_!(θ)∘j'_!Lg'^*(η) exactly, and θ=c_{j',g}∘c_{g',j}^{-1}. I matched this against det-def-sfb-base-change-morphism-comparison with the square read with j' on top (top j', left g', right g, bottom j), and the orientation agrees. Every hypothesis of component-mono holds (ℓ, char p≠ℓ, any commutative condensed Λ, separated finite-type schemes, cartesian square, j and j' open, same α direction), and its equality premise holds by reflexivity. Step 2 cancels the monomorphism α to turn the section into a two-sided, unique inverse, and step 3 proves the inverse natural by elementary algebra. Both steps are correct. Edge cases: identity immersions, empty X', and a non-cartesian square (where the hypothesis is needed). On the current snapshot no stmt+proof closure of the def, component-mono or component-section reaches the item, so there is no cycle. The component nodes are existing nodes of the same unit and are proved in Lean, and the route follows the landed Lean proof. No duplicates and no SGA. FIX: the three step source.place fields, proof_origin.place and split_report.blueprint (and the report) falsely say the main-20261015 blueprint supplies no proof, but thm-sfb-dc-open-base-change-iso.proof.md exists (underived reduction and pushforward mate, using units outside this unit). I restored the earlier FIX wording for these fields on top of the delivered item in fixes/dag/nodes/sec-six-functors-basics/thm-sfb-dc-open-base-change-iso.json, keeping NH's new step-1 text. No other change and no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "In the situation of [def-sfb-dc-open-base-change-morphism], assume that the square is\ncartesian, i.e. $X'=X\\times_ZZ'=g^{-1}(X)$. Then the exchange morphism\n$\\mathrm{Ex}^{j}_{sq}\\colon j'_!\\circ Lg'^*\\to Lg^*\\circ j_!$ is an isomorphism, for every\ncommutative condensed ring $\\Lambda$.",
+  "proof": [
+   {
+    "text": "All functors involved are restrictions of ambient functors and commute with the inclusions, and\non the ambient categories $Lg^*\\cong D(g^*)$ and $j_!=D(j_!)$ are computed levelwise\n([sk-prop-sfb-module-derived-factorization]). So it suffices to show that the underived exchange\n$j'_!g'^*M\\to g^*j_!M$ is an isomorphism for every $\\Lambda_X$-module $M$. This exchange is the\nmate of the base change morphism $j^*g_*\\to g'_*j'^*$ for the pushforwards\n([det-def-sfb-module-pushforward-pullback]). For $N$ on $Z'$, adjunction gives\n\n$$\n\\Hom(g^*j_!M,N)\\cong\\Hom(M,j^*g_*N),\\qquad\\Hom(j'_!g'^*M,N)\\cong\\Hom(M,g'_*j'^*N).\n$$",
+    "uses": [
+     "det-def-sfb-module-pushforward-pullback"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "So it suffices that $j^*g_*N\\to g'_*j'^*N$ is an isomorphism. On an object $V$ of\n$X_{\\mathrm{proét}}$, both sides are the sections of $N$ over $V\\times_ZZ'=V\\times_XX'$. These\nagree because the square is cartesian. The isomorphism is compatible with the module structures,\nwhich are transported along the coefficient maps of the square.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

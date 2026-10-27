@@ -1,0 +1,132 @@
+{
+ "id": "lem-trf-fan-center-blowup-zariski",
+ "kind": "statement",
+ "title": "Zariski structure of a supplied saturated fan-center log blowup",
+ "statement": "Let V,F,c,J be as in [lem-trf-fan-center-pullback-coherence], with J nonempty coherent and with c.pullbackIdeal J nonempty coherent. Let V' be an fs log scheme and b:V' -> V a saturated log blowup of that ideal. Then V'.logStructure.IsZariski: every geometric log-stalk element is a Zariski section germ times a ring unit. This asserts no existence of b, no fan map and no characteristic normalization.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 3.3.4(ii), 3.3.5--3.3.9, 3.3.12--3.3.13; parent proof step 4."
+ },
+ "stmt_deps": [
+  "def-trf-fan-center-tensor-chart-data",
+  "def-trf-fs-log-blowup"
+ ],
+ "proof": [
+  {
+   "text": "Use the affine generation equality of [lem-trf-fan-center-pullback-coherence] and local lifts of the prescribed fan chart. Apply [lem-trf-coherent-log-ideal-chart-construction] and identify the resulting universal log blowup with the supplied b by mutually unique factorizations. Its tensor charts over Zariski base opens are open charts of V'.",
+   "uses": [
+    "lem-trf-fan-center-pullback-coherence",
+    "lem-trf-fan-chart-local-monoid-lift",
+    "lem-trf-coherent-log-ideal-chart-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-trf-monoid-chart-characteristic-fan] to the global fs chart $R_a\\to N'|_{U'_a}$, now that $U'_a$ is locally Noetherian. It gives a local morphism $c_{R_a}:(U'_a,\\overline N')\\to S(R_a)$ whose inverse-image characteristic sheaf is isomorphic to $\\overline N'|_{U'_a}$. Let $M_a$ be the Zariski log structure associated with $R_a\\to\\mathcal O_{U'_a}$; its associated etale log structure is $N'|_{U'_a}$, since $R_a$ is a chart of $N'$ there. These charts cover $V'$. They glue as follows. By [lem-trf-coherent-log-ideal-chart-construction] $U'_a$ and $U'_b$ are glued along their common localization, with monoid $R_{ab}=R_a[(b-a)^{-1}]$. Since $e-b=(e-a)+(a-b)$ and $e-a=(e-b)+(b-a)$, both $\\langle P,e-a\\ (e\\in E)\\rangle[(b-a)^{-1}]$ and $\\langle P,e-b\\ (e\\in E)\\rangle[(a-b)^{-1}]$ equal $\\langle P,e-a\\ (e\\in E),a-b\\rangle$. Saturation commutes with localization at $s\\in Q$: if $ng=q-ks$ with $q\\in Q$, then $n(g+ks)=q+(n-1)ks\\in Q$. Hence $R_{ab}=R_b[(a-b)^{-1}]$. On the overlap $b-a$ maps to a unit. Adjoining to a chart the negatives of elements mapped to units does not change the pushout $Q\\oplus_{\\beta^{-1}(\\mathcal O^\\times)}\\mathcal O^\\times$. Hence $M_a$ and $M_b$ both restrict to the Zariski log structure associated with $R_{ab}$. These identifications are induced by inclusions of submonoids of $P^{\\mathrm{gp}}$, so they satisfy the cocycle condition on triple overlaps. The glued Zariski log structure $M'_0$ has associated etale log structure equal to $N'$ on every $U'_a$, compatibly on overlaps, hence equal to $N'$. Thus $N'$ is a Zariski log structure. The local associated Zariski log structures produce the stalkwise unit-extension criterion IsZariski on the supplied blowup.",
+   "uses": [
+    "lem-trf-monoid-chart-characteristic-fan",
+    "lem-trf-coherent-log-ideal-chart-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fan-center-pullback-coherence",
+  "lem-trf-fan-chart-local-monoid-lift",
+  "lem-trf-coherent-log-ideal-chart-construction",
+  "lem-trf-monoid-chart-characteristic-fan"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 3.1.18--3.1.25, 3.3.4--3.3.13; formal decomposition of the supplied chart argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackIdeal|IsZariski|IsGeometricComparison",
+   "results": "{\"t\": \"2026-10-26T08:01:38Z\", \"tool\": \"grep\", \"query\": \"pullbackIdeal|IsZariski|IsGeometricComparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Basic.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Basic.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\"], \"digest\": \"c98292244683f138\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary scheme ideals and monoid localizations do not state the logarithmic fan-center calculation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogFanChart\"",
+   "results": "{\"t\": \"2026-10-26T08:01:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogFanChart\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary scheme ideals and monoid localizations do not state the logarithmic fan-center calculation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent ideal on a fan pulls back along a logarithmic characteristic chart to a coherent logarithmic ideal with saturated blowup tensor charts",
+   "results": "{\"t\": \"2026-10-26T08:01:39Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent ideal on a fan pulls back along a logarithmic characteristic chart to a coherent logarithmic ideal with saturated blowup tensor charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.comap\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap\", \"AlgebraicGeometry.specTargetImage\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_map\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion\"], \"digest\": \"a81446fbf03768e3\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary scheme ideals and monoid localizations do not state the logarithmic fan-center calculation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A saturated logarithmic blowup of a Zariski log scheme has a Zariski log structure and characteristic monoids given by unit-face localizations",
+   "results": "{\"t\": \"2026-10-26T08:03:28Z\", \"tool\": \"leansearch\", \"query\": \"A saturated logarithmic blowup of a Zariski log scheme has a Zariski log structure and characteristic monoids given by unit-face localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subalgebra.saturation\", \"AddLocalization\", \"IsLocalization.of_le\", \"Algebra.EssFiniteType.isLocalization\", \"Algebra.FormallyEtale.of_isLocalization\", \"Algebra.zariskisMainProperty_iff_exists_saturation_eq_top\", \"localizationAlgebra\", \"instTopologicalSpaceLocalization\"], \"digest\": \"8c1cb0e296cde6bd\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary scheme ideals and monoid localizations do not state the logarithmic fan-center calculation"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FanCenterLocalBlowupCharts",
+  "date": "2026-10-26",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, 3.3.2--3.3.13, pp.106--109, especially 3.3.4(ii), 3.3.8--3.3.11, 3.3.13(i),(iii); finite cover as in proof of 3.3.15. Subargument: returned log-fan-chart-blowup proof step(s) 6,7; Expose VIII 3.1.19--3.1.25, pp.101--102; 3.3.7--3.3.9, pp.107--108; 3.3.13(i),(iii), pp.108--109: inverse-image center and the common saturated fraction charts. Subargument of lem-trf-fan-center-local-blowup-charts: VIII 3.3.4(ii), 3.3.5--3.3.9, 3.3.12--3.3.13; parent proof step 4.",
+   "via": [
+    "lem-trf-fan-center-local-blowup-charts",
+    "lem-trf-log-fan-chart-blowup",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FanCenterBlowupZariski",
+  "file": "lean/Sheaf/AlgebraicGeometry/FanCenterBlowupZariski.lean",
+  "declaration": "AlgebraicGeometry.fan_center_blowup_zariski",
+  "statement": "theorem fan_center_blowup_zariski (V : FineSaturatedLogScheme.{u}) (F : FineFan.Fan.{u}) (c : LogFanChart V F) (J : FineFan.IdealFamily F) (hJ : FineFan.IsNonemptyCoherentIdeal J) (hI : V.logStructure.IsNonemptyCoherentIdeal (c.pullbackIdeal J)) (V' : FineSaturatedLogScheme.{u}) (b : EtaleLogHom V' V) (hb : IsSaturatedLogBlowup b (c.pullbackIdeal J)) : V'.logStructure.IsZariski",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e1843",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261026T091953-L-3390847",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e1843",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261026T091953-L-3390847",
+  "kind": "interface",
+  "note": "independent cc review: item proof/statement vs published FanCenterLocalBlowupCharts (signature byte-identical); 8 moved data declarations vs published bodies (verbatim); 3 new sorry statements vs the item and ILO VIII 3.3.7-3.3.13; node proof_deps vs the Lean assembly"
+ }
+}

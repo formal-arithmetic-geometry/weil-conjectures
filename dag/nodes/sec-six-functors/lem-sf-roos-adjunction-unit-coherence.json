@@ -1,0 +1,431 @@
+{
+ "id": "lem-sf-roos-adjunction-unit-coherence",
+ "kind": "statement",
+ "title": "Adjunction units commute with the normalized product, signed Roos and strict-limit comparisons",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites with sheaves of commutative rings $R,S$, and put $\\mathcal A=\\operatorname{Mod}(R)$, $\\mathcal B=\\operatorname{Mod}(S)$ [def-weil-sheaf-of-modules-category]. Assume countable products in both categories are exact. Let $F:\\mathcal A\\to\\mathcal B$ and $G:\\mathcal B\\to\\mathcal A$ be additive exact functors with a specified adjunction $F\\dashv G$ whose unit $u:\\operatorname{id}\\to GF$ is invertible. Assume the canonical countable-product comparisons $\\phi^F,\\phi^G$, characterized by $\\mathrm{pr}_n\\phi^F=F(\\mathrm{pr}_n)$ and $\\mathrm{pr}_n\\phi^G=G(\\mathrm{pr}_n)$, are invertible. Use termwise functors on complexes and strict positive-integer towers [def-weil-inverse-system], their ordinary unbounded derived categories [def-weil-abstract-derived-category], and the localized unit $u$ of [def-weil-exact-derived-adjunction]. Write $L_{\\mathcal A},L_{\\mathcal B}$ for total right derived inverse limit and use exactly the normalized comparisons of [lem-cbc-exact-product-functor-strict-limit]:\n$$\\lambda^F_M:F L_{\\mathcal A}M\\xrightarrow{\\sim}L_{\\mathcal B}FM,\\qquad\\lambda^G_N:G L_{\\mathcal B}N\\xrightarrow{\\sim}L_{\\mathcal A}GN.$$\nFor every family $(M_n)$ in $\\mathcal A$, the composite product comparison satisfies\n$$\\phi^G_{FM}\\,G(\\phi^F_M)\\,u_{\\prod M_n}=(\\prod_nu_{M_n}):\\prod_nM_n\\longrightarrow\\prod_nGF(M_n).$$\nFor every strict tower complex $M$ with shift $s$, put $P_M=\\prod_nM_n$ and $\\mathsf H(M)^q=P_M^q\\oplus P_M^{q-1}$ with differential $d(x,y)=(dx,(1-s)x-dy)$ [lem-weil-strict-roos-comparison]. Let $\\kappa^F_M:F\\mathsf H(M)\\to\\mathsf H(FM)$ and $\\kappa^G_{FM}:G\\mathsf H(FM)\\to\\mathsf H(GFM)$ be the canonical product comparisons on both signed summands. Then the equality of chain maps\n$$\\kappa^G_{FM}\\,G(\\kappa^F_M)\\,u_{\\mathsf H(M)}=\\mathsf H(u_M)$$\nholds, and its normalized total-derived-limit form is the natural equality\n$$L_{\\mathcal A}(u_M^{-1})\\,\\lambda^G_{FM}\\,G(\\lambda^F_M)\\,u_{L_{\\mathcal A}M}=1.$$\nBoth equalities respect every strict augmentation $\\gamma:\\Delta C\\to M$, where $\\Delta$ is the constant tower: the Roos representative of the augmented map has coordinates $((\\gamma_n)_n,0)$, and the preceding chain equality carries it to the representative with first coordinate $(u_{M_n}\\gamma_n)_n$ and zero second coordinate, after the source unit $u_C$. Thus in unit coordinates the product map is the identity on every projection and the Roos map is the identity on both signed summands, including the actual augmentation. These assertions concern the specified natural comparisons in the derived categories, with no choice of a cone filler.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok; proetale.tex Tags 09BN, lemma-open-immersion, and 09BP, lemma-j-shriek-limits. Agent-formulated general exact-adjunction unit calculation extracted from old steps 2 and 6 of lem-sf-open-exchange-roos-restriction."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category",
+  "def-weil-exact-derived-adjunction",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-weil-strict-roos-comparison",
+  "def-weil-strict-roos-model"
+ ],
+ "proof": [
+  {
+   "text": "For each product projection expand the two piComparison projection equations and apply naturality of the specified adjunction unit. Product extensionality proves product_unit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing canonical roosAdditiveComparison, which is an isomorphism because the functor preserves countable products. Its naturality gives kappa as a natural isomorphism. Transport its coordinate formula by the fixed signed swap to obtain exactly the two positive product comparisons required by Coherence. Apply horizontal coherence to the inverse of the given unit and the identity functor. The identity comparison and the two inverse-unit equations then give chain_unit.",
+   "uses": [
+    "lem-pur-roos-comparison-horizontal-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply strictRoosDerivation in each module category. Uniqueness of total right derived functors identifies its descent with LA or LB; the rightDerivedNatTrans equation proves eta followed by theta equals Q(roos inclusion), on every complex and hence on the required K-injectives. Conjugate each canonical kappa by theta and the exact functor localization factors. Fully faithful restriction along Q descends that natural isomorphism to lambda, with exactly the stated normalization square.",
+   "uses": [
+    "lem-weil-strict-roos-derivation",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The localized adjunction unit at QX is Q of the chain unit followed by the inverse exact-functor factors. It is invertible because the original unit is invertible; fully faithful restriction along Q detects this. Conjugate the two lambda normalization squares, using naturality of the derived unit. Naturality of the exact-functor factors and chain_unit identify the right side with thetaA followed by Q(roosF of the tower unit). Naturality of lambdaG and thetaA identify the left side with LA of the localized tower unit. Cancel the invertible factors; localization natTrans_ext proves the natural transformation equality on all derived objects. Composing with LA of its inverse gives derived_unit.",
+   "uses": [
+    "def-weil-exact-derived-adjunction",
+    "lem-pur-roos-comparison-horizontal-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the existing explicit roosAugment for gamma and for GF(gamma). The canonical comparison augmentation formula identifies the mapped augmentations, and unit naturality gives the required chain-map equality. Transport the existing zero-coordinate augmentation formula through the signed swap; product uniqueness and naturality identify the first coordinate with gamma followed by the component units. Finally apply naturality of the derived unit to Q(b) followed by thetaA inverse, and compose with derived_unit. This proves the actual augmented derived equality.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "lem-pur-roos-comparison-horizontal-coherence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-roos-comparison-horizontal-coherence",
+  "lem-weil-strict-roos-derivation",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-strict-roos-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok; explicit unit/naturality argument in the open-factor paragraph of prop-sf-pf-coherence. Formal proof by D9 using canonical horizontal coherence and localization full faithfulness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an exact product preserving adjunction with invertible unit the normalized Roos derived inverse limit comparisons commute with the adjunction unit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derived'_unit",
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.Adjunction.derivedη_fac_app",
+     "CategoryTheory.Adjunction.derivedε_fac_app",
+     "CategoryTheory.Adjunction.derivedη",
+     "CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+     "CategoryTheory.Adjunction.derivedε_fac_app_assoc",
+     "CategoryTheory.Adjunction.derivedε"
+    ],
+    "digest": "4e87cec3c428c044",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: derived_unit and derivedη only normalize the unit of a derived adjunction, and preservesLimitIso/piComparison concern ordinary limits. None identifies the composite of two normalized strict total-derived-limit comparisons on both signed Roos summands and every augmentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.Limits.preservesLimitIso",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'CategoryTheory.Limits.preservesLimitIso'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: derived_unit and derivedη only normalize the unit of a derived adjunction, and preservesLimitIso/piComparison concern ordinary limits. None identifies the composite of two normalized strict total-derived-limit comparisons on both signed Roos summands and every augmentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact product preserving fully faithful left adjoint and its right adjoint commute with derived inverse limits compatibly with the adjunction unit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.Adjunction.derivedη.congr_simp",
+     "CategoryTheory.Adjunction.derived'_unit",
+     "CategoryTheory.Adjunction.derived'",
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.unitSplitEpiOfLFull",
+     "CategoryTheory.Adjunction.derived'_counit",
+     "CategoryTheory.Adjunction.derivedη"
+    ],
+    "digest": "5385f1488a4dbeef",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: derived_unit and derivedη only normalize the unit of a derived adjunction, and preservesLimitIso/piComparison concern ordinary limits. None identifies the composite of two normalized strict total-derived-limit comparisons on both signed Roos summands and every augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|derivedLimit.*unit|unit.*derivedLimit|homotopyLimit",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": "CategoryTheory"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: derived_unit and derivedη only normalize the unit of a derived adjunction, and preservesLimitIso/piComparison concern ordinary limits. None identifies the composite of two normalized strict total-derived-limit comparisons on both signed Roos summands and every augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphisms between product preserving exact functors commute with the canonical comparison between a functor applied to a derived inverse limit and the limit of its tower",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.inv_piComparison_comp_map_π_assoc",
+     "CategoryTheory.Limits.inv_piComparison_comp_map_π",
+     "CategoryTheory.Limits.PreservesProduct.iso_hom",
+     "CategoryTheory.Limits.instIsIsoPiComparison",
+     "CategoryTheory.preservesLimitIso_hom_π",
+     "CategoryTheory.Limits.PreservesProduct.of_iso_comparison",
+     "CategoryTheory.preservesLimitIso_inv_π",
+     "CategoryTheory.preservesLimitNatIso"
+    ],
+    "digest": "e72d64d6de175747",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: derived_unit and derivedη only normalize the unit of a derived adjunction, and preservesLimitIso/piComparison concern ordinary limits. None identifies the composite of two normalized strict total-derived-limit comparisons on both signed Roos summands and every augmentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.preservesLimitIso",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: derived_unit and derivedη only normalize the unit of a derived adjunction, and preservesLimitIso/piComparison concern ordinary limits. None identifies the composite of two normalized strict total-derived-limit comparisons on both signed Roos summands and every augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "piComparison.*[Nn]aturality|[Nn]at.*piComparison|preservesLimitIso_hom_π",
+   "results": {
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Limits/Elements.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Limits.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Limits.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Limits.lean",
+     "Mathlib/CategoryTheory/Limits/IndYoneda.lean"
+    ],
+    "digest": "84e37ea08bb6aad1",
+    "sub": "CategoryTheory/Limits"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: derived_unit and derivedη only normalize the unit of a derived adjunction, and preservesLimitIso/piComparison concern ordinary limits. None identifies the composite of two normalized strict total-derived-limit comparisons on both signed Roos summands and every augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "derived_unit|derivedη",
+   "results": {
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean"
+    ],
+    "digest": "abbfe2c5fb62a9c9",
+    "sub": "CategoryTheory/Functor/Derived"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: derived_unit and derivedη only normalize the unit of a derived adjunction, and preservesLimitIso/piComparison concern ordinary limits. None identifies the composite of two normalized strict total-derived-limit comparisons on both signed Roos summands and every augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|derivedLimit.*unit|unit.*derivedLimit|homotopyLimit",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": "CategoryTheory"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no Roos/derived-limit-unit result; piComparison_comp_π gives only the defining projection equation, and derivedη_fac_app only the derived-adjunction unit normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.Limits.piComparison",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no result for the adjunction-unit and piComparison query."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized derived inverse limit product comparison commutes with an adjunction unit on signed Roos complexes",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.Adjunction.derivedη.congr_simp",
+     "CategoryTheory.Adjunction.derivedη",
+     "CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+     "CategoryTheory.Adjunction.derivedε",
+     "CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_unit_app",
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.derived'"
+    ],
+    "digest": "7640ea57264b676b",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: derived_unit and derivedη_fac_app normalize a derived adjunction unit, without the signed Roos or total-derived-limit comparison and augmentation clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For exact product preserving functors F and G with a natural unit from identity to GF the composite signed Roos comparison equals the Roos map of the unit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Abelian.DoldKan.comparisonN_hom_app_f",
+     "AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app",
+     "AlgebraicTopology.DoldKan.whiskerLeft_toKaroubi_N₂Γ₂_hom",
+     "CategoryTheory.Idempotents.DoldKan.hη",
+     "AlgebraicTopology.DoldKan.N₂Γ₂_compatible_with_N₁Γ₀",
+     "AlgebraicTopology.DoldKan.compatibility_N₂_N₁_karoubi",
+     "AlgebraicTopology.DoldKan.Γ₂N₂ToKaroubiIso",
+     "AlgebraicTopology.DoldKan.compatibility_Γ₂N₁_Γ₂N₂_natTrans"
+    ],
+    "digest": "34f95c91df5b81a9",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: first phrasing returned Dold-Kan comparisons; second returned binary-product comparison composition and natural-transformation formulas. None states the signed strict-tower Roos and normalized total-derived-limit unit identities together with actual augmentations."
+  },
+  {
+   "tool": "grep",
+   "query": "piComparison.*naturality|piComparison_comp_π|derived_unit|derivedη_fac_app",
+   "results": {
+    "ok": true,
+    "n_hits": 13,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+     "Mathlib/CategoryTheory/Galois/Decomposition.lean",
+     "Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean",
+     "Mathlib/CategoryTheory/Preadditive/Biproducts.lean",
+     "Mathlib/CategoryTheory/Limits/FintypeCat.lean",
+     "Mathlib/CategoryTheory/Limits/Shapes/Products.lean",
+     "Mathlib/CategoryTheory/Limits/Shapes/Products.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean"
+    ],
+    "digest": "a49ea24bb832d55f",
+    "sub": "CategoryTheory"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no Roos/derived-limit-unit result; piComparison_comp_π gives only the defining projection equation, and derivedη_fac_app only the derived-adjunction unit normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical product comparisons for composite functors are compatible with any natural transformation from the identity functor",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.prodComparison_comp",
+     "CategoryTheory.CartesianMonoidalCategory.prodComparisonNatTrans_comp",
+     "CategoryTheory.CartesianMonoidalCategory.prodComparison_comp",
+     "CategoryTheory.Limits.prodComparison_natural_of_natTrans",
+     "CategoryTheory.Limits.prodComparisonNatTrans",
+     "CategoryTheory.CartesianMonoidalCategory.prodComparisonBifunctorNatTrans_comp",
+     "CategoryTheory.Limits.prodComparison_natural_of_natTrans_assoc",
+     "CategoryTheory.Limits.prodComparison_natural"
+    ],
+    "digest": "56d94355c816d842",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: first phrasing returned Dold-Kan comparisons; second returned binary-product comparison composition and natural-transformation formulas. None states the signed strict-tower Roos and normalized total-derived-limit unit identities together with actual augmentations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-open-exchange-roos-restriction",
+  "date": "2026-10-22",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Base-change paragraph, open factor: \"both restrict to the identity\". Compatibility of extension and restriction with the same augmented signed Roos comparison.",
+   "via": [
+    "lem-sf-open-exchange-roos-restriction",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-roos-adjunction-unit-coherence",
+  "worker": "stage1",
+  "summary": "Proved product and both signed-coordinate unit identities by projection naturality; substituted the specified normalized strict-limit comparisons and cancelled the natural Roos isomorphisms; checked the actual augmentation, including its source unit. Reused existing generic comparison nodes, with no new nodes and no statement change.",
+  "blueprint": "prop-sf-pf-coherence, base-change paragraph, open factor: \"both restrict to the identity\"; supplies the adjunction-unit normalization behind that assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic normalized strict-tower Roos functor, its naturality and actual augmentation representative; these are not constructed in this unit."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Generic exact product-preserving comparison with its explicit conjugation formula and augmentation compatibility; specializes to each of F and G without changing this unit route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-213bcd3db",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-213bcd3db (reviewer sub-agent of L); spot-checked: I read the item and all three cited nodes (lem-cbc-exact-product-functor-strict-limit, lem-weil-strict-roos-comparison, def-weil-exact-derived-adjunction) in full; the full review is in review.md. Base and shape: the item is still unsplit in live and side-live, has no repair note, and its statement and stmt_deps are unchanged (the diff touches only proof, proof_deps, proof_origin, split_report, status and mathlib_searches). The delivery adds no new nodes. Steps: Step 1, pr_n T = G(F pr_n) u_P = u_{M_n} pr_n, is elementary. Step 2: both signed coordinates give E = diag(prod u_{M_n}) = H(u_M); d^2 = 0 and H(u_M) is a chain map because u commutes with s. Step 3: I recomputed theta^{-1} kappa^G G(theta) G(theta^{-1}) G(kappa^F) GF(theta) u = theta^{-1} H(u_M) theta = L(u_M), using naturality of the derived unit (localized unit, def-weil-exact-derived-adjunction) and naturality of rho on the strict tower map u_M; u_M is invertible levelwise and the types check. Step 4: b_gamma = (gamma, 0) is a chain map since (1-s) gamma = 0, and E b_gamma = b_{GF gamma} u_C; conjugating by theta and the augmentation clauses of both cited nodes give the derived form. Hypotheses: lem-cbc applies to both F and G (small sites, Mod(R) and Mod(S), exact countable products, exact additive functors, invertible product comparisons). Edge cases: F = G = id with unit a and counit a^-1, zero transitions, constant towers, unbounded complexes. Sources: Stacks 0941 at sites-cohomology.tex:5067, 09BN and 09BP at proetale.tex:5117 and 5185, and blueprint main-20261015 prop-sf-pf-coherence lines 18-25 ('both restrict to the identity'); no SGA. Route: sk-prop-sf-cbc and sk-def-sf-operations are reached transitively from sk-prop-sf-pf-coherence; the declared tool_uses for lem-weil-strict-roos-comparison and lem-cbc-exact-product-functor-strict-limit are accepted. Duplicates: lem-sf-open-roos-restriction-unit is a special case, not a duplicate. Advisory: lem-pur-roos-comparison-horizontal-coherence gives Step 2 with alpha = u^-1, but the step is elementary anyway; one Loogle query error is recorded as 'no match'. The parent lem-sf-open-exchange-roos-restriction Step 3 gets exactly what it uses. review_split's 'no such node' messages come from the symlinked snapshot directories, not from missing nodes. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.RoosAdjunctionUnitCoherence",
+  "declaration": "CategoryTheory.RoosAdjunctionUnit.roosAdjunctionUnitCoherence",
+  "file": "lean/Sheaf/SixFunctors/RoosAdjunctionUnitCoherence.lean",
+  "statement": "theorem roosAdjunctionUnitCoherence {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max uC vC r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC r}] (R : Sheaf J RingCat.{max uC vC r}) {D : Type uD} [Category.{vD} D] (K : GrothendieckTopology D) [HasSheafify K AddCommGrpCat.{max uD vD s}] [K.WEqualsLocallyBijective AddCommGrpCat.{max uD vD s}] (S : Sheaf K RingCat.{max uD vD s}) (_hR : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a) (_hS : ∀ (U : Dᵒᵖ) (a b : S.obj.obj U), a * b = b * a) [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{max uC vC r} R)] [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{max uD vD s} S)] [HasDerivedCategory.{wA} (ringedSiteModules.{max uC vC r} R)] [HasDerivedCategory.{wA} (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R)] [HasDerivedCategory.{wB} (ringedSiteModules.{max uD vD s} S)] [HasDerivedCategory.{wB} (ℕᵒᵖ ⥤ ringedSiteModules.{max uD vD s} S)] (F : ringedSiteModules.{max uC vC r} R ⥤ ringedSiteModules.{max uD vD s} S) (G : ringedSiteModules.{max uD vD s} S ⥤ ringedSiteModules.{max uC vC r} R) [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] [PreservesFiniteLimits G] [PreservesFiniteColimits G] (a : F ⊣ G) [IsIso a.unit] (_hphiF : ∀ M : ℕ → ringedSiteModules.{max uC vC r} R, IsIso (piComparison F M)) (_hphiG : ∀ M : ℕ → ringedSiteModules.{max uD vD s} S, IsIso (piComparison G M)) (LA : DerivedCategory.{wA} (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ⥤ DerivedCategory.{wA} (ringedSiteModules.{max uC vC r} R)) (LB : DerivedCategory.{wB} (ℕᵒᵖ ⥤ ringedSiteModules.{max uD vD s} S) ⥤ DerivedCategory.{wB} (ringedSiteModules.{max uD vD s} S)) (etaA : HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙ lim ⋙ DerivedCategory.Q.{wA} ⟶ DerivedCategory.Q.{wA} ⋙ LA) (_hLA : LA.IsRightDerivedFunctor etaA (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) (.up ℤ))) (etaB : HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙ lim ⋙ DerivedCategory.Q.{wB} ⟶ DerivedCategory.Q.{wB} ⋙ LB) (_hLB : LB.IsRightDerivedFunctor etaB (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{max uD vD s} S) (.up ℤ))) : Nonempty (Coherence F G a LA LB etaA etaB)",
+  "branch": "sheaf-dag",
+  "by": "Q148",
+  "date": "2026-10-22",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.RoosAdjunctionUnit.exactDerivedAdjunctionUniverses",
+   "CategoryTheory.RoosAdjunctionUnit.exactDerivedAdjunctionUniverses_commonUniverses",
+   "CategoryTheory.RoosAdjunctionUnit.towerComplex",
+   "CategoryTheory.RoosAdjunctionUnit.towerDerived",
+   "CategoryTheory.RoosAdjunctionUnit.towerFactors",
+   "CategoryTheory.RoosAdjunctionUnit.towerAdjunction",
+   "CategoryTheory.RoosAdjunctionUnit.coordinates",
+   "CategoryTheory.RoosAdjunctionUnit.Coherence",
+   "CategoryTheory.RoosAdjunctionUnit.roosAdjunctionUnitCoherence"
+  ],
+  "note": "The conclusion is bundled by Coherence: all comparison maps are outputs pinned by signed-coordinate, K-injective-unit and conjugation equations. Uses the recorded strict Roos model directly. The universe-general localization is a listed helper in this item module, with a reflexivity identification to the landed exactDerivedAdjunction at common universes. The dependency record and its owning module are preserved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d44ddee30",
+  "group": "Q148",
+  "result": "pass",
+  "note": "Re-delivery after H13/H4 RETURN of 2cceb9abd6bd implements correction option 1 exactly. Snapshot no longer contains Sheaf/CategoryTheory/ExactDerivedAdjunctionUniverses.lean. The def-weil-exact-derived-adjunction record is byte-identical to live and side-live, so Q22's existing:true exactDerivedAdjunction binding is preserved. Helper RoosAdjunctionUnit.exactDerivedAdjunctionUniverses in the item module is the landed body (OpenTensorNormalizationData.lean:533-546) verbatim with independent universes; it is listed in lean.declarations with a source/blueprint docstring. exactDerivedAdjunctionUniverses_commonUniverses is the rfl identification with the landed def, so one notion has one definition. Diff vs the previous head: only the imports and these helpers; Coherence and the theorem are unchanged and were previously found correct. Re-checked: hypotheses (two ringed sites, exact countable products, exact additive F/G, IsIso unit, piComparison isos, LA/LB right derived limits); lambda normalization directions against Mathlib mapDerivedCategoryFactors (Q⋙F' ≅ mapHC⋙Q); diagonal positive kappa pins; product_unit, chain_unit, derived_unit with towerUnit_hom; augmentation clauses; edge cases. lean.statement is verbatim in the file, there is one sorry, all lines are ≤100 chars, there are no name clashes in live or side-live, the live item is split with no lean record and no repair note, all imports exist live, and the report sections are present. No compile (no file changed); worker reports clean scompile and a deliver2 dry-run OK. Advisory: the universe-general duplicate is acceptable via the rfl identification."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261024T184916-L-3259083",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

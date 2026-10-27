@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-verdier-identity-projection",
+ "kind": "statement",
+ "title": "Identity projection triangle on the restricted finite-Tor domain",
+ "statement": "Fix the finite-field and coefficient datum and six-functor operation datum $S$ of [def-fix-six-functor-datum], with $k$ the algebraic closure of the finite base field, $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ and a positive finite exponent. Choose one of the finite, completed integral, rational or common finite-field coefficient stages $s$ of [def-sf-ctf-coefficient-stage-selectors]. Let $X$ be a finite-type $k$-scheme and $R$ a restricted finite-Tor presentation [det-thm-sf-ctf-stability-adjunctions] for $\\mathrm{id}_X$ at its proper compactification. Write $P,Q,F$ for its pullback, direct image and compact support. Identify the entire source and target closed data, and their tensor comparisons, and assume this shared tensor comparison is natural in its first argument as in [def-sf-verdier-hom-composition-coordinates]. There exists $p:P\\cong\\mathrm{Id}$ such that inclusion carries $P(p_K)$ to the inverse identity/self pullback compositor at $K$. Let $r:Q\\cong\\mathrm{Id}$ be the unique right-adjoint comparison between $P\\dashv Q$ and the identity adjunction transported along $p^{-1}$, and let $q:F\\cong\\mathrm{Id}$ be the restricted specified proper identification $F\\cong Q$ followed by $r$. For every finite-Tor $M,T$, the actual projection of [def-pod-ctf-pairing-maps] satisfies\n$$\\operatorname{PF}_{\\mathrm{id},M,T};q_{M\\otimes PT};(1_M\\otimes p_T);\\tau_{M,T}=q_M\\otimes1_T,$$\nwhere $\\tau$ is tensorCoordinate for the equality of the source and target closed presentations. This is an equation of tensor morphisms before any internal-Hom or exceptional transposition.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "First paragraph: for f=id the adjunctions are the identity adjunction and the mate of identity is identity; restricted operation coordinates for proof step 5 of lem-sf-verdier-hom-chain-composition."
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-ctf-coefficient-stage-selectors",
+  "det-thm-sf-ctf-stability-adjunctions",
+  "def-sf-verdier-hom-composition-coordinates",
+  "def-pod-ctf-pairing-maps"
+ ],
+ "proof": [
+  {
+   "text": "Use the prescribed identity inverse-image comparison and restrict it through the full finite-Tor inclusion. At finite coefficients its section-normalized composition equation gives P(p_K)=pullComposition(id,id)^-1_K. At integral coefficients use the identity map of the completed inverse-image system before evaluation; the construction normalizations give the same equation on the system. Rationalization and common finite-stage inclusion preserve this equation. These are the units of the specified operations, rather than arbitrary identifications of their endpoints.",
+   "uses": [
+    "def-fix-six-functor-datum",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "First paragraph: for f=id the adjunctions are the identity adjunction and the mate of identity is identity; restricted operation coordinates for proof step 5 of lem-sf-verdier-hom-chain-composition."
+   }
+  },
+  {
+   "text": "At the proper compactification of identity, use the proper-coincidence equation of the projection theorem to replace compact-support projection by the specified proper counit tensor mate. The canonical pullback tensor identity and the ordinary adjunction triangles reduce this mate, after the ordinary unit r and pullback unit p, to the identity tensor map. The proper comparison defines q by composition with r. Equivalently this is the cancellation of the proper counit and identity-open unit in the source identity calculation. Thus, in the recorded ambient tensor coordinates, PF followed by q on the tensor input and tensor(p) equals tensor(q_M,1_T).",
+   "uses": [
+    "fix-prop-projection-formula",
+    "def-fix-six-functor-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "First paragraph: for f=id the adjunctions are the identity adjunction and the mate of identity is identity; restricted operation coordinates for proof step 5 of lem-sf-verdier-hom-chain-composition."
+   }
+  },
+  {
+   "text": "Transport this tensor equation through the fully faithful finite-Tor inclusion. Naturality in the test variable transports p_T through the tensor presentation. The supplied first-factor naturality transports q_M through it. The shared closed and tensor equalities cancel the remaining comparison pair; tensorCoordinate is precisely the transport between the two written monoidal presentations. Faithfulness reflects the equality. No Hom, exceptional counit, dualizing object or Verdier exchange is used.",
+   "uses": [
+    "def-sf-verdier-hom-composition-coordinates",
+    "def-pod-ctf-pairing-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "First paragraph: for f=id the adjunctions are the identity adjunction and the mate of identity is identity; restricted operation coordinates for proof step 5 of lem-sf-verdier-hom-chain-composition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-fix-six-functor-datum",
+  "lem-fix-operation-reduction",
+  "fix-prop-projection-formula",
+  "def-sf-verdier-hom-composition-coordinates",
+  "def-pod-ctf-pairing-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "First paragraph: for f=id the adjunctions are the identity adjunction and the mate of identity is identity; restricted operation coordinates for proof step 5 of lem-sf-verdier-hom-chain-composition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "projection formula identity adjunction unit monoidal functor",
+   "results": "Eight hits: generic monoidal adjunction unit/counit and monoidal functor unit identities, including Adjunction.IsMonoidal.instIsMonoidalUnit and Functor.Monoidal.ε_η. None states the project restricted projection triangle.",
+   "date": "2026-10-26",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "Twelve generic adjoint-uniqueness lemmas, including homEquiv_symm_rightAdjointUniq_hom_app and rightAdjointUniq_hom_app_counit. They provide the mate cancellation used in the main proof, not the identity projection normalization.",
+   "date": "2026-10-26",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq.*counit|ofNatIsoLeft.*homEquiv",
+   "results": "Fifteen hits in Adjunction.Unique, Adjunction.Basic and generic category constructions. The inverse Hom and counit equations are present; no specified finite/integral/common-stage projection equation. Local search also found sixFunctorProjection_identity, but it requires the stronger full SixFunctorDatum, unavailable from the item operation datum. Whole-blueprint searches for identity projection and projection identity found no exact separate node for this operation-only restricted calculation.",
+   "date": "2026-10-26",
+   "verdict": "no exact applicable match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VerdierHomChainComposition",
+  "date": "2026-10-26",
+  "group": "Q6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Projection diamonds and associativity; taking adjoint mates gives the corresponding equations for Verdier exchange. Identity projection calculation before transposition.",
+   "via": [
+    "lem-sf-verdier-hom-chain-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.VerdierIdentityProjection",
+  "file": "lean/Sheaf/Paper/VerdierIdentityProjection.lean",
+  "declaration": "WeilConjectures.VerdierHomChainComposition.normalized_identity_projection",
+  "statement": "theorem normalized_identity_projection\n    (hclosed : R.closedX = R.closedY) (htensor : HEq R.tensorX R.tensorY)\n    (hnatural : TensorPresentationNatural S s X R.closedX R.tensorX) :\n    ∃ p : R.pull ≅ 𝟭 _,\n      (∀ K : (PodCoefficientStage.domain S s X).FullSubcategory,\n        (PodCoefficientStage.domain S s X).ι.map (R.pull.map (p.hom.app K)) =\n          ((PodCoefficientStage.operations S s).pullComposition (𝟙 X) (𝟙 X)).inv.app\n            K.obj) ∧\n      let q : R.support ≅ 𝟭 _ :=\n        ((PodCoefficientStage.domain S s X).fullyFaithfulι.whiskeringRight _).preimageIso\n          (X := R.support) (Y := R.direct)\n          (Functor.isoWhiskerLeft (PodCoefficientStage.domain S s X).ι\n            ((PodCoefficientStage.operations S s).properIdentity (𝟙 X))) ≪≫\n          R.ordinaryAdjunction.rightAdjointUniq (Adjunction.id.ofNatIsoLeft p.symm)\n      ∀ M T : (PodCoefficientStage.domain S s X).FullSubcategory,\n        PodCtfPairing.projection S s (𝟙 X) (.ofIsProper ((𝟙 X) : X ⟶ X).hom.left)\n            R M T ≫\n          q.hom.app ((tensorLeft R.closedX.closed.monoidal M).obj (R.pull.obj T)) ≫\n          (tensorLeft R.closedX.closed.monoidal M).map (p.hom.app T) ≫\n          (tensorCoordinate S s hclosed M T).hom =\n        @MonoidalCategory.whiskerRight _ _ R.closedY.closed.monoidal.toMonoidalCategoryStruct\n          _ _ (q.hom.app M) T",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261026T002305-L-73272",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261026T002305-L-73272",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,291 @@
+{
+ "id": "lem-weil-isomorphism-scalar-quotient-chain-squares",
+ "kind": "statement",
+ "title": "Balanced scalar comparisons with quotient and transition squares",
+ "statement": "Let $g:X\\to Y$ be a scheme isomorphism [def-weil-scheme-morphism-properties]. Use the small pro-etale sites and compatible small skeletons in the module universe [def-weil-pbc-proetale-site, def-weil-size-convention], and write $F=g^{-1}$ for inverse image [def-weil-proetale-inverse-image]. Use sheaves of modules [def-weil-sheaf-of-modules-category], sheafified balanced tensor [def-pur-sheaf-tensor-product], and cochain complexes with the direct-sum total tensor [def-pc-tensor-complex-sheaves].\n\nFor $W=X,Y$ let $j_W:R_W\\to S_W$ be a map of commutative ring sheaves, and for $m\\geq1$ let $A_{W,m},B_{W,m}$ be commutative ring sheaves with transitions $q^A,q^B$, maps $i_{W,m}:A_{W,m}\\to B_{W,m}$ and maps $\\pi^A_{W,m}:R_W\\to A_{W,m}$, $\\pi^B_{W,m}:S_W\\to B_{W,m}$. Assume $q^Bi_{m+1}=i_mq^A$, the projections commute with transitions, and $\\pi^B_{W,m}j_W=i_{W,m}\\pi^A_{W,m}$. Let $c_R:FR_Y\\simeq R_X$, $c_S:FS_Y\\simeq S_X$, $c_{A,m}:FA_{Y,m}\\simeq A_{X,m}$, $c_{B,m}:FB_{Y,m}\\simeq B_{X,m}$ be ring isomorphisms commuting with $j,i,\\pi$ and transitions. Let $G_R,G_S,G_{A,m},G_{B,m}$ mean $F$ with the respective transported scalar actions. For an arbitrary $R_Y$-complex $P$, let\n$$b_P:G_RP\\otimes_{R_X}S_X\\xrightarrow{\\sim}G_S(P\\otimes_{R_Y}S_Y)$$\nbe the balanced comparison normalized by $Fp\\otimes c_S(Fs)\\mapsto F(p\\otimes s)$.\n\nThere are natural $B_{X,m}$-linear isomorphisms of complexes\n$$b_{P,m}:G_{A,m}(P\\otimes_{R_Y}A_{Y,m})\\otimes_{A_{X,m}}B_{X,m}\\xrightarrow{\\sim}G_{B,m}(P\\otimes_{R_Y}B_{Y,m})$$\nwith mutually inverse local rules\n$$F(p\\otimes a)\\otimes t\\longmapsto F\\bigl(p\\otimes i_{Y,m}(a)c_{B,m}^{-1}(t)\\bigr),\\qquad F(p\\otimes u)\\longmapsto F(p\\otimes1)\\otimes c_{B,m}(Fu).$$\nIn these formulas local sections on corresponding objects are identified through $F$; in particular $c_{B,m}^{-1}(t)$ is read on the corresponding $Y$ object.\n\nThe left and right coefficient maps\n$$v_m(Fp\\otimes s)=F(p\\otimes1)\\otimes\\pi^B_{X,m}(s),\\qquad w_m(F(p\\otimes s_0))=F(p\\otimes\\pi^B_{Y,m}(s_0))$$\nare chain maps and satisfy $b_{P,m}v_m=w_mb_P$. After restriction to $S_X$ along $\\pi^B_{X,m}$, let $t_m$ and $u_m$ be the transitions on these finite source and target complexes induced by $q^A,q^B$. They satisfy $b_{P,m}t_m=u_mb_{P,m+1}$. All these maps commute with differentials and are natural for chain maps $P\\to P'$. No projection or transition is required to be surjective and no coefficient map is required to be flat.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product; agent balanced reassociation and coefficient quotient/transition calculation (returned item Steps 4 and 5)."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-cochain-coefficient-arrows",
+  "def-weil-proetale-iso-sectionwise-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized extensionAdjunction of def-pur-cochain-coefficient-arrows. Compose two adjunctions and identify restriction along a composite ring map with successive restrictions. Uniqueness of left adjoints gives scalar reassociation. Evaluating the hom-equivalence on the normalized units proves z tensor (a tensor p) maps to z*i(a) tensor p.",
+   "uses": [
+    "def-pur-cochain-coefficient-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY and 03EK; normalized extension/restriction adjunction and balanced scalar extension."
+   }
+  },
+  {
+   "text": "Use the corresponding-object site equivalence to construct the module equivalence, exactly as in isoSectionwiseModuleInverseImage_exact. The ring isomorphisms and coefficient square identify scalar restriction before and after inverse image. Transpose this restriction square along the two scalar-extension adjunctions. This mate is invertible: precomposition with it induces bijections on morphisms into the essential image of the target equivalence. Its pure-tensor rule follows from the normalized units and the inverse coefficient action.",
+   "uses": [
+    "def-weil-proetale-iso-sectionwise-inverse-image",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-pur-cochain-coefficient-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY and 03EK; normalized extension/restriction adjunction and balanced scalar extension."
+   }
+  },
+  {
+   "text": "Compose the transported scalar isomorphism for i with reassociation for piA followed by i, using j followed by piB = piA followed by i. This gives bfin and its forward local formula. Apply the inverse to that formula with a=1 and s=cB(u), and cancel hom followed by inverse, to obtain the stated inverse local formula.",
+   "uses": [
+    "def-pur-cochain-coefficient-arrows"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY and 03EK; normalized extension/restriction adjunction and balanced scalar extension."
+   }
+  },
+  {
+   "text": "Construct the right quotient map by transposing the extension unit across the restriction-composition isomorphism, then use the transported restriction square. Its local rule is p tensor s mapped to p tensor piB(s). Define the left map as b followed by the right map followed by bfin inverse. The assumed normalization of b and compatibility of cS,cB with piB give the left local rule. Cancellation of bfin inverse followed by bfin gives the quotient square.",
+   "uses": [
+    "def-pur-cochain-coefficient-arrows"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY and 03EK; normalized extension/restriction adjunction and balanced scalar extension."
+   }
+  },
+  {
+   "text": "Construct the right transition in the same way for qB, and identify the successive scalar restrictions by piB(n+1) followed by qB = piB(n). Define the left transition by conjugating the right transition by the finite comparisons. The identity qB*i(n+1)=i(n)*qA and the inverse cB transport square show its value on every nested pure tensor. Cancellation proves the transition square.",
+   "uses": [
+    "def-pur-cochain-coefficient-arrows"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY and 03EK; normalized extension/restriction adjunction and balanced scalar extension."
+   }
+  },
+  {
+   "text": "All module constructions are natural transformations and natural isomorphisms. Apply Mathlib NatTrans.mapHomologicalComplex and NatIso.mapHomologicalComplex termwise, so naturality gives compatibility with differentials and with every chain map. Functor compositions can be normalized before lifting since the two presentations are definitionally equal. No boundedness, flatness or surjectivity is used.",
+   "uses": [
+    "def-pur-cochain-coefficient-arrows"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY and 03EK; normalized extension/restriction adjunction and balanced scalar extension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-cochain-coefficient-arrows",
+  "def-weil-proetale-iso-sectionwise-inverse-image",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 03EK; normalized extension/restriction adjunction and balanced scalar extension. Q7: normalized adjunction proof, 2026-10-24."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image tensor scalar extension comparison commutes with coefficient quotient maps and the transition maps of two coefficient towers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] {P : Algebra.Presentation R S ι σ} (R₀ : Type u_5) [inst_3 : CommRing R₀]\\n  [inst_4 : Algebra R₀ R] [inst_5 : Algebra R₀ S] [inst_6 : IsScalarTower R₀ R S] [inst_7 : P.Has\", \"doc\": \"For a multivariate polynomial $x$ over $R₀$, the inverse of the $R$-algebra isomorphism between $R \\\\otimes_{R₀} (R₀[\\\\iota]/I)$ and $S$ maps the evaluation of $x$ in the quotient ring to $1 \\\\otimes_{R₀\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.compEquiv_symm_inr\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"Given a homomorphism $ f $ between algebras $ P $ and $ P' $ with generators, this constructs the canonical homomorphism between their algebra extensions $ P.\\\\text{toExtension} $ and $ P'.\\\\text{toExte\"}\n  {\"name\": \"Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] {P : Algebra.Presentation R S ι σ} (R₀ : Type u_5) [inst_3 : CommRing R₀]\\n  [inst_4 : Algebra R₀ R] [inst_5 : Algebra R₀ S] [inst_6 : IsScalarTower R₀ R S] [inst_7 : P.Has\", \"doc\": \"The isomorphism between the tensor product $ R \\\\otimes_{R_0} (R_0[\\\\iota]/I) $ and the algebra $ S $ maps each element $ x \\\\otimes y $ to the product of the algebra map of $ x $ and the evaluation of t\"}\n  {\"name\": \"Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] {P : Algebra.Presentation R S ι σ} (R₀ : Type u_5) [inst_3 : CommRing R₀]\\n  [inst_4 : Algebra R₀ R] [inst_5 : Algebra R₀ S] [inst_6 : IsScalarTower R₀ R S] [inst_7 : P.Has\", \"doc\": \"For any element $x$ in the commutative ring $R$ and polynomial $y$ in the multivariate polynomial ring $R₀[\\\\iota]$, the tensor model homomorphism applied to $x \\\\otimes y$ equals the product of the can\"}\n  {\"name\": \"Algebra.TensorProduct.quotIdealMapEquivTensorQuot_symm_tmul\", \"module\": \"Mathlib/RingTheory/TensorProduct/Quotient\", \"type\": \"∀ {A : Type u_1} (B : Type u_2) [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (I : Ideal A) (b : B)\\n  (a : A),\\n  (Algebra.TensorProduct.quotIdealMapEquivTensorQuot B I).symm (b ⊗ₜ[A] (Ideal.Quotient.mk I) a) =\\n    Submodule.Quotient.mk (a • b)\", \"doc\": \"For commutative rings $ A $ and $ B $ where $ B $ is an $ A $-algebra, and for any ideal $ I $ of $ A $, the inverse of the algebra isomorphism between $ B / \\\\text{Ideal.map}(A \\\\to B)(I) $ and $ B \\\\ot\"}\n  {\"name\": \"QuotSMulTop.algebraMapTensorEquivTensorQuotSMulTop\", \"module\": \"Mathlib/RingTheory/QuotSMulTop\", \"type\": \"{R : Type u_3} →\\n  [inst : CommRing R] →\\n    (r : R) →\\n      (M : Type u_1) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            (S : Type u_2) →\\n              [inst_3 : CommRing S] →\\n                [inst_4 : Algebra R S] →\\n                  QuotSMulTop ((algebraMap R\", \"doc\": \"A linear equivalence between the quotient module $(S \\\\otimes_R M) / (\\\\text{algebraMap}(R,S)(r) \\\\cdot S \\\\otimes_R M)$ and the tensor product $S \\\\otimes_R (M / r \\\\cdot M)$, where $R$ is a commutative ri\"}\n  {\"name\": \"Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] {P : Algebra.Presentation R S ι σ} (R₀ : Type u_5) [inst_3 : CommRing R₀]\\n  [inst_4 : Algebra R₀ R] [inst_5 : Algebra R₀ S] [inst_6 : IsScalarTower R₀ R S] [inst_7 : P.Has\", \"doc\": \"For any multivariate polynomial $x$ over $R₀$, the composition of the tensor product model homomorphism with the polynomial evaluation map sends $x$ to $1 \\\\otimes_{R₀} \\\\overline{x}$, where $\\\\overline{\"}\n  {\"name\": \"TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/Quotient\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (I : Ideal R),\\n  ↑(TensorProduct.quotTensorEquivQuotSMul M I).symm ∘ₗ (I • ⊤).mkQ = (TensorProduct.mk R (R ⧸ I) M) 1\", \"doc\": \"For any ideal $ I $ of a commutative ring $ R $ and $ R $-module $ M $, the composition of the inverse of the canonical $ R $-module isomorphism $ (R/I) \\\\otimes_R M \\\\cong M/(I \\\\cdot M) $ with the cano\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the two-ring sheaf-complex finite comparisons and their quotient and transition squares"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"change\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the two-ring sheaf-complex finite comparisons and their quotient and transition squares"
+  },
+  {
+   "tool": "grep",
+   "query": "(tensor|extendScalars).*(quotient|transition)|(quotient|transition).*(tensor|extendScalars)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the two-ring sheaf-complex finite comparisons and their quotient and transition squares"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The balanced tensor comparison for inverse image of module sheaves is compatible with reduction in a commutative tower of coefficient rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \"(m : M) (n : N) : (cancelBaseChange R A B M N).symm (m ⊗ₜ n) = m ⊗ₜ (1 ⊗ₜ n)\", \"doc\": \"For modules $M$ and $N$ over a commutative semiring $R$, the inverse of the base change isomorphism $\\\\operatorname{cancelBaseChange}_{R,A,B,M,N}$ maps the tensor product $m \\\\otimes n$ to $m \\\\otimes (1\"}\n  {\"name\": \"IsBaseChange.tensorEquiv\", \"module\": \"Mathlib.RingTheory.IsTensorProduct\", \"type\": \"{f : M →ₗ[R] N} (hf : IsBaseChange S f) (P : Type*) [AddCommGroup P] [Module R P] [Module S P] [IsScalarTower R S P] :\\n  P ⊗[S] N ≃ₗ[S] P ⊗[R] M\", \"doc\": \"Given an $ R $-linear map $ f : M → N $ that satisfies the base change condition with respect to a ring homomorphism $ R → S $, and an $ S $-module $ P $ equipped with compatible $ R $-module and scal\"}\n  {\"name\": \"SheafOfModules.sheafificationCompPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  PresheafOfModules.sheafification (𝟙 S.val) ⋙ pullback.{v} φ ≅\\n    PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)\", \"doc\": \"The natural isomorphism asserting that composing sheafification with the pullback functor (along a ring sheaf morphism) is equivalent to composing the pullback functor (on presheaves) with sheafificat\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv\", \"module\": \"Mathlib.RingTheory.Kaehler.TensorProduct\", \"type\": \"[h : Algebra.IsPushout R S A B] : B ⊗[A] Ω[A⁄R] ≃ₗ[B] Ω[B⁄S]\", \"doc\": \"Let $R, S, A, B$ be commutative rings. Let $R \\\\to S$ and $R \\\\to A$ be ring homomorphisms giving $S$ and $A$ the structure of $R$-algebras. If $B$ is the pushout of $S$ and $A$ over $R$ (i.e., $B$ is i\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.cancelBaseChange\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": M ⊗[A] (A ⊗[R] N) ≃ₗ[B] M ⊗[R] N\", \"doc\": \"Let $R, A, B$ be commutative semirings, and let $A$ and $B$ be $R$-algebras. Let $M$ be an $A$-module and a $B$-module, such that the actions of $A$ and $B$ commute. Let $N$ be an $R$-module. Then the\"}\n  {\"name\": \"IsLocalization.moduleLid\", \"module\": \"Mathlib.RingTheory.Localization.BaseChange\", \"type\": \": A ⊗[R] M₁ ≃ₗ[A] M₁\", \"doc\": \"The tensor product of the $ R $-algebra $ A $ with an $ R $-module $ M_1 $ over $ R $ is canonically isomorphic to $ M_1 $ as an $ A $-module, via an $ A $-linear equivalence that respects the compati\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivBase\", \"module\": \"Mathlib.RingTheory.Kaehler.TensorProduct\", \"type\": \"[h : Algebra.IsPushout R S A B] : (S ⊗[R] Ω[A⁄R]) ≃ₗ[S] Ω[B⁄S]\", \"doc\": \"Let $R \\\\to S$ and $R \\\\to A$ be homomorphisms of commutative rings. If $B$ is the pushout of these maps (i.e., $B$ is isomorphic to the tensor product algebra $S \\\\otimes_R A$), then there is a natural \"}\n  {\"name\": \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \"{P : PresheafOfModules.{v} R₀} {F : SheafOfModules.{v} R}\\n  (g : P ⟶ (restrictScalars α).obj ((SheafOfModules.forget _).obj F)) :\\n  (SheafOfModules.toSheaf _).map ((sheafificationHomEquiv α).symm g) =\\n    (((sheafificationAdjunction J AddCommGrpCat).homEquiv P.presheaf ((SheafOfModules.toSheaf R).ob\", \"doc\": \"For a presheaf of modules $ M_0 $ over a presheaf of rings $ R_0 $, a sheaf of modules $ F $ over the sheafified ring $ R $, and a ring homomorphism $ \\\\alpha: R_0 \\\\to R $, the canonical bijection betw\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the two-ring sheaf-complex finite comparisons and their quotient and transition squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of scalar extension associativity for sheaf complexes gives quotient and transition commutative squares with explicit pure tensor formulas",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the composition of $ F $'s action on the inclus\"}\n  {\"name\": \"SheafOfModules.Presentation.mapRelations_mapGenerators_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a presentation $ P $ of a quasicoherent sheaf $ M $ over a sheaf of rings $ R $, a colimit-preserving functor $ F $ between categories of sheaves of modules, and a natural isomorphism $ \\\\eta $ r\"}\n  {\"name\": \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"For a functor $F$ between sheaf of modules categories over ring sheaves $R$ and $S$, the composition of $\\\\iota_{\\\\text{Free}}(i)$ with the inverse of $\\\\text{mapFree}(F,\\\\eta,I)$ followed by a morphism $\"}\n  {\"name\": \"SheafOfModules.ιFree_freeMap_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"For a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, given a function $ f : I \\\\to J $ between index types and an index $ i \\\\in I $, the composition of the $ i $-t\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.comp_val_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {X Y Z : SheafOfModules R} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  {Z_1 : PresheafOfModules R.val} (h : Z.val ⟶ Z_1),\\n  CategoryTheory.CategoryStruct.comp (CategoryTheory.\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and sheaves of modules $X, Y, Z$ over $R$, the composition of morphisms $f: X \\\\to Y$, $g: Y \\\\to \"}\n  {\"name\": \"SheafOfModules.Presentation.map_π_eq\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, the generator morphism of the pr\"}\n  {\"name\": \"SheafOfModules.pullback_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {D'' : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D''] {J : CategoryTheory.GrothendieckTopology C}\\n  {K :\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the two-ring sheaf-complex finite comparisons and their quotient and transition squares"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor|extendScalars",
+   "results": "[grep] OK 0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: module transitivity and presheaf tensor facts do not state the transported finite sheaf-complex comparisons and both coefficient squares"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transitivity of extension of scalars on sheaves of modules with compatibility for changing coefficient ring maps",
+   "results": "[leansearch] OK 8 hit(s): ModuleCat.extendScalars, ModuleCat.ExtendScalars.obj', ModuleCat.ExtendScalars.map', CommRingCat.moduleCatExtendScalarsPseudofunctor, AlgHom.extendScalars, ModuleCat.extendScalarsComp, ModuleCat.extendScalars_assoc, ModuleCat.ExtendScalars.map'_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: module transitivity and presheaf tensor facts do not state the transported finite sheaf-complex comparisons and both coefficient squares"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "[loogle] OK 10 hit(s): PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: module transitivity and presheaf tensor facts do not state the transported finite sheaf-complex comparisons and both coefficient squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf module base change transitivity (M tensor_R A) tensor_A B is M tensor_R B naturally with respect to coefficient maps",
+   "results": "[leanfinder] OK 8 hit(s): TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange, IsBaseChange.comp, IsBaseChange.of_comp, TensorProduct.AlgebraTensorModule.cancelBaseChange, TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul, LinearMap.baseChange_baseChange, IsBaseChange.comp_iff, isBaseChange_tensorProduct_map",
+   "date": "2026-10-22",
+   "verdict": "no match: module transitivity and presheaf tensor facts do not state the transported finite sheaf-complex comparisons and both coefficient squares"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|cancelBaseChange",
+   "results": "[grep] OK 25 hit(s): Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/LinearAlgebra/Dimension/Localization.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: module transitivity and presheaf tensor facts do not state the transported finite sheaf-complex comparisons and both coefficient squares"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-isomorphism-scalar-tensor-kflat-model",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "First cohomology-transport arrows in def-weil-global-geometric-frobenius: the integral inverse-image component has a coefficient-compatible ordinary tensor model (returned parent proof Steps 1–2 and the K-flat setup of Step 4). Extracted returned tensor-model proof Steps 4 and 5 (finite reassociation and quotient/transition diagrams).",
+   "via": [
+    "lem-weil-isomorphism-scalar-tensor-kflat-model",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-isomorphism-scalar-quotient-chain-squares",
+  "worker": "stage1",
+  "summary": "Rebased the retained seven-step split after the unpromoted side-completion return; re-read every current dependency and retained its applicable statement quotations. Made the A_(m+1) and B_(m+1) scalar actions in the transition construction explicit against the current bilinear-extension interface. Statement, route and recorded searches remain unchanged; no new nodes.",
+  "blueprint": "The first cohomology-transport arrows in def-weil-global-geometric-frobenius; supplies the finite reassociation and quotient/transition diagrams extracted as Steps 4–5 of lem-weil-isomorphism-scalar-tensor-kflat-model.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic isomorphism-of-sites section formula identifies corresponding objects; does not replace any unit step."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic bilinear extension through module sheafification handles the nested tensor; no statement of this unit replaces it."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic sheaf tensor universal property constructs maps and tests their equalities; no statement of this unit replaces it."
+   },
+   {
+    "node": "def-pc-tensor-complex-sheaves",
+    "why": "Definition of total tensor used with coefficients in degree zero; this is only a generic complex construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-e26c07610",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-e26c07610 (reviewer sub-agent of L); spot-checked: This re-delivers the unpromoted head 8247cc60, which an earlier reader reviewed with verdict FIX. The item is still unsplit in clones/live and side-live, and there is no repair note. Compared with 8247cc60, only Step 6 and split_report changed; Steps 1-5 and 7 are byte-identical, so the earlier FIX was lost. I read Stacks sites-modules.tex section-tensor-product (03EK, l.3551) and 0GMW (l.3606) with the Bilin display. I read the full statements of all six cited nodes. The bilinear-extension hypotheses hold with O=A or A_{m+1}, which are sheaves, G=B a sheaf and H via i or via i_m q^A. I rechecked every balancing identity: gamma=pi^B j=i alpha; ah=1 and ha=1; both v_m/w_m R relations; the X formulas via pi^B_X c_S=c_B F pi^B_Y; both squares; and the degree-0 total tensor, which gives d_P tensor 1 even for unbounded P. The new Step 6 is correct: the A_{m+1}-bilinearity through i_m q^A and q^B i_{m+1}=i_m q^A make the transition square commute without any surjectivity. Small cases tested: zero, the non-flat Z to Z/2, non-surjective transitions and m=1. The statement is true. Fault C4 (one, repairable): Steps 3 (ha=1) and 7 (chain-map and naturality equalities on the nested sources) prove equalities of maps out of the nested tensor (M tensor_R A) tensor_A B citing only the sheaf-tensor universal property. That needs the uniqueness clause of lem-pc-sites-module-sheafification-bilinear-extension. The FIX re-applies the earlier reader's Step 3/7 text over the new head and keeps the new Step 6 and split_report; proof_deps is unchanged and equals the union of uses. No duplicate found: lem-sfb-integral-augmented-quotient-towers covers a different setting, and lem-pd-sheaf-scalar-tensor-inverse-formulas is monoidality. The tool_uses are accepted as generic interfaces. No SGA is used and there are no new nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IsomorphismScalarQuotientChainSquares",
+  "declaration": "AlgebraicGeometry.ProEtale.ScalarQuotientChain.scalar_quotient_chain_squares",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.Coeff",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.forgetRing",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.moduleComplex",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.scalarExtend",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.scalarRestrict",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.pure",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.Tower",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.inverseRing",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.Transport",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.inverseModules",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.inverseComplex",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.left",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.right",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.finiteLeft",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.finiteRight",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.restrictedLeft",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.restrictedRight",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.doublePure",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.finitePure",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.leftPure",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.rightPure",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.UpperFormula",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.FiniteFormulas",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.QuotientFormulas",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.TransitionFormulas",
+   "AlgebraicGeometry.ProEtale.ScalarQuotientChain.scalar_quotient_chain_squares"
+  ],
+  "file": "lean/Sheaf/Paper/IsomorphismScalarQuotientChainSquares.lean",
+  "statement": "theorem scalar_quotient_chain_squares (b : left g d ≅ right g d)\n    (hb : UpperFormula g d b) :\n    ∃ (bfin : ∀ n : ℕ, finiteLeft g d n ≅ finiteRight g d n)\n      (v : ∀ n : ℕ, left g d ⟶ restrictedLeft g d n)\n      (w : ∀ n : ℕ, right g d ⟶ restrictedRight g d n)\n      (vtrans : ∀ n : ℕ, restrictedLeft g d (Nat.succ n) ⟶ restrictedLeft g d n)\n      (wtrans : ∀ n : ℕ, restrictedRight g d (Nat.succ n) ⟶ restrictedRight g d n),\n      FiniteFormulas g d bfin ∧ QuotientFormulas g d v w ∧\n      TransitionFormulas g d vtrans wtrans ∧\n      (∀ n : ℕ,\n        v n ≫ Functor.whiskerRight (bfin n).hom\n          (scalarRestrict.{t, r, max r (t + 1)} X (DX.piB n)) =\n          b.hom ≫ w n) ∧\n      (∀ n : ℕ,\n        vtrans n ≫ Functor.whiskerRight (bfin n).hom\n          (scalarRestrict.{t, r, max r (t + 1)} X (DX.piB n)) =\n          Functor.whiskerRight (bfin (Nat.succ n)).hom\n            (scalarRestrict.{t, r, max r (t + 1)} X (DX.piB (Nat.succ n))) ≫ wtrans n)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the canonical corresponding-object inverse-image model and the existing balanced scalar-extension functor, specialized with explicit independent universes. Tower and Transport only bundle the stated hypotheses. Positive level m is n+1; comparisons are natural B_X,m-linear cochain isomorphisms, with both inverse rules and quotient/transition natural-transformation squares. No flatness or surjectivity assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1386c065f",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of ea3f49d03a43. The item .lean is byte-identical (sha256 416fd16f). Compared with side-live and live, the item node changes only stmt_deps and lean. The theorem stmt_dep lem-weil-proetale-isomorphism-inverse-image is replaced by the new definition node def-weil-proetale-iso-sectionwise-inverse-image, and the theorem stays in proof_deps. The new node is existing:true on Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage; its primary statement is verbatim the isoSectionwiseInverseImage abbrev. It also owns isoSectionwiseModuleInverseImage (pushforward along inv c, so the action is c^-1, as the node states), proEtaleIsoPostcompose (re-exported) and two landed typing instances. Its 5 stmt_deps are landed definition nodes, and no duplicate definition node exists in live or side-live. Independent clause-by-clause re-read of the item Lean: Tower/Transport hypotheses, UpperFormula normalization, both finite rules (cB.inv forward, cB.hom inverse), the v/w formulas, both transition formulas and both square orientations all match the node; witnesses are pinned by sheafification and bilinear-extension uniqueness. Edge cases m=1, zero rings and complexes, unbounded P, independent universes. Only sorry; docstrings complete; report sections present. No compile run (no change made)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-5b90e",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261024T204644-L-3815491",
+  "kind": "interface",
+  "note": "independent cc review: delivered scalar_quotient_chain_squares proof and definitional normalizations (scalarExtend = extend unfolded via pull/extensionPullback.L; composite mapHomologicalComplex; Nat.succ) against the clone's CochainCoefficientArrows/CochainTensorCoherenceData, the node JSON and the change record; scratch #print axioms compiled"
+ }
+}

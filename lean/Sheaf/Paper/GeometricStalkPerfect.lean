@@ -82,8 +82,7 @@ private theorem coefficientRing_local
     ⟨fun a h ↦ h.map (ULift.ringEquiv : ULift.{u + 1, u} R ≃+* R).symm.toRingHom⟩
   exact RingHom.domain_isLocalRing ULift.ringEquiv.toRingHom
 
-attribute [-instance] WeilConjectures.pointReductionModuleDerived
-  WeilConjectures.scalarReductionSiteSmall in
+attribute [-instance] WeilConjectures.pointReductionModuleDerived in
 /-- Finite-coefficient pro-etale stalks have bounded finite-free models.
 Source: blueprint order 1825 (blueprint: fix-lem-finite-tor-perfect).
 Proof: exactness of the stalk identifies stalk cohomology with stalks of cohomology,
@@ -182,8 +181,7 @@ theorem finiteTorConstructible_proEtale_stalk_finiteFree
   exact ⟨Q, c, d, hQ₁, hQ₂, hQ,
     ⟨(T.mapDerivedCategoryFactors.app K).symm ≪≫ eQ⟩⟩
 
-attribute [-instance] WeilConjectures.pointReductionModuleDerived
-  WeilConjectures.scalarReductionSiteSmall in
+attribute [-instance] WeilConjectures.pointReductionModuleDerived in
 /-- The small-etale finite-coefficient assertion, with the actual derived-tensor
 Tor predicate on etale module sheaves.
 Source: blueprint order 1825 (blueprint: fix-lem-finite-tor-perfect).
@@ -283,8 +281,7 @@ noncomputable def fieldGeometricStalkComplex
     ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ).mapHomologicalComplex
       (ComplexShape.up ℤ)).obj K
 
-attribute [-instance] WeilConjectures.pointReductionModuleDerived
-  WeilConjectures.scalarReductionSiteSmall in
+attribute [-instance] WeilConjectures.pointReductionModuleDerived in
 /-- A rational-coefficient geometric stalk has a bounded finite-dimensional model
 and is perfect. The integral representative has only the recorded derived-complete
 constructibility condition; no finite-Tor hypothesis is added at field coefficients.
@@ -382,8 +379,7 @@ theorem rationalConstructible_stalk_perfect
   obtain ⟨P, a, b, ha, hb, hP, ⟨e⟩⟩ := hperf
   exact ⟨P, a, b, ha, hb, fun i ↦ (hP i).2, ⟨e⟩⟩
 
-attribute [-instance] WeilConjectures.pointReductionModuleDerived
-  WeilConjectures.scalarReductionSiteSmall in
+attribute [-instance] WeilConjectures.pointReductionModuleDerived in
 /-- The geometric stalk of the common-stage object represented by (E,K) has a bounded
 finite-dimensional model over the fixed algebraic closure and is perfect.
 Source: blueprint order 1825 (blueprint: fix-lem-finite-tor-perfect).

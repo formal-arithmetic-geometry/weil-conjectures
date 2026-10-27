@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.SectionLocalComparisonData
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.AffineSpace
+import Sheaf.Paper.SectionReesBaseChangeEtale
+import Sheaf.AlgebraicGeometry.SectionReesNoetherianGeometry
 
 /-! # Affine centred charts and their actual extended-Rees comparison maps
 
@@ -55,7 +57,8 @@ Proof: the section square is Cartesian, so closedness is stable under base chang
 theorem baseSectionClosed {V S T : Scheme.{u}} (g : V ⟶ S) (s : S ⟶ V)
     [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S) (b : T ⟶ S) :
     IsClosedImmersion (Scheme.Hom.baseChangeSection g s hs b) := by
-  sorry
+  exact MorphismProperty.of_isPullback
+    (Scheme.Hom.isPullback_baseChangeSection g s hs b).flip inferInstance
 
 /-- A map of the specified centred pairs carries the centre ideal into the new ideal.
 Source: sk-thm-dnc, Local construction, Rees maps
@@ -66,7 +69,11 @@ theorem pairIdeal {U X T : Scheme.{u}} (v : U ⟶ X) (r : T ⟶ X) (r' : T ⟶ U
     [IsClosedImmersion r] [IsClosedImmersion r'] (hr : r' ≫ v = r) :
     ∀ ⦃P : U.AffineZariskiSite⦄ ⦃Q : X.AffineZariskiSite⦄ (h : P.1 ≤ v ⁻¹ᵁ Q.1),
       (r.ker.siteIdeal Q).map (v.appLE Q.1 P.1 h).hom ≤ r'.ker.siteIdeal P := by
-  sorry
+  intro P Q h
+  apply (r.ker.ideal_map_appLE_le_ideal_comap v ⟨Q.1, Q.2⟩ ⟨P.1, P.2⟩ h).trans
+  apply Scheme.IdealSheafData.le_def.mp
+  rw [← Scheme.IdealSheafData.le_map_iff_comap_le,
+    Scheme.IdealSheafData.map_ker, hr]
 
 /-- The actual extended-Rees map on the open chart of the base-changed pair.
 Source: sk-thm-dnc, Local construction
@@ -173,7 +180,126 @@ theorem chartGeometry {V S : Scheme.{u}} [IsNoetherian S] (d : ℕ) (g : V ⟶ S
     [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g]
     (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S) (c : Chart d g s hs) :
     c.Geometry := by
-  sorry
+  have : Smooth g := SmoothOfRelativeDimension.smooth d g
+  have : IsClosedImmersion (Scheme.Hom.baseChangeSection g s hs c.b) :=
+    baseSectionClosed g s hs c.b
+  have : IsLocallyNoetherian c.T :=
+    isLocallyNoetherian_of_isOpenImmersion c.b
+  have : IsNoetherian c.T := ⟨⟩
+  have : IsLocallyNoetherian (pullback g c.b) :=
+    LocallyOfFiniteType.isLocallyNoetherian (pullback.snd g c.b)
+  have : IsNoetherian (pullback g c.b) := ⟨⟩
+  have : IsLocallyNoetherian c.U :=
+    isLocallyNoetherian_of_isOpenImmersion c.j
+  have : IsNoetherian c.U := ⟨⟩
+  have : SmoothOfRelativeDimension d (pullback.snd g c.b) := by
+    have := smoothOfRelativeDimension_isStableUnderBaseChange (n := d)
+    exact MorphismProperty.pullback_snd _ _ inferInstance
+  have : SmoothOfRelativeDimension d (c.j ≫ pullback.snd g c.b) := by
+    simpa using (smoothOfRelativeDimension_comp (n := 0) (m := d)
+      c.j (pullback.snd g c.b))
+  have hr : c.r ≫ (c.j ≫ pullback.snd g c.b) = 𝟙 c.T := by
+    rw [← Category.assoc, c.section_eq, Scheme.Hom.baseChangeSection_snd]
+  obtain ⟨_, _, _, _, _, _, hLine, hDBase, _, _, _, hqcDBase, _, hcompactDBase, _⟩ :=
+    SectionReesNoetherianGeometry.geometry d (pullback.snd g c.b)
+      (Scheme.Hom.baseChangeSection g s hs c.b)
+      (Scheme.Hom.baseChangeSection_snd g s hs c.b)
+  obtain ⟨_, _, _, _, _, _, _, hDU, _, _, _, _, _, hcompactDU, _⟩ :=
+    SectionReesNoetherianGeometry.geometry d (c.j ≫ pullback.snd g c.b) c.r hr
+  have := hLine
+  have := hDBase
+  have := hDU
+  have hopen := SectionReesBaseChange.etale d (pullback.snd g c.b)
+    (Scheme.Hom.baseChangeSection g s hs c.b)
+    (Scheme.Hom.baseChangeSection_snd g s hs c.b) c.j c.r hr
+    (c.section_eq.trans (Category.id_comp _).symm)
+    (IsPullback.of_vert_isIso_mono ⟨by simpa using c.section_eq⟩)
+  have hopenMap : SectionReesBaseChange.pairMap
+      (Scheme.Hom.baseChangeSection g s hs c.b) c.r c.j (𝟙 c.T)
+      (c.section_eq.trans (Category.id_comp _).symm) = c.reesOpen := by
+    unfold Chart.reesOpen
+    rfl
+  rw [hopenMap] at hopen
+  have hopenSep : IsSeparated c.reesOpen :=
+    MorphismProperty.of_isPullback (P := @IsSeparated) hopen.1.flip inferInstance
+  have := hopen.2.1
+  have := hopenSep
+  have : SmoothOfRelativeDimension d
+      (AffineSpace (ULift.{u} (Fin d)) c.T ↘ c.T) := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over (ULift.{u} (Fin d)) c.T
+  have hcoord := SectionReesBaseChange.etale d
+    (AffineSpace (ULift.{u} (Fin d)) c.T ↘ c.T)
+    (AffineSpace.zeroSection (ULift.{u} (Fin d)) c.T)
+    (AffineSpace.zeroSection_comp_over _ _) c.e c.r
+    (by rw [c.overE]; exact hr) c.centres.w c.centres
+  have hcoordMap : SectionReesBaseChange.pairMap
+      (AffineSpace.zeroSection (ULift.{u} (Fin d)) c.T) c.r c.e (𝟙 c.T) c.centres.w ≫
+      Scheme.Hom.deformationSpaceToAffineSpace (ULift.{u} (Fin d)) c.T =
+        c.reesCoordinates := by
+    unfold Chart.reesCoordinates
+    rfl
+  have hcoordSep : IsSeparated (SectionReesBaseChange.pairMap
+      (AffineSpace.zeroSection (ULift.{u} (Fin d)) c.T) c.r c.e (𝟙 c.T) c.centres.w) :=
+    MorphismProperty.of_isPullback (P := @IsSeparated) hcoord.1.flip inferInstance
+  have := hcoord.2.1
+  have := hcoordSep
+  have hcoordEtale : Etale c.reesCoordinates := by
+    rw [← hcoordMap]
+    infer_instance
+  have hcoordSeparated : IsSeparated c.reesCoordinates := by
+    rw [← hcoordMap]
+    infer_instance
+  have := hcoordEtale
+  have := hcoordSeparated
+  have hbase : IsPullback c.reesBase
+      (Scheme.Hom.deformationSpaceProj (pullback.snd g c.b)
+        (Scheme.Hom.baseChangeSection g s hs c.b))
+      (Scheme.Hom.deformationSpaceProj g s) (AffineSpace.map (ULift.{u} (Fin 1)) c.b) := by
+    unfold Chart.reesBase
+    apply Scheme.IdealSheafData.isPullback_deformationSpaceMap_proj
+      (sq := IsPullback.of_hasPullback g c.b)
+    intro x
+    obtain ⟨U, hU, hx, -⟩ := TopologicalSpace.Opens.isBasis_iff_nbhd.mp
+      (pullback g c.b).isBasis_affineOpens
+      (show x ∈ (⊤ : (pullback g c.b).Opens) from trivial)
+    exact ⟨⟨U, hU⟩, _, _, hx,
+      Scheme.IdealSheafData.isPushout_extendedReesPullbackData_imageSite _ _ _ _
+        (Scheme.Hom.ker_baseChangeSection g s hs c.b) _⟩
+  refine
+    { noethT := inferInstance
+      noethBase := inferInstance
+      noethU := inferInstance
+      noethLine := hLine
+      noethDBase := hDBase
+      noethDU := hDU
+      compactU := (NagataCompactification (c.j ≫ pullback.snd g c.b)).hasCompactification
+      compactDBase := hcompactDBase
+      qcDBase := hqcDBase
+      compactDU := hcompactDU
+      lftE := inferInstance
+      qcE := inferInstance
+      etaleDOpen := inferInstance
+      separatedDOpen := inferInstance
+      lftDOpen := inferInstance
+      qcDOpen := inferInstance
+      etaleDCoordinates := inferInstance
+      separatedDCoordinates := inferInstance
+      lftDCoordinates := inferInstance
+      qcDCoordinates := inferInstance
+      baseSquare := hbase
+      baseSections := ?_
+      openOver := ?_
+      openSections := ?_
+      coordinatesOver := ?_ }
+  · unfold Chart.reesBase
+    exact Scheme.Hom.deformationSpaceSection_comp_deformationSpaceMap_baseChangeSection
+      g s hs c.b
+  · simpa only [AffineSpace.map_id, Category.comp_id] using hopen.2.2.1.1
+  · simpa only [AffineSpace.map_id, Category.id_comp] using hopen.2.2.1.2.1
+  · rw [← hcoordMap, Category.assoc, Scheme.Hom.deformationSpaceToAffineSpace_over]
+    have hh := hcoord.2.2.1.1
+    rw [c.overE] at hh
+    simpa only [AffineSpace.map_id, Category.comp_id] using hh
 
 /-- The specified source comparison on an affine centred neighbourhood.
 Source: sk-thm-dnc, Local construction

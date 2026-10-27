@@ -1,0 +1,109 @@
+{
+ "id": "lem-sfb-derived-adjunction-cochain-unit",
+ "kind": "statement",
+ "title": "Cochain normalization of the canonical derived adjunction unit",
+ "statement": "Let C and D be abelian categories with derived categories, and suppose D has K-injective resolutions [def-weil-abstract-derived-category, def-sfb-right-derived-functor]. Let L:C→D and F:D→C be additive functors with L exact and a specified adjunction L⊣F. Write η for its ordinary unit, ηD for the unit of the canonical source-library adjunction L_D⊣RF, φ_E:L_D(QE)≅Q(LE) for the exact-functor factorization [lem-weil-pbc-exact-functor-derived-factorization], and γ_J:Q(FJ)→RF(QJ) for the universal cochain right-derived comparison. For every cochain complex E of C, ηD_(QE) followed by RF(φ_E.hom) equals Q(η_E) followed by γ_(LE). Here η_E is the unit of the termwise adjunction [lem-weil-pbc-termwise-adjunction-homotopy].",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0DVC and 09T5, canonical derived adjunction unit; Mathlib CategoryTheory.Adjunction.derivedη_fac_app, transported from the homotopy quotient to cochain complexes."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib derivedη_fac_app to the quotient of E in the homotopy category. Expand mapDerivedCategoryFactorsh_hom_app: the inverse component of mapHomotopyCategoryFactors is the identity, so its localized image cancels. Precompose the desired cochain equation with quotientCompQhIso(C).hom at E. Naturality of the derived unit moves this isomorphism past that unit. Postcompose the homotopy-category equation with RF of quotientCompQhIso(D).hom at LE, and cancel the inverse-hom pair introduced by the exact-functor factorization. Naturality of quotientCompQhIso transports the ordinary unit. The definition of rightDerivedFunctorUnitQ gives the remaining equality. These are all identities of the canonical constructions, not an existence assertion about some derived adjunction.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0DVC and 09T5; canonical normalization transported via quotientCompQhIso."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an exact additive left adjoint, the canonical derived adjunction unit on a cochain complex equals the ordinary unit followed by the right derived comparison",
+   "results": "8 hits: CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Adjunction.derived'_counit",
+   "date": "2026-10-26",
+   "verdict": "Mathlib derivedη_fac_app supplies the homotopy-category identity; transport through the canonical quotient comparison gives the cochain normalization proved here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedη_fac_app\"",
+   "results": "2 hits: CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+   "date": "2026-10-26",
+   "verdict": "Mathlib derivedη_fac_app supplies the homotopy-category identity; transport through the canonical quotient comparison gives the cochain normalization proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*unit.*cochain|derived_unit_cochain",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "Mathlib derivedη_fac_app supplies the homotopy-category identity; transport through the canonical quotient comparison gives the cochain normalization proved here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HypercoverDerivedUnitChainSquares",
+  "date": "2026-10-26",
+  "group": "A6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-hypercover-derived-unit-chain-squares",
+   "place": "Proof step 4: cochain normalization of the actual derived adjunction unit. Proved helper extracted after profiling; no new proof hole.",
+   "via": [
+    "lem-sfb-hypercover-derived-unit-chain-squares"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedAdjunctionCochainUnit",
+  "file": "lean/Sheaf/CategoryTheory/DerivedAdjunctionCochainUnit.lean",
+  "declaration": "CategoryTheory.derived_unit_cochain",
+  "statement": "theorem derived_unit_cochain\n    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]\n    [HasDerivedCategory C] [HasDerivedCategory D]\n    [Abelian.HasKInjectiveResolutions D]\n    {L : C ⥤ D} {F : D ⥤ C} [L.Additive] [F.Additive]\n    [PreservesFiniteLimits L] [PreservesFiniteColimits L]\n    (adj : L ⊣ F) (E : CochainComplex C ℤ) :\n    adj.mapDerivedCategoryRightDerivedAdjunction.unit.app (DerivedCategory.Q.obj E) ≫\n        F.rightDerivedFunctor.map (L.mapDerivedCategoryFactors.hom.app E) =\n      DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).unit.app E) ≫\n        F.rightDerivedFunctorUnitQ ((L.mapHomologicalComplex (.up ℤ)).obj E)",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-26",
+  "sorry_free": true
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T091058-L-3304495",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T091058-L-3304495",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

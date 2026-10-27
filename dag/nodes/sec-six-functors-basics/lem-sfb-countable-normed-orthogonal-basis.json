@@ -12,56 +12,54 @@
  ],
  "proof": [
   {
-   "text": "Prepend the prescribed vector $v_0\\ne0$ to a finite or countable spanning sequence of $V$ and process the resulting sequence in order, starting with $b_0=v_0$; the one-element family $b_0$ satisfies the orthogonality formula $\\|a_0b_0\\|=|a_0|\\|b_0\\|$. Inductively, suppose the retained vectors $b_0,\\ldots,b_{n-1}$ are linearly independent and satisfy $\\|\\sum_{i<n}a_ib_i\\|=\\max_{i<n}|a_i|\\|b_i\\|$, and let $W$ be their span. If the next sequence vector $x$ lies in $W$, discard it. Otherwise [lem-sfb-finite-ultrametric-best-approximation], applied to the finite-dimensional subspace $W$ and $x$, gives $w\\in W$ with $\\|x-w\\|=\\inf_{u\\in W}\\|x-u\\|$, and [lem-sfb-ultrametric-orthogonal-extension] shows that $b_n=x-w\\ne0$ and that $b_0,\\ldots,b_n$ again satisfy the orthogonality formula; retain $b_n$, so that the new span is $W+Ex$. Every finite subfamily of the retained family lies in one stage, so the whole family is linearly independent and satisfies the orthogonality formula on every finite subfamily. Each sequence vector lies in the span of the vectors retained up to its stage, so the retained family spans $V$. It is therefore an algebraic basis; its index set is $\\{0,\\ldots,d-1\\}$ with $d\\geq1$ when finitely many vectors are retained and $\\mathbf N$ otherwise.",
+   "text": "Prepend the prescribed vector to the spanning sequence. Recursively append the residual obtained by subtracting a nearest point in the span of the previous finite tuple, using [lem-sfb-finite-ultrametric-best-approximation]. Keep zero residuals temporarily. For u in the previous span and any scalar a, minimality applied to w-a^{-1}u gives ||a(x-w)|| <= ||u+a(x-w)|| when a is nonzero; a=0 is immediate. Applying ultrametricity to u=(u+a(x-w))-a(x-w) then proves ||u+a(x-w)||=max(||u||,|a| ||x-w||). The private residual_orthogonal lemma proves this directly, without the separately stated orthogonal-extension theorem. Induction gives the exact weighted maximum formula for every finite prefix. The nearest point lies in the previous span and s_n is the sum of its residual and nearest point, so the residual sequence spans every original generator. The first residual is v_0 since the initial span is zero.",
    "uses": [
-    "lem-sfb-finite-ultrametric-best-approximation",
-    "lem-sfb-ultrametric-orthogonal-extension"
+    "lem-sfb-finite-ultrametric-best-approximation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), geometric norm-coefficient projection: finite-dimensional best-approximation induction."
+    "place": "Paragraph (3), geometric norm-coefficient projection; finite-dimensional best-approximation induction and normalization supplied by the agent because the blueprint marks the exact reference WANTED."
    }
   },
   {
-   "text": "For any finitely supported coefficients, the orthogonality formula gives exactly\n$$\\left\\|\\sum_j a_jb_j\\right\\|=\\max_j |a_j|\\,\\|b_j\\|.$$ \nThis remains valid for the countable case because the support is finite and hence appears at one finite stage of the construction. The empty support gives the zero vector and maximum $0$.",
+   "text": "Extend the prefix formula to arbitrary finite supports by zero padding. Restrict to the subset I of natural indices with nonzero residuals. This restriction still spans, and the exact weighted maximum formula implies linear independence: if a finite linear combination is zero, each nonnegative term |a_i| ||t_i|| is zero, hence every coefficient is zero. Form its algebraic basis with Module.Basis.mk. Since 0 belongs to I, classify the countable nonempty index type as finite or countably infinite, use an equivalence to Iio d or all naturals, and compose with a transposition to put the prescribed vector at index zero. No completeness or infinite sum is used.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), geometric norm-coefficient projection: orthogonal finite-support norm formula."
+    "place": "Paragraph (3), geometric norm-coefficient projection; finite-dimensional best-approximation induction and normalization supplied by the agent because the blueprint marks the exact reference WANTED."
    }
   },
   {
-   "text": "Put $q=|\\ell|_E^{-1}>1$. For every basis vector $b_j$ with $j\\ne0$, choose an integer $m_j$ with $q^{m_j}\\le\\|b_j\\|<q^{m_j+1}$ and replace $b_j$ by $\\ell^{m_j}b_j$. The replacement preserves the basis and orthogonality, while its norm lies in $[1,q)$. The vector $b_0=v_0$ is left fixed. With $c=\\min(\\|b_0\\|,1)$ and $C=\\max(\\|b_0\\|,q)$, both finite and with $c>0$, the exact formula in the preceding step yields\n$$c\\max_j|a_j|\\le\\left\\|\\sum_j a_jb_j\\right\\|\\le C\\max_j|a_j|.$$",
+   "text": "Choose any scalar q in E with norm greater than one (NormedField.exists_one_lt_norm). For each basis vector except the first apply Mathlib rescale_to_shell with epsilon=||q||, obtaining a nonzero scalar d_j such that 1 <= ||d_j b_j|| < ||q||. Take d_0=1 and use Module.Basis.unitsSMul. Substitution of a_j d_j in the old orthogonality formula preserves the weighted maximum formula. Set c=min(||v_0||,1) and C=max(||v_0||,||q||). Every basis vector has norm in [c,C], c>0, and the weighted formula gives the asserted two bounds, with the empty support handled separately. This uses generic nontrivial normed-field rescaling rather than any special uniformizer construction.",
    "uses": [
     "def-weil-l-adic-coefficient-extension"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), geometric norm-coefficient projection: normalization by powers of the uniformizer and uniform constants."
+    "place": "Paragraph (3), geometric norm-coefficient projection; finite-dimensional best-approximation induction and normalization supplied by the agent because the blueprint marks the exact reference WANTED."
    }
   },
   {
-   "text": "The basis expansion is unique by linear independence. The exact norm formula implies each coefficient satisfies $|a_j|\\le c^{-1}\\|v\\|$. Therefore projection onto any subset of coordinates has norm at most $C/c$, and a map that sends each basis vector bijectively onto a subset of the basis has the same bound. If the subset is in bijection with the whole index set, the inverse has the analogous bound, so it is continuous as well. These estimates concern finite algebraic expansions only; no infinite series or completeness assertion is used.",
+   "text": "From the lower bound each coefficient satisfies |a_j| <= c^{-1}||v||. Ultrametricity bounds a finite sum of images of basis vectors by C times the largest coefficient whenever those images have norm at most C. Thus subset projections and injective basis relabelings have operator bound C/c and are continuous by LinearMap.mkContinuous. For a basis injection sigma, the coefficient family of the image is Finsupp.embDomain sigma of the original family, so its maximum dominates the original maximum. The lower image bound and upper domain bound give ||v|| <= (C/c)||f(v)||. ContinuousLinearMap.isUniformEmbedding_of_bound proves the final embedding clause, including continuity of the inverse onto the range.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), geometric norm-coefficient projection: continuity consequences of uniformly bounded finite-support coordinates."
+    "place": "Paragraph (3), geometric norm-coefficient projection; finite-dimensional best-approximation induction and normalization supplied by the agent because the blueprint marks the exact reference WANTED."
    }
   }
  ],
  "proof_deps": [
   "def-weil-l-adic-coefficient-extension",
-  "lem-sfb-finite-ultrametric-best-approximation",
-  "lem-sfb-ultrametric-orthogonal-extension"
+  "lem-sfb-finite-ultrametric-best-approximation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-  "place": "Paragraph (3), geometric norm-coefficient projection; finite-dimensional best-approximation induction and normalization supplied by the agent because the blueprint marks the exact reference WANTED."
+  "place": "Paragraph (3), geometric norm-coefficient projection; finite-dimensional best-approximation induction and normalization supplied by the agent because the blueprint marks the exact reference WANTED.; J5 Lean proof uses zero-padded nearest-point residual recursion, generic Mathlib shell rescaling, and explicit operator estimates."
  },
  "mathlib_searches": [
   {
@@ -221,5 +219,27 @@
   "group": "NF",
   "result": "pass",
   "note": "Snapshot node differs from live only in lean; the statement is verbatim in the file. Checked every clause against the node: spectralNorm.nontriviallyNormedField is the same spectral norm as def-weil-l-adic-coefficient-extension's coefficientExtensionAbsoluteValue (project convention); NormedAddCommGroup+NormedSpace+h_ultra give exactly definite, |a|-homogeneous, ultrametric; the ℕ-indexed spanning sequence covers finite and countable; no completeness; V≠0 follows from hv0; J=univ or Iio d with d≥1, b0=v0, 0<c≤C, two-sided NNReal-sup bounds (empty support gives 0), coord/subset-projection continuity, IsEmbedding for σ : J ↪ J covers basis-subset maps and the inverse on the coordinate subspace. Maths true (nearest point by local compactness, ultrametric residual orthogonality, ℓ-power rescaling, operator bounds C/c). Universes independent. No duplicate (Sheaf/WeilConjectures/Mathlib), no definition, sorry only, docstrings carry the source place (WANTED) and proof steps, not dropped, no repair note, report sections present. No compile (no fix). Advisory: NormedSpace/ directory vs existing Normed/Module/; possibly redundant Mathlib imports."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261023T123645-L-1229883",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

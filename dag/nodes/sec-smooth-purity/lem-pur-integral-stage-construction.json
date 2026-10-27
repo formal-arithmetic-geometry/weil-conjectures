@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-integral-stage-construction",
+ "kind": "statement",
+ "title": "Integral stages and scalar comparisons",
+ "statement": "The original integral_stage, coefficient_stage, fixed_coefficient_stage declarations of integral counit realization, with their unchanged hypotheses and conclusions: each supplied integral tower model yields a Stage recording the normalized Hom adjunction and fixed counit; the same model system yields coefficient comparisons and the square for every specified exceptional adjunction.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Purity transport Steps 1--4; relocation of the existing integral_stage, coefficient_stage, fixed_coefficient_stage declarations"
+ },
+ "stmt_deps": [
+  "def-pur-integral-counit-realization-data",
+  "def-sp-field-extension-integral-models",
+  "det-sp-field-extension-towers"
+ ],
+ "proof": [
+  {
+   "text": "Apply [det-sp-tower-gamma](2)--(3) and [det-sp-integral-adjunction-bijection]. They give the natural Hom bijection $B_{M,K}:\\operatorname{Hom}(FM,K)\\simeq\\operatorname{Hom}(M,HK)$, with the exact three tower comparisons displayed in the latter statement, and $g=\\gamma^H:J\\xrightarrow{\\sim}H$. Define\n$$\\Phi_{M,K}(h)=g_K^{-1}\\circ B_{M,K}(h),\\qquad \\Phi_{M,K}^{-1}(a)=\\varepsilon^H_K\\circ F(g_K\\circ a).$$\nThese maps are inverse since $B^{-1}(b)=\\varepsilon^H_K\\circ F(b)$. Naturality follows from naturality of $B,g$. Hence $\\Phi$ is the asserted adjunction $F\\dashv J$; its counit is $\\Phi^{-1}_{JK,K}(1)=\\varepsilon^H_K\\circ F(g_K)$ and its unit is $g_{FM}^{-1}\\circ\\eta^H_M$. This is the elementary transport of the given Hom bijections, with both directions explicitly fixed.",
+   "uses": [
+    "det-sp-tower-gamma",
+    "det-sp-integral-adjunction-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 2, realize the actual tower morphism and transport the Hom adjunction"
+   }
+  },
+  {
+   "text": "For any specified adjunction for the same left functor, apply det-sp-unique-right-adjoint. Its comparison delta from the realized right adjoint to the specified right adjoint preserves the counit. Functoriality then gives epsilon F(delta gammaH) = epsilonH F(gammaH), the fixed_counit equation. This calculation only uses the supplied adjunctions, not an existence theorem for a new right adjoint.",
+   "uses": [
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 3, counit-preserving identification with the chosen exceptional adjoint"
+   }
+  },
+  {
+   "text": "The supplied realized adjunction has its recorded finite unit and counit reduction equations by det-sp-integral-adjunction-bijection. The proved generic transported_unit_reduction and transported_counit_reduction formulas insert the same gammaH inverse or gammaH under reduction. These are exactly the finite unit and counit fields of Stage. No statement about a simultaneously chosen trace system is used by this construction.",
+   "uses": [
+    "det-sp-integral-adjunction-bijection",
+    "det-sp-tower-gamma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1--2 and 4, finite reductions and the reconstructed coherent family"
+   }
+  },
+  {
+   "text": "For $E\\subset F$ let $C_T=-\\otimes^L_{R_{E,T}}R_{F,T}$. Clause (1) of [det-sp-field-extension-towers] identifies this actual scalar functor and its tower reductions; clause (2) realizes the finite comparison maps and preserves $\\eta^H,\\varepsilon^H,g$. Let $b:C_YF_E\\simeq F_FC_X$, $s:C_XH_E\\simeq H_FC_Y$ and $a:C_XJ_E\\simeq J_FC_Y$ denote those comparisons. They satisfy $s\\,C_X(g_E)=g_Fa$ and $\\varepsilon^H_F\\circ F_F(s)\\circ b_{H_E}=C_Y(\\varepsilon^H_E)$. Substitution in $t^E=\\varepsilon^H_EF_E(g_E)$, using naturality of $b$, gives\n$$t^F\\circ F_F(a)\\circ b_{J_E}=C_Y(t^E).$$\nSubstitution in $g_E^{-1}\\eta^H_E$ gives the unit comparison. The same cited clause supplies transitivity for $E\\subset F\\subset L$. Finally form the counit-preserving comparisons $\\delta_E$ and $\\delta_F$ by [det-sp-unique-right-adjoint]. Their unit and counit equations show that conjugating the realized exceptional scalar comparison gives a comparison for the specified exceptional adjunctions, with the same left comparison. Substitute $\\gamma^T_E=\\delta_Eg_E$ in the purity square and cancel $\\delta_E^{-1}\\delta_E$. This proves compatibility with the actual maps. The same cancellation preserves the coefficient cocycles. No separate coefficient-uniqueness theorem is required.",
+   "uses": [
+    "det-sp-field-extension-towers",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Step 4, change of integral coefficients and Step 3, comparison to the fixed adjoint"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-sp-tower-gamma",
+  "det-sp-integral-adjunction-bijection",
+  "det-sp-unique-right-adjoint",
+  "det-sp-field-extension-towers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Existing complete Lean combination proof, relocated by J3 to keep every file below the compilation bound; no hypothesis, conclusion or public declaration name changes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integral_stage|coefficient_stage|condensed_stage|chart_realization|composition_realization",
+   "results": "Mathlib grep returned zero hits. The existing declarations and their proof arguments are retained from TransportIntegralCounitRealization. This node records relocation, not a new mathematical assertion.",
+   "date": "2026-10-27",
+   "verdict": "reuse existing proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TransportIntegralCounitRealization",
+  "date": "2026-10-27",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Purity transport Steps 1--4; relocation of the existing integral_stage, coefficient_stage, fixed_coefficient_stage declarations",
+   "via": [
+    "lem-pur-transport-integral-counit-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TransportIntegralStageConstruction",
+  "file": "lean/Sheaf/Paper/TransportIntegralStageConstruction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.TransportIntegralCounit.integral_stage",
+  "statement": "theorem integral_stage (E : FieldShriekSystem.Index P)\n    (m : FieldExtensionTowers.IntegralModel P D E j p d) :\n    Nonempty (Stage P D j p d E m)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.TransportIntegralCounit.integral_stage",
+   "AlgebraicGeometry.ProEtale.TransportIntegralCounit.coefficient_stage",
+   "AlgebraicGeometry.ProEtale.TransportIntegralCounit.fixed_coefficient_stage"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules against clone main (integral_counit_realization statement identical; relocated decls same names/namespaces/variable binders; item public-imports them; 0 importers); new holes against CondensedStage fields, tower_gluing and FiniteNormalization"
+ }
+}

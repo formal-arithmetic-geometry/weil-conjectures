@@ -1,0 +1,330 @@
+{
+ "id": "lem-coef-finite-free-system-restriction",
+ "kind": "statement",
+ "title": "Finite-free restriction preserves the system geometric adjunction calculus",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, and finite extensions $E\\subset L$ of $\\mathbf Q_\\ell$, with valuation rings $R\\subset S$, uniformizers $\\pi,v$, and ramification index $e$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. For $n\\ge1$ put $A_n=R/\\pi^n$ and $B_n=S/\\pi^nS=S/v^{en}$, with the actual quotient transitions. Fix one $R$-basis of $S$ and use its reductions at every level [lem-sfb-local-field-integral-basis]. On fixed small pro-etale sites of separated finite-type $k$-schemes $W$, let $\\mathscr S_{A,W}$ and $\\mathscr S_{B,W}$ be the abelian categories of strict semilinear module systems: objects are module sheaves $M_n$ with linear maps $M_{n+1}\\to\\operatorname{Res}M_n$, and morphisms are componentwise maps commuting with these transitions [def-weil-pbc-proetale-site, def-weil-size-convention, def-weil-scheme-morphism-properties, lem-coef-semilinear-derived-sections]. Use their ordinary unbounded derived categories. Let $U_W$ be termwise restriction from $B_\\bullet$ to $A_\\bullet$ and $T_W=-\\otimes^L_{A_\\bullet}B_\\bullet$ derived scalar extension [def-pc-sheaf-restrict-scalars, lem-pur-derived-change-of-rings].\n\nThe constant coefficient system $B_{\\bullet,W}$ is normalized as an $A_\\bullet$-system: the canonical maps $B_m\\otimes^L_{A_m}A_n\\to B_n$ are isomorphisms for every $m\\ge n$. Its levels are constructible and have Tor amplitude $[0,0]$, and every scheme pullback takes it to the corresponding constant system [def-coef-normalized-dvr-tower, def-weil-finite-torsion-constructibility, def-weil-finite-tor-amplitude].\n\nOn abelian system categories, ordinary extension $-\\otimes_{A_\\bullet}B_\\bullet$ and restriction are exact and adjoint, and restriction carries K-injective complexes to K-injective complexes [def-pur-kinjective-complex]. Their termwise localizations compute $T_W,U_W$. There is a derived adjunction $T_W\\dashv U_W$ whose bijection sends $a:T_WP\\to Q$ to $U_W(a)\\eta_P$, with unit $\\eta_P$ induced by $x\\mapsto x\\otimes1$ [lem-pur-sheaf-ring-derived-coefficient-adjunction].\n\nFor any scheme map $u:V\\to W$ between these schemes and any open immersion $j:V\\hookrightarrow W$, use the simultaneous system operations $u_C^*,Ru_{*,C},j_{!,C}$ for $C=A,B$ [def-sp-semilinear-constant-ring-operations]. The sectionwise restriction/direct-image identity and its pullback and open-adjunction mates induce natural isomorphisms\n$$U_Vu_B^*\\cong u_A^*U_W,\\qquad U_WRu_{*,B}\\cong Ru_{*,A}U_V,\\qquad U_Wj_{!,B}\\cong j_{!,A}U_V.$$\nThese specified comparisons preserve the geometric units and counits, the direct-image and open-extension compositors, and the intrinsic proper/open comparisons, including their clopen projectors [def-sf-semilinear-proper-open-comparisons, def-coef-semilinear-proper-open-mate]. For fixed compactifications, write $\\mathcal F_{h,C}=Rp_{*,C}j_{!,C}$ for the strict-system compact-support realizations and $\\gamma_{g,f,C}$ for the canonical proper/open compactification words formed in these simultaneous system categories [lem-sf-semilinear-proper-open-mate-pasting, thm-sf-comp-composition]. Here the proper/open square $pk=ir$, with top open $k$ and bottom open $i$, uses the well-typed right mate $J_iR_r\\to R_pJ_k$ of $P_pJ_i\\to J_kP_r$, and its inverse where the compactification word requires it; the scalar comparison does not assert any new invertibility of a proper/open map. Then $U\\mathcal F_{h,B}\\cong\\mathcal F_{h,A}U$, and under these comparisons $U(\\gamma_{g,f,B})=\\gamma_{g,f,A,U(-)}$ on normalized systems with bounded constructible finite-Tor levels. All compatibilities hold on entire derived systems before evaluation or inverse limit; no uniform bound in $n$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.proof.md",
+  "place": "paragraph 8, finite-free coefficient tensor: normalized coefficient tower and restriction compatibility of the simultaneous geometric adjunctions (returned item Step 2, first two paragraphs; Step 3 scalar adjunction); agent-formulated coherent-system obligation extracted from the reviewed split"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-scheme-morphism-properties",
+  "lem-coef-semilinear-derived-sections",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-sp-semilinear-constant-ring-operations",
+  "def-sf-semilinear-proper-open-comparisons",
+  "def-coef-semilinear-proper-open-mate",
+  "thm-sf-comp-composition",
+  "def-pur-kinjective-complex",
+  "lem-sfb-local-field-integral-basis",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "def-weil-pbc-integer-quotient-inclusions"
+ ],
+ "proof": [
+  {
+   "text": "Descend the given integral coordinate bijection modulo the principal uniformizer power. For injectivity, lift two tuples; equality of their images says their difference is pi^(n+1) times z. Expand z using the given basis; injectivity of the integral coordinates then says every coordinate difference is divisible by pi^(n+1). For surjectivity lift an upper residue and expand its integral lift. Associated uniformizers have equal principal ideals; taking powers gives ramifiedIdeal. This is the private quotient_basis_bijective proof and the ramifiedIdeal field in Lean.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the normalized scalar specialization to the reduced bases on every scheme, obtaining ScalarAssertions.",
+   "uses": [
+    "lem-coef-finite-free-system-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the geometric specialization to these scalar assertions, obtaining Geometry with Compatibility for the specified normalized generators.",
+   "uses": [
+    "lem-coef-finite-free-system-geometry"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the compactification comparison and composition word. Paste the gamma square, the open compositor square and the proper compositor square. Naturality moves the scalar comparisons past each factor; functoriality and associativity combine them into the asserted word equation. This calculation holds for every derived-system object, hence for the stated normalized levelwise constructible finite-Tor subclass. Assemble the unchanged Assertions structure.",
+   "uses": [
+    "def-coef-finite-free-system-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-finite-free-system-scalars",
+  "lem-coef-finite-free-system-geometry",
+  "def-coef-finite-free-system-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.proof.md",
+  "place": "Original proof Steps 2--5 and 6--12 split into independent scalar and geometric specializations; quotient arithmetic and compactification-word pasting proved directly in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"adjunction\"",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar adjunctions do not give strict-system geometric units/counits and compositors"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(injective|derived)|[Kk]Injective.*[Rr]estrict|[Rr]estrict.*[Kk]Injective",
+   "results": "0 hits: none; searched Mathlib/CategoryTheory/",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar adjunctions do not give strict-system geometric units/counits and compositors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free change of coefficient rings on strict semilinear systems: scalar restriction commutes with derived pushforward and preserves adjunction units counits and compositors",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.instIsRightAdjointRestrictScalars, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.instIsLeftAdjointRestrictScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.Counit.map",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar adjunctions do not give strict-system geometric units/counits and compositors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for finite free coefficient ring systems commutes with derived direct image and its adjunction",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an exact finite free extension of ring objects in a topos, restriction of scalars preserves K injective complexes and the derived geometric adjunction",
+   "results": "8 hits: Condensed.freeForgetAdjunction, LightCondensed.freeForgetAdjunction, comonadicExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.unit, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', ModuleCat.restrictCoextendScalarsAdj, ModuleCat.instIsRightAdjointRestrictScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar adjunctions do not give strict-system geometric units/counits and compositors"
+  },
+  {
+   "tool": "grep",
+   "query": "extendRestrictScalarsAdj|mateEquiv_hcomp|mateEquiv_vcomp",
+   "results": "22 hits: Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar adjunctions do not give strict-system geometric units/counits and compositors"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(injective|derived)|[Kk]Injective.*[Rr]estrict|[Rr]estrict.*[Kk]Injective",
+   "results": "0 hits: none; searched Mathlib/CategoryTheory",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits concern ordinary modules, free-sheaf pullback or abstract adjunction/mate calculus, not all clauses of this coherent semilinear-system assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for finite free ring systems commutes with derived geometric adjunctions",
+   "results": "8 hits: RestrictScalars, ModuleCat.restrictScalars, RestrictScalars.algebra, RestrictScalars.module, ModuleCat.RestrictScalars.obj', AlgHom.restrictScalars, RestrictScalars.isScalarTower, PresheafOfModules.restrictScalarsObj",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits concern ordinary modules, free-sheaf pullback or abstract adjunction/mate calculus, not all clauses of this coherent semilinear-system assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.Adjunction, CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk', CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.Adjunction.ofIsRightAdjoint",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits concern ordinary modules, free-sheaf pullback or abstract adjunction/mate calculus, not all clauses of this coherent semilinear-system assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free scalar restriction on modules over a ringed topos commutes with geometric pullback derived direct image extension by zero and preserves adjunction units counits",
+   "results": "8 hits: SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits concern ordinary modules, free-sheaf pullback or abstract adjunction/mate calculus, not all clauses of this coherent semilinear-system assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "adjoint.*[Kk]Injective|[Kk]Injective.*adjoint|extendRestrictScalarsAdj|mateEquiv_vcomp",
+   "results": "11 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; searched Mathlib/CategoryTheory",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits concern ordinary modules, free-sheaf pullback or abstract adjunction/mate calculus, not all clauses of this coherent semilinear-system assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact left adjoint implies that its right adjoint preserves K injective cochain complexes; exact scalar change localizes an adjunction",
+   "results": "8 hits: CochainComplex.isKInjective_of_injective_aux, CochainComplex.isKInjective_of_injective, CochainComplex.cm5b.instInjectiveXIntI, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CochainComplex.IsKInjective, CochainComplex.cm5b.I_X, CochainComplex.isKInjective_iff_rightOrthogonal, CochainComplex.IsKInjective.Qh_map_bijective",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits concern ordinary modules, free-sheaf pullback or abstract adjunction/mate calculus, not all clauses of this coherent semilinear-system assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-free-compact-composition",
+  "date": "2026-10-22",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-rational-operations",
+   "place": "paragraph 8, finite-free coefficient tensor: normalized coefficient tower and restriction compatibility of the simultaneous geometric adjunctions (returned item Step 2, first two paragraphs; Step 3 scalar adjunction)",
+   "via": [
+    "lem-coef-finite-free-compact-composition",
+    "lem-coef-dual-formula-scalar-transpose"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-coef-finite-free-system-restriction",
+  "worker": "stage1",
+  "summary": "Proved the whole-system assertion using one reduced integral basis, scalar adjunctions on the sequence ringed site, K-injective preservation, the generic derived adjoint-square comparison, and generator-by-generator proper/open mate pasting. Reused existing nodes throughout; no new obligation restates a clause. Corrected the referenced proper/open mate endpoints and specified the simultaneous-system compactification word.",
+  "blueprint": "lem-coef-rational-operations.proof.md paragraph 8: finite-free coefficient tensor and compatibility of geometric adjunction and compactification-composition maps before coefficient passage.",
+  "tool_uses": [
+   {
+    "node": "def-sf-semilinear-proper-open-comparisons",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "def-sp-semilinear-constant-ring-operations",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "def-weil-exact-derived-adjunction",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "def-weil-finite-tor-amplitude",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "def-weil-finite-torsion-constructibility",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-kun-derived-adjoint-square-comparison",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-sf-ambient-clopen-restriction-uniqueness",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-sf-semilinear-proper-open-mate-pasting",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-sfb-local-field-integral-basis",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic coefficient, ringed-site, exact-derived-adjunction or mate-calculus tool used for its stated conclusion in this sequence-site construction; it does not replace the unit biduality route."
+   },
+   {
+    "node": "lem-pur-finite-free-scalar-extension",
+    "why": "Generic finite-free scalar-extension identification U(P tensor S) = P^d on a small ringed site, used in Step 4 for exactness of ordinary scalar extension; recorded by reviewer Q136 FIX."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sf-semilinear-proper-open-comparisons",
+  "def-sp-semilinear-constant-ring-operations",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "lem-kun-derived-adjoint-square-comparison",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-ambient-clopen-restriction-uniqueness",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-sfb-local-field-integral-basis",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "prop-pur-kinjective-resolutions-exist",
+  "thm-sf-comp-composition",
+  "lem-pur-finite-free-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-58159ebb0",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-58159ebb0 (reviewer sub-agent of L); spot-checked: Read the item's 13 steps and every cited statement. The source is blueprint main-20261015 lem-coef-rational-operations.proof.md, paragraph 8 (finite-free scalar extension); the system calculus is an agent expansion and is recorded as such. The delivery creates no new nodes. Statement change, named in the report: (1) the basis is now cited to lem-sfb-local-field-integral-basis; (2) the stmt_dep lem-coef-finite-adjunction-diagram-realization is dropped. That node defines no compositor, and the new wording for gamma matches what the citers use (lem-pur-system-level-projection-formula-coherence, parent Step 3), so nothing is weakened. (3) The mate typing J_iR_r->R_pJ_k is corrected. def-coef-semilinear-proper-open-mate writes R_rJ_i->J_kR_p, which is well-typed only in diagrammatic order; the maintainer should note this. No cycle. Steps checked: basis reduction and pi=uv^e; normalization of a free module (Tor [0,0]); right-adjoint-preserves-kinjective needs an exact left adjoint, given by Step 4; every hypothesis of lem-kun-derived-adjoint-square-comparison (exact L, L0, V, W; adjunct-respecting a, c; the right-derivation hypothesis via kinjective-total-derived); open extension; compositors; clopen projector; alpha_Q and Gamma_Q via mate pasting. Refinement comparisons count as Gamma_Q of non-cartesian r=1 squares, per the mate-pasting statement. FIX (C1/C5): Step 4 asserted U^0T^0M = M^d with no citation. It now cites the existing lem-pur-finite-free-scalar-extension, which has no cycle and no trf/pd closure; uses, proof_deps and tool_uses are updated. Batch-5 flag: mate-pasting reaches lem-trf-adjoint-composition-coherence, which is pure adjunction-compositor associativity (status mathlib) and not part of the trace formula or Poincare duality, so it is accepted. The base citation of diagram-realization reached 1389 trf nodes, so the delivery shrinks that reach. Accepted the worker's 19 generic tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFreeSystemRestriction",
+  "declaration": "WeilConjectures.FiniteFreeSystemRestriction.finiteFreeSystemRestriction",
+  "declarations": [
+   "WeilConjectures.FiniteFreeSystemRestriction.Assertions",
+   "WeilConjectures.FiniteFreeSystemRestriction.finiteFreeSystemRestriction"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteFreeSystemRestriction.lean",
+  "statement": "theorem finiteFreeSystemRestriction (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (d : ℕ) (b : Fin d → Padic.coefficientExtensionIntegers l L) (_hb : Function.Bijective (fun a : Fin d → Padic.coefficientExtensionIntegers l E ↦ ∑ j, integralScalarIntegerInclusion l E L i (a j) * b j)) (ramification : ℕ) (_he : 0 < ramification) (_hram : Associated (integralScalarIntegerInclusion l E L i (Padic.coefficientExtensionUniformizer l E)) (Padic.coefficientExtensionUniformizer l L ^ ramification)) : Nonempty (Assertions l E L i D d b ramification)",
+  "branch": "sheaf-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The simultaneous strict-system operations and their intrinsic proper/open mates are used directly. Transparent helpers specify the actual ramified quotient map and the compactification word. Normalization ranges over all m >= n; constructible finite-Tor bounds are levelwise. The added landed definition dependency def-weil-pbc-integer-quotient-inclusions owns the canonical integralScalarIntegerInclusion used here; its module Sheaf.Paper.IntegralScalarExtensionWellDefined remains imported. The scalar-extension theorem is not a statement dependency. Repaired H2 of independent review 7ce4f7104ad0. H3: pre-existing data declarations move verbatim to FiniteFreeSystemRestrictionData, publicly re-exported here to permit independent scalar and geometric proof steps without an import cycle."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7da00faeb",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 7ce4f7104ad0 (H2). The Lean module is byte-identical to 7ce4. The item's stmt_deps replace theorem node lem-weil-integral-scalar-extension-well-defined with landed definition owner def-weil-pbc-integer-quotient-inclusions (existing:true record for integralScalarIntegerInclusion, on the base per blueprint-index; allowed by brief-stage2 line 177; no cycle). lean.note and report were updated; the live node is otherwise unchanged. Own reading of the full module: ScalarData is pinned (dependency model, x↦1⊗x unit, transpose), push is pinned by HEq to the identity on sections, pull is fixed by mateEquiv, derived push/open are mates with separate IsIso, gamma has endpoints J_j R_r → R_p J_k, compact word is genuine, Normalized covers all m≥n, Ctf/Tor bounds are levelwise, universes u/u+1 are kept. No hollow defs; sorry only in 3 documented theorems. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4aa84",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261026T023301-L-540319",
+  "kind": "interface",
+  "note": "independent cc review: delivered FiniteFreeSystemRestriction{,Data,Scalars,Geometry} vs live module (verbatim move except U/compactIso/compactCompositionWord, declared in change record); item proof vs Assertions; sorried lemmas vs original fields; nodes vs live"
+ }
+}

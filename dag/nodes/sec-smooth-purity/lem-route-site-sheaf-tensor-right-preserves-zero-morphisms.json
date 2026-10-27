@@ -1,0 +1,197 @@
+{
+ "id": "lem-route-site-sheaf-tensor-right-preserves-zero-morphisms",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-rationalization-karoubi",
+   "via": [
+    "lem-sf-filtered-coefficient-tensor-bounds",
+    "lem-weil-integral-scalar-extension-constructible"
+   ],
+   "place": "def-weil-rationalization-karoubi, final paragraph defining extension of coefficient fields from integral scalar extension; via lem-weil-integral-scalar-extension-constructible and lem-sf-filtered-coefficient-tensor-bounds, the sectionwise sheaf tensor must preserve zero maps to act on cochain complexes."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensor with a fixed right factor preserves zero morphisms.",
+ "statement": "Let $(\\mathcal C,J)$ be a site and let $A$ be a sheaf of commutative rings. Fix a universe of modules, independently of the site and ring universes, and assume the hypotheses of the attached Lean declaration, which make the underlying presheaf of rings of $A$ a sheaf and make module sheafification [def-weil-presheaf-modules-sheafification] available: $J$-sheaves of commutative rings remain sheaves after the forgetful functor to rings (in the ring universe), weak sheafification of abelian-group-valued presheaves exists in the module universe, and the morphisms inverted by sheafification of abelian-group-valued presheaves in the module universe are exactly the locally bijective morphisms. Let $N$ be a sheaf of $A$-modules [def-weil-sheaf-of-modules-category]. Let $T_N$ be the functor obtained by forgetting to presheaves, tensoring sectionwise with the underlying presheaf of $N$, and applying module sheafification [def-pur-sheaf-tensor-product]. Thus $T_N(M)=M\\otimes_A N$, and $T_N(f)$ is the sheafification of the presheaf map whose component at $U$ sends $x\\otimes y$ to $f_U(x)\\otimes y$. Then $T_N$ preserves zero morphisms: for all sheaves of $A$-modules $M,M'$, $T_N(0_{M,M'})=0_{T_N(M),T_N(M')}$. This is the functor `SheafOfModules.siteSheafTensorRight N` with the stated independent universes.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lem-sf-filtered-coefficient-tensor-bounds: the Lean of this node (its declaration uses) reaches SheafOfModules.siteSheafTensorRight_preservesZeroMorphisms, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/SiteTensorFunctoriality.lean, declaration SheafOfModules.siteSheafTensorRight_preservesZeroMorphisms (module Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality, lines 33-40, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For $M,M'$ as in the statement, the zero sheaf morphism has zero linear map on every section module, by the definition of module morphisms [def-weil-sheaf-of-modules-category]. Before sheafification its tensor with $\\mathrm{id}_N$ therefore sends $x\\otimes y$ to $0\\otimes y=0$ at every $U$ [def-pur-sheaf-tensor-product]. Here $0\\otimes y=0$ follows by expanding $(0+0)\\otimes y$ and cancelling. Every tensor is a finite sum of pure tensors by the construction of the module tensor product, so this linear map is zero. Equality componentwise is equality of presheaf morphisms; consequently the entire presheaf tensor map is zero.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, sites-modules-section-tensor-product; elementary zero-map calculation"
+   }
+  },
+  {
+   "text": "Write $a$ for module sheafification and $\\eta_P:P\\to aP$ for its unit [def-weil-presheaf-modules-sheafification]. For any zero presheaf morphism $z:P\\to Q$, naturality gives $a(z)\\circ\\eta_P=\\eta_Q\\circ z=0$. The zero module-sheaf morphism $0:aP\\to aQ$ has the same composite with $\\eta_P$. The unique-factorization clause of module sheafification, applied to the zero map $P\\to aQ$, gives $a(z)=0$. This proves the required zero preservation directly, without assuming sheafification is additive.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, sites-modules-lemma-sheafification-presheaf-modules, unique factorization"
+   }
+  },
+  {
+   "text": "By the definition of the sheaf tensor [def-pur-sheaf-tensor-product], $T_N(0)$ is sheafification of the presheaf map calculated in step 1. That map is zero, and step 2 shows its sheafification is zero. Hence $T_N(0_{M,M'})=0_{T_N(M),T_N(M')}$ for arbitrary $M,M'$, which is exactly preservation of zero morphisms.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, sites-modules-section-tensor-product, sheaf tensor definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03CY; elementary argument from the tensor construction and unique factorization, rather than a quoted zero-preservation theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'siteSheafTensorRight_preservesZeroMorphisms' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-25",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a sheaf of modules on a ringed site with a fixed right factor preserves zero morphisms",
+   "results": "PresheafOfModules.Sheafify.smul_zero, PresheafOfModules.Sheafify.zero_smul, PresheafOfModules.Monoidal.tensorObj, CategoryTheory.instZeroHomSheaf, PresheafOfModules.Monoidal.tensorObj_obj, PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.monoidalCategory, CategoryTheory.MonoidalPreadditive.zero_tensor",
+   "date": "2026-10-25",
+   "verdict": "no match for the full siteSheafTensorRight statement; related component facts only"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafification|Additive|map_zero",
+   "results": "16, 22, 141, 142, 221",
+   "date": "2026-10-25",
+   "verdict": "no match for the full siteSheafTensorRight statement; related component facts only",
+   "subdirectory": "Algebra/Category/ModuleCat/Presheaf/Sheafify.lean"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product functor of module sheaves preserves zero morphisms",
+   "results": "CategoryTheory.Functor.mapZeroObject, TensorProduct.map_zero_left, TensorProduct.map_zero_right, CategoryTheory.Functor.PreservesZeroMorphisms.mk, CategoryTheory.Functor.PreservesZeroMorphisms, LinearMap.rTensor_zero, LinearMap.lTensor_zero, CategoryTheory.MonoidalPreadditive.tensor_zero",
+   "date": "2026-10-25",
+   "verdict": "no match for the full siteSheafTensorRight statement; related component facts only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.PreservesZeroMorphisms, PresheafOfModules.sheafification",
+   "results": "loogle: unknown identifier 'Functor.PreservesZeroMorphisms'",
+   "date": "2026-10-25",
+   "verdict": "no match: loogle: unknown identifier 'Functor.PreservesZeroMorphisms'"
+  },
+  {
+   "tool": "grep",
+   "query": "siteSheafTensorRight|map_zero_left|instance.*Additive|sheafification.*Additive",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Category/ModuleCat/Ulift.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf.lean",
+   "date": "2026-10-25",
+   "verdict": "no match for the full siteSheafTensorRight statement; related component facts only",
+   "subdirectory": "Algebra/Category/ModuleCat"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.map_zero_left",
+   "results": "TensorProduct.map_zero_left",
+   "date": "2026-10-25",
+   "verdict": "no match for the full siteSheafTensorRight statement; related component facts only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of presheaves of modules sends zero module morphisms to zero, and tensoring a zero map with the identity is zero",
+   "results": "PresheafOfModules.Sheafify.zero_smul, PresheafOfModules.Sheafify.smul_zero, CategoryTheory.plusPlusSheaf_preservesZeroMorphisms, PresheafOfModules.zero_app, PresheafOfModules.Sheafify.one_smul, PresheafOfModules.Sheafify.mul_smul, PresheafOfModules.Sheafify.module, PresheafOfModules.Sheafify.map_smul_eq",
+   "date": "2026-10-25",
+   "verdict": "no match for the full siteSheafTensorRight statement; related component facts only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "siteSheafTensorRight is additive preserves zero morphisms",
+   "results": "TensorProduct.map_zero_right, CategoryTheory.Functor.preservesZeroMorphisms_of_additive, LinearMap.rTensor_zero, CategoryTheory.tensorRight_additive, CategoryTheory.tensoringRight_additive, CategoryTheory.instPreservesFiniteBiproductsTensorRight, CategoryTheory.Functor.preservesZeroMorphisms_of_isRightAdjoint, CategoryTheory.MonoidalPreadditive.zero_whiskerRight",
+   "date": "2026-10-25",
+   "verdict": "no match for the full siteSheafTensorRight statement; related component facts only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-sf-filtered-coefficient-tensor-bounds",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/SiteTensorFunctoriality.lean",
+  "declaration": "SheafOfModules.siteSheafTensorRight_preservesZeroMorphisms",
+  "declarations": [
+   "SheafOfModules.siteSheafTensorRight_preservesZeroMorphisms"
+  ],
+  "statement": "theorem siteSheafTensorRight_preservesZeroMorphisms\n    (N : SheafOfModules.{m} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) :\n    (siteSheafTensorRight N).PreservesZeroMorphisms := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-route-site-sheaf-tensor-right-preserves-zero-morphisms",
+  "worker": "stage1",
+  "summary": "Replaced provisional signature/docstring text by the complete ringed-site statement with independent universes and the attached Lean hypotheses. Three elementary steps compute the presheaf zero tensor map, prove sheafification sends zero to zero by uniqueness, and assemble. Searched project Lean, DAG, blueprint and Mathlib; no attachment or exact Mathlib match and no new nodes needed. Corrected source file from proetale.tex to sites-modules.tex.",
+  "blueprint": "Refines the coefficient-extension paragraph of the recorded ancestor through the two existing via nodes; retains the sheafified sectionwise tensor route of def-pur-sheaf-tensor-product (current blueprint sec-curve-estimates/sk-def-pbc-conventions). The recorded ancestor id has no file in the latest blueprint snapshot; its DAG statement supplies the inherited provenance. This is a generic zero-preservation calculation, not a change to any unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-f7fab9ec9",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-f7fab9ec9 (reviewer sub-agent of L); spot-checked: I read the whole item. It is a 3-step elementary split with no new nodes, and the mathematics is correct. Step 1: the zero sheaf morphism is zero on sections, 0⊗y=0, and pure tensors generate, so the presheaf tensor map is zero (cites def-weil-sheaf-of-modules-category and def-pur-sheaf-tensor-product). Step 2: naturality of the unit plus unique factorization (def-weil-presheaf-modules-sheafification = Stacks 03CY, sites-modules.tex:815) give a(0)=0. Step 3 assembles via 03EK (section-tensor-product, line 3551). I checked the Lean: TensorProductOfUniverses.lean:363-382 defines T_N as forget ⋙ siteTensorRight ⋙ sheafification(𝟙), so there is no change of rings. SiteTensorFunctoriality.lean:28-40 has the hypotheses and the sorry. Edge cases checked: empty site, zero ring, zero M/M'/N, one-object site. Duplicate search over the DAG with rg -L: lem-pc-tensor-action-additive-functor is a different statement and no other node states this. Two repairs in fixes/: (1) the item's source still pointed to proetale.tex with a route_nodes place text, although the report says it was corrected (B5); I set it to sites-modules.tex 03EK with 03CY. (2) The first statement sentence put the HasSheafCompose hypothesis in the module universe; I reworded it so each hypothesis has its correct universe, as in the Lean, with no change of content. No tool_uses were needed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261025T070919-L-4179277",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "SheafOfModules.siteSheafTensorRight_preservesZeroMorphisms",
+   "SheafOfModules.siteSheafTensorSecondMap_naturality",
+   "SheafOfModules.siteTensorSecondMap_naturality"
+  ],
+  "sorry_after": []
+ }
+}

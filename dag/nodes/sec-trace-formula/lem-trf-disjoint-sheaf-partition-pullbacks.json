@@ -1,0 +1,251 @@
+{
+ "id": "lem-trf-disjoint-sheaf-partition-pullbacks",
+ "kind": "statement",
+ "title": "Recognition of summand pullbacks from a disjoint sheaf partition",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and use the big fppf site [def-pc-fppf-site] and size convention [def-weil-size-convention]. Let $I$ be a small set, let $H$ and $(G_i)_{i\\in I}$ be sheaves of sets [def-weil-pbc-sites-and-cohomology], and let $c_i:G_i\\to H$ be sheaf morphisms. Assume that $c_i:G_i(V)\\to H(V)$ is injective for every $i,V$, and that, whenever $i\\ne j$, $s\\in G_i(V)$, $t\\in G_j(V)$ and $c_i(s)=c_j(t)$, the scheme $V$ is empty. Let $T$ be a site object, let $(T_i)_{i\\in I}$ be pairwise disjoint open and closed subschemes [def-weil-open-immersion] covering $T$, and let $a_i\\in G_i(T_i)$. There is a unique $a\\in H(T)$ satisfying $c_i(a_i)=a|_{T_i}$ for all $i$. For this $a$, if another clopen partition $(V_i)_{i\\in I}$ and sections $t_i\\in G_i(V_i)$ satisfy the same equations, then $V_i=T_i$ as open subschemes and $t_i=a_i$ after this identification. Put $h_W(Z)=\\operatorname{Mor}_S(Z,W)$. For each $i$, the map\n$$h_{T_i}(Z)\\longrightarrow\\{(b,s):b:Z\\to T,\\ s\\in G_i(Z),\\ c_i(s)=b^*a\\},\\qquad d\\longmapsto(\\iota_i d,d^*a_i)$$\nis a bijection natural in every site object $Z$, where $\\iota_i:T_i\\hookrightarrow T$ is the inclusion. Thus $h_{T_i}\\simeq h_T\\times_HG_i$ as presheaves, with the fibre product on $Z$ defined by the displayed set, and with $a:h_T\\to H$ given by $b\\mapsto b^*a$. For every $b:Z\\to T$, the inverse images $b^{-1}(T_i)$ and pullbacks of $a_i$ form the unique such partition and sections mapping to $b^*a$. These assertions allow empty pieces and $I=\\varnothing$.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0F15 (lemma-coproduct-sheaves-open-and-closed), omitted verification that the open represents the summand pullback, and Tag 02WO (lemma-representable-sheaf-coproduct-sheaves). Agent formulation for arbitrary sectionwise injective, pairwise disjoint sheaf morphisms with a supplied clopen partition, including uniqueness, restriction and converse gluing."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Every open covering occurring below is an fppf covering: its inclusions are etale by [lem-weil-pbc-open-immersion-etale], hence flat and locally of finite presentation by [def-weil-etale-morphism], and their images cover, as required by [def-pc-fppf-site]. In particular the empty family covers the empty scheme. The equalizer definition of sheaf [def-weil-pbc-sites-and-cohomology] then says that every set sheaf has exactly one section over an empty scheme: both products for that covering are singleton sets.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021L, definition-fppf-covering; morphisms.tex Tag 02GP, lemma-open-immersion-etale; sites.tex Tag 00VM, definition-sheaf-sets, and remark-sheaf-condition-empty-covering"
+   }
+  },
+  {
+   "text": "Set $u_i=c_i(a_i)\\in H(T_i)$. For $i\\ne j$ the intersection $T_i\\cap T_j$ is empty, so Step 1 makes the two restrictions of $u_i,u_j$ equal there; for $i=j$ they agree by functoriality. Applying the equalizer condition [def-weil-pbc-sites-and-cohomology] to the covering $(T_i\\to T)_i$ gives a unique $a\\in H(T)$ with $a|_{T_i}=u_i$. This uses no assertion about coproducts of sheaves.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VM, definition-sheaf-sets; the compatible-family formulation following the definition"
+   }
+  },
+  {
+   "text": "Suppose $(V_i,t_i)_i$ is another partition and family for this same $a$. On $W=T_i\\cap V_j$ the images of $a_i|_W$ and $t_j|_W$ in $H(W)$ are both $a|_W$. If $i\\ne j$, the disjointness hypothesis on $c_i,c_j$ forces $W$ to be empty. As the $V_j$ cover $T$, every point of $T_i$ therefore lies in $V_i$. Reversing the roles of the two partitions gives $V_i\\subseteq T_i$. Thus their underlying opens agree, and their open subscheme structures agree by [def-weil-open-immersion]. On this common scheme, $c_i(a_i)=a|_{T_i}=c_i(t_i)$; sectionwise injectivity of $c_i$ gives $a_i=t_i$.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0F15, lemma-coproduct-sheaves-open-and-closed, omitted verification; explicit comparison of two supplied partitions"
+   }
+  },
+  {
+   "text": "Fix a test scheme $Z$ and a pair $(b,s)$ in the displayed fibre set for index $i$. For every $j$, give the open subset $Z_j=b^{-1}(|T_j|)$ its open subscheme structure [def-weil-open-immersion]. The image of $b|_{Z_j}$ lies in $T_j$, so [lem-weil-pbc-morphism-factors-through-open-subscheme] gives a unique $S$-morphism $q_j:Z_j\\to T_j$ over $b$. The $Z_j$ cover $Z$. By naturality, in $H(Z_j)$ we have $c_i(s|_{Z_j})=(b^*a)|_{Z_j}=q_j^*(a|_{T_j})=c_j(q_j^*a_j)$. For $j\\ne i$ the disjointness hypothesis forces $Z_j$ to be empty. Hence $Z=Z_i$ as open subschemes, so $b(Z)\\subseteq T_i$. Apply the same factorization lemma to obtain the unique $d:Z\\to T_i$ with $\\iota_i d=b$. It is over $S$ since its composite with $T_i\\to T\\to S$ is the given structure map of $Z$. Finally $c_i(s)=b^*a=c_i(d^*a_i)$, so injectivity gives $s=d^*a_i$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0F15, lemma-coproduct-sheaves-open-and-closed: omitted verification that the open represents the summand pullback; schemes.tex Tag 01HI, lemma-restrict-map-to-opens"
+   }
+  },
+  {
+   "text": "Conversely, for $d:Z\\to T_i$, naturality gives $c_i(d^*a_i)=d^*c_i(a_i)=(\\iota_i d)^*a$, so the formula in the statement lands in the required fibre set. Step 4 recovers exactly $d$, by uniqueness of the factor through the inclusion; and Step 4 shows that every pair $(b,s)$ is the image of that recovered $d$. Thus this is a bijection. For any test morphism $r:Z'\\to Z$, the image of $dr$ is $(\\iota_i dr,(dr)^*a_i)=((\\iota_i d)r,r^*(d^*a_i))$, exactly the restriction of the image of $d$. The bijections are therefore natural. The maps $a:h_T\\to H$ and $a_i:h_{T_i}\\to G_i$ used here are the explicitly natural rules $b\\mapsto b^*a$ and $d\\mapsto d^*a_i$; the natural bijections give the claimed isomorphism of presheaves.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0F15, lemma-coproduct-sheaves-open-and-closed, omitted pullback verification; naturality and the two inverse formulas"
+   }
+  },
+  {
+   "text": "For an arbitrary $b:Z\\to T$, without a section $s$ prescribed, the inverse-image opens $Z_i=b^{-1}(|T_i|)$ are pairwise disjoint and cover $Z$. They are closed as well because their complements are inverse images of the open complements of $T_i$. With the maps $q_i:Z_i\\to T_i$ constructed in Step 4, their sections $q_i^*a_i$ satisfy $c_i(q_i^*a_i)=(b^*a)|_{Z_i}$. Step 3 applied on $Z$ proves uniqueness of this partition and these sections. Step 2 applied to any supplied partition on $Z$ proves the corresponding converse gluing. Empty pieces cause no exception by Step 1. If $I=\\varnothing$, the assumed covering of $T$ forces $T$ empty, its unique section is supplied by Step 1, partition uniqueness is vacuous, and there are no indices for the pullback assertions. Any $b:Z\\to T$ then has empty source, so the base-change assertion also holds.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tags 0F15 and 02WO, lemma-coproduct-sheaves-open-and-closed and lemma-representable-sheaf-coproduct-sheaves; restriction and empty-index cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-etale-morphism",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0F15 (lemma-coproduct-sheaves-open-and-closed), omitted verification, and Tag 02WO (lemma-representable-sheaf-coproduct-sheaves). Explicit argument for the supplied partition and pairwise disjoint injective maps; sheaf equalizer and open factorization read in sites.tex Tag 00VM and schemes.tex Tag 01HI."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(partition|[Cc]lopen).*(pullback|[Ss]heaf)|([Ss]heaf|pullback).*(partition|[Cc]lopen)",
+   "results": "{\"t\": \"2026-10-22T06:00:21Z\", \"tool\": \"grep\", \"query\": \"(partition|[Cc]lopen).*(pullback|[Ss]heaf)|([Ss]heaf|pullback).*(partition|[Cc]lopen)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic subobject-classifier pullbacks, Mayer-Vietoris squares and topological sheaf gluing do not identify these scheme-represented summand pullbacks for a supplied clopen partition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Disjoint injective maps of fppf sheaves and a given open closed partition imply cartesian summand squares, uniqueness and compatibility with base change",
+   "results": "{\"t\": \"2026-10-22T06:00:21Z\", \"tool\": \"leansearch\", \"query\": \"Disjoint injective maps of fppf sheaves and a given open closed partition imply cartesian summand squares, uniqueness and compatibility with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Function.Injective.sumMap\", \"IsOpenEmbedding.sumElim\", \"AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall\", \"Finset.Injective2_disjSum\", \"TopCat.Sheaf.isProductOfDisjoint\", \"Finset.map_disjUnion'\", \"TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk.inj\"], \"digest\": \"ee9d0aeac255f527\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic subobject-classifier pullbacks, Mayer-Vietoris squares and topological sheaf gluing do not identify these scheme-represented summand pullbacks for a supplied clopen partition."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsPullback\"",
+   "results": "{\"t\": \"2026-10-22T06:00:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"IsPullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isPullback_square_op_map_yoneda_presheafToSheaf_yoneda_iff\", \"CategoryTheory.Presheaf.isPullback_χ_truth\", \"CategoryTheory.Sheaf.isPullback_χ_truth\"], \"digest\": \"ec38b9a6960f8144\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic subobject-classifier pullbacks, Mayer-Vietoris squares and topological sheaf gluing do not identify these scheme-represented summand pullbacks for a supplied clopen partition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A clopen partition with sections mapped to a sheaf by disjoint monomorphisms is unique and represents the pullbacks of those monomorphisms",
+   "results": "{\"t\": \"2026-10-22T06:00:33Z\", \"tool\": \"leanfinder\", \"query\": \"A clopen partition with sections mapped to a sheaf by disjoint monomorphisms is unique and represents the pullbacks of those monomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.isProductOfDisjoint\", \"TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_right_as\", \"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Sheaf.existsUnique_gluing\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types\", \"TopCat.Presheaf.isGluing_iff_pairwise\", \"TopCat.Presheaf.SheafCondition.pairwiseToOpensLeCover_obj\"], \"digest\": \"bec8ad41a5929a03\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic subobject-classifier pullbacks, Mayer-Vietoris squares and topological sheaf gluing do not identify these scheme-represented summand pullbacks for a supplied clopen partition."
+  },
+  {
+   "tool": "grep",
+   "query": "(partition|[Cc]lopen).*(pullback|[Ss]heaf)|([Ss]heaf|pullback).*(partition|[Cc]lopen)",
+   "results": "{\"t\": \"2026-10-22T06:58:18Z\", \"tool\": \"grep\", \"query\": \"(partition|[Cc]lopen).*(pullback|[Ss]heaf)|([Ss]heaf|pullback).*(partition|[Cc]lopen)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern topological or Zariski sheaf gluing, generic classifier/Mayer-Vietoris pullbacks, or scheme coproduct geometry; none states the natural summand pullback bijection and partition uniqueness for arbitrary pairwise disjoint sectionwise injective fppf sheaf maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sectionwise injective disjoint morphisms of fppf sheaves and a clopen partition identify the summand fibre products with open subschemes",
+   "results": "{\"t\": \"2026-10-22T06:58:19Z\", \"tool\": \"leansearch\", \"query\": \"Sectionwise injective disjoint morphisms of fppf sheaves and a clopen partition identify the summand fibre products with open subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective\", \"AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall\", \"IsOpenEmbedding.sumElim\", \"AlgebraicGeometry.Scheme.Hom.toImage_app_injective\", \"CategoryTheory.Sheaf.locallyInjective\", \"AlgebraicGeometry.isSeparated_of_injective\", \"CategoryTheory.Sheaf.instHasFunctorialFactorizationLocallySurjectiveLocallyInjective\", \"CategoryTheory.Sheaf.IsLocallyInjective\"], \"digest\": \"bf1652b99bb60530\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern topological or Zariski sheaf gluing, generic classifier/Mayer-Vietoris pullbacks, or scheme coproduct geometry; none states the natural summand pullback bijection and partition uniqueness for arbitrary pairwise disjoint sectionwise injective fppf sheaf maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsPullback\"",
+   "results": "{\"t\": \"2026-10-22T06:58:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"IsPullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isPullback_square_op_map_yoneda_presheafToSheaf_yoneda_iff\", \"CategoryTheory.Presheaf.isPullback_χ_truth\", \"CategoryTheory.Sheaf.isPullback_χ_truth\"], \"digest\": \"ec38b9a6960f8144\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern topological or Zariski sheaf gluing, generic classifier/Mayer-Vietoris pullbacks, or scheme coproduct geometry; none states the natural summand pullback bijection and partition uniqueness for arbitrary pairwise disjoint sectionwise injective fppf sheaf maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A clopen partition and sections of pairwise disjoint subsheaves uniquely represent the pullback of each subsheaf to a scheme",
+   "results": "{\"t\": \"2026-10-22T06:58:29Z\", \"tool\": \"leanfinder\", \"query\": \"A clopen partition and sections of pairwise disjoint subsheaves uniquely represent the pullback of each subsheaf to a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\", \"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Sheaf.existsUnique_gluing\", \"TopCat.Sheaf.isProductOfDisjoint\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst\", \"TopCat.Sheaf.interUnionPullbackConeLift\"], \"digest\": \"aa8566024c8a8329\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern topological or Zariski sheaf gluing, generic classifier/Mayer-Vietoris pullbacks, or scheme coproduct geometry; none states the natural summand pullback bijection and partition uniqueness for arbitrary pairwise disjoint sectionwise injective fppf sheaf maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Disjoint subsheaves on a scheme and an open cover give unique gluing and a natural bijection between morphisms into each open piece and sections in the subsheaf",
+   "results": "{\"t\": \"2026-10-22T06:58:54Z\", \"tool\": \"leanfinder\", \"query\": \"Disjoint subsheaves on a scheme and an open cover give unique gluing and a natural bijection between morphisms into each open piece and sections in the subsheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Sheaf.existsUnique_gluing\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\", \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"TopCat.Sheaf.isProductOfDisjoint\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing\"], \"digest\": \"612bdcb6a10067d3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern topological or Zariski sheaf gluing, generic classifier/Mayer-Vietoris pullbacks, or scheme coproduct geometry; none states the natural summand pullback bijection and partition uniqueness for arbitrary pairwise disjoint sectionwise injective fppf sheaf maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fppf-sheaf-coproduct-partition",
+  "date": "2026-10-22",
+  "group": "Q01"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Support for the Tag 02WQ coproduct in the etale-relation quotient used in polarized scheme descent: the scheme-test decomposition needed to fill the omitted diagonal verification and to test the coproduct atlas. Historical ancestry through lem-trf-local-term-locality is retained. Re-split of the supporting fppf-partition argument: old proof steps 6, 7 and 8 (uniqueness, cartesian squares, arbitrary restriction and converse gluing).",
+   "via": [
+    "lem-trf-fppf-sheaf-coproduct-partition",
+    "lem-trf-algebraic-space-coproduct",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-disjoint-sheaf-partition-pullbacks",
+  "worker": "stage1",
+  "summary": "Filled the omitted Tag 0F15 verification in six explicit steps, reusing existing Mathlib leaves for open inclusions being etale and for unique factorization into an open. Proved gluing directly from the sheaf equalizer, compared competing partitions on intersections, constructed the inverse of the displayed bijection, checked its naturality by composition, and handled arbitrary restrictions and empty cases. No new nodes or statement changes.",
+  "blueprint": "Support for the Tag 02WQ coproduct in the etale-relation quotient used in polarized scheme descent: the scheme-test decomposition needed to fill the omitted diagonal verification and to test the coproduct atlas. Historical ancestry through lem-trf-local-term-locality is retained. Re-split of the supporting fppf-partition argument: old proof steps 6, 7 and 8 (uniqueness, cartesian squares, arbitrary restriction and converse gluing). This split realizes the supplied-partition recognition part by the direct Tag 0F15 omitted-verification argument; the inherited historical unit and ancestry are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-abca7ef95",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-abca7ef95 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The statement and stmt_deps are verbatim the statement-only node from the parent re-split (Q01 run 0e8e7be29ae8). Only the proof, proof_deps (equal to the union of uses), proof_origin, split_report, status and searches changed, and there are no new nodes. The source is Stacks spaces.tex Tag 0F15, lemma-coproduct-sheaves-open-and-closed, line 987, which omits the verification U'=U x_{F+G} F. The item writes out exactly that verification, as old parent steps 6/7/8, with nothing shortened. Step 1: open immersions are etale (leaf), hence flat and lfp (def-weil-etale-morphism), so open covers are fppf covers; the empty family covers the empty scheme, so every set sheaf has a singleton section there by the equalizer condition. Step 2: equalizer gluing, using T_i x_T T_j = T_i cap T_j, which is empty for i different from j. Step 3: on T_i cap V_j the two labels have equal images, so disjointness makes it empty; hence V_i=T_i, and injectivity gives t_i=a_i. Step 4: Z_j=b^{-1}T_j, q_j comes from the open-factorization leaf, and c_i(s|Z_j)=c_j(q_j^*a_j) forces Z_j empty for j different from i; so b=iota_i d, which is over S, and s=d^*a_i. Step 5: inverse by uniqueness of the factorization, naturality by composition, and the presheaf fibre product is the one the statement defines. Step 6: the inverse-image partition is clopen, Step 3 applies on Z, and I empty forces T empty. Every cited proof dependency is a definition or a Mathlib leaf, so the route is fine and no tool_uses are needed. Edge cases checked: I empty, empty pieces, empty Z, two-point T=pt+pt, infinite I. No duplicates: lem-trf-coproduct-equality-locus and lem-trf-coproduct-scheme-pullback state different results. No SGA citation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DisjointSheafPartitionPullbacks",
+  "declaration": "AlgebraicGeometry.Scheme.FppfPartition.disjoint_sheaf_partition_pullbacks",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.FppfPartition.openObject",
+   "AlgebraicGeometry.Scheme.FppfPartition.openInclusion",
+   "AlgebraicGeometry.Scheme.FppfPartition.openRestriction",
+   "AlgebraicGeometry.Scheme.FppfPartition.disjoint_sheaf_partition_pullbacks"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DisjointSheafPartitionPullbacks.lean",
+  "statement": "theorem disjoint_sheaf_partition_pullbacks {S : Scheme.{u}} {I : Type w} (H : Sheaf (Scheme.fppfTopology.over S) (Type (max u v))) (G : I → Sheaf (Scheme.fppfTopology.over S) (Type (max u v))) (c : ∀ i, G i ⟶ H) (_hinj : ∀ (i : I) (V : Over S), Function.Injective ((c i).hom.app (op V))) (_hdisj : ∀ (i j : I), i ≠ j → ∀ (V : Over S) (s : (G i).obj.obj (op V)) (t : (G j).obj.obj (op V)), (c i).hom.app (op V) s = (c j).hom.app (op V) t → IsEmpty V.left) (T : Over S) (U : I → T.left.Opens) (_hclosed : ∀ i, IsClosed (U i : Set T.left)) (_hpairwise : Pairwise (fun i j ↦ Disjoint (U i) (U j))) (_hcover : iSup U = ⊤) (a_i : ∀ i, (G i).obj.obj (op (openObject T (U i)))) : ∃ a : H.obj.obj (op T), (∀ i, (c i).hom.app (op (openObject T (U i))) (a_i i) = H.obj.map (openInclusion T (U i)).op a) ∧ (∀ a' : H.obj.obj (op T), (∀ i, (c i).hom.app (op (openObject T (U i))) (a_i i) = H.obj.map (openInclusion T (U i)).op a') → a' = a) ∧ (∀ (V : I → T.left.Opens), (∀ i, IsClosed (V i : Set T.left)) → Pairwise (fun i j ↦ Disjoint (V i) (V j)) → iSup V = ⊤ → ∀ (t : ∀ i, (G i).obj.obj (op (openObject T (V i)))), (∀ i, (c i).hom.app (op (openObject T (V i))) (t i) = H.obj.map (openInclusion T (V i)).op a) → ∀ i, V i = U i ∧ HEq (t i) (a_i i)) ∧ (∀ i, IsPullback (uliftYoneda.{v}.map (openInclusion T (U i))) (uliftYonedaEquiv.{v}.symm (a_i i)) (uliftYonedaEquiv.{v}.symm a) (c i).hom) ∧ (∀ (Z : Over S) (b : Z ⟶ T), (∀ i, IsClosed (b.left ⁻¹ᵁ U i : Set Z.left)) ∧ Pairwise (fun i j ↦ Disjoint (b.left ⁻¹ᵁ U i) (b.left ⁻¹ᵁ U j)) ∧ (⨆ i, b.left ⁻¹ᵁ U i) = ⊤ ∧ (∀ i, (c i).hom.app (op (openObject Z (b.left ⁻¹ᵁ U i))) ((G i).obj.map (openRestriction b (U i)).op (a_i i)) = H.obj.map (openInclusion Z (b.left ⁻¹ᵁ U i)).op (H.obj.map b.op a)) ∧ (∀ (V : I → Z.left.Opens), (∀ i, IsClosed (V i : Set Z.left)) → Pairwise (fun i j ↦ Disjoint (V i) (V j)) → iSup V = ⊤ → ∀ (t : ∀ i, (G i).obj.obj (op (openObject Z (V i)))), (∀ i, (c i).hom.app (op (openObject Z (V i))) (t i) = H.obj.map (openInclusion Z (V i)).op (H.obj.map b.op a)) → ∀ i, V i = b.left ⁻¹ᵁ U i ∧ HEq (t i) ((G i).obj.map (openRestriction b (U i)).op (a_i i))))",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The canonical open subscheme slice objects, inclusions and restrictions have real data. The presheaf IsPullback square is the natural displayed fibre-set bijection via the specified Yoneda maps. HEq compares sections after equality of the canonical open subschemes. Sheaf values in Type (max u v) (reviewer FIX 2026-10-22: was Type (u+1), which excluded Type u sheaves used by the citer lem-trf-fppf-sheaf-coproduct-partition); the partition index has independent universe w, including the empty index set.",
+  "fixed_by": "NT-stage2-cc-b403b37fd"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b403b37fd",
+  "group": "Q136",
+  "result": "fix",
+  "note": "Statement is faithful to node and Stacks 0F15/02WO: clauses checked (unique gluing, partition uniqueness, IsPullback orientation = natural fibre-set bijection, base change by b⁻¹U_i with uniqueness); edge cases I=∅, empty pieces, empty Z, large I hold; helpers have real data. Fault H3 universe too small: sheaves typed Type (u+1), excluding the Type (max u v)/Type u sheaves of the citer lem-trf-fppf-sheaf-coproduct-partition, which cites this item in its proof. FIX: universe u v w, Type (max u v), uliftYoneda.{v}/uliftYonedaEquiv.{v}; fixes/DisjointSheafPartitionPullbacks.lean compiled clean via nt_compile --json in 2.6 s; fixes/lem-trf-disjoint-sheaf-partition-pullbacks.lean-record.json updates statement and note, refit_record gives no refusals. Advisory: openObject/openInclusion/openRestriction are body-identical to the citer's fppfPartition* helpers; reuse would create an import cycle, so not a RETURN."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261023T105156-L-3520600",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.FppfPartition.disjoint_sheaf_partition_pullbacks"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,150 @@
+{
+ "id": "lem-sf-ringed-tensor-associator-detection",
+ "kind": "lemma",
+ "title": "Local pure triples determine a total-complex associator",
+ "statement": "Let J be a small site and R a commutative ring sheaf with independently sized coefficients; assume additive sheafification and the identification of its local equivalences with locally bijective maps [def-weil-size-convention, def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product]. For any integer cochain complexes P,Q,N of R-module sheaves, let a:Tot(Tot(P,Q),N)≅Tot(P,Tot(Q,N)) [def-coef-ringed-tensor-hom-model]. Assume that for every p+q=pq, q+t=qt, pq+t=n=p+qt, every site object V, and local sections x of P^p, y of Q^q, z of N^t, a in degree n maps the nested canonical tensor generator (x tensor y) tensor z to x tensor (y tensor z). Then the hom of a is exactly the native complex tensor associator hom. This statement needs no flatness or derived localization assumptions.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YN; local tensor sheafification and its generators use sites-modules.tex, Tags 03EK and 03EL."
+ },
+ "proof": [
+  {
+   "text": "A map from the iterated sheaf tensor is detected by its values on all local pure triples. Tensor the inner sheafification unit with the third module and sheafify. Tensor preserves local equivalences, so this map is invertible. Cancel it and the tensor/sheafification isomorphisms. Apply the sheafification adjunction and sectionwise threefold tensor extensionality; naturality of the unit and moduleTmul_map identify the tests with local pure triples.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN; local tensor sheafification and its generators use sites-modules.tex, Tags 03EK and 03EL."
+   }
+  },
+  {
+   "text": "Test the complex morphisms on every triple coproduct summand. The assumed generator formula for a and complexConstraints.associator give equal values on pure triples, so the detection criterion identifies their restrictions. Triple coproduct extensionality and degreewise extensionality identify the maps.",
+   "uses": [
+    "lem-sf-ringed-tensor-complex-constraints",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN; local tensor sheafification and its generators use sites-modules.tex, Tags 03EK and 03EL."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-module-tensor-generator-calculus",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YN; local tensor sheafification and its generators use sites-modules.tex, Tags 03EK and 03EL. Extracted as a proved helper of lem-sf-ringed-forget-tensor-associator-representatives."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from an iterated tensor product of sheaves of modules agree if they agree on all local pure tensor sections",
+   "results": "8 hits including ModuleCat.MonoidalCategory.tensor_ext₃', sectionwise tensor extensionality used after the sheafification adjunction; no exact sheaf detection theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps on an iterated tensor product of module sheaves are equal if they agree on all local pure triples",
+   "results": "8 hits include TensorProduct.ext_threefold and ModuleCat.MonoidalCategory.tensor_ext₃'; these are sectionwise and do not state the sheafification detection result.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor_ext₃\"",
+   "results": "4 hits for ModuleCat and SemimoduleCat tensor extensionality; used sectionwise after the sheafification adjunction.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensor_hom_ext₃|moduleTmul_associator",
+   "results": "Mathlib search: 0 hits. Repository rg finds the scalar-extension-specific scalarTensor_hom_ext₃ and moduleTmul_associator in ModuleTensorGenerators; the local tensor argument is specialized directly to the actual module sheaves.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedForgetTensorAssociatorRepresentatives",
+  "date": "2026-10-27",
+  "group": "G2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "A strict part of the representative associator proof.",
+   "via": [
+    "lem-sf-ringed-forget-associator-model-square",
+    "lem-sf-ringed-forget-tensor-associator-representatives",
+    "lem-sf-ringed-forget-tensor-coherence",
+    "lem-sf-ringed-forget-tensor-descent",
+    "lem-sf-ringed-forget-tensor-transposition",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedTensorAssociatorDetection",
+  "file": "lean/Sheaf/Algebra/Homology/RingedTensorAssociatorDetection.lean",
+  "declaration": "CategoryTheory.RingedForgetTensorTransposition.coefficientAssociator_eq_native",
+  "statement": "theorem coefficientAssociator_eq_native\n    (P Q N : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)\n    (a : (coefficientTotalTensor.{r, c, v} J R).obj\n        ((coefficientTotalTensor.{r, c, v} J R).obj (P, Q), N) ≅\n      (coefficientTotalTensor.{r, c, v} J R).obj\n        (P, (coefficientTotalTensor.{r, c, v} J R).obj (Q, N)))\n    (ha : ∀ (p q t pq qt n : ℤ) (hpq : p + q = pq) (hqt : q + t = qt)\n      (hn : pq + t = n) (hn' : p + qt = n) (V : Cᵒᵖ)\n      (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V) (z : (N.X t).val.obj V),\n      (a.hom.f n).val.app V\n        (coefficientTensorGenerator.{r, c, v} J R\n          ((coefficientTotalTensor.{r, c, v} J R).obj (P, Q)) N pq t n hn V\n          (coefficientTensorGenerator.{r, c, v} J R P Q p q pq hpq V x y) z) =\n      coefficientTensorGenerator.{r, c, v} J R P\n        ((coefficientTotalTensor.{r, c, v} J R).obj (Q, N)) p qt n hn' V x\n        (coefficientTensorGenerator.{r, c, v} J R Q N q t qt hqt V y z)) :\n    let := SheafOfModules.isMonoidal_W_independentCoefficients.{c, v, max c v r} R\n    let := SheafOfModules.monoidalCategory R\n    a.hom = (α_ P Q N).hom",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T131452-L-2939889",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T131452-L-2939889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

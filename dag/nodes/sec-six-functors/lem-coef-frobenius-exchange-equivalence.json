@@ -16,106 +16,24 @@
  ],
  "proof": [
   {
-   "text": "Write $h_T=g_T^{-1}$ for $T=X,Y$. The formula $g_T=\\operatorname{id}_{T_0}\\times\\operatorname{Spec}(\\gamma)$ in [def-weil-weil-sheaf-complex] gives $fg_X=g_Yf$, hence $fh_X=h_Yf$. For every integer $r$ give the underlying scheme $T$ the structure $a_Tg_T^r$ and denote it $T^{(r)}$. Then $g_T:T^{(r+1)}\\to T^{(r)}$ and $h_T:T^{(r-1)}\\to T^{(r)}$ are $k$-scheme isomorphisms, since the structure-map equations are literally $a_Tg_T^rg_T=a_Tg_T^{r+1}$ and $a_Tg_T^rh_T=a_Tg_T^{r-1}$. Also $f:X^{(r)}\\to Y^{(r)}$ is a $k$-morphism. Each twisted corner is $k$-isomorphic to its original corner and each twisted vertical map is conjugate to the original $f$, so their separated finite-type hypotheses are unchanged. The horizontal-isomorphism squares are Cartesian directly: if $fu=g_Yv$, the unique lift is $h_Xu$, since $f h_Xu=h_Yfu=v$ and $g_Xh_Xu=u$; replace $g$ by $h$ for the inverse square. The pro-etale sites, coefficient sheaves and pullbacks in [def-weil-proetale-inverse-image], and the compactification/derived-limit formulas of [def-weil-integral-rational-qbar-compact-support], use the underlying schemes and scheme morphisms, not their chosen structure maps to $\\operatorname{Spec}k$. Thus these identifications of the corners do not change the coefficient categories or the exchange constructions.",
+   "text": "Apply the existing theorem WeilConjectures.PodConstructibleMate.frobenius_exchanges_isIso from [lem-pod-constructible-mate-coherence] with the same finite-field datum, prime, finite coefficient extension, model morphism and chosen compactification. For its auxiliary common-stage field take the algebraic closure of Q_l, which has the canonical Q_l-algebra and algebraic-closure instances. Its hypotheses only require finite-type model schemes and a separated finite-type relative morphism; these are among the present hypotheses. Its first conjunct is literally the required IsIso of frobeniusRational at frobeniusCompactModel, so project that conjunct. No Weil structure, k-linearity or new input-domain hypothesis is introduced.",
    "uses": [
-    "def-weil-weil-sheaf-complex",
-    "def-weil-proetale-inverse-image",
-    "def-weil-integral-rational-qbar-compact-support"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-    "place": "Paragraph 1: semilinear Frobenius comparison, with the twisted corner structures made explicit"
-   }
-  },
-  {
-   "text": "On integral constructible objects the pullbacks along $g_T$ and $h_T$ are naturally identified with the exact termwise inverse images by [lem-weil-isomorphism-derived-pullback]. By [lem-weil-proetale-isomorphism-inverse-image], the latter are inverse equivalences of module sheaves and the structure maps identify the coefficient rings, compatibly with all finite reductions. In its section formula, successive inverse images evaluate a sheaf at $U\\to T\\xrightarrow{g_T}T\\xrightarrow{h_T}T$, or in the reverse order. Cancellation gives the identity comparisons, and cancellation of $g_T,h_T,g_T$ in either order gives their triangle compatibility. These comparisons remain the canonical pullback comparisons on completed objects: in [def-pur-integral-derived-operations] the same finite-reduction diagram computes pullback by a shifted cone of $1-s$ on products. Exact inverse image preserves products by the cited isomorphism lemma; it therefore carries the displayed product map, its cone differential and the reduction maps to the corresponding ones. Applying the cancellation comparisons to this one diagram preserves the same equalities, rather than inferring equality from separate reductions. Through the natural derived-pullback identifications these are inverse comparisons on the integral constructible categories.",
-   "uses": [
-    "lem-weil-isomorphism-derived-pullback",
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-pur-integral-derived-operations"
+    "lem-pod-constructible-mate-coherence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-    "place": "Paragraph 1: the Frobenius pullback equivalence and its coherent inverse"
-   }
-  },
-  {
-   "text": "Use the raw rationalization [def-weil-rationalization-karoubi]: every object has an integral representative, and morphisms are $\\operatorname{Hom}_{\\mathcal O_E}(-,-)\\otimes_{\\mathcal O_E}E$. The pullback morphism formula in [def-weil-derived-pullback-tensor-hom] extends the inverse comparisons and their identities in Step 2 by $\\mathcal O_E$-linearity. Put $P=Lg_Y^*$, $Q=Lh_Y^*$, $S=Lg_X^*$, $R=Lh_X^*$ on the rational constructible categories. Denote the resulting canonical comparisons by $u:QP\\xrightarrow{\\sim}\\mathrm{id}$, $v:PQ\\xrightarrow{\\sim}\\mathrm{id}$, $x:RS\\xrightarrow{\\sim}\\mathrm{id}$ and $y:SR\\xrightarrow{\\sim}\\mathrm{id}$. Their triangle identities read $Pu=vP$ and $Sx=yS$. Compact support has the required constructible target: [lem-sf-integral-compact-support-constructible] puts the integral derived-limit value in $D^b_c(Y,\\mathcal O_E)$, and [def-weil-integral-rational-qbar-compact-support] defines its rational value on that integral representative. Write this functor $F=Rf_!$. Consequently $PF$, $FS$, $QF$ and $FR$ are defined for every object of the raw $D^b_c(X,E)$. No choice of a Frobenius isomorphism on the representative is involved.",
-   "uses": [
-    "def-weil-rationalization-karoubi",
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-sf-integral-compact-support-constructible",
-    "def-weil-integral-rational-qbar-compact-support"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-    "place": "Paragraph 1: raw rational coefficient typing of the compact-support Frobenius comparison"
-   }
-  },
-  {
-   "text": "Supply compatible etale-origin witnesses for compact-support exchange. Let $K$ be an integral representative, or its pullback under $g_X$ or $h_X$, which is again integral constructible by Step 2. Its reductions $K_n$ are bounded intrinsically constructible. By clause (ii) of [lem-sf-proetale-constructible-origin], choose bounded constructible etale origins $L_n$ and isomorphisms $\\alpha_n:\\nu_X^*L_n\\xrightarrow{\\sim}K_n$. The datum $A=\\mathcal O_E$, $I=(\\varpi_E)$ satisfies the adic hypotheses: each quotient is finite and has the two-term finite free resolution $[A\\xrightarrow{\\varpi_E^n}A]$. Use one K-flat representative $P$ with flat terms, as in [def-pur-integral-derived-operations], to form all $K_n=P\\otimes_A A_{E,n}$ (with the completed coefficient sheaves understood). These are K-flat over $A_{E,n}$: tensoring with an acyclic $A_{E,n}$-complex is tensoring $P$ with that same acyclic complex restricted to $A$. The normalization maps are the balancing isomorphisms $(p\\otimes b)\\otimes a\\mapsto p\\otimes ba$; both composites for three quotients have this same formula, so they satisfy the quotient cocycle. Apply [lem-weil-pbc-normalized-etale-origin-witnesses] to these maps and chosen $L_n$. It supplies reduction-compatible witness isomorphisms for all levels. Thus every object on which we use compact-support exchange, including the inverse-square input, lies in its witnessed domain; no additional hypothesis on the rational object has been introduced.",
-   "uses": [
-    "lem-sf-proetale-constructible-origin",
-    "def-pur-integral-derived-operations",
-    "lem-weil-pbc-normalized-etale-origin-witnesses"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-    "place": "Paragraph 1: verification of the compatible etale-origin domain required by compact-support exchange"
-   }
-  },
-  {
-   "text": "Let $a:PF\\to FS$ be the specified exchange, and let $b:QF\\to FR$ be the exchange for the inverse horizontal square of Step 1. Naturality and identity/horizontal pasting on the completed and raw rationalized domains are precisely clauses (1) and (2) of [fix-lem-exchanges]. Pasting the $g$ square with the $h$ square gives an identity square; pasting in the other order also gives an identity square. With the canonical comparisons of Step 3 inserted, their two equations are\n$$ (bS)\\circ(Qa)=(Fx^{-1})\\circ(uF):QPF\\longrightarrow FRS,$$\n$$ (aR)\\circ(Pb)=(Fy^{-1})\\circ(vF):PQF\\longrightarrow FSR.$$\nFor the first pasting use the corners with $r=0,1,0$; for the opposite pasting use $r=1,0,1$. By Step 1 the repeated underlying scheme functors and exchange maps are the same ones. All input objects have integral representatives with bounded constructible reductions and a uniform interval; Step 3 supplies the output domain and Step 4 supplies the compatible etale-origin witnesses. We use only the compact-support naturality and pasting clauses, not the smooth-base-change clause or a general base-change invertibility theorem.",
-   "uses": [
-    "fix-lem-exchanges"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-    "place": "Paragraph 1: expansion of the inverse-square argument behind the Frobenius comparison"
-   }
-  },
-  {
-   "text": "Define a natural transformation $c:FS\\to PF$ by\n$$c=(PFx)\\circ(PbS)\\circ(v^{-1}FS).$$\nThe arrows have successive types $FS\\to PQFS\\to PFRS\\to PF$. Naturality of $v$ at $a_K:PFK\\to FSK$ gives $(v^{-1}FS)\\circ a=(PQa)\\circ(v^{-1}PF)$. The first equation of Step 5 then gives\n$$c\\circ a=P\\bigl((Fx)\\circ(bS)\\circ(Qa)\\bigr)\\circ(v^{-1}PF)\n=(PuF)\\circ(v^{-1}PF)=\\operatorname{id}_{PF},$$\nwhere the last equality is $Pu=vP$ from Step 3. This verifies one inverse equation with the actual canonical comparisons, not merely up to unspecified identifications.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-    "place": "Paragraph 1: explicit inverse to compact-support exchange, first inverse equation"
-   }
-  },
-  {
-   "text": "For the other equation, naturality of $a$ at $x_K:RSK\\to K$ gives $a\\circ(PFx)=(FSx)\\circ(aRS)$. Evaluate the second equation of Step 5 on $SK$ to obtain $(aRS)\\circ(PbS)=(Fy^{-1}S)\\circ(vFS)$. Therefore\n$$a\\circ c=(FSx)\\circ(Fy^{-1}S)\\circ(vFS)\\circ(v^{-1}FS)\n=F\\bigl((Sx)\\circ(y^{-1}S)\\bigr)=\\operatorname{id}_{FS},$$\nusing $Sx=yS$ from Step 3. Every factor defining $c$ is natural, so it is a natural inverse to the specified $a$, which is therefore a natural isomorphism on every $K\\in D^b_c(X,E)$. The entire construction uses $K$ and the two automorphism squares; it never asks for a map $Lg_X^*K\\to K$, so no Weil structure or stable integral lattice is required.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-    "place": "Paragraph 1: second inverse equation and conclusion for all rational constructible objects"
+    "document": "lean/Sheaf/Paper/ConstructibleMateCoherence.lean",
+    "place": "WeilConjectures.PodConstructibleMate.frobenius_exchanges_isIso, rational conjunct"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-weil-sheaf-complex",
-  "def-weil-proetale-inverse-image",
-  "def-weil-integral-rational-qbar-compact-support",
-  "lem-weil-isomorphism-derived-pullback",
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "def-pur-integral-derived-operations",
-  "def-weil-rationalization-karoubi",
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-sf-integral-compact-support-constructible",
-  "lem-sf-proetale-constructible-origin",
-  "lem-weil-pbc-normalized-etale-origin-witnesses",
-  "fix-lem-exchanges"
+  "lem-pod-constructible-mate-coherence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-  "place": "Paragraph 1: expanded proof of compact-support Frobenius exchange by coherent inverse pullbacks and identity-square pasting; the blueprint itself does not spell out this argument"
+  "document": "lean/Sheaf/Paper/ConstructibleMateCoherence.lean",
+  "place": "K4: reuse the existing stronger Frobenius exchange theorem; specialize its auxiliary field to AlgebraicClosure (Padic l) and project the rational conjunct. This replaces only the node-level inverse-square argument and preserves the six-operations unit and its Frobenius-comparison step."
  },
  "mathlib_searches": [
   {
@@ -241,14 +159,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-isomorphism-derived-pullback",
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "lem-sf-integral-compact-support-constructible",
-  "fix-lem-exchanges",
-  "lem-sf-proetale-constructible-origin",
-  "lem-weil-pbc-normalized-etale-origin-witnesses"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -276,5 +187,26 @@
   "result": "pass",
   "note": "Statement matches the node: IsIso of the landed canonical frobeniusRational over frobeniusCompactModel D f₀ c₀ for every c₀, on the full raw rational sfRationalConstructibleCategory, direction Lg_Y^*Rf_! → Rf_!Lg_X^*. Actual semilinear galois = geometricFrobenius maps, no k-linearity, Weil structure, lattice or witness assumed. Hypotheses (sep. finite type X₀, Y₀, f₀; l≠p; finite E/Q_l, Type u as in the dependencies) exact. Statement verbatim; docstrings carry source, blueprint tag and all 7 steps; sorry only. stmt_dep records identical to live; stmt_deps += landed def-weil-frobenius-square-exchange (justified). No duplicate found. Item not dropped. Compile: nt_compile clean 40.5 s at load ~250 (one earlier 60 s load timeout; lcompile 560 s clean). Advisory: NormalizedEtaleOriginWitnesses reached via FiniteCoefficientAdjointComparisons to get past the route-pivot gate's false attribution to dropped def-per-scalar-extension-unit; maintainer should clean that stale record."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261025T002517-L-3120671",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

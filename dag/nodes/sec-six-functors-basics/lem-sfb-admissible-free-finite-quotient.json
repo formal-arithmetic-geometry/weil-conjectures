@@ -1,0 +1,412 @@
+{
+ "id": "lem-sfb-admissible-free-finite-quotient",
+ "kind": "statement",
+ "title": "Admissible free finite-group quotient of a separated scheme",
+ "statement": "Let $M$ be a separated scheme over $\\operatorname{Spec}\\mathbf Z$ [def-pc-scheme, def-weil-affine-spectrum], in the universes of [def-weil-size-convention], and let $G$ be a finite abstract group acting on $M$ by scheme automorphisms. Set $G_T=\\coprod_{g\\in G}T$ for each scheme $T$. Suppose that the action is free: $(g,m)\\mapsto(gm,m)$ defines a monomorphism $G_{\\operatorname{Spec}\\mathbf Z}\\times M\\to M\\times M$, meaning injectivity on sections over every test scheme. Suppose every point orbit of $G$ in $|M|$ lies in an affine open subscheme [def-weil-open-immersion]. The fppf sheafification [def-pc-fppf-site, def-weil-pbc-sheafification] of the orbit presheaf $T\\mapsto M(T)/G_T(T)$ is represented by a separated scheme $Q$, where separated means that the absolute diagonal is a closed immersion [def-weil-closed-immersion]. The map $q:M\\to Q$ is finite etale and surjective [def-weil-finite-integral-morphism, def-weil-etale-morphism, def-weil-surjective-morphism], and the action map identifies $G_{\\operatorname{Spec}\\mathbf Z}\\times M$ with $M\\times_QM$ [def-pc-fibre-product]. For every scheme $T\\to Q$, $M\\times_QT\\to T$ represents the fppf orbit quotient of the base-changed action. Every $G$-invariant map from $M$ to an fppf sheaf factors uniquely through $Q$. For every algebraically closed field $\\Omega$ [def-weil-algebraic-closure], $q$ identifies $Q(\\Omega)$ with the set of $G$-orbits in $M(\\Omega)$. If $M$ is quasi-compact (every open cover has a finite subcover), then $Q$ is quasi-compact. No Noetherianity, finite-type hypothesis on $M$, or invertibility of $|G|$ is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 07S6 (proposition-finite-flat-equivalence-global), finite constant free-action case; Tag 0BBM (lemma-quotient-separated), (4). The finite etale torsor and geometric orbit clauses are the constant-group specialization of the relation identity in 07S6."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-size-convention",
+  "def-weil-open-immersion",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-surjective-morphism",
+  "def-pc-fibre-product",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "Given an affine open U containing the point orbit of x, take the intersection W of a(g) inverse-image U over all g in G. Each translate is affine, and finite intersections of affine opens of a separated scheme are affine (Mathlib IsAffineOpen.iInf). Every orbit point lies in W. Reindexing the finite intersection by right multiplication proves a(g) inverse-image W = W. This proves the hypothesis of the invariant-affine presentation lemma without the general finite locally free groupoid shrinking theorem.",
+   "uses": [
+    "lem-weil-pbc-separated-affine-open-intersection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 (proposition-finite-flat-equivalence-global), finite constant free-action case; Tag 0BBM (lemma-quotient-separated), (4). The finite etale torsor and geometric orbit clauses are the constant-group specialization of the relation identity in 07S6."
+   }
+  },
+  {
+   "text": "Apply the invariant-affine presentation lemma to obtain Q, q, etaleness, surjectivity, and the exact action kernel-pair square.",
+   "uses": [
+    "lem-sfb-admissible-free-finite-quotient-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 (proposition-finite-flat-equivalence-global), finite constant free-action case; Tag 0BBM (lemma-quotient-separated), (4). The finite etale torsor and geometric orbit clauses are the constant-group specialization of the relation identity in 07S6."
+   }
+  },
+  {
+   "text": "The fold coproduct_G M to M is finite by the finite sigmaDesc instance. The pullback of q by itself is isomorphic to this fold through the specified kernel pair, hence finite. The etale surjection q is a singleton fppf and thus fpqc covering. Apply isFinite_of_fpqc_cover to this cover to descend finiteness to q.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-finite-integral-morphism",
+    "def-pc-fppf-site",
+    "lem-weil-pbc-fpqc-descend-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 (proposition-finite-flat-equivalence-global), finite constant free-action case; Tag 0BBM (lemma-quotient-separated), (4). The finite etale torsor and geometric orbit clauses are the constant-group specialization of the relation identity in 07S6."
+   }
+  },
+  {
+   "text": "Finite q is proper and universally closed. Apply separatedness descent along a surjective universally closed map to the terminal structure maps of M and Q. This proves Q.IsSeparated.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-surjective-universally-closed-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 (proposition-finite-flat-equivalence-global), finite constant free-action case; Tag 0BBM (lemma-quotient-separated), (4). The finite etale torsor and geometric orbit clauses are the constant-group specialization of the relation identity in 07S6."
+   }
+  },
+  {
+   "text": "For any fppf sheaf F, apply its singleton-cover sheaf axiom to q. Yoneda identifies a transformation h_M to F with a section of F(M); the kernel-pair lift proves compatibility of its local sections. Existence and uniqueness of gluing give unique descent of every equalizing transformation. The presheaf coequalizer universal property now constructs eta and proves its required bijectivity for every F. No representable descent theorem or general FppfKernelPairQuotientDescent declaration is used.",
+   "uses": [
+    "def-pc-fppf-site",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 (proposition-finite-flat-equivalence-global), finite constant free-action case; Tag 0BBM (lemma-quotient-separated), (4). The finite etale torsor and geometric orbit clauses are the constant-group specialization of the relation identity in 07S6."
+   }
+  },
+  {
+   "text": "Construct the two base-changed relation maps by pullback.lift, with all four required projection equations. The pullback universal property proves that they form the kernel pair of the base-changed q. The latter is an fppf cover by stability of flatness, local finite presentation and surjectivity. Apply the singleton-cover descent and coequalizer argument from the preceding step. For groupwise invariant maps, use sheaf separatedness for the open cover of the relation by its G-summands to prove equality on the entire relation, including disconnected tests; then apply the same descent.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-fppf-site",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 (proposition-finite-flat-equivalence-global), finite constant free-action case; Tag 0BBM (lemma-quotient-separated), (4). The finite etale torsor and geometric orbit clauses are the constant-group specialization of the relation identity in 07S6."
+   }
+  },
+  {
+   "text": "A finite surjection lifts every algebraically closed field point by exists_comp_eq_of_isFinite_of_surjective. Equal images give a point of the kernel pair. Every map from Spec of a field into the coproduct factors through a single summand: its spectrum has one point, and that summand is an open immersion containing the entire image. The projection equations give y=a(g)x. Conversely compose the kernel-pair equality with the g-summand to show invariance of q.",
+   "uses": [
+    "lem-sc-finite-nonempty-point",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 (proposition-finite-flat-equivalence-global), finite constant free-action case; Tag 0BBM (lemma-quotient-separated), (4). The finite etale torsor and geometric orbit clauses are the constant-group specialization of the relation identity in 07S6."
+   }
+  },
+  {
+   "text": "A continuous surjection from compact M makes Q compact by the usual pullback-of-open-covers argument (Surjective.compactSpace).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 (proposition-finite-flat-equivalence-global), finite constant free-action case; Tag 0BBM (lemma-quotient-separated), (4). The finite etale torsor and geometric orbit clauses are the constant-group specialization of the relation identity in 07S6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-sfb-admissible-free-finite-quotient-presentation",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-finite-integral-morphism",
+  "def-pc-fppf-site",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-weil-pbc-finite-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-surjective-universally-closed-separated",
+  "def-weil-pbc-sheafification",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sc-finite-nonempty-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 07S6 and 07S7: invariant affine construction isolated in lem-sfb-admissible-free-finite-quotient-presentation; remaining clauses formally proved using fpqc finiteness descent, surjective closed separatedness descent, singleton fppf sheaf gluing, pullback universal properties, and finite geometric-point lifting. The finite-translate intersection uses separatedness instead of Groupoids 03JE."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.flat.equivalence|quotient.*[Ss]cheme|[Ss]cheme.*quotient",
+   "results": "11 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme separation, ring quotients, set orbits, or Galois categories; none states this algebraic-space atlas geometry or admissible scheme quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free group action scheme quotient exists if every orbit lies in an affine open",
+   "results": "8 hits: MulAction.orbitRel.Quotient, AlgebraicGeometry.Scheme.affineOpens, AddAction.selfEquivOrbitsQuotientProd', AddAction.finite_quotient_of_finite_quotient_of_finite_quotient, AddAction.orbitRel.Quotient, AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, AddAction.selfEquivOrbitsQuotientProd, AddAction.ofQuotientStabilizer_mem_orbit",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme separation, ring quotients, set orbits, or Galois categories; none states this algebraic-space atlas geometry or admissible scheme quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"quotient\"",
+   "results": "6 hits: AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk, AlgebraicGeometry.eq_bot_of_comp_quotientMk_eq_sigmaSpec",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme separation, ring quotients, set orbits, or Galois categories; none states this algebraic-space atlas geometry or admissible scheme quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A free action of a finite group on a separated scheme whose finite orbits lie in affine opens has a separated scheme quotient and is a finite etale torsor",
+   "results": "8 hits: CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat, CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, CategoryTheory.PreGaloisCategory.has_decomp_quotients, AlgebraicGeometry.IsFinite.of_comp, CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer, isQuotientCoveringMap_quotientMk_of_properlyDiscontinuousSMul, isCoveringMapOn_quotientMk_of_properlyDiscontinuousSMul",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme separation, ring quotients, set orbits, or Galois categories; none states this algebraic-space atlas geometry or admissible scheme quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An admissible free finite constant group action on a scheme admits a finite etale scheme quotient without a Noetherian hypothesis",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.has_decomp_quotients, CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat, CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups, CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme separation, ring quotients, set orbits, or Galois categories; none states this algebraic-space atlas geometry or admissible scheme quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated scheme with an admissible free action of a finite group admits a finite etale scheme quotient",
+   "results": "OK 8 hits: CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups, CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat, CategoryTheory.PreGaloisCategory.has_decomp_quotients, CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, CategoryTheory.PreGaloisCategory.FiberFunctor.preservesQuotientsByFiniteGroups, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned types; abstract Galois-category quotients, orbit sets, ring-ideal quotients and representability from an already supplied open cover do not state the free finite group scheme quotient theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"quotient\"",
+   "results": "OK 6 hits: AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk, AlgebraicGeometry.eq_bot_of_comp_quotientMk_eq_sigmaSpec",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned types; abstract Galois-category quotients, orbit sets, ring-ideal quotients and representability from an already supplied open cover do not state the free finite group scheme quotient theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(group|action).*quotient|free.*action|quotient.*[Ss]cheme",
+   "results": "OK 2 hits: Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned types; abstract Galois-category quotients, orbit sets, ring-ideal quotients and representability from an already supplied open cover do not state the free finite group scheme quotient theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free finite group action on scheme with affine neighborhoods of orbits gives finite etale quotient",
+   "results": "OK 8 hits: Finite.of_finite_addAction_orbitRel_quotient, AddAction.finite_quotient_of_finite_quotient_of_finite_quotient, Topology.IsQuotientMap.isCoveringMapOn_of_smul_disjoint, IsQuotientCoveringMap.mk, Finite.to_properlyDiscontinuousSMul, AddAction.selfEquivOrbitsQuotientProd', AddAction.selfEquivOrbitsQuotientProd, MulAction.selfEquivOrbitsQuotientProd'",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned types; abstract Galois-category quotients, orbit sets, ring-ideal quotients and representability from an already supplied open cover do not state the free finite group scheme quotient theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of the fppf quotient of a finite locally free equivalence relation with affine neighborhoods of every orbit",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned types; abstract Galois-category quotients, orbit sets, ring-ideal quotients and representability from an already supplied open cover do not state the free finite group scheme quotient theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-space-splitting-filtration",
+  "date": "2026-10-23",
+  "group": "Q24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 07SU (proposition-approximate); Noetherian stages by spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian) over Spec Z, and finite type quasi-compactness. New supporting input: Tag 07ST (lemma-filter-quasi-compact-quasi-separated); last stratum is schematic as explained in spaces-limits.tex, proposition-approximate, first proof paragraph Supporting input: Tag 07ST proof via Tag 0BBN first paragraph: existence and separatedness of the schemes V_p=W_p/S_p.",
+   "via": [
+    "lem-sfb-qcqs-space-splitting-filtration",
+    "lem-sfb-space-absolute-noetherian-approximation",
+    "lem-sfb-finite-surjective-affine-space-target",
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-admissible-free-finite-quotient",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split it into ten explicit steps using existing nodes only. Constructed the action relation, invariant affine quotients and their open gluing; descended finiteness, retained the specified torsor relation, proved separatedness, arbitrary-base-change quotient universality, geometric orbit fibres and quasi-compactness. Actual Mathlib searches find no exact project attachment or Mathlib match.",
+  "blueprint": "Supports the recorded 0BBN/07ST symmetric-group quotient construction below det-thm-sf-ctf-stability-direct-images proof (3). Read the latest direct-image proof and the chapter/unit records. The ancestor command returns None, so the inherited null from.node and entire from.place/via chain are retained. Whole-blueprint tag and concept searches found no duplicate statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic scheme, sheaf, coproduct, base-change or morphism-definition tool used only in the indicated construction step; it supplies no alternative proof of a constructible-finite-Tor unit step."
+   },
+   {
+    "node": "def-weil-finite-integral-morphism",
+    "why": "Generic scheme, sheaf, coproduct, base-change or morphism-definition tool used only in the indicated construction step; it supplies no alternative proof of a constructible-finite-Tor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic scheme, sheaf, coproduct, base-change or morphism-definition tool used only in the indicated construction step; it supplies no alternative proof of a constructible-finite-Tor unit step."
+   },
+   {
+    "node": "def-weil-etale-morphism",
+    "why": "Generic scheme, sheaf, coproduct, base-change or morphism-definition tool used only in the indicated construction step; it supplies no alternative proof of a constructible-finite-Tor unit step."
+   },
+   {
+    "node": "def-pc-finite-locally-free",
+    "why": "Generic scheme, sheaf, coproduct, base-change or morphism-definition tool used only in the indicated construction step; it supplies no alternative proof of a constructible-finite-Tor unit step."
+   },
+   {
+    "node": "def-a1-groupoid-scheme",
+    "why": "Generic scheme, sheaf, coproduct, base-change or morphism-definition tool used only in the indicated construction step; it supplies no alternative proof of a constructible-finite-Tor unit step."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Generic scheme, sheaf, coproduct, base-change or morphism-definition tool used only in the indicated construction step; it supplies no alternative proof of a constructible-finite-Tor unit step."
+   },
+   {
+    "node": "lem-trf-etale-relation-quotient",
+    "why": "Generic etale relation presentation supplies the quotient sheaf, actual kernel pair and local lifts; the unit has no replacement for this foundational space theorem."
+   },
+   {
+    "node": "lem-a1-finite-flat-affine-relation-quotient",
+    "why": "Generic affine finite locally free equivalence-relation quotient (Groupoids 03BM), applied only on the invariant affine opens exactly as in the 07S6 proof; it does not assert this item’s global quotient."
+   },
+   {
+    "node": "lem-trf-etale-relation-finding-opens",
+    "why": "Generic restricted quotient open-immersion theorem is the exact 02WU input of 07S6."
+   },
+   {
+    "node": "lem-pc-schemes-criterion",
+    "why": "Generic scheme, sheaf, coproduct, base-change or morphism-definition tool used only in the indicated construction step; it supplies no alternative proof of a constructible-finite-Tor unit step."
+   },
+   {
+    "node": "def-pc-fppf-site",
+    "why": "Generic scheme, sheaf, coproduct, base-change or morphism-definition tool used only in the indicated construction step; it supplies no alternative proof of a constructible-finite-Tor unit step."
+   },
+   {
+    "node": "lem-a1-fppf-kernel-pair-quotient-descent",
+    "why": "Generic scheme, sheaf, coproduct, base-change or morphism-definition tool used only in the indicated construction step; it supplies no alternative proof of a constructible-finite-Tor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-finite",
+    "why": "Generic fpqc descent of finite scheme morphisms applied to the torsor relation, independent of any cohomology or duality theorem."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic scheme, sheaf, coproduct, base-change or morphism-definition tool used only in the indicated construction step; it supplies no alternative proof of a constructible-finite-Tor unit step."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic scheme, sheaf, coproduct, base-change or morphism-definition tool used only in the indicated construction step; it supplies no alternative proof of a constructible-finite-Tor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-universally-closed-separated",
+    "why": "Generic scheme separatedness descent is applied after the source-route quotient is constructed and finite; it replaces no constructible-finite-Tor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic scheme, sheaf, coproduct, base-change or morphism-definition tool used only in the indicated construction step; it supplies no alternative proof of a constructible-finite-Tor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic scheme, sheaf, coproduct, base-change or morphism-definition tool used only in the indicated construction step; it supplies no alternative proof of a constructible-finite-Tor unit step."
+   },
+   {
+    "node": "def-weil-pbc-sheafification",
+    "why": "Generic scheme, sheaf, coproduct, base-change or morphism-definition tool used only in the indicated construction step; it supplies no alternative proof of a constructible-finite-Tor unit step."
+   },
+   {
+    "node": "lem-sc-finite-nonempty-point",
+    "why": "Generic finite-algebra point existence over an algebraically closed field, used only to lift geometric quotient points."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic stability of etaleness under arbitrary scheme base change, used only in step 8 to retain the quotient morphism properties."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-etale-morphism",
+  "def-pc-finite-locally-free",
+  "def-a1-groupoid-scheme",
+  "def-pc-fibre-product",
+  "lem-trf-etale-relation-quotient",
+  "lem-a1-finite-flat-affine-relation-quotient",
+  "lem-trf-etale-relation-finding-opens",
+  "lem-pc-schemes-criterion",
+  "def-pc-fppf-site",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-weil-pbc-finite-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-surjective-universally-closed-separated",
+  "lem-weil-pbc-surjective-base-change",
+  "def-weil-pbc-sheafification",
+  "lem-sc-finite-nonempty-point"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-d41acb5c3",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-d41acb5c3 (reviewer sub-agent of L); spot-checked: The item is live: it is reachable from nt-target-weil-conjectures and lies outside the lem-per-artin-gabber-affine-curve closure. The statement is unchanged from the base. It is true as Stacks 07S6/07S7 plus 0BBM(4) for a free constant finite group with affine orbits; I read spaces-properties l.1704-1848. There are no new nodes. I checked all 10 steps against the cited statements. Step 1: finite free Spec ∏A, étale by source-local étaleness. Step 2: action groupoid and freeness. Step 3: 02WW presentation. Step 4: 03JE invariant affines. Step 5: 02WU open charts and 01JJ gluing. Step 6: 02LA finiteness descent along q, not circular. Step 7: 09MQ(4) separatedness. Step 8: base change plus 03C5. Step 9: finite nonempty Ω-fibre with a single label on connected Spec Ω. Step 10: quasi-compactness. One fault: step 4 cited lem-per-free-finite-group-affine-quotient, which is on route-pivot-dropped.txt (l.1591). The clause it supplied is generic. FIX: step 4 now cites the live lem-a1-finite-flat-affine-relation-quotient (Groupoids 03BM), the input 07S6's own proof uses. Its hypotheses hold: W_m affine, R_m ≅ Spec ∏_G A_m affine, s,t finite locally free, equivalence relation over Spec Z. Its closure has no dropped ids and only generic trf descent nodes. I removed lem-weil-pbc-morphism-affine-schemes-affine, which is no longer used, recomputed proof_deps and updated tool_uses. Batch-5 flags: source-target-properties (smooth-composition), trf etale-relation-quotient/finding-opens (02WW/02WU space foundations) and fppf-kernel-pair (fppf ⇒ fpqc) are generic and accepted; the dropped node's flag is moot after the FIX. No SGA. Duplicates checked: lem-per-admissible-finite-quotient-separated (Noetherian, assumes a given quotient), lem-sfb-finite-locally-free-open-affine-cover and lem-sfb-finite-locally-free-fibre-scheme-neighbourhood (algebraic-space results); none duplicates the item. Maintainer note: the citer lem-sfb-qcqs-space-splitting-filtration also mentions the dropped node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdmissibleFreeFiniteQuotient",
+  "declaration": "AlgebraicGeometry.exists_admissible_free_finite_quotient",
+  "declarations": [
+   "AlgebraicGeometry.finiteActionRelationSource",
+   "AlgebraicGeometry.finiteActionRelationTarget",
+   "AlgebraicGeometry.exists_admissible_free_finite_quotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AdmissibleFreeFiniteQuotient.lean",
+  "statement": "theorem exists_admissible_free_finite_quotient (M : Scheme.{u}) [M.IsSeparated] (G : Type v) [Group G] [Finite G] (a : G →* Aut M) [Mono (prod.lift (finiteActionRelationTarget a) (finiteActionRelationSource M G))] (horbit : ∀ x : M, ∃ U : M.affineOpens, ∀ g : G, (a g).hom x ∈ U.1) : ∃ (Q : Scheme.{u}) (q : M ⟶ Q), Q.IsSeparated ∧ IsFinite q ∧ Etale q ∧ Surjective q ∧ IsPullback (finiteActionRelationTarget a) (finiteActionRelationSource M G) q q ∧ (∃ η : coequalizer (uliftYoneda.{max (u + 1) w}.map (finiteActionRelationTarget a)) (uliftYoneda.{max (u + 1) w}.map (finiteActionRelationSource M G)) ⟶ uliftYoneda.{max (u + 1) w}.obj Q, coequalizer.π (uliftYoneda.{max (u + 1) w}.map (finiteActionRelationTarget a)) (uliftYoneda.{max (u + 1) w}.map (finiteActionRelationSource M G)) ≫ η = uliftYoneda.{max (u + 1) w}.map q ∧ ∀ F : Sheaf Scheme.fppfTopology (Type (max (u + 1) w)), Function.Bijective (fun k : uliftYoneda.{max (u + 1) w}.obj Q ⟶ F.obj ↦ η ≫ k)) ∧ (∀ (T : Scheme.{u}) (f : T ⟶ Q), ∃ sT tT : pullback (finiteActionRelationSource M G ≫ q) f ⟶ pullback q f, sT ≫ pullback.fst q f = pullback.fst (finiteActionRelationSource M G ≫ q) f ≫ finiteActionRelationSource M G ∧ sT ≫ pullback.snd q f = pullback.snd (finiteActionRelationSource M G ≫ q) f ∧ tT ≫ pullback.fst q f = pullback.fst (finiteActionRelationSource M G ≫ q) f ≫ finiteActionRelationTarget a ∧ tT ≫ pullback.snd q f = pullback.snd (finiteActionRelationSource M G ≫ q) f ∧ ∃ ηT : coequalizer (uliftYoneda.{max (u + 1) w}.map tT) (uliftYoneda.{max (u + 1) w}.map sT) ⟶ uliftYoneda.{max (u + 1) w}.obj T, coequalizer.π (uliftYoneda.{max (u + 1) w}.map tT) (uliftYoneda.{max (u + 1) w}.map sT) ≫ ηT = uliftYoneda.{max (u + 1) w}.map (pullback.snd q f) ∧ ∀ F : Sheaf Scheme.fppfTopology (Type (max (u + 1) w)), Function.Bijective (fun k : uliftYoneda.{max (u + 1) w}.obj T ⟶ F.obj ↦ ηT ≫ k)) ∧ (∀ (F : Sheaf Scheme.fppfTopology (Type (max (u + 1) w))) (b : uliftYoneda.{max (u + 1) w}.obj M ⟶ F.obj), (∀ g : G, uliftYoneda.{max (u + 1) w}.map (a g).hom ≫ b = b) → ∃! c : uliftYoneda.{max (u + 1) w}.obj Q ⟶ F.obj, uliftYoneda.{max (u + 1) w}.map q ≫ c = b) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω], Function.Surjective (fun x : Spec (.of Ω) ⟶ M ↦ x ≫ q) ∧ ∀ x y : Spec (.of Ω) ⟶ M, x ≫ q = y ≫ q ↔ ∃ g : G, x ≫ (a g).hom = y) ∧ (CompactSpace M → CompactSpace Q)",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical action relation is the coproduct of G copies of M, with fold source and componentwise action target. Its pointwise presheaf coequalizer is the orbit presheaf under locally constant G-valued labels, including disconnected tests. The universal property of sheafificationAdjunction specifies its fppf sheafification. IsPullback fixes the original action kernel pair; the base-changed action maps are determined by both pullback projections. Explicit universes u,v,w allow any finite abstract group and arbitrary larger set-valued sheaves."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b01a7db76",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Only the item lean field and module are added; the 12 dep records and other node fields are byte-identical to live; lean.statement is verbatim. Every clause matches: separated M; G →* Aut M (left action via Aut_mul_def); freeness = Mono of (g,m)↦(gm,m) on all test sections; affine-orbit hypothesis; fppf orbit sheafification as presheaf coequalizer with pinned unit and universal property (same form as fppf_kernelPair_quotient_descent); Q separated, q finite/etale/surjective; IsPullback fixes the action kernel pair; base change with sT/tT pinned by projections; unique invariant factorization; Ω-point orbit bijection; qc implication; no extra hypotheses. Edge cases (empty M, trivial G, disconnected tests, universes u v w) OK. Helpers are real Sigma.desc maps; no duplicate helper or theorem found; imports are recorded proof-dep modules; docstrings carry source place, blueprint tag and 10 steps; sorry only. No findings; no compile since nothing changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T081802-L-2069968",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

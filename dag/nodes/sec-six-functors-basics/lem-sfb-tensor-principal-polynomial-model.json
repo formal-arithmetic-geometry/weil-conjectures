@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-tensor-principal-polynomial-model",
+ "kind": "statement",
+ "title": "Finite polynomial model and image identity for a tensor principal open",
+ "statement": "Let $A$ be a commutative ring and $B,C$ commutative $A$-algebras. Put $D=B\\otimes_A C$ [def-weil-pbc-module-tensor-product], with multiplication $(b\\otimes c)(b'\\otimes c')=bb'\\otimes cc'$ and unit $1\\otimes1$, and let $j:B\\to D$ send $b$ to $b\\otimes1$. For a commutative ring $H$ and $a\\in H$, write $D_H(a)=\\{\\mathfrak p\\in\\operatorname{Spec}(H):a\\notin\\mathfrak p\\}$ [def-weil-affine-spectrum]. For every $g\\in D$ there are $n\\geq0$, $b_1,\\ldots,b_n\\in B$, and $c_1,\\ldots,c_n\\in C$ with $g=\\sum_i b_i\\otimes c_i$ having the following properties. Set $R=A[t_1,\\ldots,t_n]$, $S=C[t_1,\\ldots,t_n]$ [def-weil-pbc-mv-polynomial-ring], let $\\varphi_n:R\\to S$ extend the structure map $A\\to C$ coefficientwise, and set $h=\\sum_i c_it_i\\in S$. Let $e:R\\to B$ be evaluation at $(b_i)$ and let $k:S\\to D$ send $c\\mapsto1\\otimes c$ and $t_i\\mapsto b_i\\otimes1$. Then $k(h)=g$, $k\\circ\\varphi_n=j\\circ e$, and the square $(R,S,B,D)$ with arrows $(\\varphi_n,e,k,j)$ is a pushout of commutative rings: for every commutative ring $E$ and maps $u:S\\to E$, $v:B\\to E$ with $u\\circ\\varphi_n=v\\circ e$, there is a unique ring map $w:D\\to E$ with $w\\circ k=u$ and $w\\circ j=v$, and $w(b\\otimes c)=v(b)u(c)$. Consequently the square with arrows $\\alpha=\\operatorname{Spec}(k)$, $\\beta=\\operatorname{Spec}(e)$, $q=\\operatorname{Spec}(j)$ and $f_n=\\operatorname{Spec}(\\varphi_n)$ is cartesian [def-pc-fibre-product], and\n$$\\alpha^{-1}(D_S(h))=D_D(g),\\qquad q(D_D(g))=\\beta^{-1}(f_n(D_S(h))).$$\nThese assertions require no finiteness or flatness assumption on $B$ or $C$. Empty sums and $n=0$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0F31, lemma-test-universally-open, proof of (3) implies (1), affine algebra paragraph, lines 21755--21784: finite tensor expansion, linear polynomial, specialization cartesian square and equality of images"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-module-tensor-product], pure tensors generate $D$ as an $A$-module. Thus $g$ is a finite sum of scalar multiples $a_i(b_i\\otimes c_i)$; absorb each scalar into $b_i$ to obtain $g=\\sum_{i=1}^n b_i\\otimes c_i$. This also follows directly from the free-module quotient construction in that definition. No finite generation of $B$ or $C$ is asserted.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F31, lemma-test-universally-open, proof of (3) implies (1), affine algebra paragraph, lines 21755--21784: finite tensor expansion, linear polynomial, specialization cartesian square and equality of images"
+   }
+  },
+  {
+   "text": "Write $\\ell(c)=1\\otimes c$. The displayed multiplication on $D$ makes $j$ and $\\ell$ ring maps, and $j(a_B)=a_B\\otimes1=1\\otimes a_C=\\ell(a_C)$ for $a\\in A$ by tensor balancing [def-weil-pbc-module-tensor-product]. Apply the polynomial universal property [def-weil-pbc-mv-polynomial-ring] to obtain $e$, the coefficient map $\\varphi_n$, and $k$ with the specified coefficients and variable images. On coefficients $a\\in A$ and on each $t_i$, the maps $k\\varphi_n$ and $je$ agree, so they agree on $R$. Set $h=\\sum_i c_it_i$. Then $k(h)=\\sum_i(1\\otimes c_i)(b_i\\otimes1)=\\sum_i b_i\\otimes c_i=g$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F31, lemma-test-universally-open, proof of (3) implies (1), affine algebra paragraph, lines 21755--21784: finite tensor expansion, linear polynomial, specialization cartesian square and equality of images"
+   }
+  },
+  {
+   "text": "Fix $E,u,v$ as in the assertion, and let $u_0:C\\to E$ be the restriction of $u$ to constant polynomials. Their compatibility on $A\\subset R$ gives $u_0(a_C)=v(a_B)$. Give $E$ this common $A$-algebra structure. The pairing $(b,c)\\mapsto v(b)u_0(c)$ is $A$-bilinear, so [def-weil-pbc-module-tensor-product] gives a unique $A$-linear $w:D\\to E$ with $w(b\\otimes c)=v(b)u_0(c)$. It preserves the unit. On two pure tensors, multiplicativity is the equality $v(bb\\prime)u_0(cc\\prime)=v(b)u_0(c)v(b\\prime)u_0(c\\prime)$; expanding both arguments as finite sums proves it on all elements. Hence $w$ is a ring map. We have $wj=v$; on constants $wk=u_0$, and on variables $wk(t_i)=v(b_i)=u(t_i)$ by compatibility. The polynomial universal property [def-weil-pbc-mv-polynomial-ring] gives $wk=u$. Any other such ring map takes $b\\otimes c=j(b)\\ell(c)$ to $v(b)u_0(c)$ and therefore agrees on every finite sum. This proves precisely the asserted pushout property and formula.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F31, lemma-test-universally-open, proof of (3) implies (1), affine algebra paragraph, lines 21755--21784: finite tensor expansion, linear polynomial, specialization cartesian square and equality of images"
+   }
+  },
+  {
+   "text": "To pass to schemes without assuming that a topological pullback is a scheme pullback, put $T=S\\otimes_R B$, where $R$ acts on $S$ by $\\varphi_n$ and on $B$ by $e$. The $R$-balanced pairing $(s,b)\\mapsto k(s)j(b)$ induces $F:T\\to D$ by [def-weil-pbc-module-tensor-product]. The unit and multiplicativity checks are the pure-tensor calculation of step 3, now over $R$, so $F$ is a ring map. The maps $u_T:S\\to T$, $s\\mapsto s\\otimes1$, and $v_T:B\\to T$, $b\\mapsto1\\otimes b$, are compatible by $R$-balancing. Step 3 gives $G:D\\to T$ with $Gk=u_T$ and $Gj=v_T$. The uniqueness in step 3 yields $FG=\\mathrm{id}_D$. On a pure tensor $s\\otimes b$, $GF(s\\otimes b)=G(k(s)j(b))=(s\\otimes1)(1\\otimes b)=s\\otimes b$, hence $GF=\\mathrm{id}_T$ by generation. The affine fibre-product theorem [lem-weil-pbc-fibre-product-affine-spectra], applied over $R$ to $S,B$, now identifies $\\operatorname{Spec}D$ with $\\operatorname{Spec}S\\times_{\\operatorname{Spec}R}\\operatorname{Spec}B$. Since $F(s\\otimes1)=k(s)$ and $F(1\\otimes b)=j(b)$, its projections are exactly $\\alpha,q$, and its base arrows are $f_n,\\beta$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4 and 01JQ, lemma-fibre-product-affine-schemes and lemma-fibre-product-affines; applied to the explicit mutually inverse tensor maps"
+   }
+  },
+  {
+   "text": "On prime ideals the induced spectrum map is contraction [def-weil-affine-spectrum]. Consequently, for $\\mathfrak p\\in\\operatorname{Spec}D$, one has $\\alpha(\\mathfrak p)\\in D_S(h)$ if and only if $h\\notin k^{-1}(\\mathfrak p)$, if and only if $k(h)=g\\notin\\mathfrak p$. Thus $\\alpha^{-1}(D_S(h))=D_D(g)$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F31, lemma-test-universally-open, proof of (3) implies (1), affine algebra paragraph, lines 21755--21784: finite tensor expansion, linear polynomial, specialization cartesian square and equality of images"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-base-change-image] to the cartesian square of step 4, with its $X=\\operatorname{Spec}S$, $Y=\\operatorname{Spec}B$, $Z=\\operatorname{Spec}R$, $P=\\operatorname{Spec}D$, $f=f_n$, $g=\\beta$, $p=\\alpha$, and $q=q$. For the subset $C$ of that lemma take $D_S(h)$. Its arbitrary-subset formula gives $q(\\alpha^{-1}(D_S(h)))=\\beta^{-1}(f_n(D_S(h)))$. Substituting step 5 proves the required image identity.",
+   "uses": [
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S1, lemma-base-change-surjective, proof: image formula for every subset, using Tag 0495, lemma-when-point-maps-to-pair"
+   }
+  },
+  {
+   "text": "For $g=0$ the empty expansion is permitted: take $n=0$, $R=A$, $S=C$, and $h=0$. All the constructions above still apply, and $D_S(0)$ and $D_D(0)$ are empty, so both image identities hold. Every construction used only ring operations and universal properties, which also apply to zero rings; no division, nonzero element, finiteness, or flatness hypothesis was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F31, lemma-test-universally-open, proof of (3) implies (1), affine algebra paragraph, lines 21755--21784: finite tensor expansion, linear polynomial, specialization cartesian square and equality of images"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-base-change-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0F31, lemma-test-universally-open, proof (3) implies (1), finite tensor expansion and linear polynomial specialization. The implicit cartesian assertion is verified explicitly by tensor universal properties and Tags 01I4/01JQ; the image assertion uses the existing Tag 01S1 arbitrary-subset formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "MvPolynomial.*[Pp]ushout|[Pp]ushout.*MvPolynomial|eval.*[Pp]ushout|[Pp]ushout.*eval",
+   "results": "Actual search: 10 hits; Mathlib/RingTheory/Algebraic/Integral.lean, Mathlib/RingTheory/Algebraic/Integral.lean, Mathlib/RingTheory/Algebraic/Integral.lean, Mathlib/RingTheory/Algebraic/Integral.lean, Mathlib/RingTheory/TensorProduct/MvPolynomial.lean, Mathlib/RingTheory/TensorProduct/MvPolynomial.lean, Mathlib/Algebra/Category/Ring/Topology.lean, Mathlib/CategoryTheory/MorphismProperty/FunctorCategory.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: PolynomialLaw.exists_lift gives a module tensor lift, not the specified linear polynomial, evaluation cartesian square and spectrum-image identity. MvPolynomial.instIsPushout concerns extension of coefficients, not the evaluated-variable square. Source read at PolynomialLaw/Basic.lean:452 and TensorProduct/MvPolynomial.lean:178."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite sum of pure tensors is evaluation of a linear polynomial and its evaluation square of polynomial rings is a pushout",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"IsPushout\"",
+   "results": "Actual search: 4 hits; MvPolynomial.instIsPushout, MvPolynomial.instIsPushout_1, instIsPushoutFractionRingMvPolynomial, instIsPushoutFractionRingMvPolynomial_1",
+   "date": "2026-10-22",
+   "verdict": "no match: PolynomialLaw.exists_lift gives a module tensor lift, not the specified linear polynomial, evaluation cartesian square and spectrum-image identity. MvPolynomial.instIsPushout concerns extension of coefficients, not the evaluated-variable square. Source read at PolynomialLaw/Basic.lean:452 and TensorProduct/MvPolynomial.lean:178."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every element of B tensor over A C is the specialization of a linear polynomial in C variables, and evaluation gives a pushout square with A variables and B",
+   "results": "Actual search: 8 hits; PolynomialLaw.exists_lift', PolynomialLaw.exists_lift, RingHom.CodescendsAlong.algebraMap_tensorProduct, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, CommRingCat.isPushout_tensorProduct, Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul, Algebra.Generators.baseChange, PolynomialLaw.exists_lift_of_mem_range_rTensor",
+   "date": "2026-10-22",
+   "verdict": "no match: PolynomialLaw.exists_lift gives a module tensor lift, not the specified linear polynomial, evaluation cartesian square and spectrum-image identity. MvPolynomial.instIsPushout concerns extension of coefficients, not the evaluated-variable square. Source read at PolynomialLaw/Basic.lean:452 and TensorProduct/MvPolynomial.lean:178."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_lift|isPushout|def tensorEquiv",
+   "results": "Actual search: 5 hits; Mathlib/RingTheory/PolynomialLaw/Basic.lean, Mathlib/RingTheory/PolynomialLaw/Basic.lean, Mathlib/RingTheory/PolynomialLaw/Basic.lean, Mathlib/RingTheory/PolynomialLaw/Basic.lean, Mathlib/RingTheory/PolynomialLaw/Basic.lean; subdirectory RingTheory/PolynomialLaw",
+   "date": "2026-10-22",
+   "verdict": "no match: PolynomialLaw.exists_lift gives a module tensor lift, not the specified linear polynomial, evaluation cartesian square and spectrum-image identity. MvPolynomial.instIsPushout concerns extension of coefficients, not the evaluated-variable square. Source read at PolynomialLaw/Basic.lean:452 and TensorProduct/MvPolynomial.lean:178."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"TensorProduct\", \"eval\"",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: PolynomialLaw.exists_lift gives a module tensor lift, not the specified linear polynomial, evaluation cartesian square and spectrum-image identity. MvPolynomial.instIsPushout concerns extension of coefficients, not the evaluated-variable square. Source read at PolynomialLaw/Basic.lean:452 and TensorProduct/MvPolynomial.lean:178."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given g in B tensor_A C, choose finitely many b_i and c_i and h=sum c_i x_i so that evaluation C[x_i] to B tensor_A C is cartesian over A[x_i] to B and the image of D(g) is the inverse image of the image of D(h)",
+   "results": "Actual search: 8 hits; PolynomialLaw.exists_lift_of_mem_range_rTensor, PolynomialLaw.exists_lift', RingHom.SurjectiveOnStalks.exists_mul_eq_tmul, TensorProduct.Algebra.exists_of_fg, exists_fg_and_mem_baseChange, PolynomialLaw.exists_lift, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul",
+   "date": "2026-10-22",
+   "verdict": "no match: PolynomialLaw.exists_lift gives a module tensor lift, not the specified linear polynomial, evaluation cartesian square and spectrum-image identity. MvPolynomial.instIsPushout concerns extension of coefficients, not the evaluated-variable square. Source read at PolynomialLaw/Basic.lean:452 and TensorProduct/MvPolynomial.lean:178."
+  },
+  {
+   "tool": "grep",
+   "query": "MvPolynomial.*[Pp]ushout|[Pp]ushout.*MvPolynomial|eval.*[Pp]ushout|[Pp]ushout.*eval",
+   "results": "Actual search: 10 hits; Mathlib/RingTheory/Algebraic/Integral.lean, Mathlib/RingTheory/Algebraic/Integral.lean, Mathlib/RingTheory/Algebraic/Integral.lean, Mathlib/RingTheory/Algebraic/Integral.lean, Mathlib/Algebra/Category/Ring/Topology.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Shapes/Pullbacks.lean, Mathlib/CategoryTheory/MorphismProperty/FunctorCategory.lean, Mathlib/CategoryTheory/Adhesive/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the item requires a specified linear h, the evaluated-variable pushout, and both spectrum identities together. Read MvPolynomial.instIsPushout at TensorProduct/MvPolynomial.lean:178 (coefficient extension square), PolynomialLaw.exists_lift at PolynomialLaw/Basic.lean:452 (arbitrary tensor-polynomial lift, not a linear h), and CommRingCat.isPushout_tensorProduct at Algebra/Category/Ring/Constructions.lean:116 (generic tensor pushout). None states the item or specializes to all its clauses in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite polynomial specialization of an element of a tensor product of commutative algebras with cartesian affine spectrum square",
+   "results": "Actual search: 8 hits; polyEquivTensor_apply, PolynomialLaw.toFun_eq_rTensor_φ_toFun', PolynomialLaw.π, MvPolynomial.rTensor_apply_tmul_apply, PolyEquivTensor.toFunAlgHom_apply_tmul, MvPolynomial.aeval_one_tmul, PolyEquivTensor.toFunLinear, PolynomialLaw.toFunLifted",
+   "date": "2026-10-23",
+   "verdict": "no match: the item requires a specified linear h, the evaluated-variable pushout, and both spectrum identities together. Read MvPolynomial.instIsPushout at TensorProduct/MvPolynomial.lean:178 (coefficient extension square), PolynomialLaw.exists_lift at PolynomialLaw/Basic.lean:452 (arbitrary tensor-polynomial lift, not a linear h), and CommRingCat.isPushout_tensorProduct at Algebra/Category/Ring/Constructions.lean:116 (generic tensor pushout). None states the item or specializes to all its clauses in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"IsPushout\"",
+   "results": "Actual search: 4 hits; MvPolynomial.instIsPushout, MvPolynomial.instIsPushout_1, instIsPushoutFractionRingMvPolynomial, instIsPushoutFractionRingMvPolynomial_1",
+   "date": "2026-10-23",
+   "verdict": "no match: the item requires a specified linear h, the evaluated-variable pushout, and both spectrum identities together. Read MvPolynomial.instIsPushout at TensorProduct/MvPolynomial.lean:178 (coefficient extension square), PolynomialLaw.exists_lift at PolynomialLaw/Basic.lean:452 (arbitrary tensor-polynomial lift, not a linear h), and CommRingCat.isPushout_tensorProduct at Algebra/Category/Ring/Constructions.lean:116 (generic tensor pushout). None states the item or specializes to all its clauses in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary element of a tensor product of commutative algebras is a finite linear polynomial specialization giving a pushout square and a base change identity for principal open images",
+   "results": "Actual search: 8 hits; Algebra.instIsStandardOpenImmersionTensorProduct, RingHom.SurjectiveOnStalks.exists_mul_eq_tmul, exists_fg_and_mem_baseChange, CommRingCat.isPushout_tensorProduct, PrimeSpectrum.tensorProductTo, RingHom.CodescendsAlong.algebraMap_tensorProduct, CommRingCat.pushoutCocone, Ideal.ResidueField.exists_smul_eq_tmul_one",
+   "date": "2026-10-23",
+   "verdict": "no match: the item requires a specified linear h, the evaluated-variable pushout, and both spectrum identities together. Read MvPolynomial.instIsPushout at TensorProduct/MvPolynomial.lean:178 (coefficient extension square), PolynomialLaw.exists_lift at PolynomialLaw/Basic.lean:452 (arbitrary tensor-polynomial lift, not a linear h), and CommRingCat.isPushout_tensorProduct at Algebra/Category/Ring/Constructions.lean:116 (generic tensor pushout). None states the item or specializes to all its clauses in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"TensorProduct\", \"eval\"",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the item requires a specified linear h, the evaluated-variable pushout, and both spectrum identities together. Read MvPolynomial.instIsPushout at TensorProduct/MvPolynomial.lean:178 (coefficient extension square), PolynomialLaw.exists_lift at PolynomialLaw/Basic.lean:452 (arbitrary tensor-polynomial lift, not a linear h), and CommRingCat.isPushout_tensorProduct at Algebra/Category/Ring/Constructions.lean:116 (generic tensor pushout). None states the item or specializes to all its clauses in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor element is a sum of pure tensors and can be lifted to a linear multivariate polynomial by evaluating its variables in the first algebra",
+   "results": "Actual search: 8 hits; MvPolynomial.rTensor_apply, PolyEquivTensor.toFunLinear, MvPolynomial.rTensor, PolynomialLaw.exists_lift, PolyEquivTensor.toFunAlgHom_apply_tmul, PolyEquivTensor.toFunLinear_tmul_apply, MvPolynomial.universalFactorizationMapPresentation_algebra_smul, polyEquivTensor_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: the item requires a specified linear h, the evaluated-variable pushout, and both spectrum identities together. Read MvPolynomial.instIsPushout at TensorProduct/MvPolynomial.lean:178 (coefficient extension square), PolynomialLaw.exists_lift at PolynomialLaw/Basic.lean:452 (arbitrary tensor-polynomial lift, not a linear h), and CommRingCat.isPushout_tensorProduct at Algebra/Category/Ring/Constructions.lean:116 (generic tensor pushout). None states the item or specializes to all its clauses in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-polynomial-test-universally-open",
+  "date": "2026-10-22",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §§3.2 and 3.5, pp.605,607--608, finite normalization and constant-field models. The relative purity and the full fibre-product surjectivity are the finite normal-model assertions used there; no flatness is claimed. Finiteness itself is already lem-fin-normalization-extension-finite. Local PDF WANTED; publisher PDF read.; justification that the full fibre product has a dense generic point after a finite extension of constants; finite normal-base openness proof: polynomial-base-change test upgrading openness to arbitrary scheme base change; affine algebra paragraph, lines 21755--21784: finite tensor expansion, linear polynomial, specialization cartesian square and equality of images",
+   "via": [
+    "lem-sfb-polynomial-test-universally-open",
+    "lem-sfb-finite-dominant-normal-base-universally-open",
+    "lem-sfb-finite-normal-relative-curve-model",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-tensor-principal-polynomial-model",
+  "worker": "stage1",
+  "summary": "Q128 checked Tag 0F31 against the current blueprint route, searched upstream and Mathlib, and supplied the finite tensor expansion, polynomial generator calculations, explicit ring pushout map with uniqueness, explicit tensor inverse giving the affine cartesian square, contraction identity, and arbitrary-subset base-change image formula. All required facts are existing nodes; no new nodes or hypotheses are needed. Empty sums and zero rings are checked.",
+  "blueprint": "The inherited from.place traces this auxiliary to det-thm-sf-ctf-stability-direct-images (3), through an older alteration argument. In literature/blueprint/latest the direct-images proof (3) now uses compactification and open/proper preservation; it does not itself state this algebraic lemma. This split keeps the assigned auxiliary and its ancestors untouched and supplies the finite expansion, linear polynomial, evaluation cartesian square and image identity used in its immediate parent, Stacks Tag 0F31. Whole-blueprint searches found no equivalent imported node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-af049588a",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-af049588a (reviewer sub-agent of L); spot-checked: I read the item in full: 7 steps, no new nodes, and the statement and stmt_deps are unchanged from live. Live still has the item unsplit and there is no repair note, so this is not a supersession or a re-split order. It agrees with Stacks 0F31 (more-morphisms.tex ~21752-21784) with the names swapped (Stacks A' = item B, Stacks B = item C), and it gives exactly the image identity that the parent lem-sfb-polynomial-test-universally-open uses. All five proof deps are Mathlib leaves and I read their statements. Step 1 (generation by pure tensors) is correct. In step 2, k∘phi_n and j∘e agree on A and on each t_i, and k(h)=g. In step 3 (pushout), u_0 and v agree on A, the pairing is A-bilinear, w is a ring map, wk=u follows from polynomial uniqueness over C, and w is unique because b⊗c=j(b)ℓ(c). In step 4, T=S⊗_R B ≅ D through F and G, with FG=id by step-3 uniqueness and GF=id on pure tensors. The affine fibre-product leaf then gives projections α and q and base arrows f_n and β. Step 5 cites def-weil-affine-spectrum for the action on points (contraction). That node does not spell this out, but it is how the definition acts on morphisms and is used the same way across the DAG, so I accepted it. Step 6 applies base-change-image with the subset D_S(h), and the square commutes by step 2. I checked edge cases: g=0 with n=0, zero rings, and the example B=A, C=A[x], g=1⊗x. No duplicate node exists and the Mathlib candidates are correctly rejected. Searches cover all three kinds, there is no SGA, no route departure and no tool_uses are needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TensorPrincipalPolynomialModel",
+  "declaration": "AlgebraicGeometry.TensorPrincipalPolynomialModel.exists_model",
+  "declarations": [
+   "AlgebraicGeometry.TensorPrincipalPolynomialModel.coefficientMap",
+   "AlgebraicGeometry.TensorPrincipalPolynomialModel.specialization",
+   "AlgebraicGeometry.TensorPrincipalPolynomialModel.linearPolynomial",
+   "AlgebraicGeometry.TensorPrincipalPolynomialModel.exists_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPrincipalPolynomialModel.lean",
+  "statement": "theorem exists_model (A B C : Type u) [CommRing A] [CommRing B] [CommRing C] [Algebra A B] [Algebra A C] (g : B ⊗[A] C) : ∃ (n : ℕ) (b : Fin n → B) (c : Fin n → C), g = ∑ i, b i ⊗ₜ[A] c i ∧ specialization (A := A) (C := C) b (linearPolynomial c) = g ∧ (specialization (A := A) (C := C) b).comp (coefficientMap A C n) = (Algebra.TensorProduct.includeLeftRingHom : B →+* B ⊗[A] C).comp (MvPolynomial.aeval b).toRingHom ∧ (∀ (E : Type (max u v)) [CommRing E] (u : MvPolynomial (Fin n) C →+* E) (v : B →+* E), u.comp (coefficientMap A C n) = v.comp (MvPolynomial.aeval b).toRingHom → ∃! w : B ⊗[A] C →+* E, w.comp (specialization (A := A) (C := C) b) = u ∧ w.comp Algebra.TensorProduct.includeLeftRingHom = v ∧ ∀ (x : B) (y : C), w (x ⊗ₜ[A] y) = v x * u (MvPolynomial.C y)) ∧ IsPullback (Spec.map (CommRingCat.ofHom (specialization (A := A) (C := C) b))) (Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom : B →+* B ⊗[A] C))) (Spec.map (CommRingCat.ofHom (coefficientMap A C n))) (Spec.map (CommRingCat.ofHom (MvPolynomial.aeval b).toRingHom)) ∧ (Spec.map (CommRingCat.ofHom (specialization (A := A) (C := C) b))).base ⁻¹' (PrimeSpectrum.basicOpen (linearPolynomial c) : Set (PrimeSpectrum _)) = (PrimeSpectrum.basicOpen g : Set (PrimeSpectrum _)) ∧ (Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom : B →+* B ⊗[A] C))).base '' (PrimeSpectrum.basicOpen g : Set (PrimeSpectrum _)) = (Spec.map (CommRingCat.ofHom (MvPolynomial.aeval b).toRingHom)).base ⁻¹' ((Spec.map (CommRingCat.ofHom (coefficientMap A C n))).base '' (PrimeSpectrum.basicOpen (linearPolynomial c) : Set (PrimeSpectrum _)))",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79c5a0284",
+  "group": "O1",
+  "result": "pass",
+  "note": "Only the item node (lean field added; everything else identical to live) and the new module TensorPrincipalPolynomialModel.lean changed. lean.statement equals the file signature verbatim. All node clauses match: B ⊗[A] C with includeLeftRingHom as j; Fin n families with g = Σ b_i ⊗ c_i; coefficientMap = MvPolynomial.map (algebraMap A C); specialization = eval₂Hom includeRight (b_i ⊗ 1); linearPolynomial = Σ C c_i · X_i; e = aeval b; k(h) = g; k∘φ = j∘e; pushout ∃! with both composites and the tensor formula, E : Type (max u v); IsPullback (Spec k)(Spec j)(Spec φ)(Spec e) of schemes; preimage and image identities match Scheme.image_preimage_eq_of_isPullback exactly. Common universe u is the Scheme.{u} convention and matches the parent's Lean. n = 0, g = 0 and zero rings are covered. Helpers are real data with docstrings; the proof is sorry with a 7-step docstring; plain imports are the proof deps' Mathlib homes. No supersession, no new nodes. No compile needed (no FIX)."
+ }
+}

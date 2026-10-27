@@ -1,0 +1,410 @@
+{
+ "id": "lem-trf-affinoid-minimal-component-norm",
+ "kind": "statement",
+ "title": "Minimal components give an isometric affinoid embedding",
+ "statement": "Let $K$ be a field [def-weil-field], complete for a nontrivial real-valued nonarchimedean absolute value. Let $C\\ne0$ be a reduced commutative unital affinoid $K$-algebra, meaning a quotient of a finite-variable Tate restricted-series algebra [def-trf-restricted-series-presentation], with its affinoid Banach topology. There are finitely many minimal prime ideals $\\mathfrak p_1,\\ldots,\\mathfrak p_s$ of $C$, with $s\\ge1$, and these are all its minimal prime ideals; a minimal prime is a prime ideal containing no strictly smaller prime ideal. Each quotient $C_i=C/\\mathfrak p_i$, with its quotient topology, is a nonzero affinoid integral domain, and the quotient maps $q_i:C\\to C_i$ are continuous. For $H=C,C_i$ put $\\sigma_H(h)=\\sup_{\\mathfrak m\\in\\operatorname{Max}H}|h\\bmod\\mathfrak m|$, with the unique extending absolute values on the finite residue fields [lem-trf-affinoid-supremum-seminorm-calculus]. The map $q:C\\to\\prod_{i=1}^s C_i$ is injective, and $\\sigma_C(c)=\\max_{1\\le i\\le s}\\sigma_{C_i}(q_i(c))$ for every $c\\in C$.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Section 6.2.1, Lemma 3 and its preceding paragraph, printed p.237; affinoid quotient topology from Section 6.1.1. Primary BGR scan read online 2026-10-24; local archival copy WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation",
+  "lem-trf-affinoid-supremum-seminorm-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Choose a quotient presentation $\\alpha:T_r=K\\langle T_1,\\ldots,T_r\\rangle\\twoheadrightarrow C$ inducing the given affinoid topology. Apply [lem-trf-tate-submodule-norm-controlled-generators] with free-module rank one to each ideal of $T_r$: every such ideal has finitely many generators. For an ideal $J\\subset C$, generators of $\\alpha^{-1}(J)$ map to generators of $J$, by lifting any element of $J$ and applying $\\alpha$ to its generator expression. Thus every ideal of $C$ is finitely generated, so $C$ is Noetherian. By [lem-weil-pbc-noetherian-finitely-many-minimal-primes], its distinct minimal primes form a finite list $\\mathfrak p_1,\\ldots,\\mathfrak p_s$. This list is nonempty: since $C\\ne0$, [lem-weil-pbc-proper-ideal-contained-in-maximal] gives a maximal ideal, and [lem-weil-pbc-prime-contains-minimal-prime] with $I=0$ gives a minimal prime below it.",
+   "uses": [
+    "lem-trf-tate-submodule-norm-controlled-generators",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.3 Corollaries 9–10, printed pp.21–22; Section 1.4 Propositions 2 and 4, printed pp.22–23, and proof of Lemma 13, minimal-prime paragraph, printed p.27. Read online; local archival copy WANTED. Agent assembly using the cited DAG statements."
+   }
+  },
+  {
+   "text": "For each $i$ put $J_i=\\alpha^{-1}(\\mathfrak p_i)\\subset T_r$. This ideal is closed: for $f$ in its closure, the infimum of $\\|f-h\\|_G$ over $h\\in J_i$ is zero; [lem-trf-tate-ideal-best-approximation] attains it, so $f=h\\in J_i$. By [lem-trf-restricted-series-gauss-completion], $T_r$ is a complete normed commutative ring. Apply [lem-trf-closed-ideal-banach-quotient] to $T_r$ and $J_i$. It gives the complete quotient norm $N_i$ on $T_r/J_i$, with quotient topology and continuous open projection. The map $f+J_i\\mapsto\\alpha(f)+\\mathfrak p_i$ is a bijective $K$-algebra homomorphism onto $C_i$: surjectivity is that of $\\alpha$, and equality of the images means $f-g\\in J_i$. Transport this norm and topology to $C_i$. The same closedness argument applies to $\\ker\\alpha$, and [lem-trf-closed-ideal-banach-quotient] applied to $T_r$ and $\\ker\\alpha$ shows that the topology of the quotient Gauss norm of $\\alpha$, which is the given affinoid topology of $C$ [def-trf-restricted-series-presentation], is the quotient topology of $\\alpha$; step 3 uses this.",
+   "uses": [
+    "lem-trf-tate-ideal-best-approximation",
+    "lem-trf-restricted-series-gauss-completion",
+    "lem-trf-closed-ideal-banach-quotient",
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.3 Corollaries 9–10, printed pp.21–22; Section 1.4 Propositions 2 and 4, printed pp.22–23, and proof of Lemma 13, minimal-prime paragraph, printed p.27. Read online; local archival copy WANTED. Agent assembly using the cited DAG statements."
+   }
+  },
+  {
+   "text": "These transported topologies are exactly the requested quotient topologies. For any subset $U\\subset C_i$, it is open for the topology of step 2 if and only if $(q_i\\alpha)^{-1}(U)$ is open in $T_r$, if and only if $q_i^{-1}(U)$ is open in $C$, since the given topology of $C$ is the quotient topology of $\\alpha$ (step 2). This is the definition of the quotient topology for $q_i$ and proves its continuity. The quotient is a Banach $K$-algebra: scalar multiplication by $a\\ne0$ bijects the lifts of $x$ and $ax$ and scales their Gauss norms by $|a|$, giving $N_i(ax)=|a|N_i(x)$; the assertion for $a=0$ is immediate. Taking arbitrarily close lifts in the Gauss ultrametric inequality gives $N_i(x+y)\\le\\max(N_i(x),N_i(y))$. Completeness and submultiplicativity are step 2. The presentation $q_i\\alpha$ makes it affinoid. Since $\\mathfrak p_i$ is proper, $1+\\mathfrak p_i\\ne0$; since it is prime, a zero product of cosets has a zero factor. Hence $C_i$ is a nonzero integral domain.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.3 Corollaries 9–10, printed pp.21–22; Section 1.4 Propositions 2 and 4, printed pp.22–23, and proof of Lemma 13, minimal-prime paragraph, printed p.27. Read online; local archival copy WANTED. Agent assembly using the cited DAG statements."
+   }
+  },
+  {
+   "text": "The map $q$ is a $K$-algebra homomorphism coordinatewise. Its kernel is $\\bigcap_i\\mathfrak p_i$, since its $i$th coordinate vanishes exactly on $\\mathfrak p_i$. By [lem-per-nilradical-minimal-prime-intersection], this intersection is precisely the set of nilpotent elements of $C$. Reducedness means that every such element is zero. Therefore $\\ker q=0$, and $q$ is injective: if $q(c)=q(d)$ then $c-d\\in\\ker q$ and $c=d$.",
+   "uses": [
+    "lem-per-nilradical-minimal-prime-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.3 Corollaries 9–10, printed pp.21–22; Section 1.4 Propositions 2 and 4, printed pp.22–23, and proof of Lemma 13, minimal-prime paragraph, printed p.27. Read online; local archival copy WANTED. Agent assembly using the cited DAG statements."
+   }
+  },
+  {
+   "text": "By [lem-trf-affinoid-supremum-seminorm-calculus], all residue fields and their unique extending absolute values defining $\\sigma_C$ and $\\sigma_{C_i}$ exist, and these suprema are finite nonnegative real numbers. Its contractivity assertion applied to $q_i:C\\to C_i$ gives $\\sigma_{C_i}(q_i(c))\\le\\sigma_C(c)$ for each $i$. Since $s\\ge1$, their finite maximum $M$ exists and satisfies $M\\le\\sigma_C(c)$.",
+   "uses": [
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.3 Corollaries 9–10, printed pp.21–22; Section 1.4 Propositions 2 and 4, printed pp.22–23, and proof of Lemma 13, minimal-prime paragraph, printed p.27. Read online; local archival copy WANTED. Agent assembly using the cited DAG statements."
+   }
+  },
+  {
+   "text": "Conversely, let $\\mathfrak m$ be any maximal ideal of $C$. By [lem-weil-pbc-prime-contains-minimal-prime] with $I=0$, it contains some $\\mathfrak p_i$. The ideal $\\mathfrak n=\\mathfrak m/\\mathfrak p_i\\subset C_i$ is maximal: the map $C_i\\to C/\\mathfrak m$, $c+\\mathfrak p_i\\mapsto c+\\mathfrak m$, is surjective with kernel $\\mathfrak n$, so $C_i/\\mathfrak n\\cong C/\\mathfrak m$ is a field. This is a $K$-isomorphism sending the residue of $q_i(c)$ to the residue of $c$. By uniqueness of the extending absolute values in [lem-trf-affinoid-supremum-seminorm-calculus], their values agree. Therefore $|c\\bmod\\mathfrak m|=|q_i(c)\\bmod\\mathfrak n|\\le\\sigma_{C_i}(q_i(c))\\le M$. Taking the supremum over all $\\mathfrak m$ gives $\\sigma_C(c)\\le M$. Together with step 5 this proves the asserted equality.",
+   "uses": [
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.3 Corollaries 9–10, printed pp.21–22; Section 1.4 Propositions 2 and 4, printed pp.22–23, and proof of Lemma 13, minimal-prime paragraph, printed p.27. Read online; local archival copy WANTED. Agent assembly using the cited DAG statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-tate-submodule-norm-controlled-generators",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-trf-tate-ideal-best-approximation",
+  "lem-trf-restricted-series-gauss-completion",
+  "lem-trf-closed-ideal-banach-quotient",
+  "def-trf-restricted-series-presentation",
+  "lem-per-nilradical-minimal-prime-intersection",
+  "lem-trf-affinoid-supremum-seminorm-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 1.3 Corollaries 9–10, printed pp.21–22; Section 1.4 Propositions 2 and 4, printed pp.22–23, and proof of Lemma 13, minimal-prime paragraph, printed p.27. Read online; local archival copy WANTED. Agent assembly using the cited DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reduced affinoid algebra embeds isometrically for the supremum norm into the finite product of its integral domain quotients by all minimal prime ideals",
+   "results": {
+    "t": "2026-10-24T09:50:22Z",
+    "tool": "leanfinder",
+    "query": "A reduced affinoid algebra embeds isometrically for the supremum norm into the finite product of its integral domain quotients by all minimal prime ideals",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PrimeSpectrum.toPiLocalization_bijective",
+     "IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion",
+     "MaximalSpectrum.toPiLocalizationEquiv",
+     "exists_integral_inj_algHom_of_quotient",
+     "AdicCompletion.piEquivFin_apply",
+     "IsDedekindDomain.FiniteAdeleRing.algebraMap",
+     "IsDedekindDomain.FiniteAdeleRing.instDFunLikeHeightOneSpectrumAdicCompletion",
+     "PrimeSpectrum.sigmaToPi_bijective"
+    ],
+    "digest": "0582ccc61aa6a812"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finiteness of minimalPrimes assumes a Noetherian ring; the generic seminorm supremum and product formulas do not give affinoid Noetherianity, closedness of its prime ideals, or identification with the quotient supremum norms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The supremum norm on a reduced affinoid algebra equals the maximum of the supremum norms on the finitely many quotients by its minimal prime ideals",
+   "results": {
+    "t": "2026-10-24T09:50:22Z",
+    "tool": "leansearch",
+    "query": "The supremum norm on a reduced affinoid algebra equals the maximum of the supremum norms on the finitely many quotients by its minimal prime ideals",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Seminorm.sup_apply",
+     "PiLp.nnnorm_eq_ciSup",
+     "Seminorm.coe_sup",
+     "Seminorm.finset_sup_apply",
+     "NonarchAddGroupSeminorm.coe_sSup_apply",
+     "Seminorm.instSup",
+     "NonUnitalIsometricContinuousFunctionalCalculus.isGreatest_nnnorm_quasispectrum",
+     "Ideal.Quotient.semiNormedCommRing"
+    ],
+    "digest": "d29cab73ce0cdc32"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finiteness of minimalPrimes assumes a Noetherian ring; the generic seminorm supremum and product formulas do not give affinoid Noetherianity, closedness of its prime ideals, or identification with the quotient supremum norms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"minimalPrimes\", \"Finite\"",
+   "results": {
+    "t": "2026-10-24T09:50:23Z",
+    "tool": "loogle",
+    "query": "\"minimalPrimes\", \"Finite\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "minimalPrimes.finite_of_isNoetherianRing",
+     "Ideal.finite_minimalPrimes_of_isNoetherianRing"
+    ],
+    "digest": "01393472fb61cc86"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finiteness of minimalPrimes assumes a Noetherian ring; the generic seminorm supremum and product formulas do not give affinoid Noetherianity, closedness of its prime ideals, or identification with the quotient supremum norms."
+  },
+  {
+   "tool": "grep",
+   "query": "minimalPrimes.*[Ff]inite|[Ff]inite.*minimalPrimes|affinoid",
+   "results": {
+    "t": "2026-10-24T09:50:23Z",
+    "tool": "grep",
+    "query": "minimalPrimes.*[Ff]inite|[Ff]inite.*minimalPrimes|affinoid",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 14,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean",
+     "Mathlib/RingTheory/KrullDimension/Regular.lean",
+     "Mathlib/RingTheory/HopkinsLevitzki.lean",
+     "Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean",
+     "Mathlib/RingTheory/Ideal/MinimalPrime/Noetherian.lean",
+     "Mathlib/RingTheory/Ideal/MinimalPrime/Noetherian.lean",
+     "Mathlib/RingTheory/Ideal/MinimalPrime/Noetherian.lean",
+     "Mathlib/RingTheory/Ideal/MinimalPrime/Noetherian.lean"
+    ],
+    "digest": "f0b107d831f0aad2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finiteness of minimalPrimes assumes a Noetherian ring; the generic seminorm supremum and product formulas do not give affinoid Noetherianity, closedness of its prime ideals, or identification with the quotient supremum norms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonarchimedean affinoid Banach algebras are Noetherian and the spectral seminorm is the maximum of the spectral norms of the quotients by their finite minimal prime ideals",
+   "results": {
+    "t": "2026-10-24T09:50:24Z",
+    "tool": "leanfinder",
+    "query": "Nonarchimedean affinoid Banach algebras are Noetherian and the spectral seminorm is the maximum of the spectral norms of the quotients by their finite minimal prime ideals",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "isNonarchimedean_spectralNorm",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralMulAlgNorm",
+     "spectralMulAlgNorm_def",
+     "spectralAlgNorm",
+     "spectralAlgNorm_def",
+     "spectralNorm_unique",
+     "spectralNorm.normedSpace"
+    ],
+    "digest": "b7d84ed4c7c98629"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: finiteness of minimalPrimes assumes a Noetherian ring; the generic seminorm supremum and product formulas do not give affinoid Noetherianity, closedness of its prime ideals, or identification with the quotient supremum norms."
+  },
+  {
+   "tool": "grep",
+   "query": "affinoid|minimalPrimes.*finite|sInf_minimalPrimes",
+   "results": {
+    "t": "2026-10-24T13:52:59Z",
+    "tool": "grep",
+    "query": "affinoid|minimalPrimes.*finite|sInf_minimalPrimes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 13,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean",
+     "Mathlib/RingTheory/HopkinsLevitzki.lean",
+     "Mathlib/RingTheory/KrullDimension/Regular.lean",
+     "Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean",
+     "Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean",
+     "Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean",
+     "Mathlib/RingTheory/Ideal/MinimalPrime/Noetherian.lean",
+     "Mathlib/RingTheory/Ideal/MinimalPrime/Noetherian.lean"
+    ],
+    "digest": "9a7b21ace8178bca"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: finiteness of minimal primes and their intersection are reused Mathlib leaves, but the hits do not provide the Tate topology, affinoid component quotients and maximal-residue supremum comparison. The alternative ring-theoretic phrasing was also checked."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The spectral supremum norm of a reduced affinoid algebra equals the maximum of the norms of its minimal prime quotients",
+   "results": {
+    "t": "2026-10-24T13:53:00Z",
+    "tool": "leansearch",
+    "query": "The spectral supremum norm of a reduced affinoid algebra equals the maximum of the norms of its minimal prime quotients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralAlgNorm",
+     "spectralRadius",
+     "spectralNorm_eq_iSup_of_finiteDimensional_normal",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "NonUnitalIsometricContinuousFunctionalCalculus.isGreatest_nnnorm_quasispectrum",
+     "IsometricContinuousFunctionalCalculus.isGreatest_nnnorm_spectrum",
+     "spectrum.pow_nnnorm_pow_one_div_tendsto_nhds_spectralRadius",
+     "NonUnitalIsometricContinuousFunctionalCalculus.isGreatest_norm_quasispectrum"
+    ],
+    "digest": "8a3b987ca23cd9b8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: finiteness of minimal primes and their intersection are reused Mathlib leaves, but the hits do not provide the Tate topology, affinoid component quotients and maximal-residue supremum comparison. The alternative ring-theoretic phrasing was also checked."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"minimalPrimes\", \"Finite\"",
+   "results": {
+    "t": "2026-10-24T13:53:00Z",
+    "tool": "loogle",
+    "query": "\"minimalPrimes\", \"Finite\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "minimalPrimes.finite_of_isNoetherianRing",
+     "Ideal.finite_minimalPrimes_of_isNoetherianRing"
+    ],
+    "digest": "01393472fb61cc86"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: finiteness of minimal primes and their intersection are reused Mathlib leaves, but the hits do not provide the Tate topology, affinoid component quotients and maximal-residue supremum comparison. The alternative ring-theoretic phrasing was also checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced affinoid algebra embeds isometrically for the maximal residue supremum into its finite product of minimal prime quotients",
+   "results": {
+    "t": "2026-10-24T13:53:01Z",
+    "tool": "leanfinder",
+    "query": "A reduced affinoid algebra embeds isometrically for the maximal residue supremum into its finite product of minimal prime quotients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MaximalSpectrum.toPiLocalizationEquiv",
+     "AdicCompletion.piEquivFin_apply",
+     "Ideal.injective_algebraMap_quotient_residueField",
+     "IsArtinianRing.quotNilradicalEquivPi",
+     "Ideal.bijective_algebraMap_quotient_residueField",
+     "PrimeSpectrum.exists_maximal_notMem_range_sigmaToPi_of_infinite",
+     "Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime",
+     "PrimeSpectrum.coe_preimageHomeomorphFiber_apply_asIdeal"
+    ],
+    "digest": "a414f7120a1f3f9e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: finiteness of minimal primes and their intersection are reused Mathlib leaves, but the hits do not provide the Tate topology, affinoid component quotients and maximal-residue supremum comparison. The alternative ring-theoretic phrasing was also checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian reduced ring the intersection of its finitely many minimal primes is zero and every maximal ideal contains one of these primes",
+   "results": {
+    "t": "2026-10-24T13:54:36Z",
+    "tool": "leanfinder",
+    "query": "For a Noetherian reduced ring the intersection of its finitely many minimal primes is zero and every maximal ideal contains one of these primes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "minimalPrimes.finite_of_isNoetherianRing",
+     "PrimeSpectrum.finite_setOf_isMin",
+     "Ideal.isLasker",
+     "Ideal.finite_minimalPrimes_of_isNoetherianRing",
+     "IsLasker",
+     "IsJacobsonRing",
+     "Ring.krullDimLE_one_iff",
+     "Ring.KrullDimLE.mk₁"
+    ],
+    "digest": "6f2b25c00e9ffffd"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire item: finiteness of minimal primes and their intersection are reused Mathlib leaves, but the hits do not provide the Tate topology, affinoid component quotients and maximal-residue supremum comparison. The alternative ring-theoretic phrasing was also checked."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-affinoid-unit-ball-finiteness",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Minimal components give an isometric affinoid embedding.",
+   "via": [
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-affinoid-minimal-component-norm",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six steps: use norm-controlled Tate generators for Noetherianity and existing minimal-prime leaves for finiteness; best approximation and one general Mathlib quotient leaf provide the component Banach topologies; the nilradical intersection gives injectivity; residue-field isomorphisms and uniqueness of extending values give both norm inequalities. One new node, a Mathlib leaf; no Lean or compiler use.",
+  "blueprint": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Minimal components give an isometric affinoid embedding. Steps 1–6 realize only this historical supporting analytic input. The current contracting-correspondence blueprint route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-ecdb34cd3",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-ecdb34cd3 (reviewer sub-agent of L); spot-checked: I read the item, the new leaf, every cited statement, the parent's use of the item and the Mathlib lines. BGR 6.2.1/3 and Bosch's Formal and Rigid Geometry are not in literature/, so I could not read the cited places; the item correctly marks proof_origin agent and lists both as WANTED. I checked the mathematics against the DAG statements instead. Step 1: rank-one norm-controlled generators give Noetherian; then finitely many minimal primes, and s>=1 from a maximal ideal and a minimal prime below it. Step 2: best approximation shows J_i is closed; Gauss completion and the new leaf give the quotient norm; T_r/J_i = C_i by an explicit kernel check. Step 3: elementary topology, homogeneity and domain checks. Step 4: nilradical = intersection of minimal primes, and reducedness gives injectivity. Steps 5-6: contractivity of the supremum, every maximal ideal contains some p_i, and uniqueness of the extending absolute value. Small cases checked: K, KxK, K<T,U>/(TU), and the non-reduced K<T>/(T^2). New leaf lem-trf-closed-ideal-banach-quotient: verified Quotient.lean lines 434, 494, 513 and 66-96, and Ring/Ideal.lean:79; true for I=R, I=0 and R=0; not a duplicate of affinoid-quotient-norm-topology (which assumes a Banach target), finite-dimensional-quotient-open or polynomial-closed-point-comparison; not a clause of the item. All trf citations are in the item's own unit sk-i-curve-zero; no tool_uses. FIX: step 3 assumed that C's affinoid topology (the quotient Gauss norm topology) is the quotient topology of alpha, without a citation. Step 2 now applies the closedness argument and the leaf to ker alpha, cites def-trf-restricted-series-presentation, and step 3 refers to it; proof_deps recomputed; statement unchanged.; 1 file(s) fixed by the reviewer"
+ }
+}

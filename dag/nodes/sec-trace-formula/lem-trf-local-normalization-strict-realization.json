@@ -1,0 +1,477 @@
+{
+ "id": "lem-trf-local-normalization-strict-realization",
+ "kind": "statement",
+ "title": "Strict quotient realization of local transport normalization",
+ "statement": "Fix the global finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber], with $q=p^a$ and $k$ the fixed algebraic closure of $k_0$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ in a fixed algebraic closure, with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$ and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Let $X_0$ be separated of finite type over $k_0$, put $X=X_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$, and put $g=g_X=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$ and $g_s=\\operatorname{Spec}(\\gamma)$ for geometric Frobenius [def-weil-frobenius-detailed]. Use the derived pullbacks of [def-weil-derived-pullback-tensor-hom] and the point functor $\\operatorname{Fib}_{s,\\Lambda}$ of [def-weil-finite-coefficient-point], on the small pro-etale sites [def-weil-pbc-proetale-site].\n\nFix $m\\geq1$ and a $k$-point $z:s\\to X$ with $\\Phi^mz=z$ and $g^mz=zg_s^m$, where $\\Phi$ is the scheme Frobenius [def-trf-scheme-frobenius]. Let $K\\in D^b_c(X,\\mathcal O_E)$ be derived-complete integral constructible [def-weil-derived-complete-integral-detailed]. Take any flat-term K-flat representative $Q\\to K$ [lem-pc-kflat-resolution], and write $Q_n=Q\\otimes_{\\widehat{\\mathcal O}_{E,X}}(A_{E,n})_X$ for its simultaneous quotients with their actual quotient transitions. Use the integral compositors and pullback/scalar comparisons specified by [lem-trf-integral-pullback-comparison-realization], the termwise finite compositors [lem-weil-pbc-proetale-derived-pullback-composition], and the canonical absolute-Frobenius comparisons $\\kappa^{(m)}$ [prop-trf-scheme-galois-comparison].\n\nFor $\\Lambda=A_{E,n},\\mathcal O_E$ put $P_\\Lambda=Lz_\\Lambda^*$, $U_\\Lambda=Lg_{s,\\Lambda}^*$, $G_\\Lambda=Lg_\\Lambda^*$, $J_\\Lambda=\\operatorname{Fib}_{s,\\Lambda}P_\\Lambda$, and $I_N^{(0)}=1$, $I_N^{(j+1)}=\\iota_{U_\\Lambda^jN}I_N^{(j)}$, with the specified point transports [def-weil-frobenius-point-transport]. Write $v_{\\Lambda,K}:U_\\Lambda^mP_\\Lambda K\\xrightarrow{\\sim}P_\\Lambda G_\\Lambda^mK$ for the return-square comparison, and $\\rho_{n,K}:J_nK\\to J_nL(\\Phi^m)^*K$ for the fixed-point comparison. On each $Q_n$ let $A_n$ be the chain-map recipe $\\operatorname{Fib}_{s,n}(v_{n,Q_n})I_{P_nQ_n}^{(m)}$ and let $B_n$ be the recipe $J_n(\\kappa^{(m)}_{Q_n})\\rho_{n,Q_n}$, both with the same termwise pullback identifications.\n\nThese recipes commute with the actual quotient transitions and define morphisms $A_\\bullet,B_\\bullet$ of the entire strict diagrams. They commute also with the canonical derived coefficient comparisons for every quotient $A_{E,n}\\to A_{E,j}$, $n\\geq j\\geq1$. Under the whole-system composition and point-section identifications, their realizations by the functor $R\\lim$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit] are respectively the specified integral map $\\operatorname{Fib}_{s,\\mathcal O_E}(v_{\\mathcal O_E,K})I_{P_{\\mathcal O_E}K}^{(m)}$ and the stipulated realization of $J_n(\\kappa^{(m)})\\rho_n$. In particular the first realization uses the actual integral point transport, not merely maps agreeing with it at individual reductions.\n\nIf the finite recipes are equal as chain maps on every $Q_n$, then $A_\\bullet=B_\\bullet$ as strict maps and the displayed integral realizations are equal. Their rationalizations are equal in the raw category [def-weil-rationalization-karoubi]; rationalization carries the successive integral point-transport recipe to the successive rational recipe, and carries its integral naturality equation to naturality for all rationalized morphisms. No finite Tor-amplitude or perfectness hypothesis on any reduction is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Last sentence, Frobenius transport: returned local normalization proof, Steps 5, 6, 7."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-frobenius-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "def-weil-pbc-proetale-site",
+  "def-trf-scheme-frobenius",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-pc-kflat-resolution",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "prop-trf-scheme-galois-comparison",
+  "def-weil-frobenius-point-transport",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-rationalization-karoubi",
+  "lem-trf-frobenius-coefficient-reduction-coherence",
+  "lem-trf-scheme-galois-comparison-normal-form",
+  "lem-pod-point-sections-derived-reduction-data",
+  "def-trf-section-localization-coordinate-transport",
+  "def-trf-semilinear-raw-localization-extension",
+  "def-trf-point-power-restriction-data",
+  "def-trf-point-representative-coordinate-data",
+  "def-trf-integral-point-power-compositor",
+  "def-trf-point-finite-reduction-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "Compute all reductions on the given single $Q$. By [lem-pur-kflat-change-of-rings], every $Q_n$ is K-flat with flat terms over $(A_{E,n})_X$; by [lem-weil-pbc-ringed-pullback-preserves-kflat] the same holds after any finite pullback occurring in either recipe. Thus their termwise pullbacks compute the indicated derived pullbacks, with compositors exactly as in [lem-weil-pbc-proetale-derived-pullback-composition]. For $n\\geq j$, the associator $(Q\\otimes A_{E,n})\\otimes_{A_{E,n}}A_{E,j}\\to Q\\otimes A_{E,j}$ sends $(x\\otimes a)\\otimes b$ to $x\\otimes\\bar a b$ and is invertible by $x\\otimes b\\mapsto(x\\otimes1)\\otimes b$. K-flatness makes this the derived quotient comparison, by [lem-pur-derived-change-of-rings]. These are comparisons of the simultaneous quotients with their given transitions.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Local normalization, simultaneous quotient models; supporting Stacks Tags 0G7E and 0D6D."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-point-system-insertion-composition] to the strict system $C_n=z_n^*Q_n$ on $s$, with $h=g_s$. It supplies chain maps on the whole system, including naturality and composition of successive point restrictions with tensor-unit insertion. Under its finite module-pullback identification these are exactly the successive factors of $I^{(m)}$. Each factor commutes with the actual transitions: both paths send an inserted section to $t_n(x)\\otimes\\bar1=t_n(x)\\otimes1$. The module compositors in [lem-weil-pbc-proetale-derived-pullback-composition] are natural in their input; on coefficient tensors quotient sends every factor to its image and preserves products and units. Consequently the return-square comparison for $g^mz=zg_s^m$, built from these compositors and their inverses, commutes with the transitions. Applying sections and composing gives the strict map $A_\\bullet$.",
+   "uses": [
+    "lem-trf-point-system-insertion-composition",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Local normalization, strict successive point transports and return square."
+   }
+  },
+  {
+   "text": "For $B_\\bullet$, use [lem-trf-scheme-galois-comparison-normal-form]: with $H=F_X^{am}$, $\\kappa_n^{(m)}=\\tau_{n,L(g^m)^*Q_n}^{(am)}d_{n,Q_n}$. The trivialization in [lem-pur-frobenius-trivialization-pullback] is induced termwise by restriction along the relative Frobenius isomorphisms, followed by the canonical coefficient identification. Restriction commutes with the quotient-linear maps $Q_{n+1}\\to Q_n$; on scalar insertion both paths take $x\\otimes a$ to the restriction of $x$ tensored with $\\bar a$. The inverse-image colimit coprojections and their sheafification maps respect these maps by their defining functoriality. Hence the trivialization and its inverse commute with the transitions as actual sheaf maps. The same holds for $d_n$ and the fixed-point compositor $\\rho_n$ for $\\Phi^mz=z$, by [lem-weil-pbc-proetale-derived-pullback-composition]. Composing and taking sections gives exactly $B_n$, with transition squares commuting before localization. Thus $B_\\bullet$ is a strict map.",
+   "uses": [
+    "lem-trf-scheme-galois-comparison-normal-form",
+    "lem-pur-frobenius-trivialization-pullback",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Local normalization, strict absolute-Frobenius recipe."
+   }
+  },
+  {
+   "text": "Check derived coefficient change for $A_{E,n}\\to A_{E,j}$. Step 1 computes the quotient tensors on $Q_n$ and its pullbacks. For point transport the scalar comparison takes $(x\\otimes1)\\otimes b$ to $x\\otimes b$; doing restriction before or after this sends it to the restriction of $x$ tensored with $b$. For the compositor both routes on $(x\\otimes a)\\otimes b$ give $x\\otimes\\bar a b$. These computations give compatibility of $I^{(m)}$, $v$ and $\\rho$ with derived quotient identifications. For $\\kappa^{(m)}$, [lem-trf-scheme-galois-coefficient-change] gives exactly its canonical derived coefficient square, including nonflat quotients. Passing to sections uses [lem-trf-point-sections-finite-reduction], with naturality and successive-reduction coherence. Its bounded-above hypothesis holds: reductions are bounded constructible by [def-weil-derived-complete-integral-detailed], and their finite pullbacks are the bounded reductions of completed pullbacks by [lem-pur-integral-operations-preserve-constructible]. This proves canonical derived quotient compatibility of both recipes in addition to their strict transition compatibility.",
+   "uses": [
+    "lem-trf-scheme-galois-coefficient-change",
+    "lem-trf-point-sections-finite-reduction",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-pur-integral-operations-preserve-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "Local normalization, every derived coefficient quotient."
+   }
+  },
+  {
+   "text": "Identify the entire systems used for realization. By [lem-trf-effective-comparison-realization-models], finite pullbacks of the reduction system of $K$ are normalized systems with constructible derived-complete realizations. Apply this successively to $z$, powers of $g_s$ and powers of $g$; thus every intermediate realization lies in the needed domain. The point-sections comparison for the strict $z$-pullback realization is [lem-trf-point-pullback-representative-diagram]: it is canonical on both product coordinates and natural for derived morphisms. For finite words of pullbacks, [lem-trf-counit-realization-substitution] supplies the iterated comparison $r_w$, with $r_{vw}=r_{v,wC}\\widehat v(r_{w,C})$, and identifies a compositor or its inverse with $r_{w'}^{-1}R\\lim(t)r_w$. These are whole-system counit identifications. They are the families prescribed by [lem-trf-integral-pullback-comparison-realization], for both paths through the return square.",
+   "uses": [
+    "lem-trf-effective-comparison-realization-models",
+    "lem-trf-point-pullback-representative-diagram",
+    "lem-trf-counit-realization-substitution",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Local normalization, whole-system identifications for iterated pullbacks."
+   }
+  },
+  {
+   "text": "Put $N=P_{\\mathcal O_E}K$ and $C_\\bullet=(z_n^*Q_n)_n$. Apply [lem-trf-integral-point-transport-tower-powers] to $C_\\bullet$. Its realization is $N$, constructible derived-complete by step 5. That lemma realizes the tower point insertion as the actual integral transport, with comparison $\\nu_{r,C}$ using the inverse of the specified integral $\\kappa$; it also gives its compositor equation for the specified $c^E$. Check agreement with step 5's comparisons using [lem-trf-integral-pullback-reduction-counit] for $g_s$ and the normalized reduction calculus on $s$. Its whole-tower identity says that the specified $\\kappa$ followed by the prescribed realization comparison has adjunct the finite tensor-unit insertion applied to the completion unit and counit. For a reduction system this is the whole-limit-cone insertion defining $\\nu$ in the power-realization lemma. For our normalized $C$, transport the equation along the whole-system counit $\\mathcal R\\mathcal LC\\xrightarrow{\\sim}C$ of step 5; naturality of that counit and the comparisons transports both adjuncts, so they still agree. The whole-tower counit bijection of [lem-trf-integral-comparison-counit-characterization] makes the maps equal. Thus the power-realization equation uses the prescribed coordinates, including zero shifted-product normalization. Starting with the identity at $j=0$, the recurrence in [lem-trf-point-system-insertion-composition] and the power-realization compositor equation identify the $j+1$ realization with $\\iota_{U^jN}$ following the $j$ realization. Induction to $m$ identifies the successive strict point recipe with $I_N^{(m)}$.",
+   "uses": [
+    "lem-trf-integral-point-transport-tower-powers",
+    "lem-trf-integral-pullback-reduction-counit",
+    "lem-trf-integral-comparison-counit-characterization",
+    "lem-trf-point-system-insertion-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Local normalization, actual integral point transport and successive powers."
+   }
+  },
+  {
+   "text": "By [lem-trf-integral-pullback-comparison-realization], the strict return-square compositor, under step 5's whole-system comparisons, realizes to the specified $v_{\\mathcal O_E,K}$. Combine with step 6 and functoriality of $R\\lim$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit] to get $R\\lim(A_\\bullet)=\\operatorname{Fib}_{s,\\mathcal O_E}(v_{\\mathcal O_E,K})I_{P_{\\mathcal O_E}K}^{(m)}$ in these coordinates. For $B_\\bullet$ its stipulated realization is, by definition, $R\\lim$ of the strict composite of $\\rho_\\bullet$ with $J_\\bullet(\\kappa^{(m)})$, using the same source and target comparisons. Step 3 constructed precisely this composite, so $R\\lim(B_\\bullet)$ is that stipulated realization. The first equality uses the actual integral point map of step 6, rather than an inference from equality at separate finite derived levels.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Local normalization, realization of both recipes."
+   }
+  },
+  {
+   "text": "If $A_n=B_n$ as chain maps for every $n$, the two strict natural transformations have identical components, and hence $A_\\bullet=B_\\bullet$. Apply the functor $R\\lim$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] and conjugate by the same source and target identifications of steps 5-7. This gives equality of the displayed integral realizations. Here equality is used in the category of strict diagrams, where a map is its commuting component family.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Local normalization, equality before realization."
+   }
+  },
+  {
+   "text": "Record integral naturality. By [lem-weil-frobenius-point-transport-natural], for every integral $u:N\\to N'$ one has $\\operatorname{Fib}(Uu)\\iota_N=\\iota_{N'}\\operatorname{Fib}(u)$. If $\\operatorname{Fib}(U^ju)I_N^{(j)}=I_{N'}^{(j)}\\operatorname{Fib}(u)$, multiply on the left by $\\iota_{U^jN'}$ and use naturality with $U^ju$. The result is the equation with $j+1$; the base $j=0$ is the identity. Thus $I^{(m)}$ is natural. The specified $v$ is natural by [lem-trf-integral-pullback-comparison-realization]. Apply that naturality square after the equation for $I^{(m)}$ to obtain the integral naturality equation for $\\operatorname{Fib}(v)I^{(m)}$.",
+   "uses": [
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Local normalization, integral naturality."
+   }
+  },
+  {
+   "text": "Apply raw rationalization [def-weil-rationalization-karoubi]. It preserves equality, identities and composition. Its point-transport components are precisely $\\iota_N\\otimes E$ by [def-weil-frobenius-point-transport], so induction through the recurrence carries $I^{(m)}$ and then $\\operatorname{Fib}(v)I^{(m)}$ to the successive rational recipes. Every rationalized morphism is a finite sum $\\sum_i u_i\\otimes a_i$ in the localized Hom module. Step 9's naturality equation holds for each $u_i$, hence for $u_i\\otimes a_i$ by scalar bilinearity of composition, and for their sum by additivity. This proves naturality for all morphisms in the raw category. All computations used flat-term K-flat resolutions and whole systems; no reduction was assumed perfect or of finite Tor-amplitude.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-frobenius-point-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Local normalization, raw rationalization and all localized morphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pur-derived-change-of-rings",
+  "lem-trf-point-system-insertion-composition",
+  "lem-trf-scheme-galois-comparison-normal-form",
+  "lem-pur-frobenius-trivialization-pullback",
+  "lem-trf-scheme-galois-coefficient-change",
+  "lem-trf-point-sections-finite-reduction",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-trf-effective-comparison-realization-models",
+  "lem-trf-point-pullback-representative-diagram",
+  "lem-trf-counit-realization-substitution",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-integral-point-transport-tower-powers",
+  "lem-trf-integral-pullback-reduction-counit",
+  "lem-trf-integral-comparison-counit-characterization",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-frobenius-point-transport-natural",
+  "def-weil-rationalization-karoubi",
+  "def-weil-frobenius-point-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Last sentence, Frobenius transport; explicit strict quotient and whole-system realization argument, with the point realization interface of prop-trf-rational-frobenius-integral-model proof (3)-(4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ff]robenius.*(tower|[Cc]omplet|[Rr]eali)|[Pp]roetale.*[Tt]ower",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit.map",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"loogle: unknown identifier 'CategoryTheory.Limits.limit.map'\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of strict coefficient reduction systems preserves point Frobenius normalization",
+   "results": "{\"hits\": 8, \"top\": [\"InverseSystem.limit\", \"InverseSystem.isNatEquiv_piEquivLim\", \"InverseSystem.invLimEquiv_symm_apply_coe\", \"InverseSystem.invLimEquiv.congr_simp\", \"Profinite.lim\", \"Ring.DirectLimit.congr_symm_apply_of\", \"InverseSystem.invLimEquiv\", \"ProfiniteGrp.isIso_toLimit\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat simultaneous reductions whole tower morphisms point sections and completed pullback composition comparison",
+   "results": "{\"hits\": 8, \"top\": [\"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.Flat.instFstScheme\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"AlgebraicGeometry.Flat.comp\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of Frobenius transport maps on simultaneous quotient complexes realizes to completed integral pullback and rationalization without finite Tor dimension",
+   "results": "{\"hits\": 8, \"top\": [\"AdicCompletion.tensor_map_id_left_eq_map\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AlgHom.IsArithFrobAt.mk_apply\", \"IsArithFrobAt.arithFrobAt\", \"AdicCompletion.ofTensorProduct_naturality\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyLimit|derivedLimit|[Ss]trict[Tt]ower",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map\", \"lim\"",
+   "results": "{\"hits\": 12, \"top\": [\"Option.elim_map\", \"Option.elim_pmap\", \"Option.elimM_map\", \"Sum.elim_map\", \"Sum.elim_comp_map\", \"Lean.Meta.CustomEliminators.map\", \"Lean.Elab.Tactic.ElimApp.Alt\", \"Lean.Elab.Tactic.ElimApp.Result\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of simultaneous coefficient reductions preserves natural Frobenius point transport maps",
+   "results": "{\"hits\": 8, \"top\": [\"InverseSystem.limit\", \"InverseSystem.isNatEquiv_piEquivLim\", \"InverseSystem.globalEquiv_naturality\", \"InverseSystem.invLimEquiv.congr_simp\", \"InverseSystem.invLimEquiv_symm_apply_coe\", \"InverseSystem.piEquivLim.congr_simp\", \"InverseSystem.invLimEquiv\", \"CategoryTheory.Limits.limit.isoLimitCone_inv_π\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary inverse limits, generic naturality, Frobenius ring maps and sheaf evaluation do not identify these completed pro-etale whole-system transport recipes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict quotient towers of K flat complexes Frobenius point transport realizes to completed integral pullback and rationalization without perfectness",
+   "results": "{\"hits\": 8, \"top\": [\"PerfectionMap.map\", \"PreTilt.untilt_iterate_frobeniusEquiv_symm_pow\", \"PerfectRing.liftAux\", \"WittVector.exists_frobenius_solution_fractionRing_aux\", \"Algebra.HasGoingDown.of_flat\", \"PerfectRing.liftAux_apply\", \"PerfectRing.lift_apply\", \"AlgHom.IsArithFrobAt.isArithFrobAt_localize\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary inverse limits, generic naturality, Frobenius ring maps and sheaf evaluation do not identify these completed pro-etale whole-system transport recipes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "{\"hits\": 9, \"top\": [\"CategoryTheory.NatTrans.naturality\", \"CategoryTheory.Limits.PullbackCone.isoMk\", \"CategoryTheory.Limits.PushoutCocone.isoMk\", \"CategoryTheory.Limits.PullbackCone.isoMk_hom_hom\", \"CategoryTheory.Limits.PullbackCone.isoMk_inv_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom\", \"CategoryTheory.Grothendieck.map_map\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary inverse limits, generic naturality, Frobenius ring maps and sheaf evaluation do not identify these completed pro-etale whole-system transport recipes"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*(tower|realization)|homotopyLimit|strictTower",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary inverse limits, generic naturality, Frobenius ring maps and sheaf evaluation do not identify these completed pro-etale whole-system transport recipes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations of inverse systems of sheaf module complexes commute with derived completion and exact final object sections",
+   "results": "{\"hits\": 8, \"top\": [\"SheafOfModules.Presentation.map_π_eq\", \"LightCondMod.hom_naturality_apply\", \"localCohomology.diagramComp\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"LightCondensed.ihomPoints_symm_comp\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map\", \"PresheafOfModules.limitPresheafOfModules_map\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary inverse limits, generic naturality, Frobenius ring maps and sheaf evaluation do not identify these completed pro-etale whole-system transport recipes"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale|derived.*limit|completed.*pullback",
+   "results": "{\"hits\": 2, \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary inverse limits, generic naturality, Frobenius ring maps and sheaf evaluation do not identify these completed pro-etale whole-system transport recipes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-frobenius-transport-normalization",
+  "date": "2026-10-22",
+  "group": "Q128"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Last sentence, Frobenius transport: returned local normalization proof, Steps 5, 6, 7.",
+   "via": [
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-local-normalization-strict-realization",
+  "worker": "stage1",
+  "summary": "Q97: checked both strict quotient recipes, derived coefficient compatibility without finite Tor-amplitude, actual integral point transport through whole-system counits, equality after realization and raw rational naturality. Reused existing nodes; no new nodes or statement changes.",
+  "blueprint": "prop-trf-karoubi-independence.proof.md, last sentence: Frobenius endomorphisms are transported. Steps 1-4 give strict quotient recipes, 5-7 their actual realizations, 8-10 equality and rational naturality.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "K-flat quotient models over each coefficient ring; generic ringed-site resolution tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Termwise pullbacks compute derived pullback on the fixed quotient representatives; generic ringed-topos tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Actual termwise finite compositor on K-flat complexes, needed to keep the specified normalization."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "K-flat computation of possibly nonflat derived coefficient quotients."
+   },
+   {
+    "node": "lem-trf-scheme-galois-comparison-normal-form",
+    "why": "Whole-system comparison used as a generic interface; the local normalization item has no separate node supplying this prerequisite."
+   },
+   {
+    "node": "lem-pur-frobenius-trivialization-pullback",
+    "why": "Explicit termwise relative-Frobenius construction of the canonical trivialization, needed for strict transition compatibility."
+   },
+   {
+    "node": "lem-trf-scheme-galois-coefficient-change",
+    "why": "Whole-system comparison used as a generic interface; the local normalization item has no separate node supplying this prerequisite."
+   },
+   {
+    "node": "lem-trf-point-sections-finite-reduction",
+    "why": "Canonical point-sections comparison with derived coefficient reduction on the bounded-above domain."
+   },
+   {
+    "node": "def-weil-derived-complete-integral-detailed",
+    "why": "Whole-system comparison used as a generic interface; the local normalization item has no separate node supplying this prerequisite."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Constructible-complete intermediate pullbacks and bounded-above reductions."
+   },
+   {
+    "node": "lem-trf-point-pullback-representative-diagram",
+    "why": "Whole-system comparison used as a generic interface; the local normalization item has no separate node supplying this prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Whole-system comparison used as a generic interface; the local normalization item has no separate node supplying this prerequisite."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Naturality of the actual defined integral point transport, then iterated by the displayed induction."
+   },
+   {
+    "node": "def-weil-rationalization-karoubi",
+    "why": "Whole-system comparison used as a generic interface; the local normalization item has no separate node supplying this prerequisite."
+   },
+   {
+    "node": "def-weil-frobenius-point-transport",
+    "why": "Whole-system comparison used as a generic interface; the local normalization item has no separate node supplying this prerequisite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pur-derived-change-of-rings",
+  "lem-trf-scheme-galois-comparison-normal-form",
+  "lem-pur-frobenius-trivialization-pullback",
+  "lem-trf-scheme-galois-coefficient-change",
+  "lem-trf-point-sections-finite-reduction",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-trf-point-pullback-representative-diagram",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-frobenius-point-transport-natural",
+  "def-weil-rationalization-karoubi",
+  "def-weil-frobenius-point-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-28ec6633b",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-28ec6633b (reviewer sub-agent of L); spot-checked: Read the item in full (unchanged statement and stmt_deps, 10 new steps, 9156 chars), the full statement of all 22 cited nodes, the parent and its sibling nodes, the Q128 old steps 5-7, and the blueprint prop-trf-karoubi-independence.proof.md last sentence (agent-written proof, correctly marked). Shape: item and report only, no new nodes, no cycle (closure of 12686 nodes excludes the item), live still unsplit, no cited node merged or changed, no SGA. Hypotheses checked: point-system-insertion-composition and integral-point-transport-tower-powers hold for arbitrary unbounded systems; pullback-preserves-kflat needs no flatness; scheme-galois normal-form and coefficient-change hold for finite rings with no Tor hypothesis; point-sections-finite-reduction only needs bounded above (from def-weil-derived-complete-integral-detailed and integral-operations-preserve-constructible); the step avoids the ctf coherence node; reduction-counit and counit-characterization are used only for the isomorphism g_s, with the entire-tower Hom bijection, so no faithfulness of separate reductions is used. Steps 8 and 10 really are elementary. Small cases K=0, m=1, n=j and z=id checked. No duplicate among the frobenius-coefficient-reduction-coherence, completed-stalk-frobenius-reduction, fixed-point-stalk-transport-cocycle and tower-realization/powers nodes. Advisory only: the step 4 sigma-compatibility uses the canonical form of the point-sections reduction isomorphism (harmless on Spec k with k algebraically closed); steps 9-10 overlap the naturality clause of the sibling iterated-return-transport-scalar-calculus (inherited from Q128's statement); several tool_uses 'why' lines are boilerplate, and some name definitions or nodes of units the unit already cites. Tool uses accepted as generic interfaces."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.LocalNormalizationStrictRealization",
+  "declaration": "WeilConjectures.LocalNormalization.localNormalizationStrictRealization",
+  "declarations": [
+   "WeilConjectures.LocalNormalization.finiteQuotient",
+   "WeilConjectures.LocalNormalization.finitePull",
+   "WeilConjectures.LocalNormalization.finiteSections",
+   "WeilConjectures.LocalNormalization.finiteComp",
+   "WeilConjectures.LocalNormalization.finiteInsertion",
+   "WeilConjectures.LocalNormalization.finiteSuccessiveInsertion",
+   "WeilConjectures.LocalNormalization.quotient",
+   "WeilConjectures.LocalNormalization.quotientScalars",
+   "WeilConjectures.LocalNormalization.restrictSections",
+   "WeilConjectures.LocalNormalization.tower",
+   "WeilConjectures.LocalNormalization.levelIdentity_existsUnique",
+   "WeilConjectures.LocalNormalization.levelModel",
+   "WeilConjectures.LocalNormalization.finiteKappa",
+   "WeilConjectures.LocalNormalization.finiteA",
+   "WeilConjectures.LocalNormalization.finiteB",
+   "WeilConjectures.LocalNormalization.ReturnPoint",
+   "WeilConjectures.LocalNormalization.Point",
+   "WeilConjectures.LocalNormalization.target",
+   "WeilConjectures.LocalNormalization.StrictMaps",
+   "WeilConjectures.LocalNormalization.Components",
+   "WeilConjectures.LocalNormalization.strictRecipes_existsUnique",
+   "WeilConjectures.LocalNormalization.strictRecipes",
+   "WeilConjectures.LocalNormalization.realize",
+   "WeilConjectures.LocalNormalization.sectionModel_existsUnique",
+   "WeilConjectures.LocalNormalization.sectionModel",
+   "WeilConjectures.LocalNormalization.sectionDerivedModel",
+   "WeilConjectures.LocalNormalization.iteratedPointPullback",
+   "WeilConjectures.LocalNormalization.successiveIntegral",
+   "WeilConjectures.LocalNormalization.pointPowerPullback",
+   "WeilConjectures.LocalNormalization.pointPowerModel",
+   "WeilConjectures.LocalNormalization.integralReturn",
+   "WeilConjectures.LocalNormalization.integralA",
+   "WeilConjectures.LocalNormalization.integralAInCoordinates",
+   "WeilConjectures.LocalNormalization.finitePointComplex",
+   "WeilConjectures.LocalNormalization.quotientSection",
+   "WeilConjectures.LocalNormalization.coefficientComparison_existsUnique",
+   "WeilConjectures.LocalNormalization.coefficientComparison",
+   "WeilConjectures.LocalNormalization.CoefficientCompatibility",
+   "WeilConjectures.LocalNormalization.integralJ",
+   "WeilConjectures.LocalNormalization.integralJ_additive",
+   "WeilConjectures.LocalNormalization.integralJAdditive",
+   "WeilConjectures.LocalNormalization.integralJ_semilinear",
+   "WeilConjectures.LocalNormalization.rationalize",
+   "WeilConjectures.LocalNormalization.rationalJ",
+   "WeilConjectures.LocalNormalization.rationalScalar",
+   "WeilConjectures.LocalNormalization.rationalSectionMap",
+   "WeilConjectures.LocalNormalization.rationalPointHom_existsUnique",
+   "WeilConjectures.LocalNormalization.rationalPointHom",
+   "WeilConjectures.LocalNormalization.successiveRational",
+   "WeilConjectures.LocalNormalization.rationalAInFibre",
+   "WeilConjectures.LocalNormalization.rationalA",
+   "WeilConjectures.LocalNormalization.Laws",
+   "WeilConjectures.LocalNormalization.localNormalizationStrictRealization"
+  ],
+  "file": "lean/Sheaf/TraceFormula/LocalNormalizationStrictRealization.lean",
+  "statement": "theorem localNormalizationStrictRealization (hl : l ≠ D.p) (B : IntegralComparisonSystem.{u} l) [IsSeparated X₀.hom] {m : ℕ} (hm : 1 ≤ m) (Z : Point D X₀ m) : Laws D l E X₀ hl B hm Z",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Repair H2: reused plain data are owned by six existing:true definition nodes. Repair H3: successive rational transport uses frobeniusPointTransportRational; rationalA is transported from its pointRationalFibre coordinates by the uniquely pure-tensor-normalized Hom comparison. Mathematical statement unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-872042e6f",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Re-delivery of a7185e21 (H2+H3 RETURN); item statement/proof unchanged vs side-live, only lean+stmt_deps differ. Mechanical finding judged: scheme-galois-normal-form used only via its conclusions (hX IsCharacteristic, w equality) and frobenius-coefficient-reduction-coherence only via theorem frobeniusCoherenceAnnihilator as hR -> genuine conclusion uses, PASS; lem-pod-point-sections-derived-reduction-data is kind definition (false positive). H2 repaired: six existing:true def-trf-* owners (section-localization-coordinate-transport, semilinear-raw-localization-extension, point-power-restriction-data, point-representative-coordinate-data, integral-point-power-compositor, point-finite-reduction-tensor-data) on unchanged modules; check_existing/check_new_node clean (noncomputable note only), all decls resolve, statements match Lean, no competing def owner, no cycle. H3 repaired: successiveRational composes frobeniusPointTransportRational; rationalSectionMap is that dependency's formula on arbitrary f; rationalPointHom_existsUnique is a true, pure-tensor-normalized Hom comparison (perfect point sections over DVR, no finite-reduction perfectness), so rationalize.map integralA = rationalA is step 10's iota tensor E identification, not map_comp. ReturnPoint generalization keeps fields/orders; levelIdentity HEq equivalent to the previously elaborated Eq. Edge cases (m=1, j=0, n=j, unbounded Q, K=0, ramified E, universes), docstrings, 8 named sorry theorems, verbatim signature, report sections OK. Advisory: pointPowerFiniteSigma_existsUnique/pointPowerRestriction not listed in their owner record; absoluteFrobenius trivialization and integralOperations*/proEtaleConstantRing* owners outside stmt_deps are inherited from the base. No compile (no file changed)."
+ }
+}

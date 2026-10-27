@@ -1,0 +1,325 @@
+{
+ "id": "lem-sfb-scheme-approximation-prescribed-open",
+ "kind": "statement",
+ "title": "Scheme approximation extending a prescribed quasi-compact open system",
+ "statement": "Let $X$ be a quasi-compact quasi-separated scheme [def-pc-scheme, def-weil-pbc-scheme-conventions], and $W\\subseteq X$ a quasi-compact open subscheme [def-weil-open-immersion]. Work in the universes of [def-weil-size-convention]. Let $I$ be a small nonempty directed set and $(W_i)$ an inverse system of schemes of finite type over $\\operatorname{Spec}\\mathbf Z$ [def-weil-affine-spectrum, def-weil-finite-type-morphism] with affine transitions [pqf-def-affine-morphism] and a specified isomorphism $W\\cong\\varprojlim_iW_i$ compatible with its projections. There exist a small nonempty directed set $J$, an order-preserving cofinal map $\\alpha:J\\to I$ (for each $i$ there is $j$ with $i\\leq\\alpha(j)$), schemes $X_j$ of finite type over $\\mathbf Z$ with affine transitions $g_{j j\\prime}:X_j\\to X_{j\\prime}$ for $j\\geq j\\prime$, and open immersions $W_{\\alpha(j)}\\hookrightarrow X_j$. These data satisfy $g_{j j\\prime}^{-1}(W_{\\alpha(j\\prime)})=W_{\\alpha(j)}$, their restrictions to these opens are the given transition maps, and $X\\cong\\varprojlim_jX_j$, compatibly with $W\\cong\\varprojlim_jW_{\\alpha(j)}$ and with the specified maps from $W$ to every $W_{\\alpha(j)}$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 07RN (lemma-approximate), all clauses; cofinality of alpha follows from the constructed directed set J = coproduct P_i in the final proof paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-open-immersion",
+  "def-weil-size-convention",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "pqf-def-affine-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Induct on a finite number of affine opens which, together with the prescribed open, cover $X$. Such a finite list exists by the affine-open basis and quasi-compactness of $X$. The zero-chart case is the supplied system, with $J=I$ and $\\alpha=\\mathrm{id}$. Each intermediate union is quasi-compact and quasi-separated: a finite union of quasi-compact opens is quasi-compact, and the quasi-separated affine-cover criterion applies since its affine opens are affine opens of $X$, whose pairwise intersections are quasi-compact. It suffices to prove the extension step $S=V\\cup U$, where $V=\\varprojlim_iV_i$ has the supplied finite-type system and $U=\\operatorname{Spec}B$ is affine. Here $V$ denotes the currently approximated open; initially it is the original $W$. The intermediate schemes remain open subschemes of $X$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RN (lemma-approximate), first paragraph, finite affine-open induction"
+   }
+  },
+  {
+   "text": "Put $T=U\\cap V$. This is quasi-compact by the intersection lemma. Every $V_i$ is Noetherian by the finite-type-over-$\\mathbf Z$ theorem, hence quasi-compact and quasi-separated by the locally Noetherian theorem. Descend $T$ to a quasi-compact open $T_{i_0}\\subset V_{i_0}$ and replace $I$ by its upper tail. Set $T_i$ to be its inverse image in $V_i$. The open-descent statement gives $T=\\varprojlim T_i$ with quasi-compact stages and affine transitions. Each $T_i$ is quasi-separated by the affine-cover criterion: its affine opens are affine opens of $V_i$. Since $T$ is a quasi-compact open of the affine $U$, it is quasi-affine. The quasi-affine-stage leaf gives a quasi-affine $T_k$; after restricting to $i\\geq k$ every $T_i$ is quasi-affine: an affine morphism to a quasi-affine scheme has quasi-affine source by the affine quasi-affine affinization-square leaf. These tail restrictions are cofinal. For a tail starting at $a$, every index has a common upper bound with $a$; cones on the tail extend uniquely by choosing such upper bounds, with independence checked at a further common upper bound.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "pqf-lem-limit-qc-open-descends",
+    "lem-sfb-limit-quasi-affine-eventual",
+    "lem-sfb-affine-quasi-affine-affinization-square",
+    "pqf-lem-qs-intersection-qc",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RN (lemma-approximate), second paragraph, descending the overlap; Tags 01Z4 and 01Z5"
+   }
+  },
+  {
+   "text": "Let $R=\\Gamma(T,\\mathcal O_T)$ and $R_i=\\Gamma(T_i,\\mathcal O_{T_i})$. The section-colimit lemma gives $R=\\varinjlim R_i$. Write $s:B\\to R$ for restriction and $t_i:R_i\\to R$ for projection pullback. Form $B_i=B\\times_R R_i$. For $i\\leq k$ the map sends $(b,r_i)$ to $(b,r_i|_{T_k})$. The natural map $\\varinjlim B_i\\to B$ is bijective: lift $s(b)$ to some $r_i$ for surjectivity; if $(b,r_i)$ and $(b,r_i^{\\prime})$ have the same first component, their second components agree in $R$ and therefore at some later stage, giving injectivity. The same observation handles elements initially at different indices by first passing to a common upper bound. All these maps are ring maps since both coordinates are.",
+   "uses": [
+    "lem-weil-pbc-limit-global-sections-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RN (lemma-approximate), third paragraph, fibre product rings and their colimit"
+   }
+  },
+  {
+   "text": "For each point of $T$, choose a principal open of $U=\\operatorname{Spec}B$ contained in $T$ using the cited basis; quasi-compactness selects finitely many $g_l$ with $T=\\bigcup_lD_B(g_l)$. Canonical affinization embeds $T$ openly in $\\operatorname{Spec}R$. For each $l$, $T_{s(g_l)}=D_B(g_l)$, so the principal-affinization isomorphism gives $T_{s(g_l)}\\cong D_R(s(g_l))$; the affine-section localization theorem gives $B_{g_l}\\cong R_{s(g_l)}$, through the stated restriction maps. Lift the finitely many $s(g_l)$ to $f_{l,i_1}\\in R_{i_1}$ by section descent. Let $O_{i_1}$ be the canonical image of $T_{i_1}$ in $\\operatorname{Spec}R_{i_1}$. It is quasi-compact because $T_{i_1}$ is. The limit projection $T\\to T_{i_1}$ is affine; hence the affinization-square leaf identifies the inverse image of $O_{i_1}$ in $\\operatorname{Spec}R$ with $T$. The inverse image of $\\bigcup_lD(f_{l,i_1})$ is also $T$. Apply eventual equality of quasi-compact opens to the affine system $\\operatorname{Spec}R_i$, whose limit is $\\operatorname{Spec}R$. At a later index $i$ the two opens agree. The same leaf applied to every transition $T_k\\to T_i$ identifies its affinization image with that inverse image. Thus on the resulting tail, $T_i=\\bigcup_lD_{R_i}(f_{l,i})$ inside $\\operatorname{Spec}R_i$, with compatible $f_{l,i}$.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-trf-quasi-affine-canonical-affine-embedding",
+    "lem-a1-affine-principal-affinization-isomorphism",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-limit-global-sections-colimit",
+    "lem-weil-pbc-limit-affine-transition",
+    "pqf-lem-limit-qc-open-descends",
+    "lem-sfb-affine-quasi-affine-affinization-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RN (lemma-approximate), fourth paragraph, choosing and descending the principal opens"
+   }
+  },
+  {
+   "text": "Put $h_{l,i}=(g_l,f_{l,i})\\in B_i$. The pullback-ring open-immersion lemma applies to $B\\to R\\leftarrow R_i$ and the isomorphisms $B_{g_l}\\cong R_{s(g_l)}$ just proved. It identifies $T_i$ with $\\bigcup_lD_{B_i}(h_{l,i})\\subset\\operatorname{Spec}B_i$, including $(B_i)_{h_{l,i}}\\cong (R_i)_{f_{l,i}}$. Each $T_i$ has finite type over $\\mathbf Z$: it is a quasi-compact open of $V_i$, so finite affine charts of $V_i$ intersected with $T_i$ admit finite principal refinements by the cited basis and compactness; their localized finite-type rings are still generated by finitely many elements and one inverse. Apply the finite-subalgebra lemma to this embedding of $T_i$, retaining the $h_{l,i}$. Let $P_i$ be all finitely generated subrings $A\\subset B_i$ containing them and satisfying $A_{h_{l,i}}\\cong (B_i)_{h_{l,i}}$. Every finite subset of $B_i$ is contained in some $A\\in P_i$. Enlarging an $A$ within $B_i$ by finitely many elements preserves its localization isomorphisms: injection follows from being a subring and surjectivity already holds from $A$. For every $A\\in P_i$ the composite $T_i\\to\\operatorname{Spec}B_i\\to\\operatorname{Spec}A$ is an open immersion with image $\\bigcup_lD_A(h_{l,i})$: by the spectrum-of-localization statement, $D_{B_i}(h_{l,i})\\cong\\operatorname{Spec}(B_i)_{h_{l,i}}\\to\\operatorname{Spec}A_{h_{l,i}}\\cong D_A(h_{l,i})$ is the spectrum of the isomorphism $A_{h_{l,i}}\\to(B_i)_{h_{l,i}}$, and the inverse image of $D_A(h_{l,i})$ in $\\operatorname{Spec}B_i$ is $D_{B_i}(h_{l,i})$, so the union of these opens maps isomorphically onto $\\bigcup_lD_A(h_{l,i})$.",
+   "uses": [
+    "lem-sfb-pullback-ring-open-immersion",
+    "lem-sfb-quasi-affine-open-finite-subalgebras",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RN (lemma-approximate), fourth and fifth paragraphs, open immersion and finite subalgebras"
+   }
+  },
+  {
+   "text": "Define $J=\\{(i,A):i\\in I,\\ A\\in P_i\\}$, with $(i,A)\\leq(k,C)$ when $i\\leq k$ and $B_i\\to B_k$ carries $A$ into $C$. This is a small nonempty directed set. Reflexivity and transitivity follow from the ring maps; antisymmetry follows from that on $I$ and inclusions of subrings at a fixed index. To dominate two elements, choose a common upper index and then a subring in its $P_i$ containing the images of both finite sets of ring generators. Nonemptiness follows from nonemptiness of each $P_i$. Set $\\alpha(i,A)=i$. It is order preserving and is onto the retained tail, so it is cofinal in the original $I$. The subrings live in sets of subsets of the small rings $B_i$; taking the displayed disjoint union remains small in the stipulated universes. The map $\\varinjlim_{(i,A)\\in J}A\\to B$ is an isomorphism: each $(b,r_i)\\in B_i$ lies in some $A$, and any equality between first components becomes an equality in some $B_k$ by step 3 and hence in a further subring containing both images. This proves both the element and relation parts of the colimit assertion.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RN (lemma-approximate), last paragraph, J and its directedness, cofinality and ring colimit"
+   }
+  },
+  {
+   "text": "For $j=(i,A)$ glue $V_i$ and $\\operatorname{Spec}A$ along $T_i\\cong\\bigcup_lD_A(h_{l,i})$; the scheme-gluing lemma supplies $S_j$ with these two open charts and exactly this intersection. It has finite type over $\\mathbf Z$, since $V_i$ has a finite affine cover by finite-type rings and $A$ itself is finitely generated. The morphisms $V\\to V_i$ and $U=\\operatorname{Spec}B\\to\\operatorname{Spec}A$, the latter from the first projection $A\\to B$, agree on $T$ by their section maps $A\\to R$; use the morphism-into-affine bijection on that intersection. They glue uniquely to $S\\to S_j$. Its inverse image of $V_i$ is $V$: on $U$ the inverse image of the overlap is $\\bigcup_lD_B(g_l)=T$. Its inverse image of $\\operatorname{Spec}A$ is $U$: on $V$ it is the pullback of $T_i$, namely $T$.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RN (lemma-approximate), last paragraph, gluing finite-type stages and the cone"
+   }
+  },
+  {
+   "text": "For $j=(i,A)\\leq j^{\\prime}=(k,C)$ glue the given map $V_k\\to V_i$ and $\\operatorname{Spec}C\\to\\operatorname{Spec}A$. Their restrictions agree on $T_k$ because both homomorphisms to $R_k$ are the second coordinate of $A\\to B_k$. The resulting $g_{j^{\\prime}j}:S_{j^{\\prime}}\\to S_j$ has inverse image of $V_i$ exactly $V_k$: on its affine chart $\\operatorname{Spec}C$ the inverse image of $T_i=\\bigcup_lD_A(h_{l,i})$ is $\\bigcup_lD_C(h_{l,k})=T_k$. It also has inverse image of $\\operatorname{Spec}A$ exactly $\\operatorname{Spec}C$, since on $V_k$ the inverse image is $T_k$. The first restriction is an affine transition by assumption; the second is affine by the same criterion applied to the single affine target chart $\\operatorname{Spec}A$, whose whole preimage $\\operatorname{Spec}C$ is affine. The affine-local-target criterion, applied to a finite affine refinement of the two target charts, proves $g_{j^{\\prime}j}$ affine. Composition, identities and cone compatibility hold on both charts, hence globally by uniqueness of morphism gluing. In particular the distinguished-open restrictions are precisely the original $V_k\\to V_i$.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "pqf-lem-affine-local-target",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RN (lemma-approximate), last paragraph, transition morphisms and the cartesian distinguished opens"
+   }
+  },
+  {
+   "text": "The projection $J\\to I$ computes the same limits of the $V_i$ and $T_i$. Here is the elementary cofinality verification needed for both. For any $i$, the indices $(k,A)$ with $k\\geq i$ are nonempty and directed by the construction in step 6. A compatible cone to the reindexed diagram therefore gives a map to $V_i$ by choosing any such index and composing to $V_i$; at a common upper index the choices agree. These maps are natural in $i$, and unique. The identical argument applies to $T_i$. Thus $V=\\varprojlim_JV_{\\alpha(j)}$ and $T=\\varprojlim_JT_{\\alpha(j)}$, with their original projections, not merely abstractly isomorphic objects. By step 6 and the affine-limit calculation, $U=\\operatorname{Spec}B=\\varprojlim_J\\operatorname{Spec}A$.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RN (lemma-approximate), last paragraph, limits on the two charts"
+   }
+  },
+  {
+   "text": "Let $L=\\varprojlim_JS_j$, which exists since all transitions are affine, and let $q:S\\to L$ be the cone comparison. Fix $j_0=(i_0,A_0)$. The inverse-image opens in $L$ of $V_{i_0}$ and $\\operatorname{Spec}A_0$ cover $L$. Their restricted diagrams over $j\\geq j_0$ are exactly $V_{\\alpha(j)}$ and $\\operatorname{Spec}A_j$ by step 8; their intersection diagram is $T_{\\alpha(j)}$. The open-limit clause identifies these opens with $V$, $U$, and their intersection with $T$, respectively, by step 9. The maps $q|_V$ and $q|_U$ are these canonical isomorphisms because they have the specified projections. Their inverses agree on the intersection: after composing with each projection both are the original inclusion of $T$ in $S$, and the overlap identifications are the unique limit comparisons. Morphism gluing produces $L\\to S$ inverse to $q$; both composites are identities on the two open charts and therefore globally. This proves $S\\cong\\varprojlim_JS_j$ compatibly with its distinguished open.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RN (lemma-approximate), last paragraph, verification of the glued limit"
+   }
+  },
+  {
+   "text": "Apply this one-affine-chart construction successively in the induction of step 1. At each extension the previous entire scheme is a distinguished open at every stage, and the inverse-image equality for it implies the same equality for every previously distinguished open. Compose the order-preserving cofinal maps: for any original index choose an upper image in the first refinement and then an upper image in the next; this proves cofinality of the composite. The restriction of each new transition to the original $W$-stage open is the original transition, since this holds for each successive restriction. The cone maps on $W$ are unchanged at every extension. Finitely many extensions therefore give the stated $J$, $\\alpha$, $X_j$, open immersions, all inverse-image equalities, and both compatible limit identifications.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RN (lemma-approximate), first paragraph, completing finite induction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "pqf-lem-limit-qc-open-descends",
+  "lem-sfb-limit-quasi-affine-eventual",
+  "lem-sfb-affine-quasi-affine-affinization-square",
+  "pqf-lem-qs-intersection-qc",
+  "lem-weil-pbc-limit-global-sections-colimit",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-trf-quasi-affine-canonical-affine-embedding",
+  "lem-a1-affine-principal-affinization-isomorphism",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-sfb-pullback-ring-open-immersion",
+  "lem-sfb-quasi-affine-open-finite-subalgebras",
+  "def-weil-finite-type-morphism",
+  "def-weil-size-convention",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "pqf-lem-affine-local-target",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 07RN (lemma-approximate), entire proof; explicit principal-generator bookkeeping in the final paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "approximation|approximate|NoetherianApproximation|[Ee]xtend.*[Ll]imit",
+   "results": "Actual logged search: 3 hits; Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean. Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has finite-stage morphism and affine-open descent and pullback cones, not extension of a prescribed open approximation; read Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:525-560 and 1040-1061. The project implementation Scheme.NoetherianApproximation.ExtensionData.approximation has an affine-extra-chart hypothesis and does not directly state this arbitrary-open result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a prescribed Noetherian approximation of a quasi compact open to an approximation of a quasi compact quasi separated scheme",
+   "results": "Actual logged search: 8 hits; NoetherianSpace.to_quasiSeparatedSpace, AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion, AlgebraicGeometry.IsAffineOpen.isQuasiSeparated, AlgebraicGeometry.quasiCompact_of_noetherianSpace_source, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.IsNoetherian.mk, AlgebraicGeometry.IsNoetherian.toCompactSpace, AlgebraicGeometry.quasiCompact_of_compactSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has finite-stage morphism and affine-open descent and pullback cones, not extension of a prescribed open approximation; read Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:525-560 and 1040-1061. The project implementation Scheme.NoetherianApproximation.ExtensionData.approximation has an affine-extra-chart hypothesis and does not directly state this arbitrary-open result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsOpenImmersion\", \"IsLimit\"",
+   "results": "Actual logged search: 2 hits; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeftIsLimit, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeOfLeftIsLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has finite-stage morphism and affine-open descent and pullback cones, not extension of a prescribed open approximation; read Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:525-560 and 1040-1061. The project implementation Scheme.NoetherianApproximation.ExtensionData.approximation has an affine-extra-chart hypothesis and does not directly state this arbitrary-open result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an affine inverse system of finite type integer schemes approximating a quasi compact open of a qcqs scheme, extend it to an inverse system approximating the whole scheme with those stage opens",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has finite-stage morphism and affine-open descent and pullback cones, not extension of a prescribed open approximation; read Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:525-560 and 1040-1061. The project implementation Scheme.NoetherianApproximation.ExtensionData.approximation has an affine-extra-chart hypothesis and does not directly state this arbitrary-open result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative absolute Noetherian approximation of schemes with compatible open immersion stages and a cofinal refinement of a directed set",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.Scheme.instLocallyDirectedIsOpenImmersionDirectedAffineCover, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has finite-stage morphism and affine-open descent and pullback cones, not extension of a prescribed open approximation; read Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:525-560 and 1040-1061. The project implementation Scheme.NoetherianApproximation.ExtensionData.approximation has an affine-extra-chart hypothesis and does not directly state this arbitrary-open result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a prescribed inverse system of finite type integer schemes on a quasi compact open to a Noetherian approximation of the ambient qcqs scheme with cartesian open immersions",
+   "results": "Actual recorded search: 8 hits; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.exists_map_preimage_eq_map_preimage",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give limit descent, quasi-affine descent, gluing and Noetherian predicates; none extends an arbitrary prescribed open system to the ambient scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Limits.IsLimit",
+   "results": "Actual recorded search: 12 hits; AlgebraicGeometry.Scheme.GlueData.vPullbackConeIsLimit, AlgebraicGeometry.Scheme.Pullback.gluedIsLimit, AlgebraicGeometry.Scheme.isAffine_of_isLimit, AlgebraicGeometry.isLimitOpensCone, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc, AlgebraicGeometry.Scheme.compactSpace_of_isLimit, AlgebraicGeometry.Scheme.nonempty_of_isLimit, AlgebraicGeometry.isAffineHom_π_app",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give limit descent, quasi-affine descent, gluing and Noetherian predicates; none extends an arbitrary prescribed open system to the ambient scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "NoetherianApproximation|approximation|approximate",
+   "results": "Actual recorded search: 1 hits; Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give limit descent, quasi-affine descent, gluing and Noetherian predicates; none extends an arbitrary prescribed open system to the ambient scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Noetherian approximation extending a specified open subscheme approximation along a cofinal directed refinement",
+   "results": "Actual recorded search: 8 hits; AlgebraicGeometry.IsLocallyNoetherian.component_noetherian, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.noetherianSpace_of_isAffineOpen, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.Scheme.directedAffineCover, AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion, AlgebraicGeometry.isLocallyNoetherian_of_affine_cover, AlgebraicGeometry.instIsLocallyNoetherianXScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give limit descent, quasi-affine descent, gluing and Noetherian predicates; none extends an arbitrary prescribed open system to the ambient scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-absolute-noetherian-approximation",
+  "date": "2026-10-23",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 07SU (proposition-approximate); Noetherian stages by spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian) over Spec Z, and finite type quasi-compactness. New supporting input: Tag 07RN (lemma-approximate), all clauses; cofinality of alpha follows from the constructed directed set J = coproduct P_i in the final proof paragraph",
+   "via": [
+    "lem-sfb-space-absolute-noetherian-approximation",
+    "lem-sfb-finite-surjective-affine-space-target",
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scheme-approximation-prescribed-open",
+  "worker": "stage1",
+  "summary": "Expanded Tag 07RN into the finite affine induction, explicit pullback-ring and finite-subalgebra system, principal-generator marking for both chart inverse-image equalities, directed colimit arguments and glued limit verification. Reused the principal-open basis, section/open descent and two scheme gluing nodes. Added two algebraic inputs and two Mathlib leaves, including the canonical affinization square needed for descending the principal covers.",
+  "blueprint": "The inherited supporting-input chain below det-thm-sf-ctf-stability-direct-images, proof (3), via absolute algebraic-space approximation; nearest blueprint ancestor is null according to blueprint_refs.py ancestor. Steps realize Tag 07RN in its inherited from.place; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-affine-principal-affinization-isomorphism",
+    "why": "Generic affine-scheme, gluing, or inverse-limit tool used in Tag 07RN, not a replacement of the constructibility unit route; its exact statement supplies this calculation and no node of this unit does."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic affine-scheme, gluing, or inverse-limit tool used in Tag 07RN, not a replacement of the constructibility unit route; its exact statement supplies this calculation and no node of this unit does."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-affine-principal-affinization-isomorphism",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-b522405c7",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-b522405c7 (reviewer sub-agent of L); spot-checked: Read Stacks 07RN (statement and full proof), 01Z4/01YX, 01Z5, 01Z7, 01Z9 and More on Algebra 01Z8. The item's statement is unchanged and matches 07RN; the cofinality of alpha is proved by the construction. Item is unsplit live, no re-split note. Steps 1-11 checked against every cited statement and hypothesis: qcqs of the intermediate unions via the affine-cover criterion; Noetherian V_i; open descent; one quasi-affine stage from the 01Z5 leaf, then the whole tail from IsQuasiAffine.of_isAffineHom; the affinization square giving the inverse image of O_i equal to T; the principal cover descended through the equality clause on Spec R_i; pullback ring (01Z8 needs no surjectivity); gluing; affine-local-target for the transitions; the open-limit clause for S = lim S_j. New nodes are true and tested on edge cases (empty families, zero rings, nilpotent h, Q empty). The two Mathlib leaves were verified at AffineTransitionLimit.lean 983-991 and QuasiAffine.lean 46-49, 93, 115, 147-150. No duplicates in the snapshot or live DAG: the nagata 07RN marked-atlas nodes, lem-a1 open-immersion square, ring-fibre-product-spectrum (needs a surjection) and nagata separated-stage are all different statements. Batch-5: lem-trf-quasi-affine-canonical-affine-embedding is a Mathlib leaf for a generic quasi-affine fact (X to Spec Gamma(X) is an open immersion), neither the trace formula nor Poincare duality nor a step of their proofs, so it is accepted. Accepted tool uses: lem-a1-affine-principal-affinization-isomorphism, lem-weil-pbc-limit-affine-transition and pqf-lem-qs-intersection-qc, all generic. FIX: step 5 defines P_i as all finitely generated subrings A with A_h isomorphic to (B_i)_h, and step 7 glues along T_i = union of D_A(h) for every such A, but the open immersion was stated only for the A the lemma constructs. Added the two-line derivation from the already cited spectrum-of-localization statement. No other change, no node dropped.; 1 file(s) fixed by the reviewer"
+ }
+}

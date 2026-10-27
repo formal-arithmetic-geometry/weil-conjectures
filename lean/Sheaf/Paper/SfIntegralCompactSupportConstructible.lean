@@ -5,214 +5,117 @@ Authors: SHEAF group Q43
 -/
 module
 
-public import Sheaf.Paper.SfIntegralConstructible
-public import Sheaf.Paper.SfCompactSupportRestrictionOfScalars
-public import Sheaf.Paper.SfIntegralReductionTower
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Sheaf.Paper.SfIntegralCompactSupportTower
+import Sheaf.Paper.SfCompactSupportTowerPresentation
 import Sheaf.Paper.SfIntegralDirectImageConstructible
-import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
-import Sheaf.CategoryTheory.RingedSliceExtensionTensor
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.IntegralReductionTowerWellDefined
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitMorphism
-
-import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
-import WeilConjectures.Compactification.Refinement
-public import WeilConjectures.Compactification.RefinementCategory
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.Paper.OpenFiniteConstructibilityInterval
+import Sheaf.Paper.SfIntegralConstructibleTriangulated
+import Sheaf.Paper.SfDerivedCompleteLegacyComparison
+import Mathlib.Data.Nat.Prime.Infinite
+import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
 import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.Paper.DerivedComplete
-import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
-import Mathlib.Topology.Constructible
-import Sheaf.Paper.SfDerivedDirectImage
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Sheaf.AlgebraicGeometry.ProEtaleDirectImageRestrictionOfScalars
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import Sheaf.AlgebraicGeometry.ProEtaleFixedScalarRestrictionDirectImage
-import Sheaf.Paper.DerivedCompleteOnSlices
-import Sheaf.Paper.IntegralReductionTowerWellDefinedUnrestricted
-import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-/-!
-# Integral compact-support constructibility
+
+/-! # Integral compact-support constructibility
 
 Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7; Stacks Tag 0GL0
 (blueprint: lem-sf-integral-compact-support-constructible).
-
-The finite terms use the chosen compactification. The quotient transitions are the
-scalar-extension adjuncts of the reduction units followed by the normalized
-compact-support coefficient comparisons. Derived limits are properties of arbitrary
-objects, expressed by their Roos triangles.
 -/
 
 @[expose] public section
 set_option autoImplicit false
-universe u
+universe u v w
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
+open CategoryTheory.Pretriangulated in
+private theorem compactSupport_limit_iso
+    {C : Type v} [Category.{w} C] [HasZeroObject C] [HasShift C ℤ]
+    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    {T U : ℕ → C} [HasProduct T] [HasProduct U]
+    (t : ∀ n, T (n + 1) ⟶ T n) (s : ∀ n, U (n + 1) ⟶ U n)
+    (e : Functor.ofOpSequence t ≅ Functor.ofOpSequence s)
+    {M N : C} (hM : IsDerivedLimit t M) (hN : IsDerivedLimit s N) :
+    Nonempty (M ≅ N) := by
+  obtain ⟨p, δ, hp⟩ := hM
+  obtain ⟨q, ε, hq⟩ := hN
+  let a : ∀ n : ℕ, T n ≅ U n := fun n ↦ e.app ⟨n⟩
+  let P : (∏ᶜ T) ≅ ∏ᶜ U :=
+    { hom := Limits.Pi.map (fun n ↦ (a n).hom)
+      inv := Limits.Pi.map (fun n ↦ (a n).inv)
+      hom_inv_id := by
+        apply Pi.hom_ext
+        intro n
+        simp [Category.assoc]
+      inv_hom_id := by
+        apply Pi.hom_ext
+        intro n
+        simp [Category.assoc] }
+  have ht : ∀ n, (a (n + 1)).hom ≫ s n = t n ≫ (a n).hom := by
+    intro n
+    change e.hom.app ⟨n + 1⟩ ≫ s n = t n ≫ e.hom.app ⟨n⟩
+    simpa only [Functor.ofOpSequence_map_homOfLE_succ] using
+      (e.hom.naturality (homOfLE (Nat.le_add_right n 1)).op).symm
+  let A := Triangle.mk p (towerTransitionEndomorphism t) δ
+  let B := Triangle.mk q (towerTransitionEndomorphism s) ε
+  let d := Pretriangulated.isoTriangleOfIso₁₂ A.rotate B.rotate
+    (Pretriangulated.rot_of_distTriang A hp)
+    (Pretriangulated.rot_of_distTriang B hq) P P
+    (towerTransitionEndomorphism_natural_backward t s (fun n ↦ (a n).hom) ht).symm
+  let d' : A ≅ B := (rotCompInvRot.app A) ≪≫
+    (Pretriangulated.invRotate C).mapIso d ≪≫ (rotCompInvRot.app B).symm
+  exact ⟨Triangle.π₁.mapIso d'⟩
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+  {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
-/-- Positive coefficient levels are finite. Source: blueprint coefficient extension;
-Bhatt--Scholze, Section 6.7 (blueprint: lem-sf-integral-compact-support-constructible). -/
-noncomputable instance sfCompactSupportCoefficientFinite (n : ℕ) :
-    Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
-  Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))
-
-/-- Restriction from exponent n+2 to exponent n+1 along the specified quotient map.
-Source: Bhatt--Scholze, Definition 3.5.2
-(blueprint: lem-sf-integral-compact-support-constructible). -/
-noncomputable abbrev sfCompactSupportFiniteRestriction (T : Scheme.{u}) (n : ℕ) :
-    scalarReductionTarget.{u, u} l E T n ⥤ scalarReductionTarget.{u, u} l E T (n + 1) :=
-  proEtaleCoefficientRestrictScalars T (Padic.coefficientExtensionTransition l E (n + 1))
-
-/-- Finite quotient restriction is left exact. Source: Stacks Tag 03DA
-(blueprint: lem-sf-integral-compact-support-constructible). -/
-noncomputable instance sfCompactSupportFiniteRestrictionLimits (T : Scheme.{u}) (n : ℕ) :
-    PreservesFiniteLimits (sfCompactSupportFiniteRestriction l E T n) :=
-  proEtaleCoefficientRestrictScalars_preservesFiniteLimits T
-    (Padic.coefficientExtensionTransition l E (n + 1))
-
-/-- Finite quotient restriction is right exact. Source: Stacks Tag 03DA
-(blueprint: lem-sf-integral-compact-support-constructible). -/
-noncomputable instance sfCompactSupportFiniteRestrictionColimits (T : Scheme.{u}) (n : ℕ) :
-    PreservesFiniteColimits (sfCompactSupportFiniteRestriction l E T n) :=
-  proEtaleCoefficientRestrictScalars_preservesFiniteColimits T
-    (Padic.coefficientExtensionTransition l E (n + 1))
-
-/-- The completion projections commute with the specified finite quotient transition.
-Source: Stacks Tag 03CO; Bhatt--Scholze, Definition 3.5.2
-(blueprint: lem-sf-integral-compact-support-constructible).
-Proof: the completed sheaf is the inverse limit of the finite quotient tower.
-Its cone condition identifies the higher projection followed by the quotient map
-with the lower projection. Forgetting commutativity gives exactly this condition
-for ring sheaves; faithfulness lifts it back to commutative ring sheaves. -/
-theorem sfCompactSupportProjection_transition (T : Scheme.{u}) (n : ℕ) :
-    completedIntegralCommRingProjectionUnrestricted l E T (n + 1) ≫
-        (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
-          (CommRingCat.ofHom (Padic.coefficientExtensionTransition l E (n + 1)).ulift) =
-      completedIntegralCommRingProjectionUnrestricted l E T n := by
-  apply (sheafCompose (ProEt.topology T)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map_injective
-  change limit.π (integralCoefficientSheafSystem l E T) (Opposite.op (n + 1)) ≫
-      integralCoefficientSheafTransition l E T n =
-    limit.π (integralCoefficientSheafSystem l E T) (Opposite.op n)
-  simpa only [integralCoefficientSheafSystem, Functor.ofOpSequence_map_homOfLE_succ]
-    using limit.w (integralCoefficientSheafSystem l E T)
-      (homOfLE (Nat.le_succ n)).op
-
-/-- The sectionwise identity composite restriction comparison, supplied by the shared
-commutative ring-sheaf restriction interface. Source: Stacks Tags 03DA and 03CO
-(blueprint: lem-sf-integral-compact-support-constructible). -/
-noncomputable def sfCompactSupportRestrictionComp (T : Scheme.{u}) (n : ℕ) :
-    sfCompactSupportFiniteRestriction l E T n ⋙
-        scalarReductionRestriction.{u, u} l E T (n + 1) ≅
-      scalarReductionRestriction.{u, u} l E T n :=
-  pbcRestrictComp (completedIntegralCommRingProjectionUnrestricted l E T (n + 1))
-    ((constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
-      (CommRingCat.ofHom (Padic.coefficientExtensionTransition l E (n + 1)).ulift))
-    (completedIntegralCommRingProjectionUnrestricted l E T n)
-    (sfCompactSupportProjection_transition l E T n)
-
-/-- Exact restriction composition on derived categories. Source: Stacks Tag 015F
-(blueprint: lem-sf-integral-compact-support-constructible). -/
-noncomputable def sfCompactSupportDerivedRestrictionComp (T : Scheme.{u}) (n : ℕ) :
-    (sfCompactSupportFiniteRestriction l E T n).mapDerivedCategory ⋙
-        scalarReductionDerivedRestriction.{u, u} l E T (n + 1) ≅
-      scalarReductionDerivedRestriction.{u, u} l E T n :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso (sfCompactSupportRestrictionComp l E T n)
-
-/-- The canonical reduction map at the finite coefficient level. It is the adjunct
-of the lower reduction unit under the higher reduction/restriction adjunction.
-On a K-flat representative it is precisely x tensor a ↦ x tensor rho(a), since that
-adjunction's unit is x ↦ x tensor 1 and the restriction comparison is identity on
-sections. Source: Bhatt--Scholze, Definition 3.5.2; Stacks Tags 03EK and 07A6
-(blueprint: lem-sf-integral-compact-support-constructible). -/
-noncomputable def sfCompactSupportReductionTransition (T : Scheme.{u})
-    (K : DerivedCategory (scalarReductionSource.{u, u} l E T)) (n : ℕ) :
-    (scalarReductionDerivedExtension.{u, u} l E T (n + 1)).obj K ⟶
-      (sfCompactSupportFiniteRestriction l E T n).mapDerivedCategory.obj
-        ((scalarReductionDerivedExtension.{u, u} l E T n).obj K) :=
-  ((derivedScalarExtensionRestrictionAdjunction.{u, u} l E T (n + 1)).choose.homEquiv
-    K _).symm
-    ((sfDerivedReductionUnit l E T n).app K ≫
-      (sfCompactSupportDerivedRestrictionComp l E T n).inv.app
-        ((scalarReductionDerivedExtension.{u, u} l E T n).obj K))
-
-
-variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
-
-/-- The actual term Res_n R(c.g)_* c.i_! (K tensor^L A_n), where the natural index
-n denotes exponent n+1. Source: Bhatt--Scholze, Definition 6.7.6
-(blueprint: lem-sf-integral-compact-support-constructible). -/
-noncomputable def sfCompactSupportTerm
-    (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) (n : ℕ) :
-    DerivedCategory (scalarReductionSource.{u, u} l E Y) :=
-  (scalarReductionDerivedRestriction.{u, u} l E Y n).obj
-    ((sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1)) c).obj
-      ((scalarReductionDerivedExtension.{u, u} l E X n).obj K))
-
-/-- The specified quotient transition: apply compact support at the higher level to
-the reduction map, apply the compact-support restriction comparison, and restrict to
-completed coefficients. The final identity-on-sections comparison identifies the two
-composite restrictions. Source: Bhatt--Scholze, Sections 6.5 and 6.7
-(blueprint: lem-sf-integral-compact-support-constructible). -/
-noncomputable def sfCompactSupportTransition
-    (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) (n : ℕ) :
-    sfCompactSupportTerm l E c K (n + 1) ⟶ sfCompactSupportTerm l E c K n :=
-  (scalarReductionDerivedRestriction.{u, u} l E Y (n + 1)).map
-    ((sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 2)) c).map
-        (sfCompactSupportReductionTransition l E X K n) ≫
-      (sfCompactSupportRestriction c
-        (Padic.coefficientExtensionTransition l E (n + 1))).hom.app
-          ((scalarReductionDerivedExtension.{u, u} l E X n).obj K)) ≫
-    (sfCompactSupportDerivedRestrictionComp l E Y n).hom.app
-      ((sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1)) c).obj
-        ((scalarReductionDerivedExtension.{u, u} l E X n).obj K))
+private theorem compactSupport_complete_iff
+    (T : Scheme.{u}) (K : DerivedCategory (scalarReductionSource.{u, u} l E T)) :
+    IsSfDerivedComplete l E T K ↔ IsDerivedCompleteUnrestricted l E T K := by
+  constructor
+  · intro hK
+    obtain ⟨p, hp, hprime⟩ := Nat.exists_infinite_primes (l + 1)
+    have : Fact p.Prime := ⟨hprime⟩
+    let D : FiniteFieldDatum.{0} :=
+      { p := p
+        a := 1
+        q := p
+        prime := hprime
+        exponent_pos := by decide
+        cardinality_eq := by simp
+        k₀ := ZMod p
+        card_base := by simp [Nat.card_eq_fintype_card]
+        k := AlgebraicClosure (ZMod p) }
+    have hl : l ≠ D.p := by change l ≠ p; omega
+    exact ⟨D, hl, (sfDerivedComplete_iff_legacy l E T D hl K).mp hK⟩
+  · rintro ⟨D, hl, hK⟩
+    exact (sfDerivedComplete_iff_legacy l E T D hl K).mpr hK
 
 /-- Every derived limit of the specified finite-level compact-support tower is bounded
 constructible and derived complete, with one cohomological interval for all reductions.
 Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7; Stacks Tag 0GL0
 (blueprint: lem-sf-integral-compact-support-constructible).
 
-Proof plan:
-1. The compactification's middle scheme is finite type over the base field, hence
-Noetherian; its open part is quasi-compact. Choose the closed complement. The completed
-and finite coefficient restrictions are compatible with every quotient projection.
-2. The ringed open--closed exact sequence and preservation of products by immersion
-restriction show that completed-coefficient extension by zero preserves countable
-products and hence Roos triangles. Its exactness makes its derived functor triangulated.
-3. Resolve K by a K-flat complex. The slice extension/tensor identity shows its extension
-by zero remains K-flat, and identifies every finite reduction with c.i_! K_n. Naturality
-of the tensor identity identifies both the quotient maps and the reduction units.
-4. Apply extension by zero to K's completion Roos triangle. The preceding product,
-transition and unit identifications prove that the extended object is derived complete.
-5. Extend each finite stratification by the closed complement, with zero module there.
-Exact extension by zero preserves cohomology, constructibility and the common interval.
-6. Apply lem-sf-integral-direct-image-constructible to c.g and this integral constructible
-extension. It supplies constructible reductions with one uniform enlarged interval.
-7. The reduction comparisons and lem-sf-compact-support-restriction-of-scalars identify
-its ordinary proper-image tower with the terms and transitions defined above. Derived
-limit morphisms and levelwise isomorphisms identify any chosen limit with this one.
-8. Reduction functoriality and naturality of units transport derived completeness and
-the common constructible interval through that isomorphism. No canonical comparison
-between arbitrary chosen derived limits is asserted. -/
+Proof:
+1. Give the compactification's middle scheme the field structure induced by its proper
+map to Y. It is finite type and Noetherian, its open part is quasi-compact, and l is
+invertible in its stalks.
+2. Obtain the normalized slice open operation, its strict completed reduction comparison,
+and the proper/support tower comparison. Identify its finite open functors and the two
+whole inverse systems with the intrinsic consumer presentations.
+3. Convert the input's derived completeness to the unrestricted comparison predicate.
+The completed open-reduction theorem gives completeness of its extension by zero.
+4. The evaluated reduction comparison identifies every reduction of that extension with
+intrinsic finite extension by zero. Finite open constructibility preserves the original
+common interval; isomorphism transport gives integral constructibility of the extension.
+5. Apply integral direct-image constructibility to the proper map. Its ordinary image has
+constructible reductions, derived completeness and one uniformly enlarged interval.
+6. Compose the ordinary-to-slice, slice proper-to-support, and support-to-intrinsic tower
+isomorphisms. Their product isomorphisms intertwine the Roos endomorphisms. Complete
+these to an isomorphism of rotated distinguished triangles and rotate back to identify
+any chosen derived limit with the constructed proper image.
+7. Transport integral constructibility through that object isomorphism. No canonical
+comparison between arbitrary chosen derived limits is asserted. -/
 theorem sfIntegralCompactSupport_constructible
     (K₀ : Type u) [Field K₀] (_hl : IsUnit (l : K₀))
     [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]
@@ -225,6 +128,67 @@ theorem sfIntegralCompactSupport_constructible
     (M : DerivedCategory (scalarReductionSource.{u, u} l E Y))
     (_hM : IsDerivedLimit (sfCompactSupportTransition l E c K) M) :
     sfIntegralConstructible l E Y M := by
-  sorry
+  classical
+  let : c.Z.Over (Spec (.of K₀)) := ⟨c.g ≫ (Y ↘ Spec (.of K₀))⟩
+  let : c.g.IsOver (Spec (.of K₀)) := ⟨rfl⟩
+  have : LocallyOfFiniteType (c.Z ↘ Spec (.of K₀)) :=
+    inferInstanceAs (LocallyOfFiniteType (c.g ≫ (Y ↘ Spec (.of K₀))))
+  have : QuasiCompact (c.Z ↘ Spec (.of K₀)) :=
+    inferInstanceAs (QuasiCompact (c.g ≫ (Y ↘ Spec (.of K₀))))
+  have : IsLocallyNoetherian c.Z :=
+    LocallyOfFiniteType.isLocallyNoetherian (c.Z ↘ Spec (.of K₀))
+  have : CompactSpace c.Z :=
+    QuasiCompact.compactSpace_of_compactSpace (c.Z ↘ Spec (.of K₀))
+  have : IsNoetherian c.Z := ⟨⟩
+  have : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
+  have hlZ : ∀ z : c.Z, IsUnit (l : c.Z.presheaf.stalk z) := by
+    intro z
+    let ρ := (Scheme.ΓSpecIso (.of K₀)).inv ≫
+      (c.Z ↘ Spec (.of K₀)).appTop ≫ c.Z.presheaf.germ ⊤ z trivial
+    simpa only [map_natCast] using _hl.map ρ.hom
+  obtain ⟨o, SV, SX, tensor, r, d, e, htower⟩ :=
+    CompactSupportProperImageTower.compactSupportProperImageTower l E K₀ f _hl c
+  obtain ⟨hfinite, hpresentation⟩ := sfCompactSupportTower_presentation l E c o d e
+  let K' : (IntegralOpenReduction.complete l E X).FullSubcategory :=
+    ⟨K, (compactSupport_complete_iff l E X K).mp _hK.1⟩
+  let J := (IntegralOpenReduction.shriek l E c.i o).obj K
+  have hJ : sfIntegralConstructible l E c.Z J := by
+    refine ⟨(compactSupport_complete_iff l E c.Z J).mpr (r.extensionComplete K'), ?_⟩
+    obtain ⟨a, b, hab, hred⟩ := _hK.2
+    refine ⟨a, b, hab, fun n ↦ ?_⟩
+    let A := Padic.coefficientExtensionRing l E (n + 1)
+    let : Finite A := Padic.finite_coefficientExtensionRing l E (n + 1)
+      (Nat.succ_le_succ (Nat.zero_le n))
+    have := (sfIntrinsicExtensionByZero_exact c.i
+      (Padic.coefficientExtensionRing l E (n + 1))).1
+    have := (sfIntrinsicExtensionByZero_exact c.i
+      (Padic.coefficientExtensionRing l E (n + 1))).2.1
+    have := (sfIntrinsicExtensionByZero_exact c.i
+      (Padic.coefficientExtensionRing l E (n + 1))).2.2
+    obtain ⟨en⟩ := hfinite n
+    let α := CompactSupportProperImageTower.alpha.{u, u} l E c.i o SV SX tensor r K' n ≪≫
+      (Functor.mapDerivedCategoryNatIso en).app
+        ((scalarReductionDerivedExtension l E X n).obj K)
+    have hout := open_finite_constructibility_interval l E (n + 1)
+      (Nat.succ_le_succ (Nat.zero_le n)) c.i hlZ a b hab
+      ((scalarReductionDerivedExtension l E X n).obj K) (hred n).1 (hred n).2
+    have : ObjectProperty.IsClosedUnderIsomorphisms
+        (intrinsicFiniteTorsionConstructible l E (n + 1)
+          (Nat.succ_le_succ (Nat.zero_le n)) c.Z) :=
+      (proEtale_bounded_constructible_isTriangulated c.Z A).1
+    refine ⟨ObjectProperty.prop_of_iso _ α.symm hout.1, ?_⟩
+    intro i hi
+    apply hout.2.1
+    intro hz
+    exact hi (((DerivedCategory.homologyFunctor _ i).mapIso α).isZero_iff.mpr hz)
+  obtain ⟨hprod, ⟨L⟩⟩ := (sfIntegralDirectImage_constructible K₀ l _hl E c.g J hJ).1
+  let := hprod
+  have hL := (sfIntegralDirectImage_constructible K₀ l _hl E c.g J hJ).2.1 L
+  obtain ⟨b, _⟩ := (htower K').2
+  obtain ⟨⟨left⟩, ⟨right⟩⟩ := hpresentation K'
+  obtain ⟨dM⟩ := compactSupport_limit_iso (sfDirectImageTransition l E c.g J)
+    (sfCompactSupportTransition l E c K) (left ≪≫ b ≪≫ right)
+      ⟨L.projection, L.boundary, L.roos⟩ _hM
+  exact ObjectProperty.prop_of_iso _ dM hL.1
 
 end WeilConjectures

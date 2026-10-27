@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-big-site-open-cover-size-closure",
+ "kind": "statement",
+ "title": "Big fppf sites contain schemes with bounded open covers",
+ "statement": "Fix a big fppf site $\\mathit{Sch}_{fppf}$ [def-pc-fppf-site], with its chosen full category of schemes (so all scheme morphisms between its objects are morphisms of this category), and an object $T$ in it; use the universes of [def-weil-size-convention]. For a scheme $Z$, put $s(Z)=\\max\\{\\aleph_0,|\\mathcal B(Z)|,\\sup_{U\\in\\mathcal B(Z)}|\\Gamma(U,\\mathcal O_Z)|\\}$, where $\\mathcal B(Z)$ is its set of affine open subschemes and $\\Gamma(U,\\mathcal O_Z)$ is the ring of sections of its structure sheaf on $U$. Let $X$ be a scheme [def-pc-scheme] with an open covering $X=\\bigcup_{i\\in I}U_i$, where $I$ is a set and the $U_i$ have their induced open subscheme structures. If $|I|\\leq s(T)^{\\aleph_0}$ and $s(U_i)\\leq s(T)^{\\aleph_0}$ for every $i$, then there exists an object $X_0$ of the chosen category and an isomorphism of schemes $X_0\\cong X$. The index set may be empty (then $X$ is the empty scheme).",
+ "source": {
+  "document": "literature/stacks-project/sets.tex",
+  "place": "Tag 000R, lemma-what-is-in-it, (6); Tag 000J, lemma-construct-category, (2); Tag 000Q, lemma-bound-size. The empty-cover case uses s(empty)=aleph_0 directly. Big-site category specified in topologies.tex, Tag 021R, definition-big-fppf-site."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-size-convention",
+  "def-sfb-stacks-big-site-category",
+  "def-sfb-scheme-cardinal-size"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sfb-scheme-size-open-cover-bound to the given open cover, with no finiteness requirement. It gives $s(X)\\leq M$, where $M=\\max\\{\\aleph_0,|I|,\\sup_{i\\in I}s(U_i)\\}$. Its statement includes the empty index set, so this application also covers $X=\\varnothing$.",
+   "uses": [
+    "lem-sfb-scheme-size-open-cover-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000Q, lemma-bound-size; empty-cover correction as stated in the cited node."
+   }
+  },
+  {
+   "text": "Put $\\kappa=s(T)$ and $K=\\kappa^{\\aleph_0}$. By the definition of $s$, $\\aleph_0\\leq\\kappa$, and constant sequences give $\\kappa\\leq K$. The two hypotheses give $|I|\\leq K$ and $\\sup_i s(U_i)\\leq K$ (also for the empty supremum $0$). Thus $M\\leq K$ and step 1 gives $s(X)\\leq K\\leq\\max\\{K,\\kappa^+\\}=B(s(T))$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000R, lemma-what-is-in-it, proof of (6); equation-bound preceding Tag 000J."
+   }
+  },
+  {
+   "text": "Apply lem-sfb-big-site-bounded-size-representative with the fixed big site, its given object $T$, and $Z=X$. The sole size hypothesis was proved in step 2; the cited statement applies to this already chosen category. It supplies an object $X_0$ in that category and an isomorphism $X_0\\cong X$, as required.",
+   "uses": [
+    "lem-sfb-big-site-bounded-size-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000J, lemma-construct-category (2); Tag 000R, lemma-what-is-in-it (6); topologies.tex Tag 021R, definition-big-fppf-site (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scheme-size-open-cover-bound",
+  "lem-sfb-big-site-bounded-size-representative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sets.tex",
+  "place": "Tag 000R, lemma-what-is-in-it, proof of (6), using Tag 000Q and Tag 000J (2); topologies.tex Tag 021R (2) identifies the chosen underlying category. Empty-cover correction is explicit in the prerequisite."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(bound|size|cardinal|small).*(fppf|Sch_alpha)|(fppf|Sch_alpha).*(bound|size|cardinal|small)",
+   "results": {
+    "t": "2026-10-23T09:34:32Z",
+    "tool": "grep",
+    "query": "(bound|size|cardinal|small).*(fppf|Sch_alpha)|(fppf|Sch_alpha).*(bound|size|cardinal|small)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: open covers, small precoverages and essential smallness of affine etale objects do not give closure in a fixed Stacks bounded category of schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Big site of schemes is closed under open coverings of bounded cardinality and bounded scheme size",
+   "results": {
+    "t": "2026-10-23T09:34:32Z",
+    "tool": "leansearch",
+    "query": "Big site of schemes is closed under open coverings of bounded cardinality and bounded scheme size",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.OpenCover",
+     "AlgebraicGeometry.Scheme.zariskiTopology",
+     "AlgebraicGeometry.Scheme.zariskiPretopology",
+     "AlgebraicGeometry.Scheme.openCoverOfIsOpenCover",
+     "AlgebraicGeometry.Scheme.subcanonical_zariskiTopology",
+     "AlgebraicGeometry.Scheme.OpenCover.compactSpace",
+     "AlgebraicGeometry.Scheme.OpenCover.isOpenCover_opensRange",
+     "AlgebraicGeometry.Scheme.openCoverOfISupEqTop"
+    ],
+    "digest": "c21bea0c64b2496f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: open covers, small precoverages and essential smallness of affine etale objects do not give closure in a fixed Stacks bounded category of schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"EssentiallySmall\"",
+   "results": {
+    "t": "2026-10-23T09:34:32Z",
+    "tool": "loogle",
+    "query": "\"Scheme\", \"EssentiallySmall\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.AffineEtale.instEssentiallySmall"
+    ],
+    "digest": "5e00d8665c4bf7f0"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: open covers, small precoverages and essential smallness of affine etale objects do not give closure in a fixed Stacks bounded category of schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme covered by at most size(T) to aleph zero opens of size at most size(T) to aleph zero has a representative in any fixed big fppf site containing T",
+   "results": {
+    "t": "2026-10-23T09:34:44Z",
+    "tool": "leanfinder",
+    "query": "A scheme covered by at most size(T) to aleph zero opens of size at most size(T) to aleph zero has a representative in any fixed big fppf site containing T",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.instInhabitedOpenCover",
+     "AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover",
+     "AlgebraicGeometry.Scheme.zariskiPrecoverage",
+     "AlgebraicGeometry.Scheme.subcanonical_zariskiTopology",
+     "AlgebraicGeometry.Scheme.OpenCover",
+     "AlgebraicGeometry.Scheme.Cover",
+     "AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover_I₀",
+     "AlgebraicGeometry.Scheme.instSmallPrecoverage"
+    ],
+    "digest": "7b606da1491ade23"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: open covers, small precoverages and essential smallness of affine etale objects do not give closure in a fixed Stacks bounded category of schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construction of a small category of schemes closed under bounded size and open coverings using rank of a set",
+   "results": {
+    "t": "2026-10-23T09:34:44Z",
+    "tool": "leanfinder",
+    "query": "Construction of a small category of schemes closed under bounded size and open coverings using rank of a set",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.instSmallPrecoverage",
+     "AlgebraicGeometry.Scheme.OpenCover",
+     "AlgebraicGeometry.Scheme.subcanonical_zariskiTopology",
+     "AlgebraicGeometry.Scheme.instInhabitedOpenCover",
+     "AlgebraicGeometry.Scheme.quasiCompactCover",
+     "AlgebraicGeometry.Scheme.Cover",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+     "AlgebraicGeometry.QuasiCompactCover"
+    ],
+    "digest": "24a9a48652520ee3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: open covers, small precoverages and essential smallness of affine etale objects do not give closure in a fixed Stacks bounded category of schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "(bound|size|cardinal|small).*(fppf|Sch_alpha)|(fppf|Sch_alpha).*(bound|size|cardinal|small)",
+   "results": {
+    "t": "2026-10-23T11:50:48Z",
+    "tool": "grep",
+    "query": "(bound|size|cardinal|small).*(fppf|Sch_alpha)|(fppf|Sch_alpha).*(bound|size|cardinal|small)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: none of the hits states bounded-open-cover closure in the fixed chosen big-site category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every scheme with a sufficiently small affine open cover and small rings of sections is represented in a fixed big fppf site",
+   "results": {
+    "t": "2026-10-23T11:53:02Z",
+    "tool": "leansearch",
+    "query": "Every scheme with a sufficiently small affine open cover and small rings of sections is represented in a fixed big fppf site",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.isLocallyNoetherian_of_affine_cover",
+     "AlgebraicGeometry.Scheme.affineOpenCover",
+     "AlgebraicGeometry.Scheme.affineCover",
+     "AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover",
+     "AlgebraicGeometry.Scheme.AffineOpenCover.openCover",
+     "AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top",
+     "AlgebraicGeometry.Scheme.AffineOpenCover",
+     "AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover"
+    ],
+    "digest": "f78a44206c3a19ba"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: none of the hits states bounded-open-cover closure in the fixed chosen big-site category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Small\"",
+   "results": {
+    "t": "2026-10-23T11:53:02Z",
+    "tool": "loogle",
+    "query": "\"Scheme\", \"Small\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.instSmallPrecoverage",
+     "AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall",
+     "AlgebraicGeometry.instHasColimitsOfShapeDiscreteSchemeOfSmall",
+     "AlgebraicGeometry.instCreatesColimitsOfShapeSchemeLocallyRingedSpaceDiscreteForgetToLocallyRingedSpaceOfSmall",
+     "AlgebraicGeometry.instPreservesColimitsOfShapeSchemeTopCatDiscreteForgetToTopOfSmall",
+     "AlgebraicGeometry.instHasCoproductsOfShapeOverSchemeTopMorphismPropertyOfSmall",
+     "AlgebraicGeometry.instCreatesColimitsOfShapeOverSchemeTopMorphismPropertyOverDiscreteForgetOfSmall",
+     "AlgebraicGeometry.Scheme.smallGrothendieckTopology"
+    ],
+    "digest": "4a361adc810823ed"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: none of the hits states bounded-open-cover closure in the fixed chosen big-site category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Big fppf sites contain schemes with bounded open covers using the size of a base object to the countable power",
+   "results": {
+    "t": "2026-10-23T11:53:06Z",
+    "tool": "leanfinder",
+    "query": "Big fppf sites contain schemes with bounded open covers using the size of a base object to the countable power",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.instSmallPrecoverage",
+     "AlgebraicGeometry.Scheme.precoverage",
+     "AlgebraicGeometry.Scheme.jointlySurjectiveTopology",
+     "AlgebraicGeometry.Scheme.surjectiveFamiliesPretopology",
+     "AlgebraicGeometry.Scheme.Cover",
+     "AlgebraicGeometry.Scheme.subcanonical_zariskiTopology",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S",
+     "AlgebraicGeometry.Scheme.exists_cover_of_mem_grothendieckTopology"
+    ],
+    "digest": "709b72d9059217e2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: none of the hits states bounded-open-cover closure in the fixed chosen big-site category."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bounded-affine-lft-coproduct",
+  "date": "2026-10-23",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: 04U0, the scheme size estimates ensuring that the coproducts of the refined bases and of their affine atlases belong to the original big site. Split prerequisite: the bounded-size closure for the open cover by the coproduct summands.",
+   "via": [
+    "lem-sfb-bounded-affine-lft-coproduct",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-big-site-open-cover-size-closure",
+  "worker": "stage1",
+  "summary": "Read Stacks 000R (6), 000Q, 000J (2), and 021R (2). Kept the item statement unchanged. Split into the general open-cover size estimate and the general bounded-size representative property, with explicit cardinal comparison between them. The size prerequisite corrects the empty-cover error in the printed 000Q maximum. Two statement-only unsplit prerequisites; no project attachment or Mathlib leaf found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: 04U0, the scheme size estimates ensuring that the coproducts of the refined bases and of their affine atlases belong to the original big site. Split prerequisite: the bounded-size closure for the open cover by the coproduct summands. The three steps realize only this set-theoretic prerequisite, following 000R (6); the current latest blueprint proof (3) provides the direct-image context, not the scheme-size estimates.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-1aed574b4",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-1aed574b4 (reviewer sub-agent of L); spot-checked: I read Stacks sets.tex (size definition, equation-bound, 000J lemma-construct-category with its proof, 000Q lemma-bound-size with its proof, 000R(6) with its proof) and topologies 021R(2). The item's statement and blueprint are byte-identical to live, the item is still unsplit live, and there is no repair note. The route is exactly the Stacks one, 000R(6) = 000Q + 000J(2). Step 1 cites lem-sfb-scheme-size-open-cover-bound, which gives s(X) ≤ max{ℵ0,|I|,sup s(U_i)} for an arbitrary cover. Step 2 is elementary and I checked it: ℵ0 ≤ κ ≤ κ^ℵ0 = K, so M ≤ K ≤ B(κ). Step 3 cites lem-sfb-big-site-bounded-size-representative (000J(2), applicable through 021R(2)), and its conclusion is exactly the item's. The new size-bound node correctly adds ℵ0 to the 000Q maximum. The printed bound fails for the empty cover, since s(∅) = ℵ0 > 0, and the report records this under Source error. I re-checked the proof of that node without quasi-separatedness: finite affine refinements and the injection into a finite product of section rings. I tested it on a singleton cover, a cover by empty opens, Spec ℤ and a non-quasi-separated X. The representative node is 000J(2) verbatim. It also holds under the universe and skeleton reading of def-weil-size-convention, because B(s(T)) < inaccessible. Neither new node restates the item. rg -L for 000J, 000Q, 000R and size found no duplicate in the DAG; the nearest, lem-sfb-qc-lft-scheme-size-bound and lem-sfb-bounded-affine-lft-coproduct, are different statements. B1–B9 hold, there is no SGA citation, and tool_uses is empty. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BigSiteOpenCoverSizeClosure",
+  "declaration": "AlgebraicGeometry.Scheme.exists_iso_of_openCover_cardinalSize_le",
+  "file": "lean/Sheaf/AlgebraicGeometry/BigSiteOpenCoverSizeClosure.lean",
+  "statement": "theorem exists_iso_of_openCover_cardinalSize_le (code : Scheme.{u} ↪ ZFSet.{u + 1}) (S₀ : Set Scheme.{u}) (α : Ordinal.{u + 1}) (hα : IsStacksBigSiteCategory code S₀ α) (T : StacksBigSiteCategory code α) (X : Scheme.{u}) {I : Type v} (U : I → X.Opens) (hU : (⨆ i : I, U i) = ⊤) (hI : Cardinal.lift.{u} (Cardinal.mk I) ≤ Cardinal.lift.{v} (T.obj.cardinalSize ^ Cardinal.aleph0)) (hsize : ∀ i : I, Cardinal.lift.{v} (U i).toScheme.cardinalSize ≤ Cardinal.lift.{v} (T.obj.cardinalSize ^ Cardinal.aleph0)) : ∃ X₀ : StacksBigSiteCategory code α, Nonempty (X₀.obj ≅ X)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already landed chosen-category admissibility and scheme-size definitions, added to stmt_deps; the covering topology does not enter this assertion about the underlying full category. Explicit cardinal lifts allow an arbitrary index universe."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3581ad00",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 000R(6): IsStacksBigSiteCategory/StacksBigSiteCategory (landed def node) for the chosen full category, cardinalSize for s, U : I → X.Opens with ⨆=⊤, hI/hsize bounds by s(T)^ℵ₀ with consistent Cardinal lifts (I : Type v arbitrary), conclusion ∃ X₀, Nonempty (X₀.obj ≅ X). No extra hypotheses; empty I forces X=∅ with s=ℵ₀ ≤ s(T)^ℵ₀, covered. Item node diff vs side-live: only stmt_deps += two landed definition nodes and lean record; statement verbatim in file; single sorry, no defs, docstrings with source/blueprint/proof plan, no SGA, report sections present; plain import of landed proof-dep module SchemeSizeOpenCoverBound. No compile rerun (no changes). Advisory: proof dep lem-sfb-big-site-bounded-size-representative has no Lean record; stage 3 can use hα clause (2)."
+ }
+}

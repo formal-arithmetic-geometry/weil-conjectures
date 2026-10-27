@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "Write $S^\\circ=\\operatorname{Spec}A$. By [lemma-nagata-noetherian-inverse-system-affine], it is the inverse limit of the spectra $S_i$ of finitely generated integer subalgebras of $A$, with affine transition morphisms. The affine morphism $h$ is of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](1). Apply [thm-pd-spreading-out](1) to get a stage $a$, a finitely presented $g_a:X_a\\to S_a$, and $X^\\circ\\cong X_a\\times_{S_a}S^\\circ$ over $S^\\circ$. For $i\\ge a$ put $X_i=X_a\\times_{S_a}S_i$ and $g_i:X_i\\to S_i$. These maps remain finitely presented, and $X_i$ is quasi-compact and quasi-separated, by [lem-weil-pbc-qcqs-morphism-permanence](2)--(3). The system $(X_i)$ has limit $X^\\circ$ by [lem-weil-pbc-scheme-over-limit]. Passing to any directed tail retains this same limit, as is also included in that statement. Each $X_i$ is of finite type over $\\mathbf Z$: finite-presentation chart algebras are finitely generated over their base chart algebras, and the union of two finite sets of generators generates their composite.",
+   "text": "Write $S^\\circ=\\operatorname{Spec}A$. By [lemma-nagata-noetherian-inverse-system-affine], it is the inverse limit of the spectra $S_i$ of finitely generated integer subalgebras of $A$, with affine transitions. The affine morphism $h$ is finitely presented by [lem-weil-pbc-qcqs-morphism-permanence](1). By [thm-pd-spreading-out](1), choose $a$ and a finitely presented $g_a:X_a\\to S_a$ with $X^\\circ\\cong X_a\\times_{S_a}S^\\circ$. For $i\\ge a$ put $X_i=X_a\\times_{S_a}S_i$, $g_i:X_i\\to S_i$. By [lem-weil-pbc-qcqs-morphism-permanence](2)--(3) these maps remain finitely presented and $X_i$ is qcqs. By [lem-weil-pbc-scheme-over-limit] their limit is $X^\\circ$, also on directed tails. Each $X_i$ is of finite type over $\\mathbf Z$: the union of generators for its finite-presentation chart algebra and for the base chart algebra generates their composite.",
    "uses": [
     "lemma-nagata-noetherian-inverse-system-affine",
     "lem-weil-pbc-qcqs-morphism-permanence",
@@ -53,78 +53,32 @@
    }
   },
   {
-   "text": "For every algebraically closed field $\\Omega$ and every geometric point $\\operatorname{Spec}\\Omega\\to S^\\circ$, the fibre $C=X^\\circ_\\Omega$ is a geometric fibre of $f$; if it is nonempty, all its closed points are smooth or nodes by the hypotheses retained in step 1. Apply [lem-trf-nodal-curve-lci-criterion], implication (1)$\\Rightarrow$(2), over the algebraically closed field of this fibre. It makes $C$ a local complete intersection. The fibre is locally of finite type since local finite presentation is preserved by base change, [lem-weil-pbc-qcqs-morphism-permanence](3), and its algebra presentations remain finitely generated after dropping relations. Empty fibres are local complete intersections by the empty affine-cover convention. The generic descent result [lem-trf-complete-intersection-fibres-limit-descent], applied to $g_a$ over the given system, now gives $b\\ge a$ such that every $g_i$ for $i\\ge b$ is flat, locally finitely presented, and has local complete intersection geometric fibres over every algebraically closed field. Its qcqs hypotheses were checked in step 2.",
+   "text": "Apply [lem-trf-nodal-limit-lci-pure-stage] to $(g_i)$ and $h$. This gives $c\\ge a$ such that every $g_i$ for $i\\ge c$ is flat with pure-one-dimensional ordinary and geometric fibres, the latter local complete intersections.",
    "uses": [
-    "lem-trf-nodal-curve-lci-criterion",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-trf-complete-intersection-fibres-limit-descent"
+    "lem-trf-nodal-limit-lci-pure-stage"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C5F, first proof sentence (Limits Tag 0C3L); the fibrewise interpretation of syntomicity from Tag 0C59 and Morphisms Tag 01UF."
+    "place": "Tag 0C5F (lemma-descend-nodal-family), first proof paragraph through relative-dimension descent; Tag 0C4E (lemma-nodal-lci). Expanded using limits.tex Tags 0C3L (lemma-descend-syntomic) and 0EY2 (lemma-descend-dimension-d), and morphisms.tex Tag 02FY (lemma-dimension-fibre-after-base-change)."
    }
   },
   {
-   "text": "The ordinary nonempty fibres of $h$ are pure of dimension one as well. Here is the passage between ordinary and geometric purity that will also be used at finite stages. For a locally finite type scheme over a field, purity of dimension one is equivalent to local topological dimension one at every point: one direction is [lem-sbc-equidimensional-open-local-dimension] with the whole scheme as open; for the converse, at the generic point of each component take an affine neighbourhood and remove the finitely many other components through that chart, then [lem-sc-dimension-locally-algebraic] identifies its local dimension with the dimension of this component. Finiteness of the components of these affine charts is [lem-wf-affine-noetherian-components]. The field-extension projection is surjective by [lem-weil-pbc-surjective-base-change], since the map of one-point field spectra is surjective. Thus every ordinary-fibre point has a lift, and [lem-sc-fibre-dimension-after-base-change] identifies the two local dimensions. The same argument proves geometric purity from ordinary purity. Apply [lem-trf-pure-relative-dimension-finite-stage] to $g_b$ with $d=1$ to find $c\\ge b$ such that every $g_i$ for $i\\ge c$ has empty or pure-one-dimensional ordinary and geometric fibres.",
+   "text": "By [lem-trf-nodal-family-fitting-singular], $\\operatorname{Sing}(h)\\to S^\\circ$ is unramified. Apply [lem-trf-first-fitting-unramified-finite-stage] to $g_c$: for some $d\\ge c$, $\\operatorname{Sing}(g_d)\\to S_d$ is unramified.",
    "uses": [
-    "lem-sbc-equidimensional-open-local-dimension",
-    "lem-sc-dimension-locally-algebraic",
-    "lem-wf-affine-noetherian-components",
-    "lem-weil-pbc-surjective-base-change",
-    "lem-sc-fibre-dimension-after-base-change",
-    "lem-trf-pure-relative-dimension-finite-stage"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C5F dimension-one reduction; Limits Tag 0EY2 (existing pure-dimension descent); Morphisms Tag 02FY and Varieties lemma-dimension-locally-algebraic."
-   }
-  },
-  {
-   "text": "Put $Z_c=\\operatorname{Sing}(g_c)\\hookrightarrow X_c$, the first-Fitting closed subscheme [def-trf-first-fitting-singular-subscheme]. Its formation commutes with every base change, without a nodality hypothesis: on an affine pair $R\\to B$ and a base change $R\\to R^\\prime$, [lem-weil-pbc-fibre-product-affine-spectra] gives $B^\\prime=R^\\prime\\otimes_R B$, [lem-weil-pbc-kahler-differentials-base-change] identifies $\\Omega_{B^\\prime/R^\\prime}=B^\\prime\\otimes_B\\Omega_{B/R}$, and [lem-trf-fitting-ideal-independence-base-change](2) gives $\\operatorname{Fit}_1(\\Omega_{B^\\prime/R^\\prime})=\\operatorname{Fit}_1(\\Omega_{B/R})B^\\prime$. The defining ideals therefore identify the closed subschemes and glue. In particular $Z_c\\times_{S_c}S_i=\\operatorname{Sing}(g_i)$ and $Z_c\\times_{S_c}S^\\circ=\\operatorname{Sing}(h)$.",
-   "uses": [
-    "def-trf-first-fitting-singular-subscheme",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-kahler-differentials-base-change",
-    "lem-trf-fitting-ideal-independence-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 0C3I (lemma-base-change-and-fitting-ideal-omega), used in Tag 0C5F; More on Algebra Tag 07ZA(3)."
-   }
-  },
-  {
-   "text": "The schemes $S_c,X_c,Z_c$ are of finite type over $\\mathbf Z$. For $Z_c$ this follows by taking a finite affine cover of $X_c$: the inverse image of each affine is its quotient by the defining ideal, and a quotient of a finitely generated algebra is generated by the images of the same generators. By [lem-weil-pbc-finite-type-over-noetherian] they are Noetherian, hence quasi-compact and quasi-separated. Also $Z_c\\to S_c$ is locally of finite type by the same quotient calculation. The limit morphism $\\operatorname{Sing}(h)\\to S^\\circ$ is unramified by [lem-trf-nodal-family-fitting-singular], since $h$ has the required nodal geometric fibres. Step 5 identifies it with the base change of $Z_c\\to S_c$. Apply [lem-trf-unramified-limit-descent] to this morphism of qcqs $S_c$-schemes. It gives $d\\ge c$ such that $\\operatorname{Sing}(g_d)\\to S_d$ is unramified. Notice that this descent only requires local finite type for the singular morphism, so it does not assume that an arbitrary closed subscheme of a finitely presented scheme is finitely presented.",
-   "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
     "lem-trf-nodal-family-fitting-singular",
-    "lem-trf-unramified-limit-descent"
+    "lem-trf-first-fitting-unramified-finite-stage"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C5F, last paragraph, using Limits Tag 0C4W (lemma-descend-unramified)."
+    "place": "Tag 0C5F (lemma-descend-nodal-family), final proof paragraph; divisors.tex Tag 0C3I (lemma-base-change-and-fitting-ideal-omega); limits.tex Tag 0C4W (lemma-descend-unramified), whose local-finite-type hypotheses are verified here for the Fitting closed subscheme."
    }
   },
   {
-   "text": "We now recover the nodal condition on $g_d$. By steps 3--4 it is flat and finitely presented, and every geometric fibre $C$ is empty or pure of dimension one and a local complete intersection. For a nonempty such fibre over $\\Omega$, step 5 identifies its first-Fitting singular scheme $Z_C$ with $\\operatorname{Sing}(g_d)\\times_{S_d}\\operatorname{Spec}\\Omega$. It is unramified by [lem-weil-pbc-unramified-base-change-open](1). Implication (2)$\\Rightarrow$(1) of [lem-trf-nodal-curve-lci-criterion] therefore makes every closed point of $C$ smooth or a node. To cover every nonsmooth point, [lem-trf-dth-fitting-smooth-locus] with $d=1$ identifies that locus with $|Z_C|$, and [lem-weil-pbc-unramified-over-field-discrete] shows that every point of $Z_C$ is closed in $Z_C$. Since $Z_C$ is closed in $C$, each nonsmooth point is closed in $C$. It is thus a node; with $\\Omega$ already algebraically closed, its defining completed-ring condition is exactly $\\Omega[[u,v]]/(uv)$. The empty case is vacuous.",
+   "text": "Apply [lem-trf-lci-unramified-singular-nodal-recognition] to $g_d$ using step 3 and step 4. Set $f_0=g_d$, $X_0=X_d$, $S_0=S_d$. Step 2 gives finite type over $\\mathbf Z$, finite presentation, and the Cartesian identification (compose the two base changes by their universal properties). For the image $x_0$ of $x$, [lem-trf-nodal-family-fitting-singular] identifies $\\operatorname{Sing}(h)$ with the pullback of $\\operatorname{Sing}(f_0)$, both with underlying nonsmooth loci. Since $x$ is nonsmooth for $h$, $x_0$ is nonsmooth for $f_0$.",
    "uses": [
-    "lem-weil-pbc-unramified-base-change-open",
-    "lem-trf-nodal-curve-lci-criterion",
-    "lem-trf-dth-fitting-smooth-locus",
-    "lem-weil-pbc-unramified-over-field-discrete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C59, reverse implication, expanded using Tag 0C4E; Divisors Tag 0C3K and Morphisms Tag 02G7."
-   }
-  },
-  {
-   "text": "Set $S_0=S_d$, $X_0=X_d$, and $f_0=g_d$. Step 2 gives finite type over $\\mathbf Z$ and finite presentation; steps 3 and 7 give flatness and the required geometric-fibre condition. The two successive base changes identify $X^\\circ\\cong X_a\\times_{S_a}S^\\circ\\cong X_d\\times_{S_d}S^\\circ$ by the fibre-product universal property. Let $x_0$ be the image of $x$. Apply [lem-trf-nodal-family-fitting-singular] to $f_0$: its singular subscheme pulls back to that of $h$, with underlying set the nonsmooth locus. Since $x$ is nonsmooth for $h$, its image lies in $\\operatorname{Sing}(f_0)$ and $x_0$ is nonsmooth. All required data and the Cartesian square now have been constructed.",
-   "uses": [
+    "lem-trf-lci-unramified-singular-nodal-recognition",
     "lem-trf-nodal-family-fitting-singular"
    ],
    "elementary": false,
@@ -136,30 +90,17 @@
  ],
  "proof_deps": [
   "def-sbc-locally-finite-presentation",
-  "def-trf-first-fitting-singular-subscheme",
   "def-weil-flat-morphism",
-  "lem-sbc-equidimensional-open-local-dimension",
   "lem-sc-dimension-locally-algebraic",
-  "lem-sc-fibre-dimension-after-base-change",
-  "lem-trf-complete-intersection-fibres-limit-descent",
-  "lem-trf-dth-fitting-smooth-locus",
-  "lem-trf-fitting-ideal-independence-base-change",
-  "lem-trf-nodal-curve-lci-criterion",
+  "lem-trf-first-fitting-unramified-finite-stage",
+  "lem-trf-lci-unramified-singular-nodal-recognition",
   "lem-trf-nodal-family-fitting-singular",
-  "lem-trf-pure-relative-dimension-finite-stage",
-  "lem-trf-unramified-limit-descent",
+  "lem-trf-nodal-limit-lci-pure-stage",
   "lem-weil-pbc-affine-opens-basis",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-kahler-differentials-base-change",
   "lem-weil-pbc-morphism-factors-through-open-subscheme",
   "lem-weil-pbc-qcqs-morphism-permanence",
   "lem-weil-pbc-scheme-over-limit",
   "lem-weil-pbc-smooth-restrict-open-subschemes",
-  "lem-weil-pbc-surjective-base-change",
-  "lem-weil-pbc-unramified-base-change-open",
-  "lem-weil-pbc-unramified-over-field-discrete",
-  "lem-wf-affine-noetherian-components",
   "lemma-nagata-noetherian-inverse-system-affine",
   "thm-pd-spreading-out"
  ],
@@ -234,16 +175,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-nodal-family-noetherian-approximation",
   "worker": "stage1",
-  "summary": "Eight steps expand the 0CBY affine approximation and the full 0C5F nodal-descent argument. Two new statement-only generic inputs are flat local-complete-intersection fibre descent (0C3L) and unramified descent (0C4W). Existing nodes supply finite-presentation models, pure relative dimension descent, Fitting formation, and the field-level nodal criterion. The stage is shown nodal before applying the nodal-family singular-locus theorem to the chosen point. Statement unchanged.",
+  "summary": "Q11 repair of the human-requested re-split: retains the statement verbatim. Three independent statement-only lemmas allocate returned steps 3--4, 5--6 and 7; steps 1--2 and 8 remain in the short parent assembly. Full returned arguments, dependency/source checks and allocation are retained in report.md. No Lean edited or compiler used.",
   "blueprint": "Realizes the inherited historical nodal local-equation input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-family-etale-local-model; 0CBY first paragraph and all of 0C5F are expanded. Does not replace the current contracting-correspondence unit route.",
   "tool_uses": [
-   {
-    "node": "lem-wf-affine-noetherian-components",
-    "why": "Finiteness of the irreducible components of finite-type field-algebra charts is used in the local-dimension test for purity."
-   },
    {
     "node": "lemma-nagata-noetherian-inverse-system-affine",
     "why": "Constructs the affine finite-type integer inverse system; it is a generic approximation tool, not supplied by the trace-formula unit."
@@ -271,26 +208,6 @@
    {
     "node": "lem-sc-dimension-locally-algebraic",
     "why": "Uses invariance of component dimension on nonempty opens for schemes locally of finite type over a field; no trace-formula node provides it."
-   },
-   {
-    "node": "lem-sbc-equidimensional-open-local-dimension",
-    "why": "Relates purity of a locally finite type field scheme to pointwise topological dimension for the field-extension comparison."
-   },
-   {
-    "node": "lem-sc-fibre-dimension-after-base-change",
-    "why": "Uses the equality of local dimensions of corresponding fibre points under base change, a generic dimension tool."
-   },
-   {
-    "node": "lem-weil-pbc-kahler-differentials-base-change",
-    "why": "Identifies affine differential modules before applying the existing Fitting-ideal base-change theorem, independent of nodality."
-   },
-   {
-    "node": "lem-weil-pbc-unramified-base-change-open",
-    "why": "Base changes the finite-stage singular morphism to each geometric fibre."
-   },
-   {
-    "node": "lem-weil-pbc-unramified-over-field-discrete",
-    "why": "Shows every singular geometric-fibre point is closed, so the existing closed-point nodal criterion covers every nonsmooth point."
    }
   ]
  },
@@ -310,12 +227,12 @@
   "lem-weil-pbc-unramified-over-field-discrete"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q72-9d98441ed",
-  "group": "Q72",
+  "reviewer": "NT-cc-Q11-ad21238e1",
+  "group": "Q11",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-9d98441ed (reviewer sub-agent of L); spot-checked: I read the whole delivery and the sources at the cited places. Curves: 0CBY first proof, first paragraph; 0C5F, full proof; 0C59. Limits: situation-descent-property, 0C3L, 0C4W, 0EY2. Morphisms: 01UF. I read the statement of all 27 cited nodes. The item statement is unchanged and agrees with 0CBY and 0C5F in the geometric-fibre form. Each of steps 1-8 checks against the statements it cites. Step 5 is a correct base-change argument with no nodal hypothesis (00RV with 07ZA(2)). Step 6 needs only local finite type, which is exactly the hypothesis of 0C4W. Step 7 meets the hypotheses of dth-fitting and the lci criterion. Step 8 gets nonsmoothness of x_0 from the Sing base-change clause once f_0 is nodal. One fault (E1/E4), now fixed. As delivered, new node lem-trf-complete-intersection-fibres-limit-descent stated its lci hypothesis and conclusion through def-weil-geometric-fibre. That definition only covers the fibre over a chosen algebraic closure of kappa(y). Step 7 and the item's conclusion need lci for every algebraically closed Omega, and no step justified the field change. The fix strengthens the node's hypothesis and conclusion to every geometric point Spec Omega -> V. The node stays true: 00SJ, then 01UF, then 0C3L, then syntomic stable under base change, then 00SJ again. The fix also adds def-weil-geometric-point to its stmt_deps. In the item, step 3's text now quantifies over Omega to match. lem-trf-unramified-limit-descent is exactly 0C4W. I tested both new nodes on small cases (systems Z[1/n] over Q, empty fibres, constant systems). Neither duplicates an existing node (searched the DAG for 0C3L/0C4W, syntomic, and limit with unramified or lci). Neither restates the item. The item does not reach itself through its dependencies (closure of 652 nodes, none missing or merged). I accept the 13 declared tool uses as generic scheme and limit tools. No SGA source is used.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-ad21238e1 (reviewer sub-agent of L); spot-checked: Re-split as the human's 2026-10-21 note asked: statement and stmt_deps byte-identical, 3 new statement-only nodes, parent assembly 2713 chars in 5 steps. Old steps 1, 2 and 8 stay in the parent, verbatim or with the same content. Old steps 3-4 go to lem-trf-nodal-limit-lci-pure-stage: the nodal-curve lci criterion (1)=>(2), the lci-fibre limit descent, the ordinary/geometric purity comparison via 02FY lifts, and pure-dimension descent. Old steps 5-6 go to lem-trf-first-fitting-unramified-finite-stage: Fit_1 commutes with base change (0C3I, without nodality), Z_i of finite type over Z, and unramified descent via 0C4W. Old step 7 goes to lem-trf-lci-unramified-singular-nodal-recognition: the reverse of 0C59 via 0C4E, the Fit_1 smooth locus and 02G7 discreteness, which makes nonsmooth points closed. Sizes are about 2376/1874/1005 chars, so comparable, and none restates the item or a parent clause. Sources checked: curves.tex 0C5F (l.4879), 0C59 (l.4662) and 0CBY first proof (l.5077). Every hypothesis of each cited node checked in parent steps 1-5, including canonical Sing under X° ≅ X_c ×_{S_c} S° and d ≥ c. Small cases: uv=0 gives Fit_1=(u,v), unramified; the cusp gives (u^2,v), nonreduced; the tacnode is ramified; empty and smooth fibres are vacuous; nonreduced generic points are excluded by the residue field Ω. Dup candidates checked: nodal-open-locus, nodal-family-fitting-singular (forward), nodal-curve-lci-criterion (field, closed points), the descent nodes and colimit-unramified-algebra. None is a duplicate. Item is not dropped, its route is inherited, no SGA is used, and the batch-5 closure is unchanged. Advisory: the item's inherited tool_uses are partly stale."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -335,5 +252,16 @@
   "existing": false,
   "file": "lean/Sheaf/TraceFormula/NodalFamilyNoetherianApproximation.lean"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

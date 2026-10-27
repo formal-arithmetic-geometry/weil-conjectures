@@ -1,0 +1,150 @@
+{
+ "id": "lem-trf-polarized-line-iso-descent",
+ "kind": "statement",
+ "title": "Unique descent of line isomorphisms over a fixed scheme isomorphism",
+ "statement": "Let $D$ be a polarized descent datum [def-trf-polarized-scheme-etale-descent-datum], and let $d=(Y,M)$ and $d'=(Y',M')$ be two realizations with their labelled charts. Fix a scheme isomorphism $e:Y\\simeq Y'$ over $S$ whose composite with each chart map $q_i:X_i\\to Y$ equals the other chart map $q_i':X_i\\to Y'$. Then there exists a unique module isomorphism $\\mu:e^*M'\\simeq M$ such that, on every $X_i$, its pullback followed by the source chart line isomorphism equals the target chart line isomorphism transported along $e q_i=q_i'$. All pullbacks use the canonical composition and equality comparisons in the definition of the datum. The global scheme isomorphism $e$ is an input, not a conclusion; no scheme-map gluing or existence of realizations is asserted.",
+ "stmt_deps": [
+  "def-trf-polarized-scheme-etale-descent-datum"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Descent Tag 023T (proposition-fpqc-descent-quasi-coherent), fullness and faithfulness; Spaces Descent Tag 04W8; only the module part of uniqueness over an already supplied chart-compatible scheme isomorphism."
+ },
+ "proof": [
+  {
+   "text": "Base change the covering of S to the source Y and transport it along its chart isomorphisms to X_i. The result is an etale, hence fpqc, covering of Y. Dependencies: [lem-trf-fppf-covering-base-change], [lem-weil-pbc-fpqc-finer-than-etale].",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-weil-pbc-fpqc-finer-than-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Descent Tag 023T (proposition-fpqc-descent-quasi-coherent), fullness and faithfulness; Spaces Descent Tag 04W8; only the module part of uniqueness over an already supplied chart-compatible scheme isomorphism."
+   }
+  },
+  {
+   "text": "Over X_i define the local isomorphism e^*M' to M by pulling the target chart trivialization along the equality of chart maps, then composing with the inverse source trivialization. Normalize all composite pullbacks by the canonical tensorPullbackCompositionIso. The two realization equations for lambda give the same local map on every double overlap; associativity cancels the common lambda. Dependencies: [def-trf-polarized-scheme-etale-descent-datum], [lem-pc-tensor-pullback-composition-associativity].",
+   "uses": [
+    "def-trf-polarized-scheme-etale-descent-datum",
+    "lem-pc-tensor-pullback-composition-associativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Descent Tag 023T (proposition-fpqc-descent-quasi-coherent), fullness and faithfulness; Spaces Descent Tag 04W8; only the module part of uniqueness over an already supplied chart-compatible scheme isomorphism."
+   }
+  },
+  {
+   "text": "Both e^*M' and M are invertible, hence quasi-coherent. Full faithfulness of fpqc module descent (Tag 023T) glues these maps uniquely. Their inverses also agree and glue; faithfulness proves the two inverse equations. Thus the global map is an isomorphism. Its restriction is exactly the displayed line equation, by the definition of the local maps. Faithfulness makes any other isomorphism satisfying those equations equal to it. This includes the empty scheme and repeated charts. Dependencies: [lem-pc-fpqc-descent], [lem-weil-pbc-invertible-pullback-invertible].",
+   "uses": [
+    "lem-pc-fpqc-descent",
+    "lem-weil-pbc-invertible-pullback-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Descent Tag 023T (proposition-fpqc-descent-quasi-coherent), fullness and faithfulness; Spaces Descent Tag 04W8; only the module part of uniqueness over an already supplied chart-compatible scheme isomorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fppf-covering-base-change",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "def-trf-polarized-scheme-etale-descent-datum",
+  "lem-pc-tensor-pullback-composition-associativity",
+  "lem-pc-fpqc-descent",
+  "lem-weil-pbc-invertible-pullback-invertible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Descent Tag 023T (proposition-fpqc-descent-quasi-coherent), fullness and faithfulness; Spaces Descent Tag 04W8; only the module part of uniqueness over an already supplied chart-compatible scheme isomorphism."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Full faithfulness of descent for invertible modules along an etale covering with specified tensor pullback comparisons",
+   "results": "{\"t\": \"2026-10-26T07:04:02Z\", \"tool\": \"leansearch\", \"query\": \"Full faithfulness of descent for invertible modules along an etale covering with specified tensor pullback comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful\", \"Module.Invertible.rTensorEquiv\", \"Submodule.tensorInvEquiv\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"CategoryTheory.Functor.pushforward_cover_iff_cover_pullback\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence\", \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\"], \"digest\": \"0fa25cb903354b32\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the fixed polarized chart interface; reuse general module descent and sheaf gluing where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"descent\"",
+   "results": "{\"t\": \"2026-10-26T07:04:02Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the fixed polarized chart interface; reuse general module descent and sheaf gluing where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "descent|descend",
+   "results": "{\"t\": \"2026-10-26T07:04:02Z\", \"tool\": \"grep\", \"query\": \"descent|descend\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\"], \"digest\": \"8c32db7b36fb7838\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the fixed polarized chart interface; reuse general module descent and sheaf gluing where applicable."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PolarizedSchemeEtaleDescent",
+  "date": "2026-10-26",
+  "group": "B7"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Additional input to the descent sentence: Stacks Spaces Descent Tag 0D3C, together with Tags 02WW and 04W8, for effective descent of a scheme with a relatively ample invertible module. Descent Tag 023T (proposition-fpqc-descent-quasi-coherent), fullness and faithfulness; Spaces Descent Tag 04W8; only the module part of uniqueness over an already supplied chart-compatible scheme isomorphism.",
+   "via": [
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PolarizedLineIsoDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/PolarizedLineIsoDescent.lean",
+  "declaration": "AlgebraicGeometry.existsUnique_polarizedLineIso",
+  "declarations": [
+   "AlgebraicGeometry.existsUnique_polarizedLineIso"
+  ],
+  "statement": "theorem existsUnique_polarizedLineIso\n    {S : Scheme.{u}} {I : Type v} {U : I → Scheme.{u}}\n    {uMap : ∀ i, U i ⟶ S} {X : I → Scheme.{u}} {f : ∀ i, X i ⟶ U i}\n    {L : ∀ i, (X i).Modules} {hL : ∀ i, Scheme.Modules.IsInvertible (L i)}\n    (D : PolarizedSchemeEtaleDescentDatum S I U uMap X f L hL)\n    (d d' : PolarizedDescentPair U uMap X f L)\n    (hd : IsPolarizedDescentRealization D d) (hd' : IsPolarizedDescentRealization D d')\n    (e : d.Y ≅ d'.Y) (he : e.hom ≫ d'.g = d.g)\n    (hc : ∀ i, polarizedChartMap d i ≫ e.hom = polarizedChartMap d' i) :\n    ∃ μ : (Scheme.Modules.tensorPullback e.hom).obj d'.M ≅ d.M,\n      (∀ i, polarizedPullLine (polarizedChartMap d i) e.hom d'.M d.M μ ≪≫\n          polarizedChartLine d i =\n        polarizedModuleCongr (hc i) d'.M ≪≫ polarizedChartLine d' i) ∧\n      ∀ ν : (Scheme.Modules.tensorPullback e.hom).obj d'.M ≅ d.M,\n        (∀ i, polarizedPullLine (polarizedChartMap d i) e.hom d'.M d.M ν ≪≫\n            polarizedChartLine d i =\n          polarizedModuleCongr (hc i) d'.M ≪≫ polarizedChartLine d' i) → ν = μ",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-23251",
+  "group": "B7",
+  "result": "fix",
+  "landing": "20261026T081113-L-1815856",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-23251",
+  "group": "B7",
+  "result": "fix",
+  "landing": "20261026T081113-L-1815856",
+  "kind": "interface",
+  "note": "independent cc review: 16 relocated defs in PolarizedSchemeEtaleDescentData vs published item (verbatim); item theorem header vs clone (identical); 3 new sorried statements vs their nodes and the item conclusion (true, weaker); direct importer PolarizedFineLogEtaleDescent compiled against the delivery (OK); item node fields vs clone"
+ }
+}

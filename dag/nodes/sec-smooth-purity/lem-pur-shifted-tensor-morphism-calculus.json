@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-pur-derived-tensor-additive-constraints] for the canonical derived constraints, separate additivity, and flat degree-zero tensor sources. Thus $P\\otimes^LQ$ and $Q\\otimes^LR$ are again flat degree-zero sources, so both iterated operations are defined. Composing the separately additive tensor map with the fixed $t_{a,b}$ proves additivity of $B$.",
+   "text": "Prove the unique normalized shift comparison by transporting the two natural complex shifts (second input first) across the arbitrary resolving representative isomorphism. Use shift closure and the binary extension and uniqueness lemmas of [lem-pur-derived-tensor-additive-constraints]. The representative square is verified by cancelling the comparison and localization shift isomorphisms. The same extension and uniqueness argument retains the signed symmetry. For the associator, use the unsigned native cochain associator. Mathlib's triple-summand associator formula and triple-total extensionality establish its normalization and uniqueness directly. Its naturality follows from graded associator naturality after comparing the raw total tensor map with tensorHom. Tensor closure bundles the intermediate totals as resolving models. Conjugating by the left and right iterated representative comparisons gives a natural isomorphism on resolving triples. Ternary extension gives the derived associator. The triple-summand formula determines the chain associator uniquely, and cancelling the two left representative isomorphisms together with ternary faithfulness proves uniqueness of the derived normalization. Additivity of $B$ (still open): use [lem-pur-derived-tensor-additive-constraints] for the canonical derived constraints, separate additivity, and flat degree-zero tensor sources. Thus $P\\otimes^LQ$ and $Q\\otimes^LR$ are again flat degree-zero sources, so both iterated operations are defined. Composing the separately additive tensor map with the fixed $t_{a,b}$ proves additivity of $B$. The associativity, symmetry and pullback identities are assembled by the following steps.",
    "uses": [
     "lem-pur-derived-tensor-additive-constraints"
    ],
@@ -69,9 +69,9 @@
   "lem-pur-exact-pullback-signed-comparison"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "Q1",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Assembly of the three extracted statement-only lemmas, preserving the former ten-step argument and its normalization. Tags 0FPQ, 0FPT and 07A4; explicit signed-Hom refinement of the relative-cup diagrams."
+  "place": "Stage-3 partial proof, 2026-10-26. Tags 0FPQ/0FPT: unsigned cochain associator, resolving total closure, conjugation of iterated representative comparisons, ternary extension, and uniqueness by triple-summand extensionality and cancellation. The existing shift and signed-symmetry arguments remain complete; the local signed calculus and exact pullback assembly remain open."
  },
  "mathlib_searches": [
   {
@@ -227,7 +227,22 @@
    "SheafOfModules.shiftedExactTensorPullback",
    "SheafOfModules.ShiftedPullbackCoherence",
    "SheafOfModules.ShiftedTensorPullbackClause",
-   "SheafOfModules.shiftedTensorMorphismCalculus"
+   "SheafOfModules.shiftedTensorMorphismCalculus",
+   "TensorShiftNormalization",
+   "tensorRightShift",
+   "tensorLeftShift",
+   "tensorPairShift",
+   "totalTensorPairShift",
+   "GenericTensorPullbackCoherence",
+   "TensorSymmetryNormalization",
+   "TensorAssociatorNormalization",
+   "ResolvingTensorModel",
+   "ComplexTensorSwapFormula",
+   "ComplexTensorAssociatorFormula",
+   "SheafOfModules.shiftedOrdinaryTensor_additive",
+   "SheafOfModules.shiftedOrdinaryTensor_objAdditive",
+   "SheafOfModules.shiftedOrdinaryTensor_totalExists",
+   "SheafOfModules.shiftedTensorComplexComparisonNatIso"
   ],
   "file": "lean/Sheaf/Paper/ShiftedTensorMorphismCalculus.lean",
   "statement": "theorem shiftedTensorMorphismCalculus (a b cshift : ℤ) : ShiftedTensorAdditivityClause R T a b ∧ ShiftedTensorAssociativityClause R T a b cshift ∧ ShiftedTensorSymmetryClause R T a b ∧ ShiftedTensorPullbackClause R T S RI TS uInv uPush adj I c uStar hobj hmap V am k a b",
@@ -238,14 +253,25 @@
   "note": "Repair of b1f365161867: all four clauses, canonical signed resolving-model normalizations, canonical associator and exact ringed-topos comparison with explicit coherence. ShiftedTensorModel is the natural representative presentation of the recorded derived tensor; shiftedTensorPublishedModel_exists connects it to siteDerivedTensorIndependentCoefficients. No arbitrary shift, symmetry, associator or pullback isomorphism is assumed."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-26",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E6",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261020T221136-L-4148659",
+  "landing": "20261026T023755-L-600959",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

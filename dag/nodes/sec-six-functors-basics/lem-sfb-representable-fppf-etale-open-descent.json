@@ -1,0 +1,366 @@
+{
+ "id": "lem-sfb-representable-fppf-etale-open-descent",
+ "kind": "statement",
+ "title": "Fppf testing of representable morphism properties",
+ "statement": "Let $S$ be a scheme and $f:\\mathcal X\\to\\mathcal Y$ a morphism of algebraic stacks over $S$ representable by algebraic spaces. Let $q:V\\to\\mathcal Y$ be a representable surjective flat locally finitely presented morphism from an algebraic space, and put $X_V=\\mathcal X\\times_{\\mathcal Y}V$. Each of the properties flat, locally of finite presentation, etale, and open immersion holds for $f$ if and only if it holds for $X_V\\to V$, independently for each property. The same assertion holds for morphisms of algebraic spaces. Furthermore, for a morphism of algebraic spaces $g:X\\to Y$, if $V\\to Y$ and $W\\to X\\times_YV$ are surjective flat locally finitely presented covers, then $g$ is flat (respectively locally of finite presentation) if and only if $W\\to V$ is flat (respectively locally of finite presentation). Flatness and local finite presentation are therefore local on both source and target for these covers; no source-local assertion for etaleness or open immersions is made. The properties use [def-weil-flat-morphism], [def-sbc-locally-finite-presentation], [def-weil-etale-morphism], [def-weil-open-immersion] on scheme charts, and surjectivity means lifting field-valued points after field extension. An algebraic stack means a stack in groupoids with diagonal representable by algebraic spaces and a smooth surjective scheme atlas; stack, 2-fibre products and representability use [def-sfb-stable-pointed-moduli-groupoids], [def-trf-algebraic-space]. Properties of representable maps are tested after scheme base change on etale scheme charts. Surjectivity means that every field-valued target object lifts after a field extension. ",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 04XD (lemma-check-property-covering) for the four listed target-local properties. Algebraic-space descent: spaces-descent.tex Tags 041W (lemma-descending-property-flat), 041T (lemma-descending-property-locally-finite-presentation), 041X (lemma-descending-property-open-immersion), 042B (lemma-descending-property-etale). Source locality of flatness and local finite presentation is the fppf/smooth source-and-target locality recalled in stacks-properties.tex Section 04XB; source-locality inputs spaces-descent.tex Tags 06ET (lemma-flat-fpqc-local-source) and 06EV (lemma-locally-finite-presentation-fppf-local-source), scheme inputs descent.tex Tags 036K and 036N."
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-space-morphism-properties",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-sfb-surjective-moduli-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=\\mathcal X\\times_{\\mathcal Y}V$. It is an algebraic space by [lem-sfb-representable-pullback-over-space]. For flatness, local finite presentation and etaleness, the forward implication follows from base-change stability in [lem-sfb-stack-chartwise-smooth-etale-calculus]. For open immersions use their scheme-test meaning: for every scheme $T\\to V$, $B\\times_VT\\simeq\\mathcal X\\times_{\\mathcal Y}T$ over $T$, so the required open immersion is one of the tests for $f$. This also shows base-change stability of open immersions in the representable sense, without assuming that $\\mathcal X$ or $V$ is a scheme. For the converse fix an arbitrary scheme $T\\to\\mathcal Y$. Write $Z=\\mathcal X\\times_{\\mathcal Y}T$ and $A=V\\times_{\\mathcal Y}T$. Both are algebraic spaces, again by representable pullback, and $A\\to T$ is flat, locally of finite presentation and surjective by the chartwise calculus. There is a canonical equivalence $Z\\times_TA\\simeq B\\times_VA$ over $A$: both parametrise an $\\mathcal X$-object, a $V$-object and their identifications with the given $\\mathcal Y$-object from $T$. This is the associativity universal property of the 2-fibre product.",
+   "uses": [
+    "lem-sfb-representable-pullback-over-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XD, lemma-check-property-covering, its two cartesian squares"
+   }
+  },
+  {
+   "text": "We will use the following elementary conversion whenever a surjective flat locally finitely presented scheme map $u:U\\to T$ occurs below. The singleton $\\{u\\}$ is an fppf covering. For every affine open $T_0\\subset T$, base change gives an fppf covering of $T_0$ by [lem-trf-fppf-covering-base-change]. Apply [lem-pc-fppf-affine-refinement] to choose finitely many affine opens in $U\\times_TT_0$ whose images cover $T_0$. These are affine opens of $U$, since $U\\times_TT_0$ is the inverse image open of $T_0$. Together with flatness of $u$, this is exactly [def-weil-pbc-fpqc-covering]. Hence $\\{u\\}$ is an fpqc covering in the family sense needed by the descent lemmas; $u$ itself need not be quasi-compact.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-pc-fppf-affine-refinement",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022C, lemma-zariski-etale-smooth-syntomic-fppf-fpqc, affine refinement argument"
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme atlas $U\\to A$, which exists by [def-trf-algebraic-space]. The composite $u:U\\to A\\to T$ is a surjective flat locally finitely presented morphism of schemes: etale maps are smooth, smooth maps are flat and locally of finite presentation, and these properties and surjectivity compose by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Thus Step 2 makes $\\{u\\}$ an fpqc covering. Fix one of the four properties $P$ and suppose $B\\to V$ has $P$. Then $Z_U=Z\\times_TU\\to U$ has $P$: for the first three properties use base-change stability and $Z_U\\simeq B\\times_VU$; for open immersion this is directly the scheme test $U\\to V$ of $B\\to V$. These identifications respect projection to $U$. In particular, in the open-immersion case $Z_U$ is a scheme, rather than merely an algebraic space.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XD, lemma-check-property-covering, refining the algebraic-space cover by an etale scheme atlas"
+   }
+  },
+  {
+   "text": "Suppose first $P$ is flat, locally of finite presentation, or etale. Choose a surjective etale scheme atlas $E\\to Z$. Its base change $E_U=E\\times_TU\\to Z_U$ is a surjective etale scheme atlas by [lem-trf-space-fibre-products-etale-covers]. By [lem-sfb-scheme-etale-source-target-properties], $P$ is etale local on source-and-target, so [lem-sfb-space-etale-presentation-property-criterion], with target chart $\\operatorname{id}_U$, gives $P(E_U\\to U)$. Now apply, respectively, [lem-weil-pbc-fpqc-descend-flat], [lem-weil-pbc-fpqc-descend-locally-finite-presentation], or [lem-galois-fpqc-descend-etale] to the scheme map $E\\to T$ and the fpqc covering $\\{U\\to T\\}$ from Step 2. This gives $P(E\\to T)$. The same presentation criterion with source chart $E\\to Z$ and target chart $\\operatorname{id}_T$ gives $P(Z\\to T)$. The argument handles each $P$ separately and uses no flatness hypothesis on $E\\to T$ in the other cases.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-weil-pbc-fpqc-descend-flat",
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "lem-galois-fpqc-descend-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tags 041W, 041T, 042B: lemma-descending-property-flat, lemma-descending-property-locally-finite-presentation, lemma-descending-property-etale; their fixed-source-atlas arguments"
+   }
+  },
+  {
+   "text": "If $P$ is open immersion, Step 3 gives a scheme $Z_U$ and an open immersion $Z_U\\to U$. Apply [lem-sfb-space-fpqc-open-immersion-descent] to the algebraic-space morphism $Z\\to T$ and the fpqc scheme covering $\\{U\\to T\\}$. It identifies $Z$ with an open subscheme of $T$. Thus all four cases give $P(Z\\to T)$ for every scheme $T\\to\\mathcal Y$, which is precisely $P(f)$ by the defining scheme-base-change test. The same proof applies with $\\mathcal X=X$, $\\mathcal Y=Y$ algebraic spaces: their discrete fibred groupoids have the same fibre products, and the chart criterion identifies the scheme tests with the space properties for the first three cases; open immersion already has that scheme-test meaning. Consequently the stated target-local equivalences also hold for algebraic spaces.",
+   "uses": [
+    "lem-sfb-space-fpqc-open-immersion-descent",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041X, lemma-descending-property-open-immersion; stacks-properties.tex Tag 04XD, final scheme tests"
+   }
+  },
+  {
+   "text": "For the final assertion put $X_0=X\\times_YV$ and $h:W\\to X_0$. Write $P$ for flatness or, separately, local finite presentation. If $g$ has $P$, base change gives $P(X_0\\to V)$, and composition with $h$, which has both flatness and local finite presentation by hypothesis, gives $P(W\\to V)$. This uses the corresponding base-change and composition assertions of [lem-sfb-stack-chartwise-smooth-etale-calculus]. For the reverse implication assume only $P(W\\to V)$. We will descend through $h$ using scheme source descent and then use the target-local equivalence already proved with the given cover $V\\to Y$.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tags 06ET and 06EV, source locality; forward direction by composition"
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme chart $T\\to V$, a surjective etale scheme chart $E\\to X_T=X_0\\times_VT$, and a surjective etale scheme chart $D\\to W_E=W\\times_{X_0}E$. These spaces and pulled-back etale covers exist by [def-trf-algebraic-space] and [lem-trf-space-fibre-products-etale-covers]. The map $D\\to E$ is surjective, flat and locally of finite presentation: $W_E\\to E$ is the base change of $h$, and $D\\to W_E$ is etale. Apply base change, composition and the etale/smooth implications of [lem-sfb-stack-chartwise-smooth-etale-calculus]. On the other hand $D\\to W_T=W\\times_VT$ is etale: it is $D\\to W_E\\to W_T$, whose second map is the base change of $E\\to X_T$. The base-change and composition assertions for chartwise etale morphisms in [lem-trf-space-chartwise-etale-permanence] justify this also for a possibly non-schematic $W_T$. Since $P(W_T\\to T)$ follows by base change from $P(W\\to V)$, the presentation criterion gives $P(D\\to T)$, using the source chart $D\\to W_T$ and target chart $\\operatorname{id}_T$. Its source need not be surjective: the criterion asserts $P$ for every presentation once the space map has $P$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tags 06ET and 06EV, lemma-transfer-from-schemes expanded by scheme charts"
+   }
+  },
+  {
+   "text": "The scheme maps $D\\xrightarrow{v}E\\xrightarrow{a}T$ satisfy $av=D\\to T$. If $P$ is flat, [lem-pc-flat-source-descent] applies because $v$ is flat and surjective and $av$ is flat, and gives flatness of $a$. If $P$ is local finite presentation, apply [lem-trf-lfp-fppf-source-locality] to $a$ and the singleton covering $\\{v\\}$: $v$ is surjective, flat and locally of finite presentation, and $av$ is locally of finite presentation, so $a$ is too. Apply [lem-sfb-space-etale-presentation-property-criterion], using [lem-sfb-scheme-etale-source-target-properties], first to $X_T\\to T$ with charts $E$ and $T$, and then to $X_0\\to V$ with the presentation $E\\to T$. In the second application $E\\to X_0$ is surjective etale, being the composite of $E\\to X_T$ and the base change of $T\\to V$, by [lem-trf-space-chartwise-etale-permanence]. Thus $X_0\\to V$ has $P$. The target-local equivalence of Step 5 gives $P(g)$. Neither source-descent theorem requires quasi-compactness; no assertion about source locality of etaleness or open immersion has been used.",
+   "uses": [
+    "lem-pc-flat-source-descent",
+    "lem-trf-lfp-fppf-source-locality",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 036K and 036N, lemma-flat-fpqc-local-source and lemma-locally-finite-presentation-fppf-local-source; spaces-descent.tex Tags 06ET and 06EV"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-pbc-fpqc-covering",
+  "lem-galois-fpqc-descend-etale",
+  "lem-pc-flat-source-descent",
+  "lem-pc-fppf-affine-refinement",
+  "lem-sfb-representable-pullback-over-space",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-sfb-space-fpqc-open-immersion-descent",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-lfp-fppf-source-locality",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 04XD (lemma-check-property-covering), expanded through etale scheme charts as in spaces-descent.tex Tags 041W, 041T, 041X, 042B; source locality by Tags 06ET, 06EV and descent.tex Tags 036K, 036N."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale flat locally finitely presented and open immersion properties for representable morphisms of stacks can be tested after a surjective flat locally finitely presented algebraic space cover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fppf local on target descent for etaleness flatness finite presentation and open immersions of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fppf local on target descent for etaleness flatness finite presentation and open immersions of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"[IsOpenImmersion f] : LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [P'.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ AlgebraicGeometry.Spec R)\\n      (g : Y ⟶ AlgebraicGeometry.Spec R), P' f → P (CategoryTheo\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties in the category of schemes. If $\\\\mathcal{P}$ is Zariski local at the target and $\\\\mathcal{P}'$ is stable under base change, then for any com\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsOpenImmersion f] : Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.of_isPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {UX UY : AlgebraicGeometry.Scheme} {iY : UY ⟶ Y}\\n  [AlgebraicGeometry.IsOpenImmersion iY] {iX : UX ⟶ X} {f' : UX ⟶ UY}, CategoryTheory.IsPullba\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target, then given a pullback square where the right morphism is an open immersion, if the original morphism $ f $ satisfies $ P $, then the pulled\"}\n  {\"name\": \"AlgebraicGeometry.targetAffineLocally\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : AffineTargetMorphismProperty) : MorphismProperty Scheme\", \"doc\": \"A morphism property $ P $ of schemes holds locally on affine opens of the target if, for every morphism $ f : X \\\\to Y $ and every affine open subset $ U \\\\subseteq Y $, the restriction $ f|_U : f^{-1}(\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*[Dd]escent|[Dd]escent.*[Ee]tale|fppf.*[Oo]pen[Ii]mmersion",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.RingTheory.Etale.Descent\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or ordinary groupoids and stack descent; none states this internal algebraic-space/groupoid or stack assertion, nor gives it by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Flat\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates are morphisms of schemes or rings; the item asserts descent for algebraic spaces and representable stack morphisms, requiring the chart reduction proved here"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|AlgebraicStack",
+   "results": "0 hits; ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates are morphisms of schemes or rings; the item asserts descent for algebraic spaces and representable stack morphisms, requiring the chart reduction proved here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable morphisms of algebraic stacks flat locally of finite presentation etale open immersion tested after fppf algebraic space cover",
+   "results": "8 hits; AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates are morphisms of schemes or rings; the item asserts descent for algebraic spaces and representable stack morphisms, requiring the chart reduction proved here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness and local finite presentation of representable algebraic stack morphisms descend along fppf covers",
+   "results": "8 hits; RingHom.Flat, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, RingHom.Flat.propertyIsLocal, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, Module.Flat.of_flat_tensorProduct, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates are morphisms of schemes or rings; the item asserts descent for algebraic spaces and representable stack morphisms, requiring the chart reduction proved here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properties of morphisms of algebraic spaces are fppf local on target and flatness finite presentation are local on source",
+   "results": "8 hits; AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsLocalAtTarget, AlgebraicGeometry.IsLocalAtSource, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instIsMultiplicativeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates are morphisms of schemes or rings; the item asserts descent for algebraic spaces and representable stack morphisms, requiring the chart reduction proved here"
+  },
+  {
+   "tool": "grep",
+   "query": "descendsAlong|class Flat|class LocallyOfFinitePresentation|class IsEtale",
+   "results": "18 hits; Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean; directory Mathlib/AlgebraicGeometry/Morphisms",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates are morphisms of schemes or rings; the item asserts descent for algebraic spaces and representable stack morphisms, requiring the chart reduction proved here"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unramified-diagonal-singleton-field-cover",
+  "date": "2026-10-23",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Etale field cover of a reduced locally Noetherian singleton stack. Input for the field-cover construction: Fppf testing of representable morphism properties.",
+   "via": [
+    "lem-sfb-unramified-diagonal-singleton-field-cover",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-representable-fppf-etale-open-descent",
+  "worker": "stage1",
+  "summary": "Expanded target locality through an etale scheme refinement of the fppf cover, scheme fpqc descent on a fixed source atlas, and algebraic-space open-immersion descent. Proved the two source-local clauses using scheme source descent after two charts. All supporting nodes already exist; no new nodes. Statement preserved. Recorded the variable typo in the last covering sentence of Stacks 04XD in report.md.",
+  "blueprint": "Supporting descent input at the inherited from.place for det-thm-sf-ctf-stability-direct-images (3), with current latest blueprint direct-images proof (3) read. The ancestor command returns None; preserve inherited null ancestor and via chain. No change to unit route or unit record.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Generic scheme/space chart or descent lemma used to reduce the representable stack assertion to scheme tests; no statement of this unit supplies its scheme descent or chart calculation."
+   },
+   {
+    "node": "lem-pc-flat-source-descent",
+    "why": "Generic scheme/space chart or descent lemma used to reduce the representable stack assertion to scheme tests; no statement of this unit supplies its source-descent criterion."
+   },
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic scheme/space chart or descent lemma used to reduce the representable stack assertion to scheme tests; no statement of this unit supplies its scheme descent or chart calculation."
+   },
+   {
+    "node": "lem-trf-fppf-covering-base-change",
+    "why": "Generic scheme/space chart or descent lemma used to reduce the representable stack assertion to scheme tests; no statement of this unit supplies its scheme descent or chart calculation."
+   },
+   {
+    "node": "lem-trf-lfp-fppf-source-locality",
+    "why": "Generic scheme/space chart or descent lemma used to reduce the representable stack assertion to scheme tests; no statement of this unit supplies its source-descent criterion."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic scheme/space chart or descent lemma used to reduce the representable stack assertion to scheme tests; no statement of this unit supplies its scheme descent or chart calculation."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme/space chart or descent lemma used to reduce the representable stack assertion to scheme tests; no statement of this unit supplies its scheme descent or chart calculation."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-flat",
+    "why": "Generic scheme/space chart or descent lemma used to reduce the representable stack assertion to scheme tests; no statement of this unit supplies its scheme descent or chart calculation."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "why": "Generic scheme/space chart or descent lemma used to reduce the representable stack assertion to scheme tests; no statement of this unit supplies its scheme descent or chart calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-descend-etale",
+  "lem-pc-flat-source-descent",
+  "lem-pc-fppf-affine-refinement",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-lfp-fppf-source-locality",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-18260b6cf",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-18260b6cf (reviewer sub-agent of L); spot-checked: PASS, no changes. Ordinary split: 0 new nodes, the item's statement is verbatim from the base, and live is still unsplit, so nothing has superseded it. The added stmt_deps (def-pc-scheme, def-sbc-smooth-morphisms, def-weil-field) are notions already used in the text. Step uses equal proof_deps, and the dependency closure has no cycle. Source: Stacks 04XD lemma-check-property-covering (stacks-properties.tex line 466) was read; the reported typo there is real (the family should be T x_Y W -> T; with X empty the written family is empty), and the delivered proof uses the correct A=V x_Y T. Steps 1-5 (target locality): the base is a space by the representable-pullback node; U->A->T is surjective, flat and lfp by the chartwise calculus; Step 2's fpqc-family conversion through 021O and 021P is correctly marked elementary; the presentation criterion gives P on E_U->U, scheme fpqc descent of flat/lfp/etale along {U->T} gives E->T, and the criterion again gives Z->T; open immersion uses the 041X space-to-scheme node with Z_U a scheme from Step 3. Steps 6-8 (source locality for flat and lfp only): the charts T->V, E->X_T and D->W_E are valid; D->E is surjective, flat and lfp; D->W_T is etale by the chartwise-etale permanence node; scheme source descent (lem-pc-flat-source-descent, or 036N with the singleton cover) gives E->T; the criterion then gives X_T->T and X_0->V, the latter with a surjective chart E->X_0 by the covering-composite clauses; target locality finishes. No hypothesis is missing and no quasi-compactness is used. The excluded etale and open-immersion source locality is correctly not claimed (A^1_k->k and a two-point etale scheme are counterexamples). No duplicate exists: the four-property, smooth-cover, lft, proper and chart-test sfb nodes cover other property lists. Batch-5: def-trf-algebraic-space, lem-trf-smooth-composition, and the trf lemmas 021O, 036N, 03FT-03FV/041F and 02X2 are generic scheme and space foundations, outside the trace formula and Poincare duality, so they are accepted. The 9 tool_uses are generic and accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RepresentableFppfEtaleOpenDescent",
+  "declaration": "CategoryTheory.representable_fppf_target_property",
+  "declarations": [
+   "CategoryTheory.representable_fppf_target_property",
+   "CategoryTheory.representable_fppf_target_openImmersion",
+   "AlgebraicGeometry.AlgebraicSpace.fppf_target_property",
+   "AlgebraicGeometry.AlgebraicSpace.fppf_target_openImmersion",
+   "AlgebraicGeometry.AlgebraicSpace.fppf_source_target_property"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RepresentableFppfEtaleOpenDescent.lean",
+  "statement": "theorem representable_fppf_target_property {S : Scheme.{u}} {F : BasedCategory.{v₁, w₁} (Over S)} {G : BasedCategory.{v₂, w₂} (Over S)} (hF : IsAlgebraicModuliStack F) (hG : IsAlgebraicModuliStack G) (f : BasedFunctor F G) (hf : IsRepresentableByAlgebraicSpaces f) (V : AlgebraicSpace S) (q : BasedFunctor (discreteModuli V.obj.obj) G) (hq : IsRepresentableByAlgebraicSpaces q) (hs : IsSurjectiveModuliMap q) (hflat : ModuliSpaceTest @Flat q) (hlfp : ModuliSpaceTest @LocallyOfFinitePresentation q) (P : MorphismProperty Scheme.{u}) (hP : P = @Flat ∨ P = @LocallyOfFinitePresentation ∨ P = @Etale) : ModuliSpaceTest P f ↔ ModuliSpaceTest P (moduliTwoFiberFst q f)",
+  "branch": "sheaf-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Five statements jointly render the node. Flat/lfp/etale use the existing chart predicates; open immersions use the existing representable scheme-test predicates. Space assertions allow any cartesian model of X times_Y V with its specified projection, avoiding a second fibre-product construction. Added statement dependencies own the already landed stack, chartwise and field-lifting notions; mathematical statement and proof unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4945a91d6",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Re-delivery of returned head 4a38e969 (H2). The only node change replaces the stmt_dep lem-sfb-stack-chartwise-smooth-etale-calculus with def-sfb-surjective-moduli-map (on base, existing:true, owns CategoryTheory.IsSurjectiveModuliMap); the theorem is kept in proof_deps. The Lean module is byte-identical to the returned head. Independently checked all five statements against ModuliSpaceTest/ModuliSchemeTest, moduliTwoFiberFst (the projection X_V→V), MapIsLocally, IsJointlySurjective and IsRepresentableWith. Flat/lfp/étale are independent via the disjunction; open immersion uses scheme tests; the space versions use an arbitrary cartesian square; source-target locality covers flat/lfp only. No quasi-compactness, Nonempty or universe restriction. All 15 stmt_deps are definition nodes owning the declarations used; lean.statement is verbatim; sorry proofs; docstrings carry source and blueprint. No file changed, so nothing compiled; the worker reported a clean compile of the identical file."
+ }
+}

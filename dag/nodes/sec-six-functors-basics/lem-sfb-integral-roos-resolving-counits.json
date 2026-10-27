@@ -1,0 +1,146 @@
+{
+ "id": "lem-sfb-integral-roos-resolving-counits",
+ "kind": "statement",
+ "title": "Flat K-flat preservation and counit computation for integral Roos towers",
+ "statement": "In the same prime, finite-extension and separated finite-type geometric setting, use the actual completed and constant ring sheaves and strict quotient towers of [def-sfb-integral-pullback-strict-roos-data]. For every flat-term K-flat complex P over R_Y, its ordinary R-pullback, its restriction to C_Y, and the C-pullback of that restriction are flat-term K-flat. The four canonical representative comparisons towerCounit(P), completedOrdinaryPullbackComplexCounit(P), completedReductionTowerComplexCounit(g_R^* P), and the constant reductionComplexCounit(g_C^* res(P)) are isomorphisms. The pulled tower assertion concerns its whole strict derived representative and does not assert that finite quotient terms are K-flat over R_Y.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "First paragraph: the target of c_K is the completion of g^*K; Comparison with the Stacks Project: the restricted target and unit give completed inverse image. Returned proof step 10: identify c_g and the augmented derived representatives. Agent-written strict cochain refinement; Stacks proetale.tex Tags 099M (lemma-naive-completion), 099N (lemma-pushforward-Noetherian-case), clauses (2),(5)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-dc-setting",
+  "def-weil-pbc-constant-sheaf",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-pc-sheaf-restrict-scalars",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-weil-strict-roos-comparison",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-sfb-integral-pullback-strict-roos-data"
+ ],
+ "proof": [
+  {
+   "text": "Constant completion equivalence makes R_Y flat over C_Y. Flat scalar restriction preserves K-flatness and flat terms. Ringed-topos K-flat pullback then gives both pulled resolving objects.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-flat-scalar-restriction-kflat",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the universal K-flat computation laws for reduction and ordinary pullback to these resolving objects. They give the ordinary pullback and the two reduction counit isomorphisms.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-completed-pullback",
+    "def-pur-strict-quotient-completion-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Completed-coefficient inverse image is exact by Cartesian coefficients, hence its termwise tower functor preserves quasi-isomorphisms. A strict diagram K-flat replacement of the source quotient tower computes derived pullback, and exactness identifies it with the ordinary pulled tower. Compose that counit with the source reduction counit to obtain towerCounit.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-diagram-kflat-replacements",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-flat-scalar-restriction-kflat",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-pur-strict-quotient-completion-data",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-diagram-kflat-replacements"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "First paragraph: the target of c_K is the completion of g^*K; Comparison with the Stacks Project: the restricted target and unit give completed inverse image. Returned proof step 10: identify c_g and the augmented derived representatives. Agent-written strict cochain refinement; Stacks proetale.tex Tags 099M (lemma-naive-completion), 099N (lemma-pushforward-Noetherian-case), clauses (2),(5)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along a flat ring sheaf map and ringed topos pullback preserve K-flat complexes with flat terms",
+   "results": "ModuleCat.restrictScalars, SheafOfModules.restrictScalars, PresheafOfModules.restrictScalars and ordinary restriction APIs; no K-flat preservation theorem.",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib match; use the project K-flat and resolving-comparison statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized Roos mapping cone augmentation agrees with the derived completion unit for a tower of quotient modules",
+   "results": "IsAdicComplete.of_comp_lift, IsAdicComplete.mkQ_comp_lift, AdicCompletion.eval_comp_of; no normalized derived Roos theorem.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "reductionComplexCounit|IsConstantUnitNormalized",
+   "results": "msearch grep returned zero hits. Local rg on the project found the actual coefficient definitions and counit APIs; local rg on the Mathlib derived, homotopy and adic-completion directories found no matching normalized Roos/K-flat completion theorem.",
+   "date": "2026-10-25",
+   "verdict": "The new statements only assemble the project APIs for these actual coefficient categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralRoosDerivedPullbackUnit",
+  "date": "2026-10-25",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-tensor-pullback",
+   "place": "First paragraph: the target of c_K is the completion of g^*K; Comparison with the Stacks Project: the restricted target and unit give completed inverse image. Returned proof step 10: identify c_g and the augmented derived representatives. Agent-written strict cochain refinement; Stacks proetale.tex Tags 099M (lemma-naive-completion), 099N (lemma-pushforward-Noetherian-case), clauses (2),(5)",
+   "via": [
+    "lem-sfb-integral-roos-derived-pullback-unit",
+    "lem-sfb-integral-pullback-strict-roos-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralRoosResolvingCounits",
+  "file": "lean/Sheaf/Paper/IntegralRoosResolvingCounits.lean",
+  "declaration": "WeilConjectures.IntegralPullbackStrictRoos.integralRoosResolvingCounits",
+  "statement": "theorem integralRoosResolvingCounits\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Scheme.{u}} (g : X ⟶ Y)\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]\n    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [g.IsOver (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] :\n    ∀ (P : complexesR l E Y), GoodR l E Y P →\n      (GoodR l E X ((cxPullR l E g).obj P) ∧\n        GoodC l E Y ((cxRes l E Y).obj P) ∧\n        GoodC l E X ((cxPullC l E g).obj ((cxRes l E Y).obj P))) ∧\n      (IsIso (towerCounit l E g P) ∧\n        IsIso (completedOrdinaryPullbackComplexCounit g (datum l E) P) ∧\n        IsIso (completedReductionTowerComplexCounit X (datum l E)\n          ((cxPullR l E g).obj P)) ∧\n        IsIso (OrderedExchange.reductionComplexCounit (datum l E) X\n          (((res l E Y ⋙ pullC l E g).mapHomologicalComplex (.up ℤ)).obj P)))",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-51f79",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261025T203123-L-2784613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-51f79",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261025T203123-L-2784613",
+  "kind": "interface",
+  "note": "independent cc review: item proof (assembleRoos over 4 sorried substeps + proved reflector comparison) vs unchanged item statement and parent IsComparison/IsLocalized/IsConstantUnitNormalized defs; unit sk-lem-int-tensor realized=[] vs removed imports; item node diff vs clone (proof/proof_deps/proof_origin/tool_uses only)"
+ }
+}

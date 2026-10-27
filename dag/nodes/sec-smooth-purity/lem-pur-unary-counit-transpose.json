@@ -1,0 +1,291 @@
+{
+ "id": "lem-pur-unary-counit-transpose",
+ "kind": "statement",
+ "title": "Unary counit substitution and comparison transpose",
+ "statement": "Let $\\mathcal C_s,\\mathcal D_s,\\mathcal C_t,\\mathcal D_t$ be categories [def-nagata-category]. For $i=s,t$ specify functors $R_i:\\mathcal C_i\\to\\mathcal D_i$ and $L_i:\\mathcal D_i\\to\\mathcal C_i$ and natural transformations $u_i:1\\to L_iR_i$, $e_i:R_iL_i\\to1$ satisfying $L_i(e_{i,M})u_{i,L_iM}=1$ and $e_{i,R_iI}R_i(u_{i,I})=1$; these specify the adjunction $R_i\\dashv L_i$. Composition below is right to left. Let $A:\\mathcal D_s\\to\\mathcal D_t$, $\\bar A:\\mathcal C_s\\to\\mathcal C_t$ be functors, with a specified natural isomorphism $d_I:L_tAR_sI\\xrightarrow{\\sim}\\bar AI$. Put $r_I=e_{t,AR_sI}R_t(d_I^{-1})$.\n\nFor any $I\\in\\mathcal C_s$, $M\\in\\mathcal D_s$ and $q:R_sI\\to M$, set $b=L_s(q)u_{s,I}$ and $q_A=A(q)r_I$. Then\n$$q=e_{s,M}R_s(b),\\qquad L_t(r_I)u_{t,\\bar AI}=d_I^{-1},$$\n$$b_A:=L_t(q_A)u_{t,\\bar AI}=L_tA(q)d_I^{-1}=L_tA(e_{s,M})d_{L_sM}^{-1}\\bar A(b).$$\nIf $b$ and $e_{s,M}$ are invertible, $b_A$ is invertible and, for $a_A(M)=d_{L_sM}(L_tA(e_{s,M}))^{-1}$,\n$$b_A^{-1}=\\bar A(b^{-1})a_A(M).$$\nFor arbitrary $f:M\\to M'$ with both $e_{s,M}$ and $e_{s,M'}$ invertible, the inverse-factor and comparison naturality identities are\n$$ (L_tA(e_{s,M'}))^{-1}L_tA(f)=L_tAR_sL_s(f)(L_tA(e_{s,M}))^{-1},$$\n$$a_A(M')L_tA(f)=\\bar A(L_s(f))a_A(M).$$\nFor an identity coefficient map $q=1_{R_sI}$ its transpose is the actual $u_{s,I}$. If $e_{s,M}$ is invertible then $u_{s,L_sM}=L_s(e_{s,M})^{-1}$. If additionally an isomorphism $h:L_sR_sK\\to K$ is given and $e_{s,R_sK}$ is invertible, then the actual $u_{s,K}$ is invertible and satisfies\n$$u_{s,K}h=L_sR_s(h)u_{s,L_sR_sK}.$$\nThese are identities of morphisms in the given categories, without a faithfulness hypothesis on any auxiliary evaluation functor.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Agent-formulated categorical extraction of the coefficient-comparison construction, original lem-pur-integral-realization-recursion steps 2-4 and unary part of 7; not a theorem asserted verbatim in the blueprint."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "Use associativity and the identity laws of [def-nagata-category], and the functor and natural-transformation axioms in the hypotheses. Counit naturality at $q:R_sI\\to M$ gives $e_{s,M}R_sL_s(q)=q e_{s,R_sI}$. Therefore\n$$e_{s,M}R_s(b)=e_{s,M}R_sL_s(q)R_s(u_{s,I})=q e_{s,R_sI}R_s(u_{s,I})=q$$\nby the stipulated triangle identity. No invertibility is used.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons preserve units and counits; agent-written unary component calculation from the specified naturality and triangle identities (Stacks 0037, definition-adjoint; 0GLL, lemma-unit-counit-relations). Calculation 1."
+   }
+  },
+  {
+   "text": "Apply unit naturality to $d_I^{-1}:\\bar AI\\to L_tAR_sI$:\n$$L_tR_t(d_I^{-1})u_{t,\\bar AI}=u_{t,L_tAR_sI}d_I^{-1}.$$\nApply $L_t$ to the definition of $r_I$ and substitute this equality. The other triangle identity, at $AR_sI\\in\\mathcal D_t$, gives\n$$L_t(r_I)u_{t,\\bar AI}=L_t(e_{t,AR_sI})u_{t,L_tAR_sI}d_I^{-1}=d_I^{-1}.$$",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons preserve units and counits; agent-written unary component calculation from the specified naturality and triangle identities (Stacks 0037, definition-adjoint; 0GLL, lemma-unit-counit-relations). Calculation 2."
+   }
+  },
+  {
+   "text": "Expand $q_A=A(q)r_I$ and apply functoriality and step 2:\n$$b_A=L_t(q_A)u_{t,\\bar AI}=L_tA(q)L_t(r_I)u_{t,\\bar AI}=L_tA(q)d_I^{-1}.$$",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons preserve units and counits; agent-written unary component calculation from the specified naturality and triangle identities (Stacks 0037, definition-adjoint; 0GLL, lemma-unit-counit-relations). Calculation 3."
+   }
+  },
+  {
+   "text": "Naturality of $d$ at $b:I\\to L_sM$ is\n$$d_{L_sM}L_tAR_s(b)=\\bar A(b)d_I.$$\nMultiply on the left by $d_{L_sM}^{-1}$ and on the right by $d_I^{-1}$. Substitute $q=e_{s,M}R_s(b)$ from step 1 into step 3 to obtain\n$$b_A=L_tA(e_{s,M})L_tAR_s(b)d_I^{-1}=L_tA(e_{s,M})d_{L_sM}^{-1}\\bar A(b).$$",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons preserve units and counits; agent-written unary component calculation from the specified naturality and triangle identities (Stacks 0037, definition-adjoint; 0GLL, lemma-unit-counit-relations). Calculation 4."
+   }
+  },
+  {
+   "text": "Suppose $b$ and $e_{s,M}$ are invertible. Functors send an inverse to an inverse: applying the functor to each of $xx^{-1}=1$ and $x^{-1}x=1$ verifies both inverse equations. Thus all three factors in step 4 are invertible. Multiplying that product on either side by\n$$\\bar A(b^{-1})d_{L_sM}(L_tA(e_{s,M}))^{-1}$$\ncancels adjacent inverse factors and gives the identity. This proves both invertibility of $b_A$ and $b_A^{-1}=\\bar A(b^{-1})a_A(M)$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons preserve units and counits; agent-written unary component calculation from the specified naturality and triangle identities (Stacks 0037, definition-adjoint; 0GLL, lemma-unit-counit-relations). Calculation 5."
+   }
+  },
+  {
+   "text": "Let $F=L_tA$, $E_M=F(e_{s,M})$, $E_{M'}=F(e_{s,M'})$ and $H=FR_sL_s(f)$. Counit naturality gives $f e_{s,M}=e_{s,M'}R_sL_s(f)$, hence $F(f)E_M=E_{M'}H$. Both $E$ factors have inverses by the preceding functor calculation, so multiplication on the left by $E_{M'}^{-1}$ and on the right by $E_M^{-1}$ gives\n$$E_{M'}^{-1}F(f)=HE_M^{-1},$$\nthe asserted inverse-factor identity. The morphism $f$ need not be invertible.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons preserve units and counits; agent-written unary component calculation from the specified naturality and triangle identities (Stacks 0037, definition-adjoint; 0GLL, lemma-unit-counit-relations). Calculation 6."
+   }
+  },
+  {
+   "text": "Naturality of $d$ at $L_s(f):L_sM\\to L_sM'$ reads\n$$d_{L_sM'}L_tAR_sL_s(f)=\\bar A(L_s(f))d_{L_sM}.$$\nUsing step 6 and the definition of $a_A$, compute\n$$a_A(M')L_tA(f)=d_{L_sM'}E_{M'}^{-1}L_tA(f)=d_{L_sM'}L_tAR_sL_s(f)E_M^{-1}=\\bar A(L_s(f))a_A(M).$$",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons preserve units and counits; agent-written unary component calculation from the specified naturality and triangle identities (Stacks 0037, definition-adjoint; 0GLL, lemma-unit-counit-relations). Calculation 7."
+   }
+  },
+  {
+   "text": "For $q=1_{R_sI}$, the defining formula is $b=L_s(1_{R_sI})u_{s,I}=u_{s,I}$. If $e_{s,M}$ is invertible, the given triangle equation $L_s(e_{s,M})u_{s,L_sM}=1$, multiplied on the left by $L_s(e_{s,M})^{-1}$, gives $u_{s,L_sM}=L_s(e_{s,M})^{-1}$. This uses the actual specified unit.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons preserve units and counits; agent-written unary component calculation from the specified naturality and triangle identities (Stacks 0037, definition-adjoint; 0GLL, lemma-unit-counit-relations). Calculation 8."
+   }
+  },
+  {
+   "text": "Apply step 8 at $M=R_sK$ to see that $v:=u_{s,L_sR_sK}$ is invertible when $e_{s,R_sK}$ is. Unit naturality at the given isomorphism $h:L_sR_sK\\to K$ is exactly\n$$u_{s,K}h=L_sR_s(h)v.$$\nConsequently $u_{s,K}=L_sR_s(h)v h^{-1}$, a product of isomorphisms; its inverse is $h v^{-1}L_sR_s(h^{-1})$, as verified by cancelling adjacent factors. All equations were proved inside the given categories, so no auxiliary evaluation or faithfulness assumption is needed.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Coefficient comparisons preserve units and counits; agent-written unary component calculation from the specified naturality and triangle identities (Stacks 0037, definition-adjoint; 0GLL, lemma-unit-counit-relations). Calculation 9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Explicit unary calculation serving the coefficient-comparison paragraph; all identities derived from the hypotheses, not asserted as a verbatim blueprint theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality|unit_naturality|counit_naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean. Subdirectory: CategoryTheory/Adjunction. ",
+   "date": "2026-10-22",
+   "verdict": "no match: Basic.lean homEquiv naturality and Mates.lean mateEquiv_counit are ingredients, not the combined specified-d transpose, inverse-factor and two-stage naturality identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left, CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "0 hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: Basic.lean homEquiv naturality and Mates.lean mateEquiv_counit are ingredients, not the combined specified-d transpose, inverse-factor and two-stage naturality identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction transpose of a composite unary functor coefficient comparison and its naturality under counit conjugation",
+   "results": "8 hits: CategoryTheory.Adjunction.mk, CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Adjunction.counit_naturality_assoc, CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.unit, CategoryTheory.Adjunction.CoreUnitCounit.unit, CategoryTheory.Adjunction.unit, CategoryTheory.Adjunction.unop_counit. ",
+   "date": "2026-10-22",
+   "verdict": "no match: Basic.lean homEquiv naturality and Mates.lean mateEquiv_counit are ingredients, not the combined specified-d transpose, inverse-factor and two-stage naturality identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given adjunctions R_s left adjoint to L_s and a natural isomorphism d from L_t A R_s to a barred unary functor, transposing A(q) times e R(d inverse) gives L A(e) times d inverse times barred A of the transpose of q; the resulting counit transport is natural",
+   "results": "8 hits: CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.mateEquiv_apply, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.conjugateEquiv_counit, CategoryTheory.Adjunction.leftAdjointCompNatTrans_app. ",
+   "date": "2026-10-22",
+   "verdict": "no match: Basic.lean homEquiv naturality and Mates.lean mateEquiv_counit are ingredients, not the combined specified-d transpose, inverse-factor and two-stage naturality identities"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem mateEquiv_counit|theorem mateEquiv_apply|theorem conjugateEquiv_counit|def mateEquiv",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean. Subdirectory: CategoryTheory/Adjunction. ",
+   "date": "2026-10-22",
+   "verdict": "no match: Basic.lean homEquiv naturality and Mates.lean mateEquiv_counit are ingredients, not the combined specified-d transpose, inverse-factor and two-stage naturality identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"naturality\"",
+   "results": "12 hits: CategoryTheory.Adjunction.homEquiv_naturality_left, CategoryTheory.Adjunction.homEquiv_naturality_right, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_left, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_right, CategoryTheory.Adjunction.homEquiv_naturality_left_symm, CategoryTheory.Adjunction.homEquiv_naturality_right_symm, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_left_symm, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_right_symm. ",
+   "date": "2026-10-22",
+   "verdict": "no match: Basic.lean homEquiv naturality and Mates.lean mateEquiv_counit are ingredients, not the combined specified-d transpose, inverse-factor and two-stage naturality identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit conjugation transport for a unary operation with a specified natural comparison: calculate the adjoint transpose of a composite coefficient map and the inverse comparison, including naturality",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.conjugateEquiv_counit, CategoryTheory.conjugateEquiv_counit_symm, CategoryTheory.mateEquiv_counit, CategoryTheory.conjugateEquiv_apply_app, CategoryTheory.unit_conjugateEquiv, CategoryTheory.conjugateEquiv_adjunction_id. ",
+   "date": "2026-10-22",
+   "verdict": "no match: Basic.lean homEquiv naturality and Mates.lean mateEquiv_counit are ingredients, not the combined specified-d transpose, inverse-factor and two-stage naturality identities"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_unit|homEquiv_counit|left_triangle|right_triangle|unit_naturality|counit_naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean. Subdirectory: CategoryTheory/Adjunction. ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected Basic.lean 107-170, Mates.lean 82-149 and FullyFaithful.lean 101-124; individual transpose and inverse-counit identities are present, but the specified d, inverse-factor naturality, and actual-unit clauses require the explicit calculations below."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given adjunctions R_s left adjoint to L_s and R_t left adjoint to L_t and a natural isomorphism L_t A R_s to barred A, compute transpose of A q composed with the counit and inverse of the comparison, and prove naturality of its inverse",
+   "results": "8 hits: CategoryTheory.CatCommSq.iso_inv_naturality, CategoryTheory.CatCommSq.iso_inv_naturality_assoc, CategoryTheory.Adjunction.conesIsoComponentInv, CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.mateEquiv, CategoryTheory.Adjunction.inv_map_unit, CategoryTheory.conjugateEquiv_apply_app, CategoryTheory.Adjunction.inv_counit_map. ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected Basic.lean 107-170, Mates.lean 82-149 and FullyFaithful.lean 101-124; individual transpose and inverse-counit identities are present, but the specified d, inverse-factor naturality, and actual-unit clauses require the explicit calculations below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction transpose of a morphism composed with a counit, transported through a specified natural isomorphism of functors, with inverse comparison naturality",
+   "results": "8 hits: CategoryTheory.conjugateEquiv_counit, CategoryTheory.Adjunction.leftAdjointCompIso_inv_app, CategoryTheory.conjugateEquiv_counit_symm, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans_app, CategoryTheory.Adjunction.leftAdjointCompIso. ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected Basic.lean 107-170, Mates.lean 82-149 and FullyFaithful.lean 101-124; individual transpose and inverse-counit identities are present, but the specified d, inverse-factor naturality, and actual-unit clauses require the explicit calculations below."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"naturality\"",
+   "results": "12 hits: CategoryTheory.Adjunction.homEquiv_naturality_left, CategoryTheory.Adjunction.homEquiv_naturality_right, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_left, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_right, CategoryTheory.Adjunction.homEquiv_naturality_left_symm, CategoryTheory.Adjunction.homEquiv_naturality_right_symm, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_left_symm, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_right_symm. ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected Basic.lean 107-170, Mates.lean 82-149 and FullyFaithful.lean 101-124; individual transpose and inverse-counit identities are present, but the specified d, inverse-factor naturality, and actual-unit clauses require the explicit calculations below."
+  },
+  {
+   "tool": "grep",
+   "query": "def homEquiv|theorem homEquiv_unit|theorem homEquiv_counit|theorem homEquiv_naturality|triangle_components",
+   "results": "5 hits: 114, 117, 122, 124, 126. Subdirectory: CategoryTheory/Adjunction/Basic.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected Basic.lean 107-170, Mates.lean 82-149 and FullyFaithful.lean 101-124; individual transpose and inverse-counit identities are present, but the specified d, inverse-factor naturality, and actual-unit clauses require the explicit calculations below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of inverse counit comparison d(L M) composed with inverse of L A counit, including adjunction transpose and actual unit at an object isomorphic to L R K",
+   "results": "8 hits: CategoryTheory.mateEquiv_counit_symm, CategoryTheory.Adjunction.inv_counit_map, CategoryTheory.mateEquiv_counit, CategoryTheory.Adjunction.inv_map_unit, CategoryTheory.conjugateEquiv_counit_symm, CategoryTheory.conjugateEquiv_counit, CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit_inv_app, CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit. ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected Basic.lean 107-170, Mates.lean 82-149 and FullyFaithful.lean 101-124; individual transpose and inverse-counit identities are present, but the specified d, inverse-factor naturality, and actual-unit clauses require the explicit calculations below."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-integral-realization-recursion",
+  "date": "2026-10-22",
+  "group": "Q57"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Unit Step 2 (adic transport), coefficient-comparison construction; recursive characterization exposing steps 3-4 of lem-sf-integral-compactification-system-realization; unary adjunction-transpose and inverse-factor calculation (original recursion steps 2-4,7)",
+   "via": [
+    "lem-pur-integral-realization-recursion",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-unary-counit-transpose",
+  "worker": "stage1",
+  "group": "Q48",
+  "summary": "Kept the statement unchanged. Wrote nine elementary unit/counit/naturality and inverse-cancellation calculations, including the actual unit at K. No new nodes: all calculations are a few lines from the stated axioms. Read candidate Mathlib homEquiv, mateEquiv and inverse-counit declarations; none states the entire comparison and naturality package.",
+  "blueprint": "Realizes the coefficient-comparison paragraph of fix-prop-coherence (units, counits and mates), underlying the adic transport provenance recorded at thm-pur-rational-and-qbar-purity. Steps 1-4 compute the unary transpose, 5 its inverse, 6-7 comparison naturality, 8-9 actual-unit normalization. Retains the existing nearest-ancestor provenance; no chapter or unit route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-3f25a5ddb",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-3f25a5ddb (reviewer sub-agent of L); spot-checked: The item is still unsplit with an empty proof on live and side-live, so the delivery is not superseded. The statement is byte-identical to live. The delivery is one commit containing the item and a report with a Review section. There are no new nodes and no repair note for this item; the 2026-10-21 re-split note belongs to the parent lem-pur-integral-realization-recursion, which created this node. I checked all nine steps by hand, typing each map. Steps 1-2 use counit/unit naturality and the two triangle identities (q = e_M R(b); L_t(r_I)u = d_I^{-1}). Steps 3-4 use functoriality and d-naturality at b, giving b_A = L_tA(e_M) d_{L_sM}^{-1} Ā(b). Step 5 checks the inverse Ā(b^{-1})a_A(M) in both orders. Steps 6-7 use counit naturality conjugated by the endpoint inverses, then d-naturality at L_s(f); f is never inverted. Step 8 gives u_{L_sM} = L_s(e_M)^{-1} from the triangle. Step 9 uses unit naturality at h, giving u_K = L_sR_s(h) v h^{-1}. All steps are elementary and cite only def-nagata-category (a Mathlib leaf). Edge cases checked: identity adjunctions with d = 1 and with a non-identity d, non-invertible f, and a non-invertible unit. The parent's steps 3 and 5 take exactly the stated clauses. Not a duplicate of lem-pur-binary-counit-transpose, lem-pur-adjunction-mate-transpose, lem-sfb-adjunction-transpose-square or lem-sf-counit-closure-unit-transpose-calculus. Source: fix-prop-coherence.proof.md lines 8-15; proof origin agent is correct; no SGA; no route departure and no tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.UnaryCounitTranspose",
+  "declaration": "CategoryTheory.Adjunction.UnaryCounitTranspose.identities",
+  "declarations": [
+   "CategoryTheory.Adjunction.UnaryCounitTranspose.restriction",
+   "CategoryTheory.Adjunction.UnaryCounitTranspose.comparison",
+   "CategoryTheory.Adjunction.UnaryCounitTranspose.identities"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/UnaryCounitTranspose.lean",
+  "statement": "theorem identities (adjS : Rs ⊣ Ls) (adjT : Rt ⊣ Lt) (d : Rs ⋙ A ⋙ Lt ≅ Abar) : (∀ (I : Cs) (M : Ds) (q : Rs.obj I ⟶ M), q = Rs.map (adjS.homEquiv I M q) ≫ adjS.counit.app M ∧ adjT.unit.app (Abar.obj I) ≫ Lt.map (restriction adjT d I) = d.inv.app I ∧ adjT.homEquiv (Abar.obj I) (A.obj M) (restriction adjT d I ≫ A.map q) = d.inv.app I ≫ Lt.map (A.map q) ∧ adjT.homEquiv (Abar.obj I) (A.obj M) (restriction adjT d I ≫ A.map q) = Abar.map (adjS.homEquiv I M q) ≫ d.inv.app (Ls.obj M) ≫ Lt.map (A.map (adjS.counit.app M)) ∧ (∀ [IsIso (adjS.homEquiv I M q)] [IsIso (adjS.counit.app M)], ∃ (_ : IsIso (adjT.homEquiv (Abar.obj I) (A.obj M) (restriction adjT d I ≫ A.map q))), inv (adjT.homEquiv (Abar.obj I) (A.obj M) (restriction adjT d I ≫ A.map q)) = comparison adjS d M ≫ Abar.map (inv (adjS.homEquiv I M q)))) ∧ (∀ (M M' : Ds) (f : M ⟶ M') [IsIso (adjS.counit.app M)] [IsIso (adjS.counit.app M')], Lt.map (A.map f) ≫ inv (Lt.map (A.map (adjS.counit.app M'))) = inv (Lt.map (A.map (adjS.counit.app M))) ≫ Lt.map (A.map (Rs.map (Ls.map f))) ∧ Lt.map (A.map f) ≫ comparison adjS d M' = comparison adjS d M ≫ Abar.map (Ls.map f)) ∧ (∀ I : Cs, adjS.homEquiv I (Rs.obj I) (𝟙 (Rs.obj I)) = adjS.unit.app I) ∧ (∀ (M : Ds) [IsIso (adjS.counit.app M)], adjS.unit.app (Ls.obj M) = inv (Ls.map (adjS.counit.app M))) ∧ (∀ (K : Cs) (h : Ls.obj (Rs.obj K) ≅ K) [IsIso (adjS.counit.app (Rs.obj K))], IsIso (adjS.unit.app K) ∧ h.hom ≫ adjS.unit.app K = adjS.unit.app (Ls.obj (Rs.obj K)) ≫ Ls.map (Rs.map h.hom))",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-21300f186",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Snapshot diff vs side-live: only the item's lean field + new module UnaryCounitTranspose.lean; statement verbatim in file; single sorry; not superseded on live/side-live. Clause-by-clause check (right-to-left vs ≫) of r_I, b=homEquiv, q_A, b_A, q=e R(b), L_t(r)u=d⁻¹, both b_A factorizations, conditional IsIso + inverse = comparison ≫ Ā(b⁻¹), inverse-factor and comparison naturality for arbitrary f, identity transpose = unit, u_{LsM}=Ls(e)⁻¹, h-clause with IsIso u_K: all match the node and were re-derived by hand. Adjunction = specified units/counits + triangles; 8 independent universes; no extra hypotheses; helpers restriction/comparison are explicit composites with source+blueprint docstrings; homEquiv reused (no duplicate transpose); stmt_dep def-nagata-category (Mathlib Category). Source paragraph present in fix-prop-coherence.proof.md (docstring cites the current sk-thm-sf-compatibility path, node keeps main-20261015 sk-thm-sf-package path; advisory). Report has Worker report and Second reading by Q99. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261024T185900-L-3748628",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Adjunction.UnaryCounitTranspose.identities"
+  ],
+  "sorry_after": []
+ }
+}

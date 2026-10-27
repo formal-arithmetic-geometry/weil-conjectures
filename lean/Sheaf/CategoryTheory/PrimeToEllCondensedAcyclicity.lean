@@ -13,6 +13,8 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Analysis.Normed.Module.Basic
 import Sheaf.CategoryTheory.CondensedDerivedInvariantBar
 import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-! # Prime-to-ell acyclicity of trivial continuous condensed scalars
 

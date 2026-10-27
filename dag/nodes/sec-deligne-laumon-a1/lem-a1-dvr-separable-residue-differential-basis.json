@@ -1,0 +1,252 @@
+{
+ "id": "lem-a1-dvr-separable-residue-differential-basis",
+ "kind": "statement",
+ "title": "Differentials of parameters in a DVR with finite separable residue field",
+ "statement": "Let $k$ be a field and let $A$ be a commutative Noetherian local $k$-algebra [def-weil-pbc-noetherian-ring] which is a discrete valuation ring [def-sc-discrete-valuation-ring]. Write $\\mathfrak m$ for its maximal ideal and $\\kappa=A/\\mathfrak m$ for its residue field, endowed with the induced field extension of $k$ [def-pc-field-extension]. Assume $\\kappa/k$ is finite and separable algebraic [def-weil-pbc-separable-algebraic-extension]. Let $d:A\\to\\Omega_{A/k}$ be the universal Kähler derivation [def-weil-pbc-kahler-differentials], and suppose that $\\Omega_{A/k}$ is free of rank one as an $A$-module. For every $t\\in A$ with $\\mathfrak m=tA$, the class of $t$ in $\\mathfrak m/\\mathfrak m^2$ is nonzero and $dt\\otimes1\\ne0$ in $\\Omega_{A/k}\\otimes_A\\kappa$. Moreover, for every basis $e$ of $\\Omega_{A/k}$, the unique coefficient $a\\in A$ with $dt=ae$ is a unit. In particular, $A\\to\\Omega_{A/k}$, $b\\mapsto b\\,dt$, is an $A$-linear isomorphism with inverse $ce\\mapsto ca^{-1}$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C1E, lemma-uniformizer-works, middle and last proof sentences: nonzero residue differential and the unit-coefficient argument; old Steps 4–6 of lem-a1-uniformizer-differential-basis, with algebra.tex Tag 00TU (lemma-computation-differential)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Fix $t$ with $\\mathfrak m=tA$. By [def-sc-discrete-valuation-ring], $A$ is a domain and $\\mathfrak m\\ne0$, so $t\\ne0$. Since $\\mathfrak m^2=t^2A$, membership $t\\in\\mathfrak m^2$ would give $t=t^2b$ for some $b\\in A$. Cancelling $t$ gives $1=tb\\in\\mathfrak m$, a contradiction. Thus $t\\bmod\\mathfrak m^2\\ne0$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1E (lemma-uniformizer-works), proof: nonzero uniformizer class, written out."
+   }
+  },
+  {
+   "text": "The finite extension $\\kappa/k$ is finitely generated as a field: any finite $k$-vector-space basis generates it as a field, because it already spans it linearly. It is also separable in the sense of [def-weil-pbc-separable-field-extension]. Indeed, for any finitely generated intermediate field $F$, every $x\\in F$ is algebraic, and its minimal polynomial over $k$ is the same whether $x$ is regarded in $F$ or in $\\kappa$ (the evaluation kernels in $k[T]$ agree). Hence every such polynomial is separable by [def-weil-pbc-separable-algebraic-extension]. The empty family is a transcendence basis of the algebraic extension $F/k$ [def-weil-pbc-transcendence-basis] (it is algebraically independent, $k(\\emptyset)=k$, and $F/k$ is algebraic), and $F/k$ is separable algebraic, so $F/k$ is separably generated. This verifies exactly the separability convention of the next cited lemma.",
+   "uses": [
+    "def-weil-pbc-separable-field-extension",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-pbc-transcendence-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030O (definition-separable-field-extension); algebraic case and finite field generation, unpacked from the definitions."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-separable-residue-cotangent-injective] with $R=A$. Noetherianity, locality and the $k$-algebra structure are hypotheses of this item; the preceding step verifies finite field generation and the precise separability notion. Its map sends $t\\bmod\\mathfrak m^2$ to $dt\\otimes1$. By its injectivity and Step 1 this image is nonzero in $\\Omega_{A/k}\\otimes_A\\kappa$.",
+   "uses": [
+    "lem-weil-pbc-separable-residue-cotangent-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TU (lemma-computation-differential), applied as in Tag 0C1E."
+   }
+  },
+  {
+   "text": "Let $e$ be any rank-one basis of $\\Omega_{A/k}$. By the unique-coordinate description of a basis [def-weil-pbc-free-module], write $dt=ae$ with unique $a\\in A$. If $a\\in\\mathfrak m$, tensor balancing gives $dt\\otimes1=e\\otimes\\bar a=0$, contrary to Step 3. Thus $a\\notin\\mathfrak m$ and $a$ is a unit: in a local ring the nonunits form its maximal ideal. This argument applies to every choice of $e$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1E (lemma-uniformizer-works), final sentence: the rank-one unit-coefficient calculation, written out."
+   }
+  },
+  {
+   "text": "For this basis and coefficient define $\\psi(ce)=ca^{-1}$. Unique coordinates make $\\psi$ well defined and $A$-linear. The map $\\phi(b)=b\\,dt=ba e$ is $A$-linear, and $\\psi(\\phi(b))=baa^{-1}=b$, while $\\phi(\\psi(ce))=ca^{-1}ae=ce$. Hence $\\phi$ is an isomorphism with exactly the stated inverse. Since $t$ was arbitrary, every assertion holds for every generator of $\\mathfrak m$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1E (lemma-uniformizer-works), final sentence: explicit inverse in the chosen basis."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-transcendence-basis",
+  "lem-weil-pbc-separable-residue-cotangent-injective",
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C1E (lemma-uniformizer-works), proof, middle and final sentences; the algebraic hypotheses isolate exactly this part of the proof, using Algebra Tag 00TU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(uniformizer|uniformiser|irreducible).*(Kaehler|differential)|Kaehler.*(IsDiscreteValuationRing|uniformizer)",
+   "results": "{\"t\": \"2026-10-22T07:53:18Z\", \"tool\": \"grep\", \"query\": \"(uniformizer|uniformiser|irreducible).*(Kaehler|differential)|Kaehler.*(IsDiscreteValuationRing|uniformizer)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/TensorProduct.lean\"], \"digest\": \"5063f6c89fec7490\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: presentation-dependent differential bases and cotangent dimension results do not assert that the differential of every maximal-ideal generator is a basis under these local algebra hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-22T07:53:19Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: presentation-dependent differential bases and cotangent dimension results do not assert that the differential of every maximal-ideal generator is a basis under these local algebra hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a local domain with principal nonzero maximal ideal and finite separable residue field the differential of its generator generates the free rank one differential module",
+   "results": "{\"t\": \"2026-10-22T07:53:19Z\", \"tool\": \"leansearch\", \"query\": \"In a local domain with principal nonzero maximal ideal and finite separable residue field the differential of its generator generates the free rank one differential module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"maximalIdeal_isPrincipal_of_isDedekindDomain\", \"Algebra.SubmersivePresentation.free_kaehlerDifferential\", \"instFreeMvPolynomialKaehlerDifferential\", \"KaehlerDifferential.span_range_map_derivation_of_isLocalization\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"dvd_differentIdeal_of_not_isSeparable\", \"KaehlerDifferential\", \"Algebra.Generators.toKaehler_cotangentSpaceBasis\"], \"digest\": \"0c2e6d846422d8a5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: presentation-dependent differential bases and cotangent dimension results do not assert that the differential of every maximal-ideal generator is a basis under these local algebra hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a discrete valuation ring over a field with finite separable residue field and free rank one Kahler differentials every uniformizer differential is a basis",
+   "results": "{\"t\": \"2026-10-22T07:53:31Z\", \"tool\": \"leanfinder\", \"query\": \"For a discrete valuation ring over a field with finite separable residue field and free rank one Kahler differentials every uniformizer differential is a basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.basisKaehler_apply\", \"Algebra.SubmersivePresentation.basisKaehler\", \"Algebra.Generators.toKaehler_cotangentSpaceBasis\", \"Algebra.Generators.basisCotangentAway_apply\", \"Algebra.Generators.basisCotangentAway\", \"Algebra.Generators.cotangentSpaceBasis_apply\", \"Algebra.Generators.cotangentSpaceBasis\", \"Algebra.SubmersivePresentation.basisCotangent\"], \"digest\": \"7d60e5a97aa8134b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: presentation-dependent differential bases and cotangent dimension results do not assert that the differential of every maximal-ideal generator is a basis under these local algebra hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "(differential|Kaehler).*(basis|Basis|span|generator)|basis.*differential",
+   "results": "{\"t\": \"2026-10-22T07:59:20Z\", \"tool\": \"grep\", \"query\": \"(differential|Kaehler).*(basis|Basis|span|generator)|basis.*differential\", \"sub\": \"RingTheory/LocalRing\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: presentation-dependent differential bases and cotangent dimension results do not assert that the differential of every maximal-ideal generator is a basis under these local algebra hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal derivation sends a generator of the maximal ideal of a discrete valuation k algebra to a basis if the residue extension is finite separable and differentials are free of rank one",
+   "results": "{\"t\": \"2026-10-22T07:59:31Z\", \"tool\": \"leanfinder\", \"query\": \"The universal derivation sends a generator of the maximal ideal of a discrete valuation k algebra to a basis if the residue extension is finite separable and differentials are free of rank one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.toKaehler_cotangentSpaceBasis\", \"Algebra.Generators.basisCotangentAway_apply\", \"Algebra.Generators.basisCotangentAway\", \"Algebra.Generators.cotangentSpaceBasis_apply\", \"Algebra.SubmersivePresentation.basisKaehler_apply\", \"Algebra.Generators.cotangentSpaceBasis\", \"Algebra.Generators.cotangentSpaceBasis_repr_one_tmul\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\"], \"digest\": \"cf1a45628526136f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: presentation-dependent differential bases and cotangent dimension results do not assert that the differential of every maximal-ideal generator is a basis under these local algebra hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "DVR finite separable residue field uniformizer differential is nonzero in cotangent space",
+   "results": "{\"t\": \"2026-10-24T00:20:56Z\", \"tool\": \"leanfinder\", \"query\": \"DVR finite separable residue field uniformizer differential is nonzero in cotangent space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.finrank_CotangentSpace_eq_one\", \"aeval_derivative_mem_differentIdeal\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"IsDedekindDomain.HeightOneSpectrum.valuation_uniformizer_ne_zero\", \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\", \"Valuation.Uniformizer.ne_zero\", \"Algebra.instFormallyUnramifiedResidueField\"], \"digest\": \"b202f61a78bbe666\"}; Read the returned signatures and the relevant Mathlib source: DVR cotangent dimension, presentation cotangent maps and standard smooth bases do not state this local-algebra assertion for an arbitrary DVR k-algebra with rank-one differentials.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, IsLocalRing.CotangentSpace",
+   "results": "{\"t\": \"2026-10-24T00:20:57Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, IsLocalRing.CotangentSpace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures and the relevant Mathlib source: DVR cotangent dimension, presentation cotangent maps and standard smooth bases do not state this local-algebra assertion for an arbitrary DVR k-algebra with rank-one differentials.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "separable_residue_cotangent_injective|cotangentSpace.*Kaehler",
+   "results": "{\"t\": \"2026-10-24T00:20:57Z\", \"tool\": \"grep\", \"query\": \"separable_residue_cotangent_injective|cotangentSpace.*Kaehler\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\"], \"digest\": \"550715033908ff62\"}; Read the returned signatures and the relevant Mathlib source: DVR cotangent dimension, presentation cotangent maps and standard smooth bases do not state this local-algebra assertion for an arbitrary DVR k-algebra with rank-one differentials.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite separable residue extension injects cotangent space into Kahler differentials",
+   "results": "{\"t\": \"2026-10-24T00:20:57Z\", \"tool\": \"leansearch\", \"query\": \"finite separable residue extension injects cotangent space into Kahler differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.toKaehler\", \"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"Algebra.Extension.CotangentSpace\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"Algebra.Extension.CotangentSpace.map\", \"Algebra.Extension.CotangentSpace.map_tmul\"], \"digest\": \"bc12284e78d48b98\"}; Read the returned signatures and the relevant Mathlib source: DVR cotangent dimension, presentation cotangent maps and standard smooth bases do not state this local-algebra assertion for an arbitrary DVR k-algebra with rank-one differentials.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "DVR finite separable residue field universal derivation uniformizer differential basis",
+   "results": "{\"t\": \"2026-10-24T00:26:36Z\", \"tool\": \"leanfinder\", \"query\": \"DVR finite separable residue field universal derivation uniformizer differential basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.basisKaehler\", \"Algebra.SubmersivePresentation.basisKaehlerOfIsCompl\", \"Algebra.SubmersivePresentation.basisCotangent\", \"Differential.differentialFiniteDimensional\", \"Algebra.Generators.basisCotangentAway\", \"Algebra.SubmersivePresentation.basisKaehler_apply\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"Algebra.Generators.cotangentSpaceBasis\"], \"digest\": \"e70739a76cdaddb6\"}; Read the returned signatures and the relevant Mathlib source: DVR cotangent dimension, presentation cotangent maps and standard smooth bases do not state this local-algebra assertion for an arbitrary DVR k-algebra with rank-one differentials.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, KaehlerDifferential",
+   "results": "{\"t\": \"2026-10-24T00:26:37Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, KaehlerDifferential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures and the relevant Mathlib source: DVR cotangent dimension, presentation cotangent maps and standard smooth bases do not state this local-algebra assertion for an arbitrary DVR k-algebra with rank-one differentials.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "uniformizer.*differential|cotangent.*Kaehler",
+   "results": "{\"t\": \"2026-10-24T00:26:37Z\", \"tool\": \"grep\", \"query\": \"uniformizer.*differential|cotangent.*Kaehler\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\"], \"digest\": \"56f44339d2c7c238\"}; Read the returned signatures and the relevant Mathlib source: DVR cotangent dimension, presentation cotangent maps and standard smooth bases do not state this local-algebra assertion for an arbitrary DVR k-algebra with rank-one differentials.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "differential of a uniformizer in a DVR with separable residue field is nonzero",
+   "results": "{\"t\": \"2026-10-24T00:26:37Z\", \"tool\": \"leansearch\", \"query\": \"differential of a uniformizer in a DVR with separable residue field is nonzero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.Separable.aeval_derivative_ne_zero\", \"ValuativeRel.uniformizer_ne_zero\", \"Polynomial.Separable.eval₂_derivative_ne_zero\", \"differentIdeal_ne_bot\", \"Valuation.IsUniformizer.ne_zero\", \"Valuation.Uniformizer.ne_zero\", \"Valuation.IsUniformizer.val_ne_zero\", \"Valuation.IsUniformizer.not_isUnit\"], \"digest\": \"f859581b87759a36\"}; Read the returned signatures and the relevant Mathlib source: DVR cotangent dimension, presentation cotangent maps and standard smooth bases do not state this local-algebra assertion for an arbitrary DVR k-algebra with rank-one differentials.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-uniformizer-differential-basis",
+  "date": "2026-10-22",
+  "group": "Q102"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-curve",
+   "place": "Proof, third paragraph: nonvanishing of the differential from pole order prime to the characteristic; middle and last proof sentences: nonzero residue differential and the unit-coefficient argument; old Steps 4–6 of lem-a1-uniformizer-differential-basis, with algebra.tex Tag 00TU (lemma-computation-differential)",
+   "via": [
+    "lem-a1-uniformizer-differential-basis"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-dvr-separable-residue-differential-basis",
+  "worker": "stage1",
+  "summary": "Split without new nodes: use the existing Tag 00TU separable-residue cotangent injection, verify its finite-generation and separability hypotheses explicitly, and write out the principal-ideal cancellation, unit coefficient, and inverse calculations. The statement and its dependencies are unchanged. All original searches are retained and current searches appended. No exact project attachment exists.",
+  "blueprint": "lem-a1-finite-map-curve, third proof paragraph (generic etaleness from the pole order prime to the characteristic): realizes the local-parameter differential input via lem-a1-uniformizer-differential-basis; current blueprint route checked in latest/sk-lem-wft-finite-map.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-separable-residue-cotangent-injective",
+    "why": "Generic Noetherian local k-algebra cotangent injection (00TU), also used by source 0C1E; already Lean-closed, and no same-unit node replaces this commutative-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-separable-residue-cotangent-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-1232e6930",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-1232e6930 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged; the five steps are new; no new nodes; no re-split note). Source checked: Stacks curves.tex 0C1E lemma-uniformizer-works, lines 2411-2430, and algebra 00TU (both tags checked against tags/tags). The item is exactly the algebraic half of 0C1E. Parent lem-a1-uniformizer-differential-basis step 2 applies it, and sibling lem-a1-smooth-curve-closed-stalk-structure gives the DVR and rank-one hypotheses, so it is not a restatement or a duplicate (searched dag/nodes for 0C1E and uniformizer-works). Step 1: t=t^2b gives 1=tb in m, correct. Step 2: the conversion to the 030O-style def-weil-pbc-separable-field-extension is correct (the minimal polynomial does not depend on the intermediate field; the empty transcendence basis works). But the step used the transcendence-basis definition without citing it. FIX: added def-weil-pbc-transcendence-basis to step 2 text and uses and to proof_deps. Step 3: all hypotheses of lem-weil-pbc-separable-residue-cotangent-injective (Noetherian local k-algebra, residue field finitely generated and separable) are checked, and its map a↦da⊗1 is used by statement. Step 4: a in m gives dt⊗1=e⊗ā=0, a contradiction, so a is a unit. Step 5: the inverse ce↦ca^{-1} is verified. Edge cases: k[T]_(T) with uT gives a unit coefficient; the inseparable case F_p(a), t=T^p-a, gives dt=0 (separability is needed); a field is excluded by m≠0. Accepted tool use: lem-weil-pbc-separable-residue-cotangent-injective (sk-thm-p1, Lean-closed, the generic 00TU injection that 0C1E itself uses). No SGA; no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DvrSeparableResidueDifferentialBasis",
+  "declaration": "IsDiscreteValuationRing.separable_residue_differential_basis",
+  "file": "lean/Sheaf/RingTheory/DvrSeparableResidueDifferentialBasis.lean",
+  "statement": "theorem separable_residue_differential_basis (k : Type u) (A : Type v) [Field k] [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] [IsNoetherianRing A] [Algebra k A] [Module.Finite k (IsLocalRing.ResidueField A)] [Algebra.IsSeparable k (IsLocalRing.ResidueField A)] (hfree : Nonempty (Module.Basis (Fin 1) A (KaehlerDifferential k A))) (t : A) (ht : IsLocalRing.maximalIdeal A = Ideal.span {t}) : (∃ htmem : t ∈ IsLocalRing.maximalIdeal A, (IsLocalRing.maximalIdeal A).toCotangent ⟨t, htmem⟩ ≠ 0) ∧ (KaehlerDifferential.D k A t) ⊗ₜ[A] (1 : IsLocalRing.ResidueField A) ≠ 0 ∧ ∀ e : Module.Basis (Fin 1) A (KaehlerDifferential k A), ∃ a : A, (KaehlerDifferential.D k A t = a • e 0 ∧ ∀ a' : A, KaehlerDifferential.D k A t = a' • e 0 → a' = a) ∧ IsUnit a ∧ ∃ φ : A ≃ₗ[A] KaehlerDifferential k A, (∀ b : A, φ b = b • KaehlerDifferential.D k A t) ∧ ∀ c : A, φ.symm (c • e 0) = c * Ring.inverse a",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4455cb759",
+  "group": "NX",
+  "result": "pass",
+  "note": "Statement matches the node and Stacks 0C1E clause by clause. Hypotheses: k field; A comm. domain with IsDiscreteValuationRing (locality included), IsNoetherianRing, Algebra k A; Module.Finite plus Algebra.IsSeparable k (ResidueField A) via Mathlib ResidueField.algebra (the same instance as the 00TU lemma); Nonempty (Basis (Fin 1) A Ω[A/k]) = free of rank one; all t with m = span{t}. Conclusions: toCotangent class ≠ 0; D t ⊗ 1 ≠ 0 in Ω⊗κ; for every basis e, ∃ unique a with D t = a•e 0, IsUnit a, and a linear equivalence φ fixed by φ b = b•D t with φ.symm(c•e 0) = c*Ring.inverse a. Nothing stronger assumed; universes u, v independent; no hollow defs, no definitions at all; one sorry; statement field verbatim; only the lean field differs from live; not landed elsewhere; docstrings give 0C1E/00TU, the blueprint id and 5 steps; plain imports are proof-dep modules; no pro-étale. Edge cases (field, zero ring, t = 0, inseparable F_p(a), any characteristic) checked. No compile (per instruction; nothing changed). No findings."
+ }
+}

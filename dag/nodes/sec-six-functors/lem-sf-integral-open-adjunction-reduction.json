@@ -1,0 +1,162 @@
+{
+ "id": "lem-sf-integral-open-adjunction-reduction",
+ "kind": "statement",
+ "title": "Whole-system reduction preserves the actual integral open adjunction",
+ "statement": "Fix D,C,E,n,S,o,z and invertibility of the coefficient prime as in [def-fix-six-functor-datum]. For a quasi-compact open immersion j:X -> Y use the natural pullComparison chi [def-sf-integral-proper-projection-coordinates] and extensionComparison rho [def-sf-integral-open-projection-coefficient-data]. If a is the actual datum open adjunction and b the actual system open adjunction, then for each constructible K on X, reduce_X(a.unit_K), chi_(j! K), and pull_j(rho_K) compose to b.unit_(reduce_X K). For each constructible N on Y, rho_(pull_j N), system j! of chi_N, and b.counit_(reduce_Y N) compose to reduce_Y(a.counit_N). No tensor, pullback compositor, or projection map appears.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction."
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-integral-proper-projection-coordinates",
+  "def-sf-integral-open-projection-coefficient-data"
+ ],
+ "proof": [
+  {
+   "text": "Restrict coherent reduction to the constructible category. Its fullness lifts any two arrows between reduced objects. If their finite evaluations agree, naturality of reductionEvaluation identifies the reductions of their lifts. Joint faithfulness of integral reductions identifies the lifts, hence the original arrows.",
+   "uses": [
+    "lem-pod-integral-system-reduction-fully-faithful",
+    "lem-sf-integral-reductions-jointly-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction."
+   }
+  },
+  {
+   "text": "Apply integralProjectionPullEvaluation to pullComparison. Apply integralProjectionOpenFactorEvaluation to the open compactification (j,id), cancel the exchange-stage equality transport, and obtain the evaluation formula for extensionComparison. Both formulas retain the specified finite pullback and open-extension comparisons.",
+   "uses": [
+    "lem-sf-integral-projection-pull-evaluation",
+    "lem-sf-integral-projection-open-factor-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction."
+   }
+  },
+  {
+   "text": "Paste the unit square of integralNormalization.reduction with finiteOpenAdjunctionNormalization. For the system adjunction, OpenEvaluation.transpose and unit_mateEquiv_symm give its finite unit square. Naturality of the finite evaluation isomorphisms and the preceding two unary squares show that the two whole-system unit composites have equal finite evaluations.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-sf-integral-system-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction."
+   }
+  },
+  {
+   "text": "Postcompose by the inverse of the pullback and open-extension comparisons so that the common target is reduced from a constructible integral object. Apply the first step to prove the unit equation. Expanding the mate and using this equation, naturality, and the right triangle identity identifies its inverse with extensionComparison. The inverse mate counit identity proves the counit square.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-integral-system-reduction-fully-faithful",
+  "lem-sf-integral-reductions-jointly-faithful",
+  "lem-sf-integral-projection-pull-evaluation",
+  "lem-sf-integral-projection-open-factor-evaluation",
+  "def-sf-operation-stages",
+  "def-sf-integral-system-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction. U9: assembly from the existing unary finite evaluation statements, full coherent reduction, and joint faithfulness; the counit follows from the unit by mate calculus."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "reduction commutes with the unit and counit of an open extension adjunction and with pullback composition",
+   "results": "Eight generic adjunction and chosen-pullback equations, including Adjunction.comp_unit_app and unit_comp_map_eq_iff; no integral coefficient normalizations.",
+   "date": "2026-10-27",
+   "verdict": "Use the adjunction API for assembly; it does not identify the specified coefficient maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Twelve mate-equivalence declarations, including unit and counit identities and composition/pasting.",
+   "date": "2026-10-27",
+   "verdict": "Generic mate calculus only; no geometric quotient normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Rr]eduction|[Rr]eduction.*[Pp]rojection",
+   "results": "msearch found zero Mathlib matches. Local searches found ProperCoordinates and the canonical completed tensor reduction square in DerivedPullbackTensorIso; no existing datum open unit or datum compositor whole-system square.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing coefficient-coordinate definitions and canonical tensor theorem; isolate only the missing normalization steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProjectionOpenTensorCoordinates",
+  "date": "2026-10-27",
+  "group": "X5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction.",
+   "via": [
+    "lem-sf-integral-projection-open-tensor-coordinates",
+    "lem-sf-integral-projection-open-factor-reduction",
+    "lem-sf-integral-projection-reduction-normalization",
+    "lem-sf-integral-projection-system-coordinates",
+    "lem-sf-integral-projection-refinement-square",
+    "lem-fix-projection-compactification-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralOpenAdjunctionReduction",
+  "file": "lean/Sheaf/Paper/IntegralOpenAdjunctionReduction.lean",
+  "declaration": "WeilConjectures.IntegralProjectionReduction.OpenCoordinates.integralOpenAdjunctionReduction",
+  "statement": "theorem integralOpenAdjunctionReduction\n    {D : FiniteFieldDatum.{u}} (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n)\n    (S : SixFunctorOperationDatum D C E n hn) (hl : IsUnit (C.l : D.k))\n    (o : Operations C.l E) (z : Realizations C.l E D o)\n    {X Y : SixFunctorSpace D} (j : X ⟶ Y)\n    (hj : IsOpenImmersion j.hom.left) [QuasiCompact j.hom.left] :\n    let a := S.higher.integral.openAdjunction j hj\n    let b := (o.extension j.hom.left).adj\n    let χ := pullComparison S.higher hl o z j\n    let ρ := extensionComparison S hl o z j hj\n    (∀ K, (reduce X).map (a.unit.app K) ≫\n        χ.hom.app ((S.higher.integral.openExtension j hj).obj K) ≫\n        (pull C.l E j.hom.left).map (ρ.hom.app K) = b.unit.app ((reduce X).obj K)) ∧\n    (∀ N, ρ.hom.app ((S.higher.integral.pull j).obj N) ≫\n        (Operations.shriek C.l E o j.hom.left).map (χ.hom.app N) ≫\n        b.counit.app ((reduce Y).obj N) = (reduce Y).map (a.counit.app N))",
+  "branch": "sheaf-dag",
+  "by": "X5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261027T050654-L-252705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261027T094530-L-239909",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,273 @@
+{
+ "id": "lem-trf-coproduct-ext-resolution-cohomology",
+ "kind": "statement",
+ "title": "Coproduct Ext computed by one injective resolution, with natural degree-zero comparison",
+ "statement": "Let $\\mathcal C$ be a small site in the chosen universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], let $R$ be a sheaf of commutative rings and let $F$ and $(E_i)_{i\\in I}$ be $R$-module sheaves [def-weil-sheaf-of-modules-category], where $I$ is a set. There exists a nonnegative injective resolution [def-sp-injective-resolutions] $0\\to F\\xrightarrow{\\iota}J^0\\xrightarrow{d_J^0}J^1\\to\\cdots$, extended by zero in negative degrees. For any such resolution and any $R$-module sheaf $M$, form the Hom cochain complex [def-pc-cochain-complex-modules] with $L_J(M)^q=\\operatorname{Hom}_R(M,J^q)$ with differential $h\\mapsto d_J^q\\circ h$; the groups $\\operatorname{Ext}_R^q(M,F):=H^qL_J(M)$ for $q\\geq0$ are independent of the chosen injective resolution. For any small set $A$ and function $i:A\\to I$, put $M=\\bigoplus_{a\\in A}E_{i(a)}$ and write $j_a:E_{i(a)}\\to M$ for the coproduct inclusions. Restriction $h\\mapsto(h\\circ j_a)_a$ is an isomorphism of complexes $L_J(M)\\cong\\prod_{a\\in A}L_J(E_{i(a)})$ and induces isomorphisms of abelian groups\n$$H^qL_J(M)\\cong\\prod_{a\\in A}H^qL_J(E_{i(a)})\\qquad(q\\geq0).$$\nThe map $\\operatorname{Hom}_R(M,F)\\to H^0L_J(M)$ sending $h$ to the class of $\\iota\\circ h$ is an isomorphism, natural for precomposition by every map between such coproducts. Consequently, if $\\operatorname{Ext}_R^q(E_i,F)=0$ for all $i\\in I$ and $q>0$, then $H^qL_J(M)=0$ for all $q>0$. These assertions also hold for any specified isomorphism $M'\\cong M$ by precomposition, and include the empty coproduct and repeated summands.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07AA (example-hom-complex-into-sheaf, choice of injective resolution and column cohomology) and 07AC (lemma-existence-derived-lower-shriek, passage from positive Ext vanishing on summands to their direct sums). Expanded coproduct/product and degree-zero comparison from the parent proof, old steps 1, 2 and 4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-ring-sheaves-grothendieck], $\\mathcal A=\\operatorname{Mod}(R)$ is Grothendieck abelian and has all small coproducts. By [lem-sp-grothendieck-enough-injectives] it has enough injectives. Part (1) of [lem-weil-pbc-left-exact-injective-resolution-degree-zero] supplies the required resolution of $F$, zero in negative degrees. The site and module universe are the same chosen universe, so the coproduct indexed by the small set $A$ exists.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tags 079Q (remark-existence-D, ringed-site example) and 079H (theorem-injective-embedding-grothendieck); derived.tex Tag 013K (lemma-injective-resolutions-exist), part (1)."
+   }
+  },
+  {
+   "text": "Fix any such $J$. The differential squares to zero since $d_J^{q+1}d_J^q=0$. Apply [lem-weil-pbc-ext-via-injective-resolution] with $\\mathcal A=\\operatorname{Mod}(R)$, $N=F$, and arbitrary $M$. It identifies $H^qL_J(M)$ with the resolution-independent group $\\operatorname{Ext}^q_{\\mathcal A}(M,F)$ for every $q\\geq0$, proving independence of the chosen resolution.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XR (lemma-compute-ext-resolutions), part (1), specialized to objects in degree zero; sites-cohomology.tex Tag 07AA (example-hom-complex-into-sheaf)."
+   }
+  },
+  {
+   "text": "For each $q$, the coproduct universal property gives a unique $h:M\\to J^q$ with $h j_a=h_a$ for every family $(h_a)_a$. Thus restriction $\\rho^q(h)=(h j_a)_a$ is bijective and additive, with additive inverse given by this universal property. Associativity gives $(d_J^q h)j_a=d_J^q(hj_a)$, so $\\rho$ and its inverse commute with the differentials. This proves the stated isomorphism of complexes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AC (lemma-existence-derived-lower-shriek), proof: direct sums of the modules under consideration; elementary coproduct universal property, expanded here."
+   }
+  },
+  {
+   "text": "Put $K_a=L_J(E_{i(a)})$, $Z_a^q=\\ker d_a^q$ and $B_a^q=\\operatorname{im}d_a^{q-1}$. Apply [lem-pc-abelian-groups-exact-products] to $0\\to Z_a^{q-1}\\to K_a^{q-1}\\to B_a^q\\to0$ and $0\\to B_a^q\\to Z_a^q\\to H^qK_a\\to0$. The first gives $\\operatorname{im}(\\prod_a d_a^{q-1})=\\prod_a B_a^q$; cycles are $\\prod_a Z_a^q$ coordinatewise. The second identifies their quotient with $\\prod_a H^qK_a$. The resulting map sends $[(z_a)_a]$ to $([z_a])_a$. Composing with $H^q(\\rho)$ proves the required cohomology isomorphism.",
+   "uses": [
+    "lem-pc-abelian-groups-exact-products"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AC (lemma-existence-derived-lower-shriek), proof: Ext vanishing passes to direct sums; expansion using exact products in Ab, not exact products of sheaves."
+   }
+  },
+  {
+   "text": "Exactness of $0\\to F\\xrightarrow{\\iota}J^0\\to J^1$ says that $\\iota$ identifies $F$ with $\\ker d_J^0$. Therefore each cycle $z:M\\to J^0$ factors uniquely as $\\iota h$. There are no degree-zero boundaries since $J^{-1}=0$. This proves that $h\\mapsto[\\iota h]$ is an additive isomorphism. For any $f:N\\to M$, $(\\iota h)f=\\iota(hf)$, proving the asserted precomposition naturality, including maps that mix summands.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TD (lemma-left-exact-higher-derived), proof, final paragraph: degree-zero kernel calculation, written directly for Hom."
+   }
+  },
+  {
+   "text": "If each positive $\\operatorname{Ext}^q_R(E_i,F)$ vanishes, step 2 makes every factor in step 4 zero, hence $H^qL_J(M)=0$. A specified isomorphism $u:M^{\\prime}\\to M$ induces the cochain isomorphism $h\\mapsto hu$ with inverse $h\\mapsto hu^{-1}$, preserving the degree-zero formula by step 5. Nothing requires distinct summands. For $A=\\varnothing$, $M=0$, all Hom groups are zero and the empty product is the zero abelian group, so all assertions remain valid.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AC (lemma-existence-derived-lower-shriek), proof: vanishing for direct sums; elementary consequences of preceding steps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-pc-abelian-groups-exact-products"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07AA/07AC, expanded coproduct-to-product argument; existence and resolution independence from injectives.tex 079Q/079H and derived.tex 013K/06XR; degree-zero kernel calculation from 05TD."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of Hom from a small coproduct into an injective resolution is the product of the Ext groups of its summands",
+   "results": "8 hits; CategoryTheory.InjectiveResolution.add_extMk, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass_apply, CategoryTheory.InjectiveResolution.sub_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_add, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_add, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.InjectiveResolution.extMk. Answer digest 60ba07e644c0a0f7.",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext.biproductAddEquiv (Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean:475) requires a finite index type. Resolution/Ext comparisons do not assert arbitrary small coproducts, exact product cohomology, and the natural degree-zero comparison together. The broader first grep also matched unrelated ext lemmas; the scoped follow-up found only finite biproduct Ext results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext from a direct sum is the product of Ext from each summand, and degree zero Hom cohomology is Hom into the resolved object",
+   "results": "8 hits; CategoryTheory.Abelian.Ext.mk₀, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass, CategoryTheory.Abelian.Ext, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.Abelian.Ext.homEquiv₀, CategoryTheory.Abelian.Ext.biproductAddEquiv, CategoryTheory.ProjectiveResolution.extMk.congr_simp, CategoryTheory.Abelian.Ext.addEquivBiproduct. Answer digest 7087f74ac7fb815f.",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext.biproductAddEquiv (Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean:475) requires a finite index type. Resolution/Ext comparisons do not assert arbitrary small coproducts, exact product cohomology, and the natural degree-zero comparison together. The broader first grep also matched unrelated ext lemmas; the scoped follow-up found only finite biproduct Ext results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"coproduct\"",
+   "results": "12 hits; CategoryTheory.FinitaryExtensive.hasFiniteCoproducts, CategoryTheory.FinitaryPreExtensive.hasFiniteCoproducts, CategoryTheory.instCoproductsOfShapeDisjointOfFinitaryExtensiveOfFinite, CategoryTheory.FinitaryExtensive.isVanKampen_finiteCoproducts, CategoryTheory.FinitaryPreExtensive.isUniversal_finiteCoproducts, CategoryTheory.FinitaryExtensive.isVanKampen_finiteCoproducts_Fin, CategoryTheory.FinitaryPreExtensive.isUniversal_finiteCoproducts_Fin, CategoryTheory.FinitaryPreExtensive.hasPullbacks_of_is_coproduct. Answer digest cdba7151b1a69fa6.",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext.biproductAddEquiv (Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean:475) requires a finite index type. Resolution/Ext comparisons do not assert arbitrary small coproducts, exact product cohomology, and the natural degree-zero comparison together. The broader first grep also matched unrelated ext lemmas; the scoped follow-up found only finite biproduct Ext results."
+  },
+  {
+   "tool": "grep",
+   "query": "Ext.*(coproduct|directSum|sigma)|((coproduct|directSum|sigma).*Ext)|homology.*[Pp]roduct",
+   "results": "25 hits; Mathlib/Algebra/Module/GradedModule.lean, Mathlib/Algebra/Module/GradedModule.lean, Mathlib/Algebra/Module/GradedModule.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/MonoidAlgebra/Grading.lean, Mathlib/Algebra/MonoidAlgebra/Grading.lean, Mathlib/Algebra/MonoidAlgebra/ToDirectSum.lean. Answer digest 2af9472f68c709c2. Mathlib subdirectory: Algebra.",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext.biproductAddEquiv (Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean:475) requires a finite index type. Resolution/Ext comparisons do not assert arbitrary small coproducts, exact product cohomology, and the natural degree-zero comparison together. The broader first grep also matched unrelated ext lemmas; the scoped follow-up found only finite biproduct Ext results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contravariant Ext functors take arbitrary small direct sums in the first argument to products, computed using one nonnegative injective resolution",
+   "results": "8 hits; CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.hasExt_of_enoughInjectives, CategoryTheory.hasExt_iff, Ext, CategoryTheory.HasExt.standard, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.ShortComplex.ShortExact.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoX₃CochainComplexMapSingleFunctorOfNatX₁. Answer digest b92806eda6233bd8.",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext.biproductAddEquiv (Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean:475) requires a finite index type. Resolution/Ext comparisons do not assert arbitrary small coproducts, exact product cohomology, and the natural degree-zero comparison together. The broader first grep also matched unrelated ext lemmas; the scoped follow-up found only finite biproduct Ext results."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bExt\\b.*(coproduct|biproduct|directSum)|homology.*[Pp]roduct|[Pp]roduct.*homology",
+   "results": "5 hits; Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean. Answer digest 679d9849fa1ade52. Mathlib subdirectory: Algebra/Homology.",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext.biproductAddEquiv (Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean:475) requires a finite index type. Resolution/Ext comparisons do not assert arbitrary small coproducts, exact product cohomology, and the natural degree-zero comparison together. The broader first grep also matched unrelated ext lemmas; the scoped follow-up found only finite biproduct Ext results."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.biproductAddEquiv",
+   "results": "1 hits; CategoryTheory.Abelian.Ext.biproductAddEquiv. Answer digest 1d0467f68cd78c9b.",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext.biproductAddEquiv (Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean:475) requires a finite index type. Resolution/Ext comparisons do not assert arbitrary small coproducts, exact product cohomology, and the natural degree-zero comparison together. The broader first grep also matched unrelated ext lemmas; the scoped follow-up found only finite biproduct Ext results."
+  },
+  {
+   "tool": "grep",
+   "query": "Ext.*(coproduct|biproduct|directSum)|homology.*[Pp]roduct",
+   "results": "5 hits; Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean. Answer digest 679d9849fa1ade52. Mathlib subdirectory: Algebra/Homology.",
+   "date": "2026-10-23",
+   "verdict": "no match: the injective-resolution Ext comparison supplies only one input; Ext.biproductAddEquiv at Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean:475 requires Fintype. Neither proves the arbitrary-small-coproduct statement with its complex map and degree-zero naturality. Search hits read in source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Contravariant Ext takes arbitrary small coproducts of sheaves of modules to products via injective resolutions",
+   "results": "8 hits; Ext, CategoryTheory.Abelian.Ext.contravariantSequence, CategoryTheory.Limits.hasProducts_opposite, CategoryTheory.hasExt_of_enoughInjectives, CategoryTheory.Abelian.Ext.contravariantSequence_exact, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₂, Module.Injective.pi, CategoryTheory.IsGrothendieckAbelian.hasExt. Answer digest 67502da02136881d.",
+   "date": "2026-10-23",
+   "verdict": "no match: the injective-resolution Ext comparison supplies only one input; Ext.biproductAddEquiv at Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean:475 requires Fintype. Neither proves the arbitrary-small-coproduct statement with its complex map and degree-zero naturality. Search hits read in source."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext, \"biproduct\"",
+   "results": "2 hits; CategoryTheory.Abelian.Ext.addEquivBiproduct, CategoryTheory.Abelian.Ext.biproductAddEquiv. Answer digest cdb035d9e394e6bc.",
+   "date": "2026-10-23",
+   "verdict": "no match: the injective-resolution Ext comparison supplies only one input; Ext.biproductAddEquiv at Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean:475 requires Fintype. Neither proves the arbitrary-small-coproduct statement with its complex map and degree-zero naturality. Search hits read in source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of Hom from an arbitrary coproduct into one injective resolution is the product of Ext groups, naturally in degree zero",
+   "results": "8 hits; CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extMk_hom, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass_symm_apply, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass_apply, CategoryTheory.InjectiveResolution.extMk. Answer digest 47b1da0e4c92a3c7.",
+   "date": "2026-10-23",
+   "verdict": "no match: the injective-resolution Ext comparison supplies only one input; Ext.biproductAddEquiv at Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean:475 requires Fintype. Neither proves the arbitrary-small-coproduct statement with its complex map and degree-zero naturality. Search hits read in source."
+  },
+  {
+   "tool": "grep",
+   "query": "Ext.*(sigma|coprod|[Pp]rod)|([Pp]rod|coprod|sigma).*Ext",
+   "results": "7 hits; Mathlib/CategoryTheory/Abelian/NonPreadditive.lean, Mathlib/CategoryTheory/Abelian/NonPreadditive.lean, Mathlib/CategoryTheory/Abelian/Basic.lean, Mathlib/CategoryTheory/Abelian/Basic.lean, Mathlib/CategoryTheory/Abelian/DiagramLemmas/KernelCokernelComp.lean, Mathlib/CategoryTheory/Abelian/DiagramLemmas/KernelCokernelComp.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean. Answer digest fe775accf8283ef6. Mathlib subdirectory: CategoryTheory/Abelian.",
+   "date": "2026-10-23",
+   "verdict": "no match: the injective-resolution Ext comparison supplies only one input; Ext.biproductAddEquiv at Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean:475 requires Fintype. Neither proves the arbitrary-small-coproduct statement with its complex map and degree-zero naturality. Search hits read in source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Ext functor in the first variable sends arbitrary direct sums to products in an abelian category with enough injectives",
+   "results": "8 hits; CategoryTheory.Abelian.Ext.mk₀_sum, CategoryTheory.Abelian.Ext.addEquivBiproduct, CategoryTheory.Abelian.Ext.biproductAddEquiv, CategoryTheory.Abelian.Ext.biprod_ext, CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.Abelian.Ext.sum_comp, CategoryTheory.Abelian.Ext.comp_sum, CategoryTheory.Abelian.extFunctorObj. Answer digest ce75643fa8cb4202.",
+   "date": "2026-10-23",
+   "verdict": "no match: the injective-resolution Ext comparison supplies only one input; Ext.biproductAddEquiv at Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean:475 requires Fintype. Neither proves the arbitrary-small-coproduct statement with its complex map and degree-zero naturality. Search hits read in source."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-acyclic-coproduct-ext-orthogonal-hom",
+  "date": "2026-10-22",
+  "group": "Q57"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Supporting input: The spectral-sequence argument proving acyclicity of Hom from the bounded-above acyclic free-sum test complex; no site functor or lower shriek is part of this lemma. Supporting coproduct/column calculation in Stacks 07AA/07AC: old steps 1, 2 and 4 of the Hom-acyclicity proof, including resolution independence and naturality in the source.",
+   "via": [
+    "lem-trf-acyclic-coproduct-ext-orthogonal-hom",
+    "lem-trf-continuous-cocontinuous-derived-shriek",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-coproduct-ext-resolution-cohomology",
+  "worker": "stage1",
+  "summary": "Reused the existing arbitrary ring-sheaf Grothendieck theorem and three existing Mathlib leaves for enough injectives, existence of resolutions and the Ext comparison. Expanded the coproduct universal property, exact-product cycle/boundary calculation in Ab and the natural degree-zero kernel formula. No new nodes; no statement change. Checked empty and repeated summands and arbitrary maps between coproducts.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality, proof (1)--(2), supporting homological input on the existing Temkin/cotangent/bar-resolution/derived-shriek dependency chain specified by blueprint.from.place; realizes the coproduct column calculation in 07AA/07AC without changing the latest blueprint unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic Grothendieck and small-colimit existence theorem for arbitrary ringed small sites, used only to choose a resolution and coproduct. The local-term unit has no ringed-site existence result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-137281cda",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-137281cda (reviewer sub-agent of L); spot-checked: PASS, with no changes; review.md has the details. I read the whole item against its source: Stacks sites-cohomology.tex l.8172-8193 (07AA, example-hom-complex-into-sheaf) and l.9385-9410 (07AC, the direct-sum Ext vanishing passage). The statement and stmt_deps are byte-identical to clones/live, where the item is still unsplit. No repair note exists for this item and nothing has superseded it. Re-split comparison: steps 1-6 carry all of the parent's old steps 1, 2 and 4 (011b packet l.66-90). Resolution independence now comes from the statement of lem-weil-pbc-ext-via-injective-resolution instead of lem-sp-derived-well-defined; both are valid. Step 1: ring-sheaves-grothendieck gives a Grothendieck category with U-small colimits for any ring sheaf, the Mathlib leaf gives enough injectives, and clause (1) of the left-exact resolution leaf gives a resolution that is zero in negative degrees and has an exact augmentation. Step 2: the ext-via-injective-resolution hypotheses hold, and its statement asserts independence. Step 3: the coproduct universal property, with bilinear composition and differentials commuting, is elementary. Step 4: two short exact sequences in Ab with exact arbitrary products. The products node quantifies over every family (its Mathlib match is AB4Star), q=0 is consistent, and exact products of module sheaves are never used. Step 5: iota is a kernel of d^0 and there are no degree-zero boundaries; naturality (iota h)f = iota(hf) holds for every f, including maps that mix summands. Step 6: vanishing, transport along a specified isomorphism, and the empty sum. I tested A empty, a single summand, repeated indices, infinite A, q=0, q>0 and F=0. The only off-unit citation is lem-weil-pbc-ring-sheaves-grothendieck, declared as a tool use for Grothendieck abelianness and the existence of coproducts; it replaces no step of sk-i-curve-zero, so I accept it. There are no cycles, no SGA citations and no new nodes. All search kinds are recorded with results, and biproductAddEquiv needs Fintype, so it is not a leaf for this item. Advisory, inherited and unchanged: the statement cites def-pc-cochain-complex-modules for what is really a complex of abelian groups (L_J(M)). The statement defines those terms and differentials itself."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoproductExtResolutionCohomology",
+  "declaration": "CategoryTheory.coproduct_ext_resolution_cohomology",
+  "declarations": [
+   "CategoryTheory.injectiveResolutionHomComplex",
+   "CategoryTheory.injectiveResolutionHomPrecomp",
+   "CategoryTheory.coproduct_ext_nonempty_injectiveResolution",
+   "CategoryTheory.coproduct_ext_resolution_independent",
+   "CategoryTheory.coproduct_ext_resolution_complex_iso",
+   "CategoryTheory.coproduct_ext_resolution_cohomology",
+   "CategoryTheory.coproduct_ext_resolution_degree_zero",
+   "CategoryTheory.coproduct_ext_resolution_vanishing"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CoproductExtResolutionCohomology.lean",
+  "statement": "theorem coproduct_ext_resolution_cohomology {A : Type u} (i : A → I) (M : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (e : M ≅ ∐ (fun a : A ↦ E (i a))) (q : ℕ) : ∃ σ : (injectiveResolutionHomComplex P M).homology (q : ℤ) ≅ ∏ᶜ (fun a : A ↦ (injectiveResolutionHomComplex P (E (i a))).homology (q : ℤ)), ∀ a : A, σ.hom ≫ Pi.π _ a = HomologicalComplex.homologyMap (injectiveResolutionHomPrecomp P (Sigma.ι (fun a : A ↦ E (i a)) a ≫ e.inv)) (q : ℤ)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-163b5d28e",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Read node, 5 stmt_dep records, Stacks 07AA/07AC, delivered module, report and the Mathlib InjectiveResolution/Extend declarations. All clauses match: Nonempty InjectiveResolution; Hom complex = degreewise preadditiveCoyoneda on the Z-indexed zero extension; resolution independence pinned to homologyMap of every Hom P Q (𝟙 F); actual complex iso and H^q iso to the product, with projections = precomposition by Sigma.ι a ≫ e.inv; degree-zero η pinned to h ↦ [ι∘h] via unique cycle lift and natural for every f between independently indexed models; positive vanishing. No Fintype/Nonempty/injectivity on A or i; A : Type u, I : Type w; empty/repeated summands and specified models via e. lean.statement verbatim, 8 declarations recorded with source/blueprint docstrings, theorems sorry, helpers real abbrevs, no theorem stmt_deps, no duplicate in live lean/Sheaf or Mathlib (biproductAddEquiv needs Fintype). Complex iso is stated as an actual iso and accompanied by per-degree form, so the derived-form rule is met. Advisory: 'Second reading by Q07' is the worker's own pass. Not recompiled (no changes)."
+ }
+}

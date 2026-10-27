@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-open-extension-zero-constructible-finite-tor",
+ "kind": "statement",
+ "title": "Open extension preserves constant-model constructibility and specified Tor bounds",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$, $p\\ne\\ell$, and an open immersion $j:U\\hookrightarrow X$ of separated finite-type $k$-schemes over $k$ [sk-def-sfb-dc-setting; def-weil-open-immersion]. Let $\\Lambda$ be any commutative condensed ring [sk-def-sfb-condensed-ring], and put $\\Lambda_S=p_S^*\\Lambda$ for $S=U,X$ [sk-def-sfb-pulled-back-coefficients]. Use the ordinary unbounded categories $D(\\operatorname{Mod}_{\\Lambda_S})$ [sk-def-sfb-derived-categories], ordinary relative derived tensor [sk-def-sfb-derived-tensor-hom], and exact termwise module-object open extension $j_!$ [sk-def-sfb-module-derived-lower-shriek]. Let $A\\in\\Dctf(U,\\Lambda)$, where constructibility means a finite stratification with finite constant scalar local models, and finite Tor amplitude is tested against every degree-zero module sheaf [sk-def-sfb-constructible]. If the cohomology of $A$ is concentrated in $[m,n]$ and its Tor amplitude is contained in $[u,v]$, then $j_!A\\in\\Dctf(X,\\Lambda)$ has cohomology concentrated in $[m,n]$ and Tor amplitude contained in $[u,v]$. Moreover $j_!A$ is bounded constructible in the locally-finitely-presented ring-object sense [sk-def-sfb-bounded-constructible]. The intervals $[m,n]$ and $[u,v]$ may be different; no admissibility, derived-completeness or finite-coefficient hypothesis is imposed on $\\Lambda$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+  "place": "Proof (3), membership of the input j_!A in the bounded constructible finite-Tor domain of proper base change; returned split step 3."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-open-immersion",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-module-derived-lower-shriek",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over Spec k supplies local Noetherianity of U and X, and quasi-compactness supplies compactness. Thus both schemes are qcqs. Translate the given Over objects into Scheme.Over structures using their actual structure maps, so that j.left is a morphism over Spec k.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-locnoeth",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (3), membership of the input j_!A in the bounded constructible finite-Tor domain of proper base change; returned split step 3."
+   }
+  },
+  {
+   "text": "For each cohomology module M of A, extract its global constructible stratification using qcqs of U. Use the proved generic property-preserving stratification conversion to forget only the constructibility field, obtaining a FiniteLocallyClosedStratification together with the same constant-model property. Apply the already proved module theorem lem-sf-open-extension-zero-constant-model-constructible with p = ringChar k, the given field and the same condensed ring and immersion. Its first conclusion gives constant-model constructibility of j_!M. This reuses the existing complementary-stratum proof without introducing another version.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lem-sf-open-extension-zero-constant-model-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (3), membership of the input j_!A in the bounded constructible finite-Tor domain of proper base change; returned split step 3."
+   }
+  },
+  {
+   "text": "Let F be the exact additive open-extension functor. Its ordinary derived-category homology isomorphism identifies F(H^q(A)) with H^q(D(F)A). On each stratum and covering member map the inverse of this isomorphism and compose with the existing scalar-model isomorphism; keep the same scalar modules and presentations. Exactness preserves boundedness and the separately supplied interval [m,n]. Thus D(F)A is constant-model bounded constructible.",
+   "uses": [
+    "def-sfb-module-open-lower-shriek",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "sk-def-sfb-derived-categories",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (3), membership of the input j_!A in the bounded constructible finite-Tor domain of proper base change; returned split step 3."
+   }
+  },
+  {
+   "text": "Unfold the instance wrappers once to express Tor amplitude in terms of the named derivedTensor bifunctor; this is a definitional equivalence and keeps all subsequent tensor comparisons on the same interface. For every degree-zero module N on X, evaluate lem-sfb-open-immersion-derived-tensor-projection at A and N[0]. Exactness of upperStar gives its standard single-functor comparison D(j^*)(N[0]) isomorphic to (j^*N)[0]. Map that isomorphism through tensor with A and D(F). The resulting isomorphism identifies D(F)A tensor N[0] with D(F)(A tensor (j^*N)[0]). The given Tor interval [a,b] and exact-functor preservation of that homology interval give [a,b] for the latter. Transport across the isomorphism. N was unrestricted, proving the asserted Tor interval and finite Tor amplitude.",
+   "uses": [
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-sfb-open-immersion-derived-tensor-projection",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "sk-def-sfb-derived-categories",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (3), membership of the input j_!A in the bounded constructible finite-Tor domain of proper base change; returned split step 3."
+   }
+  },
+  {
+   "text": "For each output cohomology module use its constant-model stratification from step 3. The forward implication of det-def-sfb-constructible-local-model gives local finite presentation on each stratum. Its coefficient map alpha is invertible, and extension along alpha identifies with restriction along its inverse. Apply the proved scalar-isomorphism transport helpers from lem-weil-pbc-module-constructible-pullback to recover local finite presentation of the raw mapMod pullback. The same stratification therefore witnesses general ring-object constructibility. Together with boundedness this is boundedConstructible. Assemble it with the two independent interval conclusions and constant-model bounded constructibility.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "lem-sfb-alpha-iso",
+    "sk-def-sfb-change-of-scalars",
+    "lem-weil-pbc-module-constructible-pullback",
+    "def-sfb-constructible-module",
+    "sk-def-sfb-bounded-constructible",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (3), membership of the input j_!A in the bounded constructible finite-Tor domain of proper base change; returned split step 3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-locnoeth",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sk-def-sfb-constructible",
+  "lem-sf-open-extension-zero-constant-model-constructible",
+  "def-sfb-module-open-lower-shriek",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "sk-def-sfb-derived-categories",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-sfb-open-immersion-derived-tensor-projection",
+  "det-def-sfb-constructible-local-model",
+  "lem-sfb-alpha-iso",
+  "sk-def-sfb-change-of-scalars",
+  "lem-weil-pbc-module-constructible-pullback",
+  "def-sfb-constructible-module",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
+  "place": "Exactness and complementary-stratum argument, reusing the proved module theorem lem-sf-open-extension-zero-constant-model-constructible; Tor bounds follow the open-immersion and derived paragraphs of det-lem-int-tensor-projection.proof.md. The compactification-composition unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|ConstantModelConstructibleFiniteTor",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: condensed module category constructions and AB axioms do not state preservation of constructibility or Tor intervals by pro-etale open extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along an open immersion preserves finite Tor amplitude of bounded constructible condensed module complexes",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: condensed module category constructions and AB axioms do not state preservation of constructibility or Tor intervals by pro-etale open extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open immersion extension by zero of pro etale condensed modules preserves finite Tor dimension and constructible cohomology",
+   "results": "8 hits: Condensed.profiniteSolid, CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CondensedMod.IsSolid, LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod.ofSheafCompHaus, LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-22",
+   "verdict": "no match: condensed module category constructions and AB axioms do not state preservation of constructibility or Tor intervals by pro-etale open extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact open extension by zero preserves bounded constructible complexes with finite constant local models and preserves every finite Tor amplitude interval for condensed module objects",
+   "results": "8 hits: CondensedMod.IsSolid, LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB5CondensedMod, Condensed.instAB4StarCondensedMod, Condensed.instAB4CondensedMod, instAbelianCondensedMod, LightCondensed.instCountableAB4StarLightCondMod, CondensedMod.ofSheafStonean",
+   "date": "2026-10-22",
+   "verdict": "no match: condensed module category constructions and AB axioms do not state preservation of constructibility or Tor intervals by pro-etale open extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract complex embeddings, derived truncation, algebraic localization or ordinary sheaf-module constructions; none states open extension preservation of condensed scalar-model constructibility and Tor intervals"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero on ordinary unbounded pro-etale derived categories with arbitrary condensed coefficients preserves constant-model constructibility and specified cohomological and Tor amplitude intervals",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjSingleFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract complex embeddings, derived truncation, algebraic localization or ordinary sheaf-module constructions; none states open extension preservation of condensed scalar-model constructibility and Tor intervals"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|ConstantModelConstructibleFiniteTor",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract complex embeddings, derived truncation, algebraic localization or ordinary sheaf-module constructions; none states open extension preservation of condensed scalar-model constructibility and Tor intervals"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open extension by zero of module sheaves preserves constructible complexes and every Tor amplitude interval",
+   "results": "8 hits: HasCompactSupport.extend_zero, HomologicalComplex.extendMap_zero, CategoryTheory.ShortComplex.hasRightHomology_of_preserves, AlgebraicGeometry.RingedSpace.res_zero, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, HomologicalComplex.extend.instHasHomology, ModuleCat.tildeInModuleCat, SheafOfModules.Finite.forgetPreservesFiniteLimits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract complex embeddings, derived truncation, algebraic localization or ordinary sheaf-module constructions; none states open extension preservation of condensed scalar-model constructibility and Tor intervals"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact open extension by zero preserves finite scalar local models by adjoining a zero complementary stratum, and preserves Tor bounds by the derived projection formula",
+   "results": "8 hits: Profinite.NobelingProof.succ_exact, exact_of_isLocalized_maximal, exact_of_isLocalized_span, HomologicalComplex.extend_exactAt, Profinite.NobelingProof.CC_exact, IsLocalizedModule.map_exact, HomologicalComplex.isZero_extend_X', LocalizedModule.map_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract complex embeddings, derived truncation, algebraic localization or ordinary sheaf-module constructions; none states open extension preservation of condensed scalar-model constructibility and Tor intervals"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-open-boundary-zero",
+  "date": "2026-10-22",
+  "group": "Q129"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-comp-composition",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-composition-interchange",
+   "place": "Proof (3), membership of the input j_!A in the bounded constructible finite-Tor domain of proper base change; returned split step 3.",
+   "via": [
+    "lem-sfb-proper-open-boundary-zero"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-open-extension-zero-constructible-finite-tor",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven-step assembly using existing DAG nodes: Noetherian complementary stratification, exact-functor cohomology, arbitrary-condensed restriction identities and scalar models, one-way passage to general ring-object constructibility, and derived open projection against every module sheaf for the unchanged Tor interval. No new nodes or Mathlib leaves. All citations read, verbatim evidence recorded, no dependency cycle; source and coefficient hypotheses checked.",
+  "blueprint": "Expands det-sf-comp-composition-interchange proof (3): membership of j_!A in the bounded constructible finite-Tor domain, via the unchanged open-stratification and tensor-projection arguments.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic Affine schemes are quasi-compact and quasi-separated used as stated for the geometric, coefficient, or exact-functor input to the open-extension domain check; the compactification-composition route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used as stated for the geometric, coefficient, or exact-functor input to the open-extension domain check; the compactification-composition route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic Reduced induced closed subscheme structure on a closed subset: existence and uniqueness used as stated for the geometric, coefficient, or exact-functor input to the open-extension domain check; the compactification-composition route is unchanged."
+   },
+   {
+    "node": "lem-sfb-noetherian-complementary-stratifications",
+    "why": "Generic Complementary immersions extend finite stratifications over a Noetherian scheme used as stated for the geometric, coefficient, or exact-functor input to the open-extension domain check; the compactification-composition route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic An exact functor commutes with cohomology of cochain complexes used as stated for the geometric, coefficient, or exact-functor input to the open-extension domain check; the compactification-composition route is unchanged."
+   },
+   {
+    "node": "lem-sfb-open-module-restriction-identities",
+    "why": "Generic Open and closed restrictions of coefficient-linear extension by zero used as stated for the geometric, coefficient, or exact-functor input to the open-extension domain check; the compactification-composition route is unchanged."
+   },
+   {
+    "node": "lem-sfb-scalar-model-restriction-criterion",
+    "why": "Generic Scalar models pass through restriction isomorphisms on an extended stratification used as stated for the geometric, coefficient, or exact-functor input to the open-extension domain check; the compactification-composition route is unchanged."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic $\\alpha_f$ is an isomorphism for every $f$ used as stated for the geometric, coefficient, or exact-functor input to the open-extension domain check; the compactification-composition route is unchanged."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic Exactness of pullback on module objects used as stated for the geometric, coefficient, or exact-functor input to the open-extension domain check; the compactification-composition route is unchanged."
+   },
+   {
+    "node": "lem-sfb-open-immersion-derived-tensor-projection",
+    "why": "Generic Open immersion derived tensor projection formula used as stated for the geometric, coefficient, or exact-functor input to the open-extension domain check; the compactification-composition route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sfb-alpha-iso",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-sfb-open-immersion-derived-tensor-projection"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-d802ec954",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-d802ec954 (reviewer sub-agent of L); spot-checked: I read the whole delivery, which is one commit with only the item node and the report; there are no new nodes. The item is still unsplit with no proof in both the live and side-live clones, and it has no repair note. The statement, stmt_deps and blueprint ancestry (det-sf-comp-composition-interchange proof (3)) are unchanged, and the statement checks out against sk-def-sfb-constructible (Dctf with constant scalar models, Tor amplitude tested on every module sheaf) and sk-def-sfb-bounded-constructible. Mechanical checks: proof_deps equals the union of step uses, every cited id exists and none is merged, there is no cycle (DFS over 785 nodes), and there is no SGA citation. Step 1: Spec k is Noetherian, and lem-weil-pbc-finite-type-over-noetherian applies to X and U. Step 2: the reduced-induced complement and lem-sfb-noetherian-complementary-stratifications have all their hypotheses, and give qcqs schemes, quasi-compact j and the extended stratification. Step 3: j_! is exact, so H^q(JA) = j_!H^q(A) via 010N, and the cohomology stays in [m,n]. Step 4: lem-sfb-open-module-restriction-identities (arbitrary Lambda) and lem-sfb-scalar-model-restriction-criterion have all their hypotheses, and keep the old models with a zero model on Z; this matches the source lem-sfb-dc-open-lower-shriek-preserves.proof.md. Step 5 uses only the forward implication of det-def-sfb-constructible-local-model, then alpha-iso and change-of-scalars clause 5 (Ext = Res along the inverse) for the extra ring-object clause; the false converse is not used. Step 6: pullback is exact, and lem-sfb-open-immersion-derived-tensor-projection (separated, qc, locally finite type over k) gives JA tensor N = J(A tensor j^*N) for arbitrary N, so the Tor amplitude stays in [u,v]. Step 7 is elementary. Edge cases tested: U empty, U = X, Lambda = 0, a shifted finite free module, and different intervals (Lambda = Z_l, A = Z/l[0] has cohomology [0,0] and Tor amplitude [-1,0]). Duplicate search: lem-sf-open-extension-zero-constant-model-constructible states the step-4 module content and could have been cited instead, but that is not a fault. lem-sfb-qc-open-extension-ctf, sk-lem-sf-open-ctf, lem-trf-open-ctf and lem-sfb-scalar-model-immersion-extension all restrict Lambda, and none equals or generalizes the item. I accept the declared tool_uses: all are generic black-box inputs and the route of proof (3) is unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OpenExtensionConstructibleFiniteTor",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.openExtension_constructible_finiteTor",
+  "file": "lean/Sheaf/Paper/OpenExtensionConstructibleFiniteTor.lean",
+  "statement": "theorem openExtension_constructible_finiteTor (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {U X : Over (Spec (.of k))} [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] (j : U ⟶ X) [IsOpenImmersion j.left] (A : ConstantModelConstructibleFiniteTor Λ U.left) (m n a b : ℤ) (hcoh : DerivedCategory.homologyConcentratedIn m n A.obj) (htor : DerivedCategory.torAmplitudeIn _ a b A.obj) : (constantModelBoundedConstructible Λ X.left ⊓ DerivedCategory.finiteTorAmplitude _) ((openImmersionLowerShriek Λ j.left).mapDerivedCategory.obj A.obj) ∧ DerivedCategory.homologyConcentratedIn m n ((openImmersionLowerShriek Λ j.left).mapDerivedCategory.obj A.obj) ∧ DerivedCategory.torAmplitudeIn _ a b ((openImmersionLowerShriek Λ j.left).mapDerivedCategory.obj A.obj) ∧ boundedConstructible (condensedRingObj Λ X.left) ((openImmersionLowerShriek Λ j.left).mapDerivedCategory.obj A.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a15e36cac",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node and the dep Lean (ConstantModelConstructibleFiniteTor, constantModelBoundedConstructible, torAmplitudeIn/finiteTorAmplitude, openImmersionLowerShriek.mapDerivedCategory, boundedConstructible over condensedRingObj): no extra hypotheses (arbitrary comm. condensed Λ, j only an open immersion), four conclusions on the same output object, four independent integer endpoints. lean.statement verbatim; only the lean field differs from the live node; one sorry (the proof), no defs; source/blueprint docstrings and 7-step proof plan present; all imports exist; Worker report and Second reading present. Edge cases (empty schemes, U=X, Λ=0, unordered intervals, universes) fine. No duplicate: OpenExtensionFiniteTor is finite-stage, constantModelConstructible_openImmersionLowerShriek is module-level, ProperOpenBoundaryZero is the consumer. Advisory: the characteristic hypotheses are unused in the proof but stated by the node. No compile run (no file changed); worker reports a clean compile of about 6 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261024T021632-L-2839058",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

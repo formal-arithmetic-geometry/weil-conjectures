@@ -1,0 +1,279 @@
+{
+ "id": "lem-per-finite-function-subring-residue-test",
+ "kind": "statement",
+ "title": "Proper ideals in finite function subrings admit residue evaluation tests",
+ "statement": "Let $A$ be a nonzero commutative unital ring which is finitely generated as a $\\mathbf Z$-module, meaning that finitely many elements of $A$ span its additive group with integer coefficients. Let $X$ be a finite nonempty set and $B\\subseteq A^X$ a unital subring containing every constant function $x\\mapsto a$ for $a\\in A$; operations in $A^X$ are coordinatewise. For every proper ideal $I\\subsetneq B$ there exist $x\\in X$ and a maximal ideal $\\mathfrak q\\subset A$ such that $f(x)\\in\\mathfrak q$ for every $f\\in I$. Here maximal means proper and maximal among proper ideals. Moreover $A/\\mathfrak q$ is a finite nonzero field, hence has characteristic a prime $p$. Finitely generated modules have the meaning of [def-weil-finitely-generated-module]; $A/\\mathfrak q$ is the quotient module [def-weil-pbc-quotient-module] equipped with coset multiplication $(a+\\mathfrak q)(b+\\mathfrak q)=ab+\\mathfrak q$. An ideal here is an additive subgroup closed under multiplication by all elements of the ambient ring; a unital subring contains $1$ and is closed under addition, additive inverses and multiplication.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent-written finite-product consequence of Tag 00GQ, lemma-integral-overring-surjective, and Tag 00GR, lemma-integral-under-field. The coordinate-prime identification and finite residue-field assertion are additional content, not the statement of 00GQ alone."
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-quotient-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=A^X$ and let $j:B\\hookrightarrow C$ be inclusion. Write $c_a\\in B$ for the constant function with value $a\\in A$. For $g\\in C$, form $P_g(T)=\\prod_{x\\in X}(T-c_{g(x)})\\in B[T]$. Its leading coefficient is the product of the leading coefficients $1$, so it is monic. At every coordinate $y\\in X$, evaluation at $g$ gives $P_g(g)(y)=\\prod_{x\\in X}(g(y)-g(x))=0$, because the factor indexed by $y$ is zero. Thus $P_g(g)=0$ in $C$. This proves directly that every element of $C$ is integral over $B$, meaning a root of a monic polynomial over $B$. The inclusion $j$ is injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GQ, lemma-integral-overring-surjective: integrality hypothesis; explicit finite-product verification written by Q74"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proper-ideal-contained-in-maximal] to $I\\subsetneq B$ to choose a maximal ideal $M\\supseteq I$. It is prime: if $ab\\in M$ and $a\\notin M$, maximality gives $1=u+ra$ with $u\\in M$, $r\\in B$, hence $b=ub+rab\\in M$. Apply [lem-weil-pbc-integral-injective-lying-over] to the integral injective inclusion $j$ established in Step 1 and the prime $M$. It supplies a prime ideal $P\\subset C$ with $j^{-1}(P)=M$.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-weil-pbc-integral-injective-lying-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GQ, lemma-integral-overring-surjective; Tag 00E0, lemma-Zariski-topology, part (2) and proof of part (8), for a maximal ideal containing a proper ideal"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-integral-prime-over-maximal-maximal], the prime $P$ is maximal, since $C$ is integral over $B$ and $j^{-1}(P)=M$ is maximal. Apply [lem-weil-pbc-product-prime-factor] to the finite product $C=\\prod_{x\\in X}A$. There are $x\\in X$ and a prime $\\mathfrak q\\subset A$ with $P=\\operatorname{ev}_x^{-1}(\\mathfrak q)$. This $\\mathfrak q$ is maximal: if $\\mathfrak q\\subseteq J\\subsetneq A$ is an ideal, then $\\operatorname{ev}_x^{-1}(J)$ is a proper ideal containing $P$, hence equals $P$. Evaluation is surjective, since $\\operatorname{ev}_x(c_a)=a$, so taking images yields $J=\\mathfrak q$. For every $f\\in I\\subseteq M=j^{-1}(P)$ we now have $f(x)\\in\\mathfrak q$, proving the evaluation assertion.",
+   "uses": [
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "lem-weil-pbc-product-prime-factor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GS, lemma-integral-over-field, for maximality above a maximal ideal; Tag 00ED, lemma-spec-product, iterated over the finite index set, for the coordinate prime; maximality along surjective evaluation proved explicitly"
+   }
+  },
+  {
+   "text": "By [lem-weil-common-extension-fields-quotient-field], $K=A/\\mathfrak q$ is a field. It is nonzero since $\\mathfrak q$ is proper, so $1+\\mathfrak q\\ne0+\\mathfrak q$. Choose additive generators $a_1,\\ldots,a_r$ of $A$ as in [def-weil-finitely-generated-module]. The quotient map of [def-weil-pbc-quotient-module] is surjective and additive. Consequently every element of $K$ has the form $\\sum_{t=1}^r n_t(a_t+\\mathfrak q)$ with $n_t\\in\\mathbf Z$, and the additive group of $K$ is finitely generated.",
+   "uses": [
+    "lem-weil-common-extension-fields-quotient-field",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0, lemma-Zariski-topology and basic notions item-characterize-maximal-ideal; the cited quotient-field Mathlib leaf; quotient generators displayed explicitly"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-finitely-generated-abelian-group-structure] to the additive group of $K$. It gives $K\\simeq\\mathbf Z^n\\times T$ additively, where $T$ is a direct sum indexed by a finite set of groups $\\mathbf Z/(p_i^{e_i})$, with $p_i$ prime and $e_i\\geq0$. If $n>0$, a free-coordinate projection composed with this isomorphism gives a surjective additive map $h:K\\to\\mathbf Z$. When $2\\cdot1_K=0$, every $z\\in K$ satisfies $2z=(2\\cdot1_K)z=0$; choosing $h(z)=1$ would give $0=h(2z)=2$, a contradiction in $\\mathbf Z$. When $2\\cdot1_K\\ne0$, multiplication by $2\\cdot1_K$ is surjective, since it has a multiplicative inverse in $K$. Choose $z$ with $h(z)=1$ and $w$ with $2w=z$; then $1=2h(w)$, again impossible in $\\mathbf Z$. Thus $n=0$. Each $p_i^{e_i}$ is positive, including the case $e_i=0$, and each cyclic group has that finite number of residue classes. An element of $T$ is a tuple in the product of these finitely many finite sets, so $T$, and hence $K$, is finite.",
+   "uses": [
+    "lem-sbc-finitely-generated-abelian-group-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/GroupTheory/FiniteAbelian/Basic.lean",
+    "place": "AddCommGroup.equiv_free_prod_directSum_zmod, lines 119-132; elementary elimination of free coordinates using the field operations"
+   }
+  },
+  {
+   "text": "Since $K$ is finite, two members of the infinite list $0,1_K,2\\cdot1_K,\\ldots$ agree. Their difference gives a positive integer annihilating $1_K$. Let $p$ be the least such integer; it is not $1$, because $K$ is nonzero. If $p=uv$ with $1<u,v<p$, minimality says $u\\cdot1_K$ and $v\\cdot1_K$ are nonzero, whereas their product is $p\\cdot1_K=0$. This contradicts the absence of zero divisors in a field. Thus $p$ is prime and is the characteristic of $K$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary finite-field characteristic argument written by Q74"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-product-prime-factor",
+  "lem-weil-common-extension-fields-quotient-field",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-quotient-module",
+  "lem-sbc-finitely-generated-abelian-group-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Finite-product consequence of Tag 00GQ (lemma-integral-overring-surjective) and Tag 00GS (lemma-integral-over-field), with the existing finitely generated abelian group structure theorem for residue finiteness; explicit argument by Q74."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every proper ideal in a unital subring of a finite product of rings finite over Z containing constant functions is contained in the inverse image of a maximal ideal under a coordinate evaluation",
+   "results": "{\"t\": \"2026-10-24T02:11:02Z\", \"tool\": \"leanfinder\", \"query\": \"Every proper ideal in a unital subring of a finite product of rings finite over Z containing constant functions is contained in the inverse image of a maximal ideal under a coordinate evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.exists_comap_evalRingHom_eq\", \"Ideal.IsMaximal.comap_piEvalRingHom\", \"PrimeSpectrum.exists_maximal_notMem_range_sigmaToPi_of_infinite\", \"AlgebraicGeometry.Ideal.span_eq_top_of_span_image_evalRingHom\", \"MaximalSpectrum.finite_of_toPiLocalization_surjective\", \"MaximalSpectrum.finite_of_toPiLocalization_pi_surjective\", \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\", \"Ideal.map_evalRingHom_pi\"], \"digest\": \"f28b5ce9b800b147\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the combined residue evaluation test: lying over, maximal ideals above integral extensions and maximality of an evaluation preimage are partial ingredients. None supplies a coordinate and a finite positive-characteristic residue field from an arbitrary proper ideal of the subring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebra A finite as an abelian group module over integers and a subalgebra B of functions X to A on a finite nonempty set containing constants every proper ideal of B vanishes at some coordinate modulo a maximal ideal of A",
+   "results": "{\"t\": \"2026-10-24T02:13:23Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebra A finite as an abelian group module over integers and a subalgebra B of functions X to A on a finite nonempty set containing constants every proper ideal of B vanishes at some coordinate modulo a maximal ideal of A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_integral_inj_algHom_of_quotient\", \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\", \"finite_of_algHom_finiteType_of_isJacobsonRing\", \"finite_of_finite_type_of_isJacobsonRing\", \"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"AlgHom.IsArithFrobAt.finite_quotient\", \"Ideal.exist_integer_multiples_notMem\", \"AlgebraicClosure.le_maxIdeal\"], \"digest\": \"c3552bc74ed19c66\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the combined residue evaluation test: lying over, maximal ideals above integral extensions and maximality of an evaluation preimage are partial ingredients. None supplies a coordinate and a finite positive-characteristic residue field from an arbitrary proper ideal of the subring."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.IsIntegral.comap_surjective",
+   "results": "{\"t\": \"2026-10-24T02:11:01Z\", \"tool\": \"loogle\", \"query\": \"RingHom.IsIntegral.comap_surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"RingHom.IsIntegral.comap_surjective\"], \"digest\": \"b47d98d7c520cfad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the combined residue evaluation test: lying over, maximal ideals above integral extensions and maximality of an evaluation preimage are partial ingredients. None supplies a coordinate and a finite positive-characteristic residue field from an arbitrary proper ideal of the subring."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Mm]aximal|comap_surjective|isMaximal.*comap|comap.*isMaximal",
+   "results": "{\"t\": \"2026-10-24T02:11:00Z\", \"tool\": \"grep\", \"query\": \"exists.*[Mm]aximal|comap_surjective|isMaximal.*comap|comap.*isMaximal\", \"sub\": \"RingTheory/Ideal\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Operations.lean\", \"Mathlib/RingTheory/Ideal/Operations.lean\", \"Mathlib/RingTheory/Ideal/Operations.lean\"], \"digest\": \"29a3e13f91c3cc87\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the combined residue evaluation test: lying over, maximal ideals above integral extensions and maximality of an evaluation preimage are partial ingredients. None supplies a coordinate and a finite positive-characteristic residue field from an arbitrary proper ideal of the subring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "maximal ideals of subring of finite product integral extension lie over coordinate maximal ideals",
+   "results": "{\"t\": \"2026-10-24T02:11:01Z\", \"tool\": \"leansearch\", \"query\": \"maximal ideals of subring of finite product integral extension lie over coordinate maximal ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.primesOver.isMaximal\", \"IsLocalization.AtPrime.mem_primesOver_of_isPrime\", \"Ideal.isMaximal_of_isIntegral_of_isMaximal_comap'\", \"Ideal.exists_ideal_over_maximal_of_isIntegral\", \"Ideal.exists_maximal_ideal_liesOver_of_isIntegral\", \"Ideal.isMaximal_of_mem_primesOver\", \"Ideal.IsMaximal.of_liesOver_isMaximal\", \"Ideal.primesOver.liesOver\"], \"digest\": \"91e1a607e3bc42c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the combined residue evaluation test: lying over, maximal ideals above integral extensions and maximality of an evaluation preimage are partial ingredients. None supplies a coordinate and a finite positive-characteristic residue field from an arbitrary proper ideal of the subring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "subalgebra of product of finite integer algebras proper ideal residue evaluation maximal ideal",
+   "results": "{\"t\": \"2026-10-24T02:13:21Z\", \"tool\": \"leansearch\", \"query\": \"subalgebra of product of finite integer algebras proper ideal residue evaluation maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subalgebra.pi\", \"IsLocalRing.ResidueField.instLiesOverMaximalIdeal\", \"Ideal.IsMaximal.comap_piEvalRingHom\", \"Subalgebra.pi_toSubsemiring\", \"Subalgebra.prod\", \"Ideal.bijective_algebraMap_quotient_residueField\", \"instFiniteResidueField\", \"Subalgebra.pi_top\"], \"digest\": \"6c2165d6a09fa525\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the combined residue evaluation test: lying over, maximal ideals above integral extensions and maximality of an evaluation preimage are partial ingredients. None supplies a coordinate and a finite positive-characteristic residue field from an arbitrary proper ideal of the subring."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_comap_evalRingHom_eq",
+   "results": "{\"t\": \"2026-10-24T02:25:30Z\", \"tool\": \"grep\", \"query\": \"exists_comap_evalRingHom_eq\", \"sub\": \"RingTheory/Spectrum/Prime\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\", \"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\", \"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\"], \"digest\": \"c960d76bef28838b\"}",
+   "date": "2026-10-24",
+   "verdict": "partial match: PrimeSpectrum.exists_comap_evalRingHom_eq at RingHom.lean:164 classifies primes of the full finite product. It does not extend a proper ideal of B to the product, establish maximality of its coordinate prime or give a finite residue field. Thus the complete statement remains unsplit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper ideal of a subring of a finite product of rings containing constants is contained in the inverse image of a coordinate maximal ideal with finite residue field when the ring is finite over integers",
+   "results": "{\"t\": \"2026-10-24T03:02:18Z\", \"tool\": \"leanfinder\", \"query\": \"A proper ideal of a subring of a finite product of rings containing constants is contained in the inverse image of a coordinate maximal ideal with finite residue field when the ring is finite over integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\", \"Algebra.QuasiFinite.finite_primesOver\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"PrimeSpectrum.residueField_comap\", \"PrimeSpectrum.residueField_specComap\", \"MaximalSpectrum.finite_of_toPiLocalization_surjective\", \"PrimeSpectrum.exists_maximal_notMem_range_sigmaToPi_of_infinite\"], \"digest\": \"b4dab58a3b35cb22\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; the returned facts address only separate ingredients, as checked against the displayed full statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A field finitely generated as a module over the integers is finite",
+   "results": "{\"t\": \"2026-10-24T03:03:13Z\", \"tool\": \"leansearch\", \"query\": \"A field finitely generated as a module over the integers is finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.finite_of_finite\", \"IntermediateField.finite_of_fg_of_isAlgebraic\", \"RingHom.IsIntegral.to_finite\", \"NumberField.of_module_finite\", \"Module.finite_iff_finite\", \"RingHom.Finite.of_isIntegral_of_finiteType\", \"Module.Finite.finiteType\", \"FiniteField.instFiniteExtension_1\"], \"digest\": \"24ab35047ebbf0a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; the returned facts address only separate ingredients, as checked against the displayed full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*of.*finiteType|finite.*of.*finite_type|finite.*of.*module_finite|finite.*of.*fg|isField.*finite",
+   "results": "{\"t\": \"2026-10-24T03:03:29Z\", \"tool\": \"grep\", \"query\": \"finite.*of.*finiteType|finite.*of.*finite_type|finite.*of.*module_finite|finite.*of.*fg|isField.*finite\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean\", \"Mathlib/FieldTheory/SeparableClosure.lean\", \"Mathlib/FieldTheory/Finite/GaloisField.lean\", \"Mathlib/FieldTheory/Finite/GaloisField.lean\", \"Mathlib/FieldTheory/Finite/GaloisField.lean\", \"Mathlib/FieldTheory/Cardinality.lean\"], \"digest\": \"b56194b50b4ecd37\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; the returned facts address only separate ingredients, as checked against the displayed full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FiniteType, Finite",
+   "results": "{\"t\": \"2026-10-24T03:03:30Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FiniteType, Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Algebra.FiniteType.instFreeAlgebraOfFinite\", \"Algebra.FiniteType.instMvPolynomialOfFinite\", \"Algebra.FiniteType.instSubtypeMemSubalgebraAdjoinOfFiniteElem\", \"Algebra.Generators.finiteType\", \"Algebra.Presentation.instFiniteTypeIntCoreOfFinite\"], \"digest\": \"f6199f3630edb4a4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the five returned finite-type instances do not prove finite cardinality of a field or the coordinate evaluation assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every element of a finite product of a commutative ring A is integral over any intermediate subring containing the constant functions",
+   "results": "{\"t\": \"2026-10-24T03:03:32Z\", \"tool\": \"leanfinder\", \"query\": \"Every element of a finite product of a commutative ring A is integral over any intermediate subring containing the constant functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsIntegral.prod\", \"IsIntegral.prod\", \"IsIntegral.of_finite\", \"RingHom.IsIntegral.of_finite\", \"RingHom.Finite.to_isIntegral\", \"Polynomial.isIntegral_coeff_prod\", \"instIsIntegralMvPolynomial\", \"IsIntegral.pair\"], \"digest\": \"3327cf042ad8f128\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; the returned facts address only separate ingredients, as checked against the displayed full statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field that is finitely generated as a ring over the integers has finitely many elements",
+   "results": "{\"t\": \"2026-10-24T03:03:33Z\", \"tool\": \"leanfinder\", \"query\": \"A field that is finitely generated as a ring over the integers has finitely many elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.hermiteTheorem.finite_of_finite_generating_set\", \"IntermediateField.fg_top_iff\", \"IntermediateField.fg_top\", \"Subfield.fintypeBot\", \"FiniteField.instFiniteExtension\", \"Finite.isField_of_domain\", \"Fintype.fieldOfDomain\", \"IntermediateField.essFiniteType_iff\"], \"digest\": \"86befecbd3adf156\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; the returned facts address only separate ingredients, as checked against the displayed full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "Finite.*ℤ|finite.*Int|finite.*[Ff]ield|[Ff]ield.*finite",
+   "results": "{\"t\": \"2026-10-24T03:03:55Z\", \"tool\": \"grep\", \"query\": \"Finite.*ℤ|finite.*Int|finite.*[Ff]ield|[Ff]ield.*finite\", \"sub\": \"RingTheory/Jacobson\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Jacobson/Ring.lean\", \"Mathlib/RingTheory/Jacobson/Ring.lean\", \"Mathlib/RingTheory/Jacobson/Ring.lean\", \"Mathlib/RingTheory/Jacobson/Ring.lean\"], \"digest\": \"d335fda16270cc83\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite_of_finite_type_of_isJacobsonRing gives module-finiteness, not finite cardinality of an integer-finite field; Step 5 instead uses the existing abelian group structure theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A field K that is a finite module over Z has positive characteristic and is a finite field",
+   "results": "{\"t\": \"2026-10-24T03:04:25Z\", \"tool\": \"leansearch\", \"query\": \"A field K that is a finite module over Z has positive characteristic and is a finite field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.to_charZero\", \"NumberField.instFiniteIntSubtypeMemSubmoduleRingOfIntegersCoeToSubmodule\", \"NumberField.of_module_finite\", \"NumberField.mk\", \"Fintype.fieldOfDomain\", \"Polynomial.IsSplittingField.instFiniteSplittingField\", \"PerfectField.ofCharZero\", \"instCharPGaloisField\"], \"digest\": \"a3d59715c27dcd4e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; the returned facts address only separate ingredients, as checked against the displayed full statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every proper ideal of an intermediate subring between a commutative ring and its finite power vanishes at one coordinate modulo a maximal ideal of the coefficient ring",
+   "results": "{\"t\": \"2026-10-24T03:05:41Z\", \"tool\": \"leanfinder\", \"query\": \"Every proper ideal of an intermediate subring between a commutative ring and its finite power vanishes at one coordinate modulo a maximal ideal of the coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_integral_inj_algHom_of_quotient\", \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\", \"AlgebraicClosure.le_maxIdeal\", \"Ideal.exists_coeff_mem_comap_sdiff_comap_of_root_mem_sdiff\", \"Algebra.exists_aeval_invOf_eq_zero_of_idealMap_adjoin_sup_span_eq_top\", \"Ideal.exist_integer_multiples_notMem\", \"HenselianRing\", \"IsDedekindDomain.exists_representative_mod_finset\"], \"digest\": \"c325382266e3334b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; the returned facts address only separate ingredients, as checked against the displayed full statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-brauer-elementary-unit-character",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited auxiliary representation input under lem-per-artin-gabber-affine-curve, Proof Step 3, via lem-per-brauer-monomial-induction; Expose X Proposition 1.2, printed p.138, before (5). The latest blueprint does not prove this auxiliary input. Specifically: Proper ideals in finite function subrings admit residue evaluation tests.",
+   "via": [
+    "lem-per-brauer-elementary-unit-character",
+    "lem-per-brauer-monomial-induction",
+    "lem-per-cyclotomic-field-brauer-splitting",
+    "lem-per-local-cyclotomic-group-algebra-split",
+    "lem-per-tame-smooth-representation-chart",
+    "lem-per-gabber-fixed-locus-log-chart",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-finite-function-subring-residue-test",
+  "worker": "stage1",
+  "summary": "Q74 retained the statement, definitions, provenance and earlier searches. Proved integrality by the explicit monic product polynomial, applied the existing maximal-ideal, lying-over and product-prime leaves, checked coordinate maximality directly, and deduced residue finiteness from the existing finitely generated abelian group structure theorem. All non-elementary facts are existing nodes; no new node or Lean code.",
+  "blueprint": "Auxiliary algebra under lem-per-artin-gabber-affine-curve, Proof Step 3, inherited through lem-per-brauer-elementary-unit-character. The latest blueprint does not supply this representation-theoretic auxiliary argument; its existing inherited route is unchanged. Steps 1-3 discharge the proper-ideal evaluation input; Steps 4-6 discharge the finite positive-characteristic residue clause.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-8edc6238a",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-8edc6238a (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it unchanged. It is one commit with the item and the report. The item statement and stmt_deps are identical to live and side-live, where the item is still unsplit, so no other group has taken it. No re-split note exists for this item. There are no new nodes, and the 7 earlier searches are kept as a prefix of the 9 added ones. All 8 cited nodes are Mathlib leaves, and I read each one's statement: exists_le_maximal, IsIntegral.comap_surjective, isMaximal_of_isIntegral_of_isMaximal_comap', exists_comap_evalRingHom_eq, Ideal.Quotient.field, the finitely-generated-module and quotient-module definitions, and equiv_free_prod_directSum_zmod. Because they are leaves, the route check is clean and tool_uses is correctly empty. Step 1 proves integrality directly: the product of the factors T minus the constant g(x) is a monic polynomial over B because the constants lie in B. Steps 2-3: the maximal ideal is shown prime, then lying over and prime-over-maximal give P maximal, and P is the evaluation preimage of a prime q. q is shown maximal directly, and f(x) lies in q for every f in I. Steps 4-6: K = A/q is a nonzero field and finitely generated as an additive group. The free rank is ruled out separately in characteristic 2 and otherwise, so K is finite, and its characteristic p is prime by pigeonhole and minimality. I checked the sources against Stacks 00GQ, 00GR and 00GS (algebra.tex:7735-7800). The source and proof_origin fields correctly mark the coordinate and finiteness clauses as agent-written. I tested a singleton X, the diagonal in Z x Z, A = Z/4, and I = 0, and confirmed that I = B, an empty X and A = 0 are excluded. Parent lem-per-brauer-elementary-unit-character step 3 uses exactly the stated conclusions. One minor point, not a fault: Step 1 defines integrality inline instead of citing def-weil-pbc-integral-closure, which matches the meaning spelled out in the lying-over leaf. The review is in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteFunctionSubringResidueTest",
+  "declaration": "Subring.exists_maximal_residue_of_ne_top",
+  "file": "lean/Sheaf/RingTheory/FiniteFunctionSubringResidueTest.lean",
+  "statement": "theorem exists_maximal_residue_of_ne_top {A : Type u} [CommRing A] [Nontrivial A] [Module.Finite ℤ A] {X : Type v} [Finite X] [Nonempty X] (B : Subring (X → A)) (hconst : ∀ a : A, (fun _ : X ↦ a) ∈ B) (I : Ideal B) (hI : I ≠ ⊤) : ∃ (x : X) (q : Ideal A), q.IsMaximal ∧ (∀ f : B, f ∈ I → (f : X → A) x ∈ q) ∧ IsField (A ⧸ q) ∧ Finite (A ⧸ q) ∧ Nontrivial (A ⧸ q) ∧ ∃ p : ℕ, Nat.Prime p ∧ CharP (A ⧸ q) p",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a306be5a7",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Read the item node, both stmt_deps (Module.Finite, Submodule.hasQuotient) and the delivered module. Every clause matches: Nontrivial CommRing A with Module.Finite ℤ A; Finite and Nonempty X; B : Subring (X → A) with constants; I ≠ ⊤; ∃ x q maximal with ∀ f ∈ I, f x ∈ q; IsField, Finite and Nontrivial A ⧸ q; ∃ prime p with CharP. No extra assumptions; independent universes u and v; lean.statement verbatim. The node record differs from side-live only in the lean field, which is unset in live and side-live. Name and module absent from side-live lean, DAG nodes and Mathlib. The statement is true by the six-step proof (integrality, lying over, prime over maximal, product primes, f.g. field finite), which is in the docstring. Edge cases checked: singleton X, I = 0, A = ℤ/4; I = ⊤, empty X and A = 0 excluded. The citer brauer-elementary-unit-character step 3 is served. No defs, only sorry, docstrings with source and blueprint, report has both sections. No file changed, so no compile; relied on the worker's scompile evidence."
+ }
+}

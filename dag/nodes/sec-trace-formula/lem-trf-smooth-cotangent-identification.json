@@ -21,29 +21,19 @@
  "status": "split",
  "proof": [
   {
-   "text": "Use the standard-resolution convention of [lem-trf-cotangent-resolution-coherence]. Let $Q_\\bullet$ be the constant simplicial $A$-algebra on $P=A[x_e\\mid e\\in E]$, augmented to $P$ by the identity. Each term is a polynomial $A$-algebra and its augmentation is surjective. All faces are identities, so on the alternating-face complex the differential from degree $-n$ to degree $-n+1$ is $\\sum_{i=0}^n(-1)^i\\mathrm{id}$: it is $0$ for odd $n$ and the identity for positive even $n$. Consequently $s(Q_\\bullet)\\to P[0]$ has identity on $H^0$ and zero negative cohomology (each negative degree belongs to a two-term identity pair). This verifies, directly, every condition for a polynomial resolution in the cited node, without assuming any finiteness of $E$.",
+   "text": "Apply [lem-trf-constant-polynomial-resolution-retraction] to $P=A[x_e\\mid e\\in E]$. It supplies the constant polynomial resolution $Q_\\bullet\\to P$, its differential complex $K$, the augmentation homotopy equivalence $a:K\\to M[0]$ with $M=\\Omega^1_{P/A}$, and the standard evaluation map $v$ with $av$ equal to the canonical differential augmentation. By the resolution-comparison isomorphisms and naturality in [lem-trf-cotangent-resolution-coherence], write $\\gamma_Q:K\\simeq L_{P/A}$ and $\\gamma_{\\mathrm{std}}:L_{P/A}\\simeq L_{P/A}$ for the comparisons. Naturality gives $\\gamma_Q\\,Q(v)=\\gamma_{\\mathrm{std}}$, so $Q(v)=\\gamma_Q^{-1}\\gamma_{\\mathrm{std}}$ is an isomorphism. Thus $av$ is an isomorphism in $D(P)$, proving the polynomial clause with the specified augmentation, for any set $E$.",
    "uses": [
-    "lem-trf-cotangent-resolution-coherence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08QI (remark-resolution), constant polynomial resolution used in Tags 08QG (lemma-pi-lower-shriek-polynomial-algebra) and 08QH (lemma-cotangent-complex-polynomial-algebra)."
-   }
-  },
-  {
-   "text": "Apply the comparison for polynomial resolutions in [lem-trf-cotangent-resolution-coherence] to $Q_\\bullet\\to P$. Put $M=\\Omega^1_{P/A}$. The resulting differential complex is the alternating-face complex of the constant simplicial $P$-module $M$, since $\\Omega^1_{Q_n/A}\\otimes_{Q_n}P=M$ and all structure maps are identities. Its augmentation $a:s(M)\\to M[0]$ is the identity in degree zero. More explicitly, let $j:M[0]\\to s(M)$ be the identity in degree zero and let $h^{-n}:s(M)^{-n}\\to s(M)^{-n-1}$ be the identity for odd $n\\geq1$ and zero for even $n\\geq0$. The differential formula in Step 1 gives $dh+hd=1-ja$, and $aj=1$. Thus $a$ is a homotopy equivalence. The degreewise evaluation maps from the standard resolution to the constant resolution send $\\mathrm dq\\otimes p$ to $p\\,\\mathrm d(\\epsilon(q))$; composed with $a$ they are exactly the augmentation to universal differentials. The natural comparison for this morphism of polynomial resolutions therefore identifies the canonical augmentation $L_{P/A}\\to M[0]$ with this isomorphism. This proves the first clause with its specified map.",
-   "uses": [
+    "lem-trf-constant-polynomial-resolution-retraction",
     "lem-trf-cotangent-resolution-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tags 08QI (remark-resolution), 08QL (section-functoriality), 08QH (lemma-cotangent-complex-polynomial-algebra); constant-complex contraction written out."
+    "place": "Tags 08QG (lemma-pi-lower-shriek-polynomial-algebra), 08QH (lemma-cotangent-complex-polynomial-algebra), 08QI (remark-resolution), and 08QL (section-functoriality): explicit constant-resolution contraction and evaluation formulas from returned proof Steps 1--2."
    }
   },
   {
-   "text": "The arbitrary-variable basis theorem [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] identifies $M$ with $\\bigoplus_{e\\in E}P\\,\\mathrm dx_e$, and gives $\\mathrm dg=\\sum_e(\\partial g/\\partial x_e)\\,\\mathrm dx_e$ with finite support. In particular the degree-zero object just obtained has precisely this differential basis. For a localization $C=T^{-1}P$, the same node gives the base-changed basis $(1\\otimes\\mathrm dx_e)_{e\\in E}$ in $C\\otimes_PM$. No finite-rank assertion is made when $E$ is infinite.",
+   "text": "By [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables], $M=\\bigoplus_{e\\in E}P\\,\\mathrm dx_e$, and $\\mathrm dg=\\sum_e(\\partial g/\\partial x_e)\\,\\mathrm dx_e$ with finite support. For $C=T^{-1}P$, its base-changed basis is $(1\\otimes\\mathrm dx_e)_{e\\in E}$ in $C\\otimes_PM$. This records the differential basis without asserting finite rank for infinite $E$.",
    "uses": [
     "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
    ],
@@ -54,24 +44,21 @@
    }
   },
   {
-   "text": "Let $T\\subseteq P$ be any multiplicative subset and put $C=T^{-1}P$. The ring-localization clause of [lem-trf-affine-cotangent-comparison], applied with the bottom multiplicative subset $\\{1\\}\\subseteq A$, gives the canonical quasi-isomorphism $L_{P/A}\\otimes_PC\\to L_{C/A}$. Localization is exact by [lem-weil-pbc-localization-module-exact], so it preserves the augmentation quasi-isomorphism of Step 2: apply exactness to kernels and images of the differentials to identify localized cohomology with cohomology of the localized complex. Here tensor with $C$ is localization: the mutually inverse maps are $m\\otimes(p/t)\\mapsto pm/t$ and $m/t\\mapsto m\\otimes(1/t)$; the fraction equivalence and tensor balancing verify these formulas. Hence $L_{C/A}\\simeq(T^{-1}M)[0]$. Finally [lem-weil-pbc-kahler-differentials-localization] identifies $T^{-1}M$ with $\\Omega^1_{C/A}$ by $\\mathrm dp/t\\mapsto t^{-1}\\mathrm d(p/1)$. Both augmentations commute with this map, since on a differential generator both composites send $\\mathrm dq\\otimes(p/t)$ to $(p/t)\\,\\mathrm d(\\epsilon(q)/1)$. Thus the localized description uses the canonical augmentation, and the basis of Step 3 becomes $(\\mathrm d(x_e/1))_{e\\in E}$. This proves the localization clause for arbitrary $T$.",
+   "text": "For any multiplicative subset $T\\subseteq P$, apply [lem-trf-cotangent-augmentation-localization] to $A\\to B=P$. Step 1 verifies its sole conditional hypothesis, that the canonical $a_P$ is a quasi-isomorphism. It gives the quasi-isomorphism $\\kappa^{-1}[0]a_C:L_{C/A}\\to(T^{-1}M)[0]$ for $C=T^{-1}P$. The lemma's commuting square and generator formula identify this as the localized canonical augmentation, including arbitrary $T$. Under its map $\\kappa$, the basis in Step 2 becomes $(\\mathrm d(x_e/1))_{e\\in E}$, proving the asserted localized description.",
    "uses": [
-    "lem-trf-affine-cotangent-comparison",
-    "lem-weil-pbc-localization-module-exact",
-    "lem-weil-pbc-kahler-differentials-localization"
+    "lem-trf-cotangent-augmentation-localization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
-    "place": "cotangent.tex Tag 08SF (lemma-localize); algebra.tex Tags 00CS (proposition-localization-exact), 00DK (lemma-tensor-localization), 00RT (lemma-differentials-localize), part (2)."
+    "place": "Tag 08SF (lemma-localize), together with algebra.tex Tags 00CS (proposition-localization-exact), 00DK (lemma-tensor-localization), and 00RT (lemma-differentials-localize), part (2): localization of the specified differential augmentation, returned Step 4."
    }
   }
  ],
  "proof_deps": [
-  "lem-trf-affine-cotangent-comparison",
+  "lem-trf-constant-polynomial-resolution-retraction",
+  "lem-trf-cotangent-augmentation-localization",
   "lem-trf-cotangent-resolution-coherence",
-  "lem-weil-pbc-kahler-differentials-localization",
-  "lem-weil-pbc-localization-module-exact",
   "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
  ],
  "proof_origin": {
@@ -225,19 +212,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-smooth-cotangent-identification",
   "worker": "stage1",
-  "summary": "Preserved the statement and its hypotheses. Proved the polynomial case by the constant polynomial resolution and an explicit contraction, identified the specified augmentation by evaluation, and proved the arbitrary-localization clause with existing cotangent-localization, exact-localization and differential-localization nodes. Reused the arbitrary-variable differential-basis Mathlib leaf; created no nodes. No exact project Lean attachment or whole-statement Mathlib match found.",
-  "blueprint": "Retains the inherited lem-trf-local-term-locality ancestry and the existing sk-i-curve-zero binding. Supplies exactly the polynomial/localized-polynomial input used in lem-trf-lci-cotangent-presentation Steps 2, 3 and 10 on the historical semistable-modification support branch; expands Stacks 08QH/08SF below the unit without changing its route."
+  "summary": "Repair of the human-requested batch5 re-split: extracted two independent, comparable statement-only unsplit nodes, for constant polynomial resolution/contraction/evaluation and for localization of differential augmentations. Retained every formula and argument of the returned proof in the report and exposed their conclusions in the new statements. Parent statement and all inherited records unchanged; its proof is now a short assembly. Rebased the retained split after L's landing refusal onto the current DAG using the delivery tool: the archived original still equals the current item; re-read all current statement and proof dependencies and retained valid citations. Made the resolution-comparison naturality equation explicit in the assembly proof.",
+  "blueprint": "Retains the inherited lem-trf-local-term-locality ancestry and the existing sk-i-curve-zero binding. Supplies exactly the polynomial/localized-polynomial input used in lem-trf-lci-cotangent-presentation Steps 2, 3 and 10 on the historical semistable-modification support branch; expands Stacks 08QH/08SF below the unit without changing its route. The constant-resolution subnode realizes former Steps 1--2; the augmentation-localization subnode realizes former Step 4; the existing basis leaf still realizes former Step 3."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-N0-2f53a180c",
-  "group": "N0",
+  "reviewer": "NT-cc-Q08-7ac621c21",
+  "group": "Q08",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N0-2f53a180c (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited sources; all four steps, canonical augmentation, arbitrary localization, edge cases, and route restrictions check out. Corrected two failed Loogle-query verdicts from “no match” to “unavailable”; no mathematical changes. Full review in review.md and corrected JSON under fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-7ac621c21 (reviewer sub-agent of L); spot-checked: Re-delivery of the batch5 re-split, sent back only because the landing refused the PASSed head 2051dfc (ledger 07:24: 'side completion never promoted; L promotes it'). That is a fault of the promotion tooling, not of this delivery; maintainer note: promote the side completion rather than redispatch. Live and side-live still hold the old 4-step item and neither new node exists there, so nothing supersedes this delivery. The released repair note asks for at least 2 nodes and a proof of at most 3000 chars. Diff against 2051dfc: both new nodes are identical; the item differs only in the Step 1 text, which now writes out gamma_Q Q(v)=gamma_std, and in the split_report summary. The statement, stmt_deps and lean record are unchanged. Old Steps 1-2 are now the statement of new node 1 (lem-trf-constant-polynomial-resolution-retraction). I checked its alternating differentials (0 for odd n, id for even n>=2), dh+hd=1-ja in degrees 0, -1, -2 and -3, aj=1, that v is simplicial because eps∘d_i=eps, and that av is the canonical augmentation (a chain map since eps_0 d_0=eps_0 d_1). Old Step 3 stays in the parent through the any-variables Kähler basis leaf. Old Step 4 is now new node 2 (lem-trf-cotangent-augmentation-localization), stated for any A->B and T. On generators dq⊗(b/t) both a_C∘lambda and kappa∘(a_B⊗C) give (b/t)d(eps(q)/1); terms of L are free, localization is exact, and the conditional conclusion follows. Parent: 3 steps, about 1.7k chars; Step 1 is correct by naturality of the comparisons in lem-trf-cotangent-resolution-coherence. The two new statements are 1819 and 1907 chars and neither restates the item. Edge cases checked: E empty or infinite, A=0, T={1}, 0 in T. Sources read: Stacks cotangent.tex 08QH (l.415), 08QI (l.667), 08SF (l.1660), and algebra.tex 00CS, 00DK and 00RT. No SGA, no duplicate in a DAG-wide grep, no cycle, everything in unit sk-i-curve-zero, no tool_uses. Advisory: node 2 also restates the lambda clause of lem-trf-affine-cotangent-comparison and the kappa isomorphism of the 00RT leaf; its future proof should cite them. No fixes."
  },
  "lean": {
   "module": "Sheaf.RingTheory.PolynomialCotangentIdentification",
@@ -262,5 +249,16 @@
   "result": "pass",
   "note": "Snapshot node differs from live only in lean; statement verbatim; nt_compile --json clean (3.3 s, exit 0, no errors or warnings). Clauses match Stacks 08QH/08SF: arbitrary A and E (same universe u, as the dependency's Coherence.{u} interface requires and the report states), standard cotangent complex from the recorded Coherence, augmentation pinned on all degree-0 generators b⊗dx ↦ b·d(εx) so it is the unique canonical chain map (exists since εd0=εd1), IsIso in D(P); localization clause for every Submonoid T via eqToIso along toAlgebra_algebraMap and Mathlib tensorKaehlerEquivOfFormallyEtale.symm. Edge cases: E empty or infinite, A=0, T=⊥, 0∈T all covered. No duplicate in Mathlib or side; docstrings carry source place, blueprint tag and all 4 proof steps; sorry only in the theorem proof. Advisory: unused proof-only imports; second reading is the author's own pass; the title's 'basis' is proof-only."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

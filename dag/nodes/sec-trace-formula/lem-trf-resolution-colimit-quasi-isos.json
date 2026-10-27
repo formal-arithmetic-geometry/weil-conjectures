@@ -1,0 +1,413 @@
+{
+ "id": "lem-trf-resolution-colimit-quasi-isos",
+ "kind": "statement",
+ "title": "Quasi-isomorphisms between colimits of resolving towers survive the functor",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian] with cochain, homotopy and derived categories [def-weil-abstract-derived-category] in an ambient universe. Assume sequential colimits exist in both categories and preserve short exact sequences of diagrams in $\\mathcal B$ [def-weil-pbc-category-colimit]. Let $F:\\mathcal A\\to\\mathcal B$ be additive and preserve sequential colimits. Let $\\mathcal P$ contain $0$, be closed under finite direct sums, and cover every object of $\\mathcal A$ by an epimorphism from an object of $\\mathcal P$. Suppose $F(C)$ is acyclic for every bounded above acyclic complex $C$ with terms in $\\mathcal P$. Define $\\overline{\\mathcal P}$ as the class of objects isomorphic to objects of $\\mathcal P$. For each $n\\ge1$, let $E_n,G_n$ be bounded above complexes with terms in $\\overline{\\mathcal P}$ and transitions $u_n:E_n\\to E_{n+1}$ and $v_n:G_n\\to G_{n+1}$. Suppose compatible cocones $e_n:E_n\\to X$ and $g_n:G_n\\to Y$ exhibit $X,Y$ as their respective termwise sequential colimits. Assume $H^j(E_n)=H^j(G_n)=0$ for $j>n$, and $H^j(e_n),H^j(g_n)$ are isomorphisms for $j\\le n$. Then for every quasi-isomorphism $\\alpha:X\\to Y$, the chain map $F(\\alpha):F(X)\\to F(Y)$ is a quasi-isomorphism. The morphism $\\alpha$ is arbitrary; it need not be induced by a map of the two towers.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0794, proposition-left-derived-exists, first-paragraph cone argument and the claim beginning “Suppose that”, through the final cohomology-colimit calculation. Includes transfer of the acyclicity assumption to the isomorphism closure."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "The class $\\overline{\\mathcal P}$ contains zero, is closed under isomorphisms and finite biproducts, and still covers every object by an epimorphism. For an acyclic bounded above $\\overline{\\mathcal P}$-complex $C$, choose degreewise isomorphisms $a^r:P^r\\simeq C^r$ with $P^r\\in\\mathcal P$, choosing $P^r=0$ above a bound. Give $P$ differential $(a^{r+1})^{-1}d_C^ra^r$. These differentials square to zero and $a:P\\simeq C$ is a complex isomorphism. Functoriality of cohomology [def-weil-abstract-derived-category] makes $P$ acyclic. The hypothesis makes $F(P)$ acyclic, and the complex isomorphism $F(a)$ makes $F(C)$ acyclic. For closure under sums, if $M\\simeq P$ and $N\\simeq Q$, the biproduct of these isomorphisms identifies $M\\oplus N$ with $P\\oplus Q\\in\\mathcal P$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, first paragraph and proof of the claim, ending with the cohomology-colimit calculation."
+   }
+  },
+  {
+   "text": "Let $s:C\\to D$ be any quasi-isomorphism between bounded above $\\overline{\\mathcal P}$-complexes. By [lem-pur-quasi-iso-cone-acyclic], its cone is acyclic. The cone formula in [def-weil-abstract-derived-category] gives terms $D^r\\oplus C^{r+1}$, so this cone is bounded above and has terms in $\\overline{\\mathcal P}$. Step 1 makes $F(C(s))$ acyclic. An additive functor preserves the finite biproduct with its inclusions and projections; under $F(D^r\\oplus C^{r+1})\\simeq F(D^r)\\oplus F(C^{r+1})$, the differential matrix becomes $\\begin{pmatrix}F(d_D)&F(s)\\\\0&-F(d_C)\\end{pmatrix}$. Hence $F(C(s))\\simeq C(F(s))$, and a second application of [lem-pur-quasi-iso-cone-acyclic] shows that $F(s)$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, first paragraph and proof of the claim, ending with the cohomology-colimit calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-bounded-stage-roof-comparison] to $\\overline{\\mathcal P}$ and $F$. Step 1 verifies the zero, isomorphism, finite-biproduct and epimorphic-cover assumptions; Step 2 verifies preservation of quasi-isomorphisms between bounded above complexes in this class. All the tower, augmentation, vanishing and cohomology-isomorphism assumptions are precisely the hypotheses of the present item. For the given arbitrary quasi-isomorphism $\\alpha$, obtain isomorphisms $\\theta_n^i:H^i(F(E_n))\\simeq H^i(F(G_n))$ with $\\theta_{n+1}^iH^i(F(u_n))=H^i(F(v_n))\\theta_n^i$ and $H^i(F(g_n))\\theta_n^i=H^i(F(\\alpha))H^i(F(e_n))$. This invocation does not require a morphism of towers inducing $\\alpha$.",
+   "uses": [
+    "lem-trf-bounded-stage-roof-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, first paragraph and proof of the claim, ending with the cohomology-colimit calculation."
+   }
+  },
+  {
+   "text": "The cocones $F(e_n)$ and $F(g_n)$ are termwise sequential colimits because $F$ preserves such colimits. They are also colimits of complexes: the universal degreewise maps commute with differentials since they do so after precomposition with every cocone leg, which jointly determine maps by [def-weil-pbc-category-colimit]. Apply [src-weil-homology-preserves-exact-colimits] in $\\mathcal B$, with index category the small ordered set of positive integers and cochain shape $\\mathbf Z$. Its existence and exactness hypotheses are exactly the assumed sequential-colimit hypotheses in $\\mathcal B$. Thus $H^i(F(X))$ and $H^i(F(Y))$, with legs $H^i(F(e_n))$ and $H^i(F(g_n))$, are colimits of the two cohomology diagrams for every $i$. No exactness of sequential colimits in $\\mathcal A$ is used.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "src-weil-homology-preserves-exact-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, first paragraph and proof of the claim, ending with the cohomology-colimit calculation."
+   }
+  },
+  {
+   "text": "Fix $i$. The compatible inverses of the isomorphisms in Step 3 satisfy $H^i(F(u_n))(\\theta_n^i)^{-1}=(\\theta_{n+1}^i)^{-1}H^i(F(v_n))$. By the colimit universal property [def-weil-pbc-category-colimit] and Step 4, the compatible legs $H^i(F(e_n))(\\theta_n^i)^{-1}$ define $\\beta_i:H^i(F(Y))\\to H^i(F(X))$. Step 3's augmentation identity implies $\\beta_iH^i(F(\\alpha))H^i(F(e_n))=H^i(F(e_n))$ and $H^i(F(\\alpha))\\beta_iH^i(F(g_n))=H^i(F(g_n))$. Colimit uniqueness gives $\\beta_iH^i(F(\\alpha))=1$ and $H^i(F(\\alpha))\\beta_i=1$. Therefore every $H^i(F(\\alpha))$ is invertible, which is the definition of a quasi-isomorphism [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, first paragraph and proof of the claim, ending with the cohomology-colimit calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-trf-bounded-stage-roof-comparison",
+  "def-weil-pbc-category-colimit",
+  "src-weil-homology-preserves-exact-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0794, proposition-left-derived-exists, first paragraph and proof of the claim, ending with the cohomology-colimit calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserving sequential colimits and bounded above acyclic resolving-class complexes sends quasi-isomorphisms between colimits of truncation resolution towers to quasi-isomorphisms",
+   "results": {
+    "t": "2026-10-22T06:48:53Z",
+    "tool": "leanfinder",
+    "query": "An additive functor preserving sequential colimits and bounded above acyclic resolving-class complexes sends quasi-isomorphisms between colimits of truncation resolution towers to quasi-isomorphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app",
+     "HomologicalComplex.quasiIsoAt_map_of_preservesHomology",
+     "HomologicalComplex.quasiIsoAt_map_iff_of_preservesHomology",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc",
+     "HomologicalComplex.quasiIso_map_iff_of_preservesHomology",
+     "HomologicalComplex.quasiIso_map_of_preservesHomology"
+    ],
+    "digest": "387eff6b54c1ca9a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned mapHomologicalComplexUpToQuasiIso declarations and quasiIso_map_of_preservesHomology assume F.PreservesHomology, which is not assumed here. The theorem applies only to resolving-tower colimits and must derive bounded-stage preservation and use compatible roofs. The exact-functor candidate requires finite limits as well as finite colimits; additivity and sequential-colimit preservation do not supply it. Read QuasiIso.lean:247-285 and Localization.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiIso\", \"PreservesColimitsOfShape\"",
+   "results": {
+    "t": "2026-10-22T06:48:40Z",
+    "tool": "loogle",
+    "query": "\"QuasiIso\", \"PreservesColimitsOfShape\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned mapHomologicalComplexUpToQuasiIso declarations and quasiIso_map_of_preservesHomology assume F.PreservesHomology, which is not assumed here. The theorem applies only to resolving-tower colimits and must derive bounded-stage preservation and use compatible roofs. The exact-functor candidate requires finite limits as well as finite colimits; additivity and sequential-colimit preservation do not supply it. Read QuasiIso.lean:247-285 and Localization.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*colimit|colimit.*quasiIso|map.*quasiIso",
+   "results": {
+    "t": "2026-10-22T06:48:40Z",
+    "tool": "grep",
+    "query": "quasiIso.*colimit|colimit.*quasiIso|map.*quasiIso",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/QuasiIso.lean",
+     "Mathlib/Algebra/Homology/QuasiIso.lean",
+     "Mathlib/Algebra/Homology/QuasiIso.lean",
+     "Mathlib/Algebra/Homology/QuasiIso.lean",
+     "Mathlib/Algebra/Homology/QuasiIso.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean"
+    ],
+    "digest": "ae190e96adc62a26"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned mapHomologicalComplexUpToQuasiIso declarations and quasiIso_map_of_preservesHomology assume F.PreservesHomology, which is not assumed here. The theorem applies only to resolving-tower colimits and must derive bounded-stage preservation and use compatible roofs. The exact-functor candidate requires finite limits as well as finite colimits; additivity and sequential-colimit preservation do not supply it. Read QuasiIso.lean:247-285 and Localization.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Preservation of quasi-isomorphisms on direct limits of bounded above resolving-class truncation resolutions by an additive functor",
+   "results": {
+    "t": "2026-10-22T06:49:34Z",
+    "tool": "leansearch",
+    "query": "Preservation of quasi-isomorphisms on direct limits of bounded above resolving-class truncation resolutions by an additive functor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.quasiIsoAt_map_of_preservesHomology",
+     "HomologicalComplex.quasiIso_map_of_preservesHomology",
+     "CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology",
+     "HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory",
+     "CategoryTheory.Functor.mapDerivedCategory",
+     "CategoryTheory.Functor.instAdditiveOfIsHomological",
+     "CategoryTheory.Functor.preservesHomologyOfExact",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso"
+    ],
+    "digest": "848b84ba1480bb62"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned mapHomologicalComplexUpToQuasiIso declarations and quasiIso_map_of_preservesHomology assume F.PreservesHomology, which is not assumed here. The theorem applies only to resolving-tower colimits and must derive bounded-stage preservation and use compatible roofs. The exact-functor candidate requires finite limits as well as finite colimits; additivity and sequential-colimit preservation do not supply it. Read QuasiIso.lean:247-285 and Localization.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spaltenstein resolution towers: a functor preserves quasi-isomorphisms between their direct limits even when the morphism does not lift to a morphism of towers",
+   "results": {
+    "t": "2026-10-22T06:49:44Z",
+    "tool": "leanfinder",
+    "query": "Spaltenstein resolution towers: a functor preserves quasi-isomorphisms between their direct limits even when the morphism does not lift to a morphism of towers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors",
+     "CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso",
+     "CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism_functor",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso"
+    ],
+    "digest": "f1e621a1714cbe1c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned mapHomologicalComplexUpToQuasiIso declarations and quasiIso_map_of_preservesHomology assume F.PreservesHomology, which is not assumed here. The theorem applies only to resolving-tower colimits and must derive bounded-stage preservation and use compatible roofs. The exact-functor candidate requires finite limits as well as finite colimits; additivity and sequential-colimit preservation do not supply it. Read QuasiIso.lean:247-285 and Localization.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*colimit|colimit.*quasiIso|map.*quasiIso",
+   "results": {
+    "t": "2026-10-23T14:48:36Z",
+    "tool": "grep",
+    "query": "quasiIso.*colimit|colimit.*quasiIso|map.*quasiIso",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/Localization.lean",
+     "Mathlib/Algebra/Homology/Localization.lean",
+     "Mathlib/Algebra/Homology/Localization.lean",
+     "Mathlib/Algebra/Homology/Localization.lean",
+     "Mathlib/Algebra/Homology/Localization.lean",
+     "Mathlib/Algebra/Homology/Opposite.lean",
+     "Mathlib/Algebra/Homology/Opposite.lean",
+     "Mathlib/Algebra/Homology/Opposite.lean"
+    ],
+    "digest": "43560f41635d846f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected QuasiIso.lean:247-285 and Localization.lean:337-355; candidates require F.PreservesHomology on all complexes, which is absent here. Exact-functor results require finite limits and finite colimits. None proves the resolving-tower criterion or is its one-line generalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiIso\", \"PreservesColimitsOfShape\"",
+   "results": {
+    "t": "2026-10-23T14:48:37Z",
+    "tool": "loogle",
+    "query": "\"QuasiIso\", \"PreservesColimitsOfShape\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected QuasiIso.lean:247-285 and Localization.lean:337-355; candidates require F.PreservesHomology on all complexes, which is absent here. Exact-functor results require finite limits and finite colimits. None proves the resolving-tower criterion or is its one-line generalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Preservation of quasi-isomorphisms on direct limits of bounded above resolving-class truncation resolutions by an additive functor",
+   "results": {
+    "t": "2026-10-23T14:48:37Z",
+    "tool": "leansearch",
+    "query": "Preservation of quasi-isomorphisms on direct limits of bounded above resolving-class truncation resolutions by an additive functor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.quasiIsoAt_map_of_preservesHomology",
+     "HomologicalComplex.quasiIso_map_of_preservesHomology",
+     "CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology",
+     "HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory",
+     "CategoryTheory.Functor.mapDerivedCategory",
+     "CategoryTheory.Functor.instAdditiveOfIsHomological",
+     "CategoryTheory.Functor.preservesHomologyOfExact",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso"
+    ],
+    "digest": "848b84ba1480bb62"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected QuasiIso.lean:247-285 and Localization.lean:337-355; candidates require F.PreservesHomology on all complexes, which is absent here. Exact-functor results require finite limits and finite colimits. None proves the resolving-tower criterion or is its one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserving sequential colimits and bounded above acyclic resolving-class complexes sends quasi-isomorphisms between colimits of truncation resolution towers to quasi-isomorphisms",
+   "results": {
+    "t": "2026-10-23T14:48:44Z",
+    "tool": "leanfinder",
+    "query": "An additive functor preserving sequential colimits and bounded above acyclic resolving-class complexes sends quasi-isomorphisms between colimits of truncation resolution towers to quasi-isomorphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism",
+     "CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh",
+     "CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app",
+     "HomologicalComplex.quasiIso_map_of_preservesHomology"
+    ],
+    "digest": "5f57ba09e2388299"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected QuasiIso.lean:247-285 and Localization.lean:337-355; candidates require F.PreservesHomology on all complexes, which is absent here. Exact-functor results require finite limits and finite colimits. None proves the resolving-tower criterion or is its one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spaltenstein resolution towers: a functor preserves quasi-isomorphisms between their direct limits even when the morphism does not lift to a morphism of towers",
+   "results": {
+    "t": "2026-10-23T14:51:18Z",
+    "tool": "leanfinder",
+    "query": "Spaltenstein resolution towers: a functor preserves quasi-isomorphisms between their direct limits even when the morphism does not lift to a morphism of towers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso",
+     "CategoryTheory.Functor.instLiftingHomotopyCategoryHomologicalComplexUpToQuasiIsoQhQuasiIsoCompMapHomotopyCategoryMapHomologicalComplexUpToQuasiIso",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app",
+     "CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso"
+    ],
+    "digest": "60305e41d704ca3a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected QuasiIso.lean:247-285 and Localization.lean:337-355; candidates require F.PreservesHomology on all complexes, which is absent here. Exact-functor results require finite limits and finite colimits. None proves the resolving-tower criterion or is its one-line generalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-unbounded-left-derived-criterion",
+  "date": "2026-10-22",
+  "group": "Q151"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Supporting input: Unbounded existence of the left derived lower shriek: the five hypotheses checked in the proof of sites-cohomology lemma-existence-derived-lower-shriek. Re-split of the Stacks 0794 supporting input: Tag 0794, proposition-left-derived-exists, first-paragraph cone argument and the claim beginning “Suppose that”, through the final cohomology-colimit calculation. Includes transfer of the acyclicity assumption to the isomorphism closure.",
+   "via": [
+    "lem-trf-unbounded-left-derived-criterion",
+    "lem-trf-continuous-cocontinuous-derived-shriek",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-resolution-colimit-quasi-isos",
+  "worker": "stage1",
+  "summary": "Conjugated differentials transfer the acyclicity assumption to the isomorphism closure; cones establish bounded-stage preservation. The existing bounded-stage roof-comparison lemma handles arbitrary quasi-isomorphisms, and exact sequential colimits in the target identify the induced isomorphism with H^i(F(alpha)). No new nodes and no statement changes.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Supporting input: Unbounded existence of the left derived lower shriek: the five hypotheses checked in the proof of sites-cohomology lemma-existence-derived-lower-shriek. Re-split of the Stacks 0794 supporting input: Tag 0794, proposition-left-derived-exists, first-paragraph cone argument and the claim beginning “Suppose that”, through the final cohomology-colimit calculation. Includes transfer of the acyclicity assumption to the isomorphism closure.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic mapping-cone criterion for quasi-isomorphisms, used twice in the bounded-stage argument; the curve-local-term unit has no replacement for this homological tool."
+   },
+   {
+    "node": "src-weil-homology-preserves-exact-colimits",
+    "why": "Generic exact-colimit/cohomology interchange in the target abelian category, specialized to positive-integer diagrams; this does not replace any geometric unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-quasi-iso-cone-acyclic",
+  "src-weil-homology-preserves-exact-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-a3a5f2322",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-a3a5f2322 (reviewer sub-agent of L); spot-checked: Read Stacks derived.tex Tag 0794 proposition-left-derived-exists, lines 9333-9442. The item states the Claim at 9383-9394, plus the first-paragraph cone argument, and asks for exact colimits only in B. Its statement is unchanged from the live base, and there is no repair note, so the re-split rule does not apply. There are no new nodes. Step 1 (elementary): conjugating the differentials moves the acyclicity hypothesis to the isomorphism closure P-bar, and P-bar keeps zero, biproducts and the epimorphic cover. Step 2: lem-pur-quasi-iso-cone-acyclic in both directions, with the cone formula C(f)^r=L^r+K^{r+1} from def-weil-abstract-derived-category; an additive F gives F(C(s)) iso to C(F(s)), so F preserves quasi-isomorphisms between bounded-above P-bar complexes. Step 3: every hypothesis of lem-trf-bounded-stage-roof-comparison checked (P-bar iso-closed, quasi-isomorphism preservation from step 2, towers, augmentations, the j>n and j<=n conditions, alpha arbitrary). Its output, theta_n with both identities, is exactly what the step uses. That node assumes no colimits, so it is strictly smaller than the item, and its proof_deps do not lead back to the item (no cycle). Step 4: the termwise colimit cocone is a colimit of complexes by uniqueness from the colimit definition, and src-weil-homology-preserves-exact-colimits applies with I = positive integers and shape Z in B; 'preserves short exact sequences' equals 'exact' because colim is already right exact. Step 5: checked the cocone condition for the legs H(Fe_n)theta_n^-1, both inverse identities after composing with the legs, and colimit uniqueness, so every H^i(F alpha) is invertible. proof_deps equal the union of the uses. A DAG search for 0794, resolving towers and the citers found no duplicate. Accepted the two generic tool_uses (cone-acyclic, homology-preserves-exact-colimits). No SGA source. Small cases: F=0, F=id with alpha=id, P={0}, a single-degree complex, and tensoring with Z/2 on free abelian groups. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ResolutionColimitQuasiIsos",
+  "declaration": "CategoryTheory.Functor.resolution_colimit_quasiIso",
+  "file": "lean/Sheaf/Algebra/Homology/ResolutionColimitQuasiIsos.lean",
+  "statement": "theorem resolution_colimit_quasiIso {A : Type uA} [Category.{vA} A] [Abelian A] {B : Type uB} [Category.{vB} B] [Abelian B] [HasColimitsOfShape ℕ A] [HasColimitsOfShape ℕ B] [HasExactColimitsOfShape ℕ B] (F : A ⥤ B) [F.Additive] [PreservesColimitsOfShape ℕ F] (P : A → Prop) (hzero : P (0 : A)) (hsum : ∀ (M N : A), P M → P N → P (M ⊞ N)) (hcover : ∀ M : A, ∃ (N : A) (p : N ⟶ M), P N ∧ Epi p) (hF : ∀ K : CochainComplex A ℤ, (∃ b : ℤ, ∀ j : ℤ, b < j → IsZero (K.X j)) → (∀ j : ℤ, P (K.X j)) → K.Acyclic → ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K).Acyclic) (E G : ℕ ⥤ CochainComplex A ℤ) (hEbound : ∀ k : ℕ, ∃ b : ℤ, ∀ j : ℤ, b < j → IsZero ((E.obj k).X j)) (hGbound : ∀ k : ℕ, ∃ b : ℤ, ∀ j : ℤ, b < j → IsZero ((G.obj k).X j)) (hEterms : ∀ (k : ℕ) (j : ℤ), ∃ M : A, P M ∧ Nonempty (M ≅ (E.obj k).X j)) (hGterms : ∀ (k : ℕ) (j : ℤ), ∃ M : A, P M ∧ Nonempty (M ≅ (G.obj k).X j)) (X Y : CochainComplex A ℤ) (e : E ⟶ (Functor.const ℕ).obj X) (g : G ⟶ (Functor.const ℕ).obj Y) (hecolim : ∀ j : ℤ, IsColimit ((HomologicalComplex.eval A (ComplexShape.up ℤ) j).mapCocone (Cocone.mk X e))) (hgcolim : ∀ j : ℤ, IsColimit ((HomologicalComplex.eval A (ComplexShape.up ℤ) j).mapCocone (Cocone.mk Y g))) (hEvanish : ∀ (k : ℕ) (j : ℤ), (k : ℤ) + 1 < j → IsZero ((E.obj k).homology j)) (hGvanish : ∀ (k : ℕ) (j : ℤ), (k : ℤ) + 1 < j → IsZero ((G.obj k).homology j)) (heiso : ∀ (k : ℕ) (j : ℤ), j ≤ (k : ℤ) + 1 → IsIso (HomologicalComplex.homologyMap (e.app k) j)) (hgiso : ∀ (k : ℕ) (j : ℤ), j ≤ (k : ℤ) + 1 → IsIso (HomologicalComplex.homologyMap (g.app k) j)) (α : X ⟶ Y) (hα : QuasiIso α) : QuasiIso ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map α)",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c57d51e91",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Read node, 3 stmt_dep records, Stacks derived.tex 9330-9442 (0794 Claim + cone paragraph), module and report. Every clause matches: Abelian A,B with independent universes; HasColimitsOfShape ℕ on A,B; HasExactColimitsOfShape ℕ only on B (as node); F Additive + PreservesColimitsOfShape ℕ; P hzero/hsum/hcover; hF on bounded-above P-complexes; iso-closure terms via ∃M,P M∧Nonempty(M≅·); towers ℕ⥤CochainComplex with n=k+1; degreewise IsColimit of the given cocones; vanishing for j>k+1 and iso for j≤k+1; arbitrary QuasiIso α; conclusion QuasiIso(F.map α). Node unchanged vs live except lean record; lean.statement verbatim. Conventions agree with live bounded_stage_roof_comparison. Edge cases (k=0, negative/boundary degrees, unbounded X,Y, universes) fine. Gates: no defs, sorry only, source/blueprint docstrings with 5-step proof, proof-only imports exist, no pro-etale substitute, Mathlib candidates need PreservesHomology (stronger). Note: the Second-reading section says it was a reread by the same worker, not an independent agent, but it is present and accurate. No recompile (no FIX)."
+ }
+}

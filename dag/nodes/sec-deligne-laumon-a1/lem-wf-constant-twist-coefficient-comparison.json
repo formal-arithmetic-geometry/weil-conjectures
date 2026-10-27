@@ -17,7 +17,11 @@
   "def-wf-weil-group",
   "def-wf-fundamental-representation",
   "def-wf-constant-weil-twist",
-  "def-pod-lisse-l-adic-sheaves"
+  "def-pod-lisse-l-adic-sheaves",
+  "def-wf-completed-constant-right-unit",
+  "def-wf-weil-coefficient-comparison-interface",
+  "lem-weil-constant-weil-structure-stage-independence",
+  "def-per-lisse-completed-system-data"
  ],
  "proof": [
   {
@@ -388,5 +392,59 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-dccd012a7 (reviewer sub-agent of L); spot-checked: Read the full item, all ten steps, cited statements and source passages; review.md records the checks. Coefficient, Frobenius, scalar-extension and local-operator comparisons are supported. Edge cases pass; no new nodes, long steps, excluded-route dependencies or prohibited batch-5 proof dependencies were found. No fixes needed."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantTwistCoefficientComparison",
+  "declaration": "WeilConjectures.constantTwistCommonDescent",
+  "declarations": [
+   "WeilConjectures.constantTwistAmbientPair",
+   "WeilConjectures.constantTwistFiniteEta_existsUnique",
+   "WeilConjectures.constantTwistFiniteEta",
+   "WeilConjectures.constantTwistLine_commonImage",
+   "WeilConjectures.constantTwistFiniteEta_natural",
+   "WeilConjectures.constantTwistLineScalar_existsUnique",
+   "WeilConjectures.constantTwistLineScalar",
+   "WeilConjectures.constantTwistLineScalar_assoc",
+   "WeilConjectures.constantTwistEta_scalar",
+   "WeilConjectures.constantTwistStalkFunctor",
+   "WeilConjectures.constantTwistExtensionOperator",
+   "WeilConjectures.constantTwistLocalConjugacy",
+   "WeilConjectures.constantTwistLine_rankOne",
+   "WeilConjectures.constantTwistLisseHypotheses",
+   "WeilConjectures.constantTwistLisseBase",
+   "WeilConjectures.constantTwistLine_etaleRepresentative",
+   "WeilConjectures.constantTwistCompletedLisseUnit",
+   "WeilConjectures.constantTwistLine_representation",
+   "WeilConjectures.constantTwistLiftedClosure",
+   "WeilConjectures.constantTwistLine_etaleWeilRealization",
+   "WeilConjectures.constantTwistCommonDescent",
+   "WeilConjectures.constantTwistTensor_inverse"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantTwistCoefficientComparison.lean",
+  "statement": "theorem constantTwistCommonDescent (J : ConstantTwistWeilComparison D c X₀ S) (b : c.Qbarˣ) (F : sfCommonStageWeilSheaf D c.l c.different X₀ c.Qbar) : ∃ (E : Padic.FiniteCoefficientFields c.l c.Qbar) (bE : E.valˣ) (K : sfWeilSheaf D c.l c.different X₀ (pbcFiniteField.{u} c.l c.Qbar E)), Units.map E.val.subtype.toMonoidHom bE = b ∧ Nonempty (sfWeilStageObject D c.l c.different X₀ c.Qbar E K.obj ≅ F.obj) ∧ Nonempty (sfWeilStageObject D c.l c.different X₀ c.Qbar E (sfFiniteConstantTwist D c X₀ E bE K.obj) ≅ sfCommonConstantTwist D c X₀ S b F.obj) ∧ sfCommonStageHeartProperty c.l (D.geometricFiber X₀).left c.Qbar (sfCommonConstantTwist D c X₀ S b F.obj).carrier ∧ Nonempty (pbcFiniteConstantWeilTensor D c X₀ S E bE ((constantTwistFiniteComparison D c X₀ S E).obj K.obj) ≅ constantTwistAmbientPair D c X₀ E ((constantTwistFiniteComparison D c X₀ S E).obj (sfFiniteConstantTwist D c X₀ E bE K.obj))) ∧ Nonempty (((weilScalarSystem D c X₀).ι E).obj ((constantTwistFiniteComparison D c X₀ S E).obj (sfFiniteConstantTwist D c X₀ E bE K.obj)) ≅ J.common.functor.obj (sfCommonConstantTwist D c X₀ S b F.obj))",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Clauses are stated separately in lean.declarations: unique normalized finite eta and naturality, line coefficient comparison and associators, eta scalar square, rank one, the etale/completed representative and Weil realization, degree-character formula, common-stage heart descent, inverse transport and both local-Frobenius conjugacies. No theorem is proved in stage 2."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8919d0f4a",
+  "group": "O3",
+  "result": "pass",
+  "note": "Re-delivery after the 8da7a3dc RETURN; all three points repaired: (1) H2 stmt_dep now def-per-lisse-completed-system-data with the LisseCompletedSystemData import; (2) lem-fd record unchanged, the interface owned by new def node def-wf-weil-coefficient-comparison-interface (fields per H12), ConstantTwistWeilComparison.stage_transition pins the stage isos to the SF transition, normalized finite scalar and PBC transIso; (3) citer audit of the def-wf-constant-weil-twist rebind lists 16 citers (spot-checked d-real-cohom docstring-only, lem-wf-constant-twist-weight). Mechanical theorem stmt_dep lem-weil-constant-weil-structure-stage-independence: the item uses constantWeilStageScalar = .choose of that module's ∃! Weil iso over alpha (clause 1 of the theorem), i.e. an object the theorem's conclusion constructs -> PASS on that point; the rebuilt dependency module states both clauses, finite type only. Clause by clause: J_E with unit-normalized transport; B = J(E_X,b theta) as pbcConstantWeilLine; integral rep R[0], section-normalized; rank one, vacuous on empty X; E-independence plus associator; eta ∃!-pinned to the completed right unit (wfCompletionExtend of rightUnitor) with naturality, scalar square, common descent keeping b, J^-1 transport; local conjugacy at extension and closed points with recorded localQbar operators; connected clause with rho = b^deg via a pinned etale theta and a fully faithful realization; universes lifted via ULift. No hollow defs, all sorry, docstrings OK, lines <=100. Advisory: lem-fd and koszul-reflector theorem modules own FdCoefficientComparisonSystem/wfCompletionExtend uses; the stage-independence module imports the new interface without a stmt_dep (dependency nodes change lean only); H11 self second reading. No compile (no change)."
+ }
 }

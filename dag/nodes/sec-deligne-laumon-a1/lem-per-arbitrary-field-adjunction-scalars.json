@@ -302,33 +302,7 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-e8256531e (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 9 steps, every cited statement, the F̄_q analogue lem-pur-ordinary-adjunction-scalar-compatibility, unit sk-p-dl-a1-perverse, and Bhatt–Scholze Lemma 6.7.2, Prop. 6.8.14 and Rem. 6.8.15. No SGA is cited. The statement is true and unchanged. It is the Beck–Chevalley agreement of the two mates: the types check, and the forward and inverse Hom equations follow by naturality of a. It holds in the cases E=L, f=id, X empty, B=0 and ramified E⊂L. No existing node duplicates it, and the delivery adds no new nodes. Main fault (C1/C3/E5): Step 4, which carries the whole content, argued with 'pure tensors' on derived morphisms. It never used d, gave no K-injective control and no normalization of the derived pullback/direct-image counit; and by BS Rem. 6.8.15 the pullback is not exact here. I repaired it with the existing reviewed node lem-sfb-ringed-comparison-tensor-adjunction, which says c is the conjugate of θ for the two factorizations (X,L_X)→(X,E_X)→(Y,E_Y) and (X,L_X)→(Y,L_Y)→(Y,E_Y). Here θ is ã^{-1} and c is d^{-1}, and with def-weil-pbc-composite-adjunction, naturality of ε̃_E and a triangle identity this gives h̃_L^{-1}(b̃) = T̃_X(ε̃_E)∘ã^{-1}. Step 8 (C1): shift compatibility of the bijections now cites lem-weil-pbc-derived-adjunction-shift, and the linearity argument is written out. Step 5 now names the finite-extension clauses of lem-per-continuous and lem-a1 and uses faithfulness of J. Step 1 drops the uncited quasi-excellence claim and checks the hypotheses of the cited nodes. Step 9 writes out the identity and tower cases with lem-weil-pbc-mate-pasting (1). Step 7 has a TeX typo fixed. The off-unit prop-weil-pbc-scalar-extension was used but not declared; I declared it together with the two new tool citations, all accepted, and the 7 tool uses the delivery declared are accepted too. proof_deps now equals the union of uses, and there is no cycle. The corrected file is fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-arbitrary-field-adjunction-scalars.json.; 1 file(s) fixed by the reviewer"
  },
- "lean": {
-  "module": "Sheaf.Paper.ArbitraryFieldAdjunctionScalars",
-  "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.ScalarAdjunction.arbitrary_field_adjunction_scalars",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.ScalarAdjunction.HomEquations",
-   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.ScalarAdjunction.LinearHomEquations",
-   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.ScalarAdjunction.restrictionComparison",
-   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.ScalarAdjunction.moduleRestrictionComparison",
-   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.ScalarAdjunction.Equations",
-   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.ScalarAdjunction.Linearity",
-   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.ScalarAdjunction.ShiftCompatibility",
-   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.ScalarAdjunction.Tower",
-   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.ScalarAdjunction.IdentityExtension",
-   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.ScalarAdjunction.stagePullComparison",
-   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.ScalarAdjunction.stagePushComparison",
-   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.ScalarAdjunction.StageEquations",
-   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.ScalarAdjunction.Compatibility",
-   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.ScalarAdjunction.arbitrary_field_adjunction_scalars"
-  ],
-  "file": "lean/Sheaf/Paper/ArbitraryFieldAdjunctionScalars.lean",
-  "statement": "theorem arbitrary_field_adjunction_scalars (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] (_hl : IsUnit (l : k)) (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (r : Family.{u} l) (p : DirectImage.Package k l r) : Compatibility k l Ω r p",
-  "branch": "newtargets-dag",
-  "by": "Q14",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "The structures unpack every raw and ambient clause, including universal-unit normalization of the explicitly constructed restriction comparison, coefficient and geometric transpose equations, actual stage identity normalization, linearity, normalized shifts, and identity/tower coherence. All canonical operations and realizations are the recorded dependency declarations; no independent notion or dependency record is replaced. 2026-10-20 (U): module Sheaf.Paper.ArbitraryFieldAdjunctionScalars deleted (dead: no target reaches it); this node is not reached either."
- },
+ "lean": null,
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -337,5 +311,23 @@
   "result": "pass",
   "note": "Re-delivery of PASSed 5605075fd6ea: item .lean byte-identical (sha256 80bae359), all dag nodes identical, only report (Repair verification section) and blueprint-index.tsv changed; L's 15:06 landing return was the side overlay break (Sheaf.Paper.NormalizedConstruc…, same wave as NH/Q21/Q09), not a delivery fault; item not live. Re-read full module: hypotheses (Field k, IsUnit l, IsAlgClosure Ω, FiniteCoefficientFields E≤F incl. E=F, Space k l with separated finite-type f), mate/forward/inverse orientations raw and via pbcStageNormalization, d as conjugateIsoEquiv pinned by restriction_normalization, coefficient_transpose and ambient_mate, linearity both directions, ShiftCompatibility/IdentityExtension existentials pinned to universal (co)units/sections, tower pasting; sorry only in theorem, docstrings with source and 9-step plan, statement verbatim, 14 declarations present. nt_compile --json clean twice (28.2 s, 31.8 s, load ~47); overlay break cleared. Advisory only: Tower.direct_image = FieldComposition, ambient_mate = inverted dependency field. Land as is."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/Paper/ArbitraryFieldAdjunctionScalars.lean",
+  "module": "Sheaf.Paper.ArbitraryFieldAdjunctionScalars",
+  "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.ScalarAdjunction.arbitrary_field_adjunction_scalars",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

@@ -1,0 +1,111 @@
+{
+ "id": "lem-sfb-localizing-subcategory-universe",
+ "kind": "statement",
+ "title": "Localizing subcategories are independent of larger existing coproduct indices",
+ "statement": "Let $\\mathcal C$ be a preadditive pretriangulated category with a zero object, integer shifts and additive shift functors. Suppose every morphism set is equivalent to a type in universe $s$ [def-weil-preadditive-category, def-weil-size-convention]. Let $P$ be a property of objects satisfying $\\operatorname{IsLocalizingSubcategoryOfSize}_s(P)$ of [sk-def-localizing-closure]: it is replete, triangulated, and closed under all existing coproducts indexed by types in universe $s$. Then $P$ is closed under all existing coproducts indexed in the object universe, and hence satisfies $\\operatorname{IsLocalizingSubcategory}(P)$. This does not assert existence of any coproduct.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "(2) Isomorphism, the closed-complement proper base-change calculation on D_ctf and extension to Loc(D_ctf)."
+ },
+ "stmt_deps": [
+  "def-weil-preadditive-category",
+  "def-weil-size-convention",
+  "sk-def-localizing-closure"
+ ],
+ "proof": [
+  {
+   "text": "For a coproduct with inclusions i_k, construct p_k from the family with identity at k and zero elsewhere. On nonzero indices the endomorphisms p_k followed by i_k are distinct: test an equality for k≠l by precomposition with i_k and postcomposition with p_k to obtain id(K_k)=0, a contradiction. Thus the nonzero indices inject into the small endomorphism set of the vertex.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restrict the cofan to nonzero summands. Extend any cocone by zero on the omitted summands to prove its colimit universal property at the same vertex. Reindex the support through Shrink and use P closure for s-indexed coproducts. The replete and triangulated clauses are exactly those assumed; this proves the large-index closure, including empty support.",
+   "uses": [
+    "sk-def-localizing-closure"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sk-def-localizing-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "(2) Isomorphism, the closed-complement proper base-change calculation on D_ctf and extension to Loc(D_ctf)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A replete triangulated subcategory of a locally small additive category closed under coproducts indexed in the hom universe is closed under all existing coproducts",
+   "results": "8 hits: CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂, CategoryTheory.ObjectProperty.IsTriangulatedClosed₃, CategoryTheory.ObjectProperty.IsTriangulatedClosed₂, CategoryTheory.ObjectProperty.IsTriangulatedClosed₁, CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated, CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated, CategoryTheory.Triangulated.Subcategory.ext₂, CategoryTheory.Triangulated.Subcategory.mk'",
+   "date": "2026-10-23",
+   "verdict": "No exact match: these hits do not give the stated coefficient-specific exchange or indexing-universe closure."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsClosedUnderColimitsOfShape",
+   "results": "12 hits: CategoryTheory.ObjectProperty.IsClosedUnderColimitsOfShape, CategoryTheory.ObjectProperty.instIsStableUnderRetractsOfIsClosedUnderColimitsOfShapeWalkingParallelPair, CategoryTheory.ObjectProperty.instIsClosedUnderColimitsOfShapeTop, CategoryTheory.ObjectProperty.instIsClosedUnderColimitsOfShapeBotOfNonempty, CategoryTheory.ObjectProperty.ColimitOfShape.prop, CategoryTheory.ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence, CategoryTheory.ObjectProperty.isClosedUnderColimitsOfShape_iff_of_equivalence, CategoryTheory.ObjectProperty.instIsClosedUnderColimitsOfShapeOppositeOpOfIsClosedUnderLimitsOfShape",
+   "date": "2026-10-23",
+   "verdict": "No exact match: these hits do not give the stated coefficient-specific exchange or indexing-universe closure."
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct_small_support|preservesCoproducts_of_small",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No exact match: these hits do not give the stated coefficient-specific exchange or indexing-universe closure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcqsProperOpenBoundaryVanishing",
+  "date": "2026-10-24",
+  "group": "T3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "(2) Isomorphism, the closed-complement proper base-change calculation on D_ctf and extension to Loc(D_ctf).",
+   "via": [
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Triangulated.LocalizingSubcategoryUniverse",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/LocalizingSubcategoryUniverse.lean",
+  "declaration": "CategoryTheory.isLocalizingSubcategory_of_locallySmall",
+  "statement": "theorem isLocalizingSubcategory_of_locallySmall     {C : Type v} [Category.{w} C] [HasZeroObject C] [HasShift C ℤ]     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]     [LocallySmall.{u} C] (P : ObjectProperty C)     (hP : IsLocalizingSubcategoryOfSize.{u} P) : IsLocalizingSubcategory P",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261024T191211-L-270633",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261024T191211-L-270633",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

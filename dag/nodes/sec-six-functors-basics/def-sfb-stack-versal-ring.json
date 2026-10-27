@@ -1,0 +1,154 @@
+{
+ "id": "def-sfb-stack-versal-ring",
+ "kind": "definition",
+ "title": "Marked formal objects and versal rings at a stack point",
+ "statement": "Let $R$ be a commutative ring, let $k$ be a field [def-weil-field] with an $R$-algebra structure, and let $\\mathcal X$ be a category fibred in groupoids on schemes over $\\operatorname{Spec}R$ [def-weil-affine-spectrum] [def-pc-scheme], with fibred-groupoid and scheme-test conventions as in [def-sfb-stable-pointed-moduli-groupoids], in the universes of [def-weil-size-convention]. Fix $x\\in\\mathcal X(\\operatorname{Spec}k)$. Write $\\mathcal X(A)$ for the fibre on the affine $R$-scheme $\\operatorname{Spec}A$; a morphism over $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ encodes the pullback identification. A complete marked local $R$-algebra is a commutative Noetherian local $R$-algebra $(C,\\mathfrak m_C)$ [def-weil-pbc-noetherian-ring] with an $R$-algebra isomorphism $C/\\mathfrak m_C\\cong k$, complete for its maximal-ideal-adic topology [def-weil-pbc-adic-completion]. Here local means having a unique maximal ideal. A marked formal object over $C$ consists of objects $\\eta_n\\in\\mathcal X(C/\\mathfrak m_C^n)$ for every integer $n\\geq1$, coherent transition isomorphisms for every reduction from a higher positive level to a lower one (identity and composition agree), and markings $\\eta_n|_k\\cong x$ commuting with all transitions. A test algebra is an Artinian local $R$-algebra $A$ with a specified $R$-algebra isomorphism $A/\\mathfrak m_A\\cong k$; Artinian means that descending chains of ideals stabilize. A map $f:A\\to B$ between local rings is local if $f^{-1}(\\mathfrak m_B)=\\mathfrak m_A$. Test maps are local $R$-maps inducing the identity on the specified residue field $k$. For a local residue-preserving $R$-map $v:C\\to A$, let $N_A$ be the least positive integer with $\\mathfrak m_A^{N_A}=0$, which exists by [lem-weil-pbc-artinian-local-noetherian-nilpotent]. Define $\\eta_v$ by pullback of $\\eta_{N_A}$ along the quotient-induced map $C/\\mathfrak m_C^{N_A}\\to A$; this map is defined because $v(\\mathfrak m_C^{N_A})\\subseteq\\mathfrak m_A^{N_A}=0$. For any other positive $n$ killed by $v$, the evaluation comparison is the composite of the transition pullback isomorphisms through the common level $\\max(n,N_A)$, with pullback composition constraints. All restrictions of evaluations use these comparisons. Such a marked formal object is versal if for every surjection $q:A'\\twoheadrightarrow A$ of test algebras, every such $v$, every marked object $\\zeta'\\in\\mathcal X(A')$ with $\\zeta'|_k\\cong x$, and every marking-preserving isomorphism $\\zeta'|_A\\cong\\eta_v$, there are a local residue-preserving $R$-map $v':C\\to A'$ with $qv'=v$ and a marking-preserving isomorphism $\\zeta'\\cong\\eta_{v'}$ whose restriction is the prescribed one. A versal ring at $x$ means such a complete marked local $R$-algebra admitting a versal marked formal object.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-size-convention",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+ ],
+ "source": {
+  "document": "literature/stacks-project/stacks-geometry.tex",
+  "place": "Tag 0DQV, definition-versal-ring-at-x; Tag 0DQY, lemma-versal-ring-field-extension; artin.tex, definition-versal-formal-object and its explicit lifting diagrams; formal-defos.tex, Tags 06HR/06HS, definition-versal and remark-versal-object"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A versal formal object over a complete Noetherian local ring for a stack with specified residue field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.residueField\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(x : X) : CommRingCat\", \"doc\": \"For a scheme $ X $ and a point $ x \\\\in X $, the residue field at $ x $ is the quotient of the local ring $ \\\\mathcal{O}_{X,x} $ (the stalk of the structure sheaf at $ x $) by its unique maximal ideal, \"}\n  {\"name\": \"IsLocalRing.ResidueField\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → [IsLocalRing R] → Type u_1\", \"doc\": \"The residue field of a local ring $ R $ is the quotient ring obtained by dividing $ R $ by its unique maximal ideal, which consists of all non-units of $ R $. This construction forms the field of equi\"}\n  {\"name\": \"Algebra.FormallySmooth.mk\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Module.Projective A Ω[A⁄R] → Subsingleton (Algebra.H1Cotangent R A) → Algebra.FormallySmooth R A\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if the module of Kähler differentials $ \\\\Omega_{A/R} $ is projective as an $ A $-module and the first cohomology group of the cotangent complex $ H^1 $ is tri\"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"module\": \"Mathlib.RingTheory.Unramified.LocalRing\", \"type\": \":\\n  Algebra.FormallyUnramified R S ↔\\n    Algebra.IsSeparable (ResidueField R) (ResidueField S) ∧ (maximalIdeal R).map (algebraMap R S) = maximalIdeal S\", \"doc\": \"An algebra $ S $ over a commutative ring $ R $ is formally unramified if and only if the residue field of $ S $ is separable over the residue field of $ R $, and the image of the maximal ideal of $ R \"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n  {\"name\": \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyUnramified R A] [FormallySmooth R A] : FormallyEtale R A\", \"doc\": \"If an algebra $ A $ over a commutative ring $ R $ is both formally unramified and formally smooth, then $ A $ is formally étale.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : (f.fiber y).Over (Spec (Y.residueField y))\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes and a point $ y \\\\in Y $, this constructs the fiber product $ X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y)) $ equipped with its canonical projection morphism to $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no marked stack-formal-object or stack versal-ring definition; existing ring smoothness and residue-field notions are reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "marked formal object and versal complete local ring of an algebraic stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instIsPreimmersionFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecStalk x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X$ is a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.instCanonicallyOverSpecStalkCommRingCatPresheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → (AlgebraicGeometry.Spec (X.presheaf.stalk x)).CanonicallyOver X\", \"doc\": \"For any scheme $ X $ and point $ x $ in $ X $, the affine scheme $ \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) $, where $ \\\\mathcal{O}_{X,x} $ is the stalk of the structure sheaf at $ x $, is canonically ov\"}\n  {\"name\": \"AlgebraicGeometry.instOverSpecStalkCommRingCatPresheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → (AlgebraicGeometry.Spec (X.presheaf.stalk x)).Over X\", \"doc\": \"For any scheme $X$ and a point $x$ in its underlying topological space, there is a canonical morphism of schemes from the spectrum of the stalk at $x$ to $X$. This morphism is denoted as $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  (R : CommRingCat) →\\n    [IsLocalRing ↑R] → (AlgebraicGeometry.Spec R ⟶ X) ≃ (x : ↥X) × { f // IsLocalHom (CommRingCat.Hom.hom f) }\", \"doc\": \"For any scheme $X$ and commutative local ring $R$, there is a bijection between morphisms from $\\\\operatorname{Spec}(R)$ to $X$ and pairs $(x, \\\\varphi)$, where $x$ is a point in $X$ and $\\\\varphi : \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no marked stack-formal-object or stack versal-ring definition; existing ring smoothness and residue-field notions are reused"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bVersal\\b|\\bFormalObject\\b|CompleteLocalAlgebra",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"line\": \"15\", \"text\": \"weak limit satisfies the same \\\"versal property\\\" as a limit, without the uniqueness\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"line\": \"194\", \"text\": \"/-- The versal morphism from any other cone to a weak limit cone. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"36\", \"text\": \"apply them to infinitesimal smooth (or versal) extensions later.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no marked stack-formal-object or stack versal-ring definition; existing ring smoothness and residue-field notions are reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, IsAdicComplete",
+   "results": "{\"t\": \"2026-10-24T15:51:59Z\", \"tool\": \"loogle\", \"query\": \"IsLocalRing, IsAdicComplete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"isLocalRing_of_isAdicComplete_maximal\", \"AdicCompletion.instIsAdicCompleteMaximalIdeal\", \"AdicCompletion.isAdicComplete_of_fg\", \"instIsAdicCompleteMaximalIdealOfIsArtinianRing\", \"PowerSeries.weierstrassDiv_zero_left\", \"PowerSeries.zero_weierstrassDiv\", \"PowerSeries.weierstrassMod_zero_left\", \"PowerSeries.zero_weierstrassMod\"], \"digest\": \"c27506d76f385523\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: the hits concern ring-theoretic completeness or formally smooth ring maps, not a marked formal object of a fibred groupoid with prescribed-isomorphism lifting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible system of objects of a category fibred in groupoids on infinitesimal quotients with the lifting property for surjective Artinian local algebra maps",
+   "results": "{\"t\": \"2026-10-24T15:52:24Z\", \"tool\": \"leanfinder\", \"query\": \"A compatible system of objects of a category fibred in groupoids on infinitesimal quotients with the lifting property for surjective Artinian local algebra maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.liftOfSurjective\", \"Algebra.FormallySmooth\", \"Algebra.FormallySmooth.of_comp_surjective\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.Extension.homInfinitesimal\", \"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.iff_comp_surjective\", \"Algebra.FormallySmooth.comp_liftOfSurjective\"], \"digest\": \"5abfbb179a855d50\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: the hits concern ring-theoretic completeness or formally smooth ring maps, not a marked formal object of a fibred groupoid with prescribed-isomorphism lifting"
+  },
+  {
+   "tool": "grep",
+   "query": "def liftOfSurjective|theorem exists_lift|class FormallySmooth",
+   "results": "{\"t\": \"2026-10-24T15:54:47Z\", \"tool\": \"grep\", \"query\": \"def liftOfSurjective|theorem exists_lift|class FormallySmooth\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\"], \"digest\": \"7535d47d304ad806\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: the hits concern ring-theoretic completeness or formally smooth ring maps, not a marked formal object of a fibred groupoid with prescribed-isomorphism lifting"
+  }
+ ],
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-versal-ring-existence",
+  "date": "2026-10-24",
+  "group": "Q126"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Existence of a versal ring at a finite-residue-field stack point. Definition of a marked formal object and its prescribed-isomorphism versality in the existence conclusion (Stacks 0DQV, 06HR/06HS).",
+   "via": [
+    "lem-sfb-stack-versal-ring-existence",
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackVersalRing",
+  "declaration": "CategoryTheory.StackVersal.FormalObject.IsVersal",
+  "declarations": [
+   "CategoryTheory.StackVersal.affine",
+   "CategoryTheory.StackVersal.affineMap",
+   "CategoryTheory.StackVersal.Object",
+   "CategoryTheory.StackVersal.Arrow",
+   "CategoryTheory.StackVersal.CompleteLocalAlgebra",
+   "CategoryTheory.StackVersal.Level",
+   "CategoryTheory.StackVersal.reduction",
+   "CategoryTheory.StackVersal.levelResidue",
+   "CategoryTheory.StackVersal.IsMarkedMap",
+   "CategoryTheory.StackVersal.KillsLevel",
+   "CategoryTheory.StackVersal.evaluationMap",
+   "CategoryTheory.StackVersal.FormalObject",
+   "CategoryTheory.StackVersal.FormalObject.IsVersal"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackVersalRing.lean",
+  "statement": "def FormalObject.IsVersal {F : BasedCategory.{v, w} (Over (Spec (.of R)))}\n    {x : Object F k} {C : CompleteLocalAlgebra R k} (eta : FormalObject F x C) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Definition ownership extraction explicitly requested by L on return 46e940302212. These thirteen declarations are moved, not copied, from StackVersalFiniteResidueExtension with identical names, signatures and bodies. The former module publicly imports this module; the original theorem and its type are preserved."
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "def-sfb-stack-versal-ring",
+  "worker": "stage1",
+  "summary": "Audited the definition against Stacks 0DQV, 0CXJ, 06H3/06H5/06HC and 06HR/06HS. Kept the complete marked local algebra, coherent marked tower and full prescribed-isomorphism versality. Used the direct existing fibred-groupoid convention, defined local maps explicitly and fixed evaluation at the least target nilpotence index using the existing Artinian nilpotence Mathlib leaf. No new nodes and no theorem proof clauses. Source searches found no project attachment under WeilConjectures and no Mathlib match for the whole notion.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Existence of a versal ring at a finite-residue-field stack point. Definition of a marked formal object and its prescribed-isomorphism versality in the existence conclusion (Stacks 0DQV, 06HR/06HS). This definition supplies the marked formal object and its lifting predicate only. Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md, proof (3), remains the ancestor route; no unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-59839d1cf",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-59839d1cf (reviewer sub-agent of L); spot-checked: This delivery is the item only, a definition with no new nodes and no proof steps; I read it in full. The marked complete Noetherian local algebra, the coherent marked tower and the lifting condition along every surjection of test algebras with the prescribed isomorphism agree with Stacks 0DQV (stacks-geometry.tex:51), artin 0CXJ (artin.tex:1587 and the lifting diagrams after it) and formal-defos 06HR/06HS (formal-defos.tex:2187/2195). Evaluating at N_A, the least positive integer with m_A^N_A=0, is well defined: v is local, so v(m_C^N_A) is contained in m_A^N_A=0. N_A exists by the cited Mathlib leaf lem-weil-pbc-artinian-local-noetherian-nilpotent. Other killed levels are compared through max(n,N_A), which agrees with the Lean IsVersal. Edge cases checked: A=k gives N=1, k[e] gives N=2, q=id is consistent, the zero ring is excluded, and automorphisms are kept. The generalised R and k are harmless because the item is a definition; the existence and extension lemmas that use it impose their own Noetherian local and finite-residue hypotheses. def-sfb-artin-deformation-test-category (an abstract cofibred groupoid on C_{R,k}) and def-sfb-pointwise-versal-lifting are related but different notions, so neither is a duplicate. Batch-5 flag: the item cites def-sfb-stable-pointed-moduli-groupoids only for the fibred-groupoid convention. The node it reaches, def-trf-projective-bundle-morphism, is a general definition of projectivity and not a step of the trace formula or Poincare duality. The previous dependency, def-sfb-algebraic-moduli-stack, already cited the same node, so the closure is unchanged. Unit, chapter, blueprint and Lean record are unchanged. No SGA source is used."
+ }
+}

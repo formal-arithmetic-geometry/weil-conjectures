@@ -115,7 +115,32 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian",
+     "lines": [
+      92,
+      123
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
@@ -159,17 +184,27 @@
   "sorry_after": []
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $(A,J)$ be an affine henselian pair, let $Y$ be separated of finite type\nover $\\operatorname{Spec}A$ with affine diagonal, covered by $n+1$ affine\nopens, and let $Y_0=Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/J)$.\nIf $I$ is an injective sheaf of $\\mathbf Z/n$-modules on $Y_{\\Et}$ for some\ninteger $n\\geq1$ (for instance an injective sheaf of $\\mathbf F_r$-modules),\nthen\n\n$$\n H^q(Y_0,I|_{Y_0})=0\\qquad(q>n).\n$$",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(A,J)$ be a henselian pair [def-weil-pbc-henselian-terminology], let\n$Y\\to\\operatorname{Spec}A$ be separated and locally of finite type, and let\n$Y_0=Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/J)$. Suppose that $Y$ is\ncovered by $n+1$ affine opens. Let $\\Lambda$ be a commutative ring and let $I$ be\nan injective object of the category of sheaves of $\\Lambda$-modules on $Y_{\\Et}$\nwhich is torsion [def-weil-pbc-torsion-etale-sheaf] (for instance an injective\nsheaf of $\\mathbf F_r$-modules). Then\n\n$$\n H^q(Y_0,I|_{Y_0})=0\\qquad(q>n).\n$$",
   "proof": [
    {
-    "text": "Let $U\\subseteq Y$ be an affine open, with closed fibre $U_0=U\\times_YY_0$.\nThe restriction of $I$ to any etale $U'\\to Y$ is an injective sheaf of\n$\\mathbf Z/n$-modules on $U'_{\\Et}$, and such sheaves have no higher\ncohomology, so $H^q(U',I|_{U'})=0$ for $q>0$. By the second\npart of Gabber's affine comparison [prop-weil-pbc-gabber-affine-comparison],\napplied to the affine $U$ over the henselian pair (for the torsion sheaf\n$I|_U$, killed by $n$), $H^q(U_0,I|_{U_0})$ is the\ncolimit of the groups $H^q(U',I|_{U'})$ over the affine etale neighbourhoods\n$U'\\to U$ of $U_0$, hence $H^q(U_0,I|_{U_0})=0$ for $q>0$. This is the case\n$n=0$; it is the colimit form of the comparison that applies, since $U$\nitself is not a henselian pair and $H^q(U,I|_U)\\to H^q(U_0,I|_{U_0})$ need not\nbe an isomorphism. For the induction step write $Y=U\\cup V$ with $U$ affine and $V$\ncovered by $n$ affine opens; the intersection $U\\cap V$ is affine because $Y$\nis separated with affine diagonal, and the Mayer--Vietoris long exact sequence\nof the closed fibre\n\n$$\n \\cdots\\to H^q((U\\cup V)_0,-)\\to H^q(U_0,-)\\oplus H^q(V_0,-)\n \\to H^q((U\\cap V)_0,-)\\to\\cdots\n$$\n\ntogether with the induction hypothesis for $V$ and for $U\\cap V$ gives the\nvanishing for $q>n$. The restriction of an injective sheaf of $\\mathbf Z/n$-modules to an open\nsubscheme is again one, so the induction hypothesis\napplies to $V$, to $U\\cap V$ and to each chart separately.",
+    "text": "Induction on $n$. Let first $U\\subseteq Y$ be an affine open, with closed fibre\n$U_0=U\\times_YY_0$, a closed subscheme of the affine scheme $U$. For every étale\n$U'\\to Y$ the restriction $I|_{U'}$ is an injective sheaf of $\\Lambda$-modules\n(restriction has the exact left adjoint extension by zero), so its underlying\nabelian sheaf has no higher cohomology: $H^q(U',I|_{U'})=0$ for $q>0$. By the\nsecond part of [prop-weil-pbc-gabber-affine-comparison], applied to the closed\nimmersion $U_0\\hookrightarrow U$ and the torsion sheaf $I|_U$,\n$H^q(U_0,I|_{U_0})$ is a filtered colimit of groups $H^q(U',I|_{U'})$ over étale\nneighbourhoods $U'\\to U$ of $U_0$, hence $H^q(U_0,I|_{U_0})=0$ for $q>0$. This is\nthe case $n=0$; it is the colimit form of the comparison that applies, since $U$\nitself is not a henselian pair.",
     "uses": [
      "prop-weil-pbc-gabber-affine-comparison"
     ],
     "elementary": false
+   },
+   {
+    "text": "For the induction step write $Y=U\\cup V$ with $U$ affine and $V$ covered by $n$\naffine opens. The intersection $U\\cap V$ is covered by $n$ affine opens (the\nintersections of $U$ with those of $V$, affine because $Y$ is separated). The\nrestrictions of $I$ to the opens $V$ and $U\\cap V$ are again injective torsion\nsheaves of $\\Lambda$-modules, and $V$, $U\\cap V$ are separated and locally of\nfinite type over $A$, so the induction hypothesis gives vanishing on $V_0$ and\n$(U\\cap V)_0$ in degrees $>n-1$. The Mayer–Vietoris long exact sequence of the\nclosed fibre\n\n$$\n \\cdots\\to H^{q-1}((U\\cap V)_0,-)\\to H^q(Y_0,-)\\to H^q(U_0,-)\\oplus H^q(V_0,-)\n \\to\\cdots\n$$\n\nthen gives $H^q(Y_0,I|_{Y_0})=0$ for $q>n$.",
+    "uses": [],
+    "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

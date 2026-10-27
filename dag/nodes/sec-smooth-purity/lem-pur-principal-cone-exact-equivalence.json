@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-principal-cone-exact-equivalence",
+ "kind": "statement",
+ "title": "Principal Cone Exact Equivalence",
+ "status": "split",
+ "statement": "For an additive equivalence H between abelian categories with countable products, and any cochain endomorphism μ:P→P, H applied degreewise to the principal completion is isomorphic to the principal completion of H(μ). Under this isomorphism the image of the specified normalized degree-zero completion unit is the specified completion unit. This is a chain-level comparison, before derived localization. Dependencies: [def-pur-principal-cone-tower].",
+ "stmt_deps": [
+  "def-pur-principal-cone-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step."
+ },
+ "proof": [
+  {
+   "text": "identify each finite mapping cone with the cone of the image endomorphism. The comparison preserves its two inclusions, hence the transition squares and the augmentation. The product comparison intertwines one minus the transition shift. Mapping the final cocone and using the shift comparison gives the completion isomorphism. Its equality on the normalized lift follows degree by degree from preservation of the cocone inclusion and the zero homotopy.",
+   "uses": [
+    "def-pur-principal-cone-tower",
+    "def-weil-pbc-derived-inverse-image",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-principal-cone-tower",
+  "def-weil-pbc-derived-inverse-image",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step.",
+  "note": "Fully proved in Lean by H4; no new sorry. This supplies the stated principal-cone argument, retaining the unit route."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For an additive equivalence H between abelian categories with countable products, and any cochain endomorphism μ:P→P, H applied degreewise to the principal completion is isomorphic to the principal completion of H(μ). Under this isomorphism the image of the specified normalized degree-zero completion unit is the specified completion unit. This is a chain-level comparison, before derived localization.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.congr\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_2} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {N : Type u_3} →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] → (M ≃ₗ[R] N) → AdicCompletion I M ≃ₗ\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, and $ R $-modules $ M $ and $ N $, an $ R $-linear equivalence between $ M $ and $ N $ induces a linear equivalence between their $ I $-adic completions\"}\n  {\"name\": \"CategoryTheory.Abelian.DoldKan.comparisonN_inv_app_f\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.Equivalence\", \"type\": \"∀ {A : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} A] [inst_1 : CategoryTheory.Abelian A]\\n  (X : CategoryTheory.SimplicialObject A) (i : ℕ),\\n  (CategoryTheory.Abelian.DoldKan.comparisonN.inv.app X).f i =\\n    CategoryTheory.CategoryStruct.comp\\n      (((CategoryTheory.Idempotents.toKaroubiEqu\", \"doc\": \"For any abelian category $\\\\mathcal{A}$, simplicial object $X$ in $\\\\mathcal{A}$, and natural number $i$, applying the inverse of the Dold-Kan comparison natural transformation $\\\\text{comparisonN}^{-1}$\"}\n  {\"name\": \"CategoryTheory.Idempotents.karoubiCochainComplexEquivalence_unitIso_hom_app_f_f\", \"module\": \"Mathlib.CategoryTheory.Idempotents.HomologicalComplex\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C] (α : Type u_3)\\n  [inst_2 : AddRightCancelSemigroup α] [inst_3 : One α]\\n  (P : CategoryTheory.Idempotents.Karoubi (HomologicalComplex C (ComplexShape.up α))) (n : α),\\n  ((CategoryTheory.Idempotents.\", \"doc\": \"For any preadditive category $\\\\mathcal{C}$ and additive right-cancellative semigroup $\\\\alpha$ with identity, the component of the unit isomorphism at index $n$ for the Karoubi equivalence of cochain c\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.addEquiv₀\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \": Ext X Y 0 ≃+ (X ⟶ Y)\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the Ext group in degree 0, $\\\\operatorname{Ext}^0(X,Y)$, is additively equivalent to the hom-set of morphisms from $X$ to $Y$. This establi\"}\n  {\"name\": \"CategoryTheory.Idempotents.karoubiChainComplexEquivalence_unitIso_hom_app_f_f\", \"module\": \"Mathlib.CategoryTheory.Idempotents.HomologicalComplex\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C] (α : Type u_3)\\n  [inst_2 : AddRightCancelSemigroup α] [inst_3 : One α]\\n  (P : CategoryTheory.Idempotents.Karoubi (HomologicalComplex C (ComplexShape.down α))) (n : α),\\n  ((CategoryTheory.Idempotent\", \"doc\": \"For any preadditive category $\\\\mathcal{C}$ and additive right-cancellative semigroup $\\\\alpha$ with identity, the unit isomorphism of the Karoubi equivalence between chain complexes satisfies: for each\"}\n  {\"name\": \"CategoryTheory.Abelian.DoldKan.comparisonN\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.Equivalence\", \"type\": \": (N : SimplicialObject A ⥤ _) ≅ Idempotents.DoldKan.N\", \"doc\": \"The natural isomorphism establishes that the normalized chain complex functor $ N $ is equivalent to the composition of the normalized Moore complex functor with the Karoubi envelope embedding, as par\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Ext\", \"type\": \": Ext X Y n ≃+ CohomologyClass R.cochainComplex ((singleFunctor C 0).obj Y) n\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the inverse of the natural equivalence between the Ext group $\\\\mathrm{Ext}^n(X, Y)$ and the $n$-th cohomology class of the homomorphism co\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.homAddEquiv\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"{n : ℕ} : Ext.{w} X Y n ≃+ ShiftedHom ((singleFunctor C 0).obj X) ((singleFunctor C 0).obj Y) (n : ℤ)\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ and natural number $n$, the equivalence between the Ext group $\\\\operatorname{Ext}^n(X, Y)$ and the hom-set $\\\\operatorname{Hom}_{D(\\\\mathcal{\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"mapHomologicalComplex\"",
+   "results": "[loogle] OK 8 hit(s)\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexIso\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Category.{v', u_2} D] [CategoryTheory.Preadditive C] [CategoryTheory.Preadditive D] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] (H : CategoryTheory.Functor C D) [H.Additive] [Homo\", \"doc\": \"If `H : C ⥤ D` is an additive functor and `φ` is a morphism of cochain complexes\\nin `C`, this is the comparison isomorphism between the image by `H`\\nof `mappingCone φ` and the mapping cone of the imag\"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexXIso\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Category.{v', u_2} D] [CategoryTheory.Preadditive C] [CategoryTheory.Preadditive D] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] (H : CategoryTheory.Functor C D) [H.Additive] [Homo\", \"doc\": \"If `H : C ⥤ D` is an additive functor and `φ` is a morphism of cochain complexes\\nin `C`, this is the comparison isomorphism (in each degree) between the image\\nby `H` of `mappingCone φ` and the mapping\"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexXIso'\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Category.{v', u_2} D] [CategoryTheory.Preadditive C] [CategoryTheory.Preadditive D] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] (H : CategoryTheory.Functor C D) [H.Additive] [Homo\", \"doc\": \"If `H : C ⥤ D` is an additive functor and `φ` is a morphism of cochain complexes\\nin `C`, this is the comparison isomorphism (in each degree `n`) between the image\\nby `H` of `mappingCone φ` and the map\"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexXIso_eq\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Category.{v', u_2} D] [CategoryTheory.Preadditive C] [CategoryTheory.Preadditive D] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] (H : CategoryTheory.Functor C D) [H.Additive] [Homo\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Category.{v', u_2} D] [CategoryTheory.Preadditive C] [CategoryTheory.Preadditive D] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] (H : CategoryTheory.Functor C D) [H.Additive] [Homo\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Category.{v', u_2} D] [CategoryTheory.Preadditive C] [CategoryTheory.Preadditive D] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] (H : CategoryTheory.Functor C D) [H.Additive] [Homo\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexIso_hom_descShortComplex\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.ShortExact\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {D : Type u_2} [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [F.Additive] (S : CategoryTheory.ShortComplex (CochainComplex C ℤ)) : CategoryTheory.CategoryStruct.comp\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexIso_hom_descShortComplex_assoc\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.ShortExact\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {D : Type u_2} [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [F.Additive] (S : CategoryTheory.ShortComplex (CochainComplex C ℤ)) {Z : HomologicalComplex D (ComplexSh\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n (mappingCone|mappingCocone).*(mapHomologicalComplex|[iI]so) Mathlib/ (local read-only Mathlib source)",
+   "results": "28 matching source lines. First matches:\nMathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:462:      (CochainComplex.mappingCone.mapTriangleIso φ G)\nMathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:511:  exact ⟨_, _, _, ⟨(rotate _).mapIso e ≪≫ CochainComplex.mappingCone.rotateTrianglehIso φ⟩⟩\nMathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:517:  exact ⟨_, _, _, ⟨Functor.mapIso _ e ≪≫ CochainComplex.mappingCone.shiftTrianglehIso φ n⟩⟩\nMathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:601:      CochainComplex.mappingCone.mapTrianglehIso f G⟩⟩\nMathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean:318:    ((mappingCone.triangle φ).mor₂ ≫ (shiftFunctorCompIsoId _ (-1 : ℤ) 1 (by lia)).inv.app _)\nMathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean:599:      (mappingCone ((H.mapHomologicalComplex (ComplexShape.up ℤ)).map φ)).X n where\nMathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean:626:      (mappingCone ((H.mapHomologicalComplex (ComplexShape.up ℤ)).map φ)).X n :=\nMathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean:641:      mappingCone ((H.mapHomologicalComplex _).map φ) :=\nMathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean:91:noncomputable def mappingConeHomOfDegreewiseSplitXIso (p q : ℤ) (hpq : p + 1 = q) :\nMathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean:128:noncomputable def mappingConeHomOfDegreewiseSplitIso :\nMathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean:130:  Hom.isoOfComponents (fun p => mappingConeHomOfDegreewiseSplitXIso S σ p _ rfl) (by\nMathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean:135:    simp only [mappingConeHomOfDegreewiseSplitXIso, mappingCone.ext_from_iff _ _ _ rfl,",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPrincipalConeLocalCriterion",
+  "date": "2026-10-22",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-principal-cone-local-criterion",
+   "place": "Independent-universe restriction, localization tests and normalized singleton cone comparison in the proof of the principal local criterion.",
+   "via": [
+    "lem-pur-integral-principal-cone-local-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.PrincipalConeExactEquivalence",
+  "file": "lean/Sheaf/Algebra/Homology/PrincipalConeExactEquivalence.lean",
+  "declaration": "CochainComplex.principalCompletionMap",
+  "statement": "theorem principalCompletionMap [HasCountableProducts A] [HasCountableProducts B]\n    [H.IsEquivalence] {P : CochainComplex A ℤ} (μ : End P) :\n    ∃ i : (H.mapHomologicalComplex (.up ℤ)).obj (PrincipalCone.completion μ) ≅\n        PrincipalCone.completion (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ)),\n      (H.mapHomologicalComplex (.up ℤ)).map (PrincipalCone.unit μ) ≫ i.hom =\n        PrincipalCone.unit (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ))",
+  "declarations": [
+   "CochainComplex.principalCompletionMap"
+  ],
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

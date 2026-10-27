@@ -7,7 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1KummerMaps
 public import Sheaf.AlgebraicGeometry.OrdinaryFiniteTraceCounit
-
+import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalTriangles
+import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalBaseChange
 
 /-!
 # The diagonal unit for the Kummer-normalized projective-line trace
@@ -29,35 +30,36 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] ordinaryFinitePullback ordinaryFinitePushforward
   ordinaryFiniteTensor
 
+-- Preserve the existing binder names in the public statement.
+set_option linter.unusedVariables false in
 /-- The supported diagonal gives a unit for the already specified trace counit.
 The decomposition and Chern arrows are inputs; no decomposition is asserted here.
 Source: blueprint thm-amb-p1-adjunction.md and its proof;
 lem-amb-p1-diagonal-integrals.md and its proof.
 (blueprint: lem-asd-ordinary-finite-p1-diagonal-unit).
 
-Proof: On P times_S P, the diagonal is an effective Cartier divisor: on each affine
-product chart its equation is u-t, which is monic and is a nonzerodivisor over every
-base ring, including after base change. Apply the supported Cartier Kummer map to
-this divisor. Its unsupported class is c_1(O(Delta)). On each geometric fibre,
-restriction along either projection has degree one, so integration against the
-normalized trace is one, by the degree-one Kummer calculation. These are degree-zero
-endomorphisms of the constant sheaf; conservative geometric stalks check equality.
-For a complex M on P, write M as the direct image from the diagonal of its inverse
-image. Invert the diagonal projection map to tensor M with the supported diagonal
-class. Apply the projection map for p_2 and inverse proper exchange to reach
-q^* Rq_* M tensor A_P(1)[2]. These maps are natural and define eta_M on all complexes.
-For the first triangular composite substitute the inverse-projection trace formula:
-the projection/exchange mate identities cancel the two diagonal projection maps and
-leave integration of the diagonal along p_1, hence the identity on Rq_* M. For the
-second triangular composite the same tensor/exchange identities cancel the other
-projection maps and leave integration along p_2, hence the identity on q^*K tensor
-the shifted line. Finally pull back the diagonal Cartier equation. The supported
-Kummer square and the projection/exchange tensor square commute with this pullback.
-The decomposition square gives the trace square by inversion and its second
-projection. Apply the tensor square to the inverse projection followed by this trace
-square and the tensor unitor; this is exactly the counit base-change equation below.
-All projections are proper with Noetherian source, so the unbounded proper projection
-and exchange results apply, without a boundedness or flatness restriction on M or K. -/
+Proof: Apply the supported Cartier Kummer construction to the diagonal of P times_S P.
+Its existing component formula, in either projective-line chart, expresses the pushed
+class as a base Chern component followed by the twisted unit plus the relative Chern
+pushforward. The second projection of the Kummer-normalized splitting kills the
+first component and evaluates the second to one. This gives both scalar diagonal
+integrals with the specified source units and coefficient comparisons.
+For every complex M, invert the diagonal projection formula, tensor with the supported
+class, push along the second projection, and apply inverse proper exchange and the
+ordered projection comparison. These natural maps define the common-base unit.
+The two coordinate trace contractions identify its triangular composites with the
+tensor section integrals. Naturality interchanges the coordinates in the first
+triangle; restriction of the coordinate comparison to the diagonal handles the
+second. The scalar integrals and the section projection identities make both
+composites identity. The normalized shifted-line pullback identifies the common-base
+coefficient with the prescribed projective-line right adjoint. Projection naturality
+identifies the transported counit with the specified Kummer trace counit.
+For base change, invert the decomposition square and apply its second projection to
+obtain the scalar trace square. The canonical projection/exchange mate square tensors
+this scalar equation with an arbitrary complex. Insert the inverse ordered projections
+and the normalized constant-unit square; their composite is exactly the stated counit
+base-change equation. All arguments apply to unbounded complexes without an added
+flatness or boundedness hypothesis. -/
 theorem ordinaryFiniteP1_diagonal_unit (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA) (c : OrdinaryFiniteP1ChernFamily A N hA)
@@ -92,6 +94,7 @@ theorem ordinaryFiniteP1_diagonal_unit (N : ℕ) (hN : 0 < N)
               (ordinaryFiniteP1_isUnit N S hS) K).hom ≫
           (ordinaryFiniteP1TraceCounit A N hA S' (b S' hS')).app
             ((ordinaryFinitePullback A f).obj K)) := by
-  sorry
+  exact ⟨ordinaryFiniteP1_diagonal_triangles N hN A hA t c hc b hb hbc,
+    ordinaryFiniteP1_diagonal_baseChange N hN A hA t c hc b hb hbc⟩
 
 end AlgebraicGeometry.Etale

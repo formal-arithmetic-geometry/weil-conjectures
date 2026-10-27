@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-henselian-pair-radical-etale-section",
+ "kind": "statement",
+ "title": "Etale sections lift modulo the radical of a henselian ideal",
+ "statement": "Let $A$ be a commutative ring and $I\\subseteq A$ an ideal such that $(A,I)$ is a henselian pair [def-weil-pbc-henselian-terminology]. Put $J=\\sqrt I=\\{a\\in A:\\exists n>0,\\ a^n\\in I\\}$. Let $A\\to B$ be a ring map such that $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism]. For every $A$-algebra homomorphism $\\bar\\sigma:B\\to A/J$ there exists an $A$-algebra homomorphism $\\sigma:B\\to A$ whose composite with $A\\to A/J$ is $\\bar\\sigma$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 09XJ (lemma-change-ideal-henselian-pair), with J=sqrt(I), and 09XI (lemma-characterize-henselian-pair), (1) implies (2)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "If $A=0$, its unital algebra $B$ is also the zero ring, and the unique map $B\\to A$ has the required reduction. Hence assume $A\\ne0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 09XJ (lemma-change-ideal-henselian-pair) and 09XI (lemma-characterize-henselian-pair), (3) implies (1), (1) implies (5), and (5) implies (2)."
+   }
+  },
+  {
+   "text": "We first prove that $(A,J)$ is henselian. For any finite $A$-algebra $C$, the kernel $K$ of $C/IC\\to C/JC$ consists of nilpotent elements. Indeed, a representative in $JC$ is a finite sum $\\sum_{i=1}^m a_i c_i$ with $a_i\\in J$; choose $n_i>0$ with $a_i^{n_i}\\in I$. For $m>0$, expanding its $N$th power, where $N=1+\\sum_i(n_i-1)$, shows that every term contains some $a_i^{n_i}$, so the power belongs to $IC$. The empty sum is zero. Apply [lem-weil-pbc-lift-idempotents-locally-nilpotent] to $C/IC$ and $K$: $C/IC\\to C/JC$ induces a bijection on idempotents. Henselianity of $(A,I)$ gives a bijection on idempotents for $C\\to C/IC$. Composing these bijections gives the defining condition of [def-weil-pbc-henselian-terminology] for $(A,J)$.",
+   "uses": [
+    "lem-weil-pbc-lift-idempotents-locally-nilpotent",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 09XJ (lemma-change-ideal-henselian-pair) and 09XI (lemma-characterize-henselian-pair), (3) implies (1), (1) implies (5), and (5) implies (2)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-henselian-factorization-criterion] for $(A,J)$, $J$ lies in the Jacobson radical and coprime monic factorizations lift modulo $J$. For $f(T)=T^n(T-1)+\\sum_{i=0}^n a_iT^i$ with $n\\ge1$ and $a_i\\in J$, the factors $T^n$ and $T-1$ of its reduction are coprime: $T^n-(T-1)(1+T+\\cdots+T^{n-1})=1$. Lift them to monic $g,h$ with $f=gh$ and $\\bar h=T-1$. Since $A\\ne0$ and $J$ lies in the Jacobson radical, $A/J\\ne0$; reduction preserves the degree of a monic polynomial. Thus $h$ has degree one, say $h=T-\\alpha$, and $\\bar h=T-1$ gives $\\alpha-1\\in J$. Evaluating $f=gh$ at $\\alpha$ gives $f(\\alpha)=0$. This proves precisely Gabber's root condition for $J$.",
+   "uses": [
+    "lem-weil-pbc-henselian-factorization-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 09XJ (lemma-change-ideal-henselian-pair) and 09XI (lemma-characterize-henselian-pair), (3) implies (1), (1) implies (5), and (5) implies (2)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-gabber-root-criterion-etale-section-lifting] with ideal $J$, etale algebra $B$, and the given $\\bar\\sigma:B\\to A/J$. The preceding step verifies both its Jacobson-radical and polynomial-root hypotheses. It gives an $A$-algebra map $\\sigma:B\\to A$ whose composite with $A\\to A/J$ is exactly $\\bar\\sigma$, as required.",
+   "uses": [
+    "lem-weil-pbc-gabber-root-criterion-etale-section-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 09XJ (lemma-change-ideal-henselian-pair) and 09XI (lemma-characterize-henselian-pair), (3) implies (1), (1) implies (5), and (5) implies (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lift-idempotents-locally-nilpotent",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-henselian-factorization-criterion",
+  "lem-weil-pbc-gabber-root-criterion-etale-section-lifting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 09XJ (lemma-change-ideal-henselian-pair) and 09XI (lemma-characterize-henselian-pair), (3) implies (1), (1) implies (5), and (5) implies (2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a henselian pair A I every section of an etale A algebra over A radical I lifts to a section over A",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"StandardEtalePair.lift_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : S) (h : P.HasMap x), (P.lift x h) P.X = x\", \"doc\": \"Given a standard étale pair $ P = (f, g) $ over a commutative ring $ R $, an element $ x $ in a ring $ S $ satisfying $ f(x) = 0 $ and $ g(x) $ invertible in $ S $, and the canonical ring homomorphism\"}\n  {\"name\": \"StandardEtalePair.lift_X_left\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), P.lift P.X ⋯ = AlgHom.id R P.Ring\", \"doc\": \"For a standard étale pair $ (f, g) $ over a commutative ring $ R $, the lift of the indeterminate $ X $ in the standard étale ring extension $ R[X,Y]/(f, Yg - 1) $, under the conditions $ f(X) = 0 $ a\"}\n  {\"name\": \"StandardEtalePair.lift\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (x : S) → P.HasMap x → P.Ring →ₐ[R] S\", \"doc\": \"Given a commutative ring $ R $, a standard étale pair $ (f, g) $ over $ R $, and an element $ x $ in a commutative $ R $-algebra $ S $ satisfying $ f(x) = 0 $ and $ g(x) $ invertible in $ S $, this co\"}\n  {\"name\": \"StandardEtalePair.hasMap_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : StandardEtalePair R}, P.HasMap P.X\", \"doc\": \"In the standard étale ring extension $ R[X,Y]/(f, Yg - 1) $, the image of the indeterminate $ X $ satisfies $ f(X) = 0 $ and $ g(X) $ is invertible (a unit) in the ring.\"}\n  {\"name\": \"HenselianRing.is_henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} [self : HenselianRing R I] (f : Polynomial R),\\n  f.Monic →\\n    ∀ (a₀ : R),\\n      Polynomial.eval a₀ f ∈ I →\\n        IsUnit ((Ideal.Quotient.mk I) (Polynomial.eval a₀ (Polynomial.derivative f))) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ I\", \"doc\": \"Let $R$ be a commutative ring that is Henselian with respect to an ideal $I$. For any monic polynomial $f \\\\in R[X]$ and any element $a_0 \\\\in R$, if $f(a_0) \\\\in I$ and the derivative $f'(a_0)$ is a uni\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary etale algebras, nilpotent lifting, ring actions, or categorical groupoids; they do not give this assertion for the stated objects and hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, Algebra.Etale",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary etale algebras, nilpotent lifting, ring actions, or categorical groupoids; they do not give this assertion for the stated objects and hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]enselian.*[Ee]tale|[Ee]tale.*[Hh]enselian",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary etale algebras, nilpotent lifting, ring actions, or categorical groupoids; they do not give this assertion for the stated objects and hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale algebra over a henselian pair admits a retraction lifting a section modulo the radical of the ideal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"retractionOfSectionOfKerSqZero\", \"module\": \"Mathlib.RingTheory.Smooth.Kaehler\", \"type\": \": S ⊗[P] Ω[P⁄R] →ₗ[P] RingHom.ker (algebraMap P S)\", \"doc\": \"Let $R$, $P$, and $S$ be commutative rings. Let $f: P \\\\to S$ be an $R$-algebra homomorphism with kernel $I = \\\\ker(f)$, and assume that $I$ is a square-zero ideal (i.e., $I^2 = \\\\{0\\\\}$). Suppose there e\"}\n  {\"name\": \"Algebra.Etale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property of an algebra $ A $ over a commutative ring $ R $ being étale.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"(f : S →ₐ[R] A) (hf : Function.Surjective f) :\\n  ∃ (g : A →ₐ[R] AdicCompletion (ker f) S), (AdicCompletion.kerProj hf).comp g = AlgHom.id R A\", \"doc\": \"Let `R` be a commutative ring, and let `A` be a formally smooth `R`-algebra. For any `R`-algebra `S` and any surjective `R`-algebra homomorphism `f : S \\\\to A`, let `\\\\hat{S}` be the adic completion of \"}\n  {\"name\": \"Algebra.Etale.recOn\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {motive : Algebra.Etale R A → Sort u_1} →\\n            (t : Algebra.Etale R A) →\\n              ((formallyEtale : Algebra.FormallyEtale R A) →\\n                  (finitePre\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, this recursor allows defining functions on the property that $ A $ is étale over $ R $ by specifying their behavior on\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] : FormallyEtale K L\", \"doc\": \"If an algebra $ L $ over a commutative ring $ K $ is separable, then it satisfies the infinitesimal lifting property characterizing formally étale morphisms in algebraic geometry.\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \"(I : Ideal S) (hI : I ^ 2 = ⊥) (x : S) (hx : P.HasMap (Ideal.Quotient.mk I x)) : ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary etale algebras, nilpotent lifting, ring actions, or categorical groupoids; they do not give this assertion for the stated objects and hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Henselian pair lifting algebra homomorphisms from an etale algebra into a quotient by the radical ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"StandardEtalePair.lift\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (x : S) → P.HasMap x → P.Ring →ₐ[R] S\", \"doc\": \"Given a commutative ring $ R $, a standard étale pair $ (f, g) $ over $ R $, and an element $ x $ in a commutative $ R $-algebra $ S $ satisfying $ f(x) = 0 $ and $ g(x) $ invertible in $ S $, this co\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g : A →ₐ[R] B ⧸ I), ∃ f, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                [Algebra.FormallySmooth R A] → (I : Ideal B) → IsNilpotent I \", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"StandardEtalePair.lift_X_left\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), P.lift P.X ⋯ = AlgHom.id R P.Ring\", \"doc\": \"For a standard étale pair $ (f, g) $ over a commutative ring $ R $, the lift of the indeterminate $ X $ in the standard étale ring extension $ R[X,Y]/(f, Yg - 1) $, under the conditions $ f(X) = 0 $ a\"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyUnramified R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g₁ g₂ : A →ₐ[R] B), (Ideal.Quotient.mkₐ R I).comp g₁ = (Ideal.Quotient.mkₐ R I\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally unramified $ R $-algebra, and $ B $ an $ R $-algebra with a nilpotent ideal $ I $. If $ g_1, g_2 : A \\\\to B $ are $ R $-algebra homomorphisms such that\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"StandardEtalePair.lift_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : S) (h : P.HasMap x), (P.lift x h) P.X = x\", \"doc\": \"Given a standard étale pair $ P = (f, g) $ over a commutative ring $ R $, an element $ x $ in a ring $ S $ satisfying $ f(x) = 0 $ and $ g(x) $ invertible in $ S $, and the canonical ring homomorphism\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary etale algebras, nilpotent lifting, ring actions, or categorical groupoids; they do not give this assertion for the stated objects and hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A henselian pair remains henselian when its ideal is replaced by another ideal with the same radical",
+   "results": "8 hits; HenselianRing, IsAdicComplete.henselianRing, HenselianRing.jac, instHenselianRingMaximalIdeal, HenselianRing.is_henselian, HenselianLocalRing, localCohomology.isoOfSameRadical, localCohomology.SelfLERadical.isoOfSameRadical",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned definitions, infinitesimal lifting or completion results do not assert lifting over the radical of a henselian ideal"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, Ideal.radical",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned definitions, infinitesimal lifting or completion results do not assert lifting over the radical of a henselian ideal"
+  },
+  {
+   "tool": "grep",
+   "query": "HenselianRing|henselian.*radical|radical.*henselian",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "inconclusive: this path is not the Henselian.lean file; repeated against RingTheory below"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale algebra sections lift over a henselian pair modulo the radical of its ideal",
+   "results": "8 hits; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, Algebra.FormallySmooth.lift, Algebra.FormallyEtale.of_isSeparable, Algebra.Etale.formallyEtale, StandardEtalePair.lift_X, StandardEtalePair.lift.congr_simp, RingHom.Etale, Algebra.FormallyEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned definitions, infinitesimal lifting or completion results do not assert lifting over the radical of a henselian ideal"
+  },
+  {
+   "tool": "grep",
+   "query": "henselian|HenselianRing",
+   "results": "5 hits; 13, 15, 16, 26, 32",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are introductory lines in Henselian.lean; the file was read through its HenselianRing definition and does not supply radical-ideal etale section lifting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a henselian pair A I every map from an etale A algebra B to A modulo the radical of I lifts to A",
+   "results": "8 hits; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, HenselianRing, StandardEtalePair.lift, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.lift, HenselianLocalRing, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, StandardEtalePair.lift_X",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned definitions, infinitesimal lifting or completion results do not assert lifting over the radical of a henselian ideal"
+  },
+  {
+   "tool": "grep",
+   "query": "HenselianRing|henselian.*[Ee]tale|[Ee]tale.*henselian",
+   "results": "5 hits; Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned definitions, infinitesimal lifting or completion results do not assert lifting over the radical of a henselian ideal"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, Algebra.Etale",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned definitions, infinitesimal lifting or completion results do not assert lifting over the radical of a henselian ideal"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-groupoid-etale-invariant-comparison",
+  "date": "2026-10-23",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Invariant-ring quotient of a stack with a finite flat affine cover. Supporting input: Etale invariant spectra for cartesian stabilizer-preserving affine groupoids. Supporting input in Tag 0DT9: Tags 09XJ (lemma-change-ideal-henselian-pair), with J=sqrt(I), and 09XI (lemma-characterize-henselian-pair), (1) implies (2).",
+   "via": [
+    "lem-sfb-affine-groupoid-etale-invariant-comparison",
+    "lem-sfb-finite-flat-affine-stack-invariant-quotient",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-henselian-pair-radical-etale-section",
+  "worker": "stage1",
+  "summary": "Proved radical invariance directly on finite-algebra idempotents using the existing nil-ideal lifting leaf, then verified Gabber roots by the existing henselian factorization criterion and applied the existing closed etale-section lifting node. No new nodes or statement changes.",
+  "blueprint": "The inherited provenance leads to det-thm-sf-ctf-stability-direct-images, proof (3), through the affine-groupoid invariant comparison, Tag 0DT9: this split expands its supporting Tags 09XJ and 09XI. The latest blueprint direct-image proof (3) remains the higher-level route; no unit or chapter changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-henselian-factorization-criterion",
+    "why": "Generic equivalence between finite-algebra idempotent lifting and coprime monic factorization lifting, used only to verify Gabber roots for the radical ideal; the current unit has no replacement for this commutative-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-henselian-factorization-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O3-d3f0365b2",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-d3f0365b2 (reviewer sub-agent of L); spot-checked: I read the item, all four cited nodes and Stacks more-algebra.tex Tags 09XJ (lemma-change-ideal-henselian-pair) and 09XI (lemma-characterize-henselian-pair). The delivery has no new nodes and the statement is unchanged; its two stmt_deps (henselian = idempotent lifting, scheme étale) are exactly what it uses. Step 1 (A=0 forces B=0) is a correct elementary step and gives A/J≠0 for step 3. Step 2 proves 09XJ for J=sqrt(I): JC/IC is nil by the exponent N=1+Σ(n_i−1), so no global exponent is needed. The nil-ideal idempotent leaf applied to C/IC, composed with henselianity of (A,I), gives the definition for (A,J). Step 3 uses the ⇒ direction of lem-weil-pbc-henselian-factorization-criterion for (A,J). The Bezout identity is correct, monic degree is preserved because A/J≠0, so h=T−α with α∈1+J and f(α)=0: this is Gabber's condition, matching hypothesis (b) of the next node index for index. Step 4: lem-weil-pbc-gabber-root-criterion-etale-section-lifting (reviewed by L, slopmaster2 declaration closed) gives exactly the conclusion with I:=J. proof_deps equals the union of the uses. Edge cases checked: A=0, I=0, I=(t^2)⊂k[[t]], and nil but not nilpotent J/I. No duplicate in the snapshot DAG: the etale-section-lifting-henselian-pair node is the converse and quotient-henselian-pair is local only. No cycle (the item is not in the 163-node closure of its deps), and the only citer uses the statement consistently. No SGA is cited. Accepted tool_use: lem-weil-pbc-henselian-factorization-criterion (sk-thm-p1), a generic commutative-algebra equivalence that replaces no geometric step of sk-thm-sf-ctf-stability. Mathlib searches cover all three kinds with a plausible no-match. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianPairRadicalEtaleSection",
+  "declaration": "Algebra.exists_etale_section_lift_mod_radical_of_henselianRing",
+  "file": "lean/Sheaf/RingTheory/HenselianPairRadicalEtaleSection.lean",
+  "statement": "theorem exists_etale_section_lift_mod_radical_of_henselianRing (A B : Type u) [CommRing A] [CommRing B] (I : Ideal A) [HenselianRing A I] [Algebra A B] [AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap A B)))] (σbar : B →ₐ[A] A ⧸ I.radical) : ∃ σ : B →ₐ[A] A, (Ideal.Quotient.mkₐ A I.radical).comp σ = σbar",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a1787762",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 09XJ (J=sqrt I) + 09XI (1)=>(2) clause by clause: HenselianRing A I = recorded pair notion; I.radical = sqrt I (exponent 0 only when I is the whole ring); AlgebraicGeometry.Etale (Spec.map (algebraMap A B)) = recorded scheme etale notion; arbitrary sigmabar : B ->a[A] A/I.radical; existence-only lift with mk_a o sigma = sigmabar. Common universe u forced by the scheme-level predicate; Gabber proof dep allows B in any universe. Edge cases A=0, I=top (excluded by jac), I=0, B=0, nil-not-nilpotent J/I covered with no added hypotheses. sorry-only proof; source/blueprint docstrings and 4-step proof docstring present; public imports for statement deps, plain imports for the 2 stated proof deps; no duplicate found; node non-lean fields identical to side-live; lean.statement verbatim; report has Worker report + Second reading by Q08. Minor: report wrongly says lift-idempotents dep has no declaration (it is Mathlib existsUnique_isIdempotentElem_eq_of_ker_isNilpotent); harmless. No compile run (nothing changed)."
+ }
+}

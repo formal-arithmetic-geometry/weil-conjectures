@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-projective-negative-twists-generator",
+ "kind": "statement",
+ "title": "Finite negative twists generate the projective-space derived category",
+ "statement": "Let $A$ be a commutative ring, $n\\geq0$, and $X=\\operatorname{Proj}(A[x_0,\\ldots,x_n])$, with twists [def-pc-projective-space-twist]. Put $T=\\bigoplus_{i=0}^n\\mathcal O_X(-i)$ in degree zero. In $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category], $T$ is a weak generator [def-pc-generators]: for every $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$, if $\\operatorname{Hom}(T,K[q])=0$ for all $q\\in\\mathbf Z$, then $K\\simeq0$.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A9V, perfect-lemma-generator-P1."
+ },
+ "stmt_deps": [
+  "def-pc-projective-space-twist",
+  "def-pc-derived-category",
+  "def-pc-generators"
+ ],
+ "proof": [
+  {
+   "text": "Fix $K$ with $\\operatorname{Hom}(T,K[q])=0$ for all $q$. In the ambient $D(\\mathcal O_X)$ form $\\mathcal S=\\{F:\\operatorname{Hom}(F,K[q])=0\\text{ for every }q\\in\\mathbf Z\\}$. Apply [lem-sf-shift-stable-left-orthogonal] to the shift-stable class of all $K[q]$: $\\mathcal S$ is strictly full and triangulated. For each summand $L_i=\\mathcal O_X(-i)$, a map $f:L_i\\to K[q]$ equals $(f\\circ\\pi_i)\\circ\\iota_i=0$, so $L_i\\in\\mathcal S$ for $0\\leq i\\leq n$. A map out of a finite direct sum is determined by its restrictions to the summands; hence every finite direct sum of objects of $\\mathcal S$ (in particular of twists already shown to lie in $\\mathcal S$) lies in $\\mathcal S$.",
+   "uses": [
+    "lem-sf-shift-stable-left-orthogonal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A9V, perfect-lemma-generator-P1, proof; Tags 0BQS and 0BQR for the two geometric inputs."
+   }
+  },
+  {
+   "text": "Prove by strong induction on $m\\geq0$ that $\\mathcal O_X(-m)\\in\\mathcal S$. The cases $m\\leq n$ were just proved. For $m\\geq n+1$, apply [lem-sfb-projective-coordinate-koszul-sequence] with $a=-m$. Omit its leftmost term and place the remaining terms $\\mathcal O_X(-m+j)^{\\oplus\\binom{n+1}{j}}$ in degrees $j-1$, $1\\leq j\\leq n+1$, to get a bounded complex $C$. Its terms lie in $\\mathcal S$ by induction, since $0\\leq m-j<m$. The augmentation $\\mathcal O_X(-m)[0]\\to C$ induces an isomorphism on degree-zero cohomology and both sides have zero cohomology in all other degrees, by exactness of the sequence. It is a quasi-isomorphism. By [lem-weil-pbc-bounded-complex-triangulated-devissage], $C\\in\\mathcal S$; closure under isomorphisms gives the induction step.",
+   "uses": [
+    "lem-sfb-projective-coordinate-koszul-sequence",
+    "lem-weil-pbc-bounded-complex-triangulated-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A9V, perfect-lemma-generator-P1, proof; Tags 0BQS and 0BQR for the two geometric inputs."
+   }
+  },
+  {
+   "text": "Put $L_m=\\mathcal O_X(-m)$. It is locally free of rank one by [def-pc-projective-space-twist], so is perfect. Applying [lem-sc-finite-locally-free-derived-hom] with target $\\mathcal O_X[0]$ identifies its derived dual with the ordinary line-bundle dual. On $U_i$ the dual basis of $e_i^{(-m)}$ transforms by $(x_i/x_j)^m$; thus $L_m^\\vee=\\mathcal O_X(m)=\\mathcal O_X(1)^{\\otimes m}$. The unbounded evaluation isomorphism of [lem-sfb-ringed-site-perfect-duality], the global Hom identification [lem-pur-rhom-global-sections], and [lem-sc-global-hom-shifted-hypercohomology] with shift indices $(0,q)$ give\n$$\\operatorname{Hom}(L_m,K[q])\\cong H^q\\bigl(X,K\\otimes^L\\mathcal O_X(m)\\bigr).$$\nTensor symmetry here is the chain isomorphism $t\\otimes k\\mapsto k\\otimes t$, with no sign since the line lies in degree zero. These groups vanish for every $m\\geq0$ and every $q\\in\\mathbf Z$ by the induction. The global comparison is applied on the Zariski site (small in a fixed sufficiently large universe); all these cited results allow arbitrary unbounded $K$.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "lem-sc-finite-locally-free-derived-hom",
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-pur-rhom-global-sections",
+    "lem-sc-global-hom-shifted-hypercohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A9V, perfect-lemma-generator-P1, proof; Tags 0BQS and 0BQR for the two geometric inputs."
+   }
+  },
+  {
+   "text": "The line bundle $\\mathcal O_X(1)$ is ample in [def-weil-pbc-ample-invertible-module]: the finitely many affine opens $U_i=D_+(x_i)$ cover $X$. The coordinate $x_i$ defines a section $s_i$ whose expression on $U_j$ is $(x_i/x_j)e_j^{(1)}$. The transition rule of [def-pc-projective-space-twist] glues these expressions, and their nonvanishing locus is precisely $U_i$. This finite affine section cover verifies both clauses of the cited definition of ampleness.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A9V, perfect-lemma-generator-P1, proof; Tags 0BQS and 0BQR for the two geometric inputs."
+   }
+  },
+  {
+   "text": "If $K\\not\\simeq0$, apply [lem-sfb-ample-twist-hypercohomology-detection] to $\\mathcal L=\\mathcal O_X(1)$, which step 4 proved ample. It supplies $m\\geq0$ and $q$ with $H^q(X,K\\otimes^L\\mathcal O_X(1)^{\\otimes m})\\neq0$, contrary to step 3. Therefore $K\\simeq0$, exactly the weak-generator criterion [def-pc-generators].",
+   "uses": [
+    "lem-sfb-ample-twist-hypercohomology-detection",
+    "def-pc-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A9V, perfect-lemma-generator-P1, proof; Tags 0BQS and 0BQR for the two geometric inputs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-shift-stable-left-orthogonal",
+  "lem-sfb-projective-coordinate-koszul-sequence",
+  "lem-weil-pbc-bounded-complex-triangulated-devissage",
+  "def-pc-projective-space-twist",
+  "lem-sc-finite-locally-free-derived-hom",
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-pur-rhom-global-sections",
+  "lem-sc-global-hom-shifted-hypercohomology",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sfb-ample-twist-hypercohomology-detection",
+  "def-pc-generators"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A9V, perfect-lemma-generator-P1, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The sum of O O(-1) through O(-n) generates the unbounded derived category of quasi coherent sheaves on projective space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"DerivedCategory.instIsLEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsLE n\", \"doc\": \"An object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, which consists of objects isomorphic to cochain complexes strictly supported in degrees $ \\\\leq n $, as defined by \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no finite-twist generator theorem; the hits concern single-complex projectivity, zero cochains, or projective spectra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing of Hom from all shifts of finitely many twists O(-i) detects zero on projective space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CochainComplex.HomComplex.Cochain.shift_zero\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift\", \"type\": \"(a : ℤ) : (0 : Cochain K L n).shift a = 0\", \"doc\": \"For any integer $a$, shifting the zero cochain in the homomorphism complex $\\\\text{Hom}(K, L)$ by $a$ results in the zero cochain, i.e., $0^\\\\text{shift}(a) = 0$.\"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives\", \"type\": \"{P : C} [Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ Q.obj L) (n : ℤ) (hn : n < i) [L.IsStrictlyLE n] : φ = 0\", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"HomologicalComplex.ExactAt.isZero_homology\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \"[K.HasHomology i] (h : K.ExactAt i) : IsZero (K.homology i)\", \"doc\": \"If a homological complex $ K $ is exact at index $ i $, then its homology object at $ i $ is a zero object.\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.leftShift_zero\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift\", \"type\": \"(a n' : ℤ) (hn' : n + a = n') : (0 : Cochain K L n).leftShift a n' hn' = 0\", \"doc\": \"For any integers $a$ and $n'$ satisfying $n + a = n'$, the left shift operation applied to the zero cochain in degree $n$ of the homomorphism complex $\\\\text{Hom}(K, L)$ yields the zero cochain in degr\"}\n  {\"name\": \"Homotopy.extend.hom_eq_zero₂\", \"module\": \"Mathlib.Algebra.Homology.Embedding.ExtendHomotopy\", \"type\": \"(i' j' : ι') (hj' : ∀ j, e.f j ≠ j') : hom e φ i' j' = 0\", \"doc\": \"For indices $i', j'$ in the target shape $\\\\iota'$, if $j'$ is not in the image of the embedding $e$ (i.e., for all $j$ in the source shape, $e.f(j) \\\\neq j'$), then the induced homomorphism between ext\"}\n  {\"name\": \"Module.forall_dual_apply_eq_zero_iff\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \"(R : Type*) [Semiring R] [Module R V] [Projective R V] (v : V) : (∀ φ : Module.Dual R V, φ v = 0) ↔ v = 0\", \"doc\": \"For a projective module $ V $ over a semiring $ R $, an element $ v \\\\in V $ satisfies $ v = 0 $ if and only if every $ R $-linear functional $ \\\\phi \\\\in V^* $ (the dual module) satisfies $ \\\\phi(v) = 0 \"}\n  {\"name\": \"ProjectiveSpectrum.vanishingIdeal\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology\", \"type\": \"(t : Set (ProjectiveSpectrum 𝒜)) : HomogeneousIdeal 𝒜\", \"doc\": \"Given a set $ t $ in the projective spectrum $ \\\\text{Proj}(\\\\mathcal{A}) $, the vanishing ideal is defined as the intersection $ \\\\bigcap_{\\\\mathfrak{p} \\\\in t} \\\\mathfrak{p} $ of all homogeneous prime ide\"}\n  {\"name\": \"AlgebraicGeometry.Proj.zero_apply\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \": (0 : (Proj.structureSheaf 𝒜).1.obj V).1 x = 0\", \"doc\": \"For the structure sheaf $\\\\mathcal{O}$ on the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$, the zero element $0 \\\\in \\\\mathcal{O}(V)$ satisfies $0(x) = 0$ for all points \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no finite-twist generator theorem; the hits concern single-complex projectivity, zero cochains, or projective spectra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpace\", \"generator\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: no finite-twist generator theorem; the hits concern single-complex projectivity, zero cochains, or projective spectra."
+  },
+  {
+   "tool": "grep",
+   "query": "projectiveSpace.*generat|generat.*projectiveSpace|generator.P1|Beilinson",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean\", \"line\": \"27\", \"text\": \"* [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*][bbd-1982]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean\", \"line\": \"25\", \"text\": \"* [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*, 1.2][bbd-1982]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean\", \"line\": \"35\", \"text\": \"* [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*][bbd-1982]\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no finite-twist generator theorem; the hits concern single-complex projectivity, zero cochains, or projective spectra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Negative line bundle twists form a weak generator of derived quasi coherent sheaves on projective n space over any ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"isZero_Ext_succ_of_projective\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"∀ {R : Type u_1} [inst : Ring R] {C : Type u_2} [inst_1 : CategoryTheory.Category.{v_1, u_2} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : CategoryTheory.EnoughProjectives C]\\n  (X Y : C) [CategoryTheory.Projective X] (n : ℕ),\\n  CategoryTheory.Limits.IsZero (\", \"doc\": \"For any projective object $ X $ in an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, and for any object $ Y $ in $ \\\\mathcal{C} $, the $(n + 1)$-th extension group $\\\\text{Ext}^{\"}\n  {\"name\": \"CochainComplex.IsKProjective.Qh_map_bijective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/KProjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (L : HomotopyCategory C (ComplexShape.up ℤ))\\n  [K.IsKProjective], Function.Bijective DerivedCategory.Qh.map\", \"doc\": \"For any K-projective cochain complex $K$ in an abelian category $\\\\mathcal{C}$ and any object $L$ in the homotopy category of integer-indexed complexes, the induced map $\\\\text{Qh.map}$ from homotopy cl\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.Preadditive C] {X : C} (R : CategoryTheory.ProjectiveResolution X) (n : ℤ),\\n  CategoryTheory.Projective (R.cochainComplex.X n)\", \"doc\": \"For every integer $ n $, the object $ X_n $ in the cochain complex constructed from the projective resolution $ R $ is projective. This cochain complex extends the chain complex of $ R $ by embedding \"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C}\\n  (R : CategoryTheory.ProjectiveResolution X), R.cochainComplex.IsKProjective\", \"doc\": \"The cochain complex constructed from a projective resolution in an abelian category satisfies the K-projective property, meaning it is acyclic and has lifting properties with respect to quasi-isomorph\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C}\\n  (R : CategoryTheory.ProjectiveResolution X), R.cochainComplex.IsGE 0\", \"doc\": \"The cochain complex constructed from a projective resolution via the embedding of natural number indices into integers is supported in non-negative degrees. Specifically, for any projective resolution\"}\n  {\"name\": \"CochainComplex.isKProjective_of_projective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (K : CochainComplex C ℤ) (d : ℤ) [K.IsStrictlyLE d] [∀ (n : ℤ), CategoryTheory.Projective (K.X n)], K.IsKProjective\", \"doc\": \"In an abelian category, if a cochain complex $ K $ is strictly supported (via the embedding $ \\\\text{embeddingUpIntLE}(d) $) and every object $ K^i $ in the complex is projective, then $ K $ satisfies \"}\n  {\"name\": \"CochainComplex.IsKProjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A proposition asserting that a cochain complex in an abelian category satisfies the K-projective property, which typically requires that the complex is acyclic and satisfies certain lifting properties\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no finite-twist generator theorem; the hits concern single-complex projectivity, zero cochains, or projective spectra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite sum O O(-1) through O(-n) is a weak generator of the unbounded quasi coherent derived category of projective space",
+   "results": "8 hits: DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.IsGE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.IsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsLEObjSingleFunctor",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived category and projective object facts do not state this geometric generator theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpectrum\", \"generator\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived category and projective object facts do not state this geometric generator theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*generator|generator.*projective|Beilinson",
+   "results": "6 hits: Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean, Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean, Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean, Mathlib/CategoryTheory/Abelian/FreydMitchell.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/Opposite.lean, Mathlib/RingTheory/Morita/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived category and projective object facts do not state this geometric generator theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite collection of negative line bundle twists generates the unbounded derived category of quasi coherent sheaves on projective space",
+   "results": "8 hits: HasDerivedCategory, HasDerivedCategory.standard, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, DerivedCategory, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.Presentation",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived category and projective object facts do not state this geometric generator theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-space-tilting-equivalence",
+  "date": "2026-10-23",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG). Proof of Stacks 0CSG (5) => (1): the equivalence from 0BQU and its RHom inverse. Generator input in the proof of Tag 0BQU, after the self-Ext calculation.",
+   "via": [
+    "lem-sfb-projective-space-tilting-equivalence",
+    "lem-sfb-projective-space-pseudocoherence-twist-test",
+    "lem-sfb-relative-section-image-flat-fp",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-negative-twists-generator",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0A9V over an arbitrary commutative ring, exposing the exact coordinate Koszul sequence and ample-twist detection as two statement-only inputs. Strong induction, bounded derived devissage, unbounded perfect duality, and the explicit ample affine cover complete the proof. No statement correction or Lean attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG). Proof of Stacks 0CSG (5) => (1): the equivalence from 0BQU and its RHom inverse. Generator input in the proof of Tag 0BQU, after the self-Ext calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-bounded-complex-triangulated-devissage",
+    "why": "Generic bounded-complex construction from its terms, applied in the sheaf-module derived category; no same-unit node states this finite truncation result."
+   },
+   {
+    "node": "lem-sc-finite-locally-free-derived-hom",
+    "why": "Identifies the derived dual of a line bundle with its ordinary sheaf dual (only a degree-zero target is used here)."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Unbounded global identification between internal derived Hom hypercohomology and actual derived morphisms on the Zariski ringed site."
+   },
+   {
+    "node": "lem-sc-global-hom-shifted-hypercohomology",
+    "why": "Converts degree-q global derived Hom to H^0 of shifted internal Hom without a boundedness assumption."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-bounded-complex-triangulated-devissage",
+  "lem-sc-finite-locally-free-derived-hom",
+  "lem-pur-rhom-global-sections",
+  "lem-sc-global-hom-shifted-hypercohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-6b990d16b",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-6b990d16b (reviewer sub-agent of L); spot-checked: This is a sound one-level split of Stacks 0A9V (perfect.tex lemma-generator-P1); I read it in full. The item statement is unchanged from live and matches 0A9V for any ring, any n and unbounded K. Live and side-live still have the item unsplit, there is no repair note and no earlier run. Steps: (1) lem-sf-shift-stable-left-orthogonal, with the summand argument f=(fπ_i)ι_i checked; (2) a stated strong induction: for m≥n+1 the 0BQS complex with a=-m has terms with indices 0≤m-j<m, and its exactness gives a quasi-isomorphism O(-m)[0]→C, after which the 0FCP devissage applies in Mod(O_X); (3) Hom(O(-m),K[q]) ≅ H^q(X,K⊗^L O(m)) by 08JA, the (0,q) shift lemma, unbounded 08JJ duality and 08DQ with an O_X target, with the dual-basis transition (x_i/x_j)^m checked against O(m)=O(1)^{⊗m}; (4) O(1) is ample under 01PS, since s_i glues and X_{s_i}=U_i is affine, so marking the step elementary is acceptable; (5) 0BQR gives the contradiction. New nodes: the 0BQS and 0BQR statements match the sources; 0BQS uses the n+1 indexing of the lemma statement, not the source's C(n,i) typo. Small cases tested: n=0, n=1 (d²=0), the zero ring, empty X, affine M[0]. No duplicates turned up across the DAG, and neither new node restates a clause of the item. Accepted tool_uses: bounded-complex devissage, finite-locally-free derived Hom, rhom-global-sections and global-hom-shifted-hypercohomology. FIXes: (B4) the JSON had \\not and \\neq with one backslash, so they decoded to newline+'ot'/'eq' in the detection node statement and in item step 5; both repaired. (B3) the Koszul node defined its maps by 'sheafifying the graded Koszul complex' without citing the tilde functor or the Koszul complex; it now gives explicit maps x_j: O(d)→O(d+1) from the bases of def-pc-projective-space-twist, with the exterior-multiplication sign (-1)^{#{k∈I:k<j}}, overlap compatibility checked. In item step 1 the finite-sum sentence now covers every finite sum of objects of S, which the induction needs. Corrected files are under fixes/dag/nodes/sec-six-functors-basics/; details are in review.md.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveNegativeTwistsGenerator",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.negativeTwistsGenerator_isWeakGenerator",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveSpace.negativeTwistsGenerator",
+   "AlgebraicGeometry.ProjectiveSpace.negativeTwistsGenerator_isWeakGenerator"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveNegativeTwistsGenerator.lean",
+  "statement": "theorem negativeTwistsGenerator_isWeakGenerator (A : Type u) [CommRing A] (n : ℕ) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of A))).toRingedSpace))] : schemeDerivedQCohProperty (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of A))) (negativeTwistsGenerator A n) ∧ ∀ K : schemeDerivedQCohCategory (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of A))), (∀ q : ℤ, Subsingleton (negativeTwistsGenerator A n ⟶ K.obj⟦q⟧)) → IsZero K.obj",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b851c08ff",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Node vs Lean clause by clause: A CommRing Type u, n:ℕ, ℙ(ULift (Fin (n+1)); Spec A) with ProjectiveSpace.twist (STATE.md convention; ULift matches twist's n : Type u), T = actual ∐_{i<n+1} twist(-i) via singleFunctor 0, extra conjunct T ∈ D_QCoh (implied by node), ∀ K : schemeDerivedQCohCategory, (∀ q:ℤ, Subsingleton (T ⟶ K.obj⟦q⟧)) → IsZero K.obj = node criterion and Stacks 0A9V/09SJ; ambient IsWeakTriangulatedGenerator would be false and D_QCoh has no triangulated instance, so the unfolded criterion is right and matches the exists_perfect_generator idiom. Universes u/w independent and bound; edge cases n=0, zero ring, K=0, all shifts covered. sorry only; definition real; docstrings carry source and blueprint id and all 5 proof steps; statement field verbatim; node unchanged from live apart from the lean record; 6 proof-dep plain imports exist; report has both sections. Not recompiled per the 2026-10-21 instruction. Advisory: the same sum exists as tiltingBundle in the tilting-equivalence theorem module; citing it would create a DAG cycle, so the duplicate is forced."
+ }
+}

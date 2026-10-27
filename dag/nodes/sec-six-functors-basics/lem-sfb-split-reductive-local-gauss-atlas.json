@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-split-reductive-local-gauss-atlas",
+ "kind": "statement",
+ "title": "Finite Laurent-polynomial open atlas for a locally split reductive group",
+ "statement": "Let $A$ be a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring]. An $A$-group scheme has multiplication, identity and inverse over $\\operatorname{Spec}A$ satisfying the group diagrams of [def-sc-group-scheme]. Let $H$ be a smooth [def-sbc-smooth-morphisms] affine finite-type [def-weil-finite-type-morphism] $A$-group scheme whose geometric fibres are reductive: each is connected [def-weil-connected-scheme] and has no nontrivial smooth connected normal unipotent subgroup. Unipotent means all geometric points are unipotent matrices in a faithful representation. Let $S\\hookrightarrow H$ be a closed subgroup [def-weil-closed-immersion], with a specified isomorphism $S\\simeq\\mathbf G_{m,A}^r$, $r\\geq0$, whose geometric fibres are maximal tori; a torus over an algebraically closed field is a finite product of $\\mathbf G_m$, and maximal means maximal for subgroup inclusion. Here $\\mathbf G_{m,A}=\\operatorname{Spec}A[z,z^{-1}]$, with multiplication of units. Then there are an integer $d\\geq0$, a nonempty finite index set $I$, and $A$-morphisms\n$$\\theta_i:\\operatorname{Spec}A[x_1,\\ldots,x_d,z_1^{\\pm1},\\ldots,z_r^{\\pm1}]\\longrightarrow H\\qquad(i\\in I)$$\nwhich are open immersions [def-weil-open-immersion] and whose images cover the underlying space of $H$. The spectrum and its contravariant functoriality are those of [def-weil-affine-spectrum]; the displayed algebra is the polynomial algebra in the $x_j$ and invertible variables $z_l$. The cases $d=0$ and $r=0$ use empty lists of variables.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Definition 5.1.1 and discussion (printed p.136), Corollary 5.1.11 (pp.142-143), Theorem 5.1.13 (pp.143-144); finite translated-cell cover is the agent-formulated consequence of the relative open cell and geometric Bruhat charts. For the field charts see Milne, Algebraic Groups (2017), Theorems 21.73 and 21.84 (printed pp.447 and 451). Original Conrad PDF WANTED locally; no Stacks tag supplies relative reductive-group structure."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "def-sfb-split-torus-over-ring",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-local-split-root-data-weyl-lifts] to $A,H,S$: it supplies one finite root set $\\Phi$, a positive system $\\Phi^+$, parametrizations $u_\\alpha$, the finite group $W$ and representatives $n_w\\in H(A)$. Apply [lem-sfb-relative-root-product-open-cell] to these data. Write $N=|\\Phi^+|$ and retain its $U^-,U^+,B$ and open immersion $j:U^-\\times_AS\\times_AU^+\\to H$. Both inputs require exactly the local Noetherian and geometric reductivity hypotheses already assumed; neither requires a henselian ring nor an algebraically closed residue field.",
+   "uses": [
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-relative-root-product-open-cell"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, introduction to Section 4, printed p.107 (weight subbundles); Definition 5.1.1 and its following discussion, p.136 (connected-base constancy); Theorem 4.1.4, p.110 (relative root groups); Proposition 5.1.6, p.138 (constant Weyl group); Corollary 5.1.11, pp.142-143 (global Weyl representatives). Local freeness of root lines becomes freeness over the local ring. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf."
+   }
+  },
+  {
+   "text": "Fix enumerations of $\\Phi^+$ and $-\\Phi^+$. The root parametrizations and ordered product isomorphisms identify the source of $j$ with $\\mathbf A_A^N\\times_AS\\times_A\\mathbf A_A^N$. Its coordinate algebra is $A[x_1,\\ldots,x_{2N},z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$: a map out is precisely two lists of $N$ arbitrary elements and $r$ units; the inverse identification reads off these coordinates. Thus this is an isomorphism $c:V\\to U^-\\times_AS\\times_AU^+$. For $w\\in W$ define $\\theta_w=L_{n_w}\\circ j\\circ c$, where $L_{n_w}(h)=n_wh$. Its inverse translation is $L_{n_w^{-1}}$, by the group identities. Hence $\\theta_w$ identifies $V$ with the open subscheme $n_w\\Omega$, where $\\Omega=j(U^-\\times_AS\\times_AU^+)$; it is an open immersion by [def-weil-open-immersion].",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Theorem 5.1.13 and proof, printed pp.143-144 (ordered positive root products, closed Borel and relative open cell), with Theorem 4.1.4 for root parametrizations. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. Geometric Borel terminology agrees with Milne, Algebraic Groups (2017), 21.32 and 21.68."
+   }
+  },
+  {
+   "text": "Fix an algebraically closed field $F$ and $A\\to F$. The relative inputs identify $S_F$ as a split maximal torus, $B_F$ as its positive Borel, and $U_F^+$ as its unipotent radical. They identify $W$ with the geometric Weyl group and $n_w$ with a system of representatives. The stratification and multiplication isomorphisms in [lem-sfb-bruhat-longest-cell-charts] therefore give, for each $g\\in H(F)$, some $w\\in W$ and $u\\in U_F^+(F),\\ b\\in B_F(F)$ with $g=u n_w b$. Indeed its stratum coordinate lies in the subscheme $V^w\\subseteq U_F^+$, which suffices here.",
+   "uses": [
+    "lem-sfb-bruhat-longest-cell-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.73(a), p.447, and Theorem 21.68(a), Remark 21.69, pp.445-446; explicit root-coordinate argument for the translated-cell cover."
+   }
+  },
+  {
+   "text": "Conjugation by $n_w^{-1}$ carries $B_F$ and its radical to $B'=n_w^{-1}B_Fn_w$ and $U'=n_w^{-1}U_F^+n_w$. Its positive roots are $w^{-1}\\Phi^+$ by the root conjugation formula of step 1. Apply [lem-sfb-borel-root-product-coordinates] to this Borel, enumerating its roots with the members of $-\\Phi^+$ first and those of $\\Phi^+$ last. It expresses $n_w^{-1}u n_w$ as $v_-v_+$, where each factor in $v_-$ belongs to a negative root subgroup and each factor in $v_+$ belongs to a positive root subgroup. The subgroup inclusions of step 1 give $v_-\\in U_F^-(F)$ and $v_+\\in U_F^+(F)$. Since $B_F=S_F\\ltimes U_F^+$, write $v_+b=st$ with $s\\in S_F(F)$ and $t\\in U_F^+(F)$. Consequently $g=n_w v_-st\\in n_w\\Omega(F)$. This uses arbitrary-order product coordinates, not commutativity of the root groups.",
+   "uses": [
+    "lem-sfb-borel-root-product-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.73(a), p.447, and Theorem 21.68(a), Remark 21.69, pp.445-446; explicit root-coordinate argument for the translated-cell cover."
+   }
+  },
+  {
+   "text": "Let $h$ be any underlying point of $H$, and let $F$ be an algebraic closure of its residue field $\\kappa(h)$. The morphism $\\operatorname{Spec}F\\to\\operatorname{Spec}\\kappa(h)\\to H$ is an $F$-point over the induced $A\\to F$ and has image $h$. Steps 3-4 put this point in some $n_w\\Omega$; composing its factorization through this open subscheme shows $h\\in|n_w\\Omega|$. Thus the images of the $\\theta_w$ cover every point of $H$. Take $I=W$ and $d=2N$. A finite group contains its identity, so $I$ is nonempty. Empty root and torus coordinate lists cause no change: when $\\Phi$ is empty the same Bruhat argument has $W=\\{1\\}$, and the single chart covers.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.73(a), p.447, and Theorem 21.68(a), Remark 21.69, pp.445-446; explicit root-coordinate argument for the translated-cell cover."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-local-split-root-data-weyl-lifts",
+  "lem-sfb-relative-root-product-open-cell",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "lem-sfb-bruhat-longest-cell-charts",
+  "lem-sfb-borel-root-product-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "21.68(a), 21.69 and 21.73(a); assembly with Conrad relative structural inputs. The Weyl translated-cell cover is proved here by reordered root factors, not assumed from the field chart cover."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Bruhat|big.?cell|reductive|root.?subgroup",
+   "results": "{\"t\": \"2026-10-24T03:38:27Z\", \"tool\": \"grep\", \"query\": \"Bruhat|big.?cell|reductive|root.?subgroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic affine covers and open immersions do not supply the specified split-reductive Laurent-polynomial charts; root-system Lie matrices do not supply group-scheme charts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split reductive group scheme big cell open immersion product of root groups and torus over a local ring",
+   "results": "{\"t\": \"2026-10-24T03:38:28Z\", \"tool\": \"leansearch\", \"query\": \"Split reductive group scheme big cell open immersion product of root groups and torus over a local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion.of_isLocalization\", \"AlgebraicGeometry.IsOpenImmersion.instIsOpenImmersionMapSchemeLocallyRingedSpaceForgetToLocallyRingedSpace\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme\", \"AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec\", \"AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion\"], \"digest\": \"4f4ada071697e823\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic affine covers and open immersions do not supply the specified split-reductive Laurent-polynomial charts; root-system Lie matrices do not supply group-scheme charts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsOpenImmersion\", \"GroupScheme\"",
+   "results": "{\"t\": \"2026-10-24T03:38:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsOpenImmersion\\\", \\\"GroupScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic affine covers and open immersions do not supply the specified split-reductive Laurent-polynomial charts; root-system Lie matrices do not supply group-scheme charts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive group scheme with split maximal torus over a local ring has a finite open cover by Weyl translates of an affine space times a split torus",
+   "results": "{\"t\": \"2026-10-24T03:38:29Z\", \"tool\": \"leanfinder\", \"query\": \"A reductive group scheme with split maximal torus over a local ring has a finite open cover by Weyl translates of an affine space times a split torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.AffineOpenCover\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\"], \"digest\": \"125ec5a28b0f206b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic affine covers and open immersions do not supply the specified split-reductive Laurent-polynomial charts; root-system Lie matrices do not supply group-scheme charts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split reductive group over a ring has Gauss decomposition open charts indexed by the Weyl group",
+   "results": "{\"t\": \"2026-10-24T03:38:30Z\", \"tool\": \"leanfinder\", \"query\": \"A split reductive group over a ring has Gauss decomposition open charts indexed by the Weyl group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.h'\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.e\", \"RootPairing.span_orbit_eq_top\", \"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"RootPairing.GeckConstruction.f\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\"], \"digest\": \"da976f1b9ddf5a2f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic affine covers and open immersions do not supply the specified split-reductive Laurent-polynomial charts; root-system Lie matrices do not supply group-scheme charts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bruhat\"",
+   "results": "{\"t\": \"2026-10-24T04:00:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"Bruhat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root systems, characteristic-zero Killing Lie algebras, abstract subgroup products, general scheme covers and open immersions do not construct relative reductive root subgroups, base-ring Weyl representatives, or the relative multiplication open cell."
+  },
+  {
+   "tool": "grep",
+   "query": "Bruhat|big.?cell|reductive",
+   "results": "{\"t\": \"2026-10-24T04:00:19Z\", \"tool\": \"grep\", \"query\": \"Bruhat|big.?cell|reductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root systems, characteristic-zero Killing Lie algebras, abstract subgroup products, general scheme covers and open immersions do not construct relative reductive root subgroups, base-ring Weyl representatives, or the relative multiplication open cell."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Laurent polynomial open atlas of a reductive group scheme with a split maximal torus over a local ring",
+   "results": "{\"t\": \"2026-10-24T04:00:19Z\", \"tool\": \"leansearch\", \"query\": \"Finite Laurent polynomial open atlas of a reductive group scheme with a split maximal torus over a local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentPolynomial\", \"LaurentSeries\", \"LaurentPolynomial.isLocalization\", \"LaurentPolynomial.T\", \"LaurentPolynomial.instModulePolynomial\", \"LaurentPolynomial.mk'_eq\", \"LaurentPolynomial.instIsScalarTowerPolynomial\", \"LaurentPolynomial.exists_T_pow\"], \"digest\": \"83fa539238124b63\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root systems, characteristic-zero Killing Lie algebras, abstract subgroup products, general scheme covers and open immersions do not construct relative reductive root subgroups, base-ring Weyl representatives, or the relative multiplication open cell."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split reductive group over a local ring has finite open cover by affine spaces times a split torus",
+   "results": "{\"t\": \"2026-10-24T04:00:22Z\", \"tool\": \"leanfinder\", \"query\": \"A split reductive group over a local ring has finite open cover by affine spaces times a split torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.Scheme.AffineOpenCover\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\"], \"digest\": \"41c750382c121ec7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root systems, characteristic-zero Killing Lie algebras, abstract subgroup products, general scheme covers and open immersions do not construct relative reductive root subgroups, base-ring Weyl representatives, or the relative multiplication open cell."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weyl translates of the relative big cell cover a split reductive group scheme",
+   "results": "{\"t\": \"2026-10-24T04:00:23Z\", \"tool\": \"leanfinder\", \"query\": \"Weyl translates of the relative big cell cover a split reductive group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.span_orbit_eq_top\", \"MulAction.IwasawaStructure.is_generator\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"AlgebraicGeometry.Scheme.Cover.iUnion_range\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\", \"AlgebraicGeometry.Scheme.OpenCover.isOpenCover_opensRange\", \"AlgebraicGeometry.sigmaOpenCover_I₀\", \"IsOpen.iUnion_smul\"], \"digest\": \"d77ffdd3eff084eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root systems, characteristic-zero Killing Lie algebras, abstract subgroup products, general scheme covers and open immersions do not construct relative reductive root subgroups, base-ring Weyl representatives, or the relative multiplication open cell."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-reductive-local-quotient-points",
+  "date": "2026-10-24",
+  "group": "Q107"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting.",
+   "via": [
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-reductive-local-gauss-atlas",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Isolated relative root data and Weyl lifts, and the relative open cell, as two statement-only inputs. Constructed charts over A and proved coverage using geometric Bruhat strata and arbitrary-order root coordinates. No lifting from residue-field points is used.",
+  "blueprint": "The inherited from.place locates the relative atlas prerequisite in det-thm-sf-ctf-stability-direct-images (3); steps 1-2 construct the relative charts and steps 3-5 prove fibrewise and hence global exhaustion. The inherited nearest blueprint node is null, as blueprint_refs.py ancestor reports; retained that provenance.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-8b00d404f",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-8b00d404f (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and the cited statements in full: bruhat-longest-cell-charts, borel-root-product-coordinates, reductive-root-subgroup-parametrizations and reductive-borel-pair-structure. The item's statement is unchanged from the base. The item is still unsplit in live, there is no repair note, and no SGA source is cited (Conrad's Luminy notes are not SGA). Steps: 1 cites the two new relative inputs, whose hypotheses are the item's word for word. 2 is elementary: U± is A^N via u_α and the ordered products, so the cell source is Spec A[x_1..x_2N, z^±], and θ_w = L_{n_w}∘j∘c is an open immersion. 3 uses the Bruhat strata C_w ≅ V^w×B; representatives that differ by S(F) are absorbed into B. 4 gives w^{-1}Φ^+ as the roots of B' = n_w^{-1}B n_w; ordering the −Φ^+ roots first puts n_w^{-1}un_w in U^-U^+, so g lies in n_wΩ(F) without assuming root groups commute. 5 is elementary: take a geometric point over κ(h); I = W. Both new statements are true and match Conrad 4.1.4/4.1.7/5.1.6/5.1.11/5.1.13. The torsor argument for n_w ∈ H(A) works because Pic of a local ring is 0. They also match Milne 21.68/21.73/21.84, which I checked in the local PDF. Neither node restates the item. Small cases tested: SL2 (charts a≠0 and c≠0), GLn, G_m^r, H=1, A=k[ε]/ε². No duplicates: relative-torus-bundle-weights, relative-torus-centralizer-normalizer, relative-block-gauss-chart and the Chevalley and field big-cell nodes are different statements. Batch 5: the three flagged closures reach split-lattice-torus-projection (smoothness of a split torus), smooth-composition (01VA Mathlib leaf) and fppf-covering-base-change (021O leaf). All three are generic and are not steps of the trace formula or Poincaré duality, so I accepted them. FIX (B3): local-split-root-data-weyl-lifts used 'tangent A-module' and 'character-weight summand' with no definition. I now define h = ker(H(A[ε]) → H(A)), the conjugation coaction and h_m inline. I also dropped the uncited stmt_dep def-weil-open-immersion and corrected 'units..' to 'units.' in both new nodes. tool_uses: none.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitReductiveLocalGaussAtlas",
+  "declaration": "AlgebraicGeometry.splitReductive_local_gauss_atlas",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitReductiveLocalGaussAtlas.lean",
+  "statement": "theorem splitReductive_local_gauss_atlas (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (H S : Grp (Over (Spec (.of A)))) [Smooth H.X.hom] [IsAffine H.X.left] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] (i : S ⟶ H) [IsClosedImmersion i.hom.hom.left] (r : ℕ) (e : S ≅ RingGroupSchemes.splitTorus A r) (hred : ∀ (F : Type u) [Field F] [IsAlgClosed F] (f : A →+* F), ReductiveTorusCentralizer.IsReductive ((Over.pullback (Spec.map (CommRingCat.ofHom f))).mapGrp.obj H)) (hmax : ∀ (F : Type u) [Field F] [IsAlgClosed F] (f : A →+* F), ReductiveTorusCentralizer.IsMaximalTorus ((Over.pullback (Spec.map (CommRingCat.ofHom f))).mapGrp.map i)) : ∃ (d : ℕ) (I : Type u) (_ : Finite I) (_ : Nonempty I) (θ : I → (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap A (MvPolynomial (Fin d) (AddMonoidAlgebra A (Fin r → ℤ)))))) ⟶ H.X)), (∀ j : I, IsOpenImmersion (θ j).left) ∧ ∀ x : H.X.left, ∃ j : I, x ∈ Set.range (θ j).left",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the landed ring split torus and geometric reductivity/maximal-torus predicates; the only stmt_deps additions are their existing nodes. The Laurent chart algebra is MvPolynomial (Fin d) (AddMonoidAlgebra A (Fin r → ℤ)). IsLocalRing includes nontriviality. No statement or proof correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35adb5e61",
+  "group": "NB",
+  "result": "pass",
+  "note": "Clause-by-clause match of the node (A local Noetherian, nontrivial via IsLocalRing; H smooth/affine/finite type as Grp over Spec A; hred/hmax over all algebraically closed F : Type u, same encoding as landed splitReductive_dvr_cartan_decomposition; S closed subgroup with Grp iso to RingGroupSchemes.splitTorus A r; conclusion: common d, finite nonempty I : Type u, Over-morphisms from Spec MvPolynomial (Fin d) (AddMonoidAlgebra A (Fin r → ℤ)), open immersions, pointwise cover). Node diff vs live = lean record + 2 used stmt_deps; statement verbatim; sorry only; source/blueprint docstrings with the 5-step plan; edge cases r=0, d=0, trivial H, G_m^r, SL2, k[ε]/ε² fine; no duplicate found; no file changed, no compile."
+ }
+}

@@ -1,0 +1,423 @@
+{
+ "id": "lem-sf-completed-shriek-composition-laws",
+ "kind": "statement",
+ "title": "Completed shriek composition laws",
+ "statement": "Fix a finite field $k_0=\\mathbf F_q$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$ and uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$. Use the small pro-etale coefficient categories and the specified six operations of [def-fix-six-functor-datum]. Finite inputs used for compact support carry compatible etale-origin witnesses; integral inputs are derived complete with compatible witnessed finite reductions, rational operations are raw localization, and algebraically closed coefficients are represented at a common finite coefficient field. All operations below are restricted to their stated constructible domains; tensor factors and comparisons have their stated finite-Tor hypotheses. Let $X\\xrightarrow fY\\xrightarrow gZ\\xrightarrow hW$ be separated finite-type morphisms of finite-type $k$-schemes. Choose compatible compactification towers and common refining towers as in [lem-cbc-compactifiable-compatible-tower]. For a compactification $f=pj$, with $j$ quasi-compact open and $p$ proper, put $F_f=S_pJ_j$; write $g=qi$ similarly. On normalized strict semilinear coefficient systems, write $S_p$ for proper derived direct image and $J_j$ for open extension. Define $a_{g,f}:F_gF_f\\to F_{gf}$ by replacing the adjacent $J_iS_p$ in $S_qJ_iS_pJ_j$ by its normalized proper/open interchange, followed by proper and open compositors. For all normalized inputs whose levels and every intermediate expression have common finite cohomology and Tor intervals, the resulting maps are independent of the compatible tower, intertwine refinement comparisons, satisfy both unit laws, and satisfy\n$$a_{h,gf}\\circ(F_h a_{g,f})=a_{hg,f}\\circ(a_{h,g}F_f).$$\nHere refinement squares include the commutative noncartesian intermediate proper/open squares, with their normalized clopen-projection comparisons. The equalities are equalities of derived system maps before evaluation. The natural realization isomorphisms $c_V:R\\lim V(\\mathcal R K)\\cong V_{\\mathrm{int}}(K)$ carry these maps, also inside nested functors, to the specified completed integral compact-support compositors and preserve the displayed equations and refinement compatibility. For bounded constructible integral inputs these expressions meet the required uniform finite-Tor bounds locally: on finite affine covers and their inverse images the separated finite-type preservation bounds apply, with the minimum lower and maximum upper endpoints giving global intervals. Thus the integral equations hold without assuming the schemes separated over $k$. Raw rationalization and common finite-field scalar transport carry these equations to the corresponding field-coefficient compositors. The finite-coefficient compositors are the unital associative ones of [thm-sf-comp-composition].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Agent-formulated sub-obligation for opening sentence: identity and pasting equations, finite compact-support composition; returned proof steps 1,2,3"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-integral-system-operations",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-etale-origin-witness",
+  "thm-sf-comp-composition",
+  "lem-cbc-compactifiable-compatible-tower",
+  "def-sf-integral-system-expression-domain",
+  "def-cbc-strict-tower-composition-maps",
+  "def-pur-chosen-compactification-compositors",
+  "def-sf-integral-system-realization-data",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-zl-field-shriek-composition-qcqs",
+  "def-sf-integral-system-canonical-bridge",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-rationalization-karoubi",
+  "def-coef-ringed-sequence-site",
+  "def-weil-ambient-exceptional-adjoint",
+  "def-sf-intrinsic-compact-support-realization",
+  "def-sf-semilinear-proper-open-comparisons",
+  "def-weil-compactifications-refinements",
+  "def-weil-compact-support-finite-action",
+  "def-weil-compact-support-coefficient-action"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sf-ambient-proper-open-pasting] in its semilinear setting (b), with the supplied Realizations interface. This provides the specified proper/open map and the proper and open compositors in the derived system categories themselves. The theorem systemProperOpenGammaIsIso of [lem-sf-system-proper-open-support] proves invertibility of this actual map on arbitrary systems by the supported-counit argument. For a compatible tower $Y\\hookrightarrow\\bar Y\\to Z$, $X\\hookrightarrow\\bar X\\to\\bar Y$, put $U=\\bar X\\times_{\\bar Y}Y$. Whisker the proper/open map for this square on both sides, then compose the open and proper compositors and their named-composite equality transports. This is exactly completedShriekA. All these factors are invertible; typeclass composition proves completedShriekComposition_isIso, without finite evaluation, an isomorphism-detection argument, or any additional bounds. Identification with the specified finite comparison is the separate task in step 5.",
+   "uses": [
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-system-proper-open-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7C, 0F7D, 0F7J and 0F7K: lemma-shriek-proper-and-open, its vertical/horizontal pasting lemmas, lemma-shriek-composition and lemma-pseudo-functor; agent assembly on the cited system and realization interfaces"
+   }
+  },
+  {
+   "text": "For completedShriekRefinementLaws, first take right-adjoint mates of the proved normalized pullback associativity theorem [lem-sf-integral-system-compositor-associativity], retaining equality transports for chosen composite arrows. Insert the identity-pair normalization [lem-sf-system-push-identity-pair] into the vertical equation of the supplied ProperOpenCoherence package. Naturality moves the inverse proper-image identity past the second gamma, and adjacent inverse compositor factors cancel. This proves the open refinement composition equation. Apply the outer proper image, use proper compositor associativity and naturality, and obtain R_(r.comp s)=R_s R_r. Every R_r is invertible on arbitrary system inputs by [lem-sf-system-proper-open-support]. Applying the composition equation to id.comp id gives an invertible idempotent, hence the identity. For parallel r,s out of c, use the dense compactification inf(c,c) and its first projection t. Density makes t.comp r=t.comp s by [lem-cbc-compactifiable-cofiltered]. The composition equation and cancellation of the invertible R_t give equality. These arguments use no additional Good bounds. The remaining choice-independence proof uses inf(e,e′), composition, density and the same arbitrary-input invertibility, as in the existing Lean proof. All equations are proved before finite evaluation.",
+   "uses": [
+    "lem-sf-integral-system-compositor-associativity",
+    "lem-sf-system-push-identity-pair",
+    "def-sf-integral-system-realization-data",
+    "lem-cbc-strict-tower-direct-image-coherence",
+    "lem-cbc-compactifiable-cofiltered",
+    "lem-sf-system-proper-open-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7C, 0F7D, 0F7J and 0F7K: lemma-shriek-proper-and-open, its vertical/horizontal pasting lemmas, lemma-shriek-composition and lemma-pseudo-functor; agent assembly on the cited system and realization interfaces"
+   }
+  },
+  {
+   "text": "Consider refining compatible pair towers indexed by $1\\to2$, with the proper arrows $w:U_1\\to U_2$, $v:\\bar X_1\\to\\bar X_2$, $u:\\bar Y_1\\to\\bar Y_2$ of [lem-cbc-compactifiable-compatible-tower]. Label the proper/open squares $A=(X,U_1;X,U_2)$, $B=(U_2,\\bar X_2;Y,\\bar Y_2)$, $C=(U_1,\\bar X_1;Y,\\bar Y_1)$, $D=(Y,\\bar Y_1;Y,\\bar Y_2)$, $E=(X,\\bar X_1;X,\\bar X_2)$ and $F=(U_1,\\bar X_1;U_2,\\bar X_2)$, listing top then bottom rows. All are commutative; only the tower squares $B,C$ must be cartesian. Horizontal pasting gives $\\Gamma_E=\\Gamma_F\\Gamma_A$; the two vertical pastings of the same outer square give $\\Gamma_C\\Gamma_D=\\Gamma_F\\Gamma_B$, by [lem-sf-ambient-proper-open-pasting]. Insert the canonical compositors throughout. Naturality permits the disjoint occurrences $\\Gamma_A,\\Gamma_B$ to pass each other. Substitution therefore gives\n$$R_{gf}\\,a_2=a_1\\,(R_gF_f^{1})\\,(F_g^{2}R_f):F_g^{2}F_f^{2}\\longrightarrow F_{gf}^{1}.$$\nHere $R_f,R_g,R_{gf}$ are step 2's reverse refinement maps. Inverting them gives the asserted forward refinement square. Together with common refinement and the cocycle, this proves tower independence of the composition maps. Lean assembly: retain named-composite equality transports. Derive the proper-image right unitor from [lem-sf-integral-system-compositor-associativity] applied to (f,id,id) and the two-identity normalization [lem-sf-system-push-identity-pair], cancelling the invertible compositor and identity comparison. Apply one horizontal and two vertical pasting equations to the A--F diagram, move the identity comparison by naturality, and cancel the final proper compositor. This is the componentwise refinement calculation already used in StrictTowerCompositionPasting, specialized directly to the specified semilinear maps; no finite evaluation or additional cartesian face is required. For compilation the categorical calculation is parameterized by a private product bundle of comparison maps for fixed categories and functors, with a separate record of proved/supplied laws, then instantiated with Operations and Realizations; no concrete derived-site definition is unfolded during the internal naturality calculation.",
+   "uses": [
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-integral-system-compositor-associativity",
+    "lem-sf-system-push-identity-pair",
+    "def-sf-integral-system-realization-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7C, 0F7D, 0F7J and 0F7K: lemma-shriek-proper-and-open, its vertical/horizontal pasting lemmas, lemma-shriek-composition and lemma-pseudo-functor; agent assembly on the cited system and realization interfaces"
+   }
+  },
+  {
+   "text": "Choose successive compactifications $Z\\hookrightarrow\\bar Z\\to W$, $Y\\hookrightarrow\\bar Y\\to\\bar Z$, $X\\hookrightarrow\\bar X\\to\\bar Y$; the compatible-tower lemma [lem-cbc-compactifiable-compatible-tower] supplies their intermediate opens and common refinements. Set $T=\\bar Y\\times_{\\bar Z}Z$, $V=\\bar X\\times_{\\bar Y}T$, $U=\\bar X\\times_{\\bar Y}Y$. There are proper/open squares $A=(U,V;Y,T)$, $B=(V,\\bar X;T,\\bar Y)$ and $C=(T,\\bar Y;Z,\\bar Z)$. Applying [lem-sf-ambient-proper-open-pasting], the horizontal rectangle has $\\Gamma_{A+B}=\\Gamma_B\\Gamma_A$ and the vertical rectangle has $\\Gamma_{B+C}=\\Gamma_B\\Gamma_C$, with whiskers/compositors inserted. The two compact-support composites become respectively $\\Gamma_B\\Gamma_A\\Gamma_C$ and $\\Gamma_B\\Gamma_C\\Gamma_A$. The disjoint occurrences $A,C$ commute by naturality: componentwise this is the equation $G'(v)\\,\\alpha_M=\\alpha_N\\,G(v)$ for a natural transformation $\\alpha:G\\to G'$ and the other component map $v:M\\to N$. Hence the two composites agree. Associativity of the proper and open compositors removes the intermediate parentheses, giving the displayed equation of the item. Step 3 carries it to any other compatible tower. This proof takes place before evaluation.",
+   "uses": [
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-sf-ambient-proper-open-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7C, 0F7D, 0F7J and 0F7K: lemma-shriek-proper-and-open, its vertical/horizontal pasting lemmas, lemma-shriek-composition and lemma-pseudo-functor; agent assembly on the cited system and realization interfaces"
+   }
+  },
+  {
+   "text": "For an identity morphism choose its compactification with both arrows identities. The resulting interchange square has identity horizontal or vertical arrows, so its $\\Gamma$ is the identity by [lem-sf-ambient-proper-open-pasting]. The remaining arrows are exactly its unital proper and open compositors. Thus $a_{g,1}$ and $a_{1,f}$ are the canonical unit maps, and step 3 proves the same assertion for any supplied compactification. At each fixed finite coefficient stage, the evaluated proper/open map is the finite one by [lem-sf-semilinear-proper-open-mate-pasting]; the evaluated compositors are the canonical adjunction compositors. The construction is consequently the compactification construction whose unital associative finite law is [thm-sf-comp-composition], on precisely its bounded-below witnessed domain.",
+   "uses": [
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7C, 0F7D, 0F7J and 0F7K: lemma-shriek-proper-and-open, its vertical/horizontal pasting lemmas, lemma-shriek-composition and lemma-pseudo-functor; agent assembly on the cited system and realization interfaces"
+   }
+  },
+  {
+   "text": "Now take integral inputs satisfying the intermediate-domain conditions. Apply [lem-sf-integral-compactification-system-realization] to each source word $V$, target word $V'$ and structural arrow $\\tau:V\\to V'$. It identifies the specified integral arrow with\n$$\\tau_{\\rm int}=c_{V'}\\,\\mathcal L(\\tau_{\\mathcal R K})\\,c_V^{-1}.$$\nThis applies also to arrows inside nested functors, not just to a single evaluated compact-support object. In any composite, the adjacent factors $c_V^{-1}c_V$ cancel; $\\mathcal L$ preserves compositions and identities. Thus the system equations of steps 2--5 become the integral refinement, unit and associativity equations, for the specified integral compositors. The same cancellation gives equality for any two refining towers. In particular, no inference of equality of integral maps from finite reductions, and no choice of lifts of finite-level arrows, enters the argument.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7C, 0F7D, 0F7J and 0F7K: lemma-shriek-proper-and-open, its vertical/horizontal pasting lemmas, lemma-shriek-composition and lemma-pseudo-functor; agent assembly on the cited system and realization interfaces"
+   }
+  },
+  {
+   "text": "For every integral constructible input, apply [lem-sf-constructible-reduction-good] to obtain Good for the actual reduction system, with its normalization, common bounds and retained compatible origins. This includes inputs not occurring in the expression and requires no geometric hypothesis on those unused inputs. Induct on the support expression. At a variable the domain and integral constructibility are the input hypotheses. A pullback or tensor case contradicts isSupportWord. At a proper constructor apply [lem-sf-proper-support-step-bounds] to the root Good property of the induction hypothesis and to the integral constructibility of its evaluation. At an open constructor use [lem-sf-open-support-step-bounds] in the same way. Combine the resulting root Good fact with the recursive admissibility hypothesis.",
+   "uses": [
+    "lem-sf-constructible-reduction-good",
+    "lem-sf-proper-support-step-bounds",
+    "lem-sf-open-support-step-bounds"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a compact-support constructor use its specified ambient compactification over the original base. Its proper map and the finite-type target show that the ambient scheme is finite type; its open is quasi-compact since the compactified morphism is quasi-compact. Apply [lem-sf-open-support-step-bounds] to the actual open, then [lem-sf-proper-support-step-bounds] to the actual proper arrow. Store both resulting Good facts, including the intermediate open output, alongside the inductive admissibility of the inner expression. The two integral preservation conclusions give integral constructibility of the compact-support evaluation. Finally pair the input-domain conjunction with the inductively assembled admissibility. This completes completedShriekIntegralBounds with no new hypothesis on structural separatedness. Other original open obligations retain the remaining proof steps of this node.",
+   "uses": [
+    "lem-sf-open-support-step-bounds",
+    "lem-sf-proper-support-step-bounds"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finally use the raw scalar localization of [lem-pur-semilinear-scalar-localization], with $R=S=\\mathcal O_E$, $\\phi$ the identity and $t=u$ the uniformizer, for the supplied integral operations and natural transformations; it extends exact $\\mathcal O_E$-linear functors and their natural transformations and preserves identities, vertical composition and whiskering. Each integral equation becomes the same equation on the same objects with every component tensored with $1$; composition of fractions is $(v/t^b)(u/t^a)=vu/t^{a+b}$, so the naturality and whiskering equations persist on all rational morphisms as well. These are the specified rational compact-support operations of [def-weil-integral-rational-qbar-compact-support]. For algebraically closed coefficients, represent the finite collection of inputs and arrows in each diagram over one common finite coefficient field, as in [def-weil-algebraically-closed-coefficients]. Apply the integral and rational argument at that field and then its functor to the common-stage category. This sends each identity/composite to the identity/composite of its images; hence the two sides remain equal, including refinements and nested maps. On passing to any further common field, the same scalar-extension functor again sends that already established equation to an equation. This proves precisely the asserted transport of the laws to the specified field-coefficient compositors, without a Karoubi envelope.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7C, 0F7D, 0F7J and 0F7K: lemma-shriek-proper-and-open, its vertical/horizontal pasting lemmas, lemma-shriek-composition and lemma-pseudo-functor; agent assembly on the cited system and realization interfaces"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ambient-proper-open-pasting",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-sf-integral-system-compositor-associativity",
+  "lem-sf-system-push-identity-pair",
+  "def-sf-integral-system-realization-data",
+  "lem-cbc-strict-tower-direct-image-coherence",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-sf-system-proper-open-support",
+  "lem-cbc-compactifiable-compatible-tower",
+  "thm-sf-comp-composition",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-constructible-reduction-good",
+  "lem-sf-proper-support-step-bounds",
+  "lem-sf-open-support-step-bounds",
+  "lem-pur-semilinear-scalar-localization",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "C4: step 3 made into Lean by the Stacks 0F7J A--F calculation, adapted from StrictTowerCompositionPasting to the specified semilinear maps; the proper right unitor is derived from associativity and the existing identity-pair normalization. Compositor invertibility now uses the supported-counit route directly. The five other open theorem obligations and all earlier completed results are retained.",
+  "tool_uses": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "adic.*associativ|compact.*support.*compos|semilinear.*interchange",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Dynamics/FixedPoints/Support.lean\", \"line\": \"56\", \"text\": \"/-- If `f` and `g` have compact fixed support, then so does their composition `f ∘ g`. -/\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity of integral compact support functor computed by commuting proper pushforwards past extension by zero on semilinear inverse systems",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MeasureTheory.integral_integral_swap_of_hasCompactSupport\", \"module\": \"Mathlib/MeasureTheory/Integral/Prod\", \"type\": \"∀ {E : Type u_3} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {X : Type u_5} {Y : Type u_6}\\n  [inst_2 : TopologicalSpace X] [inst_3 : TopologicalSpace Y] [inst_4 : MeasurableSpace X] [inst_5 : MeasurableSpace Y]\\n  [OpensMeasurableSpace X] [OpensMeasurableSpace Y] {f : X → Y → E},\\n  Conti\", \"doc\": \"Let $X$ and $Y$ be topological spaces equipped with measures $\\\\mu$ and $\\\\nu$ that are finite on compact subsets. For a continuous function $f : X \\\\times Y \\\\to E$ (where $E$ is a Banach space) with com\"}\n  {\"name\": \"CompactlySupportedContinuousMap.integralLinearMap_apply\", \"module\": \"Mathlib/MeasureTheory/Integral/CompactlySupported\", \"type\": \"∀ {X : Type u_1} [inst : TopologicalSpace X] [inst_1 : MeasurableSpace X] [inst_2 : OpensMeasurableSpace X]\\n  (μ : MeasureTheory.Measure X) [inst_3 : MeasureTheory.IsFiniteMeasureOnCompacts μ]\\n  (f : CompactlySupportedContinuousMap X NNReal),\\n  (CompactlySupportedContinuousMap.integralLinearMap μ) f\", \"doc\": \"For a topological space $X$ equipped with a measure $\\\\mu$ that is finite on all compact subsets, the application of the $\\\\mathbb{R}_{\\\\geq 0}$-linear map defined by integration against $\\\\mu$ to a compa\"}\n  {\"name\": \"CompactlySupportedContinuousMap.compLinearMap\", \"module\": \"Mathlib/Topology/ContinuousMap/CompactlySupported\", \"type\": \"{β : Type u_3} →\\n  {γ : Type u_4} →\\n    {δ : Type u_5} →\\n      [inst : TopologicalSpace β] →\\n        [inst_1 : TopologicalSpace γ] →\\n          [inst_2 : TopologicalSpace δ] →\\n            [inst_3 : AddCommMonoid δ] →\\n              [inst_4 : ContinuousAdd δ] →\\n                {R : Type u_6} →\\n        \", \"doc\": \"Given a cocompact continuous map $ g : \\\\beta \\\\to \\\\gamma $, this constructs an $ R $-linear map from the space of compactly supported continuous functions $ C_c(\\\\gamma, \\\\delta) $ to $ C_c(\\\\beta, \\\\delta\"}\n  {\"name\": \"CompactlySupportedContinuousMap.comp_assoc\", \"module\": \"Mathlib/Topology/ContinuousMap/CompactlySupported\", \"type\": \"∀ {α : Type u_2} {β : Type u_3} {γ : Type u_4} [inst : TopologicalSpace α] {δ : Type u_5} [inst_1 : TopologicalSpace β]\\n  [inst_2 : TopologicalSpace γ] [inst_3 : TopologicalSpace δ] [inst_4 : Zero δ]\\n  (f : CompactlySupportedContinuousMap γ δ) (g : CocompactMap β γ) (h : CocompactMap α β),\\n  (f.comp\", \"doc\": \"For compactly supported continuous maps $ f : C_c(\\\\gamma, \\\\delta) $, cocompact continuous maps $ g : \\\\beta \\\\to_{\\\\text{co}} \\\\gamma $, and $ h : \\\\alpha \\\\to_{\\\\text{co}} \\\\beta $, the composition of maps s\"}\n  {\"name\": \"CompactlySupportedContinuousMap.integralLinearMap\", \"module\": \"Mathlib/MeasureTheory/Integral/CompactlySupported\", \"type\": \"{X : Type u_1} →\\n  [inst : TopologicalSpace X] →\\n    [inst_1 : MeasurableSpace X] →\\n      [OpensMeasurableSpace X] →\\n        (μ : MeasureTheory.Measure X) →\\n          [MeasureTheory.IsFiniteMeasureOnCompacts μ] → CompactlySupportedContinuousMap X NNReal →ₗ[NNReal] NNReal\", \"doc\": \"Given a measure $\\\\mu$ on a topological space $X$ that is finite on all compact subsets, this defines an $\\\\mathbb{R}_{\\\\geq 0}$-linear map from the space of compactly supported continuous functions $C_c\"}\n  {\"name\": \"CompactlySupportedContinuousMap.integralPositiveLinearMap_toFun\", \"module\": \"Mathlib/MeasureTheory/Integral/CompactlySupported\", \"type\": \"∀ {X : Type u_1} [inst : TopologicalSpace X] [inst_1 : MeasurableSpace X] [inst_2 : OpensMeasurableSpace X]\\n  (μ : MeasureTheory.Measure X) [inst_3 : MeasureTheory.IsFiniteMeasureOnCompacts μ]\\n  (f : CompactlySupportedContinuousMap X ℝ),\\n  (CompactlySupportedContinuousMap.integralPositiveLinearMap μ\", \"doc\": \"For a measure $\\\\mu$ on a topological space $X$ that is finite on compact subsets, and for any compactly supported continuous real-valued function $f \\\\in C_c(X, \\\\mathbb{R})$, the positive linear map de\"}\n  {\"name\": \"ContinuousMapZero.integral_apply\", \"module\": \"Mathlib/MeasureTheory/Integral/Bochner/ContinuousLinearMap\", \"type\": \"∀ {X : Type u_1} {Y : Type u_2} [inst : MeasurableSpace X] {μ : MeasureTheory.Measure X} [inst_1 : TopologicalSpace Y]\\n  [inst_2 : CompactSpace Y] {R : Type u_8} [inst_3 : NormedCommRing R] [inst_4 : Zero Y] [inst_5 : NormedAlgebra ℝ R]\\n  [CompleteSpace R] {f : X → ContinuousMapZero Y R},\\n  MeasureT\", \"doc\": \"For a compact topological space $Y$ with zero element, a complete normed commutative ring $R$ over $\\\\mathbb{R}$, and an integrable function $f : X \\\\to C(Y, R)_0$ (the space of zero-preserving continuo\"}\n  {\"name\": \"CompactlySupportedContinuousMap.integralPositiveLinearMap\", \"module\": \"Mathlib/MeasureTheory/Integral/CompactlySupported\", \"type\": \"{X : Type u_1} →\\n  [inst : TopologicalSpace X] →\\n    [inst_1 : MeasurableSpace X] →\\n      [OpensMeasurableSpace X] →\\n        (μ : MeasureTheory.Measure X) →\\n          [MeasureTheory.IsFiniteMeasureOnCompacts μ] → CompactlySupportedContinuousMap X ℝ →ₚ[ℝ] ℝ\", \"doc\": \"Given a measure $\\\\mu$ on a topological space $X$ that is finite on all compact subsets, this defines the positive linear map from the space of compactly supported continuous real-valued functions $C_c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unit and associativity of compactly supported direct images on completed l-adic constructible categories from strict coefficient system proper open interchange",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {M : X.Modules} (f : X ⟶ Y) (g : Y ⟶ Z) (U : Z.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.pushforwardComp f g).hom.app M) U =\\n    CategoryTheory.CategoryStruct.id\\n      ((((AlgebraicGeometry.Scheme.Modules.pushforward f)\", \"doc\": \"For any open subset $U \\\\subseteq Z$, the component of the natural isomorphism between the pushforward functors composed along $g \\\\circ f$ and the composition of pushforwards along $g$ and $f$, evaluat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n        [inst_1 : AlgebraicGeometry.IsOpenImmersion g] →\\n          AlgebraicGeometry.Scheme.Modules.restrictFunctor (CategoryTheory.CategoryStruct.comp f g) ≅\\n            (Alge\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"LightCondensed.lanLightCondSet\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type u → LightCondSet\", \"doc\": \"For each type $X$, this constructs a sheaf in the category of light condensed sets by taking the pointwise left Kan extension of the locally constant function presheaf $\\\\mathrm{LocallyConstant}(-, X)$\"}\n  {\"name\": \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"∀ (R : Type u) [inst : CommRing R], (CategoryTheory.coherentTopology LightProfinite).W.IsMonoidal\", \"doc\": \"The coherent Grothendieck topology on the opposite category of light profinite spaces, when lifted to the category of modules over a commutative ring $ R $, satisfies the monoidal property. This means\"}\n  {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"Condensed.profiniteSolidification\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R\", \"doc\": \"The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unit and associativity of compactly supported direct images on completed l-adic constructible categories from strict coefficient system proper open interchange",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": functor.FullyFaithful\", \"doc\": \"The functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces is fully faithful. This follows from the fact that its adjunction unit is an isomorphism, ensuring th\"}\n  {\"name\": \"LightCondSet.LocallyConstant.functorFullyFaithful\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": functor.{u}.FullyFaithful\", \"doc\": \"The functor constructing sheaves of locally constant functions on compact Hausdorff-like spaces (totally disconnected and second-countable) is fully faithful. This follows from the adjunction between \"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction_unit\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"Under the assumption that effective epimorphisms are surjective, the unit of the adjunction between the functor constructing sheaves of locally constant functions on compact Hausdorff-like spaces and \"}\n  {\"name\": \"CompHausLike.LocallyConstant.unitIso\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": 𝟭 (Type max u w) ≅ functor.{u, w} P hs ⋙ (sheafSections _ _).obj ⟨CompHausLike.of P PUnit.{u + 1}⟩\", \"doc\": \"A natural isomorphism between the identity functor on the category of types and the composition of the locally constant sheaf functor with the sheaf section functor evaluated at the unit space (single\"}\n  {\"name\": \"CompHausLike.LocallyConstant.unit\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": 𝟭 _ ⟶ functor P hs ⋙ (sheafSections _ _).obj ⟨CompHausLike.of P PUnit.{u + 1}⟩\", \"doc\": \"The natural transformation from the identity functor to the composition of the locally constant sheaf functor and the sheaf section functor, defined by mapping each object to the morphism that sends e\"}\n  {\"name\": \"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"[HasExplicitFiniteCoproducts.{u} P] : IsIso (adjunction P hs).unit\", \"doc\": \"For a predicate $ P $ on compact Hausdorff-like spaces that has explicit finite coproducts, the unit of the adjunction between the functor constructing sheaves of locally constant functions and the se\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [QuasiCompact f] [QuasiCompact g] : QuasiCompact (f ≫ g)\", \"doc\": \"Quasi-compact morphisms of schemes form a category, where composition of morphisms is defined by the composition in the category of schemes and inherits associativity and identity properties from the \"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"[HasExplicitFiniteCoproducts.{u} P] : functor.{u, w} P hs ⊣ (sheafSections _ _).obj ⟨CompHausLike.of P PUnit.{u + 1}⟩\", \"doc\": \"There is an adjunction between the functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces and the sections functor evaluated at the terminal object (the unit ty\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.id\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] : CategoryTheory.Functor.id C ⊣ CategoryTheory.Functor.id C\", \"doc\": \"The adjunction between the identity functor on a category and itself.\"}\n  {\"name\": \"CategoryTheory.Adjunction.instInhabitedId\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] : Inhabited (CategoryTheory.Functor.id C ⊣ CategoryTheory.Functor.id C)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) (G : CategoryTheory.Functor D C) : Type (max (max (max u₁ u₂) v₁) v₂)\", \"doc\": \"`F ⊣ G` represents the data of an adjunction between two functors\\n`F : C ⥤ D` and `G : D ⥤ C`. `F` is the left adjoint and `G` is the right adjoint.\\n\\nWe use the unit-counit definition of an adjunction\"}\n  {\"name\": \"CategoryTheory.Equivalence.toAdjunction\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) : e.functor ⊣ e.inverse\", \"doc\": \"The adjunction given by an equivalence of categories. (To obtain the opposite adjunction,\\nsimply use `e.symm.toAdjunction`.)\"}\n  {\"name\": \"CategoryTheory.Equivalence.toAdjunction'\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) : e.inverse ⊣ e.functor\", \"doc\": \"`toAdjunction'` is the dual of `ToAdjunction`, which we need for `to_dual`.\\nPlease avoid using this directly.\"}\n  {\"name\": \"CategoryTheory.Adjunction.isLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) : F.IsLeftAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.isRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : G ⊣ F) : F.IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.mk'\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreHomEquivUnitCounit F G) : F ⊣ G\", \"doc\": \"Construct an adjunction from the data of a `CoreHomEquivUnitCounit`, i.e. a hom set\\nequivalence, unit and counit natural transformations together with proofs of the equalities\\n`homEquiv_unit` and `hom\"}\n  {\"name\": \"CategoryTheory.Adjunction.mkOfHomEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreHomEquiv F G) : F ⊣ G\", \"doc\": \"Construct an adjunction between `F` and `G` out of a natural bijection between each\\n`F.obj X ⟶ Y` and `X ⟶ G.obj Y`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.mkOfUnitCounit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreUnitCounit F G) : F ⊣ G\", \"doc\": \"Construct an adjunction between functors `F` and `G` given a unit and counit for the adjunction\\nsatisfying the triangle identities.\"}\n  {\"name\": \"CategoryTheory.Adjunction.ofIsLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (left : CategoryTheory.Functor C D) [left.IsLeftAdjoint] : left ⊣ left.rightAdjoint\", \"doc\": \"The adjunction associated to a functor known to be a left adjoint.\"}\n  {\"name\": \"CategoryTheory.Adjunction.ofIsRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (right : CategoryTheory.Functor C D) [right.IsRightAdjoint] : right.leftAdjoint ⊣ right\", \"doc\": \"The adjunction associated to a functor known to be a right adjoint.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent compact support composition on completed integral etale constructible categories",
+   "results": "8 hits; HasCompactSupport.comp_isClosedEmbedding; HasCompactMulSupport.comp_isClosedEmbedding; CompactlySupportedContinuousMap.coe_comp_to_continuous_fun; CompactlySupportedContinuousMap.comp; CompactlySupportedContinuousMap.comp_assoc; Condensed; AlgebraicGeometry.IsIntegralHom.comp_iff; AlgebraicGeometry.quasiCompact_isStableUnderComposition",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary categorical associators/adjunctions, scheme O-module pseudofunctors, or compactly supported continuous functions; none states the completed pro-etale strict-system compact-support law."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.associator, CategoryTheory.Adjunction",
+   "results": "12 hits; CategoryTheory.Adjunction.left_triangle; CategoryTheory.Adjunction.right_triangle; CategoryTheory.Adjunction.comp_counit; CategoryTheory.Adjunction.comp_unit; CategoryTheory.conjugateEquiv_associator_hom; CategoryTheory.mateEquiv_apply; CategoryTheory.mateEquiv_symm_apply; CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary categorical associators/adjunctions, scheme O-module pseudofunctors, or compactly supported continuous functions; none states the completed pro-etale strict-system compact-support law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity and units for compact support direct image on strict semilinear coefficient systems using proper open interchange",
+   "results": "8 hits; CompactlySupportedContinuousMap.compLinearMap; CompactlySupportedContinuousMap.compNonUnitalAlgHom; CompactlySupportedContinuousMap.comp_assoc; CompactlySupportedContinuousMap.comp; ZeroAtInftyContinuousMap.compLinearMap; CompactlySupportedContinuousMap.compAddMonoidHom; hasCompactSupport_comp_left; CompactlySupportedContinuousMap.compLeft",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary categorical associators/adjunctions, scheme O-module pseudofunctors, or compactly supported continuous functions; none states the completed pro-etale strict-system compact-support law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudofunctor of derived direct images with compact support from compactifications is unital associative and independent of refinements",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pseudofunctor; CondensedSet.compactlyGeneratedToCondensedSet; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr; LightCondensed.lanLightCondSet; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_hom_τr; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_inv_τr",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary categorical associators/adjunctions, scheme O-module pseudofunctors, or compactly supported continuous functions; none states the completed pro-etale strict-system compact-support law."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "fix-prop-coherence",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence: The identity and pasting equations are [fix-lem-exchanges].",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-completed-shriek-composition-laws",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies. Gave the intrinsic system construction, reverse-refinement cocycle and A--F refinement equation, A--B--C associativity and both units before evaluation; realized the equations contextually at integral coefficients. Discharged uniform bounds on finite affine target covers without assuming the schemes separated over k, distinguishing arbitrary A_n from the ell-power tower specialization. Raw rationalization and common-stage functoriality transport the resulting equations. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "fix-prop-coherence.proof.md opening sentence: identity and pasting equations. The finite compact-support composition component is realized by proof steps 1--5; steps 6--8 give the completed integral form and its domain; step 9 gives the stated field transport.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-ambient-proper-open-pasting",
+    "why": "Ambient proper/open mate pasting and canonical compositors are the generic system calculus; they do not replace the compact-support tower argument."
+   },
+   {
+    "node": "lem-cbc-proper-open-interchange-coherence",
+    "why": "Invertibility of the specified finite proper/open comparison on witnessed inputs supplies the system isomorphism test."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Joint conservativity is used solely to prove that the constructed proper/open maps are isomorphisms."
+   },
+   {
+    "node": "lem-cbc-compactifiable-cofiltered",
+    "why": "Generic operation restriction or preservation interface supplies only the domain or normalization used by this tower argument; the unit has no separate replacement for this interface."
+   },
+   {
+    "node": "lem-cbc-compactifiable-compatible-tower",
+    "why": "Geometric compatible towers and common refinements supply the diagrams used in the compact-support composition route."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Identifies the finite construction with the unit and associative finite compact-support law already on the prescribed route."
+   },
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Initial common Tor intervals for the reductions of a single bounded constructible integral object."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherianity needed for finite covers and constructibility locality."
+   },
+   {
+    "node": "lem-sf-cartesian-open-adjunction-restriction",
+    "why": "Generic operation restriction or preservation interface supplies only the domain or normalization used by this tower argument; the unit has no separate replacement for this interface."
+   },
+   {
+    "node": "det-sp-tower-bound-uniform",
+    "why": "Coefficient-independent finite compact-support Tor bounds on separated affine charts; only its arbitrary finite-ring assertion is used."
+   },
+   {
+    "node": "lem-sf-open-finite-constructibility-interval",
+    "why": "Generic operation restriction or preservation interface supplies only the domain or normalization used by this tower argument; the unit has no separate replacement for this interface."
+   },
+   {
+    "node": "lem-sf-finite-cover-ctf-locality",
+    "why": "Gluing finite chart intervals is a local property of cohomology and tensor amplitude."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Generic operation restriction or preservation interface supplies only the domain or normalization used by this tower argument; the unit has no separate replacement for this interface."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic raw scalar localization of linear categories extends the integral functors, transformations, whiskering and equations; the pbc-chapter transport is stated only for the pbc integral categories."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-ambient-proper-open-pasting",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-cbc-compactifiable-compatible-tower",
+  "thm-sf-comp-composition",
+  "lem-coef-integral-residue-tor",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sf-cartesian-open-adjunction-restriction",
+  "det-sp-tower-bound-uniform",
+  "lem-sf-open-finite-constructibility-interval",
+  "lem-sf-finite-cover-ctf-locality",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-pur-semilinear-scalar-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NU-a624ac4c0",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-a624ac4c0 (reviewer sub-agent of L); spot-checked: I read all of it: the item's 9 steps (no new nodes, first split of a statement-only N8 helper, no re-split note), every cited statement, and Stacks more-etale 0F7J (lemma-shriek-composition, A–F diagram) and 0F7K (lemma-pseudo-functor, A/B/C rectangles). Steps 1–5 follow the Stacks proofs on the intrinsic noncartesian Γ_Q of lem-sf-ambient-proper-open-pasting. Rechecked against the tower equations: Γ_E=Γ_FΓ_A, the common outer square (U1,X̄1;Y,Ȳ2) gives Γ_CΓ_D=Γ_FΓ_B, refinement independence comes from the cofiltered equalizer plus the R_{uv} cocycle, and the identity squares give the units. Conservativity is used only for invertibility, through mate-pasting, the strict-tower calculus and cbc γ_Q. Step 6 is the stated whiskered/nested intertwining of the realization node. Steps 7–8: affine target charts are separated over k, A_n=R/t^n is finite and ℓ-power torsion, so det-sp-tower-bound-uniform's arbitrary-finite-ring clause applies. Open letters, finite-cover locality and the integral open/direct-image nodes give the domains without separatedness over k. C4 fault repaired: step 9 cited prop-weil-pbc-rational-transport, which is stated only for the pbc integral categories (def-weil-pbc-bounded-constructible-complete, witnesses as membership), not the def-weil-derived-complete-integral-detailed / rationalization-karoubi categories, and does not state whiskering. FIX replaces it in step 9, proof_deps and tool_uses with the generic lem-pur-semilinear-scalar-localization (R=S=O_E, φ=id, t=u=ϖ). Its closure is clean: no trf/pd nodes, no cycle. Batch-5 finding: lem-trf-adjoint-composition-coherence (a Mathlib leaf, adjoint-compositor associativity) and lem-trf-proetale-unit-leray-chain-formula (a generic Leray/unit identity) are general facts outside both assumptions, and det-sp-tower-bound-uniform is a finiteness/Tor bound, so all are accepted. The listed tool_uses are accepted. Maintainer note: lem-sf-package-compactified-tower-comparisons (Q92) states the separated-only special case of the associativity clause; not a duplicate of this more general item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.CompletedShriekCompositionLaws",
+  "declaration": "WeilConjectures.IntegralSystemRealization.completedShriekAssociativity",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.completedShriekOpenQC",
+   "WeilConjectures.IntegralSystemRealization.completedShriekF",
+   "WeilConjectures.IntegralSystemRealization.completedShriekOpenCongr",
+   "WeilConjectures.IntegralSystemRealization.completedShriekA",
+   "WeilConjectures.IntegralSystemRealization.completedShriekPushId",
+   "WeilConjectures.IntegralSystemRealization.completedShriekId",
+   "WeilConjectures.IntegralSystemRealization.completedShriekRefinement",
+   "WeilConjectures.IntegralSystemRealization.completedShriekDomain",
+   "WeilConjectures.IntegralSystemRealization.completedShriekAOn",
+   "WeilConjectures.IntegralSystemRealization.completedShriekRefinementLaws",
+   "WeilConjectures.IntegralSystemRealization.completedShriekTowerRefinement",
+   "WeilConjectures.IntegralSystemRealization.completedShriekAssociativity",
+   "WeilConjectures.IntegralSystemRealization.completedShriekUnitLeftQC",
+   "WeilConjectures.IntegralSystemRealization.completedShriekUnitRightQC",
+   "WeilConjectures.IntegralSystemRealization.completedShriekUnits",
+   "WeilConjectures.IntegralSystemRealization.completedShriekComparisonVia",
+   "WeilConjectures.IntegralSystemRealization.completedShriekChoiceIndependence",
+   "WeilConjectures.IntegralSystemRealization.Expression.isSupportWord",
+   "WeilConjectures.IntegralSystemRealization.completedShriekIntegralBounds",
+   "WeilConjectures.IntegralSystemRealization.completedShriekRealized",
+   "WeilConjectures.IntegralSystemRealization.completedShriekRealizationLaws",
+   "WeilConjectures.IntegralSystemRealization.completedShriekFiniteA",
+   "WeilConjectures.IntegralSystemRealization.completedShriekFiniteEvaluation",
+   "WeilConjectures.IntegralSystemRealization.completedShriekIntegralA",
+   "WeilConjectures.IntegralSystemRealization.completedShriekIntegralComposition",
+   "WeilConjectures.IntegralSystemRealization.completedShriekRationalMap",
+   "WeilConjectures.IntegralSystemRealization.completedShriekRationalLaws",
+   "WeilConjectures.IntegralSystemRealization.completedShriekComposition_isIso",
+   "WeilConjectures.IntegralSystemRealization.completedShriekComparisonCocycle",
+   "WeilConjectures.IntegralSystemRealization.completedShriekCommonStage",
+   "WeilConjectures.IntegralSystemRealization.completedShriekCommonStageLaws",
+   "WeilConjectures.IntegralSystemRealization.completedShriekRestrictQC",
+   "WeilConjectures.IntegralSystemRealization.completedShriekSpecifiedIntegral",
+   "WeilConjectures.IntegralSystemRealization.completedShriekConstructibleRealizedCompositor",
+   "WeilConjectures.IntegralSystemRealization.completedShriekSpecifiedRational",
+   "WeilConjectures.IntegralSystemRealization.completedShriekSpecifiedCommonStage"
+  ],
+  "file": "lean/Sheaf/SixFunctors/CompletedShriekCompositionLaws.lean",
+  "statement": "theorem completedShriekAssociativity (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (o : Operations l E) (R : Realizations l E D o) {X Y Z W : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] (cf : Compactification f) (cg : Compactification g) (ch : Compactification h) (cfg : Compactification (f ≫ g)) (cgh : Compactification (g ≫ h)) (cfgh : Compactification ((f ≫ g) ≫ h)) (Tfg : Compactification.Triangle f g) (Tgh : Compactification.Triangle g h) (Tfg_h : Compactification.Triangle (f ≫ g) h) (Tf_gh : Compactification.Triangle f (g ≫ h)) [QuasiCompact Tfg.q] [QuasiCompact Tgh.q] [QuasiCompact Tfg_h.q] [QuasiCompact Tf_gh.q] (hfgf : cf = Tfg.cf) (hfgg : cg = Tfg.cg) (hfgfg : Tfg.cfg = cfg) (hghg : cg = Tgh.cf) (hghh : ch = Tgh.cg) (hghgh : Tgh.cfg = cgh) (hlfg : cfg = Tfg_h.cf) (hlh : ch = Tfg_h.cg) (hlall : Tfg_h.cfg = cfgh) (hrf : cf = Tf_gh.cf) (hrgh : cgh = Tf_gh.cg) (hrall : Tf_gh.cfg = cfgh.copy (Category.assoc f g h).symm) (M : System l E X) (hf : completedShriekDomain l E o cf M) (hg : completedShriekDomain l E o cg ((completedShriekF l E o cf).obj M)) (hh : completedShriekDomain l E o ch ((completedShriekF l E o cg).obj ((completedShriekF l E o cf).obj M))) (hfg : completedShriekDomain l E o cfg M) (hhfg : completedShriekDomain l E o ch ((completedShriekF l E o cfg).obj M)) (hgh : completedShriekDomain l E o cgh ((completedShriekF l E o cf).obj M)) (hfgh : completedShriekDomain l E o cfgh M) : (Functor.whiskerRight (completedShriekAOn l E R cf cg cfg Tfg hfgf hfgg hfgfg) (completedShriekF l E o ch) ≫ completedShriekAOn l E R cfg ch cfgh Tfg_h hlfg hlh hlall).app M = ((Functor.associator (completedShriekF l E o cf) (completedShriekF l E o cg) (completedShriekF l E o ch)).hom ≫ Functor.whiskerLeft (completedShriekF l E o cf) (completedShriekAOn l E R cg ch cgh Tgh hghg hghh hghgh) ≫ completedShriekAOn l E R cf cgh (cfgh.copy (Category.assoc f g h).symm) Tf_gh hrf hrgh hrall).app M",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned immutable head 0dcd5fc7a1aa: cite actual definition owners, restrict associativity to normalized intermediate domains at M, and identify the specified rational and common-stage compositors with the actual realized system arrow through the fixed Roos comparisons. Statement and proof unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d420f6bdf",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Repair of 0dcd RETURN. Mechanical stmt_dep lem-zl-field-shriek-composition-qcqs genuine: sfFieldShriekCompositionIntegral/Rational are .exists.choose of its ∃! theorems, used in SpecifiedIntegral/SpecifiedRational/SpecifiedCommonStage (plain sfCompositionOpenCongr comes along). F1 H2 fixed: theorem deps swapped to existing:true def-sf-integral-system-realization-data and def-pur-chosen-compactification-compositors, 11 def owners added; all 24 stmt_deps on main with lean records, no cycle (164-node closure), statement/proof byte-identical to main. F2 H3 fixed: completedShriekAssociativity at .app M under completedShriekDomain for cf,cg,ch,cfg,ch∘cfg,cgh,cfgh; orientation matches a_{h,gf}(F_h a_{g,f})=a_{hg,f}(a_{h,g}F_f). F3 fixed: real-data helper completedShriekConstructibleRealizedCompositor (Roos-conjugated realized completedShriekA), SpecifiedRational HEq identifies the sfFieldShriekCompositionRational component, SpecifiedCommonStage pins the Qbar γ by its ∃! normalization plus component=CommonStage.map helper; consistent with SpecifiedIntegral. lean.statement verbatim, 36/36 declarations listed, 16 sorry all theorem bodies, docstrings with source+blueprint, no extra assumptions or separatedness over k, Ω:Type v. Advisory: docstrings should note domain inheritance for the further common refinement; parallel NI 5563 delivery RETURNed, not landed. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261026T023842-L-609052",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.IntegralSystemRealization.completedShriekAssociativity",
+   "WeilConjectures.IntegralSystemRealization.completedShriekFiniteEvaluation",
+   "WeilConjectures.IntegralSystemRealization.completedShriekIntegralComposition",
+   "WeilConjectures.IntegralSystemRealization.completedShriekSpecifiedIntegral",
+   "WeilConjectures.IntegralSystemRealization.completedShriekUnits"
+  ],
+  "sorry_after": [
+   "WeilConjectures.IntegralSystemRealization.completedShriekAssociativity",
+   "WeilConjectures.IntegralSystemRealization.completedShriekFiniteEvaluation",
+   "WeilConjectures.IntegralSystemRealization.completedShriekIntegralComposition",
+   "WeilConjectures.IntegralSystemRealization.completedShriekSpecifiedIntegral"
+  ]
+ }
+}

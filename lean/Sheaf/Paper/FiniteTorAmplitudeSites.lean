@@ -6,6 +6,7 @@ Authors: SHEAF group Q11
 module
 
 public import Sheaf.Paper.FiniteTorAmplitude
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories

@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-space-product-tor-independence",
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "title": "Tor independence for an algebraic-space product square with two flat sides",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$, their small etale structure sheaves [def-trf-algebraic-space], and the universes of [def-weil-size-convention]. Let $Z_0\\to X_0$, $Z_0\\to Y_0$, $X_0\\to B_0$, and $Y_0\\to B_0$ be a commutative square of algebraic spaces. Let $B\\to B_0$ be any morphism of algebraic spaces and put $X=X_0\\times_{B_0}B$, $Y=Y_0\\times_{B_0}B$, $P_0=X_0\\times_{B_0}Y_0$ and $P=X\\times_BY$ [lem-trf-space-fibre-products-etale-covers]. Assume $Y_0\\to B_0$ and $Z_0\\to X_0$ are flat, meaning flat on compatible etale scheme charts [def-weil-flat-morphism]. Then $Z_0\\to P_0$ and $P\\to P_0$ are Tor independent: for every commutative diagram of geometric points $\\bar z:\\operatorname{Spec}\\Omega\\to Z_0$ and $\\bar p:\\operatorname{Spec}\\Omega\\to P$ with the same composite $\\bar t:\\operatorname{Spec}\\Omega\\to P_0$, where $\\Omega$ is algebraically closed,\n$$\\operatorname{Tor}^{\\mathcal O_{P_0,\\bar t}}_n(\\mathcal O_{Z_0,\\bar z},\\mathcal O_{P,\\bar p})=0\\qquad(n>0).$$\nGeometric local rings are stalks on the small etale site; Tor is computed by projective resolutions [def-weil-pbc-tor-modules]. No cartesianness of the original square, closed immersion, flatness of $B\\to B_0$ or $X_0\\to B_0$, or finiteness assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CTQ, lemma-case-of-tor-independence; geometric-stalk meaning spelled out as in spaces-perfect.tex, definition-tor-independent."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-tor-modules",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-geometric-tor-independence"
+ ],
+ "proof": [
+  {
+   "text": "Choose surjective etale scheme atlases $W_0\\to B_0$, $W\\to B\\times_{B_0}W_0$, $U_0\\to X_0\\times_{B_0}W_0$ and $V_0\\to Y_0\\times_{B_0}W_0$. Put $Q_0=U_0\\times_{W_0}V_0$, and choose a surjective etale scheme atlas $T_0\\to Z_0\\times_{P_0}Q_0$. Atlas existence is part of the definition of algebraic space. The map $Q_0\\to P_0\\times_{B_0}W_0$ factors as the base change of the $U_0$ atlas and then the base change of the $V_0$ atlas. Thus $Q_0\\to P_0$ is surjective etale by base change and composition of etale coverings. Likewise $U_0\\to X_0$ and $V_0\\to Y_0$ are surjective etale. The fibre-product equations identify $Z_0\\times_{P_0}Q_0$ with $(Z_0\\times_{X_0}U_0)\\times_{Y_0\\times_{B_0}W_0}V_0$. Consequently $T_0\\to Z_0\\times_{X_0}U_0$ is surjective etale. All these fibre products are schemes whenever both factors over an algebraic space are schemes, by representability of its diagonal.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTQ, lemma-case-of-tor-independence, proof and detailed etale-chart footnote."
+   }
+  },
+  {
+   "text": "Apply the flat chart test to $Y_0\\to B_0$, using the target chart $W_0$ and source chart $V_0$: it gives flatness of $V_0\\to W_0$. Apply it to $Z_0\\to X_0$, using the target chart $U_0\\to X_0$ and source chart $T_0\\to Z_0\\times_{X_0}U_0$ constructed in step 1: it gives flatness of $T_0\\to U_0$. The projection $Q_0\\to U_0$ is the scheme base change of $V_0\\to W_0$, so it is flat. Thus $T_0$ and $Q_0$ are two flat schemes over the common base $U_0$, and the induced map $T_0\\to Q_0$ is a $U_0$-morphism. No flatness of this last map is asserted.",
+   "uses": [
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-weil-pbc-flat-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTQ, lemma-case-of-tor-independence, proof and detailed etale-chart footnote."
+   }
+  },
+  {
+   "text": "Set $A=U_0\\times_{W_0}W$ and $Q=Q_0\\times_{W_0}W$. Apply the existing flat-family Tor-independence theorem over the scheme $U_0$, with its $X=T_0$, $Y=Q_0$, morphism $T_0\\to Q_0$ and arbitrary base change $S'=A\\to U_0$. Step 2 verifies exactly its two flatness hypotheses. The fibre-product universal property identifies $Q_0\\times_{U_0}A$ with $Q$: a section on either side is a triple $(u_0,v_0,w)$ with equal images in $W_0$. Hence for every ordinary $t\\in T_0$ and $q\\in Q$ over the same $q_0\\in Q_0$, the cited theorem gives $\\operatorname{Tor}^{\\mathcal O_{Q_0,q_0}}_i(\\mathcal O_{T_0,t},\\mathcal O_{Q,q})=0$ for all $i>0$.",
+   "uses": [
+    "lem-sfb-flat-families-tor-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CTA, lemma-case-of-tor-independence: cartesian square over X-prime; use the existing common-flat-base scheme lemma."
+   }
+  },
+  {
+   "text": "The universal property identifies $P=X\\times_BY$ with $P_0\\times_{B_0}B$: both have sections $(x_0,y_0,b)$ whose images in $B_0$ agree. It also identifies $Q$ with $(P\\times_{P_0}Q_0)\\times_{B\\times_{B_0}W_0}W$, preserving the projections to $Q_0$. Therefore $Q\\to P\\times_{P_0}Q_0$ is a surjective etale scheme atlas, being the base change of $W\\to B\\times_{B_0}W_0$. Use the geometric Tor-independence chart criterion with $H=P_0$, $F=Z_0$, $G=P$, and atlases $W=Q_0$, $U=T_0$, $V=Q$. Their covering hypotheses were verified in steps 1 and 4. Step 3 is precisely its ordinary local-ring Tor condition. Its other equivalent condition is the asserted vanishing for every pair of geometric points of $Z_0$ and $P$ over $P_0$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-tor-independence-etale-chart-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTQ, lemma-case-of-tor-independence, proof and detailed etale-chart footnote."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-sfb-flat-families-tor-independent",
+  "lem-sfb-space-tor-independence-etale-chart-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CTQ, lemma-case-of-tor-independence, proof and detailed etale-chart footnote."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given a square of algebraic spaces Z to Y over X to B with Y flat over B and Z flat over X product base change is Tor independent",
+   "results": "Read 8 returned hits: AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.instFstScheme, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.Flat, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern ordinary flatness, scheme morphisms, underived tensor or pullback comparisons, Kan extensions, or unrelated name substrings; none states this geometric Tor-independence or derived algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For flat algebras B and C over A the base change of a map between them along an arbitrary algebra has no higher Tor",
+   "results": "Read 8 returned hits: Module.FaithfullyFlat.instTensorProduct, Module.Flat.isBaseChange, RingHom.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, Algebra.Extension.baseChange, RingHom.FaithfullyFlat.isStableUnderBaseChange, IsSMulRegular.of_flat_of_isBaseChange, LinearMap.baseChange_eq_ltensor. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern ordinary flatness, scheme morphisms, underived tensor or pullback comparisons, Kan extensions, or unrelated name substrings; none states this geometric Tor-independence or derived algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"flat\"",
+   "results": "Read 12 returned hits: Vector.flatten, Vector.flatMap, Vector.flatMapM, Vector.flatMap_id, Vector.flatMap_id', Vector.flatten_replicate_replicate, Vector.flatMap_def, Vector.flatMap_replicate. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern ordinary flatness, scheme morphisms, underived tensor or pullback comparisons, Kan extensions, or unrelated name substrings; none states this geometric Tor-independence or derived algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat",
+   "results": "Read 12 returned hits: Module.Flat, Module.Flat.self, Module.Flat.of_free, Module.Flat.of_projective, Module.Flat.of_ulift, Module.Flat.ulift, Module.Flat.of_shrink, Module.Flat.shrink. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern ordinary flatness, scheme morphisms, underived tensor or pullback comparisons, Kan extensions, or unrelated name substrings; none states this geometric Tor-independence or derived algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "TorIndependent|torIndependent|tor_independent|AlgebraicSpace",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern ordinary flatness, scheme morphisms, underived tensor or pullback comparisons, Kan extensions, or unrelated name substrings; none states this geometric Tor-independence or derived algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher Tor of two geometric local rings vanishes for a product square with two flat sides after arbitrary scalar extension",
+   "results": "Read 8 returned hits: Module.FaithfullyFlat.of_flat_of_isLocalHom, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.Extension.tensorH1Cotangent, Algebra.HasGoingDown.of_flat, RingHom.Flat.propertyIsLocal, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern ordinary flatness, scheme morphisms, underived tensor or pullback comparisons, Kan extensions, or unrelated name substrings; none states this geometric Tor-independence or derived algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor independence of algebraic spaces is equivalent to Tor independence on surjective etale scheme charts",
+   "results": "Read 8 returned hits: AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.Etale.exists_subalgebra_fg.",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness, etale morphisms, generic categorical Tor or linear independence; none gives the algebraic-space geometric-stalk versus ordinary-chart Tor comparison or the product-square theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor independence for product squares of algebraic spaces with two flat sides",
+   "results": "Read 8 returned hits: Submodule.LinearDisjoint.linearIndependent_mul_of_flat, Submodule.LinearDisjoint.linearIndependent_mul_of_flat_right, TensorProduct.LinearIndepOn.tmul_of_flat_right, Module.Flat.linearIndependent_one_tmul, Subalgebra.LinearDisjoint.linearIndependent_mul_of_flat, LinearIndependent.tmul_of_flat_right, TensorProduct.LinearIndepOn.tmul_of_flat_left, Submodule.LinearDisjoint.linearIndependent_mul_of_flat_left.",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness, etale morphisms, generic categorical Tor or linear independence; none gives the algebraic-space geometric-stalk versus ordinary-chart Tor comparison or the product-square theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "TorIndependent|tor_independent|AlgebraicSpace",
+   "results": "Read 0 returned hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness, etale morphisms, generic categorical Tor or linear independence; none gives the algebraic-space geometric-stalk versus ordinary-chart Tor comparison or the product-square theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat",
+   "results": "Read 12 returned hits: AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instRespectsSchemeIsOpenImmersion, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Flat.epi_of_flat_of_surjective.",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness, etale morphisms, generic categorical Tor or linear independence; none gives the algebraic-space geometric-stalk versus ordinary-chart Tor comparison or the product-square theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor independence is etale local and agrees for schemes and their associated algebraic spaces",
+   "results": "Read 8 returned hits: RingHom.Etale.propertyIsLocal, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.Etale.of_isLocalizationAway, AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology, Algebra.Etale.formallyEtale.",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness, etale morphisms, generic categorical Tor or linear independence; none gives the algebraic-space geometric-stalk versus ordinary-chart Tor comparison or the product-square theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For algebraic spaces higher Tor of geometric stalk rings vanishes if and only if the ordinary local rings on etale scheme atlases are Tor independent",
+   "results": "Read 8 returned hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.mem_etaleLocus_iff, Algebra.IsEtaleAt, Algebra.Etale.formallyEtale, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.etaleLocus, Algebra.etaleLocus_eq_univ_iff, Algebra.FormallyEtale.of_isLocalization.",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness, etale morphisms, generic categorical Tor or linear independence; none gives the algebraic-space geometric-stalk versus ordinary-chart Tor comparison or the product-square theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*[Ee]tale|[Ee]tale.*Tor|AlgebraicSpace",
+   "results": "Read 20 returned hits: Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean, Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean, Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean, Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness, etale morphisms, generic categorical Tor or linear independence; none gives the algebraic-space geometric-stalk versus ordinary-chart Tor comparison or the product-square theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor",
+   "results": "Read 4 returned hits: CategoryTheory.Tor, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.Tor_obj, CategoryTheory.Tor_map.",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness, etale morphisms, generic categorical Tor or linear independence; none gives the algebraic-space geometric-stalk versus ordinary-chart Tor comparison or the product-square theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two flat schemes over a common base and an arbitrary morphism between them give Tor independence after any base change; apply on etale charts of algebraic spaces",
+   "results": "Read 8 returned hits: AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.Etale.baseChange, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified.",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness, etale morphisms, generic categorical Tor or linear independence; none gives the algebraic-space geometric-stalk versus ordinary-chart Tor comparison or the product-square theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-flat-closed-kernel-base-change",
+  "date": "2026-10-24",
+  "group": "Q09"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, choose n,Z,z,V,E using derived Chow. Supporting input: Tag 0CTQ, lemma-case-of-tor-independence; Tag 08IR, lemma-compare-base-change, applied to a closed immersion and its structure sheaf. Supporting input: Tag 0CTQ, lemma-case-of-tor-independence: the full arbitrary commutative-square assertion, before specializing to a closed immersion.",
+   "via": [
+    "lem-sfb-space-relative-flat-closed-kernel-base-change",
+    "lem-sfb-space-derived-chow-neighbourhood",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-product-tor-independence",
+  "worker": "stage1",
+  "summary": "Q125: followed the detailed etale-chart reduction of Tag 0CTQ, reused the existing common-flat-base scheme Tor-independence theorem instead of creating a scheme restatement, and isolated only the general geometric-versus-ordinary etale-chart criterion of Tag 08IQ. All cited statements and their hypotheses were read; the statement is unchanged.",
+  "blueprint": "Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3), through the inherited alteration/coherent-duality chain and Tag 0CTQ. Steps 1-2 construct compatible flat scheme charts; step 3 supplies the scheme algebra via the existing flat-family lemma; step 4 returns to geometric stalks. blueprint_refs.py ancestor returns None; retained the inherited null node and full provenance instead of inventing a blueprint ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic algebraic-space atlas/etale covering calculus, used only to construct compatible atlases; no trace-formula proof is used."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and base-change stability of algebraic-space fibre products and etale covers, used for atlas construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-e3b0eccac",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-e3b0eccac (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full, together with Stacks 0CTQ (statement, proof and footnote), 0CTA and 08IP/08IQ (statement and full proof). Tags and labels are confirmed in the tags file. The live item is still unsplit with an identical statement, so no other group has split it first. Step 1: Q_0->P_0 is surjective etale as two base changes of atlases followed by the base change of W_0->B_0. I checked the identification Z_0x_{P_0}Q_0=(Z_0x_{X_0}U_0)x_{Y_0xW_0}V_0 on points, so T_0->Z_0x_{X_0}U_0 is surjective etale. Step 2: the chart test, which holds for every pair of charts, gives V_0->W_0 and T_0->U_0 flat, and Q_0->U_0 is flat by base change. Step 3: lem-sfb-flat-families-tor-independent with S=U_0, X=T_0, Y=Q_0 and S'=U_0x_{W_0}W gives Y'=Q; this is 0CTA for the chart square, and I re-derived the cited lemma as Tor^B(C,B(x)R')=Tor^R(C,R')=0. Step 4: Q=(Px_{P_0}Q_0)x_{BxW_0}W, so Q is an atlas, and the criterion with H=P_0, F=Z_0, G=P and atlases Q_0, T_0, Q gives the geometric statement. The new node is 08IQ (1)<=>(4); it says 'for every choice' where Stacks says 'for some', which is still correct via (1)=>(2). I tested it on empty spaces, on Spec k over Spec k, and on Spec k, Spec k over k[t] at t=0 (Tor_1=k, both sides false). It is not a duplicate of the 08IP/08IQ hits, of lem-trf-tor-strict-henselian-detection, of the amplitude and stalk-condition nodes, or of anything in the blueprint. Batch 5: the closures of chartwise-etale-permanence, fibre-products-etale-covers, def-trf-algebraic-space and the chart test contain only generic algebraic-space foundations, and the closure of flat-families contains only Tor algebra (tor-localization-on-spec, tor-flat-base-change); none of these is part of the trace formula or Poincare duality, so I accept the flags and the split_report tool_uses. No SGA citation; unit and chapter unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceProductTorIndependence",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.product_torIndependent",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceProductTorIndependence.lean",
+  "statement": "theorem product_torIndependent {S : Scheme.{u}} {Z₀ X₀ Y₀ B₀ B P₀ P : AlgebraicSpace S} (zX : Z₀ ⟶ X₀) (zY : Z₀ ⟶ Y₀) (f : X₀ ⟶ B₀) (g : Y₀ ⟶ B₀) (comm : zX ≫ f = zY ≫ g) (a : B ⟶ B₀) (r : P₀ ⟶ X₀) (s : P₀ ⟶ Y₀) (hP₀ : IsPullback r.hom s.hom f.hom g.hom) (p : P ⟶ P₀) (b : P ⟶ B) (hP : IsPullback p.hom b.hom (r ≫ f).hom a.hom) (hg : MapIsFlat g) (hzX : MapIsFlat zX) : IsGeometricallyTorIndependent (ObjectProperty.homMk (hP₀.lift zX.hom zY.hom (congrArg InducedCategory.Hom.hom comm))) p",
+  "branch": "sheaf-dag",
+  "by": "Q134",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the canonical projection-preserving identification X ×_B Y ≅ P₀ ×_{B₀} B. IsPullback witnesses specify the actual sheaf products and the canonical base-change projection. The map from Z₀ is the universal pullback lift; geometric Tor and chartwise flatness reuse the landed declarations cited in stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-810128c15",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 73ff9386654e. stmt_deps: the criterion theorem node is replaced by the new definition node def-sfb-space-geometric-tor-independence, bound existing:true to the plain published def AlgebraicGeometry.AlgebraicSpace.IsGeometricallyTorIndependent; its lean.statement matches the source verbatim and it does not depend on torIndependent_iff_etale_chart. The node statement matches Stacks 08IP and its deps are def-sfb-space-geometric-stalk-models and def-weil-pbc-tor-modules. The criterion stays in proof_deps. The item JSON differs from live only in lean and stmt_deps; statement, proof and proof_deps are unchanged. The Lean module is byte-identical to the previous delivery, already checked clause by clause against 0CTQ. lean.statement is verbatim and the proof is sorry only. No same-id node or competing owner exists in side-live or the main repo. The report has the Worker report and Second reading sections. Advisories: the def docstring still names the criterion blueprint id, and the item statement text does not name the new deps."
+ }
+}

@@ -1013,7 +1013,7 @@ theorem exists_coefficientNaturality
           (scalarExtensionSection p.iota
             (scalarTensorPower p.coefficients₀.ring (p.presentation₀.line T) (n + 2)) U s
             (siteSheafTensorTmul _ _ U x y)))
-      rw [formula, q₀.succ, p'.succ_tmul, p.succ_tmul, q₁.succ]
+      erw [formula, q₀.succ, p'.succ_tmul, p.succ_tmul, q₁.succ]
       have previous := ConcreteCategory.congr_hom
         (congrArg (fun f ↦ f.val.app U) ih)
           (scalarExtensionSection p.iota

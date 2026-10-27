@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-frobenius-skew-left-multiple-division",
+ "kind": "statement",
+ "title": "Division by left multiples in a Frobenius skew-polynomial ring",
+ "statement": "Let $k$ be a field [def-weil-field] of prime characteristic $p>0$ [def-pc-field-characteristic]. Let $A$ be the ring of finite sums $\\sum_{i\\geq0}a_iF^i$, with coefficientwise addition and multiplication $(aF^i)(bF^j)=a b^{p^i}F^{i+j}$. For a nonzero element $h=\\sum_i h_iF^i$, define $\\deg h=\\max\\{i:h_i\\ne0\\}$. For every $f,g\\in A$ with $g\\ne0$, there exist $q,r\\in A$ such that $$f=qg+r,$$ with $r=0$ or $\\deg r<\\deg g$. No perfectness hypothesis is imposed on $k$; the quotient multiplies $g$ on the left.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Printed p.296, paragraph immediately preceding Proposition 14.50: the algorithm called the right division algorithm there, explicitly f=qg+r. Unlike f=gq+r in the final paragraph of that page, this algorithm assumes no perfectness."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-characteristic"
+ ],
+ "proof": [
+  {
+   "text": "Fix $g\\ne0$ and put $m=\\deg g$, so $b=g_m\\ne0$. Prove the assertion for all $f$ by strong induction on the natural number $N(f)$, where $N(0)=0$ and $N(f)=\\deg f+1$ for $f\\ne0$. If $f=0$, choose $q=r=0$. If $f\\ne0$ and $\\deg f<m$, choose $q=0$ and $r=f$. These choices give $f=qg+r$ and the required remainder condition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Printed p.296, right division algorithm immediately before Proposition 14.50; leading-term induction expanded explicitly."
+   }
+  },
+  {
+   "text": "In the remaining case let $n=\\deg f\\ge m$, $a=f_n\\ne0$, and $d=n-m$. Since $k$ is a field [def-weil-field], $b^{p^d}\\ne0$: if a positive power of $b$ vanished, multiplying by the corresponding power of $b^{-1}$ would give $1=0$. Define $c=a(b^{p^d})^{-1}$ and $u=cF^d$. Expanding the multiplication specified in the statement gives $$ug=\\sum_{j=0}^{m}c\\,g_j^{p^d}F^{d+j}.$$ Its coefficient in degree $n=d+m$ is $c b^{p^d}=a$, and every coefficient in degree greater than $n$ is zero. This chooses $c$ by inversion in $k$ and requires no extraction of roots.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Printed p.296, right division algorithm immediately before Proposition 14.50; leading-term induction expanded explicitly."
+   }
+  },
+  {
+   "text": "Put $h=f-ug$. The coefficient of $F^n$ is $a-a=0$, and all coefficients above $n$ are zero because this holds for both $f$ and $ug$. Hence either $h=0$ or $\\deg h<n$. In either case $N(h)<N(f)=n+1$: for $h=0$ this is $0<n+1$, and otherwise it follows from $\\deg h<n$. If $n=0$, the same coefficient calculation says every coefficient of $h$ vanishes, so $h=0$; no degree of zero is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Printed p.296, right division algorithm immediately before Proposition 14.50; leading-term induction expanded explicitly."
+   }
+  },
+  {
+   "text": "Apply the strong induction hypothesis to $h$ with the same fixed divisor $g$. It gives $h=q_1g+r$ with $r=0$ or $\\deg r<m$. Set $q=u+q_1$. Since $h=f-ug$, distributivity in $A$ gives $$f=ug+h=ug+q_1g+r=(u+q_1)g+r=qg+r.$$ The remainder satisfies the required bound. This completes the induction. In particular $m=0$ forces $r=0$, since a nonzero finite sum has nonnegative degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Printed p.296, right division algorithm immediately before Proposition 14.50; leading-term induction expanded explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Printed p.296, right division algorithm immediately before Proposition 14.50; leading-term induction expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "division|divMod|degree_mul|free|[Pp]rincipal",
+   "results": "{\"t\": \"2026-10-24T07:54:21Z\", \"tool\": \"grep\", \"query\": \"division|divMod|degree_mul|free|[Pp]rincipal\", \"sub\": \"Algebra/SkewPolynomial\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned Polynomial division operations concern the untwisted multiplication, OreLocalization concerns fractions rather than skew-polynomial division, and SkewPolynomial.Basic supplies the ring and coefficients but no division algorithm."
+  },
+  {
+   "tool": "grep",
+   "query": "div|mod|[Ee]uclidean|degree",
+   "results": "{\"t\": \"2026-10-24T07:55:06Z\", \"tool\": \"grep\", \"query\": \"div|mod|[Ee]uclidean|degree\", \"sub\": \"Algebra/SkewPolynomial\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/SkewPolynomial/Basic.lean\", \"Mathlib/Algebra/SkewPolynomial/Basic.lean\", \"Mathlib/Algebra/SkewPolynomial/Basic.lean\", \"Mathlib/Algebra/SkewPolynomial/Basic.lean\", \"Mathlib/Algebra/SkewPolynomial/Basic.lean\"], \"digest\": \"62cec98e101e12aa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned Polynomial division operations concern the untwisted multiplication, OreLocalization concerns fractions rather than skew-polynomial division, and SkewPolynomial.Basic supplies the ring and coefficients but no division algorithm."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A skew polynomial ring over a field with an injective coefficient endomorphism admits division by left multiples of a nonzero polynomial",
+   "results": "{\"t\": \"2026-10-24T07:55:07Z\", \"tool\": \"leansearch\", \"query\": \"A skew polynomial ring over a field with an injective coefficient endomorphism admits division by left multiples of a nonzero polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.div_eq_quo_add_rem_div\", \"SkewPolynomial\", \"Polynomial.div\", \"Polynomial.instDiv\", \"Polynomial.map_dvd_map\", \"Polynomial.dvd_mul_leadingCoeff_inv\", \"Polynomial.instIsLeftCancelMulZeroOfIsCancelAdd\", \"SkewPolynomial.instSemiring\"], \"digest\": \"5881dd67c2dcae74\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned Polynomial division operations concern the untwisted multiplication, OreLocalization concerns fractions rather than skew-polynomial division, and SkewPolynomial.Basic supplies the ring and coefficients but no division algorithm."
+  },
+  {
+   "tool": "loogle",
+   "query": "SkewPolynomial, div",
+   "results": "{\"t\": \"2026-10-24T07:55:07Z\", \"tool\": \"loogle\", \"query\": \"SkewPolynomial, div\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'div'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "invalid pattern: loogle: unknown identifier 'div'; repeated with the valid name pattern \"SkewPolynomial\"."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left Euclidean division algorithm for Ore polynomials with injective twisting endomorphism",
+   "results": "{\"t\": \"2026-10-24T07:55:08Z\", \"tool\": \"leanfinder\", \"query\": \"Left Euclidean division algorithm for Ore polynomials with injective twisting endomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.term_/ₘ_\", \"Polynomial.instDiv\", \"Polynomial.div\", \"OreLocalization.oreDivMulChar'\", \"OreLocalization.oreDivSMulChar'\", \"Polynomial.div_eq_quo_add_rem_div\", \"Polynomial.mod\", \"OreLocalization.oreDiv_smul_oreDiv\"], \"digest\": \"e3961251dbb4c424\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned Polynomial division operations concern the untwisted multiplication, OreLocalization concerns fractions rather than skew-polynomial division, and SkewPolynomial.Basic supplies the ring and coefficients but no division algorithm."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Division with remainder f = q times g plus r in a Frobenius skew polynomial ring over an imperfect field",
+   "results": "{\"t\": \"2026-10-24T07:55:09Z\", \"tool\": \"leanfinder\", \"query\": \"Division with remainder f = q times g plus r in a Frobenius skew polynomial ring over an imperfect field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WittVector.frobeniusPolyAux\", \"WittVector.frobeniusPoly\", \"WittVector.frobeniusFun_isPoly\", \"PerfectClosure.R.intro\", \"polynomial_expand_eq\", \"WittVector.frobeniusPolyAux_eq\", \"MvPolynomial.frobenius_zmod\", \"PerfectClosure.frobenius_mk\"], \"digest\": \"8aab795d5a6b2866\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned Polynomial division operations concern the untwisted multiplication, OreLocalization concerns fractions rather than skew-polynomial division, and SkewPolynomial.Basic supplies the ring and coefficients but no division algorithm."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SkewPolynomial\"",
+   "results": "{\"t\": \"2026-10-24T07:57:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"SkewPolynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SkewPolynomial\", \"SkewPolynomial.X\", \"SkewPolynomial.coeff\", \"SkewPolynomial.support\", \"SkewPolynomial.instNontrivial\", \"SkewPolynomial.erase\", \"SkewPolynomial.sum\", \"SkewPolynomial.update\"], \"digest\": \"7d8494dfe40fce32\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned Polynomial division operations concern the untwisted multiplication, OreLocalization concerns fractions rather than skew-polynomial division, and SkewPolynomial.Basic supplies the ring and coefficients but no division algorithm."
+  },
+  {
+   "tool": "grep",
+   "query": "div|mod|Euclidean|degree",
+   "results": "{\"t\": \"2026-10-24T08:15:39Z\", \"tool\": \"grep\", \"query\": \"div|mod|Euclidean|degree\", \"sub\": \"Algebra/SkewPolynomial\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/SkewPolynomial/Basic.lean\", \"Mathlib/Algebra/SkewPolynomial/Basic.lean\", \"Mathlib/Algebra/SkewPolynomial/Basic.lean\", \"Mathlib/Algebra/SkewPolynomial/Basic.lean\", \"Mathlib/Algebra/SkewPolynomial/Basic.lean\"], \"digest\": \"62cec98e101e12aa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SkewPolynomial.Basic defines the skew ring and coefficients but has no division or degree-reduction theorem; the five hits are documentation and smul_monomial."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euclidean division by left multiples in a skew polynomial ring over a field with an injective endomorphism",
+   "results": "{\"t\": \"2026-10-24T08:15:39Z\", \"tool\": \"leansearch\", \"query\": \"Euclidean division by left multiples in a skew polynomial ring over a field with an injective endomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"EuclideanDomain.sub_mul_div_left\", \"EuclideanDomain.mul_sub_div_left\", \"EuclideanDomain.mul_add_div_left\", \"Polynomial.instEuclideanDomain\", \"Polynomial.div\", \"Polynomial.instDiv\", \"EuclideanDomain.r\", \"Polynomial.divModByMonicAux\"], \"digest\": \"d431e1e10819eb22\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned Polynomial division and MonomialOrder division declarations use ordinary commutative polynomial multiplication; EuclideanDomain requires the Euclidean structure rather than proving it for this noncommutative ring. They do not specialize to Frobenius skew multiplication."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SkewPolynomial\"",
+   "results": "{\"t\": \"2026-10-24T08:15:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"SkewPolynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SkewPolynomial\", \"SkewPolynomial.X\", \"SkewPolynomial.coeff\", \"SkewPolynomial.support\", \"SkewPolynomial.instNontrivial\", \"SkewPolynomial.erase\", \"SkewPolynomial.sum\", \"SkewPolynomial.update\"], \"digest\": \"7d8494dfe40fce32\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SkewPolynomial, coeff, support, and instRing construct the ring; none asserts division with remainder."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Division with remainder f = q*g + r in skew polynomials over a field twisted by Frobenius, without perfectness",
+   "results": "{\"t\": \"2026-10-24T08:15:42Z\", \"tool\": \"leanfinder\", \"query\": \"Division with remainder f = q*g + r in skew polynomials over a field twisted by Frobenius, without perfectness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.mod\", \"Polynomial.instDiv\", \"Polynomial.instMod\", \"Polynomial.div\", \"Polynomial.div_eq_quo_add_rem_div\", \"Polynomial.mod_def\", \"Polynomial.divModByMonicAux\", \"Polynomial.div_def\"], \"digest\": \"7857c6eaf7dfefe4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned Polynomial division and MonomialOrder division declarations use ordinary commutative polynomial multiplication; EuclideanDomain requires the Euclidean structure rather than proving it for this noncommutative ring. They do not specialize to Frobenius skew multiplication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ore skew polynomials division algorithm using cancellation of the leading coefficient and induction on degree",
+   "results": "{\"t\": \"2026-10-24T08:16:16Z\", \"tool\": \"leanfinder\", \"query\": \"Ore skew polynomials division algorithm using cancellation of the leading coefficient and induction on degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.div_def\", \"MonomialOrder.div_single\", \"MonomialOrder.div\", \"Polynomial.div\", \"Polynomial.mod_def\", \"MonomialOrder.div_set\", \"Polynomial.divByMonic\", \"Polynomial.instDiv\"], \"digest\": \"9b801ac3aec4bf59\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned Polynomial division and MonomialOrder division declarations use ordinary commutative polynomial multiplication; EuclideanDomain requires the Euclidean structure rather than proving it for this noncommutative ring. They do not specialize to Frobenius skew multiplication."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-frobenius-skew-free-submodules",
+  "date": "2026-10-24",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 13.33(a)-(e), printed pp.265-266; Proposition 17.60, p.372 (split unipotent kernel); Theorem 25.1, p.544 (parabolic quotient), with Theorems 5.28 and 8.43-8.44, pp.105,161 (represented, quasi-projective quotient, hence projective when proper). Regular centralizer: proof of Proposition 21.29, pp.433-434. Smooth integral geometry: Corollary 5.26, Proposition 7.15 and Propositions 1.34-1.35. The field-extension clauses use the defining functors and quotient sheaf. Supporting proof input: Proposition 16.63, printed p.347; Proposition 16.62 and Theorem 16.58, printed pp.345,347; split-series convention in Section 16g. This general automorphism-action criterion is the input used in the proof of Proposition 17.60, printed p.372. Supporting input: Theorem 16.58 (Rosenlicht), printed p.345; split solvable convention in Section 16g, p.343; splitness of the unipotent subgroup in Proposition 16.54 and its proof, p.344. Present split of Rosenlicht 16.58: Proposition 14.50 and the preceding division algorithm, printed p.296; its finite-support application in the elementary-unipotent case of Theorem 16.58, printed p.345. The arbitrary free ambient module reduces to finitely many coordinates because M is finitely generated. Supporting algebra: division by a left multiple, f=qg+r, in the paragraph immediately preceding Milne Proposition 14.50, printed p.296; this is the one-sided input over arbitrary characteristic-p fields.",
+   "via": [
+    "lem-sfb-frobenius-skew-free-submodules",
+    "lem-sfb-rosenlicht-split-solvable-criterion",
+    "lem-sfb-split-torus-no-invariants-unipotence",
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-frobenius-skew-left-multiple-division",
+  "worker": "stage1",
+  "summary": "NF checked Milne printed p.296, the live project source, the full DAG and current blueprint. Expanded the right division algorithm as strong induction with explicit leading coefficient cancellation c=a/(b^(p^(n-m))). No perfectness is used. No new nodes: coefficient expansion, degree drop and the assembly are routine calculations from the stated ring and field inverses. Statement and dependencies preserved.",
+  "blueprint": "The inherited created.item ancestry has no imported blueprint ancestor (blueprint_refs.py ancestor returns None), retained as null. This expands the supporting algebra attached to det-thm-sf-ctf-stability-direct-images, proof (3), through the Rosenlicht 16.58 and Milne 14.50 chain recorded in blueprint.from.place. Current blueprint lem-sc-lang-steinberg.proof.md, Step 1, also contains leading-term cancellation, but has an algebraically closed coefficient field and a different conclusion; same_as remains []."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NF-948ba277e",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-948ba277e (reviewer sub-agent of L); spot-checked: The statement is byte-identical to the base (checked against the Q123 epp-prime snapshot; base status unsplit), and its stmt_deps are unchanged. Source check: Milne iAG printed p.296, the paragraph before Prop. 14.50, gives the 'right division algorithm' f=qg+r with no perfectness assumption. The convention F c = c^p F (p.292) matches (aF^i)(bF^j)=a b^{p^i}F^{i+j}. Perfectness is assumed only for f=gq+r. The node omits the uniqueness clause, as the base already did, and its only citer (free-submodules, step 'left ideals principal') uses existence only. Small cases tested: k=F_p(t), g=tF, f=F^2 gives q=t^{-p}F, r=0; the right-quotient version would need c^p=1/t, which has no solution in F_p(t). Also checked g constant (r=0), f=0, and deg f<deg g. All 4 steps are correct elementary coefficient computations: strong induction on N(f), leading-term cancellation with c=a(b^{p^d})^{-1}, degree drop including n=0, then assembly by right distributivity. def-weil-field gives the inverse used in step 2, and proof_deps equals the union of uses. Duplicates: lem-sfb-skew-polynomial-two-sided-division needs σ to be an automorphism (perfect k), so it does not cover this item; the report does not mention it, which is harmless. The other skew and division nodes, and the Mathlib file SkewPolynomial/Basic, contain no such division result. No new nodes, no tool_uses, no SGA. The report lists a citations.json that is not in the commit; this is harmless."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FrobeniusSkewLeftMultipleDivision",
+  "declaration": "SkewPolynomial.exists_frobenius_left_multiple_division",
+  "file": "lean/Sheaf/RingTheory/FrobeniusSkewLeftMultipleDivision.lean",
+  "statement": "theorem exists_frobenius_left_multiple_division {k : Type u} [Field k] (p : ℕ) [Fact (Nat.Prime p)] [CharP k p] [MulSemiringAction (Multiplicative ℕ) k] (hF : ∀ a : k, SkewPolynomial.φ a = a ^ p) (f g : SkewPolynomial k) (hg : g ≠ 0) : ∃ q r : SkewPolynomial k, f = q * g + r ∧ (r = 0 ∨ r.support.sup id < g.support.sup id)",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9243ffe67",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read the node, both stmt_deps (Field, CharP), Mathlib SkewPolynomial/Basic (support : Finset ℕ, monomial_mul_monomial, φ_iterate_apply) and the delivered module. Every hypothesis and conclusion clause matches: hF pins φ to Frobenius, which gives (aF^i)(bF^j)=a b^{p^i}F^{i+j}; deg = support.sup id; f = q*g + r with q on the left; r=0 ∨ deg r < deg g; no perfectness or bijectivity; universe u arbitrary. Edge cases f=0, deg f<deg g, constant g (r=0), p=2 and imperfect F_p(t) (g=tF, f=F^2) are covered. Milne p.296 right division before Prop 14.50 assumes no perfectness. Only duplicate candidate is SkewPolynomialTwoSidedDivision, which needs bijective φ; same conventions. Only the node's lean field changes vs side-live; lean.statement verbatim; report has Worker report and Second reading by Q23; no definitions, proof is only sorry, docstrings give source, blueprint tag and full proof. No fixes, no compile needed."
+ }
+}

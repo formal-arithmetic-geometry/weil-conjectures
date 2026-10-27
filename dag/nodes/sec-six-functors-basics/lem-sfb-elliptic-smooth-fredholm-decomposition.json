@@ -1,0 +1,173 @@
+{
+ "id": "lem-sfb-elliptic-smooth-fredholm-decomposition",
+ "kind": "statement",
+ "title": "Smooth kernel-image decomposition for real elliptic operators",
+ "statement": "All vector spaces below are over the real field $\\mathbf R$ [def-weil-field]. Let $N$ be a compact oriented smooth real manifold without boundary of dimension $m\\geq1$, with a smooth Riemannian metric and its volume form. Let $E,F$ be smooth real vector bundles on $N$ of the same finite rank, each with a smooth positive definite fibre inner product. Write $\\Gamma^\\infty(E)$ and $\\Gamma^\\infty(F)$ for their real vector spaces of smooth sections, with $L^2$ inner products obtained by integrating the fibre inner products. Let $P:\\Gamma^\\infty(E)\\to\\Gamma^\\infty(F)$ be a real-linear differential operator of order at most $k$, for some integer $k\\geq1$, with smooth coefficients: in coordinates and bundle frames it has the form $\\sum_{|\\alpha|\\leq k}a_\\alpha(x)\\partial^\\alpha$. Assume its degree-$k$ principal symbol (formed from the $|\\alpha|=k$ coefficients) is invertible at every nonzero real cotangent vector. Let $P^*:\\Gamma^\\infty(F)\\to\\Gamma^\\infty(E)$ be a differential operator with smooth coefficients satisfying $\\langle Pu,v\\rangle_{L^2}=\\langle u,P^*v\\rangle_{L^2}$ for all smooth sections. Then there is an orthogonal direct sum of real vector spaces $$\\Gamma^\\infty(E)=\\ker P\\ \\mathbin{\\oplus^{\\perp}}\\ P^*(\\Gamma^\\infty(F)).$$ In particular every smooth section $a$ can be written $a=h+P^*v$ with $h\\in\\Gamma^\\infty(E)$, $Ph=0$, and $v\\in\\Gamma^\\infty(F)$ smooth; the image in this statement is the actual image, with no closure.",
+ "source": {
+  "document": "literature/kong-complex-geometry-notes.pdf",
+  "place": "WANTED locally: Wenrui Kong, Notes on Complex Geometry (April 9, 2025); read online https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf; §6.2 Theorem 6.5(4), printed p.23. Only its smooth orthogonal decomposition assertion is requested, in the real vector-bundle setting stated before the theorem."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $Q=P^*$. In local smooth orthonormal frames, write $P=\\sum a_\\alpha\\partial^\\alpha$ and $dV=\\rho\\,dx$. Repeated integration by parts gives $Qv=\\rho^{-1}\\sum_{|\\alpha|\\leq k}(-1)^{|\\alpha|}\\partial^\\alpha(\\rho a_\\alpha^t v)$: the given adjoint equals this expression since their difference pairs to zero with every compactly supported smooth test section (test the difference against itself times a nonnegative cutoff). Consequently $Q$ has order at most $k$ and $\\sigma_k(Q)=(-1)^k\\sigma_k(P)^t$ is invertible. Symmetry of the real pairing also says that $P$ is the formal adjoint of $Q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.5)--(1.7), printed pp.288--289; local integration-by-parts calculation; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-elliptic-sobolev-closed-range] to $Q:F\\to E$, which has the required ellipticity by step 1 and has the same compact base and metric equal-rank bundles. This gives a bounded extension $T_Q:H^k(F)\\to L^2(E)$ with closed range $R$, and identifies its values with distributional $Q$. The cited completion statement also makes $L^2(E)$ a real Hilbert space and embeds $H^k(F)$ in $L^2(F)$ and distributions.",
+   "uses": [
+    "lem-sfb-elliptic-sobolev-closed-range"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, first part of Corollary (2.4)(ii), printed p.290; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+   }
+  },
+  {
+   "text": "For a smooth $a$, apply [lem-sfb-hilbert-orthogonal-projection] in $L^2(E)$ to the closed linear subspace $R$. Obtain $a=r+h$ with $r\\in R$ and $h\\in R^\\perp$, and choose $v\\in H^k(F)$ with $T_Qv=r$. For any smooth $\\phi\\in\\Gamma^\\infty(F)$, the element $Q\\phi=T_Q\\phi$ belongs to $R$, hence $\\langle h,Q\\phi\\rangle=0$. By the definition of distributional differentiation and the formal adjoint identity, $\\langle Ph,\\phi\\rangle_{\\mathcal D^{\\prime},\\mathcal D}=\\langle h,Q\\phi\\rangle_{L^2}=0$; thus $Ph=0$ distributionally. Also $Qv=r=a-h$ distributionally.",
+   "uses": [
+    "lem-sfb-hilbert-orthogonal-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Corollary (2.4)(ii), equation (2.6), printed p.290; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-elliptic-adjoint-regularity] first to $P$ and the $L^2(E)$ section $h$: its right-hand side $0$ is smooth, so $h$ is smooth. Then $r=a-h$ is smooth. Apply the same node to $Q$ and $v\\in H^k(F)\\subseteq L^2(F)$, with smooth right-hand side $r$. Step 1 checked ellipticity of $Q$, so $v$ too is smooth. Distributional identities between smooth sections are the corresponding classical identities (their difference tested against itself has zero norm). We have obtained $a=h+P^*v$ with $Ph=0$ and both summands smooth.",
+   "uses": [
+    "lem-sfb-elliptic-adjoint-regularity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2 (2.3), (2.1) and the end of Corollary (2.4)(ii), printed pp.289--290; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+   }
+  },
+  {
+   "text": "For smooth $h\\in\\ker P$ and smooth $v$, $\\langle h,P^*v\\rangle=\\langle Ph,v\\rangle=0$. If a smooth $x$ lies in both summands, write $x=P^*v$ and use $Px=0$ to get $\\|x\\|_{L^2}^2=\\langle Px,v\\rangle=0$, hence $x=0$. Combined with spanning from step 4, this proves the asserted orthogonal direct sum with the actual smooth image. The summand $P^*v$ is unique; no uniqueness of its primitive $v$ is claimed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, orthogonality in Corollary (2.4)(ii), printed p.290; elementary pairing argument; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-elliptic-sobolev-closed-range",
+  "lem-sfb-hilbert-orthogonal-projection",
+  "lem-sfb-elliptic-adjoint-regularity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "VI §§1--2, especially Corollary (2.4)(ii), printed pp.288--290; both local literature PDFs are WANTED. Applied to Q=P* to obtain Kong Theorem 6.5(4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "elliptic|Fredholm|formalAdjoint",
+   "results": "[grep] OK 25 hit(s); returned top names/files: Mathlib/Analysis/InnerProductSpace/Spectrum.lean, Mathlib/Analysis/InnerProductSpace/LinearPMap.lean, Mathlib/Analysis/InnerProductSpace/LinearPMap.lean, Mathlib/Analysis/InnerProductSpace/LinearPMap.lean, Mathlib/Analysis/InnerProductSpace/LinearPMap.lean, Mathlib/Analysis/InnerProductSpace/LinearPMap.lean, Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean, Mathlib/Analysis/Distribution/Sobolev.lean; digest 557f3330f9203229; Mathlib subdirectory Analysis/",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Fredholm operators, compact-operator alternatives and formal adjoint identities do not prove elliptic regularity or the actual smooth image decomposition for differential operators on bundles."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For elliptic differential operators on compact manifolds smooth sections decompose as kernel plus image of formal adjoint",
+   "results": "[leansearch] OK 8 hit(s); returned top names/files: LinearPMap.IsFormalAdjoint, LinearPMap.adjoint_isFormalAdjoint, ContinuousLinearMap.orthogonal_ker, LinearMap.adjoint, ContinuousLinearMap.orthogonal_range, ContinuousLinearMap.adjointAux, ContMDiffSection.ctorIdx, LinearPMap.adjoint; digest d3aa92dcbbdb5ad1",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Fredholm operators, compact-operator alternatives and formal adjoint identities do not prove elliptic regularity or the actual smooth image decomposition for differential operators on bundles."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fredholm\"",
+   "results": "[loogle] OK 12 hit(s); returned top names/files: FredholmDecomposition, FredholmDecomposition.X₀, FredholmDecomposition.X₁, FredholmDecomposition.cofg_X₁, ContinuousLinearMap.IsFredholm.id, FredholmDecomposition.isTopCompl, ContinuousLinearMap.FredholmPackage, ContinuousLinearMap.IsFredholm; digest ae339c59ee293231",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Fredholm operators, compact-operator alternatives and formal adjoint identities do not prove elliptic regularity or the actual smooth image decomposition for differential operators on bundles."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth elliptic differential operator on finite rank bundles over a closed manifold has finite dimensional kernel and smooth sections decompose into its kernel and range of its formal adjoint",
+   "results": "[leanfinder] OK 8 hit(s); returned top names/files: SmoothBumpCovering.embeddingPiTangent_ker_mfderiv, ContinuousLinearMap.ker_closedComplemented_of_finiteDimensional_range, OpenPartialHomeomorph.MDifferentiable.ker_mfderiv_eq_bot, ImplicitFunctionData.isCompl_ker, ContinuousLinearMap.ker_le_ker_iff_range_le_range, IsCoercive.continuousLinearEquivOfBilin, IsCoercive.range_eq_top, HasStrictFDerivAt.implicitFunctionDataOfComplemented; digest c3fb271cb4522e4c",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Fredholm operators, compact-operator alternatives and formal adjoint identities do not prove elliptic regularity or the actual smooth image decomposition for differential operators on bundles."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Elliptic regularity Fredholm alternative for smooth sections of a vector bundle on a compact Riemannian manifold",
+   "results": "[leanfinder] OK 8 hit(s); returned top names/files: IsContMDiffRiemannianBundle.exists_contMDiff, exists_contMDiffSection_forall_mem_convex_of_local, exists_contMDiffOn_section_forall_mem_convex_of_local, exists_smooth_section_forall_mem_convex_of_local, ContDiffMapSupportedIn.structureMapLM, exists_embedding_euclidean_of_compact, SchwartzMap.integral_clm_comp_laplacian_right_eq_left, Manifold.exists_lt_locally_constant_of_riemannianEDist_lt; digest bdc959fb333bd22a",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Fredholm operators, compact-operator alternatives and formal adjoint identities do not prove elliptic regularity or the actual smooth image decomposition for differential operators on bundles."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+  "date": "2026-10-24",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle.",
+   "via": [
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-elliptic-smooth-fredholm-decomposition",
+  "worker": "stage1",
+  "summary": "Kept the imported statement and statement dependencies. Projected onto the closed range of the Sobolev extension of the differential formal adjoint, identified the perpendicular term as a distributional kernel element by testing, and used L2 elliptic regularity twice. Added two statement-only analytic inputs and one exact Mathlib projection leaf. Corrected an erroneous draft identification of the Sobolev Hilbert adjoint with the differential adjoint, and removed a false uniqueness-of-primitive claim.",
+  "blueprint": "The latest direct-images proof (3), through the inherited alteration/moduli/Kempf/Kodaira/harmonic-representative chain, calls for smooth Dolbeault decomposition. These steps refine its general elliptic analytic prerequisite, Kong §6.2 Theorem 6.5(4), using Demailly VI §§1--2. The ancestor command returns None; retained the inherited full place and via-chain rather than inventing a blueprint ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-5b6a3a951",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-5b6a3a951 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, the citer (hermitian-dolbeault-orthogonal-decomposition step 2) and the sources. Kong Thm 6.5(4), p.23 (online; local copy WANTED) matches the item hypothesis by hypothesis. Demailly VI (1.6)-(1.7), (2.1), (2.3) and (2.4)(ii)/(2.5)-(2.6), pp.288-290 (online; local copy WANTED) are exactly the delivered route applied to Q=P* with Q*=P; the two equal-rank bundle version is the standard system version and is correct. Step 1 (adjoint formula by integration by parts in orthonormal frames, symbol (-1)^k sigma^t, cutoff uniqueness) is elementary; the existing coordinate-weighted-adjoint node is first-order only and does not give it. Step 2 uses exactly the closed-range node's clauses: bounded extension, agreement with distributional Q, closed range, L2 completeness, embeddings. Step 3 tests h against Q phi in the closed range R, so Ph=0 weakly; it correctly avoids the Hilbert adjoint of the Sobolev map. Step 4 applies regularity first to h (right-hand side 0), then to v (right-hand side a-h smooth). Step 5 gives orthogonality and directness, with no uniqueness of v claimed. New nodes: the closed-range and regularity nodes are true, self-contained, statement-only and strictly smaller than the item. They were tested on d/dt on the circle, rank 0 and Q=0 without ellipticity. The Mathlib leaf Submodule.exists_add_mem_mem_orthogonal (Basic.lean 427-430, ClosedSubmodule instance 87-89) is a one-line specialization. rg -L over dag/nodes finds no duplicates. No SGA, no off-unit citations, proof_deps equals the union of uses, no doubled backslashes. The null blueprint from.node is inherited from the ancestor chain (base-node fault). No changes."
+ }
+}

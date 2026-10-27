@@ -1,0 +1,265 @@
+{
+ "id": "lem-weil-pbc-open-module-transpose-morphisms",
+ "kind": "statement",
+ "title": "Open module transposes are linear morphisms and commute with composition",
+ "statement": "Let $X$ be a topological space, $\\mathcal O_X$ a sheaf of commutative rings, and $U\\subseteq X$ open. Put $\\mathcal O_U(W)=\\mathcal O_X(W)$ for opens $W\\subseteq U$, with inherited restrictions. Work with module presheaves (abelian presheaves with sectionwise module actions and semilinear restrictions) and sectionwise linear morphisms [def-weil-presheaf-modules-sheafification]. Suppose $\\mathcal P,\\mathcal P'$ are $\\mathcal O_X$-module presheaves and $\\mathcal Q,\\mathcal Q'$ are $\\mathcal O_U$-module presheaves. On opens of $U$ write $R\\mathcal P(W)=\\mathcal P(W)$ with inherited actions and restrictions; on opens of $X$ write $D\\mathcal Q(V)=\\mathcal Q(V\\cap U)$ with the restrictions of $\\mathcal Q$ and the $\\mathcal O_X(V)$-action through ring restriction $\\rho_V:\\mathcal O_X(V)\\to\\mathcal O_U(V\\cap U)$. Assume these assignments have the indicated module-presheaf structures, and for morphisms put $(R\\mu)_W=\\mu_W$ and $(D\\nu)_V=\\nu_{V\\cap U}$. For every module-presheaf morphism $\\alpha:R\\mathcal P\\to\\mathcal Q$, the components\n$$\\Phi(\\alpha)_V(s)=\\alpha_{V\\cap U}(s|_{V\\cap U})$$\ndefine an $\\mathcal O_X$-linear module-presheaf morphism $\\mathcal P\\to D\\mathcal Q$. For every module-presheaf morphism $\\beta:\\mathcal P\\to D\\mathcal Q$, the components\n$$\\Psi(\\beta)_W(s)=\\beta_W(s)\\quad(W\\subseteq U)$$\n(using $D\\mathcal Q(W)=\\mathcal Q(W)$ and $\\rho_W=\\mathrm{id}$) define an $\\mathcal O_U$-linear module-presheaf morphism $R\\mathcal P\\to\\mathcal Q$. For every $\\mu:\\mathcal P'\\to\\mathcal P$, $\\nu:\\mathcal Q\\to\\mathcal Q'$ and $\\alpha:R\\mathcal P\\to\\mathcal Q$, these forward maps satisfy\n$$\\Phi(\\nu\\circ\\alpha\\circ R\\mu)=D\\nu\\circ\\Phi(\\alpha)\\circ\\mu.$$\nTheir common component at any open $V\\subseteq X$ sends $s\\in\\mathcal P'(V)$ to $\\nu_{V\\cap U}(\\alpha_{V\\cap U}(\\mu_{V\\cap U}(s|_{V\\cap U})))$. These conclusions apply in particular to module sheaves and their morphisms [def-weil-sheaf-of-modules-category].",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008U (lemma-adjoint-push-pull-presheaves-modules), the forward and reverse module maps, specialized to the open section model of Tag 00A0 (lemma-j-pullback), clause (1); explicit section formulas and their naturality as in returned proof steps 3,4,6."
+ },
+ "stmt_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=V\\cap U$. By [def-weil-presheaf-modules-sheafification], restriction in $\\mathcal P$ is additive and semilinear over $\\rho_V$, and $\\alpha_A$ is additive and $\\mathcal O_X(A)$-linear. Thus $\\Phi(\\alpha)_V(s+t)=\\alpha_A(s|_A)+\\alpha_A(t|_A)$. For $a\\in\\mathcal O_X(V)$,\n$$\\Phi(\\alpha)_V(as)=\\alpha_A(\\rho_V(a)s|_A)=\\rho_V(a)\\alpha_A(s|_A)=a\\cdot\\Phi(\\alpha)_V(s),$$\nwhere the last action is precisely the stipulated action on $D\\mathcal Q(V)$. This proves sectionwise $\\mathcal O_X$-linearity, including preservation of zero.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 008U (sheaves-lemma-adjoint-push-pull-presheaves-modules), proof, compatibility with module structures; open section model of Tag 00A0 (sheaves-lemma-j-pullback), (1) and final sentence."
+   }
+  },
+  {
+   "text": "For an inclusion of opens $V'\\subseteq V$, put $A=V\\cap U$ and $B=V'\\cap U$. Naturality of $\\alpha$ and composition of restrictions give\n$$\\bigl(\\Phi(\\alpha)_V(s)\\bigr)|_B=(\\alpha_A(s|_A))|_B=\\alpha_B((s|_A)|_B)=\\alpha_B((s|_{V'})|_B)=\\Phi(\\alpha)_{V'}(s|_{V'}).$$\nThe leftmost restriction is exactly that of $D\\mathcal Q$. Together with step 1 this is the definition of a module-presheaf morphism [def-weil-presheaf-modules-sheafification].",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 008U (sheaves-lemma-adjoint-push-pull-presheaves-modules), proof, compatibility with module structures; open section model of Tag 00A0 (sheaves-lemma-j-pullback), (1) and final sentence."
+   }
+  },
+  {
+   "text": "For $W\\subseteq U$, the identity $W\\cap U=W$ identifies the action on $D\\mathcal Q(W)$ with the action on $\\mathcal Q(W)$, since $\\rho_W=\\mathrm{id}$. Hence the additive, $\\mathcal O_X(W)$-linear map $\\beta_W$ is an $\\mathcal O_U(W)$-linear map $(R\\mathcal P)(W)\\to\\mathcal Q(W)$. For $W'\\subseteq W\\subseteq U$, naturality of $\\beta$ reads\n$$\\beta_W(s)|_{W'}=\\beta_{W'}(s|_{W'}).$$\nBoth restrictions here are the inherited ones of $\\mathcal Q$ and $R\\mathcal P$. Thus these components define $\\Psi(\\beta)$ as a module-presheaf morphism [def-weil-presheaf-modules-sheafification].",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 008U (sheaves-lemma-adjoint-push-pull-presheaves-modules), proof, compatibility with module structures; open section model of Tag 00A0 (sheaves-lemma-j-pullback), (1) and final sentence."
+   }
+  },
+  {
+   "text": "The prescribed $R\\mu$ is linear and restriction-compatible because its components are components of $\\mu$. The prescribed $D\\nu$ is additive and is $\\mathcal O_X(V)$-linear since $\\nu_{V\\cap U}(\\rho_V(a)t)=\\rho_V(a)\\nu_{V\\cap U}(t)$; its restriction compatibility is that of $\\nu$. Thus all morphism composites in the claim are defined [def-weil-presheaf-modules-sheafification]. For $A=V\\cap U$ and $s\\in\\mathcal P'(V)$, expansion gives\n$$\\Phi(\\nu\\circ\\alpha\\circ R\\mu)_V(s)=\\nu_A(\\alpha_A(\\mu_A(s|_A))).$$",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 008U (sheaves-lemma-adjoint-push-pull-presheaves-modules), proof, compatibility with module structures; open section model of Tag 00A0 (sheaves-lemma-j-pullback), (1) and final sentence."
+   }
+  },
+  {
+   "text": "Naturality of $\\mu$ gives $\\mu_V(s)|_A=\\mu_A(s|_A)$ for $A=V\\cap U$. Consequently\n$$(D\\nu\\circ\\Phi(\\alpha)\\circ\\mu)_V(s)=\\nu_A(\\alpha_A(\\mu_V(s)|_A))=\\nu_A(\\alpha_A(\\mu_A(s|_A))).$$\nThis is the component found in step 4, for every $V$ and $s$. Morphisms are component families [def-weil-presheaf-modules-sheafification], so equality of these values proves the asserted equality of morphisms and its stated common-component formula.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 008U (sheaves-lemma-adjoint-push-pull-presheaves-modules), proof, compatibility with module structures; open section model of Tag 00A0 (sheaves-lemma-j-pullback), (1) and final sentence."
+   }
+  },
+  {
+   "text": "For module sheaves the notion of morphism in [def-weil-sheaf-of-modules-category] is exactly an additive restriction-compatible sectionwise linear map, as used above. Restriction preserves the sheaf property: a cover of an open $W\\subseteq U$ is the same cover by opens of $X$, so gluing is gluing in $\\mathcal P$. Direct image preserves it as well: for a cover $V=\\bigcup_iV_i$, the opens $V_i\\cap U$ cover $V\\cap U$, and compatible sections of $D\\mathcal Q(V_i)=\\mathcal Q(V_i\\cap U)$ glue uniquely in $\\mathcal Q(V\\cap U)=D\\mathcal Q(V)$. Therefore the same maps and equality are morphisms and equality of module sheaves whenever the inputs are sheaves.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 00A0 (sheaves-lemma-j-pullback), (2) and final extension to modules; direct-image sheaf condition checked on the intersected open cover."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008U (sheaves-lemma-adjoint-push-pull-presheaves-modules), proof, compatibility with module structures; open section model of Tag 00A0 (sheaves-lemma-j-pullback), (1) and final sentence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pushforwardNatTrans|pushforwardPushforwardAdj|homEquiv",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: component restriction and morphism constructors do not supply both open transposes with their displayed linearity and two-variable composition identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.pushforwardNatTrans",
+   "results": "No hits; loogle: unknown identifier 'PresheafOfModules.pushforwardNatTrans'",
+   "date": "2026-10-22",
+   "verdict": "no match: component restriction and morphism constructors do not supply both open transposes with their displayed linearity and two-variable composition identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For module presheaves on a ringed space and open U, alpha on the restriction defines the linear natural morphism s maps to alpha of s restricted to V intersect U, and beta restricts on opens inside U; these operations commute with precomposition and postcomposition",
+   "results": "AlgebraicGeometry.Scheme.Modules.Hom.app; ModuleCat.Tilde.res_apply; PresheafOfModules.restriction; ModuleCat.Tilde.toOpen_res; PresheafOfModules.restriction_app; AlgebraicGeometry.Scheme.Modules.mapPresheaf_app; PresheafOfModules.Hom.naturality_assoc; PresheafOfModules.map",
+   "date": "2026-10-22",
+   "verdict": "no match: component restriction and morphism constructors do not supply both open transposes with their displayed linearity and two-variable composition identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For module presheaves, extension of a morphism from an open subset using section restrictions is linear and natural in both module presheaves, and restriction of a direct-image morphism is linear",
+   "results": "PresheafOfModules.Hom.mk; PresheafOfModules.ofPresheaf; PresheafOfModules.restriction_app; PresheafOfModules.instAddHom; PresheafOfModules.instAdditiveRestrictScalars; PresheafOfModules.sectionsMap; ModuleCat.Tilde.toOpen; PresheafOfModules.Hom.naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: component restriction and morphism constructors do not supply both open transposes with their displayed linearity and two-variable composition identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linear maps between variable-ring module presheaves: extending a map alpha on an open U by alpha at V intersection U after restriction gives a natural transformation, compatible with composition on either side",
+   "results": "PresheafOfModules.restriction; PresheafOfModules.map; ModuleCat.Tilde.res_apply; PresheafOfModules.sections_property; PresheafOfModules.restriction_app; PresheafOfModules.sectionsMap; PresheafOfModules.Hom.naturality; PresheafOfModules.ofPresheaf_map",
+   "date": "2026-10-22",
+   "verdict": "no match: component restriction and morphism constructors do not supply both open transposes with their displayed linearity and two-variable composition identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardNatTrans",
+   "results": "SheafOfModules.pushforwardNatTrans; SheafOfModules.pushforwardNatIso_hom; SheafOfModules.pushforwardNatTrans_id; SheafOfModules.pushforwardNatIso_inv; SheafOfModules.pushforwardNatTrans_comp; SheafOfModules.pushforwardNatTrans_app_val_app; SheafOfModules.pushforwardNatTrans_app_val_app_apply; SheafOfModules.pushforwardCongr₂_hom_app_val_app_hom_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: component restriction and morphism constructors do not supply both open transposes with their displayed linearity and two-variable composition identities"
+  },
+  {
+   "tool": "grep",
+   "query": "restriction|structure Hom",
+   "results": "17; 46; 81; 96; 198",
+   "date": "2026-10-22",
+   "verdict": "no match: component restriction and morphism constructors do not supply both open transposes with their displayed linearity and two-variable composition identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.restriction, PresheafOfModules.Hom",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are component constructors, single restrictions, or scheme-specific comparisons; none supplies both displayed module-presheaf transposes and the two-variable formula in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For presheaves of modules on a ringed space, the open restriction adjunction sends alpha to the linear natural map alpha after restriction to V intersect U and is natural in both arguments",
+   "results": "ModuleCat.Tilde.res_apply; PresheafOfModules.restriction; ModuleCat.Tilde.toOpen_res; PresheafOfModules.restriction_app; TopCat.Presheaf.restrictOpenCommRingCat_apply; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app; AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are component constructors, single restrictions, or scheme-specific comparisons; none supplies both displayed module-presheaf transposes and the two-variable formula in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "restriction|structure Hom|naturality",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are component constructors, single restrictions, or scheme-specific comparisons; none supplies both displayed module-presheaf transposes and the two-variable formula in one specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism between module presheaves on an open subset extends by restricting sections to V intersection U, giving linear natural maps compatible with composition",
+   "results": "PresheafOfModules.restriction_app; PresheafOfModules.map_comp; TopCat.Presheaf.map_restrict; PresheafOfModules.map; PresheafOfModules.ofPresheaf_map; PresheafOfModules.Hom.mk; AlgebraicGeometry.Scheme.Modules.Hom.app; TopCat.Presheaf.restrict",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are component constructors, single restrictions, or scheme-specific comparisons; none supplies both displayed module-presheaf transposes and the two-variable formula in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "structure Hom|def restriction|lemma restriction_app|def pushforward|homEquiv",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf.lean:96 Hom, :298 restriction, :361 unitHomEquiv (raw search top values: 96, 298, 361); source read at 43-128 and 290-301",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are component constructors, single restrictions, or scheme-specific comparisons; none supplies both displayed module-presheaf transposes and the two-variable formula in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For variable ring module presheaves, composing restriction to an intersection with a componentwise linear natural transformation constructs the transpose for restriction to an open immersion; the reverse transpose is evaluation on opens contained in U",
+   "results": "ModuleCat.Tilde.toOpen_res; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; ModuleCat.Tilde.res_apply; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_hom_c_app; AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv; AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom; AlgebraicGeometry.Scheme.Modules.restrict_map",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are component constructors, single restrictions, or scheme-specific comparisons; none supplies both displayed module-presheaf transposes and the two-variable formula in one specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ringed-space-open-restriction-adjunction",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Returned proof steps 3,4,6: linearity and restriction compatibility of the forward and reverse component maps, and naturality under precomposition and postcomposition.; inherited blueprint service: step 4 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, third paragraph, 'By Lemma 09Z7 (lemma-constructible-maps-into-constant-general) and the remarks above we may assume F is of the form f_*M where M is a finite Z/lZ-module and f: Y -> X is a finite morphism of finite presentation')",
+   "via": [
+    "lem-weil-pbc-ringed-space-open-restriction-adjunction",
+    "lem-weil-pbc-ringed-space-colimit-restriction",
+    "lem-weil-pbc-sheaf-hom-finite-presentation-colimit",
+    "lem-weil-pbc-finite-presentation-hom-directed-colimit",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-open-module-transpose-morphisms",
+  "worker": "stage1",
+  "summary": "Proved both transposes are linear and restriction-compatible by explicit section equations, checked that the prescribed maps on morphisms are morphisms, and computed the two sides of the composition identity. Checked sheaf preservation on covers. Statement and inherited blueprint provenance retained; no new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the linearity/naturality service in returned proof steps 3,4,6 of lem-weil-pbc-ringed-space-open-restriction-adjunction, with the inherited chain to lemma-weil-pbc-h1-constructible-representation: the current main-20261015 proof uses the finite-pushforward construction in its second paragraph. The local adjunction construction stays below that unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NV-9b7f84639",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-9b7f84639 (reviewer sub-agent of L); spot-checked: I read the whole item, all six steps and both cited definitions. The statement and stmt_deps are byte-identical to the Q59 base snapshots 7f1159e5/ed83aec3; only proof, proof_deps, proof_origin, searches, status and split_report changed. There are no new nodes. Sources: Stacks sheaves.tex 008U (sheaves-lemma-adjoint-push-pull-presheaves-modules, lines 2782-2833), which gives the transposes f_*psi o i_G and c_F o f_p phi and leaves module compatibility to the reader, and 00A0 (sheaves-lemma-j-pullback, lines 4453-4494), parts (1), (2) and the module extension. Both labels were checked in tags/tags. In the open model these reduce exactly to Phi(alpha)_V(s)=alpha_{V cap U}(s|_{V cap U}) and Psi(beta)_W=beta_W. Step checks: (1) Phi is linear through rho_V, using semilinearity of restriction and O_U(A)=O_X(A). (2) Naturality holds by transitivity of restrictions. (3) Psi is linear because rho_W=id for W in U, and the restrictions are inherited. (4, 5) R mu and D nu are morphisms, and both sides of the composition identity equal nu_A alpha_A mu_A(s|_A) by naturality of mu. (6) Sheaf preservation holds through the intersected cover, including the empty cover. Every step is genuinely elementary from def-weil-presheaf-modules-sheafification and def-weil-sheaf-of-modules-category, which are definitions, so no route issue arises. Edge cases checked: U=X, U empty (O_X(empty)=0), V disjoint from U, identity and zero morphisms. The node is not a restatement of the parent open-restriction-adjunction, whose bijection is proved in its own step 3. I found no duplicate in the DAG and no exact Mathlib match; the three kinds of search are recorded. No SGA, no re-split note, no tool_uses, and no changes made. Advisory: step 6 re-proves sheaf preservation that the sibling lem-weil-pbc-open-module-section-functors also states. Citing it would have been acyclic, but the inline three-line check is acceptable."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.OpenModuleTransposeMorphisms",
+  "declaration": "TopologicalSpace.Opens.exists_openModuleTransposeMorphisms",
+  "declarations": [
+   "TopologicalSpace.Opens.openPresheafModuleRestriction",
+   "TopologicalSpace.Opens.openPresheafModuleDirectImage",
+   "TopologicalSpace.Opens.exists_openModuleTransposeMorphisms"
+  ],
+  "file": "lean/Sheaf/Topology/OpenModuleTransposeMorphisms.lean",
+  "statement": "theorem exists_openModuleTransposeMorphisms (X : RingedSpace.{u}) (U : Opens X) : ∃ (Φ : ∀ (P : PresheafOfModules.{w} (moduleRings X).obj) (Q : PresheafOfModules.{w} ((moduleRings X).over U).obj), ((openPresheafModuleRestriction X U).obj P ⟶ Q) → (P ⟶ (openPresheafModuleDirectImage X U).obj Q)) (Ψ : ∀ (P : PresheafOfModules.{w} (moduleRings X).obj) (Q : PresheafOfModules.{w} ((moduleRings X).over U).obj), (P ⟶ (openPresheafModuleDirectImage X U).obj Q) → ((openPresheafModuleRestriction X U).obj P ⟶ Q)), (∀ (P : PresheafOfModules.{w} (moduleRings X).obj) (Q : PresheafOfModules.{w} ((moduleRings X).over U).obj) (α : (openPresheafModuleRestriction X U).obj P ⟶ Q) (V : Opens X) (s : P.obj (op V)), (Φ P Q α).app (op V) s = α.app (op ((Over.star U).obj V)) (P.map (prod.snd : U ⨯ V ⟶ V).op s)) ∧ (∀ (P : PresheafOfModules.{w} (moduleRings X).obj) (Q : PresheafOfModules.{w} ((moduleRings X).over U).obj) (β : P ⟶ (openPresheafModuleDirectImage X U).obj Q) (W : Over U) (s : P.obj (op W.left)), (Ψ P Q β).app (op W) s = Q.map ((Over.forgetAdjStar U).unit.app W).op (β.app (op W.left) s)) ∧ (∀ (P' P : PresheafOfModules.{w} (moduleRings X).obj) (Q Q' : PresheafOfModules.{w} ((moduleRings X).over U).obj) (μ : P' ⟶ P) (ν : Q ⟶ Q') (α : (openPresheafModuleRestriction X U).obj P ⟶ Q), Φ P' Q' ((openPresheafModuleRestriction X U).map μ ≫ α ≫ ν) = μ ≫ Φ P Q α ≫ (openPresheafModuleDirectImage X U).map ν) ∧ (∀ (P' P : PresheafOfModules.{w} (moduleRings X).obj) (Q Q' : PresheafOfModules.{w} ((moduleRings X).over U).obj) (μ : P' ⟶ P) (ν : Q ⟶ Q') (α : (openPresheafModuleRestriction X U).obj P ⟶ Q) (V : Opens X) (s : P'.obj (op V)), (Φ P' Q' ((openPresheafModuleRestriction X U).map μ ≫ α ≫ ν)).app (op V) s = ν.app (op ((Over.star U).obj V)) (α.app (op ((Over.star U).obj V)) (μ.app (op ((Over.star U).obj V).left) (P'.map (prod.snd : U ⨯ V ⟶ V).op s)))) ∧ (∀ (M : CategoryTheory.ringedSiteModules.{w} (moduleRings X)), Presheaf.IsSheaf ((Opens.grothendieckTopology X).over U) ((openPresheafModuleRestriction X U).obj M.val).presheaf) ∧ (∀ (N : CategoryTheory.ringedSiteModules.{w} ((moduleRings X).over U)), Presheaf.IsSheaf (Opens.grothendieckTopology X) ((openPresheafModuleDirectImage X U).obj N.val).presheaf)",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the canonical Over U section model, equivalent to opens of U. The two helper abbreviations specialize Mathlib pushforward functors; the main theorem gives both linear transpose morphisms with component formulas, the composition identity and common component, and preservation of module sheaves. No inverse-bijection assertion is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f6b1a7dad",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Read node, both stmt_deps (PresheafOfModules / ringedSiteModules), Stacks 008U (sheaves.tex 2782-2833) and 00A0 (4453-4494), the module and the report. R = pushforward₀ (Over.forget U) and D = pushforward (pushforwardOver U).hom (Over.star U, ring map R.map prod.snd.op = ρ_V) render the node exactly. Conjuncts: Φ formula, Ψ via the canonical forgetAdjStar unit W ≅ U⊓W (not arbitrary), composition identity in diagrammatic order, common component with μ at (star V).left, and sheaf preservation for ringedSiteModules. Φ and Ψ are determined by their formulas, so nothing is hollow, and no extra bijection is claimed. lean.statement is verbatim; outside lean the node is identical to live; no name collision; module universe w is free. Edge cases U=⊥, U=X, disjoint V, zero/identity maps OK. Advisory: moduleRings (owned by the def node def-trf-ringed-derived-open-hom-restriction) is not in stmt_deps, the usual project convention; Mathlib.Topology.Sheaves.Module may be redundant. No file changed, so no compile; the worker's compile was clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261023T132327-L-2254576",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "TopologicalSpace.Opens.exists_openModuleTransposeMorphisms"
+  ],
+  "sorry_after": []
+ }
+}

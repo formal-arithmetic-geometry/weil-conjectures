@@ -1,0 +1,125 @@
+{
+ "id": "lem-pbc-tensor-total-comparison-square",
+ "kind": "statement",
+ "title": "Ordinary bifunctor comparison squares extend to signed direct-sum totals",
+ "statement": "Let A,B,D be abelian categories [def-sp-abelian] with small coproducts [def-weil-pbc-category-colimit]. Give bifunctors FA:A×A→A, FB:B×B→B and FD:D×D→D preserving zero morphisms separately in both variables. Write TotF for the signed direct-sum total on integer-indexed cochain complexes induced by F, whose degree n is the coproduct over a+b=n. Let C:A→B, U:B→D and I:A→D be additive functors, with U an equivalence. Suppose alpha:CU≅I and alphaC:C_Ch U_Ch≅I_Ch have matching components in every degree. Give ordinary isomorphisms muC:C(FA(M,N))≅FB(CM,CN) and muI:I(FA(M,N))≅FD(IM,IN). Give chain isomorphisms tC:TotFB(CP,CQ)≅C_Ch TotFA(P,Q) and tI:TotFD(IP,IQ)≅I_Ch TotFA(P,Q), whose composites with each bidegree injection are muC^{-1} followed by C of that injection, and muI^{-1} followed by I of that injection, respectively. Give maps delta:U(FB(M,N))→FD(UM,UN) and a natural chain isomorphism sigma:TotFB U_Ch≅(U_Ch×U_Ch)TotFD satisfying the bidegree formula U(iota);sigma=delta;iota. Assume the ordinary square U(muC^{-1});alpha=delta;FD(alpha,alpha);muI^{-1} for every pair of objects of A. Then alphaC_TotFA(P,Q);tI(P,Q)^{-1}=U_Ch(tC(P,Q)^{-1});sigma_CP,CQ;TotFD(alphaC_P,alphaC_Q) for every pair of unbounded cochain complexes P,Q. The tensor case is obtained by taking FA,FB,FD to be the ordinary tensor bifunctors.",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "status": "split",
+ "mathlib_match": null,
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-category-colimit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, signed-total construction; abstract compatibility verified by the coproduct universal property."
+ },
+ "proof": [
+  {
+   "text": "Cancel the mapped tC.hom on the source and tI.hom on the target. The inverse identities leave the forward square. Equality of chain maps can be checked in each degree. U is an equivalence, hence preserves the coproduct in that degree. Check the maps after precomposing with U of each bidegree injection.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the tC summand equation and functoriality of U. The component equation for alphaC and naturality of alpha move the coproduct injection through alpha. Substitute the assumed ordinary square. On the other side, the sigma summand equation, the bifunctor-map injection formula, the tI summand equation and the component equation for alphaC give exactly the same composite. Associativity finishes the equality on each summand. The preserved-coproduct universal property and chain-map extensionality prove the result. Zero complexes and empty sums require no separate assumption.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, signed-total construction; natural-transformation compatibility proved on coproduct injections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation compatible with tensor comparison induces a compatible map on total tensor cochain complexes",
+   "results": "Eight hits including NatTrans.IsMonoidal.tensor, tensorHom, mapBifunctorMap, NatTrans.mapHomologicalComplex and its naturality. None proves the compatibility of two specified total comparison isomorphisms from their summand equations.",
+   "date": "2026-10-27",
+   "verdict": "no exact total-comparison square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation compatible with tensor comparison induces a compatible map on total tensor cochain complexes",
+   "results": "Eight hits: HomologicalComplex.tensorHom, tensorObj, iotaTensorObj, HasTensor, and CochainComplex map-bifunctor APIs. These supply the tensor total construction, but no compatibility square with two pullbacks and an intervening equivalence.",
+   "date": "2026-10-27",
+   "verdict": "reuse generic tensor-total APIs; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctor.hom_ext_of_map",
+   "results": "No hits: unknown identifier in Mathlib. The proved source-library declaration is in WeilConjectures.Mathlib.Algebra.Homology.Bifunctor and is used directly.",
+   "date": "2026-10-27",
+   "verdict": "use existing project coproduct extensionality"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullbackTotal|total_summand|restriction_tensor_chain_square",
+   "results": "The earlier msearch returned no Mathlib hits. Project rg located the specialized canonical pullback totals and the supplied restriction total_summand field. Neither contains the compatibility square; the new theorem proves only the general coproduct passage.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleCoefficientTensorChainData",
+  "date": "2026-10-27",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-direct-image-limits",
+   "place": "Coefficient-isomorphism identification of tensor pullback in the finite-level scalar projection comparison (current DAG proof, step 3), under the blueprint proof's linear pullback/direct-image argument. This node supplies the preserved-coproduct passage to signed totals.",
+   "via": [
+    "lem-pbc-coefficient-restriction-tensor-chain-square",
+    "lem-pbc-coefficient-restriction-tensor-comparison-compatibility",
+    "lem-pbc-coefficient-restriction-tensor-comparison",
+    "lem-pbc-completed-tensor-projection-coefficient-transport",
+    "lem-pbc-completed-scalar-projection-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TensorTotalComparisonSquare",
+  "file": "lean/Sheaf/Algebra/Homology/TensorTotalComparisonSquare.lean",
+  "declaration": "HomologicalComplex.tensorTotalComparisonSquare",
+  "statement": "theorem tensorTotalComparisonSquare\n    (alpha : C ⋙ U ≅ I)\n    (alphaC : C.mapHomologicalComplex (.up ℤ) ⋙ U.mapHomologicalComplex (.up ℤ) ≅\n      I.mapHomologicalComplex (.up ℤ))\n    (halpha : ∀ (P : CochainComplex A ℤ) (n : ℤ),\n      (alphaC.hom.app P).f n = alpha.hom.app (P.X n))\n    (muC : ∀ M N : A,\n      C.obj ((FA.obj M).obj N) ≅ (FB.obj (C.obj M)).obj (C.obj N))\n    (muI : ∀ M N : A,\n      I.obj ((FA.obj M).obj N) ≅ (FD.obj (I.obj M)).obj (I.obj N))\n    (tC : ∀ P Q : CochainComplex A ℤ,\n      (Tot[FB]).obj (((C.mapHomologicalComplex (.up ℤ)).obj P),\n        ((C.mapHomologicalComplex (.up ℤ)).obj Q)) ≅\n          (C.mapHomologicalComplex (.up ℤ)).obj ((Tot[FA]).obj (P, Q)))\n    (tI : ∀ P Q : CochainComplex A ℤ,\n      (Tot[FD]).obj (((I.mapHomologicalComplex (.up ℤ)).obj P),\n        ((I.mapHomologicalComplex (.up ℤ)).obj Q)) ≅\n          (I.mapHomologicalComplex (.up ℤ)).obj ((Tot[FA]).obj (P, Q)))\n    (htC : ∀ (P Q : CochainComplex A ℤ) (a b n : ℤ) (h : a + b = n),\n      CochainComplex.ιMapBifunctor ((C.mapHomologicalComplex (.up ℤ)).obj P)\n          ((C.mapHomologicalComplex (.up ℤ)).obj Q) FB a b n h ≫ (tC P Q).hom.f n =\n        (muC (P.X a) (Q.X b)).inv ≫\n          C.map (CochainComplex.ιMapBifunctor P Q FA a b n h))\n    (htI : ∀ (P Q : CochainComplex A ℤ) (a b n : ℤ) (h : a + b = n),\n      CochainComplex.ιMapBifunctor ((I.mapHomologicalComplex (.up ℤ)).obj P)\n          ((I.mapHomologicalComplex (.up ℤ)).obj Q) FD a b n h ≫ (tI P Q).hom.f n =\n        (muI (P.X a) (Q.X b)).inv ≫\n          I.map (CochainComplex.ιMapBifunctor P Q FA a b n h))\n    (delta : ∀ M N : B, U.obj ((FB.obj M).obj N) ⟶ (FD.obj (U.obj M)).obj (U.obj N))\n    (sigma : (Tot[FB]) ⋙ U.mapHomologicalComplex (.up ℤ) ≅\n      ((U.mapHomologicalComplex (.up ℤ)).prod (U.mapHomologicalComplex (.up ℤ))) ⋙\n        (Tot[FD]))\n    (hsigma : ∀ (P Q : CochainComplex B ℤ) (a b n : ℤ) (h : a + b = n),\n      U.map (CochainComplex.ιMapBifunctor P Q FB a b n h) ≫\n          (sigma.hom.app (P, Q)).f n =\n        delta (P.X a) (Q.X b) ≫\n          CochainComplex.ιMapBifunctor ((U.mapHomologicalComplex (.up ℤ)).obj P)\n            ((U.mapHomologicalComplex (.up ℤ)).obj Q) FD a b n h)\n    (hordinary : ∀ M N : A,\n      U.map (muC M N).inv ≫ alpha.hom.app ((FA.obj M).obj N) =\n        delta (C.obj M) (C.obj N) ≫\n          (FD.map (alpha.hom.app M)).app (U.obj (C.obj N)) ≫\n            (FD.obj (I.obj M)).map (alpha.hom.app N) ≫ (muI M N).inv)\n    (P Q : CochainComplex A ℤ) :\n    alphaC.hom.app ((Tot[FA]).obj (P, Q)) ≫ (tI P Q).inv =\n      (U.mapHomologicalComplex (.up ℤ)).map (tC P Q).inv ≫\n        sigma.hom.app (((C.mapHomologicalComplex (.up ℤ)).obj P),\n          ((C.mapHomologicalComplex (.up ℤ)).obj Q)) ≫\n            (Tot[FD]).map (Prod.mkHom (alphaC.hom.app P) (alphaC.hom.app Q))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-27",
+  "declarations": [
+   "HomologicalComplex.mapTotalBifunctor",
+   "HomologicalComplex.tensorTotalComparisonSquare"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-34357",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261027T123423-L-2295156",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-34357",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261027T123423-L-2295156",
+  "kind": "interface",
+  "note": "independent cc review: restriction_tensor_chain_square proof (ordinary_square + tensorTotalComparisonSquare + tensorIso_summand) against item node and RingIsoTensorTransport fields; relocated tensorIso/tensorIso_naturality diffed verbatim vs clone and publicly re-exported; adapted RepresentativeSquare proof-only (unclaimed); 3b importer Compatibility OK"
+ }
+}

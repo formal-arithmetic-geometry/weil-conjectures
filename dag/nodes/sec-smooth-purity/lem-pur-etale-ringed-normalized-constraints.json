@@ -1,0 +1,179 @@
+{
+ "id": "lem-pur-etale-ringed-normalized-constraints",
+ "kind": "statement",
+ "title": "Canonical associator and Koszul symmetry for normalized etale tensor models",
+ "status": "split",
+ "statement": "Let $T$ be a scheme, $\\Lambda$ a commutative ring, and let the unbounded derived category of modules over the sheafified constant ring on its lifted etale site be given. Write $A_T$ for the actual ringed tensor corner and $a$ for any RingedTensorModel of $A_T$, as in [def-pur-etale-ringed-projection-presentation]. Suppose its representative isomorphism $r_{P,Q}:Q\\operatorname{Tot}(P\\otimes Q)\\xrightarrow{\\sim}QP\\otimes^L QQ$ satisfies $\\mu_{P,Q}r_{P,Q}=1$ for every pair of flat-term K-flat complexes, where $\\mu$ is the native localization lax tensorator. Then $a$ admits TensorConstraints [def-sfb-ringed-projection-coherence-data] with associator exactly the native derived associator $\\alpha$, and symmetry exactly the native derived Koszul braiding. In particular they are natural in all variables and satisfy the specified representative equations for the unsigned total associator and the signed total swap. The assertion imposes no extra hypotheses on $T$, $\\Lambda$ or the degrees of the complexes.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 07A4: descent of signed total tensor associator and Koszul symmetry"
+ },
+ "stmt_deps": [
+  "def-pur-etale-ringed-projection-presentation",
+  "def-sfb-ringed-projection-coherence-data"
+ ],
+ "proof": [
+  {
+   "text": "The localization tensorator is invertible when a factor is K-flat. Cancel it in ModelNormalized to identify the representative comparison with its inverse. Total tensor of flat-term K-flat complexes again has flat terms and is K-flat.",
+   "uses": [
+    "lem-sfb-constant-scalar-restriction-tensor",
+    "lem-pur-kflat-total-tensor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU and 07A4: descent of signed total tensor associator and Koszul symmetry"
+   }
+  },
+  {
+   "text": "Choose the native derived associator and native derived braiding. Naturality gives their naturality fields. Invert the lax tensorator associativity identity to get the representative associator equation. For symmetry use the native braiding representative equation and cancel the two localization tensorators. The total braiding has the same Koszul sign in all bidegrees.",
+   "uses": [
+    "lem-sfb-exact-tensor-functor-derived-braiding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU and 07A4: descent of signed total tensor associator and Koszul symmetry"
+   }
+  },
+  {
+   "text": "These choices define TensorConstraints and give the asserted equalities by construction, including zero coefficients and all integer degrees.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU and 07A4: descent of signed total tensor associator and Koszul symmetry"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-total-tensor-model",
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "lem-sfb-exact-tensor-functor-derived-braiding"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 07A4: descent of signed total tensor associator and Koszul symmetry",
+  "note": "Representative-constraint subargument of the original item; not a restatement of its geometric or projection comparison conclusion."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "NativeIdentification|ModelNormalized|NativeOrdinaryTensorData",
+   "results": "No matches",
+   "date": "2026-10-24",
+   "verdict": "No exact result: these are evaluation, scalar restriction or ordinary site-equivalence components, not the normalized realization asserted here."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, ModuleCat",
+   "results": "SheafOfModules.evaluation; SheafOfModules.forgetToSheafModuleCat; SheafOfModules.forgetToSheafModuleCat_obj_obj; SheafOfModules.forgetToSheafModuleCat_map_hom; SheafOfModules.unitHomEquiv_apply_coe; SheafOfModules.forgetToSheafModuleCatOfIso; SheafOfModules.evaluationPreservesLimitsOfSize; SheafOfModules.Finite.evaluationPreservesFiniteLimits",
+   "date": "2026-10-24",
+   "verdict": "No exact result: these are evaluation, scalar restriction or ordinary site-equivalence components, not the normalized realization asserted here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant scalar restriction identifies etale and ringed-site unbounded derived tensor products and projection formula morphisms",
+   "results": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; Algebra.FormallyEtale.of_restrictScalars; Algebra.FormallyEtale.instTensorProduct; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap; KaehlerDifferential.isBaseChange_of_formallyEtale; LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-24",
+   "verdict": "No exact result: these are evaluation, scalar restriction or ordinary site-equivalence components, not the normalized realization asserted here."
+  },
+  {
+   "tool": "grep",
+   "query": "NativeIdentification|NativeOrdinaryTensorData|GeometricData",
+   "results": "No matches",
+   "date": "2026-10-24",
+   "verdict": "No exact result: these are evaluation, scalar restriction or ordinary site-equivalence components, not the normalized realization asserted here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport constant-ring module inverse image, its exactness and adjunction along an equivalence of etale sites",
+   "results": "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; Algebra.Etale.of_equiv; Algebra.FormallyEtale.of_equiv; StandardEtalePresentation.mapEquiv; RingHom.Etale.respectsIso; CategoryTheory.Equivalence.transportIsoSheafToPresheaf; Algebra.FormallyEtale.iff_of_equiv; Algebra.IsStandardEtale.of_equiv",
+   "date": "2026-10-24",
+   "verdict": "No exact result: these are evaluation, scalar restriction or ordinary site-equivalence components, not the normalized realization asserted here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant ring scalar restriction and etale inverse image adjunction have the same normalized derived tensor comparison",
+   "results": "ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; ModuleCat.extendRestrictScalarsAdj; PresheafOfModules.restrictScalarsObj; CondensedMod.LocallyConstant.adjunction; RestrictScalars.addEquiv; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-24",
+   "verdict": "No exact result: these are evaluation, scalar restriction or ordinary site-equivalence components, not the normalized realization asserted here."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleRingedProjectionIdentification",
+  "date": "2026-10-24",
+  "group": "C3"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The mechanical created.item chain stops at the non-node module name Sheaf.SixFunctors.SmoothDualityBaseChangeCompat; tools/blueprint_refs.py ancestor returns None. Textual provenance is the parent item's recorded prop-asd-smooth-base-change.proof.md final paragraph (tensor maps transposed from projection and counit), and the tensor-reassociation sentence of current prop-sf-pf-coherence.proof.md.",
+   "via": [
+    "lem-route-projection-map-associativity",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleRingedNormalizedConstraints",
+  "file": "lean/Sheaf/Paper/EtaleRingedNormalizedConstraints.lean",
+  "declaration": "AlgebraicGeometry.Etale.RingedProjectionIdentification.etale_ringed_normalized_constraints",
+  "declarations": [
+   "AlgebraicGeometry.Etale.RingedProjectionIdentification.etale_ringed_normalized_constraints"
+  ],
+  "statement": "theorem etale_ringed_normalized_constraints (T : Scheme.{u})\n    (Λ : Type (u + 1)) [CommRing Λ]\n    [HasDerivedCategory.{u + 1} (Modules (topology T) Λ)]\n    (a : SheafOfModules.RingedTensorModel (corner T Λ)) (ha : ModelNormalized T Λ a) :\n    ∃ t : SheafOfModules.ProjectionCoherence.TensorConstraints (corner T Λ) a,\n      (∀ E F G : DerivedCategory (Modules (topology T) Λ),\n        t.associator E F G = α_ E F G) ∧\n      (∀ E F : DerivedCategory (Modules (topology T) Λ),\n        t.symmetry E F = DerivedMonoidal.braiding'\n          (DerivedCategory.Qh (C := Modules (topology T) Λ))\n          (HomotopyCategory.quasiIso (Modules (topology T) Λ) (.up ℤ)) E F)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-24"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-pur-etale-ringed-projection-identification",
+  "worker": "C3",
+  "summary": "Strict subargument; no new assumption on a target. Zero-ring and identity edge cases retain the canonical maps.",
+  "blueprint": "Mechanical ancestor is null as recorded for parent; textual source is the parent proof, not an invented blueprint ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Its stated representative tensor or braiding equation is used."
+   },
+   {
+    "node": "lem-sfb-constant-scalar-restriction-tensor",
+    "why": "Its stated representative tensor or braiding equation is used."
+   },
+   {
+    "node": "lem-sfb-exact-tensor-functor-derived-braiding",
+    "why": "Its stated representative tensor or braiding equation is used."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261024T014434-L-2196127",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261024T014434-L-2196127",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,100 @@
+{
+ "id": "lem-sfb-root-base-reflection-induction",
+ "kind": "statement",
+ "title": "Reflection induction for predicates on roots",
+ "statement": "Let $\\mathcal R$ be a reduced crystallographic root pairing over $\\mathbf Q$ with finite index set $I$, in the sense of Mathlib $\\operatorname{RootPairing}$. Thus its roots $a_i\\in M$ and coroots $a_i^\\vee\\in N$ lie in paired rational vector spaces [def-weil-vector-space-dimension], are injectively indexed by $I$, satisfy $\\langle a_i,a_i^\\vee\\rangle=2$, and have integer mutual pairings, with the paired root reflections permuting both families. Let $b:\\mathcal R.\\operatorname{Base}$ be a base: its finite support $J\\subset I$ has linearly independent roots and coroots, and every root, respectively coroot, or its negative is a nonnegative integer combination of those indexed by $J$. Write $r_j(i)$ for the index determined by $a_{r_j(i)}=a_i-\\langle a_i,a_j^\\vee\\rangle a_j$. For any predicate $Q$ on $I$, assume $Q(i)\\Rightarrow Q(r_i(i))$ for every $i$, $Q(j)$ for every $j\\in J$, and $Q(i)\\Rightarrow Q(r_j(i))$ whenever $j\\in J$. Then $Q(i)$ for every $i\\in I$. The finite index set and the base may be empty.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix C, root bases and Weyl reflections, pp.612--613; precise general induction principle is Mathlib/LinearAlgebra/RootSystem/Base.lean:665--674."
+ },
+ "stmt_deps": [
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite reduced crystallographic root system every root is Weyl conjugate to a simple root and each coroot is primitive in the coroot lattice",
+   "results": "{\"t\": \"2026-10-23T22:16:45Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite reduced crystallographic root system every root is Weyl conjugate to a simple root and each coroot is primitive in the coroot lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.nonempty_base\", \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"RootPairing.coroot_mem_or_neg_mem_closure_of_root\", \"RootPairing.Base.apply_mem_range_root_of_cartanMatrixEq\", \"RootPairing.Base.mk'\", \"RootPairing.InvariantForm.exists_apply_eq_or\", \"RootPairing.isRootSystem_mk''\", \"RootPairing.span_orbit_eq_top\"], \"digest\": \"ab745d7bd6d6a708\"}",
+   "date": "2026-10-24",
+   "verdict": "match: RootPairing.Base.induction_reflect, Mathlib/LinearAlgebra/RootSystem/Base.lean:665--674, is exactly this predicate-induction principle after specializing the scalar ring to Q."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every positive nonsimple root admits a simple reflection that decreases its height while keeping it positive",
+   "results": "{\"t\": \"2026-10-23T22:17:32Z\", \"tool\": \"leanfinder\", \"query\": \"Every positive nonsimple root admits a simple reflection that decreases its height while keeping it positive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Base.IsPos.reflectionPerm\", \"RootPairing.Base.IsPos.induction_on_reflect\", \"RootPairing.Base.IsPos\", \"RootPairing.Base.isPos_iff\", \"RootPairing.Base.isPos_iff'\", \"RootPairing.Base.height_ne_zero\", \"RootPairing.RootPositiveForm.rootLength_lt_of_pairingIn_notMem\", \"RootPairing.Base.IsPos.exists_mem_support_pos_pairingIn\"], \"digest\": \"16a81ece5e73a279\"}",
+   "date": "2026-10-24",
+   "verdict": "match: RootPairing.Base.induction_reflect, Mathlib/LinearAlgebra/RootSystem/Base.lean:665--674, is exactly this predicate-induction principle after specializing the scalar ring to Q."
+  },
+  {
+   "tool": "loogle",
+   "query": "RootPairing.Base.induction_reflect",
+   "results": "{\"t\": \"2026-10-23T22:24:49Z\", \"tool\": \"loogle\", \"query\": \"RootPairing.Base.induction_reflect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"RootPairing.Base.induction_reflect\"], \"digest\": \"4063d00cc1fada7e\"}",
+   "date": "2026-10-24",
+   "verdict": "match: RootPairing.Base.induction_reflect, Mathlib/LinearAlgebra/RootSystem/Base.lean:665--674, is exactly this predicate-induction principle after specializing the scalar ring to Q."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every positive root that is not simple can be reflected in a simple root to a positive root of smaller height",
+   "results": "{\"t\": \"2026-10-23T22:17:31Z\", \"tool\": \"leansearch\", \"query\": \"Every positive root that is not simple can be reflected in a simple root to a positive root of smaller height\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Base.IsPos.reflectionPerm\", \"RootPairing.reflection_image_eq\", \"RootPairing.Base.height_reflectionPerm_self\", \"RootPairing.mapsTo_reflection_root\", \"RootPairing.bijOn_reflection_root\", \"RootPairing.mem_range_root_of_mem_range_reflection_of_mem_range_root\", \"RootPairing.reflection_apply_self\", \"RootPairing.root_reflectionPerm\"], \"digest\": \"d41e1461ca969cdb\"}",
+   "date": "2026-10-24",
+   "verdict": "match: RootPairing.Base.induction_reflect, Mathlib/LinearAlgebra/RootSystem/Base.lean:665--674, is exactly this predicate-induction principle after specializing the scalar ring to Q."
+  },
+  {
+   "tool": "grep",
+   "query": "induction_reflect|induction_on_reflect",
+   "results": "{\"t\": \"2026-10-23T22:23:37Z\", \"tool\": \"grep\", \"query\": \"induction_reflect|induction_on_reflect\", \"sub\": \"LinearAlgebra/RootSystem\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/Base.lean\", \"Mathlib/LinearAlgebra/RootSystem/Base.lean\", \"Mathlib/LinearAlgebra/RootSystem/Base.lean\", \"Mathlib/LinearAlgebra/RootSystem/Base.lean\", \"Mathlib/LinearAlgebra/RootSystem/Base.lean\", \"Mathlib/LinearAlgebra/RootSystem/CartanMatrix.lean\"], \"digest\": \"8d5d880307043827\"}",
+   "date": "2026-10-24",
+   "verdict": "match: RootPairing.Base.induction_reflect, Mathlib/LinearAlgebra/RootSystem/Base.lean:665--674, is exactly this predicate-induction principle after specializing the scalar ring to Q."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RootPairing.Base.induction_reflect",
+  "file": "Mathlib/LinearAlgebra/RootSystem/Base.lean",
+  "how": "specializes in one line: specialize R to Q in RootPairing.Base.induction_reflect at lines 665--674; the hypotheses h0, h1, h2 are respectively negation, the support, and simple reflection. All instances are hypotheses or standard instances for Q.",
+  "line": 665
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-integral-rank-one",
+  "date": "2026-10-24",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Section 23h, equation (153), Theorem 23.72 proof, pp.510-511: rank-one hypotheses and simple-root generation omitted there; Section 23d and Theorem 23.71 for Weyl signs. These integral rank-one details are an agent-stated supporting lemma, not a quotation of Theorem 23.72. Supporting input: Appendix C, root bases and Weyl reflections, pp.612--613; precise general induction principle is Mathlib/LinearAlgebra/RootSystem/Base.lean:665--674.",
+   "via": [
+    "lem-sfb-chevalley-integral-rank-one",
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

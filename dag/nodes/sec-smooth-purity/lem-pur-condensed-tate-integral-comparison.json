@@ -1,0 +1,164 @@
+{
+ "id": "lem-pur-condensed-tate-integral-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Step 4, integral-to-rational coefficient compatibility: coefficient rings",
+   "via": [
+    "lem-pur-condensed-tate-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The normalized integral coefficient-ring comparison",
+ "statement": "Let $X$ be a scheme, $\\ell$ prime, $E=\\operatorname{ULift}(\\mathbf Q_\\ell)$ with its canonical normed algebra structure, and $r$ normalized realization data at $X$ [def-weil-pbc-condensed-e-realization-records]. Put $R_X=p_X^*C(-,\\mathbf Z_\\ell)$ [def-pur-condensed-tate-twists] and let $A_X$ be the completed integral coefficient ring [def-weil-pbc-adic-coefficient-datum]. There is a unique ring-sheaf isomorphism $e:\\operatorname{SectionRing}(R_X)\\cong A_X$ [def-weil-pbc-internal-abelian-sheaf-module-equivalence] such that $e\\,r.\\mathrm{integralIso}\\,r.\\mathrm{inclusion}=\\operatorname{sectionRingMap}(R_X\\to E_X^c)\\,r.\\mathrm{sectionIso}$, where $R_X\\to E_X^c$ is the integral-to-rational inclusion followed by coefficient lift [def-weil-pbc-continuous-coefficient-module-encoding].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 4, integral-to-rational coefficient compatibility: coefficient rings"
+ },
+ "stmt_deps": [
+  "def-pur-condensed-tate-twists",
+  "def-weil-pbc-condensed-e-realization-records",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-continuous-coefficient-module-encoding"
+ ],
+ "proof": [
+  {
+   "text": "Write $A_n=(\\mathbf Z/\\ell^n\\mathbf Z)_X$ and $R=R_X$. The integral-limit and localization clauses of [sk-prop-sfb-qlbar-colimit-x], with $E=\\mathbf Q_\\ell$, identify $R$ canonically with $\\varprojlim_{n\\geq1}A_n$ and $E_X^c$ with $R[1/\\ell]$. The finite-quotient comparison [lem-pur-condensed-zl-reduction-mod-ell-power] identifies $R/\\ell^nR$ with $A_n$, compatibly with every quotient transition. Thus the completed coefficient ring for the given object $M_d$ is the very ring acting in the condensed Tate construction, with the specified projections, rather than the constant sheaf $\\mathbf Z_\\ell$. Moreover [lem-weil-pbc-completed-constant-sheaf-reduction], applied with $A=\\mathbf Z_\\ell$ and $I=(\\ell)$ (Noetherian, every $A/I^n=\\mathbf Z/\\ell^n\\mathbf Z$ finite), identifies the constant sheaves $A_n$ with the coefficient sheaves $(P_n)_X$ of [def-weil-pbc-adic-coefficient-datum] and hence $\\varprojlim_nA_n$ with the completed ring $A_X$ over which the integral category $\\mathcal I_X$ and the realization $J_X$ are formed. Composing, $R\\cong A_X$ compatibly with all projections, so $M_d$, $J_X$ and the Tate construction are all taken over the one ring $R$.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-pur-condensed-zl-reduction-mod-ell-power",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.1 and Lemma 6.8.2(1); quotient comparison: Stacks 093M, sites-modules-lemma-completion-flat"
+   }
+  },
+  {
+   "text": "For E equal to the canonical universe lift of Q_l, the inclusion of Z_l into E identifies Z_l with the integral coefficient subring. The sectionwise comparison and the finite-limit comparison in the preceding step identify sectionRingSheaf(R_X) with the completed integral ring. Compose with the inverse of the recorded integralIso to obtain e. The normalization of sectionIso and inclusion says both maps to rational coefficients send each integral function to its lifted value, proving the square. The inclusion is sectionwise injective by the same normalization; cancel it and integralIso to prove uniqueness of e.",
+   "uses": [
+    "def-weil-pbc-condensed-e-realization-records",
+    "def-weil-pbc-continuous-coefficient-module-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 2 and 4, integral reconstruction and coefficient transport"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-pur-condensed-zl-reduction-mod-ell-power",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-condensed-e-realization-records",
+  "def-weil-pbc-continuous-coefficient-module-encoding"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
+  "place": "The indicated portion of the existing nine-step realization proof, isolated without changing its argument; current unit Steps 2 and 4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The section ring of the condensed p-adic integers on a scheme is the completed integral coefficient ring compatibly with rational inclusion",
+   "results": "{\"t\": \"2026-10-26T15:44:45Z\", \"tool\": \"leansearch\", \"query\": \"The section ring of the condensed p-adic integers on a scheme is the completed integral coefficient ring compatibly with rational inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicInt.withValIntegersRingEquiv\", \"PadicInt\", \"AdicCompletion.instCommRing\", \"PadicInt.subring\", \"Rat.HeightOneSpectrum.adicCompletionIntegers.padicIntEquiv\", \"Rat.HeightOneSpectrum.adicCompletionIntegers.coe_padicIntEquiv_symm_apply\", \"Padic.coe_withValRingEquiv_symm\", \"PadicInt.instIsAdicCompleteMaximalIdeal\"], \"digest\": \"ee3f3d0e57d061f9\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned declarations do not state this normalized pro-etale Tate comparison; only general algebra or categorical tools occur."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized integral coefficient ring comparison is uniquely determined by its monomorphism into rational coefficients",
+   "results": "{\"t\": \"2026-10-26T15:44:46Z\", \"tool\": \"leanfinder\", \"query\": \"The normalized integral coefficient ring comparison is uniquely determined by its monomorphism into rational coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib.Tactic.Ring.ExtractCoeff.mk.inj\", \"IsLocalization.integerNormalization_spec\", \"Polynomial.integralNormalization_C\", \"Polynomial.integralNormalization_map\", \"Mathlib.Meta.NormNum.isRat_eq_true\", \"Polynomial.integralNormalization_coeff\", \"IsLocalization.integerNormalization_coeff\", \"Polynomial.intCast_inj\"], \"digest\": \"534a0f76b2f0c404\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned declarations do not state this normalized pro-etale Tate comparison; only general algebra or categorical tools occur."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionRingMap|integralRationalCoefficientNormalized",
+   "results": "{\"t\": \"2026-10-26T15:44:45Z\", \"tool\": \"grep\", \"query\": \"sectionRingMap|integralRationalCoefficientNormalized\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned declarations do not state this normalized pro-etale Tate comparison; only general algebra or categorical tools occur."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedTateRealization",
+  "date": "2026-10-26",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedTateIntegralData",
+  "file": "lean/Sheaf/Paper/CondensedTateIntegralData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedTateRealization.integralComparison_existsUnique",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.LiftedQ",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.liftedQNormedField",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.liftedQNormedAlgebra",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.liftedQ_finite",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.CompletedRing",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.rationalLiftRingMap",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.rationalDownRingMap",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.R",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.IntegralModules",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.integralToRational",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.integralToRational_isMonHom",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.rationalToQbar",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.rationalToQbar_isMonHom",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.rationalToQbar_preservesFiniteLimits",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.integralComparison_existsUnique",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.integralComparison",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.integralEncoding",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.finiteUnit",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.finiteUnit_square",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.finiteUnitTransition",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.finiteLevel",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.finiteTransition",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.finiteTower",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.integralPower",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.powerProjection",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.powerProjection_compatible",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.integralEncoding_additive",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.integralEncoding_inverseAdditive",
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.encodedTower"
+  ],
+  "statement": "theorem integralComparison_existsUnique (r : At l (LiftedQ.{u} l) X) : ∃! e : InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} (ProEt.topology X) (R X l) ≅ CompletedRing X l, e.hom ≫ r.integralIso.hom ≫ r.inclusion = sectionRingMap X (integralToRational X l) ≫ r.sectionIso.hom",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-15d74",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261026T195529-L-3035476",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-15d74",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261026T195529-L-3035476",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to clone; Data modules = verbatim relocation of the old item module (diff); 2 new sorry statements read against WeilConjectures.TateTwist.ProEtale defs and their nodes (both true); new private helper axioms clean via scratch lcompile; item has no importers in clone"
+ }
+}

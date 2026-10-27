@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-picard-trivial-multiplicative-cover",
+ "kind": "statement",
+ "title": "A multiplicative cover with trivial Picard group",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups below are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Write $\\operatorname{Pic}(G)$ for the abelian group of isomorphism classes of invertible $\\mathcal O_G$-modules, with tensor product as addition; zero is the class of $\\mathcal O_G$, and an invertible module is an $\\mathcal O_G$-module locally isomorphic to $\\mathcal O_G$. A multiplicative isogeny is a homomorphism $f:G\\to H$ for which $F[H]\\to F[G]$ is faithfully flat and whose scheme-theoretic kernel is finite and diagonalizable. Faithfully flat means that extension of scalars is exact and detects zero modules. Finite means finite-dimensional coordinate algebra. Diagonalizable means isomorphic to $D(M)=\\operatorname{Spec}F[M]$ for a finite abelian group $M$, where $F[M]$ has basis $e^m$, multiplication $e^me^n=e^{m+n}$, comultiplication $e^m\\mapsto e^m\\otimes e^m$, counit $e^m\\mapsto1$ and antipode $e^m\\mapsto e^{-m}$. For every smooth connected group $G$, there exist a smooth connected group $P$ and a multiplicative isogeny $f:P\\to G$ such that $\\operatorname{Pic}(P)=0$. The trivial group is included.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 18.22 (Iversen 1976, 2.7), printed pp.392--393, under the standing split connected group-variety hypothesis (automatic over F); definitions 18.1 and 18.7."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-pc-scheme",
+  "def-sfb-finite-diagonalizable-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Choose a Borel subgroup $B\\subseteq G$ and put $Q=G/B$, with quotient $\\pi:G\\to Q$. By [lem-sfb-borel-characteristic-picard-sequence], $\\pi^*:\\operatorname{Pic}(Q)\\to\\operatorname{Pic}(G)$ is onto. By [lem-sfb-flag-effective-picard-generators], choose $\\mathcal L_1,\\ldots,\\mathcal L_r$ generating $\\operatorname{Pic}(Q)$, each with nonzero sections. Thus the classes $[\\pi^*\\mathcal L_i]$ generate $\\operatorname{Pic}(G)$.",
+   "uses": [
+    "lem-sfb-borel-characteristic-picard-sequence",
+    "lem-sfb-flag-effective-picard-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22, first paragraph and diagram, pp.392--393; Lemma 18.21; Theorem 18.15."
+   }
+  },
+  {
+   "text": "For each $i$, apply [lem-sfb-flag-projective-linear-system] to $\\mathcal L_i$: obtain $V_i=\\Gamma(Q,\\mathcal L_i)\\ne0$, $a_i:G\\to\\operatorname{PGL}(V_i)$ and an $a_i$-equivariant $t_i:Q\\to\\mathbf P(V_i)$ with $\\mathcal L_i\\simeq t_i^*\\mathcal O(1)$. Retain the natural linear action of $\\operatorname{GL}(V_i)$ on the tautological line.",
+   "uses": [
+    "lem-sfb-flag-projective-linear-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22, second paragraph, p.393; 18.12--18.13, p.390."
+   }
+  },
+  {
+   "text": "Induct on $i=0,\\ldots,r$. Start with $P_0=G$ and $f_0=\\mathrm{id}_G$, which is multiplicative since its coordinate map is the identity and its kernel is $D(0)$. Given the smooth connected $P_{i-1}$ and multiplicative $f_{i-1}:P_{i-1}\\to G$, apply [lem-sfb-projective-representation-smooth-lift] to $a_i\\circ f_{i-1}$. It gives a smooth connected $P_i$, a multiplicative $q_i:P_i\\to P_{i-1}$ and $\\rho_i:P_i\\to\\operatorname{SL}(V_i)$ whose projectivization is $a_i f_{i-1}q_i$. Set $f_i=f_{i-1}q_i$. It is multiplicative by [lem-sfb-multiplicative-isogeny-composition]. This induction constructs all $P_i,f_i,\\rho_i$, without assuming that the raw fibre product is smooth or connected.",
+   "uses": [
+    "lem-sfb-projective-representation-smooth-lift",
+    "lem-sfb-multiplicative-isogeny-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22, final paragraph, p.393, applied successively to the finite list; Proposition 18.2, p.387; reduced-component correction from 18.6(a), p.388."
+   }
+  },
+  {
+   "text": "At stage $i$, put $y_i=t_i(eB)$ and let $W_i=\\mathcal O(1)|_{y_i}$, a one-dimensional $F$-vector space. Equivariance gives $t_i\\pi f_i(p)=\\overline{\\rho_i(p)}y_i$. The tautological linear action from [lem-sfb-flag-projective-linear-system] therefore defines an isomorphism from $P_i\\times_F W_i$ onto the line bundle $f_i^*\\pi^*\\mathcal L_i$: on fibres it sends $(p,w)$ to $(p,\\rho_i(p)w)$, with inverse $(p,z)\\mapsto(p,\\rho_i(p)^{-1}z)$. These are regular scheme maps and mutually inverse after every scalar extension. A nonzero basis of $W_i$ trivializes this bundle. For $j<i$, a trivialization on $P_{i-1}$ remains a trivialization after pullback along $q_i$, since $f_i^*\\pi^*\\mathcal L_j=q_i^*f_{i-1}^*\\pi^*\\mathcal L_j$. Induction proves that $f_r^*$ kills every generator $[\\pi^*\\mathcal L_i]$.",
+   "uses": [
+    "lem-sfb-flag-projective-linear-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22, homogeneous-line argument, p.393; explicit trivialization on the group, using 18.10 and 18.12--18.13."
+   }
+  },
+  {
+   "text": "Put $P=P_r$ and $f=f_r$. Step 4 and generation in step 1 show $f^*:\\operatorname{Pic}(G)\\to\\operatorname{Pic}(P)$ is zero: apply the homomorphism to an integer linear combination of the generators. By [lem-sfb-character-picard-isogeny-sequence], $f^*$ is also surjective, since $f$ is a multiplicative isogeny of smooth connected affine groups. Thus every element of $\\operatorname{Pic}(P)$ is the image of an element of $\\operatorname{Pic}(G)$ and is zero. If $r=0$, the construction gives $P=G$, $f=\\mathrm{id}$ and the same argument applies. In particular the proof includes the trivial group.",
+   "uses": [
+    "lem-sfb-character-picard-isogeny-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22, first sentence of proof, p.392; final surjection in Proposition 18.18 (129), p.391."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-borel-characteristic-picard-sequence",
+  "lem-sfb-flag-effective-picard-generators",
+  "lem-sfb-flag-projective-linear-system",
+  "lem-sfb-projective-representation-smooth-lift",
+  "lem-sfb-multiplicative-isogeny-composition",
+  "lem-sfb-character-picard-isogeny-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 18.22, pp.392--393, with the finite iteration and tautological-line trivialization written explicitly, and the reduced identity-component correction from 18.6(a)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine algebraic group over an algebraically closed field has a multiplicative isogeny from a smooth connected group with trivial Picard group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X], ∃ A x, CategoryTheory.PreGaloisCategory.IsG\", \"doc\": \"For any connected object $ X $ in a pre-Galois category $ \\\\mathcal{C} $, there exists a Galois object $ A $ in $ \\\\mathcal{C} $ and a morphism $ A \\\\to X $.\"}\n  {\"name\": \"WeierstrassCurve.exists_variableChange_of_j_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ\", \"type\": \"∀ {F : Type u_1} [inst : Field F] [IsSepClosed F] (E E' : WeierstrassCurve F) [inst_2 : E.IsElliptic]\\n  [inst_3 : E'.IsElliptic], E.j = E'.j → ∃ C, C • E = E'\", \"doc\": \"If two elliptic curves over a separably closed field have the same $ j $-invariant, then there exists a variable change (isomorphism) transforming one curve into the other.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  (S : AlgebraicGeometry.Scheme) →\\n    [AlgebraicGeometry.IsAffine S] →\\n      AlgebraicGeometry.AffineSpace n S ≅\\n        AlgebraicGeometry.Spec\\n          { carrier := MvPolynomial n ↑(S.presheaf.obj (Opposite.op ⊤)),\\n            commRing := MvPolynomial.instCommRingMvPolynomial }\", \"doc\": \"For an index $i$ in the type $n$, the $i$-th coordinate function on the affine space $\\\\mathbb{A}^n_S$ over an affine scheme $S$ is defined as the global section of the structure sheaf corresponding to\"}\n  {\"name\": \"WeierstrassCurve.VariableChange.instGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"{R : Type u} → [inst : CommRing R] → Group (WeierstrassCurve.VariableChange R)\", \"doc\": \"For any commutative ring $ R $, the set of variable changes for a Weierstrass curve over $ R $ is equipped with a canonical group structure. The group operation combines variable changes via multiplic\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [CategoryTheory.GaloisCategory C] (A : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected A], Finite (CategoryTheory.Aut A)\", \"doc\": \"In a pre-Galois category, the automorphism group of any connected object is a finite group.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [IsEmpty n], CategoryTheory.IsIso (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If the type $ n $ is empty (i.e., $ n = 0 $), then the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an isomorphism. This reflects the fact that the affine sp\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S],\\n  (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).hom =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace n S).toSpecΓ\\n      (AlgebraicGeometry.Spec.map\\n        (CommRingCat.ofHom\\n          (Mv\", \"doc\": \"For an affine scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is isomorphic to the spectrum of the polynomial ring $ \\\\Gamma(S)[x_1,\\\\dots,x_n] $ over the global sections of $ S $. Th\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kill Picard group of a split connected linear algebraic group by a finite central diagonalizable covering",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V],\\n  Module.finrank R V ≤ 1 →\\n    ∀ (g : ↥(Subgroup.center (SpecialLinearGroup R V))), SpecialLinearGroup.centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V] [Module.Free R V]\\n  [Module.Finite R V], Module.finrank R V ≤ 1 → Subgroup.center (SpecialLinearGroup R V) = ⊥\", \"doc\": \"If the finite rank of an $ R $-module $ V $ over a commutative ring $ R $ satisfies $ \\\\dim_R(V) \\\\leq 1 $, then the center of the special linear group $ \\\\text{SL}(V) $ is the trivial subgroup containin\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (g : ↥(Subgroup.center (SpecialLinearGroup R V))),\\n  ↑↑↑g = SpecialLinearGroup.centerEquivRootsOfUnity g • LinearMap.id\", \"doc\": \"Every element $ g $ in the center of the special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and finite free $ R $-module $ V $ of rank $ n $ satisfies $ g = r \\\\cdot \\\\text{id}_V $, whe\"}\n  {\"name\": \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {V : Type u_5} [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] {ι : Type u_6} [inst_5 : Fintype ι] [inst_6 : DecidableEq ι]\\n  (b : Module.Basis ι R V) (g : ↥(Subgroup.center (Matrix.SpecialLinearGroup ι R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module R V] →\\n          [Module.Free R V] →\\n            [Module.Finite R V] →\\n              ↥(Subgroup.center (SpecialLinearGroup R V)) ≃* ↥(rootsOfUnity (max (Module.finrank R V) 1) R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $, where $ n $ i\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_invFun\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module R V] →\\n          [Module.Free R V] →\\n            [Module.Finite R V] →\\n              ↥(rootsOfUnity (max (Module.finrank R V) 1) R) → ↥(Subgroup.center (SpecialLinearGroup R V))\", \"doc\": \"The inverse function of the equivalence between the center of the special linear group $\\\\text{SL}(V)$ and the group of $n$-th roots of unity in $R$, where $n$ is the finite rank of the free $R$-module\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (r : ↥(rootsOfUnity (max (Module.finrank R V) 1) R)),\\n  ↑↑↑(SpecialLinearGroup.centerEquivRootsOfUnity.symm r) = r • LinearMap.id\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"BrauerGroup\", \"module\": \"Mathlib/Algebra/BrauerGroup/Defs\", \"type\": \"(K : Type u) → [Field K] → Type (max u (u_1 + 1))\", \"doc\": \"The Brauer group of a field $ K $ is defined as the quotient of the set of central simple algebras over $ K $ by the equivalence relation of Brauer equivalence. This quotient is constructed using the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"GroupScheme\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]icard.*[Ii]sogen|[Ii]sogen.*[Pp]icard|[Pp]icard.*[Gg]roupScheme",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth connected affine algebraic group over an algebraically closed field has a multiplicative isogeny from a smooth connected group with trivial Picard group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(R) [CommRing R] [Finite (MaximalSpectrum R)] : Subsingleton (Pic R)\", \"doc\": \"If the maximal spectrum of a commutative ring is finite, then its Picard group is trivial (i.e., contains only the identity element).\"}\n  {\"name\": \"CommRing.Pic.instFreeOfSubsingleton\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"[Subsingleton (Pic R)] : Free R M\", \"doc\": \"If the Picard group of a commutative semiring $ R $ is trivial (i.e., has at most one element), then every invertible $ R $-module is a free module. This means that when the group of isomorphism class\"}\n  {\"name\": \"CommRing.Pic.instSubsingletonOfIsLocalRing\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(R) [CommRing R] [IsLocalRing R] : Subsingleton (Pic R)\", \"doc\": \"For any commutative local ring $ R $, the Picard group $ \\\\mathrm{Pic}(R) $ is trivial, containing only one element. This follows because every invertible $ R $-module is isomorphic to $ R $ itself, as\"}\n  {\"name\": \"CommRing.Pic.ext_iff\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"{M N : Pic R} : M = N ↔ Nonempty (M ≃ₗ[R] N)\", \"doc\": \"For any two elements $ M $ and $ N $ in the Picard group $ \\\\mathrm{Pic}(R) $, $ M = N $ if and only if there exists an $ R $-linear isomorphism between the corresponding invertible modules $ M $ and $\"}\n  {\"name\": \"CommRing.Pic.subsingleton_iff\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"{R : Type u} [CommRing R] :\\n  Subsingleton (Pic R) ↔ ∀ (M : Type u) [AddCommGroup M] [Module R M], Module.Invertible R M → Free R M\", \"doc\": \"For a commutative ring $ R $, the Picard group $ \\\\operatorname{Pic}(R) $ is trivial (a subsingleton) if and only if every invertible $ R $-module is free.\"}\n  {\"name\": \"CommRing.Pic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(R : Type u) [CommSemiring R] : Type u\", \"doc\": \"The Picard group of a commutative semiring $ R $ is defined as the group of units of the skeleton of the category of semimodules over $ R $, with the type shrunk to ensure smallness. This corresponds \"}\n  {\"name\": \"CommRing.Pic.subsingleton_iffₛ\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Subsingleton (Pic R) ↔ ∀ (M : Type u) [AddCommMonoid M] [Module R M], Module.Invertible R M → Free R M\", \"doc\": \"For a commutative semiring $ R $, the Picard group $ \\\\mathrm{Pic}(R) $ is a subsingleton (i.e., trivial) if and only if every invertible $ R $-module is free. This equivalence characterizes the trivia\"}\n  {\"name\": \"CommRing.relPic_eq_top\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"[Subsingleton (Pic A)] : relPic R A = ⊤\", \"doc\": \"If the Picard group of $ A $ is a subsingleton (i.e., contains only the trivial invertible module), then the relative Picard subgroup $ \\\\mathrm{relPic}(R,A) $ of $ R $ with respect to $ A $ coincides \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth connected linear algebraic group has a finite diagonalizable isogeny from a smooth connected group with trivial Picard group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X], ∃ A x, CategoryTheory.PreGaloisCategory.IsG\", \"doc\": \"For any connected object $ X $ in a pre-Galois category $ \\\\mathcal{C} $, there exists a Galois object $ A $ in $ \\\\mathcal{C} $ and a morphism $ A \\\\to X $.\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V],\\n  Module.finrank R V ≤ 1 →\\n    ∀ (g : ↥(Subgroup.center (SpecialLinearGroup R V))), SpecialLinearGroup.centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [CategoryTheory.GaloisCategory C] (X : C),\\n  ∃ ι f g x, (∀ (i : ι), CategoryTheory.PreGaloisCategory.IsConnected (f i)) ∧ Finite ι\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, every object $X$ admits a decomposition as a colimit of finitely many connected objects. Specifically, there exists a finite index set $\\\\iota$, a family of conn\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instFiniteHomOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [CategoryTheory.GaloisCategory C] (A X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected A], Finite (A ⟶ X)\", \"doc\": \"For any connected object $A$ in a pre-Galois category and any object $X$, the hom-set $\\\\text{Hom}(A, X)$ is finite.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [CategoryTheory.GaloisCategory C] (A : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected A], Finite (CategoryTheory.Aut A)\", \"doc\": \"In a pre-Galois category, the automorphism group of any connected object is a finite group.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components'\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C] (X : C),\\n  ∃ ι, ∃ (x : Finite ι), ∃ f x, ∀ (i : ι), CategoryTheory.PreGaloisCategory.IsConnected (f i)\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, every object $X$ admits a decomposition as a finite coproduct of connected objects. Specifically, there exists a finite set $\\\\iota$, a family of connected objec\"}\n  {\"name\": \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"module\": \"Mathlib/RingTheory/SimpleModule/IsAlgClosed\", \"type\": \"∀ (F : Type u_1) (R : Type u_2) [inst : Field F] [IsAlgClosed F] [inst_2 : Ring R] [inst_3 : Algebra F R]\\n  [IsSemisimpleRing R] [FiniteDimensional F R],\\n  ∃ n d, (∀ (i : Fin n), NeZero (d i)) ∧ Nonempty (R ≃ₐ[F] (i : Fin n) → Matrix (Fin (d i)) (Fin (d i)) F)\", \"doc\": \"Let `F` be an algebraically closed field and `R` be a finite-dimensional semisimple algebra over `F`. Then there exists a natural number `n` and a sequence of positive integers $d_0, d_1, \\\\ldots, d_{n\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: neither abstract Galois covers nor semilocal ring Picard triviality constructs the required affine algebraic-group cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kill the Picard group by a finite central multiplicative covering of an affine algebraic group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CommRing.relPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] → (A : Type u_7) → [inst_1 : CommSemiring A] → [Algebra R A] → Subgroup (CommRing.Pic R)\", \"doc\": \"The subgroup of $ \\\\mathrm{Pic}(R) $ consisting of isomorphism classes of invertible $ R $-semimodules that become trivial when extended to the $ R $-algebra $ A $ via the tensor product. This is defin\"}\n  {\"name\": \"CommRing.relPic_eq_top\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] (A : Type u_7) [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [Subsingleton (CommRing.Pic A)], CommRing.relPic R A = ⊤\", \"doc\": \"If the Picard group of $ A $ is a subsingleton (i.e., contains only the trivial invertible module), then the relative Picard subgroup $ \\\\mathrm{relPic}(R,A) $ of $ R $ with respect to $ A $ coincides \"}\n  {\"name\": \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u_7) [inst : CommRing R] [Finite (MaximalSpectrum R)], Subsingleton (CommRing.Pic R)\", \"doc\": \"If the maximal spectrum of a commutative ring is finite, then its Picard group is trivial (i.e., contains only the identity element).\"}\n  {\"name\": \"BrauerGroup\", \"module\": \"Mathlib/Algebra/BrauerGroup/Defs\", \"type\": \"(K : Type u) → [Field K] → Type (max u (u_1 + 1))\", \"doc\": \"The Brauer group of a field $ K $ is defined as the quotient of the set of central simple algebras over $ K $ by the equivalence relation of Brauer equivalence. This quotient is constructed using the \"}\n  {\"name\": \"Submodule.range_unitsToPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], (Submodule.unitsToPic R A).range = CommRing.relPic R A\", \"doc\": \"The image of the monoid homomorphism from invertible submodules of an $ R $-module $ A $ to the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the relative Picard subgroup $ \\\\mathrm{relPic}(R, A) $, whi\"}\n  {\"name\": \"CommRing.Pic.subsingleton_iff\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommRing R],\\n  Subsingleton (CommRing.Pic R) ↔\\n    ∀ (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M], Module.Invertible R M → Module.Free R M\", \"doc\": \"For a commutative ring $ R $, the Picard group $ \\\\operatorname{Pic}(R) $ is trivial (a subsingleton) if and only if every invertible $ R $-module is free.\"}\n  {\"name\": \"CommRing.Pic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) → [CommSemiring R] → Type u\", \"doc\": \"The Picard group of a commutative semiring $ R $ is defined as the group of units of the skeleton of the category of semimodules over $ R $, with the type shrunk to ensure smallness. This corresponds \"}\n  {\"name\": \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], Function.MulExact ⇑(Submodule.unitsToPic R A) ⇑(CommRing.Pic.mapAlgebra R A)\", \"doc\": \"The group homomorphism from the Picard group of $ R $ to the Picard group of $ A $, induced by an $ R $-algebra structure, satisfies the multiplicative exactness condition with respect to the monoid h\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: neither abstract Galois covers nor semilocal ring Picard triviality constructs the required affine algebraic-group cover"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"GroupScheme\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: neither abstract Galois covers nor semilocal ring Picard triviality constructs the required affine algebraic-group cover"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.*isogen|isogen.*Picard",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: neither abstract Galois covers nor semilocal ring Picard triviality constructs the required affine algebraic-group cover"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every smooth connected linear algebraic group has a finite diagonalizable isogeny from a smooth connected group with trivial Picard group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(R) [CommRing R] [Finite (MaximalSpectrum R)] : Subsingleton (Pic R)\", \"doc\": \"If the maximal spectrum of a commutative ring is finite, then its Picard group is trivial (i.e., contains only the identity element).\"}\n  {\"name\": \"CommRing.Pic.subsingleton_iff\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"{R : Type u} [CommRing R] :\\n  Subsingleton (Pic R) ↔ ∀ (M : Type u) [AddCommGroup M] [Module R M], Module.Invertible R M → Free R M\", \"doc\": \"For a commutative ring $ R $, the Picard group $ \\\\operatorname{Pic}(R) $ is trivial (a subsingleton) if and only if every invertible $ R $-module is free.\"}\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"CommRing.Pic.ext_iff\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"{M N : Pic R} : M = N ↔ Nonempty (M ≃ₗ[R] N)\", \"doc\": \"For any two elements $ M $ and $ N $ in the Picard group $ \\\\mathrm{Pic}(R) $, $ M = N $ if and only if there exists an $ R $-linear isomorphism between the corresponding invertible modules $ M $ and $\"}\n  {\"name\": \"CommRing.Pic.instFreeOfSubsingleton\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"[Subsingleton (Pic R)] : Free R M\", \"doc\": \"If the Picard group of a commutative semiring $ R $ is trivial (i.e., has at most one element), then every invertible $ R $-module is a free module. This means that when the group of isomorphism class\"}\n  {\"name\": \"CommRing.Pic.instSubsingletonOfIsLocalRing\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(R) [CommRing R] [IsLocalRing R] : Subsingleton (Pic R)\", \"doc\": \"For any commutative local ring $ R $, the Picard group $ \\\\mathrm{Pic}(R) $ is trivial, containing only one element. This follows because every invertible $ R $-module is isomorphic to $ R $ itself, as\"}\n  {\"name\": \"CommRing.Pic.mk\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Pic R\", \"doc\": \"The Picard group of a commutative semiring $ R $ is the group formed by isomorphism classes of invertible $ R $-semimodules under the tensor product operation. Each class has an inverse given by the d\"}\n  {\"name\": \"CommRing.Pic.mk_eq_mk_iff\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Pic.mk R M = Pic.mk R N ↔ Nonempty (M ≃ₗ[R] N)\", \"doc\": \"For a commutative semiring $ R $, the equality $ [M] = [N] $ in the Picard group $ \\\\mathrm{Pic}(R) $ holds if and only if there exists an $ R $-linear isomorphism between the invertible $ R $-semimodu\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: neither abstract Galois covers nor semilocal ring Picard triviality constructs the required affine algebraic-group cover"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-multiplicative-universal-cover",
+  "date": "2026-10-23",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.22 (Iversen 1976, 2.7), printed pp.392--393, under the standing split connected group-variety hypothesis (automatic over F); definitions 18.1 and 18.7.",
+   "via": [
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-picard-trivial-multiplicative-cover",
+  "worker": "stage1",
+  "summary": "Followed Milne 18.22 through finitely many projective linear systems; retained existing Borel-characteristic, character-Picard and composition nodes, isolated three strictly supporting inputs, and made the smooth connected lift and scheme-level trivialization explicit. The item statement is unchanged.",
+  "blueprint": "Supports the recorded alteration prerequisite chain of det-thm-sf-ctf-stability-direct-images proof (3). Latest source is literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md; the chain currently has no blueprint_kind ancestor, and blueprint_refs.py ancestor returns None. No unit or chapter route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-ed314327f",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-ed314327f (reviewer sub-agent of L); spot-checked: I read Milne iAG2017 18.5-18.22 on printed pp.388-393, including 18.6(a), 18.13, (128)/(129) and 18.21. The item statement is unchanged from live, where the item is still unsplit; no other group has split it. The five steps follow 18.22 with one change, which is valid: the final stage trivializes f_i^*π^*L_i directly on P_i through the GL(V_i)-linearization of O(1) and the identity ρ̄_i=a_i f_i, instead of going through 18.14/18.16. Step 1: the existing Borel-characteristic node gives that B exists, that Q=G/B is represented and that q^* is surjective. Step 3: the lift and composition hypotheses (smooth connected P_{i-1}, P_i, G) hold. The composition node's 'multiplicative type' kernel equals 'diagonalizable' because F is algebraically closed. Step 5: the character-Picard node ends in Pic(G_0)→Pic(G_1)→0. Effective-generators node: true by the open cell A^n and its boundary divisors; tested on solvable G with r=0 and on SL_2. Linear-system node: global generation holds because the base locus is G-stable on homogeneous Q; tested on O_Q and on O(1) on P^1. Smooth-lift node: H=(E_red)° is smooth over perfect F and dim H=dim E=dim G because SL→PGL is finite fppf, so q is surjective, hence faithfully flat; ker q ⊂ μ_n is μ_d. Tested on trivial a with char | n (reduction is needed), on G_m with diag(t,1) (kernel μ_2), and on n=1. No duplicates among Borel/PGL/linearization/Picard nodes in the snapshot or in the 18-21 nodes added live since. No cycle (closure of 129 nodes), everything is in the same unit, no SGA, no re-split note. Changes: none."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardTrivialMultiplicativeCover",
+  "declaration": "AlgebraicGeometry.picard_trivial_multiplicative_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardTrivialMultiplicativeCover.lean",
+  "statement": "theorem picard_trivial_multiplicative_cover (F : Type u) [Field F] [IsAlgClosed F] (G : Over (Spec (.of F))) [GrpObj G] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Smooth G.hom] [ConnectedSpace G.left] : ∃ (P : Over (Spec (.of F))) (_ : GrpObj P), IsAffine P.left ∧ LocallyOfFiniteType P.hom ∧ QuasiCompact P.hom ∧ Smooth P.hom ∧ ConnectedSpace P.left ∧ ∃ (f : P ⟶ G) (_ : IsMonHom f), f.left.appTop.hom.FaithfullyFlat ∧ IsFinite (GrpObj.ker f).hom ∧ IsFiniteDiagonalizableGroupScheme (GrpObj.ker f) ∧ Subsingleton P.left.Pic",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90708fbbb",
+  "group": "NL",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: alg. closed F; affine finite-type (LocallyOfFiniteType+QuasiCompact) smooth connected GrpObj G over Spec F; ∃ P with same properties, IsMonHom f, Γ(G)→Γ(P) FaithfullyFlat, IsFinite ker, landed IsFiniteDiagonalizableGroupScheme (ker) [one def per notion; added stmt_dep is the landed def node], Subsingleton P.left.Pic (Pic inhabited, not vacuous). Rendering identical to landed multiplicativeIsogeny_comp hypotheses; character-Picard node's Spec F[M] form is the equivalent Hopf form (proof-stage only). Edge cases: trivial group/D(0), μ_p kernels, single universe u. lean.statement verbatim, only sorry, docstrings with source/blueprint and 5 proof steps, report sections present. No file changed, no compile run; delivery's scompile/dry-run evidence recorded."
+ }
+}

@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+ "kind": "statement",
+ "title": "Uniform Hilbert stability of smooth curves embedded by high-degree complete series",
+ "statement": "Let $g\\geq2$ and $d\\geq2g+1$ be integers and put $r=d+1-g$. There is an integer $M(g,d)$ with the following property over every algebraically closed field $k$ [def-weil-field]. Let $C$ be a smooth projective connected curve over $k$, of genus $g=\\dim_k H^1(C,\\mathcal O_C)$ [def-pc-genus], and let $L$ be an invertible module of degree $d$ [def-pc-degree-line-bundle]. Suppose $C\\hookrightarrow\\mathbf P^{r-1}_k$ is the embedding defined by the complete linear system of $L$, meaning a chosen identification $k^r\\simeq H^0(C,L)$ and its evaluation map. For every $m\\geq M(g,d)$ the Hilbert point of this embedding, with Hilbert polynomial $dm+1-g$, is stable for the Hilbert-Pluecker linearization of [lem-sfb-hilbert-plucker-pgl-linearization]. The bound depends only on $g,d$, and not on $C$, $L$ or the characteristic. The scheme, invertible-module, projective and ample conventions are [def-pc-scheme, def-sc-invertible-module, def-kun-projective, def-weil-pbc-ample-invertible-module]. Smoothness is [def-sbc-smooth-morphisms], and connected curve is [def-sc-curves].",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online.",
+  "url": "https://arxiv.org/pdf/0810.2340"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-genus",
+  "def-pc-degree-line-bundle",
+  "lem-sfb-hilbert-plucker-pgl-linearization",
+  "def-kun-projective",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sc-curves"
+ ],
+ "proof": [
+  {
+   "text": "Put $N=r=d+1-g$. The chosen complete-series identification already gives $\\dim H^0(C,L)=N$, and the specified embedding gives surjective evaluation. Fix an arbitrary full flag $V_i\\subset H^0(C,L)$ with $\\dim V_i=N-i$. Apply [lem-sfb-linear-series-degree-dimension-bound] to each nonzero $V_i$. Thus $A_i=\\operatorname{im}(V_i\\otimes\\mathcal O_C\\to L)$ is invertible, $0\\leq a_i:=\\deg A_i\\leq d$, and $N-i\\leq\\max\\{a_i+1-g,a_i/2+1\\}$. Write $e_i=d-a_i$.",
+   "uses": [
+    "lem-sfb-linear-series-degree-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Theorem 5, geometric input and Figure 1, printed p.10"
+   }
+  },
+  {
+   "text": "For $i=0$, the full space generates $L$, so $a_0=d$ and $e_0=0$. For $i=N-1$, the subspace is one-dimensional, so its generated image is isomorphic to $\\mathcal O_C$ and $a_{N-1}=0$, giving $e_{N-1}=d$. For every $i$, $0\\leq e_i\\leq d$. These are the endpoint and range assertions of [lem-sfb-linear-series-degree-dimension-bound]. In particular a positive strict gap cannot be imposed at the final endpoint.",
+   "uses": [
+    "lem-sfb-linear-series-degree-dimension-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Theorem 5, correction of the endpoint in the sentence before Figure 1"
+   }
+  },
+  {
+   "text": "Since $g\\geq2$ and $d\\geq2g+1$, we have $N\\geq4$ and $1<\\alpha:=d/(N-1)<2$. For $0<i<N-1$, the maximum inequality of Step 1 gives one of two bounds. If $N-i\\leq a_i+1-g$, then $e_i\\leq i<\\alpha i$. If $N-i\\leq a_i/2+1$, then $e_i\\leq d-2(N-1)+2i$, and subtracting $\\alpha i$ from this upper bound gives $(2-\\alpha)(i-(N-1))<0$. Consequently $e_i<di/(N-1)$ for every interior $i$. This uses exactly the degree-dimension inequality of [lem-sfb-linear-series-degree-dimension-bound], with the two cases written out instead of the source's erroneous endpoint-wide gap.",
+   "uses": [
+    "lem-sfb-linear-series-degree-dimension-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Theorem 5, Riemann-Roch/Clifford slope argument, printed pp.10--11"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-strict-codegree-polygon-gap] with these integers $N,d$. Its hypotheses are Steps 2 and 3. It gives a single $\\eta(N,d)>0$ for all admissible integral codegree tuples and all decreasing real normalized weights. Therefore every full flag on this $C$, and indeed on any curve in the statement, satisfies $B(e,w)\\leq 2d/N-\\eta(N,d)$. The same $\\eta$ works for all curves because it depends only on $N,d$, not on the flag, subseries or field.",
+   "uses": [
+    "lem-sfb-strict-codegree-polygon-gap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Theorem 5, final reduction to Lemma 6; corrected strict polygon form"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-uniform-gieseker-codegree-criterion] with $V=H^0(C,L)$ and $\\epsilon=\\eta(N,d)$. The curve is smooth projective connected, has the required genus and degree, and its given complete series defines the required closed immersion. Step 4 supplies the hypothesis for every full flag and every normalized weight tuple, including the rational weights from nontrivial one-parameter subgroups. The criterion gives $M_0(g,d,N,\\eta)$ such that all $m\\geq M_0$ have stable $\\operatorname{SL}_N$ Hilbert points with polynomial $P(m)=dm+1-g$. Since $N$ and $\\eta$ depend only on $g,d$, this is uniform in the curve and in the characteristic.",
+   "uses": [
+    "lem-sfb-uniform-gieseker-codegree-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Theorem 5, conclusion via Lemma 4(3) and Lemma 2(3), printed pp.7--11"
+   }
+  },
+  {
+   "text": "Take $M(g,d)$ to be the maximum of $M_0$ and the field-independent Hilbert embedding threshold $M(P,N)$ of [lem-sfb-hilbert-plucker-pgl-linearization]. That node identifies the stable loci for $(\\operatorname{SL}_N,\\Lambda_m)$ and $(\\operatorname{PGL}_N,\\Lambda_m^{\\otimes N})$ in every characteristic. Thus the stability just proved is precisely stability for the Hilbert-Pluecker linearization specified in the statement, with no restriction when the characteristic divides $N$. Both thresholds depend only on $g,d$.",
+   "uses": [
+    "lem-sfb-hilbert-plucker-pgl-linearization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 2.1, Hilbert linearization, printed pp.4--5; item linearization convention"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-linear-series-degree-dimension-bound",
+  "lem-sfb-strict-codegree-polygon-gap",
+  "lem-sfb-uniform-gieseker-codegree-criterion",
+  "lem-sfb-hilbert-plucker-pgl-linearization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Theorem 5, following its Riemann-Roch/Clifford, polygon, Gieseker route with the endpoint and factor-two corrections documented in report.md; local PDF unavailable."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected projective curve of genus at least two embedded by a complete line bundle of degree at least 2g plus 1 has stable Hilbert points for all sufficiently large m",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (P : Fin 3 → R),\\n  W'.NonsingularLift ⟦P⟧ ↔ W'.Nonsingular P\", \"doc\": \"A projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$ is nonsingular if and only if any of its affine lifts (representatives) satisfies the curve's homogeneous cubic equation\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (a b : R),\\n  W'.NonsingularLift ⟦![a, b, 1]⟧ ↔ W'.toAffine.Nonsingular a b\", \"doc\": \"For elements $a, b$ in a commutative ring $R$, the projective point $[a : b : 1]$ on a Weierstrass curve $W'$ is nonsingular if and only if the corresponding affine point $(a, b)$ on the affine model \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: properness of Proj, smooth morphism permanence, Hilbert series and asymptotic analytic estimates do not assert GIT stability of embedded curves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform asymptotic Hilbert stability of nonspecial complete linear series on smooth algebraic curves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LaurentSeries.exists_Polynomial_intValuation_lt\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ {K : Type u_2} [inst : Field K] (F : PowerSeries K) (η : (WithZero (Multiplicative ℤ))ˣ),\\n  ∃ P, (PowerSeries.idealX K).intValuation (F - ↑P) < ↑η\", \"doc\": \"For any formal power series $ F $ over a field $ K $ and any positive integer $ \\\\eta $, there exists a polynomial $ P \\\\in K[X] $ such that the valuation of $ F - P $ with respect to the ideal $ (X) $ \"}\n  {\"name\": \"qExpansion_coeff_isBigO_of_norm_isBigO\", \"module\": \"Mathlib/NumberTheory/ModularForms/Bounds\", \"type\": \"∀ {k : ℤ} {Γ : Subgroup (GL (Fin 2) ℝ)} [Γ.IsArithmetic] {F : Type u_2} [inst : FunLike F UpperHalfPlane ℂ]\\n  [ModularFormClass F Γ k] (f : F) (e : ℝ),\\n  (⇑f =O[Filter.comap UpperHalfPlane.im (nhds 0)] fun τ => τ.im ^ (-e)) →\\n    (fun n => (PowerSeries.coeff n) (ModularFormClass.qExpansion Γ.strictW\", \"doc\": \"Let $\\\\Gamma \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R})$ be an arithmetic subgroup, $k \\\\in \\\\mathbb{Z}$, and $f$ be a modular form of weight $k$ for $\\\\Gamma$. If the norm of $f$ satisfies $f(\\\\tau) = O(\\\\operato\"}\n  {\"name\": \"ModularFormClass.qExpansion_isBigO\", \"module\": \"Mathlib/NumberTheory/ModularForms/Bounds\", \"type\": \"∀ {k : ℤ},\\n  0 ≤ k →\\n    ∀ {Γ : Subgroup (GL (Fin 2) ℝ)} [Γ.IsArithmetic] {F : Type u_2} [inst : FunLike F UpperHalfPlane ℂ]\\n      [ModularFormClass F Γ k] (f : F),\\n      (fun n => (PowerSeries.coeff n) (ModularFormClass.qExpansion Γ.strictWidthInfty f)) =O[Filter.atTop] fun n =>\\n        ↑n ^ k\", \"doc\": \"For a modular form $ f $ of non-negative integer weight $ k $ associated with an arithmetic subgroup $ \\\\Gamma \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R}) $, the coefficients of its $ q $-expansion satisfy the\"}\n  {\"name\": \"CuspFormClass.qExpansion_isBigO\", \"module\": \"Mathlib/NumberTheory/ModularForms/Bounds\", \"type\": \"∀ {k : ℤ} {Γ : Subgroup (GL (Fin 2) ℝ)} [Γ.IsArithmetic] {F : Type u_2} [inst : FunLike F UpperHalfPlane ℂ]\\n  [CuspFormClass F Γ k] (f : F),\\n  (fun n => (PowerSeries.coeff n) (ModularFormClass.qExpansion Γ.strictWidthInfty f)) =O[Filter.atTop] fun n =>\\n    ↑n ^ (↑k / 2)\", \"doc\": \"For any arithmetic subgroup $\\\\Gamma \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R})$, integer weight $k$, and cusp form $f$ of weight $k$ with respect to $\\\\Gamma$, the coefficients of the $q$-expansion of $f$ sat\"}\n  {\"name\": \"Polynomial.existsUnique_hilbertPoly\", \"module\": \"Mathlib/RingTheory/Polynomial/HilbertPoly\", \"type\": \"∀ {F : Type u_1} [inst : Field F] [CharZero F] (p : Polynomial F) (d : ℕ),\\n  ∃! h, ∃ N, ∀ n > N, (PowerSeries.coeff n) (↑p * ↑(PowerSeries.invOneSubPow F d)) = Polynomial.eval (↑n) h\", \"doc\": \"For any polynomial $ p $ over a field $ F $ and natural number $ d $, there exists a unique polynomial $ h $ such that for sufficiently large $ n $, the coefficient of $ X^n $ in the product of $ p $ \"}\n  {\"name\": \"Nat.Partition.tendsto_order_genFun_term_atTop_nhds_top\", \"module\": \"Mathlib/Combinatorics/Enumerative/Partition/GenFun\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (f : ℕ → ℕ → R) (i : ℕ),\\n  Filter.Tendsto (fun j => (f (i + 1) (j + 1) • PowerSeries.X ^ ((i + 1) * (j + 1))).order) Filter.atTop (nhds ⊤)\", \"doc\": \"For any function $ f : \\\\mathbb{N} \\\\to \\\\mathbb{N} \\\\to R $ and index $ i \\\\in \\\\mathbb{N} $, the order of the power series term $ f(i+1, j+1) \\\\cdot X^{(i+1)(j+1)} $ tends to infinity in the extended natur\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {I : Ideal A} (H : g.IsWeierstrassDivisorAt I)\\n  (f : PowerSeries A) [inst_1 : IsPrecomplete I A] (k i : ℕ), (PowerSeries.coeff i) (H.div f - H.seq f k) ∈ I ^ k\", \"doc\": \"For any natural numbers $k$ and $i$, the $i$-th coefficient of the difference between the Weierstrass division quotient $H.\\text{div}(f)$ and the $k$-th term $H.\\text{seq}(f, k)$ of the approximating se\"}\n  {\"name\": \"EisensteinSeries.isBigO_linear_add_const_vec\", \"module\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/Summable\", \"type\": \"∀ (z : UpperHalfPlane) (a b : ℤ), (fun m => ((↑(m 0) + ↑a) * ↑z + ↑(m 1) + ↑b)⁻¹) =O[Filter.cofinite] fun m => ‖m‖⁻¹\", \"doc\": \"For $ z $ in the upper half-plane $ \\\\mathbb{H} $ and integers $ a, b $, the function mapping each pair $ (m_0, m_1) \\\\in \\\\mathbb{Z}^2 $ to $ \\\\left((m_0 + a)z + m_1 + b\\\\right)^{-1} $ is $ O(\\\\|m\\\\|^{-1}) \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: properness of Proj, smooth morphism permanence, Hilbert series and asymptotic analytic estimates do not assert GIT stability of embedded curves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Hilbert\", \"Stable\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: properness of Proj, smooth morphism permanence, Hilbert series and asymptotic analytic estimates do not assert GIT stability of embedded curves."
+  },
+  {
+   "tool": "grep",
+   "query": "Gieseker|Hilbert.*stabil|asymptotic.*stabil",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: properness of Proj, smooth morphism permanence, Hilbert series and asymptotic analytic estimates do not assert GIT stability of embedded curves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth curves embedded by high degree complete linear series are asymptotically Hilbert stable",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"IsHilbertSum\", \"module\": \"Mathlib.Analysis.InnerProductSpace.l2Space\", \"type\": \"{ι : Type u_1} →\\n  (𝕜 : Type u_2) →\\n    [inst : RCLike 𝕜] →\\n      {E : Type u_3} →\\n        [inst_1 : NormedAddCommGroup E] →\\n          [inst_2 : InnerProductSpace 𝕜 E] →\\n            (G : ι → Type u_4) →\\n              [inst_3 : (i : ι) → NormedAddCommGroup (G i)] →\\n                [inst_4 : (i : ι) →\", \"doc\": \"Given a real closed-like field $\\\\mathbb{K}$, a complete inner product space $E$ over $\\\\mathbb{K}$, and a family of inner product spaces $G_i$ over $\\\\mathbb{K}$, this proposition asserts that there exi\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsSmoothOfRelativeDimension n f] : IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"Algebra.FormallySmooth.polynomial\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(R : Type*) [CommRing R] : FormallySmooth R R[X]\", \"doc\": \"For any commutative ring $ R $, the polynomial ring $ R[X] $ is a formally smooth $ R $-algebra. This instance asserts that the canonical algebra structure on $ R[X] $ over $ R $ satisfies the formal \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [hf : IsSmoothOfRelativeDimension n f] [hg : IsSmoothOfRelativeDimension m g] :\\n  IsSmoothOfRelativeDimension (n + m) (f ≫ g)\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: properness of Proj, smooth morphism permanence, Hilbert series and asymptotic analytic estimates do not assert GIT stability of embedded curves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth projective curves embedded by a complete linear system of degree at least 2g plus 1 have uniformly stable Hilbert points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"Type r → Type r\", \"doc\": \"The type of projective Weierstrass curves over a ring $ R $, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:Y:Z]$.\"}\n  {\"name\": \"WeierstrassCurve.toProjective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → WeierstrassCurve R → WeierstrassCurve.Projective R\", \"doc\": \"The function that maps a Weierstrass curve $ W $ over a ring $ R $ to its projective counterpart, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:\"}\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (self : W'.Point), W'.NonsingularLift self.point\", \"doc\": \"Every point on a projective Weierstrass curve over a commutative ring $ R $ is nonsingular, meaning it satisfies the curve's homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ and at least one p\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.fromAffine_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} [inst_1 : Nontrivial R] {X Y : R}\\n  (h : W'.toAffine.Nonsingular X Y),\\n  WeierstrassCurve.Projective.Point.fromAffine (WeierstrassCurve.Affine.Point.some h) =\\n    { point := ⟦![X, Y, 1]⟧, nonsingular := ⋯ }\", \"doc\": \"For a nonsingular affine point $(X, Y)$ on a Weierstrass curve over a non-trivial commutative ring $R$, the projective point obtained by converting $(X, Y)$ via the affine-to-projective map equals the\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (a b : R),\\n  W'.NonsingularLift ⟦![a, b, 1]⟧ ↔ W'.toAffine.Nonsingular a b\", \"doc\": \"For elements $a, b$ in a commutative ring $R$, the projective point $[a : b : 1]$ on a Weierstrass curve $W'$ is nonsingular if and only if the corresponding affine point $(a, b)$ on the affine model \"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.mk.inj\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} {inst : CommRing R} {W' : WeierstrassCurve.Projective R}\\n  {point : WeierstrassCurve.Projective.PointClass R} {nonsingular : W'.NonsingularLift point}\\n  {point_1 : WeierstrassCurve.Projective.PointClass R} {nonsingular_1 : W'.NonsingularLift point_1},\\n  { point := point, nonsingular :\", \"doc\": \"For a commutative ring $ R $ and a projective Weierstrass curve over $ R $, if two nonsingular projective points constructed via the $\\\\mathrm{mk}$ function are equal, then their underlying projective \"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (P : Fin 3 → R),\\n  W'.NonsingularLift ⟦P⟧ ↔ W'.Nonsingular P\", \"doc\": \"A projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$ is nonsingular if and only if any of its affine lifts (representatives) satisfies the curve's homogeneous cubic equation\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern elliptic-curve models and uniform convergence, not GIT stability of Hilbert points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Asymptotic geometric invariant theory stability of nonspecial embedded algebraic curves in arbitrary characteristic",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Jacobian R → WeierstrassCurve.Jacobian.PointClass R → Prop\", \"doc\": \"The property that a point class $ [P] $ in the Jacobian of a Weierstrass curve is nonsingular if any representative $ P $ of the class satisfies the nonsingularity condition. This is well-defined beca\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.IsElliptic\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass\", \"type\": \"{R : Type u} → [CommRing R] → WeierstrassCurve R → Prop\", \"doc\": \"A predicate on a Weierstrass curve over a commutative ring $ R $, asserting that the curve is elliptic.\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (self : W'.Point), W'.NonsingularLift self.point\", \"doc\": \"Every point on a projective Weierstrass curve over a commutative ring $ R $ is nonsingular, meaning it satisfies the curve's homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ and at least one p\"}\n  {\"name\": \"WeierstrassCurve.instIsMinimalMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K},\\n  WeierstrassCurve.IsMinimal R (WeierstrassCurve.minimal R W)\", \"doc\": \"For any Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the minimal Weierstrass curve obtained by applying the minimal transformation to $ W $ satisfies the m\"}\n  {\"name\": \"WeierstrassCurve.instInhabitedSubtypeIsElliptic\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ\", \"type\": \"{F : Type u_2} → [inst : Field F] → [DecidableEq F] → Inhabited { W // W.IsElliptic }\", \"doc\": \"For any field $ F $ with decidable equality, there exists an elliptic Weierstrass curve over $ F $ with j-invariant $ 37 $. This curve is constructed explicitly using the standard form for j-invariant\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern elliptic-curve models and uniform convergence, not GIT stability of Hilbert points."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"stable\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern elliptic-curve models and uniform convergence, not GIT stability of Hilbert points."
+  },
+  {
+   "tool": "grep",
+   "query": "Gieseker|Hilbert.*stabil|asymptotic.*stabil",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern elliptic-curve models and uniform convergence, not GIT stability of Hilbert points."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform asymptotic Hilbert stability for smooth curves embedded by high degree line bundles",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TendstoUniformlyOn\", \"module\": \"Mathlib.Topology.UniformSpace.UniformConvergence\", \"type\": \"(F : ι → α → β) (f : α → β) (p : Filter ι) (s : Set α)\", \"doc\": \"For every entourage $ u $ in the uniformity of $ \\\\beta $, eventually in the filter $ p $, and for all $ x \\\\in s $, the pair $ (f(x), F(n)(x)) $ lies in $ u $.\"}\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"TendstoUniformly\", \"module\": \"Mathlib.Topology.UniformSpace.UniformConvergence\", \"type\": \"(F : ι → α → β) (f : α → β) (p : Filter ι)\", \"doc\": \"For every entourage $ u $ in the uniformity of $ \\\\beta $, there exists a neighborhood in the filter $ p $ such that for all $ n $ in this neighborhood and for all $ x \\\\in \\\\alpha $, the pair $ (f(x), F\"}\n  {\"name\": \"TendstoUniformlyOn.uniformContinuousOn\", \"module\": \"Mathlib.Topology.UniformSpace.UniformApproximation\", \"type\": \"(h : TendstoUniformlyOn F f p s) (hc : ∃ᶠ n in p, UniformContinuousOn (F n) s) : UniformContinuousOn f s\", \"doc\": \"If a sequence of functions $ F_n $ converges uniformly to $ f $ on a set $ s $ with respect to a filter $ p $, and if infinitely often in $ p $ the functions $ F_n $ are uniformly continuous on $ s $,\"}\n  {\"name\": \"TendstoLocallyUniformly\", \"module\": \"Mathlib.Topology.UniformSpace.LocallyUniformConvergence\", \"type\": \"(F : ι → α → β) (f : α → β) (p : Filter ι)\", \"doc\": \"For every entourage $ u $ in the uniformity of $ \\\\beta $ and every point $ x \\\\in \\\\alpha $, there exists a neighborhood $ t $ of $ x $ such that for sufficiently large $ n $ in the filter $ p $, the pa\"}\n  {\"name\": \"UniformConvergence.term_→ᵤ_\", \"module\": \"Mathlib.Topology.UniformSpace.UniformConvergenceTopology\", \"type\": \": Lean.TrailingParserDescr✝\", \"doc\": \"The notation $→_u$ represents the function space equipped with the uniform convergence topology, denoting the space of functions between two uniform spaces where convergence is uniform.\"}\n  {\"name\": \"TendstoUniformlyOnFilter\", \"module\": \"Mathlib.Topology.UniformSpace.UniformConvergence\", \"type\": \"(F : ι → α → β) (f : α → β) (p : Filter ι) (p' : Filter α)\", \"doc\": \"For every entourage $ u $ in the uniformity of $ \\\\beta $, the set of pairs $ (i, x) $ such that $ (f(x), F_i(x)) \\\\in u $ is eventually in the product filter $ p \\\\times p' $.\"}\n  {\"name\": \"UniformEquiv.isUniformEmbedding\", \"module\": \"Mathlib.Topology.UniformSpace.Equiv\", \"type\": \"(h : α ≃ᵤ β) : IsUniformEmbedding h\", \"doc\": \"If $ h $ is a uniform equivalence between uniform spaces $ \\\\alpha $ and $ \\\\beta $, then $ h $ is a uniform embedding.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern elliptic-curve models and uniform convergence, not GIT stability of Hilbert points."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online.",
+   "via": [
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+  "worker": "stage1",
+  "summary": "Kept the item statement unchanged. Split the high-degree stability proof into the subseries degree-dimension bound, explicit interior-codegree inequalities, a corrected strict polygon gap, the uniform Gieseker criterion, and the existing SL/PGL linearization comparison. New nodes are statement-only; all recorded searches were run. Corrected two auxiliary numerical assertions in the online Morrison source, without changing the unit route or the item conclusion.",
+  "blueprint": "Realizes the smooth high-degree curve stability prerequisite of the ten-canonical Hilbert stability input, on the existing alteration/moduli chain recorded in blueprint.from.place. The nearest imported blueprint ancestor is null, as tools/blueprint_refs.py ancestor reports; all inherited via records are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-faa9d8c69",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-faa9d8c69 (reviewer sub-agent of L); spot-checked: The delivery is the item's first split. The Q15 import had no proof and there is no repair note; the item is still unsplit in clones/live and clones/side-live, and it is not on a drop list. The item statement is unchanged.\n\nSource checked: Morrison, arXiv:0810.2340, pp.6-12, fetched from arXiv and converted with pdftotext. I read Prop 1, Lemma 2(3), §2.3 estimate (5), Lemma 4, Theorem 5 and Lemma 6. The worker's two source errors are both real. (a) In Theorem 5, the claim ε_j=(d/(N-1)-δ)(j-1) fails at j=N, because V_N is one-dimensional and has codegree d. (b) Lemma 6 is off by a factor of two: w=(1/2,1/3,1/6,0) with N=4 gives a minimum of 3/2, above the printed 3/4. The correct bound is 2(N-1)/N.\n\nSteps 1-3 hold under the RR/Clifford maximum bound, with N>=4 and 1<α=d/(d-g)<2. In the Clifford case the gap is (2-α)(i-(N-1))<0. On g=2, d=5 the bounds are e_1<=1 and e_2<=3, and hyperelliptic g^1_2 subseries attain them.\n\nStep 4: the hypotheses of the polygon node match exactly. I proved that node independently: the lower convex envelope gives cost <=2d/N, equality forces the linear chord, and inserting an interior index lowers the cost by w_0(αi-e_i)>0. Compactness and finitely many e give a uniform η. For N=2 the claim fails, so N>=3 is the right hypothesis.\n\nStep 5: the normalized Gieseker criterion is Lemma 4(1)/(3) with Σw=1, and it is not a restatement of the item.\n\nStep 6: lem-sfb-hilbert-plucker-pgl-linearization gives a k-independent threshold and equal SL/PGL stable loci in every characteristic.\n\nThe linear-series node is true: Clifford for 0<=a<=2g-2, RR for a>=2g-1, and the q=1 and complete-series clauses hold. None of the three new nodes duplicates an existing node (rg for Clifford, codegree, Gieseker and numerical criterion). There are no SGA citations, no off-unit tools and no fixes. Advisory: the maintainer should add the local PDF of arXiv:0810.2340 to literature/."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothCurveHighDegreeHilbertStability",
+  "declaration": "AlgebraicGeometry.exists_uniform_smooth_curve_high_degree_hilbert_stability",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothCurveHighDegreeHilbertStability.lean",
+  "statement": "theorem exists_uniform_smooth_curve_high_degree_hilbert_stability (g d : ℕ) (hg : 2 ≤ g) (hd : 2 * g + 1 ≤ d) : ∃ M : ℕ, ∀ (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsConnectedCurve (C ↘ Spec (.of k))] [Smooth (C ↘ Spec (.of k))] [IsHProjective (C ↘ Spec (.of k))] (L : C.Modules) [L.IsInvertible], C.arithmeticGenus k = g → L.degree k = (d : ℤ) → ∀ (n : ℕ), n + 2 + g = d + 1 → ∀ (i : C ⟶ ℙ(HilbertPlucker.Coordinates.{u} n; Spec (.of k))), IsClosedImmersion i → i ≫ (ℙ(HilbertPlucker.Coordinates n; Spec (.of k)) ↘ Spec (.of k)) = (C ↘ Spec (.of k)) → ∀ e : (Scheme.Modules.tensorPullback i).obj (ProjectiveSpace.twist (HilbertPlucker.Coordinates n) (Spec (.of k)) 1) ≅ L, Function.Bijective (fun a : HilbertPlucker.Coordinates n → k ↦ ∑ j : HilbertPlucker.Coordinates n, (C ↘ Spec (.of k)).appTop.hom ((Scheme.ΓSpecIso (.of k)).inv (a j)) • e.hom.app ⊤ (((Scheme.Modules.tensorPullbackSectionAdjunction i).unit.app (ProjectiveSpace.twist (HilbertPlucker.Coordinates n) (Spec (.of k)) 1)).app ⊤ (ProjectiveSpace.twistOneSection (HilbertPlucker.Coordinates n) (Spec (.of k)) j))) → ∀ m : ℕ, M ≤ m → ∃ (P : NumericalHilbertPolynomial) (_ : P.1 = Polynomial.C (d : ℚ) * Polynomial.X + Polynomial.C (1 - (g : ℚ))) (D : HilbertPlucker.Hilbert k n P) (E : HilbertPlucker.Presentation D m) (x : PGLLinearization.fieldTest k k ⟶ D.H), D.ideal.comap (ProjectiveSpace.map (HilbertPlucker.Coordinates n) x.left) = i.ker ∧ E.pgl_line.IsStable k x",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The complete-series identification is the bijectivity of the canonical k-linear coordinate-evaluation sum, transported by the supplied pullback O(1) isomorphism. The Hilbert point classifies exactly i.ker. The bound precedes the field, curve, line, coordinates, and m. Natural g,d cover exactly the integers satisfying g>=2 and d>=2g+1; n+2+g=d+1 fixes r=n+2=d+1-g. No statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7a5c063eb",
+  "group": "NE",
+  "result": "fix",
+  "note": "Lean statement and records correct: node differs from live only in lean; statement field verbatim; every clause matches Morrison Thm 5 (uniform M before k/C/L/n/i/e/m, alg. closed k with no char hypothesis, IsConnectedCurve+Smooth+IsHProjective, arithmeticGenus=g, degree=d, complete series = bijective coordinate evaluation through e : i^*O(1)≅L, P.1=dX+1-g in Q, Hilbert point via ideal comap = i.ker, E.pgl_line.IsStable). The existential over D,E is harmless: Presentation.stable_points gives pgl<->sl stability and sl_line is pinned by determinant_formula; M absorbs the dependency threshold. Edge cases g=2,d=5 and char | r covered. No duplicate notion, no defs, single sorry, docstrings complete, private import is a landed proof-dependency module, first stage-2 delivery. Only fault H11: the 'Second reading by NE' was the worker's self-check -> fixes/<item>.report.md = worker report verbatim + independent clause-by-clause second reading. No Lean changed, no compile."
+ }
+}

@@ -18,140 +18,86 @@
   "def-pc-fibre-product",
   "def-weil-finite-type-morphism",
   "def-weil-pbc-proetale-operations",
-  "def-sfb-proetale-unit-normalized-adjunction"
+  "def-sfb-proetale-unit-normalized-adjunction",
+  "def-sfb-finite-closed-row-constructions",
+  "def-sfb-finite-closed-augmented-rows"
  ],
  "proof": [
   {
-   "text": "Write $E_T(M)=i_{T,*}i_T^*M$ for a closed subscheme $T$ among $Z$ and its intersections. The complement of $Z_J$ is the finite union of the complements of its members. A finite union of quasi-compact open immersions is quasi-compact: over an affine test open it is a finite union of quasi-compact inverse images. Base change preserves closed immersions and quasi-compactness. Thus the cited closed/open localization sequence and exact closed direct image apply to every intersection and every open restriction used below. Geometric inverse image with the inverse-image coefficient ring is exact, so every $E_T$ is exact. The module category is abelian; kernels are sectionwise and cokernels are sheafified sectionwise cokernels. In particular homology may be checked after exact inverse image.",
+   "text": "Use the signed-restriction lemma to form $D^{-1}=E_Z$ and $D^p=\\bigoplus_{|J|=p+1}E_J$, with its actual restriction-unit differential. It gives $d^2=0$ and $\\alpha_M\\eta_i=(\\eta_{i_a})_a$, naturally in $M$.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-base-change",
-    "lem-pc-quasi-compact-base-change",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-trf-geometric-inverse-image-exact",
-    "def-weil-sheaf-of-modules-category",
-    "lem-sp-exact-functor-preserves-homology"
+    "lem-sfb-closed-restriction-signed-refinements"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH, lemma-ses-associated-to-open; finite-cover deduction written by Q01"
+    "place": "Tag 09AH, lemma-ses-associated-to-open: agent finite-closed-cover deduction using the actual closed/open localization sequence, not a verbatim assertion of this tag. Exact closed direct images and invertible counits are taken from the existing ringed-open-closed node."
    }
   },
   {
-   "text": "For a module $M$, put $C^p(M)=\\bigoplus_{|J|=p+1}E_{Z_J}(M)$ for $0\\le p<m$, and put $C^{-1}(M)=E_Z(M)$. For $J\\subset L$ the component $r_{J,L}$ is the unit for $Z_L\\hookrightarrow Z_J$ pushed to $X$, using the inverse-image composition comparison. Define $r_{Z,J}$ the same way. The composite-adjunction unit formula gives $r_{L,H}r_{J,L}=r_{J,H}$ and $r_{Z,J}\\eta_i=\\eta_{i_J}$. For an increasing tuple $L=(a_0,\\ldots,a_{p+1})$, define $(dc)_L=\\sum_t(-1)^t r_{L\\setminus\\{a_t\\},L}c_{L\\setminus\\{a_t\\}}$; the augmentation is $(r_{Z,\\{a\\}})_a$. Every term of $d^2$ occurs twice, with opposite signs and the same composite restriction; the augmented composite is likewise zero. This defines the actual augmented complex, natural in $M$, and already proves its asserted equation after composition with $M\\to E_Z(M)$.",
+   "text": "On each affine open $V\\subset X$, the vertex-contraction lemma makes every $i_{a,V}^*D(M|_V)$ contractible and the restriction of $D(M|_V)$ to $U_V=V\\setminus|Z\\times_XV|$ zero. For a cohomology sheaf $H$ of $D(M|_V)$, exact inverse images preserve homology, so $j_{U_V}^*H=0$ and every $i_{a,V}^*H=0$; with inverse-image coefficient rings the module inverse image has the abelian inverse image as underlying sheaf. The morphisms $U_V\\hookrightarrow V$ (base change of the quasi-compact $X\\setminus Z\\hookrightarrow X$) and $Z_a\\times_XV\\hookrightarrow V$ (closed immersions) are finitely many quasi-compact maps whose images cover $|V|$, as the $|Z_a|$ cover $|Z|$. Finite quasi-compact detection applied to $\\mathrm{id}_H$ gives $H=0$. The open-restriction and locality assertions of the contraction lemma give exactness on $X$: $E_Z(M)[0]\\to D^{\\geq0}(M)$ is a quasi-isomorphism for every $M$.",
    "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH, lemma-ses-associated-to-open; finite-cover deduction written by Q01"
-   }
-  },
-  {
-   "text": "The following zero detection is proved by induction on the number of closed members, allowing zero members in this induction. Suppose $N$ restricts to zero on $X\\setminus Z$ and on every $Z_a$. For zero members, $Z$ is empty, so the first restriction is $N$ itself. For a nonempty family let $V=X\\setminus Z_1$. Localization for $Z_1$ and $i_1^*N=0$ give $N\\cong j_{V,!}j_V^*N$. In $V$ the closed subscheme $Z\\times_XV$ is covered by $Z_a\\times_XV$ for $a>1$. Their complements are base changes of the original complementary opens, hence quasi-compact. The restriction of $j_V^*N$ to each is the further inverse image of $i_a^*N=0$, by inverse-image composition; it also vanishes off $Z\\times_XV$. The induction hypothesis in $V$ gives $j_V^*N=0$, hence $N=0$. This argument uses actual open and closed restrictions, without asserting that the closed family covers the pro-etale site.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-pc-quasi-compact-base-change",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH, lemma-ses-associated-to-open; finite-cover deduction written by Q01"
-   }
-  },
-  {
-   "text": "We can test exactness of the augmented complex Zariski locally on $X$. Indeed restriction to an open is exact; on an object $W\\to X$ its restriction evaluates on $W\\times_XV$, so direct image by a closed immersion commutes with this restriction by the defining formula $i_*G(W)=G(W\\times_XT)$. Inverse-image compositions agree by the adjunction comparison, compatibly with units. These identifications are linear for the inverse-image rings, since all actions are restricted through the same ring maps. A sheaf vanishing on an affine open cover vanishes: pull the cover back to each $W$, and apply the separatedness part of the sheaf axiom to every section. Applying this to the homology sheaves reduces to affine $X$. There $X$, each closed $Z_J$, and each $Z_a$ are qcqs. Consequently the existing arbitrary-ring-sheaf closed base-change theorem applies to $g=i_a:Z_a\\to X$ and $i_J$, with all its qcqs and quasi-compact-complement hypotheses verified. Its operations are the same module actions and adjunctions as ours.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-sfb-closed-intersection-vertex-contraction",
+    "lem-pod-finite-qc-proetale-abelian-detection",
     "lem-trf-geometric-inverse-image-exact",
     "lem-sp-exact-functor-preserves-homology",
-    "def-weil-pbc-proetale-site",
-    "lem-sf-ring-sheaf-base-change-mates",
-    "def-sf-proetale-ring-sheaf-operations"
+    "lem-pc-quasi-compact-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH, lemma-ses-associated-to-open; finite-cover deduction written by Q01"
+    "place": "Tag 09AH, lemma-ses-associated-to-open: agent finite-closed-cover deduction using the actual closed/open localization sequence, not a verbatim assertion of this tag. Exact closed direct images and invertible counits are taken from the existing ringed-open-closed node."
    }
   },
   {
-   "text": "Fix $a$ on the affine base. Closed base change identifies $i_a^*E_{Z_J}(M)$ with the closed direct image on $Z_a$ from $Z_{J\\cup\\{a\\}}$ of the restriction of $M_a=i_a^*M$; it identifies $i_a^*E_Z(M)$ with $M_a$. The beta transpose equation in the cited base-change theorem, together with the composite-adjunction unit formula, identifies each restricted $r_{J,L}$ with the actual restriction between these intersections: its transpose is the same inverse-image compositor followed by the same counit. When $a\\notin J$, the arrow from $J$ to $J\\cup\\{a\\}$ is therefore an isomorphism after restriction, because both intersections are identical and the identity-adjunction unit is the identity. Define $h$ from degree $p$ to degree $p-1$ by the component from $J\\cup\\{a\\}$ to $J$ with sign $(-1)^{\\#\\{b\\in J:b<a\\}}$ and the inverse of that isomorphism when $a\\notin J$, and zero when $a\\in J$. For $J=\\varnothing$ this is the singleton-$a$ component followed by the closed counit, with target $M_a$ in degree $-1$. In $dh+hd$, the insert/delete-$a$ term is the identity. Every other term appears twice: deleting $b<a$ changes the insertion position by one, and deleting $b>a$ changes its deletion position by one, so the signs are opposite; commutativity of restrictions makes the two maps equal. Thus $dh+hd=1$ in all degrees, including $-1$ and the top degree. The restricted augmented complex is contractible, hence exact.",
+   "text": "Apply the natural additive row construction to each $K^q$. Its differentials commute with $d_K$. Totalize with $d_D+(-1)^p d_K$ and column bound $r=m$. The nonnegative row complex is zero for $p<0$ or $m\\leq p$; every total diagonal is finite. Put $A^\\bullet=E_Z(K)$ and $a_q=\\alpha_{K^q}$. The specified augmentation has component $a_q$ followed by the $(0,q)$ inclusion, and the preceding row quasi-isomorphisms have precisely these zero components. The finite-strip row-augmentation lemma therefore proves this total augmentation is a quasi-isomorphism. Exactness of $E_Z$ gives $H^n(E_ZK)=E_ZH^n(K)$, so it preserves quasi-isomorphisms. The natural augmentation square and two-out-of-three imply that $C$ also does. Localization yields the natural derived isomorphism for bounded-below $K$.",
    "uses": [
-    "lem-sf-ring-sheaf-base-change-mates",
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-proetale-ringed-open-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH, lemma-ses-associated-to-open; finite-cover deduction written by Q01"
-   }
-  },
-  {
-   "text": "On $X\\setminus Z$, every term of the augmented complex vanishes: in the direct-image evaluation formula its closed fibre is empty, whose module sections are zero. For every homology sheaf $H$ of the augmented complex, exactness of inverse images and preservation of homology give $H|_{X\\setminus Z}=0$ and $i_a^*H=0$ by the preceding contraction. Step 3 therefore gives $H=0$. This proves exactness of $0\\to E_Z(M)\\to C^0(M)\\to\\cdots\\to C^{m-1}(M)\\to0$, for every module $M$. Equivalently its canonical map $E_Z(M)[0]\\to C^{\\geq0}(M)$ is a quasi-isomorphism.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "lem-trf-geometric-inverse-image-exact",
-    "lem-sp-exact-functor-preserves-homology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH, lemma-ses-associated-to-open; finite-cover deduction written by Q01"
-   }
-  },
-  {
-   "text": "Apply the construction to every term $K^q$. Naturality of all units makes the horizontal differentials commute with $d_K$. Form the finite-strip total with summands $C^{p}(K^q)$, $p+q=n$, and differential $d_C+(-1)^p d_K$; its augmentation from $E_Z(K)$ has components in column zero. There are only $m$ columns, so every diagonal is finite. Step 6 supplies exactly the row quasi-isomorphisms, with their specified zero components, required by the finite-strip row-augmentation lemma. That lemma proves that the augmentation of total complexes is a quasi-isomorphism. This works in particular for the stipulated bounded-below $K$. Because $E_Z$ is exact, it preserves quasi-isomorphisms. The natural augmentation square and two-out-of-three then show that the total functor also preserves quasi-isomorphisms. The definition of the derived category as localization therefore gives the claimed natural isomorphism in the ordinary derived category.",
-   "uses": [
+    "lem-sfb-closed-restriction-signed-refinements",
+    "lem-sfb-closed-intersection-vertex-contraction",
     "lem-sc-finite-strip-row-augmentation",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-trf-geometric-inverse-image-exact",
-    "lem-sp-exact-functor-preserves-homology",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0133, lemma-double-complex-gives-resolution, variant in the second variable; finite horizontal strip"
+    "place": "Tag 0133, lemma-double-complex-gives-resolution, second-variable variant; applied through lem-sc-finite-strip-row-augmentation to the finite horizontal strip and its specified column-zero augmentation."
    }
   },
   {
-   "text": "A refinement means a finer ordered closed family $W_b$ together with a function $f$ and factorizations $W_b\\to Z_{f(b)}$ over $Z$. For an increasing tuple $(b_0,\\ldots,b_p)$, the component of the refinement map is the restriction from the tuple $(f(b_0),\\ldots,f(b_p))$: it is zero if an index repeats, and otherwise is the sign of its sorting permutation times restriction from its underlying intersection. If there are no repetitions, deleting an index gives precisely the same sign on both sides of the chain-map equation. If there are repetitions, terms with still-repeated indices vanish; the only possible remaining two terms delete one of a duplicated pair and cancel with opposite signs. Thus refinement is a chain map. Its composite with the augmentation is the finer augmentation, by the composite-unit formula. Both augmentations are invertible in the derived category, so this identity also characterizes the derived refinement map uniquely; it proves independence of the refinement function and compatibility with iterated refinements. For any supplied pullback comparisons identifying closed restrictions and their units, exact inverse image commutes with the finite sums and the two differentials, so componentwise the augmentation square commutes. The same is true for maps of $K$. These are identities of natural transformations on the whole diagram, hence also after applying the constructions to a parameterized diagram. In particular automorphisms, including families of them, preserve the derived identification; no passage to individual parameter points occurs.",
+   "text": "For a refinement the signed-restriction lemma gives the sorting-sign chain map $\\rho_f$ (zero on repeated image indices) and $\\rho_f\\alpha_Z=\\alpha_W$, also after totalization. The finer family $W$ again covers $Z$ with quasi-compact complements, so steps 2 and 3 apply to it; since both augmentations are invertible in the derived category, $Q\\rho_f=Q\\alpha_W(Q\\alpha_Z)^{-1}$. This proves independence of the refinement function and compatibility with iterated refinements.",
    "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "lem-trf-geometric-inverse-image-exact",
+    "lem-sfb-closed-restriction-signed-refinements",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH, lemma-ses-associated-to-open; finite-cover deduction written by Q01"
+    "place": "Tag 09AH, lemma-ses-associated-to-open: agent finite-closed-cover deduction using the actual closed/open localization sequence, not a verbatim assertion of this tag. Exact closed direct images and invertible counits are taken from the existing ringed-open-closed node."
+   }
+  },
+  {
+   "text": "For a pullback with the stipulated unit-compatible closed comparisons, the total-pullback lemma identifies every face and pins the total map on all diagonal inclusions. The members $Z_a\\times_XX'$ cover $Z\\times_XX'$ with quasi-compact complements (base change), so steps 1–3 make $\\alpha'$ a quasi-isomorphism. The square $\\tau\\,g^*\\alpha=\\alpha'c_Z$, with $\\tau$ and $c_Z$ chain isomorphisms, makes $g^*\\alpha$ one by two-out-of-three. The lemma gives the derived normalization. Its natural-transformation identities give compatibility with automorphisms and parameter diagrams, with the refinement and $K$-naturality above.",
+   "uses": [
+    "lem-sfb-closed-restriction-total-pullback",
+    "lem-pc-quasi-compact-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open: agent finite-closed-cover deduction using the actual closed/open localization sequence, not a verbatim assertion of this tag. Exact closed direct images and invertible counits are taken from the existing ringed-open-closed node."
    }
   }
  ],
  "proof_deps": [
-  "def-sf-proetale-ring-sheaf-operations",
   "def-weil-abstract-derived-category",
-  "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-proetale-site",
-  "def-weil-proetale-inverse-image",
-  "def-weil-sheaf-of-modules-category",
   "lem-pc-quasi-compact-base-change",
+  "lem-pod-finite-qc-proetale-abelian-detection",
   "lem-sc-finite-strip-row-augmentation",
-  "lem-sf-ring-sheaf-base-change-mates",
+  "lem-sfb-closed-intersection-vertex-contraction",
+  "lem-sfb-closed-restriction-signed-refinements",
+  "lem-sfb-closed-restriction-total-pullback",
   "lem-sp-exact-functor-preserves-homology",
-  "lem-trf-geometric-inverse-image-exact",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-proetale-ringed-open-closed"
+  "lem-trf-geometric-inverse-image-exact"
  ],
  "proof_origin": {
   "by": "agent",
@@ -300,43 +246,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-22",
+  "date": "2026-10-23",
   "item": "lem-sfb-finite-closed-cover-resolution",
   "worker": "stage1",
-  "summary": "Split by explicit restriction-unit construction, finite closed/open zero detection, closed-base-change contraction on affine charts, finite-strip totalization, and augmentation-normalized refinement and pullback compatibility. No new nodes. Clarified the necessary quasi-compact-morphism hypothesis for complementary opens, with a non-quasi-separated counterexample to the weaker reading in report.md.",
-  "blueprint": "Technical support resolution serving paragraph (3), open direct-image finiteness, of det-thm-sf-ctf-stability-direct-images; the intermediate inner-support extraction supplies the specific use, not a verbatim blueprint theorem. The ancestor command currently returns None, preserved.",
+  "summary": "Landing return L repaired on the freshly fetched current DAG. Returned baseline and current item have no field differences; retained only the worker proof, proof_deps and split_report over current metadata. Reread every assembly citation and statement dependency. Step 5 now explicitly verifies that the closed covering and quasi-compact complementary immersions persist under base change before applying the row and total argument; the actual augmentation square supplies invertibility. Four statement-only children, retained complete old arguments and logged search results unchanged. All ten citation pairs are verbatim; short assembly and finite-strip bounds rechecked. No Lean writing or compilation. Reviewer FIX (Q41 45ed1568, 5th head; re-applying the FIX of 9f47/0a18/affa/f892, each lost after a refused landing): the detection child duplicates the Lean-closed lem-pod-finite-qc-proetale-abelian-detection and is dropped; step 2 cites it with exactness and quasi-compact base change; steps 4 and 5 state that the refined and pulled-back families cover with quasi-compact complements.",
+  "blueprint": "Technical support resolution serving paragraph (3), open direct-image finiteness, of det-thm-sf-ctf-stability-direct-images; the intermediate inner-support extraction supplies the specific use, not a verbatim blueprint theorem. The ancestor command currently returns None, preserved. New nodes serve the same technical support-resolution place; ancestor command still returns None.",
   "tool_uses": [
-   {
-    "node": "lem-sf-ring-sheaf-base-change-mates",
-    "why": "Generic arbitrary-ring closed base change supplies the intersection restrictions on affine charts; it does not replace any finiteness argument of the unit."
-   },
    {
     "node": "lem-sc-finite-strip-row-augmentation",
     "why": "Generic finite-strip totalization converts the explicitly proved exact module rows to the required complex quasi-isomorphism."
    },
    {
-    "node": "lem-trf-geometric-inverse-image-exact",
-    "why": "Generic exactness for transported ring coefficients; constant-coefficient etale lemmas cannot supply this."
-   },
-   {
-    "node": "lem-sp-exact-functor-preserves-homology",
-    "why": "Generic exact-functor homology comparison for detecting exact rows after restrictions."
-   },
-   {
-    "node": "lem-pc-quasi-compact-base-change",
-    "why": "Geometric permanence needed to apply the localization sequence after restricting to open subschemes."
-   },
-   {
-    "node": "lem-weil-pbc-closed-immersion-base-change",
-    "why": "Geometric permanence for all closed intersections and open-restricted closed families."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-ringed-open-closed",
-    "why": "The existing arbitrary-ring localization sequence and invertible closed counit are the input for detection and contraction."
-   },
-   {
-    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "why": "Canonical geometric inverse-image construction and its composition comparisons."
+    "node": "lem-pod-finite-qc-proetale-abelian-detection",
+    "why": "Generic finite quasi-compact zero detection of abelian pro-etale sheaves (Lean-closed, closure only definitions) carries old step 3's closed-restriction detection; no node of the unit states it."
    }
   ]
  },
@@ -348,50 +270,38 @@
   "lem-pc-quasi-compact-base-change",
   "lem-weil-pbc-closed-immersion-base-change",
   "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-pod-finite-qc-proetale-abelian-detection"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q01-ee3ddb2f6",
-  "group": "Q01",
+  "reviewer": "NT-cc-Q41-45ed15683",
+  "group": "Q41",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-ee3ddb2f6 (reviewer sub-agent of L); spot-checked: PASS. I read all 8 steps in full against every cited statement; no changes were made and no SGA source is cited. Delivery: one commit, no new nodes, no repair note (first split). The base item in live and side-live is unsplit with no proof, and it is not dropped. Statement change: 'quasi-compact open' now reads 'complementary open immersions are quasi-compact morphisms'. Stacks 09AH (proetale.tex l.5138) assumes exactly this, and so does lem-weil-pbc-proetale-ringed-open-closed. The report's counterexample (two copies of Spec k[x_1,x_2,...] glued along the union of the D(x_n)) is correct. The only citer, lem-sfb-root-tower-inner-support step 3, works on an affine V with principal-open complements and so still supplies the hypothesis. Step checks: (1) the complement of Z_J is a finite union of quasi-compact opens, and closed and open functors are exact. (2) d^2=0 and r_{Z,J}eta_i=eta_{i_J} follow from composite-adjunction units. (3) zero detection by induction through V=X\\Z_1 is correct; base change keeps complements quasi-compact. (4) affine reduction makes X, X', Z, Z_a, Z_J qcqs, so the hypotheses of lem-sf-ring-sheaf-base-change-mates hold. (5) the Cech homotopy in index a gives dh+hd=1 in degrees -1, 0 and top, using Z_J x_X Z_a = Z_{J+a} because a closed immersion is a monomorphism. (6) exactness follows from (3). (7) the finite-strip row-augmentation hypotheses match exactly. (8) the alternating refinement map is a chain map and is unique in D. Edge cases m=1, m=2, repeated members, empty intersections, K=0 and Z empty were checked. No duplicates: lem-exc-open-closed-detection only states the two-piece detection, which step 3 re-derives in one line (advisory). Advisory: step 4's wording about open restriction is loose, but the identification it needs is elementary. Batch 5: lem-trf-geometric-inverse-image-exact is a general exactness fact for inverse images along geometric morphisms, not part of the trace formula or Poincare duality; its closure reaches only generic trf definitions, so it is accepted. The declared tool uses are all generic and none replaces a step of paragraph (3) of the unit route; accepted."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-45ed15683 (reviewer sub-agent of L); spot-checked: This is the fifth Q41 head of the human's re-split of lem-sfb-finite-closed-cover-resolution. The FIXes on heads 9f472311, 0a183dda, affa0c77 and f892e758 each dropped the duplicate detection node, and each was lost when the landing was refused with 'completed in this project's DAG but not in the live DAG' (L's promotion problem). In this head the 4 new nodes are byte-identical to f892. The item adds only one correct sentence in step 5 (the closed covering and quasi-compact complements persist under base change), and the f892 FIX's step 5 already says this. Statement, stmt_deps and Lean record are unchanged. I read the item, the 4 new nodes, the cited statements, Stacks 09AH (j a quasi-compact morphism; the η_T epimorphism) and 09AA, and Tag 0133 through lem-sc-finite-strip-row-augmentation (r=m, A=E_Z(K), a_q=α). Checks: (1) Contraction: Z_J×Z_a=Z_J for a∈J; h carries the deletion sign; degree −1 uses the counit; the top degree and m=1 work. (2) Signed refinements: d²=0; ρ_f is a chain map with repeats cancelling; refinement maps compose. (3) Total pullback: faces agree because g^*η_T is an epimorphism; τ is unique by biproducts; the Q(τ) formula holds. Edge cases m=1, Z empty, repeated members, constant f, g=id and K=0 are consistent. Every old step has a home, and there is no SGA. FIX (C5 duplicate, re-applied a 5th time): lem-sfb-finite-closed-restriction-detection is the φ=id case of the Lean-closed lem-pod-finite-qc-proetale-abelian-detection, and its only citer is the item. Step 2 now cites the pod node, exactness of inverse images and quasi-compact base change. Steps 4 and 5 now state that the refined and pulled-back families cover with quasi-compact complements. proof_deps are recomputed, tool_uses gains the pod node, and the assembly is 2997 characters. Three comparable new nodes remain. Maintainer note: L must promote or land this head with the fix to end the loop. The item's top-level tool_uses list is stale.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FiniteClosedCoverResolution",
   "declaration": "AlgebraicGeometry.finite_closed_cover_resolution",
   "declarations": [
-   "AlgebraicGeometry.finiteClosedRestriction",
-   "AlgebraicGeometry.finiteClosedRestriction_zero",
-   "AlgebraicGeometry.finiteClosedUnit",
-   "AlgebraicGeometry.finiteClosedIntersection",
-   "AlgebraicGeometry.finiteClosedTerms",
-   "AlgebraicGeometry.finiteClosedDifferential",
-   "AlgebraicGeometry.finiteClosedAllTotal",
-   "AlgebraicGeometry.finiteClosedDouble",
-   "AlgebraicGeometry.finiteClosedTotal",
    "AlgebraicGeometry.FiniteClosedResolution",
    "AlgebraicGeometry.finiteClosedDerivedRefinement",
    "AlgebraicGeometry.finiteClosedRefinementSign",
    "AlgebraicGeometry.finiteClosedRefinementMap",
    "AlgebraicGeometry.finiteClosedTotalMap",
    "AlgebraicGeometry.FiniteClosedRefinementCompatible",
-   "AlgebraicGeometry.finiteClosedInverseZero",
-   "AlgebraicGeometry.finiteClosedPullbackComplex",
-   "AlgebraicGeometry.FiniteClosedPullbackCompatible",
-   "AlgebraicGeometry.finiteClosedTermProjection",
-   "AlgebraicGeometry.finiteClosedPullbackFamily",
    "AlgebraicGeometry.finiteClosedPullbackRowFormula",
+   "AlgebraicGeometry.FiniteClosedPullbackCompatible",
    "AlgebraicGeometry.finite_closed_cover_resolution"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/FiniteClosedCoverResolution.lean",
-  "statement": "theorem finite_closed_cover_resolution {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (m : ℕ) (hm : 0 < m) (W : Fin m → Over X) (hclosed : ∀ a, IsClosedImmersion (W a).hom) (hfactor : ∀ a, Nonempty (W a ⟶ Over.mk i)) (hcover : Set.range i = ⋃ a, Set.range (W a).hom) (hqc : ∃ U : X.Opens, Set.range U.ι = (Set.range i)ᶜ ∧ QuasiCompact U.ι) (hqcW : ∀ a, ∃ U : X.Opens, Set.range U.ι = (Set.range (W a).hom)ᶜ ∧ QuasiCompact U.ι) (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) : ∃ D : FiniteClosedResolution i W A, FiniteClosedRefinementCompatible D ∧ FiniteClosedPullbackCompatible D",
+  "statement": "theorem finite_closed_cover_resolution {X Z : Scheme.{u}} (i : Z ⟶ X)\n    [IsClosedImmersion i] (m : ℕ) (hm : 0 < m) (W : Fin m → Over X)\n    (hclosed : ∀ a, IsClosedImmersion (W a).hom)\n    (hfactor : ∀ a, Nonempty (W a ⟶ Over.mk i))\n    (hcover : Set.range i = ⋃ a, Set.range (W a).hom)\n    (hqc : ∃ U : X.Opens, Set.range U.ι = (Set.range i)ᶜ ∧ QuasiCompact U.ι)\n    (hqcW : ∀ a, ∃ U : X.Opens,\n      Set.range U.ι = (Set.range (W a).hom)ᶜ ∧ QuasiCompact U.ι)\n    (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) : ∃ D : FiniteClosedResolution i W A,\n      FiniteClosedRefinementCompatible D ∧ FiniteClosedPullbackCompatible D",
   "branch": "newtargets-dag",
-  "by": "NX",
-  "date": "2026-10-21",
+  "by": "NR",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "Repair F1: every intersection has a unit-compatible pullback comparison; the asserted row map is their product under terms and preserves the augmentation. Its totalization is pinned on all diagonal inclusions (equivalently via g* Tot ≅ Tot g*), and its localization must equal the augmentation-normalized derived comparison. Repair F2: use ringedSiteModules, proEtaleModuleInverseImage and proEtaleSheafInverseImage directly; replace the two helper-only theorem dependencies by the definition node owning the existing normalized adjunction. No statement correction."
+  "note": "Return F1/F2 on NR 19766f6117ab explicitly authorizes this lean-only repair: the old module owned shared definitions needed by its own proof prerequisite, preventing a stage-3 import. Its 13 shared helper declarations now belong solely to def-sfb-finite-closed-row-constructions. The module imports the definition modules and the pullback theorem in the forward proof direction; FiniteClosedResolution extends FiniteClosedAugmentedRows rather than copying its fields. finiteClosedPullbackRowFormula is an alias of RowFormula, and the total clause uses TotalFormulaOn with the identity complex functor. The cover theorem statement and its sorry proof remain unchanged; every non-lean field is preserved. The new definition owners are cited by the item and its row definition, without citing this downstream theorem. Maintenance prelands these shared definitions before the returned comparison delivery; its proof import is deferred until that theorem lands. This module contains no use of the pending theorem. Maintenance adds both definition owners to this cover node’s stmt_deps so the extracted definitions are reachable and correctly owned on the base before the comparison delivery."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -400,5 +310,17 @@
   "group": "NX",
   "result": "fix",
   "note": "Re-delivery of 23a13b10 RETURN. F1 fixed: FiniteClosedPullbackCompatible now quantifies unit-compatible c and cs for every intersection; requires σ pinned componentwise by finiteClosedPullbackRowFormula (Π cs under terms) with augmentation square via c; τ pinned on all g^*ιTotal(p,q,n), the jointly epimorphic summands since g^* is a left adjoint; and Q(τ)=e for the unique augmentation-normalized e. Non-tautological (σ existence = face compatibility via epi units) and true. F2 fixed: aliases unfolded to proEtaleModuleInverseImage/proEtaleSheafInverseImage/ringedSiteModules; lem-pur tensor-comparison dep dropped; closed-underived-projection theorem dep replaced by new def-sfb-proetale-unit-normalized-adjunction existing:true on unchanged ProEtaleClosedUnderivedProjection (adjunction_exists is a proved ∃!, adjunction its choose, so not hollow); check_existing and check_new_node clean; all dep records byte-identical to live. FIX (record only): fixes/def-sfb-proetale-unit-normalized-adjunction.json adds body owner def-sfb-proetale-inverse-image-unit-section (inverseSection, used in adjunction_exists) to stmt_deps and TeX; check_new_node [] on it. Advisory: proEtaleRingedDirectImage owned only by theorem lem-weil-pbc-proetale-ringed-open-closed (inherited from the base statement). Other clauses re-verified on the unfolded text: qc morphisms, Over-X product intersections, unit-pinned restrictions, signed differential, augment_unit, total sign, quasiIso on plus, derivedIso, refinement signs. Edge cases m=1, repeats, empty intersections, Z empty, K=0, arbitrary g. Single sorry; docstrings and blueprint ids present; statement verbatim; Worker report and Second reading sections present. No compile (no Lean changed); worker reports 28.9/30.1 s clean."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

@@ -1,0 +1,144 @@
+{
+ "id": "lem-coef-integral-dualizing-finite-bounds",
+ "kind": "statement",
+ "title": "The finite dualizing Tor and support bounds",
+ "statement": "Fix the finite-field datum $D$ with algebraically closed field $k$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with ring of integers $R$ and chosen uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties]. Set $A_n=R/\\varpi^{n+1}$ for $n\\in\\mathbf N$, and let $\\omega_n=Ra_n^!(A_n)_s$ be the prescribed finite dualizing term [lem-coef-finite-dualizing]. Let $d\\in\\mathbf N$ with $\\dim X\\le d$ [def-kun-topological-krull-dimension], let $n\\in\\mathbf N$, and let $M\\in D(X_{\\mathrm{proet}},(A_n)_X)$ be equipped with $M\\cong\\omega_n$. Then $M$ is intrinsically bounded constructible [def-weil-finite-torsion-constructibility], its cohomological support [def-weil-cohomological-support] lies in $[-2d,0]$, and it has pro-etale Tor amplitude $[-2d,0]$ [def-weil-proetale-tor-amplitude].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "First paragraph, final two sentences: finite constant-input preservation bound and transport to the reductions."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "lem-coef-finite-dualizing",
+  "def-kun-topological-krull-dimension",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-cohomological-support",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary etale coefficient unit belongs to bounded constructible finite-Tor complexes by the existing constructibleFiniteTor_unit theorem; its Tor interval is [0,0]. Convert between the source bounded-constructible predicate and the finite-value predicate using the constructible-module comparison. Apply verdier_preservation_strata to this unit. The closed-monoidal unit isomorphism identifies its internal Hom with finiteDualizingEtaleTerm, giving bounded constructibility and Tor interval [-2d,0].",
+   "uses": [
+    "lem-weil-verdier-preservation-strata",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invertibility of ell in each residue field follows by mapping finiteFieldDatumPrimeUnit along the residue-field algebra map. Apply finiteCoefficient_comparison_preserves_torAmplitude to the etale dualizing term. The composition comparison for mapDerivedCategory followed by finiteDualizingOrigin identifies its intrinsic image with integralDualizingFiniteTerm. Compose with the given isomorphism to M. Constructibility is invariant under isomorphism by proEtale_bounded_constructible_isTriangulated. Transport the Tor test by composing every representative isomorphism with this object isomorphism.",
+   "uses": [
+    "lem-sf-comparison-tor-amplitude",
+    "lem-coef-finite-dualizing",
+    "lem-weil-proetale-dbc-triangulated",
+    "lem-weil-structure-direct-images-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finiteCoefficient_torAmplitude_iff_flatModel to M, obtaining a representative P whose terms are zero outside [-2d,0]. At every degree outside the interval, the zero middle term gives ExactAt P, hence zero homology. Compose the representative isomorphism and homologyFunctorFactors to deduce zero derived homology of M there. This proves the required support inclusion.",
+   "uses": [
+    "lem-sf-flat-model",
+    "def-weil-cohomological-support"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-cohomological-support",
+  "lem-coef-finite-dualizing",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-flat-model",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-proetale-dbc-triangulated",
+  "lem-weil-structure-direct-images-constructible",
+  "lem-weil-verdier-preservation-strata"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "First paragraph, finite constant-input bound. Lean proof uses the existing etale unit, Verdier preservation, intrinsic Tor comparison, isomorphism closure, and bounded flat model."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral dualizing complex derived inverse limit finite coefficient dualizing complexes compact support adjunction",
+   "results": "8 hits: condensed adjunctions and localCohomology.diagram; no result constructs the specified normalized finite-dualizing tower or its mapping-limit adjunction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|NormalizedDVRTower",
+   "results": "10 hits, comments about dualizing categorical definitions. No matching statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse limit normalized dualizing tower finite Tor amplitude and derived compact support duality",
+   "results": "8 hits: tensor direct-limit equivalences and InverseSystem.piEquivLim; none states these ringed-site assertions.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizing",
+  "date": "2026-10-25",
+  "group": "Z6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "First paragraph, final two sentences: finite constant-input preservation bound and transport to the reductions.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralDualizingFiniteBounds",
+  "file": "lean/Sheaf/SixFunctors/IntegralDualizingFiniteBounds.lean",
+  "declaration": "WeilConjectures.integralDualizing_finite_bounds",
+  "statement": "theorem integralDualizing_finite_bounds (d : ℕ)\n    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (n : ℕ)\n    (M : DerivedCategory (scalarReductionTarget l E X n))\n    (e : M ≅ integralDualizingFiniteTerm l E D X n) :\n    intrinsicFiniteTorsionConstructible l E (n + 1) (by omega) X M ∧\n      proEtaleCohomologicalSupport M ⊆ Set.Icc (-(2 * (d : ℤ))) 0 ∧\n      HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1))\n        M (-(2 * (d : ℤ))) 0",
+  "branch": "sheaf-dag",
+  "by": "Z6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-58c4e",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261025T124537-L-2065790",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-58c4e",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261025T124537-L-2065790",
+  "kind": "interface",
+  "note": "independent cc review: delivered 4 modules + 4 node files vs live clone: verbatim def move (diff), item stmt byte-identical, 10 importers compiled rc 0, axioms probe, FiniteBounds import-deletion variants, sorry statements vs ringedStrictTowerHomotopyLimit spec and item conclusions"
+ }
+}

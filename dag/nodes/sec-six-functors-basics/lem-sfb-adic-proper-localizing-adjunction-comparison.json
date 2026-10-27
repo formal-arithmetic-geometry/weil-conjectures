@@ -20,7 +20,11 @@
   "def-sfb-bounded-constructible-localizing-closure",
   "sk-def-localizing-closure",
   "lem-sfb-adic-proper-localizing-pushforward",
-  "sk-prop-sf-existence"
+  "sk-prop-sf-existence",
+  "def-sfb-compactification-refinement-component",
+  "def-sfb-derived-open-lower-shriek-id",
+  "def-sfb-finite-tor-localizing-closure-of-size",
+  "def-sfb-finite-tor-localizing-lower-shriek-of-size"
  ],
  "proof": [
   {
@@ -225,5 +229,34 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-d48ee5210 (reviewer sub-agent of L); spot-checked: No new nodes and the item's statement is unchanged from the Q80 snapshot that created it (only proof, proof_deps, proof_origin, status, split_report and searches differ). Step 1: Spec k is Noetherian; Stacks 01T6 and 01OY (morphisms.tex l.2765, properties.tex l.481) give Z and Y Noetherian and qcqs, which is what the next step's two theorems need. Step 2: the predicate-comparison node gives B_T=Dbc in the same D_T; ctf-equals-bc (2) gives Tor amplitude [a-1,b] on qcqs X for O_E, E and Qlb; Dctf⊆Dbc holds by definition. Step 3: both hulls intersect the same family of properties (u+1 coproducts), so they are equal; correctly marked elementary. Step 4: sk-def-sfb-dc-setting fixes one chosen compactification per morphism, so the Rg_! of sk-prop-sf-existence is the Rp_! that det-cor-existence-ii-restriction (1) identifies with the restricted Rg_*; that is the blueprint's identity-compactification route of sk-cor-existence-ii-restriction.proof (1). Step 5: Mathlib ofNatIsoLeft (l.497) and homEquiv_ofNatIsoLeft_apply (l.509) give exactly a(h∘e_M). Coefficients: the three certificate families are admissible, a finite normed E embeds isometrically into Qlb, and the item fixes the finite-subextension Qlb. No cycle: the dependency closure contains neither the item nor its parent. No re-split note and no SGA. The two tool_uses (predicate comparison, ctf-equals-bc) are same-unit or used-unit nodes; accepted. Edge cases: integral torsion sheaves (Tor amplitude [-1,0]); g=id on Spec k, where any compactification's j is clopen. Advisory: the certificate's constructor (iii) C(-,Qlb) is ambiguous against sk-def-sfb-qlbar-condensed; the item resolves it in its statement."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicProperLocalizingAdjunctionComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.adicProperLocalizingAdjunctionComparison",
+  "statement": "theorem adicProperLocalizingAdjunctionComparison (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {Z Y : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (g : Z ⟶ Y) [IsProper g.left] (hΛ : IsEllAdicCoefficient ℓ Λ inferInstance) : ∃ (hB : ∀ T : Over (Spec (.of k)), T = Z ∨ T = Y → boundedConstructible (condensedRingObj Λ T.left) = (constantModelBoundedConstructible Λ T.left ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K)) (hL : ∀ T : Over (Spec (.of k)), T = Z ∨ T = Y → boundedConstructibleLocalizingClosure Λ T.left = finiteTorLocalizingClosureOfSize.{u + 1} Λ T.left), (ObjectProperty.ιOfLE (hL Z (Or.inl rfl)).le ⋙ (finiteTorLocalizingClosureOfSize.{u + 1} Λ Z.left).ι = (boundedConstructibleLocalizingClosure Λ Z.left).ι) ∧ (ObjectProperty.ιOfLE (hL Y (Or.inr rfl)).le ⋙ (finiteTorLocalizingClosureOfSize.{u + 1} Λ Y.left).ι = (boundedConstructibleLocalizingClosure Λ Y.left).ι) ∧ (∀ (T : Over (Spec (.of k))) (hT : T = Z ∨ T = Y), ∃ hC : (constantModelBoundedConstructible Λ T.left ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K) ≤ finiteTorLocalizingClosureOfSize.{u + 1} Λ T.left, boundedConstructibleToLocalizing Λ T.left ⋙ ObjectProperty.ιOfLE (hL T hT).le = ObjectProperty.ιOfLE (hB T hT).le ⋙ ObjectProperty.ιOfLE hC) ∧ ∀ (h : ∀ K, finiteTorLocalizingClosureOfSize.{u + 1} Λ Z.left K → finiteTorLocalizingClosureOfSize.{u + 1} Λ Y.left ((rightDerivedLowerShriekOfCompactification Λ (compactificationOverField g)).obj K)) (J : (finiteTorLocalizingClosureOfSize.{u + 1} Λ Y.left).FullSubcategory ⥤ (finiteTorLocalizingClosureOfSize.{u + 1} Λ Z.left).FullSubcategory) (a : finiteTorLocalizingLowerShriekOfSize.{u + 1} Λ (compactificationOverField g) h ⊣ J), ∃ e : ObjectProperty.ιOfLE (hL Z (Or.inl rfl)).le ⋙ finiteTorLocalizingLowerShriekOfSize.{u + 1} Λ (compactificationOverField g) h ⋙ ObjectProperty.ιOfLE (hL Y (Or.inr rfl)).ge ≅ ellAdicLocalizingLowerStar Λ ℓ g hΛ, (∀ (qc : QuasiCompact (compactificationOverField g).i) (d : Compactification.DenseBoundaryCompactification g.left) (r₁ : d.obj ⟶ (⟨⟨compactificationOverField g, qc⟩⟩ : Compactification.BoundaryCompactification g.left)) (r₂ : d.obj ⟶ (⟨⟨Compactification.ofIsProper g.left, inferInstanceAs (QuasiCompact (𝟙 Z.left))⟩⟩ : Compactification.BoundaryCompactification g.left)) (M : (boundedConstructibleLocalizingClosure Λ Z.left).FullSubcategory), (e.hom.app M).hom ≫ ((Functor.isoWhiskerRight (derivedOpenImmersionLowerShriekId Λ Z.left) ((lowerStar Λ g.left).rightDerivedFunctor) ≪≫ Functor.leftUnitor _).inv.app M.obj) ≫ compactificationRefinementComponent Λ r₂ M.obj = compactificationRefinementComponent Λ r₁ M.obj) ∧ ∃ b : ellAdicLocalizingLowerStar Λ ℓ g hΛ ⊣ ObjectProperty.ιOfLE (hL Y (Or.inr rfl)).le ⋙ J ⋙ ObjectProperty.ιOfLE (hL Z (Or.inl rfl)).ge, ∀ (M : (boundedConstructibleLocalizingClosure Λ Z.left).FullSubcategory) (N : (boundedConstructibleLocalizingClosure Λ Y.left).FullSubcategory) (f : (ellAdicLocalizingLowerStar Λ ℓ g hΛ).obj M ⟶ N), (b.homEquiv M N f).hom = (a.homEquiv ((ObjectProperty.ιOfLE (hL Z (Or.inl rfl)).le).obj M) ((ObjectProperty.ιOfLE (hL Y (Or.inr rfl)).le).obj N) (ObjectProperty.homMk ((e.hom.app M).hom ≫ f.hom))).hom",
+  "branch": "sheaf-dag",
+  "by": "Q120",
+  "date": "2026-10-22",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/AdicProperLocalizingAdjunctionComparison.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b476485e0",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 72c209e2a250; the main theorem signature is byte-identical. H2 fixed: det-sf-comp-coherence-cocycle removed; stmt_deps = 11 base deps + 4 new def nodes. H13 fixed: sk-prop-sf-existence and sk-def-localizing-closure records identical to live. New nodes: def-sfb-compactification-refinement-component (existing:true on the unchanged CompactificationCoherenceCocycle.lean:66, verbatim; deps def-sf-comp-refinement-data, def-sfb-module-derived-lower-shriek-compactification, det-nagata-definition-refinement); def-sfb-derived-open-lower-shriek-id (existing:true on ProperLowerShriek l.59-68, both decls listed, previously unowned); def-sfb-finite-tor-localizing-closure-of-size (localizingClosureOfSize.{w} of C_T); def-sfb-finite-tor-localizing-lower-shriek-of-size (ObjectProperty.lift of the actual F_c, Prop witness only). None duplicates a live node. Mathematics re-checked: hypotheses match the node; B=C and L=H with u+1 indexing on both sides; inclusion clauses present; e pinned by the refinement normalization (direction typed); b.homEquiv = a(e_M≫f) with the original J; edge cases covered; only sorry; docstrings carry source and blueprint tags. Nothing compiled (no file changed); worker reports clean scompile runs. Advisory: ofIsProper/DenseBoundaryCompactification come from def nodes not cited directly; the direct LocalizingExceptionalAdjoint import is redundant."
+ }
 }

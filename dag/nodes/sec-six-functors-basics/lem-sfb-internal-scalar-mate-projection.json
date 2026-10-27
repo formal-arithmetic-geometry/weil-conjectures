@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-internal-scalar-mate-projection",
+ "kind": "statement",
+ "title": "Restriction of an internal coefficient mate is the specified projection map",
+ "statement": "Let $a:\\Lambda\\to\\Lambda'$ be a map of commutative condensed rings [sk-def-sfb-condensed-ring] and $f:X\\to Y$ any scheme morphism with small pro-etale sites [def-weil-pbc-proetale-site]. Put $R_T=p_T^*\\Lambda$, $S_T=p_T^*\\Lambda'$ [sk-def-sfb-pulled-back-coefficients]. Use ordinary unbounded internal-module derived categories, uncompleted tensor and the specified $L_{f,R}\\dashv F_{f,R}$, $L_{f,S}\\dashv F_{f,S}$ [sk-def-sfb-module-derived-pushpull, sk-def-sfb-derived-tensor-hom]. Let $D_T=-\\otimes^L_{R_T}S_T$, let $V_T$ be scalar restriction, and take the normalized $e_T:V_TD_T\\cong(-\\otimes^L_{R_T}S_T)$ and $\\lambda:L_{f,S}D_Y\\cong D_XL_{f,R}$ of [lem-sfb-internal-scalar-pullback-normalization]. Let $b:V_XL_{f,S}\\cong L_{f,R}V_Y$ and $d:V_YF_{f,S}\\cong F_{f,R}V_X$ be the canonical adjunction-compatible restriction comparisons [lem-weil-pbc-ring-sheaf-change-adjunction], transported through the fixed internal/section equivalences [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Let $c:L_{f,R}S_Y\\xrightarrow{\\sim}S_X$ be the canonical cartesian coefficient pullback induced by $\\alpha_f$ [sk-def-sfb-coefficient-morphisms] and $\\delta$ the canonical derived pullback-tensor comparison $d$ of [def-sfb-module-object-projection-map]. For $M\\in D_R(Y)$ the following equality holds in $D_R(X)$:\n$$e_{X,L_{f,R}M}\\circ V_X(\\lambda_M)\\circ b^{-1}_{D_YM}=(1\\otimes c)\\circ\\delta_{M,S_Y}\\circ L_{f,R}(e_{Y,M}).$$\nDefine $\\rho_K:D_YF_{f,R}K\\to F_{f,S}D_XK$ as the $S$-adjunct of $D_X(\\varepsilon^R_K)\\circ\\lambda_{F_{f,R}K}$ [def-sfb-internal-derived-scalar-comparisons]. Let $\\pi_{f,K,S_Y}$ be the specified module-object projection map [def-sfb-module-object-projection-map], followed by $F_{f,R}(1\\otimes c)$. Then in $D_R(Y)$\n$$F_{f,R}(e_{X,K})\\circ d_{D_XK}\\circ V_Y(\\rho_K)=\\pi_{f,K,S_Y}\\circ e_{Y,F_{f,R}K}.$$\nUnder the section equivalence the same equation holds with the ringed-topos operations and adjunction of [def-weil-pbc-proetale-operations], the ringed tensor comparison $\\delta$ of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and the ringed projection morphism defined as the adjunct of $(\\varepsilon^R_K\\otimes1)\\circ(1\\otimes c)\\circ\\delta$. In particular, for each $K$, $\\rho_K$ is invertible if and only if this specified $\\pi_{f,K,S_Y}$ is invertible. All maps and equalities are natural in $K$; no flatness, properness, boundedness, or completeness is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3), actual canonical map under reduction; extracted old steps 3, 4 and the conservativity argument of step 5. Stacks sites-cohomology.tex Tags 07A4 (lemma-pullback-tensor-product), 0D6E (lemma-derived-pushforward-composition), 0B56 (equation-projection-formula-map), 0944 (lemma-projection-formula)."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-sfb-internal-scalar-pullback-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-module-object-projection-map",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pd-section-derived-realization",
+  "def-pd-section-derived-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply scalar_tensor_pull_normalization to the given TensorNormalized and PullNormalized data. Unfold only the scalar-interface wrappers to obtain ScalarMatePullEquation. Its component proof is the separate normalized tensor square, not a projection formula.",
+   "uses": [
+    "lem-sfb-internal-scalar-tensor-pull-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+   }
+  },
+  {
+   "text": "Apply scalar_restriction_mate_normalization. It identifies scalarRestrictionPush with the hom of restrictPush, hence proves its invertibility without assuming a flat coefficient change.",
+   "uses": [
+    "lem-sfb-internal-scalar-restriction-mate-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+   }
+  },
+  {
+   "text": "Apply the inverse R-geometric hom equivalence to the restricted-rho equation. The two mate-counit identities for rho and scalarRestrictionPush, followed by naturality of the tensor normalization at the counit, identify its left adjunct. Substitute the pull equation from step 1. The defining adjunct formula for moduleObjectProjectionMap and tensor bifunctoriality identify the right adjunct. Injectivity gives the projection equation.",
+   "uses": [
+    "def-sfb-internal-derived-scalar-comparisons",
+    "def-sfb-module-object-projection-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+   }
+  },
+  {
+   "text": "Use projection_comparison of the fixed internal/section equivalence. The published internal tensor comparison equals the generic comparison used by internalProjection, by internalDelta_eq_canonical and leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison. Identify scalarSectionPushComparison.hom with derivedPushComparison.hom using scalarSectionPushMate_eq. Naturality in the coefficient and the coefficient-modified projection-adjunct identity identify the transported scalarProjection with scalarSectionProjection. Apply the section functor to step 3 and postcompose with these fixed comparisons.",
+   "uses": [
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "new-proetale-derived-module-pullback-monoidal",
+    "def-pd-proetale-section-module-functors",
+    "lem-pd-section-derived-tensor-normalization",
+    "lem-sfb-scalar-geometric-exchange-rectangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+   }
+  },
+  {
+   "text": "Ordinary restriction reflects isomorphisms because the underlying abelian-sheaf forgetful functors do. Its derived homology comparison then proves reflection in derived categories. In step 3 all factors other than restricted rho and the specified projection are invertible. Cancel the normalization isomorphisms and scalarRestrictionPush; reflection gives the isomorphism equivalence.",
+   "uses": [
+    "def-sfb-internal-derived-scalar-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+   }
+  },
+  {
+   "text": "Naturality of rightAdjointProjectionMap gives naturality before the coefficient identification. Naturality of tensor in the coefficient, followed by functoriality of direct image, gives the displayed modified projection naturality equation.",
+   "uses": [
+    "def-sfb-module-object-projection-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-scalar-tensor-pull-normalization",
+  "lem-sfb-internal-scalar-restriction-mate-normalization",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-module-object-projection-map",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "new-proetale-derived-module-pullback-monoidal",
+  "def-pd-proetale-section-module-functors",
+  "lem-pd-section-derived-tensor-normalization",
+  "lem-sfb-scalar-geometric-exchange-rectangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP.",
+  "note": "K2 formal mate/counit calculation in abstract categories, explicit normalization of the mate-based section push comparison, fixed section tensor/projection comparison, homology reflection and naturality; separate existing nodes supply the tensor normalization and the now-proved restriction-mate normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The direct image adjunction mate of derived scalar pullback balancing for internal module sheaves restricts to the canonical projection formula morphism for unbounded complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The hom-set equivalence of the pullback-pushforward adjunction between sheaves of modules maps the canonical morphism from the pullback of the unit sheaf to the unit sheaf to the canonical morphism fr\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"The pullback functor for sheaves of modules is isomorphic to the composition of the forgetful functor, the presheaf pullback along the underlying natural transformation, and sheafification with respec\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"projection\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projectionTensorMap|scalarMate",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "After restricting scalars the derived coefficient change direct image mate equals tensor pullback followed by the adjunction counit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \": F' ⋙ G' ⟶ 𝟭 D₂\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \": coextendScalars f ⋙ restrictScalars f ⟶ 𝟭 (ModuleCat R)\", \"doc\": \"The counit of the adjunction between coextension of scalars and restriction of scalars functors, which provides a natural transformation from the composition $\\\\operatorname{Coext}_f \\\\circ \\\\operatornam\"}\n  {\"name\": \"PresheafOfModules.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \"(α : R ⟶ R') : PresheafOfModules.{v} R' ⥤ PresheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between presheaves of rings on a category $\\\\mathcal{C}$, this defines a functor from the category of presheaves of modules over $R'$ to the category o\"}\n  {\"name\": \"PresheafOfModules.restrictScalarsObj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \"(M' : PresheafOfModules.{v} R') (α : R ⟶ R') : PresheafOfModules R\", \"doc\": \"Given a presheaf of modules $\\\\mathcal{M}'$ over a presheaf of rings $R'$ on a category $\\\\mathcal{C}$, and a natural transformation $\\\\alpha: R \\\\to R'$ between ring presheaves, this constructs a new pre\"}\n  {\"name\": \"ModuleCat.restrictCoextendScalarsAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] → [inst_1 : Ring S] → (f : R →+* S) → ModuleCat.restrictScalars f ⊣ ModuleCat.coextendScalars f\", \"doc\": \"Given a ring homomorphism $ f : R → S $, the restriction of scalars functor (mapping $ S $-modules to $ R $-modules) is left adjoint to the coextension of scalars functor (mapping $ R $-modules to $ S\"}\n  {\"name\": \"RestrictScalars\", \"module\": \"Mathlib.Algebra.Algebra.RestrictScalars\", \"type\": \"(_R _S M : Type*) : Type _\", \"doc\": \"The restriction of scalars construction that views an $ S $-module $ M $ as an $ R $-module, given a ring homomorphism $ R \\\\to S $. This allows scalar multiplication by elements of $ R $ instead of $ \"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] →\\n      [inst_1 : Ring S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → (Y ⟶ (ModuleCat.coextendScalars f).obj X) → ((ModuleCat.restrictScalars f).obj Y ⟶ X)\", \"doc\": \"Given a ring homomorphism $ f : R → S $, the restriction of scalars functor (mapping $ S $-modules to $ R $-modules) is left adjoint to the coextension of scalars functor (mapping $ R $-modules to $ S\"}\n  {\"name\": \"LinearMap.restrictScalarsₗ\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Defs\", \"type\": \": (M →ₗ[S] N) →ₗ[R₁] M →ₗ[R] N\", \"doc\": \"The linear map from the space of $ S $-linear maps $ M \\to N $ to the space of $ R $-linear maps $ M \\to N $, induced by restricting scalars through the scalar tower $ R \\to S $. This map preserves addit\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identify a derived change of rings direct image comparison with the projection formula map by comparing their adjoints and balanced tensor maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsBaseChange.comp_iff\", \"module\": \"Mathlib/RingTheory/IsTensorProduct\", \"type\": \"∀ {R : Type u_1} {M : Type v₁} {N : Type v₂} {S : Type v₃} [inst : AddCommMonoid M] [inst_1 : AddCommMonoid N]\\n  [inst_2 : CommSemiring R] [inst_3 : CommSemiring S] [inst_4 : Algebra R S] [inst_5 : Module R M] [inst_6 : Module R N]\\n  [inst_7 : Module S N] [inst_8 : IsScalarTower R S N] {T : Type u_4\", \"doc\": \"Given an $ S $-linear map $ f: M \\\\to N $ that is a base change and an $ S $-linear map $ h: N \\\\to O $, the composition $ h \\\\circ f $ is a $ T $-base change if and only if $ h $ itself is a $ T $-base \"}\n  {\"name\": \"ModuleCat.extendScalarsComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R₁ R₂ R₃ : Type u₁} →\\n  [inst : CommRing R₁] →\\n    [inst_1 : CommRing R₂] →\\n      [inst_2 : CommRing R₃] →\\n        (f₁₂ : R₁ →+* R₂) →\\n          (f₂₃ : R₂ →+* R₃) →\\n            ModuleCat.extendScalars (f₂₃.comp f₁₂) ≅ (ModuleCat.extendScalars f₁₂).comp (ModuleCat.extendScalars f₂₃)\", \"doc\": \"Given commutative rings $ R_1, R_2, R_3 $ and ring homomorphisms $ f_{12} : R_1 → R_2 $, $ f_{23} : R_2 → R_3 $, the extension of scalars functor for the composite homomorphism $ f_{23} ∘ f_{12} $ is \"}\n  {\"name\": \"comonadicExtendScalars\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"{A B : Type u} →\\n  [inst : CommRing A] →\\n    [inst_1 : CommRing B] →\\n      {f : A →+* B} → f.FaithfullyFlat → CategoryTheory.ComonadicLeftAdjoint (ModuleCat.extendScalars f)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a faithfully flat ring homomorphism $ f : R → S $, the extension of scalars functor from the category of $ R $-modules to $ S $-modules is comonadic. This me\"}\n  {\"name\": \"ModuleCat.homEquiv_extendScalarsComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R₁ R₂ R₃ : Type u₁} [inst : CommRing R₁] [inst_1 : CommRing R₂] [inst_2 : CommRing R₃] (f₁₂ : R₁ →+* R₂)\\n  (f₂₃ : R₂ →+* R₃) (M : ModuleCat R₁),\\n  ((ModuleCat.extendRestrictScalarsAdj (f₂₃.comp f₁₂)).homEquiv M\\n        (((ModuleCat.extendScalars f₁₂).comp (ModuleCat.extendScalars f₂₃)).obj M))\\n  \", \"doc\": \"For commutative rings $ R_1, R_2, R_3 $ with ring homomorphisms $ f_{12} : R_1 → R_2 $ and $ f_{23} : R_2 → R_3 $, the hom-set equivalence induced by the adjunction between extension and restriction o\"}\n  {\"name\": \"PolynomialLaw.toFun'_eq_of_diagram\", \"module\": \"Mathlib/RingTheory/PolynomialLaw/Basic\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {M : Type u_1} [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {N : Type u_2}\\n  [inst_3 : AddCommMonoid N] [inst_4 : Module R N] {S : Type v} [inst_5 : CommSemiring S] [inst_6 : Algebra R S]\\n  (f : M →ₚₗ[R] N) {A : Type u} [inst_7 : CommSemiring A] [inst_8 : A\", \"doc\": \"Given commutative semirings $ R $, $ R' $, $ R $-algebras $ A $, $ B $, $ R' $-algebras $ S $, $ T $, and polynomial laws $ f: M → N $, $ g: P → Q $ between modules, if algebra homomorphisms $ h: S → \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_naturality\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N),\\n  AdicCompletion.map I f ∘ₗ AdicCompletion.ofTensorProduct I M =\\n    AdicCompletion.ofTensorProduct I N \", \"doc\": \"For any $ R $-linear map $ f : M \\to N $, the diagram involving the $ I $-adic completion maps and tensor products commutes, i.e., $\\\\text{map}_I(f) \\\\circ \\\\text{ofTensorProduct}_I(M) = \\\\text{ofTensorPro\"}\n  {\"name\": \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (A : Type u_1) [inst_3 : CommRing A] [inst_4 : Algebra S A] [inst_5 : Algebra P.Ring A]\\n  [inst_6 : IsScalarTower P.Ring S A],\\n  KaehlerDifferential.cotangentComplexBaseChange R\", \"doc\": \"The base change of the cotangent complex from $ R $ to $ S $ over $ P $, when extended by $ A $, is equal to the composition of the tensor product of $ A $ with the cotangent complex of $ P $ over $ R\"}\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\\n  TensorProduct.Alge\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|scalar.*mate|mate.*projection",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*mate|mate.*projection|derived.*[Pp]rojection[Ff]ormula",
+   "results": "0 hits in Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar restriction, ordinary pullback unit maps or formal closed-category mate identities; none states the normalized unbounded internal-module comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coefficient change comparison for unbounded derived module sheaves equals the projection formula map after restriction of scalars",
+   "results": "8 hits: PresheafOfModules.restrictScalars; PresheafOfModules.restrictScalarsObj; RestrictScalars; ModuleCat.restrictScalars; ModuleCat.RestrictScalars.obj'; SheafOfModules.restrictScalars; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction; ModuleCat.restrictCoextendScalarsAdj",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar restriction, ordinary pullback unit maps or formal closed-category mate identities; none states the normalized unbounded internal-module comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormulaMap\", \"mate\"",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar restriction, ordinary pullback unit maps or formal closed-category mate identities; none states the normalized unbounded internal-module comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules over pulled back ring sheaves restriction of the derived scalar direct image mate is the normalized projection formula morphism",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar restriction, ordinary pullback unit maps or formal closed-category mate identities; none states the normalized unbounded internal-module comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormulaMap|mateEquiv|conjugateEquiv",
+   "results": "10 hits in Mathlib/CategoryTheory/Monoidal: Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar restriction, ordinary pullback unit maps or formal closed-category mate identities; none states the normalized unbounded internal-module comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A balanced tensor pullback comparison followed by the counit has adjoint equal to the change of coefficients direct image transformation after forgetting the target algebra action",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.counit_app; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; ModuleCat.ExtendRestrictScalarsAdj.Counit.map; ModuleCat.instIsLeftAdjointExtendScalars; ModuleCat.RestrictionCoextensionAdj.counit'_app",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar restriction, ordinary pullback unit maps or formal closed-category mate identities; none states the normalized unbounded internal-module comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-quotient-direct-image-comparison",
+  "date": "2026-10-22",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Paragraphs (1) and (3), actual canonical map under reduction; extracted old steps 3, 4 and the conservativity argument of step 5.",
+   "via": [
+    "lem-sfb-integral-quotient-direct-image-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-internal-scalar-mate-projection",
+  "worker": "stage1",
+  "group": "N7",
+  "summary": "Proved the tensor normalization on flat-term K-flat representatives and an auxiliary resolution of the possibly nonflat scalar sheaf; compared the exact counit transposes using adjunction-compatible restriction; checked sectionwise transport, naturality and conservative restriction. Statement unchanged. Reused existing nodes only.",
+  "blueprint": "det-thm-sfb-proper-base-change-integral paragraphs (1) and (3): the actual scalar-reduction direct-image mate is the specified projection morphism, allowing its invertibility to be tested after restriction.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic exact section reconstruction and its tensor/K-flat preservation, required to compare internal and ringed-site maps; no claim of scalar-mate equality is taken from it."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic unbounded flat-term K-flat resolutions for M and the degree-zero scalar sheaf."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic preservation of flat-term K-flat representatives by ringed pullback."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic representative construction of the ringed derived tensor comparison used in the section equation."
+   },
+   {
+    "node": "lem-pur-kflat-tensor-quasiiso-independent",
+    "why": "Generic preservation of quasi-isomorphisms under tensor with a K-flat complex, needed to augment a resolution of a nonflat scalar sheaf."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic adjunction-compatible restriction comparison and conservativity for cartesian ring-sheaf coefficients, without flatness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N7-68714fbe3",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-68714fbe3 (reviewer sub-agent of L); spot-checked: PASS, no fixes written. I read the whole split. It is 7 steps (6461 characters) and adds no new nodes. The statement and stmt_deps are byte-identical to the live node, which is still unsplit (created by NB on 2026-10-22 in the parent re-split). There is no repair note for this item, it is not on the dropped list, no other group has landed a split of it, and nothing cites SGA. The parent's old steps 3, 4 and the conservativity half of step 5 (NB run 50c06ff1, packet lines 270-305) all reappear here in expanded form; none was shortened. Old step 3's bare assertion is now an explicit computation with K-flat representatives: a flat-term K-flat P for M and an auxiliary resolution Q→S_Y, so the scalar sheaf S_Y is never assumed flat. I checked the types of both identities by hand. Step 1: the section equivalence is exact and preserves K-flatness (lem-pe-internal-section-tensor-comparison). The inverse image with identified coefficients is exact, so it computes L on any complex (def-weil-pbc-proetale-operations). lem-pc-kflat-resolution and lem-weil-pbc-ringed-pullback-preserves-kflat say what the step takes from them. Step 2: lem-pur-kflat-tensor-quasiiso-independent has P in the second slot, and the step correctly uses symmetry. The two quasi-isomorphisms after pullback follow from exactness of H_R and from H_R P being K-flat. Step 3: the formulas for b, λ and e come from the statements of lem-weil-pbc-ring-sheaf-change-adjunction and lem-sfb-internal-scalar-pullback-normalization, and the degree-0 augmentation introduces no sign. It is acceptable as an elementary step. Step 4: the adjunct clause of the ring-sheaf-change node applies with M=D_Y F K, N=D_X K, t=t_K. Its hypothesis that the coefficient identifications are compatible with a is supplied by the normalization node. Naturality of e_X then gives (ε⊗1)h. Step 5: by the definition node, the adjunct of π is (ε⊗1)δ; bifunctoriality and injectivity of the adjunction bijection give the second identity. Step 6 writes out the section transport explicitly. Step 7: restriction reflects isomorphisms, and e, d and c are isomorphisms, so ρ is invertible exactly when π is. Small cases tested: f=id, a=id, ℤ→ℤ/2 on a point (non-flat), and K=0. Stacks tags 07A4, 0D6E, 0B56, 0944, 07A6, 0G7E, 06YP, 06YS and 03EL match their labels in the tags file. Blueprint main-20261015 integral proof, paragraphs (1) and (3). I accept the six generic tools in split_report.tool_uses. Note for the maintainer: clause 1 of NL lem-sfb-derived-scalar-mate-thick-locus (unsplit) is the section-ring analogue of this item's second identity, but with a different λ normalization. This is overlap between parallel splits, not a duplicate made by this delivery. tools/review_split.py reports 'no such node' for every cite only because the chapter directories are symlinks; every cited node exists."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.InternalScalarMateProjection",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.internal_scalar_mate_projection",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarRestrictionPull",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarRestrictionPush",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarCoefficientUnit",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarCoefficientPull",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarTensorPull",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarProjection",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarSectionCoefficientPull",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarSectionProjection",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarSectionTensor",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarSectionLeft",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarSectionRight",
+   "AlgebraicGeometry.ProEtale.QuotientChange.ScalarMateSectionEquation",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarPullLeft",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarPullRight",
+   "AlgebraicGeometry.ProEtale.QuotientChange.ScalarMatePullEquation",
+   "AlgebraicGeometry.ProEtale.QuotientChange.internal_scalar_mate_projection"
+  ],
+  "file": "lean/Sheaf/Paper/InternalScalarMateProjection.lean",
+  "statement": "theorem internal_scalar_mate_projection (a : Λ ⟶ Λ') [IsMonHom a]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (tX : TensorNormalization a X) (tY : TensorNormalization a Y)\n    (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X)\n    (hX : TensorNormalized a X tX) (hY : TensorNormalized a Y tY)\n    (hlam : PullNormalized a f lam) :\n    IsIso (scalarRestrictionPush a f) ∧\n    ScalarMatePullEquation a f tX tY lam ∧\n    (∀ K : DerivedCategory (Modules Λ X),\n      (V a Y).map ((rho a f lam).app K) ≫\n          (scalarRestrictionPush a f).app ((D a X).obj K) ≫\n          (F Λ f).map (tX.derived.hom.app K) =\n        tY.derived.hom.app ((F Λ f).obj K) ≫ scalarProjection a f K) ∧\n    ScalarMateSectionEquation a f tX tY lam ∧\n    (∀ K : DerivedCategory (Modules Λ X),\n      IsIso ((rho a f lam).app K) ↔ IsIso (scalarProjection a f K)) ∧\n    (∀ (K K' : DerivedCategory (Modules Λ X)) (q : K ⟶ K'),\n      ((CondensedRing.derivedTensor Λ Y).map ((F Λ f).map q)).app (B a Y) ≫\n        scalarProjection a f K' =\n        scalarProjection a f K ≫\n          (F Λ f).map (((CondensedRing.derivedTensor Λ X).map q).app (B a X)))",
+  "branch": "sheaf-dag",
+  "by": "Q08",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The local helpers expose canonical maps at the recorded opaque scalar-interface functor names. They contain real data: exact localization of the existing restriction/pullback comparison, its geometric mate, restriction of the regular coefficient, and the literal published moduleObjectProjectionMap followed by coefficient pullback. The section equation uses the existing representative-normalized ringed tensor comparison and actual ringed adjunction. The two added landed definition dependencies own these section operations; no new object, arbitrary comparison or flatness hypothesis is introduced. Repair of return L on 4c2e0f7a3486: import Sheaf.Paper.ScalarGeometricExchangeRectangle and reuse its scalarSectionPushComparison, which exposes the identical derivedPushComparison with the coefficient ring explicit; remove the duplicate local definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc9de0709",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Re-delivery fixing the duplicate-name landing refusal of 4c2e0f7a (PASSed on substance). Only change: public import of Sheaf.Paper.ScalarGeometricExchangeRectangle and reuse of its scalarSectionPushComparison Λ f in scalarSectionLeft/Right; the local copy and its declarations entry are removed. Same map (both bodies are ModuleRingedComparison.derivedPushComparison; derivedEquivalence.functor = derivedFunctor by definition); its HasDerivedCategory instance is already an item variable; no new hypothesis. Theorem signature byte-identical; statement verbatim; 16 declarations present; one sorry (the theorem); stmt_deps/proof_deps unchanged. None of the 16 names declared elsewhere live in this namespace (scalarProjection only in other namespaces); no cycle. The changed ringed-topoi-derived-tensor-pullback record equals live (base drift). Report has Worker report, Second reading by Q08 and the repair section. Advisory: a plain def owned by theorem node lem-sfb-scalar-geometric-exchange-rectangle is used without being a stmt_dep (known pattern, advisory). No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261025T202352-L-2711568",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

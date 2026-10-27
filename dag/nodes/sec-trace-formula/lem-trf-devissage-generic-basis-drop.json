@@ -1,0 +1,298 @@
+{
+ "id": "lem-trf-devissage-generic-basis-drop",
+ "kind": "statement",
+ "title": "A generic-fibre basis with smaller-dimensional cokernel support",
+ "statement": "Let $Y\\to B$ be a smooth morphism of affine schemes [def-pc-scheme, def-weil-affine-spectrum, def-sbc-smooth-morphisms] with geometrically irreducible fibres [def-pc-geometrically-irreducible] of a fixed dimension $d\\geq0$ [def-kun-dimension], and let $b\\in B$. Let $\\mathcal H$ be any finite-type quasi-coherent $\\mathcal O_Y$-module [pqf-def-coherent]. If $\\xi$ is the generic point of $Y_b$, there exist $r\\geq0$ and a module map $\\alpha:\\mathcal O_Y^{\\oplus r}\\to\\mathcal H$ whose induced map $\\kappa(\\xi)^r\\to\\mathcal H_\\xi\\otimes_{\\mathcal O_{Y,\\xi}}\\kappa(\\xi)$ is an isomorphism. The sheaf $\\mathcal Q=\\operatorname{coker}\\alpha$ is finite-type and quasi-coherent, and $\\operatorname{Supp}(\\mathcal Q_b)$ is a proper closed subset of $Y_b$, not containing $\\xi$. If this support is nonempty, its dimension, and its dimension at any of its points, is strictly less than $d$; if $d=0$ it is empty. Support is the set of nonzero stalks, cokernel is the quotient sheaf by the image, and the subscript $b$ denotes tensor pullback to $Y_b=Y\\times_B\\operatorname{Spec}\\kappa(b)$ [def-pc-module-pullback, def-pc-fibre-product, def-weil-residue-field, def-weil-pbc-module-stalk, def-weil-pbc-module-tensor-product]. No flatness of $\\mathcal H$ over $B$ and no finite presentation of $\\mathcal H$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05HF (lemma-existence-alpha), proof applied to any finite-type quasi-coherent module on its smooth target; permits r=0 when the generic fibre is zero. The proof uses only the smooth geometrically irreducible fibre of dimension d, not the rest of a devissage."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-kun-dimension",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $B=\\operatorname{Spec}A$ and $Y=\\operatorname{Spec}R$, and put $M=\\Gamma(Y,\\mathcal H)$. The affine finite-type criterion makes $M$ finite over $R$, and the affine tilde/global-sections counit gives $\\mathcal H\\cong\\widetilde M$. Let $p\\subset R$ correspond to the image of $\\xi$ in $Y$, and put $K=\\kappa(p)$. The tilde stalk is $M_p$. Its residue tensor is canonically $M\\otimes_RK$: the inverse maps are $(m/s)\\otimes a\\mapsto m\\otimes a/\\bar s$ and $m\\otimes a\\mapsto(m/1)\\otimes a$, where $s\\notin p$. The tensor relations verify both composites.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "def-weil-residue-field",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HF (lemma-existence-alpha), proof: affine finite module, choice of basis images, Nakayama, and dimension drop."
+   }
+  },
+  {
+   "text": "Choose a finite generating list $m_1,\\ldots,m_t$ of $M$. Its images $m_i\\otimes1$ span $M\\otimes_RK$, by expanding the first entry of every pure tensor. Scan the list, keeping a vector precisely when it is outside the span of the previously kept vectors. The kept vectors are independent and span the original list, hence form a basis. Write their number as $r$ and their lifts as $x_1,\\ldots,x_r$. The linear map $a:R^r\\to M$, $(c_i)\\mapsto\\sum c_ix_i$, becomes an isomorphism over $K$. If the tensor is zero the kept list is empty and $r=0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HF (lemma-existence-alpha), proof: affine finite module, choice of basis images, Nakayama, and dimension drop."
+   }
+  },
+  {
+   "text": "Use the tilde functor and the counit from step 1 to turn $a$ into $\\alpha:\\mathcal O_Y^{\\oplus r}\\to\\mathcal H$. Indeed the finite direct sum of $r$ copies of $\\widetilde R=\\mathcal O_Y$ is $\\widetilde{R^r}$, since tilde preserves colimits. Naturality of the tilde stalk localization sends the germ of $x_i$ to $x_i/1$, so the residue map of $\\alpha$ is exactly the basis map from step 2. Set $T=M/\\operatorname{im}a$. The quasi-coherent cokernel theorem identifies $\\mathcal Q=\\operatorname{coker}\\alpha$ as quasi-coherent with affine sections $T$; the images of the $m_i$ generate $T$, and the finite-type criterion makes $\\mathcal Q$ finite type.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HF (lemma-existence-alpha), proof: affine finite module, choice of basis images, Nakayama, and dimension drop."
+   }
+  },
+  {
+   "text": "Tensor the cokernel sequence $R^r\\to M\\to T\\to0$ with $K$. Tensor right exactness and the basis isomorphism give $T\\otimes_RK=0$. The same fraction formulas as in step 1 identify this with $T_p\\otimes_{R_p}K$. The module $T_p$ is finite over the local ring $R_p$: the fractions $\\bar m_i/1$ generate it. Apply local Nakayama to the empty generating list; its residue quotient is zero, so $T_p=0$. Thus $\\mathcal Q$ has zero stalk at the image of $\\xi$.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HF (lemma-existence-alpha), proof: affine finite module, choice of basis images, Nakayama, and dimension drop."
+   }
+  },
+  {
+   "text": "Write $b$ as the prime $q\\subset A$ and $Y_b=\\operatorname{Spec}C$ with $C=R\\otimes_A\\kappa(q)$ by the affine fibre-product formula. Let $P\\subset C$ be the prime of $\\xi$. Its contraction is $p$, and the fibre-ring residue theorem identifies $\\kappa(P)$ with $K$, so the residue isomorphism proved above is exactly the one in the statement. The pullback stalk formula gives $(\\mathcal Q_b)_\\xi\\cong\\mathcal Q_p\\otimes_{R_p}C_P=0$. Affine pullback identifies $\\mathcal Q_b$ with $\\widetilde{C\\otimes_RT}$. The tensors $1\\otimes\\bar m_i$ generate $C\\otimes_RT$ over $C$, so this module is finite. Its stalk support, by tilde stalk localization and the finite-module support theorem, is $Z=V(\\operatorname{Ann}_C(C\\otimes_RT))$, a closed subset of $Y_b$. It misses $\\xi$, hence is proper.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-fibre-ring-residue-field-iso",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-finite-module-support-annihilator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HF (lemma-existence-alpha), proof: affine finite module, choice of basis images, Nakayama, and dimension drop."
+   }
+  },
+  {
+   "text": "Geometric irreducibility, specialized to the identity extension of $\\kappa(b)$, makes $Y_b$ irreducible. Its dimension is $d$ by hypothesis. Apply the irreducible-open-complement dimension theorem with the nonempty open $U=Y_b\\setminus Z$ (which contains $\\xi$). It gives $Z=\\varnothing$, or $\\dim Z\\leq e<d$ for some natural number $e$. This proves the strict global bound whenever $Z$ is nonempty.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "new-node-irreducible-open-complement-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HF (lemma-existence-alpha), proof: affine finite module, choice of basis images, Nakayama, and dimension drop."
+   }
+  },
+  {
+   "text": "At a point $z\\in Z$ the dimension at $z$ is at most $\\dim Z$: the whole space $Z$ is one of its open neighbourhoods in the defining minimum. Thus the pointwise bound follows from step 6. If $d=0$, the nonempty alternative would supply a natural number $e<0$, which is impossible, so $Z$ is empty. The argument imposed neither flatness nor finite presentation on $\\mathcal H$.",
+   "uses": [
+    "def-kun-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HF (lemma-existence-alpha), proof: affine finite module, choice of basis images, Nakayama, and dimension drop."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "def-weil-residue-field",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-fibre-ring-residue-field-iso",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "def-pc-geometrically-irreducible",
+  "new-node-irreducible-open-complement-dimension",
+  "def-kun-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05HF (lemma-existence-alpha), proof: affine finite module, choice of basis images, Nakayama, and dimension drop."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite module on a smooth affine scheme with geometrically irreducible fibres has a generic fibre basis whose cokernel has smaller fibre support dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n  {\"name\": \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {M : Type u_2} [inst_2 : AddCommGroup M] [inst_3 : Module R M]\\n  [Module.Finite R M] [inst_5 : IsLocalRing R] {x : R},\\n  x ∈ IsLocalRing.maximalIdeal R → Module.supportDim R M ≤ Module.supportDim R (QuotSMulTop x M) + 1\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and an element $ x $ in the maximal ideal of $ R $, the Krull dimension of the support of $ M $ is at most the Krull dimension of the support of th\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"Module.supportDim_quotSMulTop_succ_eq_supportDim\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {M : Type u_2} [inst_2 : AddCommGroup M] [inst_3 : Module R M]\\n  [Module.Finite R M] [inst_5 : IsLocalRing R] {x : R},\\n  IsSMulRegular M x → x ∈ IsLocalRing.maximalIdeal R → Module.supportDim R (QuotSMulTop x M) + 1 = Module.supportDim R M\", \"doc\": \"For a local ring $ R $, if $ x $ is a regular element in the maximal ideal of $ R $ and $ M $ is an $ R $-module, then the Krull dimension of the support of $ M $ satisfies $\\\\dim(\\\\operatorname{Supp}(M\"}\n  {\"name\": \"Module.exists_basis_of_basis_baseChange\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsLocalRing R] [Module.FinitePresentation R M] {ι : Type u_5} (v : ι → M),\\n  LinearIndependent (IsLocalRing.ResidueField R) (⇑((TensorProduct.mk R (IsLocalRing.ResidueField R) M) 1) ∘ v) →\", \"doc\": \"Let $ R $ be a commutative local ring with maximal ideal $ \\\\mathfrak{m} $ and residue field $ k = R/\\\\mathfrak{m} $, and let $ M $ be a finitely presented $ R $-module. If a family of vectors $ v_i $ i\"}\n  {\"name\": \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [Finite (MaximalSpectrum R)] [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] [Module.Finite R M] [Module.Flat R M] (n : ℕ),\\n  (∀ (P : MaximalSpectrum R), Module.finrank (R ⧸ P.asIdeal) (TensorProduct R (R ⧸ P.asIdeal) M) = n) →\\n    Nonempty (Modu\", \"doc\": \"If $ M $ is a finitely generated flat module over a commutative ring $ R $, and for every maximal ideal $ \\\\mathfrak{p} $ of $ R $ the rank of the tensor product $ M \\\\otimes_R (R/\\\\mathfrak{p}) $ over t\"}\n  {\"name\": \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {M : Type u_2} [inst_2 : AddCommGroup M] [inst_3 : Module R M]\\n  [Module.Finite R M] [IsLocalRing R] (rs : List R),\\n  RingTheory.Sequence.IsRegular M rs →\\n    Module.supportDim R (M ⧸ Ideal.ofList rs • ⊤) + ↑rs.length = Module.supportDim R M\", \"doc\": \"For a module $ M $ over a commutative semiring $ R $ and a regular sequence $ rs $ on $ M $, the Krull dimension of the support of the quotient module $ M/(rs) $ plus the length of $ rs $ equals the K\"}\n  {\"name\": \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {M : Type u_2} [inst_2 : AddCommGroup M] [inst_3 : Module R M]\\n  [Module.Finite R M] [inst_5 : IsLocalRing R] {x : R},\\n  (∀ p ∈ (Module.annihilator R M).minimalPrimes, x ∉ p) →\\n    x ∈ IsLocalRing.maximalIdeal R → Module.supportDim R (QuotSMu\", \"doc\": \"If $ x $ is an element of the maximal ideal of a local ring $ R $ that does not belong to any minimal prime ideal of the annihilator of an $ R $-module $ M $, then the Krull dimension of the support o\"}\n\nRead the hits and their source: Module.exists_basis_of_basis_baseChange (RingTheory/LocalRing/Module.lean:167) assumes finite presentation and a local-ring injectivity condition; exists_free_localizedModule_powers (RingTheory/Localization/Free.lean:78) assumes finite presentation and a free localization; finite_iff_krullDimLE_zero (RingTheory/Jacobson/Artinian.lean:49) concerns Artinian bases and finite type algebras. None constructs this sheaf map with fibre support dimension drop for an arbitrary finite module. The free-surjection hit is about finite algebras. No match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Choose global generators which form a basis at the generic point so the cokernel avoids that generic point in an irreducible fibre",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.generatorsOfIsCokernelFree_π\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{M : SheafOfModules.{u} R} (f : free ι ⟶ free σ) (g : free σ ⟶ M) (H : f ≫ g = 0)\\n  (H' : IsColimit (CokernelCofork.ofπ g H)) : (generatorsOfIsCokernelFree f g H H').π = g\", \"doc\": \"Given a sheaf of modules $ M $ over a ring sheaf $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if there exists a morphism $ g: F_\\\\sigma \\\\to M $ from a free sheaf $ F_\\\\sigma $ s\"}\n  {\"name\": \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a sheaf of modules $ M $ over a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if there exists a morphism $ g: F_\\\\sigma \\\\to M $ from a free sheaf $ F_\\\\sigma\"}\n  {\"name\": \"genericPoints\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \": Set α\", \"doc\": \"The set of points $ x $ in a topological space $ \\\\alpha $ such that the closure of the singleton set $ \\\\{x\\\\} $ is an irreducible component of $ \\\\alpha $, i.e., a maximal irreducible closed subset of $\"}\n  {\"name\": \"SheafOfModules.generatorsOfIsCokernelFree_s\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a sheaf of modules $ M $ over a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if there exists a morphism $ g: F_\\\\sigma \\\\to M $ from a free sheaf $ F_\\\\sigma\"}\n  {\"name\": \"genericPoint\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"[QuasiSober α] [IrreducibleSpace α] : α\", \"doc\": \"In a quasi-sober topological space that is irreducible, this is the unique point $ x $ such that the closure of $ \\\\{x\\\\} $ equals the entire space. This follows from the quasi-sober property ensuring e\"}\n  {\"name\": \"SheafOfModules.generatorsOfIsCokernelFree\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{M : SheafOfModules.{u} R} (f : free ι ⟶ free σ) (g : free σ ⟶ M) (H : f ≫ g = 0)\\n  (H' : IsColimit (CokernelCofork.ofπ g H)) : M.GeneratingSections\", \"doc\": \"Given a sheaf of modules $ M $ over a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if there exists a morphism $ g: F_\\\\sigma \\\\to M $ from a free sheaf $ F_\\\\sigma\"}\n  {\"name\": \"SheafOfModules.presentationOfIsCokernelFree_generators\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a sheaf of modules $ M $ over a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if there exists a morphism $ g: F_\\\\sigma \\\\to M $ from a free sheaf $ F_\\\\sigma\"}\n  {\"name\": \"genericPoint_specializes\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"[QuasiSober α] [IrreducibleSpace α] (x : α) : genericPoint α ⤳ x\", \"doc\": \"In a quasi-sober irreducible topological space, the unique generic point specializes to every point $x$ in the space. This means that every neighborhood of $x$ is also a neighborhood of the generic po\"}\n\nRead the hits and their source: Module.exists_basis_of_basis_baseChange (RingTheory/LocalRing/Module.lean:167) assumes finite presentation and a local-ring injectivity condition; exists_free_localizedModule_powers (RingTheory/Localization/Free.lean:78) assumes finite presentation and a free localization; finite_iff_krullDimLE_zero (RingTheory/Jacobson/Artinian.lean:49) concerns Artinian bases and finite type algebras. None constructs this sheaf map with fibre support dimension drop for an arbitrary finite module. The free-surjection hit is about finite algebras. No match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Finite\", \"KrullDim\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Module.finite_iff_krullDimLE_zero\", \"module\": \"Mathlib.RingTheory.Jacobson.Artinian\", \"type\": \" (R : Type u_1) (A : Type u_2) [CommRing R] [CommRing A] [Algebra R A] [Algebra.FiniteType R A] [IsArtinianRing R] : Module.Finite R A ↔ Ring.KrullDimLE 0 A\", \"doc\": \"If `A` is a finite type algebra over an Artinian ring `R`,\\nthen `A` is finite over `R` if and only if `dim A = 0`.\"}\n\nRead the hits and their source: Module.exists_basis_of_basis_baseChange (RingTheory/LocalRing/Module.lean:167) assumes finite presentation and a local-ring injectivity condition; exists_free_localizedModule_powers (RingTheory/Localization/Free.lean:78) assumes finite presentation and a free localization; finite_iff_krullDimLE_zero (RingTheory/Jacobson/Artinian.lean:49) concerns Artinian bases and finite type algebras. None constructs this sheaf map with fibre support dimension drop for an arbitrary finite module. The free-surjection hit is about finite algebras. No match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|generic.*basis|basis.*generic|coker.*[dD]im",
+   "results": "[grep] OK 0 hit(s)\n\nRead the hits and their source: Module.exists_basis_of_basis_baseChange (RingTheory/LocalRing/Module.lean:167) assumes finite presentation and a local-ring injectivity condition; exists_free_localizedModule_powers (RingTheory/Localization/Free.lean:78) assumes finite presentation and a free localization; finite_iff_krullDimLE_zero (RingTheory/Jacobson/Artinian.lean:49) concerns Artinian bases and finite type algebras. None constructs this sheaf map with fibre support dimension drop for an arbitrary finite module. The free-surjection hit is about finite algebras. No match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite module over an integral finite type algebra has a generically free map from a finite free module with smaller dimensional cokernel support",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Finite.exists_free_surjective\", \"module\": \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation\", \"type\": \"∀ (R : Type u) (S : Type u_1) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S],\\n  ∃ S' x x_1,\\n    ∃ (_ : Module.Finite R S') (_ : Module.Free R S') (_ : Algebra.FinitePresentation R S'), ∃ f, Function.Surjective ⇑f\", \"doc\": \"For any commutative semiring $ R $ and a semiring $ S $ equipped with an $ R $-algebra structure that is finitely generated as an $ R $-module, there exists a commutative ring $ S' $ that is a finitel\"}\n  {\"name\": \"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Polynomial\", \"type\": \"∀ {R : Type u_2} {A : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (f : A) (s : Set A)\\n  [Module.Finite R (A ⧸ Ideal.span s)] [Module.Free R (A ⧸ Ideal.span s)],\\n  ∃ t,\\n    PrimeSpectrum.comap (algebraMap R A) '' (PrimeSpectrum.zeroLocus s \\\\ PrimeSpectrum.zeroLocus {f})\", \"doc\": \"Let $ A $ be a commutative ring over $ R $, $ s \\\\subseteq A $, and $ f \\\\in A $. If the quotient ring $ A / \\\\langle s \\\\rangle $ is a finite and free $ R $-module, then there exists a finite subset $ t \"}\n  {\"name\": \"Algebra.FormallyUnramified.finite_of_free\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Free R S], Module.Finite R S\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ equipped with an $ R $-algebra structure. If $ S $ is formally unramified over $ R $ and $ S $ is a free $ R $-module, then $ S $ is finitely genera\"}\n  {\"name\": \"Module.free_of_flat_of_finrank_eq\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [Finite (MaximalSpectrum R)] [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] [Module.Finite R M] [Module.Flat R M] (n : ℕ),\\n  (∀ (P : MaximalSpectrum R), Module.finrank (R ⧸ P.asIdeal) (TensorProduct R (R ⧸ P.asIdeal) M) = n) → Module.Free R M\", \"doc\": \"Let $ R $ be a commutative ring and $ M $ a finitely generated flat $ R $-module. If for every maximal ideal $ \\\\mathfrak{p} $ of $ R $, the rank of the tensor product $ (R/\\\\mathfrak{p}) \\\\otimes_R M $ \"}\n  {\"name\": \"Module.FinitePresentation.of_finite_of_finitePresentation\", \"module\": \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation\", \"type\": \"∀ (R : Type u) (S : Type u_1) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  [Algebra.FinitePresentation R S], Module.FinitePresentation R S\", \"doc\": \"If $ S $ is a finitely generated $ R $-module and finitely presented as an $ R $-algebra, then $ S $ is finitely presented as an $ R $-module.\"}\n  {\"name\": \"Module.FinitePresentation.exists_notMem_bijective\", \"module\": \"Mathlib/Algebra/Module/FinitePresentation\", \"type\": \"∀ {R : Type u_5} {M : Type u_6} {N : Type u_7} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] [Module.Finite R M] [Module.FinitePresentation R N] (f : M →ₗ[R] N)\\n  (p : Ideal R) [inst_7 : p.IsPrime] {Mₚ : Type u_3} {Nₚ : Type u_4\", \"doc\": \"Let $ R $ be a commutative semiring, $ M $ a finitely generated $ R $-module, and $ N $ a finitely presented $ R $-module. Given a linear map $ f : M → N $, a prime ideal $ \\\\mathfrak{p} ⊂ R $, and loc\"}\n  {\"name\": \"Module.FinitePresentation.exists_free_localizedModule_powers\", \"module\": \"Mathlib/RingTheory/Localization/Free\", \"type\": \"∀ {R : Type u_4} {M : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Submonoid R)\\n  {M' : Type u_1} [inst_3 : AddCommGroup M'] [inst_4 : Module R M'] (f : M →ₗ[R] M') [IsLocalizedModule S f]\\n  (Rₛ : Type u_3) [inst_6 : CommRing Rₛ] [inst_7 : Algebra R Rₛ] [inst_8 \", \"doc\": \"Let $R$ be a commutative ring, $S$ a submonoid of $R$, and $M$ a finitely presented $R$-module. Let $R_S$ and $M_S$ denote the localizations of $R$ and $M$ at $S$, respectively. If $M_S$ is a free $R_\"}\n  {\"name\": \"Module.Finite.of_localizationSpan_finite'\", \"module\": \"Mathlib/RingTheory/Localization/Finiteness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {M : Type w} [inst_1 : AddCommMonoid M] [inst_2 : Module R M] (t : Finset R),\\n  Ideal.span ↑t = ⊤ →\\n    ∀ {Mₚ : ↥t → Type u_1} [inst_3 : (g : ↥t) → AddCommMonoid (Mₚ g)] [inst_4 : (g : ↥t) → Module R (Mₚ g)]\\n      {Rₚ : ↥t → Type u} [inst_5 : (g : ↥t) → CommRing (R\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. Let $t \\\\subset R$ be a finite set of elements that generate the unit ideal. If for every $g \\\\in t$, the localization $M_g$ is a finitely generat\"}\n\nRead the hits and their source: Module.exists_basis_of_basis_baseChange (RingTheory/LocalRing/Module.lean:167) assumes finite presentation and a local-ring injectivity condition; exists_free_localizedModule_powers (RingTheory/Localization/Free.lean:78) assumes finite presentation and a free localization; finite_iff_krullDimLE_zero (RingTheory/Jacobson/Artinian.lean:49) concerns Artinian bases and finite type algebras. None constructs this sheaf map with fibre support dimension drop for an arbitrary finite module. The free-surjection hit is about finite algebras. No match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite module on an affine scheme choose global sections forming a basis in the residue field at a generic fibre point",
+   "results": "Actual logged hits: Algebra.QuasiFinite.finite_fiber, Algebra.quasiFinite_iff, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, AlgebraicGeometry.Scheme.affineBasisCoverRing, Algebra.QuasiFinite.instFiniteResidueField, IsLocalRing.ResidueField.finite_of_module_finite, AlgebraicGeometry.IsFinite.finite_app, Algebra.QuasiFinite.instResidueField. Module.exists_basis_of_basis_baseChange (RingTheory/LocalRing/Module.lean:167) requires finite presentation and injectivity of the maximal-ideal tensor map; localization freeness (RingTheory/Localization/Free.lean:41,78) also requires finite presentation. Module.isClosed_support (RingTheory/Spectrum/Prime/Module.lean:46) covers only support closedness, already cited through the existing Mathlib leaf. Other hits do not give the asserted affine sheaf map and fibre dimension drop.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Finite\", \"ResidueField\"",
+   "results": "Actual logged hits: . Module.exists_basis_of_basis_baseChange (RingTheory/LocalRing/Module.lean:167) requires finite presentation and injectivity of the maximal-ideal tensor map; localization freeness (RingTheory/Localization/Free.lean:41,78) also requires finite presentation. Module.isClosed_support (RingTheory/Spectrum/Prime/Module.lean:46) covers only support closedness, already cited through the existing Mathlib leaf. Other hits do not give the asserted affine sheaf map and fibre dimension drop.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*basis|basis.*generic|support.*[Cc]losed|[Cc]losed.*support",
+   "results": "Actual logged hits: Mathlib/Dynamics/FixedPoints/Support.lean, Mathlib/Dynamics/FixedPoints/Support.lean, Mathlib/Geometry/Manifold/VectorBundle/ContMDiffSection.lean, Mathlib/Geometry/Manifold/VectorBundle/MDifferentiable.lean, Mathlib/Geometry/Manifold/SmoothApprox.lean, Mathlib/Geometry/Manifold/BumpFunction.lean, Mathlib/Geometry/Manifold/BumpFunction.lean, Mathlib/Geometry/Manifold/BumpFunction.lean. Module.exists_basis_of_basis_baseChange (RingTheory/LocalRing/Module.lean:167) requires finite presentation and injectivity of the maximal-ideal tensor map; localization freeness (RingTheory/Localization/Free.lean:41,78) also requires finite presentation. Module.isClosed_support (RingTheory/Spectrum/Prime/Module.lean:46) covers only support closedness, already cited through the existing Mathlib leaf. Other hits do not give the asserted affine sheaf map and fibre dimension drop.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite module on affine scheme choose sections basis at residue field and cokernel support avoids generic point",
+   "results": "Actual logged hits: Module.exists_basis_of_basis_baseChange, Module.support, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.generatorsOfIsCokernelFree_π, Module.isClosed_support, SheafOfModules.GeneratingSections.IsFiniteType.mk, SheafOfModules.generatorsOfIsCokernelFree_I, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop. Module.exists_basis_of_basis_baseChange (RingTheory/LocalRing/Module.lean:167) requires finite presentation and injectivity of the maximal-ideal tensor map; localization freeness (RingTheory/Localization/Free.lean:41,78) also requires finite presentation. Module.isClosed_support (RingTheory/Spectrum/Prime/Module.lean:46) covers only support closedness, already cited through the existing Mathlib leaf. Other hits do not give the asserted affine sheaf map and fibre dimension drop.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Select a subset of finite module generators whose images form a basis over the residue field at a prime",
+   "results": "Actual logged hits: IsLocalRing.basisQuotient, Module.exists_basis_of_basis_baseChange, Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective, Ideal.ringBasis, Ideal.selfBasis, Module.exists_basis_of_span_of_flat, Module.nonempty_basis_of_flat_of_finrank_eq, Module.FinitePresentation.exists_basis_localizedModule_powers. Module.exists_basis_of_basis_baseChange (RingTheory/LocalRing/Module.lean:167) requires finite presentation and injectivity of the maximal-ideal tensor map; localization freeness (RingTheory/Localization/Free.lean:41,78) also requires finite presentation. Module.isClosed_support (RingTheory/Spectrum/Prime/Module.lean:46) covers only support closedness, already cited through the existing Mathlib leaf. Other hits do not give the asserted affine sheaf map and fibre dimension drop.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_basis_of_basis_baseChange|isClosed_support|exists_basis_localizedModule_powers",
+   "results": "Actual logged hits: Mathlib/RingTheory/Spectrum/Prime/Module.lean, Mathlib/RingTheory/Spectrum/Prime/Module.lean, Mathlib/RingTheory/Localization/Free.lean, Mathlib/RingTheory/Localization/Free.lean, Mathlib/RingTheory/LocalRing/Module.lean, Mathlib/RingTheory/LocalRing/Module.lean. Module.exists_basis_of_basis_baseChange (RingTheory/LocalRing/Module.lean:167) requires finite presentation and injectivity of the maximal-ideal tensor map; localization freeness (RingTheory/Localization/Free.lean:41,78) also requires finite presentation. Module.isClosed_support (RingTheory/Spectrum/Prime/Module.lean:46) covers only support closedness, already cited through the existing Mathlib leaf. Other hits do not give the asserted affine sheaf map and fibre dimension drop.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-complete-algebra-devissage-etale-existence",
+  "date": "2026-10-24",
+  "group": "Q101"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical supporting algebra in the semistable-alteration ancestry of lem-trf-local-term-locality, clauses (1)--(2), recorded in the parent: the flat-tensor weak-assassin argument uses an etale projective neighborhood. In the proof of that neighborhood, the first localization produces complete devissage, before projectivity is proved. Supporting the 05I1 existence step via the 05HR dimension induction: A generic-fibre basis with smaller-dimensional cokernel support.",
+   "via": [
+    "lem-trf-complete-algebra-devissage-etale-existence",
+    "lem-trf-flat-algebra-etale-projective-neighborhood",
+    "lem-trf-flat-tensor-weakass-fibre",
+    "lem-trf-vertical-principal-ideal-fibre-detection",
+    "lem-trf-valuation-smooth-branches-strict-chart",
+    "lem-trf-valuation-marked-strictification",
+    "lem-trf-valuation-common-strict-semistable-refinement",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-devissage-generic-basis-drop",
+  "worker": "stage1",
+  "summary": "Read 05HF and reuse existing affine quasi-coherent, Nakayama, support and dimension results. Give the basis selection and tensor formulas explicitly, allow rank zero, and separate ambient and fibre generic-point local rings. No new nodes or statement changes.",
+  "blueprint": "Historical supporting algebra in the inherited ancestry of lem-trf-local-term-locality, clauses (1)--(2): 05HF within the 05HR complete-devissage induction. The latest locality proof no longer states this algebra; this split retains the assigned supporting node without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "new-node-irreducible-open-complement-dimension",
+    "why": "Generic topological dimension bound for a proper closed subset of an irreducible finite-dimensional fibre; the assigned unit has no replacement for this auxiliary dimension fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "new-node-irreducible-open-complement-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-ea5a3ec7f",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-ea5a3ec7f (reviewer sub-agent of L); spot-checked: First S1 split. The statement is unchanged, there are no new nodes and no SGA source; the review is in review.md. I read Stacks flat.tex 05HF (lemma-existence-alpha) in full. Its proof needs only that the affine module is finite, a basis of N⊗κ(p) that lifts to N, Nakayama for the cokernel, and that the fibre is geometrically irreducible of dimension n. The item's generalization to any finite-type quasi-coherent H with r≥0 is therefore correct. Stacks writes r>0, but its proof takes r equal to the residue dimension, which can be 0, and the citer lem-trf-complete-algebra-devissage-etale-existence uses r≥0 and d=0. I checked all 7 steps against the statements of the cited nodes. (1) The affine finite-type criterion (a) and the tilde counit (3) give H≅M̃ with M finite; the fraction formulas identify M_p⊗κ(p) with M⊗κ(p). (2) The greedy basis lifts to M; r=0 when the residue space is zero. (3) α is built from tilde, colimit preservation and the counit (R̃=O_Y is the definition, 01HV). The cokernel-image node (2)-(3) gives Q(Y)=M/im a with no Noetherian hypothesis, and the same generators make Q finite type. (4) Right exactness gives T⊗K=0, and Nakayama on the empty list over R_p gives T_p=0. (5) The fibre-product node gives C=R⊗κ(q). The fibre-ring residue node (R_p→C_P) gives κ(P)≅κ(p), so the statement's residue field is the right one. The pullback-stalk formula gives (Q_b)_ξ=0; tilde pullback and the support-annihilator node give Z=V(Ann), which is closed and proper. (6) For irreducible-open-complement-dimension I read the statement and its 2 proof steps (chain extension); topological Krull dimension agrees with def-kun-dimension on |Y_b|. (7) The pointwise bound and the d=0 case are elementary. Small cases checked: H=0; A¹ with k[x]/(x)⊕k[x] gives r=1, Z={0}; torsion H gives r=0; d=0 gives Z empty. No hypothesis is used that is not there, and the base may be non-Noetherian. Duplicate search (05HF, generic basis, proper closed dimension): lem-trf-generic-free-cokernel-dimension-drop and lem-trf-smooth-generic-rank-reduction need flatness, so neither is a duplicate. The off-unit lem-weil-pbc nodes are mathlib or slopmaster2-closed. The declared tool_use new-node-irreducible-open-complement-dimension (sec-curve-estimates) is accepted as a generic topological black box. review_split.py printed 'no such node' for every citation because it does not follow the symlinked chapters; find -L shows all 16 proof_deps and 11 stmt_deps exist. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DevissageGenericBasisDrop",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.devissage_generic_basis_drop",
+  "file": "lean/Sheaf/AlgebraicGeometry/DevissageGenericBasisDrop.lean",
+  "statement": "theorem devissage_generic_basis_drop {Y B : Scheme.{u}} [IsAffine Y] [IsAffine B] (f : Y ⟶ B) [Smooth f] [GeometricallyIrreducible f] (d : ℕ) (hdim : ∀ t : B, topologicalKrullDim (f.fiber t) = (d : WithBot ℕ∞)) (b : B) (H : Y.Modules) (hH : H.IsQuasiCoherentFiniteType) (ξ : f.fiber b) (hξ : IsGenericPoint ξ Set.univ) : ∃ (r : ℕ) (α : SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r)) ⟶ H), IsIso ((ModuleCat.extendScalars (((f.fiberι b).stalkMap ξ) ≫ (f.fiber b).residue ξ).hom).map ((RingedSpace.moduleStalkFunctor Y.toRingedSpace ((f.fiberι b) ξ)).map α)) ∧ IsQuasiCoherentFiniteType (X := Y) (cokernel α) ∧ ∃ Z : Set (f.fiber b), Z = {x | ¬ Subsingleton (((tensorPullback (f.fiberι b)).obj (cokernel α)).presheaf.stalk x)} ∧ IsClosed Z ∧ Z ⊂ Set.univ ∧ ξ ∉ Z ∧ (Z.Nonempty → topologicalKrullDim Z < (d : WithBot ℕ∞) ∧ ∀ z : Z, topologicalKrullDimAt z < (d : WithBot ℕ∞)) ∧ (d = 0 → Z = ∅)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-56b7fb21b",
+  "group": "NC",
+  "result": "pass",
+  "note": "Read node, Stacks flat.tex 05HF + Def 05H9, all 11 stmt_dep records, delivered module and report. Only `lean` changed vs side-live (was null); statement verbatim; sorry-only; docstrings carry source, blueprint id and 7 proof steps; max line 88. Clauses match: affine Y,B; Smooth; GeometricallyIrreducible (Mathlib gives irreducible nonempty fibres and surjectivity, so hdim ∀t = d is the node's 'fibres of fixed dimension d', not stronger); H IsQuasiCoherentFiniteType with no flat/fp/Noetherian assumption; ξ generic point of f.fiber b; ∃ r:ℕ, α from SheafOfModules.free (ULift (Fin r)) (r=0 allowed); IsIso of extendScalars along O_{Y,ξ}→O_{Y_b,ξ}→κ(ξ) of α's stalk map (the induced residue map); cokernel finite type and quasi-coherent; Z = nonzero stalks of tensorPullback(fiberι b) of the cokernel, closed, ⊂ univ, ξ∉Z; nonempty → topologicalKrullDim Z < d and ∀ z, topologicalKrullDimAt z < d; d=0 → Z=∅. True by chain extension in the irreducible fibre. Edge cases H=0/torsion (r=0), d=0, single universe OK. No duplicate (project generic-basis results need flatness). No compile (no change). Advisory: RingedSpace.moduleStalkFunctor is owned by def-pc-module-stalk-functor, not a stmt_dep; the def-weil-pbc-module-stalk record directs scheme stalks to it and H2 bars S2 from adding it, so the maintainer may add it. Second reading is the worker's own pass (dispatcher allowed no second agent), noted."
+ }
+}

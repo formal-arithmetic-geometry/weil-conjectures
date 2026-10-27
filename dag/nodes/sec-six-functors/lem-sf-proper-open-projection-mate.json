@@ -18,132 +18,54 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-cbc-strict-tower-proper-open-calculus] for the geometry of the square: $s=(k,r):A\\to B_C$ is clopen, $bs=k$, $qs=r$, and $\\alpha$ is exactly the specified base-change map followed by projection onto $s(A)$. This geometric assertion has no hypothesis on an input complex. Write $J=i_!$, $K=k_!$, $E=R_rM$, $X=P_iN$, $Y=P_pN$, and $T=P_rX=P_kY$. All tensors below are derived; canonical pullback/tensor identifications are understood. For an open $j$ write $\\delta_j(U,V):j_!U\\otimes V\\to j_!(U\\otimes P_jV)$. The normalizations in [lem-sf-open-tensor-normalization] make these maps and the open base-change map identities after restriction and the open units.",
+   "text": "For finite coefficients use the actual ModuleCat-valued pro-etale derived functors. Identify beta with the published inverse open base-change isomorphism. The already proved canonical Cartesian tensor square in lem-pur-co-smooth-pf-exchange-coherence gives compatibility of this factor. Normalize the clopen counit using the localized sheaf counit of lem-sf-clopen-composite-counit-normalization, and use the two adjunction triangle identities to prove the clopen projector tensor square. Use lem-sf-proper-open-pull-tensor-composition and adjoint conjugacy to identify the composite-open tensor map with delta_k. Paste these factors and transport the pullback compositors to obtain the alpha tensor square. The private lemmas properOpenBeta_tensor, properOpenClopen_tensor, properOpenTensor_factorization and tensor_square_transport implement these calculations.",
    "uses": [
-    "lem-cbc-strict-tower-proper-open-calculus",
-    "lem-sf-open-tensor-normalization"
+    "lem-pur-co-smooth-pf-exchange-coherence",
+    "lem-sf-clopen-composite-counit-normalization",
+    "lem-sf-proper-open-pull-tensor-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent tensor/counit calculation with the normalized ringed-site maps"
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open (open-immersion case); agent tensor refinement of the normalized clopen comparison, from returned lem-sf-proper-open-projection-mate steps 1–3. Tensor foundations: sites-cohomology.tex Tags 07A4 (lemma-pullback-tensor-product) and 0GL1 (lemma-j-shriek-and-tensor)."
    }
   },
   {
-   "text": "First check the tensor square for the base-change factor $\\beta:P_pJ\\to b_!P_q$. For arbitrary $H$ on $C$, its two routes have source $P_p(JH\\otimes N)$ and target $b_!(P_qH\\otimes P_bY)$: one applies $P_p\\delta_i$, then $\\beta_{H\\otimes X}$ and the pullback tensor comparison; the other applies $\\mu_p$, then $\\beta_H\\otimes1_Y$ and $\\delta_b$. Both source and target lie in the image of $b_!$: use $\\beta_H$ and the open tensor isomorphism to identify the source with $b_!(P_qH\\otimes P_bY)$. Thus full faithfulness of $b_!$ reduces equality to restriction by $P_b$. Under the open units, $P_b\\beta$ and $P_i\\delta_i$ are identities. The remaining maps on both routes are the canonical pullback/tensor comparison on $P_qH\\otimes P_bY$, using $P_bP_p=P_qP_i$. Hence the square commutes. Here the comparison is the canonical one for the commutative ringed pullback square, as in [lem-weil-pbc-ringed-exchange-tensor-coherence].",
+   "text": "For the finite assertion apply the generic tensorSquare_mate_transfer to the alpha tensor square of Step 1. Its equality is initially written using the inverse pullback-square comparison. Postcompose with the image of the forward comparison, use naturality of the mate, and cancel theta inverse followed by theta. Identify tensorSquareProjectionMap with the published counit-defined rightDerivedLowerStarProjectionMap using the explicit curried/uncurried component formula. This yields precisely the forward-comparison identity stated here. No projection map or proper/open mate is inverted.",
    "uses": [
-    "lem-sf-open-tensor-normalization",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+    "lem-sf-tensor-square-mate-transfer"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent tensor/counit calculation with the normalized ringed-site maps"
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map, and Tag 07A7, remark-base-change; agent mixed tensor-action mate calculation, returned lem-sf-proper-open-projection-mate steps 4–6 (not a theorem quoted verbatim from Stacks)."
    }
   },
   {
-   "text": "The clopen-projection factor also respects tensor: in $B_C=s(A)\\amalg(B_C\\setminus s(A))$, $\\pi_s$ acts by $(1,0)$. Tensoring it with $P_bY$ still acts by $(1,0)$ on the two components. The open tensor comparison for $s$ restricts to the identity on $s(A)$; on the complementary component its target is zero. Consequently projection before tensor and projection after tensor agree, followed by $\\delta_s$. This is an identity of the given termwise clopen projections on complexes and hence of their derived classes, using the canonical tensor comparisons. The comparisons for the composite open $bs=k$ agree with $\\delta_k$: both are maps between objects in the image of $k_!$, and after restriction to $k$ they are identities, so full faithfulness gives equality. Combining this calculation with Step 2 gives, for every $H$ on $C$, the explicit identity\n$$K(\\mu_r)\\,\\alpha_{H\\otimes X}\\,P_p(\\delta_i)=\\delta_k\\,(\\alpha_H\\otimes1_Y)\\,\\mu_p.$$\nBoth sides run from $P_p(JH\\otimes N)$ to $K(P_rH\\otimes T)$.",
-   "uses": [
-    "lem-cbc-strict-tower-proper-open-calculus",
-    "lem-sf-open-tensor-normalization",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent tensor/counit calculation with the normalized ringed-site maps"
-   }
-  },
-  {
-   "text": "Put $Z=M\\otimes T$ and $a_r=(\\varepsilon_{r,M}\\otimes1_T)\\mu_r:P_r(E\\otimes X)\\to Z$. The counit definition of $\\pi_r$ gives $\\varepsilon_{r,Z}P_r(\\pi_r)=a_r$. The mate definition of $\\gamma$ gives $\\varepsilon_{p,KW}P_p(\\gamma_W)=K(\\varepsilon_{r,W})\\alpha_{R_rW}$ for every $W$. Therefore the transpose under $P_p\\dashv R_p$ of the left side of the claimed identity is\n$$K(\\varepsilon_{r,Z})\\,\\alpha_{R_rZ}\\,P_pJ(\\pi_r)\\,P_p\\delta_i\n=K(\\varepsilon_{r,Z}P_r\\pi_r)\\,\\alpha_{E\\otimes X}\\,P_p\\delta_i\n=K(a_r)\\,\\alpha_{E\\otimes X}\\,P_p\\delta_i.$$\nThe middle equality is naturality of $\\alpha$ for the arrow $\\pi_r:E\\otimes X\\to R_rZ$.",
-   "uses": [
-    "def-weil-pbc-adjunction-mate",
-    "def-exchange-projection",
-    "lem-weil-pbc-ringed-projection-mate-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent tensor/counit calculation with the normalized ringed-site maps"
-   }
-  },
-  {
-   "text": "Transpose the right side under the same adjunction. Naturality of $\\varepsilon_p$ first moves $R_p\\delta_k$ out of the transpose; the defining adjunct equation of $\\pi_p$ then gives\n$$\\delta_k\\,(\\varepsilon_{p,KM}\\otimes1_Y)\\,\\mu_p\\,P_p(\\gamma_M\\otimes1_N).$$\nNaturality of $\\mu_p$ replaces this by\n$$\\delta_k\\,((\\varepsilon_{p,KM}P_p\\gamma_M)\\otimes1_Y)\\,\\mu_p\n=\\delta_k\\,((K\\varepsilon_{r,M}\\,\\alpha_E)\\otimes1_Y)\\,\\mu_p.$$\nNow apply naturality of $\\delta_k$ to $\\varepsilon_{r,M}:P_rE\\to M$, and then the identity of Step 3 with $H=E$. The result is\n$$K(\\varepsilon_{r,M}\\otimes1_T)\\,K(\\mu_r)\\,\\alpha_{E\\otimes X}\\,P_p\\delta_i\n=K(a_r)\\,\\alpha_{E\\otimes X}\\,P_p\\delta_i,$$\nwhich is the transpose computed in Step 4. The adjunction Hom bijection is injective, so the original maps agree. All substitutions are natural in $M,N$.",
-   "uses": [
-    "def-weil-pbc-adjunction-mate",
-    "def-exchange-projection",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sf-open-tensor-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent tensor/counit calculation with the normalized ringed-site maps"
-   }
-  },
-  {
-   "text": "These calculations use arbitrary inputs in the unbounded ringed-site derived categories. In particular [lem-weil-pbc-ringed-projection-mate-exact] supplies the counit-defined map for arbitrary sheaves of commutative rings and all objects, so the use of its formula does not specialize the finite ring $\\Lambda$ to a quotient DVR or impose invertibility of its order. [lem-sf-open-tensor-normalization] also has no boundedness or Tor hypothesis. We never invert $\\pi_p$, $\\pi_r$ or $\\gamma$, nor invoke a proper projection formula or proper base-change isomorphism on these inputs. This proves precisely the finite constant-coefficient identity claimed.",
-   "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-sf-open-tensor-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent tensor/counit calculation with the normalized ringed-site maps"
-   }
-  },
-  {
-   "text": "We identify the stipulated system $\\Gamma_Q$ intrinsically, rather than from its finite evaluations. Let $\\widetilde\\gamma$ be the proper-adjunction mate of the clopen $\\alpha$. The realization node characterizes $\\Gamma_Q$ by $\\lambda_QP_i\\Gamma_Q=1$ under the open unit, where $\\lambda_Q:P_iS_pJ_k\\cong S_r$ is obtained by open restriction, $k=bs$, $J_s=S_s$ for the clopen $s$, and direct-image composition. Make exactly those identifications in $P_i\\widetilde\\gamma$. Mate pasting identifies the restricted unit/counit maps with the unit/counit of $P_r\\dashv S_r$; the restricted open base-change map is the identity by open normalization, and the clopen projection acts as identity on $J_sM$. Thus the composite $\\lambda_QP_i\\widetilde\\gamma$ is $S_r\\varepsilon_r\\circ\\eta_rS_r=1_{S_r}$ by the triangle identity. Since $J_i\\dashv P_i$ gives a bijection on the relevant Hom sets, its adjunct characterization implies $\\widetilde\\gamma=\\Gamma_Q$. This argument uses only the intrinsic open-restriction characterization and canonical composite adjunctions, and is independent of the total-limit comparisons or the finite evaluated arrows.",
+   "text": "For strict semilinear systems use the actual unbounded system functors and the ringedTensorCoherence field of the supplied Realizations record. First identify the prescribed lambda with proper exchange followed by the inverse open unit using lem-sf-system-proper-open-lambda-exchange. Compare the two asserted maps under the injective open-adjunction Hom bijection after precomposing the inverse open tensor comparison. Use projection_transpose, unit naturality, the intrinsic adjunct characterization of gamma, exchange naturality, and the ringed tensor coherence equation. The inverse open unit on k cancels the k tensor comparison; the forward and inverse square comparisons cancel. Both sides reduce to lambda inverse followed by lambda, so the original system maps agree before evaluation. This is the private system_mate_tensor_of_exchange calculation. No evaluated faithfulness or total-limit argument is used.",
    "uses": [
     "lem-sf-integral-compactification-system-realization",
-    "lem-sf-open-tensor-normalization",
-    "lem-weil-pbc-mate-pasting",
-    "def-weil-pbc-adjunction-mate",
-    "lem-pur-coefficient-system-derived-comparison"
+    "lem-sf-system-proper-open-lambda-exchange"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Agent mate calculation identifying the intrinsic system normalization; Stacks categories.tex Tags 0DV0 and 0B65 for adjunction composition"
-   }
-  },
-  {
-   "text": "For the system assertion, apply Steps 1--5 inside the unbounded derived module categories of the ringed diagram sites themselves. [lem-pur-coefficient-system-derived-comparison] supplies the exact system inverse images and their derived adjunctions on these unbounded categories. [lem-sf-open-tensor-normalization] explicitly supplies the same open-unit, tensor and base-change normalization on the diagram topoi. The operations and intrinsic $\\Gamma_Q$ are the simultaneous ringed-diagram constructions stipulated in [lem-sf-integral-compactification-system-realization]; Step 7 identifies $\\Gamma_Q$ with the proper mate of the same clopen-projection $\\alpha$. Thus the system analogue of the mate equation in Step 4 is an equation in the system category. On system complexes the clopen projection in Step 3 is literally identity on the open component and zero on its complement; these are morphisms of systems, compatible with every coefficient transition. Steps 4--5 now compare the two system maps by the single system adjunction Hom bijection and the displayed common transpose, before applying any evaluation. The generic ringed tensor/projection nodes apply to these small ringed diagram sites without change. Only the unbounded operations and intrinsic-map clauses of the realization node are used; no total-limit realization or constructible-domain claim is needed.",
-   "uses": [
-    "lem-pur-coefficient-system-derived-comparison",
-    "lem-sf-open-tensor-normalization",
-    "lem-sf-integral-compactification-system-realization",
-    "lem-cbc-strict-tower-proper-open-calculus",
-    "def-weil-pbc-adjunction-mate",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent tensor/counit calculation with the normalized ringed-site maps"
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0DV0 (lemma-compose-counits) and 0B65 (lemma-transformation-between-functors-and-adjoints); agent system application of the two extracted tensor lemmas and the intrinsic proper/open normalization"
    }
   }
  ],
  "proof_deps": [
-  "def-exchange-projection",
-  "def-weil-pbc-adjunction-mate",
-  "lem-cbc-strict-tower-proper-open-calculus",
-  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-co-smooth-pf-exchange-coherence",
+  "lem-sf-clopen-composite-counit-normalization",
+  "lem-sf-proper-open-pull-tensor-composition",
+  "lem-sf-tensor-square-mate-transfer",
   "lem-sf-integral-compactification-system-realization",
-  "lem-sf-open-tensor-normalization",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-sf-system-proper-open-lambda-exchange"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent tensor/counit calculation with the normalized ringed-site maps"
+  "place": "Tags 0F7B, 0F7C, 0F7D and 07A7; J3 finite proof by the canonical fixed-coefficient alpha tensor square and categorical mate transfer; system proof by the supplied ringed tensor coherence, explicit open Hom transposition, and the independently proved lambda/exchange normalization."
  },
  "mathlib_searches": [
   {
@@ -279,63 +201,34 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-sf-proper-open-projection-mate",
   "worker": "stage1",
-  "summary": "Expanded the proper/open tensor identity into a tensor square for open base change, the (1,0) clopen-projection calculation, and explicit equal transposes under P_p adjoint to R_p. Repeated the calculation intrinsically on the strict-system ringed diagram sites. Reused existing nodes only; kept the statement unchanged.",
-  "blueprint": "Steps 1--3 check the normalized proper/open alpha and its tensor compatibility; steps 4--6 prove the counit-defined gamma identity explicitly; steps 7--8 give the before-evaluation strict-system identity. These realize the composition/refinement/coincidence sentence of fix-prop-projection-formula, which is the recorded blueprint ancestor.",
+  "summary": "Repair of the 2026-10-22 re-split return: extract two independent statement-only arguments, the alpha tensor square (old steps 1–3) and categorical mixed-action mate transfer with explicit common transpose (old steps 4–6). Reuse the existing intrinsic system mate normalization for old step 7; old step 8 is the short system application. Statement and Lean records unchanged. Original eight arguments preserved verbatim in report.",
+  "blueprint": "The composition/refinement/exchange/proper-coincidence sentence of fix-prop-projection-formula is realized by the same alpha-tensor and counit-mate route, with intrinsic diagram-site equality; no unit route changed.",
   "tool_uses": [
    {
-    "node": "lem-cbc-strict-tower-proper-open-calculus",
-    "why": "Supplies the clopen geometry, the prescribed alpha, and the normalized proper/open mate; this is the item’s stipulated geometric input. The item’s unit is a summary remark with no proof steps providing this generic tool."
-   },
-   {
-    "node": "lem-sf-open-tensor-normalization",
-    "why": "Supplies full faithfulness, identity-on-open beta/delta and their diagram-topos analogues used in the alpha tensor square. The item’s unit is a summary remark with no proof steps providing this generic tool."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Supplies natural canonical tensor/pullback comparisons on arbitrary unbounded ringed-site derived categories. The item’s unit is a summary remark with no proof steps providing this generic tool."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "why": "Supplies the canonical tensor/exchange comparisons for the commutative ringed square used to identify the restricted beta tensor square. The item’s unit is a summary remark with no proof steps providing this generic tool."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-projection-mate-exact",
-    "why": "Supplies the general counit-defined projection transformation on unbounded ringed sites, including arbitrary finite constant rings and diagram sites. The item’s unit is a summary remark with no proof steps providing this generic tool."
-   },
-   {
-    "node": "lem-pur-coefficient-system-derived-comparison",
-    "why": "Supplies exact system inverse images with derived right adjoints intrinsically on the unbounded system categories. The item’s unit is a summary remark with no proof steps providing this generic tool."
-   },
-   {
     "node": "lem-sf-integral-compactification-system-realization",
-    "why": "Supplies the stipulated simultaneous system constructions and intrinsic proper/open Gamma; no total-limit realization or equality detection by evaluation is used. The item’s unit is a summary remark with no proof steps providing this generic tool."
+    "why": "Only the unbounded diagram-site operations and intrinsic lambda characterization are used, as in the previous split; the summary unit has no proof steps."
    },
    {
-    "node": "lem-weil-pbc-mate-pasting",
-    "why": "The identification of intrinsic Gamma with the proper mate uses the canonical composite-adjunction mate formula; it is a generic categorical tool and no step of this summary unit supplies it."
+    "node": "lem-sf-semilinear-proper-open-mate-pasting",
+    "why": "Generic intrinsic proper/open mate normalization for arbitrary varying coefficient systems, used to identify the stipulated Gamma from its open adjunct; no unit step supplies this tool."
    }
   ]
  },
  "tool_uses": [
   "lem-cbc-strict-tower-proper-open-calculus",
   "lem-sf-open-tensor-normalization",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-pur-coefficient-system-derived-comparison",
-  "lem-sf-integral-compactification-system-realization",
-  "lem-weil-pbc-mate-pasting"
+  "lem-sf-integral-compactification-system-realization"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NB-286a19c63",
-  "group": "NB",
+  "reviewer": "NT-cc-Q136-3fa0fea94",
+  "group": "Q136",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-286a19c63 (reviewer sub-agent of L); spot-checked: I read the item in full: the unchanged statement, all 8 steps, the unit sk-rem-sf-pf-done (a remark with no steps), the statements of all 10 cited nodes, and how the citer fix-prop-projection-formula uses it (steps 7 and 10). Stacks Tags 0F7B/0F7C/0F7D are at more-etale.tex lines 2460, 2617 and 2676; they are context only, and proof_origin correctly says by: agent. The quoted blueprint sentence is in main-20261015 fix-prop-projection-formula.proof.md:12. Coefficients: alpha and gamma match lem-cbc-strict-tower-proper-open-calculus (clopen s=(k,r), no cartesian hypothesis, same mate formula), and the beta inverse normalizations of that node and lem-sf-open-tensor-normalization agree. Constant finite Lambda in unbounded pro-etale D is fine because pi needs only the general counit formula of lem-weil-pbc-ringed-projection-mate-exact. I recomputed both transposes in Steps 4-5 and they agree. Step 3's alpha-tensor square comes from full faithfulness of b_! and k_!, identity restrictions, and the (1,0) splitting on the clopen decomposition. Step 7 is right: after restriction, the mate of the clopen unit is S_r eps_r o eta_r S_r = 1, so gamma equals Gamma_Q by the intrinsic lambda_Q characterization. Step 8 is right: the system categories are modules on the ringed diagram site, and the open-tensor node covers diagram topoi. One comment, not a fault: Step 2 relies on the pullback tensor comparison being compatible with pullback composition. No node states this separately; the DAG treats it as part of the canonical identifications, which the item statement and the realization node both do explicitly. Edge cases checked: the cartesian case, a noncartesian fold-map example (B = D disjoint union D), zero objects, and identity squares. There are no new nodes. The sibling lem-sf-composition-projection-mate, lem-cbc-proper-open-interchange-coherence and lem-cbc-extension-zero-projection-formula do not duplicate the item, so same_as [] is right. Three kinds of Mathlib search are recorded and none is a match. No SGA source and no cycle. I accept all 8 declared tool_uses, since the unit has no steps. No files changed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-3fa0fea94 (reviewer sub-agent of L); spot-checked: I read the re-split note (released 2026-10-22: 8 steps, 7224 characters) and the base proof in the live clone. The item statement is byte-identical to base. Old steps 1-3 (β square by full faithfulness, the clopen (1,0) calculation, composite-open δ=δ_k, the α tensor square) become new lem-sf-clopen-comparison-tensor-square, equations (1)-(3). Old steps 4-6 (both transposes, no Tor or inversions) become new lem-sf-tensor-square-mate-transfer, an abstract mixed-action transfer with the common transpose K(c)a P_p(d_i). Old step 7 is the statement of existing lem-sf-semilinear-proper-open-mate-pasting, which says the mate of the same α_Q is the J_i-adjunct of the same four-factor λ_Q^{-1}; its proof step 2 is the old triangle-identity argument, so reusing it avoids a duplicate. Old step 8 is assembly step 3. The two new nodes are of comparable size and neither restates the item; the assembly is 1764 characters. I checked both new statements by hand. Node 2's two transposes agree, using only the mate formula, the definition of π, naturality of a, μ_p, d_k and ε_p, and the hypothesis. Node 1 typechecks via P_qP_i=P_bP_p, and the ring data are consistent. Small cases tested: Cartesian square, A empty, the fold B=D⊔D, and identity functors. Item steps match: equation (3) is node 2's hypothesis exactly, node 2's g and π_h equal the item's γ and the def-exchange-projection π, and in the system case the Γ_Q of the realization node and of the pasting node are the same by adjunct uniqueness. Sources verified: Stacks 0F7B lemma-shriek-proper-and-open, 0B56 equation-projection-formula-map, 07A7, 07A4, 0GL1. No upstream duplicates in the snapshot or live clones; the similar nodes (lem-pur-system-clopen-tensor-compatibility, lem-sf-proper-open-tensor-compatibility) cite the item. No cycle, no SGA. Batch-5 check: lem-pod-derived-exact-square-composition, reached through the pasting node, is a generic lemma on exact-functor derived square composition, outside the trace-formula and Poincaré-duality content, so accepted. Tool uses of the realization and pasting nodes (sk-thm-sf-compatibility) are accepted because the unit has no steps. No fixes."
  },
  "lean": {
   "module": "Sheaf.SixFunctors.ProperOpenProjectionMate",
@@ -377,5 +270,26 @@
   "result": "fix",
   "note": "Item module byte-identical (sha 83355444) to the FIXed 210de/a5fe heads; substance re-checked: properOpenAlpha is canonical (ordinaryOpenExtensionBaseChangeIso beta, then the clopen projection of squareLift via unit + rightDerivedLowerStarIsoOfIsClosedRange, then the compositors), gamma = mateEquiv with the published proper adjunctions, pi = rightDerivedLowerStarProjectionMap, delta = inverse of derivedOpenImmersionLowerShriekProjectionIso; the equation's order matches the node; no Cartesian/Tor/bounded hypotheses; the system clause is an equality in System l E D with z.properOpen.gamma before evaluation; 8 steps in the docstrings; statement verbatim; sorry only. F1: the delivered SemilinearSystemModels.lean is stale against live 89b6054c (drops 2 public imports and [-instance], turns the internalHom abbrev into a def). The group rebased (blueprint-index = live but for its header), so the landing's REVERT DEPENDENCY guard that refused the a5fe fix will not fire and the stale text would overwrite live. FIX: fixes/SemilinearSystemModels.lean = live text + only the 4 recorded ScalarData aliases (sha 3a4b9817). nt_compile --json: item vs live dependencies 6.4 s clean; fixed dependency 27.6 s + item 7.2 s clean. MAINTAINER: the item needs neither the dependency edit nor the aliases; the cleanest landing is --revert-nodes def-coef-semilinear-system-models WITHOUT the fix file (revert + fix file = the 00:19 refusal). The delivered dependency record (by Q09) has an inaccurate note; its declarations contain all of NK's."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261026T023342-L-546669",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

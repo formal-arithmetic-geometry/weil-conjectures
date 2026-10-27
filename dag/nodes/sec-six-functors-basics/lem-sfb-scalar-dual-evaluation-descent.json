@@ -1,0 +1,384 @@
+{
+ "id": "lem-sfb-scalar-dual-evaluation-descent",
+ "kind": "statement",
+ "title": "Descent and naturality of scalar evaluation on constant module sheaves",
+ "statement": "Let $R$ be a commutative ring and $(\\mathcal C,J)$ a site small in the chosen module universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology]. Let $B$ be a sheaf of commutative rings with a morphism $\\alpha:\\underline R\\to B$, where underlines denote constant sheaves [def-weil-pbc-constant-sheaf]. For an $R$-module $V$, let $\\underline V$ be its constant module sheaf [def-sf-site-constant-module-functor] and put $C_B(V)=B\\otimes_{\\underline R}\\underline V$, using module sheaves and ordinary sheaf tensor [def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product]. Write $V^*=\\operatorname{Hom}_R(V,R)$ and use internal sheaf Hom [def-pur-sheaf-hom]. In formulas with $r\\in R$ in a section of $B$, $r$ means the image under $\\alpha$ of the constant section $r$.\nFor every $R$-module $V$ there is a unique $B$-linear sheaf morphism\n$$\\beta_V:C_B(V^*)\\longrightarrow\\mathcal Hom_B(C_B(V),B)$$\nsuch that, on every localized site [def-pur-localized-ringed-site] and for all local sections $b,b'$ of $B$ and constant generators $\\phi\\in V^*$, $v\\in V$,\n$$\\beta_V(b\\otimes\\phi)(b'\\otimes v)=bb'\\alpha(\\phi(v)).$$\nThese maps commute with restriction. For every $R$-linear map $f:V\\to W$, with $f^*(\\psi)=\\psi\\circ f$, they satisfy\n$$\\mathcal Hom_B(C_B(f),1_B)\\circ\\beta_W=\\beta_V\\circ C_B(f^*).$$\nTwo sheaf morphisms with the displayed source and target agree if their evaluations on these generators agree after every restriction. No finite generation, projectivity or flatness hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JJ, lemma-dual-perfect-complex, final evaluation comparison; constant-module and scalar-tensor sheafification descent extracted from returned step 4. Explicit agent-written specialization on every localized site."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-sf-site-constant-module-functor",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Use the module-sheafification adjunction to extend an R-linear constant presheaf map along the constant ring sheafification unit. Transport its linearity through the canonical constantModuleHomRingIso, whose comparison carries the ring sheafification unit to the commutative-ring sheafification unit. Next use the proved scalarExtensionLift and its pure-tensor formula, which combine ordinary scalar extension and module sheafification. The resulting map from the actual C_B(M) sends b tensor m to b times the given constant image.",
+   "uses": [
+    "def-sf-site-constant-module-functor",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Maps on restrictions of C_B(M) to any slice are determined by the displayed generators. Lift a section locally through the scalar-extension sheafification unit using its covering image sieve. On each lift, extension-of-scalars hom extensionality reduces equality to tensors 1 tensor x. For an arbitrary constant-module sheaf section x, use the covering image sieve of the constant-module sheafification unit to replace x locally by a constant m. Naturality of both maps and of the tensor unit then reduces equality to the assumed generator equality; separatedness of the target descends it through both covers. This also gives extensionality for sheaf morphisms.",
+   "uses": [
+    "def-sf-site-constant-module-functor",
+    "lem-pc-sites-module-sheafification-interface",
+    "def-pur-localized-ringed-site",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each phi : V -> R, extend the constant presheaf map x |-> alpha(phi(x)) by step 1 to e_phi : C_B(V) -> B. Its value on b tensor x is b alpha(phi(x)). Over U send phi to the restriction of e_phi to C/U. The formula and slice extensionality from step 2 prove additivity and R-linearity of this assignment. Restriction compatibility is immediate from restriction of morphisms. Apply step 1 again, now with target the internal Hom sheaf, to obtain beta_V. Its generator formula is b acting on the restricted e_phi, which evaluates to b|_T b-prime alpha(phi(x)) on every a:T -> U.",
+   "uses": [
+    "def-sf-site-constant-module-functor",
+    "lem-pc-sites-module-sheafification-interface",
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary M,V, compare two morphisms C_B(M) -> Hom_B(C_B(V),B). Apply the sheaf-morphism extensionality of step 2 to the source, then apply its slice extensionality to the resulting internal-Hom sections. Equality of evaluations on all generators is exactly the hypothesis of these two applications. With M=V-dual this proves uniqueness of beta_V and the stated generator test.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of the constant-module sheafification unit and scalarExtension_map_tmul gives C_B(f)(b tensor x)=b tensor f(x), and the same formula for the dual map. Evaluate both composites of the claimed naturality identity on b tensor psi and then b-prime tensor x over any slice. Their values are b restricted to T times b-prime times alpha(psi(f(x))). Apply step 4 with M=W-dual to deduce equality. No finiteness, flatness or projectivity is used.",
+   "uses": [
+    "def-sf-site-constant-module-functor",
+    "def-pur-sheaf-hom",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-site-constant-module-functor",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-sp-scalar-extension-binary-coherence",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "B6: direct iterated universal-property proof using Tag 03CY and scalar-extension tensor adjunction (03EK), then restriction of global evaluation morphisms into the internal Hom (04TT). Local generator extensionality uses the two covering image sieves. This is the scalar evaluation specialization of sites-cohomology Tag 08JJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For any ordinary R module V on a small ringed site, the formula beta(b tensor phi)(b' tensor v)=bb'phi(v) descends uniquely through constant sheafification and sheaf tensor and is contravariantly natural in V",
+   "results": {
+    "top": [],
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A balanced scalar evaluation pairing on constant modules extends uniquely through module sheafification to an internal Hom sheaf morphism on a ringed site",
+   "results": {
+    "top": [
+     "SheafOfModules.unitHomEquiv",
+     "PresheafOfModules.sheafificationHomEquiv",
+     "PresheafOfModules.sheafifyHomEquiv",
+     "PresheafOfModules.sheafifyHomEquiv'",
+     "PresheafOfModules.unitHomEquiv",
+     "SheafOfModules.unitHomEquiv_comp_apply",
+     "PresheafOfModules.Sheafify.SMulCandidate.mk'",
+     "SheafOfModules.unitHomEquiv_symm_comp"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: sheafificationHomEquiv is the general sheafification adjunction, not the normalized constant-module tensor evaluation or its naturality; free/global-section evaluation results do not give internal sheaf dual descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a sheaf of algebras B over the constant ring R the natural evaluation map B tensor constant Hom_R(V,R) to internal sheaf Hom_B(B tensor constant V,B) is an isomorphism when V is finite projective",
+   "results": {
+    "top": [
+     "FGModuleCat.FGModuleCatEvaluation",
+     "CategoryTheory.sheafSectionsNatIsoEvaluation",
+     "SheafOfModules.unitHomEquiv",
+     "AlgebraicGeometry.StructureSheaf.globalSectionsIso",
+     "SheafOfModules.evaluation",
+     "CategoryTheory.evalEquiv_apply",
+     "CategoryTheory.Sheaf.ΓHomEquiv",
+     "SheafOfModules.freeHomEquiv"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: sheafificationHomEquiv is the general sheafification adjunction, not the normalized constant-module tensor evaluation or its naturality; free/global-section evaluation results do not give internal sheaf dual descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.homObj",
+   "results": {
+    "top": [],
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'SheafOfModules.homObj'",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: sheafificationHomEquiv is the general sheafification adjunction, not the normalized constant-module tensor evaluation or its naturality; free/global-section evaluation results do not give internal sheaf dual descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafificationHomEquiv",
+   "results": {
+    "top": [
+     "PresheafOfModules.sheafificationHomEquiv",
+     "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
+     "PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+     "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv",
+     "PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm"
+    ],
+    "n_hits": 5,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: sheafificationHomEquiv is the general sheafification adjunction, not the normalized constant-module tensor evaluation or its naturality; free/global-section evaluation results do not give internal sheaf dual descent."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation|dual|homObj",
+   "results": {
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean"
+    ],
+    "n_hits": 6,
+    "note": "",
+    "sub": "Algebra/Category/ModuleCat/Sheaf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: sheafificationHomEquiv is the general sheafification adjunction, not the normalized constant-module tensor evaluation or its naturality; free/global-section evaluation results do not give internal sheaf dual descent."
+  },
+  {
+   "tool": "grep",
+   "query": "dual|internalHom|internal.hom",
+   "results": {
+    "top": [],
+    "n_hits": 0,
+    "note": "",
+    "sub": "Algebra/Category/ModuleCat/Sheaf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: sheafificationHomEquiv is the general sheafification adjunction, not the normalized constant-module tensor evaluation or its naturality; free/global-section evaluation results do not give internal sheaf dual descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary module V and a sheaf of R algebras B, construct the natural evaluation morphism B tensor constant dual V to internal sheaf Hom of B tensor constant V into B",
+   "results": {
+    "top": [
+     "SheafOfModules.evaluation",
+     "ModuleCat.ihom_ev_app",
+     "ModuleCat.ihom_coev_app",
+     "LightCondensed.ihomPoints",
+     "ModuleCat.tildeInModuleCat",
+     "PresheafOfModules.Monoidal.tensorObj",
+     "PresheafOfModules.Monoidal.tensorObjMap",
+     "ModuleCat.Tilde.toOpen"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern objectwise tensor, evaluation of sheaves at an object, or ordinary module evaluation; none states this scalar internal-Hom descent on an arbitrary site."
+  },
+  {
+   "tool": "grep",
+   "query": "dual|internalHom|tensor.*[Hh]om|[Ee]valuation",
+   "results": {
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean"
+    ],
+    "n_hits": 6,
+    "note": "",
+    "sub": "Algebra/Category/ModuleCat/Sheaf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern objectwise tensor, evaluation of sheaves at an object, or ordinary module evaluation; none states this scalar internal-Hom descent on an arbitrary site."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafificationHomEquiv",
+   "results": {
+    "top": [
+     "PresheafOfModules.sheafificationHomEquiv",
+     "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
+     "PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+     "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv",
+     "PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm"
+    ],
+    "n_hits": 5,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: The module sheafification adjunction supplies one ingredient, not the scalar evaluation or slice naturality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of the balanced pairing on scalar extended constant modules induces a unique natural morphism to the internal dual sheaf",
+   "results": {
+    "top": [],
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An R linear pairing V dual times V to R extends to a B bilinear pairing between B tensor constant V dual and B tensor constant V on a ringed site",
+   "results": {
+    "top": [
+     "PresheafOfModules.Monoidal.tensorObj",
+     "Module.Dual.baseChange_apply_tmul",
+     "Module.Dual.baseChange",
+     "PresheafOfModules.Monoidal.tensorObjMap",
+     "PresheafOfModules.monoidalCategory",
+     "PresheafOfModules.Monoidal.tensorHom",
+     "PresheafOfModules.monoidalCategoryStruct",
+     "PresheafOfModules.Monoidal.tensorObj_obj"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Module.Dual.baseChange is ordinary algebra only; it does not descend constant module sheafifications or construct the internal sheaf Hom morphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scalar-perfect-dual-realization",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Paragraph 2 final sentence, coefficient dual of a locally constant perfect complex: descent and naturality of scalar evaluation before finite-projective invertibility.",
+   "via": [
+    "lem-sfb-scalar-perfect-dual-realization",
+    "lem-sfb-internal-hom-dual-constructible-models"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-scalar-dual-evaluation-descent",
+  "worker": "stage1",
+  "summary": "Q60 gives the raw B-module tensor presheaves, the balanced evaluation pairing, its unique bilinear sheafification, explicit slice-Hom currying, generator extensionality, and contravariant naturality. Reuses the existing general descent nodes, with no new nodes or additional hypotheses. Checked zero rings/modules, arbitrary nonflat scalar extension and infinite modules. No exact upstream project declaration was found.",
+  "blueprint": "Realizes the coefficient-dual evaluation implicit in det-thm-sf-ctf-stability-internal-hom, locally constant perfect-complex clause; fills the descent ingredient of lem-sfb-scalar-perfect-dual-realization step 3. The current blueprint file contains the displayed perfect-dual isomorphism, not a proof of scalar descent.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Generic module tensor/sheafification comparison identifies the raw scalar presheaf with the specified scalar extension; this unit has no replacement for this sheaf-theoretic tool."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-interface",
+    "why": "Generic module sheafification adjunction and uniqueness of the extended action; needed for the B-module structure on the raw-tensor sheafification."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic bilinear sheafification extension, including uniqueness, supplies descent rather than any finite-projective duality theorem."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic normalized ordinary tensor comparison on slices identifies the local generators; no derived or constructibility assertion is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-module-sheafification-interface"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-cf38725ca",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-cf38725ca (reviewer sub-agent of L); spot-checked: Read the item's statement and all 5 steps in full, the statements of every cited node, and Stacks 08JJ (sites-cohomology lemma-dual-perfect-complex, line 13048) together with the tags 03CY/0GMW/03EL/04TT cited by its nodes. The split has 0 new nodes. The statement is identical to the live node, which is still unsplit, so no other group has superseded it; there is no re-split note and no SGA citation. Step 1 applies the 'in particular' clause of the tensor-sheafification lemma with O = constant presheaf R, G = B and F = constant presheaf V, giving P_V^# ≅ B⊗_{R̲}V̲. B-linearity holds by the interface lemma's uniqueness of the extended action. Step 2: the pairing bb'α(φ(v)) is R-balanced in both variables, B-bilinear and compatible with restriction; bilinear extension applies with O = B. Steps 3–4: currying into the internal Hom, and uniqueness via p_T(s,t) = γ_T(s)_id(t); both are correct. One fault: step 5 applies step 4's equality test to maps C_B(W*) → Hom_B(C_B(V),B), but step 4 proves it only for the source C_B(V*). FIX: step 4 is restated for any R-module M with p and the restriction identity written out, and step 5 now cites it with M = W*. Statement and uses are unchanged. Edge cases checked: V = 0, the zero ring, empty covers, infinite V, and R = ℤ, V = ℤ/2 with B = (ℤ/2)̲, where β = 0 and is not claimed to be an isomorphism. No duplicate: lem-ag-dual-tensor-hom-comparison, lem-pod-finite-projective-tensor-hom and lem-sf-etale-finite-projective-pullback-hom have different settings or assertions, and the sibling inverse lemma complements this item. The parent lem-sfb-scalar-perfect-dual-realization step 3 uses exactly the formula and naturality supplied here. Accepted tool_uses: the generic module-sheaf tools lem-pc-sites-module-sheafification-tensor, -interface and -bilinear-extension, and lem-sfb-localized-site-tensor-restriction.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarDualEvaluationDescent",
+  "declaration": "SheafOfModules.exists_scalarDualEvaluationDescent",
+  "declarations": [
+   "SheafOfModules.scalarConstantRealization",
+   "SheafOfModules.scalarConstantRealizationMap",
+   "SheafOfModules.scalarConstantGenerator",
+   "SheafOfModules.scalarDualEvaluationTarget",
+   "SheafOfModules.ScalarDualEvaluationFormula",
+   "SheafOfModules.exists_scalarDualEvaluationDescent"
+  ],
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/ScalarDualEvaluationDescent.lean",
+  "statement": "theorem exists_scalarDualEvaluationDescent : (∀ V : ModuleCat.{max u v} R, ∃! β : scalarConstantRealization J R B α (ModuleCat.of R (V →ₗ[R] R)) ⟶ scalarDualEvaluationTarget J R B α V, ScalarDualEvaluationFormula J R B α V β) ∧ (∀ (V W : ModuleCat.{max u v} R) (f : V ⟶ W) (βV : scalarConstantRealization J R B α (ModuleCat.of R (V →ₗ[R] R)) ⟶ scalarDualEvaluationTarget J R B α V) (βW : scalarConstantRealization J R B α (ModuleCat.of R (W →ₗ[R] R)) ⟶ scalarDualEvaluationTarget J R B α W), ScalarDualEvaluationFormula J R B α V βV → ScalarDualEvaluationFormula J R B α W βW → βW ≫ homObjMap (R := B) (scalarConstantRealizationMap J R B α f) (𝟙 (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))) = scalarConstantRealizationMap J R B α (ModuleCat.ofHom f.hom.dualMap) ≫ βV) ∧ (∀ (V : ModuleCat.{max u v} R) (γ γ' : scalarConstantRealization J R B α (ModuleCat.of R (V →ₗ[R] R)) ⟶ scalarDualEvaluationTarget J R B α V), (∀ (U T : C) (a : T ⟶ U) (b : B.obj.obj (op U)) (b' : B.obj.obj (op T)) (φ : V →ₗ[R] R) (x : V), (((γ.val.app (op U)) (scalarConstantGenerator J R B α (ModuleCat.of R (V →ₗ[R] R)) (op U) b φ)).app (op (Over.mk a))) (scalarConstantGenerator J R B α V (op T) b' x) = (((γ'.val.app (op U)) (scalarConstantGenerator J R B α (ModuleCat.of R (V →ₗ[R] R)) (op U) b φ)).app (op (Over.mk a))) (scalarConstantGenerator J R B α V (op T) b' x)) → γ = γ')",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the recorded ordinary change of rings, constant-module functor (via its existing canonical commutative-coefficient transport), internal sheaf Hom and sheafification-unit generators. The theorem states unique descent, naturality, and generator extensionality; the formula quantifies over all arrows of every slice. No statement correction or extra mathematical hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9bda3d6e7",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Snapshot changes only the item's lean field; statement matches the file verbatim; 6 declarations listed, one sorry. Every hypothesis and conclusion clause matches the node: R, site and B with α from the recorded constant sheaf; C_B(V) is the existing changeOfRingsOfUniverses of the recorded constant-module functor, moved by the canonical comparison constantModuleHomRingIso; target homObj into unit; generators are canonical sheafification units; formula at every a : T ⟶ U (a = id gives bb'α(φ(v))); ∃!, naturality via homObjMap/dualMap, and generator test for arbitrary γ, γ'. No finiteness, projectivity or flatness assumption; universes u, v not identified. Edge cases V=0, zero ring, infinite V, Z/2, empty site all hold. No hollow definition; docstrings carry source places, blueprint tag and all 5 steps. Nothing compiled because no file was changed. Advisories: helpers owned by landed existing:true def nodes def-sfb-constant-module-coefficient-transport and def-sfb-scalar-extension-pure-tensor-section are not in stmt_deps (cannot be fixed at stage 2); the general scalarExtensionDualMap (lem-sp-scalar-extension-dual-evaluation) gives a stage-3 route and is not a duplicate; the parent's Lean builds B ⊗ V̲ differently in one universe and needs a bridge at stage 3."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261023T102427-L-2898169",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

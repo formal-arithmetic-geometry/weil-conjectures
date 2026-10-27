@@ -282,5 +282,63 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-pe-wc-rings",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R$ be w-contractible [det-pe-wlocal-strict-contractible] and let $I\\subset R$ be an\nideal with $V(I)=(\\operatorname{Spec}R)^c$.\n\n1. Let $R\\to S$ be faithfully flat and ind-étale, with $\\operatorname{Spec}S$ w-local and\n   with closed points exactly the points of $V(IS)$. Then $R\\to S$ has an $R$-algebra\n   retraction $S\\to R$.\n2. Every faithfully flat ind-étale ring map $R\\to B$ has an $R$-algebra retraction\n   $B\\to R$: apply 1 to $S=B'$ of [det-pe-wc-rings-w-local-refinement] and compose with\n   $B\\to B'$.",
+  "proof": [
+   {
+    "text": "*1. Local rings.* Every prime $\\mathfrak q$ of $S$ lies in a maximal ideal $\\mathfrak n$,\nwhich is a closed point and so contains $IS$; then $\\mathfrak n\\cap R\\supset I$ is maximal,\nand $R_{\\mathfrak n\\cap R}$ is strictly henselian since $R$ is w-strictly local. The map\n$R\\to S$ is weakly étale ([lem-weil-pbc-ind-etale-stability]), so\n$R_{\\mathfrak n\\cap R}\\to S_{\\mathfrak n}$ is an isomorphism by [det-pe-wc-rings-local-iso],\nand $R_{\\mathfrak q\\cap R}\\to S_{\\mathfrak q}$ is an isomorphism as a localization of it. In\nparticular closed points of $\\operatorname{Spec}S$ lie over closed points of\n$\\operatorname{Spec}R$.",
+    "uses": [
+     "lem-weil-pbc-ind-etale-stability",
+     "det-pe-wc-rings-local-iso"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*1. Choice of components.* By [det-pe-wlocal-components] the closed point sets of\n$\\operatorname{Spec}S$ and $\\operatorname{Spec}R$ are profinite and homeomorphic to the\ncomponent spaces $\\pi_0(\\operatorname{Spec}S)$ and $\\pi_0(\\operatorname{Spec}R)$; the latter is\nextremally disconnected because $R$ is w-contractible. The induced map\n$\\pi_0(\\operatorname{Spec}S)\\to\\pi_0(\\operatorname{Spec}R)$ is continuous and surjective: a\nmaximal ideal $\\mathfrak m$ of $R$ is the image of a prime of $S$ by faithful flatness, whose\nclosed specialization lies over $\\mathfrak m$. By [det-pe-stonean-projective]\n(1 $\\Rightarrow$ 3) it has a continuous section $\\sigma$. Its image $T=\\sigma(\\pi_0(\n\\operatorname{Spec}R))$ is compact, hence closed, and maps bijectively onto\n$\\pi_0(\\operatorname{Spec}R)$.",
+    "uses": [
+     "det-pe-wlocal-components",
+     "det-pe-stonean-projective"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*1. Restriction to $T$.* Let $S_T=\\varinjlim_e S_e$, the colimit over the idempotents $e$ of $S$\nwhose clopen subset contains the preimage of $T$ in $\\operatorname{Spec}S$. Localizing at an\nidempotent is a quotient, so $S\\to S_T$ is surjective, $\\operatorname{Spec}S_T$ is the\npreimage of $T$ (an intersection of clopen subsets, as $T$ is closed in the profinite space\n$\\pi_0(\\operatorname{Spec}S)$), and local rings do not change. Thus $R\\to S_T$ identifies\nlocal rings, $\\operatorname{Spec}S_T$ is w-local (a closed union of components of a w-local\nspace), closed points of $\\operatorname{Spec}S_T$ lie over closed points of\n$\\operatorname{Spec}R$, and $\\pi_0(\\operatorname{Spec}S_T)=T\\to\\pi_0(\\operatorname{Spec}R)$ is\nbijective.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*1. $R\\to S_T$ is an isomorphism.* Each component of $\\operatorname{Spec}S_T$ consists of the\ngeneralizations of its closed point $t$, i.e. is the spectrum of $(S_T)_t\\cong R_{\\mathfrak m}$\nwith $\\mathfrak m$ the image of $t$, and maps bijectively onto the component of $\\mathfrak m$\n([det-pe-wlocal-components]). As components correspond bijectively,\n$\\operatorname{Spec}S_T\\to\\operatorname{Spec}R$ is bijective, with isomorphisms on local\nrings. It suffices that $R_{\\mathfrak p}\\to S_T\\otimes_RR_{\\mathfrak p}$ is an isomorphism for\nevery prime $\\mathfrak p$ of $R$. Let $\\mathfrak q$ be the unique prime of $S_T$ over\n$\\mathfrak p$. The primes of $S_T\\otimes_RR_{\\mathfrak p}$ are the primes $\\mathfrak q'$ of\n$S_T$ with $\\mathfrak q'\\cap R\\subset\\mathfrak p$; going down for the flat map $R\\to S$\nrestricted to the union of components $\\operatorname{Spec}S_T$ (which is stable under\ngeneralization) gives a prime $\\mathfrak q''\\subset\\mathfrak q$ of $S_T$ with\n$\\mathfrak q''\\cap R=\\mathfrak q'\\cap R$, and by injectivity $\\mathfrak q''=\\mathfrak q'$. Hence\n$S_T\\otimes_RR_{\\mathfrak p}$ is local with maximal ideal $\\mathfrak q$, equals\n$(S_T)_{\\mathfrak q}$, and $R_{\\mathfrak p}\\to(S_T)_{\\mathfrak q}$ is an isomorphism. The\ncomposite $S\\to S_T\\xrightarrow{\\ \\sim\\ }R$ is the required retraction.",
+    "uses": [
+     "det-pe-wlocal-components"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*2.* By [det-pe-wc-rings-w-local-refinement], $S=B'$ satisfies the hypotheses of 1, so it has\nan $R$-algebra retraction $B'\\to R$; precomposing with $B\\to B'$ gives the retraction of\n$R\\to B$.",
+    "uses": [
+     "det-pe-wc-rings-w-local-refinement"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ }
 }

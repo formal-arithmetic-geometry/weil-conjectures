@@ -1,0 +1,341 @@
+{
+ "id": "lem-trf-fppf-family-coproduct-descent-encoding",
+ "kind": "statement",
+ "title": "Coproduct encoding and fpqc cover for family scheme descent",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], let $I$ be a set, and let $\\{f_i:T_i\\to T\\}_{i\\in I}$ be an fppf covering [def-pc-fppf-site]. Fix a family scheme descent datum $(V_i\\to T_i,\\phi_{ij})$ [def-trf-scheme-cover-descent-datum], where $\\phi_{ij}:V_i\\times_TT_j\\simeq T_i\\times_TV_j$ satisfies the triple-overlap cocycle. Form $A=\\coprod_iT_i$, $Z=\\coprod_iV_i$ and the induced maps $f:A\\to T$, $v:Z\\to A$ [lem-weil-pbc-scheme-coproduct-family]. Fibre products are as in [def-pc-fibre-product], with all families and coproducts in the fixed universes of [def-weil-size-convention]. There is a singleton descent datum $D$ on $v$ relative to $f$ [def-pd-descent-datum] with the following properties. The canonical identifications\n$$A\\times_TA\\cong\\coprod_{i,j}(T_i\\times_TT_j),\\quad Z\\times_TA\\cong\\coprod_{i,j}(V_i\\times_TT_j),\\quad A\\times_TZ\\cong\\coprod_{i,j}(T_i\\times_TV_j)$$\nand their triple-product versions identify the transport of $D$ with $\\coprod_{i,j}\\phi_{ij}$ and its cocycle with the given component cocycles. Restricting $D$ to the coproduct components recovers the original family datum. The singleton $\\{f:A\\to T\\}$ is an fpqc covering [def-weil-pbc-fpqc-covering], also when $I$ is infinite. For every $T$-scheme $W$, there exists an isomorphism $W\\times_TA\\simeq Z$ over $A$ identifying the canonical datum with $D$ if and only if there exist isomorphisms $W\\times_TT_i\\simeq V_i$ compatible with all $\\phi_{ij}$. Thus the family datum is effective if and only if $D$ is effective; the same scheme $W/T$ realizes both. The assertion includes the empty covering of the empty scheme.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 023X, lemma-family-is-one, construction and restriction to components; the fpqc assertion uses Topologies Tag 021P, lemma-fppf-affine, with Tag 022B, definition-fpqc-covering."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-trf-scheme-cover-descent-datum",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-pc-fibre-product",
+  "def-weil-size-convention",
+  "def-pd-descent-datum",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof": [
+  {
+   "text": "For a family with an existing coproduct, its nonempty support is small: choose a point in each nonempty summand; coprojections inject these chosen points into the coproduct. Injectivity follows by mapping the coproduct to its disjoint binary double, sending one summand left and all the others right. Restrict the universal cofan to this small support; empty summands have unique outgoing maps. The small-family scheme coproduct theorem then gives open coprojections, disjointness and coverage for the original family [lem-weil-pbc-scheme-coproduct-family]. This also applies to every colimiting cofan by its unique comparison isomorphism.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back an arbitrary colimiting scheme cofan. Its legs remain open immersions and their ranges are the inverse images of the old ranges, by the open fibre-product geometry [lem-weil-pbc-open-fibre-product]. They are disjoint and cover. Restriction to the small nonempty support and the scheme disjoint-open-cofan theorem show that this is again a colimit. Thus scheme coproduct cofans are universal. Apply Mathlib IsUniversalColimit.nonempty_isColimit_prod_of_pullbackCone to the two canonical coproduct cofans to obtain the canonical pair cofan. Apply it again to this pair cofan and the third family to obtain the triple cofan. The legs are exactly the specified pullback.map morphisms [def-pc-fibre-product].",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-open-fibre-product",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert the represented local sheaf points to morphisms over each component and conjugate the given transitions to localTransport [def-trf-scheme-cover-descent-datum]. Its identity and cocycle are the corresponding descent-data laws; its naturality follows from pullHom_hom, the transition naturality square and naturality of the representing bijections. On each component V_i times_T U_j, apply localTransport to the first projection and include its result in V_j. The pair cofan from the preceding step glues these morphisms into a single familyAction. Its composite with Z to A is the second projection, by coproduct uniqueness and the local transport structure equation.",
+   "uses": [
+    "def-trf-scheme-cover-descent-datum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a point x over a:B to A and b:B to A with equal image in T, define transport by the lift (x,b) into Z times_T A followed by familyAction. Pullback universality gives naturality. A map to a coproduct locally factors through its components; iterating the universal cofan argument gives jointly epimorphic decompositions for two or three such maps. The square over a component of A is Cartesian because the coprojections are open immersions and their disjoint ranges show that the inverse image of U_i is V_i. Thus a local restriction of x lifts uniquely to V_i. On such components the assembled transport is exactly localTransport, by its naturality and the cofan desc equation. Its identity and cocycle now follow from the corresponding local laws, using the jointly epimorphic decompositions. This constructs D [def-pd-descent-datum] and proves its stated component restriction equation, including the specified represented-point conventions.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-trf-scheme-cover-descent-datum",
+    "def-pd-descent-datum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coprojections form an open cover of A even when the original index type is not small, by the support argument above. Flatness [def-weil-flat-morphism] and local finite presentation are Zariski local at source, so the equations iota_i followed by Sigma.desc f = f_i and the fppf hypotheses imply both properties of Sigma.desc f. Joint surjectivity is immediate by including a preimage in its summand. Thus the singleton is itself fppf [def-pc-fppf-site]; Mathlib Scheme.fppfPrecoverage_le_fpqcPrecoverage gives its fpqc membership [def-weil-pbc-fpqc-covering]. No finite affine refinement lemma is needed.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-flat-morphism",
+    "def-pc-fppf-site",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix W/T. Restrict q:Z to W along the coprojections; the component square is Cartesian by pasting its Cartesian inclusion square with the global square. Conversely form q by Sigma.desc of the local q_i. Mathlib IsUniversalColimit.isPullback_of_isColimit_left, applied to the universal cofan of the U_i and the colimiting cofan of the V_i, proves the global square Cartesian. Global invariance implies local invariance by the represented component equation. Conversely, restrict two test maps and a point to their component decomposition; the transport restriction formula and the local invariance equation give global invariance by coproduct uniqueness. This proves the fixed-W equivalence. Existentially quantify W and unfold the two geometric effectivity definitions [def-trf-scheme-cover-descent-datum, def-pd-descent-datum]. Empty index types and empty summands need no extra case: the support constructions use initiality of empty schemes and all cofan universal properties, covers and equality tests remain valid.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-trf-scheme-cover-descent-datum",
+    "def-pd-descent-datum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-open-fibre-product",
+  "def-pc-fibre-product",
+  "def-trf-scheme-cover-descent-datum",
+  "def-pd-descent-datum",
+  "def-weil-flat-morphism",
+  "def-pc-fppf-site",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V6",
+  "date": "2026-10-23",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 023X, lemma-family-is-one; formalized by universal scheme cofans and represented-point transports. The fpqc clause uses Mathlib Scheme.fppfPrecoverage_le_fpqcPrecoverage after establishing that the coproduct singleton is fppf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descent data for an fppf covering family correspond to descent data for the disjoint union morphism, preserving effectivity, and that morphism is an fpqc cover",
+   "results": "{\"t\": \"2026-10-22T06:06:23Z\", \"tool\": \"leanfinder\", \"query\": \"Descent data for an fppf covering family correspond to descent data for the disjoint union morphism, preserving effectivity, and that morphism is an fpqc cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"CategoryTheory.Pseudofunctor.DescentData.isEquivalence_toDescentData_iff_of_sieve_eq\", \"CategoryTheory.Pseudofunctor.DescentData.exists_equivalence_of_sieve_eq\", \"CategoryTheory.Pseudofunctor.DescentData.nonempty_fullyFaithful_toDescentData_iff_of_sieve_eq\", \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.bijective_toDescentData_map_iff\", \"CategoryTheory.coherentTopology.exists_effectiveEpiFamily_iff_mem_induced\", \"CategoryTheory.Pseudofunctor.isStackFor_iff\"], \"digest\": \"7ccedefe3c93adce\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general pseudofunctor descent assumes equal generated sieves or a stack; a family and its coproduct need not generate equal sieves. Scheme gluing and fppf-to-fpqc inclusion do not construct the scheme descent encoding or its compatibility with realizations in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DescentData\"",
+   "results": "{\"t\": \"2026-10-22T06:06:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"DescentData\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData\", \"CategoryTheory.Pseudofunctor.DescentData.instCategory\", \"CategoryTheory.Pseudofunctor.DescentData.Hom\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctor\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorIdIso\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctor_obj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence\"], \"digest\": \"7e926cccd8f606db\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general pseudofunctor descent assumes equal generated sieves or a stack; a family and its coproduct need not generate equal sieves. Scheme gluing and fppf-to-fpqc inclusion do not construct the scheme descent encoding or its compatibility with realizations in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*(coprod|sigma)|family.*(singleton|isOne)|coprod.*fpqc",
+   "results": "{\"t\": \"2026-10-22T06:06:10Z\", \"tool\": \"grep\", \"query\": \"descent.*(coprod|sigma)|family.*(singleton|isOne)|coprod.*fpqc\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general pseudofunctor descent assumes equal generated sieves or a stack; a family and its coproduct need not generate equal sieves. Scheme gluing and fppf-to-fpqc inclusion do not construct the scheme descent encoding or its compatibility with realizations in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent data of schemes for a covering family are equivalent to descent data for its coproduct and the fppf coproduct is an fpqc cover",
+   "results": "{\"t\": \"2026-10-22T06:06:11Z\", \"tool\": \"leansearch\", \"query\": \"Descent data of schemes for a covering family are equivalent to descent data for its coproduct and the fppf coproduct is an fpqc cover\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schemes over a disjoint union split into their open and closed components, and gluing overlap isomorphisms turns family scheme descent data into a singleton datum without assuming effectivity",
+   "results": "{\"t\": \"2026-10-22T06:07:11Z\", \"tool\": \"leanfinder\", \"query\": \"Schemes over a disjoint union split into their open and closed components, and gluing overlap isomorphisms turns family scheme descent data into a singleton datum without assuming effectivity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.GlueData.toGlueData\", \"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued\", \"AlgebraicGeometry.Scheme.Cover.fromGlued\", \"AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"AlgebraicGeometry.Scheme.Cover.glueMorphisms\"], \"digest\": \"2ed4e9d79cde9696\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general pseudofunctor descent assumes equal generated sieves or a stack; a family and its coproduct need not generate equal sieves. Scheme gluing and fppf-to-fpqc inclusion do not construct the scheme descent encoding or its compatibility with realizations in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_equivalence_of_sieve_eq|isEquivalence_toDescentData_iff_of_sieve_eq",
+   "results": "{\"t\": \"2026-10-22T06:06:59Z\", \"tool\": \"grep\", \"query\": \"exists_equivalence_of_sieve_eq|isEquivalence_toDescentData_iff_of_sieve_eq\", \"sub\": \"CategoryTheory/Sites/Descent\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\"], \"digest\": \"dbfc1f3e27f8e2f3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general pseudofunctor descent assumes equal generated sieves or a stack; a family and its coproduct need not generate equal sieves. Scheme gluing and fppf-to-fpqc inclusion do not construct the scheme descent encoding or its compatibility with realizations in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "fppfPrecoverage_le_fpqcPrecoverage|singleton_mem_fppfPrecoverage",
+   "results": "{\"t\": \"2026-10-22T06:06:59Z\", \"tool\": \"grep\", \"query\": \"fppfPrecoverage_le_fpqcPrecoverage|singleton_mem_fppfPrecoverage\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\"], \"digest\": \"14d654d4a73a7d88\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general pseudofunctor descent assumes equal generated sieves or a stack; a family and its coproduct need not generate equal sieves. Scheme gluing and fppf-to-fpqc inclusion do not construct the scheme descent encoding or its compatibility with realizations in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*(coprod|sigma)|coprod.*descent|disjoint.*descent",
+   "results": "{\"t\": \"2026-10-22T07:05:24Z\", \"tool\": \"grep\", \"query\": \"descent.*(coprod|sigma)|coprod.*descent|disjoint.*descent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the source hits provide finite extensive coproducts, disjoint open coprojections, or ordinary gluing; arbitrary-family distribution is proved in Step 1 from existing open-fibre-product and gluing nodes. None states this scheme family descent encoding and realization compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Family scheme descent data can be encoded over the coproduct covering morphism",
+   "results": "{\"t\": \"2026-10-22T07:05:25Z\", \"tool\": \"leansearch\", \"query\": \"Family scheme descent data can be encoded over the coproduct covering morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData.ofObj\", \"CategoryTheory.EffectiveEpiFamily.desc\", \"CategoryTheory.EffectiveEpiFamilyStruct.desc\", \"CategoryTheory.instEffectiveEpiDescOfEffectiveEpiFamily\", \"CategoryTheory.Pseudofunctor.DescentData.mk\", \"AlgebraicGeometry.Surjective.sigmaDesc_of_union_range_eq_univ\", \"CategoryTheory.Pseudofunctor.DescentData\", \"AlgebraicGeometry.Scheme.Cover.sigma\"], \"digest\": \"b4532b451506e5e1\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the source hits provide finite extensive coproducts, disjoint open coprojections, or ordinary gluing; arbitrary-family distribution is proved in Step 1 from existing open-fibre-product and gluing nodes. None states this scheme family descent encoding and realization compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Family descent data for schemes correspond to singleton descent data over the disjoint union preserving the same realizations",
+   "results": "{\"t\": \"2026-10-22T07:05:36Z\", \"tool\": \"leanfinder\", \"query\": \"Family descent data for schemes correspond to singleton descent data over the disjoint union preserving the same realizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData\", \"CategoryTheory.Pseudofunctor.DescentData.ofObj\", \"CategoryTheory.Pseudofunctor.DescentData.obj\", \"CategoryTheory.Pseudofunctor.toDescentData\", \"CategoryTheory.Pseudofunctor.toDescentData_obj\", \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"CategoryTheory.Pseudofunctor.DescentData.iso\", \"CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv\"], \"digest\": \"fa3c955f9bf29847\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: generic pseudofunctor descent definitions and equal-generated-sieve equivalences do not identify scheme descent along a family with descent along its coproduct. The sieves need not be equal."
+  },
+  {
+   "tool": "grep",
+   "query": "sigma.*[Pp]ullback|[Pp]ullback.*[Ss]igma|[Uu]niversalColimits|[Pp]ullback.*[Cc]oprod|[Cc]oprod.*[Pp]ullback",
+   "results": "{\"t\": \"2026-10-22T07:05:54Z\", \"tool\": \"grep\", \"query\": \"sigma.*[Pp]ullback|[Pp]ullback.*[Ss]igma|[Uu]niversalColimits|[Pp]ullback.*[Cc]oprod|[Cc]oprod.*[Pp]ullback\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"764cd7bb5724082f\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the source hits provide finite extensive coproducts, disjoint open coprojections, or ordinary gluing; arbitrary-family distribution is proved in Step 1 from existing open-fibre-product and gluing nodes. None states this scheme family descent encoding and realization compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of schemes preserves arbitrary coproducts indexed by a small type",
+   "results": "{\"t\": \"2026-10-22T07:05:55Z\", \"tool\": \"leansearch\", \"query\": \"Pullback of schemes preserves arbitrary coproducts indexed by a small type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"AlgebraicGeometry.isPullback_inl_inl_coprodMap\", \"AlgebraicGeometry.isPullback_inr_inr_coprodMap\", \"AlgebraicGeometry.Scheme.Pullback.instHasPullbacks\", \"AlgebraicGeometry.Scheme.Pullback.instHasPullback\", \"AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion\", \"AlgebraicGeometry.instFinitaryExtensiveScheme\", \"AlgebraicGeometry.Scheme.Pullback.affine_hasPullback\"], \"digest\": \"59a532bad30950bd\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the source hits provide finite extensive coproducts, disjoint open coprojections, or ordinary gluing; arbitrary-family distribution is proved in Step 1 from existing open-fibre-product and gluing nodes. None states this scheme family descent encoding and realization compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesColimitsOfShape\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T07:05:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"PreservesColimitsOfShape\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the source hits provide finite extensive coproducts, disjoint open coprojections, or ordinary gluing; arbitrary-family distribution is proved in Step 1 from existing open-fibre-product and gluing nodes. None states this scheme family descent encoding and realization compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of an arbitrary small coproduct of schemes is the coproduct of the base changes with the canonical projections",
+   "results": "{\"t\": \"2026-10-22T07:06:05Z\", \"tool\": \"leanfinder\", \"query\": \"Base change of an arbitrary small coproduct of schemes is the coproduct of the base changes with the canonical projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_inr_inr_coprodMap\", \"AlgebraicGeometry.isPullback_inl_inl_coprodMap\", \"AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall\", \"AlgebraicGeometry.instMonoCoprodScheme\", \"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"AlgebraicGeometry.coprodIsoSigma\", \"AlgebraicGeometry.coprodMk\", \"AlgebraicGeometry.instPreservesColimitsOfShapeOppositeCommRingCatSchemeDiscreteWalkingPairSpec\"], \"digest\": \"5290c5c7e1dde105\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the source hits provide finite extensive coproducts, disjoint open coprojections, or ordinary gluing; arbitrary-family distribution is proved in Step 1 from existing open-fibre-product and gluing nodes. None states this scheme family descent encoding and realization compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "IsUniversalColimit|isUniversal|PreservesColimitsOfShape|PreExtensive",
+   "results": "{\"t\": \"2026-10-22T07:14:01Z\", \"tool\": \"grep\", \"query\": \"IsUniversalColimit|isUniversal|PreservesColimitsOfShape|PreExtensive\", \"sub\": \"AlgebraicGeometry/Limits.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"183\", \"184\", \"589\", \"594\", \"599\"], \"digest\": \"7d6811b08cfe3f2d\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: generic pseudofunctor descent definitions and equal-generated-sieve equivalences do not identify scheme descent along a family with descent along its coproduct. The sieves need not be equal."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universality of arbitrary small disjoint unions of schemes, pullbacks preserve sigma coproducts, not just finite coproducts",
+   "results": "{\"t\": \"2026-10-22T07:14:12Z\", \"tool\": \"leanfinder\", \"query\": \"Universality of arbitrary small disjoint unions of schemes, pullbacks preserve sigma coproducts, not just finite coproducts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall\", \"AlgebraicGeometry.instFinitaryExtensiveScheme\", \"AlgebraicGeometry.instHasColimitsOfShapeDiscreteSchemeOfSmall\", \"AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty\", \"AlgebraicGeometry.instHasCoproductsOfShapeOverSchemeTopMorphismPropertyOfSmall\", \"AlgebraicGeometry.IsFinite.instDescScheme\", \"AlgebraicGeometry.instMonoCoprodScheme\"], \"digest\": \"7f33cec66b6f03f5\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the source hits provide finite extensive coproducts, disjoint open coprojections, or ordinary gluing; arbitrary-family distribution is proved in Step 1 from existing open-fibre-product and gluing nodes. None states this scheme family descent encoding and realization compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent datum gluing on all pairwise and triple components of a disjoint union of schemes preserves effective realizations",
+   "results": "{\"t\": \"2026-10-22T07:14:12Z\", \"tool\": \"leanfinder\", \"query\": \"Descent datum gluing on all pairwise and triple components of a disjoint union of schemes preserves effective realizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"CategoryTheory.effectiveEpiFamilyStructOfEffectiveEpiDesc\", \"AlgebraicGeometry.Scheme.Cover.glueMorphisms\", \"CategoryTheory.effectiveEpiFamilyStructOfEffectiveEpiDesc_aux\", \"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.GlueData.toGlueData\", \"AlgebraicGeometry.Scheme.GlueData.Rel\"], \"digest\": \"3c2cd9da56c90dda\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: generic pseudofunctor descent definitions and equal-generated-sieve equivalences do not identify scheme descent along a family with descent along its coproduct. The sieves need not be equal."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ss]igma|[Ss]igma.*pullback|[Uu]niversal.*[Cc]oprod|[Cc]oprod.*[Uu]niversal",
+   "results": "{\"t\": \"2026-10-22T07:19:07Z\", \"tool\": \"grep\", \"query\": \"pullback.*[Ss]igma|[Ss]igma.*pullback|[Uu]niversal.*[Cc]oprod|[Cc]oprod.*[Uu]niversal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\"], \"digest\": \"af4fc00df459923f\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the source hits provide finite extensive coproducts, disjoint open coprojections, or ordinary gluing; arbitrary-family distribution is proved in Step 1 from existing open-fibre-product and gluing nodes. None states this scheme family descent encoding and realization compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Arbitrary small coproduct of scheme fiber products maps isomorphically to fiber product with the coproduct",
+   "results": "{\"t\": \"2026-10-22T07:19:08Z\", \"tool\": \"leansearch\", \"query\": \"Arbitrary small coproduct of scheme fiber products maps isomorphically to fiber product with the coproduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.coprodSpec_apply\", \"CategoryTheory.Limits.Sigma.mapIso\", \"AlgebraicGeometry.coprodSpec\", \"AlgebraicGeometry.isIso_stalkMap_coprodSpec\", \"AlgebraicGeometry.instHasCoproductsOfShapeOverSchemeTopMorphismPropertyOfSmall\", \"AlgebraicGeometry.isPullback_inl_inl_coprodMap\", \"AlgebraicGeometry.instIsIsoSchemeCoprodSpec\", \"CategoryTheory.Limits.coprod.mapIso\"], \"digest\": \"1cda15a0237acc7e\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the source hits provide finite extensive coproducts, disjoint open coprojections, or ordinary gluing; arbitrary-family distribution is proved in Step 1 from existing open-fibre-product and gluing nodes. None states this scheme family descent encoding and realization compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"Sigma\"",
+   "results": "{\"t\": \"2026-10-22T07:19:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"pullback\\\", \\\"Sigma\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.FinitaryExtensive.isPullback_initial_to_sigma_ι\", \"CategoryTheory.FinitaryPreExtensive.isPullback_sigmaDesc\", \"AlgebraicGeometry.isEmpty_pullback_sigmaι_of_ne\"], \"digest\": \"6eb0ea2adf5505ed\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the source hits provide finite extensive coproducts, disjoint open coprojections, or ordinary gluing; arbitrary-family distribution is proved in Step 1 from existing open-fibre-product and gluing nodes. None states this scheme family descent encoding and realization compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any small family of schemes Xi over S and T over S the canonical map coproduct of T fiber product Xi to T fiber product coproduct Xi is an isomorphism with both projections compatible",
+   "results": "{\"t\": \"2026-10-22T07:19:19Z\", \"tool\": \"leanfinder\", \"query\": \"For any small family of schemes Xi over S and T over S the canonical map coproduct of T fiber product Xi to T fiber product coproduct Xi is an isomorphism with both projections compatible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_inl_inl_coprodMap\", \"AlgebraicGeometry.isPullback_inr_inr_coprodMap\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst_assoc\", \"AlgebraicGeometry.instIsIsoSchemeCoprodComparisonOppositeCommRingCatSpec\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_snd_assoc\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_snd\", \"AlgebraicGeometry.coprodSpec_inr_assoc\"], \"digest\": \"01be8da11d0b0b32\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the source hits provide finite extensive coproducts, disjoint open coprojections, or ordinary gluing; arbitrary-family distribution is proved in Step 1 from existing open-fibre-product and gluing nodes. None states this scheme family descent encoding and realization compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "isPullback_sigmaDesc|isIso_sigmaDesc",
+   "results": "{\"t\": \"2026-10-22T07:24:07Z\", \"tool\": \"grep\", \"query\": \"isPullback_sigmaDesc|isIso_sigmaDesc\", \"sub\": \"CategoryTheory/Extensive.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"558\", \"562\", \"564\", \"573\", \"574\"], \"digest\": \"91d1c8fc4eddf25b\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the source hits provide finite extensive coproducts, disjoint open coprojections, or ordinary gluing; arbitrary-family distribution is proved in Step 1 from existing open-fibre-product and gluing nodes. None states this scheme family descent encoding and realization compatibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fppf-family-affine-effectivity-reduction",
+  "date": "2026-10-22",
+  "group": "Q88"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Geometric quotient-presentation support via 0265 and 02W8: Tag 023X, lemma-family-is-one, construction and restriction to components; the fpqc assertion uses Topologies Tag 021P, lemma-fppf-affine, with Tag 022B, definition-fpqc-covering.",
+   "via": [
+    "lem-trf-fppf-family-affine-effectivity-reduction",
+    "lem-trf-separated-lqf-fppf-effective-descent",
+    "lem-trf-etale-affine-quotient-representable",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-fppf-family-coproduct-descent-encoding",
+  "worker": "stage1",
+  "summary": "Expanded the Tag 023X construction, all product identifications, cocycle and component restriction, and the fixed-realization compatibility equation. Proved the infinite-family fpqc assertion using finite affine refinement on each affine base open and stalkwise flatness. All inputs already exist: no new nodes. Statement unchanged.",
+  "blueprint": "Realizes the geometric quotient-presentation support of lem-trf-local-term-locality recorded in blueprint.from.place, via the family-to-singleton step of lem-trf-fppf-family-affine-effectivity-reduction; this is the Tag 023X encoding argument, not a replacement of the contracting-correspondence route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic finite affine refinement of an fppf covering over an affine scheme; used only to verify the fpqc covering definition, and no statement in this unit supplies that refinement."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-7e254846a",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-7e254846a (reviewer sub-agent of L); spot-checked: I read the item's statement and all seven steps in full against Stacks descent.tex Def 023V, the family definition and Lemma 023X (lines 8190-8275), and against topologies.tex 021O(3), 021P and 022B. I also read every cited statement. The statement is unchanged from the base; only the split-owned fields were written. Live and side-live still show the item as unsplit, so nothing supersedes it. It has no repair note of its own: the re-split note belongs to the parent affine-effectivity-reduction, so this is an ordinary first split. There are no new nodes and no SGA citations. Step 1 proves that the fibre products of arbitrary coproducts split as coproducts (open-fibre-product with U=T, disjoint covering opens, gluing with uniqueness), so no finite-extensive shortcut is used. Steps 2-4 build Phi from coprod phi_ij and its inverse, prove the cocycle componentwise over (i,j,k), and recover phi_ij from v^{-1}(T_i)=V_i. Step 5 proves the fpqc property without requiring quasi-compactness of f: flatness on stalks via the open coprojections; for each affine U, base change, then the 021P refinement, then T_i x_T U = f_i^{-1}(U) open in T_i, so the V_j are affine opens of A. I checked it on infinitely many copies of Spec k. Step 6's equation Phi∘(α×1)=(1×α)∘c_W holds on each (i,j) summand exactly when the effectivity compatibility of def-trf-scheme-cover-descent-datum holds. Step 7 handles the empty cover with T=∅ and n=0. The two 023X hits in the DAG (the parent and the 02W3 node lem-galois-fpqc-descending-types-morphisms) are not duplicates, and the finite coproduct base-change node does not cover infinite I. I accepted the tool_use of lem-pc-fppf-affine-refinement (generic 021P refinement, unit sk-def-picard-pic); all other off-unit citations are Mathlib leaves. proof_deps equals the union of the steps' uses, and searches of all three kinds are recorded. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfFamilyCoproductDescentEncoding",
+  "declaration": "AlgebraicGeometry.fppf_family_coproduct_descent_encoding",
+  "declarations": [
+   "AlgebraicGeometry.schemeCoproductPairCofan",
+   "AlgebraicGeometry.schemeCoproductTripleCofan",
+   "AlgebraicGeometry.SchemeCoverDescentDatum.coproductScheme",
+   "AlgebraicGeometry.SchemeCoverDescentDatum.coproductPoint",
+   "AlgebraicGeometry.fppf_family_coproduct_descent_encoding"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfFamilyCoproductDescentEncoding.lean",
+  "statement": "theorem fppf_family_coproduct_descent_encoding {I : Type (u + 1)} (T : Scheme.{u}) (U : I → Scheme.{u}) (f : ∀ i, U i ⟶ T) (hcov : Presieve.ofArrows U f ∈ Scheme.fppfPrecoverage T) (F : SchemeCoverDescentDatum f) [HasCoproduct U] [HasCoproduct (fun i ↦ (F.localScheme i).left)] : Nonempty (IsColimit (schemeCoproductPairCofan f f)) ∧ Nonempty (IsColimit (schemeCoproductPairCofan (fun i ↦ (F.localScheme i).hom ≫ f i) f)) ∧ Nonempty (IsColimit (schemeCoproductPairCofan f (fun i ↦ (F.localScheme i).hom ≫ f i))) ∧ Nonempty (IsColimit (schemeCoproductTripleCofan f f f)) ∧ Nonempty (IsColimit (schemeCoproductTripleCofan (fun i ↦ (F.localScheme i).hom ≫ f i) f f)) ∧ Nonempty (IsColimit (schemeCoproductTripleCofan f (fun i ↦ (F.localScheme i).hom ≫ f i) f)) ∧ Nonempty (IsColimit (schemeCoproductTripleCofan f f (fun i ↦ (F.localScheme i).hom ≫ f i))) ∧ ∃ D : Over.DescentDatum (Sigma.desc f) F.coproductScheme, (∀ i, IsPullback (Sigma.ι (fun i ↦ (F.localScheme i).left) i) (F.localScheme i).hom F.coproductScheme.hom (Sigma.ι U i)) ∧ (∀ (B : Scheme.{u}) (p : B ⟶ T) (i j : I) (a : B ⟶ U i) (b : B ⟶ U j) (ha : a ≫ f i = p) (hb : b ≫ f j = p) (x : (F.data.obj i).obj.obj (op ((Over.map a).obj (Over.mk (𝟙 B))))), (D.transport (a ≫ Sigma.ι U i) (b ≫ Sigma.ι U j) (by simp only [Category.assoc, Sigma.ι_desc]; exact ha.trans hb.symm) (F.coproductPoint i a x)).left = ((F.representation j).homEquiv.symm ((F.data.hom p a b ha hb).hom.app (op (Over.mk (𝟙 B))) x)).left ≫ Sigma.ι (fun i ↦ (F.localScheme i).left) j) ∧ Presieve.singleton (Sigma.desc f) ∈ Scheme.fpqcPrecoverage T ∧ (∀ W : Over T, (∃ q : (∐ fun i ↦ (F.localScheme i).left) ⟶ W.left, IsPullback q F.coproductScheme.hom W.hom (Sigma.desc f) ∧ ∀ (B : Scheme.{u}) (a b : B ⟶ ∐ U) (h : a ≫ Sigma.desc f = b ≫ Sigma.desc f) (x : Over.mk a ⟶ F.coproductScheme), (D.transport a b h x).left ≫ q = x.left ≫ q) ↔ (∃ q : ∀ i, (F.localScheme i).left ⟶ W.left, (∀ i, IsPullback (q i) (F.localScheme i).hom W.hom (f i)) ∧ ∀ (B : Scheme.{u}) (p : B ⟶ T) (i j : I) (a : B ⟶ U i) (b : B ⟶ U j) (ha : a ≫ f i = p) (hb : b ≫ f j = p) (x : (F.data.obj i).obj.obj (op ((Over.map a).obj (Over.mk (𝟙 B))))), ((F.representation j).homEquiv.symm ((F.data.hom p a b ha hb).hom.app (op (Over.mk (𝟙 B))) x)).left ≫ q j = ((F.representation i).homEquiv.symm x).left ≫ q i)) ∧ (F.IsEffective ↔ D.IsEffective)",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The canonical overlap identifications are stated as colimiting canonical cofans, equivalent to the displayed coproduct isomorphisms and retaining their projections. HasCoproduct records the two coproducts the node tells us to form, without imposing Small on I. Fixed-W effectivity is expressed by the Cartesian-square and transport-invariance characterization used by both recorded descent interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b8fd8901",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Only the lean field differs from live; the statement text matches the file verbatim. I : Type (u+1) matches SchemeCoverDescentDatum. The HasCoproduct hypotheses are implied by Small.{u} I and are not stronger than the node. The pair and triple coproduct identifications are IsColimit statements about canonical pullback.map cofans. D is pinned by the IsPullback component clause and transport on coproductPoint equal to the Yoneda form of F.data.hom (phi_ij); naturality and locality determine D. The singleton fpqcPrecoverage claim needs no quasi-compactness. The fixed-W iff uses the Cartesian square plus transport invariance on both sides; F.IsEffective iff D.IsEffective. Empty I, empty summands, singleton and infinite families checked. Helpers are real constructions with source/blueprint docstrings and no duplicates found; plain imports are proof-dependency modules; report sections present; only the item theorem is sorry. Not recompiled per instructions; worker reports clean compiles (6.5 s, 6.4 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261023T152059-L-440945",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

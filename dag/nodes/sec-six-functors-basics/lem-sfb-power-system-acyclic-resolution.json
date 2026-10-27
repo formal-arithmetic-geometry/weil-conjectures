@@ -1,0 +1,154 @@
+{
+ "id": "lem-sfb-power-system-acyclic-resolution",
+ "kind": "statement",
+ "title": "Torsion-free counit-computing resolutions for reduction of towers",
+ "statement": "Let l be prime, T a scheme and r any Reduction T (Rrings l T) [def-sp-tower-class-reduction, def-sp-tower-class-coefficients]. For every cochain complex K of abelian towers [def-sp-tower-class-systems], there exist P and a quasi-isomorphism q:P → K such that multiplication by l^(n+1) is monic on the level-n sheaf of P^i for every integer i and natural n, and the actual universal-derived counit r.model.epsilon at P is an isomorphism. No quotient exactness, distinguished triangle, units object, or derived-adjunction-unit formula is asserted.",
+ "stmt_deps": [
+  "def-sp-tower-class-reduction",
+  "def-sp-tower-class-coefficients",
+  "def-sp-tower-class-systems"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower.proof.md",
+  "place": "Functorial derived completion: simultaneous tensor with quotient rings; resolution [Z --ell^n--> Z] with transitions (ell,1). For the ordinary quotient see Stacks sites-modules.tex, lemma-adjointness-tensor-restrict (03D7); for resolutions see sites-cohomology.tex, lemma-K-flat-resolution (06YS) and lemma-derived-base-change (06YY)."
+ },
+ "proof": [
+  {
+   "text": "For each abelian sheaf X, sheafify the free abelian presheaf on its sections. Its evaluation map is epic because the presheaf evaluation is sectionwise surjective; all its nonzero integer multiples are monic because free abelian groups are torsion free and sheafification is exact. Apply this construction levelwise to towers. For a complex K form the disk cover C^i = F(K^i) ⊕ F(K^(i-1)), with differential (x,y) ↦ (0,x) and augmentation ε(x)+dε(y). The naturality of evaluation proves the chain-map identity and the first summand proves degreewise epimorphy.",
+   "uses": [
+    "def-sp-tower-class-systems",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let A be the kernel of the disk-cover augmentation C → K. The canonical map Cone(A → C) → K is a quasi-isomorphism by the short-exact cone comparison. Nonzero integer multiplication is monic on C^i, on its subobject A^i, and on their binary biproducts, hence on every term of this cone. Exact level evaluation sends these monomorphisms to the asserted ones; primality ensures l^(n+1) is nonzero.",
+   "uses": [
+    "lem-pc-cone-short-exact-quasi-iso",
+    "def-sp-tower-class-systems",
+    "def-sp-tower-class-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On every complex P with levelwise monic l^(n+1), apply the ordinary-cokernel theorem term by term to obtain the short exact sequence from the power-twisted P to P to the forgotten ordinary reduction of P. A quasi-isomorphism between two such P induces a morphism of these short exact sequences. Power-transition twisting preserves quasi-isomorphisms. The long exact homology sequence therefore makes its forgotten reduction a quasi-isomorphism. The supplied Forget is faithful by its section-map prescription; since it is exact it detects quasi-isomorphisms. Thus ordinary reduction preserves quasi-isomorphisms between these regular complexes.",
+   "uses": [
+    "lem-sfb-power-system-ordinary-cokernel",
+    "def-sfb-power-transition-functor",
+    "def-sp-tower-class-systems",
+    "def-sp-tower-class-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the resolving-class theorem to ordinary reduction followed by localization on the homotopy category, using the resolutions and invariance just proved. Precomposition with the full essentially-surjective homotopy quotient preserves the defining pointwise Kan extension: the induced structured-arrow functor is full, essentially surjective and hence initial. Transport along the canonical quotient/localization comparisons. This yields a universal cochain derived pair whose counit is invertible on each regular P. The canonical counit-compatible isomorphism between universal pairs identifies it with the supplied r.model pair, so r.model.epsilon.app P is invertible. Combine this with the constructed resolution.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class",
+    "def-sp-tower-class-reduction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-systems",
+  "def-weil-pbc-sheafification",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "def-sp-tower-class-coefficients",
+  "lem-sfb-power-system-ordinary-cokernel",
+  "def-sfb-power-transition-functor",
+  "def-sp-tower-class-reduction",
+  "lem-pur-left-derived-from-kflat-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XN and 05SE, specialized to the ordinary quotient of the blueprint simultaneous integer-power resolution; explicit free disk-cover/kernel-cone construction replaces the ringed-site K-flat resolution transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars to a quotient integer ring system is the mapping cone of its variable multiplication natural transformation, with second arrow the derived adjunction unit",
+   "results": "Generic derived-category functors, singleFunctor and Q, and scalar-extension APIs only; no variable-power calculation.",
+   "date": "2026-10-27",
+   "verdict": "No matching specialized declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerivedNatTrans",
+   "results": "No hits; unknown identifier 'Functor.leftDerivedNatTrans'. Local source inspection used the universal derived pairs and mapHomologicalComplex APIs instead.",
+   "date": "2026-10-27",
+   "verdict": "No matching declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "IsColimit.*CokernelCofork|exists_isKFlatResolutionIndependentCoefficients",
+   "results": "Generic cokernel universal properties. Local source inspection found CochainComplex.exists_isKFlatResolutionIndependentCoefficients and DerivedChangeOfRingsCochainModel.computes. Neither identifies an arbitrary Reduction over Rrings with this model, nor computes the variable-power ordinary quotient.",
+   "date": "2026-10-27",
+   "verdict": "Use the generic resolution and derived-extension nodes; specialized remaining steps are new."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived tensor product with a quotient of the integers is computed by the two term resolution given by multiplication, naturally in an inverse system",
+   "results": "TensorProduct.tensorQuotientEquiv, quotTensorEquivQuotSMul, tensorQuotEquivQuotSMul and quotientTensorQuotientEquiv. These are ordinary module quotient computations; none computes variable-power sheaf-system derived extension or its unit.",
+   "date": "2026-10-27",
+   "verdict": "No matching sheaf-system theorem; ordinary tensor quotient APIs are supporting algebra only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PowerSystemReductionTriangle",
+  "date": "2026-10-27",
+  "group": "H5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "variable-power coefficient resolution in simultaneous Kummer reduction",
+   "via": [
+    "lem-sfb-power-system-reduction-triangle",
+    "lem-sfb-kummer-reduction-unit",
+    "lem-sfb-normalized-kummer-reduction",
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PowerSystemAcyclicResolution",
+  "file": "lean/Sheaf/Paper/PowerSystemAcyclicResolution.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.powerSystem_acyclic_resolution",
+  "statement": "theorem powerSystem_acyclic_resolution (l : ℕ) [Fact l.Prime] (T : Scheme.{u})\n    (r : Reduction T (Rrings l T)) (K : CochainComplex (Ab T) ℤ) :\n    ∃ (P : CochainComplex (Ab T) ℤ) (q : P ⟶ K),\n      QuasiIso q ∧ (∀ (i : ℤ) (n : ℕ),\n        Mono (l ^ (n + 1) • 𝟙 ((P.X i).obj (op n)))) ∧\n      IsIso (r.model.epsilon.app P)",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261027T094418-L-223465",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T112358-L-1577160",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

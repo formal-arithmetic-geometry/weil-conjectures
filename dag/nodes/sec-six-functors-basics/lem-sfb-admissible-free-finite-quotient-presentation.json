@@ -1,0 +1,181 @@
+{
+ "id": "lem-sfb-admissible-free-finite-quotient-presentation",
+ "kind": "statement",
+ "title": "Scheme presentation from invariant affine free-action charts",
+ "statement": "Let M be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention], and let G be a finite abstract group acting on M by scheme automorphisms. Suppose the action relation (g,m) maps to (gm,m) monomorphically into M times M [def-pc-fibre-product], with relation scheme the coproduct of G copies of M. Suppose every point x has an affine open neighborhood U [def-weil-affine-spectrum, def-weil-open-immersion] such that a(g) inverse-image U = U for every g. Then there exist a scheme Q and a morphism q:M to Q which is etale [def-weil-etale-morphism] and surjective [def-weil-surjective-morphism], and the square with top map (g,m) to gm, left map (g,m) to m, and other two maps q is a pullback. No separatedness, Noetherianity, finite type, or invertibility of the order of G is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 07S6 (proposition-finite-flat-equivalence-global), invariant affine quotient charts and final gluing argument; Spaces 02WW and 02WU; Groupoids 03BM."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-surjective-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Form the action groupoid on R = coproduct_G M. The source is the fold, the target is the action on each summand, the unit is the 1-summand, inverse sends (g,m) to (g inverse,gm), and composition multiplies the labels. The group laws prove the groupoid identities. Source and target are etale, by the source-local property and their isomorphism restrictions to the summands. They are surjective using the unit. Freeness is the assumed monomorphism, so this is an etale equivalence relation on every test scheme, including disconnected schemes with locally constant labels.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 (proposition-finite-flat-equivalence-global), finite constant free-action case; Tag 0BBM (lemma-quotient-separated), (4). The finite etale torsor and geometric orbit clauses are the constant-group specialization of the relation identity in 07S6."
+   }
+  },
+  {
+   "text": "Apply the etale relation presentation theorem to its fppf quotient sheaf F. It gives an etale surjection h_M to F, the specified relation as the kernel pair, and etale-local lifts of all sections to M.",
+   "uses": [
+    "lem-trf-etale-relation-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 (proposition-finite-flat-equivalence-global), finite constant free-action case; Tag 0BBM (lemma-quotient-separated), (4). The finite etale torsor and geometric orbit clauses are the constant-group specialization of the relation identity in 07S6."
+   }
+  },
+  {
+   "text": "For every invariant affine open U=Spec A from the hypothesis, the restricted relation is coproduct_G U. This is Spec of the finite product of copies of A. The fold is finite free on the coordinate idempotents, and the target differs from it by a summandwise automorphism. Thus both maps are finite locally free, and freeness restricts. Apply the affine finite locally free relation quotient theorem to get an affine quotient Q_U with the restricted relation as its kernel pair.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-pc-finite-locally-free",
+    "lem-a1-finite-flat-affine-relation-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 (proposition-finite-flat-equivalence-global), finite constant free-action case; Tag 0BBM (lemma-quotient-separated), (4). The finite etale torsor and geometric orbit clauses are the constant-group specialization of the relation identity in 07S6."
+   }
+  },
+  {
+   "text": "The finding-opens theorem identifies h_(Q_U) to F with an open subfunctor. For a map h_T to F, choose an etale cover of T with lifts into M. The preimages of the given invariant affine opens cover each lift, so the open subfunctors Q_U cover T by surjectivity of that cover. Since an fppf sheaf is a Zariski sheaf, the scheme representability criterion glues these open charts to Q. Transport the atlas and its kernel-pair square through the representation. This gives exactly the asserted etale surjection and prescribed pullback. For empty M use the empty open cover and the empty scheme.",
+   "uses": [
+    "lem-trf-etale-relation-finding-opens",
+    "lem-pc-schemes-criterion",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S6 (proposition-finite-flat-equivalence-global), finite constant free-action case; Tag 0BBM (lemma-quotient-separated), (4). The finite etale torsor and geometric orbit clauses are the constant-group specialization of the relation identity in 07S6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-groupoid-scheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-trf-etale-relation-quotient",
+  "def-pc-finite-locally-free",
+  "lem-a1-finite-flat-affine-relation-quotient",
+  "lem-trf-etale-relation-finding-opens",
+  "lem-pc-schemes-criterion",
+  "def-pc-fppf-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 07S6, invariant affine quotient construction after invariant affine neighborhoods are supplied; construction part of the parent proof, steps 2-5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A free action of a finite group on a separated scheme with affine neighborhoods of orbits has a finite etale quotient",
+   "results": "8 hits about Galois categories and topological covering spaces; no scheme quotient construction.",
+   "date": "2026-10-26",
+   "verdict": "No matching scheme theorem, including the weaker invariant-affine presentation conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"quotient\"",
+   "results": "6 hits concerning ring-ideal quotient scheme lifts and the quotient-map property of flat scheme morphisms.",
+   "date": "2026-10-26",
+   "verdict": "No finite-action scheme presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(group|action).*quotient|free.*action|quotient.*[Ss]cheme",
+   "results": "25 hits; algebraic-geometry hits concern affine ideal quotients and flat morphisms. Local searches in WeilConjectures and Sheaf also found ColimitsOver, which constructs categorical quotients of affine morphisms but does not supply the free-action etale presentation and general gluing used here.",
+   "date": "2026-10-26",
+   "verdict": "No exact or one-line specialization. ColimitsOver.isFinite_and_etale_quotientPt requires the action scheme already finite etale over an affine base, unavailable here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AdmissibleFreeFiniteQuotient",
+  "date": "2026-10-26",
+  "group": "F6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 07SU (proposition-approximate); Noetherian stages by spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian) over Spec Z, and finite type quasi-compactness. New supporting input: Tag 07ST (lemma-filter-quasi-compact-quasi-separated); last stratum is schematic as explained in spaces-limits.tex, proposition-approximate, first proof paragraph Supporting input: Tag 07ST proof via Tag 0BBN first paragraph: existence and separatedness of the schemes V_p=W_p/S_p. Supporting input: invariant affine quotient charts glue to a scheme carrying the prescribed etale action presentation (07S6 construction).",
+   "via": [
+    "lem-sfb-admissible-free-finite-quotient",
+    "lem-sfb-qcqs-space-splitting-filtration",
+    "lem-sfb-space-absolute-noetherian-approximation",
+    "lem-sfb-finite-surjective-affine-space-target",
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AdmissibleFreeFiniteQuotientPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdmissibleFreeFiniteQuotientPresentation.lean",
+  "declaration": "AlgebraicGeometry.exists_admissible_free_finite_quotient_presentation",
+  "statement": "theorem exists_admissible_free_finite_quotient_presentation\n    (M : Scheme.{u}) (G : Type v) [Group G] [Finite G]\n    (a : G →* Aut M)\n    [Mono (prod.lift (Sigma.desc (fun g : G ↦ (a g).hom))\n      (Sigma.desc (fun _ : G ↦ 𝟙 M)))]\n    (hcover : ∀ x : M, ∃ U : M.affineOpens,\n      x ∈ U.1 ∧ ∀ g : G, (a g).hom ⁻¹ᵁ U.1 = U.1) :\n    ∃ (Q : Scheme.{u}) (q : M ⟶ Q), Etale q ∧ Surjective q ∧\n      IsPullback (Sigma.desc (fun g : G ↦ (a g).hom))\n        (Sigma.desc (fun _ : G ↦ 𝟙 M)) q q",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T081802-L-2069968",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T081802-L-2069968",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

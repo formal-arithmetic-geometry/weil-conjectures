@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-scalar-localization-fraction-colimit-of-universes",
+ "kind": "statement",
+ "title": "Normalized fraction colimit of module complexes with independent site universes",
+ "statement": "Let C,J,u have the independent-universe site and sheafification hypotheses of [lem-weil-pbc-scalar-localization-tensor-comparison-of-universes]. Let A be a commutative ring, R a commutative ring sheaf, a:A -> Gamma(R), t in A, and S=R[1/a(t)] the actual sheafified localization [def-weil-pbc-ringed-section-localization]. Suppose E is the specified additive exact sheafified tensor extension on objects and maps, U is exact restriction along the localization unit, and eta is a family of complex morphisms K -> U(E(K)) whose degreewise maps have the normalized 1-tensor section formula [lem-weil-pbc-scalar-localization-tensor-comparison-of-universes]. Use the coefficient actions of [lem-per-rational-continuous-coefficient-derived-localization]. Then for each cochain complex K, the sequential diagram with constant object K and transition t times identity has a colimit cocone c and an isomorphism c.pt -> U(E(K)) whose nth leg is eta followed by U applied to inverse(t)^n times identity. No lower bound on K is necessary.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Tag 03EK, section-tensor-product; algebra.tex Tag 00CM, section-localization"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-scalar-localization-tensor-comparison-of-universes",
+  "def-weil-pbc-ringed-section-localization",
+  "lem-per-rational-continuous-coefficient-derived-localization"
+ ],
+ "proof": [
+  {
+   "text": "Apply the ordinary module localization colimit to the regular module of each section ring. Fraction restriction maps commute by uniqueness of inverses. Evaluation reflects presheaf-module colimits, and the sheafification Hom adjunction gives the sheaf colimit, with zeroth leg the localization unit.",
+   "uses": [
+    "lem-sc-module-localization-filtered-colimit",
+    "def-weil-pbc-ringed-section-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the regular colimit with M. Tensor preserves the countable colimit by the independent-universe tensor API. The normalized restricted-extension comparison identifies the colimit object and zeroth leg. Centrality and the inverse-scalar identity determine all other legs, including t-torsion and zero localization.",
+   "uses": [
+    "lem-weil-pbc-scalar-localization-tensor-comparison-of-universes",
+    "def-pur-sheaf-tensor-product",
+    "lem-per-rational-continuous-coefficient-derived-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the module colimit degreewise. The prescribed legs are complex morphisms; their successor equation is checked in every degree. Evaluation jointly reflects complex colimits, giving the stated cocone and comparison isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-localization-filtered-colimit",
+  "def-weil-pbc-ringed-section-localization",
+  "lem-weil-pbc-scalar-localization-tensor-comparison-of-universes",
+  "def-pur-sheaf-tensor-product",
+  "lem-per-rational-continuous-coefficient-derived-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Tag 03EK, section-tensor-product; algebra.tex Tag 00CM, section-localization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of localization of sheaves of modules is the sequential colimit of multiplication by a scalar",
+   "results": "Eight localization-to-stalk hits; none gives this module-sheaf or complex colimit.",
+   "verdict": "no exact match",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ofSequence",
+   "results": "Found ofSequence and ofSequence_map_homOfLE_succ, used to assemble the fraction cocones.",
+   "verdict": "no exact match",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|localization_away_colimit",
+   "results": "Hits on tactic telescopes, no scalar-localization colimit match. Local rg found the proved small-site colimit chain and ModuleCat.localization_away_colimit; their proofs are generalized here.",
+   "verdict": "no exact match",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ScalarLocalizationTelescopeOfUniverses",
+  "date": "2026-10-27",
+  "group": "X8"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "Proof, first paragraph ('Lf^* is exact', cohomology sheaves are pullbacks): rational-coefficient realization and normalized Hom transport used to justify that pullback; scalar-localization substep: Normalized fraction colimit of module complexes with independent site universes",
+   "via": [
+    "lem-weil-pbc-scalar-localization-telescope-of-universes",
+    "lem-per-rational-realization-hom-transport",
+    "lem-per-constructible-rational-hom-comparison",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ScalarLocalizationFractionColimitOfUniverses",
+  "file": "lean/Sheaf/CategoryTheory/ScalarLocalizationFractionColimitOfUniverses.lean",
+  "declaration": "CategoryTheory.scalarLocalization_complexColimitOfUniverses",
+  "statement": "theorem scalarLocalization_complexColimitOfUniverses\n    (A : Type v) [CommRing A]\n    (R : Sheaf J CommRingCat.{u})\n    (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat))\n    (t : A)\n    [HasDerivedCategory.{w}\n      (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]\n    [HasDerivedCategory.{w}\n      (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj\n        (ringedLocalizationRingOfUniverses R (a t))))]\n    (E : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) ⥤\n      ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj\n        (ringedLocalizationRingOfUniverses R (a t))))\n    (hE : ∀ M, E.obj M =\n      SheafOfModules.changeOfRingsOfUniverses (ringedLocalizationRingUnitOfUniverses R (a t)) M)\n    (_hmap : ∀ {M N} (f : M ⟶ N), E.map f = eqToHom (hE M) ≫\n      SheafOfModules.changeOfRingsHomOfUniverses (ringedLocalizationRingUnitOfUniverses R (a t)) M\n        f ≫\n        eqToHom (hE N).symm)\n    [E.Additive] [PreservesFiniteLimits E] [PreservesFiniteColimits E]\n    (U₀ : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj\n        (ringedLocalizationRingOfUniverses R (a t))) ⥤\n      ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))\n    (hU₀ : U₀ = SheafOfModules.restrictScalars\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).map\n        (ringedLocalizationRingUnitOfUniverses R (a t))))\n    [U₀.Additive] [PreservesFiniteLimits U₀] [PreservesFiniteColimits U₀]\n    (unitComplex : ∀ (K : CochainComplex (ringedSiteModules.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ),\n      K ⟶ (U₀.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n        ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K))\n    (unitSections : ∀ (K : CochainComplex (ringedSiteModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) (i : ℤ),\n      scalarLocalizationUnitSectionsOfUniverses (ringedLocalizationRingUnitOfUniverses R (a t))\n        (K.X i) (E.obj (K.X i)) (hE (K.X i))\n        ((unitComplex K).f i ≫\n          eqToHom (congrArg (fun T ↦ T.obj (E.obj (K.X i))) hU₀)))\n :\n    (fun [_source : Linear A (ringedSiteModules.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]\n      [_target : Linear (Localization.Away t) (ringedSiteModules.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj\n          (ringedLocalizationRingOfUniverses R (a t))))] ↦\n      ∀ (K : CochainComplex (ringedSiteModules.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ),\n      ∃ (c : Cocone (Functor.ofSequence (X := fun _n : ℕ ↦ K) (fun _n ↦ t • 𝟙 K))),\n        Nonempty (IsColimit c) ∧\n        ∃ β : c.pt ≅ (U₀.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n            ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K),\n          ∀ n : ℕ, (show K ⟶ c.pt from c.ι.app n) ≫ β.hom = (unitComplex K) ≫\n            (U₀.mapHomologicalComplex (ComplexShape.up ℤ)).map\n              (((IsLocalization.Away.invSelf t : Localization.Away t) ^ n) •\n                𝟙 ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)))\n      (_source := scalarLocalizationCoefficientLinearOfUniverses A R a)\n      (_target := scalarLocalizationCoefficientLinearOfUniverses (Localization.Away t)\n        (ringedLocalizationRingOfUniverses R (a t)) (scalarLocalizationCoefficientMapOfUniverses A\n          R a t))",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T112445-L-1586053",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T112445-L-1586053",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

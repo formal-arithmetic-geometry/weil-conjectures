@@ -1,0 +1,400 @@
+{
+ "id": "det-thm-groth-ss",
+ "kind": "statement",
+ "title": "Grothendieck spectral sequence and its Leray specialization",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be Grothendieck abelian categories,\n$\\mathcal C$ an abelian category, and $\\Phi:\\mathcal A\\to\\mathcal B$,\n$\\Psi:\\mathcal B\\to\\mathcal C$ additive left exact functors forming a\ncomposable pair with acyclicity in the sense of [det-def-groth-ss]\n($\\Phi$ sends injective objects to $\\Psi$-acyclic objects). Then for\nevery $A\\in\\mathcal A$ there is a first-quadrant cohomological spectral\nsequence\n\n$$\nE_2^{p,q}\\cong R^p\\Psi\\bigl(R^q\\Phi(A)\\bigr)\\ \\Longrightarrow\\ R^{p+q}(\\Psi\\circ\\Phi)(A).\n$$\n\nIn particular, let $X\\xrightarrow{f}Y\\xrightarrow{h}Z$ be morphisms of sites (or\nschemes with their étale or small Zariski sites). For an abelian\nsheaf $F$ on $X$, since $f_*$ carries injectives\nto $h_*$-acyclics ($f_*$ is right adjoint to the exact $f^{-1}$, so\nit preserves injectives), there is a spectral sequence\n\n$$\nE_2^{p,q}=R^ph_*R^qf_*F\\ \\Longrightarrow\\ R^{p+q}(hf)_*F.\n$$\n\nFor $Z$ the punctual site, so that $h_*=\\Gamma(Y,-)$, this is the\n*Leray* spectral sequence\n\n$$\nE_2^{p,q}=H^p(Y,R^qf_*F)\\ \\Longrightarrow\\ H^{p+q}(X,F).\n$$\n\nIn particular this includes $Y_{\\mathrm{zar}}$ and $X_{\\mathrm{zar}}$\nfor a morphism of schemes. For proper $f$ and coherent $F$ the\nZariski sequence is the spectral sequence of\n$\\Gamma(Y,-)\\circ f_*$ on $\\cO$-modules.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-picard-framework/sk-thm-picard-perfect/det-thm-groth-ss.md",
+  "place": "node det-thm-groth-ss, order 785",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0732"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0733"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01F2"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01F6"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "det-def-groth-ss",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sp-grothendieck-abelian",
+  "def-sp-left-exact-additive",
+  "def-sc-zariski-site",
+  "def-weil-pbc-etale-site",
+  "pqf-def-cohomology",
+  "pqf-def-coherent",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose an injective resolution $A\\to I^\\bullet$ concentrated in nonnegative degrees, using enough injectives in $\\mathcal A$. To construct the resolution, embed $Q^0=A$ in an injective $I^0$, set $Q^{n+1}=\\operatorname{coker}(Q^n\\hookrightarrow I^n)$, embed $Q^{n+1}$ in $I^{n+1}$, and use the composite $I^n\\twoheadrightarrow Q^{n+1}\\hookrightarrow I^{n+1}$ as differential. Its image equals the next kernel, which gives exactness. Set $K^a=\\Phi(I^a)$, so $H^b(K)=R^b\\Phi(A)$. The category $\\mathcal B$ also has enough injectives, so choose the first-quadrant Cartan--Eilenberg resolution $K^\\bullet\\to J^{a,b}$ supplied by the cited existence lemma. Its columns resolve $K^a$; its horizontal cycles, boundaries and cohomology in each fixed resolution degree are injective, and their vertical complexes resolve the corresponding cycles, boundaries and cohomology of $K$. Put $D^{a,b}=\\Psi(J^{a,b})$. Additivity makes this a first-quadrant double complex in the abelian category $\\mathcal C$. No injectives in $\\mathcal C$ are needed.",
+   "uses": [
+    "lem-sp-grothendieck-enough-injectives",
+    "def-sp-injective-resolutions",
+    "def-sp-left-exact-additive",
+    "lem-sp-derived-well-defined",
+    "lem-sp-cartan-eilenberg-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015I (lemma-cartan-eilenberg), 015N (lemma-grothendieck-spectral-sequence), proof"
+   }
+  },
+  {
+   "text": "Apply the double-complex spectral-sequence theorem to $D$. For the filtration by the original complex degree, ${}'E_1^{a,b}=H^b(\\Psi(J^{a,\\bullet}))=R^b\\Psi(K^a)$, by computation on the chosen column resolution. The acyclicity assumption says this is zero for $b>0$; for $b=0$ it is $\\Psi(K^a)$. The $d_1$ differential is induced by the differential of $K$, by the augmented column maps and the natural $R^0\\Psi\\cong\\Psi$ identification. Thus ${}'E_2^{a,0}=H^a(\\Psi(K^\\bullet))$ and all other rows vanish. The row-collapse lemma identifies $H^n(\\operatorname{Tot}D)$ with $H^n(\\Psi\\Phi(I^\\bullet))=R^n(\\Psi\\circ\\Phi)(A)$. The last equality uses the original injective resolution and the definition and well-definedness of right derived functors; the composite is additive left exact because both functors preserve kernels and finite biproducts.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-left-exact-additive",
+    "lem-sp-derived-well-defined",
+    "det-def-groth-ss",
+    "lem-weil-pbc-first-quadrant-row-collapse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015J (lemma-two-ss-complex-functor), 015N (lemma-grothendieck-spectral-sequence)"
+   }
+  },
+  {
+   "text": "For the other filtration the filtration index is the resolution degree: its first page is ${}''E_1^{b,a}=H^a(\\Psi(J^{\\bullet,b}))$. Apply the left-exact cohomology comparison to each horizontal row: its cycles and boundaries are injective by the Cartan--Eilenberg statement, so this is canonically $\\Psi(H^a(J^{\\bullet,b}))$. The vertical complex $H^a(J^{\\bullet,\\bullet})$ is an injective resolution of $H^a(K)$, hence ${}''E_2^{b,a}=R^b\\Psi(H^a(K))=R^b\\Psi(R^a\\Phi(A))$. The comparisons commute with the unsigned vertical differential, since they are induced by cycle inclusions and quotient maps. With the total differential $d_I+(-1)^a d_{II}$ of [def-sp-double-complex-total], the second first-page differential on the row of fixed horizontal cohomological degree $a$ is $(-1)^a\\Psi(d_{II})$. Its cochain complex is isomorphic to the unsigned one by multiplication by $(-1)^{ab}$ in resolution degree $b$: $(-1)^{a(b+1)}(-1)^a=(-1)^{ab}$. This elementary sign correction gives the stated second page. Rename the indices $(b,a)=(p,q)$. The double-complex theorem supplies convergence to $H^{p+q}(\\operatorname{Tot}D)$ and its finite image filtration; transfer that filtration through the isomorphism of step 2. This gives exactly the displayed abutment in the sense of [det-def-groth-ss].",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-sp-cartan-eilenberg-exists",
+    "lem-sp-cart-eilenberg-left-exact-cohomology",
+    "def-sp-left-exact-additive",
+    "lem-sp-derived-well-defined",
+    "det-def-groth-ss",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015J (lemma-two-ss-complex-functor), 015N (lemma-grothendieck-spectral-sequence)"
+   }
+  },
+  {
+   "text": "For the site specialization use the categories of abelian sheaves on the sites $X,Y,Z$. They are abelian with enough injectives by [lem-weil-pbc-site-sheaves-enough-injectives]. Steps 1--3 used Grothendieckness of the source and intermediate categories only to obtain enough injectives, and used the acyclicity hypothesis only as $R^q\\Psi(\\Phi(I))=0$ for $q>0$, so they apply verbatim. By [def-weil-pbc-sites-and-cohomology] (3) a morphism of sites $f:X\\to Y$ is given by a continuous functor $u$, with $f_*\\mathcal G=\\mathcal G\\circ u$ and $f^{-1}\\dashv f_*$. For sheaf morphisms $a,b$ we have $(f_*(a+b))_V=a_{u(V)}+b_{u(V)}$, so $f_*$ is additive. Kernels and finite products of abelian sheaves are sectionwise [lem-weil-pbc-sheafification-exact] and precomposition preserves them, so $f_*$ is left exact, and likewise $h_*$. Since $f^{-1}$ is exact [lem-weil-pbc-site-pullback-abelian-exact], $f_*$ preserves injectives [lem-sp-right-adjoint-preserves-injectives], and an injective is $h_*$-acyclic [lem-weil-pbc-derived-functor-injective-vanishing]. Apply steps 1--3 to $(f_*,h_*)$. If $h$ is given by $v$, the composite $hf$ is given by $u\\circ v$, and by [lem-weil-pbc-site-morphism-composition] $(hf)_*=h_*f_*$ on objects and morphisms, so the abutment is $R^{p+q}(hf)_*F$. Let $Z$ be the punctual site (one object $*$, the identity covering). Then $h_*\\mathcal G=\\mathcal G(v(*))=\\Gamma(v(*),\\mathcal G)$, which is what the statement calls $\\Gamma(Y,-)$. Likewise $(hf)_*=\\Gamma(u(v(*)),-)$ is $\\Gamma(X,-)$. By [def-weil-pbc-sites-and-cohomology] (2), $R^p\\Gamma(U,-)=H^p(U,-)$, and the Leray formula follows.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-derived-functor-injective-vanishing",
+    "lem-weil-pbc-site-morphism-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0732 (lemma-Leray), 0734 (lemma-relative-Leray); sites.tex Tags 03CB (lemma-composition-morphisms-sites), 03CC (definition-composition-morphisms-sites)"
+   }
+  },
+  {
+   "text": "Now let $X\\xrightarrow{f}Y\\xrightarrow{h}Z$ be morphisms of schemes, with their small etale sites [def-weil-pbc-etale-site] or small Zariski sites [def-sc-zariski-site]. *Etale sites.* By [lem-weil-pbc-sets-etale-inverse-image-exact], base change $V\\mapsto V\\times_YX$ defines a morphism of sites $X_{\\Et}\\to Y_{\\Et}$ in the sense of [def-weil-pbc-sites-and-cohomology] (3), with $f_*F(V)=F(V\\times_YX)$. The same holds for $h$ and $hf$, so step 4 applies. The composite of [lem-weil-pbc-site-morphism-composition] is $W\\mapsto(W\\times_ZY)\\times_YX$. The canonical isomorphisms $(W\\times_ZY)\\times_YX\\cong W\\times_ZX$, natural in $W$, identify it with base change along $hf$. Hence $(hf)_*\\cong h_*f_*$. Isomorphic left exact functors have isomorphic derived functors: apply the isomorphism termwise to one injective resolution [def-sp-left-exact-additive]. *Zariski sites.* An abelian sheaf on $X_{\\rm Zar}$ is an abelian sheaf on the underlying space of $X$, and $f_*F(V)=F(f^{-1}V)$. By [lem-sc-topological-pushforward-injective], $f^{-1}$ is exact and left adjoint to $f_*$, and $f_*$ preserves injectives. The other inputs of step 4 (enough injectives, sectionwise left exactness, acyclicity of injectives) hold as there, and $(hf)_*=h_*f_*$ exactly since $(hf)^{-1}W=f^{-1}h^{-1}W$. *Leray for schemes.* On both sites $Y$ (resp. $\\mathrm{id}_Y$) is a final object. $\\Gamma(Y,-)$ is evaluation there, which is additive and left exact with $H^p(Y,-)=R^p\\Gamma(Y,-)$ by [def-weil-pbc-sites-and-cohomology] (2). Also $\\Gamma(Y,f_*F)=F(X)=\\Gamma(X,F)$ on objects and morphisms, since $Y\\times_YX=X$ and $f^{-1}Y=X$. Because $f_*$ preserves injectives, steps 1--3 applied to $(f_*,\\Gamma(Y,-))$ give $H^p(Y,R^qf_*F)\\Rightarrow H^{p+q}(X,F)$.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-sc-zariski-site",
+    "lem-weil-pbc-sets-etale-inverse-image-exact",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-morphism-composition",
+    "def-sp-left-exact-additive",
+    "lem-sc-topological-pushforward-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0732 (lemma-Leray), 0734 (lemma-relative-Leray), applied to the morphisms of small etale and Zariski sites induced by morphisms of schemes"
+   }
+  },
+  {
+   "text": "For the Zariski module case, take $\\Phi=f_*:\\operatorname{Mod}(\\mathcal O_X)\\to\\operatorname{Mod}(\\mathcal O_Y)$ and $\\Psi=\\Gamma(Y,-)$, with values in modules over $\\mathcal O_Y(Y)$. The two sheaf-module categories are abelian with enough injectives. Both functors are additive and left exact: for $f_*$ the sections over $V$ are those over $f^{-1}V$ with scalars restricted through $f^\\sharp$, and kernels are sectionwise; for $\\Gamma$ evaluate those kernels at $Y$. The cited module pushforward acyclicity statement, with $V=Y$, gives that $f_*I$ is $\\Gamma(Y,-)$-acyclic for every injective module $I$. Apply the construction in steps 1--3, which needs only enough injectives, not exactness of the module pullback. Since $(f_*F)(Y)=F(X)$ also on morphisms, the composite is global sections on $X$, with scalars restricted from $\\mathcal O_X(X)$ to $\\mathcal O_Y(Y)$. Its derived functors are therefore $H^n(X,F)$, with that scalar restriction (kernels, images and quotient groups are unchanged on restricting scalars), and $R^p\\Psi(R^q\\Phi F)=H^p(Y,R^qf_*F)$. This proves the module Leray sequence for every module sheaf, hence for the proper coherent case in the statement; properness and coherence impose no additional requirement on this construction.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-pushforward-injective-acyclic",
+    "def-sc-ringed-space-module-cohomology",
+    "def-sp-left-exact-additive",
+    "lem-sp-derived-well-defined",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 01EX (lemma-pushforward-injective), 01F2 (lemma-Leray), 01F6 (lemma-relative-Leray)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-grothendieck-enough-injectives",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "lem-sp-derived-well-defined",
+  "lem-sp-cartan-eilenberg-exists",
+  "thm-sp-double-complex-spectral-sequences",
+  "det-def-groth-ss",
+  "lem-weil-pbc-first-quadrant-row-collapse",
+  "lem-sp-cart-eilenberg-left-exact-cohomology",
+  "def-sp-double-complex-total",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-weil-pbc-site-morphism-composition",
+  "def-weil-pbc-etale-site",
+  "def-sc-zariski-site",
+  "lem-weil-pbc-sets-etale-inverse-image-exact",
+  "lem-sc-topological-pushforward-injective",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-pushforward-injective-acyclic",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015I, 015J, 015N; site specializations: sites-cohomology.tex Tags 0732, 0734; module specialization: cohomology.tex Tags 01EX, 01F2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck spectral sequence of two additive left exact functors sending injectives to acyclic objects and Leray spectral sequence for sheaves",
+   "results": "Actual search log: 8 hits, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex. Read the displayed results: derived-functor/left-exact-functor infrastructure, not the spectral sequence theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grothendieckSpectralSequence|leraySpectralSequence|Cartan.Eilenberg",
+   "results": "Actual search log: 2 hits, Mathlib/Algebra/Lie/Cochain.lean, Mathlib/CategoryTheory/SmallObject/Basic.lean. Read the displayed results: derived-functor/left-exact-functor infrastructure, not the spectral sequence theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck spectral sequence for composite left exact functors",
+   "results": "Actual search log: 8 hits, CategoryTheory.LeftExactFunctor.whiskeringLeft_obj_obj_obj, CategoryTheory.LeftExactFunctor.whiskeringLeft, CategoryTheory.Grothendieck.mapCompIso, CategoryTheory.isCocontinuous_comp, CategoryTheory.Functor.isContinuous_comp, CategoryTheory.Grothendieck.map_comp_eq, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, CategoryTheory.Grothendieck.pre_comp. Read the displayed results: derived-functor/left-exact-functor infrastructure, not the spectral sequence theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.SpectralSequence",
+   "results": "Actual search log: 0 hits, . Read the displayed results: derived-functor/left-exact-functor infrastructure, not the spectral sequence theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A first quadrant spectral sequence R p G R q F converges to the derived functor of the composition G F",
+   "results": "Actual search log: 8 hits, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.Functor.rightDerived, CategoryTheory.NatTrans.rightDerived. Read the displayed results: derived-functor/left-exact-functor infrastructure, not the spectral sequence theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps",
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 785,
+ "blueprint_uses": [
+  "det-def-groth-ss"
+ ],
+ "blueprint_lean": [
+  "CategoryTheory.Functor.exists_grothendieckSpectralSequence",
+  "CategoryTheory.Adjunction.isAcyclicComposablePair",
+  "AlgebraicGeometry.Scheme.Modules.exists_leraySpectralSequence"
+ ],
+ "blueprint_lean_not_found": [
+  "CategoryTheory.Functor.exists_grothendieckSpectralSequence",
+  "CategoryTheory.Adjunction.isAcyclicComposablePair",
+  "AlgebraicGeometry.Scheme.Modules.exists_leraySpectralSequence"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "det-thm-groth-ss",
+  "from": null,
+  "same_as": [
+   "sk-thm-groth-ss"
+  ]
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "det-thm-groth-ss",
+  "worker": "O1",
+  "summary": "Preserved the full statement; expanded both Cartan--Eilenberg filtrations with correctly ordered indices and cited existing general lemmas. Proved arbitrary-site and Zariski module specializations using the exact hypotheses of existing acyclicity statements. No new nodes. Reviewer (maintainer reader, 2026-10-24): step 4 rewritten to cite sectionwise kernels, site-morphism composition and the punctual-site direct image as evaluation at v(*); new step 5 shows that morphisms of schemes give morphisms of small etale/Zariski sites with (hf)_* = h_*f_* and Gamma(Y,-) evaluation at the final object; former step 5 is step 6. stmt_deps now name Grothendieck abelian categories, derived functors, the etale and Zariski sites, module cohomology, coherent modules and proper morphisms; the unused def-pc-module-pullback is removed.",
+  "blueprint": "Steps 1--3 realize the imported double-complex proof (steps 1--3 of the blueprint text), step 4 the site and punctual specializations (blueprint step 4), step 5 the etale and small Zariski sites of schemes (blueprint step 4, last sentence), step 6 the Zariski module case (blueprint step 5).",
+  "tool_uses": [
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic sheaf, injective, or cohomology tool used exactly as its statement says; it supplies a foundational input, not a replacement of this unit route."
+   },
+   {
+    "node": "def-sp-injective-resolutions",
+    "why": "Generic sheaf, injective, or cohomology tool used exactly as its statement says; it supplies a foundational input, not a replacement of this unit route."
+   },
+   {
+    "node": "def-sp-left-exact-additive",
+    "why": "Generic sheaf, injective, or cohomology tool used exactly as its statement says; it supplies a foundational input, not a replacement of this unit route."
+   },
+   {
+    "node": "lem-sp-derived-well-defined",
+    "why": "Generic sheaf, injective, or cohomology tool used exactly as its statement says; it supplies a foundational input, not a replacement of this unit route."
+   },
+   {
+    "node": "lem-sp-cartan-eilenberg-exists",
+    "why": "Generic Cartan--Eilenberg existence tool used exactly as its statement says; it supplies a foundational input, not a replacement of this unit route."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Generic two-filtered-double-complex spectral sequence tool used exactly as its statement says; it supplies a foundational input, not a replacement of this unit route."
+   },
+   {
+    "node": "lem-weil-pbc-first-quadrant-row-collapse",
+    "why": "Generic bottom-row collapse tool used exactly as its statement says; it supplies a foundational input, not a replacement of this unit route."
+   },
+   {
+    "node": "lem-sp-cart-eilenberg-left-exact-cohomology",
+    "why": "Generic left-exact functor and horizontal cohomology tool used exactly as its statement says; it supplies a foundational input, not a replacement of this unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "Generic sheaf, injective, or cohomology tool used exactly as its statement says; it supplies a foundational input, not a replacement of this unit route."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Generic sheaf, injective, or cohomology tool used exactly as its statement says; it supplies a foundational input, not a replacement of this unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Generic sheaf, injective, or cohomology tool used exactly as its statement says; it supplies a foundational input, not a replacement of this unit route."
+   },
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "Generic sheaf, injective, or cohomology tool used exactly as its statement says; it supplies a foundational input, not a replacement of this unit route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-injective-vanishing",
+    "why": "Generic sheaf, injective, or cohomology tool used exactly as its statement says; it supplies a foundational input, not a replacement of this unit route."
+   },
+   {
+    "node": "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "why": "Generic sheaf, injective, or cohomology tool used exactly as its statement says; it supplies a foundational input, not a replacement of this unit route."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Generic sheaf, injective, or cohomology tool used exactly as its statement says; it supplies a foundational input, not a replacement of this unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-pushforward-injective-acyclic",
+    "why": "Generic sheaf, injective, or cohomology tool used exactly as its statement says; it supplies a foundational input, not a replacement of this unit route."
+   },
+   {
+    "node": "def-sc-ringed-space-module-cohomology",
+    "why": "Generic sheaf, injective, or cohomology tool used exactly as its statement says; it supplies a foundational input, not a replacement of this unit route."
+   },
+   {
+    "node": "def-pc-ringed-spaces-derived-direct-image",
+    "why": "Its explicit sectionwise module direct-image definition is used for kernels, scalars, and global sections in the Zariski specialization."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "Step 4 takes from its statement only that kernels and finite limits of abelian sheaves are sectionwise; a generic sheaf fact no node of this unit gives."
+   },
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Steps 4-5 take (hf)_*=h_*f_* for composite morphisms of sites from its statement; a generic site fact no node of this unit gives."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-exact",
+    "why": "Step 5 takes from its statement that base change defines a morphism of small etale sites; a generic etale-site fact no node of this unit gives."
+   },
+   {
+    "node": "lem-sc-topological-pushforward-injective",
+    "why": "Step 5 takes from its statement exactness of topological f^{-1}, the adjunction and preservation of injectives by f_*; a generic sheaf fact no node of this unit gives."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-grothendieck-enough-injectives",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "lem-sp-derived-well-defined",
+  "lem-sp-cartan-eilenberg-exists",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-first-quadrant-row-collapse",
+  "lem-sp-cart-eilenberg-left-exact-cohomology",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-pushforward-injective-acyclic",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-sets-etale-inverse-image-exact",
+  "lem-sc-topological-pushforward-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O1-5ac6e575a",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-5ac6e575a (reviewer sub-agent of L); spot-checked: Read the item in full, every cited statement, Stacks derived.tex 015I/015J/015M/015N (015N and 015J proofs), and sites-cohomology 0732/0734 and cohomology 01EX/01F2/01F6, all verified against tags/tags; no SGA source is used. There are no new nodes. Steps 1-3 are correct: the CE node's hypotheses fit K=Phi(I); the first spectral sequence collapses onto one row via the acyclicity hypothesis, whose finite filtration and E_inf range match lem-weil-pbc-first-quadrant-row-collapse; the left-exact-cohomology node's injective-Z/B hypotheses hold row by row; and the (-1)^{ab} sign rescale is checked. The module step (old 5) is correct: 01EX acyclicity at V=Y, so f^* exactness is not needed. Two faults, repaired in fixes/dag/nodes/sec-picard-framework/det-thm-groth-ss.json. (1) C1/C4/E5 in step 4: sectionwise kernels and (hf)_*=h_*f_* had no citation, and the punctual direct image 'is global sections' rested on no node. It is rewritten with lem-weil-pbc-sheafification-exact, lem-weil-pbc-site-morphism-composition, and h_*=Gamma(v(*),-), which is what the statement calls Gamma(Y,-). The 'etale/Zariski sites are instances' sentence is replaced by a new step 5 (base change gives a morphism of etale sites, lem-weil-pbc-sets-etale-inverse-image-exact; the Zariski case uses lem-sc-topological-pushforward-injective; Gamma(Y,-) is evaluation at the final object, and Gamma(Y,f_*F)=F(X)). This is the same gap and repair as on the sibling sk-thm-groth-ss. (2) B3: stmt_deps lacked Grothendieck abelian, derived functors, the etale and Zariski sites, module cohomology, coherent and proper, and carried the unused def-pc-module-pullback; I added the existing nodes and removed it. proof_deps is the union of the step uses (26 ids), no cycle, and there are 4 new tool_uses entries. Maintainer: det-thm-groth-ss and sk-thm-groth-ss have identical statements and should be merged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Leray",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_leraySpectralSequence",
+  "declarations": [
+   "CategoryTheory.Functor.exists_grothendieckSpectralSequence",
+   "CategoryTheory.Adjunction.isAcyclicComposablePair",
+   "AlgebraicGeometry.Scheme.Modules.exists_leraySpectralSequence"
+  ],
+  "statement": "theorem exists_leraySpectralSequence [HasInjectiveResolutions X.Modules]\n    [HasInjectiveResolutions Y.Modules] (ℱ : X.Modules) :\n    ∃ E : E₂CohomologicalSpectralSequenceNat AddCommGrpCat.{u},\n      (∀ p q : ℕ, Nonempty ((E.page 2).X (p, q) ≅\n        ((globalSectionsFunctor Y).rightDerived p).obj ((higherDirectImage f q).obj ℱ))) ∧\n      E.AbutsTo (fun n ↦ ((globalSectionsFunctor X).rightDerived n).obj ℱ)",
+  "branch": "slopmaster2",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing attachment to exactly the three declarations named by the current blueprint. The abstract Functor.exists_grothendieckSpectralSequence theorem and Adjunction.isAcyclicComposablePair are defined in WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck, publicly imported by the recorded module; Scheme.Modules.exists_leraySpectralSequence is defined in the recorded module. The abstract theorem gives the full abstract statement with an arbitrary abelian target, the adjunction theorem supplies acyclicity for direct images of abelian sheaves on sites via their exact inverse-image adjoints, and the primary module theorem gives the Zariski module Leray specialization (hence its proper coherent case). Nat indexing encodes the first quadrant; SpectralSequence.AbutsTo is the finite decreasing subobject filtration of det-def-groth-ss. Site composition identifies the composite direct image, and punctual evaluation is global sections, as in the primary theorem docstring. The module theorem uses the same SheafOfModules category and module direct image as the recorded dependencies (the direct-image equality was checked by rfl on the server). Its HasInjectiveResolutions parameters are supplied by Scheme.Modules.isGrothendieckAbelian, explicitly installed in the server consumer probe. No new notion, theorem, extra mathematical assumption, or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-92d6fa637",
+  "group": "NY",
+  "result": "pass",
+  "note": "existing:true attachment of the three blueprint_lean declarations (Functor.exists_grothendieckSpectralSequence, Adjunction.isAcyclicComposablePair, Scheme.Modules.exists_leraySpectralSequence); item differs from side-live only in lean; statement verbatim to Leray.lean signature; branch slopmaster2 is the value check_existing requires for WeilConjectures.*. Checked hypotheses (A,B Grothendieck, C only abelian, additive + PreservesFiniteLimits, IsAcyclicComposablePair = det-def-groth-ss), E2 iso R^pG(R^qF X), AbutsTo = real finite filtration with E∞ at page p+q+2, site acyclicity via the adjunction criterion, module Leray for all f and F (proper/coherent clause follows; HasInjectiveResolutions supplied by isGrothendieckAbelian). Advisory: IsGrothendieckAbelian.{v} at the hom universe means étale/large-site sheaf categories (Grothendieck.{u}, homs in u+1) need ShrinkHoms transport in stage 3; report clause 9 overstates polymorphism. Leray uses an Ab-valued Scheme.Modules.globalSectionsFunctor, not the recorded ModuleCat-valued one (same groups). Merge det/sk-thm-groth-ss. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,471 @@
+{
+ "id": "lem-trf-tensor-diagonal-evaluation-hom",
+ "kind": "statement",
+ "title": "Evaluation map from the tensor-diagonal base change",
+ "statement": "Let $k$ be a commutative ring, $L$ a commutative $k$-algebra, and $B,C$ commutative $L$-algebras, regarded as $k$-algebras by restriction. Tensor products are those of [def-weil-pbc-module-tensor-product], with multiplication $(x\\otimes y)(x\\prime\\otimes y\\prime)=xx\\prime\\otimes yy\\prime$ and unit $1\\otimes1$. Put $R=L\\otimes_kL$ and $D=B\\otimes_kC$. Give $D$ its $R$-algebra structure through $\\psi:R\\to D$, $\\lambda\\otimes\\lambda\\prime\\mapsto(\\lambda1_B)\\otimes(\\lambda\\prime1_C)$, and give $L$ its $R$-algebra structure through $\\mu:R\\to L$, $\\lambda\\otimes\\lambda\\prime\\mapsto\\lambda\\lambda\\prime$. There is a unique unital ring homomorphism $\\beta:D\\otimes_RL\\to B\\otimes_LC$ such that $\\beta((b\\otimes c)\\otimes\\lambda)=(\\lambda b)\\otimes c$ for all $b\\in B,c\\in C,\\lambda\\in L$. No injectivity, flatness, reducedness, finite-generation or field assumption is imposed; zero algebras are allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C2Y, lemma-geometrically-reduced-over-separable-algebraic, second proof paragraph displayed identity; agent generalization of its inverse map to commutative algebras over a commutative ring"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $H=B\\otimes_LC$, with $L$ acting on the first factor. The map $B\\times C\\to H$, $(b,c)\\mapsto b\\otimes_Lc$, is $k$-bilinear: it is additive separately, and for $a\\in k$ both $(ab)\\otimes_Lc$ and $b\\otimes_L(ac)$ equal $a(b\\otimes_Lc)$ by $L$-bilinearity and restriction of scalars. The universal property in [def-weil-pbc-module-tensor-product], over $k$, gives a $k$-linear map $q:D\\to H$ with $q(b\\otimes_kc)=b\\otimes_Lc$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2Y, lemma-geometrically-reduced-over-separable-algebraic, second proof paragraph tensor identity; explicit evaluation construction using Tag 00CX, lemma-tensor-product"
+   }
+  },
+  {
+   "text": "Give $H$ the $R$-module structure $r\\cdot h=\\mu(r)h$. For $s,t\\in L$ and $b\\in B,c\\in C$, $L$-balancing in $H$ gives\n$$q(\\psi(s\\otimes_kt)(b\\otimes_kc))=(sb)\\otimes_L(tc)=st(b\\otimes_Lc)=\\mu(s\\otimes_kt)q(b\\otimes_kc).$$\nBy [def-weil-pbc-module-tensor-product], elements of $R$ and $D$ are finite sums of pure tensors: absorb every $k$-coefficient into a factor. Both sides are $k$-bilinear in $(r,d)$, so expanding the finite sums gives $q(\\psi(r)d)=\\mu(r)q(d)$ for all $r\\in R,d\\in D$. Thus $q$ is $R$-linear for precisely the stated actions.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2Y, lemma-geometrically-reduced-over-separable-algebraic, second proof paragraph tensor identity; explicit evaluation construction using Tag 00CX, lemma-tensor-product"
+   }
+  },
+  {
+   "text": "Define $h:D\\times L\\to H$ by $h(d,\\lambda)=\\lambda q(d)$, with $H$ carrying the $R$-action from Step 2. This map is additive in each variable. For $r\\in R$, the first scalar-linearity equation follows from Step 2, and the second from commutativity in $L$:\n$$h(\\psi(r)d,\\lambda)=\\lambda\\mu(r)q(d)=\\mu(r)h(d,\\lambda),\\qquad h(d,\\mu(r)\\lambda)=\\mu(r)\\lambda q(d)=\\mu(r)h(d,\\lambda).$$\nThus $h$ is $R$-bilinear for the two actions specified in the statement. The universal property in [def-weil-pbc-module-tensor-product], over $R$, gives an $R$-linear map $\\beta:D\\otimes_RL\\to H$ with $\\beta(d\\otimes_R\\lambda)=\\lambda q(d)$, hence $\\beta((b\\otimes_kc)\\otimes_R\\lambda)=(\\lambda b)\\otimes_Lc$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2Y, lemma-geometrically-reduced-over-separable-algebraic, second proof paragraph tensor identity; explicit evaluation construction using Tag 00CX, lemma-tensor-product"
+   }
+  },
+  {
+   "text": "The map $\\beta$ is additive by construction and sends $((1_B\\otimes_k1_C)\\otimes_R1_L)$ to $1_B\\otimes_L1_C$, so preserves the unit. Write $e(b,c,\\lambda)=(b\\otimes_kc)\\otimes_R\\lambda$. Using the multiplications in the statement, for $b,b'\\in B,c,c'\\in C,\\lambda,\\lambda'\\in L$,\n$$\\beta(e(b,c,\\lambda)e(b',c',\\lambda'))=(\\lambda\\lambda'bb')\\otimes_Lcc'=((\\lambda b)\\otimes_Lc)((\\lambda'b')\\otimes_Lc').$$\nThe generating assertion of [def-weil-pbc-module-tensor-product] applied twice expresses each element of $D\\otimes_RL$ as a finite sum of such $e$: first absorb outer $R$-coefficients into $L$, then expand $d\\in D$ into pure $k$-tensors. Explicitly, for finite sums $x=\\sum_i e_i$ and $y=\\sum_j f_j$ of these generators, distributivity and additivity give $\\beta(xy)=\\sum_{i,j}\\beta(e_if_j)=\\sum_{i,j}\\beta(e_i)\\beta(f_j)=\\beta(x)\\beta(y)$. Empty sums give the same identity if either element is zero. Hence $\\beta$ is a unital ring homomorphism.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2Y, lemma-geometrically-reduced-over-separable-algebraic, second proof paragraph tensor identity; explicit evaluation construction using Tag 00CX, lemma-tensor-product"
+   }
+  },
+  {
+   "text": "If $\\gamma:D\\otimes_RL\\to H$ is another unital ring homomorphism with the required formula, then $\\gamma(e(b,c,\\lambda))=\\beta(e(b,c,\\lambda))$ for every triple. By the finite-sum expression from Step 4, derived from [def-weil-pbc-module-tensor-product], additivity gives $\\gamma=\\beta$. This proves uniqueness among all unital ring homomorphisms, without assuming that a competitor is $R$-linear.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2Y, lemma-geometrically-reduced-over-separable-algebraic, second proof paragraph tensor identity; explicit evaluation construction using Tag 00CX, lemma-tensor-product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C2Y, lemma-geometrically-reduced-over-separable-algebraic, second proof paragraph tensor identity; explicit evaluation construction using Tag 00CX, lemma-tensor-product; the source states the identity, and Q117 writes out the inverse map and balancing checks over arbitrary commutative rings"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lift|restrictScalars",
+   "results": {
+    "t": "2026-10-22T05:56:44Z",
+    "tool": "grep",
+    "query": "lift|restrictScalars",
+    "sub": "RingTheory/TensorProduct/Basic.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "43",
+     "52",
+     "53",
+     "55",
+     "56"
+    ],
+    "digest": "22cce0fca8f7e185"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general tensor lift/map constructors do not supply the two scalar-action compatibility checks for this diagonal base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The balanced evaluation map (B tensor over k C) tensor over (L tensor over k L) L to B tensor over L C is a ring homomorphism",
+   "results": {
+    "t": "2026-10-22T05:56:44Z",
+    "tool": "leansearch",
+    "query": "The balanced evaluation map (B tensor over k C) tensor over (L tensor over k L) L to B tensor over L C is a ring homomorphism",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.map",
+   "results": {
+    "t": "2026-10-22T05:56:45Z",
+    "tool": "loogle",
+    "query": "Algebra.TensorProduct.map",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Algebra.TensorProduct.map",
+     "Algebra.TensorProduct.map_id",
+     "Algebra.TensorProduct.productMap_eq_comp_map",
+     "Algebra.TensorProduct.map_comp_includeLeft",
+     "Algebra.TensorProduct.map_id_comp",
+     "Algebra.TensorProduct.map_comp_includeRight",
+     "Algebra.TensorProduct.map_comp_id",
+     "Algebra.TensorProduct.lmul'_comp_map"
+    ],
+    "digest": "7941607965ca7a13"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general tensor lift/map constructors do not supply the two scalar-action compatibility checks for this diagonal base change"
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|theorem lift_tmul|def map|def lmul|def.*[Bb]ase[Cc]hange|diagonal",
+   "results": {
+    "t": "2026-10-22T05:56:57Z",
+    "tool": "grep",
+    "query": "def lift|theorem lift_tmul|def map|def lmul|def.*[Bb]ase[Cc]hange|diagonal",
+    "sub": "RingTheory/TensorProduct",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean",
+     "Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean",
+     "Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean"
+    ],
+    "digest": "10e448c477a646eb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general tensor lift/map constructors do not supply the two scalar-action compatibility checks for this diagonal base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For L a commutative k algebra and B C commutative L algebras there is a ring homomorphism from (B tensor k C) tensor (L tensor k L) L to B tensor L C given by (b tensor c) tensor l maps to l b tensor c",
+   "results": {
+    "t": "2026-10-22T05:57:02Z",
+    "tool": "leanfinder",
+    "query": "For L a commutative k algebra and B C commutative L algebras there is a ring homomorphism from (B tensor k C) tensor (L tensor k L) L to B tensor L C given by (b tensor c) tensor l maps to l b tensor c",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.TensorProduct.lmul''_eq_lid_comp_mapOfCompatibleSMul",
+     "TensorProduct.Algebra.linearMap_comp_mul'",
+     "Algebra.TensorProduct.rTensor",
+     "Algebra.TensorProduct.mapOfCompatibleSMul",
+     "Algebra.IsPushout.tensorProduct_tensorProduct",
+     "Algebra.TensorProduct.lmulEquiv",
+     "Algebra.TensorProduct.lTensor",
+     "Algebra.TensorProduct.lift"
+    ],
+    "digest": "949015ce1ba557f2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general tensor lift/map constructors do not supply the two scalar-action compatibility checks for this diagonal base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation after tensoring over a tensor square with its multiplication algebra gives a ring homomorphism to the relative tensor product",
+   "results": {
+    "t": "2026-10-22T05:57:18Z",
+    "tool": "leanfinder",
+    "query": "Evaluation after tensoring over a tensor square with its multiplication algebra gives a ring homomorphism to the relative tensor product",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.TensorProduct.lmul''",
+     "Algebra.TensorProduct.lmul'",
+     "LinearMap.mul''_apply",
+     "Algebra.TensorProduct.algHomOfLinearMapTensorProduct_apply",
+     "AlgHom.mulLeftRight",
+     "TensorProduct.Algebra.linearMap_comp_mul'",
+     "Algebra.TensorProduct.lift",
+     "LinearMap.mul''"
+    ],
+    "digest": "90ce97ecb06bffcd"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general tensor lift/map constructors do not supply the two scalar-action compatibility checks for this diagonal base change"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorProduct_tensorProduct",
+   "results": {
+    "t": "2026-10-22T05:58:37Z",
+    "tool": "grep",
+    "query": "tensorProduct_tensorProduct",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/IsTensorProduct.lean",
+     "Mathlib/RingTheory/Localization/BaseChange.lean",
+     "Mathlib/RingTheory/Localization/BaseChange.lean",
+     "Mathlib/RingTheory/Localization/BaseChange.lean",
+     "Mathlib/RingTheory/Localization/BaseChange.lean",
+     "Mathlib/RingTheory/Smooth/IntegralClosure.lean",
+     "Mathlib/RingTheory/Smooth/IntegralClosure.lean",
+     "Mathlib/RingTheory/Etale/QuasiFinite.lean"
+    ],
+    "digest": "a9809d57fae7c2d3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: IsPushout.tensorProduct_tensorProduct is base change of an assumed pushout, not either diagonal comparison map with its scalar compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|lift_tmul|mapOfCompatibleSMul|tensorProduct_tensorProduct",
+   "results": {
+    "t": "2026-10-22T07:28:40Z",
+    "tool": "grep",
+    "query": "def lift|lift_tmul|mapOfCompatibleSMul|tensorProduct_tensorProduct",
+    "sub": "RingTheory/TensorProduct",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/Maps.lean",
+     "Mathlib/RingTheory/TensorProduct/Nontrivial.lean",
+     "Mathlib/RingTheory/TensorProduct/Basic.lean",
+     "Mathlib/RingTheory/TensorProduct/Basic.lean"
+    ],
+    "digest": "10f413f6ac60699d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors require the scalar-action verification proved here; cancelBaseChange has source A tensor_S (S tensor_R B), not the tensor-diagonal base change, and tensorTensorTensorComm has four factors with tower assumptions, not this diagonal comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Balanced evaluation ring homomorphism from tensor diagonal base change to relative tensor product of commutative algebras",
+   "results": {
+    "t": "2026-10-22T07:28:41Z",
+    "tool": "leansearch",
+    "query": "Balanced evaluation ring homomorphism from tensor diagonal base change to relative tensor product of commutative algebras",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TensorProduct.AlgebraTensorModule.distribBaseChange",
+     "Algebra.TensorProduct.algHomOfLinearMapTensorProduct",
+     "Algebra.TensorProduct.piRightHom",
+     "Module.End.baseChangeHom",
+     "Algebra.Generators.baseChange",
+     "Algebra.TensorProduct.mapOfCompatibleSMul",
+     "Algebra.TensorProduct.lTensor",
+     "LinearEquiv.baseChange"
+    ],
+    "digest": "9380b581b48e890b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors require the scalar-action verification proved here; cancelBaseChange has source A tensor_S (S tensor_R B), not the tensor-diagonal base change, and tensorTensorTensorComm has four factors with tower assumptions, not this diagonal comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.lift",
+   "results": {
+    "t": "2026-10-22T07:28:41Z",
+    "tool": "loogle",
+    "query": "Algebra.TensorProduct.lift",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Algebra.TensorProduct.lift",
+     "Algebra.TensorProduct.lift_comp_includeLeft",
+     "Algebra.TensorProduct.lift_comp_includeRight'",
+     "Algebra.TensorProduct.lift_comp_includeRight",
+     "Algebra.TensorProduct.lift_tmul",
+     "Algebra.TensorProduct.lift_includeLeft_includeRight",
+     "Algebra.TensorProduct.lmul'_comp_map",
+     "Algebra.TensorProduct.restrictScalars_lift"
+    ],
+    "digest": "9fde71472adfb8e7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors require the scalar-action verification proved here; cancelBaseChange has source A tensor_S (S tensor_R B), not the tensor-diagonal base change, and tensorTensorTensorComm has four factors with tower assumptions, not this diagonal comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For commutative k algebras L and commutative L algebras B C the map from (B tensor k C) tensor (L tensor k L) L to B tensor L C sends (b tensor c) tensor l to (l b) tensor c",
+   "results": {
+    "t": "2026-10-22T07:28:44Z",
+    "tool": "leanfinder",
+    "query": "For commutative k algebras L and commutative L algebras B C the map from (B tensor k C) tensor (L tensor k L) L to B tensor L C sends (b tensor c) tensor l to (l b) tensor c",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.TensorProduct.tensorTensorTensorComm_tmul",
+     "Algebra.TensorProduct.cancelBaseChange",
+     "Algebra.TensorProduct.cancelBaseChange_tmul",
+     "Algebra.TensorProduct.tensorTensorTensorComm_toLinearEquiv",
+     "Algebra.TensorProduct.lmul''_eq_lid_comp_mapOfCompatibleSMul",
+     "TensorProduct.AlgebraTensorModule.tensorTensorTensorComm_tmul",
+     "Algebra.TensorProduct.lmul'_apply_tmul",
+     "TensorProduct.AlgebraTensorModule.rTensor_tensor"
+    ],
+    "digest": "aa1569e7acacb5b4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors require the scalar-action verification proved here; cancelBaseChange has source A tensor_S (S tensor_R B), not the tensor-diagonal base change, and tensorTensorTensorComm has four factors with tower assumptions, not this diagonal comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of tensor scalars and multiplication give the unique balanced evaluation map of commutative algebras along the multiplication L tensor k L to L",
+   "results": {
+    "t": "2026-10-22T07:34:41Z",
+    "tool": "leanfinder",
+    "query": "Restriction of tensor scalars and multiplication give the unique balanced evaluation map of commutative algebras along the multiplication L tensor k L to L",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.TensorProduct.lmul'",
+     "Algebra.TensorProduct.lmul''",
+     "Algebra.TensorProduct.lmul''_eq_lid_comp_mapOfCompatibleSMul",
+     "LinearMap.mul''_apply",
+     "Algebra.TensorProduct.lmul'_apply_tmul",
+     "LinearMap.mul''",
+     "Algebra.TensorProduct.lmulEquiv",
+     "TensorProduct.Algebra.linearMap_comp_mul'"
+    ],
+    "digest": "da754f17c2b63f80"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors require the scalar-action verification proved here; cancelBaseChange has source A tensor_S (S tensor_R B), not the tensor-diagonal base change, and tensorTensorTensorComm has four factors with tower assumptions, not this diagonal comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "def cancelBaseChange|cancelBaseChange_tmul|def tensorTensorTensorComm|lmul.._eq_lid",
+   "results": {
+    "t": "2026-10-22T07:35:21Z",
+    "tool": "grep",
+    "query": "def cancelBaseChange|cancelBaseChange_tmul|def tensorTensorTensorComm|lmul.._eq_lid",
+    "sub": "RingTheory/TensorProduct/Maps.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "476",
+     "483",
+     "485",
+     "679",
+     "764"
+    ],
+    "digest": "b71431d3ba96bcb3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors require the scalar-action verification proved here; cancelBaseChange has source A tensor_S (S tensor_R B), not the tensor-diagonal base change, and tensorTensorTensorComm has four factors with tower assumptions, not this diagonal comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometric-reducedness-separable-scalar-restriction",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Via the scalar-restriction input below the ancestor: Stacks 0C2Y second proof paragraph, displayed tensor identity; evaluation from the diagonal base change to the relative tensor",
+   "via": [
+    "lem-trf-geometric-reducedness-separable-scalar-restriction",
+    "lem-trf-geometrically-integral-curve-factorization",
+    "lem-trf-de-jong-geometrically-irreducible-tower",
+    "lem-trf-plurinodal-proper-hypercover",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-tensor-diagonal-evaluation-hom",
+  "worker": "stage1",
+  "summary": "Rebased the retained Q117 split against the current DAG after the repeated side-completion promotion return. The initial required dry run passed at afdbad99e0c. Re-read the current tensor-product statement and all five verbatim citations, retained the separate R-linearity equations from the prior repair, and made the finite double-sum argument in Step 4 explicit, including zero elements. The statement, route, dependencies, searches and maintainer-owned fields are retained; no new nodes or hypotheses.",
+  "blueprint": "Auxiliary scalar-restriction input below lem-trf-local-term-locality via the inherited blueprint.from chain: Stacks 0C2Y second paragraph displayed tensor identity. Steps 1–3 construct its inverse evaluation; Steps 4–5 verify it is the unique unital ring map. The unit and chapter route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-0dba6ae08",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-0dba6ae08 (reviewer sub-agent of L); spot-checked: Re-delivery after a repeated side-completion promotion landing return. I diffed the item against the previously PASSed head 25fed0af. Only Step 4 changed: it now writes out the finite double-sum β(xy)=Σβ(e_i f_j)=Σβ(e_i)β(f_j)=β(x)β(y), with empty sums covering zero. Only the split_report date and summary also changed. Statement, deps, source, proof_origin, blueprint and searches are identical. No new nodes, no repair note (not a re-split), no SGA. Source: I read Stacks 0C2Y (lemma-geometrically-reduced-over-separable-algebraic), second-paragraph display K⊗_{k'}A=(K⊗_kA)⊗_{k'⊗k'}k'. The item is the agent-generalized direction (D⊗_R L→B⊗_L C) and is true over arbitrary commutative rings. The parent's use with (L,B,C)=(k_1,E,A) matches. The only cited node, def-weil-pbc-module-tensor-product, states the bilinear universal property and pure-tensor generation, which is exactly what the steps use. Step checks: S1, q is k-bilinear. S2, q(ψ(s⊗t)(b⊗c))=st(b⊗c)=μ(s⊗t)q, extended by biadditivity and generation. S3, h(d,λ)=λq(d) is R-bilinear for both actions. S4, unit, product on generators, and the explicit sum extension. S5, uniqueness by additivity alone. Edge cases: B or C=0; L=k; ℤ[i], where β is multiplication; non-flat ℤ/4→ℤ/2. The sibling unit-hom is the reverse map, not a duplicate. Advisory: the ring structure on the tensor products is stated in the item, while the cited node covers modules only (same convention as parent and sibling). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TensorDiagonalEvaluation",
+  "declaration": "Algebra.TensorProduct.tensor_diagonal_evaluation_existsUnique",
+  "declarations": [
+   "Algebra.TensorProduct.tensorDiagonalScalarMap",
+   "Algebra.TensorProduct.tensorDiagonalBaseChange",
+   "Algebra.TensorProduct.tensorDiagonalBaseChangeCommRing",
+   "Algebra.TensorProduct.tensorDiagonalPureTensor",
+   "Algebra.TensorProduct.tensor_diagonal_evaluation_existsUnique"
+  ],
+  "file": "lean/Sheaf/RingTheory/TensorDiagonalEvaluation.lean",
+  "statement": "theorem tensor_diagonal_evaluation_existsUnique : ∃! β : tensorDiagonalBaseChange k L B C →+* B ⊗[L] C, ∀ (b : B) (c : C) (l : L), β (tensorDiagonalPureTensor k L B C b c l) = (l • b) ⊗ₜ[L] c",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c0d30727",
+  "group": "Q27",
+  "result": "fix",
+  "note": "Lean exact vs node and Stacks 0C2Y (the node's generalization to commutative rings is valid): k/L/B/C with restriction via IsScalarTower; ψ = TensorProduct.map of tower algebra maps; μ = lmul'; source (B⊗[k]C)⊗[L⊗[k]L]L built from those let-instances only (no competing global instance); ∃! RingHom with (b⊗c)⊗l ↦ (l•b)⊗c for all b,c,l; independent universes; zero and non-flat cases not excluded; one sorry; docstrings carry source place, blueprint id and the 5 proof steps; lean.statement verbatim; only the lean field changed; no existing Mathlib or project declaration (H4). Sole fault H11: the 'Second reading by Q27' is the author's own pass → FIX: fixes/lem-trf-tensor-diagonal-evaluation-hom.report.md = worker report verbatim + independent clause-by-clause second reading. Advisory: sibling lem-trf-tensor-diagonal-unit-hom should reuse tensorDiagonalBaseChange and tensorDiagonalPureTensor."
+ }
+}

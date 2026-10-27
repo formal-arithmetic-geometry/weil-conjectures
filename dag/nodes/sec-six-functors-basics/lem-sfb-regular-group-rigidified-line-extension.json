@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-regular-group-rigidified-line-extension",
+ "kind": "statement",
+ "title": "Extension and uniqueness of rigidified lines over a regular base",
+ "statement": "Let $S$ be a regular locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], where regular means that every local ring is a regular local ring (its maximal ideal has a minimal generating set of cardinality its Krull dimension). Let $j:V\\hookrightarrow S$ be a dense open immersion [def-weil-open-immersion]. Let $p:G\\to S$ be a separated smooth commutative group algebraic space of finite presentation [def-trf-algebraic-space], with geometrically integral fibres (each fibre after an algebraically closed field extension is reduced and irreducible); a commutative group algebraic space has multiplication, inverse and identity maps satisfying the group identities and commutativity. The identity is $e:S\\to G$. Smoothness and finite presentation are tested on etale scheme charts [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], and separated means that the diagonal is a closed immersion. A rigidified line module is a line module $L$ on the small etale site of $G$ together with an isomorphism $e^*L\\simeq\\mathcal O_S$; its morphisms are line-module isomorphisms respecting that rigidification. Restriction induces an equivalence between the groupoid of rigidified line modules on $G$ and that on $G_V$. In particular every rigidified line on $G_V$ extends, and a specified rigidification-preserving isomorphism between restrictions of two extensions extends uniquely to an isomorphism on $G$. Pullback of these extensions and isomorphisms along any etale map $S'\\to S$ is compatible with this restriction equivalence. For arbitrary maps of spaces, module pullback means tensor inverse image along their ringed etale sites [lem-trf-space-enlarged-etale-ringed-site-model].",
+ "source": {
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Section 4.2, printed p.142, regular-base extension by a coherent extension and determinant, followed by correction at the identity and uniqueness from irreducible geometric fibres; the general rigidified-line formulation of that argument. Local PDF WANTED; primary Numdam PDF read online."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-open-immersion",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-sfb-rigidified-space-lines",
+  "def-sfb-smooth-integral-group-space",
+  "def-weil-regular-scheme",
+  "def-sfb-space-module-tensor-composition"
+ ],
+ "proof": [
+  {
+   "text": "First work over an affine open of $S$, hence with $S$ Noetherian and separated. The identity section makes all fibres nonempty. Apply [lem-sfb-smooth-integral-fibre-vertical-divisors] to $p:G\\to S$: $G$ is regular Noetherian and separated, and $G_V$ is dense. Thus the divisor-line dictionary [lem-sfb-regular-space-divisor-line-dictionary] applies both to $G$ and to its open $G_V$. We prove essential surjectivity and full faithfulness over such affine bases first, and glue over general $S$ in Step 6.",
+   "uses": [
+    "lem-sfb-smooth-integral-fibre-vertical-divisors",
+    "lem-sfb-regular-space-divisor-line-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Agent proof of the extension/normalization/vertical-divisor argument in Deligne Section 4.2, printed p.142; divisor construction replacing the coherent-determinant construction below the unit level."
+   }
+  },
+  {
+   "text": "Let $(L,\\rho:e_V^*L\\simeq\\mathcal O_V)$ be given. Choose a nonzero rational section of $L$ on $G_V$ using [lem-sfb-regular-space-divisor-line-dictionary], with divisor $D_V=\\sum n_i[Z_i]$. Take the closures $\\overline Z_i$ in $G$ with reduced structure. Their generic points have the same local rings as in the open, so they still have codimension one. The finite sum $D=\\sum n_i[\\overline Z_i]$ is a Weil divisor of $G$. By the dictionary it gives a line $H=\\mathcal O_G(D)$ and an isomorphism $\\alpha:H|_{G_V}\\simeq L$. Indeed $D|_{G_V}=D_V$, and the two rationally trivialized lines are identified by the unique isomorphism in that statement. This extends the unrigidified line without assuming $G$ is a scheme.",
+   "uses": [
+    "lem-sfb-regular-space-divisor-line-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Agent proof of the extension/normalization/vertical-divisor argument in Deligne Section 4.2, printed p.142; divisor construction replacing the coherent-determinant construction below the unit level."
+   }
+  },
+  {
+   "text": "Put $A=e^*H$ and $M=H\\otimes p^*(A^\\vee)$. Since $pe=1_S$, evaluation gives a canonical rigidification $e^*M=A\\otimes A^\\vee\\simeq\\mathcal O_S$. On $V$, put $t=\\rho\\circ e_V^*\\alpha:A|_V\\simeq\\mathcal O_V$. Identify $M|_{G_V}$ with $L$ by the formula $h\\otimes\\lambda\\mapsto\\lambda(t^{-1}(1))\\alpha(h)$. In local rank-one generators this is an invertible scalar times $\\alpha$; on the identity section its composite with $\\rho$ is exactly evaluation. Hence it preserves the specified rigidification, rather than merely its isomorphism class. Pullback and composition are interpreted using [lem-trf-space-enlarged-etale-ringed-site-model].",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Agent proof of the extension/normalization/vertical-divisor argument in Deligne Section 4.2, printed p.142; divisor construction replacing the coherent-determinant construction below the unit level."
+   }
+  },
+  {
+   "text": "For full faithfulness let $(M_1,\\rho_1)$ and $(M_2,\\rho_2)$ be rigidified lines on $G$, and let $u_V:M_1|_{G_V}\\simeq M_2|_{G_V}$ preserve their rigidifications. It gives an everywhere generating section on $G_V$ of $N=M_1^\\vee\\otimes M_2$, hence a nonzero rational section $s$ of $N$ on $G$. By [lem-sfb-regular-space-divisor-line-dictionary] its divisor $E$ is supported outside $G_V$. By [lem-sfb-smooth-integral-fibre-vertical-divisors] there is a unique divisor $D$ of $S$ supported outside $V$ with $E=p^*D$. The dictionary identifies the pair $(N,s)$ with $(\\mathcal O_G(p^*D),s_{p^*D})$.",
+   "uses": [
+    "lem-sfb-regular-space-divisor-line-dictionary",
+    "lem-sfb-smooth-integral-fibre-vertical-divisors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Agent proof of the extension/normalization/vertical-divisor argument in Deligne Section 4.2, printed p.142; divisor construction replacing the coherent-determinant construction below the unit level."
+   }
+  },
+  {
+   "text": "The Cartier-line construction in [lem-sfb-regular-space-divisor-line-dictionary] has the explicit local form $\\mathcal O(D)=f^{-1}\\mathcal O$ when $f$ is a local rational equation for $D$, with canonical rational section $1$. By the flat-pullback clause of that statement, applied to the flat map $p$ between the regular Noetherian separated spaces $G$ and $S$ of Step 1, this identifies $(\\mathcal O_G(p^*D),s_{p^*D})$ with $p^*(\\mathcal O_S(D),s_D)$. Pull back this pair along $e$. Its rational section is defined at all generic points of $S$, because $s$ is defined on $G_V$ and every generic point of $S$ belongs to $V$. The induced rigidification of $e^*N$ identifies that rational section with $1$: this is exactly $\\rho_2u_V=\\rho_1$ on $V$. Its divisor on $S$ is consequently zero, while the displayed pullback and $pe=1$ identify that divisor with $D$. Thus $D=0$ and $E=0$. The dictionary now extends $s$ to a global generating section, giving $u:M_1\\simeq M_2$. It preserves the rigidifications since their two regular maps agree on dense $V$. Any two extensions agree on dense $G_V$, hence are equal by the dictionary. This proves the required bijection on isomorphisms.",
+   "uses": [
+    "lem-sfb-regular-space-divisor-line-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Agent proof of the extension/normalization/vertical-divisor argument in Deligne Section 4.2, printed p.142; divisor construction replacing the coherent-determinant construction below the unit level."
+   }
+  },
+  {
+   "text": "For arbitrary locally Noetherian $S$, cover it by affine opens $S_i$. Steps 1--3 give extensions over each $G_{S_i}$. On each affine open contained in $S_i\\cap S_j$, Steps 4--5 extend the prescribed comparison of their restrictions uniquely. Those maps agree on smaller affine opens by uniqueness, so glue to an overlap isomorphism. On triple intersections the two composites restrict to the same prescribed map over $V$; affine-local uniqueness makes them equal. The diagonal maps are identities for the same reason. Refine the cover of $G$ by the $G_{S_i}$ to a jointly surjective etale scheme family, as permitted by [def-trf-algebraic-space]. Pull the lines and overlap maps to this family. They now satisfy exactly the scheme-atlas hypotheses of [lem-trf-algebraic-space-invertible-descent], which descends the line and its comparison with $L$. The identity rigidifications glue because the transitions preserve them. The Hom-bijection in the same descent statement glues the unique extensions of specified isomorphisms. Thus restriction is essentially surjective and fully faithful on the entire base, hence an equivalence of groupoids.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-algebraic-space-invertible-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Agent proof of the extension/normalization/vertical-divisor argument in Deligne Section 4.2, printed p.142; divisor construction replacing the coherent-determinant construction below the unit level."
+   }
+  },
+  {
+   "text": "Let $a:S'\\to S$ be etale. By the etale clause of [lem-sfb-smooth-integral-fibre-vertical-divisors], $S'$ is again regular locally Noetherian, $V'=a^{-1}V$ is dense, and the pulled-back group has the required geometric properties. The group operations and identity pull back by the fibre-product identities. Composition compatibility in [lem-trf-space-enlarged-etale-ringed-site-model] identifies restriction of a pulled-back line with pullback of its restriction, including the identity rigidification. Thus a pulled-back extension is an extension of the pulled-back given line. Its comparison with any extension constructed on $S'$ is the unique one supplied by full faithfulness already proved. The same uniqueness shows compatibility for specified isomorphisms and for successive etale maps: both composites restrict to the same map over the dense open. This is the asserted compatibility of equivalences. If $S$ is empty, every space and groupoid here is empty-base data with one line up to its unique isomorphism, and all arguments apply vacuously.",
+   "uses": [
+    "lem-sfb-smooth-integral-fibre-vertical-divisors",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Agent proof of the extension/normalization/vertical-divisor argument in Deligne Section 4.2, printed p.142; divisor construction replacing the coherent-determinant construction below the unit level."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-integral-fibre-vertical-divisors",
+  "lem-sfb-regular-space-divisor-line-dictionary",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-trf-algebraic-space",
+  "lem-trf-algebraic-space-invertible-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Divisor-closure proof of the regular-base extension argument; follows Deligne 4.2 for identity normalization and vertical-divisor uniqueness, with its hidden divisor facts exposed as nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A rigidified line bundle on a dense open base extends uniquely to a smooth separated group algebraic space with geometrically integral fibres over a regular base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [inst : X.Over S] [inst_1 : Y.Over S]\\n  [AlgebraicGeometry.IsReduced X] [AlgebraicGeometry.IsSeparated (Y ↘ S)] {f g : X ⟶ Y}\\n  [AlgebraicGeometry.Scheme.Hom.IsOver f S] [AlgebraicGeometry.Scheme.Hom.IsOver g S] {W : AlgebraicGeometry\", \"doc\": \"Let $S$ be a base scheme. If $X$ is a reduced scheme over $S$, $Y$ is a separated scheme over $S$, and $f,g : X \\\\to Y$ are morphisms over $S$, then $f = g$ provided there exists a dense open subscheme\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {W X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsReduced X] {f g : X ⟶ Y} [Y.IsSeparated] (ι : W ⟶ X)\\n  [AlgebraicGeometry.IsDominant ι],\\n  CategoryTheory.CategoryStruct.comp ι f = CategoryTheory.CategoryStruct.comp ι g → f = g\", \"doc\": \"Let $X$ be a reduced scheme, $Y$ a separated scheme, and $\\\\iota: W \\\\to X$ a dominant morphism. If two morphisms $f,g: X \\\\to Y$ satisfy $f \\\\circ \\\\iota = g \\\\circ \\\\iota$, then $f = g$.\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {W X Y Z : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsReduced X] {f g : X ⟶ Y} (s : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSeparated s],\\n  CategoryTheory.CategoryStruct.comp f s = CategoryTheory.CategoryStruct.comp g s →\\n    ∀ (ι : W ⟶ X) [AlgebraicGeometry.IsDominant ι],\\n      CategoryTheory.CategoryS\", \"doc\": \"Let $ X $ be a reduced scheme, and let $ f, g : X \\\\to Y $ be morphisms of schemes. Suppose $ s : Y \\\\to Z $ is a separated morphism with $ f \\\\circ s = g \\\\circ s $. If there exists a dominant morphism $\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {x : ↥X} [X.IsGermInjectiveAt x] {U : X.Opens} (hxU : x ∈ U)\\n  (φ : A ⟶ X.presheaf.stalk x) (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryT\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, an open subset $U$ containing $x$, and morphisms $\\\\phi: A \\\\to \\\\mathcal{F}_x$, $\\\\phi_{RA}: R \\\\to A$, and $\\\\phi_{RX}: R \\\\to \\\\Gamma(U, \\\\mathcal{F})$\"}\n  {\"name\": \"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ {X : AlgebraicGeometry.RingedSpace} {R : CommRingCat} {α β : X ⟶ AlgebraicGeometry.Spec.sheafedSpaceObj R}\\n  (w : α.hom.base = β.hom.base),\\n  (∀ (r : ↑R),\\n      let U := PrimeSpectrum.basicOpen r;\\n      CategoryTheory.CategoryStruct.comp\\n          (CategoryTheory.CategoryStruct.comp (AlgebraicGeom\", \"doc\": \"For any ringed space $X$ and commutative ring $R$, if two morphisms $\\\\alpha, \\\\beta : X \\\\to \\\\operatorname{Spec}(R)$ have equal underlying continuous maps and for every $r \\\\in R$ the induced maps on sec\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme}\\n  (f₁ f₂ : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ T) (g : T ⟶ Y) [AlgebraicGeometry.IsAffineHom g],\\n  CategoryTheory.Categor\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected all returned hits; scheme smoothness, ordinary restriction and separatedness, abstract symmetry, Fredholm operators and Weierstrass Jacobian coordinates do not state this theorem for relative Picard spaces or rigidified line modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of identity rigidified invertible sheaves from smooth groups over regular schemes to dense opens is an equivalence",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.affineOpensRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) : U.toScheme.affineOpens ≃ { V : X.affineOpens // V ≤ U }\", \"doc\": \"For a scheme $ X $ and an open subset $ U $, there is a bijection between the affine open subsets of the restricted scheme $ U $ and the affine open subsets of $ X $ that are contained within $ U $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (restrictFunctorId.inv.app M).app U = M.presheaf.map (eqToHom (show 𝟙 X ''ᵁ U = U by simp)).op\", \"doc\": \"For a scheme $X$, sheaf of modules $\\\\mathcal{M}$ over $X$, and open subset $U \\\\subseteq X$, applying the inverse of the restriction functor induced by the identity open immersion $\\\\text{id}_X$ to $\\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.comap_id'\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(U : Opens (PrimeSpectrum.Top R)) :\\n  (comap (RingHom.id R) U U fun p hpU => by rwa [PrimeSpectrum.comap_id]) = RingHom.id _\", \"doc\": \"For any commutative ring $ R $ and open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, the inverse image sheaf of the identity ring homomorphism $ \\\\operatorname{id}_R : R \\\\to R $ on $ U $\"}\n  {\"name\": \"AlgebraicGeometry.morphismRestrict_id\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) : 𝟙 X ∣_ U = 𝟙 _\", \"doc\": \"For any scheme $X$ and any open subset $U$ of $X$, the restriction of the identity morphism on $X$ to $U$ is equal to the identity morphism on the restricted scheme $U$.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"{X Y : LocallyRingedSpace} (f : X ⟶ Y) [H : LocallyRingedSpace.IsOpenImmersion f] : X ≅ Y.restrict H.base_open\", \"doc\": \"Given an open immersion $ f: X \\\\to Y $ between locally ringed spaces, this constructs an isomorphism between $ X $ and the restriction of $ Y $ to the open subset defined by the underlying open embedd\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": IsIso ((X.ofRestrict h).stalkMap x)\", \"doc\": \"Let $X$ be a locally ringed space and $U$ an open subset of $X$. Let $X|_U$ be the restriction of $X$ to $U$. The canonical inclusion morphism $i: X|_U \\\\to X$ induces for each point $x \\\\in U$ a ring h\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorId_hom_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (restrictFunctorId.hom.app M).app U = M.presheaf.map (eqToHom (show U = 𝟙 X ''ᵁ U by simp)).op\", \"doc\": \"The restriction functor induced by the identity open immersion on a scheme $ X $ is naturally isomorphic to the identity functor on the category of sheaves of modules over $ X $. This means that restr\"}\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.Basic\", \"type\": \": (G.op ⋙ ℱ ⟶ G.op ⋙ ℱ'.val) ≃ (ℱ ⟶ ℱ'.val)\", \"doc\": \"Given a cover-dense and locally full functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a Grothendieck topology $ K $, there is a natural equivalence between the hom-set of natural transforma\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected all returned hits; scheme smoothness, ordinary restriction and separatedness, abstract symmetry, Fredholm operators and Weierstrass Jacobian coordinates do not state this theorem for relative Picard spaces or rigidified line modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Invertible\", \"restrict\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"ContinuousLinearMap.FredholmPackage.isInvertible_restrict\", \"module\": \"Mathlib.Analysis.Normed.Operator.Fredholm.Basic\", \"type\": \" {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [NontriviallyNormedField 𝕜] [AddCommGroup E] [AddCommGroup F] [Module 𝕜 E] [Module 𝕜 F] [TopologicalSpace E] [TopologicalSpace F] {u : E →L[𝕜] F} (pkg : u.FredholmPackage) : (u.restrict ⋯).IsInvertible\", \"doc\": \"\"}\n  {\"name\": \"ContinuousLinearMap.IsFredholm.of_isInvertible_restrict\", \"module\": \"Mathlib.Analysis.Normed.Operator.Fredholm.Basic\", \"type\": \" {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [NontriviallyNormedField 𝕜] [AddCommGroup E] [AddCommGroup F] [Module 𝕜 E] [Module 𝕜 F] [TopologicalSpace E] [TopologicalSpace F] [CompleteSpace 𝕜] [IsTopologicalAddGroup E] [ContinuousSMul 𝕜 E] [IsTopologicalAddGroup F] [ContinuousSMul 𝕜 F] {u : E →L[𝕜]\", \"doc\": \"Assume that `u : E →L[𝕜] F` restricts to an isomorphism between closed finite codimension\\nsubspaces `E₁` and `F₁`. Then `u` is Fredholm.\\n\\nIn fact it is enough to assume that the restriction `E₁ →L[𝕜] \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected all returned hits; scheme smoothness, ordinary restriction and separatedness, abstract symmetry, Fredholm operators and Weierstrass Jacobian coordinates do not state this theorem for relative Picard spaces or rigidified line modules"
+  },
+  {
+   "tool": "grep",
+   "query": "rigidified|rigidification|extend.*invertible|invertible.*extend",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected all returned hits; scheme smoothness, ordinary restriction and separatedness, abstract symmetry, Fredholm operators and Weierstrass Jacobian coordinates do not state this theorem for relative Picard spaces or rigidified line modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity rigidified invertible sheaves on a smooth group over a regular base extend uniquely from a dense open base",
+   "results": "8 hits: AlgebraicGeometry.Spec.basicOpen_hom_ext, SheafOfModules.LocalGeneratorsData.mk.inj, AlgebraicGeometry.Scheme.Modules.hom_ext, AlgebraicGeometry.Scheme.Modules.hom_ext_iff, AlgebraicGeometry.StructureSheaf.const_ext, AlgebraicGeometry.Scheme.OpenCover.ext_elem, AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen, AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary scheme and module restriction/extensionality statements do not give extension or full faithfulness for rigidified lines over algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of identity rigidified line bundles on a smooth group scheme with geometrically integral fibres over a regular scheme to a dense open base is fully faithful and essentially surjective",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.IsOpenImmersion.isoRestrict, AlgebraicGeometry.morphismRestrict_id, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_hom_app_app, AlgebraicGeometry.Scheme.restrictFunctorΓ_hom_app, AlgebraicGeometry.Scheme.ofRestrict_appIso",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary scheme and module restriction/extensionality statements do not give extension or full faithfulness for rigidified lines over algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-picard-theta-ampleness",
+  "date": "2026-10-23",
+  "group": "Q120"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Extension and uniqueness of rigidified lines over a regular base.",
+   "via": [
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-regular-group-rigidified-line-extension",
+  "worker": "stage1",
+  "summary": "Checked the unproved imported rigidified-line statement against Deligne 4.2, explicit divisor closure for existence, identity correction, and cancellation of the vertical divisor for full faithfulness. Created two statement-only geometric/divisor support nodes; retained the original hypotheses and statement. Proved the locally Noetherian gluing and etale compatibility separately. No Lean written or compiled.",
+  "blueprint": "Realizes the supporting regular-base line-extension prerequisite of the stable Picard theta-ampleness split, serving the direct-image alteration/moduli route recorded in blueprint.from.place. The current ancestor command returns null; retained it and the complete existing via chain. Below the unit level the unrigidified existence is proved by Cartier/Weil divisor closure rather than by a coherent determinant.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-algebraic-space-invertible-descent",
+    "why": "Generic effective descent and full faithfulness for line modules on an etale scheme atlas; needed for local-to-base gluing and not a replacement of the unit route."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Canonical tensor inverse image and composition of ringed etale sites, already used in the item statement; necessary to interpret identity pullback and etale compatibility."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-algebraic-space-invertible-descent",
+  "lem-trf-space-enlarged-etale-ringed-site-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-5eea8e835",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-5eea8e835 (reviewer sub-agent of L); spot-checked: Verdict FIX: the mathematics is correct, and one C4 gap in Step 5 is repaired in fixes/. Item statement: identical to live, where the item is unsplit with no proof; stmt_deps unchanged; nothing weakened; no re-split note applies. Deligne's Le lemme de Gabber §4.2 has no local copy (WANTED). The delivered route is the standard one: unrigidified extension because G is regular, correction at the identity by p^*e^*L^{-1}, then uniqueness through vertical divisors. It replaces Deligne's coherent extension and determinant by divisor closure; that is below unit level and the unit route is untouched. Stacks lemmas read: spaces-divisors 0DMM (line 1627) and 0EPQ (line 2205), divisors 0AGA (line 3056). Both new nodes are true and are not duplicates or restated clauses of the item (searched with rg -L for Weil divisor, 0AGA/0DMM/0EPQ, rigidified line, vertical divisor, geometrically integral fibres). Vertical-divisor node checked: flat and open map so X_V is dense; 00ON gives a height-one point of the base that is generic in its fibre; integral fibre and going down make p^{-1}(Z) integral; π is a uniformizer because O_{X,ξ}/π is a field. Tested on y^2=π (multiplicity 2, so smoothness is needed) and on a two-component fibre (not a pullback, so integrality is needed). Steps 1-7 checked: Step 3 rigidification formula (λ(t^{-1}(1))t(h)=λ(h)); Step 5 cancellation D=div(1)=0 using only (pe)^*=id; Step 6 gluing over non-affine overlaps through affine refinement and the scheme atlas, matching the hypotheses of the descent node; Step 7 étale base-change clause. Test cases: G_m over a DVR, trivial group, V=S. FIX (C4): Step 5 used a local form O(D)=f^{-1}O and compatibility with flat pullback that the dictionary node did not state. Two true clauses were added to that node (local form; flat pullback q^*(O(D),s_D)≅(O(q^*D),s_{q^*D}), so div(q^*s)=q^*div(s)), plus the stmt_dep def-weil-flat-morphism, and Step 5 now cites that clause. Batch-5 flags: lem-trf-algebraic-space-invertible-descent is generic étale descent of invertible modules; its 382-node closure contains no trace-formula or Poincaré-duality node. def-trf-algebraic-space is a general definition. Both accepted. tool_uses accepted; no SGA cited anywhere.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RigidifiedLineExtension",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.regularGroupRigidifiedLineExtension",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.regularGroupRigidifiedLineExtension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RigidifiedLineExtension.lean",
+  "statement": "theorem regularGroupRigidifiedLineExtension (S : Scheme.{u}) [IsLocallyNoetherian S] [IsRegular S] (G : AlgebraicSpace S) (H : CommutativeSpaceGroup G) (hG : IsSmoothIntegralGroupSpace G) (V : Scheme.{u}) (j : V ⟶ S) [IsOpenImmersion j] (hj : DenseRange j.base) (Gᵥ : AlgebraicSpace S) (pᵥ : Gᵥ ⟶ schemeSpace (Over.mk j)) (i : Gᵥ ⟶ G) (hcart : IsPullback i pᵥ (groupSpaceProjection G) (groupSchemeMap (Over.homMk j (by simp)))) (eᵥ : schemeSpace (Over.mk j) ⟶ Gᵥ) (we : groupSchemeMap (Over.homMk j (by simp)) ≫ H.identity = eᵥ ≫ i) (heᵥ : eᵥ ≫ pᵥ = 𝟙 _) : (rigidifiedLinePullback H.identity eᵥ (groupSchemeMap (Over.homMk j (by simp))) i we).IsEquivalence ∧ ∀ (T U : Over S) (a : T ⟶ Over.mk (𝟙 S)) (k : U ⟶ Over.mk j) (d : U ⟶ T), Etale a.left → IsPullback k.left d.left j a.left → ∀ (G' Gᵥ' : AlgebraicSpace S) (p' : G' ⟶ schemeSpace T) (pᵥ' : Gᵥ' ⟶ schemeSpace U) (e' : schemeSpace T ⟶ G') (eᵥ' : schemeSpace U ⟶ Gᵥ') (b : G' ⟶ G) (c : Gᵥ' ⟶ Gᵥ) (i' : Gᵥ' ⟶ G'), IsPullback b p' (groupSpaceProjection G) (groupSchemeMap a) → IsPullback c pᵥ' pᵥ (groupSchemeMap k) → IsPullback i' pᵥ' p' (groupSchemeMap d) → e' ≫ p' = 𝟙 _ → eᵥ' ≫ pᵥ' = 𝟙 _ → ∀ (w₂ : groupSchemeMap a ≫ H.identity = e' ≫ b) (w₃ : groupSchemeMap k ≫ eᵥ = eᵥ' ≫ c) (w₄ : groupSchemeMap d ≫ e' = eᵥ' ≫ i') (hb : c ≫ i = i' ≫ b), ∃ z : rigidifiedLinePullback H.identity eᵥ (groupSchemeMap (Over.homMk j (by simp))) i we ⋙ rigidifiedLinePullback eᵥ eᵥ' (groupSchemeMap k) c w₃ ≅ rigidifiedLinePullback H.identity e' (groupSchemeMap a) b w₂ ⋙ rigidifiedLinePullback e' eᵥ' (groupSchemeMap d) i' w₄, ∀ L : RigidifiedLines H.identity, (rigidifiedLineForget eᵥ').map (z.hom.app L) = (moduleTensorComposition c i).hom.app ((rigidifiedLineForget H.identity).obj L) ≫ (eqToIso (congrArg moduleTensorPullback hb)).hom.app ((rigidifiedLineForget H.identity).obj L) ≫ (moduleTensorComposition i' b).inv.app ((rigidifiedLineForget H.identity).obj L)",
+  "branch": "sheaf-dag",
+  "by": "Q21",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6621a562",
+  "group": "Q21",
+  "result": "fix",
+  "note": "Re-delivery of b5bfb0f4 (PASS). The Lean is byte-identical; Q21's copy of def-sfb-space-module-tensor-composition is dropped in favour of Q04's landed record (identical to side-live, 4 declarations without moduleTensorSquare). F1 (H2): RigidifiedLines.rigidifiedModulePullback still used moduleTensorSquare, which is now owned only by the uncited theorem node lem-sfb-space-flat-direct-image-base-change. FIX: fixes/RigidifiedLines.lean writes its body in place (moduleTensorComposition e' b ≪≫ eqToIso (congrArg moduleTensorPullback w.symm) ≪≫ (moduleTensorComposition a e).symm), which means the same and matches the new node prose; signatures and lean records are unchanged; nt_compile --json clean in 11.2 s. Mathematics re-read: regular locally Noetherian S, dense open j, CommutativeSpaceGroup with smooth/separated/finite-presentation/geometrically integral fibres, arbitrary pullback models; IsEquivalence on Core of rigidified lines plus a unique tensor-normalized étale base-change comparison; edge cases empty S, V=S, trivial G; single universe u. Gates satisfied. Advisories: theorem lem-trf-space-enlarged-etale-ringed-site-model kept in stmt_deps; report still mentions moduleTensorSquare; second reading is a self-check."
+ }
+}

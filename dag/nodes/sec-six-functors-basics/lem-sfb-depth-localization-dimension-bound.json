@@ -1,0 +1,330 @@
+{
+ "id": "lem-sfb-depth-localization-dimension-bound",
+ "kind": "statement",
+ "title": "Depth under localization is bounded by the quotient dimension",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], meaning that $R$ has exactly one maximal ideal $\\mathfrak m$, and let $M$ be a finite $R$-module [def-weil-finitely-generated-module]. Let $\\mathfrak p\\subset R$ be a prime ideal and write $R_{\\mathfrak p}=(R\\setminus\\mathfrak p)^{-1}R$ [def-weil-pbc-localization-at-prime] and $M_{\\mathfrak p}=(R\\setminus\\mathfrak p)^{-1}M$ [def-weil-pbc-module-localization]. With depth taken at the maximal ideals of the respective local rings [def-weil-pbc-depth] and $\\dim$ denoting ring Krull dimension [def-weil-pbc-krull-dimension-ring], one has $$\\operatorname{depth}_R(M)\\leq\\operatorname{depth}_{R_{\\mathfrak p}}(M_{\\mathfrak p})+\\dim(R/\\mathfrak p).$$ The zero module and zero localization are allowed, with depth $\\infty$ and the usual extended-natural-number addition.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0FCC, lemma-depth-localization, statement at lines 18023–18026; depth of a finite module after localization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=R_{\\mathfrak p}$ and $d=\\dim(R/\\mathfrak p)$. If $M_{\\mathfrak p}=0$, its depth is $\\infty$ by [def-weil-pbc-depth], so the inequality holds, including when $M=0$. Otherwise $M\\ne0$. The prime-localization definition makes $S$ local with maximal ideal $\\mathfrak pS$, and [lem-weil-pbc-localization-noetherian] makes it Noetherian. A finite generating set $m_1,\\ldots,m_r$ for any finite $R$-module $N$ localizes to the generators $m_i/1$ of $N_{\\mathfrak p}$: write $m/s=\\sum_i(a_i/s)(m_i/1)$ when $m=\\sum_i a_im_i$. Thus [lem-weil-pbc-depth-ext], applied over $R$ and over $S$, says the depths of $N$ and $N_{\\mathfrak p}$ are finite integers whenever these modules are nonzero. Finally $R/\\mathfrak p$ is a nonzero domain, so its zero prime gives $d\\ge0$; if $d=\\infty$ the desired inequality is automatic. Henceforth assume $d<\\infty$.",
+   "uses": [
+    "def-weil-pbc-depth",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-depth-ext",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0FCC, lemma-depth-localization, first sentence; Tags 00FN (lemma-Noetherian-permanence), 00LW (lemma-depth-ext), and 00LI (definition-depth) for the induction prerequisites."
+   }
+  },
+  {
+   "text": "Fix $R$ and $\\mathfrak p$. Use strong induction on the finite integer $n=\\operatorname{depth}_R(N)$, uniformly for all nonzero finite $R$-modules $N$ with $N_{\\mathfrak p}\\ne0$. The claim is $n\\le\\operatorname{depth}_S(N_{\\mathfrak p})+d$. If $n\\le d$, nonnegativity of depth proves the claim; in particular this proves the base $n=0$. Assume $n>d$ and that the claim holds for every finite module of depth less than $n$ whose localization is nonzero.",
+   "uses": [
+    "def-weil-pbc-depth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0FCC, lemma-depth-localization, second sentence and final induction sentence; the induction is uniform in the module."
+   }
+  },
+  {
+   "text": "No associated prime $\\mathfrak q$ of $N$ contains $\\mathfrak p$. Indeed, [lem-weil-pbc-depth-le-dim-associated-prime] gives $n\\le\\dim(R/\\mathfrak q)$. If $\\mathfrak p\\subseteq\\mathfrak q$, the surjection $R/\\mathfrak p\\twoheadrightarrow R/\\mathfrak q$ pulls every chain of prime ideals back to a chain of the same length: inverse images are prime by the product test, and strictness follows from surjectivity. Thus the chain definition of Krull dimension gives $\\dim(R/\\mathfrak q)\\le d$, contradicting $n>d$.",
+   "uses": [
+    "lem-weil-pbc-depth-le-dim-associated-prime",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0FCC, lemma-depth-localization, third sentence, invoking Tag 0BK4, lemma-depth-dim-associated-primes."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-noetherian-associated-primes-finite], $\\operatorname{Ass}_R(N)$ is finite. It is nonempty: $0$ is a zerodivisor on the nonzero module $N$, so [lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes] puts $0$ in some associated prime. Apply [lem-weil-pbc-prime-avoidance] with $J=\\mathfrak p$ and the finite nonempty list of associated primes. Step 3 verifies that $J$ is contained in none of them; all ideals in the list are prime. We obtain $x\\in\\mathfrak p$ outside their union. The same zerodivisor characterization says multiplication by $x$ on $N$ is injective.",
+   "uses": [
+    "lem-weil-pbc-noetherian-associated-primes-finite",
+    "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0FCC, lemma-depth-localization, choice of x; Tags 00LC (lemma-finite-ass), 00DS (lemma-silly), and 00LD (lemma-ass-zero-divisors)."
+   }
+  },
+  {
+   "text": "Let $Q=N/xN$, a finite $R$-module generated by the images of any finite generating set of $N$. Localize the short exact sequence $0\\to N\\xrightarrow{x}N\\to Q\\to0$. By [lem-weil-pbc-localization-module-exact] the localized multiplication is injective and the map $N_{\\mathfrak p}\\to Q_{\\mathfrak p}$ is surjective with kernel $xN_{\\mathfrak p}$. Consequently $Q_{\\mathfrak p}\\cong N_{\\mathfrak p}/xN_{\\mathfrak p}$, by the $S$-linear map sending the class of $m/s$ to $(m\\bmod xN)/s$; its kernel and surjectivity are exactly the preceding assertions. This also identifies their depths: an $S$-linear isomorphism carries each regular sequence and its successive quotients bijectively to the corresponding ones. The images of generators show $Q_{\\mathfrak p}$ is finite over $S$, as in step 1.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-depth",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0FCC, lemma-depth-localization, the localized quotient used in the penultimate sentence; Tag 00CS (proposition-localization-exact) and its immediate quotient consequence Tag 02C8 (lemma-localize-quotient-modules)."
+   }
+  },
+  {
+   "text": "Because $x\\in\\mathfrak p\\subseteq\\mathfrak m$, [lem-weil-pbc-depth-drops-by-one] applies to the nonzero finite module $N$ over the Noetherian local ring $R$. It gives $n\\ge1$, $Q\\ne0$, and $\\operatorname{depth}_R(Q)=n-1$. It also applies over $S$: $N_{\\mathfrak p}\\ne0$ is finite, multiplication by $x/1$ is injective by step 5, and $x/1\\in\\mathfrak pS$, the maximal ideal of $S$. Writing $t=\\operatorname{depth}_S(N_{\\mathfrak p})$, we obtain $t\\ge1$, $Q_{\\mathfrak p}\\ne0$, and $\\operatorname{depth}_S(Q_{\\mathfrak p})=t-1$ under the identification in step 5.",
+   "uses": [
+    "lem-weil-pbc-depth-drops-by-one",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0FCC, lemma-depth-localization, simultaneous depth drop, invoking Tag 090R (lemma-depth-drops-by-one), part (1), first over R and then over R_p."
+   }
+  },
+  {
+   "text": "Now $Q$ is finite with depth $n-1<n$ and has nonzero localization, so the induction hypothesis gives $n-1\\le(t-1)+d$. All three quantities $n,t,d$ are finite nonnegative integers and $n,t\\ge1$. Add $1$ to get $n\\le t+d$. This proves the induction step and hence the claim for $N=M$. The cases removed in step 1 already prove the full extended-depth assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0FCC, lemma-depth-localization, final sentence: induction on depth(M)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-depth",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-depth-ext",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-depth-le-dim-associated-prime",
+  "lem-weil-pbc-noetherian-associated-primes-finite",
+  "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-localization-module-exact",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-depth-drops-by-one"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0FCC, lemma-depth-localization, proof lines 18029–18045; induction prerequisites made explicit by Tag 00LW and localization consequences of Tag 00CS."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite module M over a noetherian local ring R and prime ideal p, depth M is at most depth of M localized at p plus Krull dimension of R modulo p",
+   "results": "{\"t\": \"2026-10-24T09:36:57Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite module M over a noetherian local ring R and prime ideal p, depth M is at most depth of M localized at p plus Krull dimension of R modulo p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal\", \"Module.supportDim_quotSMulTop_succ_eq_supportDim\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"ringKrullDim_le_ringKrullDim_add_card\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"height_le_ringKrullDim_quotient_add_spanFinrank\"], \"digest\": \"54d6331e7d011a15\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give height/dimension inequalities or the depth definition, not depth under localization. The live Mathlib Depth directory contains only Rees.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "depth.*localiz|localiz.*depth",
+   "results": "{\"t\": \"2026-10-24T09:37:22Z\", \"tool\": \"grep\", \"query\": \"depth.*localiz|localiz.*depth\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give height/dimension inequalities or the depth definition, not depth under localization. The live Mathlib Depth directory contains only Rees.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The depth of a finite module over a local Noetherian ring is at most the depth at a prime plus the dimension of the quotient by that prime",
+   "results": "{\"t\": \"2026-10-24T09:37:22Z\", \"tool\": \"leansearch\", \"query\": \"The depth of a finite module over a local Noetherian ring is at most the depth at a prime plus the dimension of the quotient by that prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.height_le_ringKrullDim_quotient_add_one\", \"Ideal.height_le_height_add_of_liesOver\", \"Ideal.height_le_ringKrullDim_quotient_add_encard\", \"height_le_ringKrullDim_quotient_add_spanFinrank\", \"Ideal.height_le_height_add_spanFinrank_of_le\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_le_ringKrullDim_add_card\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\"], \"digest\": \"adfb77e0964b56c4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give height/dimension inequalities or the depth definition, not depth under localization. The live Mathlib Depth directory contains only Rees.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "depth, Localization",
+   "results": "{\"t\": \"2026-10-24T09:37:22Z\", \"tool\": \"loogle\", \"query\": \"depth, Localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'depth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give height/dimension inequalities or the depth definition, not depth under localization. The live Mathlib Depth directory contains only Rees.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Depth decreases under localization by at most the dimension of the quotient by the prime ideal",
+   "results": "{\"t\": \"2026-10-24T09:39:38Z\", \"tool\": \"leanfinder\", \"query\": \"Depth decreases under localization by at most the dimension of the quotient by the prime ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.KrullDimLE.of_isLocalization\", \"Ideal.height_le_ringKrullDim_quotient_add_one\", \"Ideal.height_le_height_add_of_liesOver\", \"Ideal.height_le_ringKrullDim_quotient_add_encard\", \"height_le_ringKrullDim_quotient_add_spanFinrank\", \"Ideal.height_le_height_add_one_of_mem\", \"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"IsLocalization.height_map_of_disjoint\"], \"digest\": \"f5bb2e6a76457201\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give height/dimension inequalities or the depth definition, not depth under localization. The live Mathlib Depth directory contains only Rees.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "depth_le|le_depth|depth.*[Ll]ocal|[Ll]ocal.*depth",
+   "results": "{\"t\": \"2026-10-24T09:41:18Z\", \"tool\": \"grep\", \"query\": \"depth_le|le_depth|depth.*[Ll]ocal|[Ll]ocal.*depth\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give height/dimension inequalities or the depth definition, not depth under localization. The live Mathlib Depth directory contains only Rees.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing.depth",
+   "results": "{\"t\": \"2026-10-24T09:41:19Z\", \"tool\": \"loogle\", \"query\": \"IsLocalRing.depth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"IsLocalRing.depth\", \"IsLocalRing.depth_eq_top_of_subsingleton\", \"IsLocalRing.depth_eq_of_iso\", \"IsLocalRing.ideal_depth_le_depth\", \"IsLocalRing.depth_eq_of_linearEquiv\", \"IsLocalRing.depth_eq_sSup_length_isRegular\"], \"digest\": \"f33fc75f589a6e28\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give height/dimension inequalities or the depth definition, not depth under localization. The live Mathlib Depth directory contains only Rees.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "depth|Depth",
+   "results": "{\"t\": \"2026-10-24T09:50:47Z\", \"tool\": \"grep\", \"query\": \"depth|Depth\", \"sub\": \"RingTheory/Depth\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Depth/Rees.lean\"], \"digest\": \"eee17723f5c77e3b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give height/dimension inequalities or the depth definition, not depth under localization. The live Mathlib Depth directory contains only Rees.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "depth.*localiz|localiz.*depth",
+   "results": "{\"t\": \"2026-10-24T10:03:55Z\", \"tool\": \"grep\", \"query\": \"depth.*localiz|localiz.*depth\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern support/Krull dimension or basic depth definitions, not depth under localization; the grep of the pinned Mathlib Depth directory finds only Rees.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Depth decreases under localization by at most the Krull dimension of the quotient by the prime",
+   "results": "{\"t\": \"2026-10-24T10:03:55Z\", \"tool\": \"leansearch\", \"query\": \"Depth decreases under localization by at most the Krull dimension of the quotient by the prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_quotient_le\", \"Ideal.height_le_ringKrullDim_quotient_add_one\", \"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"Ring.KrullDimLE.of_isLocalization\", \"Ring.DimensionLEOne.localization\", \"ringKrullDim_quotient_succ_le_of_nonZeroDivisor\", \"Ideal.height_le_ringKrullDim_quotient_add_encard\", \"Ring.krullDimLE_of_isLocalization_maximal\"], \"digest\": \"02959e13c75e7dc7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern support/Krull dimension or basic depth definitions, not depth under localization; the grep of the pinned Mathlib Depth directory finds only Rees.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing.depth",
+   "results": "{\"t\": \"2026-10-24T10:03:55Z\", \"tool\": \"loogle\", \"query\": \"IsLocalRing.depth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"IsLocalRing.depth\", \"IsLocalRing.depth_eq_top_of_subsingleton\", \"IsLocalRing.depth_eq_of_iso\", \"IsLocalRing.ideal_depth_le_depth\", \"IsLocalRing.depth_eq_of_linearEquiv\", \"IsLocalRing.depth_eq_sSup_length_isRegular\"], \"digest\": \"f33fc75f589a6e28\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern support/Krull dimension or basic depth definitions, not depth under localization; the grep of the pinned Mathlib Depth directory finds only Rees.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite module over a Noetherian local ring depth is at most depth after localization at a prime plus dimension of the quotient by that prime",
+   "results": "{\"t\": \"2026-10-24T10:03:57Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite module over a Noetherian local ring depth is at most depth after localization at a prime plus dimension of the quotient by that prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"Module.supportDim_quotSMulTop_succ_eq_supportDim\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_le_ringKrullDim_add_card\", \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\"], \"digest\": \"1bb90e4a7c8801e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern support/Krull dimension or basic depth definitions, not depth under localization; the grep of the pinned Mathlib Depth directory finds only Rees.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "depth|Depth",
+   "results": "{\"t\": \"2026-10-24T10:04:32Z\", \"tool\": \"grep\", \"query\": \"depth|Depth\", \"sub\": \"RingTheory/Depth\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Depth/Rees.lean\"], \"digest\": \"eee17723f5c77e3b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern support/Krull dimension or basic depth definitions, not depth under localization; the grep of the pinned Mathlib Depth directory finds only Rees.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inequality depth M ≤ depth M_p + dim R/p for localization of finitely generated modules",
+   "results": "{\"t\": \"2026-10-24T10:04:33Z\", \"tool\": \"leanfinder\", \"query\": \"The inequality depth M ≤ depth M_p + dim R/p for localization of finitely generated modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal\", \"Module.supportDim_quotSMulTop_succ_le_of_notMem_minimalPrimes\", \"Module.supportDim_quotSMulTop_succ_eq_supportDim\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"Module.rankAtStalk\", \"Module.supportDim\", \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_jacobson\"], \"digest\": \"a6745a81d491766c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern support/Krull dimension or basic depth definitions, not depth under localization; the grep of the pinned Mathlib Depth directory finds only Rees.lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-section-divisor-intersection",
+  "date": "2026-10-24",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), recorded trait-extension prerequisite below the alteration route; BLR 10.1 Proposition 2 and its proof, printed p.290 (PDF p.296): essentially smooth DVR criterion, via Weil extension. Supporting extension step: BLR §10.1 Proposition 2, converse, invokes §4.4 Theorem 1 to extend the fibrewise dense rational map across codimension at least two. BLR §4.4 Theorem 1, diagonal-reduction paragraph: regularity near a smooth section from regularity at its codimension-at-most-one points and agreement with a given morphism along the section. Supporting input: BLR §4.4 proof of Theorem 1, printed p.110 (PDF p.116), dimension inequality for the divisorial boundary intersected with the diagonal, extracted for a section of a smooth morphism. Supporting Stacks Tag 067R, divisors.tex, label lemma-section-smooth-regular-immersion; the local smooth-section rather than the group-law input is used. Local algebra for the dimension inequality: depth under localization, Stacks 0FCC.",
+   "via": [
+    "lem-sfb-smooth-section-divisor-intersection",
+    "lem-sfb-smooth-section-rational-extension",
+    "lem-sfb-relative-group-weil-extension",
+    "lem-sfb-neron-dvr-point-criterion",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-depth-localization-dimension-bound",
+  "worker": "stage1",
+  "summary": "Checked the complete statement against Stacks 0FCC and retained it unchanged. Expanded the source induction uniformly in the finite module, handled zero localizations and infinite values, supplied the associated-prime dimension argument, checked prime avoidance and both depth-drop applications, and made the localized quotient map explicit. Reused existing DAG inputs; no new nodes. Mathlib searches in the required Q87 search log found no exact theorem.",
+  "blueprint": "Supporting local-algebra input below det-thm-sf-ctf-stability-direct-images proof (3), through the inherited smooth-section divisor-intersection chain; current blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) was read. The inherited ancestor is null (blueprint_refs.py ancestor confirms this); its precise existing from.place and via are preserved. Whole-blueprint searches for 0FCC, depth, and depth localization found no equal blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-depth-ext",
+    "why": "Its statement explicitly supplies finiteness of depth for a nonzero finite module over a Noetherian local ring, needed to justify the induction. This generic local-algebra input does not replace a unit step; no statement in this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-depth-le-dim-associated-prime",
+    "why": "Use the associated-prime dimension bound to exclude primes containing p in the positive induction case. This is precisely the generic Tag 0BK4 input of Tag 0FCC, not a replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-depth-drops-by-one",
+    "why": "Apply its full nonzero finite-module statement over R and R_p to lower both depths and preserve nonzero quotients. This generic Tag 090R local-algebra tool is not given by a statement in the six-functor unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-depth-ext",
+  "lem-weil-pbc-depth-le-dim-associated-prime",
+  "lem-weil-pbc-depth-drops-by-one"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-cca726288",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-cca726288 (reviewer sub-agent of L); spot-checked: I read the full item, which has no new nodes, and it is correct. The statement is unchanged from base and matches Stacks 0FCC (algebra.tex 18023-18045): Noetherian local R, finite M, any prime p, zero cases allowed with depth infinity, and the stmt_deps cover every notion. Step by step: (1) M_p=0 gives depth infinity; S=R_p is local by def-localization-at-prime and Noetherian by lem-localization-noetherian; lem-depth-ext gives finite depths over R and S; d>=0, and d=infinity is trivial. (2) Strong induction on depth is uniform over finite N with N_p nonzero, so it is properly set up for Q=N/xN; n<=d holds by nonnegativity. (3) lem-depth-le-dim-associated-prime gives n<=dim R/q; p in q would give dim R/q<=d by pulling back prime chains, which is elementary and correct. (4) Ass(N) is finite by the Mathlib leaf and nonempty because 0 is a zerodivisor on nonzero N; prime avoidance applies (all ideals prime, r>=1), and the zerodivisor characterization makes x injective. (5) Localization exactness gives x injective on N_p and Q_p isomorphic to N_p/xN_p; depth is invariant under isomorphism. (6) lem-depth-drops-by-one applies over R (x in p, inside m) and over S (x/1 in pS, injective, N_p nonzero finite, S Noetherian local); every hypothesis is checked. (7) The induction hypothesis on Q gives n-1<=t-1+d with all quantities finite. Small cases pass: M=0; DVR with M=k, p=0; p=m; DVR with M=R, p=0; k[x,y]_(x,y) with p=(x). An rg -L search for 0FCC and lemma-depth-localization found only the item and its citer, so there is no duplicate. A Mathlib grep found no depth-localization theorem (RingTheory/Depth has only Rees.lean); three kinds of search are recorded. I accept the three tool_uses (lem-weil-pbc-depth-ext, lem-weil-pbc-depth-le-dim-associated-prime, lem-weil-pbc-depth-drops-by-one, all in sk-thm-p1): they are generic local-algebra lemmas (00LW, 0BK4, 090R) used as black boxes exactly as the Stacks proof uses them. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DepthLocalizationDimensionBound",
+  "declaration": "IsLocalRing.depth_le_depth_localizedModule_add_ringKrullDim_quotient",
+  "file": "lean/Sheaf/RingTheory/DepthLocalizationDimensionBound.lean",
+  "statement": "theorem depth_le_depth_localizedModule_add_ringKrullDim_quotient {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] (p : Ideal R) [p.IsPrime] : (depth (R := R) M : WithBot ℕ∞) ≤ (depth (R := Localization.AtPrime p) (LocalizedModule p.primeCompl M) : WithBot ℕ∞) + ringKrullDim (R ⧸ p)",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-23285f6a0",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0FCC (algebra.tex 18022-18045): Noetherian local R, finite M (universe v), arbitrary prime p, Localization.AtPrime p / LocalizedModule p.primeCompl M, IsLocalRing.depth (ℕ∞) on both sides cast to WithBot ℕ∞, + ringKrullDim (R ⧸ p); R/p nontrivial so dim ≠ ⊥ and ⊤ absorbs, matching the extended-natural convention. No extra hypotheses; Module.Finite of M_p comes from the Mathlib instance (Localization/Finiteness.lean:177). Edge cases M=0, M_p=0, p=m, field, DVR and infinite dim checked. lean.statement verbatim; node differs from side-live only in lean (side-live lean null). Only sorry; docstrings have source, blueprint and 7 proof steps; imports exist; report has Worker report + Second reading by Q58. No duplicate in Sheaf/WeilConjectures/Mathlib. Not recompiled per instructions; no fixes."
+ }
+}

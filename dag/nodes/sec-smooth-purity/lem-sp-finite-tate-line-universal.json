@@ -1,0 +1,163 @@
+{
+ "id": "lem-sp-finite-tate-line-universal",
+ "kind": "statement",
+ "title": "Universal property of the finite Tate line",
+ "status": "split",
+ "statement": "Fix a scheme T, a prime ell, a commutative ring B and a unital map a from Z/ell^(n+1) to B. The finite Tate line [def-pur-finite-tate-line-signed-comparison] represents additive morphisms from the actual ell^(n+1)-roots sheaf [def-sp-tower-class-systems] to the underlying additive sheaf of an arbitrary B_T-module N. The Hom equivalences are natural for postcomposition. If q is the additive root morphism corresponding to f, then b times q(z) equals f of the specified finite pure tensor b tensor z.",
+ "stmt_deps": [
+  "def-pur-finite-tate-line-signed-comparison",
+  "def-pur-twist-sheaves",
+  "def-sp-tower-class-systems"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
+  "place": "classes (2), evaluation of ordinary coefficient extension; constituent tensor/sheafification universal property, Stacks sites-modules.tex Section 03EK and Tag 03CY"
+ },
+ "proof": [
+  {
+   "text": "Use the already proved private tensorHomEquiv in Sheaf.Paper.TateInverseLimitBaseChange, which composes module sheafification with the sectionwise tensor/restriction adjunction for arbitrary ring-sheaf maps. Specialize to tateFiniteScalar and purTwistRootsModule. Its tensorHomEquiv_apply and tensorHomEquiv_tmul identify the values on 1 tensor z and b tensor z. No inverse-limit or base-change theorem is used.",
+   "uses": [
+    "def-pur-finite-tate-line-signed-comparison",
+    "def-pur-twist-sheaves",
+    "lem-pur-tate-inverse-limit-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product), Tag 03CY (lemma-sheafification-presheaf-modules); agent application to the recorded root module and coefficient site"
+   }
+  },
+  {
+   "text": "For any two module sheaves over the constant ZMod(k) ring sheaf, normalize each scalar action on integer sections by map_intCast and Int.cast_smul_eq_zsmul. Module restriction maps supply semilinearity, and constantZModModuleSheaf_nsmul supplies annihilation. Apply torsionSheaf_hom_linear to make every additive sheaf morphism linear. Transport this through purTwistFiniteRingIso by restricting both modules along its inverse; its hom_inv_id recovers the original actions. PresheafOfModules.homMk and forgetting now give inverse Hom equivalences. The underlying additive sheaf of purTwistRootsModule is definitionally the actual root sheaf, and restricting the target scalars preserves its underlying sheaf. Compose this forgetful equivalence with the tensor Hom equivalence.",
+   "uses": [
+    "def-pur-twist-sheaves",
+    "def-sp-tower-class-systems",
+    "lem-pur-torsion-sheaf-constant-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product), Tag 03CY (lemma-sheafification-presheaf-modules); agent application to the recorded root module and coefficient site"
+   }
+  },
+  {
+   "text": "Evaluate naturality at an object and a root section, then use tensorHomEquiv_apply on both sides; the composite evaluates definitionally to postcomposition by g. The scalar formula is tensorHomEquiv_tmul with the equality reversed and tateFiniteTensor unfolded. No nonzero-ring, invertibility-on-the-scheme, or nonempty-scheme hypothesis is used.",
+   "uses": [
+    "def-pur-finite-tate-line-signed-comparison",
+    "lem-pur-tate-inverse-limit-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product), Tag 03CY (lemma-sheafification-presheaf-modules); agent application to the recorded root module and coefficient site"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-tate-line-signed-comparison",
+  "def-pur-twist-sheaves",
+  "lem-pur-tate-inverse-limit-base-change",
+  "def-sp-tower-class-systems",
+  "lem-pur-torsion-sheaf-constant-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C5",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
+  "place": "classes (2), evaluation of ordinary coefficient extension; Stacks sites-modules.tex Section 03EK and lemma-sheafification-presheaf-modules (03CY). Reuse the already proved mixed-universe tensor Hom equivalence and torsion-sheaf linearity; complete Lean proof with no new holes."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from a scalar extension of sheaves of modules are equivalent to morphisms from the original module with scalars restricted",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.homEquiv and related algebraic adjunctions; PresheafOfModules.restrictHomEquivOfIsLocallySurjective.",
+   "date": "2026-10-25",
+   "verdict": "Useful algebraic tools, but none identifies the evaluated root tower or the finite Tate sheaf with the additive root Hom functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.changeOfRings",
+   "results": "0 hits; unknown identifier SheafOfModules.changeOfRings",
+   "date": "2026-10-25",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*(homEquiv|adjunction)|toSheaf.*(Full|Faithful)",
+   "results": "7 hits, including SheafOfModules.toSheaf.Faithful; other hits concern locally ringed spaces and affine modules.",
+   "date": "2026-10-25",
+   "verdict": "No direct normalized root-sheaf Hom equivalence."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerClassDiagonal",
+  "date": "2026-10-25",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-classes",
+   "place": "classes (2), comparison of ordinary coefficient extension at a finite level",
+   "via": [
+    "def-sp-tower-class-diagonal"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteTateLineUniversal",
+  "file": "lean/Sheaf/Paper/FiniteTateLineUniversal.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.finiteTateLine_universal",
+  "statement": "theorem finiteTateLine_universal (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]\n    (B : Type (u + 1)) [CommRing B] (n : ℕ) (a : ZMod (l ^ (n + 1)) →+* B) :\n    ∃ Ψ : ∀ N : SheafOfModules.{u + 1}\n        ((sheafCompose (Scheme.ProEt.topology T)\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n            (Scheme.tateFiniteCoefficient T B)),\n      (Scheme.tateFiniteLine T l B n a ⟶ N) ≃\n        ((roots l T).obj (op n) ⟶ (SheafOfModules.toSheaf _).obj N),\n      (∀ {N N'} (f : Scheme.tateFiniteLine T l B n a ⟶ N) (g : N ⟶ N'),\n        Ψ N' (f ≫ g) = Ψ N f ≫ (SheafOfModules.toSheaf _).map g) ∧\n      (∀ N (f : Scheme.tateFiniteLine T l B n a ⟶ N) (U : T.ProEtᵒᵖ)\n        (b : (Scheme.tateFiniteCoefficient T B).obj.obj U)\n        (z : ((roots l T).obj (op n)).obj.obj U),\n        b • (show N.val.obj U from (Ψ N f).hom.app U z) =\n          f.val.app U (Scheme.tateFiniteTensor T l B n a U.unop b z))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "Sheaf.Paper.TowerClassDiagonal",
+  "worker": "S3",
+  "tool_uses": [
+   {
+    "node": "lem-pur-torsion-sheaf-constant-module",
+    "why": "Generic full faithfulness of forgetting constant residue-ring module structure identifies the tensor-adjunction Hom set with additive root-sheaf morphisms."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261025T164240-L-984049",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261025T180521-L-3998983",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

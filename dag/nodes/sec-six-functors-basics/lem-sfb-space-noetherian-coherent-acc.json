@@ -1,0 +1,334 @@
+{
+ "id": "lem-sfb-space-noetherian-coherent-acc",
+ "kind": "statement",
+ "title": "Noetherian coherent finiteness and ascending chains on spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and use algebraic spaces over $S$ and their small etale structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Modules, tensor pullback and direct image are on these ringed sites [def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors]. Locally Noetherian means locally Noetherian on etale scheme charts [pqf-def-locnoeth]; Noetherian means additionally quasi-compact and quasi-separated (quasi-compact diagonal). Coherent means quasi-coherent with coherent pullbacks on etale scheme charts [pqf-def-coherent]. If $B$ is a Noetherian algebraic space and $f:X\\to B$ is quasi-separated and of finite type [def-sfb-space-morphism-properties], then $X$ is Noetherian. On a locally Noetherian algebraic space, an $\\mathcal O_X$-module is coherent if and only if it is quasi-coherent of finite type, and if and only if it is finitely presented (etale locally a cokernel of a map between finite rank free modules). On a Noetherian $X$, quasi-coherent submodules of any coherent module satisfy the ascending chain condition. In particular every nonempty set of quasi-coherent ideal sheaves of $\\mathcal O_X$ has a maximal member for inclusion.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tags 07UB (lemma-coherent-Noetherian), 07UJ (lemma-acc-coherent); local Noetherian inheritance is spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian), together with finite-type quasi-compactness and quasi-separatedness."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-sfb-space-morphism-properties",
+  "def-a1-space-point-topology",
+  "def-trf-space-module-scheme-restriction",
+  "def-sfb-space-quasi-coherent-ideal"
+ ],
+ "proof": [
+  {
+   "text": "First prove local Noetherian inheritance. Take any etale scheme chart $T\\to X$ and a surjective etale scheme atlas $V\\to B$. The fibre product $W=T\\times_BV$ is a scheme and $W\\to T$ is surjective etale, by [lem-trf-space-fibre-products-etale-covers]. The composite $W\\to T\\to X$ is etale: on each scheme test it is a composite of etale scheme maps, so [lem-weil-pbc-etale-composition-cancellation] applies. Consequently $W\\to V$ is one of the compatible chart maps in the finite-type hypothesis [def-sfb-space-morphism-properties], and is locally of finite type. The scheme $V$ is locally Noetherian by the chart meaning of that hypothesis on $B$. Apply [pqf-lem-locnoeth-lft] to $W\\to V$, then [lem-trf-etale-local-noetherian-descent] to $W\\to T$. This makes every $T$ locally Noetherian, as required. No quasi-compactness of $T,V,W$ is needed here.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-sfb-space-morphism-properties",
+    "pqf-lem-locnoeth-lft",
+    "lem-trf-etale-local-noetherian-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04ZK, lemma-locally-finite-type-locally-noetherian, chart proof; scheme Tag 01T6"
+   }
+  },
+  {
+   "text": "For global Noetherianity, first compare the two forms of quasi-compactness of a space used here: a representable surjective etale map from a quasi-compact scheme, and quasi-compactness of the point space $|\\cdot|$ in the atlas topology [def-a1-space-point-topology]. If $h_{U_0}\\to B$ is surjective etale with $U_0$ quasi-compact, then $|U_0|\\to|B|$ is surjective and continuous by the definition of that final topology, so $|B|$ is quasi-compact; conversely [lem-sfb-qc-space-affine-etale-atlas] gives an affine atlas. Thus choose an affine surjective etale atlas $V\\to B$ by [lem-sfb-qc-space-affine-etale-atlas]. Finite type includes quasi-compactness [def-sfb-space-morphism-properties]; since $V$ is affine, the point space of $Y=X\\times_BV$ is quasi-compact, in agreement with the affine-test criterion [lem-sfb-space-quasicompact-affine-tests]. Choose an affine surjective etale atlas $U\\to Y$ by the same atlas lemma. The map $Y\\to X$ is surjective etale by [lem-trf-space-fibre-products-etale-covers], and $U\\to X$ is therefore surjective etale. For etaleness, test on a scheme and apply the scheme composition clause of [lem-weil-pbc-etale-composition-cancellation]; surjectivity follows by lifting a point successively through the two covers. Thus $U\\to X$ exhibits quasi-compactness, using the atlas characterization in [lem-sfb-space-quasicompact-affine-tests], and $|X|$ is quasi-compact by the comparison above. Finally, the diagonal of a space is taken in sheaves on $(\\mathit{Sch}/S)_{fppf}$, whose product is the fibre product over the final object $S$; so quasi-separatedness of $B$ means that $B\\to S$ is quasi-separated. Compose the quasi-separated morphisms $X\\to B$ and $B\\to S$ by [lem-sfb-space-quasiseparated-test-calculus]; hence $X\\to S$ is quasi-separated. Together with step 1 this proves that $X$ is Noetherian.",
+   "uses": [
+    "def-a1-space-point-topology",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-space-quasiseparated-test-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04ZK together with spaces-properties.tex lemma-quasi-compact-affine-cover and quasi-separated composition"
+   }
+  },
+  {
+   "text": "Now let $X$ be any locally Noetherian algebraic space. If $F$ is quasi-coherent, its restrictions to scheme charts are quasi-coherent by the local-presentation definition [def-trf-space-quasi-coherent-module]. Identify each chart restriction with a Zariski quasi-coherent scheme module by [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. Finite type on the two sites agrees by [lem-sfb-scheme-etale-module-exact-finiteness-comparison]. All these chart schemes are locally Noetherian. Thus [pqf-lem-coherent-ft-locnoeth] makes their modules coherent exactly when they are of finite type. Finite type is a local condition: restricting the local finite generating epimorphisms to slice sites preserves them, and generating epimorphisms on a covering family are exactly the local generators required in its definition. Hence $F$ is coherent in the chart convention of the statement if and only if it is quasi-coherent of finite type. This also gives coherence of $\\mathcal O_X$, since it has its one-generator free presentation on every chart.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UB, lemma-coherent-Noetherian, clauses (1), (2), (4), (5); coherent.tex Tag 01XZ"
+   }
+  },
+  {
+   "text": "A finite presentation $\\mathcal O^{\\oplus m}\\to\\mathcal O^{\\oplus n}\\to F\\to0$ is a presentation of the form allowed in [def-trf-space-quasi-coherent-module], so a finitely presented module is quasi-coherent. Its last map gives finite type. Step 3 therefore makes every finitely presented module coherent. This implication only uses the definitions of local presentation and finite type.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UB, lemma-coherent-Noetherian, implication (3) to (2) and (1)"
+   }
+  },
+  {
+   "text": "Conversely let $F$ be quasi-coherent of finite type. On any locally Noetherian scheme chart $T\\to X$, use [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] and [lem-sfb-scheme-etale-module-exact-finiteness-comparison] to obtain a Zariski quasi-coherent module $G$ of finite type. For an affine open $A\\subseteq T$, its ring $R=\\Gamma(A,\\mathcal O_T)$ is Noetherian by [pqf-lem-affine-open-locnoeth], and $\\Gamma(A,G)$ is finite over $R$ by clause (a) of [lem-weil-pbc-quasi-coherent-finite-type-affine]. Apply [lem-sc-noetherian-finite-module-finite-presentation] to this module, and clause (b) of the affine criterion to conclude that $G|_A$ is finitely presented. These affine opens cover $T$. The exact finiteness comparison then makes $F|_{T_{\\mathrm{et}}}$ finitely presented. Such local finite presentations on the chart cover of $X$ are precisely finite presentation on its small etale site. Together with steps 3 and 4 this proves all three equivalent conditions.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-sc-noetherian-finite-module-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UB, lemma-coherent-Noetherian; coherent.tex Tag 01XZ, implication (2) to (3)"
+   }
+  },
+  {
+   "text": "For ACC, let $X$ be Noetherian, $F$ coherent, and $F_1\\subseteq F_2\\subseteq\\cdots\\subseteq F$ quasi-coherent submodules. Since $|X|$ is quasi-compact (step 2 compares the two forms of quasi-compactness), choose an affine surjective etale atlas $p:U\\to X$ by [lem-sfb-qc-space-affine-etale-atlas]. It is a locally Noetherian scheme by the chart hypothesis on $X$, and is quasi-compact since affine, hence Noetherian as a scheme. Etale pullback is restriction to the localized site [def-trf-algebraic-space]. It preserves submodule inclusions and their equality as subsheaves on that site. By [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] and the exactness clause of [lem-sfb-scheme-etale-module-exact-finiteness-comparison], this gives a chain of quasi-coherent Zariski submodules of the coherent scheme module corresponding to $p^*F$. Apply [lem-weil-pbc-noetherian-acc-quasi-coherent] on $U$ to obtain one $n$ such that the restrictions of $F_m$ and $F_n$ agree as submodules of $p^*F$ for every $m\\ge n$. To descend equality, take any chart $T\\to X$ and section $s\\in F_m(T)$. On the surjective etale cover $T\\times_XU\\to T$ this section lies in $F_n$. These local sections of $F_n$ agree on overlaps, because their images agree in $F$ and $F_n\\hookrightarrow F$ is a monomorphism. The sheaf axiom glues them to a section of $F_n(T)$ whose image is $s$. Thus $F_m(T)\\subseteq F_n(T)$ for every $T$; the reverse inclusion comes from the chain. This proves global stabilization.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "def-trf-algebraic-space",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-weil-pbc-noetherian-acc-quasi-coherent",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UJ, lemma-acc-coherent; coherent.tex lemma-acc-coherent (Tag 01Y8)"
+   }
+  },
+  {
+   "text": "Finally $\\mathcal O_X$ is coherent by step 3. A quasi-coherent ideal sheaf is a quasi-coherent submodule of this module, so step 6 applies to increasing sequences of such ideals. If a nonempty set of quasi-coherent ideals had no maximal member, choose a first member $I_0$ and, recursively, a strictly larger member $I_{r+1}$ in that same set. Classical choice permits this recursion in the fixed universe. It produces a strictly increasing sequence, contradicting step 6. Therefore every such nonempty set has a maximal member. The argument also includes $X=\\varnothing$, where the only ideal sheaf is the zero sheaf.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UJ, elementary maximal-member consequence, as used in spaces-more-morphisms.tex Tag 08BE"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-sfb-space-morphism-properties",
+  "pqf-lem-locnoeth-lft",
+  "lem-trf-etale-local-noetherian-descent",
+  "def-a1-space-point-topology",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-sfb-space-quasiseparated-test-calculus",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-weil-pbc-noetherian-acc-quasi-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tags 07UB (lemma-coherent-Noetherian) and 07UJ (lemma-acc-coherent), with the chart proof of spaces-morphisms.tex Tag 04ZK and the written maximal-member consequence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite type algebraic spaces over a Noetherian base are Noetherian and coherent modules satisfy ascending chain condition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f]\\n  [AlgebraicGeometry.IsLocallyNoetherian Y], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], AlgebraicGeometry.IsNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring, then the scheme $ \\\\operatorname{Spec}(R) $ is a Noetherian scheme. This instance asserts that the prime spectrum of a Noetherian ring, equipped with the Zari\"}\n  {\"name\": \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R],\\n  AlgebraicGeometry.IsNoetherian (AlgebraicGeometry.Spec { carrier := R, commRing := inst })\", \"doc\": \"The spectrum of a Noetherian commutative ring is a Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a Noetherian ring, then the scheme $ \\\\operatorname{Spec}(R) $ is locally Noetherian. This means the prime spectrum of $ R $, equipped with the Zariski topology and structure sheaf, admits \"}\n  {\"name\": \"Algebra.EssFiniteType.isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Localization/Submodule\", \"type\": \"∀ (R : Type u_3) (S : Type u_4) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.EssFiniteType R S] [IsNoetherianRing R], IsNoetherianRing S\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ S $ is a commutative ring that is finitely generated as an $ R $-algebra, then $ S $ is also a Noetherian ring.\"}\n  {\"name\": \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], TopologicalSpace.NoetherianSpace ↥(AlgebraicGeometry.Spec R)\", \"doc\": \"For any Noetherian commutative ring $ R $, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Noetherian topological space. This means that every descending chain of\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a locally Noetherian algebraic space finitely presented sheaves are coherent and quasi coherent submodules satisfy ACC",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.QuasicoherentData\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If there exists a quasicoherent sheaf $\\\\sigma$ over the ring sheaf $\\\\mathcal{O}$ such that $\\\\sigma$ satisfies the finite presentation condition, then the sheaf $\\\\mathcal{M}$ also satisfies the finite \"}\n  {\"name\": \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsFiniteType\", \"doc\": \"For any sheaf of modules $ \\\\mathcal{M} $ over a ring sheaf $ \\\\mathcal{R} $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if $ \\\\mathcal{M} $ is of finite presentation (i.e., locally t\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf data $ q $ over a ring sheaf $ \\\\mathcal{O} $, if every indexed presentation $ q.\\text{presentation}(i) $ is finite (admits finite generators and relations), then $ q $ itsel\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"IsNoetherian\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|coherent.*[Nn]oetherian|Noetherian.*coherent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian algebraic spaces coherent sheaves finite presentation ascending chains of quasi coherent submodules",
+   "results": "Returned scheme IsNoetherian/IsLocallyNoetherian, scheme LocallyOfFiniteType.isLocallyNoetherian and SheafOfModules.QuasicoherentData.IsFinitePresentation. Read their types: these do not assert algebraic-space coherent ACC.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a locally Noetherian algebraic space coherent modules are finitely presented and submodules of coherent modules satisfy ACC",
+   "results": "Returned SheafOfModules.IsFinitePresentation.mk and QuasicoherentData.IsFinitePresentation, Submodule.FG.of_le_of_isNoetherian and IsNoetherian. These state sheaf presentation data or algebraic-module finite generation, not the algebraic-space theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"IsNoetherian\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|coherent.*Noetherian|Noetherian.*coherent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space finite type over a locally noetherian base is locally noetherian",
+   "results": "Returned AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, IsNoetherian, IsLocallyNoetherian and scheme instances. Read Noetherian.lean lines 239-242: the source and target are schemes, so this supplies only the chart result already recorded by pqf-lem-locnoeth-lft.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsQuasicoherentOfIsFinitePresentation|instIsFiniteTypeOfIsFinitePresentation|isLocallyNoetherian",
+   "results": "25 displayed hits, mostly scheme local-Noetherian declarations in AlgebraicGeometry/Noetherian.lean and Artinian.lean and related scheme files. No algebraic-space coherent ACC. Read Sheaf/Quasicoherent.lean presentation definitions, which encode the definition-level implication only.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-supported-adic-existence",
+  "date": "2026-10-24",
+  "group": "Q73"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; maximal bad ideal in the second paragraph, and coherent versus finite-presentation conventions of 08BF.",
+   "via": [
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-noetherian-coherent-acc",
+  "worker": "stage1",
+  "summary": "Proved local Noetherian inheritance on compatible charts, added the separate quasi-compactness and quasi-separatedness arguments, established the coherent/finite-type/finite-presentation equivalences via existing scheme comparisons, and descended scheme ACC by an explicit sheaf gluing argument. Reused existing nodes throughout; no new nodes. Statement unchanged.",
+  "blueprint": "The existing ancestry has no blueprint node (blueprint_refs.py ancestor returns None). This supplies the maximal-bad-ideal argument in Tag 08BE through lem-sfb-space-supported-adic-existence, and the coherent/finitely-presented convention of 08BF, on the inherited compactification/direct-image chain. It serves the proper/open direct-image paragraph of the current sk-thm-sf-ctf-stability proof without replacing the unit route. Whole-blueprint searches for ascending, coherent, Noetherian and Noetherian coherent found no equivalent algebraic-space statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme or chart comparison used only in the corresponding reduction step; no same-unit node states this prerequisite. It supplies local algebra or etale descent, not an alternative to the inherited direct-image route."
+   },
+   {
+    "node": "lem-trf-etale-local-noetherian-descent",
+    "why": "Generic scheme or chart comparison used only in the corresponding reduction step; no same-unit node states this prerequisite. It supplies local algebra or etale descent, not an alternative to the inherited direct-image route."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic scheme or chart comparison used only in the corresponding reduction step; no same-unit node states this prerequisite. It supplies local algebra or etale descent, not an alternative to the inherited direct-image route."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic scheme or chart comparison used only in the corresponding reduction step; no same-unit node states this prerequisite. It supplies local algebra or etale descent, not an alternative to the inherited direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic scheme or chart comparison used only in the corresponding reduction step; no same-unit node states this prerequisite. It supplies local algebra or etale descent, not an alternative to the inherited direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-acc-quasi-coherent",
+    "why": "Generic scheme or chart comparison used only in the corresponding reduction step; no same-unit node states this prerequisite. It supplies local algebra or etale descent, not an alternative to the inherited direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-etale-local-noetherian-descent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-noetherian-acc-quasi-coherent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-c90acecf1",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-c90acecf1 (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks 07UB (spaces-cohomology l.1877–1906), 07UJ (l.2096–2118) and 04ZK (spaces-morphisms l.4464–4486), and checked these tags plus 01XZ, 01Y8, 03H6 and 08BE in tags/tags. The statement is unchanged and correct, with no new nodes. I also checked the edge cases: the empty space, the zero module, and an infinite disjoint union of fields, where ACC fails as the statement allows. Steps 1 and 3–7 are correct. Step 1 builds the chart square, applies 01T6 and then étale-local Noetherian descent. Step 3 combines the Zariski/étale equivalence, the finiteness comparison and 01XZ. Step 5 uses the Noetherian affine ring, pbc (a)/(b) and finite ⇒ finitely presented. Step 6 applies the scheme ACC 01Y8 on an affine atlas and descends equality by an explicit gluing that uses F_n→F mono. Step 2 had two repairable faults, now fixed. (1) It composed X→B→Spec Z, but Spec Z is not an S-space, and the statement's diagonal lives in sheaves over S, so the composite is now X→B→S. (2) The atlas lemma needs |B| (and in step 6, |X|) quasi-compact in the point topology, but quasi-compactness was read in the atlas sense and the two senses were never linked. I added that comparison via the final-topology definition def-a1-space-point-topology, added to the step's uses and proof_deps. Batch-5 check: lem-trf-space-fibre-products-etale-covers, lem-trf-etale-local-noetherian-descent and lem-trf-scheme-zariski-etale-quasi-coherent-equivalence, plus the sfb qc/qs/atlas and finiteness-comparison nodes that reach def-trf-algebraic-space, are general foundations of algebraic spaces and quasi-coherent modules. None is part of the trace formula or Poincaré duality, so I accept them. I also accept the tool_uses in split_report. There is no duplicate: the qcoh-groupoid-equivalence, coherent-support and coherent-abelian nodes cover different statements. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-noetherian-coherent-acc.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceNoetherianCoherentAcc",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.noetherian_of_quasiSeparated_finiteType",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.noetherian_of_quasiSeparated_finiteType",
+   "AlgebraicGeometry.AlgebraicSpace.coherent_iff_finiteType_iff_finitePresentation",
+   "AlgebraicGeometry.AlgebraicSpace.noetherian_coherent_submodules_acc",
+   "AlgebraicGeometry.AlgebraicSpace.noetherian_quasiCoherent_ideals_maximal"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceNoetherianCoherentAcc.lean",
+  "statement": "theorem noetherian_of_quasiSeparated_finiteType {S : Scheme.{u}} (X B : AlgebraicSpace S) (f : X ⟶ B) (hBln : ∀ T : B.EtaleSite, IsLocallyNoetherian (B.etaleForget.obj T)) (hBqc : CompactSpace (Point B.obj.obj)) (hBqs : MapIsQuasiCompact (prod.lift (𝟙 B.obj.obj) (𝟙 B.obj.obj))) (hfqs : MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (hfft : MapIsFiniteType f) : (∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) ∧ CompactSpace (Point X.obj.obj) ∧ MapIsQuasiCompact (prod.lift (𝟙 X.obj.obj) (𝟙 X.obj.obj))",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Four statements render respectively Noetherian inheritance, both coherence equivalences, ACC for quasi-coherent subobjects, and maximal quasi-coherent ideals. No new definition is introduced; coherence and Noetherianity are expanded using the recorded scheme/chart notions and existing point topology."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d94e6245",
+  "group": "Q30",
+  "result": "fix",
+  "note": "Lean exact vs landed node and Stacks 07UB/07UJ/04ZK: chart local Noetherianity for all étale charts; CompactSpace (Point) with landed point topology; quasi-separated as diagonal over S (MapIsQuasiCompact prod.lift); f qs via pullback.diagonal = MapIsQuasiSeparated unfolding; MapIsFiniteType; coherence = IsQuasicoherent ∧ chartwise RingedSpace.IsCoherent of schemeRestriction; two ↔ with IsQuasicoherent∧IsFiniteType and Mathlib IsFinitePresentation (index universes pinned to site universe, none left free); ACC as equality of Subobjects with quasi-coherent terms; maximal (not greatest) QuasiCoherentIdeal in nonempty Z. Added stmt_deps (point-topology, scheme-restriction, quasi-coherent-ideal) are landed defs used in the signatures; statement verbatim; imports exist live; no defs, sorry only, docstrings with source/blueprint/steps. Edge cases: empty X, zero module, constant chains, non-qc disjoint union. Sole fault H11: dispatcher self-audit second reading → fixes/lem-sfb-space-noetherian-coherent-acc.report.md (worker report verbatim + independent reading). Advisory: Stacks/def-sfb-space-absolute-quasi-separated use absolute qs, this node (stage-1 step 2) uses qs over S; they coincide for qs S, which covers current citers; a §1(C) correction is needed only if a citer over non-qs S needs the absolute form of clause 1."
+ }
+}

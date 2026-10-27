@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-algebraic-stack-tangent-finite",
+ "kind": "statement",
+ "title": "Finite-dimensional tangent space of a locally finite type algebraic stack",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], put $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum], and use schemes in the universes of [def-pc-scheme, def-weil-size-convention]. Let $\\mathcal X$ be an algebraic stack over $S$ [def-sfb-algebraic-moduli-stack] admitting a smooth surjective scheme atlas $U\\to\\mathcal X$ whose composite $U\\to S$ is locally of finite type [def-weil-finite-type-morphism]. Let $k$ be a field [def-weil-field] of finite type as an $R$-algebra and let $x:\\operatorname{Spec}k\\to\\mathcal X$ be an $S$-morphism. On the Artinian local test category $\\mathcal C_{R,k}$ of [def-sfb-artin-deformation-test-category], define $\\mathcal F_x(A)$ to have objects $(\\eta,\\alpha)$ where $\\eta\\in\\mathcal X(\\operatorname{Spec}A)$ and $\\alpha:\\eta|_k\\xrightarrow{\\sim}x$; arrows are isomorphisms respecting $\\alpha$, and transport is pullback. Its tangent space $T_x=\\pi_0\\mathcal F_x(k[\\epsilon]/(\\epsilon^2))$, the set of marked first-order deformations up to isomorphism, with zero the pullback of $x$ along $k\\to k[\\epsilon]/(\\epsilon^2)$, scalar multiplication by $a\\in k$ induced by $\\epsilon\\mapsto a\\epsilon$, and addition defined by lifting two classes to $k[\\epsilon_1,\\epsilon_2]/(\\epsilon_1^2,\\epsilon_1\\epsilon_2,\\epsilon_2^2)$ and transporting along $\\epsilon_1,\\epsilon_2\\mapsto\\epsilon$ (the lift is unique up to isomorphism), is a finite-dimensional $k$-vector space. No properness, separatedness, smoothness of $\\mathcal X$ over $S$, or restriction on the stabilizers is assumed.",
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 07X1 (lemma-finite-dimension), tangent-space assertion, with the marked predeformation category of equation-predeformation-category. Affine Noetherian base specialization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-weil-finite-type-morphism",
+  "def-weil-field",
+  "def-sfb-artin-deformation-test-category",
+  "def-sfb-marked-stack-deformations"
+ ],
+ "proof": [
+  {
+   "text": "Apply the algebraic-stack Rim--Schlessinger theorem to $\\mathcal X$. Its hypotheses require neither local finite type nor any condition on stabilizers. Its conclusion is exactly the pushout property required by the marked-deformation field-extension lemma. That lemma makes $\\mathcal F_x$ a predeformation category satisfying (RS), and gives its canonical vector structure, with the zero, addition, and scalar multiplication in the statement. In particular the lift of a pair of tangent classes is unique up to isomorphism: the product comparison is an equivalence of groupoids over the terminal marked fibre at $k$, hence a bijection on isomorphism classes. For every finite extension $l/k$ the same lemma gives $T_x\\otimes_k l\\simeq T_{x_l}$, with the pullback map $v\\mapsto v\\otimes1$.",
+   "uses": [
+    "lem-sfb-algebraic-stack-rim-schlessinger",
+    "lem-sfb-marked-deformation-tangent-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07X1 (lemma-finite-dimension), field-extension reduction; Tags 07WQ (lemma-algebraic-stack-RS), 07WU (lemma-deformation-category), 07WX (lemma-change-of-field), and formal-defos.tex Tag 07WB (lemma-tangent-space-change-of-field)."
+   }
+  },
+  {
+   "text": "Form $Z=\\operatorname{Spec}k\\times_{\\mathcal X}U$. By the definition of the given atlas, $Z$ is a nonempty algebraic space smooth and surjective over $\\operatorname{Spec}k$. Choose a surjective etale scheme chart $W\\to Z$. Then $W$ is nonempty and $W\\to\\operatorname{Spec}k$ is smooth by the chart definition of smoothness for this projection. The dense-separable-points lemma gives a point of $W$ with residue field $l$ finite separable over $k$: a dense subset of a nonempty space is nonempty. Its image in $Z$ is precisely a morphism $u:\\operatorname{Spec}l\\to U$ with a specified isomorphism $p(u)\\simeq x_l$. Since $l$ has a finite $k$-basis, adjoining that basis and finitely many $R$-algebra generators of $k$ generates $l$ over $R$. Thus $l$ is an allowed finite-type residue field. Choose an affine neighbourhood $V=\\operatorname{Spec}B\\subseteq U$ through $u$ with $B$ a finite type $R$-algebra, using the affine cover in the definition of locally finite type over the affine base.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-trf-algebraic-space",
+    "lem-pc-dense-separable-points",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07X1 (lemma-finite-dimension), first paragraph; Tag 07W4 (spaces-over-fields.tex, lemma-smooth-separable-closed-points-dense), here obtained from a scheme chart and the existing Tag 056U node."
+   }
+  },
+  {
+   "text": "Let $\\eta$ represent any class of $T_{x_l}$ and put $D=l[\\epsilon]$. The atlas definition gives a smooth algebraic space $Z_\\eta=\\operatorname{Spec}D\\times_{\\mathcal X}U$ over $\\operatorname{Spec}D$. The marking of $\\eta$, the chosen $u$, and the isomorphism $p(u)\\simeq x_l$ give a section over $\\operatorname{Spec}l$. The closed immersion $\\operatorname{Spec}l\\hookrightarrow\\operatorname{Spec}D$ is an affine first order thickening, since its ideal $(\\epsilon)$ has square zero. Apply the smooth-space affine infinitesimal lifting lemma to this section, with base map the identity of $\\operatorname{Spec}D$. Its lift is a morphism $\\widetilde u:\\operatorname{Spec}D\\to U$, reducing to $u$, together with an isomorphism $p(\\widetilde u)\\simeq\\eta$ inducing the prescribed marking. Both spectra have a single point, so $\\widetilde u$ factors through $V$. Consequently the natural map from marked tangent lifts of $u$ in $V$ onto $T_{x_l}$ is surjective.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-smooth-space-affine-infinitesimal-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07X1 (lemma-finite-dimension), final paragraph, tangent surjectivity; Tag 07WK (lemma-formally-smooth-on-deformation-categories), here expanded using spaces-more-morphisms.tex Tag 04AM (lemma-smooth-formally-smooth)."
+   }
+  },
+  {
+   "text": "Write $\\varphi_0:B\\to l$ for $u$. A marked tangent lift in $V$ is an $R$-algebra map $\\varphi:B\\to l[\\epsilon]$ reducing to $\\varphi_0$; a representable scheme has no nonidentity arrows. There is a unique function $d:B\\to l$ with $\\varphi(b)=\\varphi_0(b)+\\epsilon d(b)$. The ring-map equations are exactly $d(b+c)=d(b)+d(c)$, $d(bc)=\\varphi_0(b)d(c)+\\varphi_0(c)d(b)$ and $d(r)=0$ for $r\\in R$. Conversely these equations define such a lift. These functions form an $l$-vector space under pointwise operations. If $b_1,\\ldots,b_n$ generate $B$ over $R$, evaluating $d$ on them is an injective linear map into $l^n$: addition and the product rule determine $d$ on every polynomial in the $b_i$, and these polynomials exhaust $B$. Thus the atlas tangent space is finite-dimensional (at most $n$), including $n=0$. This argument uses algebra generators, not generators of $\\ker\\varphi_0$.",
+   "uses": [
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07X1 (lemma-finite-dimension), last affine-coordinate argument and omitted details; corrected to use finite algebra generators in place of generators of the point ideal."
+   }
+  },
+  {
+   "text": "The map of step 3 from this vector space to $T_{x_l}$ is linear. Indeed the constant lift maps to the constant stack object, and pullback commutes with each map $\\epsilon\\mapsto a\\epsilon$, giving scalar compatibility. For $d_1,d_2$, the single map $b\\mapsto\\varphi_0(b)+\\epsilon_1d_1(b)+\\epsilon_2d_2(b)$ into $l[\\epsilon_1,\\epsilon_2]/(\\epsilon_1,\\epsilon_2)^2$ restricts to the two ring lifts. Its image under $p$ therefore represents the unique pair-lift in the definition of stack tangent addition. Transport along $\\epsilon_1,\\epsilon_2\\mapsto\\epsilon$ sends it to the image of $d_1+d_2$. This proves additive compatibility. A finite basis of the atlas tangent space has images spanning $T_{x_l}$ by the surjectivity of step 3. Hence $T_{x_l}$ is finite-dimensional over $l$.",
+   "uses": [
+    "lem-sfb-marked-deformation-tangent-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07X1 (lemma-finite-dimension), final paragraph: linearity and surjectivity; formal-defos.tex Tag 06IJ (lemma-k-linear-differential), here verified directly from the operations."
+   }
+  },
+  {
+   "text": "Finally use $T_x\\otimes_k l\\simeq T_{x_l}$. Choose a finite $k$-basis of $l$ starting with $1$; its first coordinate defines a $k$-linear functional $\\lambda:l\\to k$ with $\\lambda(1)=1$. The map $v\\mapsto v\\otimes1$ is injective, since $v\\otimes a\\mapsto\\lambda(a)v$ is a left inverse. A finite $l$-spanning set of $T_{x_l}$ multiplied by the finitely many basis elements of $l/k$ spans it over $k$. Its $k$-subspace $T_x$ is therefore finite-dimensional. The vector operations were already identified in step 1, so this proves every clause of the item without adding any smoothness or separation hypothesis on $\\mathcal X$.",
+   "uses": [
+    "lem-sfb-marked-deformation-tangent-field-extension",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07X1 (lemma-finite-dimension), reduction after the tangent scalar-extension isomorphism; elementary finite-dimensional descent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-stack-rim-schlessinger",
+  "lem-sfb-marked-deformation-tangent-field-extension",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "lem-pc-dense-separable-points",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-smooth-space-affine-infinitesimal-lift",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 07X1 (lemma-finite-dimension), tangent-space proof. Expanded chart lifting, linearity, and finite-dimensional descent; repaired its last affine-coordinate argument using algebra generators."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The tangent space of the marked deformation groupoid of a locally finite type algebraic stack is finite dimensional",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.finite\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"∀ (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.EssFiniteType R S], Module.Finite S Ω[S⁄R]\", \"doc\": \"If $ S $ is a commutative ring that is finitely generated as an $ R $-algebra (essential finite type) over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is finitel\"}\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.Extension.Cotangent.finite\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, P.ker.FG → Module.Finite S P.Cotangent\", \"doc\": \"Given commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, if the kernel $ \\\\ker(\\\\phi) $ of the canonical homomorphism $ \\\\phi: R \\\\to S $ is finitely generated as an ideal, then t\"}\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.EssFiniteType R A]\\n  [Algebra.FormallySmooth R A], Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).EssFiniteType\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes that is locally of finite type and any point $ x \\\\in X $, the induced ring homomorphism on the stalks $ \\\\mathcal{O}_{Y,f(x)} \\\\to \\\\mathcal{O}_{X,x} $ is of es\"}\n  {\"name\": \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S], Module.FinitePresentation S Ω[S⁄R]\", \"doc\": \"If an $ R $-algebra $ S $ is finitely presented over $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is finitely presented as an $ S $-module.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: finite Kaehler differentials and local-ring cotangent spaces concern rings, and the remaining tangent-space hits concern manifolds; none identifies or proves finiteness of the marked deformation space of an algebraic stack"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensionality of first order deformations at a field valued point of an algebraic stack with a locally finite type smooth atlas",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.EssFiniteType R A]\\n  [Algebra.FormallySmooth R A], Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: finite Kaehler differentials and local-ring cotangent spaces concern rings, and the remaining tangent-space hits concern manifolds; none identifies or proves finiteness of the marked deformation space of an algebraic stack"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, AlgebraicGeometry",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry'\n",
+   "date": "2026-10-23",
+   "verdict": "invalid query: Loogle reports unknown identifier AlgebraicGeometry; replaced by the successful query Module.Finite, KaehlerDifferential"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tangent and infinitesimal automorphism vector spaces of a finite type algebraic stack are finite dimensional",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgEquiv.fintype\", \"module\": \"Mathlib.FieldTheory.Fixed\", \"type\": \"(K : Type u) (V : Type v) [Field K] [Field V] [Algebra K V] [FiniteDimensional K V] : Fintype (V ≃ₐ[K] V)\", \"doc\": \"Given a field $ K $ and a finite-dimensional $ K $-algebra $ V $, the group of $ K $-algebra automorphisms of $ V $ is finite. This follows because each automorphism is uniquely determined by its acti\"}\n  {\"name\": \"Module.instFiniteDimensionalOfIsReflexive\", \"module\": \"Mathlib.LinearAlgebra.Dual.Lemmas\", \"type\": \"(K V : Type*) [Field K] [AddCommGroup V] [Module K V] [IsReflexive K V] : FiniteDimensional K V\", \"doc\": \"Every reflexive vector space over a field is finite-dimensional. Specifically, if $ V $ is a vector space over a field $ K $ and the canonical evaluation map $ V \\to (V^*)^* $ from $ V $ to its double \"}\n  {\"name\": \"AffineBasis.finiteDimensional\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.FiniteDimensional\", \"type\": \"[Finite ι] (b : AffineBasis ι k P) : FiniteDimensional k V\", \"doc\": \"If $\\\\iota$ is a finite type and $b$ is an affine basis for the affine space $P$ over the vector space $V$ with scalar field $k$, then $V$ is finite-dimensional as a vector space over $k$.\"}\n  {\"name\": \"TangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type*} [NontriviallyNormedField 𝕜] {E : Type u} [NormedAddCommGroup E] [NormedSpace 𝕜 E] {H : Type*}\\n  [TopologicalSpace H] (I : ModelWithCorners 𝕜 E H) {M : Type*} [TopologicalSpace M] [ChartedSpace H M] (_x : M) :\\n  Type u\", \"doc\": \"The tangent space at a point $ x $ on a charted space $ M $ modeled on a normed vector space $ E $ via a model with corners $ I $ is identified with the normed vector space $ E $ itself. This definiti\"}\n  {\"name\": \"instAddCommGroupTangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type u_2} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_1} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              (I : ModelWithCorners 𝕜 E H) →\\n                {M : Type u_4}\", \"doc\": \"The tangent space at a point $x$ on a manifold $M$ modeled on a normed vector space $E$ via a model with corners $I$ inherits the additive commutative group structure from the normed vector space $E$.\"}\n  {\"name\": \"normedSpaceTangentSpaceVectorSpace\", \"module\": \"Mathlib.Geometry.Manifold.Riemannian.Basic\", \"type\": \"(x : E) : NormedSpace ℝ (TangentSpace 𝓘(ℝ, E) x)\", \"doc\": \"For any point $ x $ in the normed vector space $ E $ over $ \\\\mathbb{R} $, the tangent space $ T_xE $ is equipped with the canonical normed vector space structure over $ \\\\mathbb{R} $, which coincides w\"}\n  {\"name\": \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"[IsNoetherianRing R] : FiniteDimensional (ResidueField R) (CotangentSpace R)\", \"doc\": \"For any Noetherian local ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal of $ R $) is finite-dimensional as a vector space over the \"}\n  {\"name\": \"FiniteDimensional.finiteDimensional_subalgebra\", \"module\": \"Mathlib.LinearAlgebra.FiniteDimensional.Basic\", \"type\": \"[FiniteDimensional F E] (S : Subalgebra F E) : FiniteDimensional F S\", \"doc\": \"Any subalgebra of a finite-dimensional algebra over a field is itself finite-dimensional. Specifically, if $ E $ is a finite-dimensional vector space over a field $ F $ and $ S $ is a subalgebra of $ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: finite Kaehler differentials and local-ring cotangent spaces concern rings, and the remaining tangent-space hits concern manifolds; none identifies or proves finiteness of the marked deformation space of an algebraic stack"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]tack.*[Tt]angent|[Tt]angent.*[Ss]tack|deformation.*[Ff]inite[Dd]im",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: finite Kaehler differentials and local-ring cotangent spaces concern rings, and the remaining tangent-space hits concern manifolds; none identifies or proves finiteness of the marked deformation space of an algebraic stack"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, KaehlerDifferential",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"KaehlerDifferential.finite\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] [Algebra.EssFiniteType R S] : Module.Finite S Ω[S⁄R]\", \"doc\": \"\"}\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \" {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]] : Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [IsLocalRing S] [Algebra R S] (P : Type u_3) (K : Type u_4) [Field K] [CommRing P] [Algebra R P] [Algebra P S] [IsScalarTower R P S] [Algebra S K] [Algebra P K] [IsScalarTower P S K] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.\", \"doc\": \"The **Jacobian criterion** for smoothness of local algebras.\\nSuppose `S` is a local `R`-algebra, and `0 → I → P → S → 0` is a presentation such that\\n`P` is formally-smooth over `R`, `Ω[P⁄R]` is finite\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [IsLocalRing S] [Algebra R S] (P : Type u_3) [CommRing P] [Algebra R P] [Algebra P S] [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P Ω[P⁄R]] (h₁ : Function.Surjective ⇑(algebraMap P S)) (h₂ : (RingHo\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [IsLocalRing S] [Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]] [Module.Finite P.Ring Ω[P.Ring⁄R]] (h' : P.ker.FG) : Algebra.FormallySmooth R S ↔ Function.Injective ⇑(LinearMap.lTens\", \"doc\": \"The **Jacobian criterion** for smoothness of local algebras.\\nSuppose `S` is a local `R`-algebra, and `0 → I → P → S → 0` is a presentation such that\\n`P` is formally-smooth over `R`, `Ω[P⁄R]` is finite\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: finite Kaehler differentials and local-ring cotangent spaces concern rings, and the remaining tangent-space hits concern manifolds; none identifies or proves finiteness of the marked deformation space of an algebraic stack"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]eformation|[Tt]angentSpace",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: finite Kaehler differentials and local-ring cotangent spaces concern rings, and the remaining tangent-space hits concern manifolds; none identifies or proves finiteness of the marked deformation space of an algebraic stack"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*finite|theorem.*finite|lemma.*finite",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"line\": \"408\", \"text\": \"theorem KaehlerDifferential.ideal_fg [EssFiniteType R S] :\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"line\": \"433\", \"text\": \"instance KaehlerDifferential.finite [EssFiniteType R S] :\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: finite Kaehler differentials and local-ring cotangent spaces concern rings, and the remaining tangent-space hits concern manifolds; none identifies or proves finiteness of the marked deformation space of an algebraic stack"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-versal-ring-existence",
+  "date": "2026-10-23",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Existence of a versal ring at a finite-residue-field stack point. Supporting input for versal-ring existence: Finite-dimensional tangent space of a locally finite type algebraic stack.",
+   "via": [
+    "lem-sfb-stack-versal-ring-existence",
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-algebraic-stack-tangent-finite",
+  "worker": "stage1",
+  "summary": "Followed the atlas/finite-field-extension route of Tag 07X1. Reused existing RS, dense separable scheme points and smooth space infinitesimal lifting nodes. Added one generic marked-deformation field-extension interface. Expanded affine tangent vectors and their operations; corrected the source proof's unjustified determination by point-ideal generators using algebra generators. Item statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Existence of a versal ring at a finite-residue-field stack point. Supporting input for versal-ring existence: Finite-dimensional tangent space of a locally finite type algebraic stack. Steps 1 and 6 carry scalar extension and descent, step 2 the atlas lift, steps 3--5 tangent surjectivity and the finite affine-coordinate bound. The ancestor helper returned None for this inherited chain; its from.node is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-dense-separable-points",
+    "why": "Generic smooth-scheme point existence used on an etale chart of the atlas fibre; the unit has no substitute for this field-valued lifting input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-dense-separable-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-f9f703775",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-f9f703775 (reviewer sub-agent of L); spot-checked: PASS with no changes; review in review.md. Not superseded: live still has the item unsplit and the new id is absent; no repair note; the item statement is unchanged against live. Sources read: artin.tex 07X1 (lemma-finite-dimension, full proof), 07WQ, 07WU, 07WX and formal-defos.tex 07WB. No SGA anywhere. Source error confirmed: the last paragraph of 07X1 says a lift is determined by its values on generators of the point ideal ker phi0, which is false for an inseparable residue map (R=F_p(s), B=l=R[t]/(t^p-s), phi0=id; t->t+c*epsilon is a lift for every c). Step 4 counts on R-algebra generators of B instead, which is correct. Step checks: (1) the RS node's conclusion is exactly the new node's hypothesis, and the pair-lift is unique by RS on k[e] x_k k[e]. (2) The atlas fibre is smooth over k, so a chart W is smooth by the chartwise definition. The 056U node gives a separable finite point l, which is of finite type over R, and an affine V=Spec B with B finitely generated. (3) The smooth-space affine lifting lemma applies along Spec l in Spec l[e] with b=id. The lift keeps the marking, and it lies in V because Spec l[e] has one point. (4) Lifts are phi0-derivations vanishing on R; evaluation on algebra generators is injective; n=0 and the inseparable case checked. (5) Scalars and zero are direct. Addition: the two-parameter map is the unique pair-lift. So the map is linear and onto. (6) A functional with lambda(1)=1 gives a left inverse of v->v(x)1, so T_x embeds in T_{x_l}, which is finite over k. New node lem-sfb-marked-deformation-tangent-field-extension: it is 07WU+07WX+07WB with exactly the pushouts the source needs. I checked that the 07WB isomorphism is v(x)a -> a*rho(v); the statement holds for l=k and for inseparable l. It is statement-only, self-contained, and has 5 searches. The duplicate search (artin-rs-tangent-tensor, rs-versal-formal-object, versal-finite-residue-extension, versal-field-lifting, pointwise-versal-field-extension, marked-lift-torsor, schlessinger-automorphism-kernel, versal-ring-smooth-span) found nothing that states it. It does not restate the item. Accepted tool use: lem-pc-dense-separable-points (generic 056U). Batch-5 check: def-trf-algebraic-space is a general definition, already reached through def-sfb-algebraic-moduli-stack. The closure of lem-sfb-smooth-space-affine-infinitesimal-lift reaches only generic algebraic-space foundation nodes, with no trace-formula, Poincare-duality or nt-assume node, so both citations are outside the assumptions. from.node=null is inherited from the parent chain; left as it is."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicStackTangentFinite",
+  "declaration": "AlgebraicGeometry.StackDeformation.algebraicStack_tangent_finite",
+  "declarations": [
+   "AlgebraicGeometry.StackDeformation.algebraicStack_tangent_finite"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicStackTangentFinite.lean",
+  "statement": "theorem algebraicStack_tangent_finite (hF : IsAlgebraicModuliStack F) (U : Over (Spec (.of R))) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F) (ha : IsSmoothModuliAtlas F U a) (hU : LocallyOfFiniteType U.hom) : ∃ (_ : AddCommGroup (Tangent F x)) (_ : Module k (Tangent F x)), FiniteDimensional k (Tangent F x) ∧ (∀ t : Tangent F x, IsZeroClass F x t ↔ t = 0) ∧ (∀ (c : k) (t s : Tangent F x), IsScalarClass F x c t s ↔ s = c • t) ∧ (∀ t s r : Tangent F x, IsSumClass F x t s r ↔ r = t + s) ∧ ∀ t s : Tangent F x, ∃ Z : Marked F x (ArtinDeformation.squareZeroTest (R := R) (k := k) (k × k)), IsPairLift F x t s Z ∧ ∀ Z' : Marked F x (ArtinDeformation.squareZeroTest (R := R) (k := k) (k × k)), IsPairLift F x t s Z' → Nonempty (Z ≅ Z')",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-429dec47c",
+  "group": "Q34",
+  "result": "fix",
+  "note": "Item statement matches node and Stacks 07X1/07T4 clause by clause: Noetherian R, IsAlgebraicModuliStack, given smooth surjective atlas (IsSmoothModuliAtlas) locally finite type over Spec R, finite-type field k, x in fibre over Spec k; Marked = structured arrows over residue immersion (cartesian under hF = marking iso), PullsBack = pullback; Tangent = iso classes at squareZeroTest k; zero/scalar/sum pinned by iff to geometric relations; pair-lift uniqueness explicit; FiniteDimensional. No extra hypotheses or universe restriction, only sorry is the theorem, verbatim statement, item differs from base only in lean + new def stmt_dep. Edge cases (dim 0, n=0, char 2, empty stack, stabilizers) ok. Finding H12 fixed: new def node def-sfb-marked-stack-deformations cited theorem lem-sfb-artin-rs-tangent-tensor only for plain squareZeroMap (no def owner). fixes/MarkedStackDeformations.lean defines squareZeroTransport (same body, proven rfl = squareZeroMap), imports ArtinDeformationTestCategory instead; fixes/def-sfb-marked-stack-deformations.json drops the theorem stmt_dep, rewrites the statement sentence, adds the declaration and a lean.note. nt_compile --json: fixed module 8.6 s, item 4.1 s, rfl check 3.0 s, all clean, exit 0."
+ }
+}

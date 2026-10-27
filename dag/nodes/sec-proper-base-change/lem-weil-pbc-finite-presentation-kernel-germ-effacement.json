@@ -1,0 +1,239 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-kernel-germ-effacement",
+ "kind": "statement",
+ "title": "A zero-image germ from a finitely presented module is killed by a finitely presented quotient",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] which is quasi-compact [def-weil-pbc-quasi-compact-scheme] and quasi-separated [def-weil-quasi-separated-morphism]. Let $\\mathcal G,\\mathcal F$ be sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], with $\\mathcal G$ of finite presentation [def-weil-pbc-module-finite-type-presentation] and $\\mathcal F$ quasi-coherent [pqf-def-coherent], and let $\\alpha:\\mathcal G\\to\\mathcal F$ be $\\mathcal O_X$-linear. Let $x\\in X$ and let $s\\in\\mathcal G_x$ be a germ in the ordinary Zariski module stalk [def-weil-pbc-module-stalk] with $\\alpha_x(s)=0$. Then there is a quasi-coherent submodule $\\mathcal K\\subseteq\\mathcal G$ of finite type [def-weil-pbc-module-finite-type-presentation], contained in the sectionwise kernel $\\ker\\alpha$ (so $\\alpha_U(\\mathcal K(U))=0$ for every open $U\\subseteq X$), such that the quotient $\\mathcal Q=\\mathcal G/\\mathcal K$, the cokernel in $\\operatorname{Mod}(\\mathcal O_X)$ of $\\mathcal K\\hookrightarrow\\mathcal G$, is of finite presentation, and its quotient map $q:\\mathcal G\\to\\mathcal Q$ satisfies $q_x(s)=0$. Moreover there is an $\\mathcal O_X$-linear map $\\beta:\\mathcal Q\\to\\mathcal F$ with $\\beta\\circ q=\\alpha$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Stacks Properties, Lemma 01PJ (lemma-directed-colimit-diagram-finite-presentation), injectivity paragraph, lines 3137-3163: finite-type quasi-coherent submodule inside the kernel, and finite-presentation quotient killing the chosen germ."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Represent $s$ by a section $t$ near $x$. The germ equality criterion shrinks its domain to $W$ where the image under $\\alpha$ vanishes. Choose an affine open neighbourhood $x\\in U\\subseteq W$ using the scheme affine-open basis, and restrict $t$ to $U$. An affine open is quasi-compact, its image section is zero, and its germ remains $s$.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Stacks 01PJ (lemma-directed-colimit-diagram-finite-presentation), injectivity paragraph, lines 3150-3168."
+   }
+  },
+  {
+   "text": "Finite presentation makes $\\mathcal G$ quasi-coherent by the finite-presentation instance in Mathlib. Since $\\mathcal F$ is quasi-coherent, the kernel theorem gives the quasi-coherent sheaf $\\mathcal H=\\ker\\alpha$, with $\\mathcal H(T)=\\ker\\alpha_T$ for every open $T$. In particular $t\\in\\mathcal H(U)$.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Stacks 01PJ (lemma-directed-colimit-diagram-finite-presentation), injectivity paragraph, lines 3150-3168."
+   }
+  },
+  {
+   "text": "Regard the section of $\\mathcal H$ over $U$ as a section on the slice site, by restricting to each smaller open. It defines a morphism from the free module on one generator to $\\mathcal H|_U$. Take its abelian image. The equivalence between the slice-site module category and modules on the open subscheme preserves kernels and cokernels and transports quasi-coherent presentations in both directions. Quasi-coherent kernel and cokernel closure therefore prove the image quasi-coherent. Push the single finite free generating section through the epimorphic image factorization; its local-generators data proves the image finite type. Evaluating the free-Hom equivalence at the unique generator shows that the original section belongs to the image on $U$.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-weil-pbc-module-finite-type-presentation",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Stacks 01PJ (lemma-directed-colimit-diagram-finite-presentation), injectivity paragraph, lines 3150-3168."
+   }
+  },
+  {
+   "text": "Apply the finite-type submodule extension theorem with ambient sheaf $\\mathcal H$ and prescribed submodule $\\mathcal L\\subseteq\\mathcal H|_U$. Its hypotheses hold: $X$ is qcqs, $U$ is quasi-compact open, $\\mathcal H$ is quasi-coherent, and $\\mathcal L$ is quasi-coherent of finite type. Obtain a quasi-coherent finite-type $\\mathcal K\\subseteq\\mathcal H$ with $\\mathcal K|_U=\\mathcal L$ as submodules. Composing with $\\mathcal H\\subseteq\\mathcal G$ gives $\\alpha_T(\\mathcal K(T))=0$ on every open $T$, and $t\\in\\mathcal K(U)$.",
+   "uses": [
+    "lem-weil-pbc-module-finite-type-submodule-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Stacks 01PJ (lemma-directed-colimit-diagram-finite-presentation), injectivity paragraph, lines 3150-3168."
+   }
+  },
+  {
+   "text": "Let $q:\\mathcal G\\to\\mathcal Q$ be the cokernel of $\\mathcal K\\hookrightarrow\\mathcal G$. The finite-type-source/finitely-presented-target cokernel theorem gives finite presentation of $\\mathcal Q$. Since $\\alpha$ vanishes on $\\mathcal K$, the defining universal property of the cokernel supplies $\\beta:\\mathcal Q\\to\\mathcal F$ with $\\beta q=\\alpha$. Also $q_U(t)=0$ because $t\\in\\mathcal K(U)$ and $q$ kills the inclusion. Taking germs yields $q_x(s)=(q_U(t))_x=0$.",
+   "uses": [
+    "lem-weil-pbc-module-finite-presentation-cokernel",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Stacks 01PJ (lemma-directed-colimit-diagram-finite-presentation), injectivity paragraph, lines 3150-3168."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "lem-weil-pbc-module-finite-type-submodule-extension",
+  "lem-weil-pbc-module-finite-presentation-cokernel"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q3",
+  "date": "2026-10-23",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Stacks 01PJ, injectivity paragraph, lines 3150-3172; cyclic section construction as in the proved CoherentOpenSectionCarrier module, without Noetherian hypotheses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a quasi-compact quasi-separated scheme, given a map from a finitely presented sheaf to a quasi-coherent sheaf, every germ in its kernel is killed by a quotient by a finite-type quasi-coherent submodule of the kernel, and that quotient remains finitely presented",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation and its isFinite_presentation and finite-type-generator instance; IsFinitePresentation.exists_quasicoherentData; quasicoherentDataOfIsFinitePresentation; instIsQuasicoherentOfIsFinitePresentation; IsFiniteType.exists_localGeneratorsData; AlgebraicGeometry.exists_lift_of_germInjective_aux. Definitions and local generators only; the last is about ring maps into scheme stalks, not module quotient effacement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation, CategoryTheory.Limits.cokernel",
+   "results": "0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel|[Ff]inite[Pp]resentation|[Ff]inite[Tt]ype",
+   "results": "AlgebraicGeometry/Modules/Tilde.lean:452,460,462,475,477: presentationTilde and isIso_fromTildeΓ_of_presentation construct presentations and compare associated sheaves. No global kernel-germ quotient existence theorem on qcqs schemes. Searched subdirectory AlgebraicGeometry/Modules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A germ in the kernel of a map from a finitely presented O_X-module to a quasi-coherent module on a qcqs scheme can be killed by a finitely presented quotient factoring the map",
+   "results": "Module.finitePresentation_of_ker, Module.Finite.kerRepr, Module.FinitePresentation.fg_ker and fg_ker_iff, Module.Relations.toQuotient_relation; AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, germ_eq_zero_of_pow_mul_eq_zero, instIsGermInjectiveOfIsLocallyNoetherian. Ring-module presentation results and structure-sheaf germ lemmas, not the global sheaf quotient statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a morphism G to F of sheaves on a qcqs scheme with G finitely presented and F quasicoherent, a zero-image stalk element of G can be killed by a factorization G to Q to F with Q finitely presented",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation and isFinite_presentation and finite-type-generator instance; IsFinitePresentation and exists_quasicoherentData; quasicoherentDataOfIsFinitePresentation; instIsQuasicoherentOfIsFinitePresentation; isFinitePresentation. Definitions and instances only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel|effac|germ|quotient",
+   "results": "Returned: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean. Searched AlgebraicGeometry/Modules; only germ restriction formulas and affine presentations, no global quotient effacement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation, CategoryTheory.Limits.cokernel",
+   "results": "Returned: . No kernel-germ quotient effacement theorem; presentation definitions and ring-module results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A germ in the kernel of a sheaf morphism is killed by a finitely presented quotient through which the morphism factors",
+   "results": "Returned: CategoryTheory.Limits.kernel, AlgebraicGeometry.Scheme.Hom.ker, SheafOfModules.IsFinitePresentation.mk, TopCat.Presheaf.Γgerm, AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero, Module.FinitePresentation.fg_ker_iff, SheafOfModules.Presentation.IsFinite.isFiniteType_generators, SheafOfModules.QuasicoherentData.IsFinitePresentation. No kernel-germ quotient effacement theorem; presentation definitions and ring-module results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A kernel germ of a morphism from a finitely presented sheaf to a quasi-coherent sheaf on a qcqs scheme is killed by quotienting by a finite type quasi-coherent submodule of the kernel",
+   "results": "Returned: SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation. No kernel-germ quotient effacement theorem; presentation definitions and ring-module results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a finitely presented module sheaf G mapping to a quasicoherent F, factor through a finitely presented quotient G/K that annihilates a chosen germ in the kernel",
+   "results": "Returned: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation. No kernel-germ quotient effacement theorem; presentation definitions and ring-module results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+  "date": "2026-10-22",
+  "group": "Q45"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Finite-pushforward approximation in the proof of lemma-weil-pbc-h1-constructible-representation; in the existing Stacks 01PJ auxiliary split, the injectivity paragraph: extend the cyclic submodule generated by a zero-image germ inside the kernel, then quotient to kill it.",
+   "via": [
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-finite-presentation-kernel-germ-effacement",
+  "worker": "stage1",
+  "summary": "Q152: five-step proof of the kernel-germ effacement argument in 01PJ, reusing existing nodes only. Explicit shrinking, cyclic image inside the sectionwise kernel, finite-type extension, and cokernel factorization; no statement change.",
+  "blueprint": "Finite-pushforward approximation in the proof of lemma-weil-pbc-h1-constructible-representation (current main-20261015 proof: paragraph beginning The finite-pushforward lemma); through the existing integral-morphism and finite-presentation approximation chain, the injectivity paragraph of Stacks 01PJ."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-f42870335",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-f42870335 (reviewer sub-agent of L); spot-checked: I read the item, its 12 cited statements and the 01PJ injectivity paragraph (properties.tex ~3143-3166). The statement agrees with the source hypothesis by hypothesis: X qcqs (needed for 01PF), G of finite presentation, F quasi-coherent (so ker α is quasi-coherent). The parent filtered-colimit node uses exactly these conclusions. Supersession: the item is still unsplit in the live and side-live clones and has no repair note. The delivery adds no new nodes. proof_deps equals the union of the step uses. Step checks: 1, the stalk node's germ criterion and induced-map formula give W with α(t|W)=0, and the qcqs⇒spectral node gives a quasi-compact U inside W. 2, affine-finiteness clause (0) makes G quasi-coherent, and the kernel node defines ker α sectionwise and shows it quasi-coherent, so t∈H(U). 3, restriction (2) keeps H|U quasi-coherent; O_U=Coker(O^0→O^1) is quasi-coherent and finite type; the image theorem on U and finite-type image clause (1) make L=Im(m_t) quasi-coherent of finite type, and t=m_t(1)∈L(U). 4, the 01PF extension node applies with ambient sheaf H: K⊆H⊆G, α kills K, t∈K(U). 5, the cokernel node is used in its general finite-type-source form (not the 'in particular' clause); β comes from the cokernel universal property; q_x(s)=(q_U t)_x=0. Route: everything is in sk-thm-p1 or is a definition or Mathlib leaf; no SGA. A grep for 01PJ found no duplicate. Edge cases s=0, α injective, X=∅ and Spec R all hold. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationKernelGermEffacement",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finitePresentation_quotient_killing_kernel_germ",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationKernelGermEffacement.lean",
+  "statement": "theorem exists_finitePresentation_quotient_killing_kernel_germ (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (G F : X.Modules) [SheafOfModules.IsFinitePresentation.{u} G] [SheafOfModules.IsQuasicoherent.{u} F] (α : G ⟶ F) (x : X) (s : (PresheafOfModules.moduleStalkFunctor X.ringCatSheaf.obj x).obj G.val) (hs : (PresheafOfModules.moduleStalkFunctor X.ringCatSheaf.obj x).map α.val s = 0) : ∃ (K : X.Modules) (ι : K ⟶ G), Mono ι ∧ SheafOfModules.IsQuasicoherent.{u} K ∧ SheafOfModules.IsFiniteType.{u} K ∧ (∀ (U : X.Opens) (t : Γ(K, U)), α.app U (ι.app U t) = 0) ∧ SheafOfModules.IsFinitePresentation.{u} (cokernel ι) ∧ (PresheafOfModules.moduleStalkFunctor X.ringCatSheaf.obj x).map (cokernel.π ι).val s = 0 ∧ ∃ β : cokernel ι ⟶ F, cokernel.π ι ≫ β = α",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the quasi-coherent clause of pqf-def-coherent via Mathlib SheafOfModules.IsQuasicoherent (Stacks 01BE), publicly re-exported by WeilConjectures.AlgebraicGeometry.Coherent. F is assumed only quasi-coherent; K is separately quasi-coherent and of finite type. The live primary binding AlgebraicGeometry.Scheme.Modules.IsQuasiCoherentFiniteType and the pqf-def-coherent node record are retained without modification."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-70381dbf8",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Re-delivery of the 4bf95d93 H13 return. pqf-def-coherent.json is now byte-identical to side-live and live (Q25 IsQuasiCoherentFiniteType kept); the item lean.note records SheafOfModules.IsQuasicoherent (01BE, re-exported by WeilConjectures.AlgebraicGeometry.Coherent) for F; the Lean module is unchanged from the head already reviewed. Re-checked: clause-by-clause H3 against Stacks 01PJ injectivity (qcqs X, G finitely presented, F only quasi-coherent, Zariski moduleStalkFunctor germ; ∃ mono ι with K quasi-coherent and finite type, sectionwise kernel, categorical cokernel finitely presented, q_x(s)=0, β with π≫β=α); single universe u; statement verbatim; the other six stmt_dep records identical to live; imports exist; edge cases (X empty, s=0, α=0, non-Noetherian) fine; no existing statement or parallel landing; sorry only, source and blueprint docstrings, 5-step proof docstring. No findings; nothing compiled (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261023T131724-L-2143794",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

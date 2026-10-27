@@ -59,6 +59,36 @@ theorem flat_of_universally_exact
         Function.Exact (f.rTensor N) (g.rTensor N) ∧
           Function.Surjective (g.rTensor N))
     [Module.Flat R M₂] : Module.Flat R M₃ := by
-  sorry
+  apply (Flat.iff_lTensor_preserves_injective_linearMap'.{max u t}).mpr
+  intro N N' _ _ _ _ i hi
+  let q : N' →ₗ[R] N' ⧸ LinearMap.range i := (LinearMap.range i).mkQ
+  have hiq : Function.Exact i q := LinearMap.exact_map_mkQ_range i
+  have hq : Function.Surjective q := Submodule.mkQ_surjective _
+  -- Right exactness suffices here; flatness of M₁ is not needed.
+  have hleft := _root_.lTensor_exact M₁ hiq hq
+  have hmid := Flat.lTensor_preserves_injective_linearMap (M := M₂) i hi
+  apply (i.lTensor M₃).ker_eq_bot.mp
+  apply le_antisymm
+  · intro x hx
+    change (i.lTensor M₃) x = 0 at hx
+    obtain ⟨y, rfl⟩ := (h_exact N).2.2 x
+    have hy : (g.rTensor N') ((i.lTensor M₂) y) = 0 := by
+      rw [← LinearMap.comp_apply, LinearMap.rTensor_comp_lTensor,
+        ← LinearMap.lTensor_comp_rTensor, LinearMap.comp_apply, hx]
+    obtain ⟨z', hz'⟩ := ((h_exact N').2.1 _).mp hy
+    have hzq : (q.lTensor M₁) z' = 0 := by
+      apply (h_exact (N' ⧸ LinearMap.range i)).1
+      rw [map_zero, ← LinearMap.comp_apply, LinearMap.rTensor_comp_lTensor,
+        ← LinearMap.lTensor_comp_rTensor, LinearMap.comp_apply, hz',
+        ← LinearMap.comp_apply, ← LinearMap.lTensor_comp,
+        hiq.linearMap_comp_eq_zero, LinearMap.lTensor_zero, LinearMap.zero_apply]
+    obtain ⟨z, hz⟩ := (hleft z').mp hzq
+    have hyz : y = (f.rTensor N) z := by
+      apply hmid
+      rw [← hz', ← hz, ← LinearMap.comp_apply, LinearMap.rTensor_comp_lTensor,
+        ← LinearMap.lTensor_comp_rTensor, LinearMap.comp_apply]
+    rw [hyz]
+    exact (h_exact N).2.1.apply_apply_eq_zero z
+  · exact bot_le
 
 end Module

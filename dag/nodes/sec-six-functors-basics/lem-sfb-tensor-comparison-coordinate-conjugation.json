@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-tensor-comparison-coordinate-conjugation",
+ "kind": "statement",
+ "title": "Coordinate conjugation of the constructed ordinary tensor comparison",
+ "statement": "Let l be prime, E a finite extension of Q_l, b a tower base, f:X to Y a scheme morphism, and g a Geometry for f [def-sp-tower-shriek-data]. Let B' and tau' be target coefficient sheaves and transitions identified with the canonical ones, and F the system pullback identified with g.pull. For each source system N let mu(N) be a natural isomorphism tensorRight(N) followed by F to F followed by tensorRight(FN), using the canonical monoidal sheaf tensors. Then comparisonOfCoordinates(g,B',tau',F,mu) at M,N [def-sfb-tower-class-tensor-comparison] is heterogeneously equal to F of the source siteTensorIso.hom at M, followed by mu(N).hom at M, followed by the target siteTensorIso.inv at FM. All supplied coefficient, transition and functor identifications are retained.",
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sfb-tower-class-tensor-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "clause (2), finite unit and tensor maps and their transposes"
+ },
+ "proof": [
+  {
+   "text": "Eliminate the coefficient equality, then the heterogeneous transition equality, then the pull-functor equality. The two sides are now definitionally the composite defining comparisonOfCoordinates. The private transport_pure helper similarly eliminates these coordinates and substitutes the three unit-section identifications in a fixed pure-tensor equality, retaining the actual sectionAdjoint and tensorPure definitions.",
+   "uses": [
+    "def-sp-tower-shriek-data",
+    "def-sfb-tower-class-tensor-comparison",
+    "def-sfb-tower-class-section-adjoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sfb-tower-class-tensor-comparison",
+  "def-sfb-tower-class-section-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H3",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "Clause (2); complete Lean proof of the finite tensor and adjunction coordinate step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image sheaves tensor product adjunction unit sends pure tensors to tensor of units",
+   "results": "8 indexed results: SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.unitToPushforwardObjUnit, CategoryTheory.sheafToPresheaf_ε, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.sheafToPresheaf_δ",
+   "date": "2026-10-27",
+   "verdict": "No normalized tensor-coordinate theorem; use the existing project evaluation and adjunction APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackPushforwardAdjunction\"",
+   "results": "12 indexed results: PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, TopCat.Presheaf.pullbackPushforwardAdjunction, TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk, TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk_assoc",
+   "date": "2026-10-27",
+   "verdict": "No normalized tensor-coordinate theorem; use the existing project evaluation and adjunction APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorSection|InverseTensorPure",
+   "results": "0 indexed results: ",
+   "date": "2026-10-27",
+   "verdict": "No normalized tensor-coordinate theorem; use the existing project evaluation and adjunction APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction transpose of a sheaf module morphism under evaluation and natural isomorphisms of inverse image direct image",
+   "results": "8 results: SheafOfModules.PullbackConstruction.adjunction, TopCat.Presheaf.pushforwardToOfIso, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, CategoryTheory.constantSheafAdj, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.sheafSectionsNatIsoEvaluation, SheafOfModules.pushforwardNatIso_inv",
+   "date": "2026-10-27",
+   "verdict": "General evaluation or finite-adjunction API; no equality for the specified tower coordinate data."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerClassTensorComparisonNormalization",
+  "date": "2026-10-27",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "Clause (2), finite tensor comparison and transpose normalization",
+   "via": [
+    "lem-sfb-tower-class-tensor-comparison-normalization",
+    "lem-sfb-tower-class-tensor-level-coordinates",
+    "lem-sfb-tower-class-tensor-geometry-existence",
+    "lem-sfb-diagonal-trace-geometric-model-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerClassTensorComparisonCoordinates",
+  "file": "lean/Sheaf/Paper/TowerClassTensorComparisonCoordinates.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.TensorCoordinates.tensorComparison_coordinates",
+  "statement": "theorem tensorComparison_coordinates {b : SpTowerShriek.Base l E}\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)\n    (B' : ℕ → Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})\n    (τ' : ∀ n, B' (n + 1) ⟶ B' n)\n    (hB : B' = SpTowerShriek.B l E X) (hτ : HEq τ' (SpTowerShriek.tau l E X))\n    (F : SpTowerShriek.S l E Y ⥤ SemilinearSections.Systems.{u + 1, u, u + 1}\n      (Scheme.ProEt.topology X) B' τ') (hF : HEq g.pull F)\n    (μ : ∀ N : SpTowerShriek.S l E Y,\n      let := SheafOfModules.isMonoidal_W_independentCoefficients\n        (SemilinearSections.systemRing (Scheme.ProEt.topology Y)\n          (SpTowerShriek.B l E Y) (SpTowerShriek.tau l E Y))\n      let := SheafOfModules.monoidalCategory\n        (SemilinearSections.systemRing (Scheme.ProEt.topology Y)\n          (SpTowerShriek.B l E Y) (SpTowerShriek.tau l E Y))\n      let := SheafOfModules.isMonoidal_W_independentCoefficients\n        (SemilinearSections.systemRing (Scheme.ProEt.topology X) B' τ')\n      let := SheafOfModules.monoidalCategory\n        (SemilinearSections.systemRing (Scheme.ProEt.topology X) B' τ')\n      CategoryTheory.MonoidalCategory.tensorRight N ⋙ F ≅\n        F ⋙ CategoryTheory.MonoidalCategory.tensorRight (F.obj N))\n    (M N : Systems Y (Arings l E Y)) :\n    HEq ((comparisonOfCoordinates l E g B' τ' hB hτ F hF μ N).hom.app M)\n      (F.map ((siteTensorIso.{u + 1, u, u + 1}\n          (coefficientSequenceTopology (Scheme.ProEt.topology Y)) (systemRing l E Y) N).hom.app\n            M) ≫ (μ N).hom.app M ≫\n        (siteTensorIso.{u + 1, u, u + 1}\n          (coefficientSequenceTopology (Scheme.ProEt.topology X))\n          (SemilinearSections.systemRing (Scheme.ProEt.topology X) B' τ')\n          (F.obj N)).inv.app (F.obj M))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-27"
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261027T123447-L-2301455",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261027T123447-L-2301455",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

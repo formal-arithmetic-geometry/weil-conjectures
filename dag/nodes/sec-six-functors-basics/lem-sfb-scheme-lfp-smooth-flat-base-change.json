@@ -1,0 +1,230 @@
+{
+ "id": "lem-sfb-scheme-lfp-smooth-flat-base-change",
+ "kind": "statement",
+ "title": "Pointwise smoothness of an lfp scheme morphism under flat base change",
+ "statement": "Let $f:U\\to V$ be a locally finitely presented morphism of schemes [def-pc-scheme, def-sbc-locally-finite-presentation], and let $g:T\\to V$ be a flat morphism [def-weil-flat-morphism]. Put $U_T=U\\times_VT$, with projections $p:U_T\\to U$ and $f_T:U_T\\to T$ [def-pc-fibre-product]. For every $u_T\\in |U_T|$, the morphism $f_T$ is smooth at $u_T$ if and only if $f$ is smooth at $p(u_T)$. Smooth at a point means smooth on some open neighbourhood, with smoothness as in [def-sbc-smooth-morphisms]. Neither flatness of $f$ nor local finite presentation or surjectivity of $g$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02V4, lemma-set-points-where-fibres-smooth, case (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Fix $z\\in U_T$, and put $u=p(z)$, $t=f_T(z)$ and $v=g(t)=f(u)$. First suppose $f$ is smooth at $u$, and choose an open neighbourhood $N\\subset U$ on which $f$ is smooth. By [lem-pc-smooth-flat], $N\\to V$ is flat and locally of finite presentation. Apply [lem-sfb-scheme-flat-smooth-point-base-change] to this morphism and the arbitrary map $g$: its base change is smooth at the point over $z$. By [lem-weil-pbc-open-fibre-product], that base change is the open neighbourhood $p^{-1}(N)$ of $z$ in $U_T$, with its morphism to $T$ the restriction of $f_T$. This proves ascent.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-sfb-scheme-flat-smooth-point-base-change",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V4, lemma-set-points-where-fibres-smooth, the forward inclusion; case (1) applied on a smooth neighbourhood; Tag 01VF, lemma-smooth-flat"
+   }
+  },
+  {
+   "text": "For reflection assume $f_T$ is smooth at $z$. Its restriction to some open neighbourhood of $z$ is smooth, hence flat by [lem-pc-smooth-flat]. Stalks of an open subscheme at its points are the original stalks, so this says that $f_T$ is flat at $z$ in [def-weil-flat-morphism]. The hypothesis that $g$ is flat gives flatness at $t$ by that same definition. Clause (2) of [lem-sfb-pointwise-flatness-base-change] therefore gives flatness of $f$ at $u$. We have not asserted that $f$ is flat at other points. Also $f_T$ is locally of finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence].",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "def-weil-flat-morphism",
+    "lem-sfb-pointwise-flatness-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V4, case (2), reflection of flatness; Tag 047C, more-morphisms-lemma-flat-locus-base-change, clause (2), for the structure sheaf; Tag 01TS"
+   }
+  },
+  {
+   "text": "Let $w_T\\in (U_T)_t$ and $w\\in U_v$ be the unique fibre points above $z$ and $u$, respectively; these exist by the homeomorphism in [def-pc-scheme-fibre]. Apply [lem-trf-smooth-at-point-fibre-criterion] to $f_T$ at $z$, using its local finite presentation and pointwise flatness from step 2. It follows that $(U_T)_t\\to\\operatorname{Spec}\\kappa(t)$ is smooth at $w_T$. By [lem-weil-pbc-fibre-of-base-change], this fibre is the base change of $U_v\\to\\operatorname{Spec}\\kappa(v)$ along the induced residue-field map. The comparison sends $w_T$ to $w$: its compatibility with the projections to $U$ sends it to $p(z)=u$, and the fibre projection is injective on points.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-trf-smooth-at-point-fibre-criterion",
+    "lem-weil-pbc-fibre-of-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V4, displayed identity for fibres of a base change; Tag 01V9, lemma-smooth-at-point, (1) iff (2)"
+   }
+  },
+  {
+   "text": "The fibre map $U_v\\to\\operatorname{Spec}\\kappa(v)$ is flat by [lem-pc-flat-field], since its base is a field. It is locally of finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], applied to $f$ and $\\operatorname{Spec}\\kappa(v)\\to V$. Apply [lem-sfb-scheme-flat-smooth-point-base-change] to this flat locally finitely presented fibre morphism and $\\operatorname{Spec}\\kappa(t)\\to\\operatorname{Spec}\\kappa(v)$. By the comparison and point identification of step 3, smoothness at $w_T$ implies smoothness of $U_v\\to\\operatorname{Spec}\\kappa(v)$ at $w$. This invokes case (1) only on the fibre, whose flatness is known independently.",
+   "uses": [
+    "lem-pc-flat-field",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-scheme-flat-smooth-point-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V4, fibrewise comparison in the first paragraph, using its already established case (1) over the residue field instead of repeating Algebra Tag 02UQ"
+   }
+  },
+  {
+   "text": "Finally apply [lem-trf-smooth-at-point-fibre-criterion] to $f$ at $u$: local finite presentation is an original hypothesis, flatness at $u$ is step 2, and smoothness of its fibre at $w$ is step 4. Thus $f$ is smooth at $u$. Together with step 1 this gives the asserted equivalence for every $z$. If $U_T$ is empty there is no point to check; none of these arguments requires surjectivity or finite presentation of $g$.",
+   "uses": [
+    "lem-trf-smooth-at-point-fibre-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V4, final sentence of case (2); Tag 01V9, lemma-smooth-at-point, (2) implies (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-smooth-flat",
+  "lem-sfb-scheme-flat-smooth-point-base-change",
+  "lem-weil-pbc-open-fibre-product",
+  "def-weil-flat-morphism",
+  "lem-sfb-pointwise-flatness-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pc-scheme-fibre",
+  "lem-trf-smooth-at-point-fibre-criterion",
+  "lem-weil-pbc-fibre-of-base-change",
+  "lem-pc-flat-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02V4, lemma-set-points-where-fibres-smooth, case (2); use its case (1) on the residue-field fibre for the first paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For schemes a locally finitely presented morphism is smooth at a point if and only if its flat base change is smooth at a point above it",
+   "results": "8 hits: AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.isSmooth_iff, RingHom.Smooth.isStableUnderBaseChange, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, RingHom.isStandardSmooth_isStableUnderBaseChange. Scheme smoothness/base-change or faithfully-flat global descent results; none states pointwise reflection under merely flat base change.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smooth\", \"Flat\"",
+   "results": "10 hits: RingHom.Smooth.flat, Algebra.Smooth.flat, Algebra.Smooth.flat_of_isNoetherianRing, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, AlgebraicGeometry.instFlatOfSmooth, RingHom.Smooth.codescendsAlong_faithfullyFlat, Algebra.Smooth.of_smooth_tensorProduct_of_faithfullyFlat, AlgebraicGeometry.instDescendsAlongSchemeSmoothMinMorphismPropertySurjectiveFlatQuasiCompact. Scheme smoothness/base-change or faithfully-flat global descent results; none states pointwise reflection under merely flat base change.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothLocus.*(flat|base|pullback)|[Ff]lat.*smoothLocus",
+   "results": "0 hits: . Scheme smoothness/base-change or faithfully-flat global descent results; none states pointwise reflection under merely flat base change.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness at a point of a locally finitely presented scheme morphism is preserved and reflected by flat base change",
+   "results": "8 hits: AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, Module.Flat.isBaseChange, RingHom.FormallySmooth.isStableUnderBaseChange, RingHom.Smooth.isStableUnderBaseChange, Algebra.Smooth.baseChange, AlgebraicGeometry.IsSmooth.casesOn, RingHom.Flat.isStableUnderBaseChange. Scheme smoothness/base-change or faithfully-flat global descent results; none states pointwise reflection under merely flat base change.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finitely presented scheme morphism f and a flat morphism g the smooth locus of the pullback f equals the inverse image of the smooth locus of f",
+   "results": "8 hits: AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, AlgebraicGeometry.isSmooth_comp, RingHom.Smooth.isStableUnderBaseChange, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth. Scheme smoothness/base-change or faithfully-flat global descent results; none states pointwise reflection under merely flat base change.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smoothLocus\"",
+   "results": "12 hits: Algebra.smoothLocus, Algebra.smoothLocus_eq_univ, Algebra.isOpen_smoothLocus, Algebra.smoothLocus_eq_univ_iff, Algebra.smoothLocus_comap_of_isLocalization, Algebra.basicOpen_subset_smoothLocus_iff, Algebra.basicOpen_subset_smoothLocus_iff_smooth, Algebra.smoothLocus_eq_compl_support_inter. Read the results: smooth-locus definitions/openness or global stability, not pointwise reflection under flat base change.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "preimage_smoothLocus_eq|smoothLocus",
+   "results": "5 hits: 251, 296, 305, 306, 308. Read the results: smooth-locus definitions/openness or global stability, not pointwise reflection under flat base change.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-maximal-smooth-open",
+  "date": "2026-10-23",
+  "group": "Q140"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the initial maximal smooth open and its flat base change to the coefficient ring. Supporting input: Tag 0DZR proof, choose the maximal smooth open in an atlas using Tag 0DZI; reduce flat base change to the same algebraic-space result. Scheme reduction of Tag 0DZI(2): Tag 02V4(2), smoothness at a point under flat base change for lfp morphisms.",
+   "via": [
+    "lem-sfb-space-maximal-smooth-open",
+    "lem-sfb-stack-maximal-smooth-open",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-lfp-smooth-flat-base-change",
+  "worker": "stage1",
+  "summary": "Preserved the exact statement of Tag 02V4(2). Proved ascent on a smooth open using existing case (1); reflected pointwise flatness by existing Tag 047C; identified the fibres and applied case (1) to the flat lfp residue-field fibre before the pointwise smooth-fibre criterion. No new nodes. Checked all cited statements and ran logged Mathlib searches with two semantic phrasings.",
+  "blueprint": "Supporting scheme input for the inherited maximal-smooth-open chain under det-thm-sf-ctf-stability-direct-images (3); latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3). Realizes Tag 02V4(2), the scheme reduction named in the inherited blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-smooth-at-point-fibre-criterion",
+    "why": "Pointwise smoothness criterion for an lfp scheme morphism flat at the chosen point (Tag 01V9); generic scheme tool, not supplied by the constructible finite-Tor unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-smooth-at-point-fibre-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-799a8609b",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-799a8609b (reviewer sub-agent of L); spot-checked: No new nodes and the statement is unchanged; it is exactly Stacks Tag 02V4 case (2) (morphisms.tex line 7354, read in full). Step checks: (1) ascent: f is smooth on an open N, which is flat and lfp by lem-pc-smooth-flat; case (1) (lem-sfb-scheme-flat-smooth-point-base-change, arbitrary g) applies, and lem-weil-pbc-open-fibre-product identifies N_T with p^{-1}(N). (2) f_T smooth near z gives f_T flat at z; with g flat at t, clause (2) of lem-sfb-pointwise-flatness-base-change (Tag 047C(2), more-morphisms.tex line 4467, read) gives f flat at u only; base-change permanence (3) gives f_T lfp. (3) The 01V9 criterion (lem-trf-smooth-at-point-fibre-criterion) applies to f_T at z; lem-weil-pbc-fibre-of-base-change gives the cartesian fibre square, and h(w_T)=w is argued from iota∘h=g'∘iota' and injectivity of the fibre projection. (4) U_v over kappa(v) is flat (lem-pc-flat-field) and lfp; case (1) along Spec kappa(t)→Spec kappa(v) moves smoothness from w_T down to w, with no separability needed. (5) 01V9 applied to f at u finishes. proof_deps equals the union of the step uses; there is no cycle; the only citer is lem-sfb-space-maximal-smooth-open. Duplicate search (rg -L for 02V4 and the smooth-locus nodes): the existing nodes cover case (1) or algebraic spaces with f flat, not case (2). Batch 5: lem-trf-smooth-at-point-fibre-criterion is the generic Tag 01V9 criterion. Its closure reaches only two generic affine trf helpers, and none of it is trace-formula or Poincare-duality content or a step of their proofs, so it is outside the assumed statements. The same holds for case (1), which reaches sec-trace-formula only through that node. Accepted the tool_uses entry for 01V9. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LfpSmoothFlatBaseChange",
+  "declaration": "AlgebraicGeometry.smooth_at_point_pullback_snd_iff_of_flat_base_change",
+  "file": "lean/Sheaf/AlgebraicGeometry/LfpSmoothFlatBaseChange.lean",
+  "statement": "theorem smooth_at_point_pullback_snd_iff_of_flat_base_change {U V T : Scheme.{u}} (f : U ⟶ V) [LocallyOfFinitePresentation f] (g : T ⟶ V) [Flat g] (x : pullback (C := Scheme.{u}) f g) : (∃ W : (pullback f g).Opens, x ∈ W ∧ Smooth (W.ι ≫ pullback.snd f g)) ↔ ∃ N : U.Opens, pullback.fst f g x ∈ N ∧ Smooth (N.ι ≫ f)",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7858a13d7",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Lean signature matches Stacks 02V4(2) clause by clause: lfp f, flat g, pointwise iff of smoothness on an open neighbourhood for f_T at x and for f at pullback.fst x (= W'=(g')^-1(W)); no Flat f, lfp g or surjective g binders; single universe u. Same shape as the case-(1) sibling smooth_at_point_pullback_snd_iff_of_flat (side-live FlatSmoothPointBaseChange.lean:82) with Flat moved from f to g. Snapshot node differs from side-live only by the new lean field; lean.statement verbatim equals the file; all 5 stmt_dep records are existing Mathlib (Scheme, LocallyOfFinitePresentation, Flat, pullback/fst/snd, Smooth); declaration and module names new; all imports exist in side-live. No definitions, one sorry theorem, docstrings with source place, blueprint id and 5 proof steps; no pro-etale substitute; report has Worker report and Second reading sections. No files changed, no compile. No findings."
+ }
+}

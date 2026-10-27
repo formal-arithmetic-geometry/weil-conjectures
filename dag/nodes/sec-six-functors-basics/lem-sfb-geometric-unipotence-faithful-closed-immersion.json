@@ -1,0 +1,227 @@
+{
+ "id": "lem-sfb-geometric-unipotence-faithful-closed-immersion",
+ "kind": "statement",
+ "title": "Faithful homomorphisms of affine algebraic groups are closed immersions",
+ "statement": "Let $k$ be a field [def-weil-field] and let $G,H$ be affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$. Let $f:G\\to H$ be a homomorphism of $k$-group schemes. Suppose that for every commutative $k$-algebra $R$ the group homomorphism $f_R:G(R)\\to H(R)$ is injective, where $G(R)=\\operatorname{Hom}_k(\\operatorname{Spec}R,G)$ and likewise for $H$. Then $f$ is a closed immersion [def-weil-closed-immersion]. No smoothness, connectedness or perfectness assumption is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 3.35, printed p.75, with Theorem 3.34 on the same page: injectivity on all algebra points is the trivial scheme-theoretic kernel condition."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-affine-homomorphism-flat-image] to the given homomorphism. It gives an affine finite-type $k$-group scheme $I$ and homomorphisms $u:G\\to I$, $j:I\\to H$ with $f=j\\circ u$, $j$ a closed immersion, and $k[G]$ faithfully flat over $k[I]$. The hypotheses are exactly those assumed here, with no smoothness or reducedness condition. For every $k$-algebra $R$, $u_R(a)=u_R(b)$ implies $f_R(a)=j_Ru_R(a)=j_Ru_R(b)=f_R(b)$, hence $a=b$ by the hypothesis. Thus $u_R$ is injective for every such $R$.",
+   "uses": [
+    "lem-sfb-affine-homomorphism-flat-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 3.35, printed p.75, first two sentences; Theorem 3.34 on the same page."
+   }
+  },
+  {
+   "text": "The map $u$ is an fpqc covering. Indeed, put $A=k[I]$, $B=k[G]$ and identify $u$ with $\\operatorname{Spec}(u^*:A\\to B)$ [def-weil-affine-spectrum]. Faithful flatness implies flatness by [def-weil-pbc-faithfully-flat-ring-map]; [lem-weil-pbc-flat-ring-map-iff-flat-affine] therefore makes $u$ a flat morphism. By [lem-weil-pbc-faithfully-flat-surjective-spectrum], $u$ is surjective on underlying spaces. Also [lem-weil-pbc-morphism-affine-schemes-affine] says that for every affine open $V\\subset I$, the open $u^{-1}(V)\\subset G$ is affine. Its image is all of $V$ by surjectivity. Taking this single affine open for each $V$ gives exactly the finite refinement required in [def-weil-pbc-fpqc-covering], so $\\{u:G\\to I\\}$ is an fpqc covering.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 3.35, printed p.75, faithfully flat descent diagram. The covering hypotheses are expanded using Stacks Tags 01U5 (morphisms-lemma-flat-characterize), 00HQ (algebra-lemma-ff-rings), 01SH (morphisms-lemma-morphism-affines-affine) and 022B (topologies-definition-fpqc-covering)."
+   }
+  },
+  {
+   "text": "Form $P=G\\times_I G$ with projections $p_1,p_2:P\\to G$ [def-pc-fibre-product], so $u\\circ p_1=u\\circ p_2$. Since $u$ is affine by step 2, [lem-weil-pbc-affine-morphism-permanence](1) makes $P\\to G$ affine, and (2), since $G$ is affine, makes $P$ affine. Write $P=\\operatorname{Spec}C$ with its induced $k$-algebra structure [def-weil-affine-spectrum]. Both projections are $k$-morphisms, hence points of $G(C)$. Their images under $u_C$ agree by the fibre-product equation; step 1's injectivity for this very $k$-algebra $C$ gives $p_1=p_2$. Thus $\\mathrm{id}_G\\circ p_1=\\mathrm{id}_G\\circ p_2$, the required descent compatibility.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 3.35, printed p.75, diagram chase: agreement of the two pullbacks of a lift. Affineness of the overlap uses Stacks Tags 01SD (morphisms-lemma-base-change-affine) and 01S6 (morphisms-definition-affine)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fpqc-representable-descent] to the covering $u:G\\to I$, target $G$, and local map $\\mathrm{id}_G$. Step 3 verifies its overlap hypothesis, so it gives a scheme morphism $s:I\\to G$ with $s\\circ u=\\mathrm{id}_G$. Now $(u\\circ s)\\circ u=u=\\mathrm{id}_I\\circ u$. Apply the uniqueness clause of the same descent statement with target $I$ and local map $u$: both $u\\circ s$ and $\\mathrm{id}_I$ descend that map, hence $u\\circ s=\\mathrm{id}_I$. Therefore $u$ is an isomorphism with inverse $s$. This constructs the inverse as a morphism, rather than inferring it from bijectivity of field-valued points.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 3.35, printed p.75, final diagram chase, expressed by descending the universal lift; Stacks Tag 023Q (descent-lemma-fpqc-universal-effective-epimorphisms)."
+   }
+  },
+  {
+   "text": "For each affine open $V=\\operatorname{Spec}D\\subset H$, the closed-immersion criterion in [def-weil-closed-immersion] for $j$ identifies $j^{-1}(V)$ over $V$ with $\\operatorname{Spec}(D/J)$ for an ideal $J\\subset D$. Since $u$ is an isomorphism and $f=j\\circ u$, its restriction identifies $f^{-1}(V)$ over $V$ with this same $\\operatorname{Spec}(D/J)$. The criterion therefore shows that $f$ is a closed immersion. No step required any smoothness, connectedness or perfectness hypothesis.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 3.35, printed p.75, conclusion after the faithfully flat factor is shown to be an isomorphism; affine closed-immersion criterion Stacks Tag 01QO."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-homomorphism-flat-image",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 3.35 and Theorem 3.34, printed p.75. The fpqc diagram chase is performed on the universal point using Stacks Tag 023Q; the fpqc covering is checked with Tags 01U5, 00HQ, 01SH and 022B."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"Mono\"",
+   "results": "OK 4 hit(s): AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.IsClosedImmersion.eq_isFinite_inf_mono, AlgebraicGeometry.IsClosedImmersion.iff_isProper_and_mono, AlgebraicGeometry.IsClosedImmersion.eq_proper_inf_monomorphisms; ",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-immersion definitions, affine surjectivity criteria and finite/proper monomorphism criteria do not assert that a faithful homomorphism of affine algebraic groups is a closed immersion; finiteness/properness is not an available hypothesis here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A faithful homomorphism of affine algebraic group schemes over a field is a closed immersion if its scheme theoretic kernel is trivial",
+   "results": "OK 8 hit(s): AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono; ",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-immersion definitions, affine surjectivity criteria and finite/proper monomorphism criteria do not assert that a faithful homomorphism of affine algebraic groups is a closed immersion; finiteness/properness is not an available hypothesis here"
+  },
+  {
+   "tool": "grep",
+   "query": "(ker|kernel|faithful|injective|[Mm]ono).*[Cc]losed[Ii]mmersion|[Cc]losed[Ii]mmersion.*(ker|kernel|faithful|injective|[Mm]ono)",
+   "results": "OK 19 hit(s): Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-immersion definitions, affine surjectivity criteria and finite/proper monomorphism criteria do not assert that a faithful homomorphism of affine algebraic groups is a closed immersion; finiteness/properness is not an available hypothesis here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective natural homomorphism on all algebra points between affine algebraic groups over a field is a closed immersion",
+   "results": "OK 8 hit(s): AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine, AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine, AlgebraicGeometry.IsClosedImmersion.hasAffineProperty, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion; ",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-immersion definitions, affine surjectivity criteria and finite/proper monomorphism criteria do not assert that a faithful homomorphism of affine algebraic groups is a closed immersion; finiteness/properness is not an available hypothesis here"
+  },
+  {
+   "tool": "grep",
+   "query": "(kernel|faithful|injective|[Mm]ono).*[Cc]losed[Ii]mmersion|[Cc]losed[Ii]mmersion.*(kernel|faithful|injective|[Mm]ono)",
+   "results": "{\"t\": \"2026-10-23T14:53:02Z\", \"tool\": \"grep\", \"query\": \"(kernel|faithful|injective|[Mm]ono).*[Cc]losed[Ii]mmersion|[Cc]losed[Ii]mmersion.*(kernel|faithful|injective|[Mm]ono)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\"], \"digest\": \"5da62606d7744a5a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned closed-immersion criteria need surjectivity on coordinate rings or finiteness/properness, none of which is an input here; the abstract Galois-category embedding result concerns a different category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every faithful representation or monomorphism of affine algebraic group schemes over a field is a closed immersion",
+   "results": "{\"t\": \"2026-10-23T14:53:02Z\", \"tool\": \"leansearch\", \"query\": \"Every faithful representation or monomorphism of affine algebraic group schemes over a field is a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.mk\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine\", \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\"], \"digest\": \"e1152be61b46516e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned closed-immersion criteria need surjectivity on coordinate rings or finiteness/properness, none of which is an input here; the abstract Galois-category embedding result concerns a different category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of affine group schemes of finite type over a field injective on every algebra points is a closed immersion",
+   "results": "{\"t\": \"2026-10-23T14:53:09Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism of affine group schemes of finite type over a field injective on every algebra points is a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isClosedImmersion_iff_isAffineHom\", \"AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine\", \"AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine\", \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine\"], \"digest\": \"75fa805aaf028bef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned closed-immersion criteria need surjectivity on coordinate rings or finiteness/properness, none of which is an input here; the abstract Galois-category embedding result concerns a different category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of finite type affine algebraic groups with trivial scheme theoretic kernel is a closed embedding",
+   "results": "{\"t\": \"2026-10-23T14:53:10Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism of finite type affine algebraic groups with trivial scheme theoretic kernel is a closed embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine\", \"CategoryTheory.PreGaloisCategory.autEmbedding_isClosedEmbedding\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.isClosedImmersion_iff_isAffineHom\", \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"AlgebraicGeometry.Scheme.Hom.isClosedEmbedding\", \"AlgebraicGeometry.IsClosedImmersion.isClosedEmbedding\"], \"digest\": \"486184bc66a7656a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned closed-immersion criteria need surjectivity on coordinate rings or finiteness/properness, none of which is an input here; the abstract Galois-category embedding result concerns a different category."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-unipotence-unitriangular-embedding",
+  "date": "2026-10-23",
+  "group": "Q93"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Smooth unipotent affine algebraic groups are solvable. Structural input to Milne 14.21: 14.12 and 14.5(b), embedding into upper unitriangular matrices over k before intersecting the standard series. Supporting input: Corollary 3.35, printed p.75, with Theorem 3.34 on the same page: injectivity on all algebra points is the trivial scheme-theoretic kernel condition.",
+   "via": [
+    "lem-sfb-geometric-unipotence-unitriangular-embedding",
+    "lem-sfb-smooth-unipotent-solvable",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-geometric-unipotence-faithful-closed-immersion",
+  "worker": "stage1",
+  "summary": "Retained the statement of Milne Corollary 3.35 and wrote its diagram chase as explicit fpqc descent of the universal inverse. Reused the reviewed affine image factorization and existing Mathlib leaves for flatness, spectrum surjectivity, affineness and representable descent. No new nodes were needed. Verified injectivity on the overlap algebra, both inverse identities, all fpqc covering hypotheses, and the affine closed-immersion conclusion.",
+  "blueprint": "The inherited from.place locates this input below det-thm-sf-ctf-stability-direct-images proof (3), through alteration/moduli/PGL reductivity and geometric unipotence. Read the current latest direct-images proof and unit; this is a lower-level prerequisite for the unitriangular embedding. The ancestor command returns None, as it does for the existing reviewed affine-factorization node; retained the inherited null from.node and its complete place/via chain. Whole-blueprint searches for faithful immersion, group monomorphism and affine homomorphism found no matching imported statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-18b26fe0e",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-18b26fe0e (reviewer sub-agent of L); spot-checked: I read the delivered proof in full, compared it against Milne iAG2017 Thm 3.34 and Cor 3.35 (printed p.75), and found no faults. The statement is unchanged against clones/live and side-live, where the item is still unsplit. The injectivity-on-all-R hypothesis is equivalent to Milne's Ker=e, and no hypothesis was added or dropped. Step 1: the same-unit node lem-sfb-affine-homomorphism-flat-image gives I, u, j with f=j∘u, j a closed immersion and k[G] faithfully flat over k[I]; injectivity of u_R is derived correctly. Step 2: the fpqc covering is checked properly from the cited nodes: faithfully flat implies flat, Spec φ is then flat, Spec is surjective, u^{-1}V is affine, and u(u^{-1}V)=V gives the n=1 refinement of def-weil-pbc-fpqc-covering. Step 3: G×_I G is affine by lem-weil-pbc-affine-morphism-permanence (1) and (2); injectivity at C=Γ(P), including nonreduced C, gives p1=p2. Step 4: fpqc representable descent (Stacks 023Q, read at descent.tex:4131) gives s with s∘u=id_G, and its uniqueness clause gives u∘s=id_I. Step 5 is a genuine few-line use of the 01QO affine criterion and is correctly marked elementary. I confirmed every cited Stacks tag against tags/tags and checked that no SGA source is cited. I found no cycle: no transitive dependency of the item reaches it. Small cases checked: id, the trivial group, α_p⊂G_a, Frobenius on G_a (excluded by the all-algebras hypothesis), imperfect k, nonreduced G and R=0. There are 0 new nodes and no tool_uses. Advisory: the existing node lem-sfb-algebraic-group-monomorphism-closed-immersion (Milne 5.34, separated finite-type groups) contains this item as its affine special case. The item is an existing node proved on its own source route, so this is not a duplicate created by the delivery. There is no re-split note for this item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.FaithfulClosedImmersion",
+  "declaration": "AlgebraicGeometry.isClosedImmersion_of_faithful_affineGroupHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/FaithfulClosedImmersion.lean",
+  "statement": "theorem isClosedImmersion_of_faithful_affineGroupHom {k : Type u} [Field k] (G H : Over (Spec (.of k))) [GrpObj G] [GrpObj H] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [IsAffine H.left] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] (f : G ⟶ H) [IsMonHom f] (hinj : ∀ (R : Type u) [CommRing R] [Algebra k R], Function.Injective (fun x : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ G ↦ x ≫ f)) : IsClosedImmersion f.left",
+  "branch": "sheaf-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b45ea35f9",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Clause-by-clause check of isClosedImmersion_of_faithful_affineGroupHom against node and Milne Cor 3.35/Thm 3.34 p.75: field, GrpObj over Spec k, IsAffine, LocallyOfFiniteType+QuasiCompact (dep conjunction), IsMonHom, injectivity on Hom_k(Spec R,G) for all comm k-algebras R : Type u, conclusion IsClosedImmersion f.left; no extra hypotheses; lean.statement verbatim; R=0, nonreduced R/G, any char, imperfect k covered; universe u same as sibling and sufficient. Sole theorem sorry, docstrings have source+blueprint+5-step proof plan, private proof imports exist, report sections present. Advisory: landed lem-sfb-algebraic-group-monomorphism-closed-immersion (separated version) subsumes it but is a distinct DAG node with different hypotheses, so no existing:true."
+ }
+}

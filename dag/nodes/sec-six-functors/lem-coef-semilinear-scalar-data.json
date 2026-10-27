@@ -1,0 +1,118 @@
+{
+ "id": "lem-coef-semilinear-scalar-data",
+ "kind": "statement",
+ "title": "Normalized derived scalar-data models",
+ "statement": "Fix a category C with object universe c and morphism universe v, a Grothendieck topology J and an EssentiallySmall.{max c v r} instance. Let B and F be towers of commutative ring sheaves in universe max c v r, with transitions tau and sigma, and let alpha_n : B_(n) to F_(n) satisfy alpha_(n+1) followed by sigma_n equals tau_n followed by alpha_n. For the ordinary system models, there exists normalized derived change-of-rings data for the system map and for every level map alpha_n, including the ordinary and derived adjunctions and their representative normalization equations.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10"
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-derived-calculus",
+  "def-coef-semilinear-system-models"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing normalized arbitrary sheaf-ring scalar model theorem to a ring map on any essentially small site. Retain its cochain derived model, ordinary adjunction and derived adjunction. Its ordinary unit is systemModelTmul with scalar 1. Cancel the two inverse object-identification maps and use one_smul to obtain exactly extensionUnit in ScalarData.unit_section.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-pur-system-scalar-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the existing normalized cochain transpose equation by the hom component of mapDerivedCategoryFactors. Its inverse followed by its hom cancels, giving ScalarData.transpose_model. The theorem provides this equation for all complexes, hence in particular for the K-flat complexes required here.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-pur-system-scalar-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The vertical sequence site is essentially small by sequenceSmall. Apply the preceding conversion on that site to the compatible system ring map, and on J to each level map alpha_n, and combine the two conclusions.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-pur-system-scalar-model"
+ ],
+ "proof_origin": {
+  "by": "Q8 stage 3",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; reuse of the normalized generic model lem-pur-system-scalar-model, with the same conversion already proved privately in SemilinearSystemsExistence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived scalar-data models",
+   "results": "No exact existing theorem; generic change-of-rings and mate APIs only.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Nonempty ScalarData",
+   "results": "No exact match.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarData|ScalarEvaluationData",
+   "results": "Only the structures being assembled and generic scalar-derived APIs.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarOperationsExistence",
+  "date": "2026-10-26",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-semilinear-scalar-operations",
+   "place": "Coefficient-extension branch, decomposition of Construction 4.1 step 5.",
+   "via": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarDataExistence",
+  "file": "lean/Sheaf/Paper/ScalarDataExistence.lean",
+  "declaration": "WeilConjectures.SemilinearSections.semilinearScalarData",
+  "statement": "theorem semilinearScalarData\n    (F : ℕ → Sheaf J CommRingCat.{max c v r})\n    (σ : ∀ n : ℕ, F (n + 1) ⟶ F n) (α : ∀ n : ℕ, B n ⟶ F n)\n    (hα : ∀ n : ℕ, α (n + 1) ≫ σ n = τ n ≫ α n) :\n    Nonempty (ScalarData.{c, v, max c v r}\n      (systemMap.{c, v, max c v r} J B τ F σ α hα)) ∧\n      ∀ n : ℕ, Nonempty (ScalarData.{c, v, max c v r} (α n))",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T024039-L-633841",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261026T070653-L-3639242",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

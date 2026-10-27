@@ -17,97 +17,61 @@
  ],
  "proof": [
   {
-   "text": "Set $N=L^\\vee$. By [lem-pc-tensor-dual-invertible], $N$ is invertible and evaluation is an isomorphism $e:L\\otimes N\\xrightarrow{\\sim}\\mathcal O_Z$. Both $L$ and $N$ have finite presentation: by [def-sc-invertible-module] each is locally $\\mathcal O_Z$, which has the finite presentation $0\\to\\mathcal O_Z\\xrightarrow{1}\\mathcal O_Z\\to0$. No finiteness of a chosen trivializing cover is needed here.",
+   "text": "Apply [lem-trf-invertible-fp-tensor-models] to $L$. Obtain $i,A_i,B_i,a,b$ and $P_i=A_i\\otimes B_i$, with $P_i$ and $\\mathcal O_{Z_i}$ finitely presented, and the isomorphism $\\epsilon:q_i^*P_i\\cong\\mathcal O_Z$ given by the tensor comparison, $a\\otimes b$, and evaluation. The small nonempty directed set, qcqs stages, affine transitions and scheme limit are exactly those assumed here.",
    "uses": [
-    "lem-pc-tensor-dual-invertible",
-    "def-sc-invertible-module"
+    "lem-trf-invertible-fp-tensor-models"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 0B8W, lemma-descend-invertible-modules, proof of (2), tensor inverse; modules.tex Tag 01CT, lemma-constructions-invertible, clause (2)."
+    "place": "Tag 0B8W, lemma-descend-invertible-modules, proof of (2), tensor-inverse argument."
    }
   },
   {
-   "text": "Apply clause (1) of [lem-trf-fp-modules-affine-limit-descent] separately to $L$ and $N$. Choose a common upper bound $i$ of the two indices, and pull both models to $Z_i$; call them $A_i,B_i$. By [lem-pc-tensor-pullback-finite-presentation] these remain finitely presented. The composition isomorphisms of [def-pc-module-pullback] give specified isomorphisms $q_i^*A_i\\cong L$ and $q_i^*B_i\\cong N$. All hypotheses of the descent statement are precisely the assumed small nonempty directed indexing set, qcqs stages, affine transitions and scheme limit; no stage is assumed affine or Noetherian.",
+   "text": "Apply [lem-weil-pbc-module-pullback-structure-sheaf] to $q_i$ to obtain $q_i^*\\mathcal O_{Z_i}\\cong\\mathcal O_Z$. Compose the tensor evaluation isomorphism from step 1 with the inverse of this isomorphism. Apply [lem-trf-fp-module-limit-isomorphism-descent] to the finitely presented modules $A_i\\otimes B_i$ and $\\mathcal O_{Z_i}$. It gives $k\\ge i$ and mutually inverse finite-stage maps $f,g$. Form their isomorphism and compose with the structure-sheaf pullback isomorphism for $q_{ki}$.",
    "uses": [
-    "lem-trf-fp-modules-affine-limit-descent",
-    "lem-pc-tensor-pullback-finite-presentation",
-    "def-pc-module-pullback"
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-trf-fp-module-limit-isomorphism-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Tags 01ZR, lemma-descend-modules-finite-presentation (1), and 0B8W, lemma-descend-invertible-modules, proof of (2); modules.tex Tag 01BQ for preservation under pullback."
+    "place": "Tag 0B8W, lemma-descend-invertible-modules, proof of (2), tensor-inverse argument."
    }
   },
   {
-   "text": "Put $P_i=A_i\\otimes B_i$. This is finitely presented, directly from local presentations. On a common open where $A_i=\\operatorname{coker}(a:\\mathcal O^r\\to\\mathcal O^s)$ and $B_i=\\operatorname{coker}(b:\\mathcal O^t\\to\\mathcal O^u)$, it has presentation\n$$\\mathcal O^{ru}\\oplus\\mathcal O^{st}\\xrightarrow{(a\\otimes1,\\,1\\otimes b)}\\mathcal O^{su}\\longrightarrow P_i\\longrightarrow0.$$\nIndeed, a map out of the displayed cokernel is a bilinear map on the two free generating modules killing each family of relations; it therefore factors uniquely through $A_i\\otimes B_i$. This is the tensor product defined in [def-pur-sheaf-tensor-product], with cokernels as in [def-weil-sheaf-of-modules-category]. Thus the presentation is valid as a sheaf presentation, not a claim that sections of every cokernel are computed without sheafification. Also $\\mathcal O_{Z_i}$ is finitely presented by its rank-one free presentation. This writes out the elementary presentation argument of Modules Tag 01CE(4).",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Tag 01CE, lemma-tensor-product-permanence (4), explicit presentation in the proof."
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-module-pullback-tensor], the chosen model isomorphisms and evaluation define an isomorphism $\\epsilon:q_i^*P_i\\xrightarrow{\\sim}q_i^*\\mathcal O_{Z_i}$. Here $q_i^*\\mathcal O_{Z_i}\\cong\\mathcal O_Z$ is the multiplication isomorphism $\\mathcal O_Z\\otimes_{q_i^{-1}\\mathcal O_{Z_i}}q_i^{-1}\\mathcal O_{Z_i}\\cong\\mathcal O_Z$ from the tensor-pullback definition [def-pc-module-pullback]. Apply clause (2) of [lem-trf-fp-modules-affine-limit-descent] to $\\epsilon$ and separately to $\\epsilon^{-1}$. At a common upper bound $j\\geq i$ their pullbacks are maps $u_j:P_j\\to Q_j$ and $v_j:Q_j\\to P_j$, where $P_j=q_{ji}^*P_i$ and $Q_j=q_{ji}^*\\mathcal O_{Z_i}$. Their limit pullbacks are $\\epsilon$ and $\\epsilon^{-1}$, with the canonical composition identifications; hence $q_j^*(v_j\\circ u_j)=1$ and $q_j^*(u_j\\circ v_j)=1$. The four finite-presentation hypotheses used here are those proved in step 3 and their pullbacks, covered by [lem-pc-tensor-pullback-finite-presentation].",
+   "text": "Set $A_k=q_{ki}^*A_i$ and $B_k=q_{ki}^*B_i$. The inverse comparison of [lem-weil-pbc-module-pullback-tensor], followed by the isomorphism from step 2, gives $A_k\\otimes B_k\\cong\\mathcal O_{Z_k}$. Both factors are finitely presented by [lem-pc-tensor-pullback-finite-presentation], hence quasi-coherent. Verify the tensor-inverse characterization in [def-sc-invertible-module] in the local-rank-one Lean API by a proved private helper: on each affine open $U$, [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections] identifies sections of the tensor with the tensor of sections. The resulting tensor isomorphism with $\\mathcal O(U)$ makes both section modules invertible by Mathlib Module.Invertible.left and right, hence finite projective. Their ranks at each prime multiply to one by Mathlib Module.rankAtStalk_tensorProduct and rankAtStalk_self, so each rank is one. The proved source criterion isFiniteLocallyFreeOfRank_of_isAffineOpen gives local freeness of rank one, and IsInvertible.of_sheafOfModules gives invertibility. Finally [def-trf-affine-limit-tensor-pullback-comparison] followed by $a$ identifies $q_k^*A_k$ with $L$. Return $k,A_k$.",
    "uses": [
     "lem-weil-pbc-module-pullback-tensor",
-    "def-pc-module-pullback",
-    "lem-trf-fp-modules-affine-limit-descent",
-    "lem-pc-tensor-pullback-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 0B8W, lemma-descend-invertible-modules, proof of (2), descent of evaluation; Tag 01ZR, lemma-descend-modules-finite-presentation (2); modules.tex Tag 01CD for the tensor comparison."
-   }
-  },
-  {
-   "text": "Apply clause (3) of [lem-trf-fp-modules-affine-limit-descent] to the endomorphism pair $v_j\\circ u_j,1_{P_j}$, and again to $u_j\\circ v_j,1_{Q_j}$. Choose a common upper bound $k\\geq j$ of the two resulting stages. Pullback preserves identities and composition, so both equalities hold at $k$. Thus $u_k$ and $v_k$ are inverse maps and $q_{ki}^*P_i\\cong q_{ki}^*\\mathcal O_{Z_i}\\cong\\mathcal O_{Z_k}$. The source and target modules in both applications are finitely presented by step 3 and [lem-pc-tensor-pullback-finite-presentation]. This is the explicit reason the descended evaluation becomes an isomorphism; invertibility is not assumed to be reflected by a single projection to the limit.",
-   "uses": [
-    "lem-trf-fp-modules-affine-limit-descent",
     "lem-pc-tensor-pullback-finite-presentation",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 0B8W, lemma-descend-invertible-modules, proof of (2), eventual isomorphism; Tag 01ZR, lemma-descend-modules-finite-presentation (3)."
-   }
-  },
-  {
-   "text": "Set $L_k=q_{ki}^*A_i$ and $N_k=q_{ki}^*B_i$. The tensor comparison [lem-weil-pbc-module-pullback-tensor] identifies $L_k\\otimes N_k$ with $q_{ki}^*P_i$, which step 5 identified with $\\mathcal O_{Z_k}$. Apply exactly the tensor-inverse characterization explicitly included in [def-sc-invertible-module]: existence of an $\\mathcal O_{Z_k}$-module $N_k$ with this tensor isomorphism means that $L_k$ is invertible. This uses that characterization, not the invalid assertion that a finitely presented module is already locally free. Finally [def-pc-module-pullback] gives $q_k^*L_k\\cong q_i^*A_i\\cong L$, since $q_{ki}\\circ q_k=q_i$. Taking $k,L_k$ proves the claimed existence.",
-   "uses": [
-    "lem-weil-pbc-module-pullback-tensor",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
     "def-sc-invertible-module",
-    "def-pc-module-pullback"
+    "def-trf-affine-limit-tensor-pullback-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 0B8W, lemma-descend-invertible-modules, final sentence of proof of (2); modules.tex Tags 0B8K, lemma-invertible, and 0B8M, lemma-invertible-is-locally-free-rank-1, as incorporated in def-sc-invertible-module."
+    "place": "Tag 0B8W, lemma-descend-invertible-modules, proof of (2), tensor-inverse argument."
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-tensor-dual-invertible",
-  "def-sc-invertible-module",
-  "lem-trf-fp-modules-affine-limit-descent",
+  "lem-trf-invertible-fp-tensor-models",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-trf-fp-module-limit-isomorphism-descent",
+  "lem-weil-pbc-module-pullback-tensor",
   "lem-pc-tensor-pullback-finite-presentation",
-  "def-pc-module-pullback",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-module-pullback-tensor"
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "def-sc-invertible-module",
+  "def-trf-affine-limit-tensor-pullback-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "M8",
+  "date": "2026-10-27",
+  "note": "Lean assembly of the existing two descent statements, following Stacks Limits Tag 0B8W(2). The local-rank-one tensor-inverse criterion is proved privately from affine tensor sections, Mathlib invertible modules and the source affine local-freeness criterion.",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Tag 0B8W, lemma-descend-invertible-modules, proof of (2), using Tag 01ZR. Descend finite-presentation tensor factors directly; finite-local-freeness/flatness descent is unnecessary because the tensor-inverse characterization is already in def-sc-invertible-module. The map, inverse and two identities are all descended explicitly."
+  "place": "Tag 0B8W, lemma-descend-invertible-modules, proof of (2); modules.tex, lemma-invertible and lemma-invertible-is-locally-free-rank-1."
  },
  "mathlib_searches": [
   {
@@ -219,28 +183,29 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-invertible-affine-limit-descent",
   "worker": "stage1",
-  "summary": "Statement kept verbatim. Split into tensor inverse and local finite presentation, general finite-presentation object descent, the elementary finite tensor presentation, lifting evaluation and its inverse, descending both inverse identities, and the tensor-inverse characterization. One new statement-only node records all three clauses of Stacks 01ZR without the Noetherian affine-base restrictions of existing Picard nodes. All searches were executed through msearch.py; no Lean writing or compilation.",
+  "summary": "Q154 repair of the human re-split return: statement unchanged. Two independent statement-only unsplit tasks carry all the old work: simultaneous finite-presentation models of a line bundle and its dual with the tensor presentation and limit evaluation; and lifting a specified module isomorphism together with its inverse and both inverse identities. The parent is a short assembly using the tensor-inverse criterion. The report preserves the old six arguments verbatim and assigns each to a task or assembly step. No Lean or compiler tools used. Landing-return repair: compared against the current DAG, reread all current assembly citations and retained their verbatim excerpts, and distinguished the newly added same-tag curve Euler-characteristic node in the report. The delivery is rebuilt on current origin/sheaf-dag; live promotion remains maintainer-owned. Latest landing-return repair (returned head b9f3ddc0742, 2026-10-22 11:57 UTC): rechecked the current statements and all six citation pairs, kept both extracted tasks unchanged, and wrote the multiplication identification and its inverse explicitly in assembly step 2. Rebase is performed by the authorized delivery tool on the current live DAG; no maintainer completion or review record is changed. Repair of reader-approved returned head 8c7de0e411f (2026-10-23): retained all earlier arguments and search evidence, compared all stage-1-owned and live metadata fields, re-read every current assembly citation, and repaired the current dry-run duplicate report with exact distinctions from the newly present twist-restriction and projective-bundle Picard nodes. Statements and the short tensor-inverse assembly remain faithful to 0B8W and 01ZR.",
   "blueprint": "Fibrewise ampleness-to-projectivity input below lem-trf-local-term-locality: in the proof of 0D2S used by lem-trf-proper-fibrewise-ample-projective, descend the chosen line bundle after the proper Noetherian approximation. The split realizes the line-bundle descent ingredient of 0D2S through the tensor-inverse argument of 0B8W(2), preserving the existing ancestry and unit.",
   "tool_uses": [
    {
-    "node": "lem-pc-tensor-pullback-finite-presentation",
-    "why": "Generic preservation of finite presentation under arbitrary tensor pullback, needed to move finitely presented models to common upper bounds. No statement in this curve local-term unit supplies this module-theoretic tool."
+    "node": "lem-weil-pbc-module-pullback-tensor",
+    "why": "Generic tensor-pullback comparison used to turn a finite-stage tensor trivialization into an inverse for the descended factor; the curve local-term unit supplies no such general module comparison."
    }
   ]
  },
  "tool_uses": [
-  "lem-pc-tensor-pullback-finite-presentation"
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-weil-pbc-module-pullback-tensor"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q13-088a3a139",
-  "group": "Q13",
+  "reviewer": "NT-cc-Q154-587f76cd2",
+  "group": "Q154",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-088a3a139 (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked all six steps against Stacks 0B8W, 01ZR and cited module results. Repaired two minor faults: colimit-only definition citations for scheme limits, and nonexistent clause 01CT(4). Corrected whole JSON files and detailed review.md written. No mathematical gap, duplicate, cycle or target weakening found.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-587f76cd2 (reviewer sub-agent of L); spot-checked: Fourth push after the structural landing refusal of 2026-10-22 16:42 UTC (side completion never promoted to live, L promotes it; not a split fault). Against the 8c7de0e411f5 snapshot, both new nodes are byte-identical and the item changed only in split_report date and summary. I still reread everything. The item statement equals live and Stacks Limits 0B8W(2) (limits.tex l.2608-2649) and is not weakened. Re-split compliance with the released human note: old steps 1-3 and the epsilon part of step 4 are in lem-trf-invertible-fp-tensor-models (dual and evaluation per 01CT(2), 01ZR(1) applied twice with a common bound, P_i finitely presented per 01CE(4), the epsilon composite). The rest of old step 4 and old step 5 are in lem-trf-fp-module-limit-isomorphism-descent (01ZR(2) for phi and phi^-1, 01ZR(3) for both composites at one bound; limits.tex l.2548-2577). Old step 6 is assembly step 3. The two statements are 1898 and 1639 characters; neither asserts that a stage model is invertible, so neither restates the item. The assembly is 3 steps and 1562 characters. Assembly checks: step 1 hypotheses match exactly. Step 2 identifies q_i^*O with O_Z by multiplication from def-pc-module-pullback, with inverse x -> x tensor 1, and applies node B with F_i=P_i and G_i=O_{Z_i}, both finitely presented by node A. Step 3 uses lem-weil-pbc-module-pullback-tensor along q_{ki}, the tensor-inverse equivalence in def-sc-invertible-module, and composition q_{ki} o q_k = q_i followed by a. Edge cases pass: empty limit, singleton index set, zero modules, and a nonidentity specified automorphism recovered exactly. No Noetherian, affine-stage or flatness assumption is used, and no SGA source is cited. Duplicate scan of same-tag nodes created since 2026-10-21: lem-trf-fp-affine-limit-overlap-cocycle is chart-wise cocycle data, not a duplicate. Advisory only: lem-sfb-space-invertible-limit-descent (O3, unsplit) is the algebraic-space analogue of the older landed item, not of either new node. No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.InvertibleAffineLimitDescent",
@@ -260,5 +225,26 @@
   "result": "pass",
   "note": "All node clauses match the Lean signature; dependencies, source Tag 0B8W, docstrings, edge cases, permitted sorry, and route-pivot requirements checked. No substantive or mechanical errors found."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261027T103453-L-1085332",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

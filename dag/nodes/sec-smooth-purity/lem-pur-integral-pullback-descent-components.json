@@ -1,0 +1,98 @@
+{
+ "id": "lem-pur-integral-pullback-descent-components",
+ "kind": "statement",
+ "title": "Component form of a normalized descent universal property",
+ "statement": "Let A,B,C be categories, L:A to B, F:B to C and T:A to C functors, and e:L followed by F isomorphic to T. Suppose that for every G:B to C and c:L followed by G isomorphic to T there exists a unique i:F isomorphic to G such that whiskering i by L and composing with c gives e. Then for each such G,c there exists a unique i:F isomorphic to G such that, for every P of A, i(L(P)) equals e(P) followed by the inverse of c(P). This categorical consequence is applied to the existing integralPullbackDescent universal field; it adds no new universal-property assumption there.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 099N(5), normalized derived pullback descent; component reformulation of IntegralPullbackDescent.universal."
+ },
+ "proof": [
+  {
+   "text": "Apply the universal-property hypothesis to G and c. Evaluate its compatibility equation at P and cancel c(P) to get the component formula. Conversely, compose each proposed component formula with c(P), cancel the inverse, and use natural-transformation extensionality to recover the full compatibility equation. Apply the uniqueness clause from the universal-property hypothesis. This is a complete proof in arbitrary categories, including empty representative categories; no sheaf or coefficient assertion is assumed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "N4",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 099N(5); the existing normalized descent universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized functor descent has a unique compatible natural isomorphism to any functor with a natural representative model, specified by its component equations",
+   "results": "8 hits, including CategoryTheory.Sigma.descUniq and Pseudofunctor.DescentData.iso and isoMk; these are for different descent settings.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project normalized descent and Mathlib natural-transformation extensionality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.ext",
+   "results": "1 hit: CategoryTheory.NatTrans.ext, the componentwise extensionality theorem used in the proof.",
+   "date": "2026-10-27",
+   "verdict": "Use the generic extensionality API to turn component compatibility into the universal compatibility equation."
+  },
+  {
+   "tool": "grep",
+   "query": "isoWhiskerLeft.*(unique|Unique)|unique.*isoWhiskerLeft",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No matching normalized component theorem; prove the component reformulation from the existing universal field."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "date": "2026-10-27",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-completed-pullback-tower-realizations",
+   "place": "Proof step 10: compare the normalized integral pullback descent with its coherent reduction/limit model.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPullbackDescentComponents",
+  "file": "lean/Sheaf/Paper/IntegralPullbackDescentComponents.lean",
+  "declaration": "CategoryTheory.normalizedDescentComponents_existsUnique",
+  "statement": "theorem normalizedDescentComponents_existsUnique\n    {A : Type u₁} [Category.{v₁} A] {B : Type u₂} [Category.{v₂} B]\n    {C : Type u₃} [Category.{v₃} C]\n    (L : A ⥤ B) (F : B ⥤ C) (T : A ⥤ C) (e : L ⋙ F ≅ T)\n    (universal : ∀ (G : B ⥤ C) (c : L ⋙ G ≅ T),\n      ∃! i : F ≅ G, Functor.isoWhiskerLeft L i ≪≫ c = e)\n    (G : B ⥤ C) (c : L ⋙ G ≅ T) :\n    ∃! i : F ≅ G, ∀ P : A, i.app (L.obj P) = e.app P ≪≫ (c.app P).symm",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c0d88",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261027T050627-L-246468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c0d88",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261027T050627-L-246468",
+  "kind": "interface",
+  "note": "independent cc review: clone item vs delivered Core+item (Core = original prefix byte for byte, item = original suffix + proof of IntegralPullbackModel); node JSONs vs Lean; OrdinaryOpenFiniteEvaluation diff (one forced import all of Core); 3b importer CompletedPullbackTensorComparison OK"
+ }
+}

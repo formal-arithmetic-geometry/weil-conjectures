@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FiberDegreeBound
 import WeilConjectures.AlgebraicGeometry.FiniteFiberDegreeBaseChange
+import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
 /-!
 # Testing fibre degree bounds on field-valued points
@@ -56,6 +57,36 @@ theorem boundsFiberDegrees_iff_fieldPoints {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
     BoundsFiberDegrees f n ↔
       ∀ (K : Type u) [Field K] (g : Spec (CommRingCat.of K) ⟶ Y),
         IsFinite (pullback.snd f g) ∧ (pullback.snd f g).finrankΓ ≤ n := by
-  sorry
+  constructor
+  · intro hf K _ g
+    let ξ : Spec (CommRingCat.of K) := default
+    let h := pullback.snd f g
+    let φ := CommRingCat.ofHom (algebraMap K ξ.asIdeal.ResidueField)
+    have : IsIso φ := (ConcreteCategory.isIso_iff_bijective φ).mpr
+      ξ.asIdeal.algEquivResidueFieldOfField.bijective
+    let e := asIso φ ≪≫ (Scheme.Spec.residueFieldIso (CommRingCat.of K) ξ).symm
+    have hjmap : Spec.map e.hom = (Spec (CommRingCat.of K)).fromSpecResidueField ξ := by
+      dsimp only [e, Iso.trans_hom, asIso_hom, Iso.symm_hom]
+      rw [Spec.map_comp]
+      exact Scheme.Spec.map_residueFieldIso_inv_eq_fromSpecResidueField _ ξ
+    have : IsIso ((Spec (CommRingCat.of K)).fromSpecResidueField ξ) := by
+      rw [← hjmap]
+      infer_instance
+    have : IsIso (h.fiberι ξ) := by
+      dsimp only [Scheme.Hom.fiberι]
+      infer_instance
+    obtain ⟨hq, hdeg⟩ := finite_fiber_degree_pullback f g ξ (hf (g ξ)).1
+    let := hq
+    have heq : inv (h.fiberι ξ) ≫ h.fiberToSpecResidueField ξ ≫ Spec.map e.hom = h := by
+      rw [hjmap, ← h.fiber_fac, IsIso.inv_hom_id_assoc]
+    have hfinite : IsFinite h := by
+      rw [← heq]
+      infer_instance
+    refine ⟨hfinite, ?_⟩
+    have hrank := finrankΓ_eq_of_iso h (h.fiberToSpecResidueField ξ)
+      (asIso (h.fiberι ξ)).symm e (by simpa only [Iso.symm_hom, asIso_inv] using heq)
+    exact hrank.le.trans (hdeg.le.trans (hf (g ξ)).2)
+  · intro hf y
+    exact hf (Y.residueField y) (Y.fromSpecResidueField y)
 
 end AlgebraicGeometry.Scheme.Hom

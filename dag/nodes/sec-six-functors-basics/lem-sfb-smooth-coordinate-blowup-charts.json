@@ -1,0 +1,328 @@
+{
+ "id": "lem-sfb-smooth-coordinate-blowup-charts",
+ "kind": "statement",
+ "title": "Smooth pullbacks of coordinate-subspace blowups and their boundary charts",
+ "statement": "Let $F$ be any field [def-weil-field], let $n\\geq0$, let $V$ be an $F$-scheme [def-pc-scheme], and let $c:V\\to\\mathbf A^n_F$ be smooth [def-sbc-smooth-morphisms, def-sbc-affine-space]. Write $z_1,\\ldots,z_n$ for the pulled-back coordinate functions. For any $A\\subseteq\\{1,\\ldots,n\\}$, the scheme-theoretic coordinate intersection $C_A=V(z_a:a\\in A)$ [def-weil-closed-immersion] is smooth over $F$, is reduced and regular, and, when nonempty, has pure codimension $|A|$ in $V$ [def-pc-reduced-scheme, def-weil-regular-scheme]. At every point of $V$, the vanishing members of the coordinate list are distinct members of some regular system of parameters of its local ring [def-weil-pbc-regular-system-of-parameters]. An empty $A$ gives $C_A=V$.\n\nFix nonempty $S\\subseteq T\\subseteq\\{1,\\ldots,n\\}$ and put $B_T=V(\\prod_{a\\in T}z_a)$ and $D_S=V(\\prod_{a\\in S}z_a)$, as reduced effective Cartier divisors [def-nagata-effective-cartier-ideal]. Let $b:V^+=\\operatorname{Bl}_{C_S}V\\to V$ be the ordinary blowup [def-nagata-global-blowup]. It is canonically the pullback along $c$ of the blowup of $\\mathbf A^n_F$ in the coordinate subspace with indices $S$. It has an open cover $(V_j^+)_{j\\in S}$ with smooth maps to affine $n$-space having coordinates $z_j$, $u_a=z_a/z_j$ for $a\\in S\\setminus\\{j\\}$, and $z_a$ for $a\\notin S$. On $V_j^+$ the exceptional divisor has equation $z_j=0$, the reduced full inverse image of $B_T$ [def-weil-pbc-scheme-reduction] has equation\n$$z_j\\prod_{a\\in S\\setminus\\{j\\}}u_a\\prod_{a\\in T\\setminus S}z_a=0,$$\nand the strict transform of $D_S$ [def-nagata-strict-transform] has equation $\\prod_{a\\in S\\setminus\\{j\\}}u_a=0$. The corresponding coordinate intersections on these charts are smooth over $F$ of pure codimension equal to the number of chosen coordinate factors, and the vanishing chart coordinates extend to a regular system of parameters at every point. Empty charts and empty intersections are allowed; if $|S|=1$, the blowup is the identity and the strict transform of $D_S$ is empty. No perfection, integrality, separatedness or global quasi-compactness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0H1H (remark-relative-blowup), displayed affine charts; Tag 0FUT (lemma-blowup), proof by flat base change. The boundary and strict-transform equations are ILO VIII Lemma 4.2.9, printed p.121. Coordinate intersections use morphisms.tex Tags 01VB (lemma-base-change-smooth) and 01VA (lemma-composition-smooth); regularity is varieties.tex Tag 056S (lemma-smooth-regular)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-affine-space",
+  "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-nagata-effective-cartier-ideal",
+  "def-nagata-global-blowup",
+  "def-weil-pbc-scheme-reduction",
+  "def-nagata-strict-transform"
+ ],
+ "proof": [
+  {
+   "text": "First establish the assertions about a smooth coordinate map, for later use on both $V$ and its blowup charts. The scheme $C_A$ is the base change of $c$ to the coordinate affine space $\\mathbf A_F^{n-|A|}$. Its projection to that space is smooth by [lem-pc-proper-base-change](2). That affine space is smooth over $F$ by [sbc-lem-affine-space-smooth], so composition [lem-trf-smooth-composition] makes $C_A/F$ smooth. This includes $A=\\varnothing$, and hence proves that $V/F$ is smooth. Apply [lem-weil-pbc-smooth-scheme-over-field-regular] to each: they are locally Noetherian with regular local rings. Those local rings are domains by [lem-sc-regular-local-domain], hence have no nonzero nilpotents, so these schemes are reduced by [def-pc-reduced-scheme]. No finite-type bound on all of $V$ or perfection of $F$ was used.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "sbc-lem-affine-space-smooth",
+    "lem-trf-smooth-composition",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-local-domain",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VB (base-change-smooth), 01VA (composition-smooth), 056S (varieties.tex lemma-smooth-regular), 00NP (regular-domain)."
+   }
+  },
+  {
+   "text": "Fix $x\\in V$ and let $L$ be any ordered subset of the coordinate indices vanishing at $x$. Put $P=F[z_1,\\ldots,z_n]$, $y=c(x)$, $Q=P_{\\mathfrak p_y}$ and $R=\\mathcal O_{V,x}$. Smoothness makes $c$ flat by [lem-pc-smooth-flat]; [def-weil-flat-morphism] says precisely that $Q\\to R$ is flat. In $P$, after quotienting by any prefix of the distinct variables in $L$, multiplication by the next variable is injective: the quotient is the polynomial ring on the remaining variables and comparison of coefficients proves the injection. Apply [lem-exc-weakly-regular-sequence-localization] to obtain these injections over $Q$. Apply [lem-weil-pbc-flat-tensor-exact] to each injection and tensor with $R$ over $Q$. The quotient tensor is $R$ modulo the corresponding prefix, as follows directly by sending $r\\otimes\\bar a$ to $ra$ modulo that prefix, with inverse $\\bar r\\mapsto r\\otimes1$. Thus all the successive multiplications over $R$ are injective. The final quotient is nonzero because all the variables in $L$ belong to the maximal ideal. This is exactly an $R$-regular sequence [def-weil-pbc-regular-sequence].",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "def-weil-flat-morphism",
+    "lem-exc-weakly-regular-sequence-localization",
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HT (flat-localization), 00LM (flat-increases-depth), 00HB (definition-flat); coefficientwise polynomial argument."
+   }
+  },
+  {
+   "text": "Take $L$ to be all $r$ vanishing coordinates at $x$ and put $J=(z_a:a\\in L)\\subset R$, $\\mathfrak m=\\mathfrak m_R$. Step 1 makes $R/J=\\mathcal O_{C_L,x}$ regular local. Step 2 and [lem-trf-regular-sequence-dimension-formula] give $\\dim(R/J)=\\dim R-r$. By [lem-weil-pbc-regular-local-quotient-kernel-parameters], $J$ is generated by a prefix $w_1,\\ldots,w_c$ of a regular parameter system of $R$. By [lem-weil-pbc-regular-local-generators-regular-sequence], this prefix has regular quotient of dimension $\\dim R-c$, so $c=r$. The classes of this prefix in $\\mathfrak m/\\mathfrak m^2$ are independent: otherwise a proper subset of the parameter system would span that vector space and, by [lem-weil-pbc-nakayama-local-generators] applied to $\\mathfrak m$, generate $\\mathfrak m$, contradicting the minimal size $\\dim R$. Consequently the image of $J$ in $\\mathfrak m/\\mathfrak m^2$ has dimension $r$. Its $r$ spanning elements $z_a$ are therefore independent. Complete them to a vector-space basis and lift the remaining basis vectors to $\\mathfrak m$. Nakayama makes this list generate $\\mathfrak m$; its length is $\\dim R$, so it is the required regular parameter system [def-weil-pbc-regular-system-of-parameters]. For a generic point $\\eta$ of any component of a nonempty $C_A$, the regular local ring $\\mathcal O_{C_A,\\eta}$ is a field. Step 2 and the same dimension formula give $\\dim\\mathcal O_{V,\\eta}=|A|$: each component has codimension $|A|$. The empty subset has zero ideal and gives $V$.",
+   "uses": [
+    "lem-trf-regular-sequence-dimension-formula",
+    "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-nakayama-local-generators",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NQ (regular-ring-CM), 00NR (regular-quotient-regular), 00DV (Nakayama local generators); dimension formula for a regular sequence."
+   }
+  },
+  {
+   "text": "We record the elementary product calculation that will be used repeatedly. In any of the regular local rings just obtained, let $t_1,\\ldots,t_r$ be distinct members of the supplied parameter system. For each $i$, [lem-weil-pbc-regular-local-generators-regular-sequence] makes $R/(t_i)$ regular local, and [lem-sc-regular-local-domain] makes it a domain. Thus $(t_i)$ is prime. If $i\\ne j$, then $t_j\\notin(t_i)$: reducing such an expression modulo $\\mathfrak m^2$ would contradict independence of the parameter classes. Inductively, $(t_1)\\cap\\cdots\\cap(t_r)=(t_1\\cdots t_r)$: for $f=(t_1\\cdots t_{r-1})g\\in(t_r)$, primality and the preceding noncontainment force $g\\in(t_r)$. The product ideal is consequently radical. Each $t_i$ is a nonzerodivisor in the domain $R$, and so is their product. Coordinates not vanishing at the point are units and do not affect either conclusion. Stalkwise this proves that every product of distinct coordinate factors defines a reduced effective Cartier divisor [def-nagata-effective-cartier-ideal, def-pc-reduced-scheme], including the empty divisor when all its factors are units. In particular this proves the claims for $B_T$ and $D_S$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-sc-regular-local-domain",
+    "def-nagata-effective-cartier-ideal",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NQ (regular-ring-CM), Tag 00NP (regular-domain); elementary prime-ideal product calculation."
+   }
+  },
+  {
+   "text": "Put $I=(z_a:a\\in S)$ in $F[z_1,\\ldots,z_n]$. The coordinate center $C_S$ is its scheme-theoretic pullback. Since $c$ is flat, the canonical comparison of [def-nagata-blowup-flat-base-change-map] is an isomorphism by [thm-nagata-blowup-flat-base-change]. Hence $V^+$ is canonically $V\\times_{\\mathbf A_F^n}\\operatorname{Bl}_I\\mathbf A_F^n$. Apply [lem-trf-coordinate-subspace-blowup-charts] with $R=F$, $b=|S|>0$ and $a=n-|S|$, simply reordering variables. It supplies the open cover indexed by $j\\in S$ and polynomial chart coordinates $z_j,u_a$ ($a\\in S\\setminus\\{j\\}$), $z_a$ ($a\\notin S$), with $z_a=z_ju_a$ for $a\\in S\\setminus\\{j\\}$. Pull these charts back to $V^+$. The projection of each pulled-back chart to its polynomial model is the base change of $c$, hence smooth by [lem-pc-proper-base-change](2). These are exactly the smooth maps to affine $n$-space asserted in the item.",
+   "uses": [
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "lem-trf-coordinate-subspace-blowup-charts",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0805 (divisors.tex lemma-flat-base-change-blowing-up), 0H1H (remark-relative-blowup), 01VB (base-change-smooth)."
+   }
+  },
+  {
+   "text": "Apply the coordinate-map argument of steps 1--3, now to each smooth $V_j^+\\to\\mathbf A_F^n$. It proves all the asserted smoothness, reducedness, regularity, intersection codimensions and parameter extensions on that chart. Put $t=z_j$, $q=\\prod_{a\\in S\\setminus\\{j\\}}u_a$, $h=\\prod_{a\\in T\\setminus S}z_a$, $s=|S|$. The center ideal pulls back to $(t,tu_a:a\\in S\\setminus\\{j\\})=(t)$, so the exceptional inverse-image divisor is $V(t)$, with $t$ a nonzerodivisor by step 4 applied to the chart. Substitution gives the full inverse-image equation $t^s qh$. For every prime ideal, containment of $t^s qh$ is equivalent to containment of $tqh$, so their radicals agree. Step 4 proves $(tqh)$ radical in every chart stalk. Thus the reduced full inverse image has exactly equation $tqh=0$, as claimed [def-weil-pbc-scheme-reduction].",
+   "uses": [
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0H1H (remark-relative-blowup), exceptional equation; ILO VIII Lemma 4.2.9, printed p.121, coordinate substitution."
+   }
+  },
+  {
+   "text": "The center is of finite presentation: locally its closed immersion is the quotient by the finite list $(z_a:a∈ S)$. On the $j$-chart the complement of the center is $D(t)$, since its pulled-back ideal is $(t)$. The equation of the pulled-back $D_S$ is $t^s q$, so on $D(t)$ it is $q=0$. By [def-nagata-strict-transform] and [def-nagata-scheme-theoretic-image], its schematic closure is the kernel of $A\\to(A/(q))[1/t]$ on any affine subchart with coordinate ring $A$. This immersion is quasi-compact: its image is closed in the principal open $D(t)$. We show its kernel is exactly $(q)$ by checking stalks. In a chart stalk $R$, discard the unit factors of $q$. If none remain, $q$ is a unit and the claim is immediate. Otherwise each remaining $(u_a)$ is prime and $t\\notin(u_a)$ by step 4 (if $t$ is a unit this is automatic). An element $f$ in the kernel satisfies $t^Nf\\in(q)$ for some $N\\geq0$, by the defining equality criterion in a localization. Primality then gives $f\\in(u_a)$ for every remaining factor. Their intersection is $(q)$ by step 4. Conversely every multiple of $q$ maps to zero. Thus the closure, and therefore the strict transform, has equation $q=0$ scheme-theoretically, rather than merely the same support.",
+   "uses": [
+    "def-nagata-strict-transform",
+    "def-nagata-scheme-theoretic-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII Lemma 4.2.9, printed p.121, strict-transform coordinate computation; Stacks divisors.tex Tag 080D (definition-strict-transform)."
+   }
+  },
+  {
+   "text": "If $|S|=1$, the sole affine model of step 5 has no ratio variables and is $\\mathbf A_F^n$ with its identity map to the original affine space. Its pullback is therefore $V$, so the blowup is the identity. In step 7 the product $q$ is the empty product $1$, and its zero scheme is empty. When a center or intersection is empty, all preceding pullback and local calculations still hold; there is simply no point at which its codimension must be checked. For $n=0$ the only subset $A$ is empty and there are no nonempty $S$. Every calculation took place on an affine chart or a stalk, so no separatedness, integrality or global quasi-compactness was assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Edge cases of Tag 0H1H coordinate charts and the preceding calculations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "sbc-lem-affine-space-smooth",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-local-domain",
+  "def-pc-reduced-scheme",
+  "lem-pc-smooth-flat",
+  "def-weil-flat-morphism",
+  "lem-exc-weakly-regular-sequence-localization",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-pbc-regular-sequence",
+  "lem-trf-regular-sequence-dimension-formula",
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-nakayama-local-generators",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-nagata-effective-cartier-ideal",
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-blowup-flat-base-change",
+  "lem-trf-coordinate-subspace-blowup-charts",
+  "def-weil-pbc-scheme-reduction",
+  "def-nagata-strict-transform",
+  "def-nagata-scheme-theoretic-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0H1H and 0FUT, combined with divisors.tex Tag 0805, algebra.tex Tags 00NQ/00NR, and ILO VIII Lemma 4.2.9 printed p.121. Explicit flat coordinate and schematic-closure calculations supplied by Q131."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The blowup of a smooth pullback of a coordinate subspace of affine space has smooth affine coordinate charts with exceptional parameter and coordinate ratios",
+   "results": "OK 8 hits: AlgebraicGeometry.AffineSpace.toSpecMvPoly, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.AffineSpace.homOfVector, AlgebraicGeometry.AffineSpace.over_over",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-space constructions and smooth base-change instances do not identify a coordinate blowup, its charts, or its strict-transform equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"smooth\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-space constructions and smooth base-change instances do not identify a coordinate blowup, its charts, or its strict-transform equations"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowUp|blowing|normal.?crossing",
+   "results": "OK 0 hits: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-space constructions and smooth base-change instances do not identify a coordinate blowup, its charts, or its strict-transform equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowing up a coordinate ideal in a smooth algebra over a field gives smooth charts with coordinate ratios and transverse coordinate divisors",
+   "results": "OK 8 hits: AlgebraicGeometry.IsSmooth.casesOn, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, RingHom.Smooth, Algebra.Smooth.formallySmooth, AlgebraicGeometry.IsSmooth.recOn, Algebra.Smooth.mk, Algebra.FormallySmooth.iff_comp_surjective, Algebra.smoothLocus",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-space constructions and smooth base-change instances do not identify a coordinate blowup, its charts, or its strict-transform equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base change of the blowup of affine space along a coordinate linear subspace preserves smoothness and coordinate hyperplane intersection codimensions",
+   "results": "OK 8 hits: RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.isStandardSmooth_isStableUnderBaseChange, Algebra.IsStandardSmoothOfRelativeDimension.baseChange, RingHom.Smooth.isStableUnderBaseChange, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, Algebra.IsStandardSmooth.baseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-space constructions and smooth base-change instances do not identify a coordinate blowup, its charts, or its strict-transform equations"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowUp|normal.?crossing",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: smoothness tools do not state coordinate blowup charts, regular parameter and strict-transform clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The blowup of a smooth pullback of a coordinate subspace of affine space has smooth charts and strict transform boundary equations",
+   "results": "OK 8 hits: AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: smoothness tools do not state coordinate blowup charts, regular parameter and strict-transform clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"smooth\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: smoothness tools do not state coordinate blowup charts, regular parameter and strict-transform clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth pullback of coordinate subspace blowup affine charts exceptional divisor strict transform reduced boundary",
+   "results": "OK 8 hits: ContMDiff.mpullback_vectorField, ContMDiffOn.mpullback_vectorField_preimage, ContMDiffWithinAt.mpullback_vectorField_preimage_of_eq, ContMDiffWithinAt.mpullbackWithin_vectorField_of_mem_of_eq, MDifferentiableWithinAt.differentiableWithinAt_mpullbackWithin_vectorField, VectorField.mpullbackWithin_univ, ContMDiffVectorBundle.pullback, VectorField.eventually_contMDiffWithinAt_mpullbackWithin_extChartAt_symm",
+   "date": "2026-10-23",
+   "verdict": "no match: smoothness tools do not state coordinate blowup charts, regular parameter and strict-transform clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coordinate hyperplane divisors under smooth morphisms of schemes over an arbitrary field form regular parameters and their blowup has coordinate ratio charts",
+   "results": "OK 8 hits: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.Smooth.exists_span_eq_top_isStandardSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: smoothness tools do not state coordinate blowup charts, regular parameter and strict-transform clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-nc-maximal-branch-strictification",
+  "date": "2026-10-23",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X 2.2--2.3: X Lemma 2.2 proof, printed p.149 last paragraph--p.150 first paragraph, successive application of Vidal 2004b 4.4.4; explicitly the smooth-pair-over-a-field variant of the following remark. This is one curve step, with arbitrary F and semilinear J, not the complete alteration theorem. Vidal primary article is WANTED locally.; VIII 4.1.2--4.1.8 pp.117--118 and 4.2.8--4.2.9 pp.120--121, with the explicit coordinate calculation over F required by X Lemma 2.2 p.149. Returned steps 10--12. Local smooth-coordinate computation for the permissible blowups of VIII 4.1.8, using VIII 4.2.9 and Stacks 0H1H; supplies the arbitrary-field relative assertion required in X 2.2.",
+   "via": [
+    "lem-sfb-relative-nc-maximal-branch-strictification",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-coordinate-blowup-charts",
+  "worker": "stage1",
+  "summary": "No new nodes: reuse the arbitrary-base affine coordinate blowup model and flat base-change theorem. Establish parameter extension using flat regular sequences, regular coordinate quotients, the dimension formula and Nakayama. Compute radical boundary products and schematic strict-transform kernels explicitly. No statement correction or stronger field hypothesis.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), its open direct-image finiteness branch: the inherited ILO X Lemma 2.2 smooth-pair route, specifically VIII 4.2.9 local coordinate computation. The ancestor command returns None, as already recorded in the inherited blueprint.from.node; its metadata is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic A scheme smooth over a field is regular used for coordinate smooth maps and their local rings; no replacement of the ILO coordinate blowup route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+    "why": "Generic The ideal of a regular local quotient is generated by parameters used for coordinate smooth maps and their local rings; no replacement of the ILO coordinate blowup route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic A regular system of parameters is a regular sequence used for coordinate smooth maps and their local rings; no replacement of the ILO coordinate blowup route."
+   },
+   {
+    "node": "lem-trf-coordinate-subspace-blowup-charts",
+    "why": "Generic Polynomial charts of a coordinate-subspace blowup and smooth etale sources used for coordinate smooth maps and their local rings; no replacement of the ILO coordinate blowup route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-trf-coordinate-subspace-blowup-charts"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-3fbb1ea77",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-3fbb1ea77 (reviewer sub-agent of L); spot-checked: Plain S1 split with no new nodes and the statement unchanged. I read the item's 8 steps and every cited statement, plus Stacks 0H1H (more-morphisms.tex 4940-4972) and ILO VIII Lemma 4.2.9 (p.121); the item states the ILO chart computation. Steps: (1) C_A is a base change of c to A^{n-|A|}, so it is smooth, then regular (056S) and reduced. (2) Flat Q->R carries the variable sequence to an R-regular sequence, using weak-regularity localization and flat tensor exactness. (3) The dimension formula, 00NR and 00NQ give a prefix of length r; the z_a classes are then independent in m/m^2 and Nakayama extends them to a regular system of parameters. Codimension is computed at generic points, where the local ring is a field. (4) The product of distinct parameters is radical and a nonzerodivisor; the induction is written out. (5) Flat base change of the blowup plus the 0H1H charts with R=F; the chart maps are base changes of c, so smooth. (6) The reduced total transform has equation tqh. (7) The strict-transform kernel {f: t^N f in (q)} equals (q), checked on stalks by primality, and the immersion is quasi-compact. (8) |S|=1 gives the identity blowup with q=1, and n=0 is covered. Edge cases tested: S={j}, and S=T={1,2} on A^2. Duplicate search: lem-trf-smooth-center-blowup-geometry and lem-trf-etale-coordinate-intersection-geometry are not duplicates. Batch-5: lem-trf-smooth-composition (01VA), lem-trf-regular-sequence-dimension-formula (Mathlib commutative algebra) and lem-trf-coordinate-subspace-blowup-charts (0H1H, any ring) are generic facts outside the trace-formula and Poincare-duality statements and their proofs; accepted. The 4 generic tool_uses are accepted. No SGA citation; no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothCoordinateBlowupCharts",
+  "declaration": "AlgebraicGeometry.SmoothCoordinateBlowup.smooth_coordinate_blowup_charts",
+  "declarations": [
+   "AlgebraicGeometry.SmoothCoordinateBlowup.coordinates",
+   "AlgebraicGeometry.SmoothCoordinateBlowup.intersection",
+   "AlgebraicGeometry.SmoothCoordinateBlowup.equation",
+   "AlgebraicGeometry.SmoothCoordinateBlowup.boundary",
+   "AlgebraicGeometry.SmoothCoordinateBlowup.CoordinateGeometry",
+   "AlgebraicGeometry.SmoothCoordinateBlowup.smooth_coordinate_blowup_charts"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothCoordinateBlowupCharts.lean",
+  "statement": "theorem smooth_coordinate_blowup_charts (F : Type u) [Field F] (n : ℕ) (V : Scheme.{u}) (c : V ⟶ AffineSpace (ULift.{u} (Fin n)) (Spec (.of F))) [Smooth c] : CoordinateGeometry (c ≫ (AffineSpace.over _ _).hom) (coordinates c) ∧ ∀ S T : Finset (Fin n), S.Nonempty → S ⊆ T → (boundary (coordinates c) T).IsInvertible ∧ IsReduced (boundary (coordinates c) T).subscheme ∧ (boundary (coordinates c) S).IsInvertible ∧ IsReduced (boundary (coordinates c) S).subscheme ∧ (∃ h : intersection (coordinates c) S = (intersection (coordinates (𝟙 (AffineSpace (ULift.{u} (Fin n)) (Spec (.of F))))) S).comap c, IsIso (eqToHom (congrArg Scheme.IdealSheafData.blowup h) ≫ (intersection (coordinates (𝟙 (AffineSpace (ULift.{u} (Fin n)) (Spec (.of F))))) S).blowupFlatBaseChange c)) ∧ (∃ (W : S → Scheme.{u}) (ι : ∀ j, W j ⟶ (intersection (coordinates c) S).blowup) (q : ∀ j, W j ⟶ AffineSpace (ULift.{u} (Fin n)) (Spec (.of F))), (∀ j, IsOpenImmersion (ι j)) ∧ (∀ x : (intersection (coordinates c) S).blowup, ∃ (j : S) (w : W j), ι j w = x) ∧ ∀ j, Smooth (q j) ∧ q j ≫ (AffineSpace.over _ _).hom = ι j ≫ (intersection (coordinates c) S).blowupMap ≫ c ≫ (AffineSpace.over _ _).hom ∧ (∀ a : Fin n, a = j.val ∨ a ∉ S → (coordinates (q j)) a = (ι j ≫ (intersection (coordinates c) S).blowupMap).appTop (coordinates c a)) ∧ (∀ a ∈ S.erase j.val, (ι j ≫ (intersection (coordinates c) S).blowupMap).appTop (coordinates c a) = coordinates (q j) j.val * coordinates (q j) a) ∧ (intersection (coordinates c) S).comap (ι j ≫ (intersection (coordinates c) S).blowupMap) = equation (coordinates (q j) j.val) ∧ (((boundary (coordinates c) T).comap (intersection (coordinates c) S).blowupMap).radical).comap (ι j) = boundary (coordinates (q j)) T ∧ (AlgebraicGeometry.strictTransformMap (boundary (coordinates c) S).subschemeι (intersection (coordinates c) S).blowupMap (intersection (coordinates c) S).support.compl).ker.comap (ι j) = boundary (coordinates (q j)) (S.erase j.val) ∧ CoordinateGeometry (q j ≫ (AffineSpace.over _ _).hom) (coordinates (q j))) ∧ (S.card = 1 → IsIso (intersection (coordinates c) S).blowupMap ∧ IsEmpty ((intersection (coordinates c) S).strictTransform (boundary (coordinates c) S).subschemeι))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0ea10a61",
+  "group": "NF",
+  "result": "pass",
+  "note": "Clause-by-clause match: C_A smooth/reduced/regular with pure codimension |A| at generic points, empty A gives V (IsIso subschemeι), vanishing coordinates injected into a regular system of parameters, B_T/D_S IsInvertible+IsReduced, ordinary blowup with the canonical blowupFlatBaseChange iso after the centre-ideal equality, chart cover (open immersions, jointly surjective, smooth q j over F, z_a=z_j*u_a), exceptional (z_j), radical of the full inverse image = full T product, strict-transform kernel (closed-immersion strictTransformMap) = product over S.erase j, CoordinateGeometry on charts, |S|=1 iso plus empty strict transform. No extra hypotheses; universes forced only by Spec F. Edge cases n=0, empty A/V/W/intersections, T=S, |S|=1 covered. Only lean field changed; statement verbatim; helpers non-hollow with docstrings; sorry-only theorem; no duplicate found. Note: blowupFlatBaseChange (def-nagata-blowup-flat-base-change-map) is in proof_deps, not stmt_deps; accepted."
+ }
+}

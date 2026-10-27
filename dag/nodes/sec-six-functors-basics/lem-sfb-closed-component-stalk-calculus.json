@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-closed-component-stalk-calculus",
+ "kind": "statement",
+ "title": "Closed components, reduced unions and intersections at ordinary stalks",
+ "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme], and $H\\hookrightarrow X$ a closed subscheme [def-weil-closed-immersion] with ideal sheaf $\\mathcal I$ [def-sbc-closed-immersion-ideal-sheaf]. For a point $x\\in X$ and an affine open $U=\\operatorname{Spec}B$ containing $x$, let $\\mathfrak p$ correspond to $x$ and let $I\\subseteq B$ define $H\\cap U$. The stalk ideal $\\mathcal I_x$ is $IB_{\\mathfrak p}$, and if $x\\in H$ then $\\mathcal O_{H,x}=B_{\\mathfrak p}/IB_{\\mathfrak p}$ via the canonical quotient-localization isomorphism [def-weil-pbc-localization-at-prime]. If $x\\notin H$, then $\\mathcal I_x=\\mathcal O_{X,x}$. Finite scheme-theoretic intersections of closed subschemes (the scheme-theoretic intersection of closed subschemes $H_1,\\ldots,H_n$ with ideal sheaves $\\mathcal I_1,\\ldots,\\mathcal I_n$ is the closed subscheme cut out by the sum $\\mathcal I_1+\\cdots+\\mathcal I_n$, and for $n=0$ it is $X$) have stalk ideal the sum of their stalk ideals. If $Z_1,\\ldots,Z_n$ are reduced closed subschemes, the reduced induced closed subscheme on $|Z_1|\\cup\\cdots\\cup|Z_n|$ has, at every $x\\in X$, stalk ideal the intersection of the stalk ideals of the $Z_i$ (reducedness of the $Z_i$ is needed: on $\\operatorname{Spec}\\mathbb Z[s]$ the single closed subscheme $V(s^2)$ has reduced union ideal $(s)\\neq(s^2)$). Suppose now that $H$ is reduced [def-pc-reduced-scheme]. Its finitely many irreducible components with reduced induced structure [def-weil-irreducible-components, lem-weil-pbc-reduced-induced-closed-subscheme] are distinct integral closed subschemes [def-pc-integral-scheme] whose reduced union equals $H$. For every $x\\in X$, taking the stalk ideal gives a bijection from the components containing $x$ to the prime ideals of $\\mathcal O_{X,x}$ minimal over $\\mathcal I_x$. Components not containing $x$ have unit stalk ideal. The stalk ideal of $H$ is the intersection of the ideals of its components through $x$; the empty intersection is the unit ideal. No regularity of $X$ or of the components is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Tag 0BIA (lemma-strict-normal-crossings), components through a point and coordinate prime ideals; Schemes Tag 01J3 (lemma-reduced-closed-subscheme), Algebra Tags 00ES and 00E3. Proof handoff retained verbatim under the released re-split order; these are the old parent arguments to implement, not proof steps of this statement-only node. Original parent step 1: We work throughout on affine neighborhoods $U=\\operatorname{Spec}B$ in $X$, with $B$ Noetherian. If $x$ corresponds to $\\mathfrak p$ and a closed subscheme $Z\\cap U$ has ideal $J$, its local ring at $x\\in Z$ is $B_{\\mathfrak p}/JB_{\\mathfrak p}$. This follows from the affine description of a closed immersion and localization of a quotient. Finite intersections of closed subschemes have ideal the sum of the ideals: a ring map kills every ideal precisely when it kills their sum. A finite family of reduced closed subschemes with union of supports $T$ has reduced union ideal the intersection of their ideals: on $U$, this intersection is radical and has vanishing set $T\\cap U$, so uniqueness of the reduced induced structure applies. Finite intersections of ideals commute with localization: if $a/s$ lies in every localized ideal, choose one denominator outside $\\mathfrak p$ for each membership and multiply these finitely many denominators. Thus the same union and intersection rules hold for the stalk ideals.\nCited statements: def-weil-closed-immersion, lem-weil-pbc-localization-at-prime-of-quotient, lem-weil-pbc-reduced-induced-closed-subscheme.\n\nOriginal parent step 7: Choose the finitely many irreducible components of the closed subset $|H|$; their finiteness follows because $X$ is Noetherian. Give each its reduced induced closed subscheme structure and call them $C_i$. They are integral because they are nonempty, reduced and irreducible. The reduced induced structure theorem and reducedness of $H$ show that their reduced union is exactly $H$, rather than a thickening with the same support. The empty closed subset gives the empty family.\nCited statements: lem-sc-noetherian-closed-subset-finite-components, lem-weil-pbc-reduced-induced-closed-subscheme, def-pc-integral-scheme.\n\nOriginal parent step 8: Fix $x\\in H$ and its chosen parameters. The components of $H$ through $x$ correspond exactly to the minimal prime ideals over $(T)$ in $R=\\mathcal O_{X,x}$. To check this using the cited statements, take an affine neighborhood $U=\\operatorname{Spec}B$. Intersecting global irreducible components with $U$ gives the components of $H\\cap U$: closure extends an irreducible subset of the open to an irreducible closed subset, and a nonempty open of an irreducible component is dense in it. Apply the spectrum/minimal-prime theorem to its affine ring $B/J$. Then apply the inclusion-preserving prime-localization bijection and the quotient-localization isomorphism. Minimality is preserved for primes below $\\mathfrak p$, since every smaller prime is still below $\\mathfrak p$. Finally a prime containing $T$ contains some $t_i$; the ideals $(t_i)$ are distinct incomparable primes, by steps 4 and 5. They are therefore exactly the minimal primes over $(T)$. In particular each $C_i$ through $x$ has stalk ideal one distinct $(t_j)$. Components missing $x$ have unit ideal stalk.\nCited statements: lem-weil-pbc-spec-irreducible-components-minimal-primes, lem-weil-pbc-primes-of-localization, lem-weil-pbc-localization-at-prime-of-quotient, lem-weil-pbc-reduced-induced-closed-subscheme, lem-weil-pbc-closed-immersion-ideal-stalk-range."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-pc-reduced-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-closed-immersion",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "pqf-def-locnoeth",
+  "def-trf-marked-ideal-order"
+ ],
+ "proof": [
+  {
+   "text": "For any ideal sheaf data J and affine neighborhoods U and V of x, choose an affine neighborhood W inside their intersection. The restriction compatibility J.map_ideal and germ_res identify the images of J(U), J(V), and J(W) in the stalk. Consequently the supremum defining stalkIdeal equals the image from any fixed U. The affine-open stalk localization instance and IsLocalization.algEquiv identify the ambient stalk with B_p, carrying every section germ to b/1. Mapping the ideal through this equivalence gives exactly the extended ideal.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IN (lemma-closed-subspace-scheme), (4), and 01HV (lemma-spec-sheaves), (6), with restriction compatibility of quasi-coherent ideal data"
+   }
+  },
+  {
+   "text": "Use the existing proved Scheme.Hom.ker_stalkMap from WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion: the kernel of i.stalkMap z is the extension of the affine defining ideal under the germ map. Transport this equality along the ambient localization equivalence from step 1. Ideal.quotientEquiv and RingHom.quotientKerEquivOfSurjective, using surjectivity of closed-immersion stalk maps, then produce the required quotient equivalence. The formulas for quotientEquiv and quotientKerEquivOfSurjective on quotient classes give the asserted formula on b/1.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 01IN (lemma-closed-subspace-scheme) and 01HV (lemma-spec-sheaves), (6); the proved Scheme.Hom.ker_stalkMap realizes the affine stalk kernel computation, followed by the ring first isomorphism theorem"
+   }
+  },
+  {
+   "text": "If $x\\notin H$, then $\\mathfrak p\\notin V(I)$, so there is $a\\in I$ with $a\\notin\\mathfrak p$. The element $a/1$ is a unit of $B_{\\mathfrak p}$ and belongs to $IB_{\\mathfrak p}$. Therefore $IB_{\\mathfrak p}=B_{\\mathfrak p}$. Step 1 proves the asserted unit stalk ideal, including for a component missing $x$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IN (lemma-closed-subspace-scheme), proof: restriction of the ideal sheaf to the complement is the whole structure sheaf"
+   }
+  },
+  {
+   "text": "By the definition of scheme-theoretic intersection (Stacks Tag 0C4H, definition-scheme-theoretic-intersection-union), its defining ideal is the sum of the defining ideals. On $U$, for ideals $I_1,\\ldots,I_n$, localization gives $(\\sum_i I_i)B_{\\mathfrak p}=\\sum_i I_iB_{\\mathfrak p}$: each summand on the right is generated by images of elements of $I_i$, which are exactly the generators on the left. Here $(\\sum_i\\widetilde{I_i})|_U=\\widetilde{\\sum_iI_i}$, since the sum sheaf is the image of $\\bigoplus_i\\widetilde{I_i}\\to\\mathcal O_U$ and $\\widetilde{(\\ )}$ preserves direct sums and images; so the intersection is cut out on $U$ by $\\sum_iI_i$. Apply step 1 to the intersection and to the individual closed subschemes. The empty scheme-theoretic intersection is $X$, whose ideal is the empty sum $0$.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4H (definition-scheme-theoretic-intersection-union), first clause, iterated finitely"
+   }
+  },
+  {
+   "text": "Finite intersections of ideals commute with localization by Mathlib IsLocalization.map_inf, packaged as mapFrameHom. Its preservation of finite infima includes the empty infimum, since the unit ideal maps to the unit ideal. On a fixed affine neighborhood, IdealSheafData.ideal_iInf identifies the ideal of the finite infimum with the finite infimum of the affine ideals. Step 1 and preservation of finite infima give the equality of stalk ideals.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Localization fraction equality and ideal membership; explicit finite-denominator argument accompanying the affine calculations of Schemes Tag 01J3"
+   }
+  },
+  {
+   "text": "Let $T=\\bigcup_i|Z_i|$ for the finite family of reduced closed subschemes, and let $T_{\\mathrm{red}}$ be its reduced induced structure. Write $J_i$ and $J_T$ for their ideals on $U$. The reduced induced closed-subscheme theorem identifies $J_T$ with the functions vanishing in residue fields at all points of $T\\cap U$. The uniqueness clause identifies each $J_i$ with the analogous functions vanishing on $|Z_i|\\cap U$, since $Z_i$ is reduced. Vanishing on the union means vanishing on every member, so $J_T=\\bigcap_iJ_i$. By steps 1 and 5, $(\\mathcal I_T)_x=\\bigcap_i(\\mathcal I_{Z_i})_x$. For the empty union the vanishing condition is vacuous, giving the unit ideal. The stipulated reducedness is essential: in $\\mathbb Z[s]$ the ideals $(s^2)$ and $(s)$ have the same support but only the latter defines its reduced induced structure.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3 (lemma-reduced-closed-subscheme), residue-field-vanishing construction and uniqueness"
+   }
+  },
+  {
+   "text": "Now assume $H$ reduced. Apply the finite-component theorem to the closed subset $|H|\\subseteq X$, obtaining its finitely many distinct irreducible components $C_i$. Each is closed in $X$ since $|H|$ is closed. Give $C_i$ its reduced induced structure using the reduced induced closed-subscheme theorem. Each $C_i$ is nonempty and irreducible by the definition of an irreducible component and is reduced by construction; hence it is integral by the integral-scheme characterization. Their supports cover $|H|$. These are all the irreducible components of $|H|$: a component $C$ is irreducible and covered by the finitely many closed sets $C\\cap C_i$, so by the definition of irreducibility $C\\subseteq C_i$ for some $i$, and maximality of $C$ gives $C=C_i$; distinct $C_i$ have distinct supports, so the integral closed subschemes are distinct. The uniqueness clause for the reduced induced structure shows that their reduced union is $H$, because $H$ is itself reduced with that support. If $H$ is empty there are no components.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3 (lemma-reduced-closed-subscheme), with Properties Tags 0BA8 (lemma-Noetherian-irreducible-components) and 01ON (lemma-characterize-integral)"
+   }
+  },
+  {
+   "text": "An irreducible closed subset C containing x has nonempty irreducible inverse image in an affine neighborhood U=Spec(B), by the open embedding fromSpec. Its affine vanishing ideal q is therefore prime, and q is contained in the prime p of x. If C and D both contain x, an inclusion of their stalk ideals contracts to the same inclusion of their affine prime ideals, since extension and contraction are inverse on primes below p. The reverse inclusion of affine zero loci follows. The intersection D with U is dense in D, by irreducibility and nonemptiness, so taking closures extends the inclusion back to D contained in C.",
+   "uses": [
+    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-primes-of-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ES (lemma-irreducible), (2); open restriction and density as in Topology Tag 0B7I (lemma-dimension-supremum-local-dimensions), proof; prime contraction as in Algebra Tag 00E3"
+   }
+  },
+  {
+   "text": "By step 8 and prime localization, every component through x has prime stalk ideal, and an inclusion between two such ideals forces the reverse inclusion between their supports. Maximality of irreducible components of H and injectivity of the closed embedding imply that the components coincide. Thus their prime stalk ideals form an antichain. By step 6 their finite intersection, including unit ideals of components missing x, is the stalk ideal of H. For any prime Q containing this finite intersection, primality and finite-infimum containment give one component ideal P_j contained in Q; this j must contain x because a prime cannot contain the unit ideal. If Q is minimal it equals P_j. Conversely any prime over the intersection contained in P_j contains a P_k, and the antichain forces k=j and equality. This proves exactly the displayed BijOn, including injectivity and the empty-family case.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3 (lemma-spec-localization), plus the elementary finite-prime-intersection characterization of minimal primes, and maximality in the definition of irreducible components"
+   }
+  },
+  {
+   "text": "Apply step 6 to the components constructed in step 7. Their finite reduced union is $H$, so $\\mathcal I_x$ is the intersection of all their stalk ideals. By step 3, each component missing $x$ contributes the unit ideal, which can be removed from the intersection. This leaves exactly the components through $x$. If $x\\notin H$ there are no such components and both sides are the unit ideal. In that case the unit ideal has no prime ideals above it, so step 9 is the bijection between two empty sets as well. Every preceding argument applies to arbitrary Noetherian $X$; none used regularity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3 (lemma-reduced-closed-subscheme), assembled with the preceding finite-union and complement calculations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-closed-immersion",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-localization-at-prime",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01IN, 01HV, 01J3; Algebra Tags 00ES and 00E3; Morphisms Tag 0C4H. F5 implements affine restriction compatibility instead of tilde-stalk comparison; uses the proved closed-immersion ker_stalkMap and the first isomorphism theorem instead of localization of quotients; and proves the component/minimal-prime bijection by the finite prime-antichain intersection argument. All private helpers are proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a reduced closed subscheme of a Noetherian scheme the reduced irreducible components through a point correspond bijectively to minimal primes of its local ring; their ideals localize and their intersection is its stalk ideal.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.zeroLocus_minimalPrimes\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R],\\n  PrimeSpectrum.zeroLocus ∘ SetLike.coe '' minimalPrimes R = irreducibleComponents (PrimeSpectrum R)\", \"doc\": \"The irreducible components of the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$ coincide with the zero loci of the minimal prime ideals of $R$. Specifically, the image of the m\"}\n  {\"name\": \"PrimeSpectrum.zeroLocus_ideal_mem_irreducibleComponents\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {I : Ideal R},\\n  PrimeSpectrum.zeroLocus ↑I ∈ irreducibleComponents (PrimeSpectrum R) ↔ I.radical ∈ minimalPrimes R\", \"doc\": \"For a commutative semiring $ R $ and an ideal $ I $ of $ R $, the zero locus $ V(I) $ is an irreducible component of the prime spectrum $ \\\\operatorname{Spec}(R) $ if and only if the radical $ \\\\sqrt{I}\"}\n  {\"name\": \"PrimeSpectrum.vanishingIdeal_irreducibleComponents\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R],\\n  PrimeSpectrum.vanishingIdeal '' irreducibleComponents (PrimeSpectrum R) = minimalPrimes R\", \"doc\": \"The image of the irreducible components of the prime spectrum $\\\\operatorname{Spec}(R)$ under the vanishing ideal map is equal to the set of minimal prime ideals of the commutative semiring $R$.\"}\n  {\"name\": \"PrimeSpectrum.quasiSober\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R], QuasiSober (PrimeSpectrum R)\", \"doc\": \"The prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$, equipped with the Zariski topology, is a quasi-sober topological space. This means that every irreducible closed subset of $\\\\\"}\n  {\"name\": \"PrimeSpectrum.vanishingIdeal_mem_minimalPrimes\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {s : Set (PrimeSpectrum R)},\\n  PrimeSpectrum.vanishingIdeal s ∈ minimalPrimes R ↔ closure s ∈ irreducibleComponents (PrimeSpectrum R)\", \"doc\": \"For a commutative semiring $ R $ and a subset $ s $ of its prime spectrum $ \\\\operatorname{Spec}(R) $, the vanishing ideal of $ s $ is a minimal prime ideal of $ R $ if and only if the topological clos\"}\n  {\"name\": \"AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [H : IsReduced ↑R], AlgebraicGeometry.IsReduced (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a reduced commutative ring (i.e., $ R $ has no nonzero nilpotent elements), then the scheme $ \\\\operatorname{Spec}(R) $ is reduced, meaning all its local rings have no nonzero nilpotent ele\"}\n  {\"name\": \"PrimeSpectrum.isIrreducible_zeroLocus_iff\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (I : Ideal R), IsIrreducible (PrimeSpectrum.zeroLocus ↑I) ↔ I.radical.IsPrime\", \"doc\": \"For a commutative semiring $ R $ and an ideal $ I $ of $ R $, the zero locus $ V(I) $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is irreducible if and only if \"}\n  {\"name\": \"PrimeSpectrum.isIrreducible_zeroLocus_iff_of_radical\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (I : Ideal R),\\n  I.IsRadical → (IsIrreducible (PrimeSpectrum.zeroLocus ↑I) ↔ I.IsPrime)\", \"doc\": \"In the Zariski topology on the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$, a radical ideal $I$ has an irreducible zero locus $V(I)$ if and only if $I$ is a prime ideal. This\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine spectrum and minimal-prime localization results do not give the stated scheme component/stalk bijection together with the ideal identifications"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"irreducibleComponents\", \"PrimeSpectrum\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"PrimeSpectrum.vanishingIdeal_irreducibleComponents\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" (R : Type u) [CommSemiring R] : PrimeSpectrum.vanishingIdeal '' irreducibleComponents (PrimeSpectrum R) = minimalPrimes R\", \"doc\": \"\"}\n  {\"name\": \"PrimeSpectrum.zeroLocus_ideal_mem_irreducibleComponents\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" {R : Type u} [CommSemiring R] {I : Ideal R} : PrimeSpectrum.zeroLocus ↑I ∈ irreducibleComponents (PrimeSpectrum R) ↔ I.radical ∈ minimalPrimes R\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine spectrum and minimal-prime localization results do not give the stated scheme component/stalk bijection together with the ideal identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents|minimalPrimes|localization.*inf|map_inf",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"line\": \"537\", \"text\": \"    haveI : IsLocalization.Away (f * g) (Localization.Away x) := by rw [hx]; infer_instance\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"74\", \"text\": \"lemma GeometricallyReduced.isReduced_of_flat_of_finite_irreducibleComponents\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"76\", \"text\": \"    [IsReduced Y] [Finite (irreducibleComponents Y)] : IsReduced X := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"77\", \"text\": \"  let pt (Z : irreducibleComponents Y) := Y.presheaf.stalk Z.property.1.genericPoint\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"79\", \"text\": \"    isField_stalk_of_closure_mem_irreducibleComponents _ _ (by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"80\", \"text\": \"      rw [Z.property.1.closure_genericPoint (isClosed_of_mem_irreducibleComponents _ Z.property)]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"89\", \"text\": \"def Scheme.Hom.irreducibleComponentsEquiv [GeometricallyIrreducible f] (hf : IsOpenMap f) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"90\", \"text\": \"    irreducibleComponents X ≃ irreducibleComponents S :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"91\", \"text\": \"  (irreducibleComponentsEquivOfIsPreirreducibleFiber f f.continuous hf\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"220\", \"text\": \"lemma isField_stalk_of_closure_mem_irreducibleComponents\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"221\", \"text\": \"    (x : X) (hx : closure {x} ∈ irreducibleComponents X) [IsReduced X] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"229\", \"text\": \"    exact preimage_mem_irreducibleComponents hx (X.affineCover.f i).isOpenEmbedding\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"232\", \"text\": \"  replace hx : x.asIdeal ∈ minimalPrimes R := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"233\", \"text\": \"    rwa [← PrimeSpectrum.vanishingIdeal_singleton, PrimeSpectrum.vanishingIdeal_mem_minimalPrimes]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"52\", \"text\": \"  (isField_stalk_of_closure_mem_irreducibleComponents X _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"53\", \"text\": \"    (by simp [irreducibleComponents_eq_singleton])).toField\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"88\", \"text\": \"  rw [IsLocalization.ideal_eq_iInf_under_map_away hS (I N),\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"89\", \"text\": \"      IsLocalization.ideal_eq_iInf_under_map_away hS (I n),\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"364\", \"text\": \"theorem finite_irreducibleComponents_of_isNoetherian [IsNoetherian X] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"365\", \"text\": \"    (irreducibleComponents X).Finite := NoetherianSpace.finite_irreducibleComponents\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"157\", \"text\": \"      simp only [IsLocalization.mk'_mem_map_algebraMap_iff, Submonoid.mem_powers_iff, Ideal.mem_inf,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"line\": \"133\", \"text\": \"@[simp] lemma map_inf   : map (I₁ ⊓ I₂) f = map I₁ f ⊓ map I₂ f       := (map_gc f).u_inf\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"85\", \"text\": \"  rw [TopCat.precoverage, Precoverage.comap_inf, precoverage]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"372\", \"text\": \"  refine ⟨.of (Localization.Away r), f, inferInstance, ?_⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"line\": \"39\", \"text\": \"variable (X : Scheme.{u}) (Z : Set X) (hZ : Z ∈ irreducibleComponents X) [IsNoetherian X]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine spectrum and minimal-prime localization results do not give the stated scheme component/stalk bijection together with the ideal identifications"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced irreducible component ideals at a point of a Noetherian closed subscheme correspond to minimal primes of the localized quotient",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"minimalPrimes\", \"module\": \"Mathlib.RingTheory.Ideal.MinimalPrime.Basic\", \"type\": \": Set (Ideal R)\", \"doc\": \"The set of prime ideals of the ring $ R $ that are minimal with respect to inclusion, i.e., there is no proper subset that is a prime ideal.\"}\n  {\"name\": \"Ideal.minimalPrimes\", \"module\": \"Mathlib.RingTheory.Ideal.MinimalPrime.Basic\", \"type\": \": Set (Ideal R)\", \"doc\": \"The set of prime ideals $ p $ containing $ I $ such that $ p $ is minimal with respect to inclusion among all prime ideals containing $ I $. That is, there is no proper subset $ q \\\\subsetneq p $ that \"}\n  {\"name\": \"irreducibleComponent\", \"module\": \"Mathlib.Topology.Irreducible\", \"type\": \"(x : X) : Set X\", \"doc\": \"For a point $x$ in a topological space $X$, the irreducible component of $x$ is the minimal irreducible set containing $x$, defined as the smallest preirreducible set containing $\\\\{x\\\\}$ that is contai\"}\n  {\"name\": \"PrimeSpectrum.vanishingIdeal_irreducibleComponents\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": vanishingIdeal '' (irreducibleComponents <| PrimeSpectrum R) = minimalPrimes R\", \"doc\": \"The image of the irreducible components of the prime spectrum $\\\\operatorname{Spec}(R)$ under the vanishing ideal map is equal to the set of minimal prime ideals of the commutative semiring $R$.\"}\n  {\"name\": \"IsLocalization.minimalPrimes_comap\", \"module\": \"Mathlib.RingTheory.Ideal.MinimalPrime.Localization\", \"type\": \"[IsLocalization S A] (J : Ideal A) :\\n  (J.comap (algebraMap R A)).minimalPrimes = Ideal.comap (algebraMap R A) '' J.minimalPrimes\", \"doc\": \"Given a localization $ S $ of a commutative semiring $ R $ at a submonoid, and an ideal $ J \\\\subseteq S $, the minimal prime ideals of the preimage $ (J \\\\cap R) $ under the canonical localization map \"}\n  {\"name\": \"Ideal.finite_minimalPrimes_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian\", \"type\": \"(I : Ideal R) : I.minimalPrimes.Finite\", \"doc\": \"In a Noetherian ring $ R $, for any ideal $ I $ of $ R $, the set of minimal prime ideals containing $ I $ is finite.\"}\n  {\"name\": \"Ideal.minimalPrimes_eq_subsingleton_self\", \"module\": \"Mathlib.RingTheory.Ideal.MinimalPrime.Basic\", \"type\": \"[I.IsPrime] : I.minimalPrimes = { I }\", \"doc\": \"If $ I $ is a prime ideal in a commutative semiring $ R $, then the set of minimal prime ideals containing $ I $ is the singleton set $ \\\\{I\\\\} $.\"}\n  {\"name\": \"IsLocalization.minimalPrimes_map\", \"module\": \"Mathlib.RingTheory.Ideal.MinimalPrime.Localization\", \"type\": \"[IsLocalization S A] (J : Ideal R) :\\n  (J.map (algebraMap R A)).minimalPrimes = Ideal.comap (algebraMap R A) ⁻¹' J.minimalPrimes\", \"doc\": \"Let $ R $ be a commutative semiring, $ S \\\\subseteq R $ a submonoid, and $ A $ the localization of $ R $ at $ S $. For any ideal $ J \\\\subseteq R $, the minimal prime ideals of the extended ideal $ J^e \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine spectrum and minimal-prime localization results do not give the stated scheme component/stalk bijection together with the ideal identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Irreducible components of a reduced closed subscheme containing a point are the minimal prime ideals of the ambient stalk over its ideal, and scheme theoretic intersections add stalk ideals",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.zeroLocus_minimalPrimes\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R],\\n  PrimeSpectrum.zeroLocus ∘ SetLike.coe '' minimalPrimes R = irreducibleComponents (PrimeSpectrum R)\", \"doc\": \"The irreducible components of the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$ coincide with the zero loci of the minimal prime ideals of $R$. Specifically, the image of the m\"}\n  {\"name\": \"PrimeSpectrum.zeroLocus_ideal_mem_irreducibleComponents\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {I : Ideal R},\\n  PrimeSpectrum.zeroLocus ↑I ∈ irreducibleComponents (PrimeSpectrum R) ↔ I.radical ∈ minimalPrimes R\", \"doc\": \"For a commutative semiring $ R $ and an ideal $ I $ of $ R $, the zero locus $ V(I) $ is an irreducible component of the prime spectrum $ \\\\operatorname{Spec}(R) $ if and only if the radical $ \\\\sqrt{I}\"}\n  {\"name\": \"PrimeSpectrum.quasiSober\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R], QuasiSober (PrimeSpectrum R)\", \"doc\": \"The prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$, equipped with the Zariski topology, is a quasi-sober topological space. This means that every irreducible closed subset of $\\\\\"}\n  {\"name\": \"PrimeSpectrum.vanishingIdeal_irreducibleComponents\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R],\\n  PrimeSpectrum.vanishingIdeal '' irreducibleComponents (PrimeSpectrum R) = minimalPrimes R\", \"doc\": \"The image of the irreducible components of the prime spectrum $\\\\operatorname{Spec}(R)$ under the vanishing ideal map is equal to the set of minimal prime ideals of the commutative semiring $R$.\"}\n  {\"name\": \"PrimeSpectrum.vanishingIdeal_mem_minimalPrimes\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {s : Set (PrimeSpectrum R)},\\n  PrimeSpectrum.vanishingIdeal s ∈ minimalPrimes R ↔ closure s ∈ irreducibleComponents (PrimeSpectrum R)\", \"doc\": \"For a commutative semiring $ R $ and a subset $ s $ of its prime spectrum $ \\\\operatorname{Spec}(R) $, the vanishing ideal of $ s $ is a minimal prime ideal of $ R $ if and only if the topological clos\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"PrimeSpectrum.instQuasiSoberElemZeroLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (I : Set R), QuasiSober ↑(PrimeSpectrum.zeroLocus I)\", \"doc\": \"For any subset $ I $ of a commutative semiring $ R $, the zero locus $ V(I) $ of $ I $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a quasi-sober space. This \"}\n  {\"name\": \"genericPoints.component_ofComponent\", \"module\": \"Mathlib/Topology/Sober\", \"type\": \"∀ {α : Type u_1} [inst : TopologicalSpace α] [inst_1 : QuasiSober α] (x : ↑(irreducibleComponents α)),\\n  genericPoints.component (genericPoints.ofComponent x) = x\", \"doc\": \"In a quasi-sober topological space, for any irreducible component $C$, the irreducible component of the generic point associated to $C$ is equal to $C$ itself. Formally, if $x$ is the generic point of\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine spectrum and minimal-prime localization results do not give the stated scheme component/stalk bijection together with the ideal identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Ii]deal|[Ii]deal.*stalk|irreducibleComponentsEquiv|minimalPrimes",
+   "results": "Actual logged hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give affine spectrum, ideal-sheaf data, or localizations separately; none states the full scheme/stalk assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a reduced closed subscheme of a Noetherian scheme, its irreducible components through x correspond to minimal prime ideals over the defining ideal in the local ring at x",
+   "results": "Actual logged hits: irreducibleComponent, PrimeSpectrum.vanishingIdeal_irreducibleComponents, PrimeSpectrum.zeroLocus_minimalPrimes, irreducibleComponents, PrimeSpectrum.vanishingIdeal_mem_minimalPrimes, irreducibleComponent_mem_irreducibleComponents, genericPoints, mem_irreducibleComponent",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give affine spectrum, ideal-sheaf data, or localizations separately; none states the full scheme/stalk assertion or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheaf, irreducibleComponents, minimalPrimes",
+   "results": "Actual logged hits: ; loogle: unknown identifier 'AlgebraicGeometry.Scheme.IdealSheaf'",
+   "date": "2026-10-23",
+   "verdict": "unavailable: this query reported an unknown identifier; not used as evidence of absence; successful LeanFinder searches supply the alternative search kind"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed subscheme ideal stalks, finite reduced unions, and irreducible components through a point as minimal primes of the local ring",
+   "results": "Actual logged hits: AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, PrimeSpectrum.zeroLocus_minimalPrimes, PrimeSpectrum.vanishingIdeal_irreducibleComponents, PrimeSpectrum.vanishingIdeal_mem_minimalPrimes, PrimeSpectrum.zeroLocus_ideal_mem_irreducibleComponents, PrimeSpectrum.quasiSober, PrimeSpectrum.instQuasiSoberElemZeroLocus, AlgebraicGeometry.irreducibleSpace_of_isIntegral",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give affine spectrum, ideal-sheaf data, or localizations separately; none states the full scheme/stalk assertion or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ideal sheaf of a closed immersion on an affine open has stalk the localized ideal; finite intersections of reduced component ideals define the reduced union",
+   "results": "Actual logged hits: AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals, AlgebraicGeometry.Scheme.IdealSheafData.ideal, AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop_ideal, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give affine spectrum, ideal-sheaf data, or localizations separately; none states the full scheme/stalk assertion or specializes to it in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-boundary-parameter-criterion",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; ordinary-local parameter equations for the final strict boundary in step 14. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Extracted original parameter-criterion steps 1,7,8.",
+   "via": [
+    "lem-sfb-snc-boundary-parameter-criterion",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-closed-component-stalk-calculus",
+  "worker": "stage1",
+  "summary": "Q36 checked all clauses against Stacks and the live DAG, retained the statement and handoff, and supplied ten proof steps with no new nodes. Existing affine stalk, reduced induced structure, open-subspace and spectrum prime correspondences suffice; finite localization and minimality arguments are explicit. No complete project Lean attachment was found.",
+  "blueprint": "Realizes the extracted original parameter-criterion steps 1, 7 and 8 recorded in source.place: closed-subscheme affine and stalk calculus, finite reduced component decomposition, and components through a point as minimal primes. This serves det-thm-sf-ctf-stability-direct-images proof (3) via the existing alteration/strict-boundary route. The inherited blueprint.from.node is null and is retained, as the ancestor command itself reports None; same_as searches found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic reduced induced closed-structure construction and uniqueness, used for unions and integral components; the strict-boundary unit has no separate version."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-49f7e18e9",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-49f7e18e9 (reviewer sub-agent of L); spot-checked: I read the whole item, all 13 cited statements, and the Stacks sources: 01J3 (proof: I(U)=I is radical), 0C4H (intersection is cut out by I+J), 01IN, 01HV, 00CT, 00ES, 00E3, 0BA8 and 01ON. The delivery has no new nodes. The parent's original steps 1/7/8, kept in source.place, are realized in steps 1-6, 7 and 8-9. The parent's normal-crossings part correctly stays in the parent. I accept the one declared tool use, lem-weil-pbc-reduced-induced-closed-subscheme (generic construction and uniqueness); every other proof dependency is a Mathlib leaf or a definition. No SGA is cited. Edge cases checked: H empty, V(uv) at the origin and at a generic point, V(s^2) (shows reducedness is needed), empty families, and a component missing x. Steps 1-3, 5, 6 and 8-10 are correct; step 5 handles zero divisors (v(ua-sb)=0), and step 9 checks minimality in both directions through the primes-of-localization bijection. I found no duplicate, judged against lem-weil-pbc-spec-irreducible-components-minimal-primes, closed-immersion-ideal-stalk-range and closed-component-spectrum-restriction. FIX 1 (B3/C1): 'scheme-theoretic intersection' had no definition node or inline definition, only the tag 0C4H. I added the Stacks definition inline to the statement (meaning unchanged) and to step 4 the identity (sum of tilde I_i)|_U = tilde of (sum I_i). FIX 2 (step 7): the cited finite-components leaf says only that |H| is a finite union of components, but the statement and step 9 need all components. I added the argument that a component C, being irreducible and covered by the closed sets C∩C_i, equals some C_i by maximality, and that the C_i are distinct. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedComponentStalkCalculus",
+  "declaration": "AlgebraicGeometry.closed_component_stalk_calculus",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedComponentStalkCalculus.lean",
+  "statement": "theorem closed_component_stalk_calculus (X H : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (i : H ⟶ X) [IsClosedImmersion i] : (∀ (U : X.affineOpens) (x : X) (hx : x ∈ U.1), stalkIdeal i.ker x = (i.ker.ideal U).map (X.presheaf.germ U.1 x hx).hom ∧ ∃ e : X.presheaf.stalk x ≃+* Localization.AtPrime (U.2.primeIdealOf ⟨x, hx⟩).asIdeal, (∀ b : Γ(X, U.1), e (X.presheaf.germ U.1 x hx b) = algebraMap _ _ b) ∧ (stalkIdeal i.ker x).map e.toRingHom = (i.ker.ideal U).map (algebraMap _ _)) ∧ (∀ (U : X.affineOpens) (z : H) (hz : i z ∈ U.1), ∃ e : (Localization.AtPrime (U.2.primeIdealOf ⟨i z, hz⟩).asIdeal) ⧸ (i.ker.ideal U).map (algebraMap _ _) ≃+* H.presheaf.stalk z, ∀ b : Γ(X, U.1), e (Ideal.Quotient.mk _ (algebraMap _ _ b)) = i.stalkMap z (X.presheaf.germ U.1 (i z) hz b)) ∧ (∀ x : X, x ∉ Set.range i → stalkIdeal i.ker x = ⊤) ∧ (∀ (n : ℕ) (J : Fin n → X.IdealSheafData) (x : X), stalkIdeal (⨆ j, J j) x = ⨆ j, stalkIdeal (J j) x) ∧ (∀ (n : ℕ) (J : Fin n → X.IdealSheafData), (∀ j, IsReduced (J j).subscheme) → ∀ x : X, stalkIdeal (vanishingIdeal (⨆ j, (J j).support)) x = ⨅ j, stalkIdeal (J j) x) ∧ (IsReduced H → ∃ (n : ℕ) (C : Fin n → TopologicalSpace.Closeds X), Function.Injective C ∧ Set.range (fun j ↦ (C j : Set X)) = Set.image (Set.image i) (irreducibleComponents H) ∧ (∀ j, IsIntegral (vanishingIdeal (C j)).subscheme) ∧ i.ker = vanishingIdeal (⨆ j, C j) ∧ (∀ x : X, Set.BijOn (fun j ↦ stalkIdeal (vanishingIdeal (C j)) x) {j | x ∈ C j} (stalkIdeal i.ker x).minimalPrimes) ∧ (∀ (j : Fin n) (x : X), x ∉ C j → stalkIdeal (vanishingIdeal (C j)) x = ⊤) ∧ (∀ x : X, stalkIdeal i.ker x = ⨅ (j : Fin n) (_ : x ∈ C j), stalkIdeal (vanishingIdeal (C j)) x))",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed stalkIdeal of def-trf-marked-ideal-order; stmt_deps gains that node. All other mathematical statement and proof-plan fields are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aaf74c302",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Clause-by-clause check against the node: IsLocallyNoetherian+CompactSpace = Mathlib IsNoetherian (the cited leaves), i.ker/IsClosedImmersion for H. Affine stalk ideal = I B_p with germ-pinned iso; O_{H,x} ≅ B_p/IB_p iso pinned on generators (canonical); unit ideal off range i; Fin n sums (⨆ of IdealSheafData is pointwise by ideal_iSup; n=0 gives X); reduced unions via vanishingIdeal of ⨆ supports = ⨅ stalk ideals with IsReduced hypotheses; reduced H: injective Fin n Closeds = i-images of all irreducibleComponents H, IsIntegral reduced-induced, i.ker = vanishingIdeal(⨆C), BijOn to minimalPrimes, ⊤ off C j, ⨅ over components through x. Edge cases H=∅, x∉H, n=0, identity checked. Record diff vs live: only new lean field and stmt_dep def-trf-marked-ideal-order (landed owner of stalkIdeal, acyclic); lean.statement equals file signature. No defs, sorry only, docstrings with Stacks tags/blueprint and 10 proof steps; report has Worker report and Second reading sections. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261025T051832-L-4154710",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

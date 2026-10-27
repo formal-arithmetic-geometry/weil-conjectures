@@ -1,0 +1,280 @@
+{
+ "id": "lem-per-elementary-distinguished-universal-pushout",
+ "kind": "statement",
+ "title": "Elementary distinguished squares are universal algebraic-space pushouts",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $Y,Z,V,W$ be algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Suppose $b:V\\hookrightarrow Y$ identifies $V$ with an open subspace [def-a1-space-open-subspace], $a:Z\\to Y$ is etale in the chartwise sense [def-sfb-space-chartwise-etale-morphism], and $W=Z\\times_YV$, with its projection maps [lem-trf-space-fibre-products-etale-covers]. Suppose $Z\\times_YT\\to T$ is an isomorphism, where $T\\hookrightarrow Y$ is the reduced closed subspace supported on $|Y|\\setminus|V|$, using the atlas topology [def-a1-space-point-topology, lem-sfb-space-reduced-closed-support]; a closed subspace means a representable map that is a closed immersion on scheme tests [def-weil-closed-immersion]. Then this square is a pushout in algebraic spaces over $S$: for every algebraic space $H/S$, compatible maps $Z\\to H$ and $V\\to H$ agreeing on $W$ factor uniquely through $Y$. For every morphism $t:Y'\\to Y$ of algebraic spaces over $S$, put $Z'=Z\\times_YY'$, $V'=V\\times_YY'$ and $W'=W\\times_YY'$. The resulting square has $V'\\hookrightarrow Y'$ open, $Z'\\to Y'$ chartwise etale, $W'=Z'\\times_{Y'}V'$, and $Z'\\times_{Y'}T'\\to T'$ an isomorphism for the reduced closed complement $T'$ of $V'$ in $Y'$. This base-changed square is also a pushout in algebraic spaces over $S$. No flatness, quasi-compactness or separatedness hypothesis is imposed on $t$ or on $a$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 0DVI (lemma-elementary-distinguished-square-pushout); base change is spaces-perfect.tex Tag 08GN (lemma-make-more-elementary-distinguished-squares), parts (2) and (3)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-space-open-subspace",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "def-sfb-space-chartwise-etale-morphism",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "First $|V|\\cup\\operatorname{im}|a|=|Y|$: a field-valued point of $Y$ outside $V$ factors through $T$ by lem-sfb-space-reduced-map-closed-factorization (a field is reduced), and lifts to $Z$ since $Z\\times_YT\\simeq T$. The point and open-subspace calculus identifies the inverse image of $|V|$ with $|Z\\times_YV|$. Put $D=Z\\times_YZ$ and $E=D\\times_YV\\simeq W\\times_VW$. The diagonal $\\Delta:Z\\to D$ is an open subspace: apply lem-sfb-space-etale-open-graph to $\\operatorname{id}_Z:Z\\to Z$ over $Y$, using that $a$ is chartwise etale. Also $E\\subseteq D$ is open by the scheme-test definition of an open subspace. Every field-valued point of $D$ outside $E$ maps into $|T|$, hence factors over $T$ by the same reduced-source factorization. Its two $Z$-coordinates then coincide because $Z\\times_YT\\to T$ is an isomorphism. It therefore belongs to $\\Delta$. Consequently the open subspaces $\\Delta$ and $E$ cover $D$, by lem-a1-space-point-open-calculus. This does not require the diagonal to be closed.",
+   "uses": [
+    "lem-sfb-space-reduced-map-closed-factorization",
+    "lem-sfb-space-etale-open-graph",
+    "lem-a1-space-point-open-calculus",
+    "def-a1-space-open-subspace",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0DVI (lemma-elementary-distinguished-square-pushout), proof."
+   }
+  },
+  {
+   "text": "Let $H/S$ be an algebraic space, and let $g:Z\\to H$, $h:V\\to H$ agree on $W$. The maps $g\\operatorname{pr}_1,g\\operatorname{pr}_2:D\\to H$ agree on $\\Delta$, since both diagonal projections are the identity. On $E=W\\times_VW$ each map equals $h$ composed with the common projection to $V$, by the assumed equality on $W$. For every scheme test $Q\\to D$, the inverse images of $\\Delta,E$ form an open cover of $Q$. Open immersions of schemes are etale by lem-a1-space-open-chart-tests, hence flat and locally of finite presentation by def-weil-etale-morphism; this cover is fppf by def-pc-fppf-site. The uniqueness part of the fppf sheaf condition for $H$ proves equality on $Q$. Since morphisms of algebraic spaces are natural transformations on scheme tests, $g\\operatorname{pr}_1=g\\operatorname{pr}_2$ on $D$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fppf-site",
+    "def-weil-etale-morphism",
+    "lem-a1-space-open-chart-tests"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0DVI (lemma-elementary-distinguished-square-pushout), proof."
+   }
+  },
+  {
+   "text": "The open inclusion $V\\to Y$ is chartwise etale by lem-a1-space-open-chart-tests. Thus $\\{V\\to Y,Z\\to Y\\}$ is an etale covering by Step 1 and lem-trf-space-chartwise-etale-permanence. For any scheme $R$ and $\\xi:h_R\\to Y$, let $V_R=R\\times_YV$ and $Z_R=R\\times_YZ$. Here $V_R$ is a scheme open in $R$ by the definition of open subspace. Choose a representable surjective etale scheme atlas $A\\to Z_R$, available by def-trf-algebraic-space. Chartwise etale permanence shows that the composite $A\\to R$ is representable etale: base change first gives $Z_R\\to R$ chartwise etale and composition with its scheme chart gives the assertion. The pair $\\{V_R\\to R,A\\to R\\}$ is jointly surjective by base change and composition of etale coverings (replace the member $Z_R$ by its atlas). Both arrows are etale scheme morphisms, hence flat and locally of finite presentation. It is therefore an fppf covering of $R$, without any quasi-compactness assumption.",
+   "uses": [
+    "lem-a1-space-open-chart-tests",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-a1-space-open-subspace",
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0DVI (lemma-elementary-distinguished-square-pushout), proof."
+   }
+  },
+  {
+   "text": "On the covering of Step 3 prescribe $h$ on $V_R$ and $g$ composed with $A\\to Z$ on $A$. These sections of $H$ agree on every pairwise overlap: on $V_R\\times_RA$ and $A\\times_RV_R$ both maps factor through $W$ and the assumed compatibility applies; on $A\\times_RA$ their map to $D$ allows Step 2 to apply; the $V_R$ self-overlap is immediate because $V_R\\to R$ is a monomorphism. The fppf sheaf condition produces a unique section $k_R(\\xi)\\in H(R)$. Choosing a different atlas gives the same section: restrict to the pairwise fibre products of the two covers over $R$, where the same three overlap calculations compare the prescribed sections, and use sheaf uniqueness. If $R'\\to R$, the restrictions of $k_R(\\xi)$ and the section constructed for $\\xi|_{R'}$ likewise agree on the common refinement of their covers, so are equal. Thus $\\xi\\mapsto k_R(\\xi)$ defines a natural transformation $Y\\to H$, hence an $S$-morphism. It restricts to $g$ and $h$ by its defining local values. Any other such morphism has these same values on every covering of Step 3 and is equal to it by sheaf uniqueness. This proves the original square's pushout property.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fppf-site",
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0DVI (lemma-elementary-distinguished-square-pushout), proof."
+   }
+  },
+  {
+   "text": "Now let $t:Y'\\to Y$ be arbitrary. Fibre-product associativity gives $W'\\simeq Z'\\times_{Y'}V'$, and the scheme-test definition shows that $V'\\to Y'$ is open. Chartwise etale permanence gives that $Z'\\to Y'$ is chartwise etale. Let $T'\\hookrightarrow Y'$ be the reduced closed complement of $V'$, supplied by lem-sfb-space-reduced-closed-support. That same node says that $T\\times_YY'\\hookrightarrow Y'$ has underlying point space $|t|^{-1}(|T|)$, even if it is not reduced. The point and open-subspace calculus gives $|V'|=|t|^{-1}(|V|)$, so $|t|(|T'|)\\subseteq|T|$. Since $T'$ is reduced, lem-sfb-space-reduced-map-closed-factorization yields a unique map $T'\\to T$ over $Y$. Base-changing the given isomorphism $Z\\times_YT\\simeq T$ along this map gives $Z'\\times_{Y'}T'\\simeq Z\\times_YT'\\simeq T'$. This proves all the distinguished-square hypotheses for the primed square; it does not assert $T'=T\\times_YY'$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-a1-space-open-subspace",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-reduced-closed-support",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-reduced-map-closed-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GN (lemma-make-more-elementary-distinguished-squares), part (2); omitted proof expanded using Tag 03JJ (lemma-map-into-reduction) in spaces-properties.tex."
+   }
+  },
+  {
+   "text": "Apply Steps 1--4 with $(Y,Z,V,W)$ replaced by $(Y',Z',V',W')$, using the hypotheses just verified. For every algebraic space $H/S$ the primed compatible maps factor uniquely through $Y'$, so the base-changed square is a pushout. The argument used only openness, chartwise etaleness, and the complement isomorphism, and imposed no further condition on $t$ or $a$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 0DVI (lemma-elementary-distinguished-square-pushout), proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-reduced-map-closed-factorization",
+  "lem-sfb-space-etale-open-graph",
+  "lem-a1-space-point-open-calculus",
+  "def-a1-space-open-subspace",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site",
+  "def-weil-etale-morphism",
+  "lem-a1-space-open-chart-tests",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-space-reduced-closed-support"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 0DVI (lemma-elementary-distinguished-square-pushout); arbitrary-base-change clause: spaces-perfect.tex Tag 08GN (lemma-make-more-elementary-distinguished-squares), part (2), whose omitted proof is expanded using spaces-properties.tex Tag 03JJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An elementary distinguished square of algebraic spaces is a pushout and remains a pushout after arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"AlgebraicGeometry.ValuativeCriterion.Existence.IsStableUnderBaseChange\", \"doc\": \"If a morphism of schemes satisfies the valuative criterion for existence, then any base change (pullback) of this morphism also satisfies the valuative criterion for existence. This means the property\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.UniversallyOpen\", \"doc\": \"The property of being a universally open morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally open morphism of schemes, then for any base change $ Y' \\to Y $, the\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally open if for every base change $ Y' \\\\to Y $, the induced morphism $ X \\\\times_Y Y' \\\\to Y' $ is an open map of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {A B C : CommRingCat} (f : A ⟶ B) (g : A ⟶ C),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.Spec.map (CategoryTheory.Limits.pushout.inl f g))\\n    (AlgebraicGeometry.Spec.map (CategoryTheory.Limits.pushout.inr f g)) (AlgebraicGeometry.Spec.map f)\\n    (AlgebraicGeometry.Spec.map g)\", \"doc\": \"For any ring homomorphisms $f : A → B$ and $g : A → C$ in the category of commutative rings, the square formed by the induced morphisms $\\\\operatorname{Spec}(\\\\text{pushout}(f,g)) → \\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {A B C : CommRingCat} (f : A ⟶ B) (g : A ⟶ C),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.Spec.map (CategoryTheory.Limits.pushout.inl f g))\\n    (AlgebraicGeometry.Spec.map (CategoryTheory.Limits.pushout.inr f g)) (AlgebraicGeometry.Spec.map f)\\n    (AlgebraicGeometry.Spec.map g)\", \"doc\": \"Given ring homomorphisms $f : A → B$ and $g : A → C$ in the category of commutative rings, the square formed by the induced morphisms $\\\\operatorname{Spec}(\\\\text{pushout}(f,g)) → \\\\operatorname{Spec}(B)\"}\n  {\"name\": \"AlgebraicGeometry.isPullback_Spec_map_isPushout\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {A B C P : CommRingCat} (f : A ⟶ B) (g : A ⟶ C) (inl : B ⟶ P) (inr : C ⟶ P),\\n  CategoryTheory.IsPushout f g inl inr →\\n    CategoryTheory.IsPullback (AlgebraicGeometry.Spec.map inl) (AlgebraicGeometry.Spec.map inr)\\n      (AlgebraicGeometry.Spec.map f) (AlgebraicGeometry.Spec.map g)\", \"doc\": \"Given a pushout square in the category of commutative rings with morphisms $ f: A → B $, $ g: A → C $, $ inl: B → P $, and $ inr: C → P $, the contravariant Spec functor transforms this into a pullbac\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.HasPullbacks\", \"doc\": \"For any two open immersions $ f : X \\\\to Z $ and $ g : Y \\\\to Z $ in the category of schemes, there exists a pullback of $ f $ and $ g $.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.fst\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [hg : AlgebraicGeometry.UniversallyOpen g],\\n  AlgebraicGeometry.UniversallyOpen (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the general MayerVietorisSquare structure assumes its sheaf pushout property; it does not prove the algebraic-space distinguished-square assertion or its base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nisnevich distinguished squares are universal pushouts in the category of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally open if for every base change $ Y' \\\\to Y $, the induced morphism $ X \\\\times_Y Y' \\\\to Y' $ is an open map of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"Every open immersion of schemes is a universally open morphism. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on the image), th\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.fst\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [hg : AlgebraicGeometry.UniversallyOpen g],\\n  AlgebraicGeometry.UniversallyOpen (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.out\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyOpen f],\\n  (AlgebraicGeometry.topologically @IsOpenMap).universally f\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, if $ f $ is universally open, then the underlying continuous map of $ f $ satisfies the universal property of being an open map. That is, for every base chan\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"@AlgebraicGeometry.UniversallyOpen = (AlgebraicGeometry.topologically @IsOpenMap).universally\", \"doc\": \"The property of a morphism of schemes being universally open is equivalent to the property that its underlying continuous map is an open map, and this openness is preserved under all base changes.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.UniversallyOpen\", \"doc\": \"The property of being a universally open morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally open morphism of schemes, then for any base change $ Y' \\to Y $, the\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the general MayerVietorisSquare structure assumes its sheaf pushout property; it does not prove the algebraic-space distinguished-square assertion or its base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPushout\", \"IsOpenImmersion\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the general MayerVietorisSquare structure assumes its sheaf pushout property; it does not prove the algebraic-space distinguished-square assertion or its base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elementary distinguished squares of algebraic spaces are stable under arbitrary base change and are categorical pushouts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.IsStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHomProperties\", \"type\": \": Prop\", \"doc\": \"For any commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a property $ P $ holds for the canonical ring homomorphism $ R \\\\to S $, then $ P $ also ho\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isStableUnderCobaseChange_iff_pushouts_le\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Limits\", \"type\": \": P.IsStableUnderCobaseChange ↔ P.pushouts ≤ P\", \"doc\": \"A morphism property $ P $ in a category is stable under cobase change if and only if every pushout of a morphism with property $ P $ also has property $ P $.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : AffineTargetMorphismProperty) : Prop\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': Z\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(hP' : Q.IsStableUnderBaseChange) : P.IsStableUnderBaseChange\", \"doc\": \"If a morphism property $ Q $ with affine target is stable under base change, then any property $ P $ implied by $ Q $ is also stable under base change. Specifically, whenever $ g: Y \\\\to S $ satisfies \"}\n  {\"name\": \"CategoryTheory.MorphismProperty.instIsStableUnderCobaseChangePushouts\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Limits\", \"type\": \": P.pushouts.IsStableUnderCobaseChange\", \"doc\": \"The property of being a pushout of a morphism with property $ P $ is stable under cobase change. That is, if a morphism $ q $ is a pushout of a morphism $ p $ with property $ P $, then any pushout of \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @QuasiSeparated\", \"doc\": \"The property of being quasi-separated for morphisms of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ of schemes is quasi-separated, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the general MayerVietorisSquare structure assumes its sheaf pushout property; it does not prove the algebraic-space distinguished-square assertion or its base change"
+  },
+  {
+   "tool": "grep",
+   "query": "distinguished.*square|[Nn]isnevich|universal.*pushout",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean\", \"line\": \"80\", \"text\": \"  /-- given two distinguished triangle, a commutative square\"}\n  {\"file\": \"Mathlib/GroupTheory/PushoutI.lean\", \"line\": \"25\", \"text\": \"- `Monoid.PushoutI.lift`: the universal property used to define homomorphisms out of the pushout.\"}\n  {\"file\": \"Mathlib/GroupTheory/PushoutI.lean\", \"line\": \"149\", \"text\": \"/-- The equivalence that is part of the universal property of the pushout. A hom out of\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"39\", \"text\": \"but this dissymmetry allows the example of Nisnevich distinguished\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"40\", \"text\": \"squares in the case of the Nisnevich topology on schemes (in which case\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the general MayerVietorisSquare structure assumes its sheaf pushout property; it does not prove the algebraic-space distinguished-square assertion or its base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An elementary distinguished square of algebraic spaces is a pushout after every base change",
+   "results": "LeanFinder returned eight scheme-level universally-open and Spec/pushout results (AlgebraicGeometry.UniversallyOpen, Scheme.instHasPullbacksIsOpenImmersion, isPullback_Spec_map_pushout, isPullback_Spec_map_isPushout, and base-change instances), not an algebraic-space pushout theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme base-change results and abstract pushout structures do not establish this algebraic-space criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "distinguished.*square|[Nn]isnevich|universal.*pushout",
+   "results": "[grep] OK 5 hit(s): Mathlib/GroupTheory/PushoutI.lean:25,149; CategoryTheory/Triangulated/Pretriangulated.lean:80; CategoryTheory/Sites/MayerVietorisSquare.lean:39,40. Read MayerVietorisSquare.lean:29-44,87-96: its structure assumes a sheaf pushout, rather than proving the distinguished-square criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme base-change results and abstract pushout structures do not establish this algebraic-space criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elementary distinguished squares of algebraic spaces are categorical pushouts stable under arbitrary base change",
+   "results": "[leansearch] OK 8 hit(s): general MorphismProperty cobase/base-change definitions and instances, CategoryTheory.Square.IsPushout, CategoryTheory.IsPushout.of_iso, scheme quasi-separated base change; none proves the algebraic-space distinguished-square criterion.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme base-change results and abstract pushout structures do not establish this algebraic-space criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPushout\", \"IsOpenImmersion\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme base-change results and abstract pushout structures do not establish this algebraic-space criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nisnevich distinguished squares give universal pushouts of algebraic spaces",
+   "results": "LeanFinder returned eight scheme-level results on universally open maps, their descent and open-immersion descent (including AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'), and LimitsOver; none states this assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme base-change results and abstract pushout structures do not establish this algebraic-space criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-nilpotent-etale-neighbourhood-pushout-lift",
+  "date": "2026-10-24",
+  "group": "NL"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Elkik equivalence for finite algebras etale away from the completion ideal; Algebraize the completed Jacobian presentation; this produces a finite TYPE model, whose finiteness is proved separately in the item. Subargument: Assembling quotient algebraizations into a principal-complete model. Supporting subargument: Tag 0AKA (lemma-approximate), proof from “We claim that we may choose” through the application of lemma-lift-approximation, before “By construction”. Supporting input: 0AKA claim paragraph, final application of lemma-lift-approximation to C-prime_m and the already chosen C_(m-1). In Tag 0ALT, the open/etale pushout construction and its comparison after base change.",
+   "via": [
+    "lem-per-nilpotent-etale-neighbourhood-pushout-lift",
+    "lem-per-rig-etale-compatible-model-tower",
+    "lem-per-rig-etale-principal-reduction",
+    "lem-per-rig-etale-jacobian-algebraization",
+    "lem-per-elkik-finite-etale-away-completion",
+    "lem-per-gabber-partial-algebraization",
+    "lem-per-gabber-local-duality-general",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-elementary-distinguished-universal-pushout",
+  "worker": "stage1",
+  "summary": "Q50 checked Stacks 0DVI and expanded the omitted arbitrary-base-change proof in 08GN. The diagonal/open-overlap calculation and fppf descent on scheme tests are explicit. Existing DAG lemmas provide the chartwise etale, point-space, open-graph and reduced-source inputs, so no new nodes are needed. Imported doubled TeX escapes were normalized without changing the mathematical statement.",
+  "blueprint": "Realizes the elementary open/etale pushout and its arbitrary-base-change comparison in Tag 0ALT, the supporting subargument named in blueprint.from.place of the item; ancestor lem-per-artin-gabber-affine-curve Step 1 via the recorded local-duality/partial-algebraization chain. The latest blueprint ancestor and its unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-space-reduced-map-closed-factorization",
+    "why": "Generic reduced-source closed-factorization criterion, used on field points and on the new reduced complement; the unit gives no replacement."
+   },
+   {
+    "node": "lem-sfb-space-etale-open-graph",
+    "why": "Generic openness of graphs into chartwise etale algebraic spaces, applied to the identity to get the diagonal open; no unit-local statement gives this."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point images of fibre products and the criterion that an open with full point image is the whole space; used to check covers and complement inverse images."
+   },
+   {
+    "node": "lem-a1-space-open-chart-tests",
+    "why": "Generic scheme-test openness, monomorphism and chartwise etaleness of open inclusions; needed for actual scheme coverings."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic arbitrary-base-change and composition laws for chartwise etale maps and coverings, including the scheme-source characterization."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and sheaf description of fibre products of algebraic spaces, used for all displayed products."
+   },
+   {
+    "node": "lem-sfb-space-reduced-closed-support",
+    "why": "Generic existence of reduced closed complements and topological behavior of a closed subspace under arbitrary base change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-space-reduced-map-closed-factorization",
+  "lem-sfb-space-etale-open-graph",
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-open-chart-tests",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-reduced-closed-support"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-bd7ee697d",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-bd7ee697d (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item and all six steps, every cited statement, and Stacks 0DVI (spaces-pushouts.tex l.1507-1544), the definition of an elementary distinguished square and 08GN (spaces-perfect.tex l.1296-1343, where the proof is omitted). The statement is unchanged from base apart from removing doubled backslashes, and it matches the definition plus 0DVI and 08GN(2). Step 1: a field point outside V factors through the reduced T (reduced-map-closed-factorization) and lifts to Z. The diagonal of Z x_Y Z is open by etale-open-graph applied to id_Z over Y. A point outside E maps into T, so its two Z-coordinates coincide through Z x_Y T = T. Step 2: the diagonal and E give an open fppf cover of every scheme test, and the sheaf uniqueness for H applies. Steps 3-4: V_R together with a scheme atlas A of Z_R is an fppf cover; it is chartwise etale and jointly surjective by the permanence lemma, and a need not be representable. Gluing on the overlaps uses W, step 2 and the fact that V_R -> R is a monomorphism; atlas independence, naturality and uniqueness are written out. This is 0DVI on scheme tests. Step 5 correctly supplies the omitted 08GN(2) proof: |T'| = |t|^-1|T|, the reduced T' maps to T, and Z' x T' = (Z x_Y T) x_T T' = T'. It does not claim T' = T x_Y Y', which is right (the k[eps] example). Edge cases checked: V=Y, V empty, Z empty, nonseparated a. No new nodes. Duplicate search (rg -L for 0DVI/08GN/elementary distinguished): lem-per-open-separated-etale-pushout states the 0DVJ construction, and lem-sfb-space-distinguished-derived-gluing states 08HB with 08GN(2) only as an embedded clause; neither duplicates the item. There is no cycle: the item is not in its own proof and statement closure. Batch 5: four of the listed citations reach sec-trace-formula only through the general definition def-trf-algebraic-space, which is already a stmt_dep of the item. lem-trf-space-chartwise-etale-permanence is a generic permanence lemma for etale maps of algebraic spaces, not a step of the trace formula or of Poincare duality. I accept all of them. I accept as tool_uses the generic sfb, a1 and trf algebraic-space lemmas. The worker listed tool_uses inside split_report; the content is correct, so I left it unchanged. No fixes."
+ }
+}

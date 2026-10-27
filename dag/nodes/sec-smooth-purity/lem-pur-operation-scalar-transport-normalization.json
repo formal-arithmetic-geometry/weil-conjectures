@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-operation-scalar-transport-normalization",
+ "kind": "statement",
+ "title": "Existence and uniqueness of tensor- and counit-normalized scalar transport",
+ "statement": "For a prime l, finite normed extensions E and F of Q_l and a coefficient embedding i : E → F, on any scheme W the record OperationScalarTransport l E F i W [def-pur-operation-scalar-transport] is nonempty and is a subsingleton. Its ordinary part preserves pure tensor sections [def-weil-integral-scalar-extension, lem-weil-scalar-extension-composition], and its derived part preserves the actual computation counit [def-pur-completed-coefficient-presentation-transport, lem-pur-completed-scalar-transport-counit].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Stacks 03EK and 06YY; completed scalar comparison in blueprint sk-thm-purity-transport Steps 2--3. These two normalization theorems are completely proved, extracted to keep the existing setup file within the compilation limit."
+ },
+ "stmt_deps": [
+  "def-pur-operation-scalar-transport",
+  "def-pur-completed-coefficient-presentation-transport",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "lem-pur-completed-scalar-transport-counit"
+ ],
+ "proof": [
+  {
+   "text": "Compare integralCompletedScalarMap with completedCoefficientMap using their uniquely prescribed residue maps. Both ordinary scalar functors have the recorded sheafified change-of-rings objects and morphisms. Their object equalities therefore give a natural isomorphism that sends every pure tensor to the same tensor. The sheafification Hom equivalence and the ordinary tensor Hom extensionality theorem prove uniqueness. Transport exactness through that ordinary isomorphism. Compose its exact derived isomorphism with the inverse of completedTensorModel; completedTensorModel_counit and mapDerivedCategoryNatIso_fac give precisely the recorded universal-counit equation. This same counit is invertible on every complex, so localization extensionality and cancellation give uniqueness of the derived comparison. Proof irrelevance yields uniqueness of OperationScalarTransport. Retain scalarPresentation, integralScalar and the reduction coefficient comparison unchanged.",
+   "uses": [
+    "def-pur-operation-scalar-transport",
+    "def-pur-completed-coefficient-presentation-transport",
+    "def-weil-integral-scalar-extension",
+    "lem-weil-scalar-extension-composition",
+    "lem-pur-completed-scalar-transport-counit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-operation-scalar-transport",
+  "def-pur-completed-coefficient-presentation-transport",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "lem-pur-completed-scalar-transport-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "The actual ordinary sheafified tensor model, the exact derived comparison with normalized counit, localization extensionality, and proof irrelevance."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived_ext",
+   "results": "1 hits: CategoryTheory.Functor.leftDerived_ext",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing completedTensorModel and completedTensorModel_counit; no new localization theory is required."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*ext|leftDerived.*uniq|tensor.*ext",
+   "results": "25 hits: Mathlib/Algebra/Algebra/Bilinear.lean, Mathlib/Algebra/Algebra/Bilinear.lean, Mathlib/Algebra/Algebra/Bilinear.lean, Mathlib/NumberTheory/Padics/Measure/Basic.lean, Mathlib/Geometry/Convex/Cone/TensorProduct.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/RingTheory/PicardGroup.lean",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing completedTensorModel and completedTensorModel_counit; no new localization theory is required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two natural transformations out of a left derived functor are equal if their composites with the universal counit are equal",
+   "results": "8 hits: CategoryTheory.Functor.leftDerived_ext, CategoryTheory.Functor.leftDerivedUnique, CategoryTheory.Functor.leftDerivedNatTrans_fac, CategoryTheory.Functor.rightDerived_ext, CategoryTheory.Functor.rightDerivedUnique, CategoryTheory.Functor.leftDerived_fac, CategoryTheory.Functor.leftDerivedNatIso_hom, CategoryTheory.Functor.leftDerivedNatTrans_app",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing completedTensorModel and completedTensorModel_counit; no new localization theory is required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportCondensedRealizationSetup",
+  "date": "2026-10-27",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-condensed-realization-setup",
+   "place": "Scalar comparison in proof step 3.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OperationScalarTransportNormalization",
+  "file": "lean/Sheaf/Paper/OperationScalarTransportNormalization.lean",
+  "declaration": "WeilConjectures.CompactSupportCondensedRealization.operationScalarTransport_subsingleton",
+  "declarations": [
+   "WeilConjectures.CompactSupportCondensedRealization.operationScalarTransport_subsingleton",
+   "WeilConjectures.CompactSupportCondensedRealization.operationScalarTransport_nonempty"
+  ],
+  "statement": "theorem operationScalarTransport_subsingleton (W : Scheme.{u}) :\n    Subsingleton (OperationScalarTransport l E F i W)",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T050541-L-236112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T050541-L-236112",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

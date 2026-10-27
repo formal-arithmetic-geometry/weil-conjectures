@@ -1,0 +1,252 @@
+{
+ "id": "lem-trf-etale-coordinate-divisor-parameters",
+ "kind": "statement",
+ "title": "Marked coordinate divisor parameters under etale pullback",
+ "statement": "Let $C$ be a commutative Noetherian regular ring [def-weil-pbc-noetherian-ring, def-weil-regular-scheme], $U=\\operatorname{Spec}C$, and $z_1,\\ldots,z_r\\in C$, with $r\\ge0$. Suppose that at each $y\\in U$ the vanishing members of this indexed list occupy distinct positions in a regular system of parameters of $\\mathcal O_{U,y}$ [def-weil-pbc-regular-system-of-parameters]. Put $P=\\prod_{j=1}^r z_j$, with empty product $1$, and $D=V(P)$. For every etale morphism $h:W\\to U$ [def-weil-etale-morphism], including $h=1_U$, the scheme $W$ is regular and locally Noetherian [pqf-def-locnoeth]. More precisely, for each $w\\in W$, $y=h(w)$, the stalk map takes every chosen full regular system of parameters of $\\mathcal O_{U,y}$ to a full regular system of parameters of $\\mathcal O_{W,w}$. The pullback germ $z_j(w)$ is a nonunit exactly when $z_j(y)$ is a nonunit, and these vanishing germs occupy the same distinct parameter positions. The local equation $h^*P$ is a unit times the product of precisely those marked parameter germs. Multiplication by $P$ on $C$, and multiplication by $h^*P$ on every local ring of $W$, are injective. Consequently $h^{-1}D$ is an effective Cartier divisor [def-nagata-effective-cartier-ideal] with normal crossings [def-trf-normal-crossings-divisor], allowing the empty divisor. Its number of geometric branches at a geometric point above $w$ equals $\\#\\{j:z_j(y)\\in\\mathfrak m_y\\}\\le r$, independently of the etale neighborhood. Using strict henselizations [def-sc-ring-strict-henselization], a geometric branch means a minimal prime of the reduced strict henselian local ring of the divisor, with number zero off the divisor. If $r=0$, then $P=1$ and all these divisors are empty.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07QP, lemma-dimension-etale-extension, and Tag 0AH0, lemma-regular-etale-extension; algebra.tex Tag 00U4, lemma-etale-at-prime, and Tag 00KU, definition-regular-local; ILO VIII 4.1.6 and 4.1.8, printed pp. 118--119, for geometric branch interpretation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-etale-morphism",
+  "pqf-def-locnoeth",
+  "def-nagata-effective-cartier-ideal",
+  "def-trf-normal-crossings-divisor",
+  "def-sc-ring-strict-henselization"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-regular-scheme] and [pqf-def-locnoeth], $U=\\operatorname{Spec}C$ is regular and locally Noetherian. Apply [lem-trf-etale-coordinate-intersection-geometry] to the list $z_1,\\ldots,z_r,1$ of length $r+1\\geq1$ and to $h$. The appended unit vanishes nowhere, so this list satisfies exactly the given condition on distinct parameter positions. The cited statement gives regularity and local Noetherianity of $W$, transport of every chosen full regular system from $\\mathcal O_{U,y}$ to $\\mathcal O_{W,w}$, and equality of the vanishing index sets. In a local ring the elements with zero residue are precisely its nonunits. Thus, writing $I_y=\\{j:z_j(y)\\in\\mathfrak m_y\\}$, the pullbacks indexed by $I_y$ occupy the same distinct positions in the transported system; precisely the remaining germs are units.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "pqf-def-locnoeth",
+    "lem-trf-etale-coordinate-intersection-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07QP (lemma-dimension-etale-extension) and 0AH0 (lemma-regular-etale-extension); algebra.tex Tag 00U4 (lemma-etale-at-prime)"
+   }
+  },
+  {
+   "text": "In $R=\\mathcal O_{W,w}$ put $x_j=h^*z_j$ for $j\\in I_y$ and $v=\\prod_{j\\notin I_y}h^*z_j$. Every factor of $v$ is a unit by Step 1, so $v$ is a unit, and the ring-homomorphism and finite-product identities give $h^*P=v\\prod_{j\\in I_y}x_j$. This proves the asserted local equation, including $I_y=\\varnothing$, when the equation is a unit. The indexed sublist has no repeated parameter position by Step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07QP (lemma-dimension-etale-extension) and 0AH0 (lemma-regular-etale-extension); algebra.tex Tag 00U4 (lemma-etale-at-prime)"
+   }
+  },
+  {
+   "text": "The full system in $R$ generates its maximal ideal and has length $\\dim R$. By [lem-weil-pbc-regular-local-generators-regular-sequence], every permutation is an $R$-regular sequence. For each marked $x_j$, choose a permutation putting that parameter first. By [def-weil-pbc-regular-sequence], multiplication by this first parameter on $R$ is injective. Multiplication by $\\prod_{j\\in I_y}x_j$ is the composite of these injective multiplication maps and hence is injective; for the empty product it is the identity. Multiplication by the unit $v$ is invertible, so multiplication by $h^*P$ is injective on $R$. This applies to every $w$ and also to $h=1_U$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NQ, lemma-regular-ring-CM, applied after permuting the regular system; definition of a regular sequence"
+   }
+  },
+  {
+   "text": "Local injectivity implies injectivity on affine sections by the following explicit argument. For an affine open $V=\\operatorname{Spec}B\\subset W$, write $f=(h^*P)|_V\\in B$ and suppose $fb=0$. Step 3 implies $b/1=0$ in $B_{\\mathfrak p}$ for every prime $\\mathfrak p$. If $b\\neq0$, its annihilator is a proper ideal; choose a maximal ideal $\\mathfrak p$ containing it. The equality $b/1=0$ gives an $s\\notin\\mathfrak p$ with $sb=0$, contrary to $s\\in\\operatorname{Ann}(b)\\subseteq\\mathfrak p$. Thus $b=0$. Applying the same argument to $\\operatorname{Spec}C$ with $h=1_U$ proves injectivity of multiplication by $P$ on $C$. In the zero ring injectivity holds directly.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary annihilator and localization argument supplementing Tags 00NQ and 00KU"
+   }
+  },
+  {
+   "text": "The inverse image closed subscheme $h^{-1}D=D\\times_UW$ has on each affine $V$ the principal ideal $(f)$: pulling back a principal equation replaces $P$ by $h^*P$. Step 4 proves that this generator is a non-zero-divisor. Hence [def-nagata-effective-cartier-ideal] makes this an effective Cartier divisor. At every $w$ its stalk ideal equals $(\\prod_{j\\in I_y}x_j)$ by Step 2, with distinct members of a full regular system. Taking the identity etale neighborhood of $W$ in [def-trf-normal-crossings-divisor] proves normal crossings, including the empty sublist. In particular this also proves the assertion about $D$ by taking $h=1_U$.",
+   "uses": [
+    "def-nagata-effective-cartier-ideal",
+    "def-trf-normal-crossings-divisor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 4.1.2, printed p.117, local product-of-parameters description; 4.1.8, printed p.118"
+   }
+  },
+  {
+   "text": "Fix a geometric point over $w$ and let $H$ be a strict henselization of $R$ with the induced separable residue-field closure [def-sc-ring-strict-henselization]. Apply [lem-trf-parameter-product-strict-local-branches] to $R$ and the distinct marked parameters $x_j$ from Step 1, and set $F=\\prod_{j\\in I_y}x_j$. For $I_y\\neq\\varnothing$ it says that $H/(F)$ is a strict henselization of $R/(F)$ and that its reduction has exactly $|I_y|$ minimal primes. The unit $v$ gives $(h^*P)=(F)$ both in $R$ and in $H$, so these quotients compute exactly the divisor in the statement. This proves the required geometric branch count. For $I_y=\\varnothing$ the equation is a unit, the divisor is absent at $w$, and the branch count is zero; the cited lemma also treats $F=1$. Since $|I_y|$ is computed at $y$ and Step 1 preserves this same index set for every $h$ and $w$, the number is independent of the etale neighborhood and is at most $r$. If $r=0$ then $P=1$ globally and every divisor under discussion is empty.",
+   "uses": [
+    "def-sc-ring-strict-henselization",
+    "lem-trf-parameter-product-strict-local-branches"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 4.1.6 and 4.1.8, printed p.118; local algebra of parameter-product branches as in the cited DAG lemma"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "pqf-def-locnoeth",
+  "lem-trf-etale-coordinate-intersection-geometry",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "def-weil-pbc-regular-sequence",
+  "def-nagata-effective-cartier-ideal",
+  "def-trf-normal-crossings-divisor",
+  "def-sc-ring-strict-henselization",
+  "lem-trf-parameter-product-strict-local-branches"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 07QP and 0AH0 with algebra.tex Tags 00U4 and 00NQ; ILO VIII 4.1.2, 4.1.6 and 4.1.8 for the normal-crossings and geometric branch interpretation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsRegularSystemOfParameters|[Ee]tale.*[Rr]egular|[Rr]egular.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-22T05:58:47Z\", \"tool\": \"grep\", \"query\": \"IsRegularSystemOfParameters|[Ee]tale.*[Rr]egular|[Rr]egular.*[Ee]tale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale local ring homomorphisms preserve a specified regular parameter system and the geometric branch number of a product of coordinate functions",
+   "results": "{\"t\": \"2026-10-22T05:58:48Z\", \"tool\": \"leansearch\", \"query\": \"Etale local ring homomorphisms preserve a specified regular parameter system and the geometric branch number of a product of coordinate functions\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularSystemOfParameters\"",
+   "results": "{\"t\": \"2026-10-22T05:58:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegularSystemOfParameters\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism over a regular Noetherian scheme any chosen local regular system of parameters pulls back to a full regular system at each point; a product of marked coordinates defines a normal crossings Cartier divisor with one geometric branch for each vanishing coordinate",
+   "results": "{\"t\": \"2026-10-22T05:58:59Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale morphism over a regular Noetherian scheme any chosen local regular system of parameters pulls back to a full regular system at each point; a product of marked coordinates defines a normal crossings Cartier divisor with one geometric branch for each vanishing coordinate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.instEtaleOfIsStandardEtale\", \"StandardEtalePair.instEtaleRing\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.IsEtaleAt\"], \"digest\": \"9005c9b3879a6481\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A list of local parameters in a regular local ring remains a regular parameter system in each local ring of an etale algebra; marked coordinate divisors keep their branches",
+   "results": "{\"t\": \"2026-10-22T05:59:13Z\", \"tool\": \"leanfinder\", \"query\": \"A list of local parameters in a regular local ring remains a regular parameter system in each local ring of an etale algebra; marked coordinate divisors keep their branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation.P\", \"StandardEtalePair\", \"StandardEtalePair.instEtaleRing\", \"StandardEtalePresentation\", \"Algebra.instIsStandardEtaleRing\", \"StandardEtalePresentation.hasMap\", \"Algebra.IsStandardEtale\", \"Algebra.IsStandardEtale.nonempty_standardEtalePresentation\"], \"digest\": \"8ba0987fc54477c8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale morphisms preserve regular parameter systems and a product of marked coordinates defines a normal crossings effective Cartier divisor with one geometric branch for each vanishing parameter",
+   "results": "{\"t\": \"2026-10-22T09:30:30Z\", \"tool\": \"leanfinder\", \"query\": \"Etale morphisms preserve regular parameter systems and a product of marked coordinates defines a normal crossings effective Cartier divisor with one geometric branch for each vanishing parameter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair\", \"StandardEtalePresentation\", \"StandardEtalePair.hasMap_X\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation.P\", \"StandardEtalePresentation.toSubmersivePresentation\", \"StandardEtalePair.instEtaleRing\", \"StandardEtalePresentation.hasMap\"], \"digest\": \"95d4f3a600942613\"}; Read the hits: standard etale presentations, formal etale base change, regular-element multiplication, Henselian predicates and localization of already regular sequences do not state the parameter-transport plus geometric-branch theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularSystemOfParameters|[Ee]tale.*[Rr]egular|[Rr]egular.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-22T09:30:59Z\", \"tool\": \"grep\", \"query\": \"IsRegularSystemOfParameters|[Ee]tale.*[Rr]egular|[Rr]egular.*[Ee]tale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: standard etale presentations, formal etale base change, regular-element multiplication, Henselian predicates and localization of already regular sequences do not state the parameter-transport plus geometric-branch theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A product of distinct regular parameters gives an effective Cartier normal crossings divisor preserved by etale morphisms with the same geometric branches",
+   "results": "{\"t\": \"2026-10-22T09:30:59Z\", \"tool\": \"leansearch\", \"query\": \"A product of distinct regular parameters gives an effective Cartier normal crossings divisor preserved by etale morphisms with the same geometric branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.instTensorProduct\", \"IsRegular.prodMk\", \"isRegular_mul_iff\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"14f7f60136cda6e4\"}; Read the hits: standard etale presentations, formal etale base change, regular-element multiplication, Henselian predicates and localization of already regular sequences do not state the parameter-transport plus geometric-branch theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, IsRegularLocalRing",
+   "results": "{\"t\": \"2026-10-22T09:31:00Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, IsRegularLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: standard etale presentations, formal etale base change, regular-element multiplication, Henselian predicates and localization of already regular sequences do not state the parameter-transport plus geometric-branch theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a regular local ring a product of a subset of a regular system of parameters is a nonzerodivisor and its quotient has as many strict henselian branches as factors; etale localization preserves the parameters",
+   "results": "{\"t\": \"2026-10-22T09:31:25Z\", \"tool\": \"leanfinder\", \"query\": \"In a regular local ring a product of a subset of a regular system of parameters is a nonzerodivisor and its quotient has as many strict henselian branches as factors; etale localization preserves the parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"Polynomial.instEtaleUniversalCoprimeFactorizationRing\", \"StandardEtalePair\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.exists_etale_of_isEtaleAt\", \"PowerSeries.weierstrassDistinguished_mul\", \"HenselianRing\"], \"digest\": \"a0d94339b6b126b4\"}; Read the hits: standard etale presentations, formal etale base change, regular-element multiplication, Henselian predicates and localization of already regular sequences do not state the parameter-transport plus geometric-branch theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nc-coordinate-blowup-branch-drop",
+  "date": "2026-10-22",
+  "group": "N0"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "ILO VIII 4.1.8 and Lemma 4.2.9, printed pp. 118 and 121: the blowup-chart computation showing that the strict transform of the deepest stratum divisor has depth one smaller. Old proof steps 6 and 8: Cartier and normal-crossings consequences, pointwise parameter transport and geometric branches.",
+   "via": [
+    "lem-trf-nc-coordinate-blowup-branch-drop",
+    "lem-trf-nc-maximal-branch-blowup",
+    "lem-trf-normal-crossings-strictification",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-etale-coordinate-divisor-parameters",
+  "worker": "stage1",
+  "group": "Q79",
+  "summary": "Six-step split reusing the existing coordinate-intersection and strict-local-branch lemmas; no new nodes. Appended a unit coordinate to cover r=0, proved injectivity by permuting regular parameter systems and an explicit annihilator argument, and checked the branch quotient after removing the unit factor. Added only an explicit definition citation to the unchanged strict-henselization meaning.",
+  "blueprint": "Realizes the local Cartier, normal-crossings and geometric-branch input of ILO VIII 4.1.8 to the existing normal-crossings strictification chain beneath lem-trf-local-term-locality. Retains the recorded ancestry through lem-trf-nc-coordinate-blowup-branch-drop; does not alter the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic local commutative algebra from Stacks 00NQ gives regularity of every permutation of a full parameter system. The same-unit coordinate-intersection lemma does not assert nonzerodivisors; this is used solely to establish injective multiplication by individual marked parameters."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-5c1d3bca3",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-5c1d3bca3 (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes. The statement only gains a def-sc-ring-strict-henselization citation and stmt_dep, which leaves the meaning unchanged (compared with the base copy from the N0 run). Six steps checked. Step 1 applies lem-trf-etale-coordinate-intersection-geometry to z_1..z_r with 1 appended; the unit keeps the index sets and distinct positions, and t_j lies in Gamma(U,O). Step 2: the unit factor v. Step 3: R is regular local by Step 1; putting each marked parameter first in a permutation, the 00NQ node (a declared tool use) gives a non-zero-divisor. Step 4: a correct annihilator argument takes injectivity from the local rings to affine sections. Step 5: the effective Cartier and normal-crossings definitions are met by the identity neighbourhood. Step 6: lem-trf-parameter-product-strict-local-branches applied to R/(h*P)=R/(F) gives the branch count |I_y|; I_y is computed at y, so the count does not depend on h. Sources checked: Stacks 07QP (more-algebra 10831), 0AH0 (10858), ILO VIII 4.1.6/4.1.8 (pdf p.124). Edge cases: r=0, C=0, dim-0 stalks, h=1, repeated labels (impossible), non-affine W, points off D. Batch-5 flags: both cited trf lemmas are generic commutative algebra (regular-parameter transport under étale maps; strict-henselization minimal primes). They are unsplit with only definition stmt_deps, are not given by either assumption and are not trace-formula or Poincaré-duality steps, so I accept them. Advisory: the branch clause overlaps lem-trf-nc-coordinate-max-stratum (same leaf lemmas, s>=1), but this is not a duplicate."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCoordinateDivisorParameters",
+  "declaration": "AlgebraicGeometry.etale_coordinate_divisor_parameters",
+  "declarations": [
+   "AlgebraicGeometry.etaleCoordinateGermMap",
+   "AlgebraicGeometry.etale_coordinate_divisor_parameters"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoordinateDivisorParameters.lean",
+  "statement": "theorem etale_coordinate_divisor_parameters {C : Type u} [CommRing C] [IsRegularRing C] (r : ℕ) (z : Fin r → C) (hcoord : ∀ y : Spec (.of C), ∃ t : List ((Spec (.of C)).presheaf.stalk y), IsLocalRing.IsRegularSystemOfParameters t ∧ ∃ f : {j : Fin r // ¬ IsUnit ((StructureSheaf.toStalk C y).hom (z j))} → Fin t.length, Function.Injective f ∧ ∀ j, t.get (f j) = (StructureSheaf.toStalk C y).hom (z j)) (D : (Spec (.of C)).IdealSheafData) (hD : D = Scheme.IdealSheafData.ofIdealTop ((Ideal.span {∏ j : Fin r, z j}).map (Scheme.ΓSpecIso (.of C)).inv.hom)) : Function.Injective (fun a : C ↦ (∏ j : Fin r, z j) * a) ∧ (∀ (W : Scheme.{u}) (h : W ⟶ Spec (.of C)), Etale h → IsRegularScheme W ∧ (∀ w : W, ∃ hN : IsNoetherianRing (W.presheaf.stalk w), (∀ t : List ((Spec (.of C)).presheaf.stalk (h w)), IsLocalRing.IsRegularSystemOfParameters t → @IsLocalRing.IsRegularSystemOfParameters (W.presheaf.stalk w) _ _ hN (t.map (h.stalkMap w).hom)) ∧ (∀ j : Fin r, (¬ IsUnit (etaleCoordinateGermMap h w (z j))) ↔ ¬ IsUnit ((StructureSheaf.toStalk C (h w)).hom (z j))) ∧ (∀ (t : List ((Spec (.of C)).presheaf.stalk (h w))) (f : {j : Fin r // ¬ IsUnit ((StructureSheaf.toStalk C (h w)).hom (z j))} → Fin t.length), IsLocalRing.IsRegularSystemOfParameters t → Function.Injective f → (∀ j, t.get (f j) = (StructureSheaf.toStalk C (h w)).hom (z j)) → ∀ j, (t.map (h.stalkMap w).hom).get (Fin.cast (List.length_map (h.stalkMap w).hom).symm (f j)) = etaleCoordinateGermMap h w (z j)) ∧ (∃ v : (W.presheaf.stalk w)ˣ, etaleCoordinateGermMap h w (∏ j : Fin r, z j) = (v : W.presheaf.stalk w) * ∏ j : {j : Fin r // ¬ IsUnit ((StructureSheaf.toStalk C (h w)).hom (z j))}, etaleCoordinateGermMap h w (z j)) ∧ Function.Injective (fun a : W.presheaf.stalk w ↦ etaleCoordinateGermMap h w (∏ j : Fin r, z j) * a)) ∧ (D.comap h).IsInvertible ∧ (D.comap h).IsNormalCrossingsDivisor ∧ (∀ (w : W) (K H : Type (max u v)) [Field K] [Algebra (IsLocalRing.ResidueField (W.presheaf.stalk w)) K] [IsSepClosure (IsLocalRing.ResidueField (W.presheaf.stalk w)) K] [Algebra (W.presheaf.stalk w) K] [IsScalarTower (W.presheaf.stalk w) (IsLocalRing.ResidueField (W.presheaf.stalk w)) K] [CommRing H] [Algebra (W.presheaf.stalk w) H], Algebra.StrictHenselizationPresentationIn.{u, v} (W.presheaf.stalk w) K H → Nonempty ((minimalPrimes (H ⧸ (Ideal.span {algebraMap (W.presheaf.stalk w) H (etaleCoordinateGermMap h w (∏ j : Fin r, z j))}).radical)) ≃ {j : Fin r // ¬ IsUnit ((StructureSheaf.toStalk C (h w)).hom (z j))})) ∧ (∀ w : W, Nat.card {j : Fin r // ¬ IsUnit ((StructureSheaf.toStalk C (h w)).hom (z j))} ≤ r) ∧ (r = 0 → (∏ j : Fin r, z j) = 1 ∧ IsEmpty (D.comap h).subscheme))",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0a0ead47",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Node diff vs side-live: only lean added. All clauses match the node: IsRegularRing C; hcoord = RSOP with injective marking of nonunit indices; D pinned by hD to ofIdealTop(span{∏z}); ·P injective on C; for every etale h: IsRegularScheme W, RSOP transport, nonunit iff, same positions, unit·∏ marked germs, stalk injectivity; (D.comap h) IsInvertible and IsNormalCrossingsDivisor (recorded owners; Mathlib comap = ideal of D×_U W); minimalPrimes(H/rad(h*P)) ≃ marked index subtype for every K and StrictHenselizationPresentationIn.{u,v} (checked true, 0 off the divisor); Nat.card ≤ r; r=0 gives empty divisor. Edge cases (C=0, r=0, dim 0, h=𝟙, empty or non-affine W) and universes fine. Helper etaleCoordinateGermMap is a genuine composite with docstrings; stmt_deps complete; no name clash in side-live; proof is sorry only; report has both sections (second reading done by the same worker, accepted). No recompile since no file was changed."
+ }
+}

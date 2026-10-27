@@ -1,0 +1,372 @@
+{
+ "id": "lem-sfb-space-absolute-noetherian-approximation",
+ "kind": "statement",
+ "title": "Absolute Noetherian approximation for qcqs algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and atlas point topology [def-a1-space-point-topology]. A space is quasi-compact if every open cover of its point space has a finite subcover, and quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. A morphism is quasi-compact if its pullback to every affine scheme test has quasi-compact source, and quasi-separated if its relative diagonal is quasi-compact. An affine morphism is representable by schemes and has affine source after every affine scheme test. Local finite presentation and local finite type are tested on compatible etale scheme charts [def-sfb-space-morphism-properties]; finite presentation means local finite presentation, quasi-compactness and quasi-separatedness. Assume $S=\\operatorname{Spec}\\mathbf Z$ [def-weil-affine-spectrum] and let $Y$ be quasi-compact and quasi-separated. There exist a small nonempty directed set $I$ and an inverse system $(Y_i)_{i\\in I}$ over $\\operatorname{Spec}\\mathbf Z$ with affine transitions, such that $Y\\cong\\varprojlim_iY_i$ and every $Y_i$ is quasi-separated and of finite type over $\\mathbf Z$. Every $Y_i$ is Noetherian: it is quasi-compact, quasi-separated, and an etale scheme atlas is locally Noetherian [pqf-def-locnoeth]. No Noetherian or finite type assumption is made on $Y$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07SU (proposition-approximate); Noetherian stages by spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian) over Spec Z, and finite type quasi-compactness."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties",
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-affine-quasifinite-properties",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-qcqs-space-splitting-filtration] to $Y$. We prove by descending induction that every $U_p$ has an affine inverse system of quasi-separated finite-type $\\mathbf Z$-spaces as in the assertion, postponing the Noetherian clause to the end. Each $U_p$ is qcqs: quasi-compactness is in the filtration statement, and quasi-separatedness follows from [lem-sfb-space-integral-qcqs-permanence], which explicitly states that qc open subspaces of quasi-separated spaces are quasi-separated. For the base $p=n$, the filtration identifies $U_n$ with the qc separated scheme $V_n$. Apply [prop-nagata-noetherian-inverse-system] to this scheme. Use [lem-weil-pbc-cofiltered-limit-directed-reindex] to replace the small cofiltered scheme system by a nonempty directed set. Its finite-type scheme stages are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and thus quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. If $Y$ is empty, the constant one-stage empty scheme system already suffices.",
+   "uses": [
+    "lem-sfb-qcqs-space-splitting-filtration",
+    "prop-nagata-noetherian-inverse-system",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-sfb-space-integral-qcqs-permanence",
+    "lem-weil-pbc-cofiltered-limit-directed-reindex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SU (proposition-approximate), first paragraph: filtration and schematic base of descending induction"
+   }
+  },
+  {
+   "text": "For the induction step put $X=U_p$, $U=U_{p+1}$, $V=V_p$, $Z=T_p$, and $f=f_p$. Thus $f:V\\to X$ is surjective etale and is an isomorphism over the reduced closed complement $Z$ of $U$. The induction hypothesis gives $U=\\varprojlim U_i$ with qcqs finite-type stages and affine transitions. Put $W=V\\times_XU$, an open subscheme of $V$. By [lem-sfb-qcqs-space-fibre-product], $W$ is qcqs. The map $W\\to U$ is etale by [lem-trf-space-chartwise-etale-permanence], hence locally finitely presented; by [lem-sfb-space-qcqs-permanence] it is also quasi-compact and quasi-separated, hence finitely presented. Apply [lem-sfb-space-fp-over-space-limit-descent] to obtain $W_0\\to U_0$ finitely presented with base change $W\\to U$. Its source is qcqs by [lem-sfb-space-fp-qcqs-source]. Apply [lem-sfb-space-etaleness-eventual-stage] and replace $0$ by the resulting index, so that $W_0\\to U_0$ is etale.",
+   "uses": [
+    "lem-sfb-qcqs-space-fibre-product",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-fp-over-space-limit-descent",
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-space-etaleness-eventual-stage",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SU (proposition-approximate), second and third paragraphs: the six hypotheses and descending W"
+   }
+  },
+  {
+   "text": "For $i\\geq0$ set $W_i=W_0\\times_{U_0}U_i$. By [lem-sfb-space-flat-proper-fp-locality] the maps $W_i\\to U_i$ remain finitely presented, so their sources are qcqs by [lem-sfb-space-fp-qcqs-source]. Base change preserves etaleness by [lem-trf-space-chartwise-etale-permanence]. Their transitions are affine and $W=\\varprojlim W_i$ by [lem-sfb-space-affine-locality] and [lem-sfb-space-affine-limits-schematic-stages]. Since $W$ is a scheme, that latter node allows a further tail on which every $W_i$ is a scheme. The etale map $W_i\\to U_i$ is locally of finite type. It is quasi-compact by [lem-sfb-space-qcqs-permanence], so is of finite type. Compose it with the finite-type map $U_i\\to\\operatorname{Spec}\\mathbf Z$ using [lem-sfb-space-finite-type-composition]; the scheme agreement in [lem-sfb-space-local-properties-chart-test] then makes $W_i$ a finite-type scheme over $\\mathbf Z$. Apply [lem-sfb-scheme-approximation-prescribed-open] to the qc separated scheme $V$ and the qc open $W\\subset V$. Reindex the $U_i,W_i$ by its cofinal $\\alpha$ and relabel the new index set as $I$. We obtain $V=\\varprojlim V_i$, with $V_i$ finite-type schemes and affine transitions, and open subschemes $W_i\\subset V_i$ preserved by inverse image. Cofinality preserves $U=\\varprojlim U_i$: compatible cones extend uniquely using common upper bounds. All $V_i$ and $W_i$ are quasi-separated by [lem-weil-pbc-finite-type-over-noetherian] and [lem-weil-pbc-locally-noetherian-quasi-separated].",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-sfb-scheme-approximation-prescribed-open",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-finite-type-composition",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SU (proposition-approximate), third and fourth paragraphs: schematic stages and prescribed-open scheme approximation"
+   }
+  },
+  {
+   "text": "Write $E_i=W_i\\times_{U_i}W_i$. It is a scheme by [lem-trf-space-fibre-products-etale-covers]. Its projections are etale by [lem-trf-space-chartwise-etale-permanence]. The diagonal $W_i\\to E_i$ is etale: both its source and target are etale over $W_i$, so apply the cancellation clause of that same node. It is a monomorphism, hence an open immersion by [lem-sfb-space-etale-monomorphism-open]. Use [lem-weil-pbc-glue-schemes] to form the scheme $R_i=V_i\\cup_{W_i}E_i$ along this diagonal and $W_i\\subset V_i$. The two projections of $E_i$ and the identity on $V_i$ agree on $W_i$, so glue to maps $s_i,t_i:R_i\\to V_i$. They are etale on the two open charts, hence etale by [lem-weil-pbc-etale-local-on-source]. The relation is the identity off $W_i$ and the kernel relation of $W_i\\to U_i$ on $W_i$. More explicitly, its identity is the $V_i$ chart, inversion is identity on that chart and exchanges the factors of $E_i$, and composition on the open charts of composable pairs is the identity law if either arrow is in $V_i$, and $(a,b),(b,c)\\mapsto(a,c)$ if both are in $E_i$. These maps agree on chart intersections. On each test scheme these formulas give a unique arrow for each related pair, reflexivity, symmetry and transitivity; local uniqueness on the charts gives the monomorphism $R_i\\to V_i\\times V_i$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-etale-monomorphism-open",
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SU (proposition-approximate), fourth paragraph: construction and etale equivalence-relation laws of R_i"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-etale-relation-quotient] to set $X_i=V_i/R_i$. This is an algebraic space with surjective etale chart $V_i\\to X_i$ and kernel pair $R_i$. It is quasi-compact since the chart map is continuous and surjective and $V_i$ is quasi-compact. The scheme $E_i$ is qcqs by [lem-sfb-qcqs-space-fibre-product]; hence $R_i$, the union of two quasi-compact opens, is quasi-compact. Its maps to the quasi-separated scheme $V_i$ are quasi-compact by [lem-sfb-space-qcqs-permanence]. Now [lem-sfb-space-qs-atlas-criterion] gives quasi-separatedness of $X_i$. By [lem-sfb-space-local-properties-chart-test], finite type of $V_i$ gives local finite type of $X_i\\to\\operatorname{Spec}\\mathbf Z$; together with quasi-compactness (or the same permanence node over the affine base), this makes $X_i$ of finite type over $\\mathbf Z$.",
+   "uses": [
+    "lem-trf-etale-relation-quotient",
+    "lem-sfb-qcqs-space-fibre-product",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-qs-atlas-criterion",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SU (proposition-approximate), fourth paragraph: quotient stages and their finiteness"
+   }
+  },
+  {
+   "text": "The transition maps on $V_i$ and $E_i$ agree on $W_i$, so glue to $R_i\\to R_j$ for $i\\geq j$ and induce $X_i\\to X_j$ by the quotient universal property in [lem-trf-etale-relation-quotient]. Their identity and composition equations hold after the surjective charts $V_i$, hence hold on the quotients. The square $(R_i,V_i)\\to(R_j,V_j)$ with the source projections is cartesian. Indeed, pull back the open cover $R_j=V_j\\cup E_j$ along $V_i\\to V_j$: the pieces are $V_i$ and $E_j\\times_{s_j,V_j}V_i$, glued along $W_i$. Since $W_i=V_i\\times_{V_j}W_j=W_j\\times_{U_j}U_i$, the second piece is $E_i$. Its two projections are the prescribed ones. The two resulting chart isomorphisms agree on $W_i$, proving the asserted cartesian square. The same argument shows the inverse images in $R_i$ of the opens $V_j,E_j,W_j$ are exactly $V_i,E_i,W_i$.",
+   "uses": [
+    "lem-trf-etale-relation-quotient",
+    "lem-weil-pbc-glue-schemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SU (proposition-approximate), equation 07SV and transition compatibility"
+   }
+  },
+  {
+   "text": "The source-cartesian square gives $V_i\\cong X_i\\times_{X_j}V_j$ as follows, using the local lifting and kernel-pair clauses of [lem-trf-etale-relation-quotient]. A section of the right side is a class $x_i$ and a lift $v_j$ of its image. Etale locally lift $x_i$ to $v_i$. The equality in $X_j$ is etale locally an arrow $r_j$ joining the image of $v_i$ to $v_j$. The source-cartesian square gives a unique arrow $r_i$ with source $v_i$ over $r_j$; its target is the required lift over $v_j$. Two such lifts differ by an arrow over the identity arrow of $v_j$; source-cartesianness forces this arrow to be the identity. Thus the local lifts glue uniquely, proving the comparison is an isomorphism. By [lem-sfb-space-affine-locality], affineness of $V_i\\to V_j$ now proves affineness of $X_i\\to X_j$. By [lem-sfb-space-affine-limits-schematic-stages], $X\\prime=\\varprojlim X_i$ exists and base change commutes with the limit. Fix a stage $0$. The cartesian squares identify $V=\\varprojlim V_i$ with $X\\prime\\times_{X_0}V_0$, so $V\\to X\\prime$ is surjective etale by [lem-trf-space-chartwise-etale-permanence]. Its kernel pair is $R=\\varprojlim R_i$ by the same base-change formula, applied to $R_0=V_0\\times_{X_0}V_0$.",
+   "uses": [
+    "lem-trf-etale-relation-quotient",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SU (proposition-approximate), cartesian quotient squares and the affine limit X prime"
+   }
+  },
+  {
+   "text": "The transitions $R_i\\to R_j$ are affine: step 6 identifies them with base changes of $V_i\\to V_j$, and [lem-sfb-space-affine-locality] preserves affineness under base change. The scheme $R$ is obtained by gluing $V$ and $W\\times_UW$ along $W$. To see the limit comparison on actual charts, fix stage $0$. The opens $V_0,E_0$ cover $R_0$; all later inverse images are $V_i,E_i$ by step 6. Base change of the limit along these two opens, using [lem-sfb-space-affine-limits-schematic-stages], therefore identifies their inverse images in $R$ with $\\varprojlim V_i=V$ and $\\varprojlim E_i=W\\times_UW$. The latter identity follows directly from the universal property: compatible pairs in $W_i$ with equal images in every $U_i$ are exactly pairs in $W$ with equal images in $U$. Their intersection is $\\varprojlim W_i=W$. These identifications preserve both projections to $V$.",
+   "uses": [
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-affine-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SU (proposition-approximate), last paragraph: identifying the limit relation chart by chart"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-etale-atlas-presentation] to $f:V\\to X$, giving its relation $V\\times_XV$ and quotient $X$. The diagonal $V\\to V\\times_XV$ is an open immersion by the same cancellation and monomorphism argument of step 4, using [lem-trf-space-chartwise-etale-permanence] and [lem-sfb-space-etale-monomorphism-open]. The other open is $W\\times_UW$. These opens cover: a geometric pair not above $U$ lies above $Z$, and $V\\times_XZ\\to Z$ is an isomorphism, so the pair is diagonal. On their intersection the two components lie in $W$ and agree, hence the intersection is exactly $W$. This checks coverage on underlying point classes; both pieces are open subspaces, so it is a scheme open cover. Thus the gluing description of step 8 gives a unique isomorphism $R\\cong V\\times_XV$ preserving both projections. Apply [lem-a1-etale-atlas-presentation] also to $V\\to X\\prime$: both $X$ and $X\\prime$ are the same sheaf quotient $V/R$, hence are isomorphic. This completes the induction step and hence the construction for $Y=U_1$.",
+   "uses": [
+    "lem-a1-etale-atlas-presentation",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-etale-monomorphism-open",
+    "lem-weil-pbc-glue-schemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SU (proposition-approximate), last paragraph: comparison with the original relation and completion of induction"
+   }
+  },
+  {
+   "text": "For every newly constructed stage $X_i$, the displayed atlas $V_i\\to X_i$ is a scheme of finite type over $\\mathbf Z$. By [lem-weil-pbc-finite-type-over-noetherian], $V_i$ is Noetherian, in particular locally Noetherian. The definition of locally Noetherian for spaces in the item asks for such an etale atlas, so $X_i$ is locally Noetherian. Step 5 already proves quasi-compactness and quasi-separatedness. The schematic base case has the same Noetherian property by step 1. Thus every final $Y_i$ is Noetherian in the precise sense asserted. All index sets and reindexings are small in the fixed universes: the filtration is finite, and the scheme systems and prescribed-open refinement are small; no construction uses a proper-class index. None of the steps assumed $Y$ locally Noetherian or of finite type.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SU (proposition-approximate), Noetherian-stage consequence of Tag 04ZK; direct verification on the constructed finite-type scheme atlas"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-a1-etale-atlas-presentation",
+  "lem-sfb-qcqs-space-fibre-product",
+  "lem-sfb-qcqs-space-splitting-filtration",
+  "lem-sfb-scheme-approximation-prescribed-open",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-etale-monomorphism-open",
+  "lem-sfb-space-etaleness-eventual-stage",
+  "lem-sfb-space-finite-type-composition",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-fp-over-space-limit-descent",
+  "lem-sfb-space-fp-qcqs-source",
+  "lem-sfb-space-integral-qcqs-permanence",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-qs-atlas-criterion",
+  "lem-trf-etale-relation-quotient",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "prop-nagata-noetherian-inverse-system"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07SU (proposition-approximate), complete proof; Noetherian conclusion checked on the constructed finite-type scheme charts using Tag 01T6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi-compact quasi-separated algebraic space over the integers is an inverse limit of Noetherian algebraic spaces of finite type over the integers with affine transition morphisms",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty, AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsNoetherian\", \"IsLimit\"",
+   "results": "Actual logged search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Nn]oetherian.*[Aa]pprox|[Aa]pprox.*[Nn]oetherian",
+   "results": "Actual logged search: 0 hits; . Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Absolute Noetherian approximation for quasi compact quasi separated algebraic spaces with affine inverse system transitions",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.quasiCompact_of_noetherianSpace_source, NoetherianSpace.to_quasiSeparatedSpace, AlgebraicGeometry.IsNoetherian.casesOn, AlgebraicGeometry.Scheme.compactSpace_of_isLimit, AlgebraicGeometry.IsNoetherian.toCompactSpace, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi-separated algebraic spaces of finite type over the integers approximate arbitrary qcqs algebraic spaces by affine inverse limits",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Nn]oetherian.*[Aa]pprox|[Aa]pprox.*[Nn]oetherian",
+   "results": "Actual logged search: 0 hits; . Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations are scheme Noetherian and inverse-limit results; no algebraic-space approximation theorem. Read Mathlib/AlgebraicGeometry/Noetherian.lean:239-250 and AffineTransitionLimit.lean:1040-1061; their types are schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Absolute Noetherian approximation for algebraic spaces with affine transition maps",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.IsLocallyNoetherian.mk, AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.noetherianSpace_of_isAffineOpen, AlgebraicGeometry.IsLocallyNoetherian.recOn, AlgebraicGeometry.IsLocallyNoetherian.casesOn, AlgebraicGeometry.noetherianSpace_of_isAffine, AlgebraicGeometry.IsNoetherian.noetherianSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations are scheme Noetherian and inverse-limit results; no algebraic-space approximation theorem. Read Mathlib/AlgebraicGeometry/Noetherian.lean:239-250 and AffineTransitionLimit.lean:1040-1061; their types are schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNoetherian\", \"IsLimit\"",
+   "results": "Actual logged search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations are scheme Noetherian and inverse-limit results; no algebraic-space approximation theorem. Read Mathlib/AlgebraicGeometry/Noetherian.lean:239-250 and AffineTransitionLimit.lean:1040-1061; their types are schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi compact quasi separated algebraic space is an affine inverse limit of quasi separated algebraic spaces of finite type over the integers",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.quasiCompact_over_affine_iff, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations are scheme Noetherian and inverse-limit results; no algebraic-space approximation theorem. Read Mathlib/AlgebraicGeometry/Noetherian.lean:239-250 and AffineTransitionLimit.lean:1040-1061; their types are schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic spaces which are qcqs can be approximated by Noetherian spaces over Spec integers using inverse limits",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.isNoetherian_iff, AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.IsNoetherian.toCompactSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations are scheme Noetherian and inverse-limit results; no algebraic-space approximation theorem. Read Mathlib/AlgebraicGeometry/Noetherian.lean:239-250 and AffineTransitionLimit.lean:1040-1061; their types are schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-surjective-affine-space-target",
+  "date": "2026-10-23",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 07SU (proposition-approximate); Noetherian stages by spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian) over Spec Z, and finite type quasi-compactness.",
+   "via": [
+    "lem-sfb-finite-surjective-affine-space-target",
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-absolute-noetherian-approximation",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and followed the filtration and etale-relation gluing proof of Stacks 07SU. Created three substantive statement-only prerequisites (07ST, 07SL and 07RN); reused existing general space-limit and quotient nodes. Wrote out the source-cartesian and quotient-cartesian comparisons, the limit-relation chart calculation and the original-relation identification. Noetherian stages follow on their actual finite-type scheme atlases.",
+  "blueprint": "The current latest blueprint direct-images proof (3) is the high-level proper/open preservation route. This existing generated branch supplies the absolute-approximation input to its finite-surjective-affine-space-target sublemma. The seeded blueprint ancestor is null; its full from.place and via chain are retained. Searches of the whole imported blueprint found no matching algebraic-space statement.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-etale-atlas-presentation",
+    "why": "Generic geometric input to Stacks 07SU: An etale atlas presents an algebraic space as its relation quotient. No statement in this unit replaces this general tool."
+   },
+   {
+    "node": "lem-trf-etale-relation-quotient",
+    "why": "Generic geometric input to Stacks 07SU: Etale equivalence relations have algebraic-space quotients. No statement in this unit replaces this general tool."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic geometric input to Stacks 07SU: Chartwise etale permanence for algebraic spaces. No statement in this unit replaces this general tool."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic geometric input to Stacks 07SU: Fibre products of algebraic spaces and pullback of etale coverings. No statement in this unit replaces this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-etale-atlas-presentation",
+  "lem-trf-etale-relation-quotient",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-8676426f1",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-8676426f1 (reviewer sub-agent of L); spot-checked: Read Stacks 07SU in full (spaces-limits proposition-approximate), plus 07ST (decent-spaces), 07SL with Situation 084W, and 07RN with its J=∐P_i construction. First delivery: live and side-live have the item unsplit with 0 steps, and there is no re-split note. Item statement is verbatim from base; no SGA anywhere. New nodes: (1) splitting-filtration is true as stated. U_p is qc because it is the image of qc V_p, and f_n is an isomorphism because it is étale and an isomorphism over (U_n)_red. X=∅ works. No existing 07ST node. (2) etaleness-eventual-stage is exactly 07SL for space bases. The scheme version 07RP exists but no space version does. (3) scheme-approximation-prescribed-open is 07RN; the added cofinality of α is true since α(i,p)=i with every P_i nonempty. W=∅ gives 01ZA and W=X is trivial. It is not a Nagata marked-subring duplicate. All 10 steps were checked against the cited statements: hypotheses for qs-atlas, fp-descent over space bases, eventual schematicity, the E_j×V_i=E_i cartesian computation, a hand-written groupoid-criterion argument, coverage of V×_XV by Δ(V) and W×_UW over Z, and the Noetherian clause via finite type over Z. No restated clause and no circularity. Batch-5 flags: def-trf-algebraic-space, trf space fibre products (02X2), etale-relation-quotient (02WW) and chartwise-etale permanence are generic space foundations. Their closures contain no nt-assume and no trace-formula or Poincaré-duality proof node, so they are accepted. Tool uses accepted: prop-nagata-noetherian-inverse-system, lem-a1-etale-atlas-presentation and the trf space foundations. FIX (B5): the blueprint.from.place of lem-sfb-space-etaleness-eventual-stage cited 'Situation 0CQC', which is more-algebra Rlim-modules; corrected to 084W in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-etaleness-eventual-stage.json. Nothing else is changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAbsoluteNoetherianApproximation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_absoluteNoetherianApproximation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAbsoluteNoetherianApproximation.lean",
+  "statement": "theorem exists_absoluteNoetherianApproximation (Y : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))) (hqc : CompactSpace (Point Y.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated Y) : ∃ (I : Type u) (_ : Preorder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·)) (D : Iᵒᵖ ⥤ AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))) (π : (Functor.const Iᵒᵖ).obj Y ⟶ D), Nonempty (IsLimit (Cone.mk Y π)) ∧ (∀ (i j : I) (h : i ≤ j), MapIsAffine (D.map (homOfLE h).op)) ∧ ∀ i : I, IsAbsolutelyQuasiSeparated (D.obj (op i)) ∧ (∃ p : D.obj (op i) ⟶ schemeSpace (Over.mk (𝟙 (Spec (CommRingCat.of (ULift.{u} ℤ))))), MapIsFiniteType p) ∧ CompactSpace (Point (D.obj (op i)).obj.obj) ∧ ∃ (U : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) (a : yoneda.obj U ⟶ (D.obj (op i)).obj.obj), IsEtale a ∧ IsSurjective a ∧ IsLocallyNoetherian U.left",
+  "branch": "sheaf-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "A limiting cone has vertex Y; affine transitions and the qc, absolute qs, finite-type and locally Noetherian atlas clauses are stated explicitly. Finite type is the existing MapIsFiniteType predicate on a map to the representable base, whose map is unique since the base is terminal."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ac762d18",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 148fb3d2b39b. Diffed against the previous snapshot: Lean byte-identical; the only node change is stmt_dep lem-trf-space-enlarged-etale-ringed-site-model → def-trf-scheme-algebraic-space (definition node, existing:true, owns schemeSpace in EnlargedEtaleRingedSite, on base since 2026-10-18). Live vs delivery differs only by the lean record and three existing owner stmt_deps; nothing reverted, item not landed. Rechecked against Stacks 07SU/04ZK: Spec ULift Z base; only qc and absolute-qs hypotheses on Y; small nonempty directed I; limiting cone with vertex Y; MapIsAffine transitions; each stage absolute qs, qc, MapIsFiniteType via the unique map to terminal schemeSpace, and a locally Noetherian surjective etale atlas. Empty, singleton and non-Noetherian cases covered. sorry only, docstrings with source and blueprint id, statement verbatim. No compile (nothing changed)."
+ }
+}

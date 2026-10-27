@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-space-sepclosed-components-base-change",
+ "kind": "statement",
+ "title": "Connected components of algebraic spaces over separably closed fields",
+ "statement": "Let $k$ be a separably closed field [def-weil-field, def-pc-separably-closed], let $L/k$ be any field extension [def-pc-field-extension], and let $Z$ be an algebraic space over $\\operatorname{Spec}k$ [def-trf-algebraic-space, def-weil-affine-spectrum]. Give point spaces their atlas topology [def-a1-space-point-topology], and use sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A connected component is a maximal nonempty connected subset, and connected means nonempty and admitting no partition into two nonempty relatively open subsets. Put $Z_L=Z\\times_{\\operatorname{Spec}k}\\operatorname{Spec}L$ and let $p:Z_L\\to Z$ be the projection. Then $|p|$ is continuous, surjective and open. Inverse image under $|p|$ gives a bijection from the connected components of $|Z|$ to the connected components of $|Z_L|$. A component $D\\subseteq |Z|$ is open and closed if and only if $|p|^{-1}(D)$ is open and closed. Consequently every open-and-closed component $C\\subseteq Z_L$ is uniquely of the form $D\\times_kL$ for an open-and-closed component subspace $D\\subseteq Z$, with open-subspace structures [def-a1-space-open-subspace]. In particular, $Z$ is connected if and only if it is geometrically connected over $k$, where the latter means that $Z_{k'}$ is connected for every field extension $k'/k$. No quasi-compactness or finite type hypothesis on $Z$, or algebraicity hypothesis on $L/k$, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Tag 0A12, lemma-separably-closed-field-connected-components. The inverse-image form and clopen clause use the open surjection in its proof; universal openness is spaces-morphisms.tex Tag 06DN, lemma-space-over-field-universally-open. Open-subspace structures are as in spaces-properties.tex, section-open-subspaces."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-separably-closed",
+  "def-pc-field-extension",
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-a1-space-point-topology",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-open-subspace",
+  "def-sfb-proper-curve-moduli",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-over-field-universally-open] with $X=\\operatorname{Spec}L$ and $Y=Z$: its projection is $p$, so $|p|$ is open. By [lem-a1-space-point-open-calculus], $|p|$ is continuous. These inputs allow arbitrary algebraic spaces and arbitrary field extensions; no finite-presentation argument is being used.",
+   "uses": [
+    "lem-sfb-space-over-field-universally-open",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0A12 via lemma-bijection-connected-components; openness is Tag 06DN."
+   }
+  },
+  {
+   "text": "The scheme $\\operatorname{Spec}L$ is nonempty and connected: a field has exactly one prime ideal, $(0)$. Apply [lem-weil-separably-closed-geometrically-connected] over the separably closed field $k$. Thus $\\operatorname{Spec}L$ is geometrically connected over $k$, and for every field extension $K/k$ the scheme $\\operatorname{Spec}L\\times_k\\operatorname{Spec}K$ is nonempty and connected.",
+   "uses": [
+    "lem-weil-separably-closed-geometrically-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0A12, first two sentences; the scheme input is varieties.tex Tag 0363."
+   }
+  },
+  {
+   "text": "For $z\\in|Z|$, choose a representative $\\operatorname{Spec}K\\to Z$. The point-image formula of [lem-a1-space-point-open-calculus], applied to $Z_L\\to Z$ and this representative, says that the image of $|Z_L\\times_Z\\operatorname{Spec}K|$ in $|Z_L|$ is exactly $|p|^{-1}(\\{z\\})$. The sheaf pullback universal property [lem-trf-space-fibre-products-etale-covers] identifies this source with $\\operatorname{Spec}L\\times_k\\operatorname{Spec}K$: on every test scheme both functors are the same compatible pairs. It is connected and nonempty by step 2. Its continuous image is therefore connected and nonempty: a separation of the image would pull back to a separation of the source. This proves that every fibre of $|p|$ is connected, and also proves surjectivity.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "lemma-bijection-connected-components, fibre-image paragraph, using spaces-properties.tex Tag 03H4."
+   }
+  },
+  {
+   "text": "The open continuous surjection $|p|$ has the quotient topology: for every subset $A\\subseteq|Z|$, if $|p|^{-1}(A)$ is closed, then $|Z|\\setminus A=|p|(|Z_L|\\setminus|p|^{-1}(A))$ is open; the converse is continuity. Apply [lem-sfb-quotient-connected-component-preimage] to obtain $|p|^{-1}(\\operatorname{Comp}_{|Z|}(p(x)))=\\operatorname{Comp}_{|Z_L|}(x)$ for every $x$. Given a component $D$, choose $z\\in D$ and a lift $x$; this equality makes its inverse image a component. Every component upstairs contains some $x$, so occurs this way; surjectivity makes inverse image injective on subsets. This is the required bijection. If $Z$ is empty, both component sets are empty and the assertions are vacuous.",
+   "uses": [
+    "lem-sfb-quotient-connected-component-preimage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0377, lemma-connected-fibres-quotient-topology-connected-components; Tag 0378, lemma-connected-fibres-connected-components."
+   }
+  },
+  {
+   "text": "For any subset $D\\subseteq|Z|$, continuity carries clopenness to its inverse image. Conversely, if $|p|^{-1}(D)$ is clopen, openness and surjectivity give $D=|p|(|p|^{-1}(D))$ and $|Z|\\setminus D=|p|(|p|^{-1}(|Z|\\setminus D))$ open. Hence $D$ is clopen. This applies in particular to the corresponding components of step 4.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0A12, clopen refinement of the open-surjection proof."
+   }
+  },
+  {
+   "text": "Let $C$ be a clopen component upstairs and let $D\\subseteq|Z|$ be the unique corresponding component from step 4. Step 5 makes $D$ clopen. By [lem-a1-space-etale-open-image], its open subset has a unique open subspace structure. By [lem-a1-space-open-factor-scheme-tests], the open subspace $D\\times_kL\\subseteq Z_L$ has point image $|p|^{-1}(D)=|C|$. The inclusion-preserving bijection between open subspaces and open subsets in [lem-a1-space-etale-open-image] identifies it with $C$. The same bijection, together with injectivity of inverse image on subsets, proves uniqueness of the open component subspace $D$.",
+   "uses": [
+    "lem-a1-space-etale-open-image",
+    "lem-a1-space-open-factor-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BZ, lemma-open-subspaces; Tag 03IE, lemma-factor-through-open-subspace, with the pullback point-image formula."
+   }
+  },
+  {
+   "text": "If $Z$ is connected, it is nonempty and its only connected component is $|Z|$. Step 4, for every extension $k\\subseteq k'$, makes $|Z_{k'}|$ its only component; it is nonempty by surjectivity. Thus $Z$ is geometrically connected. Conversely use the identity field extension in the definition of geometric connectedness. The empty space satisfies neither connectedness convention.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0A12, final assertion; definition-geometrically-connected."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-quotient-connected-component-preimage",
+  "lem-sfb-space-over-field-universally-open",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-separably-closed-geometrically-connected"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Tag 0A12, lemma-separably-closed-field-connected-components, through lemma-bijection-connected-components; explicit quotient and clopen refinement with topology.tex Tag 0377 and spaces-properties.tex Tags 03BZ/03IE."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "separably.?closed.*connected|connected.*separably.?closed",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theory and topological hits do not prove the algebraic-space base-change assertion; Mathlib/AlgebraicGeometry/Geometrically/Connected.lean:35-131 is explicitly for schemes, not arbitrary algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a separably closed field arbitrary field extension induces a bijection on connected components of an algebraic space and preserves its open and closed connected components",
+   "results": "IsSepClosed.splits_domain; separableClosure; IsSepClosure.recOn; separableClosure.map_eq_of_algEquiv; IsSepClosure.isGalois; SeparableClosure.isSepClosed; separableClosure.isGalois; separableClosure.isPurelyInseparable",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theory and topological hits do not prove the algebraic-space base-change assertion; Mathlib/AlgebraicGeometry/Geometrically/Connected.lean:35-131 is explicitly for schemes, not arbitrary algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyConnected\", \"connectedComponents\"",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theory and topological hits do not prove the algebraic-space base-change assertion; Mathlib/AlgebraicGeometry/Geometrically/Connected.lean:35-131 is explicitly for schemes, not arbitrary algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space over a separably closed field, base change to any extension field preserves connected components",
+   "results": "instTotallySeparatedSpaceAlgEquivOfIsIntegral; AlgebraicGeometry.IsSeparated.isStableUnderBaseChange; Algebra.IsAlgebraic.isSepClosed; IsSepClosed.lift_def; AlgebraicGeometry.isField_of_universallyClosed; IsSepClosed.lift; IsSepClosed; AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theory and topological hits do not prove the algebraic-space base-change assertion; Mathlib/AlgebraicGeometry/Geometrically/Connected.lean:35-131 is explicitly for schemes, not arbitrary algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyConnected|connectedComponents",
+   "results": "Mathlib/AlgebraicGeometry/Geometrically/Connected.lean; Mathlib/AlgebraicGeometry/Geometrically/Connected.lean; Mathlib/AlgebraicGeometry/Geometrically/Connected.lean; Mathlib/AlgebraicGeometry/Geometrically/Connected.lean; Mathlib/AlgebraicGeometry/Geometrically/Connected.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theory and topological hits do not prove the algebraic-space base-change assertion; Mathlib/AlgebraicGeometry/Geometrically/Connected.lean:35-131 is explicitly for schemes, not arbitrary algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connected components and clopen connected subspaces are unchanged by scalar extension from a separably closed field",
+   "results": "krullTopology_isTotallySeparated; instTotallySeparatedSpaceAlgEquivOfIsIntegral; isClosed_restrictScalars_separableClosure; IsClopen.biUnion_connectedComponent_eq; IsClopen.connectedComponent_subset; isClopen_connectedComponent; IsClopen.biUnion_connectedComponentIn; separableClosure.le_restrictScalars",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theory and topological hits do not prove the algebraic-space base-change assertion; Mathlib/AlgebraicGeometry/Geometrically/Connected.lean:35-131 is explicitly for schemes, not arbitrary algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space over a separably closed field any field extension preserves connected components",
+   "results": "{\"t\": \"2026-10-23T19:48:50Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebraic space over a separably closed field any field extension preserves connected components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instTotallySeparatedSpaceAlgEquivOfIsIntegral\", \"Algebra.IsAlgebraic.isSepClosed\", \"IsSepClosed.lift_def\", \"krullTopology_isTotallySeparated\", \"IsSepClosed\", \"IsSepClosed.lift\", \"IsSepClosure\", \"IsSepClosed.algebraMap_surjective\"], \"digest\": \"9f03e1895a7224cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme geometric-connectedness declarations and field-theory results do not state the arbitrary algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyConnected|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T19:48:41Z\", \"tool\": \"grep\", \"query\": \"GeometricallyConnected|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\"], \"digest\": \"f48fd85825251808\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme geometric-connectedness declarations and field-theory results do not state the arbitrary algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyConnected\", \"ConnectedComponents\"",
+   "results": "{\"t\": \"2026-10-23T19:49:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"GeometricallyConnected\\\", \\\"ConnectedComponents\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme geometric-connectedness declarations and field-theory results do not state the arbitrary algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension from a separably closed field preserves all connected components of an algebraic space",
+   "results": "{\"t\": \"2026-10-23T19:49:56Z\", \"tool\": \"leansearch\", \"query\": \"Scalar extension from a separably closed field preserves all connected components of an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSepClosed.lift\", \"IsSepClosed.lift_def\", \"separableClosure\", \"IsSepClosure.recOn\", \"separableClosure.isPurelyInseparable\", \"Algebra.IsAlgebraic.isSepClosed\", \"IsSepClosure.separable\", \"isSepClosure_iff\"], \"digest\": \"94a5f259642675ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme geometric-connectedness declarations and field-theory results do not state the arbitrary algebraic-space assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-space-proper-component-neighbourhood",
+  "date": "2026-10-24",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Proper neutral subgroup from local infinitesimal smoothness. Supporting input: Etale neighbourhood carrying one proper smooth fibre component. Further prerequisite: Field-extension prerequisite for applying the henselian proper-part theorem to the specified geometric component: descend that component to the separably closed residue field of the strict localization.",
+   "via": [
+    "lem-sfb-smooth-space-proper-component-neighbourhood",
+    "lem-sfb-smooth-group-proper-neutral",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-sepclosed-components-base-change",
+  "worker": "stage1",
+  "summary": "Prove connected nonempty projection fibres using the existing scheme geometric-connectedness theorem and the existing algebraic-space point calculus. Separate universal openness as a general statement-only prerequisite and the exact component-preimage equality as a Mathlib leaf. Write out the quotient topology, component bijection, clopen equivalence, open-subspace identity, uniqueness and empty case. Statement unchanged.",
+  "blueprint": "The current latest det-thm-sf-ctf-stability-direct-images proof (3), through the existing alteration/Picard prerequisite chain recorded in blueprint.from.place, requires descent of a geometric proper component to the separably closed residue field. All seven steps implement this prerequisite. The ancestor command returns None because the historical created.item chain terminates at a Lean module name; retain that null rather than invent ancestry. The intended current blueprint proof and existing via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Continuity and fibre point images for arbitrary algebraic spaces, absent from this unit."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "The sheaf fibre-product universal property for the fibre identification, absent from this unit."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Identification of open subspaces with open point subsets, absent from this unit."
+   },
+   {
+    "node": "lem-a1-space-open-factor-scheme-tests",
+    "why": "The arbitrary pullback point image of an open subspace, absent from this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-open-factor-scheme-tests"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-e5c58cbba",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-e5c58cbba (reviewer sub-agent of L); spot-checked: PASS, no fixes. The item statement and stmt_deps are unchanged from the live and side-live copies (item still unsplit there; first delivery, no repair note). I read Stacks Tag 0A12 and its preceding lemma (spaces-over-fields.tex l.2107-2150), Tag 06DN (spaces-morphisms.tex l.860-883), Topology Tags 0377/0378 (topology.tex l.720-761) and Mathlib Clopen.lean:487-490 (IsCoinducing.preimage_connectedComponent) with Maps/Basic.lean:267. Step 1: the new 06DN node with X=Spec L, Y=Z gives |p| open; continuity is a clause of point-open-calculus. Step 2: Spec L is one point; lem-weil-separably-closed-geometrically-connected with def-pc-geometrically-irreducible gives Spec L x_k Spec K connected for every K/k. Step 3: the 03H4 image formula of point-open-calculus gives the fibre as the image of Spec K x_k Spec L (sheaf fibre-product universal property). The map from a scheme's Zariski space onto its point space is continuous and surjective by the definition of the final topology (identity atlas), so the fibres are connected and nonempty and p is surjective. Step 4: open surjection gives the quotient topology; the leaf with its exact hypotheses gives the component bijection; empty Z is handled. Step 5: elementary clopen equivalence. Step 6: etale-open-image gives the bijection between open subspaces and open subsets, and the last clause of open-factor-scheme-tests gives the point image of J x_Z Z_L; uniqueness follows by injectivity. Step 7: geometric connectedness for every k', converse via the identity extension. New nodes: the 06DN node is statement-only, self-contained and true. It is not a duplicate: lem-sfb-flat-lfp-space-universally-open needs lfp, and lem-sc-scheme-over-field-universally-open (0383) is for schemes only. The Mathlib leaf is an exact match; it lies close to lem-weil-pbc-connected-fibres-quotient-preimage-connected but is not a duplicate (advisory only). Neither new node restates the item. The 4 recorded tool_uses (a1/trf algebraic-space foundations: 03H4, 03BZ, 03IE, 02X2) are accepted. Batch-5 flags: I computed the closures; they reach only trf algebraic-space definitions, fibre-product existence and fppf/etale-relation descent foundations, never a trace-formula or Poincare-duality statement or proof step, so they are generic and accepted. No SGA source is used. Details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSepClosedComponentsBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.sepClosed_components_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.structuralMapToBase",
+   "AlgebraicGeometry.AlgebraicSpace.extensionFieldSpace",
+   "AlgebraicGeometry.AlgebraicSpace.extensionFieldBaseMap",
+   "AlgebraicGeometry.AlgebraicSpace.fieldScalarExtension",
+   "AlgebraicGeometry.AlgebraicSpace.fieldScalarExtensionProjection",
+   "AlgebraicGeometry.AlgebraicSpace.sepClosed_components_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSepClosedComponentsBaseChange.lean",
+  "statement": "theorem sepClosed_components_baseChange (k L : Type u) [Field k] [IsSepClosed k] [Field L] [Algebra k L] (Z : AlgebraicSpace (Spec (CommRingCat.of k))) : Continuous (mapPoint (fieldScalarExtensionProjection k L Z).hom.hom) ∧ Function.Surjective (mapPoint (fieldScalarExtensionProjection k L Z).hom.hom) ∧ IsOpenMap (mapPoint (fieldScalarExtensionProjection k L Z).hom.hom) ∧ Set.BijOn (fun D : Set (Point Z.obj.obj) ↦ mapPoint (fieldScalarExtensionProjection k L Z).hom.hom ⁻¹' D) (Set.range (connectedComponent (α := Point Z.obj.obj))) (Set.range (connectedComponent (α := Point (fieldScalarExtension k L Z).obj.obj))) ∧ (∀ D ∈ Set.range (connectedComponent (α := Point Z.obj.obj)), IsClopen D ↔ IsClopen (mapPoint (fieldScalarExtensionProjection k L Z).hom.hom ⁻¹' D)) ∧ (∀ C : OpenSubspace (fieldScalarExtension k L Z), pointImage C.val.ι ∈ Set.range (connectedComponent (α := Point (fieldScalarExtension k L Z).obj.obj)) → IsClopen (pointImage C.val.ι) → ∃! D : OpenSubspace Z, pointImage D.val.ι ∈ Set.range (connectedComponent (α := Point Z.obj.obj)) ∧ IsClopen (pointImage D.val.ι) ∧ D.val.preimage (fieldScalarExtensionProjection k L Z).hom.hom = C.val) ∧ (ConnectedSpace (Point Z.obj.obj) ↔ ∀ (K : Type u) [Field K] [Algebra k K], ConnectedSpace (Point (fieldScalarExtension k K Z).obj.obj))",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2/H4 repair of returned head 7f6a78939e0e: stmt_deps now cite the three landed owners of mapPoint, schemeSpace, and the sheaf fibre product. fieldScalarExtension and fieldScalarExtensionProjection are abbreviations with exactly enlargedFibreProduct (structuralMapToBase Z) (extensionFieldBaseMap k L) and enlargedFibreProductFst (structuralMapToBase Z) (extensionFieldBaseMap k L) as bodies; the declarations list retains these transparent specializations alongside the three canonical base helpers and the sole postponed theorem. lean.statement is verbatim unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e1fcf272",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Re-delivery of 7f6a (RETURN H2+H4). H2 fixed: stmt_deps now include landed def-sfb-proper-curve-moduli (mapPoint), def-trf-scheme-algebraic-space (schemeSpace) and def-sfb-space-sheaf-fibre-product (enlargedFibreProduct/Fst). H4 fixed: fieldScalarExtension/Projection are abbrevs whose bodies are exactly enlargedFibreProduct/enlargedFibreProductFst (structuralMapToBase Z) (extensionFieldBaseMap k L), checked against EnlargedEtaleRingedSite.lean:230-238. Module diff is only those two abbrevs; theorem signature byte-identical and lean.statement verbatim in the file; item node differs from side-live only in stmt_deps/lean. Clauses re-read against Tag 0A12/06DN/03BZ/03IE: continuity/surjectivity/openness of mapPoint p, BijOn preimage on ranges of connectedComponent, clopen iff for components, ∃! clopen component D with Subfunctor.preimage = C, ConnectedSpace iff for all K : Type u. No extra assumptions; edge cases (empty Z, identity extension, transcendental/inseparable L, empty subspace) are fine. structuralMapToBase is the unique map to a terminal object and has no other owner in side-live. Proof is sorry only; docstrings carry the proof steps and source places; report has Worker report and Second reading by NQ; item not landed by another group. No compile because no file changed."
+ }
+}

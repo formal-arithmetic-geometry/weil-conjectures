@@ -1,0 +1,414 @@
+{
+ "id": "lem-sfb-affine-fp-relative-hom-scheme",
+ "kind": "statement",
+ "title": "Affine finitely presented relative Hom from a finite locally free source",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $X\\to S$ finite locally free [def-pc-finite-locally-free], and $Y\\to S$ affine [pqf-def-affine-morphism] and of finite presentation. Finite presentation means locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. The functor on $S$-schemes $T$ sending $T$ to $\\operatorname{Hom}_T(X\\times_ST,Y\\times_ST)$, with restriction by base change [def-pc-fibre-product], is represented by an affine $S$-scheme $H$ of finite presentation, with natural bijections $\\operatorname{Hom}_S(T,H)\\simeq\\operatorname{Hom}_T(X\\times_ST,Y\\times_ST)$ for all $T$. More explicitly, for every affine open $U=\\operatorname{Spec}A\\subset S$, the scheme $H\\times_SU$ is isomorphic over $U$ to $\\operatorname{Spec}P$ for a commutative $A$-algebra $P$ admitting a presentation $P\\simeq A[z_1,\\ldots,z_n]/(r_1,\\ldots,r_m)$ with $n,m$ finite [def-weil-affine-spectrum]. No group structure on $X$ or $Y$ is assumed; zero and varying rank of $X\\to S$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BL3 (lemma-hom-from-finite-locally-free-into-affine) and Tag 05Y6 (lemma-hom-from-finite-free-into-affine), coefficient construction with a finite presentation of the target algebra. The finitely presented refinement is Conrad, Reductive group schemes, Lemma 2.1.3, first assertion, printed pp.58-59; local copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-finite-locally-free",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Write $p:X\\to S$. By finite local freeness, $p$ is finite, flat and locally of finite presentation. The pushforward $p_*\\mathcal O_X$ is locally a finite direct sum of copies of $\\mathcal O_S$ by [lem-sc-finite-pushforward-locally-free]. Refine its trivializing open cover by affine opens using [lem-weil-pbc-affine-opens-basis]. For each resulting $U_i=\\operatorname{Spec}R_i$, finiteness and [lem-weil-pbc-finite-morphism-permanence](a),(b) give $X_i=X\\times_SU_i=\\operatorname{Spec}B_i$. Restricting the trivialization to $U_i$ and taking sections gives an $R_i$-basis of $B_i$ of some finite size $d_i$: sections of a finite direct sum are tuples of sections. The numbers $d_i$ may differ; zero is allowed. The fibre product is the inverse-image open by [lem-weil-pbc-open-preimage-fibre-product].",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-sc-finite-pushforward-locally-free",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KB, lemma-finite-flat; choice of finite-free affine charts in Tag 0BL3, more-morphisms.tex, lemma-hom-from-finite-locally-free-into-affine; Tag 01IT, schemes.tex, lemma-basis-affine-opens"
+   }
+  },
+  {
+   "text": "Affineness of $Y\\to S$ gives $Y_i=Y\\times_SU_i=\\operatorname{Spec}C_i$. It is the inverse-image open in $Y$. Apply [lem-weil-pbc-lfp-affine-opens-finite-presentation] to the affine opens $Y_i\\subseteq Y$ and $U_i\\subseteq S$. Its locally finite presentation hypothesis is part of the assumed finite presentation of $Y\\to S$. Thus, writing $R,B,C,d$ for one chart, choose a finite presentation $C=R[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$ and an $R$-basis $e_1,\\ldots,e_d$ of $B$. No Noetherian hypothesis is used.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TQ, lemma-locally-finite-presentation-characterize, (1) implies (2); finite-presentation specialization of the presentation in Tag 05Y6, more-morphisms.tex, lemma-hom-from-finite-free-into-affine"
+   }
+  },
+  {
+   "text": "Set $E=B[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$, where coefficients are mapped from $R$ to $B$. The canonical $B$-algebra isomorphism $E\\simeq B\\otimes_RC$ is obtained directly from the two universal properties. One map sends $b$ to $b\\otimes1$ and $x_i$ to $1\\otimes\\bar x_i$; it descends since each $f_k$ vanishes in $C$. For the inverse use $B\\to E$ and the $R$-algebra map $C\\to E$ sending $\\bar x_i$ to $[x_i]$. The latter is well-defined since each $f_k$ is zero in $E$; quotient classes with the same representative difference in the generated ideal have the same value. The tensor universal property gives $b\\otimes c\\mapsto b[c]$. The composites fix $B$ and all $x_i$, respectively both tensor factors, so polynomial uniqueness and tensor uniqueness make them identities.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05Y6, lemma-hom-from-finite-free-into-affine, coefficient construction; elementary scalar extension of the displayed target presentation"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-free-algebra-map-coordinates] with base ring $R$, finite free algebra $B$, and the presented $B$-algebra $E$. It constructs\n$$Q=R[a_{ij}:1\\le i\\le n,1\\le j\\le d],\\qquad P=Q/(c_{kj}:1\\le k\\le m,1\\le j\\le d),$$\nwhere the $c_{kj}$ are the coefficients of $f_k(\\sum_j e_j\\otimes a_{1j},\\ldots,\\sum_j e_j\\otimes a_{nj})$. Its natural bijection is $\\operatorname{Hom}_{R\\text{-alg}}(P,A)\\simeq\\operatorname{Hom}_{B\\text{-alg}}(E,B\\otimes_RA)$. Via Step 3 the latter set is $\\operatorname{Hom}_{R\\text{-alg}}(C,B\\otimes_RA)$: restrict along $c\\mapsto1\\otimes c$; the inverse extends by $b\\otimes c\\mapsto(b\\otimes1)h(c)$. Tensor uniqueness makes these inverse, and the formulas commute with every map $A\\to A'$. There are $nd$ variables and $md$ displayed relations, both finite, so $P$ has the finite presentation required in the item, after numbering these two finite families.",
+   "uses": [
+    "lem-sfb-finite-free-algebra-map-coordinates",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05Y6, lemma-hom-from-finite-free-into-affine, displayed polynomial algebra and coefficient ideal; finite n,m specialization"
+   }
+  },
+  {
+   "text": "Let $H_i=\\operatorname{Spec}P$ on this chart. For an affine test $T=\\operatorname{Spec}A\\to U_i$, the universal property of fibre products [def-pc-fibre-product] gives $X_T=X\\times_ST\\simeq X_i\\times_{U_i}T$ and $Y_T\\simeq Y_i\\times_{U_i}T$, since $T\\to S$ factors through $U_i$ and $X_i=X\\times_SU_i$, $Y_i=Y\\times_SU_i$. Then [lem-weil-pbc-fibre-product-affine-spectra] identifies $X_T$ with $\\operatorname{Spec}(B\\otimes_RA)$ and $Y_T$ with $\\operatorname{Spec}(C\\otimes_RA)$. Spectrum's contravariant Hom bijection and the tensor universal property identify $\\operatorname{Hom}_T(X_T,Y_T)$ with $\\operatorname{Hom}_{R\\text{-alg}}(C,B\\otimes_RA)$. Explicitly, the $A$-algebra map $C\\otimes_RA\\to B\\otimes_RA$ corresponding to $h$ sends $c\\otimes a$ to $h(c)(1\\otimes a)$; restricting to $c\\otimes1$ is the inverse. Step 4 and spectrum now give $\\operatorname{Hom}_{U_i}(T,H_i)\\simeq\\operatorname{Hom}_T(X_T,Y_T)$ naturally on affine tests. At $A=P$, the identity gives a universal relative morphism $b_i:X_{H_i}\\to Y_{H_i}$. The coordinate formulas show that the bijection on any affine test is pullback of $b_i$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05Y6, lemma-hom-from-finite-free-into-affine, universal relative morphism and the inverse on affine tests"
+   }
+  },
+  {
+   "text": "The same universal morphism gives the bijection on every $U_i$-scheme $T$. Cover $T$ by affine opens $T_a$. Given $b:X_T\\to Y_T$ over $T$, use Step 5 on each $T_a$ to obtain $g_a:T_a\\to H_i$. On an intersection $T_a\\cap T_b$, take an affine open cover; naturality of Step 5 identifies both restricted maps with the restriction of $b$ there. Injectivity on these affine tests, followed by morphism-gluing uniqueness, makes $g_a$ and $g_b$ agree on the whole intersection. The maps $g_a$ therefore glue uniquely to $g:T\\to H_i$. Its composite to $U_i$ is the structural map, since this holds on the cover. Pullback of $b_i$ along $g$ equals $b$ on the inverse-image open cover $X_{T_a}$ of $X_T$, hence globally. Conversely, applying these constructions to a map $g$ recovers $g$ on all $T_a$, hence recovers $g$. All maps to $Y_T$ are over $T$ because that equality of composites can also be checked on this cover. Pulling back along an arbitrary $T'\\to T$ commutes with pulling back $b_i$; uniqueness of the inverse then proves naturality for every map of tests. No intersection was assumed affine.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05Y6, lemma-hom-from-finite-free-into-affine, extension from affine tests; schemes.tex, Tag 01JA, section-glueing-schemes, and Tag 01JR, lemma-open-fibre-product"
+   }
+  },
+  {
+   "text": "For $U_{ij}=U_i\\cap U_j$, the two restrictions $H_i\\times_SU_{ij}$ and $H_j\\times_SU_{ij}$ represent the same functor on $U_{ij}$-schemes: by the fibre-product universal property a map into either restriction is a map into the corresponding $H_i$ or $H_j$ over the prescribed base. Step 6 identifies both with relative morphisms $X_T\\to Y_T$. The identity of this functor gives a unique transition isomorphism by [lem-galois-yoneda-hom-bijection]. Its inverse comes from the reverse identity; the diagonal transition and every triple-overlap composite are identities by Yoneda injectivity. This uses all-test representability, so the overlaps need not be affine. Apply [lem-galois-glue] to obtain an $S$-scheme $H$ and compatible isomorphisms $H\\times_SU_i\\simeq H_i$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-galois-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BL3, lemma-hom-from-finite-locally-free-into-affine, base-chart gluing; schemes.tex, Tag 01JB, lemma-glue, and Tag 01JC, lemma-glue-schemes"
+   }
+  },
+  {
+   "text": "For any $S$-scheme $T$, the inverse-image opens $T_i=T\\times_SU_i$ cover $T$. A relative morphism $b:X_T\\to Y_T$ gives maps $T_i\\to H_i\\to H$ by Step 6. On overlaps these agree by the definition of the transitions in Step 7, so morphism gluing gives a unique $S$-map $T\\to H$. Conversely an $S$-map $T\\to H$ restricts to maps $T_i\\to H_i$, giving relative morphisms on $X_{T_i}$. Their composites to $Y_T$ agree on overlaps, hence glue to a map $X_T\\to Y_T$ over $T$. These two operations are inverse by local uniqueness. The local bijections commute with every pullback of tests by Step 6, and gluing uniqueness makes the global bijections natural. This establishes exactly the functor and the base-change restriction maps in the statement.",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BL3, lemma-hom-from-finite-locally-free-into-affine, gluing of relative morphisms; schemes.tex, Tag 01JA, section-glueing-schemes"
+   }
+  },
+  {
+   "text": "The affine open cover $(U_i)$ of $S$ has affine inverse images: the inverse image of $U_i$ in $H$ is $H\\times_SU_i$ by [lem-weil-pbc-open-preimage-fibre-product], which is isomorphic over $U_i$ to $H_i$ by Step 7. Thus [pqf-lem-affine-local-target] makes $H\\to S$ affine. Each $H_i=\\operatorname{Spec}P_i\\to\\operatorname{Spec}R_i$ is locally of finite presentation by the definition [def-sbc-locally-finite-presentation], since the whole affine source and target themselves provide the required neighbourhoods at every point and Step 4 gives a finite ring presentation. Target-open locality [lem-sfb-separated-lfp-target-open-locality] gives local finite presentation of $H\\to S$. Affine-morphism permanence supplies quasi-compactness and separatedness, hence quasi-separatedness, so $H\\to S$ is of finite presentation under the convention in the item.",
+   "uses": [
+    "pqf-lem-affine-local-target",
+    "def-sbc-locally-finite-presentation",
+    "lem-sfb-separated-lfp-target-open-locality",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S8, lemma-characterize-affine; Tag 01TQ, lemma-locally-finite-presentation-characterize, (3) implies (1); affine quasi-compactness and separatedness, Tag 01S7, lemma-affine-separated"
+   }
+  },
+  {
+   "text": "Finally take any affine open $U=\\operatorname{Spec}A\\subset S$, without requiring a basis of $X_U$ on all of $U$. Affineness makes the inverse-image open $H_U$ affine, say $H_U=\\operatorname{Spec}P$. Apply [lem-weil-pbc-lfp-affine-opens-finite-presentation] to the affine opens $H_U\\subset H$ and $U\\subset S$ for the locally finitely presented map $H\\to S$ established in Step 9. It gives $P\\simeq A[z_1,\\ldots,z_n]/(r_1,\\ldots,r_m)$ with finite $n,m$, exactly the additional explicit clause. If $d_i=0$, then $B_i=0$ and $E=0$; the coefficient lemma used in Step 4 explicitly gives $P_i=R_i$. Thus $H_i=U_i$ and every test has the unique morphism from its empty source. If $X=S$, a rank-one basis identifies the construction with $Y$. Empty test schemes, empty generator or relation families, and an empty base are included by the same universal properties and gluing uniqueness. Nothing imposed positive or constant global rank, or a group structure.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-sfb-finite-free-algebra-map-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TQ, lemma-locally-finite-presentation-characterize, (1) implies (2); rank-zero coefficient construction in more-morphisms.tex, Tag 05Y6, lemma-hom-from-finite-free-into-affine"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "lem-sc-finite-pushforward-locally-free",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-finite-free-algebra-map-coordinates",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-pc-fibre-product",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-galois-glue",
+  "pqf-lem-affine-local-target",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-separated-lfp-target-open-locality",
+  "lem-weil-pbc-affine-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 05Y6 (lemma-hom-from-finite-free-into-affine), finite coefficient construction, and 0BL3 (lemma-hom-from-finite-locally-free-into-affine), Zariski gluing; finite-presentation conclusion by counting generators and relations and morphisms.tex Tag 01TQ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite locally free scheme X over S and affine finitely presented Y over S the ordinary relative Hom functor is represented by an affine finitely presented S scheme",
+   "results": "{\"t\": \"2026-10-24T11:57:06Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite locally free scheme X over S and affine finitely presented Y over S the ordinary relative Hom functor is represented by an affine finitely presented S scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\"], \"digest\": \"86d827df5134c341\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space finite presentation, supplied-atlas representability, and algebra presentations do not give this relative Hom scheme or its finite presentation in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary scheme maps from a finite locally free scheme into an affine scheme of finite presentation have a finitely presented affine parameter scheme",
+   "results": "{\"t\": \"2026-10-24T11:56:57Z\", \"tool\": \"leansearch\", \"query\": \"Ordinary scheme maps from a finite locally free scheme into an affine scheme of finite presentation have a finitely presented affine parameter scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.LocallyOfFinitePresentation.recOn\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\"], \"digest\": \"dd81be55a22bd95d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space finite presentation, supplied-atlas representability, and algebra presentations do not give this relative Hom scheme or its finite presentation in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"representable\"",
+   "results": "{\"t\": \"2026-10-24T11:56:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"representable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\"], \"digest\": \"f4fac6358b3e52cc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space finite presentation, supplied-atlas representability, and algebra presentations do not give this relative Hom scheme or its finite presentation in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "HomScheme|homScheme|WeilRestrict|hom_from_finite",
+   "results": "{\"t\": \"2026-10-24T11:56:57Z\", \"tool\": \"grep\", \"query\": \"HomScheme|homScheme|WeilRestrict|hom_from_finite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space finite presentation, supplied-atlas representability, and algebra presentations do not give this relative Hom scheme or its finite presentation in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor of algebra homomorphisms from a finitely presented algebra to a finite free algebra is represented by a finitely presented algebra",
+   "results": "{\"t\": \"2026-10-24T11:57:04Z\", \"tool\": \"leanfinder\", \"query\": \"The functor of algebra homomorphisms from a finitely presented algebra to a finite free algebra is represented by a finitely presented algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite\", \"AlgHom.FinitePresentation\", \"Algebra.Presentation.ofFinitePresentation\", \"Algebra.FinitePresentation.of_finitePresentation\", \"AlgHom.FiniteType.of_finitePresentation\", \"Algebra.Presentation.exists_presentation_fin\", \"Algebra.Presentation.finitePresentation_of_isFinite\", \"isFinitelyPresentable\"], \"digest\": \"292b4bb6c0840bb1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space finite presentation, supplied-atlas representability, and algebra presentations do not give this relative Hom scheme or its finite presentation in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Hom functor from finite locally free schemes into affine finitely presented schemes is represented by an affine scheme of finite presentation",
+   "results": "{\"t\": \"2026-10-24T12:18:17Z\", \"tool\": \"leanfinder\", \"query\": \"Relative Hom functor from finite locally free schemes into affine finitely presented schemes is represented by an affine scheme of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\"], \"digest\": \"83fb99fd28d53b86\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: representability with a supplied atlas, affine-space properties and finite algebra presentations do not construct this relative Hom scheme and its finite presentation in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"representable\"",
+   "results": "{\"t\": \"2026-10-24T12:18:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"representable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\"], \"digest\": \"f4fac6358b3e52cc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: representability with a supplied atlas, affine-space properties and finite algebra presentations do not construct this relative Hom scheme and its finite presentation in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "HomScheme|homScheme|WeilRestrict|hom_from_finite",
+   "results": "{\"t\": \"2026-10-24T12:18:50Z\", \"tool\": \"grep\", \"query\": \"HomScheme|homScheme|WeilRestrict|hom_from_finite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: representability with a supplied atlas, affine-space properties and finite algebra presentations do not construct this relative Hom scheme and its finite presentation in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scheme of maps from a finite locally free scheme into an affine scheme of finite presentation is affine and finitely presented",
+   "results": "{\"t\": \"2026-10-24T12:18:50Z\", \"tool\": \"leansearch\", \"query\": \"The scheme of maps from a finite locally free scheme into an affine scheme of finite presentation is affine and finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.IsAffine.recOn\", \"AlgebraicGeometry.IsAffineHom.mk\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.IsAffineHom\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"9a2ebd58d2cb6e6c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: representability with a supplied atlas, affine-space properties and finite algebra presentations do not construct this relative Hom scheme and its finite presentation in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor of algebra homomorphisms from a finitely presented algebra to a finite free algebra is represented by a finitely presented coefficient algebra",
+   "results": "{\"t\": \"2026-10-24T12:20:11Z\", \"tool\": \"leanfinder\", \"query\": \"The functor of algebra homomorphisms from a finitely presented algebra to a finite free algebra is represented by a finitely presented coefficient algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite\", \"AlgHom.FinitePresentation\", \"Algebra.Presentation.ofFinitePresentation\", \"Algebra.Presentation.exists_presentation_fin\", \"AlgHom.FiniteType.of_finitePresentation\", \"Algebra.FinitePresentation.mvPolynomial_of_finitePresentation\", \"Algebra.Presentation.finitePresentation_of_isFinite\", \"Algebra.FinitePresentation.of_finitePresentation\"], \"digest\": \"9fe6dec0f1eae994\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: representability with a supplied atlas, affine-space properties and finite algebra presentations do not construct this relative Hom scheme and its finite presentation in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-flat-group-hom-scheme",
+  "date": "2026-10-24",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Lemma 5.1.3 and Proposition 5.1.6, printed pp.136-138; Definition 6.1.1 and its following paragraph, p.186; affine localization of the etale neighborhoods; Theorem 3.2.6 and Corollary 3.2.7, printed pp.94-95; reductive specialization of the smooth surjective scheme of maximal tori, before choosing etale-local sections. No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None). Supporting input to this split: Theorem 2.3.1, printed pp.67-71, normalizer-quotient assertion specialized to a split torus; smoothness of the quotient map is stated in Remark 2.3.5, printed p.71, using Proposition 2.1.2. Supporting input: Lemma 2.3.4 and proof, printed pp.69-70. The functor is written using fppf forms of H; the source equivalently uses multiplicative-type subgroups geometrically isomorphic to H. The proof constructs it from the open embedding locus in Hom(H,G) modulo the finite constant automorphism group; no assertion about the conjugacy orbit or a homogeneous quotient is included here. Supporting input: Conrad Lemma 2.3.4, opening construction inside Hom(H,G), using Lemma 2.1.3. Supporting input: Affine finitely presented relative Hom from a finite locally free source.",
+   "via": [
+    "lem-sfb-finite-flat-group-hom-scheme",
+    "lem-sfb-finite-diagonalizable-subgroup-parameter",
+    "lem-sfb-split-torus-normalizer-quasi-affine-quotient",
+    "lem-sfb-maximal-torus-parameter-scheme",
+    "lem-sfb-reductive-etale-pinned-splitting",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-fp-relative-hom-scheme",
+  "worker": "stage1",
+  "summary": "N9 direct delivery. Reused the existing finite-free coefficient-algebra node and scheme foundations; no new nodes. Constructed finite-presentation affine charts with nd generators and md relations, proved their all-test natural universal property, glued them over S, and used affine-open finite-presentation characterization for every affine base open. Checked rank zero, varying rank, empty schemes, and absence of group assumptions. Statement and inherited provenance unchanged.",
+  "blueprint": "The inherited from.node is null, as blueprint_refs.py ancestor confirms. Retained from.place and via. This is the affine finitely presented relative-Hom prerequisite of the finite-flat group-Hom construction in the inherited moduli chain. Latest blueprint and whole-blueprint searches for relative Hom, coefficient algebra, 0BL3, 05Y6, finite locally free and finite presentation found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-finite-pushforward-locally-free",
+    "why": "Generic finite-flat-lfp pushforward theorem supplies finite-free base charts; the current unit has no substitute for this scheme foundation."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic affine neighbourhood basis refines trivializing opens and compares maps on overlaps; no unit-specific argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic finite base change and affineness over an affine base supply affine source charts."
+   },
+   {
+    "node": "lem-weil-pbc-open-preimage-fibre-product",
+    "why": "Generic open-base-change identity supplies the inverse-image covers used in scheme gluing."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Generic affine-open finite-presentation characterization supplies finite target presentations and the final arbitrary-affine clause."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic commutative-algebra pushout theorem identifies scalar-extended presentations and relative maps; it does not replace the geometric construction."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine fibre-product theorem translates relative maps to algebra maps."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic scheme morphism gluing extends affine-test bijections and glues relative maps over the base cover."
+   },
+   {
+    "node": "lem-galois-yoneda-hom-bijection",
+    "why": "Generic Yoneda bijection yields uniquely normalized overlap isomorphisms and their cocycle."
+   },
+   {
+    "node": "lem-galois-glue",
+    "why": "Generic Zariski gluing for schemes over a base assembles the local Hom schemes."
+   },
+   {
+    "node": "pqf-lem-affine-local-target",
+    "why": "Generic target-local criterion for affine morphisms proves affineness after gluing."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic affine morphisms are quasi-compact and separated, giving the remaining finite-presentation conditions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-finite-pushforward-locally-free",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-galois-glue",
+  "pqf-lem-affine-local-target",
+  "lem-weil-pbc-affine-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N9-78d8775b1",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-78d8775b1 (reviewer sub-agent of L); spot-checked: I read the whole item against Stacks more-morphisms.tex 05Y6 (lemma-hom-from-finite-free-into-affine, L20100) and 0BL3 (lemma-hom-from-finite-locally-free-into-affine, L20171), and against morphisms.tex 01TQ, 01S8 and 01S7. The functor matches Stacks' Mor_S(Z,X): maps over T with base-change restriction. Live had the item unsplit; the delivery changes only proof, proof_deps, proof_origin, status, split_report and mathlib_searches, and the statement and stmt_deps are byte-identical. It has no new nodes, and a closure BFS over 315 nodes found no cycle. Steps 1-4 check out: finite-free affine charts come from lem-sc-finite-pushforward-locally-free; finite presentation of C comes from 01TQ; Step 3 (E ≅ B⊗C) is elementary and correctly marked; the coefficient node is applied to the presented B-algebra E, with the R-to-B Hom bridge written out and nd/md finite counts. Steps 5-8 check out: affine tests, then all tests on U_i via affine subcovers (no affine-intersection assumption, E1), Yoneda transitions and cocycle, lem-galois-glue, and global gluing with naturality. Steps 9-10 check out: affine via the 01S8 node, lfp via the target-locality node (no quasi-compact cover needed), qcqs via affine permanence, and 01TQ on an arbitrary affine U. Small cases tested: d=0 gives H=S; X=S gives H=Y; X=S⊔S gives H=Y×_S Y; varying rank. Not duplicates: lem-sfb-affine-finite-free-hom, lem-sfb-affine-weil-restriction-charts and lem-sfb-finite-locally-free-relative-hom-space lack finite presentation or have a different target. The worker wrote the 12 tool_uses themselves; I accept them all as generic scheme and algebra foundations. FIX (C1, two missing citations): Step 5 used the fibre-product pasting X×_S T ≅ X_i×_{U_i} T without a citation, so I added it with [def-pc-fibre-product]. Step 9 used 'inverse image of U_i in H is H_i' without a citation, so I added [lem-weil-pbc-open-preimage-fibre-product] with the Step 7 isomorphism. Both were already in proof_deps. The corrected file is at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-affine-fp-relative-hom-scheme.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineFpRelativeHomScheme",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_fp_relativeHomScheme",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFpRelativeHomScheme.lean",
+  "statement": "theorem exists_affine_fp_relativeHomScheme {S X Y : Scheme.{u}} (p : X ⟶ S) (q : Y ⟶ S) [p.IsFiniteLocallyFree] [IsAffineHom q] [LocallyOfFinitePresentation q] [QuasiCompact q] [QuasiSeparated q] : ∃ H : Over S, IsAffineHom H.hom ∧ LocallyOfFinitePresentation H.hom ∧ QuasiCompact H.hom ∧ QuasiSeparated H.hom ∧ ∃ e : ∀ T : Over S, (T ⟶ H) ≃ ((Over.pullback T.hom).obj (Over.mk p) ⟶ (Over.pullback T.hom).obj (Over.mk q)), (∀ (T T' : Over S) (a : T' ⟶ T) (g : T ⟶ H), (e T' (a ≫ g)).left ≫ pullback.fst q T'.hom = pullback.map p T'.hom p T.hom (𝟙 X) a.left (𝟙 S) (by simp) (by simp [a.w]) ≫ (e T g).left ≫ pullback.fst q T.hom) ∧ ∀ (U : S.Opens) (hU : IsAffineOpen U), ∃ (n m : ℕ) (r : Fin m → MvPolynomial (Fin n) Γ(S, U)), Nonempty (Over.mk (pullback.snd H.hom U.ι) ≅ Over.mk (Spec.map (CommRingCat.ofHom (algebraMap Γ(S, U) (MvPolynomial (Fin n) Γ(S, U) ⧸ Ideal.span (Set.range r)))) ≫ hU.isoSpec.inv))",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e9ce190c",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read the node, all 7 stmt_deps, the Lean module and report.md. Hypotheses: p.IsFiniteLocallyFree (FiberDegree.lean:899, finite+flat+lfp) and IsAffineHom/LocallyOfFinitePresentation/QuasiCompact/QuasiSeparated q, which is the project's finite-presentation convention; nothing stronger. Conclusion: ∃ H : Over S, affine and fp, with e : ∀ T, (T ⟶ H) ≃ Hom in Over T of the pullbacks of X and Y. The naturality equation on Y-components is equivalent to base-change restriction (the T'-component is fixed in Over T'). The explicit clause gives an iso over every affine open U with Spec(Γ(S,U)[Fin n]/span r) via hU.isoSpec.inv. Edge cases (rank 0 and varying rank, X=S, empty schemes and opens, n=m=0) are covered, with a single universe u. lean.statement is verbatim the file signature; statement and stmt_deps are unchanged; no definitions, so nothing hollow; docstrings carry the source place, blueprint id and 10 proof steps; proof is sorry. No duplicate: RelativeHomSchemeData (HighGenusHomClosure) belongs to another theorem node and bundles H-projective pieces. Not recompiled (no change); the worker's compile and dry run are recorded OK."
+ }
+}

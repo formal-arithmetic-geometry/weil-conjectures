@@ -1,0 +1,140 @@
+{
+ "id": "lem-trf-scheme-coproduct-kernel-pair-components",
+ "kind": "statement",
+ "title": "Kernel pairs restrict to specified scheme coproduct components",
+ "statement": "Let S be a scheme, I an arbitrary indexing type, X_i and R_ij S-schemes, and p_ij:R_ij→X_i and t_ij:R_ij→X_j morphisms. Let V, W be specified coproducts in Sch/S of X_i and R_ij, with injections ι_i and κ_ij. Suppose s,t:W→V restrict to p_ij followed by ι_i and t_ij followed by ι_j. For any set-valued presheaf F on Sch/S and any q:h_V→F whose kernel pair is represented by (s,t), each square (h_Rij→h_Xi,h_Rij→h_Xj,q_i,q_j), with projections p_ij,t_ij and q_i=h(ι_i)q, is a pullback of presheaves. No topology, smallness of I, or nonemptiness of the test scheme is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0262, sectionwise kernel-pair formula and proof (3); Tags 02WV/02WW. The descent gluing uses the subcanonical fppf topology, equivalently Descent Tag 023Q restricted to fppf coverings."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "A specified coproduct in Sch/S remains a coproduct of schemes under the forgetful functor. Its injections are open immersions, have disjoint images, and jointly cover. For arbitrary I, prove this without a global small coproduct instance: separate a chosen component using the binary coproduct X_i coproduct V to express its injection as the pullback of a binary injection; use the union of the open images and the coproduct mapping property for coverage; use V coproduct V to distinguish two indices for disjointness.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a test T, lift compatible maps x:T→X_i,y:T→X_j through the global kernel pair to r:T→W. Any point r(z) lies in a component R_ab. Its s-image is both in X_a and X_i, hence a=i; the t-image gives b=j. Thus r has image inside the open immersion κ_ij. Lift through κ_ij, including when T is empty; the two projections are x and y by monicity of ι_i and ι_j.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For uniqueness, two maps to R_ij with the same p_ij and t_ij have equal composites with κ_ij by the global kernel-pair universal property, hence are equal by monicity of κ_ij. Commutativity is the global kernel-pair equation precomposed with κ_ij. Apply the pointwise pullback criterion for Type-valued presheaves.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0262, sectionwise kernel-pair formula and proof (3); Tags 02WV/02WW. The descent gluing uses the subcanonical fppf topology, equivalently Descent Tag 023Q restricted to fppf coverings."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scheme coproduct components restrict kernel pairs and fppf sheaves glue unique local lifts",
+   "results": "Returned IsKernelPair.lift', locally-ringed-space coproducts, and scheme coproduct infrastructure; no combined statement.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; use pullback and coproduct APIs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a scheme coproduct kernel pair to two components using disjoint open immersions; glue unique local maps into a scheme along an fppf covering",
+   "results": "Found isEmpty_pullback_sigmaι_of_ne, isPullback_inl_inl_coprodMap, Scheme.Cover.glueMorphisms. These supply geometric tools, but none states restriction of an arbitrary specified coproduct presheaf kernel pair or the prescribed-coordinate lifting conclusion.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presieve.IsSheafFor",
+   "results": "Found IsSheafFor.amalgamate, IsSheafFor.isSeparatedFor, isSheafFor_iff_generate. Used the equivalent isSheafFor_arrows_iff API in the proof.",
+   "date": "2026-10-26",
+   "verdict": "gluing tools, not the chart-specific conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "scheme_descent_quotient|chart_isomorphism|coproduct.*kernel; IsSheafFor|ofArrows_mem_precoverage_iff",
+   "results": "No existing component-kernel-pair or chart-section-lifting theorem in Sheaf or WeilConjectures. CoproductSchemePullback has proved private cofan_open/cofan_covers/cofan_disjoint helpers; their arguments are reused privately. Mathlib Sites/IsSheafFor.lean:840 and AlgebraicGeometry/Sites/MorphismProperty.lean:82 supply gluing and covering APIs.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SchemeDescentQuotientChartIsomorphism",
+  "date": "2026-10-26",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Extracted from lem-trf-scheme-descent-quotient-chart-isomorphism: Kernel pairs restrict to specified scheme coproduct components",
+   "via": [
+    "lem-trf-scheme-descent-quotient-chart-isomorphism",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeCoproductKernelPairComponents",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeCoproductKernelPairComponents.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.scheme_coproduct_kernel_pair_components",
+  "statement": "theorem scheme_coproduct_kernel_pair_components\n    {S : Scheme.{u}} {I : Type v} (X : I → Over S) (R : I → I → Over S)\n    (p : ∀ i j, R i j ⟶ X i)\n    (t' : ∀ i j, R i j ⟶ X j)\n    (V W : Over S) (ι : ∀ i, X i ⟶ V) (κ : ∀ ij : I × I, R ij.1 ij.2 ⟶ W)\n    (hV : IsColimit (Cofan.mk V ι)) (hW : IsColimit (Cofan.mk W κ))\n    (s t : W ⟶ V)\n    (hs : ∀ i j, κ (i, j) ≫ s = p i j ≫ ι i)\n    (ht : ∀ i j, κ (i, j) ≫ t = t' i j ≫ ι j)\n    {F : (Over S)ᵒᵖ ⥤ Type u} (q : yoneda.obj V ⟶ F)\n    (hkernel : IsPullback (yoneda.map s) (yoneda.map t) q q) :\n    ∀ i j, IsPullback (yoneda.map (p i j)) (yoneda.map (t' i j))\n      (yoneda.map (ι i) ≫ q) (yoneda.map (ι j) ≫ q)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T092625-L-3447975",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T092625-L-3447975",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

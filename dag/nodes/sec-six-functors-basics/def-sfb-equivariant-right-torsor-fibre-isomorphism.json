@@ -1,0 +1,157 @@
+{
+ "id": "def-sfb-equivariant-right-torsor-fibre-isomorphism",
+ "kind": "definition",
+ "title": "Equivariant represented right torsors and their fibre isomorphisms",
+ "statement": "Let $B$ be a scheme [def-pc-scheme] and let $G,H$ be group objects in schemes over $B$, using the diagrams of [def-sc-group-scheme] with base $B$. Let $Y$ be a $B$-scheme and $b:G\\times_B Y\\to Y$ a specified morphism. A $G$-equivariant represented right $H$-torsor over $(Y,b)$ consists of a represented right $H$-torsor $p:P\\to Y$ [def-sfb-split-solvable-right-torsors] and a left $G$-action $a:G\\times_B P\\to P$ with unit and associativity laws, satisfying $p(a(g,x))=b(g,p(x))$ and $a(g,xh)=a(g,x)h$ on every test $B$-scheme. An equivariant isomorphism between two such torsors is a $B$-scheme isomorphism over $Y$ respecting both actions. For any point $o:B\\to Y$, let $P_o=P\\times_Y B$ and $Q_o=Q\\times_Y B$, with canonical inclusions $i_P,i_Q$. A fibre isomorphism is an actual $B$-scheme isomorphism $f:P_o\\simeq Q_o$ preserving the two action graphs: for every test $B$-scheme $T$, $g\\in G(T)$, $h\\in H(T)$ and $x,x'\\in P_o(T)$, $a_P(g,i_P(x))=i_P(x')$ implies $a_Q(g,i_Q(f(x)))=i_Q(f(x'))$, and $i_P(x)h=i_P(x')$ implies $i_Q(f(x))h=i_Q(f(x'))$. At a $G$-fixed point $o$, these conditions are precisely equivariance for the induced left $G$- and right $H$-actions on the fibres. For a field $k$ [def-weil-field], use the standard $\\mathbf G_m$ and affine line $L=\\mathbf G_a$ of [def-sc-gm-ga]. Define the weight-one scaling morphism $\\mathbf G_m\\times_k L\\to L$ by the coordinate algebra map $k[u]\\to k[z,z^{-1}]\\otimes_k k[u]$, $u\\mapsto z\\otimes u$, and the origin by $u\\mapsto0$.",
+ "source": {
+  "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+  "place": "Author-hosted https://sites.math.washington.edu/~jarod/papers/iwahori.pdf, Section 2, Claims 1 and 3, printed pp.2--3, and Lemma 3.6, proof of (2) implies (1), printed p.6; swap s and t for the weight +1 line."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-sfb-split-solvable-right-torsors",
+  "def-weil-field",
+  "def-sc-gm-ga"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A represented right group scheme torsor with a commuting left group scheme action and equivariant fibre isomorphisms",
+   "results": "[leansearch] OK 8 hit(s): AddTorsor; Action.HomSubtype; Equiv.vaddConst; AddTorsor.noConfusionType; AddTorsor.noConfusion; AddTorsor.mk; MulActionHom.instModuleOfSMulCommClass; instProperVAdd.",
+   "date": "2026-10-24",
+   "verdict": "No match: abstract actions and additive torsors do not give represented right scheme torsors with a second commuting action or fibre isomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A multiplicative group action on the affine line by scaling and equivariant right group scheme torsor isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s): AffineEquiv.constVAddHom; AffineMap.mulAction; AffineEquiv.homothetyUnitsMulHom; AffineEquiv.coe_homothetyUnitsMulHom_apply; AffineEquiv.constVAddHom_apply; AffineEquiv.group; AffineEquiv.coe_homothetyUnitsMulHom_eq_homothetyHom_coe; AffineMap.homothetyHom.",
+   "date": "2026-10-24",
+   "verdict": "No match: these are algebraic affine-space actions, not group schemes and represented torsors."
+  },
+  {
+   "tool": "grep",
+   "query": "EquivariantRightTorsor|contractingLine|scaleCoaction",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib declaration."
+  },
+  {
+   "tool": "rg",
+   "query": "equivariant.*torsor|EquivariantRightTorsor|scaleCoaction|contractingLine in lean/WeilConjectures and lean/Sheaf/AlgebraicGeometry",
+   "results": "Related sources: SchemeActionTorsorGroupoids.lean; TenCanonicalHilbertParameter.lean; SplitSolvableTorsorDefinitions.lean. No EquivariantRightTorsor, scaleCoaction or contractingLine declaration.",
+   "date": "2026-10-24",
+   "verdict": "The existing SchemeAction torsors have one left action and an equivariant target map; they do not supply a commuting second action on a represented right H-torsor. Reuse RepresentedRightTorsor and ModObj as components."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "equivariant torsor",
+   "results": "0 blueprint nodes match 'equivariant torsor'",
+   "date": "2026-10-24",
+   "verdict": "No blueprint definition match."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "contracting affine line",
+   "results": "0 blueprint nodes match 'contracting affine line'",
+   "date": "2026-10-24",
+   "verdict": "No blueprint definition match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-contracting-line-equivariant-torsor-rigidity",
+  "date": "2026-10-24",
+  "group": "Q108"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Lemma 3.6, proof of (2) implies (1), printed p.6: compare a torsor on the contracting affine line with the pullback of its fibre at zero. The symmetry interchanging s and t permits the weight +1 line. Definition input: the two commuting actions, their equivariant torsor isomorphisms, the actual fibres at zero and the canonical weight-one scaling map.",
+   "via": [
+    "lem-sfb-contracting-line-equivariant-torsor-rigidity",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.EquivariantRightTorsor",
+  "declaration": "AlgebraicGeometry.EquivariantRightTorsor",
+  "declarations": [
+   "AlgebraicGeometry.EquivariantRightTorsor",
+   "AlgebraicGeometry.EquivariantRightTorsor.EquivariantIso",
+   "AlgebraicGeometry.EquivariantRightTorsor.FibreIso",
+   "AlgebraicGeometry.ContractingLine.scaling",
+   "AlgebraicGeometry.ContractingLine.origin"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/EquivariantRightTorsor.lean",
+  "statement": "structure EquivariantRightTorsor {B : Scheme.{u}} (G H : Grp (Over B)) (Y : Over B) (b : G.X ⊗ Y ⟶ Y)",
+  "branch": "sheaf-dag",
+  "by": "Q108",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d30ad915",
+  "group": "Q108",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d30ad915",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Clause-by-clause match. Field k : Type u; H : Grp (Over Spec k) with Smooth, IsAffine, LocallyOfFiniteType, QuasiCompact = smooth affine finite type, nothing stronger. G_m = Grp.mk multiplicative (Mathlib Laurent Hopf law). L = additive k with ContractingLine.scaling = mu_algSpec >> Spec(aeval (T1 ⊗ X)), i.e. u -> z⊗u. P, Q = RepresentedRightTorsor + ModObj left action + covers + commutes. alpha0 = FibreIso at origin (aeval 0): an actual iso of pullbacks; graph preservation = fibre equivariance because the origin is scaling-fixed and the fibre inclusion is mono. Conclusion: exists EquivariantIso (over, left, right) with pullback.fst >> alpha = alpha0 >> pullback.fst; no uniqueness, no triviality. New def node def-sfb-equivariant-right-torsor-fibre-isomorphism: real data, no sorry, TeX matches Lean, fields per H12 (3 search kinds, created, stmt_deps incl. def-sc-gm-ga); no duplicate in the DAG (scheme-action torsor groupoids are single-action) or in lean/Sheaf and lean/WeilConjectures. Item differs from live only by lean + new-node stmt_dep; both lean.statement fields verbatim. Docstrings carry source, blueprint tag and the five proof steps; one sorry; universes bound. Edge cases: trivial H, char p, fibres without rational points, arbitrary alpha0. No file changed, no compile run. Advisory only: LocallyOfFiniteType is implied by Smooth."
+ }
+}

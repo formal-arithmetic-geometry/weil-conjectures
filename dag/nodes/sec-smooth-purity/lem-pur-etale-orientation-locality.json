@@ -305,5 +305,42 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-deebf5153 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-pur-etale-coprojection-rho-compatibility, the parent sk-thm-regular, blueprint main-20261015 sk-thm-regular.proof.md Step 4(i)-(ii), pur9-rg-def-phi, and the full statements of every cited node, including all proof steps of lem-pur-finite-etale-dualizing-normalization. Every arrow direction of B_{u,i} checks out, and it matches the beta_s in pur9-rg-def-phi. Small cases hold: u=id, u a clopen inclusion (where the claim is the defining property of Phi_i), V empty, c=0, and disconnected X. Step 3 is correct as cited: from thm-pur-composition-coherence with f=u (d=0) and clauses (1) and (3), Pi_{a_U}=Lu^*Pi_{a_X} composed with E_{u,a_X}. I repaired three faults. F1 (E1): Phi_{i_U} was used without checking that i_U is regular of pure codimension c with V regular. Step 1 now proves this from lem-sc-etale-local-dimension, sk-lem-regular-smooth, flatness of the etale local map, and lem-weil-pbc-smooth-over-field-regular-local; the item statement now says so. F2: rho_e is only given on D^b_ctf, but the new node took K in D^b_c, so K is now ctf, with the cited fact that the exceptional functors preserve D^b_ctf. The item's wording is changed to 'finite-Tor inputs' to match. F3: the affine-chart d=0 clause of lem-pur-diagonal-dnc-chart-normalization was applied to all of U without an argument; Step 1 now glues the charts. I also recorded sk-thm-sf-compatibility as a tool_use: it is the only off-route citation, used for generic composition coherence. The new node is a genuine smaller coherence lemma, not a restated clause, and the co-projection search found no duplicate. Batch-5 check: the item reaches both targets through thm-pur-regular-immersion-purity on the Weil II residue-sequence route, without passing through the trace-formula or Poincare-duality chapters. Neither assumption gives purity for regular immersions: the Poincare-duality assumption takes smooth purity as a datum and excludes compatibilities from its scope. All nine flagged citations were already in the batch-5 closure before this delivery. The lem-pod-* nodes they reach are generic lemmas (integral pullback composition, stalk tensor, point sections and reduction), not steps of the Poincare-duality or trace-formula proofs, so no citation needs to be replaced by an assumption leaf. No SGA source is cited. The corrected files are in fixes/dag/nodes/sec-smooth-purity/.; 2 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleOrientationLocality",
+  "declaration": "AlgebraicGeometry.ProEtale.RegularImmersionPurity.etale_orientation_locality",
+  "file": "lean/Sheaf/Paper/EtaleOrientationLocality.lean",
+  "statement": "theorem etale_orientation_locality (P : WeilConjectures.PurityFiniteSetting.{u}) {Z X U V : Scheme.{u}} [Z.Over (Spec (.of P.field.k))] [X.Over (Spec (.of P.field.k))] [U.Over (Spec (.of P.field.k))] [V.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Z ↘ Spec (.of P.field.k))] [QuasiCompact (Z ↘ Spec (.of P.field.k))] [IsSeparated (Z ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (U ↘ Spec (.of P.field.k))] [QuasiCompact (U ↘ Spec (.of P.field.k))] [IsSeparated (U ↘ Spec (.of P.field.k))] (i : Z ⟶ X) (u : U ⟶ X) (v : V ⟶ Z) (iU : V ⟶ U) [i.IsOver (Spec (.of P.field.k))] [u.IsOver (Spec (.of P.field.k))] [v.IsOver (Spec (.of P.field.k))] [iU.IsOver (Spec (.of P.field.k))] [IsClosedImmersion i] [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u] [Etale u] (sq : IsPullback iU v u i) (c : ℕ) (hi : WeilConjectures.PurityConventions.IsRegularOfPureCodimension i c) [Smooth (X ↘ Spec (.of P.field.k))] (hZ : IsRegularScheme Z) : @EtaleOrientationConclusion P Z X U V _ _ _ _ _ _ _ _ _ _ _ _ _ i u v iU _ _ _ _ _ _ _ _ _ sq c hi _ hZ.2",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.etaleOrientationComparison",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.EtaleOrientationEquation",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.EtaleUnitOrientation",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.EtaleCoprojectionCompatibility",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.EtaleOrientationConclusion",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.etale_orientation_locality"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b116365b",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Item lean-only change; stmt_deps unchanged from stage 1. Lean matches node clause by clause: P datum; Z,X sep. finite type; i closed immersion with IsRegularOfPureCodimension i c (c=0 allowed, as node says c>=0); Smooth X; IsRegularScheme Z; u etale with IsSeparated/QC implied by U sep qc and X separated; sq : IsPullback iU v u i. Conclusion existentials: iU closed immersion, v etale, V finite type/qc/separated, U and V smooth, V regular, iU regular codim c; EtaleUnitOrientation u,v (chartOrdinaryOrientation 0 = .choose of diagonal ∃!, = FiniteEtaleNormalization.eta); five-arrow B checked arrow by arrow, IsIso; co-projection square = lem-pur-etale-coprojection-rho-compatibility verbatim, co-projections pinned by co.inv equation, all invertible finite-Tor L; equation comparison iU ≫ B = twistPullback(v,0).inv ≫ v^*(comparison i). §1(B) restoration of deleted RegularImmersionPurityComparison (pur9-rg-def-phi): same 32 decls, note present, statement verbatim; hreg moved to sk-def-purity-conv IsRegularOfPureCodimension (source convention, includes c=0; value pinned by ComponentEquations independent of hreg; equivalent for c>=1 on smooth X); no hollow defs; no importers affected. Docstrings and source/blueprint ok; no line >100; imports exist; only sorry proofs; pro-etale coordinates. Advisories: etale-coordinate B in co-projection clause vs pro-etale B in equation (definitional link via pur9 rho); H11 dispatcher no-second-reader wording; pur9 pruned as unreachable by U on 10-20, reachability for maintainer; docstring cites latest blueprint. No compile run (no file changed)."
+ }
 }

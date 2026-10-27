@@ -1,0 +1,224 @@
+{
+ "id": "lem-sfb-etale-detects-perfect",
+ "kind": "statement",
+ "title": "Etale pullback detects Zariski perfectness",
+ "statement": "Let $T$ be an arbitrary scheme [def-pc-scheme], and let $\\epsilon_T:(T_{\\mathrm{et}},\\mathcal O_{T,\\mathrm{et}})\\to(T_{\\mathrm{Zar}},\\mathcal O_T)$ be restriction from the small etale ringed site to the Zariski ringed site [lem-trf-zariski-etale-functor-comparison-square]. Use unbounded derived categories of module sheaves [def-weil-abstract-derived-category] and the exact tensor pullback $\\epsilon_T^*$. For any $A\\in D(\\mathcal O_T)$, $A$ is perfect in the Zariski sense [def-pc-perfect-complex] if and only if $\\epsilon_T^*A$ is perfect on $T_{\\mathrm{et}}$, meaning locally on that site isomorphic in the derived category to a bounded complex of direct summands of finite free structure modules. No quasi-coherence, boundedness, quasi-compactness or Noetherian hypothesis on $A$ or $T$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08HG (lemma-descend-perfect), with the ringed-site perfectness convention of sites-cohomology.tex Tag 08G5 (definition-perfect)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-abstract-derived-category",
+  "lem-trf-zariski-etale-functor-comparison-square",
+  "def-pc-perfect-complex",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-sc-weak-sheafify-addcommgrp-left-exact",
+  "def-sfb-ringed-site-perfect-at-coefficient-size",
+  "def-sfb-derived-etale-zariski-equivalence-data"
+ ],
+ "proof": [
+  {
+   "text": "If $A$ is Zariski perfect, choose the open cover $T=\\bigcup_iU_i$ and bounded strictly perfect representatives $P_i^\\bullet$ with isomorphisms $P_i^\\bullet\\simeq A|_{U_i}$ in $D(\\mathcal O_{U_i})$ from [def-pc-perfect-complex]. The tensor pullback $\\epsilon_T^*$ is exact on all module sheaves [lem-sfb-derived-etale-zariski-equivalence], so it is applied termwise to complexes, sends quasi-isomorphisms to quasi-isomorphisms and hence induces a functor on derived categories carrying the isomorphism $P_i^\\bullet\\simeq A|_{U_i}$ to an isomorphism $\\epsilon^*P_i^\\bullet\\simeq(\\epsilon_T^*A)|_{U_i}$; restriction to the etale site of the open $U_i$ commutes with $\\epsilon^*$ because both are computed by tensor extension of sections over etale $V\\to U_i$. For a summand $P_i^r\\xrightarrow{s}\\mathcal O_{U_i}^{n}\\xrightarrow{t}P_i^r$ with $ts=1$, the pulled-back maps still have composite $1$, and the middle module is $\\epsilon^*\\mathcal O_{U_i}^{n}=\\mathcal O_{U_i,\\mathrm{et}}^{n}$. Bounds on degrees are unchanged. The open cover is also an etale cover, so these pulled-back strictly perfect complexes exhibit $\\epsilon_T^*A$ as site-perfect.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-sfb-derived-etale-zariski-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "08HG (lemma-descend-perfect), easy direction; direct summand calculation underlying sites-cohomology.tex 08H6 (lemma-perfect-pullback)."
+   }
+  },
+  {
+   "text": "Conversely, suppose $\\epsilon_T^*A$ is perfect. Apply the ringed-site criterion to $(T_{\\mathrm{et}},\\mathcal O_{T,\\mathrm{et}})$: $\\epsilon_T^*A$ is pseudo-coherent and locally has finite Tor dimension, with the interval allowed to vary on the cover.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "08G8 (lemma-perfect), (1) implies (2)."
+   }
+  },
+  {
+   "text": "For each integer $m$, pseudo-coherence of $\\epsilon_T^*A$ gives $m$-pseudo-coherence, which descends to $A$ by the pseudo-coherence descent statement. Quantifying over $m$ proves that $A$ is pseudo-coherent. The local finite-Tor clause of Tor-dimension descent gives Zariski-locally finite Tor dimension for $A$. Both descent statements allow arbitrary $A$ and arbitrary $T$; no global bound is inferred.",
+   "uses": [
+    "lem-sfb-etale-pseudocoherence-descent",
+    "lem-sfb-etale-tor-dimension-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "08HG via 08HE (lemma-descend-pseudo-coherent) and 08HF (lemma-descend-tor-amplitude), applied locally."
+   }
+  },
+  {
+   "text": "Apply the scheme perfectness criterion to the pseudo-coherent object $A$ with Zariski-locally finite Tor dimension obtained in step 3. It gives precisely Zariski perfectness in [def-pc-perfect-complex], completing the converse.",
+   "uses": [
+    "lem-pc-pseudo-coherent-locally-finite-tor-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "08CQ (lemma-perfect), (2) implies (1); the Zariski instance of sites-cohomology.tex 08G8 used in 08HG."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-ringed-site-perfect-criterion",
+  "lem-sfb-etale-pseudocoherence-descent",
+  "lem-sfb-etale-tor-dimension-descent",
+  "lem-pc-pseudo-coherent-locally-finite-tor-perfect"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "08HG (lemma-descend-perfect), expanding its omitted assembly using 08HE, 08HF, sites-cohomology.tex 08G8, and cohomology.tex 08CQ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A complex of modules on a scheme is perfect if and only if its pullback to the small etale ringed site is perfect",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: morphism-locality results do not detect perfectness of complexes across these ringed sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfectness descends from the etale topology to the Zariski topology for an arbitrary complex of structure sheaf modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: morphism-locality results do not detect perfectness of complexes across these ringed sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes on a scheme can be detected after exact pullback from the Zariski site to the small etale site",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": zariskiTopology ≤ etaleTopology\", \"doc\": \"The Zariski topology on the category of schemes is less than or equal to the étale topology in the partial order of Grothendieck topologies, meaning that every covering sieve in the Zariski topology i\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.of_isPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {UX UY : AlgebraicGeometry.Scheme} {iY : UY ⟶ Y}\\n  [AlgebraicGeometry.IsOpenImmersion iY] {iX : UX ⟶ X} {f' : UX ⟶ UY}, CategoryTheory.IsPullba\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target, then given a pullback square where the right morphism is an open immersion, if the original morphism $ f $ satisfies $ P $, then the pulled\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}\n  {\"name\": \"AlgebraicGeometry.universally_isZariskiLocalAtSource\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P : MorphismProperty Scheme) [IsZariskiLocalAtSource P] : IsZariskiLocalAtSource P.universally\", \"doc\": \"If $ P $ is a morphism property on schemes that is Zariski-local at the source, then the property $ P $ being universally satisfied (i.e., preserved under all pullbacks) remains Zariski-local at the s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.of_isPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"{UX UY : Scheme.{u}} {iY : UY ⟶ Y} [IsOpenImmersion iY] {iX : UX ⟶ X} {f' : UX ⟶ UY} (h : IsPullback iX f' f iY)\\n  (H : P f) : P f'\", \"doc\": \"If a morphism property $P$ is Zariski local at the target, and given a pullback square involving an open immersion $iY: UY \\to Y$ and morphisms $f: X \\to Y$ and $f': UX \\to UY$, then $P$ being satisfied \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: morphism-locality results do not detect perfectness of complexes across these ringed sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"perfect\", \"etale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: morphism-locality results do not detect perfectness of complexes across these ringed sites"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*etale|etale.*perfect|perfect.*zariski|epsilon.*perfect",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: morphism-locality results do not detect perfectness of complexes across these ringed sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of structure sheaf modules is perfect exactly when its pullback from Zariski to the small etale site is perfect",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism properties, cohomological bounds, or module presentations, not this assertion about perfect or pseudo-coherent complexes and Tor amplitude"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of perfect complexes from the etale topology to the Zariski topology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.subcanonical_zariskiTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.BigZariski\", \"type\": \": zariskiTopology.Subcanonical\", \"doc\": \"The Zariski topology on the category of schemes is the Grothendieck topology where covering families are collections of open immersions whose images cover the target scheme. This topology satisfies th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": zariskiTopology ≤ etaleTopology\", \"doc\": \"The Zariski topology on the category of schemes is less than or equal to the étale topology in the partial order of Grothendieck topologies, meaning that every covering sieve in the Zariski topology i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [P'.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ AlgebraicGeometry.Spec R)\\n      (g : Y ⟶ AlgebraicGeometry.Spec R), P' f → P (CategoryTheo\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties in the category of schemes. If $\\\\mathcal{P}$ is Zariski local at the target and $\\\\mathcal{P}'$ is stable under base change, then for any com\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.BigZariski\", \"type\": \": zariskiTopology.{u} = zariskiPretopology.toGrothendieck\", \"doc\": \"The Zariski topology on the category of schemes is equal to the Grothendieck topology generated by the Zariski pretopology, which is constructed from covering families of open immersions that are join\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P]\\n  (H :\\n    ∀ {R S : CommRingCat.{u}} {Y : Scheme.{u}} (φ : R ⟶ S) (g : Y ⟶ Spec R),\\n      P' (Spec.map φ) → P (pullback.fst (Spec.map φ) g) → P g) :\\n  P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism properties, cohomological bounds, or module presentations, not this assertion about perfect or pseudo-coherent complexes and Tor amplitude"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"perfect\", \"etale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism properties, cohomological bounds, or module presentations, not this assertion about perfect or pseudo-coherent complexes and Tor amplitude"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*etale|etale.*perfect|perfect.*zariski",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism properties, cohomological bounds, or module presentations, not this assertion about perfect or pseudo-coherent complexes and Tor amplitude"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-space-derived-base-change",
+  "date": "2026-10-23",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 08HG (lemma-descend-perfect), with the ringed-site perfectness convention of sites-cohomology.tex Tag 08G5 (definition-perfect).",
+   "via": [
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-detects-perfect",
+  "worker": "stage1",
+  "summary": "Preserved the arbitrary-complex statement of 08HG; wrote the forward summand calculation and the converse through separate pseudo-coherence and local Tor-dimension descent statements and the ringed-site perfectness criterion. Reused the existing scheme criterion. All three new nodes are statement-only and searched.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting input through proper-flat derived base change: 08HG converts etale perfectness to Zariski perfectness. Latest unit file read; no change to the alteration/direct-image route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-pseudo-coherent-locally-finite-tor-perfect",
+    "why": "Generic Zariski perfectness criterion, Stacks 08CQ, needed to conclude from the two descended properties; the unit gives no replacement for this scheme-theoretic criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-pseudo-coherent-locally-finite-tor-perfect"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N8-9a6907897",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-9a6907897 (reviewer sub-agent of L); spot-checked: I read Stacks 08HG/08HE/08HF/08H8 in spaces-perfect.tex and 08FT/08FZ/08G5/08G8 in sites-cohomology.tex in full. The item statement is unchanged and matches 08HG: arbitrary scheme, arbitrary E in D(O_X), site perfectness as in 08G5. It is not superseded: live and side-live still have the item unsplit with no repair note. Steps 2-4 follow the 08HG assembly. Step 2 uses the new 08G8 ringed-site criterion. Step 3 uses the new 08HE descent for each m and the local clause of the new 08HF node. Step 4 uses lem-pc-pseudo-coherent-locally-finite-tor-perfect (08CQ); I accept this off-unit tool use because it is the generic scheme criterion. The three new nodes are true and are not clauses of the item: each also covers non-perfect E or arbitrary ringed sites. The local finite-Tor clause is not literally in 08HF; I checked it myself (finite étale subcover over an affine, hull of the intervals, then 08HF(1)). I tested the disjoint union of Spec k with shifts k[n]: locally finite Tor dimension with no global bound, and the node keeps this locality. I found no duplicates (no existing 08G8/08HE/08HF node; the scheme-only 08CQ nodes and the site-perfect window nodes differ). B1-B9 checks are fine. Batch-5 flags: both new nodes cite lem-trf-zariski-etale-functor-comparison-square only as a statement dependency defining ε, which the item already cited on the base. It is the generic Descent 03FH/03LC change-of-topology construction, and its closure has only space and étale-module foundations, with no trace-formula or Poincaré-duality step. Generic, so no RETURN. FIX (C1/C2): step 1 was marked elementary but needs exactness of ε^* on all module sheaves (08H8) to carry derived isomorphisms. The corrected item now cites lem-sfb-derived-etale-zariski-equivalence (base node, same unit, states 'ε_T^* exact and faithful on all module sheaves'), sets elementary false, spells out the restriction compatibility, and updates proof_deps. The statement is unchanged. Advisory: the new nodes could cite def-weil-pbc-strict-perfect-coefficient-package instead of the inline definition of perfect.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleDetectsPerfect",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isPerfect_iff_smallEtale_perfect",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDetectsPerfect.lean",
+  "statement": "theorem isPerfect_iff_smallEtale_perfect [∀ X : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ X : Scheme.{u}, HasDerivedCategory.{w} (SmallEtaleModules X)] (T : Scheme.{u}) [∀ U : T.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings T.toRingedSpace).over U))] (d : DerivedEtaleZariskiEquivalenceData T) (A : schemeDerivedCategory T) : Scheme.IsPerfect T A ↔ SheafOfModules.IsPerfectAtCoefficientSize (smallEtaleModuleRing T) (d.extension.obj A)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned immutable head 6915b645316d: Lean signature unchanged. Statement dependencies cite new existing-definition owners for IsPerfectAtCoefficientSize/IsLocallyStrictPerfectAtCoefficientSize and DerivedEtaleZariskiEquivalenceData/ZariskiEtaleModuleContext.structureMap. The derived equivalence theorem remains a proof dependency only; the proper-support theorem is not a dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-151d1efdb",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Re-delivery of returned 6915b645316d: both requested §1(A) existing:true definition owners are added and cited (def-sfb-ringed-site-perfect-at-coefficient-size for IsPerfectAtCoefficientSize/IsLocallyStrictPerfectAtCoefficientSize; def-sfb-derived-etale-zariski-equivalence-data for DerivedEtaleZariskiEquivalenceData/structureMap). Their statements match the Lean and 08G5/08H8, their closures avoid the item, and they are not in side-live. The Lean statement is unchanged and verbatim: arbitrary T and A in the unbounded D(O_T), no qcoh, d pins ε^* up to iso through extension_factors, no universe equality, edge cases fine, sorry only, docstrings with source and blueprint. Mechanical finding: lem-sc-weak-sheafify-addcommgrp-left-exact supplies the HasSheafify instance (hasSheafify_addCommGrp_of_weak) that the perfectness predicates need on étale slices; the statement genuinely depends on that conclusion, so PASS on this point. Advisory: def-sfb-scheme-zariski-etale-module-constructions (landed after the base) could later replace or accompany the lem-trf comparison-square stmt_dep. No files changed, no compile."
+ }
+}

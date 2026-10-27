@@ -1,0 +1,131 @@
+{
+ "id": "lem-zl-integral-open-empty-pullback-vanishing",
+ "kind": "statement",
+ "title": "Integral open compact support vanishes across an empty pullback",
+ "statement": "Fix a prime ell, a finite coefficient extension E/Q_ell, a field k with ell invertible, finite-type k-schemes U and X, a quasi-compact open k-immersion j:U→X, and i:Z→X. Assume ell invertible in the residue fields of X and Z and U×_X Z empty. For every integral constructible K on U, the specified constructible integral pullback of the fixed compact-support functor for (j,id_X) is a zero object. The operations are those of [def-weil-derived-pullback-tensor-hom; def-weil-integral-rational-qbar-compact-support; def-weil-derived-complete-integral-detailed].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+  "place": "Proof (1), complementary restriction; Bhatt–Scholze Lemma 6.1.12(2)."
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-open-immersion",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "For (j,id), the defining compact-support strict tower is extension of the input reduction tower. The specified open-reduction comparison identifies its total limit with ringed-site extension, including every quotient transition.",
+   "uses": [
+    "lem-sf-integral-open-reduction-comparison",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The integral/completed pullback comparison supplies intrinsic completeness of the constructible input and identifies its pullback with completed pullback. Apply completed open base change; its map is invertible.",
+   "uses": [
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-cbc-completed-extension-zero-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every module sheaf on the empty pullback is zero by the empty covering axiom. In the direct-sum extension formula every summand is zero, so the extension presheaf and its sheafification are zero. This remains zero termwise and after derived localization. Thus the target of completed exchange is zero. Transport its zero-object property through the comparisons of the previous steps.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-open-reduction-comparison",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-a1-integral-pullback-completed-comparison",
+  "lem-cbc-completed-extension-zero-comparison",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+  "place": "Proof (1), complementary restriction; Bhatt–Scholze Lemma 6.1.12(2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Integral derived pullback of open compact support vanishes on a disjoint subscheme; integral pullback preserves zero",
+   "results": "Scheme.isEmpty_pullback_iff, IdealSheafData.ker_fst_of_isClosedImmersion, Functor.mapZeroObject; no specified integral adic construction.",
+   "verdict": "No match for either specified integral operation.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict integral adic derived pullback preserves zero; extension by zero on a disjoint closed complement",
+   "results": "AdicCompletion.map_zero and scheme restriction isomorphisms; no completed sheaf operation.",
+   "verdict": "No matching theorem.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*[Pp]ullback.*[Zz]ero|empty.*[Pp]ullback.*[Vv]anishing|[Pp]ullback.*preserv.*[Zz]ero",
+   "results": "No matching theorem in Mathlib, WeilConjectures or Sheaf. Generic Functor.map_isZero requires a preservation instance, absent for the normalized integral pullback.",
+   "verdict": "Need the actual integral comparison step.",
+   "date": "2026-10-25"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ZlOpenCompactSupportRestriction",
+  "date": "2026-10-25",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-quasi-finite",
+   "place": "Proof (1), zero stalk outside the open",
+   "via": [
+    "lem-zl-extension-by-zero-punctual",
+    "lem-zl-open-compact-support-restriction-identities"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-quasifinite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralOpenEmptyPullbackVanishing",
+  "file": "lean/Sheaf/Paper/IntegralOpenEmptyPullbackVanishing.lean",
+  "declaration": "WeilConjectures.integralOpenEmptyPullbackVanishing",
+  "statement": "theorem integralOpenEmptyPullbackVanishing\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (k : Type u) [Field k] (hl : IsUnit (l : k))\n    {U X Z : Scheme.{u}}\n    [U.Over (Spec (.of k))] [X.Over (Spec (.of k))]\n    [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    (j : U ⟶ X) [j.IsOver (Spec (.of k))] [IsOpenImmersion j] [QuasiCompact j]\n    (i : Z ⟶ X) [IsEmpty ↥(pullback j i : Scheme.{u})]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ z : Z, Invertible (l : Z.residueField z)]\n    (K : sfIntegralConstructibleCategory l E U) :\n    IsZero ((constructibleIntegralPullback l E i).obj\n      ((sfCompactSupportFiniteIntegralFunctor l k hl\n        (Compactification.ofIsOpenImmersion j) E).obj K))",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261025T163635-L-741778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261025T163635-L-741778",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

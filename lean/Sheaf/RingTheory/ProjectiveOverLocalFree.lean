@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.RingTheory.LocalRing.Defs
+import Mathlib.LinearAlgebra.DirectSum.Basis
+import Mathlib.LinearAlgebra.Projection
 import Sheaf.LinearAlgebra.CountablyGeneratedFreenessCriterion
 import Sheaf.RingTheory.ProjectiveCountableDecomposition
 import Sheaf.SecTraceFormula.ProjectiveElementFreeSummand
@@ -54,6 +56,17 @@ theorem free_of_projective_of_isLocalRing
     (R : Type u) [CommRing R] [IsLocalRing R]
     (P : Type v) [AddCommGroup P] [Module R P] [Module.Projective R P] :
     Module.Free R P := by
-  sorry
+  obtain ⟨I, Q, _, _, hprojective, hcountable, ⟨e⟩⟩ :=
+    exists_directSum_countablyGenerated_projective R P
+  have : ∀ i, Module.Free R (Q i) := by
+    intro i
+    have : Module.Projective R (Q i) := hprojective i
+    apply free_of_countable_generators_of_free_summands (hcountable i)
+    intro N F hNF _ x
+    have : Module.Projective R N :=
+      Projective.of_split N.subtype (N.projectionOnto F hNF)
+        (Submodule.projectionOnto_comp_subtype hNF)
+    exact projective_element_mem_free_summand x
+  exact Module.Free.of_equiv e
 
 end Module

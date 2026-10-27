@@ -1,0 +1,294 @@
+{
+ "id": "lem-pur-brown-tower-finite-site-comparison",
+ "kind": "statement",
+ "title": "Finite evaluation and bounded site transport of the Brown tower adjoint",
+ "statement": "Fix distinct primes $p,\\ell$, a field $k$ of characteristic $p$, and a $k$-morphism $f:X\\to Y$ between separated finite-type $k$-schemes [def-weil-pbc-scheme-conventions]. Fix a finite extension $E/\\mathbf Q_\\ell$, valuation ring $R$, uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Choose a compactification $c=(X\\xrightarrow{j}\\overline X\\xrightarrow{g}Y)$, with $j$ open and $g$ proper [def-weil-compactifications-refinements].\n\nFor $T=X,\\overline X,Y$, let $\\mathsf S_T^{\\mathrm{et}}$ and $\\mathsf S_T^{\\mathrm{proet}}$ be the abelian categories of strict systems of $(A_n)_T$-module sheaves on the indicated small sites, with semilinear quotient transitions and componentwise exactness; use their ordinary unbounded derived categories and exact evaluations $e_n$ [lem-pur-coefficient-system-derived-comparison]. Put $F^{\\mathrm{et}}=Rg_{*,\\bullet}^{\\mathrm{et}}j_{!,\\bullet}^{\\mathrm{et}}$ and $F_n^{\\mathrm{et}}=Rg_{*,n}^{\\mathrm{et}}j_{!,n}^{\\mathrm{et}}$. Choose the $R$-linear Brown adjunction $F^{\\mathrm{et}}\\dashv G^{\\mathrm{et}}$ of [lem-pur-etale-tower-brown-adjunction]. Let $f_n^\\times$ be the ordinary unbounded etale right adjoint of $F_n^{\\mathrm{et}}$ [thm-amb-etale-exceptional-adjoint]. Let $LE_n^T\\dashv e_n$ be the derived extension from one level [lem-pur-coefficient-evaluation-derived-left-adjoint], so $e_q LE_n^T P=P\\otimes^L_{A_n}A_q$ for $q\\le n$ and is zero for $q>n$. The natural transformation\n$$\\chi_n:LE_n^YF_n^{\\mathrm{et}}\\longrightarrow F^{\\mathrm{et}}LE_n^X$$\nwhose evaluation-adjunction transpose is the identity is invertible on all objects. For every etale derived system $Q$ there are natural isomorphisms $e_nG^{\\mathrm{et}}Q\\cong f_n^\\times(e_nQ)$. They identify evaluated counits with finite counits. The actual transition adjoint of $G^{\\mathrm{et}}Q$ from level $m$ to level $n$ is the transpose of the coefficient-extended finite counit followed by the transition of $Q$; these are the ordinary exceptional coefficient mates and obey the quotient cocycle, as equalities of actual transformations of systems.\n\nLet $C$ be a bounded-below normalized pro-etale derived system of etale origin, with finite bounded constructible finite-Tor evaluations. Write $\\nu_{T,\\bullet}^*\\dashv R\\nu_{T,\\bullet,*}$ for the ordinary system site adjunction and put $Q=R\\nu_{Y,\\bullet,*}C$. Suppose the finite exceptional images $Rf_n^!C_n$ have a common lower cohomological bound. Here $Rf_n^!$ is the finite etale-origin adjoint transported as in [lem-pur-finite-coefficient-adjoint-comparisons]. Then $G^{\\mathrm{et}}Q$ is bounded below and\n$$N=\\nu_{X,\\bullet}^*G^{\\mathrm{et}}Q$$\nis a bounded-below normalized pro-etale derived system, with canonical counit-preserving isomorphisms $N_n\\cong Rf_n^!C_n$ and the specified finite coefficient-mate transitions. There is an actual transported tower counit $FN\\to C$. For every bounded-below pro-etale derived system $B$ of etale origin, the transported Brown bijection $\\operatorname{Hom}(B,N)\\cong\\operatorname{Hom}(FB,C)$ is natural and $R$-linear. Site comparison is fully faithful on these bounded-below systems, including morphisms. No right adjoint on all unbounded pro-etale complexes is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction.proof.md",
+  "place": "Agent ordinary-derived refinement of the tower adjunction used in the first Hom display; returned item proof Steps 4–5, using derived left adjoints to evaluation and bounded-below site comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-compactifications-refinements",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-etale-tower-brown-adjunction",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-pur-coefficient-evaluation-derived-left-adjoint",
+  "lem-pur-finite-coefficient-adjoint-comparisons",
+  "def-pur-brown-tower-realization",
+  "def-pur-brown-finite-evaluation",
+  "def-pur-brown-system-site",
+  "def-pur-brown-bounded-transport"
+ ],
+ "proof": [
+  {
+   "text": "Choose the finite-evaluation package and the compatible geometric comparisons before transporting any counit or Hom bijection.",
+   "uses": [
+    "lem-pur-brown-tower-geometric-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The evaluated exceptional comparison is the explicit paste of site inverse evaluation, Brown finite evaluation and site direct evaluation. Bounded site units give bijectivity on Hom by the adjunction Hom equivalence. Exact open extension preserves each lower bound, and the right adjoint of exact proper pullback preserves each lower bound too.",
+   "uses": [
+    "def-pur-brown-system-site",
+    "lem-pur-exact-derived-adjunction-bounds"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At C with common finite exceptional lower bound, the geometric bound makes G(V_Y C) bounded below. Invert d at that object and compose V_Y.inverse of the Brown counit with the Y site counit. This explicitly defines the transported counit, and cancellation of d proves its pinned equation.",
+   "uses": [
+    "lem-pur-brown-tower-geometric-transport",
+    "def-pur-brown-bounded-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the X site-counit Hom congruence, inverse of full faithfulness of X inverse image, inverse of the Brown adjunction Hom equivalence, inverse of the Y site Hom equivalence, and compact-support comparison Hom congruence. Naturality of d proves that this equivalence sends a to P.map a followed by the constructed counit. Brown compatibility follows by the same naturality square. Naturality in both variables follows from functoriality and naturality of the Brown and site counits.",
+   "uses": [
+    "def-pur-brown-bounded-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The exact-derived factorization identifies each derived inverse image with the standard exact-derived functor and hence makes it additive. Adjunction makes proper direct image additive, so P is additive and the Hom bijection preserves sums. Brown right-linearity and naturality of d and of its counit give the specified scalar equation. Assemble TransportData and Transport from these explicit constructions.",
+   "uses": [
+    "lem-pur-exact-derived-adjunction-bounds",
+    "lem-pur-etale-tower-brown-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-brown-bounded-transport",
+  "def-pur-brown-system-site",
+  "lem-pur-brown-tower-geometric-transport",
+  "lem-pur-etale-tower-brown-adjunction",
+  "lem-pur-exact-derived-adjunction-bounds"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Integral-adjunction first Hom display; Zheng Lemmas 4.10 and 5.22. Explicit proof of the transported counit and Hom chain from the geometric comparison portion of original Steps 1–10."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Brown right adjoint of compact support on strict coefficient towers evaluates to finite exceptional inverse images preserving counits and coefficient mates",
+   "results": "[{\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}, {\"name\": \"CondensedMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod.LocallyConstant.functor R ⊣ Condensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction where the left adjoint assigns to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions from discrete spaces to $ M $, and the rig\"}, {\"name\": \"CondensedSet.compactlyGeneratedAdjunction\", \"module\": \"Mathlib/Condensed/TopCatAdjunction\", \"type\": \"CondensedSet.condensedSetToCompactlyGenerated ⊣ CondensedSet.compactlyGeneratedToCondensedSet\", \"doc\": \"The adjunction between the category of compactly generated spaces and the category of condensed sets, obtained by restricting the adjunction between topological spaces and condensed sets through the f\"}, {\"name\": \"CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction\", \"module\": \"Mathlib/Condensed/TopCatAdjunction\", \"type\": \"CategoryTheory.IsIso CondensedSet.compactlyGeneratedAdjunction.counit\", \"doc\": \"The counit of the adjunction between compactly generated spaces and condensed sets is an isomorphism. This means that for every compactly generated space $X$, the canonical morphism from the condensed\"}, {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}, {\"name\": \"CompHausLike.LocallyConstant.adjunction_counit\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"Under the assumption that effective epimorphisms are surjective and given the existence of explicit finite coproducts and pullbacks in the category of compact Hausdorff-like spaces, the counit of the \"}, {\"name\": \"Condensed.profiniteSolidification\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R\", \"doc\": \"The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid \"}, {\"name\": \"CompHausLike.LocallyConstant.adjunction_left_triangle\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"The composition of the unit natural transformation followed by the counit natural transformation equals the identity morphism on the locally constant sheaf functor, i.e., $\\\\text{functorToPresheaves.ma\"}]",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary functor-category evaluation and abstract derived adjunctions do not identify finite exceptional tower counits, their quotient mates and bounded site transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived left adjoints to evaluation compute levels of the tower exceptional adjoint and transport bounded below etale origin systems to the proetale site",
+   "results": "[{\"name\": \"CategoryTheory.Adjunction.derived'\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}, {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}, {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}, {\"name\": \"Condensed.profiniteSolidification\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R\", \"doc\": \"The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid \"}, {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}, {\"name\": \"CondensedMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod.LocallyConstant.functor R ⊣ Condensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction where the left adjoint assigns to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions from discrete spaces to $ M $, and the rig\"}, {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}, {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}]",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary functor-category evaluation and abstract derived adjunctions do not identify finite exceptional tower counits, their quotient mates and bounded site transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjoint\", \"evaluation\"",
+   "results": "[{\"name\": \"CategoryTheory.coevaluation_comp_rightAdjointMate\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Rigid.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {X Y : C} [CategoryTheory.HasRightDual X] [CategoryTheory.HasRightDual Y] (f : X ⟶ Y) : CategoryTheory.CategoryStruct.comp (η_ Y Yᘁ) (CategoryTheory.MonoidalCategoryStruct.whiskerLeft Y (fᘁ)) = CategoryTheory.Cat\", \"doc\": \"\"}, {\"name\": \"CategoryTheory.rightAdjointMate_comp_evaluation\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Rigid.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {X Y : C} [CategoryTheory.HasRightDual X] [CategoryTheory.HasRightDual Y] (f : X ⟶ Y) : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerRight (fᘁ) X) (ε_ X Xᘁ) = CategoryTheory.Ca\", \"doc\": \"\"}, {\"name\": \"CategoryTheory.coevaluation_comp_rightAdjointMate_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Rigid.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {X Y : C} [CategoryTheory.HasRightDual X] [CategoryTheory.HasRightDual Y] (f : X ⟶ Y) {Z : C} (h : CategoryTheory.MonoidalCategoryStruct.tensorObj Y Xᘁ ⟶ Z) : CategoryTheory.CategoryStruct.comp (η_ Y Yᘁ) (Categor\", \"doc\": \"\"}, {\"name\": \"CategoryTheory.rightAdjointMate_comp_evaluation_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Rigid.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {X Y : C} [CategoryTheory.HasRightDual X] [CategoryTheory.HasRightDual Y] (f : X ⟶ Y) {Z : C} (h : CategoryTheory.MonoidalCategoryStruct.tensorUnit C ⟶ Z) : CategoryTheory.CategoryStruct.comp (CategoryTheory.Mono\", \"doc\": \"\"}, {\"name\": \"CategoryTheory.evaluationRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [CategoryTheory.Category.{v₂, u₂} D] [∀ (a b : C), CategoryTheory.Limits.HasProductsOfShape (a ⟶ b) D] (c : C) : CategoryTheory.Functor D (CategoryTheory.Functor C D)\", \"doc\": \"The right adjoint of evaluation.\"}, {\"name\": \"CategoryTheory.evaluationIsRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [CategoryTheory.Category.{v₂, u₂} D] [∀ (a b : C), CategoryTheory.Limits.HasCoproductsOfShape (a ⟶ b) D] (c : C) : ((CategoryTheory.evaluation C D).obj c).IsRightAdjoint\", \"doc\": \"\"}, {\"name\": \"CategoryTheory.evaluationRightAdjoint_obj_obj\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [CategoryTheory.Category.{v₂, u₂} D] [∀ (a b : C), CategoryTheory.Limits.HasProductsOfShape (a ⟶ b) D] (c : C) (d : D) (t : C) : ((CategoryTheory.evaluationRightAdjoint D c).obj d).obj t = ∏ᶜ fun x => d\", \"doc\": \"\"}, {\"name\": \"CategoryTheory.evaluationRightAdjoint_obj_map\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [CategoryTheory.Category.{v₂, u₂} D] [∀ (a b : C), CategoryTheory.Limits.HasProductsOfShape (a ⟶ b) D] (c : C) (d : D) {X✝ Y✝ : C} (f : X✝ ⟶ Y✝) : ((CategoryTheory.evaluationRightAdjoint D c).obj d).map f = CategoryTheory.Limits.Pi.li\", \"doc\": \"\"}, {\"name\": \"CategoryTheory.evaluationRightAdjoint_map_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [CategoryTheory.Category.{v₂, u₂} D] [∀ (a b : C), CategoryTheory.Limits.HasProductsOfShape (a ⟶ b) D] (c : C) {X✝ Y✝ : D} (f : X✝ ⟶ Y✝) (x✝ : C) : ((CategoryTheory.evaluationRightAdjoint D c).map f).app x✝ = CategoryTheory.Limits.Pi.\", \"doc\": \"\"}]",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary functor-category evaluation and abstract derived adjunctions do not identify finite exceptional tower counits, their quotient mates and bounded site transport."
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|exceptional|derived.*evaluation",
+   "results": "[]",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary functor-category evaluation and abstract derived adjunctions do not identify finite exceptional tower counits, their quotient mates and bounded site transport."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Brown right adjoint of compact support on strict coefficient towers evaluates to finite exceptional inverse images preserving counits and coefficient mates",
+   "results": "[{\"name\": \"CategoryTheory.Functor.rightKanExtensionCounit\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \": L ⋙ rightKanExtension L F ⟶ F\", \"doc\": \"The counit (ε) of the right Kan extension of a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $ along a functor $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, defined as the natural transformation $ \\\\varepsilon : L \"}, {\"name\": \"CategoryTheory.Functor.isPointwiseRightKanExtensionRanCounit\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Adjunction\", \"type\": \"(F : C ⥤ H) [HasPointwiseRightKanExtension L F] :\\n  (RightExtension.mk _ (L.ranCounit.app F)).IsPointwiseRightKanExtension\", \"doc\": \"Given a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $ and the existence of a pointwise right Kan extension along $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the counit $ \\\\varepsilon : L \\\\circ \\\\text{Ran}_L F \\\\R\"}, {\"name\": \"CategoryTheory.isRightAdjoint_triangle_lift\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Lifting.Left\", \"type\": \"{U : B ⥤ C} {F : C ⥤ B} (R : A ⥤ B) (adj₁ : F ⊣ U) (h : ∀ X : B, RegularEpi (adj₁.counit.app X))\\n  [HasReflexiveCoequalizers A] [(R ⋙ U).IsRightAdjoint] : R.IsRightAdjoint\", \"doc\": \"Let $\\\\mathcal{A}, \\\\mathcal{B}, \\\\mathcal{C}$ be categories. Suppose $F : \\\\mathcal{C} \\\\to \\\\mathcal{B}$ and $U : \\\\mathcal{B} \\\\to \\\\mathcal{C}$ form an adjunction $F \\\\dashv U$ with counit $\\\\varepsilon : F \"}, {\"name\": \"CompHausLike.LocallyConstant.counit_app_val\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"For a sheaf $X$ over compact Hausdorff-like spaces with a coherent Grothendieck topology, the counit of the adjunction between the sheaf of locally constant functions and the presheaf construction eva\"}, {\"name\": \"CategoryTheory.Bicategory.IsRightAdjoint.casesOn\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Adjunction.Basic\", \"type\": \"{B : Type u} →\\n  [inst : CategoryTheory.Bicategory B] →\\n    {a b : B} →\\n      {right : b ⟶ a} →\\n        {motive : CategoryTheory.Bicategory.IsRightAdjoint right → Sort u_1} →\\n          (t : CategoryTheory.Bicategory.IsRightAdjoint right) →\\n            ((nonempty : Nonempty (CategoryTheory.Bicategory\", \"doc\": \"For a 1-cell $ f : b \\to a $ in a bicategory $ \\\\mathcal{B} $, the proposition that $ f $ is a right adjoint, i.e., there exists a left adjoint 1-cell $ g : a \\to b $ and 2-cells (unit and counit) satisf\"}, {\"name\": \"CategoryTheory.LiftRightAdjoint.instIsCoreflexivePairMapAppUnitOtherMap\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Lifting.Right\", \"type\": \"(X : B) : IsCoreflexivePair (U'.map (F.map (adj₁.unit.app X))) (otherMap _ _ adj₁ adj₂ X)\", \"doc\": \"For any object $X$ in category $\\\\mathcal{B}$, the pair of morphisms formed by applying the functors $U'$ and $F$ to the unit of adjunction $\\\\text{adj}_1$ at $X$, and the morphism constructed from the \"}, {\"name\": \"CompHausLike.LocallyConstant.counitApp_app\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"∀ {P : TopCat → Prop} [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  (Y : CategoryTheory.Functor (CompHausLike P)ᵒᵖ (Type (max u w)))\\n  [inst_3 : Categ\", \"doc\": \"For any compact Hausdorff-like space $ S $, a finite-product-preserving functor $ Y $ from the opposite category of compact Hausdorff-like spaces to types, and an object $ x $ in this opposite categor\"}, {\"name\": \"CompHausLike.LocallyConstant.counitAppApp\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"(S : CompHausLike.{u} P) (Y : (CompHausLike.{u} P)ᵒᵖ ⥤ Type max u w) [PreservesFiniteProducts Y]\\n  [HasExplicitFiniteCoproducts.{u} P] : LocallyConstant S (Y.obj (op (CompHausLike.of P PUnit.{u + 1}))) ⟶ Y.obj ⟨S⟩\", \"doc\": \"For a compact Hausdorff-like space $ S $, a functor $ Y $ from the opposite category of compact Hausdorff-like spaces to types preserving finite products, and a locally constant function $ r $ from $ \"}]",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary functor-category evaluation and abstract derived adjunctions do not identify finite exceptional tower counits, their quotient mates and bounded site transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brown right adjoint on derived strict coefficient systems evaluates to finite exceptional inverse images and transports to the bounded below proetale site",
+   "results": "8 hits: Condensed.profiniteSolidCounit, Condensed.profiniteSolid, Condensed.lanSheafProfinite, Condensed.profiniteSolidification, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, LightCondMod.LocallyConstant.adjunction, Condensed.lanCondensedSet, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology",
+   "date": "2026-10-23",
+   "verdict": "No match. Read returned signatures: functor-category evaluation, condensed modules and basic pro-etale site definitions do not give the varying-coefficient derived exceptional comparison with counits, transitions and bounded site transport."
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|exceptional|derived.*evaluation",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-23",
+   "verdict": "No match. Read returned signatures: functor-category evaluation, condensed modules and basic pro-etale site definitions do not give the varying-coefficient derived exceptional comparison with counits, transitions and bounded site transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"Adjunction\"",
+   "results": "6 hits: CategoryTheory.evaluationAdjunctionLeft, CategoryTheory.evaluationAdjunctionRight, CategoryTheory.evaluationAdjunctionRight_unit_app, CategoryTheory.evaluationAdjunctionLeft_counit_app, CategoryTheory.evaluationAdjunctionLeft_unit_app_app, CategoryTheory.evaluationAdjunctionRight_counit_app_app",
+   "date": "2026-10-23",
+   "verdict": "No match. Read returned signatures: functor-category evaluation, condensed modules and basic pro-etale site definitions do not give the varying-coefficient derived exceptional comparison with counits, transitions and bounded site transport."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived evaluation left adjoint identifies Brown right adjoints of compact support on coefficient towers",
+   "results": "8 hits: CategoryTheory.evaluationLeftAdjoint, CategoryTheory.evaluationIsLeftAdjoint, CategoryTheory.evaluationAdjunctionRight, CategoryTheory.evaluationAdjunctionLeft, CategoryTheory.evaluationLeftAdjoint_obj_obj, CategoryTheory.evaluationLeftAdjoint_obj_map, CategoryTheory.evaluationRightAdjoint, CategoryTheory.evaluationRightAdjoint_obj_obj",
+   "date": "2026-10-23",
+   "verdict": "No match. Read returned signatures: functor-category evaluation, condensed modules and basic pro-etale site definitions do not give the varying-coefficient derived exceptional comparison with counits, transitions and bounded site transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of right adjoints via left adjoints to evaluation in unbounded derived categories of inverse systems of modules with varying coefficient rings",
+   "results": "8 hits: localCohomology.diagram, CondensedMod.LocallyConstant.adjunction, Ext, CategoryTheory.evaluationAdjunctionRight, Condensed.profiniteSolid, LightCondensed.ihomPoints, Condensed.profiniteSolidification, Condensed.profiniteSolidCounit",
+   "date": "2026-10-23",
+   "verdict": "No match. Read returned signatures: functor-category evaluation, condensed modules and basic pro-etale site definitions do not give the varying-coefficient derived exceptional comparison with counits, transitions and bounded site transport."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-condensed-exceptional-reconstruction",
+  "date": "2026-10-22",
+  "group": "Q99"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "thm-pur-rational-and-qbar-purity, proof Steps 1–2: transporting the reconstructed lattice to Qlb; sk-thm-purity-transport Steps 2–3. This supplies the missing comparison of its exceptional-image output with the seed target’s condensed right adjoint, without asserting smooth purity. Returned reconstruction proof Steps 4, 5.",
+   "via": [
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pur-brown-tower-finite-site-comparison",
+  "worker": "stage1",
+  "group": "Q59",
+  "summary": "Unchanged statement. Constructed the extension comparison as an evaluation mate, identified its evaluated maps with the general unbounded compact-support scalar comparisons, and derived finite right-adjoint, counit and actual transition formulas by the Hom chain. Bounded-below site equivalence and the common finite exceptional lower bound give the transported normalized object and R-linear Hom bijection. Reused existing general nodes instead of finite-field-only tower lemmas; no new nodes.",
+  "blueprint": "thm-pur-rational-and-qbar-purity proof Steps 1–2 and sk-thm-purity-transport Steps 2–3, via the reconstruction item: the tower-adjunction Hom display in sk-prop-sp-integral-adjunction.proof.md. This ordinary-derived supplement supplies its finite evaluations, transitions and bounded site transport.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 4, 5. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 9. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 10. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 2, 10, 11. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   },
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 3. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   },
+   {
+    "node": "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 1, 2, 3, 4, 5, 6. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   },
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 7, 8, 9, 11. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   },
+   {
+    "node": "lem-pur-etale-compact-scalar-coherence",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 2, 5. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   },
+   {
+    "node": "lem-pur-exact-derived-adjunction-bounds",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 10. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   },
+   {
+    "node": "lem-pur-system-derived-evaluation",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 7, 8. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   },
+   {
+    "node": "lem-pur-system-derived-transition-coherence",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 6. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 10. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   },
+   {
+    "node": "lem-sp-et-proet-coefficient-compatibility",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 9. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 9. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 1. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 6, 10. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 3. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic coefficient-system, adjunction, finite-coefficient or site-comparison tool used only for its stated assertion in proof steps 7, 8. The purity-transport unit does not supply this underlying ordinary-derived tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-exact-derived-adjunction-bounds"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-284a478af",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-284a478af (reviewer sub-agent of L); spot-checked: PASS. Read all 11 steps of the item and the statements of all 23 cited nodes in full. Only split-owned fields changed against side-live: the statement, stmt_deps and blueprint fields are identical. The item is still unsplit live, has no repair note, creates no new nodes and cites no SGA. Sources checked: Zheng Construction 4.1 (p.21), Lemma 4.10 (p.23), Lemma 5.16 (5.16.2) and Lemma 5.22; the blueprint sk-prop-sp-integral-adjunction proof (tower Hom display). Step 2: lem-pur-etale-compact-scalar-coherence applies (finite rings A_n→A_q; Noetherian schemes from Step 1), so χ_n is invertible on all unbounded objects; for q>n both sides are 0. Step 3: Yoneda is used only between representables, the form lem-galois-yoneda-fully-faithful states. Steps 5–6: the transition and cocycle are built from the σ_mn formula, transition-coherence and mate pasting as actual transposes, without reflecting equalities through evaluation. Steps 7–8: thm-weil-pbc-site-comparison makes U fully faithful on D+ systems; lower bounds are reflected because H^i commutes with ν^* and ν^*H=0 forces H=0. Step 9: e_mGQ is bounded ctf by the constructible-origin and Noetherian Tor-comparison nodes; lem-sp-et-proet-coefficient-compatibility (any char-p field, separated finite type, ℓ-power finite rings) carries the counit identity from β to b, and b_{A_m,A_n} together with t^C invertible gives normalization. Step 10: d is a whole-system transformation; its evaluations are the isomorphisms of lem-sf-class-compact-support-comparison (any field, D+ input). Step 11: the Hom chain is correct for every bounded-below etale-origin B. Edge cases checked: m=n, q>n, nonflat quotients, imperfect k. All 18 tool_uses are generic and accepted. Maintainer notes: Steps 3–5 generalize the F̄_q-only lem-pur-etale-system-evaluation-bound to an arbitrary char-p field; lem-per-finite-exceptional-system-adjunction overlaps on normalized ctf inputs but is not a duplicate, since this item concerns the Brown adjoint on all unbounded Q."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BrownTowerFiniteSiteComparison",
+  "declaration": "AlgebraicGeometry.BrownTowerComparison.brownTowerFiniteSiteComparison",
+  "declarations": [
+   "AlgebraicGeometry.BrownTowerComparison.brownTowerFiniteSiteComparison"
+  ],
+  "file": "lean/Sheaf/Paper/BrownTowerFiniteSiteComparison.lean",
+  "statement": "theorem brownTowerFiniteSiteComparison (p l : ℕ) [Fact p.Prime] [Fact l.Prime] (_hpl : p ≠ l) (k : Type u) [Field k] [CharP k p] (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (t : Padic.coefficientExtensionIntegers l E) (_ht : Ideal.span ({t} : Set (Padic.coefficientExtensionIntegers l E)) = Padic.coefficientExtensionMaximalIdeal l E) {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] (c : Compactification f) (S : StrictEtaleCompactSupport (Padic.coefficientExtensionIntegers l E) t c) (G : EtaleTowerBrownAdjunction S) : ∃ H : FiniteEvaluation S G, ∃ D : TransportData S G H, Transport S G H D (finite := D.finite)",
+  "branch": "sheaf-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be152aa2d",
+  "group": "N0",
+  "result": "fix",
+  "note": "Lean and node records correct in substance: all hypotheses exact (no Noetherian/finite-field assumption; E : Type (u+1) = dependency etaleTowerBrownAdjunction universe); FiniteEvaluation pins chi by identity transpose, e_nG≅right_n e_n natural on all unbounded Q with counit equation, quotient mates via mateEquiv of projection pinned to etaleTowerBrownRestriction, actual transition + identity/composition cocycles; Transport: bound only on finite exceptional images, GQ/N bounded below, N normalized, evaluation_def pasted, counit fixed by counit_formula via levelwise-pinned d, Hom Equiv = F(a)≫counit tied to Brown homEquiv, natural/additive/R-linear, full faithfulness on D+; no unbounded proetale adjoint. New def nodes (Realization/FiniteEvaluation/Site/BoundedTransport) are real data with pinning equations, no clash in side-live. Only fault: H11 'Second reading by N0' was the author's self-reading → FIX fixes/lem-pur-brown-tower-finite-site-comparison.report.md (worker report + New nodes verbatim + independent clause-by-clause second reading). Advisories: ordinaryFiniteRight/Adjunction = etaleUpper/etaleAdjunction body without IsNoetherian args; Ring = strictEtaleBrownRing; levelRealization = site-generic constantModule; proSystemDerived/proLevelDerived duplicate ExceptionalSystemTransport instances at default priority; d pinned only levelwise (node states no d). No Lean changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261025T013247-L-3946054",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

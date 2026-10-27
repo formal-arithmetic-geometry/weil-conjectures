@@ -1,0 +1,260 @@
+{
+ "id": "lem-sfb-comodule-finite-subrepresentation",
+ "kind": "statement",
+ "title": "Finite subsets of rational modules lie in finite-dimensional submodules",
+ "statement": "Let $k$ be a field [def-weil-field] and $H$ an affine group scheme [def-sc-group-scheme] over $k$. A rational $H$-module is a $k$-vector space $V$ with a $k$-linear coaction $\\rho_V:V\\to V\\otimes_k k[H]$ satisfying $(\\rho_V\\otimes1)\\rho_V=(1\\otimes\\Delta)\\rho_V$ and $(1\\otimes\\epsilon)\\rho_V=1_V$, where $\\Delta,\\epsilon$ are the comultiplication and counit of the coordinate Hopf algebra; $V^H=\\{v:\\rho_V(v)=v\\otimes1\\}$. For every finite subset $S\\subset V$ there is a finite-dimensional $k$-subspace $W\\subset V$ containing $S$ with $\\rho_V(W)\\subset W\\otimes_k k[H]$. Thus $W$ is a rational submodule with the restricted coaction. No finite-dimensionality hypothesis on $V$ is required.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 4.7 and Corollary 4.8, printed pp.86--87: every rational representation is a filtered union of its finite-dimensional subrepresentations."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-finite-dimensional-subspace",
+  "def-sfb-hopf-action-module-data",
+  "def-sfb-coordinate-hopf-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=k[H]$. By [lem-weil-pbc-vector-space-free], choose a $k$-basis $(e_i)_{i\\in I}$ of $A$, without requiring $I$ finite. By the basis definition [def-weil-pbc-free-module], the coefficient of $e_j$ defines a linear map $\\lambda_j:A\\to k$ with $\\lambda_j(e_i)=\\delta_{ji}$: addition and scalar multiplication add and multiply the unique basis coefficients. All basis expansions have finite support.",
+   "uses": [
+    "lem-weil-pbc-vector-space-free",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.7, printed p.86, and Corollary 4.8: coefficient comparison in equation (26)."
+   }
+  },
+  {
+   "text": "For any $k$-vector space $M$, each $t\\in M\\otimes_k A$ determines a unique finitely supported family $(m_i)_{i\\in I}$ with $t=\\sum_{i\\in I}m_i\\otimes e_i$; write $J=\\{i:m_i\\ne0\\}$ for its finite support. Indeed, the pure tensors generate the tensor product [def-weil-pbc-module-tensor-product]; expand the second factor of each of finitely many pure tensors in the basis [def-weil-pbc-free-module], then distribute and collect coefficients. The bilinear rule $m\\otimes a\\mapsto\\lambda_j(a)m$ induces a linear map $E_j^M:M\\otimes_k A\\to M$ by the tensor universal property. Applying it to the expression gives $E_j^M(t)=m_j$ (zero outside $J$), proving uniqueness. The unit identification $M\\otimes_k k\\to M$ sends $m\\otimes x$ to $xm$, with inverse $m\\mapsto m\\otimes1$. Reassociation sends $(m\\otimes a)\\otimes b$ to $m\\otimes(a\\otimes b)$, with the reverse formula as inverse. Iterating the universal property defines these maps; their composites fix every pure tensor, hence are identities because pure tensors generate.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.7, printed p.86, and Corollary 4.8: coefficient comparison in equation (26)."
+   }
+  },
+  {
+   "text": "For each $s\\in S$, apply step 2 to write $\\rho_V(s)=\\sum_{i\\in J_s}v_{s,i}\\otimes e_i$ with $J_s$ finite. Let $W$ be the span of the finite family of all $v_{s,i}$ for $s\\in S$ and $i\\in J_s$. Thus $W$ is finite-dimensional by [def-weil-finite-dimensional-subspace], since these vectors span it by definition. Applying the counit identity to the displayed expansion gives $s=\\sum_{i\\in J_s}\\epsilon(e_i)v_{s,i}$, so $S\\subset W$. If $S$ is empty, this construction gives $W=0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.7, printed p.86, and Corollary 4.8: coefficient comparison in equation (26)."
+   }
+  },
+  {
+   "text": "Fix $s\\in S$ and $j\\in J_s$. Coassociativity at $s$, after reassociating the triple tensor product, says\n$$\\sum_{i\\in J_s}\\rho_V(v_{s,i})\\otimes e_i=\\sum_{i\\in J_s}v_{s,i}\\otimes\\Delta(e_i).$$\nApply the linear map $v\\otimes a\\otimes b\\mapsto\\lambda_j(b)(v\\otimes a)$, furnished by the tensor universal property [def-weil-pbc-module-tensor-product]. The left side becomes $\\rho_V(v_{s,j})$ and the right side becomes\n$$\\rho_V(v_{s,j})=\\sum_{i\\in J_s}v_{s,i}\\otimes c_{i,j},\\qquad c_{i,j}=(\\mathrm{id}_A\\otimes\\lambda_j)\\Delta(e_i)\\in A,$$\nwhere $A\\otimes_k k$ is identified with $A$ by $a\\otimes x\\mapsto xa$. This explicitly puts the coaction of each spanning vector in the image of $W\\otimes_k A$. Linearity therefore puts $\\rho_V(W)$ in this image. This is Milne's equation (26), with its last two coefficient indices collected into $c_{i,j}$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.7, printed p.86, and Corollary 4.8: coefficient comparison in equation (26)."
+   }
+  },
+  {
+   "text": "Write $\\iota:W\\hookrightarrow V$ for the inclusion. The map $\\iota\\otimes\\mathrm{id}_A$ is injective, directly by step 2: if $t=\\sum_i w_i\\otimes e_i$ maps to zero, applying $E_j^V$ gives $\\iota(w_j)=0$, hence every $w_j=0$ and $t=0$. Applying this argument twice also shows that $\\iota\\otimes\\mathrm{id}_A\\otimes\\mathrm{id}_A$ is injective: first tensor the injective map $\\iota\\otimes\\mathrm{id}_A$ with $A$, using exactly the same coefficient test. The coefficient maps exist by [def-weil-pbc-free-module] and [def-weil-pbc-module-tensor-product]; no finite-dimensionality of $V$ or $A$ is used.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.7, printed p.86, and Corollary 4.8: coefficient comparison in equation (26)."
+   }
+  },
+  {
+   "text": "Step 4 and injectivity in step 5 define a unique $k$-linear map $\\rho_W:W\\to W\\otimes_k A$ satisfying $(\\iota\\otimes\\mathrm{id}_A)\\rho_W=\\rho_V\\iota$: take the unique preimage of $\\rho_V(w)$ for each $w$, and uniqueness proves additivity and homogeneity. Composing the two sides of the desired coassociativity identity for $\\rho_W$ with $\\iota\\otimes\\mathrm{id}_A\\otimes\\mathrm{id}_A$ gives respectively $(\\rho_V\\otimes\\mathrm{id}_A)\\rho_V\\iota$ and $(\\mathrm{id}_V\\otimes\\Delta)\\rho_V\\iota$. They are equal by the assumed coassociativity of $\\rho_V$; injectivity gives the identity for $\\rho_W$. Likewise $\\iota(\\mathrm{id}_W\\otimes\\epsilon)\\rho_W=(\\mathrm{id}_V\\otimes\\epsilon)\\rho_V\\iota=\\iota$, and injectivity of $\\iota$ gives the counit identity. These commutations follow on $w\\otimes a$ from the tensor universal property [def-weil-pbc-module-tensor-product]. Hence $W$, already finite-dimensional and containing $S$, is a rational submodule with the restricted coaction. The argument includes $W=0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.7, printed p.86, and Corollary 4.8: coefficient comparison in equation (26)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-vector-space-free",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 4.7, printed p.86, and Corollary 4.8: coefficient comparison in equation (26)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every element of a comodule over a coalgebra over a field belongs to a finite dimensional subcomodule",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FiniteDimensional.left\", \"module\": \"Mathlib/FieldTheory/Tower\", \"type\": \"∀ (F : Type u) (K : Type v) (A : Type w) [inst : Ring F] [inst_1 : Ring K] [inst_2 : Module F K]\\n  [inst_3 : AddCommGroup A] [inst_4 : Module K A] [Module.IsTorsionFree K A] [inst_6 : Module F A] [IsNoetherian F A]\\n  [IsScalarTower F K A] [IsDomain K] [Nontrivial A], Module.Finite F K\", \"doc\": \"Let $ F $ and $ K $ be rings, and let $ A $ be an additive commutative group equipped with compatible module structures over $ F $ and $ K $. If $ A $ is torsion-free over $ K $, noetherian over $ F $\"}\n  {\"name\": \"FiniteDimensional\", \"module\": \"Mathlib/LinearAlgebra/FiniteDimensional/Defs\", \"type\": \"(K : Type u_1) → (V : Type u_2) → [inst : DivisionRing K] → [inst_1 : AddCommGroup V] → [Module K V] → Prop\", \"doc\": \"A vector space $ V $ over a division ring $ K $ such that there exists a finite subset $ S \\\\subseteq V $ spanning $ V $, i.e., every element of $ V $ can be expressed as a finite $ K $-linear combinat\"}\n  {\"name\": \"FiniteDimensional.finiteDimensional_submodule\", \"module\": \"Mathlib/LinearAlgebra/FiniteDimensional/Defs\", \"type\": \"∀ {K : Type u} {V : Type v} [inst : DivisionRing K] [inst_1 : AddCommGroup V] [inst_2 : Module K V]\\n  [FiniteDimensional K V] (S : Submodule K V), FiniteDimensional K ↥S\", \"doc\": \"Given a finite-dimensional vector space $ V $ over a division ring $ K $, every submodule $ S $ of $ V $ is also finite-dimensional. This instance asserts that the property of finite-dimensionality is\"}\n  {\"name\": \"Submodule.fg_iff_finiteDimensional\", \"module\": \"Mathlib/LinearAlgebra/FiniteDimensional/Defs\", \"type\": \"∀ {K : Type u} {V : Type v} [inst : DivisionRing K] [inst_1 : AddCommGroup V] [inst_2 : Module K V] (s : Submodule K V),\\n  s.FG ↔ FiniteDimensional K ↥s\", \"doc\": \"For a submodule $ s $ of a vector space $ V $ over a division ring $ K $, $ s $ is finitely generated if and only if $ s $ is finite-dimensional.\"}\n  {\"name\": \"Module.Finite.instIsCoatomicSubmodule\", \"module\": \"Mathlib/RingTheory/Finiteness/Basic\", \"type\": \"∀ {R : Type u_1} {M : Type u_4} [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [Module.Finite R M], IsCoatomic (Submodule R M)\", \"doc\": \"If $ M $ is a finitely generated module over a semiring $ R $, then the lattice of submodules of $ M $ is coatomic. This means that for every submodule $ N $ of $ M $, there exists a coatom (a submodu\"}\n  {\"name\": \"Submodule.IsLattice.finite\", \"module\": \"Mathlib/Algebra/Module/Lattice\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (A : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A] {V : Type u_3}\\n  [inst_3 : AddCommGroup V] [inst_4 : Module R V] [inst_5 : Module A V] [inst_6 : IsScalarTower R A V]\\n  (M : Submodule R V) [Submodule.IsLattice A M], Module.Finite R ↥M\", \"doc\": \"For any module $ V $ over a commutative ring $ R $, the submodules of $ V $ form a lattice under inclusion, where the meet is the intersection and the join is the sum of submodules.\"}\n  {\"name\": \"FiniteDimensional.instSubtypeMemSubmoduleMap\", \"module\": \"Mathlib/LinearAlgebra/FiniteDimensional/Defs\", \"type\": \"∀ (K : Type u) {V : Type v} [inst : DivisionRing K] [inst_1 : AddCommGroup V] [inst_2 : Module K V] {V₂ : Type v'}\\n  [inst_3 : AddCommGroup V₂] [inst_4 : Module K V₂] (f : V →ₗ[K] V₂) (p : Submodule K V) [FiniteDimensional K ↥p],\\n  FiniteDimensional K ↥(Submodule.map f p)\", \"doc\": \"Every submodule of an $ R $-module is itself an $ R $-module under the inherited scalar multiplication operation from the ambient module.\"}\n  {\"name\": \"Submodule.finiteDimensional_finset_sup\", \"module\": \"Mathlib/LinearAlgebra/FiniteDimensional/Basic\", \"type\": \"∀ {K : Type u} {V : Type v} [inst : DivisionRing K] [inst_1 : AddCommGroup V] [inst_2 : Module K V] {ι : Type u_1}\\n  (s : Finset ι) (S : ι → Submodule K V) [∀ (i : ι), FiniteDimensional K ↥(S i)], FiniteDimensional K ↥(s.sup S)\", \"doc\": \"Given a division ring $ K $ and a $ K $-module $ V $, if $ S $ is a finite set of finite-dimensional submodules of $ V $, then the sum (supremum) of all submodules in $ S $ is also a finite-dimensiona\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-dimensional subspace lemmas, FDRep and finite tensor representations of a coalgebra element do not construct a finite-dimensional stable subcomodule"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational representation of an affine algebraic group is the filtered union of finite dimensional subrepresentations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FDRep.instLargeCategory\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"{R G : Type u} → [inst : CommRing R] → [inst_1 : Monoid G] → CategoryTheory.LargeCategory (FDRep R G)\", \"doc\": \"The category $\\\\text{FDRep}_R(G)$ whose objects are finitely generated left $R$-modules equipped with a monoid action of $G$ (i.e., representations of $G$ on finitely generated $R$-modules), and whose \"}\n  {\"name\": \"FDRep.instCoeSortType\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"{R G : Type u} → [inst : CommRing R] → [inst_1 : Monoid G] → CoeSort (FDRep R G) (Type u)\", \"doc\": \"The canonical coercion from the category $\\\\text{FDRep}_R(G)$ to types, which maps a finitely generated representation (an object in $\\\\text{FDRep}_R(G)$) to its underlying type, i.e., the base type of \"}\n  {\"name\": \"FDRep.of\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"{R G : Type u} →\\n  [inst : CommRing R] →\\n    [inst_1 : Monoid G] →\\n      {V : Type u} →\\n        [inst_2 : AddCommGroup V] → [inst_3 : Module R V] → [Module.Finite R V] → Representation R G V → FDRep R G\", \"doc\": \"Given a commutative ring $ R $, a monoid $ G $, and a finitely generated $ R $-module $ V $ equipped with a $ G $-action (i.e., a monoid homomorphism from $ G $ to the semiring of $ R $-linear endomor\"}\n  {\"name\": \"FDRep.instFiniteDimensionalCarrierVFGModuleCat\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"∀ {k G : Type u} [inst : Field k] [inst_1 : Monoid G] (V : FDRep k G), FiniteDimensional k ↑V.V\", \"doc\": \"For any field $ k $, monoid $ G $, and object $ V $ in the category $ \\\\text{FDRep}_k(G) $ of finitely generated $ k $-modules with $ G $-action, the underlying vector space of $ V $ is finite-dimensio\"}\n  {\"name\": \"FDRep.instFiniteCarrierVFGModuleCat\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"∀ {R G : Type u} [inst : CommRing R] [inst_1 : Monoid G] (V : FDRep R G), Module.Finite R ↑V.V\", \"doc\": \"For any commutative ring $ R $, monoid $ G $, and object $ V $ in the category $ \\\\text{FDRep}_R(G) $ of finitely generated $ R $-modules with $ G $-action, the underlying $ R $-module of $ V $ is fini\"}\n  {\"name\": \"FDRep.instFiniteDimensionalHom\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"∀ {k G : Type u} [inst : Field k] [inst_1 : Monoid G] (V W : FDRep k G), FiniteDimensional k (V ⟶ W)\", \"doc\": \"For any field $ k $ and monoid $ G $, and for any two finitely generated representations $ V $ and $ W $ of $ G $ over $ k $, the space of $ k $-linear maps from $ V $ to $ W $ that commute with the $\"}\n  {\"name\": \"FDRep.instModuleCarrierVFGModuleCat\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"{R G : Type u} → [inst : CommRing R] → [inst_1 : Monoid G] → (V : FDRep R G) → Module R ↑V.V\", \"doc\": \"For any commutative ring $ R $ and monoid $ G $, if $ V $ is a finitely generated left $ R $-module equipped with a $ G $-action (i.e., an object in $ \\\\text{FDRep}_R(G) $), then the underlying set (ca\"}\n  {\"name\": \"FDRep.instConcreteCategoryHomSubtypeFGModuleCatLinearMapIdCarrierObjModuleCatIsFGV\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"{R G : Type u} →\\n  [inst : CommRing R] →\\n    [inst_1 : Monoid G] → CategoryTheory.ConcreteCategory (FDRep R G) (Action.HomSubtype (FGModuleCat R) G)\", \"doc\": \"The category $\\\\text{FDRep}_R(G)$ of finitely generated left $R$-modules equipped with a monoid action of $G$ is endowed with a concrete category structure. This means that morphisms between representa\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-dimensional subspace lemmas, FDRep and finite tensor representations of a coalgebra element do not construct a finite-dimensional stable subcomodule"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\", \"FiniteDimensional\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-dimensional subspace lemmas, FDRep and finite tensor representations of a coalgebra element do not construct a finite-dimensional stable subcomodule"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*subcomodule|subcomodule.*finite|finite.*subrepresentation|locallyFinite",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/LocalField/Basic.lean\", \"line\": \"120\", \"text\": \"  obtain ⟨_⟩ := Valued.integer.locallyFiniteOrder_units_mrange_of_isCompact_integer\"}\n  {\"file\": \"Mathlib/NumberTheory/LocalField/Basic.lean\", \"line\": \"128\", \"text\": \"  exact ⟨e.symm.trans (LocallyFiniteOrder.orderMonoidWithZeroEquiv _)⟩\"}\n  {\"file\": \"Mathlib/Data/Finset/Filter.lean\", \"line\": \"89\", \"text\": \"* `Order.LocallyFinite.Basic` for the `Finset` builder notation elaborator handling syntax of the\"}\n  {\"file\": \"Mathlib/Data/Finset/Interval.lean\", \"line\": \"15\", \"text\": \"This file provides the `LocallyFiniteOrder` instance for `Finset α` and calculates the cardinality\"}\n  {\"file\": \"Mathlib/Data/Finset/Interval.lean\", \"line\": \"37\", \"text\": \"/-- `LocallyFiniteOrder` instance for `Finset α`.\"}\n  {\"file\": \"Mathlib/Data/Finset/Interval.lean\", \"line\": \"45\", \"text\": \"instance instLocallyFiniteOrder [DecidableEq α] : LocallyFiniteOrder (Finset α) :=\"}\n  {\"file\": \"Mathlib/Data/Finset/Interval.lean\", \"line\": \"75\", \"text\": \"  unfold Finset.Icc instLocallyFiniteOrder LocallyFiniteOrder.ofIcc\"}\n  {\"file\": \"Mathlib/Data/Finset/Interval.lean\", \"line\": \"90\", \"text\": \"  unfold Finset.Icc instLocallyFiniteOrder LocallyFiniteOrder.ofIcc\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Determinant/Bird/Correctness.lean\", \"line\": \"10\", \"text\": \"import Mathlib.Algebra.Order.BigOperators.Group.LocallyFinite\"}\n  {\"file\": \"Mathlib/Data/Sum/Interval.lean\", \"line\": \"15\", \"text\": \"This file provides the `LocallyFiniteOrder` instance for the disjoint sum and linear sum of two\"}\n  {\"file\": \"Mathlib/Data/Sum/Interval.lean\", \"line\": \"214\", \"text\": \"section LocallyFiniteOrder\"}\n  {\"file\": \"Mathlib/Data/Sum/Interval.lean\", \"line\": \"215\", \"text\": \"variable [Preorder α] [Preorder β] [LocallyFiniteOrder α] [LocallyFiniteOrder β]\"}\n  {\"file\": \"Mathlib/Data/Sum/Interval.lean\", \"line\": \"217\", \"text\": \"instance instLocallyFiniteOrder : LocallyFiniteOrder (α ⊕ β) where\"}\n  {\"file\": \"Mathlib/Data/Sum/Interval.lean\", \"line\": \"285\", \"text\": \"end LocallyFiniteOrder\"}\n  {\"file\": \"Mathlib/Probability/Process/Filtration.lean\", \"line\": \"500\", \"text\": \"variable [LocallyFiniteOrderBot ι]\"}\n  {\"file\": \"Mathlib/Probability/Process/Stopping.lean\", \"line\": \"1113\", \"text\": \"theorem stoppedValue_eq' [Preorder ι] [LocallyFiniteOrderBot ι] [AddCommMonoid E] {N : ι}\"}\n  {\"file\": \"Mathlib/Probability/Process/Stopping.lean\", \"line\": \"1156\", \"text\": \"theorem stoppedProcess_eq'' [LinearOrder ι] [LocallyFiniteOrderBot ι] [AddCommMonoid E] (n : ι) :\"}\n  {\"file\": \"Mathlib/Probability/Process/Stopping.lean\", \"line\": \"1184\", \"text\": \"theorem memLp_stoppedValue [LocallyFiniteOrderBot ι] (hτ : IsStoppingTime ℱ τ)\"}\n  {\"file\": \"Mathlib/Probability/Process/Stopping.lean\", \"line\": \"1201\", \"text\": \"theorem integrable_stoppedValue [LocallyFiniteOrderBot ι] (hτ : IsStoppingTime ℱ τ)\"}\n  {\"file\": \"Mathlib/Probability/Process/Stopping.lean\", \"line\": \"1229\", \"text\": \"theorem memLp_stoppedProcess [LocallyFiniteOrderBot ι] (hτ : IsStoppingTime ℱ τ)\"}\n  {\"file\": \"Mathlib/Data/DFinsupp/Interval.lean\", \"line\": \"17\", \"text\": \"This file provides the `LocallyFiniteOrder` instance for `Π₀ i, α i` when `α` itself is locally\"}\n  {\"file\": \"Mathlib/Data/DFinsupp/Interval.lean\", \"line\": \"94\", \"text\": \"variable [∀ i, Zero (α i)] [∀ i, PartialOrder (α i)] [∀ i, LocallyFiniteOrder (α i)]\"}\n  {\"file\": \"Mathlib/Data/DFinsupp/Interval.lean\", \"line\": \"148\", \"text\": \"variable [∀ i, PartialOrder (α i)] [∀ i, Zero (α i)] [∀ i, LocallyFiniteOrder (α i)]\"}\n  {\"file\": \"Mathlib/Data/DFinsupp/Interval.lean\", \"line\": \"150\", \"text\": \"instance instLocallyFiniteOrder : LocallyFiniteOrder (Π₀ i, α i) :=\"}\n  {\"file\": \"Mathlib/Data/DFinsupp/Interval.lean\", \"line\": \"151\", \"text\": \"  LocallyFiniteOrder.ofIcc (Π₀ i, α i)\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-dimensional subspace lemmas, FDRep and finite tensor representations of a coalgebra element do not construct a finite-dimensional stable subcomodule"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every element of a comodule over a coalgebra over a field belongs to a finite dimensional subcomodule",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Coalgebra.Repr.arbitrary\", \"module\": \"Mathlib.RingTheory.Coalgebra.Basic\", \"type\": \"(R : Type u) {A : Type v} [CommSemiring R] [AddCommMonoid A] [Module R A] [CoalgebraStruct R A] (a : A) :\\n  Coalgebra.Repr R a\", \"doc\": \"For any element $ a $ in a coalgebra $ A $ over a commutative semiring $ R $, there exists a finite set $ S $ such that the comultiplication $ \\\\Delta(a) $ can be expressed as the finite sum $ \\\\sum_{i \"}\n  {\"name\": \"FiniteDimensional.of_subalgebra_toSubmodule\", \"module\": \"Mathlib.LinearAlgebra.FiniteDimensional.Basic\", \"type\": \"∀ {F : Type u_1} {E : Type u_2} [inst : Field F] [inst_1 : Ring E] [inst_2 : Algebra F E] {S : Subalgebra F E},\\n  FiniteDimensional F ↥(Subalgebra.toSubmodule S) → FiniteDimensional F ↥S\", \"doc\": \"Let $ F $ be a field, $ E $ a ring equipped with an $ F $-algebra structure, and $ S $ a subalgebra of $ E $. If the underlying $ F $-submodule of $ S $ is finite-dimensional, then $ S $ is finite-dim\"}\n  {\"name\": \"FiniteDimensional.finiteDimensional_subalgebra\", \"module\": \"Mathlib.LinearAlgebra.FiniteDimensional.Basic\", \"type\": \"[FiniteDimensional F E] (S : Subalgebra F E) : FiniteDimensional F S\", \"doc\": \"Any subalgebra of a finite-dimensional algebra over a field is itself finite-dimensional. Specifically, if $ E $ is a finite-dimensional vector space over a field $ F $ and $ S $ is a subalgebra of $ \"}\n  {\"name\": \"Submodule.complete_of_finiteDimensional\", \"module\": \"Mathlib.Topology.Algebra.Module.FiniteDimension\", \"type\": \"(s : Submodule 𝕜 E) [FiniteDimensional 𝕜 s] : IsComplete (s : Set E)\", \"doc\": \"Every finite-dimensional submodule $ s $ of a vector space $ E $ over a field $ \\\\mathbb{K} $ is complete as a subset of $ E $, meaning that every Cauchy filter on $ s $ converges to a point within $ s\"}\n  {\"name\": \"Submodule.finiteDimensional_of_le\", \"module\": \"Mathlib.LinearAlgebra.FiniteDimensional.Basic\", \"type\": \"{S₁ S₂ : Submodule K V} [FiniteDimensional K S₂] (h : S₁ ≤ S₂) : FiniteDimensional K S₁\", \"doc\": \"If $ S_1 $ is a submodule of $ S_2 $ and $ S_2 $ is finite-dimensional over a division ring $ K $, then $ S_1 $ is also finite-dimensional over $ K $.\"}\n  {\"name\": \"Submodule.ClosedComplemented.of_finiteDimensional\", \"module\": \"Mathlib.Analysis.Normed.Module.HahnBanach\", \"type\": \"(p : Submodule 𝕜 F) [FiniteDimensional 𝕜 p] : p.ClosedComplemented\", \"doc\": \"Every finite-dimensional submodule $ p $ of a topological module $ F $ over a field $ \\\\mathbb{K} $ is closed complemented, meaning there exists a continuous linear retraction from $ F $ onto $ p $. Th\"}\n  {\"name\": \"Finsupp.instCoalgebra\", \"module\": \"Mathlib.RingTheory.Coalgebra.Basic\", \"type\": \": Coalgebra R (ι →₀ A)\", \"doc\": \"For a commutative semiring $ R $, index type $ \\\\iota $, and an $ R $-module $ A $ equipped with a coalgebra structure, the space of finite support functions $ \\\\iota \\\\to_0 A $ forms a coalgebra over $ \"}\n  {\"name\": \"Submodule.fg_iff_finiteDimensional\", \"module\": \"Mathlib.LinearAlgebra.FiniteDimensional.Defs\", \"type\": \"(s : Submodule K V) : s.FG ↔ FiniteDimensional K s\", \"doc\": \"For a submodule $ s $ of a vector space $ V $ over a division ring $ K $, $ s $ is finitely generated if and only if $ s $ is finite-dimensional.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-dimensional subspace lemmas, FDRep and finite tensor representations of a coalgebra element do not construct a finite-dimensional stable subcomodule"
+  },
+  {
+   "tool": "grep",
+   "query": "Subcomodule|subcomodule|finite.*[Cc]omodule|[Cc]omodule.*finite",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the relevant group-scheme reductivity and stable finite-subcomodule assertions are absent; abstract projective special linear groups do not state them"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every element of a comodule over a coalgebra over a field is contained in a finite dimensional subcomodule",
+   "results": "Submodule.fg_iff_finiteDimensional; Submodule.IsLattice.finite; FiniteDimensional.left; Module.Finite.instIsCoatomicSubmodule; Submodule.IsLattice.fg; Module.Finite.top; FiniteDimensional.finiteDimensional_submodule; Module.Finite.left.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give finite-dimensional subspaces, abstract monoid subrepresentations, affine schemes or already-finite representations; none produces a finite-dimensional rational subcomodule of an arbitrary comodule."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\", \"FiniteDimensional\"",
+   "results": "OK 0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give finite-dimensional subspaces, abstract monoid subrepresentations, affine schemes or already-finite representations; none produces a finite-dimensional rational subcomodule of an arbitrary comodule."
+  },
+  {
+   "tool": "grep",
+   "query": "subcomodule|finite.*subrepresentation|comodule.*finite",
+   "results": "RingTheory: OK 0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give finite-dimensional subspaces, abstract monoid subrepresentations, affine schemes or already-finite representations; none produces a finite-dimensional rational subcomodule of an arbitrary comodule."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational representation of an affine group scheme is a union of finite dimensional subrepresentations",
+   "results": "AlgebraicGeometry.AffineScheme; AlgebraicGeometry.isAffine_affineScheme; AlgebraicGeometry.IsAffine.recOn; AlgebraicGeometry.Scheme.compactSpace_of_isAffine; Subrepresentation; AlgebraicGeometry.IsAffine.casesOn; AlgebraicGeometry.AffineScheme.of; AlgebraicGeometry.IsAffineOpen.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give finite-dimensional subspaces, abstract monoid subrepresentations, affine schemes or already-finite representations; none produces a finite-dimensional rational subcomodule of an arbitrary comodule."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational representation of an affine algebraic group is the filtered union of finite dimensional subrepresentations",
+   "results": "FDRep.instLargeCategory; FDRep.instCoeSortType; FDRep.of; FDRep.instFiniteDimensionalCarrierVFGModuleCat; FDRep.instFiniteCarrierVFGModuleCat; FDRep.instFiniteDimensionalHom; FDRep.instConcreteCategoryHomSubtypeFGModuleCatLinearMapIdCarrierObjModuleCatIsFGV.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give finite-dimensional subspaces, abstract monoid subrepresentations, affine schemes or already-finite representations; none produces a finite-dimensional rational subcomodule of an arbitrary comodule."
+  },
+  {
+   "tool": "grep",
+   "query": "Subcomodule|subcomodule|finite.*[Cc]omodule|[Cc]omodule.*finite",
+   "results": "OK 0 hits across Mathlib.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give finite-dimensional subspaces, abstract monoid subrepresentations, affine schemes or already-finite representations; none produces a finite-dimensional rational subcomodule of an arbitrary comodule."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pgl-geometric-reductivity",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Finite subsets of rational modules lie in finite-dimensional submodules.",
+   "via": [
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-comodule-finite-subrepresentation",
+  "worker": "stage1",
+  "summary": "Read Milne Proposition 4.7 and Corollary 4.8 and expanded the finite coefficient-span argument, including coefficient extraction, the counit containment, tensor-inclusion injectivity, and the restricted coaction axioms. Reused the existing vector-space-basis Mathlib leaf and definition nodes; no new nodes and no statement correction. Checked the project source for attachments and searched Mathlib with both semantic phrasings, Loogle and grep. Repair of return for head 52340fc838b: rebased the retained approved split on the current live unsplit node, reread every cited statement, and checked all ten verbatim citation records against the current DAG. The current statements still supply exactly the basis, tensor universal property, and finite-span definition used in the six steps; no mathematical route change is needed. Retained all current maintainer metadata and the logged searches. Repair of the latest landing return, head 91527102385 (2026-10-22 11:53 UTC): rebuilt the sandbox JSON from the current live unsplit node and restored the split-owned fields; reread all current dependency statements and retained the unchanged ten verified quotations. Made step 2 precise by stating uniqueness of the finitely supported coefficient family and defining J as its support, rather than asserting uniqueness of an expression with an unspecified finite index set. The statement and proof route remain unchanged. Repair of the current landing return for head a3a2a3bfd63 (2026-10-22 16:22 UTC): compared the retained returned split against the current live unsplit JSON and rebased its split-owned fields; reread all six statement/proof dependencies and verified all ten citation quotes. No current dependency statement changes the argument. Expanded step 2 with explicit tensor unit and reassociation maps and their inverses, so the identifications used in coefficient extraction and the coaction identities are verified by pure-tensor generation. Kept the statement, provenance, searches and six-step route.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Finite subsets of rational modules lie in finite-dimensional submodules. This supporting input realizes the finite-dimensional rational-module reduction in the PGL reductivity prerequisite; no unit route changes. The ancestor command returns None for the existing item, whose inherited provenance is retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-3bef9c3e7",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-3bef9c3e7 (reviewer sub-agent of L); spot-checked: I read the whole item. This is the fourth push of a split that was already approved and then returned at landing (prior heads 52340fc838b, 91527102385, a3a2a3bfd63). Compared with a3a2, only proof step 2 and split_report changed. Step 2 now spells out the unit map m⊗x↦xm (inverse m↦m⊗1) and the reassociation map with its reverse. Both are built from the tensor universal property and are identities because pure tensors generate. This is a correct, real change, not a byte-identical re-push (A6). The item is still unsplit with an empty proof in live and side-live, and there is no repair note. Source: Milne iAG2017 §4c, printed p.86, Prop 4.7 with eq. (26) and Cor 4.8. Step 4 matches Milne's comparison of coefficients of 1⊗1⊗e_k, with c_ij=(id⊗λ_j)Δ(e_i). The argument needs only a counital coassociative coaction, so the statement for an arbitrary affine group scheme holds. Cited statements read in full: lem-weil-pbc-vector-space-free (a basis without finiteness), def-weil-pbc-free-module (unique finite expansions, giving linear λ_j), def-weil-pbc-module-tensor-product (universal property, pure-tensor generation, f⊗id functoriality), def-weil-finite-dimensional-subspace (finite spanning family). Step checks: step 3 gets S⊂W from the counit, s=Σε(e_i)v_{s,i}. Step 4 applies id⊗id⊗λ_j to the coassociativity equation, giving ρ(v_j)=Σv_i⊗c_ij. Step 5 proves injectivity by the coordinate maps E_j, including for (ι⊗id)⊗id. Step 6 defines ρ_W as the unique preimage and passes both coaction identities down through the injective maps. The union of uses equals proof_deps, every step is under 2000 characters, and there is no cycle. Edge cases: S empty gives W=0; A=k gives W=span S; the regular comodule works; infinite-dimensional V and A need only finite supports. A rg -L search for comodule/coaction with finite-dimensional finds only lem-sfb-haboush-symmetric-power-lift, a different statement, so there is no duplicate. No SGA source, no new nodes, no fixes and no tool_uses. Promoting the side completion is left to the maintainer at landing."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.ComoduleFiniteSubrepresentation",
+  "declaration": "AlgebraicGeometry.RationalRepresentation.exists_finiteDimensional_subcomodule",
+  "declarations": [
+   "AlgebraicGeometry.RationalRepresentation.coactionFixedVectors",
+   "AlgebraicGeometry.RationalRepresentation.exists_finiteDimensional_subcomodule"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/ComoduleFiniteSubrepresentation.lean",
+  "statement": "theorem exists_finiteDimensional_subcomodule (k : Type u) [Field k] (H : Scheme.{u}) [H.Over (Spec (.of k))] [GrpObj (H.asOver (Spec (.of k)))] [IsAffine H] (V : Type v) [AddCommGroup V] [Module k V] (ρ : V →ₗ[k] V ⊗[k] Γ(H, ⊤)) (hcoassoc : HopfAction.Coassociative k Γ(H, ⊤) V ρ) (hcounit : HopfAction.Counital k Γ(H, ⊤) V ρ) (S : Set V) (hS : S.Finite) : ∃ W : Submodule k V, FiniteDimensional k W ∧ S ⊆ (W : Set V) ∧ ∃ ρW : W →ₗ[k] W ⊗[k] Γ(H, ⊤), HopfAction.Coassociative k Γ(H, ⊤) W ρW ∧ HopfAction.Counital k Γ(H, ⊤) W ρW ∧ W.subtype.rTensor Γ(H, ⊤) ∘ₗ ρW = ρ ∘ₗ W.subtype",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The finite-dimensional subspace carries an actual restricted coaction satisfying both laws and commuting with the inclusion tensor identity. The fixed-vector helper records the invariant-set notation introduced in this node. Two already landed statement dependencies supply the existing right-coaction laws and canonical coordinate Hopf instance. No finite-dimensionality or finite-type hypothesis is imposed on V or H."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62885ad0d",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of d9ad7a16af5f. Only change in item JSON: stmt_deps lem-sfb-hopf-coaction-linearization -> def-sfb-coordinate-hopf-algebra, as prescribed; Lean module and lean record byte-identical to the returned head; report adds Return repair and keeps Worker report and Second reading by Q115. def-sfb-coordinate-hopf-algebra is a reviewed definition node landed by NY (record identical to side-live, present in live), existing:true on HopfAction.coordinateHopfAlgebra, whose body is Mathlib's canonical instance (affineCoordinateHopfAlgebra := inferInstance). Re-read the statement clause by clause against Milne Prop 4.7/Cor 4.8: linear coaction with both right-comodule laws; finite-dimensional W containing S; restricted coaction pinned by injective subtype.rTensor; both laws on W; no finite-type or dimension assumption; V universe free. Edge cases S empty and V=0 covered. Gates: sorry-only proof, real helper def, docstrings with source and blueprint, lean.statement verbatim (script check). No compile run because no file changed."
+ }
+}

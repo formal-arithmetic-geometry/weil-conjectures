@@ -1,0 +1,112 @@
+{
+ "id": "lem-pbc-coefficient-restriction-tensor-iso-naturality",
+ "kind": "statement",
+ "title": "Naturality of the supplied normalized tensor isomorphism on actual signed totals",
+ "statement": "For a scheme morphism f:X→Y, commutative ring sheaves R,S and c:f^{-1}R≅S [def-weil-pbc-proetale-operations], put A=f^{-1}R and U=Res_c. Let Tot_S and Tot_A be the signed direct-sum total tensor functors on module cochain complexes [def-sfb-proetale-tensor-model]. Given normalized RingIsoTensorTransport data o for c [lem-sfb-ring-isomorphism-tensor-transport], the components o.totalIso(P,Q):U_Ch(Tot_S(P,Q))≅Tot_A(U_Ch P,U_Ch Q) are natural on the product category of cochain complexes: U_Ch(Tot_S(v,w));o.totalIso(P′,Q′).hom=o.totalIso(P,Q).hom;Tot_A(U_Ch v,U_Ch w). This is the existing tensorIso_naturality declaration, relocated and proved using the generic total-map formula.",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "status": "split",
+ "mathlib_match": null,
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-sfb-proetale-tensor-model",
+  "lem-sfb-ring-isomorphism-tensor-transport"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, signed-total tensor convention; the actual component and normalization data are the existing RingIsoTensorTransport.totalIso, total_naturality and total_summand fields."
+ },
+ "proof": [
+  {
+   "text": "The generic mapTotalBifunctor formula identifies the map of the uncurried signed-total functor at an arbitrary product morphism with the totalized bifunctor map. For the curried tensor bifunctor this is the tensor of chain maps, so the given total_naturality field of o proves the equation. This is a naturality assertion about the supplied components and constructs no new data.",
+   "uses": [
+    "lem-pbc-tensor-total-comparison-square",
+    "lem-sfb-ring-isomorphism-tensor-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pbc-tensor-total-comparison-square",
+  "lem-sfb-ring-isomorphism-tensor-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, signed-total tensor convention; the actual component and normalization data are the existing RingIsoTensorTransport.totalIso, total_naturality and total_summand fields."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation compatible with tensor comparison induces a compatible map on total tensor cochain complexes",
+   "results": "Eight hits include NatTrans.IsMonoidal.tensor and NatTrans.mapHomologicalComplex. The definition here packages the already supplied normalized totalIso components; no new comparison is chosen.",
+   "date": "2026-10-27",
+   "verdict": "use existing normalized components and NatIso.ofComponents"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation compatible with tensor comparison induces a compatible map on total tensor cochain complexes",
+   "results": "Eight generic total-tensor APIs, including tensorHom and iotaTensorObj. None supplies the specific normalized coefficient transport; it is already supplied by RingIsoTensorTransport.",
+   "date": "2026-10-27",
+   "verdict": "reuse project data"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullbackTotal|total_summand|restriction_tensor_chain_square",
+   "results": "No Mathlib msearch hits. Project search found the tensorIso definition already in the item module. Its declaration, signature and body are moved unchanged, preserving its public export through the item.",
+   "date": "2026-10-27",
+   "verdict": "existing definition relocated; no duplicate"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleCoefficientTensorChainData",
+  "date": "2026-10-27",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-direct-image-limits",
+   "place": "Naturality of the normalized total coefficient transport already used in the ordinary signed-total coefficient square; this relocates its existing naturality theorem without adding an obligation.",
+   "via": [
+    "lem-pbc-coefficient-restriction-tensor-chain-square",
+    "lem-pbc-coefficient-restriction-tensor-comparison-compatibility",
+    "lem-pbc-coefficient-restriction-tensor-comparison",
+    "lem-pbc-completed-tensor-projection-coefficient-transport",
+    "lem-pbc-completed-scalar-projection-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleCoefficientTensorIsoNaturality",
+  "file": "lean/Sheaf/Paper/ProEtaleCoefficientTensorIsoNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CoefficientTensorChain.tensorIso_naturality",
+  "statement": "theorem tensorIso_naturality (o : SheafOfModules.RingIsoTensorTransport\n    (J := ProEt.topology X)\n    (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c)\n    (Z W : CochainComplex (proEtaleRingModules X S) ℤ ×\n      CochainComplex (proEtaleRingModules X S) ℤ) (v : Z ⟶ W) :\n    (total X S ⋙ (pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)).map v ≫\n        (o.totalIso W.1 W.2).hom =\n      (o.totalIso Z.1 Z.2).hom ≫\n        (((pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)).prod\n          ((pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)) ⋙\n            total X ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)).map v",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-34357",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261027T123423-L-2295156",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-34357",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261027T123423-L-2295156",
+  "kind": "interface",
+  "note": "independent cc review: restriction_tensor_chain_square proof (ordinary_square + tensorTotalComparisonSquare + tensorIso_summand) against item node and RingIsoTensorTransport fields; relocated tensorIso/tensorIso_naturality diffed verbatim vs clone and publicly re-exported; adapted RepresentativeSquare proof-only (unclaimed); 3b importer Compatibility OK"
+ }
+}

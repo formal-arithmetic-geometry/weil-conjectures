@@ -1,0 +1,353 @@
+{
+ "id": "lem-sfb-compact-parameter-taylor-expansion",
+ "kind": "statement",
+ "title": "Uniform parameter Taylor coefficients on a compact set",
+ "statement": "Work over $\\mathbf C$ [def-weil-field]. Let $d\\geq0$, let $U\\subset\\mathbf C$ and $P\\subset\\mathbf C^d$ be open, and let $K\\subset U$ be compact. Let $g:U\\times P\\to\\mathbf C$ be holomorphic, meaning locally represented by a convergent complex power series in all coordinates. Fix $w_0\\in P$ and $s>0$ such that $Q_s=\\{w:|w_j-w_{0j}|\\leq s\\ (1\\leq j\\leq d)\\}\\subset P$. There are a finite real number $M\\geq0$ and continuous functions $a_\\alpha:K\\to\\mathbf C$, for $\\alpha\\in\\mathbf N^d$, such that\n$$|a_\\alpha(\\zeta)|\\leq M s^{-|\\alpha|},\\qquad g(\\zeta,w_0+v)=\\sum_{\\alpha\\in\\mathbf N^d}a_\\alpha(\\zeta)v^\\alpha\\quad(\\zeta\\in K,\\ |v_j|<s).$$\nHere $|\\alpha|=\\sum_j\\alpha_j$ and $v^\\alpha=\\prod_jv_j^{\\alpha_j}$. For every $0<\\rho<s$, this series converges absolutely and uniformly for $\\zeta\\in K$ and $|v_j|\\leq\\rho$: explicitly, the sum of the supremum norms of its terms is finite and at most $M(1-\\rho/s)^{-d}$. One may take $M=\\max_{K\\times Q_s}|g|$ when $K$ is nonempty. For $d=0$ there is one multi-index, of degree zero, and the assertion reads $a_0(\\zeta)=g(\\zeta,w_0)$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "I §3.A (3.3), I §3.B (3.8)–(3.9): compact-uniform parameter Taylor expansion and iterated Cauchy bounds; worker-formulated auxiliary, PDF WANTED locally, not read in this repair."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "If $K=\\varnothing$, take $M=0$ and the empty functions $a_\\alpha$; all supremum norms on the empty set are zero. Henceforth suppose $K\\ne\\varnothing$. Holomorphic $g$ is continuous by [lem-sfb-complex-analytic-function-operations]. By [lem-sfb-complex-polydisc-compactness], $K\\times Q_s$ is compact and nonempty (it contains $(\\zeta,w_0)$ for $\\zeta\\in K$). Apply [lem-sfb-compact-real-function-minimum] to the continuous real function $-|g|$ on this compact set. Thus $M=\\max_{K\\times Q_s}|g|$ exists, is finite and nonnegative, and bounds $|g|$ there. If $d=0$, take $a_0(\\zeta)=g(\\zeta,w_0)$; continuity, the bound, and the single-term series assertion follow immediately. We now assume $d>0$.",
+   "uses": [
+    "lem-sfb-complex-analytic-function-operations",
+    "lem-sfb-complex-polydisc-compactness",
+    "lem-sfb-compact-real-function-minimum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Preliminaries for the compact-uniform Cauchy estimate (I §3.B (3.8)–(3.9)). Agent argument; Demailly PDF unavailable locally."
+   }
+  },
+  {
+   "text": "Put $\\theta_j(t)=w_{0j}+s e^{it}$ and define, with the indicated order of nested ordinary integrals,\n$$a_\\alpha(\\zeta)=(2\\pi)^{-d}s^{-|\\alpha|}\\int_0^{2\\pi}\\cdots\\int_0^{2\\pi}g(\\zeta,\\theta_1(t_1),\\ldots,\\theta_d(t_d))e^{-i\\sum_j\\alpha_jt_j}\\,dt_d\\cdots dt_1.$$\nAll these integrals exist. Here are also the continuity and bound checks, rather than an appeal to parameter integration: $g$ is uniformly continuous on $K\\times Q_s$ by [lem-sfb-compact-uniform-continuity]. After integrating any fixed set of the last coordinates, the difference between two values at the remaining arguments is bounded by $(2\\pi)^k$ times the supremum of the original difference, times the fixed scalar $s^{-|\\alpha|}$. This follows by applying the integral bound of [lem-sfb-normal-series-interval-integration] $k$ times. The exponential factors have modulus one and are continuous; factors in unintegrated coordinates may be pulled outside. Uniform continuity therefore makes each intermediate integral continuous in its remaining arguments. Induction starts with continuous $g$, so each next one-variable integrand is continuous and its ordinary integral exists. At $k=d$ this proves continuity of $a_\\alpha$ on $K$. Applying the same bound to $|g|\\leq M$ gives $|a_\\alpha(\\zeta)|\\leq (2\\pi)^{-d}s^{-|\\alpha|}(2\\pi)^dM=Ms^{-|\\alpha|}$.",
+   "uses": [
+    "lem-sfb-compact-uniform-continuity",
+    "lem-sfb-normal-series-interval-integration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Construction of the Cauchy coefficients and their continuity and estimates (I §3.B (3.8)–(3.9)). Agent argument; Demailly PDF unavailable locally."
+   }
+  },
+  {
+   "text": "Fix $\\zeta\\in K$ and $v$ with $|v_j|<s$. Every coordinate slice of $w\\mapsto g(\\zeta,w)$ is holomorphic on a neighbourhood of its closed disc: fixing the other coordinates is composition with an affine analytic map by [lem-sfb-complex-analytic-function-operations], and $Q_s\\subset P$ with $P$ open supplies that neighbourhood. Thus the slice is continuous on the closed disc and complex differentiable in its interior by [lem-sfb-analytic-germ-differentiable]. Repeatedly apply [lem-sfb-cauchy-circle-formula] in the coordinates, always to a slice of $g$ with the other coordinates fixed, not to an integral whose holomorphy is unproved. For $k=0$ the expression is $g(\\zeta,w_0+v)$; replacing, inside the innermost integrand, the value of $g$ as a function of coordinate $k+1$ (the coordinates $1,\\ldots,k$ already on their circles, the coordinates after $k+1$ still at $w_{0j}+v_j$) by its Cauchy integral gives the expression with $k+1$ nested circle integrals, the new integral in $t_{k+1}$ being the innermost; the kernel factors of $t_1,\\ldots,t_k$ do not depend on $t_{k+1}$ and move inside by linearity. Thus $t_1$ is the outermost and $t_d$ the innermost variable, the order fixed in step 2. The substitution $z_j=w_{0j}+se^{it_j}$ has $dz_j=ise^{it_j}dt_j$, so each normalized Cauchy factor becomes $(2\\pi)^{-1}(1-v_j/(se^{it_j}))^{-1}dt_j$. Consequently\n$$g(\\zeta,w_0+v)=(2\\pi)^{-d}\\int_0^{2\\pi}\\cdots\\int_0^{2\\pi}g(\\zeta,\\theta(t))\\prod_{j=1}^d(1-v_j/(se^{it_j}))^{-1}\\,dt_d\\cdots dt_1.$$\nAll denominators are nonzero and bounded away from zero by $1-|v_j|/s$. The continuity argument of step 2 applies also to these continuous kernel factors, so the nested integrals exist. No exchange of integration order is used.",
+   "uses": [
+    "lem-sfb-complex-analytic-function-operations",
+    "lem-sfb-analytic-germ-differentiable",
+    "lem-sfb-cauchy-circle-formula",
+    "lem-sfb-normal-series-interval-integration",
+    "lem-sfb-compact-uniform-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Iterated one-variable Cauchy formula (I §3.A (3.3)). Agent argument; Demailly PDF unavailable locally."
+   }
+  },
+  {
+   "text": "Choose $0<\\rho<s$ and put $r=\\rho/s<1$. For $|v_j|\\leq\\rho$, [lem-sfb-scalar-geometric-series] gives\n$$(1-v_j/(se^{it_j}))^{-1}=\\sum_{n\\geq0}(v_j/s)^n e^{-int_j}.$$\nApply [lem-sfb-absolute-series-product] repeatedly, starting with the empty product $1$ and adjoining one coordinate at a time. It gives the absolutely convergent multi-index expansion of the product of kernels, and likewise\n$$\\sum_{\\alpha\\in\\mathbf N^d}r^{|\\alpha|}=\\prod_{j=1}^d\\sum_{n\\geq0}r^n=(1-r)^{-d}.$$\nThe integrand term belonging to $\\alpha$ is $g(\\zeta,\\theta(t))s^{-|\\alpha|}v^\\alpha e^{-i\\sum_j\\alpha_jt_j}$. Its modulus is at most $M r^{|\\alpha|}$ simultaneously for $\\zeta\\in K$, every real angle tuple $t$, and $|v_j|\\leq\\rho$. The scalar multiple by $M$ preserves summability, so these are summable bounds. [lem-sfb-absolute-series-domination] also gives absolute convergence of the integrand series.",
+   "uses": [
+    "lem-sfb-scalar-geometric-series",
+    "lem-sfb-absolute-series-product",
+    "lem-sfb-absolute-series-domination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Geometric expansion of the Cauchy kernels (I §3.B (3.8)–(3.9)). Agent argument; Demailly PDF unavailable locally."
+   }
+  },
+  {
+   "text": "Integrate the series in step 4 first in $t_d$, then in $t_{d-1}$, and so forth. At the first integration, the index set $\\mathbf N^d$ is countable and every term is a continuous function of the integration variable on all $\\mathbf R$. Its supremum norm on $[0,2\\pi]$ is at most $Mr^{|\\alpha|}$; the sum of these norms is finite by [lem-sfb-absolute-series-domination]. Thus [lem-sfb-normal-series-interval-integration] allows the first interchange. Inductively, after $k$ integrations every term is continuous in the remaining variables by the argument of step 2, and has modulus at most $(2\\pi)^kMr^{|\\alpha|}$, by the integral bound in that same cited node. The majorant remains summable, so its termwise-integration clause applies again. This establishes all $d$ interchanges with no Fubini assumption. For each $\\alpha$, the constant $v^\\alpha$ pulls outside the integrals; the remaining normalized integral is exactly $a_\\alpha(\\zeta)$ from step 2. Combining with step 3 proves\n$$g(\\zeta,w_0+v)=\\sum_{\\alpha\\in\\mathbf N^d}a_\\alpha(\\zeta)v^\\alpha\\qquad(|v_j|\\leq\\rho).$$",
+   "uses": [
+    "lem-sfb-normal-series-interval-integration",
+    "lem-sfb-absolute-series-domination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Termwise integration of the normally convergent kernel series, using the preceding Cauchy expansion. Agent argument; Demailly PDF unavailable locally."
+   }
+  },
+  {
+   "text": "For the same $\\rho$, let $N_\\alpha$ be the supremum of $|a_\\alpha(\\zeta)v^\\alpha|$ over $\\zeta\\in K$ and $|v_j|\\leq\\rho$. Step 2 gives $N_\\alpha\\leq Mr^{|\\alpha|}$. The majorant computed in step 4 and [lem-sfb-absolute-series-domination] show\n$$\\sum_\\alpha N_\\alpha\\leq M(1-\\rho/s)^{-d}<\\infty.$$\nFor any finite set $F$ of multi-indices the absolute value of the remaining sum is at most $\\sum_{\\alpha\\notin F}N_\\alpha$, again by domination. Summability makes this tail smaller than any prescribed positive tolerance for all sufficiently large finite $F$, independently of $\\zeta,v$. This is absolute and uniform convergence, understood as the net of finite subsums. Finally any $v$ with all $|v_j|<s$ admits $\\rho$ with $\\max_j|v_j|<\\rho<s$, so step 5 supplies the asserted equality on the whole open polydisc. The cases $K=\\varnothing$ and $d=0$ were already settled in step 1.",
+   "uses": [
+    "lem-sfb-absolute-series-domination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Uniform tails and the stated sum of supremum norms; elementary consequences of the common Cauchy bound. Agent argument; Demailly PDF unavailable locally."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-complex-analytic-function-operations",
+  "lem-sfb-complex-polydisc-compactness",
+  "lem-sfb-compact-real-function-minimum",
+  "lem-sfb-compact-uniform-continuity",
+  "lem-sfb-normal-series-interval-integration",
+  "lem-sfb-analytic-germ-differentiable",
+  "lem-sfb-cauchy-circle-formula",
+  "lem-sfb-scalar-geometric-series",
+  "lem-sfb-absolute-series-product",
+  "lem-sfb-absolute-series-domination"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "Agent proof by explicit iterated Cauchy integrals and geometric kernel expansion; I §3.A (3.3), I §3.B (3.8)–(3.9) are the intended source places, but the PDF was unavailable locally and the attempted online read timed out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A holomorphic function on a neighborhood of a compact set times a polydisc has a uniformly convergent Taylor series in the parameter with continuous coefficients and uniform Cauchy coefficient bounds",
+   "results": "{\"t\": \"2026-10-24T03:20:00Z\", \"tool\": \"leanfinder\", \"query\": \"A holomorphic function on a neighborhood of a compact set times a polydisc has a uniformly convergent Taylor series in the parameter with continuous coefficients and uniform Cauchy coefficient bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Complex.exists_cthickening_tendstoUniformlyOn\", \"DiffContOnCl.hasFPowerSeriesOnBall\", \"Complex.hasSum_taylorSeries_on_ball\", \"HasFPowerSeriesWithinOnBall.tendstoUniformlyOn\", \"Complex.hasSum_taylorSeries_on_emetric_ball\", \"Complex.hasSum_taylorSeries_of_entire\", \"HasFPowerSeriesWithinOnBall.tendstoUniformlyOn'\", \"Complex.taylorSeries_eq_on_ball\"], \"digest\": \"93583f03b14cc0a1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; one-variable Taylor/Cauchy results and uniform convergence of an already given power series do not supply continuous parameter coefficients with one common Cauchy bound over K."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasFPowerSeries\", \"uniform\"",
+   "results": "{\"t\": \"2026-10-24T03:20:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"HasFPowerSeries\\\", \\\"uniform\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HasFPowerSeriesOnBall.tendstoUniformlyOn'\", \"HasFPowerSeriesWithinOnBall.tendstoUniformlyOn'\", \"HasFPowerSeriesOnBall.tendstoUniformlyOn\", \"HasFPowerSeriesOnBall.tendstoLocallyUniformlyOn'\", \"HasFPowerSeriesWithinOnBall.tendstoLocallyUniformlyOn'\", \"HasFPowerSeriesOnBall.tendstoLocallyUniformlyOn\", \"HasFPowerSeriesWithinOnBall.tendstoUniformlyOn\", \"HasFPowerSeriesWithinOnBall.tendstoLocallyUniformlyOn\"], \"digest\": \"ecd1a255a4c28d37\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; one-variable Taylor/Cauchy results and uniform convergence of an already given power series do not supply continuous parameter coefficients with one common Cauchy bound over K."
+  },
+  {
+   "tool": "grep",
+   "query": "uniform.*[Tt]aylor|[Cc]auchy.*bound|multi.*[Cc]auchy|polydisc",
+   "results": "{\"t\": \"2026-10-24T03:20:31Z\", \"tool\": \"grep\", \"query\": \"uniform.*[Tt]aylor|[Cc]auchy.*bound|multi.*[Cc]auchy|polydisc\", \"sub\": \"Analysis/Complex\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; one-variable Taylor/Cauchy results and uniform convergence of an already given power series do not supply continuous parameter coefficients with one common Cauchy bound over K."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform Taylor expansion in several complex parameters along a compact set with continuous coefficients bounded by a Cauchy estimate",
+   "results": "{\"t\": \"2026-10-24T03:20:32Z\", \"tool\": \"leansearch\", \"query\": \"Uniform Taylor expansion in several complex parameters along a compact set with continuous coefficients bounded by a Cauchy estimate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Complex.taylorSeries_eq_on_emetric_ball\", \"AnalyticAt.hasFPowerSeriesAt\", \"CPolynomialOn\", \"ftaylorSeriesWithin\", \"CPolynomialAt\", \"HasFTaylorSeriesUpTo.mk\", \"DiffContOnCl.hasFPowerSeriesOnBall\", \"Complex.taylorSeries_eq_on_ball\"], \"digest\": \"b24056a017bfb3e0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; one-variable Taylor/Cauchy results and uniform convergence of an already given power series do not supply continuous parameter coefficients with one common Cauchy bound over K."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A holomorphic map of several variables admits a Taylor expansion in some coordinates with coefficients continuous in a compact auxiliary variable and geometric coefficient estimates",
+   "results": "{\"t\": \"2026-10-24T03:21:13Z\", \"tool\": \"leanfinder\", \"query\": \"A holomorphic map of several variables admits a Taylor expansion in some coordinates with coefficients continuous in a compact auxiliary variable and geometric coefficient estimates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFTaylorSeriesUpToOn\", \"HasFTaylorSeriesUpTo\", \"Complex.taylorSeries_eq_on_emetric_ball\", \"ftaylorSeriesWithin\", \"Complex.taylorSeries_eq_on_ball\", \"Complex.hasSum_taylorSeries_on_emetric_ball\", \"Complex.taylorSeries_eq_on_ball'\", \"Complex.hasSum_taylorSeries_on_ball\"], \"digest\": \"8146c71605ee33c3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; one-variable Taylor/Cauchy results and uniform convergence of an already given power series do not supply continuous parameter coefficients with one common Cauchy bound over K."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A holomorphic function on a product with a closed polydisc admits continuous parameter Taylor coefficients with uniform Cauchy estimates over a compact set",
+   "results": {
+    "t": "2026-10-24T03:57:25Z",
+    "tool": "leanfinder",
+    "query": "A holomorphic function on a product with a closed polydisc admits continuous parameter Taylor coefficients with uniform Cauchy estimates over a compact set",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HasFTaylorSeriesUpToOn.cont",
+     "DiffContOnCl.hasFPowerSeriesOnBall",
+     "HasFTaylorSeriesUpTo.cont",
+     "DifferentiableOn.hasFPowerSeriesOnBall",
+     "Complex.hasSum_taylorSeries_on_emetric_ball",
+     "Complex.hasSum_taylorSeries_on_ball",
+     "Complex.taylorSeries_eq_on_emetric_ball",
+     "Complex.taylorSeries_eq_on_ball"
+    ],
+    "digest": "6202e266911d2aa0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has one-variable Cauchy/Taylor series and convergence of a supplied formal multilinear series; none of the returned declarations supplies these monomial coefficients continuous in an auxiliary compact variable together with the uniform coefficient and normal-sum bounds. Source types read; an iterated Cauchy argument is required."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasFPowerSeries\", \"uniform\"",
+   "results": {
+    "t": "2026-10-24T03:57:22Z",
+    "tool": "loogle",
+    "query": "\"HasFPowerSeries\", \"uniform\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "HasFPowerSeriesOnBall.tendstoUniformlyOn'",
+     "HasFPowerSeriesWithinOnBall.tendstoUniformlyOn'",
+     "HasFPowerSeriesOnBall.tendstoUniformlyOn",
+     "HasFPowerSeriesOnBall.tendstoLocallyUniformlyOn'",
+     "HasFPowerSeriesWithinOnBall.tendstoLocallyUniformlyOn'",
+     "HasFPowerSeriesOnBall.tendstoLocallyUniformlyOn",
+     "HasFPowerSeriesWithinOnBall.tendstoUniformlyOn",
+     "HasFPowerSeriesWithinOnBall.tendstoLocallyUniformlyOn"
+    ],
+    "digest": "ecd1a255a4c28d37"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has one-variable Cauchy/Taylor series and convergence of a supplied formal multilinear series; none of the returned declarations supplies these monomial coefficients continuous in an auxiliary compact variable together with the uniform coefficient and normal-sum bounds. Source types read; an iterated Cauchy argument is required."
+  },
+  {
+   "tool": "grep",
+   "query": "uniform.*[Tt]aylor|polydisc|polydisk|multi.*[Cc]auchy",
+   "results": {
+    "t": "2026-10-24T03:57:20Z",
+    "tool": "grep",
+    "query": "uniform.*[Tt]aylor|polydisc|polydisk|multi.*[Cc]auchy",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Analytic/ConvergenceRadius.lean",
+     "Mathlib/Analysis/InnerProductSpace/Basic.lean",
+     "Mathlib/Analysis/InnerProductSpace/Basic.lean",
+     "Mathlib/Analysis/InnerProductSpace/Basic.lean",
+     "Mathlib/Analysis/Calculus/Taylor.lean"
+    ],
+    "digest": "831cabd34dc677cb"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has one-variable Cauchy/Taylor series and convergence of a supplied formal multilinear series; none of the returned declarations supplies these monomial coefficients continuous in an auxiliary compact variable together with the uniform coefficient and normal-sum bounds. Source types read; an iterated Cauchy argument is required."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniformly convergent multivariate Taylor expansions of holomorphic functions on compact parameter sets with Cauchy coefficient bounds",
+   "results": {
+    "t": "2026-10-24T03:57:20Z",
+    "tool": "leansearch",
+    "query": "Uniformly convergent multivariate Taylor expansions of holomorphic functions on compact parameter sets with Cauchy coefficient bounds",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "cauchyPowerSeries",
+     "HasFPowerSeriesWithinOnBall.tendstoUniformlyOn",
+     "HasFPowerSeriesWithinOnBall.tendstoLocallyUniformlyOn",
+     "HasFPowerSeriesOnBall.tendstoUniformlyOn",
+     "cauchyPowerSeries_apply",
+     "AnalyticAt.hasFPowerSeriesAt",
+     "Complex.hasSum_taylorSeries_on_ball",
+     "MvPowerSeries.hasSum_aeval"
+    ],
+    "digest": "2687881a5f211d98"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has one-variable Cauchy/Taylor series and convergence of a supplied formal multilinear series; none of the returned declarations supplies these monomial coefficients continuous in an auxiliary compact variable together with the uniform coefficient and normal-sum bounds. Source types read; an iterated Cauchy argument is required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A several complex variable analytic function has a normally convergent monomial expansion in selected coordinates uniformly over a compact auxiliary variable with coefficient bound M times radius to minus degree",
+   "results": {
+    "t": "2026-10-24T04:00:05Z",
+    "tool": "leanfinder",
+    "query": "A several complex variable analytic function has a normally convergent monomial expansion in selected coordinates uniformly over a compact auxiliary variable with coefficient bound M times radius to minus degree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FormalMultilinearSeries.analyticOnNhd",
+     "AnalyticAt",
+     "AnalyticOn.hasFPowerSeriesOnBall",
+     "AnalyticOn.hasFPowerSeriesOnSubball",
+     "ContinuousMultilinearMap.analyticAt",
+     "ContinuousMultilinearMap.analyticOn",
+     "HasFPowerSeriesWithinOnBall.analyticWithinAt",
+     "HasFPowerSeriesWithinOnBall.analyticOn"
+    ],
+    "digest": "e7a6c8c3b3a9da0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has one-variable Cauchy/Taylor series and convergence of a supplied formal multilinear series; none of the returned declarations supplies these monomial coefficients continuous in an auxiliary compact variable together with the uniform coefficient and normal-sum bounds. Source types read; an iterated Cauchy argument is required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-holomorphic-circle-integral-parameters",
+  "date": "2026-10-24",
+  "group": "Q34"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Cauchy-integral proof of the isolated-puncture input, uniform parameter expansions (Demailly I §3.B (3.8)–(3.9)) and integration of the Cauchy kernel; supporting the GAGA input of det-thm-sf-ctf-stability-direct-images proof (3).",
+   "via": [
+    "lem-sfb-holomorphic-circle-integral-parameters",
+    "lem-sfb-hartogs-punctured-affine-extension",
+    "lem-sfb-analytic-projective-structure-cohomology",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-compact-parameter-taylor-expansion",
+  "worker": "stage1",
+  "summary": "Constructed all coefficients by iterated circle integrals. Proved continuity from compact uniform continuity and the integral bound, the common Cauchy estimate, the iterated Cauchy identity, justified all termwise integrations, and gave the quantitative uniform tail bound. Reused existing analytic and series leaves and the compact minimum theorem; added only two Mathlib leaves for polydisc compactness and compact uniform continuity. Empty K and d=0 handled explicitly. No statement correction.",
+  "blueprint": "This auxiliary realizes the uniform parameter expansion input of lem-sfb-holomorphic-circle-integral-parameters; in the inherited chain it serves the isolated-puncture/GAGA input to det-thm-sf-ctf-stability-direct-images proof (3). The newest blueprint was read; it has no separate Taylor-expansion node. Both new nodes carry the same ancestor and inherited via chain, with this item prepended."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NU-f4d12d2bb",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-f4d12d2bb (reviewer sub-agent of L); spot-checked: FIX, one sentence in step 3. I read the item, both new leaves, every cited statement and the parent's use. The item is still unsplit and unreviewed live and in side-live, and there is no repair note. Demailly is not under literature/, so the item correctly stays an agent proof. The statement is unchanged and true. I tested it on empty K, d=0 and a monomial. The parent circle-integral-parameters step 1 gets exactly continuous a_α with |a_α|≤Ms^{-|α|}, uniform on K×Q_ρ. Fault, step 3: the induction applied Cauchy to coordinate d−k at stage k. Each new integral goes inside the integrand, so that order puts t_d outermost. Steps 2 and 5 and the display (dt_d⋯dt_1) need t_d innermost, so the display would need the Fubini step that the proof says it does not use. Fix: apply Cauchy to coordinate k+1 at stage k, with the new t_{k+1} integral innermost and the outer kernels moved inside by linearity. Steps 1, 2, 4, 5 and 6 check out against the statements they cite: the max via the compact minimum of −|g|; continuity via Heine–Cantor plus the integral bound; the Jacobian factor (2π)^{-1}(1−v/(se^{it}))^{-1}; d termwise integrations with countable ℕ^d and majorant (2π)^kMr^{|α|}; the tail bound M(1−ρ/s)^{-d}. Both new Mathlib leaves check out. complex-polydisc-compactness uses isCompact_pi_infinite (Compact.lean:1167), IsCompact.prod (:1077), ProperSpace closedBall (:40) and ProperSpace ℂ (Complex/Basic:139). compact-uniform-continuity uses IsCompact.uniformContinuousOn_of_continuous (HeineCantor:47). Neither duplicates an existing node: the Tychonoff node is the whole-space form and finite-dim-proper gives balls only. Neither is a clause of the item. All cites are in unit sk-thm-sf-ctf-stability, so there are no tool_uses. There is no SGA. The blueprint from.node=null is inherited and not a fault of this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Complex.CompactParameterTaylorExpansion",
+  "declaration": "Complex.exists_compact_parameter_taylor_expansion",
+  "file": "lean/Sheaf/Analysis/Complex/CompactParameterTaylorExpansion.lean",
+  "statement": "theorem exists_compact_parameter_taylor_expansion (d : ℕ) (U : Set ℂ) (P : Set (Fin d → ℂ)) (hU : IsOpen U) (hP : IsOpen P) (K : Set ℂ) (hKU : K ⊆ U) (hK : IsCompact K) (g : (ℂ × (Fin d → ℂ)) → ℂ) (hg : AnalyticOnNhd ℂ g (U ×ˢ P)) (w₀ : Fin d → ℂ) (hw₀ : w₀ ∈ P) (s : ℝ) (hs : 0 < s) (hQ : {w : Fin d → ℂ | ∀ j, ‖w j - w₀ j‖ ≤ s} ⊆ P) : ∃ (M : ℝ) (a : (Fin d → ℕ) → C(K, ℂ)), 0 ≤ M ∧ (∀ (α : Fin d → ℕ) (ζ : K), ‖a α ζ‖ ≤ M * (s ^ (∑ j, α j))⁻¹) ∧ (∀ (ζ : K) (v : Fin d → ℂ), (∀ j, ‖v j‖ < s) → HasSum (fun α : Fin d → ℕ ↦ a α ζ * ∏ j, v j ^ α j) (g (ζ, w₀ + v))) ∧ (∀ ρ : ℝ, 0 < ρ → ρ < s → Summable (fun α : Fin d → ℕ ↦ ((⨆ (ζ : K) (v : {v : Fin d → ℂ // ∀ j, ‖v j‖ ≤ ρ}), ‖a α ζ * ∏ j, v.val j ^ α j‖₊) : ℝ)) ∧ (∑' α : Fin d → ℕ, ((⨆ (ζ : K) (v : {v : Fin d → ℂ // ∀ j, ‖v j‖ ≤ ρ}), ‖a α ζ * ∏ j, v.val j ^ α j‖₊) : ℝ)) ≤ M * ((1 - ρ / s) ^ d)⁻¹ ∧ TendstoUniformlyOn (fun F : Finset (Fin d → ℕ) ↦ fun x : K × (Fin d → ℂ) ↦ ∑ α ∈ F, a α x.1 * ∏ j, x.2 j ^ α j) (fun x : K × (Fin d → ℂ) ↦ g (x.1, w₀ + x.2)) Filter.atTop {x : K × (Fin d → ℂ) | ∀ j, ‖x.2 j‖ ≤ ρ}) ∧ (K.Nonempty → IsGreatest ((fun x : ℂ × (Fin d → ℂ) ↦ ‖g x‖) '' (K ×ˢ {w : Fin d → ℂ | ∀ j, ‖w j - w₀ j‖ ≤ s})) M) ∧ (d = 0 → ∀ ζ : K, a (fun _ : Fin d ↦ 0) ζ = g (ζ, w₀))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-82a5b1a07",
+  "group": "NI",
+  "result": "pass",
+  "note": "Read node (statement, 6 proof steps, Demailly source; agent auxiliary, PDF absent), stmt_dep def-weil-field (Mathlib Field via Complex.Basic), the module, the report (Worker report + Second reading by NI present) and the side-live consumer HolomorphicCircleIntegralParameters. Every hypothesis matches and none is stronger (hw0 redundant given hQ, harmless). Every clause is present: continuous C(K,ℂ) coefficients, Cauchy bound M*s^{-|α|}, HasSum on the open polydisc, for 0<ρ<s summable ℝ≥0 sup norms with tsum ≤ M(1-ρ/s)^{-d} and uniform convergence of the Finset net, IsGreatest max clause for nonempty K with the same M, d=0 clause. Edge cases checked: empty K, d=0, empty U, zero g, no claim at ρ=s; no universes; Classical adds no Decidable to the signature. lean.statement is verbatim in the file; node differs from side-live only by the lean field; no helpers, new nodes, dependency modules or statement change; proof is only sorry; docstrings carry source, blueprint tag and the corrected proof plan; no duplicate in Mathlib or the project. No compile reproduced (no file changed). No findings."
+ }
+}

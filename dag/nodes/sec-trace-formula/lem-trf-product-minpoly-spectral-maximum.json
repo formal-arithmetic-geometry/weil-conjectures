@@ -1,0 +1,341 @@
+{
+ "id": "lem-trf-product-minpoly-spectral-maximum",
+ "kind": "statement",
+ "title": "Minimal-polynomial spectral radius on a finite product of fields",
+ "statement": "Let $K$ be a field [def-weil-field] with a real-valued multiplicative nonarchimedean absolute value $|\\cdot|$, let $I$ be a nonempty finite set, and for each $j\\in I$ let $L_j/K$ be a finite field extension. Give $P=\\prod_{j\\in I}L_j$ its coordinatewise $K$-algebra structure. For an element $x$ of $P$ or of one of the $L_j$, write its monic minimal polynomial over $K$ [def-weil-polynomial-ring] as $p_x(Z)=Z^{d_x}+\\sum_{i=1}^{d_x}a_{x,i}Z^{d_x-i}$ and define $s(x)=\\max_{1\\le i\\le d_x}|a_{x,i}|^{1/i}$. (All these minimal polynomials have positive degree.) Then, for every $x=(x_j)_{j\\in I}\\in P$, $$s(x)=\\max_{j\\in I}s(x_j).$$ No completeness of $K$ or separability of the extensions is required.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proof of Lemma 5.3.3/4, first paragraph, printed p.217 (scan PDF p.223), finite-product spectral maximum formula; general spectral-polynomial interpretation in Section 3.1.2. Primary scan read 2026-10-25; archival literature copy WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $p=p_x$, $p_j=p_{x_j}$, and $Q=\\prod_{j\\in I}p_j$. Each $L_j$ and the nontrivial finite product $P$ is a finite-dimensional $K$-algebra: combine finite spanning sets using the coordinate inclusions. By [lem-trf-finite-algebra-minpoly-properties], $p,p_j$ are monic of positive degree and vanish at their respective elements. Evaluation is coordinatewise, so $p(x_j)=0$ for every $j$, while $Q(x_j)=0$ since its $j$-th factor vanishes. Thus $Q(x)=0$. The divisibility clause of the same node gives $p_j\\mid p$ for every $j$ and $p\\mid Q$. No assertion that the polynomials $p_j$ are distinct or coprime is needed.",
+   "uses": [
+    "lem-trf-finite-algebra-minpoly-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/FieldTheory/Minpoly/Field.lean",
+    "place": "minpoly.dvd, lines 69-77, applied to coordinatewise evaluation; monicity and integrality clauses supplied by the cited node."
+   }
+  },
+  {
+   "text": "For any monic polynomial $f=Z^d+\\sum_{i=1}^d b_iZ^{d-i}$ put $s(f)=\\max_{1\\le i\\le d}|b_i|^{1/i}$, and put $s(1)=0$. Fix $r>0$ and use $G_r$ from [lem-trf-polynomial-weighted-gauss-multiplicative]. Comparing each coefficient with the leading coefficient gives $G_r(f)\\ge r^d$ and $G_r(f)=r^d$ if and only if $|b_i|r^{d-i}\\le r^d$ for all $i$, equivalently $s(f)\\le r$. If monic $f$ divides monic $h$, write $h=fg$. Leading coefficients and degrees show that $g$ is monic and $\\deg h=\\deg f+\\deg g$. Whenever $s(h)\\le r$, multiplicativity gives $G_r(f)G_r(g)=r^{\\deg h}$; together with $G_r(g)\\ge r^{\\deg g}>0$ this implies $G_r(f)\\le r^{\\deg f}$. Hence $s(f)\\le r$. Letting $r>s(h)$ vary gives $s(f)\\le s(h)$; if this failed, the midpoint of the two nonnegative numbers would be a positive $r$ contradicting the bound.",
+   "uses": [
+    "lem-trf-polynomial-weighted-gauss-multiplicative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/RingTheory/Polynomial/GaussNorm.lean",
+    "place": "Polynomial.gaussNorm and Polynomial.gaussNorm_mul, lines 49-50 and 276-279; elementary coefficient comparison and application to minimal polynomials."
+   }
+  },
+  {
+   "text": "Let $M=\\max_{j\\in I}s(p_j)$. For every real $r>M$ one has $r>0$ and $G_r(p_j)=r^{\\deg p_j}$ by the coefficient criterion in step 2. Applying [lem-trf-polynomial-weighted-gauss-multiplicative] repeatedly along the finite product yields $G_r(Q)=\\prod_jG_r(p_j)=r^{\\sum_j\\deg p_j}=r^{\\deg Q}$. The criterion gives $s(Q)\\le r$ for every $r>M$, hence $s(Q)\\le M$ by the same midpoint argument. Now step 1 and the monic-divisor bound in step 2 give $s(p)\\le s(Q)\\le M$ and $s(p_j)\\le s(p)$ for every $j$. Taking the finite maximum proves $M\\le s(p)$ and therefore $s(x)=s(p)=M=\\max_js(x_j)$. Positivity of degrees, including $x=0$, came from step 1; no extension of the absolute value, completeness, or separability was used.",
+   "uses": [
+    "lem-trf-polynomial-weighted-gauss-multiplicative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/RingTheory/Polynomial/GaussNorm.lean",
+    "place": "Polynomial.gaussNorm and Polynomial.gaussNorm_mul, lines 49-50 and 276-279; elementary coefficient comparison and application to minimal polynomials."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-finite-algebra-minpoly-properties",
+  "lem-trf-polynomial-weighted-gauss-multiplicative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/RingTheory/Polynomial/GaussNorm.lean",
+  "place": "Polynomial.gaussNorm_mul:276, with the elementary monic-divisor argument written out. BGR scan unavailable locally and online fetch exceeded the web tool size limit; archival source WANTED in report."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The spectral value of the minimal polynomial of an element in a finite product of finite algebraic field extensions is the maximum of its component spectral norms",
+   "results": {
+    "t": "2026-10-24T16:33:22Z",
+    "tool": "leanfinder",
+    "query": "The spectral value of the minimal polynomial of an element in a finite product of finite algebraic field extensions is the maximum of its component spectral norms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "max_norm_root_eq_spectralValue",
+     "spectralNorm.spectralMulAlgNorm_eq_of_mem_roots",
+     "spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots",
+     "spectralNorm_eq_iSup_of_finiteDimensional_normal",
+     "spectralNorm",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "spectralNorm_extends_of_finiteDimensional",
+     "spectralAlgNorm_def"
+    ],
+    "digest": "432c53713ebc162b"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Pi.spectrum_eq concerns the algebraic K-spectrum and does not identify this coefficient radius over an incomplete, nonsplitting base. max_norm_root_eq_spectralValue concerns a polynomial split in a field with an algebra norm; applying it here requires a splitting extension and the product minimal-polynomial comparison, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralValue\", \"lcm\"",
+   "results": {
+    "t": "2026-10-24T16:33:23Z",
+    "tool": "loogle",
+    "query": "\"spectralValue\", \"lcm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Pi.spectrum_eq concerns the algebraic K-spectrum and does not identify this coefficient radius over an incomplete, nonsplitting base. max_norm_root_eq_spectralValue concerns a polynomial split in a field with an algebra norm; applying it here requires a splitting extension and the product minimal-polynomial comparison, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "spectralValue.*(lcm|prod)|spectralNorm.*(prod|pi)|minpoly.*(prod|pi)",
+   "results": {
+    "t": "2026-10-24T16:33:23Z",
+    "tool": "grep",
+    "query": "spectralValue.*(lcm|prod)|spectralNorm.*(prod|pi)|minpoly.*(prod|pi)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 13,
+    "note": "",
+    "top": [
+     "Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean",
+     "Mathlib/FieldTheory/Minpoly/Field.lean",
+     "Mathlib/FieldTheory/Minpoly/Field.lean",
+     "Mathlib/FieldTheory/Minpoly/ConjRootClass.lean",
+     "Mathlib/FieldTheory/Minpoly/ConjRootClass.lean",
+     "Mathlib/FieldTheory/Normal/Basic.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean"
+    ],
+    "digest": "aa4d91c7a785105c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Pi.spectrum_eq concerns the algebraic K-spectrum and does not identify this coefficient radius over an incomplete, nonsplitting base. max_norm_root_eq_spectralValue concerns a polynomial split in a field with an algebra norm; applying it here requires a splitting extension and the product minimal-polynomial comparison, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal polynomial spectral coefficient radius of an element of a product algebra is the maximum of its coordinate radii",
+   "results": {
+    "t": "2026-10-24T16:33:24Z",
+    "tool": "leansearch",
+    "query": "Minimal polynomial spectral coefficient radius of an element of a product algebra is the maximum of its coordinate radii",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm",
+     "Prod.spectrum_eq",
+     "spectralRadius",
+     "spectrum.pow_nnnorm_pow_one_div_tendsto_nhds_spectralRadius",
+     "Pi.spectrum_eq",
+     "spectralAlgNorm",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "Pi.normedAlgebra"
+    ],
+    "digest": "bf4450c4a0c1a0c2"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Pi.spectrum_eq concerns the algebraic K-spectrum and does not identify this coefficient radius over an incomplete, nonsplitting base. max_norm_root_eq_spectralValue concerns a polynomial split in a field with an algebra norm; applying it here requires a splitting extension and the product minimal-polynomial comparison, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For monic polynomials over a nonarchimedean field the coefficient spectral radius of their least common multiple equals the maximum of their radii",
+   "results": {
+    "t": "2026-10-24T16:33:25Z",
+    "tool": "leanfinder",
+    "query": "For monic polynomials over a nonarchimedean field the coefficient spectral radius of their least common multiple equals the maximum of their radii",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "max_norm_root_eq_spectralValue",
+     "norm_root_le_spectralValue",
+     "spectralValue_le_one_iff",
+     "spectralValue",
+     "spectralValue_eq_zero_iff",
+     "spectralValueTerms",
+     "spectralNorm_mul",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow"
+    ],
+    "digest": "b8821bea4ffc3ea7"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Pi.spectrum_eq concerns the algebraic K-spectrum and does not identify this coefficient radius over an incomplete, nonsplitting base. max_norm_root_eq_spectralValue concerns a polynomial split in a field with an algebra norm; applying it here requires a splitting extension and the product minimal-polynomial comparison, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "spectralValue|gaussNorm_mul",
+   "results": {
+    "t": "2026-10-24T16:55:24Z",
+    "tool": "grep",
+    "query": "spectralValue|gaussNorm_mul",
+    "sub": "Analysis/Normed/Unbundled",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean"
+    ],
+    "digest": "f2c7494ba0eb2075"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match for the item: spectralValue and root-radius formula concern single polynomials and split field-valued roots; Pi spectrum does not give the coefficient radius without additional argument. Polynomial.gaussNorm_mul supplies a strictly smaller input."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralValue\"",
+   "results": {
+    "t": "2026-10-24T16:55:25Z",
+    "tool": "loogle",
+    "query": "\"spectralValue\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "spectralValue",
+     "spectralValueTerms",
+     "spectralValueTerms_finite_range",
+     "spectralValueTerms_bddAbove",
+     "spectralValue_nonneg",
+     "spectralValueTerms_nonneg",
+     "spectralValueTerms_of_natDegree_le",
+     "spectralValue_X_pow"
+    ],
+    "digest": "b5b5787dc7c0db18"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match for the item: spectralValue and root-radius formula concern single polynomials and split field-valued roots; Pi spectrum does not give the coefficient radius without additional argument. Polynomial.gaussNorm_mul supplies a strictly smaller input."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal polynomial coefficient spectral radius on a finite product of fields equals the maximum of the coordinate spectral radii",
+   "results": {
+    "t": "2026-10-24T16:55:25Z",
+    "tool": "leansearch",
+    "query": "Minimal polynomial coefficient spectral radius on a finite product of fields equals the maximum of the coordinate spectral radii",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm",
+     "spectralRadius",
+     "NumberField.Embeddings.coeff_bdd_of_norm_le",
+     "spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "spectralValue",
+     "spectralAlgNorm_mul",
+     "spectralMulAlgNorm"
+    ],
+    "digest": "44e338d8c321fd1a"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match for the item: spectralValue and root-radius formula concern single polynomials and split field-valued roots; Pi spectrum does not give the coefficient radius without additional argument. Polynomial.gaussNorm_mul supplies a strictly smaller input."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For monic polynomials over a nonarchimedean field the spectral value of a product is the maximum of the spectral values of the factors",
+   "results": {
+    "t": "2026-10-24T16:55:26Z",
+    "tool": "leanfinder",
+    "query": "For monic polynomials over a nonarchimedean field the spectral value of a product is the maximum of the spectral values of the factors",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "max_norm_root_eq_spectralValue",
+     "norm_root_le_spectralValue",
+     "spectralAlgNorm_mul",
+     "isPowMul_spectralNorm",
+     "spectralNorm_mul",
+     "isNonarchimedean_spectralNorm",
+     "spectralValue_le_one_iff",
+     "spectralValue_eq_zero_iff"
+    ],
+    "digest": "a09c30b04538bbc8"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match for the item: spectralValue and root-radius formula concern single polynomials and split field-valued roots; Pi spectrum does not give the coefficient radius without additional argument. Polynomial.gaussNorm_mul supplies a strictly smaller input."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-degree-filtration-rank-asymptotic",
+  "date": "2026-10-25",
+  "group": "N8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Sections 5.3.3–5.3.4, especially Proposition 5.3.3/3 and the conclusion of Section 5.3.4, printed pp.215 and 218–220 (scan PDF pp.221 and 224–226); Section 5.3.4 removes the divisible-value-group restriction. Supporting input for the present split: Lemma 5.3.3/4 and its proof, printed pp.216–218 (scan PDF pp.222–224). Proof of Lemma 5.3.3/4, first paragraph, printed p.217 (scan PDF p.223), finite-product spectral maximum formula; general spectral-polynomial interpretation in Section 3.1.2. Primary scan read 2026-10-25; archival literature copy WANTED.",
+   "via": [
+    "lem-trf-degree-filtration-rank-asymptotic",
+    "lem-trf-gauss-rational-function-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-product-minpoly-spectral-maximum",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Pure weighted-polynomial Gauss-norm proof: coordinate evaluation gives divisibilities between the product and component minimal polynomials; a coefficient comparison and multiplicativity imply the monic-divisor bound and product upper bound. Two searched Mathlib leaves, no new unsplit nodes; no completeness or separability hypothesis introduced.",
+  "blueprint": "Historical supporting analytic input below lem-trf-local-term-locality, BGR Lemma 5.3.3/4 finite-product formula as located in the inherited source. Current latest blueprint contracting-correspondence route is unchanged. The present polynomial argument supplies the independent analytic lemma below that route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NS-b311ca4c9",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-b311ca4c9 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full. The item statement is unchanged. Step 1: coordinatewise evaluation gives p_j | p and p | Q = prod p_j, and no coprimality is used. Step 2: G_r(f) >= r^d, and G_r(f) = r^d iff s(f) <= r. For monic f | h, the quotient g is monic, and multiplicativity gives s(f) <= s(h), including the cases s(h) = 0 and s(1) = 0. Step 3: taking r > M avoids r = 0, and s(p_j) <= s(p) <= s(Q) <= M. I tested |I| = 1, x = 0, repeated p_j, a trivial absolute value and inseparable minimal polynomials; all hold. lem-trf-polynomial-weighted-gauss-multiplicative matches Mathlib GaussNorm.lean exactly: gaussNorm at 49-50, the AbsoluteValue / IsNonarchimedean / 0 < c section at 219-221, gaussNorm_mul at 276. It is not a duplicate of lem-trf-tate-gauss-multiplicative, which is weight 1 on restricted series and cannot be rescaled to weight r without some c in K with |c| = r. lem-trf-finite-algebra-minpoly-properties matches IsIntegral.of_finite (:64), minpoly.monic/aeval/natDegree_pos (Basic.lean 54/89/192, with Nontrivial B) and minpoly.dvd (Field.lean:69). An rg -L search of the DAG for minpoly, minimal-polynomial divisibility, monic divisors and Gauss norm found no duplicate. The BGR scan is absent from literature/ and is flagged WANTED; proof_origin is agent and rests only on the checked Mathlib inputs. No SGA is cited. No fixes."
+ }
+}

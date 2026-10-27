@@ -98,22 +98,53 @@
   "sbc-def-coefficient-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.IsConstructibleSheaf.openImmersionLowerShriek"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.IsConstructibleSheaf.openImmersionLowerShriek",
+     "module": "WeilConjectures.ConstructibleSheaf.OpenClosed",
+     "lines": [
+      290,
+      302
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $X$ be a scheme, let $j:U\\hookrightarrow X$ be an\nopen immersion, and let $F$\nbe a constructible\n$\\Lambda$-sheaf on $U_{{\\mathrm{et}}}$. Then $j_!F$ of\n[def-weil-pbc-extension-by-zero] is constructible on\n$X_{{\\mathrm{et}}}$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative ring, let $X$ be a scheme, let $j:U\\hookrightarrow X$ be a quasi-compact open immersion, and let $F$ be a constructible sheaf of $\\Lambda$-modules on $U_{\\mathrm{et}}$ [def-constructible-constructible]. Then $j_!F$ of [def-weil-pbc-extension-by-zero] is constructible on $X_{\\mathrm{et}}$. (The quasi-compactness of $j$ is automatic when $X$ is locally Noetherian.)",
   "proof": [
    {
-    "text": "By [def-weil-pbc-constructible-complexes] $U$ has a finite\npartition $U=\\bigsqcup_\\alpha U_\\alpha$ into locally closed\nconstructible subschemes with $F|_{U_\\alpha}$ lisse. The pieces\n$U_\\alpha$ are locally closed constructible subschemes of $X$ (locally\nclosed in the open subscheme $U$), and $X$ is the disjoint union of\n$X\\setminus U$ and the $U_\\alpha$. By the stalk description of\n[def-weil-pbc-extension-by-zero] the restriction of $j_!F$ to\n$U_\\alpha$ is the lisse $F|_{U_\\alpha}$ and its restriction to\n$X\\setminus U$ is the zero sheaf, which is lisse; this is the finite\npartition with lisse restrictions of\n[def-weil-pbc-constructible-complexes].",
+    "text": "Let $i:Z\\to X$ be the closed immersion of the reduced closed complement of $j(U)$, so that $(j,i)$ is a complementary pair of an open and a closed immersion. Since $j$ is quasi-compact, the open–closed criterion [prop-constructible-open-closed] applies: $j_!F$ is constructible if and only if $j^{-1}j_!F$ and $i^{-1}j_!F$ are. The unit $F\\to j^{-1}j_!F$ is an isomorphism, so $j^{-1}j_!F$ is constructible, constructibility being invariant under isomorphism [lemma-constructible-iso-invariance]. The restriction $i^{-1}j_!F$ vanishes because $Z$ is disjoint from the image of $j$ [lemma-openclosed-vanishing-lowershriek], and the zero sheaf is constructible (with the one-stratum stratification of $Z$). Hence $j_!F$ is constructible.",
     "uses": [
-     "def-weil-pbc-constructible-complexes",
-     "def-weil-pbc-extension-by-zero"
+     "prop-constructible-open-closed",
+     "lemma-constructible-iso-invariance",
+     "lemma-openclosed-vanishing-lowershriek"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

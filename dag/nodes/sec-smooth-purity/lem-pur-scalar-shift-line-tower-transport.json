@@ -1,0 +1,364 @@
+{
+ "id": "lem-pur-scalar-shift-line-tower-transport",
+ "kind": "statement",
+ "title": "Canonical scalar shifts transport coherent line towers",
+ "statement": "Let $\\ell$ be a prime, $S$ a scheme, and $L_0\\subseteq L_1\\subseteq L_2$ finite extensions of $\\mathbf Q_\\ell$, allowing repetitions [def-weil-l-adic-coefficient-extension]. On the small pro-etale site [def-weil-pbc-proetale-site], put $R_i=\\widehat{\\mathcal O}_{L_i,S}$ [def-weil-completed-integral-coefficients] and $C_{ji}=-\\otimes^L_{R_i}R_j$ [lem-pur-derived-change-of-rings]. Let $\\alpha:C_{21}C_{10}\\xrightarrow{\\sim}C_{20}$ be the ordinary derived tensor associator [lem-sfb-successive-derived-quotient-normalization], and let $s_{ji,K,n}:C_{ji}(K[n])\\xrightarrow{\\sim}(C_{ji}K)[n]$ be the canonical comparison induced by termwise change of rings, with cochain convention $P[n]^r=P^{r+n}$ and differential $(-1)^n d_P$ [def-weil-abstract-derived-category].\nFor every K-flat flat-term complex $P$ [def-pc-kflat-complex], $s$ is represented by the identity $P^{r+n}\\otimes R_j\\to(P\\otimes R_j)[n]^r$ on tensor components. It is natural in all derived morphisms and satisfies, for every $K\\in D(R_0)$ and $n\\in\\mathbf Z$,\n$$s_{20,K,n}\\circ\\alpha_{K[n]}=\\alpha_K[n]\\circ s_{21,C_{10}K,n}\\circ C_{21}(s_{10,K,n}).$$\nFor any objects $K_i\\in D(R_i)$ and isomorphisms $w_{ji}:C_{ji}K_i\\xrightarrow{\\sim}K_j$ satisfying $w_{20}\\alpha_{K_0}=w_{21}C_{21}(w_{10})$, define $q_{ji,n}=w_{ji}[n]\\circ s_{ji,K_i,n}$. Then\n$$q_{20,n}\\circ\\alpha_{K_0[n]}=q_{21,n}\\circ C_{21}(q_{10,n}).$$\nIf the $K_i$ are derived complete [def-weil-derived-complete], identify ordinary and strict-tower extensions [def-weil-integral-scalar-extension] by the actual quotient-map $\\chi$ [lem-weil-finite-free-completed-scalar-comparison]. The same equation then holds with the specified completed normalization. In the strict cone $\\operatorname{Cone}(1-s)[-1]$, $\\chi_P(z)=(c_P(z),0)$ for the family $c_P$ of quotient maps; its shift is the comparison with product coordinates $(x,y)\\mapsto(x,(-1)^ny)$ [lem-weil-completed-scalar-chain-shift]. This comparison intertwines $\\chi_{P[n]}$ with $\\chi_P[n]$. The asserted derived identities use these comparisons and do not require a chain-level inverse to $\\chi$. The conclusions include $n=0$, negative $n$, and identity coefficient extensions with their tensor multiplication and derived-completeness unit comparisons.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+  "place": "Agent auxiliary to coefficient transport, sk-thm-purity-transport Step 3; Old Step 6 and shift/identity part of Step 7: termwise shifts, associator square, and actual quotient-completion normalization."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-weil-derived-complete",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-completed-scalar-chain-shift",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "def-fd-completed-scalar-shift-representative-property",
+  "lem-pur-completed-line-tensor-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Write $E_{ji}(P)=P\\otimes_{R_i}R_j$ termwise. The two complexes $E_{ji}(P[n])$ and $E_{ji}(P)[n]$ have the same degree-$r$ module $P^{r+n}\\otimes_{R_i}R_j$ and the same differential $(-1)^n(d_P\\otimes1)$. Thus the identity in every degree is a chain isomorphism $u_{ji,P,n}$. For every chain map $f$, both sides of its naturality square are $f^{r+n}\\otimes1$ in degree $r$. These identities respect homotopies: a shifted homotopy is $(-1)^n$ times the reindexed original homotopy, and termwise tensor preserves that formula. Hence $u$ is natural on homotopy categories as well. All statements use the sheafified tensor construction; they assert equality of module-sheaf maps, not an identification of tensor sheaves with sectionwise tensors.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-weil-abstract-derived-category",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G, homology-definition-shift-cochain; termwise scalar construction of Stacks Tag 06YY (sites-cohomology.tex)."
+   }
+  },
+  {
+   "text": "Flat terms remain flat after reindexing. To check K-flatness of $P[n]$, let $A$ be an acyclic test complex. On the summand with test degree $a$, multiplication by $(-1)^{na}$ identifies $\\operatorname{Tot}(A\\otimes P[n])$ with $\\operatorname{Tot}(A\\otimes P)[n]$. The differential formula in [def-pc-tensor-complex-sheaves] verifies this: the first differential gains $(-1)^n$ from the change of test degree, while the second already gains $(-1)^n$ from $P[n]$. The latter total complex is acyclic by K-flatness of $P$ and reindexing cohomology. Thus the full subcategory of flat-term K-flat complexes is stable under every integer shift.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G, homology-definition-shift-cochain; K-flat definition in sites-cohomology.tex, Tag 06YL."
+   }
+  },
+  {
+   "text": "Work with the small skeleton in [def-weil-pbc-proetale-site], in the coefficient universe enlarged as specified there. By [lem-weil-pbc-site-derived-tensor-descent] the homotopy category of flat-term K-flat complexes localized at its quasi-isomorphisms is equivalent to $D(R_i)$. By [lem-pur-derived-change-of-rings] the functors $E_{ji}$ followed by localization invert those quasi-isomorphisms and compute $C_{ji}$. The natural isomorphism $u$ of Step 1 consequently descends by [lem-weil-pbc-localization-universal-property](2) to $s_{ji,K,n}$. Step 2 ensures that the representative of $K[n]$ is the actual complex $P[n]$. Naturality holds for every derived morphism, since the descended transformation is natural on the localization: naturality for an inverted quasi-isomorphism is obtained by multiplying the original naturality equation by its inverses. The localization's full faithfulness makes the result independent of choices, and it preserves the zero and successive-shift identities of the identity-component maps.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7D (lemma-factor-through-K-flat), 06YY (lemma-derived-base-change); localization natural-transformation universal property as in the cited DAG node."
+   }
+  },
+  {
+   "text": "For a flat-term K-flat $P$, [lem-pur-kflat-change-of-rings] makes $E_{10}P$ another such representative, now over $R_1$. Therefore [lem-sfb-successive-derived-quotient-normalization] represents the specified $\\alpha$ by $((p\\otimes a)\\otimes b)\\mapsto p\\otimes ab$. In degree $r$, both routes around the proposed shift/associator square send $((p\\otimes a)\\otimes b)$, with $p\\in P^{r+n}$, to $p\\otimes ab$. The shift maps insert no sign on these components, so the maps agree. The cited associator formula is a map of sheaves with the stated inverse; equality on its local tensor generators gives equality of sheaf maps. By the localization equivalence and the faithfulness clause (3) of [lem-weil-pbc-localization-universal-property], equality on all these representatives proves\n$$s_{20,K,n}\\alpha_{K[n]}=\\alpha_K[n]s_{21,C_{10}K,n}C_{21}(s_{10,K,n})$$\nfor every $K$.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat) and 0D6D (lemma-derived-pullback-composition); explicit balanced tensor calculation with Tag 011G shifts."
+   }
+  },
+  {
+   "text": "Substitute the just-proved associator square into $q_{20,n}\\alpha_{K_0[n]}$. Shifting the assumed equation on $w$ and using naturality of $s_{21}$ for the derived morphism $w_{10}:C_{10}K_0\\to K_1$ gives\n$$\\begin{aligned}\nq_{20,n}\\alpha_{K_0[n]}&=(w_{20}\\alpha_{K_0})[n]s_{21,C_{10}K_0,n}C_{21}(s_{10,K_0,n})\\\\\n&=w_{21}[n]C_{21}(w_{10})[n]s_{21,C_{10}K_0,n}C_{21}(s_{10,K_0,n})\\\\\n&=w_{21}[n]s_{21,K_1,n}C_{21}(w_{10}[n])C_{21}(s_{10,K_0,n})\\\\\n&=q_{21,n}C_{21}(q_{10,n}).\n\\end{aligned}$$\nThis is a calculation with functors and composition using Steps 3--4 and the hypothesis on $w$. In particular $w$ need not lift to chain isomorphisms, and no rank-one assumption on the $K_i$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Agent auxiliary calculation realizing coefficient transport in sk-thm-purity-transport Step 3; old scalar-coherence shift argument, assembled explicitly from preceding steps."
+   }
+  },
+  {
+   "text": "Let $I_{ji}$ be the strict-tower extension of [def-weil-integral-scalar-extension]. On a representative $P$, its quotient maps form a strictly compatible family $c_P$, so $(1-s)c_P=0$ and the specified map is $\\chi_P(z)=(c_P(z),0)$. Apply [lem-weil-completed-scalar-chain-shift] with its fixed product-shift comparison. The resulting chain shift $I_{ji}(P[n])\\to I_{ji}(P)[n]$ is $(x,y)\\mapsto(x,(-1)^ny)$, with degree reindexing understood. The cited theorem gives its coherence and its compatibility with the actual quotient map. In coordinates that compatibility is visible directly: the image of $\\chi_{P[n]}(z)$ is $(c_{P[n]}(z),0)$, which equals $\\chi_P[n](u_{ji,P,n}(z))$ because each quotient tensor shift is the identity. Thus the comparison uses the zero second coordinate of $\\chi$, rather than an unspecified isomorphism between the two completion objects.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-completed-scalar-chain-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, derived-definition-cone, with homology.tex Tag 011G; actual quotient-cocone normalization in the statements of the cited scalar-comparison and chain-shift nodes."
+   }
+  },
+  {
+   "text": "By [lem-weil-completed-scalar-shift-descent], the coherent strict shift of Step 6 descends to a natural shift $t_{ji,K,n}:I_{ji}(K[n])\\to I_{ji}(K)[n]$ computed on $P[n]$. Descent of the chain equation of Step 6 therefore gives\n$$t_{ji,K,n}\\chi_{ji,K[n]}=\\chi_{ji,K}[n]s_{ji,K,n}.$$\nHere [lem-weil-finite-free-completed-scalar-comparison] identifies $\\chi$ with the natural isomorphism from ordinary to strict-tower extension on derived-complete inputs, and ensures completeness of $C_{ji}K$. Completeness is stable under shift: shift the defining Roos triangle in [def-weil-derived-complete]; products and reduction maps are reindexed and the signed cone comparison of Step 6 identifies its strict realization. Thus these isomorphisms apply also to $K_i[n]$. All inverses used from now on are inverses of these isomorphisms in the derived category.",
+   "uses": [
+    "lem-weil-completed-scalar-shift-descent",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-weil-derived-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 0G7D for representative descent; homology.tex Tag 011G and derived.tex Tag 014E for shifting the quotient-limit triangle. Specified comparison from the cited DAG statements."
+   }
+  },
+  {
+   "text": "For complete inputs put $h_{ji}=\\chi_{ji}$ and $H_K=I_{21}(h_{10,K})h_{21,C_{10}K}$. The actual completed associator $a^I$ satisfies\n$$a^I_KH_K=h_{20,K}\\alpha_K$$\nby [lem-fix-scalar-completion-associator]; its hypotheses allow arbitrary schemes and repeated fields. Set $v_{ji}=w_{ji}h_{ji,K_i}^{-1}$ and $r_{ji,n}=v_{ji}[n]t_{ji,K_i,n}$. Step 7 gives $r_{ji,n}h_{ji,K_i[n]}=q_{ji,n}$. To verify the completed tower equation, precompose with the isomorphism $H_{K_0[n]}$. The left side becomes\n$$r_{20,n}a^I_{K_0[n]}H_{K_0[n]}=q_{20,n}\\alpha_{K_0[n]}.$$\nFor the right side, functoriality and naturality of $h_{21}$ give\n$$\\begin{aligned}\nr_{21,n}I_{21}(r_{10,n})H_{K_0[n]}\n&=r_{21,n}I_{21}(q_{10,n})h_{21,C_{10}(K_0[n])}\\\\\n&=r_{21,n}h_{21,K_1[n]}C_{21}(q_{10,n})\\\\\n&=q_{21,n}C_{21}(q_{10,n}).\n\\end{aligned}$$\nStep 5 identifies the results; cancel $H_{K_0[n]}$. This proves the equation for the specified completed associator and shifts, not merely an equation after arbitrary choices of objectwise identifications.",
+   "uses": [
+    "lem-fix-scalar-completion-associator",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Agent coefficient-tower calculation, using the actual quotient-normalized associator equation of lem-fix-scalar-completion-associator; realizes shift/identity part of the original transport argument."
+   }
+  },
+  {
+   "text": "For $n=0$, the component identities are literal identities and the cone's sign is $1$. For $n<0$, every formula above still uses the integer shift and $(-1)^n$; no induction restricted to nonnegative shifts was used. If a coefficient inclusion is an identity, ordinary change of rings has multiplication unitor $p\\otimes a\\mapsto ap$, which commutes with shifts since the same formula applies in degree $r+n$. By [lem-weil-finite-free-completed-scalar-comparison] its $\\chi$ is exactly the derived-completeness map under this multiplication isomorphism. The unit normalization of [lem-fix-scalar-completion-associator] then gives the required completed unit identifications. The cone sign comparison still fixes the zero second coordinate, so no chain-level inverse to $\\chi$ is introduced, including for identity extensions.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-fix-scalar-completion-associator"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G for all integer shifts; identity-extension normalization in the cited finite-free comparison and completed associator statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-complete",
+  "def-weil-integral-scalar-extension",
+  "def-weil-pbc-proetale-site",
+  "lem-fix-scalar-completion-associator",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-completed-scalar-chain-shift",
+  "lem-weil-completed-scalar-shift-descent",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+  "place": "Coefficient transport auxiliary: explicit shift/associator and tower-conjugation calculations; infrastructure from Stacks Tags 011G, 014E, 06YS, 0G7D, 06YY, 0G7E, 0D6D and the cited DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "commShiftIso|shift.*[Aa]ssociator",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module, completion or shift infrastructure does not state the specified derived sheaf comparisons and domains",
+   "directory": "Mathlib/Algebra/Homology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commShiftIso\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.CommShift.commShiftIso\", \"CategoryTheory.Functor.commShiftIso_zero'\", \"CategoryTheory.Functor.CommShift.commShiftIso_zero\", \"CategoryTheory.Functor.commShiftIso_add'\", \"CategoryTheory.Functor.CommShift.commShiftIso_add\", \"CategoryTheory.Functor.commShiftIso_id_hom_app\", \"CategoryTheory.Functor.commShiftIso_id_inv_app\", \"CategoryTheory.Functor.CommShift.id_commShiftIso_hom_app\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module, completion or shift infrastructure does not state the specified derived sheaf comparisons and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Termwise derived scalar extension shift comparisons commute with tensor associators and transport coherent line maps to shifted line maps under completion",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"CategoryTheory.Tor_map\", \"CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom\", \"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Functor.mapExtLinearMap_apply\", \"DerivedCategory.instLinearShiftFunctorInt\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module, completion or shift infrastructure does not state the specified derived sheaf comparisons and domains"
+  },
+  {
+   "tool": "grep",
+   "query": "mapCochainComplexShiftIso|CommShift.*comp|commShiftIso_comp",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Shift.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Shift.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Shift.lean\", \"Mathlib/CategoryTheory/Shift/Localization.lean\", \"Mathlib/CategoryTheory/Shift/Localization.lean\", \"Mathlib/CategoryTheory/Shift/Localization.lean\", \"Mathlib/CategoryTheory/Shift/Localization.lean\", \"Mathlib/CategoryTheory/Shift/Localization.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module, completion or shift infrastructure does not state the specified derived sheaf comparisons and domains",
+   "directory": "Mathlib/CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural comparison for derived scalar extension commutes with shifts and carries a commuting tower of line isomorphisms to the shifted commuting tower",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.CommShift.shift_comm\", \"CategoryTheory.NatTrans.shift_app_comm\", \"CategoryTheory.NatTrans.CommShiftCore.shift_app\", \"CategoryTheory.NatTrans.CommShift.of_core\", \"CategoryTheory.NatTrans.CommShiftCore.shift_app_comm\", \"CategoryTheory.Functor.CommShift.iso\", \"CategoryTheory.Functor.CommShift.commShiftIso\", \"CategoryTheory.Functor.CommShift.OfComp.iso\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module, completion or shift infrastructure does not state the specified derived sheaf comparisons and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cochain shift of an invertible coefficient line and canonical derived scalar extension associativity are compatible with completion quotient cone",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc\", \"CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv\", \"CochainComplex.mappingCone.shiftIso\", \"CochainComplex.mappingCone.lift_f_snd_v_assoc\", \"CochainComplex.mappingCone.liftCochain_v_snd_v_assoc\", \"CochainComplex.mappingCone.liftCochain_v_fst_v_assoc\", \"CochainComplex.mappingCone.lift_f_fst_v_assoc\", \"CochainComplex.mappingCone.liftCochain_v_descCochain_v\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module, completion or shift infrastructure does not state the specified derived sheaf comparisons and domains"
+  },
+  {
+   "tool": "grep",
+   "query": "commShiftIso_comp|mapCochainComplexShiftIso|shift.*[Aa]ssociator",
+   "results": "{\"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected general termwise-shift/localization infrastructure, which does not state the actual quotient-completion normalization and coherent line-tower conclusion",
+   "directory": "Algebra/Homology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical shift isomorphism for derived change of rings commutes with scalar extension associators and the quotient map into a completed inverse limit cone",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.shiftIso\", \"CategoryTheory.Quotient.LiftCommShift.iso\", \"CochainComplex.mappingCone.shiftTriangleIso\", \"ModuleCat.extendScalars_assoc'\", \"CategoryTheory.Functor.CommShift.OfComp.iso\", \"CochainComplex.mappingCone.shiftTrianglehIso\", \"CategoryTheory.Adjunction.RightAdjointCommShift.iso'\", \"CategoryTheory.Functor.commShiftOfLocalization\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected general termwise-shift/localization infrastructure, which does not state the actual quotient-completion normalization and coherent line-tower conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift, CategoryTheory.NatTrans.CommShift",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.CommShift.id\", \"CategoryTheory.NatTrans.CommShift.isoRefl_hom\", \"CategoryTheory.NatTrans.CommShift\", \"CategoryTheory.Functor.CommShift.ofIso_compatibility\", \"CategoryTheory.NatTrans.CommShift.of_core\", \"CategoryTheory.NatTrans.CommShift.leftUnitor\", \"CategoryTheory.NatTrans.CommShift.rightUnitor\", \"CategoryTheory.NatTrans.CommShift.of_iso_inv\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected general termwise-shift/localization infrastructure, which does not state the actual quotient-completion normalization and coherent line-tower conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars for sheaves of rings commutes with cochain shifts naturally and the shift comparisons commute with the scalar tower associator and completion",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"SheafOfModules.pushforwardNatIso\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"DerivedCategory.instCommShiftCochainComplexIntQ\", \"DerivedCategory.instLinearCochainComplexIntQ\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected general termwise-shift/localization infrastructure, which does not state the actual quotient-completion normalization and coherent line-tower conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "commShiftOfLocalization|class CommShift|commShiftIso_comp_hom_app",
+   "results": "{\"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Shift/Localization.lean\", \"Mathlib/CategoryTheory/Shift/Localization.lean\", \"Mathlib/CategoryTheory/Shift/Localization.lean\", \"Mathlib/CategoryTheory/Shift/Localization.lean\", \"Mathlib/CategoryTheory/Shift/Localization.lean\", \"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"Mathlib/CategoryTheory/Shift/Adjunction.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected general termwise-shift/localization infrastructure, which does not state the actual quotient-completion normalization and coherent line-tower conclusion",
+   "directory": "CategoryTheory/Shift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor applied termwise to cochain complexes has the identity integer shift comparison and natural scalar associators remain compatible after localization at quasi-isomorphisms",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc\", \"DerivedCategory.instCommShiftCochainComplexIntQ\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected general termwise-shift/localization infrastructure, which does not state the actual quotient-completion normalization and coherent line-tower conclusion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-shifted-tate-unit-scalar-coherence",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Old Step 6 and shift/identity part of Step 7: termwise shifts, associator square, and actual quotient-completion normalization. Coefficient transport realizing sk-thm-purity-transport Step 3.",
+   "via": [
+    "lem-pur-shifted-tate-unit-scalar-coherence",
+    "lem-pur-adic-scalar-trace-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-scalar-shift-line-tower-transport",
+  "worker": "stage1",
+  "summary": "NK: supplied nine proof steps, with explicit shift signs, derived naturality, tensor-associator square, line-map composition and quotient-normalized completed transport. Reused existing resolving-class, scalar-associator and completed-shift nodes; no new nodes and no change to the statement. Recorded six actual Mathlib searches and checked all cited statements and edge cases.",
+  "blueprint": "thm-pur-rational-and-qbar-purity: coefficient transport in sk-thm-purity-transport Step 3, as retained by the item from old Step 6 and shift/identity part of Step 7; realized by Steps 1--9 without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-scalar-completion-associator",
+    "why": "The existing actual quotient-normalized completed associator supplies its comparison equation; no new completion route."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Existing module-sheaf scalar-extension or shift infrastructure used with its stated hypotheses; no replacement of a unit-level purity step."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Existing module-sheaf scalar-extension or shift infrastructure used with its stated hypotheses; no replacement of a unit-level purity step."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "The existing ordinary scalar associator supplies its actual balanced sheaf formula for the generator calculation."
+   },
+   {
+    "node": "lem-weil-completed-scalar-chain-shift",
+    "why": "Existing module-sheaf scalar-extension or shift infrastructure used with its stated hypotheses; no replacement of a unit-level purity step."
+   },
+   {
+    "node": "lem-weil-completed-scalar-shift-descent",
+    "why": "Existing module-sheaf scalar-extension or shift infrastructure used with its stated hypotheses; no replacement of a unit-level purity step."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Existing module-sheaf scalar-extension or shift infrastructure used with its stated hypotheses; no replacement of a unit-level purity step."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Full faithfulness of precomposition descends natural transformations and tests their equality; a general categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Resolving-class localization for flat-term K-flat module sheaves gives naturality on all derived morphisms; a general tool, not a different purity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-scalar-completion-associator",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-completed-scalar-chain-shift",
+  "lem-weil-completed-scalar-shift-descent",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NK-42700675a",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-42700675a (reviewer sub-agent of L); spot-checked: FIX (B3): the item statement used the ordinary derived tensor associator α without citing a node. Added [lem-sfb-successive-derived-quotient-normalization] to the statement and to stmt_deps; Step 4 already uses that node, so the change adds no cycle. The corrected item is in fixes/dag/nodes/sec-smooth-purity/; no other field changed. The rest of the delivery is accepted. It is one commit with no new nodes, the statement is unchanged from Q95's creation, and no repair note exists for this item, so the 2026-10-21 re-split rule does not apply. I read all nine steps against the cited statements. Step 1: the termwise identity is a chain isomorphism under the convention of def-weil-abstract-derived-category. Step 2: I recomputed the (-1)^{na} K-flatness sign with the Tot differential of def-pc-tensor-complex-sheaves. Step 3: the descent uses site-derived-tensor-descent and localization-universal-property clauses (2) and (3). Step 4: on generators both routes give p⊗ab, using the balanced formula of successive-derived-quotient-normalization. Step 5: I checked each equality of the line-tower calculation, including naturality of s21 at w10. Steps 6-7: completed-scalar-chain-shift gives the signs (1, (-1)^m) and the compatibility with b_P; completed-scalar-shift-descent and the finite-free comparison give tχ=χ[n]s; completeness is checked for C_ji K and for K[n]. Step 8: the domains of r and H match, the normalization is exactly that of lem-fix-scalar-completion-associator, and naturality of χ21 at q10 holds between complete objects. Step 9: n=0, negative n and identity extensions are covered by the unit clauses. No duplicate after grepping the DAG; no cycle after a transitive closure over the snapshot DAG; no SGA; blueprint place is thm-pur-rational-and-qbar-purity Step 3. The recorded tool_uses (generic module-sheaf, localization and completed-scalar nodes) are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ScalarShiftLineTowerTransport",
+  "declaration": "WeilConjectures.scalarShiftLineTowerTransport",
+  "declarations": [
+   "WeilConjectures.ScalarShiftLineData",
+   "WeilConjectures.scalarShiftTowerMap",
+   "WeilConjectures.ScalarShiftLineTowerTransportData",
+   "WeilConjectures.scalarShiftLineTowerTransport"
+  ],
+  "file": "lean/Sheaf/Paper/ScalarShiftLineTowerTransport.lean",
+  "statement": "theorem scalarShiftLineTowerTransport (l : ℕ) [Fact l.Prime] (W : AlgebraicGeometry.Scheme.{t}) : Nonempty (ScalarShiftLineTowerTransportData.{t, u} l W)",
+  "branch": "sheaf-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses completedScalarShiftRepresentativeProperty, owned by the landed definition node def-fd-completed-scalar-shift-representative-property (existing:true in Sheaf.Paper.CompletedScalarShift), and the actual chi-conjugated associators from lem-pur-completed-line-tensor-coherence. The shift-existence theorem lem-weil-point-completed-scalar-shift is not a statement dependency: only its module's plain predicate is used. The auxiliary records only bundle this node's assertions; scalarShiftTowerMap is its explicit q (or completed r) formula. No notion is copied and no statement is corrected. Repair of L's H2/H4 return on immutable head 95207a8ab55a: replace the theorem dependency by the predicate's definition owner; retain the reviewed Lean module unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-626bdf822",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Re-delivery of 95207a8ab55a after an H2/H4 return; the Lean module is byte-identical. The only node change: stmt_dep lem-weil-point-completed-scalar-shift replaced by def-fd-completed-scalar-shift-representative-property (landed, existing:true, owns completedScalarShiftRepresentativeProperty in Sheaf.Paper.CompletedScalarShift), plus lean.note and report updates. Mechanical finding on lem-pur-completed-line-tensor-coherence: the statement depends on objects that theorem constructs (associatorData and ordinaryUnit are .choose of its ∃! theorems; associator and unit are built from them and chi), so PASS on that point. Re-checked all clauses: associator_shift, ordinary_tower, completed_tower, shift_complete, ordinary_unit, completed_unit; s and the strict and integral shifts are pinned by the existing normalization predicate; n in ℤ, identity and repeated extensions allowed; sorry only; no hollow definitions; docstrings present. Item not landed live, so not superseded. No file changed, so no compile."
+ }
+}

@@ -1,0 +1,212 @@
+{
+ "id": "lem-trf-line-proj-affine-chart-atlas",
+ "kind": "statement",
+ "title": "Compatible homogeneous-fraction charts for arbitrary graded line maps",
+ "statement": "Let $f:W\\to T$ be a morphism of schemes [def-pc-scheme], $\\mathcal A=\\bigoplus_{d\\geq0}\\mathcal A_d$ a quasi-coherent graded commutative $\\mathcal O_T$-algebra [def-weil-pbc-quasi-coherent-algebra, def-weil-pbc-graded-sheaf-structures], $L$ an invertible $\\mathcal O_W$-module [def-sc-invertible-module], and $\\psi:f^*\\mathcal A\\to\\bigoplus_{d\\geq0}L^{\\otimes d}$ a graded algebra homomorphism, with tensor pullback [def-pc-module-pullback] and tensor powers [def-pur-sheaf-tensor-product]. Let $W_V=f^{-1}V$ for an affine open $V\\subseteq T$, and let $A=\\Gamma(V,\\mathcal A)$. For $a\\in A_d$, $d>0$, put $W_a=\\{w\\in W_V:\\psi(a)_w\\text{ freely generates }L_w^{\\otimes d}\\}$ [def-sc-section-generating-locus]. The union of these opens, over $V,d,a$, equals the union of the stalkwise surjectivity loci of the positive-degree maps $\\psi_d$, $d>0$. Each $W_a$ has a unique morphism $q_{V,a}:W_a\\to D_+(a)=\\operatorname{Spec}A_{(a)}$ [def-pc-proj, def-nagata-homogeneous-localization-degree-zero] whose ring map is\n$$b/a^m\\longmapsto\\psi(b)/\\psi(a)^m,\\qquad m\\geq0,\\quad b\\in A_{md}.$$\nDivision means the unique coefficient relative to the free generator $\\psi(a)^m$. After composition with the chart embedding into $\\operatorname{Proj}_T(\\mathcal A)$ [def-nagata-relative-proj], these morphisms agree on every pairwise intersection, including different positive degrees and different affine base opens. On a trivializing affine open $\\operatorname{Spec}B\\subseteq W_V$, write $\\psi(a)=\\alpha_a e^{\\otimes d}$; then $W_a$ restricts to $D(\\alpha_a)$ and the formula is $b/a^m\\mapsto\\alpha_b/\\alpha_a^m$. These chart maps are unchanged by a new trivialization of $L$ and are compatible with open refinements on $W$ and on $T$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NK (lemma-invertible-map-into-proj), local homogeneous localization construction and uniqueness; Tag 01O9 (lemma-invertible-map-into-relative-proj), affine-base restriction and gluing."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-sc-section-generating-locus",
+  "def-nagata-relative-proj",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-pc-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose the unique fraction charts provided by the coefficient-and-chart theorem. Use its source-restriction uniqueness and local-frame formula for the third and fifth clauses.",
+   "uses": [
+    "lem-trf-line-proj-fraction-coefficient-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+   }
+  },
+  {
+   "text": "Use the local generator/germ-basis equivalence and positive-degree union equality for the first and second clauses.",
+   "uses": [
+    "lem-trf-line-proj-generation-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+   }
+  },
+  {
+   "text": "Apply the compatibility theorem to the chart family, which satisfies the fraction formula by source uniqueness at the whole generator open. This gives arbitrary-base overlaps and affine base refinement, the fourth and sixth clauses.",
+   "uses": [
+    "lem-trf-line-proj-fraction-compatibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-line-proj-fraction-coefficient-hom",
+  "lem-trf-line-proj-generation-locus",
+  "lem-trf-line-proj-fraction-compatibility"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A graded algebra homomorphism into tensor powers of a line bundle defines compatible homogeneous fraction morphisms from generator opens to relative Proj, independent of trivializations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct.comp (CommRingCat.ofHom (HomogeneousLocalization.awayMa\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f,g$ where $f$ divides $g$, the composition of the ring homomorphism $\\\\mathcal{A}_{(g)} \\\\to \\\\mathcal{A}_{(f)}$ (induced by localization) follo\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m') {x : A} (hx : x = f * g) {Z : CommRingCat}\\n  (h : (AlgebraicGeometry.Proj 𝒜).presheaf.obj (Opposite.op (Algebraic\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f,g,x$ with $x = f \\\\cdot g$, the composition of the homogeneous localization map $\\\\mathcal{A}_{(g)} \\\\to \\\\mathcal{A}_{(f)}$, the structure shea\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayToSection\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                { carrier := HomogeneousLocalization.Away 𝒜 f,\\n                  \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$, this defines a ring homomorphism from the homogeneous localization $\\\\mathcal{A}_{(f)}$ to the sections of the structure sheaf over the ba\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A)\\n  (x :\\n    ↑{ carrier := HomogeneousLocalization.Away 𝒜 f,\\n        commRing := HomogeneousLocalization.homogeneousLocalizationCommRing })\\n  (p : ↥(\", \"doc\": \"For a graded ring $ A $, the valuation of the section defined by localizing away from the powers of $ f $ at a point $ p $ not containing $ f $ equals the identity map applied to the value of $ x $ in\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                { carrier := HomogeneousLocalization.Away 𝒜 f,\\n                \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$, this defines a ring homomorphism from the localization $A_f$ to the sections of the structure sheaf over the basic open set $D_+(f) \\\\subs\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a positive integer $n$, and an element $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism induced by global sections composed with the preimage of the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                { carrier := HomogeneousLocalization.Away 𝒜 f,\\n                \", \"doc\": \"A morphism in the category of commutative rings that maps the localization of a graded ring $ A $ at the submonoid generated by powers of a homogeneous element $ f $ to the global sections of the stru\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a global section $f$, and a positive integer $n$ with $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism $\\\\text{fromOfGlobalSections}(\\\\mathcal{A}, f, hf)$ to the b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Proj\", \"fromOfGlobalSections\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \" {σ : Type u_1} {A : Type u} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A] (𝒜 : ℕ → σ) [GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤))) (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) : X ⟶ AlgebraicGeometry.Proj 𝒜\", \"doc\": \"Given a graded ring `A` and a map `f : A →+* Γ(X, ⊤)` such that the image of the\\nirrelevant ideal under `f` generates the whole ring, we can construct a map `X ⟶ Proj 𝒜`.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \" {σ : Type u_1} {A : Type u} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A] (𝒜 : ℕ → σ) [GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤))) (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) : CategoryTheory.CategoryStruct.comp (AlgebraicGeometr\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \" {σ : Type u_1} {A : Type u} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A] (𝒜 : ℕ → σ) [GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤))) (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {Z : AlgebraicGeometry.Scheme} (h : AlgebraicGeometry.\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_preimage_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \" {σ : Type u_1} {A : Type u} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A] (𝒜 : ℕ → σ) [GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤))) (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ} (hn : 0 < n) (hr : r ∈ 𝒜 n) : (Topolog\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \" {σ : Type u_1} {A : Type u} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A] (𝒜 : ℕ → σ) [GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤))) (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ} (hn : 0 < n) (hr : r ∈ 𝒜 n) : Algebrai\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \" {σ : Type u_1} {A : Type u} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A] (𝒜 : ℕ → σ) [GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤))) (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ} (hn : 0 < n) (hr : r ∈ 𝒜 n) : Algebrai\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromOfGlobalSections|toBasicOpenOfGlobalSections|invertible.*[Pp]roj",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"30\", \"text\": \"- `AlgebraicGeometry.Proj.fromOfGlobalSections`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"369\", \"text\": \"def toBasicOpenOfGlobalSections (H : f t = x) (h0d : 0 < d) (hd : t ∈ 𝒜 d) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"381\", \"text\": \"lemma homOfLE_toBasicOpenOfGlobalSections_ι\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"384\", \"text\": \"    X.homOfLE (by aesop) ≫ toBasicOpenOfGlobalSections 𝒜 f H h0d hd ≫ (basicOpen 𝒜 t).ι =\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"385\", \"text\": \"      toBasicOpenOfGlobalSections 𝒜 f H' h0d' hd' ≫ (basicOpen 𝒜 t').ι := by\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given a graded ring map A to sections of powers of an invertible sheaf, glue maps on the open sets where positive homogeneous sections generate using fractions b over a power",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.basicOpenToSpec_app_top\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": (basicOpenToSpec 𝒜 f).app ⊤ = (Scheme.ΓSpecIso _).hom ≫ awayToSection 𝒜 f ≫ (basicOpen 𝒜 f).topIso.inv\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$, there exists a ring homomorphism from the homogeneous localization $\\\\mathcal{A}_{(f)}$ to the global sections $\\\\Gamma(D_+(f), \\\\mathcal{O}\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \": Sheaf CommRingCat (ProjectiveSpectrum.top 𝒜)\", \"doc\": \"The sheaf of commutative rings on the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$, assigning to each open set $U$ the ring of sections locally represented by homogene\"}\n  {\"name\": \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": CommRingCat.of (Away 𝒜 f) ≅ Γ(Proj 𝒜, basicOpen 𝒜 f)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$ of positive degree, the ring of sections of the structure sheaf over the basic open set $D_+(f) \\\\subseteq \\\\operatorname{Proj}(\\\\mathcal{A})\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \": Sheaf (Type _) (ProjectiveSpectrum.top 𝒜)\", \"doc\": \"The structure sheaf on the projective spectrum of a graded ring $\\\\mathcal{A}$, constructed by applying the subsheaf-to-types construction to the local predicate of being expressible as homogeneous fra\"}\n  {\"name\": \"AlgebraicGeometry.Proj.basicOpenIsoAway_hom\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A) {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m),\\n  (AlgebraicGeometry.Proj.basicOpenIsoAway 𝒜 f f_deg hm).hom = AlgebraicGeometry.Proj.awayToSection 𝒜 f\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$ of positive degree $m$, the homomorphism component of the isomorphism between the homogeneous localization $\\\\mathcal{A}_{(f)}$ and the rin\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme\", \"type\": \"(f) : CommRingCat.of (A⁰_ f) ⟶ (structureSheaf 𝒜).1.obj (op (pbo f))\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$, this defines a ring homomorphism from the localization $A_f$ to the sections of the structure sheaf over the basic open set $D_+(f) \\\\subs\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.add_mem'\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \"(U : (Opens (ProjectiveSpectrum.top 𝒜))ᵒᵖ) (a b : ∀ x : U.unop, at x.1) (ha : (isLocallyFraction 𝒜).pred a)\\n  (hb : (isLocallyFraction 𝒜).pred b) : (isLocallyFraction 𝒜).pred (a + b)\", \"doc\": \"The structure sheaf on the projective spectrum of a graded ring is defined such that sections over open sets are functions expressible as homogeneous fractions $ r/s $ with denominators $ s $ (homogen\"}\n  {\"name\": \"AlgebraicGeometry.Proj.mul_apply\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \": (s * t).1 x = s.1 x * t.1 x\", \"doc\": \"The structure sheaf on the projective spectrum of a graded ring assigns to each open set $ U $ the ring of sections locally represented by homogeneous fractions $ r/s $, where $ s $ is a homogeneous e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromOfGlobalSections|toBasicOpenOfGlobalSections|invertible.*[Pp]roj",
+   "results": "Read hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean. ProjectiveSpectrum/Basic.lean:369-464 checked: the input is an ordinary map to global functions, not a graded map into tensor powers of an arbitrary invertible sheaf; no relative line-bundle atlas theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match: local trivial-function constructions only; general graded line-module chart atlas needs the fraction and base-overlap arguments"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Proj\", \"fromOfGlobalSections\"",
+   "results": "Read hits: AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc, AlgebraicGeometry.Proj.fromOfGlobalSections_preimage_basicOpen, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict. ProjectiveSpectrum/Basic.lean:369-464 checked: the input is an ordinary map to global functions, not a graded map into tensor powers of an arbitrary invertible sheaf; no relative line-bundle atlas theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match: local trivial-function constructions only; general graded line-module chart atlas needs the fraction and base-overlap arguments"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map from a graded algebra to the section ring of a line bundle induces a morphism from its positive degree generation locus to relative Proj",
+   "results": "Read hits: AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.awayToSection, AlgebraicGeometry.Proj.basicOpenToSpec_app_top, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections. ProjectiveSpectrum/Basic.lean:369-464 checked: the input is an ordinary map to global functions, not a graded map into tensor powers of an arbitrary invertible sheaf; no relative line-bundle atlas theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match: local trivial-function constructions only; general graded line-module chart atlas needs the fraction and base-overlap arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A graded algebra map into sections of tensor powers of an invertible sheaf defines compatible fraction morphisms to Proj on the opens where positive homogeneous sections generate",
+   "results": "Read hits: AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection, AlgebraicGeometry.Proj.awayToSection, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ, AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction. ProjectiveSpectrum/Basic.lean:369-464 checked: the input is an ordinary map to global functions, not a graded map into tensor powers of an arbitrary invertible sheaf; no relative line-bundle atlas theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match: local trivial-function constructions only; general graded line-module chart atlas needs the fraction and base-overlap arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a scheme morphism to projective spectrum by sending homogeneous degree zero fractions b divided by a power to quotients of sections of a line bundle",
+   "results": "Read hits: AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ, AlgebraicGeometry.Proj.awayToSection, AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections, AlgebraicGeometry.Proj.toSpecZero, AlgebraicGeometry.Proj.awayι. ProjectiveSpectrum/Basic.lean:369-464 checked: the input is an ordinary map to global functions, not a graded map into tensor powers of an arbitrary invertible sheaf; no relative line-bundle atlas theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match: local trivial-function constructions only; general graded line-module chart atlas needs the fraction and base-overlap arguments"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-line-module-proj-map",
+  "date": "2026-10-22",
+  "group": "NX"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polarized-descent helper under lem-trf-local-term-locality: local section-algebra/relative-Proj construction; returned proof of lem-trf-space-line-module-proj-map, step 1 local generator opens and chart maps, step 2 overlap comparison, and step 4 scheme specialization.",
+   "via": [
+    "lem-trf-space-line-module-proj-map",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-line-proj-affine-chart-atlas",
+  "worker": "stage1",
+  "summary": "Q156: constructed the scalar ring maps by the ordinary localization relation and unique division by free generators; proved differing-degree and arbitrary affine-base overlap compatibility explicitly. Reused existing closed/Mathlib tools; no new nodes. Clarified that the surjectivity union ranges over positive degrees, with a degree-zero counterexample in report.md.",
+  "blueprint": "Polarized-descent branch under lem-trf-local-term-locality: the local homogeneous-fraction construction in lem-trf-space-line-module-proj-map, steps 1 (generation opens and local maps), 2 (overlaps), and 4 (scheme specialization). No change to the chapter or unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-31b90ca8a",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-31b90ca8a (reviewer sub-agent of L); spot-checked: Ordinary one-level split, no new nodes. The item is still unsplit live and has no repair note. The parent's 10-21 re-split is resolved; it created this item as a child. Statement change: the comparison with surjectivity loci is narrowed to d>0, and tensor powers now cite def-pur-sheaf-tensor-product. The worker's counterexample (A=k in degree 0, L=O) is correct. The change matches Stacks, where U(psi) uses A(V)_+, and the only citer, the parent, whose U(psi) is the union over d>=1; the report names it. I read Stacks 01NK (statement, uniqueness, local existence) and 01O9 (set-up, (1)-(3), the 'details omitted' gluing), and checked the 01NK/01O9/01NQ/01M4/01CY/01I1/01I9/01IA labels. I read the statement of every cited node. Two cited statements are closed (nonvanishing-section trivialization, affine pullback sections) and two are Mathlib leaves (Gamma-Spec adjunction, Proj basic-open intersection), so there is no route issue and no tool_uses are needed. Steps checked: (1) W_a open, equal to D(alpha_a). (2) Local-ring unit argument for the union, with no finiteness used; A_d is quasi-coherent as a direct summand, left implicit. (3) Localization relation in degree (r+m+n)d, cancelling a basis, so zero-divisor a is fine. (4) Ring-hom identities. (5) Adjunction gives existence and uniqueness and lies over V. (6) The preimage of D(b^d/a^e) is W_a∩W_b, for different degrees. (7) I recomputed c/(ab)^n=(c b^{kd-n}/a^{n+ke})chi^{-k} and the degree d(n+ke); the result is symmetric in a,b. (8) Restriction to an affine C⊆V via A_r⊗R_C and the relative-Proj transitions, with no principal-open hypothesis. (9) Cover V∩V' by affines, so no affine-overlap assumption (E1 clean). (10) Frame-change invariance and edge cases (empty open, m=0, nilpotent a). Duplicate search: the 01NK/01O9 and generating-locus nodes in the DAG either cite the parent (citing them would be circular) or concern the full section ring of L (lem-sc chart nodes), so none is a duplicate. My cycle check found no cycle; proof_deps equals the union of the step uses; there is no SGA citation; searches of all three kinds are recorded. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.LineProjAffineChartAtlas",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_lineProj_affine_chart_atlas",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.exists_lineProj_affine_chart_atlas"
+  ],
+  "file": "lean/Sheaf/TraceFormula/LineProjAffineChartAtlas.lean",
+  "statement": "theorem exists_lineProj_affine_chart_atlas {W T : Scheme.{u}} (f : W ⟶ T) (A : RelativeProjAlgebra T) (L : W.Modules) [L.IsInvertible] (ψ : ∀ n : ℕ, (tensorPullback f).obj (A.piece n) ⟶ L.tensorPow n) (hunit : ∀ (V : T.Opens) (r : Γ(T, V)), lineProjImage f A L ψ V 0 (A.graded.unit.val.app (op V) (unitSectionsEquiv V r)) = unitSectionsEquiv (f ⁻¹ᵁ V) (f.app V r)) (hmul : ∀ (V : T.Opens) (m n : ℕ) (a : Γ(A.piece m, V)) (b : Γ(A.piece n, V)), lineProjImage f A L ψ V (m + n) (A.graded.mul m n V a b) = (L.tensorPowAddIso m n).inv.app (f ⁻¹ᵁ V) (tmulSection (lineProjImage f A L ψ V m a) (lineProjImage f A L ψ V n b))) : ∃ q : ∀ (V : T.affineOpens) (d : ℕ) (_hd : 0 < d) (a : Γ(A.piece d, V.1)), LineProjChart f A L ψ V d a, (∀ (V : T.affineOpens) (d : ℕ) (_hd : 0 < d) (a : Γ(A.piece d, V.1)) (x : W), x ∈ lineProjGeneratorOpen f A L ψ V d a ↔ ∃ hx : x ∈ f ⁻¹ᵁ V.1, Function.Bijective fun r : W.presheaf.stalk x ↦ r • TopCat.Presheaf.germ (L.tensorPow d).val.presheaf (f ⁻¹ᵁ V.1) x hx (lineProjImage f A L ψ V.1 d a)) ∧ ((⨆ (V : T.affineOpens) (d : ℕ) (_hd : 0 < d) (a : Γ(A.piece d, V.1)), lineProjGeneratorOpen f A L ψ V d a : W.Opens) : Set W) = {x | ∃ d : ℕ, 0 < d ∧ Function.Surjective ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map (ψ d).mapPresheaf)} ∧ (∀ (V : T.affineOpens) (d : ℕ) (hd : 0 < d) (a : Γ(A.piece d, V.1)) (C : W.Opens) (hC : C ≤ lineProjGeneratorOpen f A L ψ V d a) (r : C.toScheme ⟶ Spec (.of (HomogeneousLocalization.Away (A.grade V) (lineProjElement A V d a).val))), LineProjFractionFormula f A L ψ V d a C (hC.trans inf_le_left) r ↔ r = W.homOfLE hC ≫ q V d hd a) ∧ (∀ (V V' : T.affineOpens) (d e : ℕ) (hd : 0 < d) (he : 0 < e) (a : Γ(A.piece d, V.1)) (b : Γ(A.piece e, V'.1)), W.homOfLE (inf_le_left : lineProjGeneratorOpen f A L ψ V d a ⊓ lineProjGeneratorOpen f A L ψ V' e b ≤ lineProjGeneratorOpen f A L ψ V d a) ≫ lineProjChartToRelative f A L ψ V d hd a (q V d hd a) = W.homOfLE inf_le_right ≫ lineProjChartToRelative f A L ψ V' e he b (q V' e he b)) ∧ (∀ (V : T.affineOpens) (d : ℕ) (hd : 0 < d) (a : Γ(A.piece d, V.1)), LineProjTrivializationFormula f A L ψ V d a (q V d hd a)) ∧ LineProjBaseRefinement f A L ψ q",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Actual tensor-pullback homogeneous sheaf maps with their unit and multiplication laws; canonical generator opens, fraction formula, full chart family, stalkwise positive-degree surjectivity comparison, arbitrary-degree and affine-base overlaps, frame independence, and source/base refinements. Helpers use the existing relative-Proj sheaf input and affineData bridge; no duplicate bundled graded-line-map notion or downstream parent import."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1159962c",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Read the item node, the 10 stmt_dep records, the module and the dependency sources (RelativeProjAlgebra, affineData/gradeIso/localTransition/gradeIso_naturality, relProjι, tensorPowAddIso/MulIso, generatingLocus, IsFreeGenerator, GradedSheafAlgebra, tensorPullbackSection). Every node clause is rendered. Hypotheses: RelativeProjAlgebra with no finiteness or A_0=O_T; ψ as linear per-degree maps with hunit/hmul equivalent to the algebra-hom laws; [L.IsInvertible]. Conclusions: generator open pinned to stalk bijectivity; positive-degree union equals the stalkwise surjectivity loci; fraction-formula ⟺ q characterization on every C ≤ W_a gives existence, uniqueness and source refinement; overlaps in relProj for arbitrary V,V′,d,e; frame formula with D(α_a) for every frame; base refinement via the canonical Proj restriction (= relProjFunctor.map by gradeIso_naturality). Helpers are canonical and non-hollow; tensorPowMulIso is consistent with tensorPowAddIso. No duplicate: RelativeGradedLineMap would create a cycle, GradedLineMap is the algebraic-space notion. Statement field verbatim, all 14 declarations present, one sorry, docstrings with source and blueprint id, node diff is the lean field only. Advisory: unused ClearDenominators and proof-only imports. No compile run since no file was changed; the worker reports scompile clean and the deliver2 dry run OK."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-60ed0",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261024T191024-L-221297",
+  "kind": "interface",
+  "note": "independent cc review: 13 moved chart defs byte-identical to clone base; item statement unchanged; 3 new proved modules vs their nodes' lean.statement; importer LineProjChartPullback compiled against delivered modules; #print axioms traced sorryAx to pre-existing RelativeProjAlgebra.gradeRing"
+ }
+}

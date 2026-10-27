@@ -1,0 +1,130 @@
+{
+ "id": "lem-pd-biduality-finite-truncation",
+ "kind": "statement",
+ "title": "Canonical biduality reduces to the heart",
+ "statement": "Let C be a symmetric monoidal closed Grothendieck abelian category with additive tensor and functorial flat resolutions, and use its native monoidal derived category and Koszul braiding. Let W be any derived object, and let Q be an isomorphism-invariant property of objects of C. If the canonical map M[0] -> RHom(RHom(M[0],W),W) is invertible for every M with Q(M), then it is invertible for every bounded complex K whose homology objects have Q. No geometric property of W or constructibility assumption is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.11(3), finite-truncation argument; formal part of the coefficient-biduality proof, with Stacks Tag 08JC for internal-Hom exactness"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The shift of the tensor unit is invertible, with inverse the opposite shift, by shiftTensorShiftIso and the zero-shift isomorphism. Identify K[n] with K tensor 1[n]. The proved isIso_toIhomIhom_tensor_iff makes canonical biduality invariant under shift.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let P(K) assert invertibility at every shift. Naturality of toIhomIhomNatTrans gives isomorphism invariance; shift addition gives shift stability. P contains zero since internal Hom of zero into W is zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_distinguished_ihom_pre twice to a distinguished triangle. At each shift the two outer P hypotheses give the two outer isomorphisms and the adjacent shifts needed by isIso_app_obj₂_of_distTriang. This proved triangulated five lemma gives extension closure, so P is triangulated.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing proved DerivedCategory.prop_of_bounded to P, Q, the heart hypothesis with shift invariance, and the boundedness and homology hypotheses on K. Transport the assertion at shift zero along shiftFunctorZero.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S6",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.11(3), finite-truncation argument; formal part of the coefficient-biduality proof, with Stacks Tag 08JC for internal-Hom exactness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural double dual map which is invertible on heart objects is invertible on bounded complexes by finite truncation",
+   "results": "Eight hits on ordinary module duality and unrelated double-opposite constructions; none states this derived categorical assertion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If canonical double duality is an isomorphism on shifted heart objects it is an isomorphism on bounded derived complexes",
+   "results": "Eight hits, including DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE and condensed locally constant sheaf comparisons; no canonical derived biduality theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toIhomIhom\"",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "biduality.*bounded|toIhomIhom.*singleFunctor",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.PoincareDuality.Verdier",
+  "date": "2026-10-25",
+  "group": "S6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-qbar-verdier",
+   "place": "Proposition 6.8.11(3), finite-truncation argument; formal part of the coefficient-biduality proof, with Stacks Tag 08JC for internal-Hom exactness",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.PoincareDuality.BidualityTruncation",
+  "file": "lean/Sheaf/PoincareDuality/BidualityTruncation.lean",
+  "declaration": "CategoryTheory.MonoidalClosed.biduality_of_bounded_heart",
+  "statement": "theorem biduality_of_bounded_heart (W : DerivedCategory C)\n    (Q : ObjectProperty C) [Q.IsClosedUnderIsomorphisms]\n    (hQ : ∀ (M : C), Q M →\n      IsIso (toIhomIhom W ((DerivedCategory.singleFunctor C 0).obj M)))\n    (K : DerivedCategory C) (hb : DerivedCategory.TStructure.t.bounded K)\n    (hc : ∀ n, Q ((DerivedCategory.homologyFunctor C n).obj K)) :\n    IsIso (toIhomIhom W K)",
+  "branch": "sheaf-dag",
+  "by": "S6",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "blueprint": "The coefficient-duality route of sk-prop-sf-biduality-general; geometric sheaf case followed by finite truncation. No realized unit step is removed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261025T013242-L-3945229",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261025T013242-L-3945229",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

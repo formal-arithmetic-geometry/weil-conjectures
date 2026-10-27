@@ -18,6 +18,7 @@ import Sheaf.Paper.FiniteDiscreteEncodingConstructibility
 import Sheaf.CategoryTheory.WeakSerreBoundedThick
 import Sheaf.CategoryTheory.BoundedHomologyEssentiallySmall
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Thick and essentially small constructible finite-Tor complexes

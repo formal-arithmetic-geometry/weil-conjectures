@@ -1,0 +1,131 @@
+{
+ "id": "def-sp-mixed-base-change-operations",
+ "kind": "definition",
+ "title": "Specified mixed compact-support exchange and its realization coordinates",
+ "statement": "For finite commutative coefficients A and a Cartesian scheme square h,f′,f,g [def-cbc-compact-support-square], transport exact fixed-scalar functors by the intrinsic module realization equivalences. Transport the ordinary open-extension base-change isomorphism [lem-cbc-proetale-extension-zero-base-change] by these same equivalences and their unit-normalized tensor-pullback identifications. Pull a compactification c of f back along the square. Define its intrinsic compact-support exchange to be the proper counit-mate [def-weil-pbc-adjunction-mate], followed by the direct image of this open-extension comparison, in the order specified in [def-cbc-exchange-map]. Restrict constant-ring derived pullback to the full bounded constructible finite-Tor subcategories whenever its preservation certificate is given. These are exactly mixedDerivedTransport, mixedOpenBaseChangeIso, mixedPullbackCompactification, mixedCompactSupportExchange, and mixedCtfPullback; they introduce no new choice of comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-mixed.proof.md",
+  "place": "Direct images, first paragraph: choose a compactification and pull it back; define the open/proper composite"
+ },
+ "stmt_deps": [
+  "def-cbc-compact-support-square",
+  "def-cbc-exchange-map",
+  "def-weil-pbc-adjunction-mate",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-proetale-operations",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-trf-finite-pullback-coordinate-comparison",
+  "def-sp-reduction-direct-image-comparison",
+  "def-sp-constant-scalar-pullback-comparison",
+  "lem-fix-direct-image-scalar-exchange",
+  "sk-def-sp-normalized-towers"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-mixed.proof.md",
+  "place": "Direct images, first paragraph: choose a compactification and pull it back; define the open/proper composite",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension by zero base change compatible with derived scalar extension",
+   "results": "8 hits, including Function.ExtendByZero.linearMap and LinearMap.baseChange_zero; none concerns derived pro-etale open exchange.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper base change on bounded constructible finite Tor pro etale module complexes",
+   "results": "8 hits, including AlgebraicGeometry.IsProper.isStableUnderBaseChange and AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; none is the module-derived exchange.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits, including mateEquiv, mateEquiv_counit, mateEquiv_vcomp and mateEquiv_hcomp. These give the formal mate calculations, not the specialized comparisons.",
+   "date": "2026-10-27",
+   "verdict": "generic formal tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport|openScalarExchange",
+   "results": "25 hits for topological compact support, no categorical openScalarExchange. Local project search found directImageScalarExchange and openScalarExchange; their coordinate-model difference is retained explicitly.",
+   "date": "2026-10-27",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper base change and pullback preserve bounded constructible complexes of finite Tor amplitude on the pro etale site",
+   "results": "8 hits for stability under geometric/site base change, including IsProper.isStableUnderBaseChange and GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage; none concerns these derived modules.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero base change commutes with derived scalar extension along a homomorphism of finite rings",
+   "results": "8 hits, including ModuleCat.extendScalarsComp and IsBaseChange.comp; ordinary module scalar extension, not this derived open exchange.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.MixedBaseChange",
+  "date": "2026-10-27",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-mixed-base-change",
+   "place": "Direct images, first paragraph: choose a compactification and pull it back; define the open/proper composite",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.MixedBaseChangeOperations",
+  "file": "lean/Sheaf/SecSmoothPurity/MixedBaseChangeOperations.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.mixedDerivedTransport",
+  "statement": "def mixedDerivedTransport (A : Type u) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}}\n    (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) ⥤\n      Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))\n    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] :\n    ((sfIntrinsicModuleEquivalence X A).inverse ⋙ F ⋙\n        (sfIntrinsicModuleEquivalence Y A).functor).mapDerivedCategory ≅\n      (sfIntrinsicDerivedEquivalence X A).inverse ⋙ F.mapDerivedCategory ⋙\n        (sfIntrinsicDerivedEquivalence Y A).functor",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.mixedDerivedTransport",
+   "AlgebraicGeometry.ProEtale.mixedOpenBaseChangeIso",
+   "AlgebraicGeometry.ProEtale.mixedPullbackCompactification",
+   "AlgebraicGeometry.ProEtale.mixedCompactSupportExchange",
+   "AlgebraicGeometry.ProEtale.mixedCtfPullback"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8d00c",
+  "group": "R2",
+  "result": "fix",
+  "landing": "20261026T222750-L-693083",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8d00c",
+  "group": "R2",
+  "result": "fix",
+  "landing": "20261026T222750-L-693083",
+  "kind": "interface",
+  "note": "independent cc review: item mixedBaseChange proof, moved defs and two new sorry statements against node det-sp-mixed-base-change, the clone source and the change record; direct importer SmoothPurityTowerMateEvaluationReduction and transitive user ExceptionalBaseChangeIntegralComparisons compiled OK against the delivered modules"
+ }
+}

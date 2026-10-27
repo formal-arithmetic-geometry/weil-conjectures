@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-space-acyclic-affinization-geometry",
+ "kind": "statement",
+ "title": "Geometry of the affinization map under first-cohomology vanishing",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $X$ be an algebraic space over $S$ [def-trf-algebraic-space]. Assume $X$ is quasi-compact and quasi-separated: every open covering has a finite subcover and its diagonal is quasi-compact on scheme tests. Quasi-coherent modules are on the small etale ringed site [def-trf-space-quasi-coherent-module], and $H^q$ is the right derived functor of global sections of the underlying additive sheaf [def-weil-pbc-sites-and-cohomology]. Assume $H^1(X,F)=0$ for every quasi-coherent module $F$. Put $A=\\Gamma(X,\\mathcal O_X)$. Absolute means over $\\operatorname{Spec}\\mathbf Z$: regard $X$ as an algebraic space over $\\operatorname{Spec}\\mathbf Z$ through $X\\to S\\to\\operatorname{Spec}\\mathbf Z$, with the same etale scheme charts, point space and small etale ringed site. In this sense, and with algebraic spaces and morphisms below taken over $\\operatorname{Spec}\\mathbf Z$, there is a unique absolute morphism $p:X\\to\\operatorname{Spec}A$ inducing the identity of $A$ on global functions. Its diagonal $X\\to X\\times_{\\operatorname{Spec}A}X$ is a closed immersion on every scheme test [def-weil-closed-immersion, def-pc-fibre-product]. Moreover $p$ is universally injective: for every algebraic space $T\\to\\operatorname{Spec}A$, the induced map $|X\\times_{\\operatorname{Spec}A}T|\\to|T|$ is injective, using the field-valued point classes and atlas topology [def-a1-space-point-topology].",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tags 07V4 (lemma-vanishing-injective) and 07V5 (lemma-vanishing-separated), under Situation 07UY (situation-vanishing); canonical map from spaces-properties.tex Tag 05Z1 (lemma-morphism-to-affine-scheme). Change of base scheme: spaces.tex Tag 04SG (lemma-category-of-spaces-over-smaller-base-scheme)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-a1-space-point-topology",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-proper-curve-moduli",
+  "lem-sfb-space-change-base-to-integers"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-change-base-to-integers] to $S\\to\\operatorname{Spec}\\mathbf Z$. The same charts and ringed small etale site preserve the quasi-compactness, quasi-separatedness and H1 hypothesis. Work over $\\mathbf Z$ henceforth. Apply [lem-sfb-space-affine-target-global-functions] to $T=\\operatorname{Spec}A$ and $1_A$. Its bijection gives exactly one $p:X\\to\\operatorname{Spec}A$ inducing $1_A$.",
+   "uses": [
+    "lem-sfb-space-change-base-to-integers",
+    "lem-sfb-space-affine-target-global-functions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Situation 07UY; canonical map using spaces-properties.tex Tag 05Z1; change of base spaces.tex Tag 04SG."
+   }
+  },
+  {
+   "text": "For a field $K$ and a map $\\operatorname{Spec}K\\to\\operatorname{Spec}A$, let $Z=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}K$. By [lem-sfb-space-h1-vanishing-affine-base-change], $Z$ is qcqs, its diagonal over $K$ is quasi-compact, $H^1(Z,G)=0$ for all quasi-coherent $G$, and its structural map identifies $\\Gamma(Z,\\mathcal O_Z)$ with $K$ as a $K$-algebra. These are valid for every field map, including non-flat $A\\to K$.",
+   "uses": [
+    "lem-sfb-space-h1-vanishing-affine-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V4 first paragraph; Tag 07V0 affine base change."
+   }
+  },
+  {
+   "text": "By (2) and (3) of [lem-sfb-space-change-base-to-integers] for $\\operatorname{Spec}K\\to\\operatorname{Spec}\\mathbf Z$, regard $Z$ with its structural map to $\\operatorname{Spec}K$ as an algebraic space over $K$, with the same scheme charts, point space and small etale ringed site; $Z(K)$ denotes its $K$-morphisms $\\operatorname{Spec}K\\to Z$. For $x,x\\prime\\in Z(K)$, [lem-sfb-qs-space-rational-point-topology] says their images are closed singletons and that distinct morphisms have distinct images. If they were distinct, [lem-sfb-space-h1-separate-disjoint-closed] would give $a$ evaluating to $0$ at $x$ and to $1$ at $x\\prime$. But $\\Gamma(Z,\\mathcal O_Z)=K$ as a $K$-algebra, so evaluation at either $K$-point is the identity on $K$, contradicting $0\\ne1$. Thus every fibre has at most one $K$-point. Apply [lem-sfb-stack-universal-injectivity-criteria], (3) implies (1), to $p$, viewing algebraic spaces as stacks with discrete groupoids. For any algebraically closed $K$, two $K$-points over the same point of $\\operatorname{Spec}A$ are two $K$-points of the fibre just treated and hence equal; all isomorphisms in these discrete groupoids are identities. The criterion gives injectivity after every stack base change, in particular after every algebraic-space base change required here.",
+   "uses": [
+    "lem-sfb-space-change-base-to-integers",
+    "lem-sfb-qs-space-rational-point-topology",
+    "lem-sfb-space-h1-separate-disjoint-closed",
+    "lem-sfb-stack-universal-injectivity-criteria"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V4 closed-rational-point argument with Tag 07V1 and decent-spaces.tex Tag 07U5; equivalent field-valued-point criterion stacks-morphisms.tex Tag 0CPN."
+   }
+  },
+  {
+   "text": "Choose a scheme $Y$ and a surjective integral $f:Y\\to X$ using [lem-sfb-qcqs-space-integral-scheme-cover]. By [lem-sfb-space-integral-qcqs-permanence], $f$ is affine and $Y$ is qcqs. Apply part (1) of [lem-sfb-space-h1-vanishing-affine-base-change] to conclude $H^1(Y,G)=0$ for every quasi-coherent module on its small etale site.",
+   "uses": [
+    "lem-sfb-qcqs-space-integral-scheme-cover",
+    "lem-sfb-space-integral-qcqs-permanence",
+    "lem-sfb-space-h1-vanishing-affine-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V5 first paragraph, using decent-spaces.tex Tag 09YB and Tag 07V0(1)."
+   }
+  },
+  {
+   "text": "For every quasi-coherent Zariski ideal $I\\subseteq\\mathcal O_Y$, [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] gives its associated quasi-coherent small etale module. By [lem-sc-etale-zariski-qcoh-comparison], $H^1(Y,I)$ on the Zariski site equals its etale cohomology and is zero by the preceding step. Since $Y$ is a quasi-compact scheme, [lem-pqf-quasicompact-h1-zero] now implies $Y$ is affine.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sc-etale-zariski-qcoh-comparison",
+    "lem-pqf-quasicompact-h1-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V5 application of coherent.tex Tag 01XF (lemma-quasi-compact-h1-zero-covering); comparison descent.tex Tags 03DX and 03DW."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-affine-source-morphism-separated], the structure morphism $Y\\to\\operatorname{Spec}\\mathbf Z$ is separated, since $Y$ is affine. The sheaf fibre product $Y\\times_{\\mathbf Z}Y$ is represented by the scheme product, so by [lem-weil-pbc-closed-immersion-base-change] every scheme-test pullback of the scheme closed immersion $\\Delta_Y$ is a closed immersion; thus the absolute diagonal of $Y$ is a closed immersion in the representable sense. By [lem-sfb-space-integral-universally-closed], the integral surjection $f:Y\\to X$ is universally closed. Apply [lem-sfb-space-uc-surjection-separation] to obtain that the absolute diagonal $\\Delta_X:X\\to X\\times_{\\mathbf Z}X$ is a closed immersion on every scheme test.",
+   "uses": [
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-sfb-space-integral-universally-closed",
+    "lem-sfb-space-uc-surjection-separation",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V5 final paragraph: Tags 0415 and 05Z2(2); affine-source separatedness schemes.tex Tags 01KN and 01KV."
+   }
+  },
+  {
+   "text": "The square with top $1_X:X\\to X$, bottom $X\\times_{\\operatorname{Spec}A}X\\to X\\times_{\\mathbf Z}X$, left $\\Delta_p$ and right $\\Delta_X$ is Cartesian: a pair with equal images under $p$ lies on either diagonal exactly when its two entries agree. For any scheme test $T\\to X\\times_{\\operatorname{Spec}A}X$, the pullback of $\\Delta_p$ is therefore the pullback of $\\Delta_X$ by the composite $T\\to X\\times_{\\mathbf Z}X$. This is a closed immersion by the preceding step. Thus $p$ is separated on all scheme tests. The unique construction and universal injectivity were proved in steps 1 and 3.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V5 conclusion, spelled out using the defining scheme tests of a representable closed immersion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pqf-quasicompact-h1-zero",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "lem-sfb-qcqs-space-integral-scheme-cover",
+  "lem-sfb-qs-space-rational-point-topology",
+  "lem-sfb-space-affine-target-global-functions",
+  "lem-sfb-space-change-base-to-integers",
+  "lem-sfb-space-h1-separate-disjoint-closed",
+  "lem-sfb-space-h1-vanishing-affine-base-change",
+  "lem-sfb-space-integral-qcqs-permanence",
+  "lem-sfb-space-integral-universally-closed",
+  "lem-sfb-space-uc-surjection-separation",
+  "lem-sfb-stack-universal-injectivity-criteria",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tags 07V4 and 07V5 under Situation 07UY; Tag 07V4 field criterion expressed by equivalent stacks-morphisms.tex Tag 0CPN specialization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated algebraic space with zero H1 for all quasi coherent modules has separated universally injective canonical map to the spectrum of global sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], X.IsSeparated\", \"doc\": \"Every quasi-affine scheme is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (R S : CommRingCat) (f : R ⟶ S), AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Spec.map f)\", \"doc\": \"For any ring homomorphism $ f : R \\to S $ between commutative rings, the induced morphism of schemes $ \\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R) $ is separated. This means the diagonal morphism \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsAffineHom f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsAffine Y] (f : X ⟶ Y),\\n  AlgebraicGeometry.AffineTargetMorphismProperty.diagonal (fun X x x_1 x_2 => CompactSpace ↥X) f ↔\\n    QuasiSeparatedSpace ↥X\", \"doc\": \"A scheme $X$ is quasi-separated if and only if, for every affine scheme $Y$ and morphism $f: X \\\\to Y$, the diagonal morphism associated to $f$ satisfies the quasi-compactness condition under pullbacks\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ring algebras only; no theorem for algebraic spaces or one-line specialization gives this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing first coherent cohomology implies separated and radicial affinization of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], X.IsSeparated\", \"doc\": \"Every quasi-affine scheme is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsAffineHom f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsAffineHom (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If the composition $ g \\\\circ f $ is an affine morphism and $ g $ is a separated morphism of schemes, then $ f $ is an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is separated.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ring algebras only; no theorem for algebraic spaces or one-line specialization gives this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSeparated\", \"UniversallyInjective\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ring algebras only; no theorem for algebraic spaces or one-line specialization gives this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|affinization.*injective|vanishing.*separated",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ring algebras only; no theorem for algebraic spaces or one-line specialization gives this statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic space Serre criterion separated universally injective affinization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.universallyInjective_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \": @UniversallyInjective = universally (topologically (Injective ·))\", \"doc\": \"A morphism of schemes is universally injective if and only if it is injective on the underlying topological space and this injectivity is preserved under all base changes.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_of_injective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"(hf : Function.Injective f) : IsSeparated f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is injective, then it is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[h : IsAffineHom f] : IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": HasAffineProperty @IsSeparated fun X _ _ _ ↦ X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_valuativeCriterion\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"[QuasiSeparated f] (hf : ValuativeCriterion.Uniqueness f) : IsSeparated f\", \"doc\": \"Let $ f: X \\\\to Y $ be a quasi-separated morphism of schemes. If $ f $ satisfies the uniqueness part of the valuative criterion (i.e., any valuative lifting diagram has at most one lift), then $ f $ is\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ring algebras only; no theorem for algebraic spaces or one-line specialization gives this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated algebraic space with vanishing first cohomology of all quasi coherent modules has a separated universally injective affinization map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsAffineHom fun X x x_1 x_2 => AlgebraicGeometry.IsAffine X\", \"doc\": \"If a morphism from a scheme $ X $ to an affine scheme $ Y $ is affine, then $ X $ itself is an affine scheme. This instance establishes that the property of being an affine morphism, when applied to a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], X.IsSeparated\", \"doc\": \"Every quasi-affine scheme is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsAffineHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: Y \\\\to Z $ is an affine morphism of schemes and $ g: X \\\\to Y $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f],\\n  AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsAffine Y] (f : X ⟶ Y),\\n  AlgebraicGeometry.AffineTargetMorphismProperty.diagonal (fun X x x_1 x_2 => CompactSpace ↥X) f ↔\\n    QuasiSeparatedSpace ↥X\", \"doc\": \"A scheme $X$ is quasi-separated if and only if, for every affine scheme $Y$ and morphism $f: X \\\\to Y$, the diagonal morphism associated to $f$ satisfies the quasi-compactness condition under pullbacks\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, affine schemes, or cotangent cohomology; none gives the stated algebraic-space geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre criterion cohomologically affine algebraic space canonical morphism to spectrum of global functions separated radicial",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsAffineHom fun X x x_1 x_2 => AlgebraicGeometry.IsAffine X\", \"doc\": \"If a morphism from a scheme $ X $ to an affine scheme $ Y $ is affine, then $ X $ itself is an affine scheme. This instance establishes that the property of being an affine morphism, when applied to a\"}\n  {\"name\": \"AlgebraicGeometry.isAffine_Spec\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (R : CommRingCat), AlgebraicGeometry.IsAffine (AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $R$, the scheme $\\\\operatorname{Spec}(R)$ constructed from the prime spectrum of $R$ equipped with the Zariski topology and structure sheaf is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating whether a given scheme is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.affine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsAffine X], CategoryTheory.IsIso X.toSpecΓ\", \"doc\": \"For any affine scheme $X$, the canonical morphism from $X$ to $\\\\operatorname{Spec}(\\\\Gamma(X))$ is an isomorphism, establishing a natural correspondence between affine schemes and the spectra of their \"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of schemes consisting of those isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, forming the essential image of the contravariant Spec functor f\"}\n  {\"name\": \"AlgebraicGeometry.isAffine_affineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.AffineScheme), AlgebraicGeometry.IsAffine X.obj\", \"doc\": \"The category of affine schemes is the full subcategory of the category of schemes consisting of schemes isomorphic to the prime spectrum of a commutative ring. This subcategory is the essential image \"}\n  {\"name\": \"AlgebraicGeometry.essImage_Spec\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, AlgebraicGeometry.Scheme.Spec.essImage X ↔ AlgebraicGeometry.IsAffine X\", \"doc\": \"A scheme $X$ is in the essential image of the contravariant Spec functor from the opposite category of commutative rings to schemes if and only if $X$ is an affine scheme. In other words, the essentia\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, affine schemes, or cotangent cohomology; none gives the stated algebraic-space geometry."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSeparated\", \"UniversallyInjective\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, affine schemes, or cotangent cohomology; none gives the stated algebraic-space geometry."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|affinization.*injective|vanishing.*separated",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, affine schemes, or cotangent cohomology; none gives the stated algebraic-space geometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic space vanishing first quasi coherent cohomology separated universally injective affinization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[h : IsAffineHom f] : IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex_injective_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(P : Extension R A) [FormallySmooth R P.Ring] :\\n  Function.Injective P.cotangentComplex ↔ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For an $ R $-algebra extension $ P $, the cotangent complex map $ P.\\text{cotangentComplex} $ is injective if and only if the first cohomology group $ \\text{Algebra.H1Cotangent}(R, A) $ is trivial (i.e.\"}\n  {\"name\": \"AlgebraicGeometry.universallyInjective_isZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \": IsZariskiLocalAtTarget @UniversallyInjective\", \"doc\": \"The property of being universally injective is Zariski local at the target. That is, for any morphism of schemes with this property, there exists a Zariski covering of the target such that the propert\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsAffineHom (f ≫ g)] [IsSeparated g] : IsAffineHom f\", \"doc\": \"If the composition $ g \\\\circ f $ is an affine morphism and $ g $ is a separated morphism of schemes, then $ f $ is an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"(X : Scheme) {U : X.Opens} (hU : IsAffineOpen U) (x f : Γ(X, U)) (H : x |_ (X.basicOpen f) = 0) :\\n  ∃ n : ℕ, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"[IsAffine Y] (f : X ⟶ Y) :\\n  AffineTargetMorphismProperty.diagonal (fun X _ _ _ ↦ CompactSpace X) f ↔ QuasiSeparatedSpace X\", \"doc\": \"A scheme $X$ is quasi-separated if and only if, for every affine scheme $Y$ and morphism $f: X \\\\to Y$, the diagonal morphism associated to $f$ satisfies the quasi-compactness condition under pullbacks\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.AffineAnd\", \"type\": \": AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, affine schemes, or cotangent cohomology; none gives the stated algebraic-space geometry."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-serre-affineness",
+  "date": "2026-10-23",
+  "group": "Q155"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Serre affineness criterion for algebraic spaces. Geometric prerequisites to Tag 07V6: separatedness and universal injectivity of the absolute canonical map, before the affine presentation argument.",
+   "via": [
+    "lem-sfb-space-serre-affineness",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-acyclic-affinization-geometry",
+  "worker": "stage1",
+  "summary": "Followed Tags 07V4 and 07V5, writing the closed-point contradiction and integral-cover/Serre argument explicitly. Reused the existing absolute separation-descent lemma instead of adding its relative variant. Four new statement-only inputs state the affine-target universal property, affine H1 base-change lemma, closed-subset separation, and integral universal closedness. Corrected doubled TeX escapes in the imported statement; mathematical content unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Serre affineness criterion for algebraic spaces. Geometric prerequisites to Tag 07V6: separatedness and universal injectivity of the absolute canonical map, before the affine presentation argument. The latest sk-thm-sf-ctf-stability-direct-images.proof.md (3) proves preservation through proper direct image and compactification; this existing downstream Stacks geometric prerequisite is split along its recorded Serre-affineness branch, without replacing that unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic change of topology for quasi-coherent modules on the integral scheme cover; the unit provides no replacement."
+   },
+   {
+    "node": "lem-sc-etale-zariski-qcoh-comparison",
+    "why": "Generic comparison of quasi-coherent cohomology on the same scheme in the two topologies, required to apply scheme Serre affineness."
+   },
+   {
+    "node": "lem-pqf-quasicompact-h1-zero",
+    "why": "Generic scheme Serre criterion applied to the integral scheme cover as in Tag 07V5, not the algebraic-space Serre theorem being proved upstream."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "lem-pqf-quasicompact-h1-zero"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-ccd89f3ed",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-ccd89f3ed (reviewer sub-agent of L); spot-checked: Read in full: the item, the 4 new nodes and every cited statement, plus Stacks 07UY/07UZ/07V0/07V1/07V4/07V5/07V6, 05Z1, 0415, 05Z2, 0CPN and tags/tags. The item is unsplit in live and side-live, there is no repair note, and the statement and stmt_deps are unchanged from the base. The steps follow 07V4/07V5. Step 1: change of base to Z, then 05Z1 gives a unique p. Step 2: both clauses of 07V0 apply to Z=X×_A Spec K, including non-flat A→K. Step 3: closed rational points plus 07V1, and Γ(Z)=K forces 0=1; 0CPN (3)⇒(1) with discrete groupoids replaces the large-transcendence step. Steps 4-5: 09YB cover, permanence, 07V0(1), 03DX/03DW and 01XF show Y is affine. Step 6: 0415 and 05Z2(2). Step 7: a Cartesian square through the monomorphism X×_A X→X×_Z X, elementary. The new nodes (05Z1; 07V0+073B; 07V1; 0415) are true as stated, tested on empty X, A=0 and empty Z_i. They are statement-only with three kinds of search recorded and none is a duplicate (rg -L for the tags and phrases; checked integral-stack-closed-point, finite-space-topology, serre-affineness, qcqs-permanence). Tool_uses 03DX, 03DW and 01XF are accepted as generic. No SGA is cited. Batch-5 flags: every one is a general algebraic-space foundation (definition of space, quasi-coherent modules, fibre products, Zariski/étale equivalence, 09YB/07U5/03I4/073B geometry), not part of the trace formula or Poincaré duality, so OK. FIX in the item proof only, two missing citations (C1): step 3 now cites change-base-to-integers (2),(3) to view Z as an algebraic space over K; step 6 now cites the Mathlib leaf lem-weil-pbc-closed-immersion-base-change, so the scheme diagonal of the affine Y becomes a representable closed immersion as lem-sfb-space-uc-surjection-separation requires. proof_deps updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAcyclicAffinizationGeometry",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_acyclic_affinization_geometry",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.acyclicAffinizationAbsoluteSpace",
+   "AlgebraicGeometry.AlgebraicSpace.space_acyclic_affinization_geometry"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAcyclicAffinizationGeometry.lean",
+  "statement": "theorem space_acyclic_affinization_geometry {S : Scheme.{u}} (X : AlgebraicSpace S) [HasSheafify X.etaleTopology AddCommGrpCat.{u}] [HasExt.{u + 1} (Sheaf X.etaleTopology AddCommGrpCat.{u})] (hqc : CompactSpace (Point X.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated X) (hH : ∀ (F : X.Modules) (_ : F.IsQuasicoherent), Subsingleton (Sheaf.H ((SheafOfModules.toSheaf X.structureSheaf).obj F) 1)) : ∃ (A : CommRingCat.{u}) (π : (Functor.const (acyclicAffinizationAbsoluteSpace X).EtaleSiteᵒᵖ).obj A ⟶ (acyclicAffinizationAbsoluteSpace X).etaleForget.op ⋙ Scheme.Γ), Nonempty (IsLimit (Cone.mk A π)) ∧ ∃ p : acyclicAffinizationAbsoluteSpace X ⟶ schemeSpace (Over.mk (specULiftZIsTerminal.from (Spec A))), (∀ T : (acyclicAffinizationAbsoluteSpace X).EtaleSite, π.app (op T) = (Scheme.ΓSpecIso A).inv ≫ (yoneda.preimage (T.obj.hom ≫ p.hom.hom)).left.appTop) ∧ (∀ q : acyclicAffinizationAbsoluteSpace X ⟶ schemeSpace (Over.mk (specULiftZIsTerminal.from (Spec A))), (∀ T : (acyclicAffinizationAbsoluteSpace X).EtaleSite, π.app (op T) = (Scheme.ΓSpecIso A).inv ≫ (yoneda.preimage (T.obj.hom ≫ q.hom.hom)).left.appTop) → q = p) ∧ IsRepresentableWith (fun _ _ f ↦ IsClosedImmersion f.left) (pullback.diagonal p.hom.hom) ∧ ∀ (T : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))) (g : T ⟶ schemeSpace (Over.mk (specULiftZIsTerminal.from (Spec A)))), Function.Injective (mapPoint (pullback.snd p.hom g.hom).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Global regular functions are represented by a limit cone on the actual small etale chart diagram. Its chartwise normalization fixes the identity on A; uniqueness concerns all morphisms with this normalization. The absolute-space helper is the projection of the characterized change-of-base equivalence, with real data and only a uniquely characterized theorem choice. Added statement dependencies own the reused absolute quasi-separatedness, schemeSpace, point-map and change-of-base interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4684b8416",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read item node (diff vs live: only lean + 4 added stmt_deps), module, report (Worker report + Second reading by Q46 present), all stmt_dep records and live decls (IsAbsolutelyQuasiSeparated affine-pair absolute test, Point/pointTopologicalSpace, mapPoint, IsRepresentableWith, EtaleSite/etaleForget, exists_spaceChangeBase, AlgebraicSpaceH1AffineBaseChange). Clause map: arbitrary S and X; qc = CompactSpace (Point X); qs = IsAbsolutelyQuasiSeparated (absolute as in Stacks 07UY); H1 hypothesis over X.Modules with Mathlib IsQuasicoherent (same predicate as QCoh), identical to landed affine-base-change convention; A = limit of Gamma over the actual etale chart diagram; p normalized chartwise by (GammaSpecIso A).inv >> appTop = identity on A, uniqueness among maps with the same normalization; diagonal IsRepresentableWith closed immersion on all scheme tests; universal injectivity over every algebraic space T -> Spec A via mapPoint on field-point classes. Edge cases: empty X / zero ring, non-flat fields, universe u only. Mechanical finding: the theorem stmt_dep lem-sfb-space-change-base-to-integers is genuinely needed, since the absolute space j_!X is Classical.choose of exists_spaceChangeBase (J pinned by Sigma/restriction/morphism formulas, so unique up to canonical iso; all conclusions iso-invariant); the theorem module has no plain defs to cite -> PASS on that point. Helper def has real data and source/blueprint docstrings; sorry only; 7-step proof docstring; lean.statement verbatim; no duplicate notion. No compile run (no changes); worker compile evidence clean."
+ }
+}

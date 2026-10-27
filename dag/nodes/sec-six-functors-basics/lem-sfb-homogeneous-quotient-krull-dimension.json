@@ -1,0 +1,354 @@
+{
+ "id": "lem-sfb-homogeneous-quotient-krull-dimension",
+ "kind": "statement",
+ "title": "Krull dimension of an arbitrary algebraic homogeneous quotient",
+ "statement": "Let $k$ be a field [def-weil-field], let $A$ be a separated group scheme of finite type over $k$ [def-sc-group-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism], and let $L\\hookrightarrow A$ be a closed subgroup scheme [def-sc-group-scheme-subgroup]. Let $A/L$ be the separated finite-type scheme representing the fpqc coset quotient, with its quotient morphism as in [lem-sfb-algebraic-group-homogeneous-quotient]. Then the topological Krull dimensions [def-kun-topological-krull-dimension] satisfy $$\\dim A=\\dim L+\\dim(A/L).$$ All three dimensions are finite nonnegative integers. No smoothness, reducedness, connectedness, normality or affineness assumption is imposed on $A$ or $L$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 5.23, printed p.104, including its reduction to the associated reduced schemes and A.72."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=A/L$ and write $q:A\\to X$ for the supplied quotient. Its cited statement gives that $X$ is finite type over $k$ and $q$ is flat, surjective and finitely presented. The affine presentation in [def-sbc-locally-finite-presentation] shows directly that $q$ is locally of finite type. To check finite type of $L$, choose a finite affine cover $\\operatorname{Spec}R_i$ of $A$ by finitely generated $k$-algebras. By [def-weil-closed-immersion], its inverse images in $L$ are $\\operatorname{Spec}(R_i/I_i)$; the images of any finite generating list of $R_i$ generate $R_i/I_i$. This is a finite affine cover of $L$, so $L$ is finite type by [def-weil-finite-type-morphism]. For each of $A,L,X$, the affine coordinate rings in such a cover are Noetherian by [lem-wf-affine-noetherian-components], so the schemes are locally Noetherian by [pqf-def-locnoeth]. Their global dimensions are finite by [lem-kun-dimension-finite-type]. The identity sections give points of $A$ and $L$, and $q(e_A)$ gives a point of $X$. Thus none is empty and all three dimensions are nonnegative integers. Set $d=\\dim L\\in\\mathbb N$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "lem-wf-affine-noetherian-components",
+    "pqf-def-locnoeth",
+    "lem-kun-dimension-finite-type",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.23; use the supplied quotient of Theorem 5.28 and Proposition 5.25. Affine Noetherian input: Stacks algebra.tex Tag 00FN; finiteness: varieties.tex Tag 0A21 (lemma-dimension-locally-algebraic)."
+   }
+  },
+  {
+   "text": "Fix $a\\in A$, put $x=q(a)$ and $K=\\kappa(a)$, and let $g:\\operatorname{Spec}K\\to A$ be its canonical residue-field morphism. Put $v=qg$ and $F=A\\times_{X,v}\\operatorname{Spec}K$. This fibre product has a $K$-point $\\widetilde g=(g,1)$. There is a pointed $K$-isomorphism\n$$\\phi:L_K=L\\times_k\\operatorname{Spec}K\\longrightarrow F,\\qquad h\\longmapsto gh,$$\nsending the identity to $\\widetilde g$. Here is the complete inverse construction. Write $b:F\\to A$ and $r:F\\to\\operatorname{Spec}K$ for the projections. Since $qb=qgr$, the quotient's test-scheme criterion, applied to $T=F$, says $(gr)^{-1}b$ factors through $j:L\\hookrightarrow A$; the factor is unique because $j_T$ is injective. Together with $r$ it defines $\\psi:F\\to L_K$. Conversely the same criterion gives $q(gh)=q(g)$, so multiplication defines $\\phi$ by the fibre-product universal property. The identities $g(g^{-1}b)=b$ and $g^{-1}(gh)=h$ show $\\phi\\psi=1$ and $\\psi\\phi=1$ by their projections and the injectivity of $j$. These are morphisms on the full schemes, including nilpotents.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "def-sc-group-scheme",
+    "def-sc-group-scheme-subgroup",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.24: the explicit torsor identity, restricted along g; compare Proposition 5.27."
+   }
+  },
+  {
+   "text": "The base change $L_K$ is finite type over the field $K$ by [lem-sfb-finite-type-composition-base-change]. Pulling back the multiplication, identity and inverse diagrams gives its group-scheme structure. Apply the group specialization of [lem-sfb-field-groupoid-constant-local-dimension] at its identity: $\\dim_{e}(L_K)=\\dim L_K$. For a scheme the identity etale chart in that statement computes precisely the local topological dimension used here. Apply the field-extension clause of [lem-kun-dimension-extension] to the finite-type $k$-scheme $L$ to get $\\dim L_K=\\dim L=d$. The isomorphism $\\phi$ of Step 2 gives a bijection of open neighbourhoods of the distinguished points and preserves their chains of irreducible closed subsets, hence\n$$\\dim_{\\widetilde g}F=\\dim_e L_K=d.$$\nOnly local topological dimensions occur in this equality; no dimension of a local ring is substituted for them.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "def-sc-group-scheme",
+    "lem-sfb-field-groupoid-constant-local-dimension",
+    "lem-kun-dimension-extension",
+    "def-kun-topological-dimension-at-point",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 06FE (lemma-group-over-field-locally-finite-type-dimension), clause (1); field extension: algebra.tex Tag 00P3; Milne Proposition 5.23."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-fibre-dimension-after-base-change] to $q:A\\to X$ and $v:\\operatorname{Spec}K\\to X$, with the point $\\widetilde g\\in F$ over $a$. The base point in $\\operatorname{Spec}K$ has residue field $K$, so the fibre of $F\\to\\operatorname{Spec}K$ over that point is $F$ itself. The cited equality therefore says\n$$\\dim_a(A_x)=\\dim_{\\widetilde g}F=d.$$\nThe hypothesis that $q$ is locally of finite type was checked in Step 1. Since $a$ was arbitrary, the ordinary fibres of $q$ have local topological dimension $d$ at every point. No rational lift over $\\kappa(x)$ was assumed: the extension used is the actual residue field $\\kappa(a)$.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), clause (1), for the base change along v."
+   }
+  },
+  {
+   "text": "Apply [lem-per-surjective-flat-global-dimension] to $q:A\\to X$ and $d=\\dim L$. Its local Noetherian, flat and locally finite type hypotheses hold by Step 1, its constant pointwise fibre dimension hypothesis is Step 4, and its surjectivity and nonempty-base hypotheses hold by Step 1. It yields $\\dim A=\\dim X+d$. Commutativity of addition of the finite integers of Step 1 gives\n$$\\dim A=\\dim L+\\dim(A/L).$$\nThe finiteness and nonnegativity assertions were also proved in Step 1. Nothing in Steps 2--4 requires smoothness, reducedness, connectedness, normality or affineness of either group.",
+   "uses": [
+    "lem-per-surjective-flat-global-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AFE (lemma-rel-dimension-dimension), global surjective form from the second proof paragraph; Milne Proposition 5.23."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-dimension-at-point",
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-kun-dimension-extension",
+  "lem-kun-dimension-finite-type",
+  "lem-per-surjective-flat-global-dimension",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "lem-sfb-field-groupoid-constant-local-dimension",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-wf-affine-noetherian-components",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 5.23, expanded using the torsor identity 5.24 and flatness 5.25; Stacks 02FY, 06FE and 0AFE give the nonreduced pointwise flat-dimension calculation instead of passing to reductions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The dimension of a homogeneous quotient scheme G/H plus the dimension of the subgroup H equals the dimension of the algebraic group G",
+   "results": "{\"t\": \"2026-10-23T21:41:33Z\", \"tool\": \"leansearch\", \"query\": \"The dimension of a homogeneous quotient scheme G/H plus the dimension of the subgroup H equals the dimension of the algebraic group G\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"rank_quotient_add_rank_of_divisionRing\", \"Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension\", \"AddSubgroup.finiteIndex_of_finite_quotient\", \"Finite.of_finite_quot_finite_addSubgroup\", \"HomogeneousSubmodule.mk.sizeOf_spec\", \"AddSubgroup.index_eq_card\", \"AddSubgroup.fintypeQuotientOfFiniteIndex\", \"Finite.of_addSubgroup_quotient\"], \"digest\": \"cb5aa789db63b1fe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are vector-space rank/nullity, abstract finite group quotients or submersive-presentation dimensions; Loogle gives stalk dimension/coheight, and the group-scheme grep is empty. None states a Krull dimension formula for homogeneous quotient schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type group scheme G over a field and a closed subgroup H, the homogeneous quotient has dimension dim G minus dim H",
+   "results": "{\"t\": \"2026-10-23T21:41:34Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type group scheme G over a field and a closed subgroup H, the homogeneous quotient has dimension dim G minus dim H\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.rank_le_card\", \"Projectivization.card''\", \"ModN.natCard_eq\", \"Submodule.finrank_quotient_le\", \"Submodule.finrank_quotient\", \"Submodule.card_eq_card_quotient_mul_card\", \"Submodule.cardQuot_apply\", \"Submodule.cardQuot\"], \"digest\": \"fc1c534d5bd4318c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are vector-space rank/nullity, abstract finite group quotients or submersive-presentation dimensions; Loogle gives stalk dimension/coheight, and the group-scheme grep is empty. None states a Krull dimension formula for homogeneous quotient schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous|quotient|dimension",
+   "results": "{\"t\": \"2026-10-23T21:42:10Z\", \"tool\": \"grep\", \"query\": \"homogeneous|quotient|dimension\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are vector-space rank/nullity, abstract finite group quotients or submersive-presentation dimensions; Loogle gives stalk dimension/coheight, and the group-scheme grep is empty. None states a Krull dimension formula for homogeneous quotient schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"dim\"",
+   "results": "{\"t\": \"2026-10-23T21:42:11Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"dim\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ringKrullDim_stalk_eq_coheight\", \"AlgebraicGeometry.krullDimLE_of_coheight_le\", \"AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion.respectsIso\", \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\"], \"digest\": \"088c8729ea074d74\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are vector-space rank/nullity, abstract finite group quotients or submersive-presentation dimensions; Loogle gives stalk dimension/coheight, and the group-scheme grep is empty. None states a Krull dimension formula for homogeneous quotient schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension formula for a faithfully flat torsor of algebraic schemes under a finite type algebraic group",
+   "results": "{\"t\": \"2026-10-23T21:42:12Z\", \"tool\": \"leanfinder\", \"query\": \"Krull dimension formula for a faithfully flat torsor of algebraic schemes under a finite type algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension\", \"Algebra.IsStandardSmooth.relativeDimension\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"Polynomial.ringKrullDim_le\", \"Module.supportDim_self_eq_ringKrullDim\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\"], \"digest\": \"280bc86ddc3bd5fd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are vector-space rank/nullity, abstract finite group quotients or submersive-presentation dimensions; Loogle gives stalk dimension/coheight, and the group-scheme grep is empty. None states a Krull dimension formula for homogeneous quotient schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|quotient|homogeneous",
+   "results": "{\"t\": \"2026-10-23T21:42:38Z\", \"tool\": \"grep\", \"query\": \"torsor|quotient|homogeneous\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\"], \"digest\": \"58b7fd7074f21b58\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are vector-space rank/nullity, abstract finite group quotients or submersive-presentation dimensions; Loogle gives stalk dimension/coheight, and the group-scheme grep is empty. None states a Krull dimension formula for homogeneous quotient schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|torsor|dimension|homogeneous",
+   "results": "{\"t\": \"2026-10-23T22:22:16Z\", \"tool\": \"grep\", \"query\": \"quotient|torsor|dimension|homogeneous\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group quotients, ideal quotients, stalk coheight, polynomial dimensions or dimensions of presentations; none states the homogeneous group-scheme quotient dimension formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homogeneous quotient of algebraic group schemes has dimension equal to the dimension of the group minus the dimension of the subgroup",
+   "results": "{\"t\": \"2026-10-23T22:22:16Z\", \"tool\": \"leansearch\", \"query\": \"A homogeneous quotient of algebraic group schemes has dimension equal to the dimension of the group minus the dimension of the subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddSubgroup.finite_quotient_of_finiteIndex\", \"Rep.quotientToInvariants\", \"QuotientAddGroup.instHasQuotientAddSubgroup\", \"QuotientAddGroup.mk\", \"AddSubgroup.finiteIndex_of_finite_quotient\", \"AddSubgroup.fintypeQuotientOfFiniteIndex\", \"HomogeneousLocalization\", \"MulActionHom.toQuotient\"], \"digest\": \"d2472658ba3c9867\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group quotients, ideal quotients, stalk coheight, polynomial dimensions or dimensions of presentations; none states the homogeneous group-scheme quotient dimension formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type group scheme G over a field and a closed subgroup H, the topological Krull dimension satisfies dim G = dim H + dim (G/H)",
+   "results": "{\"t\": \"2026-10-23T22:22:17Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type group scheme G over a field and a closed subgroup H, the topological Krull dimension satisfies dim G = dim H + dim (G/H)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_ringKrullDim_quotient_add_encard\", \"ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_le_ringKrullDim_add_card\", \"ringKrullDim_quotient_le\", \"ringKrullDim_le_ringKrullDim_quotient_add_card\", \"ringKrullDim_quotient\"], \"digest\": \"0315ca07b68f5796\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group quotients, ideal quotients, stalk coheight, polynomial dimensions or dimensions of presentations; none states the homogeneous group-scheme quotient dimension formula."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|homogeneous.*quotient|quotient.*[Kk]rull",
+   "results": "{\"t\": \"2026-10-23T22:22:51Z\", \"tool\": \"grep\", \"query\": \"torsor|homogeneous.*quotient|quotient.*[Kk]rull\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\"], \"digest\": \"7c16acc2aceca870\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group quotients, ideal quotients, stalk coheight, polynomial dimensions or dimensions of presentations; none states the homogeneous group-scheme quotient dimension formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension is additive for a faithfully flat torsor of finite type schemes over a field under an algebraic group",
+   "results": "{\"t\": \"2026-10-23T22:22:54Z\", \"tool\": \"leanfinder\", \"query\": \"Krull dimension is additive for a faithfully flat torsor of finite type schemes over a field under an algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_succ_le_ringKrullDim_polynomial\", \"Polynomial.ringKrullDim_le\", \"ringKrullDim_quotient\"], \"digest\": \"cf5a52f8b81200f3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group quotients, ideal quotients, stalk coheight, polynomial dimensions or dimensions of presentations; none states the homogeneous group-scheme quotient dimension formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nested-homogeneous-quotient-geometry",
+  "date": "2026-10-24",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Conjugate an arbitrary Borel into the maximum-dimensional one by its action on the already proper quotient. Supporting geometric input: Milne Theorem 17.1, used after the minimum-dimensional orbit has been proved closed. Supporting quotient geometry in Milne Theorem 17.1: the finite reduction of the subgroup and the fibres of G/H -> G/N (Proposition 7.15 and Remark 7.16). Supporting dimension calculation: Milne Proposition 5.23 applied to J/H before Remark 7.16(b).",
+   "via": [
+    "lem-sfb-nested-homogeneous-quotient-geometry",
+    "lem-sfb-solvable-homogeneous-proper-subschemes",
+    "lem-sfb-solvable-proper-fixed-point",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-homogeneous-quotient-krull-dimension",
+  "worker": "stage1",
+  "summary": "Expanded the homogeneous-quotient dimension formula in five steps, with an explicit pointed fibre isomorphism over the source residue field. Reused existing finite-dimension, field-extension, constant group dimension, fibre-base-change and surjective-flat dimension nodes; no new nodes. Statement and statement dependencies unchanged.",
+  "blueprint": "The inherited from.node is null (confirmed by blueprint_refs ancestor), and its precise from.place and via chain are retained. This supplies the Milne Proposition 5.23 dimension input in the nested homogeneous quotient geometry below direct-image stability paragraph (3). Read latest sk-thm-sf-ctf-stability and sk-thm-sf-ctf-stability-direct-images.proof.md. No unit route is replaced. Searches across blueprint nodes found no duplicate homogeneous quotient statement.",
+  "tool_uses": [
+   {
+    "node": "def-kun-topological-dimension-at-point",
+    "why": "General scheme, finite-type or dimension tool used as its statement specifies in the proof; the homogeneous-quotient unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "def-kun-topological-krull-dimension",
+    "why": "General scheme, finite-type or dimension tool used as its statement specifies in the proof; the homogeneous-quotient unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "General scheme, finite-type or dimension tool used as its statement specifies in the proof; the homogeneous-quotient unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "def-pc-scheme-fibre",
+    "why": "General scheme, finite-type or dimension tool used as its statement specifies in the proof; the homogeneous-quotient unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "def-sbc-locally-finite-presentation",
+    "why": "General scheme, finite-type or dimension tool used as its statement specifies in the proof; the homogeneous-quotient unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "def-sc-group-scheme",
+    "why": "General scheme, finite-type or dimension tool used as its statement specifies in the proof; the homogeneous-quotient unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "def-sc-group-scheme-subgroup",
+    "why": "General scheme, finite-type or dimension tool used as its statement specifies in the proof; the homogeneous-quotient unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "General scheme, finite-type or dimension tool used as its statement specifies in the proof; the homogeneous-quotient unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "General scheme, finite-type or dimension tool used as its statement specifies in the proof; the homogeneous-quotient unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "lem-kun-dimension-extension",
+    "why": "General scheme, finite-type or dimension tool used as its statement specifies in the proof; the homogeneous-quotient unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "General scheme, finite-type or dimension tool used as its statement specifies in the proof; the homogeneous-quotient unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "lem-per-surjective-flat-global-dimension",
+    "why": "General scheme, finite-type or dimension tool used as its statement specifies in the proof; the homogeneous-quotient unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "General scheme, finite-type or dimension tool used as its statement specifies in the proof; the homogeneous-quotient unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "General scheme, finite-type or dimension tool used as its statement specifies in the proof; the homogeneous-quotient unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "lem-wf-affine-noetherian-components",
+    "why": "General scheme, finite-type or dimension tool used as its statement specifies in the proof; the homogeneous-quotient unit has no alternative statement of this foundation."
+   },
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "General scheme, finite-type or dimension tool used as its statement specifies in the proof; the homogeneous-quotient unit has no alternative statement of this foundation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-kun-topological-dimension-at-point",
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-kun-dimension-extension",
+  "lem-kun-dimension-finite-type",
+  "lem-per-surjective-flat-global-dimension",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-wf-affine-noetherian-components",
+  "pqf-def-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-d055e1f21",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-d055e1f21 (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item in full; there are 0 new nodes and the statement and stmt_deps are unchanged (Milne iAG Prop. 5.23, p.104, checked in the PDF). Step 1 is correct: the quotient node gives X finite type and q flat, surjective and of finite presentation, so q is locally of finite type; L is finite type via the closed-immersion clause R_i/I_i; lem-wf-affine-noetherian-components and pqf-def-locnoeth give local Noetherianity; lem-kun-dimension-finite-type gives finite dimensions; identity sections give nonemptiness. Step 2 is correct: φ: L_K ≅ A×_{X}Spec κ(a), h↦gh, with the criterion direction a⁻¹b∈j_T L(T) checked; the inverse comes from the criterion with T=F, both composites are identities by Yoneda, and it is valid with nilpotents (Milne 5.24). Step 3 is correct: lem-sfb-field-groupoid-constant-local-dimension (Stacks 06FE(1), read) gives dim_e L_K = dim L_K, and lem-kun-dimension-extension gives dim L_K = dim L. Step 4 is correct: lem-sc-fibre-dimension-after-base-change (02FY(1)) applies with f=q, g=v, and the fibre of F over Spec K is F; def-kun-dimension's local dimension is the same notion as def-kun-topological-dimension-at-point. Step 5 is correct: every hypothesis of lem-per-surjective-flat-global-dimension (0AFE, read) is discharged. Small cases checked: L=1, L=A, α_p⊂G_a and μ_p⊂G_m. Nearby nodes lem-sfb-smooth-group-orbit-geometry and lem-sfb-group-hom-dimension-kernel-image only cover special cases. Batch-5 finding: lem-sfb-field-groupoid-constant-local-dimension reaches sec-trace-formula only through def-trf-algebraic-space, a general definition. It is a Stacks groupoid dimension lemma, not a step of the trace formula or Poincaré duality proof, so it is accepted. The generic foundations in tool_uses are accepted; no SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.HomogeneousQuotientKrullDimension",
+  "declaration": "AlgebraicGeometry.topologicalKrullDim_homogeneousQuotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/HomogeneousQuotientKrullDimension.lean",
+  "statement": "theorem topologicalKrullDim_homogeneousQuotient (k : Type u) [Field k] (A L : Over (Spec (.of k))) [GrpObj A] [GrpObj L] [IsSeparated A.hom] [LocallyOfFiniteType A.hom] [QuasiCompact A.hom] (j : L ⟶ A) [IsClosedSubgroupScheme j] (X : Over (Spec (.of k))) (q : A ⟶ X) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [Flat q.left] [Surjective q.left] [LocallyOfFinitePresentation q.left] [QuasiCompact q.left] [QuasiSeparated q.left] (hcoset : ∀ (T : Over (Spec (.of k))) (a b : T ⟶ A), a ≫ q = b ≫ q ↔ a⁻¹ * b ∈ Set.range (fun l : T ⟶ L ↦ l ≫ j)) (hlift : ∀ (T : Over (Spec (.of k))) (x : T ⟶ X), ∃ (I : Type u) (T' : I → Over (Spec (.of k))) (f : ∀ i, T' i ⟶ T), Presieve.ofArrows (fun i ↦ (T' i).left) (fun i ↦ (f i).left) ∈ Scheme.fpqcPrecoverage T.left ∧ ∀ i, ∃ g : T' i ⟶ A, g ≫ q = f i ≫ x) : topologicalKrullDim A.left = topologicalKrullDim L.left + topologicalKrullDim X.left ∧ ∃ a l x : ℕ, topologicalKrullDim A.left = (a : WithBot ℕ∞) ∧ topologicalKrullDim L.left = (l : WithBot ℕ∞) ∧ topologicalKrullDim X.left = (x : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c262e0193",
+  "group": "N5",
+  "result": "pass",
+  "note": "Clauses match the node: Field k; A Over Spec k with GrpObj + IsSeparated + LOFT + QC; IsClosedSubgroupScheme j (Defs.lean:100); X, q hypotheses are term-for-term the conjuncts of landed exists_homogeneousQuotient (coset clause and fpqc lifts, same universe u); conclusion topologicalKrullDim A = dim L + dim X plus ∃ ℕ witnesses (finite, nonnegative). Edge cases L=1, L=A, trivial A, α_p/μ_p, non-affine, disconnected; non-emptiness follows from the unit. No defs, one sorry, source/blueprint docstrings with 5 proof steps, statement verbatim, node differs from live only in lean, both report sections present, imported proof-dep modules exist; field-groupoid lemma has no Lean record (proof-only, not a fault). No FIX, no compile."
+ }
+}

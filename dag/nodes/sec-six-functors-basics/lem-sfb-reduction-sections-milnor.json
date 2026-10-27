@@ -1,0 +1,145 @@
+{
+ "id": "lem-sfb-reduction-sections-milnor",
+ "kind": "statement",
+ "title": "Milnor sequence for resolved reduction sections",
+ "statement": "In the setting of [lem-sfb-reduction-sections-roos-triangle], let $L\\in D(\\mathbf{Ab})$ and let $z:L\\simeq Q\\operatorname{Roos}(\\Gamma^{\\mathrm{Tow}}I)$ be any isomorphism. For every integer $q$ there exist maps forming a short exact sequence $0\\to R^1\\lim_n H^{q-1}R\\Gamma(K_n)\\to H^q(L)\\to\\lim_n H^qR\\Gamma(K_n)\\to0$. Both inverse-limit functors are the actual functors on abelian-group towers and retain the canonical quotient transitions. No completeness, upper bound or Mittag--Leffler assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6K, lemma-RGamma-commutes-with-Rlim; Tag 0A07, lemma-Rf-commutes-with-Rlim; Tag 0941, lemma-derived-limit-is-ok"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-pe-derived-completion",
+  "def-weil-derived-limit",
+  "def-weil-strict-roos-model",
+  "def-sfb-complete-reduction-sections-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the specified Roos triangle on the actual reduction section tower. Transport its first vertex along z, its first arrow to z followed by the original projection, and its last arrow to the original boundary followed by z inverse shifted by one. The triangle isomorphism has components z,id,id, so the transported triangle is distinguished.",
+   "uses": [
+    "lem-sfb-reduction-sections-roos-triangle"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply milnor_shortExact in degree q to the transported triangle and the full canonical reduction section tower. Its existential maps and short exactness give precisely the claimed sequence.",
+   "uses": [
+    "lem-pc-derived-limit-milnor-sequence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reduction-sections-roos-triangle",
+  "lem-pc-derived-limit-milnor-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6K, lemma-RGamma-commutes-with-Rlim; Tag 0A07, lemma-Rf-commutes-with-Rlim; Tag 0941, lemma-derived-limit-is-ok"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit of a tower of complexes with cohomology zero above h has cohomology zero above h+1",
+   "results": "8 hits: DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, CochainComplex.isZero_of_isLE, DerivedCategory.isLE_iff, CochainComplex.isZero_of_isGE, DerivedCategory.isGE_iff, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized internal-module reduction section comparison or its strict tower realization. Generic Milnor exact sequence is reused from the source library."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsZero, CategoryTheory.Limits.limit",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized internal-module reduction section comparison or its strict tower realization. Generic Milnor exact sequence is reused from the source library."
+  },
+  {
+   "tool": "grep",
+   "query": "milnor_shortExact|rightDerivedFunctorUnit.*roos|limitToRoos",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized internal-module reduction section comparison or its strict tower realization. Generic Milnor exact sequence is reused from the source library."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Milnor exact sequence for sections of the inverse limit of a strict tower of module complexes",
+   "results": "8 hits: SheafOfModules.sections, Module.DirectLimit.module, PresheafOfModules.sections, groupCohomology.H1InfRes, PresheafOfModules.sectionsMk, AdicCompletion, CochainComplex.HomComplex.Cochain.InductionUp.limitSequence, CategoryTheory.Abelian.Ext.covariantSequence_exact",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized internal-module reduction section comparison or its strict tower realization. Generic Milnor exact sequence is reused from the source library."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompleteReductionRgammaUpperBound",
+  "date": "2026-10-25",
+  "group": "T5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Current det-sf-comp-coherence-cocycle proof, Refinement isomorphisms paragraph: the use of det-sf-comp-coherence-refinement (2) on the localizing closure. This descendant supplies the scalar complete-reduction sections bound used below the proper direct-image coproduct argument; the ancestor does not itself state this estimate. This node isolates the milnor sequence for resolved reduction sections.",
+   "via": [
+    "lem-sfb-complete-reduction-rgamma-upper-bound",
+    "lem-sfb-supported-three-term-scalar-cd",
+    "lem-sfb-finite-constructible-complex-heart-cd",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ReductionSectionsMilnor",
+  "file": "lean/Sheaf/Paper/ReductionSectionsMilnor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CompleteReductionSections.reduction_sections_milnor",
+  "statement": "theorem reduction_sections_milnor\n    (K : DerivedCategory (AdicCompletion.Modules l E U))\n    (P : CochainComplex (AdicCompletion.Modules l E U) ℤ)\n    (hP : (HomologicalComplex.quasiIso (AdicCompletion.Modules l E U) (.up ℤ)).kFlat P)\n    (e : DerivedCategory.Q.obj P ≅ K)\n    (I : CochainComplex (ℕᵒᵖ ⥤ AdicCompletion.Modules l E U) ℤ)\n    (hI : I.IsKInjective)\n    (j : Functor.ofOpSequence\n      (X := fun n : ℕ ↦ (AdicCompletion.level l E U n).obj P)\n      (AdicCompletion.levelStep l E U P) ⟶ I.asFunctor)\n    (hj : ∀ n : ℕ, QuasiIso (j.app (op n)))\n    (L : DerivedCategory Ab.{u + 1})\n    (z : L ≅ DerivedCategory.Q.obj (roosF.obj (sectionTower l E U I))) (q : ℤ) :\n    ∃ (a : ((lim : (ℕᵒᵖ ⥤ Ab.{u + 1}) ⥤ Ab.{u + 1}).rightDerived 1).obj\n          (AdicCompletion.derivedTower l E U K ⋙ rgamma l E U ⋙\n            DerivedCategory.homologyFunctor Ab.{u + 1} (q - 1)) ⟶\n          (DerivedCategory.homologyFunctor Ab.{u + 1} q).obj L)\n      (b : (DerivedCategory.homologyFunctor Ab.{u + 1} q).obj L ⟶\n        limit (AdicCompletion.derivedTower l E U K ⋙ rgamma l E U ⋙\n          DerivedCategory.homologyFunctor Ab.{u + 1} q))\n      (hz : a ≫ b = 0),\n      (ShortComplex.mk a b hz).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "T5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4974a",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261025T144105-L-1177264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4974a",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261025T144105-L-1177264",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to clone; 4 moved decls verbatim vs change record; new sorried statements read against their nodes and Stacks 0D6K/0941/BS products-exact; unit realized list vs removed imports; node proof_deps vs Lean"
+ }
+}

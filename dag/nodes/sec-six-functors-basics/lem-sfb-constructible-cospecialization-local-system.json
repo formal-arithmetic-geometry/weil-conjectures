@@ -1,0 +1,167 @@
+{
+ "id": "lem-sfb-constructible-cospecialization-local-system",
+ "kind": "statement",
+ "title": "Constructible cospecialization criterion over arbitrary schemes",
+ "statement": "Let Y be an arbitrary scheme [def-pc-scheme] and Lambda a commutative Noetherian ring. Let G be a constructible sheaf of Lambda-modules on the small etale site of Y [def-weil-pbc-etale-site, def-weil-sheaf-of-modules-category, def-constructible-constructible]. For every geometric point s: Spec Omega -> Y and geometric point t: Spec Omega-prime -> Y_(s) of the strict localization, suppose the canonical cospecialization map G_s -> G_(t over Y) is bijective (the strict-localization cospecializationMap convention). Then G is finite locally constant [def-constructible-finite-locally-constant]. No Noetherian hypothesis on Y is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma characterize-locally-constant-module, Tag 0GKC: finite-presentation spreading step. The constructible variant replaces the finite-irreducible-components argument by the constructible kernel/cokernel neighborhood argument already proved in lean/WeilConjectures/ConstructibleSheaf/SpecializationCriterion.lean."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-constructible-constructible",
+  "def-constructible-finite-locally-constant"
+ ],
+ "proof": [
+  {
+   "text": "Fix a geometric point s above y. Constructibility makes the stalk M=G_s a finite module; since the coefficient ring is Noetherian it is finitely presented. The existing finite-presentation colimit API exists_comp_toPresheafFiber_eq_id spreads the identity to an affine pointed etale neighborhood V. The constantSheafSpread morphism psi from the constant M-sheaf to G restricted to V is the identity at s.",
+   "uses": [
+    "def-constructible-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant M-sheaf and the inverse image of G are constructible. Their morphism psi has constructible kernel and cokernel by the constructible Serre theorem. On the affine scheme V their zero-stalk loci are open in the constructible topology, by the already proved isOpen_constructibleTopology_stalkZeroLocus API.",
+   "uses": [
+    "thm-constructible-serre",
+    "prop-constructible-pullback",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every generization of the distinguished point of V lifts to a point of the strict localization at s. The stalk map of psi at that point identifies with the cospecialization map of G, hence is an isomorphism. Thus all these generizations lie in the intersection Z of the two zero-stalk loci. The spectral-space constructible-neighborhood lemma, implemented by exists_isOpen_subset_of_isOpen_constructibleTopology, gives an ordinary open neighborhood of the distinguished point contained in Z. This uses only that V is affine (hence spectral), not that the base is locally Noetherian.",
+   "uses": [
+    "lem-weil-pbc-spectral-proconstructible-closure-specialization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On that open neighborhood the kernel and cokernel have zero stalks, so stalk conservativity makes the restriction of psi an isomorphism. Composing with the constant-sheaf inverse-image comparison gives an etale constant neighborhood of y. Such neighborhoods, one for each y, form an etale cover. The existing finite stalk modules supply IsFiniteSheaf, so the sheaf is finite locally constant.",
+   "uses": [
+    "def-constructible-finite-locally-constant",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-constructible",
+  "thm-constructible-serre",
+  "prop-constructible-pullback",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+  "def-constructible-finite-locally-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "W9",
+  "date": "2026-10-23",
+  "reason": "Generalize the existing source-library constructible-topology proof in WeilConjectures/ConstructibleSheaf/SpecializationCriterion.lean by dropping the unused IsLocallyNoetherian base instance and its unused affine-neighborhood instance. All imported APIs already hold over arbitrary schemes; the generalized Lean proof compiles without holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A constructible sheaf of modules on an arbitrary scheme is finite locally constant if every cospecialization map is bijective",
+   "results": [
+    "SheafOfModules.IsFiniteType",
+    "SheafOfModules.LocalGeneratorsData.IsFiniteType",
+    "SheafOfModules.isFinitePresentation",
+    "SheafOfModules.IsFinitePresentation",
+    "CompHausLike.LocallyConstantModule.functor",
+    "SheafOfModules.GeneratingSections.IsFiniteType",
+    "SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType",
+    "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat"
+   ],
+   "date": "2026-10-23",
+   "verdict": "No matching etale constructible cospecialization criterion; generic constant sheaf and finite-presentation results do not supply this implication."
+  },
+  {
+   "tool": "grep",
+   "query": "cospecialization|IsConstructibleSheaf|isFiniteLocallyConstantSheaf",
+   "results": [],
+   "date": "2026-10-23",
+   "verdict": "No matching etale constructible cospecialization criterion; generic constant sheaf and finite-presentation results do not supply this implication."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A constructible sheaf of modules on an arbitrary scheme is finite locally constant if every cospecialization map is bijective",
+   "results": [
+    "CategoryTheory.Sheaf.isConstant_iff_mem_essImage",
+    "CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app",
+    "CategoryTheory.Sheaf.IsConstant.casesOn",
+    "CategoryTheory.Sheaf.IsConstant.mk",
+    "CondensedSet.LocallyConstant.functorFullyFaithful",
+    "CategoryTheory.Sheaf.IsConstant",
+    "SheafOfModules.IsFiniteType",
+    "CategoryTheory.Sheaf.isConstant_of_isIso_counit_app"
+   ],
+   "date": "2026-10-23",
+   "verdict": "No matching etale constructible cospecialization criterion; generic constant sheaf and finite-presentation results do not supply this implication."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "W9",
+  "item": "Sheaf.AlgebraicGeometry.SmoothProperFiniteCohomologyLocalSystem",
+  "date": "2026-10-23"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Local-system input for the smooth full-level cover, before choosing a frame. Constructible cospecialization criterion for its smooth proper finite-cohomology local-system input.",
+   "via": [
+    "lem-sfb-smooth-proper-finite-cohomology-local-system",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleCospecializationLocalSystem",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleCospecializationLocalSystem.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_of_constructible_bijective_cospecialization",
+  "statement": "theorem isFiniteLocallyConstantSheaf_of_constructible_bijective_cospecialization\n    [IsNoetherianRing Λ] {Y : Scheme.{u}}\n    (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf G]\n    (hG : ∀ {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y) {Ω' : Type u}\n      [Field Ω'] [IsSepClosed Ω'] (t : Spec (.of Ω') ⟶ strictLocalization s),\n      Function.Bijective (cospecializationMap s t (ModuleCat.{u + 1} Λ) G).hom) :\n    IsFiniteLocallyConstantSheaf G",
+  "branch": "sheaf-dag",
+  "by": "W9",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261023T132331-L-2256119",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261023T132331-L-2256119",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

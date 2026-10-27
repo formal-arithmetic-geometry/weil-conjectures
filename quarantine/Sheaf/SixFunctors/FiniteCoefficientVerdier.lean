@@ -5,150 +5,27 @@ Authors: SHEAF group NH
 -/
 module
 
-public import Sheaf.Paper.FiniteFieldFiber
-public import Sheaf.Paper.FiniteTorAmplitude
-public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
-public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
-public import Sheaf.Paper.SfIntegralConstructible
-public import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
-public import Sheaf.Paper.SfDerivedComplete
-public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import Sheaf.Paper.DualityPairing
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
-public import WeilConjectures.Compactification.NagataCompactification
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-public import Sheaf.SixFunctors.FiniteDualitySiteComparison
-public import Sheaf.Paper.EtaleDerivedScalarTensor
-public import Sheaf.Paper.FiniteTorAmplitudeProEtaleModule
-public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleIntrinsicComparison
-public import Sheaf.Paper.FiniteTorAmplitudeSites
-public import Sheaf.SixFunctors.FiniteDualizing
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+public import Sheaf.SixFunctors.FiniteCoefficientVerdierData
 
 import Sheaf.Paper.WeilVerdierPreservationStrata
-import Sheaf.Paper.ComparisonTorAmplitude
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import Sheaf.Paper.ProEtaleConstructibleOrigin
-import Sheaf.Paper.FiniteCoefficientFlatModel
-import Sheaf.Paper.BasicOperationsCoefficientReduction
-import Sheaf.Paper.FiniteCoefficientHomChange
+import Sheaf.Paper.FiniteHomDomainCalculus
+import Sheaf.SixFunctors.FiniteVerdierCoefficientDiagrams
+import Sheaf.SixFunctors.FiniteVerdierProEtaleLeftTor
 
 /-! # Finite coefficient change for Verdier duality
 
-Source: Weil conjectures blueprint, `sec-six-functors/sk-prop-sf-biduality-general`,
-node `cor-coef-finite-verdier` (blueprint: cor-coef-finite-verdier).
-
-## Main definitions
-
-* `FiniteVerdierCoherentComparison`: the evaluation, biduality, identity and cocycle diagrams.
-* `FiniteVerdierSiteComparison`: those diagrams with the normalized scalar tensorator.
-* `FiniteCoefficientVerdierComparison`: specialization to both finite coefficient sites.
-
-## Main statements
-
-* `finite_coefficient_verdier`: coefficient compatibility on finite-Tor constructible objects.
+Source: blueprint cor-coef-finite-verdier.
 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
 universe u v w
-
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
-open AlgebraicGeometry
-
+open AlgebraicGeometry AlgebraicGeometry.ProEtale
 namespace WeilConjectures
 
-open AlgebraicGeometry.ProEtale
-
-/-- Ordinary scalar extension on either of the two finite-coefficient sites.
-Source: blueprint cor-coef-finite-verdier, proof step 6, ordinary balanced tensor.
-(blueprint: cor-coef-finite-verdier). -/
-def finiteVerdierOrdinaryExtension
-    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-    (J : GrothendieckTopology C) {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) :=
-  Sheaf.composeAndSheafify J (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ)
-
-/-- The ordinary scalar adjunction, with its actual sectionwise unit.
-Source: blueprint cor-coef-finite-verdier, proof step 6.
-(blueprint: cor-coef-finite-verdier). -/
-def finiteVerdierOrdinaryAdjunction
-    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-    (J : GrothendieckTopology C) {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) : finiteVerdierOrdinaryExtension J φ ⊣ Sheaf.restrictScalars J φ :=
-  Sheaf.adjunction J (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ)
-
-/-- Additivity inherited from the ordinary scalar adjunction.
-Source: blueprint cor-coef-finite-verdier, proof step 6.
-(blueprint: cor-coef-finite-verdier). -/
-instance finiteVerdierOrdinaryExtension_additive
-    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-    (J : GrothendieckTopology C) {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) : (finiteVerdierOrdinaryExtension J φ).Additive :=
-  (finiteVerdierOrdinaryAdjunction J φ).left_adjoint_additive
-
-/-- The oplax structure is ordinary scalar balancing, rather than a free tensorator.
-Source: blueprint cor-coef-finite-verdier, proof step 6.
-(blueprint: cor-coef-finite-verdier). -/
-instance finiteVerdierOrdinaryExtension_oplax
-    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-    (J : GrothendieckTopology C) {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) : (finiteVerdierOrdinaryExtension J φ).OplaxMonoidal :=
-  composeAndSheafifyOplaxMonoidal J (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ)
-
-/-- The adjunct of the localized ordinary scalar unit, with the abelian structures
-shared before specializing to sheaves. This is a construction, not an assumed map.
-Source: blueprint cor-coef-finite-verdier, proof steps 1 and 6.
-(blueprint: cor-coef-finite-verdier). -/
-def finiteVerdierScalarRepresentativeAux
-    {C : Type v} [Category.{u + 1} C] [Abelian C] [HasDerivedCategory.{u + 1} C]
-    {D : Type w} [Category.{u + 1} D] [Abelian D] [HasDerivedCategory.{u + 1} D]
-    (L : C ⥤ D) [L.Additive] (R : D ⥤ C) [R.Additive]
-    [PreservesFiniteLimits R] [PreservesFiniteColimits R]
-    (ordinary : L ⊣ R) {S : DerivedCategory C ⥤ DerivedCategory D}
-    (derived : S ⊣ R.mapDerivedCategory) (P : CochainComplex C ℤ) :
-    S.obj (DerivedCategory.Q.obj P) ⟶
-      DerivedCategory.Q.obj ((L.mapHomologicalComplex (.up ℤ)).obj P) :=
-  (derived.homEquiv _ _).symm
-    (DerivedCategory.Q.map
-        ((Functor.mapHomologicalComplexIdIso C (.up ℤ)).inv.app P ≫
-          (NatTrans.mapHomologicalComplex ordinary.unit (.up ℤ)).app P ≫
-          (Functor.mapHomologicalComplexCompIso (Iso.refl (L ⋙ R)) (.up ℤ)).inv.app P) ≫
-      R.mapDerivedCategoryFactors.inv.app ((L.mapHomologicalComplex (.up ℤ)).obj P))
-
-/-- The derived scalar counit on a cochain representative. This is the adjunct of
-localizing the ordinary unit, so it fixes the scalar tensor normalization without
-assuming flatness of the quotient.
-Source: blueprint cor-coef-finite-verdier, proof steps 1 and 6.
-(blueprint: cor-coef-finite-verdier). -/
-def finiteVerdierScalarRepresentative
-    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-    (J : GrothendieckTopology C) {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) (P : CochainComplex (Sheaf J (ModuleCat.{u + 1} A)) ℤ) :
-    (pbcFixedScalarExtension J φ).obj (DerivedCategory.Q.obj P) ⟶
-      DerivedCategory.Q.obj
-        (((finiteVerdierOrdinaryExtension J φ).mapHomologicalComplex (.up ℤ)).obj P) :=
-  finiteVerdierScalarRepresentativeAux
-    (finiteVerdierOrdinaryExtension J φ) (Sheaf.restrictScalars J φ)
-    (finiteVerdierOrdinaryAdjunction J φ)
-    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars J φ)) P
-
-/-- The coefficient compatibility diagrams with all ambient structures shared explicitly.
-This helper is specialized below to the two prescribed derived module categories.
-Source: blueprint cor-coef-finite-verdier, proof steps 2--6.
-(blueprint: cor-coef-finite-verdier). -/
-def FiniteVerdierCoherentComparison
+private theorem coherent_with_left_bounds
     (V : ℕ → Type v) [∀ n, Category.{w} (V n)]
     (T : ∀ n, V n ⥤ V n ⥤ V n) (H : ∀ n, (V n)ᵒᵖ ⥤ V n ⥤ V n)
     (W : ∀ n, V n) (P : ∀ n, ObjectProperty (V n))
@@ -162,344 +39,75 @@ def FiniteVerdierCoherentComparison
     (ev : ∀ n (K : V n), ((T n).obj (((H n).obj (op K)).obj (W n))).obj K ⟶ W n)
     (δ : ∀ n (K : V n),
       K ⟶ (dualityDoubleFunctor (H n) (W n)).obj K)
-    (uMap : ∀ {n m : ℕ} (h : m ≤ n), (S h).obj (W n) ⟶ W m) (d : ℕ) : Prop :=
-  ∃ comparison : ∀ {n m : ℕ} (h : m ≤ n),
-      (H n).flip.obj (W n) ⋙ S h ⟶
-        (S h).op ⋙ (H m).flip.obj (W m),
-    (∀ {n m : ℕ} (h : m ≤ n) (K : V n), P n K →
-      P m ((S h).obj K) ∧ IsIso ((comparison h).app (op K)) ∧
-      ((T m).map ((comparison h).app (op K))).app ((S h).obj K) ≫ ev m ((S h).obj K) =
-        (μ h).inv.app ((((H n).obj (op K)).obj (W n)), K) ≫
-          (S h).map (ev n K) ≫ uMap h ∧
-      (S h).map (δ n K) ≫
-          (comparison h).app (op (((H n).obj (op K)).obj (W n))) =
-        δ m ((S h).obj K) ≫
-          ((H m).flip.obj (W m)).map (((comparison h).app (op K)).op) ∧
-      (∀ a b : ℤ, a ≤ b → Tor n a b K →
+    (uMap : ∀ {n m : ℕ} (h : m ≤ n), (S h).obj (W n) ⟶ W m) (d : ℕ)
+    (hcore : FiniteVerdierCoherentComparison V T H W P (fun _ _ _ _ ↦ True)
+      (fun {_ _} h ↦ S h) unit (fun {_ _ _} h g ↦ comp h g)
+      (fun {_ _} h ↦ μ h) ev δ (fun {_ _} h ↦ uMap h) 0)
+    (hbound : ∀ {n m : ℕ} (h : m ≤ n) (K : V n), P n K →
+      ∀ a b : ℤ, a ≤ b → Tor n a b K →
         Tor m (-b - 2 * (d : ℤ)) (-a)
-          ((S h).obj (((H n).obj (op K)).obj (W n))) ∧
-        Tor m (-b - 2 * (d : ℤ)) (-a)
-          (((H m).obj (op ((S h).obj K))).obj (W m)))) ∧
-    (∀ (n : ℕ) (K : V n), P n K → (comparison (le_refl n)).app (op K) =
-      (unit n).hom.app (((H n).obj (op K)).obj (W n)) ≫
-        ((H n).flip.obj (W n)).map (((unit n).hom.app K).op)) ∧
-    (∀ {n m r : ℕ} (h : m ≤ n) (g : r ≤ m) (K : V n), P n K →
-      (S g).map ((comparison h).app (op K)) ≫
-          (comparison g).app (op ((S h).obj K)) ≫
-          ((H r).flip.obj (W r)).map (((comp h g).inv.app K).op) =
-        (comp h g).hom.app (((H n).obj (op K)).obj (W n)) ≫
-          (comparison (g.trans h)).app (op K))
+          ((S h).obj (((H n).obj (op K)).obj (W n))))
+    (hiso : ∀ (n : ℕ) (a b : ℤ) {K L : V n}, (K ≅ L) →
+      Tor n a b K → Tor n a b L) :
+    FiniteVerdierCoherentComparison V T H W P Tor
+      (fun {_ _} h ↦ S h) unit (fun {_ _ _} h g ↦ comp h g)
+      (fun {_ _} h ↦ μ h) ev δ (fun {_ _} h ↦ uMap h) d := by
+  obtain ⟨c, hc, hunit, hcomp⟩ := hcore
+  refine ⟨c, ?_, hunit, hcomp⟩
+  intro n m h K hK
+  obtain ⟨hP, hi, he, hδ, _⟩ := hc h K hK
+  refine ⟨hP, hi, he, hδ, ?_⟩
+  intro a b hab ht
+  have hb := hbound h K hK a b hab ht
+  let := hi
+  exact ⟨hb, hiso m _ _ (asIso ((c h).app (op K))) hb⟩
 
-/-- The complete coefficient comparison on one fixed site. The dualizing maps `uMap`,
-evaluations `ev`, and transposes `δ` are fixed before the comparisons are quantified.
-The tensorator is normalized on ordinary cochain representatives, using the published
-normalization predicate. Invertibility is asserted only on `P`, never on the whole
-unbounded category. The two final equations are the identity and quotient cocycle,
-with the canonical scalar associators displayed.
-Source: blueprint cor-coef-finite-verdier, all clauses and proof steps 2--6.
-(blueprint: cor-coef-finite-verdier). -/
-def FiniteVerdierSiteComparison
-    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-    (J : GrothendieckTopology C)
-    (R : ℕ → Type (u + 1)) [∀ n, CommRing (R n)]
-    (φ : ∀ {n m : ℕ}, m ≤ n → R n →+* R m)
-    (φId : ∀ n, φ (le_refl n) = RingHom.id (R n))
-    (φComp : ∀ {n m r : ℕ} (h : m ≤ n) (g : r ≤ m),
-      φ (g.trans h) = (φ g).comp (φ h))
-    (W : ∀ n : ℕ, DerivedCategory (Sheaf J (ModuleCat.{u + 1}
-      (R n))))
-    (P : ∀ n : ℕ, ObjectProperty (DerivedCategory (Sheaf J (ModuleCat.{u + 1}
-      (R n)))))
-    (Tor : ∀ n : ℕ, ℤ → ℤ → ObjectProperty (DerivedCategory
-      (Sheaf J (ModuleCat.{u + 1} (R n)))))
-    (T : ∀ n : ℕ,
-      DerivedCategory (Sheaf J (ModuleCat.{u + 1} (R n))) ⥤
-        DerivedCategory (Sheaf J (ModuleCat.{u + 1} (R n))) ⥤
-          DerivedCategory (Sheaf J (ModuleCat.{u + 1} (R n))))
-    (H : ∀ n : ℕ,
-      (DerivedCategory (Sheaf J (ModuleCat.{u + 1} (R n))))ᵒᵖ ⥤
-        DerivedCategory (Sheaf J (ModuleCat.{u + 1} (R n))) ⥤
-          DerivedCategory (Sheaf J (ModuleCat.{u + 1} (R n))))
-    (ev : ∀ (n : ℕ) (K : DerivedCategory
-      (Sheaf J (ModuleCat.{u + 1} (R n)))),
-      ((T n).obj (((H n).obj (op K)).obj (W n))).obj K ⟶ W n)
-    (δ : ∀ (n : ℕ) (K : DerivedCategory
-      (Sheaf J (ModuleCat.{u + 1} (R n)))),
-      K ⟶ (dualityDoubleFunctor (H n) (W n)).obj K)
-    (uMap : ∀ {n m : ℕ} (h : m ≤ n),
-      (pbcFixedScalarExtension J (φ h)).obj (W n) ⟶ W m)
-    (d : ℕ) : Prop :=
-  letI {n m : ℕ} (h : m ≤ n) : (finiteVerdierOrdinaryExtension J (φ h)).IsLeftAdjoint :=
-    (finiteVerdierOrdinaryAdjunction J (φ h)).isLeftAdjoint
-  ∃ μ : ∀ {n m : ℕ} (h : m ≤ n),
-      Functor.uncurry.obj (T n) ⋙ pbcFixedScalarExtension J (φ h) ≅
-        (pbcFixedScalarExtension J (φ h)).prod (pbcFixedScalarExtension J (φ h)) ⋙
-          Functor.uncurry.obj (T m),
-    (∀ {n m : ℕ} (h : m ≤ n), ∃ e,
-      Etale.ExceptionalCoefficients.TensorNormalizationAux
-        (finiteVerdierOrdinaryExtension J (φ h)) (pbcFixedScalarExtension J (φ h))
-        (finiteVerdierScalarRepresentative J (φ h)) e ∧ HEq (μ h) e) ∧
-    @FiniteVerdierCoherentComparison
-      (fun n ↦ DerivedCategory (Sheaf J (ModuleCat.{u + 1} (R n))))
-      (fun _n ↦ inferInstance) T H W P Tor
-      (fun {_ _} h ↦ pbcFixedScalarExtension J (φ h))
-      (fun n ↦ normalizedOriginScalarUnit J (φ (le_refl n)) (φId n))
-      (fun {_ _ _} h g ↦ pbcFixedScalarExtensionComp J (φ h) (φ g) (φ (g.trans h))
-        (φComp h g)) μ ev δ (fun {_ _} h ↦ uMap h) d
+private theorem etale_tor_of_iso
+    (R : Type (u + 1)) [CommRing R] (X : Scheme.{u}) (a b : ℤ)
+    {K L : Etale.DerivedCategoryModule R X} (e : K ≅ L)
+    (ht : Etale.DerivedCategory.hasTorAmplitudeIn R X a b K) :
+    Etale.DerivedCategory.hasTorAmplitudeIn R X a b L := by
+  intro M i hi
+  exact IsZero.of_iso (ht M i hi)
+    ((_root_.DerivedCategory.homologyFunctor _ i).mapIso
+      (((Etale.derivedTensor (ModuleCat.{u + 1} R) X).mapIso e).app
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj M))).symm
 
-/-- Evaluation projected from the recorded, normalized etale pairing.
-The coefficient category is shared before specializing to modules.
-Source: blueprint cor-coef-finite-verdier, proof steps 3--4.
-(blueprint: cor-coef-finite-verdier). -/
-def finiteVerdierEtaleEvaluation
-    (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
-    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
-    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
-    (X : Scheme.{u}) {W : DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (h : Etale.AmbientDualityPairing A X W)
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    ((Etale.derivedTensor A X).obj (((Etale.derivedHom A X).obj (op K)).obj W)).obj K ⟶ W :=
-  h.choose_spec.2.choose K
+private theorem proEtale_tor_of_iso
+    (X : Scheme.{u}) (R : Type u) [CommRing R] (a b : ℤ)
+    {K L : Scheme.proEtaleDerivedCategory X R} (e : K ≅ L)
+    (ht : Scheme.HasProEtaleTorAmplitude X R K a b) :
+    Scheme.HasProEtaleTorAmplitude X R L a b := by
+  refine ⟨ht.1, ?_⟩
+  intro A P hA f hf hP M i hi
+  obtain ⟨eA⟩ := hA
+  exact ht.2 A P ⟨eA ≪≫ e.symm⟩ f hf hP M i hi
 
-/-- Evaluation projected from the recorded, normalized pro-etale pairing.
-The coefficient category is shared before specializing to modules.
-Source: blueprint cor-coef-finite-verdier, proof steps 3--4 and 7.
-(blueprint: cor-coef-finite-verdier). -/
-def finiteVerdierProEtaleEvaluation
-    (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
-    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
-    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
-    (X : Scheme.{u}) {W : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-    (h : ProEtale.AmbientDualityPairing A X W)
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
-    ((ProEtale.derivedTensor A X).obj
-      (((ProEtale.derivedHom A X).obj (op K)).obj W)).obj K ⟶ W :=
-  h.choose_spec.2.choose K
-
-/-- The recorded pro-etale double-dual arrow with the published Hom wrapper.
-Source: blueprint cor-coef-finite-verdier, proof step 4.
-(blueprint: cor-coef-finite-verdier). -/
-def finiteVerdierProEtaleBiduality
-    (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
-    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
-    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
-    (X : Scheme.{u}) {W : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
-    (h : ProEtale.AmbientDualityPairing A X W)
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
-    K ⟶ (dualityDoubleFunctor (ProEtale.derivedHom A X) W).obj K :=
-  ProEtale.AmbientDualityPairing.bidualityMap A X h K
-
-/-- The published Etale derived tensor, with the module coefficient structures shared.
-Source: blueprint cor-coef-finite-verdier, proof steps 3--4.
-(blueprint: cor-coef-finite-verdier). -/
-def finiteVerdierEtaleTensorAt (R : Type (u + 1)) [CommRing R] (X : Scheme.{u}) :
-    DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) ⥤
-      DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) ⥤
-      DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) :=
-  Etale.derivedTensor (ModuleCat.{u + 1} R) X
-
-/-- The published Etale derived hom, with the module coefficient structures shared.
-Source: blueprint cor-coef-finite-verdier, proof steps 3--4.
-(blueprint: cor-coef-finite-verdier). -/
-def finiteVerdierEtaleHomAt (R : Type (u + 1)) [CommRing R] (X : Scheme.{u}) :
-    (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)))ᵒᵖ ⥤
-      DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) ⥤
-      DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) :=
-  Etale.derivedHom (ModuleCat.{u + 1} R) X
-
-/-- The recorded normalized Etale pairing, specialized to module coefficients.
-Source: blueprint cor-coef-finite-verdier, proof steps 3--4.
-(blueprint: cor-coef-finite-verdier). -/
-def finiteVerdierEtalePairingAt (R : Type (u + 1)) [CommRing R] (X : Scheme.{u})
-    (W : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) : Prop :=
-  Etale.AmbientDualityPairing (ModuleCat.{u + 1} R) X W
-
-/-- The specified Etale evaluation at module coefficients.
-Source: blueprint cor-coef-finite-verdier, proof steps 3--4.
-(blueprint: cor-coef-finite-verdier). -/
-def finiteVerdierEtaleEvaluationAt (R : Type (u + 1)) [CommRing R] (X : Scheme.{u})
-    {W : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))}
-    (h : finiteVerdierEtalePairingAt R X W)
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
-    ((finiteVerdierEtaleTensorAt R X).obj 
-      (((finiteVerdierEtaleHomAt R X).obj (op K)).obj W)).obj K ⟶
-      W :=
-  finiteVerdierEtaleEvaluation (ModuleCat.{u + 1} R) X h K
-
-/-- The specified Etale transpose of evaluation at module coefficients.
-Source: blueprint cor-coef-finite-verdier, proof steps 3--4.
-(blueprint: cor-coef-finite-verdier). -/
-def finiteVerdierEtaleBidualityAt (R : Type (u + 1)) [CommRing R] (X : Scheme.{u})
-    {W : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))}
-    (h : finiteVerdierEtalePairingAt R X W)
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
-    K ⟶ (dualityDoubleFunctor (finiteVerdierEtaleHomAt R X) W).obj K :=
-  Etale.AmbientDualityPairing.bidualityMap (ModuleCat.{u + 1} R) X h K
-
-/-- The published ProEtale derived tensor, with the module coefficient structures shared.
-Source: blueprint cor-coef-finite-verdier, proof steps 3--4.
-(blueprint: cor-coef-finite-verdier). -/
-def finiteVerdierProEtaleTensorAt (R : Type (u + 1)) [CommRing R] (X : Scheme.{u}) :
-    DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)) ⥤
-      DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)) ⥤
-      DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)) :=
-  ProEtale.derivedTensor (ModuleCat.{u + 1} R) X
-
-/-- The published ProEtale derived hom, with the module coefficient structures shared.
-Source: blueprint cor-coef-finite-verdier, proof steps 3--4.
-(blueprint: cor-coef-finite-verdier). -/
-def finiteVerdierProEtaleHomAt (R : Type (u + 1)) [CommRing R] (X : Scheme.{u}) :
-    (DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)))ᵒᵖ ⥤
-      DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)) ⥤
-      DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)) :=
-  ProEtale.derivedHom (ModuleCat.{u + 1} R) X
-
-/-- The recorded normalized ProEtale pairing, specialized to module coefficients.
-Source: blueprint cor-coef-finite-verdier, proof steps 3--4.
-(blueprint: cor-coef-finite-verdier). -/
-def finiteVerdierProEtalePairingAt (R : Type (u + 1)) [CommRing R] (X : Scheme.{u})
-    (W : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) : Prop :=
-  ProEtale.AmbientDualityPairing (ModuleCat.{u + 1} R) X W
-
-/-- The specified ProEtale evaluation at module coefficients.
-Source: blueprint cor-coef-finite-verdier, proof steps 3--4.
-(blueprint: cor-coef-finite-verdier). -/
-def finiteVerdierProEtaleEvaluationAt (R : Type (u + 1)) [CommRing R] (X : Scheme.{u})
-    {W : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))}
-    (h : finiteVerdierProEtalePairingAt R X W)
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) :
-    ((finiteVerdierProEtaleTensorAt R X).obj 
-      (((finiteVerdierProEtaleHomAt R X).obj (op K)).obj W)).obj K ⟶
-      W :=
-  finiteVerdierProEtaleEvaluation (ModuleCat.{u + 1} R) X h K
-
-/-- The specified ProEtale transpose of evaluation at module coefficients.
-Source: blueprint cor-coef-finite-verdier, proof steps 3--4.
-(blueprint: cor-coef-finite-verdier). -/
-def finiteVerdierProEtaleBidualityAt (R : Type (u + 1)) [CommRing R] (X : Scheme.{u})
-    {W : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))}
-    (h : finiteVerdierProEtalePairingAt R X W)
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) :
-    K ⟶ (dualityDoubleFunctor (finiteVerdierProEtaleHomAt R X) W).obj K :=
-  finiteVerdierProEtaleBiduality (ModuleCat.{u + 1} R) X h K
-
-/-- The etale specialization of the full coefficient diagrams.
-Source: blueprint cor-coef-finite-verdier, proof steps 2--7.
-(blueprint: cor-coef-finite-verdier). -/
-def FiniteVerdierEtaleComparison
-    (X : Scheme.{u}) (R : ℕ → Type (u + 1)) [∀ n, CommRing (R n)]
-    (φ : ∀ {n m : ℕ}, m ≤ n → R n →+* R m)
-    (φId : ∀ n, φ (le_refl n) = RingHom.id (R n))
-    (φComp : ∀ {n m r : ℕ} (h : m ≤ n) (g : r ≤ m),
-      φ (g.trans h) = (φ g).comp (φ h))
-    (W : ∀ n, Etale.DerivedCategoryModule (R n) X)
-    (Pet : ∀ n, ObjectProperty (Etale.DerivedCategoryModule (R n) X))
-    (_Ppro : ∀ n, ObjectProperty
-      (DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R n)))))
-    (TorEt : ∀ n, ℤ → ℤ → ObjectProperty (Etale.DerivedCategoryModule (R n) X))
-    (_TorPro : ∀ n, ℤ → ℤ → ObjectProperty
-      (DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R n)))))
-    (uEt : ∀ {n m : ℕ} (h : m ≤ n), (Etale.scalarExtension (φ h) X).obj (W n) ⟶ W m)
-    (d : ℕ) : Prop :=
-  (∃ hEt : ∀ n : ℕ, finiteVerdierEtalePairingAt
-      (R n) X (W n),
-    @FiniteVerdierSiteComparison _ _ _ X.smallEtaleTopology R
-      (fun _n ↦ inferInstance) (fun {_ _} h ↦ φ h)
-      φId (fun {_ _ _} h g ↦ φComp h g)
-      W
-      Pet
-      TorEt
-      (fun n ↦ finiteVerdierEtaleTensorAt (R n) X)
-      (fun n ↦ finiteVerdierEtaleHomAt (R n) X)
-      (fun n ↦ finiteVerdierEtaleEvaluationAt (R n) X (hEt n))
-      (fun n ↦ finiteVerdierEtaleBidualityAt (R n) X (hEt n))
-      (fun {_ _} h ↦ uEt h) d)
-
-/-- The pro-etale specialization, with transported dualizing object and coefficient map.
-Source: blueprint cor-coef-finite-verdier, proof steps 2--7.
-(blueprint: cor-coef-finite-verdier). -/
-def FiniteVerdierProEtaleComparison
-    (X : Scheme.{u}) (R : ℕ → Type (u + 1)) [∀ n, CommRing (R n)]
-    (φ : ∀ {n m : ℕ}, m ≤ n → R n →+* R m)
-    (φId : ∀ n, φ (le_refl n) = RingHom.id (R n))
-    (φComp : ∀ {n m r : ℕ} (h : m ≤ n) (g : r ≤ m),
-      φ (g.trans h) = (φ g).comp (φ h))
-    (W : ∀ n, Etale.DerivedCategoryModule (R n) X)
-    (_Pet : ∀ n, ObjectProperty (Etale.DerivedCategoryModule (R n) X))
-    (Ppro : ∀ n, ObjectProperty
-      (DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R n)))))
-    (_TorEt : ∀ n, ℤ → ℤ → ObjectProperty (Etale.DerivedCategoryModule (R n) X))
-    (TorPro : ∀ n, ℤ → ℤ → ObjectProperty
-      (DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R n)))))
-    (uEt : ∀ {n m : ℕ} (h : m ≤ n), (Etale.scalarExtension (φ h) X).obj (W n) ⟶ W m)
-    (d : ℕ) : Prop :=
-  let F := fun n ↦ (comparisonUpperStar (ModuleCat.{u + 1}
-    (R n)) X).mapDerivedCategory
-  (∃ hPro : ∀ n : ℕ, finiteVerdierProEtalePairingAt
-      (R n) X ((F n).obj (W n)),
-    @FiniteVerdierSiteComparison _ _ _ (Scheme.ProEt.topology X) R
-      (fun _n ↦ inferInstance) (fun {_ _} h ↦ φ h)
-      φId (fun {_ _ _} h g ↦ φComp h g)
-      (fun n ↦ (F n).obj (W n))
-      Ppro
-      TorPro
-      (fun n ↦ finiteVerdierProEtaleTensorAt (R n) X)
-      (fun n ↦ finiteVerdierProEtaleHomAt (R n) X)
-      (fun n ↦ finiteVerdierProEtaleEvaluationAt (R n) X (hPro n))
-      (fun n ↦ finiteVerdierProEtaleBidualityAt (R n) X (hPro n))
-      (fun {n m} h ↦ (pbcComparisonReduction X (φ h)).hom.app
-        (W n) ≫ (F m).map (uEt h)) d)
-
-/-- Both sites with the same coefficient tower and dimension bound.
-Source: blueprint cor-coef-finite-verdier, proof steps 2--7.
-(blueprint: cor-coef-finite-verdier). -/
-def FiniteVerdierTwoSitesComparison
-    (X : Scheme.{u}) (R : ℕ → Type (u + 1)) [∀ n, CommRing (R n)]
-    (φ : ∀ {n m : ℕ}, m ≤ n → R n →+* R m)
-    (φId : ∀ n, φ (le_refl n) = RingHom.id (R n))
-    (φComp : ∀ {n m r : ℕ} (h : m ≤ n) (g : r ≤ m),
-      φ (g.trans h) = (φ g).comp (φ h))
-    (W : ∀ n, Etale.DerivedCategoryModule (R n) X)
-    (Pet : ∀ n, ObjectProperty (Etale.DerivedCategoryModule (R n) X))
-    (Ppro : ∀ n, ObjectProperty
-      (DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R n)))))
-    (TorEt : ∀ n, ℤ → ℤ → ObjectProperty (Etale.DerivedCategoryModule (R n) X))
-    (TorPro : ∀ n, ℤ → ℤ → ObjectProperty
-      (DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R n)))))
-    (uEt : ∀ {n m : ℕ} (h : m ≤ n), (Etale.scalarExtension (φ h) X).obj (W n) ⟶ W m)
-    (d : ℕ) : Prop :=
-  FiniteVerdierEtaleComparison X R (fun {_ _} h ↦ φ h) φId
-    (fun {_ _ _} h g ↦ φComp h g) W Pet Ppro TorEt TorPro (fun {_ _} h ↦ uEt h) d ∧
-  FiniteVerdierProEtaleComparison X R (fun {_ _} h ↦ φ h) φId
-    (fun {_ _ _} h g ↦ φComp h g) W Pet Ppro TorEt TorPro (fun {_ _} h ↦ uEt h) d
-
-/-- Both finite coefficient sites, with the pro-etale dualizing object explicitly
-transported from the etale object. Positive levels are indexed by `n+1`; hence all
-levels in the node, including level one and all identity quotients, occur.
-Source: blueprint cor-coef-finite-verdier, proof steps 1 and 7.
-(blueprint: cor-coef-finite-verdier). -/
-def FiniteCoefficientVerdierComparison
-    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
+private theorem etale_left_tor_bound
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (d : ℕ) (X : Scheme.{u})
-    (_hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
+    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
     [X.Over (Spec (.of D.k))]
     [IsSeparated (X ↘ Spec (.of D.k))]
     [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
-    [QuasiCompact (X ↘ Spec (.of D.k))] : Prop :=
-  @FiniteVerdierTwoSitesComparison X (finiteDualizingCoeff l E)
-    (fun _n ↦ inferInstance) (fun {_ _} h ↦ finiteDualizingQuotient l E h)
-    (finiteDualizingQuotient_id l E) (fun {_ _ _} h g ↦ finiteDualizingQuotient_comp l E h g)
-    (finiteDualizingEtaleTerm l E D X)
-    (fun n ↦ finiteTorConstructibleEtale l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) X)
-    (fun n ↦ finiteTorConstructibleProEtaleModule l E (n + 1)
-      (Nat.succ_le_succ (Nat.zero_le n)) X)
-    (fun n ↦ Etale.DerivedCategory.hasTorAmplitudeIn (finiteDualizingCoeff l E n) X)
-    (fun n a b K ↦ Scheme.HasProEtaleTorAmplitude X
-      (Padic.coefficientExtensionRing l E (n + 1))
-      ((ProEtale.finiteCoefficientIntrinsicRealization X
-        (Padic.coefficientExtensionRing l E (n + 1))).mapDerivedCategory.obj K) a b)
-    (fun {_ _} h ↦ finiteDualizingEtaleComparison l E D X h) d
+    [QuasiCompact (X ↘ Spec (.of D.k))]
+    {n m : ℕ} (h : m ≤ n)
+    (K : Etale.DerivedCategoryModule (finiteDualizingCoeff l E n) X)
+    (hK : finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X K)
+    (a b : ℤ) (hab : a ≤ b)
+    (ht : Etale.DerivedCategory.hasTorAmplitudeIn (finiteDualizingCoeff l E n) X a b K) :
+    Etale.DerivedCategory.hasTorAmplitudeIn (finiteDualizingCoeff l E m) X
+      (-b - 2 * (d : ℤ)) (-a)
+      ((Etale.scalarExtension (finiteDualizingQuotient l E h) X).obj
+        (((Etale.derivedHom (ModuleCat.{u + 1} (finiteDualizingCoeff l E n)) X).obj
+          (op K)).obj (finiteDualizingEtaleTerm l E D X n))) := by
+  have hv := verdier_preservation_strata D l hl E (n + 1) (Nat.succ_pos n) X d hd
+    a b K hK.1 ht
+  have hi : -b - 2 * (d : ℤ) ≤ -a := by omega
+  have hr := finiteHomDomain_flatModel D l hl E X h
+    (-b - 2 * (d : ℤ)) (-a) hi _ hv.1 hv.2
+  exact hr.2.2.2
 
 /-- Finite reductions of Verdier duality, including both sites and all coefficient
 quotients. The compatibility equations use the specified evaluation and its transpose.
@@ -543,6 +151,22 @@ theorem finite_coefficient_verdier
     [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
     [QuasiCompact (X ↘ Spec (.of D.k))] :
     FiniteCoefficientVerdierComparison D l hl E d X hd := by
-  sorry
+  obtain ⟨⟨hEt, μEt, hnEt, hcEt⟩, ⟨hPro, μPro, hnPro, hcPro⟩⟩ :=
+    finiteVerdier_coefficient_diagrams D l hl E X
+  constructor
+  · refine ⟨hEt, μEt, hnEt, ?_⟩
+    apply coherent_with_left_bounds (hcore := hcEt)
+    · intro n m h K hK a b hab ht
+      exact etale_left_tor_bound D l hl E d X hd h K hK a b hab ht
+    · intro n a b K L e ht
+      exact etale_tor_of_iso (finiteDualizingCoeff l E n) X a b e ht
+  · refine ⟨hPro, μPro, hnPro, ?_⟩
+    apply coherent_with_left_bounds (hcore := hcPro)
+    · intro n m h K hK a b hab ht
+      exact finiteVerdier_proEtale_left_tor D l hl E d X hd h K hK a b hab ht
+    · intro n a b K L e ht
+      exact proEtale_tor_of_iso X (Padic.coefficientExtensionRing l E (n + 1)) a b
+        ((ProEtale.finiteCoefficientIntrinsicRealization X
+          (Padic.coefficientExtensionRing l E (n + 1))).mapDerivedCategory.mapIso e) ht
 
 end WeilConjectures

@@ -15,41 +15,42 @@
  ],
  "proof": [
   {
-   "text": "Put $P(T)=U(T)/j(R(T))$ and $Q=P^\\#=U/R$. The assumption that $j(R(T))$ is already an equivalence relation means that $[a]=[b]$ in $P(T)$ if and only if there is $r\\in R(T)$ with $sr=a$ and $tr=b$; no chain of generated relations is needed. For a section $(a,b)$ of $h_U\\times_Qh_U$ over $T$, the classes $[a],[b]\\in P(T)$ have equal images in $Q(T)$. Apply the final assertion of [lem-weil-pbc-site-sheafification-sections-local] to $P$ on the big fppf site (with set values in a universe containing its objects and arrows). It gives an fppf covering $\\{T_i\\to T\\}$ on which $[a|_{T_i}]=[b|_{T_i}]$. By the defining equivalence relation there are $r_i\\in R(T_i)$ with $sr_i=a|_{T_i}$ and $tr_i=b|_{T_i}$. Hence the canonical map is locally surjective. Conversely any such relation sections give equality in $Q$ locally, and then globally by the separatedness of $Q$. This proves the local-witness assertion of Tag 045Y rather than assuming its omitted proof.",
+   "text": "Use [lem-trf-fppf-universal-unit-locally-injective] to obtain local injectivity of η. Its proof establishes the smallness bridge via [lem-trf-fppf-small-local-representatives], so the specified universal property in Type u suffices.",
+   "uses": [
+    "lem-trf-fppf-universal-unit-locally-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 045Y (lemma-quotient-pre-equivalence), together with Definition of quotient sheaf immediately above it and the monomorphism hypothesis."
+   }
+  },
+  {
+   "text": "Evaluate the presheaf coequalizer at T; evaluation preserves this coequalizer. Map it, by its universal property, into the quotient set of U(T) by the equivalence relation hrel T. Quotient.exact shows that equality of coequalizer classes implies one relation witness, rather than a chain. If two U-sections have equal images in F, local injectivity of η from the first step gives a covering equalizer sieve of their coequalizer classes. Naturality and this quotient calculation supply relation witnesses on every arrow in that covering sieve.",
    "uses": [
     "def-pc-scheme",
     "def-pc-fibre-product",
     "def-pc-fppf-site",
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-site-sheafification-sections-local"
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 045Y (lemma-quotient-pre-equivalence), whose proof is omitted; its hint is completed using Sites Tags 00WB (theorem-plus) and 00WK (lemma-sections-sheafification) via the cited existing local-sections lemma"
+    "place": "Tag 045Y, with the quotient-sheaf definition immediately preceding it; Mathlib coequalizer and setoid quotient APIs"
    }
   },
   {
-   "text": "The same canonical morphism is locally injective. Suppose two sections r,r' of h_R over an S-scheme T have equal images in h_U x_Q h_U. After restricting to any member of a covering on which the equality is witnessed, their composites with s and t are equal. Thus j r=(s r,t r) and j r'=(s r',t r') are equal as maps to U x_S U. Since j is a monomorphism, r=r' on that member. This is exactly the local-injectivity condition for a morphism of sheaves of sets.",
+   "text": "The two projections jointly determine a relation section because prod.lift s t is mono. Consequently local relation witnesses from the preceding step form a compatible family. Representables are sheaves for the fppf topology and its over topology, so the relation family glues. Separatedness of the representable U-sheaf verifies both projections of the glued section. Together with joint injectivity this proves the pullback square pointwise in Type; IsPullback.of_forall_isPullback_app yields the presheaf pullback.",
    "uses": [
     "def-pc-scheme",
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 045Y, monomorphism hypothesis together with the definition of a monomorphism of schemes"
-   }
-  },
-  {
-   "text": "Apply the sheaf local-bijection criterion [lem-galois-set-sheaf-local-bijection-isomorphism] to the canonical map. Step 1 supplies local surjectivity and Step 2 supplies local injectivity, so the criterion gives that h_R -> h_U x_Q h_U is an isomorphism.",
-   "uses": [
-    "lem-galois-set-sheaf-local-bijection-isomorphism"
+    "def-pc-fibre-product",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false,
    "source": {
-    "document": "Mathlib/CategoryTheory/Sites/LocallyBijective.lean",
-    "place": "Sheaf.isLocallyBijective_iff_isIso, specialized to sheaves of sets"
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 045Y and monomorphism hypothesis; Mathlib/CategoryTheory/Sites/SubcanonicalOver.lean and Limits/Types/Pullbacks.lean"
    }
   }
  ],
@@ -58,13 +59,12 @@
   "def-pc-fppf-site",
   "def-pc-scheme",
   "def-weil-pbc-sheafification",
-  "lem-galois-set-sheaf-local-bijection-isomorphism",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-trf-fppf-universal-unit-locally-injective"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/groupoids.tex",
-  "place": "Tag 045Y and the quotient-sheaf definition immediately preceding it; the final categorical step is Mathlib Sheaf.isLocallyBijective_iff_isIso"
+  "place": "Tag 045Y; direct gluing in representable fppf sheaves, with a proved smallness bridge using Mathlib essentiallySmall_costructuredArrow_Spec"
  },
  "mathlib_searches": [
   {
@@ -130,9 +130,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-galois-set-sheaf-local-bijection-isomorphism"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -159,5 +157,26 @@
   "result": "fix",
   "note": "Lean statement matches the node and sources; immutable module compiles cleanly. Fixed H11 by supplying a complete report with the independent reading in fixes/lem-trf-etale-relation-kernel-pair.report.md. Full checks and findings are in review.md; no repository or branch changes."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261023T135335-L-2872787",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

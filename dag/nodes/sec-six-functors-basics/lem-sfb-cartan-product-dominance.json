@@ -1,0 +1,198 @@
+{
+ "id": "lem-sfb-cartan-product-dominance",
+ "kind": "statement",
+ "title": "Dominant multiplication from finitely many Cartan subgroups",
+ "statement": "Let $k$ be an infinite field [def-weil-field], and let $G$ be a smooth [def-sbc-smooth-morphisms], geometrically connected [def-weil-connected-scheme], affine group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$. Tori and maximal tori mean [def-sfb-tori-multiplicative-type, def-sfb-reductive-torus-centralizer-terminology]. For a closed torus $T\\subseteq G$, write $C_G(T)$ for the smooth geometrically connected closed subgroup representing the centralizer functor [lem-sfb-torus-centralizer-smooth-connected]: its $A$-points commute with every point of $T$ after every commutative $A$-algebra extension. There are an integer $m\\geq1$ and maximal $k$-tori $T_1,\\ldots,T_m\\subseteq G$ for which the multiplication morphism\n$$\\mu:C_G(T_1)\\times_k\\cdots\\times_k C_G(T_m)\\longrightarrow G,\\qquad(c_1,\\ldots,c_m)\\longmapsto c_1\\cdots c_m$$\nhas dense image on underlying Zariski topological spaces. In particular every nonempty Zariski open subset of $G$ has nonempty inverse image under $\\mu$. The trivial group is allowed; no reductivity or perfectness assumption is made.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.91, printed p.381, and the dominant-product assertion in the proof of Corollary 17.92, printed p.382; Cartan subgroups are centralizers of maximal tori (17.43--17.44 and p.381)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "lem-sfb-torus-centralizer-smooth-connected"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-cartan-subgroups-generate], the set $I$ of maximal $k$-tori in $G$ is nonempty, and a closed $k$-subgroup containing $C_G(T)$ for every $T\\in I$ must be $G$. For each $T\\in I$ put $H_T=C_G(T)$. By [lem-sfb-torus-centralizer-smooth-connected], each $H_T$ is a smooth geometrically connected closed subgroup of $G$; as a closed subgroup of the affine finite-type scheme $G$, it is affine of finite type. Thus this family satisfies the generation and connectedness hypotheses of the general finite-word lemma. These assertions hold over the original field $k$; no rational-point density or passage to a perfect field is used.",
+   "uses": [
+    "lem-sfb-cartan-subgroups-generate",
+    "lem-sfb-torus-centralizer-smooth-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.91, printed p.381; Cartan-subgroup paragraph preceding Proposition 17.90."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-connected-subgroups-finite-word] to the nonempty family $(H_T)_{T\\in I}$ from step 1. It gives $m\\geq1$ and indices $T_1,\\ldots,T_m\\in I$ such that the ordered multiplication of the $H_{T_j}$ has dense image. Substituting $H_{T_j}=C_G(T_j)$ gives exactly the displayed morphism $\\mu$ of the statement, with the indicated order of factors. Repetitions are allowed, so no distinctness assumption on the tori is needed. For the trivial group the trivial rank-zero torus is maximal and its centralizer is the group itself; a single factor gives the identity morphism, consistent with the lemma's $m\\geq1$ conclusion.",
+   "uses": [
+    "lem-sfb-connected-subgroups-finite-word"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Corollary 17.92, printed p.382, finite dominant product before the unirationality argument."
+   }
+  },
+  {
+   "text": "If $U\\subseteq G$ is nonempty and Zariski open and $\\mu^{-1}(U)$ were empty, the image of $\\mu$ would be contained in the closed set $G\\setminus U$. Its closure would then also be contained in that set, contradicting the density proved in step 2. Hence $\\mu^{-1}(U)$ is nonempty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Elementary consequence of dominance in the proof of Corollary 17.92, printed p.382."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-cartan-subgroups-generate",
+  "lem-sfb-torus-centralizer-smooth-connected",
+  "lem-sfb-connected-subgroups-finite-word"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.91 and proof of Corollary 17.92, printed pp.381-382; finite-word supporting lemma made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth geometrically connected affine algebraic group over an infinite field admits a dominant multiplication morphism from a finite product of centralizers of maximal tori",
+   "results": "{\"t\": \"2026-10-24T08:15:36Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth geometrically connected affine algebraic group over an infinite field admits a dominant multiplication morphism from a finite product of centralizers of maximal tori\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"LieAlgebra.exists_isRegular\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"instTotallySeparatedSpaceAlgEquivOfIsIntegral\"], \"digest\": \"aeee2e67daf66ea8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give generic dominance criteria or Lie regularity, abstract subgroup generation, and topological quotient density; none constructs a dominant product of algebraic-group Cartan subgroups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected algebraic group is generated by its Cartan subgroups",
+   "results": "{\"t\": \"2026-10-24T08:15:32Z\", \"tool\": \"leansearch\", \"query\": \"A connected algebraic group is generated by its Cartan subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"LieSubalgebra.IsCartanSubalgebra.casesOn\", \"LieSubalgebra.IsCartanSubalgebra.nilpotent\", \"LieSubalgebra.IsCartanSubalgebra\", \"LieSubalgebra.instNontrivialSubtypeMemOfIsCartanSubalgebra\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"LieSubalgebra.IsCartanSubalgebra.mk\", \"LieAlgebra.IsKilling.instIsLieAbelianOfIsCartanSubalgebra\"], \"digest\": \"90857aedf28c8797\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give generic dominance criteria or Lie regularity, abstract subgroup generation, and topological quotient density; none constructs a dominant product of algebraic-group Cartan subgroups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"IsDominant\"",
+   "results": "{\"t\": \"2026-10-24T08:15:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"centralizer\\\", \\\"IsDominant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give generic dominance criteria or Lie regularity, abstract subgroup generation, and topological quotient density; none constructs a dominant product of algebraic-group Cartan subgroups."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartan|cartan",
+   "results": "{\"t\": \"2026-10-24T08:15:32Z\", \"tool\": \"grep\", \"query\": \"Cartan|cartan\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give generic dominance criteria or Lie regularity, abstract subgroup generation, and topological quotient density; none constructs a dominant product of algebraic-group Cartan subgroups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many Cartan subgroups of an algebraic group have dense image under multiplication",
+   "results": "{\"t\": \"2026-10-24T08:15:37Z\", \"tool\": \"leanfinder\", \"query\": \"Finitely many Cartan subgroups of an algebraic group have dense image under multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.dense_image_mk\", \"MulAction.IwasawaStructure.is_generator\", \"Subgroup.closure_mul_image_eq_top'\", \"ProfiniteGrp.denseRange_toLimit\", \"Subgroup.closure_mul_image_eq_top\", \"Subgroup.dense_or_cyclic\", \"denseRange_zpow_iff_pow\", \"Subgroup.dense_of_not_isolated_one\"], \"digest\": \"d80fb12c9e1a45d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give generic dominance criteria or Lie regularity, abstract subgroup generation, and topological quotient density; none constructs a dominant product of algebraic-group Cartan subgroups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected affine algebraic group over an infinite field is generated by centralizers of its maximal tori",
+   "results": "{\"t\": \"2026-10-24T08:47:28Z\", \"tool\": \"leanfinder\", \"query\": \"A connected affine algebraic group over an infinite field is generated by centralizers of its maximal tori\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"Subgroup.center_eq_infi'\", \"Subgroup.center_eq_iInf\", \"closureCommutatorRepresentatives\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"Subgroup.centralizer_univ\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\"], \"digest\": \"e9d610ddf615bb09\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No algebraic-group Cartan finite-product theorem; semantic hits concern Lie Cartan subalgebras, abstract subgroup products, or generic composition of dominant morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite product of Cartan subgroups has dominant multiplication into a connected algebraic group",
+   "results": "{\"t\": \"2026-10-24T08:47:27Z\", \"tool\": \"leansearch\", \"query\": \"A finite product of Cartan subgroups has dominant multiplication into a connected algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant\", \"Subgroup.pi\", \"Subgroup.prod\", \"AddSubgroup.pi\", \"OpenSubgroup.prod\", \"AddSubgroup.coe_pi\", \"Subgroup.pi_le_iff\", \"AddSubgroup.pi_top\"], \"digest\": \"20f10e00a3b9e1e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No algebraic-group Cartan finite-product theorem; semantic hits concern Lie Cartan subalgebras, abstract subgroup products, or generic composition of dominant morphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"IsDominant\"",
+   "results": "{\"t\": \"2026-10-24T08:47:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"centralizer\\\", \\\"IsDominant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No algebraic-group Cartan finite-product theorem; semantic hits concern Lie Cartan subalgebras, abstract subgroup products, or generic composition of dominant morphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartan|cartan|centralizer",
+   "results": "{\"t\": \"2026-10-24T08:47:27Z\", \"tool\": \"grep\", \"query\": \"Cartan|cartan|centralizer\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No algebraic-group Cartan finite-product theorem; semantic hits concern Lie Cartan subalgebras, abstract subgroup products, or generic composition of dominant morphisms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-infinite-field-reductive-rational-density",
+  "date": "2026-10-24",
+  "group": "Q78"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, passage from a rational fixed coset to an element of G(k), using 25.9(b). Supporting input to Milne 25.9(b): Theorem 17.93(b), used for the rational translate in 25.9(a). Milne 17.93(b), proof: apply the dominant finite product of Cartan subgroups in the proof of 17.92, following 17.91.",
+   "via": [
+    "lem-sfb-infinite-field-reductive-rational-density",
+    "lem-sfb-field-parabolic-quotient-rational-lift",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cartan-product-dominance",
+  "worker": "stage1",
+  "summary": "Read Milne 17.91-17.93 and section 2h; separated Cartan generation from the general connected-subgroup finite-word theorem. Reused the existing torus-centralizer theorem, checked its full statement, and proved the open-inverse-image consequence directly. No statement change, no new definitions, no Lean writing or compilation.",
+  "blueprint": "The latest sk-thm-sf-ctf-stability direct-images proof (3) is realized by the inherited prerequisite chain in blueprint.from.place. This item supplies its Milne 17.93(b)/17.92 Cartan-product input. No latest blueprint node states either new lemma; blueprint_refs ancestor returned None, so the inherited null ancestor and via chain are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-901e06f9e",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-901e06f9e (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and the cited statements. Against Milne iAG2017: the Cartan-subgroup paragraph before 17.90 and Theorem 17.91 on p.381 (the item assumes k infinite, the case Milne proves; the finite-field case is only cited), Corollary 17.92 and Theorem 17.93 on p.382, Theorem 17.82 and Corollary 17.83 on p.379, and section 2h on generated subgroups (2.46-2.53). Steps: step 1 takes nonemptiness of the maximal tori and generation from lem-sfb-cartan-subgroups-generate, and takes smoothness and geometric connectedness of C_G(T) from lem-sfb-torus-centralizer-smooth-connected; its full statement covers any torus. Step 2 meets every hypothesis of lem-sfb-connected-subgroups-finite-word, and the substitution H_T = C_G(T) gives exactly the item's map. Step 3 is elementary. The generation node is Milne 17.91 with generation in the smallest-subgroup sense, so the containing subgroup H may be non-reduced. I checked the finite-word node is true by a maximal-dimension word-closure argument with descent to k, and tested both nodes on the trivial group, G_a, tori, GL_2, the two axes in G_a^2, and SL_2 with U+ and U- (U+U-U+ is dense, so repetition is needed and allowed). Neither node restates the item. My duplicate search found only nearby nodes (affine-pointed-map-generated-subgroup, pointed-word-kernel-stabilization, derived-commutator-word, smooth-subgroup-tangent-generation, semisimple-centralizer-reduction), none of which states either lemma. Batch-5 finding: lem-trf-smooth-at-point-fibre-criterion, reached through the torus-centralizer node, is Stacks 01V9, the fibrewise smoothness criterion. It is general algebraic geometry, not the trace formula, Poincare duality or a step of their proofs, and the item already cited the centralizer node on the base, so I did not return for it. Minor remark, not repaired: 'geometrically connected' cites only def-weil-connected-scheme, the same convention as the base item."
+ }
+}

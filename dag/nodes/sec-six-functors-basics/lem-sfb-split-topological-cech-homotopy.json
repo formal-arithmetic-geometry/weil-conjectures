@@ -1,0 +1,439 @@
+{
+ "id": "lem-sfb-split-topological-cech-homotopy",
+ "kind": "statement",
+ "title": "Extra-coordinate homotopy on continuous cochains of a split topological map",
+ "statement": "Use the universes of [def-weil-size-convention]. Let $T,V$ be topological spaces, $q:T\\to V$ a continuous map, $\\sigma:V\\to T$ continuous with $q\\sigma=\\mathrm{id}_V$, and $A$ an abelian group with a topology for which addition and negation are continuous. For $r\\geq1$, put $T_V^r=\\{(t_0,\\ldots,t_{r-1})\\in T^r:q(t_i)=q(t_j)\\text{ for all }i,j\\}$ with the subspace topology. For $n\\geq0$ let $C^n=C(T_V^{n+1},A)$ be the additive group of all continuous functions, with\n$$(d^nf)(t_0,\\ldots,t_{n+1})=\\sum_{j=0}^{n+1}(-1)^jf(t_0,\\ldots,\\widehat{t_j},\\ldots,t_{n+1}),$$\nwhere a minus sign denotes additive inversion. For every $n\\geq1$ the rule\n$$(h_nf)(t_0,\\ldots,t_{n-1})=f(\\sigma(q(t_0)),t_0,\\ldots,t_{n-1})$$\ndefines an additive map $h_n:C^n\\to C^{n-1}$ and satisfies\n$$d^{n-1}(h_nf)+h_{n+1}(d^nf)=f\\qquad(f\\in C^n).$$\nThe statement includes $n=1$ and empty $T,V$; no compactness, separation, metrizability or completeness assumption is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: agent-created analytic auxiliary; the blueprint motivates but does not state the noncomplete Cech assertion. Split-cover argument formerly in step 7, also used by step 8: the full extra-coordinate homotopy identity on continuous cochains. Stacks Tag 016E (example-fibre-products-simplicial-object) describes the nerve only; the homotopy is agent-written."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Write $X_r=T_V^r$ for $r\\geq1$. Deleting coordinate $j$ gives $p_j:X_{r+1}\\to X_r$: every pair of retained coordinates still has equal $q$-image. Set $s_r(x)=(\\sigma(q(x_0)),x_0,\\ldots,x_{r-1})$. Since $q\\sigma(q(x_0))=q(x_0)=q(x_i)$, this tuple belongs to $X_{r+1}$. These are actual maps of the displayed tuple spaces, without choosing any point of $T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written split-cover auxiliary, explicit coordinate proof, step 1"
+   }
+  },
+  {
+   "text": "Both maps are continuous directly from the topologies. The inverse image under $p_j$ of a coordinate-open cylinder is a coordinate-open cylinder in $X_{r+1}$. For $s_r$, a cylinder in coordinate zero pulls back to $\\{x:x_0\\in(\\sigma\\circ q)^{-1}(U)\\}$, open since $q,\\sigma$ are continuous; a cylinder in coordinate $i+1$ pulls back to $\\{x:x_i\\in U\\}$. Product opens are unions of finite intersections of cylinders; subspace opens are their intersections with $X_r$. Thus these calculations prove continuity into the indicated subspaces.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written split-cover auxiliary, explicit coordinate proof, step 2"
+   }
+  },
+  {
+   "text": "Continuous functions into $A$ are closed under pointwise zero, addition and negation: for example $(f+g)^{-1}(U)=(f,g)^{-1}(+^{-1}(U))$, and the pair map is continuous by inverse images of open rectangles. Composition is continuous because inverse images compose. Hence $d^n$ is well-defined as a finite signed sum of $f\\circ p_j$, and $h_n(f)=f\\circ s_n$ is continuous. Pointwise, $h_n(f+g)=h_n(f)+h_n(g)$ and $h_n(0)=0$, proving additivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written split-cover auxiliary, explicit coordinate proof, step 3"
+   }
+  },
+  {
+   "text": "For clarity write $p_j^{(r)}:X_{r+1}\\to X_r$ for deletion of coordinate $j$. For $x=(t_0,\\ldots,t_n)\\in X_{n+1}$ with $n\\geq1$, put $a=\\sigma(q(t_0))$. Coordinatewise, $p_0^{(n+1)}s_{n+1}(x)=x$ and $p_{j+1}^{(n+1)}s_{n+1}(x)=s_n(p_j^{(n)}x)$ for $0\\leq j\\leq n$. For $j>0$ the first retained $t$-entry is $t_0$; for $j=0$ it is $t_1$, and $\\sigma(q(t_1))=a$ because $q(t_1)=q(t_0)$. The remaining entries agree in order. The condition $n\\geq1$ ensures $t_1$ exists and $s_n$ is defined.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written split-cover auxiliary, explicit coordinate proof, step 4"
+   }
+  },
+  {
+   "text": "Expanding the definitions at $x$ and using step 4 gives\n$$ (d^{n-1}h_nf)(x)=\\sum_{j=0}^{n}(-1)^j f(s_n(p_j^{(n)}x)),\\qquad\n(h_{n+1}d^nf)(x)=f(x)+\\sum_{j=0}^{n}(-1)^{j+1} f(s_n(p_j^{(n)}x)). $$\nSet $b_j=(-1)^j f(s_n(p_j^{(n)}x))$. The corresponding term of the second sum is $-b_j$: the two exponents have opposite parity. Commutativity and associativity rearrange the sum of both displayed expressions as $f(x)+\\sum_{j=0}^{n}(b_j+(-b_j))=f(x)$; each pair is zero. Equality at every tuple proves the required equality of continuous functions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written split-cover auxiliary, explicit coordinate proof, step 5"
+   }
+  },
+  {
+   "text": "For $n=1$, the two expressions are $f(a,t_1)-f(a,t_0)$ and $f(t_0,t_1)-f(a,t_1)+f(a,t_0)$, so the same cancellation includes the lowest degree. If $T$ is empty, the given section forces $V$ empty; conversely a map $T\\to\\varnothing$ forces $T$ empty. All $X_r$ are then empty, each $C^n$ is the one-element group, and the identity is automatic. No step used separation, compactness, a metric, or completeness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written split-cover auxiliary, explicit coordinate proof, step 6"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) motivates the auxiliary; tuple construction, continuity and finite cancellation supplied by Q137. Stacks simplicial.tex, Tag 016E, example-fibre-products-simplicial-object supplies only the nerve background."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous map with a continuous section, continuous abelian group valued Cech cochains have the contracting homotopy inserting the section as first coordinate",
+   "results": {
+    "t": "2026-10-22T06:03:28Z",
+    "tool": "leanfinder",
+    "query": "For a continuous map with a continuous section, continuous abelian group valued Cech cochains have the contracting homotopy inserting the section as first coordinate",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Homotopy.mkCoinductive",
+     "CochainComplex.HomComplex.δ_neg_one_cochain",
+     "Homotopy.mkCoinductiveAux₃",
+     "Homotopy.mkCoinductiveAux₂",
+     "Homotopy.mkCoinductiveAux₂_zero",
+     "AlgebraicTopology.DoldKan.homotopyPToId",
+     "Homotopy.mkCoinductiveAux₁",
+     "CochainComplex.MappingConeCompHomotopyEquiv.homotopyInvHomId"
+    ],
+    "digest": "a6708d258c6fa048"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic chain homotopies and simplicial splittings do not state this coordinate identity for all continuous A-valued functions. ExtraDegeneracy supplies a candidate abstract route; comparing its categorical nerve and complex with these explicit function groups and maps is additional work, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The identity d h plus h d equals identity on continuous functions on the nerve of a split topological surjection with h prepending a section",
+   "results": {
+    "t": "2026-10-22T06:03:41Z",
+    "tool": "leanfinder",
+    "query": "The identity d h plus h d equals identity on continuous functions on the nerve of a split topological surjection with h prepending a section",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplicialObject.Splitting.PInfty_comp_πSummand_id",
+     "SimplicialObject.Splitting.PInfty_comp_πSummand_id_assoc",
+     "SimplicialObject.Splitting.πSummand_comp_cofan_inj_id_comp_PInfty_eq_PInfty",
+     "SimplicialObject.Splitting.σ_comp_πSummand_id_eq_zero_assoc",
+     "SimplicialObject.Splitting.decomposition_id",
+     "SimplicialObject.Splitting.σ_comp_πSummand_id_eq_zero",
+     "CategoryTheory.nerve.σ_zero_nerveEquiv_symm",
+     "SimplicialObject.Splitting.cofan_inj_πSummand_eq_id"
+    ],
+    "digest": "701df503bcc8d4b4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic chain homotopies and simplicial splittings do not state this coordinate identity for all continuous A-valued functions. ExtraDegeneracy supplies a candidate abstract route; comparing its categorical nerve and complex with these explicit function groups and maps is additional work, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cech\", \"homotopy\"",
+   "results": {
+    "t": "2026-10-22T06:03:41Z",
+    "tool": "loogle",
+    "query": "\"cech\", \"homotopy\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic chain homotopies and simplicial splittings do not state this coordinate identity for all continuous A-valued functions. ExtraDegeneracy supplies a candidate abstract route; comparing its categorical nerve and complex with these explicit function groups and maps is additional work, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous Cech cochain contracting homotopy from a continuous section of a map of topological spaces",
+   "results": {
+    "t": "2026-10-22T06:03:42Z",
+    "tool": "leansearch",
+    "query": "Continuous Cech cochain contracting homotopy from a continuous section of a map of topological spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.HomotopyLike.mk",
+     "ContinuousMap.Homotopy.continuous",
+     "ContinuousMap.Homotopy.toContinuousMap",
+     "ContinuousMap.HomotopyLike.toContinuousMapClass",
+     "ContinuousMap.HomotopyWith.instHomotopyLike",
+     "ContinuousMap.Homotopy.instHomotopyLike",
+     "ContinuousMap.Homotopy",
+     "TopCat.isSection"
+    ],
+    "digest": "2251de45f85f46bc"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic chain homotopies and simplicial splittings do not state this coordinate identity for all continuous A-valued functions. ExtraDegeneracy supplies a candidate abstract route; comparing its categorical nerve and complex with these explicit function groups and maps is additional work, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "(cech|contracting|extraDegeneracy|extra_degeneracy|ExtraDegeneracy)",
+   "results": {
+    "t": "2026-10-22T06:03:42Z",
+    "tool": "grep",
+    "query": "(cech|contracting|extraDegeneracy|extra_degeneracy|ExtraDegeneracy)",
+    "sub": "AlgebraicTopology",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+     "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+     "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+     "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+     "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+     "Mathlib/AlgebraicTopology/CechNerve.lean",
+     "Mathlib/AlgebraicTopology/CechNerve.lean",
+     "Mathlib/AlgebraicTopology/CechNerve.lean"
+    ],
+    "digest": "17365c00eecef60f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic chain homotopies and simplicial splittings do not state this coordinate identity for all continuous A-valued functions. ExtraDegeneracy supplies a candidate abstract route; comparing its categorical nerve and complex with these explicit function groups and maps is additional work, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "ExtraDegeneracy|homotopyEquiv",
+   "results": {
+    "t": "2026-10-22T06:05:27Z",
+    "tool": "grep",
+    "query": "ExtraDegeneracy|homotopyEquiv",
+    "sub": "AlgebraicTopology/ExtraDegeneracy.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "31",
+     "32",
+     "34",
+     "36",
+     "38"
+    ],
+    "digest": "bb4a546541471d34"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic chain homotopies and simplicial splittings do not state this coordinate identity for all continuous A-valued functions. ExtraDegeneracy supplies a candidate abstract route; comparing its categorical nerve and complex with these explicit function groups and maps is additional work, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "^noncomputable def (extraDegeneracy|homotopyEquiv)|^theorem ExtraDegeneracy.s_comp",
+   "results": {
+    "t": "2026-10-22T06:05:48Z",
+    "tool": "grep",
+    "query": "^noncomputable def (extraDegeneracy|homotopyEquiv)|^theorem ExtraDegeneracy.s_comp",
+    "sub": "AlgebraicTopology",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean",
+     "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+     "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+     "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+     "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+     "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean"
+    ],
+    "digest": "39fe05d972c6f1c3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic chain homotopies and simplicial splittings do not state this coordinate identity for all continuous A-valued functions. ExtraDegeneracy supplies a candidate abstract route; comparing its categorical nerve and complex with these explicit function groups and maps is additional work, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "ExtraDegeneracy|extraDegeneracy|homotopyEquiv",
+   "results": {
+    "t": "2026-10-22T11:59:05Z",
+    "tool": "grep",
+    "query": "ExtraDegeneracy|extraDegeneracy|homotopyEquiv",
+    "sub": "AlgebraicTopology/ExtraDegeneracy.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "31",
+     "32",
+     "34",
+     "36",
+     "38"
+    ],
+    "digest": "bb4a546541471d34"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits are abstract simplicial homotopies, ordinary chain homotopies, or alternating multilinear/group cochain formulas. ExtraDegeneracy.lean lines 331–440 was read: the categorical extra degeneracy and its chain homotopy equivalence do not directly identify the explicit topological tuple spaces and continuous-function cochains of this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The alternating sum differential on continuous functions on equal-image tuples has contraction by prepending a continuous section",
+   "results": {
+    "t": "2026-10-22T11:59:06Z",
+    "tool": "leansearch",
+    "query": "The alternating sum differential on continuous functions on equal-image tuples has contraction by prepending a continuous section",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousAlternatingMap.map_vecCons_sub",
+     "DifferentiableOn.continuousAlternatingMap_apply",
+     "ContinuousAlternatingMap.alternatizeUncurryFin_alternatizeUncurryFinCLM_comp_apply",
+     "Differentiable.continuousAlternatingMap_apply_const",
+     "ContinuousAlternatingMap.map_sum_finset",
+     "DifferentiableOn.continuousAlternatingMap_apply_const",
+     "ContinuousMultilinearMap.alternatization",
+     "fderivWithin_continuousAlternatingMap_apply_apply"
+    ],
+    "digest": "2cc56b913fdbe560"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits are abstract simplicial homotopies, ordinary chain homotopies, or alternating multilinear/group cochain formulas. ExtraDegeneracy.lean lines 331–440 was read: the categorical extra degeneracy and its chain homotopy equivalence do not directly identify the explicit topological tuple spaces and continuous-function cochains of this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cech\", \"homotopy\"",
+   "results": {
+    "t": "2026-10-22T11:59:06Z",
+    "tool": "loogle",
+    "query": "\"cech\", \"homotopy\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits are abstract simplicial homotopies, ordinary chain homotopies, or alternating multilinear/group cochain formulas. ExtraDegeneracy.lean lines 331–440 was read: the categorical extra degeneracy and its chain homotopy equivalence do not directly identify the explicit topological tuple spaces and continuous-function cochains of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous abelian group valued Cech cochains of a continuous map with a continuous section have a homotopy inserting that section",
+   "results": {
+    "t": "2026-10-22T11:59:16Z",
+    "tool": "leanfinder",
+    "query": "Continuous abelian group valued Cech cochains of a continuous map with a continuous section have a homotopy inserting that section",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Homotopy.mkCoinductiveAux₃",
+     "Homotopy.mkCoinductive",
+     "Homotopy.mkCoinductiveAux₂",
+     "Homotopy.mkCoinductiveAux₂_zero",
+     "Homotopy.mkCoinductiveAux₁",
+     "Homotopy.mkCoinductiveAux₂_add_one",
+     "CochainComplex.mappingCone.liftHomotopy",
+     "CochainComplex.HomComplex.Cochain.ofHomotopy"
+    ],
+    "digest": "2b4f542dc4d7433f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits are abstract simplicial homotopies, ordinary chain homotopies, or alternating multilinear/group cochain formulas. ExtraDegeneracy.lean lines 331–440 was read: the categorical extra degeneracy and its chain homotopy equivalence do not directly identify the explicit topological tuple spaces and continuous-function cochains of this item."
+  },
+  {
+   "tool": "grep",
+   "query": "extraDegeneracy|ExtraDegeneracy|contracting.*homotopy",
+   "results": {
+    "t": "2026-10-22T12:00:25Z",
+    "tool": "grep",
+    "query": "extraDegeneracy|ExtraDegeneracy|contracting.*homotopy",
+    "sub": "AlgebraicTopology",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+     "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+     "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+     "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+     "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean"
+    ],
+    "digest": "36e0d35e189f91e5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits are abstract simplicial homotopies, ordinary chain homotopies, or alternating multilinear/group cochain formulas. ExtraDegeneracy.lean lines 331–440 was read: the categorical extra degeneracy and its chain homotopy equivalence do not directly identify the explicit topological tuple spaces and continuous-function cochains of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prepending a section to a tuple in a fiber product gives d h plus h d equal identity for the alternating cochain differential",
+   "results": {
+    "t": "2026-10-22T12:00:35Z",
+    "tool": "leanfinder",
+    "query": "Prepending a section to a tuple in a fiber product gives d h plus h d equal identity for the alternating cochain differential",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "inhomogeneousCochains.d_eq",
+     "inhomogeneousCochains.d_hom_apply",
+     "CochainComplex.mappingCone.d_fst_v'",
+     "CochainComplex.cocycleOfDegreewiseSplit",
+     "CochainComplex.HomComplex.δ_v",
+     "CochainComplex.HomComplex.δ_zero_cochain_comp",
+     "CochainComplex.mappingCone.d_fst_v",
+     "inhomogeneousCochains.d"
+    ],
+    "digest": "5d10c66f5c9ddd0d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits are abstract simplicial homotopies, ordinary chain homotopies, or alternating multilinear/group cochain formulas. ExtraDegeneracy.lean lines 331–440 was read: the categorical extra degeneracy and its chain homotopy equivalence do not directly identify the explicit topological tuple spaces and continuous-function cochains of this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-norm-algcl-profinite-cech-exact",
+  "date": "2026-10-22",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy; CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv",
+  "file": "Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+  "how": "Read lines 331--440: extra degeneracy at 368, homotopy equivalence at 415. Additional comparison with explicit equal-image tuples and continuous-function cochains is not supplied by these declarations."
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: agent-created analytic auxiliary; the blueprint motivates but does not state the noncomplete Cech assertion. Split-cover argument formerly in step 7, also used by step 8: the full extra-coordinate homotopy identity on continuous cochains. Stacks Tag 016E (example-fibre-products-simplicial-object) describes the nerve only; the homotopy is agent-written.",
+   "via": [
+    "lem-sfb-norm-algcl-profinite-cech-exact",
+    "lem-sfb-norm-algcl-bar-augmentation",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-split-topological-cech-homotopy",
+  "worker": "stage1",
+  "summary": "Rebased the retained six-step split against the current unsplit DAG after the side-completion promotion return. The statement, statement dependencies and provenance agree with the current DAG; the sole statement dependency was re-read and no proof step cites another node. Clarified the degree of each face map and the explicit pairing of opposite-sign terms. Retained all earlier searches and their results. No new nodes are needed: the tuple, continuity, additivity and cancellation calculations are elementary and written out.",
+  "blueprint": "The current blueprint direct-images proof paragraph (3) motivates this split-cover auxiliary but does not state it. All six steps realize the agent-created split-cover homotopy used below that paragraph, not a new assertion attributed to the blueprint. Retained the existing from.node=null and via chain: blueprint_refs.py ancestor reports None for this inherited created.item chain; the source place remains explicit."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-d00689f17",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-d00689f17 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item and all six steps in full and worked through the mathematics myself. This is a re-push of 3cd8d8f48e41, which passed on 2026-10-22; its landing was then refused as a side completion. The item is still unsplit, with an empty proof, in both clones/live and clones/side-live, and it has no repair note, so the re-split rules do not apply. Compared with the live node, only status, proof, proof_origin, split_report and mathlib_searches differ. The statement, the stmt_dep def-weil-size-convention (only its universe convention is used), source, blueprint and created fields are unchanged. The branch is one commit with the item and its report, and it adds no new nodes. Compared with 3cd8, only steps 4 and 5 were rewritten (faces indexed by degree as p_j^(r), and the terms paired explicitly as b_j and -b_j) plus the split_report summary; steps 1-3 and 6 are byte-identical. Source checks: blueprint main-20261015 direct-images.proof.md paragraph (3) only motivates the auxiliary, so from.node=null and proof_origin agent are correct. Stacks simplicial.tex lines 308-319 (Tag 016E) supplies only the nerve coordinates. The node cites no SGA. Math checks: s_r lands in X_{r+1} because q∘σ=id. For continuity, coordinate 0 of s_r is σ∘q∘pr_0 and the other coordinates are projections. Deleting entry 0 of s_{n+1}x gives x. Deleting entry j+1 gives s_n(p_j x); for j=0 this uses σq(t_1)=σq(t_0), which needs n≥1. The two expansions sum to f(x)+Σ(b_j-b_j)=f(x), and I checked the n=1 case by hand. For small cases: if T is a point, the maps alternate between 0 and id and the identity holds. If q=σ=id, every X_r is the diagonal and the same check applies. If T is empty, then V is empty and every C^n is 0. If A=0, everything is trivial. The parent lem-sfb-norm-algcl-profinite-cech-exact applies the item in steps 2 and 8, with A=Ω and with the diagonal section of q':T×_VT→T; the h formula it gets matches the parent's. Duplicate candidates checked and ruled out: lem-exc-coinduced-homotopy-identity, lem-coef-split-coproduct-bar-extra-degeneracy, the set-nerve and site Čech lemmas, and Mathlib's ExtraDegeneracy, which is categorical and correctly kept as a candidate. There are no tool_uses."
+ }
+}

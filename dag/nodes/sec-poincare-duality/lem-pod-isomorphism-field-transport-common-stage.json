@@ -1,0 +1,137 @@
+{
+ "id": "lem-pod-isomorphism-field-transport-common-stage",
+ "kind": "statement",
+ "title": "Common-stage descent of a normalized isomorphism transport family",
+ "statement": "Fix a prime l, an algebraic closure Ω/Q_l, an isomorphism g:X→Y of noetherian schemes of finite Krull dimension with l invertible, and stalk-unit proofs hX,hY. For every small finite coefficient field E in Ω suppose given normalized stages S_E for g and R_E for inv g, in the sense of [def-pod-isomorphism-field-transport-clauses]. Suppose both families obey isomorphismFieldTransportRationalScalarLaw for every coefficient inclusion E≤L. Then IsomorphismFieldTransportCommon(l,Ω,g,hX,hY,S) is inhabited. The conclusion consists only of descent to the actual common-stage category: the exact additive equivalence, specified quotient-arrow formulas, identity-normalized stage/shift comparison, and epsilon represented by S_E's rational epsilon at the object's own stage. It assumes, and does not construct, all finite stages and their rational inverse/scalar equations.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+ },
+ "stmt_deps": [
+  "def-pod-isomorphism-field-transport-clauses",
+  "lem-pod-isomorphism-pullback-texact-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Identify the actual commonStageDerivedPullback with its normalized stage-system morphism using commonStagePullback_comparison_data and the unique representative characterization. Its generic inclusion comparison has identity components, giving the required stageComparison.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pod-common-stage-pullback-normalized-descent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply normalized shift descent to the supplied finite packages and this inclusion comparison. A distinguished triangle is isomorphic to an included finite-stage distinguished triangle. The shift-compatible stage comparison and finite rational exactness show that its pullback is distinguished, including the connecting map. Thus the chosen functor is triangulated and hence additive.",
+   "uses": [
+    "lem-pod-isomorphism-field-transport-shift-descent",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct each inverse component by transporting the inclusion of the supplied own-stage rational epsilon along the actual object equalities of the two chosen pullbacks. Epsilon naturality assembles these components into a natural isomorphism. Repeat for inv g using R and hR; inv(inv g)=g gives the other composite. Equivalence.mk yields equivalence. Retain the original epsilon so that its exact prescribed component formula is preserved.",
+   "uses": [
+    "lem-pod-isomorphism-field-transport-epsilon-naturality",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Fill the object_formula and arrow_formula directly from commonStageDerivedPullback_existsUnique. Package these with the constructed comparison, shift, exactness, additivity, equivalence and epsilon.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-common-stage-pullback-normalized-descent",
+  "lem-pod-isomorphism-field-transport-epsilon-naturality",
+  "lem-pod-isomorphism-field-transport-shift-descent",
+  "lem-sbc-coherent-pair-functor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A coherent family of exact equivalences over finite coefficient fields descends to an exact equivalence on the common stage quotient category with inverse counit represented at each own stage",
+   "results": "CategoryTheory.Equivalence.precoherent; CategoryTheory.Equivalence.counit; CategoryTheory.Equivalence.congrFullSubcategory_counitIso; CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv. These do not provide the prescribed quotient functor, its own-stage inverse comparison and shift/exactness data.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a scheme isomorphism gives exact inverse equivalences on derived constructible sheaves with localized coefficients",
+   "results": "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pullbackComp; SheafOfModules.pullbackIso. These concern ordinary module pullback and do not give the specified completed, raw rational, and common-stage normalization clauses.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg commonStage|rationalDerivedPullback|pullbackIdentityEpsilon|coefficientPairFunctor|inverseImageIntegralModules Mathlib/CategoryTheory Mathlib/AlgebraicGeometry; rg the same names in lean/Sheaf and lean/WeilConjectures",
+   "results": "No Mathlib occurrences. Project IsomorphismPullbackRawStage supplies normalized integral/rational exactness but no inverse-comparison package; PullbackIdentitiesScalarExtension gives the integral scalar square; StageSystemFunctorDescent gives functor descent but no specialized inverse and exactness package.",
+   "date": "2026-10-26",
+   "verdict": "no exact existing declaration; retain these generic tools"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IsomorphismFieldTransport",
+  "date": "2026-10-26",
+  "group": "A6"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport.",
+   "via": [
+    "lem-pod-isomorphism-field-transport",
+    "lem-pod-semilinear-field-operation-lifts"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IsomorphismFieldTransportCommonStage",
+  "file": "lean/Sheaf/Paper/IsomorphismFieldTransportCommonStage.lean",
+  "declaration": "WeilConjectures.isomorphismFieldTransportCommonStage",
+  "statement": "theorem isomorphismFieldTransportCommonStage (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [IsNoetherian X] [IsNoetherian Y] (hDimX : ∃ n : ℕ, topologicalKrullDim X ≤ n) (hDimY : ∃ n : ℕ, topologicalKrullDim Y ≤ n) [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (S : ∀ E : Index l Ω, IsomorphismFieldTransportStage l (Coefficient.{u} l Ω E) g hX hY) (R : ∀ E : Index l Ω, IsomorphismFieldTransportStage l (Coefficient.{u} l Ω E) (inv g) hY hX) (hS : ∀ (E L : Index l Ω) (h : E ≤ L), isomorphismFieldTransportRationalScalarLaw l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) g hX hY (S E) (S L)) (hR : ∀ (E L : Index l Ω) (h : E ≤ L), isomorphismFieldTransportRationalScalarLaw l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) (inv g) hY hX (R E) (R L)) : Nonempty (IsomorphismFieldTransportCommon l Ω g hX hY S)",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6eabd",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261026T065118-L-2694757",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261027T103510-L-1090992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

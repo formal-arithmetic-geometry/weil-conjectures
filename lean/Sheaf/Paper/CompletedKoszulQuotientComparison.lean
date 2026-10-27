@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.CompletedRlimFunctor
 public import Sheaf.Paper.IntrinsicCompletion
-public import Sheaf.Paper.CompletedTowerPullback
+public import Sheaf.Paper.CompletedReductionUnit
 import Sheaf.Paper.CompletedConstantPresentationTransport
 
 /-!

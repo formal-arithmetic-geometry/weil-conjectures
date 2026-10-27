@@ -1,0 +1,227 @@
+{
+ "id": "lem-sfb-space-closed-ideal-correspondence",
+ "kind": "statement",
+ "title": "Closed algebraic subspaces, quasi-coherent ideals and arbitrary pullback",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and work with algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Closed immersions are representable and become closed immersions of schemes on every scheme test [def-weil-closed-immersion]. Modules are on the small etale ringed sites, with quasi-coherence [def-trf-space-quasi-coherent-module] and tensor pullback and direct image [def-trf-space-etale-module-functors]. Let $X$ be such a space. Closed subspaces $i:Z\\hookrightarrow X$, up to isomorphism over $X$, correspond bijectively to quasi-coherent ideals $\\mathcal I\\subseteq\\mathcal O_X$, by $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$. For the subspace associated to $\\mathcal I$, the quotient map identifies $i_*\\mathcal O_Z$ canonically with $\\mathcal O_X/\\mathcal I$. For every morphism $p:X\\prime\\to X$, let $i\\prime:Z\\prime=Z\\times_X X\\prime\\hookrightarrow X\\prime$ be the inverse image [lem-trf-space-fibre-products-etale-covers]. Its ideal is $\\operatorname{im}(p^*\\mathcal I\\to\\mathcal O_{X\\prime})$, and there is a canonical isomorphism $p^*(i_*\\mathcal O_Z)\\simeq i\\prime_*\\mathcal O_{Z\\prime}$ which identifies the tensor pullback of the quotient map with the structure quotient map on $X\\prime$. These identifications preserve the units and commute with successive pullbacks. No flatness, finite-type, finite-presentation or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03MB, lemma-closed-immersion-ideals, bijection and its proof using the ideal image on scheme tests; quotient-pullback formulation of that construction."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-closed-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-closed-subspace",
+  "def-sfb-space-quasi-coherent-ideal",
+  "def-sfb-space-module-structure-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-ideal-closed-subspace-correspondence] to $X$. It supplies the asserted bijection, and says that the structure map $q:\\mathcal O_X\\to i_*\\mathcal O_Z$ is surjective with kernel $\\mathcal I$. Thus $q$ induces the unique isomorphism $\\mathcal O_X/\\mathcal I\\simeq i_*\\mathcal O_Z$ carrying the quotient map to $q$: locally a class $[a]$ maps to $q(a)$; surjectivity gives local preimages and the kernel assertion makes their classes independent of the lift. The same cited statement applied to $p$ says that $Z\\prime$ is the closed subspace with ideal $\\mathcal J=\\operatorname{im}(p^*\\mathcal I\\to\\mathcal O_{X\\prime})$ and that $q\\prime:\\mathcal O_{X\\prime}\\to i\\prime_*\\mathcal O_{Z\\prime}$ is surjective with kernel $\\mathcal J$.",
+   "uses": [
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB (lemma-closed-immersion-ideals), and the paragraph after definition-inverse-image-closed-subspace."
+   }
+  },
+  {
+   "text": "By [def-trf-space-etale-module-functors], $p^*$ is left adjoint to $p_*$. Regard $q$ as the coequalizer of the inclusion and zero maps $\\mathcal I\\rightrightarrows\\mathcal O_X$ in module sheaves; a module map out of $\\mathcal O_X$ descends through $q$ exactly when it kills $\\mathcal I$. Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to this finite, hence small, diagram. Consequently $p^*q$ is the coequalizer of $p^*\\mathcal I\\rightrightarrows p^*\\mathcal O_X$. By [lem-trf-space-chart-adjunction-tensor-realization], the specified left adjoint $p^*$ is identified, compatibly with units and local tensors, with the ringed tensor pullback $\\mathcal O_{X\\prime}\\otimes_{p^{-1}\\mathcal O_X}p^{-1}(-)$ of [def-pur-sheaf-tensor-product]; for $\\mathcal O_X$ this gives $p^*\\mathcal O_X\\simeq\\mathcal O_{X\\prime}$ by $b\\otimes a\\mapsto b\\,p^\\sharp(a)$, inverse $b\\mapsto b\\otimes1$. Its coequalizer is therefore $\\mathcal O_{X\\prime}/\\mathcal J$. This uses preservation of cokernels, not preservation of the injection of $\\mathcal I$.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-pur-sheaf-tensor-product",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038 (lemma-adjoint-exact), part (1); sites-modules.tex Tag 03D7 (lemma-adjoint-pullback-pushforward-modules), with its tensor formula."
+   }
+  },
+  {
+   "text": "The two coequalizers in steps 1 and 2 give a unique isomorphism $\\beta_p:p^*(i_*\\mathcal O_Z)\\simeq i\\prime_*\\mathcal O_{Z\\prime}$ satisfying $\\beta_p\\circ p^*q=q\\prime$, after identifying $p^*\\mathcal O_X$ with $\\mathcal O_{X\\prime}$. Hence it sends $1\\otimes1$ to $1$, and on locally lifted tensors sends $b\\otimes[a]$ to the class of $b\\,p^\\sharp(a)$. Multiplication is respected by this formula. For a further pullback $r:X\\prime\\prime\\to X\\prime$, the composition isomorphism $r^*p^*\\simeq(p\\circ r)^*$ of [lem-trf-space-chart-adjunction-tensor-realization] sends $c\\otimes(b\\otimes m)$ to $c\\,r^\\sharp(b)\\otimes m$. Both the successive comparison and the comparison for $p\\circ r$ thus take a local lift $c\\otimes(b\\otimes[a])$ to $[c\\,r^\\sharp(b)\\,(p\\circ r)^\\sharp(a)]$. Equivalently both have the same composite with the epimorphic pulled-back quotient map; they are equal. Identity pullback gives the identity by the same formula. This proves the asserted unit and successive-pullback compatibilities.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "def-pur-sheaf-tensor-product",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB (lemma-closed-immersion-ideals), and the paragraph after definition-inverse-image-closed-subspace."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "def-trf-space-etale-module-functors",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-pur-sheaf-tensor-product",
+  "lem-trf-space-chart-adjunction-tensor-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03MB and its inverse-image paragraph, assembled with Tag 0038 and the tensor-pullback adjunction (Tag 03D7). The quotient and coherence argument is written by Q132."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Closed subspaces of an algebraic space correspond to quasi coherent ideal sheaves and the correspondence commutes with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  (CategoryTheory.MorphismProperty.Over @AlgebraicGeometry.IsClosedImmersion ⊤ X)ᵒᵖ ≌ X.IdealSheafData\", \"doc\": \"For any scheme $X$, there is an equivalence of categories between the opposite category of the over category of closed immersions into $X$ with the top morphism property and the category of ideal shea\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} {f : X ⟶ AlgebraicGeometry.Spec R},\\n  AlgebraicGeometry.IsClosedImmersion f ↔\\n    ∃ I e,\\n      f =\\n        CategoryTheory.CategoryStruct.comp e.hom (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))\", \"doc\": \"A morphism $ f: X \\\\to \\\\operatorname{Spec}(R) $ is a closed immersion if and only if there exists an ideal $ I \\\\subseteq R $ and an isomorphism $ X \\\\cong \\\\operatorname{Spec}(R/I) $ such that $ f $ equa\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor_obj\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ (Y : AlgebraicGeometry.Scheme) (I : Y.IdealSheafDataᵒᵖ),\\n  (AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor Y).obj I =\\n    CategoryTheory.Over.mk (Opposite.unop I).subschemeι\", \"doc\": \"For a scheme $Y$ and an ideal sheaf data $\\\\mathcal{I}$ on $Y$ (considered in the opposite category), the object mapping of the subscheme functor sends $\\\\mathcal{I}$ to the closed subscheme $\\\\operatorn\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionInclusion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {I J : X.IdealSheafData} (h : I ≤ J),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Scheme.IdealSheafData.inclusion h)\", \"doc\": \"For any scheme $X$ and ideal sheaf data $\\\\mathcal{I} \\\\leq \\\\mathcal{J}$ on $X$, the inclusion morphism from the closed subscheme defined by $\\\\mathcal{J}$ to the closed subscheme defined by $\\\\mathcal{I}\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {R : CommRingCat} (I : Ideal ↑R),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $ of $ R $, the morphism $ \\\\operatorname{Spec}(R/I) \\\\to \\\\operatorname{Spec}(R) $ induced by the quotient map $ R \\\\to R/I $ is a closed immersion. This foll\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"(Y : AlgebraicGeometry.Scheme) → CategoryTheory.Functor Y.IdealSheafDataᵒᵖ (CategoryTheory.Over Y)\", \"doc\": \"For a scheme $Y$, this functor maps each ideal sheaf data $\\\\mathcal{I}$ on $Y$ to its associated closed subscheme $\\\\operatorname{Subscheme}(\\\\mathcal{I})$ equipped with the canonical morphism to $Y$, a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme associated to $\\\\mathcal{I}$ is constructed by gluing local affine models $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData), AlgebraicGeometry.IsClosedImmersion I.subschemeι\", \"doc\": \"For any scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the canonical morphism from the closed subscheme defined by $\\\\mathcal{I}$ to $X$ is a closed immersion. This means the morphism induces a \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: overEquivIdealSheafData in Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:180 and the other hits are for schemes; none supplies the algebraic-space ideal correspondence on the small etale site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of the structure sheaf of an algebraic space is the direct image of the structure sheaf of a unique closed subspace",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.specTargetImage\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → {A : CommRingCat} → (X ⟶ AlgebraicGeometry.Spec A) → CommRingCat\", \"doc\": \"For a morphism of schemes $f: X \\\\to \\\\operatorname{Spec}(A)$, where $A$ is a commutative ring, this defines the coordinate ring of the scheme-theoretic image of $f$. It is the quotient ring $A / I$, wh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  (I : X.IdealSheafData) →\\n    (U : ↑X.affineOpens) →\\n      I.subscheme.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map I.subschemeι.base).obj ↑U)) ≅\\n        { carrier := ↑(X.presheaf.obj (Opposite.op ↑U)) ⧸ I.ideal U, commRing := Ideal.Quotient.commRing (I.id\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $ and a closed subscheme defined by an ideal sheaf $ \\\\mathcal{I} $, the global sections of the subscheme's structure sheaf over the intersection with $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme associated to $\\\\mathcal{I}$ is constructed by gluing local affine models $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor_obj\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ (Y : AlgebraicGeometry.Scheme) (I : Y.IdealSheafDataᵒᵖ),\\n  (AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor Y).obj I =\\n    CategoryTheory.Over.mk (Opposite.unop I).subschemeι\", \"doc\": \"For a scheme $Y$ and an ideal sheaf data $\\\\mathcal{I}$ on $Y$ (considered in the opposite category), the object mapping of the subscheme functor sends $\\\\mathcal{I}$ to the closed subscheme $\\\\operatorn\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {A : CommRingCat} →\\n    (f : X.Hom (AlgebraicGeometry.Spec A)) →\\n      (I : Ideal ↑A) →\\n        I ≤\\n            RingHom.ker\\n              (CommRingCat.Hom.hom\\n                (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop)) →\", \"doc\": \"Let $f: X \\\\to \\\\mathrm{Spec}(A)$ be a morphism from a scheme $X$ to an affine scheme $\\\\mathrm{Spec}(A)$, and let $I$ be an ideal of the commutative ring $A$. The morphism $f$ corresponds to a ring homo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toImage_app\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : ↑Y.affineOpens),\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.Scheme.Hom.toImage f)\\n      ((TopologicalSpace.Opens.map (AlgebraicGeometry.Scheme.Hom.imageι f).base).obj ↑U) =\\n    CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Schem\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $\\\\tilde{f}: X \\\\to \\\\mathrm{im}(f)$ be the canonical morphism to its image subscheme. For any affine open subset $U \\\\subseteq Y$, the ring of sections \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  AlgebraicGeometry.Scheme.Hom.app I.subschemeι ↑U =\\n    CategoryTheory.CategoryStruct.comp (CommRingCat.ofHom (Ideal.Quotient.mk (I.ideal U))) (I.subschemeObjIso U).inv\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $ and a closed subscheme defined by an ideal sheaf $ \\\\mathcal{I} $, the component of the canonical morphism $ \\\\iota: \\\\text{Subscheme}(\\\\mathcal{I}) \\\\to X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (I : X.IdealSheafData) → I.subscheme ⟶ X\", \"doc\": \"The canonical morphism from the closed subscheme defined by an ideal sheaf $\\\\mathcal{I}$ on a scheme $X$ to $X$ itself, constructed via the gluing data of local models $\\\\operatorname{Spec}(\\\\mathcal{O}\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: overEquivIdealSheafData in Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:180 and the other hits are for schemes; none supplies the algebraic-space ideal correspondence on the small etale site"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.Scheme.IdealSheafData",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) : AlgebraicGeometry.IsClosedImmersion I.subschemeι\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.IsClosedImmersion f] : CategoryTheory.IsIso f ↔ AlgebraicGeometry.Scheme.Hom.ker f = ⊥\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.IsClosedImmersion f] (H : AlgebraicGeometry.Scheme.Hom.ker f ≤ AlgebraicGeometry.Scheme.Hom.ker g) : Y ⟶ X\", \"doc\": \"The universal property of closed immersions:\\nFor a closed immersion `f : X ⟶ Z`, given any morphism of schemes `g : Y ⟶ Z` whose kernel\\ncontains the kernel of `X` in `Z`, we can lift this morphism to \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isIso_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {Z₁ Z₂ X : AlgebraicGeometry.Scheme} (i₁ : Z₁ ⟶ X) (i₂ : Z₂ ⟶ X) [AlgebraicGeometry.IsClosedImmersion i₁] [AlgebraicGeometry.IsClosedImmersion i₂] (h : AlgebraicGeometry.Scheme.Hom.ker i₁ = AlgebraicGeometry.Scheme.Hom.ker i₂) : CategoryTheory.IsIso (AlgebraicGeometry.IsClosedImmersion.lift i₁ i₂ ⋯\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.lift_fac\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.IsClosedImmersion f] (H : AlgebraicGeometry.Scheme.Hom.ker f ≤ AlgebraicGeometry.Scheme.Hom.ker g) : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.IsClosedImmersion.lift f g H) f = g\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isIso_of_ker_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {Z₁ Z₂ X : AlgebraicGeometry.Scheme} (i₁ : Z₁ ⟶ X) (i₂ : Z₂ ⟶ X) [AlgebraicGeometry.IsClosedImmersion i₁] [AlgebraicGeometry.IsClosedImmersion i₂] (f : Z₁ ⟶ Z₂) (h : CategoryTheory.CategoryStruct.comp f i₂ = i₁) (h' : AlgebraicGeometry.Scheme.Hom.ker i₁ = AlgebraicGeometry.Scheme.Hom.ker i₂) : Cate\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.IsClosedImmersion f] (H : AlgebraicGeometry.Scheme.Hom.ker f ≤ AlgebraicGeometry.Scheme.Hom.ker g) {Z✝ : AlgebraicGeometry.Scheme} (h : Z ⟶ Z✝) : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.IsClosedImmersion.lif\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" (X : AlgebraicGeometry.Scheme) : (CategoryTheory.MorphismProperty.Over @AlgebraicGeometry.IsClosedImmersion ⊤ X)ᵒᵖ ≌ X.IdealSheafData\", \"doc\": \"The category of closed subschemes is contravariantly equivalent\\nto the lattice of ideal sheaves.\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionInclusion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \" {X : AlgebraicGeometry.Scheme} {I J : X.IdealSheafData} (h : I ≤ J) : AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Scheme.IdealSheafData.inclusion h)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Functorial\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (i : Z ⟶ Y) (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion i] : AlgebraicGeometry.Scheme.Hom.ker (CategoryTheory.Limits.pullback.fst f i) = (AlgebraicGeometry.Scheme.Hom.ker i).comap f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isPullback_of_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Functorial\", \"type\": \" {ZX ZY X Y : AlgebraicGeometry.Scheme} (iX : ZX ⟶ X) (iY : ZY ⟶ Y) (Zf : ZX ⟶ ZY) (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion iX] [AlgebraicGeometry.IsClosedImmersion iY] (h : CategoryTheory.CategoryStruct.comp iX f = CategoryTheory.CategoryStruct.comp Zf iY) (h' : (AlgebraicGeometry.Scheme.Ho\", \"doc\": \"To show that the pullback of the closed immersion `iX` along `f` is the closed immersion\\n`iY`, it suffices to check that the preimage of `ker iY` under `f` is `ker iX`.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.hom_ext\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \" {X Y Z' Z : AlgebraicGeometry.Scheme} (i : Z' ⟶ Z) (hi : IsNilpotent (AlgebraicGeometry.Scheme.Hom.ker i)) [AlgebraicGeometry.IsClosedImmersion i] (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f] {g₁ g₂ : Z ⟶ X} (hig : CategoryTheory.CategoryStruct.comp i g₁ = CategoryTheory.CategoryStruct.comp\", \"doc\": \"Given any commuting diagram\\n```\\nZ' --→ X\\n|      |\\n↓      ↓\\nZ  --→ Y\\n```\\nWith `X ⟶ Y` formally unramified and `Z' ⟶ Z` an infinitesimal thickening, there exists at most\\none arrow `Z ⟶ X` making the dia\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: overEquivIdealSheafData in Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:180 and the other hits are for schemes; none supplies the algebraic-space ideal correspondence on the small etale site"
+  },
+  {
+   "tool": "grep",
+   "query": "overEquivIdealSheafData|closed.*subspace.*ideal|algebraic.*space.*ideal",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Analysis/Normed/Module/MStructure.lean\", \"line\": \"33\", \"text\": \"space with dual `X^*`. A closed subspace `M` of `X` is said to be an M-ideal if the topological\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"180\", \"text\": \"def overEquivIdealSheafData (X : Scheme.{u}) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"229\", \"text\": \"  rw [← isIso_iff_of_reflects_iso _ (IsClosedImmersion.overEquivIdealSheafData X).functor]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"230\", \"text\": \"  simpa [IsClosedImmersion.overEquivIdealSheafData] using ⟨homOfLE h'.le, by simp, by simp⟩\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: overEquivIdealSheafData in Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:180 and the other hits are for schemes; none supplies the algebraic-space ideal correspondence on the small etale site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed subspaces of algebraic spaces are classified by quasi coherent ideals with quotient structure sheaf",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": Scheme\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme associated to $\\\\mathcal{I}$ is constructed by gluing local affine models $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"(X : Scheme.{u}) : (MorphismProperty.Over @IsClosedImmersion ⊤ X)ᵒᵖ ≌ X.IdealSheafData\", \"doc\": \"For any scheme $X$, there is an equivalence of categories between the opposite category of the over category of closed immersions into $X$ with the top morphism property and the category of ideal shea\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{R : CommRingCat} {f : X ⟶ Spec R} :\\n  IsClosedImmersion f ↔\\n    ∃ I : Ideal R, ∃ e : X ≅ Spec (.of <| R ⧸ I), f = e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))\", \"doc\": \"A morphism $ f: X \\\\to \\\\operatorname{Spec}(R) $ is a closed immersion if and only if there exists an ideal $ I \\\\subseteq R $ and an isomorphism $ X \\\\cong \\\\operatorname{Spec}(R/I) $ such that $ f $ equa\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor_obj\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"∀ (Y : AlgebraicGeometry.Scheme) (I : Y.IdealSheafDataᵒᵖ),\\n  (AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor Y).obj I =\\n    CategoryTheory.Over.mk (Opposite.unop I).subschemeι\", \"doc\": \"For a scheme $Y$ and an ideal sheaf data $\\\\mathcal{I}$ on $Y$ (considered in the opposite category), the object mapping of the subscheme functor sends $\\\\mathcal{I}$ to the closed subscheme $\\\\operatorn\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.inclusion\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"{I J : IdealSheafData X} (h : I ≤ J) : J.subscheme ⟶ I.subscheme\", \"doc\": \"Given a scheme $X$ and ideal sheaf data $\\\\mathcal{I} \\\\leq \\\\mathcal{J}$, this constructs the morphism $\\\\operatorname{Subscheme}(\\\\mathcal{J}) \\\\to \\\\operatorname{Subscheme}(\\\\mathcal{I})$ induced by the qu\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionInclusion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{I J : X.IdealSheafData} (h : I ≤ J) : IsClosedImmersion (I.inclusion h)\", \"doc\": \"For any scheme $X$ and ideal sheaf data $\\\\mathcal{I} \\\\leq \\\\mathcal{J}$ on $X$, the inclusion morphism from the closed subscheme defined by $\\\\mathcal{J}$ to the closed subscheme defined by $\\\\mathcal{I}\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"(U : X.affineOpens) : Γ(I.subscheme, I.subschemeι ⁻¹ᵁ U) ≅ .of (Γ(X, U) ⧸ I.ideal U)\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $ and a closed subscheme defined by an ideal sheaf $ \\\\mathcal{I} $, the global sections of the subscheme's structure sheaf over the intersection with $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"(U : X.affineOpens) : Scheme\", \"doc\": \"For a scheme $X$ with ideal sheaf data $I$ and an affine open subset $U \\\\subseteq X$, this constructs the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/I(U))$, where $\\\\mathcal{O}_X(U)$ is the ri\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: overEquivIdealSheafData in Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:180 and the other hits are for schemes; none supplies the algebraic-space ideal correspondence on the small etale site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed subspaces of algebraic spaces correspond to quasi coherent ideals and their structure sheaf quotients commute with arbitrary tensor pullback",
+   "results": "Hits: AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor_obj, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc, AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor_map, AlgebraicGeometry.Scheme.IdealSheafData.map",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or their ideal-sheaf data; none states the small-etale algebraic-space correspondence together with the quotient-pullback and coherence clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "overEquivIdealSheafData|closed.*subspace.*ideal|algebraic.*space.*ideal",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/Analysis/Normed/Module/MStructure.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or their ideal-sheaf data; none states the small-etale algebraic-space correspondence together with the quotient-pullback and coherence clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed subspaces of algebraic spaces and quasi coherent ideal sheaves with arbitrary base change of the quotient",
+   "results": "Hits: AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.UniversallyClosed.universally_isClosedMap, AlgebraicGeometry.IsClosedImmersion.Spec_iff, AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet, AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AlgebraicGeometry.instIsClosedImmersionInclusion, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or their ideal-sheaf data; none states the small-etale algebraic-space correspondence together with the quotient-pullback and coherence clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.Scheme.IdealSheafData",
+   "results": "Hits: AlgebraicGeometry.IsClosedImmersion.instSubschemeι, AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot, AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.IsClosedImmersion.isIso_lift, AlgebraicGeometry.IsClosedImmersion.lift_fac, AlgebraicGeometry.IsClosedImmersion.isIso_of_ker_eq, AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc, AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or their ideal-sheaf data; none states the small-etale algebraic-space correspondence together with the quotient-pullback and coherence clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor pullback of the structure sheaf quotient by a quasi coherent ideal on an algebraic space is the structure sheaf quotient by the extended ideal",
+   "results": "Hits: AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.IdealSheafData.comap, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or their ideal-sheaf data; none states the small-etale algebraic-space correspondence together with the quotient-pullback and coherence clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-hilbert-is-quot",
+  "date": "2026-10-23",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 0D00, quot-lemma-hilb-is-quot, including naturality of the displayed mutually inverse constructions. Supporting input for the forward and inverse structure-sheaf quotient constructions, and their naturality.",
+   "via": [
+    "lem-sfb-space-hilbert-is-quot",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-closed-ideal-correspondence",
+  "worker": "stage1",
+  "summary": "Reused the existing algebraic-space ideal correspondence and arbitrary inverse-image formula. Proved the additional quotient-pullback isomorphism by preservation of the finite coequalizer under the specified left adjoint, and checked units and composition on local tensor lifts. No new nodes and no statement change.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli/Hilbert chain, specifically the forward and inverse structure-sheaf quotients in Tag 0D00. The latest blueprint does not separately state this supporting lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Generic identification of the specified adjoint tensor pullback of def-trf-space-etale-module-functors with the ringed tensor formula, and its composition isomorphism with local tensor formula, used in steps 2-3; no node of sk-thm-sf-ctf-stability states it (the unit's lem-sfb-space-affine-module-base-change cites the same node in its statement)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-chart-adjunction-tensor-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-62c5db373",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-62c5db373 (reviewer sub-agent of L); spot-checked: Read Stacks Tag 03MB (lemma-closed-immersion-ideals) and its proof. The delivery has no new nodes and the statement is unchanged. Step 1 is correct: lem-sfb-space-ideal-closed-subspace-correspondence supplies the bijection, that q is surjective with kernel I, and the ideal im(h^*I→O_Y) under arbitrary base change; there is no cycle and it is not a duplicate. Step 2 is correct: the left adjoint preserves the coequalizer I⇉O_X through the Mathlib leaf (small diagram, colimit exists), and only right-exactness is used. β_p is pinned by β_p∘p^*q=q' and agrees with the canonical base-change map. Small cases I=0, I=O_X, and the non-flat ℤ→ℤ/2 example were checked. FIX for two missing citations (C1/C3). (1) Step 2 identified the adjoint-defined p^* with the ringed tensor formula (p^*O_X≅O_{X'}) with no node stating that. (2) Step 3's 'tensor associativity' isomorphism r^*p^*≅(pr)^*, c⊗(b⊗m)↦c r^♯(b)⊗m, was cited to no node. Both are stated by lem-trf-space-chart-adjunction-tensor-realization (τ_l and its composition clause). Steps 2 and 3 now cite it, it is added to proof_deps, and it is declared in split_report.tool_uses as an off-route generic tool (unit sk-i-curve-zero; the in-unit lem-sfb-space-affine-module-base-change cites the same node). Its closure does not reach the item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceClosedIdealCorrespondence",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.closed_ideal_correspondence",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceClosedIdealCorrespondence.lean",
+  "statement": "theorem closed_ideal_correspondence (S : Scheme.{u}) : ∃ (corr : ∀ X : AlgebraicSpace S, ClosedSubspace X ≃ QuasiCoherentIdeal X) (unitIso : ∀ (X Y : AlgebraicSpace S) (p : Y ⟶ X), (moduleTensorPullback p).obj (SheafOfModules.unit X.structureSheaf) ≅ SheafOfModules.unit Y.structureSheaf) (idIso : ∀ X : AlgebraicSpace S, moduleTensorPullback (𝟙 X) ≅ 𝟭 X.Modules) (compIso : ∀ (X Y W : AlgebraicSpace S) (p : Y ⟶ X) (r : W ⟶ Y), moduleTensorPullback p ⋙ moduleTensorPullback r ≅ moduleTensorPullback (r ≫ p)) (beta : ∀ (X Y : AlgebraicSpace S) (p : Y ⟶ X) (C : ClosedSubspace X) (D : ClosedSubspace Y) (a : (D.val : AlgebraicSpace S) ⟶ (C.val : AlgebraicSpace S)) (_ : IsPullback a D.val.arrow C.val.arrow p), (moduleTensorPullback p).obj ((moduleDirectImage C.val.arrow).obj (SheafOfModules.unit (C.val : AlgebraicSpace S).structureSheaf)) ≅ (moduleDirectImage D.val.arrow).obj (SheafOfModules.unit (D.val : AlgebraicSpace S).structureSheaf)), (∀ (X : AlgebraicSpace S) (C : ClosedSubspace X), (corr X C).val = kernelSubobject (moduleStructureMap C.val.arrow) ∧ ∃ (Q : X.Modules) (q : SheafOfModules.unit X.structureSheaf ⟶ Q) (w : (corr X C).val.arrow ≫ q = 0), Nonempty (IsColimit (CokernelCofork.ofπ q w)) ∧ ∃! e : Q ≅ (moduleDirectImage C.val.arrow).obj (SheafOfModules.unit (C.val : AlgebraicSpace S).structureSheaf), q ≫ e.hom = moduleStructureMap C.val.arrow) ∧ (∀ (X Y : AlgebraicSpace S) (p : Y ⟶ X), (unitIso X Y p).hom = ((moduleTensorAdjunction p).homEquiv _ _).symm (moduleStructureMap p)) ∧ (∀ (X : AlgebraicSpace S) (M : X.Modules) (V : X.EtaleSite) (q : ModuleChart (𝟙 X) V) (a : q.left ⟶ V), a.hom.left = q.hom.left → ∀ (b : X.structureSheaf.obj.obj (op q.left)) (m : M.val.obj (op V)), ((idIso X).hom.app M).val.app (op q.left) (moduleTensorSection (𝟙 X) M V q b m) = b • M.val.map a.op m) ∧ (∀ (X Y W : AlgebraicSpace S) (p : Y ⟶ X) (r : W ⟶ Y) (M : X.Modules) (V : X.EtaleSite) (q : ModuleChart p V) (t : ModuleChart r q.left) (c : (moduleChartTarget (r ≫ p)).obj t.left ⟶ V.obj), c.left = t.hom.left ≫ q.hom.left → ∀ (a : W.structureSheaf.obj.obj (op t.left)) (b : Y.structureSheaf.obj.obj (op q.left)) (m : M.val.obj (op V)), ((compIso X Y W p r).hom.app M).val.app (op t.left) (moduleTensorSection r ((moduleTensorPullback p).obj M) q.left t a (moduleTensorSection p M V q b m)) = moduleTensorSection (r ≫ p) M V (CostructuredArrow.mk c) (a * moduleChartScalar r q.left t b) m) ∧ (∀ (X Y : AlgebraicSpace S) (p : Y ⟶ X) (C : ClosedSubspace X), ∃ (D : ClosedSubspace Y) (a : (D.val : AlgebraicSpace S) ⟶ (C.val : AlgebraicSpace S)), IsPullback a D.val.arrow C.val.arrow p) ∧ (∀ (X Y : AlgebraicSpace S) (p : Y ⟶ X) (C : ClosedSubspace X) (D : ClosedSubspace Y) (a : (D.val : AlgebraicSpace S) ⟶ (C.val : AlgebraicSpace S)) (h : IsPullback a D.val.arrow C.val.arrow p), (∃ q : (moduleTensorPullback p).obj ((corr X C).val : X.Modules) ⟶ ((corr Y D).val : Y.Modules), Epi q ∧ q ≫ (corr Y D).val.arrow = idealTensorMap p (corr X C)) ∧ (moduleTensorPullback p).map (moduleStructureMap C.val.arrow) ≫ (beta X Y p C D a h).hom = (unitIso X Y p).hom ≫ moduleStructureMap D.val.arrow ∧ (∀ e : (moduleTensorPullback p).obj ((moduleDirectImage C.val.arrow).obj (SheafOfModules.unit (C.val : AlgebraicSpace S).structureSheaf)) ≅ (moduleDirectImage D.val.arrow).obj (SheafOfModules.unit (D.val : AlgebraicSpace S).structureSheaf), (moduleTensorPullback p).map (moduleStructureMap C.val.arrow) ≫ e.hom = (unitIso X Y p).hom ≫ moduleStructureMap D.val.arrow → e = beta X Y p C D a h) ∧ ∀ (V : X.EtaleSite) (q : ModuleChart p V) (b : Y.structureSheaf.obj.obj (op q.left)), (beta X Y p C D a h).hom.val.app (op q.left) (moduleTensorSection p ((moduleDirectImage C.val.arrow).obj (SheafOfModules.unit (C.val : AlgebraicSpace S).structureSheaf)) V q b ((moduleStructureMap C.val.arrow).val.app (op V) (1 : X.structureSheaf.obj.obj (op V)))) = (moduleStructureMap D.val.arrow).val.app (op q.left) b) ∧ (∀ (X : AlgebraicSpace S) (C : ClosedSubspace X), beta X X (𝟙 X) C C (𝟙 _) (IsPullback.id_horiz C.val.arrow) = (idIso X).app ((moduleDirectImage C.val.arrow).obj (SheafOfModules.unit (C.val : AlgebraicSpace S).structureSheaf))) ∧ (∀ (X Y W : AlgebraicSpace S) (p : Y ⟶ X) (r : W ⟶ Y) (C : ClosedSubspace X) (D : ClosedSubspace Y) (E : ClosedSubspace W) (a : (D.val : AlgebraicSpace S) ⟶ (C.val : AlgebraicSpace S)) (b : (E.val : AlgebraicSpace S) ⟶ (D.val : AlgebraicSpace S)) (h : IsPullback a D.val.arrow C.val.arrow p) (k : IsPullback b E.val.arrow D.val.arrow r), (moduleTensorPullback r).map (beta X Y p C D a h).hom ≫ (beta Y W r D E b k).hom = ((compIso X Y W p r).hom.app ((moduleDirectImage C.val.arrow).obj (SheafOfModules.unit (C.val : AlgebraicSpace S).structureSheaf))) ≫ (beta X W (r ≫ p) C E (b ≫ a) (k.paste_horiz h)).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing closed-subspace, quasi-coherent-ideal, structure-map and chart-tensor constructions. Quotients are expressed by a cokernel universal property, and the image ideal by an epi factorization onto its subobject, avoiding unavailable chosen-cokernel/image instances at the small etale section universe. The canonical quotient and base-change isomorphisms are uniquely normalized by quotient maps; identity and composition comparisons are normalized on local chart tensors, with explicit beta identity and composition equations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cfda44642",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Single new module (one theorem, sorry proof, no defs). Item node differs from live only in lean (statement verbatim in file) and stmt_deps (+3 already-landed def-sfb nodes: closed-subspace, quasi-coherent-ideal, module-structure-map; allowed by brief §5, no cycle); every other snapshot node identical to live. Checked against Stacks 03MB and the inverse-image paragraph: corr ≃ pinned by kernelSubobject of the structure map; quotient by cokernel universal property plus unique iso onto i_*O_Z; inverse image exists; image ideal by epi onto (corr Y D) for every pullback presentation, no injectivity claimed; beta normalized by p^*(i#)≫β=unitIso≫i'#, unitIso fixed to the adjoint of moduleStructureMap p, uniqueness stated; unit clause on charts; idIso/compIso pinned on local tensors, identity and paste_horiz composition equations true. No extra hypotheses or universe restriction. Edge cases empty X, zero ideal, unit ideal, non-flat base change OK. Docstrings and proof steps present, plain imports are proof_dep modules, report has both required sections (second reading by the same worker, stated openly). No recompile, per instruction."
+ }
+}

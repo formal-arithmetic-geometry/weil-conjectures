@@ -1,0 +1,141 @@
+{
+ "id": "lem-sp-field-exceptional-finite-compatibility",
+ "kind": "statement",
+ "title": "Finite evaluation and mixed quotient laws for the exceptional transpose",
+ "statement": "Fix a purity finite-field datum $P$ [def-pur-conventions], separated finite-type $P.field.k$-schemes $X,Y$, a smooth separated morphism $f:X\\to Y$ of pure relative dimension $d\\ge0$, and a compactification $c$. Let $D$ be simultaneous $\\mathrm{Models}(P)$ [def-sp-field-shriek-system-models], $b$ its proper/open system comparison laws [lem-sp-field-shriek-system-comparison], $a:\\mathrm{Domains}(P,D,c)$ [def-sp-field-exceptional-system-domains], and $A:\\mathrm{Adjoints}(P,D,c,b,a)$ [def-sp-field-exceptional-system-adjoints]. The specified counit transpose component [def-sp-field-exceptional-system-components] satisfies $\\mathrm{evaluationLaw}(P,D,c,b,a,A)$ and $\\mathrm{mixedLaw}(P,D,c,b,a,A)$ [def-sp-field-exceptional-system-laws]. Moreover, for each inclusion $E\\subset F$ of coefficient fields, each $n\\ge0$ and each constructible finite-Tor object $K$ over $\\mathcal O_E/\\ell^{n+1}$ on $Y$, the specified finiteComponent for $\\mathcal O_E/\\ell^{n+1}\\to\\mathcal O_F/\\ell^{n+1}$ is invertible. Only finite evaluations and mixed quotient comparisons are asserted, with the actual coordinates of $A$; whole-system invertibility, units and cocycles are not assumed.",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), counit transpose, finite comparisons and quotient compatibility"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sp-field-shriek-system-models",
+  "lem-sp-field-shriek-system-comparison",
+  "def-sp-field-exceptional-system-domains",
+  "def-sp-field-exceptional-system-adjoints",
+  "def-sp-field-exceptional-system-laws",
+  "def-sp-field-exceptional-system-components",
+  "def-sbc-smooth-morphisms",
+  "def-sf-setting",
+  "det-sp-tower-shriek-levels",
+  "sk-def-sp-normalized-towers",
+  "def-sp-tower-shriek-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply evaluation at n to the defining counit equation of component. The\nAdjunctionEvaluationNormalized equation of A identifies the tower counit with the\nfinite counit, while b.scalarEvaluation and b.evaluation identify scalar extension\nand the compact-support comparison. A.leftNormalized fixes the same left evaluation\ncoordinate. Thus the evaluated arrow, conjugated by sourceEvaluation and\ntargetEvaluation, has the counit transpose defining finiteComponent. Injectivity of\nthe finite adjunction Hom bijection proves evaluationLaw. The finite adjoints retain\ntheir ordinary-etale counit realizations; uniqueness of such adjoints transports\nreductionExceptional_isIso to them. Counit transposition then identifies its\ninvertible finite comparison with finiteComponent, proving the last assertion.\nFor mixedLaw apply reductionCompatibilities_composition to the field map followed\nby the quotient map and to the quotient map followed by the field map. The\nfiniteComponent counit equations discharge the comparison hypotheses. Both composites\nare the direct comparison by injectivity of transposition. The residue-class formula\nin D.coefficients proves equality of the two ring maps; transport along that equality\ngives the second HEq. The scalar associators are exactly those in finiteComposite.\nEqual levels and identity field extensions use the same associators and unitors;\nquotient maps need not be flat. All these equalities are in finite derived categories.",
+   "uses": [
+    "det-sp-reduction-exceptional",
+    "det-sp-reduction-compatibilities",
+    "lem-coef-semilinear-derived-sections",
+    "det-sp-scalar-extension-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+    "place": "(2), counit transpose, finite comparisons and quotient compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-sp-reduction-exceptional",
+  "det-sp-reduction-compatibilities",
+  "lem-coef-semilinear-derived-sections",
+  "det-sp-scalar-extension-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M9",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), counit transpose, finite comparisons and quotient compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mate counit transpose naturality unit composition coefficient extension",
+   "results": "8 hits: CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.mateEquiv_apply, CategoryTheory.conjugateEquiv_counit, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.unit_conjugateEquiv, CategoryTheory.mateEquiv_symm_apply. ",
+   "date": "2026-10-25",
+   "verdict": "Generic categorical ingredients only; no theorem with these normalized tower domains and fixed evaluation coordinates."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits: CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit. ",
+   "date": "2026-10-25",
+   "verdict": "Generic categorical ingredients only; no theorem with these normalized tower domains and fixed evaluation coordinates."
+  },
+  {
+   "tool": "grep",
+   "query": "counitComparison|homEquiv_naturality_left_square",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/Condensed/Light/Epi.lean. ",
+   "date": "2026-10-25",
+   "verdict": "Generic categorical ingredients only; no theorem with these normalized tower domains and fixed evaluation coordinates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized constructible tower compact support adjunction finite evaluation coefficient mate",
+   "results": "8 hits: Condensed.profiniteSolidCounit, CompHausLike.LocallyConstant.adjunction_left_triangle, CompHausLike.LocallyConstant.counitAppApp, CondensedMod.LocallyConstant.adjunction, CompHausLike.LocallyConstant.counitApp, CompHausLike.LocallyConstant.counitApp_app, LightCondensed.ihomPoints, CompHausLike.LocallyConstant.adjunction_counit. ",
+   "date": "2026-10-25",
+   "verdict": "Generic categorical ingredients only; no theorem with these normalized tower domains and fixed evaluation coordinates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The counit transpose of scalar extension of compact support evaluates to the finite exceptional coefficient comparison",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.RestrictionCoextensionAdj.counit'_app, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, Pi.counit_coe_dFinsupp, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, CompHausLike.LocallyConstant.counit_app_val. ",
+   "date": "2026-10-25",
+   "verdict": "Generic categorical ingredients only; no theorem with these normalized tower domains and fixed evaluation coordinates."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldExceptionalSystemComparison",
+  "date": "2026-10-26",
+  "group": "M9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(2), Finite evaluation and mixed quotient laws for the exceptional transpose",
+   "via": [
+    "lem-sp-field-exceptional-system-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FieldExceptionalFiniteCompatibility",
+  "file": "lean/Sheaf/Paper/FieldExceptionalFiniteCompatibility.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldExceptionalSystem.field_exceptional_finite_compatibility",
+  "statement": "theorem field_exceptional_finite_compatibility\n    (X Y : Scheme.{u}) [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))]\n    [QuasiCompact (X ↘ Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))]\n    [QuasiCompact (Y ↘ Spec (.of P.field.k))] [IsSeparated (Y ↘ Spec (.of P.field.k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))]\n    (d : ℕ) [SmoothOfRelativeDimension d f] [IsSeparated f] (c : Compactification f)\n    (D : Models P) (b : FieldShriekSystem.Laws P D c) (a : Domains P D c)\n    (A : Adjoints P D c b a) :\n    evaluationLaw P D c b a A ∧ mixedLaw P D c b a A ∧\n      ∀ (E F : Index P) (h : E ≤ F) (n : ℕ)\n        (K : spFiniteConstructibleTorCategory Y (SpTowerShriek.R P.coefficients.l E.val n)),\n        IsIso (finiteComponent P D c b a A ((D.coefficients E F h).quotient n) K)",
+  "branch": "sheaf-dag",
+  "by": "M9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a81ec",
+  "group": "M9",
+  "result": "fix",
+  "landing": "20261026T070331-L-3547379",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a81ec",
+  "group": "M9",
+  "result": "fix",
+  "landing": "20261026T070331-L-3547379",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery identical in Lean/nodes to 323389a2 (FIX not landed: override named .md); item proof + 2 sorry substeps vs node lem-sp-field-exceptional-system-comparison; sandbox --all with published Adjoints/LevelWords + current importers (exit 0), all-published control for Witnesses"
+ }
+}

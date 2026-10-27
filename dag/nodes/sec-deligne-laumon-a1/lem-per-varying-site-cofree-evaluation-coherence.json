@@ -1,0 +1,161 @@
+{
+ "id": "lem-per-varying-site-cofree-evaluation-coherence",
+ "kind": "statement",
+ "title": "Coherence of the explicit cofree evaluation transitions",
+ "statement": "Let $I$ be a small category in the universes of [def-weil-size-convention], and $D$ a coherent diagram of sites [def-per-coherent-site-diagram]. Let $Q_a\\dashv P_a$ be the actual abelian inverse and direct images with their canonical mate comparisons [def-per-varying-site-abelian-systems], and assume each $Q_a$ additive. Fix $i\\in I$ and $A\\in\\operatorname{Ab}(D_i)$. Put $R_j=\\prod_{t:i\\to j}P_tA$, with projections $\\rho_t$. For $c:k\\to j$ define $\\sigma_c:Q_cR_j\\to R_k$ as the product lift whose $b:i\\to k$ factor is $Q_c(\\rho_{b\\mathbin{\\gg}c}\\operatorname{comp}_{b,c}^{-1})\\varepsilon_c(P_bA)$, in Lean composition order. Then (1) $\\sigma_{1_j}$ is the inverse-image unitor on $R_j$; (2) $\\operatorname{comp}_{a,b}(R_l)\\sigma_{a\\mathbin{\\gg}b}=Q_a(\\sigma_b)\\sigma_a$; (3) the adjunct of $\\operatorname{unit}_i(X)h$ followed by the direct-image unitor on $A$ equals $h$, for every $X\\in\\operatorname{Ab}(D_i)$ and $h:X\\to A$; (4) the adjunct under $Q_a\\dashv P_a$ of $\\sigma_a\\rho_{1_i}\\operatorname{unit}^{P}_i(A)$ is $\\rho_a$, for every $a:i\\to j$; (5) for every abelian system $X$ and $h:X_i\\to A$, the family $q_j:X_j\\to R_j$ whose $a$-factor is the adjunct of $X.\\phi_a h$ satisfies $Q_c(q_j)\\sigma_c=X.\\phi_c q_k$. Products are those of [def-weil-category-product]. No inverse image is required to preserve them.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0EXZ, lemma-colim-sites-injective, canonical product transitions and compatibility of gamma; categories.tex Tags 0037 and 0DV0 for the composite Hom bijections. Agent expansion for a general coherent diagram."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-per-coherent-site-diagram",
+  "def-per-varying-site-abelian-systems",
+  "def-weil-category-product",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Transpose sigma_c to t_c:R_j -> P_c R_k. Counit naturality and the triangle identities identify its mapped b-projection with rho_(b≫c) followed by the inverse direct-image compositor. Right adjoints preserve products, so these projections detect equality.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-limits",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Test the identity and cocycle of t on all mapped projections. The labels agree by associativity and the comparison maps by the direct-image pseudofunctor triangles and pentagon. Transpose back by the composite Hom bijection to obtain clauses (1)-(2).",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse-image unitor is the mate of the direct-image unitor: the identity-arrow adjunct followed by the latter is h. The identity-factor projection of t_a, followed by P_a of that unitor, is rho_a by the direct-image unit triangle. These are clauses (3)-(4).",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the cocycle for X. For the family q, both sides of its compatibility equation have the same b-factor by the transposed cocycle and naturality of adjuncts after h. Product uniqueness, then transposition, yields clause (5).",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0EXZ, lemma-colim-sites-injective, canonical product transitions and compatibility of gamma; categories.tex Tags 0037 and 0DV0 for the composite Hom bijections. Agent expansion for a general coherent diagram."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Arrow indexed products of right adjoints form a compatible system and adjuncts of transition maps give a compatible map into the product",
+   "results": "{\"t\": \"2026-10-26T08:24:16Z\", \"tool\": \"leanfinder\", \"query\": \"Arrow indexed products of right adjoints form a compatible system and adjuncts of transition maps give a compatible map into the product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.evaluationRightAdjoint_obj_map\", \"CategoryTheory.evaluationRightAdjoint_map_app\", \"CategoryTheory.evaluationRightAdjoint\", \"CategoryTheory.evaluationRightAdjoint_obj_obj\", \"CategoryTheory.ParametrizedAdjunction.mk'_adj\", \"CategoryTheory.Localization.HasProductsOfShapeAux.adj\", \"CategoryTheory.LiftRightAdjoint.constructRightAdjointObj\", \"CategoryTheory.LiftRightAdjoint.constructRightAdjoint\"], \"digest\": \"d2a1101bcd746a86\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Fixed-category evaluation adjoints do not provide these varying-fibre comparison equations; the preservation and mate APIs are ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality_left|leftAdjointIdIso|leftAdjointCompIso_assoc",
+   "results": "{\"t\": \"2026-10-26T08:24:53Z\", \"tool\": \"grep\", \"query\": \"homEquiv_naturality_left|leftAdjointIdIso|leftAdjointCompIso_assoc\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Category/UniformSpace.lean\", \"Mathlib/Algebra/Category/Grp/Adjunctions.lean\", \"Mathlib/Algebra/Category/Grp/Adjunctions.lean\", \"Mathlib/Algebra/Category/Grp/Adjunctions.lean\", \"Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean\", \"Mathlib/Algebra/Category/MonCat/Adjunctions.lean\", \"Mathlib/Algebra/Category/MonCat/Adjunctions.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\"], \"digest\": \"cef32fad1d64819b\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Fixed-category evaluation adjoints do not provide these varying-fibre comparison equations; the preservation and mate APIs are ingredients only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A system with transition maps under adjunctions maps compatibly to products of direct images by transposing the transition maps",
+   "results": "{\"t\": \"2026-10-26T08:24:54Z\", \"tool\": \"leansearch\", \"query\": \"A system with transition maps under adjunctions maps compatibly to products of direct images by transposing the transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.pushforwardToOfIso\", \"SheafOfModules.pushforwardPushforwardAdj\", \"CategoryTheory.GlueData.mapGlueData_t\", \"Topology.IsInducing.adjunction\", \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.Adjunction.leftAdjointCompNatTrans\", \"TopCat.Sheaf.instIsRightAdjointPushforward\"], \"digest\": \"eaea12c608074fc0\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Fixed-category evaluation adjoints do not provide these varying-fibre comparison equations; the preservation and mate APIs are ingredients only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.VaryingSiteEvaluationAdjoints",
+  "date": "2026-10-26",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3 of lem-per-artin-gabber-affine-curve: 'That assertion is proved by the argument of Step 2 with f_! replaced by f_*'. In the inherited refinement through the punctual/completion and derived-sections continuity tools, this is the free/cofree evaluation input for compatible varying-site resolutions. Here: the cofree arrow-indexed transition construction and its coherence checks.",
+   "via": [
+    "lem-per-varying-site-evaluation-adjoints",
+    "lem-per-varying-site-system-injective-resolutions",
+    "lem-per-finite-cover-derived-sections-continuity",
+    "lem-per-admissible-modification-cohomology-presentation",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.VaryingSiteCofreeEvaluationCoherence",
+  "file": "lean/Sheaf/CategoryTheory/VaryingSiteCofreeEvaluationCoherence.lean",
+  "declaration": "CategoryTheory.CoherentSitePseudofunctor.abelianCofreeEvaluation_coherence",
+  "declarations": [
+   "CategoryTheory.CoherentSitePseudofunctor.abelianCofreeFamily",
+   "CategoryTheory.CoherentSitePseudofunctor.abelianCofreeTransition",
+   "CategoryTheory.CoherentSitePseudofunctor.abelianCofreeExtension",
+   "CategoryTheory.CoherentSitePseudofunctor.abelianCofreeTransition_π",
+   "CategoryTheory.CoherentSitePseudofunctor.abelianCofreeEvaluation_coherence"
+  ],
+  "statement": "theorem abelianCofreeEvaluation_coherence [∀ (j k : I) (a : j ⟶ k), (D.abelianInverse a).Additive] (i : I) (A : D.abelianFibre i) : (∀ j : I, D.abelianCofreeTransition i A (𝟙 j) = (D.abelianInverseId j).hom.app (D.abelianCofreeFamily i A j)) ∧ (∀ {j k l : I} (a : j ⟶ k) (b : k ⟶ l), (D.abelianInverseComp a b).hom.app (D.abelianCofreeFamily i A l) ≫ D.abelianCofreeTransition i A (a ≫ b) = (D.abelianInverse a).map (D.abelianCofreeTransition i A b) ≫ D.abelianCofreeTransition i A a) ∧ (∀ (X : D.abelianFibre i) (h : X ⟶ A), (D.abelianAdjunction (𝟙 i)).homEquiv X A ((D.abelianInverseId i).hom.app X ≫ h) ≫ (D.abelianDirectId i).hom.app A = h) ∧ (∀ (j : I) (a : i ⟶ j), (D.abelianAdjunction a).homEquiv (D.abelianCofreeFamily i A j) A (D.abelianCofreeTransition i A a ≫ Pi.π (fun t : i ⟶ i ↦ (D.abelianDirect t).obj A) (𝟙 i) ≫ (D.abelianDirectId i).hom.app A) = Pi.π (fun t : i ⟶ j ↦ (D.abelianDirect t).obj A) a) ∧ (∀ (X : D.AbelianSystem) (h : X.obj i ⟶ A) {j k : I} (c : k ⟶ j), (D.abelianInverse c).map (D.abelianCofreeExtension i X A h j) ≫ D.abelianCofreeTransition i A c = X.transition c ≫ D.abelianCofreeExtension i X A h k)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T092003-L-3391722",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T092003-L-3391722",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

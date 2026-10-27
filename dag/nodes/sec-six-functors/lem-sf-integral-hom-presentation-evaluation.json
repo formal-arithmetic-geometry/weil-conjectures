@@ -1,0 +1,128 @@
+{
+ "id": "lem-sf-integral-hom-presentation-evaluation",
+ "kind": "statement",
+ "title": "Joint integral tensor-Hom presentations normalized by reduced evaluation",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a scheme $X$, and a finite-field datum $D$ whose characteristic differs from $\\ell$. Use the completed coefficient sheaf and finite reductions of [def-weil-integral-derived-reduction], the ambient internal Hom of [def-pur-derived-internal-hom], and the fixed closed coefficient calculus [def-coef-derived-system-calculus-data]. There is one integral TensorPresentation $a$ [def-sf-integral-hom-reduction-models] and, for each $n\\ge0$, a ReductionPresentation $m_n$ of $a$ over $\\mathcal O_E/(t^{n+1})$ such that for every pair of ambient derived objects $K,M$, the fixed finite closed adjunction uncurries $\\operatorname{comparison}(m_n,K,M)$ to $\\mu_n^{-1}(H(K,M),K)$ followed by integral reduction of the fixed evaluation $H(K,M)\\otimes K\\to M$. Here $\\mu_n$ is the fixed integral-to-finite tensorator. Only normalization is asserted; invertibility is a separate existing theorem.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Proof sentence: The general Hom comparisons are defined by the same evaluation maps."
+ },
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-coef-derived-system-calculus-data",
+  "def-pur-derived-internal-hom",
+  "def-weil-integral-derived-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Use the fixed natural closed adjunction on every ambient integral input and transport it by Koszul symmetry to the K tensor Hom convention. Its total-tensor and Hom-complex models give a TensorPresentation whose counit is the specified signed evaluation.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each finite quotient use the fixed finite closed structure and tensorator, conjugated by the same Koszul symmetry. Its pure-tensor equation and normalized scalar unit/counit square give the reduction presentation, using the same integral presentation for all n.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-sf-integral-hom-reduction-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand IntegralHom.comparison and uncurry in the original Hom tensor K convention. The transported adjunctions cancel the symmetry and give exactly finiteTensor inverse followed by reduced evaluation. The adjunction was chosen at every ambient input; no inference from normalization only on K-flat objects is needed.",
+   "uses": [
+    "def-pur-coefficient-base-change-hom",
+    "def-sf-integral-hom-reduction-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-coefficient-base-change-hom",
+  "def-sf-integral-hom-reduction-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Explicit normalization substep of lem-sf-general-hom-comparison-cocycles; see the Lean docstring for the representative construction. Stacks Project sites-cohomology.tex, lemma-internal-hom (08J9), lemma-pullback-tensor-product (07A4), and lemma-derived-base-change (06YY)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical tensor comparisons for derived changes of ring sheaves preserve associativity and identity and composition adjunction mates",
+   "results": "8 hits, including TensorProduct.assoc, PresheafOfModules.monoidalCategory and SheafOfModules.pushforward_assoc; none identifies the specified derived coefficient tensorators and adjunction mates.",
+   "date": "2026-10-25",
+   "verdict": "No matching normalization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient tensor comparison commutes with associators and the identity and composite adjunction mates",
+   "results": "8 hits: Adjunction.map_μ_comp_counit_app_tensor_assoc, Adjunction.unit_app_tensor_comp_map_δ_assoc, Adjunction.unit_app_tensor_comp_map_δ, Adjunction.map_μ_comp_counit_app_tensor, comp_leftAdjointMate_assoc, comp_rightAdjointMate_assoc, mateEquiv_apply, iterated_mateEquiv_conjugateEquiv. These are abstract tools without the specified coefficient-model normalization.",
+   "date": "2026-10-25",
+   "verdict": "No matching normalization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorPresentation|coefficientBaseChangeHom|completedScalarComparison",
+   "results": "0 Mathlib hits. Library search finds existing presentation, closed-calculus and completed-comparison interfaces, but not the simultaneous normalization assertions here.",
+   "date": "2026-10-25",
+   "verdict": "Existing definitions and component results do not state the required normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GeneralHomComparisonCocycles",
+  "date": "2026-10-25",
+  "group": "C6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence: The general Hom comparisons are defined by the same evaluation maps.",
+   "via": [
+    "lem-sf-general-hom-comparison-cocycles"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHomPresentationEvaluation",
+  "file": "lean/Sheaf/Paper/IntegralHomPresentationEvaluation.lean",
+  "declaration": "WeilConjectures.integralHom_presentation_evaluation",
+  "statement": "theorem integralHom_presentation_evaluation (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) :\n    ∃ a : IntegralHom.TensorPresentation.{u, u} X\n        (completedIntegralCommRingSheaf l E X D hl),\n      ∀ n : ℕ, ∃ m : IntegralHom.ReductionPresentation l E X D hl a n,\n        ∀ K M : completedIntegralDerivedCategory l E X D hl,\n          ((finiteIntrinsicClosed l E X n).transpose _\n            ((coefficientFiniteDerivedExtension l E X n).obj K)\n            ((coefficientFiniteDerivedExtension l E X n).obj M)).symm\n              (IntegralHom.comparison l E X D hl m K M) =\n            ((coefficientDerivedSystemEvaluationCalculus l E X).choose.finiteTensor n).inv.app\n                ((coefficientIntegralInternalHom l E X).obj (op K, M), K) ≫\n              (coefficientFiniteDerivedExtension l E X n).map\n                ((scalarIntegralClosed l E X).evaluation K M)",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T122627-L-1791195",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T122627-L-1791195",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,379 @@
+{
+ "id": "lem-tw-lisse-scalar-comparison-coherence",
+ "kind": "statement",
+ "title": "Finite scalar comparison and coherence of lisse realization maps",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ in $\\overline{\\mathbf Q}_\\ell$, its valuation ring $R$ and uniformizer $t$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a finite-type $k$-scheme, without separatedness [def-weil-scheme-morphism-properties]. On $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] set $B_X=\\varprojlim_{n\\ge1}(R/t^n)_X$ [def-weil-completed-integral-coefficients] and $A_X=B_X[1/t]$, the sheafification of sectionwise localization. Use ordinary module sheaves and their unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Write $\\mathcal C_X=D^b_c(X,R)$ for the integral constructible category [def-weil-derived-complete-integral-detailed], $Q_X:\\mathcal C_X\\to\\mathcal R_X=D^b_c(X,E)$ for raw rationalization [def-weil-rationalization-karoubi], and $F_X:D(B_X)\\to D(A_X)$ for $K\\mapsto A_X\\otimes^L_{B_X}K$. Write $J_X(Q_XK)=F_XK$, $J_X(u\\otimes a)=aF_X(u)$ for the induced functor. A lisse rational object means an object of the standard heart [def-weil-constructible-heart] pro-etale locally isomorphic to a finite sum of coefficient units [def-real-rational-lisse-heart]. A finite locally free module sheaf means one pro-etale locally isomorphic to $A_X^{\\oplus r}$, allowing rank zero and varying finite ranks.\n\nFor a finite extension $E\\subset E'$ in $\\overline{\\mathbf Q}_\\ell$, write $B'_X=\\widehat{\\mathcal O}_{E',X}$ and $A'_X=B'_X[1/t']$, with $t'$ a uniformizer of $\\mathcal O_{E'}$. There are natural isomorphisms\n$$J_{X,E'}(K\\otimes_EE')\\xrightarrow{\\sim}A'_X\\otimes^L_{A_X}J_{X,E}K.$$\nOn integral representatives they are localization of the inverse of the quotient-cone comparison $\\chi_{E'/E,K}$ [lem-weil-finite-free-completed-scalar-comparison], composed with ordinary derived scalar associators. On rational arrows they use $J(u\\otimes a)=aF(u)$. On lisse objects they are ordinary coefficient extension in degree zero, send $e_i\\otimes b$ to $be_i$, and have the homology-normalized form of [def-real-lisse-field-normalization]. The coefficient ring square commutes with all residue projections and localization units.\n\nThe tensor, unit and pullback comparisons specified by the inverse completion maps and ordinary scalar squares in [lem-tw-lisse-tensor-pullback-realization] and the scalar comparisons just specified obey the naturality, tensor associativity, symmetry, both unit, identity-pullback and composition-pullback diagrams. They obey the identity and tower laws for coefficient extensions and their tensor and pullback compatibility diagrams. On integral representatives the diagrams use the same simultaneous finite quotient maps, and their strict inverse-limit cone maps have zero shifted-product coordinate. On degree-zero lisse modules the associator sends $(e_i\\otimes e_j)\\otimes e_k$ to $e_i\\otimes(e_j\\otimes e_k)$, the symmetry sends $e_i\\otimes e_j$ to $e_j\\otimes e_i$ with sign $+1$, units multiply by $1$, successive pullbacks preserve basis vectors, and successive scalar maps multiply their scalars. All these specifications are compatible with sheaf maps and independent of the chosen local bases.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2, Proposition 6.8.14(1), Remark 6.8.15; agent specification of quotient-diagram coherence and finite scalar comparisons"
+ },
+ "stmt_deps": [
+  "def-real-lisse-field-normalization",
+  "def-real-rational-lisse-heart",
+  "def-weil-abstract-derived-category",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-constructible-heart",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-rationalization-karoubi",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-sheaf-of-modules-category",
+  "lem-tw-lisse-tensor-pullback-realization",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof": [
+  {
+   "text": "First check the geometric hypotheses used below. A field is Noetherian since its only ideals are $0$ and itself. Finite type includes local finite type and quasi-compactness. Thus the local-Noetherian finite-type lemma and the locally-Noetherian quasi-separatedness lemma make every scheme in the statement Noetherian and qcqs; the finite-type dimension lemma makes it finite dimensional. The prime $\\ell$ is invertible since the characteristic is different. For $E\\subset E'$, use the compatible same-index finite scalar maps to obtain $b:B_X\\to B'_X$. Its residue projections are exactly the specified ones. The analogous maps for $E\\subset E'\\subset E''$ compose, because each finite quotient map does; joint monicity of inverse-limit projections proves equality of completed ring maps. For a scheme map the constant-section maps commute with coefficient inclusions, so the same projection calculation proves the coefficient ring square, with the geometric inverse-image compositor supplied by completed-coefficient ringed coherence. The valuation restriction assertion puts $t$ in the maximal ideal of $\\mathcal O_{E'}$; the DVR factorization gives $t=u(t')^e$ with $u$ a unit and $e\\ge1$. Thus inverting $t$ or $t'$ in $B'_X$ gives the same sheaf, and $b$ induces $a:A_X\\to A'_X$. Equality on the integral rings extends uniquely across localization. This proves the residue and localization-unit specifications, including repeated fields.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-tw-completed-coefficient-ringed-coherence",
+    "def-weil-finite-type-morphism",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Remark 6.8.15; agent quotient-cone comparison argument"
+   }
+  },
+  {
+   "text": "Write $C_{E'/E}K=B'_X\\otimes^L_{B_X}K$ and $I_{E'/E}K$ for the specified integral scalar extension. The finite-free completed scalar comparison gives the natural isomorphism $\\chi_K:C_{E'/E}K\\to I_{E'/E}K$ on the derived-complete integral input $K$. Define $\\sigma_K$ to be $A'_X\\otimes^L_{B'_X}\\chi_K^{-1}$ followed by the ordinary balanced associators\n$$A'_X\\otimes^L_{B'_X}(B'_X\\otimes^L_{B_X}K)\\cong A'_X\\otimes^L_{B_X}K\\cong A'_X\\otimes^L_{A_X}(A_X\\otimes^L_{B_X}K).$$\nThe last isomorphism uses $B_X\\to A_X\\to A'_X$ from step 1. Change of rings and its K-flat computation give these functors; the normalized ordinary monoidal comparisons give these particular associators. Hence $\\sigma$ has exactly the requested source, target and integral normalization. Only the derived morphism $\\chi^{-1}$ is used; no chain inverse is chosen.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-derived-change-of-rings",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Remark 6.8.15; agent quotient-cone comparison argument"
+   }
+  },
+  {
+   "text": "The isomorphism in step 2 is natural on integral arrows since $\\chi$ and the balanced associators are natural. In raw rationalization an arrow is a finite sum of $u\\otimes c$. Both routes through its naturality square multiply the integral square by the image of $c\\in E\\subset E'$. The balancing relation $(ru)\\otimes c=u\\otimes rc$ is respected by $R$-linearity. Additivity proves naturality on all rational arrows with the action $J(u\\otimes c)=cF(u)$. Integral inverses remain inverses after localization. This constructs the asserted natural isomorphism on the raw rational categories without any extra objects.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Remark 6.8.15; agent quotient-cone comparison argument"
+   }
+  },
+  {
+   "text": "The completed integral finite-free lemma identifies $B'_X$, as a $B_X$-module, with a finite product of copies of $B_X$. By step 1, $A'_X=B'_X[1/t]$, so the same finite basis identifies $A'_X$ over $A_X$ with a finite direct sum of copies of $A_X$. Tensoring with it is a finite direct sum functor, hence is exact on module sheaves and has no higher derived terms. Slice restriction and exact localization identify a lisse input locally with $A_X^{\\oplus r}[0]$. On the integral coefficient unit the quotient comparison is the actual quotient augmentation; its inverse followed by localization sends a scalar to that same scalar. Additivity gives $\\sigma$ on each local free sum: under the canonical scalar-extension identification it sends $e_i\\otimes b$ to $be_i$. Its degree-zero identification is the one inducing the identity on $\\mathcal H^0$. These are precisely the requirements of the field normalization definition, rather than a new choice of normalization.",
+   "uses": [
+    "lem-weil-completed-integral-finite-free",
+    "lem-tw-lisse-localization-restriction",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-real-lisse-field-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Remark 6.8.15; agent quotient-cone comparison argument"
+   }
+  },
+  {
+   "text": "First retain the ordinary, uncompleted operations. Apply the ringed derived monoidal comparison theorem to completed and localized coefficient rings and their commuting structural squares from step 1. It gives associativity, signed symmetry, both unit equations, and the monoidal identity and composition comparators for ordinary pullback. The finite-derived normalization theorem identifies these maps on simultaneous flat-term K-flat representatives: $s\\otimes(x\\otimes y)\\mapsto(s\\otimes x)\\otimes(1\\otimes y)$, with inverse multiplying the two scalar factors. It also gives the scalar-square equation and its identity and successive-change laws. These apply to arbitrary commutative ring-sheaf maps; no flatness of a finite residue coefficient map is being used.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pur-finite-derived-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Remark 6.8.15; agent quotient-cone comparison argument"
+   }
+  },
+  {
+   "text": "Compare those ordinary equations with the actual completed tensor and pullback maps. Use simultaneous flat-term K-flat representatives of the integral inputs and their strict quotient towers. Coherent substitution identifies each iterated completed expression with the limit of its whole finite tensor/pullback expression, including the structural associators, symmetry, unitors and pullback compositors. The quotient-realization theorem says that the finite comparison diagrams commute as strict systems and realize the specified completed maps. For the augmentations from ordinary expressions, project to level $n$: both routes reduce the same tensor generators and apply the finite maps of step 5. For example reassociation sends $((x\\otimes y)\\otimes z)$ to $x\\otimes(y\\otimes z)$ after the same coefficient projection; symmetry contributes $(-1)^{pq}$ on degrees $p,q$ on both routes. Unit maps multiply by the projected $1$. The unshifted product maps therefore agree. Their shifted-product coordinates are both zero by the quotient augmentation normalizations. Equality of these two coordinates proves equality of the chain maps to the specified cone, before localization. The cited simultaneous substitution and representative independence make this an equality of the required derived maps, not an inference from isolated finite cohomology groups.",
+   "uses": [
+    "lem-pur-completed-operation-tower-substitution",
+    "lem-pur-completed-comparison-quotient-realization",
+    "lem-fix-constructible-tensor-completion",
+    "lem-tw-ordinary-completed-integral-pullback",
+    "lem-pur-quotient-scalar-comparison-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Remark 6.8.15; agent quotient-cone comparison argument"
+   }
+  },
+  {
+   "text": "On integral constructible inputs the tensor and pullback augmentations used in step 6 are isomorphisms. The tensor/pullback realization lemma specifies its comparisons by precisely their inverses and the ordinary scalar squares. Consequently inserting those inverses into the commuting augmentation diagrams of step 6 cancels each augmentation with its inverse and yields the requested tensor associativity, symmetry and both unit diagrams. The same cancellation applied to the finite identity and composable-pullback systems yields identity-pullback and composition-pullback diagrams; their completed compositors are the specified ones by coherent substitution. Apply exact scalar localization to these equalities and then the scalar-linear arrow argument of step 3. This gives naturality and the same equations on rational objects, for arbitrary scheme morphisms, without separatedness or base-field linearity.",
+   "uses": [
+    "lem-tw-lisse-tensor-pullback-realization",
+    "lem-fix-constructible-tensor-completion",
+    "lem-tw-ordinary-completed-integral-pullback",
+    "lem-pur-completed-operation-tower-substitution",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Remark 6.8.15; agent quotient-cone comparison argument"
+   }
+  },
+  {
+   "text": "For $E\\subset E'\\subset E''$, apply the scalar-completion associator normalization. Writing $C$ for ordinary and $I$ for completed scalar extension, it states\n$$a^I I_{E''/E'}(\\chi_{E'/E})\\chi_{E''/E',C_{E'/E}K}=\\chi_{E''/E,K}a^C.$$\nThe input $K$ is derived complete, as required; ordinary finite scalar extension is complete by the finite-free comparison. Invert the displayed isomorphisms and apply $A''_X\\otimes^L_{B''_X}(-)$. Substitute the definition of $\\sigma$ from step 2: the intermediate $\\chi$ factors cancel, leaving exactly the scalar tower equation with the ordinary rational associator. The identity normalization of the finite-free comparison gives the identity field law under multiplication and completeness unitors, including repeated fields. The associator lemma also supplies independence of cofinal exponent choices and the pentagon, so this calculation uses the prescribed strict quotient towers even for ramified extensions.",
+   "uses": [
+    "lem-fix-scalar-completion-associator",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Remark 6.8.15; agent quotient-cone comparison argument"
+   }
+  },
+  {
+   "text": "For tensor/scalar and pullback/scalar compatibility, use the mixed coefficient equation of the quotient-realization theorem, together with the ordinary coefficient square of the finite-derived normalization theorem. At level $n$ its scalar association is $(x\\otimes a)\\otimes b\\mapsto x\\otimes ab$. The tensor/pullback square has both routes $b\\otimes(x\\otimes y)\\mapsto(b\\otimes x)\\otimes(1\\otimes y)$; for a single pulled-back generator both routes retain that generator and its image scalar. Thus the actual quotient transitions agree, including the ramified case. The whole-system equation in that theorem identifies the completed structural maps with these same strict maps; the scalar-completion associator of step 8 fixes successive scalar substitutions. The augmentations have the specified zero shifted coordinate. After passing to derived maps, invert the completion isomorphisms and cancel adjacent factors as in step 7. Ordinary associativity identifies the surviving maps with $\\sigma$ and the stated tensor/pullback realizations. This proves their mixed diagrams and their identity and tower compatibility. Rational arrows are handled by multiplying scalars as in step 3.",
+   "uses": [
+    "lem-pur-completed-comparison-quotient-realization",
+    "lem-pur-finite-derived-comparison-normalization",
+    "lem-fix-scalar-completion-associator",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-tw-lisse-tensor-pullback-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Remark 6.8.15; agent quotient-cone comparison argument"
+   }
+  },
+  {
+   "text": "Finally restrict to a common pro-etale cover trivializing the finitely many lisse inputs. Slice compatibility of localization and the tensor/pullback realization formulas identify all maps just constructed with ordinary degree-zero module maps. The formulas in steps 4 and 5 send $(e_i\\otimes e_j)\\otimes e_k$ to $e_i\\otimes(e_j\\otimes e_k)$, interchange $e_i,e_j$ with sign $(-1)^{0\\cdot0}=1$, and multiply unit coefficients by $1$. Consecutive pullbacks retain the same basis vector; consecutive scalar extensions send $(e_i\\otimes b)\\otimes c$ to $e_i\\otimes bc$. These formulas also cover rank zero (the unique map of zero modules) and independently varying finite ranks. For a sheaf map represented on an overlap by a matrix $(m_{ji})$, either composite sends $e_i$ to $\\sum_j a(m_{ji})e_j$, with the same scalar image $a$; tensor products give products of matrix entries. In particular the formulas commute with each change-of-basis matrix and its inverse. Hence they are independent of bases and agree on overlaps, so sheaf locality gives the claimed global compatibility with sheaf maps. No local equality test for arbitrary derived morphisms is used here: these are maps of degree-zero sheaves.",
+   "uses": [
+    "lem-tw-lisse-localization-restriction",
+    "lem-tw-lisse-tensor-pullback-realization",
+    "def-real-lisse-field-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Remark 6.8.15; agent quotient-cone comparison argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-real-lisse-field-normalization",
+  "def-weil-finite-type-morphism",
+  "def-weil-rationalization-karoubi",
+  "lem-fix-constructible-tensor-completion",
+  "lem-fix-scalar-completion-associator",
+  "lem-kun-dimension-finite-type",
+  "lem-pur-completed-comparison-quotient-realization",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-finite-derived-comparison-normalization",
+  "lem-pur-quotient-scalar-comparison-descent",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-tw-completed-coefficient-ringed-coherence",
+  "lem-tw-lisse-localization-restriction",
+  "lem-tw-lisse-tensor-pullback-realization",
+  "lem-tw-ordinary-completed-integral-pullback",
+  "lem-weil-completed-integral-finite-free",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2, Proposition 6.8.14 and Remark 6.8.15; explicit normalized quotient-cone argument assembled from the cited DAG statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completed scalar extension of constructible sheaves realizes as continuous field extension compatibly with normalized tensor pullback associativity symmetry and units",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type u} [inst_1 : CommRing S] (f : R →+* S)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) {Z : CommRingCat}\\n  (h :\\n    {\\n        carrier :=\\n          ↑((AlgebraicGeometry.Spec.structureSheaf S).val.obj\\n              (Opposite.op\\n     \", \"doc\": \"Let $R$ and $S$ be commutative rings and let $f: R \\\\to S$ be a ring homomorphism. Let $f^*: \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ be the induced continuous map on the prime spectra. For a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module/sheaf, algebraic localization, or completion results do not assert the specified constructible pro-etale comparison; see report for sources read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient field extension and completed tensor comparison coherence on local bases",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsLocalRing.span_eq_top_of_tmul_eq_basis\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsLocalRing R] [Module.Finite R M] {ι : Type u_5} (f : ι → M)\\n  (b : Module.Basis ι (IsLocalRing.ResidueField R) (TensorProduct R (IsLocalRing.ResidueField R) M)),\\n  (∀ (i : ι), 1 ⊗ₜ[R] f \", \"doc\": \"Let $R$ be a commutative local ring with residue field $k$, and let $M$ be a finitely generated $R$-module. Let $f: I \\\\to M$ be a family of elements in $M$. If the family of tensors $\\\\{1 \\\\otimes f(i)\\\\\"}\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\\n  TensorProduct.Alge\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"Module.exists_basis_of_basis_baseChange\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsLocalRing R] [Module.FinitePresentation R M] {ι : Type u_5} (v : ι → M),\\n  LinearIndependent (IsLocalRing.ResidueField R) (⇑((TensorProduct.mk R (IsLocalRing.ResidueField R) M) 1) ∘ v) →\", \"doc\": \"Let $ R $ be a commutative local ring with maximal ideal $ \\\\mathfrak{m} $ and residue field $ k = R/\\\\mathfrak{m} $, and let $ M $ be a finitely presented $ R $-module. If a family of vectors $ v_i $ i\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (ι : Type u_4) →\\n        [Fintype ι] →\\n          [DecidableEq ι] → TensorProduct R (AdicCompletion I R) (ι → R) ≃ₗ[AdicCompletion I R] AdicCompletion I (ι → R)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and a finite index type $ \\\\iota $ with decidable equality, this constructs a linear equivalence between the $ I $-adic completion of the product module $ \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_tmul\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (r : AdicCompletion I R) (x : M), (AdicCompletion.ofTensorProduct I M) (r ⊗ₜ[R] x) = r • (AdicCompletion.of I M) x\", \"doc\": \"For any element $ r $ in the $ I $-adic completion of a commutative ring $ R $ and any element $ x $ in an $ R $-module $ M $, the canonical linear map from the tensor product $ (\\\\varprojlim R/I^nR) \\\\\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M).symm ((AdicCompletion.of I M) x) = 1 ⊗ₜ[R] x\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, applying the inverse of the linear equivalence between $ \\\\hat{R} \\\\otimes_R M $ and the $ I $-adic \"}\n  {\"name\": \"IsBaseChange.of_fintype_basis\", \"module\": \"Mathlib/RingTheory/TensorProduct/IsBaseChangeFree\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {V : Type u_2} [inst_1 : AddCommMonoid V] [inst_2 : Module R V] (A : Type u_3)\\n  [inst_3 : CommSemiring A] [inst_4 : Algebra A R] [inst_5 : Module A V] [inst_6 : IsScalarTower A R V] {ι : Type u_4}\\n  (b : Module.Basis ι R V) [inst_7 : Fintype ι], IsBaseChange\", \"doc\": \"Given a finite type $\\\\iota$ and a basis $b$ of an $R$-module $A$, the linear combination map $\\\\mathrm{Fintype.linearCombination}_A^b$ satisfies the base change property, establishing an isomorphism be\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : TensorProduct R (AdicCompletion I R) M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) x = (AdicCompletion.o\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module/sheaf, algebraic localization, or completion results do not assert the specified constructible pro-etale comparison; see report for sources read"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalFunctor",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.MonoidalFunctor'",
+   "date": "2026-10-22",
+   "verdict": "invalid query: unknown identifier, retained as actually returned; successful replacement query recorded below"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|completed.*scalar|scalar.*complet",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean\", \"line\": \"493\", \"text\": \"    [IsScalarTower K (v.adicCompletion K) (w.adicCompletion L)]\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/LiesOverInstances.lean\", \"line\": \"47\", \"text\": \"scoped instance : IsScalarTower K v.Completion w.Completion :=\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean\", \"line\": \"339\", \"text\": \"variable [Algebra v.Completion w.Completion] [IsScalarTower K v.Completion w.Completion]\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean\", \"line\": \"344\", \"text\": \"  (IsScalarTower.algebraMap_apply (WithAbs v.1) v.Completion w.Completion x).symm.trans\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean\", \"line\": \"355\", \"text\": \"variable [Algebra v.Completion w.Completion] [IsScalarTower K v.Completion w.Completion]\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean\", \"line\": \"358\", \"text\": \"such that `IsScalarTower K v.Completion w.Completion`.\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean\", \"line\": \"413\", \"text\": \"variable [Algebra v.Completion w.Completion] [IsScalarTower K v.Completion w.Completion]\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/ZMod.lean\", \"line\": \"320\", \"text\": \"The completed L-function of a function `ZMod 1 → ℂ` is a scalar multiple of the completed Riemann\"}\n  {\"file\": \"Mathlib/Topology/Algebra/UniformMulAction.lean\", \"line\": \"209\", \"text\": \"    [UniformContinuousConstSMul N X] [IsScalarTower M N X] : IsScalarTower M N (Completion X) :=\"}\n  {\"file\": \"Mathlib/Topology/Algebra/UniformMulAction.lean\", \"line\": \"227\", \"text\": \"instance [SMul Mᵐᵒᵖ X] [IsCentralScalar M X] : IsCentralScalar M (Completion X) :=\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/MetricSeparated.lean\", \"line\": \"47\", \"text\": \"lemma isSeparated_iff_setRelIsSeparated :\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Cover.lean\", \"line\": \"103\", \"text\": \"  .of_maximal_isSeparated <| by simpa [isSeparated_iff_setRelIsSeparated] using hN\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"line\": \"161\", \"text\": \"  rw [← restrictScalars_top R (AdicCompletion I R) (AdicCompletion I M),\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"line\": \"162\", \"text\": \"    ← restrictScalars_image_smul_eq (R := AdicCompletion I R),\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"line\": \"95\", \"text\": \"      (TensorProduct.piScalarRight R (AdicCompletion I R) (AdicCompletion I R) ι).toLinearMap := by\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"line\": \"120\", \"text\": \"      (TensorProduct.piScalarRight R (AdicCompletion I R) (AdicCompletion I R) ι).toLinearMap := by\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"line\": \"129\", \"text\": \"  letI g := (TensorProduct.piScalarRight R (AdicCompletion I R) (AdicCompletion I R) ι).symm\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"153\", \"text\": \"    [IsScalarTower R S M] : IsPrecomplete (I.map (algebraMap R S)) M ↔ IsPrecomplete I M := by\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"287\", \"text\": \"instance instSMul [SMul S R] [SMul S M] [IsScalarTower S R M] : SMul S (AdicCompletion I M) where\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"307\", \"text\": \"lemma val_smul [SMul S R] [SMul S M] [IsScalarTower S R M] (s : S) (f : AdicCompletion I M) :\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"310\", \"text\": \"lemma val_smul_apply [SMul S R] [SMul S M] [IsScalarTower S R M] (s : S) (f : AdicCompletion I M)\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"331\", \"text\": \"    IsScalarTower S T (AdicCompletion I M) where\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"line\": \"337\", \"text\": \"instance : IsScalarTower R (AdicCompletion I R) (AdicCompletion I M) where\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"line\": \"112\", \"text\": \"  ((ofAlgEquiv I).symm.toAlgHom.restrictScalars R).comp (AdicCompletion.liftAlgHom I f hf)\"}\n  {\"file\": \"Mathlib/Algebra/Module/Submodule/RestrictScalars.lean\", \"line\": \"149\", \"text\": \"def restrictScalarsLatticeHom : CompleteLatticeHom (Submodule R M) (Submodule S M) where\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module/sheaf, algebraic localization, or completion results do not assert the specified constructible pro-etale comparison; see report for sources read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed scalar extension of constructible sheaves realizes as continuous field extension compatibly with normalized tensor pullback associativity symmetry and units",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IntermediateField.botContinuousSMul\", \"module\": \"Mathlib.Topology.Algebra.IntermediateField\", \"type\": \"(M : IntermediateField K L) : ContinuousSMul (⊥ : IntermediateField K L) M\", \"doc\": \"The scalar actions of the base field $F$ on itself (as the bottom intermediate field $\\\\bot$) and on the extension field $E$ satisfy the compatibility condition $m \\\\cdot (n \\\\cdot a) = (m \\\\cdot n) \\\\cdot\"}\n  {\"name\": \"Bornology.IsVonNBounded.extend_scalars\", \"module\": \"Mathlib.Analysis.LocallyConvex.Bounded\", \"type\": \"[NontriviallyNormedField 𝕜] {E : Type*} [AddCommGroup E] [Module 𝕜 E] (𝕝 : Type*) [NontriviallyNormedField 𝕝]\\n  [NormedAlgebra 𝕜 𝕝] [Module 𝕝 E] [TopologicalSpace E] [ContinuousSMul 𝕝 E] [IsScalarTower 𝕜 𝕝 E] {s : Set E}\\n  (h : IsVonNBounded 𝕜 s) : IsVonNBounded 𝕝 s\", \"doc\": \"Let $ E $ be a topological vector space over a nontrivially normed field $ \\\\mathbb{K} $, and let $ \\\\mathbb{L} $ be another nontrivially normed field equipped with a normed algebra structure over $ \\\\ma\"}\n  {\"name\": \"IntermediateField.extendScalars\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Basic\", \"type\": \": IntermediateField F L\", \"doc\": \"Given a subfield $ E $ of $ L $ containing the image of $ F $ under the canonical algebra homomorphism $ F \\\\to L $, this function constructs the intermediate field structure on $ E $ between $ F $ and\"}\n  {\"name\": \"SheafOfModules.sheafificationCompPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  PresheafOfModules.sheafification (𝟙 S.val) ⋙ pullback.{v} φ ≅\\n    PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)\", \"doc\": \"The natural isomorphism asserting that composing sheafification with the pullback functor (along a ring sheaf morphism) is equivalent to composing the pullback functor (on presheaves) with sheafificat\"}\n  {\"name\": \"Algebra.Extension.instIsScalarTowerRing\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \"{R₀} [CommRing R₀] [Algebra R₀ R] [Algebra R₀ S] [IsScalarTower R₀ R S] : IsScalarTower R₀ R P.Ring\", \"doc\": \"Given commutative rings $ R_0 $, $ R $, and $ S $ with $ R $ and $ S $ as $ R_0 $-algebras and a scalar tower compatibility between $ R_0 $, $ R $, and $ S $, the algebra extension $ \\\\text{Algebra.Ext\"}\n  {\"name\": \"IntermediateField.extendScalars_top\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Adjoin.Defs\", \"type\": \": extendScalars (le_top : F ≤ ⊤) = ⊤\", \"doc\": \"The scalar extension of the top intermediate field $\\\\top$ (corresponding to the field $L$) from $F$ yields $\\\\top$ itself, i.e., $\\\\text{extendScalars}(F \\\\leq \\\\top) = \\\\top$.\"}\n  {\"name\": \"IntermediateField.extendScalars_self\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Adjoin.Defs\", \"type\": \": extendScalars (le_refl F) = ⊥\", \"doc\": \"Extending the scalar structure from the base field $ F $ to itself results in the bottom element $ \\\\bot $ of the complete lattice of intermediate fields between $ F $ and $ E $, which corresponds to t\"}\n  {\"name\": \"Valued.instFaithfulSMulCompletionOfUniformContinuousConstSMul\", \"module\": \"Mathlib.Topology.Algebra.Valued.ValuedField\", \"type\": \"{R : Type*} [CommSemiring R] [Algebra R K] [UniformContinuousConstSMul R K] [FaithfulSMul R K] : FaithfulSMul R (hat K)\", \"doc\": \"If $ R $ is a commutative semiring with a faithful scalar multiplication on a valued field $ K $, and scalar multiplication by $ R $ is uniformly continuous on $ K $, then $ R $ also has a faithful sc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module/sheaf, algebraic localization, or completion results do not assert the specified constructible pro-etale comparison; see report for sources read"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjFreeIso",
+   "results": "5 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:100-135: ordinary free-sheaf pullback and naturality, not the completed scalar comparison or its specified quotient-cone coherence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed scalar extension comparison for constructible pro-etale sheaves is compatible with tensor pullback and field towers",
+   "results": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; KaehlerDifferential.isBaseChange_of_formallyEtale; Algebra.Etale.baseChange; Algebra.Etale.comp; Algebra.FormallyEtale.of_restrictScalars; Algebra.Extension.tensorCotangentSpace; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaf pullback, algebraic adic completion, condensed modules or etale algebras; none states the prescribed completed constructible realization and quotient-cone coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|completed.*scalar|scalar.*complet",
+   "results": "Mathlib/NumberTheory/LSeries/ZMod.lean; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/LiesOverInstances.lean; Mathlib/Algebra/Module/Submodule/RestrictScalars.lean; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean; Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaf pullback, algebraic adic completion, condensed modules or etale algebras; none states the prescribed completed constructible realization and quotient-cone coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pro-etale lisse sheaf realization commutes with finite coefficient field extension and completed tensor products",
+   "results": "Condensed.lanSheafProfinite; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; SheafOfModules.sheafificationCompPullback; LightCondensed.lanLightCondSet; Algebra.FormallyEtale.instTensorProduct; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Algebra.Etale.baseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaf pullback, algebraic adic completion, condensed modules or etale algebras; none states the prescribed completed constructible realization and quotient-cone coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "SheafOfModules.pullbackId; SheafOfModules.pullback; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackComp; SheafOfModules.pullback_comp_id; SheafOfModules.pullback_id_comp; SheafOfModules.pullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaf pullback, algebraic adic completion, condensed modules or etale algebras; none states the prescribed completed constructible realization and quotient-cone coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free local systems over completed coefficient ring sheaves and quotient cone scalar extension coherence",
+   "results": "Condensed.profiniteSolid; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; AdicCompletion.val_smul_eq_evalₐ_smul; IsAdicComplete.of_comp_lift; IsAdicComplete.StrictMono.of_comp_lift; AdicCompletion.instIsScalarTower_1; AdicCompletion.eval_comp_of; IsAdicComplete.StrictMono.of_lift",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaf pullback, algebraic adic completion, condensed modules or etale algebras; none states the prescribed completed constructible realization and quotient-cone coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-tw-lisse-rational-realization",
+  "date": "2026-10-22",
+  "group": "Q130"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "blueprint": {
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "First dual-stalk identification underlying weight negation; realization infrastructure for Finite scalar comparison and coherence of lisse realization maps. Returned realization proof steps 7,8,13.",
+   "via": [
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-tw-lisse-scalar-comparison-coherence",
+  "worker": "stage1",
+  "summary": "Constructed finite scalar realization by localization of the specified completion inverse. Proved ordinary and strict quotient-system coherence separately, then cancelled completion maps in the derived category; checked raw rational arrows, ramified towers, exact finite-free scalar extension, degree-zero normalization and basis independence. Reused existing smaller statements; no new nodes.",
+  "blueprint": "The dual-stalk/dual-weight realization infrastructure under lem-tw-dual-negation; realizes the finite scalar and coherence clauses split from lem-tw-lisse-rational-realization (returned steps 7, 8, 13).",
+  "tool_uses": [
+   {
+    "node": "lem-fix-constructible-tensor-completion",
+    "why": "Generic Ordinary and completed tensor agree on integral constructible complexes used for the normalized coefficient/derived-operation comparison; this unit has no theorem supplying this technical tool and its dual-weight route is retained."
+   },
+   {
+    "node": "lem-fix-scalar-completion-associator",
+    "why": "Generic Tensor-associator normalization of the strict-tower scalar completion comparison used for the normalized coefficient/derived-operation comparison; this unit has no theorem supplying this technical tool and its dual-weight route is retained."
+   },
+   {
+    "node": "lem-pur-completed-comparison-quotient-realization",
+    "why": "Generic Simultaneous quotient realization of completed comparison diagrams used for the normalized coefficient/derived-operation comparison; this unit has no theorem supplying this technical tool and its dual-weight route is retained."
+   },
+   {
+    "node": "lem-pur-completed-operation-tower-substitution",
+    "why": "Generic Coherent substitution of normalized systems into completed operations used for the normalized coefficient/derived-operation comparison; this unit has no theorem supplying this technical tool and its dual-weight route is retained."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions used for the normalized coefficient/derived-operation comparison; this unit has no theorem supplying this technical tool and its dual-weight route is retained."
+   },
+   {
+    "node": "lem-pur-finite-derived-comparison-normalization",
+    "why": "Generic K-flat normalization and coefficient coherence of the finite derived comparison used for the normalized coefficient/derived-operation comparison; this unit has no theorem supplying this technical tool and its dual-weight route is retained."
+   },
+   {
+    "node": "lem-pur-quotient-scalar-comparison-descent",
+    "why": "Generic Canonical scalar augmentation to a strict coefficient-tower cone descends used for the normalized coefficient/derived-operation comparison; this unit has no theorem supplying this technical tool and its dual-weight route is retained."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic Monoidal and adjunction normalization of derived ringed-topos comparisons used for the normalized coefficient/derived-operation comparison; this unit has no theorem supplying this technical tool and its dual-weight route is retained."
+   },
+   {
+    "node": "lem-weil-completed-integral-finite-free",
+    "why": "Generic The prescribed completed integral coefficient inclusion is finite free used for the normalized coefficient/derived-operation comparison; this unit has no theorem supplying this technical tool and its dual-weight route is retained."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic Finite free completed coefficient extension is ordinary derived scalar extension used for the normalized coefficient/derived-operation comparison; this unit has no theorem supplying this technical tool and its dual-weight route is retained."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-well-defined",
+    "why": "Generic The integral scalar extension is well defined, a derived limit, and O_E-linear used for the normalized coefficient/derived-operation comparison; this unit has no theorem supplying this technical tool and its dual-weight route is retained."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field used for the normalized coefficient/derived-operation comparison; this unit has no theorem supplying this technical tool and its dual-weight route is retained."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite-type dimension bound used only to verify the hypotheses of the ordinary-completed pullback comparison; no weight-unit node supplies this generic geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-constructible-tensor-completion",
+  "lem-fix-scalar-completion-associator",
+  "lem-pur-completed-comparison-quotient-realization",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-finite-derived-comparison-normalization",
+  "lem-pur-quotient-scalar-comparison-descent",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-completed-integral-finite-free",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-kun-dimension-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-51528ce49",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-51528ce49 (reviewer sub-agent of L); spot-checked: I read the 10-step split and every cited statement in full. The delivery has no new nodes, and the statement and stmt_deps are byte-identical to the node Q130 created today. Old steps 7-8 of lem-tw-lisse-rational-realization were checked against the run-2 Q12 snapshot: all their content is present and more explicit (steps 2-4 and 9; 5-7 and 10). uses equals proof_deps, there is no cycle and no SGA citation. Bhatt-Scholze 6.8.2/6.8.3/6.8.14/Rem 6.8.15 were checked on pp. 58-62. Geometry: 01T6 plus finite type gives Noetherian, 01OY gives qcqs, and def-kun-dimension finiteness matches the hypothesis of ordinary-completed-pullback. Coefficients: t=u t'^e with e>=1. sigma is A'⊗chi^{-1} followed by associators, with K derived complete. Lisse objects go through the finite-free rank [E':E]. The level-n cone formulas are explicit and the shifted coordinate is zero. The step-8 tower equation matches lem-fix-scalar-completion-associator verbatim, using naturality of chi and v-completeness of C K. Mixed laws come from the quotient-realization mixed equation. Edge cases checked: E'=E, ramified extensions, rank 0, sign +1 in degree 0. lem-per-rational-realization-scalar-coherence is the PBC analogue on different categories, not a duplicate. Batch-5: lem-pod-derived-exact-square-composition is generic derived-square pasting for exact functors, not part of the Poincaré duality proof, and the base stmt_deps already reach it, so the citation is accepted. Accepted tool_uses: the generic lem-fix-*, lem-pur-*, lem-sfb-* and lem-weil-* coefficient and derived-operation tools. Advisory: step 1 does not separately cite the functoriality of the constant-section map in the coefficient ring, which is elementary."
+ }
+}

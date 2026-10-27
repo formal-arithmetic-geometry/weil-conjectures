@@ -17,6 +17,9 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Injective
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 
+import Sheaf.AlgebraicGeometry.AffineComparisonInjectiveDerivedVanishing
+import WeilConjectures.SixFunctors.ProEtale.Comparison.UpperStar
+
 /-!
 # Acyclicity for pro-étale direct images on the affine pro-étale basis
 
@@ -95,6 +98,48 @@ theorem rightAcyclic_lowerStar_of_isZero_rightDerived {U V : Scheme.{u}} (f : U 
 
 section Acyclicity
 
+private lemma affine_etale_sections_vanishing (X : Scheme.{u})
+    (I : Sheaf X.smallEtaleTopology A) [Injective I]
+    (W : X.AffineEtale) (q : ℕ) :
+    IsZero (((sectionsFunctor A ((toProEt X).obj ((AffineEtale.Spec X).obj W))).rightDerived
+      (q + 1)).obj ((comparisonUpperStar A X).obj I)) := by
+  let T := (toProEt X).obj ((AffineEtale.Spec X).obj W)
+  have : Etale T.hom := ((AffineEtale.Spec X).obj W).prop
+  have : IsAffine T.left := by
+    change IsAffine ((AffineEtale.Spec X).obj W).left
+    rw [AffineEtale.Spec_obj_left]
+    infer_instance
+  have hT : WeaklyEtale T.hom := T.prop
+  let j := ProEtale.localizationRestriction A T.hom hT
+  let Γ := sheafToPresheaf (ProEt.topology T.left) A ⋙
+    (evaluation _ A).obj (op (MorphismProperty.Over.mk ⊤ (𝟙 T.left)
+      (MorphismProperty.id_mem _ T.left)))
+  let e : T ≅ (MorphismProperty.Over.map ⊤ hT).obj
+      (MorphismProperty.Over.mk ⊤ (𝟙 T.left) (MorphismProperty.id_mem _ T.left)) :=
+    MorphismProperty.Over.isoMk (Iso.refl _) (by exact Category.id_comp _)
+  have : j.Additive := {}
+  let eΓ : sectionsFunctor A T ≅ j ⋙ Γ :=
+    NatIso.ofComponents (fun G ↦ G.obj.mapIso e.op) (fun φ ↦ (φ.hom.naturality e.inv.op).symm)
+  have : PreservesFiniteColimits j :=
+    preservesFiniteColimits_of_natIso (ProEtale.upperStarIsoLocalizationRestriction A T.hom hT)
+  have : PreservesFiniteLimits j :=
+    preservesFiniteLimits_of_natIso (ProEtale.upperStarIsoLocalizationRestriction A T.hom hT)
+  have : Injective ((Etale.upperStar A T.hom).obj I) :=
+    Etale.injective_upperStar_obj_of_etale' A T.hom I
+  have h := isZero_rightDerived_globalSections_comparisonUpperStar_of_isAffine A T.left
+    ((Etale.upperStar A T.hom).obj I) q
+  let eR : (sectionsFunctor A T).rightDerived (q + 1) ≅
+      (j ⋙ Γ).rightDerived (q + 1) :=
+    { hom := NatTrans.rightDerived eΓ.hom (q + 1)
+      inv := NatTrans.rightDerived eΓ.inv (q + 1)
+      hom_inv_id := by rw [← NatTrans.rightDerived_comp, eΓ.hom_inv_id, NatTrans.rightDerived_id]
+      inv_hom_id := by rw [← NatTrans.rightDerived_comp, eΓ.inv_hom_id, NatTrans.rightDerived_id] }
+  refine IsZero.of_iso h (eR.app _ ≪≫
+    (Functor.rightDerivedCompIsoOfExact j Γ (q + 1)).app _ ≪≫ ?_)
+  exact (Γ.rightDerived (q + 1)).mapIso
+    (((ProEtale.upperStarIsoLocalizationRestriction A T.hom hT).app _).symm ≪≫
+      (comparisonUpperStarUpperStarIso A T.hom).app I)
+
 /-- Blueprint `prop-weil-pbc-site-comparison-finite-level`: Exactness and full faithfulness at
 finite level
 
@@ -106,8 +151,38 @@ and invertibility of the unit `F ⟶ ν_* ν^* F`, are
 `AlgebraicGeometry.ProEtale.isIso_comparisonAdjunction_unit`. -/
 theorem rightAcyclic_comparisonUpperStar_obj_of_injective (X : Scheme.{u})
     (I : Sheaf X.smallEtaleTopology A)
-    [Injective I] : ν_*(X)[A].rightAcyclic (ν^*(X)[A].obj I) :=
-  sorry
+    [Injective I] : ν_*(X)[A].rightAcyclic (ν^*(X)[A].obj I) := by
+  intro q
+  let R : InjectiveResolution ((comparisonUpperStar A X).obj I) :=
+    injectiveResolution ((comparisonUpperStar A X).obj I)
+  refine IsZero.of_iso ?_ (R.isoRightDerivedObj _ (q + 1))
+  rw [HomologicalComplex.homologyFunctor_obj, ← HomologicalComplex.exactAt_iff_isZero_homology]
+  let S := ((comparisonLowerStar A X).mapHomologicalComplex _).obj R.cocomplex |>.sc (q + 1)
+  change S.Exact
+  have : HasLimitsOfSize.{u, u + 1} A := hasLimitsOfSizeShrink.{u, u + 1, u + 1, u + 1} A
+  let Φ := (AffineEtale.Spec X).sheafPushforwardContinuous A (AffineEtale.topology X)
+    X.smallEtaleTopology
+  have : LocallySmall.{u + 1} X.AffineEtale := ⟨fun _ _ ↦ ⟨ULift.{u + 1} _, ⟨Equiv.ulift.symm⟩⟩⟩
+  have : EssentiallySmall.{u + 1} X.AffineEtale := essentiallySmall_of_small_of_locallySmall _
+  have : HasSheafify (AffineEtale.topology X) A :=
+    GrothendieckTopology.hasSheafify_of_essentiallySmall A _
+  have : Abelian (Sheaf (AffineEtale.topology X) A) := sheafIsAbelian
+  have : Φ.Additive := ⟨rfl⟩
+  have : Φ.PreservesHomology := {}
+  rw [← S.exact_map_iff_of_faithful Φ]
+  let T := (S.map Φ).map (sheafToPresheaf (AffineEtale.topology X) A)
+  have hT : T.Exact := by
+    rw [ShortComplex.exact_iff_evaluation]
+    intro W
+    have h := (affine_etale_sections_vanishing A X I W.unop q).of_iso
+      (R.isoRightDerivedObj _ (q + 1)).symm
+    rw [HomologicalComplex.homologyFunctor_obj,
+      ← HomologicalComplex.exactAt_iff_isZero_homology] at h
+    exact h
+  have : (presheafToSheaf (AffineEtale.topology X) A).PreservesHomology := {}
+  have hT' := hT.map (presheafToSheaf (AffineEtale.topology X) A)
+  refine (ShortComplex.exact_iff_of_iso ?_).1 hT'
+  exact (ShortComplex.mapNatIso (S.map Φ) (sheafificationNatIso _ _)).symm
 
 /-- The global sections functor of the small pro-étale site: the sections over the terminal
 object. -/
@@ -158,44 +233,76 @@ noncomputable def comparisonUpperStarCompUpperStarIso {Y X : Scheme.{u}} (g : Y 
     (lowerStarCompComparisonLowerStarIso g A).symm
 
 /-- **Comparison of global cohomology.** The derived global sections of the comparison pullback
-`ν^* M` of an étale sheaf are those of `M`: `RΓ(X_proét, ν^* M) ≅ RΓ(X_ét, M)`, by the
-invertibility of the derived unit `M ⟶ Rν_* ν^* M`. -/
-noncomputable def rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIso (X : Scheme.{u})
-    (M : Sheaf X.smallEtaleTopology A) (q : ℕ) :
-    ((globalSectionsFunctor A X).rightDerived q).obj ((comparisonUpperStar A X).obj M) ≅
-      ((Etale.sectionsFunctor A X).rightDerived q).obj M := by
+`ν^* M` of an étale sheaf are those of `M`: `RΓ(X_proét, ν^* M) ≅ RΓ(X_ét, M)` in the bounded
+below derived category, by the invertibility of the derived unit `M ⟶ Rν_* ν^* M`, given that
+`ν^* I` is acyclic for `ν_*` for every injective étale sheaf `I`. -/
+noncomputable def rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIsoOfRightAcyclic
+    (X : Scheme.{u})
+    (hI : ∀ (I : Sheaf X.smallEtaleTopology A) [Injective I],
+      ν_*(X)[A].rightAcyclic (ν^*(X)[A].obj I))
+    (M : Sheaf X.smallEtaleTopology A) :
+    (globalSectionsFunctor A X).rightDerivedFunctorPlus.obj
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj ((comparisonUpperStar A X).obj M)) ≅
+      (Etale.sectionsFunctor A X).rightDerivedFunctorPlus.obj
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj M) := by
   have := isIso_comparisonAdjunction_unit A X
   have : (comparisonLowerStar A X).PreservesInjectiveObjects :=
     Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
       (comparisonAdjunction A X)
-  -- the global sections of a pro-étale sheaf are the global sections of its restriction
-  let eΓ : comparisonLowerStar A X ⋙ Etale.sectionsFunctor A X ≅ globalSectionsFunctor A X :=
-    Iso.refl _
-  let eR : (comparisonLowerStar A X ⋙ Etale.sectionsFunctor A X).rightDerived q ≅
-      (globalSectionsFunctor A X).rightDerived q :=
-    { hom := NatTrans.rightDerived eΓ.hom q
-      inv := NatTrans.rightDerived eΓ.inv q
-      hom_inv_id := by rw [← NatTrans.rightDerived_comp, eΓ.hom_inv_id, NatTrans.rightDerived_id]
-      inv_hom_id := by rw [← NatTrans.rightDerived_comp, eΓ.inv_hom_id, NatTrans.rightDerived_id] }
   -- the derived unit `M ⟶ Rν_* ν^* M` is invertible
   have hu := (comparisonAdjunction A X).isIso_derivedPlus_unit_app_of_rightAcyclic
-    (fun _ _ ↦ inferInstance) (fun I _ ↦ rightAcyclic_comparisonUpperStar_obj_of_injective A X I)
+    (fun _ _ ↦ inferInstance) (fun I _ ↦ hI I)
     ((DerivedCategory.Plus.singleFunctor _ 0).obj M)
-  let e : (DerivedCategory.Plus.singleFunctor _ 0 ⋙
-      (comparisonLowerStar A X ⋙ Etale.sectionsFunctor A X).rightDerivedFunctorPlus ⋙
-        DerivedCategory.Plus.homologyFunctor A q).obj ((comparisonUpperStar A X).obj M) ≅
-      (DerivedCategory.Plus.singleFunctor _ 0 ⋙
-        (Etale.sectionsFunctor A X).rightDerivedFunctorPlus ⋙
-          DerivedCategory.Plus.homologyFunctor A q).obj M :=
+  -- the global sections of a pro-étale sheaf are the global sections of its restriction
+  exact (Functor.rightDerivedFunctorPlusCompIso (comparisonLowerStar A X)
+      (Etale.sectionsFunctor A X)).app _ ≪≫
+    (Etale.sectionsFunctor A X).rightDerivedFunctorPlus.mapIso
+      ((comparisonLowerStar A X).rightDerivedFunctorPlus.mapIso
+        (((comparisonUpperStar A X).mapDerivedCategoryPlusSingleFunctor 0).app M).symm ≪≫
+      (asIso ((comparisonAdjunction A X).derivedPlus.unit.app _)).symm)
+
+/-- **Comparison of global cohomology.** The derived global sections of the comparison pullback
+`ν^* M` of an étale sheaf are those of `M` in each degree: `R^qΓ(X_proét, ν^* M) ≅ R^qΓ(X_ét, M)`,
+the cohomology in degree `q` of
+`rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIsoOfRightAcyclic`. -/
+noncomputable def rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIsoOfRightAcyclic
+    (X : Scheme.{u})
+    (hI : ∀ (I : Sheaf X.smallEtaleTopology A) [Injective I],
+      ν_*(X)[A].rightAcyclic (ν^*(X)[A].obj I))
+    (M : Sheaf X.smallEtaleTopology A) (q : ℕ) :
+    ((globalSectionsFunctor A X).rightDerived q).obj ((comparisonUpperStar A X).obj M) ≅
+      ((Etale.sectionsFunctor A X).rightDerived q).obj M :=
+  ((globalSectionsFunctor A X).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
+      q).symm.app _ ≪≫
     (DerivedCategory.Plus.homologyFunctor A q).mapIso
-      ((Functor.rightDerivedFunctorPlusCompIso _ _).app _ ≪≫
-        (Etale.sectionsFunctor A X).rightDerivedFunctorPlus.mapIso
-          ((comparisonLowerStar A X).rightDerivedFunctorPlus.mapIso
-            (((comparisonUpperStar A X).mapDerivedCategoryPlusSingleFunctor 0).app M).symm ≪≫
-          (asIso ((comparisonAdjunction A X).derivedPlus.unit.app _)).symm))
-  exact eR.symm.app _ ≪≫
-    ((comparisonLowerStar A X ⋙ Etale.sectionsFunctor A X)
-      |>.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q).symm.app _ ≪≫ e ≪≫
+      (rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIsoOfRightAcyclic A X hI M) ≪≫
+    ((Etale.sectionsFunctor A X).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
+      q).app M
+
+/-- **Comparison of global cohomology.** The derived global sections of the comparison pullback
+`ν^* M` of an étale sheaf are those of `M`: `RΓ(X_proét, ν^* M) ≅ RΓ(X_ét, M)` in the bounded
+below derived category, by the invertibility of the derived unit `M ⟶ Rν_* ν^* M`. -/
+noncomputable def rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIso
+    (X : Scheme.{u}) (M : Sheaf X.smallEtaleTopology A) :
+    (globalSectionsFunctor A X).rightDerivedFunctorPlus.obj
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj ((comparisonUpperStar A X).obj M)) ≅
+      (Etale.sectionsFunctor A X).rightDerivedFunctorPlus.obj
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj M) :=
+  rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIsoOfRightAcyclic A X
+    (fun I _ ↦ rightAcyclic_comparisonUpperStar_obj_of_injective A X I) M
+
+/-- **Comparison of global cohomology.** The derived global sections of the comparison pullback
+`ν^* M` of an étale sheaf are those of `M` in each degree: `R^qΓ(X_proét, ν^* M) ≅ R^qΓ(X_ét, M)`,
+the cohomology in degree `q` of `rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIso`.
+-/
+noncomputable def rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIso (X : Scheme.{u})
+    (M : Sheaf X.smallEtaleTopology A) (q : ℕ) :
+    ((globalSectionsFunctor A X).rightDerived q).obj ((comparisonUpperStar A X).obj M) ≅
+      ((Etale.sectionsFunctor A X).rightDerived q).obj M :=
+  ((globalSectionsFunctor A X).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
+      q).symm.app _ ≪≫
+    (DerivedCategory.Plus.homologyFunctor A q).mapIso
+      (rightDerivedFunctorPlusGlobalSectionsComparisonUpperStarObjIso A X M) ≪≫
     ((Etale.sectionsFunctor A X).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
       q).app M
 

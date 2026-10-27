@@ -1,0 +1,115 @@
+{
+ "id": "lem-qcqs-compact-support-finite-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Proof of the qcqs proper/open realization, construction and finite comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Completeness and finite mates of ambient qcqs compact support",
+ "statement": "For a prime ell invertible in a field K0, a finite coefficient extension E/Q_ell, finite-type K0-schemes X,Y and a separated finite-type K0-morphism f with fixed compactification c, the actual completed proper/open image of any integral constructible input K is derived complete. Every actual scalar-adjunction mate from that image reduced modulo the positive power n+1 to finite-coefficient proper/open image of the reduced K is invertible. Constructibility, completion, reduction and compact support are the constructions of [def-weil-scheme-morphism-properties, def-weil-l-adic-coefficient-extension, def-weil-completed-integral-coefficients, def-weil-derived-complete-integral-detailed, def-weil-integral-derived-reduction, def-weil-compactifications-refinements, def-compact-support-direct-image-detailed].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
+  "place": "Proof of lem-coef-integral-compact-support; Bhatt--Scholze 6.7.6, 6.7.7 and 6.1.13; Stacks 0941 and 0F7J",
+  "note": "Agent-stated proper/open realization prerequisite; proof details in module docstring."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-compactifications-refinements",
+  "def-compact-support-direct-image-detailed",
+  "def-sf-open-reduction-coefficient-mate"
+ ],
+ "proof": [
+  {
+   "text": "Combine the derived-completeness component and the finite-mate component for the same input K.",
+   "uses": [
+    "lem-qcqs-compact-support-image-complete",
+    "lem-qcqs-compact-support-finite-mates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-qcqs-compact-support-image-complete",
+  "lem-qcqs-compact-support-finite-mates"
+ ],
+ "proof_origin": "X6: conjunction assembled from two strictly simpler component lemmas.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural compact support functor integral completed coefficients derived inverse limit reduction tower canonical realization",
+   "results": "['Condensed.profiniteSolid', 'CompactlySupportedContinuousMap.integralLinearMap_apply', \"Profinite.NobelingProof.Linear_CC'₀\", \"Profinite.NobelingProof.Linear_CC'₁\", 'ContinuousMapZero.integral_apply', 'CompactlySupportedContinuousMap.integralLinearMap', 'PadicInt.mahlerEquiv', 'CompactlySupportedContinuousMap.integralPositiveLinearMap_toFun']",
+   "date": "2026-10-24",
+   "verdict": "no matching compact-support theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatIso.ofComponents",
+   "results": "[]",
+   "date": "2026-10-24",
+   "verdict": "no matching compact-support theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "recordedIdentification|compactSupport.*[Rr]ealization",
+   "results": "[]",
+   "date": "2026-10-24",
+   "verdict": "no matching compact-support theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsCompactSupportRealization",
+  "date": "2026-10-25",
+  "group": "K2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QcqsCompactSupportFiniteComparison",
+  "file": "lean/Sheaf/Paper/QcqsCompactSupportFiniteComparison.lean",
+  "declaration": "WeilConjectures.sfQcqsCompactSupport_finiteComparison",
+  "declarations": [
+   "WeilConjectures.sfQcqsCompactSupport_finiteComparison"
+  ],
+  "statement": "theorem sfQcqsCompactSupport_finiteComparison\n    (K : sfIntegralConstructibleCategory l E X) :\n    IsSfDerivedComplete l E Y ((image (completed l E) c).obj K.obj) ∧\n      ∀ n : ℕ, IsIso\n        ((comparison (reduction l E (n + 1) (Nat.le_add_left 1 n)) c).app K.obj)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261024T224931-L-1831923",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261026T003215-L-153011",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lead_note": "2026-10-25 Q2 maintenance, dependency ownership correction: The actual comparison map belongs to def-pur-integral-compact-support-coefficient-data and reduction to the already cited def-sf-open-reduction-coefficient-mate. The proof uses the ordered mate identity comparison_factorization, now separately attached, not the finite-extension coefficient comparison theorem.",
+ "tool_uses": [
+  "lem-pur-compact-support-comparison-factorization"
+ ]
+}

@@ -1,0 +1,343 @@
+{
+ "id": "lem-sfb-pointed-projective-line-family",
+ "kind": "statement",
+ "title": "A pointed smooth family of projective lines is Zariski locally trivial",
+ "statement": "Let $S$ be a Noetherian scheme, meaning one with a finite affine open cover by spectra of Noetherian rings [def-pc-scheme, def-weil-pbc-noetherian-ring]. Let $f:X\\to S$ be smooth [def-sbc-smooth-morphisms] and proper [def-weil-proper-morphism], and let $\\sigma:S\\to X$ be a section, so $f\\sigma=\\mathrm{id}_S$. Suppose that for every geometric point $\\bar s:\\operatorname{Spec}\\Omega\\to S$ [def-weil-geometric-point] the fibre $X_{\\bar s}=X\\times_S\\operatorname{Spec}\\Omega$ [def-pc-fibre-product] is isomorphic over $\\Omega$ to $\\mathbf P^1_\\Omega$ [def-nagata-projective-space-base-change]. Then there is a Zariski open cover $(S_i)$ of $S$ and $S_i$-isomorphisms $X\\times_SS_i\\simeq\\mathbf P^1_{S_i}$ that carry $\\sigma|_{S_i}$ to the infinity section $[1:0]$. Each chosen pointed isomorphism remains such an isomorphism after every base change to $S_i$. No reducedness of $S$ and no residue-characteristic restriction are assumed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Proposition 4.2.7, proof, printed p.124, cohomology and base change applied to the inverse ideal of the section; this is the general pointed-curve input used there. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this assertion in this form."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-weil-geometric-point",
+  "def-pc-fibre-product",
+  "def-nagata-projective-space-base-change"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-pc-smooth-flat], $f$ is flat and locally of finite presentation. Properness supplies quasi-compactness and separatedness, hence quasi-separatedness, so $f$ is finitely presented (the convention is locally finitely presented, quasi-compact and quasi-separated). Its geometric fibres are pure of dimension one: they are the projective lines in the hypothesis, and [lem-sc-projective-line-smooth-relative-dimension-one] identifies their relative dimension. Apply [lem-trf-geometric-pure-fibre-point-dimension] with $d=1$ to obtain $\\dim_x X_{f(x)}=1$ at every $x$. Thus $f$ is smooth of relative dimension one in [def-sbc-smooth-morphisms]. Properness also supplies separatedness for the next step. If $S$ is empty the empty open cover proves the assertion; henceforth the construction is pointwise on the nonempty base.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "def-weil-proper-morphism",
+    "lem-sc-projective-line-smooth-relative-dimension-one",
+    "lem-trf-geometric-pure-fibre-point-dimension",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P4, lemma-dimension-at-a-point-preserved-field-extension, as packaged in lem-trf-geometric-pure-fibre-point-dimension; smoothness conventions from morphisms.tex."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-smooth-curve-section-cartier] to $f$ and $\\sigma$. Its image $D=\\sigma(S)$ is a closed effective Cartier divisor. Since $D\\to S$ is the identity under $\\sigma$, it is flat, so $D$ is relative effective Cartier by [def-pc-relative-effective-cartier]. Define $L=\\mathcal O_X(D)=\\mathcal I_D^\\vee$; it is invertible by [lem-pc-divisor-line-bundle-invertible]. For every base change $g:T\\to S$, [lem-pc-recd-pullback] applies to the flat finitely presented $f$ and this relative divisor: $D_T$ is the base-changed section and $g_X^*L\\cong\\mathcal O_{X_T}(D_T)$. In particular on a geometric fibre $L_{\\bar s}=\\mathcal O_{X_{\\bar s}}(\\sigma(\\bar s))$. This uses relative-divisor pullback, whose base morphism is arbitrary, rather than a formula requiring $g$ flat.",
+   "uses": [
+    "lem-trf-smooth-curve-section-cartier",
+    "def-pc-relative-effective-cartier",
+    "lem-pc-divisor-line-bundle-invertible",
+    "lem-pc-recd-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 067R, lemma-section-smooth-regular-immersion (relative dimension one); Tag 056Q, lemma-relative-Cartier; definition of the inverse divisor ideal in section-effective-Cartier-invertible."
+   }
+  },
+  {
+   "text": "Fix a geometric fibre and an isomorphism with $\\mathbf P^1_\\Omega$. Its marked point is $p=[a:b]$. Choose $c,d\\in\\Omega$ with $ca+db=1$. The invertible coordinate change $y_0=cx_0+dx_1$, $y_1=-bx_0+ax_1$ has determinant $1$ and carries $p$ to $[1:0]$. This is a scheme isomorphism: the inverse linear substitution induces the inverse graded polynomial-ring map, and the induced degree-zero localization maps glue on the standard Proj charts. On $D_+(y_0)$ the ideal of $[1:0]$ has generator $t=y_1/y_0$, and on $D_+(y_1)$ it has generator $1$. Its dual therefore has frames $t^{-1}$ and $1$, with transition $t^{-1}=y_0/y_1$, exactly the transition of $\\mathcal O(1)$ in [def-pc-projective-space-twist]. Hence $L_{\\bar s}\\cong\\mathcal O(1)$. By [lem-pc-projective-space-twist-cohomology] with $n=d=1$, its global sections have basis $y_0,y_1$, and $H^1$ is zero. The morphism of this complete linear system is an isomorphism: on its two target charts the coordinate maps are $\\Omega[z]\\to\\Omega[t]$, $z\\mapsto t$, and $\\Omega[w]\\to\\Omega[t^{-1}]$, $w\\mapsto t^{-1}$. In particular it is a closed immersion. These are explicit chart computations from the cited twist and cohomology statements, valid also in characteristic two.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "lem-pc-projective-space-twist-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XT, lemma-cohomology-projective-space-over-ring, specialized to n=1,d=1; standard two-chart identification of the point divisor with the degree-one twist."
+   }
+  },
+  {
+   "text": "The hypotheses of [lem-sfb-fibrewise-very-ample-evaluation] hold for $(f,L)$: $f$ is flat proper finitely presented, every geometric fibre has dimension one, and Step 3 supplies both the complete-linear-system closed immersion and $H^1=0$. It follows that $E=f_*L$ is finite locally free, its canonical base-change map $g^*E\\to(f_T)_*L_T$ is invertible for every $g:T\\to S$, and evaluation is a quotient $f^*E\\twoheadrightarrow L$ defining a closed immersion $j:X\\hookrightarrow\\mathbf P_S(E)$. The same statement identifies its base change with the complete-linear-system morphism on each geometric fibre. The rank of $E$ is two: a local free presentation of rank $r$ pulls back to $\\Omega^r$, whereas base change and Step 3 identify that vector space with $\\Omega^2$.",
+   "uses": [
+    "lem-sfb-fibrewise-very-ample-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0B91, lemma-flat-proper-perfect-direct-image-general, through the existing fibrewise-very-ample evaluation theorem; this implements Conrad Proposition 4.2.7, printed p.124."
+   }
+  },
+  {
+   "text": "Cover $S$ by opens $U$ on which $E$ has an ordered free basis of length two. By [lem-trf-projective-bundle-quotient-geometry], this basis identifies $\\mathbf P_S(E)|_U$ with $\\mathbf P^1_U$ in the quotient convention; [lem-trf-free-projective-bundle-base-change-space] identifies that relative-Proj projective space with the base-change projective line of the statement. We obtain $\\phi_U:X_U\\to\\mathbf P^1_U$. Its geometric fibres are isomorphisms by Steps 3--4. Apply [lem-sfb-universal-isomorphism-open] with $B=U$, $A=X_U$, $C=\\mathbf P^1_U$, and $f=\\phi_U$. The source map is flat, locally finitely presented and universally closed, by Step 1 and the restriction of properness. The target map is proper by [lemma-nagata-projective-space-base-change-proper], hence locally of finite type, separated and closed. The theorem gives an open $W\\subseteq U$ representing the isomorphism property after every base change. Every geometric point of $U$ factors through $W$ because its fibre map is an isomorphism. Therefore $W=U$ as open subschemes; use the theorem at $\\mathrm{id}_U$ to conclude that $\\phi_U$ is an isomorphism, including on nilpotents.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-free-projective-bundle-base-change-space",
+    "lem-sfb-universal-isomorphism-open",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XD, lemma-where-isomorphism, scheme specialization; projective bundle coordinates from constructions.tex Tags 01OB and 01OE."
+   }
+  },
+  {
+   "text": "It remains to adapt the frame to the section. Under the quotient classification of [lem-trf-projective-bundle-quotient-geometry], the section $j\\sigma$ corresponds to the pulled-back evaluation quotient $q:E\\twoheadrightarrow M=\\sigma^*L$. The module $M$ is invertible: pulling back a local rank-one frame of $L$ gives such a frame. Refine each $U$ so that $M$ has a frame $m$. If $v_0,v_1$ is the frame of $E$, write $q(v_0)=am$, $q(v_1)=bm$. Surjectivity says that at each stalk at least one of $a,b$ is a unit, so the opens where $a$ or $b$ is invertible cover $U$. Where $a$ is invertible put $e_0=a^{-1}v_0$ and $e_1=v_1-ba^{-1}v_0$. Their change-of-basis determinant is $a^{-1}$, so they form a basis, with $q(e_0)=m$ and $q(e_1)=0$. Where $b$ is invertible first interchange $v_0,v_1$ and use the same formula. The basis identification of the projective bundle then carries the section to the quotient $(1,0)$, namely $[1:0]$. Composing $j$ with these basis identifications gives the required pointed isomorphisms on the refined cover. This is a local two-by-two calculation, not an assertion that the quotient line or its kernel is globally trivial.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.2.7, proof, printed p.124, paragraph applying cohomology and base change to the inverse ideal of the section; details expanded here without using any SGA source."
+   }
+  },
+  {
+   "text": "For a chosen pointed isomorphism $\\phi_i:X\\times_SS_i\\to\\mathbf P^1_{S_i}$ and any $h:T\\to S_i$, pull back $\\phi_i$ and its inverse. Their composites are the identities because the two original composites were identities. The fibre-product associativity identifies their source with $X\\times_ST$; the definition [def-nagata-projective-space-base-change] identifies the target with $\\mathbf P^1_T$. Pulling back the equality $\\phi_i\\sigma_i=[1:0]$ gives the same equality for the pulled-back section. Thus every chosen isomorphism remains pointed after every base change, with no condition on reducedness, characteristic or on $T$.",
+   "uses": [
+    "def-nagata-projective-space-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.2.7, proof, printed p.124, paragraph applying cohomology and base change to the inverse ideal of the section; details expanded here without using any SGA source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-smooth-flat",
+  "def-weil-proper-morphism",
+  "lem-sc-projective-line-smooth-relative-dimension-one",
+  "lem-trf-geometric-pure-fibre-point-dimension",
+  "def-sbc-smooth-morphisms",
+  "lem-trf-smooth-curve-section-cartier",
+  "def-pc-relative-effective-cartier",
+  "lem-pc-divisor-line-bundle-invertible",
+  "lem-pc-recd-pullback",
+  "def-pc-projective-space-twist",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-sfb-fibrewise-very-ample-evaluation",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-trf-free-projective-bundle-base-change-space",
+  "lem-sfb-universal-isomorphism-open",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-nagata-projective-space-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Expansion of the standard argument in Proposition 4.2.7, printed p.124, using existing DAG lemmas for Cartier sections, evaluation and the universal isomorphism locus. Conrad PDF is not present locally; consulted online, local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth proper family all of whose geometric fibres are projective lines with a section is Zariski locally a pointed projective line",
+   "results": "{\"t\": \"2026-10-24T07:54:06Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth proper family all of whose geometric fibres are projective lines with a section is Zariski locally a pointed projective line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"WeierstrassCurve.Projective.NonsingularLift\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"WeierstrassCurve.Projective.Point.fromAffine_some\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\"], \"digest\": \"89fcb45df419560b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are abstract matrix groups, topological torsors, root systems or general scheme infrastructure; none states this relative scheme theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Projective\"",
+   "results": "{\"t\": \"2026-10-24T07:54:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Projective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isFractionPrelocal\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj\"], \"digest\": \"d8086ff20a9efa91\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are abstract matrix groups, topological torsors, root systems or general scheme infrastructure; none states this relative scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "genusZero|genus_zero|projectiveLine|projective.line",
+   "results": "{\"t\": \"2026-10-24T07:54:04Z\", \"tool\": \"grep\", \"query\": \"genusZero|genus_zero|projectiveLine|projective.line\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\"], \"digest\": \"5c4e0f95fe3749d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are abstract matrix groups, topological torsors, root systems or general scheme infrastructure; none states this relative scheme theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Brauer Severi curve with a rational section is locally a trivial projective line bundle",
+   "results": "{\"t\": \"2026-10-24T07:54:05Z\", \"tool\": \"leansearch\", \"query\": \"A Brauer Severi curve with a rational section is locally a trivial projective line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"VectorBundleCore.localTriv\", \"FiberBundleCore.localTriv\", \"VectorBundleCore.mem_localTriv_source\", \"VectorBundleCore.localTrivAt_def\", \"FiberBundleCore.localTrivAt_def\", \"VectorBundleCore.localTrivAt\", \"VectorBundleCore.localTrivAt_apply\", \"VectorBundleCore.trivializationAt\"], \"digest\": \"a38b93b5ec356298\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are abstract matrix groups, topological torsors, root systems or general scheme infrastructure; none states this relative scheme theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Brauer Severi curve with a rational section is locally a trivial projective line bundle",
+   "results": "{\"t\": \"2026-10-24T07:54:10Z\", \"tool\": \"leanfinder\", \"query\": \"A Brauer Severi curve with a rational section is locally a trivial projective line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Projective.PointClass\", \"WeierstrassCurve.toProjective\", \"WeierstrassCurve.Projective.toAffine\", \"WeierstrassCurve.Projective.Point.fromAffine_some\", \"WeierstrassCurve.Projective.Point\", \"WeierstrassCurve.Projective.Point.toAffineAddEquiv_apply\"], \"digest\": \"af48573fd3225bb5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are abstract matrix groups, topological torsors, root systems or general scheme infrastructure; none states this relative scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "genusZero|genus_zero|projectiveLine|Brauer.Severi|pointed.*projective",
+   "results": "{\"t\": \"2026-10-24T08:44:42Z\", \"tool\": \"grep\", \"query\": \"genusZero|genus_zero|projectiveLine|Brauer.Severi|pointed.*projective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero source hits for scheme projective-line splitting."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Brauer Severi curve with a section is a projective bundle of a rank two vector bundle",
+   "results": "{\"t\": \"2026-10-24T08:44:43Z\", \"tool\": \"leansearch\", \"query\": \"A Brauer Severi curve with a section is a projective bundle of a rank two vector bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"VectorBundleCore.Base\", \"VectorBundleCore.proj\", \"WeierstrassCurve.Projective\", \"Bundle.mdifferentiableOn_zeroSection\", \"Bundle.TotalSpace.proj\", \"Bundle.contMDiff_zeroSection\", \"Bundle.zeroSection_proj\", \"VectorBundleCore.mem_localTriv_source\"], \"digest\": \"f4a38bcf9f9cc277\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Proj charts/structure sheaves, topological vector bundles, linear-algebra projectivization, Brauer-group definitions and projective modules do not state pointed smooth proper curve triviality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Projective\"",
+   "results": "{\"t\": \"2026-10-24T08:44:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Projective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isFractionPrelocal\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj\"], \"digest\": \"d8086ff20a9efa91\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Proj charts/structure sheaves, topological vector bundles, linear-algebra projectivization, Brauer-group definitions and projective modules do not state pointed smooth proper curve triviality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth proper family of projective lines with a section is Zariski locally isomorphic to the projective line preserving the section",
+   "results": "{\"t\": \"2026-10-24T08:44:44Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth proper family of projective lines with a section is Zariski locally isomorphic to the projective line preserving the section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.Proj.basicOpenIsoAway_hom\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\"], \"digest\": \"2cd7f5571899d8b6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Proj charts/structure sheaves, topological vector bundles, linear-algebra projectivization, Brauer-group definitions and projective modules do not state pointed smooth proper curve triviality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section splits a Brauer Severi curve into the projectivization of a locally free sheaf of rank two",
+   "results": "{\"t\": \"2026-10-24T08:45:21Z\", \"tool\": \"leanfinder\", \"query\": \"A section splits a Brauer Severi curve into the projectivization of a locally free sheaf of rank two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.rep\", \"IsAzumaya.toProjective\", \"Projectivization.nonZeroEquivProjectivizationProdUnits\", \"BrauerGroup\", \"WeierstrassCurve.Projective.PointClass\", \"Module.Projective.iff_split\", \"Module.Projective.iff_split'\", \"Module.Projective.of_split\"], \"digest\": \"921f56fe698760ad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Proj charts/structure sheaves, topological vector bundles, linear-algebra projectivization, Brauer-group definitions and projective modules do not state pointed smooth proper curve triviality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-rank-one-semisimple-models",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the semisimple local models of the quotient, not the reductive central-torus reconstruction. Specific supporting place: Proposition 4.2.7, sentence applying cohomology and base change to the inverse ideal sheaf of sigma. It is a theorem about arbitrary pointed smooth proper curve families, independent of reductive groups.",
+   "via": [
+    "lem-sfb-relative-rank-one-semisimple-models",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pointed-projective-line-family",
+  "worker": "stage1",
+  "summary": "Seven-step inverse-section-ideal proof, reusing existing nodes throughout. Explicit geometric-fibre and adapted-basis calculations; universal isomorphism locus handles nonreduced bases. No new nodes. Statement unchanged.",
+  "blueprint": "Retains the inherited null ancestor and via chain reported by blueprint_refs.py ancestor. Implements the specific supporting place recorded in blueprint.from.place: Conrad Proposition 4.2.7, p.124, inverse ideal of sigma. Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3) is the remote ancestor route; the present input is the generic pointed-curve step already requested by its rank-one-model descendant.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-geometric-pure-fibre-point-dimension",
+    "why": "Converts geometric pure fibre dimension one to ordinary pointwise fibre dimension; no node of this unit supplies this generic dimension tool."
+   },
+   {
+    "node": "lem-sc-projective-line-smooth-relative-dimension-one",
+    "why": "Identifies the known projective-line fibres as pure relative dimension one; generic projective-line geometry."
+   },
+   {
+    "node": "lem-trf-smooth-curve-section-cartier",
+    "why": "Makes the given section an effective Cartier divisor of a separated smooth relative curve; generic curve geometry, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-pc-divisor-line-bundle-invertible",
+    "why": "Makes the dual of the effective Cartier ideal invertible, for the inverse-ideal construction specified by Conrad."
+   },
+   {
+    "node": "lem-pc-recd-pullback",
+    "why": "Identifies the inverse divisor ideal after arbitrary base change, especially to geometric fibres; the flat-base-only variant is insufficient."
+   },
+   {
+    "node": "lem-pc-projective-space-twist-cohomology",
+    "why": "Computes H0 and H1 of O(1) on the geometric projective-line fibres; generic coherent cohomology tool."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Classifies line quotients and identifies the framed projective bundle with projective space, including the distinguished section."
+   },
+   {
+    "node": "lem-trf-free-projective-bundle-base-change-space",
+    "why": "Connects the quotient relative-Proj model to the base-change projective line used by the statement."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Supplies all target-map hypotheses in the universal-isomorphism-locus theorem; generic projective-space properness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-geometric-pure-fibre-point-dimension",
+  "lem-sc-projective-line-smooth-relative-dimension-one",
+  "lem-trf-smooth-curve-section-cartier",
+  "lem-pc-divisor-line-bundle-invertible",
+  "lem-pc-recd-pullback",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-trf-free-projective-bundle-base-change-space",
+  "lemma-nagata-projective-space-base-change-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-31123a6fc",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-31123a6fc (reviewer sub-agent of L); spot-checked: Read the item in full: 7 steps, no new nodes, statement unchanged. Checked every cited statement against what its step uses. Stacks sources read: divisors 067R lemma-section-smooth-regular-immersion, divisors 056Q lemma-relative-Cartier (arbitrary base), spaces-more-morphisms 05XD lemma-where-isomorphism (all six hypotheses matched in Step 5: p flat, lfp, universally closed; q = P^1_U proper, so lft, separated and closed). Conrad 4.2.7 is not in local literature; I checked the mathematics directly. Steps: Step 1 dimension comparison is correct (lfp and pure geometric fibres). Step 2 relative effective Cartier divisor and arbitrary-base pullback via lem-pc-recd-pullback (f flat and fp) are correct. Step 3 chart transition t^{-1}=y0/y1 matches e_0=(x0/x1)e_1; H^0 basis y0,y1 and H^1=0 with n=d=1. Step 4: all hypotheses of the evaluation node hold; rank 2. Step 5: the universal isomorphism locus is all of U because each point has a geometric point over it, so the result also holds over nonreduced bases. Step 6: jσ corresponds to E -> σ^*L, and the basis change e0=a^{-1}v0, e1=v1-ba^{-1}v0 gives [1:0]. Step 7 is base change of an isomorphism. Small cases: empty S, a field, dual numbers, characteristic 2, and a pointless conic (excluded by σ). No duplicate: the trf genus-zero nodes are over a field only. tool_uses are generic and accepted. Batch-5: the closures of the cited trf nodes and of lem-sfb-fibrewise-very-ample-evaluation / lem-sfb-universal-isomorphism-open reach only generic trf lemmas and definitions (00P4, 067R, 01OB/01NF, def-trf-projective-bundle-morphism, scheme-monomorphism-separated), no trace-formula or Poincaré-duality theorem or step. They are outside both assumptions: OK."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointedProjectiveLineFamily",
+  "declaration": "AlgebraicGeometry.exists_pointedProjectiveLineFamily_trivialization",
+  "file": "lean/Sheaf/AlgebraicGeometry/PointedProjectiveLineFamily.lean",
+  "statement": "theorem exists_pointedProjectiveLineFamily_trivialization {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [Smooth f] [IsProper f] (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S) (hfib : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S), ∃ e : pullback f s ≅ ProjectiveLine (Spec (.of Ω)), e.hom ≫ ProjectiveLine (Spec (.of Ω)) ↘ Spec (.of Ω) = pullback.snd f s) : ∀ x : S, ∃ U : S.Opens, x ∈ U ∧ ∃ e : pullback f U.ι ≅ ProjectiveLine U.toScheme, e.hom ≫ ProjectiveLine U.toScheme ↘ U.toScheme = pullback.snd f U.ι ∧ pullback.lift (U.ι ≫ σ) (𝟙 U.toScheme) (by simp [Category.assoc, hσ]) ≫ e.hom = ProjectiveLine.infinity U.toScheme ∧ ∀ (T : Scheme.{u}) (h : T ⟶ U.toScheme), ∃ eT : pullback f (h ≫ U.ι) ≅ ProjectiveLine T, eT.hom ≫ ProjectiveLine T ↘ T = pullback.snd f (h ≫ U.ι) ∧ pullback.lift ((h ≫ U.ι) ≫ σ) (𝟙 T) (by simp [Category.assoc, hσ]) ≫ eT.hom = ProjectiveLine.infinity T ∧ eT.hom ≫ ProjectiveSpace.map (ULift.{u} (Fin 2)) h = pullback.map f (h ≫ U.ι) f U.ι (𝟙 X) h (𝟙 S) (by simp) (by simp) ≫ e.hom",
+  "branch": "sheaf-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a0388e702",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsNoetherian S (= finite affine Noetherian cover), Smooth/IsProper f, section hσ, geometric fibres ≅ ProjectiveLine over Ω (recorded inline geometric point, universe u); the pointwise open-neighbourhood form is equivalent to an open cover (empty S included); local iso over U sending pullback.lift(U.ι≫σ) to ProjectiveLine.infinity (=[1:0], checked in Line.lean l.263); base-change clause pinned to the chosen e by the ProjectiveSpace.map square + isPullback_map. No extra hypotheses, no definitions, proof sorry, docstrings with source/blueprint/7 steps, lean.statement verbatim, all imported proof-dep modules exist on side-live, no duplicate theorem (only field-level genus-zero results). Second reading section is a self-audit but present and accurate. No compile needed (no FIX)."
+ }
+}

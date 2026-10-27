@@ -20,22 +20,13 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
 public import WeilConjectures.ZetaSeries
-import WeilConjectures.FieldTheory.SeparableExtension
-import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.AlgebraicGeometry.ZeroDimensionalNoetherianFiniteDiscrete
-import Sheaf.AlgebraicGeometry.ComplementaryPureSubcurveComponents
-import Sheaf.TraceFormula.CurveNormalizationCompletion
-import Sheaf.TraceFormula.ReducedSchemeImage
-import WeilConjectures.RingTheory.CompletionRegularLocal
-import WeilConjectures.RingTheory.LocalCompletionQuotient
-import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
-import WeilConjectures.RingTheory.RegularLocalSeparableResidueSmooth
-import Sheaf.RingTheory.SmoothOverFieldRegularLocal
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+import Sheaf.AlgebraicGeometry.ComplementaryPureSubcurveBoundaryFinite
+import Sheaf.AlgebraicGeometry.FiniteReducedDiscreteResidueFields
+import Sheaf.AlgebraicGeometry.SplitNodeCompletionTransport
+import Sheaf.AlgebraicGeometry.SplitNodalSubcurveLocalDichotomy
+import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
+import WeilConjectures.PointCount
 import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # Reduced closed subcurves of a split nodal curve
@@ -56,6 +47,44 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
+private theorem residue_separable_of_closed_immersion
+    {k : Type u} [Field k] {X Y : Scheme.{u}} (f : X ⟶ Spec (.of k))
+    (i : Y ⟶ X) [IsClosedImmersion i] (y : Y)
+    (hfin : (f.residueFieldAlgebraMap (i y)).Finite)
+    (hsep : @Algebra.IsSeparable k (X.residueField (i y)) _ _
+      (f.residueFieldAlgebraMap (i y)).toAlgebra) :
+    ((i ≫ f).residueFieldAlgebraMap y).Finite ∧
+      @Algebra.IsSeparable k (Y.residueField y) _ _
+        ((i ≫ f).residueFieldAlgebraMap y).toAlgebra := by
+  have := i.isIso_residueFieldMap y
+  let := (f.residueFieldAlgebraMap (i y)).toAlgebra
+  let := ((i ≫ f).residueFieldAlgebraMap y).toAlgebra
+  let e : X.residueField (i y) ≃ₐ[k] Y.residueField y :=
+    { (asIso (i.residueFieldMap y)).commRingCatIsoToRingEquiv with
+      commutes' a := by
+        change _ = (i ≫ f).residueFieldAlgebraMap y a
+        rw [Scheme.Hom.residueFieldAlgebraMap_comp]
+        rfl }
+  have := hsep
+  refine ⟨?_, AlgEquiv.Algebra.isSeparable e⟩
+  rw [Scheme.Hom.residueFieldAlgebraMap_comp]
+  exact (RingHom.Finite.of_surjective _
+    (ConcreteCategory.bijective_of_isIso (i.residueFieldMap y)).2).comp hfin
+
+private theorem stalk_scalar_compatibility
+    {k : Type u} [Field k] {X Y : Scheme.{u}} (f : X ⟶ Spec (.of k))
+    (i : Y ⟶ X) (y : Y) (a : k) :
+    (i.stalkMap y).hom
+      (((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop ≫ X.presheaf.Γgerm (i y)).hom a) =
+      (((Scheme.ΓSpecIso (.of k)).inv ≫ (i ≫ f).appTop ≫
+        Y.presheaf.Γgerm y).hom a) := by
+  change ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop ≫
+    X.presheaf.Γgerm (i y) ≫ i.stalkMap y).hom a = _
+  simp only [TopCat.Presheaf.Γgerm]
+  rw [i.germ_stalkMap ⊤ y (by trivial)]
+  simp only [Scheme.Hom.comp_appTop, Category.assoc]
+  rfl
+
 /-- A reduced closed pure subcurve of a split nodal curve is again split nodal.
 Its intersection with the scheme-theoretic complementary closure is a finite disjoint
 union of spectra of finite separable extensions of the ground field, consists of ambient
@@ -71,58 +100,16 @@ Source: Stacks Project, `curves.tex`, Tag 0E38 (1), (2)(a)--(c), with the split
 completed-local-ring convention of Tags 0C4D and 0CBU
 (blueprint: lem-trf-stacks-nodal-closed-subcurve).
 
-Proof plan, following the nine steps of the node:
-1. A field is Noetherian, so finite type makes X Noetherian
-   (lem-weil-pbc-finite-type-over-noetherian). Apply
-   lem-trf-complementary-pure-subcurve-components: Y is a reduced union of components,
-   and the complementary reduced closure is the union of the remaining components.
-   The open complement is reduced, so lem-trf-reduced-scheme-image identifies this
-   with the scheme-theoretic closure Z. No component generic point belongs to both
-   unions. Every nonclosed point of a Noetherian dimension-one scheme is generic in
-   a component, since otherwise a closed specialization gives a chain of length two.
-   Thus every boundary point is closed. Sobriety makes every irreducible closed subset
-   of the boundary a singleton, so its dimension is at most zero; it is Noetherian.
-2. At a smooth closed ambient point, lem-weil-pbc-smooth-over-field-regular-local and
-   lem-sc-regular-local-domain make the local ring a domain. Components through the point
-   correspond to minimal primes of that local ring by
-   lem-weil-pbc-spec-irreducible-components-minimal-primes and localization. Hence only
-   one component passes through it; removing the other finitely many components makes
-   X and Y coincide near the point. It is smooth on Y and outside the boundary.
-3. At a nonsmooth closed point put A = O_X,x, F = kappa(x), and C = completion(A).
-   The hypothesis identifies C with F[[u,v]]/(uv). Its primes are precisely (u), (v),
-   and (u,v), since the one-variable quotients are local dimension-one domains by
-   lem-weil-pbc-power-series-field-cohen-regular-complete.
-   By lem-weil-pbc-local-completion-faithfully-flat every minimal prime of A lifts;
-   lem-weil-pbc-local-completion-local-ring identifies the maximal ideal and its
-   contraction. Thus A has at most two minimal primes and X at most two incident components.
-4. If Y contains all incident components, remove the others: Y and X coincide near x,
-   including their local k-algebras, residue fields and completions. Thus the node is
-   preserved and x is outside Z. This also treats an irreducible self-node.
-5. Otherwise two distinct components pass through x and exactly one belongs to Y.
-   Their distinct minimal primes p1,p2 are nonzero. By
-   lem-trf-curve-normalization-completion the completions of the reduced local
-   dimension-one algebras A/pi are reduced and dimension one. By
-   lem-weil-pbc-local-completion-quotient these are C/piC. The prime list and
-   lem-weil-pbc-zero-locus-eq-iff-radical-eq leave only 0,(u),(v) for piC.
-   Lem-weil-pbc-faithfully-flat-ideal-contraction excludes 0 and distinguishes the
-   two extended primes. After exchanging u,v they are the two axis ideals, and the
-   completed quotient maps are the actual axis projections.
-6. The sum p1+p2 defines the intersection. Its extension is (u,v) = mC by
-   lem-weil-pbc-local-completion-local-ring. Faithfully flat contraction gives
-   p1+p2 = m. The boundary local ring is consequently F, with its original k-structure.
-7. The completed local ring of Y at a boundary point is F[[u]], hence regular by the
-   power-series theorem. Lem-weil-pbc-completion-regular-local descends regularity.
-   Finite separable algebraic F/k is separable in the sense of
-   def-weil-pbc-separable-field-extension: every intermediate field is separably
-   generated using the empty transcendence basis. The finite-type affine criterion
-   lem-weil-pbc-regular-local-separable-residue-smooth now makes Y smooth at the point.
-8. These cases prove inheritance of the split nodal condition. Every boundary point
-   is in the two-component case, so is a nonsmooth ambient node and is smooth on Y.
-9. Lem-sc-zero-dim-noetherian-finite-discrete makes the boundary finite and discrete.
-   Each open singleton is the spectrum of its local ring: an affine neighbourhood
-   inside the singleton is the entire singleton, and localization changes nothing.
-   Step 6 identifies this ring with its finite separable residue field over k.
-   This gives the claimed finite disjoint union over k, including the empty union.
+Proof: The boundary-finiteness theorem gives a finite discrete intersection with closed
+ambient image points. The local dichotomy separates stalk-isomorphism points from boundary
+branch points. At a nonsmooth point of Y the smooth-branch alternative is impossible, so the
+stalk and residue-field isomorphisms transport the ambient nodal presentation; the transport
+lemma retains its k-scalar identity. At a boundary point the stalk-isomorphism alternative
+is excluded by the pullback condition. The branch alternative gives smoothness on Y and
+field stalks on the intersection, while the ambient hypothesis gives its nonsmooth nodal
+presentation. Field stalks make the intersection reduced. Finally the canonical residue
+maps identify this finite discrete reduced scheme with the coproduct of its residue-field
+spectra, whose embeddings are finite separable and commute with the maps to Spec k.
 -/
 theorem stacks_nodal_closed_subcurve
     {k : Type u} [Field k] {X Y : Scheme.{u}}
@@ -199,6 +186,83 @@ theorem stacks_nodal_closed_subcurve
       ∃ U : Y.Opens,
         pullback.fst i (Scheme.openComplementOfIsClosedImmersion i).ι.imageι t ∈ U ∧
           Smooth (U.ι ≫ i ≫ f)) := by
-  sorry
+  classical
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsNoetherian X := ⟨⟩
+  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace f
+  let j := (Scheme.openComplementOfIsClosedImmersion i).ι.imageι
+  let T := pullback (C := Scheme.{u}) i j
+  let b : T ⟶ X := pullback.fst i j ≫ i
+  obtain ⟨hfin, hdisc, hclosed⟩ := complementary_pure_subcurve_boundary_finite hX i hY
+  have : Finite T := hfin
+  have : DiscreteTopology T := hdisc
+  have hlocal (y : Y) (hy : IsClosed ({y} : Set Y)) :
+      (∃ U : X.Opens, i y ∈ U ∧ Smooth (U.ι ≫ f)) ∨
+      ((f.residueFieldAlgebraMap (i y)).Finite ∧
+        @Algebra.IsSeparable k (X.residueField (i y)) _ _
+          (f.residueFieldAlgebraMap (i y)).toAlgebra ∧
+        Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk (i y)))
+          (X.presheaf.stalk (i y)) ≃+*
+          (MvPowerSeries (Fin 2) (X.residueField (i y)) ⧸
+            Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2)
+              (X.residueField (i y))) * MvPowerSeries.X 1}))) := by
+    by_cases hsm : ∃ U : X.Opens, i y ∈ U ∧ Smooth (U.ι ≫ f)
+    · exact Or.inl hsm
+    · have hx : IsClosed ({i y} : Set X) := by
+        simpa using i.isClosedEmbedding.isClosedMap _ hy
+      obtain ⟨hf, hs, e, _⟩ := hnodal (i y) hx hsm
+      exact Or.inr ⟨hf, hs, ⟨e⟩⟩
+  have hboundary (t : T) :
+      (¬ ∃ U : X.Opens, b t ∈ U ∧ Smooth (U.ι ≫ f)) ∧
+      (∃ U : Y.Opens, pullback.fst i j t ∈ U ∧ Smooth (U.ι ≫ i ≫ f)) ∧
+      IsField (T.presheaf.stalk t) := by
+    let y := pullback.fst i j t
+    have hy : IsClosed ({y} : Set Y) := by
+      have h := (hclosed t).preimage i.continuous
+      have heq : i ⁻¹' {i y} = {y} := by
+        ext z
+        exact i.isClosedEmbedding.injective.eq_iff
+      rwa [heq] at h
+    rcases split_nodal_subcurve_local_dichotomy f hX i hY y hy (hlocal y hy) with
+      ⟨_, _, hnot⟩ | ⟨hns, hs, hfield⟩
+    · exact False.elim (hnot ⟨pullback.snd i j t, by
+        have h := congrArg (fun a : T ⟶ X ↦ a t) (pullback.condition (f := i) (g := j))
+        exact h.symm⟩)
+    · exact ⟨hns, hs, hfield t rfl⟩
+  refine ⟨?_, ?_, ?_⟩
+  · intro y hy hns
+    rcases split_nodal_subcurve_local_dichotomy f hX i hY y hy (hlocal y hy) with
+      ⟨hiso, hsm, _⟩ | ⟨_, hsm, _⟩
+    · have hnX : ¬ ∃ U : X.Opens, i y ∈ U ∧ Smooth (U.ι ≫ f) :=
+        fun h ↦ hns (hsm h)
+      have hx : IsClosed ({i y} : Set X) := by
+        simpa using i.isClosedEmbedding.isClosedMap _ hy
+      obtain ⟨hf, hs, e, he⟩ := hnodal (i y) hx hnX
+      obtain ⟨hfy, hsy⟩ := residue_separable_of_closed_immersion f i y hf hs
+      have := i.isIso_residueFieldMap y
+      let eA := (asIso (i.stalkMap y)).commRingCatIsoToRingEquiv
+      let eF := (asIso (i.residueFieldMap y)).commRingCatIsoToRingEquiv
+      refine ⟨hfy, hsy, ?_⟩
+      apply split_node_completion_transport
+        (((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop ≫ X.presheaf.Γgerm (i y)).hom)
+        (((Scheme.ΓSpecIso (.of k)).inv ≫ (i ≫ f).appTop ≫ Y.presheaf.Γgerm y).hom)
+        (f.residueFieldAlgebraMap (i y)) ((i ≫ f).residueFieldAlgebraMap y) eA eF
+        (stalk_scalar_compatibility f i y) ?_ e he
+      intro a
+      rw [Scheme.Hom.residueFieldAlgebraMap_comp]
+      rfl
+    · exact False.elim (hns hsm)
+  · have hfield (t : T) : IsField (T.presheaf.stalk t) := (hboundary t).2.2
+    have hred (t : T) : _root_.IsReduced (T.presheaf.stalk t) := by
+      let := (hfield t).toField
+      infer_instance
+    have : IsReduced T := isReduced_of_isReduced_stalk T
+    exact finite_reduced_discrete_residue_fields T (b ≫ f) (fun t ↦ by
+      have hnode := hnodal (b t) (hclosed t) (hboundary t).1
+      exact residue_separable_of_closed_immersion f b t hnode.1 hnode.2.1)
+  · intro t
+    exact ⟨(hboundary t).1,
+      (hnodal (b t) (hclosed t) (hboundary t).1).2.2, (hboundary t).2.1⟩
 
 end AlgebraicGeometry

@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-projective-quotient-field-extension",
+ "kind": "statement",
+ "title": "Coherent projective quotients, Euler characteristics and regularity under field extension",
+ "statement": "Let $L/k$ be a field extension [def-pc-field-extension], let $n\\geq0$ and $r\\geq1$, and put $X=\\mathbf P^n_k$ and $X_L=\\mathbf P^n_L$. Let $p:X_L\\to X$ be the projection induced by extension of coefficients. Use coherent modules [pqf-def-coherent], pullbacks $E_L=p^*E$ [def-pc-module-pullback], twists $E(d)=E\\otimes\\mathcal O_X(d)$ [def-pc-projective-space-twist], module sheaf cohomology [pqf-def-cohomology], finite vector-space dimensions [def-weil-vector-space-dimension] and Euler characteristics [def-pc-euler-characteristic]. Then $p^*\\mathcal O_X^{\\oplus r}\\cong\\mathcal O_{X_L}^{\\oplus r}$. Pullback of any short exact sequence $0\\to K\\to\\mathcal O_X^{\\oplus r}\\to F\\to0$ of coherent modules is a short exact sequence of coherent modules $0\\to K_L\\to\\mathcal O_{X_L}^{\\oplus r}\\to F_L\\to0$. For every coherent module $E$ on $X$, $E_L$ is coherent and $p^*(E(d))\\cong E_L(d)$ for every integer $d$. For every $q\\geq0$ and integer $d$ the natural base-change map is an isomorphism\n$$H^q(X,E(d))\\otimes_k L\\xrightarrow{\\sim}H^q(X_L,E_L(d)),$$\nand the two finite dimensions over their respective fields are equal. Consequently\n$$\\chi(X_L,E_L(d))=\\chi(X,E(d))$$\nfor every integer $d$, and, for every integer $a$,\n$$\\bigl[H^j(X,E(a-j))=0\\ (1\\leq j\\leq n)\\bigr]\\ \\Longleftrightarrow\\ \\bigl[H^j(X_L,E_L(a-j))=0\\ (1\\leq j\\leq n)\\bigr].$$",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 08A4 (lemma-m-regular-extend-base-field), 08AB (lemma-euler-characteristic-extend-base-field), and 08AG (lemma-bound-quotients-free), the field-extension reduction in its first paragraph. Coherent pullback and the exact quotient are the local finite-presentation and scalar-extension details of that reduction."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-pc-projective-space-twist",
+  "pqf-def-cohomology",
+  "def-weil-vector-space-dimension",
+  "def-pc-euler-characteristic"
+ ],
+ "proof": [
+  {
+   "text": "Use homogeneous coordinate index set $\\{0,\\ldots,n\\}$, which is finite and nonempty even for $n=0$. The Cartesian square of [lemma-nagata-projective-space-base-change-pullback] identifies $X_L$ with $X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}L$, with $p$ the stated coefficient projection. The charts in [lem-weil-pbc-projective-space-standard-charts] have rings $k[t_j:j\\ne i]$ and $L[t_j:j\\ne i]$; their transition maps send a coordinate ratio to the same ratio. These are also the standard opens of the polynomial Proj convention of the item: the degree-zero localization has the mutually inverse substitutions $t_j\\mapsto x_j/x_i$ and $x^\\alpha/x_i^{|\\alpha|}\\mapsto\\prod_{j\\ne i}t_j^{\\alpha_j}$. Thus the two projective-space conventions agree over the fields. Both spaces are proper by [lemma-nagata-projective-space-base-change-proper], and locally Noetherian by [pqf-lem-locnoeth-lft], since their affine charts are finite type over fields (a field is Noetherian because its only ideals are $0$ and the whole field). The finite standard cover makes $X\\to\\operatorname{Spec}k$ quasi-compact. Its pairwise chart intersections are the principal opens obtained by inverting $x_j/x_i$, hence affine and quasi-compact; consequently it is quasi-separated.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-pullback",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lemma-nagata-projective-space-base-change-proper",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex; literature/stacks-project/morphisms.tex",
+    "place": "Tags 01NG (lemma-standard-covering-projective-space), 01NH (lemma-projective-space-separated), 01O3 (lemma-relative-proj-base-change), 01T6 (lemma-finite-type-noetherian)"
+   }
+  },
+  {
+   "text": "By [lem-pc-field-extension-flat], $\\operatorname{Spec}L\\to\\operatorname{Spec}k$ is flat, with no algebraicity or finiteness assumption on $L/k$. Apply [lem-weil-pbc-flat-morphism-base-change] with its flat morphism $f$ equal to $\\operatorname{Spec}L\\to\\operatorname{Spec}k$ and its base morphism $g$ equal to $X\\to\\operatorname{Spec}k$. The resulting projection $X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}L\\to X$ is $p$ by step 1, so $p$ is flat. Apply the exactness assertion of [lem-weil-pbc-flat-module-pullback-exact-pushforward-injective] to $p$: the pullback of the given short exact sequence is short exact as a sequence of Zariski module sheaves. This proves exactness, including injectivity on the left; coherence and the identification of the middle term are checked next.",
+   "uses": [
+    "lem-pc-field-extension-flat",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/modules.tex",
+    "place": "Tags 01U9 (lemma-base-change-flat) and 02N4 (lemma-pullback-flat); varieties.tex, Tag 08AG (lemma-bound-quotients-free), first field-extension reduction"
+   }
+  },
+  {
+   "text": "For any coherent $E$ on $X$, [pqf-lem-coherent-ft-locnoeth] says that $E$ is quasi-coherent and of finite type. Its pullback is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent] and of finite type by [lem-weil-pbc-module-pullback-finite-type]. Since $X_L$ is locally Noetherian by step 1, the reverse implication of [pqf-lem-coherent-ft-locnoeth] proves that $E_L$ is coherent. Apply this separately to $K$, $F$, and the middle coherent module of the given sequence.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex; literature/stacks-project/modules.tex",
+    "place": "Tags 01XZ (lemma-coherent-Noetherian), 01BG (lemma-pullback-quasi-coherent), 01B6 (lemma-pullback-finite-type)"
+   }
+  },
+  {
+   "text": "The adjunction in [def-pc-module-pullback] makes $p^*$ preserve finite direct sums, and [lem-weil-pbc-module-pullback-structure-sheaf] identifies $p^*\\mathcal O_X$ with $\\mathcal O_{X_L}$; apply it to each of the $r$ summands. For any $d\\in\\mathbf Z$, use the local frames $e_i^{(d)}$ of [def-pc-projective-space-twist]. On the $i$th chart, the identification $E(d)\\cong E$, $s\\otimes e_i^{(d)}\\mapsto s$, pulls back to the identification with $E_L$. On an overlap its change of frame is multiplication by $(x_i/x_j)^d$, whose pullback is the same coordinate ratio over $L$. The local identities therefore glue to $p^*(E(d))\\cong E_L(d)$. Coordinate ratios are units on overlaps, so this also applies to negative $d$. The same local identifications show that $E(d)$ and $E_L(d)$ are coherent, since coherence in [pqf-def-coherent] is local and invariant under isomorphism.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "def-pc-projective-space-twist",
+    "pqf-def-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex; literature/stacks-project/sheaves.tex",
+    "place": "Tag 01O3 (lemma-relative-proj-base-change), twist comparison; Tag 0095 (definition-pushforward), tensor pullback; explicit frame argument for arbitrary integers"
+   }
+  },
+  {
+   "text": "Fix $q\\geq0$ and $d\\in\\mathbf Z$. Apply [lem-pc-flat-base-change-cohom] to $f:X\\to\\operatorname{Spec}k$, $g:\\operatorname{Spec}L\\to\\operatorname{Spec}k$ and the quasi-coherent module $E(d)$. Step 1 supplies the Cartesian square and the quasi-compact quasi-separated hypothesis; step 2 supplies flatness of $g$; steps 3--4 supply quasi-coherence and identify $(p^*E(d))$ with $E_L(d)$. The affine-base clause gives exactly the natural base-change isomorphism $H^q(X,E(d))\\otimes_kL\\to H^q(X_L,E_L(d))$, not just an unspecified vector-space isomorphism.",
+   "uses": [
+    "lem-pc-flat-base-change-cohom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH (lemma-flat-base-change-cohomology), both clauses; varieties.tex, Tags 08A4 and 08AB, proofs"
+   }
+  },
+  {
+   "text": "The coherent-cohomology finiteness of [lem-pc-projective-space-coherent-finiteness], with the Noetherian ring $A=k$ or $A=L$, proves that both cohomology spaces in step 5 are finite-dimensional over their respective fields. Apply [lem-pc-finrank-field-base-change] to the finite-dimensional $k$-space $H^q(X,E(d))$. The symmetry $v\\otimes\\lambda\\mapsto\\lambda\\otimes v$ identifies the order of tensor factors there with the order in step 5, and the latter isomorphism identifies the resulting dimension with $\\dim_L H^q(X_L,E_L(d))$. Thus the two finite dimensions asserted in the item are equal for every $q,d$.",
+   "uses": [
+    "lem-pc-projective-space-coherent-finiteness",
+    "lem-pc-finrank-field-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex; literature/blueprint/latest/blueprint/sec-picard-framework/sk-prop-picard-pic-split/lem-pc-projective-space-coherent-finiteness.md",
+    "place": "Tag 08AB (lemma-euler-characteristic-extend-base-field), proof; projective coherent finiteness"
+   }
+  },
+  {
+   "text": "By [lem-pc-projective-space-cohomology-bound], the quasi-coherent modules $E(d)$ and $E_L(d)$ have zero cohomology in all degrees greater than $n$. The Euler characteristics in [def-pc-euler-characteristic] are therefore the finite sums over $0\\leq q\\leq n$. Step 6 equates each summand, with the same sign $(-1)^q$, proving their equality for every integer $d$. A finite-dimensional vector space is zero exactly when its dimension is zero: a basis has no elements exactly in that case. Apply this observation to the equal dimensions of step 6 with $(q,d)=(j,a-j)$ for each $1\\leq j\\leq n$, and take their conjunction. This proves the stated equivalence for every $a\\in\\mathbf Z$. For $n=0$ the conjunction is empty on both sides and hence true.",
+   "uses": [
+    "lem-pc-projective-space-cohomology-bound",
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex; literature/blueprint/latest/blueprint/sec-picard-framework/sk-prop-picard-pic-split/lem-pc-projective-space-cohomology-bound.md",
+    "place": "Tags 08AB (lemma-euler-characteristic-extend-base-field) and 08A4 (lemma-m-regular-extend-base-field), proofs; projective cohomology bound"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lemma-nagata-projective-space-base-change-proper",
+  "pqf-lem-locnoeth-lft",
+  "lem-pc-field-extension-flat",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "def-pc-projective-space-twist",
+  "pqf-def-coherent",
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-projective-space-coherent-finiteness",
+  "lem-pc-finrank-field-base-change",
+  "lem-pc-projective-space-cohomology-bound",
+  "def-pc-euler-characteristic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex; literature/stacks-project/coherent.tex",
+  "place": "Tags 08AG (lemma-bound-quotients-free), field-extension reduction, 08A4 and 08AB and their common input 02KH; agent expansion of the coefficient, coherence and chart identifications"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Field extension preserves coherent free sheaf quotient exact sequences on projective space, Euler Hilbert polynomials and reflects Castelnuovo Mumford regularity",
+   "results": "{\"t\": \"2026-10-22T08:06:10Z\", \"tool\": \"leanfinder\", \"query\": \"Field extension preserves coherent free sheaf quotient exact sequences on projective space, Euler Hilbert polynomials and reflects Castelnuovo Mumford regularity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.ext_iff\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"Module.basicOpen_subset_freeLocus_iff\", \"Rep.standardComplex.x_projective\", \"Module.projective_of_localization_maximal'\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"Module.freeLocus_eq_univ_iff\"], \"digest\": \"d40d1b03abb699c5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Proj constructions, local free loci, regular sequences, scalar extension of modules and vanishing for projective objects; none gives coherent projective quotient exactness together with all twisted cohomology base change, Euler invariance and regularity reflection."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-22T08:06:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Proj constructions, local free loci, regular sequences, scalar extension of modules and vanishing for projective objects; none gives coherent projective quotient exactness together with all twisted cohomology base change, Euler invariance and regularity reflection."
+  },
+  {
+   "tool": "grep",
+   "query": "Castelnuovo|Mumford|eulerChar|regularity",
+   "results": "{\"t\": \"2026-10-22T08:06:11Z\", \"tool\": \"grep\", \"query\": \"Castelnuovo|Mumford|eulerChar|regularity\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Proj constructions, local free loci, regular sequences, scalar extension of modules and vanishing for projective objects; none gives coherent projective quotient exactness together with all twisted cohomology base change, Euler invariance and regularity reflection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of twists of a coherent sheaf on projective space commutes with scalar extension, preserving dimensions and Euler characteristic",
+   "results": "{\"t\": \"2026-10-22T08:06:11Z\", \"tool\": \"leansearch\", \"query\": \"Cohomology of twists of a coherent sheaf on projective space commutes with scalar extension, preserving dimensions and Euler characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cochain.rightUnshift_smul\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"CochainComplex.HomComplex.Cochain.rightUnshift_units_smul\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"comonadicExtendScalars\", \"CochainComplex.HomComplex.Cochain.shift_units_smul\", \"LinearEquiv.extendScalarsOfSurjective_apply\"], \"digest\": \"5c16e8b8f36b3d95\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Proj constructions, local free loci, regular sequences, scalar extension of modules and vanishing for projective objects; none gives coherent projective quotient exactness together with all twisted cohomology base change, Euler invariance and regularity reflection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat extension of ground field detects vanishing of coherent sheaf cohomology and m regularity on projective space",
+   "results": "{\"t\": \"2026-10-22T08:06:20Z\", \"tool\": \"leanfinder\", \"query\": \"Faithfully flat extension of ground field detects vanishing of coherent sheaf cohomology and m regularity on projective space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isZero_Ext_succ_of_projective\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"Rep.isZero_Tor_succ_of_projective\", \"CategoryTheory.isZero_Tor_succ_of_projective\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"CochainComplex.isKProjective_of_projective\", \"Module.basicOpen_subset_freeLocus_iff\"], \"digest\": \"797f778cf38d431a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Proj constructions, local free loci, regular sequences, scalar extension of modules and vanishing for projective objects; none gives coherent projective quotient exactness together with all twisted cohomology base change, Euler invariance and regularity reflection."
+  },
+  {
+   "tool": "grep",
+   "query": "Castelnuovo|Mumford|eulerChar|regularity",
+   "results": "{\"t\": \"2026-10-23T04:25:38Z\", \"tool\": \"grep\", \"query\": \"Castelnuovo|Mumford|eulerChar|regularity\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern the construction of Proj, flatness, projective objects in abelian categories, or generic site cohomology, not the coherent projective field-extension statement and its clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of coherent sheaves on projective space commutes with field extension, preserving Euler characteristic and reflecting m regularity",
+   "results": "{\"t\": \"2026-10-23T04:25:39Z\", \"tool\": \"leansearch\", \"query\": \"Cohomology of coherent sheaves on projective space commutes with field extension, preserving Euler characteristic and reflecting m regularity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_add\", \"Algebra.Extension.CotangentSpace.map_cotangentComplex\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_add\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.Presheaf.coherentExtensiveEquivalence_counitIso\"], \"digest\": \"27ffda8646f1061f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern the construction of Proj, flatness, projective objects in abelian categories, or generic site cohomology, not the coherent projective field-extension statement and its clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-23T04:25:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern the construction of Proj, flatness, projective objects in abelian categories, or generic site cohomology, not the coherent projective field-extension statement and its clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field extension preserves coherent quotients of a finite free sheaf on projective space and all twisted cohomology dimensions, Euler characteristics and Castelnuovo Mumford regularity",
+   "results": "{\"t\": \"2026-10-23T04:25:41Z\", \"tool\": \"leanfinder\", \"query\": \"A field extension preserves coherent quotients of a finite free sheaf on projective space and all twisted cohomology dimensions, Euler characteristics and Castelnuovo Mumford regularity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.ext\", \"AlgebraicGeometry.Proj.ext_iff\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"Rep.standardComplex.x_projective\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\"], \"digest\": \"14eeea67355a3f44\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern the construction of Proj, flatness, projective objects in abelian categories, or generic site cohomology, not the coherent projective field-extension statement and its clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat extension of the ground field commutes with quasi coherent sheaf cohomology and detects zero cohomology on projective schemes",
+   "results": "{\"t\": \"2026-10-23T04:26:37Z\", \"tool\": \"leanfinder\", \"query\": \"Flat extension of the ground field commutes with quasi coherent sheaf cohomology and detects zero cohomology on projective schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"isZero_Ext_succ_of_projective\", \"AlgebraicGeometry.Flat.flat_appLE\", \"Rep.isZero_Tor_succ_of_projective\", \"Module.Flat.of_projective\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.flat_iff\"], \"digest\": \"cc1f1adf242996c7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern the construction of Proj, flatness, projective objects in abelian categories, or generic site cohomology, not the coherent projective field-extension statement and its clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-free-quotient-kernel-regularity-bound",
+  "date": "2026-10-22",
+  "group": "Q40"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; Hilbert construction prerequisite, field boundedness input: Stacks 08AG before passage to families; Tags 08A4 (lemma-m-regular-extend-base-field), 08AB (lemma-euler-characteristic-extend-base-field), and 08AG (lemma-bound-quotients-free), the field-extension reduction in its first paragraph. Coherent pullback and the exact quotient are the local finite-presentation and scalar-extension details of that reduction.",
+   "via": [
+    "lem-sfb-free-quotient-kernel-regularity-bound",
+    "lem-sfb-hilbert-uniform-section-bound",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-quotient-field-extension",
+  "worker": "stage1",
+  "summary": "Expanded the field-extension reduction in seven steps using existing DAG inputs only. Checked canonical flat base change, locally Noetherian coherence hypotheses, exactness of pullback, the local frame comparison for all integer twists, cohomology finiteness, equal dimensions, finite Euler sums and vanishing reflection. No statement change and no new nodes. Repair of the 2026-10-23 return: rebased by the delivery tool onto the current DAG, re-read all 19 cited statements and verified every retained quote; updated the finiteness and cohomology-bound sources to the current blueprint latest paths and made the flat-base-change orientation explicit.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; Hilbert construction prerequisite, field boundedness input: Stacks 08AG before passage to families; Tags 08A4 (lemma-m-regular-extend-base-field), 08AB (lemma-euler-characteristic-extend-base-field), and 08AG (lemma-bound-quotients-free), the field-extension reduction in its first paragraph. Coherent pullback and the exact quotient are the local finite-presentation and scalar-extension details of that reduction. The split supplies only this existing field-extension prerequisite to the projective Hilbert-scheme boundedness route. The ancestor search reports no imported blueprint ancestor.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-projective-space-base-change-pullback",
+    "why": "General scheme/module or coherent-cohomology input used as a black box in the Stacks 08AG field-extension reduction; this unit has no replacement for this prerequisite. The exact assertion used is quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "General scheme/module or coherent-cohomology input used as a black box in the Stacks 08AG field-extension reduction; this unit has no replacement for this prerequisite. The exact assertion used is quoted in citations.json."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "General scheme/module or coherent-cohomology input used as a black box in the Stacks 08AG field-extension reduction; this unit has no replacement for this prerequisite. The exact assertion used is quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "why": "General scheme/module or coherent-cohomology input used as a black box in the Stacks 08AG field-extension reduction; this unit has no replacement for this prerequisite. The exact assertion used is quoted in citations.json."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "General scheme/module or coherent-cohomology input used as a black box in the Stacks 08AG field-extension reduction; this unit has no replacement for this prerequisite. The exact assertion used is quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "General scheme/module or coherent-cohomology input used as a black box in the Stacks 08AG field-extension reduction; this unit has no replacement for this prerequisite. The exact assertion used is quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-finite-type",
+    "why": "General scheme/module or coherent-cohomology input used as a black box in the Stacks 08AG field-extension reduction; this unit has no replacement for this prerequisite. The exact assertion used is quoted in citations.json."
+   },
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "General scheme/module or coherent-cohomology input used as a black box in the Stacks 08AG field-extension reduction; this unit has no replacement for this prerequisite. The exact assertion used is quoted in citations.json."
+   },
+   {
+    "node": "lem-pc-projective-space-coherent-finiteness",
+    "why": "General scheme/module or coherent-cohomology input used as a black box in the Stacks 08AG field-extension reduction; this unit has no replacement for this prerequisite. The exact assertion used is quoted in citations.json."
+   },
+   {
+    "node": "lem-pc-projective-space-cohomology-bound",
+    "why": "General scheme/module or coherent-cohomology input used as a black box in the Stacks 08AG field-extension reduction; this unit has no replacement for this prerequisite. The exact assertion used is quoted in citations.json."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-projective-space-coherent-finiteness",
+  "lem-pc-projective-space-cohomology-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-adc995b9d",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-adc995b9d (reviewer sub-agent of L); spot-checked: This re-delivers head 5081acc577b3, which an earlier reader PASSed and landing refused. Statement and stmt_deps are unchanged and there are no new nodes. I diffed the item against the earlier head. Step 2 now states the base-change orientation explicitly (f = Spec L→Spec k flat, g = X→Spec k, so the projection X×_k Spec L→X is p), which matches the cited node statement. The step 6 and 7 source paths now point to the current blueprint (latest/.../sk-prop-picard-pic-split); both files exist and their statements match the cited nodes. I read all 19 cited statements against the seven steps. Step 1: Cartesian square, standard charts matching the Proj convention, properness, local Noetherianity via 01T6, qcqs. Step 2: flat field extension, flat base change, exact pullback. Step 3: 01XZ in both directions plus pullback preserving quasi-coherence and finite type. Step 4: sums, p^*O≅O, frames with transitions (x_i/x_j)^d, including d<0. Step 5: 02KH affine clause, with every hypothesis proved earlier; this matches Stacks 08AB's proof (varieties.tex:6260). Step 6: finiteness over k and L, and dim_L(L⊗V) = dim_k V. Step 7: vanishing above n makes χ a finite sum, and vanishing iff dimension 0 with (q,d) = (j,a−j). Edge cases n=0, L=k, zero sheaves, negative d, any field extension and r=1 all hold. Live and side-live still have the item unsplit, so no other group has superseded it. No SGA citation. proof_deps equals the union of the steps' uses. The 10 generic tool_uses are declared in split_report (C8). No fixes."
+ }
+}

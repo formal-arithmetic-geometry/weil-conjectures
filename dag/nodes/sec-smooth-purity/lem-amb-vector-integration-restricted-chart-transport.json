@@ -1,0 +1,145 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Overlap calculation before the affine counit; the two local maps are identified by linear changes of frame."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Change of trivialization for a scheme vector bundle on overlapping opens induces an invertible linear coordinate substitution",
+   "results": "8 results: Trivialization.coordChangeL_apply, Trivialization.apply_symm_apply_eq_coordChangeL, Trivialization.coordChangeL_apply', Trivialization.mk_coordChangeL, Trivialization.coe_coordChangeL', Trivialization.symm_coordChangeL, Trivialization.coe_coordChangeL, VectorBundleCore.trivializationAt_coordChange_eq",
+   "date": "2026-10-26",
+   "verdict": "No exact match for algebraic chart-prefix exchange; topological coordinate changes and underived module pullback coherence are not this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "vectorIntegration.*(overlap|restrict)|transition_spec|leftDerivedUpperStarComp_assoc",
+   "results": "0 results: ",
+   "date": "2026-10-26",
+   "verdict": "No exact match for algebraic chart-prefix exchange; topological coordinate changes and underived module pullback coherence are not this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUpperStarComp|rightDerivedLowerShriekBaseChangeMap|coordChange",
+   "results": "25 results: Mathlib/Topology/FiberBundle/Trivialization.lean, Mathlib/Topology/FiberBundle/Trivialization.lean, Mathlib/Topology/FiberBundle/Trivialization.lean, Mathlib/Topology/FiberBundle/Trivialization.lean, Mathlib/Topology/FiberBundle/Trivialization.lean, Mathlib/Topology/FiberBundle/Basic.lean, Mathlib/Topology/FiberBundle/Basic.lean, Mathlib/Topology/FiberBundle/Basic.lean",
+   "date": "2026-10-26",
+   "verdict": "No exact match for algebraic chart-prefix exchange; topological coordinate changes and underived module pullback coherence are not this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image associativity and compact support base change pasting for a cartesian square precomposed with an automorphism",
+   "results": "8 results: AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullback_assoc, PresheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-26",
+   "verdict": "No exact match for algebraic chart-prefix exchange; topological coordinate changes and underived module pullback coherence are not this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support base change for a vector bundle chart is compatible with restricting the trivialization to a smaller open",
+   "results": "8 results: Trivialization.restrOpen, Trivialization.coe_coordChangeL, Trivialization.homeomorphComp, Trivialization.restrictPreimage', Trivialization.restrictPreimage, VectorBundleCore.trivializationAt_coordChange_eq, Trivialization.comp_continuousLinearEquivAt_eq_coord_change, contMDiffOn_coordChangeL",
+   "date": "2026-10-26",
+   "verdict": "No exact match for algebraic chart-prefix exchange; topological coordinate changes and underived module pullback coherence are not this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorIntegrationOverlapChartPrefix",
+  "date": "2026-10-26",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-amb-vector-integration",
+   "place": "Overlap identification before the affine counit: geometric restriction, coefficient transport and exchange pasting.",
+   "via": [
+    "lem-amb-vector-integration-overlap-chart-prefix",
+    "lem-amb-vector-integration-local-trace-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "id": "lem-amb-vector-integration-restricted-chart-transport",
+ "kind": "statement",
+ "title": "Restriction of a single chart prefix equals the direct composite-square prefix",
+ "statement": "Let N>0, A be a finite commutative ring with NA=0, t its normalized finite Tate transport, S a Noetherian scheme with N invertible, and F a locally free O_S-module of rank d≥0. Let U≤V be opens and e a frame on V. Use the actual chart, coefficient and compact-support constructions of [def-amb-vector-integration-charts], the affine tower exchange and right comparison of [def-amb-affine-trace-construction], and the linear coefficient descent of [def-amb-affine-linear-trace-action]. Restrict the three-factor chart prefix from V to U by the inverse-image compositor, inverse image of that prefix, affineTraceExchange on R_V(1_V), and affineTraceLeft applied to affineTraceRightBaseChange followed by the constant-unit pullback. This composite equals vectorIntegrationCartesianPrefix of [lem-amb-vector-integration-cartesian-prefix-action] for p=π_F, f=U→S, q=affineTraceMap(U→V,d) followed by the inverse-frame chart, L=affineLinearBaseCoefficient(S,d), and b=vectorIntegrationBaseCoefficientPullback(U→S,d). This compares one frame to its direct restriction; no change-of-frame matrix, action or second frame occurs.",
+ "stmt_deps": [
+  "def-asd-vector-bundle-zero-section",
+  "def-amb-vector-integration-charts",
+  "def-amb-affine-trace-construction",
+  "def-amb-affine-linear-trace-action",
+  "lem-amb-vector-integration-cartesian-prefix-action"
+ ],
+ "proof": [
+  {
+   "text": "Install the geometry of the bundle and the Noetherian opens and towers. Use affineTraceUnitCompactComparison_baseChange to replace inverse comparison followed by tower exchange and right-coefficient base change by ordinary tower exchange, ordinary compact-support image of that coefficient map, and inverse comparison over U.",
+   "uses": [
+    "lem-amb-affine-trace-unit-compact-base-change",
+    "def-amb-vector-integration-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality of ordinary tower exchange to vectorIntegrationChartCoefficient. Paste the tower square with the inverse-frame square using affineLinearExchange_paste. Use the named equality U→S=(U→V→S); the pasted chart is vectorIntegrationRestrictedChart. Cancel the source inverse-image compositor with its inverse.",
+   "uses": [
+    "lem-amb-affine-linear-exchange-coherence",
+    "lem-amb-vector-integration-cartesian-prefix-action",
+    "def-amb-vector-integration-charts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Combine the three coefficient maps using functoriality of ordinary compact-support pushforward and substitute vectorIntegration_restricted_chart_coefficient. The result is definitionally vectorIntegrationCartesianPrefix, with the same final comparison over U.",
+   "uses": [
+    "lem-amb-vector-integration-restricted-chart-coefficient",
+    "lem-amb-vector-integration-cartesian-prefix-action"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-affine-trace-unit-compact-base-change",
+  "def-amb-vector-integration-charts",
+  "lem-amb-affine-linear-exchange-coherence",
+  "lem-amb-vector-integration-cartesian-prefix-action",
+  "lem-amb-vector-integration-restricted-chart-coefficient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Overlap calculation; Lean assembly of compact-comparison transport, exchange naturality and pasting, and the strictly coefficient-only restriction identity (H4, 2026-10-26)."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorIntegrationRestrictedChartTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorIntegrationRestrictedChartTransport.lean",
+  "declaration": "AlgebraicGeometry.Etale.vectorIntegration_restricted_chart_transport",
+  "statement": "theorem vectorIntegration_restricted_chart_transport\n    (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]\n    (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)\n    (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d]\n    (U V : S.Opens) (hUV : U ≤ V)\n    (e : VectorBundleZeroSection.Trivialization S d F V) :\n    letI : IsAffineHom (VectorBundleZeroSection.π S d F) :=\n      (vectorIntegration_geometry S d F).1\n    letI : LocallyOfFiniteType (VectorBundleZeroSection.π S d F) :=\n      (vectorIntegration_geometry S d F).2.1\n    letI : TopologicalSpace.NoetherianSpace U.toScheme :=\n      U.ι.isOpenEmbedding.isInducing.noetherianSpace\n    letI : IsNoetherian U.toScheme :=\n      { toIsLocallyNoetherian := inferInstance\n        isCompact_univ := TopologicalSpace.NoetherianSpace.isCompact _ }\n    letI : TopologicalSpace.NoetherianSpace V.toScheme :=\n      V.ι.isOpenEmbedding.isInducing.noetherianSpace\n    letI : IsNoetherian V.toScheme :=\n      { toIsLocallyNoetherian := inferInstance\n        isCompact_univ := TopologicalSpace.NoetherianSpace.isCompact _ }\n    (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) (S.homOfLE hUV) V.ι U.ι\n      (S.homOfLE_ι hUV).symm).hom.app (vectorIntegrationSource A N hA S d F) ≫\n      (ordinaryFinitePullback A (S.homOfLE hUV)).map\n        ((rightDerivedLowerShriekBaseChangeMap A\n          (vectorIntegrationChart_isPullback S d F V e)).app\n            (vectorIntegrationCoefficient A N hA S d F) ≫\n          (rightDerivedLowerShriek (ModuleCat.{u + 1} A)\n            (affineTraceProjection V.toScheme d)).map\n              (vectorIntegrationChartCoefficient A N hA t S hS d F V e).hom ≫\n          (affineLinearCompactComparison N hN A hA V.toScheme\n            (affineTracePullbackInvertible N V.ι hS) d).inv) ≫\n      (affineTraceExchange A (S.homOfLE hUV) d\n        ((affineTraceRight A N hA V.toScheme d).obj (ordinaryFiniteUnit A V.toScheme)) ≫\n        (affineTraceLeft A U.toScheme d).map\n          (affineTraceRightBaseChange A N hA t (S.homOfLE hUV)\n            (affineTracePullbackInvertible N V.ι hS) d (ordinaryFiniteUnit A V.toScheme)).hom ≫\n        (affineTraceLeft A U.toScheme d).map\n          ((affineTraceRight A N hA U.toScheme d).map\n            (ordinaryFiniteUnitPullback A (S.homOfLE hUV)).hom)) =\n    vectorIntegrationCartesianPrefix N hN A hA t (VectorBundleZeroSection.π S d F)\n      U.ι (affineTracePullbackInvertible N U.ι hS) d\n      (vectorIntegrationRestrictedChart S d F U V hUV e)\n      (vectorIntegrationRestrictedChart_isPullback S d F U V hUV e)\n      (affineLinearBaseCoefficient A N hA S d)\n      (vectorIntegrationBaseCoefficientPullback A N hA t U.ι hS d)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T111800-L-1729909",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T130441-L-3461706",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

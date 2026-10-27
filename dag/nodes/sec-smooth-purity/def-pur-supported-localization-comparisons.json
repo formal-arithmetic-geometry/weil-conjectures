@@ -16,9 +16,10 @@
  },
  "proof": [
   {
-   "text": "Unfold the existing external product to obtain its displayed derived-tensor formula by reflexivity. All canonical tensor and projection-composition comparisons remain the recorded constructions.",
+   "text": "Unfold the existing external product to obtain its displayed derived-tensor formula by reflexivity. All canonical tensor and projection-composition comparisons remain the recorded constructions. The identical tensor-of-isomorphisms and exact pullback tensor comparison are re-exported from their foundational definition module and used in the ensuing support comparison composites.",
    "uses": [
-    "def-kun-derived-tensor"
+    "def-kun-derived-tensor",
+    "def-sf-exact-pullback-tensor-comparison"
    ],
    "elementary": true
   },
@@ -54,6 +55,7 @@
  ],
  "proof_deps": [
   "def-kun-derived-tensor",
+  "def-sf-exact-pullback-tensor-comparison",
   "def-pur-supported-exterior-product",
   "lem-pur-support-restriction-triangle"
  ],
@@ -106,7 +108,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "lean": {
@@ -120,8 +133,6 @@
    "AlgebraicGeometry.Etale.supportedExternalProductIso",
    "AlgebraicGeometry.Etale.supportIsoTransport",
    "AlgebraicGeometry.Etale.supportExactPullbackCompIso",
-   "AlgebraicGeometry.Etale.supportDerivedTensorIso",
-   "AlgebraicGeometry.Etale.supportExactPullbackTensorIso",
    "AlgebraicGeometry.Etale.supportPullbackSquareIso",
    "AlgebraicGeometry.Etale.supportPullbackProjectionIso",
    "AlgebraicGeometry.Etale.supportTensorFirstSquareIso",
@@ -168,7 +179,8 @@
   "branch": "newtargets-dag",
   "by": "Q06",
   "date": "2026-10-16",
-  "existing": false
+  "existing": false,
+  "note": "The unchanged supportDerivedTensorIso and supportExactPullbackTensorIso constructions are re-exported from ExactPullbackTensorComparison, attached to def-sf-exact-pullback-tensor-comparison. All remaining declarations remain in this module."
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -187,13 +199,13 @@
   "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical constructions, boundary signs, universes, edge cases, docstrings and declaration records. All three modules passed per-file scompile.py reproduction without warnings or errors. No repairs or branch changes."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V2",
+  "reviewer": "C-12d89",
+  "group": "R6",
   "result": "pass",
-  "landing": "20261020T131204-L-1256044",
+  "landing": "20261025T123642-L-1886209",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered files vs clones/live (only the intended edits; G9 graph proof preserved); moved defs block-diffed verbatim; cycle path verified by import BFS; sandbox compile of 5 delivered modules + 5 direct importers clean; #print axioms of item and helpers"
  }
 }

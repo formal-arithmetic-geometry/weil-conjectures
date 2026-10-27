@@ -1,0 +1,160 @@
+{
+ "id": "lem-sf-proetale-ringed-open-cover-reflects-iso",
+ "kind": "statement",
+ "title": "Open covers detect native ringed pro-etale derived isomorphisms",
+ "statement": "Let $Z$ be a scheme [def-pc-scheme] and $R$ a sheaf of commutative rings on its small pro-etale site [def-weil-pbc-proetale-site; def-weil-sheaf-of-modules-category]. Let $(j_i:V_i\\to Z)_{i\\in I}$ be a small family of open immersions [def-weil-open-immersion] whose images cover $Z$. For each $i$, let $R_i$ be a ring sheaf on $V_i$ and let $c_i:j_i^{-1}R\\xrightarrow{\\sim}R_i$ be an isomorphism, using the actual inverse image [def-weil-proetale-inverse-image]. Use native module inverse image with these coefficient isomorphisms [def-weil-pbc-proetale-operations] and ordinary unbounded derived categories [def-weil-abstract-derived-category]. Then a morphism $a:K\\to L$ in $D(R)$ is invertible if its derived inverse image under every $j_i$ is invertible. No boundedness, quasi-compactness, nonempty-cover, constructibility or constant-coefficient hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-open-immersion",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0EYZ, section-localization, together with sites.tex Tag 00XZ, section-localize, and derived.tex Tag 05RM, lemma-acyclic-general. Native-coefficient realization of step 8 of lem-sf-ringed-restriction-exchange-open-descent."
+ },
+ "proof": [
+  {
+   "text": "Choose for each point z of Z one member j_i containing z. For each pro-etale object Q over Z, the first projections Q times_Z V_i to Q form an open cover: the pullback range formula lifts each point of Q to the chosen open over its image in Z. Each of those objects maps to the pro-etale object V_i over Z. Thus the sieve of objects factoring through the family V_i is covering on every Q, which is exactly CoversTop. Indexing the selected subfamily by points of Z keeps the universe of the covering family small. This also works when Z and the indexing family are empty. The point-lifting assertion is the image-of-base-change formula of lem-weil-pbc-base-change-image. The defining pro-etale topology contains Zariski covers, as implemented by ProEt.mem_topology_of_openImmersion.",
+   "uses": [
+    "lem-weil-pbc-base-change-image",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each open j_i, apply the canonical ringed open comparison to identify the unextended inverse image followed by a site-and-ring equivalence with module slice restriction. Scalar extension along c_i is naturally isomorphic to scalar restriction along its inverse, hence is the inverse of a scalar equivalence. If native pullback of a module map is invertible, that scalar equivalence reflects invertibility of the unextended inverse-image map. Applying the open-site equivalence and transporting by the ringed open comparison proves slice restriction of the module map invertible.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-comparison",
+    "lem-weil-sheaf-scalar-extension-ring-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the exact-pullback homology comparison in every degree n. Native inverse image is additive and exact for arbitrary inverse-image coefficient rings, so the assumed invertibility of the derived pullback map implies invertibility of native pullback of H^n(a). Step 2 converts this to invertibility of the slice restriction of H^n(a). Forgetting modules gives invertible restrictions of the underlying abelian-sheaf map on the family of step 1.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheaf cover-local isomorphism theorem glues the restricted inverses and proves the underlying sheaf map of H^n(a) invertible. The module forgetful functor reflects isomorphisms, so H^n(a) is invertible. This holds separately for every integer n, with no bound or uniformity condition. The unbounded derived cohomology criterion then proves a invertible.",
+   "uses": [
+    "lem-sfb-sheaf-cover-local-isomorphism",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-base-change-image",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Expansion of the covering-sieve argument in step 8 of lem-sf-ringed-restriction-exchange-open-descent. Use the existing exact homology comparison and the sheaf cover-local isomorphism theorem directly, avoiding separate derived-category instances on every slice."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact family of restriction functors of sheaves of modules over an open cover jointly reflects isomorphisms on derived categories",
+   "results": "8 hits including SheafOfModules.toSheaf reflection, Scheme.Modules.restrictFunctor and SheafOfModules.restrictScalars.",
+   "date": "2026-10-27",
+   "verdict": "No native arbitrary-ring pro-etale derived theorem. Use the ringed open comparison and generic homology/cover detection APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CoversTop\", \"IsIso\"",
+   "results": "Sheaf.isIso_of_coversTop and Sheaf.isIso_iff_of_coversTop.",
+   "date": "2026-10-27",
+   "verdict": "The ordinary sheaf locality theorem is the last sheaf step; native module inverse image and its derived comparison still need transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphisms in the unbounded derived category of sheaves of modules are detected after restriction to an open cover",
+   "results": "8 hits including Scheme.Modules.Hom.isIso_iff_isIso_app and cover-dense sheaf equivalences.",
+   "date": "2026-10-27",
+   "verdict": "No exact native pro-etale inverse-image result with arbitrary transported coefficient rings."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_of_coversTop|mapDerivedCategoryHomologyFunctorIso in Mathlib, WeilConjectures and Sheaf; blueprint search local isomorphism",
+   "results": "Mathlib Sites.LocalProperties contains sheaf cover detection. Source ExactFunctor contains homology comparison and joint reflection on derived categories. Existing RingedRestrictionLocalIso uses literal slice derived categories; CondensedCoverRestrictionConservative uses condensed coefficients, and OrdinaryCompletedCoverDetection assumes completed coefficients and qcqs domains. No duplicate native arbitrary-ring theorem. Blueprint search returns reconstruction and perfectness nodes, neither this statement.",
+   "date": "2026-10-27",
+   "verdict": "Use the generic tools and explicitly transport native inverse image to slice restriction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RingedRestrictionExchangeOpenDescent",
+  "date": "2026-10-27",
+  "group": "Y7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Continuous-module proper exchange realization for prop-functor-package clause 2: returned proof steps 4, 5, 9 and 10 of lem-sf-continuous-adic-proper-base-change-restriction; independent normalized ringed restriction exchange and open descent argument. Native open-cover detection part of proof step 8.",
+   "via": [
+    "lem-sf-ringed-restriction-exchange-open-descent",
+    "lem-sf-continuous-adic-proper-base-change-restriction",
+    "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleRingedOpenCoverReflectsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleRingedOpenCoverReflectsIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.RingedRestrictionExchange.proEtaleRingedOpenCover_reflectsIso",
+  "statement": "theorem proEtaleRingedOpenCover_reflectsIso {Z : Scheme.{u}}\n    (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}) (ι : Type (u + 1))\n    (V : ι → Scheme.{u}) (j : ∀ i, V i ⟶ Z) [∀ i, IsOpenImmersion (j i)]\n    (cover : ∀ z : Z, ∃ (i : ι) (v : V i), (j i).base v = z)\n    (R' : ∀ i, Sheaf (ProEt.topology (V i)) CommRingCat.{u + 1})\n    (c : ∀ i, (proEtaleSheafInverseImage (j i) CommRingCat.{u + 1}).obj R ≅ R' i)\n    {K L : DerivedCategory (proEtaleRingModules Z R)} (a : K ⟶ L)\n    (localIso : ∀ i,\n      IsIso ((proEtaleRingModulePullback (j i) R (R' i) (c i)).mapDerivedCategory.map a)) :\n    IsIso a",
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261027T013013-L-2357890",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261027T013013-L-2357890",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,253 @@
+{
+ "id": "lem-trf-point-restriction-system-chain-map",
+ "kind": "statement",
+ "title": "Restriction and insertion as a natural chain map on strict systems",
+ "statement": "Fix $k_0=\\mathbf F_q$, its algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$, $n\\ge1$ [def-trf-coefficient-conventions]. Put $s=\\operatorname{Spec}k$ and let $g:s\\to s$ be any scheme automorphism [def-weil-scheme-morphism-properties]. On the small pro-etale site [def-weil-pbc-proetale-site] put $B_n=(A_n)_s$, with reductions $\\rho_n:B_{n+1}\\to B_n$, and $\\widehat R_s=\\lim_nB_n$, with projections $\\pi_n$ [def-weil-completed-integral-coefficients]. Let $F=g^{-1}$, with actions transported by $c_n^{-1}$ for the canonical coefficient isomorphisms $c_n:FB_n\\to B_n$ [def-weil-inverse-image-pullback-comparison]. Let $\\mathscr S_s$ be the strict system category: its objects are $B_n$-module sheaves $M_n$ and quotient-linear maps $v_n:M_{n+1}\\to\\operatorname{Res}_{\\rho_n}M_n$, and morphisms are component maps commuting with $v_n$ [lem-coef-semilinear-derived-sections]. Let $G$ apply $F$ at each level, retaining the transported transitions. Let $\\Gamma_\\bullet$ mean levelwise sections restricted along $R\\to A_n$, with all original transitions retained, valued in $\\operatorname{Tow}(\\operatorname{Mod}R)$ [def-trf-coefficient-tower-operations], the indexing $n\\geq1$ here being identified with the $\\mathbb N$ indexing there (where $A_i=R/\\varpi^{i+1}$) by $n=i+1$. Use unbounded cochain complexes [def-weil-abstract-derived-category].\n\nPut $U=(s\\xrightarrow{\\mathrm{id}}s)$ and $V=(s\\xrightarrow g s)$. For each degree $i$ and level $n$, define $\\sigma^g_{M_n^i}:M_n^i(U)\\to(FM_n^i)(U)$ by restriction along $g:V\\to U$, followed by the inverse-image colimit insertion at $(V,(\\mathrm{id},\\mathrm{id}))$ and sheafification, exactly as in [lem-weil-point-automorphism-restriction-natural]. Under the site-reindexing identification $(FM_n^i)(U)\\cong M_n^i(V)$ the insertion is identity. These components are $A_n$-linear for the specified target action and satisfy the strict transition identity\n$$\\Gamma(Fv_n)\\sigma^g_{M_{n+1}}=\\sigma^g_{M_n}\\Gamma(v_n).$$\nThere is a unique natural $R$-linear chain map of whole strict towers\n$$u^g_M:\\Gamma_\\bullet M\\longrightarrow\\Gamma_\\bullet GM$$\nwith these degreewise and levelwise components. For every system chain map $f:M\\to M'$ it satisfies\n$$\\Gamma_\\bullet(Gf)u^g_M=u^g_{M'}\\Gamma_\\bullet(f).$$\nThis asserts strict commutation before localization, for arbitrary quotient-linear transitions, rather than only for transitions obtained by reduction of a single complex. No cartesianness, boundedness, constructibility, finite Tor-amplitude or derived-completeness hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "Clause (3), point-factor prerequisite: extracted old steps 1 and 4 and the restriction/quotient-transition calculation in old step 3. Agent-formulated simultaneous-system extension of the explicit point-transport recipe; not a theorem asserted verbatim by the blueprint."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-coef-semilinear-derived-sections",
+  "def-trf-coefficient-tower-operations",
+  "def-weil-abstract-derived-category",
+  "lem-weil-point-automorphism-restriction-natural",
+  "def-coef-ringed-sequence-site",
+  "def-trf-point-restriction-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "For every $i,n$, apply [lem-weil-point-automorphism-restriction-natural] with $\\Lambda=A_n$ to $M_n^i$. It gives exactly the specified restriction followed by insertion and sheafification, identifies insertion with identity in $(FM_n^i)(U)\\cong M_n^i(V)$, and gives $\\sigma(bx)=c_n^{-1}(b)\\sigma(x)$. The prescribed target action therefore makes this component $A_n$-linear, hence $R$-linear through $R\\to A_n$.",
+   "uses": [
+    "lem-weil-point-automorphism-restriction-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "Clause (3), point-factor prerequisite; agent-written strict-system extension"
+   }
+  },
+  {
+   "text": "The coefficient compatibility of [lem-weil-proetale-isomorphism-inverse-image](3) applied to $A_{n+1}\\to A_n$ gives $\\rho_n c_{n+1}=c_nF\\rho_n$, hence $F\\rho_n c_{n+1}^{-1}=c_n^{-1}\\rho_n$. Thus transporting $Fv_n$ gives a quotient-linear transition with precisely the prescribed target action. Restriction of scalars changes neither sections nor restrictions [def-pc-sheaf-restrict-scalars]; after restricting to $R$, all transitions are $R$-linear.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "Clause (3), point-factor prerequisite; agent-written strict-system extension"
+   }
+  },
+  {
+   "text": "Fix $i,n$ and $x\\in M_{n+1}^i(U)$. In the reindexing coordinates of [lem-weil-proetale-isomorphism-inverse-image](1), $\\Gamma(Fv_n)\\sigma(x)=v_n(V)(x|_V)=v_n(U)(x)|_V=\\sigma\\Gamma(v_n)(x)$. The middle equality is naturality of the underlying sheaf morphism $v_n:M_{n+1}^i\\to\\operatorname{Res}_{\\rho_n}M_n^i$ [def-weil-sheaf-of-modules-category, def-pc-sheaf-restrict-scalars]. This proves the strict transition identity for arbitrary $v_n$, without expressing it as reduction of a single object.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "Clause (3), point-factor prerequisite; agent-written strict-system extension"
+   }
+  },
+  {
+   "text": "The preceding section restrictions define a natural transformation of whole R-module towers in the concrete ringed sequence-site presentation [def-coef-ringed-sequence-site]. At every level, transition naturality is the functoriality of restrictions; naturality in a module map is its underlying presheaf naturality [def-weil-sheaf-of-modules-category]. Identify the explicit restriction functor with the specified coefficientSequenceRestriction using its uniqueness characterization. Both sections and transported inverse image preserve addition. Apply Mathlib NatTrans.mapHomologicalComplex to obtain the natural chain map on arbitrary unbounded complexes [def-weil-abstract-derived-category]. The component formula is preserved by transport along the restriction-functor equality. Any two transformations with the prescribed components agree at every object, degree, and tower index, so extensionality proves uniqueness. No derived semilinear-calculus theorem is used.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "Clause (3), point-factor prerequisite; agent-written strict-system extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-point-automorphism-restriction-natural",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "def-coef-ringed-sequence-site",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "Clause (3), explicit point-factor strict-system prerequisite; sectionwise naturality argument, with Stacks Tags 03CT and 03CW for module morphisms; G3 stage 3: concrete sequence-site restriction, Mathlib NatTrans.mapHomologicalComplex, componentwise extensionality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction along an automorphism of an algebraically closed point gives a natural chain map on strict systems of sheaves of modules over quotient rings commuting with all transitions",
+   "results": "UNAVAILABLE: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.natTransΓRes, CategoryTheory.NatTrans",
+   "results": "0 hits; . PresheafOfModules.restriction and Sheaf.natTransΓRes are ingredients for one restriction map, not the specified semilinear system chain transformation with inverse-image insertion and quotient transitions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "natTransΓRes|semilinear.*(system|transition)|restriction.*colimit",
+   "results": "4 hits; Mathlib/Algebra/Ring/CompTypeclasses.lean, Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean. PresheafOfModules.restriction and Sheaf.natTransΓRes are ingredients for one restriction map, not the specified semilinear system chain transformation with inverse-image insertion and quotient transitions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections restriction maps on a diagram of module sheaves with varying coefficient rings form a natural transformation of complexes of strict inverse systems",
+   "results": "8 hits; PresheafOfModules.restriction, PresheafOfModules.limitPresheafOfModules_map, SheafOfModules.Presentation.map_π_eq, PresheafOfModules.limitCone_π_app_app, PresheafOfModules.sections_property, PresheafOfModules.limitPresheafOfModules, PresheafOfModules.sectionsMap, PresheafOfModules.limitCone. PresheafOfModules.restriction and Sheaf.natTransΓRes are ingredients for one restriction map, not the specified semilinear system chain transformation with inverse-image insertion and quotient transitions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The actual restriction at the final object and inverse image colimit insertion induce a unique linear natural transformation on complexes of semilinear module towers without cartesianness",
+   "results": "8 hits; PresheafOfModules.colimitCocone_ι_app_app, Profinite.NobelingProof.GoodProducts.square_commutes, PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.d, ModuleCat.RestrictionCoextensionAdj.counit', CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.ι_d, ModuleCat.restrictScalarsComp'App_inv_naturality, CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.ι_d_assoc. PresheafOfModules.restriction and Sheaf.natTransΓRes are ingredients for one restriction map, not the specified semilinear system chain transformation with inverse-image insertion and quotient transitions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def restriction|instIsIsoPullbackObjUnitToUnitOfFinal|def pullbackObjFreeIso",
+   "results": "2 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf.lean. PresheafOfModules.restriction and Sheaf.natTransΓRes are ingredients for one restriction map, not the specified semilinear system chain transformation with inverse-image insertion and quotient transitions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "natTransΓRes|semilinear.*(tower|transition)|restriction.*colimit",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean. Read restriction at Presheaf.lean:298 and natTransΓRes at GlobalSections.lean:178: ingredients only; neither states the inverse-image/insertion identification and arbitrary varying-coefficient system transformation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"natTransΓRes\"",
+   "results": "2 hits: CategoryTheory.Sheaf.natTransΓRes, CategoryTheory.Sheaf.natTransΓRes_app. Read restriction at Presheaf.lean:298 and natTransΓRes at GlobalSections.lean:178: ingredients only; neither states the inverse-image/insertion identification and arbitrary varying-coefficient system transformation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction at the final object under a site automorphism commutes with semilinear coefficient transition maps of sheaf towers",
+   "results": "8 hits: ModuleCat.Tilde.res_apply, CategoryTheory.Sheaf.ΓRes, CategoryTheory.Sheaf.ΓRes_map, LinearEquiv.apply_smulCommClass', PresheafOfModules.restrictScalarsObj, AlgebraicGeometry.SheafedSpace.restrictTopIso, PresheafOfModules.restriction_app, TopCat.Presheaf.SheafConditionEqualizerProducts.w. Read restriction at Presheaf.lean:298 and natTransΓRes at GlobalSections.lean:178: ingredients only; neither states the inverse-image/insertion identification and arbitrary varying-coefficient system transformation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-point-system-transport-descent",
+  "date": "2026-10-22",
+  "group": "Q131"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Global powers: the naturality assertion g^*_{gamma,c} RΓ_c(X,f)=RΓ_c(X,Lg^*_gamma f) g^*_{gamma,c}; prerequisite point-factor construction in prop-trf-rational-frobenius-integral-model proof (3), extracted old item steps 1-3. Extraction: Clause (3), point-factor prerequisite: extracted old steps 1 and 4 and the restriction/quotient-transition calculation in old step 3. Agent-formulated simultaneous-system extension of the explicit point-transport recipe; not a theorem asserted verbatim by the blueprint.",
+   "via": [
+    "lem-trf-point-system-transport-descent",
+    "lem-trf-integral-point-transport-tower-powers",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-point-restriction-system-chain-map",
+  "worker": "stage1",
+  "summary": "Q103 retains the full arbitrary-system statement. Reuses the existing restriction/insertion theorem, verifies the inverse coefficient square and calculates transition commutation sectionwise, then assembles the chain transformation and proves naturality and uniqueness. No new nodes or Mathlib leaves.",
+  "blueprint": "Nearest ancestor thm-trf-l-function-euler-product, global-powers naturality prerequisite in prop-trf-rational-frobenius-integral-model proof (3): restriction components, quotient-transition square, and strict chain-map naturality before localization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-point-automorphism-restriction-natural",
+    "why": "Generic restriction/insertion theorem for an arbitrary point automorphism; used only at a single finite coefficient level before assembling the system."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic site reindexing and coefficient-ring naturality for an isomorphism; supplies the actual section coordinates and reduction square."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Only the explicit definition of strict semilinear system morphisms as compatible componentwise families is used; no derived operation or adjunction is invoked."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-point-automorphism-restriction-natural",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-e9ee142dd",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-e9ee142dd (reviewer sub-agent of L); spot-checked: I read the item, the report, every cited node's statement and blueprint main-20261015 prop-trf-rational-frobenius-integral-model proof (3). The statement is unchanged from the version Q131 fixed (the n=i+1 index match with def-trf-coefficient-tower-operations) and nothing is weakened. There are no new nodes. Old parent steps 1 and 4 and the restriction half of step 3 (Q128 head of lem-trf-point-system-transport-descent) are all carried here, for any automorphism g. Step 1: the point lemma with Λ=A_{E,n} (same O_E/ϖ^n with n≥1) gives σ=ins∘res_g, ins=identity under (GM)(U)≅M(V), and σ(bx)=c^{-1}(b)σ(x); g need not be over k_0. Step 2: clause (3) of lem-weil-proetale-isomorphism-inverse-image gives ρ_n c_{n+1}=c_n Fρ_n, hence Fρ_n c_{n+1}^{-1}=c_n^{-1}ρ_n; I checked the algebra. Restriction of scalars leaves the underlying sheaf unchanged. Step 3: under the identification of clause (1), natural in the sheaf, the identity becomes the naturality square of the underlying abelian-sheaf map v_n, since module morphisms are abelian-sheaf morphisms. Step 4: system morphisms are compatible families, the point lemma gives the d- and f-compatibility at each level, and uniqueness holds because the components are prescribed. No derived-equality claim is made. The three tool_uses are reachable from sk-thm-trace-transport through the unit uses, and I accept them. There is no cycle and no SGA. The other nodes citing the point lemma (strict-quotient, cone-descent, roos-transport, whole-roos-square, restriction-coordinates, frobenius-point-transport) are Frobenius-specific, flat-tower, Roos or definitional, so none is a duplicate. Edge cases: g=id, zero transitions, non-surjective v_n, n=1 non-flat, any degree. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointRestrictionSystemChainMap",
+  "declaration": "WeilConjectures.PointRestrictionSystem.restriction_system_chain_map",
+  "declarations": [
+   "WeilConjectures.PointRestrictionSystem.reindex",
+   "WeilConjectures.PointRestrictionSystem.reindexContinuous",
+   "WeilConjectures.PointRestrictionSystem.sequenceRing",
+   "WeilConjectures.PointRestrictionSystem.coefficient_existsUnique",
+   "WeilConjectures.PointRestrictionSystem.coefficient",
+   "WeilConjectures.PointRestrictionSystem.pull",
+   "WeilConjectures.PointRestrictionSystem.sections",
+   "WeilConjectures.PointRestrictionSystem.operations_additive",
+   "WeilConjectures.PointRestrictionSystem.sectionsAdditive",
+   "WeilConjectures.PointRestrictionSystem.pullAdditive",
+   "WeilConjectures.PointRestrictionSystem.complexSections",
+   "WeilConjectures.PointRestrictionSystem.transportedComplexSections",
+   "WeilConjectures.PointRestrictionSystem.HasRestrictionComponents",
+   "WeilConjectures.PointRestrictionSystem.restriction_system_chain_map"
+  ],
+  "file": "lean/Sheaf/Paper/PointRestrictionSystemChainMap.lean",
+  "statement": "theorem restriction_system_chain_map (_hl : l ≠ D.p) (g : Spec (.of D.k) ⟶ Spec (.of D.k)) [IsIso g] : (∀ (n : ℕ) (M : SheafOfModules.{max u (t + 1)} (pointRestrictionRing l E (Spec (.of D.k)) (some n))) (b : pointRestrictionScalars.{t, u} l E (some n)) (x : M.val.obj (op (ProEt.mk (𝟙 (Spec (.of D.k)))))), pointRestrictionRaw l E g (some n) M (pointRestrictionScalarAt l E (Spec (.of D.k)) (some n) (ProEt.mk (𝟙 _)) b • x) = pointRestrictionScalarAt l E (Spec (.of D.k)) (some n) (ProEt.mk (𝟙 _)) b • pointRestrictionRaw l E g (some n) M x) ∧ ∃! u : complexSections D l E ⟶ transportedComplexSections D l E g, HasRestrictionComponents D l E g u",
+  "branch": "sheaf-dag",
+  "by": "Q84",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the existing ringed sequence-site realization of arbitrary quotient-linear systems. Adds its landed definition node to stmt_deps. The canonical coefficient morphism is chosen only from its unique prescribed section components; no arbitrary inverse-image map or transition is supplied. All auxiliary declarations belong to the strict-system restriction/insertion construction of this node. The natural-transformation type encodes strict transition, chain and chain-map naturality equations. Independent site and coefficient universes are retained; n denotes exponent n+1. Cites the landed existing:true definition owner def-trf-point-restriction-coordinates for pointRestrictionScalars/Ring/CoefficientMap/ScalarAt/Sections/InverseImage/Arrow/Raw (and its site-reindexing coordinates); retains lem-weil-point-automorphism-restriction-natural, which the node text cites for sigma."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3c1eab9d",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Re-delivery of H2 return dbfcfa3b1966. Lean module byte-identical (same sha256); node differs from live only by adding stmt_dep def-trf-point-restriction-coordinates (landed existing:true owner of pointRestrictionScalars/Ring/CoefficientMap/ScalarAt/Sections/InverseImage/Arrow/Raw, byte-identical to live) and the lean.note naming it; theorem dep retained; report has Return repair H2 section. Independent re-read: c_n^-1 coefficient pinned by RingCat HEq on propositionally equal objects (genuine, provable); coefficientSequenceModules strict systems; sections along R->A_{n+1} with n=i+1 shift; components HEq-pinned to restriction along pointRestrictionArrow g; A_n-linearity conjunct; unique natural chain map; no extra hypotheses; edge cases g=id, n=0, zero/non-surjective transitions, all degrees, independent universes. No hollow defs, 4 sorry theorems, docstrings ok, statement verbatim, max line 93. No compile (no file changed). Advisories: unused public imports; reindex/pull/sections plain defs in theorem module need a def owner for future citers; proEtaleIsoPostcompose reached via the def node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T122953-L-1820777",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

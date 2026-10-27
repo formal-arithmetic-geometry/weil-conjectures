@@ -1,0 +1,347 @@
+{
+ "id": "lem-sfb-balanced-nodal-trait-stable-canonical-limit",
+ "kind": "statement",
+ "title": "A balanced nodal trait has a stable ten-canonical limit",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$ [def-sc-discrete-valuation-ring]. Let $f:X\\to\\operatorname{Spec}R$ be a projective flat finitely presented family with nonempty connected reduced geometric fibres of pure dimension one, having only ordinary nodes, in the unmarked convention of [lem-sfb-nodal-log-canonical-reconstruction]; write $\\omega=\\omega_{X/R}$ for its canonical relative dualizing line. Let $L$ be an invertible module [def-sc-invertible-module] such that $L|_{X_K}\\simeq\\omega^{\\otimes10}|_{X_K}$. Let $\\Omega$ be an algebraic closure of the residue field and $C=X_\\Omega$. Suppose $g\\geq2$, $\\chi(C,\\mathcal O_C)=1-g$ [def-pc-euler-characteristic], and $L_C=L|_C$ is very ample and gives a complete embedding. Suppose every genus-zero normalized component of $C$ has at least two node branches, and every smooth rational component meeting its complement in exactly two points has $L_C$-degree one. Suppose also that for every nonempty proper reduced union $Y$ of irreducible components of $C$,\n$$\\left|\\deg_Y L_C-10\\deg_Y\\omega_C\\right|\\leq k_Y/2,$$\nwhere $k_Y$ counts nodes between $Y$ and its complement and degrees are sums on normalized components [def-pc-degree-line-bundle]. Then $L_C\\simeq\\omega_C^{\\otimes10}$ and $C/\\Omega$ is an unpointed stable genus-$g$ curve [def-sfb-stable-pointed-curve, def-sfb-stable-pointed-moduli-groupoids]: on each normalized component of genus zero there are at least three node branches and on each component of genus one at least one. Thus the given complete embedding is a ten-canonical embedding. No regularity of the total space $X$ or Cartier property of its special-fibre components is assumed.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Morrison Section 3.3 Proposition 10 and Corollary 11(1), printed pp.16--17: extremal twister and exclusion of unstable components; relative dualizing component degrees in Stacks Tag 0E74, moduli-curves.tex lemma-stable. Agent formulation using the existing singular-total-space twister input."
+ },
+ "stmt_deps": [
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic",
+  "def-sc-discrete-valuation-ring",
+  "def-sc-invertible-module",
+  "def-sfb-stable-pointed-curve",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-nodal-log-canonical-reconstruction",
+  "def-sc-ample"
+ ],
+ "proof": [
+  {
+   "text": "The geometric fibre $C$ is projective, flat and finitely presented by base change, hence proper, and is Noetherian because it is of finite type over the field $\\Omega$. Connectedness, nonemptiness and reducedness give $H^0(C,\\mathcal O_C)=\\Omega$. Cohomology above dimension one vanishes. Consequently $1-g=\\chi(C,\\mathcal O_C)=1-\\dim_\\Omega H^1(C,\\mathcal O_C)$, so its cohomological genus is $g$.",
+   "uses": [
+    "lem-pc-projective-base-change",
+    "lem-pc-projective-proper",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Genus convention preceding lemma-stable (Tag 0E74); genus calculation expanded using varieties.tex lemma-proper-geometrically-reduced-global-sections (Tag 0BUG) and cohomology.tex proposition-vanishing-Noetherian (Tag 02UZ)."
+   }
+  },
+  {
+   "text": "A DVR is Noetherian, so the base satisfies the reconstruction theorem's locally Noetherian hypothesis. The unmarked relative dualizing theorem identifies $\\omega|_C$ with $\\omega_C$ and $\\omega|_{X_K}$ with $\\omega_{X_K}$. Define $T=L\\otimes(\\omega^\\vee)^{\\otimes10}$. Pullback preserves invertibility and tensor products; tensor products and duals of invertible modules are invertible. Evaluation cancels the generic isomorphism $L_K\\simeq\\omega_K^{\\otimes10}$, giving $T_K\\simeq\\mathcal O_{X_K}$. On every normalized component degree is additive under tensor product. Since $\\deg\\mathcal O=0$ by definition and $\\omega\\otimes\\omega^\\vee\\simeq\\mathcal O$, summing these equalities gives $\\deg_Y T_C=\\deg_Y L_C-10\\deg_Y\\omega_C$ for every union $Y$ in the hypothesis.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "lem-pc-tensor-dual-invertible",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-trf-curve-degree-tensor-additive",
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.3, Proposition 10, printed p.16: generically trivial difference line; degree identity expanded using varieties.tex lemma-degree-tensor-product (Tag 0AYX) and moduli-curves.tex lemma-gorenstein-dualizing (Tag 0E6R)."
+   }
+  },
+  {
+   "text": "Apply the existing nodal-trait twister theorem to $T$ on the given family. Its hypotheses are exactly projectivity, flat finite presentation, connected reduced nodal geometric curves, and $T_K\\simeq\\mathcal O_{X_K}$; it permits singular total spaces and persistent nodes. If $T_C$ were nontrivial, it would supply a nonempty proper union $Y$ with $\\deg_Y T_C\\geq k_Y>0$. Step 2 and balance instead give $\\deg_Y T_C\\leq|\\deg_Y T_C|\\leq k_Y/2$. Thus $0<k_Y\\leq k_Y/2$, a contradiction. Therefore $T_C\\simeq\\mathcal O_C$, and tensoring with $\\omega_C^{\\otimes10}$ gives $L_C\\simeq\\omega_C^{\\otimes10}$.",
+   "uses": [
+    "lem-sfb-nodal-trait-twister-extremal-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.3, Proposition 10, printed p.16, equation (6) versus the extremal-subcurve inequality; use the existing singular-total-space twister statement rather than assuming the components Cartier."
+   }
+  },
+  {
+   "text": "Each normalized component $\\widetilde Z$ is a smooth proper connected integral curve. Choose two distinct geometric points of its image $Z$ in the given projective embedding. A linear form can vanish at one and not the other: their distinct projective coordinate vectors admit such a linear functional. Its pullback to $\\widetilde Z$ is a nonzero section of $L_C|_{\\widetilde Z}$ vanishing at a point over the first one. The section-degree positivity lemma therefore gives $\\deg_{\\widetilde Z}L_C>0$. Write $h_Z$ for the genus of $\\widetilde Z$ and $b_Z$ for its number of node branches; a self-node contributes two branches. The unmarked component formula and step 3 give $0<\\deg_{\\widetilde Z}L_C=10(2h_Z-2+b_Z)$. For $h_Z=0$ this forces $b_Z\\geq3$; for $h_Z=1$ it forces $b_Z\\geq1$. In particular even a component whose two branches form a self-node is excluded when its normalized genus is zero.",
+   "uses": [
+    "lem-trf-reduced-curve-normalization-genus",
+    "lem-trf-curve-section-degree-positivity",
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "lem-trf-curve-degree-tensor-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.3, Corollary 11(1), printed p.17, positivity of the embedding line on every component; expanded with varieties.tex lemma-check-invertible-sheaf-trivial (Tag 0B40) and the unmarked component-degree formula of the cited reconstruction theorem."
+   }
+  },
+  {
+   "text": "For any algebraically closed extension $\\Omega\\subset\\Omega_1$, the curve $C_{\\Omega_1}$ is again a geometric fibre of the original family. The given projective closed immersion pulls back to a closed immersion, and $L_C\\simeq\\omega_C^{\\otimes10}$ pulls back to the same canonical-line isomorphism by the relative dualizing base-change theorem. Repeat step 4 on its normalized components to obtain the same stable branch bounds. Flat cohomology base change for the quasi-compact quasi-separated proper curve $C$ gives $H^1(C_{\\Omega_1},\\mathcal O)=H^1(C,\\mathcal O)\\otimes_\\Omega\\Omega_1$, so its genus is still $g$. This checks every geometric point of $\\operatorname{Spec}\\Omega$, not just its identity-valued point.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-pc-flat-base-change-cohom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Arbitrary base change in lemma-gorenstein-dualizing (Tag 0E6R); the all-geometric-fibres convention of stable curves, with flat cohomology base change as in the cited node."
+   }
+  },
+  {
+   "text": "With zero markings the disjoint-section and smooth-marking conditions are vacuous. Projectivity, flatness, finite presentation, and the connected reduced nodal pure one-dimensional fibre are already given; the component conditions just proved are precisely the stability predicate. Steps 1 and 5 supply the genus-$g$ condition at all geometric points in the moduli convention. Finally transport the given complete linear series along $L_C\\simeq\\omega_C^{\\otimes10}$: the induced isomorphism of global-section spaces identifies its evaluation sections, hence the same embedding, up to projective coordinates, is the complete ten-canonical embedding.",
+   "uses": [
+    "def-sfb-stable-pointed-curve",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-sc-ample"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.3, Corollary 11(1), printed p.17; unpack the unpointed stability and complete-linear-series conventions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-base-change",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "def-pc-euler-characteristic",
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-nodal-log-canonical-reconstruction",
+  "lem-pc-tensor-dual-invertible",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-trf-curve-degree-tensor-additive",
+  "def-pc-degree-line-bundle",
+  "lem-sfb-nodal-trait-twister-extremal-degree",
+  "lem-trf-reduced-curve-normalization-genus",
+  "lem-trf-curve-section-degree-positivity",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-pc-flat-base-change-cohom",
+  "def-sfb-stable-pointed-curve",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sc-ample"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 3.3, Proposition 10 and Corollary 11(1), printed pp.16--17, read online at https://arxiv.org/pdf/0810.2340 (local PDF WANTED); expanded assembly using existing twister and component-degree nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A balanced line bundle in a nodal family over a DVR which is a tenth canonical power generically remains canonical on the special fibre, which is stable if the embedding is potentially stable",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: valuative-criterion, elliptic-reduction and smooth-morphism declarations do not state this family, polarization or deformation assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rigidity of balanced pluricanonical polarizations under specialization using extremal multidegrees of twisters on nodal curves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"AlgebraicGeometry.ValuativeCriterion.Existence = (AlgebraicGeometry.topologically @SpecializingMap).universally\", \"doc\": \"The valuative criterion for existence of a scheme morphism is equivalent to the universal property that its underlying continuous map is a specializing map, meaning this property is preserved under al\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"(AlgebraicGeometry.topologically @SpecializingMap).RespectsIso\", \"doc\": \"The property of a scheme morphism being a specializing map (defined via its underlying continuous map) holds for all isomorphisms of schemes. In other words, every isomorphism of schemes automatically\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.ValuativeCriterion.Existence f → SpecializingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes satisfies the valuative criterion for existence, then $ f $ is a specializing map, meaning that specialization relations in the codomain can be lifted to the do\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (AlgebraicGeometry.topologically @SpecializingMap).universally f → AlgebraicGeometry.ValuativeCriterion.Existence f\", \"doc\": \"If a morphism of schemes is universally specializing (topologically), then it satisfies the valuative criterion for existence. Specifically, for any valuative commutative square involving the morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap T.SpecTensorTo p))\\n      (\", \"doc\": \"For a pullback triplet $T$ in the category of schemes and a point $p$ in the spectrum of $T.tensor$, the composition of the morphisms $\\\\mathrm{Spec.map}(\\\\mathrm{Hom.residueFieldMap}(T.\\\\mathrm{SpecTens\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) (X.fromSpecStalk y) =\\n    X.fromSpecStalk x\", \"doc\": \"For a scheme $X$ and points $x,y$ where $x$ specializes to $y$, the composition of the morphism $\\\\operatorname{Spec}$ applied to the specialization-induced stalk map $\\\\mathcal{F}_y \\\\to \\\\mathcal{F}_x$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : X.Over S] [inst_1 : Y.Over S] [AlgebraicGeometry.IsReduced X]\\n  [S.IsSeparated] {f : X.PartialMap Y},\\n  AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap ↔ AlgebraicGeometry.Scheme.PartialMap.IsOver S f\", \"doc\": \"Let $X$ and $Y$ be schemes over a base scheme $S$, with $X$ being reduced and $S$ being separated. For any partial map $f$ from $X$ to $Y$, the rational map obtained from $f$ is over $S$ if and only i\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: valuative-criterion, elliptic-reduction and smooth-morphism declarations do not state this family, polarization or deformation assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Dualizing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no declaration with the requested geometric notion"
+  },
+  {
+   "tool": "grep",
+   "query": "twister|pluricanonical|balanced.*(polarization|degree)|dualizing.*(curve|nodal)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no nodal stability, balanced-polarization, or stable-curve smoothing declaration in the searched source"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generically trivial line bundle with balanced multidegree on a connected nodal family over a trait is trivial on the special fibre",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsHomeomorphicTrivialFiberBundle\", \"module\": \"Mathlib.Topology.FiberBundle.IsHomeomorphicTrivialBundle\", \"type\": \"(proj : Z → B) : Prop\", \"doc\": \"A fiber bundle $\\\\pi: Z \\\\to B$ is trivial if there exists a homeomorphism $e: Z \\\\to B \\\\times F$ such that for every $z \\\\in Z$, the projection $\\\\pi(z)$ equals the first component of $e(z)$. This means t\"}\n  {\"name\": \"Bundle.Trivial.fiberBundle\", \"module\": \"Mathlib.Topology.FiberBundle.Constructions\", \"type\": \": FiberBundle F (Bundle.Trivial B F)\", \"doc\": \"The trivial bundle over a base space $B$ with fiber $F$ is a fiber bundle, where the total space $B \\times F$ is equipped with the product topology. This structure uses the canonical trivialization giv\"}\n  {\"name\": \"Bundle.Trivial.fiberBundle_trivializationAt'\", \"module\": \"Mathlib.Topology.FiberBundle.Constructions\", \"type\": \"∀ (B : Type u_1) (F : Type u_2) [inst : TopologicalSpace B] [inst_1 : TopologicalSpace F] (x : B),\\n  FiberBundle.trivializationAt' x = Bundle.Trivial.trivialization B F\", \"doc\": \"Given topological spaces $B$ and $F$, the trivial bundle with total space $B \\\\times F$ equipped with the product topology is a fiber bundle. This structure uses the canonical global trivialization pro\"}\n  {\"name\": \"Bundle.Trivial.trivialization\", \"module\": \"Mathlib.Topology.FiberBundle.Constructions\", \"type\": \": Trivialization F (π F(Bundle.Trivial B F))\", \"doc\": \"The canonical trivialization for a trivial bundle over a base space $B$ with fiber $F$, constructed using the homeomorphism between the total space and the product space $B \\\\times F$. This trivializat\"}\n  {\"name\": \"Bundle.Trivial.symmₗ_trivialization\", \"module\": \"Mathlib.Topology.VectorBundle.Constructions\", \"type\": \"(x : B) : (trivialization B F).symmₗ 𝕜 x = LinearMap.id\", \"doc\": \"For any base point $x$ in the base space $B$, the inverse of the canonical linear trivialization of the trivial bundle with fiber $F$ at $x$ is the identity linear map on the fiber $F$.\"}\n  {\"name\": \"Bundle.Trivial.trivialization_source\", \"module\": \"Mathlib.Topology.FiberBundle.Constructions\", \"type\": \"∀ (B : Type u_1) (F : Type u_2) [inst : TopologicalSpace B] [inst_1 : TopologicalSpace F],\\n  (Bundle.Trivial.trivialization B F).source = Set.univ\", \"doc\": \"The source of the canonical trivialization of the trivial bundle over a base space $ B $ with fiber $ F $ is the universal set containing all elements of $ B $, meaning the trivialization is defined o\"}\n  {\"name\": \"Bundle.Trivial.contMDiffVectorBundle\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Basic\", \"type\": \": ContMDiffVectorBundle n F (Bundle.Trivial B F) IB\", \"doc\": \"The trivial bundle over a topological space $ B $ with fiber $ F $, a normed vector space over a nontrivially normed field $ \\\\mathbb{K} $, is a vector bundle. This structure equips the product space $\"}\n  {\"name\": \"Pretrivialization.ctorIdx\", \"module\": \"Mathlib.Topology.FiberBundle.Trivialization\", \"type\": \"{B : Type u_1} →\\n  {F : Type u_2} →\\n    {Z : Type u_4} →\\n      {inst : TopologicalSpace B} → {inst_1 : TopologicalSpace F} → {proj : Z → B} → Pretrivialization F proj → ℕ\", \"doc\": \"A trivialization of a fiber bundle is a continuous pretrivialization that provides a homeomorphism between the product of an open subset of the base space $B$ with the fiber $F$ and the corresponding \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial/support specialization, topological bundles and smoothness declarations do not state this assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generically tenth canonical line bundle with balanced multidegrees on a nodal family over a discrete valuation ring has stable tenth canonical special fibre",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.isMinimal_iff\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned WeierstrassCurve.IsGoodReduction, WeierstrassCurve.exists_isMinimal, WeierstrassCurve.IsMinimal, WeierstrassCurve.minimal, WeierstrassCurve.isGoodReduction_iff, WeierstrassCurve.isMinimal_iff, WeierstrassCurve.instIsMinimalMinimal, WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction do not state balanced specialization of a nodal pluricanonical line bundle"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A balanced line bundle generically equal to a power of the dualizing sheaf on a nodal family over a trait is canonical on the special fibre",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instCanonicallyOverFiber\", \"CommRing.Pic.mk.linearEquiv\", \"CategoryTheory.SheafOfTypes.balanced\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"CategoryTheory.Balanced\", \"FractionalIdeal.canonicalEquiv\", \"AlgebraicGeometry.Scheme.instIsIsoSubschemeιBotIdealSheafData\", \"Balanced.balancedCore_eq\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned AlgebraicGeometry.instCanonicallyOverFiber, CommRing.Pic.mk.linearEquiv, CategoryTheory.SheafOfTypes.balanced, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, CategoryTheory.Balanced, FractionalIdeal.canonicalEquiv, AlgebraicGeometry.Scheme.instIsIsoSubschemeιBotIdealSheafData, Balanced.balancedCore_eq do not state balanced specialization of a nodal pluricanonical line bundle"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|dualizing|canonical.*line.*bundle",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: no matching geometric declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+  "date": "2026-10-22",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. Re-split of lem-sfb-gieseker-ten-canonical-hilbert-stability: old step 4 and the stable-component exclusion in old step 5",
+   "via": [
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-balanced-nodal-trait-stable-canonical-limit",
+  "worker": "stage1",
+  "summary": "Reuse existing singular-total-space twister theorem, write out its contradiction with balance, and prove stable component bounds by positive degrees of the embedding line. Check the cohomological genus separately. No new nodes, no statement correction, no Lean attachment. Repair L (2026-10-22): re-audited the retained delivery against the current live unsplit item and every cited statement; all 25 citation excerpts remain literal and sufficient. Repackage on current origin/sheaf-dag for promotion of the side completion; retain the approved six-step argument. Resumed promotion repair: verified all current dependency statements and all 25 citation occurrences after dry-run receipt 5266fa38a74; made the locally Noetherian base hypothesis explicit in step 2 before the final current-base delivery. Current-base repair audit (2026-10-23): re-read all 23 current dependencies after successful dry run 144bd9f9d05; explicitly cite the existing DVR definition/equivalence in step 2 for the Noetherian hypothesis and add its verbatim citation. Statement, route and all six arguments retained.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. Re-split of lem-sfb-gieseker-ten-canonical-hilbert-stability: old step 4 and the stable-component exclusion in old step 5; six steps realize this created prerequisite. The ancestor command returns None; no imported blueprint node states the balanced-limit assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic preservation of flatness under base change, for the geometric-fibre family."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Clause (3), at scheme level, gives preservation of finite presentation under base change, for the geometric-fibre family."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic tensor and pullback compatibility for invertible modules, used for the generic and special restrictions of the difference line."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Clause (b) preserves the given projective closed immersion under extension of the algebraically closed field."
+   },
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "Generic flat cohomology base change for the proper curve identifies H1 after algebraically closed field extension, checking the all-geometric-points genus condition."
+   },
+   {
+    "node": "lem-pc-projective-base-change",
+    "why": "Projectivity under arbitrary base change is a generic scheme tool used to obtain a proper geometric fibre."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Projective implies proper is a generic scheme tool, not a replacement for an alteration-unit step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian finiteness tool for a finite-type scheme over a field."
+   },
+   {
+    "node": "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "why": "Generic global-functions theorem; connected reduced proper special fibre over an algebraically closed field has one constant factor."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic Zariski cohomology dimension vanishing, used only to identify Euler genus with H1 genus."
+   },
+   {
+    "node": "lem-pc-tensor-dual-invertible",
+    "why": "Generic invertible-module tensor-dual calculus constructs the difference line and cancels its powers."
+   },
+   {
+    "node": "lem-trf-curve-degree-tensor-additive",
+    "why": "Generic degree additivity for line bundles on proper curves, using Stacks 0AYX; no trace-formula or duality theorem is used."
+   },
+   {
+    "node": "lem-trf-reduced-curve-normalization-genus",
+    "why": "Only the smooth proper connected normalization assertion is used, as a generic algebraic-curve tool; no trace formula is used."
+   },
+   {
+    "node": "lem-trf-curve-section-degree-positivity",
+    "why": "Only the generic curve assertion that a nonzero section with a zero has positive degree is used (Stacks 0B40); no trace formula is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-projective-base-change",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-pc-tensor-dual-invertible",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-trf-reduced-curve-normalization-genus",
+  "lem-trf-curve-section-degree-positivity"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-56f4d9740",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-56f4d9740 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the full statement of every one of the 23 cited nodes. All 23 are identical in the snapshot and the live clone, and none is merged. The item is still unsplit on live and on side-live, and there is no repair note. The only change against the earlier PASSed heads a39cec11, b55b5358 and b89e12d5 is in step 2: it now cites def-sc-discrete-valuation-ring for 'a DVR is Noetherian', and that node does state the Noetherian local-domain equivalence (00PD). proof_deps equals the union of the uses. I re-checked the mathematics from scratch. Morrison arXiv:0810.2340 (local text copy; the report correctly lists the PDF as WANTED, proof_origin agent): Prop. 10 on p.16 (the chain k_Y <= deg_Y(twister) <= k_Y/2) and Cor. 11(1) on p.17 (a rational bridge is excluded because deg omega = 0 while omega^n is very ample). The six Stacks labels 0E74, 0E6R, 0AYX, 0B40, 0BUG and 02UZ exist in the local .tex files. Step 1: C is projective, flat, finitely presented, proper and Noetherian; H^0 = Omega (global-sections-product, C connected), H^{>=2} = 0, and chi = 1-g gives h^1 = g. Step 2: T = L tensor (omega dual)^10 has T_K trivial, and degree additivity on normalized components gives deg_Y T = deg_Y L - 10 deg_Y omega. Step 3: the twister node's hypotheses and its k_Y match the item exactly; its alternative deg_Y T >= k_Y > 0 contradicts the balance bound k_Y/2, so L_C is isomorphic to omega_C^10. Step 4: each normalized component is smooth, proper and integral. A linear form separating two points of its image pulls back to a nonzero section with a zero, so the degree is positive. The reconstruction formula with no markings then gives 10(2h-2+b) > 0, hence b >= 3 when h = 0 and b >= 1 when h = 1; these branches are the special points of the stability definition. Step 5: for every algebraically closed Omega_1 containing Omega, the closed immersion (proper-fp-permanence (b)) and the isomorphism L = omega^10 survive, and flat base change of cohomology keeps genus g. Step 6 (elementary): the stability and moduli definitions with zero markings, plus transport of the complete linear series. Small cases: irreducible C, a rational bridge, a rational curve with one self-node, genus-1 components with and without branches. No new nodes and no duplicates: gieseker-potential-stability gives the balance hypothesis, and stable-curve-pluricanonical-linear-series goes in the converse direction. No SGA is cited. Batch-5 findings, all accepted: lem-trf-curve-degree-tensor-additive, lem-trf-reduced-curve-normalization-genus and lem-trf-curve-section-degree-positivity are generic curve facts (degree additivity, normalization, positive degree of a section with a zero). Neither assumption gives them, the item's steps are not steps of either proof, and their closures contain no assumption leaf and no trace-transport node. The twister node reaches the trace-formula chapter only through lem-trf-degree-weighted-irreducible-components, which is Euler-characteristic and degree algebra. global-sections-product reaches only the definition def-trf-schematically-dense-open. I accept all 14 declared tool uses. Advisory, not a fault: step 4 uses the meaning of very ample from def-sc-ample without listing it in that step's uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BalancedNodalTraitStableCanonicalLimit",
+  "declaration": "AlgebraicGeometry.balanced_nodal_trait_stable_canonical_limit",
+  "declarations": [
+   "AlgebraicGeometry.BalancedNodalTrait.closedPoint",
+   "AlgebraicGeometry.BalancedNodalTrait.fiber",
+   "AlgebraicGeometry.BalancedNodalTrait.projection",
+   "AlgebraicGeometry.BalancedNodalTrait.line",
+   "AlgebraicGeometry.BalancedNodalTrait.componentDegree",
+   "AlgebraicGeometry.BalancedNodalTrait.componentUnion",
+   "AlgebraicGeometry.BalancedNodalTrait.boundary",
+   "AlgebraicGeometry.BalancedNodalTrait.coordinateSections",
+   "AlgebraicGeometry.balanced_nodal_trait_stable_canonical_limit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BalancedNodalTraitStableCanonicalLimit.lean",
+  "statement": "theorem balanced_nodal_trait_stable_canonical_limit (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (K : Type u) [Field K] [Algebra R K] [IsFractionRing R K] {X : Scheme.{u}} (f : X ⟶ Spec (.of R)) [IsProjective f] [Flat f] [LocallyOfFinitePresentation f] (hnodal : HasNodalGeometricFibres f) (hgeometric : ∀ (F : Type u) [Field F] [IsAlgClosed F] (t : Spec (.of F) ⟶ Spec (.of R)), IsReduced (pullback f t) ∧ (pullback f t).IsPureDimension 1) (omega : X.Modules) (dualizing : NodalDualizingDatum f omega) (L : X.Modules) [L.IsInvertible] (hgeneric : Nonempty ((Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap R K))))).obj L ≅ (Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap R K))))).obj (omega.tensorPow 10))) (Ω : Type u) [Field Ω] [Algebra (IsLocalRing.ResidueField R) Ω] [IsAlgClosure (IsLocalRing.ResidueField R) Ω] (g : ℕ) (hg : 2 ≤ g) (hchi : @Scheme.Modules.eulerChar Ω _ (BalancedNodalTrait.fiber f Ω) ⟨BalancedNodalTrait.projection f Ω⟩ (SheafOfModules.unit (BalancedNodalTrait.fiber f Ω).ringCatSheaf) = 1 - (g : ℤ)) (I : Type u) [Fintype I] (i : BalancedNodalTrait.fiber f Ω ⟶ ℙ(I; Spec (.of Ω))) (hi : IsClosedImmersion i) (hover : i ≫ (ℙ(I; Spec (.of Ω)) ↘ Spec (.of Ω)) = BalancedNodalTrait.projection f Ω) (e : (Scheme.Modules.tensorPullback i).obj (ProjectiveSpace.twist I (Spec (.of Ω)) 1) ≅ BalancedNodalTrait.line f Ω L) (hcomplete : Function.Bijective (BalancedNodalTrait.coordinateSections (BalancedNodalTrait.projection f Ω) i _ e)) (hrational : ∀ Z : irreducibleComponents (BalancedNodalTrait.fiber f Ω), (BalancedNodalTrait.fiber f Ω).normalizedComponentGenus (BalancedNodalTrait.projection f Ω) Z = 0 → 2 ≤ ((BalancedNodalTrait.fiber f Ω).normalizedComponentMap Z ⁻¹' {x | x ∉ (BalancedNodalTrait.projection f Ω).smoothLocus}).encard) (htwopoint : ∀ Z : irreducibleComponents (BalancedNodalTrait.fiber f Ω), Smooth ((Scheme.IdealSheafData.vanishingIdeal ⟨Z.1, isClosed_of_mem_irreducibleComponents _ Z.2⟩).subschemeι ≫ BalancedNodalTrait.projection f Ω) → (BalancedNodalTrait.fiber f Ω).normalizedComponentGenus (BalancedNodalTrait.projection f Ω) Z = 0 → (BalancedNodalTrait.boundary {Z}).ncard = 2 → BalancedNodalTrait.componentDegree (BalancedNodalTrait.projection f Ω) (BalancedNodalTrait.line f Ω L) Z = 1) (hbalanced : ∀ S : Finset (irreducibleComponents (BalancedNodalTrait.fiber f Ω)), S.Nonempty → BalancedNodalTrait.componentUnion S ≠ Set.univ → |((∑ Z ∈ S, BalancedNodalTrait.componentDegree (BalancedNodalTrait.projection f Ω) (BalancedNodalTrait.line f Ω L) Z : ℤ) : ℚ) - 10 * ((∑ Z ∈ S, BalancedNodalTrait.componentDegree (BalancedNodalTrait.projection f Ω) (BalancedNodalTrait.line f Ω omega) Z : ℤ) : ℚ)| ≤ ((BalancedNodalTrait.boundary S).ncard : ℚ) / 2) : ∃ c : BalancedNodalTrait.line f Ω L ≅ (BalancedNodalTrait.line f Ω omega).tensorPow 10, IsStablePointedCurve (BalancedNodalTrait.projection f Ω) (fun j : Fin 0 ↦ Fin.elim0 j) (fun j : Fin 0 ↦ Fin.elim0 j) ∧ (∀ (F : Type u) [Field F] [IsAlgClosed F] (a : Spec (.of F) ⟶ Spec (.of Ω)), Module.finrank F ((ModuleCat.restrictScalars (((Scheme.ΓSpecIso (.of F)).inv ≫ (pullback.snd (BalancedNodalTrait.projection f Ω) a).appTop).hom)).obj ((RingedSpace.moduleCohomology (pullback (BalancedNodalTrait.projection f Ω) a).toRingedSpace 1).obj (SheafOfModules.unit (pullback (BalancedNodalTrait.projection f Ω) a).ringCatSheaf))) = g) ∧ Function.Bijective (BalancedNodalTrait.coordinateSections (BalancedNodalTrait.projection f Ω) i _ (e ≪≫ c))",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical closed-fibre pullbacks, normalized-component degree sums and the actual coordinate-section map render the given complete embedding. The conclusion retains that same embedding, unpointed stability and genus at every geometric point. All helper data are explicit constructions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-484035165",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Snapshot item differs from live only in lean; statement verbatim in file with sorry proof; report has Worker report and Second reading by Q125. Every clause matched: DVR R with fraction field K; IsProjective (=IsHProjective+QC) + Flat + LFP f; HasNodalGeometricFibres + reduced/pure-dim-1 binders exactly as in exists_nodal_log_canonical_reconstruction; omega with NodalDualizingDatum; invertible L with generic iso to omega^10 along Spec K; Omega IsAlgClosure of residue field, C = actual pullback; hg, hchi via eulerChar; very ample complete embedding = IsVeryAmple unpacked (closed immersion over Omega, e : i^*O(1) ≅ L_C) + bijective actual coordinate-section map (unit 1⊗T_j); hrational = >=2 nonsmooth preimages on normalization (self-node counts 2, same convention as IsStablePointedCurve); htwopoint = smooth genus-0 reduced component, boundary ncard 2, degree 1; hbalanced over all nonempty S with union ≠ univ (= proper, may be disconnected), normalized degree sums in Q, factor 10, k_Y/2 via component-union intersection. Conclusion: ∃ c : L_C ≅ (omega|_C)^10, IsStablePointedCurve with Fin 0, genus clause verbatim StablePointedModuli.genus, same embedding complete for e≪≫c. Edge cases (irreducible C, self-nodes, bridges, genus-1, g=2, empty I, universes u) OK. Helpers explicit with docstrings; no hollow defs, no pro-etale substitute, no compile needed (no change). Advisories: componentDegree overlaps markedNodalComponentDegree in presentation only; tensorPullbackSectionAdjunction used from a non-stmt_dep generic node."
+ }
+}

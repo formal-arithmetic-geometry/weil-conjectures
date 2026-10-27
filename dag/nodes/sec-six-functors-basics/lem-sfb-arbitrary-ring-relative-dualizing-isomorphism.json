@@ -1,0 +1,220 @@
+{
+ "id": "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism",
+ "kind": "statement",
+ "title": "Unmarked algebraic relative dualizing complexes over arbitrary rings are isomorphic",
+ "statement": "Let $R\\to A$ be a flat finitely presented homomorphism of arbitrary commutative rings [def-weil-pbc-flat-ring-map], [def-weil-pbc-finitely-presented-algebra]. Put $B=A\\otimes_R A$, $p_1(a)=a\\otimes1$, and give $A$ its $B$-module structure via multiplication. Use the module derived categories [def-weil-abstract-derived-category], derived scalar extension and diagonal object [def-trf-affine-diagonal-module-data], and derived Hom [def-pur-derived-internal-hom] on the one-object ringed site. For $T\\in D(A)$ put $T_1=T\\otimes^{\\mathbf L}_{A,p_1}B$. Say $T$ is $R$-perfect if it is pseudo-coherent over $A$ [def-pc-ring-pseudo-coherent-complex] and has finite Tor amplitude over $R$: there are integers $a\\le b$ with $H^i(T\\otimes_R^{\\mathbf L}Q)=0$ for all $R$-modules $Q$ and $i\\notin[a,b]$. If $M,N\\in D(A)$ are $R$-perfect and $R\\operatorname{Hom}_B(A,M_1)$ and $R\\operatorname{Hom}_B(A,N_1)$ are isomorphic to $A[0]$ in $D(B)$, then $M\\cong N$ in $D(A)$. The isomorphism need not preserve any chosen diagonal class. No Noetherian or nonzero-ring hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0E2D, lemma-uniqueness-relative-dualizing; Definition 0E2C, definition-relative-dualizing-complex."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-pur-derived-internal-hom",
+  "def-trf-affine-diagonal-module-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose a presentation $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow A$ using [def-weil-pbc-finitely-presented-algebra]. Let $C=C_{P\\to A}(P)[n]$. By [lem-sfb-arbitrary-polynomial-dual-properties], $C$ is $R$-perfect and the scalar map $h:A[0]\\to R\\operatorname{Hom}_A(C,C)$ is invertible. This argument also applies to the zero algebra; its derived category has only the zero object.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-sfb-arbitrary-polynomial-dual-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2D, lemma-uniqueness-relative-dualizing; agent polynomial-duality proof repairing the Tor hypothesis in its two evaluation applications."
+   }
+  },
+  {
+   "text": "For $T=M,N$ restrict its assumed diagonal isomorphism along the actual first coprojection $p_1:A\\to B$. Since multiplication composed with $p_1$ is $1_A$, the restricted target is $A[0]$ with its usual $A$-action. Apply [lem-sfb-arbitrary-polynomial-diagonal-hom] to obtain an isomorphism $g_T:A[0]\\xrightarrow{\\sim}R\\operatorname{Hom}_A(C,T)$. Only existence is required; no generator is chosen or preserved.",
+   "uses": [
+    "lem-sfb-arbitrary-polynomial-diagonal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2D, lemma-uniqueness-relative-dualizing; agent polynomial-duality proof repairing the Tor hypothesis in its two evaluation applications."
+   }
+  },
+  {
+   "text": "Use [lem-pod-projective-hom-evaluation-model] with a bounded-above finite-free representative of $C$, supplied by its pseudo-coherence in step 1. Let $f_T:C=C\\otimes_A^{\\mathbf L}A[0]\\to T$ be the adjunct of $g_T$. Naturality of the tensor--Hom adjunction gives $R\\operatorname{Hom}_A(C,f_T)\\circ h=g_T$, since $h$ is the adjunct of $1_C$. Thus $R\\operatorname{Hom}_A(C,f_T)$ is invertible.",
+   "uses": [
+    "lem-pod-projective-hom-evaluation-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2D, lemma-uniqueness-relative-dualizing; agent polynomial-duality proof repairing the Tor hypothesis in its two evaluation applications."
+   }
+  },
+  {
+   "text": "Both $C$ and $T$ are $R$-perfect: step 1 gives this for $C$ and the hypothesis gives it for $T=M,N$. Apply [lem-sfb-relative-perfect-polynomial-dual-detection] to $f_T:C\\to T$ and step 3. It follows that $f_M$ and $f_N$ are isomorphisms. The composite $f_N\\circ f_M^{-1}:M\\to N$ proves the assertion, with no normalization condition.",
+   "uses": [
+    "lem-sfb-relative-perfect-polynomial-dual-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0E2D, lemma-uniqueness-relative-dualizing; agent polynomial-duality proof repairing the Tor hypothesis in its two evaluation applications."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-sfb-arbitrary-polynomial-diagonal-hom",
+  "lem-sfb-arbitrary-polynomial-dual-properties",
+  "lem-sfb-relative-perfect-polynomial-dual-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0E2D, lemma-uniqueness-relative-dualizing; agent polynomial-duality proof repairing the Tor hypothesis in its two evaluation applications."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative dualizing complexes for flat finitely presented algebras over arbitrary rings have scalar derived endomorphisms and are isomorphic",
+   "results": "8 hits: IsBaseChange.toDualBaseChange, Algebra.FormallyUnramified.flat_of_restrictScalars, Algebra.Extension.tensorH1Cotangent, Module.Flat.iff_characterModule_injective, Module.Flat.iff_characterModule_baer, KaehlerDifferential.endEquiv, ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat, Module.Flat.self; digest=e4728ce990b04cae; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flatness, scheme diagonal, underived adjunction or linear-algebra declarations; none states this derived relative duality result"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|RelativeDualizing|dualizing.*[Uu]niq|[Hh]omothety",
+   "results": "25 hits: Mathlib/LinearAlgebra/Transvection/Generation.lean, Mathlib/LinearAlgebra/Transvection/Generation.lean, Mathlib/LinearAlgebra/Transvection/Generation.lean, Mathlib/LinearAlgebra/Transvection/Generation.lean, Mathlib/LinearAlgebra/Transvection/Generation.lean, Mathlib/LinearAlgebra/AffineSpace/MidpointZero.lean, Mathlib/LinearAlgebra/AffineSpace/MidpointZero.lean, Mathlib/LinearAlgebra/AffineSpace/MidpointZero.lean; digest=b85b881582a7b804; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flatness, scheme diagonal, underived adjunction or linear-algebra declarations; none states this derived relative duality result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flatness, scheme diagonal, underived adjunction or linear-algebra declarations; none states this derived relative duality result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative dualizing complexes for flat finitely presented algebras are unique and their derived endomorphisms are scalars",
+   "results": "8 hits: RingHom.Flat, Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation, RingHom.FaithfullyFlat, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, DualNumber.algHom_ext, Algebra.Smooth.flat, Module.flat_iff_of_isLocalization, RingHom.flat_algebraMap_iff; digest=27be7af85051a484; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flatness, scheme diagonal, underived adjunction or linear-algebra declarations; none states this derived relative duality result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semidualizing complex of a flat finitely presented algebra is unique up to isomorphism and its derived endomorphism ring is the algebra",
+   "results": "8 hits: IsAzumaya, IsAzumaya.id, IsMoritaEquivalent.refl, IsAzumaya.toProjective, IsMoritaEquivalent, Algebra.formallySmooth_iff, Algebra.FormallySmooth.iff_subsingleton_and_projective, Module.free_of_flat_of_isLocalRing; digest=a19ebebbc5cd07e9; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flatness, scheme diagonal, underived adjunction or linear-algebra declarations; none states this derived relative duality result"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|semidualizing|dualizing.*[Uu]niq",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived algebra or general derived categories, not this relative polynomial-duality assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived algebra or general derived categories, not this relative polynomial-duality assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of relative dualizing complexes for flat finitely presented algebras",
+   "results": "8 hits: RingHom.Flat, CategoryTheory.Functor.rightDerivedUnique, Algebra.FormallyUnramified.ext', Algebra.FormallyUnramified.lift_unique', Algebra.FormallyEtale.subsingleton_kaehlerDifferential, RingHom.flat_algebraMap_iff, Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation, Algebra.Smooth.flat; digest=12f525b4cf79bfaf; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived algebra or general derived categories, not this relative polynomial-duality assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For flat finitely presented algebras over arbitrary commutative rings the relative dualizing complex is unique up to isomorphism",
+   "results": "8 hits: Algebra.Smooth.flat, Module.Flat.projective_of_finitePresentation, Algebra.FormallySmooth.projective_kaehlerDifferential, Algebra.FormallySmooth.iff_subsingleton_and_projective, Algebra.formallySmooth_iff, Algebra.Extension.tensorH1Cotangent, RingHom.FaithfullyFlat.respectsIso, Algebra.FormallySmooth.iff_injective_lTensor_residueField; digest=b0c32aee64605c65; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived algebra or general derived categories, not this relative polynomial-duality assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-dualizing-pair-open-rigidity",
+  "date": "2026-10-23",
+  "group": "Q118"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Open restriction and rigidity of supplied relative dualizing pairs over arbitrary bases. Affine uniqueness input: unmarked module complexes, before generator normalization.",
+   "via": [
+    "lem-sfb-relative-dualizing-pair-open-rigidity",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism",
+  "worker": "stage1",
+  "summary": "Kept the arbitrary-ring statement. Replaced the unexplained evaluation applications of 0E2D by polynomial relative duality, adjunction and relative-perfect detection. Added three strictly smaller generic inputs; checked the Noetherian analogues, Lean source, and actual Mathlib search results.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images alteration/moduli dualizing-line prerequisite: affine unmarked uniqueness before diagonal-class normalization. The inherited blueprint ancestor is null; the item is not itself a blueprint import.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-projective-hom-evaluation-model",
+    "why": "Generic module tensor--Hom adjunction with bounded-above projective source; no unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-projective-hom-evaluation-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-349b4d5c5",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-349b4d5c5 (reviewer sub-agent of L); spot-checked: First split (live and side-live: item unsplit, no repair note). Statement unchanged, matches Stacks 0E2C/0E2D. Worker's source error confirmed: 0E2D applies 0ATK(3), which needs K_1 or L_2 to have finite Tor amplitude over A⊗_R A, i.e. finite Tor dimension over A; counterexample A=k[x,y]/(x,y)^2 with K=Hom_k(A,k). Gap in the proof only; agent replacement route is valid. Steps: (1) presentation plus dual-properties give C R-perfect and h an isomorphism; (2) restriction along p_1 (μ∘p_1=id) plus diagonal-hom give g_T: A≅RHom(C,T); (3) adjunction naturality RHom(C,f_T)∘h=g_T via lem-pod; (4) detection makes f_M, f_N isomorphisms, so M≅N. All three new nodes checked true for arbitrary rings. dual-properties: 0E1T+068X give A perfect over P; perfect biduality gives the homothety. diagonal-hom: S=A_1[x], B perfect over S, E=B⊗_{A_2}C[-n], Koszul x_i−ā_i, valid for unbounded T; tested on R=A and A=R[x]. detection: 0E1U base change to fibres, field case via H^d_m(A) socle, Nakayama on top cohomology; morphism clause via cone. All are statement-only, self-contained, with 4-kind searches. No duplicates: the trf analogues are Noetherian; sfb homothety, generator-base-change and affine-realization have other content; none restates the item. Batch-5: def-trf-derived-coinduction and def-trf-affine-diagonal-module-data are general definitions; lem-pod-projective-hom-evaluation-model is a generic Hom-model/adjunction lemma outside both assumptions. All accepted; declared tool use accepted. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ArbitraryRingRelativeDualizingIsomorphism",
+  "declaration": "AlgebraicGeometry.arbitraryRing_relativeDualizing_isomorphic",
+  "file": "lean/Sheaf/RingTheory/ArbitraryRingRelativeDualizingIsomorphism.lean",
+  "statement": "theorem arbitraryRing_relativeDualizing_isomorphic (R A : Type u) [CommRing R] [CommRing A] [Algebra R A] (hflat : RingHom.Flat (algebraMap R A)) [Algebra.FinitePresentation R A] (M N : DerivedCategory (ModuleCat.{u} A)) (hM : DerivedCategory.IsPseudoCoherent M) (hN : DerivedCategory.IsPseudoCoherent N) (hMTor : ∃ a b : ℤ, a ≤ b ∧ ∀ (Q : ModuleCat.{u} R) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj (((ModuleCat.restrictScalars (algebraMap R A)).mapDerivedCategory.obj M) ⊗ DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj Q)))) (hNTor : ∃ a b : ℤ, a ≤ b ∧ ∀ (Q : ModuleCat.{u} R) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj (((ModuleCat.restrictScalars (algebraMap R A)).mapDerivedCategory.obj N) ⊗ DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj Q)))) (hMHom : Nonempty ((ordinaryModuleDerivedInternalHom (A ⊗[R] A)).obj (op (relativeDualizingModuleDiagonal R A), (relativeDualizingDerivedExtension (Algebra.TensorProduct.includeLeft : A →ₐ[R] A ⊗[R] A).toRingHom).obj M) ≅ relativeDualizingModuleDiagonal R A)) (hNHom : Nonempty ((ordinaryModuleDerivedInternalHom (A ⊗[R] A)).obj (op (relativeDualizingModuleDiagonal R A), (relativeDualizingDerivedExtension (Algebra.TensorProduct.includeLeft : A →ₐ[R] A ⊗[R] A).toRingHom).obj N) ≅ relativeDualizingModuleDiagonal R A)) : Nonempty (M ≅ N)",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-915308dd5",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Clause-by-clause match to node and Stacks 0E2C/0E2D: Algebra R A with RingHom.Flat and FinitePresentation; p1 = includeLeft; T1 = relativeDualizingDerivedExtension (K-flat left derived extendScalars); A[0] = relativeDualizingModuleDiagonal (restricted along lmul'); RHom = ordinaryModuleDerivedInternalHom (defeq to relativeDualizingModuleHom); R-perfect = IsPseudoCoherent plus a finite Tor interval over R for each complex, all degrees and all u-small Q; conclusion Nonempty (M ≅ N) in D(A). No Noetherian, nonzero or explicit HasDerivedCategory hypothesis; the zero ring, R=A and a=b are covered. Only close declaration is algebraic_relativeDualizing_isomorphic, which adds Noetherian assumptions. Node diff: only the lean field; lean.statement matches the file exactly; no definitions or new nodes; proof is sorry; docstrings complete; the plain import is a proof dependency's module. Advisory only: the derived tensor on D(R) comes from the shared monoidal instance, not a listed statement dependency. Not recompiled (no file changed)."
+ }
+}

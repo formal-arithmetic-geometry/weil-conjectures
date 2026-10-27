@@ -8,6 +8,15 @@ module
 public import Sheaf.Paper.CompletedTowerPullback
 public import Sheaf.Paper.FiniteStagePairCategory
 public import Sheaf.AlgebraicGeometry.ProEtaleIsomorphismInverseImage
+import all Sheaf.Paper.CompletedTowerPullback
+import all Sheaf.Paper.FiniteStagePairCategory
+import all Sheaf.Paper.PbcScalarExtension
+import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
+import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+import Sheaf.Paper.PbcActualRingedExchange
+import Sheaf.Paper.SfConstructibleCanonicalCompleteness
+import Sheaf.CategoryTheory.ExactEquivalenceDerivedSquares
+import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.LeftDerivedEquivalence
 
 /-!
 # Completed coefficient transport and Weil categories
@@ -31,12 +40,171 @@ actual field inclusions conjugated by that canonical equivalence.
 set_option autoImplicit false
 universe u c
 open CategoryTheory CategoryTheory.Limits Opposite
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem isoTransportCochainDerivedCounit
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    (G : A ⥤ B) [G.Additive]
+    (L : DerivedCategory A ⥤ DerivedCategory B)
+    (ε : DerivedCategory.Qh ⋙ L ⟶ G.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    [L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso A (.up ℤ))] :
+    ∃ εc : DerivedCategory.Q ⋙ L ⟶ G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q,
+      L.IsLeftDerivedFunctor εc (HomologicalComplex.quasiIso A (.up ℤ)) ∧
+      ∀ P, εc.app P = Functor.leftDerivedCounitOnComplex G L ε P := by
+  let π := HomotopyCategory.quotient A (.up ℤ)
+  let εc : DerivedCategory.Q ⋙ L ⟶
+      G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+    { app := fun P ↦ ε.app (π.obj P)
+      naturality := fun _ _ f ↦ ε.naturality (π.map f) }
+  refine ⟨εc, ?_, ?_⟩
+  swap
+  · intro P
+    simp only [εc, Functor.leftDerivedCounitOnComplex,
+      DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
+      Functor.mapHomotopyCategoryFactors]
+    erw [L.map_id, DerivedCategory.Qh.map_id]
+    change ε.app (π.obj P) = 𝟙 _ ≫ ε.app (π.obj P) ≫ 𝟙 _ ≫ 𝟙 _
+    simp only [Category.id_comp, Category.comp_id]
+  · refine ⟨⟨⟨?_⟩⟩⟩
+    let lift (Z : DerivedCategory A ⥤ DerivedCategory B)
+        (τ : DerivedCategory.Q ⋙ Z ⟶
+          G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) :
+        DerivedCategory.Qh ⋙ Z ⟶ G.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh :=
+      { app := fun X ↦ τ.app X.as
+        naturality := by
+          intro X Y f
+          obtain ⟨X, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+          obtain ⟨Y, rfl⟩ := HomotopyCategory.quotient_obj_surjective Y
+          obtain ⟨f, rfl⟩ := π.map_surjective f
+          exact τ.naturality f }
+    refine IsTerminal.ofUniqueHom (fun Z ↦ CostructuredArrow.homMk
+      (L.leftDerivedLift ε (HomotopyCategory.quasiIso A (.up ℤ)) Z.left
+        (lift Z.left Z.hom)) (by
+          apply NatTrans.ext
+          funext P
+          exact L.leftDerived_fac_app ε (HomotopyCategory.quasiIso A (.up ℤ))
+            Z.left (lift Z.left Z.hom) (π.obj P))) ?_
+    intro Z m
+    apply CostructuredArrow.hom_ext
+    apply L.leftDerived_ext ε (HomotopyCategory.quasiIso A (.up ℤ))
+    apply NatTrans.ext
+    funext X
+    obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    have hm := NatTrans.congr_app m.w P
+    have hm' : m.left.app (DerivedCategory.Q.obj P) ≫ ε.app (π.obj P) =
+        Z.hom.app P := by simpa using hm
+    exact hm'.trans
+      (L.leftDerived_fac_app ε (HomotopyCategory.quasiIso A (.up ℤ))
+        Z.left (lift Z.left Z.hom) (π.obj P)).symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem isoTransportDerivedSquare
+    {A B AD BD : Type*} [Category A] [Category B] [Category AD] [Category BD]
+    (QA : A ⥤ AD) (QB : B ⥤ BD) (G : A ⥤ B) (L : AD ⥤ BD)
+    (ε : QA ⋙ L ⟶ G ⋙ QB) [L.IsRightKanExtension ε]
+    (U : A ⥤ A) [U.IsEquivalence] (V : B ⥤ B)
+    (HA : AD ⥤ AD) [HA.IsEquivalence] (HB : BD ⥤ BD) [HB.IsEquivalence]
+    (θA : QA ⋙ HA ≅ U ⋙ QA) (θB : QB ⋙ HB ≅ V ⋙ QB)
+    (τ : G ⋙ V ≅ U ⋙ G) :
+    ∃! c : L ⋙ HB ≅ HA ⋙ L, ∀ P : A,
+      c.hom.app (QA.obj P) ≫ L.map (θA.hom.app P) ≫ ε.app (U.obj P) =
+        HB.map (ε.app P) ≫ θB.hom.app (G.obj P) ≫ QB.map (τ.hom.app P) := by
+  let εU := (Functor.associator U QA L).hom ≫ Functor.whiskerLeft U ε
+  have : L.IsRightKanExtension εU :=
+    (Functor.isRightKanExtension_iff_precomp L U ε).mp inferInstance
+  let δ := (Functor.associator QA HA L).inv ≫
+    Functor.whiskerRight θA.hom L ≫ εU
+  have : (HA ⋙ L).IsRightKanExtension δ :=
+    (Functor.isRightKanExtension_iff_postcomp₁ HA θA εU).mp inferInstance
+  let σ := (Functor.associator QA L HB).inv ≫ Functor.whiskerRight ε HB
+  have : (L ⋙ HB).IsRightKanExtension σ :=
+    Functor.isRightKanExtension_comp_of_isEquivalence L ε HB
+  let ζ : (G ⋙ QB) ⋙ HB ≅ U ⋙ G ⋙ QB :=
+    Functor.associator G QB HB ≪≫ Functor.isoWhiskerLeft G θB ≪≫
+      (Functor.associator G V QB).symm ≪≫ Functor.isoWhiskerRight τ QB ≪≫
+      Functor.associator U G QB
+  let c := Functor.rightKanExtensionUniqueOfIso (L ⋙ HB) σ ζ (HA ⋙ L) δ
+  have hc (P : A) :
+      c.hom.app (QA.obj P) ≫ L.map (θA.hom.app P) ≫ ε.app (U.obj P) =
+        HB.map (ε.app P) ≫ θB.hom.app (G.obj P) ≫ QB.map (τ.hom.app P) := by
+    have h := (HA ⋙ L).liftOfIsRightKanExtension_fac_app δ (L ⋙ HB) (σ ≫ ζ.hom) P
+    change c.hom.app (QA.obj P) ≫ δ.app P = (σ ≫ ζ.hom).app P at h
+    simpa only [δ, εU, σ, ζ, NatTrans.comp_app, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
+      Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
+      Functor.isoWhiskerRight_hom, Functor.map_id, Category.id_comp,
+      Category.comp_id, Category.assoc] using h
+  refine ⟨c, hc, ?_⟩
+  intro c' hc'
+  apply Iso.ext
+  apply (HA ⋙ L).hom_ext_of_isRightKanExtension δ
+  apply NatTrans.ext
+  funext P
+  simpa only [δ, εU, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.assoc] using (hc' P).trans (hc P).symm
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem isoTransportCochainSquare
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    (G : A ⥤ B) [hG : G.Additive] (L : DerivedCategory A ⥤ DerivedCategory B)
+    (ε : DerivedCategory.Qh ⋙ L ⟶ G.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (hL : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso A (.up ℤ)))
+    (FE : A ⥤ A) (FF : B ⥤ B) [hFA : FE.Additive] [hFB : FF.Additive]
+    [hEA : FE.IsEquivalence] [hEB : FF.IsEquivalence]
+    (τ : G.mapHomologicalComplex (.up ℤ) ⋙ FF.mapHomologicalComplex (.up ℤ) ≅
+      FE.mapHomologicalComplex (.up ℤ) ⋙ G.mapHomologicalComplex (.up ℤ)) :
+    ∃! c : L ⋙ FF.mapDerivedCategory ≅ FE.mapDerivedCategory ⋙ L,
+      ∀ P : CochainComplex A ℤ,
+        c.hom.app (DerivedCategory.Q.obj P) ≫
+          L.map (FE.mapDerivedCategoryFactors.hom.app P) ≫
+          Functor.leftDerivedCounitOnComplex G L ε
+            ((FE.mapHomologicalComplex (.up ℤ)).obj P) =
+        FF.mapDerivedCategory.map (Functor.leftDerivedCounitOnComplex G L ε P) ≫
+          FF.mapDerivedCategoryFactors.hom.app
+            ((G.mapHomologicalComplex (.up ℤ)).obj P) ≫
+          DerivedCategory.Q.map (τ.hom.app P) := by
+  let : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso A (.up ℤ)) := hL
+  obtain ⟨εc, hεc, hεapp⟩ := isoTransportCochainDerivedCounit G L ε
+  let : L.IsLeftDerivedFunctor εc (HomologicalComplex.quasiIso A (.up ℤ)) := hεc
+  let : L.IsRightKanExtension εc := Functor.IsLeftDerivedFunctor.isRightKanExtension
+    L εc (HomologicalComplex.quasiIso A (.up ℤ))
+  let : (FE.mapHomologicalComplex (.up ℤ)).IsEquivalence :=
+    (FE.asEquivalence.mapHomologicalComplex (.up ℤ)).isEquivalence_functor
+  obtain ⟨c, hc, hu⟩ := isoTransportDerivedSquare DerivedCategory.Q DerivedCategory.Q
+    (G.mapHomologicalComplex (.up ℤ)) L εc
+    (FE.mapHomologicalComplex (.up ℤ)) (FF.mapHomologicalComplex (.up ℤ))
+    FE.mapDerivedCategory FF.mapDerivedCategory FE.mapDerivedCategoryFactors
+    FF.mapDerivedCategoryFactors τ
+  refine ⟨c, ?_, ?_⟩
+  · intro P
+    simpa only [hεapp] using hc P
+  · intro c' hc'
+    apply hu c'
+    intro P
+    simpa only [hεapp] using hc' P
+
+
 namespace AlgebraicGeometry.Scheme
+
+private theorem isoTransportComplexCounitEq {X : Scheme.{u}}
+    {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S)
+    (P : CochainComplex (pbcModules X R) ℤ) :
+    pbcComplexCounit φ P = Functor.leftDerivedCounitOnComplex (pbcExtend φ)
+      (pbcDerivedExtend φ) (pbcExtensionCounit φ) P := rfl
+
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [hf : IsIso f]
   {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 include hf in
+set_option linter.unusedSectionVars false in
 /-- The coefficient map is invertible for a scheme isomorphism.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
 Proof: the site equivalence preserves all limits. Each finite constant-ring
@@ -44,7 +212,8 @@ comparison is invertible by the isomorphism inverse-image theorem. Apply
 preservation of the limit to these finite comparisons. Their limit is precisely
 the map defined by the recorded projection equations. -/
 @[instance] theorem pbcIsoCoefficientMap_isIso : IsIso (completedCoefficientMap f d) := by
-  sorry
+  rw [completedCoefficientMap_eq_integralRingIso]
+  infer_instance
 
 /-- Exact module transport: inverse image followed by the canonical scalar identification.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
@@ -52,6 +221,41 @@ abbrev pbcIsoModulePullback :
     pbcModules Y (pbcAdicCompletion Y d) ⥤ pbcModules X (pbcAdicCompletion X d) :=
   proEtaleRingModulePullback f (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
     (asIso (completedCoefficientMap f d))
+
+private theorem isoSiteModulePushforward
+    {C D : Type*} [Category C] [Category D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    (E : C ≌ D) [E.functor.IsContinuous J K] [E.inverse.IsContinuous K J]
+    {R : Sheaf K RingCat.{u + 1}} {S : Sheaf J RingCat.{u + 1}}
+    (φ : S ⟶ (E.functor.sheafPushforwardContinuous RingCat J K).obj R) [IsIso φ] :
+    (SheafOfModules.pushforward.{u + 1} φ).IsEquivalence := by
+  let F := E.functor
+  let G := E.inverse
+  let a := E.toAdjunction.sheafPushforwardContinuous (E := RingCat.{u + 1}) J K
+  let ψ : R ⟶ (G.sheafPushforwardContinuous RingCat K J).obj S :=
+    a.unit.app R ≫ (G.sheafPushforwardContinuous RingCat K J).map (inv φ)
+  have H₁ : Functor.whiskerRight (NatTrans.op E.counit) R.obj =
+      ψ.hom ≫ G.op.whiskerLeft φ.hom := by
+    ext U : 2
+    simp [ψ, a]
+  have H₂ : φ.hom ≫ F.op.whiskerLeft ψ.hom ≫
+      Functor.whiskerRight (NatTrans.op E.unit) S.obj = 𝟙 S.obj := by
+    have hh : φ ≫ (F.sheafPushforwardContinuous RingCat J K).map ψ ≫
+        a.counit.app S = 𝟙 S := by
+      dsimp only [ψ]
+      simp only [Functor.map_comp, Category.assoc]
+      erw [a.counit.naturality (inv φ)]
+      have ht := a.left_triangle_components R
+      calc
+        _ = φ ≫ ((F.sheafPushforwardContinuous RingCat J K).map
+            (a.unit.app R) ≫ a.counit.app
+              ((F.sheafPushforwardContinuous RingCat J K).obj R)) ≫ inv φ := by
+          simp only [Category.assoc, Functor.id_map]
+          rfl
+        _ = φ ≫ 𝟙 _ ≫ inv φ := congrArg (fun z ↦ φ ≫ z ≫ inv φ) ht
+        _ = _ := by simp
+    exact congrArg (fun z ↦ z.hom) hh
+  exact (SheafOfModules.pushforwardPushforwardEquivalence E φ ψ H₁ H₂).isEquivalence_functor
 
 /-- The module pullback is an exact equivalence with inverse transport along f inverse.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
@@ -61,12 +265,59 @@ unit and counit of their site equivalence therefore lift to modules. Both
 functors are exact, since site equivalences and ring identifications are exact. -/
 @[instance] theorem pbcIsoModulePullback_isEquivalence :
     (pbcIsoModulePullback f d).IsEquivalence := by
-  sorry
+  let hsite : (proEtaleIsoPostcompose f).IsEquivalence :=
+    (proEtaleIsoPostcompose_equivalence f).1
+  let : (MorphismProperty.Over.map (P := @WeaklyEtale) ⊤
+      (inferInstance : WeaklyEtale f)).IsEquivalence := hsite
+  let a := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ f
+    (inferInstance : WeaklyEtale f) trivial
+  let hbase : (proEtaleBaseChange f).IsEquivalence :=
+    a.isEquivalence_right_of_isEquivalence_left
+  let E : Y.ProEt ≌ X.ProEt := a.toEquivalence.symm
+  let : E.functor.IsContinuous (ProEt.topology Y) (ProEt.topology X) :=
+    inferInstanceAs ((proEtaleBaseChange f).IsContinuous _ _)
+  let hcont : E.inverse.IsContinuous (ProEt.topology X) (ProEt.topology Y) :=
+    proEtaleIsoPostcompose_isContinuous f
+  let hu : IsIso (proEtaleSheafAdjunction f CommRingCat.{u + 1}).unit :=
+    (proEtaleIsoInverseImage_equivalence.{u, u + 2, u, u} f CommRingCat.{u + 1}).2.1
+  let hm : IsIso (proEtaleRingDirectImageMap f
+      (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
+      (asIso (completedCoefficientMap f d))) := by
+    dsimp only [proEtaleRingDirectImageMap]
+    infer_instance
+  let hright : (proEtaleRingModuleDirectImage f
+      (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
+      (asIso (completedCoefficientMap f d))).IsEquivalence := by
+    let φ : (sheafCompose (ProEt.topology Y)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (pbcAdicCompletion Y d) ⟶
+        ((proEtaleBaseChange f).sheafPushforwardContinuous RingCat
+          (ProEt.topology Y) (ProEt.topology X)).obj
+          ((sheafCompose (ProEt.topology X)
+            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (pbcAdicCompletion X d)) :=
+      ⟨Functor.whiskerRight (proEtaleRingDirectImageMap f (pbcAdicCompletion Y d)
+        (pbcAdicCompletion X d) (asIso (completedCoefficientMap f d))).hom
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
+    let : IsIso φ := by
+      change IsIso ((sheafCompose (ProEt.topology Y)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+          (proEtaleRingDirectImageMap f (pbcAdicCompletion Y d)
+            (pbcAdicCompletion X d) (asIso (completedCoefficientMap f d))))
+      infer_instance
+    exact isoSiteModulePushforward E φ
+  exact (proEtaleRingModuleAdjunction f _ _
+    (asIso (completedCoefficientMap f d))).isEquivalence_left_of_isEquivalence_right
+
+attribute [local irreducible] proEtaleRingModulePullback completedModulePullback
+  CategoryTheory.Functor.mapDerivedCategory
+  CategoryTheory.Functor.mapDerivedCategoryFactors
+  completedPullbackComparison completedPullbackObject
+  completedCoefficientMap
 
 /-- The exact equivalence transported to complexes and localized at quasi-isomorphisms.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
 abbrev pbcIsoAmbientPullback : PbcCompletedDerived Y d ⥤ PbcCompletedDerived X d :=
   (pbcIsoModulePullback f d).mapDerivedCategory
+
 
 /-- The two recorded ordinary inverse images have the same tensor object and map formulas.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
@@ -77,7 +328,37 @@ changeOfRingsHom. Functor extensionality gives the displayed equality.
 -/
 theorem pbcIsoModulePullback_eq_completed :
     pbcIsoModulePullback f d = completedModulePullback f d := by
-  sorry
+  rw [completedModulePullback_eq_exact]
+  have h : asIso (completedCoefficientMap f d) = d.integralRingIso f := by
+    apply Iso.ext
+    exact completedCoefficientMap_eq_integralRingIso f d
+  exact congrArg (proEtaleRingModulePullback f (d.completedRing Y) (d.completedRing X)) h
+
+private theorem isoExactDerivedComparison
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F G : C ⥤ D) [F.Additive] [G.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (he : G = F)
+    (L : DerivedCategory C ⥤ DerivedCategory D)
+    (ε : DerivedCategory.Qh ⋙ L ⟶
+      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    [L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso C (.up ℤ))] :
+    ∃! alpha : L ≅ G.mapDerivedCategory,
+      ∀ P : CochainComplex C ℤ,
+        alpha.hom.app (DerivedCategory.Q.obj P) ≫
+            G.mapDerivedCategoryFactors.hom.app P =
+          F.leftDerivedCounitOnComplex L ε P ≫
+            DerivedCategory.Q.map
+              ((NatIso.mapHomologicalComplex (eqToIso he).symm (.up ℤ)).hom.app P) := by
+  cases he
+  have hid (P : CochainComplex C ℤ) :
+      DerivedCategory.Q.map
+        ((NatIso.mapHomologicalComplex (eqToIso (rfl : F = F)).symm (.up ℤ)).hom.app P) =
+          𝟙 _ := by
+    change DerivedCategory.Q.map (𝟙 _) = 𝟙 _
+    exact DerivedCategory.Q.map_id _
+  simp_rw [hid, Category.comp_id]
+  exact exactDerivedCounitComparison F L ε
 
 /-- Exact descent is the unique ordinary derived inverse image with its universal counit.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
@@ -95,33 +376,101 @@ theorem pbcIsoOrdinaryDerivedComparison_exists :
             DerivedCategory.Q.map
               ((NatIso.mapHomologicalComplex
                 (eqToIso (pbcIsoModulePullback_eq_completed f d)).symm (.up ℤ)).hom.app P) := by
-  sorry
+  exact isoExactDerivedComparison (completedModulePullback f d) (pbcIsoModulePullback f d)
+    (pbcIsoModulePullback_eq_completed f d) (completedOrdinaryPullback f d)
+    (completedOrdinaryPullbackCounit f d)
+
 
 /-- The comparison fixed by the two derived counits on every complex.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
 def pbcIsoOrdinaryDerivedComparison :=
   (pbcIsoOrdinaryDerivedComparison_exists f d).exists.choose
 
-include hf in
-/-- The completed comparison is invertible on the stipulated integral complete objects.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
-Proof: the exact inverse site functors preserve the K-injective resolutions of strict
-towers, hence their derived inverse limits and normalized constant-tower units.
-Finite coefficient projections identify the transported reduction tower with the
-reduction tower of the exact inverse image. The completion unit is invertible on K;
-transporting this unit identifies completedPullbackComparison with an isomorphism.
--/
-@[instance] theorem pbcIsoCompletedComparison_isIso
-    (K : PbcBoundedConstructibleComplete Y d) :
-    IsIso (completedPullbackComparison f d K.obj) := by
+private theorem isoTransportIntrinsicIso
+    (S : Scheme.{u}) {M N : PbcCompletedDerived S d} (i : M ≅ N)
+    (hM : PbcIsIntrinsicallyComplete S d M) : PbcIsIntrinsicallyComplete S d N := by
+  obtain ⟨r, a, ha, C, eC, hC⟩ := hM
+  refine ⟨r, a, ha, C,
+    eC ≪≫ (pbcDerivedExtend (pbcCompletedComparison S d).inv).mapIso i, ?_⟩
+  change IsIso (eC.inv ≫ _) at hC
+  have hu := (isIso_comp_left_iff eC.inv _).mp hC
+  change IsIso ((_ ≫ eC.inv) ≫ _)
+  infer_instance
+
+omit hf in
+private theorem isoTransportDirectComplete
+    (M : PbcCompletedDerived X d) (hM : PbcIsIntrinsicallyComplete X d M) :
+    PbcIsIntrinsicallyComplete Y d ((pbcActualDerivedPush f d).obj M) := by
+  let P : ObjectProperty (PbcCompletedDerived X d) := PbcIsIntrinsicallyComplete X d
+  let adj := Adjunction.ofIsRightAdjoint P.ι
+  have hu : IsIso ((pbcActualCompletionUnit d X).app M) :=
+    adj.isIso_unit_app_of_iso (X := ⟨M, hM⟩) (Iso.refl M)
+  obtain ⟨c, hc⟩ := (pbcActualDirectCompletionIso_exists f d).exists
+  have hv : IsIso ((pbcActualCompletionUnit d Y).app
+      ((pbcActualDerivedPush f d).obj M) ≫ c.hom.app M) := by
+    rw [hc]
+    infer_instance
+  have : IsIso ((pbcActualCompletionUnit d Y).app
+      ((pbcActualDerivedPush f d).obj M)) :=
+    IsIso.of_isIso_comp_right _ (c.hom.app M)
+  exact isoTransportIntrinsicIso d Y
+    (asIso ((pbcActualCompletionUnit d Y).app
+      ((pbcActualDerivedPush f d).obj M))).symm
+    (((ObjectProperty.ι (PbcIsIntrinsicallyComplete Y d)).leftAdjoint.obj
+      ((pbcActualDerivedPush f d).obj M)).property)
+
+/-- Intrinsic completion preservation component of the automorphism transport.
+Source: blueprint order 2106, preservation clause
+(blueprint: lem-wf-pbc-automorphism-transport-intrinsic).
+Proof: transport a finite generating-family completion witness through the exact inverse-image
+functor and identify its finite projection equations with those of the ordinary pullback;
+reassociate along the normalized ordinary-derived comparison and preserve invertibility. -/
+theorem pbcIsoAmbientPullback_preserves_intrinsic
+    (K : PbcBoundedConstructibleComplete Y d)
+    (H : PbcCompletedDerived Y d ⥤ PbcCompletedDerived X d)
+    (e : completedOrdinaryPullback f d ≅ H) :
+    PbcIsIntrinsicallyComplete X d (H.obj K.obj) := by
+  let G := completedOrdinaryPullback (inv f) d
+  have : G.IsEquivalence := Functor.isEquivalence_of_iso
+    (pbcIsoOrdinaryDerivedComparison (inv f) d).symm
+  let adj := pbcActualDerivedAdjunction (inv f) d
+  let c : completedOrdinaryPullback f d ⋙ G ≅ 𝟭 (PbcCompletedDerived Y d) :=
+    (pbcActualDerivedPullCompIso (inv f) f d).symm ≪≫
+      eqToIso (congrArg (fun g ↦ completedOrdinaryPullback g d) (IsIso.inv_hom_id f)) ≪≫
+      pbcActualDerivedPullIdIso d Y
+  let t : completedOrdinaryPullback f d ≅ pbcActualDerivedPush (inv f) d :=
+    (Functor.rightUnitor _).symm ≪≫
+      Functor.isoWhiskerLeft _ (asIso adj.unit) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight c _ ≪≫ Functor.leftUnitor _
+  exact isoTransportIntrinsicIso d X ((t.symm ≪≫ e).app K.obj)
+    (isoTransportDirectComplete (inv f) d K.obj K.property.1)
+
+/-- Uniform reduction preservation component of the automorphism transport.
+Source: blueprint order 2106, preservation clause
+(blueprint: lem-wf-pbc-automorphism-transport-reductions).
+Proof: apply exact inverse image levelwise to the canonical reduction tower; the finite
+coefficient projection equations preserve transitions and all local bounds, then transport
+the resulting witnesses along the normalized comparison `e`. -/
+theorem pbcIsoAmbientPullback_preserves_reductions
+    (K : PbcBoundedConstructibleComplete Y d)
+    (H : PbcCompletedDerived Y d ⥤ PbcCompletedDerived X d)
+    (e : completedOrdinaryPullback f d ≅ H) :
+    PbcHasUniformConstructibleReductions X d (H.obj K.obj) := by
   sorry
 
-/-- Completed pullback is the same coefficient transport, with its normalized comparison.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
-def pbcIsoCompletedPullback_identification (K : PbcBoundedConstructibleComplete Y d) :
-    completedPullbackObject f d K.obj ≅ (pbcIsoAmbientPullback f d).obj K.obj :=
-  (asIso (completedPullbackComparison f d K.obj)).symm ≪≫
-    (pbcIsoOrdinaryDerivedComparison f d).app K.obj
+/-- Compatible etale-origin preservation component of the automorphism transport.
+Source: blueprint order 2106, preservation clause
+(blueprint: lem-wf-pbc-automorphism-transport-origins).
+Proof: transport each finite etale-origin witness and its normalized transition equation
+through exact inverse image; constant-section comparisons preserve the quotient maps, and
+`e` gives the displayed target object. -/
+theorem pbcIsoAmbientPullback_preserves_origins
+    (K : PbcBoundedConstructibleComplete Y d)
+    (H : PbcCompletedDerived Y d ⥤ PbcCompletedDerived X d)
+    (e : completedOrdinaryPullback f d ≅ H) :
+    PbcHasCompatibleEtaleOrigins X d (H.obj K.obj) := by
+  sorry
 
 /-- Transport preserves the specified integral full subcategory.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
@@ -135,7 +484,52 @@ bounds and the number of strata remain unchanged. -/
 theorem pbcIsoAmbientPullback_preserves
     (K : PbcBoundedConstructibleComplete Y d) :
     PbcIsBoundedConstructibleComplete X d ((pbcIsoAmbientPullback f d).obj K.obj) := by
-  sorry
+  let e := pbcIsoOrdinaryDerivedComparison f d
+  refine ⟨?_, ?_, ?_⟩
+  · exact pbcIsoAmbientPullback_preserves_intrinsic f d K
+      (pbcIsoAmbientPullback f d) e
+  · exact pbcIsoAmbientPullback_preserves_reductions f d K
+      (pbcIsoAmbientPullback f d) e
+  · exact pbcIsoAmbientPullback_preserves_origins f d K
+      (pbcIsoAmbientPullback f d) e
+
+include hf in
+/-- The completed comparison is invertible on the stipulated integral complete objects.
+Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
+Proof: the exact inverse site functors preserve the K-injective resolutions of strict
+towers, hence their derived inverse limits and normalized constant-tower units.
+Finite coefficient projections identify the transported reduction tower with the
+reduction tower of the exact inverse image. The completion unit is invertible on K;
+transporting this unit identifies completedPullbackComparison with an isomorphism.
+-/
+@[instance] theorem pbcIsoCompletedComparison_isIso
+    (K : PbcBoundedConstructibleComplete Y d) :
+    IsIso (completedPullbackComparison f d K.obj) := by
+  have hc : PbcIsIntrinsicallyComplete X d
+      ((completedOrdinaryPullback f d).obj K.obj) :=
+    pbcIsoAmbientPullback_preserves_intrinsic f d K (completedOrdinaryPullback f d)
+      (Iso.refl _)
+  obtain ⟨r, a, ha⟩ := Submodule.fg_iff_exists_fin_generating_family.mp d.finitelyGenerated
+  let C := DerivedCategory.Q.objPreimage K.obj
+  let eC := DerivedCategory.Q.objObjPreimageIso K.obj
+  let P := DerivedCategory.Q.objPreimage ((completedOrdinaryPullback f d).obj K.obj)
+  let eP := DerivedCategory.Q.objObjPreimageIso ((completedOrdinaryPullback f d).obj K.obj)
+  have hK : IsDerivedCompleteIntrinsic Y d r a ha K.obj C eC :=
+    (sfConstructibleCanonicalCompleteness Y d K.obj K.property.1).1 r a ha C eC
+  obtain ⟨α, hα⟩ := completedPullback_isCompletion f d r a ha K.obj C eC hK P eP
+  have hu : IsIso (intrinsicCompletionUnit X d r a ha
+      ((completedOrdinaryPullback f d).obj K.obj) P eP) :=
+    (sfConstructibleCanonicalCompleteness X d _ hc).1 r a ha P eP
+  apply (isIso_comp_right_iff _ α.hom).mp
+  rw [hα]
+  infer_instance
+
+/-- Completed pullback is the same coefficient transport, with its normalized comparison.
+Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
+def pbcIsoCompletedPullback_identification (K : PbcBoundedConstructibleComplete Y d) :
+    completedPullbackObject f d K.obj ≅ (pbcIsoAmbientPullback f d).obj K.obj :=
+  (asIso (completedPullbackComparison f d K.obj)).symm ≪≫
+    (pbcIsoOrdinaryDerivedComparison f d).app K.obj
 
 /-- Restriction to the full subcategory, retaining all ambient derived morphisms.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
@@ -145,6 +539,9 @@ def pbcIsoIntegralPullback :
     (ObjectProperty.ι (PbcIsBoundedConstructibleComplete Y d) ⋙ pbcIsoAmbientPullback f d)
     (pbcIsoAmbientPullback_preserves f d)
 
+
+attribute [local irreducible] pbcIsoIntegralPullback
+
 /-- The inverse coefficient transport preserves the same integral conditions.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
 Proof: apply the completed-transport preservation argument to the inverse
@@ -152,7 +549,34 @@ scheme isomorphism. Its unit and counit restrict to the full subcategories,
 giving an inverse to this integral transport. -/
 @[instance] theorem pbcIsoIntegralPullback_isEquivalence :
     (pbcIsoIntegralPullback f d).IsEquivalence := by
-  sorry
+  let F := pbcIsoAmbientPullback f d
+  let G := pbcIsoAmbientPullback (inv f) d
+  have hF : F.IsEquivalence := by
+    dsimp only [F, pbcIsoAmbientPullback]
+    infer_instance
+  have hc : G ⋙ F ≅ 𝟭 (PbcCompletedDerived X d) :=
+    Functor.isoWhiskerRight (pbcIsoOrdinaryDerivedComparison (inv f) d).symm F ≪≫
+      Functor.isoWhiskerLeft (completedOrdinaryPullback (inv f) d)
+        (pbcIsoOrdinaryDerivedComparison f d).symm ≪≫
+      (pbcActualDerivedPullCompIso f (inv f) d).symm ≪≫
+      eqToIso (congrArg (fun g ↦ completedOrdinaryPullback g d) (IsIso.hom_inv_id f)) ≪≫
+      pbcActualDerivedPullIdIso d X
+  have hfull : (pbcIsoIntegralPullback f d).Full := by
+    unfold pbcIsoIntegralPullback
+    infer_instance
+  have hfaithful : (pbcIsoIntegralPullback f d).Faithful := by
+    unfold pbcIsoIntegralPullback
+    infer_instance
+  have hsurj : (pbcIsoIntegralPullback f d).EssSurj := by
+    constructor
+    intro K
+    let L : PbcBoundedConstructibleComplete Y d :=
+      ⟨G.obj K.obj, pbcIsoAmbientPullback_preserves (inv f) d K⟩
+    refine ⟨L, ⟨?_⟩⟩
+    unfold pbcIsoIntegralPullback
+    exact ObjectProperty.isoMk _ (hc.app K.obj)
+  exact ⟨hfaithful, hfull, hsurj⟩
+
 
 /-- Coefficient transport is additive and linear for the original constant-section action.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
@@ -162,7 +586,27 @@ intertwines the recorded constant-section actions. The same equations hold on
 complexes, descend to derived morphisms, and restrict to the full subcategories. -/
 theorem pbcIsoIntegralPullback_linear :
     (pbcIsoIntegralPullback f d).Additive ∧ (pbcIsoIntegralPullback f d).Linear A := by
-  sorry
+  have hG : (proEtaleRingModuleDirectImage f (pbcAdicCompletion Y d)
+      (pbcAdicCompletion X d) (asIso (completedCoefficientMap f d))).Linear A := by
+    constructor
+    intro M N a b
+    ext U x
+    change (pbcCompletedSection X d ((proEtaleBaseChange f).op.obj U) b) •
+        a.val.app ((proEtaleBaseChange f).op.obj U) x =
+      ((completedCoefficientDirectImageMap f d).hom.app U
+        (pbcCompletedSection Y d U b)) •
+        a.val.app ((proEtaleBaseChange f).op.obj U) x
+    rw [pbcCompletedSection_directImage]
+  have hF : (pbcIsoModulePullback f d).Linear A :=
+    (proEtaleRingModuleAdjunction f _ _ (asIso (completedCoefficientMap f d))).left_adjoint_linear
+  constructor
+  · unfold pbcIsoIntegralPullback
+    infer_instance
+  · constructor
+    intro K L a b
+    apply ObjectProperty.hom_ext
+    unfold pbcIsoIntegralPullback
+    exact (pbcIsoAmbientPullback f d).map_smul b a.hom
 
 /-- Additivity supplied by the named coefficient-transport theorem.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
@@ -188,6 +632,29 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type c) [Field Ω]
   [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   {T : Scheme.{u}} (e : Aut T)
   {E F : Padic.FiniteCoefficientFields l Ω}
+
+omit hf in
+private theorem scalarRightInverse
+    {RA RB : Sheaf (ProEt.topology Y) RingCat.{u + 1}}
+    {SA SB : Sheaf (ProEt.topology X) RingCat.{u + 1}}
+    (ay : RA ⟶ RB) (ax : SA ⟶ SB)
+    (aR : RA ⟶ (proEtaleSheafDirectImage f RingCat.{u + 1}).obj SA)
+    (aS : RB ⟶ (proEtaleSheafDirectImage f RingCat.{u + 1}).obj SB)
+    (h : ay ≫ aS = aR ≫ (proEtaleSheafDirectImage f RingCat.{u + 1}).map ax) :
+    ∃! r : SheafOfModules.restrictScalars ax ⋙
+        SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange f) aR ≅
+      SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange f) aS ⋙
+        SheafOfModules.restrictScalars ay,
+      ∀ (N : SheafOfModules.{u + 1} SB) (U : Y.ProEtᵒᵖ)
+        (x : N.val.obj ((proEtaleBaseChange f).op.obj U)),
+        HEq ((r.hom.app N).val.app U x) x := by
+  refine ⟨SheafOfModules.pushforwardCongr (F := proEtaleBaseChange f) h.symm, ?_, ?_⟩
+  · intro N U x
+    rfl
+  · intro r' hr'
+    apply Iso.ext
+    ext N U x
+    exact eq_of_heq (hr' N U x)
 
 /-- Exact transport's right adjoints commute with restriction of coefficients.
 The section equation fixes the comparison, not just its isomorphism class.
@@ -215,7 +682,21 @@ theorem pbcIsoScalarRightComparison_exists (h : E ≤ F) :
             (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))
             (asIso (completedCoefficientMap e.hom (pbcStageDatum.{u} l Ω E)))).obj M).val.obj U),
         HEq ((r.hom.app M).val.app U x) x := by
-  sorry
+  have hs :
+      pbcActualCoefficientRingMap T (pbcCompletedScalarMap l Ω T h) ≫
+          pbcActualStructureMap e.hom (pbcStageDatum.{u} l Ω F) =
+        pbcActualStructureMap e.hom (pbcStageDatum.{u} l Ω E) ≫
+          (proEtaleSheafDirectImage e.hom RingCat.{u + 1}).map
+            (pbcActualCoefficientRingMap T (pbcCompletedScalarMap l Ω T h)) := by
+    rw [pbcStageCoefficientMap_eq l Ω T h]
+    exact pbcScalarCoefficientStructureSquare l (pbcFiniteField.{u} l Ω E)
+      (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) e.hom
+  exact scalarRightInverse e.hom
+    (pbcActualCoefficientRingMap T (pbcCompletedScalarMap l Ω T h))
+    (pbcActualCoefficientRingMap T (pbcCompletedScalarMap l Ω T h))
+    (pbcActualStructureMap e.hom (pbcStageDatum.{u} l Ω E))
+    (pbcActualStructureMap e.hom (pbcStageDatum.{u} l Ω F)) hs
+
 
 /-- The right-adjoint comparison fixed by identity on sections.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
@@ -267,13 +748,45 @@ def pbcIsoOrdinaryComplexComparison (h : E ≤ F) :
       (Iso.refl (pbcIsoModulePullback e.hom (pbcStageDatum.{u} l Ω E) ⋙
         pbcExtend (pbcCompletedScalarMap l Ω T h))) (.up ℤ)).symm
 
-/-- The ambient comparison is fixed by the ordinary tensor comparison and the
-specified universal derived counits, on complexes before localization.
-Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
-Proof: finite freeness makes scalar extension exact. The site equivalence is
-exact as well. The two derived counits below are therefore invertible. Compose
-these counits and the ordinary comparison on complexes; the universal property
-of localization descends their conjugation uniquely to the derived categories. -/
+attribute [local irreducible] pbcExtensionCounit pbcComplexCounit
+  pbcIsoOrdinaryComplexComparison
+
+private theorem isoTransportAmbientScalarComparison
+    (T' : Scheme.{u}) (f' : T' ⟶ T') [IsIso f']
+    {A' B' : Type (u + 1)} [CommRing A'] [CommRing B']
+    (dA : AdicCoefficientDatum A') (dB : AdicCoefficientDatum B')
+    (φ : pbcAdicCompletion T' dA ⟶ pbcAdicCompletion T' dB)
+    (τ : (pbcExtend φ).mapHomologicalComplex (.up ℤ) ⋙
+        (pbcIsoModulePullback f' dB).mapHomologicalComplex (.up ℤ) ≅
+      (pbcIsoModulePullback f' dA).mapHomologicalComplex (.up ℤ) ⋙
+        (pbcExtend φ).mapHomologicalComplex (.up ℤ)) :
+    ∃! c : pbcDerivedExtend φ ⋙ pbcIsoAmbientPullback f' dB ≅
+        pbcIsoAmbientPullback f' dA ⋙ pbcDerivedExtend φ,
+      ∀ P : CochainComplex (pbcModules T' (pbcAdicCompletion T' dA)) ℤ,
+        c.hom.app (DerivedCategory.Q.obj P) ≫
+          (pbcDerivedExtend φ).map
+            ((pbcIsoModulePullback f' dA).mapDerivedCategoryFactors.hom.app P) ≫
+          pbcComplexCounit φ
+            (((pbcIsoModulePullback f' dA).mapHomologicalComplex (.up ℤ)).obj P) =
+        (pbcIsoAmbientPullback f' dB).map (pbcComplexCounit φ P) ≫
+          (pbcIsoModulePullback f' dB).mapDerivedCategoryFactors.hom.app
+            (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj P) ≫
+          DerivedCategory.Q.map (τ.hom.app P) := by
+  have hc := isoTransportCochainSquare
+    (hG := pbcExtend_additive φ)
+    (hFA := inferInstanceAs (pbcIsoModulePullback f' dA).Additive)
+    (hFB := inferInstanceAs (pbcIsoModulePullback f' dB).Additive)
+    (hEA := pbcIsoModulePullback_isEquivalence f' dA)
+    (hEB := pbcIsoModulePullback_isEquivalence f' dB)
+    (pbcExtend φ) (pbcDerivedExtend φ)
+    (pbcExtensionCounit φ) (pbcDerivedExtension_universal φ)
+    (pbcIsoModulePullback f' dA) (pbcIsoModulePullback f' dB) τ
+  simpa only [isoTransportComplexCounitEq] using hc
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+
 theorem pbcIsoAmbientScalarComparison_exists (h : E ≤ F) :
     ∃! c : pbcAmbientScalarExtension l Ω T h ⋙
         pbcIsoAmbientPullback e.hom (pbcStageDatum.{u} l Ω F) ≅
@@ -294,7 +807,9 @@ theorem pbcIsoAmbientScalarComparison_exists (h : E ≤ F) :
               (((pbcExtend (pbcCompletedScalarMap l Ω T h)).mapHomologicalComplex (.up ℤ)).obj P) ≫
           DerivedCategory.Q.map
             ((pbcIsoOrdinaryComplexComparison l Ω e h).hom.app P) := by
-  sorry
+  exact isoTransportAmbientScalarComparison T e.hom
+    (pbcStageDatum.{u} l Ω E) (pbcStageDatum.{u} l Ω F)
+    (pbcCompletedScalarMap l Ω T h) (pbcIsoOrdinaryComplexComparison l Ω e h)
 
 /-- The ambient Frobenius/scalar comparison with its representative normalization.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
@@ -307,6 +822,9 @@ def pbcIsoAmbientScalarComparison (h : E ≤ F) :
 
 variable [IsNoetherian T] (hdim : ∃ m : ℕ, topologicalKrullDim T ≤ m)
   (hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
+
+section
+attribute [local semireducible] pbcIsoIntegralPullback
 
 /-- Fullness restricts the normalized ambient comparison uniquely.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
@@ -323,7 +841,23 @@ theorem pbcIsoIntegralScalarComparison_exists (h : E ≤ F) :
         Functor.whiskerLeft
           (ObjectProperty.ι (PbcIsBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E)))
           (pbcIsoAmbientScalarComparison l Ω e h).hom := by
-  sorry
+  let c := pbcIsoAmbientScalarComparison l Ω e h
+  let b : pbcIntegralScalarExtension l Ω T hdim hl h ⋙
+        pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω F) ≅
+      pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω E) ⋙
+        pbcIntegralScalarExtension l Ω T hdim hl h :=
+    NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk _ (c.app K.obj))
+      (fun a ↦ ObjectProperty.hom_ext _ (c.hom.naturality a.hom))
+  refine ⟨b, rfl, ?_⟩
+  intro b' hb'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  apply ObjectProperty.hom_ext _
+  exact congrArg (fun t ↦ t.app K) hb'
+
+
+end
 
 /-- The integral comparison retaining its ambient normalization.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
@@ -334,6 +868,7 @@ def pbcIsoIntegralScalarComparison (h : E ≤ F) :
         pbcIntegralScalarExtension l Ω T hdim hl h :=
   (pbcIsoIntegralScalarComparison_exists l Ω e hdim hl h).exists.choose
 
+set_option linter.unusedSectionVars false in
 /-- Integral localization commutes with the explicitly linear coefficient transport.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
 Proof: both functors have the same object function. On morphisms they both send
@@ -344,7 +879,14 @@ theorem pbcIsoRationalization (E : Padic.FiniteCoefficientFields l Ω) :
         pbcRationalIsoPullback e (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E) =
       pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω E) ⋙
         pbcRationalization T (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E) := by
-  sorry
+  refine CategoryTheory.Functor.ext
+    (F := pbcRationalization T (pbcStageDatum.{u} l Ω E)
+      (pbcStageUniformizer.{u} l Ω E) ⋙
+      pbcRationalIsoPullback e (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E))
+    (fun _ ↦ rfl) ?_
+  intro K L a
+  simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+  exact LinearMap.baseChange_tmul _ _ _
 
 /-- The rational comparison is fixed on every original integral object.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport).
@@ -370,7 +912,59 @@ theorem pbcIsoRationalScalarComparison_exists (h : E ≤ F) :
             ((pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω E)).obj K) ≫
           (pbcScalarExtension l Ω T hdim hl h).map
             ((eqToIso (pbcIsoRationalization l Ω e E)).inv.app K) := by
-  sorry
+  let QE := pbcStageLocalization l Ω T E
+  let QF := pbcStageLocalization l Ω T F
+  let SEF := pbcScalarExtension l Ω T hdim hl h
+  let IEF := pbcIntegralScalarExtension l Ω T hdim hl h
+  let PE := pbcRationalIsoPullback e (pbcStageDatum.{u} l Ω E)
+    (pbcStageUniformizer.{u} l Ω E)
+  let PF := pbcRationalIsoPullback e (pbcStageDatum.{u} l Ω F)
+    (pbcStageUniformizer.{u} l Ω F)
+  let IE := pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω E)
+  let IF := pbcIsoIntegralPullback e.hom (pbcStageDatum.{u} l Ω F)
+  let a : QE ⋙ (SEF ⋙ PF) ≅ QE ⋙ (PE ⋙ SEF) :=
+    (Functor.associator QE SEF PF).symm ≪≫
+      Functor.isoWhiskerRight (pbcScalarIntegralComparison l Ω T hdim hl h) PF ≪≫
+      Functor.associator IEF QF PF ≪≫
+      Functor.isoWhiskerLeft IEF (eqToIso (pbcIsoRationalization l Ω e F)) ≪≫
+      (Functor.associator IEF IF QF).symm ≪≫
+      Functor.isoWhiskerRight (pbcIsoIntegralScalarComparison l Ω e hdim hl h) QF ≪≫
+      Functor.associator IE IEF QF ≪≫
+      Functor.isoWhiskerLeft IE (pbcScalarIntegralComparison l Ω T hdim hl h).symm ≪≫
+      (Functor.associator IE QE SEF).symm ≪≫
+      Functor.isoWhiskerRight (eqToIso (pbcIsoRationalization l Ω e E)).symm SEF ≪≫
+      Functor.associator QE PE SEF
+  let W := pbcStageDenominators l Ω T hdim hl E
+  have : QE.IsLocalization W := pbcStageLocalization_isLocalization l Ω T hdim hl E
+  let FF := Localization.fullyFaithfulWhiskeringLeft QE W
+    (PbcRationalCategory T (pbcStageDatum.{u} l Ω F) (pbcStageUniformizer.{u} l Ω F))
+  let c : SEF ⋙ PF ≅ PE ⋙ SEF := FF.preimageIso a
+  have hc : Functor.whiskerLeft QE c.hom = a.hom := FF.map_preimage a.hom
+  have hnorm (K : PbcBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E)) :
+      c.hom.app (QE.obj K) =
+        PF.map ((pbcScalarIntegralComparison l Ω T hdim hl h).hom.app K) ≫
+          (eqToIso (pbcIsoRationalization l Ω e F)).hom.app (IEF.obj K) ≫
+          QF.map ((pbcIsoIntegralScalarComparison l Ω e hdim hl h).hom.app K) ≫
+          (pbcScalarIntegralComparison l Ω T hdim hl h).inv.app (IE.obj K) ≫
+          SEF.map ((eqToIso (pbcIsoRationalization l Ω e E)).inv.app K) := by
+    rw [show c.hom.app (QE.obj K) = a.hom.app K from congrArg (fun t ↦ t.app K) hc]
+    simp only [a, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+      Functor.associator_hom_app, Functor.associator_inv_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    dsimp only [Functor.comp_obj]
+    simp only [Category.id_comp]
+    erw [Category.id_comp, Category.id_comp, Category.id_comp, Category.id_comp,
+      Category.comp_id]
+    erw [Category.id_comp, Category.id_comp]
+  refine ⟨c, hnorm, ?_⟩
+  intro c' hc'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  obtain ⟨K⟩ := K
+  exact (hc' K).trans (hnorm K).symm
+
 
 /-- The Frobenius/scalar comparison determined by canonical tensor transport.
 Source: blueprint order 2106 (blueprint: def-wf-automorphism-completed-transport). -/
@@ -382,3 +976,12 @@ def pbcIsoRationalScalarComparison (h : E ≤ F) :
   (pbcIsoRationalScalarComparison_exists l Ω e hdim hl h).exists.choose
 
 end AlgebraicGeometry.Scheme
+
+
+
+
+
+
+
+
+ 

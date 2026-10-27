@@ -204,7 +204,18 @@
   "prop-weil-pbc-proetale-constant-exact"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-open-closed-triangle",
  "split_report": {
@@ -273,5 +284,31 @@
   "landing": "20261019T002617-L-2160233",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R$ be a commutative ring, for instance a finite one. For complementary\nopen and closed immersions $j:U\\hookrightarrow X$, $i:Z\\hookrightarrow X$ as\nin the open-closed recollement, one has $j_!\\dashv j^*$ and $i^*\\dashv Ri_*$\non the unbounded derived categories of pro-etale sheaves of $R$-modules, the\nexact functors $j_!$, $j^*$, $i^*$ being applied termwise. The open unit and\nthe closed counit are isomorphisms\n$$\n \\operatorname{id}\\xrightarrow{\\sim}j^*j_!,\\qquad\n i^*Ri_*\\xrightarrow{\\sim}\\operatorname{id};\n$$\nequivalently $j_!$ and $Ri_*$ are fully faithful.\nThe operations are those of extension by zero, derived direct image, and\nderived pullback, tensor and hom.",
+  "proof": [
+   {
+    "text": "The open adjunction is the extension-by-zero adjunction. Both functors are\nexact, so they pass to ordinary derived categories with the same adjunction\nand triangle identities. The unit is an isomorphism term by term by\n[lem-exc-proetale-open-unit].",
+    "uses": [
+     "lem-exc-proetale-open-unit"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For the closed adjunction, choose a K-injective resolution $M\\to J$ on $Z$.\nSince $i^*$ is exact, $i_*J$ is K-injective: its Hom complex from an acyclic\ncomplex $N$ is the Hom complex from the acyclic $i^*N$ to $J$, hence\nacyclic. Thus $i_*$ preserves K-injective complexes, $i_*J$ represents\n$Ri_*M$, and complex-level adjunction gives $i^*\\dashv Ri_*$. Exactness of\n$i^*$ lets us compute the derived counit by $i^*i_*J\\to J$. This is an\nisomorphism in every degree by [lem-exc-proetale-closed-fully-faithful].\nHence the derived counit is an isomorphism, i.e. $Ri_*$ is fully faithful. This calculation does not assume exactness of $i_*$ for an\narbitrary closed immersion; the complement's quasi-compactness is needed for\nthe separate sheaf-exactness and recollement theorems above.",
+    "uses": [
+     "lem-exc-proetale-closed-fully-faithful"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

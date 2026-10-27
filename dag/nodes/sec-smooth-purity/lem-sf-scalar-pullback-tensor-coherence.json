@@ -1,0 +1,144 @@
+{
+ "id": "lem-sf-scalar-pullback-tensor-coherence",
+ "kind": "statement",
+ "title": "The normalized scalar/pullback comparison is tensor compatible",
+ "statement": "Let A and B be finite commutative rings, φ:A→B, and r:Z→Y any scheme morphism. Use arbitrary normalized models m and choices c of [def-sp-open-scalar-tensor-data]. Write S_T for scalar extension, P_R for geometric inverse image, λ:P_B S_Y≅S_Z P_A, s_T for scalar tensorators, and a_R for the canonical geometric tensorators. For every P,Q in the ordinary unbounded derived category D(Y,A), λ_(P⊗Q);S_Z(a_A(P,Q));s_Z(P_A P,P_A Q) = P_B(s_Y(P,Q));a_B(S_Y P,S_Y Q);(λ_P⊗λ_Q). No projection transformation, open extension, or compactification occurs. The assertion includes zero rings, empty schemes, and nonflat coefficient maps.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, lemma-pullback-tensor-product; 0D6D, lemma-derived-pullback-composition; 0E48, remark-compatible-with-diagram; parent proper/open proof step 2"
+ },
+ "stmt_deps": [
+  "def-sp-open-scalar-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat representatives. The scalar and geometric tensorator normalization equations identify their representatives with signed total tensor complexes.",
+   "uses": [
+    "lem-sfb-scalar-tensor-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The balanced scalar/pullback comparison on each pure tensor commutes with the ordinary tensorators: both composites preserve the two generator factors and multiply the same coefficient scalars. Sheafification and the signed total summand formula give equality of chain maps.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the representative equation, cancel the representative comparison isomorphisms, and use naturality along flat K-flat resolutions to obtain the equation for arbitrary P,Q. Normalize scalar coordinates by scalarIso; the intermediate changes cancel.",
+   "uses": [
+    "def-sfb-scalar-hom-comparison-data",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scalar-tensor-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "def-sfb-scalar-hom-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, lemma-pullback-tensor-product; 0D6D, lemma-derived-pullback-composition; 0E48, remark-compatible-with-diagram; parent proper/open proof step 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mates commute with projection formula tensor comparison and coefficient extension",
+   "results": "['CategoryTheory.coev_expComparison', 'CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ', 'CategoryTheory.frobeniusMorphism_mate', 'CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor', 'CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc', 'ModuleCat.homEquiv_extendScalarsComp', 'LightCondensed.ihomPoints_symm_comp', 'ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply']",
+   "verdict": "No matching normalized pro-etale tensor/compositor theorem; generic mate calculus is used.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "['CategoryTheory.mateEquiv_counit']",
+   "verdict": "No matching normalized pro-etale tensor/compositor theorem; generic mate calculus is used.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor_mate_coherence|lambda_tensor|tensorPullback.*(comp|unit)",
+   "results": "[]",
+   "verdict": "No matching normalized pro-etale tensor/compositor theorem; generic mate calculus is used.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullback.*[Tt]ensor|[Tt]ensor.*[Pp]ullback.*[Cc]oherence",
+   "results": "[]",
+   "verdict": "No matching normalized pro-etale tensor/compositor theorem; generic mate calculus is used.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scalar extension pullback comparison is monoidal and compatible with tensor products in derived categories",
+   "results": "[\"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor'_obj_obj\", 'PresheafOfModules.pullbackComp', 'CategoryTheory.Functor.mapExactFunctor_smul', 'CategoryTheory.Tor_map', 'CategoryTheory.Tor', \"CategoryTheory.Tor'\"]",
+   "verdict": "No matching normalized pro-etale tensor/compositor theorem; generic mate calculus is used.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": "['CategoryTheory.mateEquiv', 'CategoryTheory.mateEquiv_counit', 'CategoryTheory.mateEquiv_counit_symm', 'CategoryTheory.unit_mateEquiv', 'CategoryTheory.unit_mateEquiv_symm', 'CategoryTheory.conjugateEquiv_mateEquiv_vcomp', 'CategoryTheory.mateEquiv_conjugateEquiv_vcomp', 'CategoryTheory.mateEquiv_vcomp']",
+   "verdict": "No matching normalized pro-etale tensor/compositor theorem; generic mate calculus is used.",
+   "date": "2026-10-25"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PfReductionProperOpenIdentities",
+  "date": "2026-10-25",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-pf-reduction-proper-open-identities",
+   "place": "Tags 07A4 (pullback tensor product), 0D6D (composition), 0E48 (compatibility); parent proof step 2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-pf-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ScalarPullbackTensorCoherence",
+  "file": "lean/Sheaf/SixFunctors/ScalarPullbackTensorCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.OpenScalarTensor.scalarPullbackTensorCoherence",
+  "statement": "theorem scalarPullbackTensorCoherence (m : Models.{u}) (c : Choices m)\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {Z Y : Scheme.{u}} (r : Z ⟶ Y)\n    (P Q : proEtaleDerivedCategory Y A) :\n    (lambda m φ r).hom.app ((tensor m A Y).obj (P, Q)) ≫\n        (scalar m φ Z).map ((restrictionTensor m A r).hom.app (P, Q)) ≫\n        (c.scalarTensor φ Z).iso.hom.app\n          ((constantPullback (A := A) r).obj P, (constantPullback (A := A) r).obj Q) =\n      (constantPullback (A := B) r).map ((c.scalarTensor φ Y).iso.hom.app (P, Q)) ≫\n        (restrictionTensor m B r).hom.app ((scalar m φ Y).obj P, (scalar m φ Y).obj Q) ≫\n        (tensor m B Z).map\n          (Prod.mkHom ((lambda m φ r).hom.app P) ((lambda m φ r).hom.app Q))",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261025T122510-L-1777958",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261025T122510-L-1777958",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

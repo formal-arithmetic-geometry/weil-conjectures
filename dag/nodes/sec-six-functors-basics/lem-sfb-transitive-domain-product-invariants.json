@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-transitive-domain-product-invariants",
+ "kind": "statement",
+ "title": "Stabilizer invariants of transitive domain products and their fraction fields",
+ "statement": "Let $H$ be a finite group acting transitively on a nonempty finite set $I$. For each $i\\in I$, let $B_i$ be a commutative integral domain (a nonzero commutative ring with no zero divisors). Suppose ring isomorphisms $\\rho_{h,i}:B_i\\to B_{hi}$ satisfy $\\rho_{1,i}=\\mathrm{id}$ and $\\rho_{gh,i}=\\rho_{g,hi}\\circ\\rho_{h,i}$. Equip $B=\\prod_{i\\in I}B_i$ with the action characterized by $(hb)_{hi}=\\rho_{h,i}(b_i)$, and write $B^H=\\{b\\in B:hb=b\\text{ for all }h\\in H\\}$. Fix $i\\in I$ and set $D=\\{h\\in H:hi=i\\}$ and $B_i^D=\\{a\\in B_i:\\rho_{h,i}(a)=a\\text{ for all }h\\in D\\}$. Projection $p_i:B\\to B_i$ restricts to a ring isomorphism $B^H\\cong B_i^D$. More generally, if $A$ is a commutative ring and $u:A\\to B$ is an injective unital ring homomorphism with image $B^H$, then $A$ is a domain, $a_i=p_i\\circ u$ is injective with image $B_i^D$, and its unique fraction-field extension [def-pc-field-extension] has image $\\operatorname{Frac}(B_i)^D$. Here $\\operatorname{Frac}R$ is the field of quotients of a domain $R$ under its canonical injection, and the action of $D$ on $\\operatorname{Frac}(B_i)$ is $h(b/c)=\\rho_{h,i}(b)/\\rho_{h,i}(c)$. No faithfulness, characteristic assumption, normality of $D$ in $H$, or invertibility of $|H|$ is required.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Agent transitive-product and conjugate-denominator calculation implementing Tag 03BK (lemma-invariants-base-change), part (3), for a finite constant action groupoid. Fraction invariance also appears as Mathlib/RingTheory/Invariant/Basic.lean:510, IsFractionRing.isInvariant."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "For $h\\in H$ define $\\alpha_h:B\\to B$ by $(\\alpha_h(b))_{hj}=\\rho_{h,j}(b_j)$ for all $j\\in I$; this is the action of the statement. Each $\\alpha_h$ is a unital ring homomorphism, being coordinatewise given by the ring maps $\\rho_{h,j}$ after the bijection $j\\mapsto hj$. The cocycle identities give $\\alpha_1=\\mathrm{id}$ and $\\alpha_{gh}=\\alpha_g\\alpha_h$, so each $\\alpha_h$ is an automorphism with inverse $\\alpha_{h^{-1}}$. Since $\\rho_{h,j}(1)=1$ and $\\rho_{h,j}(0)=0$, the coordinate idempotents $e_j\\in B$ (coordinate $1$ at $j$, $0$ elsewhere) satisfy $\\alpha_h(e_j)=e_{hj}$. Hence the unique action on $I$ in [lem-sfb-domain-product-action-fixed-ring] is the given action, and the unique isomorphisms $h_j$ there are $\\rho_{h,j}$, because both satisfy $(\\alpha_h(x))_{hj}=h_j(x_j)$ for all $x$. Thus its $H_i$ is $D$, its $C_i$ is $B_i^D$, and its $B^H$ is the $B^H$ of the statement.",
+   "uses": [
+    "lem-sfb-domain-product-action-fixed-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent coordinate calculation for the constant finite action groupoid, contextualizing Tag 03BK (lemma-invariants-base-change), part (3); the coordinate calculation is written here, not asserted to be the statement of that tag."
+   }
+  },
+  {
+   "text": "By transitivity, $R=\\{i\\}$ contains exactly one representative of the single orbit $I$. Apply [lem-sfb-domain-product-action-fixed-ring] with this $R$, using the identifications of the preceding step. It gives that projection $e=p_i|_{B^H}:B^H\\to B_i^D$ is a ring isomorphism, with inverse $a\\mapsto(\\rho_{h,i}(a))_{hi}$, independent of the choice of $h$. This is the first assertion of the statement.",
+   "uses": [
+    "lem-sfb-domain-product-action-fixed-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent coordinate calculation for the constant finite action groupoid, contextualizing Tag 03BK (lemma-invariants-base-change), part (3); the coordinate calculation is written here, not asserted to be the statement of that tag."
+   }
+  },
+  {
+   "text": "Under the hypothesis on $u$, its corestriction $A\\to B^H$ is bijective. Composing with $e$ shows that $a_i$ is injective and has image $B_i^D$. Also $1_A\\ne0_A$, since $a_i$ is unital and $B_i$ is nonzero. If $ab=0$ in $A$, then $a_i(a)a_i(b)=0$ in the domain $B_i$; one factor is zero, and injectivity gives $a=0$ or $b=0$. This proves that $A$ is a domain, without claiming that the product $B$ is a domain.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent coordinate calculation for the constant finite action groupoid, contextualizing Tag 03BK (lemma-invariants-base-change), part (3); the coordinate calculation is written here, not asserted to be the statement of that tag."
+   }
+  },
+  {
+   "text": "Write $K=\\operatorname{Frac}(A)$ and $L=\\operatorname{Frac}(B_i)$. Apply [lem-weil-pbc-fraction-field-lift] to the injective map $A\\xrightarrow{a_i}B_i\\hookrightarrow L$. It gives the unique injective extension $v:K\\to L$, with $v(a/c)=a_i(a)/a_i(c)$. For $d\\in D$, apply the same node to $B_i\\xrightarrow{\\rho_{d,i}}B_i\\hookrightarrow L$. The resulting map on $L$ is $b/c\\mapsto\\rho_{d,i}(b)/\\rho_{d,i}(c)$. Its inverse is the map for $d^{-1}$, and the identity and composition laws follow by uniqueness, since they hold on $B_i$. Thus these maps are an action on $L$ by ring automorphisms.",
+   "uses": [
+    "lem-weil-pbc-fraction-field-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Fraction-field universal property as recorded by lem-weil-pbc-fraction-field-lift (Tag 0BI0, lemma-power-series-over-Noetherian-normal-domain, quotient embedding); uniqueness and formula are the cited node statement."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-invariant-fraction-field-lifting] with $G=D$, $R=A$, $S=B_i$, $f=a_i$, and the fraction fields and map $v$ just constructed. The group $D$ is finite because it is a subgroup of finite $H$; step 4 gives the required injectivity and image equality. The leaf gives $L^D\\subseteq\\operatorname{im}(v)$. Conversely, each $v(a/c)=a_i(a)/a_i(c)$ is fixed by every $d\\in D$, since both numerator and denominator lie in $B_i^D$. Therefore $\\operatorname{im}(v)=L^D$. All calculations use only automorphisms, transitivity and finiteness, with no division by a group order.",
+   "uses": [
+    "lem-sfb-finite-invariant-fraction-field-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/RingTheory/Invariant/Basic.lean",
+    "place": "IsFractionRing.isInvariant, lines 481--484 and 507--512, especially line 510; conclusion expanded using Algebra.IsInvariant in Mathlib/RingTheory/Invariant/Defs.lean:31--32."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-domain-product-action-fixed-ring",
+  "lem-weil-pbc-fraction-field-lift",
+  "lem-sfb-finite-invariant-fraction-field-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Explicit transport-of-coordinates proof in the finite constant action setting of Tag 03BK (lemma-invariants-base-change), part (3); fraction-field input is the separately cited Mathlib leaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite group permutes a finite product of integral domains transitively and invariants project isomorphically onto stabilizer invariants in one factor; the fraction field of those invariants equals the fixed field in that factor fraction field",
+   "results": "{\"t\": \"2026-10-22T06:01:10Z\", \"tool\": \"leanfinder\", \"query\": \"A finite group permutes a finite product of integral domains transitively and invariants project isomorphically onto stabilizer invariants in one factor; the fraction field of those invariants equals the fixed field in that factor fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.normal\", \"IsFractionRing.stabilizerHom\", \"FixedPoints.toAlgHom_bijective\", \"FixedPoints.isSeparable\", \"FixedPoints.toAlgHomEquiv\", \"IsGaloisGroup.fixedPoints\", \"FixedPoints.toAlgAut_bijective\", \"IsFractionRing.stabilizerHom_surjective\"], \"digest\": \"338970fe3a2ce170\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: IsFractionRing.isInvariant (Mathlib/RingTheory/Invariant/Basic.lean:510) gives its fraction-invariant clause once evaluation is established, but does not give the chosen-factor evaluation isomorphism for a dependent product of different rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsInvariant, IsFractionRing",
+   "results": "{\"t\": \"2026-10-22T06:01:28Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsInvariant, IsFractionRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"IsFractionRing.isInvariant\", \"IsFractionRing.isInvariant_of_isIntegral\", \"IsFractionRing.stabilizerHom_surjective\", \"IsFractionRing.stabilizerQuotientInertiaEquiv\", \"IsFractionRing.stabilizerQuotientInertiaEquiv_mk\", \"Algebra.isInvariant_of_isGalois'\", \"Algebra.isInvariant_of_isGalois\", \"Ideal.IsFractionRing.normal\"], \"digest\": \"de417e323b748a87\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: IsFractionRing.isInvariant (Mathlib/RingTheory/Invariant/Basic.lean:510) gives its fraction-invariant clause once evaluation is established, but does not give the chosen-factor evaluation isomorphism for a dependent product of different rings."
+  },
+  {
+   "tool": "grep",
+   "query": "isInvariant|fixed|prod|pi",
+   "results": "{\"t\": \"2026-10-22T06:01:45Z\", \"tool\": \"grep\", \"query\": \"isInvariant|fixed|prod|pi\", \"sub\": \"RingTheory/Invariant/Basic.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"8\", \"16\", \"25\", \"27\", \"28\"], \"digest\": \"8a8a584d16eac3b9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: IsFractionRing.isInvariant (Mathlib/RingTheory/Invariant/Basic.lean:510) gives its fraction-invariant clause once evaluation is established, but does not give the chosen-factor evaluation isomorphism for a dependent product of different rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariants of a transitively permuted product of domains equal stabilizer invariants of a factor and their fraction field equals its fixed fraction field",
+   "results": "{\"t\": \"2026-10-22T06:01:46Z\", \"tool\": \"leansearch\", \"query\": \"Invariants of a transitively permuted product of domains equal stabilizer invariants of a factor and their fraction field equals its fixed fraction field\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem isInvariant|lemma isInvariant|fixedPoints.*[Ee]quiv|[Ee]quiv.*fixedPoints",
+   "results": "{\"t\": \"2026-10-22T06:02:55Z\", \"tool\": \"grep\", \"query\": \"theorem isInvariant|lemma isInvariant|fixedPoints.*[Ee]quiv|[Ee]quiv.*fixedPoints\", \"sub\": \"RingTheory/Invariant\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\"], \"digest\": \"1decb5991cd2ffc1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: IsFractionRing.isInvariant (Mathlib/RingTheory/Invariant/Basic.lean:510) gives its fraction-invariant clause once evaluation is established, but does not give the chosen-factor evaluation isomorphism for a dependent product of different rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at one index identifies the invariant ring of a transitive dependent product of rings with the fixed ring of the index stabilizer",
+   "results": "{\"t\": \"2026-10-22T06:03:07Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation at one index identifies the invariant ring of a transitive dependent product of rings with the fixed ring of the index stabilizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Quotient.stabilizerHom_apply\", \"SubMulAction.ofFixingSubgroup_insert_map\", \"instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient\", \"SubMulAction.ofFixingSubgroup_of_singleton\", \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor_aux\", \"Algebra.IsInvariant.isInvariant\", \"instMulSemiringActionQuotientSubgroupSubtypeMemSubringSubring\", \"IsFractionRing.stabilizerHom\"], \"digest\": \"59fede6f41c535a1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: IsFractionRing.isInvariant (Mathlib/RingTheory/Invariant/Basic.lean:510) gives its fraction-invariant clause once evaluation is established, but does not give the chosen-factor evaluation isomorphism for a dependent product of different rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at one factor identifies invariant elements of a transitively permuted dependent product of rings with stabilizer fixed elements",
+   "results": "{\"t\": \"2026-10-23T09:49:45Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation at one factor identifies invariant elements of a transitively permuted dependent product of rings with stabilizer fixed elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DomMulAct.stabilizerEquiv_invFun\", \"DomMulAct.stabilizerEquiv_invFun_eq\", \"DomMulAct.stabilizerEquiv_invFun_aux\", \"DomMulAct.comp_stabilizerEquiv_invFun\", \"DomMulAct.stabilizerMulEquiv_apply\", \"DomMulAct.stabilizerMulEquiv\", \"DomMulAct.mem_stabilizer_iff\", \"DomMulAct.stabilizer_ncard\"], \"digest\": \"4707ef174315a781\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full transitive-product statement: the fraction-invariant clause matches IsFractionRing.isInvariant at Invariant/Basic.lean:510 and is isolated as a Mathlib leaf; DomMulAct hits classify fiber-preserving permutations, not invariant sections of a dependent product of different rings. Searches with two distinct evaluation phrasings were read."
+  },
+  {
+   "tool": "grep",
+   "query": "fixedPoints.*[Ee]quiv|[Ee]quiv.*fixedPoints|isInvariant",
+   "results": "{\"t\": \"2026-10-23T09:50:57Z\", \"tool\": \"grep\", \"query\": \"fixedPoints.*[Ee]quiv|[Ee]quiv.*fixedPoints|isInvariant\", \"sub\": \"RingTheory/Invariant\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\"], \"digest\": \"06c6f5e1718e753b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full transitive-product statement: the fraction-invariant clause matches IsFractionRing.isInvariant at Invariant/Basic.lean:510 and is isolated as a Mathlib leaf; DomMulAct hits classify fiber-preserving permutations, not invariant sections of a dependent product of different rings. Searches with two distinct evaluation phrasings were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariants of a transitive dependent product of rings identify with stabilizer invariants by evaluation",
+   "results": "{\"t\": \"2026-10-23T09:50:57Z\", \"tool\": \"leansearch\", \"query\": \"Invariants of a transitive dependent product of rings identify with stabilizer invariants by evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"prodXSubSMul.eval\", \"prodXSubSMul.smul\", \"Algebra.IsInvariant.casesOn\", \"MulAction.stabilizer_mul_eq_left\", \"MulAction.stabilizerEquivStabilizer_trans\", \"IsInvariantSubring.recOn\", \"SubMulAction.stabilizer_of_subMul\", \"Algebra.IsInvariant.recOn\"], \"digest\": \"a39406d9ac2239a7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full transitive-product statement: the fraction-invariant clause matches IsFractionRing.isInvariant at Invariant/Basic.lean:510 and is isolated as a Mathlib leaf; DomMulAct hits classify fiber-preserving permutations, not invariant sections of a dependent product of different rings. Searches with two distinct evaluation phrasings were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsInvariant, IsFractionRing",
+   "results": "{\"t\": \"2026-10-23T09:50:57Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsInvariant, IsFractionRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"IsFractionRing.isInvariant\", \"IsFractionRing.isInvariant_of_isIntegral\", \"IsFractionRing.stabilizerHom_surjective\", \"IsFractionRing.stabilizerQuotientInertiaEquiv\", \"IsFractionRing.stabilizerQuotientInertiaEquiv_mk\", \"Algebra.isInvariant_of_isGalois'\", \"Algebra.isInvariant_of_isGalois\", \"Ideal.IsFractionRing.normal\"], \"digest\": \"de417e323b748a87\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full transitive-product statement: the fraction-invariant clause matches IsFractionRing.isInvariant at Invariant/Basic.lean:510 and is isolated as a Mathlib leaf; DomMulAct hits classify fiber-preserving permutations, not invariant sections of a dependent product of different rings. Searches with two distinct evaluation phrasings were read."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem isInvariant",
+   "results": "{\"t\": \"2026-10-23T09:56:12Z\", \"tool\": \"grep\", \"query\": \"theorem isInvariant\", \"sub\": \"RingTheory/Invariant/Basic.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"488\", \"510\"], \"digest\": \"269690a284077bbb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full transitive-product statement: the fraction-invariant clause matches IsFractionRing.isInvariant at Invariant/Basic.lean:510 and is isolated as a Mathlib leaf; DomMulAct hits classify fiber-preserving permutations, not invariant sections of a dependent product of different rings. Searches with two distinct evaluation phrasings were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fraction field of the invariant ring of a finite group equals the invariant subfield of the fraction field",
+   "results": "{\"t\": \"2026-10-23T09:56:13Z\", \"tool\": \"leansearch\", \"query\": \"Fraction field of the invariant ring of a finite group equals the invariant subfield of the fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGaloisGroup.to_isFractionRing\", \"IsGalois.of_fixed_field\", \"IsGaloisGroup.fixedPoints\", \"FixedPoints.isIntegral\", \"IsInvariantSubfield.mk\", \"FixedPoints.finrank_eq_card\", \"Algebra.IsInvariant.isIntegral\", \"IsGaloisGroup.fixedPoints_fixingSubgroup\"], \"digest\": \"71ae0f7291817122\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full transitive-product statement: the fraction-invariant clause matches IsFractionRing.isInvariant at Invariant/Basic.lean:510 and is isolated as a Mathlib leaf; DomMulAct hits classify fiber-preserving permutations, not invariant sections of a dependent product of different rings. Searches with two distinct evaluation phrasings were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFractionRing.isInvariant",
+   "results": "{\"t\": \"2026-10-23T09:56:13Z\", \"tool\": \"loogle\", \"query\": \"IsFractionRing.isInvariant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsFractionRing.isInvariant\"], \"digest\": \"955da16309c7683b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full transitive-product statement: the fraction-invariant clause matches IsFractionRing.isInvariant at Invariant/Basic.lean:510 and is isolated as a Mathlib leaf; DomMulAct hits classify fiber-preserving permutations, not invariant sections of a dependent product of different rings. Searches with two distinct evaluation phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed sections of a transitive family of rings are in bijection with fixed elements for the stabilizer of a chosen index",
+   "results": "{\"t\": \"2026-10-23T09:56:19Z\", \"tool\": \"leanfinder\", \"query\": \"Fixed sections of a transitive family of rings are in bijection with fixed elements for the stabilizer of a chosen index\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DomMulAct.stabilizerMulEquiv_apply\", \"SubMulAction.ofFixingSubgroup_insert_map_bijective\", \"DomMulAct.stabilizerMulEquiv\", \"SubMulAction.fixingSubgroupInsertEquiv\", \"SubAddAction.ofFixingAddSubgroup_insert_map_bijective\", \"SubMulAction.ofFixingSubgroup_insert_map\", \"SubAddAction.fixingAddSubgroupInsertEquiv\", \"SubMulAction.ofFixingSubgroup_of_singleton_bijective\"], \"digest\": \"49712d49133523c7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full transitive-product statement: the fraction-invariant clause matches IsFractionRing.isInvariant at Invariant/Basic.lean:510 and is isolated as a Mathlib leaf; DomMulAct hits classify fiber-preserving permutations, not invariant sections of a dependent product of different rings. Searches with two distinct evaluation phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed subrings under finite group actions on domains have fraction fields equal to the fixed subfield of the fraction field",
+   "results": "{\"t\": \"2026-10-23T09:56:20Z\", \"tool\": \"leanfinder\", \"query\": \"Fixed subrings under finite group actions on domains have fraction fields equal to the fixed subfield of the fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.normal\", \"IsGalois.of_fixed_field\", \"FixedPoints.isIntegral\", \"FixedPoints.intermediateField\", \"FixedPoints.isSeparable\", \"IsGaloisGroup.fixedPoints\", \"IsGaloisGroup.fixedPoints_fixingSubgroup\", \"FixedPoints.subfield\"], \"digest\": \"af6d580f4f034ed7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full transitive-product statement: the fraction-invariant clause matches IsFractionRing.isInvariant at Invariant/Basic.lean:510 and is isolated as a Mathlib leaf; DomMulAct hits classify fiber-preserving permutations, not invariant sections of a dependent product of different rings. Searches with two distinct evaluation phrasings were read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-quotient-generic-fields",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Auxiliary input: Generic fields and component orbits in a finite quotient of a normal scheme. Repair extraction of old proof steps 6 and 8: chosen-factor invariant evaluation and conjugate denominators.",
+   "via": [
+    "lem-sfb-finite-quotient-generic-fields",
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-transitive-domain-product-invariants",
+  "worker": "stage1",
+  "summary": "Wrote the stabilizer projection isomorphism using representative-independent transport, proved the embedded base is a domain by injectivity into one factor, reused the existing fraction-field extension leaf, and isolated finite fixed-fraction lifting as one Mathlib leaf. Checked nonfaithful actions, nonnormal stabilizers and characteristic dividing the group order. No statement change. Reviewer FIX (Q132 cc maintainer reader, 2026-10-23): the delivered steps 1-3 reproved a special case of the existing same-unit node lem-sfb-domain-product-action-fixed-ring (R={i} by transitivity); they now cite it, with the identification of its derived action and isomorphisms with the given rho written out.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Auxiliary input: Generic fields and component orbits in a finite quotient of a normal scheme. Repair extraction of old proof steps 6 and 8: chosen-factor invariant evaluation and conjugate denominators. The latest direct-image proof (3) uses the open direct-image input; this item supplies the algebraic invariant-field calculation in its recorded alteration auxiliary chain. The ancestor command returns None; its documented blueprint origin and via chain have been retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-64dcc3072",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-64dcc3072 (reviewer sub-agent of L); spot-checked: Read in full: the item (6 steps, statement unchanged against live and side-live, where it is still unsplit, so no other group has superseded it) and the new Mathlib leaf lem-sfb-finite-invariant-fraction-field-lifting. Leaf checked against Mathlib RingTheory/Invariant/Basic.lean:481-484 and 510 (IsFractionRing.isInvariant [Finite G]) and Defs.lean:31-32. Algebra R S comes from f and Algebra K L from v; both scalar towers come from v∘ι_R=ι_S∘f; SMulDistribClass holds for the quotient action; IsInvariant R S G holds because S^G⊆im f, and SMulCommClass because im f⊆S^G. So the leaf is a valid one-line specialization. Duplicate search: lem-dl-a1-finite-invariant-prime-orbits-residues, lem-sfb-generic-invariant-field-orbit-open and lem-exc-* are not the same as the leaf. Stacks 03BK (groupoids.tex:4368) is used only as context for an agent calculation, and proof_origin says agent. lem-weil-pbc-fraction-field-lift supports step 5: extension, quotient formula, and the action laws by uniqueness. Step 6 correctly applies the leaf with G=D, f=a_i and the extended action; the reverse inclusion is direct; nothing divides by |H|. Edge cases checked: singleton I, non-normal stabilizer in S_3, non-faithful action, characteristic 2 (F_2[x] with x↦x+1), empty I excluded. No SGA. Fault (C5, brief §3 'special case of an existing node is a citation'): steps 1-3 re-proved the transitive case R={i} of the existing same-unit reviewed node lem-sfb-domain-product-action-fixed-ring. FIX: those steps are replaced by two steps citing that node. New step 1 builds α_h from ρ and shows α_h(e_j)=e_{hj}, so by uniqueness the node's action on I and its h_j are the given action and ρ_{h,j}; hence H_i=D and C_i=B_i^D. New step 2 takes R={i} by transitivity. proof_deps updated to the union of uses; steps 4-6 unchanged; no cycle; no node dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TransitiveDomainProductInvariants",
+  "declaration": "RingTheory.transitive_domain_product_invariants",
+  "declarations": [
+   "RingTheory.transitiveProductFixedSubring",
+   "RingTheory.transitiveStabilizerFixedSubring",
+   "RingTheory.transitive_domain_product_invariants"
+  ],
+  "file": "lean/Sheaf/RingTheory/TransitiveDomainProductInvariants.lean",
+  "statement": "theorem transitive_domain_product_invariants (H : Type u) [Group H] [Finite H] (I : Type v) [Finite I] [Nonempty I] [MulAction H I] (htrans : ∀ i j : I, ∃ h : H, h • i = j) (B : I → Type w) [∀ i : I, CommRing (B i)] [∀ i : I, IsDomain (B i)] (ρ : ∀ (h : H) (i : I), B i ≃+* B (h • i)) (hρone : ∀ i : I, (ρ 1 i).trans (RingEquiv.cast (R := B) (one_smul H i)) = RingEquiv.refl (B i)) (hρmul : ∀ (g h : H) (i : I), (ρ (g * h) i).trans (RingEquiv.cast (R := B) (mul_smul g h i)) = (ρ h i).trans (ρ g (h • i))) (i : I) : (∃ e : transitiveProductFixedSubring B ρ ≃+* transitiveStabilizerFixedSubring B ρ i, ∀ b : transitiveProductFixedSubring B ρ, (e b : B i) = (b : ∀ j : I, B j) i) ∧ (∀ (A : Type a) [CommRing A] (f : A →+* (∀ j : I, B j)), Function.Injective f → f.range = transitiveProductFixedSubring B ρ → IsDomain A ∧ Function.Injective ((Pi.evalRingHom B i).comp f) ∧ ((Pi.evalRingHom B i).comp f).range = transitiveStabilizerFixedSubring B ρ i ∧ ∀ (K : Type k) [Field K] [Algebra A K] [IsFractionRing A K] (L : Type l) [Field L] [Algebra (B i) L] [IsFractionRing (B i) L], ∃ v : K →+* L, v.comp (algebraMap A K) = (algebraMap (B i) L).comp ((Pi.evalRingHom B i).comp f) ∧ (∀ v' : K →+* L, v'.comp (algebraMap A K) = (algebraMap (B i) L).comp ((Pi.evalRingHom B i).comp f) → v' = v) ∧ Set.range v = {x : L | ∀ (h : H) (hi : h • i = i), IsFractionRing.ringEquivOfRingEquiv (K := L) (L := L) ((ρ h i).trans (RingEquiv.cast (R := B) hi)) x = x})",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The two helper definitions are the actual fixed subrings in coordinate equalizer form, built from Mathlib RingHom.eqLocus and subring intersections. They introduce no arbitrary action or choice. The canonical fraction automorphisms are Mathlib IsFractionRing.ringEquivOfRingEquiv; fraction fields are quantified with their canonical IsFractionRing structure. The accepted stage-1 split is preserved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d629eacd",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Clause-by-clause match: H finite group with transitive action on finite nonempty I; B_i domains; rho with cocycle laws (casts only via one_smul/mul_smul, correct composition order). B^H = eqLocus intersection matching (hb)_{hi}=rho_{h,i}(b_i); B_i^D over the stabilizer with no normality assumption. The iso is pinned to the projection (e b = b i). IsDomain A is concluded, not assumed; a_i is shown injective with image B_i^D. The fraction-field clause states existence, uniqueness among all extensions, and range = fixed set of the canonical IsFractionRing.ringEquivOfRingEquiv action. No faithfulness, characteristic or |H| assumption; universes independent. Edge cases: empty I excluded as in the node, singleton I, non-faithful action, non-normal stabilizer, characteristic dividing |H|. Helpers are real data. No duplicate fixed-subring definition in side-live lean/Sheaf or WeilConjectures, and the proof-dependency owner has no Lean record. Node differs from live only in lean; statement verbatim; only proof is sorry; docstrings carry source and blueprint and the 5-step proof plan. Not recompiled (no changes). Advisory: the second-reading section is thin but accurate."
+ }
+}

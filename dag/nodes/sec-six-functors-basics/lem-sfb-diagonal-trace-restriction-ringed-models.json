@@ -1,0 +1,136 @@
+{
+ "id": "lem-sfb-diagonal-trace-restriction-ringed-models",
+ "kind": "statement",
+ "title": "Ringed-site models of the normalized diagonal scalar restriction",
+ "statement": "Fix a prime l, a finite field extension E of Q_l in universe u, schemes X and S, a morphism f:X→S, and a normalized Restriction rX from varying E-coefficient systems to strict constant Z_l-module towers [def-sfb-diagonal-trace-models]. There exist commutative ring sheaves RX and RS on the respective pro-etale sequence sites, a ring map a from RX to the actual varying coefficient systemRing on X, and a geometric ring map b from RS to the direct image of RX, together with equivalences eX and eS from module sheaves over RX and RS to the respective strict constant Z_l-module towers. Scalar restriction along a followed by eX.functor is naturally isomorphic to rX.F. The inverse eX followed by ringed direct image along b is naturally isomorphic to whole-tower lowerStar followed by the inverse eS. All models and isomorphisms are constructed; no complex, K-injectivity or derived unit is assumed or concluded.",
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-models",
+  "def-sp-tower-class-coefficients",
+  "def-coef-ringed-sequence-site",
+  "def-sp-varying-ring-operations"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), scalar restrictions and direct-image comparisons before R lim"
+ },
+ "proof": [
+  {
+   "text": "Construct residueCone from toZModPow and compose each component with coefficientMap. Consecutive compatibility produces the scalar cone for the reconstructed systemRing sequence and hence towerScalarMap on the product site. Naturality of the sheafification unit and Nat.cast_smul_eq_nsmul give its prescribed residue scalar action.",
+   "uses": [
+    "def-sp-tower-class-coefficients",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let RX and RS be the sequence-constant commutative ring sheaves with integral Z_l coefficients. Curry their module sheaves and apply the constant-section equivalence levelwise; use the explicit sequence and constant-ring equivalences to construct eX and eS and their inverse functors.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-cbc-constant-ring-module-sheaves",
+    "lem-pur-native-constant-restriction-acyclicity",
+    "lem-weil-proetale-direct-image-restriction-of-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized Restriction underlying additive-group equalities give section isomorphisms. The residue scalar-action equation proves linearity. The heterogeneous equalities for restrictions, transitions and module morphisms prove the three naturality equations. Thus restriction along towerScalarMap followed by eX.functor is naturally isomorphic to rX.F.",
+   "uses": [
+    "def-sfb-diagonal-trace-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheafification adjunction shows that the geometric constant-ring structural map preserves constant sections. The resulting scalar-section direct-image square, whiskered over the sequence index and combined with the proved curry/uncurry pushforward comparison, gives eX.inverse followed by ringed pushforward naturally isomorphic to whole-tower lowerStar followed by eS.inverse. These witnesses give the asserted existence; no complex or injective argument is involved.",
+   "uses": [
+    "lem-pur-native-constant-restriction-acyclicity",
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-coefficients",
+  "def-coef-ringed-sequence-site",
+  "lem-cbc-constant-ring-module-sheaves",
+  "lem-pur-native-constant-restriction-acyclicity",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "def-sfb-diagonal-trace-models",
+  "def-sp-varying-ring-operations"
+ ],
+ "proof_origin": {
+  "by": "F9",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), explicit sequence-site scalar and direct-image models"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized scalar restriction on inverse systems of module sheaves admits a ringed sequence site model commuting with direct image",
+   "results": "8 hits, including SheafOfModules.restrictScalars and its object/map formulas, and PresheafOfModules.restrictScalars.",
+   "date": "2026-10-27",
+   "verdict": "Mathlib supplies scalar restriction, but not the project-specific normalized sequence-site comparison. Reuse the proved sequence and constant-ring helpers of the project."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\"",
+   "results": "12 hits for ordinary LinearMap restriction of scalars; none gives the normalized module-sheaf tower models.",
+   "date": "2026-10-27",
+   "verdict": "The project-specific presentation must be assembled from its existing proved helpers."
+  },
+  {
+   "tool": "grep",
+   "query": "sequence.*[Ee]quivalence|[Cc]urry.*[Ss]heafOfModules",
+   "results": "3 unrelated sequence equivalence comments in Mathlib. Direct project search locates NativeConstantModel.sequenceEquivalence and pushComparison.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the project helpers and prove the normalized comparison, without duplicating their equivalence constructions."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceRestrictedPushAcyclic",
+  "date": "2026-10-27",
+  "group": "F9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-diagonal-trace-restricted-push-acyclic",
+   "place": "proof steps (1) and (2): explicit scalar-restriction and direct-image presentations"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceRestrictionRingedModels",
+  "file": "lean/Sheaf/Paper/DiagonalTraceRestrictionRingedModels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_restriction_ringedModels",
+  "statement": "theorem diagonalTrace_restriction_ringedModels {X S : Scheme.{u}} (f : X ⟶ S)\n    (rX : Restriction l E X) :\n    ∃ (RX : Sheaf (coefficientSequenceTopology (Scheme.ProEt.topology X))\n          CommRingCat.{u + 1})\n      (RS : Sheaf (coefficientSequenceTopology (Scheme.ProEt.topology S))\n          CommRingCat.{u + 1})\n      (a : RX ⟶ SemilinearSections.systemRing.{u + 1, u, u + 1}\n        (Scheme.ProEt.topology X) (fun n ↦ (Arings l E X).obj (op n))\n        (fun n ↦ (Arings l E X).map (homOfLE (Nat.le_succ n)).op))\n      (b : RS ⟶ ((ProEtale.VaryingRing.baseChange f).sheafPushforwardContinuous\n        CommRingCat.{u + 1} (coefficientSequenceTopology (Scheme.ProEt.topology S))\n        (coefficientSequenceTopology (Scheme.ProEt.topology X))).obj RX)\n      (eX : SheafOfModules.{u + 1}\n        ((sheafCompose (coefficientSequenceTopology (Scheme.ProEt.topology X))\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RX) ≌ DiagonalSystems l X)\n      (eS : SheafOfModules.{u + 1}\n        ((sheafCompose (coefficientSequenceTopology (Scheme.ProEt.topology S))\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RS) ≌ DiagonalSystems l S),\n      Nonempty (SheafOfModules.restrictScalars.{u + 1}\n        ((sheafCompose (coefficientSequenceTopology (Scheme.ProEt.topology X))\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map a) ⋙ eX.functor ≅ rX.F) ∧\n      Nonempty (eX.inverse ⋙ SheafOfModules.pushforward.{u + 1}\n        (F := ProEtale.VaryingRing.baseChange f)\n        (J := coefficientSequenceTopology (Scheme.ProEt.topology S))\n        (K := coefficientSequenceTopology (Scheme.ProEt.topology X))\n        (R := (sheafCompose (coefficientSequenceTopology (Scheme.ProEt.topology X))\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RX)\n        (S := (sheafCompose (coefficientSequenceTopology (Scheme.ProEt.topology S))\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RS)\n        ((sheafCompose (coefficientSequenceTopology (Scheme.ProEt.topology S))\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map b) ≅\n        diagonalTraceSystemPush l f ⋙ eS.inverse)",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261027T034644-L-3671027",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261027T034644-L-3671027",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

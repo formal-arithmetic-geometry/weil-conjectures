@@ -1,0 +1,143 @@
+{
+ "id": "lem-sf-finite-scalar-proper-projection-presentation",
+ "kind": "statement",
+ "title": "Constant-scalar presentation of a single proper counit projection",
+ "statement": "Let R be a finite commutative ring, p:X→Y any scheme morphism, aX and aY presentations of unbounded intrinsic derived tensor by signed total tensor on flat-term K-flat complexes [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and K in D(X_proet,R), L in D(Y_proet,R) arbitrary [def-weil-pbc-proetale-modules, def-weil-abstract-derived-category]. Let EX and EY be the canonical derived associated-module-sheaf equivalences from fixed-R module-valued sheaves to intrinsic constant-ring modules. The intrinsic proper-factor projection, adjunct to tensor pullback followed by counit tensor identity, is isomorphic as an arrow to EY of the published fixed-R proper-factor projection evaluated on EX.inverse(K) and EY.inverse(L). No open immersion, compactification, operation datum, constructibility, Tor bound, or projection invertibility is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 07A6 (lemma-adjoint); constant-scalar specialization of the proper transpose step of lem-sf-finite-projection-operation-presentation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-exchange-projection"
+ ],
+ "proof": [
+  {
+   "text": "Construct finiteScalarPullbackComparison by the inverse mate of the normalized derived direct-image comparison. The two intrinsic direct-image functors agree by the coefficient adjunction Hom bijection. Inverse-mate invertibility along the realization equivalences proves that the pullback comparison is an isomorphism, without any projection invertibility assumption.",
+   "uses": [
+    "lem-stage3-inverse-mate-equivalences",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finiteScalarTensorPullbackComparison to the supplied aX and aY. It provides the two tensor bifunctor isomorphisms and ComparisonCompatible for the published fixed-scalar and canonical intrinsic tensor-pullback maps.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing categorical map_rightAdjointProjectionMap_comp_mateEquiv theorem. The mate is invertible along the realization equivalences. Its two endpoint composites, formed from the tensor comparisons, mate and pullback comparison, are isomorphisms. Arrow.isoMk packages the resulting commuting projection square as projectionArrowIso.",
+   "uses": [
+    "lem-sp-categorical-projection-mate-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate at the inverse realizations of K and L. Naturality of the intrinsic projection transformation at the two realization counit isomorphisms gives an arrow isomorphism from these realized inputs to K,L themselves. Compose it with projectionArrowIso and reverse the result. Unfolding the curried comparison identifies its component with finiteScalarProperProjection.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-stage3-inverse-mate-equivalences",
+  "def-weil-proetale-inverse-image",
+  "lem-sf-finite-scalar-tensor-pullback-comparison",
+  "lem-sp-categorical-projection-mate-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 07A6; U6 uses the existing categorical projection/mate identity and proves the arrow/counit assembly. Only the tensor-pullback square is split off."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal equivalence identifies the derived projection formula morphism between fixed scalar module sheaves and modules over the constant ring sheaf",
+   "results": "Eight ordinary module sheafification, unit Hom equivalence and condensed monoidal results.",
+   "date": "2026-10-27",
+   "verdict": "No normalized derived projection comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant scalar realization equivalence identifies the canonical derived projection morphism defined by the tensor pullback comparison and adjunction counit",
+   "results": "Eight ordinary pullback and scalar-extension counit results.",
+   "date": "2026-10-27",
+   "verdict": "No normalized unbounded derived realization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Arrow.isoMk",
+   "results": "Arrow.isoMk and four component equations.",
+   "date": "2026-10-27",
+   "verdict": "Constructs the final isomorphism once the square is known."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Pp]resentation|[Pp]resentation.*projection",
+   "results": "Seven unrelated QPF, matrix and representation results.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProjectionOperationPresentation",
+  "date": "2026-10-27",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Specified-map compatibility: proper counit transpose in the finite operation presentation",
+   "via": [
+    "lem-sf-finite-projection-operation-presentation",
+    "lem-sf-integral-stage-projection-reduction",
+    "lem-sf-projection-integral-stage-laws"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarProperProjectionPresentation",
+  "file": "lean/Sheaf/Paper/FiniteScalarProperProjectionPresentation.lean",
+  "declaration": "WeilConjectures.finiteScalarProperProjection_presentation",
+  "declarations": [
+   "WeilConjectures.finiteScalarProperProjection",
+   "WeilConjectures.finiteScalarProperProjection_presentation"
+  ],
+  "statement": "theorem finiteScalarProperProjection_presentation\n    (R : Type u) [CommRing R] [Finite R]\n    {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (aX : ProEtaleTensorModel X (proEtaleConstantRing X R))\n    (aY : ProEtaleTensorModel Y (proEtaleConstantRing Y R))\n    (K : proEtaleDerivedCategory X R) (L : proEtaleDerivedCategory Y R) :\n    Nonempty (Arrow.mk (finiteScalarProperProjection R p aX aY K L) ≅\n      Arrow.mk ((sfIntrinsicDerivedEquivalence Y R).functor.map\n        (((AlgebraicGeometry.ProEtale.rightDerivedLowerStarProjectionMap\n          (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).app\n            ((sfIntrinsicDerivedEquivalence X R).inverse.obj K)).app\n              ((sfIntrinsicDerivedEquivalence Y R).inverse.obj L))))",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261026T222557-L-669784",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261027T012949-L-2352656",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

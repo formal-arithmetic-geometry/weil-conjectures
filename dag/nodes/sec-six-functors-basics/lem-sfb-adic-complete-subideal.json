@@ -1,0 +1,218 @@
+{
+ "id": "lem-sfb-adic-complete-subideal",
+ "kind": "statement",
+ "title": "Adic completeness for a finitely generated subideal",
+ "statement": "Let $A$ be a commutative ring and $L\\subseteq K\\subseteq A$ ideals. Suppose $L$ is finitely generated (there exist $f_1,\\ldots,f_r\\in A$ with $L=(f_1,\\ldots,f_r)$) and $A$ is $K$-adically complete [def-weil-pbc-adically-complete-ring]. Then $A$ is $L$-adically complete.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 090T (lemma-complete-by-sub), specialization M=A; statement and proof, lines 22776–22806."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-adically-complete-ring], $\\bigcap_{n\\geq1}K^n=0$. Since $L^n\\subseteq K^n$, also $\\bigcap_{n\\geq1}L^n=0$. Thus the canonical map $A\\to\\varprojlim_nA/L^n$ is injective: an element in its kernel lies in every $L^n$.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 090T, first two proof sentences (separatedness)."
+   }
+  },
+  {
+   "text": "Fix $f\\in K$ and a compatible family in $\\varprojlim_{n\\geq1}A/f^nA$. Choose representatives $a_n\\in A$. Compatibility gives $a_n-a_{n+1}=f^nz_n$ for some $z_n\\in A$. For $m\\geq n$, telescoping gives $a_m-a_n\\in f^nA\\subseteq K^n$. Hence $(a_n\\bmod K^n)_n$ is compatible. The bijection defining $K$-adic completeness [def-weil-pbc-adically-complete-ring] gives $x\\in A$ with $a_n-x\\in K^n$. Write $b_n=a_n-x$; then $b_n\\in K^n$ and $b_n-b_{n+1}=f^nz_n$.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 090T, principal-ideal case through the replacement x_n by x_n-x."
+   }
+  },
+  {
+   "text": "For fixed $n\\geq1$ put $s_c=\\sum_{j=0}^{c-1}f^jz_{n+j}$ for $c\\geq1$. If $d\\geq c$, then $s_d-s_c\\in K^c$, since $f\\in K$. Thus $K$-completeness [def-weil-pbc-adically-complete-ring] gives $y_n\\in A$ with $y_n-s_c\\in K^c$. Telescoping gives $f^ns_c=b_n-b_{n+c}$. Consequently $b_n-f^ny_n=b_{n+c}+f^n(s_c-y_n)\\in K^{n+c}$ for every $c\\geq1$. Its membership in all powers of $K$ forces $b_n=f^ny_n$. Therefore $a_n-x\\in f^nA$ for every $n$, so $A\\to\\varprojlim_n A/f^nA$ is surjective. This proves the principal case without cancellation of $f$ or any closed-ideal assertion.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 090T, final displayed tail sum and the two following sentences."
+   }
+  },
+  {
+   "text": "Choose the stated finite generators $L=(f_1,\\ldots,f_r)$. Each $f_i\\in K$, so steps 2–3 show that every principal completion map $A\\to\\varprojlim_nA/f_i^nA$ is surjective. Apply [lem-sfb-adic-surjectivity-from-principal-generators] to these generators: $A\\to\\varprojlim_nA/L^n$ is surjective. For $r=0$, the same lemma applies with an empty family (and $L=0$). Combine surjectivity with step 1 and the definition [def-weil-pbc-adically-complete-ring] to obtain $L$-adic completeness.",
+   "uses": [
+    "lem-sfb-adic-surjectivity-from-principal-generators",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 090T, invocation of Tag 090S and conclusion; Tag 090S with M=A."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "lem-sfb-adic-surjectivity-from-principal-generators"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 090T (lemma-complete-by-sub), full proof, with the tail-sum congruences written explicitly; finite-generator reduction by Tag 090S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "of_le|mono|antitone|subideal",
+   "results": "25 hits; Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Noetherian.lean, Mathlib/RingTheory/AdicCompletion/Noetherian.lean, Mathlib/RingTheory/AdicCompletion/Noetherian.lean, Mathlib/RingTheory/AdicCompletion/Noetherian.lean, Mathlib/RingTheory/AdicCompletion/LocalRing.lean; directory RingTheory/AdicCompletion",
+   "date": "2026-10-23",
+   "verdict": "no match: completeness definitions, topology equivalences and completeness of the completion do not transfer completeness to a smaller ideal. Read Mathlib/RingTheory/AdicCompletion/Basic.lean:700-737, Completeness.lean:185-193, LocalRing.lean:61-63 and Noetherian.lean:20-43."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If J is contained in I and a module is I adically complete then it is J adically complete for a finitely generated ideal J",
+   "results": "8 hits; IsAdicComplete, IsAdicComplete.toIsPrecomplete, isAdicComplete_iff, IsPrecomplete, AdicCompletion.submodule, AdicCompletion, IsAdicComplete.toIsHausdorff, AdicCompletion.instIsHausdorff",
+   "date": "2026-10-23",
+   "verdict": "no match: completeness definitions, topology equivalences and completeness of the completion do not transfer completeness to a smaller ideal. Read Mathlib/RingTheory/AdicCompletion/Basic.lean:700-737, Completeness.lean:185-193, LocalRing.lean:61-63 and Noetherian.lean:20-43."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicComplete|IsPrecomplete",
+   "results": "25 hits; Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/Noetherian.lean, Mathlib/RingTheory/AdicCompletion/Topology.lean; directory RingTheory/AdicCompletion",
+   "date": "2026-10-23",
+   "verdict": "no match: completeness definitions, topology equivalences and completeness of the completion do not transfer completeness to a smaller ideal. Read Mathlib/RingTheory/AdicCompletion/Basic.lean:700-737, Completeness.lean:185-193, LocalRing.lean:61-63 and Noetherian.lean:20-43."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completeness for an ideal implies completeness for a finitely generated smaller ideal",
+   "results": "8 hits; IsAdicComplete, IsPrecomplete.mk, IsAdicComplete.toIsPrecomplete, Ideal.fg_of_isNoetherianRing, Ideal.FG.of_isNoetherianRing, IsAdicComplete.mk, Ideal.isOka_fg, Ideal.FG",
+   "date": "2026-10-23",
+   "verdict": "no match: completeness definitions, topology equivalences and completeness of the completion do not transfer completeness to a smaller ideal. Read Mathlib/RingTheory/AdicCompletion/Basic.lean:700-737, Completeness.lean:185-193, LocalRing.lean:61-63 and Noetherian.lean:20-43."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete, Ideal.FG",
+   "results": "3 hits; AdicCompletion.isAdicComplete, AdicCompletion.isAdicComplete_of_fg, AdicCompletion.isAdicComplete_self",
+   "date": "2026-10-23",
+   "verdict": "no match: completeness definitions, topology equivalences and completeness of the completion do not transfer completeness to a smaller ideal. Read Mathlib/RingTheory/AdicCompletion/Basic.lean:700-737, Completeness.lean:185-193, LocalRing.lean:61-63 and Noetherian.lean:20-43."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative ring complete for an ideal K is complete for any finitely generated ideal L contained in K",
+   "results": "8 hits; IsAdicComplete.toIsPrecomplete, IsAdicComplete, IsAdic.isAdicComplete_iff, IsAdic.isPrecomplete_iff, IsAdicComplete.henselianRing, IsAdicComplete.le_jacobson_bot, AdicCompletion.instCommRing, isAdicComplete_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: completeness definitions, topology equivalences and completeness of the completion do not transfer completeness to a smaller ideal. Read Mathlib/RingTheory/AdicCompletion/Basic.lean:700-737, Completeness.lean:185-193, LocalRing.lean:61-63 and Noetherian.lean:20-43."
+  },
+  {
+   "tool": "grep",
+   "query": "of_le|mono|subideal|090T",
+   "results": "25 hits: Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Noetherian.lean, Mathlib/RingTheory/AdicCompletion/Noetherian.lean, Mathlib/RingTheory/AdicCompletion/Noetherian.lean, Mathlib/RingTheory/AdicCompletion/Noetherian.lean, Mathlib/RingTheory/AdicCompletion/LocalRing.lean; directory Mathlib/RingTheory/AdicCompletion",
+   "date": "2026-10-23",
+   "verdict": "no match: completeness of a completion and topology equivalences do not transfer completeness to a smaller ideal. Read Basic.lean:703-705; Completeness.lean:185; LocalRing.lean:61-63; Noetherian.lean:20-35."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completeness of a commutative ring for an ideal implies completeness for a finitely generated smaller ideal",
+   "results": "8 hits: IsAdicComplete, AdicCompletion.instCommRing, IsAdicComplete.bot, AdicCompletion.liftRingHom.congr_simp, IsAdicComplete.mk, AdicCompletion, isLocalRing_of_isAdicComplete_maximal, IsAdicComplete.toIsPrecomplete",
+   "date": "2026-10-23",
+   "verdict": "no match: completeness of a completion and topology equivalences do not transfer completeness to a smaller ideal. Read Basic.lean:703-705; Completeness.lean:185; LocalRing.lean:61-63; Noetherian.lean:20-35."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete, Ideal.FG",
+   "results": "3 hits: AdicCompletion.isAdicComplete, AdicCompletion.isAdicComplete_of_fg, AdicCompletion.isAdicComplete_self",
+   "date": "2026-10-23",
+   "verdict": "no match: completeness of a completion and topology equivalences do not transfer completeness to a smaller ideal. Read Basic.lean:703-705; Completeness.lean:185; LocalRing.lean:61-63; Noetherian.lean:20-35."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring complete for an ideal K is complete for every finitely generated ideal L contained in K",
+   "results": "8 hits: IsAdicComplete.toIsPrecomplete, IsAdic.isPrecomplete_iff, IsAdicComplete, IsAdic.isAdicComplete_iff, IsAdicComplete.henselianRing, IsAdicComplete.toIsHausdorff, IsAdic, IsAdicComplete.le_jacobson_bot",
+   "date": "2026-10-23",
+   "verdict": "no match: completeness of a completion and topology equivalences do not transfer completeness to a smaller ideal. Read Basic.lean:703-705; Completeness.lean:185; LocalRing.lean:61-63; Noetherian.lean:20-35."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If J is contained in I and a module is I adically complete then it is J adically complete for a finitely generated ideal J",
+   "results": "8 hits: IsAdicComplete, IsAdicComplete.toIsPrecomplete, isAdicComplete_iff, IsPrecomplete, AdicCompletion.submodule, AdicCompletion, IsAdicComplete.toIsHausdorff, AdicCompletion.instIsHausdorff",
+   "date": "2026-10-23",
+   "verdict": "no match: completeness of a completion and topology equivalences do not transfer completeness to a smaller ideal. Read Basic.lean:703-705; Completeness.lean:185; LocalRing.lean:61-63; Noetherian.lean:20-35."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-two-ideal-adic-completeness",
+  "date": "2026-10-23",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Deformations of an affine isolated singularity and its completions. General completion functor used before splitting its semilocal special fibre into factors. Automatic completeness: apply algebra.tex Tag 0DYC with I=m_A Q and the second ideal J_Q. Supporting input in Tag 0DYC: apply smaller-ideal completeness first to IB inside (I+J)B and finally to J inside I+J.",
+   "via": [
+    "lem-sfb-two-ideal-adic-completeness",
+    "lem-sfb-adic-completion-flat-deformation-functor",
+    "lem-sfb-isolated-affine-completion-deformation",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-adic-complete-subideal",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Followed Stacks 090T: injectivity from power containment, the principal-ideal lifting and tail-sum argument, and finite-generator assembly through one new statement-only 090S node. Searched the complete DAG, latest blueprint, project Lean and Mathlib; no attachment or exact Mathlib match. No Noetherian or local hypothesis introduced.",
+  "blueprint": "Inherited supporting algebra for det-thm-sf-ctf-stability-direct-images (3), via lem-sfb-two-ideal-adic-completeness: automatic completeness in the deformation-completion input. Read latest blueprint unit and direct-image proof (3); no route changed. The ancestor tool returns None, retained as from.node; the new node serves Tag 090T first invocation of Tag 090S."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-2d19b5765",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-2d19b5765 (reviewer sub-agent of L); spot-checked: Read the item, the new node, def-weil-pbc-adically-complete-ring, def-weil-pbc-adic-completion and Stacks algebra.tex 22755-22806 (090S/090T, label confirmed in tags/tags). The item statement is 090T with M=A, unchanged; finite generation is on the smaller ideal L as in the source. The cited definition includes separatedness. Step 1: ⋂L^n ⊆ ⋂K^n = 0 gives injectivity. Step 2: a_{n+1}-a_n ∈ f^nA ⊆ K^n, so the family is compatible mod K^n and gives x with b_n ∈ K^n. Step 3: I checked the indices of the finite tail sums s_c. f^n s_c = b_n - b_{n+c}, and b_n - f^n y_n lies in K^{n+c} for all c, so b_n = f^n y_n. This is the source's convergence argument written as finite congruences, with no cancellation by f. Step 4: the new 090S node plus step 1 gives completeness; r=0 is trivial. The new node lem-sfb-adic-surjectivity-from-principal-generators is 090S with M=A. It is self-contained, true (J_n=(f_i^n) is cofinal with I^n), statement-only, and not a restatement of the item: it has no K, no completeness and no injectivity. I tested r=0, a unit generator and a nilpotent generator. A DAG search (090S/090T/labels/subideal/principal generators) found no duplicate; lem-sbc-complete-local-subideal is the Noetherian local case only. The Mathlib searches are recorded with all three kinds, and my own Mathlib grep agrees there is no match. The blueprint from/via is inherited and consistent. The route uses only definition notions, with no tool_uses and no SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AdicCompleteSubideal",
+  "declaration": "IsAdicComplete.of_fg_subideal",
+  "file": "lean/Sheaf/RingTheory/AdicCompleteSubideal.lean",
+  "statement": "theorem IsAdicComplete.of_fg_subideal (A : Type u) [CommRing A] (L K : Ideal A) (hLK : L ≤ K) (hL : L.FG) [IsAdicComplete K A] : IsAdicComplete L A",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fbf047009",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Delivery = new module Sheaf.RingTheory.AdicCompleteSubideal + item lean field only (diffed vs side-live; stage-1 split untouched; name not landed elsewhere). IsAdicComplete.of_fg_subideal (A : Type u) [CommRing A] (L K : Ideal A) (hLK : L ≤ K) (hL : L.FG) [IsAdicComplete K A] : IsAdicComplete L A matches Stacks 090T (algebra.tex 22774-22801) with M=A: direction of containment, FG on the smaller ideal only, conclusion includes Hausdorff+precomplete (Mathlib IsAdicComplete = bijectivity, Basic.lean:46-56, the recorded def-weil-pbc-adically-complete-ring). No extra hypotheses; L=0/zero ring/K=⊤ covered. No Mathlib/project duplicate (rg AdicCompletion for 090T/090S/of_le/mono; project of_le_maximalIdeal is Noetherian-local only). Statement verbatim, universe bound, only sorry is the proof, docstrings with source place, blueprint tag and 4 proof steps; worker report and second-reading sections present. Unstated 090S proof dep correctly not imported. No compile (no change). Minor: source.place line range 22806 vs 22801."
+ }
+}

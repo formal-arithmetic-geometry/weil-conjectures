@@ -1,0 +1,317 @@
+{
+ "id": "lem-sfb-space-fibre-flat-free-criterion",
+ "kind": "statement",
+ "title": "Fibre flatness detects finite freeness near a relatively flat point",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X,Y$ be algebraic spaces over $S$ [def-trf-algebraic-space], and let $f:X\\to Y$ be locally of finite presentation on etale scheme charts [def-sfb-space-morphism-properties]. Let $M$ be a quasi-coherent module on the small etale ringed site of $X$ [def-trf-space-quasi-coherent-module], of finite presentation: etale locally $M$ is the cokernel of a map $\\mathcal O^m\\to\\mathcal O^n$ with $m,n$ finite. Use tensor pullback [def-trf-space-etale-module-functors] and point classes [def-a1-space-point-topology]. Fix $x\\in|X|$ and suppose that $M$ is flat over $Y$ at $x$: on every compatible etale scheme-chart diagram $U\\to V$ over $X\\to Y$, the ordinary module stalk at each $u$ over $x$ is flat over $\\mathcal O_{V,v}$. Module flatness means exactness of tensoring [def-weil-pbc-flat-ring-map]. For any field $K$ [def-weil-field] and representative $\\xi:\\operatorname{Spec}K\\to X$ of $x$, put $y_K=f\\xi$, $X_{y_K}=X\\times_{Y,y_K}\\operatorname{Spec}K$, and let $M_{y_K}$ be the pullback of $M$ [lem-trf-space-fibre-products-etale-covers]. The map $(\\xi,\\mathrm{id})$ defines a point $\\widetilde x$ of $X_{y_K}$. Then the following are equivalent: (i) there are an etale scheme neighbourhood $e:U\\to X$ whose point image contains $x$ and an integer $r\\geq0$ such that $e^*M\\simeq\\mathcal O_U^{\\oplus r}$; (ii) $M_{y_K}$ is flat over $X_{y_K}$ at $\\widetilde x$, in the same chartwise module sense with the identity of $X_{y_K}$ as structure map. The equivalence holds for every choice of $K$ and $\\xi$, including $M=0$ and $r=0$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CZS (lemma-flat-and-free-at-point-fibre), equivalence (1) and (4); Tag 05WY (lemma-flat-on-fibres-at-point), equivalence (1) and (2), applied to id_X over Y, replaces the geometric representative by any field-valued representative."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-a1-space-point-topology",
+  "def-weil-pbc-flat-ring-map",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties",
+  "def-weil-field",
+  "def-trf-scheme-algebraic-space",
+  "def-trf-space-module-scheme-restriction",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Choose a surjective etale scheme chart $V_0\\to Y$, then a surjective etale scheme chart $U_0\\to X\\times_YV_0$. The atlas, fibre-product, and etale-permanence statements give a compatible scheme map $U_0\\to V_0$ and a point $u$ above $x$. Choose an affine open $V\\subseteq V_0$ containing the image of $u$, and an affine open $U\\subseteq U_0$ containing $u$ and mapping into $V$. Their composites $a:U\\to X$ and $b:V\\to Y$ are etale: open immersions are etale and etale maps compose. The chart definition of local finite presentation makes $U\\to V$ locally of finite presentation. On these affine opens its section-ring map is finitely presented by [lem-weil-pbc-lfp-affine-opens-finite-presentation]. Moreover $U\\to V$ is a morphism of affine schemes, hence affine by [lem-weil-pbc-morphism-affine-schemes-affine], hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence]. It is therefore of finite presentation, not merely locally so. Put $v$ for the image of $u$.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-weil-pbc-open-immersion-etale",
+    "def-sfb-space-morphism-properties",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CZS (lemma-flat-and-free-at-point-fibre), proof of (1) implies (4) by etale charts and the scheme case, and (4) implies (1); Tag 05WY (lemma-flat-on-fibres-at-point), (2) equivalent to (3)."
+   }
+  },
+  {
+   "text": "Since $a$ is etale, the tensor pullback $a^*M$ is the restriction of $M$ to the localized etale site [lem-trf-space-etale-module-pushforward-restriction]; it is quasi-coherent [lem-sfb-space-module-pullback-quasicoherent]. Let $G$ be the Zariski quasi-coherent module corresponding to $a^*M$ by [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. This restriction preserves the etale local finite presentation of $M$; [lem-sfb-scheme-etale-module-exact-finiteness-comparison] then gives finite presentation of $G$ in the Zariski sense. By the relative-flatness hypothesis, $G_u$ is flat over $\\mathcal O_{V,v}$. Assume (ii). Apply [lem-sfb-space-fibre-flatness-chart-comparison] to $X\\xrightarrow{\\mathrm{id}}X\\xrightarrow{f}Y$ and the diagram $U\\xrightarrow{\\mathrm{id}}U\\to V$. It says exactly that $(G_v)_u$ is flat over $\\mathcal O_{U_v,u}$. The pullback comparison in the Zariski-etale equivalence identifies this $G_v$ with the ordinary scheme-fibre pullback. The finite-presentation morphism $U\\to V$ from step 1, the finite-presentation module $G$, and these two flatness assertions satisfy every hypothesis of [lem-trf-flat-fibre-free-neighbourhood]. Obtain an open $W\\subseteq U$ containing $u$ and $r\\geq0$ with $G|_W\\cong\\mathcal O_W^{\\oplus r}$. The equivalence identifies the associated free module with $\\mathcal O_W^{\\oplus r}$: its formula on every etale test is tensor pullback of this finite direct sum. Thus $(a|_W)^*M\\cong\\mathcal O_W^{\\oplus r}$. Since $W\\to U$ is an open immersion, its composite with $a$ is etale and its point image contains $x$. This proves (i).",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-sfb-space-fibre-flatness-chart-comparison",
+    "lem-trf-flat-fibre-free-neighbourhood",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CZS (lemma-flat-and-free-at-point-fibre), proof of (1) implies (4) by etale charts and the scheme case, and (4) implies (1); Tag 05WY (lemma-flat-on-fibres-at-point), (2) equivalent to (3)."
+   }
+  },
+  {
+   "text": "Conversely suppose (i), witnessed by $e:E\\to X$ and $e^*M\\cong\\mathcal O_E^{\\oplus r}$. Repeat the chart construction of step 1 with $E$ in place of $X$: choose $V\\to Y$ surjective etale and a scheme chart of $E\\times_YV$, with a point $u$ over a chosen point of $E$ above $x$. The resulting compatible etale chart $a:U\\to X$ factors through $E$. Its pullback module is finite free: writing $a=e\\circ p$, the tensor pullback along etale maps is restriction [lem-trf-space-etale-module-pushforward-restriction], so $a^*M\\cong p^*e^*M\\cong p^*\\mathcal O_E^{\\oplus r}$, and in tensor coordinates, $B\\otimes_A A^r\\cong B^r$, with $b\\otimes(a_i)\\mapsto(ba_i)$ and inverse $(b_i)\\mapsto\\sum_i b_i\\otimes e_i$. The same formula for the scheme fibre over $v\\in V$ makes $(G_v)_u\\cong\\mathcal O_{U_v,u}^r$, using the pullback comparison of [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. A finite free module is flat by [lem-sc-affine-standard-cover-finite-free-local-fp-flat]. Apply [lem-sfb-space-fibre-flatness-chart-comparison] to $\\mathrm{id}_X$ over $Y$ and $U\\xrightarrow{\\mathrm{id}}U\\to V$ to deduce (ii) for the prescribed $K,\\xi$. Since that comparison holds for every representative, the equivalence has the asserted choice independence. Every construction allows $r=0$ and the zero module; no nonvanishing hypothesis was used.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-a1-space-affine-etale-cover",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-trf-space-etale-module-functors",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+    "lem-sfb-space-fibre-flatness-chart-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CZS (lemma-flat-and-free-at-point-fibre), proof of (1) implies (4) by etale charts and the scheme case, and (4) implies (1); Tag 05WY (lemma-flat-on-fibres-at-point), (2) equivalent to (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-sfb-space-morphism-properties",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-sbc-locally-finite-presentation",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-sfb-space-fibre-flatness-chart-comparison",
+  "lem-trf-flat-fibre-free-neighbourhood",
+  "def-trf-space-etale-module-functors",
+  "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-sfb-space-module-pullback-quasicoherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CZS (lemma-flat-and-free-at-point-fibre), proof of (1) implies (4) by etale charts and the scheme case, and (4) implies (1); Tag 05WY (lemma-flat-on-fibres-at-point), (2) equivalent to (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented quasi-coherent module on an algebraic space locally of finite presentation over a base, relative flatness and flatness of its fibre at a point are equivalent to finite freeness near that point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"Module.free_of_flat_of_isLocalRing\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {P : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup P] [inst_2 : Module R P] [IsLocalRing R]\\n  [Module.Finite R P] [Module.Flat R P], Module.Free R P\", \"doc\": \"Let $ R $ be a local ring and $ P $ a finitely generated flat $ R $-module. Then $ P $ is a free $ R $-module.\"}\n  {\"name\": \"Module.Flat.projective_of_finitePresentation\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.FinitePresentation R M], Module.Projective R M\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $ and $ M $ is finitely presented, then $ M $ is a projective module over $ R $.\"}\n  {\"name\": \"Module.freeLocus_eq_univ\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Finite R M]\\n  [Module.Flat R M], Module.freeLocus R M = Set.univ\", \"doc\": \"For a commutative ring $ R $ and an $ R $-module $ M $ that is finitely generated and flat, the free locus of $ M $—the set of prime ideals $ \\\\mathfrak{p} $ in the prime spectrum of $ R $ where the lo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"Module.Flat.tfae_equational_criterion\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  [Module.Flat R M, ∀ (I : Ideal R), Function.Injective ⇑(LinearMap.rTensor M (Submodule.subtype I)),\\n      ∀ {l : ℕ} {f : Fin l → R} {x : Fin l → M}, ∑ i, f i ⊗ₜ[R] x i = 0 → TensorProduct.VanishesT\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. The following statements are equivalent:\\n1. $M$ is a flat $R$-module.\\n2. For every ideal $I$ of $R$, the map $I \\\\otimes_R M \\\\to R \\\\otimes_R M$ i\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: local-ring module results and scheme morphism results do not give this relative sheaf criterion on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.Free",
+   "results": "[loogle] OK 9 hit(s)\n  {\"name\": \"Module.Flat.of_free\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \" {R : Type u} {M : Type v} [CommSemiring R] [AddCommMonoid M] [Module R M] [Module.Free R M] : Module.Flat R M\", \"doc\": \"\"}\n  {\"name\": \"Submodule.finrank_span_eq_finrank\", \"module\": \"Mathlib.LinearAlgebra.Span.TensorProduct\", \"type\": \" {R : Type u_1} (A : Type u_2) {M : Type u_3} [CommRing R] [CommRing A] [Nontrivial A] [Algebra R A] [Algebra.IsEpi R A] [Module.Flat R A] [AddCommGroup M] [Module R M] [Module A M] [IsScalarTower R A M] (p : Submodule R M) [Module.Free R ↥p] [Module.Finite R ↥p] : Module.finrank A ↥(Submodule.span \", \"doc\": \"\"}\n  {\"name\": \"Module.Flat.exists_factorization_of_apply_eq_zero_of_free\", \"module\": \"Mathlib.RingTheory.Flat.EquationalCriterion\", \"type\": \" {R : Type u_1} {M : Type u_2} [CommRing R] [AddCommGroup M] [Module R M] [Module.Flat R M] {N : Type u_3} [AddCommGroup N] [Module R N] [Module.Free R N] [Module.Finite R N] {f : N} {x : N →ₗ[R] M} (h : x f = 0) : ∃ k a y, x = y ∘ₗ a ∧ a f = 0\", \"doc\": \"**Equational criterion for flatness**, forward direction, second alternate form.\\n\\nLet $M$ be a flat module over a commutative ring $R$. Let $N$ be a finite free module over $R$,\\nlet $f \\\\in N$, and let\"}\n  {\"name\": \"Module.Flat.exists_factorization_of_comp_eq_zero_of_free\", \"module\": \"Mathlib.RingTheory.Flat.EquationalCriterion\", \"type\": \" {R : Type u_1} {M : Type u_2} [CommRing R] [AddCommGroup M] [Module R M] [Module.Flat R M] {K : Type u_3} {N : Type u_4} [AddCommGroup K] [Module R K] [Module.Finite R K] [AddCommGroup N] [Module R N] [Module.Free R N] [Module.Finite R N] {f : K →ₗ[R] N} {x : N →ₗ[R] M} (h : x ∘ₗ f = 0) : ∃ k a y, \", \"doc\": \"Let $M$ be a flat module. Let $K$ and $N$ be finite $R$-modules with $N$\\nfree, and let $f \\\\colon K \\\\to N$ and $x \\\\colon N \\\\to M$ be linear maps such that\\n$x \\\\circ f = 0$. Then there exist a finite fre\"}\n  {\"name\": \"Module.free_of_flat_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \" {R : Type u_1} {P : Type u_4} [CommRing R] [AddCommGroup P] [Module R P] [IsLocalRing R] [Module.Finite R P] [Module.Flat R P] : Module.Free R P\", \"doc\": \"[Stacks Tag 00NZ](https://stacks.math.columbia.edu/tag/00NZ)\"}\n  {\"name\": \"Module.free_of_flat_of_finrank_eq\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \" (R : Type u_1) (M : Type u_2) [CommRing R] [Finite (MaximalSpectrum R)] [AddCommGroup M] [Module R M] [Module.Finite R M] [Module.Flat R M] (n : ℕ) (rk : ∀ (P : MaximalSpectrum R), Module.finrank (R ⧸ P.asIdeal) (TensorProduct R (R ⧸ P.asIdeal) M) = n) : Module.Free R M\", \"doc\": \"[Stacks Tag 02M9](https://stacks.math.columbia.edu/tag/02M9)\"}\n  {\"name\": \"Subalgebra.LinearDisjoint.adjoin_rank_eq_rank_left\", \"module\": \"Mathlib.RingTheory.LinearDisjoint\", \"type\": \" {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] {A B : Subalgebra R S} (H : A.LinearDisjoint B) [Module.Free R ↥A] [Module.Flat R ↥B] [Nontrivial R] [Nontrivial S] : Module.rank ↥B ↥(Algebra.adjoin ↥B ↑A) = Module.rank R ↥A\", \"doc\": \"If `A` and `B` are linearly disjoint, if `A` is free and `B` is flat,\\nthen `[B[A] : B] = [A : R]`. See also `Subalgebra.adjoin_rank_le`.\"}\n  {\"name\": \"Subalgebra.LinearDisjoint.adjoin_rank_eq_rank_right\", \"module\": \"Mathlib.RingTheory.LinearDisjoint\", \"type\": \" {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] {A B : Subalgebra R S} (H : A.LinearDisjoint B) [Module.Free R ↥B] [Module.Flat R ↥A] [Nontrivial R] [Nontrivial S] : Module.rank ↥A ↥(Algebra.adjoin ↥A ↑B) = Module.rank R ↥B\", \"doc\": \"If `A` and `B` are linearly disjoint, if `B` is free and `A` is flat,\\nthen `[A[B] : A] = [B : R]`. See also `Subalgebra.adjoin_rank_le`.\"}\n  {\"name\": \"Module.Free.away_of_finite_of_flat_of_rankAtStalk_constant\", \"module\": \"Mathlib.RingTheory.Flat.LocallyFree\", \"type\": \" {R : Type u_1} [CommRing R] (M : Type u_2) [AddCommGroup M] [Module R M] [Module.Finite R M] [Module.Flat R M] (p : Ideal R) [p.IsPrime] (h : ∀ (m : Ideal R) [inst : m.IsMaximal], Module.rankAtStalk M { asIdeal := m, isPrime := ⋯ } = Module.rankAtStalk M { asIdeal := p, isPrime := ⋯ }) : ∃ a ∉ p, M\", \"doc\": \"Let `M` be a finite flat `R`-module, `p` be a prime ideal of `R`. If `rankAtStalk M` is\\nconstant, then there exists `a ∉ p` such that `M` is free after localization away from `a`.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: local-ring module results and scheme morphism results do not give this relative sheaf criterion on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*free|free.*flat",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: local-ring module results and scheme morphism results do not give this relative sheaf criterion on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative flat finitely presented sheaves are free near a point if their fibre stalk is flat",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.free\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"(I : Type u) : SheafOfModules.{u} R\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"SheafOfModules.ιFree\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"{I : Type u} (i : I) : unit R ⟶ free I\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}\n  {\"name\": \"Module.free_of_flat_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.Finite R P] [Flat R P] : Free R P\", \"doc\": \"Let $ R $ be a local ring and $ P $ a finitely generated flat $ R $-module. Then $ P $ is a free $ R $-module.\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] [Module.Flat R M] : IsLocallyConstant (rankAtStalk (R := R) M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If there exists a quasicoherent sheaf $\\\\sigma$ over the ring sheaf $\\\\mathcal{O}$ such that $\\\\sigma$ satisfies the finite presentation condition, then the sheaf $\\\\mathcal{M}$ also satisfies the finite \"}\n  {\"name\": \"Module.free_of_flat_of_finrank_eq\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.Finite R M] [Flat R M] (n : ℕ) (rk : ∀ P : MaximalSpectrum R, finrank (R ⧸ P.1) ((R ⧸ P.1) ⊗[R] M) = n) :\\n  Free R M\", \"doc\": \"Let $ R $ be a commutative ring and $ M $ a finitely generated flat $ R $-module. If for every maximal ideal $ \\\\mathfrak{p} $ of $ R $, the rank of the tensor product $ (R/\\\\mathfrak{p}) \\\\otimes_R M $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: local-ring module results and scheme morphism results do not give this relative sheaf criterion on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibre criterion for local freeness of a relatively flat finitely presented module on a locally finitely presented algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"Module.freeLocus_eq_univ\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Finite R M]\\n  [Module.Flat R M], Module.freeLocus R M = Set.univ\", \"doc\": \"For a commutative ring $ R $ and an $ R $-module $ M $ that is finitely generated and flat, the free locus of $ M $—the set of prime ideals $ \\\\mathfrak{p} $ in the prime spectrum of $ R $ where the lo\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"Module.free_of_flat_of_isLocalRing\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {P : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup P] [inst_2 : Module R P] [IsLocalRing R]\\n  [Module.Finite R P] [Module.Flat R P], Module.Free R P\", \"doc\": \"Let $ R $ be a local ring and $ P $ a finitely generated flat $ R $-module. Then $ P $ is a free $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Module.flat_of_isLocalized_span\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M] (s : Set S),\\n  Ideal.span s = ⊤ →\\n    ∀ (Mₛ : ↑s → Type u_5) [inst_7 : (r : ↑s) → Add\", \"doc\": \"If for every element $ r $ in the set $ s $, the localized module $ M_{\\\\mathfrak{p}_r} $ is flat over $ R $, then the module $ M $ is flat over $ R $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: local-ring module results and scheme morphism results do not give this relative sheaf criterion on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*(fibre|fiber)|(fibre|fiber).*flat",
+   "results": "OK 3 hit(s).  Returned: Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme-morphism flatness and ordinary module flatness declarations do not state field-representative versus etale-chart fibre flatness for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness of a quasi coherent sheaf on a fibre of algebraic spaces can be checked on etale chart fibres",
+   "results": "OK 8 hit(s).  Returned: AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.Flat.flat_of_affine_subset, RingHom.Flat.propertyIsLocal, RingHom.Flat, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.instMorphismRestrict",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme-morphism flatness and ordinary module flatness declarations do not state field-representative versus etale-chart fibre flatness for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat",
+   "results": "OK 12 hit(s).  Returned: AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instRespectsSchemeIsOpenImmersion, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Flat.epi_of_flat_of_surjective",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme-morphism flatness and ordinary module flatness declarations do not state field-representative versus etale-chart fibre flatness for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness on a fibre of morphisms of algebraic spaces is independent of the field valued point representative and equivalent to flatness on etale scheme chart fibres",
+   "results": "OK 8 hit(s).  Returned: AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.isStableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme-morphism flatness and ordinary module flatness declarations do not state field-representative versus etale-chart fibre flatness for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|flat.*(fibre|fiber)|(fibre|fiber).*flat",
+   "results": "OK 0 hit(s).  Returned: ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme-morphism flatness and ordinary module flatness declarations do not state field-representative versus etale-chart fibre flatness for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For X to Y to Z and a quasi coherent module on X, flatness on the field valued Z fibre is equivalent to flatness on the ordinary residue fibre of etale scheme charts U to V to W",
+   "results": "OK 8 hit(s).  Returned: AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme-morphism flatness and ordinary module flatness declarations do not state field-representative versus etale-chart fibre flatness for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented quasi coherent module relatively flat at a point is finite free in an etale neighbourhood if its fibre module is flat at that point",
+   "results": "OK 8 hit(s).  Returned: Module.free_of_flat_of_isLocalRing, Algebra.Etale.finitePresentation, Module.flat_of_isLocalized_maximal, Module.free_of_flat_of_finrank_eq, Module.freeLocus_eq_univ, Module.flat_of_isLocalized_span, Algebra.etaleLocus_eq_univ_iff_etale, Algebra.Smooth.flat",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scheme-morphism flatness and ordinary module flatness declarations do not state field-representative versus etale-chart fibre flatness for quasi-coherent modules on algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-finite-free-locus-base-change",
+  "date": "2026-10-24",
+  "group": "Q71"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Invertible modules form an open substack for proper flat algebraic spaces. Specific input: quot.tex lemma-picard-stack-open-in-coh, the sentence invoking spaces-more-morphisms lemma-finite-free-open to obtain W and its arbitrary-base-change property. Supporting input in the proof of Tag 0CZT: the invocation of lemma-flat-and-free-at-point-fibre, together with lemma-flat-on-fibres-at-point for id_X over Y.",
+   "via": [
+    "lem-sfb-space-relative-finite-free-locus-base-change",
+    "lem-sfb-space-invertible-open-coherent",
+    "lem-sfb-space-picard-stack-smooth",
+    "lem-sfb-curve-smooth-polarization-cover",
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-fibre-flat-free-criterion",
+  "worker": "stage1",
+  "summary": "Followed 0CZS via 05WY and the existing scheme result 080Q; added only the general field-fibre/chart-fibre flatness comparison. Explicitly shrank to affine charts to meet the finite-presentation hypothesis of 080Q, compared etale and Zariski coefficients, and proved the converse by finite-free tensor coordinates. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Invertible modules form an open substack for proper flat algebraic spaces. Specific input: quot.tex lemma-picard-stack-open-in-coh, the sentence invoking spaces-more-morphisms lemma-finite-free-open to obtain W and its arbitrary-base-change property. Supporting input in the proof of Tag 0CZT: the invocation of lemma-flat-and-free-at-point-fibre, together with lemma-flat-on-fibres-at-point for id_X over Y. Realized supporting input 0CZS by the three chart-reduction/assembly steps; checked the latest direct-images proof. The pre-existing ancestor record has node=null, as ancestor command reports.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-flat-fibre-free-neighbourhood",
+    "why": "Tag 080Q is exactly the scheme case invoked by the proof of 0CZS; no same-unit scheme module free-neighbourhood theorem replaces it."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Interpret etale chart coefficients as ordinary Zariski modules, with the stated pullback comparison; no same-unit node provides this equivalence."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Characterize the section map on affine opens when shrinking the chart to meet the finite-presentation hypothesis of 080Q."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Quasi-compactness and quasi-separatedness of the affine chart morphism justify using the finite-presentation scheme case."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Open shrinkings remain etale charts; needed before applying the chart criterion and after obtaining the free open neighbourhood."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Construct compatible chart diagrams through fibre products and retain surjectivity."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Composition of the chart maps and etale refinements remains etale."
+   },
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Choose scheme atlases and lift the point x to them."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-flat-fibre-free-neighbourhood",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-a1-space-affine-etale-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-1bb1bb960",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-1bb1bb960 (reviewer sub-agent of L); spot-checked: Read 0CZS (l.5940), all of 05WY (l.5632-5790) and 080Q (more-morphisms l.4791). The item statement is unchanged and matches 0CZS (1)<=>(4) via 05WY(2), with every hypothesis and the r=0, M=0 cases kept. The new node lem-sfb-space-fibre-flatness-chart-comparison is exactly 05WY (2)<=>(3) for a general tower and any quasi-coherent F. It is a separate Stacks lemma, not a clause of the item, and no existing node states it (checked 05VU chart-independence, 05VW base change, 04NG and 05X3). Tested on Spec k with F=k^n, on identity scheme charts, on F=0 and on a field extension of the representative. Step 1: atlas, fibre-product and permanence cites are correct; 01TQ gives the finitely presented ring map. Step 2: applying the new node to X->X->Y with U->U->V gives (G_v)_u flat over O_{U_v,u}, and every hypothesis of 080Q is checked. Step 3: the finite free module is flat (00NX), then the new node gives (ii). No cycle. Two small C1 gaps fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-fibre-flat-free-criterion.json. Step 1: 'U->V affine via distinguished opens' now cites lem-weil-pbc-morphism-affine-schemes-affine (01SH). Steps 2 and 3: 'a^*M is restriction for etale a', and its quasi-coherence, now cite lem-trf-space-etale-module-pushforward-restriction (03LV) and lem-sfb-space-module-pullback-quasicoherent (03GA); proof_deps extended. Batch-5 flags: all accepted as generic foundations (space definitions, fibre products, etale permanence, Zariski-etale quasi-coherent equivalence 03DX, 05VG, the 080Q commutative algebra). The closure has 32 trf nodes, all def-/lem-, with no trace or Poincare theorem and no sk-/nt- nodes. tool_uses accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreFlatFreeCriterion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.finiteFree_near_iff_representativeFibre_flat",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.PointRepresentative.toMorphism",
+   "AlgebraicGeometry.AlgebraicSpace.representativeFibre",
+   "AlgebraicGeometry.AlgebraicSpace.representativeFibreProjection",
+   "AlgebraicGeometry.AlgebraicSpace.representativeFibreSection",
+   "AlgebraicGeometry.AlgebraicSpace.representativeFibrePoint",
+   "AlgebraicGeometry.AlgebraicSpace.finiteFree_near_iff_representativeFibre_flat"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFibreFlatFreeCriterion.lean",
+  "statement": "theorem finiteFree_near_iff_representativeFibre_flat {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hf : MapIsLocallyOfFinitePresentation f) (M : X.QCoh) (hM : M.obj.IsFinitePresentation) (x : Point X.obj.obj) (hflat : ∀ (U : X.EtaleSite) (V : Y.EtaleSite) (h : U.obj.left ⟶ V.obj.left), U.obj.hom ≫ f.hom.hom = yoneda.map h ≫ V.obj.hom → ∀ t : X.etaleForget.obj U, schemePointMap U.obj.hom t = x → Module.Flat ((Y.etaleForget.obj V).presheaf.stalk (h.left t)) ((ModuleCat.restrictScalars (h.left.stalkMap t).hom).obj ((RingedSpace.moduleStalkFunctor (X.etaleForget.obj U).toRingedSpace t).obj ((X.schemeRestriction U).obj M.obj)))) (ξ : PointRepresentative X.obj.obj) (hξ : Quot.mk _ ξ = x) : (∃ U : X.EtaleSite, x ∈ pointImage U.obj.hom ∧ ∃ r : ℕ, Nonempty ((X.etalePullback U).obj M.obj ≅ SheafOfModules.free (R := X.structureSheaf.over U) (ULift.{u} (Fin r)))) ↔ (∀ (U V : (representativeFibre f ξ).EtaleSite) (h : U.obj.left ⟶ V.obj.left), U.obj.hom = yoneda.map h ≫ V.obj.hom → ∀ t : (representativeFibre f ξ).etaleForget.obj U, schemePointMap U.obj.hom t = representativeFibrePoint f ξ → Module.Flat (((representativeFibre f ξ).etaleForget.obj V).presheaf.stalk (h.left t)) ((ModuleCat.restrictScalars (h.left.stalkMap t).hom).obj ((RingedSpace.moduleStalkFunctor ((representativeFibre f ξ).etaleForget.obj U).toRingedSpace t).obj (((representativeFibre f ξ).schemeRestriction U).obj ((moduleTensorPullback (representativeFibreProjection f ξ)).obj M.obj)))))",
+  "branch": "sheaf-dag",
+  "by": "Q60",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper definitions construct precisely the field-valued map, actual sheaf fibre, projection and tautological point introduced in this statement. The chartwise stalk-flatness conditions are written out with the existing schemeRestriction and moduleStalkFunctor, and the finite free neighbourhood uses the same small-etale slice restriction as the existing finiteFreeLocus. Added only three already-landed definition dependencies used for these constructions; the mathematical statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68d59a5b1",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Read node, 0CZS source (spaces-more-morphisms l.5940), every dep declaration and the item module. hf/hM/x/hflat (pointwise chartwise stalk flatness; restrictScalars along h.left.stalkMap, correct direction)/ξ,hξ match the node. representativeFibre is the actual sheaf pullback along ξ.toMorphism≫f (Yoneda map, not a choice), algebraic space via fibreProduct_isAlgebraicSpace.1. M_{y_K} is the moduleTensorPullback along the first projection; x̃ is the pullback.lift (ξ,𝟙) at the identity section. (i) matches the landed finiteFreeLocus formula; (ii) is the same chart test with identity structure map. r=0, M=0, empty X, any field K in universe u covered. Node diff vs live: only lean plus 3 landed def stmt_deps (schemeSpace, schemeRestriction, moduleStalkFunctor), all used in the statement. Statement verbatim; sorry only; docstrings with source and blueprint; no hollow defs; no existing field-fibre declaration found (grep); pointwise flatness written inline (ModuleIsFlatOver too strong; moduleFlatAt is owned by a theorem node), not a duplicate definition. Report has both sections. No compile run (no file changed)."
+ }
+}

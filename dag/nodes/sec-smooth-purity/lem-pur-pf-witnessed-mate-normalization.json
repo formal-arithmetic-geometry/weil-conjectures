@@ -1,0 +1,374 @@
+{
+ "id": "lem-pur-pf-witnessed-mate-normalization",
+ "kind": "statement",
+ "title": "Witness transport identifies the normalized proper/open isomorphism with the clopen-projection mate",
+ "statement": "Fix the finite coefficient datum $A=A_{E,n}$ of [def-pur-conventions]. Let $f:X\\to Y$ be a separated finite-type morphism of separated finite-type $k$-schemes, let $c_i=(j_i:X\\hookrightarrow\\overline X_i,p_i:\\overline X_i\\to Y)$ be compactifications, and let $v:c_1\\to c_2$ be a proper refinement, so $vj_1=j_2$ and $p_2v=p_1$ [def-weil-compactifications-refinements]. Use ordinary unbounded derived categories of constant-$A$ modules on the small pro-etale sites. Write $J_i=j_{i!}$ for exact extension by zero [def-weil-extension-by-zero]. Let $(M,H,a)$ be an etale-origin witness: $M\\in D^+(X_{\\mathrm{proet}},A)$, $H\\in D^+(X_{\\mathrm{et}},A)$, $a:\\nu_X^*H\\xrightarrow{\\sim}M$ [def-weil-pbc-etale-origin-witness]. Let $\\alpha^p_v(H):J_2\\nu_X^*H\\xrightarrow{\\sim}Rv_*J_1\\nu_X^*H$ be the specified comparison of [lem-weil-pbc-proper-open-comparison-proetale], and set\n$$\\Gamma_v(M,H,a)=Rv_*J_1(a)\\circ\\alpha^p_v(H)\\circ J_2(a)^{-1}.$$\nThis is precisely the proper/open isomorphism in part (a) of [def-sf-refinement-comparison-isomorphism]. For the commutative proper/open square with top $j_1$, bottom $j_2$, left edge $1_X$, and right edge $v$, let $\\gamma_v:J_2\\to Rv_*J_1$ be the finite proper-adjunction mate normalized in [lem-sf-proper-open-projection-mate]: base-change $Lv^*J_2$ to the inverse image of $j_2(X)$, project onto its clopen section $(j_1,1_X)$, and transpose under $Lv^*\\dashv Rv_*$. The opens $j_i$ are quasi-compact since the compactification schemes are finite type over $k$. Then the equality of actual maps is\n$$\\Gamma_v(M,H,a)=\\gamma_{v,M}.$$\nMore explicitly, with $e_j:\\nu^*j_!^{\\mathrm{et}}\\cong j_!\\nu^*$ and $b_v:\\nu^*Rv_{\\mathrm{et},*}\\cong Rv_*\\nu^*$ the canonical comparisons of [lem-sf-proper-open-comparison-site-normalization], and $\\gamma^e_v$ the finite etale proper/open comparison of [lem-cbc-proper-open-interchange-coherence], one has\n$$\\gamma_{v,\\nu_X^*H}=Rv_*(e_{j_1,H})\\circ b_{v,j_{1!}^{\\mathrm{et}}H}\\circ\\nu^*(\\gamma^e_{v,H})\\circ e_{j_2,H}^{-1}.$$\nThe equality is natural in the witnessed object, and holds separately for any witnessed bounded-below tensor input; no constructibility or Tor-amplitude hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence; extracted normalization argument of lem-pur-pf-refinement-compatibility, former Step 1. Finite-site comparison via the constant strict-tower realization, not an abstract six-functor axiom."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-compactifications-refinements",
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-etale-origin-witness",
+  "def-sf-refinement-comparison-isomorphism",
+  "lem-weil-pbc-proper-open-comparison-proetale",
+  "lem-sf-proper-open-projection-mate",
+  "lem-sf-proper-open-comparison-site-normalization",
+  "lem-cbc-proper-open-interchange-coherence"
+ ],
+ "proof": [
+  {
+   "text": "The compactification factorization and QuasiCompact f make both open immersions quasi-compact. Apply finiteClopenMateSiteTransport to (j1,j2,1,v). Its etale mate equals normalizedComparison. The canonical direct-image identity law says N(e^{-1}) b_1 = d^{-1}; this is comparisonDirectImagePlus_id followed by cancellation of d. Naturality of the open-extension comparison moves N(e^{-1}) across it. Cancel the forward open comparison to obtain refinementSiteWordPlus_eq, the four-factor formula for the identity-normalized bounded-below pro-etale mate.",
+   "uses": [
+    "lem-cbc-finite-clopen-mate-site-transport",
+    "prop-weil-pbc-comparison-direct-image",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification independence; the four finite witnessed normalization steps, with the pro-etale D+ inclusion equation isolated."
+   }
+  },
+  {
+   "text": "Apply properOpenRefinementMate_plus_compatibility to N(H), an arbitrary bounded-below pro-etale input. Substitute the bounded-below formula from Step 1. Naturality transports this equality across the canonical exact comparison N(H) included in D versus N applied to the included H, giving refinementMate_eq_siteWord with precisely the source and target compatibility factors in purityRefinementSiteWord.",
+   "uses": [
+    "lem-pur-refinement-mate-plus-compatibility",
+    "lem-sf-proper-open-projection-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification independence; the four finite witnessed normalization steps, with the pro-etale D+ inclusion equation isolated."
+   }
+  },
+  {
+   "text": "The refinement clause of properOpenInterchangeCoherence identifies purityEtaleRefinementComparison with the specified etale properOpenComparison. Expand properOpenProEtaleIsoPlus into its four factors and properOpenProEtaleIso into its canonical inclusion comparisons. Thus purityRefinementSiteWord is exactly its hom. This is the site-normalization equation directly from the named construction, valid for the size-lifted coefficient ring without re-presenting the coefficients.",
+   "uses": [
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-weil-pbc-proper-open-comparison-proetale"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification independence; the four finite witnessed normalization steps, with the pro-etale D+ inclusion equation isolated."
+   }
+  },
+  {
+   "text": "Expand refinementProperOpenIsoFixed as J2(a^{-1}), the specified pro-etale comparison, and Rv J1(a). By Steps 2 and 3 replace the middle factor by the proper mate at N(H). Naturality at a, followed by functoriality and a^{-1}a=1, cancels the outer factors and gives the proper mate at M. This proves the first clause; Step 2 is the second clause. For any two witnesses and any underlying arrow t, rewrite both transported maps by the first clause and apply naturality of purityRefinementMate. This proves the last clause. The argument applies separately to any bounded-below tensor input with a witness.",
+   "uses": [
+    "def-sf-refinement-comparison-isomorphism",
+    "lem-sf-proper-open-projection-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification independence; the four finite witnessed normalization steps, with the pro-etale D+ inclusion equation isolated."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-finite-clopen-mate-site-transport",
+  "prop-weil-pbc-comparison-direct-image",
+  "def-weil-compactifications-refinements",
+  "lem-pur-refinement-mate-plus-compatibility",
+  "lem-sf-proper-open-projection-mate",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-weil-pbc-proper-open-comparison-proetale",
+  "def-sf-refinement-comparison-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification independence; the four finite witnessed normalization steps, with the pro-etale D+ inclusion equation isolated."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite proetale proper open comparison at an etale origin witness equals the clopen projection adjunction mate",
+   "results": {
+    "hits": 8,
+    "top": [
+     "Profinite.exists_isClopen_of_cofiltered",
+     "CompHausLike.LocallyConstant.incl_of_counitAppApp",
+     "Condensed.profiniteSolidCounit",
+     "PrimeSpectrum.basicOpen_isIdempotentElemEquivClopens_symm",
+     "Profinite.exists_locallyConstant_finite_aux",
+     "CompHausLike.LocallyConstant.counitAppApp",
+     "AlgebraicGeometry.exists_map_preimage_eq_map_preimage",
+     "CompHausLike.LocallyConstant.adjunction_left_triangle"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not assert this comparison of the specified derived pro-etale maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not assert this comparison of the specified derived pro-etale maps"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.?open|clopen.*mate|refinement.*comparison",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not assert this comparison of the specified derived pro-etale maps",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper open comparison for etale origin complexes agrees with its normalized adjunction mate",
+   "results": {
+    "hits": 8,
+    "top": [
+     "TopologicalSpace.Opens.adjunction_counit_app_self",
+     "TopologicalSpace.Opens.adjunction_counit_map_functor",
+     "IsOpenMap.adjunction",
+     "Topology.IsInducing.adjunction",
+     "IsOpenMap.adjunctionNhds",
+     "Topology.IsInducing.adjunctionNhds",
+     "CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction",
+     "CategoryTheory.Abelian.DoldKan.comparisonN_hom_app_f"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not assert this comparison of the specified derived pro-etale maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale proetale comparison transport extension by zero proper direct image normalized mate",
+   "results": {
+    "hits": 8,
+    "top": [
+     "Condensed.profiniteSolidCounit",
+     "Condensed.profiniteSolidification",
+     "Condensed.profiniteSolid",
+     "Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit",
+     "Condensed.lanPresheafExt",
+     "LightCondensed.lanPresheafExt",
+     "Condensed.lanCondensedSet",
+     "Condensed.lanPresheaf"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not assert this comparison of the specified derived pro-etale maps"
+  },
+  {
+   "tool": "grep",
+   "query": "clopen|proper.?open",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not assert this comparison of the specified derived pro-etale maps",
+   "subdirectory": "CategoryTheory/Sites"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.?open|clopen.*mate|refinement.*comparison",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general topological adjunctions, condensed objects or other comparisons, not the specified derived etale/pro-etale proper/open maps",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general topological adjunctions, condensed objects or other comparisons, not the specified derived etale/pro-etale proper/open maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite proetale proper open comparison at an etale origin witness equals the clopen projection adjunction mate",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CompHausLike.LocallyConstant.adjunction_left_triangle",
+     "CompHausLike.LocallyConstant.adjunction_counit",
+     "Condensed.profiniteSolidCounit",
+     "CompHausLike.LocallyConstant.incl_of_counitAppApp",
+     "Profinite.toProfiniteAdjToCompHaus",
+     "CompHausLike.LocallyConstant.counitAppApp",
+     "CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso",
+     "Condensed.isoLocallyConstantOfIsColimit_inv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general topological adjunctions, condensed objects or other comparisons, not the specified derived etale/pro-etale proper/open maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale proetale comparison transport extension by zero proper direct image normalized mate",
+   "results": {
+    "hits": 8,
+    "top": [
+     "Condensed.profiniteSolidCounit",
+     "Condensed.profiniteSolidification",
+     "Condensed.profiniteSolid",
+     "Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit",
+     "Condensed.lanSheafProfinite",
+     "Condensed.lanPresheaf",
+     "Condensed.lanCondensedSet",
+     "LightCondensed.lanPresheaf"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general topological adjunctions, condensed objects or other comparisons, not the specified derived etale/pro-etale proper/open maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper open comparison for etale origin complexes agrees with its normalized adjunction mate",
+   "results": {
+    "hits": 8,
+    "top": [
+     "TopologicalSpace.Opens.adjunction_counit_app_self",
+     "TopologicalSpace.Opens.adjunction_counit_map_functor",
+     "IsOpenMap.adjunction",
+     "Topology.IsInducing.adjunction",
+     "IsOpenMap.adjunctionNhds",
+     "Topology.IsInducing.adjunctionNhds",
+     "CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction",
+     "CategoryTheory.Abelian.DoldKan.comparisonN_hom_app_f"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general topological adjunctions, condensed objects or other comparisons, not the specified derived etale/pro-etale proper/open maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-pf-refinement-compatibility",
+  "date": "2026-10-22",
+  "group": "Q120"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof Step 4, independence of compactifications in the forward external product; Witness transport identifies the normalized proper/open isomorphism with the clopen-projection mate",
+   "via": [
+    "lem-pur-pf-refinement-compatibility",
+    "lem-pur-finite-product-compactification",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pur-pf-witnessed-mate-normalization",
+  "worker": "Q24 stage1 direct",
+  "summary": "Four-step finite witnessed normalization proof, no new nodes. Reuses the finite clopen site-transport sublemma of the strict-tower calculus, the site normalization of the specified proper/open isomorphism, and explicit naturality/cancellation along the witness. Statement and statement dependencies unchanged.",
+  "blueprint": "Current latest prop-sf-pf-coherence.proof.md compactification-independence sentence: identify the refinement proper/open comparison with the counit-normalized mate. This supplies the normalization used by the affine-space composition route, ancestor prop-pur-affine-space-composition-law.",
+  "tool_uses": [
+   {
+    "node": "def-sf-refinement-comparison-isomorphism",
+    "why": "Defines the particular witnessed refinement arrow and records the finite/Noetherian compactification setting; no affine-space unit node defines that arrow."
+   },
+   {
+    "node": "lem-cbc-finite-clopen-mate-site-transport",
+    "why": "Finite-site sublemma of the existing strict-tower proper/open calculus: identifies the actual clopen proper mate with the etale comparison under canonical open/direct-image comparisons."
+   },
+   {
+    "node": "lem-sf-proper-open-projection-mate",
+    "why": "Supplies the stipulated clopen-projection mate as a natural transformation on arbitrary unbounded finite-coefficient objects; its tensor identity is not invoked."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Its counit equation fixes the comparison on the identity left edge, eliminating any arbitrary endpoint isomorphism."
+   },
+   {
+    "node": "lem-cbc-proper-open-interchange-coherence",
+    "why": "Its explicit refinement specialization identifies the normalized etale comparison with the alpha used in the specified proetale construction."
+   },
+   {
+    "node": "lem-sf-proper-open-comparison-site-normalization",
+    "why": "Fixes the actual proper/open proetale arrow as the canonical transported etale arrow; required to compare named maps rather than only endpoints."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sf-refinement-comparison-isomorphism",
+  "lem-cbc-finite-clopen-mate-site-transport",
+  "lem-sf-proper-open-projection-mate",
+  "lem-cbc-proper-open-interchange-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-a2656086d",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-a2656086d (reviewer sub-agent of L); spot-checked: Read the item's 4-step split in full, with no new nodes. Statement and stmt_deps are identical to live and side-live, where the item is still unsplit with no proof, and no re-split note applies. Step 1: part (a) of def-sf-refinement-comparison-isomorphism (K0=k) gives Gamma_v=S(a)alpha^p J2(a)^{-1} and Noetherian compactifications, so the square (j1,j2,1_X,v) meets the hypotheses of lem-cbc-finite-clopen-mate-site-transport (finite Lambda, qc opens, proper r=id and p=v, no cartesian requirement, L and k_!L in D^+). Step 2: I checked the transport equation with (V,W,S,T;k,i,r,p)=(X,Xbar1,X,Xbar2;j1,j2,1,v). Its alpha^p is the same clopen-projection composite as in lem-sf-proper-open-projection-mate (refinement case = projection onto (j1,1)), so gamma^p is the item's gamma. Its gamma^e is the resolution-normalized map of interchange-coherence. b_1=1 follows from the counit equation of lem-weil-pbc-comparison-direct-image-canonical-mate. The transport's o_j and the item's e_j are the same comparison of lem-cbc-proetale-extension-zero-comparison (advisory: the step does not say so). Both sides run from nu*j2!H to Rv_*j1!K. Step 3: interchange-coherence's refinement clause gives gamma^e=alpha^e; with lem-sf-proper-open-comparison-site-normalization (hypotheses met) and cancelling e_j2 this gives alpha^p_v(H)=gamma_{v,K} as actual maps. Step 4: naturality of gamma at the witness a gives Gamma_v=gamma_{v,M}, and witness independence and naturality in t follow. Edge cases checked: empty X, v=id, an extra clopen component killed by the projection, change of witness. No duplicate of the witnessed equality among the citers of projection-mate and site-normalization. Source is blueprint prop-sf-pf-coherence.proof.md, compactification-independence sentence. No SGA. All six off-unit tool_uses are declared and accepted. Batch-5 flag on lem-cbc-finite-clopen-mate-site-transport: its trf/pod closure (def-trf-schematically-dense-open, trf affine-open-limit-descent, trf localization-ess-surj, trf proper-finite-fibre-finite-near, pod separated-finite-type base change, pod lisse/local-constancy) is exactly the closure of the base stmt_deps interchange-coherence and site-normalization. So it adds nothing, and these are generic geometry and definitions, not steps of the trace-formula or Poincaré-duality proofs; accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityWitnessedMateNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.purityWitnessedMateNormalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.purityNormalizationCoefficientFinite",
+   "AlgebraicGeometry.ProEtale.purityRefinementMate",
+   "AlgebraicGeometry.ProEtale.purityEtaleRefinementComparison",
+   "AlgebraicGeometry.ProEtale.purityRefinementSiteWordPlus",
+   "AlgebraicGeometry.ProEtale.purityRefinementSiteWord",
+   "AlgebraicGeometry.ProEtale.purityWitnessedMateNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/PurityWitnessedMateNormalization.lean",
+  "statement": "theorem purityWitnessedMateNormalization (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [IsSeparated (Y ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] {c₁ c₂ : Compactification f} (v : c₁.Refinement c₂) (M : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))) (w : X.FixedEtaleOriginWitness P.Coefficient M) : (refinementProperOpenIsoFixed P.Coefficient v M w).hom = (purityRefinementMate P v).app M.obj ∧ (purityRefinementMate P v).app ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.obj w.complex.obj) = purityRefinementSiteWord P v w.complex ∧ (∀ (M' : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))) (w' : X.FixedEtaleOriginWitness P.Coefficient M') (t : M.obj ⟶ M'.obj), (refinementProperOpenIsoFixed P.Coefficient v M w).hom ≫ (ProperOpenPush P.Coefficient v.hom).map ((ProperOpenShriek P.Coefficient c₁.i).map t) = (ProperOpenShriek P.Coefficient c₂.i).map t ≫ (refinementProperOpenIsoFixed P.Coefficient v M' w').hom)",
+  "branch": "sheaf-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15e278c21",
+  "group": "NV",
+  "result": "pass",
+  "note": "Every clause matches. Γ_v (refinementProperOpenIsoFixed) is the exact part (a) formula J2(a)^-1, α^p(H), Rv_*J1(a) on FixedEtaleOriginWitness. γ_v is the recorded properOpenMate for (j1,1,v,j2), precomposed with the canonical conjugate of leftDerivedUpperStarId. The conjuncts are: equality at M; the 4-factor word e2^-1, ν*(γ^e), b_v, Rv_*(e1) with canonical D+ inclusions; naturality for all t:M→M' with arbitrary witnesses. Hypotheses are separated finite type over k for X, Y and f; no extra hypothesis and no universe restriction. Records: item and dependency differ from live only in lean; both statements verbatim; only sorry is the theorem proof; docstrings carry the 4 steps. The §1(B) RefinementComparisonFixedWitness re-exports the original module. Advisories: (1) the dependency record dropped 7 landed declarations (refinementCoefficientEquivalence, refinementFixedObject, ...) from its list; the module is re-exported, so restore optional. (2) b_v (fixedComparisonDirectImageMatePlus, from theorem node lem-weil-pbc-comparison-direct-image-canonical-mate) and γ^e (normalizedComparison, from def-cbc-etale-clopen-mate-normalization-data) are not cited by the item. Both are the exact maps of cited dependencies: site-normalization's Lean uses b_v verbatim, and γ^e is the .choose of the interchange-coherence ∃, pinned by its clauses. (3) Missing space in module docstring. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261025T203648-L-2838662",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

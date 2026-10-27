@@ -23,7 +23,7 @@ def frontier(graph, dependencies):
     ready, seen = [], set()
     def visit(nid):
         nid = graph.resolve(nid)
-        if nid in seen or nid not in graph.live or graph.stated(nid):
+        if nid in seen or nid in graph.route_dropped or nid not in graph.live or graph.stated(nid):
             return
         seen.add(nid)
         deps = missing(graph, graph.deps(nid, "stmt"))

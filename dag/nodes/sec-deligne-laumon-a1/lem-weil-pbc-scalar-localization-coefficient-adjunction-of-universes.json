@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-pbc-scalar-localization-coefficient-adjunction-of-universes",
+ "kind": "statement",
+ "title": "Exact restriction and normalized adjunction for the independent-universe tensor model",
+ "statement": "Let C be a category with independent object and morphism universes, r a coefficient universe, J a Grothendieck topology with additive sheafification and its locally-bijective detection, and commutative-ring forgetful composition. For commutative ring sheaves O,Oprime and phi:O -> Oprime, restriction [def-pc-sheaf-restrict-scalars] preserves finite limits and finite colimits. Every additive functor E presenting changeOfRingsOfUniverses [def-pur-sheaf-tensor-product] on both objects and maps is left adjoint to that restriction. The Hom correspondence on eqToHom(h M) followed by f sends a local section x to f of the sheafification class of 1 tensor x, using [def-weil-presheaf-modules-sheafification].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CZ, lemma-adjointness-tensor-restrict; Tag 03DA, lemma-abelian; Tag 03DB, lemma-limits-colimits"
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Construct the sectionwise extension/restriction Hom equivalence between tensor presheaf maps and restriction maps. Pure-tensor naturality makes these module-presheaf maps. Compose with the module sheafification Hom equivalence. The two-variable naturality constructs the adjunction; its Hom map is the stated 1-tensor formula. Transport along the natural isomorphism from the supplied object and map equalities.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction followed by forgetting to additive sheaves is the same forgetful functor as before restriction. That functor preserves finite limits and finite colimits and reflects them. Apply the reflection-of-preservation lemmas to obtain both exactness instances.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CZ, lemma-adjointness-tensor-restrict; Tag 03DA, lemma-abelian; Tag 03DB, lemma-limits-colimits"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of extension of scalars is left adjoint to restriction of scalars on sheaves of modules",
+   "results": "Found module sheafificationAdjunction, sheafificationHomEquiv, their section formulas and sheaf pullback adjunctions. The same-site tensor Hom correspondence must be assembled.",
+   "verdict": "no exact match",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendRestrictScalarsAdj",
+   "results": "Found the sectionwise extension/restriction adjunction and its 1-tensor unit formula, used in the proof.",
+   "verdict": "no exact match",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "extendRestrictScalarsAdj",
+   "results": "Found the ordinary module adjunction in Mathlib.Algebra.Category.ModuleCat.ChangeOfRings; no sheafified independent-universe tensor interface.",
+   "verdict": "no exact match",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ScalarLocalizationTelescopeOfUniverses",
+  "date": "2026-10-27",
+  "group": "X8"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "Proof, first paragraph ('Lf^* is exact', cohomology sheaves are pullbacks): rational-coefficient realization and normalized Hom transport used to justify that pullback; scalar-localization substep: Exact restriction and normalized adjunction for the independent-universe tensor model",
+   "via": [
+    "lem-weil-pbc-scalar-localization-telescope-of-universes",
+    "lem-per-rational-realization-hom-transport",
+    "lem-per-constructible-rational-hom-comparison",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ScalarLocalizationCoefficientAdjunctionOfUniverses",
+  "file": "lean/Sheaf/CategoryTheory/ScalarLocalizationCoefficientAdjunctionOfUniverses.lean",
+  "declaration": "SheafOfModules.scalarLocalizationCoefficientAdjunctionOfUniverses",
+  "statement": "theorem scalarLocalizationCoefficientAdjunctionOfUniverses (φ : O ⟶ O') :\n    ∃ (_ : PreservesFiniteLimits (restrictScalars.{r}\n                    ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ)))\n      (_ : PreservesFiniteColimits (restrictScalars.{r}\n                    ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ))),\n    ∀ (E : SheafOfModules.{r} (((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) ⥤\n        SheafOfModules.{r} (((sheafCompose J (forget₂ CommRingCat RingCat)).obj O')))\n      (h : ∀ M, E.obj M = changeOfRingsOfUniverses φ M),\n      (∀ {M N} (f : M ⟶ N), E.map f =\n        eqToHom (h M) ≫ changeOfRingsHomOfUniverses φ M f ≫ eqToHom (h N).symm) →\n      ∀ [E.Additive], ∃ a : E ⊣ restrictScalars\n          ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ),\n        (∀ (M : SheafOfModules.{r} (((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)))\n          (N : SheafOfModules.{r} (((sheafCompose J (forget₂ CommRingCat RingCat)).obj O')))\n          (f : changeOfRingsOfUniverses φ M ⟶ N) (U : Cᵒᵖ) (x : M.val.obj U),\n          (a.homEquiv M N (eqToHom (h M) ≫ f)).val.app U x =\n            f.val.app U\n              ((CategoryTheory.toSheafify J (changeOfRingsPresheafOfUniverses φ M).presheaf).app U\n                ((1 : O'.obj.obj U) ⊗ₜ[O.obj.obj U, (φ.hom.app U).hom] x)))",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T112445-L-1586053",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T112445-L-1586053",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-reduced-singleton-field-factorization",
+ "kind": "statement",
+ "title": "Reduced singleton-image maps factor through a field monomorphism",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $X,Y$ algebraic spaces over $S$ [def-trf-algebraic-space], $F$ a field [def-weil-field], and $j:\\operatorname{Spec}F\\to X$ a quasi-compact monomorphism [def-weil-affine-spectrum]. Here monomorphism means injectivity of composition with $j$ on morphisms from every algebraic space over $S$, and quasi-compact means that after every scheme test inverse images of quasi-compact opens are quasi-compact. Let $x$ be the unique point in the image of $j$, with point classes and atlas topology [def-a1-space-point-topology]. If $Y$ is reduced (the rings of sections on affine opens of an etale scheme atlas have no nonzero nilpotents) and $f:Y\\to X$ has point image contained in $\\{x\\}$, there is a unique $S$-morphism $g:Y\\to\\operatorname{Spec}F$ with $j\\circ g=f$. No Noetherian hypothesis is imposed on $X$ or $Y$.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tags 0H1T (lemma-factor-through-residual-space-decent) and 0H1R (lemma-residual-space-monomorphism); uniqueness follows from the monomorphism hypothesis."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-sfb-reduced-algebraic-space",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine component $A$ of the atlas in [lem-a1-space-affine-etale-cover] with a point over $x$. Its etale image $E\\subseteq X$ is open and quasi-compact, and admits a quasi-compact scheme atlas, by [lem-a1-space-etale-open-image]. By [lem-a1-space-open-factor-scheme-tests], both $f$ and $j$ factor through $E$. The induced $j_E:\\operatorname{Spec}F\\to E$ remains quasi-compact: for every scheme $H\\to E$, its pullback is exactly $H\\times_X\\operatorname{Spec}F$ by the comparison in that node. It remains monomorphic by cancellation with $E\\hookrightarrow X$.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-a1-space-etale-open-image",
+    "lem-a1-space-open-factor-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0H1T, shrinking to a quasi-compact open neighbourhood."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-qc-space-schematic-strata] to $E$ and $j_E$. Obtain an open $U\\subseteq E$ and a closed subspace $T\\hookrightarrow U$ represented by a scheme, whose point image contains $x$. Both $f$ and $j$ factor through $U$ by [lem-a1-space-open-factor-scheme-tests]. Choose a reduced scheme atlas $w:W\\to Y$ as in the reducedness hypothesis; its affine section rings are reduced, so $W$ is reduced by [def-pc-reduced-scheme]. The pullback $P=W\\times_U T\\to W$ is a closed immersion of schemes by the closed-subspace convention in [lem-sfb-qc-space-schematic-strata]. Its point image is all of $|W|$ by [lem-a1-space-point-open-calculus], since $f w$ maps into $\\{x\\}\\subseteq|T|$. By [lem-weil-pbc-reduced-source-factors-through-closed-subscheme], the identity of $W$ factors through $P$. Projecting gives $b:W\\to T$ with composite $f w$. The same argument with the reduced scheme $\\operatorname{Spec}F$ in place of $W$ gives $j_T:\\operatorname{Spec}F\\to T$ with composite $j$.",
+   "uses": [
+    "lem-sfb-qc-space-schematic-strata",
+    "lem-a1-space-open-factor-scheme-tests",
+    "def-pc-reduced-scheme",
+    "lem-a1-space-point-open-calculus",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0H1T, schematic stratum and reduced-source factorization; uses schemes.tex Tag 0356 after an atlas instead of appealing to spaces-properties.tex Tag 03JJ without a node."
+   }
+  },
+  {
+   "text": "The map $T\\to X$ is injective on points: the closed-subspace clause of [lem-sfb-qc-space-schematic-strata] identifies $|T|$ with a subset of $|U|$, and the open inclusions identify $|U|$ with a subset of $|X|$ by [lem-a1-space-point-open-calculus]. Let $t$ be the image of $j_T$. Thus $b(|W|)\\subseteq\\{t\\}$. The map $j_T$ is a monomorphism of schemes: equality after $j_T$ implies equality after $j$, hence equality by the hypothesis on $j$. For arbitrary scheme tests the equality induces the same $S$-structure on the test, so that this cancellation applies to $S$-morphisms.",
+   "uses": [
+    "lem-sfb-qc-space-schematic-strata",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0H1T, reduction to the one-point scheme problem."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-morphism-from-spec-field], $j_T=i_t\\circ a$ for a morphism $a:\\operatorname{Spec}F\\to\\operatorname{Spec}\\kappa(t)$. Because $j_T$ is monomorphic, $a$ is monomorphic: if $a u=a v$, compose with $i_t$ and cancel $j_T$. Apply [lem-sfb-monomorphism-into-field-coproduct] to the one-element family with field $\\kappa(t)$. The subset of components cannot be empty because $\\operatorname{Spec}F$ is nonempty; hence $a$ is an isomorphism. Apply [lem-sfb-reduced-scheme-single-point-residue-factorization] to $b:W\\to T$: reducedness of $W$ and the singleton-image condition were checked above. It gives $h:W\\to\\operatorname{Spec}\\kappa(t)$ with $i_t h=b$. Set $g_W=a^{-1}h$. Then $j_Tg_W=b$ and $jg_W=fw$. All maps are over $S$: $T\\to S$ induces the structure on its residue-field spectrum, and composing $j_T=i_ta$ with $T\\to S$ shows $a$ is over $S$.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-sfb-monomorphism-into-field-coproduct",
+    "lem-sfb-reduced-scheme-single-point-residue-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0H1T, final reduction to morphisms.tex Tag 0H1M; schemes.tex Tag 03DP identifies the given field with the scheme residue field."
+   }
+  },
+  {
+   "text": "For every scheme test $H\\to Y$, the pullback $W_H\\to H$ is a surjective etale map of schemes by [def-trf-algebraic-space] and [lem-trf-space-fibre-products-etale-covers]. It is an fppf covering by [def-weil-etale-morphism] and [def-pc-fppf-site]. The restriction of $g_W$ to $W_H$ has equal pullbacks to $W_H\\times_H W_H$: their composites with $j$ both equal the restriction of $f$, and $j$ is monomorphic. The fppf sheaf condition for the algebraic space $\\operatorname{Spec}F$ [def-trf-algebraic-space] gives a unique map $g_H:H\\to\\operatorname{Spec}F$. The equality $jg_H=f|_H$ holds after the same cover, hence holds by the sheaf condition for $X$. For $H'\\to H$ over $Y$, the maps $g_{H'}$ and $g_H|_{H'}$ have equal composites with $j$, so are equal. The $g_H$ therefore define a natural transformation $g:Y\\to\\operatorname{Spec}F$, with $jg=f$. Any two such $g$ are equal by the stated monomorphism hypothesis. This also covers empty $Y$, since the sheaf condition on the empty covering gives the unique sections on empty tests.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0H1T, preliminary etale descent remark, expanded on scheme tests using the fppf sheaf definition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-pc-reduced-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-monomorphism-into-field-coproduct",
+  "lem-sfb-qc-space-schematic-strata",
+  "lem-sfb-reduced-scheme-single-point-residue-factorization",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 0H1T (lemma-factor-through-residual-space-decent), proof; avoids introducing residual spaces by explicitly identifying the given field monomorphism with the scheme residue field using Tags 01J9 and 03DP."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "factor.*[Rr]esidu|[Rr]esidu.*factor|factor.*[Pp]oint",
+   "results": "Search directory Mathlib/AlgebraicGeometry; 1 hits: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ringed-space or general-category results do not state this algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced source morphism to an algebraic space factors through the residue field at its unique image point",
+   "results": "8 hits: AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, AlgebraicGeometry.Scheme.descResidueField_fromSpecResidueField, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.Scheme.fromSpecResidueField_apply, AlgebraicGeometry.specTargetImageFactorization, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, AlgebraicGeometry.LocallyRingedSpace.residueField",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ringed-space or general-category results do not state this algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"factorThru\"",
+   "results": "0 hits: none",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ringed-space or general-category results do not state this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a reduced algebraic space with singleton image factors uniquely through a quasi compact field monomorphism representing that point",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, AlgebraicGeometry.ext_of_isDominant, AlgebraicGeometry.ext_of_isDominant_of_isSeparated, AlgebraicGeometry.ext_of_isDominant_of_isSeparated', AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff, AlgebraicGeometry.ValuativeCriterion.Existence.eq",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ringed-space or general-category results do not state this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced scheme or algebraic space mapping to one point factors uniquely through a field spectrum which is quasi compact and monomorphic in the target",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField, AlgebraicGeometry.instHasStrictInitialObjectsScheme, AlgebraicGeometry.instHasTerminalScheme, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.instSubsingletonOverTerminalScheme, AlgebraicGeometry.instIsAffineTerminalScheme, AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf, AlgebraicGeometry.IsReduced",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ringed-space or general-category results do not state this algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced algebraic space with singleton image factors uniquely through a quasi compact monomorphism from a field spectrum",
+   "results": "8 hits: AlgebraicGeometry.instIsAffineOfSubsingletonCarrierCarrierCommRingCat, Algebra.QuasiFinite.iff_finite_comap_preimage_singleton, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.QuasiCompact.isCompact_preimage_singleton, CFC.spectrum_algebraMap_eq, AlgebraicGeometry.Scheme.range_fromSpecResidueField, Algebra.IsGeometricallyReduced.casesOn, AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes, not the asserted algebraic-space factorization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qs-space-rational-point-topology",
+  "date": "2026-10-23",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Theorem 5.3.1(3),(5), printed pp.29--30; these supply conditions (a),(b) used in Proposition 7.1.1. Supporting input for Theorem 5.3.1(3),(5): Topology of rational points of quasi-separated algebraic spaces. Supporting input: Reduced singleton-image maps factor through a field monomorphism.",
+   "via": [
+    "lem-sfb-qs-space-rational-point-topology",
+    "lem-sfb-adequate-geometric-fibres-submersion",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-reduced-singleton-field-factorization",
+  "worker": "stage1",
+  "summary": "Checked the unchanged assertion against Stacks 0H1T. Followed its quasi-compact-neighbourhood and schematic-stratum route, reduced the closed-subspace step to the existing scheme lemma on a reduced atlas, identified the given field monomorphism with the stratum residue field, and wrote descent on every scheme test explicitly. Two smaller statement-only inputs remain, and the existing field-coproduct monomorphism node supplies its singleton case; no Lean attachment or Mathlib leaf was found.",
+  "blueprint": "Supports the existing ancestry recorded in blueprint.from: the rational-point uniqueness input on the alteration/moduli branch of the direct-image proof. The current latest direct-images proof (3) is read for context; this generic algebraic-space input follows Stacks 0H1T and changes no unit-level route. The nearest blueprint ancestor is null as reported by blueprint_refs.py ancestor; preserved it and its via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic algebraic-space topology, scheme factorization, or fibre-product tool for the Stacks 0H1T reduction; does not replace any step of the unit direct-image route."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic algebraic-space topology, scheme factorization, or fibre-product tool for the Stacks 0H1T reduction; does not replace any step of the unit direct-image route."
+   },
+   {
+    "node": "lem-a1-space-open-factor-scheme-tests",
+    "why": "Generic algebraic-space topology, scheme factorization, or fibre-product tool for the Stacks 0H1T reduction; does not replace any step of the unit direct-image route."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic algebraic-space topology, scheme factorization, or fibre-product tool for the Stacks 0H1T reduction; does not replace any step of the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic algebraic-space topology, scheme factorization, or fibre-product tool for the Stacks 0H1T reduction; does not replace any step of the unit direct-image route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space topology, scheme factorization, or fibre-product tool for the Stacks 0H1T reduction; does not replace any step of the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-8d67c1935",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-8d67c1935 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full. I checked them against decent-spaces.tex 0H1T (whole proof), 0H1R, 0BBN (lemma-filter-quasi-compact, both clauses and the proof) and morphisms.tex 0H1M. The item statement is unchanged and equals 0H1T with k=F: no hypothesis dropped, uniqueness from the monomorphism. Step 1: an affine component's open quasi-compact image E; f and j factor through E; j_E stays quasi-compact via the comparison H×_E Spec F ≅ H×_X Spec F, and stays a monomorphism by cancellation. Step 2: the 0BBN stratum T ⊂ U ⊂ E contains x. P=W×_U T→W is a closed immersion whose image is all of |W| (point-open-calculus image formula). Reduced W then gives b:W→T via lem-weil-pbc-reduced-source-factors-through-closed-subscheme, and likewise j_T for Spec F. Step 3: |T|→|X| is injective, and j_T is a monomorphism of schemes with the S-structure handled. Step 4: j_T=i_t a (morphism-from-spec-field); a is a monomorphism and therefore an isomorphism by the singleton case of lem-sfb-monomorphism-into-field-coproduct, since Spec F is nonempty; the 0H1M node gives h, and g_W=a^{-1}h. Step 5: explicit fppf gluing on scheme tests from definitions, with naturality and uniqueness from the monomorphism; empty Y is fine. New nodes: lem-sfb-qc-space-schematic-strata is a true weakened form of 0BBN (T_p a reduced scheme) with no quasi-separatedness; it is not the 07ST node lem-sfb-qcqs-space-splitting-filtration, which needs quasi-separatedness. lem-sfb-reduced-scheme-single-point-residue-factorization is 0H1M; no duplicate exists, and the closed-subscheme lemma does not cover non-closed points. The k[t]→k[ε] example shows reducedness is needed. Both nodes are statement-only, self-contained and cite no SGA, and neither restates the item. Batch 5: def-trf-algebraic-space is a general definition; the a1 point/open-subspace nodes reach sec-trace-formula only through that definition; lem-trf-space-fibre-products-etale-covers is generic fibre-product/étale-cover foundations. None is a step of the trace formula or Poincaré duality, so none is a fault. The split_report tool_uses (a1/trf/pbc generic tools) are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedSingletonFieldFactorization",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.existsUnique_factor_through_field_of_reduced_singleton_image",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedSingletonFieldFactorization.lean",
+  "statement": "theorem existsUnique_factor_through_field_of_reduced_singleton_image {S : Scheme.{u}} (X Y : AlgebraicSpace S) (F : Type u) [Field F] (s : Spec (CommRingCat.of F) ⟶ S) (j : yoneda.obj (Over.mk s) ⟶ X.obj.obj) [Mono j] (hqc : MapIsQuasiCompact j) (hred : IsReduced Y) (f : Y ⟶ X) (himage : pointImage f.hom.hom ⊆ {schemePointMap j (IsLocalRing.closedPoint F)}) : ∃! g : Y.obj.obj ⟶ yoneda.obj (Over.mk s), g ≫ j = f.hom.hom",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00c57189b",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Checked each binder against the node and Stacks 0H1T. Presheaf Mono j is equivalent to the node's monomorphism (representable tests); MapIsQuasiCompact (affine tests, compact point space of the representable pullback) is equivalent to the node's quasi-compactness and is the same predicate AlgebraicSpaceMorphismProperties uses; IsReduced (all étale charts reduced) is equivalent to the node's reducedness by étale locality; x = schemePointMap j closedPoint is canonical; pointImage ⊆ {x}; ∃! g : Y → h_SpecF over S with g ≫ j = f. No extra hypotheses; empty Y, non-closed x and the u-universe field are covered. lean.statement is verbatim in the file; the two added stmt_deps are landed owner def nodes; no dep edits or new nodes; sorry only; docstrings carry source, blueprint id and the 5 proof steps. Advisory: unused non-public proof-input imports; Second reading section is the standard direct-delivery stub."
+ }
+}

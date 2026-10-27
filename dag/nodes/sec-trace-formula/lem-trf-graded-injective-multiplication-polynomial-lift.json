@@ -1,0 +1,179 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00K1, proposition-graded-hilbert-polynomial, final paragraph and displayed shifted exact sequence, together with Tag 00JZ, lemma-numerical-polynomial, finite-difference integration in the binomial basis, specialized to rational-valued dimensions."
+ },
+ "proof": [
+  {
+   "text": "The subspace $xN$ is graded: if $m=\\sum_jm_j$ is the finite homogeneous decomposition of an element of $N$, then $xm=\\sum_jxm_j$ and $xm_j\\in N_{j+1}$. Comparing homogeneous components gives $(xN)\\cap N_0=0$ and $(xN)\\cap N_{n+1}=xN_n$. It also shows that the images of the $N_j$ in $C$ have direct sum: if a finite sum $\\sum_jv_j$ lies in $xN$, comparing its components gives $v_j\\in xN$ individually. These images span $C$, so they give exactly its quotient grading. Multiplication by $x$ is $k$-linear and restricts to an injective map $N_n\\to N_{n+1}$. The map $N_{n+1}\\to C_{n+1}$ is surjective by the definition of $C_{n+1}$ and has kernel $xN_n$ by the preceding component comparison. This proves the asserted exact sequence in every degree, including $n=0$.",
+   "uses": [
+    "def-pc-standard-graded-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00K1, proposition-graded-hilbert-polynomial, final paragraph and displayed shifted exact sequence, together with Tag 00JZ, lemma-numerical-polynomial, finite-difference integration in the binomial basis, specialized to rational-valued dimensions."
+   }
+  },
+  {
+   "text": "Put $U=xN_n\\subseteq N_{n+1}$. The maps $N_n\\to U$, $m\\mapsto xm$, and $N_{n+1}/U\\to C_{n+1}$, $v+U\\mapsto\\overline v$, are linear bijections: the first uses the assumed injectivity; the second uses precisely the kernel and surjectivity proved in step 1. A linear bijection sends a basis to a basis. Since $N_{n+1}$ is finite-dimensional, [lem-trf-vector-space-quotient-dimension] shows that $U$, $N_{n+1}/U$, and hence $C_{n+1}$ are finite-dimensional and gives $\\dim_kC_{n+1}+\\dim_kN_n=\\dim_kN_{n+1}$. Rearranging in $\\mathbf Z$, or after embedding the dimensions in $\\mathbf Q$, gives the stated difference formula.",
+   "uses": [
+    "lem-trf-vector-space-quotient-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00K1, proposition-graded-hilbert-polynomial, final paragraph and displayed shifted exact sequence, together with Tag 00JZ, lemma-numerical-polynomial, finite-difference integration in the binomial basis, specialized to rational-valued dimensions."
+   }
+  },
+  {
+   "text": "Now assume $\\dim_kC_n=P(n)$ for all $n\\ge d$. Regard dimensions as rational numbers and put $H(n)=\\dim_kN_n$, $f(t)=H(d+t)$, and $A(X)=P(X+d+1)$. Step 2 gives $f(t+1)-f(t)=P(d+t+1)=A(t)$ for every $t\\ge0$, because $d+t+1\\ge d$. Choose a natural number $b$ strictly exceeding $\\deg A$ (take $b=1+\\operatorname{natdeg}A$, also when $A=0$). Apply [lem-trf-rational-sequence-polynomial-forward-difference] to obtain $R\\in\\mathbf Q[X]$ with $R(t)=f(t)$ for all natural $t$. Set $B(X)=R(X-d)$, $c=0$, and $e=d$. For $n\\ge e$ the natural number $t=n-d$ satisfies $d+t=n$, so $B(n)+c=R(t)=H(n)$.",
+   "uses": [
+    "lem-trf-rational-sequence-polynomial-forward-difference"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00K1, proposition-graded-hilbert-polynomial, final paragraph and displayed shifted exact sequence, together with Tag 00JZ, lemma-numerical-polynomial, finite-difference integration in the binomial basis, specialized to rational-valued dimensions."
+   }
+  },
+  {
+   "text": "For every natural $n\\ge d+1$, both $n$ and $n-1$ lie in the range of the formula just proved. Hence $B(n)-B(n-1)=H(n)-H(n-1)=\\dim_kC_n=P(n)$ by step 2. The rationals represented by the integers $n\\ge d+1$ are pairwise distinct and form an infinite set. Apply [lem-trf-polynomial-infinite-evaluation-identity] over the integral domain $\\mathbf Q$ to the polynomials $B(X)-B(X-1)$ and $P(X)$; this proves their equality as polynomials. No nonzero assumption on $P$ or $N$ was used. In particular the construction also covers $P=0$, when $H$ is eventually constant, and $N=0$, when all the displayed dimensions vanish.",
+   "uses": [
+    "lem-trf-polynomial-infinite-evaluation-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00K1, proposition-graded-hilbert-polynomial, final paragraph and displayed shifted exact sequence, together with Tag 00JZ, lemma-numerical-polynomial, finite-difference integration in the binomial basis, specialized to rational-valued dimensions."
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00K1, proposition-graded-hilbert-polynomial, final paragraph and displayed shifted exact sequence, together with Tag 00JZ, lemma-numerical-polynomial, finite-difference integration in the binomial basis, specialized to rational-valued dimensions."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-standard-graded-hilbert-function",
+  "date": "2026-10-22",
+  "group": "Q112"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "id": "lem-trf-graded-injective-multiplication-polynomial-lift",
+ "title": "Polynomial lifting through injective multiplication in degree one",
+ "statement": "Let $k$ be a field, let $S=\\bigoplus_{n\\ge0}S_n$ be a standard graded $k$-algebra [def-pc-standard-graded-algebra], and let $N=\\bigoplus_{n\\ge0}N_n$ be an $S$-module with a direct-sum decomposition into finite-dimensional $k$-subspaces such that $S_iN_j\\subseteq N_{i+j}$. Let $x\\in S_1$ and assume that $m\\mapsto xm$ is injective on $N$. Give $C=N/xN$ its quotient grading $C_n=\\operatorname{im}(N_n\\to C)$. For every $n\\ge0$ there is an exact sequence of finite-dimensional $k$-spaces $0\\to N_n\\xrightarrow{x}N_{n+1}\\to C_{n+1}\\to0$, and consequently $\\dim_kN_{n+1}-\\dim_kN_n=\\dim_kC_{n+1}$. If $P\\in\\mathbf Q[X]$ and $d\\in\\mathbf N$ satisfy $\\dim_kC_n=P(n)$ for all $n\\ge d$, then there are $B\\in\\mathbf Q[X]$, $c\\in\\mathbf Q$, and $e\\in\\mathbf N$ such that $B(X)-B(X-1)=P(X)$ as polynomials and $\\dim_kN_n=B(n)+c$ for all $n\\ge e$. The polynomial $P$ and the module $N$ may be zero.",
+ "stmt_deps": [
+  "def-pc-standard-graded-algebra",
+  "def-weil-vector-space-dimension",
+  "def-weil-polynomial-ring"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If multiplication by a degree one element x on a graded module N is injective and the dimensions of (N/xN) in degree n are eventually a rational polynomial, then the dimensions of N in degree n are eventually polynomial by discrete integration",
+   "results": "{\"t\": \"2026-10-22T06:09:19Z\", \"tool\": \"leanfinder\", \"query\": \"If multiplication by a degree one element x on a graded module N is injective and the dimensions of (N/xN) in degree n are eventually a rational polynomial, then the dimensions of N in degree n are eventually polynomial by discrete integration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"ChevalleyThm.MvPolynomialC.degBound_succ\", \"Module.supportDim_quotSMulTop_succ_eq_supportDim\", \"ChevalleyThm.MvPolynomialC.degBound_casesOn_succ\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"HomogeneousLocalization.Away.eventually_smul_mem\", \"ChevalleyThm.MvPolynomialC.degBound\", \"MvPolynomial.IsHomogeneous.funext_of_le_card\"], \"digest\": \"7f6eff20c9ab33c1\"}; Read RingTheory/Polynomial/HilbertPoly.lean:18-42,59-70,100-112 and the returned signatures. Polynomial.hilbertPoly assumes a formal rational-series presentation, not this graded-module recurrence. The choose-sum identities give combinatorial sums, not the degreewise quotient exact sequence and polynomial lifting theorem. No exact or one-line specialization found.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sum\" , \"choose\"",
+   "results": "{\"t\": \"2026-10-22T06:09:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"sum\\\" , \\\"choose\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Nat.sum_range_multichoose\", \"Nat.sum_range_choose\", \"Nat.sum_Icc_choose\", \"Finset.sum_antidiagonal_choose_add\", \"Nat.sum_range_choose_halfway\", \"Int.alternating_sum_range_choose_of_ne\", \"Nat.sum_range_add_choose\", \"Nat.sum_range_mul_choose\"], \"digest\": \"1d14f202710f845d\"}; Read RingTheory/Polynomial/HilbertPoly.lean:18-42,59-70,100-112 and the returned signatures. Polynomial.hilbertPoly assumes a formal rational-series presentation, not this graded-module recurrence. The choose-sum identities give combinatorial sums, not the degreewise quotient exact sequence and polynomial lifting theorem. No exact or one-line specialization found.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "discrete|difference|sum.*choose|choose.*sum",
+   "results": "{\"t\": \"2026-10-22T06:09:09Z\", \"tool\": \"grep\", \"query\": \"discrete|difference|sum.*choose|choose.*sum\", \"sub\": \"RingTheory/Polynomial\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Basic.lean\", \"Mathlib/RingTheory/Polynomial/HilbertPoly.lean\", \"Mathlib/RingTheory/Polynomial/Bernstein.lean\"], \"digest\": \"927a5dfa7536ef4a\"}; Read RingTheory/Polynomial/HilbertPoly.lean:18-42,59-70,100-112 and the returned signatures. Polynomial.hilbertPoly assumes a formal rational-series presentation, not this graded-module recurrence. The choose-sum identities give combinatorial sums, not the degreewise quotient exact sequence and polynomial lifting theorem. No exact or one-line specialization found.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Injective multiplication exact sequence graded module Hilbert function polynomial discrete antidifference in binomial polynomial basis",
+   "results": "{\"t\": \"2026-10-22T06:09:09Z\", \"tool\": \"leansearch\", \"query\": \"Injective multiplication exact sequence graded module Hilbert function polynomial discrete antidifference in binomial polynomial basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.mul_X_pow_injective\", \"PowerSeries.X_pow_mul_injective\", \"Polynomial.hilbertPoly\", \"Polynomial.hilbertPoly_mul_one_sub_succ\", \"PowerSeries.X_mul_injective\", \"PowerSeries.mul_X_injective\", \"Polynomial.monomial_injective\", \"Polynomial.hilbertPoly_mul_one_sub_pow_add\"], \"digest\": \"4babad2e22093880\"}; Read RingTheory/Polynomial/HilbertPoly.lean:18-42,59-70,100-112 and the returned signatures. Polynomial.hilbertPoly assumes a formal rational-series presentation, not this graded-module recurrence. The choose-sum identities give combinatorial sums, not the degreewise quotient exact sequence and polynomial lifting theorem. No exact or one-line specialization found.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sequence of rational numbers with successive differences eventually polynomial is eventually polynomial; apply to finrank of graded pieces via regular degree one multiplication",
+   "results": "{\"t\": \"2026-10-22T06:09:19Z\", \"tool\": \"leanfinder\", \"query\": \"A sequence of rational numbers with successive differences eventually polynomial is eventually polynomial; apply to finrank of graded pieces via regular degree one multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.eventually_smul_mem\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"ChevalleyThm.MvPolynomialC.degBound_succ\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"MvPolynomial.IsHomogeneous.funext_of_le_card\", \"HomogeneousLocalization.NumDenSameDeg.deg_pow\"], \"digest\": \"ee5177a04b04bf68\"}; Read RingTheory/Polynomial/HilbertPoly.lean:18-42,59-70,100-112 and the returned signatures. Polynomial.hilbertPoly assumes a formal rational-series presentation, not this graded-module recurrence. The choose-sum identities give combinatorial sums, not the degreewise quotient exact sequence and polynomial lifting theorem. No exact or one-line specialization found.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "antidiff|discrete|difference|descPochhammer|ascPochhammer",
+   "results": "{\"t\": \"2026-10-22T06:09:33Z\", \"tool\": \"grep\", \"query\": \"antidiff|discrete|difference|descPochhammer|ascPochhammer\", \"sub\": \"Algebra/Polynomial\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Polynomial/Mirror.lean\", \"Mathlib/Algebra/Polynomial/CoeffList.lean\", \"Mathlib/Algebra/Polynomial/Sequence.lean\", \"Mathlib/Algebra/Polynomial/Sequence.lean\"], \"digest\": \"56beb780f60bee03\"}; Read RingTheory/Polynomial/HilbertPoly.lean:18-42,59-70,100-112 and the returned signatures. Polynomial.hilbertPoly assumes a formal rational-series presentation, not this graded-module recurrence. The choose-sum identities give combinatorial sums, not the degreewise quotient exact sequence and polynomial lifting theorem. No exact or one-line specialization found.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "proof_deps": [
+  "def-pc-standard-graded-algebra",
+  "lem-trf-vector-space-quotient-dimension",
+  "lem-trf-rational-sequence-polynomial-forward-difference",
+  "lem-trf-polynomial-infinite-evaluation-identity"
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration algebra under lem-trf-local-term-locality proof (1)--(2), through lem-trf-log-smooth-log-regular: ILO VI 1.6(i)--(ii) formal chart models; this input expands the formal-monoid dimension argument. Hilbert--Samuel dimension theorem explicitly named in the dimension input to the completed formal models. The graded-ring calculation underlying the Hilbert--Samuel input (Stacks 00K8). Within this algebra input: the shifted degreewise exact sequence of Stacks 00K1 and rational binomial-polynomial integration of 00JZ (old steps 6--7).",
+   "via": [
+    "lem-trf-standard-graded-hilbert-function",
+    "lem-trf-hilbert-samuel-growth-dimension",
+    "lem-trf-formal-monoid-ring-dimension",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-graded-injective-multiplication-polynomial-lift",
+  "worker": "stage1",
+  "summary": "Checked Stacks 00K1 and 00JZ; gave the homogeneous-kernel argument, used the quotient dimension formula, attached the existing project theorem on polynomial forward differences, and supplied the exact threshold shifts and polynomial-identity argument. The statement is unchanged and zero cases are included.",
+  "blueprint": "Within the inherited historical algebra input to lem-trf-local-term-locality, these steps realize the shifted exact sequence of Stacks 00K1 and the numerical integration of 00JZ, previously delegated in lem-trf-standard-graded-hilbert-function steps 6–7. No chapter or unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-17d332cca",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-17d332cca (reviewer sub-agent of L); spot-checked: I read Stacks algebra.tex 00K1 (the final paragraph: reduction to injective x and the shifted sequence 0→M_d→M_{d+1}→M̄_{d+1}→0) and 00JZ (numerical integration). The item states exactly that argument, specialized to dimensions over a field. Its statement is identical to live. There is no repair note and live is still unsplit, so this delivery is not superseded. The two added stmt_deps (vector-space dimension, polynomial ring) are both used by the statement. Step 1 (elementary): xm_j lies in N_{j+1}, so (xN)∩N_0=0, (xN)∩N_{n+1}=xN_n, and the images of the N_j form a direct sum; I checked this by direct component comparison. Step 2: the quotient-dimension leaf applies to V=N_{n+1}, which is finite-dimensional, and U=xN_n, with bijections N_n≅U and N_{n+1}/U≅C_{n+1}; this is also where finiteness of C_{n+1} comes from. Step 3: f(t)=H(d+t) and A(X)=P(X+d+1) give the forward-difference recurrence for all t≥0; b=1+natDeg A works also when A=0; B(X)=R(X−d), c=0, e=d. Step 4: for n≥d+1, B(n)−B(n−1)=P(n), and Polynomial.eq_of_infinite_eval_eq over ℚ gives B(X)−B(X−1)=P(X); there is no off-by-one. New nodes: the quotient-dimension leaf matches RankNullity.lean:248 plus the instances at FiniteDimensional/Defs.lean:132–139. The infinite-evaluation leaf matches Roots.lean:156 exactly. The forward-difference node is true (b=0 and A=0 edge cases checked). Project Lean ForwardDiff.lean:78–93 states it exactly and the file has no sorry; the node is correctly left unsplit with a lean_candidates attachment. None of the three nodes restates a clause of the item, and all are in the unit or are Mathlib leaves, so no tool_uses are needed. The dup search found only lem-weil-pbc-idempotent-charpoly-rank-nullity, which assumes the target finite-dimensional and so is not a one-line replacement, plus geometric Hilbert-polynomial nodes; none duplicates a new node. Minor: the report cites a citations.json that is not in the commit. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GradedInjectiveMultiplicationPolynomialLift",
+  "declaration": "GradedAlgebra.injective_multiplication_polynomial_lift",
+  "file": "lean/Sheaf/RingTheory/GradedInjectiveMultiplicationPolynomialLift.lean",
+  "statement": "theorem injective_multiplication_polynomial_lift {k : Type u} {S : Type v} {N : Type w} [Field k] [CommRing S] [Algebra k S] [AddCommGroup N] [Module k N] [Module S N] [IsScalarTower k S N] (𝒜 : ℕ → Submodule k S) [GradedAlgebra 𝒜] [IsStandard 𝒜] (𝒩 : ℕ → Submodule k N) [DirectSum.Decomposition 𝒩] [SetLike.GradedSMul 𝒜 𝒩] [∀ n : ℕ, FiniteDimensional k (𝒩 n)] (x : S) (hx : x ∈ 𝒜 1) (hinj : Function.Injective (fun m : N ↦ x • m)) : DirectSum.IsInternal (fun n : ℕ ↦ (𝒩 n).map ((x • (⊤ : Submodule S N)).mkQ.restrictScalars k)) ∧ (∀ n : ℕ, FiniteDimensional k ((𝒩 n).map ((x • (⊤ : Submodule S N)).mkQ.restrictScalars k))) ∧ (∀ n : ℕ, ∃ μ : 𝒩 n →ₗ[k] 𝒩 (n + 1), ∃ q : 𝒩 (n + 1) →ₗ[k] ((𝒩 (n + 1)).map ((x • (⊤ : Submodule S N)).mkQ.restrictScalars k)), (∀ m : 𝒩 n, (μ m : N) = x • (m : N)) ∧ (∀ m : 𝒩 (n + 1), (q m : QuotSMulTop x N) = Submodule.Quotient.mk (m : N)) ∧ Function.Injective μ ∧ Function.Exact μ q ∧ Function.Surjective q ∧ (Module.finrank k (𝒩 (n + 1)) : ℚ) - (Module.finrank k (𝒩 n) : ℚ) = (Module.finrank k ((𝒩 (n + 1)).map ((x • (⊤ : Submodule S N)).mkQ.restrictScalars k)) : ℚ)) ∧ (∀ (P : Polynomial ℚ) (d : ℕ), (∀ n : ℕ, d ≤ n → (Module.finrank k ((𝒩 n).map ((x • (⊤ : Submodule S N)).mkQ.restrictScalars k)) : ℚ) = P.eval (n : ℚ)) → ∃ (B : Polynomial ℚ) (c : ℚ) (e : ℕ), B - B.comp (Polynomial.X - Polynomial.C 1) = P ∧ ∀ n : ℕ, e ≤ n → (Module.finrank k (𝒩 n) : ℚ) = B.eval (n : ℚ) + c)",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39646f2c2",
+  "group": "Q52",
+  "result": "pass",
+  "note": "First stage-2 delivery (live lean null). The snapshot module is identical to the packet and lean.statement is verbatim in the file. Clause-by-clause match with the node and Stacks 00K1/00JZ: IsStandard 𝒜 + GradedAlgebra, Decomposition 𝒩 + GradedSMul + finite-dimensional pieces, x∈𝒜 1, injectivity; C_n = image of N_n in QuotSMulTop x N with IsInternal and finite-dimensionality; exact sequence with μ and q pinned by normalization equations (injective, exact, surjective); dimension recurrence in ℚ; polynomial lift B - B.comp(X - C 1) = P with eventual dim N_n = B(n)+c. No extra assumptions; universes independent and bound. Mathematically sound (homogeneous component comparison; ForwardDiff + eq_of_infinite_eval_eq); edge cases n=0, d=0, P=0, N=0 covered. No new definitions, sorry-only proof, docstrings with source/blueprint and proof steps. The only project declaration, IsStandard, is a stmt_dep. Not recompiled per instruction; imports verified to exist."
+ }
+}

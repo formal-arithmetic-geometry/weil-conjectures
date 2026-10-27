@@ -15,32 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Write $P^0=s^*_{\\bullet}$, $J^0=s_{!,\\bullet}$ and $E=s_{*,\\bullet}$ for the ordinary system functors. For every pro-etale test object $H\\to X$, put $H_U=H\\times_XU$ and $H_C=H\\times_X(X\\setminus s(U))$. The two open immersions form a covering in [def-weil-pbc-proetale-site]: every affine open of $H$ is quasi-compact and hence covered by finitely many affine opens in these two pieces. Their intersection is empty. The sheaf equalizer of [def-weil-pbc-sites-and-cohomology], including the empty covering of the empty object, gives $M_n(H)=M_n(H_U)\\times M_n(H_C)$ with $M_n(\\varnothing)=0$. Restriction maps and scalar actions preserve both factors [def-weil-sheaf-of-modules-category]. Every semilinear transition of [lem-coef-semilinear-derived-sections] preserves them too: restriction commutes with the transition and $t(ax)=\\phi_n(a)t(x)$. Thus this is a decomposition of actual ordinary systems, natural in $M$ and $H$.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-proetale-site",
-    "def-weil-sheaf-of-modules-category",
-    "lem-coef-semilinear-derived-sections"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI (lemma-extension-by-zero), disjoint-cover specialization; the two-factor calculation is the sheaf axiom"
-   }
-  },
-  {
-   "text": "By the direct-image section formula in [def-sp-varying-ring-operations], $(EF)_n(H)=F_n(H_U)$, and $P^0EF=F$ canonically. For a system map $a:F\\to P^0M$, the maps $x\\mapsto(a(x),0)$ define $EF\\to M$ under step 1's decomposition. Conversely, restrict any map $EF\\to M$ to objects over $U$. These operations are inverse: over $H_C$ the source is zero, and over $H_U$ its map is the restricted one; sheaf uniqueness identifies the map over $H$. The formulas commute with all transitions and are linear over the section-ring restrictions. They give $E\\dashv P^0$ with unit $1\\to P^0E$ the identity. The specified adjunction $J^0\\dashv P^0$ of [def-sp-varying-ring-operations] therefore gives a unique natural isomorphism $\\kappa:J^0\\xrightarrow{\\sim}E$ carrying its unit $u^0$ to this identity: $P^0\\kappa\\circ u^0=1$. Explicitly the inverse is the adjunct of $u^0$; each composite is the identity because its adjunct is the same unit.",
-   "uses": [
-    "def-sp-varying-ring-operations"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI (lemma-extension-by-zero), adjunction; explicit clopen section formula and uniqueness of its left adjoint"
-   }
-  },
-  {
-   "text": "The ordinary right adjunction $P^0\\dashv E$ in [def-sp-varying-ring-operations] has counit $P^0EF\\to F$ the identity and unit $q_M:M\\to EP^0M$ given on sections by $(x,y)\\mapsto x$. Indeed the right-adjunction correspondence sends $b:P^0M\\to F$ to the map $(x,y)\\mapsto b(x)$, and sends this map back to $b$. Hence the right transpose of $\\kappa$ is $P^0\\kappa=(u^0)^{-1}$; $\\kappa$ is exactly the specified ordinary open-to-direct-image arrow of [def-sp-varying-ring-proper-open-arrows], rather than an unspecified isomorphism. Put $\\pi^0=(\\kappa P^0)^{-1}q$. It is identity on $U$ and zero on the complement. Therefore $(\\kappa P^0)\\pi^0=q=\\eta^0$, $P^0\\pi^0=u^0_{P^0(-)}$, and $c^*_{\\bullet}\\pi^0=0$. The last equality has zero target since $(EP^0M)_n(H)=M_n(\\varnothing)=0$ for $H$ over the complement.",
+   "text": "Use the ordinary open-unit and open-to-direct-image isomorphisms already proved for the specified system operations. Transfer finite-colimit preservation from extension to direct image. Localizing the ordinary open unit gives an identity-composite isomorphism, hence the specified derived open unit is invertible by adjoint uniqueness.",
    "uses": [
     "def-sp-varying-ring-operations",
     "def-sp-varying-ring-proper-open-arrows"
@@ -48,63 +23,72 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI (lemma-extension-by-zero), its adjunction and canonical comparison; direct computation of the two ordinary units"
+    "place": "Tags 03DI and 03DJ; derived.tex Tag 015F; categorical uniqueness and iterated mates"
    }
   },
   {
-   "text": "The ordinary $J^0$ and $P^0$ are exact by [def-sp-varying-ring-operations]; step 2's isomorphism implies $E$ is exact as well. Apply [lem-weil-pbc-exact-functor-derived-functor] to $E$: its total unbounded right derived functor is computed on every complex by termwise $E$, so $S_s=RE\\cong D(E)$. The categories are abelian (indeed Grothendieck) by [lem-coef-semilinear-derived-sections], and all three functors are additive. Thus [lem-sfb-exact-derived-natural-iso] localizes $\\kappa$ to an isomorphism $D(J^0)\\to D(E)$. Under $J_s=D(J^0)$ and $P_s=D(P^0)$, localize the two exact adjunctions with their specified units and counits as in [def-weil-exact-derived-adjunction]. The adjunctions supplied by [def-sp-varying-ring-operations] are induced from these ordinary adjunctions, so the exact-functor comparison with $RE$ carries the localized unit and counit to $\\eta_s,\\varepsilon_s$. Explicitly, if $P^0K\\to I$ is a K-injective resolution, the derived unit is $K\\xrightarrow{q}EP^0K\\to EI$; the second arrow is the canonical exact-derived isomorphism. Naturality of $q$ identifies this with its termwise localization. The counit follows by the same adjunction correspondence and its triangle identities.",
+   "text": "Compare the exact localized adjunction with the specified right-derived adjunction by their unit factorization on the homotopy category. The localization factor isomorphisms cancel, and the normalized exact/right-derived comparison identifies the units. The same calculation localizes the ordinary inverse open unit and its transpose. Thus clopenToDirect followed by the exact/right-derived comparison is the localization of moduleOpenToP.",
    "uses": [
     "def-sp-varying-ring-operations",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-coef-semilinear-derived-sections",
-    "lem-sfb-exact-derived-natural-iso",
-    "def-weil-exact-derived-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor), all complexes compute the derived functor; exact adjunction and natural-isomorphism localization"
-   }
-  },
-  {
-   "text": "By [def-weil-exact-derived-adjunction], the right transpose of localized $\\kappa$ is the localization of $\\varepsilon^0\\circ P^0\\kappa=(u^0)^{-1}$; hence it is $u_s^{-1}$. The bijection of the specified adjunction $P_s\\dashv S_s$ identifies localized $\\kappa$ with exactly $t_s$, proving its invertibility. Localize the ordinary identities of step 3 to obtain $(t_sP_s)\\circ D(\\pi^0)=\\eta_s$, $P_sD(\\pi^0)=u_sP_s$ and $P_cD(\\pi^0)=0$. Here $D(\\pi^0)$ denotes the localized termwise transformation. It is the specified component projection $\\pi_s$: on every ordinary system and in every cochain degree its formula is identity on the chosen component and zero on the other. The simultaneous models of [lem-coef-semilinear-derived-sections] use those very ordinary maps. Consequently $P_s\\pi_s=1$ under the open unit, as asserted. These are identities localized from maps of whole complexes of systems, not inferred from equality after evaluating a derived system at each $n$.",
-   "uses": [
-    "def-weil-exact-derived-adjunction",
-    "lem-coef-semilinear-derived-sections"
+    "def-sp-varying-ring-proper-open-arrows",
+    "lem-sfb-exact-derived-natural-iso"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor); termwise localization of the explicit identities of steps 2-3"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI and 03DJ; derived.tex Tag 015F; categorical uniqueness and iterated mates"
    }
   },
   {
-   "text": "For naturality, let $C_\\bullet\\to D_\\bullet$ be a compatible map of coefficient sequences. Restriction of scalars leaves pairs, $x\\mapsto(x,0)$ and $(x,y)\\mapsto x$ unchanged. For extension of scalars, step 1 identifies the system categories with the product of the two component categories: the inverse sends $(F,G)$ to $s_{*,\\bullet}F\\oplus c_{*,\\bullet}G$, with the two inverse identities given by the same section decompositions. A balanced bilinear map out of two such pairs is precisely a pair of balanced bilinear maps, so the universal property of tensor computes tensor and coefficient extension separately on both components. A complex in this product is acyclic exactly when its two components are, and hence is K-flat exactly when both components are K-flat. Thus the K-flat scalar-extension models of [lem-coef-semilinear-derived-sections] also act componentwise. Tensoring the displayed identities and zero maps gives identities and zero maps on these actual models, so all comparison squares commute before localization and descend to the derived categories. All maps are natural in the coefficient sequence and in the systems. No flatness of a coefficient transition, cartesianness of a system, or boundedness of a complex has been used.",
+   "text": "Localize modulePi composed with moduleOpenToP equals the ordinary right unit to obtain the projector equation. The adjunction triple and its triangle identity give restriction to the selected component. For the complementary component, the disjoint_extension helper of the existing complementary-component lemma makes the target zero; exact localization preserves this zero target. The localized transpose calculation also gives the required normalization on actual cochain representatives.",
    "uses": [
+    "def-sp-varying-ring-operations",
+    "def-sp-varying-ring-proper-open-arrows",
+    "new-lem-sp-varying-ring-module-pi-complement-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI and 03DJ; derived.tex Tag 015F; categorical uniqueness and iterated mates"
+   }
+  },
+  {
+   "text": "Construct the ordinary coefficient pushforward comparison by pushforward composition and coefficient-ring naturality; its section maps are identities, so sectionwise extensionality proves uniqueness. Transport the open pullback adjunction to the explicit ringed-site open inverse image. Its coefficient restriction isomorphism obeys the unit equation, so its inverse mate is the specified coefficient pull comparison. Localize this mate equation using exactDerivedMate. Uniqueness of right adjoints identifies its invertible direct-image mate with clopenCoefficientP. Full faithfulness of open extension and the clopen open-to-direct-image isomorphisms then give invertibility of clopenCoefficientJInv.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-sp-varying-ring-proper-open-arrows",
     "lem-coef-semilinear-derived-sections"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI (lemma-extension-by-zero), sectionwise identity/zero calculation; agent extension to coefficient change on the ringed sequence site"
+    "place": "Tags 03DI and 03DJ; derived.tex Tag 015F; categorical uniqueness and iterated mates"
+   }
+  },
+  {
+   "text": "The four naturality equations follow from the two unit equations: express the clopen comparison as the transpose of the inverse open unit, and cancel its invertible component to obtain projector naturality. Restriction comparisons obey those unit equations by the mates identities. For scalar extension, use its specified adjunctions. Iterating mates around the square gives conjugation between composite adjunctions. Conjugation reflects invertibility and takes inverses to inverses, yielding invertibility of the scalar pull and extension comparisons and both scalar unit equations. The same four-square argument yields scalar naturality; its open-to-direct-image square then gives invertibility of the scalar direct-image comparison. This uses the given unbounded scalar adjunctions without a new tensor decomposition.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI and 03DJ; derived.tex Tag 015F; categorical uniqueness and iterated mates"
    }
   }
  ],
  "proof_deps": [
   "def-sp-varying-ring-operations",
   "def-sp-varying-ring-proper-open-arrows",
-  "def-weil-exact-derived-adjunction",
-  "def-weil-pbc-proetale-site",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-sheaf-of-modules-category",
-  "lem-coef-semilinear-derived-sections",
   "lem-sfb-exact-derived-natural-iso",
-  "lem-weil-pbc-exact-functor-derived-functor"
+  "new-lem-sp-varying-ring-module-pi-complement-zero",
+  "lem-coef-semilinear-derived-sections"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03DI (lemma-extension-by-zero) and Tag 03DJ (lemma-extension-by-zero-exact), clopen disjoint-cover argument; derived.tex Tag 015F. The semilinear-system extension and map normalization are written out here."
+  "place": "Tags 03DI and 03DJ; derived.tex Tag 015F; categorical uniqueness and iterated mates; R8 proof from the existing ordinary operations, exact-derived factorization and adjunction mates."
  },
  "mathlib_searches": [
   {
@@ -236,7 +220,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-7d8f7d1cb (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the full statement of every cited node; the split adds no new nodes. Sources checked: Stacks 03DI (sites-modules.tex l.2058, extension by zero is left adjoint to restriction) and 015F(4) (derived.tex l.5884, every unbounded complex computes RF for an exact F). The item's t_s and pi_s agree with def-sp-varying-ring-proper-open-arrows: j_!->j_* is the mate of the inverse open unit, and pi_s is that inverse after the s^*-|s_* unit. The item is the statement node for the definition's clopen invertibility claim, and its (t_sP_s)pi_s=eta_s is exactly what the parent's mate-pasting step cites. Step 1: the clopen pieces H_U, H_C cover H in the fpqc sense because V meet H_U is clopen in V, hence quasi-compact; M(empty)=0 comes from the empty cover. Step 2: E-|P^0 holds with identity unit, so kappa:J^0=E is unique with P^0kappa u^0=1. One accepted implicit point: s^* is identified with restriction, which the operations definition gives through lem-pur-site-restriction-module-adjunction-exact. Step 3: q(x,y)=x, the transpose of kappa is (u^0)^{-1}, P^0pi^0=u^0 by the triangle identity, and c^*pi^0=0 because the target is M(empty)=0. Steps 4-5: E is exact, RE=D(E) by 015F, and kappa localizes by lem-sfb-exact-derived-natural-iso. With the localized units of def-weil-exact-derived-adjunction, t_s is the localized kappa and the identities localize. Step 6: naturality in C_bullet is componentwise on the product decomposition, since tensor and K-flatness split componentwise. Edge cases checked: U empty, U=X, X empty, nonflat Z/4->Z/2, unbounded complexes. All cited statements lie in the route of sk-thm-sf-compatibility; the two declared tool_uses are generic and accepted. No SGA is cited and there is no cycle. The fixed-coefficient and strict-tower clopen nodes do not state this varying-ring identity, so there is no duplicate. No changes."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.SemilinearClopenUnitProjector",
   "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.semilinearClopen_unit_projector",
@@ -283,5 +278,15 @@
   "group": "Q10",
   "result": "pass",
   "note": "Re-delivery of the PASSed head dcfc7e8e, which was returned at landing only for an overlay environment fault (TensorProduct.Basic). The Lean module is byte-identical; the item and dependency nodes differ only by an empty lean_audit field; the report only adds repair-retry sections. Re-checked: t_s=clopenToDirect is the P⊣S transpose of the inverse open unit (same formula as moduleOpenToP); π_s=clopenPi is the localized dependency modulePi, defined independently of t_s; the clauses IsIso t_s, π≫G◁t=η, G_s π=u_s G_s, G_c π=0 and the termwise moduleOpenToP normalization match the node. Coefficient naturality uses only canonical maps (∃!-pinned push comparison, its mates, ScalarData transposes); mate directions and square types checked. Universe inherited from the dependency; lean.statement verbatim; 26/26 declarations recorded; only lean differs from live; all proofs sorry. nt_compile --json clean, exit 0, 57.4 s at load ~203 (6.8 s earlier), so landing should be retried at lower load. Advisory: unused proof imports; superfluous IsClosedImmersion on openUnit_isIso; the parent SemilinearProperOpenMatePasting keeps a parallel openToS/pi (downstream, citing it would cycle)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261024T020119-L-2550527",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

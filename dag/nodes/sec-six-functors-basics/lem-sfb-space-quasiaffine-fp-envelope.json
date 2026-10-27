@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-space-quasiaffine-fp-envelope",
+ "kind": "statement",
+ "title": "Finite-presentation closed envelopes for quasi-affine locally finite type maps",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A space is quasi-compact if it admits a surjective etale atlas from a quasi-compact scheme; it is quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. A morphism is quasi-compact if its pullback along every affine scheme test has quasi-compact source, and quasi-separated if its relative diagonal is quasi-compact. Local finite type and local finite presentation are tested on compatible etale scheme charts [def-weil-finite-type-morphism, def-sbc-locally-finite-presentation]. Finite type means quasi-compact and locally of finite type; finite presentation means quasi-compact, quasi-separated and locally of finite presentation. A morphism is quasi-affine if it is representable by schemes and every pullback along an affine scheme test is a quasi-compact open subscheme of an affine scheme. A closed immersion is representable by schemes and a closed immersion after every scheme base change [def-weil-closed-immersion]. Let $g:A\\to B$ be a locally finite type quasi-affine morphism and suppose $B$ is quasi-compact and quasi-separated. Then there exist an algebraic space $C$, a closed immersion $e:A\\hookrightarrow C$, and a morphism of finite presentation $v:C\\to B$ such that $v\\circ e=g$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0871 (lemma-quasi-affine-closed-in-finite-presentation)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-nagata-quasi-affine-morphism",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-stack-qcqs-morphism"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-space-quasiaffine-affine-factorization], factor $g$ as $A\\xrightarrow{j}Z\\xrightarrow{p}B$, with $j$ a quasi-compact open immersion and $p$ affine. By [lem-sfb-space-affine-locality], $Z$ is qcqs. The source $A$ is quasi-compact: pull $j$ back along a quasi-compact etale atlas of $Z$; quasi-compactness of $j$ makes its source quasi-compact, and that source is an atlas of $A$. Here the tests on quasi-compact spaces are supplied by [lem-sfb-space-quasicompact-fppf-local].",
+   "uses": [
+    "lem-sfb-space-quasiaffine-affine-factorization",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-quasicompact-fppf-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0871, first sentence; Tag 086S"
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-affine-fp-limit], write $Z=\\varprojlim_i Z_i$ over $B$, indexed by a small nonempty directed set, with affine transitions and each $Z_i\\to B$ affine and finitely presented. Every $Z_i$ is qcqs by [lem-sfb-space-affine-locality]. Regard $A$ as its open image in $Z$. Apply [lem-sfb-space-limit-open-cover-descent] to the two-member covering family $A,Z$ of $Z$. It yields a stage $i_0$ and a quasi-compact open $U_{i_0}\\subset Z_{i_0}$ with $Z\\times_{Z_{i_0}}U_{i_0}=A$. The second member of the covering is only to meet that lemma's covering hypothesis.",
+   "uses": [
+    "lem-sfb-space-affine-fp-limit",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-limit-open-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0871, approximation and descent of the open; Tags 0870 and 0827"
+   }
+  },
+  {
+   "text": "For $i\\ge i_0$ set $U_i=Z_i\\times_{Z_{i_0}}U_{i_0}$. The inverse images are quasi-compact and quasi-separated and have affine transitions by the last clause of [lem-sfb-space-limit-open-cover-descent], applied to the descended two-member covering. The sheaf limit of this system is $A$: for every test scheme $T$, a compatible tuple in the $U_i(T)$ is exactly a compatible tuple in the $Z_i(T)$ whose $i_0$ component belongs to $U_{i_0}(T)$. These are precisely $(Z\\times_{Z_{i_0}}U_{i_0})(T)=A(T)$. The tail $i\\ge i_0$ has the same limit since it is cofinal in the directed set.",
+   "uses": [
+    "lem-sfb-space-limit-open-cover-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0871, sentence defining the inverse images U_i; pointwise sheaf-limit verification"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-eventual-closed-immersion] with common base $B$, inverse system $(U_i)_{i\\ge i_0}$, source $A$, and closed immersion $\\mathrm{id}_A:A\\to\\varprojlim U_i=A$. Its stages are quasi-compact by the previous step, its transitions affine, and $A\\to B$ is the given locally finite type map $g$. Thus for some $i\\ge i_0$ the projection $e:A\\to U_i$ is a closed immersion.",
+   "uses": [
+    "lem-sfb-space-eventual-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0871, penultimate sentence; Tag 0828(1)"
+   }
+  },
+  {
+   "text": "The open inclusion $k:U_i\\hookrightarrow Z_i$ is quasi-compact by [lem-sfb-space-qcqs-permanence], since $U_i$ is quasi-compact and $Z_i$ quasi-separated. It is finitely presented by [lem-sfb-space-qc-open-finite-presentation]. Therefore $v:U_i\\xrightarrow{k}Z_i\\to B$ is finitely presented by [lem-sfb-space-separated-fp-composition]. Put $C=U_i$. Every projection in the constructed inverse system is a $B$-map, so $v\\circ e=g$. This gives all the required data.",
+   "uses": [
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-qc-open-finite-presentation",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0871, last sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-quasiaffine-affine-factorization",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "lem-sfb-space-affine-fp-limit",
+  "lem-sfb-space-limit-open-cover-descent",
+  "lem-sfb-space-eventual-closed-immersion",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-qc-open-finite-presentation",
+  "lem-sfb-space-separated-fp-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0871 (lemma-quasi-affine-closed-in-finite-presentation), complete proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi affine locally finite type morphism of algebraic spaces over a quasi compact quasi separated base has a factorization by a closed immersion into a finitely presented algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.IsImmersion f ↔\\n    ∃ Z g₁ g₂,\\n      AlgebraicGeometry.IsOpenImmersion g₁ ∧\\n        AlgebraicGeometry.IsClosedImmersion g₂ ∧ CategoryTheory.CategoryStruct.comp g₁ g₂ = f\", \"doc\": \"For a quasi-compact morphism $ f: X \\\\to Y $ of schemes, $ f $ is an immersion if and only if there exists a scheme $ Z $ and morphisms $ g_1: X \\\\to Z $ (an open immersion) and $ g_2: Z \\\\to Y $ (a clos\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [Y.IsQuasiAffine] [AlgebraicGeometry.IsImmersion f] [CompactSpace ↥X],\\n  X.IsQuasiAffine\", \"doc\": \"If $ X $ and $ Y $ are schemes, $ f: X \\to Y $ is an immersion, $ Y $ is quasi-affine, and $ X $ is a compact topological space, then $ X $ is a quasi-affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every closed immersion of schemes is locally of finite type. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with surjective \"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Any immersion of schemes is a morphism that is locally of finite type. Specifically, for a morphism $ f: X \\to Y $ between schemes that is an immersion, every point in $ Y $ has an open neighborhood su\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every immersion of schemes is a quasi-finite morphism.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, ring maps, or general categorical limits; none states this algebraic-space theorem. Scheme-only types checked in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Noetherian.lean:266-276 and QuasiAffine.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type quasi affine algebraic space embeds as a closed subspace of an algebraic space of finite presentation over the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [Y.IsQuasiAffine] [AlgebraicGeometry.IsImmersion f] [CompactSpace ↥X],\\n  X.IsQuasiAffine\", \"doc\": \"If $ X $ and $ Y $ are schemes, $ f: X \\to Y $ is an immersion, $ Y $ is quasi-affine, and $ X $ is a compact topological space, then $ X $ is a quasi-affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsQuasiAffine], AlgebraicGeometry.IsImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the natural morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an immersion, where $ \\\\Gamma(X) $ denotes the ring of global sections of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsQuasiAffine\", \"doc\": \"Every affine scheme is quasi-affine. That is, if a scheme $X$ is affine (isomorphic to the spectrum of a ring), then it satisfies the property of being quasi-affine (isomorphic to an open subscheme of\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, ring maps, or general categorical limits; none states this algebraic-space theorem. Scheme-only types checked in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Noetherian.lean:266-276 and QuasiAffine.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffine\", \"LocallyOfFinitePresentation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, ring maps, or general categorical limits; none states this algebraic-space theorem. Scheme-only types checked in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Noetherian.lean:266-276 and QuasiAffine.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Qq]uasi[Aa]ffine.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*[Qq]uasi[Aa]ffine",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, ring maps, or general categorical limits; none states this algebraic-space theorem. Scheme-only types checked in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Noetherian.lean:266-276 and QuasiAffine.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi affine algebraic spaces locally finite type over a qcqs base admit finite presentation closed envelopes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $f(V) \\\\subseteq U$, the induced ring homomorphism $\\\\mathcal{O}_Y\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf data $ q $ over a ring sheaf $ \\\\mathcal{O} $, if every indexed presentation $ q.\\text{presentation}(i) $ is finite (admits finite generators and relations), then $ q $ itsel\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \"[Finite n] : LocallyOfFinitePresentation (𝔸(n; S) ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : X.IsQuasiAffine → Sort u_1} →\\n    (t : X.IsQuasiAffine) →\\n      ([toCompactSpace : CompactSpace ↥X] → [toIsImmersion : AlgebraicGeometry.IsImmersion X.toSpecΓ] → motive ⋯) →\\n        motive t\", \"doc\": \"For any scheme $X$, given a type family over the property of $X$ being quasi-affine, if we can construct an element of this type when $X$ is compact and the canonical morphism $X \\\\to \\\\operatorname{Spe\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.rec\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : X.IsQuasiAffine → Sort u_1} →\\n    ([toCompactSpace : CompactSpace ↥X] → [toIsImmersion : AlgebraicGeometry.IsImmersion X.toSpecΓ] → motive ⋯) →\\n      (t : X.IsQuasiAffine) → motive t\", \"doc\": \"For any scheme $X$, given a type family over the property of $X$ being quasi-affine, if we can construct an element of this type when $X$ is compact and the canonical morphism $X \\\\to \\\\operatorname{Spe\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[IsAffine X] : X.IsQuasiAffine\", \"doc\": \"Every affine scheme is quasi-affine. That is, if a scheme $X$ is affine (isomorphic to the spectrum of a ring), then it satisfies the property of being quasi-affine (isomorphic to an open subscheme of\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, ring maps, or general categorical limits; none states this algebraic-space theorem. Scheme-only types checked in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Noetherian.lean:266-276 and QuasiAffine.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi affine locally finite type morphism of algebraic spaces over a quasi compact quasi separated base factors as a closed immersion followed by a morphism of finite presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.IsImmersion f ↔\\n    ∃ Z g₁ g₂,\\n      AlgebraicGeometry.IsOpenImmersion g₁ ∧\\n        AlgebraicGeometry.IsClosedImmersion g₂ ∧ CategoryTheory.CategoryStruct.comp g₁ g₂ = f\", \"doc\": \"For a quasi-compact morphism $ f: X \\\\to Y $ of schemes, $ f $ is an immersion if and only if there exists a scheme $ Z $ and morphisms $ g_1: X \\\\to Z $ (an open immersion) and $ g_2: Z \\\\to Y $ (a clos\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every closed immersion of schemes is locally of finite type. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [Y.IsQuasiAffine] [AlgebraicGeometry.IsImmersion f] [CompactSpace ↥X],\\n  X.IsQuasiAffine\", \"doc\": \"If $ X $ and $ Y $ are schemes, $ f: X \\to Y $ is an immersion, $ Y $ is quasi-affine, and $ X $ is a compact topological space, then $ X $ is a quasi-affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes which is locally of finite presentation. If $U \\\\subseteq Y$ and $V \\\\subseteq X$ are affine open subsets such that $f(V) \\\\subseteq U$, then the ring homomorphi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type quasi affine algebraic space has a finite presentation closed envelope over its base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFiniteType fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FiniteType\", \"doc\": \"For any commutative rings $ R $ and $ S $, and a ring homomorphism $ f : R \\to S $, the induced morphism of schemes is locally of finite type if and only if $ f $ is a finite type ring homomorphism (i.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes which is locally of finite presentation. If $U \\\\subseteq Y$ and $V \\\\subseteq X$ are affine open subsets such that $f(V) \\\\subseteq U$, then the ring homomorphi\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyQuasiFinite fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.QuasiFinite\", \"doc\": \"A morphism of schemes is locally quasi-finite if and only if the corresponding ring homomorphism is quasi-finite, meaning the target ring is finitely generated as a module over the source ring.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffine\", \"LocallyOfFinitePresentation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Qq]uasi[Aa]ffine.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*[Qq]uasi[Aa]ffine",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi affine finite type algebraic spaces admit finite presentation envelopes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $f(V) \\\\subseteq U$, the induced ring homomorphism $\\\\mathcal{O}_Y\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \"[Finite n] : LocallyOfFinitePresentation (𝔸(n; S) ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : X.IsQuasiAffine → Sort u_1} →\\n    (t : X.IsQuasiAffine) →\\n      ([toCompactSpace : CompactSpace ↥X] → [toIsImmersion : AlgebraicGeometry.IsImmersion X.toSpecΓ] → motive ⋯) →\\n        motive t\", \"doc\": \"For any scheme $X$, given a type family over the property of $X$ being quasi-affine, if we can construct an element of this type when $X$ is compact and the canonical morphism $X \\\\to \\\\operatorname{Spe\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": HasAffineProperty @QuasiSeparated (fun X _ _ _ ↦ QuasiSeparatedSpace X)\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[IsAffine X] : X.IsQuasiAffine\", \"doc\": \"Every affine scheme is quasi-affine. That is, if a scheme $X$ is affine (isomorphic to the spectrum of a ring), then it satisfies the property of being quasi-affine (isomorphic to an open subscheme of\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-finite-type-fp-envelope",
+  "date": "2026-10-23",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0A0X: replace the proper family over an affine open by a proper finite-presentation inverse system. Supporting input to 0A0X: Tag 0A0W (lemma-proper-limit-of-proper-finite-presentation), specialized to a scheme base; 0A0W proof, first sentence: choose a separated finite-presentation closed envelope; 0873 proof, first sentence: the finite-presentation envelope before enforcing separatedness; supporting input: 0872 proof: apply the quasi-affine envelope lemma to the chosen finite-stage map",
+   "via": [
+    "lem-sfb-space-finite-type-fp-envelope",
+    "lem-sfb-space-separated-finite-type-fp-envelope",
+    "lem-sfb-proper-space-fixed-base-fp-limit",
+    "lem-sfb-space-proper-noetherian-approximation",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-quasiaffine-fp-envelope",
+  "worker": "stage1",
+  "summary": "Followed Tag 0871 exactly: affine factorization, affine finite-presentation approximation, descent of the open using the existing covering lemma with the family A,Z, and 0828(1) applied to the identity on the restricted limit. Added four statement-only supporting facts, checked hypotheses and scheme-only Mathlib candidates. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0A0X: replace the proper family over an affine open by a proper finite-presentation inverse system. Supporting input to 0A0X: Tag 0A0W (lemma-proper-limit-of-proper-finite-presentation), specialized to a scheme base; 0A0W proof, first sentence: choose a separated finite-presentation closed envelope; 0873 proof, first sentence: the finite-presentation envelope before enforcing separatedness; supporting input: 0872 proof: apply the quasi-affine envelope lemma to the chosen finite-stage map; realizes 0871 as the quasi-affine input to the fixed-base finite-presentation envelope route. The computed blueprint ancestor is null (inherited broken ancestry); no ancestor id was invented."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-f23afb9a6",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-f23afb9a6 (reviewer sub-agent of L); spot-checked: Read the item, all 4 new nodes and every cited statement against Stacks 0871 (spaces-limits l.2791), 086S (spaces-morphisms l.4054), 0870 (l.2700), 0828(1) (l.1235), 0827 (l.1078) and 06CN (l.5651). The item's statement matches 0871 exactly, and the 5 steps follow its proof in order. Step 2 applies lem-sfb-space-limit-open-cover-descent correctly to the finite covering family {A,Z}. Step 3 checks the restricted limit sectionwise and is genuinely elementary. Step 4 meets every hypothesis of 0828(1) with h=id_A. Step 5 has its qc, fp and composition citations (permanence, qc open fp, fp composition with no separatedness needed). The new nodes are true as stated: quasi-affine is qcqs, so 086S applies and 01SM gives a qc open immersion; an open immersion is a monomorphism, so qs+lfp+qc gives fp. They are statement-only, self-contained, and not restatements of the item or its clauses. The DAG search (086S/0870/0828/06CN/labels/keywords) finds only scheme versions or other clauses (0828(3) closed-limit-stabilization, 0828(4) eventual-monomorphism, 07VR, 0A0U), so there are no duplicates. Edge cases checked: empty A or B, constant system, non-noetherian base. Batch-5 flags: def-trf-algebraic-space and def-a1-space-open-subspace are definitions, lem-trf-space-fibre-products-etale-covers is general 02X2 foundations, and the 5 sfb permanence/limit lemmas reach trf only via that definition. None is part of the trace formula or Poincare duality, so all are accepted. No tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQuasiAffineFpEnvelope",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_closedImmersion_finitePresentation_of_quasiAffine",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQuasiAffineFpEnvelope.lean",
+  "statement": "theorem exists_closedImmersion_finitePresentation_of_quasiAffine {S : Scheme.{u}} {A B : AlgebraicSpace S} (g : A ⟶ B) (hlft : MapIsLocally (@LocallyOfFiniteType) g) (hqa : IsRepresentableWith (fun _ _ p ↦ IsQuasiAffineHom p.left) g.hom.hom) (hqc : IsQuasiCompact B.obj) (hqs : IsAbsolutelyQuasiSeparated B) : ∃ (C : AlgebraicSpace S) (e : A ⟶ C) (v : C ⟶ B), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) e.hom.hom ∧ (MapIsQuasiCompact v.hom.hom ∧ MapIsQuasiSeparated v.hom.hom ∧ MapIsLocallyOfFinitePresentation v) ∧ e ≫ v = g",
+  "branch": "sheaf-dag",
+  "by": "Q47",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Returned-delivery repair H2/H4: cites definition-node owners and uses IsQuasiCompact, MapIsQuasiCompact and MapIsQuasiSeparated directly. Uses existing chart-local morphism predicates, absolute quasi-separatedness and scheme quasi-affineness. No mathematical statement correction or new definition is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bbe07d5d",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 13ac9e0fe94b. Both H2 and H4 are fixed: the theorem node lem-trf-space-qc-separated-etale-local and its import are gone. hqc is IsQuasiCompact B.obj and finite presentation of v is MapIsQuasiCompact ∧ MapIsQuasiSeparated ∧ MapIsLocallyOfFinitePresentation. The added stmt_deps (def-sfb-space-morphism-properties, def-sfb-space-absolute-quasi-separated, def-nagata-quasi-affine-morphism, def-sfb-proper-curve-moduli, def-sfb-stack-qcqs-morphism) are landed definition owners. Every clause matches Stacks 0871 (spaces-limits l.2791): lft via MapIsLocally, quasi-affine via IsRepresentableWith IsQuasiAffineHom (equivalent to the affine-test form), absolute quasi-separatedness of B, closed immersion via IsRepresentableWith IsClosedImmersion, e ≫ v = g. No extra hypotheses; empty and non-qs-S cases are covered. Only lean and stmt_deps differ from live; lean.statement is verbatim; docstrings carry Tag 0871, the blueprint id and all 5 proof steps; proof is sorry only; no definitions. No reviewer change, so no compile."
+ }
+}

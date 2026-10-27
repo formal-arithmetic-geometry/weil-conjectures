@@ -1,0 +1,272 @@
+{
+ "id": "lem-pd-section-tensor-pull-representatives-exists-unique",
+ "kind": "statement",
+ "title": "Existence and uniqueness of the section tensor-pullback representative comparison",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], and let $f:X\\to Y$ be any morphism of schemes, with their small pro-etale sites small relative to the coefficient universe [def-weil-pbc-proetale-site]. Use the section-module categories $\\mathcal S_T$, cochain localization $Q_T:C(\\mathcal S_T)\\to D(\\mathcal S_T)$, conjugate derived tensor $\\mathsf T_T$, and signed direct-sum total $\\operatorname{Tot}_T$ of [def-pd-section-derived-tensor-data], for $T=X,Y$. Complexes are arbitrary unbounded integer-indexed cochain complexes; retain independent site object, site morphism, and coefficient universes, and assume the chosen derived categories exist. Let $q_T$ be the unique natural transformation specified in [lem-pd-section-tensor-representatives-exists-unique]. Let $F=f^*_{\\mathrm{sec}}:\\mathcal S_Y\\to\\mathcal S_X$ be the fixed exact ordinary module pullback with its specified adjunction-mate oplax tensor map $\\delta_{M,N}:F(M\\otimes N)\\to FM\\otimes FN$ of [def-pd-proetale-section-module-functors]. Write $F_c$ for termwise pullback, $LF$ for its exact localization, and $\\epsilon_A:LF(Q_YA)\\xrightarrow{\\sim}Q_X(F_cA)$ for its fixed factor isomorphism of [def-pd-section-derived-tensor-data]. Define $b_{P,Q}:F_c\\operatorname{Tot}_Y(P,Q)\\to\\operatorname{Tot}_X(F_cP,F_cQ)$ by the preserved-coproduct comparison followed on the degree-$(p,q)$ summand by $\\delta_{P^p,Q^q}$ and the canonical summand inclusion. Both totals use the differential $d_P\\otimes1+(-1)^p1\\otimes d_Q$.\n\nThere exists exactly one natural isomorphism of bifunctors\n$$d_f:LF\\circ\\mathsf T_Y\\xrightarrow{\\sim}\\mathsf T_X\\circ(LF\\times LF)$$\nwith the following equation for every pair of section-module complexes $P,Q$:\n$$Q_X(b_{P,Q})\\circ\\epsilon_{\\operatorname{Tot}_Y(P,Q)}\\circ LF(q_{Y;P,Q})\n=q_{X;F_cP,F_cQ}\\circ\\mathsf T_X(\\epsilon_P,\\epsilon_Q)\\circ d_{f;Q_YP,Q_YQ}.$$\nBoth sides are arrows from $LF(\\mathsf T_Y(Q_YP,Q_YQ))$ to $Q_X\\operatorname{Tot}_X(F_cP,F_cQ)$. The equation is required for all complex pairs, without a K-flatness, termwise flatness, or boundedness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; exact all-complex normalization predicate and theorem: lean/Sheaf/Paper/SectionDerivedRealization.lean:187-237."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "def-pd-section-derived-tensor-data",
+  "lem-pd-section-tensor-representatives-exists-unique",
+  "def-pd-proetale-section-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Uncurry mapBifunctorComparisonNatTrans for the specified ordinary oplax pullback map. Since that ordinary comparison is strong and pullback preserves coproducts, its signed total is a natural isomorphism. Its components are exactly totalPullComparison: the explicit totalTensor object equalities contribute identities.",
+   "uses": [
+    "def-pd-proetale-section-module-functors",
+    "def-pd-section-derived-tensor-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; resolving-pair descent and naturality calculation."
+   }
+  },
+  {
+   "text": "Use the internal functorial flat resolution of the inverse image of any section complex. Internal pullback preserves flat objects and the colimits used by that resolution, so both the resolution complex and its pulled-back complex are categorical K-flat. Transfer those tests through internal_section_tensor_comparison and transfer the second along the termwise pullComparison. Apply the section equivalence to the resolution map, then its counit, to obtain a quasi-isomorphism from a section complex K-flat both before and after pullback.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "def-pd-proetale-section-module-functors",
+    "lem-sfb-derived-monoidal",
+    "def-pd-section-derived-tensor-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; resolving-pair descent and naturality calculation."
+   }
+  },
+  {
+   "text": "Apply resolvingRepresentativesFullyFaithfulWhiskering to the full homotopy quotient and derived localization. Every homotopy object has the resolving quasi-isomorphism just constructed. The quotientCompQhIso identifies restriction along their composite with restriction along cochain localization on pairs of resolving section complexes.",
+   "uses": [
+    "lem-weil-pbc-resolving-representative-whiskering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; resolving-pair descent and naturality calculation."
+   }
+  },
+  {
+   "text": "On resolving pairs the specified qTensor maps are invertible, for both the source and the pulled-back pair. Their restricted inverses provide the model isomorphisms for tensorComparisonDescent. Exact localization factors are invertible on every complex, including total tensors. The signed total pullback isomorphism supplies the chain comparison, giving the unique derived comparison on resolving pairs.",
+   "uses": [
+    "lem-pd-section-tensor-representatives-exists-unique",
+    "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "def-pd-section-derived-tensor-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; resolving-pair descent and naturality calculation."
+   }
+  },
+  {
+   "text": "Both sides of the required all-complex equation are natural transformations. Choose resolving quasi-isomorphisms A to P and B to Q. The derived source bifunctor sends the pair to an isomorphism because localization inverts both resolution maps. Naturality and equality on A,B permit cancellation of this source map, proving the equation on arbitrary P,Q. Uniqueness restricts an alternate all-complex equation to resolving pairs and cancels the invertible qTensor factors. No ordinary total-tensor image of a resolution map is inverted.",
+   "uses": [
+    "lem-pd-section-tensor-representatives-exists-unique",
+    "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "def-pd-section-derived-tensor-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; resolving-pair descent and naturality calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pd-proetale-section-module-functors",
+  "def-pd-section-derived-tensor-data",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-derived-monoidal",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-pd-section-tensor-representatives-exists-unique",
+  "lem-weil-pbc-tensor-comparison-descent-representatives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/SectionDerivedRealization.lean",
+  "place": "A8: pullback_resolving_complexes, totalPullIso, tensorComparisonDescentAll, and tensorPullComparison_existsUnique."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TensorPullRepresentativeCondition|tensorPullComparison_existsUnique|leftDerivedTensorComparison",
+   "results": "0 hits; ; top: ",
+   "date": "2026-10-24",
+   "verdict": "no match: generic localization, flat-module or monoidal infrastructure does not state this specified section-module normalization theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.OplaxMonoidal, Iso",
+   "results": "0 hits; loogle: unknown identifier 'Functor.OplaxMonoidal'; top: ",
+   "date": "2026-10-24",
+   "verdict": "query rejected: loogle: unknown identifier 'Functor.OplaxMonoidal'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback tensor comparison uniquely determined by localization representative square for all complexes",
+   "results": "8 hits; ; top: CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.Limits.pullbackComparison, HasDerivedCategory.standard, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc, CategoryTheory.Limits.instIsIsoPullbackComparison, CategoryTheory.Functor.mapDerivedCategoryFactors, HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso, CategoryTheory.IsPullback.isoIsPullback",
+   "date": "2026-10-24",
+   "verdict": "no match: generic localization, flat-module or monoidal infrastructure does not state this specified section-module normalization theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique isomorphism between derived pullback of derived tensor and tensor of derived pullbacks satisfying the representative square for all unbounded complexes",
+   "results": "8 hits; ; top: CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, HomologicalComplex.HasGoodTensor₁₂, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Tor'_map_app, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Tor'_obj_obj",
+   "date": "2026-10-24",
+   "verdict": "no match: generic localization, flat-module or monoidal infrastructure does not state this specified section-module normalization theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|rightDerivedFunctorComparison_fac",
+   "results": "14 hits; ; top: Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: generic localization, flat-module or monoidal infrastructure does not state this specified section-module normalization theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxMonoidal",
+   "results": "12 hits; ; top: CategoryTheory.Functor.OplaxMonoidal.id, CategoryTheory.Functor.OplaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal, CategoryTheory.Functor.Monoidal.toOplaxMonoidal, CategoryTheory.Functor.Monoidal.toOplaxMonoidal_injective, CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal",
+   "date": "2026-10-24",
+   "verdict": "no match: generic localization, flat-module or monoidal infrastructure does not state this specified section-module normalization theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullComparison|TensorPullRepresentative|mapDerivedCategoryFactors",
+   "results": "10 hits; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: these give exact-functor localization, ordinary total tensor, fractions or Tor, not the specified conjugate section tensor and all-complex normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor comparison for an exact strong monoidal pullback with a unique representative normalization on all complexes",
+   "results": "8 hits; CategoryTheory.FreeMonoidalCategory.HomEquiv.tensor, HomologicalComplex.tensorObj, CategoryTheory.Over.tensorObj_ext, CategoryTheory.FreeMonoidalCategory.normalizeIso, CategoryTheory.FreeMonoidalCategory.NormalMonoidalObject.tensor.inj, CategoryTheory.FreeMonoidalCategory.NormalMonoidalObject.tensor.injEq, CategoryTheory.FreeMonoidalCategory.tensor.noConfusion, CategoryTheory.FreeMonoidalCategory.normalizeIsoAux",
+   "date": "2026-10-24",
+   "verdict": "no match: these give exact-functor localization, ordinary total tensor, fractions or Tor, not the specified conjugate section tensor and all-complex normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "results": "12 hits; CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_hom_app, CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app_assoc, CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app_mapDerivedCategoryFactors_hom_app",
+   "date": "2026-10-24",
+   "verdict": "no match: these give exact-functor localization, ordinary total tensor, fractions or Tor, not the specified conjugate section tensor and all-complex normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique derived pullback tensor isomorphism characterized by the localization tensor square on every unbounded complex pair",
+   "results": "8 hits; CategoryTheory.Functor.isHomological_of_localization, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Tor'_obj_obj, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, DerivedCategory.right_fac, DerivedCategory.left_fac",
+   "date": "2026-10-24",
+   "verdict": "no match: these give exact-functor localization, ordinary total tensor, fractions or Tor, not the specified conjugate section tensor and all-complex normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Tt]ensor|[Tt]ensor.*[Dd]erived|[Kk][Ff]lat",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: these give exact-functor localization, ordinary total tensor, fractions or Tor, not the specified conjugate section tensor and all-complex normalization.",
+   "sub": "Algebra/Homology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact strong monoidal functor induces a strong monoidal functor on unbounded derived categories using K-flat resolutions",
+   "results": "8 hits; CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+   "date": "2026-10-24",
+   "verdict": "no match: these give exact-functor localization, ordinary total tensor, fractions or Tor, not the specified conjugate section tensor and all-complex normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-pd-section-derived-realization",
+  "date": "2026-10-24",
+  "group": "NH"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Existence and uniqueness of the tensor-pullback comparison specified by its all-complex representative square.",
+   "via": [
+    "def-pd-section-derived-realization",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-pd-section-tensor-pull-representatives-exists-unique",
+  "worker": "stage1",
+  "summary": "Kept the exact all-unbounded-complex statement. Constructed the comparison on flat-term K-flat pairs from the specified q, epsilon and total b; descended it and its inverse using the existing resolving localization theorem; proved the all-complex square by naturality and cancellation only at its derived source. Existing nodes suffice; no new nodes. The matching Sheaf theorem contains sorry and no WeilConjectures declaration states this exact normalization.",
+  "blueprint": "Retained the null blueprint ancestor and existing via chain. This source-derived helper serves the nt-target-poincare-isiso section-realization route, specifically its all-complex tensor-pullback square. No latest-blueprint node states the same normalization and no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic ringed-site preservation of flat-term K-flat complexes, applied to the fixed ordinary section pullback; unit-specific normalization lemmas would cite the circular section-realization definition."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic fully faithful resolving restriction, used only for descent and uniqueness of the specified comparison, not to replace a unit proof."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of unbounded flat-term K-flat replacements for the naturality argument on arbitrary section-module complexes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NA-47468b442",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-47468b442 (reviewer sub-agent of L); spot-checked: I read the item in full. It has no new nodes, and its statement and stmt_deps are unchanged. The statement matches Stacks 07A4 (lemma-pullback-tensor-product, read in sites-cohomology.tex) and TensorPullRepresentativeCondition / tensorPullComparison_existsUnique (SectionDerivedRealization.lean:187-237): same composites, same direction, equation required for all complex pairs. The coefficient category stays the section-module category with the conjugate tensor. Step 1: b is invertible because the oplax structure is strong (def-pd-proetale-section-module-functors), and def-pd-section-total-oplax-comparison-data gives the summandwise inverse. Step 2: section pullback is scalar extension followed by sheafification, so lem-weil-pbc-ringed-topos-kflat-pullback applies (morphism of topoi, ring map, K-flat with flat terms). Step 3: the types check, and C and q_Y are invertible by clause (2) of lem-pd-section-tensor-representatives-exists-unique, one K-flat argument being enough. Step 4: lem-weil-pbc-site-derived-tensor-descent extends d and its inverse uniquely from resolving pairs to all derived objects. Step 5: the equation reaches arbitrary complexes using lem-pc-kflat-resolution, naturality, and cancellation of the invertible U(a,c) only, which I tested against the Z/2 Tor case. Step 6: uniqueness follows by cancelling C and restricting. A DFS over the dependency closure found no cycle. Nodes with similar statements all sit above def-pd-section-derived-realization, which cites this item, so none can be used; the generic ringed-topoi derived tensor pullback node is unpinned, so it is not a duplicate. I accept the three declared tool uses: two generic ringed-site lemmas from sk-thm-properbasechange and the K-flat resolution lemma from sk-thm-picard-semicon. No SGA source is used. Twelve Mathlib searches are recorded across all tools, with no match."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SectionDerivedRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.tensorPullComparison_existsUnique",
+  "statement": "theorem tensorPullComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ∃! d : tensor Λ Y ⋙ derivedPullback Λ f ≅\n        ((derivedPullback Λ f).prod (derivedPullback Λ f)) ⋙ tensor Λ X,\n      TensorPullRepresentativeCondition Λ f d",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing theorem, checked against the live server source with scompile.py --source. TensorPullRepresentativeCondition uses the specified qTensor, exact-localization factor and signed totalPullComparison, and quantifies over every unbounded section-complex pair without flatness or boundedness hypotheses. The canonical section-module categories and their actual site universes are unchanged. The existing theorem proof is sorry; no new module or duplicate declaration is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f4786b1c2",
+  "group": "NI",
+  "result": "pass",
+  "note": "Existing:true binding of tensorPullComparison_existsUnique (SectionDerivedRealization.lean:233-237); node diff is the lean record only; statement verbatim in live source. Checked: Λ/universes/HasDerivedCategory section variables; derivedPullback = (pullback Λ f).mapDerivedCategory; ε = mapDerivedCategoryFactors.hom (correct direction); qTensor = choose of the stmt_dep tensor_representatives; δ = pullOplax adjunction mate (pullMonoidal = ofOplaxMonoidal keeps it); b = totalPullComparison = mapBifunctorComparison with δNatTrans (coproduct desc of δ≫ι, up-ℤ sign (-1)^p). The predicate is the node equation in diagrammatic order, quantified over all complex pairs with no flatness or boundedness premise; ∃! of the natural iso in the right direction. Stacks 07A4 read (sites-cohomology.tex:3684); the all-complex extension by naturality and cancelling U(a,c) is sound. Edge cases OK. Ownership pattern matches the landed sibling lem-pd-section-tensor-representatives-exists-unique. Advisory: totalPullComparison duplicates the map of sectionTotalIso. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-13f07",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T130328-L-3449208",
+  "kind": "interface",
+  "note": "independent cc review: section_tensor_representative_exists proof and the refactored TensorRepresentativeCondition/totalTensor/tensorUnit/localizedTotalComparison/totalPullComparison against their published bodies (probe equalities and ↔) and the node statements; 17-module cone incl. transitive users compiled against the delivery",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.section_tensor_representative_exists"
+  ],
+  "sorry_after": []
+ }
+}

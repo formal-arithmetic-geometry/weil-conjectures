@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-polynomial-bar-divided-monomial-normalization",
+ "kind": "statement",
+ "title": "Divided-monomial multidegree normalization of polynomial bar cochains",
+ "statement": "For a commutative $\\mathbf Q$-algebra $B$ and an integer $r\\geq0$, define the nonnegative cochain complex $P_{B,r}$ by\n$$P_{B,r}^n=B[x_{a,i}:1\\leq a\\leq n,\\ 1\\leq i\\leq r],\\qquad n\\geq0,$$\nusing polynomial rings [def-weil-pbc-mv-polynomial-ring]. Write $x_a=(x_{a,1},\\ldots,x_{a,r})$. Its differential is\n$$(df)(x_1,\\ldots,x_{n+1})=f(x_2,\\ldots,x_{n+1})+\\sum_{a=1}^{n}(-1)^a f(x_1,\\ldots,x_a+x_{a+1},\\ldots,x_{n+1})+(-1)^{n+1}f(x_1,\\ldots,x_n).$$\nIn degree zero the first and last terms cancel. Put $P^n=0$ for $n<0$.\nWork over $B=\\mathbf Q$. For $m\\in\\mathbf N^r$, let $P_m^n$ be spanned by the monomials whose exponents in coordinate $i$, summed over all blocks, equal $m_i$. Use its finite basis\n$$b_{\\alpha_1,\\ldots,\\alpha_n}=\\prod_{a,i}\\frac{x_{a,i}^{\\alpha_{a,i}}}{\\alpha_{a,i}!},\\qquad \\alpha_a\\in\\mathbf N^r,\\quad \\sum_a\\alpha_a=m.$$\nThe empty tuple occurs only when $n=0,m=0$. Let $U_{m,n}=\\operatorname{Hom}_{\\mathbf Q}(P_m^n,\\mathbf Q)$, with the dual basis of all such tuples. Dualize the individual cofaces of $P_m$, and dualize the codegeneracies that set one block to zero. These operators make $U_m$ a simplicial rational vector space [def-weil-pbc-simplicial-object]; its degeneracies insert a zero block. Let $V_{m,n}$ be the subspace spanned by tuples with all blocks nonzero, with the same empty-tuple convention. Zero-block insertion supplies an isomorphism\n$$\\bigoplus_{\\theta:[n]\\twoheadrightarrow[k]}V_{m,k}\\xrightarrow{\\sim}U_{m,n},$$\nwhere each summand map is the indicated degeneracy composite and $\\theta$ is order preserving. The projected alternating face differential on $V_m$ is\n$$\\partial_n[\\alpha_1|\\cdots|\\alpha_n]=\\sum_{a=1}^{n-1}(-1)^a[\\alpha_1|\\cdots|\\alpha_a+\\alpha_{a+1}|\\cdots|\\alpha_n],$$\nwith zero differential for $n=0,1$. The component $P_m$ is a cochain complex, and it is cochain homotopy equivalent to $V_m^*$, whose differential is $\\partial_{n+1}^*$ in degree $n$. Here a homotopy means degree $-1$ maps with the difference of cochain maps equal to $dH+Hd$. Thus the equivalence is at the level of complexes, and in particular gives their isomorphism in the derived category [def-weil-abstract-derived-category], not just equality of cohomology dimensions. Equivalently $V_m^*$ identifies with the polynomial subcomplex on divided monomials with no zero block; its differential splits a block into two nonzero blocks with coefficient $(-1)^a$. For $m\\ne0$ these terms vanish above degree $\\sum_i m_i$, and for $m=0$ the normalized complex is $\\mathbf Q$ in degree zero only. The direct sum of the $P_m$ is the full polynomial complex, since each polynomial has only finitely many multidegrees.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), algebraic obligation under the trivial lattice calculation; returned proof steps 3 and 4: finite divided-monomial duals, actual zero-block splitting, and chain-level normalization. Stacks Tag 017P, simplicial.tex, definition-split, supplies the splitting terminology only; the general homotopy theorem is the existing lem-sfb-split-simplicial-nondegenerate-homotopy. The polynomial construction is agent-formulated."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-mv-polynomial-ring], monomials are independent and span. Grouping them by the vector of total coordinate exponents gives the indicated $P_m^n$. For fixed $m,n$, every $\\alpha_{a,i}$ lies between $0$ and $m_i$, so there are finitely many basis tuples. Every factorial is nonzero and invertible in $\\mathbf Q$; multiplying each monomial by the product of the inverse factorials therefore gives exactly the stated basis $b_{\\alpha_1,\\ldots,\\alpha_n}$. For $n=0$ the sole monomial is $1$ of multidegree zero. In particular the evaluation map $P_m^n\\to(U_{m,n})^*$ is an isomorphism: its inverse sends a functional $\\lambda$ on the dual basis $(u_\\alpha)$ to $\\sum_\\alpha\\lambda(u_\\alpha)b_\\alpha$, a finite sum.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image clause: agent-formulated algebraic sub-obligation inherited through lem-sfb-rational-polynomial-bar-contraction; the current blueprint does not itself state the divided-monomial calculation."
+   }
+  },
+  {
+   "text": "Write $z^{[\\gamma]}=\\prod_i z_i^{\\gamma_i}/\\gamma_i!$. Direct multiplication gives\n$$(x+y)^{[\\gamma]}=\\sum_{\\beta+\\eta=\\gamma}x^{[\\beta]}y^{[\\eta]}.$$\nFor completeness, in one variable the coefficients of $(x+y)^t$ satisfy $c_{t+1,j}=c_{t,j-1}+c_{t,j}$, with initial coefficient $1$ at $t=0$. The numbers $t!/(j!(t-j)!)$ satisfy this same recurrence and boundary values, proving the formula by induction; multiply it over the finitely many coordinates. Thus every coface preserves $m$, including the endpoint cofaces which insert a zero exponent block. A codegeneracy setting block $a$ to zero kills a divided monomial unless $\\alpha_a=0$, and otherwise deletes that block.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image clause: agent-formulated algebraic sub-obligation inherited through lem-sfb-rational-polynomial-bar-contraction; the current blueprint does not itself state the divided-monomial calculation."
+   }
+  },
+  {
+   "text": "Denote the dual basis by $[\\alpha_1|\\cdots|\\alpha_n]$. Transposing the preceding coefficient formulas gives $d_a[\\alpha]=[\\alpha_1|\\cdots|\\alpha_a+\\alpha_{a+1}|\\cdots|\\alpha_n]$ for $0<a<n$; $d_0[\\alpha]$ deletes $\\alpha_1$ when $\\alpha_1=0$ and is zero otherwise; $d_n[\\alpha]$ deletes $\\alpha_n$ when $\\alpha_n=0$ and is zero otherwise. Transposing the codegeneracy gives $s_a$, insertion of a zero at position $a+1$, for $0\\leq a\\leq n$. These are transposes of individual maps, not of their alternating sum, so no sign has yet entered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image clause: agent-formulated algebraic sub-obligation inherited through lem-sfb-rational-polynomial-bar-contraction; the current blueprint does not itself state the divided-monomial calculation."
+   }
+  },
+  {
+   "text": "Here is an explicit check of all simplicial operators, using the functor definition [def-weil-pbc-simplicial-object]. For an order-preserving $\\varphi:[p]\\to[q]$, send a basis tuple $(\\alpha_1,\\ldots,\\alpha_q)$ to zero unless $\\alpha_j=0$ for all $j\\leq\\varphi(0)$ and all $j>\\varphi(p)$. Otherwise send it to the $p$-tuple with block $a$ equal to $\\sum_{\\varphi(a-1)<j\\leq\\varphi(a)}\\alpha_j$; empty intervals have sum zero. For the identity this is the original tuple. For $\\psi:[t]\\to[p]$, grouping these sums again groups precisely the original indices in $(\\varphi\\psi(b-1),\\varphi\\psi(b)]$. The two successive endpoint tests together are exactly the endpoint test for $\\varphi\\psi$: a sum of vectors in $\\mathbf N^r$ is zero precisely when each summand is zero. Thus $U(\\psi)U(\\varphi)=U(\\varphi\\psi)$, including the cases where a test fails. This constructs the required functor, and on the elementary injections and surjections gives exactly step 3. Its alternating differential squares to zero: in $\\partial_{n-1}\\partial_n$ the terms $d_i d_j=d_{j-1}d_i$ for $i<j$ occur twice with opposite signs. Transposition gives $d^2=0$ on $P_m$; the same identities of polynomial substitutions, checked on variables, hold over every $B$. Hence the initially displayed $P_{B,r}$ really is a complex.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image clause: agent-formulated algebraic sub-obligation inherited through lem-sfb-rational-polynomial-bar-contraction; the current blueprint does not itself state the divided-monomial calculation."
+   }
+  },
+  {
+   "text": "The splitting is a bijection on bases. Given a tuple in $U_{m,n}$, let its nonzero block positions be $1\\leq j_1<\\cdots<j_k\\leq n$. Delete the zero blocks to obtain the unique basis tuple of $V_{m,k}$. Define $\\theta(0)=0$ and let $\\theta(t)$ be the number of positions $j_a\\leq t$ for $1\\leq t\\leq n$. This is an order-preserving surjection $[n]\\twoheadrightarrow[k]$, and $U(\\theta)$ inserts zeros at exactly the deleted positions, by step 4. Conversely any such surjection has increments zero or one, and its increments of one recover precisely those $j_a$. Thus the summand bases are disjoint and exhaust the basis of $U_{m,n}$. Extending this bijection linearly, with the inverse just described, proves the asserted direct-sum isomorphism. The all-zero tuple corresponds to $k=0$ and the unique map $[n]\\to[0]$; its summand exists only when $m=0$. This is the splitting of Stacks Tag 017P, not an appeal to a splitting existence theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 017P, definition-split and equation-splitting; explicit basis verification for this item"
+   }
+  },
+  {
+   "text": "On an all-nonzero tuple the two endpoint faces are zero by step 3. Each internal face merges two nonzero vectors in $\\mathbf N^r$, whose sum is still nonzero. Therefore projecting $\\sum_a(-1)^ad_a$ onto the identity-surjection summand gives precisely the displayed $\\partial_n$ on $V_m$, with zero differential in degrees zero and one. Apply [lem-sfb-split-simplicial-nondegenerate-homotopy] with $R=\\mathbf Q$, $U=U_m$, $j_n$ the inclusion of the nonzero-tuple basis and $\\pi_n$ its coordinate projection. Step 4 supplies the simplicial module, and step 5 supplies exactly every decomposition required by that theorem. It follows that this $V_m$ is a chain complex and there are chain maps $f:C(U_m)\\to V_m$, $g:V_m\\to C(U_m)$ and homotopies $gf-1=\\partial H+H\\partial$, $fg-1=\\partial J+J\\partial$.",
+   "uses": [
+    "lem-sfb-split-simplicial-nondegenerate-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean",
+    "place": "nondegComplex (line 165), projected d (line 148), homotopyEquivNondegComplex (line 307), as recorded in the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "Dualize these maps degree by degree: $f^*:V_m^*\\to C(U_m)^*$ and $g^*:C(U_m)^*\\to V_m^*$. The evaluation isomorphisms of step 1 identify $C(U_m)^*$ with $P_m$ and its differential with the given $d$, since $\\partial$ was its transpose. Dualizing a chain homotopy gives degree $-1$ maps $(H^*)^n=(H_{n-1})^*:U_{m,n}^*\\to U_{m,n-1}^*$. Explicitly the transpose of $\\partial_{n+1}H_n+H_{n-1}\\partial_n$ is $H_n^*\\partial_{n+1}^*+\\partial_n^*H_{n-1}^*$, exactly $(H^*d+dH^*)^n$. The same calculation applies to $J$. Since $(gf)^*=f^*g^*$ and $(fg)^*=g^*f^*$, these are the two required cochain homotopies to the identity. No exactness of an infinite dual or interchange of infinite sums is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image clause: agent-formulated algebraic sub-obligation inherited through lem-sfb-rational-polynomial-bar-contraction; the current blueprint does not itself state the divided-monomial calculation."
+   }
+  },
+  {
+   "text": "The dual of the coordinate projection $\\pi_n$ identifies $V_{m,n}^*$ with the span of the divided monomials having no zero block. Its differential is block splitting into nonzero blocks with sign $(-1)^a$. Indeed, step 2 expands the internal cofaces into all splittings, and the terms with a zero block cancel: at the first position the endpoint term has sign $+1$ and the split of block one has sign $-1$; at an internal position $j$ the splits from blocks $j-1$ and $j$ have signs $(-1)^{j-1}$ and $(-1)^j$; at the last position the last split has sign $(-1)^n$ and the endpoint term sign $(-1)^{n+1}$. All remaining terms are precisely the asserted nonzero splittings. For degree zero the two endpoint terms cancel directly. Thus this is an identification of complexes, not merely of their graded terms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image clause: agent-formulated algebraic sub-obligation inherited through lem-sfb-rational-polynomial-bar-contraction; the current blueprint does not itself state the divided-monomial calculation."
+   }
+  },
+  {
+   "text": "On a cocycle $z$, a difference $dH+Hd$ is $d(Hz)$ and hence a coboundary. The cochain homotopies in step 7 therefore show that $f^*$ and $g^*$ induce inverse maps on every cohomology group. They are quasi-isomorphisms and become inverse isomorphisms in the derived category by its localization definition [def-weil-abstract-derived-category]. Finally each nonzero block has positive total weight, so $n$ such blocks require $n\\leq\\sum_i m_i$. If $m=0$ there are no nonzero blocks at any positive degree, and $V_{0,0}=\\mathbf Q$. This also treats $r=0$, where only $m=0$ exists. Each polynomial has a finite monomial support and therefore a finite set of multidegrees. Since step 2 shows that the differential preserves multidegree, the degreewise decomposition $P=\\bigoplus_mP_m$ is a decomposition of cochain complexes.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image clause: agent-formulated algebraic sub-obligation inherited through lem-sfb-rational-polynomial-bar-contraction; the current blueprint does not itself state the divided-monomial calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-simplicial-object",
+  "lem-sfb-split-simplicial-nondegenerate-homotopy",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct-image clause: agent-formulated algebraic sub-obligation inherited through lem-sfb-rational-polynomial-bar-contraction; the current blueprint does not itself state the divided-monomial calculation. Explicit polynomial and tuple calculations; the homotopy theorem is supplied by the cited existing Mathlib leaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "divided.monomial|nonzero.block|zero.block|homotopyEquivNondegComplex",
+   "results": "{\"t\": \"2026-10-22T06:04:40Z\", \"tool\": \"grep\", \"query\": \"divided.monomial|nonzero.block|zero.block|homotopyEquivNondegComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean\"], \"digest\": \"d896c299f4386bb7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general Dold-Kan normalization is already represented by lem-sfb-split-simplicial-nondegenerate-homotopy; constructing the divided-monomial splitting and identifying the projected merge differential require a separate argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization of polynomial cosimplicial cochains in fixed multidegree using the divided power basis gives a homotopy equivalence with positive block decompositions",
+   "results": "{\"t\": \"2026-10-22T06:04:41Z\", \"tool\": \"leansearch\", \"query\": \"Normalization of polynomial cosimplicial cochains in fixed multidegree using the divided power basis gives a homotopy equivalence with positive block decompositions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\", \"CategoryTheory.Idempotents.DoldKan.N\", \"CategoryTheory.Idempotents.DoldKan.N_obj\", \"CategoryTheory.Idempotents.DoldKan.isoN₁_hom_app_f\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"Polynomial.degree_normalize\", \"AlgebraicTopology.DoldKan.instReflectsIsomorphismsSimplicialObjectKaroubiChainComplexNatN₁\", \"IsLocalization.integerNormalization\"], \"digest\": \"fdfbac8d78222274\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general Dold-Kan normalization is already represented by lem-sfb-split-simplicial-nondegenerate-homotopy; constructing the divided-monomial splitting and identifying the projected merge differential require a separate argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"Splitting\"",
+   "results": "{\"t\": \"2026-10-22T06:04:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"Splitting\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general Dold-Kan normalization is already represented by lem-sfb-split-simplicial-nondegenerate-homotopy; constructing the divided-monomial splitting and identifying the projected merge differential require a separate argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Divided monomial multidegree components of the rational polynomial additive bar complex dualize to split simplicial modules normalized by tuples with no zero blocks",
+   "results": "{\"t\": \"2026-10-22T06:04:52Z\", \"tool\": \"leanfinder\", \"query\": \"Divided monomial multidegree components of the rational polynomial additive bar complex dualize to split simplicial modules normalized by tuples with no zero blocks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\", \"AlgebraicTopology.DoldKan.decomposition_Q\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id\", \"SimplicialObject.Splitting.πSummand\", \"SimplicialObject.Splitting.nondegComplex\", \"SimplicialObject.Splitting.ιSummand_comp_d_comp_πSummand_eq_zero\", \"SimplicialObject.Splitting.summand\", \"SimplicialObject.Splitting.d\"], \"digest\": \"7581bee58cdfeaf7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general Dold-Kan normalization is already represented by lem-sfb-split-simplicial-nondegenerate-homotopy; constructing the divided-monomial splitting and identifying the projected merge differential require a separate argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dual rational polynomial bar normalization removes all zero exponent blocks via the degeneracy splitting of a simplicial module",
+   "results": "{\"t\": \"2026-10-22T06:04:52Z\", \"tool\": \"leanfinder\", \"query\": \"Dual rational polynomial bar normalization removes all zero exponent blocks via the degeneracy splitting of a simplicial module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.exists_normal_form_P_σ\", \"Mathlib.Tactic.FieldSimp.qNF.removeZeros\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id\", \"Mathlib.Tactic.FieldSimp.qNF.split\", \"Mathlib.Tactic.FieldSimp.qNF.tryClearZero\", \"SimplicialObject.Splitting.summand\", \"AlgebraicTopology.DoldKan.decomposition_Q\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\"], \"digest\": \"1a30e66e91ebc95c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general Dold-Kan normalization is already represented by lem-sfb-split-simplicial-nondegenerate-homotopy; constructing the divided-monomial splitting and identifying the projected merge differential require a separate argument."
+  },
+  {
+   "tool": "grep",
+   "query": "divided.monomial|homotopyEquivNondegComplex|basisMonomials",
+   "results": "{\"t\": \"2026-10-23T09:47:06Z\", \"tool\": \"grep\", \"query\": \"divided.monomial|homotopyEquivNondegComplex|basisMonomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"Mathlib/Algebra/Polynomial/Basis.lean\", \"Mathlib/Algebra/Polynomial/Basis.lean\", \"Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean\", \"Mathlib/RingTheory/MvPolynomial.lean\", \"Mathlib/RingTheory/MvPolynomial.lean\", \"Mathlib/RingTheory/MvPolynomial.lean\", \"Mathlib/RingTheory/LinearDisjoint.lean\"], \"digest\": \"033db9ea4cf3ae03\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: monomial bases and the existing general split-simplicial homotopy theorem do not state the polynomial zero-block calculation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polynomial bar cochains over the rationals normalize to nonzero exponent blocks by a chain homotopy equivalence",
+   "results": "{\"t\": \"2026-10-23T09:47:06Z\", \"tool\": \"leansearch\", \"query\": \"Polynomial bar cochains over the rationals normalize to nonzero exponent blocks by a chain homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.degree_normalize\", \"Polynomial.normalize_eq_self_iff_monic\", \"AlgebraicTopology.DoldKan.homotopyQToZero\", \"AlgebraicTopology.DoldKan.homotopyPToId\", \"CochainComplex.HomComplex.Cochain.ofHomotopy\", \"Polynomial.integralNormalization_coeff_degree\", \"Polynomial.integralNormalization_coeff_natDegree\", \"IsLocalization.integerNormalization\"], \"digest\": \"ad8269918cd3501f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general homotopies and unrelated polynomial normalizations do not identify this complex"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"Splitting\"",
+   "results": "{\"t\": \"2026-10-23T09:47:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"Splitting\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Divided monomial normalization of multigraded polynomial additive bar cochains as a split simplicial module",
+   "results": "{\"t\": \"2026-10-23T09:47:12Z\", \"tool\": \"leanfinder\", \"query\": \"Divided monomial normalization of multigraded polynomial additive bar cochains as a split simplicial module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\", \"AlgebraicTopology.DoldKan.Γ₀'\", \"AlgebraicTopology.DoldKan.Γ₀.splitting\", \"AlgebraicTopology.DoldKan.Γ₀'_obj\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂\", \"AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self\", \"AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self_assoc\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id\"], \"digest\": \"866f31a1ac9ff5ea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general Dold-Kan summands or divided-power operations do not state this polynomial normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Additive group polynomial cochains in characteristic zero with divided power monomials and zero block degeneracies",
+   "results": "{\"t\": \"2026-10-23T09:47:55Z\", \"tool\": \"leanfinder\", \"query\": \"Additive group polynomial cochains in characteristic zero with divided power monomials and zero block degeneracies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"dividedPowersBot_dpow_eq\", \"DividedPowers.dpow_eval_zero\", \"DividedPowers.RatAlgebra.dpow\", \"DividedPowers.dpow\", \"DividedPowers.RatAlgebra.dpow_apply\", \"DividedPowers.OfInvertibleFactorial.dpow\", \"DividedPowers.RatAlgebra.dpow_eq_inv_fact_smul\", \"DividedPowers.OfInvertibleFactorial.dpow_add_of_lt\"], \"digest\": \"8cf2b4631dcdda91\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general Dold-Kan summands or divided-power operations do not state this polynomial normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-polynomial-bar-contraction",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), algebraic obligation under the trivial lattice calculation; returned proof steps 3 and 4: finite divided-monomial duals, actual zero-block splitting, and chain-level normalization. Stacks Tag 017P, simplicial.tex, definition-split, supplies the splitting terminology only; the general homotopy theorem is the existing lem-sfb-split-simplicial-nondegenerate-homotopy. The polynomial construction is agent-formulated.",
+   "via": [
+    "lem-sfb-rational-polynomial-bar-contraction",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-polynomial-bar-divided-monomial-normalization",
+  "worker": "stage1",
+  "summary": "Constructed all simplicial operators explicitly on finite divided-monomial duals, proved the zero-block splitting by a basis bijection, applied the existing split-simplicial homotopy leaf, and transposed both homotopies with their degrees checked. Wrote the normalized polynomial differential and all zero-block cancellations. No statement change and no new node.",
+  "blueprint": "Paragraph (3), open direct-image clause: agent-formulated algebraic sub-obligation inherited through lem-sfb-rational-polynomial-bar-contraction; the current blueprint does not itself state the divided-monomial calculation. Whole-blueprint searches for polynomial, divided, zero block and polynomial bar found no node stating this normalization; blueprint ancestor tool returns null for this created-node chain."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-42683f39d",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-42683f39d (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit that splits the item (9 steps) with no new nodes. The statement is byte-identical to live/side-live (unsplit, no proof); only status, proof, proof_deps, proof_origin, split_report and searches changed. There is no repair note, no SGA citation, and the main-20261015 and latest copies of direct-images.proof.md paragraph (3) are identical, so the item stays an inherited agent-formulated sub-obligation. I checked every step. Step 2: the divided binomial identity. Step 3: the transposed faces (internal faces merge blocks, d_0/d_n delete a block only if it is zero, degeneracies insert a zero). Step 4: the general U(phi) formula, including its composition and combined endpoint tests (N^r has no cancellation), and its agreement with step 3 on delta_i and sigma_i. Step 5: the splitting theta(t)=#{j_a<=t} is a basis bijection; surjections have increments 0/1, and the k=0 summand exists only for m=0. Step 6: the leaf's hypotheses and conclusion, checked against Mathlib SplitSimplicialObject.lean lines 140-176 and 300-312. Step 7: the degrees and transposes of the dualized homotopies. Step 8: zero-block terms cancel at the first, internal and last positions, leaving exactly the transpose of the boundary. Step 9: weight bound, m=0 and r=0, and the finite-multidegree direct sum. Small cases: m=1 gives H^1=Q; for m=2, d(x^2/2)=-x1x2 matches boundary[1|1]=-[2]; r=0 gives Q in degree 0. Duplicate search over dag/nodes found only the parent, siblings and general Dold-Kan nodes, none stating this normalization. No fixes."
+ }
+}

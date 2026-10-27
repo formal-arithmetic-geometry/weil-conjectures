@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-unramified-etale-compatible-charts",
+ "kind": "statement",
+ "title": "Compatible etale scheme charts recognize unramified and etale morphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. In a compatible chart diagram $b h=f a$, the objects $U,V$ are schemes, $a:U\\to X$ and $b:V\\to Y$ are representable etale morphisms, and $h:U\\to V$ is a scheme morphism. Scheme unramifiedness and etaleness mean [def-weil-unramified-morphism, def-weil-etale-morphism]. The corresponding chartwise property of $f$ means that $h$ has that scheme property for every compatible chart diagram. For either property, it suffices to test a single compatible diagram with $a$ surjective: $f$ has the chartwise property if and only if its $h$ has the scheme property. For every prescribed surjective etale scheme atlas $b:V\\to Y$, there exist a scheme $U$, a surjective etale scheme atlas $a:U\\to X$, and $h:U\\to V$ with $b h=f a$. These assertions include empty spaces and schemes and require no separation or finiteness hypotheses on $f$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03MJ (lemma-local-source-target), 03ZH (definition-unramified), and 03XT (lemma-etale-local), clauses (7)--(8); existence is spaces.tex Tag 02X1 (lemma-lift-morphism-presentations); scheme locality is descent.tex Tag 04R3 (remark-list-local-source-target), items (7) and (9)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-unramified-morphism",
+  "def-weil-etale-morphism",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "For unramifiedness, use the three clauses of [lem-sfb-scheme-unramified-etale-locality], interchanging the final two existential binders to obtain IsEtaleLocalOnSourceAndTarget. For etaleness take the first conjunct of [lem-sfb-scheme-etale-source-target-properties]. The unramified property respects isomorphisms because it is the intersection of locally finite type with the diagonal of open immersions; etaleness respects isomorphisms by Mathlib. Apply [lem-sfb-space-etale-presentation-property-criterion]. A given diagram with surjective source and P(h) witnesses HasEtalePresentationProperty; in the other direction apply MapIsLocally directly to the given diagram. Target-chart surjectivity is not used.",
+   "uses": [
+    "lem-sfb-scheme-unramified-etale-locality",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "def-weil-unramified-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MJ (lemma-local-source-target), clauses (1)--(2); scheme locality: descent.tex Tag 04R3, items (7),(9)."
+   }
+  },
+  {
+   "text": "Choose an atlas c:h_W -> X from [def-trf-algebraic-space]. Apply the scheme-test definition of IsEtale b to c followed by f. It produces U, p:U -> W and q:h_U -> h_V with a representing pullback square, and p is etale. The IsSurjective b test may choose a different representing scheme, but the unique isomorphism of the two pullback squares, reflected through fully faithful Yoneda [lem-galois-yoneda-fully-faithful], transports surjectivity to p. Let h be the Yoneda preimage of q and a=yoneda(p) followed by c. For either scheme property P=etale or surjective, yoneda(p) is representable with P: represent a test by the scheme pullback [def-pc-fibre-product], use preservation of pullbacks by Yoneda, and use scheme base change [lem-weil-pbc-etale-scheme-base-change, lem-weil-pbc-surjective-base-change]. Composite representable etaleness is isEtale_comp from [def-trf-algebraic-space]. For composite representable surjectivity, successively represent the two scheme tests and paste the squares; their scheme projection is surjective by [lem-trf-surjective-morphism-composition]. Etaleness of the analogous composite projection is [lem-weil-pbc-etale-composition-cancellation]. The original representing square gives the required commuting equation. No algebraic-space fibre-product or point-set covering theorem is needed.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-galois-yoneda-fully-faithful",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-trf-surjective-morphism-composition",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02X1 (lemma-lift-morphism-presentations), construction U = W x_Y V and the scheme tests of its composite atlas."
+   }
+  },
+  {
+   "text": "All arguments are uniform for empty schemes and spaces: existence of the starting atlas and every representing test is part of the hypotheses or [def-trf-algebraic-space], and no point is selected. Scheme locality includes empty sources by [lem-sfb-scheme-unramified-etale-locality, lem-sfb-scheme-etale-source-target-properties]. Thus no extra hypothesis on nonemptiness, separation, finiteness, quasi-compactness or Noetherianity occurs.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-scheme-unramified-etale-locality",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MJ (lemma-local-source-target), applied to empty spaces; the scheme definitions are vacuous on the empty source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-scheme-unramified-etale-locality",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-trf-surjective-morphism-composition",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03MJ, using the stated presentation criterion and scheme locality. Atlas construction: spaces.tex Tag 02X1; its representable pullbacks and composition are implemented directly by scheme tests and categorical pullback pasting (H5, 2026-10-26)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is unramified if and only if a compatible etale surjective scheme chart morphism is unramified",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  f.Etale ↔ f.FormallyUnramified ∧ f.Smooth\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ between commutative rings, $ f $ is étale if and only if it is both formally unramified (admits no nontrivial derivations) and smooth (induces a flat algebra wi\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.FormallyUnramified (CategoryTheory.CategoryStruct.comp f g)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the composition of morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ of schemes is formally unramified, then $ f $ is formally unramified.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, ring maps or Zariski locality; no algebraic-space chart recognition or algebraic-space permanence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of algebraic spaces is unramified if and only if a compatible etale surjective scheme chart morphism is unramified",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"RingHom.FormallyUnramified\", \"module\": \"Mathlib.RingTheory.RingHom.Unramified\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\to S $ between commutative semirings is formally unramified if the algebra structure on $ S $ over $ R $ induced by $ f $ satisfies the formally unramified condition, meani\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"Algebra.FormallyUnramified\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"(R : Type v) → (A : Type u) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"Given a commutative ring $ R $ and a commutative ring $ A $ equipped with an $ R $-algebra structure, the proposition that $ A $ is formally unramified over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"If for every affine open subset $ U $ of $ Y $ and every affine open subset $ V $ of $ X $ contained in $ f^{-1}(U) $, the induced ring homomorphism $ \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(V) $ is formal\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"Algebra.Unramified\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → (A : Type u_2) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"Given a commutative ring $ R $ and a commutative ring $ A $ equipped with an $ R $-algebra structure, this is the proposition that $ A $ is unramified over $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, ring maps or Zariski locality; no algebraic-space chart recognition or algebraic-space permanence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, ring maps or Zariski locality; no algebraic-space chart recognition or algebraic-space permanence"
+  },
+  {
+   "tool": "grep",
+   "query": "local.*source.*target|AlgebraicSpace|algebraic space",
+   "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"line\": \"135\", \"text\": \"  have := HasRingHomProperty.of_isZariskiLocalAtSource_of_isZariskiLocalAtTarget.{u}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"310\", \"text\": \"section IsZariskiLocalAtSourceAndTarget\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"312\", \"text\": \"/-- If `P` is local at the source and the target, then restriction on both source and target\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"317\", \"text\": \"  IsZariskiLocalAtSource.comp (IsZariskiLocalAtTarget.restrict hf U) _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"319\", \"text\": \"/-- If `P` is local at the source, local at the target and is stable under post-composition with\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"336\", \"text\": \"end IsZariskiLocalAtSourceAndTarget\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"line\": \"32\", \"text\": \"`affineLocally P` will be local on both the source and the target.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"line\": \"402\", \"text\": \"lemma isLocal_ringHomProperty_of_isZariskiLocalAtSource_of_isZariskiLocalAtTarget\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"line\": \"434\", \"text\": \"lemma of_isZariskiLocalAtSource_of_isZariskiLocalAtTarget [IsZariskiLocalAtTarget P]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"line\": \"438\", \"text\": \"    isLocal_ringHomProperty_of_isZariskiLocalAtSource_of_isZariskiLocalAtTarget P\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"line\": \"442\", \"text\": \"      ⟨isLocal_ringHomProperty_of_isZariskiLocalAtSource_of_isZariskiLocalAtTarget P, rfl⟩\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, ring maps or Zariski locality; no algebraic-space chart recognition or algebraic-space permanence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Independence of etale scheme presentations for unramified and etale properties of algebraic space morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  f.Etale ↔ f.FormallyUnramified ∧ f.Smooth\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ between commutative rings, $ f $ is étale if and only if it is both formally unramified (admits no nontrivial derivations) and smooth (induces a flat algebra wi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"For commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is both formally unramified over $ R $ and formally smooth over $ R $, then $ A $ is formally étale over $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, ring maps or Zariski locality; no algebraic-space chart recognition or algebraic-space permanence"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic space|local.*source.*target",
+   "results": "Hits read: Mathlib/Logic/Equiv/PartialEquiv.lean, Mathlib/Geometry/Manifold/Immersion.lean, Mathlib/Geometry/Manifold/Immersion.lean, Mathlib/Geometry/Manifold/Immersion.lean, Mathlib/Geometry/Manifold/Immersion.lean, Mathlib/Geometry/Manifold/Immersion.lean, Mathlib/Geometry/Manifold/LocalSourceTargetProperty.lean, Mathlib/Geometry/Manifold/LocalSourceTargetProperty.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme or algebra morphisms, not algebraic-space compatible chart recognition or prescribed target atlases"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible etale scheme presentations recognize unramified and etale morphisms of algebraic spaces",
+   "results": "Hits read: AlgebraicGeometry.FormallyUnramified.recOn, Algebra.FormallyEtale.iff_unramified_and_smooth, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.FormallyUnramified.casesOn, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified, RingHom.etale_iff_formallyUnramified_and_smooth. ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme or algebra morphisms, not algebraic-space compatible chart recognition or prescribed target atlases"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "Hits read: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme or algebra morphisms, not algebraic-space compatible chart recognition or prescribed target atlases"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is unramified or etale if and only if one compatible etale scheme chart with surjective source has that property",
+   "results": "Hits read: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.formallyUnramified_iff. ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme or algebra morphisms, not algebraic-space compatible chart recognition or prescribed target atlases"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every prescribed etale scheme atlas of the target of an algebraic space morphism there is a compatible surjective etale scheme atlas of the source",
+   "results": "Hits read: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.of_comp. ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme or algebra morphisms, not algebraic-space compatible chart recognition or prescribed target atlases"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-unramified-permanence",
+  "date": "2026-10-22",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Unramified algebraic-space morphisms: base change, composition and cancellation. Supporting input: chart recognition and existence of compatible presentations.",
+   "via": [
+    "lem-sfb-space-unramified-permanence",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-unramified-etale-compatible-charts",
+  "worker": "stage1",
+  "summary": "Reused the existing general presentation criterion and etale scheme-locality lemma, isolated the missing unramified scheme-locality input as one statement-only node, and wrote the prescribed-atlas pullback and all scheme tests of its composite explicitly. Checked empty spaces and absence of finiteness or separation hypotheses.",
+  "blueprint": "Supporting chart-recognition input along the existing from.place chain below det-thm-sf-ctf-stability-direct-images (3); latest blueprint direct-image step retained, no unit route changed. The current blueprint does not state this auxiliary lemma separately.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic representable etale pullback and surjectivity used to construct a compatible atlas; this unit has no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Scheme etale composition for each test of the composite atlas; a generic morphism tool."
+   },
+   {
+    "node": "lem-trf-surjective-morphism-composition",
+    "why": "Scheme surjectivity composition for each test of the composite atlas; a generic set-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-trf-surjective-morphism-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-16e97c811",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-16e97c811 (reviewer sub-agent of L); spot-checked: The item statement is unchanged from live, and the item is still unsplit in clones/live and side-live; this is a first split with no repair note. Step 1 applies lem-sfb-space-etale-presentation-property-criterion, whose presentation diagrams are exactly the item's compatible diagrams. The 04QZ (i)-(iii) hypotheses come from the new node for unramified and from lem-sfb-scheme-etale-source-target-properties for etale. The fixed-diagram form follows correctly from the existential (2). Step 2 is the Stacks 02X1 construction (spaces.tex, lemma-lift-morphism-presentations, proof read): U = W x_Y V. U is a scheme and U->W is surjective etale by lem-trf-space-fibre-products-etale-covers applied to a singleton family. The composite a = cp is checked on each test scheme T via T x_X U = (T x_X W) x_Y V. On that scheme, etaleness comes from lem-weil-pbc-etale-composition-cancellation(2) and surjectivity from lem-trf-surjective-morphism-composition. There is no cycle: lem-sfb-space-unramified-permanence cites this item and is not used here. Step 3 handles the empty cases and is correct. The new node lem-sfb-scheme-unramified-etale-locality is true by descent.tex 04R3 item (9) (03YV/02VM via 04R2), and the scheme notion lft + open diagonal equals 02G4 by 02GE. It is statement only, self-contained, and a scheme-level input strictly smaller than the space-level item. A rg -L search for 03YV/02VM/04R3 and unramified-locality wording found no duplicate: the etale-locality list omits unramified, and the fpqc/stack nodes are target descent. Batch-5: both lem-trf-space-fibre-products-etale-covers (02X2/041F algebraic-space foundations) and lem-trf-surjective-morphism-composition (Mathlib leaf 01RZ) are generic and not part of the trace formula or Poincare duality statements or proofs, so I accept them. I accept the three tool_uses as generic. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnramifiedEtaleCompatibleCharts",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.unramified_etale_compatible_charts",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnramifiedEtaleCompatibleCharts.lean",
+  "statement": "theorem unramified_etale_compatible_charts {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) : (∀ P : MorphismProperty Scheme.{u}, P = @IsUnramified ∨ P = @Etale → ∀ (U V : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ Y.obj.obj) (h : U ⟶ V), IsEtale a → IsEtale b → a ≫ f.hom.hom = yoneda.map h ≫ b → IsSurjective a → (MapIsLocally P f ↔ P h.left)) ∧ (∀ (V : Over S) (b : yoneda.obj V ⟶ Y.obj.obj), IsEtale b → IsSurjective b → ∃ (U : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (h : U ⟶ V), IsEtale a ∧ IsSurjective a ∧ a ≫ f.hom.hom = yoneda.map h ≫ b)",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses MapIsLocally from the landed definition node added to stmt_deps. The compatible diagram is quantified explicitly, so no theorem node is used to own presentation data. The first conjunct is the fixed-compatible-diagram equivalence for either scheme property; the second constructs a source atlas for every prescribed target atlas."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c27787b0",
+  "group": "O1",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 at 177e. The signature now names the compatible diagram directly (U V a b h, IsEtale a/b, a ≫ f.hom.hom = yoneda.map h ≫ b, IsSurjective a) instead of using EtalePresentation, which is owned only by a theorem node. That theorem stmt_dep is dropped. The only node differences from side-live are the lean record and the added stmt_dep def-sfb-space-morphism-properties (owner of MapIsLocally), with no cycle. Statement matches Stacks 03MJ (1)<=>(2) for a fixed diagram with surjective source chart and no target surjectivity, for P = IsUnramified or Etale, plus the 02X1 existence of a compatible surjective étale source atlas over any prescribed target atlas. Empty spaces and single-universe u are covered, and no extra hypotheses are added. No new definitions; IsChartwiseEtale is a different formulation, so no duplicate. Docstrings carry source, blueprint id and proof steps; the proof is only sorry; lean.statement is verbatim; the report has the required sections. No files changed, so nothing was compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261026T082117-L-2135627",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-etale-sheaf-space-atlas-bootstrap",
+ "kind": "statement",
+ "title": "An etale sheaf with an atlas by algebraic spaces is an algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Let $F:(\\mathit{Sch}/S)^{\\mathrm{op}}\\to\\mathit{Sets}$ be a functor which is a sheaf for jointly surjective etale covering families: every family of sections agreeing on all pairwise fibre products glues uniquely. Etale morphisms are as in [def-weil-etale-morphism]. Suppose that an $S$-scheme $U$ and a natural transformation $q:h_U\\to F$ are given, where $h_U(T)=\\operatorname{Mor}_S(T,U)$. Assume that for every $S$-scheme $T$ and every $a\\in F(T)$, the functor $h_T\\times_{a,F,q}h_U$ is represented by an algebraic space $P_a$ over $T$ [def-trf-algebraic-space], and its projection $P_a\\to T$ is surjective and etale. These properties mean that for every representable etale scheme chart $V\\to P_a$ the composite $V\\to T$ is etale, and that some surjective etale scheme chart has composite surjective onto $T$. Then $F$ is an algebraic space over $S$ in the fppf-sheaf convention of [def-trf-algebraic-space].",
+ "source": {
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 0BH4 (lemma-spaces-etale-locally-representable), scheme-atlas specialization. The input is only an etale sheaf; the conclusion is an algebraic space in the fppf-sheaf convention."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-etale-morphism",
+  "def-trf-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Write $q_H(u)$ for the section obtained by applying $q$ to an $S$-morphism $u:H\\to U$. Apply the atlas hypothesis with $T=U$ and $a=q_U(\\mathrm{id}_U)$. It gives an algebraic space $R$ whose functor of points is $R(H)=\\{(u,v)\\in h_U(H)^2:q_H(u)=q_H(v)\\}$. Let $s,t:R\\to h_U$ be its two projections. One projection is chartwise etale by hypothesis; interchange $(u,v)$ to obtain the other. The map $j=(s,t):R\\to h_{U\\times_SU}$ is a monomorphism, because a pair determines an element of $R(H)$ uniquely. Its image on each $H$ is an equivalence relation: equality of the two $q_H$-images is reflexive, symmetric and transitive. The diagonal pair $(u,u)$ gives a section of either projection.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0BH4, first three proof sentences: form the relation R=U times_F U; scheme-atlas specialization."
+   }
+  },
+  {
+   "text": "We check that $j$ is locally of finite type without assuming any finiteness or separation of $U/S$. For every representable etale scheme chart $V\\to R$, the composite $V\\to U$ through $s$ is etale by the hypothesis on $P_a$. By [def-weil-etale-morphism] and [def-sbc-locally-finite-presentation], every point of $V$ has an affine open neighbourhood mapping into an affine open of $U$ whose coordinate ring is finitely presented, hence finitely generated, over that of the affine open of $U$. Postcomposing $j$ with the first projection $p_1:U\\times_SU\\to U$ gives $s$. Let $W^{\\prime}=\\operatorname{Spec}B^{\\prime}$ be an arbitrary affine open of $U\\times_SU$ and $v\\in V$ a point mapping into $W^{\\prime}$. Choose an affine open $U_0=\\operatorname{Spec}A\\subseteq U$ containing the image of $v$ in $U$, a principal open $W=D(b)=\\operatorname{Spec}B^{\\prime}_b\\subseteq W^{\\prime}\\cap p_1^{-1}(U_0)$ containing the image of $v$, and an affine open $V_0=\\operatorname{Spec}C\\ni v$ of $V$ mapping into $W$ with $C$ finitely generated over $A$: start with a finite-type affine chart of $V\\to U$ around $v$ over $U_0$, and shrink it to a principal affine open inside the inverse image of $W$; adjoining one inverse keeps finite generation over $A$. The ring maps factor as $A\\to B^{\\prime}_b\\to C$, so the same finite set of $A$-algebra generators generates $C$ over $B^{\\prime}_b$; adding $1/b$ to it generates $C$ over $B^{\\prime}$. Thus the inverse image of every affine open $W^{\\prime}$ is covered by spectra of finitely generated $B^{\\prime}$-algebras, and $V\\to U\\times_SU$ is locally of finite type in [def-weil-finite-type-morphism], as required. This is the affine argument underlying Tag 0462.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0BH4 via Tag 04S6 (theorem-final-bootstrap), reduction (1) to (2); affine specialization of Tag 0462."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-lft-monomorphism-separated-lqf] to $j:R\\to U\\times_SU$, using the monomorphism from step 1 and the chartwise finite-type verification from step 2. It makes $j$ separated and chartwise locally quasi-finite. The target $U\\times_SU$ is a scheme by [def-pc-fibre-product]. Therefore [lem-a1-separated-locally-qf-space-representable] gives a scheme representing $R$, over $U\\times_SU$. Replace $R$ by that representing scheme; the identifications of its sections and projections from step 1 are preserved.",
+   "uses": [
+    "lem-sfb-space-lft-monomorphism-separated-lqf",
+    "def-pc-fibre-product",
+    "lem-a1-separated-locally-qf-space-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), reduction (1) to (2), invoking Tags 0463 and 03XX."
+   }
+  },
+  {
+   "text": "Now the identity chart of the scheme $R$ shows that $s,t:R\\to U$ are etale; their diagonal sections show that they are surjective. Thus $j$ is an etale equivalence relation in schemes. Apply [lem-trf-etale-relation-quotient] and call its fppf quotient $Q$, with quotient map $\\pi:h_U\\to Q$. It gives all three facts needed below: $Q$ is an algebraic space, every section of $Q$ has etale-local lifts to $U$, and $h_R\\simeq h_U\\times_Qh_U$. In particular, for two maps $u,v:H\\to U$, $\\pi_H(u)=\\pi_H(v)$ if and only if $(u,v)\\in R(H)$, which by step 1 is equivalent to $q_H(u)=q_H(v)$.",
+   "uses": [
+    "lem-trf-etale-relation-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0BH4, quotient construction; scheme relation presentation is Tag 02WW (theorem-presentation)."
+   }
+  },
+  {
+   "text": "The fppf sheaf $Q$ is also an etale sheaf: every jointly surjective family of etale scheme morphisms is a covering in [def-pc-fppf-site], because [def-weil-etale-morphism] says its maps are flat and locally of finite presentation. For $x\\in Q(H)$ choose an etale covering $H_i\\to H$ and lifts $u_i:H_i\\to U$ supplied by [lem-trf-etale-relation-quotient]. On each overlap $H_i\\times_HH_j$, their images under $\\pi$ agree, so the kernel-pair identity in that node gives a section of $R$ with these two endpoints. Hence $q(u_i)=q(u_j)$ on the overlap. The assumed etale sheaf axiom for $F$ glues them uniquely to a section $\\phi_H(x)\\in F(H)$.",
+   "uses": [
+    "def-pc-fppf-site",
+    "def-weil-etale-morphism",
+    "lem-trf-etale-relation-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0BH4, final comparison of etale quotients; its omitted small check, existence of the comparison."
+   }
+  },
+  {
+   "text": "This construction is independent of its choices. Given two covering families and lifts of $x$, use the covering by their pairwise fibre products over $H$. On each member the two lifts have the same $\\pi$-image, hence form an $R$-pair by [lem-trf-etale-relation-quotient]; their $q$-images agree. Uniqueness in the sheaf axiom of $F$ makes the two glued sections equal. Pulling a lifting cover back along $H^{\\prime}\\to H$ produces lifts of the restricted section; uniqueness again gives $\\phi_{H^{\\prime}}(x|_{H^{\\prime}})=\\phi_H(x)|_{H^{\\prime}}$. Thus $\\phi:Q\\to F$ is natural and $\\phi\\pi=q$. The use of common refinements is on the small etale site of the scheme $H$, whose fibre products and covering structure are supplied by [def-weil-pbc-etale-site].",
+   "uses": [
+    "lem-trf-etale-relation-quotient",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0BH4, final comparison: the omitted small check, independence and naturality."
+   }
+  },
+  {
+   "text": "For injectivity, let $x,y\\in Q(H)$ have $\\phi_H(x)=\\phi_H(y)$. Choose etale-local lifts to $U$ of both sections and a common refinement as in step 6. On this covering they are represented by $u,v$ with $q(u)=q(v)$. Step 1 says $(u,v)\\in R$, and the kernel-pair identity of [lem-trf-etale-relation-quotient] gives $\\pi(u)=\\pi(v)$. Thus $x$ and $y$ agree on the covering, and separatedness of the etale sheaf $Q$ from step 5 gives $x=y$.",
+   "uses": [
+    "lem-trf-etale-relation-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0BH4, final comparison: injectivity from equality of the two kernel pairs."
+   }
+  },
+  {
+   "text": "For surjectivity, fix $a\\in F(H)$. By the atlas hypothesis choose a representable surjective etale scheme chart $V\\to P_a$ whose composite $V\\to H$ is surjective and etale. The universal pair in $P_a=h_H\\times_Fh_U$ gives a map $u:V\\to U$ with $q(u)=a|_V$. The section $x_V=\\pi(u)\\in Q(V)$ satisfies $\\phi_V(x_V)=a|_V$. Its two pullbacks to $V\\times_HV$ have the same $\\phi$-image, hence are equal by step 7 applied to that scheme. The etale sheaf axiom for $Q$ glues $x_V$ to $x\\in Q(H)$. Naturality and separatedness of $F$ give $\\phi_H(x)=a$. Thus every $\\phi_H$ is a bijection, including on empty schemes, and their inverses are natural by the naturality already proved.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0BH4, final comparison: local surjectivity followed by explicit descent of the lifted section."
+   }
+  },
+  {
+   "text": "The natural isomorphism $\\phi:Q\\simeq F$ proves the required conclusion in the fppf convention. Explicitly, an fppf matching family in $F$ transports by $\\phi^{-1}$ to one in $Q$, glues there uniquely, and transports back. For two scheme sections of $F$, their fibre product is identified by $\\phi^{-1}$ with the corresponding fibre product over $Q$, hence is a scheme because the diagonal of $Q$ is representable. Finally, since $\\phi\\pi=q$, every scheme base change of $q$ is the corresponding base change of the representable surjective etale atlas $\\pi$ of $Q$. These are exactly the sheaf, diagonal and atlas clauses of [def-trf-algebraic-space].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-etale-relation-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0BH4, conclusion; Tag 025Y (definition-algebraic-space)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-space-lft-monomorphism-separated-lqf",
+  "lem-a1-separated-locally-qf-space-representable",
+  "lem-trf-etale-relation-quotient",
+  "def-pc-fppf-site",
+  "def-weil-pbc-etale-site",
+  "def-trf-algebraic-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 0BH4 (lemma-spaces-etale-locally-representable), scheme-atlas case; simplify its quotient step by the scheme-relation reduction in Tag 04S6 (theorem-final-bootstrap), reduction (1) to (2), and existing Tag 02WW."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of sets for the big etale topology admitting a surjective etale map from an algebraic space representable by algebraic spaces is an algebraic space",
+   "results": "OK 8 hit(s); returned declarations/files: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.SheafedSpace, AlgebraicGeometry.Scheme, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-22",
+   "verdict": "no match: the representability hits glue schemes from Zariski open immersions, not algebraic spaces from etale charts. Mathlib/AlgebraicGeometry/Sites/Representability.lean:50-62 was read to check the stronger open-immersion hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale sheaf with an etale scheme atlas representable by algebraic spaces is an fppf algebraic space",
+   "results": "OK 8 hit(s); returned declarations/files: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.etaleTopology",
+   "date": "2026-10-22",
+   "verdict": "no match: the representability hits glue schemes from Zariski open immersions, not algebraic spaces from etale charts. Mathlib/AlgebraicGeometry/Sites/Representability.lean:50-62 was read to check the stronger open-immersion hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale sheaf with a representable surjective etale atlas is an algebraic space",
+   "results": "OK 8 hit(s); returned declarations/files: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.SheafedSpace.IsSheaf, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.LocallyRingedSpace, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-22",
+   "verdict": "no match: the representability hits glue schemes from Zariski open immersions, not algebraic spaces from etale charts. Mathlib/AlgebraicGeometry/Sites/Representability.lean:50-62 was read to check the stronger open-immersion hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"representable\"",
+   "results": "OK 2 hit(s); returned declarations/files: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy",
+   "date": "2026-10-22",
+   "verdict": "no match: the representability hits glue schemes from Zariski open immersions, not algebraic spaces from etale charts. Mathlib/AlgebraicGeometry/Sites/Representability.lean:50-62 was read to check the stronger open-immersion hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraicSpace|Stack.*[Ss]etoid|[Ss]etoid.*Stack",
+   "results": "OK 0 hit(s); returned declarations/files: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the representability hits glue schemes from Zariski open immersions, not algebraic spaces from etale charts. Mathlib/AlgebraicGeometry/Sites/Representability.lean:50-62 was read to check the stronger open-immersion hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|etale.*quotient",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etale topology and Zariski open-immersion representability only. Mathlib/AlgebraicGeometry/Sites/Representability.lean:50-62 requires relatively representable open immersions; no algebraic-space bootstrap or etale equivalence-relation quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale sheaf with a representable surjective etale scheme atlas is an algebraic space",
+   "results": "OK 8 hit(s): AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.IsEtale, AlgebraicGeometry.LocallyRingedSpace, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etale topology and Zariski open-immersion representability only. Mathlib/AlgebraicGeometry/Sites/Representability.lean:50-62 requires relatively representable open immersions; no algebraic-space bootstrap or etale equivalence-relation quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"representable\"",
+   "results": "OK 2 hit(s): AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etale topology and Zariski open-immersion representability only. Mathlib/AlgebraicGeometry/Sites/Representability.lean:50-62 requires relatively representable open immersions; no algebraic-space bootstrap or etale equivalence-relation quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale sheaf with a scheme atlas whose pullbacks are surjective etale algebraic spaces is an fppf algebraic space",
+   "results": "OK 8 hit(s): AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.instFullEtaleOverForget",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etale topology and Zariski open-immersion representability only. Mathlib/AlgebraicGeometry/Sites/Representability.lean:50-62 requires relatively representable open immersions; no algebraic-space bootstrap or etale equivalence-relation quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of a scheme by an etale equivalence relation identifies any etale sheaf with the same atlas and kernel pair",
+   "results": "OK 8 hit(s): AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.instHasPullbacksEtale",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme etale topology and Zariski open-immersion representability only. Mathlib/AlgebraicGeometry/Sites/Representability.lean:50-62 requires relatively representable open immersions; no algebraic-space bootstrap or etale equivalence-relation quotient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dm-geometric-inertia-trivial",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Passage from trivial geometric level stabilizers to an algebraic space on all test schemes, before identifying the coarse scheme. Sublemma: the algebraic-space recognition step after constructing the sheaf of isomorphism classes and checking its atlas.",
+   "via": [
+    "lem-sfb-dm-geometric-inertia-trivial",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-etale-sheaf-space-atlas-bootstrap",
+  "worker": "stage1",
+  "summary": "Checked Tag 0BH4 and its cited bootstrap reduction against Tags 0463, 03XX and 02WW. Constructed the kernel relation, proved local finite type of its monomorphism by affine finite generation, reused the existing separated locally quasi-finite schemehood and scheme etale quotient nodes, and wrote out the omitted etale-quotient comparison by explicit gluing. The sole new node is the strict geometric input Tag 0463. Statement unchanged; no Lean attachment or Mathlib match.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Passage from trivial geometric level stabilizers to an algebraic space on all test schemes, before identifying the coarse scheme. Sublemma: the algebraic-space recognition step after constructing the sheaf of isomorphism classes and checking its atlas. The nine steps realize the sheaf-recognition prerequisite without changing the alteration or moduli route. The existing ancestor chain has from.node=null; this split preserves that recorded ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-separated-locally-qf-space-representable",
+    "why": "Generic algebraic-space schemehood criterion Tag 03XX, needed to replace the kernel relation by a scheme before the scheme quotient theorem; no unit-local node supplies it."
+   },
+   {
+    "node": "lem-trf-etale-relation-quotient",
+    "why": "Generic etale equivalence-relation quotient theorem Tag 02WW, used only after verifying its scheme hypotheses; it is a geometric tool in the existing moduli prerequisite, not a replacement for a six-functor unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-separated-locally-qf-space-representable",
+  "lem-trf-etale-relation-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-0d69078ba",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-0d69078ba (reviewer sub-agent of L); spot-checked: Read in full: item (9 steps), the new node lem-sfb-space-lft-monomorphism-separated-lqf, every cited statement and the sources. Sources: bootstrap.tex:2185 Tag 0BH4, reduction (1)->(2) of 04S6 at bootstrap.tex:1488-1510, spaces-morphisms.tex:5361 Tag 0463. The route matches the source: R=P_a for a=q(id_U) is a monomorphism into U x_S U and lft; 0463 gives separated and lqf; 03XX makes R a scheme; the 02WW node gives the quotient Q. Q is an etale sheaf, and phi:Q->F is built by etale gluing (never by the fppf universal property with target F); injectivity uses the kernel pair, surjectivity uses the chart V->P_a, and the fppf clauses transport along phi. Hypotheses check: U not separated, empty H. The new node is a true specialization of 0463 to a scheme target, self-contained, and smaller than the item. Duplicate search (rg -L for 0463/0462/label/monomorphism+finite type/algebraic space lqf) found only scheme-R, permanence, etale=>lqf, limit and Keel-Mori nodes: no duplicate. FIX: step 2 proved local finite type only on affines W it chose itself, but def-weil-finite-type-morphism quantifies over every target affine. Rewrote step 2 for an arbitrary W'=Spec B' using a principal D(b) and adding 1/b to the generators. Same uses; statement unchanged; file in fixes/dag/nodes/sec-six-functors-basics/. Batch-5 flags accepted: def-trf-algebraic-space is a general definition already in the base stmt_deps; lem-trf-etale-relation-quotient (02WW) and the a1 03XX node are general algebraic-space foundations. Their computed closures hold only descent, sheafification and quasi-affine trf lemmas, with no assumption leaf, no trace-formula or Poincare theorem and no batch-4 target. Tool uses for 03XX and 02WW are generic and accepted. Advisory: 'algebraic space P_a over T' is read as a space over S with a map to h_T (inherited wording; the parent uses it the same way).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSheafSpaceAtlasBootstrap",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_sheaf_space_atlas_bootstrap",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSheafSpaceAtlasBootstrap.lean",
+  "statement": "theorem etale_sheaf_space_atlas_bootstrap {S : Scheme.{u}} (F : (Over S)ᵒᵖ ⥤ Type u) (hF : Presheaf.IsSheaf (Scheme.etaleTopology.over S) F) (U : Over S) (q : yoneda.obj U ⟶ F) (hatlas : ∀ (T : Over S) (a : F.obj (op T)), ∃ (P : AlgebraicSpace S) (p : P.obj.obj ⟶ yoneda.obj T) (r : P.obj.obj ⟶ yoneda.obj U), IsPullback r p q (yonedaEquiv.symm a) ∧ (∀ (V : Over S) (c : yoneda.obj V ⟶ P.obj.obj), IsEtale c → Etale (yoneda.preimage (c ≫ p)).left) ∧ ∃ (V : Over S) (c : yoneda.obj V ⟶ P.obj.obj), IsEtale c ∧ IsSurjective c ∧ Surjective (yoneda.preimage (c ≫ p)).left) : ∃ hfppf : Presheaf.IsSheaf (Scheme.fppfTopology.over S) F, IsAlgebraicSpace ⟨F, hfppf⟩",
+  "branch": "newtargets-dag",
+  "by": "Q146",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f253d40d8",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Compared the statement clause by clause with the node and Stacks bootstrap.tex:2185 (Tag 0BH4, scheme-atlas case). Hypotheses: F is a sheaf for Scheme.etaleTopology.over S (big étale, no fppf input); P_a is an actual IsPullback r p q (yonedaEquiv.symm a) with P : AlgebraicSpace S; étale means every AlgebraicSpace.IsEtale chart has an Etale composite to T; surjective means an étale, surjective chart exists whose composite is Surjective. Conclusion: ∃ fppf sheaf proof, IsAlgebraicSpace ⟨F,_⟩ on the same F. Universes all at u, matching def-trf-algebraic-space; no extra separation, finiteness or Noetherian assumptions. Empty S, T and U are allowed and the chart clauses are not vacuous. Node differs from live only in lean; lean.statement matches the file verbatim; docstrings have source, blueprint id and all 9 steps; proof is sorry only; lines ≤100; proof-dep imports match the recorded modules, and lem-sfb-space-lft-monomorphism-separated-lqf has no lean record. Searches confirm no existing Mathlib or project declaration. Not compiled because no file was changed; the worker's scompile was clean. Advisories: Pullbacks import instead of HasPullback; the Q146 second-reading section is thin."
+ }
+}

@@ -1,0 +1,385 @@
+{
+ "id": "lem-sfb-ferrand-etale-scheme-patching",
+ "kind": "statement",
+ "title": "Etale scheme patching across a closed-integral Ferrand pushout",
+ "statement": "Let $S$ be a scheme and let $i:Z\\hookrightarrow X$ and $j:Z\\to T$ be morphisms of $S$-schemes [def-pc-scheme]. Assume $i$ is a closed immersion [def-weil-closed-immersion], $j$ is integral [def-weil-finite-integral-morphism], and for every $t\\in T$ there is an affine open $A\\subseteq X$ containing $i(j^{-1}(\\{t\\}))$. Let $P=X\\amalg_ZT$ be a scheme pushout [def-weil-pbc-category-colimit], with its induced map to $S$. All fibre products below are scheme fibre products [def-pc-fibre-product]. Suppose $u:X'\\to X$ and $v:T'\\to T$ are separated etale morphisms [def-weil-etale-morphism], where separated means that the relative diagonal is a closed immersion, and let $\\phi:X'\\times_XZ\\xrightarrow{\\sim}T'\\times_TZ$ be an isomorphism over $Z$. Set $Z'=X'\\times_XZ$, use $\\phi$ for its map to $T'$, and use its projection for its map to $X'$. Then the scheme pushout $P'=X'\\amalg_{Z'}T'$ exists. Its induced morphism $P'\\to P$ is separated and etale, and the canonical morphisms\n$$X'\\longrightarrow P'\\times_PX,\\qquad T'\\longrightarrow P'\\times_PT,\\qquad Z'\\longrightarrow P'\\times_PZ$$\nare isomorphisms, respecting the specified $\\phi$ and all the projections. Conversely, for every etale scheme morphism $q:U\\to P$, the inverse-image square with vertices $U\\times_PZ$, $U\\times_PX$, $U\\times_PT$, and $U$ is a pushout in schemes. In this converse $q$ need not be separated or quasi-compact. There are no Noetherian, finite-type, surjectivity, or nilpotence assumptions beyond the stated hypotheses; empty schemes are allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0ECK (lemma-pushout-functor) and 0ECL (lemma-pushout-functor-equivalence-flat), etale case, with the canonical unit and counit; the counit for arbitrary etale U follows by Zariski gluing of the separated etale counit."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The isomorphism $\\phi$ makes both squares in the diagram $(X',Z',T')\\to(X,Z,T)$ cartesian. Thus $i':Z'\\to X'$ is a closed immersion and $j':Z'\\to T'$ is integral. For $t'\\in T'$ over $t\\in T$, its fibre $F=Z'_{t'}$ is affine, with coordinate ring integral over $\\kappa(t')$: apply integral base change and the affine definition of integrality. In particular $|F|$ is quasi-compact. Its image $K\\subset X'$ is contained in $u^{-1}A$ for an affine open $A\\subset X$ containing $i(j^{-1}(\\{t\\}))$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sbc-integral-morphism-base-change",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ECK, first paragraph: checking Situation 0ECI for the primed diagram"
+   }
+  },
+  {
+   "text": "Cover $K$ by finitely many affine opens of $u^{-1}A$ and let $Q$ be their union. Then $Q$ is a quasi-compact open containing $K$. The map $Q\\to A$ is separated: its diagonal is the inverse image of the closed diagonal of $u$ on the open $Q\\times_AQ$. It is quasi-compact since $Q$ is quasi-compact and $A$ is affine, by qcqs permanence. For every affine open $\\operatorname{Spec}S\\subseteq Q$ mapping into an affine open $\\operatorname{Spec}R'\\subseteq A$, the composite of the open immersion $\\operatorname{Spec}S\\hookrightarrow X'$ (etale) with $u$ is etale, hence so is $\\operatorname{Spec}S\\to\\operatorname{Spec}R'$ (an etale map into the open $\\operatorname{Spec}R'$), and by the affine criterion $R'\\to S$ is an etale ring map. Such ring maps are finitely generated and quasi-finite at every prime, and such charts cover the inverse image in $Q$ of every affine open of $A$, so $Q\\to A$ is locally of finite type and locally quasi-finite. Zariski's Main Theorem in the form [lemma-nagata-zmt-quasi-affine-source] now shows $Q$ is quasi-affine.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "pqf-def-quasifinite",
+    "def-weil-finite-type-morphism",
+    "lemma-nagata-zmt-quasi-affine-source",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ECK, first paragraph, using Tag 0AP9 (separated locally quasi-finite implies ind-quasi-affine) via the existing quasi-compact ZMT node"
+   }
+  },
+  {
+   "text": "Embed the quasi-affine scheme $Q$ as an open subscheme of $\\operatorname{Spec}R$. The composite $F\\to Q\\to\\operatorname{Spec}R$ comes from a ring map to the integral $\\kappa(t')$-algebra of step 1. Apply [lem-sfb-algebraic-field-image-principal-neighbourhood] to the open $Q\\subset\\operatorname{Spec}R$. It gives a principal affine open $D(f)$ with $K\\subset D(f)\\subset Q$. Hence every fibre of $j'$ has its image in an affine open of $X'$, exactly the extra hypothesis for the Ferrand scheme pushout theorem. If $F$ is empty one may instead use the empty affine open; the same theorem permits the zero algebra.",
+   "uses": [
+    "lem-sfb-algebraic-field-image-principal-neighbourhood",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ECK, first paragraph, last sentence; Tag 0E21 in its affine ambient-space form"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ferrand-scheme-pushout] to $i',j'$ with the affine-neighbourhood condition established above. It constructs $P'=X'\\amalg_{Z'}T'$. The maps $X'\\to X\\to P$ and $T'\\to T\\to P$ agree on $Z'$, so the pushout universal property defines $r:P'\\to P$. The given $P$ is canonically the Ferrand pushout by uniqueness of scheme pushouts. We may therefore use the quotient topology, compatible affine covers and restriction to opens in that theorem for both pushouts.",
+   "uses": [
+    "lem-sfb-ferrand-scheme-pushout",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0E25 and 0ECK, existence of the two pushouts"
+   }
+  },
+  {
+   "text": "Choose a compatible affine chart $W=\\operatorname{Spec}R\\subset P$, with $X_W=\\operatorname{Spec}A$, $T_W=\\operatorname{Spec}B$, $Z_W=\\operatorname{Spec}C$ and $R=A\\times_CB$, where $A\\twoheadrightarrow C$. Let $X'_W,T'_W,Z'_W$ be the inverse images of $r^{-1}W$ in $X',T',Z'$; since $ra'=au$ and $rb'=bv$ they are $u^{-1}(X_W)$, $v^{-1}(T_W)$ and $X'_W\\times_XZ$. These restricted data satisfy the hypotheses of [lem-sfb-ferrand-scheme-pushout]: $i'_W$ is a closed immersion and $j'_W$ is integral (open restrictions of $i',j'$, with the same fibres), and for $t'\\in T'_W$ over $t\\in T_W$ every $z\\in j^{-1}(t)$ has $c(z)=b(t)\\in W$, so $i(j^{-1}(\\{t\\}))\\subseteq X_W$; steps 1--3 with the affine open $X_W$ in place of $A$ then give an affine open $D(f)\\subseteq Q\\subseteq X'_W$ containing $i'(j'^{-1}(\\{t'\\}))$. By the open-restriction clause of [lem-sfb-ferrand-scheme-pushout] for $P'$, $r^{-1}W$ is a pushout of these restricted data, hence canonically their Ferrand pushout. Its compatible affine cover gives charts $V=\\operatorname{Spec}E$ with inverse images $\\operatorname{Spec}A_1$, $\\operatorname{Spec}B_1$, $\\operatorname{Spec}C_1$ and $E=A_1\\times_{C_1}B_1$. The original cartesian component squares, restricted to these opens, give the specified algebra identification $C_1=A_1/IA_1\\cong B_1\\otimes_BC$, where $I=\\ker(A\\to C)$. These are canonical identifications, using $\\phi$, not arbitrary choices of an isomorphic algebra.",
+   "uses": [
+    "lem-sfb-ferrand-scheme-pushout",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ECK, second paragraph: the affine ring diagrams; Tag 0E25, compatible affine covering"
+   }
+  },
+  {
+   "text": "The maps $A\\to A_1$ and $B\\to B_1$ are etale: they are affine-chart restrictions of $u,v$. Ring patching [lem-sfb-fibre-product-algebra-etale], with $(A',A,B,C',D)=(A,C,B,A_1,B_1)$ in its notation, shows $R\\to E$ is etale. Thus $V\\to W$ is etale by the affine criterion. These $V$ cover $P'$ and these $W$ cover $P$, so locality of etaleness gives that $r$ is etale.",
+   "uses": [
+    "lem-sfb-fibre-product-algebra-etale",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ECL, first paragraph, using Tag 08KQ (5)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-patched-module-base-change] to the underlying modules of the same algebra diagram. It identifies $E\\otimes_RA\\to A_1$ and $E\\otimes_RB\\to B_1$ with the canonical projection-induced maps and proves both are bijective. They are ring maps, so they are ring isomorphisms. The affine fibre-product formula therefore makes $X'\\to P'\\times_PX$ and $T'\\to P'\\times_PT$ isomorphisms over each $V$, hence globally. Their inverses agree on overlaps because they invert the same canonical maps. Applying the fibre-product universal property once more to $Z'=X'\\times_XZ$ gives the third isomorphism. The projection formulas for the module maps and the common algebra $C_1$ show that all these isomorphisms respect $\\phi$ and every projection.",
+   "uses": [
+    "lem-sfb-patched-module-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ECK, second paragraph, cartesian squares from Tag 07RU"
+   }
+  },
+  {
+   "text": "For separatedness fix a chart $W\\subset P$ as in step 5. Step 7 identifies the inverse images of $X_W,T_W$ in the restricted primed square with the base changes $X'_W\\to X_W$ and $T'_W\\to T_W$ of $u,v$. They are separated by separated base change. Since $X_W,T_W$ are affine, their sources $X'_W,T'_W$ are separated schemes by [lem-sc-separated-over-affine-scheme-separated]. The separatedness clause of [lem-sfb-ferrand-scheme-pushout] applied over $\\operatorname{Spec}\\mathbf Z$ says that their pushout $r^{-1}W$ is a separated scheme. Its relative diagonal over $W$ is the pullback of its absolute diagonal along $(r^{-1}W)\\times_W(r^{-1}W)\\to(r^{-1}W)\\times_{\\mathbf Z}(r^{-1}W)$, hence is closed. Thus $r^{-1}W\\to W$ is separated. Target-open locality proves $r$ separated without assuming either original component is separated over $S$.",
+   "uses": [
+    "lem-weil-pbc-separated-base-change",
+    "lem-sc-separated-over-affine-scheme-separated",
+    "lem-sfb-ferrand-scheme-pushout",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-separated-lfp-target-open-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ECK, separatedness assertion; use Tag 0E26 locally instead of its universally-closed-surjection proof"
+   }
+  },
+  {
+   "text": "Now let $q:U\\to P$ be any etale morphism. Choose an affine chart $H_0=\\operatorname{Spec}H\\subset U$ mapping into a compatible chart $W=\\operatorname{Spec}R$ of $P$. The map $R\\to H$ is flat, since etale morphisms are flat. Write $R=A\\times_CB$ as in step 5. The flat-algebra clause of [lem-sfb-fibre-product-algebra-flat-presentation] gives the canonical ring isomorphism\n$$H\\xrightarrow{\\sim}(H\\otimes_RA)\\times_{H\\otimes_RC}(H\\otimes_RB).$$\nThe affine fibre-product formula identifies these three tensor algebras with the inverse images of $X,T,Z$ over $H_0$. The map $H\\otimes_RA\\to H\\otimes_RC$ is surjective: $C=A/I$, so its target is $(H\\otimes_RA)/I(H\\otimes_RA)$. The affine closed-pinching pushout theorem now makes this inverse-image square a pushout with vertex $H_0$. This works for every such affine chart, including charts in any intersection of two opens of $U$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-sfb-ferrand-scheme-pushout",
+    "lem-sfb-fibre-product-algebra-flat-presentation",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-affine-closed-pinching-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ECL, converse and final flat-algebra assertion of Tag 08KQ; affine pushout Tag 0ET0"
+   }
+  },
+  {
+   "text": "To verify the global universal property, fix an arbitrary scheme $Y$ and compatible maps $U\\times_PX\\to Y$, $U\\times_PT\\to Y$. Step 9 produces a unique map $H_0\\to Y$ on each affine chart $H_0$ mapping into a compatible chart of $P$. These charts cover $U$ by the affine-open basis. On the intersection of two charts, refine by affine opens mapping into a compatible chart of $P$; on each refinement the two candidate maps agree by the uniqueness in step 9. Scheme-morphism gluing therefore gives a unique map $U\\to Y$ with the required restrictions. Uniqueness is checked on the same cover. This proves the asserted pushout for arbitrary $q$, without separatedness or quasi-compactness. In fact this last argument uses only flatness of $q$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ECL, affine counit extended by Zariski gluing; the gluing argument is written out here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-category-colimit",
+  "lem-sbc-integral-morphism-base-change",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-sfb-affine-closed-pinching-pushout",
+  "lem-sfb-algebraic-field-image-principal-neighbourhood",
+  "lem-sfb-ferrand-scheme-pushout",
+  "lem-sfb-fibre-product-algebra-etale",
+  "lem-sfb-fibre-product-algebra-flat-presentation",
+  "lem-sfb-patched-module-base-change",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-separated-lfp-target-open-locality",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-separated-base-change",
+  "lemma-nagata-zmt-quasi-affine-source",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0ECK and 0ECL; affine inputs 0E25, 0E21, 07RU, 08KQ and 0ET0. The arbitrary-etale counit is the explicit Zariski gluing of the flat affine counit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Ferrand|pinching|[Ee]tale.*[Pp]ushout|[Pp]ushout.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-24T12:03:37Z\", \"tool\": \"grep\", \"query\": \"Ferrand|pinching|[Ee]tale.*[Pp]ushout|[Pp]ushout.*[Ee]tale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give etale categories, etale base change, open-immersion gluing or integral-morphism permanence, not patching over a closed-integral Ferrand pushout."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The etale site of the pushout of schemes along a closed immersion and an integral morphism is described by compatible etale schemes",
+   "results": "{\"t\": \"2026-10-24T12:03:37Z\", \"tool\": \"leansearch\", \"query\": \"The etale site of the pushout of schemes along a closed immersion and an integral morphism is described by compatible etale schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\"], \"digest\": \"8aff18134c837097\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give etale categories, etale base change, open-immersion gluing or integral-morphism permanence, not patching over a closed-integral Ferrand pushout."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, CategoryTheory.IsPushout",
+   "results": "{\"t\": \"2026-10-24T12:03:37Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, CategoryTheory.IsPushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give etale categories, etale base change, open-immersion gluing or integral-morphism permanence, not patching over a closed-integral Ferrand pushout."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale schemes on a Ferrand pushout are glued from compatible separated etale schemes on the two components",
+   "results": "{\"t\": \"2026-10-24T12:03:38Z\", \"tool\": \"leanfinder\", \"query\": \"Etale schemes on a Ferrand pushout are glued from compatible separated etale schemes on the two components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.GlueData.glued\", \"AlgebraicGeometry.Scheme.GlueData\"], \"digest\": \"c21c33d4d92d23e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give etale categories, etale base change, open-immersion gluing or integral-morphism permanence, not patching over a closed-integral Ferrand pushout."
+  },
+  {
+   "tool": "grep",
+   "query": "pushout|gluing",
+   "results": "{\"t\": \"2026-10-24T12:06:29Z\", \"tool\": \"grep\", \"query\": \"pushout|gluing\", \"sub\": \"AlgebraicGeometry/Morphisms/Etale.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give etale categories, etale base change, open-immersion gluing or integral-morphism permanence, not patching over a closed-integral Ferrand pushout."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme pushout along a closed immersion and an integral map is also a pushout for algebraic space targets",
+   "results": "{\"t\": \"2026-10-24T12:06:29Z\", \"tool\": \"leansearch\", \"query\": \"A scheme pushout along a closed immersion and an integral map is also a pushout for algebraic space targets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.IsIntegralHom.instDescScheme\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.isPullback_of_isClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\"], \"digest\": \"38a92d7b1e454c61\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give etale categories, etale base change, open-immersion gluing or integral-morphism permanence, not patching over a closed-integral Ferrand pushout."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separated etale covers of a scheme obtained by pinching are equivalent to pairs of separated etale covers agreeing on the closed subscheme",
+   "results": "{\"t\": \"2026-10-24T12:06:30Z\", \"tool\": \"leanfinder\", \"query\": \"Separated etale covers of a scheme obtained by pinching are equivalent to pairs of separated etale covers agreeing on the closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"07099dc87aa6c805\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give etale categories, etale base change, open-immersion gluing or integral-morphism permanence, not patching over a closed-integral Ferrand pushout."
+  },
+  {
+   "tool": "grep",
+   "query": "Ferrand|pinching|etale.*pushout|pushout.*etale",
+   "results": "{\"t\": \"2026-10-24T12:31:48Z\", \"tool\": \"grep\", \"query\": \"Ferrand|pinching|etale.*pushout|pushout.*etale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: etale base change and open gluing do not imply closed-integral Ferrand pushout patching."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separated etale schemes over a Ferrand scheme pushout are compatible pairs of separated etale schemes",
+   "results": "{\"t\": \"2026-10-24T12:31:49Z\", \"tool\": \"leansearch\", \"query\": \"Separated etale schemes over a Ferrand scheme pushout are compatible pairs of separated etale schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.IsSeparated.comp_iff\", \"AlgebraicGeometry.IsSeparated.instCompScheme\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.IsSeparated.stableUnderComposition\"], \"digest\": \"e0004a7917167979\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: etale base change and open gluing do not imply closed-integral Ferrand pushout patching."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, CategoryTheory.IsPushout",
+   "results": "{\"t\": \"2026-10-24T12:31:49Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsEtale, CategoryTheory.IsPushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern etale base change, etale categories, open gluing and separatedness permanence; none states closed-integral scheme pushout patching. Loogle reports an unknown identifier for IsEtale in its index."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale morphisms glue over a Ferrand pushout along a closed immersion and integral morphism, with cartesian component squares",
+   "results": "{\"t\": \"2026-10-24T12:31:50Z\", \"tool\": \"leanfinder\", \"query\": \"Etale morphisms glue over a Ferrand pushout along a closed immersion and integral morphism, with cartesian component squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\"], \"digest\": \"7d8ef27e95fdc574\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: etale base change and open gluing do not imply closed-integral Ferrand pushout patching."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPushout|pushout|patching",
+   "results": "{\"t\": \"2026-10-24T12:32:14Z\", \"tool\": \"grep\", \"query\": \"IsPushout|pushout|patching\", \"sub\": \"AlgebraicGeometry/Morphisms/Etale.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: etale base change and open gluing do not imply closed-integral Ferrand pushout patching."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pinching schemes along an integral map commutes with etale base change and separated etale covers can be patched",
+   "results": "{\"t\": \"2026-10-24T12:32:15Z\", \"tool\": \"leanfinder\", \"query\": \"Pinching schemes along an integral map commutes with etale base change and separated etale covers can be patched\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Etale\", \"StandardEtalePair.HasMap.map\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"f2c3d7655913ca41\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: etale base change and open gluing do not imply closed-integral Ferrand pushout patching."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ferrand-pushout-space-agreement",
+  "date": "2026-10-24",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), inherited trait schematicity input: the closed gluing in Anantharaman Proposition 1.3.2 must have its universal property also for algebraic-space targets. Supporting scheme-theoretic input for 0EDP: the etale patching unit and counit used to verify hypotheses (3) and (4) of 07SX.",
+   "via": [
+    "lem-sfb-ferrand-pushout-space-agreement",
+    "lem-sfb-trait-space-closure-thickenings-scheme",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ferrand-etale-scheme-patching",
+  "worker": "stage1",
+  "summary": "Split the construction via the existing quasi-affine-source theorem and integral-field image principal neighbourhood, then the existing Ferrand pushout, etale algebra patching and module base-change statements. Separatedness is proved on compatible affine target charts. The arbitrary etale counit is proved directly by flat algebra patching and Zariski gluing. No new nodes, no statement changes, no Lean edits or compiler calls.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), trait schematicity subroute recorded in blueprint.from.place: the etale scheme patching needed for hypotheses (3),(4) of 07SX. The newest blueprint has no separate Ferrand or pinching node; the inherited ancestor is null as confirmed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "why": "Generic scheme or commutative-algebra input for the Ferrand patching subargument; its full statement is used in the cited step, without replacing the constructible-direct-image unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-ring-map-quasi-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NY-997bb0c2f",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-997bb0c2f (reviewer sub-agent of L); spot-checked: I read the whole item: the statement and all 10 steps, every cited statement, and the Stacks sources. Sources checked: more-morphisms 0ECI/0ECJ/0E25/0E26/0ECK/0ECL and the ind-quasi-affine lemma (l.19681), more-algebra 08KQ (l.1159) including (5) and the final flat assertion, and limits 0E21. The statement is 0ECK/0ECL in the etale case with the 0ECI hypotheses written out. Its converse covers arbitrary etale q, which is stronger than 0ECL but true; steps 9-10 prove it from the flat counit of 08KQ by Zariski gluing. It is not weakened. The delivery has no new nodes and is not a re-split. Fix 1 (C1/C4): step 2 used, without citation, that an affine chart of Q mapping to an affine open of A is etale and has an etale ring map. I added the citations open-immersion-etale, etale-source-target-properties (i) and the affine etale criterion, and wrote the chart argument. All three were already in proof_deps. Fix 2 (E1/E5): step 5 took compatible Ferrand charts for r^{-1}W without checking the affine-neighbourhood hypothesis for the restricted data. It holds: c(z)=b(t) is in W, so i(j^{-1}(t)) lies in X_W, and steps 1-3 with X_W in place of A give an affine D(f) inside X'_W. The open-restriction clause then makes r^{-1}W their Ferrand pushout. Step 8's use of 0E26 over Spec Z rests on this repair. Other steps checked: the 08KQ(5) substitution (A',A,B,C',D)=(A,C,B,A1,B1); the 07RU node with N=B1 and M'=A1, giving V x_P X = Spec(E tensor_R A); the base change of the diagonal from over Spec Z to over W; the H-flat counit plus the 0ET0 pinching; and the gluing with affine refinements of overlaps. Edge cases checked: Z empty, empty fibres, infinite integral fibres (07S0 would not do there), and non-separated U. No duplicate in the DAG: 0ECJ and the finite-pinching descent node state different things. Batch-5: the fibre-product-algebra etale and flat-presentation nodes reach lem-trf-finite-presentation-surjective-module-kernel, a Mathlib-leaf algebra fact (0519). The source-target-properties node reaches lem-trf-smooth-composition (01VA). Neither is a step of the trace formula or of Poincare duality; I accept both. tool_use lem-weil-pbc-etale-ring-map-quasi-finite (00U5) accepted. The corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FerrandEtaleSchemePatching",
+  "declaration": "AlgebraicGeometry.ferrand_etale_scheme_patching",
+  "file": "lean/Sheaf/AlgebraicGeometry/FerrandEtaleSchemePatching.lean",
+  "statement": "theorem ferrand_etale_scheme_patching (S : Scheme.{u}) (Z X T P : Over S) (i : Z ⟶ X) (j : Z ⟶ T) (a : X ⟶ P) (b : T ⟶ P) [IsClosedImmersion i.left] [IsIntegralHom j.left] (h : ∀ t : T.left, ∃ A : X.left.Opens, IsAffineOpen A ∧ ∀ z : Z.left, j.left z = t → i.left z ∈ A) (hs : IsPushout i.left j.left a.left b.left) (X' T' : Scheme.{u}) (u : X' ⟶ X.left) (v : T' ⟶ T.left) [IsSeparated u] [Etale u] [IsSeparated v] [Etale v] (φ : pullback u i.left ≅ pullback v j.left) (hφ : φ.hom ≫ pullback.snd v j.left = pullback.snd u i.left) : (∃ (P' : Scheme.{u}) (a' : X' ⟶ P') (b' : T' ⟶ P') (r : P' ⟶ P.left), IsPushout (pullback.fst u i.left) (φ.hom ≫ pullback.fst v j.left) a' b' ∧ IsSeparated r ∧ Etale r ∧ IsPullback a' u r a.left ∧ IsPullback b' v r b.left ∧ IsPullback (pullback.fst u i.left ≫ a') (pullback.snd u i.left) r (i.left ≫ a.left)) ∧ (∀ (U : Scheme.{u}) (q : U ⟶ P.left), Etale q → IsPushout ((Over.pullback q).map (Over.homMk i.left rfl : Over.mk (i.left ≫ a.left) ⟶ Over.mk a.left)).left ((Over.pullback q).map (Over.homMk j.left hs.w.symm : Over.mk (i.left ≫ a.left) ⟶ Over.mk b.left)).left (pullback.snd a.left q) (pullback.snd b.left q))",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-70f3df88b",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause: i closed immersion, j integral, affine fibre-neighbourhood h, P pushout in schemes, u/v separated étale, φ over Z (hφ); P' pushout of the specified maps, r separated and étale, three IsPullback squares pinning r and the projections; converse for every étale q via the Over.pullback square, same encoding as the sibling exists_ferrand_scheme_pushout. No extra hypotheses, one universe u, empty and infinite-fibre cases covered. The node's extension of the converse to non-separated q is sound (08KQ flat clause + affine pinching pushout 0ET0 + Zariski gluing). Node record changes only lean; lean.statement is verbatim in the file; docstrings carry the source tags, blueprint tag and ten proof steps; no defs; sorry-only proof; no duplicate declaration in side-live; all proof-dep imports exist; report has real Worker report and Second reading by Q102 sections. Not recompiled per instructions; worker reports a clean compile. No findings."
+ }
+}

@@ -70,7 +70,30 @@
  "blueprint_order": 647,
  "blueprint_uses": [],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Subspace.iUnion_ne_univ_of_ne_top",
+     "module": "WeilConjectures.Mathlib.GroupTheory.CosetCover",
+     "lines": [
+      24,
+      32
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-coherence",
  "split_report": {
@@ -87,5 +110,22 @@
   "group": "Q144",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-dbd803de6 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It changes only the item and the report, adds no new nodes, and makes no changes. The item becomes a Mathlib leaf on Subspace.biUnion_ne_univ_of_top_notMem. I read Mathlib/GroupTheory/CosetCover.lean: the variables (DivisionRing k, Infinite k, Module k E, s : Finset (Subspace k E)) are at lines 376-377 and the theorem at 380-386. The recorded range is 380-387, and line 387 is blank, which does not matter. The theorem specializes in one line: a field is a division ring; take s as the image of the W_j, so that top not in s means every W_j is proper; the union over s equals the union of the W_j. Finite-dimensionality is not used, so Mathlib states a generalization. The statement is verbatim from both the master blueprint (order 647) and main-20261015 (order 653) and is not weakened. Edge cases hold: s=0, V=0, dimension 1, repeated subspaces. Over F_2 the plane is covered by its three lines, so the infinite-field hypothesis is needed. The search record has all three kinds: LeanSearch and LeanFinder both return the exact declaration, Loogle returned 0 hits (recorded honestly), and the greps found it. The two citers, lem-pc-projective-curve-linear-pair and lem-a1-semilocal-submodule-basis, use the statement as written. There is no re-split repair note for this item, no SGA citation, and no duplicate; blueprint.is is correct and same_as is []. The Mathlib indexed form Subspace.exists_eq_top_of_iUnion_eq_univ (line 394) would also match."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be an infinite field, let $V$ be a (not necessarily\nfinite-dimensional) $k$-vector space, and let $W_1,\\ldots,W_s$ be proper linear\nsubspaces. Then $V\\ne\\bigcup_{j=1}^s W_j$.",
+  "proof": [
+   {
+    "text": "First reduce to finite dimension: choose $v_j\\in V\\setminus W_j$ for\neach $j$ and replace $V$ by the span $V'$ of $v_1,\\dots,v_s$ and each\n$W_j$ by $W_j\\cap V'$, which is proper in $V'$ as it misses $v_j$; a\nvector of $V'$ outside all $W_j\\cap V'$ lies outside all $W_j$. So\nassume $V$ finite-dimensional.\nFor each $j$, extend a basis of $W_j$ to one of $V$ and take a\nnonzero coordinate functional $\\lambda_j$ vanishing on $W_j$.\nTheir product is a nonzero polynomial on $V$, since the polynomial\nring over $k$ is a domain. A nonzero polynomial over an infinite\nfield cannot vanish at every point of affine space: in one variable\nit has at most its degree many roots; in several variables first\nchoose values at which one nonzero coefficient polynomial is nonzero,\nby induction, and then choose the last coordinate avoiding the\nfinitely many roots of the resulting one-variable polynomial.\nA point where $\\prod_j\\lambda_j$ does not vanish belongs to none\nof the $W_j$. For $s=0$ any vector suffices.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

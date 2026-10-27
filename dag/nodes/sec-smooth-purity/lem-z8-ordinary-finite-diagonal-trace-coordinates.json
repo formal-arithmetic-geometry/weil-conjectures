@@ -1,0 +1,118 @@
+{
+ "id": "lem-z8-ordinary-finite-diagonal-trace-coordinates",
+ "kind": "statement",
+ "title": "Ordinary Finite Diagonal Trace Coordinates",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ndef ordinaryFiniteDiagonalCoefficientIso\n    (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA) (S : Scheme.{u})\n    (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool) :\n    (ordinaryFinitePullback A (projectiveLineDiagonalProjection S a)).obj\n        ((ordinaryFinitePullback A (ProjectiveLine S ↘ S)).obj\n          ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧)) ≅\n      (ordinaryFiniteLine A N hA\n        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))⟦(2 : ℤ)⟧\n\ntheorem ordinaryFiniteDiagonalTrace_exchange\n    (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]\n    (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    (c : OrdinaryFiniteP1ChernFamily A N hA)\n    (b : ∀ (T : Scheme.{u}) [IsNoetherian T] (_hT : IsUnit (N : Γ(T, ⊤))),\n      ((ordinaryFiniteLine A N hA T)⟦(2 : ℤ)⟧ ⊞ ordinaryFiniteUnit A T) ≅\n        (ordinaryFinitePushforward A (ProjectiveLine T ↘ T)).obj\n          ((ordinaryFiniteLine A N hA (ProjectiveLine T))⟦(2 : ℤ)⟧))\n    (hb : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),\n      (b T hT).hom = ordinaryFiniteP1KummerMap A N hA t c T hT)\n    (hbc : OrdinaryFiniteP1KummerMapBaseChange A N hA t c)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :\n    let : IsLocallyNoetherian (ProjectiveLine S) :=\n      LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine S ↘ S)\n    let : CompactSpace (ProjectiveLine S) :=\n      QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine S ↘ S)\n    let : IsNoetherian (ProjectiveLine S) := ⟨⟩\n    ∀ a : Bool,\n      (derivedBaseChangeMap (ModuleCat.{u + 1} A) (projectiveLineDiagonalSquare S a)).app\n          ((ordinaryFinitePullback A (ProjectiveLine S ↘ S)).obj\n            ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧)) ≫\n        (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).map\n          (ordinaryFiniteDiagonalCoefficientIso A N hA t S hS (!a)).hom ≫\n        ordinaryFiniteP1DiagonalChartMap A N hA t S hS a ≫\n        (b (ProjectiveLine S) (ordinaryFiniteP1_isUnit N S hS)).inv ≫ biprod.snd ≫\n        (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) (ProjectiveLine S)).hom =\n      (ordinaryFinitePullback A (ProjectiveLine S ↘ S)).map\n        ((ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).map\n            (ordinaryFiniteShiftedLinePullback A N hA t (ProjectiveLine S ↘ S) hS).hom ≫\n          (b S hS).inv ≫ biprod.snd ≫\n          (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) S).hom) ≫\n        (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) (ProjectiveLine S ↘ S)).hom\n\ntheorem ordinaryFiniteDiagonalCoefficientIso_coordinate\n    (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) :\n    (CoordinateTrace.coordinate A (ProjectiveLine S ↘ S)\n        ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧)).hom ≫\n      (ordinaryFiniteDiagonalCoefficientIso A N hA t S hS true).hom =\n        (ordinaryFiniteDiagonalCoefficientIso A N hA t S hS false).hom",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "lem-z8-ordinary-finite-unit-pullback-normalization",
+  "lem-z8-ordinary-finite-diagonal-chart-exchange",
+  "lem-z8-ordinary-finite-p1-diagonal-integral",
+  "lem-z8-ordinary-finite-trace-base-change",
+  "lem-asd-finite-shifted-line-square"
+ ],
+ "proof": [
+  {
+   "text": "Define the coefficient identification by the two normalized shifted-line pullbacks. Naturality of self-exchange moves the first coefficient comparison through exchange. The chart exchange identity and the Kummer scalar trace base-change square then identify the chart trace with pullback of the original trace. The constant-unit normalization gives the required monoidal unitor. The twist square law identifies the two common-base coefficient maps.",
+   "uses": [
+    "lem-z8-ordinary-finite-unit-pullback-normalization",
+    "lem-z8-ordinary-finite-diagonal-chart-exchange",
+    "lem-z8-ordinary-finite-p1-diagonal-integral",
+    "lem-z8-ordinary-finite-trace-base-change",
+    "lem-asd-finite-shifted-line-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-z8-ordinary-finite-diagonal-chart-exchange",
+  "lem-z8-ordinary-finite-p1-diagonal-integral",
+  "lem-z8-ordinary-finite-trace-base-change",
+  "lem-asd-finite-shifted-line-square",
+  "lem-z8-ordinary-finite-unit-pullback-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteDiagonalTraceCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteDiagonalTraceCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteDiagonalCoefficientIso_coordinate",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteDiagonalCoefficientIso",
+   "AlgebraicGeometry.Etale.ordinaryFiniteDiagonalTrace_exchange",
+   "AlgebraicGeometry.Etale.ordinaryFiniteDiagonalCoefficientIso_coordinate"
+  ],
+  "statement": "theorem ordinaryFiniteDiagonalCoefficientIso_coordinate\n    (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) :\n    (CoordinateTrace.coordinate A (ProjectiveLine S ↘ S)\n        ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧)).hom ≫\n      (ordinaryFiniteDiagonalCoefficientIso A N hA t S hS true).hom =\n        (ordinaryFiniteDiagonalCoefficientIso A N hA t S hS false).hom",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

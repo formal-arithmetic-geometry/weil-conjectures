@@ -12,93 +12,57 @@
  ],
  "proof": [
   {
-   "text": "Work first over $\\mathbf Q$. The coface substitutions are the ones from addition with unit $0$: omitting an outer variable and replacing adjacent variables by their sum. Applying two substitutions in either possible order agrees by associativity of addition and by its unit law; equivalently, for cofaces $\\delta^a$, $\\delta^b\\delta^a=\\delta^a\\delta^{b-1}$ when $a<b$. In the expansion of $d^2$, each such composite occurs twice with opposite signs, so $d^2=0$. In degree zero $d=0$ as stipulated. Polynomial substitution and comparison on variables are legitimate by [def-weil-pbc-mv-polynomial-ring].",
+   "text": "Apply [lem-sfb-polynomial-bar-coface-retraction-identities] to the displayed $P,K,i,p$. It gives $d^2=0$, $di=0$, $pd=0$, $pi=1$, including degree zero, over every $B$. Give $e_I$ multidegree $1_I$; all these maps preserve multidegree.",
    "uses": [
-    "def-weil-pbc-mv-polynomial-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent proof of the rational polynomial-bar contraction; coface identities"
-   }
-  },
-  {
-   "text": "For $i(e_I)$, expand each substitution of $x_a+x_{a+1}$ by linearity of the single coordinate occurring in that block. The term choosing the right variable at position $a$ cancels the term choosing the left variable at position $a+1$; the two end terms cancel the first and last remaining terms. Hence $di=0$. To check $pd=0$, express $p^q(f)$ as the alternating wedge of the coefficient of degree one in each of the $q$ blocks, identifying the basis wedge with $e_I$. Outer cofaces omit a block and contribute zero. An inner coface can contribute only from degree two in its merged block and degree one in every other block. The two orders of two distinct coordinates have equal coefficients and opposite wedge signs; a repeated coordinate wedges to zero. Thus every contribution vanishes. Finally $pi(e_I)=e_I$, including the empty subset. These are coefficient calculations, so already hold over every $B$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent proof of the rational polynomial-bar contraction; the prescribed i and p, with their signs"
-   }
-  },
-  {
-   "text": "For a multi-index $m\\in\\mathbf N^r$, let $P_m^n$ be the span of monomials whose total exponent in coordinate $i$ across all blocks is $m_i$. All cofaces preserve $m$, and every polynomial is a finite sum of such homogeneous parts. In $P_m^n$ use the divided-monomial basis\n$$b_{\\alpha_1,\\ldots,\\alpha_n}=\\prod_{a,i}x_{a,i}^{\\alpha_{a,i}}/\\alpha_{a,i}!,\\qquad \\sum_a\\alpha_a=m.$$\nThis is a finite basis in each degree. The binomial formula says that the middle coface replaces $\\alpha_a$ by all pairs $\\beta+\\gamma=\\alpha_a$, each with coefficient $1$ in this basis; the two outer cofaces insert a zero block. The codegeneracies set one block equal to zero, killing its positive-degree monomials and deleting its zero block. The addition and zero identities give the cosimplicial identities. Therefore the finite rational duals $U_{m,n}=(P_m^n)^*$ form a simplicial module. Its degeneracies insert zero blocks. Every tuple has a unique ordered list of nonzero blocks, so insertion of its zero blocks gives exactly the direct-sum decomposition indexed by order-preserving surjections required by [lem-sfb-split-simplicial-nondegenerate-homotopy]. The nondegenerate summand $V_{m,n}$ is the span of dual tuples with every block nonzero (and the empty tuple for $m=0,n=0$).",
-   "uses": [
-    "lem-sfb-split-simplicial-nondegenerate-homotopy"
+    "lem-sfb-polynomial-bar-coface-retraction-identities"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent proof of the rational polynomial-bar contraction; divided monomials and the actual splitting of U_m"
+    "place": "Paragraph (3), algebraic obligation; assembly of Q59 re-split tasks, step 1"
    }
   },
   {
-   "text": "Apply [lem-sfb-split-simplicial-nondegenerate-homotopy] to this splitting over $R=\\mathbf Q$, and dualize the chain maps and homotopies. Every term is finite dimensional, so the double dual identifies with the original polynomial component. Thus $P_m$ is cochain homotopy equivalent to $V_m^*$. The projected differential in $V_m$ merges two adjacent nonzero blocks with sign $(-1)^a$ for $1\\leq a\\leq n-1$; the end faces of a nonzero-block tuple are zero, since the dual outer cofaces have zero blocks. Consequently $V_m^*$ is the polynomial subcomplex $N_m$ spanned by the divided monomials with no zero block: its differential splits one block into two nonzero blocks with sign $(-1)^a$. There are no terms in $N_m^n$ for $n>\\sum_i m_i$ when $m\\ne0$.",
+   "text": "Over $\\mathbf Q$, [lem-sfb-polynomial-bar-divided-monomial-normalization] decomposes $P$ as the direct sum of the finite multidegree complexes $P_m$ and gives $P_m\\simeq V_m^*$ by cochain homotopy equivalences, with the displayed adjacent-merge boundary on $V_m$. For a cocycle $z$, homotopic maps differ on $z$ by the boundary $dH(z)$; hence these equivalences induce inverse cohomology maps. Apply [lem-sfb-ordered-composition-complex-homology] to that exact boundary: $H^n(P_m)$ has dimension one precisely when $m$ is squarefree and $n=\\sum_i m_i$, and vanishes otherwise. This includes $m=0$.",
    "uses": [
-    "lem-sfb-split-simplicial-nondegenerate-homotopy"
+    "lem-sfb-polynomial-bar-divided-monomial-normalization",
+    "lem-sfb-ordered-composition-complex-homology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent proof of the rational polynomial-bar contraction; normalization and its exact projected differential"
+    "place": "Paragraph (3), algebraic obligation; assembly of Q59 re-split tasks, step 2"
    }
   },
   {
-   "text": "For $m\\ne0$, send a nonzero-block tuple $(\\alpha_1,\\ldots,\\alpha_n)$ to its cumulative partial sums\n$$v_a=\\alpha_1+\\cdots+\\alpha_a,\\qquad1\\leq a<n.$$\nThese are precisely the strict chains $0<v_1<\\cdots<v_{n-1}<m$ in the coordinatewise interval; differences recover the tuple, so this is a bijection of bases, including $n=1$ and the empty chain. Merging blocks $a,a+1$ deletes $v_a$. The vertex-deletion sign is $(-1)^{a-1}$, whereas the merging sign is $(-1)^a$. Hence the differential on $V_{m,n}$ is the negative of the differential on $A(m)_{n-2}$ in [lem-sfb-product-chain-proper-interval-homology]. This minus sign does not change kernels or images. The lemma gives homology zero unless $m$ is squarefree, and in that case dimension one only for $n=\\sum_i m_i$.",
+   "text": "By [lem-sfb-polynomial-bar-coface-retraction-identities], the induced maps satisfy $p_*i_*=1$. In each multidegree and degree, $K_m^n$ and $H^n(P_m)$ have the same dimension, either zero or one, by the preceding step. A linear map between zero spaces is invertible; between one-dimensional spaces a map with a right inverse is invertible. Thus each $p_m$ is an isomorphism on cohomology, with inverse induced by the prescribed $i_m$.",
    "uses": [
-    "lem-sfb-product-chain-proper-interval-homology"
+    "lem-sfb-polynomial-bar-coface-retraction-identities"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent proof of the rational polynomial-bar contraction; interval identification, degree shift n-2, and the homology input"
-   }
-  },
-  {
-   "text": "A finite rational matrix and its transpose have the same rank (row and column reduction both reduce it to an identity block and zeros). In degree $n$, the homology dimension of $V_m$ and the cohomology dimension of $V_m^*$ are therefore both $\\dim V_{m,n}-\\operatorname{rank}\\partial_n-\\operatorname{rank}\\partial_{n+1}$. With the preceding homotopy equivalence, $H^n(P_m)$ has the dimensions just found. For $m=0$, the nondegenerate complex has only $\\mathbf Q$ in degree zero, so the same equivalence gives $H^0(P_0)=\\mathbf Q$ and zero in other degrees. Give $e_I$ multidegree $1_I$. Since $pi=1$ and $i,p$ are cochain maps, their induced maps on each multidegree have composite the identity; in each nonzero cohomology degree both sides have dimension one, and in every other degree both sides vanish. Hence $p:P_m\\to K_m$ induces an isomorphism in every degree, with inverse induced by $i$.",
-   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent proof of the rational polynomial-bar contraction; finite ranks and the specified representatives"
+    "place": "Paragraph (3), algebraic obligation; assembly of Q59 re-split tasks, step 3"
    }
   },
   {
-   "text": "Put $C_m=\\ker(p:P_m\\to K_m)$. The equations $pi=1$, $di=0$, $pd=0$ give a direct-sum decomposition of complexes $P_m=i(K_m)\\oplus C_m$. For a cycle $c\\in C_m^n$, the cohomology isomorphism proved above gives $c=db$ in $P_m$; replacing $b$ by $b-ipb$ puts it in $C_m$ and leaves $db$ unchanged. Thus $C_m$ is acyclic. Let $Z_m^n=\\ker(d:C_m^n\\to C_m^{n+1})$. By [lem-trf-vector-subspace-complement], choose $L_m^n$ with $C_m^n=Z_m^n\\oplus L_m^n$. The restriction $d:L_m^n\\to Z_m^{n+1}$ is injective because $L_m^n\\cap Z_m^n=0$, and surjective because $Z_m^{n+1}=dC_m^n=dL_m^n$. For $z+l\\in Z_m^n\\oplus L_m^n$ define $h(z+l)$ as the unique inverse image of $z$ in $L_m^{n-1}$. In degree zero $Z_m^0=0$ by acyclicity and $C_m^{-1}=0$, so this prescription gives $h^0=0$. It satisfies $dh(z+l)=z$ and $hd(z+l)=l$. Set $h=0$ on $i(K_m)$ and take the direct sum over $m$. Then $dh+hd=1-ip$ on $P_{\\mathbf Q,r}$.",
+   "text": "Apply [lem-sfb-rational-based-retract-universal-homotopy] with $M=\\mathbf N^r$, the monomial bases of $P_m$ and the subset bases of $K_m$. Its hypotheses are the identities and cohomology isomorphisms just established. It gives $m$-preserving rational $h$ on $\\bigoplus_mP_m=P_{\\mathbf Q,r}$ with $dh+hd=1-ip$, each column finitely supported. Its simultaneous matrix extension gives the desired identities over every $B$: the extended $d,i,p$ are exactly their stated monomial formulas. The zero algebra is included. When $r=0$, the differential parity is given by [lem-sfb-polynomial-bar-coface-retraction-identities] and the last clause of [lem-sfb-rational-based-retract-universal-homotopy] gives $h^n=1$ for even $n\\geq2$ and zero otherwise. Extend by zero in negative degrees.",
    "uses": [
-    "lem-trf-vector-subspace-complement"
+    "lem-sfb-rational-based-retract-universal-homotopy",
+    "lem-sfb-polynomial-bar-coface-retraction-identities"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent proof of the rational polynomial-bar contraction; constructing the homotopy for the fixed i and p"
-   }
-  },
-  {
-   "text": "Each basis monomial belongs to one $P_m^n$, and its image under $h$ is an element of the ordinary polynomial space $P_m^{n-1}$, hence a finite rational linear combination of monomials. Use the same coefficient matrices over every commutative $\\mathbf Q$-algebra $B$: multiply the rational entries by the given coefficient in $B$. The differential, $i$, and $p$ have the same monomial formulas, so the rational identities remain equalities of finite coefficient sums over $B$. No exactness of scalar extension is needed. This also treats the zero algebra. If $r=0$, all terms are $B$, $d^n=0$ for even $n$ and $d^n=1$ for odd $n$. One may take $h^n=1$ for even $n\\geq2$ and $h^n=0$ otherwise; then $dh+hd=1-ip$ in positive degrees and both sides vanish in degree zero. Thus the stated constant-complex edge case is included.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent proof of the rational polynomial-bar contraction; finite rational matrices, arbitrary scalar extension, and r=0"
+    "place": "Paragraph (3), algebraic obligation; assembly of Q59 re-split tasks, step 4"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-mv-polynomial-ring",
-  "lem-sfb-split-simplicial-nondegenerate-homotopy",
-  "lem-sfb-product-chain-proper-interval-homology",
-  "lem-trf-vector-subspace-complement"
+  "lem-sfb-polynomial-bar-coface-retraction-identities",
+  "lem-sfb-polynomial-bar-divided-monomial-normalization",
+  "lem-sfb-ordered-composition-complex-homology",
+  "lem-sfb-rational-based-retract-universal-homotopy"
  ],
  "proof_origin": {
   "by": "agent",
@@ -201,17 +165,17 @@
   "date": "2026-10-22",
   "item": "lem-sfb-rational-polynomial-bar-contraction",
   "worker": "stage1",
-  "summary": "Preserved the exact statement and ordered i,p. Split the polynomial calculation into finite multidegrees, normalized the dual split simplicial modules via a new Mathlib leaf, identified the normalized differential with the dual augmented proper-product-interval boundary, and constructed the desired homotopy by rational complements of cycles. One new unsplit combinatorial homology input. Explicit treatment of r=0, zero algebra, degree zero, and finite rational scalar-extension matrices.",
-  "blueprint": "Realizes the algebraic contraction input beneath the trivial-lattice base case of paragraph (3) of main-20261015 direct-images.proof.md. The imported ancestor command returns None because the chain ends at the Lean-created admissible-direct-image node; its existing from.node=None is retained. No claim that the blueprint contains this algebraic proof.",
+  "summary": "Repair of the human 2026-10-21 re-split return. Preserved the statement and Lean record verbatim. Replaced 6922 characters of proof by four short assembly steps and four comparably sized statement-only tasks, covering all eight former steps. Retained every former argument verbatim in report.md with an explicit task map. All new nodes have five actually logged Mathlib searches; none is an exact match. Repaired the 2026-10-22 landing return (returned head fb41440c050) against the current live DAG: re-read all four cited task statements and their three definition inputs, preserved current maintainer metadata, and made the homotopy-to-cohomology inference explicit in assembly step 2. Retained all four statement-only tasks and their logged searches.",
+  "blueprint": "Realizes the algebraic contraction input beneath the trivial-lattice base case of paragraph (3) of main-20261015 direct-images.proof.md. The imported ancestor command returns None because the chain ends at the Lean-created admissible-direct-image node; its existing from.node=None is retained. No claim that the blueprint contains this algebraic proof. New tasks realize respectively the coface/retraction identities, divided-monomial normalization, shifted interval/dual homology, and fixed-retraction homotopy with scalar extension; all lie under the same paragraph (3) algebraic obligation.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q15-81eb1e644",
-  "group": "Q15",
+  "reviewer": "NT-cc-Q59-ed82c633c",
+  "group": "Q59",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-81eb1e644 (reviewer sub-agent of L); spot-checked: First split of the item. There is no repair note, so the 10-21 re-split rules do not apply. The statement is preserved and checked on small cases: r=0 constant complex with h^even=1; r=1, m=(2) acyclic, giving the exterior algebra on one generator. Steps 1-8 are verified. d^2 follows from the cosimplicial identities. di=0 holds as a cup product of 1-cocycles. pd=0 holds because the quadratic merged-block terms cancel in the wedge and repeated indices vanish. Divided-monomial multidegree components are finite and form a split dual simplicial module: zero-block insertion gives the splitting indexed by surjections. The Mathlib leaf homotopyEquivNondegComplex (SplitSimplicialObject.lean:148/165/307-312, needs only Preadditive) matches the new mathlib node. N_m (monomials with no zero block) is a subcomplex dual to the merge differential. Partial sums give a bijection with the strict chains of T_m, with sign -1 and degree shift n-2. Transpose rank, pi=1 and equal dimensions make i_* and p_* inverse isomorphisms. A complement-of-cycles homotopy (lem-trf-vector-subspace-complement) gives dh+hd=1-ip, and rational matrices extend to any B. The new node product-chain-proper-interval-homology is true: if some m_j>=2 the max(v,e_j) cone contracts it; if m is squarefree it is the subdivided boundary of a simplex, a sphere of dimension s-2; s=1 gives H_{-1}=Q. It is a separate combinatorial input and does not restate the item. split-simplicial is not a duplicate of lem-cbc-normalized-alternating-homotopy-equivalence (Moore kernels versus a supplied splitting). The blueprint source, main-20261015 direct-images paragraph (3), has no algebraic proof; the proof is honestly marked agent-formulated with references WANTED. Batch 5: lem-trf-vector-subspace-complement is the Mathlib leaf Submodule.exists_isCompl with closure {def-weil-field}. It is general linear algebra outside the trace-formula and Poincare-duality assumptions, so it is accepted. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-ed82c633c (reviewer sub-agent of L); spot-checked: This is a valid re-split under the released human note of 2026-10-21/22, which is the same in live and side-live. The live item is still the Q15 8-step split and none of the 4 new ids exists live, so no other group has superseded it. This head rebases fb41440c050c, which got FIX, then a landing refusal. The 4 new nodes are byte-identical to fb41. The item changes only in step 2 (it adds that the homotopy equivalence induces inverse cohomology maps via dH(z), which is correct) and in its split_report summary; statement, stmt_deps and lean record are unchanged. The old 8 steps (I diffed live against the report's copy) are all kept: steps 1-2 → coface-retraction-identities; 3-4 → divided-monomial-normalization; 5 plus the transpose rank of 6 → ordered-composition-complex-homology; 7-8 → rational-based-retract-universal-homotopy; the rest of 6 → elementary item steps 2-3. The assembly is about 2000 characters, the 4 nodes are of comparable size, none restates the item, and the item's homotopy is genuinely assembled. I checked the mathematics myself. Node 1: di=0 as a cup product of additive 1-cocycles; pd=0 on r=2, f=x11x12 (-e+e); r=1; pi=1; q>r; r=0 parity. Node 2: binomial divided cofaces with coefficient 1; dual outer faces vanish on tuples with all blocks nonzero; the zero-block splitting count C(n,k) equals the number of surjections [n]->[k], matching the hypothesis of lem-sfb-split-simplicial-nondegenerate-homotopy; N_m is a subcomplex because the zero-block terms of delta^j and delta^(j-1) cancel; m=0. Node 3: deletion sign (-1)^(a-1) against merge sign (-1)^a; the (-1)^n chain isomorphism; n=1 and n=2; m=(1,1), (2), 0; the interval node is used only for m nonzero, matching its r>=1 hypothesis. Node 4: direct sum and acyclic ker p; dh+hd=1-ip on ik, z and l; hi=ph=h^2=0; column-finite extension to every B including zero; the constant complex is forced to h^even=1, checked by hand in degrees 0-3. Item step 4 meets every hypothesis of node 4. The blueprint source paragraph (3) contains no algebra; the nodes say honestly they are agent-formulated, there is no SGA, and tool_uses is empty. Duplicate search of the whole snapshot (8 candidates read) found none. One fault, B3: the fb41 FIX adding [def-weil-abstract-derived-category] to nodes 2 and 3 (derived-category isomorphism without a definition node) was lost when the landing was refused. I re-applied it: whole files under fixes/dag/nodes/sec-six-functors-basics/ for lem-sfb-polynomial-bar-divided-monomial-normalization and lem-sfb-ordered-composition-complex-homology, changing only statement and stmt_deps.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.RationalPolynomialBarContraction",
@@ -251,5 +215,17 @@
   "group": "O3",
   "result": "pass",
   "note": "Only the lean record changed; the statement is verbatim from the file and all 18 declarations exist. Clause by clause: the differential (first term, inner merge with sign (-1)^(a+1), last term with sign (-1)^(n+1), checked outside the sum by Mathlib's term:67 precedence), the degree-0 cancellation, i via increasing enumeration with i(e_empty)=1, p via injective one-coordinate-per-block tuples with the inversion sign and p^0 = 1, and d^2=0, di=0, pd=0, pi=1, dh+hd=1-ip in degree 0 and n+1. h is chosen over Q before the statement ranges over every B and extended by its monomial matrix, as the citers require. Edge cases checked by hand: n=0, r=0 (h=1 in even degrees >=2), r=1 and r=2 di=0 and pd=0 checks, q>r, zero algebra. Not hollow, only sorry proofs, docstrings and imports conform; the per-degree-only rule does not apply to a chain-level statement. Advisory: the polynomialComplex/exteriorComplex definitions are unused by contraction; a HomotopyEquiv corollary could package them later."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

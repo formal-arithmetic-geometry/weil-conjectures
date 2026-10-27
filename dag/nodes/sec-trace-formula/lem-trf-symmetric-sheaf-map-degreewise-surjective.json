@@ -1,0 +1,239 @@
+{
+ "id": "lem-trf-symmetric-sheaf-map-degreewise-surjective",
+ "kind": "statement",
+ "title": "Surjective module-sheaf maps induce degreewise surjective symmetric-algebra maps",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $\\mathcal F$ and $\\mathcal E$ be quasi-coherent $\\mathcal O_S$-modules [pqf-def-coherent, def-weil-sheaf-of-modules-category], and let $u:\\mathcal F\\to\\mathcal E$ be an $\\mathcal O_S$-linear morphism surjective as a map of sheaves: every local section of $\\mathcal E$ lifts to $\\mathcal F$ on an open covering of its domain. Use the symmetric algebra sheaves with their canonical degree-one maps $j_{\\mathcal F}$ and $j_{\\mathcal E}$ [lem-weil-pbc-quasi-coherent-symmetric-algebra] and their symmetric-degree grading [lem-weil-pbc-symmetric-algebra-graded]. The unique induced morphism of $\\mathcal O_S$-algebra sheaves\n$$\\operatorname{Sym}(u):\\operatorname{Sym}(\\mathcal F)\\longrightarrow\\operatorname{Sym}(\\mathcal E),\\qquad \\operatorname{Sym}(u)\\circ j_{\\mathcal F}=j_{\\mathcal E}\\circ u,$$\npreserves every symmetric degree, is the identity of $\\mathcal O_S$ in degree zero, and is surjective as a map of sheaves in every degree $n\\geq0$. Explicitly, for every open $U\\subseteq S$ and $t\\in\\operatorname{Sym}^n(\\mathcal E)(U)$ there are an open covering $U=\\bigcup_k U_k$ and sections $v_k\\in\\operatorname{Sym}^n(\\mathcal F)(U_k)$ with $\\operatorname{Sym}(u)(v_k)=t|_{U_k}$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CJ (lemma-presentation-sym-exterior), surjectivity of each symmetric power; Section 01CF (section-symmetric-exterior), quotient construction and symmetric grading."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "def-trf-symmetric-homogeneous-sections"
+ ],
+ "proof": [
+  {
+   "text": "Apply the canonical sheaf universal property [lem-weil-pbc-quasi-coherent-symmetric-algebra-core] to the module morphism j_E composed with u, obtaining a unique algebra-sheaf map a extending u. The equation for scalars is the commutativity condition of a morphism under O_X. Sectionwise, the canonical symmetric algebra lift of u agrees with a after the sectionMap: prove this on scalars and generators, then on sums and products.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra-core",
+    "lem-weil-pbc-symmetric-algebra-sheaf-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The explicit affine grade [def-trf-canonical-symmetric-graded-algebra] is the nth power of the degree-one range. Prove by submodule-power induction that both module-induced symmetric algebra maps and restriction preserve this power: scalars give degree zero, addition preserves membership, and multiplying by a generator raises the degree by one. Naturality of the sectionMap then shows that the sectionMap of a degree-n element on any open is homogeneous in the affine-test sense [def-trf-symmetric-homogeneous-sections]. For a homogeneous input section, apply its affine-test witness on each affine subopen and then the module-induced symmetric algebra map. Naturality of a and the generator comparison from Step 1 prove degree preservation.",
+   "uses": [
+    "def-trf-canonical-symmetric-graded-algebra",
+    "def-trf-symmetric-homogeneous-sections",
+    "lem-weil-pbc-symmetric-algebra-sheaf-construction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any open U and degree-n element s of the sectionwise symmetric algebra of E, prove that s lifts near every x in U to a degree-n element of the sectionwise symmetric algebra of F, by submodule-power induction. A scalar lifts on U itself. For a sum, intersect the two lifting neighborhoods and restrict both lifts, then add. For a product of a degree-one generator and a degree-i element, local surjectivity lifts the module generator near x; intersect that neighborhood with the one supplied by induction, restrict both lifts, and multiply. Step 2 gives the required degree membership; naturality, additivity and multiplicativity give the lifting equations. Thus zero, n=0, and empty sums require no exceptional cases.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a homogeneous section t on U and x in U, choose an affine neighborhood V of x contained in U [lem-weil-pbc-affine-opens-basis]. Its affine-test witness [def-trf-symmetric-homogeneous-sections] gives a degree-n sectionwise element s mapping to t restricted to V. Apply Step 3 to s and x, then apply sectionMap to the resulting lift on W contained in V. By Step 2 this is homogeneous; the sectionMap naturality and Step 1 identify its image under a with t restricted to W. Choose one such W and lift for each point x of U. This point-indexed family is in Type u, lies below U, and its supremum is U since the neighborhood chosen for x contains x. If U is empty the index type is empty. These witnesses prove the requested degreewise local surjectivity.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-trf-symmetric-homogeneous-sections"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-core",
+  "lem-weil-pbc-symmetric-algebra-sheaf-construction",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-trf-symmetric-homogeneous-sections",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Section 01CF and Tag 01CJ. E8 formalizes the finite monomial lifting argument by Submodule.pow_induction_on_left' on the explicit degree-one range powers; the canonical sheaf universal property supplies the map and uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A surjection of quasi-coherent module sheaves induces a degree-preserving epimorphism of their symmetric algebra sheaves, surjective in every symmetric degree",
+   "results": "8 hits; top results: SymAlg.sym_surjective, SymAlg.unsym_surjective, SheafOfModules.GeneratingSections.ofEpi, SymmetricAlgebra.algHom_surjective, SheafOfModules.GeneratingSections.opEpi_comp, SheafOfModules.GeneratingSections.ofEpi_I, SheafOfModules.GeneratingSections.ofEpi_s, PresheafOfModules.epi_of_surjective. Read the returned signatures: none states this sheaf-level or relative-Proj comparison; ring symmetric-algebra and absolute Proj results do not specialize in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SymmetricAlgebra.*(surjective|map)|symmetricAlgebra.*(surjective|map)",
+   "results": "0 hits; top results: . Read the returned signatures: none states this sheaf-level or relative-Proj comparison; ring symmetric-algebra and absolute Proj results do not specialize in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SymmetricAlgebra.map, Function.Surjective",
+   "results": "0 hits; top results: . loogle: unknown identifier 'SymmetricAlgebra.map'. Read the returned signatures: none states this sheaf-level or relative-Proj comparison; ring symmetric-algebra and absolute Proj results do not specialize in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "map.*surjective|surjective.*map|def map",
+   "results": "0 hits; top results: . Read the returned signatures: none states this sheaf-level or relative-Proj comparison; ring symmetric-algebra and absolute Proj results do not specialize in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective morphism of quasi-coherent sheaves induces a surjection on each symmetric power sheaf",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally surjective morphism of sheaves of modules induces locally surjective maps on all symmetric powers",
+   "results": "8 hits; top results: PresheafOfModules.IsLocallySurjective, PresheafOfModules.instIsLocallySurjectiveToSheafify, CategoryTheory.Sheaf.instIsLocallySurjectiveHomObjForgetTypeMapSheafCompose, CategoryTheory.Sheaf.isLocallySurjective_sheafToPresheaf_map_iff, TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective, CategoryTheory.extensiveTopology.surjective_of_isLocallySurjective_sheaf_of_types, CategoryTheory.Presheaf.isLocallySurjective_of_surjective, CategoryTheory.Presheaf.isLocallySurjective_iff_whisker_forget. Read the returned signatures: none states this sheaf-level or relative-Proj comparison; ring symmetric-algebra and absolute Proj results do not specialize in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SymmetricAlgebra",
+   "results": "10 hits; top results: Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean. Read the returned signatures: none states this sheaf-level or relative-Proj comparison; ring symmetric-algebra and absolute Proj results do not specialize in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SymmetricAlgebra.lift",
+   "results": "6 hits; top results: SymmetricAlgebra.lift, IsSymmetricAlgebra.equiv_toAlgHom, IsSymmetricAlgebra.equiv_apply, SymmetricAlgebra.lift_ι_apply, SymmetricAlgebra.lift_ι, SymmetricAlgebra.lift_comp_ι. Read the returned signatures: none states this sheaf-level or relative-Proj comparison; ring symmetric-algebra and absolute Proj results do not specialize in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "symmetric|SymmetricAlgebra",
+   "results": "0 hits in Mathlib/Algebra/Category/ModuleCat/Sheaf; no symmetric-algebra sheaf construction or symmetric-power surjectivity declaration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Symmetric powers of a sheaf of modules are sheafifications of sectionwise symmetric powers and sections are locally finite sums of products",
+   "results": "8 hits: SymmetricPower, PresheafOfModules.sheafify, SymmetricPower.instAddCommGroup, SymmetricPower.instAddCommMonoid, SymmetricPower.module, SheafOfModules.ιFree, SymmetricAlgebra, SymmetricPower.mk. Read the returned types; symmetric algebra quotient and lift concern rings, while module-sheaf local-surjectivity results do not construct symmetric powers or their grades. No exact sheaf symmetric-power result or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective morphism of module sheaves induces a degree preserving morphism of symmetric algebra sheaves which is locally surjective on every homogeneous component",
+   "results": "8 hits: SymAlg.sym_surjective, SymAlg.unsym_surjective, SymmetricAlgebra.algHom_surjective, AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective, HomogeneousLocalization.mk_surjective, PresheafOfModules.instIsLocallySurjectiveToSheafify, PresheafOfModules.IsLocallySurjective, ExteriorAlgebra.map_surjective_iff. Read the returned types; symmetric algebra quotient and lift concern rings, while module-sheaf local-surjectivity results do not construct symmetric powers or their grades. No exact sheaf symmetric-power result or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective|def lift|theorem lift",
+   "results": "5 hits: Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean. Read the returned types; symmetric algebra quotient and lift concern rings, while module-sheaf local-surjectivity results do not construct symmetric powers or their grades. No exact sheaf symmetric-power result or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally surjective morphism of sheaves of modules induces locally surjective maps on every symmetric power sheaf",
+   "results": "8 hits: PresheafOfModules.IsLocallySurjective, CategoryTheory.Sheaf.locallyInjective, CategoryTheory.Sheaf.isLocallySurjective_iff_epi', PresheafOfModules.IsLocallyInjective, CategoryTheory.Sheaf.epi_of_isLocallySurjective', CategoryTheory.Sheaf.locallySurjective, TopCat.Presheaf.IsLocallySurjective, CategoryTheory.Sheaf.IsLocallySurjective. Read the returned types; symmetric algebra quotient and lift concern rings, while module-sheaf local-surjectivity results do not construct symmetric powers or their grades. No exact sheaf symmetric-power result or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Symmetric powers of a quotient sheaf of modules are quotients of the symmetric powers, graded symmetric algebra functor preserves epimorphisms",
+   "results": "8 hits: SheafOfModules.GeneratingSections.opEpi_comp, SymAlg.sym_surjective, SheafOfModules.GeneratingSections.ofEpi, SheafOfModules.GeneratingSections.ofEpi_I, SymmetricAlgebra.algHom_surjective, SheafOfModules.GeneratingSections.epi, SymmetricPower.range_mk, SheafOfModules.GeneratingSections.ofEpi_s. Read the returned types; symmetric algebra quotient and lift concern rings, while module-sheaf local-surjectivity results do not construct symmetric powers or their grades. No exact sheaf symmetric-power result or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-projective-bundle-global-generated-h-projective",
+  "date": "2026-10-22",
+  "group": "Q72"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting projective-bundle argument below lem-trf-local-term-locality, through lem-trf-projective-bundle-global-generated-h-projective: Tag 087S paragraph beginning “If E is generated by finitely many global sections”, induced symmetric-algebra surjection (returned proof Step 1).",
+   "via": [
+    "lem-trf-projective-bundle-global-generated-h-projective",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-symmetric-sheaf-map-degreewise-surjective",
+  "worker": "stage1",
+  "summary": "Repair the returned delivery 481b30a3f36 against the current live DAG: retain the unchanged statement and five-step finite local-lifting argument, reread every cited statement, and cite the affine symmetric-algebra sheaf comparison (b) directly in Steps 2 and 3. The universal property, explicit affine grades, pure-product spanning and affine basis supply all non-elementary inputs. No new nodes, repeated searches, Lean writing or compilation.",
+  "blueprint": "Supporting algebra in the projective-bundle reduction below lem-trf-local-term-locality, through lem-trf-projective-bundle-global-generated-h-projective: realize the symmetric-algebra surjection in the Tag 087S paragraph beginning “If E is generated by finitely many global sections”. Steps 1–2 construct the graded map; Steps 3–5 prove degreewise local surjectivity.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "why": "The universal property constructs the symmetric-algebra sheaf map; this generic algebra-sheaf tool is needed in the projective-bundle argument and is not supplied by a trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-023f32db2",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-023f32db2 (reviewer sub-agent of L); spot-checked: This re-delivers 481b30a3f36d, which passed review and was then refused at landing because the side-project completion had not been promoted. I compared every field of the item with the 481b snapshot. Statement, stmt_deps, source, blueprint and proof_deps are unchanged, and there are no new nodes. The only change to the mathematics is that Steps 2 and 3 now also cite clause (b) of lem-weil-pbc-quasi-coherent-symmetric-algebra. I checked that clause word for word: for an affine U it states the iso Sym_R(F(U)) -> Sym(F)(U). Its hypothesis is quasi-coherence, which both modules satisfy, and it gives exactly the finite monomial presentation that Steps 2 and 3 use. I reread the full proof. Step 1 is clause (a) applied to j_E∘u. Step 2 gets degree preservation from the def-trf affine grades, the n-fold-product spanning of lem-weil-pbc-symmetric-algebra-graded and the affine-basis Mathlib leaf; degree 0 is the identity on Sym^0 = R·1. Steps 3 to 5 lift finitely many factors on a finite open intersection W_x, which need not be affine, then substitute; the W_x cover U. The statement is the surjectivity half of Stacks modules.tex Tag 01CJ (l.3352-3380) plus the degree-0 clause, and that is exactly what Step 1 of the parent lem-trf-projective-bundle-global-generated-h-projective uses. Edge cases checked: n=0, an empty sum, U=∅, u=id, O->0, O²->O at n=2, and E not of finite type. There are no SGA citations and no cycle, and proof_deps equals the union of uses. Accepted tool_use: lem-weil-pbc-quasi-coherent-symmetric-algebra, the generic universal property, which is already a stmt_dep. Maintainer note: this item is in a side-completion promotion loop. The landing refusal is a promotion fault, not a fault in the delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SymmetricSheafMapDegreewiseSurjective",
+  "declaration": "AlgebraicGeometry.SymmetricAlgebraSheaf.exists_map_degreewise_locallySurjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/SymmetricSheafMapDegreewiseSurjective.lean",
+  "statement": "theorem exists_map_degreewise_locallySurjective {X : Scheme.{u}} (F E : X.Modules) [F.IsQuasicoherent] [E.IsQuasicoherent] (u : F ⟶ E) [PresheafOfModules.IsLocallySurjective (Opens.grothendieckTopology X) u.val] : ∃ a : algebra F ⟶ algebra E, (∀ (U : X.Opens) (x : F.val.obj (op U)), a.right.hom.app (op U) ((inclusion F).val.app (op U) x) = (inclusion E).val.app (op U) (u.val.app (op U) x)) ∧ (∀ b : algebra F ⟶ algebra E, (∀ (U : X.Opens) (x : F.val.obj (op U)), b.right.hom.app (op U) ((inclusion F).val.app (op U) x) = (inclusion E).val.app (op U) (u.val.app (op U) x)) → b = a) ∧ (∀ (n : ℕ) (U : X.Opens) (s : (algebra F).right.obj.obj (op U)), IsHomogeneousSection F n U s → IsHomogeneousSection E n U (a.right.hom.app (op U) s)) ∧ (∀ (U : X.Opens) (r : X.presheaf.obj (op U)), a.right.hom.app (op U) ((algebra F).hom.hom.app (op U) r) = (algebra E).hom.hom.app (op U) r) ∧ (∀ (n : ℕ) (U : X.Opens) (t : (algebra E).right.obj.obj (op U)), IsHomogeneousSection E n U t → ∃ (I : Type u) (V : I → X.Opens) (hV : ∀ i : I, V i ≤ U), iSup V = U ∧ ∃ v : ∀ i : I, (algebra F).right.obj.obj (op (V i)), (∀ i : I, IsHomogeneousSection F n (V i) (v i)) ∧ ∀ i : I, a.right.hom.app (op (V i)) (v i) = (algebra E).right.obj.map (homOfLE (hV i)).op t)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f8490d8e",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Item Lean matches node clause by clause: qcoh F,E; u locally surjective (PresheafOfModules.IsLocallySurjective on opens topology); canonical algebra/inclusion (exact witnesses of exists_quasiCoherentSymmetricAlgebra); ∃ a with generator eq + uniqueness over all b satisfying only that eq; degree preservation; scalar identity in degree 0; degreewise local lifts with Type u cover, iSup V = U, homogeneous v_i of same degree. New def IsHomogeneousSection = affine-test membership in gradedAlgebraData grading via sectionMap (bijective on affines, so exactly Sym^n subsheaf); concrete, no sorry, no duplicate found; node fields ok, deps on base, 3 search kinds. Item node: only lean + new def stmt_dep added; statements verbatim; docstrings with source/blueprint/5 steps; edge cases n=0, empty sum, U=∅, 0-module, non-qc U, universes ok. Advisory: owner lem-weil-pbc-symmetric-algebra-sheaf-construction of algebra/inclusion not a direct stmt_dep (reached via new def node; precedent NX advisory). No file changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261026T081707-L-2044097",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

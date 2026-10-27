@@ -20,7 +20,7 @@
  ],
  "proof": [
   {
-   "text": "Fix $N\\geq2$. Restrict $\\varphi$ to the canonical image of $\\mathcal O_{Y,y}$ in its completion, obtaining the local $\\mathcal O_{S,s}$-map $\\theta:\\mathcal O_{Y,y}\\to\\widehat{\\mathcal O}_{X,x}$. Apply [lem-trf-local-map-completion-approximation] to this map with the given $N$. This gives $p:(U,u)\\to(X,x)$ etale with unchanged residue field, and an $S$-map $f:(U,u)\\to(Y,y)$ with the required congruence on $\\mathcal O_{Y,y}$. The hypotheses are exactly the given locally Noetherian base, the two locally finite type structural maps, and the G-ring $\\mathcal O_{S,s}$.",
+   "text": "Fix $N\\geq2$. Compose the canonical completion map $\\iota_Y:\\mathcal O_{Y,y}\\to\\widehat{\\mathcal O}_{Y,y}$ with $\\varphi$, obtaining the local $\\mathcal O_{S,s}$-map $\\theta:\\mathcal O_{Y,y}\\to\\widehat{\\mathcal O}_{X,x}$. Apply [lem-trf-local-map-completion-approximation] to this map with the given $N$. This gives $p:(U,u)\\to(X,x)$ etale with unchanged residue field, and an $S$-map $f:(U,u)\\to(Y,y)$ with the required congruence on $\\mathcal O_{Y,y}$. The hypotheses are exactly the given locally Noetherian base, the two locally finite type structural maps, and the G-ring $\\mathcal O_{S,s}$.",
    "uses": [
     "lem-trf-local-map-completion-approximation"
    ],
@@ -31,65 +31,29 @@
    }
   },
   {
-   "text": "Write $A=\\mathcal O_{Y,y}$, $B=\\mathcal O_{X,x}$, and $C=\\mathcal O_{U,u}$. These rings are Noetherian: take affine finite-type charts over a Noetherian affine neighbourhood of $s$, use [lem-weil-pbc-finite-type-over-noetherian], and localize using [lem-weil-pbc-flat-local-ring-maps] (its Noetherian-localization assertion, applied also to identity maps). For $U$ use affine charts of the etale map $p$; finite presentation implies finite type. The map $p_u^{\\sharp}:B\\to C$ is flat by [def-weil-etale-morphism, def-weil-flat-morphism]. By [lem-weil-pbc-etale-prime-generates-maximal] on these etale affine charts it satisfies $\\mathfrak m_B C=\\mathfrak m_C$, and Step 1 supplies the residue-field isomorphism. Consequently [lem-weil-pbc-flat-local-completion-iso] gives an isomorphism $\\widehat p^{\\sharp}:\\widehat B\\xrightarrow{\\sim}\\widehat C$. Put $\\alpha=\\widehat p^{\\sharp}\\circ\\varphi:\\widehat A\\xrightarrow{\\sim}\\widehat C$ and let $g=\\widehat f^{\\sharp}:\\widehat A\\to\\widehat C$ be the actual map induced by $f$.",
+   "text": "For the maps $p,f$ just obtained, set $A=\\mathcal O_{Y,y}$, $B=\\mathcal O_{X,x}$, $C=\\mathcal O_{U,u}$ and $D=\\widehat C$. Apply [lem-trf-etale-completion-congruence] with the original $\\varphi$ and $N$: Step 1 supplies its congruence hypothesis on $A$, since $g\\circ\\iota_A=\\iota_C\\circ f_u^{\\sharp}$ by the definition of the completed stalk map; $p$ is etale with unchanged residue field. It gives that $Y$ is locally Noetherian, $A,B,C$ are Noetherian, $D$ is local with maximal ideal $\\mathfrak n=\\mathfrak m_CD$, and $\\alpha=\\widehat p^{\\sharp}\\circ\\varphi:\\widehat A\\xrightarrow{\\sim}D$ is an isomorphism. For the actual completed map $g=\\widehat f^{\\sharp}$, using $(\\mathfrak m_CD)^N=\\mathfrak m_C^ND$, it gives $g(z)-\\alpha(z)\\in\\mathfrak n^N$ for every $z\\in\\widehat A$.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-flat-local-ring-maps",
-    "def-weil-etale-morphism",
-    "def-weil-flat-morphism",
-    "lem-weil-pbc-etale-prime-generates-maximal",
-    "lem-weil-pbc-flat-local-completion-iso"
+    "lem-trf-etale-completion-congruence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0CAV, proof, invocation of More on Algebra Tag 0AGX (lemma-flat-unramified)"
+    "place": "Tag 0CAV, lemma-isomorphism-approximation, proof: comparison of the X and U completions by lemma-flat-unramified, and the congruence diagram before passage to associated graded rings; the congruence is extended from the original local ring."
    }
   },
   {
-   "text": "Let $\\mathfrak n_A=\\mathfrak m_A\\widehat A$ and $\\mathfrak n_C=\\mathfrak m_C\\widehat C$. These are the maximal ideals by [lem-weil-pbc-local-completion-local-ring]. For each $r\\geq1$, [lem-weil-pbc-local-completion-quotient] applied to $A\\twoheadrightarrow A/\\mathfrak m_A^r$ gives $\\widehat A/\\mathfrak n_A^r\\cong A/\\mathfrak m_A^r$: the quotient has nilpotent maximal ideal, so its defining completion sequence is constant from level $r$ onwards. In particular every $a\\in\\widehat A$ has a representative $a_0\\in A$ with $a-a_0\\in\\mathfrak n_A^N$. Both $g$ and $\\alpha$ are local maps and send this difference into $\\mathfrak n_C^N$. Step 1 gives $g(a_0)-\\alpha(a_0)\\in\\mathfrak n_C^N$, hence $g(a)-\\alpha(a)\\in\\mathfrak n_C^N$ for every $a\\in\\widehat A$. This proves the claimed congruence on the whole completed source, rather than only on its dense local subring.",
+   "text": "Put $h=g\\circ\\alpha^{-1}:D\\to D$. Step 2 and $N\\geq2$ give $h(d)-d\\in\\mathfrak n^N\\subseteq\\mathfrak n^2$ for every $d\\in D$. For $d\\in\\mathfrak n$ this implies $h(d)\\in\\mathfrak n$, since $\\mathfrak n^2\\subseteq\\mathfrak n$. Apply [lem-trf-completion-near-identity-automorphism] to the Noetherian local ring $C$. It makes $h$ an automorphism, via its compatible inverses on all infinitesimal quotients; hence $g=h\\circ\\alpha$ is an isomorphism.",
    "uses": [
-    "lem-weil-pbc-local-completion-local-ring",
-    "lem-weil-pbc-local-completion-quotient"
+    "lem-trf-completion-near-identity-automorphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0CAV, congruence diagram on completions; extension of the Tag 0CAU congruence using completion of quotients, Algebra Tag 00MA"
+    "place": "Tag 0CAV, lemma-isomorphism-approximation, proof: generation in degree 1, induction with successive infinitesimal-quotient exact sequences, and passage to the completed rings; after identifying the given isomorphism with the identity."
    }
   },
   {
-   "text": "Identify $\\widehat A$ with $D=\\widehat C$ using $\\alpha$ and set $h=g\\circ\\alpha^{-1}:D\\to D$. Thus $h(a)-a\\in\\mathfrak n^2$ for every $a\\in D$, where $\\mathfrak n=\\mathfrak n_C$, because $N\\geq2$. It follows that $h$ is the identity on $D/\\mathfrak n$ and on $\\mathfrak n/\\mathfrak n^2$. More explicitly, for $a_1,\\ldots,a_r\\in\\mathfrak n$, the telescoping expansion of $\\prod_i h(a_i)-\\prod_i a_i$ has in each term one factor in $\\mathfrak n^2$ and $r-1$ factors in $\\mathfrak n$, so it belongs to $\\mathfrak n^{r+1}$. Every element of $\\mathfrak n^r$ is a finite sum of such products: scalar coefficients can be absorbed into one factor. Hence $h$ acts as the identity on every $\\mathfrak n^r/\\mathfrak n^{r+1}$. This is the generation-in-degree-one argument for the associated graded ring, with the degree-zero case stated separately.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0CAV, associated-graded diagram and generation in degree 1"
-   }
-  },
-  {
-   "text": "For $r\\geq1$ let $h_r:D/\\mathfrak n^r\\to D/\\mathfrak n^r$ be induced by $h$. Inductively these maps are bijective. The base $r=1$ is Step 4. For injectivity at $r+1$, an element killed by $h_{r+1}$ reduces to zero modulo $\\mathfrak n^r$ by injectivity of $h_r$, and is then zero in $\\mathfrak n^r/\\mathfrak n^{r+1}$ because $h$ is the identity there. For surjectivity, given $d\\bmod\\mathfrak n^{r+1}$ first choose $a$ with $h(a)\\equiv d\\bmod\\mathfrak n^r$. The error $d-h(a)$ has a class in $\\mathfrak n^r/\\mathfrak n^{r+1}$; choose a representative $e\\in\\mathfrak n^r$ of that class. Step 4 gives $h(e)\\equiv e\\bmod\\mathfrak n^{r+1}$, so $a+e$ is a preimage. This is an explicit chase of the two short exact sequences used by the source.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0CAV, final paragraph: induction with the short exact sequences of successive quotients"
-   }
-  },
-  {
-   "text": "The ideal $\\mathfrak m_C$ is finitely generated since $C$ is Noetherian. Thus [lem-weil-pbc-adic-completion-mod-ideal] makes $D=\\widehat C$ complete for $\\mathfrak n=\\mathfrak m_CD$. By [def-weil-pbc-adic-completion], $D=\\varprojlim_rD/\\mathfrak n^r$. The inverse maps $h_r^{-1}$ of Step 5 commute with the transition quotients: both possible composites are inverses of the same commutative square of the $h_r$. Applying them coordinate by coordinate therefore defines an inverse ring map to $h$ on the compatible sequences. Hence $h$ is an isomorphism and so is $g=h\\circ\\alpha$. No unproved exactness of inverse limits is required.",
-   "uses": [
-    "lem-weil-pbc-adic-completion-mod-ideal",
-    "def-weil-pbc-adic-completion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0CAV, last sentence: isomorphisms of all infinitesimal quotients give the isomorphism on completions"
-   }
-  },
-  {
-   "text": "The map $f:U\\to Y$ is locally of finite type: the composite $U\\to X\\to S$ is locally of finite type, and cancellation gives the assertion, both by [lem-weil-pbc-proper-fp-permanence](e),(f). The target $Y$ is locally Noetherian by the affine-chart argument of Step 2. Its actual completed stalk map is the isomorphism $g$ of Step 6, so [lem-trf-completed-stalk-isomorphism-etale] gives an open neighbourhood $W\\ni u$ on which $f$ is etale, and an isomorphism $\\kappa(y)\\to\\kappa(u)$. Replace $U$ by $W$. The map to $X$ remains etale by [lem-weil-pbc-etale-composition-cancellation], since the open immersion $W\\hookrightarrow U$ is etale. Its residue field map is still that of Step 1. The local ring at $u$, its maximal ideal, and both completed maps are unchanged by restriction, so the congruence modulo $\\mathfrak m_u^N\\widehat{\\mathcal O}_{U,u}$ from Step 3 holds with exactly the original $\\varphi$. This supplies both elementary etale neighbourhoods and the requested approximation.",
+   "text": "The map $f:U\\to Y$ is locally of finite type: the composite $U\\to X\\to S$ is locally of finite type, and cancellation gives the assertion, both by [lem-weil-pbc-proper-fp-permanence](e),(f). The target $Y$ is locally Noetherian by Step 2. Its actual completed stalk map is the isomorphism $g$ of Step 3, so [lem-trf-completed-stalk-isomorphism-etale] gives an open neighbourhood $W\\ni u$ on which $f$ is etale, and an isomorphism $\\kappa(y)\\to\\kappa(u)$. Replace $U$ by $W$. The map to $X$ remains etale by [lem-weil-pbc-etale-composition-cancellation], since the open immersion $W\\hookrightarrow U$ is etale. Its residue field map is still that of Step 1. The local ring at $u$, its maximal ideal, and both completed maps are unchanged by restriction, so the congruence modulo $\\mathfrak m_u^N\\widehat{\\mathcal O}_{U,u}$ from Step 2 holds with exactly the original $\\varphi$. This supplies both elementary etale neighbourhoods and the requested approximation.",
    "uses": [
     "lem-weil-pbc-proper-fp-permanence",
     "lem-trf-completed-stalk-isomorphism-etale",
@@ -104,16 +68,8 @@
  ],
  "proof_deps": [
   "lem-trf-local-map-completion-approximation",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-flat-local-ring-maps",
-  "def-weil-etale-morphism",
-  "def-weil-flat-morphism",
-  "lem-weil-pbc-etale-prime-generates-maximal",
-  "lem-weil-pbc-flat-local-completion-iso",
-  "lem-weil-pbc-local-completion-local-ring",
-  "lem-weil-pbc-local-completion-quotient",
-  "lem-weil-pbc-adic-completion-mod-ideal",
-  "def-weil-pbc-adic-completion",
+  "lem-trf-etale-completion-congruence",
+  "lem-trf-completion-near-identity-automorphism",
   "lem-weil-pbc-proper-fp-permanence",
   "lem-trf-completed-stalk-isomorphism-etale",
   "lem-weil-pbc-etale-composition-cancellation"
@@ -307,40 +263,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-isomorphism-completion-approximation",
   "worker": "stage1",
-  "summary": "Split Stacks 0CAV without changing its statement. Two statement-only inputs isolate local-map approximation (0CAU) and the generic completed-stalk etaleness criterion. The item proves the completed map is an isomorphism by extending the N-th-order congruence, computing all graded pieces, chasing successive quotients, and taking compatible inverses; all generic completion and permanence facts reuse existing nodes. No Lean declaration attaches and no Mathlib search matches.",
+  "summary": "Repairs the batch5 re-split return without changing the statement. Old steps 2-3 are assigned to a new statement-only etale-completion comparison and congruence lemma; old steps 4-6 to a new statement-only near-identity completion automorphism lemma. Original steps 1 and 7 remain in the short four-step assembly. The report preserves the complete old arguments, citations and search history, and explains their new owners. Both new nodes are unsplit and independently assignable. Rebased the retained repair against the current shared DAG after the side-completion promotion return; parent baseline and current statements of the six cited inputs were rechecked, and the newly present completed-base affine span was ruled out as a duplicate. The third step now derives preservation of the maximal ideal directly from the stated congruence; the fourth explicitly uses the new comparison lemma for local Noetherianity. On 2026-10-23 compared the current read-clone node with the retained returned baseline (no changed fields), reread every assembly input and the current latest blueprint ancestor, and renewed the promotion repair on current server main. Step 1 now explicitly composes the completion map with the given isomorphism, avoiding any implicit identification of the original stalk with a subring of its completion. The two extracted statements and their recorded search questions remain unchanged. Renewal after the 2026-10-23 return of b5414434abf: initial dry run b7cc92af1fe passed on current server main. Rechecked the unchanged returned baseline and all six input statements; step 2 now spells out the canonical completed-map equation that identifies the approximation hypothesis, and the equality of the two ideal-power notations. Retained nodes, sources and logged searches are unchanged.",
   "blueprint": "Preserves the historical lem-trf-local-term-locality ancestry and realizes the Tag 0CAV input to Tag 0GDX, used for the relative completed-local isomorphism in the nodal etale local-model branch. No chapter or unit route changes.",
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Generic local algebra, completion, or finite-type/etale permanence used as a black box in the Stacks 0CAV argument; no node of sk-i-curve-zero supplies this fact."
-   },
-   {
-    "node": "lem-weil-pbc-flat-local-ring-maps",
-    "why": "Generic local algebra, completion, or finite-type/etale permanence used as a black box in the Stacks 0CAV argument; no node of sk-i-curve-zero supplies this fact."
-   },
-   {
-    "node": "lem-weil-pbc-etale-prime-generates-maximal",
-    "why": "Generic local algebra, completion, or finite-type/etale permanence used as a black box in the Stacks 0CAV argument; no node of sk-i-curve-zero supplies this fact."
-   },
-   {
-    "node": "lem-weil-pbc-flat-local-completion-iso",
-    "why": "Generic local algebra, completion, or finite-type/etale permanence used as a black box in the Stacks 0CAV argument; no node of sk-i-curve-zero supplies this fact."
-   },
-   {
-    "node": "lem-weil-pbc-local-completion-local-ring",
-    "why": "Generic local algebra, completion, or finite-type/etale permanence used as a black box in the Stacks 0CAV argument; no node of sk-i-curve-zero supplies this fact."
-   },
-   {
-    "node": "lem-weil-pbc-local-completion-quotient",
-    "why": "Generic local algebra, completion, or finite-type/etale permanence used as a black box in the Stacks 0CAV argument; no node of sk-i-curve-zero supplies this fact."
-   },
-   {
-    "node": "lem-weil-pbc-adic-completion-mod-ideal",
-    "why": "Generic local algebra, completion, or finite-type/etale permanence used as a black box in the Stacks 0CAV argument; no node of sk-i-curve-zero supplies this fact."
-   },
    {
     "node": "lem-weil-pbc-proper-fp-permanence",
     "why": "Generic local algebra, completion, or finite-type/etale permanence used as a black box in the Stacks 0CAV argument; no node of sk-i-curve-zero supplies this fact."
@@ -363,12 +291,12 @@
   "lem-weil-pbc-etale-composition-cancellation"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-N9-522fa7021",
-  "group": "N9",
+  "reviewer": "NT-cc-Q90-62f12f031",
+  "group": "Q90",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N9-522fa7021 (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited DAG statements, unit route, worker report, and Stacks sources 0CAU, 0CAV, 02HX, 0CAR, and 0AGX. Verified hypotheses, completion/base-change maps, coefficient category, graded and quotient arguments, etale conclusions, edge cases, duplicate checks, Mathlib searches, and route compliance. No repair is needed; review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-62f12f031 (reviewer sub-agent of L); spot-checked: This is the fifth delivery of the 2026-10-21 re-split. The four earlier heads (defc684c, 7b0eea2f, c7f87807, b5414434) were all PASSed with no fixes, and each landing was refused with 'side completion never promoted; L promotes it'. In clones/live and clones/side-live the item is still the old 7-step split and neither new node exists, so no other group has superseded it, and there is no repair note. Compared with b5414434, both new nodes (etale-completion-congruence, completion-near-identity-automorphism) are unchanged (no JSON diff). In the item, the statement, stmt_deps, proof_deps and steps 1, 3 and 4 are unchanged. Only step 2 changed, in two ways, and both are correct. First, it adds g∘ι_A=ι_C∘f_u♯, which turns the 0CAU conclusion p̂(θ(a))−ι_u(f_u♯(a))∈𝔪_u^NÔ with θ=φ∘ι_Y into exactly the congruence node's hypothesis. Second, it adds (𝔪_C D)^N=𝔪_C^N D, which holds for extended ideals. The cited input statements I compared are unchanged since b5414 (local-map approx, completed-stalk criterion, proper-fp (e)(f), etale composition (1)(2), flat-local-completion-iso, the local-completion lemmas). I re-checked the assembly. Step 1: the 0CAU node applies with N≥2≥1. Step 2: Y is locally Noetherian, A, B, C are Noetherian, α=p̂φ is an isomorphism by 0AGX, and g−α∈𝔫^N on Â via Â/𝔪^NÂ≅A/𝔪^N and locality. Step 3: h=gα⁻¹ satisfies h−id∈𝔫²⊆𝔫, so the near-identity node makes it an automorphism (identity on gr, quotient induction, completeness). Step 4: f is locally of finite type by composition and cancellation, the completed-stalk criterion gives W, restricting keeps p étale, and the congruence is preserved. Both new statements are true. Small cases: a field forces h=id; t↦t+at² is invertible on k[t]/(t³) and k[[t]]; t↦t² is excluded. Former steps 2–3 and 4–6 became two nodes of comparable size, no argument was dropped, and the assembly is short. Stacks more-morphisms Tag 0CAV: its proof starts 'We may assume N≥2', so N≥2 is not a weakening. In an rg -L sweep, the only addition since b5414 is lem-trf-varying-base-smooth-span-model (Q19 0GDX relative smooth-span descent), which is not a duplicate. No SGA source, no new tool_uses. Maintainer note: this is the side-completion promotion loop; L must promote the node, and another re-push will not resolve it."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.IsomorphismCompletionApproximation",
@@ -388,5 +316,16 @@
   "result": "pass",
   "note": "Review written to review.md. Verified source alignment, all statement dependencies and clauses, canonical completion maps, edge cases, verbatim signature, docstrings, report sections, and route compliance. scompile.py reproduced a clean per-file compile; no fixes required."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

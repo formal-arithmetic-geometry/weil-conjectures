@@ -13,25 +13,44 @@
  ],
  "proof": [
   {
-   "text": "Let A0=Hom(P,I) and choose a flat-term K-flat resolution q:Q→A0. Apply the Hom normalization to P,I, obtaining the canonically augmented kappa, kappa_U and the chain isomorphism gamma to Hom(rP,rI). Apply the tensor normalization to Q,P. The kflat field guarantees that the restricted complexes are valid tensor representatives. Exact restriction takes q to a quasi-isomorphism.",
+   "text": "Choose a flat-term K-flat resolution q:Q→Hom(P,I). Convert termwise categorical flatness to IsFlatOnSite using siteSheafTensorRightIso. Apply the supplied tensor normalization to Q,P and Hom normalization to P,I, obtaining gamma_t, gamma_h, kappa and kappa_U and their localization squares.",
    "uses": [
     "lem-pc-kflat-resolution",
+    "def-sfb-ringed-slice-comparison-model",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the ordinary signed tensor-Hom chain equivalence from the native adjunction construction to uncurry q and its restriction followed by gamma_h. Precompose with gamma_t inverse. Its pure-tensor normalization reduces both maps to evaluating the same Hom-product coordinate. Apply the local-family normalization of gamma_h at W equal to the identity of V. The sheafification adjunction and total-coproduct extensionality identify the two chain maps. This step is underived and does not use an augmentation or K-injectivity.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "def-sfb-ringed-slice-comparison-model",
+    "def-coef-ringed-tensor-hom-model",
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply coefficientTensorCurry_normalize on both sites. In each normalization the kappa augmentation equation rewrites Q(Hom(P,augmentation(I))) followed by the inverse fixed Hom comparison to kappa inverse. The adjunction counit formula then identifies Q(uncurry(q)) with T.iso followed by tensor(Q(q) followed by kappa inverse, identity) and evaluation. The slice version uses restricted K-flatness from d.kflat.",
+   "uses": [
+    "lem-sf-coefficient-tensor-curry-normalization",
     "def-sfb-ringed-slice-comparison-model",
     "def-coef-ringed-tensor-hom-model"
    ],
    "elementary": false
   },
   {
-   "text": "Compose q with Hom(P,augmentation(I)) and use T.uncurry_model to obtain the representative evaluation into the fixed K-injective replacement of I. On the slice compose the restricted q and gamma with the augmentation of rI and use T_U.uncurry_model. On every local pure tensor x⊗p these chain maps evaluate the same local Hom-family component on p. The gamma formula holds on every further slice object. The two chain maps target r(F(I)) and F_U(rI), respectively. Postcompose the first by augmentation r(F(I))→F_U(r(F(I))) and the second by F_U(r(augmentation(I))):F_U(rI)→F_U(r(F(I))). Use homComplexFunctor_obj_map_f_π for postcomposition of Hom components. The fixed coefficientHomComponent agrees with homComplexπ by proof irrelevance on their existential specifications, unfolding homComplexFunctor and Exists.choose. Naturality of augmentation says r(augmentation(I)) followed by augmentation(r(F(I))) equals augmentation(rI) followed by F_U(r(augmentation(I))). Thus the local pure-tensor values agree in this common target. The sheafification and total-summand universal properties give equality of these common-target chain maps. Localize, substitute the tensor and Hom representative squares and the two kappa augmentation equations, then cancel the resolving and comparison isomorphisms. This is exactly the stated counit identity; neither evaluation nor an arbitrary map is cancelled.",
+   "text": "Naturality of the localization comparison transfers the equality of ordinary chain maps to the derived categories. Substitute the tensor normalization square. Invert kappa in the Hom normalization square, postcompose by kappa_U inverse, and precompose with r(Q(q)); naturality of localization gives the square for Q(q) followed by kappa inverse. Naturality of the evaluation counit and evaluation_naturality identify the isomorphic slice endpoints. Tensor comparison naturality completes the resulting diagram. Cancel only the tensor comparison, tensor(Q(q) followed by kappa inverse,identity), and localization isomorphisms, yielding the stated counit equation.",
    "uses": [
-    "def-coef-ringed-tensor-hom-model",
     "def-sfb-ringed-slice-comparison-model",
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-sheaf-tensor-product",
-    "def-pur-derived-internal-hom"
+    "def-coef-ringed-tensor-hom-model"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -41,12 +60,15 @@
   "def-pur-hom-complex",
   "def-pur-sheaf-tensor-product",
   "def-sfb-ringed-slice-comparison-model",
-  "lem-pc-kflat-resolution"
+  "lem-pc-kflat-resolution",
+  "lem-sf-coefficient-tensor-curry-normalization",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08J9 (lemma-internal-hom), 08JB (lemma-restriction-RHom-to-U), and the evaluation calculation in lemma-compose."
+  "place": "Tags 08J9 and 08JB, and lemma-compose (0A90); T4 uses the existing arbitrary-target currying normalization and ordinary chain-level equivalence to shorten the representative calculation."
  },
  "mathlib_searches": [
   {
@@ -121,14 +143,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-13f8a",
-  "group": "M1",
-  "result": "fix",
-  "landing": "20261020T221240-L-4163737",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261025T203219-L-2792927",
   "kind": "interface",
-  "note": "independent cc review: item Lean and 5 new/moved modules vs live RingedSliceEvaluationTranspose (12 defs moved byte-identical to RingedSliceEvaluationModels, theorem signature identical) and the item/def/new node records; 5 direct importers compiled against the delivery"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

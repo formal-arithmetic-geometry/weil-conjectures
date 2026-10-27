@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-ringed-hypercohomology-edge-pullback",
+ "kind": "statement",
+ "title": "Pullback compatibility of the hypercohomology-to-sheaf-cohomology edge",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site small in the common coefficient universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], with $\\mathcal O$ a sheaf of commutative rings. Use module sheaves [def-weil-sheaf-of-modules-category], their unbounded derived category [def-weil-abstract-derived-category], cohomology sheaves $\\mathcal H^n$ [def-weil-derived-cohomology-sheaves], and K-injective derived global sections $R\\Gamma$ [def-pur-ringed-site-zeroth-hypercohomology]. Put $A=\\Gamma(\\mathcal C,\\mathcal O)$. For $K\\in D(\\mathcal O)$ and $n\\in\\mathbf Z$, let $e_K^n:H^nR\\Gamma(\\mathcal C,K)\\to\\Gamma(\\mathcal C,\\mathcal H^nK)$ send a global cocycle in a K-injective representative to its class in the cohomology sheaf. Let $(\\mathcal C',\\mathcal O')$ be another such ringed site and let $g:(\\operatorname{Sh}(\\mathcal C'),\\mathcal O')\\to(\\operatorname{Sh}(\\mathcal C),\\mathcal O)$ be a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism]. Use exact topos inverse image $g^{-1}$ and derived tensor pullback $Lg^*$ with its canonical adjunction [lem-weil-pbc-ringed-projection-mate-exact]. Define\n$$r_{g,K}^n:g^*\\mathcal H^nK=\\mathcal O'\\otimes_{g^{-1}\\mathcal O}g^{-1}\\mathcal H^nK\\longrightarrow\\mathcal H^n(Lg^*K)$$\nby the tensor-of-cocycles pairing $\\kappa^{0,n}$ of [def-sfb-ringed-site-module-cup-product], using $\\mathcal H^0(\\mathcal O'[0])=\\mathcal O'$ and $\\mathcal H^n(g^{-1}K)=g^{-1}\\mathcal H^nK$. In local flat-term K-flat models it sends $b\\otimes[z]$ to $[b\\otimes z]$, with local lifts in a resolution of the scalar module when required. For $D\\in D(\\mathcal O')$ and $t:Lg^*K\\to D$, define $P_{g,t}^n:H^nR\\Gamma(\\mathcal C,K)\\to H^nR\\Gamma(\\mathcal C',D)$ by the derived adjunction unit $K\\to Rg_*Lg^*K$, the canonical comparison $R\\Gamma Rg_*\\cong R\\Gamma'$, and $R\\Gamma'(t)$. Then, for $n\\geq0$ and every $x$,\n$$e_D^n(P_{g,t}^n(x))=\\Gamma(\\mathcal C',\\mathcal H^n(t)\\circ r_{g,K}^n)\\bigl(g^*(e_K^n(x))\\bigr).$$\nHere $g^*$ on sections sends $s$ to $1\\otimes g^{-1}s$. The maps $r_{g,K}^n$ and the displayed identity are natural in $K$ and $t$. No flatness of the structural ring map, exactness of tensor pullback, final site object, or boundedness is assumed; $r_{g,K}^n$ need not be invertible.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0BKV (lemma-sheafification-cohomology), naturality of the cocycle-to-sheaf map; derived-unit and global-sections normalization as in Tag 0D6H (lemma-Leray-unbounded). The nonflat tensor-pullback edge identity is agent-stated from these constructions."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-sfb-ringed-site-module-cup-product",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-sfb-ringed-derived-comparison-data",
+  "def-sfb-coefficient-module-global-sections",
+  "def-sfb-ringed-site-global-derived-adjunction",
+  "def-sfb-ringed-site-cohomology-tensor-maps"
+ ],
+ "proof": [
+  {
+   "text": "Put $U_n=\\mathcal O_n$ and $U'_n=\\mathcal O'_n$, with the structure sheaves in degree $n$. Apply [lem-sfb-ringed-hypercohomology-shifted-unit] to write $u=\\gamma_K^n(x):U_n\\to K$; then $e_K^n(x)=\\mathcal H^n(u)(1)$. On the target use the same external ring $A=\\Gamma(\\mathcal C,\\mathcal O)$, acting through $A\\to\\Gamma(\\mathcal C',\\mathcal O')$, so forgetting this action gives exactly the hypercohomology in the question. This does not change the edge map or its cocycle formula.",
+   "uses": [
+    "lem-sfb-ringed-hypercohomology-shifted-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JA (lemma-section-RHom-over-U), 0BKV (lemma-sheafification-cohomology), 07A6 (lemma-adjoint), 0D6H (lemma-Leray-unbounded), and 07A4 (lemma-pullback-tensor-product); shifted-unit argument for the nonflat edge identity."
+   }
+  },
+  {
+   "text": "Write $L=Lg^*$, $R=Rg_*$ and $v=t\\circ L(u):LU_n\\to D$, identifying $LU_n\\cong U'_n$ by the canonical unit and shift comparisons of [lem-weil-pbc-ringed-projection-mate-exact]. We claim $\\gamma_D^n(P_{g,t}^n(x))=v$. Use the adjunction normalization in [lem-sfb-ringed-hypercohomology-shifted-unit] for the global-sections morphism $s$ and its composite $s g$. By [lem-sfb-ringed-derived-monoidal-comparisons], the Leray comparison is adjunction-compatible with that composite. Thus the image of $P_{g,t}^n(x)$ is the transpose, under $L\\dashv R$, of $R(t)\\eta_K u:U_n\\to RD$. Naturality of the unit gives $R(t)\\eta_K u=R(tL(u))\\eta_{U_n}=R(v)\\eta_{U_n}$. Its transpose is $\\varepsilon_D L(R(v)\\eta_{U_n})=v\\varepsilon_{LU_n}L\\eta_{U_n}=v$, by counit naturality and the adjunction triangle. This proves the claim with the specified Leray comparison.",
+   "uses": [
+    "lem-sfb-ringed-hypercohomology-shifted-unit",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JA (lemma-section-RHom-over-U), 0BKV (lemma-sheafification-cohomology), 07A6 (lemma-adjoint), 0D6H (lemma-Leray-unbounded), and 07A4 (lemma-pullback-tensor-product); shifted-unit argument for the nonflat edge identity."
+   }
+  },
+  {
+   "text": "The tensor-of-cocycles pairing in [def-sfb-ringed-site-module-cup-product] is natural in the second argument: applying a cochain map to a local cocycle before tensoring gives the same tensor as applying its tensor-induced map afterwards; coboundaries map to coboundaries. Its canonical resolution identifications make this also an equality for derived morphisms. Apply it to $g^{-1}u:g^{-1}U_n\\to g^{-1}K$. The exact inverse image and the definition of $r$ give\n$$\\mathcal H^n(Lu)\\,r_{g,U_n}^n=r_{g,K}^n\\,g^*\\mathcal H^n(u).$$\nThe complex $U_n$ has one flat term. Under the unit and shift comparisons, $r_{g,U_n}^n$ is the identity on $\\mathcal O'$: the pairing of the unit class with a scalar class is $b\\otimes a\\mapsto ba$. Thus\n$$\\mathcal H^n(Lu)(1)=r_{g,K}^n(1\\otimes g^{-1}(\\mathcal H^n(u)(1))).$$\nThis calculation uses only the flat shifted unit, and makes no flatness claim about $K$ or the structural ring map.",
+   "uses": [
+    "def-sfb-ringed-site-module-cup-product",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JA (lemma-section-RHom-over-U), 0BKV (lemma-sheafification-cohomology), 07A6 (lemma-adjoint), 0D6H (lemma-Leray-unbounded), and 07A4 (lemma-pullback-tensor-product); shifted-unit argument for the nonflat edge identity."
+   }
+  },
+  {
+   "text": "Apply the edge evaluation of [lem-sfb-ringed-hypercohomology-shifted-unit] to the morphism $v$ found in step 2. Steps 1 and 3 yield\n$$e_D^n(P_{g,t}^n(x))=\\mathcal H^n(t)\\mathcal H^n(Lu)(1)=\\mathcal H^n(t)r_{g,K}^n(1\\otimes g^{-1}e_K^n(x)),$$\nwhich is the asserted identity of global sections. For a derived map $f:K\\to K_1$, naturality of the pairing in step 3 gives $\\mathcal H^n(Lf)r_{g,K}^n=r_{g,K_1}^n g^*\\mathcal H^n(f)$. Naturality of $\\gamma$ and of the adjunction unit gives the corresponding naturality of $P$; postcomposition $t\\mapsto a\\circ t$ is functoriality of $R\\Gamma'$ and $\\mathcal H^n$. Hence both $r$ and the equality have the required naturality. The proof works for every integer $n$, in particular for $n\\geq0$.",
+   "uses": [
+    "lem-sfb-ringed-hypercohomology-shifted-unit",
+    "def-sfb-ringed-site-module-cup-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JA (lemma-section-RHom-over-U), 0BKV (lemma-sheafification-cohomology), 07A6 (lemma-adjoint), 0D6H (lemma-Leray-unbounded), and 07A4 (lemma-pullback-tensor-product); shifted-unit argument for the nonflat edge identity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ringed-site-module-cup-product",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-hypercohomology-shifted-unit",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JA (lemma-section-RHom-over-U), 0BKV (lemma-sheafification-cohomology), 07A6 (lemma-adjoint), 0D6H (lemma-Leray-unbounded), and 07A4 (lemma-pullback-tensor-product); shifted-unit argument for the nonflat edge identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "edgeMap|edge_map|cupProduct|cup_product",
+   "results": "{\"t\": \"2026-10-23T21:01:38Z\", \"tool\": \"grep\", \"query\": \"edgeMap|edge_map|cupProduct|cup_product\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, HomologicalComplex.homology",
+   "results": "{\"t\": \"2026-10-23T21:01:38Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, HomologicalComplex.homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomology sheaf hypercohomology edge map cocycle sheafification naturality pullback",
+   "results": "{\"t\": \"2026-10-23T21:01:39Z\", \"tool\": \"leansearch\", \"query\": \"cohomology sheaf hypercohomology edge map cocycle sheafification naturality pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.sheafificationCompPullback\", \"CategoryTheory.toSheafify_naturality_assoc\", \"CategoryTheory.GrothendieckTopology.toSheafify_naturality_assoc\", \"CategoryTheory.GrothendieckTopology.toSheafify_naturality\", \"CategoryTheory.toSheafify_naturality\", \"CategoryTheory.Subfunctor.sheafifyLift\", \"CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility\", \"TopCat.Presheaf.toSheafify\"], \"digest\": \"d37412d9351c1528\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher direct image module base change map on cohomology classes local sections nonflat",
+   "results": "{\"t\": \"2026-10-23T21:01:45Z\", \"tool\": \"leanfinder\", \"query\": \"higher direct image module base change map on cohomology classes local sections nonflat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.π_map_apply\", \"groupCohomology.H1π_comp_map_apply\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"groupCohomology.π_map\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"groupCohomology.mapCocycles₁_comp_i_apply\", \"groupCohomology.mapCocycles₂_comp_i_apply\"], \"digest\": \"3b79f776734ff2ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher direct image as sheaf associated to cohomology presheaf canonical module base change local classes",
+   "results": "{\"t\": \"2026-10-23T21:02:28Z\", \"tool\": \"leanfinder\", \"query\": \"higher direct image as sheaf associated to cohomology presheaf canonical module base change local classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.H\", \"SheafOfModules.pushforward\", \"SheafOfModules.pushforwardSections\", \"SheafOfModules.pushforward_obj_val\", \"SheafOfModules.pushforwardNatTrans\", \"SheafOfModules.unitToPushforwardObjUnit\"], \"digest\": \"a785e2265a1856bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H",
+   "results": "{\"t\": \"2026-10-23T21:04:38Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology|edgeMap|edge_map|cup_product|cupProduct",
+   "results": "{\"t\": \"2026-10-23T21:04:38Z\", \"tool\": \"grep\", \"query\": \"hypercohomology|edgeMap|edge_map|cup_product|cupProduct\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, HomologicalComplex.homology",
+   "results": "{\"t\": \"2026-10-23T21:44:02Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullback, HomologicalComplex.homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; underived module adjunctions, Ext of abelian sheaves and abstract Hom-complex localization do not state the unbounded ringed-site assertion and its representative normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "hypercohomology edge map compatible with derived pullback of sheaves of modules on ringed topoi",
+   "results": "{\"t\": \"2026-10-23T21:44:02Z\", \"tool\": \"leansearch\", \"query\": \"hypercohomology edge map compatible with derived pullback of sheaves of modules on ringed topoi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"TopCat.Presheaf.stalkPullbackHom\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackComp\"], \"digest\": \"3292a984a5503c5e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; underived module adjunctions, Ext of abelian sheaves and abstract Hom-complex localization do not state the unbounded ringed-site assertion and its representative normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology|edgeMap|edge_map|tensor.*cocycle",
+   "results": "{\"t\": \"2026-10-23T21:44:02Z\", \"tool\": \"grep\", \"query\": \"hypercohomology|edgeMap|edge_map|tensor.*cocycle\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; underived module adjunctions, Ext of abelian sheaves and abstract Hom-complex localization do not state the unbounded ringed-site assertion and its representative normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of derived adjunction unit equals scalar extension of cocycle classes for ringed sites",
+   "results": "{\"t\": \"2026-10-23T21:44:03Z\", \"tool\": \"leanfinder\", \"query\": \"cohomology of derived adjunction unit equals scalar extension of cocycle classes for ringed sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\"], \"digest\": \"a14736dbb11eb430\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; underived module adjunctions, Ext of abelian sheaves and abstract Hom-complex localization do not state the unbounded ringed-site assertion and its representative normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "RΓ|hypercohomology|derivedGlobalSections|ringedSite.*[Hh]om",
+   "results": "{\"t\": \"2026-10-23T21:52:06Z\", \"tool\": \"grep\", \"query\": \"RΓ|hypercohomology|derivedGlobalSections|ringedSite.*[Hh]om\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\"], \"digest\": \"e6285a71a9c8baa0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; underived module adjunctions, Ext of abelian sheaves and abstract Hom-complex localization do not state the unbounded ringed-site assertion and its representative normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of the hypercohomology to cohomology sheaf edge under nonflat extension of scalars",
+   "results": "{\"t\": \"2026-10-23T21:52:07Z\", \"tool\": \"leanfinder\", \"query\": \"naturality of the hypercohomology to cohomology sheaf edge under nonflat extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.ΓHomEquiv_naturality_right\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left\", \"CochainComplex.isoHomologyπ₀_inv_naturality_assoc\", \"groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_assoc\", \"groupCohomology.mapCocycles₁_comp_i\", \"groupCohomology.resNatTrans\", \"groupCohomology.toCocycles_comp_isoCocycles₁_hom\", \"groupCohomology.infNatTrans\"], \"digest\": \"7d3a819a2132e5ae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; underived module adjunctions, Ext of abelian sheaves and abstract Hom-complex localization do not state the unbounded ringed-site assertion and its representative normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-affine-relative-cup-sections",
+  "date": "2026-10-24",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: the relative exterior coherent-cohomology theorem, before the reduced-coproduct calculation; not a Picard infinitesimal-lifting assertion. Reviewer-added input for lem-sfb-abelian-coherent-exterior-base-change steps 6-8: identification of the relative cup product on higher direct images with the global cup product over affine opens, and its compatibility with base change. Supporting input for this split: Pullback compatibility of the hypercohomology-to-sheaf-cohomology edge.",
+   "via": [
+    "lem-sfb-space-affine-relative-cup-sections",
+    "lem-sfb-abelian-coherent-exterior-base-change",
+    "lem-sfb-abelian-h2-reduced-coproduct-injective",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-hypercohomology-edge-pullback",
+  "worker": "stage1",
+  "summary": "Preserved the full nonflat unbounded statement. Represented a hypercohomology class by the shifted unit, computed the adjunction-unit pullback by the composite adjunction, and evaluated the natural tensor-of-cocycles map on the shifted unit. One statement-only prerequisite isolates the representative-normalized shifted-unit bijection and edge evaluation. No finished project or Mathlib attachment found.",
+  "blueprint": "Auxiliary hypercohomology pullback comparison in the inherited det-thm-sf-ctf-stability-direct-images proof (3) ancestry. The latest blueprint direct-images proof (3) uses composition of direct images. Step 2 supplies its normalized global-sections composition in this local supporting lemma; steps 1, 3 and 4 establish the class/edge identification needed by the affine relative-cup parent. The ancestor command returns null and this is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic normalized composition of derived ringed-topos adjunctions, needed to identify the specified Leray map on shifted-unit morphisms; no geometric or constructibility proof is imported."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic canonical ringed-topos derived adjunction and shifted tensor-unit comparison, needed in step 2 and to evaluate r on the shifted unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-870befae3",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-870befae3 (reviewer sub-agent of L); spot-checked: Read the whole item, the new node, every cited statement (cup-product κ, projection-mate-exact, derived-monoidal-comparisons, zeroth-hypercohomology, ringed-topos morphism, cohomology sheaves) and Stacks 08JA, 0BKV and 0D6H at their labels. New node shifted-unit: H^nRΓ(K) ≅ Hom_D(O[-n],K), normalized by the Ls^*⊣G adjunction and by the edge e(x)=H^n(γx)(1). Checked on K-injective I: cycles are cochain maps, boundaries are homotopies, and A[-n] is K-projective. True for every integer n, including the empty site and zero rings. It is strictly smaller than the item (no g, t or r). Not a duplicate: rhom-global-sections is H^0 only; derived-internal-hom-sections-model and global-hom-cup-comparison have no adjunction or edge normalization; Q113's naive-cup node is a different statement; live and side-live have no copy. Step 2: the unit/counit/triangle algebra checks out and uses monoidal-comparisons' adjunction-compatible κ and e_g∘P_g(e_s)∘c=e_{sg}. Step 3: κ^{0,n} is natural in the second variable, and r on g^{-1}O[-n] is b⊗a↦ba with no sign. Step 4 assembles the steps. No flatness, boundedness or invertibility of r is used. Tested pt with Z→F_2: K=Z[0]; Z/2[0]; [Z--2-->Z] in degrees 0,1 with n=1. Accepted tool_uses: derived-monoidal-comparisons and projection-mate-exact, both generic. Note: blueprint.from.node is null, inherited from the created-ancestor chain. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedHypercohomologyEdgePullback",
+  "declaration": "SheafOfModules.RingedHypercohomology.edge_pullback",
+  "declarations": [
+   "SheafOfModules.RingedHypercohomology.ordinaryUnit",
+   "SheafOfModules.RingedHypercohomology.sectionPullback",
+   "SheafOfModules.RingedHypercohomology.EdgeSpec",
+   "SheafOfModules.RingedHypercohomology.PullbackSpec",
+   "SheafOfModules.RingedHypercohomology.SectionsComparisonSpec",
+   "SheafOfModules.RingedHypercohomology.LeraySpec",
+   "SheafOfModules.RingedHypercohomology.hypercohomologyPullback",
+   "SheafOfModules.RingedHypercohomology.edge_pullback"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedHypercohomologyEdgePullback.lean",
+  "statement": "theorem edge_pullback {X Y : Site.{u, w}} {g : Morphism X Y} (l : Lift g) : ∃ (eY : ∀ n : ℤ, globalAbelianDerived Y.corner ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} n ⟶ cohomology Y.corner n ⋙ coefficientSections Y.A) (eX : ∀ n : ℤ, globalAbelianDerived X.corner ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} n ⟶ cohomology X.corner n ⋙ coefficientSections X.A) (r : ∀ n : ℤ, cohomology Y.corner n ⋙ l.edge.pullback ⟶ l.edge.left ⋙ cohomology X.corner n) (θ : l.edge.pushforward ⋙ coefficientSections Y.A ≅ coefficientSections X.A) (c : l.edge.right ⋙ globalAbelianDerived Y.corner ≅ globalAbelianDerived X.corner), (∀ n : ℤ, EdgeSpec Y n (eY n) ∧ EdgeSpec X n (eX n) ∧ PullbackSpec l n (r n)) ∧ SectionsComparisonSpec l θ ∧ LeraySpec l θ c ∧ (∀ (K : Y.D) (D : X.D) (t : l.edge.left.obj K ⟶ D) (n : ℕ) (x : (globalAbelianDerived Y.corner ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} (n : ℤ)).obj K), (eX (n : ℤ)).app D (hypercohomologyPullback l c t (n : ℤ) x) = (coefficientSections X.A).map ((r (n : ℤ)).app K ≫ (cohomology X.corner (n : ℤ)).map t) (sectionPullback l ((cohomology Y.corner (n : ℤ)).obj K) ((eY (n : ℤ)).app K x))) ∧ (∀ (K K' : Y.D) (f : K ⟶ K') (D : X.D) (t : l.edge.left.obj K' ⟶ D) (n : ℤ), (globalAbelianDerived Y.corner ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} n).map f ≫ hypercohomologyPullback l c t n = hypercohomologyPullback l c (l.edge.left.map f ≫ t) n) ∧ (∀ (K : Y.D) (D D' : X.D) (t : l.edge.left.obj K ⟶ D) (a : D ⟶ D') (n : ℤ), hypercohomologyPullback l c (t ≫ a) n = hypercohomologyPullback l c t n ≫ (globalAbelianDerived X.corner ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} n).map a)",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical maps are existentially supplied with representative specifications, rather than assumed as arbitrary maps. NatTrans encodes edge and r naturality. PullbackSpec is the tensor-of-cocycles kappa^(0,n) construction expressed on flat-term K-flat models, with no flatness of the structural map. Added four already-landed definition nodes for the exact Site/Lift, sections, global adjunction and cohomology-tensor interfaces used. The shifted-unit proof dependency has no Lean record and is not needed to type this statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34f42a6d8",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Read node, module, report (Worker report + Second reading present), all stmt_dep Lean sources (RingedDerivedComparisonData Lift: eta/eta_injective/epsilon_flat/canonical_adjunction/unit_canonical/alpha; RingedTensorEdge fields; mateFlat; globalUnderlyingSections/globalAbelianDerived/globalAbelianUnit; cohomology/representativeCohomology; coefficientSections in AddCommGrpCat) and Stacks 0BKV/0D6H plus line 4598 (f_* of a K-injective is K-injective). Existential e, r, theta, c are each pinned: EdgeSpec on K-injectives (0BKV cocycle formula), PullbackSpec on flat-term K-flat P (b⊗[z]↦[b⊗z], v.inv = l.alpha P, unique since g^* right exact), SectionsComparisonSpec by adjoint transpose, LeraySpec consistent via K-injective pushforward; ordinaryUnit choice is unique by the unitor condition. Directions, composition order, n:ℕ for n≥0, naturality in K and t, no invertibility of r, no extra flatness/boundedness/final object/universe restriction. Node diff only lean + 4 landed def stmt_deps owning the used declarations; statement verbatim; single sorry; docstrings complete; no duplicate edge declaration in live/side-live. No fixes, no compile needed."
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "id": "lem-sp-finite-smooth-diagonal-scalar",
+ "kind": "statement",
+ "title": "Scalar compatibility of the diagonal base-change factor",
+ "statement": "Let A and B be finite commutative rings, φ:A→B a unital map, and N>0 an integer killing both rings. Let X,Y be Noetherian schemes with N invertible on Y, and f:X→Y a separated quasi-compact compactifiable smooth morphism of pure relative dimension d. Write D_A(f) for finiteSmoothDiagonalFactor A f, the inverse section compositor for Δ followed by Δ* of the canonical dualizing base-change map for the self-product of f [def-pur-finite-smooth-canonical-maps]. Write c_f for the unit-normalized exceptional coefficient map [def-pur-exceptional-coefficient-tensor-maps], and q_(p1,Δ) for scalar/pullback balancing followed by pullback of c_p1 [def-pur-dnc-coefficient-section-maps]. Then Q_X(D_A(f)) ≫ q_(p1,Δ) = c_f ≫ D_B(f). This compares only the base-change factor; no DNC map, integration or supplied smooth orientation occurs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "(3), Orientation; diagonal base-change factor"
+ },
+ "stmt_deps": [
+  "def-pur-finite-smooth-canonical-maps",
+  "def-pur-exceptional-coefficient-tensor-maps",
+  "def-pur-dnc-coefficient-section-maps"
+ ],
+ "proof": [
+  {
+   "text": "The source-library boundedConstructibleFiniteTor_dualizingComplex theorem applies to f because the common annihilator N is invertible on Y and therefore on X. It is a consequence of smooth tensor duality: omega_f is a shifted locally constant free rank-one sheaf. Its boundedness supplies the source D+ input. The scalar_extension_plus_of_finiteTor calculation from ExceptionalCoefficientComparison supplies the scalar D+ input, using the finite Tor amplitude of omega_f and the scalar tensor comparison. No flatness of B over A is required.",
+   "uses": [
+    "thm-asd-smooth-tensor",
+    "lem-pur-exceptional-coefficient-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Work with the flipped self-product Cartesian square, whose upper map is the second projection and whose structural map is the first projection. The existing compact_scalar_exchange_left calculation gives the compact-support scalar square on the two D+ inputs. Invert its isomorphisms and cancel the vertical chosen compact-support scalar comparisons to obtain coefficientPullbackSquare for inverse exchange. The two exceptional maps have the mate counit equations, as do the two coefficient mates. Apply coefficient_exchange_of_counit_at. This proves the exceptional scalar/base-change square for this arbitrary Cartesian presentation, directly rather than via the standard chosen-pullback predicate.",
+   "uses": [
+    "lem-pur-compact-scalar-base-change",
+    "lem-pur-exceptional-coefficient-comparison",
+    "lem-weil-pbc-coefficient-exchange-mates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the exceptional square at the coefficient unit. Naturality of the exceptional scalar mate moves the pulled-back A-unit comparison through the coefficient mate. etaleScalarPullback_unit identifies scalar extension of that unit comparison followed by the target scalar unit with inverse scalar/pullback balancing followed by pullback of the source scalar unit and the B-pullback unit. Naturality of the B exceptional base-change transformation then identifies the two paths with the specified dualizingScalarMap and dualizingComplexBaseChangeMap composites. This is the private dualizing_scalar_square calculation.",
+   "uses": [
+    "lem-pur-etale-scalar-pullback-unit-coherence",
+    "lem-pur-exceptional-coefficient-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull the dualizing square along the diagonal. Naturality of the inverse scalar/pullback comparison moves the A base-change map past balancing. The scalar_section_compositor equation, after cancellation of its section compositor, identifies scalar extension of the inverse A compositor followed by the two balancing maps with the inverse B compositor. Naturality of that inverse B compositor at the dualizing coefficient map completes the equation. The private scalar_section_factor lemma proves this categorical cancellation, and unfolding only finiteSmoothDiagonalFactor and the two names for the unit-normalized coefficient map yields the statement unchanged.",
+   "uses": [
+    "lem-pur-scalar-section-compositor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-asd-smooth-tensor",
+  "lem-pur-exceptional-coefficient-comparison",
+  "lem-pur-compact-scalar-base-change",
+  "lem-weil-pbc-coefficient-exchange-mates",
+  "lem-pur-etale-scalar-pullback-unit-coherence",
+  "lem-pur-scalar-section-compositor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P2",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "(3), Orientation; arbitrary Cartesian coefficient mate calculation and diagonal section cancellation, using the existing compact scalar exchange proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite scalar extension commutes with the diagonal exceptional base change mate pulled back along the diagonal of a smooth scheme morphism",
+   "results": "Eight hits, concerning ordinary module scalar extension and smooth scheme base change",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient change commutes with the diagonal base change factor of smooth purity",
+   "results": "Eight hits; smooth algebras and scalar base change",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "integratedSpecialization|finiteSmoothDiagonalFactor|section_scalar_base_change",
+   "results": "No Mathlib or adopted WeilConjectures hits. Project search found the geometric base-change version of integratedSpecialization, common-exponent orientation reduction, and uniformizer/pro-etale diagonal factor reduction. None has the required ordinary scalar section square at the two independently specified exponents.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteOrientationReduction",
+  "date": "2026-10-27",
+  "group": "S7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization and Purity paragraphs; tower-geometric gamma proof (1) finite orientations and (3) coefficient compatibility",
+   "via": [
+    "lem-sp-finite-orientation-reduction",
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSmoothDiagonalScalar",
+  "file": "lean/Sheaf/Paper/FiniteSmoothDiagonalScalar.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteSmoothDiagonalScalar",
+  "statement": "theorem finiteSmoothDiagonalScalar\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (hB : (N : B) = 0)\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (hY : IsUnit (N : Γ(Y, ⊤))) (f : X ⟶ Y)\n    [HasCompactification f] [IsSeparated f] [QuasiCompact f]\n    (d : ℕ) [SmoothOfRelativeDimension d f] :\n    (ordinaryScalar φ X).map (finiteSmoothDiagonalFactor A f) ≫\n        WeilConjectures.DncCoefficientTransport.sectionMap φ\n          (pullback.fst f f) (pullback.diagonal f) =\n      ExceptionalCoefficients.dualizingScalarMap φ f ≫\n        finiteSmoothDiagonalFactor B f",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T034742-L-3681791",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261027T103457-L-1086649",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

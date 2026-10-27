@@ -23,30 +23,38 @@
  ],
  "proof": [
   {
-   "text": "Restrict frames to the intersection. Exact inverse image commutes with the Hom correspondence. Compact-support exchange pasting and normalized Tate composition identify the restricted maps with the prescribed affine counits of the restricted frames. The supplied projective-line base-change equation passes to the ordered affine counit by composition of adjunctions.",
+   "text": "Prove the inverse-image/single-degree composition equation from the source library's exact-derived single-functor lemmas. Combine it with upperStarIsoLocalizationRestriction_comp. Expand the inverse fully faithful Hom correspondence: its value is pullback(alpha.hom), the single restriction comparison, single(psi), and the inverse target comparison. Naturality, the composition equation and inverse cancellation show this inverse correspondence commutes with compRestriction. The constant-unit composition equation follows from single-functor composition and upperStarConstantSheafIso_comp.",
    "uses": [
-    "def-amb-vector-integration-charts",
-    "thm-cbc-finite-torsion",
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-amb-affine-trace-tower-counit-base-change"
+    "lem-amb-etale-degree-zero-hom",
+    "lem-amb-etale-degree-zero-hom-restriction",
+    "lem-amb-ordinary-finite-unit-pullback-comp"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "On the intersection write e_j=e_i G. The coordinate convention gives phi_j=a_(G transpose) phi_i and g=(G transpose)^(-1). The inverse coordinate squares paste to give B_j=rho_g B_i with rho_g the actual affineLinearTraceAction.",
+   "text": "Apply affineTraceTowerCounit_baseChange at the constant object and then counit naturality for ordinaryFiniteUnitPullback. This proves affineTraceUnitBaseChange followed by the counit on U equals the pullback counit followed by the constant-unit comparison. By functoriality, the same formula identifies overlapPrefix followed by the counit with the restriction of the prescribed local trace.",
    "uses": [
-    "def-asd-vector-bundle-zero-section",
+    "lem-amb-vector-integration-overlap-chart-prefix",
+    "lem-amb-affine-trace-tower-counit-base-change",
     "def-amb-vector-integration-charts"
    ],
    "elementary": false
   },
   {
-   "text": "Apply affineSpaceLinearTraceInvariance on the Noetherian intersection, where N remains invertible. Pull back the equality to W and evaluate. Full faithfulness and the Hom correspondence give equality of the descent components.",
+   "text": "Take U=V intersection V_prime. Apply vectorIntegration_overlap_chart_prefix, then affineSpaceLinearTraceInvariance on U. Cartesian-square certificates agree by proof irrelevance. Postcomposing the prefix equation with the affine counit cancels the linear action, proving equality of the two restricted derived traces. The inverse Hom correspondence and its constant-unit normalization transfer this to equality of the two compRestriction sheaf maps.",
    "uses": [
+    "lem-amb-vector-integration-overlap-chart-prefix",
     "lem-amb-linear-trace-invariance",
     "lem-amb-etale-degree-zero-hom"
    ],
    "elementary": false
+  },
+  {
+   "text": "The intersection square is Cartesian, so the two lifts from W give a common lift a:W->U. It is etale since its composite with U->S is etale. Use descentComponent_eq_compRestriction for each lift and the equality of the restricted sheaf maps. This proves the requested component equality, without assuming W globally Noetherian.",
+   "uses": [
+    "lem-amb-etale-degree-zero-hom"
+   ],
+   "elementary": true
   },
   {
    "text": "For the wrapper, identify any two normalized Tate transports and then their datum families by the proved uniqueness theorems. Obtain base change from normalization and apply the fixed-family overlap result.",
@@ -58,20 +66,20 @@
   }
  ],
  "proof_deps": [
-  "def-amb-vector-integration-charts",
-  "thm-cbc-finite-torsion",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-amb-affine-trace-tower-counit-base-change",
-  "def-asd-vector-bundle-zero-section",
-  "lem-amb-linear-trace-invariance",
   "lem-amb-etale-degree-zero-hom",
+  "lem-amb-vector-integration-overlap-chart-prefix",
+  "lem-amb-affine-trace-tower-counit-base-change",
+  "def-amb-vector-integration-charts",
+  "lem-amb-linear-trace-invariance",
   "lem-amb-ordinary-finite-twist-transport-uniqueness",
-  "lem-amb-ordinary-finite-p1-datum-uniqueness"
+  "lem-amb-ordinary-finite-p1-datum-uniqueness",
+  "lem-amb-etale-degree-zero-hom-restriction",
+  "lem-amb-ordinary-finite-unit-pullback-comp"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
-  "place": "Explicit Lean implementation of Compatibility of prescribed local vector traces on overlaps"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Lean reduction: single/restriction coherence, affine tower counit base change, chart prefix linear action, affine trace invariance, and sheaf component evaluation."
  },
  "mathlib_searches": [
   {
@@ -142,14 +150,27 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-0612a",
-  "group": "F1",
+  "reviewer": "COMPILER",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261020T221141-L-4149524",
-  "kind": "interface",
-  "note": "independent cc review: delivered item + 9 new modules + adapted VectorPurityDirectSum vs live clone: moved Charts block byte-identical, item theorem statement unchanged, remaining sorry (overlap compatibility) checked against proved affineSpaceLinearTraceInvariance and node; all 10 delivered modules and 10 direct importers compiled clean against overlay; axioms probed"
+  "landing": "20261026T111832-L-1747696",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [],
+  "sorry_after": []
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

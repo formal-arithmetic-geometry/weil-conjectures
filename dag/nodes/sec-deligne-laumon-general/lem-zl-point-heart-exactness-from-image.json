@@ -1,0 +1,112 @@
+{
+ "id": "lem-zl-point-heart-exactness-from-image",
+ "kind": "statement",
+ "title": "PointHeartExactness",
+ "statement": "Let C be a preadditive category and F a field. Let omega:C to ModuleCat F be a full, faithful, additive functor. Suppose every omega(X) is finite-dimensional and every finite-dimensional F-module is isomorphic to omega(X) for some X. Then ZlPointHeartExact F omega, as defined in [def-zl-point-heart-finite-stage-data]: omega preserves and reflects finite limits, finite colimits, zero objects and short exact sequences, in addition to the assumed functor and essential-image properties. No abelian structure on C is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7, dimension-zero input; steps 7 of lem-zl-point-heart-finite-stage"
+ },
+ "stmt_deps": [
+  "def-zl-point-heart-finite-stage-data"
+ ],
+ "proof": [
+  {
+   "text": "factor through finitely generated modules. Full faithfulness and the stated\nessential image make this factor an equivalence. Finite-dimensional modules form an\nabelian category whose inclusion preserves finite limits and colimits. Transport the\nabelian structure to the source. The original functor therefore preserves finite limits\nand colimits, and full faithfulness reflects them. A zero object is characterized by its\nunique incoming and outgoing maps; short exactness is reflected by a faithful functor\nbetween abelian categories and preserved by an exact functor.",
+   "uses": [
+    "def-zl-point-heart-finite-stage-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Theorem 1.3.6; transport of universal properties through an equivalence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-zl-point-heart-finite-stage-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7; explicit argument inherited from the reviewed parent plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A full faithful additive functor whose image is exactly finite dimensional modules is exact",
+   "results": "exactFunctor and exactFunctor_iff, leftExactFunctor, and general functor categories; no result for the specified point-heart realization",
+   "date": "2026-10-25",
+   "verdict": "General exactness tools apply after identifying the essential image; the specified point and Weil descent claims are absent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A t exact equivalence induces an exact equivalence on hearts and finite diagrams descend along filtered coefficient extensions",
+   "results": "Functor.exact_tfae, Abelian.Ext.mapExactFunctor, Functor.map_distinguished_exact, and preservesFiniteLimits/Colimits_tfae",
+   "date": "2026-10-25",
+   "verdict": "Useful general exactness infrastructure, but no direct specified point-heart or finite-stage Weil descent theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "point.*[Hh]eart|pointRationalFibreScalarIso; FGModuleCat finite limits, colimits, and Abelian; shortExact_map_iff",
+   "results": "PointHeartFiniteStage has the assigned theorem only; CoefficientCohomologyModules supplies changeStage; FGModuleCat.Abelian and CategoryTheory.Abelian.ShortExact supply exactness infrastructure. Local rg and msearch both used.",
+   "date": "2026-10-25",
+   "verdict": "Reuse FGModuleCat universal-property infrastructure and the existing changeStage theorem; no duplicate of the split point claims found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointHeartFiniteStage",
+  "date": "2026-10-25",
+  "group": "R7"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 7, dimension-zero point-heart and finite-stage argument",
+   "via": [
+    "lem-zl-point-weil-heart-flag",
+    "lem-zl-point-heart-finite-stage"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointHeartExactness",
+  "file": "lean/Sheaf/Paper/PointHeartExactness.lean",
+  "declaration": "WeilConjectures.zlPointHeartExact_of_essentialImage",
+  "declarations": [
+   "WeilConjectures.zlPointHeartExact_of_essentialImage"
+  ],
+  "statement": "theorem zlPointHeartExact_of_essentialImage {C : Type v} [Category.{w} C] [Preadditive C] (F : Type u) [Field F] (ω : C ⥤ ModuleCat.{u} F) (hfull : ω.Full) (hfaithful : ω.Faithful) (hadd : ω.Additive) (hfinite : ∀ X, FiniteDimensional F (ω.obj X)) (himage : ∀ V : ModuleCat.{u} F, FiniteDimensional F V → ∃ X, Nonempty (ω.obj X ≅ V)) : ZlPointHeartExact F ω",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3ce6d",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261025T123659-L-1889419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3ce6d",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261025T123659-L-1889419",
+  "kind": "interface",
+  "note": "independent cc review: delivered item theorem and 20 relocated defs (type/value hashes published vs sandbox, rfl equality of the changed zlPointWeilStageOmega body) against base 6c5fa6c0be3; 4 sorried split statements against the item's conjuncts and the ZlPointFiniteStageWitness fields; #print axioms in a full sandbox compile"
+ }
+}

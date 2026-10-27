@@ -1,0 +1,138 @@
+{
+ "id": "lem-sfb-projective-line-overlap-unit-normalization",
+ "kind": "statement",
+ "title": "Normalization of a projective-line overlap unit",
+ "statement": "Let $k$ be a field [def-weil-field], $P=\\mathbf P^1_k$, $U_i=D_+(x_i)$, $U=U_0\\cap U_1$, and $q=x_0/x_1$ [def-sc-p1-standard]. For every unit $v\\in\\Gamma(U,\\mathcal O_P)^\\times$ there are $d\\in\\mathbf Z$ and $a\\in\\Gamma(U_0,\\mathcal O_P)^\\times$ such that $a|_U v=q^d$, the standard degree-$d$ transition unit.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BXJ, divisors-lemma-Pic-projective-space-UFD, proof specialized to n=1 over a field; OverlapUnitNormalization"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-p1-standard"
+ ],
+ "proof": [
+  {
+   "text": "Lift the overlap unit uniquely to a Laurent polynomial unit using [lem-sfb-projective-line-overlap-laurent-coordinates] and Units.map_bijective.",
+   "uses": [
+    "lem-sfb-projective-line-overlap-laurent-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the Laurent-unit surjectivity clause of [lem-pur-affine-punctured-line-algebra] to its canonical specUnitSection. Cancel the GammaSpec unit map and the type tags to obtain an actual equality w=c z^n of ring units.",
+   "uses": [
+    "lem-pur-affine-punctured-line-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the equality on the overlap. Set d=n (z=x_0/x_1) and take a to be the constant chart unit c^-1. Restriction preserves constants, so a|_U v=c^-1 c q^n=q^n.",
+   "uses": [
+    "def-sc-p1-standard",
+    "lem-sfb-projective-line-overlap-laurent-coordinates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-line-overlap-laurent-coordinates",
+  "lem-pur-affine-punctured-line-algebra",
+  "def-sc-p1-standard"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BXJ, explicit two-chart computation; coordinate identification also Constructions Tag 01M7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The ring of regular functions on the intersection of the two standard affine charts of the projective line is the Laurent polynomial ring",
+   "results": "8 hits: LaurentPolynomial, LaurentPolynomial.isLocalization, instModulePolynomial, Polynomial.toLaurentAlg_apply, Polynomial.toLaurent_eq_zero, instIsScalarTowerPolynomial, algebraPolynomial, Polynomial.toLaurent.",
+   "date": "2026-10-27",
+   "verdict": "No matching sheaf/chart theorem. The returned algebraic facts are used where applicable, but do not identify the concrete projective-line chart maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero homogeneous localization of k[X,Y] at XY is isomorphic to Laurent polynomials in X/Y",
+   "results": "8 hits: LaurentPolynomial.isLocalization, mk'_one_X, RatFunc.laurent, LaurentPolynomial.mk'_eq, mk'_one_X_pow, Polynomial.toLaurent_X, RatFunc.laurentAux_ofFractionRing_mk, RatFunc.coe_X.",
+   "date": "2026-10-27",
+   "verdict": "No matching sheaf/chart theorem. The returned algebraic facts are used where applicable, but do not identify the concrete projective-line chart maps."
+  },
+  {
+   "tool": "grep",
+   "query": "LaurentPolynomial.eval₂|bijective_sum_awayMonomial|laurentExponents",
+   "results": "0 Mathlib matches through msearch. Local source inspection found bijective_sum_awayMonomial in WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections and polynomial chart coordinates in LineDifferentials, but no concrete Laurent overlap evaluation theorem.",
+   "date": "2026-10-27",
+   "verdict": "No matching sheaf/chart theorem. The returned algebraic facts are used where applicable, but do not identify the concrete projective-line chart maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveSpace.LineInvertibleClassification",
+  "date": "2026-10-27",
+  "group": "A9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof of lem-sfb-projective-line-invertible-classification: OverlapUnitNormalization",
+   "via": [
+    "lem-sfb-projective-line-invertible-classification",
+    "lem-sfb-projective-line-twist-rigidity",
+    "lem-sfb-point-exceptional-isomorphism-neighbourhood",
+    "lem-sfb-proper-birational-surface-factorization",
+    "lem-sfb-common-regular-surface-resolution",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.OverlapUnitNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/OverlapUnitNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveLine.exists_normalized_overlap_unit",
+  "statement": "theorem exists_normalized_overlap_unit (k : Type u) [Field k]\n    (v : Γ(ProjectiveLine (Spec (.of k)),\n      standardOpen _ (Spec (.of k)) (⟨0⟩ : ULift.{u} (Fin 2)) ⊓\n        standardOpen _ (Spec (.of k)) (⟨1⟩ : ULift.{u} (Fin 2)))ˣ) :\n    ∃ (d : ℤ)\n      (a : Γ(ProjectiveLine (Spec (.of k)),\n        standardOpen _ (Spec (.of k)) (⟨0⟩ : ULift.{u} (Fin 2)))ˣ),\n      Units.map ((ProjectiveLine (Spec (.of k))).presheaf.map\n        (homOfLE inf_le_left).op).hom.toMonoidHom a * v =\n          transitionUnit (ULift.{u} (Fin 2)) (Spec (.of k)) d ⟨0⟩ ⟨1⟩",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261027T094333-L-215633",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261027T094333-L-215633",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

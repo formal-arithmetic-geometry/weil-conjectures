@@ -1,0 +1,130 @@
+{
+ "id": "lem-zl-curve-restriction-local-powers",
+ "kind": "statement",
+ "title": "Normalized local Frobenius powers for curve restriction",
+ "statement": "Fix a finite-field datum $D$ with base $k_0$, algebraic closure $k$ and geometric Frobenius [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\Omega:\\operatorname{Type}(u+1)$ of $\\mathbf Q_\\ell$. Let $X_0$ be a separated finite-type $k_0$-scheme, $m\\ge1$, $k_m=\\mathbf F_{q^m}\\subset k$, and $h_0:C_0\\hookrightarrow X_0\\times_{k_0}k_m$ a closed immersion with $C_0$ finite type over $k_m$. Use the common-stage constructible Weil heart [def-weil-weil-sheaf-complex; def-weil-constructible-heart], classical lisse Weil sheaves and filtrations [def-zl-classical-weil-filtration-transport-data], and normalized classical realization [def-zl-normalized-classical-weil-realization]. Let $R$ satisfy the constant restriction specification [def-zl-constant-extension-restriction-local-data], $R_X,R_C$ be supplied normalized realizations, and $c$ any $\\mathrm{ZlCurveClassicalPullback}$ comparison [def-zl-curve-restriction-filtration-data]. For every constructible common-stage Weil sheaf $H$, $\\mathrm{ZlCurveLocalConclusions}(R,c_{\\rm underlying},H)$ holds: it has a normalized finite model, each closed curve point maps to a closed point with positive residue degree $d$ and $q_z=q_x^d$, its Frobenius root multiset is obtained by powering each source root by $d$ with multiplicities, and every normalized finite-model stalk comparison intertwines the displayed operators. Moreover, for each field isomorphism $\\iota:\\Omega\\simeq\\mathbf C$, reality of $H$ implies reality of $R_mH$, where $R_m=h_0^*\\circ R$ is the composite curve restriction [def-wf-iota-real]. No filtration or lissity hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-punctual-weights",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-wf-fundamental-representation",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constructible-heart",
+  "def-real-common-stage-lisse",
+  "def-dl-a1-constant-extension-data",
+  "def-zl-constant-extension-restriction-local-data",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-local-frobenius-trace",
+  "def-wf-iota-real",
+  "def-zl-classical-weil-filtration-transport-data",
+  "def-zl-normalized-classical-weil-realization",
+  "def-per-lisse-completed-system-data",
+  "def-zl-curve-restriction-filtration-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 2: exact curve restriction, ordinary geometric pullback and residue-degree local Frobenius powers; BS 6.8.4, 6.8.14, 6.8.15; Weil II (1.1.8)--(1.1.10), pp.151--152."
+ },
+ "proof": [
+  {
+   "text": "Factor the arithmetic map as the closed immersion and constant projection. The\nimmersion identifies residue fields and sends closed points to closed points.\nConstant restriction has local operator equal, under the normalized stalk map,\nto the residue-degree power of the original operator. Residue degrees multiply;\nthe immersion contributes degree one. The finite-field cardinality formula gives\nq_z=q_x^f and f is positive. The normalized constant comparison and inverse\npullback compositor give a carrier comparison at a common finite coefficient\nstage, by the common-stage Hom calculus, including its inverse and equations.\nThus a ZlCurveFiniteModel exists. Naturality and composition of the normalized\npoint comparisons identify the composite stalk map with zlCurveFiniteStalkIso.\nThey intertwine the ordered Weil products and every point transport, giving the\ndisplayed operator equality for every normalized finite model and compatible lift.\nApply power_spectrum_conjugation to the finite-dimensional scalar-extended local\noperator and transport characteristic polynomials across this stalk isomorphism.\nThe all-presentation characterization of sfLocalCharacteristicFactor identifies\nthese determinants with the local factors. This gives the multiset formula,\nincluding algebraic multiplicities. A conjugation-stable spectrum stays stable\nunder positive powers, so real local factors stay real at every closed point.\nThe empty curve has no point conditions; rank zero uses polynomial one.",
+   "uses": [
+    "lem-zl-immersion-weil-local-behavior",
+    "lem-zl-constant-extension-weil-heart-equivalence",
+    "lem-zl-power-spectrum-conjugation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-immersion-weil-local-behavior",
+  "lem-zl-constant-extension-weil-heart-equivalence",
+  "lem-zl-power-spectrum-conjugation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 2: exact curve restriction, ordinary geometric pullback and residue-degree local Frobenius powers; BS 6.8.4, 6.8.14, 6.8.15; Weil II (1.1.8)--(1.1.10), pp.151--152."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Local Frobenius under restriction and constant field extension is a residue degree power, preserving real characteristic polynomials",
+   "results": "8 hits: arithmetic Frobenius restrictions, finite-field Frobenius and finite residue fields. No Weil local stalk comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib statement for this normalized classical/common-stage curve interface. General categorical or Frobenius facts do not construct its comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.charpoly, HPow.hPow",
+   "results": "8 hits: charpoly_zero, charpoly_one, pow_eq_aeval_mod_charpoly and nilpotence criteria. None compares local Frobenius for a curve restriction.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib statement for this normalized classical/common-stage curve interface. General categorical or Frobenius facts do not construct its comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "power_spectrum_conjugation|ConstantExtensionLocalConjugacy",
+   "results": "0 hits in Mathlib. Existing project power_spectrum_conjugation supplies the linear-algebra step; constant-extension conjugacy is for the projection alone, not the composite normalized curve comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib statement for this normalized classical/common-stage curve interface. General categorical or Frobenius facts do not construct its comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CurveRestrictionFiltrationSpectrum",
+  "group": "B7",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 2: exact curve restriction, ordinary geometric pullback and residue-degree local Frobenius powers; BS 6.8.4, 6.8.14, 6.8.15; Weil II (1.1.8)--(1.1.10), pp.151--152.",
+   "via": [
+    "lem-zl-curve-restriction-filtration-spectrum",
+    "lem-zl-two-point-curve-constituent-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CurveRestrictionLocalPowers",
+  "file": "lean/Sheaf/Paper/CurveRestrictionLocalPowers.lean",
+  "declaration": "WeilConjectures.zl_curve_restriction_local_powers",
+  "declarations": [
+   "WeilConjectures.zl_curve_restriction_local_powers"
+  ],
+  "statement": "theorem zl_curve_restriction_local_powers\n    (R : sfCommonStageWeilSheaf D l hl X₀ Ω ⥤\n      sfCommonStageWeilSheaf (constantExtensionDatum D m hm) l hl\n        (constantExtensionModel D m hm X₀) Ω)\n    (hR : ConstantExtensionRestrictionSpec D m hm X₀ l hl Ω R)\n    (RX : ZlClassicalRealization D l hl Ω X₀)\n    (RC : ZlClassicalRealization (constantExtensionDatum D m hm) l hl Ω C₀)\n    (c : ZlCurveClassicalPullback D l hl Ω X₀ m hm C₀ h₀ RX RC R)\n    (H : sfCommonStageWeilSheaf D l hl X₀ Ω) (iota : Ω ≃+* ℂ) :\n    ZlCurveLocalConclusions D l hl Ω X₀ m hm C₀ h₀ R c.underlying H ∧\n      (SfIsReal D l hl Ω X₀ iota.toRingHom H →\n        SfIsReal (constantExtensionDatum D m hm) l hl Ω C₀ iota.toRingHom\n          ((zlCurveRestriction D l hl Ω X₀ m hm C₀ h₀ R).obj H))",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-78654",
+  "group": "B7",
+  "result": "fix",
+  "landing": "20261026T022900-L-494007",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-78654",
+  "group": "B7",
+  "result": "fix",
+  "landing": "20261026T022900-L-494007",
+  "kind": "interface",
+  "note": "independent cc review: B7 CurveRestrictionFiltrationSpectrum 7865: compared the moved data (Expr hashes, sandbox vs published) with the published item module, the new sorry statements with node lem-zl-curve-restriction-filtration-spectrum and the blueprint paragraph 2, and the item node with sheaf-dag"
+ }
+}

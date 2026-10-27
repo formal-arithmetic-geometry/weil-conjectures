@@ -14,9 +14,85 @@
   "def-weil-regular-scheme",
   "def-weil-pbc-associated-graded-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $B=P_{\\mathfrak N}$ for a smooth finite type $A$-algebra $P$ and a prime $\\mathfrak N$ over $\\mathfrak m$, using the localization description of an essentially smooth local algebra. Both $A$ and $B$ are Noetherian: take their finite type $\\mathbf Q$-algebra models and apply the finite type Noetherian theorem followed by localization. Smoothness gives $A\\to P$ flat; localization and transitivity give $A\\to B$ flat. The smooth-fibre theorem identifies $F=B/\\mathfrak mB$ with a localization of the smooth $K$-algebra $P\\otimes_AK$ and proves it regular local. In particular its dimension $s$ is finite.",
+   "uses": [
+    "def-weil-pbc-essentially-smooth-ring-map",
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "lem-wf-affine-noetherian-components",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "lem-weil-pbc-localization-flat",
+    "lem-pc-module-flat-transitive",
+    "lem-weil-pbc-smooth-fibre-regular-local",
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (Noetherian permanence), 00TA (smooth flatness), 00T4 and 00TT (smooth fibres), 00P1 (finite local dimension)."
+   }
+  },
+  {
+   "text": "Apply the relative Cohen presentation to the flat local map just obtained. Choose the compatible coefficient sections, put $R=K[[X_1,\\ldots,X_e]]$, and write $\\widehat A=R/I$ and $\\widehat B=L[[X_1,\\ldots,X_e,T_1,\\ldots,T_s]]/(I)$ with the induced map the coefficient inclusion. Denote the maximal ideal of $R/I$ by $\\mathfrak a$ and that of the second quotient by $\\mathfrak b$. In particular these presentations preserve the actual map from $A$, not just the isomorphism classes of the two completions.",
+   "uses": [
+    "lem-trf-relative-cohen-flat-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Coefficient-compatible refinement of Tag 07NQ, complete power-series presentation step."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-coefficient-extended-power-series-jets] to $R/I$ and $L[[X,T]]/(I)$ from step 2. Its map fixes the base coefficients, is multiplicative and preserves total degree. For $A$ and $B$, [lem-weil-pbc-local-completion-local-ring] identifies the completed maximal ideals with their extended maximal ideals. Part (2) of [lem-weil-pbc-module-completion-complete] identifies the quotients by every positive power with those before completion. These are the canonical ring quotient maps, so they preserve multiplication and the map from $A$ to $B$. Taking consecutive kernels (degree zero uses the quotient by the maximal ideal itself) identifies the associated graded rings. Compose with the cited graded isomorphism; its constant-$T$ part is the actual induced base map, as required.",
+   "uses": [
+    "lem-trf-coefficient-extended-power-series-jets",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG (lemma-hathat-finitely-generated), part (2), and Tag 05GI (lemma-radical-completion); finite-jet lemma and canonical kernel assembly."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-flat-local-component-dimension-difference] with $k=\\mathbf Q$ to the flat local map in step 1: minimal primes contract surjectively, and each pair $(\\mathfrak p,\\mathfrak q)$ satisfies the stated dimension-difference formula. A minimal prime $\\mathfrak q$ of $B=P_{\\mathfrak N}$ corresponds to a minimal prime $\\mathfrak Q\\subseteq\\mathfrak N$ of $P$: every smaller prime survives localization. Apply [lem-trf-smooth-chart-generic-residue-transcendence] to this pair. It gives $\\operatorname{trdeg}_{\\operatorname{Frac}(A/\\mathfrak p)}\\operatorname{Frac}(B/\\mathfrak q)=r=s+\\operatorname{trdeg}_K L$. Substitution yields $\\dim(B/\\mathfrak q)=\\dim(A/\\mathfrak p)+s$. Surjective contraction proves both inclusions of the required sets.",
+   "uses": [
+    "lem-trf-flat-local-component-dimension-difference",
+    "lem-trf-smooth-chart-generic-residue-transcendence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Assembly of the flat-local dimension-difference and smooth-chart generic-residue lemmas; the final set argument of former step 9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "lem-pc-module-flat-transitive",
+  "lem-trf-coefficient-extended-power-series-jets",
+  "lem-trf-flat-local-component-dimension-difference",
+  "lem-trf-relative-cohen-flat-presentation",
+  "lem-trf-smooth-chart-generic-residue-transcendence",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-smooth-fibre-regular-local",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-wf-affine-noetherian-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Smooth-fibre and dimension inputs from Tags 00T4, 00TT, 00P0, 00P1 and 02G1; coefficient-compatible completed presentation and explicit finite-jet calculation supplied in this split, not attributed to a single Stacks lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +128,38 @@
    "results": "{\"t\": \"2026-10-18T22:53:54Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-smooth-local-tangent-cone-extension: graded pieces of a smooth local algebra have ranks given by convolution with binomial coefficients and minimal prime quotient dimensions add the closed fibre dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"Ideal.rank_pow_quot_aux\", \"Algebra.IsStandardSmoothOfRelativeDimension.trans\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\"], \"digest\": \"f31d0d005035df3a\"}",
    "date": "2026-10-18",
    "verdict": "no match: read the returned types; smooth presentations, flatness, ranks and Krull dimension inequalities do not give the stated tangent-cone or near-point component comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An essentially smooth local homomorphism of noetherian local rings gives a polynomial extension of the associated graded ring after extending residue fields, and shifts dimensions of minimal components by the closed fibre dimension",
+   "results": "{\"t\": \"2026-10-22T04:36:26Z\", \"tool\": \"leanfinder\", \"query\": \"An essentially smooth local homomorphism of noetherian local rings gives a polynomial extension of the associated graded ring after extending residue fields, and shifts dimensions of minimal components by the closed fibre dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\", \"RingHom.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\"], \"digest\": \"b5387d017884050d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations give smooth presentations, flatness or formal lifting, not the associated graded and minimal-component conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, AssociatedGraded",
+   "results": "{\"t\": \"2026-10-22T04:36:37Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, AssociatedGraded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AssociatedGraded'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations give smooth presentations, flatness or formal lifting, not the associated graded and minimal-component conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded|AssociatedGraded|FormallySmooth",
+   "results": "{\"t\": \"2026-10-22T04:36:37Z\", \"tool\": \"grep\", \"query\": \"associatedGraded|AssociatedGraded|FormallySmooth\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\"], \"digest\": \"f261aa213ee6a5d8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations give smooth presentations, flatness or formal lifting, not the associated graded and minimal-component conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated graded ring of a formally smooth local algebra is the polynomial algebra over the base tangent cone after residue field extension",
+   "results": "{\"t\": \"2026-10-22T04:37:00Z\", \"tool\": \"leansearch\", \"query\": \"Associated graded ring of a formally smooth local algebra is the polynomial algebra over the base tangent cone after residue field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"RingHom.FormallySmooth\", \"Algebra.Smooth.of_isLocalization_Away\", \"RingHom.Smooth\", \"Algebra.FormallySmooth.of_isLocalization\", \"Algebra.Extension.formallySmooth_iff_split_injection\", \"Algebra.FormallySmooth.polynomial\"], \"digest\": \"710b2d6ea0749d1e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations give smooth presentations, flatness or formal lifting, not the associated graded and minimal-component conclusions"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-hilbert-samuel-smooth-dimension-profile",
@@ -87,5 +191,74 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-smooth-local-tangent-cone-extension",
+  "worker": "stage1",
+  "summary": "Rebased onto the current live DAG after L returned the side-project completion for promotion. The returned-item baseline equals the current read-clone item in every field; all current cited statements were re-read and all 15 saved quotations still match, so the approved four-step assembly and three new statements are retained. Repair of the human re-split return: preserve the statement and split the 6313-character proof into three independent unsplit statements. Coefficient-extended finite jets carry old steps 3 and the completed-ring calculation of 4; smooth-chart generic residues carry 6 and 8; flat-local component dimensions carry 5, 7 and the subtraction of 9. The parent retains chart preparation, the existing relative Cohen input, completion comparison and set assembly. Full old steps and ownership mapping are retained in report.md. Continued current-DAG check: all 18 audited dependency statements remain unchanged; added the required same-tag distinction from the newly present rational ordinary-cohomology tensor node after the initial dry-run diagnostic. All 15 exact citations were revalidated. Promotion repair continued 2026-10-23: rechecked the returned baseline against every current item field and all 18 saved dependency statements; no mathematical changes. Read the two newly present same-tag nodes (relative-flat-cartier-support and flat-localized-field-descent) and added explicit statement distinctions under Not duplicates. Retained the 2651-character assembly, all three new statement-only nodes and their logged searches; revalidated all 15 exact citations. Final resumed promotion check: initial server dry run exited successfully at 13dceb81387; re-read all 15 current proof inputs and compared all 18 saved dependency statements with no changes. The returned nine-step baseline is still current, so this rebased delivery continues to replace it with the retained four-step assembly and three new statement-only nodes, preserving live statement and metadata.",
+  "blueprint": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), via the Hilbert--Samuel smooth dimension profile: graded polynomial comparison and component dimensions. This is a lower local-algebra refinement, with chapter and unit unchanged.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-essentially-smooth-ring-map",
+    "why": "Generic local algebra input used exactly as quoted in citations.json: Essentially smooth ring maps. The trace-formula unit has no replacement for this algebraic tool; its resolution route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "why": "Generic local algebra input used exactly as quoted in citations.json: Dimension at a point of a finite type algebra over a field. The trace-formula unit has no replacement for this algebraic tool; its resolution route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-fibre-regular-local",
+    "why": "Generic local algebra input used exactly as quoted in citations.json: Smooth fibres have regular local rings. The trace-formula unit has no replacement for this algebraic tool; its resolution route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "lem-weil-pbc-dimension-at-point-components",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-weil-pbc-smooth-fibre-regular-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-3c175f774",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-3c175f774 (reviewer sub-agent of L); spot-checked: PASS, no fixes. This is the 4th push of NI's re-split after the PASSed heads 270b3440, 9e7e8ec2 and a8d686dc. Each earlier landing was refused as 'completed in this project's DAG but not in the live DAG', which is the side-to-live promotion loop and not a mathematical fault. Against a8d686dc, the three new nodes are byte-identical and the item differs only in split_report.date and split_report.summary; the report gains two same-tag distinctions. In live and side-live the item still has the old 9-step proof, the re-split note is released and none of the new ids exists, so the push is not superseded. The item's statement and stmt_deps are unchanged. Its proof has 4 steps and 2651 characters; steps 1-2 are the old ones verbatim. Every old step has a destination: old 3-4 go to the jets node, with the completion transport left in parent step 3 (05GG); old 6 and 8 go to the smooth-chart node; old 5, 7 and the subtraction of 9 go to the flat-local node; the substitution and set inclusions stay in parent step 4. Maths re-read. (1) Jets: the T^beta coefficient of I L[[X,T]] is I L[[X]], and L[[X]]/X^M = L tensor_K K[[X]]/X^M; flatness (00HD) then gives D/b^N = sum over |beta|<N of L tensor_K C/a^{N-|beta|}, and consecutive kernels give the graded L-algebra isomorphism. Checked N=1, s=0, e=0, I=0, K[[x]]/(x^2) and infinite L/K. (2) Smooth chart: 00P1 at N gives r=s+t; a minimal Q gives a 0-dimensional local ring in P tensor E with residue field H; 02G1 local constancy at the generization Q gives trdeg_E H=r. Checked k[t] at (t) and at (0). (3) Flat-local: 00HR and 00HS give surjective contraction of minimal primes; 00OT/00P0/00P1 give the local-domain formula; 030H towers give the difference. Checked k->k(t) and k->k[t]_(t). Parent step 4 then gives dim B/q = dim A/p + s with k=Q. Duplicate scan: the 78 nodes created 2026-10-23 contain none; relative-flat-cartier-support and flat-localized-field-descent are not duplicates. No SGA is cited, the tool_uses are unchanged, and no target is weakened. Maintainer note: identical split stuck in the promotion loop."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SmoothLocalTangentConeExtension",
+  "declaration": "Algebra.smooth_local_tangent_cone_extension",
+  "declarations": [
+   "IsLocalRing.associatedGradedAlgebra",
+   "Algebra.smooth_local_tangent_cone_extension"
+  ],
+  "file": "lean/Sheaf/RingTheory/SmoothLocalTangentConeExtension.lean",
+  "statement": "theorem smooth_local_tangent_cone_extension {A : Type u} {B : Type v} [CommRing A] [CommRing B] [IsLocalRing A] [IsLocalRing B] [Algebra ℚ A] [Algebra ℚ B] [EssFiniteType ℚ A] [EssFiniteType ℚ B] [Algebra A B] [IsLocalHom (algebraMap A B)] (hsmooth : EssentiallySmooth A B) : IsRegularLocalRing (B ⧸ (IsLocalRing.maximalIdeal A).map (algebraMap A B)) ∧ ∃ s : ℕ, ringKrullDim (B ⧸ (IsLocalRing.maximalIdeal A).map (algebraMap A B)) = (s : WithBot ℕ∞) ∧ (∃ e : MvPolynomial (Fin s) (IsLocalRing.ResidueField B ⊗[IsLocalRing.ResidueField A] Ideal.associatedGraded (IsLocalRing.maximalIdeal A)) ≃ₐ[IsLocalRing.ResidueField B] Ideal.associatedGraded (IsLocalRing.maximalIdeal B), (∀ (d : ℕ) (b : Fin s →₀ ℕ) (c : IsLocalRing.ResidueField B) (x : Ideal.associatedGradedPiece (IsLocalRing.maximalIdeal A) d), ∃ y : Ideal.associatedGradedPiece (IsLocalRing.maximalIdeal B) (d + b.degree), e (MvPolynomial.monomial b (c ⊗ₜ[IsLocalRing.ResidueField A] DirectSum.of (Ideal.associatedGradedPiece (IsLocalRing.maximalIdeal A)) d x)) = DirectSum.of (Ideal.associatedGradedPiece (IsLocalRing.maximalIdeal B)) (d + b.degree) y) ∧ (∀ (d : ℕ) (a : (IsLocalRing.maximalIdeal A ^ d : Ideal A)), ∃ b : (IsLocalRing.maximalIdeal B ^ d : Ideal B), b.val = algebraMap A B a.val ∧ e (MvPolynomial.C (1 ⊗ₜ[IsLocalRing.ResidueField A] DirectSum.of (Ideal.associatedGradedPiece (IsLocalRing.maximalIdeal A)) d (Submodule.Quotient.mk a))) = DirectSum.of (Ideal.associatedGradedPiece (IsLocalRing.maximalIdeal B)) d (Submodule.Quotient.mk b))) ∧ {r : WithBot ℕ∞ | ∃ q : Ideal B, q ∈ minimalPrimes B ∧ ringKrullDim (B ⧸ q) = r} = {r : WithBot ℕ∞ | ∃ p : Ideal A, p ∈ minimalPrimes A ∧ ringKrullDim (A ⧸ p) + (s : WithBot ℕ∞) = r}",
+  "branch": "sheaf-dag",
+  "by": "O4",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf6764f06",
+  "group": "O4",
+  "result": "pass",
+  "note": "Item node differs from side-live only in lean; the 5 stmt_dep records equal live; item not dropped, no repair note; lean.statement verbatim in file. Hypotheses match the node (IsLocalRing gives nonzero, EssFiniteType ℚ for both rings, IsLocalHom, recorded Algebra.EssentiallySmooth), with no extra assumptions and independent universes u, v. Conclusions: IsRegularLocalRing F for F = B/mB; ∃ s : ℕ with ringKrullDim F = s; e : (L⊗_K gr_m A)[Fin s] ≃ₐ[L] gr_n B, graded via monomial b (c⊗ι_d x) ↦ ι_{d+|b|} and pinned on the base by ι_d[a] ↦ ι_d[φ a], consistent with L-linearity at d=0; minimal-prime dimension sets equal in WithBot ℕ∞ after adding s. Edge cases identity, ℚ→ℚ(t), ℚ[x]_(x)→(ℚ[x][t])_(x), ℚ→ℚ[t]_(t) all correct. Helper IsLocalRing.associatedGradedAlgebra is an inferInstanceAs transport of the dep's Ideal.associatedGradedAlgebra through ResidueField, listed in declarations with docstrings. Docstrings carry source, blueprint and all 9 proof steps; body sorry; H9 proof-dep imports present and exist live; no existing theorem found. No recompile (no change). No findings."
+ }
 }

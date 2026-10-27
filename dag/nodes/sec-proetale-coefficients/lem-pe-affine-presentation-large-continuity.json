@@ -1,0 +1,128 @@
+{
+ "id": "lem-pe-affine-presentation-large-continuity",
+ "kind": "lemma",
+ "title": "Large affine etale presentations from small filtered continuity",
+ "statement": "Let X be a scheme in universe u, and F a sheaf of sets valued in Type (u+1) on its pro-etale site. Suppose the restriction of F to the opposite affine ind-etale site preserves every universe-u filtered colimit. For every affine etale presentation P of det-pe-classical-definition-continuity-map, whose cofiltered index has objects and morphisms in universe u+1 and whose affine vertex is a limit in schemes over X, the canonical restriction cocone from the section sets at the stages to the section set at the vertex is a colimit.",
+ "stmt_deps": [
+  "det-pe-classical-definition-continuity-map",
+  "lem-weil-pbc-ind-etale-basis"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-limit-pullback (Tag 099S) and lemma-describe-pullback-from-etale; Bhatt--Scholze Lemmas 5.1.1--5.1.2; index comparison for the blueprint continuity-map definition"
+ },
+ "proof": [
+  {
+   "text": "Choose one original stage i and restrict to Over i. Full faithfulness of Spec identifies the affine limit with a ring colimit. Etale cancellation makes the stage ring maps etale over the ring of stage i. Apply CommRingCat.ind_etale_small_index and the affine ind-etale characterization to get proAffineEtale of the vertex projection, then compose with the etale map of stage i to X. The explicit private helpers affineSectionsColimit and presentationVertexProAffineEtale prove these steps in Lean. The basis presentation theorem now supplies a universe-u relative affine etale presentation p of the same vertex. The hypothesis hF sends its opposite cone to a colimit.",
+   "uses": [
+    "det-pe-classical-definition-continuity-map",
+    "lem-pe-ind-etale-small-index",
+    "lem-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let E be the full subcategory of X.ProEt on affine etale objects, and L its opposite inclusion. Lift each of the original and the small presentation diagrams into E. For the original diagram apply lem-pe-affine-etale-large-limit-maps to every object of E. For the small presentation the private helper affineEtale_smallLimit_preservesColimit proves the same fact directly from Mathlib Scheme.preservesColimit_yoneda, transporting Hom sets through the fully faithful ProEt.forget and Coyoneda.objOpOp isomorphisms. The small-index theorem applies because its index lies in universe u. The theorem final_costructuredArrowLift_of_isFinitelyPresentable now makes both lifted opposite presentation functors final into the same category CostructuredArrow L (op U).",
+   "uses": [
+    "lem-pe-affine-etale-large-limit-maps",
+    "lem-weil-pbc-finite-presentation-map-limit-factorization",
+    "lem-weil-pbc-locally-finite-type-limit-map-equality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On that common costructured-arrow category the canonical cocone has vertex F(U), with component F applied to the displayed arrow to U. Its whiskering along the small presentation functor is exactly the colimit supplied by hF. Finality transfers that colimit to the canonical cocone. Whiskering along the original presentation functor transfers it to exactly sectionCocone P F.obj. This is a complete Lean proof using Functor.Final.isColimitWhiskerEquiv twice; no small cofinal functor into the original index is asserted.",
+   "uses": [
+    "det-pe-classical-definition-continuity-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-pe-classical-definition-continuity-map",
+  "lem-pe-ind-etale-small-index",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-pe-affine-etale-large-limit-maps",
+  "lem-weil-pbc-finite-presentation-map-limit-factorization",
+  "lem-weil-pbc-locally-finite-type-limit-map-equality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-limit-pullback (Tag 099S); F7 implements the small-presentation reduction and compares the two restriction cocones by finality in a common costructured-arrow category"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf preserving small filtered affine inverse limits sends a larger cofiltered affine etale presentation to a colimit of section sets",
+   "results": "Found nonempty_isColimit_Gamma_mapCocone, exists_appTop_pi_eq_of_isAffine_of_isLimit, exists_appTop_map_eq_zero_of_isAffine_of_isLimit, and preservesColimit_Gamma. The first three use the small scheme universe for their index; the last is a ring-valued affine limit statement, not set-sheaf section continuity.",
+   "verdict": "No direct match for the larger-index section-cocone assertion.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesFilteredColimitsOfSize\"",
+   "results": "Found preservesFilteredColimitsOfSize_shrink and preservesFilteredColimitsOfSize_of_univLE; these restrict larger preservation to smaller sizes and cannot upgrade small preservation to the presentation universe.",
+   "verdict": "No match for the needed upward universe comparison.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "small_fullSubcategory_cofilteredClosure|PreservesRelativeFilteredColimits",
+   "results": "Mathlib.CategoryTheory.Filtered.Small has the small cofiltered closure construction. This does not by itself identify the original large presentation section cocone. Repository search found CoefficientComparisonContinuity, whose representable continuity module imports the current item, so it cannot be used here without an import cycle. No equivalent generic small-continuity-to-large-presentation theorem was found.",
+   "verdict": "No existing acyclic declaration supplies this statement.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesImage",
+  "date": "2026-10-26",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-classical-sheaves-image",
+   "place": "Proof, (1) implies (2): apply the affine section continuity formula to the specified presentation; reconcile the small-index continuity theorem with the universe-u+1 presentation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-classical-sheaves",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePresentationSectionColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePresentationSectionColimit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.affinePresentation_sectionCocone_isColimit",
+  "statement": "theorem affinePresentation_sectionCocone_isColimit {X : Scheme.{u}}\n    (F : Sheaf (Scheme.ProEt.topology X) (Type (u + 1)))\n    (hF : PreservesFilteredColimitsOfSize.{u, u}\n      ((Scheme.AffineProEt.toProEt X).op ⋙ F.obj))\n    {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]\n    (P : AffinePresentation X I) :\n    Nonempty (IsColimit (sectionCocone P F.obj))",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T023037-L-515101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261026T065654-L-3167049",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

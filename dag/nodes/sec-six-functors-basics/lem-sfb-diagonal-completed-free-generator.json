@@ -1,0 +1,184 @@
+{
+ "id": "lem-sfb-diagonal-completed-free-generator",
+ "kind": "statement",
+ "title": "Automatic completed-coefficient linearity into free local representables",
+ "statement": "Let l be prime and X any scheme, with its small pro-etale site [def-weil-pbc-proetale-site]. Let R be the inverse limit of the constant ring sheaves Z/l^(n+1), with their quotient transitions [def-pur-twist-coefficient-rings]. Let S be the section-ring reconstruction [def-weil-pbc-internal-abelian-sheaf-module-equivalence] of the pullback to X [sk-def-sfb-pulled-back-coefficients] of the condensed ring T↦C(T,Z_l), with pointwise operations. For a test object U whose structure map is proAffineEtale [sk-def-pe-morphisms], define P_U as the module sheafification [def-weil-presheaf-modules-sheafification] of the free R-presheaf on the universe-lifted representable h_U. For any ring-sheaf isomorphism c:S≅R, any S-module sheaf N [def-weil-sheaf-of-modules-category], and any additive sheaf map g:N_ab→(P_U)_ab, the map g is semilinear over c: for every test object V, r∈S(V), and x∈N(V), one has g_V(r·x)=c_V(r)·g_V(x). This statement concerns concrete free targets and contains no realization functor or normalization.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-pur-twist-coefficient-rings",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "sk-def-pe-morphisms"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), coefficient identification; local-free-generator step of lem-sfb-diagonal-completed-section-action; integer-modulo-powers linearity criterion in WeilConjectures/SixFunctors/ProEtale/Adic/PadicIntSheafLinear.lean"
+ },
+ "proof": [
+  {
+   "text": "The coefficient-only local approximation theorem gives a covering sieve on which r=a+l^(n+1)b, for an integer a.",
+   "uses": [
+    "lem-sfb-completed-coefficient-local-integers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On that sieve, use naturality of g and c, semilinearity of the restriction maps of N and the free target, preservation of integers by c, and additivity of g. The action defect restricts to l^(n+1) times g(b x)-c(b)g(x), since the integer terms cancel. This constructs an explicit witness in the image sieve for each n.",
+   "uses": [
+    "lem-sfb-local-adic-linearity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply corrected adic separation of the sheafified free pro-affine etale representable to this action defect, using the hypothesis on U. All its positive-power image sieves are covering, so the defect is zero. The free-cell construction and its generator-to-section map remain available on arbitrary U.",
+   "uses": [
+    "lem-sfb-completed-free-adic-separation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-completed-coefficient-local-integers",
+  "lem-sfb-local-adic-linearity",
+  "lem-sfb-completed-free-adic-separation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), corrected finite-support local generator argument",
+  "note": "Necessary restriction of the free-target helper; free-cell definitions are unchanged. The only consumer uses the helper first on the pro-affine etale basis and descends its unchanged conclusion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive map between sheaves of modules over p adic integers is linear when its target is p adically separated",
+   "results": "linearMapOfTendsto; AdicCompletion.map; SheafOfModules.instAdditiveRestrictScalars; no automatic linearity theorem for free pro-etale module sheaves.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match. The source library provides the abstract action-defect criterion, but not separation of these free targets."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"act_comp_eq_of_epi\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "The criterion is in the adopted source library, not Mathlib; no whole-statement match."
+  },
+  {
+   "tool": "grep",
+   "query": "act_comp_eq_of_epi|free.*separated|separated.*free",
+   "results": "Mathlib search: only unrelated FreeMonoid/Symbols comment. Local source search found WeilConjectures/SixFunctors/ProEtale/Adic/PadicIntSheafLinear.lean and its finite-free separated-target specialization in PadicIntLatticeLisse.lean.",
+   "date": "2026-10-27",
+   "verdict": "No existing theorem treats the sheafified free representable targets used here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientSectionAction",
+  "date": "2026-10-27",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), coefficient identification; the local free-module argument of lem-sfb-diagonal-completed-section-action",
+   "via": [
+    "lem-sfb-diagonal-completed-section-action"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedCoefficientFreeGenerator",
+  "file": "lean/Sheaf/Paper/CompletedCoefficientFreeGenerator.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedFreeCell_automaticLinearity",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedFreePresheaf",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedFreeCell",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedFreeGenerator",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedFreeDesc",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedFreeDesc_generator",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedFreeCell_automaticLinearity"
+  ],
+  "statement": "theorem completedFreeCell_automaticLinearity (l : ℕ) [Fact l.Prime]\n    (X : Scheme.{u}) (U : X.ProEtᵒᵖ) (hU : proAffineEtale U.unop.hom)\n    (c : (sheafCompose (Scheme.ProEt.topology X)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n          (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}\n            (Scheme.ProEt.topology X)\n            (condensedRingObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) X)) ≅\n        Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l))\n    (N : SheafOfModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n        (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}\n          (Scheme.ProEt.topology X)\n          (condensedRingObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) X))))\n    (g : (SheafOfModules.toSheaf _).obj N ⟶\n      (SheafOfModules.toSheaf _).obj (completedFreeCell l X U))\n    (V : X.ProEtᵒᵖ) (r : ((sheafCompose (Scheme.ProEt.topology X)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n        (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}\n          (Scheme.ProEt.topology X)\n          (condensedRingObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) X))).obj.obj V)\n    (x : N.val.obj V) :\n    g.hom.app V (r • x) =\n      @SMul.smul _ ((completedFreeCell l X U).val.obj V) inferInstance\n        (c.hom.hom.app V r) (g.hom.app V x)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261026T235950-L-1474308",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4e5d7",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T034636-L-3668862",
+  "kind": "interface",
+  "note": "independent cc review: item/free-generator/section-action Lean vs their DAG nodes, change record and 3b importer compile; old statement checked false (doubled convergent sequence); new local-dual sorry read as true; public section_action signature unchanged against the clone"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "F2 stage 2",
+  "old_statement": "Let l be prime and X any scheme, with its small pro-etale site [def-weil-pbc-proetale-site]. Let R be the inverse limit of the constant ring sheaves Z/l^(n+1), with their quotient transitions [def-pur-twist-coefficient-rings]. Let S be the section-ring reconstruction [def-weil-pbc-internal-abelian-sheaf-module-equivalence] of the pullback to X [sk-def-sfb-pulled-back-coefficients] of the condensed ring T↦C(T,Z_l), with pointwise operations. For a test object U, define P_U as the module sheafification [def-weil-presheaf-modules-sheafification] of the free R-presheaf on the universe-lifted representable h_U. For any ring-sheaf isomorphism c:S≅R, any S-module sheaf N [def-weil-sheaf-of-modules-category], and any additive sheaf map g:N_ab→(P_U)_ab, the map g is semilinear over c: for every test object V, r∈S(V), and x∈N(V), one has g_V(r·x)=c_V(r)·g_V(x). This statement concerns concrete free targets and contains no realization functor or normalization.",
+  "what": "The proof used the false unrestricted free-sheaf separation statement. Restrict the helper to pro-affine etale U, and adapt its sole consumer by descent. This is an intermediate statement correction, not a proof of the original assertion. See coord/changes/F2-completed-free-pro-affine-generators.md",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+   "place": "paragraph (1), corrected finite-support local generator argument"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-diagonal-completed-section-action",
+    "holds": true,
+    "note": "The general section-action statement is unchanged; its proof now first handles the cover-dense pro-affine etale basis and descends."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-proetale-site",
+   "def-pur-twist-coefficient-rings",
+   "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+   "sk-def-sfb-pulled-back-coefficients",
+   "def-weil-presheaf-modules-sheafification",
+   "def-weil-sheaf-of-modules-category"
+  ],
+  "old_proof": [
+   {
+    "text": "The coefficient-only local approximation theorem gives a covering sieve on which r=a+l^(n+1)b, for an integer a.",
+    "uses": [
+     "lem-sfb-completed-coefficient-local-integers"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "On that sieve, use naturality of g and c, semilinearity of the restriction maps of N and the free target, preservation of integers by c, and additivity of g. The action defect restricts to l^(n+1) times g(b x)-c(b)g(x), since the integer terms cancel. This constructs an explicit witness in the image sieve for each n.",
+    "uses": [
+     "lem-sfb-local-adic-linearity"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply adic separation of the sheafified free representable to this action defect. All its positive-power image sieves are covering by the preceding computation, so the defect is zero, yielding the unchanged section formula.",
+    "uses": [
+     "lem-sfb-completed-free-adic-separation"
+    ],
+    "elementary": false
+   }
+  ]
+ }
+}

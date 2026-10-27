@@ -1,0 +1,211 @@
+{
+ "id": "lem-wf-tensor-pullback-completion-unit-square",
+ "kind": "statement",
+ "title": "The specified Frobenius tensor comparison preserves the intrinsic completion unit",
+ "statement": "Fix primes $p\\ne\\ell$, $q=p^a$ with $a\\ge1$, $k_0=\\mathbf F_q$, $k=\\overline{k_0}$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, and a finite intermediate field $E\\subset\\Omega$, with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $W_0$ be a separated finite-type $k_0$-scheme, $W=W_0\\times_{k_0}k$, and $B=\\varprojlim_{n\\ge1}(R/\\varpi^n)_W$ on the small pro-etale site. Use the integral category $\\mathcal I_E=D^b_c(W_{\\mathrm{proet}},R)$ of [def-weil-pbc-bounded-constructible-complete], whose raw rationalization is the coefficient category of [def-wf-weil-category].\nLet $\\Phi_W=\\mathrm{id}_{W_0}\\times\\operatorname{Spec}(z\\mapsto z^{1/q})$ and let $H=\\Phi_W^*$ be exact integral coefficient transport [def-wf-weil-category]. Write $C(A)=A^{\\wedge}_{\\mathrm{Kos}}$ and $\\eta_A:A\\to C(A)$ for [def-weil-pbc-intrinsic-completion]. For $M,N\\in\\mathcal I_E$ put $T=M\\otimes_B^L N$ and $T'=HM\\otimes_B^L HN$. Let $a:HT\\xrightarrow{\\sim}T'$ and $b:HC(T)\\xrightarrow{\\sim}C(T')$ be respectively the specified ordinary and completed tensor/pullback comparisons of [def-wf-tensor-product], with the coefficient isomorphism induced by the constant finite quotient maps. Then in $D(B)$\n$$b\\circ H(\\eta_T)=\\eta_{T'}\\circ a.$$\nThe equality holds already on the specified flat-term K-flat models: for representatives $U,V$, set $A=\\operatorname{Tot}(U\\otimes_B V)$ and $A'=\\operatorname{Tot}(HU\\otimes_B HV)$, and use $Q_m=[B\\xrightarrow{\\varpi^m}B]$ in degrees $[-1,0]$, with transition $\\varpi$ in degree $-1$ and identity in degree zero. Under the canonical maps $HQ_m\\cong Q_m$ and $H\\prod_m\\cong\\prod_m H$, the chain maps representing $a,b$ satisfy $bH(\\eta_A)=\\eta_{A'}a$. Here the two units are the actual maps $z\\mapsto((z\\otimes\\iota_m)_m,0)$ into the product mapping-fiber complexes, with $\\iota_m:B[0]\\to Q_m$ the degree-zero inclusion. This also specifies the equality after localization of the models at quasi-isomorphisms.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Penultimate sentence, equivariance for Weil complexes; argument extracted from lem-wf-tensor-completion-frobenius, original step 3; specified tensor comparison and intrinsic mapping-fiber model"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-wf-weil-category",
+  "def-wf-tensor-product",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-bounded-constructible-complete"
+ ],
+ "proof": [
+  {
+   "text": "The existing predicates and comparison definitions are retained in the shared interface module.",
+   "uses": [
+    "def-wf-tensor-unit-square-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence; original steps 1--4 of lem-wf-tensor-pullback-completion-unit-square"
+   }
+  },
+  {
+   "text": "Prove DerivedSquare directly from the unit equation defining wfPullbackCompletion and naturality of wfCompletionUnit under the ordinary tensor comparison.",
+   "uses": [
+    "def-wf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence; original steps 1--4 of lem-wf-tensor-pullback-completion-unit-square"
+   }
+  },
+  {
+   "text": "Obtain the unique normalized constant comparison. Apply augmented Koszul fiber transport to every pair of representatives. Map the resulting strict chain equation through DerivedCategory.Q and its composition law. Uniqueness of normalized constants gives the uniqueness required by StrictSquare. Specialize to geometric Frobenius and the coefficient-stage uniformizer.",
+   "uses": [
+    "lem-wf-completed-constant-pullback-normalization",
+    "lem-wf-normalized-koszul-fiber-unit-transport",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence; original steps 1--4 of lem-wf-tensor-pullback-completion-unit-square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-wf-tensor-unit-square-data",
+  "def-wf-tensor-product",
+  "lem-wf-completed-constant-pullback-normalization",
+  "lem-wf-normalized-koszul-fiber-unit-transport",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Penultimate sentence; original steps 1--4 of lem-wf-tensor-pullback-completion-unit-square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived tensor comparison for inverse image commutes with Koszul completion unit on sheaves",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pushforwardSections_unitHomEquiv; SheafOfModules.unitToPushforwardObjUnit_val_app_apply; SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this normalized derived-sheaf tensor assertion with its Weil/localized coefficient clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact inverse image equivalence preserves the actual Koszul mapping fiber completion unit tensor comparison",
+   "results": "PrimeSpectrum.preimageEquivFiber_symm_apply_coe; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.congr_symm_apply; CategoryTheory.MorphismProperty.inverseImage_equivalence_functor_eq_map_inverse; NonUnitalSubring.comap_equiv_eq_map_symm; CategoryTheory.Grothendieck.grothendieckTypeToCat_unitIso_inv_app_fiber; AbstractCompletion.mapEquiv_symm; NonUnitalSubsemiring.comap_equiv_eq_map_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this normalized derived-sheaf tensor assertion with its Weil/localized coefficient clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality; CategoryTheory.Limits.PullbackCone.isoMk; CategoryTheory.Limits.PushoutCocone.isoMk; CategoryTheory.Limits.PullbackCone.isoMk_hom_hom; CategoryTheory.Limits.PullbackCone.isoMk_inv_hom; CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom; CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom; CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this normalized derived-sheaf tensor assertion with its Weil/localized coefficient clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*pullback|pullback.*Koszul|completion.*unit",
+   "results": "Mathlib/Topology/Algebra/Valued/ValuedField.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean; Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean; Mathlib/RingTheory/DedekindDomain/AdicValuation.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this normalized derived-sheaf tensor assertion with its Weil/localized coefficient clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*completion|completion.*unit|mappingFiber",
+   "results": "Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/Topology/Algebra/Valued/ValuedField.lean; Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean; Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean; Mathlib/RingTheory/DedekindDomain/AdicValuation.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic naturality, unitors, ordinary module adic completion, and Dold-Kan comparisons do not identify the specified Koszul product/fiber chain maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact equivalence preserves Koszul tower completion map via tensor and product comparisons",
+   "results": "AdicCompletion.ofTensorProductEquivOfPiFintype; CategoryTheory.FreeMonoidalCategory.HomEquiv.tensor; Algebra.TensorProduct.congr_apply; TensorProduct.AlgebraTensorModule.map_eq; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp; Algebra.TensorProduct.congr_refl; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.tensor_map_id_left_eq_map",
+   "date": "2026-10-22",
+   "verdict": "no match: generic naturality, unitors, ordinary module adic completion, and Dold-Kan comparisons do not identify the specified Koszul product/fiber chain maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality; CategoryTheory.Limits.PullbackCone.isoMk; CategoryTheory.Limits.PushoutCocone.isoMk; CategoryTheory.Limits.PullbackCone.isoMk_hom_hom; CategoryTheory.Limits.PullbackCone.isoMk_inv_hom; CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom; CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom; CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-22",
+   "verdict": "no match: generic naturality, unitors, ordinary module adic completion, and Dold-Kan comparisons do not identify the specified Koszul product/fiber chain maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image tensor comparison preserves Koszul completion unit in mapping fiber complex",
+   "results": "HomologicalComplex.leftUnitor'_inv; HomologicalComplex.instHasTensorTensorUnit_1; HomologicalComplex.rightUnitor'_inv; HomologicalComplex.leftUnitor'_inv_comm; HomologicalComplex.instHasTensorXTensorUnit; HomologicalComplex.tensorUnitIso; HomologicalComplex.rightUnitor'_inv_comm; HomologicalComplex.leftUnitor'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic naturality, unitors, ordinary module adic completion, and Dold-Kan comparisons do not identify the specified Koszul product/fiber chain maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "chain level naturality of map into homotopy inverse limit product mapping fiber of Koszul complexes under monoidal equivalence",
+   "results": "AlgebraicTopology.DoldKan.Γ₀.Obj.Termwise.mapMono_naturality_assoc; CategoryTheory.Idempotents.DoldKan.η_hom_app_f; CategoryTheory.Abelian.DoldKan.comparisonN_inv_app_f; CategoryTheory.Idempotents.DoldKan.η_inv_app_f; CategoryTheory.Abelian.DoldKan.comparisonN_hom_app_f; AlgebraicTopology.DoldKan.QInfty_f_naturality_assoc; AlgebraicTopology.DoldKan.N₂Γ₂_compatible_with_N₁Γ₀; AlgebraicTopology.DoldKan.N₁Γ₀_hom_app_f_f",
+   "date": "2026-10-22",
+   "verdict": "no match: generic naturality, unitors, ordinary module adic completion, and Dold-Kan comparisons do not identify the specified Koszul product/fiber chain maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-tensor-completion-frobenius",
+  "date": "2026-10-22",
+  "group": "Q140"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof, penultimate sentence: 'Its equivariance for Weil complexes is the equivariance of the projection transformation in [lem-fix-weil-operations]'; strict Frobenius tensor/unit square",
+   "via": [
+    "lem-wf-tensor-completion-frobenius"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-wf-tensor-pullback-completion-unit-square",
+  "worker": "stage1",
+  "summary": "Computed the specified tensor comparison on the degree-zero Koszul inclusions, then on product projections and the two fiber summands. This proves the strict unit square and its derived image without new nodes. Corrected the integral-category notation: C_E in the cited Weil-category definition is rational, so introduced I_E for its stipulated integral category.",
+  "blueprint": "Realizes the Frobenius equivariance sentence in fix-prop-projection-formula.proof.md, via lem-wf-tensor-completion-frobenius, using the explicit comparison of def-wf-tensor-product.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic exact site-equivalence and product-preservation theorem for the given scheme automorphism; no step of the projection-formula unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic K-flat preservation and canonical derived tensor comparison, used to identify the stipulated representatives; no alternate projection-formula route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-4435f6c78",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-4435f6c78 (reviewer sub-agent of L); spot-checked: I read the item, the 8 cited statements, the parent and only citer lem-wf-tensor-completion-frobenius, the unit sk-rem-sf-pf-done and fix-prop-projection-formula.proof.md (main-20261015). There are no new nodes. The one statement change is a correct typing repair. In def-wf-weil-category, C_E is the rational category, so the integral objects are now I_E=D^b_c(W_proet,R) of def-weil-pbc-bounded-constructible-complete. Its hypotheses hold: W is of finite type over k and ℓ≠p. The citer already quantifies over integral D^b_c(W,O_E), and the conclusion is unchanged, so nothing is weakened. Step 1: the inverse-image lemma (clause 2) gives exactness and preservation of products. def-wf-tensor-product specifies c, the balanced iso α, and that they represent the derived comparison. The ringed-topoi lemma gives flat-term K-flat preservation. Step 2: c(ϖ)=ϖ and c(1)=1, so β_m H(1⊗ι_m)=(1⊗ι_m)α on generators, and the transition (ϖ in degree −1, identity in degree 0) commutes. Step 3: pr_m δ H(u_A)=pr_m u_{A'} α, and the product's universal property gives δ H(u_A)=u_{A'} α. On F=B⊕B[−1], b sends (H u_A z,0) to (u_{A'} α z,0), a strict chain equality. Step 4: localization. The intrinsic-completion hypotheses hold for O_E with I=(ϖ). I checked m=1, ramified E and zero inputs. lem-sf-automorphism-completion-unit-comparison and lem-sfb-exact-completed-koszul-pullback do not identify the specified b, so neither is a duplicate. The unit has uses=[]; I accept the two declared tool uses, both generic site/tensor-pullback lemmas. No SGA, no cycle, proof_deps equals the union of the step uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WfTensorPullbackCompletionUnitSquare",
+  "declaration": "WeilConjectures.wfTensorPullbackCompletionUnitSquare",
+  "declarations": [
+   "WeilConjectures.wfTensorPullbackCompletionUnitSquare"
+  ],
+  "file": "lean/Sheaf/Paper/WfTensorPullbackCompletionUnitSquare.lean",
+  "statement": "theorem wfTensorPullbackCompletionUnitSquare (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (X₀ : Over (Spec (.of D.k₀))) [IsSeparated X₀.hom] [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] (E : Padic.FiniteCoefficientFields c.l c.Qbar) (M N : PbcBoundedConstructibleComplete (D.geometricFiber X₀).left (pbcStageDatum.{u} c.l c.Qbar E)) : WfTensorUnitSquare.DerivedSquare (D.geometricFiber X₀).left (pbcStageDatum.{u} c.l c.Qbar E) (D.geometricFrobenius X₀) (pbcStageUniformizer.{u} c.l c.Qbar E) (wfUniformizer_generates D c E) M N ∧ WfTensorUnitSquare.StrictSquare (D.geometricFiber X₀).left (pbcStageDatum.{u} c.l c.Qbar E) (D.geometricFrobenius X₀) (pbcStageUniformizer.{u} c.l c.Qbar E) M N",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b697af3d4",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Read node, 5 stmt_deps, def-wf-tensor-product explicit chain construction, WeilTensorProduct/WeilCompletedTensorReflector/IntrinsicCompletion(Completed) sources, report. DerivedSquare: H(eta_T)≫b = a≫eta_T' with a = proEtaleCanonicalTensorComparison on wfTensorModel and b = wfPullbackCompletion ≪≫ completion(a), verbatim the terms of wfIntegralTensorPullback; units wfCompletionUnit. StrictSquare: ∀ flat K-flat U,V, strict chain equality H(unit)≫b = alpha≫unit' on the actual mappingCocone units plus its Q-image; ∃! k pinned by NormalizedConstants (constant module = scalar extension, generated by 1⊗x), delta/b pinned by NormalizedFiber (product UP, mapping-cocone fst/snd). Hypotheses match (separated finite type, p≠ℓ, finite E), no extra instances, universes the established u/u+1. Edge cases zero/empty/a=1/m=0/ramified ok. Docstrings, sorry-only, searches ok; node changed only in lean. Advisory: wfCompletionUnit/wfCompletion owned by reflector statement node not in stmt_deps but are the interface of the cited def-wf-tensor-product's own b (which cites the reflector); completed restates wfIntegralTensorPullback composite for non-WfComplete inputs; realU/realV unused. No fixes; no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2fc77",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T202826-L-2756421",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/item/normalization/transport modules vs clone a0aa732 item module (verbatim relocation; tensor/alpha abbrev→def, beta let-form) and item node vs clone node; sorry statement vs IntrinsicCompletionCompleted Koszul defs and ProEtaleCanonicalTensorPullback pure-tensor characterization"
+ }
+}

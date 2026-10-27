@@ -1,0 +1,451 @@
+{
+ "id": "lem-sfb-rank-zero-perfect-determinant-section",
+ "kind": "statement",
+ "title": "Canonical determinant section of a rank-zero two-term perfect object",
+ "statement": "Let $V$ be a scheme [def-pc-scheme] and $K\\in D(\\mathcal O_V)$ [def-pc-derived-category] a perfect object [def-pc-perfect-complex] of Tor amplitude $[0,1]$: derived tensor [def-pc-scheme-derived-tensor-structure] with any module has cohomology only in these two degrees. Suppose $K$ has virtual rank zero, meaning that each local model $[E^0\\xrightarrow d E^1]$ in degrees $0,1$ has equal finite locally free ranks [def-amb-finite-locally-free-module]. There is a functorial pair $(D(K),\\delta_K)$ consisting of an invertible module [def-sc-invertible-module] and a global section, with canonical local identifications\n$$(D(K),\\delta_K)\\simeq(\\det E^1\\otimes(\\det E^0)^{-1},\\det d),$$\nwhere $\\det E=\\bigwedge^{\\operatorname{rk}E}E$ [def-sc-sheaf-exterior-power]. Derived isomorphisms induce isomorphisms of pairs, independently of the model, preserving identities and composition. For every scheme map $h:V'\\to V$ the pair for $Lh^*K$ is canonically $h^*(D(K),\\delta_K)$ [def-pc-derived-pullback, def-pc-module-pullback], compatibly with derived isomorphisms, identities and composition. For every invertible module $N$ on $V$ there is a canonical identification of pairs for $K\\otimes N$ and $K$, locally the cancellation of the two factors $N^{\\otimes r}$ in the displayed formula. These identifications respect isomorphisms of $N$, tensor products of twists and base change. In particular every scalar automorphism $a\\in\\mathcal O_V^\\times$ of $K$, acting by multiplication on every term, induces the identity on this pair. On a field-valued fibre, $\\delta_K$ is nonzero exactly when that fibre of $K$ is acyclic.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0FJX (lemma-determinant-two-term-complexes) and 0FJY (remark-functorial-det), with more-algebra.tex Tag 0FJM (lemma-determinant-two-term-complexes) and Section 0FJI (section-determinants-complexes). Degrees are reindexed from [-1,0] to [0,1]; the line-twist cancellation is the rank-zero exterior formula."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-amb-finite-locally-free-module",
+  "def-sc-invertible-module",
+  "def-sc-sheaf-exterior-power",
+  "def-pc-derived-pullback",
+  "def-pc-module-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-trf-two-term-determinant-data",
+  "def-sfb-flat-lci-adjunction-system",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-sfb-determinant-pullback-coherence-data",
+  "def-sfb-recorded-pullback-counit-data"
+ ],
+ "proof": [
+  {
+   "text": "Use sign-free reindexing $R(P)^i=P^{i+1}$, $d_{R(P)}^i=d_P^{i+1}$, and $R(f)^i=f^{i+1}$. Its inverse reindexes backwards; $H^i(R(P))=H^{i+1}(P)$, so both preserve quasi-isomorphisms and descend through the derived localization. This is not the usual signed differential of $P[1]$. Reindexing commutes with tensoring a module and with termwise pullback of a flat resolution. Thus $R(K)$ has Tor amplitude $[-1,0]$, and the window theorem supplies an affine open cover with finite locally free two-term models, refined to constant ranks. Fix the normalized derived pullback coherence supplied by the coherence theorem, and the affine cartesian determinant system supplied by the affine theorem. In Steps 2--8 we construct the global line and its arrows from this affine system; no previously chosen global determinant functor or its unspecified model comparisons are used.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-trf-two-term-perfect-tor-window",
+    "lem-trf-two-term-determinant-pullback-coherence",
+    "lem-trf-affine-two-term-determinant",
+    "def-trf-affine-determinant-interfaces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 0FJX (lemma-determinant-two-term-complexes), 0FJY (remark-functorial-det), affine-local construction; sign-free reindexing written explicitly."
+   }
+  },
+  {
+   "text": "For a model $P=[E^0\\xrightarrow d E^1]$ of common rank $r$, use the explicit exterior line $L(P)=\\det E^1\\otimes(\\det E^0)^\\vee$. The top exterior map $\\bigwedge^r d:\\det E^0\\to\\det E^1$ defines its section $\\delta_P$. On a free chart with ordered wedges $e=e_1\\wedge\\cdots\\wedge e_r$ and $f=f_1\\wedge\\cdots\\wedge f_r$, write $\\bigwedge^r d(e)=c f$ and set $\\delta_P=c f\\otimes e^\\vee$. Changing $e$ by a unit $u$ multiplies $c$ by $u$ and $e^\\vee$ by $u^{-1}$; changing $f$ by a unit $v$ multiplies $c$ by $v^{-1}$. This is the intrinsic top exterior map. The identification $\\operatorname{Hom}(\\det E^0,\\det E^1)=L(P)$ and its inverse are evaluation on a generator and tensoring that image with its dual. These exterior lines are the displayed-model lines of the affine construction, with arrows given by its kernel-normalized good diagrams. Degree-zero exterior powers give $\\delta_{[0\\to0]}=1$.",
+   "uses": [
+    "def-sc-sheaf-exterior-power",
+    "def-sc-invertible-module",
+    "lem-trf-affine-two-term-determinant",
+    "lem-trf-surjective-two-term-determinant-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), exterior line and canonical element; Tag 0FJM (lemma-determinant-two-term-complexes), affine construction."
+   }
+  },
+  {
+   "text": "Check preservation under a degreewise surjective quasi-isomorphism $a:P\\to Q$ of affine finite projective two-term models (reindexed into degrees $-1,0$). The normalization theorem gives finite projective kernels $N^i$, an isomorphism $d_N$, and $T_a^{-1}(x)=\\Gamma_a(x\\otimes\\delta_N)$. Take a common finite standard free cover of $N^{-1}$ and $Q^{-1},Q^0$; products of their covering elements still generate the unit ideal. The lifting property of the finite projective quotients gives sections of the two surjections; $x=(x-sa(x))+sa(x)$ gives the direct-sum splittings. The kernel-first wedge maps then give bases $(k,\\widetilde q)$ in $P^{-1}$ and $(d_N k,\\widetilde t)$ in $P^0$. In the wedge of their images under $d_P$, the kernel basis goes to $d_N k$. Every kernel component in an image $d_P\\widetilde q$ wedges to zero against this full kernel wedge. The remaining quotient wedge is $\\bigwedge d_Q(q)$. Therefore the kernel-first formula gives $\\delta_P=\\Gamma_a(\\delta_Q\\otimes\\delta_N)$, so $T_a(\\delta_P)=\\delta_Q$. Scalar comparison identifies these localized formulas, including their duals and exact-sequence maps, with the original maps. Equality on the finite standard cover detects equality in the module. No invertibility of $d_P$ or $d_Q$ was used.",
+   "uses": [
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-trf-projective-determinant-exact-sequence",
+    "lem-trf-projective-exterior-scalar-comparisons",
+    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "lem-weil-pbc-cover-module-exact",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0FJI (section-determinants-complexes), 0FJJ (lemma-canonical-element-well-defined); direct wedge argument filling the scope gap in the citation of 0FJC."
+   }
+  },
+  {
+   "text": "The affine determinant theorem states that EVERY derived isomorphism acts by a kernel-normalized good-diagram map. For such an isomorphism $P\\simeq Q$, write its map as $T_cT_b^{-1}$ for its good diagram $P\\xleftarrow b M\\xrightarrow c Q$. Both legs are surjective quasi-isomorphisms; their kernel differentials are isomorphisms by the normalization theorem. Their kernels have equal ranks in the two degrees, so if $P$ and $Q$ have rank zero, so does $M$. Step 3 gives $T_b\\delta_M=\\delta_P$ and $T_c\\delta_M=\\delta_Q$, hence $(T_cT_b^{-1})\\delta_P=\\delta_Q$. Independence of diagrams and the identity and composition laws are the affine determinant functor's existing assertions; we have only restricted its arrows to ones preserving the newly defined sections.",
+   "uses": [
+    "lem-trf-affine-two-term-determinant",
+    "lem-trf-surjective-two-term-determinant-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM (lemma-determinant-two-term-complexes), good diagrams and passage to derived isomorphisms."
+   }
+  },
+  {
+   "text": "Write $s_P:B\\otimes_A L(P)\\to L(B\\otimes_A P)$ for the explicit exterior scalar comparison, including duals and ordinary tensor symmetry. Its generator formula sends $1\\otimes\\delta_P$ to $\\delta_{B\\otimes_A P}$: the wedge of $d e_j$ goes to the wedge of $1\\otimes d e_j$, and the dual basis goes to the dual basis. For a surjective quasi-isomorphism $a:P\\to Q$, its termwise sequences split by projectivity as in Step 3. Tensor preserves these splittings, so its new kernel is $B\\otimes_A N$ and its differential is still invertible. Compatibility of the exterior scalar maps with the kernel-first wedge maps, duals and evaluation gives\n$$s_P(1\\otimes\\Gamma_a)(x\\otimes\\delta_N)=\\Gamma_{B\\otimes a}(s_Q(x)\\otimes\\delta_{B\\otimes N}).$$\nSubstitute $T_a^{-1}(x)=\\Gamma_a(x\\otimes\\delta_N)$ and cancel the isomorphisms. This proves $s_Q(1\\otimes T_a)=T_{B\\otimes a}s_P$. For $u$ represented by $P\\xleftarrow b M\\xrightarrow c Q$, the same equation for both legs and their inverses yields\n$$s_Q(1\\otimes T_u)=T_{Lu}\\,s_P.$$\nThe tensor diagram is again good: its split kernel complexes remain contractible. The flat-complex and affine tensor comparison theorems identify it with the derived-pulled-back diagram, including for nonflat $A\\to B$. The identity and associativity equations for these explicit $s$ are in the exterior scalar theorem; derived identifications use the fixed normalized coherence. Thus this equivariance applies to every further affine restriction, with no appeal to a global determinant comparison.",
+   "uses": [
+    "lem-trf-affine-two-term-determinant",
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-trf-projective-exterior-scalar-comparisons",
+    "def-weil-pbc-projective-module",
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-trf-two-term-determinant-pullback-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM (lemma-determinant-two-term-complexes), scalar-extension functoriality; perfect.tex Tag 0FJY (remark-functorial-det)."
+   }
+  },
+  {
+   "text": "Choose affine model charts $(U_i,P_i,\\alpha_i:P_i\\simeq K|_{U_i})$. On an affine $W\\subset U_i\\cap U_j$, restrict both models via the exterior comparisons $s$. Define $g_{ij}$ there to be $T_{\\alpha_j^{-1}\\alpha_i}:L(P_i)|_W\\to L(P_j)|_W$. Step 5's equation makes these maps agree after further affine restriction. They therefore glue on the overlap: images of any local section agree on an affine cover, so the sheaf axiom gives its unique image; the inverse is obtained the same way. Step 4 gives $g_{ii}=1$, $g_{jk}g_{ij}=g_{ik}$ on affine triple-overlap charts and $g_{ij}\\delta_{P_i}=\\delta_{P_j}$, hence globally. Apply the sheaf-gluing theorem on the small site of opens of $V$, with this set-indexed cover. Concretely\n$$D(K)(O)=\\{(x_i)\\in\\prod_i L(P_i)(O\\cap U_i):g_{ij}(x_i|)=x_j|\\}.$$\nRestriction, addition and scalar multiplication are componentwise. Linearity of $g_{ij}$ preserves the matching condition. Projection to the $i$th coordinate on $O\\subset U_i$ is an isomorphism, with inverse $x\\mapsto(g_{ij}(x|))_j$. Thus this is a module sheaf locally equal to $L(P_i)$, and is invertible. The matching tuple $(\\delta_{P_i})_i$ is its global section $\\delta_K$. All intersections are covered by affines, never assumed affine.",
+   "uses": [
+    "lem-trf-affine-two-term-determinant",
+    "def-trf-affine-determinant-interfaces",
+    "lem-pe-site-sheaf-gluing",
+    "def-weil-sheaf-of-modules-category",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0FJX (lemma-determinant-two-term-complexes), explicit affine gluing; sites.tex Tag 04TR (lemma-glue-sheaves), underlying sheaf gluing."
+   }
+  },
+  {
+   "text": "For a derived isomorphism $u:K\\simeq K'$, choose affine model charts $\\alpha_i:P_i\\simeq K$ and $\\beta_j:Q_j\\simeq K'$ and refine their overlaps by affines. Define the line map there as $T_{\\beta_j^{-1}u\\alpha_i}$. Step 5 makes it compatible with restrictions. On a change of source and target chart, affine composition gives\n$$T_{\\beta_{j'}^{-1}\\beta_j}\\,T_{\\beta_j^{-1}u\\alpha_i}\n =T_{\\beta_{j'}^{-1}u\\alpha_{i'}}\\,T_{\\alpha_{i'}^{-1}\\alpha_i}.$$\nIt therefore defines a map of the matching-tuple sheaves in Step 6. Step 4 makes it section-preserving, and using $u^{-1}$ gives its inverse. The identity and composite equations follow on every affine chart from those for $T$. Taking $u=1_K$ between two choices of chart covers gives canonical inverse comparisons; for three choices their composites agree by the same equation. On any displayed model, comparison with the chosen charts is this very $T$, so the local formula holds for every model and is compatible with its derived isomorphisms. This constructs the functor on pairs and its model independence, with its local action specified rather than borrowed from an unrelated global functor.",
+   "uses": [
+    "lem-trf-affine-two-term-determinant",
+    "def-trf-affine-determinant-interfaces",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0FJX (lemma-determinant-two-term-complexes), gluing functoriality and canonical sections; affine arrows from more-algebra.tex Tag 0FJM."
+   }
+  },
+  {
+   "text": "Let $h:V'\\to V$. Pullback preserves the two-term class by the window theorem. Cover $h^{-1}U_i$ by affine opens $W$; on $W$, the flat-complex pullback theorem and the affine tensor comparison identify $Lh^*P_i$ with the termwise scalar-extended model $h^*P_i$. Define the local line comparison $h^*L(P_i)\\to L(h^*P_i)$ to be exactly $s_{P_i}$ of Step 5. On an overlap its equation\n$$s_{P_j}\\,h^*g_{ij}=g'_{ij}\\,s_{P_i}$$\nidentifies the two local maps, where $g'_{ij}$ is the transition of the pulled-back models. These maps and their inverses glue to $h^*D(K)\\simeq D(Lh^*K)$, using Step 7 to compare with any chosen target model charts. The generator equation in Step 5 proves section preservation. Naturality in derived isomorphisms is the same equivariance equation with $u$ in place of a transition. On three affine model charts, the two comparisons for a composite pullback are $s_{h^*P}h^*s_P$ and $s_P$ for the composite scalar extension, identified by the exterior associativity equation and the fixed normalized derived coherence. For an identity map the exterior comparison is the identity. Equality on affine covers proves all these diagrams globally, without a flatness assumption on $h$.",
+   "uses": [
+    "lem-trf-two-term-perfect-tor-window",
+    "lem-trf-affine-two-term-determinant",
+    "def-trf-affine-determinant-interfaces",
+    "lem-trf-projective-exterior-scalar-comparisons",
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-trf-two-term-determinant-pullback-coherence",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0FJY (remark-functorial-det), construction of the global pullback map from the exterior scalar maps and their equivariance."
+   }
+  },
+  {
+   "text": "For a termwise isomorphism $u:P\\to Q$, its kernel is zero. The kernel-first normalization formula therefore identifies its determinant action with $y\\mapsto(\\det u^1)y(\\det u^0)^{-1}$, with the degrees now $0,1$. This follows directly from the zero-kernel exact-sequence wedge maps, with their empty kernel wedge equal to $1$. Apply this to multiplication by a unit $a$ on both terms of a rank-zero model of common rank $r$. Multilinearity gives $\\bigwedge^r(a\\,1)=a^r1$, so the action is $a^r a^{-r}=1$. The affine determinant theorem identifies this with the derived action, and Step 7 defines the global action by these very affine arrows, so the sheaf separatedness axiom extends the equality from model charts to $D(K)$. Thus every such scalar acts by the identity on the pair, even when $\\delta_K=0$.",
+   "uses": [
+    "lem-trf-affine-two-term-determinant",
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-trf-projective-determinant-exact-sequence",
+    "def-sc-sheaf-exterior-power",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), kernel-normalized comparison; Tag 0FJ9 (section-determinants), top exterior scalar action."
+   }
+  },
+  {
+   "text": "Let $N$ be invertible. On an open where it has a generator $n$, the map $x\\otimes n\\mapsto x$ identifies $K\\otimes N$ with $K$ in the derived category. Tensoring by $N$ preserves quasi-isomorphisms: locally this functor is the identity, so its cohomology maps are the same maps; in particular this is the ordinary and derived twist. Apply the functor on pairs already obtained to this local isomorphism. If $n'=a n$, the new map is $a^{-1}$ times the old map, and Step 9 says these induce the same map of determinant pairs. They consequently glue to a canonical isomorphism $(D(K\\otimes N),\\delta_{K\\otimes N})\\simeq(D(K),\\delta_K)$; inverses glue as well. In a model, $\\det(E^i\\otimes N)\\simeq\\det E^i\\otimes N^{\\otimes r}$ sends the wedge of the $e_j\\otimes n$ to $(\\bigwedge e_j)\\otimes n^{\\otimes r}$. Cancelling the two $n^{\\otimes r}$ factors gives exactly this glued map and preserves $\\bigwedge^r d$. Changing the generator multiplies both factors by the same $a^r$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-sc-sheaf-exterior-power",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJ9 (section-determinants), local exterior formula and rank-zero line-twist cancellation; agent-written extension of perfect.tex Tags 0FJX--0FJY."
+   }
+  },
+  {
+   "text": "The twist comparisons are natural also in derived isomorphisms of $K$: with $n$ fixed, $\\tau_n:K\\otimes N\\to K$ satisfies $u\\tau_n=\\tau_n(u\\otimes1)$, and the functor on pairs preserves this equation. For an isomorphism $v:N\\to N'$, choose generators $n,n'$ and write $v(n)=a n'$. The analogous square differs from the identity square by multiplication by $a$, whose determinant action is the identity by Step 9. For two twists, the generator $n\\otimes m$ gives $\\tau_{n\\otimes m}=\\tau_n\\circ(\\tau_m\\text{ on the second twist})$ after the ordinary tensor associator. Functoriality gives precisely the required product and unit comparisons. Finally $h^*n$ generates $h^*N$, and the pullback of $\\tau_n$ is $\\tau_{h^*n}$. Naturality of the pair comparison in Step 8 gives the base-change square. All equations are local on the indicated trivializations and hence hold globally by sheaf separatedness.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0FJY (remark-functorial-det) and the preceding local-generator construction; agent-written coherence checks."
+   }
+  },
+  {
+   "text": "On a field-valued fibre choose bases of its two vector spaces of common finite rank $r$. Base change in Step 8 identifies the section with $\\det(d)$ times the displayed basis of the determinant line. Identify both vector spaces with the same $k^r$; the determinant-nonvanishing criterion for endomorphisms says that this coefficient is nonzero exactly when $d$ is bijective. The two-term cohomology is $\\ker d$ in degree $0$ and $\\operatorname{coker}d$ in degree $1$, so this is exactly acyclicity. For $r=0$ the differential of the zero object is an isomorphism and the empty determinant is $1$, consistent with this criterion. The argument also covers the empty scheme (unique sheaf data, no field-valued fibres), varying locally constant ranks, and characteristic two.",
+   "uses": [
+    "lem-weil-endomorphism-invertible-iff-det-nonzero",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), canonical element is a trivialization iff the two-term model is acyclic; field specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-trf-two-term-perfect-tor-window",
+  "lem-trf-two-term-determinant-pullback-coherence",
+  "lem-trf-affine-two-term-determinant",
+  "def-trf-affine-determinant-interfaces",
+  "def-sc-sheaf-exterior-power",
+  "def-sc-invertible-module",
+  "lem-trf-surjective-two-term-determinant-calculus",
+  "lem-trf-projective-determinant-exact-sequence",
+  "lem-trf-projective-exterior-scalar-comparisons",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-weil-pbc-cover-module-exact",
+  "def-weil-pbc-projective-module",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pe-site-sheaf-gluing",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-endomorphism-invertible-iff-det-nonzero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0FJX and 0FJY, with more-algebra.tex 0FJI--0FJM and sites.tex 04TR; explicit affine gluing of lines, sections, arrows and pullback maps, plus line-twist coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a perfect complex of Euler rank zero in degrees zero and one the determinant of its differential is a canonical section invariant under quasi-isomorphism and tensoring by an invertible module",
+   "results": "Actual search: 8 hits; Algebra.SubmersivePresentation.aevalDifferentialEquiv, LinearMap.det_eq_one_of_finrank_eq_zero, LinearMap.det_def, Module.Free.of_det_ne_one, LinearMap.det_eq_one_of_not_module_finite, LinearMap.detAux_def, LinearMap.det_ring, LinearMap.coe_det",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary determinants, module pullback coherence and ring Picard groups do not provide the canonical section on derived rank-zero complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "determinant.*cohomology|determinant.*[Ss]ection|theta.?divisor",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary determinants, module pullback coherence and ring Picard groups do not provide the canonical section on derived rank-zero complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The determinant section of a perfect complex of virtual rank zero commutes with base change and tensoring by a line bundle",
+   "results": "Actual search: 8 hits; LinearMap.det_eq_one_of_finrank_eq_zero, LinearEquiv.det_baseChange, IsBaseChange.det_endHom, LinearMap.det_baseChange, KaehlerDifferential.cotangentComplexBaseChange_tmul, Module.Basis.det_comp_basis, LinearEquiv.det, LinearMap.det_conj",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary determinants, module pullback coherence and ring Picard groups do not provide the canonical section on derived rank-zero complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"det\", \"quasi\"",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary determinants, module pullback coherence and ring Picard groups do not provide the canonical section on derived rank-zero complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rank zero two term perfect complex on a scheme has a determinant section natural under derived isomorphisms and pullback and invariant under line bundle twists",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc, AlgebraicGeometry.Scheme.Modules.pullbackId, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.Scheme.Modules.inv_app, CommRing.Pic.mapAlgebra_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary determinants, module pullback coherence and ring Picard groups do not provide the canonical section on derived rank-zero complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "determinant.*section|determinantLine|det.*twoTerm|det.*quasiIso",
+   "results": "{\"t\": \"2026-10-23T18:13:41Z\", \"tool\": \"grep\", \"query\": \"determinant.*section|determinantLine|det.*twoTerm|det.*quasiIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary determinants, exterior powers and Picard classes, not the derived determinant section and its coherence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The determinant of the differential of a two term perfect complex descends to a canonical section of its determinant line and commutes with base change",
+   "results": "{\"t\": \"2026-10-23T18:13:41Z\", \"tool\": \"leansearch\", \"query\": \"The determinant of the differential of a two term perfect complex descends to a canonical section of its determinant line and commutes with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.det_endHom\", \"LinearMap.det_baseChange\", \"LinearEquiv.det_baseChange\", \"Algebra.PreSubmersivePresentation.baseChange_jacobian\", \"KaehlerDifferential.tensorKaehlerEquivBase\", \"LinearMap.associated_det_comp_equiv\", \"LinearMap.det_toMatrix_eq_det_toMatrix\", \"LinearEquiv.det\"], \"digest\": \"143adfea9e1f396f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary determinants, exterior powers and Picard classes, not the derived determinant section and its coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex of virtual rank zero and Tor amplitude zero to one has a canonical determinant section invariant under derived isomorphisms and tensoring by a line bundle",
+   "results": "{\"t\": \"2026-10-23T18:13:42Z\", \"tool\": \"leanfinder\", \"query\": \"A perfect complex of virtual rank zero and Tor amplitude zero to one has a canonical determinant section invariant under derived isomorphisms and tensoring by a line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.det_eq_one_of_finrank_eq_zero\", \"CommRing.Pic.mk_tensor\", \"CommRing.Pic.mk_eq_one\", \"CommRing.Pic.mapAlgebra_apply\", \"CommRing.Pic.mk\", \"CommRing.Pic.mul_eq_tensor\", \"CommRing.relPic\", \"CommRing.Pic.mk_eq_one_iff\"], \"digest\": \"a040ace0b6b7ead3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary determinants, exterior powers and Picard classes, not the derived determinant section and its coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The top exterior power of the differential of an equal rank complex of finite projective modules is invariant under quasi isomorphism and defines a section of its determinant line",
+   "results": "{\"t\": \"2026-10-23T18:14:58Z\", \"tool\": \"leanfinder\", \"query\": \"The top exterior power of the differential of an equal rank complex of finite projective modules is invariant under quasi isomorphism and defines a section of its determinant line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.exteriorPower\", \"ModuleCat.exteriorPower.iso₀\", \"ModuleCat.exteriorPower.natIso₁\", \"ModuleCat.exteriorPower.natIso₀\", \"exteriorPower.oneEquiv_naturality\", \"ModuleCat.exteriorPower.iso₁\", \"exteriorPower.pairingDual_ιMulti_ιMulti\", \"ModuleCat.exteriorPower.functor\"], \"digest\": \"f96fee99aff91bfa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary determinants, exterior powers and Picard classes, not the derived determinant section and its coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-degree-gminusone-theta",
+  "date": "2026-10-24",
+  "group": "Q146"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative theta autoduality of smooth curve Picard spaces. Supporting input: The degree-g-minus-one Picard torsor and its determinant theta divisor. Supporting input: the determinant SECTION, not just the determinant line, and rank-zero line-twist cancellation in the relative degree-g-minus-one construction.",
+   "via": [
+    "lem-sfb-relative-degree-gminusone-theta",
+    "lem-sfb-relative-jacobian-theta-polarization",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rank-zero-perfect-determinant-section",
+  "worker": "stage1",
+  "summary": "Repair of C3/E5/F: construct D(K) and its section by gluing affine exterior model lines with the kernel-normalized T arrows; construct all global arrows by those same affine arrows, and pullback by the exterior scalar maps with their stated equivariance. The unnormalized global determinant functor and the silent descent output are no longer used. Retained the kernel-first section calculation, scalar cancellation, line-twist coherences, field criterion, statement, searches and blueprint metadata. Twelve steps; no new nodes or Mathlib leaves.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative theta autoduality of smooth curve Picard spaces. Supporting input: The degree-g-minus-one Picard torsor and its determinant theta divisor. Supporting input: the determinant SECTION, not just the determinant line, and rank-zero line-twist cancellation in the relative degree-g-minus-one construction. Current latest sk-thm-sf-ctf-stability-direct-images proof (3) was read; this is the existing auxiliary theta prerequisite, not a replacement of its compactification route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-two-term-perfect-tor-window",
+    "why": "Generic local finite locally free two-term models and preservation under arbitrary derived pullback; no node in the item unit supplies this Tor-window tool."
+   },
+   {
+    "node": "lem-trf-affine-two-term-determinant",
+    "why": "The affine determinant functors explicitly act by kernel-normalized good diagrams and have natural arbitrary scalar extension; these actual affine lines and arrows are the gluing input, not comparisons of an unspecified global functor."
+   },
+   {
+    "node": "lem-trf-surjective-two-term-determinant-calculus",
+    "why": "Generic kernel-normalized comparison and its surjective quasi-isomorphism calculus; used to prove the new section-preservation equation explicitly."
+   },
+   {
+    "node": "lem-trf-projective-determinant-exact-sequence",
+    "why": "Generic kernel-first exact-sequence wedge formula, including empty kernel blocks; used to compute the section and scalar action."
+   },
+   {
+    "node": "lem-trf-projective-exterior-scalar-comparisons",
+    "why": "Generic exterior/dual/evaluation and kernel-first exact-sequence compatibility with arbitrary scalar extension; needed for nonflat base change."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-standard-free-cover",
+    "why": "Generic finite-projective local free cover, needed only for the wedge calculation."
+   },
+   {
+    "node": "lem-weil-pbc-cover-module-exact",
+    "why": "Generic detection of module equality on a finite standard cover; needed only to descend the wedge calculation."
+   },
+   {
+    "node": "lem-trf-two-term-determinant-pullback-coherence",
+    "why": "Normalized identity/composition coherence for the recorded derived pullbacks is the hypothesis of the affine determinant system; used to compare composite pullbacks of models."
+   },
+   {
+    "node": "lem-pc-flat-complex-derived-pullback",
+    "why": "A bounded two-term finite locally free model is flat and computes arbitrary derived pullback termwise; no flatness of the scheme morphism is imposed."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Restriction and the affine derived-pullback/tensor-sheaf comparison identify the pulled-back models used by the affine scalar-extension equation."
+   },
+   {
+    "node": "lem-pe-site-sheaf-gluing",
+    "why": "Generic effective sheaf gluing on a small site is applied only to the ordinary Zariski site; componentwise linear operations then give the desired invertible module."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-two-term-perfect-tor-window",
+  "lem-trf-affine-two-term-determinant",
+  "lem-trf-surjective-two-term-determinant-calculus",
+  "lem-trf-projective-determinant-exact-sequence",
+  "lem-trf-projective-exterior-scalar-comparisons",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-weil-pbc-cover-module-exact",
+  "lem-trf-two-term-determinant-pullback-coherence",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pe-site-sheaf-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-d8642a050",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-d8642a050 (reviewer sub-agent of L); spot-checked: This re-delivery fixes the earlier RETURN (C3/E5/F at old steps 5–7). It no longer uses lem-trf-two-term-perfect-determinant, whose comparisons are not tied to the affine maps. D(K) is now built directly as the sheaf of matching tuples in the exterior lines L(P_i), with transition maps g_ij = T_{α_j^{-1}α_i}. Arrows are defined as T_{β^{-1}uα} and the pullback map as the scalar comparison s_P. Everything used is fixed by statements: lem-trf-affine-two-term-determinant says every derived iso acts by the kernel-normalized good-diagram map; T_a and Γ_a are explicit in the surjective-calculus node; s is explicit in the exterior scalar node. The earlier counterexample (twisting [k→2 k] by −1) no longer applies. I recomputed three steps. Step 3: with bases (k, q̃) and (d_N k, t̃), the kernel parts wedge to zero and δ_P = Γ_a(δ_Q ⊗ δ_N) with sign +1. This fills a real gap in Stacks: 0FJJ applies 0FJC, which needs all vertical maps to be isomorphisms; I checked this in more-algebra.tex. Step 5: B⊗a is still a surjective quasi-isomorphism with split contractible kernel, and the wedge, dual and evaluation compatibilities give s_Q(1⊗T_u) = T_{Lu}s_P; Lu is identified through the flat-complex and affine tilde nodes, with composites handled by the fixed coherence. Step 9: a scalar acts by a^r·a^{-r} = 1. Steps 6–8 check out: the cocycle and section matching follow from functoriality and step 4, chart independence from u = 1, and pullback squares from step 5. Steps 10–12 check out: twist cancellation, the coherences, and det(d) ≠ 0 iff the field fibre is acyclic. The statement, stmt_deps and blueprint fields are identical to live, and the statement agrees with 0FJX/0FJY after the unsigned reindexing. Live and side-live still have the item unsplit, there are no new nodes, no existing node duplicates it, and no SGA is cited. Batch-5: the seven flagged trace-formula citations (tor-window, pullback-coherence, affine two-term determinant, the interfaces definition, surjective calculus, exact sequence, exterior scalar comparisons) are generic determinant algebra and a definition. Their joint closure (896 nodes) contains no trace-formula or Poincaré theorem and no sk-, assume or target node, so all seven flags are accepted. The declared tool_uses are acceptable. Advisory: step 2 could also cite new-q1-exterior-sheaf-affine-unit-bijective and lem-pc-finite-flat-affine-sections-projective; the affine theorem's exterior-family clause already covers this. Maintainer note: lem-trf-two-term-perfect-determinant should itself state the 0FJX affine-local clause. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RankZeroPerfectDeterminantSection",
+  "declaration": "AlgebraicGeometry.exists_rankZeroPerfectDeterminantSectionData",
+  "declarations": [
+   "AlgebraicGeometry.rankZeroDeterminantComplex",
+   "AlgebraicGeometry.rankZeroDeterminantTermMap₀",
+   "AlgebraicGeometry.rankZeroDeterminantTermMap₁",
+   "AlgebraicGeometry.rankZeroTwistModules",
+   "AlgebraicGeometry.rankZeroTwistModules_additive",
+   "AlgebraicGeometry.rankZeroTwistModules_limits",
+   "AlgebraicGeometry.rankZeroTwistModules_colimits",
+   "AlgebraicGeometry.rankZeroModelObject",
+   "AlgebraicGeometry.rankZeroModelMap",
+   "AlgebraicGeometry.rankZeroPullbackAdditive",
+   "AlgebraicGeometry.rankZeroPullbackComplex",
+   "AlgebraicGeometry.rankZeroPullbackCounit",
+   "AlgebraicGeometry.rankZeroTwistPullbackModules",
+   "AlgebraicGeometry.rankZeroTwistPullbackComplex",
+   "AlgebraicGeometry.rankZeroTwist",
+   "AlgebraicGeometry.rankZeroTwistFactors",
+   "AlgebraicGeometry.rankZeroTwistMap",
+   "AlgebraicGeometry.rankZeroTwistTrivialization",
+   "AlgebraicGeometry.rankZeroTwistProduct",
+   "AlgebraicGeometry.rankZeroScalar",
+   "AlgebraicGeometry.IsRankZeroPerfect01",
+   "AlgebraicGeometry.RankZeroPerfect01Core",
+   "AlgebraicGeometry.rankZeroDeterminantValue",
+   "AlgebraicGeometry.rankZeroDeterminantIso",
+   "AlgebraicGeometry.rankZeroPullbackTermMap₀",
+   "AlgebraicGeometry.rankZeroPullbackTermMap₁",
+   "AlgebraicGeometry.RankZeroPerfectDeterminantSectionData",
+   "AlgebraicGeometry.exists_rankZeroPerfectDeterminantSectionData"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RankZeroPerfectDeterminantSection.lean",
+  "statement": "theorem exists_rankZeroPerfectDeterminantSectionData : ∃ κ : TwoTermDeterminantPullbackCoherence.{u, w}, Nonempty (RankZeroPerfectDeterminantSectionData κ)",
+  "branch": "sheaf-dag",
+  "by": "Q79",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of eab8722e1929 H2: the plain coherence structure and retained original counit definitions have their own definition-node attachments. The termwise pullback and counit component are constructed in this module from these definition-owned operations. The coherence existence theorem stays a proof dependency; the uniquely normalized module_pullback_tensor theorem remains a valid statement dependency. The mathematical pair and every normalized comparison clause are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8fb7152fe",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Re-delivery of eab8 (H2 RETURN) repairs both faults: the cotangent helpers are now local defs rankZeroPullbackComplex/rankZeroPullbackCounit, identical to CotangentPresentation.pullbackComplex/pullbackCounit (LciCotangentPresentation.lean:211,515); the plain TwoTermDeterminantPullbackCoherence and RecordedPullbackData/recordedPullbackData/recordedTransportCounit/recordedDerivedPullbackCounit get definition-only existing:true owners (def-sfb-determinant-pullback-coherence-data, def-sfb-recorded-pullback-counit-data); node text matches the fields, no theorem attached, neither node created by another group; stmt_deps now cite them; coherence existence theorem remains in proof_deps. Statement text unchanged; lean.statement verbatim; single sorry. Mechanical finding: lem-weil-pbc-module-pullback-tensor stays, since the item uses Classical.choose of module_pullback_tensor (the constructed iso, unique by its pure-tensor formula; lines 187-189), so the statement genuinely depends on the theorem's conclusion: PASS on that point. Maths reviewed in full previously; unchanged. Not recompiled (no file changed). Minor: branch metadata newtargets-dag vs sheaf-dag; advisory: def-trf-affine-determinant-interfaces should later cite the new coherence-data node."
+ }
+}

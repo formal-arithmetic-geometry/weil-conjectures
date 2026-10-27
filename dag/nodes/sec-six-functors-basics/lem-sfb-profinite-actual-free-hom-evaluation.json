@@ -1,0 +1,145 @@
+{
+ "id": "lem-sfb-profinite-actual-free-hom-evaluation",
+ "kind": "statement",
+ "title": "Counit-normalized free profinite Hom evaluation for the chosen adjoint model",
+ "statement": "Let $A$ be a commutative condensed ring on the coherent profinite site [def-sfb-condensed-equivariant-bar-data], in the fixed compatible universes. Let $A[P]$ be the free internal module on a profinite set $P$ [def-sfb-condensed-free-module-adjunction], and let $H_P$ be the chosen right adjoint $\\operatorname{Mod.ihom}(A[P])$ to $-\\otimes_A A[P]$. Fix the ordinary derived-category convention [sk-def-sfb-derived-categories], and suppose given the normalized equalizer evaluation and resolution data $h$ specified in [lem-sfb-profinite-free-hom-resolution-evaluation]. There is an additive isomorphism, natural in every internal $A$-module $N$, $H_P(N)(S)\\cong N(S\\times P)$ for every profinite $S$, using the explicit Cartesian product. Its forward map restricts $x$ along $\\operatorname{pr}_S$ and then applies the chosen tensor-Hom counit to that restriction tensored with the free generator $[\\operatorname{pr}_P]$. It sends $a x$ to $\\operatorname{pr}_S^*(a)$ times the image of $x$, for $a\\in A(S)$. Restriction in the test object is pullback along $(s',p)\\mapsto(v(s'),p)$ for every continuous $v:S'\\to S$. Precomposition in the parameter by the adjoint mate of the free-module map $A[P']\\to A[P]$ induced by a continuous $v:P'\\to P$ is pullback along $(s,p')\\mapsto(s,v(p'))$. Empty profinite spaces and zero modules are included. No analytic or derived-acyclicity hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EO, lemma-internal-hom-adjoint-tensor; free-generator normalization in parent proof steps 1 and 3."
+ },
+ "stmt_deps": [
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-condensed-free-module-adjunction",
+  "lem-sfb-profinite-free-hom-resolution-evaluation",
+  "sk-def-sfb-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "For each profinite P, both the chosen right adjoint H_P and the equalizer functor H′_P of [lem-sfb-profinite-free-hom-resolution-evaluation] are right adjoint to the same relative tensor functor - tensor_A A[P]. Uniqueness of right adjoints gives a natural isomorphism c_P:H_P to H′_P. Its counit equation says tensor(c_P) followed by the equalizer counit equals the chosen counit. Whisker c_P by evaluation at S and compose with the supplied equalizer evaluation isomorphism, obtaining H_P(N)(S) isomorphic to N(S times P). Restrict along the canonical isomorphism from the explicit Cartesian product to the categorical product. This defines every map of ActualEvaluation, with inverse the composite of the three inverse isomorphisms.",
+   "uses": [
+    "lem-sfb-profinite-free-hom-resolution-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EO, lemma-internal-hom-adjoint-tensor; free-generator normalization in parent proof steps 1 and 3."
+   }
+  },
+  {
+   "text": "Evaluate the counit equation from step 1 on the tensor of the restriction of x along the first projection and the free generator of the second projection. The tautological equation in [lem-sfb-profinite-free-hom-resolution-evaluation] identifies the result with actualValue. The c_P components are module morphisms, hence their section maps preserve scalar multiplication. The scalar equation of the equalizer evaluation therefore becomes the asserted action through the first projection. Naturality of c_P in N supplies naturality in the module argument.",
+   "uses": [
+    "lem-sfb-profinite-free-hom-resolution-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EO, lemma-internal-hom-adjoint-tensor; free-generator normalization in parent proof steps 1 and 3."
+   }
+  },
+  {
+   "text": "Apply naturality of the underlying sheaf map c_P to a test map S′ to S, then use the equalizer restriction equation. Both product identifications commute with their projections, so this is restriction by (s′,p) mapped to (v(s′),p). For a parameter map P′ to P, the two composites of c_P with the precomposition mates are equal: uncurrying them and using the counit equation gives the same tensor map, and the adjunction Hom bijection is injective. The equalizer parameter equation therefore gives restriction by (s,p′) mapped to (s,v(p′)). These equations hold for zero modules and empty profinite spaces as well; no division, choice of point, completeness, or cohomological vanishing occurs.",
+   "uses": [
+    "lem-sfb-profinite-free-hom-resolution-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EO, lemma-internal-hom-adjoint-tensor; free-generator normalization in parent proof steps 1 and 3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-profinite-free-hom-resolution-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EO, lemma-internal-hom-adjoint-tensor; free-generator normalization in parent proof steps 1 and 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of right adjoints identifies their counits and evaluation natural transformations",
+   "results": "CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit in Mathlib.CategoryTheory.Adjunction.Unique; provides the counit equation but not the profinite free-generator evaluation or its scalar and parameter laws.",
+   "date": "2026-10-26",
+   "verdict": "no match for the full normalized profinite comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointUniq\", \"counit\"",
+   "results": "Four counit compatibility lemmas in Mathlib.CategoryTheory.Adjunction.Unique, including rightAdjointUniq_hom_app_counit and its reassociation; no free profinite evaluation.",
+   "date": "2026-10-26",
+   "verdict": "no match for the full normalized profinite comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq_hom_app_counit|homEquiv_symm_rightAdjointUniq_hom_app",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean:105,127; Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean:355.",
+   "date": "2026-10-26",
+   "verdict": "no match for the full normalized profinite comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.NormedScalarProfiniteHomAcyclic",
+  "date": "2026-10-26",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), free-generator internal Hom evaluation in parent proof steps 1 and 3; transport between the equalizer and chosen adjoint models.",
+   "via": [
+    "lem-sfb-normed-scalar-profinite-hom-acyclic",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ProfiniteActualFreeHomEvaluation",
+  "file": "lean/Sheaf/CategoryTheory/ProfiniteActualFreeHomEvaluation.lean",
+  "declaration": "CategoryTheory.CondensedBar.ProfiniteHom.actual_free_hom_evaluation",
+  "declarations": [
+   "CategoryTheory.CondensedBar.ProfiniteHom.actualValue",
+   "CategoryTheory.CondensedBar.ProfiniteHom.ActualEvaluation",
+   "CategoryTheory.CondensedBar.ProfiniteHom.actual_free_hom_evaluation"
+  ],
+  "statement": "theorem actual_free_hom_evaluation (h : Evaluation A) : Nonempty (ActualEvaluation A)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T082243-L-2154380",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T082243-L-2154380",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

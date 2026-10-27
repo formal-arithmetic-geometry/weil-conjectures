@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-open-counit-tensor-action",
+ "kind": "statement",
+ "title": "The inverse open projection respects the counit",
+ "statement": "Let J:C→D be left adjoint to Q:D→C [lem-weil-pbc-adjunction-of-natural-bijection], between symmetric monoidal categories [def-sfb-monoidal-category], and let Q be symmetric strong monoidal [def-sfb-strong-monoidal-functor]. For H,M in D suppose the unit-defined right-coefficient projection k(QM,H):J(QM⊗QH)→J(QM)⊗H is invertible. Then β(H,JQM);k(QM,H)⁻¹;J(β(QM,QH));J(μ(H,M));ε(H⊗M)=H⊗ε(M).",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+  "place": "last paragraph: projection formula on chosen compactifications and the ordered affine-line tower; categorical calculations making coefficient normalization explicit"
+ },
+ "stmt_deps": [
+  "lem-pur-unit-adjunct-tensor-action",
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof": [
+  {
+   "text": "the unit-defined right-coefficient projection satisfies the counit equation\nby transposition and the right triangle identity. Braidedness moves the swap through\nthe tensorator, and counit naturality moves the resulting mapped swap past the\ncounit. The inverse projection cancels and symmetry naturality gives the claimed\nleft-coefficient equation.",
+   "uses": [
+    "lem-pur-unit-adjunct-tensor-action",
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+    "place": "last paragraph: projection formula on chosen compactifications and the ordered affine-line tower; categorical calculations making coefficient normalization explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-unit-adjunct-tensor-action",
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+  "place": "last paragraph: projection formula on chosen compactifications and the ordered affine-line tower; categorical calculations making coefficient normalization explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An iterated tensor pullback and associator source comparison intertwines the canonical projection formula for compact support with the pasted coefficient action along a tower",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; the general identities below are specialized and combined in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\"",
+   "results": "CategoryTheory.Adjunction.mkOfUnitCounit; CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.ext_counit; CategoryTheory.Adjunction.ofNatIsoLeft_counit; CategoryTheory.Adjunction.ofNatIsoRight_counit; CategoryTheory.Adjunction.counit_naturality; CategoryTheory.Adjunction.counit_naturality_assoc; CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; the general identities below are specialized and combined in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap.*counit|counit.*projectionMap",
+   "results": "No matches",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; the general identities below are specialized and combined in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryAffineCounitTensorNormalization",
+  "date": "2026-10-25",
+  "group": "G2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof paragraph 2: composition of the explicit projective-line adjunctions and the same iterated counit for direct sums",
+   "via": [
+    "lem-pur-ordinary-affine-counit-tensor-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OpenCounitTensorAction",
+  "file": "lean/Sheaf/CategoryTheory/OpenCounitTensorAction.lean",
+  "declaration": "CategoryTheory.Adjunction.openCounit_tensorAction",
+  "declarations": [
+   "CategoryTheory.Adjunction.openCounit_tensorAction"
+  ],
+  "statement": "theorem openCounit_tensorAction\n    {C D : Type*} [Category* C] [Category* D]\n    [MonoidalCategory C] [SymmetricCategory C]\n    [MonoidalCategory D] [SymmetricCategory D]\n    {J : C ⥤ D} {Q : D ⥤ C} (adj : J ⊣ Q) [Q.Braided]\n    (H M : D)\n    [IsIso (((adj.projectionMap Q (curriedTensor C) (curriedTensor D)\n      (Functor.LaxMonoidal.μNatTrans Q)).app (Q.obj M)).app H)] :\n    (β_ H (J.obj (Q.obj M))).hom ≫\n      inv (((adj.projectionMap Q (curriedTensor C) (curriedTensor D)\n        (Functor.LaxMonoidal.μNatTrans Q)).app (Q.obj M)).app H) ≫\n      J.map (β_ (Q.obj M) (Q.obj H)).hom ≫\n      J.map (Functor.LaxMonoidal.μ Q H M) ≫ adj.counit.app (H ⊗ M) =\n        H ◁ adj.counit.app M",
+  "statements": [
+   "theorem openCounit_tensorAction\n    {C D : Type*} [Category* C] [Category* D]\n    [MonoidalCategory C] [SymmetricCategory C]\n    [MonoidalCategory D] [SymmetricCategory D]\n    {J : C ⥤ D} {Q : D ⥤ C} (adj : J ⊣ Q) [Q.Braided]\n    (H M : D)\n    [IsIso (((adj.projectionMap Q (curriedTensor C) (curriedTensor D)\n      (Functor.LaxMonoidal.μNatTrans Q)).app (Q.obj M)).app H)] :\n    (β_ H (J.obj (Q.obj M))).hom ≫\n      inv (((adj.projectionMap Q (curriedTensor C) (curriedTensor D)\n        (Functor.LaxMonoidal.μNatTrans Q)).app (Q.obj M)).app H) ≫\n      J.map (β_ (Q.obj M) (Q.obj H)).hom ≫\n      J.map (Functor.LaxMonoidal.μ Q H M) ≫ adj.counit.app (H ⊗ M) =\n        H ◁ adj.counit.app M"
+  ],
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e2b21",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T204611-L-2980818",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e2b21",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T204611-L-2980818",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to clone; the 5 moved defs byte-identical in OrdinaryAffineCounitTensorMaps (public re-export, 0 importers); 3 sorry holes checked against OrdinaryFiniteP1Datum.counit_normalization, derivedOpenImmersionLowerShriekProjectionMap (= adjunction projectionMap) and the canonical compact-support compositor lemmas; #print axioms of item, tower, line and the 5 categorical lemmas on a scratch build"
+ }
+}

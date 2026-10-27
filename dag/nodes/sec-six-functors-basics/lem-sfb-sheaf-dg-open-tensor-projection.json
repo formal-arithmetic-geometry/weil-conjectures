@@ -1,0 +1,325 @@
+{
+ "id": "lem-sfb-sheaf-dg-open-tensor-projection",
+ "kind": "statement",
+ "title": "Balanced sheaf dg tensor commutes with open extension by zero",
+ "statement": "Fix universes as in [def-weil-size-convention]. Let $X$ be a topological space, $\\mathcal S$ a sheaf of commutative rings, and $\\mathcal A$ a sheaf of associative unital dg $\\mathcal S$-algebras. Use the sheafified balanced direct-sum total tensor, left-module signs and dg modules of [def-sfb-sheaf-dg-module-localization]. A right module has $d(ma)=d(m)a+(-1)^{|m|}m\\,d(a)$. Let $j:U\\hookrightarrow X$ be any open inclusion and $j_!$ termwise extension by zero, with its dg action and canonical counit, as in [lem-sfb-sheaf-dg-open-extension-calculus] (for right modules use the graded opposite algebra). Write $\\mathcal A_U=\\mathcal A|_U$.\n\nFor every right dg $\\mathcal A_U$-module $L$ and left dg $\\mathcal A$-module $N$, and every right dg $\\mathcal A$-module $M$ and left dg $\\mathcal A_U$-module $H$, the maps induced by the balanced tensor pairings give natural isomorphisms of complexes of $\\mathcal S$-module sheaves\n$$j_!L\\otimes_{\\mathcal A}N\\simeq j_!(L\\otimes_{\\mathcal A_U}N|_U),\\qquad M\\otimes_{\\mathcal A}j_!H\\simeq j_!(M|_U\\otimes_{\\mathcal A_U}H).$$\nOn $U$ these maps identify the same pure tensors, and outside $U$ their stalks are the maps between zero objects. If $M$ additionally carries a commuting left action of a sheaf dg $\\mathcal S$-algebra $\\mathcal B$ (so it is a dg $(\\mathcal B,\\mathcal A)$-bimodule), the second isomorphism is an isomorphism of left dg $\\mathcal B$-modules with the action on the first tensor factor. The isomorphisms commute with open restriction, nested extension by zero and the counits to ambient tensors. The same assertions hold for graded modules and graded balanced tensors, with differentials omitted. No flatness, boundedness or commutativity of $\\mathcal A$ is assumed; $U$ may be empty.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tags 0FRB (lemma-tensor-with-extension-by-zero) and 0FRX (lemma-tensor-with-extension-by-zero-dg), and their left-module/opposite-algebra versions; retaining an additional commuting left dg action is the action-compatible form of these same canonical tensor identifications."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-sheaf-dg-module-localization",
+  "lem-sfb-sheaf-dg-open-extension-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Write $J=j_!$ on ordinary $\\mathcal S_U$-modules. The degreewise underlying sheaves of the dg extension $j_!$ are these ordinary extensions by zero, by [lem-sfb-sheaf-dg-open-extension-calculus]. Apply [lem-sc-derived-open-restriction-adjunction-exact] to the ringed space $(X,\\mathcal S)$: $J$ is additive and left adjoint to open restriction. By [lem-weil-pbc-left-adjoint-preserves-colimits], it preserves all the direct sums and cokernels below, including their structure maps. The indexing sets $\\{(p,q):p+q=n\\}$ and $\\{(r,s,t):r+s+t=n\\}$ are small in the fixed universes; cokernels are coequalizers of a map and zero, and additivity preserves that zero. Thus the preservation theorem applies to these actual presentations, with no boundedness assumption.",
+   "uses": [
+    "lem-sfb-sheaf-dg-open-extension-calculus",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero); sdga Tag 0FRB (lemma-tensor-with-extension-by-zero), last sentence of proof"
+   }
+  },
+  {
+   "text": "For ordinary module sheaves $F$ on $U$ and $G$ on $X$, apply [lem-sf-ringed-slice-tensor-generators] to the small site of opens of $X$ and its object $U$. Its slice is the open site of $U$, with the same restricted coefficient sheaf. It supplies the natural isomorphism $\\psi_{F,G}:JF\\otimes_{\\mathcal S}G\\to J(F\\otimes_{\\mathcal S_U}G|_U)$ and its inverse, with the specified rule $[f]\\otimes g\\mapsto[f\\otimes g|_U]$. Brackets denote the sheafification images of extension-presheaf sections, not arbitrary global representatives. Iterating $\\psi$, first on $JL^r\\otimes\\mathcal A^s$ and then tensoring with $N^t$, identifies $(JL^r\\otimes\\mathcal A^s)\\otimes N^t$ with $J((L^r\\otimes\\mathcal A_U^s)\\otimes N_U^t)$. Associating ordinary $\\mathcal S$-tensors introduces no sign: both associations represent trilinear maps, by applying [lem-pc-sites-sheaf-tensor-bilinear-universal] twice. The inverse preserves the same ordered triples.",
+   "uses": [
+    "lem-sf-ringed-slice-tensor-generators",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I (lemma-j-shriek-and-tensor), generator-normalized form; sdga Tag 0FRB"
+   }
+  },
+  {
+   "text": "Use the balanced sheaf tensor of [def-sfb-sheaf-dg-module-localization]. For any right graded $P$ and left graded $Q$, its degree $n$ is $\\operatorname{coker}\\rho_n$, where $\\rho_n:\\bigoplus_{r+s+t=n}(P^r\\otimes_{\\mathcal S}\\mathcal A^s)\\otimes_{\\mathcal S}Q^t\\to\\bigoplus_{p+q=n}P^p\\otimes_{\\mathcal S}Q^q$ sends $p\\otimes a\\otimes q$ to $pa\\otimes q-p\\otimes aq$. Indeed maps from this cokernel are exactly families of bilinear pairings annihilating these relations, which is the defining sheafified balanced tensor universal property. For $P=JL,Q=N$, step 2 identifies both sums with $J$ of their counterparts on $U$. The two arrows of the balancing relation separately become $[la\\otimes n]$ and $[l\\otimes an]$, since extension actions extend the given action on $U$. Their difference is therefore $J\\rho_{U,n}$. Step 1 identifies its cokernel with $J(\\operatorname{coker}\\rho_{U,n})$. These are inverse degreewise maps induced by the stated pairings, proving the first graded formula, with the identity on ordered pure tensors on $U$.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "lem-sfb-sheaf-dg-open-extension-calculus",
+    "lem-sf-ringed-slice-tensor-generators",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FRB (lemma-tensor-with-extension-by-zero), both displayed cokernel presentations; section-tensor-product"
+   }
+  },
+  {
+   "text": "Construct the ordinary second-slot comparison without commuting the algebra $\\mathcal A$. Over the commutative base $\\mathcal S$, the bilinear map $g\\otimes f\\mapsto f\\otimes g$ has an inverse of the same form by [lem-pc-sites-sheaf-tensor-bilinear-universal]. Compose this flip, $\\psi_{F,G}$ of [lem-sf-ringed-slice-tensor-generators], and $J$ of the flip to get $\\chi_{G,F}:G\\otimes JF\\cong J(G_U\\otimes F)$, carrying $g\\otimes[f]$ to $[g_U\\otimes f]$. These are ordinary degreewise $\\mathcal S$-tensors, so the auxiliary flips have no Koszul sign. Apply $\\chi$ first to $\\mathcal A^s\\otimes JH^t$ and then to $M^r$ tensor that extension. On the triple relation the two arrows become $[ma\\otimes h]$ and $[m\\otimes ah]$. Applying step 1 to the cokernel presentation in step 3 gives $M\\otimes_{\\mathcal A}JH\\cong J(M_U\\otimes_{\\mathcal A_U}H)$ as graded sheaves. At no point were a right and left $\\mathcal A$-module interchanged.",
+   "uses": [
+    "lem-sf-ringed-slice-tensor-generators",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FRB (lemma-tensor-with-extension-by-zero), same cokernel argument with extension in the second slot"
+   }
+  },
+  {
+   "text": "For homogeneous $p,a,q$ with $|p|=r$ and $|a|=s$, let $\\rho(p,a,q)=pa\\otimes q-p\\otimes aq$. The right and left Leibniz rules and the differential in [def-sfb-sheaf-dg-module-localization] give\n$$d\\rho(p,a,q)=\\rho(dp,a,q)+(-1)^r\\rho(p,da,q)+(-1)^{r+s}\\rho(p,a,dq).$$\nThus $d$ descends through the balanced relations. Its square on $p\\otimes q$ is $d^2p\\otimes q+((-1)^{r+1}+(-1)^r)dp\\otimes dq+p\\otimes d^2q=0$. For either graded comparison $\\gamma$ of steps 3 and 4, applying $d\\gamma$ or $\\gamma d$ to an ordered generator gives exactly $[dp\\otimes q+(-1)^rp\\otimes dq]$, with the corresponding factor extended. Extension is degreewise and carries $d$ to $Jd$ by [lem-sfb-sheaf-dg-open-extension-calculus]. Tensor, coproduct and cokernel universal properties then give equality of the sheaf maps. Hence both comparisons are chain isomorphisms: their degreewise inverses commute with $d$ by composing the chain-map identity with the inverses.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "lem-sfb-sheaf-dg-open-extension-calculus",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FRX (lemma-tensor-with-extension-by-zero-dg), omitted differential verification; section-tensor-product-dg, displayed Leibniz computation"
+   }
+  },
+  {
+   "text": "For the extra dg $(\\mathcal B,\\mathcal A)$-bimodule structure on $M$, put $b\\cdot(m\\otimes h)=(bm)\\otimes h$. The balancing relation is preserved because $(bm)a=b(ma)$, so its image is $bma\\otimes h-bm\\otimes ah$. Associativity and the unit follow from those of the left action on $M$. For $|b|=u,|m|=r$,\n$$d((bm)\\otimes h)=(db)m\\otimes h+(-1)^ub(dm)\\otimes h+(-1)^{u+r}bm\\otimes dh=(db)\\cdot(m\\otimes h)+(-1)^ub\\cdot d(m\\otimes h).$$\nThe second projection comparison takes $(bm)\\otimes[h]$ to $[(b|_U m)\\otimes h]$, which is precisely the extended $\\mathcal B$-action on its output. Therefore it and its inverse are $\\mathcal B$-linear dg maps. Only a commuting left action is used, never graded commutativity of either algebra.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "lem-sfb-sheaf-dg-open-extension-calculus",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FRX (lemma-tensor-with-extension-by-zero-dg), action-compatible refinement; section-dg-bimodules"
+   }
+  },
+  {
+   "text": "Naturality follows before taking cokernels: for maps $f$ of the first factor and $g$ of the second, either composite sends an ordered generator to $[f(p)\\otimes g(q)]$. This is also the naturality of the ordinary comparisons in [lem-sf-ringed-slice-tensor-generators]. The induced maps on sums and cokernels are consequently natural, and so are their inverses. On $U$, the unit identification of [lem-sfb-sheaf-dg-open-extension-calculus] identifies each extension with the original sheaf and both projection maps with the identity on pure tensors; hence with the identity sheaf map by the tensor and quotient universal properties. Outside $U$, each right-hand complex is termwise an extension by zero, so has zero stalk in every degree by that same calculus. The degreewise isomorphisms already proved force the left-hand stalks to be zero too. The stalk maps are therefore the unique maps between zero objects. This argument requires no theorem commuting noncommutative balanced dg tensor with stalks.",
+   "uses": [
+    "lem-sf-ringed-slice-tensor-generators",
+    "lem-sfb-sheaf-dg-open-extension-calculus",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FRB and 0FRX, functoriality and normalization of the displayed identifications"
+   }
+  },
+  {
+   "text": "Let $k:V\\hookrightarrow X$, $T=U\\cap V$, and $j':T\\hookrightarrow V$. On the open sites the inclusion of opens of $V$ is continuous and cocontinuous: a covering of an open contained in $V$ consists of opens still contained in $V$, with the identical union. Thus [lem-weil-pbc-module-sheafification-restriction] identifies restriction of each sheafified tensor presentation with the sheafification of its restricted presentation, preserving the original unit sections. The direct-sum and balanced-quotient presheaf formulas are the same on every open of $V$, so this gives the required restriction identifications for both tensors. Use also $k^*j_!\\cong j'_!(-|_T)$ from [lem-sfb-sheaf-dg-open-extension-calculus]. After these identifications, restricting either projection map gives the projection for $j'$, since both send the original ordered pair to that same pair on $T$. The unit-section equality criterion in the sheafification-restriction node gives equality of the resulting sheaf maps. Differential compatibility was checked in step 5.",
+   "uses": [
+    "lem-weil-pbc-module-sheafification-restriction",
+    "lem-sfb-sheaf-dg-open-extension-calculus",
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04B8 (lemma-almost-cocontinuous-sheafification); sdga Tags 0FRB and 0FRX, restriction of the explicit tensor maps"
+   }
+  },
+  {
+   "text": "For nested opens $W\\xrightarrow{i}U\\xrightarrow{j}X$, compare the projection for $ji$ with the composite of the two projections and the compositor $(ji)_!\\cong j_!i_!$ from [lem-sfb-sheaf-dg-open-extension-calculus]. By steps 3 and 4, the source is degreewise an extension from $W$. The ordinary adjunction of [lem-sc-derived-open-restriction-adjunction-exact] implies that two maps from this source agree if their restrictions to $W$, composed with the unit, agree. Both composites there are the identity on the same ordered pure tensor, including the unit-normalized compositor. Hence they agree in every degree. This also proves coherence for further nested opens. For an ambient right module $P$ and left module $Q$, writing $\\varepsilon$ for the extension counit, the two counit compatibilities are\n$$\\varepsilon_{P\\otimes_{\\mathcal A}Q}\\gamma_1=\\varepsilon_P\\otimes1_Q,\\qquad \\varepsilon_{P\\otimes_{\\mathcal A}Q}\\gamma_2=1_P\\otimes\\varepsilon_Q,$$\nwhere $\\gamma_1$ is evaluated at $(P|_U,Q)$ and $\\gamma_2$ at $(P,Q|_U)$. Each source is degreewise an extension from $U$ by the formulas proved above. Under the ordinary adjunction both sides restrict to $p\\otimes q\\mapsto p\\otimes q$, since the counits restrict to the identity. Thus these are equalities of actual chain maps. Naturality gives the versions with a supplied map to an ambient factor.",
+   "uses": [
+    "lem-sfb-sheaf-dg-open-extension-calculus",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FRB and 0FRX, canonical pairing refinements; sites-modules Tag 03DI, uniqueness under the open adjunction"
+   }
+  },
+  {
+   "text": "Steps 1--4 and 7--9 use only graded components, actions, sheaf maps and universal properties; deleting the differentials gives the asserted graded versions with the same normalizations and coherences. The construction never asks tensor to preserve a kernel or a quasi-isomorphism: only extension of sums and cokernels is used. It therefore imposes no flatness, boundedness or commutativity hypothesis on $\\mathcal A$. For $U=\\varnothing$, extension by zero is zero degreewise by [lem-sfb-sheaf-dg-open-extension-calculus], so all displayed maps are the unique isomorphisms of zero complexes. For $U=X$ the maps are identities, as their pure-tensor formulas show.",
+   "uses": [
+    "lem-sfb-sheaf-dg-open-extension-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FRB and 0FRX, scope and graded/dg comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-sheaf-dg-open-extension-calculus",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sf-ringed-slice-tensor-generators",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-sfb-sheaf-dg-module-localization",
+  "lem-weil-pbc-module-sheafification-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tags 0FRB (lemma-tensor-with-extension-by-zero) and 0FRX (lemma-tensor-with-extension-by-zero-dg); explicit second-slot, differential, bimodule and coherence checks supplied here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|homotopicallyFlat",
+   "results": "{\"t\": \"2026-10-24T08:56:21Z\", \"tool\": \"grep\", \"query\": \"extensionByZero|extension_by_zero|homotopicallyFlat\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary modules over a commutative ring, scheme module restriction, graded commutativity, or extension of the indexing shape of a complex; none gives balanced sheaf dg tensor with open extension by zero"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of sheaf differential graded modules commutes with balanced tensor and preserves graded flat homotopically flat resolutions",
+   "results": "{\"t\": \"2026-10-24T08:56:21Z\", \"tool\": \"leansearch\", \"query\": \"Extension by zero of sheaf differential graded modules commutes with balanced tensor and preserves graded flat homotopically flat resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.gradedComm_of_zero_tmul\", \"TensorProduct.gradedComm_tmul_of_zero\", \"HomologicalComplex.extendMap_zero\", \"HomologicalComplex.extend.d\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero\", \"CategoryTheory.ProjectiveResolution.extMk_zero\", \"HomologicalComplex.extend.d_none_eq_zero'\", \"HomologicalComplex.extend.d_none_eq_zero\"], \"digest\": \"fe74e55119b3c60b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary modules over a commutative ring, scheme module restriction, graded commutativity, or extension of the indexing shape of a complex; none gives balanced sheaf dg tensor with open extension by zero"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-24T08:56:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"extensionByZero\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary modules over a commutative ring, scheme module restriction, graded commutativity, or extension of the indexing shape of a complex; none gives balanced sheaf dg tensor with open extension by zero"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with tensor products of sheaves of differential graded modules and preserves homotopically flat graded flat dg modules",
+   "results": "{\"t\": \"2026-10-24T08:56:25Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero commutes with tensor products of sheaves of differential graded modules and preserves homotopically flat graded flat dg modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.instHasTensorXTensorUnit_1\", \"HomologicalComplex.HasGoodTensor₁₂\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\"], \"digest\": \"ae868b055349385e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary modules over a commutative ring, scheme module restriction, graded commutativity, or extension of the indexing shape of a complex; none gives balanced sheaf dg tensor with open extension by zero"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for an open immersion and arbitrary dg bimodule, including extension by zero of K flat sheaf dg modules",
+   "results": "{\"t\": \"2026-10-24T08:56:28Z\", \"tool\": \"leanfinder\", \"query\": \"Projection formula for an open immersion and arbitrary dg bimodule, including extension by zero of K flat sheaf dg modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_apply\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.invApp_app_apply\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app'\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\"], \"digest\": \"4b9afcdd438f83b9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary modules over a commutative ring, scheme module restriction, graded commutativity, or extension of the indexing shape of a complex; none gives balanced sheaf dg tensor with open extension by zero"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|homotopicallyFlat",
+   "results": "{\"t\": \"2026-10-24T08:58:34Z\", \"tool\": \"grep\", \"query\": \"extensionByZero|extension_by_zero|homotopicallyFlat\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary modules over a commutative ring, scheme module restriction, graded commutativity, or extension of the indexing shape of a complex; none gives balanced sheaf dg tensor with open extension by zero"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|jShriek",
+   "results": "{\"t\": \"2026-10-24T09:25:38Z\", \"tool\": \"grep\", \"query\": \"extensionByZero|extension_by_zero|jShriek\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results give Cartesian sheaf products, ordinary total tensors, sheafification scalar rules or scheme open restriction, not balanced sheaf dg tensor with extension by zero"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-24T09:25:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"extensionByZero\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results give Cartesian sheaf products, ordinary total tensors, sheafification scalar rules or scheme open restriction, not balanced sheaf dg tensor with extension by zero"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula for extension by zero of sheaves of modules and tensor product over a sheaf of graded noncommutative algebras",
+   "results": "{\"t\": \"2026-10-24T09:25:38Z\", \"tool\": \"leansearch\", \"query\": \"Projection formula for extension by zero of sheaves of modules and tensor product over a sheaf of graded noncommutative algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.gradedComm_of_zero_tmul\", \"GradedTensorProduct.tmul_coe_mul_zero_coe_tmul\", \"AlgebraicGeometry.Proj.awayι_toSpecZero_assoc\", \"PresheafOfModules.Sheafify.smul_zero\", \"GradedRing.projZeroRingHom\", \"AlgebraicGeometry.Proj.mul_apply\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc\"], \"digest\": \"ff2de540a2d465a0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results give Cartesian sheaf products, ordinary total tensors, sheafification scalar rules or scheme open restriction, not balanced sheaf dg tensor with extension by zero"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of associative differential graded algebras, balanced tensor product commutes with extension by zero along an open inclusion",
+   "results": "{\"t\": \"2026-10-24T09:25:40Z\", \"tool\": \"leanfinder\", \"query\": \"For a sheaf of associative differential graded algebras, balanced tensor product commutes with extension by zero along an open inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"HomologicalComplex.ιTensorObj\", \"CategoryTheory.Sheaf.monoidalCategory\", \"HomologicalComplex.instHasTensorXTensorUnit_1\", \"HomologicalComplex.unit_tensor_d₁\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\"], \"digest\": \"6519d8a6e74fb55c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results give Cartesian sheaf products, ordinary total tensors, sheafification scalar rules or scheme open restriction, not balanced sheaf dg tensor with extension by zero"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open immersion extension by zero projection formula for tensor products of module sheaves on a ringed topological space",
+   "results": "{\"t\": \"2026-10-24T09:27:28Z\", \"tool\": \"leanfinder\", \"query\": \"Open immersion extension by zero projection formula for tensor products of module sheaves on a ringed topological space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.toOpen_res\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_apply\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app'\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app\"], \"digest\": \"17d45d8713a74dc7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results give Cartesian sheaf products, ordinary total tensors, sheafification scalar rules or scheme open restriction, not balanced sheaf dg tensor with extension by zero"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sheaf-dg-open-hom-mayer-vietoris",
+  "date": "2026-10-24",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Uniform Mayer--Vietoris locality step: the predicate on each open covers all perfect sources, ordinary targets, integer cutoffs and arrows surjective on cohomology above the cutoff; conditional on this full predicate on both opens and their intersection. Independent prerequisite: finite coefficient descent of the perfect sheaf dg source, before transposing the arrow to an ordinary coherent object. Morphisms and eventual equalities on the overlap, before binary sheaf dg gluing. Independent sheaf dg Mayer--Vietoris input for the Hom-continuity argument, including scalar-extension naturality of its boundary. Tensor prerequisite: the graded and dg open-extension projection formulas, before deriving coefficient extension.",
+   "via": [
+    "lem-sfb-sheaf-dg-open-hom-mayer-vietoris",
+    "lem-sfb-perfect-sheaf-dg-hom-continuity",
+    "lem-sfb-perfect-sheaf-dg-finite-stage-descent",
+    "lem-sfb-perfect-arrow-coherent-factorization-locality",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sheaf-dg-open-tensor-projection",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies. Expanded the graded balancing-cokernel argument of 0FRB and the differential check omitted in 0FRX, using existing generator-normalized ordinary projection and open-extension nodes. Wrote both slots without commuting the noncommutative algebra, checked the extra left action and restriction/composition/counit coherences, and tested empty, identity and unbounded cases. No new nodes or Lean files.",
+  "blueprint": "Read the latest sec-six-functors-basics/sk-thm-sf-ctf-stability unit and its direct-images proof (3), including its use of (2) for open extension. This tensor prerequisite belongs to the inherited dg Hom Mayer--Vietoris chain supporting that step. blueprint_refs.py ancestor reports None for the inherited creation chain; preserve the existing null ancestor, exact place and via list. Whole-blueprint searches for 0FRB, 0FRX, balanced, graded, dg module and extension by zero found no equivalent sheaf-dg balanced-tensor statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-derived-open-restriction-adjunction-exact",
+    "why": "Ordinary extension-by-zero adjunction on a ringed topological space, for preserving the cokernel presentation and testing equality degreewise; the dg calculus states its adjunction after localization, whereas this argument needs the ordinary module adjunction."
+   },
+   {
+    "node": "lem-sf-ringed-slice-tensor-generators",
+    "why": "Generator-normalized ordinary ringed-site tensor projection, exactly the 0E8I input used by the source 0FRB; applies to each graded component without coefficient or scheme restrictions."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Sheaf tensor bilinear universal property, for ordinary associating/flipping and equality of maps on pure pairings; no same-unit statement supplies this general universal property."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheafification-restriction",
+    "why": "Module sheafification commutes with restriction to an open subsite, with the unit-section equality criterion; used for open restriction of the balanced tensor presentation, not an alternative geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sf-ringed-slice-tensor-generators",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-module-sheafification-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-5aab983fd",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-5aab983fd (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit with the item and report, no new nodes, and the statement and stmt_deps unchanged. It is the item's first split, so the 2026-10-21 re-split rule does not apply. I read sdga.tex section-tensor-product (l.308), 0FRB (l.943), section-tensor-product-dg (l.1443) and 0FRX (l.2119). The ten steps follow the 0FRB cokernel proof through 0E8I (lem-sf-ringed-slice-tensor-generators ψ) and J preserving colimits (ordinary j_!⊣j^{-1} plus the Mathlib leaf 0038). They also supply the differential check that 0FRX omits. I recomputed dρ=ρ(dp,a,q)+(-1)^rρ(p,da,q)+(-1)^{r+s}ρ(p,a,dq), d²=0, and the B-Leibniz identity of step 6. The right-module/A^op sign convention is consistent. The second slot is done by an S-tensor flip with no A-commutation. Restriction (sheafification-restriction, plus k^*j_!≅j'_!k'^* from the calculus), nesting and the counit squares are checked through the ordinary adjunction. Step 8 compares maps on generator sections; this is enough because sections of j_!L are locally [l] or 0. I tested a small case: Sierpinski space with A=M_2(k), and also U=∅ and U=X. The closures of all proof_deps avoid the item, so there is no cycle. No duplicate exists: 0FRB/0FRX occur only in the item and its two citers. I accept the off-unit generic tools in split_report.tool_uses: open-restriction adjunction, ringed-slice tensor generators, bilinear universal property and sheafification-restriction. No SGA is used."
+ }
+}

@@ -1,0 +1,273 @@
+{
+ "id": "lem-sf-equivariant-hom-resolution-calculus",
+ "kind": "statement",
+ "title": "Product Hom homotopies and normalized changes of K-injective resolutions",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories with ordinary derived categories and localizations $Q_{\\mathcal A},Q_{\\mathcal B}$ [def-weil-abstract-derived-category]. Assume $\\mathcal B$ has countable products. Let $H:\\mathcal A^{\\mathrm{op}}\\times\\mathcal A\\to\\mathcal B$ be additive in each variable. On integer-indexed cochain complexes put\n$$\\mathsf H(K,I)^n=\\prod_{p\\in\\mathbf Z}H(K^p,I^{p+n}),\\qquad d(f)=d_I f-(-1)^n f d_K,$$\nwhere composition denotes the corresponding action of $H$. For chain maps $t:K'\\to K$ and $v:I\\to I'$, write $\\mathsf H(t,v)$ for the componentwise induced map. A homotopy from $t$ to $t'$ means degree $-1$ maps $h$ with $t-t'=d_Kh+hd_{K'}$, and similarly for target maps.\n\nThe assignment $\\mathsf H$ is a bifunctor on complexes and descends to their homotopy categories. A source homotopy $h:t\\simeq t'$ induces the degree $-1$ homotopy $f\\mapsto(-1)^n f h$ on degree $n$ terms of $\\mathsf H(K,I)$; a target homotopy $h':v\\simeq v'$ induces $f\\mapsto h'f$. These formulas respect all morphisms of $\\mathcal A$ and $\\mathcal B$ and preserve additional equivariance when $H$, the maps and the homotopies are equivariant.\n\nFor $A\\in\\mathcal A$, set $H_A=H(A,-)$ and let $A[0]$ be concentrated in degree zero. Projection to source degree zero gives a chain isomorphism $\\pi_{A,I}:\\mathsf H(A[0],I)\\xrightarrow{\\sim}H_A(I)$, natural contravariantly in $A$ and covariantly in $I$.\n\nMore generally, let $K,L$ be complexes, let $\\alpha:K\\to J$, $\\beta:L\\to J'$ be quasi-isomorphisms with K-injective $J,J'$, and let $a:K\\to L$ be a chain map. Here K-injective means that all maps from acyclic complexes are null-homotopic. The derived arrow $(Q_{\\mathcal A}\\beta)(Q_{\\mathcal A}a)(Q_{\\mathcal A}\\alpha)^{-1}$ has a representative $u:J\\to J'$, unique up to homotopy, with $u\\alpha\\simeq\\beta a$. For every complex $I$, the square of precomposition maps commutes up to the induced homotopy:\n$$\\mathsf H(\\alpha,1)\\,\\mathsf H(u,1)\\simeq\\mathsf H(a,1)\\,\\mathsf H(\\beta,1).$$\nIt therefore commutes after $Q_{\\mathcal B}$, independently of the representative $u$. For K-injective representatives $I,I'$ of the same derived object, the representative $v:I\\to I'$ of that identification is a homotopy equivalence, and postcomposition by $v$ commutes with these precomposition maps. The resulting changes of representatives satisfy identity and composition laws after localization; the same squares apply to arbitrary derived arrows between K-injective targets. No quasi-isomorphism invariance of $\\mathsf H$ for non-homotopy-equivalent source maps, and no derived-functor comparison, is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X (section-hom-complexes), signed product-Hom differential and equation-cohomology-hom-complex; combined with Tag 070I (derived.tex, lemma-K-injective). Agent-formulated product-Hom homotopy and resolution-square calculus."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Interpret the notation $f^p$ as a product projection, not as an element of an object of $\\mathcal B$. Each displayed component formula below specifies a morphism by the universal property of the countable product. For a homogeneous input of degree $n$, $(Df)^p=d_I^{p+n}f^p-(-1)^nf^{p+1}d_K^p$. Expanding once more gives\n$$ (D^2f)^p=d_I^{p+n+1}d_I^{p+n}f^p-\\bigl((-1)^n+(-1)^{n+1}\\bigr)d_I^{p+n+1}f^{p+1}d_K^p+(-1)^{2n+1}f^{p+2}d_K^{p+1}d_K^p=0.$$\nHere a string means the corresponding actions of $H$; actions in the two variables commute by bifunctoriality. Additivity allows the expansion and sends zero maps to zero. Thus these objects and maps form a cochain complex, with no exactness assumption on products or on $H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes: signed product-Hom differential; the following additive-bifunctor calculations are agent supplied."
+   }
+  },
+  {
+   "text": "For $t:K'\\to K$ and $v:I\\to I'$, set $(Tf)^p=v^{p+n}f^pt^p$, again meaning $H(t^p,v^{p+n})$ on the $p$th factor. The chain-map equations give\n$$D(Tf)^p=v^{p+n+1}d_I^{p+n}f^pt^p-(-1)^nv^{p+n+1}f^{p+1}d_K^pt^p=(T(Df))^p.$$\nThus $T=\\mathsf H(t,v)$ is a chain map. On each product projection, identities act as identities and successive maps act by composing their source maps in the contravariant order and their target maps in the covariant order. This proves the bifunctor laws and the strict equality between first precomposing then postcomposing and first postcomposing then precomposing.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes: signed product-Hom differential; the following additive-bifunctor calculations are agent supplied."
+   }
+  },
+  {
+   "text": "Given $h^p:K'^p\\to K^{p-1}$ with $t-t'=d_Kh+hd_{K'}$, define $S_n$ by $(S_nf)^p=(-1)^nf^{p-1}h^p$. This has output degree $n-1$. Expanding its boundary gives\n$$ (DS_nf)^p=(-1)^nd_I f^{p-1}h^p+f^ph^{p+1}d_{K'}^p,$$\n$$ (S_{n+1}Df)^p=(-1)^{n+1}d_I f^{p-1}h^p+f^pd_K^{p-1}h^p.$$\nThe terms containing $d_I$ cancel, leaving $f^p(t^p-t'^p)$. Hence $DS+SD=\\mathsf H(t,1)-\\mathsf H(t',1)$. This proves exactly the asserted sign $(-1)^n$ for source homotopies, including negative degrees.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes: signed product-Hom differential; the following additive-bifunctor calculations are agent supplied."
+   }
+  },
+  {
+   "text": "For $h'^q:I^q\\to I'^{q-1}$ with $v-v'=d_{I'}h'+h'd_I$, define $(R_nf)^p=h'^{p+n}f^p$. Expansion gives\n$$ (DR_nf)^p=d_{I'}h'f^p+(-1)^nh'f^{p+1}d_K^p,\\qquad (R_{n+1}Df)^p=h'd_If^p-(-1)^nh'f^{p+1}d_K^p.$$\nTheir sum is $(v^{p+n}-v'^{p+n})f^p$, so $DR+RD=\\mathsf H(1,v)-\\mathsf H(1,v')$. For simultaneous changes use these two homotopies in succession, composing with the unchanged chain map in the other variable; the sum of the resulting boundaries is the difference of the two induced maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes: signed product-Hom differential; the following additive-bifunctor calculations are agent supplied."
+   }
+  },
+  {
+   "text": "The preceding two boundary equations show that replacing either input chain map by a homotopic map gives the same morphism in the output homotopy category. The bifunctor therefore factors through homotopy classes in both variables. The localizations in [def-weil-abstract-derived-category] factor through these homotopy categories, so homotopic output maps also have equal $Q_{\\mathcal B}$ images. All equalities were tested on product projections and used only the actions of $H$, addition, and signs. They consequently commute with the given structure maps: if the data carry compatible equivariance, each component of $D,T,S,R$ is equivariant. Product uniqueness makes the assembled maps equivariant too. This assertion concerns equivariant maps and the products carrying their induced action; it does not require an unrelated functor to preserve products.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes: signed product-Hom differential; the following additive-bifunctor calculations are agent supplied."
+   }
+  },
+  {
+   "text": "Since $H$ is additive in its first variable, $1_{H(0,B)}=H(1_0,1_B)=H(0,1_B)=0$, so $H(0,B)$ is a zero object. For $A[0]$, every source factor except $p=0$ is therefore zero. Projection $\\pi_{A,I}^n$ to $p=0$ has inverse given by the identity component at zero and zero components elsewhere. Both composites are identities by product projections. As $d_{A[0]}=0$, the differential on the remaining factor is $H(A,d_I)$; thus projection and its inverse are chain maps. For $b:A'\\to A$ and $v:I\\to I'$, both routes around the projection square in degree $n$ are $H(b,v^n)$. This proves the claimed chain isomorphism and both naturalities, including when $A=0$ or $I=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes: signed product-Hom differential; the following additive-bifunctor calculations are agent supplied."
+   }
+  },
+  {
+   "text": "Put $q=(Q_{\\mathcal A}\\beta)(Q_{\\mathcal A}a)(Q_{\\mathcal A}\\alpha)^{-1}$; the inverse exists because $\\alpha$ is a quasi-isomorphism [def-weil-abstract-derived-category]. By [lem-weil-pbc-kinjective-hom-derived] with target $J'$ and source $J$, $q$ is represented by a unique homotopy class of chain maps $u:J\\to J'$. Functoriality gives $Q_{\\mathcal A}(u\\alpha)=Q_{\\mathcal A}(\\beta a)$. Apply the injectivity part of the same cited bijection with source $K$ and K-injective target $J'$: these chain maps are homotopic. Conversely any map with this homotopy has localized image $q$, by cancelling $Q_{\\mathcal A}\\alpha$, and hence is homotopic to $u$. These applications require K-injectivity of $J'$; the assumed K-injectivity of $J$ is not needed here.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective (3), applied through lem-weil-pbc-kinjective-hom-derived; representative and coherence arguments are agent supplied."
+   }
+  },
+  {
+   "text": "Choose $c$ with $u\\alpha-\\beta a=d_{J'}c+cd_K$. Apply the source-homotopy formula of step 3 to these two maps $K\\to J'$: its component on degree $n$ input is $(-1)^nf c$. By the strict composition law of step 2 its boundary is\n$$\\mathsf H(\\alpha,1)\\mathsf H(u,1)-\\mathsf H(a,1)\\mathsf H(\\beta,1).$$\nThis proves the square before localization. Applying $Q_{\\mathcal B}$ gives equality [def-weil-abstract-derived-category]. If $u$ is replaced by a homotopic representative, step 3 gives a homotopy between the induced precomposition maps, so this equality is independent of the representative. The complex $I$ was arbitrary throughout.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes: signed product-Hom differential; the following additive-bifunctor calculations are agent supplied."
+   }
+  },
+  {
+   "text": "Specify the identification of the two K-injective representatives by an isomorphism $e:Q_{\\mathcal A}I\\xrightarrow{\\sim}Q_{\\mathcal A}I'$. The bijection of [lem-weil-pbc-kinjective-hom-derived] gives representatives $v:I\\to I'$ of $e$ and $w:I'\\to I$ of $e^{-1}$. Its injectivity with targets $I$ and $I'$ gives $wv\\simeq1_I$ and $vw\\simeq1_{I'}$. Step 4 then shows that $\\mathsf H(1,v)$ and $\\mathsf H(1,w)$ are mutually inverse up to homotopy for every source complex; hence they become inverse after $Q_{\\mathcal B}$ [def-weil-abstract-derived-category]. For every source chain map $t$, the mixed square commutes strictly: both composite components are $v^{p+n}f^pt^p$ by step 2. Changing the chosen $v$ changes neither localized map, by step 4. Thus the representative changes commute with all the precomposition squares of step 8.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective (3), applied through lem-weil-pbc-kinjective-hom-derived; representative and coherence arguments are agent supplied."
+   }
+  },
+  {
+   "text": "For composable chain arrows $K\\xrightarrow aL\\xrightarrow bM$ and resolutions $\\alpha:K\\to J$, $\\beta:L\\to J'$, $\\gamma:M\\to J''$, let $u,w$ represent the normalized derived arrows of step 7. Their composite satisfies $Q_{\\mathcal A}(wu)=(Q_{\\mathcal A}\\gamma)Q_{\\mathcal A}(ba)(Q_{\\mathcal A}\\alpha)^{-1}$, by cancelling $Q_{\\mathcal A}\\beta$. Injectivity into $J''$ in [lem-weil-pbc-kinjective-hom-derived] makes it homotopic to any representative chosen directly for $ba$. The identity is represented by $1_J$ and the same uniqueness proves its identity law. Steps 2--5 therefore give composition and identity after $Q_{\\mathcal B}$ for precomposition, and the identical argument with covariant composition gives them for target changes. Finally any derived arrow between K-injective complexes has a unique representing homotopy class by the cited bijection, without an invertibility hypothesis. Choosing such representatives, every mixed square still has the literal component $vft$ of step 2; their homotopy independence follows from steps 3--4. This proves the last assertion for arbitrary derived arrows and uses no quasi-isomorphism invariance of $\\mathsf H$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective (3), applied through lem-weil-pbc-kinjective-hom-derived; representative and coherence arguments are agent supplied."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, section-hom-complexes; agent-written extension to an additive bifunctor and normalized resolution squares, using derived.tex Tag 070I, lemma-K-injective."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom complexes respect source and target chain homotopies and comparison between K injective resolutions is independent of choices and natural in both variables",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.descHomotopy, CategoryTheory.InjectiveResolution.Hom.hom'_f, CategoryTheory.InjectiveResolution.homotopyEquiv_hom_ι_assoc, CategoryTheory.InjectiveResolution.homotopyEquiv_hom_ι, CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.InjectiveResolution.homotopyEquiv_inv_ι_assoc, CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc, CategoryTheory.InjectiveResolution.descHomotopyZeroOne",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary injective-resolution results are bounded-below object resolutions; mapBifunctorMapHomotopy uses direct-sum totalization, not this product totalization and resolution-square normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy coherent precomposition postcomposition of an additive internal Hom bifunctor descends to the homotopy category and gives natural comparison across injective resolutions",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.injectiveResolutions, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary injective-resolution results are bounded-below object resolutions; mapBifunctorMapHomotopy uses direct-sum totalization, not this product totalization and resolution-square normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bifunctorHom\", \"Homotopy\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary injective-resolution results are bounded-below object resolutions; mapBifunctorMapHomotopy uses direct-sum totalization, not this product totalization and resolution-square normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorHom.*[Hh]omotop|[Hh]omotop.*bifunctorHom",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary injective-resolution results are bounded-below object resolutions; mapBifunctorMapHomotopy uses direct-sum totalization, not this product totalization and resolution-square normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A source chain homotopy induces the signed precomposition homotopy on the total Hom complex and target homotopies induce postcomposition homotopies",
+   "results": "8 hits: HomologicalComplex.mapBifunctorMapHomotopy₂, HomologicalComplex.mapBifunctorMapHomotopy.hom₂, HomologicalComplex.mapBifunctorMapHomotopy.hom₁, Homotopy.compLeft, Homotopy.comp_hom, HomologicalComplex.mapBifunctorMapHomotopy₁, Homotopy.compLeft_hom, Homotopy.compRight",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary injective-resolution results are bounded-below object resolutions; mapBifunctorMapHomotopy uses direct-sum totalization, not this product totalization and resolution-square normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorHom.*[Hh]omotop|[Hh]omotop.*bifunctorHom",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: bifunctor totalization homotopies use coproducts; ordinary injective object resolutions or Hom-set single-complex equivalences do not state the general product-Hom construction and normalized K-injective squares."
+  },
+  {
+   "tool": "leansearch",
+   "query": "K injective comparison morphisms are unique up to homotopy and product total Hom complexes preserve chain homotopy",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.descHomotopy, HomologicalComplex.mapBifunctor₁₂.hom_ext, CategoryTheory.InjectiveResolution.Hom.mk.injEq, HomologicalComplex.mapBifunctor.hom_ext, CategoryTheory.InjectiveResolution.Hom.mk.inj, HomologicalComplex.Hom.mk.injEq, HomotopyEquiv.mk.inj, Homotopy.noConfusion",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: bifunctor totalization homotopies use coproducts; ordinary injective object resolutions or Hom-set single-complex equivalences do not state the general product-Hom construction and normalized K-injective squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bifunctorHom\", \"Homotopy\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: bifunctor totalization homotopies use coproducts; ordinary injective object resolutions or Hom-set single-complex equivalences do not state the general product-Hom construction and normalized K-injective squares."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The internal product Hom complex from a complex concentrated in degree zero is naturally isomorphic to termwise application of the additive Hom functor",
+   "results": "8 hits: HomologicalComplex.singleCompEvalIsoSelf_hom_app, CochainComplex.HomComplex.Cochain.fromSingleEquiv, CochainComplex.HomComplex.Cochain.toSingleEquiv, ChainComplex.toSingle₀Equiv_apply_coe, CochainComplex.toSingle₀Equiv, CochainComplex.toSingle₀Equiv_apply, ChainComplex.fromSingle₀Equiv, ChainComplex.fromSingle₀Equiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: bifunctor totalization homotopies use coproducts; ordinary injective object resolutions or Hom-set single-complex equivalences do not state the general product-Hom construction and normalized K-injective squares."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Product total Hom of an additive bifunctor takes chain homotopies in either variable to chain homotopies with signed precomposition",
+   "results": "8 hits: HomologicalComplex.mapBifunctorMapHomotopy₂, HomologicalComplex.mapBifunctorMapHomotopy₁, HomologicalComplex.mapBifunctorMapHomotopy.hom₂, HomologicalComplex.mapBifunctorMapHomotopy.hom₁, HomologicalComplex.mapBifunctorMapHomotopy.ιMapBifunctor_hom₁, HomologicalComplex.mapBifunctorMapHomotopy.ιMapBifunctor_hom₂, HomologicalComplex.mapBifunctorMapHomotopy.comm₁, HomologicalComplex.mapBifunctorMapHomotopy.comm₁_aux",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: bifunctor totalization homotopies use coproducts; ordinary injective object resolutions or Hom-set single-complex equivalences do not state the general product-Hom construction and normalized K-injective squares."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-derived-hom-single-resolution",
+  "date": "2026-10-22",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Intended explicit anchor lem-a1-local-boundary-duality (created.item chain currently terminates at maintainer audit node with no parent): Opening lisse identity D_U F = F^vee(1)[2] in lem-a1-local-boundary-duality.proof.md: resolution comparison needed by the native tensorLisse/internal-Hom identification, via lem-sf-weil-lisse-internal-hom-tensor-dual. Single-source projection and homotopy-normalized change of resolutions (returned proof steps 6 and 7).",
+   "via": [
+    "lem-sf-weil-derived-hom-single-resolution",
+    "lem-sf-weil-lisse-internal-hom-tensor-dual"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-equivariant-hom-resolution-calculus",
+  "worker": "stage1",
+  "summary": "Q126: retained the statement and inherited source/blueprint data. Expanded product differential, both signed homotopies, single-source projection and all normalized squares explicitly. Reused the existing K-injective localization Mathlib leaf rather than creating any node. Checked products by projections, arbitrary unbounded complexes, homotopy equivalences and identity/composition; no derived-functor invariance is used.",
+  "blueprint": "The inherited explicit anchor is the opening lisse identity D_U F = F^vee(1)[2] of lem-a1-local-boundary-duality, through lem-sf-weil-lisse-internal-hom-tensor-dual and lem-sf-weil-derived-hom-single-resolution: steps 1--6 supply the product-Hom calculus and projection; steps 7--10 supply returned proof steps 6--7, normalized changes of resolutions. blueprint_refs ancestor reports None because the inherited chain ends at an unanchored maintainer audit node; the existing from record is retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-9655fbd07",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-9655fbd07 (reviewer sub-agent of L); spot-checked: I read the item in full. It is a 10-step split with no new nodes and the statement unchanged. The one commit touches only the item and the report, and proof_deps equals the union of the step uses. I recomputed every component formula against Stacks 0A8X (sites-cohomology.tex l.8571: d(f)=d_M f-(-1)^n f d_L, the same as the item's indexing). Step 1: D^2=0, the mixed coefficient -(-1)^n-(-1)^{n+1} is 0 and the last term is (-1)^{2n+1} f dd. Step 2: H(t,v) is a chain map and functorial. Step 3: source homotopy (S_n f)^p=(-1)^n f^{p-1}h^p, the d_I terms cancel and the sum is f(t-t'). Step 4: target homotopy h'f, the f d_K terms cancel. Step 5: descent through K(-), since def-weil-abstract-derived-category localizes through the homotopy category, plus formal equivariance. Step 6: A[0] projection, H(0,B)=0 by additivity, the d_{A[0]} term vanishes, natural in both variables. Steps 7, 9 and 10 use only the bijection Hom_K(N,I)->Hom_D(QN,QI) for K-injective I (lem-weil-pbc-kinjective-hom-derived, a Mathlib leaf, Stacks 070I(3)): u is unique up to homotopy with u alpha ~ beta a, targets have inverse-up-to-homotopy representatives v,w, and composition holds by cancelling Q beta into J''. Step 8 is the square up to homotopy from step 3 with t=u alpha, t'=beta a, using step 2's contravariance. I tested all signs for n in Z and the cases zero source/target, K=A[0], zero homotopies, identity and composite changes. Both cited nodes are Mathlib leaves, so there is no route or tool_use issue and no SGA is cited. Duplicate check: lem-sf-bifunctor-homotopy-exact has a different sign convention and different content, and the other Hom-complex nodes do not state this calculus. The only citer, lem-sf-weil-derived-hom-single-resolution steps 3-4, uses exactly the clauses proved in steps 6-10. Maintainer notes, neither a fault of this delivery: blueprint.from.node is null because the inherited ancestry is unanchored, and the unit sk-prop-sf-rf-shriek-preservation metadata is inherited."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.EquivariantHomResolutionCalculus",
+  "declaration": "CochainComplex.exists_equivariantHomResolutionCalculus",
+  "declarations": [
+   "CochainComplex.productHomResolutionMap",
+   "CochainComplex.exists_equivariantHomResolutionCalculus"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/EquivariantHomResolutionCalculus.lean",
+  "statement": "theorem exists_equivariantHomResolutionCalculus {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A] {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B] [HasCountableProducts B] (H : Aᵒᵖ ⥤ A ⥤ B) [H.Additive] [∀ X : Aᵒᵖ, (H.obj X).Additive] : ∃ F : (CochainComplex A ℤ)ᵒᵖ × CochainComplex A ℤ ⥤ CochainComplex B ℤ, ∃ π : ∀ (K I : CochainComplex A ℤ) (n p q : ℤ), p + n = q → ((F.obj (op K, I)).X n ⟶ (H.obj (op (K.X p))).obj (I.X q)), (∀ (K I : CochainComplex A ℤ) (n : ℤ), Nonempty (IsLimit (Fan.mk ((F.obj (op K, I)).X n) (fun p : ℤ ↦ π K I n p (p + n) rfl)))) ∧ (∀ (K I : CochainComplex A ℤ) (n m p q r s : ℤ) (_hnm : n + 1 = m) (hpq : p + m = q) (hpr : p + n = r) (hsq : s + n = q), (F.obj (op K, I)).d n m ≫ π K I m p q hpq = π K I n p r hpr ≫ (H.obj (op (K.X p))).map (I.d r q) - n.negOnePow • (π K I n s q hsq ≫ (H.map (K.d p s).op).app (I.X q))) ∧ (∀ (K K' I I' : CochainComplex A ℤ) (t : K' ⟶ K) (v : I ⟶ I') (n p q : ℤ) (hpq : p + n = q), (productHomResolutionMap F t v).f n ≫ π K' I' n p q hpq = π K I n p q hpq ≫ (H.map (t.f p).op).app (I.X q) ≫ (H.obj (op (K'.X p))).map (v.f q)) ∧ (∀ (K K' I : CochainComplex A ℤ) (t t' : K' ⟶ K) (h : Homotopy t t'), ∃ S : Homotopy (productHomResolutionMap F t (𝟙 I)) (productHomResolutionMap F t' (𝟙 I)), ∀ (n m p r q : ℤ) (_hmn : m + 1 = n) (_hrp : r + 1 = p) (hrq : r + n = q) (hpq : p + m = q), S.hom n m ≫ π K' I m p q hpq = n.negOnePow • (π K I n r q hrq ≫ (H.map (h.hom p r).op).app (I.X q))) ∧ (∀ (K I I' : CochainComplex A ℤ) (v v' : I ⟶ I') (h : Homotopy v v'), ∃ R : Homotopy (productHomResolutionMap F (𝟙 K) v) (productHomResolutionMap F (𝟙 K) v'), ∀ (n m p q r : ℤ) (_hmn : m + 1 = n) (hpq : p + m = q) (hpr : p + n = r), R.hom n m ≫ π K I' m p q hpq = π K I n p r hpr ≫ (H.obj (op (K.X p))).map (h.hom r q)) ∧ (∃ G : (HomotopyCategory A (.up ℤ))ᵒᵖ × HomotopyCategory A (.up ℤ) ⥤ HomotopyCategory B (.up ℤ), Nonempty (F ⋙ HomotopyCategory.quotient B (.up ℤ) ≅ (HomotopyCategory.quotient A (.up ℤ)).op.prod (HomotopyCategory.quotient A (.up ℤ)) ⋙ G)) ∧ (∃ e : ∀ (X : A) (I : CochainComplex A ℤ), F.obj (op ((HomologicalComplex.single A (.up ℤ) 0).obj X), I) ≅ ((H.obj (op X)).mapHomologicalComplex (.up ℤ)).obj I, (∀ (X : A) (I : CochainComplex A ℤ) (n : ℤ), (e X I).hom.f n = π ((HomologicalComplex.single A (.up ℤ) 0).obj X) I n 0 n (zero_add n) ≫ (H.map (HomologicalComplex.singleObjXSelf (.up ℤ) 0 X).inv.op).app (I.X n)) ∧ (∀ (X X' : A) (b : X' ⟶ X) (I I' : CochainComplex A ℤ) (v : I ⟶ I') (n : ℤ), (productHomResolutionMap F ((HomologicalComplex.single A (.up ℤ) 0).map b) v).f n ≫ (e X' I').hom.f n = (e X I).hom.f n ≫ (H.map b.op).app (I.X n) ≫ (H.obj (op X')).map (v.f n))) ∧ (∀ (K L J J' : CochainComplex A ℤ) [J.IsKInjective] [J'.IsKInjective] (α : K ⟶ J) (β : L ⟶ J') [QuasiIso α] [QuasiIso β] (a : K ⟶ L), ∃ u : J ⟶ J', DerivedCategory.Q.map u = inv (DerivedCategory.Q.map α) ≫ DerivedCategory.Q.map a ≫ DerivedCategory.Q.map β ∧ Nonempty (Homotopy (α ≫ u) (a ≫ β)) ∧ (∀ u' : J ⟶ J', Nonempty (Homotopy (α ≫ u') (a ≫ β)) → Nonempty (Homotopy u u')) ∧ (∀ I : CochainComplex A ℤ, Nonempty (Homotopy (productHomResolutionMap F u (𝟙 I) ≫ productHomResolutionMap F α (𝟙 I)) (productHomResolutionMap F β (𝟙 I) ≫ productHomResolutionMap F a (𝟙 I))) ∧ DerivedCategory.Q.map (productHomResolutionMap F u (𝟙 I)) ≫ DerivedCategory.Q.map (productHomResolutionMap F α (𝟙 I)) = DerivedCategory.Q.map (productHomResolutionMap F β (𝟙 I)) ≫ DerivedCategory.Q.map (productHomResolutionMap F a (𝟙 I)))) ∧ (∀ (J J' : CochainComplex A ℤ) [J.IsKInjective] [J'.IsKInjective] (q : DerivedCategory.Q.obj J ⟶ DerivedCategory.Q.obj J'), ∃ u : J ⟶ J', DerivedCategory.Q.map u = q ∧ (∀ u' : J ⟶ J', DerivedCategory.Q.map u' = q → Nonempty (Homotopy u u') ∧ ∀ K : CochainComplex A ℤ, DerivedCategory.Q.map (productHomResolutionMap F u (𝟙 K)) = DerivedCategory.Q.map (productHomResolutionMap F u' (𝟙 K)) ∧ DerivedCategory.Q.map (productHomResolutionMap F (𝟙 K) u) = DerivedCategory.Q.map (productHomResolutionMap F (𝟙 K) u'))) ∧ (∀ (I I' : CochainComplex A ℤ) [I.IsKInjective] [I'.IsKInjective] (e : DerivedCategory.Q.obj I ≅ DerivedCategory.Q.obj I') (v : I ⟶ I') (_hv : DerivedCategory.Q.map v = e.hom), (∃ E : HomotopyEquiv I I', E.hom = v) ∧ ∀ K : CochainComplex A ℤ, ∃ E : HomotopyEquiv (F.obj (op K, I)) (F.obj (op K, I')), E.hom = productHomResolutionMap F (𝟙 K) v) ∧ (∀ (K K' I I' : CochainComplex A ℤ) (t : K' ⟶ K) (v : I ⟶ I'), productHomResolutionMap F t (𝟙 I) ≫ productHomResolutionMap F (𝟙 K') v = productHomResolutionMap F (𝟙 K) v ≫ productHomResolutionMap F t (𝟙 I')) ∧ (∀ (J : CochainComplex A ℤ) [J.IsKInjective] (u : J ⟶ J) (_hu : DerivedCategory.Q.map u = 𝟙 _) (K : CochainComplex A ℤ), DerivedCategory.Q.map (productHomResolutionMap F u (𝟙 K)) = 𝟙 _ ∧ DerivedCategory.Q.map (productHomResolutionMap F (𝟙 K) u) = 𝟙 _) ∧ (∀ (J J' J'' : CochainComplex A ℤ) [J.IsKInjective] [J'.IsKInjective] [J''.IsKInjective] (u : J ⟶ J') (v : J' ⟶ J'') (w : J ⟶ J'') (_hw : DerivedCategory.Q.map w = DerivedCategory.Q.map u ≫ DerivedCategory.Q.map v) (K : CochainComplex A ℤ), DerivedCategory.Q.map (productHomResolutionMap F w (𝟙 K)) = DerivedCategory.Q.map (productHomResolutionMap F v (𝟙 K)) ≫ DerivedCategory.Q.map (productHomResolutionMap F u (𝟙 K)) ∧ DerivedCategory.Q.map (productHomResolutionMap F (𝟙 K) w) = DerivedCategory.Q.map (productHomResolutionMap F (𝟙 K) u) ≫ DerivedCategory.Q.map (productHomResolutionMap F (𝟙 K) v))",
+  "branch": "sheaf-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1cfcf19f7",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Statement field matches the file verbatim; node differs from live only in lean; def-weil-abstract-derived-category record unchanged. All clauses checked against Stacks 0A8X (sites-cohomology l.8571) and 070I (derived l.9632). Differential sign (-1)^n with s=p+1, source homotopy (-1)^n f^{p-1}h^p and unsigned target homotopy h'f recomputed by hand; orientation matches Mathlib Homotopy (dNext/prevD). Also checked: homotopy-category descent G with iso; degree-zero projection iso pinned via singleObjXSelf, natural in both variables; normalized u with Q u = inv Qα ≫ Qa ≫ Qβ, homotopy uniqueness and the H(u,1)H(α,1)~H(β,1)H(a,1) square; arbitrary derived arrows; HomotopyEquiv for K-injective representatives; strict mixed square; identity/composition laws with correct variance. Hypotheses no stronger than the node: countable products only, independent universes. ProductHomComplexSpecification (lem-weil-pbc-bilinear-hom-complex) needs one universe and HasProducts.{0} and is a theorem-node plain def, so restating inline is correct; productHomResolutionMap = F.map. Equivariance read as morphism identities in arbitrary categories, per proof step 5. Only sorry is the main theorem; docstrings carry source and blueprint; plain import is the proof_dep module. No fix, no compile; the worker's compile is the evidence. Maintainer note: blueprint.from.node null (inherited)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261024T185207-L-3471721",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CochainComplex.exists_equivariantHomResolutionCalculus"
+  ],
+  "sorry_after": []
+ }
+}

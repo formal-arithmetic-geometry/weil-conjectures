@@ -1,0 +1,124 @@
+{
+ "id": "lem-sf-integral-published-tower-evaluation",
+ "kind": "lemma",
+ "title": "Finite projection of the published completed pullback tower",
+ "statement": "The actual Roos projection is natural, the published limit/Roos bridge preserves finite projection, and the prescribed strict pullback tower component computes the normalized finite derived pullback evaluation. These are equalities of the maps fixed by the coefficient calculus and published model normalizations.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization"
+ },
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "def-pur-completed-pullback-tower-realizations",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Compute the Roos projection from its K-injective normalization and extend by naturality. Transport the exact restriction square to complexes. Apply the published finite evaluation normalization and cancel the representative isomorphisms.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "def-pur-completed-pullback-tower-realizations",
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-pur-integral-ambient-operation-models",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-integral-published-finite-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "def-pur-completed-pullback-tower-realizations",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-integral-published-finite-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q5",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback commutes with finite coefficient evaluation of integral reduction and adjunction counit",
+   "results": "8 hits: PresheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, PresheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id",
+   "date": "2026-10-27",
+   "verdict": "No specialized published-model evaluation lemma; use normalization and adjunction naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.hom_inv_id",
+   "results": "2 hits: CategoryTheory.Iso.hom_inv_id, CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence_counitIso",
+   "date": "2026-10-27",
+   "verdict": "No specialized published-model evaluation lemma; use normalization and adjunction naturality."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ee]valuation|[Cc]ounit.*[Pp]rojection",
+   "results": "5 hits: Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean, Mathlib/CategoryTheory/MorphismProperty/FunctorCategory.lean, Mathlib/CategoryTheory/Abelian/Preradical/Colon.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Shapes/Pullbacks.lean",
+   "date": "2026-10-27",
+   "verdict": "No specialized published-model evaluation lemma; use normalization and adjunction naturality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProjectionPullEvaluation",
+  "date": "2026-10-27",
+  "group": "Q5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-projection-pull-evaluation",
+   "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPublishedTowerEvaluation",
+  "file": "lean/Sheaf/Paper/IntegralPublishedTowerEvaluation.lean",
+  "declaration": "WeilConjectures.IntegralPublishedPullback.published_tower_finite_component",
+  "declarations": [
+   "WeilConjectures.IntegralPublishedPullback.published_tower_finite_component"
+  ],
+  "statement": "theorem published_tower_finite_component {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) :\n    let C := ((pullbackTensorOrdinaryReduction l E Y).mapHomologicalComplex (.up ℤ)).obj P\n    let D := ((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).obj C\n    (integralComparisonRestrictedEvaluationFactors l E X D n).hom ≫\n      DerivedCategory.Q.map (pullbackTensorPullbackTowerLevel l E f P n).hom ≫\n      (scalarReductionRestriction l E X n).mapDerivedCategoryFactors.inv.app\n        (integralPullbackFiniteComplex l E f P n) =\n    (coefficientFiniteDerivedRestriction l E X n).map\n      ((coefficientSequenceDerivedEvaluation l E X n).map\n          ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.inv.app C) ≫\n        (pullbackTensorDerivedEvaluation l E f n).hom.app (DerivedCategory.Q.obj C) ≫\n        (finiteDerivedPullback l E n f).map\n          ((coefficientSequenceEvaluation l E Y n).mapDerivedCategoryFactors.hom.app C ≫\n            DerivedCategory.Q.map ((pullbackTensorReductionEvaluationComplex l E Y n).inv.app P)) ≫\n        (sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f\n          ).mapDerivedCategoryFactors.hom.app\n          ((unrestrictedIntegralFiniteComplex l E Y n).obj P) ≫\n        DerivedCategory.Q.map\n          ((NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n)\n            (.up ℤ)).inv.app ((unrestrictedIntegralFiniteComplex l E Y n).obj P)))",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261027T103508-L-1090272",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261027T103508-L-1090272",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

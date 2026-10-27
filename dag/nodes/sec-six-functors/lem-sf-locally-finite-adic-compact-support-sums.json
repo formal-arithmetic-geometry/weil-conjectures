@@ -1,0 +1,356 @@
+{
+ "id": "lem-sf-locally-finite-adic-compact-support-sums",
+ "kind": "statement",
+ "title": "Coproduct preservation of actual adic compact supports on the constructible localizing hull",
+ "statement": "Fix a finite field $k_0$, its algebraic closure $k$, and $\\ell\\ne\\operatorname{char}(k_0)$. Write $\\Omega=\\overline{\\mathbf Q}_\\ell$. For each finite-type $k$-scheme $T$, on its small pro-etale site put $B_T=\\Omega_T^{\\mathrm{lf}}$, the sheaf of continuous $\\Omega$-valued functions whose values locally span a finite-dimensional $\\mathbf Q_\\ell$-space. Put $\\mathcal A_T=\\operatorname{Mod}(B_T)$, with the internal-module convention of [def-sf-native-weil-derived-framework], and let $\\mathcal C_T\\subset D(\\mathcal A_T)$ be the full subcategory with bounded constructible cohomology: each cohomology sheaf is locally finite free on every member of a finite locally closed stratification, locally on $T$. Write $\\mathcal L_T=\\operatorname{Loc}(\\mathcal C_T)$ for its full replete triangulated closure under small coproducts, computed in $D(\\mathcal A_T)$ [def-weil-triangulated-subcategory, def-weil-size-convention]. For a separated finite-type $k$-morphism $f:X\\to Y$ and a compactification $X\\xrightarrow jZ\\xrightarrow pY$ with $j$ open and $p$ proper [def-weil-compactifications-refinements], take $F=Rp_*D(j_!)$ on ordinary module derived categories, with the coefficient sheaves $B_T$ above and the actual sheaf functors used by the native construction. Then $F$ restricts to an exact functor $\\mathcal L_X\\to\\mathcal L_Y$ preserving every small coproduct. Neither $X,Y$ nor $Z$ is required to be separated over $k$. This assertion is only on the indicated localizing hulls; it makes no assertion about coproducts on the entire ambient derived categories.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
+  "place": "First two bullet points and final paragraph: open extension and proper direct image on the localizing hulls. Agent-formulated version for the native locally-finite coefficient sheaf and finite-type schemes without absolute separatedness; this precise coefficient/domain variant is the unsplit obligation, not an invocation of the stronger whole-ambient assertion."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-triangulated-subcategory",
+  "def-weil-size-convention",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [
+  {
+   "text": "Bundle the given finite field and its algebraic closure as FiniteFieldDatum using FiniteField.card. Apply [lem-sf-constructible-exceptional-coefficient-construction] and [lem-sf-locally-finite-adic-compact-support-realization]. The preserves field gives the actual compactification composite F(C_X) subset C_Y. Apply the same construction to a quasi-compact open immersion j with Compactification.ofIsOpenImmersion j. The proper factor is the identity; its right derived functor is naturally isomorphic to the identity through rightDerivedFunctorIsoMapDerivedCategory, adicLowerStarId and mapDerivedCategoryIdIso. Transport the preserves assertion across this isomorphism: D(j_!) maps C_X into C_Z.",
+   "uses": [
+    "lem-sf-constructible-exceptional-coefficient-construction",
+    "lem-sf-locally-finite-adic-compact-support-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Give the compactification middle scheme Z its structure map p followed by a_Y; the factorization equation makes j a k-map. Properness of p and finite type of Y imply finite type and quasi-compactness of Z. Since f is quasi-compact, Compactification.quasiCompact_openImmersion makes j quasi-compact. Exact native j_! preserves heart coproducts as a left adjoint, hence D(j_!) preserves derived coproducts. Minimality, via ObjectProperty.localizingClosure_le_inverseImage, extends the bounded constructible assertion of step 1 to J(L_X) subset L_Z. Lift J to those full subcategories. The target inclusion reflects colimits and its composite is the coproduct-preserving source inclusion followed by J, so the lift preserves coproducts.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-kun-grothendieck-derived-coproducts",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Y is Noetherian by finite type over a field [lem-weil-pbc-finite-type-over-noetherian]. The algebra k_0 to k identifies their characteristics. Apply [lem-sf-native-adic-proper-coproducts] to p and a_Y. Compose its functor from L_Z with the lifted open-extension functor of step 2. Its composite is definitionally the source-hull inclusion followed by the actual F, so F preserves coproducts on L_X.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sf-native-adic-proper-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ambient F is triangulated: open extension is the derived functor of an exact functor, and the ordinary total right derived functor is triangulated [lem-sf-exact-functor-derived-triangulated, lem-pc-right-derived-functor-triangulated]. Apply ObjectProperty.localizingClosure_obj_of_le to F: step 3 supplies coproduct continuity on L_X, and step 1 supplies preservation of its generators. The localizing intersection of L_X with the inverse image of L_Y contains C_X, hence contains L_X. This gives the required h. ObjectProperty.isTriangulated_liftFullSubcategory gives exactness. The composite of the restriction with the target inclusion is the source inclusion followed by F, which preserves coproducts by step 3; reflection by the fully faithful target inclusion gives coproduct preservation of the restriction, for every Type (u+1), including the empty family.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pc-right-derived-functor-triangulated",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-triangulated-subcategory",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-constructible-exceptional-coefficient-construction",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-locally-finite-adic-compact-support-realization",
+  "lem-sf-native-adic-proper-coproducts",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
+  "place": "Lean assembly from native proper-factor coproduct continuity, open extension via the existing compact-support realization for an open compactification, and localizing-closure minimality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compact support direct image on the localizing hull of bounded constructible locally finite continuous algebraic l adic module sheaves preserves arbitrary coproducts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"Condensed.instAB5CondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB5 (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ satisfies the AB5 axiom, meaning it has all filtered colimits and these colimits are exact (preserve finite limits).\"}\n  {\"name\": \"instHasColimitsCondensedMod\", \"module\": \"Mathlib/Condensed/Limits\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.Limits.HasColimits (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ has all colimits.\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v)} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"CondensedMod.ofSheafCompHaus\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor CompHausᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\\\mathrm{CompHaus}^{\\\\mathrm{op}} \\\\to \\\\mathrm{ModuleCat}\\\\, R $ that preserves finite products and satisfies the equalizer condition for the regular topology, $ F $ defines a sheaf w\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesColimits\", \"rightDerivedFunctor\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*[Cc]oproduct|[Cc]oproduct.*adic|lowerShriek|derivedLowerShriek",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper direct image preserves arbitrary sums on the localizing category generated by constructible adic module complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Additive\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AdicCompletion.sum\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {ι : Type u_6} →\\n        (M : ι → Type u_7) →\\n          [inst_1 : (i : ι) → AddCommGroup (M i)] →\\n            [inst_2 : (i : ι) → Module R (M i)] →\\n              [DecidableEq ι] →\\n                (DirectSum ι fun j => AdicCompletion \", \"doc\": \"A linear map from the direct sum of the $I$-adic completions of a family of $R$-modules $\\\\{M_j\\\\}_{j \\\\in \\\\iota}$ to the $I$-adic completion of their direct sum. This map is defined over the $I$-adic co\"}\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive\", \"module\": \"Mathlib.CategoryTheory.Preadditive.AdditiveFunctor\", \"type\": \"[Additive F] : PreservesFiniteCoproducts F\", \"doc\": \"An additive functor between preadditive categories preserves finite coproducts. That is, if $ F : C \\to D $ is an additive functor (preserving addition of morphisms), then $ F $ preserves all finite co\"}\n  {\"name\": \"CategoryTheory.Localization.Preadditive.map_add\", \"module\": \"Mathlib.CategoryTheory.Localization.CalculusOfFractions.Preadditive\", \"type\": \"(f₁ f₂ : X ⟶ Y) :\\n  letI := addCommGroup L W (L.obj X) (L.obj Y)\\n  L.map (f₁ + f₂) = L.map f₁ + L.map f₂\", \"doc\": \"For a localization functor $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ inverting morphisms in $ W $, where $ \\\\mathcal{C} $ is preadditive and $ \\\\mathcal{D} $ admits a left calculus of fractions for $ W $, the\"}\n  {\"name\": \"CategoryTheory.Localization.instAdditiveLocalizationQ\", \"module\": \"Mathlib.CategoryTheory.Localization.CalculusOfFractions.Preadditive\", \"type\": \": W.Q.Additive\", \"doc\": \"The localization functor $ Q: \\\\mathcal{C} \\\\to \\\\mathcal{C}[W^{-1}] $ preserves the addition of morphisms, i.e., for all morphisms $ f, g $ with the same domain and codomain in $ \\\\mathcal{C} $, we have \"}\n  {\"name\": \"CategoryTheory.Localization.instPreservesFiniteProductsLocalizationQ\", \"module\": \"Mathlib.CategoryTheory.Localization.FiniteProducts\", \"type\": \": PreservesFiniteProducts W.Q\", \"doc\": \"The localization functor $ Q: \\\\mathcal{C} \\\\to \\\\mathcal{C}[W^{-1}] $, which inverts morphisms satisfying property $ W $, preserves finite products. This means that if $ \\\\mathcal{C} $ has finite product\"}\n  {\"name\": \"ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Localization\", \"type\": \"[Small.{v} R] (S : Submonoid R) : Limits.PreservesFiniteColimits (ModuleCat.localizedModule_functor.{v} S)\", \"doc\": \"The localization functor from the category of left modules over a small commutative ring $ R $ to the category of left modules over its Ore localization $ R_S $ at a submonoid $ S $ preserves finite c\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instPreservesColimitsOfShapeSheafedSpaceCommRingCatDiscreteForgetToSheafedSpace\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \": PreservesColimitsOfShape (Discrete.{v} ι) forgetToSheafedSpace.{u}\", \"doc\": \"The forgetful functor from the category of locally ringed spaces to the category of sheafed spaces over commutative rings preserves colimits of discrete diagrams, i.e., coproducts. This means that the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The chosen compactification functor Rp star j shriek preserves the localizing closure of constructible complexes and its direct sums",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.isHomological_of_localization\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.HasShift C ℤ] [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.HasShift D ℤ]\\n  [inst_5 : CategoryTheory.P\", \"doc\": \"Let $\\\\mathcal{C}, \\\\mathcal{D}$ be pretriangulated categories and $\\\\mathcal{A}$ an abelian category. If $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a triangulated functor commuting with $\\\\mathbb{Z}$-indexed s\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"HomologicalComplex.map_isStrictlySupported\", \"module\": \"Mathlib/Algebra/Homology/Embedding/IsSupported\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3} {D : Type u_4}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Category.{v_2, u_4} D]\\n  [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] [inst_3 : CategoryTheory.Limits.HasZeroMorp\", \"doc\": \"Given a category $\\\\mathcal{W}_1$ with zero morphisms, a zero-preserving functor $F : \\\\mathcal{W}_1 \\\\to \\\\mathcal{W}_2$, and a homological complex $K$ in $\\\\mathcal{W}_1$ that is strictly supported by an\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The derived category is obtained by localizing the category of cochain complexes with integer indices at quasi-isomorphisms (morphisms inducing isomorphisms on all homology groups). The canonical func\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*[Cc]oproduct|[Cc]oproduct.*adic|lowerShriek|derivedLowerShriek",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper derived pushforward of locally finite continuous Qbar ell sheaves commutes with arbitrary direct sums in the constructible localizing hull",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pushforward\", \"TopCat.Sheaf.pushforward_sheaf_of_sheaf\", \"SheafOfModules.pushforward\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp\", \"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"SheafOfModules.pushforwardComp\"], \"digest\": \"b1170ad0d6b31851\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\", \"PreservesColimitsOfShape\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Actual derived compact support Rp star j shriek for locally finite continuous algebraic ell adic modules preserves coproducts on the hull of bounded constructible complexes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.instAB5CondensedMod\", \"instHasColimitsCondensedMod\", \"Condensed.profiniteSolid\", \"CompHausLike.LocallyConstantModule.functor\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CondensedMod.IsSolid\", \"Condensed.hasExactColimitsOfShape\", \"localCohomology.ofDiagram\"], \"digest\": \"c5f368dc8fe44cf8\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]onstructible.*[Ll]ocalizing|[Ll]ocalizing.*[Cc]onstructible|pro[Ee]tale.*[Cc]oproduct",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right derived functor of proper pushforward preserves coproducts in the localizing subcategory generated by bounded constructible l adic sheaves",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsRightDerivedFunctor\", \"CategoryTheory.Functor.IsRightDerivedFunctor.recOn\", \"CategoryTheory.Functor.HasRightDerivedFunctor.mk\", \"CategoryTheory.Functor.totalRightDerived\", \"CategoryTheory.Functor.IsRightDerivedFunctor.mk\", \"CategoryTheory.Functor.HasRightDerivedFunctor\", \"CategoryTheory.Functor.totalLeftDerived\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\"], \"digest\": \"851fde118c02aeb4\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"PreservesColimits\"",
+   "results": "{\"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"PresheafOfModules.toPresheaf_preservesColimitsOfSize\", \"PresheafOfModules.toPresheaf_preservesColimitsOfShape\", \"PresheafOfModules.evaluation_preservesColimitsOfSize\", \"PresheafOfModules.evaluation_preservesColimitsOfShape\", \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft\", \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight\", \"SheafOfModules.instPreservesColimitsOfSizeFreeFunctor\", \"SheafOfModules.instPreservesColimitsOfSize\"], \"digest\": \"31a0e134a438e862\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compactification composite of extension by zero and proper derived pushforward commutes with all direct sums of complexes generated by constructible sheaves",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPushforwardContinuousComp'\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"SheafOfModules.pushforward_assoc\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app\", \"SheafOfModules.pushforwardNatTrans_comp\"], \"digest\": \"bbd12a68b70c045e\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-sf-weil-compact-direct-image-right-adjoint",
+  "date": "2026-10-22",
+  "group": "Q06"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supplied anchor lem-a1-local-boundary-duality, steps 1–2: exceptional adjunction; current cor-coef-verdier-weil-equivariance, final paragraph: First two bullet points and final paragraph: open extension and proper direct image on the localizing hulls. Agent-formulated version for the native locally-finite coefficient sheaf and finite-type schemes without absolute separatedness; this precise coefficient/domain variant is the unsplit obligation, not an invocation of the stronger whole-ambient assertion.",
+   "via": [
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-locally-finite-adic-compact-support-sums",
+  "worker": "stage1",
+  "summary": "Kept the statement. One new statement-only coefficient-ring comparison. Normalize the actual native module functors, use the existing Noetherian proper-heart estimate and pro-etale module Postnikov Roos theorem to prove unbounded coproduct continuity, and use the existing constructible realization clause for preservation of the target hull. No absolute separatedness, completion of sums, or whole-ambient continuity is assumed.",
+  "blueprint": "The supplied breadcrumb points to exceptional adjunction at lem-a1-local-boundary-duality and to cor-coef-verdier-weil-equivariance. In the immediate construction source, steps 3-5 realize the first (open-extension) bullet, steps 6-10 supply the proper-image direct-sum input of the second bullet, and steps 11-12 realize the final localizing-closure paragraph. blueprint_refs.py ancestor returns None, matching the maintainer-seeded chain.",
+  "tool_uses": [
+   {
+    "node": "def-kun-truncations",
+    "why": "The explicit good truncations, retained cohomology and cokernel formula are the generic tools for steps 6,7,9,10; the biduality unit does not construct these."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Step 2 unpacks relative properness into finite type and separatedness, without imposing absolute separatedness; this is a geometric definition."
+   },
+   {
+    "node": "def-weil-triangulated-subcategory",
+    "why": "Steps 5 and 12 use inherited triangles and full triangulated subcategories in the minimality argument, not a different six-functor route."
+   },
+   {
+    "node": "lem-derived-exact-equivalence-squares",
+    "why": "Step 1 derives the underived comparison squares for the actual module operations; the biduality unit does not supply a module-presentation transport theorem."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Step 2 needs ordinary unbounded derived coproducts represented termwise; this generic fact is independent of the exceptional-adjunction construction."
+   },
+   {
+    "node": "lem-module-object-postnikov-roos",
+    "why": "Step 8 needs actual pro-etale module Postnikov convergence after derived pushforward and cohomology of countable products. This is the convergence input in the proper-image direct-sum argument, not a replacement route."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Step 3 obtains exactness of total right derived pushforward from the generic K-injective theorem."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Step 2 needs quasi-separatedness of the relative proper map for bounded-below continuity; the statement only uses its relative separatedness."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Step 2 needs the Grothendieck property for ordinary ring-sheaf modules to apply K-injectives and termwise sums; this generic ringed-site result is absent from the unit."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Steps 6,8,9 use the long exact cohomology sequence to check Serre closure and the numerical tail bound; it is a generic triangulated tool."
+   },
+   {
+    "node": "lem-sf-derived-truncation-triangle",
+    "why": "Step 9 uses the ordinary derived truncation triangle, a generic tool not constructed by the biduality unit."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Step 3 derives the exact open extension functor termwise; this is a generic exact-functor theorem."
+   },
+   {
+    "node": "lem-sfb-adic-proper-bounded-below-coproducts",
+    "why": "Step 10 applies qcqs continuity only to the common-lower-bounded truncated family. This supplies the bounded-below input to the existing proper-image route."
+   },
+   {
+    "node": "lem-sfb-bounded-heart-amplitude-devissage",
+    "why": "Step 7 uses bounded Postnikov devissage to pass a uniform heart bound to bounded truncations. No different geometric route is introduced."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Step 2 needs K-injective resolutions for ordinary total right derived functors; this is a generic resolution-existence input."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Step 1 compares internal and sectionwise module operations, including actual pushforward and open extension, before any derived coproduct argument."
+   },
+   {
+    "node": "lem-sfb-proper-serre-heart-qbar",
+    "why": "Step 6 uses the uniform proper heart bound for the finite-subextension ring on a Noetherian target. It is the proper-image estimate needed in the construction-source second bullet."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Step 2 obtains Noetherianity from finite type over the field; it is a generic geometric input."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Step 3 applies the generic adjoint-colimit theorem to exact open extension; the unit has no separate categorical proof of this fact."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Step 10 detects the actual comparison isomorphism using all cohomology functors in the ordinary unbounded derived category."
+   },
+   {
+    "node": "sk-def-sfb-module-lower-shriek",
+    "why": "Step 3 uses the stated exact open module extension and its restriction adjunction; this defines the operation in the construction route."
+   },
+   {
+    "node": "sk-def-sfb-module-pushforward-pullback",
+    "why": "Step 3 uses additivity and left exactness of actual module direct image; this generic definition and its specified operation are not reconstructed in the biduality unit."
+   },
+   {
+    "node": "sk-def-sfb-constructible",
+    "why": "Step 4 (reviewer repair) places open extensions of the generators in the finite-constant-local-model constructible class, the class that generates the Serre class of the proper heart bound in step 6."
+   },
+   {
+    "node": "det-def-sfb-constructible-local-model",
+    "why": "Step 4 (reviewer repair): a locally finite free native module is a finite constant local model over the scalar ring Omega."
+   },
+   {
+    "node": "lem-sf-open-extension-zero-constant-model-constructible",
+    "why": "Step 4 (reviewer repair): open extension by zero preserves finite-constant-model constructibility, applied on affine opens so that no absolute separatedness of X or Z is needed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-proper-morphism",
+  "def-weil-triangulated-subcategory",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-ef5e3fbab",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-ef5e3fbab (reviewer sub-agent of L); spot-checked: Read the item's 12 steps and the new node lem-sf-locally-finite-coefficient-ring-realization in full, with every cited statement. FAULT (delivery-errors C/E, missing argument), now fixed: step 4 only placed j_! of the generators in the local-finite-presentation class (sk-def-sfb-bounded-constructible), but step 6 claims without argument that this class lies in the Serre class S_Z of lem-sfb-proper-serre-heart-qbar. S_Z is generated by finite-constant-local-model constructibles (sk-def-sfb-constructible), and det-def-sfb-constructible-local-model says the converse fails. The rewritten step 4 proves constant-model constructibility directly: R_U^r = R_U⊗Ω^r; lem-sf-open-extension-zero-constant-model-constructible is applied on an affine cover W_i of Z, whose pieces are separated, so the item gets no new absolute-separatedness hypothesis; the strata are glued using that Z is Noetherian. Step 6 now cites step 4, and proof_deps and tool_uses are updated (dropped sk-def-sfb-bounded-constructible and lem-weil-pbc-module-constructible-extension-zero). Remaining steps check out: Noetherianity and qcqs of p (steps 2, 10); exact j_! preserves sums (step 3); minimality (steps 5, 12); the Postnikov–Roos tail bound gives c=d+1 (step 8); the cutoff arithmetic a=q−c is right (step 9); landing in L_Y follows from the last clause of the realization lemma. The new node is true: locally finite Q_l-span = values in a finite extension E with the norm topology; it matches colim_E E_T from sk-prop-sfb-qlbar-colimit-x plus the field realization; checked on a point, profinite sets, empty and non-quasi-compact V; not a duplicate and not a clause of the item. Batch-5 flag on lem-sfb-proper-serre-heart-qbar is accepted: the path reaches lem-pd-module-ringed-topos-derived-comparison only through proper base change, and that node is a generic internal-module vs ringed-topos comparison, not a step of the duality or trace-formula proofs. No SGA source; statement not weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NativeAdicCompactSupportSums",
+  "declaration": "AlgebraicGeometry.ProEtale.nativeAdicCompactSupport_localizing_preservesCoproducts",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.nativeAdicConstructibleLocalizingHull",
+   "AlgebraicGeometry.ProEtale.nativeAdicCompactSupport",
+   "AlgebraicGeometry.ProEtale.nativeAdicCompactSupport_localizing_preservesCoproducts"
+  ],
+  "file": "lean/Sheaf/Paper/NativeAdicCompactSupportSums.lean",
+  "statement": "theorem nativeAdicCompactSupport_localizing_preservesCoproducts (k₀ k : Type u) [Field k₀] [Finite k₀] [Field k] [Algebra k₀ k] [IsAlgClosure k₀ k] (l : ℕ) [Fact l.Prime] (hl : ringChar k₀ ≠ l) {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k))] [Y.Over (Spec (CommRingCat.of k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k))] [QuasiCompact (X ↘ Spec (CommRingCat.of k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of k))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) : ∃ h : ∀ K, nativeAdicConstructibleLocalizingHull l X K → nativeAdicConstructibleLocalizingHull l Y ((nativeAdicCompactSupport l c).obj K), ((nativeAdicConstructibleLocalizingHull l X).liftFullSubcategory (nativeAdicConstructibleLocalizingHull l Y) (nativeAdicCompactSupport l c) h).IsTriangulated ∧ ∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) ((nativeAdicConstructibleLocalizingHull l X).liftFullSubcategory (nativeAdicConstructibleLocalizingHull l Y) (nativeAdicCompactSupport l c) h)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0f777452",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Only the item's lean field changed; the new module NativeAdicCompactSupportSums.lean has 2 transparent abbrevs plus the theorem (sorry only), and lean.statement is verbatim in the file. Clause check: B_T = adicConstantSheaf from PadicAlgCl.locallyFiniteFunctions, A_T = AdicSheaf (Mod over B_T), as in def-sf-native-weil-derived-framework; C_T = boundedAdicConstructible = bounded ⊓ homology in IsAdicConstructibleSheaf (Zariski-local finite constructible stratification, pro-etale locally finite free with rank per cover member); L_T = ObjectProperty.localizingClosure, closed under Type v coproducts with v = u+1 (HasDerivedCategory.ofIsGrothendieckAbelian, IsGrothendieckAbelian.{u+1}); X, Y finite type over Spec k, f over k, separated and finite type, no absolute separatedness; arbitrary Compactification (IsProper g, IsOpenImmersion i); F = D(adicOpenImmersionLowerShriek c.i) then (adicLowerStar c.g).rightDerivedFunctor, the native operations that ProEtaleWeilSheaf.extensionByZero/lowerStar lift; conclusion = ∃ hull preservation, IsTriangulated of the lift, PreservesColimitsOfShape (Discrete I) for all I : Type (u+1), on the hulls only. Edge cases: empty I, zero, empty schemes, proper f, rank 0, unbounded objects. H4: sk-def-localizing-closure and def-sfb-bounded-constructible-localizing-closure are for condensed-ring Ab modules, not native AdicSheaf; no existing native compact-support functor found. Docstrings carry source place, blueprint tag and all 12 steps. Advisory: the Second-reading section is the dispatcher placeholder; the realization lemma of step 12 should later reuse these abbrevs. No files changed, nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261026T235954-L-1475329",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

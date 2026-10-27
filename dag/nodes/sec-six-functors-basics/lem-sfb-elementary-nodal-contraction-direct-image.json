@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-elementary-nodal-contraction-direct-image",
+ "kind": "statement",
+ "title": "Cohomology and log dualizing comparison for a given elementary nodal contraction",
+ "statement": "Let $S$ be any scheme [def-pc-scheme]. Let $Y\\to S$ and $Z\\to S$ be proper [def-weil-proper-morphism], flat [def-weil-flat-morphism], finitely presented [def-sbc-locally-finite-presentation] families with nonempty connected reduced nodal geometric fibres of pure dimension one [def-trf-nodal-geometric-fibres]. Equip them with pairwise disjoint labelled sections $a_1,\\ldots,a_r$ and $b_1,\\ldots,b_r$ in the relative smooth loci, allowing $r=0$. Let $c:Y\\to Z$ be a proper $S$-morphism with $ca_i=b_i$. Assume that on every geometric fibre $c$ is either an isomorphism or is an isomorphism away from one smooth irreducible component $E\\simeq\\mathbf P^1$ and contracts exactly $E$ to one point. Here $E$ has either two attaching nodes and no marking, or one attaching node and exactly one marking. Put $L_Y=\\omega_{Y/S}(\\sum a_i)$ and $L_Z=\\omega_{Z/S}(\\sum b_i)$, using [def-trf-nodal-dualizing-datum] and [def-pc-divisor-line-bundle]. Then the structure unit $\\mathcal O_Z\\to c_*\\mathcal O_Y$ is an isomorphism and $R^ic_*\\mathcal O_Y=0$ for $i>0$. There is a canonical isomorphism $c^*L_Z\\simeq L_Y$ extending the adjunction comparison off the contracted components [def-pc-module-pullback]. For every $m\\geq0$, it induces canonical isomorphisms $L_Z^{\\otimes m}\\simeq c_*L_Y^{\\otimes m}$ and $R^ic_*L_Y^{\\otimes m}=0$ for $i>0$, and canonical isomorphisms $R^i(Z\\to S)_*L_Z^{\\otimes m}\\simeq R^i(Y\\to S)_*L_Y^{\\otimes m}$ for all $i\\geq0$. For $S=\\operatorname{Spec}k$ these include the corresponding $k$-linear cohomology isomorphisms. The $m=0$ comparison is the structure unit, the comparisons for all $m$ preserve section multiplication, and all these assertions and comparison maps remain valid and compatible after arbitrary base change of $S$ and under isomorphisms of contraction diagrams. No stability or genus restriction is imposed; the contraction $c$ is supplied, not constructed.",
+ "source": {
+  "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+  "place": "Section 1, Corollary 1.5, the logarithmic dualizing comparison immediately preceding Lemma 1.6, and Lemma 1.6 (Main Lemma), printed pp.166--169. Agent formulation for a supplied elementary tail/bridge contraction of nodal families: it retains precisely the fibre conditions used in that argument; no existence of a relative contraction is asserted. The m=0 case is Corollary 1.5 applied to the structure module. Local PDF WANTED; indexed primary scan read online.",
+  "url": "https://gdz.sub.uni-goettingen.de/download/pdf/PPN35397434X_0052/PPN35397434X_0052.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-nodal-geometric-fibres",
+  "def-trf-nodal-dualizing-datum",
+  "def-pc-divisor-line-bundle",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The current dualizing theorem tests nodality explicitly: on each geometric fibre the nonsmooth closed points have completed local algebra $\\Omega[[u,v]]/(uv)$, and all other points are smooth. The supplied nodal families satisfy this test: their geometric fibres are reduced of pure dimension one, the nonsmooth points are closed, with residue field $\\Omega$, and their completed local rings are isomorphic as rings to $\\Omega[[u,v]]/(uv)$; lem-trf-rational-nodal-completion-algebra, applied to an affine neighbourhood of such a point, makes this an isomorphism of complete local $\\Omega$-algebras. They are also proper, flat and finitely presented, as required. Write $p:Y\\to S$, $q:Z\\to S$, $D_Y=\\sum a_i$, $D_Z=\\sum b_i$. A section in the relative smooth locus is Cartier by lem-trf-smooth-curve-section-cartier, applied to that smooth open; its image is closed in the whole proper family by lem-weil-pbc-section-separated-closed-immersion. Disjointness makes each sum Cartier. The divisors are relative, since each is a disjoint union of copies of $S$, so their ideal sequences remain exact under base change. The dualizing theorem supplies the canonical invertible modules and arbitrary-base-change adjunction normalization. On a contracted $E$ its degree formula gives $\\deg L_Y|_E=-2+2=0$, using genus zero of $\\mathbf P^1$ from sk-thm-picard-pn. Thus the degree hypotheses of the rational-contraction line-cohomology theorem hold for $\\mathcal O_Y$, $L_Y$ and $L_Y^m$ for every $m\\geq0$. The ideal $I_Y=\\mathcal O_Y(-D_Y)$ has degree $0$ on a bridge and $-1$ on a marked tail, so that theorem applies to it as well.",
+   "uses": [
+    "lem-trf-smooth-curve-section-cartier",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-sfb-proper-nodal-dualizing-base-change",
+    "sk-thm-picard-pn",
+    "lem-pc-recd-pullback",
+    "lem-trf-rational-nodal-completion-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E6R; smooth Cartier sections Tag 067R; Knudsen Section 1 preceding Lemma 1.6, exceptional component degrees."
+   }
+  },
+  {
+   "text": "Apply lem-sfb-rational-contraction-line-cohomology with $\\mathcal L=\\mathcal O_Y$. It gives a finitely presented quasi-coherent algebra $B=c_*\\mathcal O_Y$, flat over $S$, with $R^1c_*\\mathcal O_Y=0$ and arbitrary $S$-base-change compatibility. The fibres of $c$ have dimension at most one: they are points away from the exceptional image and have support $E$ at it. The general proper fibre-dimension bound therefore gives $R^ic_*\\mathcal O_Y=0$ for $i>1$. All these applications also apply after every base change.",
+   "uses": [
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-proper-quasicoherent-fibre-dimension-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0E7D; Knudsen Corollary 1.5 (i)--(iii)."
+   }
+  },
+  {
+   "text": "First work over a geometric point of $S$ and on an affine open $U\\subset Z$. For $V=c^{-1}U$, form the affine Stein factor $V\\to W=\\operatorname{Spec}\\Gamma(V,\\mathcal O_V)\\to U$. The second map is finite: the algebra is a finite module by the preceding line-cohomology theorem. The scheme $W$ is reduced since $V$ is reduced, finite type over the algebraically closed field, and birational over $U$. Every nonexceptional component meets the isomorphism locus. The image of $E$, when present, lies in the closure of those images because $E$ has an attaching node. Surjectivity of the Stein map therefore shows that $W$ is pure of dimension one, with no extra isolated component. At a closed point of $U$ the fibre of $c$ is connected, and its surjective image in the finite fibre of $W\\to U$ is connected. The other points are generic points of components, where $W\\to U$ is an isomorphism. Thus all geometric fibres of this finite map are connected. By lem-trf-rational-nodal-completion-algebra $U$ passes its $k$-algebra nodal test, so the finite birational nodal criterion gives $W\\simeq U$. This proves that the structure unit on each geometric $S$-fibre is an isomorphism. Return to a stalk $z\\in Z$ over $s\\in S$. The cokernel of $\\mathcal O_Z\\to B$ is finite and vanishes modulo $\\mathfrak m_s$, by base change from Step 2 and faithful scalar extension to an algebraic closure. Here $\\mathfrak m_s\\mathcal O_{Z,z}\\subseteq\\mathfrak m_z$, so vanishing modulo $\\mathfrak m_s$ implies vanishing modulo the maximal ideal $\\mathfrak m_z$; the cited local Nakayama theorem makes the unit surjective. Its kernel is finite because $B$ is finitely presented. Since $B$ is $S$-flat, tensoring this surjection with $\\kappa(s)$ preserves its kernel, which is therefore zero modulo $\\mathfrak m_s$ too. Its quotient modulo $\\mathfrak m_z$ is therefore zero, and the same local Nakayama theorem proves injectivity. Together with Step 2, the actual unit is $\\mathcal O_Z\\simeq Rc_*\\mathcal O_Y$.",
+   "uses": [
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-trf-finite-birational-nodal-connected-iso",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-trf-rational-nodal-completion-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 03H2, Stein factorization; nodal connected finite modification criterion from Temkin Appendix B; Knudsen Corollary 1.5 and the fibrewise Nakayama argument printed p.168."
+   }
+  },
+  {
+   "text": "Apply the rational-contraction theorem to $I_Y=\\mathcal O_Y(-D_Y)$, with the degrees verified in Step 1. It gives $R^1c_*I_Y=0$; the dimension bound gives all higher vanishing. The Cartier exact sequence $0\\to I_Y\\to\\mathcal O_Y\\to\\bigoplus_i a_{i,*}\\mathcal O_S\\to0$ pushes to $0\\to c_*I_Y\\to\\mathcal O_Z\\to\\bigoplus_i b_{i,*}\\mathcal O_S\\to0$: each $c a_i=b_i$, and a closed immersion has no higher quasi-coherent direct images. The last map is restriction, since the middle map is the structure unit, so its kernel is exactly $I_Z=\\mathcal O_Z(-D_Z)$. Hence $Rc_*I_Y\\simeq I_Z$ canonically. This is the derived identification induced by the restriction triangle; it holds for the empty divisor as well.",
+   "uses": [
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-proper-quasicoherent-fibre-dimension-vanishing",
+    "lem-sc-affine-derived-pushforward-t-exact",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Cartier ideal sequence; Knudsen Section 1, printed pp.167--168, comparison of the negative marking ideals."
+   }
+  },
+  {
+   "text": "Apply relative trace-duality to $F=I_Y$. Both $F$ and $Rc_*F=I_Z$ are invertible, hence perfect. Cancelling the common shift $[1]$ in its isomorphism gives $Rc_*L_Y\\simeq L_Z$, since $R\\mathcal Hom(I_Y,\\omega_{Y/S})=I_Y^\\vee\\otimes\\omega_{Y/S}=L_Y$, and likewise on $Z$. Denote its degree-zero inverse by $\\beta:L_Z\\xrightarrow{\\sim}c_*L_Y$. The rational-contraction theorem gives a surjective adjunction evaluation $c^*c_*L_Y\\to L_Y$, because the exceptional degrees are zero. Composing with $c^*\\beta$ gives a surjection $\\alpha:c^*L_Z\\to L_Y$. A surjection between invertible modules is an isomorphism: after trivializing them it is multiplication by an element generating the local ring, hence by a unit. The trace normalization says that $\\alpha$ agrees with the adjunction comparison wherever $c$ is an isomorphism. This constructs the canonical log-dualizing isomorphism, rather than merely comparing component degrees.",
+   "uses": [
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-rational-contraction-line-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0A9Q and 0GEV, applied to the perfect marking ideal; relative trace base change Tags 0E5X and 0E6C in spaces-duality.tex; Knudsen comparison preceding Lemma 1.6."
+   }
+  },
+  {
+   "text": "For $m\\geq0$ take $\\alpha^{\\otimes m}:c^*(L_Z^{\\otimes m})\\simeq L_Y^{\\otimes m}$. Its adjoint $\\beta_m:L_Z^{\\otimes m}\\to c_*L_Y^{\\otimes m}$ is an isomorphism. For a line power, $Lc^*(L_Z^{\\otimes m})=c^*(L_Z^{\\otimes m})$: locally its rank-one free representative already computes derived pullback, without any flatness assumption on $c$. The perfect projection formula with $E=\\mathcal O_Y$ and $P=L_Z^{\\otimes m}$ identifies its derived version with the tensor product of the actual structure unit $\\mathcal O_Z\\to Rc_*\\mathcal O_Y$ and $P$, followed by $Rc_*(\\alpha^{\\otimes m})$. Both maps are isomorphisms by Steps 3 and 5. Thus $Rc_*L_Y^{\\otimes m}\\simeq L_Z^{\\otimes m}$, giving the stated direct-image isomorphism and all higher vanishing. For $m=0$ the map is exactly the structure unit. The use of the adjoint of $\\alpha^{\\otimes m}$ fixes the comparison maps without choices.",
+   "uses": [
+    "lem-sbc-ringed-site-perfect-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944, lemma-projection-formula; Knudsen Lemma 1.6(a),(b), with the additional m=0 unit case."
+   }
+  },
+  {
+   "text": "Apply $Rq_*$ to the derived isomorphism of Step 6 and use the canonical direct-image compositor $R(qc)_*\\simeq Rq_*Rc_*$. Its degree-$i$ cohomology gives $R^iq_*L_Z^{\\otimes m}\\simeq R^ip_*L_Y^{\\otimes m}$ for every $i\\geq0$. Over $S=\\operatorname{Spec}k$ this is precisely the $k$-linear cohomology comparison. For local sections $s$ and $t$ of tensor powers, both multiplication routes take $s\\otimes t$ to $\\alpha^{\\otimes(m+n)}c^*(s\\otimes t)$, since $\\alpha^{\\otimes(m+n)}=\\alpha^{\\otimes m}\\otimes\\alpha^{\\otimes n}$. Adjunction therefore makes the direct-image comparisons preserve section multiplication, including its unit.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Knudsen Lemma 1.6(c)."
+   }
+  },
+  {
+   "text": "For any $S_{new}\\to S$, the geometric fibre hypotheses, including the explicit nodal local-algebra test in Step 1, remain exactly the same, so Steps 1--7 apply to the pulled-back diagram. The dualizing and divisor comparisons in Step 1 commute with this base change. The line-cohomology theorem makes the units and the marking-ideal identification of Steps 2--4 commute with arbitrary base change. Relative trace-duality makes $\\beta$ in Step 5 commute as well; the adjunction evaluation defining $\\alpha$ commutes with the same canonical maps. Tensoring and taking adjuncts then give the identical $\\beta_m$ after base change, and the derived compositor gives commutative squares on relative cohomology. These are compatibilities with the canonical base-change maps; no assertion that each separate $R^iq_*L_Z^m$ has invertible ordinary base-change map is needed. All constructions (unit, restriction to labelled sections, trace, evaluation, tensor powers, compositor) are natural under isomorphisms of contraction diagrams. Their identity and composition laws give the required iterated compatibilities.",
+   "uses": [
+    "lem-sfb-proper-nodal-dualizing-base-change",
+    "lem-pc-recd-pullback",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "Tag 0E6C, relative dualizing trace and arbitrary base change; Knudsen Corollary 1.5(iii) and canonical maps in Lemma 1.6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-smooth-curve-section-cartier",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-sfb-proper-nodal-dualizing-base-change",
+  "sk-thm-picard-pn",
+  "lem-pc-recd-pullback",
+  "lem-sfb-rational-contraction-line-cohomology",
+  "lem-sfb-proper-quasicoherent-fibre-dimension-vanishing",
+  "lem-weil-pbc-stein-factorization-affine",
+  "lem-trf-finite-birational-nodal-connected-iso",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-sc-affine-derived-pushforward-t-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-relative-nodal-perfect-duality-trace",
+  "lem-sbc-ringed-site-perfect-projection-formula",
+  "lem-trf-rational-nodal-completion-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+  "place": "Section 1, Corollary 1.5 and comparison preceding Lemma 1.6, pp.167--169; indexed primary scan read online. Agent supplies relative-duality presentation of the comparison; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of pointed nodal curve families contracting one rational bridge or one rational tail with one marking preserves the logarithmic dualizing sheaf and its cohomology under arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W' : WeierstrassCurve.Projective R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism. For a projective Weierstrass curve $ W' $ over $ A $, a point $ P $ on $ W' $ is nonsingular if and only if the base-changed point $ f \\\\circ P $ \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"WeierstrassCurve.Affine.baseChange_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W : WeierstrassCurve.Affine R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst_9 : \", \"doc\": \"Given an injective ring homomorphism $ f : A \\to B $, a point $ (f(x), f(y)) $ on the base change of an affine Weierstrass curve $ W $ to $ B $ is nonsingular if and only if the corresponding point $ (\"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop),\\n  (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n      ∀ {X Y S : AlgebraicGeometry.Scheme} [AlgebraicGeometry.I\", \"doc\": \"If a property $ P $ of ring homomorphisms is stable under base change and respects isomorphisms, then for affine schemes $ X, Y, S $ with morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $, the property $ P \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: base-change permanence and structure-sheaf stalk formulas do not assert cohomological triviality or the logarithmic dualizing comparison for a rational contraction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Dualizing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: base-change permanence and structure-sheaf stalk formulas do not assert cohomological triviality or the logarithmic dualizing comparison for a rational contraction."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalBridge|rationalTail|nodal.*contract|contract.*nodal|logDualizing",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: base-change permanence and structure-sheaf stalk formulas do not assert cohomological triviality or the logarithmic dualizing comparison for a rational contraction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational component contraction of a nodal curve has pushforward structure sheaf O and R1 zero and preserves log canonical section rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pushforwardSections\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"[Functor.IsContinuous.{v} F J K] {M : SheafOfModules.{v} R} (s : M.sections) : ((pushforward φ).obj M).sections\", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, a natural transformation $ \\\\phi : S \\\\to F_*R $ between sheaves of rings, and \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \":\\n  f ≫ StructureSheaf.toPushforwardStalk f p =\\n    StructureSheaf.toStalk R p ≫ (TopCat.Presheaf.stalkFunctor _ _).map (Spec.sheafedSpaceMap f).hom.c\", \"doc\": \"For a ring homomorphism $ f : R \\to S $ and a point $ p $ in $ \\\\operatorname{Spec}(R) $, the composition of $ f $ with the canonical morphism from $ R $ to the pushforward of the structure sheaf on $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \": algebraMap R ((Spec.topMap f _* (structureSheaf S).1).stalk p) = (f ≫ StructureSheaf.toPushforwardStalk f p).hom\", \"doc\": \"The algebra map from $ R $ to the stalk of the pushforward structure sheaf at $ p $ is equal to the composition of the ring homomorphism $ f $ with the stalk map at $ p $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"[X.Over S] [Y.Over S] [Z.Over S] (f : X ⤏ Y) (g : Y ⟶ Z) [f.IsOver S] [g.IsOver S] : (f.compHom g).IsOver S\", \"doc\": \"A rational map between schemes $X$ and $Y$ is said to be over a base scheme $S$ if it is compatible with the given morphisms from $X$ and $Y$ to $S$. This means that the diagram formed by the rational\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \": IsLocalizedModule p.asIdeal.primeCompl (toPushforwardStalkAlgHom R S p).toLinearMap\", \"doc\": \"Given a commutative ring $ R $, an $ R $-algebra $ S $, and a prime ideal $ p $ in $ S $, the linear map associated to the canonical $ R $-algebra homomorphism from $ S $ to the stalk of the pushforwa\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverToRationalMapOfIsOver\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"[X.Over S] [Y.Over S] (f : X.PartialMap Y) [f.IsOver S] : f.toRationalMap.IsOver S\", \"doc\": \"If a partial map $ f $ between schemes $ X $ and $ Y $ over a base scheme $ S $ is compatible with the structure maps to $ S $, then the corresponding rational map obtained by equivalence of partial m\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \"(y) : ∃ x : S × p.asIdeal.primeCompl, x.2 • y = toPushforwardStalkAlgHom R S p x.1\", \"doc\": \"Given a commutative ring $ R $, an $ R $-algebra $ S $, and a prime ideal $ p $ in $ S $, there exists a canonical $ R $-algebra homomorphism from $ S $ to the stalk of the pushforward of the structur\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \": S ⟶ (Spec.topMap f _* (structureSheaf S).1).stalk p\", \"doc\": \"For a commutative ring $ R $ and an open subset $ U $ of its prime spectrum $ \\\\operatorname{Spec}(R) $, this constructs the canonical ring homomorphism from $ R $ to the ring of sections $ \\\\mathcal{O}\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: base-change permanence and structure-sheaf stalk formulas do not assert cohomological triviality or the logarithmic dualizing comparison for a rational contraction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper contraction of a rational bridge or marked rational tail preserves structure sheaf and logarithmic dualizing line bundle",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Proj.fromOfGlobalSections. ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general derived-category, module-adjunction, normalization, or quasicoherence declarations do not state this geometric theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalBridge|rationalTail|nodal.*contract|contract.*nodal|logDualizing",
+   "results": "Actual search returned 0 hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general derived-category, module-adjunction, normalization, or quasicoherence declarations do not state this geometric theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper map of nodal curves contracting a projective line with two special points preserves logarithmic canonical cohomology",
+   "results": "Actual search returned 8 hits: IsProperMap, AlgebraicGeometry.IsProper.mk, IsProperMap.casesOn, isProperMap_iff_tendsto_cocompact, AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProper.instRespectsIsoScheme, IsProperMap.mk, AlgebraicGeometry.IsProper.instOfIsFinite. ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general derived-category, module-adjunction, normalization, or quasicoherence declarations do not state this geometric theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Dualizing\"",
+   "results": "Actual search returned 0 hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general derived-category, module-adjunction, normalization, or quasicoherence declarations do not state this geometric theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-log-canonical-deletion-algebra",
+  "date": "2026-10-22",
+  "group": "Q64"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction.",
+   "via": [
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-elementary-nodal-contraction-direct-image",
+  "worker": "stage1",
+  "summary": "Reused rational-contraction line cohomology, proved structure unit by fibrewise nodal Stein factorization and two Nakayama applications, identified the marking ideals, and derived the canonical log comparison by coherent trace-duality and evaluation. Added only general proper fibre-dimension vanishing and relative coherent duality with trace compatibility. No statement correction. Repair of return 87433ddeba4: rebased onto the current live unsplit item, re-read every proof dependency and checked all 24 retained quotations; clarified both local Nakayama applications by distinguishing the base maximal ideal from the target-stalk maximal ideal. Statement and proof route retained. Renewed promotion repair on 2026-10-22: current server dry run 01a7b357e01 passed; revalidated every cited statement and all 24 quotations, and made pure dimension one and geometric connectedness of the affine Stein factor explicit before applying the finite nodal criterion. Promotion repair on 2026-10-23: initial current-server dry run 6af074f873c passed. Re-read all current proof-input statements and retained search results; all 24 quotations remain valid. Explicitly identified ordinary and derived pullback of the line powers in Step 6 by their local free representatives, so the cited derived projection formula needs no flatness of the contraction. Repair of changed cited statement (2026-10-23): re-read the current dualizing theorem, checked its explicit geometric-fibre hypotheses in Steps 1 and 8, and replaced both stale quotations. Distinguished the newly added Noetherian adjunction-line comparison node from the general relative trace-duality input.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Steps 1--8 supply the direct-image and logarithmic-dualizing prerequisite, not existence of a contraction.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-smooth-curve-section-cartier",
+    "why": "Generic tool used for its displayed statement in this contraction argument; this unit has no corresponding coherent-module/Stein/Nakayama/Cartier/projection/composition theorem. Does not replace a unit-level alteration step."
+   },
+   {
+    "node": "sk-thm-picard-pn",
+    "why": "Generic tool used for its displayed statement in this contraction argument; this unit has no corresponding coherent-module/Stein/Nakayama/Cartier/projection/composition theorem. Does not replace a unit-level alteration step."
+   },
+   {
+    "node": "lem-pc-recd-pullback",
+    "why": "Generic tool used for its displayed statement in this contraction argument; this unit has no corresponding coherent-module/Stein/Nakayama/Cartier/projection/composition theorem. Does not replace a unit-level alteration step."
+   },
+   {
+    "node": "lem-weil-pbc-stein-factorization-affine",
+    "why": "Generic tool used for its displayed statement in this contraction argument; this unit has no corresponding coherent-module/Stein/Nakayama/Cartier/projection/composition theorem. Does not replace a unit-level alteration step."
+   },
+   {
+    "node": "lem-trf-finite-birational-nodal-connected-iso",
+    "why": "Generic tool used for its displayed statement in this contraction argument; this unit has no corresponding coherent-module/Stein/Nakayama/Cartier/projection/composition theorem. Does not replace a unit-level alteration step."
+   },
+   {
+    "node": "lem-sc-affine-derived-pushforward-t-exact",
+    "why": "Generic tool used for its displayed statement in this contraction argument; this unit has no corresponding coherent-module/Stein/Nakayama/Cartier/projection/composition theorem. Does not replace a unit-level alteration step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic tool used for its displayed statement in this contraction argument; this unit has no corresponding coherent-module/Stein/Nakayama/Cartier/projection/composition theorem. Does not replace a unit-level alteration step."
+   },
+   {
+    "node": "lem-sbc-ringed-site-perfect-projection-formula",
+    "why": "Generic tool used for its displayed statement in this contraction argument; this unit has no corresponding coherent-module/Stein/Nakayama/Cartier/projection/composition theorem. Does not replace a unit-level alteration step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-smooth-curve-section-cartier",
+  "sk-thm-picard-pn",
+  "lem-pc-recd-pullback",
+  "lem-weil-pbc-stein-factorization-affine",
+  "lem-trf-finite-birational-nodal-connected-iso",
+  "lem-sc-affine-derived-pushforward-t-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sbc-ringed-site-perfect-projection-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-6e7522f22",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-6e7522f22 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, and diffed this head against the last passing one (327469fe7336). The new nodes are byte-identical. The item differs only in Steps 1 and 8, which now quote the rewritten statement of lem-sfb-proper-nodal-dualizing-base-change. That theorem now asks for each nonsmooth closed point to have completed local Omega-algebra Omega[[u,v]]/(uv). The live item is still unsplit and there is no re-split note. One fault (C1/C4), fixed: the item's nodality comes from def-trf-nodal-geometric-fibres, which gives that isomorphism only as rings, while the dualizing theorem (Step 1) and lem-trf-finite-birational-nodal-connected-iso (Step 3) need an isomorphism of k-algebras. The step just said the supplied families satisfy the test. The existing node lem-trf-rational-nodal-completion-algebra (on the base, N9 2026-10-22) is exactly this bridge; it applies because nonsmooth points of a reduced curve over Omega are closed with residue field Omega. The corrected item file now cites it in Steps 1 and 3 and in proof_deps; Step 3 is 1987 characters, nothing else changed. Steps checked: Step 1 smooth-locus Cartier sections, closed images, relative Cartier pullback, deg L_Y|_E = -2+#B+#marks = 0 with g(P1)=0 from sk-thm-picard-pn, I_Y degree 0 or -1. Step 2 matches the rational-contraction hypotheses; fibres have dimension at most 1, so 0E7D gives vanishing above degree 1. Step 3 Stein factor W: finite, reduced, birational, pure dimension one, connected fibres; Nakayama is correct, using m_s O_{Z,z} in m_z and Tor_1 = 0 from S-flatness of B. Step 4: affine t-exactness and the compositor give kernel I_Z. Step 5: F = I_Y and Rc_*F = I_Z are perfect, so Rc_*L_Y = L_Z, and alpha is a surjection between line bundles, hence an isomorphism. Steps 6 to 8: projection formula with Lc^* = c^* on line bundles, the compositor, and the stated base-change clauses. New node fibre-dimension-vanishing is Stacks limits.tex Tag 0E7D(1) (line 4808, no Noetherian hypothesis); no duplicate. New node duality-trace follows from 0A9Q and Remark 0GEV(1) (duality.tex line 620, L and Rf_*L perfect) with a_p = a_c a_q, plus 0E5X and 0E6C; the base-change square is Tor-independent because Y and Z are S-flat, so c need not be flat. Neither new node restates an item clause, and duality-trace is not a duplicate of the new Noetherian line-comparison node. Batch 5: smooth-curve-section-cartier, Stein-factorization-affine, finite-birational-nodal-connected-iso, the two def-trf definitions and the added bridge node are generic. The closures of the dualizing and line-cohomology nodes reach only definitions, general lemmas and setup nodes; no assumption leaf, trace-transport node, or trace-formula or Poincare-duality theorem. All accepted. The 8 generic tool_uses are accepted; the maintainer should record the added bridge node as a tool use. Knudsen II §1 has no local PDF, but the item statement is unchanged from the base and the proof route rests on Stacks and DAG inputs. Edge cases checked: r=0, m=0, c an isomorphism, a bridge with both nodes on one component, a marked tail, nonreduced S.; 1 file(s) fixed by the reviewer"
+ }
+}

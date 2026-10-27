@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-adic-actual-systems-normalized",
+ "kind": "statement",
+ "title": "Normalization of the actual source and exceptional coefficient systems",
+ "statement": "Fix a finite-field datum D, its coefficient datum C with prime ell different from the residue characteristic, a finite intermediate extension E of Q_ell, separated finite-type D.k-schemes X,Y, a smooth separated finite-type quasi-compact morphism f:X→Y of pure relative dimension d≥0, and a finite-Tor constructible integral object K in D(R_Y), with coefficients and canonical maps of [def-pur-adic-normalized-purity-systems]. There exist normalized DVR towers U,V [def-coef-normalized-dvr-tower] whose actual strict towers equal sourceTower(K), targetTower(K). Their finite objects are exactly the left and right endpoints of purAdicFiniteArrow(K,n), their evaluation maps are exactly sourceEvaluation and targetEvaluation, and their transitions are exactly purAdicFiniteSourceTransition and exceptionalTransition for every n≤m, using heterogeneous equality only to compare endpoint presentations. No morphism between the towers, finite purity invertibility, finite purity square, or exceptional normalization-mate identity is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Paragraph (1), actual normalized towers, with det-sp-tower-gamma (3) and the original normalized-purity-lift proof steps 1--3."
+ },
+ "stmt_deps": [
+  "def-pur-adic-normalized-purity-systems",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-derived-complete-integral-detailed] and [def-weil-finite-tor-amplitude], every $K_n$ is bounded constructible of finite Tor amplitude, and the cohomological lower bound is independent of $n$. Use [def-weil-pbc-adic-coefficient-datum] for the actual strict reduction towers of $K$ and $U$. Write $a_{m,n}:\\operatorname{red}_{m,n,Y}K_m\\xrightarrow{\\sim}K_n$ for the normalization of $K$ and $c^U_{m,n}$ for that of the reduction tower of $U$. Their identity and quotient cocycles are part of that construction. By [lem-pur-adic-source-finiteness-reductions], $b^U_n$ is invertible and intertwines successive and direct quotient normalizations. Identify the evaluations of the strict reduction tower of $U$ with $U_n$ using $b^U_n$; explicitly $\\rho^U_{m,n}=b^U_n c^U_{m,n}\\operatorname{red}_{m,n,X}((b^U_m)^{-1})$. This gives the required normalized source tower, including the quotient cocycle, in the sense of [def-coef-normalized-dvr-tower].",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-finite-tor-amplitude",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-pur-adic-source-finiteness-reductions",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take $\\mathcal V_\\bullet=DU_X\\mathcal T_fK$ from the integral construction in [def-weil-exceptional-inverse-image], so its inverse limit is the defined $Rf^!K$. This retains the actual strict system. Indeed, [lem-sf-proetale-constructible-origin] gives an etale-origin witness for every $K_n$. The input system is uniformly bounded below by step 1. Apply the last clause of [lem-pur-coefficient-system-derived-comparison] to $\\nu_Y$: the derived direct image of the input is a bounded-below normalized etale system. By [lem-pur-etale-coefficient-system-adjoint] its exceptional image is again bounded below and normalized, and its evaluations, including the transition maps, are the finite exceptional images and their adjunction mates. The comparison lemma transports this back by exact $\\nu_X^*$, preserving normalization and the evaluated transition maps. Forgetting the varying coefficient actions to $R_X$ gives exactly $\\mathcal V_\\bullet$, with evaluations $\\operatorname{Res}_n(V_n)$ and the original quotient cocycle.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "lem-sf-proetale-constructible-origin",
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-pur-adic-source-finiteness-reductions",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-etale-coefficient-system-adjoint",
+  "lem-sf-proetale-constructible-origin"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Paragraph (1), actual normalized towers, with det-sp-tower-gamma (3) and the original normalized-purity-lift proof steps 1--3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalization of strict reduction and exceptional coefficient systems in derived categories",
+   "date": "2026-10-25",
+   "results": "8 hits: HasDerivedCategory.standard, HasDerivedCategory, DerivedCategory.instCategory, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.instIsTriangulated, DerivedCategory.left_fac_of_isStrictlyGE, HomologicalComplexUpToQuasiIso, HomologicalComplexUpToQuasiIso.Q",
+   "verdict": "No exact Mathlib result. Reuse the project constructions and standard categorical lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of strict reduction and exceptional coefficient systems in derived categories",
+   "date": "2026-10-25",
+   "results": "8 hits: Mathlib.Tactic.LinearCombination.normStx, Mathlib.Tactic.LinearCombination'.normStx, Mathlib.Tactic.Module.reduceCoefficientwise, Mathlib.Tactic.Module.qNF.toNF, Mathlib.Tactic.FieldSimp.qNF.toNF, FreeAddGroup.Red.Step.to_red, Mathlib.Tactic.FieldSimp.qNF.removeZeros, FreeAddGroup.reduce.min",
+   "verdict": "No exact Mathlib result. Reuse the project constructions and standard categorical lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedDVRTowerEvaluation|exceptionalNormalization|sourceEvaluation",
+   "date": "2026-10-25",
+   "results": "0 hits: ",
+   "verdict": "No exact Mathlib result. Reuse the project constructions and standard categorical lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicNormalizedPurityLift",
+  "date": "2026-10-25",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-adic-reconstruction",
+   "place": "Paragraph (1), actual normalized towers, with det-sp-tower-gamma (3) and the original normalized-purity-lift proof steps 1--3.",
+   "via": [
+    "lem-pur-adic-normalized-purity-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicActualSystemsNormalized",
+  "file": "lean/Sheaf/Paper/AdicActualSystemsNormalized.lean",
+  "declaration": "WeilConjectures.AdicNormalizedPurity.actual_systems_normalized",
+  "declarations": [
+   "WeilConjectures.AdicNormalizedPurity.actual_systems_normalized"
+  ],
+  "statement": "theorem actual_systems_normalized\n    (K : DerivedCategory (scalarReductionSource C.l E Y))\n    (hK : finiteTorConstructibleIntegral C.l E Y K) :\n    ∃ U V : NormalizedDVRTower C.l E X D C.different,\n      U.tower = sourceTower D C E f d K ∧\n      V.tower = targetTower D C E f K ∧\n      (∀ n : ℕ,\n        HEq (U.M n) (purAdicFiniteArrow D C E f d K hK n).left ∧\n        HEq (V.M n) (purAdicFiniteArrow D C E f d K hK n).right ∧\n        HEq (U.evaluationIso n).hom (sourceEvaluation D C E f d K hK n) ∧\n        HEq (V.evaluationIso n).hom (targetEvaluation D C E f d K hK n).hom) ∧\n      (∀ {m n : ℕ} (h : n ≤ m),\n        HEq (U.tau h) (purAdicFiniteSourceTransition D C E f d K hK h) ∧\n        HEq (V.tau h) (exceptionalTransition D C E f d K hK h))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-60f67",
+  "group": "P3",
+  "result": "fix",
+  "landing": "20261025T095710-L-3469215",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-60f67",
+  "group": "P3",
+  "result": "fix",
+  "landing": "20261025T095710-L-3469215",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clones/live (identical); 10 moved defs vs old item bodies (identical); 2 new sorry lemmas vs item clauses 2.3 and 3 (verbatim); tower-full copy vs SequentialTowerEvaluationFull (universe-general re-proof, axioms clean)"
+ }
+}

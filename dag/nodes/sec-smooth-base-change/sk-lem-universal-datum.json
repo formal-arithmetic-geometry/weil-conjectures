@@ -249,7 +249,43 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-universal-datum",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.CurveTestDatum",
+    "AlgebraicGeometry.Etale.exists_curveTestDatum"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.CurveTestDatum",
+     "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum",
+     "lines": [
+      73,
+      119
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.exists_curveTestDatum",
+     "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum",
+     "lines": [
+      295,
+      322
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "sk-lem-universal-datum",
@@ -302,5 +338,66 @@
   "group": "Q92",
   "result": "pass",
   "note": "Delivery = report, node lean record only, one sorry-only module. Node statement is verbatim the main-20261015 blueprint. Each clause matches: signed n:ℤ with IsUnit on Γ(S,⊤) and (n:Λ)=0; q≥1; hprev ∀q'≤q-1 UniversalBaseChangeProperty; hfail ¬BaseChangeProperty at the fixed base; upstream CurveTestDatum fields give S' affine, integral and normal (integrally closed stalks), algebraically closed function field, K/L, geometric generic point and Cartesian fibre; ChosenCartesianSquare b D.f₀ f a has the right orientation; natural D.d cast to ℤ is equivalent to an integer d (same ideal, unit and divisibility); conclusion ¬IsZero R^q h_*(Λ/d). Λ:Type(u+1) matches the reviewed sk-def-bc interface. The statement follows from upstream exists_curveTestDatum via natAbs, so a wrapper rather than existing:true is justified. Edge cases q=1, n<0, n=0, Λ=0, empty schemes, d=0/1 are fine. Docstrings carry the source place, blueprint id and full proof plan. No hollow definition, no extra assumptions. lean.statement is verbatim. nt_compile.py per-file compile exit 0 with no diagnostics; a probe confirmed the signature and axioms (propext, sorryAx, choice, Quot.sound). No findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Recall that, for a morphism $g:Y'\\to Y$ and an integer $n$ invertible on $Y$,\n$\\mathrm{BC}(g,n,r)$ means: for every scheme $T$ over $Y$, every qcqs morphism $Z\\to T$,\nevery sheaf of $\\mathbf Z/n$-modules on $Z_{\\mathrm{\\acute et}}$ and every $0\\leq i\\leq r$,\nthe degree-$i$ exchange map for the square with base change $Y'\\times_YT\\to T$ and direct\nimage along $Z\\to T$ is an isomorphism.\nSuppose $g\\colon Y'\\to Y$ is affine and smooth of relative dimension\none, $n$ is invertible on $Y$, and $\\mathrm{BC}(g,n,q-1)$ holds. If\n$\\mathrm{BC}(g,n,q)$ fails, there are an affine scheme\n$S=\\operatorname{Spec}A$ over $Y$ with $A$ a normal domain whose fraction\nfield $L$ is algebraically closed, an algebraically closed extension\nfield $K$ of $L$, an integer $d\\mid n$, and, for the smooth affine curve\n$C=Y'\\times_YS$, the cartesian square\n\n$$\n\\begin{array}{ccc}\nC_K & \\xrightarrow{\\ h\\ } & C\\\\\n\\downarrow & & \\downarrow\\\\\n\\operatorname{Spec}K & \\longrightarrow & S\n\\end{array}\n$$\n\nsuch that\n\n$$\n R^qh_*\\underline{\\mathbf Z/d}\\ne0.\n$$\n\nHere $\\underline{\\mathbf Z/d}$ is the classical constant sheaf. The\nring $A$ is in general not Noetherian, which is why the reductions\nallow arbitrary base schemes $T$.\n\n*Complement.* In the notation of [sk-def-bc] (smooth side $f$, qcqs side $g$):\n\nLet $f:X\\to S$ be affine and smooth of relative dimension one with $X$\naffine, let $\\Lambda$ be a commutative ring, let $n$ be an integer\ninvertible on $S$ with $n\\Lambda=0$, and let $q\\ge1$. If\n$\\mathrm{BC}(f,\\Lambda,q')$ holds universally for all $q'\\le q-1$ but\n$\\mathrm{BC}(f,\\Lambda,q)$ does not hold ([sk-def-bc]), then\nthere is a universal curve-test datum: a morphism $S'\\to S$ and a\nCartesian square\n\n$$\n\\begin{array}{ccc}\nX'=X\\times_SS' & \\xleftarrow{\\;h\\;} & Y\\\\\nf'\\downarrow & & \\downarrow e\\\\\nS' & \\xleftarrow{\\;g\\;} & \\Spec K\n\\end{array}\n$$\n\nwith $S'=\\Spec A$ affine, integral, normal, fraction field $L$\nalgebraically closed, $K/L$ an extension of algebraically closed\nfields and $g$ the corresponding geometric generic point, $f'$ the base\nchange of $f$ (so affine and smooth of relative dimension one), and an\ninteger $d\\mid n$, invertible on $S'$, such that\n\n$$\nR^qh_*(\\Lambda/d\\Lambda)\\ \\neq\\ 0 .\n$$",
+  "proof": [
+   {
+    "text": "[sk-lem-failure-field] gives a failure with direct image\nfrom the spectrum of a field $K$, and [sk-lem-sbc-integral-tests]\nlets us replace $K$ by an algebraic closure. On this geometric point a\nsheaf of $\\mathbf Z/n$-modules is a $\\mathbf Z/n$-module, hence a direct\nsum of cyclic groups $\\mathbf Z/d$ with $d\\mid n$. The exchange map\ncommutes with this direct sum by continuity of qcqs direct images, so\nsome summand $\\mathbf Z/d$ still fails. Its positive-degree direct image\nfrom the geometric point vanishes, because every étale scheme over\nthe point is a disjoint union of copies of it. The source of the\nexchange map is therefore zero, and the failure means that the target\n$R^qh_*\\underline{\\mathbf Z/d}$ is nonzero.\n\nIf the base is $\\operatorname{Spec}B$, replace it by\n$\\operatorname{Spec}A$, where $A$ is the integral closure in $K$ of the\nimage of $B$. The morphism $\\operatorname{Spec}A\\to\\operatorname{Spec}B$\nis integral, so [sk-lem-sbc-integral-tests] keeps the failure.\nThe fraction field $L$ of $A$ is the algebraic closure of\n$\\operatorname{Frac}(\\operatorname{im}(B\\to K))$ in $K$, hence\nalgebraically closed. In general $K/L$ is transcendental. This is the\nsituation of [Stacks, Tag 0F08](https://stacks.math.columbia.edu/tag/0F08).",
+    "uses": [
+     "sk-lem-failure-field",
+     "sk-lem-sbc-integral-tests"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Complement.* In the notation of [sk-def-bc]:",
+    "uses": [
+     "sk-def-bc"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 1 (a failure over a field).* By [sk-lem-failure-field] there are\nan affine $S_1$ with a morphism $S_1\\to S$, the base change\n$f_1:X_1\\to S_1$ of $f$, a field $K_0$ with $g_0:\\Spec K_0\\to S_1$, and a\nsheaf $\\mathcal F_0$ of $\\Lambda$-modules on $(\\Spec K_0)_{\\Et}$ for which\nthe degree-$q$ base-change map of $f_1$ along $g_0$ is not an isomorphism.",
+    "uses": [
+     "sk-lem-failure-field"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 2 (algebraically closed field).* Let $K$ be an algebraic closure of\n$K_0$; $\\pi:\\Spec K\\to\\Spec K_0$ is integral and surjective. Since\n$\\mathrm{BC}(f_1,\\Lambda,q-1)$ holds (part of the universal hypothesis), the\nbase-change map in degree $q$ is injective, and the integral surjective\nbase-change lemma of this subsection shows that the failure persists\nfor the square of $f_1$ along $g_0\\circ\\pi$ and the sheaf\n$\\pi^{-1}\\mathcal F_0$: surjectivity on a geometric point makes the same\ncokernel element survive.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 3 (normal base).* Let $A_1=\\Gamma(S_1,\\mathcal O_{S_1})$ and let $B$ be\nthe integral closure of the image of $A_1$ in $K$; put $S'=\\Spec B$. Then\n$S'$ is affine, integral and normal, its fraction field $L$ is the\nalgebraic closure in $K$ of the fraction field of the image of $A_1$, hence\nalgebraically closed, $S'\\to S_1$ is integral, and $\\Spec K\\to S_1$\nfactors as the geometric generic point $g:\\Spec K\\to S'$ followed by\n$S'\\to S_1$. Higher direct images along integral morphisms vanish, so the\nintegral base-change lemma of this subsection identifies the base-change map\nof $f_1$ along $\\Spec K\\to S_1$ with that of the base change\n$f':X'=X\\times_SS'\\to S'$ along $g$; hence the latter, for\n$\\mathcal F=\\pi^{-1}\\mathcal F_0$, is not an isomorphism.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 4 (the target is nonzero).* $\\mathrm{BC}(f',\\Lambda,q-1)$ holds by the\nuniversal hypothesis, so by [sk-prop-injectivity] (1) the base-change map\n$f'^{-1}R^qg_*\\mathcal F\\to R^qh_*e^{-1}\\mathcal F$ is injective. It is not\nan isomorphism, so its target $R^qh_*e^{-1}\\mathcal F$ is nonzero.",
+    "uses": [
+     "sk-prop-injectivity"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 5 (constant coefficients $\\Lambda/d\\Lambda$).* As $K$ is algebraically\nclosed, $\\mathcal F$ is the constant sheaf with value the $\\Lambda$-module\n$M=\\mathcal F(\\Spec K)$, so $e^{-1}\\mathcal F$ is the constant sheaf $M$\non $Y$. The higher direct images of a sheaf of $\\Lambda$-modules are those of\nits underlying abelian sheaf, and $R^qh_*$ commutes with direct sums because\n$h$ is quasi-compact and quasi-separated (it is affine, as a base change of\nthe affine $f$). Since $n\\Lambda=0$, $M$ is an abelian group of exponent\ndividing $n$, hence a direct sum of cyclic groups $\\Z/\\ell^k$ with $\\ell$\nprime and $\\ell^k\\mid n$; so $R^qh_*(\\Z/\\ell^k)\\neq0$ for one of them, and\nthe exact sequences $0\\to\\Z/\\ell^{j-1}\\to\\Z/\\ell^j\\to\\Z/\\ell\\to0$ give\n$R^qh_*(\\Z/\\ell)\\neq0$ for that prime $\\ell\\mid n$. The element of order\n$\\ell$ of $M$ in that summand shows that $\\ell$ is not a unit of $\\Lambda$,\nso $\\Lambda/\\ell\\Lambda$ is a nonzero $\\mathbf F_\\ell$-vector space; as an\nabelian sheaf the constant sheaf $\\Lambda/\\ell\\Lambda$ is a nonzero direct\nsum of copies of $\\Z/\\ell$, and therefore\n$R^qh_*(\\Lambda/\\ell\\Lambda)\\neq0$. Put $d=\\ell$; it divides $n$, so it is\ninvertible on $S$ and on $S'$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 6 (the datum).* $S'\\to S$ is the composite $S'\\to S_1\\to S$, and\n$f'$ is the base change of $f$ along it; affineness, smoothness and relative\ndimension one are stable under base change, so $f'$ is affine and smooth of\nrelative dimension one. This is the datum of the statement.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

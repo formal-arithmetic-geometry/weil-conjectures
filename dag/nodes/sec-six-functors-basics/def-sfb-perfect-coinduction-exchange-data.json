@@ -1,0 +1,136 @@
+{
+ "id": "def-sfb-perfect-coinduction-exchange-data",
+ "kind": "definition",
+ "title": "Normalized scalar exchange data for derived coinduction",
+ "status": "split",
+ "statement": "Let $R,A,T,B$ be commutative rings, with ordinary unbounded module derived categories [def-weil-abstract-derived-category] and ring maps $f:R\\to A$, $g:R\\to T$, $a:A\\to B$, $b:T\\to B$. A scalar pair for a ring map $h:S\\to S'$ is a functor $F_h:D(S)\\to D(S')$ with a universal left-derived counit $Q_SF_h\\to (S'\\otimes_S-)Q_{S'}$, invertible on K-flat complexes, presenting derived scalar extension [lem-pc-derived-tensor-second-factor-functor]. Write $U_f,U_b$ for derived restriction and $C_f,C_b$ for derived coinduction [def-trf-derived-coinduction], with their evaluation counits $\\epsilon_f,\\epsilon_b$. Given scalar pairs $d_g,d_a$ and a natural isomorphism $\\theta:d_a.F\\,U_b\\simeq U_f\\,d_g.F$ (composition written left to right), define the following exchange data and predicates.\n\nThe tensor normalization of $\\theta$ is the equation on every K-flat $A$-complex $E$ identifying $\\theta^{-1}$, via the two scalar-pair counits and the restriction/localization comparisons, with the localization of each ordinary balancing isomorphism $e:T\\otimes_R U_fE\\simeq U_b(B\\otimes_A E)$ having $e(t\\otimes x)=b(t)\\otimes x$.\n\nFor $M\\in D(R)$ define $\\gamma_M:d_a.F(C_fM)\\to C_b(d_g.FM)$ to be the adjoint of $\\theta_{C_fM}$ followed by $d_g.F(\\epsilon_{f,M})$, using the restriction/coinduction adjunction. Thus the actual $B$-action is retained.\n\nFor complexes $E,Q$ over $R$, an augmentation $s:E\\to U_fA[0]$, and an isomorphism $e:Q_R\\operatorname{Hom}_R^\\bullet(E,Q)\\simeq U_fC_f(Q_RQ)$, define its Hom model predicate using the module-valued total Hom complex [def-sc-module-total-hom-complex] as follows: for every K-injective complex $I$ and every map $l:Q\\to I$, there exist the postcomposition chain map $j(z)=l\\circ z$, the augmentation-precomposition chain map $p(z)=z\\circ s$, and the canonical complex coinduction/Hom isomorphism $k$. Require the localized equation\n$$Q_R(j)=e\\circ U_fC_f(Q_Rl)\\circ U_f(\\mathrm{model}_f(I))\\circ\\mathrm{restriction\\ comparison}\\circ Q_R(k)\\circ Q_R(p),$$\nwhere this displayed composition is written in order of application. The coordinates of $k$ send a coinduced element $z$ to $x\\mapsto z(x)$ under the ordinary coinduction/linear-Hom equivalence.\n\nFor a chain map\n$$\\chi:T\\otimes_R\\operatorname{Hom}_R^\\bullet(E,Q)\\to\\operatorname{Hom}_T^\\bullet(T\\otimes_RE,T\\otimes_RQ),$$\ndefine the Hom scalar formula predicate to require, in every homogeneous coordinate $r+n=t$, every $z\\in\\operatorname{Hom}_R^n(E,Q)$, $x\\in E^r$, and $v,w\\in T$,\n$$(\\chi(v\\otimes z))_{r,t}(w\\otimes x)=vw\\otimes z_{r,t}(x).$$\n\nFor composable ring maps $h:S\\to S'$, $h':S'\\to S''$ and scalar pairs $d,e,c$ for $h,h',h'h$, define scalar-composition normalization of $\\alpha:d.F\\,e.F\\simeq c.F$ to mean that on each K-flat $S$-complex its hom followed by $c$'s counit equals the successive counits followed by the localization of the inverse ordinary tensor associator.\n\nFinally define the tower predicate for $(f,g,a,b,d_g,d_a,\\theta)$: for every further pushout square $T\\xrightarrow{t}V$, $B\\xrightarrow{j}C$, $V\\xrightarrow{c}C$ with maps from $T$ given by $b,t$, every scalar pair for $t,j,tg,ja$, and every derived Tor-independent identification $F_{tg}(U_fA[0])\\simeq U_cC[0]$, there exist normalized scalar associators $\\alpha_R:F_gF_t\\simeq F_{tg}$, $\\alpha_A:F_aF_j\\simeq F_{ja}$ and normalized tensor comparisons $\\theta',\\theta''$ for the direct and second squares such that for every unbounded $M\\in D(R)$,\n$$\\alpha_A^{-1}(C_fM)\\,;\\,F_j(\\gamma_M)\\,;\\,\\gamma''_{F_gM}\\,;\\,C_c(\\alpha_R(M))=\\gamma'_M.$$\nThese are definitions of data, maps and predicates; they assert neither existence of the tensor comparisons nor invertibility of the counit mates.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-trf-derived-coinduction",
+  "def-sc-module-total-hom-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex; literature/stacks-project/more-algebra.tex",
+  "place": "dualizing.tex equation-base-change and Tags 0A70/0A71; more-algebra.tex Tag 0661 (lemma-base-change-comparison), Tag 0A6A (equation-base-change-RHom), scalar associativity of Tag 06Y6."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CoinductionScalarPair|CoinductionTensorNormalized|coinductionScalarExchange|CoinductionHomModel|CoinductionHomScalarFormula|CoinductionExchangeTower",
+   "results": "{\"t\": \"2026-10-23T17:10:13Z\", \"tool\": \"grep\", \"query\": \"CoinductionScalarPair|CoinductionTensorNormalized|coinductionScalarExchange|CoinductionHomModel|CoinductionHomScalarFormula|CoinductionExchangeTower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib match: ordinary adjunction/counit and monoidal coherence hits do not define the derived exchange data; reuse the published Sheaf definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coinduction scalar exchange data universal derived scalar extension counit normalized Hom comparison",
+   "results": "{\"t\": \"2026-10-23T17:10:14Z\", \"tool\": \"leansearch\", \"query\": \"Derived coinduction scalar exchange data universal derived scalar extension counit normalized Hom comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction\", \"Coalgebra.counitCoalgHom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\"], \"digest\": \"e04d597643d9edea\"}",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib match: ordinary adjunction/counit and monoidal coherence hits do not define the derived exchange data; reuse the published Sheaf definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coinduction normalized tensor comparison counit mate and successive scalar extension compatibility",
+   "results": "{\"t\": \"2026-10-23T17:10:15Z\", \"tool\": \"leanfinder\", \"query\": \"Derived coinduction normalized tensor comparison counit mate and successive scalar extension compatibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"ModuleCat.homEquiv_extendScalarsComp\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"CategoryTheory.Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ\", \"CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse\"], \"digest\": \"d331d43421514e83\"}",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib match: ordinary adjunction/counit and monoidal coherence hits do not define the derived exchange data; reuse the published Sheaf definitions."
+  },
+  {
+   "tool": "rg",
+   "query": "CoinductionScalarPair|CoinductionTensorNormalized|coinductionScalarExchange|CoinductionHomModel|CoinductionHomScalarFormula|CoinductionExchangeTower in dag/nodes, lean/WeilConjectures and lean/Sheaf",
+   "results": "DAG: theorem records lem-sfb-perfect-coinduction-tor-independent-exchange and lem-per-potential-coinduction; no definition node owns these helpers. No upstream definition. Sheaf: all definitions are in Sheaf.Algebra.Homology.PerfectCoinductionTorIndependentExchange, lines 53, 68, 95, 118, 165, 258, 277. Reuse without copying.",
+   "date": "2026-10-23",
+   "verdict": "Exact existing Sheaf declarations; missing definition owner."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search coinduction; ancestor lem-sfb-perfect-coinduction-tor-independent-base-change",
+   "results": "0 blueprint nodes match 'coinduction'; a node created for lem-sfb-perfect-coinduction-tor-independent-base-change has blueprint.from.node = None",
+   "date": "2026-10-23",
+   "verdict": "No blueprint definition match; preserve null ancestor."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-coinduction-tor-independent-base-change",
+  "date": "2026-10-23",
+  "group": "Q154"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Supporting Tor-independent base change for perfect derived coinduction: the scalar pair, normalized tensor comparison, actual counit mate, Hom model and scalar formula, and successive-extension predicate used to state lem-sfb-perfect-coinduction-tor-independent-base-change.",
+   "via": [
+    "lem-sfb-perfect-coinduction-tor-independent-base-change",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PerfectCoinductionTorIndependentExchange",
+  "declaration": "ModuleCat.CoinductionScalarPair",
+  "declarations": [
+   "ModuleCat.CoinductionScalarPair",
+   "ModuleCat.CoinductionTensorNormalized",
+   "ModuleCat.coinductionScalarExchange",
+   "ModuleCat.CoinductionHomModel",
+   "ModuleCat.CoinductionHomScalarFormula",
+   "ModuleCat.CoinductionScalarCompNormalized",
+   "ModuleCat.CoinductionExchangeTower"
+  ],
+  "statement": "structure CoinductionScalarPair {R : Type u} {S : Type u} [CommRing R] [CommRing S]\n    [HasDerivedCategory.{wR} (ModuleCat.{u} R)]\n    [HasDerivedCategory.{wS} (ModuleCat.{u} S)] (f : R →+* S)",
+  "branch": "sheaf-dag",
+  "by": "Q154",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "H2 return repair: owns the existing plain definitions in the unchanged exchange module. No declaration is copied or obtained by choosing from its exchange theorem. The theorem stays a proof dependency of the consumer."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce325b54f",
+  "group": "Q154",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce325b54f",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 35da431f (H2+H3). Lean byte-identical (sha 95f2d25b), whose clause-by-clause reading found the maths faithful. Item delta: only stmt_deps and lean.note changed. Theorem stmt_dep lem-sfb-perfect-coinduction-tor-independent-exchange replaced by new def-sfb-perfect-coinduction-exchange-data, existing:true on the unchanged side-live PerfectCoinductionTorIndependentExchange with 7 plain decls (ScalarPair, TensorNormalized, coinductionScalarExchange, HomModel, HomScalarFormula, ScalarCompNormalized, ExchangeTower); bodies read, TeX faithful, covers every helper the item uses, no other owner, no cycle. def-sc-module-total-hom-complex added for moduleHomComplex. check_existing, check_record, check_new_node and check_lean_text all clean; statement verbatim; source labels exist; sorry only. Advisory: conceptual theorem cite lem-pc-derived-tensor-second-factor-functor in the new node; kFlat/ordinaryDerivedChangeOfRings owners; redundant sign clause; unused OrdinaryModuleDerivedInternalHom import. No file changed, no compile."
+ }
+}

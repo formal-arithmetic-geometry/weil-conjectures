@@ -1,0 +1,118 @@
+{
+ "id": "def-sfb-moduli-stabilizer-isomorphism-locus",
+ "kind": "definition",
+ "title": "Field-fibre points and geometric stabilizer-isomorphism locus",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Use the categories over $\\mathit{Sch}/S$, their fibre categories and morphisms of [def-sfb-stable-pointed-moduli-groupoids], and the quotient point set $|F|$ of field-valued objects of [def-sfb-dm-stack-morphism-properties]. Let $F,G$ be such categories over $\\mathit{Sch}/S$. The point class of an object $x$ in the fibre over an $S$-scheme $\\operatorname{Spec}K$, where $K$ is a field, is its quotient class $\\operatorname{pt}(x)\\in|F|$. For a morphism $f:F\\to G$ of categories over $\\mathit{Sch}/S$, define its geometric stabilizer-isomorphism locus to be the subset of $|F|$ consisting of classes $p$ for which there exist an algebraically closed field $\\Omega$, an $S$-structure on $\\operatorname{Spec}\\Omega$, and an object $x$ in that fibre of $F$ such that $\\operatorname{pt}(x)=p$ and the map $\\operatorname{Aut}(x)\\to\\operatorname{Aut}(f(x))$ induced by the actual fibre functor is bijective. For Deligne--Mumford stacks this is the locus where $f$ induces an isomorphism on geometric stabilizer group algebraic spaces, since these stabilizers over an algebraically closed field are etale. This definition asserts no openness or global stabilizer preservation.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DUA (lemma-stabilizer-preserving-unramified), the subset in its statement; Remark remark-identify-automorphism-groups and Lemma lemma-iso-automorphism-groups; field-point quotient convention"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The locus of points where a morphism of Deligne Mumford stacks induces an isomorphism on geometric stabilizer groups",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MulAction.stabilizerEquivStabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Basic\", \"type\": \"(hg : b = g • a) : stabilizer G a ≃* stabilizer G b\", \"doc\": \"Given a group $G$ acting on a set $\\\\alpha$, if $b = g \\\\cdot a$ for some $g \\\\in G$ and $a, b \\\\in \\\\alpha$, then the stabilizer subgroup of $b$ is conjugate to the stabilizer subgroup of $a$ via $g$. Thi\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : LocallyRingedSpace.{u}} (f : X ⟶ Y) (x : X) : IsLocalHom (f.toHom.stalkMap x).hom\", \"doc\": \"For any morphism $f : X \\\\to Y$ between two locally ringed spaces, and for any point $x \\\\in X$, the ring homomorphism $\\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$ induced by $f$ at $x$ is a local rin\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.stalkMap.isIso\", \"module\": \"Mathlib.Geometry.RingedSpace.Stalks\", \"type\": \"{X Y : PresheafedSpace.{_, _, v} C} (α : X ⟶ Y) [IsIso α] (x : X) : IsIso (α.stalkMap x)\", \"doc\": \"For any isomorphism $\\\\alpha: X \\\\to Y$ of presheafed spaces over a category $\\\\mathcal{C}$ and any point $x \\\\in X$, the induced stalk map $\\\\mathcal{F}_{Y, \\\\alpha(x)} \\\\to \\\\mathcal{F}_{X, x}$ between the \"}\n  {\"name\": \"DomMulAct.stabilizerMulEquiv_apply\", \"module\": \"Mathlib.GroupTheory.Perm.DomMulAct\", \"type\": \"(g : (stabilizer (Perm α)ᵈᵐᵃ f)ᵐᵒᵖ) {a : α} {i : ι} (h : f a = i) :\\n  ((stabilizerMulEquiv f)) g i ⟨a, h⟩ = (mk.symm g.unop : Equiv.Perm α) a\", \"doc\": \"There exists a group isomorphism between the opposite group of the stabilizer subgroup of a permutation action on $\\\\alpha$ via $f$ and the product of permutation groups on each fiber $\\\\{a \\\\in \\\\alpha \\\\\"}\n  {\"name\": \"MulAction.stabilizerEquivStabilizerOfOrbitRel\", \"module\": \"Mathlib.GroupTheory.GroupAction.Basic\", \"type\": \"(h : orbitRel G α a b) : stabilizer G a ≃* stabilizer G b\", \"doc\": \"Given a group $ G $ acting on a set $ \\\\alpha $, if elements $ a $ and $ b $ are in the same orbit (i.e., there exists $ g \\\\in G $ such that $ g \\\\cdot a = b $), then their stabilizer subgroups $ \\\\mathr\"}\n  {\"name\": \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.IsIso\", \"type\": \":\\n  isomorphisms Scheme = (isomorphisms TopCat).inverseImage Scheme.forgetToTop ⊓ stalkwise (fun f ↦ Function.Bijective f)\", \"doc\": \"A morphism of schemes is an isomorphism if and only if it induces a homeomorphism on the underlying topological spaces and the induced maps on the stalks are bijective.\"}\n  {\"name\": \"SubMulAction.ofStabilizer.conjMap\", \"module\": \"Mathlib.GroupTheory.GroupAction.SubMulAction.OfStabilizer\", \"type\": \"{g : G} {a b : α} (hg : b = g • a) : MulActionHom (stabilizerEquivStabilizer hg) (ofStabilizer G a) (ofStabilizer G b)\", \"doc\": \"Given a group $G$ acting on a set $\\\\alpha$, an element $a \\\\in \\\\alpha$, and $b = g \\\\cdot a$ for some $g \\\\in G$, this constructs a homomorphism between the submultiplicative actions of the stabilizer su\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \": (MorphismProperty.isomorphisms Scheme).IsLocalAtTarget zariskiPrecoverage\", \"doc\": \"The property of being an isomorphism for morphisms of schemes is local on the target with respect to the Zariski precoverage. Specifically, if a morphism $ f: X \\to Y $ becomes an isomorphism after pul\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no Mathlib match; the exact existing project definitions are reused, with a new definition-node ownership record"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stabilizer isomorphism locus of a morphism of algebraic stacks and point class of a field fibre object",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.arrowStalkMapIsoOfEq\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    {x y : ↥X} →\\n      x = y →\\n        (CategoryTheory.Arrow.mk (AlgebraicGeometry.Scheme.Hom.stalkMap f x) ≅\\n          CategoryTheory.Arrow.mk (AlgebraicGeometry.Scheme.Hom.stalkMap f y))\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes and equal points $ x = y $ in $ X $, this constructs an isomorphism between the arrows $ \\text{Arrow}(f_*^x) $ and $ \\text{Arrow}(f_*^y) $ in the arrow categor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.arrowStalkMapIsoOfEq\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    {x y : ↥X} →\\n      x = y →\\n        (CategoryTheory.Arrow.mk (AlgebraicGeometry.Scheme.Hom.stalkMap f x) ≅\\n          CategoryTheory.Arrow.mk (AlgebraicGeometry.Scheme.Hom.stalkMap f y))\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes and equal points $ x = y $ in $ X $, this constructs an isomorphism between the arrows $ \\\\text{Arrow}(f_*^x) $ and $ \\\\text{Arrow}(f_*^y) $ in the arrow categ\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkMap_congr_point\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x x' : ↥X) (hxx' : x = x'),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.stalkMap f x) (X.presheaf.stalkCongr ⋯).hom =\\n    CategoryTheory.CategoryStruct.comp (Y.presheaf.stalkCongr ⋯).hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $x, x'$ be points in the underlying topological space of $X$ such that $x = x'$. Let $f^\\\\#_x: \\\\mathcal{O}_{Y,f(x)} \\\\to \\\\mathcal{O}_{X,x}$ and $f^\\\\#_{\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.stalkMap_congr_point\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x x' : ↥X) (hxx' : x = x'),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.stalkMap f x) (X.presheaf.stalkCongr ⋯).hom =\\n    CategoryTheory.CategoryStruct.comp (Y.presheaf.stalkCongr ⋯).hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $x, x'$ be points in the underlying topological space of $X$ such that $x = x'$. This theorem states that the stalk map $f^\\\\sharp$ is compatible with\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ with injective germ map, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\\\\to Y$ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkMap_hom_inv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y) (y : ↥Y)\\n  (z :\\n    ↑(Y.presheaf.stalk\\n        ((CategoryTheory.ConcreteCategory.hom e.hom.base) ((CategoryTheory.ConcreteCategory.hom e.inv.base) y)))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap e.inv y))\\n      ((Cat\", \"doc\": \"For any isomorphism $ e: X \\\\cong Y $ between schemes and any point $ y \\\\in Y $, the composition of the underlying continuous maps $ e^{-1} \\\\circ e $ satisfies $ (e^{-1} \\\\circ e)(y) = y $. This establi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkMap_hom_inv\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y) (y : ↥Y),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Hom.stalkMap e.hom ((CategoryTheory.ConcreteCategory.hom e.inv.base) y))\\n      (AlgebraicGeometry.Scheme.Hom.stalkMap e.inv y) =\\n    (Y.presheaf.stalkCongr ⋯).hom\", \"doc\": \"For any isomorphism $ e: X \\\\cong Y $ between schemes and any point $ y \\\\in Y $, the composition of the stalk map $ e_\\\\ast $ at $ e^{-1}(y) $ followed by the stalk map $ e^{-1}_\\\\ast $ at $ y $ equals t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.stalkMap_hom_inv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y) (y : ↥Y)\\n  (z :\\n    ↑(Y.presheaf.stalk\\n        ((CategoryTheory.ConcreteCategory.hom e.hom.base) ((CategoryTheory.ConcreteCategory.hom e.inv.base) y)))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap e.inv y))\\n      ((Cat\", \"doc\": \"Let $e: X \\\\to Y$ be an isomorphism of schemes with inverse $e^{-1}$, and let $e_b, (e^{-1})_b$ be the underlying continuous maps. For any point $y$ in $Y$, the composition of the stalk maps $(e^{-1})_\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no Mathlib match; the exact existing project definitions are reused, with a new definition-node ownership record"
+  },
+  {
+   "tool": "grep",
+   "query": "moduliStabilizerIsomorphismLocus|moduliFiberPoint|stabilizer.*[Ll]ocus",
+   "results": "[grep] OK 0 hit(s)\n\nLocal rg of lean/WeilConjectures: no matching definitions. Local rg of lean/Sheaf: exact definitions only in DmStabilizerIsomorphismOpenLocus.lean, lines 89 and 100. DAG search: names listed only on the theorem node lem-sfb-dm-stabilizer-isomorphism-open-locus; no definition node owns them. blueprint_refs.py search stabilizer isomorphism returns only unrelated det-base-field-cd-cochains.",
+   "date": "2026-10-24",
+   "verdict": "no Mathlib match; the exact existing project definitions are reused, with a new definition-node ownership record"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dm-pointed-finite-groupoid-neighbourhood",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Stabilizer-preserving etale local finite flat affine covers. Supporting input: Pointed finite-groupoid etale neighbourhoods of finite-inertia DM stacks. Definition of the geometric stabilizer-isomorphism locus used at the chosen point.",
+   "via": [
+    "lem-sfb-dm-pointed-finite-groupoid-neighbourhood",
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DmStabilizerIsomorphismOpenLocus",
+  "declaration": "CategoryTheory.moduliStabilizerIsomorphismLocus",
+  "declarations": [
+   "CategoryTheory.moduliStabilizerIsomorphismLocus",
+   "CategoryTheory.moduliFiberPoint"
+  ],
+  "statement": "def moduliStabilizerIsomorphismLocus {S : Scheme.{u}}\n    {F : BasedCategory.{v₁, w₁} (Over S)} {G : BasedCategory.{v₂, w₂} (Over S)}\n    (f : BasedFunctor F G) : Set (ModuliPoints F)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Ownership record for the two existing definitions, with no duplicate Lean module and no use of the openness theorem. The field-fibre point is its quotient class; the locus uses an algebraically closed representative and the bijective automorphism homomorphism induced by the actual fibre functor."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c17b73557",
+  "group": "Q19",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c17b73557",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 59f7550c: Lean module byte-identical (maths accepted then; lean.statement verbatim, sole sorry is the theorem proof); item stmt_deps now cite new def node def-sfb-moduli-stabilizer-isomorphism-locus instead of the theorem node lem-sfb-dm-stabilizer-isomorphism-open-locus; no other item field changed. New node: statement matches the existing moduliFiberPoint/moduliStabilizerIsomorphismLocus defs (side-live lines 89-106, ∃ alg-closed Ω, fibre object, bijective mapAut) and Stacks 0DUA; existing:true record with verbatim signature; stmt_deps cover ModuliPoints/moduliFiberMap; H12 fields present; no competing owner landed. Report sections present. No compile needed (no file changed). Advisory: new node branch newtargets-dag vs sheaf-dag."
+ }
+}

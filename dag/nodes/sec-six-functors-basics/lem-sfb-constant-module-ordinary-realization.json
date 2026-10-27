@@ -1,0 +1,156 @@
+{
+ "id": "lem-sfb-constant-module-ordinary-realization",
+ "kind": "statement",
+ "title": "Ordinary constant-module realization of a geometric inverse image",
+ "statement": "For the geometric datum d of [def-sfb-constant-module-geometric-comparison-data], with independent object and morphism universes and a commutative coefficient ring A, there exist an OrdinaryIdentification d and a FixedTensorData d. The former identifies the module adjunctions through the prescribed constant-scalar restriction, with the underlying right-comparison identity and the complete Hom equation. The latter gives the geometric underlying inverse image, its normalized Hom equation, and a strong monoidal structure whose oplax tensor map preserves generalized pure tensors. All isomorphisms and tensors are normalized as in the cited definition; no finiteness, nonzero-ring, points, or derived-category hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks Project, Sites Tag 00YV (6), Modules on Sites Tag 03EL, and sites-cohomology.tex Tag 07A4: ordinary geometric module inverse image and balanced-tensor comparison; parent proof steps 1 and 4."
+ },
+ "stmt_deps": [
+  "def-sfb-constant-module-geometric-comparison-data",
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "lem-sfb-constant-scalar-geometric-adjunctions",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-pbc-ringed-tensor-section-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Compare the underlying direct-image isomorphisms. The ringed module linearity law, the constant-section equation and the fixed scalar linearity law show that their composite preserves b*x+y on arbitrary generalized sections. Extract linear component maps, prove their naturality, and reflect invertibility through the faithful underlying-sheaf functor. Take the adjunction square through the scalar-restriction equivalences to obtain the left comparison and its Hom equation.",
+   "uses": [
+    "def-sfb-constant-module-geometric-comparison-data",
+    "lem-sfb-constant-scalar-geometric-adjunctions",
+    "lem-sfb-constant-scalar-restriction-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, Sites Tag 00YV (6), Modules on Sites Tag 03EL, and sites-cohomology.tex Tag 07A4: ordinary geometric module inverse image and balanced-tensor comparison; parent proof steps 1 and 4."
+   }
+  },
+  {
+   "text": "Scalar extension along the specified ring isomorphism has inverse given by restriction along its inverse. Its inverse-on-generators equation identifies the insertion q with an isomorphism. Combine q with the algebraic underlying-sheaf isomorphism. Define the fixed underlying insertion as the mate of fixedPushUnderlying. The Hom equations identify this mate on the scalar-restriction image with the ringed insertion. Since scalar restriction is an equivalence, the mate is invertible on all fixed module sheaves.",
+   "uses": [
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "lem-pur-module-tensor-generator-calculus",
+    "lem-sfb-constant-scalar-restriction-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, Sites Tag 00YV (6), Modules on Sites Tag 03EL, and sites-cohomology.tex Tag 07A4: ordinary geometric module inverse image and balanced-tensor comparison; parent proof steps 1 and 4."
+   }
+  },
+  {
+   "text": "Apply the proved ringed tensor associativity, right unit and braiding equations to the recorded ringTensor isomorphisms, constructing the monoidal ringed pullback. Transport its composite with scalar restriction across the left comparison and a quasi-inverse of source scalar restriction. The monoidal equivalence counit gives the explicit transported oplax tensor map. Pull any generalized pure tensor back through that counit and the source restriction tensorator, apply ringTensor.pure, then apply the target restriction tensorator and the left comparison. Naturality of the underlying mate and of the sheafified tensor comparison identifies the result with the required normalized fixed pure tensor.",
+   "uses": [
+    "lem-pur-module-tensor-monoidal-equations",
+    "lem-pur-cochain-comparison-monoidal-equations",
+    "def-pur-cochain-tensor-coherence-data",
+    "lem-sfb-constant-scalar-restriction-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, Sites Tag 00YV (6), Modules on Sites Tag 03EL, and sites-cohomology.tex Tag 07A4: ordinary geometric module inverse image and balanced-tensor comparison; parent proof steps 1 and 4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-constant-module-geometric-comparison-data",
+  "lem-sfb-constant-scalar-geometric-adjunctions",
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-pur-module-tensor-generator-calculus",
+  "lem-pur-module-tensor-monoidal-equations",
+  "lem-pur-cochain-comparison-monoidal-equations",
+  "def-pur-cochain-tensor-coherence-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks Project, Sites Tag 00YV (6), Modules on Sites Tag 03EL, and sites-cohomology.tex Tag 07A4: ordinary geometric module inverse image and balanced-tensor comparison; parent proof steps 1 and 4. Explicit ordinary adjunction mate and transport of the existing normalized ringed tensor comparison; A6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constant.*(tensor|[Ee]xact)|geometric.*[Mm]onoidal",
+   "results": "{\"t\": \"2026-10-23T15:33:50Z\", \"tool\": \"grep\", \"query\": \"constant.*(tensor|[Ee]xact)|geometric.*[Mm]onoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/PiTensorProduct/Dual.lean\"], \"digest\": \"a4e005d2351ec2ea\"}",
+   "date": "2026-10-23",
+   "verdict": "No matching constant-module realization or normalized derived tensor square; the hits are generic scalar restriction, module tensor, or monoidal-functor constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric inverse image of constant ring module sheaves is exact and strong monoidal, compatible with scalar restriction",
+   "results": "{\"t\": \"2026-10-23T15:33:52Z\", \"tool\": \"leanfinder\", \"query\": \"A geometric inverse image of constant ring module sheaves is exact and strong monoidal, compatible with scalar restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\"], \"digest\": \"0bda05a03443dcd5\"}",
+   "date": "2026-10-23",
+   "verdict": "No matching constant-module realization or normalized derived tensor square; the hits are generic scalar restriction, module tensor, or monoidal-functor constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact strong monoidal functor on module sheaves induces a normalized derived monoidal functor compatible with scalar restriction on K-flat tensor representatives",
+   "results": "{\"t\": \"2026-10-23T16:06:05Z\", \"tool\": \"leansearch\", \"query\": \"An exact strong monoidal functor on module sheaves induces a normalized derived monoidal functor compatible with scalar restriction on K-flat tensor representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.ofBifunctor\", \"PresheafOfModules.monoidalCategory\", \"PresheafOfModules.monoidalCategoryStruct\", \"CategoryTheory.FreeMonoidalCategory.normalizeObj'\", \"CategoryTheory.Mod_.scalarRestriction\", \"ModuleCat.restrictScalars\", \"CategoryTheory.FreeMonoidalCategory.normalize\", \"CategoryTheory.Functor.Monoidal.mk\"], \"digest\": \"6b6e84880cbeecec\"}",
+   "date": "2026-10-23",
+   "verdict": "No matching constant-module realization or normalized derived tensor square; the hits are generic scalar restriction, module tensor, or monoidal-functor constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A geometric inverse image of module sheaves over a constant ring is naturally strong monoidal and agrees with scalar restriction",
+   "results": "{\"t\": \"2026-10-23T16:06:05Z\", \"tool\": \"leansearch\", \"query\": \"A geometric inverse image of module sheaves over a constant ring is naturally strong monoidal and agrees with scalar restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Mod_.scalarRestriction\", \"PresheafOfModules.restrictScalarsObj\", \"PresheafOfModules.monoidalCategory\", \"PresheafOfModules.monoidalCategoryStruct\", \"CategoryTheory.Mod_.comap\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalars\", \"ModuleCat.tildeInModuleCat\"], \"digest\": \"b17a092c43b13f6b\"}",
+   "date": "2026-10-23",
+   "verdict": "No matching constant-module realization or normalized derived tensor square; the hits are generic scalar restriction, module tensor, or monoidal-functor constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ConstantModuleDerivedProjectionIdentification",
+  "date": "2026-10-23",
+  "group": "A6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-finite",
+   "place": "Proof paragraph (3), canonical projection map: transport the etale projection formula through the constant-module realization, retaining its ordinary inverse-image tensor map and derived counit transpose.",
+   "via": [
+    "lem-sfb-constant-module-derived-projection-identification",
+    "lem-sfb-projection-comparison-etale-proetale"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ConstantModuleOrdinaryRealization",
+  "file": "lean/Sheaf/CategoryTheory/ConstantModuleOrdinaryRealization.lean",
+  "declaration": "CategoryTheory.ConstantModuleDerivedProjection.constant_module_ordinary_realization",
+  "statement": "theorem constant_module_ordinary_realization (d : GeometricData J K A) :\n    ∃ o : OrdinaryIdentification d, Nonempty (FixedTensorData d)",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261023T230345-L-3418115",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261024T184548-L-3068784",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

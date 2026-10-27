@@ -1,0 +1,277 @@
+{
+ "id": "lem-pur-vector-bundle-finite-type-frames",
+ "kind": "statement",
+ "title": "Finite-type affine frames and purity-domain geometry for a vector bundle",
+ "statement": "Let $k$ be a field, let $S$ be a finite-type $k$-scheme [def-weil-finite-type-morphism], and let $\\mathcal E$ be a locally free $\\mathcal O_S$-module of constant rank $d\\geq0$ [def-amb-finite-locally-free-module]. Let $\\pi:V=\\underline{\\operatorname{Spec}}_S(\\operatorname{Sym}^\\bullet\\mathcal E)\\to S$ be its vector bundle and $z:S\\to V$ its augmentation zero section [def-asd-vector-bundle-zero-section]. No separatedness of $S$ over $k$ is assumed.\n\nThe schemes $S,V$ are Noetherian, and $\\pi$ is affine, quasi-compact, separated and of finite type, and smooth of pure relative dimension $d$ [pqf-def-affine-morphism, def-weil-proper-morphism, def-sbc-smooth-morphisms]. There is a finite affine open cover $S=\\bigcup_i U_i$, with each $U_i=\\operatorname{Spec}R_i$ and $R_i$ finitely generated over $k$, and frames $\\mathcal E|_{U_i}\\cong\\mathcal O_{U_i}^{\\oplus d}$. Each frame gives a $U_i$-isomorphism $V_i=\\pi^{-1}U_i\\cong\\operatorname{Spec}R_i[x_1,\\ldots,x_d]=\\mathbf A^d_{U_i}$ [def-sbc-affine-space], identifying $\\pi$ with the polynomial projection and $z$ with the coordinate-zero section. The $V_i$ form an open cover of $V$ and are affine, separated finite-type $k$-schemes. On overlaps the restrictions of these frames can be compared on affine refinements whose coordinate rings are finitely generated over $k$; no affineness of $U_i\\cap U_j$ is asserted. The assertions include the empty scheme with the empty cover and $d=0$, when $\\pi$ and its zero section are the identity under the canonical rank-zero identification.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.md",
+  "place": "Preparation for source Steps 1-3: returned proof Step 1, finite-type affine frames and geometric domain of all diagonal/DNC applications"
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-amb-finite-locally-free-module",
+  "def-asd-vector-bundle-zero-section",
+  "pqf-def-affine-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-affine-space"
+ ],
+ "proof": [
+  {
+   "text": "Obtain IsNoetherian S using LocallyOfFiniteType.isLocallyNoetherian and QuasiCompact.compactSpace_of_compactSpace over the Noetherian field spectrum. Choose a module frame cover by exists_restrict_iso_free. Shrink a frame neighbourhood of each point using Scheme.isBasis_affineOpens, restricting the frame by restrictCompIso and the coproduct-preserving restriction functor. Compactness supplies a finite subcover, reindexed by Fin n. If S is empty choose Fin 0 from the outset.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-amb-finite-locally-free-module",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01C6, 01T6 and schemes.tex Tag 01IT"
+   }
+  },
+  {
+   "text": "The definition of over already supplies IsAffineHom of the bundle projection. Thus it is quasi-compact and separated. For each module frame use trivializationMap_spec to identify the restricted projection with an affine-space projection after an isomorphism. AffineSpace.smoothOfRelativeDimension_over, invariance under isomorphisms, and target locality of SmoothOfRelativeDimension d prove smoothness of relative dimension d globally. This implies Smooth, hence local finite presentation and local finite type. Finite type over S makes the total space Noetherian.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01S7, 01V6 and 02G2; constructions.tex Tag 01M1"
+   }
+  },
+  {
+   "text": "For rank zero each restricted affine-space projection is an isomorphism because its variable type is empty. Target locality of isomorphisms proves that the bundle projection is an isomorphism. Its existing section equation zero_spec identifies its inverse with zero. Preimages of the finite frame cover cover the total space by Scheme.Hom.iSup_preimage_eq_top.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "constructions.tex Tags 01LX and 01M1, rank zero"
+   }
+  },
+  {
+   "text": "For every affine frame open, trivializationMap_spec supplies the chart isomorphism and both the projection and zero-section equations. Its composite with AffineSpace.isoOfIsAffine is the required polynomial-spectrum isomorphism. Affineness of the chart implies separatedness and quasi-compactness over Spec k; local finite type follows by composition. Apply HasRingHomProperty.iff_of_isAffine and compose with the ring isomorphism Scheme.ΓSpecIso.inv to obtain finite type of the base coordinate ring over k.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "def-sbc-affine-space",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T2; schemes.tex Tag 01KN; constructions.tex Tag 01M1"
+   }
+  },
+  {
+   "text": "Shrink a neighbourhood of each point of an overlap to an affine T using the affine-open basis. Restrict the two original frames using restrictCompIso and the free-sheaf coproduct comparison for restriction. The formula ιFree_mapFreeIso_hom and naturality of the frame morphism show that the new frame sections are exactly the restrictions of the original sections. Apply transition_spec to obtain G,H and all frame and coordinate identities. The finite-type assertion for Γ(T) is the same affine-pair argument as above. Empty matrices and sums are covered by the existing transition_spec.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-amb-finite-locally-free-module",
+    "def-asd-vector-bundle-zero-section",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "modules.tex Tag 01C6 and constructions.tex Tag 01M1, restrictions of frames and change of basis"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-amb-finite-locally-free-module",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-asd-vector-bundle-zero-section",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-affine-space",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01M1; finite-frame and geometric consequences assembled from the existing VectorBundleZeroSection API and the cited Mathlib locality results. Formal proof by P2, 2026-10-24."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A constant rank algebraic vector bundle over a finite type scheme over a field has a finite affine trivializing cover with finite type affine total spaces and its projection is affine finite type smooth of relative dimension the rank",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : CompactSpace ↥X] (𝒰 : X.OpenCover)\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)] (i : 𝒰.finiteSubcover.I₀),\\n  AlgebraicGeometry.IsAffine (𝒰.finiteSubcover.X i)\", \"doc\": \"For any compact scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$ consisting of affine open subschemes, every finite subcover of $\\\\mathcal{U}$ also consists of affine open subschemes. Specifically, if\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine S],\\n  AlgebraicGeometry.IsAffine (AlgebraicGeometry.AffineSpace n S)\", \"doc\": \"If $ S $ is an affine scheme, then the affine space $ \\\\mathbb{A}^n_S $ over $ S $ is also affine. This instance asserts that when the base scheme $ S $ satisfies the affineness condition, the construc\"}\n  {\"name\": \"Bundle.Trivial.vectorBundle\", \"module\": \"Mathlib/Topology/VectorBundle/Constructions\", \"type\": \"∀ (𝕜 : Type u_1) (B : Type u_2) (F : Type u_3) [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup F]\\n  [inst_2 : NormedSpace 𝕜 F] [inst_3 : TopologicalSpace B], VectorBundle 𝕜 F (Bundle.Trivial B F)\", \"doc\": \"The trivial bundle over a topological space $ B $ with fiber $ F $, a normed vector space over a nontrivially normed field $ \\\\mathbb{K} $, is a vector bundle. This structure equips the product space $\"}\n  {\"name\": \"trivialVectorBundleCore\", \"module\": \"Mathlib/Topology/VectorBundle/Basic\", \"type\": \"(R : Type u_1) →\\n  (B : Type u_2) →\\n    (F : Type u_3) →\\n      [inst : NontriviallyNormedField R] →\\n        [inst_1 : NormedAddCommGroup F] →\\n          [inst_2 : NormedSpace R F] →\\n            [inst_3 : TopologicalSpace B] → (ι : Type u_5) → [Inhabited ι] → VectorBundleCore R B F ι\", \"doc\": \"Constructs a trivial vector bundle over a topological space $ B $ with fiber $ F $, using the universal set as the base set and identity continuous linear maps as transition functions between triviali\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsFinite f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"For any finite morphism $ f : X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(f^{-1}(U)) $ is finite, meaning that\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: individual affine-space/smoothness or ordinary adjunction/coordinate results do not state the simultaneous algebraic bundle assertion and its specified comparison maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsAffineHom",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: individual affine-space/smoothness or ordinary adjunction/coordinate results do not state the simultaneous algebraic bundle assertion and its specified comparison maps"
+  },
+  {
+   "tool": "grep",
+   "query": "vectorBundle.*[Ss]mooth|[Ss]mooth.*vectorBundle|vectorBundle.*[Ff]initeType",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: individual affine-space/smoothness or ordinary adjunction/coordinate results do not state the simultaneous algebraic bundle assertion and its specified comparison maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite locally free module on a finite type scheme over a field the relative spectrum of its symmetric algebra is smooth with relative dimension its rank and has affine finite type trivializing charts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [hf : IsSmoothOfRelativeDimension n f] [hg : IsSmoothOfRelativeDimension m g] :\\n  IsSmoothOfRelativeDimension (n + m) (f ≫ g)\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsSmoothOfRelativeDimension n f] : IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.relativeDimension\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmooth\", \"type\": \"[IsStandardSmooth R S] : ℕ\", \"doc\": \"The relative dimension of a standard smooth algebra $ S $ over a commutative ring $ R $, defined as the dimension of $ S $ via its submersive presentation where $ S $ is isomorphic to a localized poly\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: individual affine-space/smoothness or ordinary adjunction/coordinate results do not state the simultaneous algebraic bundle assertion and its specified comparison maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Spec of the symmetric algebra of a locally free sheaf is an affine separated finite type morphism smooth of constant relative dimension, with affine polynomial ring charts over a finite type base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.FormallyUnramified R S]\\n  [Algebra.EssFiniteType R S],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.lmul' R).toRingHom))\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ S $ that is formally unramified and of essential finite type, the morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(S \\\\otimes_R S) $ induced\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: individual affine-space/smoothness or ordinary adjunction/coordinate results do not state the simultaneous algebraic bundle assertion and its specified comparison maps"
+  },
+  {
+   "tool": "grep",
+   "query": "IsZariskiLocalAtTarget|IsLocalAtTarget",
+   "results": "Returned 1 hits: 96",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: returned locality, finite-type, affine-space or topological vector-bundle declarations cover individual ingredients only; the relative symmetric-algebra construction and the simultaneous framed geometry require assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness of a morphism of schemes is local on an open covering of the target",
+   "results": "Returned 8 hits: AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsLocalAtTarget, AlgebraicGeometry.IsZariskiLocalAtTarget.of_iSup_eq_top, AlgebraicGeometry.IsZariskiLocalAtTarget.of_openCover, AlgebraicGeometry.IsLocalAtTarget.of_openCover, AlgebraicGeometry.IsZariskiLocalAtTarget.iff_of_openCover, AlgebraicGeometry.IsSmoothOfRelativeDimension.mk, AlgebraicGeometry.topologically_isLocalAtTarget'",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: returned locality, finite-type, affine-space or topological vector-bundle declarations cover individual ingredients only; the relative symmetric-algebra construction and the simultaneous framed geometry require assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "Returned 12 hits: AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType, AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.locallyOfFiniteType_comp",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: returned locality, finite-type, affine-space or topological vector-bundle declarations cover individual ingredients only; the relative symmetric-algebra construction and the simultaneous framed geometry require assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes which is Zariski locally on the target a finite dimensional affine space projection is smooth of that relative dimension and is of finite type",
+   "results": "Returned 8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: returned locality, finite-type, affine-space or topological vector-bundle declarations cover individual ingredients only; the relative symmetric-algebra construction and the simultaneous framed geometry require assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "symSpecProj|symSpecZeroSection|vectorBundle.*[Ff]initeType|finite.*affine.*trivializ",
+   "results": "Returned 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: returned locality, finite-type, affine-space or topological vector-bundle declarations cover individual ingredients only; the relative symmetric-algebra construction and the simultaneous framed geometry require assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic vector bundle over a finite type scheme over a field has finitely many affine trivializing charts and a smooth affine finite type projection",
+   "results": "Returned 8 hits: VectorPrebundle.pretrivializationAtlas, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, FiberBundle.trivializationAtlas', VectorBundleCore.trivializationAt, VectorBundleCore.mem_localTriv_source, VectorBundleCore.localTriv, VectorBundle.trivialization_linear', VectorPrebundle.IsContMDiff",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: returned locality, finite-type, affine-space or topological vector-bundle declarations cover individual ingredients only; the relative symmetric-algebra construction and the simultaneous framed geometry require assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine trivializing frames of a finite locally free sheaf on a scheme of finite type over a field; relative spectrum of its symmetric algebra is affine smooth and Noetherian",
+   "results": "Returned 8 hits: AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover, AlgebraicGeometry.Scheme.affineBasisCoverRing, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset, AlgebraicGeometry.Scheme.Hom.finite_app",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: returned locality, finite-type, affine-space or topological vector-bundle declarations cover individual ingredients only; the relative symmetric-algebra construction and the simultaneous framed geometry require assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-orientation-vector-bundle",
+  "date": "2026-10-22",
+  "group": "Q157"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-orientation",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-orientation-vector-bundle",
+   "place": "Preparation for source Steps 1-3: returned proof Step 1, finite-type affine frames and geometric domain of all diagonal/DNC applications",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-vector-bundle-finite-type-frames",
+  "worker": "stage1",
+  "summary": "Constructed finite affine frames and all projection/chart properties using existing nodes only. Read cited statements and Stacks sources; separatedness of the base and affine overlaps are never assumed; empty base and rank zero are included. Statement unchanged; no new nodes.",
+  "blueprint": "Preparation for Steps 1-3 of the returned diagonal-orientation argument, as named in blueprint.from.place: affine framed models and validity of geometric inputs for diagonal/DNC comparisons.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine",
+    "why": "Affine section comparison for the symmetric algebra; a generic algebraic-geometric construction needed to identify framed charts, not a replacement of the orientation route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Relative spectrum on affine opens, algebra-map compatibility and restriction; no orientation-unit node gives this general construction."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Smoothness and relative dimension of the polynomial projection in each frame; a generic geometric input to the orientation argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-e6bb3fbe6",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-e6bb3fbe6 (reviewer sub-agent of L); spot-checked: Ordinary S1 split: no repair note, no new nodes, statement unchanged, proof_deps equal the union of the step uses, no SGA. I read the full statements of all 20 cited nodes. Step 1: Spec k is Noetherian, so S is Noetherian by 01T6; frames come from def-amb; 01IT gives affine shrinkings; quasi-compactness gives a finite subcover; 01T2 pairs with target Spec k show each R_i is finitely generated over k. Step 2: θ_U gives A(U_i)≅Sym_{R_i}(E(U_i)); relative-spec (2),(3),(4) and 00DM give V_i≅Spec R_i[x], with z equal to the coordinate-zero section by the augmentation clause of def-asd. Step 3: π is affine by the existential cover criterion 01S8, quasi-compact and separated by 01S7, locally of finite type by the pointwise criterion, hence of finite type, and V is Noetherian by 01T6. Step 4: finite type over k by explicit generators; separated because the source is affine (01KN/01KV); separatedness of S is never used. Step 5: A^d is smooth of relative dimension d; restrict (c) and then (b) give π_i and π∘j_i smooth, and local-on-source gives π smooth; the fibre over s∈U_i lies entirely in V_i, which gives dim_x=d at every point. Step 6: affine refinements of overlaps with transition matrices as in def-asd; no affine intersections are assumed. Step 7: the empty base and d=0 hold (E=0, Sym=R, A^0_S=S). The def-asd Noetherian hypothesis is supplied by Step 1. Edge cases tested: a non-separated glued A^1 base, a nonreduced base, rank 0 and any characteristic. Duplicate check: lem-pur-line-zero-geometry is a different, stronger rank-one package with a separated base, so it is not a duplicate. The citer det-sp-orientation-vector-bundle uses only clauses proved here. The three generic tool_uses are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.VectorBundleFiniteTypeFrames",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorBundleFiniteTypeFrames.lean",
+  "declaration": "AlgebraicGeometry.VectorBundleZeroSection.finite_type_frames",
+  "statement": "theorem finite_type_frames (k : Type u) [Field k] (S : Scheme.{u}) (f : S ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ) (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d] : ∃ (hS : IsNoetherian S), IsNoetherian (scheme S d F) ∧ IsAffineHom (π S d F) ∧ QuasiCompact (π S d F) ∧ IsSeparated (π S d F) ∧ LocallyOfFiniteType (π S d F) ∧ SmoothOfRelativeDimension d (π S d F) ∧ (d = 0 → ∃ e : scheme S d F ≅ S, e.hom = π S d F ∧ e.inv = zero S d F) ∧ ∃ (n : ℕ) (U : Fin n → S.affineOpens) (e : ∀ i : Fin n, Trivialization S d F (U i).1), (⨆ i : Fin n, (U i).1) = ⊤ ∧ (IsEmpty S → n = 0) ∧ (⨆ i : Fin n, (π S d F) ⁻¹ᵁ (U i).1) = ⊤ ∧ (∀ i : Fin n, ((Scheme.ΓSpecIso (.of k)).inv ≫ ((U i).1.ι ≫ f).appTop).hom.FiniteType ∧ IsAffine (((π S d F) ⁻¹ᵁ (U i).1).toScheme) ∧ IsSeparated (((π S d F) ⁻¹ᵁ (U i).1).ι ≫ π S d F ≫ f) ∧ LocallyOfFiniteType (((π S d F) ⁻¹ᵁ (U i).1).ι ≫ π S d F ≫ f) ∧ QuasiCompact (((π S d F) ⁻¹ᵁ (U i).1).ι ≫ π S d F ≫ f) ∧ IsIso (trivializationMap S d F (U i).1 (e i)) ∧ (trivializationMap S d F (U i).1 (e i) ≫ AffineSpace (ULift.{u} (Fin d)) (U i).1.toScheme ↘ (U i).1.toScheme = (π S d F) ∣_ (U i).1) ∧ (zeroRestricted S d F (U i).1 ≫ trivializationMap S d F (U i).1 (e i) = AffineSpace.zeroSection (ULift.{u} (Fin d)) (U i).1.toScheme) ∧ ∃ φ : ((π S d F) ⁻¹ᵁ (U i).1).toScheme ≅ Spec (.of (MvPolynomial (ULift.{u} (Fin d)) Γ((U i).1.toScheme, ⊤))), φ.hom = trivializationMap S d F (U i).1 (e i) ≫ (AffineSpace.isoOfIsAffine (ULift.{u} (Fin d)) (U i).1.toScheme).hom) ∧ (∀ (i j : Fin n) (x : S), x ∈ (U i).1 ⊓ (U j).1 → ∃ (T : S.affineOpens) (hi : T.1 ≤ (U i).1) (hj : T.1 ≤ (U j).1), x ∈ T.1 ∧ ((Scheme.ΓSpecIso (.of k)).inv ≫ (T.1.ι ≫ f).appTop).hom.FiniteType ∧ ∃ ei ej : Trivialization S d F T.1, (∀ a : Fin d, frameSection S d F T.1 ei a = F.presheaf.map (homOfLE hi).op (frameSection S d F (U i).1 (e i) a)) ∧ (∀ a : Fin d, frameSection S d F T.1 ej a = F.presheaf.map (homOfLE hj).op (frameSection S d F (U j).1 (e j) a)) ∧ ∃ G H : Matrix (Fin d) (Fin d) (S.presheaf.obj (op T.1)), G * H = 1 ∧ H * G = 1 ∧ (∀ b : Fin d, frameSection S d F T.1 ej b = ∑ a : Fin d, G a b • frameSection S d F T.1 ei a) ∧ (∀ b : Fin d, coordinate S d F T.1 ej b = ∑ a : Fin d, ((π S d F) ∣_ T.1).appTop (T.1.topIso.inv (G a b)) * coordinate S d F T.1 ei a))",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ec3396a0",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node: field k, f : S ⟶ Spec k with LFT+QC, no separatedness, IsFiniteLocallyFreeOfRank d; IsNoetherian S is an existential conclusion supplying the def-asd instance, not an added hypothesis; V Noetherian, π IsAffineHom/QC/IsSeparated/LFT/SmoothOfRelativeDimension d; finite affine cover with k-FiniteType Γ rings via ΓSpecIso and f; module frames (Trivialization); chart clauses are the upstream trivializationMap_spec maps plus φ to Spec MvPolynomial pinned to trivializationMap ≫ isoOfIsAffine; V_i cover V, affine, separated finite type over k; pointwise affine refinements of overlaps with frames pinned as restrictions and G,H with GH=HG=1 and frame/coordinate relations matching transition_spec; IsEmpty S → n=0; d=0 iso with hom=π, inv=zero. Edge cases (empty, d=0, non-separated base, zero ring, any characteristic, universes) covered. Node copy differs from live only in lean; lean.statement verbatim; all 7 stmt_deps used; single theorem, sorry only; source/blueprint docstrings and 7-step proof docstring present; no name clash or duplicate (vectorIntegration_geometry differs); report has Worker report and Second reading by Q116. No compile run (no file changed). Advisory: 'Noetherian' has no cited def node, uses Mathlib IsNoetherian as def-asd does."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261024T190513-L-4074583",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

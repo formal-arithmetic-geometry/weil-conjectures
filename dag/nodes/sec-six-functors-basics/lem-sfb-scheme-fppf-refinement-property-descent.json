@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-scheme-fppf-refinement-property-descent",
+ "kind": "statement",
+ "title": "Scheme morphism properties descend through an fppf refinement",
+ "statement": "Let $X\\xrightarrow{a}Y\\xrightarrow{b}Z$ be morphisms of schemes [def-pc-scheme], in the universes of [def-weil-size-convention]. Fix $P$ to be one of flatness [def-weil-flat-morphism], locally of finite type [def-weil-finite-type-morphism], or locally of finite presentation [def-sbc-locally-finite-presentation]. Suppose $b\\circ a$ has $P$. Assume there is a set-indexed fppf covering $\\{q_i:Y_i\\to Y\\}_{i\\in I}$ [def-pc-fppf-site] and morphisms $s_i:Y_i\\to X$ such that $a\\circ s_i=q_i$ for all $i$. Then $b$ has $P$, separately for each of the three choices. No flatness, finiteness, separation, or quasi-compactness assumption is made on $a$.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 06NB, lemma-curiosity (statement and three-case proof)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fppf-site"
+ ],
+ "proof": [
+  {
+   "text": "Fix affine opens $W=\\operatorname{Spec}C\\subseteq Z$ and $V=\\operatorname{Spec}B\\subseteq Y$ with $b(V)\\subseteq W$. Apply [lem-sfb-fppf-lifts-finite-affine-charts] to $a$ and $V$. Write its finite ring towers as $C\\to B\\to A_j\\to D_j$, and put $A=\\prod_jA_j$ and $D=\\prod_jD_j$. All maps are the coordinate maps induced by the displayed factorizations; in particular $C\\to B\\to A\\to D$ is a ring tower. The lemma gives $B\\to D$ faithfully flat and finitely presented, independently of the chosen property $P$.",
+   "uses": [
+    "lem-sfb-fppf-lifts-finite-affine-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06NB, lemma-curiosity, affine preparation and three-case proof."
+   }
+  },
+  {
+   "text": "Each $U_j=\\operatorname{Spec}A_j$ lies in $(b\\circ a)^{-1}(W)$. If $P$ is flatness, [lem-weil-pbc-flat-morphism-affine-criterion] makes every $A_j$ flat over $C$, and [lem-weil-pbc-finite-product-flat-modules] makes $A$ flat over $C$. If $P$ is local finite type, [lem-weil-pbc-lft-affine-pairs] makes each $A_j$ finite type over $C$. Their finite product is finite type: take the coordinate idempotents $e_j$ and the elements supported in coordinate $j$ from a finite generating set of $A_j$; every tuple is the sum of its coordinate expressions. If $P$ is local finite presentation, [lem-weil-pbc-lfp-affine-opens-finite-presentation] makes every $C\\to A_j$ finitely presented. Apply [lem-trf-finite-affine-composite-presentation] with its $S=X=V=W=\\operatorname{Spec}C$, $f=\\mathrm{id}$, $U_j=T_j=\\operatorname{Spec}A_j$, and $h_j$ the induced maps to $\\operatorname{Spec}C$: their composites are locally finitely presented by their single affine presentations. It gives $C\\to A$ finitely presented. The empty product is the zero algebra and satisfies all three assertions.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-finite-product-flat-modules",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-trf-finite-affine-composite-presentation",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06NB, lemma-curiosity, affine preparation and three-case proof."
+   }
+  },
+  {
+   "text": "In the flat case, let $u:N\\hookrightarrow N_1$ be an injective map of $C$-modules and let $z\\in N\\otimes_C B$ map to zero in $N_1\\otimes_C B$. Its image in $N\\otimes_C A$ is zero, since tensoring $u$ with the flat $C$-module $A$ is injective. Therefore its image in $N\\otimes_C D$ is zero. But the map $N\\otimes_C B\\to N\\otimes_C D$ is injective: it is the map $M\\to M\\otimes_B D$ for $M=N\\otimes_C B$, under $(n\\otimes b)\\otimes d\\mapsto n\\otimes bd$, so [lem-weil-pbc-faithfully-flat-universally-injective] applies to $B\\to D$. Thus $z=0$. The definition [def-weil-pbc-flat-ring-map] now proves $C\\to B$ flat. This uses no flatness of $B\\to A$ or $A\\to D$.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06NB, lemma-curiosity, affine preparation and three-case proof."
+   }
+  },
+  {
+   "text": "In the finite-type case, $B\\to D$ is finitely presented and hence finite type: a finite presentation supplies finite algebra generators. Those same generators generate $D$ over $A$, because the map $B\\to D$ factors through $A$. Since $A$ is finite type over $C$, the images of generators of $A/C$ together with generators of $D/A$ generate $D/C$. Apply [lem-a1-finite-type-fppf-source-algebra] to the tower $C\\to B\\to D$: $C\\to D$ is finite type and $B\\to D$ is faithfully flat and finitely presented. It follows that $C\\to B$ is finite type.",
+   "uses": [
+    "lem-a1-finite-type-fppf-source-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06NB, lemma-curiosity, affine preparation and three-case proof."
+   }
+  },
+  {
+   "text": "In the finite-presentation case, $C\\to A$ is finitely presented, hence finite type. Its generators also generate $A$ over $B$, since $C\\to A$ factors through $B$. Apply [lem-weil-pbc-finite-presentation-over-finite-type-algebra] to $B\\to A\\to D$: $B\\to D$ is finitely presented and $B\\to A$ is finite type, so $A\\to D$ is finitely presented. Composition by [lem-weil-pbc-finite-presentation-base-change-composition](2) shows that $C\\to D$ is finitely presented. Apply [lem-trf-finite-presentation-fppf-source-algebra] to $C\\to B\\to D$, using faithful flatness and finite presentation of $B\\to D$, to obtain finite presentation of $C\\to B$.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-trf-finite-presentation-fppf-source-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06NB, lemma-curiosity, affine preparation and three-case proof."
+   }
+  },
+  {
+   "text": "The pair of affine opens $V\\subseteq Y$, $W\\subseteq Z$ was arbitrary. The flat case therefore gives flatness of $b$ by [lem-weil-pbc-flat-morphism-affine-criterion]; the finite-type case gives local finite type by [lem-weil-pbc-lft-affine-pairs]. In the finite-presentation case each point of $Y$ has an affine neighbourhood $V$ mapping into an affine neighbourhood $W$ of its image, and the preceding finite presentation of $C\\to B$ is exactly the local presentation required by [def-sbc-locally-finite-presentation]. This proves the three alternatives separately, including empty schemes.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06NB, lemma-curiosity, affine preparation and three-case proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-fppf-lifts-finite-affine-charts",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-finite-product-flat-modules",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-trf-finite-affine-composite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "def-weil-pbc-flat-ring-map",
+  "lem-a1-finite-type-fppf-source-algebra",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-trf-finite-presentation-fppf-source-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 06NB, lemma-curiosity, affine preparation and three-case proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "curiosity|surject.*sheaf|sheaf.*surject",
+   "results": "{\"t\": \"2026-10-23T21:08:07Z\", \"tool\": \"grep\", \"query\": \"curiosity|surject.*sheaf|sheaf.*surject\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\"], \"digest\": \"0964797fd33236d9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern composition, restrictions, or base-change descent; none gives descent from a composite along an arbitrary map admitting fppf local lifts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of schemes factors an fppf covering of its target and its composite is flat locally finite type or locally finite presentation then the target morphism has the same property",
+   "results": "{\"t\": \"2026-10-23T21:08:07Z\", \"tool\": \"leansearch\", \"query\": \"A morphism of schemes factors an fppf covering of its target and its composite is flat locally finite type or locally finite presentation then the target morphism has the same property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\", \"AlgebraicGeometry.LocallyOfFiniteType.recOn\", \"AlgebraicGeometry.LocallyOfFiniteType.casesOn\"], \"digest\": \"1138ad62a608100a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern composition, restrictions, or base-change descent; none gives descent from a composite along an arbitrary map admitting fppf local lifts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"DescendsAlong\"",
+   "results": "{\"t\": \"2026-10-23T21:08:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"DescendsAlong\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"e671ba0a95c4d4fa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern composition, restrictions, or base-change descent; none gives descent from a composite along an arbitrary map admitting fppf local lifts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schemes X to Y to Z with an fppf covering of Y lifting to X descend flatness or local finite presentation from X to Z to Y to Z",
+   "results": "{\"t\": \"2026-10-23T21:08:10Z\", \"tool\": \"leanfinder\", \"query\": \"Schemes X to Y to Z with an fppf covering of Y lifting to X descend flatness or local finite presentation from X to Z to Y to Z\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.instDescScheme\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.comp\"], \"digest\": \"0ac7189ede3a450e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern composition, restrictions, or base-change descent; none gives descent from a composite along an arbitrary map admitting fppf local lifts"
+  },
+  {
+   "tool": "grep",
+   "query": "of_comp|DescendsAlong",
+   "results": "{\"t\": \"2026-10-23T21:08:36Z\", \"tool\": \"grep\", \"query\": \"of_comp|DescendsAlong\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean\"], \"digest\": \"929627da253bfe2b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern composition, restrictions, or base-change descent; none gives descent from a composite along an arbitrary map admitting fppf local lifts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFinitePresentation\", \"of_comp\"",
+   "results": "{\"t\": \"2026-10-23T21:08:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyOfFinitePresentation\\\", \\\"of_comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern composition, restrictions, or base-change descent; none gives descent from a composite along an arbitrary map admitting fppf local lifts"
+  },
+  {
+   "tool": "grep",
+   "query": "of_comp|DescendsAlong|fppf",
+   "results": "{\"t\": \"2026-10-23T21:11:51Z\", \"tool\": \"grep\", \"query\": \"of_comp|DescendsAlong|fppf\", \"sub\": \"AlgebraicGeometry/Morphisms/Flat.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"141\", \"314\"], \"digest\": \"4e976d45bcd2c7c8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern composition, restrictions, or base-change descent; none gives descent from a composite along an arbitrary map admitting fppf local lifts"
+  },
+  {
+   "tool": "grep",
+   "query": "fppf|of_comp|descend",
+   "results": "{\"t\": \"2026-10-23T21:12:12Z\", \"tool\": \"grep\", \"query\": \"fppf|of_comp|descend\", \"sub\": \"AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern composition, restrictions, or base-change descent; none gives descent from a composite along an arbitrary map admitting fppf local lifts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For schemes X to Y to Z if X to Z is flat and X to Y admits an fppf covering family factoring through it then Y to Z is flat; likewise local finite type and local finite presentation",
+   "results": "{\"t\": \"2026-10-23T21:12:12Z\", \"tool\": \"leansearch\", \"query\": \"For schemes X to Y to Z if X to Z is flat and X to Y admits an fppf covering family factoring through it then Y to Z is flat; likewise local finite type and local finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.comp\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\"], \"digest\": \"57558d973c2e4776\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern composition, restrictions, or base-change descent; none gives descent from a composite along an arbitrary map admitting fppf local lifts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a scheme morphism has fppf local sections then flatness of a composite descends without flatness of that morphism",
+   "results": "{\"t\": \"2026-10-23T21:55:32Z\", \"tool\": \"leansearch\", \"query\": \"If a scheme morphism has fppf local sections then flatness of a composite descends without flatness of that morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat.stableUnderComposition\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\"], \"digest\": \"71ed56fc8b5e0e3c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: local flatness and composition results do not assert descent along an arbitrary morphism with fppf local lifts"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-sheaf-surjective-property-descent",
+  "date": "2026-10-24",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: closed-point hypothesis (c) of Lemma 8.3.1; Residual-gerbe reduction of the closed singleton: a reduced singleton stack locally of finite type over a field is universally homeomorphic to a finite field spectrum; supporting input: Smooth atlas over the gerbe base for local-finite-type descent, and the universal topological comparison. Supporting neutral-section input for the smooth atlas argument (06QG(3)). In the neutral-section proof: Tag 06QG invokes the converse direction of criteria Lemma 06PL after identifying the stack with the trivial-action quotient. 06PL converse: descend the properties of the restricted arrow projection through the sheaf-surjective map which forgets its first B-prime factor. Scheme-chart reduction: Descent Tag 06NB, descent of the scheme composite after constructing an fppf refinement of U to V.",
+   "via": [
+    "lem-sfb-space-sheaf-surjective-property-descent",
+    "lem-sfb-algebraic-classifying-stack-flatness",
+    "lem-sfb-neutral-gerbe-section-fppf",
+    "lem-sfb-gerbe-smooth-universal-homeomorphism",
+    "lem-sfb-singleton-stack-finite-field-homeomorphism",
+    "lem-sfb-stack-diagonal-closed-points",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scheme-fppf-refinement-property-descent",
+  "worker": "stage1",
+  "summary": "Read Stacks 06NB against all three alternatives. Isolated its affine-lift preparation as one statement-only geometric prerequisite; reused existing finite-product, affine-criterion, source-fppf algebra and intermediate-algebra nodes. Wrote the flatness argument explicitly using tensor injectivity; imposed no property on a. Searched the project, DAG, whole blueprint and Mathlib; checked empty charts and all ring towers.",
+  "blueprint": "Supporting input to det-thm-sf-ctf-stability-direct-images proof (3) through the inherited admissible-direct-image/alteration chain. This split realizes exactly the 06NB scheme-chart reduction named in the parent proof; its new node isolates the first paragraph before the flat/finite-type/finite-presentation cases. The ancestor tool prints None because the inherited created.item chain terminates at a Lean module; retained that mechanically computed ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-finite-affine-composite-presentation",
+    "why": "Generic affine/ring algebra input, used only for its stated compatible finite affine coproduct maps for locally finitely presented composites; no part of the constructibility or alteration route is replaced."
+   },
+   {
+    "node": "lem-a1-finite-type-fppf-source-algebra",
+    "why": "Generic affine/ring algebra input, used only for its stated finite type descends in a ring tower through a faithfully flat finitely presented source algebra; no part of the constructibility or alteration route is replaced."
+   },
+   {
+    "node": "lem-trf-finite-presentation-fppf-source-algebra",
+    "why": "Generic affine/ring algebra input, used only for its stated finite presentation descends through a faithfully flat finitely presented source algebra; no part of the constructibility or alteration route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-finite-affine-composite-presentation",
+  "lem-a1-finite-type-fppf-source-algebra",
+  "lem-trf-finite-presentation-fppf-source-algebra"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-78bb000b2",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-78bb000b2 (reviewer sub-agent of L); spot-checked: I read Stacks 06NB (descent.tex lemma-curiosity) and 021P (topologies.tex lemma-fppf-affine). The item states 06NB faithfully: the refinement is spelled out as q_i with s_i such that a∘s_i=q_i, and no hypothesis is added or dropped. The live item is still unsplit and there is no repair note, so this is a first split. Step 1 cites the new node only by its statement: it gives C→B→A_j→D_j with B→∏D_j faithfully flat and finitely presented. Step 2 uses the affine-pair leaves 01U5, 01T2 and 01TQ, the finite-product flatness node and an elementary idempotent argument for the finite-type product. For finite presentation it applies lem-trf-finite-affine-composite-presentation with f=id on Spec C and T_j=U_j; I checked that instantiation and it gives C→∏A_j finitely presented. Step 3 is a correct injectivity version of the flat case: A is flat over C, so the element vanishes over A and hence over D, and N⊗_C B→N⊗_C D is M→M⊗_B D, which is injective by 05CK. Step 4 applies 0367 with R=C, A=B, B=D once D is shown finite type over C. Step 5 applies 00F4(4) to get A→D finitely presented, then composition, then 02KK, all with their hypotheses checked. Step 6 is the converse of the affine criteria plus the definition 01TP. I checked the new node lem-sfb-fppf-lifts-finite-affine-charts for truth: base-change the covering to V, refine by 021P, then by principal opens mapping into affine opens of a^{-1}(V). I also checked the case V=∅ (n=0, the map 0→0). It is statement-only, self-contained and correctly cited. It does not restate a clause of the item (it has no P and no b). It is not a duplicate of lem-pc-fppf-affine-refinement, lem-sfb-space-fppf-finite-affine-refinement, lem-trf-fppf-affine-refinement-pullback-model or lem-a1-finite-affine-family-fppf-algebra. Batch-5: both trf citations are generic commutative algebra that neither assumption gives. lem-trf-finite-affine-composite-presentation has a 10-node closure of 01TQ/coproduct leaves, and lem-trf-finite-presentation-fppf-source-algebra is the unsplit 02KK leaf. Both are accepted, and so are the three declared tool_uses (these two plus lem-a1-finite-type-fppf-source-algebra, 0367). from.node=null is inherited, since the ancestor chain ends at a Lean module. No changes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeFppfRefinementPropertyDescent",
+  "declaration": "AlgebraicGeometry.properties_of_fppf_refinement_of_comp",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeFppfRefinementPropertyDescent.lean",
+  "statement": "theorem properties_of_fppf_refinement_of_comp {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z) {I : Type v} (T : I → Scheme.{u}) (q : ∀ i : I, T i ⟶ Y) (hcover : Presieve.ofArrows T q ∈ Scheme.fppfPrecoverage Y) (s : ∀ i : I, T i ⟶ X) (hlift : ∀ i : I, s i ≫ a = q i) : (Flat (a ≫ b) → Flat b) ∧ (LocallyOfFiniteType (a ≫ b) → LocallyOfFiniteType b) ∧ (LocallyOfFinitePresentation (a ≫ b) → LocallyOfFinitePresentation b)",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e11eaf0f",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Item node differs from live only in lean. Lean matches Stacks 06NB clause by clause: X,Y,Z : Scheme.{u}; I : Type v arbitrary; Presieve.ofArrows T q ∈ Scheme.fppfPrecoverage Y is jointly surjective with each q i flat and LFP (Mathlib Fpqc.lean:38-41, MorphismProperty.lean:82), as def-pc-fppf-site defines; lifts s i ≫ a = q i; three separate implications concluding Flat/LocallyOfFiniteType/LocallyOfFinitePresentation b; nothing assumed on a. Edge cases (empty I hence empty Y, empty schemes, identity cover, independent universe v) covered. All 6 dep records byte-identical to side-live and used as recorded. sorry only, no defs, source and blueprint docstrings, 6-step proof plan, statement verbatim, max line 90. The two proof-dependency imports exist in live (ring theory only, no cycle). No duplicate found. Report has both sections; the second reading was by the same worker (advisory only). Not recompiled (no change)."
+ }
+}

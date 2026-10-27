@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-coherent-restricted-scalar-composition",
+ "kind": "statement",
+ "title": "Normalized coherent scalar is compatible with inverse-image composition",
+ "statement": "Let j:Y to X, b:Z to Y and k:Z to X be etale morphisms with k=b followed by j. Let G be quasi-coherent on X, with quasi-coherent tensor pullbacks, and r a global function on Y. Define restrictionScalar(j,G,r) on j inverse image of the lifted coherent sheaf by conjugating the coefficient map induced by multiplication by r on j tensor pullback G through coherentEtaleRestrictionIso(j,G). Then the inverse image along b of restrictionScalar(j,G,r), followed by the inverse of upperStarComp(b,j,k), equals that inverse followed by restrictionScalar(k,G,b.appTop r). Dependencies: [def-weil-pbc-restriction-scalar-endomorphism].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images, restriction of cohomology classes; Descent Tag 03DR, tensor-section restriction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-restriction-scalar-endomorphism"
+ ],
+ "proof": [
+  {
+   "text": "identify each etale inverse image with localization restriction. The chosen\ncoherent restriction isomorphism has component the inverse tensor-composition\nisomorphism. Conjugating multiplication through it is multiplication by the scalar\nrestricted to each etale test scheme, since tensor-composition maps are module-linear.\nThe comparison of inverse-image composition with localization restriction composition\nis upperStarIsoLocalizationRestriction_comp. Its localization component restricts\nalong the mapComp isomorphism of test objects, whose underlying scheme map is the\nidentity. The semilinearity equation etaleTensorSectionsRestriction_smul therefore\nidentifies the two scalar endomorphisms. Cancel the localization and composition\nisomorphisms. All equalities also hold for zero modules, empty schemes, identity\nmorphisms, and the zero or unit scalar. This is a sheaf-level coefficient assertion;\nit contains neither raw higher-image classes nor any cohomological degree.",
+   "uses": [
+    "def-weil-pbc-coherent-etale-restriction",
+    "new-unit-structure-coefficient-iso",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-etale-restriction",
+  "new-unit-structure-coefficient-iso",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Scalar naturality expansion of the presheaf in Tag 03Q8; tensor-section normalization from Tag 03DR."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology pullback naturality for a commutative square of sheaf coefficient maps and single complexes",
+   "results": "Eight hits on module sheaf pullback and group cohomology; none express the fixed etale derived pullback or normalization.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map_comp_apply",
+   "results": "One hit for cohomology of a coefficient composite.",
+   "date": "2026-10-26",
+   "verdict": "Useful functoriality, not the claimed comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rawAffineComplexPullback|coherentEtaleRestrictionIso|sheafHToDerived_map",
+   "results": "No Mathlib matches. Local source inspected and partial proofs recorded in the worker scratchpad.",
+   "date": "2026-10-26",
+   "verdict": "No existing matching interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of pullback in sheaf cohomology with respect to a commutative square of coefficient endomorphisms",
+   "results": "Eight hits: general categorical commutative-square naturality and sheaf-of-modules pullback composition; none for the prescribed derived etale raw comparison.",
+   "date": "2026-10-26",
+   "verdict": "No matching fixed-comparison interface; use functor and natural-transformation naturality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentRawScalarRestriction",
+  "date": "2026-10-26",
+  "group": "G1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-raw-scalar-restriction",
+   "place": "Strict component of the scalar restriction proof."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawScalarRestrictionAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawScalarRestrictionAux.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.restrictionScalar_comp_aux",
+  "statement": "theorem restrictionScalar_comp_aux {X Y Z : Scheme.{u}} (j : Y ⟶ X) (b : Z ⟶ Y) (k : Z ⟶ X) (hk : k = b ≫ j) [AlgebraicGeometry.Etale j] [AlgebraicGeometry.Etale b] [AlgebraicGeometry.Etale k] (G : X.Modules) [G.IsQuasicoherent] [(tensorPullback j).obj G |>.IsQuasicoherent] [(tensorPullback k).obj G |>.IsQuasicoherent] (r : Γ(Y, ⊤)) : (Etale.upperStar AddCommGrpCat.{u + 1} b).map (restrictionScalar j G r) ≫ (Etale.upperStarComp AddCommGrpCat.{u + 1} b j k hk).inv.app (liftedCoherentEtaleSheaf G) = (Etale.upperStarComp AddCommGrpCat.{u + 1} b j k hk).inv.app (liftedCoherentEtaleSheaf G) ≫ restrictionScalar k G (b.appTop r)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-26",
+  "declarations": []
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T065714-L-3196579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T065714-L-3196579",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

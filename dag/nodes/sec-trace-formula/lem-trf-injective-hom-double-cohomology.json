@@ -1,0 +1,271 @@
+{
+ "id": "lem-trf-injective-hom-double-cohomology",
+ "kind": "statement",
+ "title": "Injective Hom double cohomology and its Ext identification",
+ "statement": "Let $A$ be a commutative ring, let $M^\\bullet$ be an integer-indexed cochain complex of $A$-modules [def-weil-abstract-derived-category], let $u\\in\\mathbf Z$ satisfy $M^a=0$ for $a>u$, let $N$ be an $A$-module, and let $N[0]\\to I^\\bullet$ be any injective resolution [def-sp-injective-resolutions] with $I^i=0$ for $i<0$. Form the commuting first-quadrant double complex [def-sp-double-complex-total]\n$$D^{i,b}=\\operatorname{Hom}_A(M^{u-b},I^i)\\quad(i,b\\geq0),\\qquad D^{i,b}=0\\quad\\text{otherwise},$$\n$$d_\\mathrm{I}(f)=d_I^i\\circ f,\\qquad d_\\mathrm{II}(f)=(-1)^{b-u+1}f\\circ d_M^{u-b-1}.$$\nFor $i,b\\geq0$, restriction of a vertical cocycle to $\\ker d_M^{u-b}$, followed by descent through $\\operatorname{im}d_M^{u-b-1}$, induces an $A$-linear isomorphism\n$$H^b_\\mathrm{II}(D^{i,\\bullet})\\xrightarrow{\\sim}\\operatorname{Hom}_A(H^{u-b}(M^\\bullet),I^i),$$\nwhere $H^a(M^\\bullet)=\\ker d_M^a/\\operatorname{im}d_M^{a-1}$ [def-weil-derived-category-cohomology-functor]. These isomorphisms commute with postcomposition by every $d_I^i$, so that for every $i,b\\geq0$ there is an induced $A$-linear isomorphism\n$$H^i_\\mathrm{I}H^b_\\mathrm{II}(D)\\xrightarrow{\\sim}\\operatorname{Ext}^i_A(H^{u-b}(M^\\bullet),N).$$\nHere $\\operatorname{Ext}^i_A$ is the derived-category Ext of $A$-modules [def-pc-ext]; its $A$-action is induced by postcomposition with scalar multiplication on $N$. In the last isomorphism a cocycle $H^{u-b}(M^\\bullet)\\to I^i$ maps to its corresponding derived morphism to $N[0][i]$, and scalar multiplication by $a\\in A$ is postcomposition with $a\\operatorname{id}_{I^\\bullet}$. These assertions include $b=0$ and $i=0$, require no finite injective dimension of $N$, and impose no Noetherian or finite-generation hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 0G20, remark-spectral-sequences-ext-variant: injective-dual cohomology and iterated-cohomology calculation in the module-target realization of its source sequence; homology.tex lemma-ss-double-complex identifies these with the first two pages."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions",
+  "def-sp-double-complex-total",
+  "def-weil-derived-category-cohomology-functor",
+  "def-pc-ext"
+ ],
+ "proof": [
+  {
+   "text": "The displayed differentials define the double complex of [def-sp-double-complex-total]: $d_{\\mathrm I}^2=0$ by $d_I^2=0$, and $d_{\\mathrm{II}}^2=0$ by $d_M^2=0$, regardless of the two signs. Both mixed composites send $f$ to $(-1)^{b-u+1}d_I^i\\circ f\\circ d_M^{u-b-1}$, so they commute. At a zero term outside the quadrant all required composites are zero. The missing incoming vertical term at $b=0$ agrees with $\\operatorname{Hom}_A(M^{u+1},I^i)=0$, since $M^{u+1}=0$.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0130, lemma-ss-double-complex; double-complex identities with the displayed differentials"
+   }
+  },
+  {
+   "text": "Fix $i,b\\geq0$ and write $a=u-b$, $J=I^i$, $Z^a=\\ker d_M^a$, $B^a=\\operatorname{im}d_M^{a-1}$ and $H^a=Z^a/B^a$ [def-weil-derived-category-cohomology-functor]. A vertical cocycle is exactly a map $f:M^a\\to J$ with $f d_M^{a-1}=0$, since the sign is a unit. Thus restriction to $Z^a$ descends to a map $r(f):H^a\\to J$, $[z]\\mapsto f(z)$. For $b>0$ a boundary is $(-1)^{b-u}g d_M^a$ and restricts to zero; for $b=0$ there are no boundaries. Hence $r$ defines the asserted map on vertical cohomology. Restriction, quotient descent, and these formulas preserve sums and scalar multiples.",
+   "uses": [
+    "def-weil-derived-category-cohomology-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 0G20, remark-spectral-sequences-ext-variant, source-page calculation expanded by cycles and boundaries"
+   }
+  },
+  {
+   "text": "For surjectivity let $h:H^a\\to J$ be $A$-linear. The inclusion $Z^a\\subset M^a$ induces an inclusion $H^a=Z^a/B^a\\hookrightarrow M^a/B^a$. Since $J=I^i$ is injective, its defining extension property [def-sp-injective-resolutions] extends $h$ to $\\bar f:M^a/B^a\\to J$. Composing with the quotient gives a map $f:M^a\\to J$ killing $B^a$, hence a vertical cocycle, and $r(f)=h$. This applies also at $b=0$.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0135, definition-injective, applied to the inclusion of quotient modules"
+   }
+  },
+  {
+   "text": "For injectivity suppose $r(f)=0$. Then $f$ vanishes on $Z^a$, so the formula $d_M^a(x)\\mapsto f(x)$ defines an $A$-linear map $\\lambda:\\operatorname{im}d_M^a\\to J$. For $b>0$, extend $\\lambda$ along $\\operatorname{im}d_M^a\\hookrightarrow M^{a+1}$ to $t:M^{a+1}\\to J$, using precisely the injectivity property [def-sp-injective-resolutions]. Now $g=(-1)^{b-u}t$ satisfies $d_{\\mathrm{II}}g=(-1)^{b-u}g d_M^a=f$, so $f$ is a boundary. If $b=0$, then $a=u$ and $Z^u=M^u$ because $M^{u+1}=0$, so $f=0$ directly. Thus the map on cohomology is injective, and together with the preceding step is an $A$-linear isomorphism.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0135, definition-injective, applied to the image inclusion; explicit boundary and upper-endpoint calculation"
+   }
+  },
+  {
+   "text": "The maps $r_i$ just constructed commute with postcomposition: for any $A$-linear $v:I^i\\to I^{i+1}$ and any vertical cocycle $f$, both $r_{i+1}([vf])$ and $v r_i([f])$ send $[z]\\in H^a$ to $v(f(z))$. In particular take $v=d_I^i$. By the definition of iterated cohomology [def-sp-double-complex-total], the $r_i$ therefore give an isomorphism of the complexes in the first index, from $H^b_{\\mathrm{II}}(D)$ to $\\operatorname{Hom}_A(H^a,I^\\bullet)$ with differential $h\\mapsto d_Ih$. Applying the $r_i$ and their inverses to cycles and boundaries gives an $A$-linear isomorphism on $i$-th cohomology, using the quotient definition [def-weil-derived-category-cohomology-functor].",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-weil-derived-category-cohomology-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0130, lemma-ss-double-complex, iterated cohomology and its induced differential"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ext-via-injective-resolution] in the abelian category of $A$-modules with source $H^a$ and with the given resolution $\\varepsilon:N[0]\\to I^\\bullet$. It identifies $H^i(\\operatorname{Hom}_A(H^a,I^\\bullet))$ additively with the derived-category $\\operatorname{Ext}_A^i(H^a,N)$. Its stated cocycle formula sends $h:H^a\\to I^i$ to $Q(\\varepsilon[i])^{-1}\\circ Q(h):H^a[0]\\to N[0][i]$, where $h$ is the chain map to $I^\\bullet[i]$. Composing with the previous isomorphism proves the requested double-cohomology identification with this exact cocycle formula. The cited result includes $i=0$, when its boundary subgroup is zero.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XR, lemma-compute-ext-resolutions (1), specialized to objects in degree zero"
+   }
+  },
+  {
+   "text": "Finally let $c\\in A$. Multiplication $c_I$ is a chain endomorphism of $I^\\bullet$, and $c_I\\varepsilon=\\varepsilon c_N$ because the augmentation is $A$-linear. Inverting the augmentation in the derived category gives $Q(\\varepsilon[i])^{-1}Q(c_I[i])=Q(c_N[i])Q(\\varepsilon[i])^{-1}$. Thus the cocycle $ch=c_I^i h$ maps to $Q(c_N[i])$ postcomposed with the class of $h$, which is exactly the scalar action specified using [def-pc-ext]. The additive isomorphism of the preceding step is consequently $A$-linear. Every construction above used only individual injective terms and the given resolution, so there is no finite injective-dimension, Noetherian, or finite-generation assumption.",
+   "uses": [
+    "def-pc-ext"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XR, lemma-compute-ext-resolutions, cocycle realization; scalar compatibility expanded using the definition of Ext functoriality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "def-weil-derived-category-cohomology-functor",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "def-pc-ext"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 0G20, remark-spectral-sequences-ext-variant: explicit elementary module calculation of its source page; Ext comparison is the existing Mathlib leaf lem-weil-pbc-ext-via-injective-resolution (Stacks Tag 06XR)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The first two pages of the Hom double complex into an injective resolution are Hom of cohomology into the injective terms and Ext of cohomology into the target module",
+   "results": "{\"t\": \"2026-10-22T06:01:02Z\", \"tool\": \"leanfinder\", \"query\": \"The first two pages of the Hom double complex into an injective resolution are Hom of cohomology into the injective terms and Ext of cohomology into the target module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.extMk\", \"CategoryTheory.InjectiveResolution.extMk_hom\", \"CategoryTheory.InjectiveResolution.extMk_surjective\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.InjectiveResolution.extMk_eq_zero_iff\", \"CategoryTheory.ProjectiveResolution.extMk\", \"CategoryTheory.InjectiveResolution.extMk_comp_mk₀\", \"CategoryTheory.InjectiveResolution.mk₀_comp_extMk\"], \"digest\": \"dc5ef948895c792f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: extEquivCohomologyClass and its additive variant compare a single-module Hom complex with Ext, and HomComplex leftHomologyData identifies its own quotient. They do not compute vertical cohomology for arbitrary M or its postcomposition compatibility, so do not state this double-cohomology lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a complex dualized into an injective module is Hom of its cohomology into that injective module naturally and compatible with postcomposition",
+   "results": "{\"t\": \"2026-10-22T06:01:02Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of a complex dualized into an injective module is Hom of its cohomology into that injective module naturally and compatible with postcomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"groupCohomologyIsoExt\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"CochainComplex.HomComplex.leftHomologyData'_H_coe\", \"CochainComplex.HomComplex.leftHomologyData_H_coe\"], \"digest\": \"11cba6bf38fec358\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: extEquivCohomologyClass and its additive variant compare a single-module Hom complex with Ext, and HomComplex leftHomologyData identifies its own quotient. They do not compute vertical cohomology for arbitrary M or its postcomposition compatibility, so do not state this double-cohomology lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective, HomologicalComplex.homologyFunctor",
+   "results": "{\"t\": \"2026-10-22T06:00:49Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Injective, HomologicalComplex.homologyFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: extEquivCohomologyClass and its additive variant compare a single-module Hom complex with Ext, and HomComplex leftHomologyData identifies its own quotient. They do not compute vertical cohomology for arbitrary M or its postcomposition compatibility, so do not state this double-cohomology lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*[Hh]om|[Hh]om.*homology|extEquivCohomologyClass",
+   "results": "{\"t\": \"2026-10-22T06:00:49Z\", \"tool\": \"grep\", \"query\": \"homology.*[Hh]om|[Hh]om.*homology|extEquivCohomologyClass\", \"sub\": \"CategoryTheory/Abelian/Injective\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean\"], \"digest\": \"cf5c89e613f253cc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: extEquivCohomologyClass and its additive variant compare a single-module Hom complex with Ext, and HomComplex leftHomologyData identifies its own quotient. They do not compute vertical cohomology for arbitrary M or its postcomposition compatibility, so do not state this double-cohomology lemma.",
+   "subdirectory": "CategoryTheory/Abelian/Injective"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hyper Ext double complex first page cohomology in source then cohomology in injective resolution yields Ext",
+   "results": "{\"t\": \"2026-10-22T06:00:49Z\", \"tool\": \"leansearch\", \"query\": \"Hyper Ext double complex first page cohomology in source then cohomology in injective resolution yields Ext\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: LeanSearch returned a rate-limit error; no absence claim is inferred."
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*homology|homology.*injective|linearYoneda|PreservesHomology",
+   "results": "{\"t\": \"2026-10-22T06:06:07Z\", \"tool\": \"grep\", \"query\": \"injective.*homology|homology.*injective|linearYoneda|PreservesHomology\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\", \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"Mathlib/Algebra/Homology/Localization.lean\"], \"digest\": \"28b9e1f737f27922\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: extEquivCohomologyClass and its additive variant compare a single-module Hom complex with Ext, and HomComplex leftHomologyData identifies its own quotient. They do not compute vertical cohomology for arbitrary M or its postcomposition compatibility, so do not state this double-cohomology lemma.",
+   "subdirectory": "Algebra/Homology"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective, HomologicalComplex.homologyFunctor",
+   "results": "{\"t\": \"2026-10-22T11:05:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Injective, HomologicalComplex.homologyFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give the single-source Ext/resolution comparison, resolution naturality, opposite-complex homology or general homology-preservation infrastructure, not the full signed vertical-cohomology restriction map with iterated Ext and scalar compatibility. Existing Ext leaf reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of Hom from a bounded above complex into an injective module is Hom of its cohomology, naturally in the injective target",
+   "results": "{\"t\": \"2026-10-22T11:05:13Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of Hom from a bounded above complex into an injective module is Hom of its cohomology, naturally in the injective target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CochainComplex.isKInjective_of_injective_aux\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective\", \"CategoryTheory.InjectiveResolution.extMk\"], \"digest\": \"797c3c7f649935b6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give the single-source Ext/resolution comparison, resolution naturality, opposite-complex homology or general homology-preservation infrastructure, not the full signed vertical-cohomology restriction map with iterated Ext and scalar compatibility. Existing Ext leaf reused."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*[Hh]om|[Hh]om.*homology|extEquivCohomologyClass",
+   "results": "{\"t\": \"2026-10-22T11:05:13Z\", \"tool\": \"grep\", \"query\": \"homology.*[Hh]om|[Hh]om.*homology|extEquivCohomologyClass\", \"sub\": \"CategoryTheory/Abelian/Injective\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean\"], \"digest\": \"cf5c89e613f253cc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give the single-source Ext/resolution comparison, resolution naturality, opposite-complex homology or general homology-preservation infrastructure, not the full signed vertical-cohomology restriction map with iterated Ext and scalar compatibility. Existing Ext leaf reused.",
+   "subdirectory": "CategoryTheory/Abelian/Injective"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of the dual complex into an injective module is Hom of cohomology with naturality in the target",
+   "results": "{\"t\": \"2026-10-22T11:05:14Z\", \"tool\": \"leansearch\", \"query\": \"Cohomology of the dual complex into an injective module is Hom of cohomology with naturality in the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc\", \"CategoryTheory.InjectiveResolution.iso_inv_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"HomologicalComplex.homologyOpNatIso\"], \"digest\": \"1b6be4e33f343b3b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give the single-source Ext/resolution comparison, resolution naturality, opposite-complex homology or general homology-preservation infrastructure, not the full signed vertical-cohomology restriction map with iterated Ext and scalar compatibility. Existing Ext leaf reused."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesHomology|homologyOpNatIso|mapHomologyIso|preadditiveCoyonedaObj.*preserves|injective.*[Ee]xact",
+   "results": "{\"t\": \"2026-10-22T11:05:53Z\", \"tool\": \"grep\", \"query\": \"PreservesHomology|homologyOpNatIso|mapHomologyIso|preadditiveCoyonedaObj.*preserves|injective.*[Ee]xact\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\", \"Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean\"], \"digest\": \"92332e295adef592\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give the single-source Ext/resolution comparison, resolution naturality, opposite-complex homology or general homology-preservation infrastructure, not the full signed vertical-cohomology restriction map with iterated Ext and scalar compatibility. Existing Ext leaf reused.",
+   "subdirectory": "Algebra/Homology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The first two cohomologies of a Hom double complex into an injective resolution are Ext of the source cohomology",
+   "results": "{\"t\": \"2026-10-22T11:06:04Z\", \"tool\": \"leanfinder\", \"query\": \"The first two cohomologies of a Hom double complex into an injective resolution are Ext of the source cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.InjectiveResolution.extMk\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass_symm_apply\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero\", \"CategoryTheory.InjectiveResolution.extMk_hom\"], \"digest\": \"dfd34038b3927795\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give the single-source Ext/resolution comparison, resolution naturality, opposite-complex homology or general homology-preservation infrastructure, not the full signed vertical-cohomology restriction map with iterated Ext and scalar compatibility. Existing Ext leaf reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-source-hyperext-module-target",
+  "date": "2026-10-22",
+  "group": "Q35"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: First paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Expanded input: Tag 0G4H proof, final application of perfect.tex lemma-coherent-internal-hom (Tag 0D0C); the algebra assertion explicitly stated in the proof of that lemma. First of the two algebraic reductions in the displayed spectral-sequence argument: the source-truncation sequence of Injectives Tag 0G20, with second argument a module in degree zero. Extracted source-hyper-Ext page argument: injective-dual cycles/boundaries, postcomposition compatibility and A-linear Ext identification (returned proof steps 5--6).",
+   "via": [
+    "lem-trf-source-hyperext-module-target",
+    "lem-trf-bounded-above-coherent-rhom",
+    "lem-trf-coherent-rhom-finite-injective-dimension",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-injective-hom-double-cohomology",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the signed injective-dual calculation explicitly: restriction/descent, surjectivity by extension from Z/B into M/B, kernel by extension from im(d), separate b=0 argument, and postcomposition square. Reused the existing Ext-via-injective-resolution Mathlib leaf, and proved its A-linearity from its cocycle formula and the scalar/augmentation square. No new nodes. Checked the full statement and edge cases with no finiteness hypotheses.",
+  "blueprint": "Realizes the existing blueprint.from.place source-hyper-Ext page argument under lem-trf-local-term-locality, proof (1)--(2), through the recorded algebraic-duality ancestry. The vertical cohomology and postcomposition are direct module calculations; the final Ext comparison is the existing generic Mathlib leaf. Blueprint searches injective Hom, Ext injective resolution, cohomology injective, Hom cohomology and 0G20 found no equivalent blueprint statement. Chapter and unit route unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-3395155f1",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-3395155f1 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full. There are no new nodes, and the statement is identical to the Q35-imported version, which had proof []. Only proof, proof_deps, origin and searches changed. There is no re-split note. Sign checks: the incoming vertical boundary is (-1)^{b-u} g d_M^a; g=(-1)^{b-u}t gives d_II g=f; the mixed composites have the same sign, so they commute. At b=0, M^{u+1}=0 gives Z^u=M^u and f=0, so no false boundary is produced. Surjectivity extends along Z/B into M/B and injectivity extends along im d into M^{a+1}; both use only the injective-extension property of def-sp-injective-resolutions. In step 5, postcomposition gives an isomorphism of horizontal complexes. In step 6, the hypotheses of the Mathlib leaf lem-weil-pbc-ext-via-injective-resolution are satisfied (I^n=0 for n<0, exact augmentation, i=0 included). Its displayed orientation is inverse to its worded formula; this is harmless. In step 7, c_I ε=ε c_N gives A-linearity and matches def-pc-ext b_*. Small cases checked: the exact complex A→A (both pages 0), M in a single degree (Ext^i(M^a,N)), and the zero cases. Sources: Stacks 0G20 (injectives remark-spectral-sequences-ext-variant gives only the E'_2 page, so the agent-written proof_origin is correct), 0130 and 0135; no SGA. The statement matches its use in step 3 of the parent lem-trf-source-hyperext-module-target. rg -L duplicate search: lem-sbc-ext-injective-resolution-comparison is the single-module projective-Ext comparison, not a duplicate; I found no other node stating this identification. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.InjectiveHomDoubleCohomology",
+  "declaration": "HomologicalComplex₂.exists_injectiveHom_double_cohomology",
+  "file": "lean/Sheaf/Algebra/Homology/InjectiveHomDoubleCohomology.lean",
+  "statement": "theorem exists_injectiveHom_double_cohomology (A : Type u) [CommRing A] [HasExt.{w} (ModuleCat.{v} A)] (M : CochainComplex (ModuleCat.{v} A) ℤ) (u₀ : ℤ) (hM : ∀ a : ℤ, u₀ < a → IsZero (M.X a)) (N : ModuleCat.{v} A) (I : InjectiveResolution N) : ∃ D : HomologicalComplex₂ (ModuleCat.{v} A) (ComplexShape.up ℕ) (ComplexShape.up ℕ), ∃ e : ∀ i b : ℕ, (D.X i).X b ≅ ModuleCat.of A (M.X (u₀ - (b : ℤ)) ⟶ I.cocomplex.X i), ∃ r : ∀ i b : ℕ, (D.X i).homology b ≅ ModuleCat.of A (M.homology (u₀ - (b : ℤ)) ⟶ I.cocomplex.X i), ∃ t : ∀ b i : ℕ, (((HomologicalComplex.homologyFunctor (ModuleCat.{v} A) (ComplexShape.up ℕ) b).mapHomologicalComplex (ComplexShape.up ℕ)).obj D).homology i ≃ₗ[A] Abelian.Ext (M.homology (u₀ - (b : ℤ))) N i, (∀ (i b : ℕ) (f : (D.X i).X b), (e (i + 1) b).hom ((D.d i (i + 1)).f b f) = (e i b).hom f ≫ I.cocomplex.d i (i + 1)) ∧ (∀ (i b : ℕ) (f : (D.X i).X b), (e i (b + 1)).hom ((D.X i).d b (b + 1) f) = ((b : ℤ) - u₀ + 1).negOnePow • (M.d (u₀ - ((b + 1 : ℕ) : ℤ)) (u₀ - (b : ℤ)) ≫ (e i b).hom f)) ∧ (∀ (i b : ℕ) (z : (D.X i).cycles b) (x : M.cycles (u₀ - (b : ℤ))), ((r i b).hom ((D.X i).homologyπ b z)) (M.homologyπ (u₀ - (b : ℤ)) x) = ((e i b).hom ((D.X i).iCycles b z)) (M.iCycles (u₀ - (b : ℤ)) x)) ∧ (∀ (i b : ℕ) (x : (D.X i).homology b), (r (i + 1) b).hom (HomologicalComplex.homologyMap (D.d i (i + 1)) b x) = (r i b).hom x ≫ I.cocomplex.d i (i + 1)) ∧ (∀ (b i : ℕ) (z : (((HomologicalComplex.homologyFunctor (ModuleCat.{v} A) (ComplexShape.up ℕ) b).mapHomologicalComplex (ComplexShape.up ℕ)).obj D).cycles i) (h : M.homology (u₀ - (b : ℤ)) ⟶ I.cocomplex.X i) (hh : h ≫ I.cocomplex.d i (i + 1) = 0), (r i b).hom ((((HomologicalComplex.homologyFunctor (ModuleCat.{v} A) (ComplexShape.up ℕ) b).mapHomologicalComplex (ComplexShape.up ℕ)).obj D).iCycles i z) = h → t b i ((((HomologicalComplex.homologyFunctor (ModuleCat.{v} A) (ComplexShape.up ℕ) b).mapHomologicalComplex (ComplexShape.up ℕ)).obj D).homologyπ i z) = I.extMk h (i + 1) rfl hh) ∧ (∀ (b i : ℕ) (c : A) (x : (((HomologicalComplex.homologyFunctor (ModuleCat.{v} A) (ComplexShape.up ℕ) b).mapHomologicalComplex (ComplexShape.up ℕ)).obj D).homology i), t b i (c • x) = (t b i x).comp (Abelian.Ext.mk₀ (c • 𝟙 N)) (add_zero i))",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Constructs the specified first-quadrant bicomplex with term charts and its canonical vertical and iterated cohomology comparisons. Restriction/descent, horizontal compatibility, the extMk cocycle formula and postcomposition scalar normalization are equations in the conclusion. Natural indices encode extension by zero outside the quadrant; ring, module and Ext universes are independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-38b766d66",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Clause-by-clause check of HomologicalComplex₂.exists_injectiveHom_double_cohomology against the node: hypotheses exact (CommRing A, ℤ-indexed M with IsZero above u₀, any InjectiveResolution N, independent universes u/v/w, HasExt size model only); the bicomplex is pinned by the chart isos e plus both differential equations (sign ((b:ℤ)-u₀+1).negOnePow, M.d (u₀-(b+1)) (u₀-b) checked) and ℕ indices encode the zero extension; r is fixed by the pointwise restriction/descent equation and commutes with d_I; t is fixed on cocycles by I.extMk, which by extMk_hom is Q(ε[i])⁻¹∘Q(h); the A-action matches smul_eq_comp_mk₀. Edge cases covered: b=0, i=0, negative u₀, zero modules, char 2, unbounded resolution. lean.statement is verbatim equal to the file signature; only the lean field differs from the side-live node; all stmt_dep modules are imported; one sorry (the proof only), no definitions; docstrings carry the source place, blueprint id and 7-step proof; report has the Worker report and the Second reading by Q43 (labelled a self-check). No duplicate declaration or name clash found. Not recompiled because no file was changed."
+ }
+}

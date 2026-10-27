@@ -86,8 +86,8 @@ def PurityNaturalityMate {CX : Type uX} {CY : Type uY}
 namespace RationalWeilPurity
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   {X₀ Y₀ : Over (Spec (.of D.k₀))}
-  [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom]
-  [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom]
+  [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+  [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
   (f₀ : X₀ ⟶ Y₀)
   [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -261,8 +261,8 @@ namespace CommonWeilPurity
 open AlgebraicallyClosedCoefficients GeneralAlgebraicallyClosedCoefficients
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   {X₀ Y₀ : Over (Spec (.of D.k₀))}
-  [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom]
-  [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom]
+  [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+  [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
   (f₀ : X₀ ⟶ Y₀)
   [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left]
   (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]

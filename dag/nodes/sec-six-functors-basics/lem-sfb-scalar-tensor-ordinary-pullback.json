@@ -1,0 +1,118 @@
+{
+ "id": "lem-sfb-scalar-tensor-ordinary-pullback",
+ "kind": "statement",
+ "title": "Ordinary scalar tensor coordinates and total pullback naturality",
+ "statement": "Let f:Z→T, a:A→B, F the exact ordinary A-module complex pullback, C=r(B)[0], and k:F(C)≅C_Z the fixed coefficient complex identification. Put TT(P,Q)=Tot(P tensor Q), TZ for the corresponding tensor on Z, and j_P=totalPullback(P,C)^{-1} followed by TZ(1,k). For every complex map q:Q→C, F(TT(1,q)) ≫ j_P = totalPullback(P,Q)^{-1} ≫ TZ(1,Fq ≫ k). No K-flatness, flatness of B or boundedness is assumed. This node also defines κ_a(P) by the restricted derived scalar counit and exact restriction localization factor, and the one-sided scalar coordinates e_a(QP)^{-1} κ_a(P) Q(ordinaryComplexIso.hom), all by explicit composites.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+ },
+ "stmt_deps": [
+  "lem-sfb-derived-scalar-tensor-identification",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Take the natural isomorphism of total complexes supplied by the tensor descent data. Its naturality at (1,q) gives compatibility with the inverse total pullback comparison. Postcompose with TZ(1,k), use functoriality and identity preservation of the uncurried total bifunctor, and obtain the formula with Fq followed by k. The single-complex coefficient map is the specified unit-normalized one. All four auxiliary maps in this module are defined by the displayed actual composites.",
+   "uses": [
+    "lem-weil-pbc-proetale-tensor-descent-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-tensor-descent-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor pullback compatibility with the augmentation to ordinary tensor on complexes",
+   "results": "HomologicalComplex.unit_tensor_d₁, tensor_unit_d₂, ιTensorObj and HasGoodTensor statements; no normalized derived sheaf scalar/pullback square.",
+   "date": "2026-10-27",
+   "verdict": "No matching normalization. Use the project representative specifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "mateEquiv, unit_mateEquiv_symm and iterated_mateEquiv_conjugateEquiv: abstract adjunction transport only.",
+   "date": "2026-10-27",
+   "verdict": "No sheaf scalar tensor representative comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullback|scalarPullback|derivedMate_comparison",
+   "results": "msearch returned no Mathlib hits. Project rg found DerivedScalarMateData, KFlatScalarComparisonNormalization, ProEtaleCanonicalTensorPullback and ProEtaleTensorPullbackDescentData.",
+   "date": "2026-10-27",
+   "verdict": "The tensor half follows from the project specifications; the scalar counit calculation still needs a separate equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedScalarPullbackTensorNormalization",
+  "date": "2026-10-27",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof of sk-thm-sf-ctf-stability, derived scalar change in the direct-image argument; representative expansion of step 1 of lem-sfb-derived-scalar-projection-normalization.",
+   "via": [
+    "lem-sfb-derived-scalar-pullback-tensor-normalization",
+    "lem-sfb-derived-scalar-projection-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarTensorOrdinaryPullback",
+  "file": "lean/Sheaf/Paper/ScalarTensorOrdinaryPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.DerivedScalarMate.tensorScalarOrdinaryPullback_naturality",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.tensorScalarCounit",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.tensorScalarCoordinates",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.tensorCoefficientComplexPullback",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.tensorScalarOrdinaryPullback",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.tensorScalarOrdinaryPullback_naturality"
+  ],
+  "statement": "theorem tensorScalarOrdinaryPullback_naturality\n    {Z T : Scheme.{u}} (f : Z ⟶ T)\n    {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)\n    (P Q : CochainComplex (proEtaleRingModules T A) ℤ)\n    (q : Q ⟶ coefficientComplex a) :\n    let F := (proEtaleRingModulePullback f A (inverseRing f A)\n      (Iso.refl _)).mapHomologicalComplex (.up ℤ)\n    let TT := Functor.uncurry.obj ((proEtaleOrdinaryTensor T A).map₂HomologicalComplex\n      (.up ℤ) (.up ℤ) (.up ℤ))\n    let TZ := Functor.uncurry.obj ((proEtaleOrdinaryTensor Z (inverseRing f A)\n      ).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ))\n    F.map (TT.map (Prod.mkHom (𝟙 P) q)) ≫ tensorScalarOrdinaryPullback f a P =\n      (proEtaleTensorPullbackTotalIso f A (inverseRing f A) (Iso.refl _) P Q).inv ≫\n        TZ.map (Prod.mkHom (𝟙 (F.obj P))\n          (F.map q ≫ (tensorCoefficientComplexPullback f a).hom))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261027T084445-L-3682702",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261027T084445-L-3682702",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

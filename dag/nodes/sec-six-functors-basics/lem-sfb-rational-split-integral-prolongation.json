@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-rational-split-integral-prolongation",
+ "kind": "statement",
+ "title": "Integral prolongation of a given split rational reductive group",
+ "statement": "Let $(G_{\\mathbf Q},T_{\\mathbf Q}=D_{\\mathbf Q}(M))$ be a split realization over $\\mathbf Q$ of a finite reduced root datum $\\mathcal R=(M,\\Phi,M^\\vee,\\Phi^\\vee)$ in the sense of [def-sfb-pinned-split-root-realization], with the base and pinning forgotten. There exists a split realization $(\\mathcal G,\\mathcal T=D_{\\mathbf Z}(M))$ of the same datum over $\\mathbf Z$, and a $\\mathbf Q$-group-scheme isomorphism\n$$\\iota:(\\mathcal G_{\\mathbf Q},\\mathcal T_{\\mathbf Q})\\xrightarrow{\\sim}(G_{\\mathbf Q},T_{\\mathbf Q})$$\nwhose restriction to $D_{\\mathbf Q}(M)$ is the identity and which respects the specified root and coroot labels. The term split realization includes smoothness, affineness, finite presentation, connected reductive geometric fibres, the full torus tangent decomposition with zero summand $\\operatorname{Lie}(\\mathcal T)$, and free rank-one integral root modules, exactly as in the cited definition. No base, pinning or generators are prescribed in the input or output. Roots need not span $M$; empty roots and rank zero are allowed. Thus the assertion extends an already given rational group and its specified torus, rather than postulating a group from an abstract datum.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Section 6.3, printed pp.212--229: Lemma 6.3.1 reduces by central products and diagonalizable central quotients to the semisimple simply connected case; the construction starts with a given split Q-group; Propositions 6.3.15 and 6.3.16, pp.227--229, give reductive geometric fibres and affineness, and the final paragraph gives the original generic fibre and free integral root lines. Generic-fibre identification in the central reductions uses the full-faithfulness part of Corollary 6.1.15, proved before integral existence. Read online; local PDF WANTED. No Stacks tag states this prolongation theorem."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization"
+ ],
+ "proof": [
+  {
+   "text": "First carry out the construction for an arbitrary rational split realization of a datum with $\\Phi$ spanning $M_{\\mathbf Q}$ and $\\mathbf Z\\Phi^\\vee=M^\\vee$. Apply [lem-sfb-chevalley-birational-integral-envelope] to obtain $H$, its torus and root homomorphisms, the fibrewise dense open product chart, and $H_{\\mathbf Q}\\simeq G_{\\mathbf Q}$ fixing the specified torus. No integral reductivity has been used.",
+   "uses": [
+    "lem-sfb-chevalley-birational-integral-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Section 6.3, pp.217--227, construction before Proposition 6.3.15"
+   }
+  },
+  {
+   "text": "The chart in step 1 is geometrically irreducible and fibrewise dense, so each geometric fibre of $H$ is connected. Apply [lem-sfb-root-cell-semisimplicity-criterion] to every fibre: the same root datum, monomial torus action, rank-one identity and Weyl word all base change from the envelope. The fibres are affine semisimple with the specified torus, roots and coroots. Now [lem-sfb-relative-semisimple-affineness], with $B=\\mathbf Z$, proves that $H$ is affine over $\\mathbf Z$. Its immersed torus is a monomorphism; [lem-sfb-affine-multiplicative-type-monomorphism-closed] makes it a closed subgroup.",
+   "uses": [
+    "lem-sfb-root-cell-semisimplicity-criterion",
+    "lem-sfb-relative-semisimple-affineness",
+    "lem-sfb-affine-multiplicative-type-monomorphism-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Propositions 6.3.15--6.3.16, pp.227--229"
+   }
+  },
+  {
+   "text": "Differentiate the open product chart at $(0,1,0)$. Its differential is an isomorphism from $\\operatorname{Lie}(D_{\\mathbf Z}(M))\\oplus\\bigoplus_{\\alpha\\in\\Phi}\\mathbf Z$ onto $\\operatorname{Lie}(H)$. Conjugation on the chart acts trivially on the torus tangent and as multiplication by the full character $\\chi_\\alpha$ on the $\\alpha$ coordinate, by the envelope identities. Thus its zero summand is exactly the torus tangent and each root summand is a free line; this calculation is an identity on dual-number points over every algebra, without differentiating a character. Along with step 2 these are precisely all conditions of [def-sfb-pinned-split-root-realization] after forgetting the base and generators. We have proved the required prolongation for every semisimple simply connected datum, including the zero datum.",
+   "uses": [
+    "lem-sfb-chevalley-birational-integral-envelope",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Tangent calculation preceding Proposition 6.3.15 and final paragraph of Section 6.3, pp.227--229"
+   }
+  },
+  {
+   "text": "For the given rational group, [lem-sfb-reductive-rank-one-reflections] over $\\overline{\\mathbf Q}$ realizes the lattice reflections inside a finite Weyl group. Thus their subgroup in $\\operatorname{Aut}(M)$ is finite. Return to the original arbitrary datum $\\mathcal R$. Apply [lem-sfb-root-datum-lattice-embedding], with $V=\\mathbf Q\\Phi$ and $Z$ the annihilator of the coroots. It gives the weight lattice $P\\subset V$, the free central lattice $C=\\pi_Z(M)$, and a finite-index injection $j:M\\hookrightarrow P\\oplus C$ satisfying $j(\\alpha)=(\\alpha,0)$ and $\\alpha^\\vee(m)=\\bar\\alpha^\\vee(\\pi_Vm)$. The datum on $P$ with roots $\\Phi$ and these restricted coroots is semisimple and simply connected: its dual is the coroot lattice by the defining integral-dual formula for $P$. It satisfies the hypotheses of step 1. Obtain its rational realization from [lem-sfb-rational-split-root-realization], and apply steps 1--3 to it, obtaining a split integral realization $S$ with torus $D_{\\mathbf Z}(P)$.",
+   "uses": [
+    "lem-sfb-root-datum-lattice-embedding",
+    "lem-sfb-rational-split-root-realization",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 6.3.1, pp.212--213, central-torus and weight-lattice reductions"
+   }
+  },
+  {
+   "text": "Put $K=S\\times D_{\\mathbf Z}(C)$, with torus $T_K=D_{\\mathbf Z}(P\\oplus C)$. The product is affine by [lem-weil-pbc-affine-morphism-permanence] and smooth by [lem-weil-pbc-smooth-ring-map-base-change-composition], applied to its tensor-product coordinate algebra, using [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] to pass between the ring and scheme formulations. Finite presentations tensor to a finite presentation. The torus is reductive: a smooth connected normal unipotent subgroup maps trivially to each multiplicative coordinate by [lem-sfb-unipotent-to-multiplicative-trivial]. The split-torus fibre is geometrically connected (its Laurent polynomial ring stays a domain after every field extension); [lem-weil-pbc-geometrically-connected-product-components] then makes its product with the connected fibre of $S$ connected. Every geometric fibre of $K$ is therefore smooth and connected, and is reductive by [lem-sfb-subdirect-product-reductivity] applied to the entire product, whose two projections are surjective. The product clause of [lem-sfb-central-isogeny-borel-root-compatibility], applied to the identity isogeny of each product fibre, identifies its roots and coroots with those of $S$; the tangent module is the direct sum of those of $S$ and the rootless torus, so $K$ is a split realization on $P\\oplus C$, with roots $(\\alpha,0)$ and coroots $(\\bar\\alpha^\\vee,0)$.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-subdirect-product-reductivity",
+    "lem-sfb-central-isogeny-borel-root-compatibility",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-geometrically-connected-product-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 6.3.1, product with the split central torus, pp.212--213"
+   }
+  },
+  {
+   "text": "Let $N=D_{\\mathbf Z}((P\\oplus C)/j(M))\\subset T_K$. Diagonalizable character duality identifies this as the kernel of $D(j):T_K\\to D_{\\mathbf Z}(M)$, and identifies $T_K/N$ with $D_{\\mathbf Z}(M)$. Every root $(\\alpha,0)=j(\\alpha)$ vanishes on $N$; the centre formula [lem-sfb-relative-reductive-centre-weight-kernel] therefore puts $N$ in $Z(K)$ scheme-theoretically. Apply [lem-sfb-relative-central-multiplicative-quotient] over the nonzero Noetherian ring $\\mathbf Z$ to form $\\mathcal G=K/N$. It is reductive, with closed maximal torus $\\mathcal T=T_K/N=D_{\\mathbf Z}(M)$; formation of the quotient and torus commutes with arbitrary base change. In particular there is no assumption that $N$ is smooth or that its order is invertible.",
+   "uses": [
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "lem-sfb-relative-reductive-centre-weight-kernel",
+    "lem-sfb-relative-central-multiplicative-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 6.3.1, finite central diagonalizable quotient, pp.212--213"
+   }
+  },
+  {
+   "text": "For every geometric field, the quotient $K\\to\\mathcal G$ has finite central kernel. Apply [lem-sfb-central-isogeny-borel-root-compatibility] with $H=K_k$ and $G=\\mathcal G_k$, both already known reductive. It identifies roots under pullback $j$ and coroots under $j^\\vee$. The identities in step 4 give exactly $\\Phi$ and $\\Phi^\\vee$ on $M$, with all labels fixed. For the integral tangent clause, [lem-sfb-relative-tangent-weight-base-change] gives the direct weight decomposition, finite projective weight modules, and their base change. [lem-sfb-arbitrary-base-root-lines-coroots] identifies its zero summand with $\\operatorname{Lie}(\\mathcal T)$ and identifies the nonzero weight ranks with geometric root multiplicities. Thus the only nonzero summands off zero are the prescribed root lines. They have rank one everywhere and are free over $\\mathbf Z$: a finite projective module is a summand of a finite free module, hence free by [lem-weil-subgroup-finite-free-abelian-group-free]. Consequently $\\mathcal G$ is a split realization of the original datum with precisely the full tangent decomposition of [def-sfb-pinned-split-root-realization].",
+   "uses": [
+    "lem-sfb-central-isogeny-borel-root-compatibility",
+    "lem-sfb-relative-tangent-weight-base-change",
+    "lem-sfb-arbitrary-base-root-lines-coroots",
+    "lem-weil-subgroup-finite-free-abelian-group-free",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 6.3.1 and root/tangent compatibility in Section 5.1; final paragraph of Section 6.3, pp.212--213,229"
+   }
+  },
+  {
+   "text": "First, $(\\mathcal G_{\\mathbf Q},\\mathcal T_{\\mathbf Q})$ is a split realization over $\\mathbf Q$ of $\\mathcal R$: the base $\\Delta$ of $\\Phi$ supplied in step 4 (a condition on the finite set $\\Phi\\subset\\mathbf Q\\Phi$ only) is a base of $\\mathcal R$, a generator of each free root line $\\mathfrak g_\\alpha$, $\\alpha\\in\\Delta$, makes $\\mathcal G$ pinned, and [lem-sfb-pinned-split-root-base-change] along $\\mathbf Z\\to\\mathbf Q$ gives a pinned, hence split, realization with root lines $\\mathbf Q\\otimes\\mathfrak g_\\alpha$; then forget base and pinning. Apply [lem-sfb-split-central-isogeny-lifting] over $\\mathbf Q$ to the two split realizations $(\\mathcal G_{\\mathbf Q},\\mathcal T_{\\mathbf Q})$ and the given $(G_{\\mathbf Q},T_{\\mathbf Q})$, taking $h=\\mathrm{id}_M$ and the identity root bijection. The lemma gives a group isomorphism $\\iota$ whose torus restriction is $D_{\\mathbf Q}(\\mathrm{id}_M)$, hence the identity, with the specified root and coroot labels. This is the asserted prolongation of the given rational pair. No pinning was prescribed; all temporary choices may be forgotten. For empty roots step 4 has $P=0$ and $C=M$, and $N=1$, so the construction is the split torus itself; for $M=0$ it is the trivial group.",
+   "uses": [
+    "lem-sfb-pinned-split-root-base-change",
+    "lem-sfb-split-central-isogeny-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 6.1.15 and central Isogeny Theorem preceding existence, pp.195--196; Lemma 6.3.1, pp.212--213"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-chevalley-birational-integral-envelope",
+  "lem-sfb-root-cell-semisimplicity-criterion",
+  "lem-sfb-relative-semisimple-affineness",
+  "lem-sfb-affine-multiplicative-type-monomorphism-closed",
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-root-datum-lattice-embedding",
+  "lem-sfb-rational-split-root-realization",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "lem-sfb-subdirect-product-reductivity",
+  "lem-sfb-central-isogeny-borel-root-compatibility",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "lem-sfb-relative-reductive-centre-weight-kernel",
+  "lem-sfb-relative-central-multiplicative-quotient",
+  "lem-sfb-relative-tangent-weight-base-change",
+  "lem-sfb-arbitrary-base-root-lines-coroots",
+  "lem-weil-subgroup-finite-free-abelian-group-free",
+  "lem-sfb-split-central-isogeny-lifting",
+  "lem-sfb-pinned-split-root-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Agent assembly of the read Conrad Section 6.3 construction and central quotient reduction, with three separate statement-only inputs; local source WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every split reductive group over Q with a specified split torus and root datum extends to a split reductive group scheme over Z",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Defs\", \"type\": \"Type u_1 →\\n  (X₁ : Type u_5) → (X₂ : Type u_6) → [AddCommGroup X₁] → [AddCommGroup X₂] → Type (max (max (max u_1 0) u_5) u_6)\", \"doc\": \"A root datum is a root pairing between two additive commutative groups $X_1$ and $X_2$ over the integers $\\\\mathbb{Z}$, where each group is equipped with its canonical $\\\\mathbb{Z}$-module structure. Th\"}\n  {\"name\": \"RootPairing.restrictScalarsRat\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"{ι : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : Field L] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : Module L M] →\\n                [inst_4 : Module L N] →\\n                  (P : RootPairing ι \", \"doc\": \"Given a crystallographic root pairing $ P $ over a field $ L $ of characteristic zero, this constructs a new root pairing over $ \\\\mathbb{Q} $ by restricting scalars via the canonical embedding $ \\\\math\"}\n  {\"name\": \"RootPairing.instIsValuedInRatOfIsCrystallographic\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_4} {N : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [P.IsCrystallographic]\\n  [inst_6 : Algebra ℚ R], P.IsValuedIn ℚ\", \"doc\": \"If a root pairing $ P $ between $ R $-modules is crystallographic and $ R $ has a $ \\\\mathbb{Q} $-algebra structure, then $ P $ takes values in the rational numbers $ \\\\mathbb{Q} $.\"}\n  {\"name\": \"RootPairing.EmbeddedG2\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → Type u_1\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a root pairing between them, this constructs the type of embedded $ G_2 $ root systems parameterized by a type $ \\\\iota $, defined ind\"}\n  {\"name\": \"RootPairingCat\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/RootPairingCat\", \"type\": \"(R : Type u) → [CommRing R] → Type (max u (v + 1))\", \"doc\": \"The category of root pairings over a commutative ring $ R $, constructed as an inductive type depending on the commutative ring structure of $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.specZIsTerminal\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"CategoryTheory.Limits.IsTerminal (AlgebraicGeometry.Spec { carrier := ℤ, commRing := Int.instCommRing })\", \"doc\": \"The scheme $\\\\operatorname{Spec}(\\\\mathbb{Z})$ is the terminal object in the category of schemes, meaning that for every scheme $X$, there exists a unique morphism $X \\\\to \\\\operatorname{Spec}(\\\\mathbb{Z})\"}\n  {\"name\": \"RootPairing.instIsAnisotropicOfIsCrystallographic\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Fintype ι] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : CommRing R] [inst_4 : Module R M] [inst_5 : Module R N] (P : RootPairing ι R M N)\\n  [CharZero R] [P.IsCrystallographic], P.IsAnisotropic\", \"doc\": \"For a root pairing $ P $ between $ R $-modules that is crystallographic (takes values in a subring $ S $ of $ R $) and where $ R $ has characteristic zero, $ P $ is anisotropic. This means that the on\"}\n  {\"name\": \"RootPairing.instIsRootSystemSubtypeMemSubmoduleSpanRangeCoeEmbeddingRootCorootRestrictScalars'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"∀ {ι : Type u_1} {L : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field L] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : Module L M] [inst_4 : Module L N] (P : RootPairing ι L M N) (K : Type u_5)\\n  [inst_5 : Field K] [inst_6 : Algebra K L] [inst_7 : Module K M] [inst_8 : Module\", \"doc\": \"Given a root pairing over a field $ L $, restricting scalars to a subfield $ K $ yields a new root pairing over $ K $. The new pairing has root and coroot embeddings valued in the $ K $-span of the or\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract root-pairing, Lie, group-extension or unrelated integral-model results do not realize or prolong reductive group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral extension of split rational reductive groups by Chevalley root coordinates and birational group laws",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.EmbeddedG2\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → Type u_1\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a root pairing between them, this constructs the type of embedded $ G_2 $ root systems parameterized by a type $ \\\\iota $, defined ind\"}\n  {\"name\": \"RootPairing.instIsValuedInRatOfIsCrystallographic\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_4} {N : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [P.IsCrystallographic]\\n  [inst_6 : Algebra ℚ R], P.IsValuedIn ℚ\", \"doc\": \"If a root pairing $ P $ between $ R $-modules is crystallographic and $ R $ has a $ \\\\mathbb{Q} $-algebra structure, then $ P $ takes values in the rational numbers $ \\\\mathbb{Q} $.\"}\n  {\"name\": \"RootPairing.EmbeddedG2.toIsValuedIn\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} {inst : CommRing R} {inst_1 : AddCommGroup M}\\n  {inst_2 : Module R M} {inst_3 : AddCommGroup N} {inst_4 : Module R N} {P : RootPairing ι R M N} [self : P.EmbeddedG2],\\n  P.IsValuedIn ℤ\", \"doc\": \"For any commutative ring $ R $, $ R $-modules $ M $ and $ N $, and an embedded $ G_2 $ root system defined by a root pairing $ P $ between $ M $ and $ N $, the root pairing $ P $ takes values in the i\"}\n  {\"name\": \"WeierstrassCurve.IsIntegral.integral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {K : Type u_2} {inst_1 : Field K} {inst_2 : Algebra R K} {W : WeierstrassCurve K}\\n  [self : WeierstrassCurve.IsIntegral R W], ∃ W_int, W = W_int.baseChange K\", \"doc\": \"For any commutative ring $ R $, field $ K $ equipped with an $ R $-algebra structure, and integral Weierstrass curve $ W $ over $ K $, there exists a Weierstrass curve $ W_{\\\\text{int}} $ over $ R $ su\"}\n  {\"name\": \"RootPairing.restrictScalarsRat\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"{ι : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : Field L] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : Module L M] →\\n                [inst_4 : Module L N] →\\n                  (P : RootPairing ι \", \"doc\": \"Given a crystallographic root pairing $ P $ over a field $ L $ of characteristic zero, this constructs a new root pairing over $ \\\\mathbb{Q} $ by restricting scalars via the canonical embedding $ \\\\math\"}\n  {\"name\": \"RootPairing.IsCrystallographic\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_4} →\\n      {N : Type u_5} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → Prop\", \"doc\": \"Given a commutative ring $ R $, an $ R $-module $ M $, an $ R $-module $ N $, and a commutative ring $ S $ with an $ S $-algebra structure on $ R $, this proposition asserts that a root pairing betwee\"}\n  {\"name\": \"WeierstrassCurve.isIntegral_of_exists_lift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] {W : WeierstrassCurve K},\\n  (∃ r₁, (algebraMap R K) r₁ = W.a₁) →\\n    (∃ r₂, (algebraMap R K) r₂ = W.a₂) →\\n      (∃ r₃, (algebraMap R K) r₃ = W.a₃) →\\n        (∃ r₄, (algebraMap R K) r₄ = W.a₄) → (∃ r₆, (alge\", \"doc\": \"Given a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and a Weierstrass curve $ W $ over $ K $, if each coefficient $ a_1, a_2, a_3, a_4, a_6 $ of $ W $ lies in the i\"}\n  {\"name\": \"exists_integral_multiples\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  {L : Type u_3} [inst_4 : Field L] [inst_5 : Algebra K L] [inst_6 : Algebra A L] [IsScalarTower A K L]\\n  [FiniteDimensional K L] [IsDomain A] (s : Finset L), ∃ y, y ≠ 0 ∧ ∀ x ∈ s, IsIn\", \"doc\": \"Let $R$ be an integral domain with field of fractions $K$. Let $L$ be a finite field extension of $K$. Let $A$ be a subring of $L$ that is also an $R$-algebra. For any finite subset $s \\\\subseteq L$, t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract root-pairing, Lie, group-extension or unrelated integral-model results do not realize or prolong reductive group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"RootDatum\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract root-pairing, Lie, group-extension or unrelated integral-model results do not realize or prolong reductive group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley.*group|reductive.*integral|birational.*group",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/Extension.lean\", \"line\": \"39\", \"text\": \"* [Chevalley, Eilenberg, *Cohomology Theory of Lie Groups and Lie\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract root-pairing, Lie, group-extension or unrelated integral-model results do not realize or prolong reductive group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a given split reductive rational group and maximal torus to a split reductive group scheme over the integers",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"GroupExtension.Splitting.mk\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : Group N] →\\n        [inst_1 : Group E] →\\n          [inst_2 : Group G] →\\n            {S : GroupExtension N E G} →\\n              (toMonoidHom : G →* E) → Function.RightInverse (↑toMonoidHom).toFun ⇑S.rightHom → S.Splitting\", \"doc\": \"Constructs a splitting of the group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ by providing a group homomorphism $s : G \\\\to E$ and verifying that the composition $G \\\\xrightarrow{s} E \\\\xrightarrow{\\\\pi} G$ e\"}\n  {\"name\": \"GroupExtension.Splitting.ctorIdx\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      {inst : Group N} → {inst_1 : Group E} → {inst_2 : Group G} → {S : GroupExtension N E G} → S.Splitting → ℕ\", \"doc\": \"The function that returns the natural number $0$ for any splitting of a group extension, corresponding to the single constructor of the splitting structure in Lean.\"}\n  {\"name\": \"GroupExtension.Splitting.toSection\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : Group N] → [inst_1 : Group E] → [inst_2 : Group G] → {S : GroupExtension N E G} → S.Splitting → S.Section\", \"doc\": \"Given a group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ and a splitting $s : G \\\\to E$ (a group homomorphism satisfying $\\\\pi \\\\circ s = \\\\mathrm{id}_G$), this constructs the corresponding section $s : G \\\\to \"}\n  {\"name\": \"AddGroupExtension.Splitting.ctorIdx\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      {inst : AddGroup N} →\\n        {inst_1 : AddGroup E} → {inst_2 : AddGroup G} → {S : AddGroupExtension N E G} → S.Splitting → ℕ\", \"doc\": \"The index of the constructor for the splitting structure in an additive group extension $0 \\\\to N \\\\to E \\\\to G \\\\to 0$, which encodes a homomorphism $s : G \\\\to E$ splitting the sequence as a semidirect p\"}\n  {\"name\": \"GroupExtension.Splitting\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : Group N] → [inst_1 : Group E] → [inst_2 : Group G] → GroupExtension N E G → Type (max u_2 u_3)\", \"doc\": \"A splitting of the group extension given by the short exact sequence $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ is a group homomorphism $s : G \\\\to E$ such that the composition $G \\\\xrightarrow{s} E \\\\xrightarrow{\\\\pi} \"}\n  {\"name\": \"GroupExtension.Splitting.recOn\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : Group N] →\\n        [inst_1 : Group E] →\\n          [inst_2 : Group G] →\\n            {S : GroupExtension N E G} →\\n              {motive : S.Splitting → Sort u} →\\n                (t : S.Splitting) →\\n                  ((toMonoidHom :\", \"doc\": \"Given a group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ and a splitting $s : G \\\\to E$ satisfying $\\\\pi \\\\circ s = \\\\mathrm{id}_G$, this recursor allows defining functions on the splitting by specifying their\"}\n  {\"name\": \"GroupExtension.Splitting.casesOn\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : Group N] →\\n        [inst_1 : Group E] →\\n          [inst_2 : Group G] →\\n            {S : GroupExtension N E G} →\\n              {motive : S.Splitting → Sort u} →\\n                (t : S.Splitting) →\\n                  ((toMonoidHom :\", \"doc\": \"Given a group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ and a splitting $s : G \\\\to E$ satisfying $\\\\pi \\\\circ s = \\\\mathrm{id}_G$, this recursor allows defining functions on the splitting by specifying their\"}\n  {\"name\": \"AddGroupExtension.Splitting.mk.injEq\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"∀ {N : Type u_1} {E : Type u_2} {G : Type u_3} [inst : AddGroup N] [inst_1 : AddGroup E] [inst_2 : AddGroup G]\\n  {S : AddGroupExtension N E G} (toAddMonoidHom : G →+ E)\\n  (rightInverse_rightHom : Function.RightInverse (↑toAddMonoidHom).toFun ⇑S.rightHom) (toAddMonoidHom_1 : G →+ E)\\n  (rightInverse_r\", \"doc\": \"Two splittings of an additive group extension are equal if and only if their underlying additive monoid homomorphisms are equal. Specifically, given an additive group extension $0 \\\\to N \\\\to E \\\\to G \\\\t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract root-pairing, Lie, group-extension or unrelated integral-model results do not realize or prolong reductive group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pinned-split-root-classification",
+  "date": "2026-10-24",
+  "group": "Q156"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for existence in Theorem 6.1.17: Integral prolongation of a given split rational reductive group",
+   "via": [
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rational-split-integral-prolongation",
+  "worker": "stage1",
+  "summary": "Q118 preserves the statement and its source route. Three statement-only inputs separate the non-reductive integral envelope, a field root-cell semisimplicity criterion, and root-independent relative affineness. Existing lattice, central quotient, tangent and central-isogeny interfaces assemble the general datum and the prescribed rational pair. The final identification uses the isogeny theorem, not the existence/classification node that depends on this item.",
+  "blueprint": "Newest blueprint det-thm-sf-ctf-stability-direct-images proof (3), via the recorded alteration/moduli/invariant-theory chain. This item realizes the integral existence prerequisite of pinned classification. Steps 1--3 realize the semisimple simply connected construction; steps 4--7 the central-torus and finite-quotient reductions; step 8 fixes the original rational pair. blueprint_refs.py ancestor reports null for the inherited created-node chain, which is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "step 5 passes between smoothness of the coordinate ring map Z -> Z[S] (x) Z[C] and smoothness of the affine product K; a generic smooth-ring/smooth-scheme comparison of sk-thm-p1 that no node of sk-thm-sf-ctf-stability states"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-a20a3b32f",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-a20a3b32f (reviewer sub-agent of L); spot-checked: Read the item, all 3 new nodes and every cited statement in full. Source: Conrad's Reductive Group Schemes, not in literature/; fetched the public PDF once and read Thm 6.1.16/6.1.17, Lemma 6.3.1, (6.3.5) and Props 6.3.15-6.3.16. The isogeny theorem is proved before existence, so step 8 is not circular. Steps 1-3 build the simply connected case; the 3 new nodes cover 6.3.4-6.3.14 (envelope), the fibre criterion from the proof of 6.3.15, and the Dedekind affineness of 6.3.16. All are true, smaller than the item and of comparable size. lem-sfb-chevalley-integral-root-model is downstream of the item, so avoiding it was correct. Steps 4-7 are a one-step version of Lemma 6.3.1: lattice embedding into P+C, the product K, the central quotient by N=D((P+C)/j(M)) (central because ZPhi lies in j(M)), and the coroot check c_alpha(l)=<jl,(cbar,0)>. Edge cases checked: empty roots, M=0, mu_2 quotient, SL2 identities by matrix computation (also in char 2). Source error confirmed: exp_c(1) lies in U_c and normalizes it; the three-factor word is correct. Batch-5: every listed sec-trace-formula node reached is a generic tool, outside both assumed statements and not a step of their proofs (fppf-covering-base-change, fg-torsionfree-group-free, smooth-fpqc-base-descent, flat-tensor-preserves-injection and fppf-covering-is-fpqc are Mathlib leaves; artin-approximation is general commutative algebra). Repairs: (1) C1 step 8: base change Z->Q of the split realization now argued, citing lem-sfb-pinned-split-root-base-change (same unit, no cycle, no new trace-formula reach); (2) B3: criterion now cites the definitions of smooth/connected/finite type, affineness node the definition of connected; (3) accepted tool use lem-weil-pbc-smooth-ring-map-iff-smooth-affine (unit sk-thm-p1), recorded in split_report.tool_uses. Advisory: smoothness of Z[C] is left standard; the local Conrad PDF is still WANTED.; 3 file(s) fixed by the reviewer"
+ }
+}

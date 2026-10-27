@@ -1,0 +1,216 @@
+{
+ "id": "lem-trf-fg-field-tensor-finite-free-reduction",
+ "kind": "statement",
+ "title": "Finite free tensor reduction for a finitely generated field extension",
+ "statement": "Let $k$ be a field [def-weil-field], let $K/k$ and $L/k$ be field extensions [def-pc-field-extension], and assume $K=k(a_1,\\ldots,a_n)$ for finitely many elements of $K$, where this denotes the smallest subfield containing $k$ and these elements. There exist $r\\geq0$ and elements $t_1,\\ldots,t_r\\in K$ forming a transcendence basis [def-weil-pbc-transcendence-basis], a subfield $F=k(t_1,\\ldots,t_r)\\subset K$, an integer $d\\geq1$, and an $F$-basis $e_1,\\ldots,e_d$ of $K$ [def-weil-pbc-free-module]. For these choices put $A=F\\otimes_kL$ and $T=K\\otimes_kL$ with algebra tensor multiplication [def-weil-pbc-module-tensor-product], and give $T$ its $A$-algebra structure by $f\\otimes l\\mapsto f\\otimes l$. The map $A\\otimes_FK\\to T$, $(f\\otimes l)\\otimes u\\mapsto fu\\otimes l$, is an $A$-algebra isomorphism. The map $A^d\\to T$, $(c_i)\\mapsto\\sum_i c_i(e_i\\otimes1)$, is an $A$-linear isomorphism. In particular $T$ is finite free over $A$, and $A\\to T$ is flat [def-weil-pbc-flat-ring-map] and integral [def-weil-pbc-integral-closure]. No separability hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 045M (lemma-tensor-fields-CM), proof: choose a finite extension of a purely transcendental extension and form its finite free tensor map."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finitely-generated-field-finite-transcendence-basis] to $K/k$ and put $F=k(t_1,\\ldots,t_r)$. Thus $K/F$ is algebraic. Also $F(a_1,\\ldots,a_n)=K$: this field contains $k$ and all the $a_i$, and is contained in $K$. Apply [lem-weil-pbc-algebraic-generators-finite-extension] over $F$ to these same generators. It gives a finite spanning list for $K$ over $F$. Successively discard any vector in the span of the others; the resulting finite list still spans and is linearly independent, since a nonzero coefficient in a dependence over a field would express its vector in terms of the others. This is a basis $e_1,\\ldots,e_d$ by [def-weil-pbc-free-module]. Since $1\\ne0$ in $K$, an empty list cannot span, so $d\\ge1$.",
+   "uses": [
+    "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+    "lem-weil-pbc-algebraic-generators-finite-extension",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 030F (lemma-transcendence-degree), 09GH (lemma-algebraic-finitely-generated); unpacking the finite extension in Tag 045M."
+   }
+  },
+  {
+   "text": "Use the bilinearity universal property [def-weil-pbc-module-tensor-product]. The formula $((f\\otimes l),u)\\mapsto fu\\otimes l$ is $F$-balanced: multiplying either $f$ or $u$ by $h\\in F$ gives $fhu\\otimes l$; it also respects the inner $k$-relations. It therefore gives $\\alpha:A\\otimes_FK\\to T$. Conversely $(u,l)\\mapsto(1\\otimes l)\\otimes u$ is $k$-balanced, since $(1\\otimes bl)\\otimes u=(b\\otimes l)\\otimes u=(1\\otimes l)\\otimes bu$ for $b\\in k$. It gives $\\beta:T\\to A\\otimes_FK$. On generators, $\\alpha\\beta(u\\otimes l)=u\\otimes l$ and $\\beta\\alpha((f\\otimes l)\\otimes u)=(1\\otimes l)\\otimes fu=(f\\otimes l)\\otimes u$. Thus they are inverse additive maps. Tensor multiplication gives $\\alpha(((f\\otimes l)\\otimes u)((g\\otimes m)\\otimes v))=fguv\\otimes lm=(fu\\otimes l)(gv\\otimes m)$, and $\\alpha(1)=1$. Moreover $\\alpha((f\\otimes l)\\otimes1)=f\\otimes l$, so $\\alpha$ respects the specified $A$-algebra structure.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 045M (lemma-tensor-fields-CM), finite purely transcendental subfield and finite free tensor map in its proof."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-free-module-base-change-free] to the ring map $F\\to A$, $f\\mapsto f\\otimes1$, and the basis just chosen. The vectors $1_A\\otimes e_i$ form an $A$-basis of $A\\otimes_FK$. The $A$-linear isomorphism $\\alpha$ sends them to $e_i\\otimes1$, so these form a basis of $T$. By the basis definition [def-weil-pbc-free-module], its coordinate map is precisely $A^d\\to T$, $(c_i)\\mapsto\\sum_i c_i(e_i\\otimes1)$; this proves the claimed finite freeness.",
+   "uses": [
+    "lem-weil-pbc-free-module-base-change-free",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 045M (lemma-tensor-fields-CM), finite purely transcendental subfield and finite free tensor map in its proof."
+   }
+  },
+  {
+   "text": "The finite free $A$-module $T$ is flat by [lem-sc-affine-standard-cover-finite-free-local-fp-flat]. By [def-weil-pbc-flat-ring-map], this means the specified ring map $A\\to T$ is flat. The displayed finite basis also generates $T$ over $A$, so [lem-weil-pbc-finite-algebra-is-integral] makes this ring map integral. None of these applications assumes separability.",
+   "uses": [
+    "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 045M (lemma-tensor-fields-CM), finite purely transcendental subfield and finite free tensor map in its proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-free-module-base-change-free",
+  "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-finite-algebra-is-integral"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 045M (lemma-tensor-fields-CM), finite purely transcendental subfield and finite free tensor map in its proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If K is a finitely generated field extension of k there is a finite transcendence basis t with K finite over F=k(t), and for any field extension L the map F tensor k L to K tensor k L is finite free",
+   "results": "{\"t\": \"2026-10-22T06:48:16Z\", \"tool\": \"leanfinder\", \"query\": \"If K is a finitely generated field extension of k there is a finite transcendence basis t with K finite over F=k(t), and for any field extension L the map F tensor k L to K tensor k L is finite free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.essFiniteType_iff\", \"trdeg_lt_aleph0\", \"IntermediateField.FG.exists_finset_maximalFor_isTranscendenceBasis_separableClosure\", \"IntermediateField.fg_top\", \"IntermediateField.finite_of_fg_of_isAlgebraic\", \"IntermediateField.fg_top_iff\", \"Algebra.finite_of_essFiniteType_of_isAlgebraic\", \"exists_finite_inj_algHom_of_fg\"], \"digest\": \"370e748e23fdc103\"} Read hits: No complete match or one-line specialization: finite transcendence basis, finite algebraic extension, tensor reassociation, and finite-free base change must be combined. Module.Free.tensor and Module.Finite.base_change cover only the base-change ingredient; the statement also constructs the rational subfield from finite field generation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free, TensorProduct",
+   "results": "{\"t\": \"2026-10-22T06:48:30Z\", \"tool\": \"loogle\", \"query\": \"Module.Free, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Free.tensor\", \"Subalgebra.centralizer_range_includeRight_eq_center_tensorProduct\", \"Subalgebra.centralizer_coe_image_includeRight_eq_center_tensorProduct\", \"Subalgebra.centralizer_coe_range_includeLeft_eq_center_tensorProduct\", \"Subalgebra.centralizer_coe_map_includeRight_eq_center_tensorProduct\", \"Subalgebra.centralizer_coe_image_includeLeft_eq_center_tensorProduct\", \"Subalgebra.centralizer_tensorProduct_eq_center_tensorProduct_right\", \"Subalgebra.centralizer_tensorProduct_eq_center_tensorProduct_left\"], \"digest\": \"635010a3188b2ef9\"} Read hits: No complete match or one-line specialization: finite transcendence basis, finite algebraic extension, tensor reassociation, and finite-free base change must be combined. Module.Free.tensor and Module.Finite.base_change cover only the base-change ingredient; the statement also constructs the rational subfield from finite field generation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CohenMacaulay|cohen.macaulay|exists.*[Tt]ranscendence[Bb]asis|finrank.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-22T06:48:30Z\", \"tool\": \"grep\", \"query\": \"CohenMacaulay|cohen.macaulay|exists.*[Tt]ranscendence[Bb]asis|finrank.*[Tt]ensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dimension/Constructions.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Classification.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Classification.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Classification.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Classification.lean\", \"Mathlib/FieldTheory/SeparableClosure.lean\", \"Mathlib/FieldTheory/SeparableClosure.lean\", \"Mathlib/FieldTheory/SeparableClosure.lean\"], \"digest\": \"73204311ac76d430\"} Read hits: No complete match or one-line specialization: finite transcendence basis, finite algebraic extension, tensor reassociation, and finite-free base change must be combined. Module.Free.tensor and Module.Finite.base_change cover only the base-change ingredient; the statement also constructs the rational subfield from finite field generation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finitely generated field extension is finite over a rational function subfield and tensor base change is a finite free module",
+   "results": "{\"t\": \"2026-10-22T06:48:30Z\", \"tool\": \"leansearch\", \"query\": \"Every finitely generated field extension is finite over a rational function subfield and tensor base change is a finite free module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"functionField_iff\", \"IntermediateField.finite_of_fg_of_isAlgebraic\", \"Module.Finite.base_change\", \"FunctionField\", \"finite_of_finite_type_of_isJacobsonRing\", \"IntermediateField.fg_of_noetherian\", \"Algebra.FiniteType.baseChange\", \"IntermediateField.FG\"], \"digest\": \"fd891acdfc7096f8\"} Read hits: No complete match or one-line specialization: finite transcendence basis, finite algebraic extension, tensor reassociation, and finite-free base change must be combined. Module.Free.tensor and Module.Finite.base_change cover only the base-change ingredient; the statement also constructs the rational subfield from finite field generation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_of_fg_of_isAlgebraic|exists_finset_isTranscendenceBasis|cancelBaseChange|baseChange_apply",
+   "results": "{\"t\": \"2026-10-23T12:31:14Z\", \"tool\": \"grep\", \"query\": \"finite_of_fg_of_isAlgebraic|exists_finset_isTranscendenceBasis|cancelBaseChange|baseChange_apply\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/Basis.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\"], \"digest\": \"9d79ddb125b8b781\"} Read hits: partial ingredients only. Neither the finite-transcendence-basis construction nor its assembly with the explicit A-algebra and basis coordinate isomorphisms is a single hit or one-line specialization. Reuse existing DAG leaves for the ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finitely generated field extension K over k choose a finite transcendence basis and a basis of K over k(t); after tensoring with L it remains a finite free basis",
+   "results": "{\"t\": \"2026-10-23T12:31:14Z\", \"tool\": \"leansearch\", \"query\": \"For a finitely generated field extension K over k choose a finite transcendence basis and a basis of K over k(t); after tensoring with L it remains a finite free basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.TensorProduct.instFree\", \"IsTranscendenceBasis\", \"exists_isTranscendenceBasis\", \"isTranscendenceBasis_iff_algebraicIndependent_isAlgebraic\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top\", \"exists_isTranscendenceBasis_and_isSeparable_of_perfectField\", \"FiniteField.instFiniteExtension_1\", \"Algebra.FiniteType.baseChange\"], \"digest\": \"35a3e7619940e230\"} Read hits: partial ingredients only. Neither the finite-transcendence-basis construction nor its assembly with the explicit A-algebra and basis coordinate isomorphisms is a single hit or one-line specialization. Reuse existing DAG leaves for the ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IntermediateField.finite_of_fg_of_isAlgebraic",
+   "results": "{\"t\": \"2026-10-23T12:31:14Z\", \"tool\": \"loogle\", \"query\": \"IntermediateField.finite_of_fg_of_isAlgebraic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IntermediateField.finite_of_fg_of_isAlgebraic'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read hits: partial ingredients only. Neither the finite-transcendence-basis construction nor its assembly with the explicit A-algebra and basis coordinate isomorphisms is a single hit or one-line specialization. Reuse existing DAG leaves for the ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated field extension is finite over a rational function subfield; tensoring with another field gives a finite free algebra",
+   "results": "{\"t\": \"2026-10-23T12:31:18Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated field extension is finite over a rational function subfield; tensoring with another field gives a finite free algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"functionField_iff\", \"FunctionField\", \"IntermediateField.fg_top\", \"IntermediateField.finite_of_fg_of_isAlgebraic\", \"RatFunc.finrank_ratFunc_ratFunc\", \"IntermediateField.essFiniteType_iff\", \"IntermediateField.fg_top_iff\", \"RatFunc.liftAlgebra\"], \"digest\": \"7e14c647c33a90cd\"} Read hits: partial ingredients only. Neither the finite-transcendence-basis construction nor its assembly with the explicit A-algebra and basis coordinate isomorphisms is a single hit or one-line specialization. Reuse existing DAG leaves for the ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free, TensorProduct",
+   "results": "{\"t\": \"2026-10-23T12:42:26Z\", \"tool\": \"loogle\", \"query\": \"Module.Free, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Free.tensor\", \"Subalgebra.centralizer_range_includeRight_eq_center_tensorProduct\", \"Subalgebra.centralizer_coe_image_includeRight_eq_center_tensorProduct\", \"Subalgebra.centralizer_coe_range_includeLeft_eq_center_tensorProduct\", \"Subalgebra.centralizer_coe_map_includeRight_eq_center_tensorProduct\", \"Subalgebra.centralizer_coe_image_includeLeft_eq_center_tensorProduct\", \"Subalgebra.centralizer_tensorProduct_eq_center_tensorProduct_right\", \"Subalgebra.centralizer_tensorProduct_eq_center_tensorProduct_left\"], \"digest\": \"635010a3188b2ef9\"} Read hits: partial ingredients only. Neither the finite-transcendence-basis construction nor its assembly with the explicit A-algebra and basis coordinate isomorphisms is a single hit or one-line specialization. Reuse existing DAG leaves for the ingredients.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tensor-fields-cohen-macaulay",
+  "date": "2026-10-22",
+  "group": "Q148"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, flat-family component-closure input through relative associated specialization; in the proof of Stacks 05DC used there, the residue-field tensor ring has no embedded associated primes because it is Noetherian Cohen–Macaulay. This input is the finite-transcendence-basis and finite-free tensor reduction in Stacks 045M.",
+   "via": [
+    "lem-trf-tensor-fields-cohen-macaulay",
+    "lem-trf-relative-assassin-base-change",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-fg-field-tensor-finite-free-reduction",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 045M finite free reduction using existing finite transcendence basis, algebraic generators, basis base-change, flatness and integrality nodes; proved the algebra tensor identification by explicit inverse maps. No new nodes and no separability hypothesis.",
+  "blueprint": "Realizes the existing finite-free residue-field tensor reduction (Stacks 045M) below latest lem-trf-local-term-locality, proof (1)--(2), through the recorded flat-family component-closure chain."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-8cd086fd7",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-8cd086fd7 (reviewer sub-agent of L); spot-checked: PASS. The delivery is one commit with the item and its report, and no new nodes. Against clones/live the statement, stmt_deps, source and blueprint are unchanged; only the proof and split fields were added. It is not a re-split (the base had no proof). The source is Stacks algebra.tex 47267, Tag 045M: K finite over k(t), and k(t)⊗L→K⊗L is finite free. The item states this with an explicit basis plus flat and integral, which is exactly what its citer lem-trf-tensor-fields-cohen-macaulay uses (T≅A^d, finite flat). Step 1: the finite-transcendence-basis leaf, then the algebraic-generators leaf applied over F to the a_i. F(a)=K is checked both ways, the reduction to a linearly independent spanning list is elementary, and 1≠0 gives d≥1. Step 2 is elementary and correct: I checked α and β for k-bilinearity and F-balancing, both composites on generators, multiplicativity, the unit and the A-structure. Step 3: the free-module base-change basis 1⊗e_i is carried by α to e_i⊗1, and the coordinate map is A^d→T. Step 4: flatness from the Mathlib leaf Module.Flat.of_free (another unit's node, so no tool_uses needed) and integrality from Algebra.IsIntegral.of_finite. Edge cases checked: K=k, K/k finite, purely transcendental K, and a purely inseparable extension with nilpotents in T; no separability or reducedness is used. proof_deps equals the union of uses. There is no cycle, no SGA, and no duplicate node in the 045M chain. One minor point: the report mentions a citations.json that is not in the commit; this does not affect the DAG."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FgFieldTensorFiniteFreeReduction",
+  "declaration": "Algebra.exists_finiteFree_tensorProduct_reduction",
+  "file": "lean/Sheaf/FieldTheory/FgFieldTensorFiniteFreeReduction.lean",
+  "statement": "theorem exists_finiteFree_tensorProduct_reduction (k : Type u) (K : Type v) (L : Type w) [Field k] [Field K] [Field L] [Algebra k K] [Algebra k L] (hfg : (⊤ : IntermediateField k K).FG) : ∃ (r : ℕ) (t : Fin r → K), IsTranscendenceBasis k t ∧ ∃ F : IntermediateField k K, F = IntermediateField.adjoin k (Set.range t) ∧ ∃ d : ℕ, 1 ≤ d ∧ ∃ e : Module.Basis (Fin d) F K, ∃ (_ : Algebra (F ⊗[k] L) (K ⊗[k] L)), (∀ (f : F) (l : L), algebraMap (F ⊗[k] L) (K ⊗[k] L) (f ⊗ₜ[k] l) = (f : K) ⊗ₜ[k] l) ∧ (∃ α : ((F ⊗[k] L) ⊗[F] K) ≃ₐ[F ⊗[k] L] (K ⊗[k] L), ∀ (f : F) (l : L) (z : K), α ((f ⊗ₜ[k] l) ⊗ₜ[F] z) = ((f : K) * z) ⊗ₜ[k] l) ∧ (∃ β : (Fin d → F ⊗[k] L) ≃ₗ[F ⊗[k] L] (K ⊗[k] L), ∀ c : Fin d → F ⊗[k] L, β c = ∑ i, c i • (e i ⊗ₜ[k] (1 : L))) ∧ Module.Free (F ⊗[k] L) (K ⊗[k] L) ∧ Module.Finite (F ⊗[k] L) (K ⊗[k] L) ∧ (algebraMap (F ⊗[k] L) (K ⊗[k] L)).Flat ∧ (algebraMap (F ⊗[k] L) (K ⊗[k] L)).IsIntegral",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65a277fb1",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Only the node's lean record changed against side-live, and lean.statement matches the file signature verbatim. Hypotheses: (⊤ : IntermediateField k K).FG is generation as a field (same convention as the citer tensor-fields-cohen-macaulay), with independent universes u v w and no separability assumption. Conclusion checked clause by clause: IsTranscendenceBasis for t : Fin r → K, F = adjoin k (range t), a basis e : Fin d with 1 ≤ d, the A-algebra structure fixed on pure tensors (canonical, not arbitrary), the AlgEquiv α with the formula (f⊗l)⊗z ↦ fz⊗l, the linear equiv β with β c = Σ c_i•(e_i⊗1), and Free, Finite, RingHom.Flat and RingHom.IsIntegral for the same algebraMap. This matches Stacks 045M (algebra.tex 47266–47288). Edge cases covered: K=k, K/k finite or inseparable, K purely transcendental, L=k; d≥1 excludes the empty basis. No definitions, the only proof is sorry, source and blueprint docstrings present, the four proof steps are in the theorem docstring, report sections present, all statement dependencies are Mathlib leaves, no duplicate declaration. No compile run because no file was changed; the worker reports clean compiles."
+ }
+}

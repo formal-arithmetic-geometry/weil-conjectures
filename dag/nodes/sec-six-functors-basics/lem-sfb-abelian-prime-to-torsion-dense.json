@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-abelian-prime-to-torsion-dense",
+ "kind": "statement",
+ "title": "Prime-to-characteristic torsion is dense in an abelian variety",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $B/F$ be an abelian variety [def-sc-abelian-variety]. For each integer $n\\geq1$ whose image in $F$ is nonzero, let $B[n]$ be the kernel of multiplication by $n$ [def-sc-mult-n]. The subset $T=\\bigcup_{n\\geq1,\\,n\\in F^\\times}B[n](F)$ of rational points [def-pc-rational-point] is Zariski dense in $B$: every closed subset of the underlying topological space of $B$ containing all the images of the points in $T$ is the whole space. The assertion includes the zero-dimensional abelian variety.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Section 10, pp.42–45 (torsion and isogenies); the explicit density statement and proof are the first unnumbered lemma after Proposition 12.1 in Milne, Abelian Varieties, January 2, 2022, Section 12, printed p.19, https://www.jmilne.org/math/xnotes/AVs.pdf. The latter article is WANTED; see report.md. Agent supporting lemma, not a claim that the local PDF states it verbatim."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-sc-mult-n",
+  "def-pc-rational-point"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-av-commutative], $B(F)$ is abelian. The set $T$ is a subgroup: $0\\in B[1](F)$; if $nx=0$ and $my=0$ with $n,m$ invertible in $F$, then $nm(x-y)=0$ and $nm$ is invertible. Form $P=\\coprod_{t\\in T}\\operatorname{Spec}F$ using [lem-weil-pbc-scheme-coproduct-family], and the constant-group multiplication of [lem-weil-pbc-constant-group-scheme-multiplication]. Its unit is the inclusion labelled $0$, and its inverse carries the copy labelled $t$ identically to the copy labelled $-t$. The group axioms follow on each open component from the corresponding equalities in $T$. The coproduct universal property gives $a:P\\to B$ restricting to the rational point $t$ on the copy labelled $t$. On every component labelled $(t,u)$ of $P\\times_F P$, compatibility with addition is the equality $t+u=t+u$ in $B(F)$; unit and inverse compatibility are identical. Thus $a$ is a group-scheme homomorphism, and its topological image is exactly the set of images of the points of $T$.",
+   "uses": [
+    "lem-sc-av-commutative",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-constant-group-scheme-multiplication"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 1.40 and Definition 1.48, pp.18–20; explicit constant-group evaluation construction."
+   }
+  },
+  {
+   "text": "Regard $P$ and $B$ as absolute groupoids with object scheme $\\operatorname{Spec}F$: both source and target are their structure map, composition is addition, and their unit and inverse are the group operations [def-a1-groupoid-scheme]. The map $a$ of step 1 commutes with these operations. The field $F$ is perfect: in characteristic $p>0$, each $c\\in F$ has a root of $X^p-c$, and characteristic-zero fields are perfect. Apply [lem-sfb-perfect-field-groupoid-image-closure] to $a$. It gives the reduced closed subgroup scheme $H\\hookrightarrow B$ with underlying subset $\\overline T$. This application allows the infinite coproduct $P$: the cited statement has no finite-type or quasi-compactness hypothesis on the source. The scheme $H$ is of finite type over $F$: on each member $\\operatorname{Spec}R$ of a finite affine cover of $B$, its intersection is $\\operatorname{Spec}(R/I)$, and the quotient of a finitely generated $F$-algebra is finitely generated [def-weil-finite-type-morphism].",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-sfb-perfect-field-groupoid-image-closure",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q8, lemma-map-groupoids-on-perfect-field-image, applied to the evaluation homomorphism from a constant group scheme."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-abelian-closed-subgroup-reduced-component] to $H\\hookrightarrow B$. Since $H$ is reduced, its identity component $C=H^0$ is an abelian variety and a closed subgroup of $B$. By [lem-sfb-group-neutral-component-translates], $H$ has finitely many components, each a rational translate of $C$; denote their number by $r\\geq1$. By [lem-kun-dimension-finite-type], write $g=\\dim B$ and $h=\\dim C$ as nonnegative integers; both schemes contain the identity. Dimensions here mean the chain dimension [def-kun-topological-krull-dimension], which is the $\\kundim$ of the finiteness lemma. Since $C$ is a closed subset of $B$, any chain in $C$ is also a chain in $B$, so $h\\leq g$.",
+   "uses": [
+    "lem-sfb-abelian-closed-subgroup-reduced-component",
+    "lem-sfb-group-neutral-component-translates",
+    "lem-kun-dimension-finite-type",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.34, Corollary 1.35 and dimension discussion before Proposition 1.37, pp.16–18; Milne AV I Proposition 8.1, p.35."
+   }
+  },
+  {
+   "text": "Fix a prime $\\ell$ invertible in $F$ (take $2$ unless $\\operatorname{char}F=2$, in which case take $3$). For every $m\\geq1$, put $N=\\ell^m$. Apply [lem-sc-ntorsion-etale] to $B$ and to $C$ ($N$ is prime to $\\operatorname{char}F$): $B[N](F)\\cong(\\mathbf Z/N\\mathbf Z)^{2g}$ and $C[N](F)\\cong(\\mathbf Z/N\\mathbf Z)^{2h}$, so $\\#B[N](F)=N^{2g}$ and $\\#C[N](F)=N^{2h}$. Every point of $B[N](F)$ belongs to $T\\subseteq H(F)$. In any one component of $H$, either there is no such point, or choose one, $x$. Subtracting $x$ injects the $N$-torsion points of that component into $C[N](F)$: translation identifies the component with $C$ by step 3, and $N(y-x)=Ny-Nx=0$. Thus each of the $r$ components contains at most $N^{2h}$ of these points, and $N^{2g}\\leq rN^{2h}$.",
+   "uses": [
+    "lem-sc-ntorsion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Theorem 7.2 and Remark 7.3, pp.33–34, prime-to-characteristic torsion count; componentwise subtraction argument supplied here."
+   }
+  },
+  {
+   "text": "If $h<g$, cancelling the positive integer $N^{2h}$ in the inequality of step 4 gives $\\ell^{2m(g-h)}\\leq r$ for every $m\\geq1$. Taking $m=r+1$ contradicts this, since $\\ell\\geq2$ and $g-h\\geq1$ give $\\ell^{2m(g-h)}\\geq2^m\\geq m+1>r$ (the inequality $2^m\\geq m+1$ follows by induction). Hence $h=g$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent counting argument from Theorem 7.2 and Remark 7.3; no density theorem used."
+   }
+  },
+  {
+   "text": "The variety $B$ is irreducible by [lem-sc-abelian-variety-characterization]. If the closed subset $C\\subseteq B$ were proper, a chain of irreducible closed subsets of length $h=g$ in $C$ would extend by appending $B$, giving a chain of length $g+1$ in $B$. Such a chain in $C$ exists because its finite integer dimension is the supremum of the integer chain lengths [def-kun-topological-krull-dimension]. This contradicts $\\dim B=g$. Thus $|C|=|B|$, so $|B|=|C|\\subseteq|H|=\\overline T\\subseteq|B|$. Every closed subset containing $T$ contains its closure, and is therefore all of $|B|$. The argument also covers $g=0$: $h\\leq g$ forces $h=g=0$, and the same chain argument shows $C=B$.",
+   "uses": [
+    "lem-sc-abelian-variety-characterization",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.35, p.17; final dimension comparison written directly from the definition of chain dimension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-groupoid-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-weil-finite-type-morphism",
+  "lem-kun-dimension-finite-type",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sc-av-commutative",
+  "lem-sc-ntorsion-etale",
+  "lem-sfb-abelian-closed-subgroup-reduced-component",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-sfb-perfect-field-groupoid-image-closure",
+  "lem-weil-pbc-constant-group-scheme-multiplication",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Theorem 7.2 and Remark 7.3 (pp.33–34), with Milne iAG2017 1.34–1.48 and Stacks Tag 04Q8; explicit torsion-counting density argument. The 2022 Section 12 density lemma remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an abelian variety over an algebraically closed field the union of the l power torsion points is Zariski dense for a prime l different from the characteristic",
+   "results": "8 hits: PadicInt.denseRange_natCast, AddCircle.denseRange_zsmul_iff, Padic.denseRange_ratCast, Subgroup.dense_xor'_cyclic, PadicInt.denseRange_intCast, AddCircle.dense_addSubgroup_iff_ne_zmultiples, AddSubgroup.dense_xor'_cyclic, AddCircle.denseRange_zsmul_coe_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this scheme-theoretic assertion; density of an abstract topological subgroup and descent of a morphism property do not suffice"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The subgroup of points killed by powers of a prime invertible in the field is schematically dense in an abelian variety",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.denseRange, PadicInt.denseRange_natCast, PadicInt.denseRange_intCast, AlgebraicGeometry.Scheme.RationalMap.dense_domain, AddCircle.denseRange_zsmul_iff, Subgroup.dense_iff_ne_zpowers, denseRange_zsmul_iff_nsmul, AddCircle.dense_addSubgroup_iff_ne_zmultiples",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this scheme-theoretic assertion; density of an abstract topological subgroup and descent of a morphism property do not suffice"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The points of finite order prime to the characteristic are Zariski dense in every abelian variety over an algebraically closed field",
+   "results": "8 hits: AlgebraicGeometry.dominant_eq_topologically, AlgebraicGeometry.Scheme.Hom.denseRange, AlgebraicGeometry.Scheme.RationalMap.dense_domain, AlgebraicGeometry.IsDominant.denseRange, FirstOrder.Field.finite_ACF_prime_not_realize_of_ACF_zero_realize, AddCircle.denseRange_zsmul_iff, NumberField.InfinitePlace.denseRange_algebraMap_pi, AddCircle.denseRange_zsmul_coe_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this scheme-theoretic assertion; density of an abstract topological subgroup and descent of a morphism property do not suffice"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prime to characteristic torsion points of an abelian variety are Zariski dense",
+   "results": "8 hits: CharP.char_is_prime_of_pos, CharP.char_is_prime, prime_dvd_char_iff_dvd_card, AlgebraicGeometry.Scheme.RationalMap.dense_domain, IsAlgClosed.perfectRing, AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor, AddSubgroup.torsionBy, PrimeSpectrum.isClosed_iff_zeroLocus_ideal",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this scheme-theoretic assertion; density of an abstract topological subgroup and descent of a morphism property do not suffice"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torsion\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this scheme-theoretic assertion; density of an abstract topological subgroup and descent of a morphism property do not suffice"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*dens|dens.*torsion|AbelianVariety",
+   "results": "3 hits: Mathlib/Analysis/Convex/Segment.lean, Mathlib/Analysis/Convex/Segment.lean, Mathlib/Analysis/Convex/Extreme.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not state this scheme-theoretic assertion; density of an abstract topological subgroup and descent of a morphism property do not suffice"
+  },
+  {
+   "tool": "grep",
+   "query": "closure.*[Ss]ubgroup|[Ss]ubgroup.*closure|IsAbelianVariety|abelianVariety",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract topological subgroup density, scheme dominance, and rational-map domains do not assert torsion density for abelian varieties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The prime to characteristic torsion points are Zariski dense in an abelian variety over an algebraically closed field",
+   "results": "8 hits: AlgebraicGeometry.dominant_eq_topologically, AlgebraicGeometry.Scheme.Hom.denseRange, AlgebraicGeometry.IsDominant.denseRange, AlgebraicGeometry.Scheme.RationalMap.dense_domain, AlgebraicGeometry.Scheme.PartialMap.dense_domain, FirstOrder.ACF_models_genericPolyMapSurjOnOfInjOn_of_prime, AlgebraicGeometry.isDominant_iff, AddCircle.denseRange_zsmul_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract topological subgroup density, scheme dominance, and rational-map domains do not assert torsion density for abelian varieties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The prime to characteristic torsion points of an abelian variety are Zariski dense",
+   "results": "8 hits: AlgebraicGeometry.Scheme.RationalMap.dense_domain, AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor, IsAlgClosed.perfectRing, AddSubgroup.torsionBy.zmodModule, AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget, AddSubgroup.torsionBy, CharP.char_is_prime, PrimeSpectrum.isClosed_iff_zeroLocus_radical_ideal",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract topological subgroup density, scheme dominance, and rational-map domains do not assert torsion density for abelian varieties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torsion\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract topological subgroup density, scheme dominance, and rational-map domains do not assert torsion density for abelian varieties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "All torsion points of order invertible in the base field form a Zariski dense subset of any abelian variety",
+   "results": "8 hits: AddCircle.denseRange_zsmul_iff, AddCircle.denseRange_zsmul_coe_iff, AddCircle.dense_addSubgroup_iff_ne_zmultiples, NumberField.Units.torsionOrder_ne_zero, NumberField.Units.torsionOrder_pos, NumberField.Units.even_torsionOrder, NumberField.InfinitePlace.denseRange_algebraMap_pi, NumberField.InfiniteAdeleRing.denseRange_algebraMap",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract topological subgroup density, scheme dominance, and rational-map domains do not assert torsion density for abelian varieties"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-subvariety-separable-definition",
+  "date": "2026-10-23",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: The abelian part of a homomorphism kernel over its ground field. Supporting lemma: Geometric abelian subvarieties have a finite separable field of definition. Supporting torsion-density input for separable definition of an abelian subvariety.",
+   "via": [
+    "lem-sfb-abelian-subvariety-separable-definition",
+    "lem-sfb-abelian-kernel-abelian-part",
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-abelian-prime-to-torsion-dense",
+  "worker": "stage1",
+  "summary": "Q139: proved density by the reduced image closure of the constant torsion group, the existing reduced identity-component and translation theorems, and a componentwise torsion count. Reused Stacks 04Q8 instead of introducing a duplicate closure lemma. No new nodes; no statement changes; all step citations checked verbatim and small cases checked.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: The abelian part of a homomorphism kernel over its ground field. Supporting lemma: Geometric abelian subvarieties have a finite separable field of definition. Supporting torsion-density input for separable definition of an abelian subvariety. This is a supporting argument for the inherited level-rigidity route. The current latest unit statement does not independently state this auxiliary density lemma. blueprint_refs.py ancestor returns None, retained faithfully.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-av-commutative",
+    "why": "Commutativity of abelian varieties is the generic input making the torsion union a subgroup; no node of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic existence and universal property of scheme coproducts, used for the evaluation source."
+   },
+   {
+    "node": "lem-weil-pbc-constant-group-scheme-multiplication",
+    "why": "Generic componentwise multiplication construction on the constant group scheme, valid for arbitrary abelian index group."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finiteness of dimension for finite-type schemes over a field."
+   },
+   {
+    "node": "lem-sc-ntorsion-etale",
+    "why": "Generic torsion structure $A[n](k)\\cong(\\mathbf Z/n)^{2g}$ of an abelian variety over an algebraically closed field (Lean-closed in slopmaster2), used twice for the torsion cardinalities; no node of this unit gives it."
+   },
+   {
+    "node": "lem-sc-abelian-variety-characterization",
+    "why": "Generic irreducibility of an abelian variety, used for the final closed-subset chain argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-av-commutative",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-constant-group-scheme-multiplication",
+  "lem-kun-dimension-finite-type",
+  "lem-sc-ntorsion-etale",
+  "lem-sc-abelian-variety-characterization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-fe4fdb623",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-fe4fdb623 (reviewer sub-agent of L); spot-checked: I read all six steps of the item and every cited statement in full; the mathematics is correct and there are 0 new nodes. Step 1 builds the constant group P = ⊔_{t∈T} Spec F from the coproduct and constant-multiplication nodes, and the evaluation a: P→B is a homomorphism (checked on each W_{t,u}). Step 2 applies Stacks 04Q8 (more-groupoids.tex l.1563; its Situation imposes no finiteness on R_1, so the infinite P is allowed; F algebraically closed is perfect). This gives a reduced closed subgroup H with |H| equal to the closure of T, and H is of finite type. Step 3 takes C = H⁰ as an abelian variety with finitely many translates (checked through the reduced-component and neutral-component nodes), and h ≤ g by the chain dimension (def-kun-dimension equals def-kun-topological-krull-dimension). Step 4: the injection y↦y−x into C[N](F) is valid on every component, so N^{2g} ≤ rN^{2h}. Step 5's arithmetic at m=r+1 is correct. Step 6: B is irreducible, so the chain argument gives |C| = |B|. I tested B = Spec F, elliptic curves in characteristic p, and characteristics 2 and 3. Sources checked: Milne AV Theorem 7.2 and Remark 7.3. No duplicate density node exists in the DAG. Batch-5 finding: the cited node det-cor-jacobian-torsion-kernel was used only for clause 2, the general abelian-variety count, which neither the trace formula nor Poincaré duality gives. But its proof_deps are only sk-thm-picard-main, which pulls det-picard-main-degree → lem-trf-curve-euler-tensor-generic-rank and about 30 trf/pd nodes into a batch-5 proof. FIX: step 4 now cites lem-sc-ntorsion-etale instead (A[n](k) ≅ (Z/n)^{2g} over algebraically closed k, n prime to char k). That node is Lean-closed and sorry-free in slopmaster2 and passed review on 2026-10-10. The only trf/pod nodes its closure adds are generic (affine-open limit descent, schematically dense open, polynomial forward difference, finite-type base change, scalar extension), and none is part of the trace formula or Poincaré duality. I updated step 4's uses, proof_deps and the split_report.tool_uses entry. The other tool_uses are accepted as generic. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.PrimeToTorsionDense",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.eq_univ_of_contains_primeToTorsion",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/PrimeToTorsionDense.lean",
+  "statement": "theorem IsAbelianVariety.eq_univ_of_contains_primeToTorsion (F : Type u) [Field F] [IsAlgClosed F] (B : Over (Spec (.of F))) [GrpObj B] [IsAbelianVariety B] (Z : Set B.left) (hZ : IsClosed Z) (hT : ∀ (n : ℕ), 0 < n → (n : F) ≠ 0 → ∀ q : (torsionSubgroupScheme B n).hom.fieldPoints F, (torsionSubgroupScheme.ι B n).left (q.1.base default) ∈ Z) : Z = Set.univ",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c8fd7ae8",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Each node clause matches: Field+IsAlgClosed F; Over Spec F with GrpObj+IsAbelianVariety (the predicate has no group law, so GrpObj is the node's datum); ∀ n>0, (n:F)≠0; recorded torsionSubgroupScheme = GrpObj.ker (𝟙 B ^ n) and its ι; F-points via Hom.fieldPoints (sections, Comparator/Weil/Definitions.lean:85); images in Z closed ⇒ Z = univ, the node's closed-subset form. Single universe, no extra hypotheses; dimension 0, char 0/p/2/3 and n=0,1 checked. No duplicate in Mathlib, Sheaf or WeilConjectures (denseRange_fieldPoints is all rational points, not torsion). Only the item node's lean field changes; statement verbatim; docstrings carry source place, blueprint tag and six proof steps; proof-dep imports exist live; report sections present. Not recompiled (no file changed); the worker's scompile was clean."
+ }
+}

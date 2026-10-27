@@ -1,0 +1,123 @@
+{
+ "id": "def-sfb-presheaf-etale-chart-property",
+ "kind": "definition",
+ "title": "Etale scheme-chart test of a presheaf morphism property",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Let $E,F:(\\mathit{Sch}/S)^{\\mathrm{op}}\\to\\mathit{Set}$ be presheaves of sets and let $f:E\\to F$ be a natural transformation. Let $P$ be a property of morphisms of schemes in the chosen universe. Define $\\operatorname{OnEtaleCharts}(P,f)$ to mean that for every pair of $S$-schemes $U,V$, every pair of representable etale natural transformations $a:h_U\\to E$, $b:h_V\\to F$ in the scheme-test sense of [def-trf-algebraic-space], and every $S$-morphism $h:U\\to V$ satisfying $f\\circ a=b\\circ h_h$, the underlying scheme morphism $h$ has property $P$. Here $h_T$ is the Yoneda presheaf of an $S$-scheme $T$ and $h_h:h_U\\to h_V$ is induced by $h$. Neither $E,F$ nor $f$ is required to be representable; the presheaves are not required to be sheaves or algebraic spaces.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex; literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 03MM(7) (lemma-flat-local), 0410(7) (lemma-finite-presentation-local), and 0DSG(6) (lemma-nodal-local): compatible etale scheme-chart tests, expressed as a predicate on presheaf maps."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A property of morphisms of schemes tested on all compatible representable etale charts of a map of presheaves over a scheme",
+   "results": "{\"t\": \"2026-10-24T11:32:11Z\", \"tool\": \"leansearch\", \"query\": \"A property of morphisms of schemes tested on all compatible representable etale charts of a map of presheaves over a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"CategoryTheory.GrothendieckTopology.W\", \"AlgebraicGeometry.QuasiSeparated\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp'\"], \"digest\": \"9873c878af71e2b1\"}",
+   "date": "2026-10-24",
+   "verdict": "Search returns no general presheaf chart-test predicate in Mathlib; reuse the existing project OnEtaleCharts definition without restating it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define a morphism property on presheaves by requiring the property on every compatible pair of etale scheme charts",
+   "results": "{\"t\": \"2026-10-24T11:32:12Z\", \"tool\": \"leanfinder\", \"query\": \"Define a morphism property on presheaves by requiring the property on every compatible pair of etale scheme charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsLocalAtSource\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.stalkwise\", \"AlgebraicGeometry.IsLocalAtTarget\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"3df9b42a4be6a63b\"}",
+   "date": "2026-10-24",
+   "verdict": "Search returns no general presheaf chart-test predicate in Mathlib; reuse the existing project OnEtaleCharts definition without restating it."
+  },
+  {
+   "tool": "grep",
+   "query": "OnEtaleCharts|MapIsLocally|etale.*chart",
+   "results": "{\"t\": \"2026-10-24T11:32:11Z\", \"tool\": \"grep\", \"query\": \"OnEtaleCharts|MapIsLocally|etale.*chart\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Search returns no general presheaf chart-test predicate in Mathlib; reuse the existing project OnEtaleCharts definition without restating it."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n OnEtaleCharts dag/nodes lean/WeilConjectures lean/Sheaf; python3 tools/blueprint_refs.py search OnEtaleCharts",
+   "results": "No occurrence in lean/WeilConjectures. Existing definition: lean/Sheaf/AlgebraicGeometry/SpaceNodalLocusBaseChange.lean:76. DAG occurrences are the theorem node lem-sfb-space-nodal-locus-base-change, not a definition node owning the predicate. blueprint_refs: 0 blueprint nodes match OnEtaleCharts. MapIsLocally in AlgebraicSpaceMorphismProperties.lean is restricted to bundled algebraic-space morphisms, whereas OnEtaleCharts applies to arbitrary presheaf maps.",
+   "date": "2026-10-24",
+   "verdict": "Add a definition node owning the existing general presheaf predicate as explicitly required by the return; no Lean declaration is added or copied."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-maximal-flat-lfp-base-open",
+  "date": "2026-10-24",
+  "group": "Q139"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Inherited supporting chain below latest det-thm-sf-ctf-stability-direct-images, proof (3), via the spectral-point-space prerequisite: Tag 06RC proof, largest open W and its invariance under the presentation groupoid; Tag 06R4 uses precisely this base-open theorem. Definition input: compatible etale scheme-chart tests for the flat and locally finitely presented restrictions in Tag 06R2, using 03MM(7)/0410(7)/0DSG(6).",
+   "via": [
+    "lem-sfb-space-maximal-flat-lfp-base-open",
+    "lem-sfb-reduced-qc-inertia-dense-open-gerbe",
+    "lem-sfb-qc-stack-spectral-point-space",
+    "lem-sfb-finite-type-stack-closed-specialization",
+    "lem-sfb-adequate-integral-comparison-finite",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceNodalLocusBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.OnEtaleCharts",
+  "statement": "def OnEtaleCharts {S : Scheme.{u}} (P : MorphismProperty Scheme.{u})\n    {E F : (Over S)ᵒᵖ ⥤ Type u} (f : E ⟶ F) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing plain definition at SpaceNodalLocusBaseChange.lean:76. This definition node owns its general compatible-etale-scheme-chart predicate for presheaf maps; it does not depend on or choose data from the nodal-locus theorem. Added in repair of H2 on delivery 855f82ce619f. No Lean source is moved, duplicated or changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c11d32442",
+  "group": "Q139",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c11d32442",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 on 855f82ce619f. Item Lean module byte-identical (cmp); mathematics re-read against the node and Stacks 06R2: arbitrary f/X/Y/Y', no finiteness, separation or reducedness hypothesis; ∃! pinned by good+largest; any flat lfp g, no surjectivity premise; W'.val = preimage with W' good and largest; empty, identity, open-immersion and non-surjective g covered. H2 repaired: theorem stmt_dep lem-sfb-space-nodal-locus-base-change replaced by landed def-sfb-space-morphism-properties and new def-sfb-presheaf-etale-chart-property (existing:true, owns OnEtaleCharts, signature verbatim with SpaceNodalLocusBaseChange.lean:76-77, statement faithful, stmt_deps def-pc-scheme/def-weil-size-convention/def-trf-algebraic-space, tags 03MM/0410/0DSG verified, no competing owner in live or side-live). IsFlatLfpOverSubfunctor is a real listed item helper. Only sorry; docstrings with source, blueprint and 6 proof steps; report sections present. Note only: OnEtaleCharts docstring keeps the nodal-locus blueprint tag (landed module, untouched). No compile: no file changed."
+ }
+}

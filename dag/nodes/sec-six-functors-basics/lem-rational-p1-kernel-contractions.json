@@ -1,0 +1,238 @@
+{
+ "id": "lem-rational-p1-kernel-contractions",
+ "kind": "statement",
+ "title": "Normalized rational projective-line kernel contractions",
+ "statement": "For the rational coefficient E (or Qbar_l), a separated finite-type Y over a field of characteristic different from l, and the referenced completed diagonal family of def-sfb-diagonal-coefficient-reference, let a be a pair of natural transformations of UnitCounitType from det-prop-p1-adjunction-rational-unit-counit. Assume UnitCounitNormalized: every component agrees, in heterogeneous equality, with the explicit ambient diagonal-class insertion unitComponent or inverse-projection/trace contraction counitComponent of def-sfb-projective-ambient-unit-counit-composites. On every M in Loc(Dbc(P1_Y,Lambda)), Rq_*(a.unit_M) followed by a.counit_(Rq_*M) equals Rq_* of identity_M tensor the support-normalized p1 diagonal integral. On every K in Loc(Dbc(Y,Lambda)), a.unit_(q*K(1)[2]) followed by q*(a.counit_K)(1)[2] equals identity_(q*K(1)[2]) tensor the support-normalized p2 diagonal integral. The tensor actions are conjugated by the right unitor and singleUnitIso. All canonical maps, coefficient lines, source normalizations, derived functors, completed limit data, and finite-type/Noetherian/localization hypotheses are exactly those in the attached Lean statement. The assertion is independent of the chosen normalized pair and does not assert integration, an adjunction, or a Brown comparison. The normalization fixes all map data; only the invertibility proofs are existential.",
+ "stmt_deps": [
+  "det-prop-p1-adjunction-rational-unit-counit",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-internal-diagonal-tensor-comparison",
+  "def-sfb-tate-twisted-projection-comparison",
+  "def-sfb-rational-tate-pullback-comparison",
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-trace-limit-characterization",
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-diagonal-completed-endpoints",
+  "def-sfb-diagonal-normalized-source"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Opening paragraph, First identity, and Second identity, before integration."
+ },
+ "proof": [
+  {
+   "text": "For each M, expose the underlying Hom of the full-subcategory composite as Rq.map of (a.1.app M).hom followed by (a.2.app (push.obj M)).hom. The first projection of UnitCounitNormalized supplies unit normalization at M; its second supplies counit normalization at push.obj M. Apply [lem-sfb-rational-p1-first-ambient-contraction] to these two arrows, with an explicit ambient endomorphism type for the composite. This proves the first conjunct.",
+   "uses": [
+    "det-prop-p1-adjunction-rational-unit-counit",
+    "def-sfb-projective-ambient-unit-counit-composites",
+    "lem-sfb-rational-p1-first-ambient-contraction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each K, expose the underlying Hom of the second full-subcategory composite as the unit at exceptional.obj K followed by twist.map of pullback.map of the counit at K. The normalizations at exceptional.obj K and K follow from the corresponding projections of UnitCounitNormalized. Apply [lem-sfb-rational-p1-second-ambient-contraction] to K.obj and these two normalized arrows. The underlying object of exceptional.obj K is definitionally the positive twist/shift of q*K. Pair the two conjuncts.",
+   "uses": [
+    "det-prop-p1-adjunction-rational-unit-counit",
+    "def-sfb-projective-ambient-unit-counit-composites",
+    "lem-sfb-rational-p1-second-ambient-contraction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-prop-p1-adjunction-rational-unit-counit",
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "lem-sfb-rational-p1-first-ambient-contraction",
+  "lem-sfb-rational-p1-second-ambient-contraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Open componentwise normalization and use the separate first and second ambient contractions. The geometric calculations are retained in the two strictly smaller nodes."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1Triangle",
+  "date": "2026-10-24",
+  "group": "Q8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "Opening paragraph, First identity, and Second identity, before integration.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1KernelContractions",
+  "file": "lean/Sheaf/Paper/RationalP1KernelContractions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.rationalP1_kernel_contractions",
+  "statement": "theorem rationalP1_kernel_contractions\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    (hY : IsUnit (l : Γ(Y, ⊤)))\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y)))\n    (_hcompletion : DiagonalCompletionSpec l (diagonalSurface Y) D)\n    (_hsystem : DiagonalCycleSystemSpec l Y hY D)\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (_hδ : DiagonalTrace.IsDiagonalLimit l Y hY D δ)\n    (family : Family l Y) (_reference : Reference l Y δ family)\n    (a : UnitCounitType l c k p hpl Y)\n    (_hnorm : UnitCounitNormalized l c k p hpl Y family a) :\n    (∀ M : rationalLocalizingCategory (coefficient l c).X (ProjectiveLine Y),\n      ((push l c k p hpl Y).map (a.1.app M) ≫\n        a.2.app ((push l c k p hpl Y).obj M)).hom =\n      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map\n        (((ρ_ (M.obj)).inv ≫ ((M.obj) ◁\n          ((singleUnitIso (coefficient l c).X (ProjectiveLine Y)).inv ≫\n            (diagram l c Y family).support₁.hom ≫\n            (diagram l c Y family).R₁.R.map (diagram l c Y family).delta ≫\n            (diagram l c Y family).trace₁ ≫\n            (singleUnitIso (coefficient l c).X (ProjectiveLine Y)).hom)) ≫ (ρ_ (M.obj)).hom))) ∧\n    (∀ K : rationalLocalizingCategory (coefficient l c).X Y,\n      (a.1.app ((exceptional l c k p hpl Y).obj K) ≫\n        (exceptional l c k p hpl Y).map (a.2.app K)).hom =\n      (ρ_ (((exceptional l c k p hpl Y).obj K).obj)).inv ≫\n        ((((exceptional l c k p hpl Y).obj K).obj) ◁\n          ((singleUnitIso (coefficient l c).X (ProjectiveLine Y)).inv ≫\n            (diagram l c Y family).support₂.hom ≫\n            (diagram l c Y family).R₂.R.map (diagram l c Y family).delta ≫\n            (diagram l c Y family).trace₂ ≫\n            (singleUnitIso (coefficient l c).X (ProjectiveLine Y)).hom)) ≫ \n        (ρ_ (((exceptional l c k p hpl Y).obj K).obj)).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q8",
+  "date": "2026-10-24"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical diagonal class insertion followed by projective line trace is tensor the integral of the diagonal along either projection",
+   "date": "2026-10-24",
+   "results": {
+    "hits": 8,
+    "top": [
+     "Algebra.intTraceAux",
+     "LinearMap.trace_tensorProduct",
+     "LinearMap.trace_tensorProduct'",
+     "LinearMap.trace_prodMap",
+     "Algebra.trace_prod",
+     "Algebra.trace_prod_apply",
+     "LinearMap.trace_eq_contract",
+     "Algebra.trace_comp_trace"
+    ],
+    "note": ""
+   },
+   "verdict": "No projective-line diagonal/trace contraction theorem. The hits concern linear algebra traces or unrelated analytic kernels; generic adjunction lemmas assume rather than prove the geometric identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"counit\"",
+   "date": "2026-10-24",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "verdict": "No projective-line diagonal/trace contraction theorem. The hits concern linear algebra traces or unrelated analytic kernels; generic adjunction lemmas assume rather than prove the geometric identities."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*(triangle|contraction)|kernel.*integral",
+   "date": "2026-10-24",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/Condensed/Light/Sequence.lean",
+     "Mathlib/InformationTheory/KullbackLeibler/ChainRule.lean",
+     "Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean",
+     "Mathlib/Combinatorics/SimpleGraph/Triangle/Tripartite.lean",
+     "Mathlib/Analysis/Complex/ValueDistribution/Proximity/IntegralPresentation.lean",
+     "Mathlib/Analysis/Complex/Poisson.lean",
+     "Mathlib/Analysis/Complex/Poisson.lean",
+     "Mathlib/Analysis/Complex/Poisson.lean"
+    ],
+    "note": ""
+   },
+   "verdict": "No projective-line diagonal/trace contraction theorem. The hits concern linear algebra traces or unrelated analytic kernels; generic adjunction lemmas assume rather than prove the geometric identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived projection formula and base change rewrite the diagonal cycle class unit and projective line trace counit into tensor with the diagonal integral",
+   "date": "2026-10-24",
+   "results": {
+    "hits": 8,
+    "top": [
+     "LinearMap.trace_baseChange",
+     "AlgebraicGeometry.diagonal_SpecMap",
+     "CategoryTheory.MorphismProperty.IsStableUnderBaseChange.diagonal",
+     "LinearMap.proj_comp_single",
+     "AlgebraicGeometry.diagonal_Spec_map",
+     "KaehlerDifferential.cotangentComplexBaseChange_tmul",
+     "CategoryTheory.Limits.pullback.diagonal_fst",
+     "AlgebraicGeometry.IsImmersion.instDiagonalScheme"
+    ],
+    "note": ""
+   },
+   "verdict": "No geometric kernel contraction. Linear algebra trace base change and scheme diagonals do not imply the derived diagonal/trace formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "Whole blueprint and DAG searches: diagonal integral, kernel contraction, and projective line triangle; tools/blueprint_refs.py search diagonal integral",
+   "results": "Only the existing finite-coefficient diagonal integration nodes match. They compute the integral itself, not the rational ambient composites before integration. The original rational triangle node contains this calculation as only part of its conclusion.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate blueprint node stating the ambient kernel calculation separately."
+  }
+ ],
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-rational-p1-kernel-contractions",
+  "worker": "stage3",
+  "group": "Q8",
+  "summary": "Extract the independent geometric kernel calculation for canonically normalized components; integration and all adjunction/Brown consequences are proved in the parent.",
+  "blueprint": "Opening paragraph and First/Second identity paragraphs, before the integration paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic unbounded composition on ringed topoi, applied to the pulled-back coefficient sheaves; the bounded rational adic composition node would not cover arbitrary localizing objects."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic equality of canonical projection and exchange transformations, precisely the formal compatibility invoked by the unit route; no purity or geometric adjunction is imported."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic properness of relative projective space verifies the hypothesis for the trivial compactification."
+   },
+   {
+    "node": "det-thm-sf-pf-field-localizing",
+    "why": "Existing localizing proper projection formula component is the rational projection input named by the unit, whose aggregate sk-thm-sf-pf-field label is not a DAG node."
+   },
+   {
+    "node": "det-prop-diagonal-tower-coefficients",
+    "why": "Existing coefficient/base-change component of the diagonal-tower unit supplies rational traces and their pullbacks, as required by the unit route."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Generic mate definition used to compute the transposes of the two exchanges and diagonal projections."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Generic composite-counit formula computes both Kunneth transposes and the identity normalization along each projection of the diagonal."
+   },
+   {
+    "node": "lem-pd-module-ringed-topos-derived-comparison",
+    "why": "The explicit derived comparison identifies the actual module-object adjunction, tensor and projection maps with the ringed-topos maps used in the setup; the unit has no node giving this generic comparison."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261024T214407-L-615710",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261026T194817-L-2550543",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

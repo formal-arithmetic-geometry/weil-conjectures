@@ -1,0 +1,379 @@
+{
+ "id": "lem-sfb-smooth-model-volume-order-comparison",
+ "kind": "statement",
+ "title": "Differential order detects open immersions of smooth trait models",
+ "statement": "Let $R$ be a discrete valuation ring with uniformizer $\\pi$, fraction field $E$, residue field $k$, and $T=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Products and fibres are scheme-theoretic base changes [def-pc-base-change]. Smooth and finite type have the meanings of [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]; separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Write $R^{\\mathrm{sh}}$ for a strict henselization at a geometric closed point and $E^{\\mathrm{sh}}=\\operatorname{Frac}(R^{\\mathrm{sh}})$ [def-weil-geometric-point, def-weil-pbc-strict-henselization-limit]. An open in a scheme over a trait is base-dense if it is dense in each fibre. A rational map over that trait is a morphism on a base-dense open, modulo agreement on a base-dense common open; its domain of definition is the union of all representative domains. A birational map over the trait is an isomorphism between base-dense opens. For a smooth separated finite-type $E$-scheme $X$, a smooth model means a smooth separated finite-type $T$-scheme $M$ with a specified identification $M_E\\simeq X$. Let $G/E$ be a smooth separated finite-type group scheme of dimension $d$, with group operations as in [def-sc-group-scheme]. Fix a nowhere vanishing left-invariant section $\\omega$ of $\\Omega^d_{G/E}=\\bigwedge^d\\Omega^1_{G/E}$ [def-sc-relative-differential-sheaf, def-sc-sheaf-exterior-power]. For a smooth model $M$ of $G$ with nonempty irreducible special fibre and generic point $\\zeta$ of that fibre, write $n(M)=\\operatorname{ord}_{\\zeta}(\\omega)$: this is the integer $n$ for which $\\pi^{-n}\\omega$ generates $\\Omega^d_{M/R,\\zeta}$. Each ring $\\mathcal O_{M,\\zeta}$ used to define $n(M)$ is a discrete valuation ring with uniformizer $\\pi$, so the indicated integer exists uniquely. Every smooth model with nonempty special fibre admits an $R^{\\mathrm{sh}}$-point. Let $M,N$ have nonempty irreducible special fibres and let $u:M\\dashrightarrow N$ be a $T$-rational map whose generic fibre is an isomorphism $u_E:G\\to G$. Write $u_E^*\\omega=a\\omega$ for a unit $a\\in\\Gamma(G,\\mathcal O_G)^\\times$. If $v(a(x))=0$ for an $E^{\\mathrm{sh}}$-point $x$ extending to $M(R^{\\mathrm{sh}})$, then $n(M)\\geq n(N)$, and the morphism on the domain of definition of $u$ is an open immersion if and only if $n(M)=n(N)$. More generally, the open-immersion assertion holds for models with finitely many special-fibre components if every source and target component has the same differential order $n_0$, and for each source component the unit-multiplier hypothesis holds on the open consisting of that component and the entire generic fibre. In this last assertion the conclusion is an open immersion on the entire domain of definition, not merely near the generic points of special-fibre components.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "4.3 order construction and Lemma 1, printed pp.104-105 (PDF pp.110-111); finite-component extension is the same Jacobian argument followed by the generically-isomorphic étale open-immersion criterion used in Lemma 1. Existence of strict-henselian sections: 2.2 Corollary 13 and Proposition 14, and 2.3 Proposition 5. Primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-sheaf-exterior-power",
+  "def-weil-open-immersion",
+  "def-sc-invertible-module",
+  "def-weil-etale-morphism",
+  "def-sfb-smooth-trait-model",
+  "def-sfb-trait-rational-map",
+  "def-sfb-trait-top-form-order"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-smooth-trait-volume-infrastructure] to each model. The generic fibre is the smooth group $G$. By [lem-sfb-group-scheme-differentials-from-identity], $\\Omega^1_{G/E}\\cong f^*e^*\\Omega^1_{G/E}$ is free of one constant rank $r$, and by [lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension] $r=\\dim_xG$ at every $x\\in G$; hence $G$ is pure of dimension $r=d$. So the differential sheaves of the models have rank $d$ and their determinants are line bundles. The special-fibre generic stalks are DVRs with uniformizer $\\pi$. A nonzero vector in a free rank-one module over the fraction field of a DVR has a unique integral order (write its coefficient as $\\pi^n$ times a unit). This defines $n(M)$ and $n(N)$ exactly as stated. Smoothness also makes special-fibre components pairwise disjoint, so deleting the other components gives an open consisting of a chosen component and the entire generic fibre.",
+   "uses": [
+    "lem-sfb-smooth-trait-volume-infrastructure",
+    "def-sc-discrete-valuation-ring",
+    "lem-sfb-group-scheme-differentials-from-identity",
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "4.3 order construction, printed p.104; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+   }
+  },
+  {
+   "text": "Every smooth model $Z$ with nonempty special fibre has an $R^{\\mathrm{sh}}$-point. Its generic fibre is dense by [lem-sfb-smooth-trait-volume-infrastructure], hence nonempty; therefore $Z\\to T$ is surjective. Apply [lem-sfb-smooth-space-cover-etale-sections] in its scheme case to obtain a jointly surjective etale family $T_i\\to T$ and maps $T_i\\to Z$. By [lem-trf-space-fibre-products-etale-covers], its base change to $\\operatorname{Spec}R^{\\mathrm{sh}}$ is still a jointly surjective etale family of schemes. Choose a member with a point over the closed point. By [lem-weil-pbc-etale-local-ring-triples] (with $Y=T$, $\\mathfrak p=\\mathfrak m_R$) the ring $R^{\\mathrm{sh}}$ is canonically the colimit $C$ over the triples category with $K$ the separable closure of $k$ in $\\Omega$; so $R^{\\mathrm{sh}}$ is strictly henselian, with maximal ideal $\\mathfrak m_RR^{\\mathrm{sh}}$, by [lem-weil-pbc-strict-henselization-triples]. Thus [lem-sbc-strict-henselian-etale-neighbourhood-section] gives a section of that member, hence a point of $Z(R^{\\mathrm{sh}})$. By [lem-sc-strict-henselization-dvr] this ring is a DVR, and its maximal-ideal description says that $\\pi$ is its uniformizer.",
+   "uses": [
+    "lem-sfb-smooth-trait-volume-infrastructure",
+    "lem-sfb-smooth-space-cover-etale-sections",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sbc-strict-henselian-etale-neighbourhood-section",
+    "lem-sc-strict-henselization-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "2.2 Corollary 13 and Proposition 14; 2.3 Proposition 5; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+   }
+  },
+  {
+   "text": "Set $n_M=n(M)$ and $n_N=n(N)$. By [lem-sfb-trait-line-section-order-normalization], $\\alpha_M=\\pi^{-n_M}\\omega$ and $\\alpha_N=\\pi^{-n_N}\\omega$ extend to global frames of the respective top-differential lines. Apply the same node with $\\mathcal L=\\mathcal O_M$ and $s_E=a$. It writes $a=\\pi^m c$ with $c$ a global unit of $M$, and identifies $m$ with the valuation at the section in the hypothesis. Hence $m=0$, so $a$ itself extends as a global unit on $M$.",
+   "uses": [
+    "lem-sfb-trait-line-section-order-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "4.3 normalization paragraphs preceding Lemma 1; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+   }
+  },
+  {
+   "text": "Let $U$ be the domain of definition. It contains the entire generic fibre: glue the representative with the specified generic-fibre morphism, using the uniqueness for maps from a smooth trait scheme to a separated target in [lem-sfb-smooth-trait-local-rational-spreading]. It contains the generic point of the special fibre by base-density. On $U$ the determinant of the differential gives a regular coefficient $b$ with $u^*\\alpha_N=b\\alpha_M$. On the generic fibre the equation is $b=\\pi^{n_M-n_N}a$. Since $a$ is a unit, at the special-fibre generic DVR the order of $b$ is $n_M-n_N$. A regular nonzero element of a DVR has nonnegative order; hence $n_M\\geq n_N$.",
+   "uses": [
+    "lem-sfb-smooth-trait-local-rational-spreading",
+    "def-sc-relative-differential-sheaf",
+    "def-sc-sheaf-exterior-power",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "4.3 Lemma 1 proof, determinant equation; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+   }
+  },
+  {
+   "text": "If $n_M=n_N$, the coefficient $b$ equals the unit $a$ on $U$: the equality holds on $U_E$, and generic-fibre restriction is injective by [lem-sfb-smooth-trait-volume-infrastructure]. Thus $\\bigwedge^d du$ is an isomorphism everywhere on $U$, and [lem-sfb-smooth-cotangent-etale-criterion] makes $u$ etale everywhere there. It is separated because $U$ is separated over the trait (its relative diagonal over $N$ is the base change of its closed diagonal over the trait). Apply [lem-sfb-space-flat-isomorphism-dense-open] in the scheme case with target $N$ and quasi-compact schematically dense open $N_E$: etale means flat and locally of finite presentation, hence locally finite type, and $U\\times_NN_E=U_E\\simeq N_E$. This proves an open immersion on all of $U$.",
+   "uses": [
+    "lem-sfb-smooth-trait-volume-infrastructure",
+    "lem-sfb-smooth-cotangent-etale-criterion",
+    "def-weil-etale-morphism",
+    "lem-sfb-space-flat-isomorphism-dense-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "4.3 Lemma 1(ii), using 2.2 Corollary 10 and the generic-isomorphism open-immersion criterion; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+   }
+  },
+  {
+   "text": "Conversely, an open immersion identifies the relative differential sheaves by restriction, so its determinant is invertible. In particular $b$ is a unit at the source special-fibre generic point. Its order there is $n_M-n_N$ by step 4, and a DVR unit has order zero. Therefore $n_M=n_N$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-sc-relative-differential-sheaf",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "4.3 Lemma 1(ii), reverse implication; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+   }
+  },
+  {
+   "text": "For finitely many components of common order $n_0$, [lem-sfb-trait-line-section-order-normalization] gives global frames $\\pi^{-n_0}\\omega$ on both models. Write the determinant coefficient on the entire domain as $b$. For each source component $C$, restrict the generic unit $a$ to the open $M_C$ consisting of $C$ and $M_E$. The section hypothesis and the normalization node give order zero for $a$ on $C$, and in fact a unit extension on $M_C$. Since the exponents are both $n_0$, the equation is $b=a$ on the generic fibre, hence on $U\\cap M_C$ by schematic density. These opens cover $U$ (or $U=U_E$ when the source special fibre is empty). Therefore $b$ is a unit throughout $U$. Apply [lem-sfb-smooth-cotangent-etale-criterion] and the same dense-open criterion [lem-sfb-space-flat-isomorphism-dense-open] as in step 5 to the whole morphism $U\\to N$. This proves the asserted global open immersion without separately gluing componentwise images.",
+   "uses": [
+    "lem-sfb-trait-line-section-order-normalization",
+    "lem-sfb-smooth-trait-volume-infrastructure",
+    "lem-sfb-smooth-cotangent-etale-criterion",
+    "lem-sfb-space-flat-isomorphism-dense-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "4.3 Lemma 1 determinant argument, equal-order finite-component extension; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-trait-volume-infrastructure",
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-group-scheme-differentials-from-identity",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-sfb-smooth-space-cover-etale-sections",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sbc-strict-henselian-etale-neighbourhood-section",
+  "lem-sc-strict-henselization-dvr",
+  "lem-sfb-trait-line-section-order-normalization",
+  "lem-sfb-smooth-trait-local-rational-spreading",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-sheaf-exterior-power",
+  "lem-sfb-smooth-cotangent-etale-criterion",
+  "def-weil-etale-morphism",
+  "lem-sfb-space-flat-isomorphism-dense-open",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 4.3 order construction and Lemma 1, printed pp.104-105 (PDF pp.110-111); equal-order componentwise extension; local copy WANTED, primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A rational generic isomorphism between smooth models over a discrete valuation ring is an open immersion exactly when the orders of a top differential form agree",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.RespectsIso\", \"doc\": \"Every isomorphism of schemes is an open immersion. This means that if there is an isomorphism between two schemes, it satisfies the conditions of an open immersion: the underlying continuous map is a \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {Y Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z) [CategoryTheory.IsIso g], AlgebraicGeometry.IsOpenImmersion g\", \"doc\": \"Every isomorphism between schemes is an open immersion. Specifically, if $ g: X \\to Y $ is an isomorphism of schemes, then it satisfies the open immersion condition: the underlying continuous map is a \"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every open immersion of schemes is a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion\", \"type\": \"AlgebraicGeometry.IsOpenImmersion =\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => Topology.IsOpenEmbedding) ⊓\\n    AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] x => Function.Bijective ⇑x\", \"doc\": \"A morphism of schemes is an open immersion if and only if it is a topological open embedding and induces bijective maps on all stalks.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.iff_stalk_iso\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsOpenImmersion f ↔\\n    Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∧\\n      ∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is an open immersion if and only if its underlying map of topological spaces is an open embedding, and for every point $x \\\\in X$, the induced map on stalks $f_x^\\\\#: \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.residueFieldMap f x)\", \"doc\": \"For any open immersion of schemes $f: X \\\\to Y$ and any point $x \\\\in X$, the induced ring homomorphism between the residue fields, $k(f(x)) \\\\to k(x)$, is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_iff_stalk\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsOpenImmersion f ↔\\n    Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∧\\n      ∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is an open immersion if and only if the underlying continuous map is an open embedding and, for every point $ x \\\\in X $, the induced map on stalks at $ x $ is an i\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary rational maps, gluing, local smooth presentations, analytic Haar characters or Weierstrass models; none supplies this statement about smooth trait models and fibrewise rational maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Order of a volume differential on smooth models over a discrete valuation ring and the Jacobian criterion for a birational map to be an open immersion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.PreSubmersivePresentation.isUnit_jacobian_iff_aevalDifferential_bijective\", \"module\": \"Mathlib.RingTheory.Extension.Presentation.Submersive\", \"type\": \": IsUnit P.jacobian ↔ Function.Bijective P.aevalDifferential\", \"doc\": \"The Jacobian determinant of a pre-submersive presentation $ P $ is a unit in the ring if and only if the differential map $ \\\\text{aevalDifferential} $ associated with $ P $ is bijective.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsOpenImmersion f] : IsSmooth f\", \"doc\": \"Every open immersion of schemes is a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{R : CommRingCat.{u}} (f : R) : IsOpenImmersion (Spec.map (CommRingCat.ofHom (algebraMap R (Localization.Away f))))\", \"doc\": \"The morphism from the spectrum of the localization of a commutative ring $ R $ at an element $ f $ to the spectrum of $ R $ is an open immersion. This corresponds to the inclusion of the principal ope\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion\", \"type\": \": @IsOpenImmersion = (topologically IsOpenEmbedding) ⊓ stalkwise (Function.Bijective ·)\", \"doc\": \"A morphism of schemes is an open immersion if and only if it is a topological open embedding and induces bijective maps on all stalks.\"}\n  {\"name\": \"IsDiscreteValuationRing.toWithBotNat_le_toWithBotNat_iff\", \"module\": \"Mathlib.RingTheory.DiscreteValuationRing.Basic\", \"type\": \"{x y : R} (hx : x ≠ 0) (hy : y ≠ 0) : toWithBotNat x ≤ toWithBotNat y ↔ x ∣ y\", \"doc\": \"For non-zero elements $x$ and $y$ in a discrete valuation ring, the valuation $v(x)$ is less than or equal to $v(y)$ if and only if $x$ divides $y$.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsOpenImmersion f] : IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": MorphismProperty (Scheme.{u})\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying morphism of locally ringed spaces satisfies the open immersion condition: the continuous map is a topological open embe\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.jacobian\", \"module\": \"Mathlib.RingTheory.Extension.Presentation.Submersive\", \"type\": \": S\", \"doc\": \"The Jacobian is defined as the determinant of the differential operator $\\\\partial_i$ acting on relations in the polynomial ring $R[\\\\iota]$, mapped through the canonical algebra homomorphism from $P.\\\\t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary rational maps, gluing, local smooth presentations, analytic Haar characters or Weierstrass models; none supplies this statement about smooth trait models and fibrewise rational maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Differential\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary rational maps, gluing, local smooth presentations, analytic Haar characters or Weierstrass models; none supplies this statement about smooth trait models and fibrewise rational maps."
+  },
+  {
+   "tool": "grep",
+   "query": "ord.*differential|volume.*model|birational.*[Ee]tale|[Ee]tale.*birational",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean\", \"line\": \"55\", \"text\": \"in order to compute the homology of the differentials.)\"}\n  {\"file\": \"Mathlib/Algebra/Homology/SpectralObject/HasSpectralSequence.lean\", \"line\": \"64\", \"text\": \"Various conditions are added in order to construct the differentials on the pages\"}\n  {\"file\": \"Mathlib/Analysis/ODE/Gronwall.lean\", \"line\": \"19\", \"text\": \"between two approximate or exact solutions of an ordinary differential equation.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary rational maps, gluing, local smooth presentations, analytic Haar characters or Weierstrass models; none supplies this statement about smooth trait models and fibrewise rational maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equal volume orders on smooth trait models imply the Jacobian of a rational generic isomorphism is invertible on its domain",
+   "results": {
+    "hits": [
+     "Algebra.PreSubmersivePresentation.isUnit_jacobian_iff_aevalDifferential_bijective",
+     "Algebra.PreSubmersivePresentation.jacobian_ofAlgEquiv",
+     "Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective",
+     "Algebra.PreSubmersivePresentation.jacobian.congr_simp",
+     "Algebra.SubmersivePresentation.mk.congr_simp",
+     "Algebra.SubmersivePresentation.mk.inj",
+     "Algebra.PreSubmersivePresentation.ofBijectiveAlgebraMap_jacobian",
+     "Algebra.PreSubmersivePresentation.jacobian_reindex"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "900c7295041f44af"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary order-of-vanishing and presentation Jacobian lemmas do not give the smooth-model volume comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"ord\"",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Scheme.instPreorderCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.Scheme.IdealSheafData.instPartialOrder",
+     "AlgebraicGeometry.Scheme.IdealSheafData.instOrderBot",
+     "AlgebraicGeometry.Scheme.IdealSheafData.instOrderTop",
+     "AlgebraicGeometry.Scheme.IdealSheafData.instIsOrderedRing",
+     "AlgebraicGeometry.Scheme.Hom.coborderRange",
+     "AlgebraicGeometry.Scheme.Hom.liftCoborder",
+     "AlgebraicGeometry.Scheme.Hom.liftCoborder_ι"
+    ],
+    "n_hits": 12,
+    "note": "",
+    "subdirectory": "",
+    "digest": "3d605d9abef71ff4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary order-of-vanishing and presentation Jacobian lemmas do not give the smooth-model volume comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "volume.*model|order.*differential|birational.*etale",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary order-of-vanishing and presentation Jacobian lemmas do not give the smooth-model volume comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Orders of a top differential form on smooth models over a DVR compare under a generic isomorphism, with equality characterizing an open immersion",
+   "results": {
+    "hits": [
+     "IsOpen.isImmersionAt",
+     "IsOpen.isImmersionAtOfComplement",
+     "AlgebraicGeometry.instIsSmoothOfIsOpenImmersion",
+     "AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion",
+     "AlgebraicGeometry.isOpenImmersion_eq_inf",
+     "AlgebraicGeometry.isGermInjectiveAt_iff_of_isOpenImmersion",
+     "AlgebraicGeometry.isOpenImmersion_iff_stalk",
+     "AlgebraicGeometry.IsOpenImmersion.iff_stalk_iso"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "a9aabd403871f00d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary order-of-vanishing and presentation Jacobian lemmas do not give the smooth-model volume comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bounded-group-translation-model",
+  "date": "2026-10-24",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Proposition 4(iii), printed pp.106-107 (PDF pp.112-113), using 3.5 Theorem 2 and 4.3 Propositions 2 and 4; boundedness is BLR 1.1 Definition 2. The local rings and translations here are exactly those in 4.3/4(iii). Supporting BLR result: 4.3 order construction and Lemma 1, printed pp.104-105 (PDF pp.110-111); finite-component extension is the same Jacobian argument followed by the generically-isomorphic étale open-immersion criterion used in Lemma 1. Existence of strict-henselian sections: 2.2 Corollary 13 and Proposition 14, and 2.3 Proposition 5.",
+   "via": [
+    "lem-sfb-bounded-group-translation-model",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-model-volume-order-comparison",
+  "worker": "stage1",
+  "summary": "Expanded BLR volume comparison into seven steps, retaining all clauses including DVR orders, sections and the entire finite-component domain. Three supporting statement-only nodes: smooth trait geometry, normalization of generic line frames, and the smooth cotangent criterion. Reused existing etale-section and generic-isomorphism open-immersion nodes; no statement change.",
+  "blueprint": "Supports BLR 4.3 Proposition 4(iii) in the existing bounded-group translation-model branch of sk-thm-sf-ctf-stability. No imported blueprint node states this comparison; ancestor command prints None, retained with the supplied via chain. Current latest unit read; no change of unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic geometric input for smooth trait models and strict-henselian lifting; no node of this unit supplies the same statement."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic geometric input for smooth trait models and strict-henselian lifting; no node of this unit supplies the same statement."
+   },
+   {
+    "node": "lem-sbc-strict-henselian-etale-neighbourhood-section",
+    "why": "Generic geometric input for smooth trait models and strict-henselian lifting; no node of this unit supplies the same statement."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dvr",
+    "why": "Generic geometric input for smooth trait models and strict-henselian lifting; no node of this unit supplies the same statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-local-ring-triples",
+    "why": "Identifies the pointed-etale-neighbourhood strict henselization R^sh of the statement with the triples colimit, so that the triples node's strict henselianity and maximal ideal m_R R^sh apply (reviewer FIX)."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "why": "Generic fact that the rank of Omega^1 of a smooth morphism equals the local fibre dimension; used to see that the smooth group G is pure of dimension d (reviewer FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sbc-strict-henselian-etale-neighbourhood-section",
+  "lem-sc-strict-henselization-dvr",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NB-0873109d9",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-0873109d9 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full. BLR is not in literature/, so proof_origin stays agent and the WANTED line stands; I checked the facts against Stacks morphisms.tex (lemma-triangle-differentials-smooth, lemma-smooth-permanence, 02G1). The statement is unchanged and all 7 steps are correct after two citation repairs. C1: step 1 said G is pure of dimension d without a citation, but the infrastructure node needs Z_E pure of dimension d. Fixed by citing lem-sfb-group-scheme-differentials-from-identity (Omega^1_G is free of one rank r) and lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension (that rank is dim_x G at every point), so r=d. C4: step 2 took 'strictly henselian with maximal ideal m_R R^sh' from the triples node, but the item's R^sh is the pointed-etale-neighbourhood colimit of def-weil-pbc-strict-henselization-limit. Fixed by citing lem-weil-pbc-etale-local-ring-triples(3), which identifies that colimit with the triples colimit. The fixed item has proof_deps equal to the union of the uses and two added tool_uses entries (both new citations are from sk-thm-p1); I checked the new citations' closures for cycles and batch-5 reach. The three new nodes are true, checked on small cases: (1) smooth-trait infrastructure: regularity, schematic density, a DVR at each special-fibre generic point with uniformizer pi via the flat dimension formula, and constant rank d by generization; (2) line-section order normalization: extension by height-one detection on the normal model, uniqueness, Z_k empty allowed, and the valuation formula needs pi to be a uniformizer of A, which excludes ramified A; (3) the cotangent etale criterion, BLR 2.2 Cor 10. None is a duplicate (checked against the curve-only trait nodes, generic-germs-extension, local-generic-unit-factorization and primitive-section-specialization) or a restated clause of the item. Steps 3-7: exponent algebra b=pi^(n_M-n_N) a; the hypotheses of flat-isomorphism-dense-open hold on all of U (separated, etale hence flat and locally of finite type, N_E quasi-compact and schematically dense); componentwise unit extension on M_C. Batch 5: smooth-space-cover-etale-sections, trf-space-fibre-products-etale-covers, smooth-trait-local-rational-spreading and space-flat-isomorphism-dense-open are generic foundations (the algebraic-space definition, base change of etale covers, torsion-free modules over a domain), not steps of the trace formula or Poincare duality, so I accepted them. I also accepted the four declared tool uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothModelVolumeOrderComparison",
+  "declaration": "AlgebraicGeometry.smoothModel_volumeOrder_comparison",
+  "declarations": [
+   "AlgebraicGeometry.smoothModel_volumeOrder_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothModelVolumeOrderComparison.lean",
+  "statement": "theorem smoothModel_volumeOrder_comparison {R E Ω : Type u} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field E] [Algebra R E] [IsFractionRing R E] [Field Ω] [IsAlgClosed Ω] (π : R) (hπ : Irreducible π) (s : Spec (.of Ω) ⟶ Spec (.of R)) (hs : s (IsLocalRing.closedPoint Ω) = IsLocalRing.closedPoint R) (G : Over (Spec (.of E))) [GrpObj G] (hGsmooth : Smooth G.hom) (hGsep : IsSeparated G.hom) (hGft : LocallyOfFiniteType G.hom) (hGqc : QuasiCompact G.hom) (d : ℕ) (hd : topologicalKrullDim G.left = (d : WithBot ℕ∞)) (ω : Γ(traitTopForms G.hom d, ⊤)) (hω : Scheme.Modules.IsFreeGenerator ω) (hinv : IsLeftInvariantTopForm G d ω) : (∀ (M : SmoothTraitModel (R := R) G) (C : Set (M.hom.fiber (IsLocalRing.closedPoint R))) (hC : C ∈ irreducibleComponents (M.hom.fiber (IsLocalRing.closedPoint R))) (z : M.hom.fiber (IsLocalRing.closedPoint R)) (hz : IsGenericPoint z C), ∃ hdom : IsDomain (M.scheme.presheaf.stalk (M.hom.fiberι (IsLocalRing.closedPoint R) z)).1, IsDiscreteValuationRing (M.scheme.presheaf.stalk (M.hom.fiberι (IsLocalRing.closedPoint R) z)).1 ∧ Irreducible (M.stalkScalar (M.hom.fiberι (IsLocalRing.closedPoint R) z) π) ∧ ∃! n : ℤ, IsTraitVolumeOrder M π d ω (M.hom.fiberι (IsLocalRing.closedPoint R) z) n) ∧ (∀ M : SmoothTraitModel (R := R) G, Nonempty (M.hom.fiber (IsLocalRing.closedPoint R)) → ∃ x : Scheme.strictHenselizationScheme s ⟶ M.scheme, x ≫ M.hom = traitStrictBase s) ∧ (∀ (M N : SmoothTraitModel (R := R) G) (hM : IrreducibleSpace (M.hom.fiber (IsLocalRing.closedPoint R))) (hN : IrreducibleSpace (N.hom.fiber (IsLocalRing.closedPoint R))) (zM : M.hom.fiber (IsLocalRing.closedPoint R)) (zN : N.hom.fiber (IsLocalRing.closedPoint R)) (hzM : IsGenericPoint zM Set.univ) (hzN : IsGenericPoint zN Set.univ) (nM nN : ℤ) (hoM : IsTraitVolumeOrder M π d ω (M.hom.fiberι (IsLocalRing.closedPoint R) zM) nM) (hoN : IsTraitVolumeOrder N π d ω (N.hom.fiberι (IsLocalRing.closedPoint R) zN) nN) (v : M.scheme.RationalMap N.scheme) (hv : IsTraitRationalMap M.hom N.hom v) (e : G ≅ G) (he : HasGenericModelIso M N v e) (a : Γ(G.left, ⊤)ˣ) (ha : TopFormPullsTo G.hom G.hom e.hom.left d ω ((a : Γ(G.left, ⊤)) • ω)) (hx : HasTraitUnitSection M s a Set.univ), nN ≤ nM ∧ ∃ p : M.scheme.PartialMap N.scheme, IsMaximalTraitRepresentative M.hom N.hom v p ∧ (IsOpenImmersion p.hom ↔ nM = nN)) ∧ (∀ (M N : SmoothTraitModel (R := R) G) (hM : (irreducibleComponents (M.hom.fiber (IsLocalRing.closedPoint R))).Finite) (hN : (irreducibleComponents (N.hom.fiber (IsLocalRing.closedPoint R))).Finite) (n₀ : ℤ) (hoM : ∀ (C : Set (M.hom.fiber (IsLocalRing.closedPoint R))), C ∈ irreducibleComponents (M.hom.fiber (IsLocalRing.closedPoint R)) → ∀ z : M.hom.fiber (IsLocalRing.closedPoint R), IsGenericPoint z C → IsTraitVolumeOrder M π d ω (M.hom.fiberι (IsLocalRing.closedPoint R) z) n₀) (hoN : ∀ (C : Set (N.hom.fiber (IsLocalRing.closedPoint R))), C ∈ irreducibleComponents (N.hom.fiber (IsLocalRing.closedPoint R)) → ∀ z : N.hom.fiber (IsLocalRing.closedPoint R), IsGenericPoint z C → IsTraitVolumeOrder N π d ω (N.hom.fiberι (IsLocalRing.closedPoint R) z) n₀) (v : M.scheme.RationalMap N.scheme) (hv : IsTraitRationalMap M.hom N.hom v) (e : G ≅ G) (he : HasGenericModelIso M N v e) (a : Γ(G.left, ⊤)ˣ) (ha : TopFormPullsTo G.hom G.hom e.hom.left d ω ((a : Γ(G.left, ⊤)) • ω)) (hx : ∀ (C : Set (M.hom.fiber (IsLocalRing.closedPoint R))), C ∈ irreducibleComponents (M.hom.fiber (IsLocalRing.closedPoint R)) → HasTraitUnitSection M s a (traitComponentSet M C)), ∃ p : M.scheme.PartialMap N.scheme, IsMaximalTraitRepresentative M.hom N.hom v p ∧ IsOpenImmersion p.hom)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68e033586",
+  "group": "NZ",
+  "result": "fix",
+  "note": "Item, 18 stmt_deps, 3 new def nodes and 4 modules read clause by clause against BLR 4.3 Lemma 1: DVR/π/Frac, R^sh at a geometric closed point, models with generic iso, base-dense rational maps equal Mathlib RationalMap classes and domain on reduced/separated models, IsLeftInvariantTopForm relative to pr1 (correct), IsTraitVolumeOrder equivalent to stalk generation with unique n, HasTraitUnitSection = v(a(x))=0, clause 3 asserts existence of the maximal representative with nN<=nM and iff, clause 4 open immersion on the whole domain; edge cases d=0, empty special fibre, disconnected G, negative orders OK; one sorry, no hollow defs, docstrings OK, statements verbatim. H4 fixed: traitStrictBase rebuilt the landed Scheme.strictHenselizationStructuralMap (def-weil-pbc-strict-henselization-structural-map, on base since 10-17); fixes/SmoothTraitModel.lean makes it an abbrev of the landed map, fixes/def-sfb-smooth-trait-model.json adds the stmt_dep. nt_compile --json of fix plus 3 importers clean, broken control errors; check_lean_text/check_record clean. Maintainer note: parallel Q47 a3c9112b4 delivery of the same item (PASS, unlanded, other def node def-sfb-smooth-trait-volume-data): only one may land, the other must rebind."
+ }
+}

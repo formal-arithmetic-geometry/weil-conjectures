@@ -1,0 +1,144 @@
+{
+ "id": "lem-sfb-internal-koszul-quotient-resolution",
+ "kind": "statement",
+ "title": "Strict finite singleton Koszul resolution of transported actual quotients",
+ "statement": "Let l be prime, E a finite extension of Q_l and X Noetherian. Use O and the residue map q [def-sfb-internal-completion-section-transport], the actual complex transport and strict quotient tower [def-sfb-internal-quotient-tower-model]. Let a be a global section whose singleton generates kernelIdeal(q) on every slice [def-weil-pbc-ringed-ideal-generators]. For every actual K-flat complex P [sk-def-pe-derived-completion], there is a quasi-isomorphism of complexes of towers from the strict singleton dual Koszul tensor tower of complex(P) [def-weil-pbc-ringed-koszul-system] to quotientComplex(P), carrying the ordinary Koszul limit unit to quotientLimitUnit(P). This is a finite resolution assertion before applying any derived inverse-limit functor.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Section derived-completion-noetherian and Lemma naive-completion (099L, 099M); sites-cohomology.tex Lemma derived-limit-is-ok (0941); algebraization.tex Lemma derived-completion-koszul (0A0E)."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-quotient-tower-model",
+  "def-sfb-internal-completion-section-transport",
+  "sk-def-pe-derived-completion",
+  "def-weil-pbc-ringed-ideal-generators",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "On each slice take the generating section indexed by the inverse image of 0 under the supplied equivalence with Fin 1. Its image under the ideal inclusion is a. The section belongs to the ideal by its subtype property; the proved kernelIdeal_existsUnique sections formula identifies this with the kernel of the residue map, so a has zero residue. Apply koszul_finite_augmentation to this weaker hypothesis. It gives finite chain maps v_n, their degree-zero unit equations, their vanishing on every nonzero Koszul-degree tensor summand, and successor compatibility. NatTrans.ofOpSequence constructs a natural transformation of strict towers. Transpose it degree by degree to the chain map q; its chain-map equation is the chain-map equation of each v_n.",
+   "uses": [
+    "lem-sfb-internal-koszul-finite-augmentation",
+    "def-sfb-internal-quotient-tower-model",
+    "def-weil-pbc-ringed-koszul-system",
+    "def-weil-pbc-ringed-ideal-generators",
+    "def-weil-pbc-ringed-site-ideal",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use koszul_finite_augmentation_quasiIso at each level with the supplied K-flatness and the two normalization equations from the first step. HomologicalComplex.quasiIso_iff_evaluation then proves that the constructed q is a quasi-isomorphism of complexes of towers.",
+   "uses": [
+    "lem-sfb-internal-koszul-finite-acyclicity"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In each complex degree compose the desired unit equation with every inverse-limit projection. The limMap projection formula followed by the two limit.lift projection formulas reduces it to the already supplied finite unit equation, evaluated in that degree. Joint monicity of projections and extensionality of chain maps give the stated ordinary-limit unit equation.",
+   "uses": [
+    "def-sfb-internal-quotient-tower-model",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-koszul-finite-augmentation",
+  "def-sfb-internal-quotient-tower-model",
+  "def-weil-pbc-ringed-koszul-system",
+  "def-weil-pbc-ringed-ideal-generators",
+  "def-weil-pbc-ringed-site-ideal",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sfb-internal-koszul-finite-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Lemma derived-completion-koszul (0A0E), singleton augmentation; Section derived-completion-noetherian (099L) and Lemma naive-completion (099M).",
+  "note": "K2 writes the strict tower assembly, evaluation argument and limit projection calculation; finite construction and one-level acyclicity are separate named obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Functor.IsRightDerivedFunctor",
+   "results": "loogle: unknown identifier 'Functor.IsRightDerivedFunctor'",
+   "date": "2026-10-25",
+   "verdict": "No augmented sheaf quotient-tower comparison; use exact-functor localization and existing strict tower APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived inverse limit of quotients by powers of a regular element is computed by the dual Koszul tower, compatibly with the augmentation",
+   "results": "AdicCompletion, Hausdorffification, AdicCompletion.of_apply, AdicCompletion.eval_of, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.eval, AdicCompletion.factor_eval_eq_evalₐ, AdicCompletion.val_smul_eq_evalₐ_smul",
+   "date": "2026-10-25",
+   "verdict": "No augmented sheaf quotient-tower comparison; use exact-functor localization and existing strict tower APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient_koszul|roos_isDerivedLimit|RingedKoszulLimitPresentation",
+   "results": "No hits",
+   "date": "2026-10-25",
+   "verdict": "No augmented sheaf quotient-tower comparison; use exact-functor localization and existing strict tower APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor preserving countable products carries the augmented Roos complex to the total right derived inverse limit of the transported strict tower",
+   "results": "CategoryTheory.exactFunctor, CategoryTheory.ExactFunctor.of, CategoryTheory.leftExactFunctor, CategoryTheory.rightExactFunctor, CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor, CategoryTheory.ExactFunctor, CategoryTheory.Functor.exact_tfae, CategoryTheory.instPreservesFiniteLimitsObjFunctorLeftExactFunctor",
+   "date": "2026-10-25",
+   "verdict": "No augmented sheaf quotient-tower comparison; use exact-functor localization and existing strict tower APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.InternalQuotientKoszulUnitComparison",
+  "date": "2026-10-25",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Integral-models proof (1): quotient tower and normalized completion comparison",
+   "via": [
+    "lem-sfb-internal-quotient-koszul-unit-comparison",
+    "lem-sfb-internal-completion-stacks-comparison",
+    "lem-sfb-internal-integral-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalKoszulQuotientResolution",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalKoszulQuotientResolution.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.InternalCompletionTransport.koszul_quotient_resolution",
+  "statement": "theorem koszul_quotient_resolution [IsNoetherian X]\n    (a : ((ring l E X).obj ⋙ forget CommRingCat).sections)\n    (ha : ∀ U : Scheme.coefficientProEtaleSiteModel.{u, u} X,\n      IsRingedIdealGeneratingList (ring l E X)\n        (ConstantCompletion.kernelIdeal (residue l E X)).module\n        (ConstantCompletion.kernelIdeal (residue l E X)).inclusion U 1\n        (fun _ ↦ a.val (op U)))\n    (P : CochainComplex (AdicCompletion.Modules l E X) ℤ)\n    (hP : (HomologicalComplex.quasiIso (AdicCompletion.Modules l E X) (.up ℤ)).kFlat P) :\n    ∃ q : ringedKoszulTensorTowerComplex (ring l E X) 1 (fun _ ↦ a)\n        (complex l E X P) ⟶ quotientComplex l E X P,\n      QuasiIso q ∧\n        ringedKoszulLimitUnit (ring l E X) 1 (fun _ ↦ a) (complex l E X P) ≫\n          ((lim : (ℕᵒᵖ ⥤ ConstantCompletion.Mod (ring l E X)) ⥤ _).mapHomologicalComplex\n            (.up ℤ)).map q = quotientLimitUnit l E X P",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261025T202030-L-2665193",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261026T001925-L-41712",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

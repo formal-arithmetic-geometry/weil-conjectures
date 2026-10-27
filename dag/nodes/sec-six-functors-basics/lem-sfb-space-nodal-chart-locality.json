@@ -1,0 +1,406 @@
+{
+ "id": "lem-sfb-space-nodal-chart-locality",
+ "kind": "statement",
+ "title": "Nodal algebraic-space morphisms on etale charts and after base change",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. A scheme morphism is nodal of relative dimension one if it is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation], and every nonempty geometric fibre [def-weil-geometric-fibre] is pure of dimension one [def-weil-pure-dimension] and has only smooth points [def-sbc-smooth-morphisms] and ordinary nodes. Over an algebraically closed field $\\Omega$ [def-weil-field, def-weil-algebraic-closure], an ordinary node is a closed point [def-weil-closed-points] with completed local $\\Omega$-algebra $\\Omega[[u,v]]/(uv)$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. This scalar-compatible scheme condition is [def-sfb-scheme-nodal-relative-curve]; the completed local algebras use the canonical structural scalar map [def-trf-completed-local-scalar-map]. Define $f$ to be nodal of relative dimension one if there exists a commutative diagram $U\\to V$ over $X\\to Y$ with $U,V$ schemes, both vertical morphisms representable etale [def-trf-algebraic-space, def-weil-etale-morphism], $U\\to X$ surjective, and $U\\to V$ nodal of relative dimension one. This condition is equivalent to requiring $U\\to V$ nodal in every such diagram, without requiring surjectivity in the universal condition. It is also equivalent to requiring $X\\times_YV\\to V$ nodal for one surjective etale scheme atlas $V\\to Y$, and to requiring $f\\circ p$ nodal for one representable surjective etale scheme atlas $p:U\\to X$. Nodal morphisms remain nodal under every algebraic-space base change $Y'\\to Y$, with fibre products as in [lem-trf-space-fibre-products-etale-covers]. In particular these equivalences apply to restrictions to arbitrary source open subspaces [def-a1-space-open-subspace]. Pointwise on a geometric fibre, on locally finite type scheme charts over its algebraically closed ground field [def-weil-finite-type-morphism], the condition of being smooth of relative dimension one or an ordinary node is preserved and reflected by etale scheme charts; the completed local ring at a geometric closed point can be computed on such a chart. No properness, nonemptiness, connectedness or global equidimensionality hypothesis is imposed on $X$ or $Y$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0DSG (lemma-nodal-local), conditions (4)--(7), and Tag 0DSF (lemma-base-change-nodal); definition-nodal-family and its preceding paragraph. The geometric point interpretation is the etale-local test used in curves.tex lemma-node-etale-local and lemma-nodal-family-etale-local-source."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-weil-closed-points",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-etale-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-scheme-nodal-relative-curve",
+  "def-trf-completed-local-scalar-map",
+  "def-a1-space-open-subspace",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write $N$ for the scheme condition in the statement, tested on every geometric point $\\operatorname{Spec}\\Omega\\to S$. This agrees with the test on the chosen geometric fibres of [def-weil-geometric-fibre]. One direction is a special case. Conversely, if $\\operatorname{Spec}\\Omega\\to S$ lies over $s$, choose a $\\kappa(s)$-embedding $k=\\overline{\\kappa(s)}\\subseteq\\Omega$; then $C\\times_S\\operatorname{Spec}\\Omega$ is the base change of $C_{\\bar s}$ along $k\\subseteq\\Omega$. If $C_{\\bar s}$ is pure of dimension one, every local dimension of this locally finite type $k$-scheme is one, so every irreducible component of the base change has dimension one by [lem-trf-field-extension-component-local-dimension]. Every nonsmooth point of the base change has completed local ring $\\Omega[[u,v]]/(uv)$ by [lem-trf-node-algebraically-closed-extension], and is closed by [lem-trf-nodal-point-etale-locality] applied to the identity. Stability under scheme base change follows: flatness and local finite presentation persist by [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence](3). For $T\\to S$ and $\\operatorname{Spec}\\Omega\\to T$, associativity identifies $(C\\times_ST)\\times_T\\operatorname{Spec}\\Omega$ with $C\\times_S\\operatorname{Spec}\\Omega$. This is the identical $\\Omega$-scheme tested in the hypothesis, including empty fibres, so purity, smoothness and the completed local $\\Omega$-algebra condition persist.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-trf-field-extension-component-local-dimension",
+    "lem-trf-node-algebraically-closed-extension",
+    "lem-trf-nodal-point-etale-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DSF, scheme input Tag 0C5B (lemma-base-change-nodal-family), geometric-fibre formulation; comparison of geometric fibres over different algebraically closed fields, curves.tex Tag 0C56 (lemma-node-field-extension)"
+   }
+  },
+  {
+   "text": "There always is a chart diagram with surjective left vertical arrow: choose an atlas $V\\to Y$, then an atlas $U\\to X\\times_YV$. Their projection $U\\to X$ is surjective etale. The two nodes [lem-trf-space-fibre-products-etale-covers] and [lem-trf-space-representable-etale-scheme-tests] supply the products, their scheme representability when both entries are schemes, and etale composition and pullback. Now suppose $h:U\\to V$ is a nodal witnessing chart and $h':U'\\to V'$ any chart. Put $R=U\\times_XU'$ and $W=V\\times_YV'$, both schemes. The maps $R\\to U$, $R\\to U'$ and $W\\to V$, $W\\to V'$ are etale; $R\\to U'$ is surjective. By [lem-trf-nodal-family-etale-source-locality], $R\\to U\\to V$ is nodal (apply source locality to the family consisting of the identity of $U$ and $R\\to U$). It factors through $R\\to W$. Reflection in [lem-sfb-scheme-nodal-etale-postcomposition] for $W\\to V$ makes $R\\to W$ nodal; preservation for $W\\to V'$ makes $R\\to V'$ nodal. Source locality along $R\\to U'$ now makes $h'$ nodal. Conversely the universal condition applies to the first atlas diagram. For scheme $X,Y$, the identity diagram also shows that the space condition agrees with the scheme condition.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-nodal-family-etale-source-locality",
+    "lem-sfb-scheme-nodal-etale-postcomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DSG (lemma-nodal-local), (6) and (7); spaces-morphisms.tex Tag 03MJ proof, common refinement"
+   }
+  },
+  {
+   "text": "For any scheme map $B\\to Y$, put $P=X\\times_YB$. With $U,V,h$ a witnessing diagram, set $R=U\\times_YB$ and $C=V\\times_YB$. These are schemes by [lem-trf-space-representable-etale-scheme-tests]. The map $R\\to C$ is exactly the scheme base change of $h$ along $C\\to V$, hence nodal by step 1. The diagram $R\\to C$ over $P\\to B$ has etale vertical arrows, and $R\\to P$ is surjective, by [lem-trf-space-fibre-products-etale-covers]. It witnesses nodality of $P\\to B$. For an arbitrary space map $Y'\\to Y$, choose an atlas $B\\to Y'$ and then an atlas $A\\to X\\times_YB$ using [def-trf-algebraic-space]. The preceding witness for $X\\times_YB\\to B$, together with the universal-chart criterion of step 2, makes $A\\to B$ nodal. The source map factors as $A\\to X\\times_YB\\to X\\times_YY'$. Its first arrow is the chosen atlas and its second is the pullback of $B\\to Y'$, so their composite is surjective etale by [lem-trf-space-representable-etale-scheme-tests]. The target arrow $B\\to Y'$ is the chosen atlas. Thus this is a witnessing diagram for the arbitrary base change.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DSF (lemma-base-change-nodal); Tag 0DSG (4), construction on pulled-back charts"
+   }
+  },
+  {
+   "text": "Consequently nodal $f$ pulls back to a nodal map over every target atlas. Conversely, if $P=X\\times_YV\\to V$ is nodal for a surjective etale atlas $V\\to Y$, choose an atlas $A\\to P$. The universal criterion for $P\\to V$ makes $A\\to V$ nodal, while $A\\to X$ is surjective etale by [lem-trf-space-representable-etale-scheme-tests]. This is a witness for $f$. For a source atlas $p:U\\to X$, nodal $f$ makes $fp$ nodal: in every chart $A\\to B$ over $U\\to Y$, the composite $A\\to X$ is etale by the same node, so step 2 applies to $f$. Conversely a witness $A\\to B$ for $fp$ has $A\\to U$ surjective etale, hence $A\\to X$ surjective etale; it witnesses $f$. These arguments apply to any chosen atlas, including empty atlases of empty spaces.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DSG (lemma-nodal-local), conditions (4) and (5)"
+   }
+  },
+  {
+   "text": "An open subspace $O\\subset X$ is representable by open immersions by [def-a1-space-open-subspace]; pulling a witnessing source chart back to $O$ gives an open subscheme of that chart. The inclusion is etale by [lem-weil-pbc-open-immersion-etale], and the source-locality lemma used in step 2 preserves nodality on it. Hence all the proved criteria apply to source restrictions. Now let $e:D\\to C$ be an etale map of locally finite type $\\Omega$-schemes, as between etale scheme charts of a geometric fibre $X_\\Omega$ (no purity of dimension is assumed for $C$), with $y\\mapsto x$. Smoothness at a point is preserved and reflected by [lem-trf-etale-source-smoothness]. For the relative dimension, apply [lem-sbc-flat-composite-fibre-dimension-at-point] to $e$ and $C\\to\\operatorname{Spec}\\Omega$: $\\dim_yD=\\dim_y(D_x)+\\dim_xC$, and $\\dim_y(D_x)=0$ by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]; so $\\dim_yD=\\dim_xC$ and smoothness of relative dimension one at $y$ and at $x$ agree. A closed point of a locally finite type $\\Omega$-scheme is maximal in an affine finite-type chart, so its residue field is $\\Omega$ by [lem-weil-pbc-zariski-lemma]. Hence if $x$ or $y$ is an ordinary node, the hypothesis of [lem-trf-etale-completed-local-ring-iso] holds, so both points are closed with residue field $\\Omega$ and the actual induced map $\\widehat{\\mathcal O}_{C,x}\\to\\widehat{\\mathcal O}_{D,y}$ is an isomorphism; thus ordinary nodes are preserved and reflected, and the same node computes the completed local ring at any geometric closed point. Two charts through the same geometric point have the etale scheme common refinement furnished by [lem-trf-space-representable-etale-scheme-tests], so both computations agree via that refinement. This gives the asserted chartwise meaning of the completed geometric local ring without choosing a preferred chart.",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-trf-nodal-family-etale-source-locality",
+    "lem-trf-etale-source-smoothness",
+    "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-zariski-lemma",
+    "lem-trf-etale-completed-local-ring-iso",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DSG, source open restrictions; curves.tex Tag 0C57 (lemma-node-etale-local), completion computation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-space-open-subspace",
+  "def-trf-algebraic-space",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-sfb-scheme-nodal-etale-postcomposition",
+  "lem-trf-etale-completed-local-ring-iso",
+  "lem-trf-etale-source-smoothness",
+  "lem-trf-field-extension-component-local-dimension",
+  "lem-trf-nodal-family-etale-source-locality",
+  "lem-trf-nodal-point-etale-locality",
+  "lem-trf-node-algebraically-closed-extension",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-zariski-lemma"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 0DSG and 0DSF, expanding the omitted proof by the common-refinement argument of spaces-morphisms.tex Tag 03MJ; curves.tex Tags 0C5D, 0CD8, 0C57."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Nodal morphisms of algebraic spaces are etale local on source and target and stable under arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A property on morphisms $ f : X \\\\to Y $ between schemes, defined inductively to characterize when $ f $ satisfies the conditions of a preimmersion in algebraic geometry.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no nodal algebraic-space assertion; the scheme smoothness and etaleness results omit ordinary nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism is a flat family of nodal curves if and only if this holds on etale scheme charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no nodal algebraic-space assertion; the scheme smoothness and etaleness results omit ordinary nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"nodal\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: no nodal algebraic-space assertion; the scheme smoothness and etaleness results omit ordinary nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|Nodal|ordinaryDoublePoint",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: no nodal algebraic-space assertion; the scheme smoothness and etaleness results omit ordinary nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "At worst nodal morphisms of relative dimension one descend along etale covers of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothOfFree\", \"type\": \": Etale R S ↔ IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @Surjective (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmoothOfRelativeDimension 0 R S] : Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no nodal algebraic-space assertion; the scheme smoothness and etaleness results omit ordinary nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|Nodal|AtWorstNodal",
+   "results": "{\"t\": \"2026-10-22T07:13:34Z\", \"tool\": \"grep\", \"query\": \"nodal|Nodal|AtWorstNodal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: scheme etaleness, smoothness, flatness and abstract morphism-property permanence do not state a nodal-family theorem. Read Etale.lean lines 39--157 and Smooth.lean lines 55--105; these do not include ordinary nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nodal\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-22T07:13:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"nodal\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: scheme etaleness, smoothness, flatness and abstract morphism-property permanence do not state a nodal-family theorem. Read Etale.lean lines 39--157 and Smooth.lean lines 55--105; these do not include ordinary nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nodal scheme morphisms of relative dimension one are preserved and reflected by postcomposition with an etale morphism",
+   "results": "{\"t\": \"2026-10-22T07:13:34Z\", \"tool\": \"leansearch\", \"query\": \"Nodal scheme morphisms of relative dimension one are preserved and reflected by postcomposition with an etale morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange\"], \"digest\": \"c29abbb932f6c2f2\"}; Read hits: scheme etaleness, smoothness, flatness and abstract morphism-property permanence do not state a nodal-family theorem. Read Etale.lean lines 39--157 and Smooth.lean lines 55--105; these do not include ordinary nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For scheme morphisms g C to T and an etale map e T to S, g is a nodal family of relative dimension one if and only if e composed with g is nodal",
+   "results": "{\"t\": \"2026-10-22T07:13:44Z\", \"tool\": \"leanfinder\", \"query\": \"For scheme morphisms g C to T and an etale map e T to S, g is a nodal family of relative dimension one if and only if e composed with g is nodal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.stableUnderComposition\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"cf07e9dad3f3743a\"}; Read hits: scheme etaleness, smoothness, flatness and abstract morphism-property permanence do not state a nodal-family theorem. Read Etale.lean lines 39--157 and Smooth.lean lines 55--105; these do not include ordinary nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented family of curves with only smooth points and ordinary nodes remains nodal when its structural morphism is composed with an etale map of bases, and conversely",
+   "results": "{\"t\": \"2026-10-22T07:14:20Z\", \"tool\": \"leanfinder\", \"query\": \"A flat locally finitely presented family of curves with only smooth points and ordinary nodes remains nodal when its structural morphism is composed with an etale map of bases, and conversely\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"9605b71841d29474\"}; Read hits: scheme etaleness, smoothness, flatness and abstract morphism-property permanence do not state a nodal-family theorem. Read Etale.lean lines 39--157 and Smooth.lean lines 55--105; these do not include ordinary nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every arbitrary base change of a flat locally finitely presented scheme morphism with pure one dimensional nodal geometric fibres has the same properties",
+   "results": "{\"t\": \"2026-10-22T07:29:55Z\", \"tool\": \"leanfinder\", \"query\": \"Every arbitrary base change of a flat locally finitely presented scheme morphism with pure one dimensional nodal geometric fibres has the same properties\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\"], \"digest\": \"47a032416d34aa83\"}; Read hits: scheme etaleness, smoothness, flatness and abstract morphism-property permanence do not state a nodal-family theorem. Read Etale.lean lines 39--157 and Smooth.lean lines 55--105; these do not include ordinary nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Families of at worst nodal curves are stable under arbitrary change of base schemes",
+   "results": "{\"t\": \"2026-10-22T07:29:55Z\", \"tool\": \"leansearch\", \"query\": \"Families of at worst nodal curves are stable under arbitrary change of base schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStableUnderBaseChange\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange.mk\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"CategoryTheory.MorphismProperty.IsStableUnderBaseChangeAlong\", \"AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange\"], \"digest\": \"438fe04bb4f33372\"}; Read hits: scheme etaleness, smoothness, flatness and abstract morphism-property permanence do not state a nodal-family theorem. Read Etale.lean lines 39--157 and Smooth.lean lines 55--105; these do not include ordinary nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-nodal-locus-base-change",
+  "date": "2026-10-22",
+  "group": "Q80"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DSH (lemma-locus-where-nodal), with lemma-nodal-local and definition-nodal-family; fibrewise meaning from curves.tex lemma-locus-where-nodal. Chartwise nodal descent in the proof of Tag 0DSH: the application of lemma-nodal-local after taking the open image of the nodal chart locus.",
+   "via": [
+    "lem-sfb-space-nodal-locus-base-change",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-nodal-chart-locality",
+  "worker": "stage1",
+  "summary": "Rebased the retained delivery onto the current live unsplit node after the side-completion promotion return. Re-read all twelve proof-dependency statements and checked all nineteen retained citation quotations against them; no statement quotation changed. Retained chart-refinement, atlas, source-restriction and completion arguments and the one scheme-only prerequisite. Made the surjective source-cover factorization in arbitrary space base change explicit. Statement and statement dependencies unchanged; no Mathlib leaf. Rechecked against the current shared DAG on 2026-10-23; distinguished the newly present three-chart DVR gluing node sharing definition Tag 0C5A.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DSH (lemma-locus-where-nodal), with lemma-nodal-local and definition-nodal-family; fibrewise meaning from curves.tex lemma-locus-where-nodal. Chartwise nodal descent in the proof of Tag 0DSH: the application of lemma-nodal-local after taking the open image of the nodal chart locus.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-etale-completed-local-ring-iso",
+    "why": "Generic scheme/atlas locality or permanence input to nodal chart refinement; the unit has no replacement and its alteration route is unchanged."
+   },
+   {
+    "node": "lem-trf-etale-source-smoothness",
+    "why": "Generic scheme/atlas locality or permanence input to nodal chart refinement; the unit has no replacement and its alteration route is unchanged."
+   },
+   {
+    "node": "lem-trf-nodal-family-etale-source-locality",
+    "why": "Generic scheme/atlas locality or permanence input to nodal chart refinement; the unit has no replacement and its alteration route is unchanged."
+   },
+   {
+    "node": "lem-trf-nodal-point-etale-locality",
+    "why": "Generic scheme/atlas locality or permanence input to nodal chart refinement; the unit has no replacement and its alteration route is unchanged."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme/atlas locality or permanence input to nodal chart refinement; the unit has no replacement and its alteration route is unchanged."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic scheme/atlas locality or permanence input to nodal chart refinement; the unit has no replacement and its alteration route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic scheme/atlas locality or permanence input to nodal chart refinement; the unit has no replacement and its alteration route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic scheme/atlas locality or permanence input to nodal chart refinement; the unit has no replacement and its alteration route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme/atlas locality or permanence input to nodal chart refinement; the unit has no replacement and its alteration route is unchanged."
+   },
+   {
+    "node": "lem-trf-field-extension-component-local-dimension",
+    "why": "Comparison of the chosen geometric fibre with geometric fibres over larger algebraically closed fields in the nodal condition; generic curve input, the unit's alteration route is unchanged."
+   },
+   {
+    "node": "lem-trf-node-algebraically-closed-extension",
+    "why": "Comparison of the chosen geometric fibre with geometric fibres over larger algebraically closed fields in the nodal condition; generic curve input, the unit's alteration route is unchanged."
+   },
+   {
+    "node": "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "why": "Step 5: dimension at a point is unchanged by an etale chart map; generic dimension tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Step 5: etale maps have zero-dimensional fibres; generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-zariski-lemma",
+    "why": "Step 5: closed points of a locally finite type scheme over an algebraically closed field have residue field the ground field; generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-etale-completed-local-ring-iso",
+  "lem-trf-etale-source-smoothness",
+  "lem-trf-nodal-family-etale-source-locality",
+  "lem-trf-nodal-point-etale-locality",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-trf-field-extension-component-local-dimension",
+  "lem-trf-node-algebraically-closed-extension",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-zariski-lemma"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-b1c86acf7",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-b1c86acf7 (reviewer sub-agent of L); spot-checked: Third delivery, after two refused landings: 78b7 and df12 were both FIX, then refused as not in the live DAG. This head is df12 plus one summary sentence, and it carries neither earlier repair. I re-checked both repairs and re-applied them. I read Stacks 0DSG(1)-(7), 0DSF and definition-nodal-family (spaces-more-morphisms), and 0CD8 with its proof, 0C5B and 0C5D (curves). The item matches 0DSG (4)-(7) plus base change. New node lem-sfb-scheme-nodal-etale-postcomposition is true. Forward is 0CD8: T_Omega is a disjoint union of copies of Spec Omega. Reverse: base change by 0C5B, then the graph, which is an open immersion as a section of an etale map (no separatedness needed), then source locality. I tested it on an open immersion, a finite separable extension, the doubled-origin line, empty schemes, uv=0 in characteristic 2 and uv=t. B1-B9 hold, it is not a duplicate, and it is strictly smaller than the item. Steps 2-4 are checked: R=UxU' and W=VxV', source locality on {id,R->U}, reflection then preservation, source locality on {R->U'}; base change via UxB=Ux_V C; the atlas tests. Fault 1 (C2/C1, from df12): step 1 was marked elementary and replaced the chosen-closure reading of def-weil-geometric-fibre with every Omega. It now proves the two agree via lem-trf-field-extension-component-local-dimension, lem-trf-node-algebraically-closed-extension and lem-trf-nodal-point-etale-locality on id. Fault 2 (E1, from 78b7): step 5 proved the pointwise clause only on pure-one-dimensional charts, but citer lem-sfb-space-nodal-locus-base-change step 8 applies it to arbitrary atlases of a flat lfp map. It now uses lem-sbc-flat-composite-fibre-dimension-at-point, lem-weil-pbc-etale-smooth-zero-dimensional-fibres, lem-weil-pbc-zariski-lemma and lem-trf-etale-completed-local-ring-iso. proof_deps equals the union of step uses, tool_uses are updated, and there is no cycle. Statement and new node are unchanged. Batch-5: def-a1-space-open-subspace and def-trf-algebraic-space are general definitions. The cited lem-trf nodes, including the two the fix adds, are foundational curve and algebraic-space geometry from sk-i-curve-zero. Neither assumption gives them and they are not steps of the trace-formula or duality proofs, so all are accepted. Maintainer note: land this fix with the promotion, since it has been lost twice. blueprint.from.node is null, an inherited broken creator chain.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceNodalChartLocality",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.nodal_chart_locality",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.IsNodalRelativeDimensionOne",
+   "AlgebraicGeometry.AlgebraicSpace.NodalAtlasCriteria",
+   "AlgebraicGeometry.AlgebraicSpace.nodal_chart_locality",
+   "AlgebraicGeometry.AlgebraicSpace.nodal_yoneda_iff",
+   "AlgebraicGeometry.nodal_geometric_point_chart_locality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceNodalChartLocality.lean",
+  "statement": "theorem nodal_chart_locality {S : Scheme.{u}} (X Y : AlgebraicSpace S) (f : X ⟶ Y) : NodalAtlasCriteria f.hom.hom ∧ (IsNodalRelativeDimensionOne f.hom.hom → ∀ (Y' : AlgebraicSpace S) (g : Y' ⟶ Y), IsNodalRelativeDimensionOne (Limits.pullback.snd f.hom.hom g.hom.hom)) ∧ (∀ A : OpenSubspace X, (IsNodalRelativeDimensionOne f.hom.hom → IsNodalRelativeDimensionOne (A.val.ι ≫ f.hom.hom)) ∧ NodalAtlasCriteria (A.val.ι ≫ f.hom.hom))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three theorems retain their accepted signatures. Scheme nodality and ordinary-node helpers are supplied by the same-delivery definition module SchemeNodalRelativeCurve; its full scalar-compatible definition uses no legacy IsNodalRelativeCurve."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6d3fab00",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Re-delivery of cfe7 (H2 return) using option (b). The three theorem signatures and the chart definitions are byte-identical to the reviewed version. The helpers moved to the new def node def-sfb-scheme-nodal-relative-curve (module SchemeNodalRelativeCurve, no sorry). Its body is Flat ∧ LFP ∧ for every alg. closed Ω and every g: IsPureDimension 1 ∧ (nonsmooth point → closed point with an Ω-AlgEquiv to Ω[[u,v]]/(uv) via the canonical completedLocalScalarMap). This is equivalent to the reviewed IsNodalRelativeCurve ∧ scalar condition, since the dropped ring-iso conjunct is implied, and matches Stacks 0C5A/0C57. Empty fibres are vacuous; Ω is in universe u. stmt_deps: the theorem nodes are replaced by def-trf-completed-local-scalar-map and the new node, and def-a1-space-open-subspace and def-weil-finite-type-morphism are added. All 19 are bracket-cited (script check), and the lean.statement strings of both nodes appear verbatim in their files. Against side-live, only statement, stmt_deps, lean and statement_change differ; proof and proof_deps are identical. statement_change: old_statement is verbatim; the edit adds citations and makes explicit the lft chart scope already in proof step 5 (not a weakening). Citers nodal-locus-base-change (step 8: atlases of X_Ω are lft over Ω) and nodal-point-blowup-local-descent hold. No name or id clash. Report has Worker report and Second reading sections. No compile: no file changed. Maintainer note: blueprint.from.node is null, inherited from the Q80 chain.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q22 stage 2",
+  "old_statement": "Let $S$ be a scheme [def-pc-scheme] and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. A scheme morphism is nodal of relative dimension one if it is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation], and every nonempty geometric fibre [def-weil-geometric-fibre] is pure of dimension one [def-weil-pure-dimension] and has only smooth points [def-sbc-smooth-morphisms] and ordinary nodes. Over an algebraically closed field $\\Omega$ [def-weil-field, def-weil-algebraic-closure], an ordinary node is a closed point [def-weil-closed-points] with completed local $\\Omega$-algebra $\\Omega[[u,v]]/(uv)$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Define $f$ to be nodal of relative dimension one if there exists a commutative diagram $U\\to V$ over $X\\to Y$ with $U,V$ schemes, both vertical morphisms representable etale [def-trf-algebraic-space, def-weil-etale-morphism], $U\\to X$ surjective, and $U\\to V$ nodal of relative dimension one. This condition is equivalent to requiring $U\\to V$ nodal in every such diagram, without requiring surjectivity in the universal condition. It is also equivalent to requiring $X\\times_YV\\to V$ nodal for one surjective etale scheme atlas $V\\to Y$, and to requiring $f\\circ p$ nodal for one representable surjective etale scheme atlas $p:U\\to X$. Nodal morphisms remain nodal under every algebraic-space base change $Y'\\to Y$, with fibre products as in [lem-trf-space-fibre-products-etale-covers]. In particular these equivalences apply to restrictions to arbitrary source open subspaces. Pointwise on a geometric fibre, the condition of being smooth of relative dimension one or an ordinary node is preserved and reflected by etale scheme charts; the completed local ring at a geometric closed point can be computed on such a chart. No properness, nonemptiness, connectedness or global equidimensionality hypothesis is imposed on $X$ or $Y$.",
+  "what": "Returned H2 repair: attach the full scalar-compatible scheme predicate to a definition node, cite the already owned completed-local scalar map and open-subspace notion, and make the locally finite type scope of the pointwise chart clause explicit as in existing proof step 5. No Lean signature or mathematical conclusion changes.",
+  "source": {
+   "document": "literature/stacks-project/spaces-more-morphisms.tex",
+   "place": "Tag 0DSG (lemma-nodal-local), conditions (4)--(7), and Tag 0DSF (lemma-base-change-nodal); definition-nodal-family and its preceding paragraph. The geometric point interpretation is the etale-local test used in curves.tex lemma-node-etale-local and lemma-nodal-family-etale-local-source."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-nodal-point-blowup-local-descent",
+    "holds": true,
+    "note": "The chart-locality and completion results are unchanged; added definition citations and the locally finite type chart scope already present in proof step 5 preserve this use."
+   },
+   {
+    "id": "lem-sfb-space-nodal-locus-base-change",
+    "holds": true,
+    "note": "The chart-locality and completion results are unchanged; added definition citations and the locally finite type chart scope already present in proof step 5 preserve this use."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-scheme",
+   "def-trf-algebraic-space",
+   "def-weil-size-convention",
+   "def-weil-flat-morphism",
+   "def-sbc-locally-finite-presentation",
+   "def-weil-geometric-fibre",
+   "def-weil-pure-dimension",
+   "def-sbc-smooth-morphisms",
+   "def-weil-field",
+   "def-weil-algebraic-closure",
+   "def-weil-closed-points",
+   "def-weil-pbc-adic-completion",
+   "def-weil-pbc-multivariate-power-series",
+   "def-weil-etale-morphism",
+   "lem-trf-space-fibre-products-etale-covers"
+  ]
+ }
+}

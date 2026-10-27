@@ -1,0 +1,173 @@
+{
+ "id": "lem-sfb-integral-section-coefficient-naturality",
+ "kind": "statement",
+ "title": "Compatible reconstructed coefficient isomorphism after inverse image",
+ "statement": "Fix a prime l and a finite extension E of Q_l, and any scheme morphism g:S to X. Compose the fixed detailed completed coefficient comparison on X [def-sfb-integral-completed-coefficient-transport] with the inverse section-ring comparison [def-sfb-integral-section-action-transport], obtaining an isomorphism d from the detailed completed ring to the reconstructed internal integer-ring sheaf. There is a unique isomorphism c from the underlying ring sheaf of the actual commutative-ring inverse image of the detailed completed ring to the reconstructed internal integer-ring sheaf on S such that d followed by the internal direct-image coefficient map equals the actual inverse-image unit followed by direct image of c. This is a ring-only statement for arbitrary schemes; it asserts no module inverse-image comparison.",
+ "stmt_deps": [
+  "def-sfb-integral-section-action-transport",
+  "def-sfb-integral-completed-coefficient-transport",
+  "lem-sfb-internal-module-operations-transport",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3), coefficient rings in integral scalar local models; inverse-image adjunction and reconstruction of commutative ring sheaves."
+ },
+ "proof": [
+  {
+   "text": "The composite forgetful functor from commutative rings through rings to abelian groups preserves filtered colimits and sheafification. The Kan-extension construction therefore supplies its inverse-image comparison. The Kan-extension and sheafification unit equations show that this comparison commutes with inverse-image adjunction units.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Lift the internal direct-image coefficient map through the fully faithful functor from commutative ring sheaves to ring sheaves. Take its adjunct in commutative ring sheaves. Forgetting it to abelian sheaves and applying the preceding unit equation identifies it with condensedPullbackHom. The latter is an isomorphism by the point-pullback compositor. Since the forgetful functor reflects isomorphisms, the adjunct is a ring isomorphism.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the fixed source detailed comparison composed with the inverse section-ring comparison to a commutative ring isomorphism. Compose its inverse image with the reconstructed ring adjunct. Naturality of the unit gives the coefficient square. Faithfulness of forgetting commutativity and injectivity of the adjunction hom equivalence give uniqueness.",
+   "uses": [
+    "def-sfb-integral-section-action-transport",
+    "def-sfb-integral-completed-coefficient-transport",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-module-operations-transport",
+  "def-sfb-integral-section-action-transport",
+  "def-sfb-integral-completed-coefficient-transport",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "K6: forget to abelian sheaves to prove that the adjunct ring coefficient map is an isomorphism, then use source transport and adjunction uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lanCompIsoOfPreserves|sheafComposeNatTrans_fac",
+   "results": {
+    "t": "2026-10-26T08:49:19Z",
+    "tool": "grep",
+    "query": "lanCompIsoOfPreserves|sheafComposeNatTrans_fac",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/Continuous.lean",
+     "Mathlib/CategoryTheory/Sites/PreservesSheafification.lean",
+     "Mathlib/CategoryTheory/Sites/PreservesSheafification.lean",
+     "Mathlib/CategoryTheory/Sites/PreservesSheafification.lean",
+     "Mathlib/CategoryTheory/Sites/PreservesSheafification.lean",
+     "Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean"
+    ],
+    "digest": "97811b16b4e7bf84"
+   },
+   "date": "2026-10-26",
+   "verdict": "Generic Kan-extension and sheafification comparison APIs are available and used; no theorem supplies the reconstructed coefficient adjunct square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.sheafComposeNatIso",
+   "results": {
+    "t": "2026-10-26T08:49:20Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.sheafComposeNatIso",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.sheafComposeNatIso"
+    ],
+    "digest": "33c64f495831d6c8"
+   },
+   "date": "2026-10-26",
+   "verdict": "Generic Kan-extension and sheafification comparison APIs are available and used; no theorem supplies the reconstructed coefficient adjunct square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of commutative rings commutes with forgetting to sheaves of abelian groups",
+   "results": {
+    "t": "2026-10-26T08:49:21Z",
+    "tool": "leanfinder",
+    "query": "Inverse image of sheaves of commutative rings commutes with forgetting to sheaves of abelian groups",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.fullyFaithfulForget_preimage_val",
+     "SheafOfModules.toSheafCompSheafToPresheafIso",
+     "AlgebraicGeometry.structurePresheafCompForget",
+     "LightCondensed.forget_obj_val_map",
+     "SheafOfModules.toSheaf_map_val",
+     "SheafOfModules.forgetToSheafModuleCat_map_val",
+     "SheafOfModules.forgetToSheafModuleCat_obj_val",
+     "TopCat.Sheaf.pushforwardForgetIso"
+    ],
+    "digest": "d2a5a3ec94e3af03"
+   },
+   "date": "2026-10-26",
+   "verdict": "Generic Kan-extension and sheafification comparison APIs are available and used; no theorem supplies the reconstructed coefficient adjunct square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralSectionLocalIsomorphisms",
+  "date": "2026-10-26",
+  "group": "K6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-integral-section-local-isomorphisms",
+   "place": "Ring-only adjunct coefficient square used in the global section inverse-image comparison."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralSectionCoefficientNaturality",
+  "file": "lean/Sheaf/Paper/IntegralSectionCoefficientNaturality.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralSectionCoefficientNaturality",
+  "statement": "theorem integralSectionCoefficientNaturality (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X S : Scheme.{u}} (g : S ⟶ X) :\n    let R := Scheme.pbcAdicCompletion X (Scheme.pbcIntegralDatum l E)\n    let P := (Scheme.proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj R\n    let F := Scheme.proEtaleBaseChange g\n    let J := Scheme.ProEt.topology X\n    let K := Scheme.ProEt.topology S\n    let B := (sheafCompose K (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj P\n    let a : (Scheme.adicLisseForget X).obj R ⟶\n        (F.sheafPushforwardContinuous RingCat.{u + 1} J K).obj B :=\n      ⟨Functor.whiskerRight\n        ((Scheme.proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app R).hom\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩\n    ∃! c : B ≅ InternalModuleOperations.ring (DerivedNakayama.integerRing l E) S,\n      (integralDetailedSectionRingComparison l E X).hom ≫\n          InternalModuleOperations.coefficientMap (DerivedNakayama.integerRing l E) g =\n        a ≫ (F.sheafPushforwardContinuous RingCat.{u + 1} J K).map c.hom",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralDetailedSectionRingComparison",
+   "AlgebraicGeometry.ProEtale.integralSectionCoefficientNaturality"
+  ],
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261026T100306-L-4173966",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261026T100306-L-4173966",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

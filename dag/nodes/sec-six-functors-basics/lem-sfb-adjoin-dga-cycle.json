@@ -1,0 +1,472 @@
+{
+ "id": "lem-sfb-adjoin-dga-cycle",
+ "kind": "statement",
+ "title": "Adjoining a variable with a prescribed cycle as differential",
+ "statement": "Let $R$ be a commutative ring, let $(B,d,\\gamma)$ be a divided-power differential graded $R$-algebra [def-sfb-divided-power-dga], let $e\\geq1$, and let $z\\in B_{e-1}$ satisfy $d(z)=0$. Let $C=B\\langle T\\rangle$ be the graded divided-power algebra obtained by adjoining one variable $T$ of degree $e$ as in [lem-sfb-divided-power-variable-adjunction]: exterior if $e$ is odd, and divided-power if $e$ is even. There exists a unique differential $D:C_q\\to C_{q-1}$ extending $d$ on $B$, compatible with the divided-power structure on $C$, and satisfying $D(T)=z$, such that $(C,D,\\gamma)$ is a divided-power differential graded $R$-algebra. In particular $B\\hookrightarrow C$ is a morphism of divided-power differential graded algebras. Explicitly, for homogeneous $b\\in B$, $D(bT)=d(b)T+(-1)^{\\deg(b)}bz$ if $e$ is odd; if $e$ is even, writing $T^{[a]}=\\gamma_a(T)$, one has $D(bT^{[a]})=d(b)T^{[a]}+(-1)^{\\deg(b)}bzT^{[a-1]}$ for every $a\\geq1$.",
+ "source": {
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PM (lemma-extend-differential), the differential extension on the single-variable graded divided-power algebra; explicit formulas from the Leibniz and divided-power differential rules"
+ },
+ "stmt_deps": [
+  "def-sfb-divided-power-dga",
+  "lem-sfb-divided-power-variable-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-divided-power-variable-adjunction] on the underlying graded divided-power algebra of $B$ [def-sfb-divided-power-dga]. It supplies $C$ with its strict graded commutativity, extended divided powers, and free left $B$-module basis $1,T$ in odd degree, or $t_a=T^{[a]}$ for $a\\geq0$ in even degree. Define an $R$-linear map on the direct-sum components by $D(b)=d(b)$ and $D(bT)=d(b)T+(-1)^p bz$ in the odd case; in the even case put $D(bt_a)=d(b)t_a+(-1)^p bz t_{a-1}$ for $a\\geq1$ and $D(bt_0)=d(b)$. Here $b\\in B_p$. These are well-defined formulas on the free summands, not prescriptions on an algebra presentation. Every term has degree $\\deg(bt_a)-1$ (or $\\deg(bT)-1$), since $\\deg z=e-1$. Finite sums define $D$ on all of $C$; degree zero maps to zero. In particular $D|_B=d$ and $D(T)=z$.",
+   "uses": [
+    "def-sfb-divided-power-dga",
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PM (lemma-extend-differential), omitted direct computation; using Tags 09PH/09PI (example-adjoining-odd/even) and 09PJ (definition-divided-powers-dga)."
+   }
+  },
+  {
+   "text": "Check the signed Leibniz rule in the odd case using the multiplication from [lem-sfb-divided-power-variable-adjunction] and the old Leibniz rule from [def-sfb-divided-power-dga]. By bilinearity only pairs $b,c$, $b,cT$, $bT,c$, $bT,cT$, with $b\\in B_p,c\\in B_q$, need checking. The first is the old rule. For the second, both sides are $d(bc)T+(-1)^{p+q}bc z$. For the third, using $(bT)c=(-1)^qbcT$, both sides are $(-1)^q d(b)cT+(-1)^{p+q}b d(c)T+(-1)^pbc z$. For the fourth the product is zero, and the right side is $(-1)^pbc zT+(-1)^{p+1}bc zT=0$: the terms with two $T$ factors vanish. Here $z$ is even, so $zc=cz$ and $Tz=zT$. These calculations prove the rule on all homogeneous elements of $C$.",
+   "uses": [
+    "def-sfb-divided-power-dga",
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PM (lemma-extend-differential), omitted direct computation; using Tags 09PH/09PI (example-adjoining-odd/even) and 09PJ (definition-divided-powers-dga)."
+   }
+  },
+  {
+   "text": "Check the even-case Leibniz rule on $bt_a,ct_s$ with $b\\in B_p,c\\in B_q$ using [lem-sfb-divided-power-variable-adjunction] and [def-sfb-divided-power-dga]. Their product is $\\binom{a+s}{a}bc t_{a+s}$. The coefficient of $t_{a+s}$ in each side of the rule is $\\binom{a+s}{a}(d(b)c+(-1)^pb d(c))$. If $a+s>0$, the coefficient of $bc zt_{a+s-1}$ on the left is $(-1)^{p+q}\\binom{a+s}{a}$; on the right it is $(-1)^{p+q}(\\binom{a+s-1}{a-1}+\\binom{a+s-1}{a})$, which is equal by Pascal's identity. In the first term of the right side, moving $z$ past $c$ contributes $(-1)^q$, because $z$ is odd. Omit the first binomial when $a=0$ and the second when $s=0$; these boundary cases give the same equality. If $a=s=0$ this is just the old Leibniz rule. Bilinearity finishes the check.",
+   "uses": [
+    "def-sfb-divided-power-dga",
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PM (lemma-extend-differential), omitted direct computation; using Tags 09PH/09PI (example-adjoining-odd/even) and 09PJ (definition-divided-powers-dga)."
+   }
+  },
+  {
+   "text": "Verify $D^2=0$ directly. On $B$ it is $d^2=0$ from [def-sfb-divided-power-dga]. In the odd case, applying the defining formula twice to $bT$ gives $d^2(b)T+((-1)^{p-1}+(-1)^p)d(b)z+b d(z)=0$. If $p=0$, terms involving $d(b)$ are zero. In the even case and $a\\geq1$ the result is $d^2(b)t_a+((-1)^{p-1}+(-1)^p)d(b)z t_{a-1}+b d(z)t_{a-1}-b z^2t_{a-2}$, with the last term absent for $a=1$. The first three terms vanish; the last vanishes because $z$ has odd degree $e-1$ and odd squares vanish strictly, including in characteristic two. This proves the claim on the free summands and hence everywhere. No assertion about ordinary graded commutativity alone is used to deduce odd squares zero.",
+   "uses": [
+    "def-sfb-divided-power-dga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PM (lemma-extend-differential), omitted direct computation; using Tags 09PH/09PI (example-adjoining-odd/even) and 09PJ (definition-divided-powers-dga)."
+   }
+  },
+  {
+   "text": "For even $e$, first verify divided-power compatibility on a monomial $bt_a$ of positive even degree, where $a\\geq1$ and $b$ is homogeneous even. By [lem-sfb-divided-power-variable-adjunction], $\\gamma_n(bt_a)=K_{n,a}b^nt_{na}$, where $K_{n,a}=(na)!/(n!(a!)^n)$ and set $K_{0,a}=1$. Using the Leibniz rule already checked, $D\\gamma_n(bt_a)=nK_{n,a}b^{n-1}d(b)t_{na}+K_{n,a}b^nz t_{na-1}$. On multiplying $D(bt_a)$ by $\\gamma_{n-1}(bt_a)$, the two respective coefficients are $K_{n-1,a}\\binom{na}{a}$ and $K_{n-1,a}\\binom{na-1}{a-1}$. They equal $nK_{n,a}$ and $K_{n,a}$: substitute the factorial expressions and cancel factorials as integer identities. Thus no integer is inverted in $R$. This holds also when $n=1$. For $a=0$ and $b$ positive even it is exactly the old compatibility from [def-sfb-divided-power-dga].",
+   "uses": [
+    "def-sfb-divided-power-dga",
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PM (lemma-extend-differential), omitted direct computation; using Tags 09PH/09PI (example-adjoining-odd/even) and 09PJ (definition-divided-powers-dga)."
+   }
+  },
+  {
+   "text": "The preceding even-case check extends to every positive even element by the divided-power addition formula in [def-sfb-divided-power-dga], valid in $C$ by [lem-sfb-divided-power-variable-adjunction]. Explicitly, if compatibility holds for $u,v$ for all indices, differentiate $\\gamma_n(u+v)=\\sum_{i+j=n}\\gamma_i(u)\\gamma_j(v)$. Every factor $\\gamma_i(u)$ has even parity, so the Leibniz rule gives $\\sum_{i+j=n,i>0}D(u)\\gamma_{i-1}(u)\\gamma_j(v)+\\sum_{i+j=n,j>0}D(v)\\gamma_i(u)\\gamma_{j-1}(v)=(D(u)+D(v))\\gamma_{n-1}(u+v)$. The derivative of $\\gamma_0=1$ is zero. Each element of $C_{\\mathrm{even},+}$ is a finite sum of the monomials checked in the preceding step, including a positive even constant coefficient; induction on that finite sum proves compatibility. This is just a reindexing of finite sums, not an appeal to a separate compatibility theorem.",
+   "uses": [
+    "def-sfb-divided-power-dga",
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PM (lemma-extend-differential), omitted direct computation; using Tags 09PH/09PI (example-adjoining-odd/even) and 09PJ (definition-divided-powers-dga)."
+   }
+  },
+  {
+   "text": "For odd $e$, take any positive even element $w=x+yT$, with $x\\in B_{\\mathrm{even},+}$ and $y\\in B_{\\mathrm{odd}}$. The formula of [lem-sfb-divided-power-variable-adjunction] gives $\\gamma_n(w)=\\gamma_n(x)+\\gamma_{n-1}(x)yT$. For $n\\geq2$, differentiating this expression using the old compatibility [def-sfb-divided-power-dga] gives $d(x)\\gamma_{n-1}(x)+d(x)\\gamma_{n-2}(x)yT+\\gamma_{n-1}(x)d(y)T-\\gamma_{n-1}(x)yz$. Expanding $D(w)\\gamma_{n-1}(w)$ gives the same four terms: the other two terms vanish, one because it contains two $T$ factors, and the other because $yzyT=zy^2T=0$. Indeed $z$ is even, and $y^2=0$ even if $y$ is inhomogeneous: expand into finitely many odd homogeneous components, whose squares vanish and whose cross terms cancel in pairs by strict graded commutativity. The identity for $n=1$ is $D(w)=D(w)\\gamma_0(w)$. This proves compatibility on the full positive even part, without dividing by two.",
+   "uses": [
+    "def-sfb-divided-power-dga",
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PM (lemma-extend-differential), omitted direct computation; using Tags 09PH/09PI (example-adjoining-odd/even) and 09PJ (definition-divided-powers-dga)."
+   }
+  },
+  {
+   "text": "For uniqueness, let $D'$ be any differential with the stated rules [def-sfb-divided-power-dga]. In the odd case its values on $B$ and $T$ force $D'(bT)=d(b)T+(-1)^pbz$. In the even case $t_a=\\gamma_a(T)$ from [lem-sfb-divided-power-variable-adjunction] forces $D'(t_a)=z t_{a-1}$ for $a\\geq1$; the Leibniz rule then forces the same formula on every $bt_a$. Since these are free left $B$-module summands, additivity gives $D'=D$. The graded algebra and divided powers were already supplied in step 1, and the intervening computations establish every differential axiom. Hence $(C,D,\\gamma)$ is the required divided-power DGA. Its inclusion of $B$ preserves multiplication, grading and divided powers by the adjunction lemma and commutes with the differentials by construction, so it is a morphism of divided-power DGAs.",
+   "uses": [
+    "def-sfb-divided-power-dga",
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PM (lemma-extend-differential), omitted direct computation; using Tags 09PH/09PI (example-adjoining-odd/even) and 09PJ (definition-divided-powers-dga)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-divided-power-dga",
+  "lem-sfb-divided-power-variable-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PM (lemma-extend-differential): the source omits the direct computation; all details are supplied here from Tags 09PH, 09PI, 09PG, and 09PJ, with the corrected 09PI coefficient already in the cited adjunction node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extend the differential on a strictly graded commutative divided power algebra after adjoining one positive degree variable whose differential is a prescribed cycle",
+   "results": {
+    "t": "2026-10-23T23:37:28Z",
+    "tool": "leanfinder",
+    "query": "Extend the differential on a strictly graded commutative divided power algebra after adjoining one positive degree variable whose differential is a prescribed cycle",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Generators.H1Cotangent.δAux_X",
+     "Algebra.Generators.H1Cotangent.δ_map",
+     "Algebra.Generators.H1Cotangent.δ_eq_δAux",
+     "Algebra.Generators.H1Cotangent.δAux_toAlgHom",
+     "Algebra.Presentation.differentialsSolution",
+     "Algebra.Generators.H1Cotangent.δAux_monomial",
+     "Algebra.Generators.H1Cotangent.δ_eq_δ",
+     "Algebra.Generators.H1Cotangent.δAux_mul"
+    ],
+    "digest": "4a5b3e2ebbf0c35e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary ideal divided powers, Kahler derivations or alternating chain complexes, not an extension of a strict divided-power DGA. The differential grep has no hits; the alternate grep hits concern different ideals or manifold differentials. DividedPowers (Mathlib/RingTheory/DividedPowers/Basic.lean:78) has no differential or graded extension, and DividedPowerAlgebra.submodule_span_prod_dp_eq_top (Init.lean:251) only states spanning in an ordinary algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "DividedPowers, \"differential\"",
+   "results": {
+    "t": "2026-10-23T23:37:28Z",
+    "tool": "loogle",
+    "query": "DividedPowers, \"differential\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary ideal divided powers, Kahler derivations or alternating chain complexes, not an extension of a strict divided-power DGA. The differential grep has no hits; the alternate grep hits concern different ideals or manifold differentials. DividedPowers (Mathlib/RingTheory/DividedPowers/Basic.lean:78) has no differential or graded extension, and DividedPowerAlgebra.submodule_span_prod_dp_eq_top (Init.lean:251) only states spanning in an ordinary algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "divided.?power.*differential|differential.*divided.?power|DividedPowerDGA",
+   "results": {
+    "t": "2026-10-23T23:37:28Z",
+    "tool": "grep",
+    "query": "divided.?power.*differential|differential.*divided.?power|DividedPowerDGA",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary ideal divided powers, Kahler derivations or alternating chain complexes, not an extension of a strict divided-power DGA. The differential grep has no hits; the alternate grep hits concern different ideals or manifold differentials. DividedPowers (Mathlib/RingTheory/DividedPowers/Basic.lean:78) has no differential or graded extension, and DividedPowerAlgebra.submodule_span_prod_dp_eq_top (Init.lean:251) only states spanning in an ordinary algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoining a variable with prescribed cycle as differential to a differential graded algebra with divided powers",
+   "results": {
+    "t": "2026-10-23T23:37:29Z",
+    "tool": "leansearch",
+    "query": "Adjoining a variable with prescribed cycle as differential to a differential graded algebra with divided powers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.OfSquareZero.dividedPowers",
+     "DividedPowers.dpow",
+     "DividedPowers.exp",
+     "DividedPowers.RatAlgebra.dividedPowers",
+     "DividedPowers.CharP.dividedPowers",
+     "DividedPowers.Quotient.dpow",
+     "DividedPowers.casesOn",
+     "DividedPowers.mk"
+    ],
+    "digest": "876e5cac7b2a2609"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary ideal divided powers, Kahler derivations or alternating chain complexes, not an extension of a strict divided-power DGA. The differential grep has no hits; the alternate grep hits concern different ideals or manifold differentials. DividedPowers (Mathlib/RingTheory/DividedPowers/Basic.lean:78) has no differential or graded extension, and DividedPowerAlgebra.submodule_span_prod_dp_eq_top (Init.lean:251) only states spanning in an ordinary algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "adjoin.*(cycle|differential)|extend.*differential|differential.*extend",
+   "results": {
+    "t": "2026-10-23T23:38:02Z",
+    "tool": "grep",
+    "query": "adjoin.*(cycle|differential)|extend.*differential|differential.*extend",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean",
+     "Mathlib/Geometry/Manifold/MFDeriv/Atlas.lean",
+     "Mathlib/Geometry/Manifold/MFDeriv/UniqueDifferential.lean",
+     "Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean"
+    ],
+    "digest": "307720c2f62b5995"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary ideal divided powers, Kahler derivations or alternating chain complexes, not an extension of a strict divided-power DGA. The differential grep has no hits; the alternate grep hits concern different ideals or manifold differentials. DividedPowers (Mathlib/RingTheory/DividedPowers/Basic.lean:78) has no differential or graded extension, and DividedPowerAlgebra.submodule_span_prod_dp_eq_top (Init.lean:251) only states spanning in an ordinary algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cycle in a differential graded algebra can be killed by adjoining an exterior generator in odd degree or a divided power generator in even degree",
+   "results": {
+    "t": "2026-10-23T23:38:03Z",
+    "tool": "leanfinder",
+    "query": "A cycle in a differential graded algebra can be killed by adjoining an exterior generator in odd degree or a divided power generator in even degree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Presentation.differentialsSolution",
+     "Algebra.Generators.H1Cotangent.δ_eq_δAux",
+     "Algebra.Generators.H1Cotangent.δAux_X",
+     "HomologicalComplex.alternatingConst_iCycles_odd_comp_apply",
+     "HomologicalComplex.alternatingConst_iCycles_even_comp",
+     "HomologicalComplex.alternatingConst_iCycles_even_comp_apply",
+     "HomologicalComplex.alternatingConst_iCycles_odd_comp",
+     "HomologicalComplex.alternatingConst_iCycles_odd_comp_assoc"
+    ],
+    "digest": "d15943f998598866"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary ideal divided powers, Kahler derivations or alternating chain complexes, not an extension of a strict divided-power DGA. The differential grep has no hits; the alternate grep hits concern different ideals or manifold differentials. DividedPowers (Mathlib/RingTheory/DividedPowers/Basic.lean:78) has no differential or graded extension, and DividedPowerAlgebra.submodule_span_prod_dp_eq_top (Init.lean:251) only states spanning in an ordinary algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend the differential on a divided power differential graded algebra by adjoining a positive degree variable with prescribed cycle as its differential",
+   "results": {
+    "t": "2026-10-24T00:11:26Z",
+    "tool": "leanfinder",
+    "query": "Extend the differential on a divided power differential graded algebra by adjoining a positive degree variable with prescribed cycle as its differential",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Generators.H1Cotangent.δAux_X",
+     "Algebra.Presentation.differentialsSolution",
+     "Algebra.Generators.H1Cotangent.δ_eq_δAux",
+     "Algebra.Generators.H1Cotangent.δ_map",
+     "Algebra.Generators.H1Cotangent.δAux",
+     "Algebra.Generators.H1Cotangent.δAux_monomial",
+     "Algebra.Presentation.differentials.hom₁_single",
+     "Algebra.Generators.H1Cotangent.δAux_mul"
+    ],
+    "digest": "e8288fe18e35227f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern ordinary Kahler derivations (JacobiZariski.lean:243,248; Differentials.lean:140), cycles of an existing complex (HomologicalComplex.lean:93), the exterior grading (Grading.lean:72), or ordinary ideal divided powers and square-zero derivation lifts (DividedPowers/Basic.lean:78 and Derivation/ToSquareZero.lean:80). They do not extend a signed degree-minus-one differential to an arbitrary strict graded divided-power base. The differential grep and Loogle have no hits; the second grep hits manifold derivatives or differential ideals of number rings. No exact or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "DividedPowers, \"differential\"",
+   "results": {
+    "t": "2026-10-24T00:12:18Z",
+    "tool": "loogle",
+    "query": "DividedPowers, \"differential\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern ordinary Kahler derivations (JacobiZariski.lean:243,248; Differentials.lean:140), cycles of an existing complex (HomologicalComplex.lean:93), the exterior grading (Grading.lean:72), or ordinary ideal divided powers and square-zero derivation lifts (DividedPowers/Basic.lean:78 and Derivation/ToSquareZero.lean:80). They do not extend a signed degree-minus-one differential to an arbitrary strict graded divided-power base. The differential grep and Loogle have no hits; the second grep hits manifold derivatives or differential ideals of number rings. No exact or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "divided.?power.*differential|differential.*divided.?power|DividedPowerDGA",
+   "results": {
+    "t": "2026-10-24T00:12:18Z",
+    "tool": "grep",
+    "query": "divided.?power.*differential|differential.*divided.?power|DividedPowerDGA",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern ordinary Kahler derivations (JacobiZariski.lean:243,248; Differentials.lean:140), cycles of an existing complex (HomologicalComplex.lean:93), the exterior grading (Grading.lean:72), or ordinary ideal divided powers and square-zero derivation lifts (DividedPowers/Basic.lean:78 and Derivation/ToSquareZero.lean:80). They do not extend a signed degree-minus-one differential to an arbitrary strict graded divided-power base. The differential grep and Loogle have no hits; the second grep hits manifold derivatives or differential ideals of number rings. No exact or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cycle can be killed by adjoining an exterior or divided power variable to a differential graded algebra",
+   "results": {
+    "t": "2026-10-24T00:12:19Z",
+    "tool": "leansearch",
+    "query": "A cycle can be killed by adjoining an exterior or divided power variable to a differential graded algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.iCycles_d_assoc",
+     "HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top",
+     "ModuleCat.exteriorPower.iso₀",
+     "HomologicalComplex.cycles",
+     "CategoryTheory.ShortComplex.cyclesIsKernel",
+     "ExteriorAlgebra.gradedAlgebra",
+     "CategoryTheory.ShortComplex.cyclesIsoLeftHomology",
+     "HomologicalComplex.d_toCycles"
+    ],
+    "digest": "d617b7015d361941"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern ordinary Kahler derivations (JacobiZariski.lean:243,248; Differentials.lean:140), cycles of an existing complex (HomologicalComplex.lean:93), the exterior grading (Grading.lean:72), or ordinary ideal divided powers and square-zero derivation lifts (DividedPowers/Basic.lean:78 and Derivation/ToSquareZero.lean:80). They do not extend a signed degree-minus-one differential to an arbitrary strict graded divided-power base. The differential grep and Loogle have no hits; the second grep hits manifold derivatives or differential ideals of number rings. No exact or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "adjoin.*(cycle|differential)|extend.*differential|differential.*extend",
+   "results": {
+    "t": "2026-10-24T00:12:49Z",
+    "tool": "grep",
+    "query": "adjoin.*(cycle|differential)|extend.*differential|differential.*extend",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean",
+     "Mathlib/Geometry/Manifold/MFDeriv/Atlas.lean",
+     "Mathlib/Geometry/Manifold/MFDeriv/UniqueDifferential.lean",
+     "Mathlib/RingTheory/DedekindDomain/LinearDisjoint.lean"
+    ],
+    "digest": "307720c2f62b5995"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern ordinary Kahler derivations (JacobiZariski.lean:243,248; Differentials.lean:140), cycles of an existing complex (HomologicalComplex.lean:93), the exterior grading (Grading.lean:72), or ordinary ideal divided powers and square-zero derivation lifts (DividedPowers/Basic.lean:78 and Derivation/ToSquareZero.lean:80). They do not extend a signed degree-minus-one differential to an arbitrary strict graded divided-power base. The differential grep and Loogle have no hits; the second grep hits manifold derivatives or differential ideals of number rings. No exact or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strictly graded commutative differential algebra with divided powers admits an extension of its differential to a free divided power variable",
+   "results": {
+    "t": "2026-10-24T00:12:53Z",
+    "tool": "leanfinder",
+    "query": "A strictly graded commutative differential algebra with divided powers admits an extension of its differential to a free divided power variable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.Quotient.OfSurjective.dpow",
+     "DividedPowers.RatAlgebra.dpow",
+     "DividedPowers.OfSquareZero.dividedPowers",
+     "Algebra.Generators.H1Cotangent.δAux_toAlgHom",
+     "liftOfDerivationToSquareZero_apply",
+     "liftOfDerivationToSquareZero",
+     "liftOfDerivationToSquareZero_mk_apply",
+     "liftOfDerivationToSquareZero_mk_apply'"
+    ],
+    "digest": "0344860d34673706"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern ordinary Kahler derivations (JacobiZariski.lean:243,248; Differentials.lean:140), cycles of an existing complex (HomologicalComplex.lean:93), the exterior grading (Grading.lean:72), or ordinary ideal divided powers and square-zero derivation lifts (DividedPowers/Basic.lean:78 and Derivation/ToSquareZero.lean:80). They do not extend a signed degree-minus-one differential to an arbitrary strict graded divided-power base. The differential grep and Loogle have no hits; the second grep hits manifold derivatives or differential ideals of number rings. No exact or one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tate-free-resolution",
+  "date": "2026-10-24",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting the etale chart comparison in the fibrewise complete-intersection locus on the direct-image branch (3) of det-thm-sf-ctf-stability-direct-images; the local-ring comparison used below lem-sfb-lci-etale-pointwise-invariance. Flat-local complete-intersection comparison on the ordinary fibres, as in descent.tex Tag 05B7 proof, last paragraph. Supporting input: Regular generation of nested ideals with a flat quotient. The single-ring nested-ideal step in Stacks 09PX, implication (2) to (3), applying dpa.tex lemma-regular-sequence (09PW) to IS contained in J. Immediate supporting input: Stacks 09PW proof, first sentence, applying 09PV to the map of minimal-generator spaces. Supporting input for Tag 09PV: dpa.tex lemma-not-finite-pd (09PU), applied to the cyclic square-zero quotient constructed from a nonzero kernel vector. Auxiliary input for Tag 09PU: Tag 09PN (lemma-tate-resolution), statement (1)-(4), finiteness assertion, and its explicit free monomial construction Supporting the successive variable adjunctions in the proof of Tag 09PN: single-variable differential extension, Tag 09PM, on the algebra already supplied by lem-sfb-divided-power-variable-adjunction.",
+   "via": [
+    "lem-sfb-tate-free-resolution",
+    "lem-sfb-square-zero-relation-tor-obstruction",
+    "lem-sfb-finite-tor-ideal-generators-injective",
+    "lem-sfb-nested-regular-ideals-finite-tor",
+    "lem-sfb-flat-quotient-nested-regular-ideals",
+    "lem-sfb-flat-local-ci-source-fibre",
+    "lem-sfb-syntomic-etale-source-locality",
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-sfb-space-fibrewise-lci-source-locus",
+    "lem-sfb-space-lci-base-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-adjoin-dga-cycle",
+  "worker": "stage1",
+  "summary": "Supplied the omitted 09PM computation in eight steps: construction, both signed Leibniz checks, square zero, divided-power compatibility for even monomials and sums and for odd adjunctions, and uniqueness. Reused the existing general adjunction node and DGA definition; no new nodes or Mathlib leaves. Statement and statement dependencies unchanged. Read the inherited Mathlib search results and ran six fresh logged searches, including two semantic phrasings, Loogle, LeanSearch, and two greps; none matches the item.",
+  "blueprint": "Supporting algebra below direct-image branch (3) of det-thm-sf-ctf-stability-direct-images, via the inherited local complete-intersection and Tate-resolution chain. Read latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and its sk-thm-sf-ctf-stability-direct-images.proof.md. This item expands the 09PM single-variable step used in the 09PN Tate-resolution construction; it is not a unit key node. Blueprint searches for divided power and differential give no equivalent node. blueprint_refs.py ancestor returns null; inherited detailed from.place and via are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NV-1b2829e3c",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-1b2829e3c (reviewer sub-agent of L); spot-checked: Read Stacks dpa.tex 09PM (l.1181-1197, proof omitted), 09PH/09PI (l.1003-1060) and 09PJ, plus the full statements of the two cited nodes, def-sfb-divided-power-dga and lem-sfb-divided-power-variable-adjunction. Item statement and stmt_deps are identical to clones/live and side-live, where the item is still unsplit with no proof. This is not a re-split: there is no repair note. No new nodes; the eight steps write out the computation Stacks omits (D5). I redid every computation. Odd Leibniz: all four basis pairs check, including the cancellation of (-1)^p bczT against (-1)^{p+1+q}(-1)^q bczT. Even Leibniz: the (-1)^q sign and Pascal's identity check. D^2=0: odd case gives ((-1)^{p-1}+(-1)^p)d(b)z+bd(z)=0; even case leaves -bz^2t_{a-2}, which is zero by strictness since deg z is odd. Even compatibility: K_{n-1,a}C(na,a)=nK_{n,a} and K_{n-1,a}C(na-1,a-1)=K_{n,a} as integer identities; checked n=1 and n=a=2. Additivity reindexing checks. Odd compatibility: four surviving terms; TyT=0, and y^2=0 for inhomogeneous odd y via strictness with no division by 2. Uniqueness follows from D'(t_a)=D'(gamma_a T)=z t_{a-1}. Edge cases checked: e=1 (Koszul), e=2, z=0, characteristic 2. Duplicate search (rg -L for 09PM / extend-differential / prescribed cycle) found only the citer lem-sfb-tate-free-resolution. lem-sfb-free-graded-pd-odd-derivations needs a polynomial algebra with finitely many generators per degree, so it does not cover the item. The square-zero curvature nodes are different statements. Six Mathlib searches are recorded with no match. Route stays in unit sk-thm-sf-ctf-stability; no tool_uses; no SGA. Minor: the report mentions a citations.json that is not in the commit; this is immaterial."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AdjoinDGACycle",
+  "declaration": "GradedAlgebra.VariableAdjunction.odd_differential_extension",
+  "declarations": [
+   "GradedAlgebra.VariableAdjunction.odd_differential_extension",
+   "GradedAlgebra.VariableAdjunction.even_differential_extension"
+  ],
+  "file": "lean/Sheaf/RingTheory/AdjoinDGACycle.lean",
+  "statement": "theorem odd_differential_extension (R : Type u) [CommRing R] (B : AlgebraData.{u, v} R) (d : DividedPowerDGA B.grade) (e : ℕ) (he : 0 < e) (heodd : Odd e) (z : B.Carrier) (hz : z ∈ B.grade (e - 1)) (hcycle : d.d z = 0) (C : AlgebraData.{u, w} R) (p : OddPresentation B C e) (δ : GradedDividedPowers C.grade) (hδ : Preserves p.inclusion d.toGradedDividedPowers δ) : ∃ D : DividedPowerDGA C.grade, D.toGradedDividedPowers = δ ∧ (∀ b : B.Carrier, D.d (p.inclusion.toAlgHom b) = p.inclusion.toAlgHom (d.d b)) ∧ D.d (p.coordinates.symm (0, 1)) = p.inclusion.toAlgHom z ∧ (∀ D' : DividedPowerDGA C.grade, D'.toGradedDividedPowers = δ → (∀ b : B.Carrier, D'.d (p.inclusion.toAlgHom b) = p.inclusion.toAlgHom (d.d b)) → D'.d (p.coordinates.symm (0, 1)) = p.inclusion.toAlgHom z → D' = D) ∧ ∀ (i : ℕ) (b : B.Carrier), b ∈ B.grade i → D.d (p.inclusion.toAlgHom b * p.coordinates.symm (0, 1)) = p.inclusion.toAlgHom (d.d b) * p.coordinates.symm (0, 1) + (-1 : C.Carrier) ^ i * (p.inclusion.toAlgHom b * p.inclusion.toAlgHom z)",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two theorems give the odd and even cases on the recorded single-variable presentations. Each fixes the divided powers and asserts existence, unrestricted uniqueness among extending compatible differentials with the prescribed generator value, and the explicit homogeneous monomial formula. The existing inclusion already preserves grading and divided powers; the extension equation states commutation with differentials."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d8f2ee85",
+  "group": "Q67",
+  "result": "pass",
+  "note": "3-file delivery (node lean field only, AdjoinDGACycle.lean with odd_/even_differential_extension, report). Checked every clause against node and Stacks 09PM: B DP-DGA, e>0 parity split, z∈B_{e-1} cycle, C via recorded Odd/EvenPresentation with δ fixed by Preserves (+EvenNormalized), ∃D with D.toGDP=δ, extends d, D(T)=z, unrestricted uniqueness, morphism via Hom+hδ+extension clause, explicit formulas verified against presentation multiplication (incl b*T=bT, incl b*t_a=bT^[a]) with correct signs. Edge cases e=1,2, z=0, deg b=0, a=1, char 2 fine; independent universes. No duplicate in DAG/Sheaf/Mathlib. lean.statement verbatim; docstrings with source+blueprint+proof; only sorry; report sections present. No findings."
+ }
+}

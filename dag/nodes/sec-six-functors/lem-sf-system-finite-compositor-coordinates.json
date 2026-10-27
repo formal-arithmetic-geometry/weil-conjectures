@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-system-finite-compositor-coordinates",
+ "kind": "statement",
+ "title": "Finite evaluation of the direct-image compositor",
+ "statement": "Fix a prime l, a finite extension E/Q_l, Operations o and Compositors c as in [def-sf-integral-system-operations], and m≥0. For arbitrary composable scheme maps f:X→Y, g:Y→Z, t:X→Z and h:f≫g=t, and every system M on X, the evaluation of c.pushComp(f,g) followed by the h transport and the push(t,M) coordinate equals push(g,push_f M), then the realized direct image of fixedPush(f,M), then the realized canonical fixed-scalar conjugate compositor and its h index transport. All coordinates are those of [def-sf-system-finite-evaluation-coordinates]; this has no open or constructibility assumptions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence: compatibility of individual refinement maps with counits and j_!, before the projection square is deduced. Integral-system realization steps 1 and 3 of lem-sf-integral-projection-refinement-square."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-sf-system-finite-evaluation-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "The direct-evaluation counit equation, after cancelling the inverse-image evaluation isomorphism, identifies each direct evaluation with mateEquiv applied to the inverse pullback-evaluation square (private evaluation_is_mate).",
+   "uses": [
+    "def-sf-integral-system-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Invert systemPullbackCompositorEvaluation as an equality of isomorphisms. Apply mateEquiv to this square equality. Mathlib conjugateEquiv_mateEquiv_vcomp, mateEquiv_conjugateEquiv_vcomp and mateEquiv_hcomp turn it into the intrinsic direct-image compositor square (private intrinsic_compositor).",
+   "uses": [
+    "lem-pur-system-pullback-compositor-evaluation",
+    "def-sf-integral-system-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the intrinsic coefficient compositor normalization to the fixed-scalar presentation of the evaluated input. Naturality of the intrinsic compositor moves the inverse coefficient counit to its source. Paste the coefficient comparison square. Naturality of the next direct-image coefficient comparison and the coefficient-equivalence triangle identity cancel the middle realization; this gives exactly fixedPush in the second slot.",
+   "uses": [
+    "lem-sf-intrinsic-direct-compositor-coordinates",
+    "def-sf-system-finite-evaluation-coordinates",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Substitute t using h. Both equality-index isomorphisms are identities by their definitions, reducing the goal to the preceding compositor equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-operations",
+  "lem-pur-system-pullback-compositor-evaluation",
+  "lem-sf-intrinsic-direct-compositor-coordinates",
+  "def-sf-system-finite-evaluation-coordinates",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence: compatibility of individual refinement maps with counits and j_!, before the projection square is deduced. Integral-system realization steps 1 and 3 of lem-sf-integral-projection-refinement-square. Explicit Lean mate pasting and coefficient-equivalence cancellation by J9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluating right adjoint conjugate compositors commutes with adjunction preserving squares",
+   "results": "CategoryTheory.conjugateEquiv_comp and general adjunction-square lifting results; no coefficient-system geometric comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; abstract mate algebra does not identify the prescribed geometric comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of an adjunction mate commutes with functors preserving the unit and counit",
+   "results": "CategoryTheory.mateEquiv, unit_mateEquiv, mateEquiv_counit, iterated_mateEquiv_conjugateEquiv in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-27",
+   "verdict": "Generic algebra only; the actual normalized derived operation comparisons are project-specific."
+  },
+  {
+   "tool": "grep",
+   "query": "rg conjugate.*comp|mate.*comp in Mathlib/CategoryTheory/Adjunction; rg evaluation, canonicalBridge and pushComp in lean/Sheaf/SixFunctors and lean/WeilConjectures",
+   "results": "Mathlib conjugateEquiv_comp, mateEquiv_conjugateEquiv_vcomp; existing system unit/counit evaluations and semilinear gamma_evaluation. No declaration already compares the recorded fixed-scalar coordinates. Blueprint search for finite evaluation has no matching node.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate; use existing evaluation and geometric model normalization declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemRefinementFiniteCoordinates",
+  "date": "2026-10-27",
+  "group": "V9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"the projection transformation of [def-exchange-projection] is a composite of precisely these tensor and counit maps, hence is equivariant as well\": the Frobenius-transported compactification differs from the chosen one, so the two projection composites must be compared through the refinement comparison. Individual-arrow integral system realization of these tensor and counit maps, before their compactification comparison square is deduced. The one-input support/refinement part of the individual-arrow normalization, independent of tensor and projection. Finite scalar coordinates of the one-input support/refinement argument. Operation-level finite-evaluation factor, before the two factors are pasted.",
+   "via": [
+    "lem-sf-system-refinement-finite-coordinates",
+    "lem-sf-integral-projection-system-coordinates",
+    "lem-sf-integral-projection-refinement-square",
+    "lem-fix-projection-compactification-comparison",
+    "lem-sf-integral-support-reduction-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemFiniteCompositorCoordinates",
+  "file": "lean/Sheaf/Paper/SystemFiniteCompositorCoordinates.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.FiniteCoordinates.compositor",
+  "statement": "theorem compositor (o : Operations l E)\n    (c : Compositors l E o) (m : ℕ)\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (t : X ⟶ Z)\n    (h : f ≫ g = t) (M : System l E X) :\n    let A := ULift.{u + 1} (Padic.coefficientExtensionRing l E (m + 1))\n    let RZ := sfIntrinsicDerivedEquivalence Z (Padic.coefficientExtensionRing l E (m + 1))\n    (coefficientSequenceDerivedEvaluation l E Z m).map\n        ((c.pushComp l E f g).hom.app M ≫\n          (eqToIso (congrArg (Operations.push l E o) h)).hom.app M) ≫\n      (push l E o m t M).hom =\n    (push l E o m g ((Operations.push l E o f).obj M)).hom ≫\n      RZ.functor.map ((ProperOpenPush A g).map (fixedPush l E o m f M).hom) ≫\n      RZ.functor.map\n        ((conjugateIsoEquiv\n          ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g).comp\n            (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f))\n          (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) (f ≫ g))\n          (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) f g)).hom.app\n            (input l E m X M) ≫\n          (indexIso (ProperOpenPush A) h).hom.app (input l E m X M))",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261027T103520-L-1095809",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261027T123500-L-2305425",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

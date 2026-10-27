@@ -1,0 +1,234 @@
+{
+ "id": "lem-trf-complete-valued-sheaf-equivalence-lift",
+ "kind": "statement",
+ "title": "Lifting a set-sheaf equivalence to complete category-valued sheaves",
+ "statement": "Fix a universe $\\mathcal V$ [def-weil-size-convention]. Let $(C,J)$ and $(D,K)$ be $\\mathcal V$-small sites [def-weil-pbc-sites-and-cohomology] with finite limits [def-galois-finite-limits-colimits], whose topologies are subcanonical, meaning that every representable $h_c=\\operatorname{Hom}_C(-,c)$ and $h_d=\\operatorname{Hom}_D(-,d)$ is a sheaf of $\\mathcal V$-sets. Let $u:C\\to D$ preserve finite limits and coverings. Suppose restriction\n$$R_{\\mathrm{set}}:\\operatorname{Sh}(D,K;\\mathrm{Sets}_{\\mathcal V})\\longrightarrow\\operatorname{Sh}(C,J;\\mathrm{Sets}_{\\mathcal V}),\\qquad H\\longmapsto H\\circ u^{\\mathrm{op}}$$\nis an equivalence. Let $\\mathcal A$ be a locally $\\mathcal V$-small category admitting all $\\mathcal V$-small limits: every diagram indexed by a category with objects and arrows in $\\mathcal V$ has a limit in $\\mathcal A$. An $\\mathcal A$-valued presheaf $F$ is a sheaf precisely when $c\\mapsto\\operatorname{Hom}_{\\mathcal A}(a,F(c))$ is a sheaf of sets for every $a\\in\\mathcal A$. Then restriction\n$$R_{\\mathcal A}:\\operatorname{Sh}(D,K;\\mathcal A)\\longrightarrow\\operatorname{Sh}(C,J;\\mathcal A),\\qquad F\\longmapsto F\\circ u^{\\mathrm{op}}$$\nis an equivalence of categories.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00VR (definition-sheaf) and its preceding Hom-test discussion. Agent generalization: equivalence-lifting via the small category-of-elements limit construction; the general equivalence assertion is proved in words in the delivery report, not stated in Tag 00VR."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-galois-finite-limits-colimits"
+ ],
+ "proof": [
+  {
+   "text": "Put $L=u^{\\mathrm{op}}$. For each $d\\in D$, the comma category $(d\\downarrow L)$, with $d$ viewed in $D^{\\mathrm{op}}$, is $I_d=(u\\downarrow d)^{\\mathrm{op}}$: its underlying pairs are $(c,\\alpha:u(c)\\to d)$. Its objects and arrows form $\\mathcal V$-sets, since $C,D$ are $\\mathcal V$-small. The cited pointwise Kan lemma therefore constructs $T_{\\mathcal A}$ and $T_{\\mathrm{set}}$ on presheaves, with $(TF)(d)=\\lim_{I_d}F(c)$ and precomposition adjunction $P\\dashv T$. These are limits over $I_d$, never over a whole sheaf category.",
+   "uses": [
+    "lem-trf-small-pointwise-right-kan-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VR (definition-sheaf), Hom-test; agent argument using pointwise right Kan extension and Yoneda (categories.tex lemma-yoneda)."
+   }
+  },
+  {
+   "text": "First check the set-valued inverse. Choose a quasi-inverse $E$ to the given $R_{\\mathrm{set}}$, with $R_{\\mathrm{set}}EF\\cong F$. For a set sheaf $F$ on $C$, subcanonicity and Yoneda give\n$$ (EF)(d)\\cong\\operatorname{Nat}(h_d,EF)\\cong\\operatorname{Nat}(R_{\\mathrm{set}}h_d,F). $$\nThe second bijection is full faithfulness of the given equivalence followed by $R_{\\mathrm{set}}EF\\cong F$. Write a transformation in the last set as the family $x_{c,\\alpha}\\in F(c)$ obtained by evaluating its $c$-component at $\\alpha:u(c)\\to d$. Naturality is exactly $F(g)x_{c,\\alpha}=x_{c',\\alpha u(g)}$ for $g:c'\\to c$. Thus these transformations are precisely the compatible families defining $\\lim_{I_d}F(c)$, including when $I_d$ is empty. This gives $EF\\cong T_{\\mathrm{set}}F$, naturally in $d$ and $F$: an arrow $d'\\to d$ reindexes $\\alpha$ by composition, and a morphism $F\\to F'$ acts on each $x_{c,\\alpha}$. Hence $T_{\\mathrm{set}}F$ is a sheaf.",
+   "uses": [
+    "lem-galois-yoneda-hom-bijection",
+    "lem-trf-small-pointwise-right-kan-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VR (definition-sheaf), Hom-test; agent argument using pointwise right Kan extension and Yoneda (categories.tex lemma-yoneda)."
+   }
+  },
+  {
+   "text": "Restriction of an $\\mathcal A$-sheaf is an $\\mathcal A$-sheaf: its $H_a$-test is $R_{\\mathrm{set}}(H_aF)$, a sheaf by hypothesis. Conversely, for an $\\mathcal A$-sheaf $F$ on $C$, the Hom/Kan comparison gives $H_a(T_{\\mathcal A}F)\\cong T_{\\mathrm{set}}(H_aF)$ for every $a$. The latter is a sheaf by step 2. The Hom-test in the statement now proves that $T_{\\mathcal A}F$ is a sheaf. Thus both presheaf adjunctions restrict to the full subcategories of sheaves, with exactly the same units and counits.",
+   "uses": [
+    "lem-trf-hom-right-kan-comparison",
+    "lem-trf-small-pointwise-right-kan-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VR (definition-sheaf), Hom-test; agent argument using pointwise right Kan extension and Yoneda (categories.tex lemma-yoneda)."
+   }
+  },
+  {
+   "text": "For sets the restricted adjunction has left adjoint $R_{\\mathrm{set}}$, an equivalence. Its counit $\\epsilon^{\\mathrm{set}}_F:R_{\\mathrm{set}}T_{\\mathrm{set}}F\\to F$ is therefore invertible by the cited adjunction lemma. For an $\\mathcal A$-sheaf $F$, the counit equation of the Hom/Kan comparison identifies $H_a(\\epsilon^{\\mathcal A}_{F,c})$ with $\\epsilon^{\\mathrm{set}}_{H_aF,c}\\circ\\chi_{F,u(c)}$. Both factors are bijections. The cited Hom-detection criterion, applied in $\\mathcal A$ for all $a$, shows that every component $\\epsilon^{\\mathcal A}_{F,c}$ is invertible. Component inverses form a natural inverse, so $\\epsilon^{\\mathcal A}_F$ is invertible.",
+   "uses": [
+    "lem-coef-adjunction-equivalence-counit-iso",
+    "lem-trf-hom-right-kan-comparison",
+    "lem-coef-joyal-homset-iso-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VR (definition-sheaf), Hom-test; agent argument using pointwise right Kan extension and Yoneda (categories.tex lemma-yoneda)."
+   }
+  },
+  {
+   "text": "Restriction $R_{\\mathcal A}$ reflects isomorphisms. Indeed, if $R_{\\mathcal A}(v)$ is invertible then for every $a$, $R_{\\mathrm{set}}(H_a(v))=H_a(R_{\\mathcal A}(v))$ is invertible. An equivalence reflects isomorphisms: full faithfulness lifts the inverse and faithfulness verifies its two inverse identities. Thus $H_a(v)$ is invertible for all $a$. Applying Hom-detection at each object of $D$ shows that $v$ is invertible.",
+   "uses": [
+    "lem-coef-joyal-homset-iso-detection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VR (definition-sheaf), Hom-test; agent argument using pointwise right Kan extension and Yoneda (categories.tex lemma-yoneda)."
+   }
+  },
+  {
+   "text": "For a sheaf $G$ on $D$, the triangle identity is $\\epsilon^{\\mathcal A}_{R_{\\mathcal A}G}\\circ R_{\\mathcal A}(\\eta^{\\mathcal A}_G)=1_{R_{\\mathcal A}G}$. The counit is invertible by step 4, hence $R_{\\mathcal A}(\\eta^{\\mathcal A}_G)$ is its inverse. Step 5 implies that $\\eta^{\\mathcal A}_G$ is invertible. The natural isomorphisms $\\eta^{\\mathcal A}:1\\cong T_{\\mathcal A}R_{\\mathcal A}$ and $\\epsilon^{\\mathcal A}:R_{\\mathcal A}T_{\\mathcal A}\\cong1$ exhibit $T_{\\mathcal A}$ as a quasi-inverse of the actual restriction functor in the statement.",
+   "uses": [
+    "lem-trf-small-pointwise-right-kan-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VR (definition-sheaf), Hom-test; agent argument using pointwise right Kan extension and Yoneda (categories.tex lemma-yoneda)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-small-pointwise-right-kan-adjunction",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-trf-hom-right-kan-comparison",
+  "lem-coef-adjunction-equivalence-counit-iso",
+  "lem-coef-joyal-homset-iso-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00VR (definition-sheaf); original small pointwise right Kan assembly using Mathlib and Yoneda. The full equivalence theorem is not attributed to 00VR."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite limit preserving continuous functor between subcanonical small sites inducing an equivalence of set sheaves induces an equivalence of sheaves valued in any complete locally small category",
+   "results": "8 hits; CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Functor.IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous, CategoryTheory.Equivalence.sheafCongr_functor, CategoryTheory.Equivalence.sheafCongrPrecoherent, CategoryTheory.Equivalence.sheafCongr.functor_obj_val_obj. Read Sites/Equivalence.lean:109-143 and DenseSubsite/SheafEquiv.lean:37-40,107-108: these require an equivalence of underlying categories or a dense-subsite hypothesis, not merely an equivalence of set-sheaf categories. Coherent comparison results have additional coherence hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous functor of sites whose pushforward on sheaves of sets is an equivalence induces an equivalence on sheaves valued in any complete category",
+   "results": "8 hits; CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Functor.IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous, CategoryTheory.Equivalence.hasSheafCompose, CategoryTheory.Equivalence.sheafCongr_functor, CategoryTheory.Equivalence.sheafCongr.functor_obj_val_obj, CategoryTheory.Equivalence.precoherent_isSheaf_iff, CategoryTheory.Equivalence.sheafCongrPrecoherent. Read Sites/Equivalence.lean:109-143 and DenseSubsite/SheafEquiv.lean:37-40,107-108: these require an equivalence of underlying categories or a dense-subsite hypothesis, not merely an equivalence of set-sheaf categories. Coherent comparison results have additional coherence hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction between subcanonical sites is an equivalence for complete category valued sheaves if it is an equivalence for set valued sheaves",
+   "results": "8 hits; CategoryTheory.Equivalence.sheafCongr.functor_obj_val_obj, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor, CategoryTheory.Equivalence.sheafCongr_functor, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Functor.IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous, CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense, CategoryTheory.Equivalence.sheafCongr.functor. Read Sites/Equivalence.lean:109-143 and DenseSubsite/SheafEquiv.lean:37-40,107-108: these require an equivalence of underlying categories or a dense-subsite hypothesis, not merely an equivalence of set-sheaf categories. Coherent comparison results have additional coherence hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPushforwardContinuous\", \"IsEquivalence\"",
+   "results": "3 hits; CategoryTheory.Functor.IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous, AlgebraicGeometry.Scheme.instIsEquivalenceSheafEtaleSmallEtaleTopologyAffineEtaleTopologySheafPushforwardContinuousSpec, AlgebraicGeometry.Scheme.instIsEquivalenceSheafEtaleSmallEtaleTopologyAffineEtaleTopologySheafPushforwardContinuousSpec_1. Read Sites/Equivalence.lean:109-143 and DenseSubsite/SheafEquiv.lean:37-40,107-108: these require an equivalence of underlying categories or a dense-subsite hypothesis, not merely an equivalence of set-sheaf categories. Coherent comparison results have additional coherence hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]quivalence.*[Tt]ype|[Tt]ype.*[Ee]quivalence|[Ee]quivalence.*[Cc]omplete|[Cc]omplete.*[Ee]quivalence",
+   "results": "11 hits; Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean, Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean, Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean, Mathlib/CategoryTheory/Sites/Types.lean, Mathlib/CategoryTheory/Sites/Types.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean. Read Sites/Equivalence.lean:109-143 and DenseSubsite/SheafEquiv.lean:37-40,107-108: these require an equivalence of underlying categories or a dense-subsite hypothesis, not merely an equivalence of set-sheaf categories. Coherent comparison results have additional coherence hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafInducedTopologyEquivOfIsCoverDense|sheafPushforwardContinuous.*[Ii]sEquivalence|sheafCongr|isSheaf_iff_isSheaf_comp",
+   "results": "14 hits; Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean, Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean, Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean, Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean, Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean, Mathlib/CategoryTheory/Sites/Equivalence.lean, Mathlib/CategoryTheory/Sites/Equivalence.lean, Mathlib/CategoryTheory/Sites/Equivalence.lean. Read Sites/Equivalence.lean:109-143 and DenseSubsite/SheafEquiv.lean:37-40,107-108: these require an equivalence of underlying categories or a dense-subsite hypothesis, not merely an equivalence of set-sheaf categories. Coherent comparison results have additional coherence hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPushforwardContinuous\", \"IsEquivalence\"",
+   "results": {
+    "hits": 3,
+    "top": [
+     "CategoryTheory.Functor.IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous",
+     "AlgebraicGeometry.Scheme.instIsEquivalenceSheafEtaleSmallEtaleTopologyAffineEtaleTopologySheafPushforwardContinuousSpec",
+     "AlgebraicGeometry.Scheme.instIsEquivalenceSheafEtaleSmallEtaleTopologyAffineEtaleTopologySheafPushforwardContinuousSpec_1"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Equivalence.sheafCongr requires an equivalence C ≌ D and DenseSubsite.sheafEquiv requires IsDenseSubsite; neither follows in one line from the given set-sheaf equivalence. Read Equivalence.lean:95-143 and DenseSubsite/SheafEquiv.lean:31-40,107-108."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafCongr|IsEquivalence.*sheafPushforward|sheafPushforward.*IsEquivalence",
+   "results": {
+    "hits": 17,
+    "top": [
+     "Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean",
+     "Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean",
+     "Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean",
+     "Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean",
+     "Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean",
+     "Mathlib/CategoryTheory/Sites/Equivalence.lean",
+     "Mathlib/CategoryTheory/Sites/Equivalence.lean",
+     "Mathlib/CategoryTheory/Sites/Equivalence.lean"
+    ],
+    "note": "",
+    "subdirectory": "CategoryTheory/Sites"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Equivalence.sheafCongr requires an equivalence C ≌ D and DenseSubsite.sheafEquiv requires IsDenseSubsite; neither follows in one line from the given set-sheaf equivalence. Read Equivalence.lean:95-143 and DenseSubsite/SheafEquiv.lean:31-40,107-108."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-proetale-lower-star-universal-homeomorphism-equivalence",
+  "date": "2026-10-23",
+  "group": "Q69"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-topology",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "i-topology / sk-i-topology, proof first paragraph: 'the two categories of étale sheaves are equivalent'; coefficient-valued passage needed for its pro-etale realization. ancestor command returns None because the audit-created item has created.item=null; existing item blueprint.from records i-topology.",
+   "via": [
+    "lem-trf-proetale-lower-star-universal-homeomorphism-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-complete-valued-sheaf-equivalence-lift",
+  "worker": "stage1",
+  "summary": "Constructed the inverse by small pointwise right Kan limits; proved its set-valued sheaf property by subcanonicity, full faithfulness of restriction and Yoneda, then used representable Hom, the actual counit equation, and Hom-detection. Two new Mathlib leaves; all geometric statements and hypotheses retained.",
+  "blueprint": "Current latest i-topology.proof.md first paragraph, the equivalence on sheaves before deriving. The ancestor command returns None through the audit-created parent; retained the existing blueprint.from.node=null and recorded the intended i-topology place in each new node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-cb9501c90",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-cb9501c90 (reviewer sub-agent of L); spot-checked: I read the item, both new Mathlib leaves and every cited statement in full. The item statement is unchanged from base; live and side-live still show it unsplit with the identical statement; there is no repair note and no SGA anywhere. Source: Stacks sites.tex:1022-1057 (00VR definition-sheaf, Hom-test). Step 1: (d↓u^op) = (u↓d)^op is V-small; the pointwise leaf gives T, the limit formula and P⊣T. Step 2: EF(d) ≅ Nat(h_d,EF) by Yoneda (lem-galois-yoneda-hom-bijection), then ≅ Nat(h_d∘u^op,F) by subcanonicity and full faithfulness; I checked by hand that a transformation is a compatible family x_{c,α} with F(g)x_{c,α} = x_{c',αu(g)}, which is exactly lim_{I_d}F, including when I_d is empty. Step 3: Hom-test via χ: H_a T_A F ≅ T_set(H_a F). Step 4: counit-iso lemma applied to the correct adjunction (left adjoint R_set is the equivalence), then the counit equation and Joyal Hom-detection. Step 5: reflection of isos is written out. Step 6: triangle identity. All Mathlib lines checked: Adjunction.lean 295-370 (ran, ranObjObjIsoLimit(_hom_π), ranAdjunction, counit/unit), Pointwise.lean 56-61 and 766, Preserves.lean 405-430 (hom_fac_app is exactly the stated counit equation), 452-467, 534-549, Limits/Yoneda.lean 181. Duplicate search over the DAG (right Kan, ran/lan declarations, Hom preserving limits) found nothing: sfb-right-kan-extension-unique-iso, sfb-pointwise-kan-colimit, pur coherent-shift and the coef quasicategory Kan nodes are all different. Neither new node restates the item. Small cases tested: L = id, A = Sets, empty comma category, terminal A. Inherited blueprint.from.node = null comes from the audit-created base item."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.CompleteValuedSheafEquivalenceLift",
+  "declaration": "CategoryTheory.Functor.isEquivalence_sheafPushforwardContinuous_of_types",
+  "file": "lean/Sheaf/CategoryTheory/Sites/CompleteValuedSheafEquivalenceLift.lean",
+  "statement": "theorem isEquivalence_sheafPushforwardContinuous_of_types {C D : Type v} [SmallCategory C] [SmallCategory D] [HasFiniteLimits C] [HasFiniteLimits D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) [J.Subcanonical] [K.Subcanonical] (U : C ⥤ D) [PreservesFiniteLimits U] (hU : CoverPreserving J K U) (A : Type w) [Category.{v} A] [HasLimitsOfSize.{v, v} A] (hset : (@Functor.sheafPushforwardContinuous C _ D _ U (Type v) _ J K ((@Functor.isContinuous_iff_coverPreserving C _ D _ U J K (flat_of_preservesFiniteLimits U)).mpr hU)).IsEquivalence) : (@Functor.sheafPushforwardContinuous C _ D _ U A _ J K ((@Functor.isContinuous_iff_coverPreserving C _ D _ U J K (flat_of_preservesFiniteLimits U)).mpr hU)).IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68fab6db7",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Theorem isEquivalence_sheafPushforwardContinuous_of_types matches the node clause by clause: v-small sites C, D (Type v, SmallCategory) with HasFiniteLimits, J/K.Subcanonical, U with PreservesFiniteLimits and CoverPreserving J K U; the continuity instance is derived via isContinuous_iff_coverPreserving and flat_of_preservesFiniteLimits, not assumed; A : Type w with Category.{v} and HasLimitsOfSize.{v,v}; hypothesis hset and the conclusion are IsEquivalence of the actual sheafPushforwardContinuous (precomposition with U.op) for Type v and for A. Presheaf.IsSheaf is the 00VR Hom-test. The Grothendieck-topology encoding generalizes the 00VH covering sites with no extra hypothesis, per the def-weil-pbc-sites-and-cohomology record note. Only the lean field differs from side-live; lean.statement is verbatim in the file; the 3 stmt_deps are definitions/conventions, all used; proof is sorry; docstrings carry the source place, blueprint tag and all 6 steps; no duplicate in Mathlib (sheafCongr and IsDenseSubsite need stronger input) or in side-live lean/Sheaf; no conflicting landing. The second-reading section was written by the same worker, as the report says. Not recompiled: no file changed."
+ }
+}

@@ -195,7 +195,18 @@
   "date": "2026-10-16",
   "existing": false
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_proof": {
   "date": "2026-10-18",
   "by": "L",
@@ -205,5 +216,27 @@
   "landing": "20261018T135942-L-2973125",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal C$ be an abelian category with K-injective resolutions, and let $I$ be a set\nsuch that $I$-indexed products exist in $\\mathcal C$ and are exact. By [det-pe-products-exact]\nthis holds for $\\mathcal C$ the abelian sheaves on $X_{\\mathrm{proét}}$ and any set $I$, and for\n$\\mathcal C$ the sheaves of $\\Lambda$-modules ($\\Lambda$ a ring) and $I$ countable. Let\n$(K_i)_{i\\in I}$ be a family of complexes in $\\mathcal C$.\n\n1. If $K_i\\to K'_i$ are quasi-isomorphisms, so is $\\prod_iK_i\\to\\prod_iK'_i$, and\n   $H^p(\\prod_iK_i)\\cong\\prod_iH^p(K_i)$ for every $p$.\n2. The termwise product complex $\\prod_iK_i$, with the projections induced by the termwise\n   projections, is a product of the $K_i$ in $D(\\mathcal C)$.",
+  "proof": [
+   {
+    "text": "*1.* $H^p(K)=\\ker(d^p)/\\operatorname{im}(d^{p-1})$ is built from kernels and cokernels.\nProducts always commute with kernels, and they commute with cokernels and images because they\nare exact. Hence $H^p(\\prod_iK_i)=\\prod_iH^p(K_i)$, naturally in the family. In particular a\nproduct of quasi-isomorphisms is a quasi-isomorphism.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*2.* Choose K-injective resolutions $K_i\\to I_i$. The termwise product $\\prod_iI_i$ is\nK-injective: for an acyclic complex $C$, $\\Hom_{K}(C,\\prod_iI_i)=\\prod_i\\Hom_K(C,I_i)=0$, as\nproducts in the homotopy category are termwise. For any complex $C$, using that maps into\nK-injective complexes in $D$ are computed in the homotopy category,\n\n$$\n\\Hom_D\\Bigl(C,\\prod_iI_i\\Bigr)=\\Hom_K\\Bigl(C,\\prod_iI_i\\Bigr)=\\prod_i\\Hom_K(C,I_i)\n=\\prod_i\\Hom_D(C,I_i)=\\prod_i\\Hom_D(C,K_i),\n$$\n\nso $\\prod_iI_i$ is a product of the $K_i$ in $D$. By 1, $\\prod_iK_i\\to\\prod_iI_i$ is a\nquasi-isomorphism, so the termwise product $\\prod_iK_i$ is also a product of the $K_i$ in\n$D$, with the projections induced by the termwise projections.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,318 @@
+{
+ "id": "lem-sfb-associative-jacobson-identities",
+ "kind": "statement",
+ "title": "Jacobson identities in an associative algebra of prime characteristic",
+ "statement": "Let $F$ be a field of prime characteristic $p>0$ [def-weil-field], and let $A$ be an associative unital $F$-algebra, with no commutativity or finite-dimensionality assumption. Put $[a,b]=ab-ba$ and let $\\operatorname{ad}(a):A\\to A$ be the $F$-linear map $b\\mapsto[a,b]$. For $1\\le i<p$, define $s_i(a,b)\\in A$ by declaring $i s_i(a,b)$ to be the coefficient of $t^{i-1}$ in $\\operatorname{ad}(ta+b)^{p-1}(a)$ in $A[t]$, where $t$ is central. Then $\\operatorname{ad}(a)^p=\\operatorname{ad}(a^p)$ as endomorphisms of $A$, and $(a+b)^p=a^p+b^p+\\sum_{i=1}^{p-1}s_i(a,b)$ for all $a,b\\in A$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 10k, Proposition 10.38(a),(b), printed pp.205–206. The coefficient form of s_i is the expansion of the iterated-adjoint word definition just before the proposition."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "All integers in coefficients act through $F$. By [def-weil-field], every integer $k$ with $1\\leq k<p$ is invertible in $F$: its image is nonzero because the characteristic is $p$. Direct cancellation in the defining integer factorial formulas gives $$k\\binom pk=p\\binom{p-1}{k-1},\\qquad k\\binom{p-1}{k}=(p-k)\\binom{p-1}{k-1}.$$ Thus $\\binom pk=0$ in $F$ for $0<k<p$. The second identity gives $\\binom{p-1}{k}=-\\binom{p-1}{k-1}$ in $F$, so induction from $\\binom{p-1}0=1$ gives $\\binom{p-1}{k}=(-1)^k$ for $0\\leq k\\leq p-1$. Also $(-1)^p=-1$ in $F$: for odd $p$ this is the usual parity identity, while for $p=2$ one has $-1=1$. These scalar equalities remain true when acting on any $F$-algebra, including the zero algebra.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Scalar binomial coefficients; elementary factorial calculations supplying the binomial congruences used on printed p.205"
+   }
+  },
+  {
+   "text": "For any associative unital $F$-algebra $B$ and $z\\in B$, let $L_z(c)=zc$ and $R_z(c)=cz$. These are $F$-linear, and associativity gives $L_zR_z(c)=z(cz)=(zc)z=R_zL_z(c)$. Their powers satisfy $L_z^m(c)=z^mc$ and $R_z^m(c)=cz^m$, by induction from $m=0$. Apply [lem-sfb-commuting-binomial-expansion] in the associative ring $\\operatorname{End}_F(B)$ to $L_z$ and $-R_z$; they commute by the preceding equality. Evaluate at $c$ and reindex using $\\binom nj=\\binom n{n-j}$ (the factorial formula) to obtain, for every $n\\geq0$, $$\\operatorname{ad}(z)^n(c)=\\sum_{j=0}^{n}(-1)^j\\binom nj z^{n-j}cz^j.$$ No two arbitrary elements of $B$ have been assumed to commute.",
+   "uses": [
+    "lem-sfb-commuting-binomial-expansion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.38(a), printed p.205: commuting multiplication operators; full iterated-commutator expansion written out"
+   }
+  },
+  {
+   "text": "Apply the preceding expansion with $B=A$, $z=a$, $n=p$. All interior terms vanish by step 1. The two endpoint terms are $a^pc+(-1)^pca^p=a^pc-ca^p$. Consequently $\\operatorname{ad}(a)^p(c)=\\operatorname{ad}(a^p)(c)$ for every $c\\in A$. Equality on every input is equality of the $F$-linear endomorphisms, proving the first clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.38(a), printed p.205, the two surviving endpoint terms"
+   }
+  },
+  {
+   "text": "Work now with finite polynomials $B=A[t]$, where $t$ commutes with every coefficient, and put $z=ta+b$. This is still an associative $F$-algebra. With $n=p-1$ and $c=a$, steps 1–2 give $$\\operatorname{ad}(z)^{p-1}(a)=\\sum_{j=0}^{p-1}z^{p-1-j}az^j,$$ since $(-1)^j\\binom{p-1}{j}=1$ in $F$. In particular no commutativity of $a$ and $b$ is used. This is the insertion sum that replaces the permutation counting in the proof of Proposition 10.38(b).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.38(b), printed pp.205–206; agent-supplied insertion-sum form of the same iterated-adjoint calculation"
+   }
+  },
+  {
+   "text": "Define $D(\\sum_m c_mt^m)=\\sum_{m\\geq1}mc_mt^{m-1}$. It obeys $D(UV)=D(U)V+UD(V)$: for coefficients $u_r,v_s$, the coefficient of $t^q$ on the right is $\\sum_{r+s=q+1}(r+s)u_rv_s$, precisely that on the left. The order $u_rv_s$ is unchanged. Since $Dz=a$, induction yields $$D(z^n)=\\sum_{j=0}^{n-1}z^{n-1-j}az^j\\quad(n\\geq1).$$ The base $n=1$ is $Dz=a$. For the step differentiate $z^{n+1}=z^nz$: multiply the insertion sum for $n$ on the right by $z$, then add $z^na$, giving exactly the $n+1$ insertion positions. Combining with step 4 gives $D(z^p)=\\operatorname{ad}(z)^{p-1}(a)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.38(b), printed pp.205–206; agent-supplied finite polynomial coefficient proof of the product rule and insertion formula"
+   }
+  },
+  {
+   "text": "Set $Q(t)=(ta+b)^p-t^pa^p-b^p$. Expanding its finite product by distributivity shows that its constant coefficient is $b^p-b^p=0$ and its degree-$p$ coefficient is $a^p-a^p=0$, and that it has no terms of degree greater than $p$. Hence $Q(t)=\\sum_{i=1}^{p-1}q_it^i$. Since $p=0$ in $F$, step 5 gives $$\\sum_{i=1}^{p-1}i q_i t^{i-1}=DQ(t)=\\operatorname{ad}(ta+b)^{p-1}(a).$$ By the coefficient definition in the item, the coefficient on the right at $t^{i-1}$ is $i s_i(a,b)$. Coefficient equality and the invertibility of $i\\in F$ from step 1 give $q_i=s_i(a,b)$. Finally evaluation at the central scalar $t=1$ is multiplicative by the finite Cauchy product formula, so $Q(1)=\\sum_i s_i(a,b)$ is exactly $(a+b)^p-a^p-b^p$. This proves the second clause by formal coefficient equality, without inferring polynomial equality from values in $F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.38(b), printed pp.205–206; agent-supplied coefficient argument for the exact coefficient normalization of the item"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-field",
+  "lem-sfb-commuting-binomial-expansion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 10k, Proposition 10.38, printed pp.205–206. Part (a) follows the source. For (b), Q17 supplies a finite-polynomial derivative/coefficient version of its iterated-adjoint expansion, retaining the coefficient definition in the item rather than relying on the source’s word-index normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An associative algebra in prime characteristic p with commutator bracket and pth power is a restricted Lie algebra with Jacobson sum formula",
+   "results": "{\"t\": \"2026-10-23T23:30:11Z\", \"tool\": \"leanfinder\", \"query\": \"An associative algebra in prime characteristic p with commutator bracket and pth power is a restricted Lie algebra with Jacobson sum formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.ofAssociativeAlgebra\", \"JacobsonNoether.exist_pow_eq_zero_of_le\", \"LieAlgebra.RestrictScalars.instLieRingRestrictScalars\", \"LieRing.ofAssociativeRing\", \"LieAlgebra\", \"LieAlgebra.RestrictScalars.lieAlgebra\", \"LieAdmissibleAlgebra.instLieAlgebra\", \"LieAdmissibleRing.instLieRing\"], \"digest\": \"8e3c35b970fa7d11\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieAlgebra.ofAssociativeAlgebra supplies only the commutator Lie algebra; ad_pow_lie is the iterated Leibniz formula for a bracket, not ad(a^p)=ad(a)^p; CharP sum formulas require commuting arguments and omit the Jacobson correction polynomials."
+  },
+  {
+   "tool": "grep",
+   "query": "jacobson|Jacobson|restrictedLie|restricted Lie|add_pow.*lie|lie.*add_pow|ad_pow",
+   "results": "{\"t\": \"2026-10-23T23:31:23Z\", \"tool\": \"grep\", \"query\": \"jacobson|Jacobson|restrictedLie|restricted Lie|add_pow.*lie|lie.*add_pow|ad_pow\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/OfAssociative.lean\", \"Mathlib/Algebra/Lie/OfAssociative.lean\", \"Mathlib/Algebra/Lie/EngelSubalgebra.lean\", \"Mathlib/Algebra/Lie/EngelSubalgebra.lean\", \"Mathlib/Algebra/Lie/EngelSubalgebra.lean\"], \"digest\": \"6424a730d60d2285\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieAlgebra.ofAssociativeAlgebra supplies only the commutator Lie algebra; ad_pow_lie is the iterated Leibniz formula for a bracket, not ad(a^p)=ad(a)^p; CharP sum formulas require commuting arguments and omit the Jacobson correction polynomials."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Jacobson identities for pth powers and commutators in associative algebras in prime characteristic",
+   "results": "{\"t\": \"2026-10-23T23:31:23Z\", \"tool\": \"leansearch\", \"query\": \"Jacobson identities for pth powers and commutators in associative algebras in prime characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"sub_pow_char_of_commute\", \"sub_pow_eq_mul_pow_sub_pow_div_char_of_commute\", \"sub_pow_char_pow_of_commute\", \"add_pow_char_of_commute\", \"add_pow_expChar_pow_of_commute\", \"add_pow_char_pow_of_commute\", \"sub_pow_expChar_pow_of_commute\", \"FreeLieAlgebra.Rel.leibniz_lie\"], \"digest\": \"7a075d3fbc529561\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieAlgebra.ofAssociativeAlgebra supplies only the commutator Lie algebra; ad_pow_lie is the iterated Leibniz formula for a bracket, not ad(a^p)=ad(a)^p; CharP sum formulas require commuting arguments and omit the Jacobson correction polynomials."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.ad, \"pow\"",
+   "results": "{\"t\": \"2026-10-23T23:31:23Z\", \"tool\": \"loogle\", \"query\": \"LieAlgebra.ad, \\\"pow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"LieModule.toEnd_pow_lie\", \"LieAlgebra.ad_pow_lie\", \"LieSubalgebra.coe_ad_pow\", \"JacobsonNoether.exist_pow_eq_zero_of_le\"], \"digest\": \"e02bb8b75be97a7a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieAlgebra.ofAssociativeAlgebra supplies only the commutator Lie algebra; ad_pow_lie is the iterated Leibniz formula for a bracket, not ad(a^p)=ad(a)^p; CharP sum formulas require commuting arguments and omit the Jacobson correction polynomials."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a noncommutative algebra of characteristic p the pth power of a sum equals the sum of pth powers plus Jacobson iterated commutator polynomials",
+   "results": "{\"t\": \"2026-10-23T23:31:24Z\", \"tool\": \"leanfinder\", \"query\": \"In a noncommutative algebra of characteristic p the pth power of a sum equals the sum of pth powers plus Jacobson iterated commutator polynomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"sum_pow_char_pow\", \"add_pow_char_pow\", \"add_pow_char_pow_of_commute\", \"add_pow_expChar_pow_of_commute\", \"add_pow_char_of_commute\", \"sum_pow_char\", \"add_pow_expChar_pow\", \"Commute.exists_add_pow_prime_pow_eq\"], \"digest\": \"47eb8a8538ee3c97\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieAlgebra.ofAssociativeAlgebra supplies only the commutator Lie algebra; ad_pow_lie is the iterated Leibniz formula for a bracket, not ad(a^p)=ad(a)^p; CharP sum formulas require commuting arguments and omit the Jacobson correction polynomials."
+  },
+  {
+   "tool": "grep",
+   "query": "Jacobson.*formula|jacobson.*formula|restricted Lie|restrictedLie|p-Lie|jacobson.*[Aa]dd|[Aa]dd.*jacobson",
+   "results": "{\"t\": \"2026-10-23T23:35:07Z\", \"tool\": \"grep\", \"query\": \"Jacobson.*formula|jacobson.*formula|restricted Lie|restrictedLie|p-Lie|jacobson.*[Aa]dd|[Aa]dd.*jacobson\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Jacobson/Ideal.lean\", \"Mathlib/RingTheory/Jacobson/Ideal.lean\", \"Mathlib/RingTheory/Jacobson/Ring.lean\", \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"Mathlib/RingTheory/Nakayama.lean\"], \"digest\": \"7bc5864bbfae5871\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieAlgebra.ofAssociativeAlgebra supplies only the commutator Lie algebra; ad_pow_lie is the iterated Leibniz formula for a bracket, not ad(a^p)=ad(a)^p; CharP sum formulas require commuting arguments and omit the Jacobson correction polynomials."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictedLie|restricted Lie|Jacobson.*formula|ad_pow",
+   "results": "{\"t\": \"2026-10-23T23:57:21Z\", \"tool\": \"grep\", \"query\": \"restrictedLie|restricted Lie|Jacobson.*formula|ad_pow\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/OfAssociative.lean\", \"Mathlib/Algebra/Lie/OfAssociative.lean\", \"Mathlib/Algebra/Lie/EngelSubalgebra.lean\", \"Mathlib/Algebra/Lie/EngelSubalgebra.lean\", \"Mathlib/Algebra/Lie/EngelSubalgebra.lean\"], \"digest\": \"6424a730d60d2285\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: LieAlgebra.ad_pow_lie is iterated Leibniz on a bracket, JacobsonNoether has division-ring and algebraicity hypotheses, and characteristic-p power formulas found here require commuting inputs. None gives both stated identities for arbitrary associative algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem (add_pow|sub_pow)",
+   "results": "{\"t\": \"2026-10-23T23:57:21Z\", \"tool\": \"grep\", \"query\": \"theorem (add_pow|sub_pow)\", \"sub\": \"Algebra/GroupPower\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: LieAlgebra.ad_pow_lie is iterated Leibniz on a bracket, JacobsonNoether has division-ring and algebraicity hypotheses, and characteristic-p power formulas found here require commuting inputs. None gives both stated identities for arbitrary associative algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "choose.*(char|neg_one)|cast_choose|choose.*cast",
+   "results": "{\"t\": \"2026-10-23T23:57:21Z\", \"tool\": \"grep\", \"query\": \"choose.*(char|neg_one)|cast_choose|choose.*cast\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Finite/GaloisField.lean\", \"Mathlib/FieldTheory/Finite/GaloisField.lean\", \"Mathlib/FieldTheory/Finite/Basic.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Exponent.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Exponent.lean\", \"Mathlib/NumberTheory/Bernoulli.lean\", \"Mathlib/NumberTheory/Bernoulli.lean\", \"Mathlib/NumberTheory/Bernoulli.lean\"], \"digest\": \"c4f35953d2b1b0d6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: these results concern scalar binomial coefficients or commuting elements, not the noncommutative Jacobson sum formula. Scalar recurrences used in the proof are written out from integer factorial identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Jacobson noncommutative pth power of a sum using iterated adjoint coefficients",
+   "results": "{\"t\": \"2026-10-23T23:57:22Z\", \"tool\": \"leansearch\", \"query\": \"Jacobson noncommutative pth power of a sum using iterated adjoint coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Commute.exists_add_pow_prime_pow_eq\", \"Commute.add_pow_prime_eq\", \"Commute.add_pow_prime_pow_eq\", \"add_pow_char_of_commute\", \"LieAlgebra.ad_pow_lie\", \"Commute.add_pow_prime_pow_eq'\", \"add_pow_expChar_pow_of_commute\", \"sum_pow_char_pow\"], \"digest\": \"690a146fa91478a5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: LieAlgebra.ad_pow_lie is iterated Leibniz on a bracket, JacobsonNoether has division-ring and algebraicity hypotheses, and characteristic-p power formulas found here require commuting inputs. None gives both stated identities for arbitrary associative algebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "Commute.add_pow",
+   "results": "{\"t\": \"2026-10-23T23:57:22Z\", \"tool\": \"loogle\", \"query\": \"Commute.add_pow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Commute.add_pow\"], \"digest\": \"2b9560c832a63c83\"}",
+   "date": "2026-10-24",
+   "verdict": "match for a prerequisite only: match: Commute.add_pow, Mathlib/Data/Nat/Choose/Sum.lean:34; read lines 28–36. Its Semiring R hypothesis specializes to Ring R in one line; Commute x y is exactly xy=yx. The natural-number cast is multiplication by the central integer coefficient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"choose\", \"neg_one\"",
+   "results": "{\"t\": \"2026-10-23T23:57:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"choose\\\", \\\"neg_one\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: these results concern scalar binomial coefficients or commuting elements, not the noncommutative Jacobson sum formula. Scalar recurrences used in the proof are written out from integer factorial identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.ad, \"pow\"",
+   "results": "{\"t\": \"2026-10-23T23:57:22Z\", \"tool\": \"loogle\", \"query\": \"LieAlgebra.ad, \\\"pow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"LieModule.toEnd_pow_lie\", \"LieAlgebra.ad_pow_lie\", \"LieSubalgebra.coe_ad_pow\", \"JacobsonNoether.exist_pow_eq_zero_of_le\"], \"digest\": \"e02bb8b75be97a7a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: LieAlgebra.ad_pow_lie is iterated Leibniz on a bracket, JacobsonNoether has division-ring and algebraicity hypotheses, and characteristic-p power formulas found here require commuting inputs. None gives both stated identities for arbitrary associative algebras."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Commuting elements binomial expansion of a difference in a noncommutative ring",
+   "results": "{\"t\": \"2026-10-23T23:57:22Z\", \"tool\": \"leansearch\", \"query\": \"Commuting elements binomial expansion of a difference in a noncommutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Commute.sub_left\", \"sub_pow_expChar_of_commute\", \"Commute.sub_right\", \"Commute.add_pow\", \"Commute.mul_self_sub_mul_self_eq\", \"Polynomial.one_add_X_pow_sub_X_pow\", \"sub_pow\", \"Commute.mul_self_sub_mul_self_eq'\"], \"digest\": \"411896557a49c1b7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: LieAlgebra.ad_pow_lie is iterated Leibniz on a bracket, JacobsonNoether has division-ring and algebraicity hypotheses, and characteristic-p power formulas found here require commuting inputs. None gives both stated identities for arbitrary associative algebras."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prime characteristic binomial p minus one choose k equals negative one power k",
+   "results": "{\"t\": \"2026-10-23T23:57:22Z\", \"tool\": \"leansearch\", \"query\": \"Prime characteristic binomial p minus one choose k equals negative one power k\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.choose_neg'\", \"Ring.choose_neg\", \"neg_one_pow_char\", \"Nat.Prime.dvd_choose_pow_iff\", \"Nat.Prime.dvd_choose_pow\", \"add_pow_eq_mul_pow_add_pow_div_char\", \"neg_one_pow_char_pow\", \"Nat.Prime.dvd_choose_self\"], \"digest\": \"c46ef6edcc871aee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: these results concern scalar binomial coefficients or commuting elements, not the noncommutative Jacobson sum formula. Scalar recurrences used in the proof are written out from integer factorial identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Binomial theorem for two commuting elements of a noncommutative ring, powers of sums and differences",
+   "results": "{\"t\": \"2026-10-23T23:57:22Z\", \"tool\": \"leanfinder\", \"query\": \"Binomial theorem for two commuting elements of a noncommutative ring, powers of sums and differences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Commute.add_pow\", \"Commute.add_pow'\", \"Commute.mul_geom_sum₂\", \"Commute.geom_sum₂_mul\", \"Commute.mul_neg_geom_sum₂\", \"Commute.geom_sum₂_mul_add\", \"Commute.geom_sum₂_succ_eq\", \"Commute.mul_geom_sum₂_Ico\"], \"digest\": \"afaecd05ae11e634\"}",
+   "date": "2026-10-24",
+   "verdict": "match for a prerequisite only: match: Commute.add_pow, Mathlib/Data/Nat/Choose/Sum.lean:34; read lines 28–36. Its Semiring R hypothesis specializes to Ring R in one line; Commute x y is exactly xy=yx. The natural-number cast is multiplication by the central integer coefficient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jacobson identities for noncommutative associative algebras in prime characteristic: adjoint pth power and the Jacobson formula for a sum",
+   "results": "{\"t\": \"2026-10-23T23:57:23Z\", \"tool\": \"leanfinder\", \"query\": \"Jacobson identities for noncommutative associative algebras in prime characteristic: adjoint pth power and the Jacobson formula for a sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"JacobsonNoether.exist_pow_eq_zero_of_le\", \"Commute.exists_add_pow_prime_eq\", \"Commute.exists_add_pow_prime_pow_eq\", \"JacobsonNoether.exists_pow_mem_center_of_inseparable\", \"JacobsonNoether.exists_pow_mem_center_of_inseparable'\", \"sub_pow_char_of_commute\", \"add_pow_char_of_commute\", \"sub_pow_char_pow_of_commute\"], \"digest\": \"a3deccaab0fd72e0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: LieAlgebra.ad_pow_lie is iterated Leibniz on a bracket, JacobsonNoether has division-ring and algebraicity hypotheses, and characteristic-p power formulas found here require commuting inputs. None gives both stated identities for arbitrary associative algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In characteristic p, binomial coefficients p choose k vanish for 0 < k < p, and p minus one choose k equals minus one to k",
+   "results": "{\"t\": \"2026-10-23T23:57:24Z\", \"tool\": \"leanfinder\", \"query\": \"In characteristic p, binomial coefficients p choose k vanish for 0 < k < p, and p minus one choose k equals minus one to k\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Nat.Prime.dvd_choose_self\", \"Choose.lucas_theorem_nat\", \"Nat.Prime.dvd_choose_pow\", \"Nat.Prime.dvd_choose_pow_iff\", \"Choose.lucas_theorem\", \"Choose.choose_modEq_prod_range_choose_nat\", \"Choose.choose_modEq_prod_range_choose\", \"Choose.choose_modEq_choose_mod_mul_choose_div_nat\"], \"digest\": \"4715534266420fbb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: these results concern scalar binomial coefficients or commuting elements, not the noncommutative Jacobson sum formula. Scalar recurrences used in the proof are written out from integer factorial identities."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem Commute.add_pow|lemma Commute.add_pow|theorem add_pow|theorem sub_pow",
+   "results": "{\"t\": \"2026-10-23T23:59:33Z\", \"tool\": \"grep\", \"query\": \"theorem Commute.add_pow|lemma Commute.add_pow|theorem add_pow|theorem sub_pow\", \"sub\": \"Data/Nat/Choose/Sum.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"34\", \"68\", \"76\", \"81\"], \"digest\": \"8218729fa54e6d18\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: LieAlgebra.ad_pow_lie is iterated Leibniz on a bracket, JacobsonNoether has division-ring and algebraicity hypotheses, and characteristic-p power formulas found here require commuting inputs. None gives both stated identities for arbitrary associative algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associative algebra Jacobson correction terms i times s_i coefficient of ad(t a plus b) to p minus one applied to a",
+   "results": "{\"t\": \"2026-10-23T23:59:34Z\", \"tool\": \"leanfinder\", \"query\": \"Associative algebra Jacobson correction terms i times s_i coefficient of ad(t a plus b) to p minus one applied to a\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"JacobsonNoether.exist_pow_eq_zero_of_le\", \"jacobson_density\", \"Algebra.SubmersivePresentation.sum_jacobianRelationsOfHasCoeffs_mul_relationOfHasCoeffs\", \"Algebra.SubmersivePresentation.jacobianRelations_spec\", \"Algebra.PreSubmersivePresentation.comp_jacobian_eq_jacobian_smul_jacobian\", \"LieAlgebra.ad_pow_lie\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_h_pow_toEnd_f\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_e_pow_succ_toEnd_f\"], \"digest\": \"e57a197a42ff7178\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: LieAlgebra.ad_pow_lie is iterated Leibniz on a bracket, JacobsonNoether has division-ring and algebraicity hypotheses, and characteristic-p power formulas found here require commuting inputs. None gives both stated identities for arbitrary associative algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem add_pow \\(h : Commute",
+   "results": "{\"t\": \"2026-10-24T00:02:20Z\", \"tool\": \"grep\", \"query\": \"theorem add_pow \\\\(h : Commute\", \"sub\": \"Data/Nat/Choose\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Data/Nat/Choose/Sum.lean\"], \"digest\": \"2b3e042d407331c3\"}",
+   "date": "2026-10-24",
+   "verdict": "match for a prerequisite only: match: Commute.add_pow, Mathlib/Data/Nat/Choose/Sum.lean:34; read lines 28–36. Its Semiring R hypothesis specializes to Ring R in one line; Commute x y is exactly xy=yx. The natural-number cast is multiplication by the central integer coefficient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Binomial theorem for commuting elements of an associative unital ring: (x+y)^n is the sum of x^j y^(n-j) times choose n j",
+   "results": "{\"t\": \"2026-10-24T00:07:25Z\", \"tool\": \"leansearch\", \"query\": \"Binomial theorem for commuting elements of an associative unital ring: (x+y)^n is the sum of x^j y^(n-j) times choose n j\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Commute.add_pow\", \"add_pow\", \"Commute.add_pow'\", \"sub_pow\", \"Fin.sum_pow_mul_eq_add_pow\", \"Finset.sum_pow_mul_eq_add_pow\", \"Ring.add_choose_eq\", \"Polynomial.powAddExpansion\"], \"digest\": \"c3af4f8f9539a155\"}",
+   "date": "2026-10-24",
+   "verdict": "match for a prerequisite only: match: Commute.add_pow, Mathlib/Data/Nat/Choose/Sum.lean:34; read lines 28–36. Its Semiring R hypothesis specializes to Ring R in one line; Commute x y is exactly xy=yx. The natural-number cast is multiplication by the central integer coefficient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-restricted-rational-differentiation",
+  "date": "2026-10-24",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Section 1, restricted enveloping algebra definition, Theorem 1.2 and Corollary 1.3, printed pp.148--150; positive-root grading of the Borel radical in Section 1, printed pp.151--152. The nilpotent augmentation assertion is the bounded positive-root grading consequence, not a claim that x^[p] is always zero. Supporting input for the augmentation argument: restricted invariant derivations, their functoriality and rational-module actions. General associative-algebra input: Milne Proposition 10.38, Jacobson formulas (a),(b), used for endomorphism algebras.",
+   "via": [
+    "lem-sfb-restricted-rational-differentiation",
+    "lem-sfb-unipotent-restricted-enveloping-augmentation",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-associative-jacobson-identities",
+  "worker": "stage1",
+  "summary": "Q17 checked Milne Proposition 10.38 and the exact coefficient definition, supplied the commuting-operator and finite-polynomial coefficient proof, and created one Mathlib leaf for the genuinely noncommutative-ring binomial theorem. Scalar binomial recurrences and the formal product rule are proved explicitly as elementary steps. Statement and statement dependencies are unchanged. No project declaration covers both clauses.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), through the inherited alteration / restricted-enveloping chain and Milne Proposition 10.38(a),(b) at its end. The ancestor command returns None for this inherited chain; retained the item’s null from.node and used the same computed ancestor for the new leaf. This algebraic prerequisite changes no unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-cb3307450",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-cb3307450 (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 §10k, Prop 10.38 with its proof (printed pp.204–206). The item's coefficient convention for s_i is Jacobson's standard one; it agrees with Milne's examples for p=2 and p=3. Item statement and stmt_deps are unchanged, and there is no repair note. All six steps are correct. (1) Proves the scalar facts C(p,k)=0 and C(p−1,k)=(−1)^k from factorial recurrences, using invertibility in the field (def-weil-field). (2) Applies the new leaf in End_F(B) to the commuting pair L_z and −R_z, giving ad(z)^n(c)=Σ(−1)^j C(n,j) z^{n−j}cz^j; I recomputed the reindexing. (3) Proves (a) by putting n=p. (4) Gets the insertion sum in A[t] with t central. (5) Proves the noncommutative product rule for the formal derivative coefficientwise, keeping the order u_r v_s. (6) Shows DQ = D(z^p) because p=0 in F, compares coefficients using that 1..p−1 are invertible, then evaluates at t=1 (allowed because t is central). This proof of (b) differs from Milne's permutation count, and proof_origin by=agent declares it. New node lem-sfb-commuting-binomial-expansion matches Commute.add_pow exactly (Mathlib/Data/Nat/Choose/Sum.lean:34; I read lines 25–40). It is self-contained and cites def-weil-field. It is not a duplicate: lem-pur-commutative-ring-binomial-expansion needs a commutative ring, which End_F(B) is not, and the other binomial nodes are unrelated. It does not restate a clause of the item. An independent random-matrix check over F_2, F_3, F_5 and F_7 confirmed (a) and (b) in the item's convention. No SGA, no tool_uses, no fixes. Advisory only: the inherited statement does not cite def-pc-field-characteristic for 'characteristic p'."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.AssociativeJacobsonIdentities",
+  "declaration": "Algebra.associative_jacobson_identities",
+  "declarations": [
+   "Algebra.jacobsonCorrectionTerm",
+   "Algebra.associative_jacobson_identities"
+  ],
+  "file": "lean/Sheaf/Algebra/Lie/AssociativeJacobsonIdentities.lean",
+  "statement": "theorem associative_jacobson_identities (F : Type u) [Field F] (A : Type v) [Ring A] [Algebra F A] (p : ℕ) [Fact p.Prime] [CharP F p] (a b : A) : (LinearMap.mulLeft F a - LinearMap.mulRight F a) ^ p = LinearMap.mulLeft F (a ^ p) - LinearMap.mulRight F (a ^ p) ∧ (a + b) ^ p = a ^ p + b ^ p + ∑ i ∈ Finset.Ico 1 p, jacobsonCorrectionTerm F p a b i",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-386ed49c6",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Clause-by-clause match with Milne 10.38(a),(b) and the node: Field F + Fact p.Prime + CharP F p; Ring A + Algebra F A (no comm, no CharP A, so the zero algebra is allowed); ad = mulLeft - mulRight in Module.End; s_i = (i:F)^-1 • coeff_{i-1} of iterate^{p-1} of [ta+b, -] applied to C a in Polynomial A (X central); sum over Ico 1 p. p=2 checked by hand (s_1=ab+ba). Universes u, v independent. No duplicate in Mathlib or the live Sheaf/WeilConjectures trees. jacobsonCorrectionTerm has real data. Node delta is lean only; statement verbatim; one sorry; docstrings carry source place, blueprint id and proof plan; report sections present. No file changed, so no compile."
+ }
+}

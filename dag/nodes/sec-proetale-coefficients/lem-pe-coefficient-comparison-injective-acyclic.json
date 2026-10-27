@@ -1,0 +1,120 @@
+{
+ "id": "lem-pe-coefficient-comparison-injective-acyclic",
+ "kind": "lemma",
+ "title": "Injective unit and acyclicity for coefficient-sized intrinsic comparison",
+ "statement": "Let X be a scheme in universe u and A a commutative ring in max(v,u+1). Use the canonical constant-ring intrinsic module adjunction from [lem-pe-coefficient-comparison-data] on the coefficient-sized small site models. Specify the ordinary additive sheafification instances on both small sites, the enough-injectives instance on the target module category, and the additive structure of direct image R. These instances exist canonically and only determine the ordinary derived-functor constructions. For any adjunction between these fixed functors and every injective etale module I, the unit I -> R(L(I)) is invertible and L(I) is R-acyclic: each positive right-derived direct image vanishes. No finiteness, torsion, constructibility or qcqs assumption is made.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-injective-acyclicity/sk-lem-pe-injective-acyclicity.proof.md",
+  "place": "Entire proof: injective pullbacks are comparison-direct-image acyclic; the unit input is the preceding classical-sheaves comparison."
+ },
+ "stmt_deps": [
+  "lem-pe-coefficient-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the Grothendieck abelian comparison-unit argument in the full coefficient universe. The affine Kan-extension and dense-subsite sheafification argument is already proved for this universe by additiveUnitIso in ConstructibleComparisonModuleExact. Conjugate its adjunction by the two AsSmall sheaf equivalences; full faithfulness and hence invertibility of the unit are preserved. The constant-ring pullback presentation and lem-weil-pbc-module-inverse-image-unit-comparison identify the forgotten canonical module unit with the abelian unit followed by an invertible comparison. The module forgetful functor reflects isomorphisms, so the canonical module unit is invertible. The module pullback is therefore full and faithful, and the unit of every adjunction with this fixed left adjoint is invertible. This works on every module, without using injectivity.",
+   "uses": [
+    "lem-weil-pbc-comparison-grothendieck-unit",
+    "lem-pe-constructible-comparison-module-exact",
+    "lem-weil-pbc-module-inverse-image-unit-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an injective resolution of the module pullback of I. For each positive degree, its direct-image homology computes the right derived direct image. Forget the module structure, transport the etale model to the original etale site, and restrict to its affine etale dense subsite. All three functors are faithful and exact, so they reflect exactness of the degree short complex. At every affine etale object, lem-pe-coefficient-comparison-affine-sections and the injective-resolution derived-evaluation isomorphism show that the evaluated short complex is exact. Objectwise evaluation therefore proves exactness of the presheaf short complex. Exact sheafification preserves it, and the sheafification counit identifies this sheafified short complex with the restricted sheaf complex. Faithful exact restriction reflects exactness back to the module short complex, proving zero homology in every positive degree.",
+   "uses": [
+    "lem-pe-coefficient-comparison-affine-sections",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-comparison-grothendieck-unit",
+  "lem-pe-constructible-comparison-module-exact",
+  "lem-weil-pbc-module-inverse-image-unit-comparison",
+  "lem-pe-coefficient-comparison-affine-sections",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099T unit argument and Tag 099V first proof paragraph. Lean proves unit transport, arbitrary-adjunction independence, and assembly of local affine derived evaluation into global direct-image acyclicity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The etale to proetale comparison pullback of an injective sheaf of modules over a discrete ring is acyclic for comparison direct image",
+   "results": "Eight hits including SheafOfModules.pullback and pullbackPushforwardAdjunction; none states injective comparison acyclicity.",
+   "date": "2026-10-26",
+   "verdict": "No theorem for intrinsic coefficient-sized comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant coefficient ring sheaf module comparison injective acyclic derived direct image vanishing",
+   "results": "Eight hits concerning condensed locally constant functors and presheaf sheafification; no comparison acyclicity.",
+   "date": "2026-10-26",
+   "verdict": "No theorem for intrinsic coefficient-sized comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAcyclic|comparison.*[Ii]njective",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No theorem for intrinsic coefficient-sized comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientBoundedClassicalDescent",
+  "date": "2026-10-26",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "Derived conclusion: classical derived comparison and bounded truncation; sk-prop-sf-comparison: First proof paragraph: acyclic pullback of each term of an injective resolution and invertible ordinary unit.",
+   "via": [
+    "lem-pe-coefficient-bounded-classical-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientComparisonInjectiveAcyclic",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientComparisonInjectiveAcyclic.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientComparison_injectiveAcyclic",
+  "statement": "theorem coefficientComparison_injectiveAcyclic (X : Scheme.{u})\n    (A : Type (max v (u + 1))) [CommRing A]\n    [HasSheafify (Scheme.smallModelComparisonEtaleTopology.{u, v} X)\n      AddCommGrpCat.{max v (u + 1)}]\n    [HasSheafify (Scheme.coefficientProEtaleModelTopology.{u, v} X)\n      AddCommGrpCat.{max v (u + 1)}]\n    [EnoughInjectives (ConstantCompletion.Mod (ConstantCompletion.constant\n      (Scheme.coefficientProEtaleModelTopology.{u, v} X) A))]\n    [(SheafOfModules.pushforward.{max v (u + 1)}\n      (F := Scheme.smallModelComparisonInclusion.{u, v} X)\n      (constructibleComparisonRingMap.{u, v} X A)).Additive]\n    (adj : constructibleComparisonPullback.{u, v} X A ⊣\n      SheafOfModules.pushforward.{max v (u + 1)}\n        (F := Scheme.smallModelComparisonInclusion.{u, v} X)\n        (constructibleComparisonRingMap.{u, v} X A)) :\n    ∀ (I : ConstantCompletion.Mod (ConstantCompletion.constant\n        (Scheme.smallModelComparisonEtaleTopology.{u, v} X) A)) [Injective I],\n      IsIso (adj.unit.app I) ∧\n      (SheafOfModules.pushforward.{max v (u + 1)}\n        (F := Scheme.smallModelComparisonInclusion.{u, v} X)\n        (constructibleComparisonRingMap.{u, v} X A)).rightAcyclic\n          ((constructibleComparisonPullback.{u, v} X A).obj I)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261025T201637-L-2594403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T023446-L-567109",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

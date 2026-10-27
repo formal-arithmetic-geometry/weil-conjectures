@@ -1,0 +1,241 @@
+{
+ "id": "lem-trf-filtered-monoid-coefficient-limit",
+ "kind": "statement",
+ "title": "Reconstruction from finite monoid coefficient quotients",
+ "statement": "Let $A$ be a commutative ring and $I\\subseteq A$ an ideal such that $A\\to\\varprojlim_{j\\ge1}A/I^j$ is bijective [def-weil-pbc-adically-complete-ring]. Let $P$ be a commutative additive monoid and $\\nu:P\\to\\mathbf N$ satisfy $\\nu(0)=0$ and $\\nu(u)+\\nu(v)\\le\\nu(u+v)$. Assume $S_n=\\{p\\in P:\\nu(p)<n\\}$ is finite for every $n\\ge1$, and $\\{(u,v)\\in P^2:u+v=p\\}$ is finite for every $p$. Let $R=A[P]$ be the monoid algebra of [def-trf-complete-toric-model] (zero polynomial variables), the ring of finite sums $F=\\sum_p c_pz^p$, with $z^uz^v=z^{u+v}$, and let $J\\subseteq R$ be an ideal satisfying, for every $n\\ge1$,\n$$F\\in J^n\\quad\\Longleftrightarrow\\quad c_p\\in I^{\\max(n-\\nu(p),0)}\\text{ for all }p.$$\nIdeal powers mean finite sums of products, with $I^0=A$. Put $\\widehat R=\\varprojlim_{n\\ge1}R/J^n$ [def-weil-pbc-adic-completion], and let $\\pi_n:\\widehat R\\to R/J^n$ be its projection. There is an $A$-algebra isomorphism $c:\\widehat R\\to A^P$, where $A^P$ has pointwise addition, convolution $(ab)_p=\\sum_{u+v=p}a_ub_v$, and scalar embedding $a\\mapsto az^0$. The isomorphism is required to satisfy the following coefficient condition, and is unique subject to it: if $x\\in\\widehat R$, $p\\in P$, $j\\ge1$, $N\\ge j+\\nu(p)$, and $F_N\\in R$ represents $\\pi_N(x)$, then $c(x)_p$ modulo $I^j$ is the coefficient of $z^p$ in $F_N$ modulo $I^j$. For every $a=(a_p)\\in A^P$ and $n\\ge1$,\n$$\\pi_n(c^{-1}(a))=\\left[\\sum_{p\\in S_n}a_pz^p\\right]\\in R/J^n.$$\nThe canonical image of $az^p\\in R$ is sent by $c$ to the family with coefficient $a$ at $p$ and zero elsewhere.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VI §1.6(i)--(ii), printed p. 70: agent-supplied coefficient refinement of the formal monoid models; not a verbatim theorem of ILO."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-adic-completion",
+  "def-trf-complete-toric-model"
+ ],
+ "proof": [
+  {
+   "text": "For finite sums $F,G\\in R$, the assumed criterion applied to $F-G$ gives $[F]=[G]$ in $R/J^n$ exactly when $F_p-G_p\\in I^{\\max(n-\\nu(p),0)}$ for every $p$; here $F_p$ denotes the coefficient of $z^p$. If $x\\in\\widehat R$ and $F_N,F_M$ represent its levels with $M\\ge N$, compatibility means $F_M-F_N\\in J^N$. Hence their $p$-coefficients agree modulo $I^j$ whenever $N\\ge j+\\nu(p)$. Representatives at the same level also agree modulo $I^j$ under this bound. Two arbitrary eligible levels are compared through their maximum. These conclusions use just the stated criterion and the compatible-sequence definition [def-weil-pbc-adic-completion].",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M9 (section-completion), compatible-sequence description, and Tag 0317 (definition-complete). Agent argument using the coefficient criterion in the item; ILO Exposé VI 1.6(i)--(ii), printed p. 70, motivates only the formal models."
+   }
+  },
+  {
+   "text": "For each $x\\in\\widehat R$ and $p\\in P$, let $r_{p,j}\\in A/I^j$ be the $p$-coefficient of a representative at level $j+\\nu(p)$, reduced modulo $I^j$. Step 1 makes this independent of the representative and of replacement by any larger eligible level. The residues are compatible as $j$ increases: use the representative at the larger level for both reductions. By the assumed bijection $A\\to\\varprojlim_j A/I^j$, there is a unique $c(x)_p\\in A$ with these residues [def-weil-pbc-adically-complete-ring]. This defines $c:\\widehat R\\to A^P$ and proves its required coefficient condition for every eligible $N$. The same injectivity shows that two elements of $A$ agreeing modulo every $I^j$ are equal.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M9 (section-completion), compatible-sequence description, and Tag 0317 (definition-complete). Agent argument using the coefficient criterion in the item; ILO Exposé VI 1.6(i)--(ii), printed p. 70, motivates only the formal models."
+   }
+  },
+  {
+   "text": "For a family $a\\in A^P$ put $T_n(a)=\\sum_{p\\in S_n}a_pz^p$, a finite polynomial by the assumed finiteness. For $m\\ge n$, the difference $T_m(a)-T_n(a)$ is supported at $p$ with $n\\le\\nu(p)<m$. The criterion imposes only membership in $I^0=A$ at these positions; all other coefficients of the difference are zero. Thus $T_m(a)-T_n(a)\\in J^n$. The classes $[T_n(a)]$ therefore define $d(a)\\in\\widehat R$ by [def-weil-pbc-adic-completion], and $\\pi_n(d(a))=[T_n(a)]$.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M9 (section-completion), compatible-sequence description, and Tag 0317 (definition-complete). Agent argument using the coefficient criterion in the item; ILO Exposé VI 1.6(i)--(ii), printed p. 70, motivates only the formal models."
+   }
+  },
+  {
+   "text": "For $N\\ge j+\\nu(p)$ with $j\\ge1$, one has $p\\in S_N$, so the $p$-coefficient of $T_N(a)$ equals $a_p$. Applying the coefficient condition from step 2 to $d(a)$ gives $c(d(a))_p\\equiv a_p\\pmod{I^j}$ for every $j$. Injectivity of the coefficient-completion map [def-weil-pbc-adically-complete-ring] gives $c(d(a))_p=a_p$ for all $p$, hence $cd=1$.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M9 (section-completion), compatible-sequence description, and Tag 0317 (definition-complete). Agent argument using the coefficient criterion in the item; ILO Exposé VI 1.6(i)--(ii), printed p. 70, motivates only the formal models."
+   }
+  },
+  {
+   "text": "Conversely let $a=c(x)$ and let $F_n$ represent $\\pi_n(x)$. If $p\\in S_n$, set $j=n-\\nu(p)\\ge1$. The coefficient condition with $N=n$ gives $a_p-(F_n)_p\\in I^{n-\\nu(p)}$. If $p\\notin S_n$, the criterion at $p$ asks only for membership in $I^0=A$. It follows for every $p$ that the coefficient of $T_n(a)-F_n$ satisfies the criterion, so this difference lies in $J^n$. Thus $\\pi_n(d(c(x)))=\\pi_n(x)$ for every $n$. Equality of compatible sequences [def-weil-pbc-adic-completion] gives $dc=1$. In particular $c$ is a bijection and $d=c^{-1}$, with exactly the asserted projection formula.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M9 (section-completion), compatible-sequence description, and Tag 0317 (definition-complete). Agent argument using the coefficient criterion in the item; ILO Exposé VI 1.6(i)--(ii), printed p. 70, motivates only the formal models."
+   }
+  },
+  {
+   "text": "Fix $p$ and $j\\ge1$, and choose $N\\ge j+\\nu(p)$. For every decomposition $u+v=p$, superadditivity and nonnegativity give $\\nu(u),\\nu(v)\\le\\nu(p)$, so the same $N$ is eligible for all these coefficient residues. If $F_N,G_N$ represent $x,y$ at level $N$, their sum and product represent $x+y,xy$, since completion has componentwise operations [def-weil-pbc-adic-completion]. Polynomial multiplication [def-trf-complete-toric-model] gives $(F_NG_N)_p=\\sum_{u+v=p}(F_N)_u(G_N)_v$, with zero coefficients included outside the finite supports. The pair set is finite by hypothesis. Reduction modulo $I^j$ and the coefficient condition therefore give $c(xy)_p\\equiv\\sum_{u+v=p}c(x)_uc(y)_v\\pmod{I^j}$; addition similarly gives $c(x+y)_p\\equiv c(x)_p+c(y)_p$. As this holds for every $j$, injectivity of $A\\to\\varprojlim_j A/I^j$ [def-weil-pbc-adically-complete-ring] gives both equalities in $A$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-trf-complete-toric-model",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M9 (section-completion), compatible-sequence description, and Tag 0317 (definition-complete). Agent argument using the coefficient criterion in the item; ILO Exposé VI 1.6(i)--(ii), printed p. 70, motivates only the formal models."
+   }
+  },
+  {
+   "text": "The canonical image of a fixed polynomial $F$ is represented by $F$ at every level [def-weil-pbc-adic-completion]. Its coefficient family under $c$ is therefore $(F_p)_p$, because its residues agree with those coefficients for every $j$ and the coefficient-completion map is injective [def-weil-pbc-adically-complete-ring]. Taking $F=0,1$ or $az^p$ proves preservation of zero and unit, the monomial formula, and preservation of the scalar embedding $a\\mapsto az^0$. Together with step 6 and bijectivity, this makes $c$ an $A$-algebra isomorphism: the ring laws for the specified finite convolution follow by applying the bijection $c$ to the corresponding laws in $\\widehat R$. Finally any other map satisfying the coefficient condition has the same residue at every $p,j$, hence the same coefficient by injectivity. This proves the required uniqueness.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M9 (section-completion), compatible-sequence description, and Tag 0317 (definition-complete). Agent argument using the coefficient criterion in the item; ILO Exposé VI 1.6(i)--(ii), printed p. 70, motivates only the formal models."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-adically-complete-ring",
+  "def-trf-complete-toric-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VI 1.6(i)--(ii), printed p. 70: formal models only; explicit auxiliary residue-and-truncation proof using Stacks Tags 00M9 (section-completion) and 0317 (definition-complete)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "toAdicCompletion|coeff_toAdicCompletion",
+   "results": "{\"t\": \"2026-10-22T06:44:39Z\", \"tool\": \"grep\", \"query\": \"toAdicCompletion|coeff_toAdicCompletion\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\"], \"digest\": \"2824229cb1761ef6\"}; Read Mathlib/RingTheory/MvPowerSeries/Equiv.lean:280--354 and RingTheory/AdicCompletion/Algebra.lean. The multivariable equivalence treats the variable ideal for a free monoid; generic completion operations and finite-product equivalences do not reconstruct arbitrary monoid coefficient families with a mixed coefficient ideal filtration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible finite support coefficient quotients with coefficient ideals I to the n minus degree reconstruct arbitrary monoid series over an I-adically complete coefficient ring",
+   "results": "{\"t\": \"2026-10-22T06:44:40Z\", \"tool\": \"leansearch\", \"query\": \"Compatible finite support coefficient quotients with coefficient ideals I to the n minus degree reconstruct arbitrary monoid series over an I-adically complete coefficient ring\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/RingTheory/MvPowerSeries/Equiv.lean:280--354 and RingTheory/AdicCompletion/Algebra.lean. The multivariable equivalence treats the variable ideal for a free monoid; generic completion operations and finite-product equivalences do not reconstruct arbitrary monoid coefficient families with a mixed coefficient ideal filtration.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, MvPowerSeries",
+   "results": "{\"t\": \"2026-10-22T06:44:40Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, MvPowerSeries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"MvPowerSeries.toAdicCompletionInv\", \"MvPowerSeries.toAdicCompletion\", \"MvPowerSeries.toAdicCompletionAlgEquiv\", \"MvPowerSeries.toAdicCompletionAlgEquiv_symm_apply\", \"MvPowerSeries.toAdicCompletionAlgEquiv_apply\", \"MvPowerSeries.toAdicCompletion_coe\", \"MvPowerSeries.coeff_toAdicCompletionInv\", \"MvPowerSeries.coeff_toAdicCompletion_val_apply_out\"], \"digest\": \"494e5200ee9779cb\"}; Read Mathlib/RingTheory/MvPowerSeries/Equiv.lean:280--354 and RingTheory/AdicCompletion/Algebra.lean. The multivariable equivalence treats the variable ideal for a free monoid; generic completion operations and finite-product equivalences do not reconstruct arbitrary monoid coefficient families with a mixed coefficient ideal filtration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse limit of monoid algebra quotients with coefficientwise ideal filtration equals a product of copies of the complete coefficient ring and multiplication is finite convolution",
+   "results": "{\"t\": \"2026-10-22T06:44:51Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse limit of monoid algebra quotients with coefficientwise ideal filtration equals a product of copies of the complete coefficient ring and multiplication is finite convolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.instMul\", \"AdicCompletion.val_mul\", \"AdicCompletion.mk_smul_top_ofAlgEquiv_symm\", \"AdicCompletion.piEquivFin_apply\", \"AdicCompletion.instCommRing\", \"AdicCompletion.mk_ofAlgEquiv_symm\", \"AdicCompletion.instAlgebraAdicCauchySequence\", \"AdicCompletion.instMulAdicCauchySequence\"], \"digest\": \"709f318982be237b\"}; Read Mathlib/RingTheory/MvPowerSeries/Equiv.lean:280--354 and RingTheory/AdicCompletion/Algebra.lean. The multivariable equivalence treats the variable ideal for a free monoid; generic completion operations and finite-product equivalences do not reconstruct arbitrary monoid coefficient families with a mixed coefficient ideal filtration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adic completion with finite coefficient quotients is isomorphic to all coefficient functions over an ideal-adically complete ring, with convolution multiplication and truncation projections",
+   "results": "{\"t\": \"2026-10-22T06:44:52Z\", \"tool\": \"leanfinder\", \"query\": \"An adic completion with finite coefficient quotients is isomorphic to all coefficient functions over an ideal-adically complete ring, with convolution multiplication and truncation projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.mk_smul_top_ofAlgEquiv_symm\", \"AdicCompletion.mk_ofAlgEquiv_symm\", \"AdicCompletion.piEquivFin\", \"AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ\", \"AdicCompletion.piEquivFin_apply\", \"AdicCompletion.ofAlgEquiv\", \"AdicCompletion.ofAlgEquiv_apply\", \"AdicCompletion.piEquivOfFintype_apply\"], \"digest\": \"ed00edab9a023f1d\"}; Read Mathlib/RingTheory/MvPowerSeries/Equiv.lean:280--354 and RingTheory/AdicCompletion/Algebra.lean. The multivariable equivalence treats the variable ideal for a free monoid; generic completion operations and finite-product equivalences do not reconstruct arbitrary monoid coefficient families with a mixed coefficient ideal filtration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toAdicCompletion|coeff_toAdicCompletion|monoid.*completion|completion.*monoid",
+   "results": "{\"t\": \"2026-10-23T09:28:42Z\", \"tool\": \"grep\", \"query\": \"toAdicCompletion|coeff_toAdicCompletion|monoid.*completion|completion.*monoid\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\", \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\"], \"digest\": \"884be18ce285d496\"}; Read MvPowerSeries/Equiv.lean:235--354 and AdicCompletion/Algebra.lean:40--110. The power-series equivalence concerns the variable ideal of a free polynomial monoid, not an arbitrary monoid and mixed coefficient filtration. Generic completion structures and weighted homogeneous components do not give the claimed reconstruction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adic completion of a monoid algebra is the ring of all coefficient families over a complete ring with finite convolution multiplication",
+   "results": "{\"t\": \"2026-10-23T09:28:42Z\", \"tool\": \"leansearch\", \"query\": \"Adic completion of a monoid algebra is the ring of all coefficient families over a complete ring with finite convolution multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion\", \"AdicCompletion.module\", \"AdicCompletion.instAlgebra\", \"AdicCompletion.instAddCommGroup\", \"AdicCompletion.instCommRing\", \"AdicCompletion.subring\", \"AddMonoidAlgebra.ring\", \"AdicCompletion.liftRingHom.congr_simp\"], \"digest\": \"c99aa8dea36a7765\"}; Read MvPowerSeries/Equiv.lean:235--354 and AdicCompletion/Algebra.lean:40--110. The power-series equivalence concerns the variable ideal of a free polynomial monoid, not an arbitrary monoid and mixed coefficient filtration. Generic completion structures and weighted homogeneous components do not give the claimed reconstruction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, AddMonoidAlgebra",
+   "results": "{\"t\": \"2026-10-23T09:28:42Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, AddMonoidAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read MvPowerSeries/Equiv.lean:235--354 and AdicCompletion/Algebra.lean:40--110. The power-series equivalence concerns the variable ideal of a free polynomial monoid, not an arbitrary monoid and mixed coefficient filtration. Generic completion structures and weighted homogeneous components do not give the claimed reconstruction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of a monoid algebra with coefficient ideals I to the n minus weight is all coefficient functions over an I-adically complete ring with finite convolution",
+   "results": "{\"t\": \"2026-10-23T09:28:44Z\", \"tool\": \"leanfinder\", \"query\": \"Completion of a monoid algebra with coefficient ideals I to the n minus weight is all coefficient functions over an I-adically complete ring with finite convolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.subalgebra\", \"AdicCompletion.instAlgebraAdicCauchySequence\", \"AdicCompletion.AdicCauchySequence.subalgebra\", \"AdicCompletion.subring\", \"AdicCompletion.instAlgebra\", \"AdicCompletion.ofAlgEquiv\", \"AdicCompletion.instPowNat\", \"AdicCompletion.instMul\"], \"digest\": \"d0c96ea890955923\"}; Read MvPowerSeries/Equiv.lean:235--354 and AdicCompletion/Algebra.lean:40--110. The power-series equivalence concerns the variable ideal of a free polynomial monoid, not an arbitrary monoid and mixed coefficient filtration. Generic completion structures and weighted homogeneous components do not give the claimed reconstruction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible weighted coefficient residues in finite monoid algebra quotients reconstruct a unique formal series with truncation projections",
+   "results": "{\"t\": \"2026-10-23T09:29:23Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible weighted coefficient residues in finite monoid algebra quotients reconstruct a unique formal series with truncation projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.IsWeightedHomogeneous\", \"MvPowerSeries.coeff_mul_prod_one_sub_of_lt_weightedOrder\", \"MvPowerSeries.weightedHomogeneousComponent\", \"MvPowerSeries.coeff_mul_left_one_sub_of_lt_weightedOrder\", \"MvPowerSeries.coeff_weightedHomogeneousComponent\", \"MvPowerSeries.coeff_mul_right_one_sub_of_lt_weightedOrder\", \"MvPowerSeries.isWeightedHomogeneous_iff_eq_weightedHomogeneousComponent\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\"], \"digest\": \"15dfa7b00e6442d6\"}; Read MvPowerSeries/Equiv.lean:235--354 and AdicCompletion/Algebra.lean:40--110. The power-series equivalence concerns the variable ideal of a free polynomial monoid, not an arbitrary monoid and mixed coefficient filtration. Generic completion structures and weighted homogeneous components do not give the claimed reconstruction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-monoid-completion-coefficients",
+  "date": "2026-10-22",
+  "group": "Q09"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical formal-chart algebra under lem-trf-local-term-locality proof (1)--(2), via the completed-monoid model: parent proof steps 3--4, stabilized coefficient residues, inverse truncations and convolution compatibility.",
+   "via": [
+    "lem-trf-monoid-completion-coefficients",
+    "lem-trf-formal-monoid-ring-dimension",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-filtered-monoid-coefficient-limit",
+  "worker": "stage1",
+  "summary": "Kept the statement and all imported metadata. Wrote the residue construction, compatible truncation inverse, both inverse identities, finite-convolution compatibility, scalar/monomial formulas and uniqueness directly from the assumed coefficient criterion and completeness. No new nodes: every step is an explicit elementary argument from the hypotheses and cited definitions. Searched project Lean, DAG, blueprint and Mathlib; no exact attachment or leaf.",
+  "blueprint": "Realizes the auxiliary coefficient-reconstruction subargument in the recorded historical formal-chart ancestry of lem-trf-local-term-locality, via lem-trf-monoid-completion-coefficients steps 2--3. Read latest blueprint main 7284bb09: the current ancestor proves contracting local terms by Varshavsky and no longer contains a toric-model subargument. This item is existing auxiliary algebra, not a replacement of the current unit route; ILO VI 1.6 only motivates its models."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-601bea436",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-601bea436 (reviewer sub-agent of L); spot-checked: Read the item in full. The delivery has no new nodes, and the statement is identical to the live and side-live versions (only status, proof, proof_deps, proof_origin, split_report and mathlib_searches changed). No re-split note exists for this item, and there is no SGA. The cited statements say what the steps take: def-weil-pbc-adic-completion gives compatible sequences, componentwise operations and the canonical map; def-weil-pbc-adically-complete-ring gives bijectivity, so injectivity; def-trf-complete-toric-model gives the monoid ring for any commutative monoid with n=0. proof_deps equals the union of the uses, and all are definitions, so there is no route issue. The 7 steps are correct and elementary. Step 1: the criterion on F-G and I^{N-nu(p)} ⊆ I^j when N >= j+nu(p). Step 2: residues at level j+nu(p) are compatible, and the bijection gives a unique lift. Step 3: T_m-T_n is supported where the requirement is I^0=A, so d(a) is well defined. Step 4: j>=1 puts p in S_N, so cd=1. Step 5: j=n-nu(p) with N=n is eligible, so dc=1 and the projection formula holds. Step 6: superadditivity gives nu(u),nu(v) <= nu(p), the decomposition sum is finite, so c is multiplicative and additive. Step 7: unit delta_0, scalar a·delta_0, monomials; the ring laws transfer along the bijection c; uniqueness by injectivity. Small cases checked: P={0}; finite P with nu=0; P=N, I=0 gives A[[z]]; I=A forces A=0; Z/2. Sources checked: ILO VI 1.6(i)-(ii) on p.70 is motivation only and the proof is marked agent-written; Stacks 00M9 (section-completion) and 0317 (definition-complete) match their labels. The parent lem-trf-monoid-completion-coefficients is a special case that cites this item, so it is not a duplicate and there is no cycle. Mathlib's toAdicCompletionAlgEquiv covers only the free monoid with the variable ideal. The LeanSearch rate limit is recorded honestly as unavailable."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FilteredMonoidCoefficientLimit",
+  "declaration": "AddMonoidAlgebra.filteredMonoid_coefficient_limit",
+  "file": "lean/Sheaf/RingTheory/FilteredMonoidCoefficientLimit.lean",
+  "statement": "theorem filteredMonoid_coefficient_limit (A : Type u) [CommRing A] (I : Ideal A) [IsAdicComplete I A] (P : Type v) [AddCommMonoid P] (ν : P → ℕ) (hzero : ν 0 = 0) (hadd : ∀ p q : P, ν p + ν q ≤ ν (p + q)) (hfinite : ∀ n : ℕ, 1 ≤ n → Set.Finite {p : P | ν p < n}) (hpairs : ∀ p : P, Set.Finite {q : P × P | q.1 + q.2 = p}) (J : Ideal (AddMonoidAlgebra A P)) (hJ : ∀ (n : ℕ), 1 ≤ n → ∀ F : AddMonoidAlgebra A P, F ∈ J ^ n ↔ ∀ p : P, F.coeff p ∈ I ^ (n - ν p)) : ∃ (ring : CommRing (P → A)) (alg : @Algebra A (P → A) _ ring.toSemiring) (c : @AlgEquiv A (AdicCompletion J (AddMonoidAlgebra A P)) (P → A) _ _ ring.toSemiring _ alg), (∀ (a b : P → A) (p : P), (@Add.add (P → A) ring.toAdd a b) p = a p + b p) ∧ (∀ (a b : P → A) (p : P), (@Mul.mul (P → A) ring.toMul a b) p = ∑ᶠ q : {q : P × P // q.1 + q.2 = p}, a q.1.1 * b q.1.2) ∧ (∀ (a : A) (p : P), (@algebraMap A (P → A) _ ring.toSemiring alg) a p = if p = 0 then a else 0) ∧ (∀ (x : AdicCompletion J (AddMonoidAlgebra A P)) (p : P) (j : ℕ), 1 ≤ j → ∀ N : ℕ, j + ν p ≤ N → ∀ F : AddMonoidAlgebra A P, Ideal.Quotient.mk (J ^ N) F = AdicCompletion.evalₐ J N x → Ideal.Quotient.mk (I ^ j) (c x p) = Ideal.Quotient.mk (I ^ j) (F.coeff p)) ∧ (∀ (a : P → A) (n : ℕ) (hn : 1 ≤ n), AdicCompletion.evalₐ J n ((@AlgEquiv.symm A (AdicCompletion J (AddMonoidAlgebra A P)) (P → A) _ _ ring.toSemiring _ alg c) a) = Ideal.Quotient.mk (J ^ n) (∑ p ∈ (hfinite n hn).toFinset, AddMonoidAlgebra.single p (a p))) ∧ (∀ (a : A) (p q : P), c (AdicCompletion.of J (AddMonoidAlgebra A P) (AddMonoidAlgebra.single p a)) q = if q = p then a else 0) ∧ (∀ d : @AlgEquiv A (AdicCompletion J (AddMonoidAlgebra A P)) (P → A) _ _ ring.toSemiring _ alg, (∀ (x : AdicCompletion J (AddMonoidAlgebra A P)) (p : P) (j : ℕ), 1 ≤ j → ∀ N : ℕ, j + ν p ≤ N → ∀ F : AddMonoidAlgebra A P, Ideal.Quotient.mk (J ^ N) F = AdicCompletion.evalₐ J N x → Ideal.Quotient.mk (I ^ j) (d x p) = Ideal.Quotient.mk (I ^ j) (F.coeff p)) → d = c)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9bdf39a0b",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsAdicComplete (recorded dep decl), AddMonoidAlgebra A P = the L[P] underlying ToricMonoid.PolynomialRing (no duplicate notion), hJ with truncated subtraction for n≥1, AdicCompletion/evalₐ, existential CommRing/Algebra on P→A with add/convolution(finsum over finite pair subtype)/algebraMap pinned so all structure is forced, coefficient condition for every representative with j≥1, N≥j+ν p, inverse truncation over (hfinite n hn).toFinset with the same c, monomial clause, uniqueness from the coefficient condition alone. Edge cases P={0}, n=1, j=1, A=0, I=0, non-cancellative P covered; universes u,v independent; no extra instances. lean.statement verbatim; only the lean field changed vs side-live; docstrings with ILO VI 1.6/Stacks 00M9,0317, blueprint tag and 7 proof steps; sorry only; report has Worker report and Second reading by Q48. No file changed, no compile run."
+ }
+}

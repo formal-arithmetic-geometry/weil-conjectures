@@ -1,0 +1,173 @@
+{
+ "id": "lem-sp-smooth-tower-compact-bounds",
+ "kind": "statement",
+ "title": "Uniform finite-level bounds of one smooth compact-support composite",
+ "statement": "Fix a characteristic-p field k, primes ell!=p and a finite extension E/Q_ell. Let X,Y be separated finite-type k-schemes, f:X->Y smooth of pure relative dimension d, and c any fixed compactification of f. Use the specified ordinary tower operations and compactification composite F_c [det-sp-tower-shriek-levels]. If an actual tower C has the finite-level bounds of [def-sp-chart-tate-tower-data], with independent ordered cohomological and Tor intervals [a,b] and [s,t], then every level of F_c C is intrinsically constructible finite-Tor, has cohomological support in [s,t+2d] and Tor amplitude in [s,t+2d]. This assertion concerns finite-level bounds only, not the full ordinary tower domain.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs and Uniformity: actual tower domains and separate uniform intervals"
+ },
+ "stmt_deps": [
+  "def-sp-chart-tate-tower-data",
+  "det-sp-tower-shriek-levels",
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over the field makes both schemes Noetherian. The Over relation and cancellation of separatedness and local finite type show that the map itself is separated and finite type. Its chosen compactification therefore has the hypotheses of the existing uniform compact-support theorem.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Local pairs and Uniformity: actual tower domains and separate uniform intervals"
+   }
+  },
+  {
+   "text": "Smoothness of relative dimension d survives base change to an algebraic closure of every residue field. The existing topologicalKrullDim_le_of_smoothOfRelativeDimension bound gives geometric fibre dimension at most d, without a closed-point or finite-field hypothesis.",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Local pairs and Uniformity: actual tower domains and separate uniform intervals"
+   }
+  },
+  {
+   "text": "Apply compactSupport_uniform_tor_bound [det-sp-tower-bound-uniform]. Its finite-coefficient clause gives constructibility at each level, since R_n is finite and ell^(n+1)=0 in its quotient. Its tower clause gives the required uniform cohomology vanishing and Tor interval [s,t+2d].",
+   "uses": [
+    "det-sp-tower-bound-uniform",
+    "def-sp-chart-tate-tower-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Local pairs and Uniformity: actual tower domains and separate uniform intervals"
+   }
+  },
+  {
+   "text": "The compactification evaluation comparison [det-sp-tower-shriek-levels] identifies the tower output with the intrinsic finite open-extension/direct-image composite. Identify its open factor with the constant-ring factor by uniqueness of left adjoints to the normalized inverse-image functor. Transport constructibility, cohomology vanishing and Tor amplitude across these derived isomorphisms. These give exactly bounds, without asserting a tower domain.",
+   "uses": [
+    "det-sp-tower-shriek-levels",
+    "def-sp-chart-tate-tower-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Local pairs and Uniformity: actual tower domains and separate uniform intervals"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "det-sp-tower-bound-uniform",
+  "def-sp-chart-tate-tower-data",
+  "det-sp-tower-shriek-levels"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs and Uniformity: actual tower domains and separate uniform intervals",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Uniform cohomological and Tor bounds for pullback and Tate twist in ordinary derived coefficient towers",
+   "results": "Rep.isZero_Tor_succ_of_projective, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CochainComplex.cm5b and homology exact-sequence lemmas; no specialized tower interval transport.",
+   "date": "2026-10-25",
+   "verdict": "Use existing geometric and finite-level declarations; a tower-presentation bridge is still needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.SmoothOfRelativeDimension",
+   "results": "smoothOfRelativeDimension_comp, smoothOfRelativeDimension_isStableUnderBaseChange, pullback fst/snd instances.",
+   "date": "2026-10-25",
+   "verdict": "Geometry is already available; no ordinary tower-domain or interval API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact evaluation of strict sheaf coefficient towers jointly detects zero homology and bounded below complexes",
+   "results": "ShortComplex.exact_iff_isZero_homology, CochainComplex.isZero_of_isGE, HomologicalComplex.exactAt_iff_isZero_homology; no strict coefficient tower bridge.",
+   "date": "2026-10-25",
+   "verdict": "General exact homology tools available, but no specialized result."
+  },
+  {
+   "tool": "grep",
+   "query": "tower.*bound|bound.*tower; origins|domain_of_bounds|bounds_operations|bounds_pull|bounds_twist",
+   "results": "Mathlib has no coefficient-tower bounds. Project: SmoothPurityTowerBound, CompactSupportUniformTorBound, TwistedPullbackTowerDomain and ProEtaleCtfPullbackDomains. The latter two require finite-field/gamma data and import this module, so cannot supply the bridge without a cycle. blueprint_refs.py search tower bounds returned 0 blueprint nodes.",
+   "date": "2026-10-25",
+   "verdict": "New nodes record only the missing interfaces used by this argument, not copies of the chart theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerChartAdmissibility",
+  "date": "2026-10-25",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs and Uniformity: actual tower domains and separate uniform intervals",
+   "via": [
+    "lem-sp-tower-chart-admissibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityTowerCompactBounds",
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerCompactBounds.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpChartAdmissibility.smooth_tower_compact_bounds",
+  "statement": "theorem smooth_tower_compact_bounds\n    (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (hlp : l ≠ p)\n    (base : SpTowerShriek.Base l E) (ops : SpTowerShriek.Operations l E base)\n    (X Y : Over (Spec (.of k)))\n    [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n    [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]\n    (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f.left]\n    (c : Compactification f.left) (C : SpTowerShriek.D l E X.left)\n    (a b s t : ℤ) (_hab : a ≤ b) (hst : s ≤ t)\n    (hC : bounds l E X.left C a b s t) :\n    bounds l E Y.left ((SpTowerShriek.F l E base ops c).obj C)\n      s (t + 2 * (d : ℤ)) s (t + 2 * (d : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sp-smooth-tower-compact-bounds",
+  "worker": "stage3 B7",
+  "summary": "The finite bounds interface is completely proved in Lean from compactSupport_uniform_tor_bound, smooth geometric fibre dimension bounds, and the canonical open-adjunction coordinate comparison. No sorry remains in this module. The interface is strictly a part of the chart conjunction, with domain recovery handled separately.",
+  "blueprint": "Local pairs and Uniformity of det-sp-tower-gluing; details are the cited chart-admissibility proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-37575",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T162009-L-190660",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-37575",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T162009-L-190660",
+  "kind": "interface",
+  "note": "independent cc review: 13 relocated chart data decls byte-identical to live (SmoothPurityTowerChartData, public re-export from item); tower_chart_admissibility signature unchanged; domain_of_level_bounds/elementary_tower_bounds checked true against SpTowerShriek.Base/Geometry/Data pinning; 5 delivered modules + 7 direct importers compile in sandbox; node proof fields match the Lean"
+ }
+}

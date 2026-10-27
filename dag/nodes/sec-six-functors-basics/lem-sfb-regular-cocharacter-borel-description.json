@@ -1,0 +1,220 @@
+{
+ "id": "lem-sfb-regular-cocharacter-borel-description",
+ "kind": "statement",
+ "title": "Borel subgroups as regular-cocharacter limit subgroups",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine group schemes [def-sc-group-scheme] of finite type, and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness, connectedness and morphism properties have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme, def-pc-morphism-conventions]. A group is solvable if its successive scheme-theoretic commutator subgroups eventually become trivial. A smooth group is unipotent if every geometric point is a unipotent matrix in a faithful linear representation, meaning $(u-I)^n=0$ for some $n\\geq1$. A reductive group is smooth and connected and has no nontrivial smooth connected normal unipotent subgroup. A torus is a group isomorphic over $F$ to $\\mathbf G_m^r$, where $r\\geq0$ and $\\mathbf G_m(A)=A^\\times$ for a commutative $F$-algebra $A$; a maximal torus is a torus subgroup maximal under inclusion. A Borel subgroup is a maximal smooth connected solvable subgroup. Let $G$ be reductive, $T\\subseteq G$ a maximal torus, and $\\Phi$ the nonzero characters of $T$ in $\\operatorname{Lie}(G)$, the tangent space at the identity. For $\\lambda:\\mathbf G_m\\to T$, define $P(\\lambda)$ by the condition that $t\\mapsto\\lambda(t)g\\lambda(t)^{-1}$ extends from $\\mathbf G_{m,A}$ to $\\mathbf A^1_A$ for an $A$-point $g$ of $G$. Pair characters and cocharacters by $\\alpha\\circ\\lambda(t)=t^{\\langle\\alpha,\\lambda\\rangle}$. Call $\\lambda$ regular if $\\langle\\alpha,\\lambda\\rangle\\ne0$ for all $\\alpha\\in\\Phi$. For every regular $\\lambda$, the functor $P(\\lambda)$ is a Borel subgroup containing $T$, and $$\\operatorname{Lie}(P(\\lambda))=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\langle\\alpha,\\lambda\\rangle>0}\\mathfrak g_\\alpha.$$ Conversely every Borel subgroup containing $T$ is $P(\\lambda)$ for some regular $\\lambda$. The case $\\Phi=\\varnothing$ is allowed, with $\\lambda=0$ regular and $P(0)=T=G$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 13, especially Theorem 13.33 (limit subgroups); Propositions 21.29 and 21.31, Theorem 21.32 and Definition 21.35, pp.433--435."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-pc-morphism-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Fix a regular $\\lambda$. Apply [lem-sfb-cocharacter-limit-smooth-structure] to $G,\\lambda$, writing $P,U,Z$ for the three represented groups. By [lem-sfb-reductive-rank-one-reflections], $\\mathfrak g=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\alpha\\in\\Phi}\\mathfrak g_\\alpha$. On $\\mathfrak g_\\alpha$, restriction along $\\lambda$ has integer weight $\\langle\\alpha,\\lambda\\rangle$; on $\\operatorname{Lie}(T)$ it is trivial since $T$ is commutative. Regularity and the weight formulas give $\\operatorname{Lie}(Z)=\\operatorname{Lie}(T)$ and the asserted formula for $\\operatorname{Lie}(P)$. Every $T(A)$ commutes with $\\lambda$ after every scalar extension, so $T\\subseteq Z\\subseteq P$. The torus $T$ is smooth, $Z$ is smooth connected by the limit-group lemma, and their Lie algebras agree. Apply [lem-sfb-smooth-subgroup-tangent-generation] to the ambient smooth connected group $Z$, the one-member family $H_1=T$ (smooth connected, with $\\operatorname{Lie}(T)$ spanning $\\operatorname{Lie}(Z)$) and the closed subgroup $K=T$, through which the inclusion of $H_1$ factors, to obtain $Z=T$. Thus $P=U\\rtimes T$.",
+   "uses": [
+    "lem-sfb-cocharacter-limit-smooth-structure",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-smooth-subgroup-tangent-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.29, printed p.434, first paragraph and displayed formula; Theorem 13.33."
+   }
+  },
+  {
+   "text": "The smooth unipotent group $U$ is solvable by [lem-sfb-smooth-unipotent-solvable]. Because $P/U=T$ is commutative, the first scheme-theoretic commutator subgroup of $P$ is contained in $U$; its successive commutators are contained in the successive commutators of $U$. A normal series with commutative quotients for $U$ bounds this latter sequence term by term, so it terminates. Hence $P$ is solvable. It is smooth connected by step 1. Among the smooth connected solvable subgroups of $G$ containing $P$, choose $B$ of largest dimension: the set is nonempty (it contains $P$), its dimensions are nonnegative integers bounded by $\\dim G$, and a strict smooth connected subgroup inclusion increases dimension, by [lem-sfb-solvable-normal-subgroup-products]. Therefore $B$ admits no larger smooth connected solvable subgroup, so is a Borel. It contains $T$.",
+   "uses": [
+    "lem-sfb-smooth-unipotent-solvable",
+    "lem-sfb-solvable-normal-subgroup-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.29, printed p.434, solvability and containment in a Borel; maximality made explicit."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-borel-opposite-root-dichotomy] to $B,T$. The inclusion $P\\subseteq B$ implies $\\operatorname{Lie}(P)\\subseteq\\operatorname{Lie}(B)$ by the tangent-space definition (a dual-number point of $P$ is one of $B$). For each opposite pair $\\{\\alpha,-\\alpha\\}$, regularity gives exactly one positive integer pairing with $\\lambda$, and step 1 puts its root space in $\\operatorname{Lie}(P)$. The dichotomy says $\\operatorname{Lie}(B)$ selects exactly one member of this pair and has no weights besides the selected roots and $\\operatorname{Lie}(T)$. It must therefore select precisely the positive members, so $\\operatorname{Lie}(P)=\\operatorname{Lie}(B)$. Since $P$ is smooth connected and $B$ smooth connected, [lem-sfb-smooth-subgroup-tangent-generation] applied to the ambient group $B$, the one-member family $H_1=P$ and $K=P$ gives $P=B$. This proves the forward assertion as a subgroup-scheme statement.",
+   "uses": [
+    "lem-sfb-borel-opposite-root-dichotomy",
+    "lem-sfb-smooth-subgroup-tangent-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.29, printed p.434, second paragraph; Lemma 21.28 and Proposition 10.15."
+   }
+  },
+  {
+   "text": "There exists a regular cocharacter $\\lambda_0$. To see this, fix $T\\simeq\\mathbf G_m^r$. Characters of this torus are integer monomials, by [lem-sfb-multiplicative-character-antiduality] (the split group $\\mathbf G_m^r$ corresponds to $\\mathbf Z^r$). For $r>0$, a root with nonzero exponent vector $(a_0,\\ldots,a_{r-1})$ pairs with the cocharacter $t\\mapsto(t,t^N,\\ldots,t^{N^{r-1}})$ as the nonzero polynomial $a_0+a_1N+\\cdots+a_{r-1}N^{r-1}$. Each has only finitely many integer zeros, so choose an integer $N$ avoiding the finite union of these zeros over $\\Phi$, which is finite by [lem-sfb-reductive-rank-one-reflections]. This cocharacter is regular. For $r=0$ the character group is zero and $\\Phi$ empty, so take $\\lambda_0=0$. By steps 1--3, $B_0=P(\\lambda_0)$ is a Borel containing $T$. For a given Borel $B\\supseteq T$, [lem-sfb-torus-normalizer-borel-transitivity] gives $n\\in G(F)$ with $nTn^{-1}=T$ and $nB_0n^{-1}=B$.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-torus-normalizer-borel-transitivity",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.32, printed pp.434--435; Corollary 17.11, printed p.355; regular-cocharacter existence underlying Corollary 21.30."
+   }
+  },
+  {
+   "text": "Set $\\lambda(t)=n\\lambda_0(t)n^{-1}$, a cocharacter of $T$. Conjugation by $n$ permutes the $T$-characters in $\\operatorname{Lie}(G)$ and preserves the character/cocharacter pairing, by [lem-sfb-reductive-rank-one-reflections]; hence $\\lambda$ remains regular. For every commutative $F$-algebra $A$ and $g\\in G(A)$, write $h=n_A^{-1}gn_A$. Then\n$$\\lambda(t)g\\lambda(t)^{-1}=n_A\\bigl(\\lambda_0(t)h\\lambda_0(t)^{-1}\\bigr)n_A^{-1}.$$\nConjugation by the constant section $n_A$ is an automorphism over $\\mathbf A^1_A$, so either orbit extends to $\\mathbf A^1_A$ if and only if the other does. Thus $P(\\lambda)(A)=n_AP(\\lambda_0)(A)n_A^{-1}=B(A)$ for every $A$. This proves $P(\\lambda)=B$ including nonreduced test algebras.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.32, printed pp.434--435; functorial conjugation calculation supplied explicitly."
+   }
+  },
+  {
+   "text": "Finally, if $\\Phi=\\varnothing$, [lem-sfb-reductive-rank-one-reflections] gives $\\operatorname{Lie}(G)=\\operatorname{Lie}(T)$. The torus $T$ is smooth connected and $G$ is smooth connected, so [lem-sfb-smooth-subgroup-tangent-generation], applied to the one-member family $H_1=T$ and $K=T$, gives $G=T$. Every conjugation orbit for the zero cocharacter is constant, so $P(0)=G=T$ on all algebras, and $0$ is regular because the root set is empty. The same applies to the trivial group.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-smooth-subgroup-tangent-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.29 and Theorem 21.32, rootless case, made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-cocharacter-limit-smooth-structure",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-smooth-subgroup-tangent-generation",
+  "lem-sfb-smooth-unipotent-solvable",
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-borel-opposite-root-dichotomy",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-torus-normalizer-borel-transitivity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 21.29 and Theorem 21.32, printed pp.433--435, with their inputs Theorem 13.33, Example 14.13, Lemma 21.28, Proposition 10.15 and Corollary 17.11. The all-algebra conjugation calculation and regular-cocharacter choice are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a split reductive algebraic group every Borel subgroup containing the torus is the parabolic of a regular cocharacter and its Lie algebra has exactly the positive weight spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieSubalgebra.root\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"{K : Type u_2} →\\n  {L : Type u_3} →\\n    [inst : LieRing L] →\\n      [inst_1 : Field K] →\\n        [inst_2 : LieAlgebra K L] →\\n          [FiniteDimensional K L] →\\n            {H : LieSubalgebra K L} → [inst_4 : H.IsCartanSubalgebra] → Finset (LieModule.Weight K (↥H) L)\", \"doc\": \"The finite set of non-zero weights $\\\\alpha \\\\in \\\\text{Weight}(K, \\\\mathfrak{h}, \\\\mathfrak{g})$ associated with the Lie subalgebra $\\\\mathfrak{h}$, where each weight $\\\\alpha$ satisfies $\\\\alpha \\\\neq 0$ (i.\"}\n  {\"name\": \"LieModule.exists_nontrivial_weightSpace_of_isSolvable\", \"module\": \"Mathlib/Algebra/Lie/LieTheorem\", \"type\": \"∀ (k : Type u_1) [inst : Field k] (L : Type u_2) [inst_1 : LieRing L] [inst_2 : LieAlgebra k L] (V : Type u_3)\\n  [inst_3 : AddCommGroup V] [inst_4 : Module k V] [inst_5 : LieRingModule L V] [inst_6 : LieModule k L V] [CharZero k]\\n  [Module.Finite k V] [Nontrivial V] [LieAlgebra.IsSolvable L] [LieMod\", \"doc\": \"Let $\\\\mathfrak{g}$ be a solvable Lie algebra over a field $k$, and let $V$ be a triangularizable $\\\\mathfrak{g}$-module. Then there exists a linear functional $\\\\chi \\\\in \\\\mathfrak{g}^*$ (the dual space \"}\n  {\"name\": \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L]\\n  [inst_3 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_4 : H.IsCartanSubalgebra]\\n  [inst_5 : LieAlgebra.IsKilling K L] [inst_6 : LieModule.IsTriangularizable K (↥H) L] [inst_7 : CharZero K]\\n  (α\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form and a non-zero weight $\\\\alpha$, the $\\\\mathfrak{sl}_2$-submodule generated by the $\\\\mathfrak{sl}_2$-triple associated \"}\n  {\"name\": \"LieModule.exists_nontrivial_weightSpace_of_lieIdeal\", \"module\": \"Mathlib/Algebra/Lie/LieTheorem\", \"type\": \"∀ {k : Type u_1} [inst : Field k] {L : Type u_2} [inst_1 : LieRing L] [inst_2 : LieAlgebra k L] {V : Type u_3}\\n  [inst_3 : AddCommGroup V] [inst_4 : Module k V] [inst_5 : LieRingModule L V] [inst_6 : LieModule k L V] [CharZero k]\\n  [Module.Finite k V] [LieModule.IsTriangularizable k L V] (A : LieIde\", \"doc\": \"Let $ V $ be a triangularizable Lie module over a Lie algebra $ \\\\mathfrak{g} $ over a field $ k $. If $ A $ is a coatom Lie ideal of $ \\\\mathfrak{g} $ (i.e., a maximal proper Lie ideal) and the weight \"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ {L : Type u_2} [inst : LieRing L] {K : Type u_4} [inst_1 : Field K] [inst_2 : LieAlgebra K L] [FiniteDimensional K L]\\n  (H : LieSubalgebra K L) [inst_4 : H.IsCartanSubalgebra] [LieModule.IsTriangularizable K (↥H) L],\\n  H.toLieSubmodule ⊔ ⨆ α, ⨆ (_ : α.IsNonZero), LieAlgebra.rootSpace H ⇑α = ⊤\", \"doc\": \"The direct sum of the Cartan subalgebra $\\\\mathfrak{h}$ and all non-zero root spaces associated with weights $\\\\chi$ equals the entire Lie algebra $\\\\mathfrak{g}$, i.e., $\\\\mathfrak{h} \\\\oplus \\\\bigoplus_{\\\\\"}\n  {\"name\": \"LieAlgebra.zero_rootSpace_eq_top_of_nilpotent\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : LieRing.IsNilpotent L], LieAlgebra.rootSpace ⊤ 0 = ⊤\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, if $\\\\mathfrak{g}$ is nilpotent, then the zero root space of $\\\\mathfrak{g}$ (defined as the intersection of generalized 0-eigenspaces for a\"}\n  {\"name\": \"LieAlgebra.rootSpace_zero_eq\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : H.IsCartanSubalgebra] [IsNoetherian R L],\\n  LieAlgebra.rootSpace H 0 = H.toLieSubmodule\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, if $\\\\mathfrak{h}$ is a Cartan subalgebra of $\\\\mathfrak{g}$ and $\\\\mathfrak{g}$ is Noetherian as an $R$-module, then the root space of $\\\\mat\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular one parameter subgroups classify Borel subgroups and their positive root spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.rootSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Cartan\", \"type\": \"(χ : H → R) : LieSubmodule R H L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with a subalgebra $\\\\mathfrak{h}$, and a root $\\\\chi : \\\\mathfrak{h} \\\\to R$, the root space is the generalized weight space $\\\\bigcap_{x \\\\in \\\\m\"}\n  {\"name\": \"LieSubalgebra.root.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.Weights.RootSystem\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L]\\n  [inst_3 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_4 : H.IsCartanSubalgebra],\\n  LieSubalgebra.root = LieSubalgebra.root\", \"doc\": \"For any field $ K $, Lie algebra $ L $ over $ K $, and Cartan subalgebra $ \\\\mathfrak{h} $ of $ L $, the finite set of non-zero weights (roots) associated with $ \\\\mathfrak{h} $ is uniquely determined b\"}\n  {\"name\": \"ContinuousSub.measurableSub\", \"module\": \"Mathlib.MeasureTheory.Constructions.BorelSpace.Basic\", \"type\": \"[Sub γ] [ContinuousSub γ] : MeasurableSub γ\", \"doc\": \"In a topological space equipped with its Borel $\\\\sigma$-algebra, every continuous subgroup is a measurable subset. This means that if $\\\\gamma$ is a subgroup of a topological space and its operations a\"}\n  {\"name\": \"QuotientGroup.borelSpace\", \"module\": \"Mathlib.MeasureTheory.Constructions.Polish.Basic\", \"type\": \"{G : Type*} [TopologicalSpace G] [PolishSpace G] [Group G] [IsTopologicalGroup G] [MeasurableSpace G] [BorelSpace G]\\n  {N : Subgroup G} [N.Normal] [IsClosed (N : Set G)] : BorelSpace (G ⧸ N)\", \"doc\": \"If $ G $ is a Polish topological group and $ N $ is a closed normal subgroup of $ G $, then the quotient group $ G/N $ is equipped with the Borel $ \\\\sigma $-algebra generated by the quotient topology \"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsRootSystemSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"module\": \"Mathlib.Algebra.Lie.Weights.RootSystem\", \"type\": \": (rootSystem H).IsRootSystem\", \"doc\": \"The root system constructed from the non-degenerate Killing form of a Lie algebra $\\\\mathfrak{g}$ over a field $K$, where the roots are elements of the dual space $\\\\mathfrak{h}^*$ of a Cartan subalgebr\"}\n  {\"name\": \"Subgroup.IsRegularAtInfty\", \"module\": \"Mathlib.NumberTheory.ModularForms.Cusps\", \"type\": \": Prop\", \"doc\": \"A subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,R)$ is regular at infinity if its strict periods subgroup equals its periods subgroup, i.e., when $\\\\mathcal{G}.\\\\text{strictPeriods} = \\\\mathcal{G}.\\\\text{\"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsCrystallographicSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"module\": \"Mathlib.Algebra.Lie.Weights.RootSystem\", \"type\": \": (rootSystem H).IsCrystallographic\", \"doc\": \"The root system constructed from the non-degenerate Killing form of a Lie algebra $\\\\mathfrak{g}$ over a field $K$, where the roots are elements of the dual space $\\\\mathfrak{h}^*$ of a Cartan subalgebr\"}\n  {\"name\": \"Subgroup.IsRegularAtInfty.eq\", \"module\": \"Mathlib.NumberTheory.ModularForms.Cusps\", \"type\": \"(h : 𝒢.IsRegularAtInfty) : 𝒢.strictPeriods = 𝒢.periods\", \"doc\": \"If a subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,R)$ is regular at infinity, then its strict periods subgroup $\\\\mathcal{G}.\\\\text{strictPeriods}$ equals its periods subgroup $\\\\mathcal{G}.\\\\text{period\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cocharacter\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*cocharacter|BorelSubgroup|parabolic.*cocharacter",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular cocharacters of a maximal torus in a reductive algebraic group define Borel limit subgroups with positive root Lie algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieSubalgebra.root\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"{K : Type u_2} →\\n  {L : Type u_3} →\\n    [inst : LieRing L] →\\n      [inst_1 : Field K] →\\n        [inst_2 : LieAlgebra K L] →\\n          [FiniteDimensional K L] →\\n            {H : LieSubalgebra K L} → [inst_4 : H.IsCartanSubalgebra] → Finset (LieModule.Weight K (↥H) L)\", \"doc\": \"The finite set of non-zero weights $\\\\alpha \\\\in \\\\text{Weight}(K, \\\\mathfrak{h}, \\\\mathfrak{g})$ associated with the Lie subalgebra $\\\\mathfrak{h}$, where each weight $\\\\alpha$ satisfies $\\\\alpha \\\\neq 0$ (i.\"}\n  {\"name\": \"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] (H : LieSubalgebra K L) [inst_6 : H.IsCartanSubalgebra]\\n  [LieModule.IsTriangularizable K (↥H) L], ⨆ α, ⨆ (_ : α.IsNonZero), LieA\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with a Cartan subalgebra $\\\\mathfrak{h}$ and non-degenerate Killing form, the supremum (sum) of all coroot spaces $\\\\mathrm{corootSpace}(\\\\alpha)$ associ\"}\n  {\"name\": \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  {H : LieSubalgebra R L} (α χ : ↥H → R) [inst_7 : H.IsCartanSubalgebra] [inst_8\", \"doc\": \"Let $ R $ be a commutative ring that is an integral domain, a principal ideal ring, and has characteristic zero. Let $ M $ be a torsion-free, Noetherian $ R $-module. For a non-zero weight $ \\\\alpha : \"}\n  {\"name\": \"LieAlgebra.corootSpace\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"{R : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : LieRing L] →\\n        [inst_2 : LieAlgebra R L] →\\n          {H : LieSubalgebra R L} →\\n            [LieRing.IsNilpotent ↥H] → [H.IsCartanSubalgebra] → [IsNoetherian R L] → (↥H → R) → LieIdeal R ↥H\", \"doc\": \"The coroot space associated to a weight $\\\\alpha : \\\\mathfrak{h} \\\\to R$ is the image of the composition of maps from the tensor product of root spaces $\\\\mathfrak{g}_\\\\alpha \\\\otimes_R \\\\mathfrak{g}_{-\\\\alph\"}\n  {\"name\": \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L]\\n  [inst_3 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_4 : H.IsCartanSubalgebra]\\n  [inst_5 : LieAlgebra.IsKilling K L] [inst_6 : LieModule.IsTriangularizable K (↥H) L] [inst_7 : CharZero K]\\n  (α\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form and a non-zero weight $\\\\alpha$, the $\\\\mathfrak{sl}_2$-submodule generated by the $\\\\mathfrak{sl}_2$-triple associated \"}\n  {\"name\": \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L]\\n  [inst_3 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_4 : H.IsCartanSubalgebra]\\n  [inst_5 : LieAlgebra.IsKilling K L] [inst_6 : LieModule.IsTriangularizable K (↥H) L] [inst_7 : CharZero K]\\n  {α\", \"doc\": \"An element $ x $ belongs to the $ \\\\mathfrak{sl}_2 $-subalgebra generated by an $ \\\\mathfrak{sl}_2 $-triple $ (h,e,f) $ corresponding to a non-zero root $ \\\\alpha $ if and only if $ x $ can be expressed \"}\n  {\"name\": \"LieAlgebra.IsKilling.sl2SubalgebraOfRoot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"{K : Type u_2} →\\n  {L : Type u_3} →\\n    [inst : LieRing L] →\\n      [inst_1 : Field K] →\\n        [inst_2 : LieAlgebra K L] →\\n          [FiniteDimensional K L] →\\n            {H : LieSubalgebra K L} →\\n              [inst_4 : H.IsCartanSubalgebra] →\\n                [LieAlgebra.IsKilling K L] →\\n         \", \"doc\": \"Given a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with a non-degenerate Killing form and a non-zero weight $\\\\alpha$, this constructs the $\\\\mathfrak{sl}_2$-subalgebra of $\\\\mathfrak{g}$ generated by e\"}\n  {\"name\": \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ {L : Type u_2} [inst : LieRing L] {K : Type u_4} [inst_1 : Field K] [inst_2 : LieAlgebra K L] [FiniteDimensional K L]\\n  (H : LieSubalgebra K L) [inst_4 : H.IsCartanSubalgebra] [LieModule.IsTriangularizable K (↥H) L],\\n  H.toLieSubmodule ⊔ ⨆ α, ⨆ (_ : α.IsNonZero), LieAlgebra.rootSpace H ⇑α = ⊤\", \"doc\": \"The direct sum of the Cartan subalgebra $\\\\mathfrak{h}$ and all non-zero root spaces associated with weights $\\\\chi$ equals the entire Lie algebra $\\\\mathfrak{g}$, i.e., $\\\\mathfrak{h} \\\\oplus \\\\bigoplus_{\\\\\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, root pairings or Lie algebra modules, analytic Lie groups, or cotangent modules; none states this arbitrary-characteristic assertion about affine group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every Borel subgroup containing a split maximal torus is a contraction parabolic for a one parameter subgroup",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"module\": \"Mathlib.NumberTheory.ModularForms.Cusps\", \"type\": \"{g} (hg : g ∈ 𝒢) (hg10 : g 1 0 = 0) : g.IsParabolic ↔ (∃ x ≠ 0, g = upperRightHom x) ∨ (∃ x ≠ 0, g = -upperRightHom x)\", \"doc\": \"For a matrix $ g $ in the subgroup of $ \\\\mathrm{GL}(2, R) $ with determinant $ \\\\pm 1 $ and $ g_{1,0} = 0 $, $ g $ is parabolic if and only if there exists a non-zero $ x \\\\in R $ such that $ g $ equals\"}\n  {\"name\": \"Matrix.GeneralLinearGroup.IsParabolic\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \"(g : GL (Fin 2) R) : Prop\", \"doc\": \"A 2×2 invertible matrix over a semiring $ R $ is parabolic if it is not a scalar matrix (i.e., not a scalar multiple of the identity matrix) and its characteristic polynomial has zero discriminant.\"}\n  {\"name\": \"ContinuousSub.measurableSub\", \"module\": \"Mathlib.MeasureTheory.Constructions.BorelSpace.Basic\", \"type\": \"[Sub γ] [ContinuousSub γ] : MeasurableSub γ\", \"doc\": \"In a topological space equipped with its Borel $\\\\sigma$-algebra, every continuous subgroup is a measurable subset. This means that if $\\\\gamma$ is a subgroup of a topological space and its operations a\"}\n  {\"name\": \"OpenSubgroup\", \"module\": \"Mathlib.Topology.Algebra.OpenSubgroup\", \"type\": \"(G : Type u_1) → [Group G] → [TopologicalSpace G] → Type u_1\", \"doc\": \"An open subgroup of a topological group $G$ is a subgroup $H \\\\subseteq G$ that is also an open set in the topology of $G$.\"}\n  {\"name\": \"Ideal.IsMaximal.under\", \"module\": \"Mathlib.RingTheory.Ideal.GoingUp\", \"type\": \"[P.IsMaximal] : (P.under A).IsMaximal\", \"doc\": \"If $ B $ is an integral extension of $ A $, then the contraction of a maximal ideal $ P $ in $ B $ under the algebra homomorphism $ A \\to B $ is a maximal ideal in $ A $.\"}\n  {\"name\": \"QuotientGroup.borelSpace\", \"module\": \"Mathlib.MeasureTheory.Constructions.Polish.Basic\", \"type\": \"{G : Type*} [TopologicalSpace G] [PolishSpace G] [Group G] [IsTopologicalGroup G] [MeasurableSpace G] [BorelSpace G]\\n  {N : Subgroup G} [N.Normal] [IsClosed (N : Set G)] : BorelSpace (G ⧸ N)\", \"doc\": \"If $ G $ is a Polish topological group and $ N $ is a closed normal subgroup of $ G $, then the quotient group $ G/N $ is equipped with the Borel $ \\\\sigma $-algebra generated by the quotient topology \"}\n  {\"name\": \"Sylow.subtype.congr_simp\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G] (P P_1 : Sylow p G) (e_P : P = P_1) {N : Subgroup G} (h : ↑P ≤ N),\\n  P.subtype h = P_1.subtype ⋯\", \"doc\": \"If $ P $ is a Sylow $ p $-subgroup of a group $ G $ and is contained in a subgroup $ N $ of $ G $, then $ P $ is also a Sylow $ p $-subgroup of $ N $.\"}\n  {\"name\": \"IsApproximateSubgroup.subgroup\", \"module\": \"Mathlib.Combinatorics.Additive.ApproximateSubgroup\", \"type\": \"{S : Type*} [SetLike S G] [SubgroupClass S G] {H : S} : IsApproximateSubgroup 1 (H : Set G)\", \"doc\": \"Every subgroup $ H $ of a group $ G $ is a $ 1 $-approximate subgroup, meaning it satisfies the definition of an approximate subgroup with the minimal constant $ \\\\kappa = 1 $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, root pairings or Lie algebra modules, analytic Lie groups, or cotangent modules; none states this arbitrary-characteristic assertion about affine group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cocharacter\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, root pairings or Lie algebra modules, analytic Lie groups, or cotangent modules; none states this arbitrary-characteristic assertion about affine group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*cocharacter|BorelSubgroup|parabolic.*cocharacter",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, root pairings or Lie algebra modules, analytic Lie groups, or cotangent modules; none states this arbitrary-characteristic assertion about affine group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-borel-pair-structure",
+  "date": "2026-10-23",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Identify the actual Lie(B) weights with an integral positive half-space; the simple-root base is subsequently constructed in the item.",
+   "via": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-regular-cocharacter-borel-description",
+  "worker": "stage1",
+  "summary": "Followed Milne 21.29 and 21.32, extracting three general non-elementary inputs, reusing the live normalizer-transitivity node and arbitrary-characteristic rank-one data. Preserved the statement, including rootless and nonreduced test-algebra cases; supplied maximal-dimension Borel existence, regular-cocharacter construction, and direct functorial conjugation. Searches found no exact project proof or Mathlib match. Maintainer reader FIX (2026-10-24): the new rigidity node was a special case of the existing lem-sfb-smooth-subgroup-tangent-generation (Milne 10.17, one-member family); it is dropped and steps 1, 3 and 6 cite the existing node; step 4 cites rank-one-reflections for finiteness of the roots.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), with the inherited alteration/moduli/PGL/Steinberg prerequisite chain in blueprint.from.place. This item supplies the positive-half-space description needed by lem-sfb-reductive-borel-pair-structure. There is no exact blueprint node for these cocharacter facts."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-54fa226ef",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-54fa226ef (reviewer sub-agent of L); spot-checked: I read the whole item, all three new nodes and every cited statement against Milne iAG2017: Prop 10.15 and Cor 10.17 (p.191), Thm 13.33(a)-(e) (pp.265-266), Ex 14.13, Thm 21.11(b),(c), Lemma 21.28, Prop 21.29 and Thm 21.32 (pp.433-435). Step by step: (1) Z=T by regularity and the limit-group Lie formulas, and Lie(P) is T plus the positive roots. (2) P is solvable because U is solvable and P/U=T is commutative; a Borel B containing P is chosen of maximal dimension. (3) The opposite-root dichotomy gives Lie B = Lie P, so P=B. (4) A regular cocharacter (t,t^N,...) exists, and the normalizer-transitivity node supplies n. (5) Conjugation by n works on every test algebra and keeps the cocharacter regular. (6) With no roots, G=T and P(0)=G. This follows Milne 21.29/21.32 correctly, with no characteristic restriction. There is no cycle, and every citation is in unit sk-thm-sf-ctf-stability, so there is no off-unit tool use. The two new nodes I keep, cocharacter-limit-smooth-structure (13.33+14.13) and borel-opposite-root-dichotomy (21.28+21.11), are true and are not restatements of the item; I tested them on lambda=0, a central GL_2 cocharacter, SL_2 upper and lower Borels, and characteristic 2. FIX (C5): the new node lem-sfb-smooth-subgroup-lie-rigidity duplicates the existing unsplit lem-sfb-smooth-subgroup-tangent-generation (Milne 10.17, same unit, any characteristic) taken with a one-member family; every use has connected H (T in Z, P in B, T in G). I dropped it, repointed steps 1, 3 and 6 to the existing node with the family and K stated, added rank-one-reflections to step 4 for the finiteness of Phi, and recomputed proof_deps. Batch-5: lem-trf-smooth-fpqc-base-descent (Mathlib leaf, fpqc descent of smoothness), def-trf-scheme-cover-descent-datum (general descent-data definition) and lem-trf-fppf-covering-base-change (Mathlib leaf) are generic descent tools, not steps of the trace formula or Poincare duality; accepted.; 1 file(s) fixed by the reviewer"
+ }
+}

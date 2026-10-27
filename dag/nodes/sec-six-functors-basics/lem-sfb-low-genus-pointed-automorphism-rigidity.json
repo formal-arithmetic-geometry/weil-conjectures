@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-low-genus-pointed-automorphism-rigidity",
+ "kind": "statement",
+ "title": "Rigidity of automorphisms on pointed smooth curves of genus zero or one",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $Y/k$ be a smooth projective connected curve [def-sc-curves, def-kun-projective], and let $b$ be a $k$-automorphism. Genus is [def-sc-genus], and $\\operatorname{Pic}^0(Y)$ is the group of degree-zero invertible sheaf classes [def-sc-pic0, def-sc-invertible-module]. If $Y$ has genus zero, then $Y\\simeq\\mathbf P^1_k$, and if $b$ fixes three distinct $k$-points then $b=\\operatorname{id}_Y$. If $Y$ has genus one and $b^*$ acts identically on $\\operatorname{Pic}^0(Y)$, then for any choice of origin $O\\in Y(k)$ the automorphism $b$ is a translation for the elliptic group law on $Y$ with identity $O$. Consequently, in genus one, identity on $\\operatorname{Pic}^0(Y)$ together with one fixed $k$-point implies $b=\\operatorname{id}_Y$.",
+ "source": {
+  "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+  "place": "Lemma 1.15(b),(c) and Lemma 1.16(b),(c), printed pp.85–86; genus-one Abel identification and projective-line automorphisms. Genus-zero classification: Stacks curves.tex Tag 0C6N, lemma-genus-zero. Local PDF WANTED; primary PDF read online.",
+  "url": "https://www.numdam.org/item/PMIHES_1969__36__75_0.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-invertible-module",
+  "def-sc-curves",
+  "def-kun-projective",
+  "def-sc-genus",
+  "def-sc-pic0"
+ ],
+ "proof": [
+  {
+   "text": "In genus zero apply [lem-trf-genus-zero-smooth-proper-line] to $Y$: its field is algebraically closed and it is smooth, proper and connected, with $g(Y)=0$. This gives a $k$-isomorphism $h:Y\\simeq\\mathbf P^1_k$. (Properness: the embedding of [def-kun-projective] is a closed immersion into $\\mathbf P^N_k$, hence H-projective and quasi-compact, i.e. projective in the sense of [lem-pc-projective-proper], which makes $Y$ proper over $k$.)",
+   "uses": [
+    "lem-trf-genus-zero-smooth-proper-line",
+    "def-kun-projective",
+    "lem-pc-projective-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6U, proposition-projective-line, algebraically closed genus-zero specialization."
+   }
+  },
+  {
+   "text": "Conjugate $b$ by $h$. By [lem-sfb-projective-frames-pgl], with $S=\\operatorname{Spec}k$ and $r=2$, this automorphism is induced by an invertible matrix $A$: a nonempty Zariski open of $\\operatorname{Spec}k$ is all of it. Let $L_1,L_2,L_3$ be the three distinct fixed lines in the homogeneous coordinate space $k^2$. Choose nonzero $v_i\\in L_i$ for $i=1,2$; they are a basis. Write a generator of $L_3$ as $a v_1+c v_2$, where $a,c\\ne0$ since the three lines are distinct. Invariance of the first two lines gives $A v_i=\\lambda_i v_i$. Invariance of the third gives $a\\lambda_1=\\mu a$ and $c\\lambda_2=\\mu c$, so $\\lambda_1=\\lambda_2$. Thus $A$ is scalar and its projective automorphism is the identity. Conjugating back gives $b=\\operatorname{id}_Y$.",
+   "uses": [
+    "lem-sfb-projective-frames-pgl"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+    "place": "Lemma 1.15(c), printed p.85; agent expansion of the projectivity calculation, using the existing projective-automorphism node."
+   }
+  },
+  {
+   "text": "Now suppose $g(Y)=1$ and fix an arbitrary $O\\in Y(k)$. Apply [lem-sfb-genus-one-abel-group-identification] to this pointed curve. We obtain algebraic addition and inversion on $Y$, with identity $O$, and an additive bijection $\\alpha=\\alpha_O$, $\\alpha(P)=[\\mathcal O_Y(P-O)]$. In particular translation by every $k$-point is a $k$-scheme automorphism (its inverse is translation by the negative point).",
+   "uses": [
+    "lem-sfb-genus-one-abel-group-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DSV, example-pos-dim, genus-one paragraph: the degree-one Abel map is an isomorphism and identifying Picard degree one with degree zero gives the abelian-variety structure."
+   }
+  },
+  {
+   "text": "For the automorphism $b$, pullback of a divisor line bundle satisfies $b^*\\mathcal O_Y(P-O)\\simeq\\mathcal O_Y(b^{-1}P-b^{-1}O)$. Here is the local check, rather than an extra functoriality assumption: the isomorphism of local rings induced by $b$ identifies a uniformizer at $P$ with a uniformizer at $b^{-1}P$, so preserves the normalized valuation. The valuation inequalities defining $\\mathcal O_Y(D)$ in [def-sc-divisor] are therefore precisely the inequalities for $b^{-1}D$ after pullback [def-pc-module-pullback]. Applying the divisor-class homomorphism [lem-sc-divisor-class-curve] gives $b^*\\alpha(P)=\\alpha(b^{-1}P)-\\alpha(b^{-1}O)$.",
+   "uses": [
+    "def-sc-divisor",
+    "def-pc-module-pullback",
+    "lem-sc-divisor-class-curve"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DSV, example-pos-dim, Abel identification; agent local calculation for transport of divisor modules under an isomorphism."
+   }
+  },
+  {
+   "text": "Put $c=b^{-1}(O)$. The assumption $b^*|_{\\operatorname{Pic}^0(Y)}=1$ and step 4 give $\\alpha(b^{-1}P)=\\alpha(P)+\\alpha(c)=\\alpha(P+c)$ for every $P\\in Y(k)$. Injectivity of $\\alpha$ gives $b^{-1}P=P+c$. Replacing $P$ by $b(Q)$ gives $b(Q)=Q-c$. Taking $Q=O$ shows $b(O)=-c$, so $b(Q)=Q+b(O)$ on all $k$-points. No homomorphism property for $b$ has been assumed.",
+   "uses": [
+    "lem-sfb-genus-one-abel-group-identification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DSV, example-pos-dim, genus-one paragraph: the degree-one Abel map is an isomorphism and identifying Picard degree one with degree zero gives the abelian-variety structure."
+   }
+  },
+  {
+   "text": "The pointwise equality in step 5 is equality of scheme morphisms. To justify this explicitly, $Y$ is reduced by [lem-sc-smooth-regular]. For two $k$-morphisms $f,g:Y\\to Y$ agreeing on $k$-points, the opens $f^{-1}V\\cap g^{-1}V$, with $V$ affine in the separated target, contain every closed point: closed points are $k$-points by [lem-wf-affine-nullstellensatz-vanishing](1). They cover $Y$, since a nonempty closed complement in a finite-type scheme has a closed point (on an affine chart choose a maximal ideal of its nonzero quotient algebra and apply the same clause). On an affine open $U$ of one such intersection, for each $s\\in\\mathcal O(V)$ the section $f^*s-g^*s$ vanishes on all $k$-points of $U$. Clause (2) of that node makes it zero, since $U$ is reduced and of finite type. Thus the ring maps agree on every such chart, hence $f=g$. Apply this to $b$ and the algebraic translation $Q\\mapsto Q+b(O)$. If $b$ has a fixed $k$-point $Q$, cancellation in $Q+b(O)=Q$ gives $b(O)=O$, and this translation is the identity. The origin was arbitrary.",
+   "uses": [
+    "lem-sc-smooth-regular",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-mumford-irreducibility_PMIHES-1969-36.pdf",
+    "place": "Lemma 1.15(b) and Lemma 1.16(b), printed pp.85–86; agent expansion of the final translation and fixed-point argument, with affine Nullstellensatz to pass to scheme morphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-genus-zero-smooth-proper-line",
+  "def-kun-projective",
+  "lem-pc-projective-proper",
+  "lem-sfb-projective-frames-pgl",
+  "lem-sfb-genus-one-abel-group-identification",
+  "def-sc-divisor",
+  "def-pc-module-pullback",
+  "lem-sc-divisor-class-curve",
+  "lem-sc-smooth-regular",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0DSV, example-pos-dim, together with Deligne–Mumford Lemmas 1.15(b),(c), 1.16(b),(c); detailed matrix and Abel-class calculations supplied by Q72."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A genus one smooth projective curve automorphism trivial on Picard zero and fixing a point is identity; a projective line automorphism fixing three distinct points is identity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective.Point.ext\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} {inst : CommRing R} {W' : WeierstrassCurve.Projective R} {x y : W'.Point}, x.point = y.point → x = y\", \"doc\": \"For any commutative ring $ R $ and projective Weierstrass curve over $ R $, if two points $ x $ and $ y $ have the same projective point class in the projective space over $ R $, then $ x = y $.\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.ext_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} {inst : CommRing R} {W' : WeierstrassCurve.Projective R} {x y : W'.Point}, x = y ↔ x.point = y.point\", \"doc\": \"For any commutative ring $ R $, and any two points $ x $ and $ y $ on a projective Weierstrass curve over $ R $, $ x = y $ if and only if their corresponding projective point classes in the projective\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.toAffine_of_equiv\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Projective F} {P Q : Fin 3 → F},\\n  P ≈ Q → WeierstrassCurve.Projective.Point.toAffine W P = WeierstrassCurve.Projective.Point.toAffine W Q\", \"doc\": \"If two projective Weierstrass curve points $[X:Y:Z]$ and $[X':Y':Z']$ over a field are equivalent (i.e., there exists a unit $\\\\lambda$ such that $X' = \\\\lambda X$, $Y' = \\\\lambda Y$, $Z' = \\\\lambda Z$), \"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.mk.inj\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} {inst : CommRing R} {W' : WeierstrassCurve.Projective R}\\n  {point : WeierstrassCurve.Projective.PointClass R} {nonsingular : W'.NonsingularLift point}\\n  {point_1 : WeierstrassCurve.Projective.PointClass R} {nonsingular_1 : W'.NonsingularLift point_1},\\n  { point := point, nonsingular :\", \"doc\": \"For a commutative ring $ R $ and a projective Weierstrass curve over $ R $, if two nonsingular projective points constructed via the $\\\\mathrm{mk}$ function are equal, then their underlying projective \"}\n  {\"name\": \"WeierstrassCurve.Projective.instSetoidForallFinOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [CommRing R] → Setoid (Fin 3 → R)\", \"doc\": \"For any ring $ R $, there is an equivalence relation on the set of 3-tuples with entries in $ R $, where two tuples are equivalent if one is obtained from the other by multiplying all entries by a uni\"}\n  {\"name\": \"WeierstrassCurve.Projective.comp_equiv_comp\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {F : Type u} {K : Type v} [inst : Field F] [inst_1 : Field K] {W : WeierstrassCurve.Projective F} (f : F →+* K)\\n  {P Q : Fin 3 → F}, W.Nonsingular P → W.Nonsingular Q → (⇑f ∘ P ≈ ⇑f ∘ Q ↔ P ≈ Q)\", \"doc\": \"For a ring homomorphism $ f : F \\\\to K $ between fields and nonsingular points $ P, Q $ on a projective Weierstrass curve over $ F $, the images $ f \\\\circ P $ and $ f \\\\circ Q $ are projectively equival\"}\n  {\"name\": \"WeierstrassCurve.Projective.PointClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"(R : Type r) → [CommRing R] → Type r\", \"doc\": \"The quotient of the type of triples $(x_0, x_1, x_2)$ in $R^3$ by the equivalence relation identifying triples that are scalar multiples of each other under the action of the multiplicative group of u\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.toAffine_of_equiv\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Jacobian F} {P Q : Fin 3 → F},\\n  P ≈ Q → WeierstrassCurve.Jacobian.Point.toAffine W P = WeierstrassCurve.Jacobian.Point.toAffine W Q\", \"doc\": \"If two projective points $ P $ and $ Q $ on the Jacobian of a Weierstrass curve over a field $ F $ are equivalent under scalar multiplication by units in $ F $, then their corresponding affine points \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: projective point extensionality, projectivization subspaces, Weierstrass coordinate changes and the GL action on OnePoint do not classify automorphisms of smooth projective curves or their action on Picard zero."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projectivization\", \"ext\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"Projectivization.Subspace.ext\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Subspace\", \"type\": \" {K : Type u_1} {V : Type u_2} {inst✝ : DivisionRing K} {inst✝¹ : AddCommGroup V} {inst✝² : Module K V} {x y : Projectivization.Subspace K V} (carrier : x.carrier = y.carrier) : x = y\", \"doc\": \"\"}\n  {\"name\": \"Projectivization.Subspace.ext_iff\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Subspace\", \"type\": \" {K : Type u_1} {V : Type u_2} {inst✝ : DivisionRing K} {inst✝¹ : AddCommGroup V} {inst✝² : Module K V} {x y : Projectivization.Subspace K V} : x = y ↔ x.carrier = y.carrier\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: projective point extensionality, projectivization subspaces, Weierstrass coordinate changes and the GL action on OnePoint do not classify automorphisms of smooth projective curves or their action on Picard zero."
+  },
+  {
+   "tool": "grep",
+   "query": "(automorphism|[Aa]ut).*(three|elliptic|genus)|(elliptic|genus).*(translation|automorphism)",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Note.lean\", \"line\": \"149\", \"text\": \"Mathlib makes heavy use of `autoParam`s in the continuous functional calculus. There are three\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: projective point extensionality, projectivization subspaces, Weierstrass coordinate changes and the GL action on OnePoint do not classify automorphisms of smooth projective curves or their action on Picard zero."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An automorphism of an elliptic curve acting identically on its degree zero line bundles is a translation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CircleDeg1Lift.translationNumber_one\", \"module\": \"Mathlib.Dynamics.Circle.RotationNumber.TranslationNumber\", \"type\": \": τ 1 = 0\", \"doc\": \"τ(1) = 0\"}\n  {\"name\": \"translate_zero_right\", \"module\": \"Mathlib.Algebra.Group.Translate\", \"type\": \"[Zero α] (a : G) : τ a (0 : G → α) = 0\", \"doc\": \"For any additive commutative group $ G $, type $ \\\\alpha $ with a zero element, and element $ a \\\\in G $, the translation of the zero function $ G \\\\to \\\\alpha $ by $ a $ equals the zero function. That is\"}\n  {\"name\": \"AddAut\", \"module\": \"Mathlib.Algebra.Group.End\", \"type\": \"(M : Type u_7) → [Add M] → Type u_7\", \"doc\": \"The type of additive automorphisms on M, which are bijective additive homomorphisms from M to itself.\"}\n  {\"name\": \"WeierstrassCurve.VariableChange.noConfusionType\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.VariableChange\", \"type\": \"Sort u_1 →\\n  {R : Type u} →\\n    [inst : CommRing R] →\\n      WeierstrassCurve.VariableChange R →\\n        {R' : Type u} → [inst' : CommRing R'] → WeierstrassCurve.VariableChange R' → Sort u_1\", \"doc\": \"The type of variable changes (isomorphisms) for an elliptic curve over a commutative ring $ R $.\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass_eq_zero\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point\", \"type\": \"(P : W.Point) : toClass P = 0 ↔ P = 0\", \"doc\": \"For any point $ P $ on an affine Weierstrass curve over a field, the image of $ P $ under the additive homomorphism to the class group of the coordinate ring is zero if and only if $ P $ is the zero p\"}\n  {\"name\": \"translate_zero\", \"module\": \"Mathlib.Algebra.Group.Translate\", \"type\": \"(f : G → α) : τ 0 f = f\", \"doc\": \"For any function $ f : G \\\\to \\\\alpha $, translating $ f $ by the zero element of the additive commutative group $ G $ yields $ f $ itself, i.e., $ \\\\tau(0, f) = f $. This follows because shifting inputs\"}\n  {\"name\": \"CircleDeg1Lift.translate_zpow\", \"module\": \"Mathlib.Dynamics.Circle.RotationNumber.TranslationNumber\", \"type\": \"(x : ℝ) (n : ℤ) : translate (Multiplicative.ofAdd x) ^ n = translate (Multiplicative.ofAdd <| ↑n * x)\", \"doc\": \"For any real number $x$ and integer $n$, the $n$-th power of the translation homomorphism $T_x$ (defined by $T_x(y) = x + y$) equals the translation homomorphism $T_{n x}$. This expresses that integer\"}\n  {\"name\": \"AffineEquiv.linear_constVAdd\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.AffineEquiv\", \"type\": \"∀ (k : Type u_1) (P₁ : Type u_2) {V₁ : Type u_6} [inst : Ring k] [inst_1 : AddCommGroup V₁] [inst_2 : Module k V₁]\\n  [inst_3 : AddTorsor V₁ P₁] (v : V₁), (AffineEquiv.constVAdd k P₁ v).linear = LinearEquiv.refl k V₁\", \"doc\": \"For any ring $ k $, affine space $ P_1 $ over a module $ V_1 $, and vector $ v \\\\in V_1 $, the linear part of the affine equivalence induced by translation by $ v $ is the identity linear equivalence o\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: projective point extensionality, projectivization subspaces, Weierstrass coordinate changes and the GL action on OnePoint do not classify automorphisms of smooth projective curves or their action on Picard zero."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projectivity of the projective line fixing three points is identity and a genus one automorphism in the Picard kernel is a translation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective.Point.toAffineAddEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] → (W : WeierstrassCurve.Projective F) → [inst_1 : DecidableEq F] → W.Point ≃+ W.toAffine.Point\", \"doc\": \"The additive equivalence between the projective points and affine points of a Weierstrass curve over a field $ F $ with decidable equality, established by the affine lift and projective conversion fun\"}\n  {\"name\": \"OnePoint.smul_infty_def\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] {g : GL (Fin 2) K},\\n  g • OnePoint.infty = (OnePoint.equivProjectivization K).symm (Projectivization.mk K (↑g 0 0, ↑g 1 0) ⋯)\", \"doc\": \"For any invertible $ 2 \\\\times 2 $ matrix $ g $ over a division ring $ K $, the action of $ g $ on the point at infinity $ \\\\infty $ in the one-point compactification $ \\\\text{OnePoint}\\\\, K $ corresponds\"}\n  {\"name\": \"OnePoint.smul_some_eq_ite\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] {g : GL (Fin 2) K} {k : K},\\n  g • ↑k = if ↑g 1 0 * k + ↑g 1 1 = 0 then OnePoint.infty else ↑((↑g 0 0 * k + ↑g 0 1) / (↑g 1 0 * k + ↑g 1 1))\", \"doc\": \"For any invertible 2×2 matrix $ g = \\\\begin{pmatrix} g_{00} & g_{01} \\\\\\\\ g_{10} & g_{11} \\\\end{pmatrix} $ over a field $ K $ and any element $ k \\\\in K $, the action of $ g $ on $ k $ in the one-point com\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.toAffine_of_equiv\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Projective F} {P Q : Fin 3 → F},\\n  P ≈ Q → WeierstrassCurve.Projective.Point.toAffine W P = WeierstrassCurve.Projective.Point.toAffine W Q\", \"doc\": \"If two projective Weierstrass curve points $[X:Y:Z]$ and $[X':Y':Z']$ over a field are equivalent (i.e., there exists a unit $\\\\lambda$ such that $X' = \\\\lambda X$, $Y' = \\\\lambda Y$, $Z' = \\\\lambda Z$), \"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.toAffineAddEquiv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] (W : WeierstrassCurve.Projective F) [inst_1 : DecidableEq F] (P : W.Point),\\n  (WeierstrassCurve.Projective.Point.toAffineAddEquiv W) P = P.toAffineLift\", \"doc\": \"For a Weierstrass curve $ W $ over a field $ F $ with decidable equality, there exists an additive equivalence between the projective points of $ W $ and their affine counterparts. This equivalence is\"}\n  {\"name\": \"WeierstrassCurve.Projective.PointClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"(R : Type r) → [CommRing R] → Type r\", \"doc\": \"The quotient of the type of triples $(x_0, x_1, x_2)$ in $R^3$ by the equivalence relation identifying triples that are scalar multiples of each other under the action of the multiplicative group of u\"}\n  {\"name\": \"OnePoint.instGLAction\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"{K : Type u_1} → [inst : Field K] → [DecidableEq K] → MulAction (GL (Fin 2) K) (OnePoint K)\", \"doc\": \"The general linear group $ \\\\mathrm{GL}(2, K) $ acts on the one-point compactification $ \\\\text{OnePoint}\\\\, K $ of a field $ K $, induced by its natural action on the projective line over $ K $. This ac\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.toAffine_smul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Projective F} (P : Fin 3 → F) {u : F},\\n  IsUnit u → WeierstrassCurve.Projective.Point.toAffine W (u • P) = WeierstrassCurve.Projective.Point.toAffine W P\", \"doc\": \"Let $W$ be a projective Weierstrass curve over a field $F$. For any point $P$ on $W$ and any non-zero scalar $u \\\\in F$, scaling the homogeneous coordinates of $P$ by $u$ does not change the resulting \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: projective point extensionality, projectivization subspaces, Weierstrass coordinate changes and the GL action on OnePoint do not classify automorphisms of smooth projective curves or their action on Picard zero."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-picard-action-faithful",
+  "date": "2026-10-23",
+  "group": "Q118"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: last sentence, invoking Deligne–Mumford Theorem 1.13 after identity on all of Pic^0 has been established; this lemma assumes identity on all line bundles, not merely level torsion. Auxiliary: Lemma 1.15(b),(c) and Lemma 1.16(b),(c), printed pp.85–86; genus-one Abel identification and projective-line automorphisms. Genus-zero classification: Stacks curves.tex Tag 0C6N, lemma-genus-zero. Local PDF WANTED; primary PDF read online.",
+   "via": [
+    "lem-sfb-stable-picard-action-faithful",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-low-genus-pointed-automorphism-rigidity",
+  "worker": "stage1",
+  "summary": "Reused the existing genus-zero classification and projective automorphism matrix description; added only the foundational genus-one Abel/group-law input, and proved translation and both rigidity assertions by explicit calculations. Added the missing definition dependency for Picard zero and justified equality on scheme morphisms from equality on rational points. No mathematical statement changed.",
+  "blueprint": "Auxiliary to det-thm-sf-ctf-stability-direct-images, proof (3), through the stable Picard-faithfulness chain: Deligne–Mumford Lemmas 1.15(b),(c), 1.16(b),(c), the normalized components of genus zero and one. The newest blueprint proof (3) was read; this is a prerequisite of its direct-image input, not a replacement of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-genus-zero-smooth-proper-line",
+    "why": "Genus-zero classification over an algebraically closed field; a generic curve theorem already in the DAG."
+   },
+   {
+    "node": "lem-sc-divisor-class-curve",
+    "why": "The divisor-to-line-bundle map is additive, needed to subtract the two point classes."
+   },
+   {
+    "node": "lem-sc-smooth-regular",
+    "why": "Smooth curve local rings are regular, hence reduced, for the rational-point equality argument."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Affine vanishing detects equality of regular maps on rational points; a generic algebraic geometry tool."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Projective morphisms are proper; supplies the properness hypothesis of the genus-zero classification and of the genus; generic scheme-theory tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-genus-zero-smooth-proper-line",
+  "lem-sc-divisor-class-curve",
+  "lem-sc-smooth-regular",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-pc-projective-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-5b66d9cc1",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-5b66d9cc1 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, Stacks 0DSV (moduli-curves.tex example-pos-dim) and Stacks 0C6U (curves.tex proposition-projective-line). The Deligne–Mumford PDF is not local; the report lists it as WANTED and the proof is marked agent. One C1 fault, repaired: step 1 said 'projectivity supplies properness' without citing a node. It now cites def-kun-projective and lem-pc-projective-proper (the def-kun-projective embedding is H-projective and quasi-compact, so projective in that node's sense), proof_deps is updated and a tool_uses entry added. Step checks: (1) the hypotheses of lem-trf-genus-zero hold once properness is cited. (2) lem-sfb-projective-frames-pgl over S=Spec k with r=2 gives a global matrix, a scalar matrix induces the identity scheme morphism, and the eigenline argument with a,c≠0 forces λ1=λ2. (3) The new node gives the group scheme with origin O and the bijective homomorphism α_O. (4) For an isomorphism b, b^*O(D)=O(b^{-1}D) by transport of the valuations, and Cl→Pic is additive. (5) b(Q)=Q+b(O), with the direction of b^{-1} checked. (6) Agreement on k-points gives equality of morphisms because Y is reduced and the Nullstellensatz clauses (1),(2) apply; cancellation then gives b(O)=O. Small cases: diag(1,λ) fixes only two points, and a nonzero translation acts trivially on Pic^0 but has no fixed point. The new genus-one Abel node is true, self-contained, statement-only, searched with three kinds of search, and does not restate the item. It is not a duplicate; lem-sfb-symmetric-abel-image-geometry plus def-sc-jacobian is a possible route for its later split (advisory). Batch 5: lem-trf-genus-zero-smooth-proper-line is the classical 0C6U genus-zero classification, and lem-sfb-projective-frames-pgl reaches only projective-bundle, descent and limit nodes. Neither closure contains a trace-formula or Poincaré-duality theorem, sk-thm-trace-transport or a batch-4 target, so both are outside the assumed statements. The accepted tool uses are genus-zero, divisor-class-curve, smooth-regular, nullstellensatz and projective-proper.; 1 file(s) fixed by the reviewer"
+ }
+}

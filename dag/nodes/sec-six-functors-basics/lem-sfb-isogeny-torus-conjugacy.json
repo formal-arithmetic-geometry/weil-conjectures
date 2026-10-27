@@ -1,0 +1,211 @@
+{
+ "id": "lem-sfb-isogeny-torus-conjugacy",
+ "kind": "statement",
+ "title": "Uniqueness of reductive isogenies up to torus conjugation",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G_1,G_0$ be reductive $F$-group schemes [def-sc-group-scheme], meaning smooth connected affine groups of finite type with no nontrivial smooth connected normal unipotent subgroup; unipotent means unipotent matrices at geometric points in a faithful representation. Let $T_i\\subseteq G_i$ be split maximal tori, and write $X^*(T_i)=\\operatorname{Hom}_{F\\text{-groups}}(T_i,\\mathbf G_m)$ with $\\mathbf G_m(A)=A^\\times$, as in [lem-sfb-reductive-borel-pair-structure]. Suppose $a,b:G_1\\to G_0$ are surjective $F$-group-scheme homomorphisms with finite scheme-theoretic kernels, each mapping $T_1$ into $T_0$ as scheme morphisms. Here finite means finite-dimensional coordinate algebra. If $\\chi\\circ a|_{T_1}=\\chi\\circ b|_{T_1}$ for every $\\chi\\in X^*(T_0)$, then there exists $t\\in T_0(F)$ such that $b=\\operatorname{Int}(t)\\circ a$ as morphisms of group schemes, where $\\operatorname{Int}(t)_A(x)=t_Axt_A^{-1}$ for every commutative $F$-algebra $A$. No separability or reducedness of the kernels is assumed; groups with empty root sets are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 23.7, printed p.486, and full isogeny theorem 23.25, pp.492--493 (same character map determines the root-data isogeny and uniqueness up to inner torus automorphism). Algebraically closed base allows a representative in T_0(F) of a point of T_0/Z(G_0); the proof of 23.7 constructs its simple-root values."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure"
+ ],
+ "proof": [
+  {
+   "text": "First $a,b$ are faithfully flat on coordinate rings. Indeed [lem-sfb-affine-homomorphism-flat-image] factors either map as a faithfully flat homomorphism followed by a closed immersion into $G_0$. This immersion is surjective on underlying spaces since the composite is surjective. The coordinate algebra of $G_0$ is reduced by [sbc-lem-smooth-geometrically-reduced], applied to its smooth structure morphism over $F$. The ideal of the immersion lies in every prime, hence in the zero nilradical. Thus the immersion is an isomorphism, proving the claim. The given finite kernels are retained.",
+   "uses": [
+    "lem-sfb-affine-homomorphism-flat-image",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.43, printed p.107; Proposition 23.5, printed p.485, isogeny hypotheses. Reduced-target closed-image argument written out."
+   }
+  },
+  {
+   "text": "Choose split coordinates $T_0\\simeq\\mathbf G_m^r$. Its coordinate projections are characters, so the hypothesis applied to these projections gives $a|_{T_1}=b|_{T_1}$ as scheme morphisms. Write $u$ for their common pullback on characters. By [lem-sfb-isogeny-root-power-laws] this map is injective with finite cokernel, and both isogenies induce root correspondences with positive integer powers $q_\\alpha$. These correspondences and powers coincide: if $u(\\beta)=q\\alpha$ and $u(\\beta')=q'\\alpha$ for the two maps, then $u(q'\\beta-q\\beta')=0$. Injectivity gives $q'\\beta=q\\beta'$. Reducedness of the target root system forces $\\beta'=\\beta$ (the multiple is positive), and torsion-freeness of the character lattice gives $q'=q$. The reduced-root and lattice assertions are supplied by [lem-sfb-reductive-borel-pair-structure].",
+   "uses": [
+    "lem-sfb-isogeny-root-power-laws",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5, printed pp.485--486; Proposition 23.7, first sentence of proof, p.486."
+   }
+  },
+  {
+   "text": "Fix a simple-root base $\\Delta$ of $(G_1,T_1)$ and root parametrizations $x_\\alpha:\\mathbf G_a\\simeq U_{1,\\alpha}$ and $y_\\beta:\\mathbf G_a\\simeq U_{0,\\beta}$. For corresponding roots write $u(\\beta_\\alpha)=q_\\alpha\\alpha$. By [lem-sfb-isogeny-root-power-laws], there are $c_\\alpha,d_\\alpha\\in F^\\times$ with $a(x_\\alpha(z))=y_{\\beta_\\alpha}(c_\\alpha z^{q_\\alpha})$ and $b(x_\\alpha(z))=y_{\\beta_\\alpha}(d_\\alpha z^{q_\\alpha})$ over every test algebra. The characters $\\beta_\\alpha$ for $\\alpha\\in\\Delta$ are integrally independent: applying $u$ to a relation yields $\\sum n_\\alpha q_\\alpha\\alpha=0$; independence of a simple-root base and $q_\\alpha>0$ give $n_\\alpha=0$. The simple-root-base conventions are [lem-sfb-reductive-borel-pair-structure]. Apply [lem-sfb-independent-torus-character-values] to these characters and $d_\\alpha c_\\alpha^{-1}$, obtaining $t\\in T_0(F)$ with $\\beta_\\alpha(t)=d_\\alpha c_\\alpha^{-1}$.",
+   "uses": [
+    "lem-sfb-isogeny-root-power-laws",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-independent-torus-character-values"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.7, printed p.486, root-group constants and torus choice; Theorem 12.9(a), pp.233--234. Independence avoids needing a separate theorem on correspondence of bases."
+   }
+  },
+  {
+   "text": "Set $a'=\\operatorname{Int}(t)\\circ a$. This is still a surjective homomorphism with the same finite kernel, since conjugation is an automorphism. It maps $T_1$ into $T_0$ and agrees with $b$ on $T_1$, because $T_0$ is commutative. For every $F$-algebra $A$ and $z\\in A$, the root conjugation formula [lem-sfb-reductive-root-subgroup-parametrizations] gives\n$$a'(x_\\alpha(z))=y_{\\beta_\\alpha}(\\beta_\\alpha(t)c_\\alpha z^{q_\\alpha})=y_{\\beta_\\alpha}(d_\\alpha z^{q_\\alpha})=b(x_\\alpha(z)).$$\nThus $a'$ and $b$ agree as scheme morphisms on every simple root subgroup, not merely on its $F$-points.",
+   "uses": [
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.7, displayed calculation, printed p.486; 21.19 formula (135), printed p.431."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-isogeny-simple-root-rigidity] to $a',b:(G_1,T_1)\\to(G_0,T_0)$ and $\\Delta$. The preceding steps verify its torus and simple-root restriction equalities and its isogeny hypotheses. It gives $b=a'=\\operatorname{Int}(t)\\circ a$ as group-scheme morphisms. If the root set is empty, the chosen family of characters is empty and $t=1$ is available; the same rigidity statement still applies. At no point was any kernel assumed separable or reduced.",
+   "uses": [
+    "lem-sfb-isogeny-simple-root-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.7, last sentence, printed p.486; Corollary 21.63, printed p.443. Composition order is that of the displayed calculation in 23.7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-homomorphism-flat-image",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sfb-isogeny-root-power-laws",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-independent-torus-character-values",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-isogeny-simple-root-rigidity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 23.7, printed p.486, with Proposition 23.5 and Corollary 21.63; the split-torus point choice is made explicit over the algebraically closed base."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two isogenies of split reductive algebraic groups with the same restriction to a maximal torus differ by torus conjugation",
+   "results": "{\"t\": \"2026-10-23T21:47:26Z\", \"tool\": \"leanfinder\", \"query\": \"Two isogenies of split reductive algebraic groups with the same restriction to a maximal torus differ by torus conjugation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension.IsConj\", \"GroupExtension.IsConj.setoid\", \"GroupExtension.Splitting.conjAct\", \"GroupExtension.IsConj.trans\", \"GroupExtension.IsConj.refl\", \"CategoryTheory.PreGaloisCategory.autMap_unique\", \"CategoryTheory.PreGaloisCategory.AutGalois.ext\", \"RootPairing.Equiv.toEndUnit\"], \"digest\": \"d5e2a3868f871567\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GroupExtension.IsConj (Mathlib/GroupTheory/GroupExtension/Defs.lean:317) defines conjugacy of splittings of an abstract group extension. RootPairing.Hom (LinearAlgebra/RootSystem/Hom.lean:64-72) and its extensionality concern abstract root pairings; they do not compare algebraic-group isogenies. AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isogeny\"",
+   "results": "{\"t\": \"2026-10-23T21:47:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"isogeny\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GroupExtension.IsConj (Mathlib/GroupTheory/GroupExtension/Defs.lean:317) defines conjugacy of splittings of an abstract group extension. RootPairing.Hom (LinearAlgebra/RootSystem/Hom.lean:64-72) and its extensionality concern abstract root pairings; they do not compare algebraic-group isogenies. AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "isogen|[Rr]eductive|torus.*conjug|conjug.*torus",
+   "results": "{\"t\": \"2026-10-23T21:47:24Z\", \"tool\": \"grep\", \"query\": \"isogen|[Rr]eductive|torus.*conjug|conjug.*torus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GroupExtension.IsConj (Mathlib/GroupTheory/GroupExtension/Defs.lean:317) defines conjugacy of splittings of an abstract group extension. RootPairing.Hom (LinearAlgebra/RootSystem/Hom.lean:64-72) and its extensionality concern abstract root pairings; they do not compare algebraic-group isogenies. AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of reductive group isogenies with a prescribed torus character map up to inner automorphism",
+   "results": "{\"t\": \"2026-10-23T21:47:25Z\", \"tool\": \"leansearch\", \"query\": \"Uniqueness of reductive group isogenies with a prescribed torus character map up to inner automorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.IntertwiningMap.mk.noConfusion\", \"Representation.IntertwiningMap.noConfusion\", \"AddChar.noConfusion\", \"MulChar.noConfusionType\", \"MulChar.noConfusion\", \"QuotientGroup.congr.congr_simp\", \"CategoryTheory.CommGrp.uniqueHomFromTrivial\", \"MulAction.IwasawaStructure.mk.inj\"], \"digest\": \"ab2a2e5bcf770f60\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GroupExtension.IsConj (Mathlib/GroupTheory/GroupExtension/Defs.lean:317) defines conjugacy of splittings of an abstract group extension. RootPairing.Hom (LinearAlgebra/RootSystem/Hom.lean:64-72) and its extensionality concern abstract root pairings; they do not compare algebraic-group isogenies. AlgebraicGeometry grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isogeny between reductive algebraic groups is determined by its map on torus characters up to inner conjugation",
+   "results": "{\"t\": \"2026-10-23T21:48:25Z\", \"tool\": \"leanfinder\", \"query\": \"An isogeny between reductive algebraic groups is determined by its map on torus characters up to inner conjugation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Hom.ext\", \"RootPairing.Hom.mk.inj\", \"RootPairing.Hom.ext_iff\", \"FDRep.char_iso\", \"RootPairing.Equiv.ext_iff\", \"CategoryTheory.PreGaloisCategory.autMap_unique\", \"TannakaDuality.FiniteGroup.toRightFDRepComp_injective\", \"RootPairing.Equiv.weightHom\"], \"digest\": \"f3e3d7bf60b79cc3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GroupExtension.IsConj (Mathlib/GroupTheory/GroupExtension/Defs.lean:317) defines conjugacy of splittings of an abstract group extension. RootPairing.Hom (LinearAlgebra/RootSystem/Hom.lean:64-72) and its extensionality concern abstract root pairings; they do not compare algebraic-group isogenies. AlgebraicGeometry grep returned no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scalar-p-isogeny-relative-frobenius",
+  "date": "2026-10-24",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Multiplication of simple-module dimensions along the p-adic weight expansion. Supporting input to the numerical multiplication: Steinberg tensor-product simplicity for a restricted simple module and a Frobenius pullback. Supporting input: Sections 2.25--2.29, printed pp.47--49 (relative Frobenius), and full isogeny theorem 23.25, printed pp.492--493 (existence and uniqueness up to an inner torus automorphism); isomorphism theorem 23.26. Scalar p isogeny specialization: compare f with relative Frobenius after the root-datum isomorphism between G^(p) and G, and absorb the inner torus automorphism into h. Supporting input here: Proposition 23.7, printed p.486, and full isogeny theorem 23.25, pp.492--493 (same character map determines the root-data isogeny and uniqueness up to inner torus automorphism). Algebraically closed base allows a representative in T_0(F) of a point of T_0/Z(G_0); the proof of 23.7 constructs its simple-root values.",
+   "via": [
+    "lem-sfb-scalar-p-isogeny-relative-frobenius",
+    "lem-sfb-restricted-frobenius-tensor-simplicity",
+    "lem-sfb-restricted-highest-weight-dimension-product",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-isogeny-torus-conjugacy",
+  "worker": "stage1",
+  "summary": "Followed Milne 23.7: shared torus map, equality of root correspondences and powers, comparison of nonzero root constants, prescribed torus values and scheme-theoretic rigidity. Reused root power laws and conjugation. Added two statement-only inputs, not a reformulation of the uniqueness conclusion. Statement unchanged.",
+  "blueprint": "The item has no imported blueprint ancestor (blueprint_refs.py ancestor returns None); retained its exact inherited place and via chain below det-thm-sf-ctf-stability-direct-images proof (3). Steps realize the uniqueness prerequisite in the scalar p-isogeny/Frobenius comparison there. Searched the entire blueprint for isogeny, torus conjugation, simple root, independent characters, Borel homomorphisms and prescribed character: none states either new lemma.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Only the reducedness of the smooth F-group G_0 is used to turn a surjective closed image into G_0. This is a general smooth-scheme tool, not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-ede568ee5",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-ede568ee5 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement in full, and checked them against Milne iAG 2017 Prop 23.7 (p.486), Cor 21.63 (p.443) and Prop 17.21 (p.358). The item statement and stmt_deps are identical to the version Q04 created. The base proof was empty and there is no repair note. The item is still unsplit in live and side-live. Every citation is consistent (uses = cited ids, proof_deps = union of uses).\n\nSteps:\n(1) flat-image gives a = j∘u. Since G_0 → Spec F is smooth, sbc-lem-smooth-geometrically-reduced makes G_0 reduced, so the surjective closed immersion j is an isomorphism and a, b are faithfully flat, as root-power-laws requires. The split_report.tool_uses entry for this off-unit tool is limited and accepted.\n(2) Coordinate characters give a|T1 = b|T1. Checked f^*β = e_α α, with α in the source and β in the target, and f^* injective. q′β = qβ′, the reduced root datum and a torsion-free character lattice give the same β and q.\n(3) Independence of the β_α comes from Σ n_α q_α α = 0 and independence of the base. This replaces Milne's 21.9.\n(4) With the conjugation formula, Int(t)∘a sends x_α(z) to y_β(β(t) c_α z^q) = y_β(d_α z^q); scalar order checked.\n(5) The rigidity node applies; Δ = ∅ gives t = 1.\n\nNew nodes:\n- independent-torus-character-values: true, because T(F) = Hom(Z^r, F^×) and F^× is divisible, also in characteristic p. Tested m = 0, r = 0, a non-closed field and dependent families. It is not a duplicate of character-separation, antiduality or split-torus-hom-matrices.\n- isogeny-simple-root-rigidity = Cor 21.63: true, by 17.21 on G_α with Borel T·U_α plus the existing generation node. It adds what generation-mixed-commutation lacks: agreement on U_{-α}. No 17.21 or 21.63 node exists in the snapshot or in live. It does not restate the item.\n\nMilne 23.7's final line φ1∘inn(t) is a typo, recorded as a source error; the item uses inn(t)∘φ1.\n\nBatch-5 flags: borel-pair-structure, root-subgroup-parametrizations, affine-homomorphism-flat-image and isogeny-root-power-laws reach trf only through generic algebra (fppf base change, split-lattice torus projection, flat tensor injectivity). None is a step of the trace-formula or Poincaré proofs, so the flags are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.IsogenyTorusConjugacy",
+  "declaration": "AlgebraicGeometry.isogeny_torus_conjugacy",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/IsogenyTorusConjugacy.lean",
+  "statement": "theorem isogeny_torus_conjugacy {F : Type u} [Field F] [IsAlgClosed F] (G₁ G₀ T₁ T₀ : Grp (Over (Spec (.of F)))) (hG₁ : ReductiveTorusCentralizer.IsReductive G₁) (hG₀ : ReductiveTorusCentralizer.IsReductive G₀) (i₁ : T₁ ⟶ G₁) (i₀ : T₀ ⟶ G₀) (hT₁ : ReductiveTorusCentralizer.IsMaximalTorus i₁) (hT₀ : ReductiveTorusCentralizer.IsMaximalTorus i₀) (hsplit₁ : ∃ r : ℕ, Nonempty (T₁ ≅ MultiplicativeType.splitTorus F r)) (hsplit₀ : ∃ r : ℕ, Nonempty (T₀ ≅ MultiplicativeType.splitTorus F r)) (a b : G₁ ⟶ G₀) (ha : Surjective a.hom.hom.left) (hb : Surjective b.hom.hom.left) (haker : IsFinite (GrpObj.ker a.hom.hom).hom) (hbker : IsFinite (GrpObj.ker b.hom.hom).hom) (aT bT : T₁ ⟶ T₀) (haT : i₁ ≫ a = aT ≫ i₀) (hbT : i₁ ≫ b = bT ≫ i₀) (hchars : ∀ χ : T₀ ⟶ Grp.mk (StandardGroupSchemes.multiplicative F), aT ≫ χ = bT ≫ χ) : ∃ t : 𝟙_ (Over (Spec (.of F))) ⟶ T₀.X, b.hom.hom = (toUnit G₁.X ≫ t ≫ i₀.hom.hom) * a.hom.hom * (toUnit G₁.X ≫ t ≫ i₀.hom.hom)⁻¹",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-abb29256a",
+  "group": "NP",
+  "result": "pass",
+  "note": "Item changes only lean; one module IsogenyTorusConjugacy.lean, theorem isogeny_torus_conjugacy with sorry proof; lean.statement verbatim. Clause by clause matches the node: IsReductive/IsMaximalTorus/splitTorus/G_m characters exactly as in stmt_dep reductive-borel-pair-structure; Surjective on the underlying map; IsFinite of GrpObj.ker (keeps nilpotents); restrictions aT/bT through mono i0; all characters of T0; conclusion b = c*a*c^-1 in Hom.group with c the constant F-point t of T0 = Int(t)∘a, the order of Milne 23.7's display. No extra hypotheses, one universe u, no characteristic or kernel restriction; tori without roots, rank 0 and non-reduced kernels covered. No duplicate in side-live or Mathlib. Proof-dep imports match live records; docstrings carry source, blueprint id and all 5 steps; lines <=100. Advisory: terminology def nodes reached through the stage-1 theorem stmt_dep borel-pair-structure, inherited from stage 1, not added here. No file changed, no compile run."
+ }
+}

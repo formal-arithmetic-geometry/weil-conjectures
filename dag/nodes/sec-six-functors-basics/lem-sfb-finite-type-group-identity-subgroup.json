@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-finite-type-group-identity-subgroup",
+ "kind": "statement",
+ "title": "The identity component of a finite-type group scheme over an arbitrary field is an open and closed subgroup",
+ "statement": "Let $k$ be a field [def-weil-field] and let $G$ be a group scheme over $k$ [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Let $e\\in |G|$ be the image of the unique point of $\\operatorname{Spec}k$ under the identity section. The connected component $G^0$ containing $e$, that is, the maximal connected subset containing $e$ [def-weil-connected-scheme], is open and closed in $G$. With its open-subscheme structure [def-weil-open-immersion], $G^0$ is a connected group scheme, and the inclusion $j:G^0\\to G$ is a homomorphism and a closed immersion [def-weil-closed-immersion], hence a closed subgroup scheme [def-sc-group-scheme-subgroup]. No perfectness or algebraic closedness of $k$ and no reducedness or smoothness of $G$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0B7R (proposition-connected-component), canonical closed identity subgroup. In the finite-type case it is also open: Milne, literature/milne-algebraic-groups_iAG2017.pdf, Proposition 1.34, printed pp.16-17, with the finite component discussion in 1.30-1.33. Project implementations: WeilConjectures/AlgebraicGeometry/GroupScheme/Basic.lean:250-260, 434-500, 548-576."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof": [
+  {
+   "text": "Write $C$ for the connected component containing $e$. Apply [lem-trf-finite-type-component-open-qc] to the finite-type $k$-scheme $G$ and its point $e$. Thus $C$ is open and its open subscheme $H=(C,\\mathcal O_G|_C)$ is nonempty and connected. Denote its open immersion by $j:H\\to G$.",
+   "uses": [
+    "lem-trf-finite-type-component-open-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057K (lemma-local-local-structure-finite-type), the connected-component paragraph; its general Noetherian component argument is recorded by the cited node."
+   }
+  },
+  {
+   "text": "The component $C$ is also closed. Indeed any separation of its closure into two relatively clopen pieces restricts to a separation of $C$ [def-weil-connected-scheme]. Connectedness puts all of $C$ in one piece, whose relative closedness then puts its closure there; thus the closure is connected and maximality of $C$ gives $\\overline C=C$. We will also use the elementary observation that a continuous image of a connected space is connected: a separation of the image pulls back to a separation of the source, and both pieces are nonempty if the image pieces are. Finally any connected subset $D$ containing $e$ lies in $C$: the union $D\\cup C$ is connected, since in a clopen separation both connected subsets must lie on the side containing $e$; maximality then gives $D\\cup C=C$.",
+   "uses": [
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 004S (definition-connected-components), 004T (lemma-connected-components); lemma-image-connected-space. These elementary arguments are written out here."
+   }
+  },
+  {
+   "text": "Since the image of the identity section $e_G:\\operatorname{Spec}k\\to G$ is contained in $C$, [lem-weil-pbc-morphism-factors-through-open-subscheme] gives a unique $k$-morphism $e_H:\\operatorname{Spec}k\\to H$ with $j e_H=e_G$. (It is over $k$ because composition with the structure map of $H$ is that of $G$.) The scheme $\\operatorname{Spec}k$ is geometrically connected: after every extension $K/k$ its base change is $\\operatorname{Spec}K$, a nonempty one-point space. Apply [lem-trf-geometrically-connected-image-criterion] to $e_H$ and the connected $H$ of step 1. Consequently $H$ is geometrically connected over $k$.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-trf-geometrically-connected-image-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R (proposition-connected-component), the identity-section and geometric-connectedness argument, using Varieties Tag 056R (lemma-geometrically-connected-criterion)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-geometrically-connected-product-components] with $X=Y=H$. As $H$ is geometrically connected and connected, $H\\times_k H$ has precisely one connected component and is nonempty (it has the point $(e_H,e_H)$), so it is connected. Restrict multiplication to $f=m_G\\circ(j\\times j):H\\times_k H\\to G$. By step 2 its image is connected; the identity axiom gives $f(e_H,e_H)=e$, so its image lies in $C$. By [lem-weil-pbc-morphism-factors-through-open-subscheme] there is a unique $k$-morphism $m_H:H\\times_k H\\to H$ with $j m_H=m_G(j\\times j)$.",
+   "uses": [
+    "lem-weil-pbc-geometrically-connected-product-components",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R (proposition-connected-component), multiplication paragraph, using Varieties Tag 0385 (lemma-bijection-connected-components); factorization through the open subscheme uses Schemes Tag 01HI (lemma-restrict-map-to-opens)."
+   }
+  },
+  {
+   "text": "The inverse $i_G$ fixes $e$ by the inverse and unit axioms [def-sc-group-scheme]. The image of $i_Gj:H\\to G$ is connected by step 2 and contains $e$, so it is contained in $C$. Apply [lem-weil-pbc-morphism-factors-through-open-subscheme] to obtain a unique $k$-morphism $i_H:H\\to H$ with $j i_H=i_Gj$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R (proposition-connected-component), inversion paragraph; Schemes Tag 01HI (lemma-restrict-map-to-opens)."
+   }
+  },
+  {
+   "text": "The factorization uniqueness in [lem-weil-pbc-morphism-factors-through-open-subscheme] implies that $j$ is a monomorphism: two maps to $H$ with equal composites to $G$ are the two factorizations of that composite. Check every group-object diagram after composing with $j$. Associativity becomes $m_G(m_G(j\\times j)\\times j)=m_G(j\\times m_G(j\\times j))$ on $H\\times_kH\\times_kH$; the two unit laws become $m_G(e_G,j)=j=m_G(j,e_G)$; and the inverse laws become $m_G(i_Gj,j)\\Delta=e_G p=m_G(j,i_Gj)\\Delta$, where $p:H\\to\\operatorname{Spec}k$ and $\\Delta$ is the diagonal. These are exactly the diagrams of the given group scheme [def-sc-group-scheme]. Cancel $j$ to obtain the diagrams for $(H,m_H,e_H,i_H)$. Thus $H$ is a group scheme, and $j$ is a homomorphism by the defining equality for $m_H$.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R (proposition-connected-component), subgroup assertion; Tag 0G8L (lemma-closed-subgroup-scheme), restriction of the group diagrams."
+   }
+  },
+  {
+   "text": "The open immersion $j$ is an immersion: factor it as the identity closed immersion of $H$ followed by $j$ [def-weil-closed-immersion]. Its image is $C$, closed by step 2, so [lem-weil-pbc-immersion-closed-image-closed-immersion] makes $j$ a closed immersion. For every $k$-algebra $R$, $j(R)$ is injective by the uniqueness from step 6, and preserves multiplication, identity and inversion by the defining factorizations. Its image is therefore a subgroup of $G(R)$, proving the closed-subgroup assertion in [def-sc-group-scheme-subgroup]. Since $H$ has underlying set $C$ with its subspace topology, it is exactly the required connected group scheme $G^0$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R (proposition-connected-component), closed-subgroup conclusion; Schemes Tag 01IQ (lemma-immersion-when-closed, literature/stacks-project/schemes.tex)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-finite-type-component-open-qc",
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-trf-geometrically-connected-image-criterion",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0B7R (proposition-connected-component), identity-section, geometric-connectedness, product and restricted-operations argument; finite-type openness from the Noetherian component lemma and the open-subscheme factorization. Also Milne, Algebraic Groups, Proposition 1.34, printed pp.16-17."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "identityComponent|connectedComponent.*(grp|group)|grp.*connectedComponent",
+   "results": "{\"t\": \"2026-10-23T22:33:19Z\", \"tool\": \"grep\", \"query\": \"identityComponent|connectedComponent.*(grp|group)|grp.*connectedComponent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern topological groups and their pointwise connected subgroups, not subgroup schemes or scheme-theoretic inclusions over an arbitrary field; the Mathlib geometry grep has no hits.",
+   "directory": "Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The connected component of the identity in a finite type group scheme is an open and closed subgroup scheme",
+   "results": "{\"t\": \"2026-10-23T22:33:20Z\", \"tool\": \"leansearch\", \"query\": \"The connected component of the identity in a finite type group scheme is an open and closed subgroup scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"OpenSubgroup.isClopen\", \"OpenNormalSubgroup.pathComponentOne_carrier\", \"Subgroup.pathComponentOne\", \"Subgroup.coe_pathComponentOne\", \"AddSubgroup.connectedComponentOfZero\", \"OpenNormalSubgroup.pathComponentOne\", \"mul_mem_connectedComponent_one\"], \"digest\": \"49a277e116708ab9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern topological groups and their pointwise connected subgroups, not subgroup schemes or scheme-theoretic inclusions over an arbitrary field; the Mathlib geometry grep has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"connectedComponent\", \"GrpObj\"",
+   "results": "{\"t\": \"2026-10-23T22:33:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"connectedComponent\\\", \\\"GrpObj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern topological groups and their pointwise connected subgroups, not subgroup schemes or scheme-theoretic inclusions over an arbitrary field; the Mathlib geometry grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The identity component of an algebraic group scheme over a field is an open closed subgroup scheme",
+   "results": "{\"t\": \"2026-10-23T22:33:20Z\", \"tool\": \"leanfinder\", \"query\": \"The identity component of an algebraic group scheme over a field is an open closed subgroup scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"Subgroup.pathComponentOne\", \"IntermediateField.fixingSubgroup_isOpen\", \"OpenSubgroup.isClopen\", \"Subgroup.isClosed_of_isOpen\", \"OpenNormalSubgroup.instIsClosedCoePathComponentOne\", \"Subgroup.coe_pathComponentOne\", \"OpenSubgroup.instInhabited\"], \"digest\": \"61d41ce3de4d3d8c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern topological groups and their pointwise connected subgroups, not subgroup schemes or scheme-theoretic inclusions over an arbitrary field; the Mathlib geometry grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic group over an arbitrary field has a canonical connected identity subgroup which is open and closed when it has finite type",
+   "results": "{\"t\": \"2026-10-23T22:34:01Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic group over an arbitrary field has a canonical connected identity subgroup which is open and closed when it has finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"Subgroup.pathComponentOne\", \"AddSubgroup.connectedComponentOfZero\", \"OpenSubgroup.instInhabited\", \"mul_mem_connectedComponent_one\", \"OpenNormalSubgroup.pathComponentOne\", \"Subgroup.Normal.pathComponentOne\", \"Subgroup.coe_pathComponentOne\"], \"digest\": \"eefbbc005c7e8fe0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: second phrasing returns connected subgroups of ordinary topological groups and path components; none is an identity subgroup scheme over an arbitrary field."
+  },
+  {
+   "tool": "grep",
+   "query": "identityComponent|connectedComponent.*[Gg]roup|[Gg]roup.*connectedComponent",
+   "results": "{\"t\": \"2026-10-23T23:00:09Z\", \"tool\": \"grep\", \"query\": \"identityComponent|connectedComponent.*[Gg]roup|[Gg]roup.*connectedComponent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary topological groups or unrelated finite/integral scheme facts, not the arbitrary-field identity subgroup scheme with its scheme-theoretic inclusion.",
+   "directory": "Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The connected component of the identity of an algebraic group scheme is an open closed subgroup",
+   "results": "{\"t\": \"2026-10-23T23:00:10Z\", \"tool\": \"leansearch\", \"query\": \"The connected component of the identity of an algebraic group scheme is an open closed subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"OpenSubgroup.isClopen\", \"Subgroup.pathComponentOne\", \"OpenNormalSubgroup.pathComponentOne\", \"OpenNormalSubgroup.pathComponentOne_carrier\", \"mul_mem_connectedComponent_one\", \"Subgroup.coe_pathComponentOne\", \"OpenSubgroup\"], \"digest\": \"392612bc612570b8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary topological groups or unrelated finite/integral scheme facts, not the arbitrary-field identity subgroup scheme with its scheme-theoretic inclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"connectedComponent\", \"GrpObj\"",
+   "results": "{\"t\": \"2026-10-23T23:00:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"connectedComponent\\\", \\\"GrpObj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary topological groups or unrelated finite/integral scheme facts, not the arbitrary-field identity subgroup scheme with its scheme-theoretic inclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The identity component of a finite type group scheme over an arbitrary field is an open and closed subgroup scheme",
+   "results": "{\"t\": \"2026-10-23T23:00:11Z\", \"tool\": \"leanfinder\", \"query\": \"The identity component of a finite type group scheme over an arbitrary field is an open and closed subgroup scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme\", \"IntermediateField.fixingSubgroup_isOpen\", \"Subgroup.connectedComponentOfOne\", \"InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup\", \"CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed\", \"Subgroup.isOpen_of_isClosed_of_finiteIndex\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"CategoryTheory.PreGaloisCategory.instTotallyDisconnectedSpaceAutFunctorFintypeCat\"], \"digest\": \"477e5824c07e2219\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary topological groups or unrelated finite/integral scheme facts, not the arbitrary-field identity subgroup scheme with its scheme-theoretic inclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group object in schemes of finite type over a field has a connected neutral open subscheme whose inclusion is a closed immersion and a group homomorphism",
+   "results": "{\"t\": \"2026-10-23T23:03:07Z\", \"tool\": \"leanfinder\", \"query\": \"A group object in schemes of finite type over a field has a connected neutral open subscheme whose inclusion is a closed immersion and a group homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\"], \"digest\": \"54f8588f6b25443e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary topological groups or unrelated finite/integral scheme facts, not the arbitrary-field identity subgroup scheme with its scheme-theoretic inclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bounded-exponent-reduced-p-kernel",
+  "date": "2026-10-24",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: The reduced neutral component of a bounded p-power torsion group has nontrivial p-kernel. General identity-component subgroup theorem used for the reduced kernel over a perfect field, before proving nontriviality.",
+   "via": [
+    "lem-sfb-bounded-exponent-reduced-p-kernel",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-type-group-identity-subgroup",
+  "worker": "stage1",
+  "summary": "Preserved the arbitrary-field and nonreduced statement. Split the geometric-connectedness and product argument of Stacks 0B7R, restrict the operations through the open component, check the diagrams by cancellation, and infer closed immersion from the closed image. Reused all prerequisites; no new nodes. Existing project declarations cover the open subgroup but no project declaration was found for the closed-immersion clause.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images (3) alteration/marked-plurinodal chain, at the bounded-exponent reduced p-kernel identity-subgroup input. Current blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) was read; this item is a subordinate algebraic-group tool. Blueprint ancestor command returns empty (inherited from.node is null); retained the supplied precise from.place and via chain. No equivalent arbitrary-field group-scheme statement was found in the blueprint.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-finite-type-component-open-qc",
+    "why": "Generic finite-type scheme topology supplies openness and connected open-subscheme structure; no node of this unit states this prerequisite."
+   },
+   {
+    "node": "lem-trf-geometrically-connected-image-criterion",
+    "why": "Generic connected-image criterion applied to the identity section over the arbitrary field, exactly as Stacks 0B7R; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-finite-type-component-open-qc",
+  "lem-trf-geometrically-connected-image-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-df725c46c",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-df725c46c (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 7 steps, every cited statement, Stacks 0B7R in groupoids.tex, and the 056R and 0385 sources. The split follows the 0B7R proof (rational e, geometric connectedness by 056R, H×H connected by 0385, m and i restricted). It factors through the open component, using the 01HI node, which is valid because finite type makes C open by 057K. The C-closed and connected-image arguments in step 2, and the cancellation check of the group axioms after composing with the monomorphism j in step 6, are each a few lines from the definitions. Step 7 combines the 01IQ node with def-sc-group-scheme-subgroup. Tested on the trivial group, finite étale groups, α_p, μ_p, G_m and O_n. The statement is unchanged against live (still unsplit there), with no new nodes and no SGA citation. Not a duplicate: lem-sfb-locally-algebraic-group-identity-component, group-neutral-component-translates and finite-constant-component-quotient all assume k algebraically closed. Batch-5 check: lem-trf-finite-type-component-open-qc (057K) and lem-trf-geometrically-connected-image-criterion (056R) are generic scheme topology. Their closures (67 and 115 nodes) contain no PD node, no assumption leaf and no trace-transport node; the only trf nodes are themselves and 056R's own Galois-descent sub-nodes. Neither is part of the trace formula or Poincaré duality, so both are accepted. FIX: the source of step 7 named 'Morphisms Tag 01IQ (lemma-immersion-closed)'; corrected to 'Schemes Tag 01IQ (lemma-immersion-when-closed)' (checked in tags/tags and at schemes.tex:1849).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeGroupIdentitySubgroup",
+  "declaration": "AlgebraicGeometry.GrpObj.finiteType_identityComponent_closedSubgroup",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeGroupIdentitySubgroup.lean",
+  "statement": "theorem GrpObj.finiteType_identityComponent_closedSubgroup (k : Type u) [Field k] (G : Over (Spec (.of k))) [GrpObj G] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] : IsClopen (connectedComponent (GrpObj.onePoint G)) ∧ ConnectedSpace (GrpObj.identityComponent G).left ∧ IsClosedSubgroupScheme (GrpObj.identityComponentι G)",
+  "branch": "sheaf-dag",
+  "by": "Q132",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a99c6fb97",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Clause-by-clause match: Field k (u); GrpObj G over Spec k; finite type = LocallyOfFiniteType+QuasiCompact; e=onePoint; G0=connectedComponent; IsClopen; ConnectedSpace of the open subscheme identityComponent (Opens.ι, full structure sheaf, nonreduced kept); IsClosedSubgroupScheme identityComponentι (Defs: IsMonHom + R-point injectivity + IsClosedImmersion) with canonical restricted GrpObj instance (Basic:548). No extra hypotheses; 0B7R items (1)-(2) + Milne 1.34 openness; flatness/irreducibility not added. H4: Basic proves clopen, ConnectedSpace, IsMonHom but not closed immersion or the conjunction; Q48 GroupNeutralComponentTranslates is the IsAlgClosed variant, so not an exact existing decl. Statement objects are sorry-free canonical decls (identityComponent recorded by def node def-wf-algebraic-components), so no theorem-stmt_dep issue. Only change vs live is the new lean record; lean.statement verbatim; sorry-only, no defs; docstrings carry source, blueprint tag and 7 steps; private proof-dep import exists in side-live. First S2 delivery, not a rebind. No compile (no file changed)."
+ }
+}

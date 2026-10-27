@@ -1,0 +1,403 @@
+{
+ "id": "lem-sfb-diagonalizable-hom-family-rigidity",
+ "kind": "statement",
+ "title": "Connected families of homomorphisms between diagonalizable groups are constant",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $D_1,D_2$ be affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Suppose that for $i=1,2$ there is a finitely generated abelian group $M_i$ and an isomorphism $D_i\\simeq\\operatorname{Spec}F[M_i]$ of group schemes, where $F[M_i]$ has basis $e_m$, multiplication $e_me_{m'}=e_{m+m'}$, comultiplication $e_m\\mapsto e_m\\otimes e_m$, counit $e_m\\mapsto1$, and inverse $e_m\\mapsto e_{-m}$. Let $X$ be a connected [def-weil-connected-scheme] affine scheme [def-pc-scheme] of finite type over $F$, with its structure morphism [def-weil-scheme-over-base], and let $x_0:\\operatorname{Spec}F\\to X$ be an $F$-point. Write $X(A)=\\operatorname{Hom}_F(\\operatorname{Spec}A,X)$ for a commutative $F$-algebra $A$. Let $\\phi:X\\times_F D_1\\to D_2$ be an $F$-morphism such that for every such $A$ and every $x\\in X(A)$ the map $d\\mapsto\\phi(x,d)$ is a group homomorphism $D_1(A)\\to D_2(A)$, naturally under change of $A$. Put $\\phi_{x_0}(d)=\\phi(x_{0,A},d)$, where $x_{0,A}$ is the base change of $x_0$. Then $\\phi=\\phi_{x_0}\\circ\\operatorname{pr}_{D_1}$ as $F$-morphisms. No smoothness or reducedness is required of $X,D_1,D_2$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.36, printed pp.243--244, restricted to an algebraically closed field and an affine connected parameter scheme. The statement and the proof explicitly test all algebra-valued points, including nonreduced schemes."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-pc-scheme",
+  "def-weil-scheme-over-base",
+  "def-sfb-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "Choose the given group-scheme identifications and write $X=\\operatorname{Spec}B$. The point $x_0$ gives an $F$-algebra map $b_0:B\\to F$, so $B\\ne0$. By the affine fibre-product comparison [lem-weil-pbc-fibre-product-affine-spectra], $X\\times_FD_1\\cong\\operatorname{Spec}(B\\otimes_FF[M_1])$, the projections being $\\operatorname{Spec}$ of $b\\mapsto b\\otimes1$ and $e_m\\mapsto1\\otimes e_m$; so by the spectrum correspondence and the tensor-product universal property a pair $(x,d)\\in X(A)\\times D_1(A)$ is the algebra map $b\\otimes e_m\\mapsto x(b)d(e_m)$. Identify this algebra with $B[M_1]$ by $b\\otimes e_m\\mapsto be_m$: its inverse sends a finite sum $\\sum b_me_m$ to $\\sum b_m\\otimes e_m$. Both maps preserve products and are inverse on the displayed generators. Thus $\\phi$ gives an $F$-algebra map $f:F[M_2]\\to B[M_1]$. Fix $n\\in M_2$ and write $f(e_n)=u_n=\\sum_m a_{n,m}e_m$, a finite sum. In the hypothesis take $A=B[M_1\\oplus M_1]$, the point $x$ induced by $B\\to A$, and the two points of $D_1$ induced by $e_m\\mapsto e_{(m,0)}$ and $e_m\\mapsto e_{(0,m)}$. Multiplicativity of $d\\mapsto\\phi(x,d)$, evaluated on $e_n$, gives $\\sum_m a_{n,m}e_{(m,m)}=\\sum_{m,l}a_{n,m}a_{n,l}e_{(m,l)}$. Taking instead $A=B$, the point induced by $1_B$ and the identity of $D_1(B)$, preservation of the identity gives $\\sum_m a_{n,m}=1$. These are tests on all algebra-valued points, without passing to reduced schemes.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.36, pp.243--244; Remark 12.43, p.245, coordinate-ring interpretation (expanded)."
+   }
+  },
+  {
+   "text": "Compare the coefficients of the formal basis $e_{(m,l)}$ in the preceding equality. For $m=l$ one gets $a_{n,m}^2=a_{n,m}$; for $m\\ne l$ one gets $a_{n,m}a_{n,l}=0$. This comparison is valid over any commutative ring: $B[M_1\\oplus M_1]$ consists by definition of finitely supported functions to $B$, so equality is coefficientwise. Consequently the finitely many nonzero coefficients of each $u_n$ are pairwise orthogonal idempotents whose sum is $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 12.43, p.245: argument with basis monomials and a ring with no nontrivial idempotents (expanded coefficient calculation)."
+   }
+  },
+  {
+   "text": "Apply the connectedness criterion to the nonempty scheme $X$: every idempotent in $B=\\Gamma(X,\\mathcal O_X)$ is $0$ or $1$. For each fixed $n$, at least one coefficient $a_{n,m}$ is nonzero, since their finite sum is $1\\ne0$, and every nonzero coefficient is therefore $1$. There cannot be two: their product would be $1$ by their values and $0$ by orthogonality. Thus for a unique $h(n)\\in M_1$ we have $u_n=e_{h(n)}$, with coefficient $1_B$. No integral-domain assumption on $B$ has been used.",
+   "uses": [
+    "lem-pc-scheme-connected-iff-idempotents"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 12.43, p.245, no nontrivial idempotents; Stacks Tag 0BUG, varieties.tex, lemma-proper-geometrically-reduced-global-sections, proof of (2), for the connectedness criterion."
+   }
+  },
+  {
+   "text": "Pulling back along $x_0\\times1_{D_1}$ applies $b_0$ to the coefficients of $f$. Since each $f(e_n)=e_{h(n)}$ has coefficient $1_B$, it becomes $e_{h(n)}\\in F[M_1]$. Pulling this map back along $\\operatorname{pr}_{D_1}$ includes the coefficients $F\\to B$ and again gives $e_{h(n)}\\in B[M_1]$. Hence $\\phi$ and $\\phi_{x_0}\\circ\\operatorname{pr}_{D_1}$ induce equal algebra maps on every $e_n$ and on $F$, and therefore on every finite sum. The uniqueness clause of the spectrum correspondence gives equality of the two morphisms, including on nonreduced test algebras.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.36, pp.243--244, conclusion; Remark 12.43, p.245, coordinate proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-pc-scheme-connected-iff-idempotents",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.36, pp.243--244, via the alternative coordinate argument of Remark 12.43, p.245; all coefficient and universal-point calculations written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"hom\"",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern categorical connectedness, abstract group actions, affine transition limits, characters of representations, or group-like elements over domains; none states constancy of scheme-theoretic homomorphism families over an arbitrary connected base, or rigidity for the given central extension. AlgebraicGeometry grep has no hits. Bialgebra/MonoidAlgebra.lean:231-323 requires an integral domain and does not give the connected-base assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of homomorphisms between diagonalizable group schemes parameterized by a connected affine scheme is constant",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq",
+     "AlgebraicGeometry.AffineTargetMorphismProperty.diagonal",
+     "AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal",
+     "AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso",
+     "AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+     "AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal",
+     "AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType",
+     "AlgebraicGeometry.AffineSpace.hom_ext"
+    ],
+    "digest": "1404b592407e1a08"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern categorical connectedness, abstract group actions, affine transition limits, characters of representations, or group-like elements over domains; none states constancy of scheme-theoretic homomorphism families over an arbitrary connected base, or rigidity for the given central extension. AlgebraicGeometry grep has no hits. Bialgebra/MonoidAlgebra.lean:231-323 requires an integral domain and does not give the connected-base assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "GroupScheme|diagonaliz|multiplicative.?type",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern categorical connectedness, abstract group actions, affine transition limits, characters of representations, or group-like elements over domains; none states constancy of scheme-theoretic homomorphism families over an arbitrary connected base, or rigidity for the given central extension. AlgebraicGeometry grep has no hits. Bialgebra/MonoidAlgebra.lean:231-323 requires an integral domain and does not give the connected-base assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Connected families of homomorphisms between group schemes of multiplicative type are constant",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Pi.constMulHom",
+     "CategoryTheory.IsConnected.of_constant_of_preserves_morphisms",
+     "Pi.mulHom",
+     "MulHomClass.mk",
+     "MulHomClass",
+     "MulHom.mulHomClass",
+     "AlgebraicGeometry.Scheme.Hom",
+     "Pi.constMulHom_apply"
+    ],
+    "digest": "feed2e2ecd1ddd5c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern categorical connectedness, abstract group actions, affine transition limits, characters of representations, or group-like elements over domains; none states constancy of scheme-theoretic homomorphism families over an arbitrary connected base, or rigidity for the given central extension. AlgebraicGeometry grep has no hits. Bialgebra/MonoidAlgebra.lean:231-323 requires an integral domain and does not give the connected-base assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonaliz|diagonalis|multiplicative.?type|group.?like",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/SelbergSieve.lean",
+     "Mathlib/NumberTheory/SelbergSieve.lean",
+     "Mathlib/NumberTheory/SelbergSieve.lean",
+     "Mathlib/Algebra/Group/TypeTags/Hom.lean",
+     "Mathlib/Tactic/Translate/ToAdditive.lean",
+     "Mathlib/Tactic/Translate/ToAdditive.lean",
+     "Mathlib/Algebra/GroupWithZero/Action/Hom.lean",
+     "Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean"
+    ],
+    "digest": "41bd2b396b80686f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern categorical connectedness, abstract group actions, affine transition limits, characters of representations, or group-like elements over domains; none states constancy of scheme-theoretic homomorphism families over an arbitrary connected base, or rigidity for the given central extension. AlgebraicGeometry grep has no hits. Bialgebra/MonoidAlgebra.lean:231-323 requires an integral domain and does not give the connected-base assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rigidity of characters of diagonalizable algebraic groups in families over a connected base scheme",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FDRep.char_iso",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq",
+     "FDRep.char_orthonormal",
+     "AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal",
+     "FDRep.char_mul_comm",
+     "FDRep.char_linHom",
+     "AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover",
+     "AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType"
+    ],
+    "digest": "9de9eaad490f05ff"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern categorical connectedness, abstract group actions, affine transition limits, characters of representations, or group-like elements over domains; none states constancy of scheme-theoretic homomorphism families over an arbitrary connected base, or rigidity for the given central extension. AlgebraicGeometry grep has no hits. Bialgebra/MonoidAlgebra.lean:231-323 requires an integral domain and does not give the connected-base assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "GroupScheme|diagonaliz|multiplicative.?type",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the group-like monomial criterion and independence hits require IsDomain, which a connected nonreduced B need not satisfy; scheme and representation hits do not state rigidity over a connected affine parameter ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "Bialgebra.IsGrouplike, MonoidAlgebra",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Bialgebra.IsGrouplike'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "invalid pattern: Loogle reported the unknown identifier Bialgebra.IsGrouplike; corrected in the later IsGroupLikeElem query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homomorphisms of diagonalizable group schemes over a connected base are constant",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMonoidHom.diag",
+     "AlgebraicGeometry.Scheme.Hom",
+     "AlgebraicGeometry.Scheme.Modules.Hom",
+     "ContinuousMonoidHom.diag_toFun",
+     "CommGrpCat.Hom.ext_iff",
+     "Rep.diagonalHomEquiv_apply",
+     "Rep.diagonalHomEquiv",
+     "CommGrpCat.Hom"
+    ],
+    "digest": "f13c537c0280297f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the group-like monomial criterion and independence hits require IsDomain, which a connected nonreduced B need not satisfy; scheme and representation hits do not state rigidity over a connected affine parameter ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of homomorphisms between diagonalizable group schemes over a connected affine scheme is constant",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq",
+     "AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal",
+     "AlgebraicGeometry.AffineTargetMorphismProperty.diagonal",
+     "AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso",
+     "AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal",
+     "AlgebraicGeometry.AffineSpace.hom_ext",
+     "AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+     "AlgebraicGeometry.HasAffineProperty.diagonal_iff"
+    ],
+    "digest": "8024bab6d1b957dd"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the group-like monomial criterion and independence hits require IsDomain, which a connected nonreduced B need not satisfy; scheme and representation hits do not state rigidity over a connected affine parameter ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGroupLikeElem, AddMonoidAlgebra",
+   "results": {
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "AddMonoidAlgebra.isGroupLikeElem_single_one",
+     "AddMonoidAlgebra.span_isGroupLikeElem",
+     "AddMonoidAlgebra.isGroupLikeElem_of",
+     "AddMonoidAlgebra.isGroupLikeElem_iff_mem_range_single_one",
+     "AddMonoidAlgebra.isGroupLikeElem_iff_mem_range_of"
+    ],
+    "digest": "1e71a0499b36500c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the group-like monomial criterion and independence hits require IsDomain, which a connected nonreduced B need not satisfy; scheme and representation hits do not state rigidity over a connected affine parameter ring"
+  },
+  {
+   "tool": "grep",
+   "query": "isGroupLikeElem_iff|IsDomain|IsIdempotentElem",
+   "results": {
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "232",
+     "235",
+     "236",
+     "252",
+     "253"
+    ],
+    "digest": "4b10d9c7c12b5e92"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the group-like monomial criterion and independence hits require IsDomain, which a connected nonreduced B need not satisfy; scheme and representation hits do not state rigidity over a connected affine parameter ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Group like elements in a group algebra over a connected commutative ring are basis monomials because coefficients are orthogonal idempotents",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "linearIndepOn_isGroupLikeElem",
+     "GroupLike.isGroupLikeElem_val",
+     "linearIndep_groupLikeVal",
+     "IsGroupLikeElem",
+     "GroupLike.valEquiv",
+     "IsGroupLikeElem.one",
+     "GroupLike.val",
+     "GroupLike"
+    ],
+    "digest": "c7f1e8dcf0c574c4"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the group-like monomial criterion and independence hits require IsDomain, which a connected nonreduced B need not satisfy; scheme and representation hits do not state rigidity over a connected affine parameter ring"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-multiplicative-extension-action-rigidity",
+  "date": "2026-10-23",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Composition of multiplicative isogenies has finite central multiplicative kernel. Supporting input: Milne Corollary 12.41, rigidity of the conjugation action on the kernel extension. The Chapter 12 erratum requires the kernel to be central in the middle group. Theorem 12.36: connected families of homomorphisms between diagonalizable groups, applied to the descended difference map Q to N.",
+   "via": [
+    "lem-sfb-multiplicative-extension-action-rigidity",
+    "lem-sfb-multiplicative-isogeny-composition",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-diagonalizable-hom-family-rigidity",
+  "worker": "stage1",
+  "summary": "Checked Milne Theorem 12.36 and Remark 12.43. Expanded the coefficient proof over the possibly nonreduced connected parameter ring, reusing the closed connectedness/idempotent node and the spectrum and tensor-product Mathlib leaves; no new node, no statement change, no domain or reducedness assumption. No exact project attachment found.",
+  "blueprint": "The inherited provenance ends at det-thm-sf-ctf-stability-direct-images, proof (3), supporting central-cover and multiplicative-isogeny prerequisites: this item supplies Theorem 12.36 for the descended difference map Q to N. Steps 1--4 realize that rigidity input by Milne Remark 12.43. The current latest direct-images proof was read; its upper route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-scheme-connected-iff-idempotents",
+    "why": "Generic connectedness/global-idempotent criterion applied to X; the node is already Lean-closed and no unit-specific replacement is needed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-scheme-connected-iff-idempotents"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-483f1dc1b",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-483f1dc1b (reviewer sub-agent of L); spot-checked: Read in full: the item and all 4 steps, against Milne iAG2017 Theorem 12.36 (pp.243-244) and Remark 12.43 (p.245). The statement is 12.36 restricted to an algebraically closed F and an affine X, the same reduction Milne makes; it is unchanged and there are no new nodes. One fault, fixed (C1/C4): step 1 identified X×_F D1 with Spec(B⊗F[M1]) citing only def-weil-affine-spectrum (morphisms between spectra only) and the tensor universal property. Those two do not show the scheme fibre product is affine. The fix cites the existing Mathlib leaf lem-weil-pbc-fibre-product-affine-spectra (pullbackSpecIso) in step 1's uses and in proof_deps, and spells out that a pair (x,d) is the algebra map b⊗e_m↦x(b)d(e_m); it creates no cycle. Hand checks: the universal-point test on A=B[M1⊕M1] gives Σa_{n,m}e_(m,m)=Σa_{n,m}a_{n,l}e_(m,l) by the comultiplication, and the counit gives Σa=1. Coefficient comparison gives orthogonal idempotents summing to 1; lem-pc-scheme-connected-iff-idempotents (X nonempty via x0; Lean-closed generic tool, tool_use accepted) gives u_n=e_{h(n)}; uniqueness in the spectrum correspondence gives φ=φ_{x0}∘pr. Edge cases: M1=0, M2=0, F[ε]/ε², μ_p in characteristic p; B=F×F shows connectedness is needed. Duplicate search (12.36 / diagonalizable rigidity): the Q146/Q02 connected-action nodes are 12.37-type corollaries with smooth G and automorphism actions, not duplicates. No SGA source used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DiagonalizableHomFamilyRigidity",
+  "declaration": "AlgebraicGeometry.diagonalizable_hom_family_rigidity",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalizableHomFamilyRigidity.lean",
+  "statement": "theorem diagonalizable_hom_family_rigidity (F : Type u) [Field F] [IsAlgClosed F] (D₁ D₂ : Grp (Over (Spec (.of F)))) [IsAffine D₁.X.left] [IsAffine D₂.X.left] [LocallyOfFiniteType D₁.X.hom] [QuasiCompact D₁.X.hom] [LocallyOfFiniteType D₂.X.hom] [QuasiCompact D₂.X.hom] (M₁ M₂ : Type u) [AddCommGroup M₁] [AddCommGroup M₂] [AddGroup.FG M₁] [AddGroup.FG M₂] (hD₁ : Nonempty (D₁ ≅ diagonalizableGroup F M₁)) (hD₂ : Nonempty (D₂ ≅ diagonalizableGroup F M₂)) (X : Over (Spec (.of F))) [IsAffine X.left] [ConnectedSpace X.left] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (x₀ : 𝟙_ (Over (Spec (.of F))) ⟶ X) (φ : X ⊗ D₁.X ⟶ D₂.X) (hφ : ∀ (A : Type u) [CommRing A] [Algebra F A] (x : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap F A))) ⟶ X), (∃ f : (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap F A))) ⟶ D₁.X) →* (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap F A))) ⟶ D₂.X), ∀ d, f d = lift x d ≫ φ)) : φ = snd X D₁.X ≫ (lift (toUnit D₁.X ≫ x₀) (𝟙 D₁.X) ≫ φ)",
+  "branch": "sheaf-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d41d03bfd",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Fresh S2 delivery (live node has no lean record, no prior runs). Dep records byte-identical to live; item node changes only by its lean record plus the landed def-sfb-diagonalizable-group stmt_dep, which is in the base and used in the Lean. lean.statement verbatim = file signature. Clause check: F alg. closed; D_i in Grp(Over Spec F), affine, LocallyOfFiniteType+QuasiCompact; Nonempty group-object iso to diagonalizableGroup F M_i (hopfSpec of AddMonoidAlgebra, the node's Hopf operations) with AddGroup.FG; X affine, connected, finite type; x0 : unit ⟶ X; φ : X⊗D1 ⟶ D2; hφ asks for a MonoidHom on A-points (Mathlib Hom.group) equal to lift x d ≫ φ for all commutative F-algebras A : Type u, no reducedness; conclusion φ = snd ≫ (lift (toUnit≫x0) 𝟙 ≫ φ) in the right order. No extra hypotheses. Edge cases (M=0, μ_p, F[ε]/ε², Spec F, zero algebra, empty X excluded) OK; single universe u is standard. No defs, sorry only, docstrings carry source place, blueprint id and all 4 steps; report has Worker report and Second reading by Q13. No duplicate in Mathlib or project. Not recompiled (no changes); worker reports clean compiles."
+ }
+}

@@ -1,0 +1,324 @@
+{
+ "id": "lem-sfb-locally-separated-space-decent",
+ "kind": "statement",
+ "title": "Locally separated algebraic spaces are decent",
+ "statement": "Let $X$ be an algebraic space over $\\operatorname{Spec}\\mathbf Z$ [def-trf-algebraic-space, def-weil-affine-spectrum], with point set and atlas topology [def-a1-space-point-topology] and sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. An immersion of algebraic spaces means a representable morphism all of whose scheme base changes are immersions [def-weil-closed-immersion]. Call an algebraic space $X$ decent if every morphism $\\operatorname{Spec}L\\to X$ from a field spectrum is quasi-compact: for every affine scheme $U\\to X$, the scheme $U\\times_X\\operatorname{Spec}L$ is quasi-compact [def-weil-pbc-quasi-compact-scheme]. If the absolute diagonal $X\\to X\\times_{\\operatorname{Spec}\\mathbf Z}X$ is an immersion, then $X$ is decent. No quasi-separatedness or finite-type hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 088J (lemma-locally-separated-decent); decency is Tag 03I8 (definition-very-reasonable), equivalently condition (6) of Tag 03JV (lemma-UR-finite-above-x)."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-a1-space-point-topology",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in|X|$. Choose an etale scheme chart $V\\to X$ and $v\\in V$ over $x$, using the affine etale atlas. Write $u=\\operatorname{Spec}\\kappa(v)$ with its canonical map to $V$. This map is a monomorphism: two maps into $u$ with the same composite into $V$ agree on points, and their maps on local rings agree because the map $\\mathcal O_{V,v}\\to\\kappa(v)$ is surjective; equality can be tested on these stalk maps. Form $H=u\\times_Xu$. The map $H\\to u\\times_{\\mathbf Z}u$ is the base change of the absolute diagonal of $X$, hence an immersion by hypothesis. The two kernel-relation projections, diagonal, interchange and composition make $(u,H)$ a groupoid: on test schemes its arrows are pairs with equal images in $X$. The map to the pair groupoid $(u,u\\times_{\\mathbf Z}u)$ preserves these operations. The field-groupoid lemma therefore makes this immersion a closed immersion.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-a1-groupoid-scheme",
+    "lem-sfb-field-kernel-relation-immersion-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 088J (lemma-locally-separated-decent)"
+   }
+  },
+  {
+   "text": "The projection $u\\times_XV\\to u$ is etale by base change of the chart. It is a disjoint union of finite separable field spectra by the etale-fibre lemma. The map $H\\to u\\times_XV$ is a monomorphism, being the base change of $u\\to V$. The field-coproduct monomorphism lemma says $H$ is a union of these components. It is also affine, since step 1 embeds it as a closed subscheme of the affine $u\\times_{\\mathbf Z}u$. Hence it is quasi-compact; its disjoint open components admit a finite subcover, so there are only finitely many of them. Thus $H$ is a finite union of open components of the etale $u$-scheme $u\\times_XV$; an open immersion is etale and etale maps compose, so the first projection $H\\to u$ is etale, and it is quasi-compact as $H$ is affine and $u$ has one point. Interchange switches the projections, so both are etale and quasi-compact. The finite-self-relation lemma supplies a field monomorphism $j:\\operatorname{Spec}k\\to X$ representing $x$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-sfb-monomorphism-into-field-coproduct",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-finite-point-self-relation-field-monomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 088J (lemma-locally-separated-decent)"
+   }
+  },
+  {
+   "text": "Fix any affine etale chart $U=\\operatorname{Spec}A\\to X$ and put $F=U\\times_X\\operatorname{Spec}k$. It is etale over $k$, so write $F=\\coprod_{i\\in I}\\operatorname{Spec}k_i$ with $k_i/k$ finite separable. The projection $F\\to U$ is a monomorphism. For each component its map to $U$ factors through the residue field of its image point $p_i$; base changing this monomorphism by $\\operatorname{Spec}\\kappa(p_i)\\to U$ and applying the field-coproduct lemma shows $k_i=\\kappa(p_i)$. The same lemma shows the $p_i$ are pairwise distinct: over a fixed $p$, that base change is a monomorphism to one field spectrum and has at most one component.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-sfb-monomorphism-into-field-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 088J (lemma-locally-separated-decent)"
+   }
+  },
+  {
+   "text": "Set $R=U\\times_XU$, and let $q:R\\to P=U\\times_{\\mathbf Z}U$ be its immersion, again a pullback of the absolute diagonal. Factor it as a closed immersion $q^{\\prime}:R\\to P^{\\prime}$ followed by an open immersion $P^{\\prime}\\subseteq P$. Write $e:U\\to R$ for the relation diagonal. Both $R\\to U$ and $\\mathrm{id}_U$ are etale, so etale cancellation makes $e$ etale. It is a monomorphism, so the etale-monomorphism lemma makes it an open immersion. Also $q e=\\Delta_U$ is a closed immersion: under the affine product identification it is induced by the surjection $A\\otimes_{\\mathbf Z}A\\to A$, $a\\otimes b\\mapsto ab$. Since $q$ is an embedding, $e(U)=q^{-1}(\\Delta_U(U))$ is closed in $R$. Thus $R=e(U)\\amalg W$ for an open and closed complement $W$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-space-etale-monomorphism-open",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 088J (lemma-locally-separated-decent)"
+   }
+  },
+  {
+   "text": "The subset $q^{\\prime}(W)$ is closed in $P^{\\prime}$, since $W$ is closed in $R$ and $q^{\\prime}$ is a closed embedding. It is disjoint from $\\Delta_U(U)$, which is contained in $P^{\\prime}$. For an open subspace $P^{\\prime}$, closure in $P$ restricted to $P^{\\prime}$ is closure in $P^{\\prime}$. Therefore $\\overline{q(W)}\\cap\\Delta_U(U)=\\varnothing$. This is solely the definition of closure, since every point of $P^{\\prime}\\setminus q^{\\prime}(W)$ has an open neighbourhood there avoiding $q(W)$.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 088J (lemma-locally-separated-decent)"
+   }
+  },
+  {
+   "text": "For $i\\ne i^{\\prime}$ the map $\\operatorname{Spec}(k_i\\otimes_k k_{i^{\\prime}})\\to R$ comes from $F\\times_kF=U\\times_X\\operatorname{Spec}k\\times_XU$, or directly from equality of the two composites to $X$. It avoids $e(U)$: the two projections land at distinct points $p_i,p_{i^{\\prime}}$ of $U$, whereas both projections agree on $e(U)$. It therefore factors through the open complement $W$. If $I$ were infinite, choose countably many indices and apply the infinite-primes lemma to their distinct primes $p_i$ and the embeddings $k\\hookrightarrow k_i=\\kappa(p_i)$. It says the closure of the union of these cross-product images in $P=\\operatorname{Spec}(A\\otimes_{\\mathbf Z}A)$ meets $\\Delta_U(U)$. That union lies in $q(W)$, contradicting step 5. Thus $I$ is finite. A finite disjoint union of finite field extensions is finite over $k$: its coordinate algebra is a finite product of finite-dimensional $k$-vector spaces.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-infinite-primes-off-diagonal-closure",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 088J (lemma-locally-separated-decent)"
+   }
+  },
+  {
+   "text": "We have proved finiteness of $U\\times_X\\operatorname{Spec}k$ for every affine etale chart $U\\to X$. Apply the finite-chart decency criterion to the monomorphism $j$ from step 2. It gives quasi-compactness of every field-valued representative of $x$, on all affine scheme tests (not merely etale tests). As $x$ was arbitrary, every morphism $\\operatorname{Spec}L\\to X$ is quasi-compact. This is precisely the definition of decency in the statement. If $X$ is empty there are no such representatives and the assertion is vacuous.",
+   "uses": [
+    "lem-sfb-field-monomorphism-finite-chart-decency-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 088J (lemma-locally-separated-decent)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-groupoid-scheme",
+  "lem-sfb-field-kernel-relation-immersion-closed",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-sfb-monomorphism-into-field-coproduct",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-finite-point-self-relation-field-monomorphism",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sfb-space-etale-monomorphism-open",
+  "lem-sfb-infinite-primes-off-diagonal-closure",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-field-monomorphism-finite-chart-decency-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 088J (lemma-locally-separated-decent), both paragraphs, with Tags 04Q9, 03DP, 03JU, 088I and 03JV made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every locally separated algebraic space over a field is decent meaning field spectrum morphisms into it are quasi compact",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] : QuasiSeparated f\", \"doc\": \"Any separated morphism $ f: X \\to Y $ of schemes automatically satisfies the quasi-separated condition, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": @QuasiSeparated = MorphismProperty.diagonal @QuasiCompact\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if its diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact. This establishes the equivalence between the quasi-separatedness p\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": HasAffineProperty @QuasiSeparated (fun X _ _ _ ↦ QuasiSeparatedSpace X)\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [X.IsSeparated] : QuasiSeparatedSpace X\", \"doc\": \"Every separated scheme is a quasi-separated space. That is, for any scheme $X$ equipped with the separatedness property, the intersection of any two quasi-compact open subsets of $X$ is itself quasi-c\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"[IsAffine Y] (f : X ⟶ Y) :\\n  AffineTargetMorphismProperty.diagonal (fun X _ _ _ ↦ CompactSpace X) f ↔ QuasiSeparatedSpace X\", \"doc\": \"A scheme $X$ is quasi-separated if and only if, for every affine scheme $Y$ and morphism $f: X \\\\to Y$, the diagonal morphism associated to $f$ satisfies the quasi-compactness condition under pullbacks\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace Y] : QuasiSeparated f ↔ QuasiSeparatedSpace X\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-separated if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": QuasiSeparatedSpace X ↔ QuasiCompact (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"A scheme $X$ is quasi-separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsLocallyNoetherian X] : QuasiSeparatedSpace X\", \"doc\": \"Every locally Noetherian scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is quasi-compact.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphisms or general category theory; none states this algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphisms or general category theory; none states this algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Dd]ecent|[Ll]ocally[Ss]eparated",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphisms or general category theory; none states this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space with immersion diagonal has quasi compact maps from all field spectra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"@AlgebraicGeometry.QuasiSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.QuasiCompact\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if its diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact. This establishes the equivalence between the quasi-separatedness p\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [QuasiSeparatedSpace ↥X],\\n  AlgebraicGeometry.QuasiCompact\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any quasi-separated scheme $ X $, the diagonal morphism $ X \\to X \\times X $ (constructed as the product of the identity morphism with itself) is quasi-compact. This follows from the definition of q\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsAffine Y] (f : X ⟶ Y),\\n  AlgebraicGeometry.AffineTargetMorphismProperty.diagonal (fun X x x_1 x_2 => CompactSpace ↥X) f ↔\\n    QuasiSeparatedSpace ↥X\", \"doc\": \"A scheme $X$ is quasi-separated if and only if, for every affine scheme $Y$ and morphism $f: X \\\\to Y$, the diagonal morphism associated to $f$ satisfies the quasi-compactness condition under pullbacks\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.QuasiSeparated f ↔\\n    autoParam (AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal._autoParam\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\to Y $ of schemes, the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  QuasiSeparatedSpace ↥X ↔\\n    AlgebraicGeometry.QuasiCompact\\n      (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"A scheme $X$ is quasi-separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CompactSpace ↥X] [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Any morphism $ f: X \\to Y $ of schemes is quasi-compact if $ X $ is a compact topological space and $ Y $ is a quasi-separated scheme. This follows from the property that compactness of $ X $ ensures f\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphisms or general category theory; none states this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally separated algebraic space is decent: every morphism from a field spectrum is quasi compact",
+   "results": "{'t': '2026-10-23T13:06:25Z', 'tool': 'leanfinder', 'query': 'A locally separated algebraic space is decent: every morphism from a field spectrum is quasi compact', 'sub': '', 'ok': True, 'n_hits': 8, 'note': '', 'top': ['AlgebraicGeometry.IsSeparated.hasAffineProperty', 'AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget', 'AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated', 'AlgebraicGeometry.Scheme.IsSeparated', 'AlgebraicGeometry.IsSeparated.instQuasiSeparated', 'AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat', 'AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine', 'AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine'], 'digest': '13b9f8a997f77f89'}",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme separatedness and spectrum statements, or an unrelated Ordset comment; no algebraic-space decency theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Dd]ecent|[Ll]ocally[Ss]eparated",
+   "results": "{'t': '2026-10-23T13:10:33Z', 'tool': 'grep', 'query': 'AlgebraicSpace|[Dd]ecent|[Ll]ocally[Ss]eparated', 'sub': '', 'ok': True, 'n_hits': 1, 'note': '', 'top': ['Mathlib/Data/Ordmap/Ordset.lean'], 'digest': '035261f8bac28890'}",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme separatedness and spectrum statements, or an unrelated Ordset comment; no algebraic-space decency theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic spaces with immersion diagonal have quasi compact field valued points",
+   "results": "{'t': '2026-10-23T13:10:33Z', 'tool': 'leansearch', 'query': 'Algebraic spaces with immersion diagonal have quasi compact field valued points', 'sub': '', 'ok': True, 'n_hits': 8, 'note': '', 'top': ['AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift', 'AlgebraicGeometry.quasiSeparated_iff', 'AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace', 'AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal', 'AlgebraicGeometry.isSeparated_iff', 'AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact', 'AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact', 'AlgebraicGeometry.IsImmersion.instDiagonalScheme'], 'digest': 'd8b1a013424971dd'}",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme separatedness and spectrum statements, or an unrelated Ordset comment; no algebraic-space decency theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+   "results": "{'t': '2026-10-23T13:10:33Z', 'tool': 'loogle', 'query': '\"AlgebraicSpace\", \"QuasiCompact\"', 'sub': '', 'ok': True, 'n_hits': 0, 'note': '', 'top': [], 'digest': '4f53cda18c2baa0c'}",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme separatedness and spectrum statements, or an unrelated Ordset comment; no algebraic-space decency theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-separated-rational-point-closed-immersion",
+  "date": "2026-10-23",
+  "group": "Q114"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives.",
+   "via": [
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-locally-separated-space-decent",
+  "worker": "stage1",
+  "summary": "Preserved the unrestricted locally separated statement. Expanded both paragraphs of Stacks 088J into seven steps, exposing five independently stated supporting results and reusing existing etale fibre, chart, immersion and product nodes. No quasi-separatedness or finite-type hypothesis is introduced.",
+  "blueprint": "Inherited null imported ancestor, as tools/blueprint_refs.py ancestor reports. The recorded historical route reaches det-thm-sf-ctf-stability-direct-images proof (3); this item supplies the locally separated/adequate-moduli geometric input on that existing alteration branch. Realizes Stacks 088J paragraphs 1 and 2, not a replacement of the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic scheme/space chart, fibre-product, immersion or etale calculus used inside the fixed Stacks 088J argument; the unit has no alternate statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-from-spec-field",
+    "why": "Generic scheme/space chart, fibre-product, immersion or etale calculus used inside the fixed Stacks 088J argument; the unit has no alternate statement of this tool."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme/space chart, fibre-product, immersion or etale calculus used inside the fixed Stacks 088J argument; the unit has no alternate statement of this tool."
+   },
+   {
+    "node": "def-a1-groupoid-scheme",
+    "why": "Generic scheme/space chart, fibre-product, immersion or etale calculus used inside the fixed Stacks 088J argument; the unit has no alternate statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic scheme/space chart, fibre-product, immersion or etale calculus used inside the fixed Stacks 088J argument; the unit has no alternate statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic scheme/space chart, fibre-product, immersion or etale calculus used inside the fixed Stacks 088J argument; the unit has no alternate statement of this tool."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic scheme/space chart, fibre-product, immersion or etale calculus used inside the fixed Stacks 088J argument; the unit has no alternate statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme/space chart, fibre-product, immersion or etale calculus used inside the fixed Stacks 088J argument; the unit has no alternate statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic scheme/space chart, fibre-product, immersion or etale calculus used inside the fixed Stacks 088J argument; the unit has no alternate statement of this tool."
+   },
+   {
+    "node": "def-weil-finite-integral-morphism",
+    "why": "Generic scheme/space chart, fibre-product, immersion or etale calculus used inside the fixed Stacks 088J argument; the unit has no alternate statement of this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-groupoid-scheme",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-finite-integral-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-12327f8ae",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-12327f8ae (reviewer sub-agent of L); spot-checked: Read Stacks 088J (both paragraphs), 088I, 03JU, 03JV, 04Q9 with Situation 04Q5, 03DP and 01IQ, and every cited node statement. Item statement unchanged: absolute, immersion diagonal, decency as 03JV(6); it matches 088J and its one citer. Steps 1-7 check against their cited statements. Step 3's k_i=κ(p_i) and distinct primes follow from 03DP; step 5 is honestly elementary; step 6's ⊗_Z matches the 088I node. All five new nodes are true and are the exact source implications: 04Q9+01IQ, 03DP for any index set, 03JU(3)⇒(4), 088I, 03JV(3)⇒(6). For 088I I checked it stays true over Z with no k-algebra structure on A, by pushing the source's ∏k_n closure forward. No duplicates: rg -L over all tags; every 03JU/03JV node assumes decency or a quasi-compact diagonal. No restated clause, no cycle, no SGA. Batch-5 flags (def-trf-algebraic-space, def-a1-space-point-topology, lem-trf-space-fibre-products-etale-covers, lem-a1-space-affine-etale-cover, lem-sfb-space-etale-monomorphism-open) are generic definitions or foundations, not trace-formula or Poincaré steps; accepted. The 10 generic tool_uses are accepted. FIX (C1): step 2 claimed the projections H→u are étale without a node. Added lem-weil-pbc-etale-composition-cancellation (open immersion étale, composition) to step 2's uses and wrote out the étale and quasi-compact reason. Fixed file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-locally-separated-space-decent.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallySeparatedSpaceDecent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.decent_of_locallySeparated",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallySeparatedSpaceDecent.lean",
+  "statement": "theorem decent_of_locallySeparated (X : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))) (hdiag : IsRepresentableWith (fun _ _ p ↦ IsImmersion p.left) (prod.lift (𝟙 X.obj.obj) (𝟙 X.obj.obj))) : ∀ (L : Type u) [Field L] (b : Spec (CommRingCat.of L) ⟶ Spec (CommRingCat.of (ULift.{u} ℤ))) (a : yoneda.obj (Over.mk b) ⟶ X.obj.obj) (U : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))), IsAffine U.left → ∀ t : yoneda.obj U ⟶ X.obj.obj, ∃ (V : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) (p : V ⟶ U) (q : yoneda.obj V ⟶ yoneda.obj (Over.mk b)), IsPullback q (yoneda.map p) a t ∧ CompactSpace V.left",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-824acdd88",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Read the item, all 7 stmt_deps, the module, the report (both sections present) and Stacks 088J/03I8/03JV(6). Hypothesis: IsRepresentableWith (IsImmersion p.left) on the absolute diagonal over terminal Spec ULift Z; no QS/finite-type/closed-immersion strengthening. Conclusion: for all L : Type u, field maps a, affine U and t, a representing IsPullback square with CompactSpace V.left, i.e. 03JV(6) at every point = 03I8, quantifiers in node order. Same decency expansion as landed DecentSpaceFiniteFieldMap hdecent. Edge cases: empty X vacuous, empty U compact, all characteristics, single bound universe u. H4: no existing decency or locally-separated theorem; IsQuasiCompactPresheafMap is an étale-atlas predicate the node does not cite. Only the item node's lean field and the new module are delivered; lean.statement verbatim; imports exist; sorry-only proof; docstrings carry source, blueprint and the 7 steps. No fix, no compile."
+ }
+}

@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-borel-opposite-root-dichotomy",
+ "kind": "statement",
+ "title": "A Borel Lie algebra selects one of each opposite pair of torus roots",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $F$, and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Write $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga] for commutative $F$-algebras $A$. Lie algebras are tangent spaces at the identity, with the adjoint action obtained by differentiating conjugation. A smooth group is unipotent if its geometric points are unipotent matrices in a faithful representation. A reductive group is smooth and connected with no nontrivial smooth connected normal unipotent subgroup. A torus is a group isomorphic to $\\mathbf G_m^r$ for some integer $r\\geq0$; it is maximal if it is contained in no larger torus subgroup. A group is solvable if its successive scheme-theoretic commutator subgroups eventually become trivial, and a Borel subgroup is a maximal smooth connected solvable subgroup. Let $G$ be reductive, $T\\subseteq G$ a maximal torus and $B\\subseteq G$ a Borel subgroup containing $T$. Let $\\Phi$ be the nontrivial characters $\\alpha:T\\to\\mathbf G_m$ occurring in $\\mathfrak g=\\operatorname{Lie}(G)$, and let $\\mathfrak g_\\alpha$ be their weight spaces. Then $\\Phi$ is finite, $-\\alpha\\in\\Phi$ for each $\\alpha\\in\\Phi$, and, setting $\\Psi_B=\\{\\alpha\\in\\Phi:\\mathfrak g_\\alpha\\subseteq\\operatorname{Lie}(B)\\}$, one has\n$$\\operatorname{Lie}(B)=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\alpha\\in\\Psi_B}\\mathfrak g_\\alpha,\\qquad \\#(\\Psi_B\\cap\\{\\alpha,-\\alpha\\})=1\\quad(\\alpha\\in\\Phi).$$\nThe weights are characters of the torus, not differentials of characters; no restriction on the characteristic of $F$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 21.28, printed p.433; Theorem 21.11(b),(c), printed pp.428--429, and its use in the proof of Proposition 21.29, printed p.434."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-rank-one-root-interfaces",
+  "def-sfb-borel-subgroup-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-torus-character-tangent-weights"
+ ],
+ "proof": [
+  {
+   "text": "Apply the reductive rank-one theorem to $(G,T)$. It gives a finite decomposition $\\mathfrak g=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\beta\\in\\Phi}\\mathfrak g_\\beta$, one-dimensional root spaces, and $\\mathbf Q\\alpha\\cap\\Phi=\\{\\alpha,-\\alpha\\}$ for every root $\\alpha$. In particular $\\Phi$ is finite and stable under negation. Fix a root $\\alpha$ for the next three steps; when there are no roots these steps are vacuous.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(a),(b), pp.428--430; decomposition in 21.1, p.424."
+   }
+  },
+  {
+   "text": "Let $S=T_\\alpha$ be the largest subtorus of $\\ker\\alpha$ and $H=C_G(S)$. The rank-one theorem makes $H$ reductive of semisimple rank one with maximal torus $T$. Apply the centralizer-intersection theorem with $S\\subseteq T\\subseteq B$: the scheme intersection $D=B\\times_GH$ is a smooth connected solvable Borel subgroup of $H$, and it contains $T$. All of these are scheme-theoretic inclusions.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-torus-centralizer-borel-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 21.28, p.433, invoking Theorem 17.46, pp.365--366 (restated in 17.72)."
+   }
+  },
+  {
+   "text": "Use the rank-one pair classification to identify $(H,T)$ with $(\\mathbf G_m^r\\times M,\\mathbf G_m^r\\times D_M)$, where $M$ is $\\operatorname{SL}_2$, $\\operatorname{PGL}_2$ or $\\operatorname{GL}_2$ and $D_M$ is its standard diagonal torus. Act on the projective line of lines in $F^2$ by the matrix factor, with the central torus acting trivially; scalar matrices act trivially, so the action descends in the PGL case. This is the usual algebraic projective action. The projective line is nonempty, finite type (its two affine-line charts), and proper by the cited projective-space theorem. Apply the solvable fixed-point theorem to $D$ acting on this line: some line $L$ is fixed scheme-theoretically. Since $T\\subseteq D$, $L$ is diagonal-torus invariant. The only such lines are $Fe_1$ and $Fe_2$: for a vector with both coordinates nonzero, a diagonal element with unequal coordinate ratio moves the line. In the SL case choose $s$ with $s^2\\ne1$; such an $s$ exists even in characteristic two because $F$ is algebraically closed. Thus $D$ is contained, as a group scheme, in an upper or lower triangular stabilizer $Q$ of $H$. Each $Q$ is smooth connected solvable: its variety is a product of a split torus and $\\mathbf A^1$, and the diagonal homomorphism has commutative torus image and kernel $\\mathbf G_a$. Maximality of the Borel $D$ in $H$ gives $D=Q$.",
+   "uses": [
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-solvable-proper-fixed-point",
+    "lemma-nagata-projective-space-base-change-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 21.28, p.433; rank-one description in 20.20, pp.414--415. Explicit line-stabilizer argument as in Example 17.7 and Theorem 17.9, p.354, using Corollary 17.3, p.353."
+   }
+  },
+  {
+   "text": "Compute tangent spaces in these matrix models. The two off-diagonal tangent directions have torus characters $\\pm2\\chi$ for SL2, $\\pm\\chi$ for PGL2 (diagonal ratio $\\chi$), and $\\pm(e_1-e_2)$ for GL2. For PGL2 its tangent space is $\\mathfrak{gl}_2/FI$; the off-diagonal classes survive in every characteristic. An upper triangular $Q$ contains just the upper direction and a lower triangular $Q$ just the lower direction. To identify these directions inside $\\mathfrak g$, write $\\alpha=ma$ with $a$ primitive in the free character lattice of $T$, using character antiduality. Extend $a$ to an integral basis; then $S$ is given by first torus coordinate $1$, and a character is trivial on $S$ exactly when it is an integral multiple of $a$. A tangent vector belongs to $\\operatorname{Lie}(H)$ precisely when its dual-number point centralizes $S$ after every algebra extension, equivalently when it is $S$-fixed. Hence $\\operatorname{Lie}(H)=\\operatorname{Lie}(T)\\oplus\\mathfrak g_\\alpha\\oplus\\mathfrak g_{-\\alpha}$, by the rational-multiple assertion of step 1. Thus the two off-diagonal directions are exactly $\\mathfrak g_\\alpha$ and $\\mathfrak g_{-\\alpha}$, possibly with labels exchanged. Tangents commute with this fibre product: a dual-number point in $D=B\\times_GH$ is precisely one in both $B$ and $H$. Consequently exactly one of $\\mathfrak g_\\alpha,\\mathfrak g_{-\\alpha}$ is contained in $\\operatorname{Lie}(B)$.",
+   "uses": [
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(b), pp.428--430; standard matrix models in 21.4--21.6, pp.425--426; character antiduality in 12.9 and 12.23; dual-number description of fixed tangents in 10.34."
+   }
+  },
+  {
+   "text": "Finally $\\mathfrak b=\\operatorname{Lie}(B)$ is a $T$-stable subspace containing $\\operatorname{Lie}(T)$. For $v\\in\\mathfrak b$, write its weight decomposition $v=v_0+\\sum v_\\beta$ from step 1. Its coaction is $v_0\\otimes1+\\sum v_\\beta\\otimes e_\\beta$ in $\\mathfrak b\\otimes F[X^*(T)]$. Comparing the independent Laurent monomials $1,e_\\beta$ shows that each $v_\\beta$ lies in $\\mathfrak b$. Each intersection $\\mathfrak b\\cap\\mathfrak g_\\beta$ is zero or the whole space because the latter is one-dimensional. Therefore $\\mathfrak b=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\beta\\in\\Psi_B}\\mathfrak g_\\beta$. Step 4 gives exactly one element of $\\Psi_B$ in every opposite pair. These are distinct characters: $\\alpha=-\\alpha$ would give $2\\alpha=0$ in a free integer lattice, contradicting $\\alpha\\ne0$. This proves the cardinality assertion, including in characteristic two. If $\\Phi$ is empty, the same subspace argument gives $\\mathfrak b=\\operatorname{Lie}(T)$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12, pp.234--235 (coaction coefficients); Lemma 21.28 and proof of Proposition 21.29, pp.433--434."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-torus-centralizer-borel-intersection",
+  "lem-sfb-split-rank-one-classification",
+  "lem-sfb-solvable-proper-fixed-point",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-sfb-multiplicative-character-antiduality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 21.28 and Theorem 21.11(b), pp.428--433; the rank-one step is expanded using the fixed-point argument of 17.7--17.9 and the explicit matrix classification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Lie algebra of a Borel subgroup of a reductive algebraic group containing a maximal torus contains exactly one of each pair of opposite root spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"For a root pairing $ P $ with finite support indexed by $ \\\\iota $ over a commutative ring $ R $, the matrix $ h(i) $ constructed from the Geck construction lies in the Cartan subalgebra $ \\\\mathfrak{h}\"}\n  {\"name\": \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L]\\n  [inst_3 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_4 : H.IsCartanSubalgebra]\\n  [inst_5 : LieAlgebra.IsKilling K L] [inst_6 : LieModule.IsTriangularizable K (↥H) L] [inst_7 : CharZero K]\\n  {α\", \"doc\": \"An element $ x $ belongs to the $ \\\\mathfrak{sl}_2 $-subalgebra generated by an $ \\\\mathfrak{sl}_2 $-triple $ (h,e,f) $ corresponding to a non-zero root $ \\\\alpha $ if and only if $ x $ can be expressed \"}\n  {\"name\": \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ {L : Type u_2} [inst : LieRing L] {K : Type u_4} [inst_1 : Field K] [inst_2 : LieAlgebra K L] [FiniteDimensional K L]\\n  (H : LieSubalgebra K L) [inst_4 : H.IsCartanSubalgebra] [LieModule.IsTriangularizable K (↥H) L],\\n  H.toLieSubmodule ⊔ ⨆ α, ⨆ (_ : α.IsNonZero), LieAlgebra.rootSpace H ⇑α = ⊤\", \"doc\": \"The direct sum of the Cartan subalgebra $\\\\mathfrak{h}$ and all non-zero root spaces associated with weights $\\\\chi$ equals the entire Lie algebra $\\\\mathfrak{g}$, i.e., $\\\\mathfrak{h} \\\\oplus \\\\bigoplus_{\\\\\"}\n  {\"name\": \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L]\\n  [inst_3 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_4 : H.IsCartanSubalgebra]\\n  [inst_5 : LieAlgebra.IsKilling K L] [inst_6 : LieModule.IsTriangularizable K (↥H) L] [inst_7 : CharZero K]\\n  (α\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form and a non-zero weight $\\\\alpha$, the $\\\\mathfrak{sl}_2$-submodule generated by the $\\\\mathfrak{sl}_2$-triple associated \"}\n  {\"name\": \"LieAlgebra.mem_corootSpace\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  {H : LieSubalgebra R L} [inst_3 : LieRing.IsNilpotent ↥H] [inst_4 : H.IsCartanSubalgebra] [inst_5 : IsNoetherian R L]\\n  (α : ↥H → R) {x : ↥H},\\n  x ∈ LieAlgebra.corootSpace α ↔\\n    ↑x ∈ Submodule.span\", \"doc\": \"An element $ x $ of the Lie subalgebra $ \\\\mathfrak{h} $ belongs to the coroot space associated with the weight $ \\\\alpha $ if and only if $ x $, when considered as an element of the Lie algebra $ \\\\math\"}\n  {\"name\": \"LieAlgebra.rootSpace_zero_eq\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : H.IsCartanSubalgebra] [IsNoetherian R L],\\n  LieAlgebra.rootSpace H 0 = H.toLieSubmodule\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, if $\\\\mathfrak{h}$ is a Cartan subalgebra of $\\\\mathfrak{g}$ and $\\\\mathfrak{g}$ is Noetherian as an $R$-module, then the root space of $\\\\mat\"}\n  {\"name\": \"LieAlgebra.mem_corootSpace'\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  {H : LieSubalgebra R L} [inst_3 : LieRing.IsNilpotent ↥H] [inst_4 : H.IsCartanSubalgebra] [inst_5 : IsNoetherian R L]\\n  (α : ↥H → R) {x : ↥H},\\n  x ∈ LieAlgebra.corootSpace α ↔\\n    x ∈ Submodule.span \", \"doc\": \"An element $ x $ of the Cartan subalgebra $ \\\\mathfrak{h} $ lies in the coroot space associated to a root $ \\\\alpha $ if and only if $ x $ is contained in the $ R $-span of all Lie brackets $[y, z]$ whe\"}\n  {\"name\": \"LieAlgebra.corootSpace\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"{R : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : LieRing L] →\\n        [inst_2 : LieAlgebra R L] →\\n          {H : LieSubalgebra R L} →\\n            [LieRing.IsNilpotent ↥H] → [H.IsCartanSubalgebra] → [IsNoetherian R L] → (↥H → R) → LieIdeal R ↥H\", \"doc\": \"The coroot space associated to a weight $\\\\alpha : \\\\mathfrak{h} \\\\to R$ is the image of the composition of maps from the tensor product of root spaces $\\\\mathfrak{g}_\\\\alpha \\\\otimes_R \\\\mathfrak{g}_{-\\\\alph\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, root pairings or Lie algebra modules, analytic Lie groups, or cotangent modules; none states this arbitrary-characteristic assertion about affine group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Borel subgroup through a split torus has exactly one positive or negative root space for each root",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RootPairing.Base.IsPos.or_neg\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Base\", \"type\": \"(i : ι) :\\n  letI := P.indexNeg\\n  b.IsPos i ∨ b.IsPos (-i)\", \"doc\": \"For any index $i$ in the indexing set $\\\\iota$ of a root system, either the root $\\\\Phi(i)$ is positive or the root $\\\\Phi(-i)$ is positive, where $-i$ denotes the involutive negation of the index induce\"}\n  {\"name\": \"LieAlgebra.rootSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Cartan\", \"type\": \"(χ : H → R) : LieSubmodule R H L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with a subalgebra $\\\\mathfrak{h}$, and a root $\\\\chi : \\\\mathfrak{h} \\\\to R$, the root space is the generalized weight space $\\\\bigcap_{x \\\\in \\\\m\"}\n  {\"name\": \"LieSubalgebra.root.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.Weights.RootSystem\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L]\\n  [inst_3 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_4 : H.IsCartanSubalgebra],\\n  LieSubalgebra.root = LieSubalgebra.root\", \"doc\": \"For any field $ K $, Lie algebra $ L $ over $ K $, and Cartan subalgebra $ \\\\mathfrak{h} $ of $ L $, the finite set of non-zero weights (roots) associated with $ \\\\mathfrak{h} $ is uniquely determined b\"}\n  {\"name\": \"RootPairing.Base.root_mem_or_neg_mem\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Base\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N} (self : P.Base)\\n  (i : ι),\\n  P.root i ∈ AddSubmonoid.closure (⇑P.root '' ↑self.support) ∨\\n    \", \"doc\": \"For any index $i$ in $\\\\iota$, either the root $\\\\alpha_i$ is contained in the additive submonoid generated by the image of the support under the root embedding, or its additive inverse $-\\\\alpha_i$ is c\"}\n  {\"name\": \"LieAlgebra.IsKilling.finrank_rootSpace_eq_one\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \"(α : Weight K H L) (hα : α.IsNonZero) : finrank K (rootSpace H α) = 1\", \"doc\": \"For a non-zero weight $\\\\alpha$ in the Cartan subalgebra $\\\\mathfrak{h}$ of a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form, the finite rank of the root space associated t\"}\n  {\"name\": \"LieAlgebra.IsKilling.rootSpace_one_div_two_smul\", \"module\": \"Mathlib.Algebra.Lie.Weights.RootSystem\", \"type\": \"(hα : α.IsNonZero) : rootSpace H ((2⁻¹ : K) • α) = ⊥\", \"doc\": \"If $\\\\alpha$ is a non-zero root in the root system of a Lie algebra with a non-degenerate Killing form, then the root space associated with the scalar multiple $\\\\frac{1}{2}\\\\alpha$ is trivial (i.e., con\"}\n  {\"name\": \"LieAlgebra.rootSpace.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.Weights.Cartan\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : LieRing.IsNilpotent ↥H] (χ χ_1 : ↥H → R),\\n  χ = χ_1 → LieAlgebra.rootSpace H χ = LieAlgebra.rootSpace H χ_1\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with a nilpotent Lie subalgebra $\\\\mathfrak{h} \\\\subseteq \\\\mathfrak{g}$, if two roots $\\\\chi, \\\\chi' : \\\\mathfrak{h} \\\\to R$ are equal as linear \"}\n  {\"name\": \"LieSubalgebra.root\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \": Finset (Weight K H L)\", \"doc\": \"The finite set of non-zero weights $\\\\alpha \\\\in \\\\text{Weight}(K, \\\\mathfrak{h}, \\\\mathfrak{g})$ associated with the Lie subalgebra $\\\\mathfrak{h}$, where each weight $\\\\alpha$ satisfies $\\\\alpha \\\\neq 0$ (i.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, root pairings or Lie algebra modules, analytic Lie groups, or cotangent modules; none states this arbitrary-characteristic assertion about affine group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"root\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, root pairings or Lie algebra modules, analytic Lie groups, or cotangent modules; none states this arbitrary-characteristic assertion about affine group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|borelSubgroup|opposite.*root",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, root pairings or Lie algebra modules, analytic Lie groups, or cotangent modules; none states this arbitrary-characteristic assertion about affine group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|borelSubgroup|opposite.*root",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract root-pairing positive systems do not identify the roots of an algebraic Borel; the Lie-algebra root-space results use differential weights and additional Killing/characteristic-zero hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Borel subgroup through a split maximal torus contains exactly one positive or negative root space in arbitrary characteristic",
+   "results": "OK 8 hit(s): RootPairing.Base.IsPos.or_neg, LieAlgebra.rootSpace, LieSubalgebra.root.congr_simp, LieAlgebra.rootSpace_zero_eq, RootPairing.Base.root_mem_or_neg_mem, LieAlgebra.IsKilling.finrank_rootSpace_eq_one, LieAlgebra.IsKilling.rootSpace_one_div_two_smul, LieAlgebra.rootSpace.congr_simp",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract root-pairing positive systems do not identify the roots of an algebraic Borel; the Lie-algebra root-space results use differential weights and additional Killing/characteristic-zero hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"root\"",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract root-pairing positive systems do not identify the roots of an algebraic Borel; the Lie-algebra root-space results use differential weights and additional Killing/characteristic-zero hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Lie algebra of a Borel subgroup of a reductive algebraic group containing a maximal torus selects exactly one root in each pair of opposite torus characters",
+   "results": "OK 8 hit(s): RootPairing.GeckConstruction.h_mem_cartanSubalgebra', LieSubalgebra.root, LieAlgebra.IsKilling.rootSystem, RootPairing.GeckConstruction.h', LieAlgebra.corootSpace, LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff, LieAlgebra.mem_corootSpace, LieAlgebra.mem_corootSpace'",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract root-pairing positive systems do not identify the roots of an algebraic Borel; the Lie-algebra root-space results use differential weights and additional Killing/characteristic-zero hypotheses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-regular-cocharacter-borel-description",
+  "date": "2026-10-24",
+  "group": "Q137"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Identify the actual Lie(B) weights with an integral positive half-space; the simple-root base is subsequently constructed in the item. Supporting input: Milne 21.29, second paragraph: a Borel containing the limit subgroup cannot have an additional negative root weight, by rank-one Borel dichotomy.",
+   "via": [
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-borel-opposite-root-dichotomy",
+  "worker": "stage1",
+  "summary": "Follow Milne 21.28 through a scheme-theoretic torus-centralizer intersection, using the existing rank-one theorem and matrix-pair classification. Expand the two rank-one Borels using the existing solvable fixed-point theorem on the projective line, and compute their tangent directions, including PGL2 in characteristic two. One new statement-only theorem is needed: the general Borel-centralizer intersection theorem. Preserve the statement and existing provenance.",
+  "blueprint": "Current blueprint det-thm-sf-ctf-stability-direct-images proof (3), supporting alteration chain already recorded in blueprint.from.place; the local supporting argument is Milne 21.28 used in 21.29. The ancestor command returns null because the created.item chain ends at the Lean module Sheaf.SixFunctors.CtfStabilityDirectImages; retain that current null provenance rather than edit an ancestor. No same-statement blueprint node was found.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-c77a60d19",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-c77a60d19 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-torus-centralizer-borel-intersection and all cited statements in full. Source checks: the item follows Milne iAG Lemma 21.28 (p.433), 21.11 and 21.29; the new node matches Theorem 17.46 (pp.365-366) and 17.72 (p.376) hypothesis by hypothesis (G smooth connected, S a torus in a Borel B, B x_G C_G(S) a Borel of C_G(S), C_G(S) smooth connected). Steps: 1 uses the rank-one node for the finite decomposition, dim g_a=1 and Qa∩Φ={±a}. 2 uses the rank-one node (H=C_G(T_a) is reductive of semisimple rank one, and T stays maximal in H) and the new node with T_a ⊆ T ⊆ B. 3 uses the split-rank-one classification, whose hypothesis is the same definition of semisimple rank one, plus properness of P^1 (Lean-closed, a tool) and the solvable fixed-point theorem: a fixed line is a coordinate line (s^2≠1 exists in char 2), so D lies in the triangular Q, and Q is smooth connected solvable, so D=Q by maximality. 4: the tangent weights 2χ/χ/e1-e2 and Lie(PGL2)=gl2/FI are right; Lie(C_G(S))=g^S via dual numbers; the characters trivial on S are Z·a by antiduality; so Lie(B)∩Lie(H)=Lie(T)⊕g_{εa}. 5 (elementary): Lie(B) splits into weight components by T-stability and comparison of coaction coefficients. No cycle, all proof nodes on the unit route, no duplicate of the new node in the DAG (checked against torus-centralizer-smooth-connected, maximal-torus-centralizer-borel and others). The new node is not a clause of the item and was tested on small cases (S=1, S central, G solvable, S=T). Batch-5 flags: lem-trf-smooth-fpqc-base-descent (fpqc descent of smoothness, a Mathlib leaf) and lem-trf-projective-exterior-scalar-comparisons (base change of exterior powers, duals and determinants) are generic algebra, outside the trace formula and Poincaré duality assumptions and their proofs, so accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.BorelOppositeRootDichotomy",
+  "declaration": "AlgebraicGeometry.RankOneRoots.borel_opposite_root_dichotomy",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelOppositeRootDichotomy.lean",
+  "statement": "theorem borel_opposite_root_dichotomy {F : Type u} [Field F] [IsAlgClosed F] (G T B : Grp (Over (Spec (.of F)))) (iT : T ⟶ G) (iB : B ⟶ G) (j : T ⟶ B) (hG : ReductiveTorusCentralizer.IsReductive G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hB : IsBorelGroupScheme iB.hom.hom) (hj : j ≫ iB = iT) : ∃ a : ModObj T.X G.X, a.smul = adjointMap iT ∧ (roots T G a).Finite ∧ (∀ α ∈ roots T G a, ∃ β ∈ roots T G a, β.hom.hom = α.hom.hom⁻¹) ∧ iSupIndep (fun k : Option {χ : Character T // χ ∈ roots T G a ∧ weight T G a χ ≤ (GrpObj.differential iB.hom.hom).toLinearMap.range} ↦ k.elim (GrpObj.differential iT.hom.hom).toLinearMap.range (fun χ ↦ weight T G a χ.val)) ∧ (GrpObj.differential iB.hom.hom).toLinearMap.range = (GrpObj.differential iT.hom.hom).toLinearMap.range ⊔ ⨆ χ : {χ : Character T // χ ∈ roots T G a ∧ weight T G a χ ≤ (GrpObj.differential iB.hom.hom).toLinearMap.range}, weight T G a χ.val ∧ ∀ α ∈ roots T G a, Set.ncard {χ : Character T | χ ∈ roots T G a ∧ weight T G a χ ≤ (GrpObj.differential iB.hom.hom).toLinearMap.range ∧ (χ = α ∨ χ.hom.hom = α.hom.hom⁻¹)} = 1",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63d5cf4b4",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Item node differs from side-live only in lean + 4 added landed def stmt_deps (rank-one-root-interfaces, borel-subgroup-scheme, reductive-torus-centralizer-terminology, torus-character-tangent-weights), all used; lean.statement verbatim. Clause check vs Milne 21.28/21.11(b,c)/21.29: alg-closed F with no char hypothesis; IsReductive G, IsMaximalTorus iT, IsBorelGroupScheme iB, hj: j≫iB=iT; ModObj pinned to adjointMap iT (conjugation, as in landed reflections theorem); roots = nontrivial actual characters with nonzero weightSpace; Finite; inverse-character closure; Lie B = range dB = Lie T ⊔ ⨆ Ψ_B weight with iSupIndep over Option Ψ_B (directness); ncard{χ∈Ψ_B, χ=α ∨ χ=α⁻¹}=1. Edge cases Φ=∅ (Lie B = Lie T), char 2 (α≠α⁻¹ in torsion-free X(T); SL2 ±2χ; PGL2 directions survive) covered. Sorry-only, source/blueprint docstrings with 5 proof steps, proof-dep plain imports present (split-rank-one-classification and solvable-proper-fixed-point have no lean yet). No duplicate found. Advisory: GrpObj.Lie/differential owned by sk-d-tangent (transitive via weight node). No file changed, no compile."
+ }
+}

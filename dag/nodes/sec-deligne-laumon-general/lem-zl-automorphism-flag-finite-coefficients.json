@@ -1,0 +1,222 @@
+{
+ "id": "lem-zl-automorphism-flag-finite-coefficients",
+ "kind": "statement",
+ "title": "A full automorphism flag with a simultaneous finite coefficient model",
+ "statement": "Let $K$ be a field, let $\\Omega$ be an algebraic closure of $K$ [def-weil-algebraic-closure], let $E_0\\subset\\Omega$ be finite over $K$ [def-pc-field-tower], and let $V_0$ be a finite-dimensional $E_0$-vector space [def-weil-finite-dimensional-subspace, def-weil-vector-space-dimension] with a specified basis $c_1,\\ldots,c_d$. Let $F_0:V_0\\xrightarrow{\\sim}V_0$ be an $E_0$-linear automorphism and use vector-space scalar extension [def-weil-vector-space-scalar-extension] to put $V=V_0\\otimes_{E_0}\\Omega$ and $F=F_0\\otimes1$. There exist a finite intermediate extension $E_0\\subset E\\subset\\Omega$, an $E$-basis $b_1,\\ldots,b_d$ of $V_E=V_0\\otimes_{E_0}E$, a full flag $0=W_{0,E}\\subset W_{1,E}\\subset\\cdots\\subset W_{d,E}=V_E$, and scalars $\\alpha_j\\in E^\\times$ for $1\\le j\\le d$ with the following properties.\nOne has $W_{j,E}=\\operatorname{span}_E(b_1,\\ldots,b_j)$ and $\\dim_E W_{j,E}=j$. Both $F_E=F_0\\otimes1$ and $F_E^{-1}$ preserve every $W_{j,E}$; their restrictions and their induced quotient maps are mutually inverse, and $F_E$ acts on $W_{j,E}/W_{j-1,E}$ by $\\alpha_j$. The change-of-basis matrices $B,B^{-1}$ from $c$ to $b$, and the matrices of $F_E,F_E^{-1}$ in $b$, all have entries in this same $E$; the latter two matrices are upper triangular. Every inclusion and quotient projection and the adapted bases of the short exact sequences $0\\to W_{j-1,E}\\to W_{j,E}\\to W_{j,E}/W_{j-1,E}\\to0$ are defined over $E$.\nAfter scalar extension to $\\Omega$, these data give a full $F$-invariant flag in $V$ with the same dimensions and nonzero quotient scalars; the displayed sequences remain exact and the restrictions and quotient operators remain invertible. The assertion allows repeated eigenvalues and nonzero off-diagonal entries. If $d=0$, the basis is empty and the flag has only its zero endpoint, with no quotient conditions.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7, dimension-zero Jordan filtration: invertible restrictions, quotient scalars and common adapted-basis coefficient field; old item steps 3–4."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-pc-field-tower",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension",
+  "def-weil-vector-space-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Extend c and F₀ to Ω by Basis.baseChange and LinearEquiv.baseChange. The scalar-extended basis has size d, including d = 0. Use Module.End.exists_basis_isUpperTriangular_toMatrix to obtain a triangular basis a over Ω, reindexed by Fin d.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension",
+    "def-weil-algebraic-closure",
+    "p-linear-triangular"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let S be the finite range of the d² coordinates of a in c.baseChange Ω, and let E = IntermediateField.adjoin E₀ S. Algebra.IsAlgebraic.tower_top gives algebraicity over E₀; IntermediateField.finiteDimensional_adjoin proves E/E₀ finite. Define candidate vectors v by exactly these coordinates in c.baseChange E. Their canonical images in Ω ⊗ V₀ are a. Independence descends through that E-linear map by LinearIndependent.of_comp and restrict_scalars'; the cardinality equals finrank, so basisOfLinearIndependentOfCardEqFinrank' gives the desired basis b. The tensor tower isomorphism carries b.baseChange Ω to a.",
+   "uses": [
+    "lem-weil-pbc-algebraic-generators-finite-extension",
+    "def-weil-algebraic-closure",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The matrix of a base-changed map in the base-changed basis is the entrywise algebraMap image of its original matrix. LinearMap.baseChange_baseChange identifies the conjugation by cancelBaseChange. Thus triangularity over Ω reflects to E by injectivity of algebraMap. Basis.toMatrix_mul_toMatrix_flip supplies both change-of-basis inverse identities. The operator and inverse matrices already have entries in E by their types; their coordinates need not be adjoined separately.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any basis b with upper triangular automorphism F, membership in b.flag j means that all coordinates with index at least j vanish. This proves preservation of the initial spans. Basis.span on the restricted independent family gives adapted bases, whose cardinalities are j. Restrict F to each span; its injectivity and finite dimension give LinearEquiv.ofInjectiveEndo. Applying F to the inverse restriction identifies it with F⁻¹. This also proves that F⁻¹ is upper triangular. On the j-th initial span, the j-th coordinate of F x is the j-th diagonal entry times the j-th coordinate of x. Applying this formula to the inverse image of b j shows the diagonal is nonzero. Define α j by Units.mk0.",
+   "uses": [
+    "lem-weil-pbc-idempotent-charpoly-rank-nullity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The last-coordinate linear map on b.flag j.succ has kernel exactly the comap of b.flag j.castSucc and is surjective, with preimage t • b j for t. Its quotient equivalence is obtained from quotEquivOfEq and quotKerEquivOfSurjective. Conjugate multiplication by α j through this equivalence to define g j; the coordinate formula identifies it with the restricted action, and injectivity identifies the inverse. The inclusion is injective, its range is the kernel of mkQ, and mkQ is surjective. Apply the same construction to bΩ and FΩ; the matrix comparison identifies its diagonal units with the images of α.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The canonical inclusion/mkQ sequences over E remain injective, exact and surjective after base change: use Module.Flat.lTensor_preserves_injective_linearMap, Module.Flat.lTensor_exact and LinearMap.lTensor_surjective, and baseChange_eq_ltensor. Finally Submodule.baseChange_span and map_span identify the initial spans of the transported basis over Ω with the transported base changes. All constructions work also for the empty basis.",
+   "uses": [
+    "lem-weil-field-scalar-extension-exact",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-vector-space-scalar-extension",
+  "def-weil-algebraic-closure",
+  "p-linear-triangular",
+  "lem-weil-pbc-idempotent-charpoly-rank-nullity",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "lem-weil-field-scalar-extension-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7; finite coefficient refinement using coordinate descent and triangular basis flags, Lean proof by W3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism of a finite dimensional vector space over an algebraic closure of a field admits a full invariant flag with invertible restrictions and quotients simultaneously defined over a finite extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgHom.bijective\", \"module\": \"Mathlib/RingTheory/Algebraic/Integral\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L]\\n  (ϕ : L →ₐ[K] L), Function.Bijective ⇑ϕ\", \"doc\": \"Every algebra endomorphism $\\\\phi : L \\\\to L$ of a finite-dimensional algebra $L$ over a field $K$ is bijective, i.e., if $L$ is finite-dimensional as a vector space over $K$ and $\\\\phi$ preserves the al\"}\n  {\"name\": \"IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed\", \"module\": \"Mathlib/RepresentationTheory/AlgebraRepresentation/Basic\", \"type\": \"∀ {A : Type u_1} {V : Type u_2} (k : Type u_3) [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A]\\n  [inst_3 : AddCommGroup V] [inst_4 : Module k V] [inst_5 : Module A V] [inst_6 : IsScalarTower k A V]\\n  [IsSimpleModule A V] [FiniteDimensional k V] [IsAlgClosed k], Function.Bijective ⇑(algebra\", \"doc\": \"If $ k $ is an algebraically closed field and $ V $ is a simple module over a ring $ A $, then the canonical algebra homomorphism from $ k $ to the endomorphism ring $ \\\\mathrm{End}_A(V) $ is bijective\"}\n  {\"name\": \"exists_linearIndependent_algEquiv_apply\", \"module\": \"Mathlib/FieldTheory/Galois/NormalBasis\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L],\\n  ∃ x, LinearIndependent K fun σ => σ x\", \"doc\": \"There exists an element $ x $ in the field extension $ L $ such that the set $ \\\\{ \\\\sigma(x) \\\\mid \\\\sigma \\\\in \\\\text{Gal}(L/K) \\\\} $ is linearly independent over the base field $ K $.\"}\n  {\"name\": \"AlgEquiv.fintype\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"(K : Type u) →\\n  (V : Type v) →\\n    [inst : Field K] → [inst_1 : Field V] → [inst_2 : Algebra K V] → [FiniteDimensional K V] → Fintype Gal(V/K)\", \"doc\": \"Given a field $ K $ and a finite-dimensional $ K $-algebra $ V $, the group of $ K $-algebra automorphisms of $ V $ is finite. This follows because each automorphism is uniquely determined by its acti\"}\n  {\"name\": \"FiniteField.nonempty_algHom_of_finrank_dvd\", \"module\": \"Mathlib/FieldTheory/Finite/GaloisField\", \"type\": \"∀ {F : Type u_3} {K : Type u_4} {L : Type u_5} [inst : Field F] [inst_1 : Field K] [inst_2 : Algebra F K]\\n  [inst_3 : Field L] [inst_4 : Algebra F L] [Finite L], Module.finrank F K ∣ Module.finrank F L → Nonempty (K →ₐ[F] L)\", \"doc\": \"If the finite rank of the field extension $ K/F $ divides the finite rank of $ L/F $, then there exists at least one $ F $-algebra homomorphism from $ K $ to $ L $. This holds for finite fields $ K, L\"}\n  {\"name\": \"minpoly.AlgHom.fintype\", \"module\": \"Mathlib/FieldTheory/Minpoly/Field\", \"type\": \"(F : Type u_3) →\\n  (E : Type u_4) →\\n    (K : Type u_5) →\\n      [inst : Field F] →\\n        [inst_1 : Ring E] →\\n          [inst_2 : CommRing K] →\\n            [IsDomain K] →\\n              [inst_4 : Algebra F E] → [inst_5 : Algebra F K] → [FiniteDimensional F E] → Fintype (E →ₐ[F] K)\", \"doc\": \"The set of F-algebra homomorphisms from a finite free F-module E to a field K is finite. This follows because each homomorphism is uniquely determined by its action on a finite basis of E, and the ima\"}\n  {\"name\": \"CategoryTheory.fieldEndOfFiniteDimensional\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Schur\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      (𝕜 : Type u_2) →\\n        [inst_2 : Field 𝕜] →\\n          [IsAlgClosed 𝕜] →\\n            [inst_4 : CategoryTheory.Linear 𝕜 C] →\\n              [CategoryTheory.Limits.HasKernels C] →\\n   \", \"doc\": \"In a preadditive category with kernels, if $ X $ is a simple object (where every monomorphism into $ X $ is either zero or an isomorphism) and its endomorphism ring $ \\\\text{End}(X) $ is finite-dimensi\"}\n  {\"name\": \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"module\": \"Mathlib/RingTheory/SimpleModule/IsAlgClosed\", \"type\": \"∀ (F : Type u_1) (R : Type u_2) [inst : Field F] [IsAlgClosed F] [inst_2 : Ring R] [inst_3 : Algebra F R]\\n  [IsSemisimpleRing R] [FiniteDimensional F R],\\n  ∃ n d, (∀ (i : Fin n), NeZero (d i)) ∧ Nonempty (R ≃ₐ[F] (i : Fin n) → Matrix (Fin (d i)) (Fin (d i)) F)\", \"doc\": \"Let `F` be an algebraically closed field and `R` be a finite-dimensional semisimple algebra over `F`. Then there exists a natural number `n` and a sequence of positive integers $d_0, d_1, \\\\ldots, d_{n\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: eigenvalue existence and Lie-module triangularizability are partial tools; no hit supplies the full flag together with this finite coefficient model"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A full invariant flag of an invertible linear operator over an algebraic closure descends together with an adapted basis and inverse matrices to a finite coefficient field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[IsAlgClosed K] : IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"Module.End.instInhabitedEigenvaluesOfIsAlgClosedOfFiniteDimensionalOfNontrivial\", \"module\": \"Mathlib.LinearAlgebra.Eigenspace.Triangularizable\", \"type\": \"[IsAlgClosed K] [FiniteDimensional K V] [Nontrivial V] (f : End K V) : Inhabited f.Eigenvalues\", \"doc\": \"For an algebraically closed field $ K $, a finite-dimensional non-zero vector space $ V $ over $ K $, and any linear operator $ f : V \\to V $, the set of eigenvalues of $ f $ is non-empty.\"}\n  {\"name\": \"Matrix.toLinearEquiv\", \"module\": \"Mathlib.LinearAlgebra.Matrix.ToLinearEquiv\", \"type\": \"[DecidableEq n] (A : Matrix n n R) (hA : IsUnit A.det) : M ≃ₗ[R] M\", \"doc\": \"For a square matrix $ A $ over a commutative ring $ R $, if the determinant of $ A $ is a unit in $ R $, then $ A $ defines a linear equivalence from the module $ M $ to itself, with the inverse equiv\"}\n  {\"name\": \"Module.Basis.invertibleToMatrix\", \"module\": \"Mathlib.LinearAlgebra.Matrix.Basis\", \"type\": \"[DecidableEq ι] [Fintype ι] (b b' : Basis ι R₂ M₂) : Invertible (b.toMatrix b')\", \"doc\": \"For any two bases $ b $ and $ b' $ of a module $ M $ over a commutative ring $ R $, with $ \\\\iota $ a finite index type, the change-of-basis matrix from $ b' $ to $ b $ is invertible. Its inverse is th\"}\n  {\"name\": \"Matrix.toLinOfInv\", \"module\": \"Mathlib.LinearAlgebra.Matrix.ToLin\", \"type\": \"[DecidableEq m] {M : Matrix m n R} {M' : Matrix n m R} (hMM' : M * M' = 1) (hM'M : M' * M = 1) : M₁ ≃ₗ[R] M₂\", \"doc\": \"Given a commutative semiring $ R $, finite types $ m, n $, and finite-dimensional $ R $-modules $ M_1, M_2 $ with bases indexed by $ m, n $, if square matrices $ M $ and $ M' $ satisfy $ M M' = I $ an\"}\n  {\"name\": \"LinearMap.isUnit_toMatrix_iff\", \"module\": \"Mathlib.LinearAlgebra.Matrix.ToLin\", \"type\": \"{f : M₁ →ₗ[R] M₁} : IsUnit (f.toMatrix v₁ v₁) ↔ IsUnit f\", \"doc\": \"For a commutative semiring $ R $ and a finite-dimensional $ R $-module $ M_1 $ with basis $ v_1 $, a linear endomorphism $ f : M_1 \\\\to M_1 $ is invertible if and only if its matrix representation $ f.\"}\n  {\"name\": \"LinearMap.polyCharpoly.congr_simp\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Polynomial\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} {M : Type u_3} {ι : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup L]\\n  [inst_2 : Module R L] [inst_3 : AddCommGroup M] [inst_4 : Module R M] (φ φ_1 : L →ₗ[R] Module.End R M),\\n  φ = φ_1 →\\n    ∀ [inst_5 : Fintype ι] [inst_6 : DecidableEq ι] [inst_7 : Module.Free \", \"doc\": \"For commutative rings $R$ and modules $L, M$ over $R$, if two linear maps $\\\\varphi, \\\\varphi_1: L \\\\to \\\\text{End}_R(M)$ are equal, then for any finite free $R$-module $M$ with bases $b, b_1$, the charac\"}\n  {\"name\": \"LinearMap.polyCharpoly_coeff_eq_zero_iff_of_basis\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Polynomial\", \"type\": \"(b : Basis ι R L) (b' : Basis ι' R L) (k : ℕ) : (polyCharpoly φ b).coeff k = 0 ↔ (polyCharpoly φ b').coeff k = 0\", \"doc\": \"For any two bases $ b $ and $ b' $ of the $ R $-module $ L $, the $ k $-th coefficient of the characteristic polynomial of a linear map $ \\\\varphi $ with respect to $ b $ is zero if and only if the $ k\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: eigenvalue existence and Lie-module triangularizability are partial tools; no hit supplies the full flag together with this finite coefficient model"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.IsTriangularizable",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'LinearMap.IsTriangularizable'",
+   "date": "2026-10-22",
+   "verdict": "no match: eigenvalue existence and Lie-module triangularizability are partial tools; no hit supplies the full flag together with this finite coefficient model"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTriangularizable|exists.*invariant.*flag|flag.*finite.*extension",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic.lean\", \"line\": \"335\", \"text\": \"instance : LieModule.IsTriangularizable R (cartanSubalgebra' b) (b.support ⊕ ι → R) := by\"}\n  {\"file\": \"Mathlib/Algebra/Lie/CartanSubalgebra.lean\", \"line\": \"49\", \"text\": \"A _splitting_ Cartan subalgebra can be defined by mixing in `LieModule.IsTriangularizable R H L`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Basis/Base.lean\", \"line\": \"42\", \"text\": \"variable [IsTriangularizable K H L] [IsKilling K L]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Cartan.lean\", \"line\": \"320\", \"text\": \"variable [LieModule.IsTriangularizable K H L]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"line\": \"101\", \"text\": \"variable [IsTriangularizable K H L]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"line\": \"158\", \"text\": \"  {H : LieSubalgebra K L} [H.IsCartanSubalgebra] [IsTriangularizable K H L] {α : Weight K H L}\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"line\": \"249\", \"text\": \"@[simp] lemma coroot_neg [IsTriangularizable K H L] (α : Weight K H L) :\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"line\": \"253\", \"text\": \"variable [IsTriangularizable K H L]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"line\": \"737\", \"text\": \"omit [IsKilling K L] [IsTriangularizable K H L] [CharZero K] in\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"line\": \"704\", \"text\": \"class IsTriangularizable : Prop where\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"line\": \"707\", \"text\": \"instance (L' : LieSubalgebra R L) [IsTriangularizable R L M] : IsTriangularizable R L' M where\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"line\": \"708\", \"text\": \"  maxGenEigenspace_eq_top x := IsTriangularizable.maxGenEigenspace_eq_top (x : L)\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"line\": \"710\", \"text\": \"instance (I : LieIdeal R L) [IsTriangularizable R L M] : IsTriangularizable R I M where\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"line\": \"711\", \"text\": \"  maxGenEigenspace_eq_top x := IsTriangularizable.maxGenEigenspace_eq_top (x : L)\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/IsSimple.lean\", \"line\": \"63\", \"text\": \"variable [CharZero K] [IsKilling K L] [IsTriangularizable K H L]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/IsSimple.lean\", \"line\": \"233\", \"text\": \"  {H : LieSubalgebra K L} [H.IsCartanSubalgebra] [IsTriangularizable K H L]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/IsSimple.lean\", \"line\": \"570\", \"text\": \"  {H : LieSubalgebra K L} [H.IsCartanSubalgebra] [IsTriangularizable K H L]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Linear.lean\", \"line\": \"243\", \"text\": \"    [IsTriangularizable k L M] [Nontrivial M] :\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Chain.lean\", \"line\": \"396\", \"text\": \"  [IsTriangularizable K H M] [FiniteDimensional K M]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Chain.lean\", \"line\": \"419\", \"text\": \"    [IsTriangularizable K H L] [FiniteDimensional K L]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/RootSystem.lean\", \"line\": \"49\", \"text\": \"  {H : LieSubalgebra K L} [H.IsCartanSubalgebra] [IsTriangularizable K H L]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/TraceForm.lean\", \"line\": \"250\", \"text\": \"    [Module.IsTorsionFree R M] [IsNoetherian R M] [IsTriangularizable R L M] (z : L) :\"}\n  {\"file\": \"Mathlib/Algebra/Lie/TraceForm.lean\", \"line\": \"313\", \"text\": \"  · exact IsTriangularizable.maxGenEigenspace_eq_top (1 ⊗ₜ[R] x)\"}\n  {\"file\": \"Mathlib/Algebra/Lie/TraceForm.lean\", \"line\": \"435\", \"text\": \"variable [LieRing.IsNilpotent L] [LinearWeights K L M] [IsTriangularizable K L M]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"line\": \"40\", \"text\": \"  [IsIrreducible k L M] [IsFaithful k L M] [IsTriangularizable k L M]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: eigenvalue existence and Lie-module triangularizability are partial tools; no hit supplies the full flag together with this finite coefficient model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Upper triangularize an invertible matrix over the algebraic closure and find a finite extension containing the change of basis and inverse so each initial span and one dimensional quotient has invertible induced operator",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"module\": \"Mathlib/RingTheory/SimpleModule/IsAlgClosed\", \"type\": \"∀ (F : Type u_1) (R : Type u_2) [inst : Field F] [IsAlgClosed F] [inst_2 : Ring R] [inst_3 : Algebra F R]\\n  [IsSemisimpleRing R] [FiniteDimensional F R],\\n  ∃ n d, (∀ (i : Fin n), NeZero (d i)) ∧ Nonempty (R ≃ₐ[F] (i : Fin n) → Matrix (Fin (d i)) (Fin (d i)) F)\", \"doc\": \"Let `F` be an algebraically closed field and `R` be a finite-dimensional semisimple algebra over `F`. Then there exists a natural number `n` and a sequence of positive integers $d_0, d_1, \\\\ldots, d_{n\"}\n  {\"name\": \"Module.End.instInhabitedEigenvaluesOfIsAlgClosedOfFiniteDimensionalOfNontrivial\", \"module\": \"Mathlib/LinearAlgebra/Eigenspace/Triangularizable\", \"type\": \"{K : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : Field K] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module K V] →\\n          [IsAlgClosed K] → [FiniteDimensional K V] → [Nontrivial V] → (f : Module.End K V) → Inhabited f.Eigenvalues\", \"doc\": \"For an algebraically closed field $ K $, a finite-dimensional non-zero vector space $ V $ over $ K $, and any linear operator $ f : V \\to V $, the set of eigenvalues of $ f $ is non-empty.\"}\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M] [FiniteDimensional K M]\\n  [IsAlgClosed K], LieModule.IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"IsSimpleRing.exists_algEquiv_matrix_of_isAlgClosed\", \"module\": \"Mathlib/RingTheory/SimpleModule/IsAlgClosed\", \"type\": \"∀ (F : Type u_1) (R : Type u_2) [inst : Field F] [IsAlgClosed F] [inst_2 : Ring R] [inst_3 : Algebra F R]\\n  [IsSimpleRing R] [FiniteDimensional F R], ∃ n, ∃ (_ : NeZero n), Nonempty (R ≃ₐ[F] Matrix (Fin n) (Fin n) F)\", \"doc\": \"For an algebraically closed field $ F $, if $ R $ is a simple ring that is finite-dimensional as an $ F $-algebra, then there exists a positive integer $ n $ such that $ R $ is isomorphic to the ring \"}\n  {\"name\": \"IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing_finite\", \"module\": \"Mathlib/RingTheory/SimpleModule/WedderburnArtin\", \"type\": \"∀ (R₀ : Type u_1) (R : Type u) [inst : CommSemiring R₀] [inst_1 : Ring R] [inst_2 : Algebra R₀ R] [IsSemisimpleRing R]\\n  [Module.Finite R₀ R],\\n  ∃ n D d x x_1,\\n    ∃ (_ : ∀ (i : Fin n), Module.Finite R₀ (D i)),\\n      (∀ (i : Fin n), NeZero (d i)) ∧ Nonempty (R ≃ₐ[R₀] (i : Fin n) → Matrix (Fin (d i))\", \"doc\": \"Let `R` be an algebra over a commutative ring `R₀`. If `R` is a semisimple ring and is finitely generated as an `R₀`-module, then `R` is isomorphic as an `R₀`-algebra to a finite direct product of mat\"}\n  {\"name\": \"IsSemisimpleModule.exists_end_algEquiv_pi_matrix_divisionRing\", \"module\": \"Mathlib/RingTheory/SimpleModule/WedderburnArtin\", \"type\": \"∀ (R₀ : Type u_1) (R : Type u) [inst : CommSemiring R₀] [inst_1 : Ring R] [inst_2 : Algebra R₀ R] (M : Type v)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R₀ M] [inst_5 : Module R M] [inst_6 : IsScalarTower R₀ R M]\\n  [IsSemisimpleModule R M] [Module.Finite R M],\\n  ∃ n D d x x_1,\\n    (∀ (i : Fin n),\", \"doc\": \"For a semisimple module $ M $ over a ring $ R $, there exists a natural number $ n $, a family of division rings $ \\\\{D_i\\\\}_{i=1}^n $, and a family of positive integers $ \\\\{d_i\\\\}_{i=1}^n $ such that th\"}\n  {\"name\": \"IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed\", \"module\": \"Mathlib/RepresentationTheory/AlgebraRepresentation/Basic\", \"type\": \"∀ {A : Type u_1} {V : Type u_2} (k : Type u_3) [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A]\\n  [inst_3 : AddCommGroup V] [inst_4 : Module k V] [inst_5 : Module A V] [inst_6 : IsScalarTower k A V]\\n  [IsSimpleModule A V] [FiniteDimensional k V] [IsAlgClosed k], Function.Bijective ⇑(algebra\", \"doc\": \"If $ k $ is an algebraically closed field and $ V $ is a simple module over a ring $ A $, then the canonical algebra homomorphism from $ k $ to the endomorphism ring $ \\\\mathrm{End}_A(V) $ is bijective\"}\n  {\"name\": \"IsSemisimpleModule.exists_end_algEquiv_pi_matrix_end\", \"module\": \"Mathlib/RingTheory/SimpleModule/WedderburnArtin\", \"type\": \"∀ (R₀ : Type u_1) (R : Type u) [inst : CommSemiring R₀] [inst_1 : Ring R] [inst_2 : Algebra R₀ R] (M : Type v)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R₀ M] [inst_5 : Module R M] [inst_6 : IsScalarTower R₀ R M]\\n  [IsSemisimpleModule R M] [Module.Finite R M],\\n  ∃ n S d,\\n    (∀ (i : Fin n), IsSim\", \"doc\": \"If $ M $ is a semisimple $ R $-module, then its endomorphism ring $ \\\\mathrm{End}_R(M) $ is isomorphic to a product of matrix algebras over the endomorphism rings of its simple submodules. Specifically\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: eigenvalue existence and Lie-module triangularizability are partial tools; no hit supplies the full flag together with this finite coefficient model"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_complete_invariant_flag|exists_basis_isUpperTriangular_toMatrix|finite.*coefficient.*flag",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit supplies both the automorphism flag and simultaneous finite coefficient model"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A full invariant flag and its adapted basis for an automorphism descend to a finite subextension of an algebraic closure",
+   "results": "OK 8 hits: FiniteGaloisIntermediateField.adjoin_map, Module.Basis.toFlag, Algebra.isInvariant_of_isGalois', FiniteGaloisIntermediateField.adjoin_simple_map_algEquiv, IsGalois.normalBasis, IntermediateField.normalClosure_map_eq, IntermediateField.normal_iff_forall_map_eq, Algebra.isInvariant_of_isGalois",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit supplies both the automorphism flag and simultaneous finite coefficient model"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.exists_complete_invariant_flag",
+   "results": "OK 0 hits: ; loogle: unknown identifier 'Module.End.exists_complete_invariant_flag'",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit supplies both the automorphism flag and simultaneous finite coefficient model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible linear map over an algebraic closure admits an upper triangular basis defined over a finite field extension",
+   "results": "OK 8 hits: LieModule.instIsTriangularizableOfIsAlgClosed, Module.End.instInhabitedEigenvaluesOfIsAlgClosedOfFiniteDimensionalOfNontrivial, IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed, IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed, exists_linearIndependent_algEquiv_apply, Module.End.exists_eigenvalue, IsSimpleRing.exists_algEquiv_matrix_of_isAlgClosed, Module.End.exists_isNilpotent_isSemisimple",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit supplies both the automorphism flag and simultaneous finite coefficient model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Triangularization of an automorphism and simultaneous descent of basis coordinates and inverse matrices to a finite algebraic extension",
+   "results": "OK 8 hits: IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed, IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing_finite, LieModule.instIsTriangularizableOfIsAlgClosed, Module.End.exists_isNilpotent_isSemisimple, IsSemisimpleModule.exists_end_algEquiv_pi_matrix_divisionRing, IsSemisimpleModule.exists_end_algEquiv, Module.End.exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow, IsSemisimpleModule.exists_end_algEquiv_pi_matrix_end",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit supplies both the automorphism flag and simultaneous finite coefficient model"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-point-weil-heart-flag",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 7, dimension-zero Jordan filtration: invertible restrictions, quotient scalars and common adapted-basis coefficient field; old item steps 3–4.",
+   "via": [
+    "lem-zl-point-weil-heart-flag"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-automorphism-flag-finite-coefficients",
+  "worker": "stage1",
+  "summary": "Q89: expanded the invariant flag into an adapted basis, proved simultaneous inverse stability using rank-nullity, descended all basis/operator coordinates to one finite extension by Tag 09GH, and checked exact sequences and scalar extension. Reused existing nodes throughout; no new nodes or statement change.",
+  "blueprint": "thm-zl-real-mixed-by-curves, paragraph 7: dimension-zero Jordan filtration; realizes the finite coefficient model required by lem-zl-point-weil-heart-flag.",
+  "tool_uses": [
+   {
+    "node": "p-linear-triangular",
+    "why": "Generic linear-algebra triangularization over the algebraically closed coefficient field; supplies precisely the Jordan filtration invoked by this unit, not a replacement of its route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "p-linear-triangular"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-742ab5e9e",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-742ab5e9e (reviewer sub-agent of L); spot-checked: Read the item and all 7 steps in full, plus every cited statement: p-linear-triangular, rank-nullity, lem-weil-pbc-algebraic-generators-finite-extension (= Stacks 09GH fields.tex:693), field-scalar-extension-exact, the scalar-extension definition and the algebraic-closure definition. Source checked: main-20261015 thm-zl-real-mixed-by-curves.proof.md lines 82-87, the dimension-zero Jordan filtration; the split writes out the finite-coefficient descent the source leaves out. The statement fits its only citer, lem-zl-point-weil-heart-flag step 2 (K=Q_l). Tested the statement on d=0, d=1, a Jordan block with lambda nonzero, and eigenvalues outside E_0 (E must grow); it is true and no target is weakened. Step 2 applies triangularization over Omega, which is algebraically closed. Step 3 uses rank-nullity to prove that the inverse also preserves the flag. Steps 4-5 descend all matrix entries to one finite E through the injective map E -> Omega. Step 7 uses exactness of scalar extension. No new nodes, no duplicate (searched flags, triangularization, eigenvalue nodes), no cycle, no SGA. Batch-5 flag on p-linear-triangular accepted: it is generic linear algebra with no dependencies and Lean-closed (Module.End.exists_le_map_le_finrank_eq_succ), neither assumption gives it, and citing it imports no part of the proof of the trace formula. Advisory: the worker wrote tool_uses itself (C8), which is harmless because the node is Lean-closed. The imported statement of p-linear-triangular omits that k is algebraically closed; this application satisfies it."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.AutomorphismFlagFiniteCoefficients",
+  "declaration": "LinearEquiv.exists_flag_finite_coefficients",
+  "file": "lean/Sheaf/LinearAlgebra/AutomorphismFlagFiniteCoefficients.lean",
+  "statement": "theorem exists_flag_finite_coefficients {K : Type u} [Field K] {Ω : Type v} [Field Ω] [Algebra K Ω] [IsAlgClosure K Ω] (E₀ : IntermediateField K Ω) [FiniteDimensional K E₀] {V₀ : Type w} [AddCommGroup V₀] [Module E₀ V₀] [FiniteDimensional E₀ V₀] {d : ℕ} (c : Module.Basis (Fin d) E₀ V₀) (F₀ : V₀ ≃ₗ[E₀] V₀) : ∃ E : IntermediateField E₀ Ω, FiniteDimensional E₀ E ∧ ∃ (b : Module.Basis (Fin d) E (E ⊗[E₀] V₀)) (α : Fin d → Eˣ), (c.baseChange E).toMatrix b * b.toMatrix (c.baseChange E) = 1 ∧ b.toMatrix (c.baseChange E) * (c.baseChange E).toMatrix b = 1 ∧ ((LinearMap.toMatrix b b (F₀.baseChange E₀ E V₀ V₀).toLinearMap).IsUpperTriangular ∧ (LinearMap.toMatrix b b (F₀.baseChange E₀ E V₀ V₀).symm.toLinearMap).IsUpperTriangular ∧ (∀ j : Fin (d + 1), Module.finrank E (b.flag j) = j.val) ∧ (∀ j : Fin (d + 1), ∃ a : Module.Basis {i : Fin d // i.castSucc < j} E (b.flag j), ∀ i, (a i : E ⊗[E₀] V₀) = b i.val) ∧ ∃ r : ∀ j : Fin (d + 1), (b.flag j) ≃ₗ[E] (b.flag j), (∀ (j : Fin (d + 1)) (x : b.flag j), (r j x : E ⊗[E₀] V₀) = (F₀.baseChange E₀ E V₀ V₀) x ∧ ((r j).symm x : E ⊗[E₀] V₀) = (F₀.baseChange E₀ E V₀ V₀).symm x) ∧ ∃ q : ∀ j : Fin d, ((b.flag j.succ) ⧸ ((b.flag j.castSucc).comap (b.flag j.succ).subtype)) ≃ₗ[E] E, ∃ g : ∀ j : Fin d, ((b.flag j.succ) ⧸ ((b.flag j.castSucc).comap (b.flag j.succ).subtype)) ≃ₗ[E] ((b.flag j.succ) ⧸ ((b.flag j.castSucc).comap (b.flag j.succ).subtype)), (∀ (j : Fin d) (x : b.flag j.succ), q j (((b.flag j.castSucc).comap (b.flag j.succ).subtype).mkQ x) = b.repr (x : E ⊗[E₀] V₀) j) ∧ (∀ (j : Fin d) (x : b.flag j.succ), g j (((b.flag j.castSucc).comap (b.flag j.succ).subtype).mkQ x) = ((b.flag j.castSucc).comap (b.flag j.succ).subtype).mkQ (r j.succ x) ∧ (g j).symm (((b.flag j.castSucc).comap (b.flag j.succ).subtype).mkQ x) = ((b.flag j.castSucc).comap (b.flag j.succ).subtype).mkQ ((r j.succ).symm x)) ∧ (∀ (j : Fin d) x, q j (g j x) = (α j : E) * q j x) ∧ (∀ j : Fin d, Function.Injective (Submodule.inclusion (b.flag_mono (Fin.castSucc_le_succ j))) ∧ Function.Exact (Submodule.inclusion (b.flag_mono (Fin.castSucc_le_succ j))) ((b.flag j.castSucc).comap (b.flag j.succ).subtype).mkQ ∧ Function.Surjective ((b.flag j.castSucc).comap (b.flag j.succ).subtype).mkQ) ∧ (∀ j : Fin d, Function.Injective (LinearMap.baseChange Ω (Submodule.inclusion (b.flag_mono (Fin.castSucc_le_succ j)))) ∧ Function.Exact (LinearMap.baseChange Ω (Submodule.inclusion (b.flag_mono (Fin.castSucc_le_succ j)))) (LinearMap.baseChange Ω ((b.flag j.castSucc).comap (b.flag j.succ).subtype).mkQ) ∧ Function.Surjective (LinearMap.baseChange Ω ((b.flag j.castSucc).comap (b.flag j.succ).subtype).mkQ))) ∧ ∃ bΩ : Module.Basis (Fin d) Ω (Ω ⊗[E₀] V₀), bΩ = (b.baseChange Ω).map (TensorProduct.AlgebraTensorModule.cancelBaseChange E₀ E Ω Ω V₀) ∧ (∀ j : Fin (d + 1), bΩ.flag j = ((b.flag j).baseChange Ω).map (TensorProduct.AlgebraTensorModule.cancelBaseChange E₀ E Ω Ω V₀).toLinearMap) ∧ (LinearMap.toMatrix bΩ bΩ (F₀.baseChange E₀ Ω V₀ V₀).toLinearMap).IsUpperTriangular ∧ (LinearMap.toMatrix bΩ bΩ (F₀.baseChange E₀ Ω V₀ V₀).symm.toLinearMap).IsUpperTriangular ∧ (∀ j : Fin (d + 1), Module.finrank Ω (bΩ.flag j) = j.val) ∧ (∀ j : Fin (d + 1), ∃ a : Module.Basis {i : Fin d // i.castSucc < j} Ω (bΩ.flag j), ∀ i, (a i : Ω ⊗[E₀] V₀) = bΩ i.val) ∧ ∃ r : ∀ j : Fin (d + 1), (bΩ.flag j) ≃ₗ[Ω] (bΩ.flag j), (∀ (j : Fin (d + 1)) (x : bΩ.flag j), (r j x : Ω ⊗[E₀] V₀) = (F₀.baseChange E₀ Ω V₀ V₀) x ∧ ((r j).symm x : Ω ⊗[E₀] V₀) = (F₀.baseChange E₀ Ω V₀ V₀).symm x) ∧ ∃ q : ∀ j : Fin d, ((bΩ.flag j.succ) ⧸ ((bΩ.flag j.castSucc).comap (bΩ.flag j.succ).subtype)) ≃ₗ[Ω] Ω, ∃ g : ∀ j : Fin d, ((bΩ.flag j.succ) ⧸ ((bΩ.flag j.castSucc).comap (bΩ.flag j.succ).subtype)) ≃ₗ[Ω] ((bΩ.flag j.succ) ⧸ ((bΩ.flag j.castSucc).comap (bΩ.flag j.succ).subtype)), (∀ (j : Fin d) (x : bΩ.flag j.succ), q j (((bΩ.flag j.castSucc).comap (bΩ.flag j.succ).subtype).mkQ x) = bΩ.repr (x : Ω ⊗[E₀] V₀) j) ∧ (∀ (j : Fin d) (x : bΩ.flag j.succ), g j (((bΩ.flag j.castSucc).comap (bΩ.flag j.succ).subtype).mkQ x) = ((bΩ.flag j.castSucc).comap (bΩ.flag j.succ).subtype).mkQ (r j.succ x) ∧ (g j).symm (((bΩ.flag j.castSucc).comap (bΩ.flag j.succ).subtype).mkQ x) = ((bΩ.flag j.castSucc).comap (bΩ.flag j.succ).subtype).mkQ ((r j.succ).symm x)) ∧ (∀ (j : Fin d) x, q j (g j x) = algebraMap E Ω (α j : E) * q j x) ∧ (∀ j : Fin d, Function.Injective (Submodule.inclusion (bΩ.flag_mono (Fin.castSucc_le_succ j))) ∧ Function.Exact (Submodule.inclusion (bΩ.flag_mono (Fin.castSucc_le_succ j))) ((bΩ.flag j.castSucc).comap (bΩ.flag j.succ).subtype).mkQ ∧ Function.Surjective ((bΩ.flag j.castSucc).comap (bΩ.flag j.succ).subtype).mkQ)",
+  "branch": "sheaf-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76ef9db29",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Q34 lem-zl-automorphism-flag-finite-coefficients 76ef9db2: only change vs side-live is the new lean field; lean.statement verbatim in file, single sorry. Each hypothesis and conclusion clause matched to the node: IsAlgClosure K Ω, E₀ intermediate field finite over K, basis c : Fin d, F₀ ≃ₗ; ∃ E : IntermediateField E₀ Ω finite; b-basis, Basis.flag dims j, adapted bases, mutually inverse restrictions r and induced quotient maps g, quotient scalars α_j : Eˣ fixed by the q normalisation b.repr, upper-triangular F_E and F_E⁻¹ (BlockTriangular id), inclusion/mkQ exact over E and after base change, Ω flag = cancelBaseChange image with full repeated specification and algebraMap α_j. Independent universes, no extra assumptions; d=0, Jordan block and repeated eigenvalues covered. Stmt-dep declarations (IsAlgClosure, Module.Finite/FiniteDimensional, finrank, TensorProduct base-change APIs) match the dependency records. Source blueprint main-20261024 paragraph 7 checked; citer lem-zl-point-weil-heart-flag uses exactly these outputs. No hollow def, no duplicate, docstrings carry source and blueprint tag, report sections present. Advisory only: B·B⁻¹=1 and FiniteDimensional E₀ V₀ are redundant. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T050952-L-3894350",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

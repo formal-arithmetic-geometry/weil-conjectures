@@ -1,0 +1,301 @@
+{
+ "id": "lem-trf-polynomial-resolution-universal-evaluation",
+ "kind": "statement",
+ "title": "Signed small-model evaluation of derived colimits on polynomial resolutions",
+ "statement": "Fix universes $\\mathcal U\\in\\mathcal V$ and a bound as in [def-weil-size-convention]. Let $A\\to B$ be a homomorphism of $\\mathcal U$-small commutative rings and let $\\mathcal D_{B/A}$ be the category of all $\\mathcal U$-small polynomial $A$-algebras $T=A[E]$ [def-weil-pbc-mv-polynomial-ring] with an $A$-algebra map $\\epsilon_T:T\\to B$ (not necessarily surjective), and $A$-algebra maps over $B$. Let $\\mathcal D\\subseteq\\mathcal D_{B/A}$ be a full subcategory that is small in the working universe, with inclusion $i$, and put $\\mathcal C=\\mathcal D^{op}$ with the identity-cover topology. Let $P_\\bullet\\to\\operatorname{const}B$ be an augmented simplicial $A$-algebra [def-weil-pbc-simplicial-object] with every $P_n$ in $\\mathcal D$, whose underlying simplicial-set augmentation is a trivial Kan fibration [def-weil-pbc-trivial-kan-fibration]. For a commutative ring $R$ and an $R$-module presheaf $F$ on $\\mathcal C$ [def-weil-sheaf-of-modules-category], that is a functor $F:\\mathcal D\\to\\operatorname{Mod}_R$, put $s(F(P_\\bullet))^{-n}=F(P_n)$ with differential $\\sum_i(-1)^iF(d_i)$ and zero positive terms. Let $K_{\\mathcal C}(F)$ be the bar model of $L\\pi^R_{\\mathcal C,!}F$ of [lem-trf-derived-colimit-bar], whose face $d_j$ deletes $U_{n-j}$ of $U_n\\to\\cdots\\to U_0$, and let $a_{P,F}:s(F(P_\\bullet))\\xrightarrow{\\sim}\\mathbf H(\\mathcal D,F)$ be the comparison of [lem-trf-simplicial-derived-colimit-computation] with its bar model $K_{\\mathcal D}(F)$, whose face $d_j$ deletes $T_j$ of $T_0\\to\\cdots\\to T_n$.\n(1) The two models have the same summand $F(U_0)=F(T_0)$ indexed by $U_n\\to\\cdots\\to U_0$ in $\\mathcal C$, that is $T_0\\to\\cdots\\to T_n$ in $\\mathcal D$ with $T_i=U_i$, and multiplication by $(-1)^{n(n+1)/2}$ in degree $-n$ is an isomorphism of complexes $j_F:K_{\\mathcal C}(F)\\to K_{\\mathcal D}(F)$. It is the identity in degree zero, respects the augmentations, and commutes with every bar-chain map induced by a functor and a semilinear coefficient transformation. The isomorphism\n$$\\alpha_{P,F}=j_F^{-1}a_{P,F}:s(F(P_\\bullet))\\xrightarrow{\\sim}L\\pi^R_{\\mathcal C,!}F\\quad\\text{in }D(R)$$\n[def-weil-abstract-derived-category] is natural in $F$ and in augmented simplicial maps $h:P\\to Q$ between such resolutions: $\\alpha_{Q,F}\\,s(F(h))=\\alpha_{P,F}$.\n(2) If $F=F^{\\mathrm{big}}\\circ i$ for a functor $F^{\\mathrm{big}}:\\mathcal D_{B/A}\\to\\operatorname{Mod}_R$ and $a^{\\mathrm{big}}_P:s(F^{\\mathrm{big}}(P_\\bullet))\\xrightarrow{\\sim}\\mathbf H(\\mathcal D_{B/A},F^{\\mathrm{big}})$ is the comparison of [lem-trf-polynomial-presentation-homology], then $a^{\\mathrm{big}}_P=\\mathbf H(i,\\mathrm{id})\\,a_{P,F}$. Consequently, for two such resolutions $P,Q$ in $\\mathcal D$, $\\alpha_{Q,F}^{-1}\\alpha_{P,F}=(a^{\\mathrm{big}}_Q)^{-1}a^{\\mathrm{big}}_P$.\n(3) Let $A'\\to B'$, $\\mathcal D'\\subseteq\\mathcal D_{B'/A'}$ and $P'$ be data of the same kind, $\\mathcal C'=\\mathcal D'^{op}$, $v:\\mathcal D\\to\\mathcal D'$ any functor, $\\rho:R\\to R'$ a ring map, $G$ an $R'$-module presheaf on $\\mathcal C'$, $t:F\\to\\operatorname{Res}_\\rho(G\\circ v)$ a natural transformation and $k:vP\\to P'$ a morphism of simplicial objects of $\\mathcal D'$. Then, after restriction of scalars to $R$,\n$$\\alpha_{P',G}\\,s(G(k)t_P)=L\\pi_!(v^{op},t)\\,\\alpha_{P,F},$$\nwhere $L\\pi_!(v^{op},t)$ is the map given by the bar-chain formula of [lem-trf-derived-colimit-bar]. No contractibility, resolution or flatness hypothesis on $vP$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08PS (lemma-identify-pi-shriek), 08PT (lemma-pi-shriek-standard), 08QI (remark-resolution), 08QL (section-functoriality); sites-cohomology Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories), 08Q9 (lemma-compute-by-cosimplicial-resolution). Carries original sheaf-model proof Step 1 (bar sign), Step 4 (evaluation), the small-model transport of Step 5 and the signed reindexing of Step 8; Steps 2-3 are carried by lem-trf-polynomial-augmentation-boundary and lem-trf-polynomial-presentation-homology."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-trivial-kan-fibration",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-simplicial-derived-colimit-computation",
+  "lem-trf-derived-colimit-bar",
+  "lem-trf-polynomial-presentation-homology"
+ ],
+ "proof": [
+  {
+   "text": "Identify a string $U_n\\to\\cdots\\to U_0$ in $\\mathcal C$ with $T_0\\to\\cdots\\to T_n$ in $\\mathcal D$, $T_i=U_i$. The coefficient modules coincide. By [lem-trf-derived-colimit-bar] and [lem-trf-simplicial-derived-colimit-computation], face $j$ in $K_{\\mathcal C}$ is face $n-j$ in $K_{\\mathcal D}$, including the coefficient map: deleting $U_0=T_0$ applies $F(T_0\\to T_1)$ in both. Thus on degree $-n$, for $n\\geq1$, $d_{\\mathcal C}=\\sum_{j=0}^n(-1)^j\\partial_{n-j}=(-1)^n d_{\\mathcal D}$. Put $\\lambda_n=(-1)^{n(n+1)/2}$. Since $\\lambda_n=(-1)^n\\lambda_{n-1}$, $d_{\\mathcal D}\\lambda_n=\\lambda_{n-1}d_{\\mathcal C}$. Multiplication by $\\lambda_n$ is therefore the asserted chain map $j_F$, and the same degreewise formula is its inverse since $\\lambda_n^2=1$. Positive degrees are zero.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-simplicial-derived-colimit-computation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PG (example-left-derived-colimits), 08Q9 (lemma-compute-by-cosimplicial-resolution); explicit face-reversal sign calculation"
+   }
+  },
+  {
+   "text": "In degree zero $\\lambda_0=1$, so $j_F$ preserves the cocone augmentation to $\\operatorname{colim}_{\\mathcal D}F$: it leaves every generator $(T_0,x)$ unchanged. For any functor $v$ and semilinear transformation $t$, both bar formulas send $(T_0\\to\\cdots\\to T_n,x)$ to $(vT_0\\to\\cdots\\to vT_n,t_{T_0}(x))$. Additivity gives $t_{T_0}(\\lambda_nx)=\\lambda_nt_{T_0}(x)$, also after scalar restriction. Hence $j_GK_{\\mathcal C}(v^{op},t)=K_{\\mathcal D}(v,t)j_F$ as chain maps. The same calculation covers coefficient transformations alone.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-simplicial-derived-colimit-computation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories); signed reindexing"
+   }
+  },
+  {
+   "text": "Fullness of $\\mathcal D\\subseteq\\mathcal D_{B/A}$ makes $P$ a simplicial object of $\\mathcal D$ and identifies $\\operatorname{Hom}_{\\mathcal D}(T,P_\\bullet)$ with $\\operatorname{Hom}_{\\mathcal D_{B/A}}(T,P_\\bullet)$, commuting with all simplicial operators. For every $T\\in\\mathcal D$, [lem-trf-polynomial-presentation-homology] says that this latter simplicial set is homotopy equivalent to a singleton: apply its representable assertion to $Q=P$, whose polynomial terms and trivial Kan augmentation are precisely our hypotheses. This does not require $T\\to B$ to be surjective. Therefore $P$ satisfies the representable contractibility hypothesis of [lem-trf-simplicial-derived-colimit-computation] in the working-universe-small category $\\mathcal D$.",
+   "uses": [
+    "lem-trf-polynomial-presentation-homology",
+    "lem-trf-simplicial-derived-colimit-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution); cotangent.tex Tag 08PS (lemma-identify-pi-shriek), full-subcategory restriction"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-simplicial-derived-colimit-computation] to step 3. It gives the canonical isomorphism $a_{P,F}$ with target the first-vertex bar model. By [lem-trf-derived-colimit-bar], $K_{\\mathcal C}(F)$ represents $L\\pi^R_{\\mathcal C,!}F$; step 1 identifies it with that first-vertex model. Consequently $\\alpha_{P,F}=j_F^{-1}a_{P,F}$ is an isomorphism in $D(R)$. Naturality of $a$ in $F$ and step 2 give naturality of $\\alpha$ in $F$. If $h:P\\to Q$ is an augmented resolution map, step 3 applies to $Q$ as well; in the cited comparison formula set $u=\\mathrm{id}_{\\mathcal D}$, $\\rho=\\mathrm{id}_R$, $\\theta=\\mathrm{id}_F$, $k=h$. Its bar map is the identity on every generator, so $a_{Q,F}s(F(h))=a_{P,F}$. Multiplication by $j_F^{-1}$ gives the required equality for $\\alpha$.",
+   "uses": [
+    "lem-trf-simplicial-derived-colimit-computation",
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution); cotangent.tex Tags 08PS (lemma-identify-pi-shriek), 08QI (remark-resolution)"
+   }
+  },
+  {
+   "text": "Suppose $F=F^{\\mathrm{big}}i$. By [lem-trf-polynomial-presentation-homology], $P$ satisfies representable contractibility also in the containing-universe-small $\\mathcal D_{B/A}$, and its $a^{\\mathrm{big}}_P$ is the canonical comparison with the first-vertex bar model. In [lem-trf-simplicial-derived-colimit-computation] take $u=i$, $F'=F^{\\mathrm{big}}$, $\\rho=\\mathrm{id}_R$, $\\theta=\\mathrm{id}$ and $k:\\!iP\\to P$ the identity. Both source and target satisfy its hypotheses by step 3 and the cited large-category assertion. Its formula gives $a^{\\mathrm{big}}_P=\\mathbf H(i,\\mathrm{id})a_{P,F}$. Apply the same argument to $Q$.",
+   "uses": [
+    "lem-trf-polynomial-presentation-homology",
+    "lem-trf-simplicial-derived-colimit-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution); cotangent.tex Tags 08PS (lemma-identify-pi-shriek), 08QI (remark-resolution), small-model transport"
+   }
+  },
+  {
+   "text": "Write $M=\\mathbf H(i,\\mathrm{id})$. Step 5 gives $a^{\\mathrm{big}}_P=Ma_{P,F}$ and $a^{\\mathrm{big}}_Q=Ma_{Q,F}$. Since these comparison maps are isomorphisms, $M=a^{\\mathrm{big}}_P a_{P,F}^{-1}$ is an isomorphism as well. Cancellation now yields $(a^{\\mathrm{big}}_Q)^{-1}a^{\\mathrm{big}}_P=a_{Q,F}^{-1}M^{-1}Ma_{P,F}=a_{Q,F}^{-1}a_{P,F}=\\alpha_{Q,F}^{-1}\\alpha_{P,F}$, the last equality using $\\alpha_{P,F}=j_F^{-1}a_{P,F}$ and the same $j_F$ for $P,Q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution); cancellation of the comparison isomorphisms"
+   }
+  },
+  {
+   "text": "For the data of (3), repeat step 3 in $\\mathcal D'$ for $P'$. Apply the general compatibility statement of [lem-trf-simplicial-derived-colimit-computation] with $u=v$, $F'=G$, $\\theta=t$ and the given $k:vP\\to P'$. It gives $a_{P',G}s(G(k)t_P)=\\mathbf H(v,t)a_{P,F}$ after restriction to $R$; its statement expressly requires no contractibility of $vP$. Step 2 and the generator formula of [lem-trf-derived-colimit-bar] identify $j_G^{-1}\\mathbf H(v,t)=L\\pi_!(v^{op},t)j_F^{-1}$ under the displayed bar models. Multiply the first equality on the left by $j_G^{-1}$ and substitute $\\alpha=j^{-1}a$ to obtain exactly (3). Restricting scalars preserves the degreewise sign maps, and the cited general compatibility includes restriction of scalars on its comparisons. No flatness or resolution property of $vP$ is used.",
+   "uses": [
+    "lem-trf-simplicial-derived-colimit-computation",
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PH (example-morphism-categories), 08Q9 (lemma-compute-by-cosimplicial-resolution); cotangent.tex Tag 08QL (section-functoriality), signed comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-derived-colimit-bar",
+  "lem-trf-simplicial-derived-colimit-computation",
+  "lem-trf-polynomial-presentation-homology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories), 08Q9 (lemma-compute-by-cosimplicial-resolution), together with cotangent.tex Tags 08PS (lemma-identify-pi-shriek), 08QI (remark-resolution), 08QL (section-functoriality). Explicit signed assembly and small-model comparison using the existing general DAG theorems."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "polynomial.*resolution|resolution.*polynomial|contractib.*[Rr]epresentable|[Rr]epresentable.*contractib",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: group/module resolutions and extra-degeneracy homotopies do not establish representable contractibility or evaluation on arbitrary augmented polynomial resolutions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial resolution by polynomial algebras is homotopically terminal among polynomial presentations and computes derived colimits",
+   "results": {
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialObject, MvPolynomial",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'SimplicialObject'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "invalid query: unknown identifier; the fully qualified follow-up was executed successfully and gave zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every polynomial algebra T augmented to B, Hom(T,P) for a termwise surjective simplicial polynomial algebra resolution of B is contractible and evaluates any module functor to its derived colimit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule",
+     "Rep.standardComplex.x_projective",
+     "ModuleCat.projectiveResolution",
+     "CategoryTheory.ProjectiveResolution.self_complex",
+     "Rep.barResolution",
+     "Rep.standardResolution",
+     "CategoryTheory.ProjectiveResolution.self",
+     "Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv"
+    ],
+    "digest": "73a6de398aced4cf",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: group/module resolutions and extra-degeneracy homotopies do not establish representable contractibility or evaluation on arbitrary augmented polynomial resolutions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject, MvPolynomial",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: group/module resolutions and extra-degeneracy homotopies do not establish representable contractibility or evaluation on arbitrary augmented polynomial resolutions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a free commutative algebra into an augmented acyclic simplicial algebra is a contractible simplicial set by lifting polynomial generators against simplex boundaries",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule",
+     "CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv",
+     "classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented",
+     "ChainComplex.alternatingConstHomotopyEquiv",
+     "AlgebraicTopology.AlternatingFaceMapComplex.ε",
+     "classifyingSpaceUniversalCover.compForgetAugmented.toModule",
+     "SimplicialObject.Splitting",
+     "AlgebraicTopology.DoldKan.Γ₀'_obj"
+    ],
+    "digest": "5a9338dba7627ecb",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: group/module resolutions and extra-degeneracy homotopies do not establish representable contractibility or evaluation on arbitrary augmented polynomial resolutions"
+  },
+  {
+   "tool": "grep",
+   "query": "reverse.*(face|bar)|face.*reverse|derived.*colimit|colimit.*derived",
+   "results": "3 hits; top=['Mathlib/LinearAlgebra/AffineSpace/Simplex/Centroid.lean', 'Mathlib/LinearAlgebra/AffineSpace/Simplex/Centroid.lean', 'Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean']; note=; digest=835618f7809ac06e. Candidate source inspection recorded in report.md.",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern ordinary colimits, additive functor compatibility, Dold–Kan normalization, formally smooth polynomial rings or group bar resolutions; none states the signed polynomial-resolution derived-colimit comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived colimits evaluated on polynomial simplicial resolutions naturally agree after reversing bar face order with triangular degree signs",
+   "results": "8 hits; top=['CategoryTheory.Limits.IsLimit.unop', 'CategoryTheory.CosimplicialObject.instHasColimits', 'CategoryTheory.SimplicialObject.instHasColimits', 'CategoryTheory.Limits.colimitFlipCompColimIsoColimitCompColim', 'CategoryTheory.Limits.isColimitOfOp', 'CategoryTheory.cosimplicialSimplicialEquiv', 'CategoryTheory.CosimplicialObject.Truncated.instHasColimits', 'CategoryTheory.Limits.isColimitOfUnop']; note=; digest=dfa8dd2a69964f6e. Candidate source inspection recorded in report.md.",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern ordinary colimits, additive functor compatibility, Dold–Kan normalization, formally smooth polynomial rings or group bar resolutions; none states the signed polynomial-resolution derived-colimit comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"alternating\", \"iso\"",
+   "results": "8 hits; top=['AlgebraicTopology.alternatingFaceMapComplexCompMapHomologicalComplexIso', 'AlgebraicTopology.alternatingFaceMapComplexCompMapHomologicalComplexIso_hom_app_f', 'AlgebraicTopology.alternatingFaceMapComplexCompMapHomologicalComplexIso_inv_app_f', 'HomologicalComplex.alternatingConstScIsoEven', 'HomologicalComplex.alternatingConstScIsoOdd', 'HomologicalComplex.alternatingConstHomologyIsoEven', 'HomologicalComplex.alternatingConstHomologyIsoOdd', 'LinearIsometry.norm_compContinuousAlternatingMap']; note=; digest=db69413ebbebd2bc. Candidate source inspection recorded in report.md.",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern ordinary colimits, additive functor compatibility, Dold–Kan normalization, formally smooth polynomial rings or group bar resolutions; none states the signed polynomial-resolution derived-colimit comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reversing face order in a simplicial bar complex changes its differential by degree sign and gives a natural comparison with evaluation on polynomial resolutions",
+   "results": "8 hits; top=['AlgebraicTopology.DoldKan.PInfty', 'AlgebraicTopology.AlternatingCofaceMapComplex.d_eq_unop_d', \"AlgebraicTopology.DoldKan.hσ'\", \"AlgebraicTopology.DoldKan.hσ'_eq\", \"AlgebraicTopology.DoldKan.hσ'_eq'\", 'AlgebraicTopology.AlternatingFaceMapComplex.objD', 'AlgebraicTopology.DoldKan.N₂_obj_X_d', 'Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq']; note=; digest=71f20f4c03b27d04. Candidate source inspection recorded in report.md.",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern ordinary colimits, additive functor compatibility, Dold–Kan normalization, formally smooth polynomial rings or group bar resolutions; none states the signed polynomial-resolution derived-colimit comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor on polynomial algebras has derived colimit computed by an augmented simplicial polynomial resolution with contractible representable Hom, compatible with arbitrary indexing functors and coefficient ring restriction",
+   "results": "8 hits; top=['Algebra.FormallySmooth.polynomial', 'instHasColimitsCommAlgCat', 'Algebra.mvPolynomial', 'PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap', 'preservesColimit_coyoneda_of_finitePresentation', 'RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit', 'AlgebraicTopology.DoldKan.Γ₀.obj', 'CategoryTheory.Functor.toRightDerivedZero']; note=; digest=50fa59cd91fbb270. Candidate source inspection recorded in report.md.",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern ordinary colimits, additive functor compatibility, Dold–Kan normalization, formally smooth polynomial rings or group bar resolutions; none states the signed polynomial-resolution derived-colimit comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-sheaf-model",
+  "date": "2026-10-22",
+  "group": "Q73"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Re-split of the supporting sheaf-model argument (Stacks 08PS/08PT/08QI/08QL, sites-cohomology 08Q9): the identification of the derived lower shriek on the small polynomial-presentation site with the evaluation on a polynomial resolution, its bar-face sign normalization, its compatibility with the large presentation category and its signed reindexing along functors of presentation sites (original sheaf-model proof Steps 1, 4, the transport part of 5, and 8).",
+   "via": [
+    "lem-trf-cotangent-sheaf-model",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-polynomial-resolution-universal-evaluation",
+  "worker": "Q91",
+  "summary": "Kept all three clauses and hypotheses unchanged. Proved the triangular sign correction and semilinear reindexing on generators, restricted existing polynomial representable contractibility along the full inclusion, and assembled the existing general derived-colimit comparison and its functoriality. The large/small comparison and its cancellation are explicit. No new nodes; all citations checked against their statements.",
+  "blueprint": "Realizes the inherited supporting input beneath lem-trf-local-term-locality proof (1)–(2): the cotangent sheaf-model original Step 1 (bar sign), Step 4 (evaluation), transport part of Step 5 (small-model comparison), and Step 8 (signed functoriality). The current ancestor is a local-term statement, not an independent formulation of this algebraic input; no unit or chapter route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-f27fe2033",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-f27fe2033 (reviewer sub-agent of L); spot-checked: Read in full: the item and all 7 steps, the statements of the 3 cited theorem nodes (all split, reviewed, unit sk-i-curve-zero), def-weil-pbc-trivial-kan-fibration, def-weil-size-convention, and the parent lem-trf-cotangent-sheaf-model steps 1-3, which use clauses (1), (2) and (3). Statement and stmt_deps are byte-identical to the live base; only proof, proof_deps, proof_origin, status, split_report and mathlib_searches changed. No new nodes and no repair note. Sources checked at the cited places: Stacks cotangent 08PS (l.229-274: Mor = product of fibres, trivial Kan, homotopy equivalent to a point; non-surjective beta allowed), 08PT, 08QI, and sites-cohomology 08PG (l.10044 bar differential, last face restricts) and 08Q9 (l.10229-10294). Step 1: C-face j equals D-face n-j, so d_C=(-1)^n d_D. With lambda_n=(-1)^{n(n+1)/2}, lambda_n(-1)^n=lambda_{n-1} gives the chain iso; checked by hand for n=1,2. Elementary and correct. Step 2: the cited generator formulas agree and sign commutes with additive maps; correct. Step 3: fullness plus the representable clause of polynomial-presentation-homology (hypotheses exactly the item's) gives contractibility in D; uses the statement, not the proof. Step 4: general formula with u=id, theta=id, k=h; correct. Step 5: u=i, k=id; D_{B/A} is V-small (V is the working universe); a^big is the canonical bar comparison, so a^big_P=H(i,id)a_P. Step 6: cancellation algebra correct, and M is shown invertible rather than assumed. Step 7: general formula plus step-2 conjugation gives (3); vP is unconstrained. Edge cases: char 2, F=0, R=0, E empty, non-flat Z->F_2. Route: all cited theorems in-unit, no tool_uses, no SGA; LeanSearch, Loogle, LeanFinder and grep searches recorded. Route-pivot points: def-weil-pbc-trivial-kan-fibration is inherited in the unchanged statement and is the classical hypothesis of Stacks 08PS, used at step 3 via polynomial-presentation-homology; it is not dropped infinity/dg/model machinery, so accepted. 'simplicial set' means the ordinary Hom simplicial set, accepted. Maintainer note: lem-trf-terminal-bar-evaluation-compatibility (unsplit) also states the lambda_n sign iso that clause (1) proves inline. This overlap is not a fault but could be shared later."
+ }
+}

@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-relative-abelian-pointed-rigidity",
+ "kind": "statement",
+ "title": "Pointed morphisms of relative abelian spaces are homomorphisms",
+ "statement": "Let $S$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth]. Let $A\\to S$ and $B\\to S$ be proper smooth commutative group algebraic spaces of finite presentation [def-trf-algebraic-space] whose geometric fibres are abelian varieties, meaning smooth proper geometrically connected group schemes. Proper means separated, of finite type and universally closed; smoothness and finite presentation are tested on etale scheme charts. Let $u:A\\to B$ be any $S$-morphism such that $u\\circ e_A=e_B$, where $e_A,e_B$ are the identity sections. Then $u$ is a homomorphism: $u\\circ m_A=m_B\\circ(u\\times_Su)$, with $m_A,m_B$ the addition maps. This assertion holds over nonreduced bases and after any locally Noetherian base change. In particular, if $C\\to S$ is another such space and $v:A\\times_SB\\to C$ is a morphism whose restrictions to $A\\times e_B$ and $e_A\\times B$ are both zero, then $v=0$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I section 1, rigidity and homomorphisms, for the field argument; relative input Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Proposition 6.1 (WANTED). Algebraic-space version is an agent-stated relative rigidity prerequisite; it is not inferred from equality on geometric fibres.",
+  "external": [
+   {
+    "document": "literature/mumford-fogarty-kirwan-geometric-invariant-theory.pdf",
+    "place": "Proposition 6.1, relative rigidity lemma and the pointed-homomorphism consequence; WANTED."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "pqf-def-locnoeth",
+  "def-sfb-abelian-space-poincare-data"
+ ],
+ "proof": [
+  {
+   "text": "We first prove the stated two-axis vanishing assertion, with arbitrary spaces $P,Q,R$ satisfying the hypotheses on $A,B,C$ and $w:P\\times_SQ\\to R$ zero on both identity axes. On every etale scheme chart, smoothness implies flatness by [lem-pc-smooth-flat]; the chartwise definition therefore makes $P\\to S$ flat. Each geometric fibre of $P$ is geometrically integral by [lem-sc-abelian-variety-characterization], applied to its smooth proper connected group scheme. Hence every fibre $P_s$ over $\\kappa(s)$ is geometrically integral: for a field extension $K/\\kappa(s)$ with algebraic closure $\\bar K$, the base change $P_{\\bar K}\\to P_K$ is surjective and, on etale charts, faithfully flat, so $P_K$ is reduced because $P_{\\bar K}$ is, and $|P_K|$ is irreducible as the continuous image of the irreducible $|P_{\\bar K}|$; $P_K$ is separated over $K$, hence decent. The identity is a section. Thus the first assertion of [lem-sfb-rigidified-space-picard] applies: for every scheme $T\\to S$, the canonical map $\\mathcal O_T\\to(p_T)_*\\mathcal O_{P_T}$ is an isomorphism. Only this global-functions assertion is used, not any Picard-space construction.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-sc-abelian-variety-characterization",
+    "lem-sfb-rigidified-space-picard"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E0S, lemma-proper-flat-geom-red-connected; the existing rigidified-Picard node states the needed universal structure-sheaf conclusion."
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar s=\\operatorname{Spec}\\Omega\\to S$. The fibres $P_{\\bar s},Q_{\\bar s},R_{\\bar s}$ are schemes by hypothesis. Apply [lem-sc-rigidity] to $w_{\\bar s}$ with $X=P_{\\bar s}$, $Y=Q_{\\bar s}$ and $Z=R_{\\bar s}$. The source factor is proper, geometrically connected and geometrically reduced by the preceding characterization; the second factor is connected; the target is proper, hence separated and of finite type. The fibre at $e_Q$ maps to the single point $e_R$. Consequently $w_{\\bar s}=g\\operatorname{pr}_2$. Composing with $(e_P,1)$ gives $g=0$ because the other axis is zero. Hence $w_{\\bar s}=0$ as a scheme morphism for every $\\bar s$.",
+   "uses": [
+    "lem-sc-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Theorem 1.1, printed pp.8--9; field rigidity in the existing node gives the scheme-theoretic factorization."
+   }
+  },
+  {
+   "text": "Take a surjective etale scheme atlas of $Q$, and restrict it to affine opens $T$. This is allowed by [def-trf-algebraic-space]. Pull back $w$ to a $T$-map $h:P_T\\to R_T$. The projection $P_T\\to T$ is proper by [lem-sfb-space-flat-proper-fp-locality], since it is a base change of $P\\to S$; similarly $R_T\\to T$ is proper, hence separated and locally of finite type. At every geometric point of $T$, step 2 says $h$ is the constant identity map, so its image is a singleton. Apply [lem-sfb-proper-space-finite-image-neighbourhood] at each $t\\in T$. It supplies affine open neighbourhoods $V$ covering $T$ and actual factorizations $P_V\\xrightarrow{a}Z\\xrightarrow{j}R_V$, with $Z$ an affine scheme finite over $V$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-proper-space-finite-image-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0AEJ, lemma-flat-proper-family-cannot-collapse-fibre, applied over each atlas scheme T."
+   }
+  },
+  {
+   "text": "For each such $V$, put $p_V:P_V\\to V$ and $s_V=(e_P)_V:V\\to P_V$. Step 1 identifies $p_V^\\sharp:\\Gamma(V,\\mathcal O_V)\\to\\Gamma(P_V,\\mathcal O)$ as an isomorphism. Since $p_Vs_V=1$, we have $s_V^\\sharp=(p_V^\\sharp)^{-1}$. Let $b=as_V:V\\to Z$. Then $(bp_V)^\\sharp=p_V^\\sharp s_V^\\sharp a^\\sharp=a^\\sharp$. By the injectivity in [lem-sfb-space-affine-target-global-functions], $a=bp_V$. Thus $h|_{P_V}=jbp_V$. The axis hypothesis says $jb=hs_V=e_R|_V$, so $h|_{P_V}=0$. The calculation takes place in the full rings of global functions, including their nilpotents.",
+   "uses": [
+    "lem-sfb-space-affine-target-global-functions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05Z1, lemma-morphism-to-affine-scheme; combine with the universal functions conclusion already obtained in step 1."
+   }
+  },
+  {
+   "text": "It follows that the pullback of $w$ to every atlas open $T$ is zero. To descend this equality, take any scheme test $U\\to P\\times_SQ$. The $Q$-coordinate lifts etale locally on $U$ to the chosen atlas; on these lifts $w$ and zero agree. The target $R$ is a sheaf, so its two sections over $U$ agree. This holds for every test $U$, hence $w=0$ as a natural transformation. This proves the two-axis assertion without reducing the base.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Definition of algebraic spaces as fppf sheaves with an etale atlas; etale-local uniqueness of sections."
+   }
+  },
+  {
+   "text": "Apply the assertion just proved to $P=Q=A$, $R=B$, and the morphism $d(x,y)=u(x+y)-u(x)-u(y)$, defined using the given group operations. Because $u(e_A)=e_B$, both restrictions $d(x,0)$ and $d(0,y)$ are zero. Thus $d=0$, which is precisely $u\\circ m_A=m_B\\circ(u\\times_Su)$. Applying the same assertion to $P=A,Q=B,R=C,w=v$ proves the last clause. Finally the equality for $u$ pulls back along any base change: both sides are composites of the pulled-back maps and group operations. In particular it holds after every locally Noetherian base change, including nonreduced ones.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Corollary 1.2, printed p.9, additivity defect; relative two-axis vanishing supplied by steps 1--5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-smooth-flat",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sfb-rigidified-space-picard",
+  "lem-sc-rigidity",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-proper-space-finite-image-neighbourhood",
+  "lem-sfb-space-affine-target-global-functions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Theorem 1.1 and Corollary 1.2; relative assembly using Stacks Tags 0E0S, 0AEJ and 05Z1, including arbitrary nilpotent bases."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism between abelian schemes over an arbitrary base which preserves the identity sections is a group homomorphism",
+   "results": "8 hits; logged top: CommGrpCat.Hom.Simps.hom, CommGrpCat.Hom.hom, CommGrpCat.Hom.hom', CommGrpCat.Hom, CommGrpCat.ofHom_hom, CommGrpCat.instCategory, CommGrpCat.instOneHom, CommGrpCat.forget_map",
+   "date": "2026-10-23",
+   "verdict": "no match: morphisms of CommGrpCat are already homomorphisms; the sought assertion upgrades an arbitrary pointed morphism of algebraic spaces to a group homomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A zero preserving morphism of proper smooth connected group algebraic spaces is additive by relative rigidity",
+   "results": "8 hits; logged top: AddMonoidHom.map_zero, ZeroHom, AddCommGrpCat.zero_apply, AddMonoidHomClass.toZeroHomClass, ZeroHom.instAddMonoid, CategoryTheory.Functor.preservesZeroMorphisms_of_additive, ContinuousMapZero.coeFnAddMonoidHom_apply, ZeroHom.instAddCommGroup",
+   "date": "2026-10-23",
+   "verdict": "no match: morphisms of CommGrpCat are already homomorphisms; the sought assertion upgrades an arbitrary pointed morphism of algebraic spaces to a group homomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"rigidity\"",
+   "results": "0 hits; logged top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: morphisms of CommGrpCat are already homomorphisms; the sought assertion upgrades an arbitrary pointed morphism of algebraic spaces to a group homomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "rigidity|abelianScheme|AbelianVariety",
+   "results": "4 hits; logged top: Mathlib/Topology/Order/IntermediateValue.lean, Mathlib/Topology/Order/IntermediateValue.lean, Mathlib/Topology/Order/IntermediateValue.lean, Mathlib/Geometry/Manifold/Complex.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: morphisms of CommGrpCat are already homomorphisms; the sought assertion upgrades an arbitrary pointed morphism of algebraic spaces to a group homomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pointed map of abelian schemes is automatically a homomorphism even over a nonreduced base",
+   "results": "8 hits; logged top: Pointed.Hom.toFun, Pointed.Hom.map_point, AlgebraicGeometry.Scheme.instCoeFunHomForallCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.Hom.Simps.toLRSHom, AlgebraicGeometry.Scheme.Hom.toLRSHom', AlgebraicGeometry.Scheme.Hom.toLRSHom, AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass, AlgebraicGeometry.Scheme.Hom",
+   "date": "2026-10-23",
+   "verdict": "no match: morphisms of CommGrpCat are already homomorphisms; the sought assertion upgrades an arbitrary pointed morphism of algebraic spaces to a group homomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every identity preserving morphism of abelian schemes over a nonreduced base is a group homomorphism",
+   "results": "8 hits; top: CommGrpCat.hom_id, CommGrpCat.instOneHom, AlgebraicGeometry.Scheme.Hom.id_base, CommGrpCat.ofHom_hom, AlgebraicGeometry.Scheme.id.base, AddCommGrpCat.hom_id, CommGrpCat.ofHom_id, CommGrpCat.id_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: already-homomorphic group morphisms and additive module functors do not upgrade pointed morphisms of relative algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"rigidity\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: already-homomorphic group morphisms and additive module functors do not upgrade pointed morphisms of relative algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "rigidity|AbelianScheme|abelian_scheme",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: already-homomorphic group morphisms and additive module functors do not upgrade pointed morphisms of relative algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pointed morphism between proper smooth connected group spaces is additive by rigidity over any base scheme",
+   "results": "8 hits; top: AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.AffineSpace.homOfVector_over, AlgebraicGeometry.Scheme.Modules.Hom.add_app, AlgebraicGeometry.AffineSpace.comp_homOfVector, AlgebraicGeometry.AffineSpace.homOfVector_over_assoc, TopCat.instAddHomObjTopCommRingCatForget₂, AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: already-homomorphic group morphisms and additive module functors do not upgrade pointed morphisms of relative algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-space-poincare-calculus",
+  "date": "2026-10-23",
+  "group": "Q153"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Pointed morphisms of relative abelian spaces are homomorphisms.",
+   "via": [
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-abelian-pointed-rigidity",
+  "worker": "stage1",
+  "summary": "Proved two-axis vanishing using field rigidity, existing universal global functions, finite closed image on atlas neighbourhoods, and affine-target uniqueness. Applied it to the additivity defect. One new general finite-image lemma, stated only; reused the stronger existing rigidified-Picard global-functions assertion instead of duplicating it. No statement change.",
+  "blueprint": "Nearest ancestor is null as reported by blueprint_refs.py; retains the inherited via chain and the det-thm-sf-ctf-stability-direct-images proof (3) supporting relative Poincare-calculus prerequisite. Latest blueprint inspected at main-20261023-1620.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-5a43471f0",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-5a43471f0 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full, and checked the sources at the cited places. Milne I Thm 1.1 and Cor 1.2 (pp.8-9) give step 6 exactly. The new node lem-sfb-proper-space-finite-image-neighbourhood is Stacks 0AEJ with hypothesis (3)(a), a scheme base and an affine shrink; it is correct and self-contained. Z is affine because a finite map (03ZP) to an affine base is affine. I found no duplicate under rg -L (lem-sc-finite-image-locus-open and lem-sfb-constant-source-closed-factorization-locus are different statements), and the node does not restate the item since it uses no group structure. Step checks: step 1 matches 0E0S (geometrically reduced and connected fibres give the result universally) and uses only the first assertion of lem-sfb-rigidified-space-picard. Step 2's hypotheses for lem-sc-rigidity all hold on geometric fibres, and both axes are used. Step 3: base-change properness holds and the fibre image is a single point, so the new node applies. Step 4: the 05Z1 calculation (bp)^#=p^#s^#a^#=a^# is checked, is valid over nilpotent bases, and gives h=e_R. Step 5 (étale descent, R a sheaf) is genuinely elementary. No cycle: a BFS over the 814-node closure does not reach the item. Route: lem-sc-rigidity and lem-sc-abelian-variety-characterization are slopmaster2-closed and lem-pc-smooth-flat is a Mathlib leaf, so they are tools, not route, and I accept them. Batch-5: def-trf-algebraic-space, def-sfb-space-morphism-properties, lem-trf-space-fibre-products-etale-covers (02X2/041F), def-a1-space-point-topology, lem-sfb-space-flat-proper-fp-locality (base change and descent of flat/proper/fp) and lem-sfb-space-affine-target-global-functions (05Z1) are all foundational algebraic-space definitions and lemmas, not part of the trace formula or Poincare duality; accepted. FIX: step 1 proved only that the geometric fibres P_Omega are integral, while the Picard node needs the fibres P_s over kappa(s) to be geometrically integral. I added the descent (P_Kbar -> P_K is surjective and faithfully flat on charts, so P_K is reduced and irreducible; P_K is separated, hence decent). Only the step-1 text of the item changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeAbelianPointedRigidity",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.relativeAbelian_pointed_rigidity",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.relativeAbelianBaseChangeMap",
+   "AlgebraicGeometry.AlgebraicSpace.relativeAbelian_two_axis_vanishing",
+   "AlgebraicGeometry.AlgebraicSpace.relativeAbelian_pointed_rigidity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeAbelianPointedRigidity.lean",
+  "statement": "theorem relativeAbelian_pointed_rigidity (S : Scheme.{u}) [IsLocallyNoetherian S] (A B : AlgebraicSpace S) (g : CommutativeSpaceGroup A) (h : CommutativeSpaceGroup B) (hA : IsAbelianFamily (groupSpaceProjection A)) (hB : IsAbelianFamily (groupSpaceProjection B)) (a : A ⟶ B) (ha : g.identity ≫ a = h.identity) : IsHom g h a ∧ addition A g ≫ a = productMap (pointedGroup A g) (pointedGroup A g) (pointedGroup B h) (pointedGroup B h) a a ≫ addition B h ∧ ∀ (T : Over S) [IsLocallyNoetherian T.left], relativeAbelianBaseChangeMap (addition A g ≫ a) T = relativeAbelianBaseChangeMap (productMap (pointedGroup A g) (pointedGroup A g) (pointedGroup B h) (pointedGroup B h) a a ≫ addition B h) T",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the landed Poincare abelian-family and group-operation interface, cited by the added statement dependency. Two-axis vanishing is the other conclusion of this same node. The helper is the explicit sheaf fibre-product map for scheme base change. No statement correction or new definition node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4575d0474",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read item, all 4 stmt_deps and the live decls used (product/fst/snd/pair, leftAxis/rightAxis, IsAbelianFamily/HasAbelianFibres, pointedGroup, addition, IsHom, productMap, baseMap_eq, CommutativeSpaceGroup(.identity), groupSpaceProjection, groupSchemeMap, upstream IsAbelianVariety = proper+smooth+connected, no own group law). Clauses match: locally Noetherian S, no reducedness; abelian-family predicate = proper+smooth+lfp (gives fp with properness)+abelian geometric fibres; arbitrary a with g.identity≫a=h.identity; conclusions IsHom and addition≫a = productMap a a≫addition; base-change conjunct over every locally Noetherian T via real helper pair(fst≫f, snd), a formal consequence as the node's step 6 says. Two-axis: rightAxis=A×e_B, leftAxis=e_A×B, zero = structural map≫k.identity, hC present. Item diff vs live: lean + stmt_deps gains the landed def node def-sfb-abelian-space-poincare-data (allowed); dep records unchanged; lean.statement verbatim; both theorems by sorry; docstrings with source, blueprint id and proof steps; universes bound; no pro-etale. No file changed, so no compile."
+ }
+}

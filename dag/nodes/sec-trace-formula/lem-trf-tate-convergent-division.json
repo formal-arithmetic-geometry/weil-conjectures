@@ -1,0 +1,457 @@
+{
+ "id": "lem-trf-tate-convergent-division",
+ "kind": "statement",
+ "title": "Bounded convergent division by finitely many Tate series",
+ "statement": "Let $K$ be a field [def-weil-field] complete for a real-valued nonarchimedean absolute value, and let $s\\ge0$. Let $T_s=K\\langle X_1,\\ldots,X_s\\rangle$ be the restricted-series ring [def-trf-restricted-series-presentation], with Gauss norm $\\|\\sum_\\nu a_\\nu X^\\nu\\|_G=\\sup_\\nu|a_\\nu|$. Order $\\mathbf N^s$ by graded lexicographic order: compare total degree first and then lexicographically. For $0\\ne u=\\sum a_\\nu X^\\nu\\in T_s$, let $L(u)$ be the largest exponent in this order among the finitely many exponents with $|a_\\nu|=\\|u\\|_G$. Let $t\\ge0$ and let $b_1,\\ldots,b_t\\in T_s$ satisfy $\\|b_i\\|_G=1$. For every $f\\in T_s$ there are $q_1,\\ldots,q_t,r\\in T_s$ such that $f=\\sum_{i=1}^t q_i b_i+r$, $\\|q_i\\|_G\\le\\|f\\|_G$ for every $i$, and $\\|r\\|_G\\le\\|f\\|_G$. Moreover, if the coefficient of $X^\\nu$ in $r$ is nonzero, then $L(b_i)\\nleq\\nu$ componentwise for every $i$. The list may be empty, in which case $r=f$; no assumption that the $b_i$ form a Gröbner basis is made.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Agent auxiliary multivariate bounded-division lemma for the strict-closedness result, Corollary 5.2.7/8; not claimed to be a verbatim printed BGR theorem. Book absent locally (WANTED). Independent polynomial-division plus contracting-tail proof is recorded in the worker report. Context corroborated online in Bosch, Lectures on Formal and Rigid Geometry (April 2008), §1.3, Corollaries 7–9, printed pp.20–21.",
+  "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "If $t=0$, take $r=f$. If $s=0$ and $t>0$, then $T_0=K$ by [lem-trf-restricted-series-gauss-completion]; take $q_1=f/b_1$, all other quotients zero and $r=0$. Since $|b_1|=1$, this has the required bound. Thus assume $s,t>0$. Throughout, coefficientwise scalar multiplication has $\\|a h\\|_G=|a|\\|h\\|_G$ directly from the supremum formula, including $a=0$.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Agent multivariate auxiliary proof. Compare Bosch, Lectures on Formal and Rigid Geometry (April 2008), §1.2 Theorem 8 proof, printed pp.12–13 (polynomial part plus contracting-error iteration); §1.3 Corollaries 7–9, printed pp.20–21 (context). Read online; local archival copy WANTED. This general finite-list statement is not asserted to be printed there."
+   }
+  },
+  {
+   "text": "For each $i$, let $H_i$ be the finite polynomial consisting of exactly the terms of $b_i$ with coefficient modulus $1$, and put $e_i=b_i-H_i$. Restrictedness [def-trf-restricted-series-presentation] makes $H_i$ finite and nonzero: a nonzero restricted family attains its positive supremum, by taking the maximum of the finite set of coefficients at least as large as any fixed nonzero coefficient. All coefficients of $e_i$ have modulus less than $1$, uniformly so: only finitely many have modulus at least $1/2$, and their maximum together with $1/2$ is less than $1$. Consequently choose $0<c<1$ with $\\|e_i\\|_G\\le c$ for every $i$, using finiteness of the list. The greatest support exponent of $H_i$ in graded lexicographic order is $\\beta_i=L(b_i)$. Put $V=\\{a\\in K:|a|\\le1\\}$. The absolute-value identities show directly that $V$ is a unital subring; every coefficient of $H_i$ lies in $V$, and its leading coefficient is invertible in $V$ because its modulus and that of its inverse are $1$. The chosen order is additive and well-founded: every fixed-total-degree set is finite, and total degree cannot decrease infinitely.",
+   "uses": [
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Agent multivariate auxiliary proof. Compare Bosch, Lectures on Formal and Rigid Geometry (April 2008), §1.2 Theorem 8 proof, printed pp.12–13 (polynomial part plus contracting-error iteration); §1.3 Corollaries 7–9, printed pp.20–21 (context). Read online; local archival copy WANTED. This general finite-list statement is not asserted to be printed there."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-unit-leading-ring-polynomial-division] over the commutative ring $V$ with the polynomials $H_i$ and this graded lexicographic order, separately to every monomial $X^\\nu$. Choose once and for all polynomial solutions $A_{i,\\nu},B_\\nu\\in V[X_1,\\ldots,X_s]$ of\n$$X^\\nu=\\sum_i A_{i,\\nu}H_i+B_\\nu,$$\nwhere every support exponent of $B_\\nu$ lies in $S=\\{\\mu:\\beta_i\\nleq\\mu\\text{ for every }i\\}$. Embedded coefficientwise in $T_s$, these polynomials have Gauss norm at most $1$, since all their coefficients belong to $V$. Fixing these solutions on monomials avoids any unsupported claim that arbitrary choices of polynomial division are linear.",
+   "uses": [
+    "lem-trf-unit-leading-ring-polynomial-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Agent multivariate auxiliary proof. Compare Bosch, Lectures on Formal and Rigid Geometry (April 2008), §1.2 Theorem 8 proof, printed pp.12–13 (polynomial part plus contracting-error iteration); §1.3 Corollaries 7–9, printed pp.20–21 (context). Read online; local archival copy WANTED. This general finite-list statement is not asserted to be printed there."
+   }
+  },
+  {
+   "text": "Use the completeness and ultrametric inequality of [lem-trf-restricted-series-gauss-completion]. For $h=\\sum_\\nu h_\\nu X^\\nu$, define\n$$Q_i(h)=\\lim_{N\\to\\infty}\\sum_{|\\nu|\\le N}h_\\nu A_{i,\\nu},\\qquad R(h)=\\lim_{N\\to\\infty}\\sum_{|\\nu|\\le N}h_\\nu B_\\nu.$$\nBoth limits exist in $T_s$: differences of partial sums after degree $N$ have norm at most $\\sup_{|\\nu|>N}|h_\\nu|$, which tends to zero by restrictedness and finiteness of the bounded-degree sets. Each partial sum has norm at most $\\|h\\|_G$, so the limits have the same bound. Finite sums are linear in $h$; the identical estimates applied to $h-h'$ give $\\|Q_i(h)-Q_i(h')\\|_G,\\|R(h)-R(h')\\|_G\\le\\|h-h'\\|_G$. Taking limits of the finite monomial identities gives\n$$h=\\sum_iQ_i(h)H_i+R(h).$$\nIndeed, multiplication by the fixed $H_i$ is continuous by the cited submultiplicative estimate, and the left side is the convergent truncation of $h$. Every $R(h)$ has support in $S$, since each forbidden coefficient is zero in every partial sum and $|[X^\\mu](u-v)|\\le\\|u-v\\|_G$. These are explicit Cauchy estimates, not an invocation of an extension theorem.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Agent multivariate auxiliary proof. Compare Bosch, Lectures on Formal and Rigid Geometry (April 2008), §1.2 Theorem 8 proof, printed pp.12–13 (polynomial part plus contracting-error iteration); §1.3 Corollaries 7–9, printed pp.20–21 (context). Read online; local archival copy WANTED. This general finite-list statement is not asserted to be printed there."
+   }
+  },
+  {
+   "text": "Starting at $h_0=f$, define recursively\n$$u_{i,n}=Q_i(h_n),\\quad v_n=R(h_n),\\quad h_{n+1}=-\\sum_i u_{i,n}e_i.$$\nThe decomposition just obtained and $b_i=H_i+e_i$ give the exact identity\n$$h_n=\\sum_i u_{i,n}b_i+v_n+h_{n+1}.$$\nBy [lem-trf-restricted-series-gauss-completion], $\\|h_{n+1}\\|_G\\le c\\|h_n\\|_G$, since each $\\|u_{i,n}\\|_G\\le\\|h_n\\|_G$ and $\\|e_i\\|_G\\le c$. Induction from $h_0=f$ therefore yields $\\|h_n\\|_G\\le c^n\\|f\\|_G$ and $\\|u_{i,n}\\|_G,\\|v_n\\|_G\\le c^n\\|f\\|_G$ for all $n\\ge0$.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Agent multivariate auxiliary proof. Compare Bosch, Lectures on Formal and Rigid Geometry (April 2008), §1.2 Theorem 8 proof, printed pp.12–13 (polynomial part plus contracting-error iteration); §1.3 Corollaries 7–9, printed pp.20–21 (context). Read online; local archival copy WANTED. This general finite-list statement is not asserted to be printed there."
+   }
+  },
+  {
+   "text": "Set $q_i=\\lim_N\\sum_{n<N}u_{i,n}$ and $r=\\lim_N\\sum_{n<N}v_n$. These limits exist by [lem-trf-restricted-series-gauss-completion]: for $M>N$, the norm of either corresponding tail is at most $c^N\\|f\\|_G$, by repeated ultrametricity, and this tends to zero since $0<c<1$. Completeness puts the limits in $T_s$. Summing the exact identities from the preceding step telescopes to\n$$f=\\sum_i\\Bigl(\\sum_{n<N}u_{i,n}\\Bigr)b_i+\\sum_{n<N}v_n+h_N.$$\nLetting $N\\to\\infty$ gives $f=\\sum_iq_i b_i+r$: the finite products converge by submultiplicativity, and $\\|h_N\\|_G\\le c^N\\|f\\|_G\\to0$.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Agent multivariate auxiliary proof. Compare Bosch, Lectures on Formal and Rigid Geometry (April 2008), §1.2 Theorem 8 proof, printed pp.12–13 (polynomial part plus contracting-error iteration); §1.3 Corollaries 7–9, printed pp.20–21 (context). Read online; local archival copy WANTED. This general finite-list statement is not asserted to be printed there."
+   }
+  },
+  {
+   "text": "Each finite partial sum defining $q_i$ or $r$ has norm at most $\\|f\\|_G$ by the same ultrametric inequality [lem-trf-restricted-series-gauss-completion]; passing to the limit preserves this bound. Explicitly, if a limit had norm greater than $\\|f\\|_G$, choose a partial sum whose distance to it is smaller than that norm, and the ultrametric inequality gives a contradiction. Every $v_n=R(h_n)$ has support in $S$, so each forbidden coefficient of $r$ is the limit of zeros; coefficient evaluation is continuous because its absolute value is bounded by the Gauss norm. This proves the required remainder condition for all $i$. No uniqueness or Gröbner-basis property was used, and $f=0$, trivial absolute values and nondiscrete value groups satisfy all estimates unchanged.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Agent multivariate auxiliary proof. Compare Bosch, Lectures on Formal and Rigid Geometry (April 2008), §1.2 Theorem 8 proof, printed pp.12–13 (polynomial part plus contracting-error iteration); §1.3 Corollaries 7–9, printed pp.20–21 (context). Read online; local archival copy WANTED. This general finite-list statement is not asserted to be printed there."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-restricted-series-gauss-completion",
+  "def-trf-restricted-series-presentation",
+  "lem-trf-unit-leading-ring-polynomial-division"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Agent multivariate auxiliary proof. Compare Bosch, Lectures on Formal and Rigid Geometry (April 2008), §1.2 Theorem 8 proof, printed pp.12–13 (polynomial part plus contracting-error iteration); §1.3 Corollaries 7–9, printed pp.20–21 (context). Read online; local archival copy WANTED. This general finite-list statement is not asserted to be printed there."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Multivariate convergent division in a Tate algebra by finitely many nonzero restricted power series with remainder supported outside multiples of their leading monomials and Gauss norm bounds",
+   "results": {
+    "t": "2026-10-24T09:30:16Z",
+    "tool": "leanfinder",
+    "query": "Multivariate convergent division in a Tate algebra by finitely many nonzero restricted power series with remainder supported outside multiples of their leading monomials and Gauss norm bounds",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.IsWeierstrassDivisionAt",
+     "PowerSeries.exists_isWeierstrassDivision",
+     "PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod",
+     "PowerSeries.IsWeierstrassDivision",
+     "PowerSeries.IsWeierstrassDivisorAt.div",
+     "PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod",
+     "PowerSeries.weierstrassDiv",
+     "PowerSeries.IsWeierstrassDivisorAt.mod"
+    ],
+    "digest": "55dd26f2abf2e02d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: MonomialOrder.div (Mathlib/RingTheory/MvPolynomial/Groebner.lean:128–134, read) is polynomial division without Gauss bounds or analytic convergence; PowerSeries.exists_isWeierstrassDivision and IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod concern formal univariate adic series. MvPowerSeries.IsRestricted (Restricted.lean:33–34, read) defines the analytic class but does not prove this division statement. These do not specialize to the stated finite-list Tate division in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricted multivariable power series admit division with remainder by a finite list, with remainder monomials not divisible by the leading monomials",
+   "results": {
+    "t": "2026-10-24T09:30:46Z",
+    "tool": "leanfinder",
+    "query": "Restricted multivariable power series admit division with remainder by a finite list, with remainder monomials not divisible by the leading monomials",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MonomialOrder.div",
+     "MonomialOrder.div_set",
+     "MonomialOrder.div_single",
+     "PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod",
+     "MvPolynomial.divMonomial_add_modMonomial",
+     "PowerSeries.isWeierstrassDivisionAt_iff",
+     "MvPolynomial.modMonomial_add_divMonomial",
+     "MvPolynomial.divMonomial_add_modMonomial_single"
+    ],
+    "digest": "bc7513f50b768093"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: MonomialOrder.div (Mathlib/RingTheory/MvPolynomial/Groebner.lean:128–134, read) is polynomial division without Gauss bounds or analytic convergence; PowerSeries.exists_isWeierstrassDivision and IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod concern formal univariate adic series. MvPowerSeries.IsRestricted (Restricted.lean:33–34, read) defines the analytic class but does not prove this division statement. These do not specialize to the stated finite-list Tate division in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Convergent multivariate division with remainder in a Tate algebra with norm controlled quotients",
+   "results": {
+    "t": "2026-10-24T09:30:44Z",
+    "tool": "leansearch",
+    "query": "Convergent multivariate division with remainder in a Tate algebra with norm controlled quotients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.weierstrassDiv",
+     "PowerSeries.isWeierstrassDivisionAt_iff",
+     "PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod",
+     "PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod",
+     "PowerSeries.weierstrassDiv.congr_simp",
+     "MonomialOrder.div",
+     "PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem",
+     "PowerSeries.IsWeierstrassDivision.unique"
+    ],
+    "digest": "2db136bcd7ae4ee5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: MonomialOrder.div (Mathlib/RingTheory/MvPolynomial/Groebner.lean:128–134, read) is polynomial division without Gauss bounds or analytic convergence; PowerSeries.exists_isWeierstrassDivision and IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod concern formal univariate adic series. MvPowerSeries.IsRestricted (Restricted.lean:33–34, read) defines the analytic class but does not prove this division statement. These do not specialize to the stated finite-list Tate division in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRestricted\", \"div\"",
+   "results": {
+    "t": "2026-10-24T09:30:14Z",
+    "tool": "loogle",
+    "query": "\"IsRestricted\", \"div\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: MonomialOrder.div (Mathlib/RingTheory/MvPolynomial/Groebner.lean:128–134, read) is polynomial division without Gauss bounds or analytic convergence; PowerSeries.exists_isWeierstrassDivision and IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod concern formal univariate adic series. MvPowerSeries.IsRestricted (Restricted.lean:33–34, read) defines the analytic class but does not prove this division statement. These do not specialize to the stated finite-list Tate division in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "division|div_rem|remainder",
+   "results": {
+    "t": "2026-10-24T09:30:13Z",
+    "tool": "grep",
+    "query": "division|div_rem|remainder",
+    "sub": "RingTheory/MvPowerSeries",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/Basic.lean"
+    ],
+    "digest": "82fc8b87fd4599ae"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: MonomialOrder.div (Mathlib/RingTheory/MvPolynomial/Groebner.lean:128–134, read) is polynomial division without Gauss bounds or analytic convergence; PowerSeries.exists_isWeierstrassDivision and IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod concern formal univariate adic series. MvPowerSeries.IsRestricted (Restricted.lean:33–34, read) defines the analytic class but does not prove this division statement. These do not specialize to the stated finite-list Tate division in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "^theorem div|^theorem div_set|^theorem div_single|^lemma div",
+   "results": {
+    "t": "2026-10-24T09:33:04Z",
+    "tool": "grep",
+    "query": "^theorem div|^theorem div_set|^theorem div_single|^lemma div",
+    "sub": "RingTheory/MvPolynomial",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPolynomial/Groebner.lean",
+     "Mathlib/RingTheory/MvPolynomial/Groebner.lean",
+     "Mathlib/RingTheory/MvPolynomial/Groebner.lean"
+    ],
+    "digest": "3f90993ea5816a98"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: MonomialOrder.div (Mathlib/RingTheory/MvPolynomial/Groebner.lean:128–134, read) is polynomial division without Gauss bounds or analytic convergence; PowerSeries.exists_isWeierstrassDivision and IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod concern formal univariate adic series. MvPowerSeries.IsRestricted (Restricted.lean:33–34, read) defines the analytic class but does not prove this division statement. These do not specialize to the stated finite-list Tate division in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "^def IsRestricted|^def gaussNorm|^lemma isRestricted",
+   "results": {
+    "t": "2026-10-24T09:33:04Z",
+    "tool": "grep",
+    "query": "^def IsRestricted|^def gaussNorm|^lemma isRestricted",
+    "sub": "RingTheory/MvPowerSeries",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean"
+    ],
+    "digest": "3bd3b753cfd93f57"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: MonomialOrder.div (Mathlib/RingTheory/MvPolynomial/Groebner.lean:128–134, read) is polynomial division without Gauss bounds or analytic convergence; PowerSeries.exists_isWeierstrassDivision and IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod concern formal univariate adic series. MvPowerSeries.IsRestricted (Restricted.lean:33–34, read) defines the analytic class but does not prove this division statement. These do not specialize to the stated finite-list Tate division in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Convergent multivariate division of restricted power series by a finite list in a Tate algebra with Gauss norm bounds and standard monomial remainder",
+   "results": {
+    "t": "2026-10-24T14:21:02Z",
+    "tool": "leanfinder",
+    "query": "Convergent multivariate division of restricted power series by a finite list in a Tate algebra with Gauss norm bounds and standard monomial remainder",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.IsWeierstrassDivisionAt",
+     "PowerSeries.weierstrassDiv",
+     "PowerSeries.IsWeierstrassDivisorAt.div",
+     "PowerSeries.IsWeierstrassDivision",
+     "PowerSeries.exists_isWeierstrassDivision",
+     "PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod",
+     "PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod",
+     "PowerSeries.IsWeierstrassDivisorAt.mod"
+    ],
+    "digest": "d24029e77560540f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: MonomialOrder.div is polynomial division without analytic convergence or Gauss bounds; PowerSeries.exists_isWeierstrassDivision concerns univariate formal adic series. Read Groebner.lean:128–135, MvPowerSeries/Restricted.lean:33–34, GaussNorm.lean:55–57, and the WeierstrassPreparation formal-adic statements. None specializes in one line to finite-list Tate division."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded division in a nonarchimedean Tate algebra using polynomial division and a strictly contracting tail",
+   "results": {
+    "t": "2026-10-24T14:20:59Z",
+    "tool": "leanfinder",
+    "query": "Bounded division in a nonarchimedean Tate algebra using polynomial division and a strictly contracting tail",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.weierstrassDiv",
+     "PowerSeries.IsWeierstrassDivisorAt.div",
+     "PowerSeries.IsWeierstrassDivision",
+     "PowerSeries.exists_isWeierstrassDivision",
+     "PowerSeries.IsWeierstrassDivisionAt",
+     "PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod",
+     "PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod",
+     "PowerSeries.IsWeierstrassDivisorAt.mod"
+    ],
+    "digest": "c80663cce69b2114"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: MonomialOrder.div is polynomial division without analytic convergence or Gauss bounds; PowerSeries.exists_isWeierstrassDivision concerns univariate formal adic series. Read Groebner.lean:128–135, MvPowerSeries/Restricted.lean:33–34, GaussNorm.lean:55–57, and the WeierstrassPreparation formal-adic statements. None specializes in one line to finite-list Tate division."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restricted multivariate power series division with norm controlled quotients and remainder",
+   "results": {
+    "t": "2026-10-24T14:20:59Z",
+    "tool": "leansearch",
+    "query": "Restricted multivariate power series division with norm controlled quotients and remainder",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.exists_isWeierstrassDivision",
+     "PowerSeries.IsWeierstrassDivisionAt.mk",
+     "PowerSeries.weierstrassDiv",
+     "PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod",
+     "PowerSeries.IsWeierstrassDivision",
+     "PowerSeries.term_/ʷ_",
+     "PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod",
+     "PowerSeries.isWeierstrassDivisionAt_iff"
+    ],
+    "digest": "a773569218e16a90"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: MonomialOrder.div is polynomial division without analytic convergence or Gauss bounds; PowerSeries.exists_isWeierstrassDivision concerns univariate formal adic series. Read Groebner.lean:128–135, MvPowerSeries/Restricted.lean:33–34, GaussNorm.lean:55–57, and the WeierstrassPreparation formal-adic statements. None specializes in one line to finite-list Tate division."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRestricted\", \"div\"",
+   "results": {
+    "t": "2026-10-24T14:20:59Z",
+    "tool": "loogle",
+    "query": "\"IsRestricted\", \"div\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: MonomialOrder.div is polynomial division without analytic convergence or Gauss bounds; PowerSeries.exists_isWeierstrassDivision concerns univariate formal adic series. Read Groebner.lean:128–135, MvPowerSeries/Restricted.lean:33–34, GaussNorm.lean:55–57, and the WeierstrassPreparation formal-adic statements. None specializes in one line to finite-list Tate division."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|IsRestricted|gaussNorm",
+   "results": {
+    "t": "2026-10-24T14:20:58Z",
+    "tool": "grep",
+    "query": "TateAlgebra|IsRestricted|gaussNorm",
+    "sub": "RingTheory/MvPowerSeries",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean"
+    ],
+    "digest": "f8a23b96ae6f13fe"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: MonomialOrder.div is polynomial division without analytic convergence or Gauss bounds; PowerSeries.exists_isWeierstrassDivision concerns univariate formal adic series. Read Groebner.lean:128–135, MvPowerSeries/Restricted.lean:33–34, GaussNorm.lean:55–57, and the WeierstrassPreparation formal-adic statements. None specializes in one line to finite-list Tate division."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tate-ideal-best-approximation",
+  "date": "2026-10-24",
+  "group": "Q29"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Every Tate ideal admits best approximation for the Gauss norm. Auxiliary for best approximation: Bounded convergent division by finitely many Tate series.",
+   "via": [
+    "lem-trf-tate-ideal-best-approximation",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-tate-convergent-division",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Chose monomial divisions over the valuation ring using the general commutative-ring Mathlib division leaf (the existing leaf covers only fields), extended their norm-one coefficient families by explicit Cauchy estimates in the existing Tate completion node, and corrected the small tails by a geometrically convergent recurrence. Checked all cited statements and empty/zero-variable/trivial-valuation cases. BGR and local Bosch copy WANTED; this multivariate generalization is an agent proof, not an asserted printed theorem.",
+  "blueprint": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Every Tate ideal admits best approximation for the Gauss norm. Auxiliary for best approximation: Bounded convergent division by finitely many Tate series. Steps 1–7 refine only the already-recorded historical analytic auxiliary input. The latest blueprint contracts local terms by specialization; its chapter/unit route is not replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NX-36f4d6a76",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-36f4d6a76 (reviewer sub-agent of L); spot-checked: PASS. I read the whole proof and its seven steps hold. There is no repair note, so the re-split rule does not apply; the item was statement-only on the base and this delivery adds its first proof. The statement is unchanged and true. Step 2: restrictedness makes H_i (the coefficients of b_i with modulus 1) finite and nonzero, gives ||e_i||<1 attained, and finite t gives one common c<1. LM(H_i)=L(b_i), and LC(H_i) is a unit of V={|a|<=1}. Step 3: division over V is fixed one monomial at a time and uses only the leaf's decomposition and support clauses. Step 4: Cauchy tail bounds sup_{|nu|>N}|h_nu| come from completeness, ultrametricity, submultiplicativity and truncation, all in lem-trf-restricted-series-gauss-completion (same unit). Step 5: I re-derived h_n=sum u b+v+h_{n+1} (sign correct) and ||h_{n+1}||<=c||h_n||. Steps 6-7: the telescoped identity passes to the limit; the norm bounds and the support condition survive it. Cases checked by hand: b=X-a with |a|<1 and f=X gives q=1, r=a; also f=0, t=0, s=0, a constant divisor, trivial valuation, dense value group. New node lem-trf-unit-leading-ring-polynomial-division: a valid Mathlib leaf. MonomialOrder.div (Groebner.lean:128, [CommRing R] at line 57) has hypothesis IsUnit (leadingCoeff (b i)) and conclusion that no support exponent of r is componentwise >= degree(b i). The node's order hypotheses give MonomialOrder (additivity and 0 least imply componentwise monotone). It is not a duplicate: the existing lem-sfb-monomial-order-polynomial-division is field-only and cannot be used over V. DAG search for MonomialOrder.div, unit leading coefficients, and Tate/Gauss/convergent division found no restatement of the item. Sources: BGR and Bosch are absent locally and marked WANTED; proof_origin is agent, correctly. No SGA; no tool_uses needed. Minor, not repaired: lean_audit is missing on both nodes, and the node gives line 56 where the variable line is 57. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateConvergentDivision",
+  "declaration": "RestrictedSeries.exists_bounded_division",
+  "file": "lean/Sheaf/RingTheory/TateConvergentDivision.lean",
+  "statement": "theorem exists_bounded_division (K : Type u) [NormedField K] [IsUltrametricDist K] [CompleteSpace K] (s t : ℕ) (b : Fin t → MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin s ↦ (1 : ℝ))) (hb : ∀ i : Fin t, MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin s ↦ 1) (b i).val = 1) (f : MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin s ↦ (1 : ℝ))) : ∃ (β : Fin t → (Fin s →₀ ℕ)) (q : Fin t → MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin s ↦ (1 : ℝ))) (r : MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin s ↦ (1 : ℝ))), (∀ i : Fin t, MvPowerSeries.AchievesGaussNorm (norm : K → ℝ) (fun _ : Fin s ↦ 1) (b i).val (β i) ∧ ∀ μ : Fin s →₀ ℕ, MvPowerSeries.AchievesGaussNorm (norm : K → ℝ) (fun _ : Fin s ↦ 1) (b i).val μ → toDegLex μ ≤ toDegLex (β i)) ∧ f = (∑ i : Fin t, q i * b i) + r ∧ (∀ i : Fin t, MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin s ↦ 1) (q i).val ≤ MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin s ↦ 1) f.val) ∧ MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin s ↦ 1) r.val ≤ MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin s ↦ 1) f.val ∧ (∀ ν : Fin s →₀ ℕ, MvPowerSeries.coeff ν r.val ≠ 0 → ∀ i : Fin t, ¬ β i ≤ ν)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b731a5c2a",
+  "group": "NE",
+  "result": "fix",
+  "note": "Lean statement RestrictedSeries.exists_bounded_division matches the node clause by clause: K is a NormedField with IsUltrametricDist and CompleteSpace (trivial absolute value allowed); s,t : ℕ; T_s = IsRestricted.subring with weights 1; Mathlib gaussNorm; L(b_i) is an existential β pinned by AchievesGaussNorm plus DegLex maximality, whose existence follows from the hypotheses, so neither stronger nor weaker; f = (∑ q_i b_i) + r with correct parentheses; both norm bounds; remainder support uses the componentwise Finsupp order. Edge cases t=0, s=0, f=0, trivial absolute value and b=X−a checked. Node changed only in lean; lean.statement verbatim; stmt_deps and imports right; no new definitions; proof is sorry; docstrings complete; no duplicate (H4). Only fault, H11: the 'Second reading by NE' section is an admitted worker self-audit. Repaired by fixes/lem-trf-tate-convergent-division.report.md: worker report unchanged, then an independent clause-by-clause second reading under the required heading, with the self-audit kept as a subsection. No Lean changed, so no compile."
+ }
+}

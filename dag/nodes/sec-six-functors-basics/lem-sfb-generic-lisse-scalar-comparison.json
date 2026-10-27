@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-generic-lisse-scalar-comparison",
+ "kind": "statement",
+ "title": "Natural generic scalar comparison for all-continuous lisse coefficients",
+ "statement": "Let $X$ be a nonempty normal integral locally Noetherian scheme [def-pc-integral-scheme, pqf-def-locnoeth], where normal means that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Write $k=\\mathcal O_{X,\\eta}$ for its function field, choose a separable closure $k^s/k$ [def-pd-separable-closure], and put $G_k=\\operatorname{Aut}_k(k^s)$ with its profinite Krull topology. For any nonarchimedean normed field $A$ (a field with a multiplicative absolute value satisfying $|a+b|\\leq\\max(|a|,|b|)$), put $R_{A,T}=p_T^*\\underline A$, where $\\underline A(S)=C(S,A)$ for profinite $S$ [def-sfb-continuous-map-condensed-ring, sk-def-sfb-pulled-back-coefficients]. All module objects and lisse modules are those of [sk-def-sfb-module-objects, def-sfb-lisse-coefficient-module] on the small pro-etale site [def-weil-pbc-proetale-site]. Use all continuous functions with the norm topology. Let $B$ be another nonarchimedean normed field and $\\varphi:A\\hookrightarrow B$ a continuous field homomorphism. Along postcomposition by $\\varphi$ and pullback [def-sfb-continuous-map-condensed-ring-map], use ordinary internal scalar extension [sk-def-sfb-change-of-scalars]. For every lisse $R_{A,X}$-module $L$, the module\n$$L_B=R_{B,X}\\otimes_{R_{A,X}}L$$\nis lisse of the same rank, and there is a canonical isomorphism, natural in $L$,\n$$B\\otimes_A V_A(L)\\xrightarrow{\\sim} V_B(L_B),\\qquad b\\otimes v\\longmapsto b\\,v_B,$$\nwhere $V_A(L)=\\Gamma((\\operatorname{Spec}k^s)_{\\mathrm{proet}},L|_{k^s})$ and $v_B$ is the image under the scalar-extension unit. In bases, the transition matrices and generic Galois descent matrices of $L_B$ are the entrywise images under $\\varphi$ of those of $L$. Under the displayed isomorphism the $G_k$-action is $g(b\\otimes v)=b\\otimes\\sigma_L(g)v$, with the cocycle convention of [lem-sfb-field-separable-cech-coordinates]. A morphism with generic matrix $T$ extends to the matrix $\\varphi_*(T)$, and the displayed comparison commutes with every such morphism. If $X$ is quasi-compact and the two generic actions factor through the induced surjection $q:G_k\\to\\pi_1^{\\mathrm{et}}(X,\\bar\\eta)$ [def-galois-fibre-functor], the same comparison intertwines those factored actions, and also their transports by any one fixed topological isomorphism $\\pi_1^{\\mathrm{et}}(X,\\bar\\eta)\\cong\\pi_1^{\\mathrm{et}}(X,\\bar x)$. These assertions include rank zero and do not restrict continuous $B$-valued functions to functions valued in a finite subextension.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent entrywise tensor/descend comparison in the framework of Lemma 7.4.7, pp. 70–71; all-continuous norm topology, not the colimit topology of Example 7.1.7."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-pd-separable-closure",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-sfb-lisse-coefficient-module",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-field-separable-cech-coordinates",
+  "def-galois-fibre-functor",
+  "def-sfb-norm-continuous-monodromy-data",
+  "def-sfb-normal-generic-lisse-sections",
+  "def-sfb-field-separable-cech-nerve"
+ ],
+ "proof": [
+  {
+   "text": "For a scheme morphism $h:T\\to X$, abelian inverse image preserves colimits [det-pe-topos-functoriality-inverse-image] and tensor products [lem-sfb-finite-upper-star-tensor]. Apply it to the defining pair of arrows and coequalizer for $R_{B,X}\\otimes_{R_{A,X}}L$ [sk-def-sfb-change-of-scalars]. The monoidal natural coefficient identifications [sk-def-sfb-pullback-from-point-comp] identify that pair with the defining pair for $R_{B,T}\\otimes_{R_{A,T}}h^*L$: the two arrows respectively multiply the coefficient and act on the module. Their coequalizers are therefore canonically isomorphic. The comparison carries the generalized balanced tensor to the corresponding tensor and the unit $m\\mapsto1\\otimes m$ to that same unit. This also applies to a trivializing slice via its scheme inverse image, which is slice restriction [lem-sfb-coefficient-sections-localization]. These are coequalizers of sheaves; no assertion about sections commuting with arbitrary tensor products is used.",
+   "uses": [
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-sfb-finite-upper-star-tensor",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-pullback-from-point-comp",
+    "lem-sfb-coefficient-sections-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent coequalizer calculation for ordinary tensor, in the framework of Lemma 7.4.7, p. 70."
+   }
+  },
+  {
+   "text": "Choose the pro-etale slice trivializations $L|_{U_i}\\cong R_{A,U_i}^{\\oplus r_i}$ supplied by [def-sfb-lisse-coefficient-module]. Step 1 and [lem-sfb-ringed-site-free-matrix-scalar-extension] give $L_B|_{U_i}\\cong R_{B,U_i}^{\\oplus r_i}$. Thus the same cover proves lisseness, preserving every local rank. On an overlap the same free-matrix lemma sends a transition matrix $(a_{uv})$ to its image under the coefficient map, section by section. By [def-sfb-continuous-map-condensed-ring-map], that map is postcomposition with $\\varphi$ and pullback. A transition inverse maps to its inverse, since a ring map respects matrix products, so these are the transition maps of the given tensor sheaf. This includes rank zero.",
+   "uses": [
+    "def-sfb-lisse-coefficient-module",
+    "lem-sfb-ringed-site-free-matrix-scalar-extension",
+    "def-sfb-continuous-map-condensed-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent local-basis calculation, Lemma 7.4.7 framework, p. 70."
+   }
+  },
+  {
+   "text": "Put $h:\\operatorname{Spec}k^s\\to X$. Pulling back the trivializations of $L$ makes $h^*L$ lisse: inverse image preserves the covering [det-pe-topos-functoriality-inverse-image] and sends the coefficient ring to $R_{A,k^s}$ [sk-def-sfb-pullback-from-point-comp]. By [lem-sfb-field-separable-cech-coordinates], $h^*L\\cong R_{A,k^s}^{\\oplus n}$ and its sections are $A^n$, since $\\Gamma(\\operatorname{Spec}k^s,R_{A,k^s})=A$ [lem-sfb-galois-continuous-section-naturality]. Step 1 and the free-matrix lemma [lem-sfb-ringed-site-free-matrix-scalar-extension] identify $h^*L_B$ with $R_{B,k^s}^{\\oplus n}$, whose sections are $B^n$ by the same section identification for $B$. The balanced map $b\\otimes v\\mapsto b\\,v_B$ thus becomes $B\\otimes_A A^n\\to B^n$, $b\\otimes(a_j)\\mapsto(b\\varphi(a_j))$. Its inverse is $(b_j)\\mapsto\\sum_j b_j\\otimes e_j$, and the balancing relation checks both composites. The map was defined by the coefficient unit before choosing a basis, so it is canonical.",
+   "uses": [
+    "det-pe-topos-functoriality-inverse-image",
+    "sk-def-sfb-pullback-from-point-comp",
+    "lem-sfb-field-separable-cech-coordinates",
+    "lem-sfb-ringed-site-free-matrix-scalar-extension",
+    "lem-sfb-galois-continuous-section-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent generic finite-basis calculation, Lemma 7.4.7 framework, p. 70."
+   }
+  },
+  {
+   "text": "Let $u:L\\to M$ have generic matrix $T=(t_{ij})$ in chosen generic bases. The free-matrix lemma [lem-sfb-ringed-site-free-matrix-scalar-extension] gives matrix $\\varphi_*(T)$ after extension. For the comparison $\\theta$ of step 3, both paths of its naturality square send $b\\otimes v$ to $b\\,(u(v))_B$: indeed $u_B(1\\otimes v)=1\\otimes u(v)$ by the functorial coequalizer construction [sk-def-sfb-change-of-scalars]. Pure tensors generate the ordinary vector-space tensor, proving naturality. In particular the equality holds for changes of generic bases; the coordinate computations impose no choices on $\\theta$.",
+   "uses": [
+    "lem-sfb-ringed-site-free-matrix-scalar-extension",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent naturality calculation on pure tensors, Lemma 7.4.7 framework, p. 70."
+   }
+  },
+  {
+   "text": "Restrict $L$ first to $\\operatorname{Spec}k$ and use the cover $\\operatorname{Spec}k^s\\to\\operatorname{Spec}k$. By [lem-sfb-field-separable-cech-coordinates] its pullback to $\\operatorname{Spec}k^s$ is free and $\\Gamma(W_1,R_A)=C(G_k,A)$ for $W_1=(\\operatorname{Spec}k^s)^2_{/k}$; the descent isomorphism between the two face pullbacks is an automorphism of $R_A^{\\oplus n}$ on the slice over $W_1$, hence by [lem-sfb-ringed-site-free-matrix-scalar-extension] an invertible matrix $c$ over $C(G_k,A)$, with $c(gh)=c(g)c(h)$ in the specified convention by the cocycle condition on $W_2$. By step 1 the face pullbacks of $L_B$ are the scalar extensions of those of $L$, and its descent isomorphism is the functorial extension of that of $L$ [sk-def-sfb-change-of-scalars]; the free-matrix lemma and that node's coefficient-natural Cech coordinates identify its matrix with $\\varphi\\circ c$ over $C(G_k,B)$. The resulting action is therefore entrywise $\\varphi(c(g))$, and is continuous. The face-compatible coordinates have trivial action on the constant coefficients [lem-sfb-galois-continuous-section-naturality], so $g$ fixes $b\\in B$. In the basis of step 3, matrix multiplication now gives $\\theta(b\\otimes\\sigma_L(g)v)=\\sigma_{L_B}(g)\\theta(b\\otimes v)$, proving exactly $g(b\\otimes v)=b\\otimes\\sigma_L(g)v$. These are the full continuous-function rings in the cited nodes.",
+   "uses": [
+    "lem-sfb-field-separable-cech-coordinates",
+    "lem-sfb-galois-continuous-section-naturality",
+    "lem-sfb-ringed-site-free-matrix-scalar-extension",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent coefficient-natural descent calculation with the field Cech convention; Lemma 7.4.7 framework, pp. 70–71."
+   }
+  },
+  {
+   "text": "Finally assume both actions factor through the stipulated surjection $q:G_k\\to\\Pi$. Given $\\gamma\\in\\Pi$, choose $g$ with $q(g)=\\gamma$ and apply step 5. Factorization makes the equality independent of the lift, proving $\\Pi$-equivariance. For the one fixed topological isomorphism $a:\\Pi\\to\\pi_1^{\\mathrm{et}}(X,\\bar x)$, its transported action of $\\delta$ is the old action of $a^{-1}(\\delta)$; substitute this element into that equality. For $n=0$, step 3 has the unique map $0\\to0$ and its empty-sum inverse, and every matrix and equivariance identity still holds. Neither tensor computation restricts continuous functions to finite subextensions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Elementary descent of an intertwining identity along a surjection and precomposition by a fixed isomorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-sfb-finite-upper-star-tensor",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-pullback-from-point-comp",
+  "lem-sfb-coefficient-sections-localization",
+  "def-sfb-lisse-coefficient-module",
+  "lem-sfb-ringed-site-free-matrix-scalar-extension",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "lem-sfb-field-separable-cech-coordinates",
+  "lem-sfb-galois-continuous-section-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Explicit coequalizer and matrix argument in the framework of Lemma 7.4.7, pp. 70–71; not an appeal to its local-field classification for arbitrary normed fields."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary internal scalar extension of lisse pro etale sheaves along a continuous normed field embedding preserves local freeness and extends generic Galois cocycles entrywise naturally",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.map_ιFree_mapFree_hom; PresheafOfModules.restrictHomEquivOfIsLocallySurjective; KaehlerDifferential.isBaseChange_of_formallyEtale; PresheafOfModules.Sheafify.SMulCandidate.mk'; CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux; SheafOfModules.mapFree; SheafOfModules.freeHomEquiv_comp_apply; SheafOfModules.freeFunctor_map",
+   "date": "2026-10-22",
+   "verdict": "no match: related general algebra, sheaf or topological constructions do not state this entire normed-coefficient input or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic fibre of extension of scalars of a continuous coefficient locally free sheaf is tensor product of its Galois representation compatible with morphisms and descent",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.pullbackObjFreeIso; SheafOfModules.freeHomEquiv_freeMap; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; ModuleCat.Tilde.toOpen; PresheafOfModules.Monoidal.tensorObj; SheafOfModules.ιFree_mapFree_inv; PresheafOfModules.Monoidal.tensorObjMap",
+   "date": "2026-10-22",
+   "verdict": "no match: related general algebra, sheaf or topological constructions do not state this entire normed-coefficient input or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of lisse normed coefficient sheaves commutes with generic monodromy cocycles",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"extendScalars\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: related general algebra, sheaf or topological constructions do not state this entire normed-coefficient input or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "(lisse|proetale).*(scalar|[Ss]calar)|(generic|[Gg]eneric).*cocycle.*(scalar|[Ss]calar)",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: related general algebra, sheaf or topological constructions do not state this entire normed-coefficient input or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "(lisse|proetale).*(scalar|Scalar)|(generic|Generic).*Galois.*tensor",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: general free modules, presheaf tensor, localization, or finite Galois algebra do not state the natural generic comparison for all-continuous pro-etale coefficient modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars of locally free sheaves is compatible with their generic fibre and Galois action",
+   "results": "Hits: LinearMap.extendScalarsOfIsLocalization_apply, LinearMap.extendScalarsOfIsLocalization_apply', IsLocalizedModule.mapExtendScalars_apply_apply, Algebra.TensorProduct.instFree, SheafOfModules.restrictScalars, instSMulDistribClassAlgEquiv, PresheafOfModules.Sheafify.map_smul_eq, LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: general free modules, presheaf tensor, localization, or finite Galois algebra do not state the natural generic comparison for all-continuous pro-etale coefficient modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "Hits: PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: general free modules, presheaf tensor, localization, or finite Galois algebra do not state the natural generic comparison for all-continuous pro-etale coefficient modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of finite locally free pro etale sheaves over normed fields commutes with the generic Galois representation naturally",
+   "results": "Hits: InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj, InfiniteGalois.toAlgEquivAux_eq_liftNormal, RingHom.Etale.isStableUnderBaseChange, Algebra.Etale.comp, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.IsEtaleAt.comp",
+   "date": "2026-10-22",
+   "verdict": "no match: general free modules, presheaf tensor, localization, or finite Galois algebra do not state the natural generic comparison for all-continuous pro-etale coefficient modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally free sheaf of continuous coefficients has generic fibre compatible with tensoring along a continuous field homomorphism and entrywise monodromy matrices",
+   "results": "Hits: SheafOfModules.mapFree, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeMap, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.Presentation.mapGenerators, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.ιFree_mapFree_inv_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: general free modules, presheaf tensor, localization, or finite Galois algebra do not state the natural generic comparison for all-continuous pro-etale coefficient modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-continuous-algcl-monodromy",
+  "date": "2026-10-22",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; old proof Step 9: local scalar tensors, generic comparison and naturality; Step 8 simultaneous transport",
+   "via": [
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-generic-lisse-scalar-comparison",
+  "worker": "stage1",
+  "summary": "Q89: reused existing field Cech coordinates, general free-matrix scalar extension, inverse-image tensor and colimit preservation. Wrote tensor pullback, generic comparison, matrix naturality, action, and quotient transport explicitly. No statement change; no new nodes.",
+  "blueprint": "Realizes det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation, via normal-continuous-algcl-monodromy old proof step 9 (generic tensors and naturality) and step 8 (fixed transport), as recorded in blueprint.from.place. Ancestor command returns None for this existing chain.",
+  "tool_uses": [
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "Generic inverse-image/coefficient tensor machinery supports the prescribed coefficient-compatibility calculation; it replaces no step of the constructibility unit."
+   },
+   {
+    "node": "lem-sfb-finite-upper-star-tensor",
+    "why": "Generic inverse-image/coefficient tensor machinery supports the prescribed coefficient-compatibility calculation; it replaces no step of the constructibility unit."
+   },
+   {
+    "node": "lem-sfb-coefficient-sections-localization",
+    "why": "Generic inverse-image/coefficient tensor machinery supports the prescribed coefficient-compatibility calculation; it replaces no step of the constructibility unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-sfb-finite-upper-star-tensor",
+  "lem-sfb-coefficient-sections-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-d6ddef3e5",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-d6ddef3e5 (reviewer sub-agent of L); spot-checked: Read the item and all 10 cited statements in full; there are no new nodes. The statement, stmt_deps and blueprint fields are the same as in the copy Q26 created; only the proof was added. No repair note exists, so this is not a re-split. No SGA citation. Source checked: Bhatt–Scholze Lemma 7.4.7 and Remark 7.4.8, pp. 70–71 (the local-field classification). The proof is correctly marked agent-written and does not claim that classification for arbitrary normed fields. Tested φ=id, a proper field embedding, rank 0, m or n = 0, the zero morphism and trivial action: none of the claims fails. Step 1: lem-sfb-finite-upper-star-tensor allows any scheme morphism with Ab as the coefficient category, and inverse image is exact on abelian sheaves, so it keeps the coequalizer. Step 2: the free-matrix lemma on each slice keeps every local rank, and transition matrices go entrywise to their images. Step 3: both composites of b⊗(a_j)↦(bφ(a_j)) and its inverse Σb_j⊗e_j were checked. Step 4: naturality holds on pure tensors, by functoriality of scalar extension. Step 5: θ(b⊗c(g)a)=φ(c(g))θ(b⊗a), and the result does not depend on the cocycle convention. Step 6 is elementary. FIX (C1/C4, two citations): step 3 took Γ(Spec k^s,R_{A,k^s})=A from the field-Cech node, which only states Γ over (Spec k^s)/k; it now cites lem-sfb-galois-continuous-section-naturality for it. Step 5 read the descent matrix over C(G_k,A) off the field-Cech node, which gives constant matrices only on Spec k^s; it now cites lem-sfb-ringed-site-free-matrix-scalar-extension on the slice over W_1, plus sk-def-sfb-change-of-scalars for extending the descent isomorphism. proof_deps are unchanged. Accepted the declared tool uses det-pe-topos-functoriality-inverse-image, lem-sfb-finite-upper-star-tensor and lem-sfb-coefficient-sections-localization as general black-box tools. No duplicate of the item found in the DAG.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GenericLisseScalarComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.GenericLisseScalar.comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.extension_lisse",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.extension",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.pullUnderlying",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.baseUnit",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.chartUnit",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.IsExtendedCoefficientChart",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.ChartAssertions",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.charts",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.evalHom",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.pullMapSections",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.coefficientUnitArrow",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.scalar",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.scalar_laws",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.fiberModule",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.map",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.action",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.unitArrow",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.unitSource_eq",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.unitTarget_eq",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.unit",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.etaleFiber",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.quotient",
+   "AlgebraicGeometry.ProEtale.GenericLisseScalar.comparison"
+  ],
+  "file": "lean/Sheaf/Paper/GenericLisseScalarComparison.lean",
+  "statement": "theorem comparison [IsLocallyNoetherian X] (_hnormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) [Algebra A B] (_hA : IsNonarchimedean (norm : A → ℝ)) (_hB : IsNonarchimedean (norm : B → ℝ)) (hφ : Continuous (algebraMap A B)) : ∃ e : ∀ L : NormContinuousLisse A X, (B ⊗[A] NormalGenericLisse.geometricSections X A Ω L) ≃ₗ[B] NormalGenericLisse.geometricSections X B Ω ((extension X (algebraMap A B) hφ).obj L), (∀ (L : NormContinuousLisse A X) (b : B) (v : NormalGenericLisse.geometricSections X A Ω L), e L (b ⊗ₜ[A] v) = scalar X Ω ((extension X (algebraMap A B) hφ).obj L) b (unit X Ω (algebraMap A B) hφ L v)) ∧ (∀ (L M : NormContinuousLisse A X) (f : L ⟶ M) (b : B) (v : NormalGenericLisse.geometricSections X A Ω L), e M (b ⊗ₜ[A] map X Ω f v) = map X Ω ((extension X (algebraMap A B) hφ).map f) (e L (b ⊗ₜ[A] v))) ∧ (∀ (L : NormContinuousLisse A X) (g : Ω ≃ₐ[X.functionField] Ω) (b : B) (v : NormalGenericLisse.geometricSections X A Ω L), e L (b ⊗ₜ[A] action X Ω L g v) = action X Ω ((extension X (algebraMap A B) hφ).obj L) g (e L (b ⊗ₜ[A] v))) ∧ (∀ (L M : NormContinuousLisse A X) (f : L ⟶ M) (n m : ℕ) (c : Module.Basis (Fin n) A (NormalGenericLisse.geometricSections X A Ω L)) (d : Module.Basis (Fin m) A (NormalGenericLisse.geometricSections X A Ω M)) (i : Fin m) (j : Fin n), ((d.baseChange B).map (e M)).repr (map X Ω ((extension X (algebraMap A B) hφ).map f) (((c.baseChange B).map (e L)) j)) i = algebraMap A B (d.repr (map X Ω f (c j)) i)) ∧ (∀ (L : NormContinuousLisse A X) (n : ℕ) (c : Module.Basis (Fin n) A (NormalGenericLisse.geometricSections X A Ω L)) (g : Ω ≃ₐ[X.functionField] Ω) (i j : Fin n), ((c.baseChange B).map (e L)).repr (action X Ω ((extension X (algebraMap A B) hφ).obj L) g (((c.baseChange B).map (e L)) j)) i = algebraMap A B (c.repr (action X Ω L g (c j)) i)) ∧ ∀ (_hqc : CompactSpace X) (_hq : Function.Surjective (quotient X Ω)) (Ωx : Type u) [Field Ωx] [IsAlgClosed Ωx] (x : Spec (.of Ωx) ⟶ X) (a : Aut (etaleFiber X Ω) ≃ₜ* Aut (Scheme.flcFiber x)) (L : NormContinuousLisse A X) (ρA : Aut (etaleFiber X Ω) → NormalGenericLisse.geometricSections X A Ω L → NormalGenericLisse.geometricSections X A Ω L) (ρB : Aut (etaleFiber X Ω) → NormalGenericLisse.geometricSections X B Ω ((extension X (algebraMap A B) hφ).obj L) → NormalGenericLisse.geometricSections X B Ω ((extension X (algebraMap A B) hφ).obj L)), (∀ g v, ρA (quotient X Ω g) v = action X Ω L g v) → (∀ g v, ρB (quotient X Ω g) v = action X Ω ((extension X (algebraMap A B) hφ).obj L) g v) → (∀ (γ : Aut (etaleFiber X Ω)) (b : B) (v : NormalGenericLisse.geometricSections X A Ω L), e L (b ⊗ₜ[A] ρA γ v) = ρB γ (e L (b ⊗ₜ[A] v))) ∧ ∀ (δ : Aut (Scheme.flcFiber x)) (b : B) (v : NormalGenericLisse.geometricSections X A Ω L), e L (b ⊗ₜ[A] ρA (a.symm δ) v) = ρB (a.symm δ) (e L (b ⊗ₜ[A] v))",
+  "branch": "sheaf-dag",
+  "by": "Q108",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses actual generic sections and Spec(g) action from NormalGenericLisse, actual norm-continuous coefficients and ordinary internal extension. The unit is the evaluated internal arrow with endpoint equality transports; local charts, rectangular matrices, rank zero, quotient and simultaneous fixed basepoint transport are explicit. H2 repair of fac0019fb315: cite the definition owner def-sfb-normal-generic-lisse-sections instead of the generic-cocycle theorem, and directly cite def-sfb-field-separable-cech-nerve for closureObject. Lean source and signatures unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9926bfff3",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Re-delivery after the fac0019f RETURN for H2 and the theorem-stmt_dep rule. The Lean module is byte-identical to the one previously reviewed and accepted clause by clause (sha256 57fc00dc). The item changes only stmt_deps and lean.note: the theorem lem-sfb-normal-generic-lisse-cocycle is replaced by the new definition node def-sfb-normal-generic-lisse-sections, and def-sfb-field-separable-cech-nerve is added; the statement, proof and lean.statement are unchanged. The new node is an existing:true record on genericMap, genericModule, geometricSections, automorphism_over and automorphism in the live NormalGenericLisseCocycle module. I read their bodies: fromSpecStalk at the generic point, CondensedRing.upperStar, evaluation at closureObject, and Over.homMk of Spec(g). They match the node text and binders, the signature is verbatim, and all its stmt_deps are existing definition nodes. The declaration overlap with the theorem's record follows the live cech-nerve precedent. There is no duplicate and the item is still open live. The earlier advisories (flcFiber versus the finite-étale fibre; surjectivity as a hypothesis) are explained in the report. No compile, since no file was changed."
+ }
+}

@@ -147,14 +147,18 @@
    "traceChartCoordinate",
    "traceChartCoordinateQuotient",
    "traceChartParameterQuotient",
-   "traceChartCoordinateNonzerodivisors"
+   "traceChartCoordinateNonzerodivisors",
+   "traceChartRing.commRing",
+   "traceChartCoordinateQuotient.commRing",
+   "traceChartParameterQuotient.commRing"
   ],
   "file": "lean/Sheaf/RingTheory/ChartCoordinateNonzerodivisors.lean",
-  "statement": "theorem traceChartCoordinateNonzerodivisors {R : Type u} [CommRing R] [IsRegularLocalRing R] {d : ℕ} (t : Fin d → R) (ht : IsLocalRing.IsRegularSystemOfParameters (List.ofFn t)) (J : Finset (Fin d)) (hJ : J.Nonempty) (j : Fin d) (hj : j ∈ J) : (∀ (i : Fin d) (hi : i ∈ J.erase j), Function.Injective (fun x : traceChartCoordinateQuotient t J j i hi => Ideal.Quotient.mk _ (algebraMap R (traceChartRing t J j) (t j)) * x)) ∧ (∀ k : Fin d, k ∉ J → Function.Injective (fun x : traceChartParameterQuotient t J j k => Ideal.Quotient.mk _ (algebraMap R (traceChartRing t J j) (t j)) * x))",
+  "statement": "theorem traceChartCoordinateNonzerodivisors {R : Type u} [CommRing R]\n    [IsRegularLocalRing R] {d : ℕ} (t : Fin d → R)\n    (ht : IsLocalRing.IsRegularSystemOfParameters (List.ofFn t))\n    (J : Finset (Fin d)) (hJ : J.Nonempty) (j : Fin d) (hj : j ∈ J) :\n    (∀ (i : Fin d) (hi : i ∈ J.erase j),\n      Function.Injective (fun x : traceChartCoordinateQuotient t J j i hi =>\n        Ideal.Quotient.mk _ (algebraMap R (traceChartRing t J j) (t j)) * x)) ∧\n    (∀ k : Fin d, k ∉ J →\n      Function.Injective (fun x : traceChartParameterQuotient t J j k =>\n        Ideal.Quotient.mk _ (algebraMap R (traceChartRing t J j) (t j)) * x))",
   "branch": "newtargets-dag",
-  "by": "NN",
-  "date": "2026-10-18",
-  "existing": false
+  "by": "N9",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Module-mode interface repair: the recorded legacy non-module file cannot be imported by a module-mode consumer. Converted the same owning module to module mode with public statement imports and exposed declarations, preserving all definitions and the theorem signature; full source and proof docstrings supplied. No mathematical statement changes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -164,5 +168,16 @@
   "result": "pass",
   "note": "Reviewed the immutable node, dependencies, Lean module, source/report requirements, edge cases, and route constraints. The chart presentation and theorem statement match the node; required report sections and docstrings are present. scompile.py was invoked, with server confirmation delayed by heavy queue; the immutable worker report records a clean compile. Review saved to review.md."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

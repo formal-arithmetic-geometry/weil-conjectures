@@ -1,0 +1,260 @@
+{
+ "id": "lem-sfb-abelian-isogeny-quasi-inverse",
+ "kind": "statement",
+ "title": "An abelian-variety isogeny admits an integer quasi-inverse",
+ "statement": "Let $k$ be a field [def-weil-field], let $A,B$ be abelian varieties over $k$ [def-sc-abelian-variety], and let $u:A\\to B$ be an isogeny [def-sc-isogeny]. There exist an integer $n\\geq1$ and a $k$-group-scheme homomorphism $v:B\\to A$ [def-sc-group-scheme] such that\n$$v\\circ u=[n]_A,\\qquad u\\circ v=[n]_B,$$\nwhere $[n]$ denotes multiplication by $n$ [def-sc-mult-n]. No perfection of $k$, separability of $u$, or restriction on the characteristic is assumed.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Remark 8.6, printed p.36, and I Proposition 8.10, printed pp.38–39: factor multiplication through the quotient by the kernel. A positive integer annihilating the finite commutative kernel is supplied by Milne Algebraic Groups, Proposition 11.32, printed p.221."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-sc-isogeny",
+  "def-sc-group-scheme",
+  "def-sc-mult-n"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=\\ker u$ and let $i:K\\to A$ be its inclusion. By [def-sc-isogeny] and [lem-sc-kernel-subgroup], $K$ is a finite group scheme and $K(R)=\\ker(u(R))$. By [lem-sc-av-commutative], $A$ is commutative, hence so is its subgroup $K$. Apply [lem-sfb-finite-group-scheme-order-annihilator]: for $n=\\dim_k\\Gamma(K,\\mathcal O_K)$ one has $n\\geq1$ and $[n]_K=0$. Consequently $[n]_A\\circ i=0$, because a homomorphism commutes with repeated addition [def-sc-mult-n].",
+   "uses": [
+    "def-sc-isogeny",
+    "lem-sc-kernel-subgroup",
+    "lem-sc-av-commutative",
+    "lem-sfb-finite-group-scheme-order-annihilator",
+    "def-sc-mult-n"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.32, printed p.221; AV I Remark 8.6, printed p.36"
+   }
+  },
+  {
+   "text": "By [lem-sc-isogeny-degree], $u$ is finite and flat, and by [def-sc-isogeny] it is surjective. A finite morphism is affine [def-weil-finite-integral-morphism], so for every affine open $V\\subseteq B$, $u^{-1}(V)$ is affine and maps onto $V$. Taking this single affine open in the definition [def-weil-pbc-fpqc-covering] shows that $\\{u:A\\to B\\}$ is an fpqc covering.",
+   "uses": [
+    "lem-sc-isogeny-degree",
+    "def-sc-isogeny",
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022B, definition-fpqc-covering; Milne AV I Remark 8.6 quotient input"
+   }
+  },
+  {
+   "text": "The group operations give inverse morphisms $A\\times_kK\\to A\\times_BA$, $(a,t)\\mapsto(a,a+i(t))$, and $(a,a\\prime)\\mapsto(a,a\\prime-a)$; the second component of the latter factors through $K$ since $u(a\\prime-a)=0$ [lem-sc-kernel-subgroup]. The composites are identities by the group laws [def-sc-group-scheme]. Under this identification the projections are $a$ and $a+i(t)$. Their composites with $[n]_A$ agree, since $[n]_A(a+i(t))=[n]_A(a)+i([n]_K(t))=[n]_A(a)$ by Step 1 and [def-sc-mult-n]. These are identities of morphisms formed from group operations, including on nonreduced test schemes.",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "def-sc-group-scheme",
+    "def-sc-mult-n"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Remark 8.6, printed p.36, kernel quotient calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fpqc-representable-descent] to the singleton covering $u$ of Step 2, target scheme $A$, and morphism $[n]_A:A\\to A$. Step 3 is exactly its compatibility condition on the self-overlap. It gives a unique scheme morphism $v:B\\to A$ with $v\\circ u=[n]_A$. This morphism is over $k$: the structure morphisms $B\\to\\operatorname{Spec}k$ and $B\\xrightarrow{v}A\\to\\operatorname{Spec}k$ agree after $u$, and uniqueness in the same descent statement, now with target $\\operatorname{Spec}k$, makes them equal.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, lemma-fpqc-universal-effective-epimorphisms"
+   }
+  },
+  {
+   "text": "Let $m_A,m_B$ be the group laws. The maps $v\\circ m_B$ and $m_A\\circ(v\\times v)$ from $B\\times_kB$ to $A$ agree after $u\\times u$, because $u$ is a homomorphism and $v u=[n]_A$, which is a homomorphism [def-sc-mult-n, lem-sc-av-commutative]. More explicitly both restrictions send $(a,a\\prime)$ to $[n]_A(a)+[n]_A(a\\prime)$. The maps $\\operatorname{id}_A\\times u:A\\times_kA\\to A\\times_kB$ and $u\\times\\operatorname{id}_B:A\\times_kB\\to B\\times_kB$ are separately base changes of $u$, hence fpqc coverings by [lem-galois-fpqc-covering-base-change]. Apply uniqueness in [lem-weil-pbc-fpqc-representable-descent] first to the former and then to the latter to obtain $v m_B=m_A(v\\times v)$. Also $v(e_B)=v u(e_A)=[n]_A(e_A)=e_A$; thus $v$ is a group-scheme homomorphism [def-sc-group-scheme].",
+   "uses": [
+    "def-sc-mult-n",
+    "lem-sc-av-commutative",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, uniqueness; topologies.tex Tag 022D (lemma-fpqc), part (3)"
+   }
+  },
+  {
+   "text": "Finally $(u v)u=u[n]_A=[n]_Bu$, the second equality being the repeated-addition identity for the homomorphism $u$ [def-sc-mult-n]. The uniqueness clause of [lem-weil-pbc-fpqc-representable-descent] for the covering $u$ and target $B$ gives $u v=[n]_B$. Together with Step 4 and the positive integer $n$ of Step 1 this proves both required identities. No step assumed perfection, separability, or that $n$ is invertible in $k$.",
+   "uses": [
+    "def-sc-mult-n",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Remark 8.6, printed p.36; Stacks Tag 023Q for cancellation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-isogeny",
+  "lem-sc-kernel-subgroup",
+  "lem-sc-av-commutative",
+  "lem-sfb-finite-group-scheme-order-annihilator",
+  "def-sc-mult-n",
+  "lem-sc-isogeny-degree",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-galois-fpqc-covering-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Remark 8.6, printed p.36, with the quotient universal property expanded using Stacks Tag 023Q and Tag 022D(3); kernel annihilation from Milne Algebraic Groups Proposition 11.32, printed p.221."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isogeny of abelian varieties has a quasi inverse whose composites are multiplication by a positive integer",
+   "results": "8 hits: WeierstrassCurve.VariableChange.instInv, WeierstrassCurve.VariableChange.inv_def, WeierstrassCurve.exists_variableChange_of_j_eq, AlgebraicGeometry.Scheme.inv_hom_apply, AlgebraicGeometry.Scheme.hom_inv_apply, AlgebraicGeometry.Scheme.iso_inv_base_hom_base_apply, WeierstrassCurve.VariableChange.instGroup, AlgebraicGeometry.Scheme.iso_hom_base_inv_base_apply. The hits concern abstract group quotients, elliptic-curve variable changes and linear quasi-inverses, not homomorphisms of abelian varieties.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective homomorphism of abelian varieties with finite kernel admits a reverse homomorphism composing to multiplication by n",
+   "results": "8 hits: QuotientAddGroup.homQuotientZSMulOfHom_comp_of_rightInverse, AddCon.comapQuotientEquivOfSurj_symm_mk', AddHom.inverse, Function.Surjective.distribSMul, Con.quotientKerEquivOfSurjective, AddMonoidHom.fiberEquivKerOfSurjective, AddMonoidHom.liftOfSurjective, Con.comapQuotientEquivOfSurj_symm_mk'. The hits concern abstract group quotients, elliptic-curve variable changes and linear quasi-inverses, not homomorphisms of abelian varieties.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Isogeny\"",
+   "results": "0 hits: none. The hits concern abstract group quotients, elliptic-curve variable changes and linear quasi-inverses, not homomorphisms of abelian varieties.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isogen|quasiInverse",
+   "results": "11 hits: Mathlib/LinearAlgebra/RootSystem/Hom.lean, Mathlib/Algebra/Module/LinearMap/FiniteRange.lean, Mathlib/Algebra/Module/LinearMap/FiniteRange.lean, Mathlib/Algebra/Module/LinearMap/FiniteRange.lean, Mathlib/Algebra/Module/LinearMap/FiniteRange.lean, Mathlib/Algebra/Module/LinearMap/FiniteRange.lean, Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean, Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean. The hits concern abstract group quotients, elliptic-curve variable changes and linear quasi-inverses, not homomorphisms of abelian varieties.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isogen|quasiInverse",
+   "results": "{\"t\": \"2026-10-24T04:13:52Z\", \"tool\": \"grep\", \"query\": \"isogen|quasiInverse\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits concern elliptic-curve variable changes, abstract group kernels or linear maps, not reverse group-scheme homomorphisms for abelian-variety isogenies; Loogle and the AlgebraicGeometry source grep have zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Isogeny\"",
+   "results": "{\"t\": \"2026-10-24T04:13:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"Isogeny\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits concern elliptic-curve variable changes, abstract group kernels or linear maps, not reverse group-scheme homomorphisms for abelian-variety isogenies; Loogle and the AlgebraicGeometry source grep have zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective morphism of abelian varieties with finite scheme theoretic kernel is invertible up to multiplication by an integer",
+   "results": "{\"t\": \"2026-10-24T04:13:53Z\", \"tool\": \"leansearch\", \"query\": \"A surjective morphism of abelian varieties with finite scheme theoretic kernel is invertible up to multiplication by an integer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.tensorKerEquivOfSurjective_symm_tmul\", \"CategoryTheory.Abelian.epiWithInjectiveKernel_of_iso\", \"CategoryTheory.Abelian.epiWithInjectiveKernel\", \"CategoryTheory.Abelian.instIsMultiplicativeEpiWithInjectiveKernel\", \"AlgebraicGeometry.Surjective\", \"Module.Invertible.bijective_of_surjective\", \"AddMonoidHom.fiberEquivKerOfSurjective\", \"RingHom.quotientKerEquivOfSurjective\"], \"digest\": \"128949b6f72ed791\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits concern elliptic-curve variable changes, abstract group kernels or linear maps, not reverse group-scheme homomorphisms for abelian-variety isogenies; Loogle and the AlgebraicGeometry source grep have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isogeny of abelian varieties admits an integer quasi inverse with both composites multiplication by a positive integer",
+   "results": "{\"t\": \"2026-10-24T04:14:04Z\", \"tool\": \"leanfinder\", \"query\": \"An isogeny of abelian varieties admits an integer quasi inverse with both composites multiplication by a positive integer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.VariableChange.instInv\", \"WeierstrassCurve.VariableChange.instGroup\", \"WeierstrassCurve.VariableChange.inv_def\", \"WeierstrassCurve.VariableChange\", \"WeierstrassCurve.exists_variableChange_of_j_eq\", \"WeierstrassCurve.Projective.comp_equiv_comp\", \"WeierstrassCurve.Jacobian.comp_equiv_comp\", \"WeierstrassCurve.VariableChange.instMul\"], \"digest\": \"9a5d593c5e2086db\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits concern elliptic-curve variable changes, abstract group kernels or linear maps, not reverse group-scheme homomorphisms for abelian-variety isogenies; Loogle and the AlgebraicGeometry source grep have zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dual-isogeny-degree",
+  "date": "2026-10-24",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Auxiliary for the symmetric ample endomorphism-span input below det-thm-sf-ctf-stability-direct-images, proof (3): Milne AV I §14, the double-dual identification behind the Rosati involution. Biduality proof: apply Milne I Theorem 9.1 to the ample polarization before cancelling its degree. Auxiliary below dual-isogeny-degree: An abelian-variety isogeny admits an integer quasi-inverse.",
+   "via": [
+    "lem-sfb-dual-isogeny-degree",
+    "lem-sfb-abelian-poincare-biduality",
+    "lem-sfb-polarization-calculus-over-field",
+    "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-abelian-isogeny-quasi-inverse",
+  "worker": "stage1",
+  "summary": "Retained the complete arbitrary-field statement. Reused the existing finite commutative group-scheme order-annihilator instead of duplicating it. Expanded the kernel quotient into an explicit kernel-pair calculation, fpqc descent of multiplication, verification of the descended group law, and cancellation giving the other composite. No new nodes. Corrected the source attribution: AV Proposition 8.10 alone covers finite abstract groups over algebraically closed fields, so Stacks 023Q supplies the needed general descent.",
+  "blueprint": "Auxiliary below lem-sfb-dual-isogeny-degree in the inherited chain supporting det-thm-sf-ctf-stability-direct-images, proof (3). Read latest sk-thm-sf-ctf-stability/_section.md and direct-images.proof.md. The quotient construction remains Milne Remark 8.6. Whole-blueprint searches isogeny and quasi-inverse found no equivalent statement. blueprint_refs.py ancestor returns null, retained from the existing item with its explanatory place and full via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic scheme morphism descent and uniqueness implement the kernel quotient in Milne Remark 8.6 over arbitrary fields; no six-functor step or unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-13be113a0",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-13be113a0 (reviewer sub-agent of L); spot-checked: I read the whole item; the delivery adds no new nodes. Statement, source and blueprint are unchanged from the base (the old item was unsplit with no proof), and there is no re-split note, so this is the first split. Sources checked: Milne AV I Remark 8.6 (p.36) and Prop 8.10/8.11 (pp.38-39). Prop 8.10 covers only finite abstract groups over an algebraically closed field, so replacing the quotient with fpqc descent along u is a correct expansion of the source. Also checked: iAG Prop 11.32 (p.221) against lem-sfb-finite-group-scheme-order-annihilator (reviewed PASS 2026-10-23), Stacks 023Q against lem-weil-pbc-fpqc-representable-descent (Mathlib leaf), and 022D(3) against lem-galois-fpqc-covering-base-change (Mathlib leaf). Steps: (1) K=ker u is finite and commutative, and [n]_K=0 gives [n]_A∘i=0. (2) Finite plus affine plus flat plus surjective, so {u} is an fpqc covering by the definition. (3) A×_kK≅A×_BA through (a,t)↦(a,a+it), and [n] agrees on both projections because [n]_A is a homomorphism. (4) Descent gives v with vu=[n]_A; uniqueness with target Spec k makes v a k-morphism. (5) u×u=(u×id)(id×u), each factor a base change of u, so cancelling them in turn makes v a homomorphism. (6) (uv)u=u[n]=[n]u, and uniqueness gives uv=[n]_B. Off-unit lemmas (kernel-subgroup, av-commutative, isogeny-degree) are slopmaster2-closed. Edge cases checked: an isomorphism, dim 0, u=[m] (n=m^{2g}), Frobenius with an infinitesimal kernel, n divisible by char k. No duplicate among the 32 isogeny nodes. The only citer, lem-sfb-dual-isogeny-degree step 5, uses exactly this statement. No dependency cycle, no SGA. The tool_uses entry names a Mathlib leaf and is harmless. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.IsogenyQuasiInverse",
+  "declaration": "AlgebraicGeometry.IsIsogeny.exists_quasiInverse",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/IsogenyQuasiInverse.lean",
+  "statement": "theorem IsIsogeny.exists_quasiInverse {k : Type u} [Field k] {A B : Over (Spec (.of k))} [GrpObj A] [GrpObj B] [IsAbelianVariety A] [IsAbelianVariety B] (f : A ⟶ B) [IsIsogeny f] : ∃ n : ℕ, 1 ≤ n ∧ ∃ g : B ⟶ A, IsMonHom g ∧ f ≫ g = (𝟙 A : A ⟶ A) ^ n ∧ g ≫ f = (𝟙 B : B ⟶ B) ^ n",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2dbad0a05",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Clauses checked against the node: field k in any universe; A,B Over Spec k with GrpObj and IsAbelianVariety (proper, smooth, connected); IsIsogeny = IsMonHom + surjective + finite kernel, no separability; ∃ n≥1 ∃ g IsMonHom with f≫g=𝟙A^n and g≫f=𝟙B^n. 𝟙G^n is the def-sc-mult-n convention (torsionSubgroupScheme = ker(𝟙G^n)). Composition order and shared n correct; no extra hypotheses (commutativity not assumed). Edge cases: isomorphisms, dim 0, [char k], Frobenius over a non-perfect field; n=0 excluded as the node requires. No duplicate in Mathlib or project Lean; the only citer (dual-isogeny-degree step 5) uses this exact form. Docstrings carry sources, blueprint tag and proof steps 1-6; proof is sorry only; lean.statement verbatim; imports exist; report has Worker report and Second reading sections. Not recompiled (worker reports a clean compile). No findings."
+ }
+}

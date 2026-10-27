@@ -1,0 +1,110 @@
+{
+ "id": "def-diagonal-cyclic-cartier-frame",
+ "kind": "definition",
+ "title": "Normalized arrow-only cyclic coefficient reduction",
+ "statement": "Let l be prime, Y a scheme, P=ProjectiveLine Y, W=diagonalSurface Y and n natural. Put R=ULift(ZMod(l^(n+1))) and let cyclicMap be the map of condensed ring objects induced by the actual continuous PadicInt.toZModPow(n+1). Let cyclicLine on X be ordinary extension of zlLine(l,X) along this map, and cyclicLineMap its tensor unit [def-sfb-diagonal-coefficient-maps, def-sfb-diagonal-coefficient-endpoints]. A CyclicCartierFrame records exact finite realizations on P,W [def-sfb-diagonal-coefficient-finite-realization], the normalized coefficient-unit and supported-source Endpoints, the normalized line Endpoint, an IntegralRoots and a kernel-normalized FiniteRoots, a line isomorphism normalized by the n-th integral-root projection, and a FiniteSourceComparison [def-diagonal-finite-ordinary-comparisons]. It has no arrow or class equality as a field. finiteRealizedClass is Ext.homEquiv inverse of a supplied arrow conjugated by the supplied source and positive-line comparisons. Frame.reduce applies derivedScalars(cyclicMap) to any arrow from the supported Z_l coefficient to zlLine[2], conjugates by the frame Endpoints and applies finiteRealizedClass. These are actual constructions without any choice of a class or comparison witness.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-maps",
+  "def-sfb-diagonal-coefficient-endpoints",
+  "def-sfb-diagonal-coefficient-diagrams",
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-diagonal-finite-ordinary-comparisons",
+  "def-sfb-geo-cartier-interface",
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-cartier-reduction-data",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized derived scalar unit induces a bijection on Ext groups and finite coefficient changes preserve the supported Cartier class",
+   "date": "2026-10-27",
+   "results": "8 hits: Ext.chgUniv, Ext.homEquiv_chgUniv, Ext.mk₀_bijective, Ext.homLinearEquiv, Ext.homLinearEquiv_apply, Ext.mk₀_linearEquiv₀_apply, Ext.smul_eq_comp_mk₀, ProjectiveResolution.extAddEquivCohomologyClass_apply.",
+   "verdict": "Generic Ext APIs only. Local search found scalar_unit_ext_bijective (proved), geoCartierCanonicalClass_scalar (stated), and the completed and scalar endpoint interfaces; reuse them."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "date": "2026-10-27",
+   "results": "6 hits, including CategoryTheory.Functor.map_comp, PresheafOfModules.map_comp and map_comp_assoc.",
+   "verdict": "Functor composition API is available, but not the normalized completed/condensed/finite cyclic comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "CyclicCartier|CartierFrame|cyclic.*[Cc]artier",
+   "date": "2026-10-27",
+   "results": "0 hits.",
+   "verdict": "No existing cyclic Cartier frame or its projection/continuation theorem in the search index. Local rg additionally inspected DiagonalCoefficient*, DiagonalUniformizer*, GeoCartier*, CartierReduction*, and ScalarUnitExt."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalUniformizerCartierReduction",
+  "date": "2026-10-27",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension",
+   "via": [
+    "lem-diagonal-uniformizer-cartier-reduction",
+    "lem-diagonal-uniformizer-finite-normalization",
+    "lem-diagonal-coefficient-uniformizer-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCyclicCartierFrame",
+  "file": "lean/Sheaf/Paper/DiagonalCyclicCartierFrame.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.CyclicCartierFrame",
+  "statement": "structure CyclicCartierFrame (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.cyclicMap",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.cyclicMap_isMonHom",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.cyclicResidueFinite",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.cyclicLine",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.cyclicLineMap",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.finiteRealizedClass",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.CyclicCartierFrame",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.CyclicCartierFrame.reduce"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T021357-L-2763238",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T021357-L-2763238",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-negative-koszul-low-degrees",
+ "kind": "statement",
+ "title": "The two highest terms of an ordered negative Koszul complex",
+ "statement": "Let C be a small category, J a Grothendieck topology, O a sheaf of commutative rings, r a natural number, b a list indexed by Fin r of global sections of O, and m a natural number. Write M for the regular O-module and K for ringedNegativeKoszul O r b m [def-cbc-signed-koszul-completion-model, def-weil-pbc-ringed-koszul-system]. There exist isomorphisms e0: K.X(0) to M and e1: the finite biproduct of r copies of M to K.X(-1), such that e0.inv is the canonical empty-subset map ringedNegativeKoszulBasis O r b m empty 0. For every i, the ith biproduct inclusion followed by e1.hom, the differential K.d(-1,0), and e0.hom is (ringedKoszulScalar O (b i))^(m+1). This includes r=0: the degree-minus-one biproduct is then zero.",
+ "stmt_deps": [
+  "def-cbc-signed-koszul-completion-model",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "lemma-derived-completion-koszul (0A0E), the finite free complex in degrees -r through 0; more-algebra.tex, lemma-sequence-Koszul-complexes."
+ },
+ "proof": [
+  {
+   "text": "Use the coefficient ring of global sections of O, its identity map, and the sections b as coefficients. Apply the existing finite-coordinate theorem to the regular module complex M[0]. The left unitor identifies the negative Koszul tensor applied to M[0] with the actual negative Koszul complex. Transfer its subset-indexed biproduct coordinates through this unitor.",
+   "uses": [
+    "lem-cbc-signed-koszul-finite-coordinates",
+    "def-cbc-signed-koszul-completion-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree zero all nonempty-subset summands vanish since M[0] is concentrated in zero. Projection to the empty summand is an isomorphism to M, with inverse given by the empty inclusion. In degree minus one precisely the singleton summands survive. Delete zero summands using biproduct.fromSubtype and biproduct.toSubtype, and identify singleton subsets with Fin r. The canonical-summand identity in the finite-coordinate theorem, naturality of the left and right unitors, and equality of the two unitors at the unit object identify the inverse degree-zero coordinates with ringedNegativeKoszulBasis at the empty subset.",
+   "uses": [
+    "lem-cbc-signed-koszul-finite-coordinates",
+    "def-cbc-signed-koszul-completion-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the finite-coordinate differential matrix to the singleton {i} and the empty subset in degree minus one. The internal differential term vanishes, the index transport is the identity, and the Koszul sign is +1. This yields scalar multiplication by b_i^(m+1). Evaluate powers of the scalar endomorphism on local sections by induction; multiplication is commutative, so this is the displayed power of ringedKoszulScalar.",
+   "uses": [
+    "lem-cbc-signed-koszul-finite-coordinates",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-signed-koszul-finite-coordinates",
+  "def-cbc-signed-koszul-completion-model",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "lemma-derived-completion-koszul (0A0E), standard subset basis of the finite free negative Koszul complex."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero term of a negative Koszul complex is the ring and its last differential is the row of generator powers",
+   "results": "8 generic hits, including HomologicalComplex.alternatingConst, Rep.standardComplex.d and Algebra.Presentation constructions; no ordered ringed Koszul coordinate identification.",
+   "verdict": "No matching low-degree coordinate theorem.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*LowDegrees|Koszul.*last.*differential|Koszul.*degreeZero",
+   "results": "0 hits.",
+   "verdict": "No matching Mathlib declaration.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The degree zero term of a negative Koszul complex is the ring and its last differential is the row of generator powers",
+   "results": "8 hits: CochainComplex.mk_d_1_0, CochainComplex.ConnectData.d_negSucc, Homotopy.prevD_zero_cochainComplex, Rep.standardComplex.d, ChainComplex.mk'_d_1_0, CochainComplex.singleFunctor_obj_d, HomologicalComplex.single_obj_d, CochainComplex.HomComplex.δ_zero_cochain_comp.",
+   "verdict": "Generic complex differential identities do not identify the two highest terms of this ordered ringed Koszul tensor.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueKoszulCoefficientAugmentation",
+  "date": "2026-10-26",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof (1), application of Stacks 099M: finite free Koszul coefficient augmentation, degree-minus-one and degree-zero basis calculation.",
+   "via": [
+    "lem-sfb-adic-residue-koszul-coefficient-augmentation",
+    "lem-sfb-adic-residue-strict-koszul-augmentation",
+    "lem-sfb-adic-residue-quotient-finite-projection",
+    "lem-sfb-adic-residue-quotient-unit-universal",
+    "lem-sfb-adic-residue-cech-quotient-cone",
+    "lem-sfb-adic-complete-reduction-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedNegativeKoszulLowDegrees",
+  "file": "lean/Sheaf/CategoryTheory/RingedNegativeKoszulLowDegrees.lean",
+  "declaration": "CategoryTheory.ringedNegativeKoszulLowDegrees",
+  "statement": "theorem ringedNegativeKoszulLowDegrees\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u}) (r : ℕ)\n    (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) :\n    let M := SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)\n    let K := ringedNegativeKoszul O r b m\n    ∃ (e₀ : K.X 0 ≅ M) (e₁ : (⨁ fun _ : Fin r ↦ M) ≅ K.X (-1)),\n      e₀.inv = ringedNegativeKoszulBasis O r b m ∅ 0 ∧\n      ∀ i : Fin r, biproduct.ι _ i ≫ e₁.hom ≫ K.d (-1) 0 ≫ e₀.hom =\n        (ringedKoszulScalar O (b i)) ^ (m + 1)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T114141-L-2268861",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T114141-L-2268861",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

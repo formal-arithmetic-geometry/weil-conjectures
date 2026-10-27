@@ -1,0 +1,395 @@
+{
+ "id": "lem-sfb-projective-polarization-section-algebra",
+ "kind": "statement",
+ "title": "Section algebras and restriction charts of projective polarizations",
+ "statement": "Let $k$ be a field [def-weil-field], $X$ a projective finite-type $k$-scheme [def-kun-projective, def-weil-finite-type-morphism], and $L$ an invertible module [def-sc-invertible-module] such that some positive tensor power is the pullback of $\\mathcal O(1)$ under a closed embedding $X\\hookrightarrow\\mathbf P^n_k$. Put $S=\\bigoplus_{m\\geq0}H^0(X,L^{\\otimes m})$, with tensor-product multiplication [def-sc-invertible-section-ring]. Then $S$ is a finitely generated $k$-algebra and every $S_m$ is finite-dimensional over $k$. For every homogeneous $s\\in S_d$ with $d>0$, its nonvanishing open $X_s$ is affine of finite type over $k$, and the fraction map $S_{(s)}\\to\\Gamma(X_s,\\mathcal O_X)$, $a/s^n\\mapsto a|_{X_s}/s^n|_{X_s}$, is an isomorphism; here $S_{(s)}$ is the degree-zero part of $S[1/s]$. For every closed subscheme $Y\\hookrightarrow X$, the restriction $H^0(X,L^{\\otimes m})\\to H^0(Y,L^{\\otimes m}|_Y)$ is surjective for all sufficiently large $m$. These conclusions allow nonreduced and disconnected schemes.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0B5T, lemma-coherent-proper-ample, parts (1), (3), (4); high-degree restriction is part (4) applied to the coherent ideal of Y and its cohomology exact sequence. Charts: morphisms.tex Tag 0C6J, lemma-proper-ample-is-proj, and Tag 0EKE, lemma-proper-ample-delete-affine. The positive-power embedding hypothesis is the projective polarization convention."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-kun-projective",
+  "def-weil-finite-type-morphism",
+  "def-sc-invertible-module",
+  "def-sc-invertible-section-ring",
+  "def-weil-closed-immersion",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finite-type-algebra",
+  "pqf-def-cohomology",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose the given positive power r and closed immersion j. The uniqueness isomorphism between the tensor pullback adjunction and the usual pullback adjunction converts the specified polarization isomorphism to twistRestrict(j,1) ≅ L^r. This gives IsAmple(f,L). Pull back the coordinate sections: their nonvanishing opens are the inverse images of the standard affine opens, and they cover X. The comparison of zero-scheme support with the stalkwise nonvanishing locus includes empty and nonreduced schemes.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sfb-projective-coordinate-section",
+    "def-pc-projective-space-twist",
+    "lem-weil-pbc-section-nonvanishing-zero-locus",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every L^m is invertible and hence coherent. Apply the existing projective coherent cohomology finiteness theorem through an embedding of f, then the degree-zero cohomology isomorphism, to obtain finiteness of each S_m for the precise structural k-action in the statement.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-pc-projective-coherent-finiteness",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let p: O_X^(ι) → L^r be evaluation at the pulled-back coordinate sections. On each coordinate open one of these sections is a free generator, so p is epi. Its kernel K is quasi-coherent and of finite presentation on the locally Noetherian scheme X. Tensoring its kernel sequence by L^n is exact because tensoring by an invertible object is an equivalence. Serre vanishing gives H^1(K tensor L^n)=0 for n≥M. Therefore global sections of p tensor L^n are surjective. Decompose a section of the finite free source using its coordinate projections and the left unitor. After the tensor-power addition isomorphism, every section t in S_(r+n) is a sum Σ_i a_i b_i with b_i in S_n.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-sc-ext-tensor-exact",
+    "lem-pc-serre-vanishing",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "def-sc-invertible-section-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Give the direct sum its graded k-algebra structure explicitly: constants act through the structural map k→Γ(X,O_X) in degree zero, and the unitors prove compatibility with tensor multiplication. Choose finite k-spanning families in degrees n<r+M, and adjoin these together with the finitely many a_i. Strong induction on n proves every homogeneous section belongs to this subalgebra: low degrees follow by linear-span induction, and high degrees use the recurrence of the preceding step and n−r<n. Direct-sum induction then proves the subalgebra is the entire ring. This proves finite type without assuming S_0=k or generation in degree one.",
+   "uses": [
+    "def-sc-invertible-section-ring",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For s in S_d, d>0, tensor the coordinate sections to exponent d and transport them through (L^r)^d ≅ (L^d)^r. Their affine nonvanishing opens are unchanged and still cover X. Apply the existing source-library theorem isAffineOpen_compl_support_zeroLocus (Modules.AffineComplement) to this cover and s^r, using properness of f. Positive tensor powers have the same nonvanishing locus, hence X_s is affine. X is Noetherian, so its open X_s is quasi-compact; the open immersion followed by f is locally of finite type and quasi-compact.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-weil-pbc-section-nonvanishing-zero-locus",
+    "def-sc-invertible-module",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sfb-section-affine-complement-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restricted s is a free generator on X_s. The coefficient-hom theorem constructs the canonical map from homogeneous localization with precisely the numerator equation in the statement. The section-ring localization bijectivity theorem applies since X is quasi-compact and quasi-separated. Turn this same map into a ring equivalence using bijectivity; its fraction equation is unchanged, including zero localizations and the empty open.",
+   "uses": [
+    "lem-sc-section-ring-coefficient-hom",
+    "lem-sc-section-ring-localization-bijective",
+    "lem-weil-pbc-section-nonvanishing-zero-locus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a closed immersion i, its coherent defining ideal I has vanishing H^1(I tensor L^m) for m sufficiently large by Serre vanishing. The closed-immersion unit-kernel theorem identifies the kernel of the chosen pullback adjunction unit on L^m with the image of ideal multiplication. Since L^m is invertible, that multiplication is mono, so this image is isomorphic to I tensor L^m. The cohomology exact sequence gives surjectivity of the unit on global sections. Finally the canonical uniqueness isomorphism between this adjunction and tensorPullbackSectionAdjunction carries one unit to the other; its pushforward is an isomorphism on sections, preserving surjectivity.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-closed-immersion-unit-kernel",
+    "lem-pc-serre-vanishing",
+    "lem-sc-ext-tensor-exact",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sfb-projective-coordinate-section",
+  "def-pc-projective-space-twist",
+  "lem-weil-pbc-section-nonvanishing-zero-locus",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "def-sc-invertible-module",
+  "lem-pc-projective-coherent-finiteness",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-sc-ext-tensor-exact",
+  "lem-pc-serre-vanishing",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "def-sc-invertible-section-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-section-affine-complement-cover",
+  "lem-sc-section-ring-coefficient-hom",
+  "lem-sc-section-ring-localization-bijective",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-closed-immersion-unit-kernel"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R6",
+  "date": "2026-10-23",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0B5T(1),(3),(4): finite generation via the coordinate evaluation kernel and Serre vanishing, rather than the residue-class Proj comparison. Affineness uses the proved affine-complement theorem; localization uses coefficient and bijectivity theorems."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a projective scheme with an ample invertible sheaf the section ring is finitely generated and its Proj is the scheme with affine homogeneous localization charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A) {m : ℕ},\\n  f ∈ 𝒜 m → 0 < m → AlgebraicGeometry.IsAffineOpen (AlgebraicGeometry.Proj.basicOpen 𝒜 f)\", \"doc\": \"For a homogeneous element $ f $ in a graded ring $ \\\\mathcal{A} $, the basic open set $ D_+(f) $ in the projective spectrum $ \\\\operatorname{Proj}(\\\\mathcal{A}) $ is an affine open subset, meaning it is \"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                (AlgebraicGeometry.Proj.toLocallyRingedSpace 𝒜).restrict ⋯ ⟶\\n  \", \"doc\": \"The morphism of locally ringed spaces from the restriction of the projective spectrum $ \\\\text{Proj}(A) $ to the basic open set $ D_+(f) $ (defined by exclusion of the homogeneous element $ f $) to the\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) → [inst_3 : GradedRing 𝒜] → (AlgebraicGeometry.Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$, if the irrelevant ideal (elements with zero degree component) is contained in the ideal generated by homogeneous elements $\\\\{f_i\\\\}$ of positive degree, t\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"ProjectiveSpectrum\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubmonoidClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → Type u_1\", \"doc\": \"The projective spectrum of a graded ring $ A $, constructed from a commutative ring $ A $, a set-like additive submonoid structure $ \\\\sigma $ over $ A $, and a grading $ \\\\mathcal{A} : \\\\mathbb{N} \\\\to \\\\\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: existing Proj charts and properness start with a graded ring; none proves finite generation, high-degree restriction surjectivity, or section-algebra charts for a projective polarization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of powers of an ample line bundle on a proper scheme form a finitely generated graded algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"HomogeneousLocalization.Away.finiteType\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] {𝒜 : ℕ → σ}\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A] (f : A) (d : ℕ),\\n  f ∈ 𝒜 d → Algebra.FiniteType (↥(𝒜 0)) (HomogeneousLocalization.Away 𝒜 f)\", \"doc\": \"For a graded algebra $ A $ and a homogeneous element $ f $ of degree $ d $, the homogeneous localization $ A_f $ is a finitely generated algebra over the zeroth graded component $ A_0 $. This means th\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/FiniteType\", \"type\": \"∀ {S : Type u_1} {σ : Type u_2} {ι : Type u_3} [inst : DecidableEq ι] [inst_1 : AddCommMonoid ι] [inst_2 : CommRing S]\\n  [inst_3 : SetLike σ S] [inst_4 : AddSubgroupClass σ S] (𝒜 : ι → σ) [inst_5 : GradedRing 𝒜]\\n  [Algebra.FiniteType (↥(𝒜 0)) S], ∃ s, Algebra.adjoin ↥(𝒜 0) ↑s = ⊤ ∧ ∀ i ∈ s, ∃ n, n ≠\", \"doc\": \"In a graded algebra $\\\\mathcal{A}$ over a commutative semiring $R$, there exists a finite subset $S$ of homogeneous elements (each belonging to a non-zero graded component $\\\\mathcal{A}_n$ for $n \\\\neq 0\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (consisting of elements with zero zeroth homogeneous component) is contained in the ideal generated b\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A) {m : ℕ},\\n  f ∈ 𝒜 m → 0 < m → AlgebraicGeometry.IsAffineOpen (AlgebraicGeometry.Proj.basicOpen 𝒜 f)\", \"doc\": \"For a homogeneous element $ f $ in a graded ring $ \\\\mathcal{A} $, the basic open set $ D_+(f) $ in the projective spectrum $ \\\\operatorname{Proj}(\\\\mathcal{A}) $ is an affine open subset, meaning it is \"}\n  {\"name\": \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/FiniteType\", \"type\": \"∀ {S : Type u_1} {σ : Type u_2} {ι : Type u_3} [inst : DecidableEq ι] [inst_1 : AddCommMonoid ι] [inst_2 : CommRing S]\\n  [inst_3 : SetLike σ S] [inst_4 : AddSubgroupClass σ S] (𝒜 : ι → σ) [inst_5 : GradedRing 𝒜]\\n  [Algebra.FiniteType (↥(𝒜 0)) S], ∃ s, Algebra.adjoin ↥(𝒜 0) ↑s = ⊤ ∧ ∀ i ∈ s, SetLike.\", \"doc\": \"For any graded algebra $\\\\mathcal{A}$ over a commutative semiring, there exists a finite set $s$ of homogeneous elements such that the subalgebra generated by the zero-graded component $\\\\mathcal{A}(0)$\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: existing Proj charts and properness start with a graded ring; none proves finite generation, high-degree restriction surjectivity, or section-algebra charts for a projective polarization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAmple\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: existing Proj charts and properness start with a graded ring; none proves finite generation, high-degree restriction surjectivity, or section-algebra charts for a projective polarization"
+  },
+  {
+   "tool": "grep",
+   "query": "section.?ring|section.?algebra|isAmple|IsAmple",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"20\", \"text\": \"  the section ring is an Artinian ring.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"line\": \"1083\", \"text\": \"section Ring\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: existing Proj charts and properness start with a graded ring; none proves finite generation, high-degree restriction surjectivity, or section-algebra charts for a projective polarization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projective scheme is Proj of its finitely generated ample section algebra",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme\", \"type\": \": Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"ProjectiveSpectrum\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubmonoidClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → Type u_1\", \"doc\": \"The projective spectrum of a graded ring $ A $, constructed from a commutative ring $ A $, a set-like additive submonoid structure $ \\\\sigma $ over $ A $, and a grading $ \\\\mathcal{A} : \\\\mathbb{N} \\\\to \\\\\"}\n  {\"name\": \"ProjectiveSpectrum.mk\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubmonoidClass σ A] →\\n          {𝒜 : ℕ → σ} →\\n            [inst_3 : GradedRing 𝒜] →\\n              (asHomogeneousIdeal : HomogeneousIdeal 𝒜) →\\n                asHomogeneousIdeal.toIdeal.I\", \"doc\": \"The projective spectrum of a graded ring $\\\\mathcal{A}$ is constructed by taking prime homogeneous ideals in $\\\\mathcal{A}$ that do not contain the irrelevant ideal (the ideal of elements with zero zero\"}\n  {\"name\": \"AlgebraicGeometry.termProj|_\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme\", \"type\": \": Lean.ParserDescr✝\", \"doc\": \"A parser for terms using the `Proj| ` notation in algebraic geometry, which constructs the projective spectrum of a graded ring. This parser combines the symbol `Proj| ` with a term at precedence leve\"}\n  {\"name\": \"AlgebraicGeometry.Proj.iSup_basicOpen_eq_top'\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \"{ι : Type*} (f : ι → A) (hfn : ∀ i, ∃ n, f i ∈ 𝒜 n) (hf : Algebra.adjoin (𝒜 0) (Set.range f) = ⊤) :\\n  ⨆ i, Proj.basicOpen 𝒜 (f i) = ⊤\", \"doc\": \"If the subalgebra generated by the zero-graded component of a graded ring $\\\\mathcal{A}$ and a set of homogeneous elements $\\\\{f_i\\\\}$ equals $\\\\mathcal{A}$, then the union of the basic open sets $D_+(f_i\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \"[Algebra.FiniteType (𝒜 0) A] : LocallyOfFiniteType (Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \"[Algebra.FiniteType (𝒜 0) A] : QuasiCompact (Proj.toSpecZero 𝒜)\", \"doc\": \"If a graded ring $\\\\mathcal{A}$ is finitely generated as an algebra over its zero-graded component $\\\\mathcal{A}_0$, then the canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": X.OpenCover\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: existing Proj charts and properness start with a graded ring; none proves finite generation, high-degree restriction surjectivity, or section-algebra charts for a projective polarization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sections of high powers of an ample line bundle on a projective scheme to a closed subscheme is surjective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {d e : ℕ} {f : A} (hf : f ∈ 𝒜 d) {g : A} (hg : g ∈ 𝒜 e) {x : A} (hx : x = f * g),\\n  0 < d →\\n    Function.Surjective\\n      ⇑(Algebra.TensorProduct.lift (Hom\", \"doc\": \"Given a graded algebra $\\\\mathcal{A}$ over a commutative semiring, for homogeneous elements $f \\\\in \\\\mathcal{A}_d$ and $g \\\\in \\\\mathcal{A}_e$ with $d > 0$, the canonical algebra homomorphism from the ten\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ},\\n  f ∈ 𝒜 m →\\n    0 < m →\\n      Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec \", \"doc\": \"For a homogeneous element $ f $ of positive degree $ m $ in a graded ring $ A $, the continuous map from the projective spectrum $ \\\\operatorname{Proj}(A) $ to the prime spectrum $ \\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app I.subschemeι ↑U))\", \"doc\": \"For any affine open subset $U$ of a scheme $X$, the canonical morphism $\\\\iota: Z \\\\to X$ from the closed subscheme $Z$ defined by an ideal sheaf $\\\\mathcal{I}$ induces a surjective map $\\\\iota_U: \\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a positive integer $n$, and an element $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism induced by global sections composed with the preimage of the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a global section $f$, and a positive integer $n$ with $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism $\\\\text{fromOfGlobalSections}(\\\\mathcal{A}, f, hf)$ to the b\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$, a homogeneous element $t \\\\in \\\\mathcal{A}_d$ with $d > 0$, and a global section $x$ such that $f(t) = x$, this morphism constructs a scheme map from the basic open su\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.app_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ [AlgebraicGeometry.IsClosedImmersion f],\\n      Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app f U))\", \"doc\": \"Let $f: X \\\\to Y$ be a closed immersion of schemes, and let $U$ be an affine open subset of $Y$. Then the canonical ring homomorphism from the ring of sections of the structure sheaf of $Y$ over $U$ to\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: existing Proj charts and properness start with a graded ring; none proves finite generation, high-degree restriction surjectivity, or section-algebra charts for a projective polarization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The graded ring of sections of an ample invertible sheaf on a proper scheme over a field is finitely generated, its homogeneous pieces are finite dimensional, and its homogeneous localizations identify affine nonvanishing charts",
+   "results": "8 hits: AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.affineOpenCover, AlgebraicGeometry.Proj.isAffineOpen_basicOpen, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern Proj of an already given graded ring, affine closed-immersion sections, or module generators; they do not state the projective polarization section-algebra theorem or eventual restriction surjectivity"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionRing|section_ring|Serre.*vanish|ample.*coherent|coherent.*ample",
+   "results": "0 hits in Mathlib/AlgebraicGeometry: ",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern Proj of an already given graded ring, affine closed-immersion sections, or module generators; they do not state the projective polarization section-algebra theorem or eventual restriction surjectivity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a projective scheme with an ample line bundle the section ring is a finitely generated algebra and restrictions to a closed subscheme are eventually surjective",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.app_surjective, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.res_apply, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern Proj of an already given graded ring, affine closed-immersion sections, or module generators; they do not state the projective polarization section-algebra theorem or eventual restriction surjectivity"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, Algebra.FiniteType",
+   "results": "5 hits: AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.valuativeCriterion_existence",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern Proj of an already given graded ring, affine closed-immersion sections, or module generators; they do not state the projective polarization section-algebra theorem or eventual restriction surjectivity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre finiteness and Serre vanishing for coherent sheaves on projective schemes, finite generation of the section algebra of a polarization",
+   "results": "8 hits: AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.GeneratingSections.IsFiniteType, AlgebraicGeometry.Proj.openCoverOfISupEqTop, AlgebraicGeometry.Proj.isAffineOpen_basicOpen",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern Proj of an already given graded ring, affine closed-immersion sections, or module generators; they do not state the projective polarization section-algebra theorem or eventual restriction surjectivity"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsProper|isAffineOpen_basicOpen|toSpecZero|fromOfGlobalSections",
+   "results": "10 hits in Mathlib/AlgebraicGeometry/ProjectiveSpectrum: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern Proj of an already given graded ring, affine closed-immersion sections, or module generators; they do not state the projective polarization section-algebra theorem or eventual restriction surjectivity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-pgl-stable-quotient",
+  "date": "2026-10-22",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Section algebras and restriction charts of projective polarizations.",
+   "via": [
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-projective-polarization-section-algebra",
+  "worker": "stage1",
+  "summary": "Q27: retained the statement and all inherited provenance. Split the section-algebra proof by residue classes modulo the embedding power, coherent cohomology finiteness, canonical Proj charts, properness and Serre vanishing. Every input already has a node, so no new nodes. Read Stacks 0B5T, 01YS, 01Q1, 0C6J and 0EKE, checked every cited statement, and recorded current Mathlib searches.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration route via stable pointed-curve compactification: section algebras and restriction charts supporting the projective PGL quotient, precisely the existing blueprint.from.place. The inherited from.node is null; no new ancestor or unit realization is invented.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "projective implies proper, needed to apply the proper-over-separated lemma; this unit has no separate statement giving this generic scheme/cohomology tool."
+   },
+   {
+    "node": "lem-pc-closed-immersion-coherent-cohomology",
+    "why": "coherent pushforward, cohomology, and the natural projection formula for the fixed projective embedding and for the closed subscheme; this unit has no separate statement giving this generic scheme/cohomology tool."
+   },
+   {
+    "node": "lem-pc-twist-tensor",
+    "why": "multiplication of projective-space twists used to identify residue-class section modules; this unit has no separate statement giving this generic scheme/cohomology tool."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "tensor and pullback compatibility identifies the given polarization power with every projective-space twist; this unit has no separate statement giving this generic scheme/cohomology tool."
+   },
+   {
+    "node": "lem-pc-projective-space-coherent-finiteness",
+    "why": "finite-dimensionality of coherent cohomology on projective space; this unit has no separate statement giving this generic scheme/cohomology tool."
+   },
+   {
+    "node": "lem-weil-pbc-proj-polynomial-twist-chart",
+    "why": "standard affine charts of Proj(k[T_0..T_N]) and the transition rule of its glued twisting module, used to read off the nonvanishing opens of the coordinate sections and check ampleness directly from the given embedding; this unit has no separate statement giving this generic scheme tool."
+   },
+   {
+    "node": "lem-sc-ample-proj-local-chart",
+    "why": "canonical section-ring morphism and its affine local-chart isomorphisms; this unit has no separate statement giving this generic scheme/cohomology tool."
+   },
+   {
+    "node": "lem-sc-ample-proj-canonical-map",
+    "why": "identification of the canonical map on fractions, including constants; this unit has no separate statement giving this generic scheme/cohomology tool."
+   },
+   {
+    "node": "lem-trf-proj-separated",
+    "why": "absolute separatedness of Proj, used for properness of the canonical map; this unit has no separate statement giving this generic scheme/cohomology tool."
+   },
+   {
+    "node": "lem-weil-pbc-separated-cancellation",
+    "why": "separatedness over k follows from absolute separatedness of Proj; this unit has no separate statement giving this generic scheme/cohomology tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-over-separated",
+    "why": "the canonical k-morphism from proper X to separated Proj is proper; this unit has no separate statement giving this generic scheme/cohomology tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "quasi-compactness of open subschemes used for their finite type; this unit has no separate statement giving this generic scheme/cohomology tool."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "coherence of the defining quasi-coherent ideal on Noetherian X; this unit has no separate statement giving this generic scheme/cohomology tool."
+   },
+   {
+    "node": "lem-sc-ext-tensor-exact",
+    "why": "tensoring by an invertible module preserves the ideal short exact sequence; this unit has no separate statement giving this generic scheme/cohomology tool."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-serre-vanishing",
+    "why": "eventual H1 vanishing for the coherent defining ideal and ample L; this unit has no separate statement giving this generic scheme/cohomology tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-modules-enough-injectives",
+    "why": "the hypothesis needed to apply the derived-functor long exact sequence; this unit has no separate statement giving this generic scheme/cohomology tool."
+   },
+   {
+    "node": "lem-sc-global-sections-left-exact",
+    "why": "the left exactness hypothesis of the long exact sequence theorem; this unit has no separate statement giving this generic scheme/cohomology tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "the exact cohomology segment that turns H1 vanishing into restriction surjectivity; this unit has no separate statement giving this generic scheme/cohomology tool."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "coherence of finite-type quasi-coherent modules on the Noetherian schemes here; this unit has no separate statement giving this generic scheme/cohomology tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-sc-ext-tensor-exact",
+  "lem-weil-pbc-derived-functor-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-cae69ba58",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-cae69ba58 (reviewer sub-agent of L); spot-checked: Read all 12 steps, every cited statement, and Stacks 0B5T (coherent.tex lemma-coherent-proper-ample, proofs of (1), (3), (4)), 0C6J and 0EKE. The split follows 0B5T: the projection formula, residue classes mod r with 01YS finiteness, H^0 finiteness through the embedding, and Serre vanishing on the ideal of Y with the long exact sequence. Steps 6-7 follow 0C6J: f is an open immersion by the ample charts; Proj is separated, so f is proper and hence a closed immersion; density is not needed. Step 8 gets affineness of X_s from the closed immersion, then the local-chart iso and the fraction formula. Checked edge cases: X empty, s nilpotent, r>1, disconnected X (S_0 = k x k), nonreduced X, Y empty and Y = X. One C4 fault, repaired: step 5 cited lem-weil-pbc-projective-space-standard-charts, which is stated for S x_Z P^n_Z with rho^*O(1), while the item's P is Proj(k[T]) with the glued twist of def-pc-projective-space-twist. The step now cites lem-weil-pbc-proj-polynomial-twist-chart (same object; its closure has no trf/PD nodes) and derives the nonvanishing loci from e_l=(x_l/x_k)e_k. proof_deps and tool_uses were updated and the source place corrected. Batch 5: lem-trf-proj-separated is the Mathlib leaf Proj.instIsSeparated (general Proj separated, definitions-only closure). It is neither the trace formula nor Poincare duality nor a step of their proofs, so it is accepted; the non-trf node covers only polynomial rings. Statement unchanged; the item is not dropped and not split live by another group; no SGA. The 19 declared generic tool uses are accepted. No new nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectivePolarizationSectionAlgebra",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.projectivePolarizationSectionAlgebra",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectivePolarizationSectionAlgebra.lean",
+  "statement": "theorem projectivePolarizationSectionAlgebra (k : Type u) [Field k] (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of k)) [IsHProjective f] [LocallyOfFiniteType f] [QuasiCompact f] (L : X.Modules) [L.IsInvertible] (hpol : ∃ (ι : Type u) (_ : Finite ι) (j : X ⟶ ProjectiveSpace ι (Spec (CommRingCat.of k))), IsClosedImmersion j ∧ j ≫ (ProjectiveSpace ι (Spec (CommRingCat.of k))) ↘ Spec (CommRingCat.of k) = f ∧ ∃ r : ℕ, 0 < r ∧ Nonempty ((tensorPullback j).obj (ProjectiveSpace.twist ι (Spec (CommRingCat.of k)) 1) ≅ L.tensorPow r)) : (∃ ρ : k →+* InvertibleSectionRing L, (∀ c : k, ρ c = DirectSum.of (SectionRingComponent L) 0 (unitSectionsEquiv ⊤ (f.appTop ((Scheme.ΓSpecIso (CommRingCat.of k)).inv c)))) ∧ ρ.FiniteType) ∧ (∀ m : ℕ, @Module.Finite k (SectionRingComponent L m) _ _ (Module.compHom (SectionRingComponent L m) (f.appTop.hom.comp (Scheme.ΓSpecIso (CommRingCat.of k)).inv.hom))) ∧ (∀ (d : ℕ), 0 < d → ∀ s : sectionRingGrade L d, ∃ U : X.Opens, (U : Set X) = nonvanishingLocus (L.tensorPow d) (s.val d) ∧ IsAffineOpen U ∧ LocallyOfFiniteType (U.ι ≫ f) ∧ QuasiCompact (U.ι ≫ f) ∧ ∃ e : HomogeneousLocalization.Away (sectionRingGrade L) s.val ≃+* Γ(X, U), ∀ (n : ℕ) (a : sectionRingGrade L (n • d)), e (HomogeneousLocalization.Away.mk (sectionRingGrade L) s.property n a.val a.property) • (L.tensorPow (n • d)).presheaf.map (homOfLE (le_top : U ≤ ⊤)).op ((s.val ^ n) (n • d)) = (L.tensorPow (n • d)).presheaf.map (homOfLE (le_top : U ≤ ⊤)).op (a.val (n • d))) ∧ (∀ (Y : Scheme.{u}) (i : Y ⟶ X), IsClosedImmersion i → ∃ M : ℕ, ∀ m : ℕ, M ≤ m → Function.Surjective (fun t : SectionRingComponent L m ↦ ((tensorPullbackSectionAdjunction i).unit.app (L.tensorPow m)).app ⊤ t))",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ac175827",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Stage-2 statement of lem-sfb-projective-polarization-section-algebra; live node has only Q27's S1 split (no lean), snapshot differs only by the lean record; statement verbatim. Clauses match node and Stacks 0B5T(1),(3),(4)/0C6J/0EKE: hpol = closed immersion over k into ProjectiveSpace ι (Spec k), r>0, tensorPullback twist 1 ≅ L^r; ρ pinned to structure map in degree 0 with RingHom.FiniteType; Module.Finite via compHom for every m incl. 0; U = nonvanishingLocus, IsAffineOpen, finite type over k, ring iso Away ≃+* Γ(X,U) fixed by the division-free fraction formula (same as landed exists_sectionRing_proj_morphism; s^n free generator → unique); restriction = normalized tensorPullbackSectionAdjunction unit (1⊗m), eventually surjective for every closed immersion. Edge cases (empty X, nilpotent s, r>1, S_0≠k, Y empty/Y=X, nonreduced) ok; single universe u. All decls from def nodes/Mathlib; no duplicate found; sorry-only, source/blueprint docstrings, 12 proof steps, both report sections present. Advisory: IsHProjective/QuasiCompact implied by hpol. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261024T015959-L-2490435",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

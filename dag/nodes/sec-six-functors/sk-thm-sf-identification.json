@@ -273,7 +273,22 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-identification",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation"
+   ]
+  }
+ },
  "split_report": {
   "date": "2026-10-18",
   "item": "sk-thm-sf-identification",
@@ -327,5 +342,30 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-5d97d6e7d (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item and its 12 steps against the main-20261015 unit and proof text, all four new nodes, every cited statement, and the constructions in the proofs of sk-thm-sf-global-duality (steps 2-4), sk-thm-sf-verdier-exchange (steps 2, 3, 6) and sk-thm-sf-tensor-hom (steps 7, 9). The item statement is not weakened, and no SGA source is used. Checks: (1) Step 3 (Phi=b_1 Ra_*j) uses the same tensor-Hom chain as the one that builds the exchange map. (2) The normalization c=Ra^!(nu) follows from the identity transpose equation epsilon_Lambda Ra_!(c) alpha = nu epsilon_omega once alpha is the identity; the direction of c matches verdier-exchange step 2. (3) The exchange equations eta_K=b_1^{-1}RHom(C,nu), alpha_C=alpha^1_C Fib RHom(C,nu) and G=Fib(b_1^{-1})(alpha^1_C)^{-1} hold by naturality in N of the tensor-Hom exchange. (4) The fibre-adjunction claim beta^sharp=alpha^1 F(Phi) holds by naturality of t, which gives beta_K^sharp=B^{-1}. (5) Steps 8-12 are correct; I recomputed the counterexample X=s, K=R/pi: H^0(C^vee)=0 and H^1(C^vee)=R/pi. Batch-5 check: the cited nodes lem-sf-point, global-duality, tensor-hom, verdier-exchange and the point-fibre equivalence were already in the base item's proof. Global-duality and tensor-hom are in the unit's own route. None is a step of the trace formula or of Poincare duality. The Poincare duality assumption covers only constant coefficients over condensed Qlbar, and the closure paths reach only definitions or generic coefficient lemmas. So these citations are outside the assumptions. Fix (one fault): lem-sf-identification-counit-normalization is exactly the A_{E,n} case of the sibling node coefficient-transport (the report itself says so), and its statement leaves X and s undefined (B2). I drop it. coefficient-transport now states the conjugate direction explicitly, exchange-comparison now takes the normalization from coefficient-transport, and item Step 4 applies coefficient-transport at A_{E,n}. proof_deps is again the union of the step uses. The declared tool uses are accepted. Details are in review.md.; 3 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X/k$ be smooth, separated of pure dimension $d$, with $k$ algebraically\nclosed. For every admissible $\\Lambda$ and $K\\in\\Dctf(X,\\Lambda)$, purity gives\nisomorphisms in $\\Dctf(X,\\Lambda)$\n\n$$\n\\omega_X\\simeq\\Lambda_X(d)[2d],\\qquad\n\\mathbb D_XK\\simeq\\cHom_X(K,\\Lambda_X)(d)[2d].\n$$\n\nPut $K^\\vee=\\cHom_X(K,\\Lambda_X)$; when $K$ is locally perfect over $\\Lambda_X$, so\nis $K^\\vee$, and it is the ordinary dual. Let $\\operatorname{Tr}_X$ be the map\ninduced on $R\\Gamma_c$ by the smooth trace of $a_X$ [sk-def-sp-trace]. The pairing\nin $D(\\Lambda)$\n\n$$\n\\begin{aligned}\n\\beta_K:\\quad\nR\\Gamma_c(X,K)\\otimes^{\\mathbf L}R\\Gamma\\bigl(X,K^\\vee(d)\\bigr)[2d]\n&\\longrightarrow R\\Gamma_c\\bigl(X,\\Lambda_X(d)\\bigr)[2d]\\\\\n&\\xrightarrow{\\operatorname{Tr}_X}\\Lambda\n\\end{aligned}\n$$\n\nis perfect in the sense of [sk-def-pairing], and its adjoint is the canonical\nisomorphism\n\n$$\nR\\Gamma\\bigl(X,K^\\vee(d)\\bigr)[2d]\n\\xrightarrow{\\sim}\nR\\operatorname{Hom}_\\Lambda\\bigl(R\\Gamma_c(X,K),\\Lambda\\bigr).\n\\tag{1}\n$$\n\nIf $X$ is proper, $R\\Gamma_c$ may be replaced by $R\\Gamma$.\n\n*Complement.* If $X$ is proper, $K$ is locally perfect over $\\Lambda_X$ and\n$\\Lambda=A_{E,n}=\\mathcal O_E/\\pi_E^n$, the degreewise form of (1) gives perfect\npairings\n\n$$\n\\langle-,-\\rangle_i:H_c^i(X,K)\\times H^{2d-i}\\bigl(X,K^\\vee(d)\\bigr)\n\\longrightarrow\\Lambda\\qquad(i\\in\\mathbf Z),\n$$\n\nbecause this ring is self-injective, so that $\\operatorname{Hom}_\\Lambda(-,\\Lambda)$\nis exact.",
+  "proof": [
+   {
+    "text": "Corollary [sk-cor-sp-all-coefficients] identifies $\\omega_X$. Tensoring the\nsecond variable of internal Hom by an invertible Tate line and a shift commutes\nwith internal Hom. This gives the displayed description of $\\mathbb D_XK$. In the\nlocally perfect case the dual is computed by a finite-projective local model and\nevaluation is the familiar evaluation of that model. Under these identifications\nthe evaluation and exceptional counit of Theorem [sk-thm-sf-global-duality] are\nprecisely cup product, coefficient evaluation and the normalized smooth trace. Its\nadjoint is consequently (1). The complexes on the point are perfect by\nLemma [sk-lem-finite]. Properness identifies the two direct images, proving the\nlast statement.",
+    "uses": [
+     "sk-thm-sf-global-duality",
+     "sk-lem-finite"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Complement.* For a perfect point complex $C$, the shift convention\n$H^r(C[m])=H^{r+m}(C)$ and the identification\n$H^{-i}(C^\\vee)\\cong\\operatorname{Hom}_\\Lambda(H^i(C),\\Lambda)$, applied to\n$C=R\\Gamma_c(X,K)=R\\Gamma(X,K)$, turn $H^{-i}$ of (1) into the adjoint\n$H^{2d-i}(X,K^\\vee(d))\\to\\operatorname{Hom}_\\Lambda(H^i_c(X,K),\\Lambda)$ of\n$\\langle-,-\\rangle_i$. The identification holds because\n$\\operatorname{Hom}_\\Lambda(-,\\Lambda)$ is exact on $\\Lambda$-modules, so that\n$R\\operatorname{Hom}_\\Lambda(C,\\Lambda)$ is computed termwise and commutes with\ntaking cohomology. The ring $\\Lambda=A_{E,n}=\\mathcal O_E/\\pi_E^n$ is\nself-injective by Baer's criterion: its ideals are the $\\pi_E^jA_{E,n}$, a\nhomomorphism $\\varphi:\\pi_E^jA_{E,n}\\to A_{E,n}$ sends $\\pi_E^j$ to an element\nkilled by $\\pi_E^{n-j}$, hence to some $\\pi_E^ja$, and $\\varphi$ extends to\nmultiplication by $a$. Hence $H^{-i}$ of (1) is an isomorphism, and the pairings\n$\\langle-,-\\rangle_i$ are perfect.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

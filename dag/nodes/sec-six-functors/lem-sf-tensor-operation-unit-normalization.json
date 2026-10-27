@@ -1,0 +1,120 @@
+{
+ "id": "lem-sf-tensor-operation-unit-normalization",
+ "kind": "statement",
+ "title": "Pure-section normalization of the quotient tensor augmentation",
+ "statement": "Let l be a prime, E a finite extension of Q_l, and X a scheme. Let chain be a natural transformation from the completed-coefficient total tensor to the specified finite-tensor Roos complex [def-sf-tensor-completion-comparison]. Suppose that on each pair (P,Q) its component is tensorOperationUnit, the quotient Roos unit on the total tensor followed by the Roos image of the normalized tensorTowerIso [lem-pur-integral-ambient-operation-models]. Then chain satisfies IsTensorChain: at every positive quotient n and every homogeneous pure tensor x tensor y its first coordinate is the tensor of the two quotient-unit sections, and its shifted Roos coordinate is zero. No compactness, constructibility or invertibility hypothesis is needed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Integral reconstruction through thm-sf-pf-adic: strict quotient-tensor augmentation; Bhatt--Scholze Definition 3.4.10 and Lemma 6.5.5, Stacks 03EL, 07A4, 0941."
+ },
+ "stmt_deps": [
+  "def-sf-tensor-completion-comparison",
+  "lem-pur-integral-ambient-operation-models"
+ ],
+ "proof": [
+  {
+   "text": "Substitute the stated component identity for chain. Apply tensorOperationUnit_coordinates. Its second assertion immediately gives the zero shifted coordinate. Its first assertion expresses the first coordinate as the product quotient augmentation followed by the product of the strict tensor-tower comparison maps.",
+   "uses": [
+    "lem-pur-integral-ambient-operation-models",
+    "def-sf-tensor-completion-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose this first identity with the product projection to level n and evaluate the degree p+q map on the homogeneous pure tensor. Naturality of product maps reduces its right side to the level n strict tensor map applied to the level n augmentation.",
+   "uses": [
+    "lem-pur-integral-ambient-operation-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The uniquely normalized augmentation augmentation_existsUnique sends this tensor to the quotient generator with scalar 1. The normalization supplied by tensorTowerModel sends that generator to the tensor of the two quotient-unit sections. Compose these equalities to obtain the first clause of IsTensorChain. These formulas include zero sections and the empty scheme.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-pur-integral-ambient-operation-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "def-sf-tensor-completion-comparison",
+  "lem-pur-integral-ambient-operation-models"
+ ],
+ "proof_origin": "S4, 2026-10-27: written and proved from the existing operation-unit coordinate, quotient augmentation normalization and strict tensor-tower normalization theorems. Extracted as a self-contained proved lemma after profiling and simplifying the original proof; no new proof obligation.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "quotient tensor Roos augmentation evaluated on pure tensors has quotient unit tensor coordinates and zero shifted coordinate",
+   "results": "Eight hits about algebra/module presentations and ordinary tensor quotients; none states this Roos coordinate assertion.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project-specific coordinate and normalization theorems."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Pi.map_π",
+   "results": "Found CategoryTheory.Limits.Pi.map_π in Mathlib.CategoryTheory.Limits.Shapes.Products.",
+   "date": "2026-10-27",
+   "verdict": "Used to project the first coordinate to one quotient level; it does not supply the section normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorOperationUnit.*normal|IsTensorChain|tensorOperationUnit_coordinates",
+   "results": "Mathlib search returned zero hits. Project search locates IsTensorChain and tensorOperationUnit_coordinates, but no theorem establishing the former from the normalized operation unit. Blueprint search for tensor augmentation returned zero matching nodes.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate theorem or blueprint node; state the coordinate-normalization subargument explicitly."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.TensorCompletionModelExistence",
+  "date": "2026-10-27",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Integral reconstruction through thm-sf-pf-adic, strict quotient normalization of the tensor augmentation.",
+   "via": [
+    "lem-sf-tensor-completion-model-existence",
+    "def-sf-projection-tensor-coefficient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.TensorOperationUnitNormalization",
+  "file": "lean/Sheaf/SixFunctors/TensorOperationUnitNormalization.lean",
+  "declaration": "WeilConjectures.OpenFactorCoherence.tensorOperationUnit_normalized",
+  "statement": "theorem tensorOperationUnit_normalized\n    (chain : constructibleTensorTotal l E X ⟶ integralOperationsTensorComplexFunctor l E X)\n    (hchain : ∀ P Q, chain.app (P, Q) = tensorOperationUnit l E X P Q) :\n    IsTensorChain l E X chain",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T222756-L-694475",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T222756-L-694475",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

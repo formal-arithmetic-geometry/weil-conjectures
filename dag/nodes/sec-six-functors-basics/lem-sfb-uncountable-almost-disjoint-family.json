@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Take $I=\\mathcal P(\\mathbf N)$. By [lem-sfb-cantor-no-powerset-injection] with $X=\\mathbf N$, no function $I\\to\\mathbf N$ is injective. Thus $I$ is uncountable with exactly the meaning of [def-sfb-countable-set].",
+   "text": "Take I to be the universe lift of the power set of the natural numbers. If I were Countable, compose an injection I → ℕ with ULift.up to contradict Function.cantor_injective, the Mathlib declaration of [lem-sfb-cantor-no-powerset-injection]. This proves the required negation of [def-sfb-countable-set], in every universe.",
    "uses": [
     "lem-sfb-cantor-no-powerset-injection",
     "def-sfb-countable-set"
@@ -25,7 +25,7 @@
    }
   },
   {
-   "text": "Encode finite words in the digits $\\{0,1\\}$ by $c([])=1$ and $c(b::w)=2c(w)+b$, where $b::w$ is the word with head $b$ and tail $w$. All codes are positive by induction. The code is injective: induct on the sum of the lengths of two words with equal codes. An empty word cannot have the same code as a nonempty word, whose code is at least $2$. For two nonempty words, reduction modulo $2$ gives equal heads, and subtraction and division by $2$ give equal tail codes; the induction hypothesis gives equal tails. This proves equality of the words.",
+   "text": "For a subset S of ℕ and a natural number n, form the finite set initialSegment(S,n) of k < n belonging to S, by filtering Finset.range n. Code the pair (n,initialSegment(S,n)) with Mathlib Encodable.encode. The existing Encodable instances for ℕ, Finset ℕ and products give an injection into ℕ. Thus equal codes imply equal lengths and equal finite initial segments by Encodable.encode_injective and Prod.mk.inj. This replaces only the explicit binary arithmetic coding, not the prefix construction.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -34,16 +34,7 @@
    }
   },
   {
-   "text": "For $S\\in I$, define its digit $s(k)$ to be $1$ if $k\\in S$ and $0$ otherwise. Let $w_S(n)=[s(0),\\ldots,s(n-1)]$, including $w_S(0)=[]$, and put $A_S=\\{c(w_S(n)):n\\in\\mathbf N\\}\\subseteq\\mathbf N$. Equality $c(w_S(n))=c(w_T(m))$ implies equality of the two words by step 2, hence $n=m$ and $s(k)=t(k)$ for every $k<n$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), combinatorial auxiliary; explicit binary-prefix proof written by NF, not asserted by the blueprint paragraph."
-   }
-  },
-  {
-   "text": "For each $S$, the function $n\\mapsto c(w_S(n))$ is injective by the equality-of-lengths conclusion of step 3. If $A_S$ were finite, of size $r$, its elements $c(w_S(0)),\\ldots,c(w_S(r))$ would be $r+1$ distinct members of a set of size $r$, a contradiction. Therefore each $A_S$ is infinite in the sense of [def-sfb-finite-infinite-set].",
+   "text": "Define A_S as the range of n ↦ code(S,n). For fixed S this map is injective, since equal codes have equal first components n. Mathlib Set.infinite_range_of_injective therefore proves A_S.Infinite, with the meaning of [def-sfb-finite-infinite-set].",
    "uses": [
     "def-sfb-finite-infinite-set"
    ],
@@ -54,7 +45,7 @@
    }
   },
   {
-   "text": "Let $S\\ne T$ in $I$. Choose $k\\in\\mathbf N$ at which their membership digits differ; such a $k$ exists by extensionality of subsets. If $a\\in A_S\\cap A_T$, write $a=c(w_S(n))=c(w_T(m))$. Step 3 gives $n=m$. If $k<n$, equality of the words gives $s(k)=t(k)$, contradicting the choice of $k$. Thus $n\\le k$, so $A_S\\cap A_T\\subseteq\\{c(w_S(0)),\\ldots,c(w_S(k))\\}$. The right side has at most $k+1$ elements, and hence the intersection is finite as in [def-sfb-finite-infinite-set]. Together with steps 1 and 4 this gives every clause of the statement.",
+   "text": "For distinct lifted subsets S and T, set extensionality and ULift.ext give a coordinate k where membership differs. For any a in A_S ∩ A_T, choose lengths n,m giving its two codes. Their equality gives n=m and equal initial segments. If k<n, Finset membership in the equal initial segments gives k∈S iff k∈T, a contradiction. Hence n≤k. Thus the intersection is contained in the image of {n | n≤k} under code(S,·). That set is finite by Set.finite_le_nat and Set.Finite.image; apply Set.Finite.subset. This proves the finite-intersection clause of [def-sfb-finite-infinite-set].",
    "uses": [
     "def-sfb-finite-infinite-set"
    ],
@@ -73,7 +64,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-  "place": "Paragraph (3), agent-written combinatorial auxiliary; source paragraph gives the coefficient use, not the combinatorial theorem. The only non-elementary input is the Mathlib Cantor theorem."
+  "place": "Paragraph (3), agent-written combinatorial auxiliary. S9 formalizes the prefix construction using Mathlib Encodable.encode for the length and finite initial segment; Cantor remains the only non-elementary input. The source paragraph supplies the coefficient application, not this combinatorial theorem."
  },
  "mathlib_searches": [
   {
@@ -403,5 +394,27 @@
   "group": "NE",
   "result": "pass",
   "note": "Lean statement ∃ (I : Type u) (A : I → Set ℕ), ¬Countable I ∧ (∀ i, (A i).Infinite) ∧ ∀ i j, i ≠ j → (A i ∩ A j).Finite matches the node clause by clause; universe u declared and inhabited by a lift of Set ℕ; no extra hypotheses; lean.statement verbatim; node diff vs side-live only adds the lean record; stmt_deps Countable / Set.Finite / Set.Infinite are Mathlib records, publicly imported; cantor_injective proof dep exists; citer countable-endomorphism-module-reconstruction uses exactly this shape; no Mathlib/project duplicate, name clash or module-path clash; docstrings carry source place, blueprint tag and the node proof; proof is sorry only; both report sections present (second reading is the standard note). Advisory only: private Logic.Function.Basic import serves the future proof."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261023T105625-L-3583821",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

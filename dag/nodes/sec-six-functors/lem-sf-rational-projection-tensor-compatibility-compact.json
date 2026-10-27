@@ -1,0 +1,126 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility: local proper/open mate calculation after the shared tensor comparison"
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates",
+  "lem-sf-rational-pullback-tensor-localization-square"
+ ],
+ "proof": [
+  {
+   "text": "Apply rationalProjectionPullTensorSquare to the prescribed proper and open tensor-pullback comparisons, using their integral and rational canonical normalizations. Normalize the proper and open tensor-pullback isomorphisms to the operation functors. Their integral and rational model normalizations, canonicalRationalPullbackTensor_existsUnique, rationalProjectionTensorFunctorEq, and rationalModelNormalization identify the localized integral maps with the rational maps. Express this heterogeneous equality as the tensor/pullback comparison square. The proper square is independent of the compactification used to supply the proper tensor-pullback isomorphism.",
+   "uses": [
+    "lem-sf-rational-pullback-tensor-localization-square",
+    "def-pur-completed-pullback-tensor-comparison",
+    "def-sf-operation-stages"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove that an adjunction coefficient comparison preserves homEquiv using its unit equation. Apply this to the left projection map, whose transpose is the tensor of the open unit followed by the inverse open tensor-pullback map. Invert the tensor square, use naturality in the extended object, and use pullComposition to account for the factorization of f. Cancelling the specified open-projection isomorphisms gives the forward open square.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-sf-constructible-projection-mates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize the compactification projection into four factors: tensor of the support identification, the proper right-adjoint projection mate, the direct image of the open projection, and the inverse support identification. The counit equation preserves the proper factor. The open square preserves the open factor. Naturality, properIdentity, openIdentification and composition preserve the factored-support identification at both endpoints. Paste these four equations. This only cancels isomorphisms, never the proper or compact-support projection components. The calculation has no nonzero-object or nonempty-open hypotheses, so also covers zero inputs, empty opens and identity proper maps.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-sf-constructible-projection-mates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-rational-pullback-tensor-localization-square",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localized compact support projection component tensor comparison square",
+   "results": "No exact theorem; only generic naturality and localization transport declarations.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib theorem states this six-functor mate square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Generic functor map-composition theorem.",
+   "date": "2026-10-26",
+   "verdict": "Useful for the eventual categorical calculation, not a ready-made projection square."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupportProjectionComponent rationalization tensor comparison",
+   "results": "Local search finds only the prescribed projection definitions and the parent compatibility statement.",
+   "date": "2026-10-26",
+   "verdict": "No existing declaration discharges this local statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalProjectionTensorCompatibility",
+  "date": "2026-10-26",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "thm-sf-pf-field.proof.md, Compatibility: coefficient comparisons carry projection mates",
+   "via": [
+    "lem-sf-rational-projection-tensor-compatibility"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "id": "lem-sf-rational-projection-tensor-compatibility-compact",
+ "title": "Canonical localization carries the compact-support projection component",
+ "statement": "theorem rationalProjectionTensorCompatibility_compactSupport\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (H : SixFunctorHigherOperations D C E) :\n      ∀ {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n        (c : Compactification f.hom.left)\n        (K : sfIntegralConstructibleCategory C.l E X.obj.left)\n        (L : sfIntegralConstructibleCategory C.l E Y.obj.left),\n        (sfRationalConstructibleLocalization C.l E Y.obj.left).map\n            (compactSupportProjectionComponent H.integralExchange f c K L) ≫\n          (target H.rationalization\n            (rationalProjectionTensorComparison H) f c K L).hom =\n        (source H.rationalization\n          (rationalProjectionTensorComparison H) f c K L).hom ≫\n          compactSupportProjectionComponent H.rationalExchange f c\n            ((sfRationalConstructibleLocalization C.l E X.obj.left).obj K)\n            ((sfRationalConstructibleLocalization C.l E Y.obj.left).obj L)",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalProjectionTensorCompatibility",
+  "file": "lean/Sheaf/Paper/RationalProjectionTensorCompatibility.lean",
+  "declaration": "WeilConjectures.rationalProjectionTensorCompatibility_compactSupport",
+  "statement": "theorem rationalProjectionTensorCompatibility_compactSupport\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (H : SixFunctorHigherOperations D C E) :\n      ∀ {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n        (c : Compactification f.hom.left)\n        (K : sfIntegralConstructibleCategory C.l E X.obj.left)\n        (L : sfIntegralConstructibleCategory C.l E Y.obj.left),\n        (sfRationalConstructibleLocalization C.l E Y.obj.left).map\n            (compactSupportProjectionComponent H.integralExchange f c K L) ≫\n          (target H.rationalization\n            (rationalProjectionTensorComparison H) f c K L).hom =\n        (source H.rationalization\n          (rationalProjectionTensorComparison H) f c K L).hom ≫\n          compactSupportProjectionComponent H.rationalExchange f c\n            ((sfRationalConstructibleLocalization C.l E X.obj.left).obj K)\n            ((sfRationalConstructibleLocalization C.l E Y.obj.left).obj L)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-26"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility: shared tensor-model calculation in RationalProjectionTensorModels and the complete projection-mate calculations, E2, 2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-98fad",
+  "group": "R2",
+  "result": "fix",
+  "landing": "20261026T235930-L-1471377",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-41636",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261027T050552-L-238639",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + new RationalProjectionTensorModels vs clone (public signatures identical, moved decls verbatim) and nodes vs Lean; 2 delivered modules + 6 direct importers compiled together via lcompile --all, exit 0"
+ }
+}

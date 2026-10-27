@@ -48,19 +48,45 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-lem-nagata-sketch-affine-cover",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "The affine charts in [def-nagata-relative-affine-space] glue to a\nscheme over $S$. Their transition maps satisfy the cocycle condition,\nand for every $T\\to S$ there is a canonical isomorphism\n$\\mathbb A^n_S\\times_ST\\cong\\mathbb A^n_T$ compatible with the charts.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $S$ be a scheme and $n$ an index set.\n\n1. For every affine open $V\\subseteq S$ the chart\n$\\operatorname{Spec}\\bigl(\\mathcal O_S(V)[T_i:i\\in n]\\bigr)\\to\\mathbb A^n_S$\nof [def-nagata-relative-affine-space] is an open immersion onto the preimage\nof $V$, and these charts cover $\\mathbb A^n_S$.\n1. For affine opens $V'\\subseteq V$ of $S$, the chart over $V'$ is the chart\nover $V$ precomposed with the morphism induced by the restriction\n$\\mathcal O_S(V)[T_i]\\to\\mathcal O_S(V')[T_i]$, and these transition\nmorphisms satisfy the cocycle condition: for $V''\\subseteq V'\\subseteq V$ the\ntransition for $V''\\subseteq V$ is the composite of those for\n$V''\\subseteq V'$ and $V'\\subseteq V$.\n1. For every morphism $g\\colon T\\to S$ there is a canonical isomorphism\n$\\mathbb A^n_S\\times_ST\\cong\\mathbb A^n_T$ over $T$, compatible with the\ncharts: for affine opens $W\\subseteq T$ and $V\\subseteq S$ with\n$g(W)\\subseteq V$, the chart of $\\mathbb A^n_T$ over $W$ corresponds to the\nchart of $\\mathbb A^n_S$ over $V$, after changing coefficients along\n$g^\\sharp\\colon\\mathcal O_S(V)\\to\\mathcal O_T(W)$, together with the\nstructure morphism to $T$.",
   "proof": [
    {
-    "text": "On an affine $V=\\operatorname{Spec}(R)$, localization gives\n$R[T_1,\\ldots,T_n]_a\\cong R_a[T_1,\\ldots,T_n]$. On a triple of principal\nopens both composites send each polynomial coefficient to its image in the\nlocalization at the product of the denominators, so the cocycle equality is\nliteral. Scheme gluing therefore produces the asserted scheme and map to\n$S$. After base change to $T$, the same affine charts become\n$\\operatorname{Spec}(\\Gamma(W,\\mathcal O_T)[T_1,\\ldots,T_n])$ on affine\n$W\\subseteq T$; the chartwise identifications agree on overlaps and hence\nglue to the stated base-change isomorphism.",
+    "text": "(1) For an affine open $V=\\operatorname{Spec}(R)$ of $S$, the base change of\n$\\mathbb A^n_S=S\\times\\operatorname{Spec}\\mathbf Z[T_i:i\\in n]$ along the\nopen immersion $V\\to S$ is\n$V\\times\\operatorname{Spec}\\mathbf Z[T_i]=\\operatorname{Spec}(R[T_i])$, and\nthe chart is the resulting projection. As a base change of an open immersion\nit is an open immersion, and its image is the preimage of $V$. The affine\nopens of $S$ cover $S$, so their preimages cover $\\mathbb A^n_S$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(2) Both composites are morphisms into the fibre product\n$\\mathbb A^n_S$ whose two components agree: on the factor $S$ both are\n$\\operatorname{Spec}(R'[T_i])\\to V'\\to S$, and on the factor\n$\\operatorname{Spec}\\mathbf Z[T_i]$ both are induced by\n$\\mathbf Z[T_i]\\to R'[T_i]$. The cocycle condition holds already on rings,\nsince both composites send each polynomial to the polynomial obtained by\nrestricting its coefficients from $V$ to $V''$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(3) The square with sides $\\mathbb A^n_T\\to\\mathbb A^n_S$ (the base change\nof $g$), the two structure morphisms and $g$ is cartesian by the pasting law\nfor fibre products, since both $\\mathbb A^n_T$ and $\\mathbb A^n_S$ are base\nchanges of $\\operatorname{Spec}\\mathbf Z[T_i]$; this gives the isomorphism.\nThe compatibility with the charts is again a comparison of the two\ncomponents of morphisms into a fibre product, both of which are induced by\nthe ring map $\\mathcal O_S(V)[T_i]\\to\\mathcal O_T(W)[T_i]$ given by\n$g^\\sharp$ on coefficients.",
     "uses": [],
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-coefficient-ringed-square-normalization",
+ "kind": "statement",
+ "title": "Normalization of the specified coefficient ringed-square comparison",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, separated finite-type $k$-schemes $X,Y$, and a $k$-morphism $f:X\\to Y$ [sk-def-sfb-dc-setting]. Let $a:R\\to S$ be a morphism of commutative condensed rings such that $\\operatorname{Ext}_{a_Z}$ is exact for every scheme $Z$ [sk-def-sfb-coefficient-change]. On ordinary unbounded derived categories of internal module objects [sk-def-sfb-derived-categories] put $T_Z=L\\operatorname{Ext}_{a_Z}$, $U_Z=D(\\operatorname{Res}_{a_Z})$, $P_R=Lf_R^*$, $G_R=Rf_{R*}$, and similarly $P_S,G_S$ [sk-def-sfb-module-derived-pushpull]. Take the small pro-etale sites small relative to the module-sheaf universe [def-weil-pbc-proetale-site, def-weil-size-convention]. Write $E_{R,Z},E_{S,Z}$ for the fixed internal-module/section-module equivalences [lem-pd-module-ringed-topos-derived-comparison, lem-sfb-internal-section-scalar-adjunction], and use their specified derived operation and adjunction identifications. The section-ring coefficient maps define identity-underlying-topos morphisms $\\phi_Z:(Z,S_Z)\\to(Z,R_Z)$ and geometric ringed-topos morphisms $f_R,f_S$. Their coefficient square commutes with identity underlying commutation. Let $\\theta:P_ST_Y\\xrightarrow{\\sim}T_XP_R$ and $C:G_RU_X\\xrightarrow{\\sim}U_YG_S$ denote, after these identifications, the canonical ringed pullback and direct-image path comparisons of [lem-sfb-ringed-comparison-tensor-adjunction], with ringed paths $f_R\\circ\\phi_X$ and $\\phi_Y\\circ f_S$ respectively.\nLet $e:U_YG_S\\xrightarrow{\\sim}G_RU_X$ be the specified restriction/direct-image comparison [def-sfb-derived-comap-lower-star-iso], and $c:T_XP_R\\xrightarrow{\\sim}P_ST_Y$ its specified conjugate [def-sfb-derived-pull-iso]. Then $C=e^{-1}$ and $\\theta=c^{-1}$ as natural transformations between these actual derived functors. More precisely, if $I$ is a K-injective complex [def-pur-kinjective-complex] of $S_X$-module sheaves and $Q$ is localization, then under the canonical resolution identifications $C_{QI}=Q(\\vartheta_I^{-1})$ and $e_{QI}=Q(\\vartheta_I)$, where $\\vartheta:\\operatorname{Res}_{a_Y}f_{S*}\\cong f_{R*}\\operatorname{Res}_{a_X}$ is the identity-on-underlying-sheaves comparison [def-sfb-comap-lower-star-iso]. The equality $\\theta=c^{-1}$ concerns the comparison conjugate to these specified direct-image composition maps, rather than an arbitrarily chosen pullback isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E (lemma-derived-pushforward-composition), 0D6D (lemma-derived-pullback-composition); specified coefficient-square normalization extracted from blueprint main-20261015 proper-base-change-rational.proof.md (3)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-ringed-comparison-tensor-adjunction",
+  "def-sfb-derived-comap-lower-star-iso",
+  "def-sfb-derived-pull-iso",
+  "def-pur-kinjective-complex",
+  "def-sfb-comap-lower-star-iso"
+ ],
+ "proof": [
+  {
+   "text": "Work directly in the fixed internal-module coordinates used by the four definitions. Restriction is exact, and under the exact-extension hypothesis preserves K-injective complexes. The existing internal-module right-derived functors and their universal units therefore apply to both coefficient paths.",
+   "uses": [
+    "sk-def-sfb-coefficient-change",
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-comap-preserves-k-injectives",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6E (lemma-derived-pushforward-composition), 0D6D (lemma-derived-pullback-composition); specified coefficient-square normalization extracted from blueprint main-20261015 proper-base-change-rational.proof.md (3)"
+   }
+  },
+  {
+   "text": "Identify the two canonical composition isomorphisms for an arbitrary additive first functor and exact second functor: the construction which first derives both factors and then identifies the exact second factor with its termwise localization agrees with the direct exact-postcomposition construction. Apply rightDerived_ext; both universal-unit equations agree by naturality of rightDerivedFunctorIsoMapDerivedCategory and its hom_fac equation. This is the proved private helper exact_comp_compare.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6E (lemma-derived-pushforward-composition), 0D6D (lemma-derived-pullback-composition); specified coefficient-square normalization extracted from blueprint main-20261015 proper-base-change-rational.proof.md (3)"
+   }
+  },
+  {
+   "text": "Expand C and e and use the preceding equality for exact postcomposition. Their four factors are inverse factors in reverse order, including the inverse ordinary coefficient bridge. Thus C=e.symm as natural isomorphisms. The definitions of the pullback comparison and derivedPullIso are inverse conjugates along the same two composite adjunctions. The inverse-component formula of conjugateIsoEquiv gives theta=c.symm.",
+   "uses": [
+    "def-sfb-comap-lower-star-iso",
+    "def-sfb-derived-comap-lower-star-iso",
+    "def-sfb-derived-pull-iso",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6E (lemma-derived-pushforward-composition), 0D6D (lemma-derived-pullback-composition); specified coefficient-square normalization extracted from blueprint main-20261015 proper-base-change-rational.proof.md (3)"
+   }
+  },
+  {
+   "text": "Evaluate the universal-unit equation for the derived natural transformation of comapLowerStarIso on a K-injective I. Evaluate both composition-unit equations there. The source restriction preserves K-injectivity, so its resolution comparison is the inverse unit. The target exact-factorization comparison cancels with the exact-restriction derived-unit comparison by hom_fac. Substitute the two composition equations into the derived bridge equation; cancel the inverse resolution units. This proves targetResolution.inv followed by e followed by sourceResolution.hom equals Q of the ordinary bridge. The private objQ and factorsh helpers only normalize the canonical homotopy/complex localization identifications. No K-injectivity of the geometric pushforward of I is assumed.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-sfb-derived-comap-lower-star-iso",
+    "def-sfb-comap-lower-star-iso",
+    "lem-sfb-comap-preserves-k-injectives",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6E (lemma-derived-pushforward-composition), 0D6D (lemma-derived-pullback-composition); specified coefficient-square normalization extracted from blueprint main-20261015 proper-base-change-rational.proof.md (3)"
+   }
+  },
+  {
+   "text": "Regard the preceding equality as equality of isomorphisms, take inverse components, and substitute C=e.symm. This gives the requested formula for C, while the preceding step gives the formula for e. Assemble these with the two natural-transformation equalities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6E (lemma-derived-pushforward-composition), 0D6D (lemma-derived-pullback-composition); specified coefficient-square normalization extracted from blueprint main-20261015 proper-base-change-rational.proof.md (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-comap-preserves-k-injectives",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-sfb-comap-lower-star-iso",
+  "def-sfb-derived-comap-lower-star-iso",
+  "def-sfb-derived-pull-iso",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E (lemma-derived-pushforward-composition), 0D6D (lemma-derived-pullback-composition); specified coefficient-square normalization extracted from blueprint main-20261015 proper-base-change-rational.proof.md (3); C9 direct internal-coordinate universal-unit proof, 2026-10-23"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For exact scalar extension of condensed coefficients on pro-etale sheaves, the canonical derived direct-image comparison of the identity-topos ringed square equals the inverse restriction-pushforward comparison, and its pullback comparison is the specified inverse conjugate",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullback_id_comp, SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback composition and its conjugate do not identify the specified internal unbounded derived comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The direct image composition comparison for a commuting coefficient change square, evaluated on K-injective sheaves, equals derived restriction of scalars commuting with pushforward",
+   "results": "8 hits: SheafOfModules.pushforwardNatIso_hom, PresheafOfModules.pushforward₀CompToPresheaf, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pushforwardNatTrans_app_val_app",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are underived pushforward comparisons, with no K-injective or internal coefficient normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: source PullbackContinuous.lean lines 167-183 gives underived composition and conjugacy, not the specified derived coefficient square."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|conjugateEquiv_pullbackComp_inv",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167,177 are underived; source read through line 183."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward composition normalization for restriction of scalars on sheaves of modules",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj, PresheafOfModules.pushforward_obj_map_apply, PresheafOfModules.restrictScalars, SheafOfModules.pushforwardNatTrans_comp, PresheafOfModules.pushforward_id_comp, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforward, PresheafOfModules.pushforward",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf/presheaf scalar restriction and pushforward maps, not this unbounded comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|conjugateEquiv_pullbackComp_inv",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary sheaf/presheaf composition and scalar restriction or zeroth derived functors do not state this normalization on unbounded internal-module derived categories; PullbackContinuous.lean:167-183 read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction of scalars commutes with pushforward and agrees with ringed topos composition",
+   "results": "8 hits: PresheafOfModules.pushforward_obj_map_apply', PresheafOfModules.restrictScalarsObj, PresheafOfModules.pushforward₀CompToPresheaf, PresheafOfModules.pushforward_obj_map_apply, ModuleCat.restrictScalars, ModuleCat.restrictScalarsComp'App_hom_naturality, PresheafOfModules.pushforward_obj_obj, RingCat.moduleCatRestrictScalarsPseudofunctor_mapComp",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary sheaf/presheaf composition and scalar restriction or zeroth derived functors do not state this normalization on unbounded internal-module derived categories; PullbackContinuous.lean:167-183 read."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary sheaf/presheaf composition and scalar restriction or zeroth derived functors do not state this normalization on unbounded internal-module derived categories; PullbackContinuous.lean:167-183 read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived direct image composition comparison in a coefficient ringed square is inverse to derived restriction of scalars commuting with pushforward",
+   "results": "8 hits: SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardNatIso_inv, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, PresheafOfModules.pushforward₀CompToPresheaf, SheafOfModules.pushforwardNatIso_hom, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, PresheafOfModules.pushforwardCompToPresheaf, SheafOfModules.pushforwardNatIso",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary sheaf/presheaf composition and scalar restriction or zeroth derived functors do not state this normalization on unbounded internal-module derived categories; PullbackContinuous.lean:167-183 read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluate canonical right derived functor composition isomorphism on a K-injective complex; compare a natural isomorphism between two composites with exact scalar restriction",
+   "results": "8 hits: CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary sheaf/presheaf composition and scalar restriction or zeroth derived functors do not state this normalization on unbounded internal-module derived categories; PullbackContinuous.lean:167-183 read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-coefficient-projection-square",
+  "date": "2026-10-22",
+  "group": "Q100"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-rational",
+   "place": "paragraph (3), compatibility of scalar extension with the canonical maps: identify the restriction/pushforward square and its conjugate pullback comparison",
+   "via": [
+    "lem-sfb-coefficient-projection-square"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-coefficient-ringed-square-normalization",
+  "worker": "stage1",
+  "summary": "Proved the specified normalization by comparing both ringed composition maps on K-injective representatives and cancelling the exact restriction of the intermediate resolution map; derived the e formula from universal derived-unit compatibility, then used naturality and conjugate uniqueness. No new nodes; no statement changes.",
+  "blueprint": "Realizes paragraph (3) of det-thm-sfb-proper-base-change-rational.proof.md: compatibility of the canonical maps with scalar extension, specifically the direct-image composition and conjugate pullback comparisons.",
+  "tool_uses": [
+   {
+    "node": "lem-pd-module-ringed-topos-derived-comparison",
+    "why": "Generic exact internal-module/section-module equivalence including the actual derived operation and adjunction normalizations, already required by the item statement."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic scalar extension/restriction comparison including specified adjunctions; already required by the item statement."
+   },
+   {
+    "node": "lem-sfb-comap-preserves-k-injectives",
+    "why": "Generic flat restriction preservation of K-injectives; the proper-base-change unit does not prove this homological tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic termwise localization of an exact functor, needed to cancel the restriction of the resolution map."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of K-injective resolutions on a small ringed site, with no purity or duality input."
+   },
+   {
+    "node": "lem-sfb-ringed-comparison-tensor-adjunction",
+    "why": "Generic conjugacy of specified ringed path comparisons, already required by the item statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-comap-preserves-k-injectives",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-7bd761d45",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-7bd761d45 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery adds no new nodes. The statement is unchanged and true: I checked the case a=id, the case f=id, S=0 and zero complexes. Step 2 is correct: the eta coefficient square gives one R_Y-action, theta is the identity on sections, and the bridge is theta^{-1}. Step 3 is correct: exact Ext gives the finite-limit hypothesis of lem-sfb-comap-preserves-k-injectives, and the small site gives K-injective resolutions. Step 4: e_{QI}=Q(theta_I), recomputed from the construction in def-sfb-derived-comap-lower-star-iso (proof steps 1-3 with s=id). It reads a definition's construction, which is acceptable and disclosed in the report. Step 5: the kappa normalization of lem-weil-pbc-ringed-topoi-derived-pushforward-composition, with j=id on path f_R phi_X and Q(r_Y j) cancelled on path phi_Y f_S, gives C_{QI}=Q(theta_I^{-1}). Step 6 is elementary naturality. Step 7: the types are P1=T_XP_R, V1=G_RU_X, P2=P_ST_Y, V2=U_YG_S; def-sfb-conjugate-pull-iso gives c^c=e, and with theta^c=C, conjugate injectivity gives theta=c^{-1}. Sources checked: Stacks 0D6D/0D6E at sites-cohomology.tex l.3658/4011 and blueprint main-20261015 rational PBC proof paragraph (3); no SGA. FIX (C4): Step 1 claimed the two cited equivalence nodes identify the scalar adjunction T_Z -| U_Z with the ringed adjunction L phi_Z^* -| R phi_Z* of the identity-topos morphism, which neither states, and Step 7 needs it. The sibling node lem-sfb-coefficient-scalar-tensor-realization (Q100, same unit) states exactly this, does not depend on the item, and creates no cycle. I cited it in Steps 1 and 7 and recomputed proof_deps; the corrected file is under fixes/dag/nodes/sec-six-functors-basics/. tool_uses accepted: these are generic tools, and lem-pd-module-ringed-topos-derived-comparison was already accepted at the parent's review. Advisory for the maintainer: lem-sfb-flat-coefficient-square-normalization (Q32, unsplit) partly overlaps this item's comparison of d on K-injectives but is not a duplicate.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientRingedSquareNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.coefficient_ringed_square_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientRingedDirectImageComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientRingedPullbackComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientRingedSourceResolution",
+   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientRingedTargetResolution",
+   "AlgebraicGeometry.ProEtale.CondensedRing.coefficient_ringed_square_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientRingedSquareNormalization.lean",
+  "statement": "theorem coefficient_ringed_square_normalization (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (X₀ Y₀ : Over (Spec (CommRingCat.of k))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom] (f₀ : X₀ ⟶ Y₀) : (coefficientRingedDirectImageComparison a f₀.left).hom = (derivedComapLowerStarIso a f₀.left).inv ∧ (coefficientRingedPullbackComparison a f₀.left).hom = (derivedPullIso a f₀.left).inv ∧ ∀ (I : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X₀.left) Ab.{u + 1}) (condensedRingObj S X₀.left)) ℤ) [I.IsKInjective], (coefficientRingedSourceResolution a f₀.left I).inv ≫ (coefficientRingedDirectImageComparison a f₀.left).hom.app (DerivedCategory.Q.obj I) ≫ (coefficientRingedTargetResolution a f₀.left I).hom = DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (comapLowerStarIso a f₀.left) (ComplexShape.up ℤ)).inv.app I) ∧ (coefficientRingedTargetResolution a f₀.left I).inv ≫ (derivedComapLowerStarIso a f₀.left).hom.app (DerivedCategory.Q.obj I) ≫ (coefficientRingedSourceResolution a f₀.left I).hom = DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (comapLowerStarIso a f₀.left) (ComplexShape.up ℤ)).hom.app I)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The four helper definitions belong to this normalization node. Canonical ringed paths are expressed in the fixed internal-module coordinates by universal right-derived composition and conjugacy, rather than an arbitrary comparison isomorphism. Both K-injective formulas include the actual exact-factorization and resolution identifications."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e6338852",
+  "group": "ND",
+  "result": "pass",
+  "note": "Single-module delivery, node changes only lean, statement verbatim. Setting and exact-Ext hypotheses match the dc-setting and ChangeOfCoefficients interfaces with nothing stronger. C is a canonical internal-coordinate 0D6E construction (rightDerivedFunctorCompIso, derived inverse of comapLowerStarIso, exact-composition iso), not defined as e.symm; the generic canonicalRingedDirectImageComparison is uninstantiable (RingedTensorCorner forces site universe u vs pro-etale u+1/u). theta is the conjugate of C along the composite derived adjunctions, as the node's last sentence asks, not via derivedPullIso; direction checked. Clauses C.hom=e.inv, theta.hom=c.inv and both K-injective representative formulas match the node, with canonical resolution identifications and no K-injectivity assumed for f_S* I. Edge cases a=id, f=id, S=0, empty scheme covered; single universe u, none forced. No hollow defs, sorry only in the theorem, docstrings and 7-step plan present. Advisories: clause 1 near-definitional; five private imports unused by the statement; two equivalence stmt_deps used only through the internal-coordinate rendering. No compile needed (no FIX); worker reports clean 30.7/32.5 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261023T165917-L-2043559",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

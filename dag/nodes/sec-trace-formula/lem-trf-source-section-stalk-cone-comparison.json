@@ -1,0 +1,243 @@
+{
+ "id": "lem-trf-source-section-stalk-cone-comparison",
+ "kind": "statement",
+ "title": "Restriction-insertion comparison in both point-stalk cone coordinates",
+ "statement": "Fix the finite-field coefficient datum [def-trf-coefficient-conventions]: $k=\\overline{\\mathbf F}_q$, $s=\\operatorname{Spec}k$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$. All schemes below have $\\ell$ invertible and use compatible small pro-etale sites [def-weil-pbc-proetale-site]. Put $\\widehat R_T=\\lim_n(A_n)_T$. Use $D^b_c(T,R)$ of [def-weil-derived-complete-integral-detailed], completed pullback of [def-pur-integral-derived-operations], and point sections $\\operatorname{Fib}_s$ of [def-weil-finite-coefficient-point]. For a geometric point $v:s\\to T$ and $M\\in D^b_c(T,R)$ put $J_v(M)=\\operatorname{Fib}_s(Lv^*M)$. Stalks and their representatives $[U,u,a]$ mean [def-weil-proetale-geometric-stalk]. For a strict tower $T_\\bullet$ of complexes with transitions $t_n$, write $H(T_\\bullet)=\\operatorname{Cone}(1-s_T:\\prod_nT_n\\to\\prod_nT_n)[-1]$, $s_T((x_n))=(t_nx_{n+1})$, with degree-$i$ coordinates $(b,a)\\in\\prod_nT_n^{i-1}\\oplus\\prod_nT_n^i$ and differential $d(b,a)=(-db-(1-s_T)a,da)$.\n\nLet $N\\in D^b_c(s,R)$, $\\alpha\\in\\operatorname{Aut}(k)$, $\\delta=\\operatorname{Spec}(\\alpha)$ and $q:Q\\to N$ any flat-term K-flat representative. Put $Q_n=Q\\otimes_{\\widehat R_s}(A_n)_s$, $\\mathcal H_u=H(((Q_n)_u)_n)$, and $e_u:J_u(N)\\xrightarrow{\\sim}\\mathcal H_u$ as in [lem-trf-bounded-quotient-stalk-realization]. Use the identity unit to identify $J_{\\mathrm{id}}(N)$ with $\\operatorname{Fib}_sN=\\Gamma(s,N)$. Write $c_{\\delta,\\mathrm{id},N}=\\Gamma(s,\\chi_{\\mathrm{id},\\delta,N}^{-1})$ for the specified comparison of [lem-trf-stalk-compositor-tower-realization], and $R_{\\mathrm{id},\\alpha,\\bullet}$ for the germ tower map of [lem-trf-germ-reparametrization-derived-descent].\n\nLet $\\rho_{\\delta,N}:\\Gamma(s,N)\\to\\Gamma(s,\\delta^{-1}N)$ be restriction along $\\delta$ followed by inverse-image colimit insertion and sheafification. With the scalar action transported by the canonical coefficient isomorphism it is a natural $R$-linear isomorphism. Put\n$$j_{\\delta,N}=\\Gamma(s,\\kappa^\\delta_N)\\rho_{\\delta,N},$$\nwhere $\\kappa^\\delta$ is the specified chosen-resolution comparison [def-weil-inverse-image-pullback-comparison]; it is invertible on this derived-complete domain by [lem-weil-isomorphism-derived-pullback-comparison-normalization]. At finite level, restriction, insertion, scalar insertion and the finite stalk comparison send a section $a$ to $[s,\\delta,a]$, using source lift $\\mathrm{id}_s$ and target lift $\\delta$.\n\nThe normalization of $e_{\\mathrm{id}}$ is sections of the actual completion unit, followed by identity-stalk identifications. On $\\Gamma(s,Q)$ its composite with $\\Gamma(q)$ is the chain map $z\\mapsto(0,([s,\\mathrm{id},\\bar z_n])_n)$, where $\\bar z_n$ is the image of $z$ in $Q_n$. The specified inverse-image comparison, compositor realization and germ reparametrization have representatives on this one resolution satisfying the equality of entire chain maps\n$$e_\\delta c_{\\delta,\\mathrm{id},N}j_{\\delta,N}\\Gamma(q)(z)\n=(0,([s,\\delta,\\bar z_n])_n)\n=H(R_{\\mathrm{id},\\alpha,\\bullet})e_{\\mathrm{id}}\\Gamma(q)(z).$$\nThe shifted coordinate is zero on both sides. This assertion is invariant under canonical resolution comparisons and natural for all derived morphisms of $N$. It asserts equality of the indicated chain representatives, not a claim that reductions detect arbitrary completed derived morphisms.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0F4F (lemma-point-functor): restriction/insertion germ formula, combined with the specified completion normalization; agent extraction of original Steps 9--10; blueprint thm-trf-l-function-euler-product.proof.md, Step 1, Local powers, input (b)."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "def-weil-finite-coefficient-point",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-geometric-point",
+  "def-weil-completed-integral-coefficients",
+  "lem-trf-bounded-quotient-stalk-realization",
+  "lem-trf-stalk-compositor-tower-realization",
+  "lem-trf-germ-reparametrization-derived-descent",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Obtain a coherent compositor system from the compositor-tower theorem, and obtain section restriction and its ordinary derived descent from the restriction model.",
+   "uses": [
+    "lem-trf-stalk-compositor-tower-realization",
+    "lem-trf-source-section-restriction-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use germ-reparametrization descent to choose the normalized e_v and the strict identity-to-alpha tower isomorphism R, retaining its germ formula and all realization isomorphisms.",
+   "uses": [
+    "lem-trf-germ-reparametrization-derived-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the identity model to obtain the natural strict completion lift a_0, its two coordinates, and its identity representative formula. Pack these choices into the unchanged source-section data structure.",
+   "uses": [
+    "def-trf-source-section-stalk-cone-data",
+    "lem-trf-source-section-identity-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the automorphism model to obtain the finite insertion formula, the source representative equation and invertibility, and the equality of entire strict lifts for all complexes. Combine its source equation with the identity representative equation to prove the original representatives clause.",
+   "uses": [
+    "lem-trf-source-section-automorphism-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite both source lifts by a_0 followed by the Roos image of R. Naturality of a_0 and R and functoriality of Roos prove chain naturality. The coherent source-unit equation cancels the inverse unit and compositor in c, so c is identity. Compose restriction with the natural inverse-image comparison to prove derived naturality, and assemble every field.",
+   "uses": [
+    "lem-weil-isomorphism-comparison-natural"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-stalk-compositor-tower-realization",
+  "lem-trf-source-section-restriction-model",
+  "lem-trf-germ-reparametrization-derived-descent",
+  "def-trf-source-section-stalk-cone-data",
+  "lem-trf-source-section-identity-model",
+  "lem-trf-source-section-automorphism-model",
+  "lem-weil-isomorphism-comparison-natural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Stages 3 extraction of source-section proof, steps 1--7; Stacks Tags 0F4F, 05V1 and the specified strict completion model."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a source field automorphism followed by inverse image insertion and specified completed pullback has zero shifted Roos coordinate and the reparametrized germ in the other coordinate",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.reindex_appTop_coord, AlgebraicGeometry.Scheme.Pullback.cocycle, AlgebraicGeometry.Scheme.Pullback.gluing_t', AlgebraicGeometry.Scheme.Pullback.cocycle_snd_snd, AlgebraicGeometry.Scheme.Pullback.cocycle_snd_fst_fst, AlgebraicGeometry.Scheme.Pullback.cocycle_snd_fst_snd, AlgebraicGeometry.Scheme.Pullback.cocycle_fst_fst_snd, AlgebraicGeometry.Scheme.Pullback.cocycle_fst_snd",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general truncation, localization, topological stalk or cone tools; none states this specified completed quotient-stalk comparison or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone.lift|proetale|proEtale",
+   "results": "13 hits: Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general truncation, localization, topological stalk or cone tools; none states this specified completed quotient-stalk comparison or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.lift",
+   "results": "8 hits: CochainComplex.mappingCocone.ofHom_lift, CochainComplex.mappingCocone.lift, CochainComplex.mappingCocone.lift_fst, CochainComplex.mappingCocone.lift_f_snd_v, CochainComplex.mappingCocone.lift_f_fst_f, CochainComplex.mappingCocone.lift_f_snd_v_assoc, CochainComplex.mappingCocone.lift_f_fst_f_assoc, CochainComplex.mappingCocone.lift_fst_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general truncation, localization, topological stalk or cone tools; none states this specified completed quotient-stalk comparison or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality of full chain maps from a K flat point complex for section restriction and geometric stalk reparametrization with the completion unit",
+   "results": "8 hits: HomologicalComplex.from_single_hom_ext, HomologicalComplex.Hom.mk.congr_simp, Homotopy.ofEq, HomologicalComplex.congr_hom, HomologicalComplex.hom_ext, HomologicalComplex.hom_ext_iff, HomologicalComplex.Hom.ext_iff, HomologicalComplex.restrictionMap_id",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general truncation, localization, topological stalk or cone tools; none states this specified completed quotient-stalk comparison or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of full chain maps from a K flat point complex for section restriction and geometric stalk reparametrization with the completion unit",
+   "results": "8 hits: ModuleCat.Tilde.toOpen_germ, AlgebraicGeometry.Scheme.Opens.fromSpecStalkOfMem_toSpecΓ, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap, ModuleCat.Tilde.toOpen_germ_assoc, AlgebraicGeometry.Scheme.fromSpecStalk_app, ModuleCat.Tilde.toOpen_germ_apply, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.fromSpecStalk_toSpecΓ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general truncation, localization, topological stalk or cone tools; none states this specified completed quotient-stalk comparison or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone.lift|proetale|proEtale",
+   "results": "13 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic cone constructors and ordinary topological stalk/restriction tools do not state the specified pro-etale completed quotient-cone equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completion unit and pullback along an isomorphism commute with restriction of global sections and geometric stalk reparametrization as entire chain maps",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app, AlgebraicGeometry.arrowResLEAppIso, AlgebraicGeometry.PresheafedSpace.stalkMap.isIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ_assoc, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι, AlgebraicGeometry.PresheafedSpace.restrictTopIso",
+   "date": "2026-10-22",
+   "verdict": "no match: generic cone constructors and ordinary topological stalk/restriction tools do not state the specified pro-etale completed quotient-cone equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.lift",
+   "results": "8 hits: CochainComplex.mappingCocone.ofHom_lift, CochainComplex.mappingCocone.lift, CochainComplex.mappingCocone.lift_fst, CochainComplex.mappingCocone.lift_f_snd_v, CochainComplex.mappingCocone.lift_f_fst_f, CochainComplex.mappingCocone.lift_f_snd_v_assoc, CochainComplex.mappingCocone.lift_f_fst_f_assoc, CochainComplex.mappingCocone.lift_fst_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: generic cone constructors and ordinary topological stalk/restriction tools do not state the specified pro-etale completed quotient-cone equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of point sections along a field automorphism followed by completed pullback agrees with germ reparametrization on both coordinates of the quotient tower Roos cone",
+   "results": "8 hits: TopCat.Presheaf.germ_res', TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom, TopCat.Presheaf.germ_stalkPullbackInv, TopCat.Presheaf.germ_res, AlgebraicGeometry.opensCone_π_app, TopCat.Presheaf.map_germ_eq_Γgerm, TopCat.Presheaf.Γgerm_res_apply, TopCat.Presheaf.germ_res_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: generic cone constructors and ordinary topological stalk/restriction tools do not state the specified pro-etale completed quotient-cone equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a zero homotopy mapping cocone lift under a strict map of inverse systems of sheaf complexes",
+   "results": "8 hits: HomologicalComplex.homotopyCofiber.inrX_desc_f, CategoryTheory.GrothendieckTopology.OneHypercover.multiforkLift_map, CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux_fac, HomologicalComplex.homotopyCofiber.inlX_desc_f, CategoryTheory.GrothendieckTopology.liftToPlusObjLimitObj_fac, HomologicalComplex.homotopyCofiber.desc_f', HomologicalComplex.homotopyCofiber.inrCompHomotopy_hom_desc_hom, CochainComplex.mappingCone.lift_f_snd_v",
+   "date": "2026-10-22",
+   "verdict": "no match: generic cone constructors and ordinary topological stalk/restriction tools do not state the specified pro-etale completed quotient-cone equality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-completed-stalk-reparametrization-coherence",
+  "date": "2026-10-22",
+  "group": "Q127"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Local powers, input (b): canonical integral stalk and fixed-point identifications; extracted original completed-stalk proof Steps 9,10",
+   "via": [
+    "lem-trf-completed-stalk-reparametrization-coherence",
+    "lem-trf-rational-local-frobenius-powers"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-source-section-stalk-cone-comparison",
+  "worker": "stage1",
+  "summary": "Seven steps using existing nodes only: restriction isomorphism, actual completion-unit normalization, chosen-resolution cancellation, explicit pointed-germ calculation, strict transition and whole-cone comparison, reparametrization on both coordinates, and derived naturality. Statement unchanged; no new nodes.",
+  "blueprint": "thm-trf-l-function-euler-product.proof.md Step 1, Local powers, input (b): source-automorphism fixed-point/stalk identifications at the integral stage before rationalization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-point-automorphism-restriction-natural",
+    "why": "Generic restriction/insertion transformation on point sections, including completed coefficients and derived naturality; no node of this unit states this unbounded sheaf-level tool."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic site-equivalence evaluation formula used to identify restriction with an isomorphism, not a replacement for any trace-transport step."
+   },
+   {
+    "node": "lem-trf-proetale-pullback-stalk-coherence",
+    "why": "Generic finite-coefficient inverse-image germ formula used only for the explicit finite insertion coordinate."
+   },
+   {
+    "node": "lem-trf-quotient-tensor-insertion",
+    "why": "Generic strict scalar-insertion and quotient-transition identity, applied to the given quotient tower."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-point-automorphism-restriction-natural",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-trf-proetale-pullback-stalk-coherence",
+  "lem-trf-quotient-tensor-insertion"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-b674ac0bf",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-b674ac0bf (reviewer sub-agent of L); spot-checked: I read the item, the parent lem-trf-completed-stalk-reparametrization-coherence and the statements of all 11 nodes the proof cites, in full. I checked Stacks sites.tex Tags 0F4F (line 8514, the germ rule (V,y,U,phi) to (U,v(phi)(y))) and 05V1 (8558), and the blueprint place thm-trf-l-function-euler-product, Local powers (b), at lines 56-60. This is a one-level split with no new nodes; the statement and stmt_deps are unchanged and there is no SGA. Step 1: rho = sigma^delta (it allows any automorphism, completed coefficients, no boundedness). The arrow delta:(s,delta) to (s,id) is invertible with inverse delta^{-1}, so restriction along it is bijective, and it is natural under Gamma(q). Step 2: the completion-unit model gives u_N[q] = rho_D[v_Q]; with e_{id,n}(x) = [s,id,x] applied diagonally this yields (0,[s,id,z_n]). Step 3: the definition kappa = [theta~][G q]^{-1} cancels Gamma(Gq). It is literal for the chosen resolution and moves to any Q by the invariance in Step 7; the step could say this order explicitly (advisory, not a fault). Step 4: I checked it against pullback-stalk-coherence with t = delta, u = id, theta = (id,id), u' = id: the image is [V,id,a|delta], and the pointed arrow delta:(V,id) to (U,delta) gives [s,delta,a]. Step 5: t_n theta_{n+1} = theta_n by quotient-tensor-insertion, so (1-s)A = 0 and d(0,A z) = (0,A dz) (checked by hand). The compositor coordinate formula with f = delta, v = id then gives (0,[s,delta,z_n]). Step 6: R[s,id,a] = [s,delta,a] on both coordinates and R(0) = 0. Step 7: naturality covers e, the compositor, R with roofs and kappa; kappa is invertible because N is derived complete. Edge cases alpha = id, N = 0 and non-cocycle z are fine. No duplicate: the nearby nodes are Frobenius-specific or have no germ formula (lem-trf-point-sections-completion-cone, lem-trf-point-transport-resolution-cancellation, lem-weil-point-automorphism-derived-transport-inverse). The item's dependency closure does not contain the item, so there is no cycle. I accept the four declared tool_uses; quotient-tensor-insertion is already on the unit's route, so declaring it is superfluous. No changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SourceSectionStalkConeComparison",
+  "declaration": "WeilConjectures.trfSourceSectionStalkConeComparison",
+  "declarations": [
+   "WeilConjectures.trfSourceSectionStalkConeComparison"
+  ],
+  "file": "lean/Sheaf/Paper/SourceSectionStalkConeComparison.lean",
+  "statement": "theorem trfSourceSectionStalkConeComparison (_hl : l ≠ D.p)\n    [∀ x : Spec (.of D.k), Invertible (l : (Spec (.of D.k)).residueField x)]\n    (hS : ∀ x : Spec (.of D.k), IsUnit (l : (Spec (.of D.k)).presheaf.stalk x))\n    (α : D.k ≃+* D.k) :\n    ∃ B : TrfSourceSectionData l E D α, TrfSourceSectionNormalized l E D hS α B",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-62b3bf491"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62b3bf491",
+  "group": "Q04",
+  "result": "fix",
+  "note": "All 12 node clauses match: σ pinned to pointRestrictionRaw, ρ by its localization, j = ρ≫Γ(inverseImagePullbackComparisonDerived), c = unit⁻¹≫compositor(id,δ)⁻¹≫eqToHom from a coherent IntegralComparisonSystem as in the compositor dependency, e pinned by TrfQuotientGermNormalized, R pinned to proEtaleStalkReparam id α, a₀ pinned in both coordinates. The central equality is strict and on entire chain maps (ConeLift = a₀≫H(R)), with localization identities for every q and chain/derived naturality. Edge cases (α=id, N=0, n+1 indexing, negative degrees, non-cycles, universes) pass; no hollow defs, sorry only, docstrings and lean.statement verbatim OK, no duplicate. FIX 1: identityCoordinate used unrestrictedTowerUnit, owned only by the uncited theorem node lem-weil-integral-reduction-tower-well-defined; replaced by its defining value unrestrictedTowerTensorSection … 1 x (def node; equal by unrestrictedTowerUnit_condition); nt_compile --json clean in 32.4 s. FIX 2 (H11): the same-worker Second reading was replaced by a clause-by-clause section, Worker report kept verbatim. Advisory: def-node declarations (pointRestrictionRaw etc.) used without stmt_deps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-66786",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T071338-L-3917727",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof and three new modules vs clone item module (five declarations moved verbatim) and node lem-trf-source-section-stalk-cone-comparison; two sorry statements vs the item's original Normalized clauses"
+ }
+}

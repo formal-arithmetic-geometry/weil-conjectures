@@ -1,0 +1,268 @@
+{
+ "id": "lem-trf-coinduction-shift-scalar-model",
+ "kind": "statement",
+ "title": "Simultaneous-shift and scalar normalization for coinduced complexes",
+ "statement": "Let $P\\to A$ be a homomorphism of commutative rings, $U$ termwise restriction of scalars, and $I$ an unbounded K-injective $P$-complex representing $P[0]$ in $D(P)$ [def-weil-abstract-derived-category, def-pur-kinjective-complex]. Set $V=\\operatorname{Hom}_P^\\bullet(A[0],I)$ with $(a h)(b)=h(ba)$ and write $T$ for the evaluation-at-one isomorphism of [lem-trf-coinduction-total-hom-model]. Use product total Hom [def-sc-module-total-hom-complex] and shifts $(L[n])^i=L^{i+n}$, $d_{L[n]}=(-1)^n d_L$. For arbitrary complexes $L,M$ over either ring and every $n\\in\\mathbf Z$, the formula\n$$\\sigma^r_{L,M,n}(f)^i=(-1)^{nr}f^{i-n}$$\ndefines a natural chain isomorphism $\\operatorname{Hom}^\\bullet(L[n],M[n])\\xrightarrow{\\sim}\\operatorname{Hom}^\\bullet(L,M)$. Its degree-zero action is the usual inverse shift on chain maps. Shifts preserve K-injectivity, and $J(I[n])=V[n]$ as $A$-complexes, where $J(K)=\\operatorname{Hom}_P^\\bullet(A[0],K)$. These identifications represent the canonical shift comparison $C(P[n])\\cong C(P[0])[n]$ for the K-injective coinduction construction $C$ [def-trf-derived-coinduction]. The maps $T$ commute with simultaneous-shift comparisons. The map\n$$m_n:A[0]\\longrightarrow U\\operatorname{Hom}_A^\\bullet(V[n],V[n]),\\qquad m_n(a)(h)=a h,$$\nis a chain map, and the following equality holds as actual chain maps:\n$$\\sigma_{UV,I,n}\\circ T_{V[n],I[n]}\\circ m_n=\\delta_I,\\qquad \\delta_I:A[0]\\longrightarrow\\operatorname{Hom}_P^\\bullet(UV,I),\\quad\\delta_I(a)(h)=h(a).$$\nNo boundedness, perfectness, flatness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0BZW (lemma-relative-dualizing-algebraic), proof of (1)(c), simultaneous-shift cancellation; evaluation-at-one normalization from Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext)."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "def-sc-module-total-hom-complex",
+  "def-trf-derived-coinduction",
+  "lem-trf-coinduction-total-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\epsilon=(-1)^n$ and let $f$ have Hom degree $r$. In the product Hom of [def-sc-module-total-hom-complex], reindexing $j=i-n$ identifies the factors $\\operatorname{Hom}(L^{j+n},M^{j+n+r})$ with $\\operatorname{Hom}(L^i,M^{i+r})$. Thus $\\sigma^r(f)^i=\\epsilon^r f^{i-n}$ is linear, with inverse $\\tau^r(g)^j=\\epsilon^r g^{j+n}$ since $\\epsilon^{2r}=1$. For the differential on the shifted Hom one has $(d'f)^j=\\epsilon(d_Mf^j-(-1)^r f^{j+1}d_L)$, with all differentials reindexed. Consequently $\\sigma^{r+1}(d'f)^i=\\epsilon^{r+2}(d_Mf^{i-n}-(-1)^r f^{i+1-n}d_L)=(d\\sigma^r f)^i$. This proves the chain-isomorphism assertion over either ring, using products without any support restriction.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZW (lemma-relative-dualizing-algebraic), proof of (1)(c), shift cancellation; Tags 0A70 (lemma-right-adjoint), 0A71 (lemma-RHom-ext), coinduced K-injective model. Explicit signed calculations supplied by Q06."
+   }
+  },
+  {
+   "text": "For chain maps $u:L'\\to L$ and $v:M\\to M'$, the $i$th component of $\\sigma^r(v[n]fu[n])$ is $\\epsilon^r v^{i+r}f^{i-n}u^i$, which is the $i$th component of $v\\sigma^r(f)u$. This gives naturality in both variables. For $r=0$ the sign is $1$; a degree-zero cocycle is precisely a chain map by the differential in [def-sc-module-total-hom-complex]. Hence the induced map on chain maps is the usual inverse shift, with no sign.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZW (lemma-relative-dualizing-algebraic), proof of (1)(c), shift cancellation; Tags 0A70 (lemma-right-adjoint), 0A71 (lemma-RHom-ext), coinduced K-injective model. Explicit signed calculations supplied by Q06."
+   }
+  },
+  {
+   "text": "Interpret [def-pur-kinjective-complex] on the one-object identity-cover ringed site of the chosen ring, so its module sheaves are ordinary modules. Let $K$ be K-injective over either ring and let $f:N\\to K[n]$ be a chain map with $N$ acyclic. The cohomology definition in [def-weil-abstract-derived-category] gives $H^j(N[-n])=H^{j-n}(N)=0$, since multiplying a differential by $\\epsilon$ does not change its kernel or image. The maps $g^j=f^{j-n}$ form a chain map $N[-n]\\to K$: $d_Kg^j=\\epsilon g^{j+1}d_N$. By [def-pur-kinjective-complex] choose a null-homotopy $k$ with $g^j=d_Kk^j+\\epsilon k^{j+1}d_N$. Set $h^i=\\epsilon k^{i+n}:N^i\\to K^{i+n-1}$. Then $d_{K[n]}h^i+h^{i+1}d_N=d_Kk^{i+n}+\\epsilon k^{i+n+1}d_N=f^i$. Thus every such $f$ is null-homotopic, proving K-injectivity of $K[n]$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070H (definition-K-injective), definition and following paragraph: translates of acyclic complexes are acyclic. Explicit shifted null-homotopy supplied by Q06."
+   }
+  },
+  {
+   "text": "By [lem-trf-coinduction-total-hom-model], $J(K)^i=\\operatorname{Hom}_P(A,K^i)$ with differential $h\\mapsto d_Kh$ and action $(ah)(b)=h(ba)$. Therefore $J(K[n])^i=\\operatorname{Hom}_P(A,K^{i+n})=J(K)[n]^i$, and both differentials are $h\\mapsto\\epsilon d_Kh$; the $A$-actions also coincide. The identification is natural because for every chain map $q:K\\to K'$ both maps $J(q[n])$ and $J(q)[n]$ are postcomposition with $q^{i+n}$. In particular $I[n]$ is K-injective by step 3 and represents $P[n]$, since localization commutes with shifts by [def-weil-abstract-derived-category]. The K-injectivity clause of [lem-trf-coinduction-total-hom-model] also makes $J(I[n])$ K-injective over $A$. The K-injective construction of [def-trf-derived-coinduction] computes $C(P[n])$ by $J(I[n])$ and $C(P[0])[n]$ by $J(I)[n]$. Its shift comparison is induced by the just-verified natural chain identification. This is also the evaluation-normalized comparison: under the identity identification its counit sends $h$ to $h(1)$ on both sides, exactly the shift of the unshifted counit in the transposition $T$ of [lem-trf-coinduction-total-hom-model].",
+   "uses": [
+    "lem-trf-coinduction-total-hom-model",
+    "def-weil-abstract-derived-category",
+    "def-trf-derived-coinduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZW (lemma-relative-dualizing-algebraic), proof of (1)(c), shift cancellation; Tags 0A70 (lemma-right-adjoint), 0A71 (lemma-RHom-ext), coinduced K-injective model. Explicit signed calculations supplied by Q06."
+   }
+  },
+  {
+   "text": "More generally take any $A$-complex $E$, $P$-complex $K$, and degree-$r$ cochain $f:E[n]\\to J(K[n])$. Identify $J(K[n])=J(K)[n]$ by step 4. For $x\\in E^i$, the formula for $T$ in [lem-trf-coinduction-total-hom-model] gives\n$$\\bigl(\\sigma^r_{UE,K,n}T_{E[n],K[n]}(f)\\bigr)^i(x)=\\epsilon^r f^{i-n}(x)(1)=\\bigl(T_{E,K}(\\sigma^r_{E,J(K),n}f)\\bigr)^i(x).$$\nLinearity of evaluation at $1$ gives the middle equality, so the square commutes in every Hom degree as actual chain maps. Taking $E=V$, $K=I$ gives the asserted compatibility.",
+   "uses": [
+    "lem-trf-coinduction-total-hom-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZW (lemma-relative-dualizing-algebraic), proof of (1)(c), shift cancellation; Tags 0A70 (lemma-right-adjoint), 0A71 (lemma-RHom-ext), coinduced K-injective model. Explicit signed calculations supplied by Q06."
+   }
+  },
+  {
+   "text": "Put $W=V[n]$. The model theorem [lem-trf-coinduction-total-hom-model] makes $V$, hence $W$, an $A$-complex. Because $A$ is commutative, multiplication $\\mu_a:h\\mapsto ah$ is $A$-linear, and $a\\mapsto\\mu_a$ is $P$-linear. Its Hom differential is $d_W\\mu_a-\\mu_a d_W=0$ since $d_W$ is $A$-linear. By [def-sc-module-total-hom-complex] each $\\mu_a$ is thus a degree-zero cocycle. Sending $A[0]$ to these cocycles, and taking zero components in other source degrees, defines exactly the chain map $m_n$.",
+   "uses": [
+    "lem-trf-coinduction-total-hom-model",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZW (lemma-relative-dualizing-algebraic), proof of (1)(c), shift cancellation; Tags 0A70 (lemma-right-adjoint), 0A71 (lemma-RHom-ext), coinduced K-injective model. Explicit signed calculations supplied by Q06."
+   }
+  },
+  {
+   "text": "For $a\\in A$ and $h\\in (UV)^i$, the composite in the statement, evaluated in its sole nonzero source degree, is\n$$\\bigl(\\sigma^0_{UV,I,n}T_{V[n],I[n]}(m_n(a))\\bigr)^i(h)=(ah)(1)=h(1a)=h(a).$$\nHere $h$ on the shifted side lies in $V[n]^{i-n}$, the degree-zero sign in step 2 is $1$, and both evaluation and the action are those of [lem-trf-coinduction-total-hom-model]. This is $\\delta_I(a)^i(h)$, so the maps agree in every component. The composite is a chain map by steps 1, 5 and 6, hence so is the displayed $\\delta_I$. The calculations use neither bounds nor finiteness, flatness, perfectness or Noetherian assumptions.",
+   "uses": [
+    "lem-trf-coinduction-total-hom-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZW (lemma-relative-dualizing-algebraic), proof of (1)(c), shift cancellation; Tags 0A70 (lemma-right-adjoint), 0A71 (lemma-RHom-ext), coinduced K-injective model. Explicit signed calculations supplied by Q06."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-kinjective-complex",
+  "def-sc-module-total-hom-complex",
+  "def-trf-derived-coinduction",
+  "def-weil-abstract-derived-category",
+  "lem-trf-coinduction-total-hom-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0BZW (lemma-relative-dualizing-algebraic), proof of (1)(c), shift cancellation; Tags 0A70 (lemma-right-adjoint), 0A71 (lemma-RHom-ext), coinduced K-injective model. Explicit signed calculations supplied by Q06."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous shift of source and target total Hom complexes has comparison with sign (-1)^(nr), compatible with coinduction and scalar action evaluation at one",
+   "results": "{\"t\": \"2026-10-22T06:45:28Z\", \"tool\": \"leanfinder\", \"query\": \"Simultaneous shift of source and target total Hom complexes has comparison with sign (-1)^(nr), compatible with coinduction and scalar action evaluation at one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex₂.ι_totalShift₂Iso_hom_f\", \"HomologicalComplex₂.totalShift₁Iso_hom_totalShift₂Iso_hom\", \"HomologicalComplex₂.totalShift₂XIso\", \"HomologicalComplex₂.ι_totalShift₁Iso_hom_f\", \"HomologicalComplex₂.totalShift₁Iso_trans_totalShift₂Iso\", \"HomologicalComplex₂.totalShift₁XIso\", \"HomologicalComplex₂.ι_totalShift₁Iso_inv_f\", \"CochainComplex.mapBifunctorHomologicalComplexShift₁Iso\"], \"digest\": \"ce7a89de81a8adc9\"} Read Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean:45-125 and KInjective.lean:88-98. Cochain shifts and K-injective shift preservation are available, but not the entire P-linear Hom-complex comparison with coinduction and the displayed scalar chain-map identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "shift.*[Hh]om|[Hh]om.*shift|[Ss]hift.*[Ee]quiv",
+   "results": "{\"t\": \"2026-10-22T06:45:33Z\", \"tool\": \"grep\", \"query\": \"shift.*[Hh]om|[Hh]om.*shift|[Ss]hift.*[Ee]quiv\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/CochainComplexPlus.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\"], \"digest\": \"45e0000e0755bd3d\"} Read Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean:45-125 and KInjective.lean:88-98. Cochain shifts and K-injective shift preservation are available, but not the entire P-linear Hom-complex comparison with coinduction and the displayed scalar chain-map identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex, CategoryTheory.shiftFunctor",
+   "results": "{\"t\": \"2026-10-22T06:45:33Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.HomComplex, CategoryTheory.shiftFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean:45-125 and KInjective.lean:88-98. Cochain shifts and K-injective shift preservation are available, but not the entire P-linear Hom-complex comparison with coinduction and the displayed scalar chain-map identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous shift total Hom chain comparison with sign (-1)^(nr), coinduction evaluation, and scalar multiplication normalization",
+   "results": "{\"t\": \"2026-10-22T06:45:50Z\", \"tool\": \"leansearch\", \"query\": \"Simultaneous shift total Hom chain comparison with sign (-1)^(nr), coinduction evaluation, and scalar multiplication normalization\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom complex simultaneous shift cancellation preserves evaluation at one and takes shifted scalar multiplication to evaluation h(a)",
+   "results": "{\"t\": \"2026-10-22T06:46:03Z\", \"tool\": \"leanfinder\", \"query\": \"Hom complex simultaneous shift cancellation preserves evaluation at one and takes shifted scalar multiplication to evaluation h(a)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.shiftEval_hom_app\", \"CochainComplex.shiftEval\", \"CochainComplex.shiftEval_inv_app\", \"CochainComplex.HomComplex.Cochain.leftUnshift_v\", \"CochainComplex.shiftShortComplexFunctor'_hom_app_τ₁\", \"CochainComplex.HomComplex.Cochain.leftShift_v\", \"CochainComplex.shiftShortComplexFunctorIso_hom_app_τ₁\", \"CochainComplex.HomComplex.Cochain.shift_v\"], \"digest\": \"0930d3a607547475\"} Read Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean:45-125 and KInjective.lean:88-98. Cochain shifts and K-injective shift preservation are available, but not the entire P-linear Hom-complex comparison with coinduction and the displayed scalar chain-map identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def shift|shift_v|shift_δ|δ_shift|shift.*[Ll]inear",
+   "results": "{\"t\": \"2026-10-22T06:46:28Z\", \"tool\": \"grep\", \"query\": \"def shift|shift_v|shift_δ|δ_shift|shift.*[Ll]inear\", \"sub\": \"Algebra/Homology/HomotopyCategory/HomComplexShift.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"57\", \"70\", \"85\", \"99\", \"107\"], \"digest\": \"c37315723caa9202\"} Read Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean:45-125 and KInjective.lean:88-98. Cochain shifts and K-injective shift preservation are available, but not the entire P-linear Hom-complex comparison with coinduction and the displayed scalar chain-map identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coinduc|simultaneous|isKInjective_shift_iff",
+   "results": "{\"t\": \"2026-10-23T04:10:31Z\", \"tool\": \"grep\", \"query\": \"coinduc|simultaneous|isKInjective_shift_iff\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\"], \"digest\": \"a2445f7f0df97297\"} Read HomComplexShift.lean:107-128, 306-338, 484-495, KInjective.lean:88-98, and ChangeOfRings.lean:590-680. The hits provide homogeneous shift operations, their signed differential identity, preservation of K-injectivity, and ordinary evaluation adjunction. None states the entire coinduced product-Hom shift comparison together with the scalar chain-map identity. These local calculations are proved explicitly in this split.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Total Hom complex simultaneous shift comparison compatible with coinduction evaluation at one and scalar multiplication",
+   "results": "{\"t\": \"2026-10-23T04:10:32Z\", \"tool\": \"leansearch\", \"query\": \"Total Hom complex simultaneous shift comparison compatible with coinduction evaluation at one and scalar multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cochain.leftUnshift_smul\", \"CochainComplex.HomComplex.Cochain.rightUnshift\", \"CochainComplex.HomComplex.Cochain.shift\", \"CochainComplex.HomComplex.Cochain.leftShiftLinearEquiv\", \"CochainComplex.HomComplex.Cochain.shift_smul\", \"HomologicalComplex₂.totalShift₁Iso\", \"CochainComplex.HomComplex.Cochain.rightUnshift_units_smul\", \"HomologicalComplex₂.totalShift₂XIso\"], \"digest\": \"faa22a452758cdb6\"} Read HomComplexShift.lean:107-128, 306-338, 484-495, KInjective.lean:88-98, and ChangeOfRings.lean:590-680. The hits provide homogeneous shift operations, their signed differential identity, preservation of K-injectivity, and ordinary evaluation adjunction. None states the entire coinduced product-Hom shift comparison together with the scalar chain-map identity. These local calculations are proved explicitly in this split.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.Cochain.shift, CochainComplex.IsKInjective",
+   "results": "{\"t\": \"2026-10-23T04:10:32Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.HomComplex.Cochain.shift, CochainComplex.IsKInjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read HomComplexShift.lean:107-128, 306-338, 484-495, KInjective.lean:88-98, and ChangeOfRings.lean:590-680. The hits provide homogeneous shift operations, their signed differential identity, preservation of K-injectivity, and ordinary evaluation adjunction. None states the entire coinduced product-Hom shift comparison together with the scalar chain-map identity. These local calculations are proved explicitly in this split.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous shifts of total Hom complexes with sign (-1)^(nr), coinduction evaluation at one and scalar multiplication identity",
+   "results": "{\"t\": \"2026-10-23T04:10:43Z\", \"tool\": \"leanfinder\", \"query\": \"Simultaneous shifts of total Hom complexes with sign (-1)^(nr), coinduction evaluation at one and scalar multiplication identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.shiftEval_hom_app\", \"HomologicalComplex₂.ι_totalShift₂Iso_hom_f\", \"HomologicalComplex₂.totalShift₁Iso_hom_totalShift₂Iso_hom\", \"HomologicalComplex₂.ι_totalShift₁Iso_inv_f\", \"CochainComplex.ι_mapBifunctorShift₁Iso_hom_f\", \"CochainComplex.mapBifunctorHomologicalComplexShift₁Iso\", \"HomologicalComplex₂.ι_totalShift₁Iso_hom_f\", \"HomologicalComplex₂.ι_totalShift₂Iso_inv_f\"], \"digest\": \"9ff7f8568fc23b5c\"} Read HomComplexShift.lean:107-128, 306-338, 484-495, KInjective.lean:88-98, and ChangeOfRings.lean:590-680. The hits provide homogeneous shift operations, their signed differential identity, preservation of K-injectivity, and ordinary evaluation adjunction. None states the entire coinduced product-Hom shift comparison together with the scalar chain-map identity. These local calculations are proved explicitly in this split.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "shift.*[δd]|[δd].*shift|shift_smul|leftShiftLinearEquiv",
+   "results": "{\"t\": \"2026-10-23T04:12:31Z\", \"tool\": \"grep\", \"query\": \"shift.*[δd]|[δd].*shift|shift_smul|leftShiftLinearEquiv\", \"sub\": \"Algebra/Homology/HomotopyCategory/HomComplexShift.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"18\", \"22\", \"24\", \"52\", \"60\"], \"digest\": \"d4ba9f59650b44a8\"} Read HomComplexShift.lean:107-128, 306-338, 484-495, KInjective.lean:88-98, and ChangeOfRings.lean:590-680. The hits provide homogeneous shift operations, their signed differential identity, preservation of K-injectivity, and ordinary evaluation adjunction. None states the entire coinduced product-Hom shift comparison together with the scalar chain-map identity. These local calculations are proved explicitly in this split.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction coextension scalars adjunction maps multiplication by a on Hom(A,I) to the linear map h maps to h(a)",
+   "results": "{\"t\": \"2026-10-23T04:12:37Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction coextension scalars adjunction maps multiplication by a on Hom(A,I) to the linear map h maps to h(a)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply\", \"ModuleCat.RestrictionCoextensionAdj.app'\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction_hom_apply_apply\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"ModuleCat.CoextendScalars.map'_hom_apply_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt\"], \"digest\": \"3bad6434a4ee36c5\"} Read HomComplexShift.lean:107-128, 306-338, 484-495, KInjective.lean:88-98, and ChangeOfRings.lean:590-680. The hits provide homogeneous shift operations, their signed differential identity, preservation of K-injectivity, and ordinary evaluation adjunction. None states the entire coinduced product-Hom shift comparison together with the scalar chain-map identity. These local calculations are proved explicitly in this split.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algebraic-shriek-derived-hom-adjunction",
+  "date": "2026-10-22",
+  "group": "Q41"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the A-linear/P-linear derived-Hom comparison used in the scalar biduality calculation. Extracted argument: simultaneous-shift signs and scalar evaluation (returned proof steps 5-6).",
+   "via": [
+    "lem-trf-algebraic-shriek-derived-hom-adjunction",
+    "lem-trf-algebraic-shriek-relative-perfect",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-coinduction-shift-scalar-model",
+  "worker": "stage1",
+  "summary": "Q06 checked the Stacks coinduction models and shift cancellation, proved the signed comparison and its naturality componentwise, wrote the shifted null-homotopy, identified the coinduced shifts and evaluation counits, and verified the scalar identity as an equality of chain maps. No statement change or new node is needed: all remaining calculations are elementary from the cited definitions and the existing coinduced total-Hom model. Repair of returned head 173c69b8afe: rebuilt from the current DAG node, reread all five cited statements, made the ordinary-module specialization of K-injectivity explicit, and recorded the cited model theorem's K-injectivity guarantee for the shifted coinduced representative.",
+  "blueprint": "Serves lem-trf-local-term-locality proof (1)-(2), through the existing nearby-cycle/semistable-modification branch named in blueprint.from.via; specifically the coinduction shift cancellation in the algebraic relative-dualizing scalar biduality calculation (Stacks 0BZW proof (1)(c)). No unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-9dc574648",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-9dc574648 (reviewer sub-agent of L); spot-checked: PASS, no changes. This is a re-delivery. The earlier head 173c69b8afe3 got PASS, but it was never promoted: in clones/live and clones/side-live the item is still unsplit with no proof. There is no repair note, so this is not a 2026-10-21 re-split. The delivery adds no new nodes and leaves the statement, its five stmt_deps, the source, blueprint, unit and chapter unchanged. Against the previous head only proof and split_report differ, and only steps 3 and 4 changed. Step 3 now says def-pur-kinjective-complex is read on the one-object identity-cover ringed site, the same convention as lem-trf-coinduction-total-hom-model. Step 4 now invokes that model node's stated clause that J(I) is K-injective whenever I is, to get J(I[n]) K-injective. The five cited statements are identical in the old and new snapshots. I read all five in full and redid every step. (1) The shifted Hom differential is d'f = ε(d_M f − (−1)^r f d_L), and σ^{r+1}d' = dσ^r, so the sign (−1)^{nr} is required. (2) Naturality holds, and degree 0 gives the inverse shift. (3) With h^i = ε k^{i+n}, d_{K[n]}h^i + h^{i+1}d_N = f^i, so K[n] is K-injective. (4) J(K[n]) = J(K)[n] with the same differential, A-action, postcomposition and counit h ↦ h(1). This step does not cite the derived-adjunction lemma, so there is no cycle. (5) Both sides of the square equal ε^r f^{i−n}(x)(1). (6) μ_a is a degree-0 cocycle because A is commutative. (7) (ah)(1) = h(a), with matching degrees. proof_deps equal the union of the uses, and no cycle exists. I checked the sources in dualizing.tex: 0BZW proof (1)(c) at l.4826 ff. (shift cancellation R Hom_P(R Hom_P(A,P)[n],P)[n]), 0A70 at l.2211 and 0A71 at l.2235. There is no SGA. Edge cases checked: n=0; n=±1 with r=±1; characteristic 2; zero complexes; a field with I=P[0]. Advisory only: step 3 proves inline what the Mathlib leaf lem-weil-pbc-kinjective-shift already states."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.CoinductionShiftScalarModel",
+  "declaration": "ModuleCat.coinduction_shift_scalar_model",
+  "declarations": [
+   "CochainComplex.ModuleHomShiftComparison",
+   "ModuleCat.coinduction_shift_scalar_model"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/CoinductionShiftScalarModel.lean",
+  "statement": "theorem coinduction_shift_scalar_model {P A : Type u} [CommRing P] [CommRing A] (φ : P →+* A) [HasDerivedCategory.{wP} (ModuleCat.{u} P)] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] : ∃ (σP : ModuleHomShiftComparison P) (σA : ModuleHomShiftComparison A) (j : ∀ (K : CochainComplex (ModuleCat.{u} P) ℤ) (n : ℤ), (coinductionComplexFunctor φ).obj (K⟦n⟧) ≅ ((coinductionComplexFunctor φ).obj K)⟦n⟧) (T : ∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (K : CochainComplex (ModuleCat.{u} P) ℤ), ((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj (moduleHomComplex E ((coinductionComplexFunctor φ).obj K)) ≅ moduleHomComplex (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj E) K) (t : ∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (K : CochainComplex (ModuleCat.{u} P) ℤ) (n : ℤ), ((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj (moduleHomComplex (E⟦n⟧) (((coinductionComplexFunctor φ).obj K)⟦n⟧)) ≅ moduleHomComplex ((((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj E)⟦n⟧) (K⟦n⟧)), (∀ (K : CochainComplex (ModuleCat.{u} P) ℤ) (n i : ℤ), (j K n).hom.f i = 𝟙 _) ∧ (∀ (K K' : CochainComplex (ModuleCat.{u} P) ℤ) (a : K ⟶ K') (n : ℤ), (coinductionComplexFunctor φ).map (a⟦n⟧') ≫ (j K' n).hom = (j K n).hom ≫ ((coinductionComplexFunctor φ).map a)⟦n⟧') ∧ (∀ (K : CochainComplex (ModuleCat.{u} P) ℤ) (n : ℤ), K.IsKInjective → (K⟦n⟧).IsKInjective) ∧ (∀ (K : CochainComplex (ModuleCat.{u} A) ℤ) (n : ℤ), K.IsKInjective → (K⟦n⟧).IsKInjective) ∧ (∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (K : CochainComplex (ModuleCat.{u} P) ℤ) (r p q : ℤ) (hpq : p + r = q) (z : Cochain E ((coinductionComplexFunctor φ).obj K) r) (x : E.X p), (((T E K).hom.f r z).v p q hpq) x = CoextendScalars.equiv φ (K.X q) (z.v p q hpq x) (1 : A)) ∧ (∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (K : CochainComplex (ModuleCat.{u} P) ℤ) (n r p q : ℤ) (hpq : p + r = q) (z : Cochain (E⟦n⟧) (((coinductionComplexFunctor φ).obj K)⟦n⟧) r) (x : (E⟦n⟧).X p), (((t E K n).hom.f r z).v p q hpq) x = CoextendScalars.equiv φ (K.X (q + n)) (z.v p q hpq x) (1 : A)) ∧ (∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (K : CochainComplex (ModuleCat.{u} P) ℤ) (n r : ℤ) (z : Cochain (E⟦n⟧) (((coinductionComplexFunctor φ).obj K)⟦n⟧) r), (σP.iso (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj E) K n).hom.f r ((t E K n).hom.f r z) = (T E K).hom.f r ((σA.iso E ((coinductionComplexFunctor φ).obj K) n).hom.f r z)) ∧ (∀ (I : CochainComplex (ModuleCat.{u} P) ℤ) [I.IsKInjective] (_e : DerivedCategory.Q.obj I ≅ DerivedCategory.Q.obj ((CochainComplex.singleFunctor (ModuleCat.{u} P) 0).obj (ModuleCat.of P P))) (n : ℤ), (derivedCoinduction φ).map ((DerivedCategory.Q.commShiftIso n).hom.app I) ≫ (Functor.commShiftIso (derivedCoinduction φ) (self := (derivedCoinductionAdjunction φ).rightAdjointCommShift ℤ) n).hom.app (DerivedCategory.Q.obj I) ≫ (derivedCoinductionModel φ I).hom⟦n⟧' = (derivedCoinductionModel φ (I⟦n⟧)).hom ≫ DerivedCategory.Q.map (j I n).hom ≫ (DerivedCategory.Q.commShiftIso n).hom.app ((coinductionComplexFunctor φ).obj I)) ∧ (∀ (I : CochainComplex (ModuleCat.{u} P) ℤ) [I.IsKInjective] (_e : DerivedCategory.Q.obj I ≅ DerivedCategory.Q.obj ((CochainComplex.singleFunctor (ModuleCat.{u} P) 0).obj (ModuleCat.of P P))), ∃ (m : ∀ n : ℤ, (CochainComplex.singleFunctor (ModuleCat.{u} P) 0).obj ((restrictScalars φ).obj (ModuleCat.of A A)) ⟶ ((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj (moduleHomComplex (((coinductionComplexFunctor φ).obj I)⟦n⟧) (((coinductionComplexFunctor φ).obj I)⟦n⟧))) (δI : (CochainComplex.singleFunctor (ModuleCat.{u} P) 0).obj ((restrictScalars φ).obj (ModuleCat.of A A)) ⟶ moduleHomComplex (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj ((coinductionComplexFunctor φ).obj I)) I), (∀ (n p : ℤ) (a : A) (h : (((coinductionComplexFunctor φ).obj I)⟦n⟧).X p), (((m n).f 0 ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 ((restrictScalars φ).obj (ModuleCat.of A A))).inv a)).v p p (add_zero p)) h = a • h) ∧ (∀ (p : ℤ) (a : A) (h : ((coinductionComplexFunctor φ).obj I).X p), ((δI.f 0 ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 ((restrictScalars φ).obj (ModuleCat.of A A))).inv a)).v p p (add_zero p)) h = CoextendScalars.equiv φ (I.X p) h a) ∧ (∀ n : ℤ, m n ≫ (t ((coinductionComplexFunctor φ).obj I) I n).hom ≫ (σP.iso (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj ((coinductionComplexFunctor φ).obj I)) I n).hom = δI))",
+  "branch": "sheaf-dag",
+  "by": "Q72",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a67b97d88",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Only the lean field differs from side-live; the 5 stmt_deps are byte-identical, there are no new nodes, and lean.statement is verbatim. Every node clause is rendered. ModuleHomShiftComparison is fixed by its component formula (sign (-1)^{nr} with explicit shiftFunctorObjXIso index maps), plus naturality in both variables and an ofHom clause (degree 0 = inverse shift); the sign was checked against Mathlib's delta (eps^{r+2}=eps^r). Shifts preserve K-injectivity over P and over A. j has identity components and is natural. T and t are fixed by evaluation at 1 (same formula as the dependency's T). The square sigmaP o t = T o sigmaA was checked componentwise. The derived shift comparison uses derivedCoinductionAdjunction.rightAdjointCommShift, the same instance as the downstream consumer coinductionHomShift, and canonical. m_n and delta_I are actual chain maps fixed by their degree-0 formulas, and the final equation reduces to (ah)(1)=h(a). No extra hypotheses; the common universe u matches the dependency interfaces. No duplicate declaration, nothing hollow, a single sorry, docstrings with source and blueprint tag. Edge cases n=0, n,r=+-1, r=0, char 2, zero ring, unbounded complexes, field with I=P[0]. Not recompiled (no change; worker scompile clean). Advisory: _e and [I.IsKInjective] are unnecessary in the final clause but are stated by the node."
+ }
+}

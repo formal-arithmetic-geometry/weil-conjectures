@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-dg-finite-principal-hom-descent",
+ "kind": "statement",
+ "title": "Finite principal-cover descent for dg derived Hom",
+ "statement": "Let $S$ be a commutative ring and $C$ an associative unital dg $S$-algebra with central degree-zero $S$-action and $S$-linear differential. Use left dg module derived categories and signs of [def-sfb-sheaf-dg-module-localization], applied to a point. Let $r\\geq1$ and $f_1,\\ldots,f_r\\in S$ generate the unit ideal. For $f\\in S$ define $S_f$ and $M_f$ by inverting $1,f,f^2,\\ldots$ in the ring and in each term of a module, respectively, and put $C_f=S_f\\otimes_SC$. For nonempty $J\\subseteq\\{1,\\ldots,r\\}$ put $f_J=\\prod_{j\\in J}f_j$. Let $M,N\\in D(C)$ be arbitrary, possibly unbounded.\n\nLet $R\\operatorname{Hom}_C(M,N)\\in D(S)$ [def-weil-abstract-derived-category] denote derived dg-linear Hom: choose a quasi-isomorphism $P\\to M$ with $\\operatorname{Hom}_C^\\bullet(P,L)$ acyclic for every acyclic dg module $L$, and use $\\operatorname{Hom}_C^\\bullet(P,N)$, whose degree $q$ consists of graded $C$-linear maps of degree $q$, with $h(cx)=(-1)^{q|c|}c h(x)$ and differential $dh=d_Nh-(-1)^qhd_P$. This construction is independent up to its canonical derived isomorphism and has $H^qR\\operatorname{Hom}_C(M,N)=\\operatorname{Hom}_{D(C)}(M,N[q])$.\n\nLocalization is exact and has the derived extension--restriction adjunction. The canonical maps induce a natural isomorphism in $D(S)$\n$$R\\operatorname{Hom}_C(M,N)\\simeq\\operatorname{Tot}\\left[\\prod_{|J|=1}R\\operatorname{Hom}_{C_{f_J}}(M_{f_J},N_{f_J})\\longrightarrow\\cdots\\longrightarrow R\\operatorname{Hom}_{C_{f_{\\{1,\\ldots,r\\}}}}(M_{f_{\\{1,\\ldots,r\\}}},N_{f_{\\{1,\\ldots,r\\}}})\\right].$$\nAll terms on the right are restricted to $S$. The finite alternating Cech direction has degree $p=|J|-1$ and total differential $\\delta+(-1)^pd_{\\mathrm{Hom}}$; its transition maps are induced by localization. The comparison is the augmentation into the singleton coordinates. No compactness, flatness or Noetherian hypothesis on $M,N,C,S$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D2 (lemma-alternating-cech-complex-complex-computes-cohomology), finite affine Cech resolution; dg-Hom refinement obtained by applying Hom from a homotopically projective dg resolution to the finite localization resolution. This derived dg Hom statement is agent-formulated, not quoted verbatim from the tag."
+ },
+ "stmt_deps": [
+  "def-sfb-sheaf-dg-module-localization",
+  "def-weil-abstract-derived-category",
+  "def-sfb-dg-principal-hom-models"
+ ],
+ "proof": [
+  {
+   "text": "Pass from left $C$-modules to right modules over the graded opposite $C^{\\mathrm{op}}$, with $a*b=(-1)^{|a||b|}ba$ and $x\\cdot a=(-1)^{|x||a|}ax$. These formulas preserve the differential, quasi-isomorphisms and Hom complexes: for a degree-$q$ map, right linearity becomes $h(ax)=(-1)^{q|a|}ah(x)$. Right shifts with unchanged action become precisely the signed left shifts in [def-sfb-sheaf-dg-module-localization]. Apply [lem-sfb-dg-property-p-resolution] over $C^{\\mathrm{op}}$ and then [lem-sfb-dg-property-p-homotopically-projective]. Translating back gives a quasi-isomorphism $P\\to M$ such that $\\operatorname{Hom}_C^\\bullet(P,L)$ is acyclic for every acyclic left dg module $L$. The $S$-action is retained: every graded $C$-linear map is $S$-linear because $S$ acts centrally in degree zero. Neither cited theorem requires boundedness or flatness.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "lem-sfb-dg-property-p-resolution",
+    "lem-sfb-dg-property-p-homotopically-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09KP (lemma-resolve), 09KM (lemma-property-P-K-projective); left/right conversion written explicitly"
+   }
+  },
+  {
+   "text": "For any homotopically projective $P$, [lem-sfb-dg-homotopically-projective-hom-derived], transported by step 1, identifies chain maps modulo homotopy from $P$ with maps in $D(C)$. Apply it also to $N[q]$: degree-zero chain maps $P\\to N[q]$ are exactly closed degree-$q$ elements of the displayed Hom complex, and boundaries are homotopies, with the signed shift action. This gives $H^q\\operatorname{Hom}_C^\\bullet(P,N)=\\operatorname{Hom}_{D(C)}(M,N[q])$. For two such resolutions $P\\to M$, $P'\\to M$, lift their canonical derived comparison and its inverse using the same bijection. The composites represent identities, hence are homotopic to identities. Precomposition gives mutually inverse chain homotopy equivalences on Hom complexes; homotopic lifts induce the same map in $D(S)$. This proves the canonical independence of the chosen resolution and defines the contravariant functor on $M$. All maps and homotopies used are $S$-linear.",
+   "uses": [
+    "lem-sfb-dg-homotopically-projective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KY (lemma-hom-derived), applied also to shifts"
+   }
+  },
+  {
+   "text": "For $f\\in S$, [lem-weil-pbc-localization-module-exact] applied to cycles and boundaries shows $H^n(L_f)=H^n(L)_f$; thus localization preserves quasi-isomorphisms. Restriction keeps the underlying complex and is exact. Ordinary extension along $C\\to C_f$ is localization: the mutually inverse balanced maps are $(c/s)\\otimes x\\mapsto cx/s$ and $x/s\\mapsto(1/s)\\otimes x$, where $s$ is a power of $f$. They commute with differentials because $ds=0$. Consequently this extension is already its derived functor. The extension--restriction adjunction of [lem-sfb-ringed-dg-scalar-adjunction], on a point and for left modules, is therefore the required exact derived localization adjunction, with its action counit.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-sfb-ringed-dg-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CS (proposition-localization-exact); dg scalar adjunction: sdga.tex Tags 0FTF (lemma-derived-tensor-product), 0FTR (lemma-derived-adjoint-push-pull)"
+   }
+  },
+  {
+   "text": "For any dg $C_f$-module $L$ there is an isomorphism of $S$-complexes $\\operatorname{Hom}_{C_f}^\\bullet(P_f,L)\\cong\\operatorname{Hom}_C^\\bullet(P,\\operatorname{Res}L)$. In every degree its forward map restricts along $x\\mapsto x/1$, and its inverse sends $h$ to $x/s\\mapsto s^{-1}h(x)$. Fractions are well defined since $s$ acts invertibly on $L$; the same formula verifies the signed $C_f$-linearity. The Hom differential commutes with this formula since $d(s)=0$. An acyclic $L$ remains acyclic under restriction, so the right complex is acyclic by the choice of $P$. Hence $P_f$ is homotopically projective, and step 3 shows $P_f\\to M_f$ is a quasi-isomorphism. With $L=N_f$ the displayed complexes compute $R\\operatorname{Hom}_{C_f}(M_f,N_f)$ and $R\\operatorname{Hom}_C(M,\\operatorname{Res}N_f)$, respectively. For further localization the formula remains $h(x/s)/t=h(x)/(st)$, so these identifications commute with the transition maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KY (lemma-hom-derived); explicit fraction form of the extension--restriction Hom adjunction"
+   }
+  },
+  {
+   "text": "Put $B^{p,t}=\\prod_{|J|=p+1}(N_{f_J})^t$ for $0\\leq p<r$, zero otherwise. Its horizontal differential $\\delta$ is the alternating sum of further localizations and its vertical differential is $d_N$; they commute. Form $T(N)^n=\\bigoplus_{p=0}^{r-1}B^{p,n-p}$ with $D=\\delta+(-1)^p d_N$. Give column $p$ the left action $c\\star x=(-1)^{p|c|}cx$. Then $D^2=0$. For $|c|=a$, the $\\delta$ terms in $D(c\\star x)=d_Cc\\star x+(-1)^ac\\star D(x)$ agree because $(-1)^{pa}=(-1)^a(-1)^{(p+1)a}$; the internal terms agree by the original module Leibniz rule. Thus $T(N)$ is a dg $C$-module. The singleton localization maps define a dg map $u:N\\to T(N)$: its horizontal differential is zero since on each pair the two localizations coincide, and column zero has unchanged differential and action.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D2 (lemma-alternating-cech-complex-complex-computes-cohomology); explicit left-dg refinement and total signs"
+   }
+  },
+  {
+   "text": "For each integer $t$, apply [lem-pc-affine-cech-complex] to the $S$-module $N^t$ and to the unit-ideal family $f_1,\\ldots,f_r$. It gives exactness of $0\\to N^t\\to B^{0,t}\\to\\cdots\\to B^{r-1,t}\\to0$. Equivalently the singleton map from $N^t[0]$ to this horizontal row is a quasi-isomorphism: its degree-zero kernel is the image of $N^t$, this map is injective, and all positive row cohomology vanishes. Apply [lem-sc-finite-strip-row-augmentation] in $S$-modules to the commuting double complex $B$, with $A=N$, width $r$, and the maps just described. Its hypotheses hold in every integer degree, and its specified augmentation is exactly $u$. It follows that the underlying $S$-complex map $u:N\\to T(N)$ is a quasi-isomorphism. The width is finite even when $N$ is unbounded.",
+   "uses": [
+    "lem-pc-affine-cech-complex",
+    "lem-sc-finite-strip-row-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), variant in the other variable and finite horizontal strip; standard affine alternating Cech exactness"
+   }
+  },
+  {
+   "text": "The cone of $u$ is acyclic by [lem-sfb-dg-homotopy-acyclic-localization], transported to left modules as in step 1. Homotopical projectivity therefore makes $\\operatorname{Hom}_C^\\bullet(P,\\operatorname{Cone}(u))$ acyclic. Splitting a map to the cone into its two components identifies this complex with $\\operatorname{Cone}(\\operatorname{Hom}_C^\\bullet(P,u))$: on a degree-$q$ pair $(a,b)$ the differential is $(d a+u b,-d b)$, using the signed shifted action. The same cone criterion, applied to the dg algebra $S$ concentrated in degree zero, shows that $\\operatorname{Hom}_C^\\bullet(P,N)\\to\\operatorname{Hom}_C^\\bullet(P,T(N))$ is a quasi-isomorphism. This uses Hom on an acyclic cone, rather than exactness of ordinary Hom on the Cech rows.",
+   "uses": [
+    "lem-sfb-dg-homotopy-acyclic-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KW (lemma-acyclic), cone criterion; the Hom-cone component calculation uses the displayed Hom differential"
+   }
+  },
+  {
+   "text": "A degree-$q$ map $P\\to T(N)$ is uniquely its finite family of components $h_{p,J}:P^i\\to (N_{f_J})^{i+q-p}$. Signed $C$-linearity in $T(N)$ reads $h_{p,J}(cx)=(-1)^{(q+p)|c|}ch_{p,J}(x)$, which is exactly degree-$(q-p)$ linearity into $N_{f_J}$. Conversely these components reconstruct the map by the finite sum of column inclusions. This remains true for an unbounded $P$: an arbitrary family indexed by $i$ can be regrouped across the fixed finite set of pairs $(p,J)$. In these coordinates the Hom differential is $\\delta h_{p-1}+(-1)^p d_Nh_p-(-1)^q h_p d_P=\\delta h_{p-1}+(-1)^p(d_Nh_p-(-1)^{q-p}h_pd_P)$. Thus there is an actual isomorphism of $S$-complexes $\\operatorname{Hom}_C^\\bullet(P,T(N))\\cong\\operatorname{Tot}[\\prod_{|J|=p+1}\\operatorname{Hom}_C^\\bullet(P,N_{f_J})]$ with exactly the differential in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D2; finite regrouping and the explicit Hom-total differential computation"
+   }
+  },
+  {
+   "text": "Combine steps 7 and 8, then apply step 4 to every $f_J$. Each local complex becomes $\\operatorname{Hom}_{C_{f_J}}^\\bullet(P_{f_J},N_{f_J})$, a representative of the required derived Hom. The isomorphisms of step 4 commute with all further localizations, so they identify the whole finite diagram, not just its individual objects. This gives the asserted isomorphism in $D(S)$. The degree-zero-column component sends $h$ to $x/s\\mapsto h(x)/s$ in each singleton, and all higher column components are zero; hence the comparison is the stated augmentation. These strict models also specify the total of the derived diagram. A map of target modules commutes with each fraction map and with $\\delta$. A map of source modules is represented by a map between their projective resolutions using step 2; precomposition commutes with every displayed construction. Changing such a lift by a homotopy changes the resulting maps by a homotopy. The same holds for a change of projective resolution. Therefore the comparison is natural in both derived variables and independent of choices. For $r=1$, $f_1$ is a unit and this is the identity under localization; zero localizations or zero modules simply give zero coordinates. No argument used any finiteness, boundedness, flatness or Noetherian condition beyond the finite unit-ideal cover.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D2; assembly of the dg refinement with the specified augmentation and naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-sheaf-dg-module-localization",
+  "lem-sfb-dg-property-p-resolution",
+  "lem-sfb-dg-property-p-homotopically-projective",
+  "lem-sfb-dg-homotopically-projective-hom-derived",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-sfb-ringed-dg-scalar-adjunction",
+  "lem-pc-affine-cech-complex",
+  "lem-sc-finite-strip-row-augmentation",
+  "lem-sfb-dg-homotopy-acyclic-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D2 finite Cech route, refined using dga.tex Tags 09KP, 09KM, 09KY and homology.tex Tag 0133. The dg-Hom and total-action computations are written here by Q72."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Cc]ech.*[Ll]ocaliz|[Ll]ocaliz.*[Cc]ech",
+   "results": "{\"t\": \"2026-10-24T07:00:17Z\", \"tool\": \"grep\", \"query\": \"[Cc]ech.*[Ll]ocaliz|[Ll]ocaliz.*[Cc]ech\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived fractions, Mayer-Vietoris sheaf sequences and ordinary Hom complexes do not give finite principal-cover descent for RHom over an arbitrary dg algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential graded module derived Hom finite localization Cech descent",
+   "results": "{\"t\": \"2026-10-24T07:00:17Z\", \"tool\": \"leansearch\", \"query\": \"Differential graded module derived Hom finite localization Cech descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory\", \"DerivedCategory.Q\", \"HasDerivedCategory.standard\", \"CochainComplex.HomComplex.instModuleCochain\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"CochainComplex.HomComplex_d_hom_apply\", \"DerivedCategory\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\"], \"digest\": \"b258491682f4265d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived fractions, Mayer-Vietoris sheaf sequences and ordinary Hom complexes do not give finite principal-cover descent for RHom over an arbitrary dg algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-24T07:00:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cech\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived fractions, Mayer-Vietoris sheaf sequences and ordinary Hom complexes do not give finite principal-cover descent for RHom over an arbitrary dg algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite principal open cover Cech descent of differential graded modules and derived Hom complexes",
+   "results": "{\"t\": \"2026-10-24T07:00:22Z\", \"tool\": \"leanfinder\", \"query\": \"Finite principal open cover Cech descent of differential graded modules and derived Hom complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"CochainComplex.cm5b.I\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\"], \"digest\": \"80a194f54caefdaa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived fractions, Mayer-Vietoris sheaf sequences and ordinary Hom complexes do not give finite principal-cover descent for RHom over an arbitrary dg algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom over a dg algebra satisfies finite Zariski descent without compactness assumptions",
+   "results": "{\"t\": \"2026-10-24T07:00:24Z\", \"tool\": \"leanfinder\", \"query\": \"Derived Hom over a dg algebra satisfies finite Zariski descent without compactness assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"HasDerivedCategory.standard\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"Algebra.Smooth.exists_finiteType\"], \"digest\": \"d1cf4f0e594b0790\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived fractions, Mayer-Vietoris sheaf sequences and ordinary Hom complexes do not give finite principal-cover descent for RHom over an arbitrary dg algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite principal open cover Cech descent of differential graded modules and derived Hom complexes",
+   "results": "{\"t\": \"2026-10-24T07:34:30Z\", \"tool\": \"leanfinder\", \"query\": \"Finite principal open cover Cech descent of differential graded modules and derived Hom complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"CochainComplex.cm5b.I\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\"], \"digest\": \"80a194f54caefdaa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary Hom complexes, derived fractions, cotangent modules and scheme descent statements do not assert Cech descent of derived Hom over an arbitrary dg algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-24T07:34:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cech\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary Hom complexes, derived fractions, cotangent modules and scheme descent statements do not assert Cech descent of derived Hom over an arbitrary dg algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ech.*[Ll]ocaliz|[Ll]ocaliz.*[Cc]ech",
+   "results": "{\"t\": \"2026-10-24T07:34:31Z\", \"tool\": \"grep\", \"query\": \"[Cc]ech.*[Ll]ocaliz|[Ll]ocaliz.*[Cc]ech\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary Hom complexes, derived fractions, cotangent modules and scheme descent statements do not assert Cech descent of derived Hom over an arbitrary dg algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential graded module derived Hom finite localization Cech descent",
+   "results": "{\"t\": \"2026-10-24T07:34:32Z\", \"tool\": \"leansearch\", \"query\": \"Differential graded module derived Hom finite localization Cech descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory\", \"DerivedCategory.Q\", \"HasDerivedCategory.standard\", \"CochainComplex.HomComplex.instModuleCochain\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"CochainComplex.HomComplex_d_hom_apply\", \"DerivedCategory\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\"], \"digest\": \"b258491682f4265d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary Hom complexes, derived fractions, cotangent modules and scheme descent statements do not assert Cech descent of derived Hom over an arbitrary dg algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom over a dg algebra satisfies finite Zariski descent without compactness assumptions",
+   "results": "{\"t\": \"2026-10-24T07:36:32Z\", \"tool\": \"leanfinder\", \"query\": \"Derived Hom over a dg algebra satisfies finite Zariski descent without compactness assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"HasDerivedCategory.standard\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"Algebra.Smooth.exists_finiteType\"], \"digest\": \"d1cf4f0e594b0790\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary Hom complexes, derived fractions, cotangent modules and scheme descent statements do not assert Cech descent of derived Hom over an arbitrary dg algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DGAlgebra|[Dd]ifferential.?[Gg]raded|[Ss]emi.?free",
+   "results": "{\"t\": \"2026-10-24T07:36:33Z\", \"tool\": \"grep\", \"query\": \"DGModule|DGAlgebra|[Dd]ifferential.?[Gg]raded|[Ss]emi.?free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\"], \"digest\": \"b00540e86065b3f2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned ordinary Hom complexes, derived fractions, cotangent modules and scheme descent statements do not assert Cech descent of derived Hom over an arbitrary dg algebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-dg-coefficient-module-comparison",
+  "date": "2026-10-24",
+  "group": "Q89"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Affine passage to dg global modules, including the local-to-finite-cell perfectness theorem and the actual coefficient adjunction comparisons. Independent tool: Local-to-global perfectness: finite principal Cech descent for arbitrary derived dg Hom, prior to imposing local compactness.",
+   "via": [
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-finite-principal-hom-descent",
+  "worker": "stage1",
+  "summary": "Reused existing property-(P) resolution, homotopical projectivity, derived Hom, localization exactness, scalar adjunction and finite Cech lemmas. Constructed the signed left-dg Cech total, applied Hom to its acyclic cone, and checked all transition maps, total signs, naturality and resolution independence. No new nodes and no statement change.",
+  "blueprint": "Inherited direct-image finiteness prerequisite, affine dg comparison: local-to-global perfectness uses finite principal Cech descent for arbitrary dg derived Hom. The latest blueprint stability direct-image paragraph (3) is the inherited route; this refinement changes no unit or chapter step.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-finite-strip-row-augmentation",
+    "why": "Generic unbounded double-complex theorem for a finite horizontal strip; it converts termwise exact affine Cech rows into the quasi-isomorphism of their total. No dg or stability hypothesis is involved."
+   },
+   {
+    "node": "lem-weil-pbc-localization-module-exact",
+    "why": "Generic exactness of module localization, applied termwise to dg modules. It supplies preservation of quasi-isomorphisms without imposing flatness on the dg algebra."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-finite-strip-row-augmentation",
+  "lem-weil-pbc-localization-module-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-d1a44fe17",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-d1a44fe17 (reviewer sub-agent of L); spot-checked: PASS with no changes; review.md is written. The delivery splits the item into 9 steps, adds no new nodes and leaves the statement unchanged. It is not a re-split: the item was created by Q89 the same day as a statement-only tool and had no earlier proof. I checked each step by hand. Step 1: the graded-opposite transport (Leibniz rule, associativity, right linearity becoming h(ax)=(-1)^{q|a|}ah(x), shifted action (-1)^{k|a|}) and S-linearity, which holds because S acts centrally in degree 0. Step 2: H^q = Hom_D(M,N[q]) through the 09KY node. Steps 3 and 4: localization preserves quasi-isomorphisms (00CS node), C_f⊗_C M ≅ M_f by the balanced maps, the scalar-adjunction node on a point, and Hom_{C_f}(P_f,L) ≅ Hom_C(P,Res L) with x/s↦s^{-1}h(x) well defined. Step 5: the column twist (-1)^{p|c|} satisfies the Leibniz rule in both the δ and internal terms, D²=0, and u is a dg map; the sign δ+(-1)^p d matches def-sp-double-complex-total. Step 6: the affine Čech node and the finite-strip node apply with no vertical bound. Step 7: I recomputed Hom(P,Cone u) ≅ Cone(Hom(P,u)), differential (da+ub,-db). Step 8: the regrouping signs give exactly the statement's total differential. Step 9: assembly from strict models, with naturality. Small cases checked: r=1, f_i=0, the zero ring, M=0 or N=0, unbounded P and N, and C with odd elements. Source checked: perfect.tex 08D2 at l.2055. The duplicate search (Koszul-Čech nodes, lem-coef-dg-*) found no node stating this result. Accepted tool_uses: finite-strip-row-augmentation and localization-module-exact; lem-pc-affine-cech-complex is Lean-closed. Batch 5: the scalar adjunction reaches lem-trf-triangulated-subcategory-cone-system, a general Verdier multiplicative-system lemma (status mathlib) that is not part of the trace formula or Poincaré duality, so the citation is accepted. Minor: the report mentions a citations.json that is not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgFinitePrincipalHomDescent",
+  "declaration": "CategoryTheory.SheafDg.PrincipalHom.finite_principal_hom_descent",
+  "declarations": [
+   "CategoryTheory.SheafDg.PrincipalHom.derivedPairs",
+   "CategoryTheory.SheafDg.PrincipalHom.representative",
+   "CategoryTheory.SheafDg.PrincipalHom.DerivedHomModel",
+   "CategoryTheory.SheafDg.PrincipalHom.IsCanonicalHomComparison",
+   "CategoryTheory.SheafDg.PrincipalHom.DescentData",
+   "CategoryTheory.SheafDg.PrincipalHom.finite_principal_hom_descent"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgFinitePrincipalHomDescent.lean",
+  "statement": "theorem finite_principal_hom_descent (A : Algebra S) (r : ℕ) (hr : 1 ≤ r) (f : Fin r → S) (hf : Ideal.span (Set.range f) = ⊤) : (∀ g : S, Nonempty (LocalizationModel A g)) ∧ ∃ d : DescentData A r f, (∀ Z : (Derived A)ᵒᵖ × Derived A, IsIso (d.comparison.app Z)) ∧ ∀ (H' : HomModel A) (R' : DerivedHomModel A H'), ∃! e : d.derivedHom.functor ≅ R'.functor, IsCanonicalHomComparison d.derivedHom R' e",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f5574538",
+  "group": "Q87",
+  "result": "fix",
+  "note": "Read item, 9 steps, source 08D2/09KP/09KM/09KY, dependency SheafDgModuleLocalization (GradedLinear sign, Derived = word localization, extension/actionCounit), new node def-sfb-dg-principal-hom-models and both modules. Clause match OK: CommRing S, punctual SheafDg.Algebra, 1≤r, Fin r, Ideal.span=⊤; LocalizationModel pins C_f by degreewise IsLocalizedModule plus counit=actionCounit, exact ext/res, derived adjunction with unit normalization; HomModel coordinates exactly GradedMap with HomComplex.δ (d_N h-(-1)^q h d_P checked); DerivedHomModel pinned by compute on every h.-proj P; ∃! canonical comparison; LocalDiagram transitions pinned on fractions; CechModel alternating signs (-1)^{#k<j}, Mathlib up/up total ε₂=p.negOnePow so D=δ+(-1)^p d (verified); comparison_formula = column-0 augmentation; IsIso at all derived pairs in D(S). Edge cases r=1, zero ring, f_i=0, M or N=0, unbounded: OK; no extra hypotheses or universe restriction; no hollow defs; only the theorem is sorry; docstrings and verbatim statements OK. FIX (H12): new node cited only the theorem lem-weil-pbc-singleton-site-module-comparison for singletonRingSheaf/singletonEvaluation, which are owned by def-trf-singleton-site-operations (on base since 10-19); fixes/def-sfb-dg-principal-hom-models.json adds it to stmt_deps and statement, all else unchanged; no Lean change, no compile needed. Advisory: cohomology clause is Nonempty ≃+ rather than the canonical identification (explanatory clause, RHom itself pinned); second reading is a disclosed self-reread."
+ }
+}

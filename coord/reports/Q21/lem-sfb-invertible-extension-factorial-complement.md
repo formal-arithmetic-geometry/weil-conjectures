@@ -1,0 +1,42 @@
+## Worker report
+
+Files written:
+- `dag/nodes/sec-six-functors-basics/lem-sfb-invertible-extension-factorial-complement.json`: statement, split; no exact Mathlib match.
+- `citations.json`: verbatim statements for all nine step/node citations.
+- `searches.jsonl`: five actual Q21 searches, in addition to the five inherited search records retained in the item.
+
+New nodes: 0. New Mathlib leaves: 0. Existing nodes supply every mathematical input.
+
+Attachments: none. I searched all of `lean/WeilConjectures/` for the item tag and invertible-module extension terminology, and searched factorial-related declarations. `Modules/PicardAffine.lean` and `AffineSpace/PuncturedLine.lean` concern factorial affine Picard triviality, not this arbitrary open-extension theorem. No complete declaration states all the item's clauses. No Lean was written or compiled.
+
+WANTED: none. The proof uses the locally stored Stacks sources.
+
+The statement is unchanged and agrees with Stacks Tag 0BD9 (`divisors.tex`, `lemma-extend-invertible-module`). The inherited item had no proof. I supplied the local construction from effective Cartier divisors and the general locally Noetherian assembly. In Tag 0AYM the quasi-affine case permits the second divisor to be empty; the existing `lem-sfb-quasiaffine-line-effective-divisor` therefore supplies a single effective divisor. I reuse that stronger special case instead of introducing another difference-of-divisors node.
+
+For the general assembly, the source passes to a dense open and uses Zorn on extensions with compatible identifications. I give a well-ordered affine-cover construction with chosen coherent identifications at every stage, using the same local extension and sheaf-gluing inputs. At a successor stage the previous line and the new affine line are glued. At a limit stage the already supplied comparison maps give the descent cocycle. This is below the unit route and proves the same general statement without inserting a density hypothesis. Because the set-theoretic implementation is written here, `proof_origin.by` is `agent`, with Tag 0BD9 as the supporting document, rather than claiming it is verbatim Stacks.
+
+The current blueprint was read at `literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/`, including `_section.md` and the direct-image proof. This item is a supporting geometric input on the inherited alteration branch. Whole-blueprint searches for `invertible extension`, `factorial`, and `line bundle extension`, supplemented by the wider `invertible` and `effective Cartier` searches, found no blueprint node stating this general theorem. `tools/blueprint_refs.py ancestor` returns `None` on the live inherited ancestry, so I preserve its existing `blueprint.from.node = null` and `via`, and retain the precise existing `from.place`. No chapter, unit, or route was changed.
+
+Unfinished work: none in this one-level split. Its existing dependencies remain tasks in their own right where not already finished.
+
+## Not duplicates
+
+No new nodes were created. In particular, I reuse `lem-sfb-quasiaffine-line-effective-divisor` (0AYM), `lem-sfb-cartier-extension-factorial-complement` (0BD8), `lem-sfb-noetherian-open-immersion-qc` (01OX), and `lem-weil-pbc-site-module-sheaf-gluing` (04TR). The quasi-affine and Cartier lemmas are proper inputs: neither states extension of an arbitrary line over a general locally Noetherian scheme. No clause of this item was moved to a renamed node.
+
+## Review by Q21
+
+I read Stacks `divisors.tex` around Tags 0AYM, 0BD8 and 0BD9, not just their titles, and the statement and compatible-tuple proof of the module-gluing theorem in `sites.tex` at Tag 04TR. I also read the ordinary open-cover sheaf-gluing discussion in `sheaves.tex` (00AK/00AL). There are no new nodes whose sources require a separate audit.
+
+Step 1 cites the actual statement of `pqf-def-locnoeth`, including its open-subscheme remark, and the statement of `lem-sfb-noetherian-open-immersion-qc`. The latter explicitly gives quasi-compact inverse images of affine opens. Applying it to the open immersion V into Z gives exactly quasi-compactness of V intersect W, while the former gives local Noetherianness. Thus the next step has a Noetherian quasi-affine scheme even if Z is non-quasi-compact. I did not assume that the intersection of two affine opens is affine, or that Z is separated.
+
+Step 2 cites the exact quasi-affine presentation statement, which allows the empty scheme, and the exact Cartier-extension statement, which assumes factoriality only at points of the complement. For W minus (V intersect W), containment in Z minus U verifies that hypothesis, and restriction of the structure sheaf identifies the local rings. I read `def-pc-divisor-line-bundle`: it defines the dual of the Cartier ideal and explicitly says it is invertible. The restriction isomorphism is written out using a generator f of the Cartier ideal and its dual generator. It takes only that local presentation; no unquoted claim about arbitrary pullback or flatness is needed.
+
+Step 3 fixes one set-indexed affine cover and its well-order, and states the complete induction invariant, including the actual compatibility equation. It is elementary choice and recursion bookkeeping, not an assertion that arbitrary independently chosen extensions agree. No uniqueness of extension is asserted.
+
+Steps 4 and 5 both cite `lem-weil-pbc-site-module-sheaf-gluing`. I opened its statement and verified that it gives effective gluing of module sheaf objects with comparison maps satisfying the specified overlap equation; it is not merely section gluing or a definition of descent. The sites here are the Zariski sites, the coefficient sheaf is the commutative structure sheaf, the covers are sets, and fibre products of open inclusions are their intersections. At a successor stage the identity and inverse maps satisfy all cocycles. At a limit stage the q maps in the induction invariant and their inverses supply the full pairwise descent datum; sorting three indices reduces its cocycle identity to the displayed induction equation. The output overlap equation yields exactly the new q compatibility equation. Both stages cite the actual invertible-module definition, so local free rank one proves the required property on the glued module. Local free rank one modules are quasi-coherent: on a local trivializing open they are the structure sheaf, and quasi-coherence is local. This uses only the ordinary local description, and imposes no quasi-compactness on the limit union.
+
+The gluing theorem is the one off-unit nonclosed generic tool. I declared it in `split_report.tool_uses` and explained why the unit supplies no replacement. No maintainer-owned `tool_uses` field was added. Step 6 is the terminal induction evaluation V_kappa = Z and q_0,kappa, not another invoked extension theorem.
+
+For C4 I copied each cited statement verbatim into `citations.json`; each contains the assertion that its step needs. For C1 I checked the local Noetherian and quasi-compactness hypotheses, the quasi-affine divisor presentation, Cartier extension, and object gluing separately. For B I checked statement self-containment, retained the existing statement dependencies, used the proper Stacks labels, retained inherited metadata and searches, and recorded the actual new search queries and outcomes. The searches returned Noetherian stalk facts, affine tilde-section formulas, scheme restriction constructions, and unrelated substring hits; none states the item or a one-line generalization. The second LeanFinder phrasing likewise returned section-extension denominator identities rather than line-module extension.
+
+For D I checked that the proof carries the local argument and the global coherent assembly, that all its dependencies already exist, and that no new dependency restates its conclusion. For E I tested U = Z, U empty, Z empty, a disconnected scheme with components disjoint from U, and empty overlaps. The local divisor lemma permits empty divisors; the gluing handles these cases. A nonseparated locally Noetherian scheme causes no change: only an open subset of a single affine chart needs to be quasi-affine, and module gluing is valid over arbitrary open covers. A non-quasi-compact locally Noetherian Z is handled by the set-indexed limit construction. The statement is true as imported, so no STATEMENT-DISPUTED correction is needed. Every step is below 1000 characters; none hides a long unreviewed lemma.

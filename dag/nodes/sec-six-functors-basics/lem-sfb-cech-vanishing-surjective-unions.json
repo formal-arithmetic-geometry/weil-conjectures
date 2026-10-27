@@ -13,79 +13,67 @@
  ],
  "proof": [
   {
-   "text": "Construct the auxiliary space $P=\\{A\\subseteq I\\mid A\\ne\\varnothing\\}$. For finite nonempty $J\\subseteq I$ set $B_J=\\{A\\in P\\mid J\\subseteq A\\}$. These sets cover $P$, since every $A$ contains some $i$; and $B_J\\cap B_K=B_{J\\cup K}$, so their arbitrary unions form a topology. Moreover $B_J\\subseteq B_K$ iff $K\\subseteq J$: necessity follows by testing the point $A=J$, and sufficiency follows from inclusion transitivity. In particular, if an open $W$ contains the point $J$, then $B_J\\subseteq W$: choose a basic neighborhood $B_K$ of $J$ inside $W$, so $K\\subseteq J$. This also proves that $B_J\\subseteq\\bigcup_s W_s$ iff $B_J\\subseteq W_s$ for some $s$, by testing the point $J$.",
+   "text": "Use the space P of finite nonempty subsets of I, with its upper-set topology for inclusion, enlarged by ULift to Type (max v w). For finite J let B_J be the open of finite nonempty sets containing J. In particular B_{singleton i} are opens and intersections indexed by a nonempty finite tuple are B_J for the set J of its entries. Every point A has the principal open B_A as smallest neighborhood. This finite-point variant of the source construction suffices: all principal opens used there already have finite nonempty index.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A36, lemma-vanishing-ravi, proof"
+    "place": "Tag 0A36, lemma-vanishing-ravi, proof; finite-nonempty-subset variant of the auxiliary space"
    }
   },
   {
-   "text": "For any open $W\\subseteq P$ define $T(W)=\\bigcup_{J\\text{ finite nonempty},\\ B_J\\subseteq W}U_J$, an open of $Y$ contained in $U$. It is monotone. The inclusion criterion from step 1 gives $T(B_K)=U_K$: the union in its definition ranges exactly over $J\\supseteq K$, and contains the term $J=K$. Also $T(\\varnothing)=\\varnothing$ because $B_J$ contains $J$, and $T(P)=U$ because the singleton terms are $U_i$ and all other terms lie in $U$. These identities remain valid when $I$ is empty: then $P=U=\\varnothing$.",
+   "text": "Define T(Z) as the union of U_J over all finite nonempty J whose point belongs to Z. This equals the union of U_J over B_J contained in Z because Z is upper. It is monotone, T(Z) is contained in U, and T(B_J)=U_J for nonempty J. The union J union K shows T(Z intersection W)=T(Z) intersection T(W). A cover of Z covers each point J in Z and therefore its U_J term, so T preserves covering sieves.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A36, lemma-vanishing-ravi, proof"
+    "place": "Tag 0A36, lemma-vanishing-ravi, proof; finite-nonempty-subset variant of the auxiliary space"
    }
   },
   {
-   "text": "The functor $T$ preserves arbitrary unions: the last criterion of step 1 says that a finite nonempty $J$ contributes to $T(\\bigcup_s W_s)$ exactly when it contributes to some $T(W_s)$. It preserves binary intersections as well. Monotonicity gives $T(W\\cap Z)\\subseteq T(W)\\cap T(Z)$. Conversely a point in the latter lies in $U_J\\cap U_K=U_{J\\cup K}$ with $B_J\\subseteq W$ and $B_K\\subseteq Z$; but $B_{J\\cup K}=B_J\\cap B_K\\subseteq W\\cap Z$, giving the other inclusion. Consequently $T$ sends an open covering $W=\\bigcup_s W_s$ to the covering $T(W)=\\bigcup_s T(W_s)$, and sends $W_s\\cap Z$ to $T(W_s)\\cap T(Z)$ for every $Z\\subseteq W$.",
+   "text": "The intersection identity verifies CompatiblePreserving directly: restrict the compatibility equation on Z intersection W to the given common subopen of T(Z) and T(W). Together with cover preservation, Mathlib Functor.isContinuous_of_coverPreserving proves continuity on the open sites. Functor.op_comp_isSheaf constructs G0=T.op composed with F. Compose with AddCommGrpCat.uliftFunctor to put coefficients in the same universe as P; this functor preserves limits and hence the sheaf property.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A36, lemma-vanishing-ravi, proof"
+    "place": "Tag 0A36, lemma-vanishing-ravi, proof; finite-nonempty-subset variant of the auxiliary space"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-site-continuous-pushforward-sheaf] to $T:\\operatorname{Open}(P)\\to\\operatorname{Open}(Y)$ and $F$. Both sites are small in a universe containing the underlying sets $I,Y$ and their power sets, their arrows are inclusions and coverings are open families. Step 3 verifies both hypotheses of that lemma: image families cover and pullbacks along covering inclusions (intersections) are preserved. Thus $G(W)=F(T(W))$, with restriction maps inherited from $F$, is an abelian sheaf on $P$. No continuous map of underlying topological spaces is asserted or needed.",
-   "uses": [
-    "lem-weil-pbc-site-continuous-pushforward-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A36, lemma-vanishing-ravi, auxiliary sheaf construction; Sites Tag 00WW, lemma-pushforward-sheaf"
-   }
-  },
-  {
-   "text": "For opens $Z\\subseteq W\\subseteq P$ and $s\\in G(Z)=F(T(Z))$, the hypothesis of the item applied to the family of all finite nonempty $J$ with $B_J\\subseteq Z$ gives $t\\in F(U)$ restricting to $s$ on $T(Z)$. Restrict $t$ to $T(W)$; this is an element of $G(W)$ restricting to $s$, by functoriality of $F$ and $T(Z)\\subseteq T(W)\\subseteq U$. Hence every restriction of $G$ is surjective, so $G$ is flasque by [def-sc-zariski-flasque]. This uses the empty-family hypothesis when $Z=\\varnothing$.",
+   "text": "The hypothesis hres applied to S={J | J belongs to Z} makes F(U) to F(T(Z)) surjective. For Z contained in W, extend any section to U and restrict to T(W); functoriality makes its restriction to T(Z) the given section. Lifting sections by ULift preserves this argument and proves G flasque.",
    "uses": [
     "def-sc-zariski-flasque"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A36, lemma-vanishing-ravi, proof"
+    "place": "Tag 0A36, lemma-vanishing-ravi, proof; finite-nonempty-subset variant of the auxiliary space"
    }
   },
   {
-   "text": "The family $\\mathcal B=(B_{\\{i\\}})_{i\\in I}$ covers $P$. For any tuple $(i_0,\\ldots,i_p)$, let $J=\\{i_0,\\ldots,i_p\\}$. Then $\\bigcap_k B_{\\{i_k\\}}=B_J$, $T(B_J)=U_J=\\bigcap_k U_{i_k}$, so $G(\\bigcap_k B_{\\{i_k\\}})=F(\\bigcap_k U_{i_k})$. For each omitted entry, the restriction between these groups is exactly the restriction of $F$ between the corresponding intersections, since $G$ was defined by precomposition with $T$. Therefore the identity on every tuple component identifies the two products and commutes term by term with each summand $(-1)^k$ in the differential of [def-weil-pbc-site-cech-complex]. It gives an isomorphism of cochain complexes $\\check C^\\bullet(\\mathcal B,G)\\cong\\check C^\\bullet(\\mathcal U,F)$, including tuples with repetitions.",
+   "text": "For a tuple t, T(intersection_k B_{singleton t(k)})=intersection_k U_{t(k)}. The universal property of the supplied SiteCechComplex identifies K.W p t with this open. Componentwise restriction along this equality and ULift give additive isomorphisms of cochains. The two alternating differentials commute with them: distribute restriction and ULift.down over the signed finite sum, and use thinness of the open category to identify each pair of composite restriction arrows. Hom.isoOfComponents assembles the resulting complex isomorphism.",
    "uses": [
     "def-weil-pbc-site-cech-complex"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A36, lemma-vanishing-ravi, proof"
+    "place": "Tag 0A36, lemma-vanishing-ravi, proof; finite-nonempty-subset variant of the auxiliary space"
    }
   },
   {
-   "text": "Apply [lem-sfb-flasque-open-cover-cech-acyclic] to the topological space $P$, the abelian sheaf $G$ of step 4, its flasqueness from step 5, and the set-indexed open cover $\\mathcal B$ of step 6. It gives $\\check H^p(\\mathcal B,G)=0$ for $p>0$. The cochain isomorphism in step 6 identifies kernels and images of the differentials, hence identifies these groups with $\\check H^p(\\mathcal U,F)$, proving the assertion.",
+   "text": "Apply TopCat.Sheaf.exactAt_cechComplex_of_isFlasque to G and the singleton basic-open family. Its exactness in degree q+1 transports across the inverse complex isomorphism to K.complex F. ExactAt.isZero_homology proves the conclusion for every p>0 by writing p=q+1.",
    "uses": [
     "lem-sfb-flasque-open-cover-cech-acyclic"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A36, lemma-vanishing-ravi, last paragraph, invoking Tag 09SZ, lemma-flasque-acyclic-cech"
+    "place": "Tag 0A36, lemma-vanishing-ravi, proof; finite-nonempty-subset variant of the auxiliary space"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-site-continuous-pushforward-sheaf",
   "def-sc-zariski-flasque",
   "def-weil-pbc-site-cech-complex",
   "lem-sfb-flasque-open-cover-cech-acyclic"
@@ -93,7 +81,8 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0A36, lemma-vanishing-ravi, proof"
+  "place": "Tag 0A36, lemma-vanishing-ravi, proof; finite-nonempty-subset variant of the auxiliary space",
+  "note": "U7 Lean proof uses finite points and Mathlib site continuity directly; all stated universes unchanged."
  },
  "mathlib_searches": [
   {
@@ -215,9 +204,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-site-continuous-pushforward-sheaf"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-22",
   "by": "L",
@@ -243,5 +230,27 @@
   "group": "NM",
   "result": "pass",
   "note": "Statement matches node and Stacks 0A36 clause by clause: Y, F a Mathlib Sheaf on Opens.grothendieckTopology in AddCommGrpCat.{w}, cover V : I → Opens Y with ⨆ V = U, U_J as Finset.inf' over finite nonempty J, hres = surjectivity onto every union for all S : Set including ∅ (the W ≤ U binder always holds, so it adds no assumption), Cech complex via the recorded SiteCechComplex (universal-property binder, tuples with repetitions), conclusion IsZero of cohomologyFunctor p for p > 0. Edge cases (empty I, empty S, single-member cover, infinite I) and independent universes u/v/w checked. Node diff vs live: only the lean field; lean.statement verbatim in file; single sorry; docstrings carry source place, blueprint tag and all 7 proof steps. No existing duplicate (exactAt_cechComplex_of_isFlasque needs full flasqueness, strictly stronger); item not landed elsewhere. Report has both required sections. Advisory: unused plain proof imports. No compile run since no file changed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261023T170214-L-2075485",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

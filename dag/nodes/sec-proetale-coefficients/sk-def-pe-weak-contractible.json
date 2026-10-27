@@ -118,7 +118,32 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-182241daf (reviewer sub-agent of L); spot-checked: I read the item, the unit, the report and every cited node in full. The item statement is verbatim from the blueprint main-20261015 sk-def-pe-weak-contractible/_section.md (order 713). It agrees with Bhatt–Scholze 1309.1198 Def. 3.2.1 (p.17: an object is weakly contractible if every surjection onto it has a section), here for h_W in Sh(X_proét). It is a definition, so there is no base-change morphism or coefficient category to check. The stmt_deps hold: sk-def-pe-site gives X_proét, and det-pe-topos-functoriality-site gives h_T as a sheaf (clause 2) and Sh as a Grothendieck topos (clause 3). Its site, def-weil-pbc-small-proetale-site, has the same objects and fpqc covers. Dropping the blueprint use sk-def-sfb-finite-pushforward-pullback is correct: that id is a unit with an empty realized statement and no node, and its topos content is exactly det-pe-topos-functoriality-site. The report's stated reason for the drop is a bit off, but the result is right. Epimorphism and projective are plain categorical notions (Mathlib Projective, Preadditive/Projective/Basic.lean:47). The 'Equivalently' claim already lives in the reviewed node det-pe-weak-contractible-equivalences; I read its 5 steps. The two nodes list each other under same_as, there is no cycle and no duplicate child is needed. A maintainer may want to add a pointers entry, which is a maintainer field. Small cases check: W empty, disconnected W1⊔W2 (the section is on the whole cover, as the remark says), and h_X terminal. The three users of the definition are served by it. Search records: the first grep (sub Mathlib/CategoryTheory) has the doubled-prefix problem, so its 0 hits are not evidence; the second grep is valid. The node is not a Mathlib leaf because Mathlib has no pro-étale site. slopmaster2 has only the ring-level IsWContractibleRing, nothing to attach. Unit realized.statement=[item], steps []. No new nodes, no fixes, no tool_uses."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.GrothendieckTopology.IsWeaklyContractible"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.GrothendieckTopology.IsWeaklyContractible",
+     "module": "WeilConjectures.CategoryTheory.Sites.WeaklyContractible",
+     "lines": [
+      44,
+      49
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
@@ -136,5 +161,15 @@
   "by": "Q05",
   "date": "2026-10-17",
   "note": "Exact generic site definition in the published side framework, read from the current source with scompile.py --source. It defines weak contractibility by local surjectivity of every sheaf-of-sets morphism and surjectivity on W-sections; for sheaves of sets, epimorphisms are locally surjective, so this is the node’s epimorphism-to-representable formulation. The projective and section-surjectivity equivalences are supplied by det-pe-weak-contractible-equivalences."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "An object $W$ of $X_{\\mathrm{proét}}$ is *weakly contractible* if every epimorphism of\nsheaves of sets $F\\to h_W$ admits a section, where $h_W$ is the representable sheaf\nassociated to $W$. Equivalently, $h_W$ is projective in $\\Sh(X_{\\mathrm{proét}})$, or every\nepimorphism $F\\to G$ induces a surjection $F(W)\\to G(W)$.\n\nTo see the equivalence, pull an epimorphism $F\\to G$ back along a section $h_W\\to G$. The\nresulting epimorphism onto $h_W$ splits. Conversely, if every epimorphism is surjective on\nsections, then $\\mathrm{id}_{h_W}$ lifts along any epimorphism onto $h_W$. This is the\ncategorical definition of Bhatt–Scholze, §3.2. Note that the splitting condition concerns a\ncover as a whole. For example, if $W$ is disconnected, then a lift of $\\mathrm{id}_{h_W}$\nalong a covering family may use different members of the family on different clopen pieces\nof $W$.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

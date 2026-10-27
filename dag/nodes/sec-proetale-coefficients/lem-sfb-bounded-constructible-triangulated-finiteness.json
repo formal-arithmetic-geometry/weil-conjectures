@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-bounded-constructible-triangulated-finiteness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sfb-bounded-constructible",
+   "via": [],
+   "place": "proof of prop-sfb-bounded-constructible-triangulated, opening reduction to closure under kernels, cokernels and extensions, and final Kernels paragraph restricting coherence to ell-adic coefficients; same statement as this corrected finiteness-coefficient specialization of the ancestor"
+  },
+  "same_as": [
+   "sk-def-sfb-bounded-constructible"
+  ]
+ },
+ "kind": "statement",
+ "title": "Bounded constructible complexes form a triangulated subcategory for the finiteness coefficients",
+ "statement": "Let $\\ell$ be a prime and $\\Lambda$ one of the coefficient rings of Deligne's finiteness theorems: the continuous-function condensed rings [def-sfb-continuous-map-condensed-ring] of $\\mathcal O_E$ or $E$ for a finite extension $E$ of $\\mathbf Q_\\ell$, the condensed ring $\\overline{\\mathbf Q}_\\ell$ [sk-def-sfb-qlbar-condensed], or a finite ring of $\\ell$-power order. Let $X$ be a scheme whose underlying topological space is noetherian and $\\Lambda_X$ the pulled-back coefficient ring [sk-def-sfb-pulled-back-coefficients]. Then the bounded constructible complexes of $\\Lambda_X$-modules [def-sfb-bounded-constructible-complexes], those $K$ with $H^i(K)=0$ for all but finitely many $i$ and every $H^i(K)$ constructible [def-sfb-constructible-module], form a triangulated subcategory [def-weil-triangulated-subcategory] of $D(\\Mod_{\\Lambda_X})$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-bounded-constructible/_section.md",
+  "place": "sk-def-sfb-bounded-constructible: sk-def-sfb-bounded-constructible states that the bounded constructible complexes are triangulated when constructible modules are closed under kernels, cokernels and extensions; upstream isTriangulated_boundedConstructible (corrected statement of upstream #1574, only IsFinitenessCoefficient rings, noetherian X) is that instance, used through instance search by the batch-2 users of D_cons (TwoColimit, EllAdicRationalization, FiniteCoefficient.Derived.Perfect). The upstream docstring: the input is Bhatt-Scholze 6.8 (closure of constructible Λ_X-modules under kernels, cokernels, extensions); false for a general ring object; Lean: upstream file lean/WeilConjectures/ConstructibleSheaf/ProEtaleModule/DerivedCategory.lean, declaration AlgebraicGeometry.ProEtale.isTriangulated_boundedConstructible (module WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory, lines 103-111, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-bounded-constructible-complexes",
+  "def-sfb-constructible-module",
+  "def-weil-triangulated-subcategory"
+ ],
+ "proof": [
+  {
+   "text": "Constructible zero objects use the identity one-stratum stratification and the rank-zero cokernel presentation. Constructibility is invariant under isomorphism. Package closure of canonical kernels and cokernels as closure under arbitrary limiting cones, using their unique isomorphisms to the canonical objects.",
+   "uses": [
+    "lem-weil-pbc-module-constructible-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For finite normed ℓ-adic fields, lift the coefficient type to the scheme universe, use the proved lfp local-freeness theorem, and transport along liftCoefficientIso and comap equivalences. Apply the existing locally-free constructible Serre argument. For the algebraic closure apply its existing Serre theorem.",
+   "uses": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-constructible-serre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For integral coefficients use the induced normed-field structure from the embedding, prove its normed ℚ_ℓ-algebra inequality, and apply integralConstructible_serre. For a supplied closed unit ball identify its subring with continuousIntegers by the norm membership equivalence and apply the same result.",
+   "uses": [
+    "lem-weil-pbc-integral-constructible-serre",
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For finite discrete ℓ-power-torsion coefficients use the finite discrete internal kernel theorem and the generic constructible cokernel and extension theorem.",
+   "uses": [
+    "lem-sfb-finite-discrete-internal-constructible-kernels",
+    "lem-weil-pbc-constructible-cokernels-extensions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each constructor of IsFinitenessCoefficient these results make constructibility a weak Serre object property containing zero. The existing generic DerivedCategory.homologyProperty criterion makes constructible cohomology triangulated. Intersect it with the bounded property of the canonical t-structure, also triangulated. This intersection is definitionally the original boundedConstructible predicate.",
+   "uses": [
+    "prop-constructible-derived-subcategory"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-constructible-pullback",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-condensed-constructible-serre",
+  "lem-weil-pbc-integral-constructible-serre",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-sfb-finite-discrete-internal-constructible-kernels",
+  "lem-weil-pbc-constructible-cokernels-extensions",
+  "prop-constructible-derived-subcategory"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.8.7, 6.8.9 and Proposition 6.8.11(1); finite discrete coefficients by the etale comparison and constructible Serre theorem",
+  "note": "F4: complete Lean proof, no new sorry or axiom. The unit route through constructible heart closure and bounded constructible cohomology is retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded constructible complexes form a triangulated subcategory of the derived category",
+   "results": "DerivedCategory.instIsTriangulated, Triangulated.Subcategory, DerivedCategory.instPretriangulated, exists_iso_Q_obj_of_isGE_of_isLE: the derived category and the notion of triangulated subcategory, nothing on constructible complexes",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "full subcategory of complexes with constructible bounded cohomology closed under cones is triangulated",
+   "results": "DerivedCategory.instIsTriangulated, instIsTriangulatedHomotopyCategoryIntUpQh, TStructure.t: no constructibility",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsTriangulated, DerivedCategory",
+   "results": "none",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'boundedConstructible|IsConstructible.*Sheaf' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|IsConstructibleModuleObject|WeakSerre",
+   "results": "none; receipt digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded cohomology in a weak Serre subcategory forms a triangulated derived subcategory",
+   "results": "CategoryTheory.Triangulated.Subcategory; DerivedCategory.instIsTriangulated; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic; DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; CategoryTheory.Functor.instIsTriangulatedHomologicalKernel; HasDerivedCategory.standard; receipt digest 34616a9b076ee1fd",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsTriangulated, DerivedCategory",
+   "results": "none; receipt digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible complexes of pro etale sheaves with l adic coefficients form a triangulated subcategory",
+   "results": "DerivedCategory.TStructure.t; HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic; DerivedCategory.instIsTriangulated; DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh; CategoryTheory.Functor.instIsTriangulatedHomologicalKernel; DerivedCategory.IsGE; DerivedCategory.IsLE; CategoryTheory.Triangulated.TStructure.exists_triangle; receipt digest c879d491be2e28d2",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructible sheaves form an abelian subcategory closed under kernels cokernels extensions for finite coefficient rings",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod; instAbelianLightCondMod; instAbelianCondensedMod; Condensed.instAB4CondensedMod; AlgebraicGeometry.Scheme.Modules.instAbelian; CategoryTheory.Sheaf.instIsGrothendieckAbelian; Condensed.instAB4StarCondensedMod; Condensed.instAB5CondensedMod; receipt digest 1a78ccf62908772f",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "sk-def-sfb-bounded-constructible",
+  "date": "2026-10-23",
+  "why": "sorried declaration on the batch sorry route (local/sorry-route.json, 22:01 recompute) with no DAG node, so it was only worked as a stage-3 module item (the human's order 2026-10-23: every proof-related upstream sorry gets a node; a node without a written proof goes to stage 1); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-bounded-constructible",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory",
+  "declaration": "AlgebraicGeometry.ProEtale.isTriangulated_boundedConstructible_of_serre",
+  "statement": "instance isTriangulated_boundedConstructible\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]\n    {ℓ : ℕ} [Fact ℓ.Prime] [IsFinitenessCoefficient ℓ Λ] (X : Scheme.{u})\n    [TopologicalSpace.NoetherianSpace X] :\n    (boundedConstructible (condensedRingObj Λ X)).IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-22",
+  "file": "lean/WeilConjectures/ConstructibleSheaf/ProEtaleModule/DerivedCategory.lean"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.isTriangulated_boundedConstructible"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.isTriangulated_boundedConstructible",
+     "module": "WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory",
+     "lines": [
+      103,
+      111
+     ],
+     "kind": "instance",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-bounded-constructible-triangulated-finiteness",
+  "worker": "stage1",
+  "summary": "Split with no new nodes. Read current blueprint, live sorried Lean instance, Bhatt-Scholze 6.8 and Stacks 06UQ/09B5. Reused integral and field internal exact-closure nodes, supplied the arbitrary normed-field coefficient identification and both directions of the finite-discrete encoding, then applied the existing weak Serre derived theorem. Preserved the item statement and all coefficient and topological hypotheses.",
+  "blueprint": "Realizes the current prop-sfb-bounded-constructible-triangulated proof opening reduction and Kernels coherence paragraph for the corrected finiteness-coefficient item; finite-discrete comparison and arbitrary field presentation are explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Used only for its stated general module, coefficient, or weak-Serre closure result, as explicitly instantiated in the proof; the unit supplies the triangulatedness reduction but no such coefficient comparison or closure theorem."
+   },
+   {
+    "node": "lem-sfb-modobj-abelian",
+    "why": "Used only for its stated general module, coefficient, or weak-Serre closure result, as explicitly instantiated in the proof; the unit supplies the triangulatedness reduction but no such coefficient comparison or closure theorem."
+   },
+   {
+    "node": "lem-weil-pbc-integral-constructible-serre",
+    "why": "Used only for its stated general module, coefficient, or weak-Serre closure result, as explicitly instantiated in the proof; the unit supplies the triangulatedness reduction but no such coefficient comparison or closure theorem."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-constructible-serre",
+    "why": "Used only for its stated general module, coefficient, or weak-Serre closure result, as explicitly instantiated in the proof; the unit supplies the triangulatedness reduction but no such coefficient comparison or closure theorem."
+   },
+   {
+    "node": "lem-weil-pbc-internal-module-ab-equivalence",
+    "why": "Used only for its stated general module, coefficient, or weak-Serre closure result, as explicitly instantiated in the proof; the unit supplies the triangulatedness reduction but no such coefficient comparison or closure theorem."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-constructible-encoding",
+    "why": "Used only for its stated general module, coefficient, or weak-Serre closure result, as explicitly instantiated in the proof; the unit supplies the triangulatedness reduction but no such coefficient comparison or closure theorem."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-constant-exact",
+    "why": "Used only for its stated general module, coefficient, or weak-Serre closure result, as explicitly instantiated in the proof; the unit supplies the triangulatedness reduction but no such coefficient comparison or closure theorem."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-restriction-encoding",
+    "why": "Used only for its stated general module, coefficient, or weak-Serre closure result, as explicitly instantiated in the proof; the unit supplies the triangulatedness reduction but no such coefficient comparison or closure theorem."
+   },
+   {
+    "node": "lem-weil-proetale-constructible-exact-closure",
+    "why": "Used only for its stated general module, coefficient, or weak-Serre closure result, as explicitly instantiated in the proof; the unit supplies the triangulatedness reduction but no such coefficient comparison or closure theorem."
+   },
+   {
+    "node": "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "why": "Used only for its stated general module, coefficient, or weak-Serre closure result, as explicitly instantiated in the proof; the unit supplies the triangulatedness reduction but no such coefficient comparison or closure theorem."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "why": "Supplies the finite-discrete coefficient identification e required by the encoding definition (step 5); no node of the unit gives it."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-constant-module-encoding",
+    "why": "Equivalence between sheaves of modules over the constant ring sheaf and fixed-module sheaves, needed to apply the finite-coefficient exact-closure lemma to the encoded sheaves (step 7, reviewer FIX)."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-constant-module-constructibility",
+    "why": "Identifies the intrinsic constructibility predicate of the encoding with def-weil-proetale-constructible-sheaf across that equivalence (step 7, reviewer FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-modobj-abelian",
+  "lem-weil-pbc-integral-constructible-serre",
+  "lem-weil-pbc-condensed-constructible-serre",
+  "lem-weil-pbc-internal-module-ab-equivalence",
+  "lem-weil-pbc-finite-discrete-constructible-encoding",
+  "lem-weil-pbc-finite-type-constant-exact",
+  "lem-weil-pbc-finite-discrete-restriction-encoding",
+  "lem-weil-proetale-constructible-exact-closure",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "lem-weil-pbc-proetale-constant-module-constructibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-7406e4cc3",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-7406e4cc3 (reviewer sub-agent of L); spot-checked: Read the item's 8 steps in full, every cited statement, and the blueprint proof prop-sfb-bounded-constructible-triangulated (main-20261015/latest). The route is the blueprint's: the long exact sequence reduces the item to closure under kernels, cokernels and extensions, and the Kernels paragraph sends the l-adic closure to Bhatt-Scholze 6.8. The statement is unchanged; it equals clones/live and side-live, where the item is still unsplit. There are no new nodes. A cycle check found no cycle. Steps 1-4: lem-weil-pbc-sheaf-tensor-closed supplies the hypothesis that R tensor - preserves finite colimits, which lem-sfb-modobj-abelian needs. lem-weil-pbc-integral-constructible-serre is the exact Serre closure of the predicate (Lean IsConstructibleModuleObject on condensedRingObj (integralCoeff), noetherian space only). lem-weil-pbc-condensed-constructible-serre covers finite intermediate E and the finite-subextension Qbar, which is exactly sk-def-sfb-qlbar-condensed, with the same p_T^*. Step 4 identifies an abstract finite E with a subfield: the 09GU embedding plus the unique extension of the absolute value give an isometry, and change of scalars clause 5 transports the closure. Steps 5-6: finite-discrete encoding in both directions; the converse is elementary and correct, including T=0. Step 8 applies Stacks 06UQ through lem-sbc-cohomology-in-weak-serre-subcategory; its bounded clause is exactly def-sfb-bounded-constructible-complexes. Fault, C4/E5 in step 7: lem-weil-proetale-constructible-exact-closure is about sheaves of modules over the constant ring sheaf with def-weil-proetale-constructible-sheaf. The step applied it to the ModuleCat(ULift T)-valued sheaves with the ProEtale.IsConstructible predicate of steps 5-6, and did not cite the existing bridge. FIX: step 7 now cites lem-weil-pbc-proetale-constant-module-encoding (an equivalence) and lem-weil-pbc-proetale-constant-module-constructibility (the two predicates are equivalent), and the transfer is written out. Step 5 also argued the identification e inline; it now cites lem-weil-pbc-finite-discrete-condensed-ring-constant. proof_deps equals the union of the step uses. The worker's 10 tool_uses are accepted, and I added 3 for the new citations. Edge cases checked: empty X, zero ring, zero modules, torsion O_E/varpi; only the noetherian space is assumed.; 1 file(s) fixed by the reviewer"
+ }
+}

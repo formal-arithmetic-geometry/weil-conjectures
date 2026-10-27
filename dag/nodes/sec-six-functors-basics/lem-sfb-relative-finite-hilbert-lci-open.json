@@ -1,0 +1,267 @@
+{
+ "id": "lem-sfb-relative-finite-hilbert-lci-open",
+ "kind": "statement",
+ "title": "The unramified lci finite-Hilbert locus is open",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention]. Let $F:\\mathcal X\\to\\mathcal Y$ be a morphism of stacks in groupoids on $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site, def-sfb-stable-pointed-moduli-groupoids]: isomorphism presheaves are sheaves and object descent is effective. Suppose $F$ is representable by algebraic spaces [def-trf-algebraic-space], meaning that for every $S$-scheme $T$ and $y\\in\\mathcal Y(T)$, $\\mathcal X\\times_{\\mathcal Y}h_T$ is an algebraic space $X_y$ over $T$. Assume each $X_y\\to T$ is flat and locally of finite presentation on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. For every integer $d\\geq1$, the fibred groupoids $\\mathcal H_d(F)$ and $\\mathcal L_d(F)$ [def-sfb-relative-finite-hilbert-groupoids] are fppf stacks, and the inclusion $j_d:\\mathcal L_d(F)\\to\\mathcal H_d(F)$ is representable by schemes and an open immersion: for every scheme $T$ and $\\xi\\in\\mathcal H_d(F)(T)$, $h_T\\times_{\\mathcal H_d(F)}\\mathcal L_d(F)$ is naturally represented by an open subscheme $T^\\circ\\subseteq T$ [def-weil-open-immersion]. Equivalently, for every scheme map $T'\\to T$, $\\xi|_{T'}$ lies in $\\mathcal L_d(F)$ if and only if $T'\\to T$ factors through $T^\\circ$. Neither surjectivity of $F$ nor algebraicity of either $\\mathcal X$ or $\\mathcal Y$ is required.",
+ "source": {
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 06CL (lemma-lci-locus-stack-in-groupoids); examples-stacks.tex Tag 05WB (lemma-hilbert-d-stack)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-relative-finite-hilbert-groupoids",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Fix $d\\geq1$. For an fppf descent datum of Hilbert objects as in [def-sfb-relative-finite-hilbert-groupoids], first descend the finite degree-$d$ covers $Z_i\\to T_i$ and their isomorphisms by [lem-sfb-finite-locally-free-fppf-descent], obtaining $Z\\to T$. Identify $Z_i=Z\\times_TT_i$; these form an fppf covering of $Z$ by [lem-trf-fppf-covering-base-change]. The overlap arrows induce descent data for $y_i$ on $T_i$ and $x_i$ on $Z_i$. Effectivity for the assumed stacks $\\mathcal Y$ and $\\mathcal X$ gives $y\\in\\mathcal Y(T)$ and $x\\in\\mathcal X(Z)$. The compatibility square defining a Hilbert arrow says exactly that the transported $\\alpha_i$ agree on overlaps. The isomorphism sheaf in $\\mathcal Y$ glues them to $\\alpha:y|_Z\\simeq F(x)$. This gives the descended object. For arrows, descend the cover isomorphism uniquely by the same finite-cover lemma, then descend $b$ and $a$ by the isomorphism sheaves of $\\mathcal Y$ and $\\mathcal X$. The compatibility square holds because it holds on the covering. Thus $\\mathcal H_d(F)$ is an fppf stack.",
+   "uses": [
+    "def-sfb-relative-finite-hilbert-groupoids",
+    "lem-sfb-finite-locally-free-fppf-descent",
+    "lem-trf-fppf-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 05WB (lemma-hilbert-d-stack), proof, including the omitted arrow-gluing check."
+   }
+  },
+  {
+   "text": "For $\\xi=(Z\\to T,y,x,\\alpha)$ write $u:Z\\to X_y$ using the explicit represented $2$-fibre product in [def-sfb-relative-finite-hilbert-groupoids]. Given $g:T^\\prime\\to T$, identify $X_{g^*y}$ with $T^\\prime\\times_TX_y$. On a test scheme $V$, both classify a map $t:V\\to T^\\prime$, an object $a\\in\\mathcal X(V)$ and an isomorphism $(gt)^*y\\simeq F(a)$, with exactly the same compatible arrows. The resulting bijections of represented sheaves are natural in $V$, so they and their inverse are inverse maps of spaces, whose maps are natural transformations. Fibre products exist by [lem-trf-space-fibre-products-etale-covers]. The pulled-back pair is $(x|_{Z\\times_TT^\\prime},\\alpha|_{Z\\times_TT^\\prime})$, so its associated map is exactly $u_{T^\\prime}:Z\\times_TT^\\prime\\to X_y\\times_TT^\\prime$. For an isomorphism of Hilbert objects, the defining equation $F(a)\\alpha=(h^*\\alpha^\\prime)(b|_Z)$ identifies these pairs and their maps. Thus the conditions concern this pulled-back map and do not depend on representatives.",
+   "uses": [
+    "def-sfb-relative-finite-hilbert-groupoids",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "section-lci, equation-relative-map and the following base-change remark (details supplied)."
+   }
+  },
+  {
+   "text": "The morphism $p:Z\\to T$ is finite, flat and locally of finite presentation by [def-pc-finite-locally-free]. It is closed by [lem-weil-pbc-finite-closed-map-finite-fibres]. It is also locally of finite type: on affine charts a finitely presented algebra is a quotient of a polynomial algebra in finitely many variables, whose coordinate images generate it. The other projection $q:X_y\\to T$ is flat and locally of finite presentation by hypothesis. Here the space-map properties have the chart meaning fixed by [def-sfb-relative-finite-hilbert-groupoids]: there exist surjective etale scheme charts $V\\to B$ and $U\\to A\\times_BV$ with $U\\to V$ having the specified scheme property. This is the interpretation of flatness and local finite presentation in the hypotheses, and of unramifiedness and lci in the two parameter-open statements. Apply [lem-sfb-space-closed-source-unramified-base-open] and [lem-sfb-space-relative-lci-parameter-open] to the triangle $Z\\xrightarrow{u}X_y\\to T$. They give open subschemes $W_{\\mathrm{ur}},W_{\\mathrm{lci}}\\subseteq T$. Set $T^\\circ=W_{\\mathrm{ur}}\\cap W_{\\mathrm{lci}}$. A morphism $g:T^\\prime\\to T$ factors through this intersection exactly when it factors through both opens. The two universal properties and step 2 give precisely $\\xi|_{T^\\prime}\\in\\mathcal L_d(F)$. Taking $T^\\prime=T^\\circ$ and then any map into it also proves stability of the subcategory under every pullback.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-sfb-space-closed-source-unramified-base-open",
+    "lem-sfb-space-relative-lci-parameter-open",
+    "def-sfb-relative-finite-hilbert-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06CL (lemma-lci-locus-stack-in-groupoids), proof, using 05X8 and 06CE."
+   }
+  },
+  {
+   "text": "Over $g:T^\\prime\\to T$, the 2-fibre product $h_T\\times_{\\mathcal H_d(F)}\\mathcal L_d(F)$ has objects an $\\eta\\in\\mathcal L_d(F)(T^\\prime)$ together with an isomorphism $\\xi|_{T^\\prime}\\simeq\\eta$. Since $\\mathcal L_d(F)$ is a full subcategory, this groupoid is empty unless $\\xi|_{T^\\prime}$ belongs to it, and otherwise is contractible: between two such pairs there is exactly one arrow, obtained by composing their displayed isomorphisms. By step 3 it is therefore naturally equivalent to $h_{T^\\circ}(T^\\prime)$. These equivalences respect restriction, so the 2-fibre product is represented by $T^\\circ$. Its projection to $h_T$ is the inclusion of this open subscheme, an open immersion by [def-weil-open-immersion]. This proves the asserted scheme representability and the universal factorization clause.",
+   "uses": [
+    "def-sfb-relative-finite-hilbert-groupoids",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06CL (lemma-lci-locus-stack-in-groupoids), identification of the scheme pullback."
+   }
+  },
+  {
+   "text": "It remains to check descent for $\\mathcal L_d(F)$. Its arrow sheaves are the arrow sheaves of $\\mathcal H_d(F)$ by fullness. A descent datum in $\\mathcal L_d(F)$ descends in $\\mathcal H_d(F)$ by step 1 to some $\\xi$ over $T$. Each cover map $T_i\\to T$ factors through the open $T^\\circ$ for $\\xi$ by steps 2--3. Since the family is jointly surjective, $|T^\\circ|=|T|$; the open subscheme is therefore $T$ itself. Consequently $\\xi$ lies in $\\mathcal L_d(F)$. Uniqueness and the given overlap isomorphisms are inherited from the full subcategory. This proves that $\\mathcal L_d(F)$ is an fppf stack. The argument has used only the scheme tests of $F$ and the stated stack axioms, so requires neither surjectivity nor algebraicity of $\\mathcal X,\\mathcal Y$.",
+   "uses": [
+    "def-sfb-relative-finite-hilbert-groupoids",
+    "def-pc-fppf-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06CL (lemma-lci-locus-stack-in-groupoids), final descent assertion, proved directly rather than assuming the stacks are algebraic."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-relative-finite-hilbert-groupoids",
+  "lem-sfb-finite-locally-free-fppf-descent",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-sfb-space-closed-source-unramified-base-open",
+  "lem-sfb-space-relative-lci-parameter-open",
+  "def-weil-open-immersion",
+  "def-pc-fppf-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 06CL (lemma-lci-locus-stack-in-groupoids), together with examples-stacks.tex Tag 05WB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The unramified local complete intersection locus is an open substack of the finite relative Hilbert stack",
+   "results": "8 hits; Algebra.isOpen_unramifiedLocus, Algebra.isOpen_smoothLocus, Algebra.isOpen_etaleLocus, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, Algebra.basicOpen_subset_unramifiedLocus_iff, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: openness of the unramified locus of a ring map does not represent the universal base-change locus where an entire finite family is unramified and lci"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Openness of the locus where a finite locally free family maps by an unramified local complete intersection morphism to a flat space",
+   "results": "8 hits; Algebra.isOpen_unramifiedLocus, Algebra.isOpen_smoothLocus, Algebra.isOpen_etaleLocus, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.isOpenMap_of_generalizingMap, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus, AlgebraicGeometry.IsEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: openness of the unramified locus of a ring map does not represent the universal base-change locus where an entire finite family is unramified and lci"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unramified local complete intersection locus is an open substack of the finite relative Hilbert stack",
+   "results": "8 hits; Algebra.unramifiedLocus, AlgebraicGeometry.FormallyUnramified.recOn, Algebra.isOpen_unramifiedLocus, AlgebraicGeometry.FormallyUnramified.casesOn, Algebra.unramifiedLocus_eq_univ_iff, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, Algebra.basicOpen_subset_unramifiedLocus_iff, Algebra.unramifiedLocus_eq_compl_support",
+   "date": "2026-10-23",
+   "verdict": "no match: openness of the unramified locus of a ring map does not represent the universal base-change locus where an entire finite family is unramified and lci"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Unramified\"",
+   "results": "12 hits; AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified.of_comp, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+   "date": "2026-10-23",
+   "verdict": "no match: openness of the unramified locus of a ring map does not represent the universal base-change locus where an entire finite family is unramified and lci"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertStack|lci.?locus|unramified.*complete.?intersection",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: openness of the unramified locus of a ring map does not represent the universal base-change locus where an entire finite family is unramified and lci"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite Hilbert groupoid over stacks is a stack and its unramified local complete intersection subcategory is representable by an open immersion",
+   "results": "8 hits; AlgebraicGeometry.instIsOpenImmersionMapSchemeCompOverOverTopMorphismPropertyForgetForget, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale.forget, CategoryTheory.Pseudofunctor.isStackFor', AlgebraicGeometry.Scheme.instFullEtaleOverForget",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme and ring source loci or general stack descent axioms do not state the finite Hilbert open-substack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertStack|lciLocus|finite.?Hilbert AlgebraicGeometry",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme and ring source loci or general stack descent axioms do not state the finite Hilbert open-substack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The finite Hilbert groupoid over stacks is a stack and its unramified local complete intersection subcategory is representable by an open immersion",
+   "results": "8 hits; AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.stalk_iso, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, continuousGroupoid, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.instOfRestrict, AlgebraicGeometry.isOpenImmersion_eq_inf",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme and ring source loci or general stack descent axioms do not state the finite Hilbert open-substack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Unramified\"",
+   "results": "12 hits; AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified.of_comp, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme and ring source loci or general stack descent axioms do not state the finite Hilbert open-substack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal open locus where a family of maps between flat finitely presented algebraic spaces is unramified and local complete intersection",
+   "results": "8 hits; AlgebraicGeometry.UniversallyOpen.of_flat, Algebra.isOpen_unramifiedLocus, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsSmoothOfRelativeDimension",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme and ring source loci or general stack descent axioms do not state the finite Hilbert open-substack theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fppf-stack-algebraicity-bootstrap",
+  "date": "2026-10-23",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06CL (lemma-lci-locus-stack-in-groupoids); examples-stacks.tex Tag 05WB (lemma-hilbert-d-stack).",
+   "via": [
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-finite-hilbert-lci-open",
+  "worker": "stage1",
+  "summary": "Followed Stacks 06CL and 05WB without changing the statement. Supplied the omitted base-change identification and the Hilbert arrow-descent argument. Created three strictly geometric inputs: finite-cover fppf descent, the general algebraic-space unramified parameter open, and the relative lci parameter open. Existing nodes give only scheme or structure-morphism specializations of the last two. Proved descent of the open full subcategory directly, without an algebraic-stack assumption. Repair of the returned landing: revalidated the current Hilbert-groupoid definition, used its explicit represented triples in step 2 and its existential etale-chart convention in step 3, and replaced stale definition quotations for steps 1, 2, 4 and 5. The item statement and three geometric inputs are unchanged.",
+  "blueprint": "The inherited from.place identifies the finite-Hilbert open-locus input of the flat-presentation bootstrap, below the older alteration branch of det-thm-sf-ctf-stability-direct-images (3). The current latest blueprint has shortened the direct-image proof; this delivery retains the assigned prerequisite and its source, and does not change any unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Generic scheme theorem: finite maps are closed, needed for both Stacks parameter-open lemmas; no unit-specific assertion is substituted."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and universal property of fibre products of algebraic spaces, used for the scheme-test identification of the relative Hilbert maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O3-ffb5513ab",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-ffb5513ab (reviewer sub-agent of L); spot-checked: I read the item and all three new nodes in full. Sources checked: Stacks 06CL (criteria.tex) proof and the construction before it, 05WB (examples-stacks.tex) proof and the definition of H_d, 05X8 and 06CE (spaces-more-morphisms.tex), and 0245/02VO/023Q for the descent node. The item statement is unchanged and there is no re-split note. Compared with the earlier review d28bac20e7b7 (FIX): only the step 2 and step 3 texts changed, to match the revised def-sfb-relative-finite-hilbert-groupoids (explicit triples, discrete representative, existential étale-chart convention). The three new nodes are byte-identical to the original delivery, so the earlier fix was lost. Step 1 is 05WB with the omitted details written out (cover descent, y and x by stack effectivity, alpha by the Isom sheaf, arrow descent). Step 2 identifies X_{g*y} with T' x_T X_y on test schemes; it is elementary. Step 3: p is finite, flat and lfp, closed by lem-weil-pbc-finite-closed-map-finite-fibres, and lft; q is flat and lfp by hypothesis. Every hypothesis of the 05X8 and 06CE space nodes holds, and T° = W_ur ∩ W_lci. Step 4 is the 2-fibre product with a full subcategory, an open immersion. Step 5 descends L_d through joint surjectivity without assuming algebraicity. All are correct. The new nodes match their sources hypothesis by hypothesis and are not duplicates: the existing nodes are the scheme-only 05X8, 05X9, the source loci 05W2/06M3, the q=id lci base open and 06CA, and finite étale or singleton-affine descent. Small cases tested: empty source, zero section, u=id on k[x,y]/(x,y)^2, d=0, non-reduced covers. Accepted tool uses: lem-weil-pbc-finite-closed-map-finite-fibres and lem-trf-space-fibre-products-etale-covers. Batch-5 flags: lem-trf-space-fibre-products-etale-covers is generic algebraic-space foundations (02X2/041F), and def-trf-algebraic-space, def-a1-space-point-topology and def-a1-space-open-subspace are definitions. None of them is the trace formula, Poincaré duality, or a step of their proofs, so all are accepted. No SGA is cited. FIX, re-applying the lost d28b repair (C5): the last sentence of the new node lem-sfb-finite-locally-free-fppf-descent restated the existing Mathlib-status node lem-trf-fppf-covering-base-change (021O). I removed the sentence and the 021O part of its source, and item step 1 now cites lem-trf-fppf-covering-base-change (added to uses and proof_deps). The corrected files are under fixes/dag/nodes/sec-six-functors-basics/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeFiniteHilbertLciOpen",
+  "declaration": "AlgebraicGeometry.RelativeFiniteHilbert.lci_open",
+  "declarations": [
+   "AlgebraicGeometry.RelativeFiniteHilbert.lciGroupoid",
+   "AlgebraicGeometry.RelativeFiniteHilbert.lciInclusion",
+   "AlgebraicGeometry.RelativeFiniteHilbert.lci_open"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeFiniteHilbertLciOpen.lean",
+  "statement": "theorem lci_open (F : BasedFunctor X Y) (d : ℕ+) (hX : IsFppfModuliStack X) (hY : IsFppfModuliStack Y) (hF : IsRepresentableByAlgebraicSpaces F) (R : ∀ (T : Over S) (y : Functor.Fiber Y.p T), Representative (F := F) T y) (hflat : FlatLfp R) : IsFppfModuliStack (groupoid F d hX hY) ∧ IsFppfModuliStack (lciGroupoid F d hX hY hF R hflat) ∧ ∀ A : RelativeFiniteHilbert F d, ∃ (W : Over S) (i : W ⟶ A.T), IsOpenImmersion i.left ∧ (∃ e : BasedFunctor (discreteModuli (yoneda.obj W)) (relativeFiber (F := lciInclusion F d hX hY hF R hflat) A), e.toFunctor.IsEquivalence ∧ ∀ z : (discreteModuli (yoneda.obj W)).obj, eqToHom (e.w_obj z).symm ≫ relativeProjection (F := lciInclusion F d hX hY hF R hflat) A (e.obj z) = yoneda.preimage (z.hom ≫ yoneda.map i)) ∧ ∀ (T' : Over S) (g : T' ⟶ A.T), IsLciObject (A.pullback hX.1 hY.1 g) (R T' (A.pullback hX.1 hY.1 g).y) ↔ ∃ f : T' ⟶ W, f ≫ i = g",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded RelativeFiniteHilbert objects, canonical pullback and induced-map predicate. The two helper definitions equip the existing full Lci subcategory with its inherited base and inclusion. The conclusion gives both fppf stack assertions, a representing equivalence compatible with the open scheme projection, and the universal factorization criterion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b6322ba6",
+  "group": "NE",
+  "result": "pass",
+  "note": "Read item, report (Worker report + Second reading present), module, the full RelativeFiniteHilbertGroupoids dep (Lci, IsLciObject, pullback, relativeFiber, Representative, FlatLfp), IsFppfModuliStack and discreteModuli. H3: S/universes independent; F, hX/hY fppf stacks, hF, R (allowed representative data), hflat two-chart flat+lfp, d:ℕ+; conclusions: both H_d and L_d IsFppfModuliStack, open immersion i:W→A.T with a based equivalence discreteModuli(yoneda W) ≃ relativeFiber of the real inclusion, compatible with yoneda.map i, and the universal factorization iff on the canonical pullback. Helpers lciGroupoid/lciInclusion are real (ι, rfl), no duplicates in live. Item differs from live only in lean; statement verbatim. Edge cases d=0 excluded, empty/full open allowed, no extra hypotheses. Note: IsFppfModuliStack (def-sfb-fppf-stackification) reaches the item via stmt_dep def-sfb-relative-finite-hilbert-groupoids; second reading was author-written. No compile: no file changed."
+ }
+}

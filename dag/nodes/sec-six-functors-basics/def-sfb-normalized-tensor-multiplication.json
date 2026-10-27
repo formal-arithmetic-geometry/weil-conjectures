@@ -1,0 +1,149 @@
+{
+ "id": "def-sfb-normalized-tensor-multiplication",
+ "kind": "definition",
+ "title": "Canonical multiplication into a normalized reduced tensor algebra",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $A,B$ be commutative rings with an $A$-algebra structure on $B$. Let $K,L,P$ be fields [def-pc-field-extension], with compatible algebra structures $A\\to K$, $A\\to L$, $B\\to L$, $K\\to L$, $K\\to P$ and $A\\to P$: the composites $A\\to B\\to L$ and $A\\to K\\to L$ are the given $A\\to L$, and $A\\to K\\to P$ is the given $A\\to P$. Put $R_P=\\operatorname{Int}_A(P)$ and $C_P=\\operatorname{Int}_B((L\\otimes_KP)/\\sqrt{(0)})$ [def-weil-pbc-integral-closure] [def-weil-pbc-module-tensor-product], where $\\sqrt{(0)}$ is the ideal of all nilpotent elements. The canonical multiplication homomorphism $\\mu_P:B\\otimes_AR_P\\to C_P$ sends $b\\otimes r$ to the class of $(b\\otimes1)(1\\otimes r)$ in the reduced tensor algebra. This class is integral over $B$, since $r$ is integral over $A$. Its restriction to $1\\otimes R_P$ is the canonical normalization map $\\nu_P:R_P\\to C_P$, $r\\mapsto[1\\otimes r]$.",
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 09EM (remark-construction) and 09II (proposition-epp-essentially-finite-type), canonical map B_i tensor over A_i A_1-prime to B_1-prime in the final proof paragraphs, specialized to the corrected finite-normalization hypothesis."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical multiplication map from B tensor integral closure of A in P to integral closure of B in reduced tensor product L tensor P",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearMap.mul'\", \"module\": \"Mathlib.Algebra.Algebra.Bilinear\", \"type\": \": A ⊗[R] A →ₗ[R] A\", \"doc\": \"The linear map from the tensor product $ A \\\\otimes_R A $ to $ A $ induced by the bilinear multiplication map $ A \\\\times A \\\\to A $, which sends each pure tensor $ a \\\\otimes b $ to the product $ ab $.\"}\n  {\"name\": \"LinearMap.mul'_tensor\", \"module\": \"Mathlib.RingTheory.TensorProduct.Basic\", \"type\": \": mul' R (A ⊗[R] B) = map (mul' R A) (mul' R B) ∘ₗ tensorTensorTensorComm R A B A B\", \"doc\": \"The multiplication map $ \\\\mu_{A \\\\otimes_R B} $ on the tensor product $ A \\\\otimes_R B $ is equal to the composition of the canonical reordering isomorphism $ (A \\\\otimes_R A) \\\\otimes_R (B \\\\otimes_R B) \\\\\"}\n  {\"name\": \"PiTensorProduct.mul\", \"module\": \"Mathlib.RingTheory.PiTensorProduct\", \"type\": \": (⨂[R] i, A i) →ₗ[R] (⨂[R] i, A i) →ₗ[R] (⨂[R] i, A i)\", \"doc\": \"The linear map representing multiplication in the tensor product $\\\\bigotimes_R A_i$, constructed by taking the tensor product of the individual multiplication maps $A_i \\\\to_R A_i \\\\to_R A_i$ and liftin\"}\n  {\"name\": \"LinearMap.mul''\", \"module\": \"Mathlib.Algebra.Algebra.Bilinear\", \"type\": \": A ⊗[R] A →ₗ[A] A\", \"doc\": \"The A-linear map from the tensor product $ A \\\\otimes_R A $ to $ A $ induced by the bilinear multiplication map $ A \\\\times A \\\\to A $, which sends each pure tensor $ a \\\\otimes b $ to the product $ ab $.\"}\n  {\"name\": \"Algebra.TensorProduct.lmul''\", \"module\": \"Mathlib.RingTheory.TensorProduct.Maps\", \"type\": \": S ⊗[R] S →ₐ[S] S\", \"doc\": \"The algebra homomorphism from $ S \\\\otimes_R S $ to $ S $ induced by the multiplication in $ S $, sending each pure tensor $ s \\\\otimes t $ to the product $ st $.\"}\n  {\"name\": \"TensorProduct.toIntegralClosure\", \"module\": \"Mathlib.RingTheory.Smooth.IntegralClosure\", \"type\": \"(B : Type*) [CommRing B] [Algebra R B] : S ⊗[R] integralClosure R B →ₐ[S] integralClosure S (S ⊗[R] B)\", \"doc\": \"The algebra homomorphism from $ S \\\\otimes_R \\\\overline{B}^R $ to $ \\\\overline{S \\\\otimes_R B}^S $, where $ \\\\overline{B}^R $ denotes the integral closure of $ R $ in $ B $, and $ \\\\overline{S \\\\otimes_R B}^\"}\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Smooth.IntegralClosure\", \"type\": \"{s : Set S} (hs : Ideal.span s = ⊤) (Sᵣ : s → Type*) [∀ r, CommRing (Sᵣ r)] [∀ r, Algebra S (Sᵣ r)]\\n  [∀ r, Algebra R (Sᵣ r)] [∀ r, IsScalarTower R S (Sᵣ r)] [∀ r, IsLocalization.Away r.1 (Sᵣ r)]\\n  (H : ∀ r, Function.Bijective (toIntegralClosure R (Sᵣ r) B)) : Function.Bijective (toIntegralClosure R\", \"doc\": \"Let $R$ and $S$ be commutative rings, with $S$ being an $R$-algebra, and let $B$ be another $R$-algebra. For a ring $A$ and an $A$-algebra $C$, let $\\\\overline{C}^A$ denote the integral closure of $A$ \"}\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"module\": \"Mathlib.RingTheory.Smooth.IntegralClosure\", \"type\": \"(M : Submonoid R) [IsLocalization M S] : Function.Bijective (toIntegralClosure R S B)\", \"doc\": \"If $ S $ is the localization of a commutative semiring $ R $ at a submonoid $ M $, then the canonical map from the tensor product of the integral closure of $ R $ in $ B $ with $ S $ over $ R $ to the\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Related generic tensor-to-integral-closure map found and reused; no map to the reduced generic tensor normalization as in this node."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.toIntegralClosure",
+   "results": "[loogle] OK 7 hit(s)\n  {\"name\": \"TensorProduct.toIntegralClosure\", \"module\": \"Mathlib.RingTheory.Smooth.IntegralClosure\", \"type\": \" (R : Type u_1) (S : Type u_2) [CommRing R] [CommRing S] [Algebra R S] (B : Type u_4) [CommRing B] [Algebra R B] : TensorProduct R S ↥(integralClosure R B) →ₐ[S] ↥(integralClosure S (TensorProduct R S B))\", \"doc\": \"The comparison map from `S ⊗[R] integralClosure R B` to `integralClosure S (S ⊗[R] B)`.\\nThis is injective when `S` is `R`-flat, and (TODO) bijective when `S` is `R`-smooth.\"}\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_smooth\", \"module\": \"Mathlib.RingTheory.Smooth.IntegralClosure\", \"type\": \" {R : Type u_1} {S : Type u_2} {B : Type u_3} [CommRing R] [CommRing S] [Algebra R S] [CommRing B] [Algebra R B] [Algebra.Smooth R S] : Function.Bijective ⇑(TensorProduct.toIntegralClosure R S B)\", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"module\": \"Mathlib.RingTheory.Smooth.IntegralClosure\", \"type\": \" {R : Type u_1} {S : Type u_2} {B : Type u_3} [CommRing R] [CommRing S] [Algebra R S] [CommRing B] [Algebra R B] (M : Submonoid R) [IsLocalization M S] : Function.Bijective ⇑(TensorProduct.toIntegralClosure R S B)\", \"doc\": \"Localization preserves integral closure.\"}\n  {\"name\": \"TensorProduct.toIntegralClosure_injective_of_flat\", \"module\": \"Mathlib.RingTheory.Smooth.IntegralClosure\", \"type\": \" {R : Type u_1} {S : Type u_2} {B : Type u_3} [CommRing R] [CommRing S] [Algebra R S] [CommRing B] [Algebra R B] [Module.Flat R S] : Function.Injective ⇑(TensorProduct.toIntegralClosure R S B)\", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Smooth.IntegralClosure\", \"type\": \" {R : Type u_1} {S : Type u_2} {B : Type u_3} [CommRing R] [CommRing S] [Algebra R S] [CommRing B] [Algebra R B] {s : Set S} (hs : Ideal.span s = ⊤) (Sᵣ : ↑s → Type u_4) [(r : ↑s) → CommRing (Sᵣ r)] [(r : ↑s) → Algebra S (Sᵣ r)] [(r : ↑s) → Algebra R (Sᵣ r)] [∀ (r : ↑s), IsScalarTower R S (Sᵣ r)] [∀\", \"doc\": \"\\\"Base change preserves integral closure\\\" can be checked Zariski-locally.\"}\n  {\"name\": \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"module\": \"Mathlib.RingTheory.Smooth.IntegralClosure\", \"type\": \" {R : Type u_1} {B : Type u_3} [CommRing R] [CommRing B] [Algebra R B] {σ : Type u_4} : Function.Bijective ⇑(TensorProduct.toIntegralClosure R (MvPolynomial σ R) B)\", \"doc\": \"Base changing to `MvPolynomial σ R` preserves integral closure.\"}\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_tower\", \"module\": \"Mathlib.RingTheory.Smooth.IntegralClosure\", \"type\": \" {R : Type u_1} {S : Type u_2} {B : Type u_3} [CommRing R] [CommRing S] [Algebra R S] [CommRing B] [Algebra R B] {T : Type u_4} [CommRing T] [Algebra R T] [Algebra S T] [IsScalarTower R S T] (H : Function.Bijective ⇑(TensorProduct.toIntegralClosure R S B)) (H' : Function.Bijective ⇑(TensorProduct.to\", \"doc\": \"\\\"Base change preserves integral closure\\\" is stable under composition.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Related generic tensor-to-integral-closure map found and reused; no map to the reduced generic tensor normalization as in this node."
+  },
+  {
+   "tool": "grep",
+   "query": "toIntegralClosure|[Nn]ormaliz.*[Tt]ensor.*[Mm]ap",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"16\", \"text\": \"`TensorProduct.toIntegralClosure : S ⊗[R] integralClosure R B →ₐ[S] integralClosure S (S ⊗[R] B)`\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"20\", \"text\": \"- `TensorProduct.toIntegralClosure_injective_of_flat`:\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"21\", \"text\": \"  If `S` is `R`-flat, then `TensorProduct.toIntegralClosure` is injective.\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"22\", \"text\": \"- `TensorProduct.toIntegralClosure_mvPolynomial_bijective`:\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"23\", \"text\": \"  If `S = MvPolynomial σ R`, then `TensorProduct.toIntegralClosure` is bijective.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Related generic tensor-to-integral-closure map found and reused; no map to the reduced generic tensor normalization as in this node."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n eppNormalizationMap|eppUpperClosure|normalizedTensorMultiplication|toIntegralClosure lean/WeilConjectures",
+   "results": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Normalization.lean:547:      Function.Bijective (TensorProduct.toIntegralClosure Γ(S, U) Γ(Y, V) Γ(X, f ⁻¹ᵁ U))) :\nlean/WeilConjectures/Mathlib/AlgebraicGeometry/Normalization.lean:575:    e.mapIntegralClosure.toAlgHom.comp (TensorProduct.toIntegralClosure _ _ _)\nlean/WeilConjectures/Mathlib/AlgebraicGeometry/Normalization.lean:613:      · simp [ψ, toIntegralClosure, e]; rfl\nlean/WeilConjectures/AlgebraicGeometry/Morphisms/NormalizationStalkBaseChange.lean:18:with TensorProduct.toIntegralClosure_bijective_of_isLocalization.\nlean/WeilConjectures/AlgebraicGeometry/Morphisms/NormalizationStalkBaseChange.lean:64:    e.mapIntegralClosure.toAlgHom.comp (TensorProduct.toIntegralClosure _ _ _)\nlean/WeilConjectures/AlgebraicGeometry/Morphisms/NormalizationStalkBaseChange.lean:66:    (TensorProduct.toIntegralClosure_bijective_of_isLocalization M)\nlean/WeilConjectures/AlgebraicGeometry/Morphisms/NormalizationStalkBaseChange.lean:103:      · simp [ψ, toIntegralClosure, e]; rfl\nlean/WeilConjectures/AlgebraicGeometry/Morphisms/NormalizationAffineLocalization.lean:59:    e.mapIntegralClosure.toAlgHom.comp (TensorProduct.toIntegralClosure _ _ _)\nlean/WeilConjectures/AlgebraicGeometry/Morphisms/NormalizationAffineLocalization.lean:61:    (TensorProduct.toIntegralClosure_bijective_of_isLocalization M)\nlean/WeilConjectures/AlgebraicGeometry/Morphisms/NormalizationAffineLocalization.lean:98:      · simp [ψ, toIntegralClosure, e]; rfl\n",
+   "date": "2026-10-24",
+   "verdict": "Existing normalization constructions found in Sheaf.RingTheory.EppEssentiallyFiniteTypeTraits and reused; no existing canonical map to its upper reduced normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n eppNormalizationMap|eppUpperClosure|normalizedTensorMultiplication|toIntegralClosure lean/Sheaf",
+   "results": "lean/Sheaf/RingTheory/EppEssentiallyFiniteTypeTraits.lean:52:abbrev eppUpperClosure (T : Type w) (F : Type v) (H : Type x) (M : Type y)\nlean/Sheaf/RingTheory/EppEssentiallyFiniteTypeTraits.lean:62:noncomputable def eppNormalizationMap\nlean/Sheaf/RingTheory/EppEssentiallyFiniteTypeTraits.lean:68:    integralClosure D M →+* eppUpperClosure T F H M :=\nlean/Sheaf/RingTheory/EppEssentiallyFiniteTypeTraits.lean:162:        (q : Ideal (eppUpperClosure T F H M)) [q.IsMaximal],\nlean/Sheaf/RingTheory/EppEssentiallyFiniteTypeTraits.lean:163:        (q.comap (eppNormalizationMap D T F H M)).IsMaximal ∧\nlean/Sheaf/RingTheory/EppEssentiallyFiniteTypeTraits.lean:166:        Ideal.map ((algebraMap (eppUpperClosure T F H M) (Localization.AtPrime q)).comp\nlean/Sheaf/RingTheory/EppEssentiallyFiniteTypeTraits.lean:167:          (eppNormalizationMap D T F H M))\nlean/Sheaf/RingTheory/EppEssentiallyFiniteTypeTraits.lean:168:          (q.comap (eppNormalizationMap D T F H M)) =\nlean/Sheaf/RingTheory/EppEssentiallyFiniteTypeTraits.lean:169:            Ideal.map (algebraMap (eppUpperClosure T F H M) (Localization.AtPrime q)) q ∧\nlean/Sheaf/RingTheory/EppEssentiallyFiniteTypeTraits.lean:171:          (eppNormalizationMap D T F H M)\nlean/Sheaf/RingTheory/EppEssentiallyFiniteTypeTraits.lean:172:          (q.comap (eppNormalizationMap D T F H M)) q rfl := by\nlean/Sheaf/RingTheory/IntegralClosureIndEtaleBaseChange.lean:30:Its underlying formula is `s ⊗ c ↦ s ⊗ c`, by `TensorProduct.toIntegralClosure`.\nlean/Sheaf/RingTheory/IntegralClosureIndEtaleBaseChange.lean:65:theorem toIntegralClosure_bijective_of_indEtale\nlean/Sheaf/RingTheory/IntegralClosureIndEtaleBaseChange.lean:69:    Function.Bijective (TensorProduct.toIntegralClosure R S B) := by\n",
+   "date": "2026-10-24",
+   "verdict": "Existing normalization constructions found in Sheaf.RingTheory.EppEssentiallyFiniteTypeTraits and reused; no existing canonical map to its upper reduced normalization."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-normalized-finite-stage-descent",
+  "date": "2026-10-24",
+  "group": "Q120"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The canonical multiplication B tensor_A R_P to C_P in the finite-module hypothesis of lem-sfb-dvr-normalized-finite-stage-descent; its finite-stage model is used in proof steps 2 and 5.",
+   "via": [
+    "lem-sfb-dvr-normalized-finite-stage-descent",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalizedTensorMultiplication",
+  "declaration": "IsDiscreteValuationRing.normalizedTensorMultiplication",
+  "file": "lean/Sheaf/RingTheory/NormalizedTensorMultiplication.lean",
+  "statement": "def normalizedTensorMultiplication (A : Type u) (B : Type v) (K : Type w) (L : Type x) (P : Type y) [CommRing A] [CommRing B] [Field K] [Field L] [Field P] [Algebra A B] [Algebra A K] [Algebra A L] [Algebra B L] [Algebra K L] [IsScalarTower A B L] [IsScalarTower A K L] [Algebra K P] [Algebra A P] [IsScalarTower A K P] : B ⊗[A] integralClosure A P →+* normalizedUpperClosure B K L P",
+  "branch": "sheaf-dag",
+  "by": "Q120",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Owns the 09EM helpers with Mathlib-only imports: normalizedReducedTensor (L ⊗[K] P)/nilradical, normalizedUpperClosure (integral closure of B in it), the multiplication B ⊗[A] R_P → C_P (TensorProduct.toIntegralClosure then AlgHom.mapIntegralClosure) and normalizedLowerMap r ↦ [1 ⊗ r] (its restriction along includeRight). Second-reader FIX: the delivered module imported Sheaf.RingTheory.EppEssentiallyFiniteTypeTraits, the module of lem-sfb-epp-essentially-finite-type-traits, whose proof_deps contain lem-sfb-dvr-normalized-finite-stage-descent (stage-3 import cycle). Checked by a test file: normalizedUpperClosure = eppUpperClosure by rfl and normalizedLowerMap = eppNormalizationMap (ext; simp; rfl), so the Epp module can import this one and abbreviate its helpers to these.",
+  "declarations": [
+   "IsDiscreteValuationRing.normalizedReducedTensor",
+   "IsDiscreteValuationRing.normalizedUpperClosure",
+   "IsDiscreteValuationRing.normalizedTensorMultiplication",
+   "IsDiscreteValuationRing.normalizedLowerMap"
+  ],
+  "fixed_by": "NT-stage2-cc-a20fe1730"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a20fe1730",
+  "group": "Q120",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a20fe1730",
+  "group": "Q120",
+  "result": "fix",
+  "note": "The statement matches the node clause by clause (injective local DVR map, essentially finite type B, algebraic P, genuine multiplication map in the finite-module hypothesis, all local hypotheses, IsSeparableExtension + FG, conclusion with 5 clauses over a finite IntermediateField), and the edge cases are covered. Finding C6/H4: the new def module imported EppEssentiallyFiniteTypeTraits, the module of the theorem lem-sfb-epp-essentially-finite-type-traits, whose proof_deps contain this item, so stage 3 would hit an import cycle. FIX: NormalizedTensorMultiplication now imports only Mathlib and owns normalizedReducedTensor, normalizedUpperClosure, normalizedTensorMultiplication (body unchanged) and normalizedLowerMap (mu composed with includeRight). The item module only renames the helpers it uses. Fixes: the new-node JSON, the item lean-record.json with the verbatim statement, and report.md. nt_compile: both fixed files compiled clean (2.5 s, 4.9 s); a test file showed normalizedUpperClosure = eppUpperClosure by rfl and normalizedLowerMap = eppNormalizationMap. Maintainer: have the Epp module import this def module."
+ }
+}

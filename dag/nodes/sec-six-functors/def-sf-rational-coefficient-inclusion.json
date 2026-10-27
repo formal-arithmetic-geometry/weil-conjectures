@@ -1,0 +1,137 @@
+{
+ "id": "def-sf-rational-coefficient-inclusion",
+ "kind": "definition",
+ "title": "Continuous rational coefficient inclusion",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $\\ell$ be prime and $E,F$ finite extensions of $\\mathbf Q_\\ell$ with their specified spectral topologies [def-weil-l-adic-coefficient-extension]. Let $i:E\\to F$ be a $\\mathbf Q_\\ell$-algebra embedding and $X$ a scheme with its small pro-etale site [def-weil-pbc-proetale-site]. Define the morphism $E_X\\to F_X$ of continuous-function coefficient sheaves by the canonical continuous coefficient map [def-sfb-continuous-coefficient-pullback-maps] for $\\operatorname{ULift}(i)$. On each site object $U$, it sends a continuous function $b$ to the function $x\\mapsto i(b(x))$, with the standard universe lifts. The continuity proof is the uniqueness of the extended absolute value on finite extensions. This definition is the existing rationalBalancedCoefficient, and includes no scalar-realization comparison theorem.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-continuous-coefficient-pullback-maps"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2 and Proposition 6.8.14: finite coefficient embeddings on continuous rational coefficients."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "postcompose continuous field valued functions with a finite extension embedding",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousMap.isEmbedding_postcomp\", \"AbstractCompletion.extend_comp_coe\", \"PointwiseConvergenceCLM.postcomp\", \"ContinuousLinearMap.postcomp_apply\", \"ContinuousLinearMap.postcomp_uniformConvergenceCLM\", \"UniformSpace.Completion.extension_comp_coe\", \"ContinuousLinearMap.postcomp\", \"BoundedContinuousFunction.extend_comp\"]}",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib sheaf-level definition; reuse the published project construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous coefficient sheaf map from an embedding of finite padic fields",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicInt.continuous_choose\", \"mahler\", \"cyclotomicCharacter.continuous\", \"PadicInt.continuous_multichoose\", \"PadicInt.continuous_addChar_of_value_at_one\", \"PadicInt.isOpenEmbedding_coe\", \"InfiniteGalois.algEquivToLimit_continuous\", \"PadicComplex\"]}",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib sheaf-level definition; reuse the published project construction"
+  },
+  {
+   "tool": "grep",
+   "query": "completedCoefficientMap|completedScalarComparison|rationalBalancedCoefficient",
+   "results": "Mathlib Algebra/Homology: 0 hits. rg in lean/WeilConjectures found no exact finite-field sheaf map. rg in lean/Sheaf found rationalBalancedCoefficient in RationalScalarBalancedLocalization, defined by continuousCoefficientMap of RingHom.ulift i. DAG search found only theorem consumers and its theorem owner, with no definition owner; def-sfb-continuous-coefficient-pullback-maps owns the general map and is reused. blueprint_refs.py search continuous coefficient map: 0 matches.",
+   "date": "2026-10-24",
+   "verdict": "reuse published definitions; add missing definition ownership"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-common-stage-descent-equivalence",
+  "date": "2026-10-24",
+  "group": "Q70"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Canonical coefficient maps and normalized completed scalar comparison in the conditional common-stage descent obligation; the parent is a maintainer-created obligation with no blueprint ancestor.",
+   "via": [
+    "lem-sf-adic-common-stage-descent-equivalence",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.RationalScalarBalancedLocalization",
+  "declaration": "AlgebraicGeometry.Scheme.rationalBalancedCoefficient",
+  "statement": "def rationalBalancedCoefficient (X : Scheme.{u}) :\n    rationalCoefficientSheaf l X E ⟶ rationalCoefficientSheaf l X F",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair: owns only the already published continuous postcomposition definition. No theorem of rational scalar balanced localization is assumed and no definition is copied."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-184fde136",
+  "group": "Q70",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-184fde136",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Re-delivery of returned 4017973c fixes all three return points; only the dependency records, two aliases and the shift instance changed, statement unchanged. (1) The four locally finite realization helpers are cited from landed def-sf-locally-finite-adic-realization-data. (2) completedIntegralScalarCoefficientMap is the landed def-weil-completed-integral-scalar-data alias; the new node def-sf-completed-scalar-comparison-data owns an alias of completedScalarComparison with the same type and the same normalization, no invertibility claim, no other owner and no name clash. (3) The new node def-sf-rational-coefficient-inclusion records the published rationalBalancedCoefficient as existing; its signature is word-for-word the live source. scalarCommShift is now a definition used as a local instance, so importers get no second global shift instance on pbcDerivedExtend; the five advisory owners were added. Re-read the statement against the node: hypotheses, conclusions and edge cases unchanged and correct; recorded signature matches the file; report sections present. Minor, not blocking: integralRationalCoefficientMap's owner def-sfb-continuous-coefficient-pullback-maps is reached only through the new node; lem-weil-scalar-extension-composition stays a theorem dependency cited only by the node text; completedDerivedScalarExtension is still defined in a theorem's module. No compile run, as no file was changed; worker reports clean compiles (8.7 s and 36.4 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261026T235846-L-1461716",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.rationalBalancedCoefficient_comp",
+   "AlgebraicGeometry.Scheme.rationalBalancedCoefficient_sections",
+   "AlgebraicGeometry.Scheme.rationalBalancedCoefficient_square",
+   "AlgebraicGeometry.Scheme.rationalBalancedComponent_naturality",
+   "AlgebraicGeometry.Scheme.rationalBalancedDerivedNaturality",
+   "AlgebraicGeometry.Scheme.rationalBalancedEmbedding_continuous",
+   "AlgebraicGeometry.Scheme.rationalBalancedFractions",
+   "AlgebraicGeometry.Scheme.rationalBalancedGeometricNormalization",
+   "AlgebraicGeometry.Scheme.rationalBalancedGeometricSquare",
+   "AlgebraicGeometry.Scheme.rationalBalancedIdentity",
+   "AlgebraicGeometry.Scheme.rationalBalancedIntegralCoefficients",
+   "AlgebraicGeometry.Scheme.rationalBalancedIntegralNormalization",
+   "AlgebraicGeometry.Scheme.rationalBalancedNormalizedIdentity",
+   "AlgebraicGeometry.Scheme.rationalBalancedNormalizedTower",
+   "AlgebraicGeometry.Scheme.rationalBalancedPentagon",
+   "AlgebraicGeometry.Scheme.rationalBalancedTensorModels",
+   "AlgebraicGeometry.Scheme.rationalBalancedTower",
+   "AlgebraicGeometry.Scheme.rationalScalarBalancedLocalization"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.Scheme.rationalBalancedComponent_naturality",
+   "AlgebraicGeometry.Scheme.rationalBalancedIdentity",
+   "AlgebraicGeometry.Scheme.rationalBalancedIntegralNormalization",
+   "AlgebraicGeometry.Scheme.rationalBalancedPentagon",
+   "AlgebraicGeometry.Scheme.rationalBalancedTensorModels",
+   "AlgebraicGeometry.Scheme.rationalBalancedTower"
+  ]
+ }
+}

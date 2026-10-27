@@ -1,0 +1,267 @@
+{
+ "id": "lem-sfb-open-space-generization-lifting",
+ "kind": "statement",
+ "title": "Open algebraic-space morphisms lift generalizations through a specified point",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and work in the universes of [def-weil-size-convention] with algebraic spaces over $S$ [def-trf-algebraic-space], their sheaf fibre products [lem-trf-space-fibre-products-etale-covers], and point spaces with the atlas topology [def-a1-space-point-topology]. A space is quasi-compact if every open cover of its point space has a finite subcover; a morphism is quasi-compact if its pullback along every affine scheme test has quasi-compact point space. A space is quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. Let $f:X\\to Y$ be a morphism between quasi-separated algebraic spaces whose point map is open. For every $x_0\\in|X|$ and $y_1\\in|Y|$ with $f(x_0)\\in\\overline{\\{y_1\\}}$, there is $x_1\\in|X|$ such that $x_0\\in\\overline{\\{x_1\\}}$ and $f(x_1)=y_1$. Neither surjectivity nor local finite presentation is assumed.",
+ "source": {
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Rydh section 1, paragraph preceding Remark (1.3), printed p.5, and Remark (2.5)(2), printed p.8; algebraic-space extensions Remark (1.8) and end of section 2, printed p.11. Scheme statement: Stacks Tag 040F, morphisms.tex, lemma-open-generizing (read in full). Author PDF https://davidrydh.se/papers/submersion20100305.pdf read online; local copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine component $U$ of an etale presentation $p:U\\to X$ and $u_0\\in U$ with $p(u_0)=x_0$, using [lem-a1-space-affine-etale-cover]. The point map of $p$ is open and continuous by [lem-a1-space-point-open-calculus]. Thus $h=f\\circ p:U\\to Y$ is open: $h(V)=f(p(V))$ is open for every open $V\\subseteq U$. The affine scheme $U$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], and hence its point space is spectral by [lem-weil-pbc-qcqs-scheme-spectral].",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-a1-space-point-open-calculus",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-scheme-spectral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03FX (lemma-cover-by-union-affines), 03BX (lemma-topology-points); spectrality: properties.tex Tag 094L (lemma-quasi-compact-quasi-separated-spectral)."
+   }
+  },
+  {
+   "text": "Choose a field representative $a:\\operatorname{Spec}K\\to Y$ of $y_1$ by [def-a1-algebraic-space-point-classes]. Its source has one point by [def-weil-affine-spectrum] and is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Since $Y$ is quasi-separated, [lem-sfb-space-qcqs-permanence] makes $a$ quasi-compact. Apply [lem-sfb-space-quasicompact-constructible-closed] to the whole (closed) constructible point space of $\\operatorname{Spec}K$: its image $\\{y_1\\}$ is constructible-topology closed in $Y$. Both $U$ and $Y$ are quasi-separated, so [lem-sfb-space-constructible-topology-comparison] makes $|h|$ continuous for these topologies. Therefore $F=h^{-1}\\{y_1\\}\\subseteq U$ is closed in the constructible topology of the affine scheme $U$.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-quasicompact-constructible-closed",
+    "lem-sfb-space-constructible-topology-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 073B (lemma-quasi-compact-quasi-separated-permanence), (1); field representatives: spaces-properties.tex Tag 03BU (definition-points). Agent argument using the cited constructible-topology nodes."
+   }
+  },
+  {
+   "text": "Let $\\mathcal B$ be the quasi-compact open neighborhoods of $u_0$ in the spectral space $U$; they form a neighborhood basis by [def-weil-spectral-space]. Each $B\\in\\mathcal B$ is closed in the constructible topology by [def-weil-pbc-constructible-topology]. For any finite list $B_1,\\ldots,B_r$ in $\\mathcal B$, the open set $V=B_1\\cap\\cdots\\cap B_r$ contains $u_0$ (take $V=U$ if $r=0$). Since $h(V)$ is an open neighborhood of $h(u_0)=f(x_0)$ and $f(x_0)\\in\\overline{\\{y_1\\}}$, it contains $y_1$. Thus $F\\cap V$ is nonempty. By [lem-weil-pbc-spectral-constructible-topology-quasi-compact], $U$ is quasi-compact in its constructible topology. If $F\\cap\\bigcap_{B\\in\\mathcal B}B$ were empty, the constructible opens $U\\setminus F$ and $U\\setminus B$ would cover $U$. A finite subcover would contradict the preceding nonempty finite intersections. Choose $u_1$ in this intersection. Then $h(u_1)=y_1$, and every neighborhood of $u_0$ contains $u_1$, so $u_0\\in\\overline{\\{u_1\\}}$.",
+   "uses": [
+    "def-weil-spectral-space",
+    "def-weil-pbc-constructible-topology",
+    "lem-weil-pbc-spectral-constructible-topology-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0901 (lemma-constructible-hausdorff-quasi-compact), quasi-compactness; definition-constructible-topology immediately preceding it. Agent finite-subcover argument."
+   }
+  },
+  {
+   "text": "Set $x_1=p(u_1)$. Then $f(x_1)=h(u_1)=y_1$. To verify specialization directly, let $O\\subseteq|X|$ be any open neighborhood of $x_0$. By continuity of $p$ from [lem-a1-space-point-open-calculus], $p^{-1}O$ is a neighborhood of $u_0$, so it contains $u_1$. Hence $x_1\\in O$, proving $x_0\\in\\overline{\\{x_1\\}}$. This proves the required lifting using only openness of $f$, with no surjectivity or finite-presentation assumption.",
+   "uses": [
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX (lemma-topology-points); elementary neighborhood argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "def-a1-algebraic-space-point-classes",
+  "def-weil-affine-spectrum",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-quasicompact-constructible-closed",
+  "lem-sfb-space-constructible-topology-comparison",
+  "def-weil-spectral-space",
+  "def-weil-pbc-constructible-topology",
+  "lem-weil-pbc-spectral-constructible-topology-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 0901 (lemma-constructible-hausdorff-quasi-compact), combined with spaces-morphisms.tex Tag 073B; constructible-compactness proof of the algebraic-space extension of morphisms.tex Tag 040F."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An open morphism of schemes or algebraic spaces lifts every generalization of the image of a specified source point",
+   "results": "{\"t\": \"2026-10-23T22:11:15Z\", \"tool\": \"leanfinder\", \"query\": \"An open morphism of schemes or algebraic spaces lifts every generalization of the image of a specified source point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap\", \"AlgebraicGeometry.UniversallyOpen.out\", \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"AlgebraicGeometry.Scheme.Hom.isOpenMap\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyIsOpenMap\", \"AlgebraicGeometry.Flat.generalizingMap\"], \"digest\": \"5faa0b31d4dd16e0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: isOpenMap_of_generalizingMap and the going-down Chevalley lemma prove the converse direction with local finite presentation; Flat.generalizingMap requires flatness. None states lifting for an arbitrary open morphism of algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open morphism of quasi separated algebraic spaces lifts generalizations through any given source point",
+   "results": "{\"t\": \"2026-10-23T22:13:05Z\", \"tool\": \"leansearch\", \"query\": \"An open morphism of quasi separated algebraic spaces lifts generalizations through any given source point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift.congr_simp\", \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"AlgebraicGeometry.IsOpenImmersion.lift\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.lift\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_fac\", \"AlgebraicGeometry.Scheme.Hom.isOpenMap\", \"AlgebraicGeometry.IsOpenImmersion.lift_fac\", \"AlgebraicGeometry.IsOpenImmersion.comp_lift\"], \"digest\": \"d3b655f351ee9736\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: isOpenMap_of_generalizingMap and the going-down Chevalley lemma prove the converse direction with local finite presentation; Flat.generalizingMap requires flatness. None states lifting for an arbitrary open morphism of algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "generalizingMap|generizing",
+   "results": "{\"t\": \"2026-10-23T22:13:04Z\", \"tool\": \"grep\", \"query\": \"generalizingMap|generizing\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\"], \"digest\": \"9d8e86192d245884\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: isOpenMap_of_generalizingMap and the going-down Chevalley lemma prove the converse direction with local finite presentation; Flat.generalizingMap requires flatness. None states lifting for an arbitrary open morphism of algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenMap\", \"GeneralizingMap\"",
+   "results": "{\"t\": \"2026-10-23T22:09:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsOpenMap\\\", \\\"GeneralizingMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isOpenMap_of_generalizingMap\"], \"digest\": \"87eee4f9d4bdd0e4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: isOpenMap_of_generalizingMap and the going-down Chevalley lemma prove the converse direction with local finite presentation; Flat.generalizingMap requires flatness. None states lifting for an arbitrary open morphism of algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsOpenMap.generalizingMap",
+   "results": "{\"t\": \"2026-10-23T22:11:14Z\", \"tool\": \"loogle\", \"query\": \"IsOpenMap.generalizingMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsOpenMap.generalizingMap'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: isOpenMap_of_generalizingMap and the going-down Chevalley lemma prove the converse direction with local finite presentation; Flat.generalizingMap requires flatness. None states lifting for an arbitrary open morphism of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open maps of algebraic spaces have the going down property for specialization ordered points, with no finite presentation hypothesis",
+   "results": "{\"t\": \"2026-10-23T22:13:06Z\", \"tool\": \"leanfinder\", \"query\": \"Open maps of algebraic spaces have the going down property for specialization ordered points, with no finite presentation hypothesis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyIsOpenMap\", \"AlgebraicGeometry.isOpenMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap\", \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.Hom.isOpenMap\", \"AlgebraicGeometry.UniversallyOpen.eq\"], \"digest\": \"74fc1b142d3d33da\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: isOpenMap_of_generalizingMap and the going-down Chevalley lemma prove the converse direction with local finite presentation; Flat.generalizingMap requires flatness. None states lifting for an arbitrary open morphism of algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "generalizingMap|generizing|isOpenMap_of_generalizingMap",
+   "results": "{\"t\": \"2026-10-23T22:49:27Z\", \"tool\": \"grep\", \"query\": \"generalizingMap|generizing|isOpenMap_of_generalizingMap\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\"], \"digest\": \"9d8e86192d245884\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme openness theorem is the converse and requires local finite presentation; Flat.generalizingMap assumes flatness. Specialization.map and the topological specialization definitions do not give existence of a lifting. No algebraic-space statement found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open morphisms of schemes lift generalizations of points without finite presentation assumptions",
+   "results": "{\"t\": \"2026-10-23T22:49:27Z\", \"tool\": \"leansearch\", \"query\": \"Open morphisms of schemes lift generalizations of points without finite presentation assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"AlgebraicGeometry.Scheme.Hom.isOpenMap\", \"AlgebraicGeometry.IsOpenImmersion.lift_app\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift.congr_simp\", \"AlgebraicGeometry.IsOpenImmersion.comp_lift\", \"AlgebraicGeometry.IsOpenImmersion.lift\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.UniversallyOpen.of_flat\"], \"digest\": \"2c768818ac5b2355\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme openness theorem is the converse and requires local finite presentation; Flat.generalizingMap assumes flatness. Specialization.map and the topological specialization definitions do not give existence of a lifting. No algebraic-space statement found."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsOpenMap, GeneralizingMap",
+   "results": "{\"t\": \"2026-10-23T22:49:27Z\", \"tool\": \"loogle\", \"query\": \"IsOpenMap, GeneralizingMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isOpenMap_of_generalizingMap\"], \"digest\": \"87eee4f9d4bdd0e4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme openness theorem is the converse and requires local finite presentation; Flat.generalizingMap assumes flatness. Specialization.map and the topological specialization definitions do not give existence of a lifting. No algebraic-space statement found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open morphism of quasi separated algebraic spaces lifts generalizations through every specified point",
+   "results": "{\"t\": \"2026-10-23T22:49:28Z\", \"tool\": \"leanfinder\", \"query\": \"An open morphism of quasi separated algebraic spaces lifts generalizations through every specified point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap\", \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyIsOpenMap\", \"AlgebraicGeometry.isOpenMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated\"], \"digest\": \"8ed9a71e75ff150c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme openness theorem is the converse and requires local finite presentation; Flat.generalizingMap assumes flatness. Specialization.map and the topological specialization definitions do not give existence of a lifting. No algebraic-space statement found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A spectral open map lifts the specialization order by compactness of each patch closed fibre",
+   "results": "{\"t\": \"2026-10-23T22:50:14Z\", \"tool\": \"leanfinder\", \"query\": \"A spectral open map lifts the specialization order by compactness of each patch closed fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Specialization.map\", \"SpecializingMap\", \"IsOpenMap.exists_opens_image_eq_of_prespectralSpace\", \"Topology.IsInducing.specializingMap\", \"Specializes.map\", \"IsRetrocompact_iff_isSpectralMap_subtypeVal\", \"ContinuousMap.map_specializes\", \"StableUnderSpecialization.image\"], \"digest\": \"76c09bac52d5cc89\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme openness theorem is the converse and requires local finite presentation; Flat.generalizingMap assumes flatness. Specialization.map and the topological specialization definitions do not give existence of a lifting. No algebraic-space statement found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-subtrusive-topological-descent-calculus",
+  "date": "2026-10-24",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route, through Alper Proposition 7.1.1 Hom exactness and Rydh (5.19)(i); supporting Rydh (5.17) proof, printed p.22: the universally subtrusive hypothesis, affine localization, passage to finite-presentation factors, and the universally open sufficient condition; supporting input: Rydh section 1, paragraph preceding Remark (1.3), printed p.5, and Remark (2.5)(2), printed p.8; algebraic-space extensions Remark (1.8) and end of section 2, printed p.11. Scheme statement: Stacks Tag 040F, morphisms.tex, lemma-open-generizing (read in full).",
+   "via": [
+    "lem-sfb-subtrusive-topological-descent-calculus",
+    "lem-sfb-space-qc-subtrusive-etale-descent",
+    "lem-sfb-space-open-surjection-etale-descent",
+    "lem-sfb-homeomorphism-separated-etale-equivalence",
+    "lem-sfb-separated-space-homeomorphism-affine",
+    "lem-sfb-stein-submersive-reduced-descent",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-open-space-generization-lifting",
+  "worker": "stage1",
+  "summary": "Q83 verified Stacks 040F and supplied a constructible-compactness proof for quasi-separated algebraic spaces. An affine etale chart is spectral; the target singleton is patch closed using its field representative and quasi-compactness over a quasi-separated target. Openness supplies the finite intersection property, and patch compactness supplies the lifting. All inputs reuse existing DAG nodes; statement unchanged; no new nodes.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route through the recorded via chain: the generalization-lifting input used by lem-sfb-subtrusive-topological-descent-calculus in its affine-test descent and universally open sufficient-condition steps. Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md checked; no separate blueprint statement of this lifting was found.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic atlas existence supplies an affine chart and a point above x_0; this is the established point-space presentation tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point calculus supplies openness and continuity of an etale chart; the unit has no different point-topology construction."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-constructible-topology-quasi-compact",
+    "why": "Generic spectral patch compactness is used on an affine chart; it is a topological tool and not a different six-functor proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-spectral-constructible-topology-quasi-compact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-5b0cbbc86",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-5b0cbbc86 (reviewer sub-agent of L); spot-checked: I read the delivery in full: one commit, 0 new nodes, statement unchanged, no repair note for this item. The statement matches the scheme case in Stacks 040F (morphisms.tex:4519), which holds for any open morphism. Step 1: an affine component U of the atlas from lem-a1-space-affine-etale-cover has an open, continuous point map by lem-a1-space-point-open-calculus, so h=f∘p is open. U is qcqs (00E8/01KN) and therefore spectral (094L). That U→X is étale is left implicit, which I accept as elementary. Step 2: take a field point a:Spec K→Y of y_1 (03BU). Spec K has one point and Y is qs, so lem-sfb-space-qcqs-permanence (073B(1)) makes a quasi-compact. Then lem-sfb-space-quasicompact-constructible-closed shows {y_1} is constructible-closed. The comparison node gives constructible continuity of h, and through the identity presentation F=h^{-1}{y_1} is patch-closed in U. Both constructible nodes are same-unit, unsplit, with empty proof_deps, so there is no cycle. Step 3: quasi-compact opens are patch-clopen and form a basis (08YG). The finite intersection property follows from openness of h and from y_1 being a generization of f(x_0), with the r=0 case handled. Patch compactness (0901) then gives u_1, with the specialization in the right direction. Step 4 is elementary from continuity of p. Edge cases checked: y_1=f(x_0), open immersions, empty X. No duplicate in dag/nodes or in the main-20261015 blueprint; lem-sfb-quasiseparated-space-etale-specializations covers only the étale-chart case. tool_uses accepted: the off-unit lem-a1 atlas and point-calculus nodes are generic, and the patch-compactness node is a Mathlib leaf. Batch 5: all four flagged citations reach sec-trace-formula only through the general definition def-trf-algebraic-space, which is outside the trace-formula and Poincaré-duality assumptions. No SGA citations. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceOpenGenerizationLifting",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_generization_of_isOpenMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceOpenGenerizationLifting.lean",
+  "statement": "theorem exists_generization_of_isOpenMap {S : Scheme.{u}} (X Y : AlgebraicSpace S) (f : X ⟶ Y) (_hX : IsAbsolutelyQuasiSeparated X) (_hY : IsAbsolutelyQuasiSeparated Y) (_hf : IsOpenMap (mapPoint f.hom.hom)) (x₀ : Point X.obj.obj) (y₁ : Point Y.obj.obj) (_h : mapPoint f.hom.hom x₀ ∈ closure ({y₁} : Set (Point Y.obj.obj))) : ∃ x₁ : Point X.obj.obj, x₀ ∈ closure ({x₁} : Set (Point X.obj.obj)) ∧ mapPoint f.hom.hom x₁ = y₁",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed absolute affine-test criterion and canonical point map. Added their existing definition nodes to stmt_deps; no statement correction. The theorem has only the postponed proof."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5811a1382",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Read node, stmt_deps (point topology, absolute qs, proper-curve-moduli), module, report, live sources and Stacks 040F. The Lean matches clause by clause: Scheme.{u}; AlgebraicSpace X Y and f; IsAbsolutelyQuasiSeparated on both (0AHR(3)); IsOpenMap (mapPoint f.hom.hom) on pointTopologicalSpace; hypothesis f(x0) ∈ closure{y1}; conclusion ∃ x1, x0 ∈ closure{x1} ∧ f(x1)=y1. No surjectivity, lfp or extra hypotheses. Node diff is only lean plus two landed definition stmt_deps that own the declarations used; no cycle; statement verbatim. No duplicate: the étale-chart lifting nodes are distinct. Docstrings, sorry-only proof, both report sections present. Edge cases (empty spaces, y1=f(x0), non-qs base) covered. No compile (no FIX). No findings."
+ }
+}

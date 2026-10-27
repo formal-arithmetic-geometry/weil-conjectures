@@ -1,0 +1,123 @@
+{
+ "id": "lem-sfb-ringed-cocontinuous-monoidal",
+ "kind": "statement",
+ "title": "Strong monoidal module restriction for an invertible coefficient map",
+ "statement": "Let (C,J) and (D,K) be sites essentially small in universe w [def-weil-pbc-sites-and-cohomology]. Let F:C→D be continuous and cocontinuous. Let R and S be sheaves of commutative rings with values in universe w on C and D respectively. Suppose a:R≅F_*S is an isomorphism of their underlying sheaves of rings. Then the existing restriction functor on sheaves of modules [def-weil-sheaf-of-modules-category], SheafOfModules(S)→SheafOfModules(R),, defined by precomposition with F and scalar restriction along a, admits a strong monoidal structure for the sheafified tensor products [def-pur-sheaf-tensor-product]. Site object and morphism universes may differ from w. No points, Noetherianity, nonzero-ring assumption or equivalence of sites is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; tensor-product section, lemma-sheafification-tensor and lemma-tensor-product-pullback (Tag 03EK); Sites Tag 04B8, lemma-almost-cocontinuous-sheafification. Specialization of inverse-image tensor comparison to the precomposition realization with invertible coefficient map."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Equip presheaf precomposition and scalar restriction with their existing lax monoidal structures. The unit comparison is the sectionwise coefficient map a, hence invertible. Each tensorator is invertible by the proved scalar-restriction tensor equivalence for a bijective ring homomorphism (restrictScalars_mu_isIso in SemilinearDerivedCalculus). Construct a presheaf isomorphism from the component isomorphisms. This makes presheaf restriction strong monoidal.",
+   "uses": [
+    "def-coef-semilinear-derived-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved restrictionSheafificationMap helper transposes the restricted sheafification unit. Cocontinuity preserves its local bijectivity; restrictionSheafificationMap_isIso proves invertibility. Apply the sheafification adjunction to the naturality equation; evaluation on unit sections and unit naturality prove it. These are the arbitrary-universe helpers of SemilinearDerivedCalculus.",
+   "uses": [
+    "def-coef-semilinear-derived-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both module sheafification functors are strong monoidal localizations for the existing tensor. The natural isomorphism of the previous step gives a Localization.Lifting of the sheaf restriction. Apply Mathlib CategoryTheory.Localization.Monoidal.functorMonoidalOfComp (Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, declaration beginning at line 136) to descend the strong monoidal structure.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-derived-calculus",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tensor-product section, lemma-sheafification-tensor and lemma-tensor-product-pullback; implemented using the existing semilinear restriction helpers and the Mathlib monoidal-localization universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves of modules along a cocontinuous functor with invertible scalar map is strong monoidal",
+   "date": "2026-10-26",
+   "results": "8 hits: ModuleCat.restrictScalars, SheafOfModules.restrictScalars, PresheafOfModules.restrictScalars and monoidalCategory, among others.",
+   "verdict": "Basic scalar restriction and presheaf tensor exist; no exact cocontinuous sheaf-module result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal functor descends through a monoidal localization when its composite is naturally isomorphic to a monoidal functor",
+   "date": "2026-10-26",
+   "results": "8 hits, including Localization.Monoidal.functorMonoidalOfComp and functorCoreMonoidalOfComp.",
+   "verdict": "Use functorMonoidalOfComp to descend presheaf restriction through module sheafification."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*Monoidal|functorMonoidalOfComp",
+   "date": "2026-10-26",
+   "results": "9 hits: presheaf pushforwardZeroMonoidal, Sites.Monoidal, Sites.Point.Monoidal and Localization.Monoidal.Functor.",
+   "verdict": "Reuse the presheaf structure and localization universal property; the ringed sheaf comparison still has to be assembled."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiscreteCoefficientModel",
+  "date": "2026-10-26",
+  "group": "Q5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Integral-models coefficient comparison, preservation of the ordinary module tensor under section reconstruction and equivalent-site scalar restriction.",
+   "via": [
+    "lem-sfb-discrete-coefficient-model",
+    "lem-sfb-integral-residue-coefficient-transport",
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedCocontinuousMonoidal",
+  "file": "lean/Sheaf/CategoryTheory/RingedCocontinuousMonoidal.lean",
+  "declaration": "SheafOfModules.ringed_cocontinuous_monoidal",
+  "statement": "theorem ringed_cocontinuous_monoidal : Nonempty (pushforward.{w} a.hom).Monoidal",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261026T002258-L-72466",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261026T002258-L-72466",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

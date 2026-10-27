@@ -1,0 +1,262 @@
+{
+ "id": "lem-trf-two-term-kernel-normalization",
+ "kind": "statement",
+ "title": "Construction of the kernel-normalized determinant isomorphism",
+ "statement": "Let $R$ be a commutative ring and $a:P\\to Q$ a morphism of cochain complexes [def-weil-abstract-derived-category], both zero outside degrees $-1,0$, whose terms are direct summands of finite free $R$-modules [def-weil-pbc-projective-module]. Suppose $a^{-1},a^0$ are surjective and the induced maps on $H^{-1}$ and $H^0$ are isomorphisms. Put $N^i=\\ker a^i$, with the restricted differential $d_N$. Then each sequence $0\\to N^i\\to P^i\\to Q^i\\to0$ splits, $N^i$ is finite projective, and $d_N:N^{-1}\\to N^0$ is an isomorphism. For a finite projective module $V$, let $\\det_R(V)$ be its determinant line, locally its top exterior power, with kernel-first exact-sequence maps $\\gamma^i:\\det_R(N^i)\\otimes_R\\det_R(Q^i)\\xrightarrow{\\sim}\\det_R(P^i)$ as in [lem-trf-projective-determinant-exact-sequence]. For any such two-term complex $E$ put $D(E)=\\det_R(E^0)\\otimes_R\\det_R(E^{-1})^\\vee$, where $V^\\vee=\\operatorname{Hom}_R(V,R)$. Let $\\Gamma_a:D(Q)\\otimes_R D(N)\\xrightarrow{\\sim}D(P)$ be obtained by tensoring $\\gamma^0$ with the inverse dual of $\\gamma^{-1}$ and reordering factors by ordinary tensor symmetry. The element $\\delta_N\\in D(N)$ corresponding to $\\det(d_N)$ under $D(N)\\cong\\operatorname{Hom}_R(\\det_R(N^{-1}),\\det_R(N^0))$ generates this invertible module. Consequently $x\\mapsto\\Gamma_a(x\\otimes\\delta_N)$ is an isomorphism $D(Q)\\to D(P)$ and has a unique inverse $T_a:D(P)\\to D(Q)$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJI (section-determinants-complexes), construction preceding Tag 0FJJ, together with Tag 0FJB (lemma-det-ses)."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-projective-module",
+  "lem-trf-projective-determinant-exact-sequence",
+  "def-trf-projective-determinant-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-trf-two-term-determinant-encoding"
+ ],
+ "proof": [
+  {
+   "text": "Projective lifting applied to $1_{Q^i}$ along the surjection $a^i$ gives a section $s_i:Q^i\\to P^i$. The mutually inverse maps $N^i\\oplus Q^i\\to P^i$, $(n,q)\\mapsto n+s_iq$, and $p\\mapsto(p-s_ia^ip,a^ip)$ split the exact sequence. Thus $N^i$ is a direct summand of $P^i$, hence of a finite free module: compose its inclusion and projection with a finite-free splitting of $P^i$. The composite projection after inclusion is the identity.",
+   "uses": [
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), the kernel term exact sequences; explicit projective lifting expansion."
+   }
+  },
+  {
+   "text": "The chain-map equation $a^0d_P=d_Qa^{-1}$ restricts $d_P$ to $d_N:N^{-1}\\to N^0$. If $n\\in N^{-1}$ and $d_Nn=0$, then $n$ lies in $H^{-1}(P)=\\ker d_P$. Its image in $H^{-1}(Q)$ is zero, so injectivity of $H^{-1}(a)$ gives $n=0$. There are no incoming boundaries in degree $-1$. Thus $d_N$ is injective.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), acyclicity of the kernel, injectivity in the two-term case."
+   }
+  },
+  {
+   "text": "For $n\\in N^0$, its class in $H^0(P)=P^0/d_PP^{-1}$ maps to zero. Injectivity of $H^0(a)$ gives $p\\in P^{-1}$ with $d_Pp=n$. Then $a^{-1}p$ is a cycle of $Q$. Surjectivity of $H^{-1}(a)$ gives a cycle $z\\in P^{-1}$ with $a^{-1}z=a^{-1}p$; equality is of actual cycles because there are no degree-$-1$ boundaries. Hence $p-z\\in N^{-1}$ and $d_N(p-z)=n$. This proves surjectivity. The inverse of the bijective linear map $d_N$ is linear by uniqueness of preimages, so $d_N$ is an isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), acyclicity of the kernel, surjectivity in the two-term case."
+   }
+  },
+  {
+   "text": "Apply the kernel-first determinant exact-sequence theorem to the two split exact sequences. Its hypotheses hold by step 1 and the finite projectivity of the given terms. It supplies exactly $\\gamma^i:\\det_R(N^i)\\otimes\\det_R(Q^i)\\cong\\det_R(P^i)$ and says that all these determinant modules are finite projective and locally free of rank one, including zero-rank terms.",
+   "uses": [
+    "lem-trf-projective-determinant-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJB (lemma-det-ses), applied in degrees -1 and 0 as in Tag 0FJI."
+   }
+  },
+  {
+   "text": "For a finite projective $U$ and arbitrary $V$, specialize the tensor-Hom equivalence with $(M,P,Q)=(U,V,R)$ and remove the right unitor to get $V\\otimes U^\\vee\\cong\\operatorname{Hom}_R(U,V)$, with $v\\otimes\\lambda\\mapsto(u\\mapsto\\lambda(u)v)$. For finite projectives $U,W$, curry a functional on $U\\otimes W$ into $\\operatorname{Hom}_R(U,W^\\vee)$ by the tensor universal property and apply this equivalence with $V=W^\\vee$. This gives $(U\\otimes W)^\\vee\\cong U^\\vee\\otimes W^\\vee$, sending $\\lambda\\otimes\\mu$ in the inverse direction to $(u\\otimes w\\mapsto\\lambda(u)\\mu(w))$. Finite projective duals and double-dual evaluation are supplied by the dual theorem. Therefore the inverse dual of $\\gamma^{-1}$ is an isomorphism from $\\det(N^{-1})^\\vee\\otimes\\det(Q^{-1})^\\vee$ to $\\det(P^{-1})^\\vee$. Tensor it with $\\gamma^0$, then use the pure-tensor associativity and symmetry maps to obtain the stated $\\Gamma_a:D(Q)\\otimes D(N)\\cong D(P)$. These rearrangements have no signs.",
+   "uses": [
+    "lem-pc-finite-projective-module-tensor-hom",
+    "lem-sf-finite-projective-dual",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), tensoring gamma^0 and the inverse dual of gamma^(-1); explicit tensor-Hom expansion."
+   }
+  },
+  {
+   "text": "Take finite free covers of $N^{-1}$ and $N^0$ using [lem-weil-pbc-finite-projective-standard-free-cover]. The chart-descent theorem identifies their top-exterior determinant lines with the annihilator models in [def-trf-projective-determinant-module], compatibly with exterior localization. Write $L=\\det_R(N^{-1})$, $M=\\det_R(N^0)$. The exterior-algebra maps of $d_N$ and $d_N^{-1}$ are inverse: their composites fix every exterior generator, so equal the identity by the defining uniqueness. They restrict to the annihilator determinant modules: if $x$ annihilates every $n\\in N^{-1}$, its image annihilates every $d_Nn\\in N^0$, and these exhaust $N^0$. On the free charts these are precisely the top exterior maps; by the chart identifications they give inverse determinant maps $u:L\\cong M$ and $u^{-1}$ for the determinant lines used in step 4. Under step 5 the tensor $\\delta_N\\in M\\otimes L^\\vee$ is exactly the element corresponding to $u$. The line-duality lemma applies to $L$ by step 4 and makes $R\\to\\operatorname{End}_R(L)$, $r\\mapsto r1_L$, an isomorphism. Composing with $f\\mapsto u\\circ f$ and the inverse of step 5 gives an isomorphism $t:R\\cong D(N)$ taking $1$ to $\\delta_N$. Thus $\\delta_N$ is a basis element, which is the claimed generator. Line evaluation also identifies duals of all determinant lines as their tensor inverses, justifying the invertible-module terminology for $D(E)$.",
+   "uses": [
+    "def-trf-projective-determinant-module",
+    "lem-trf-line-module-duality",
+    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "lem-trf-projective-determinant-chart-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), canonical element of an acyclic complex; Tag 0FJ9 (section-determinants), exterior determinant of an isomorphism."
+   }
+  },
+  {
+   "text": "Tensor the isomorphism $t:R\\cong D(N)$ with $D(Q)$ and compose with $\\Gamma_a$. After the right unitor the resulting map is $F(x)=\\Gamma_a(x\\otimes\\delta_N)$. Its inverse is the composite $D(P)\\xrightarrow{\\Gamma_a^{-1}}D(Q)\\otimes D(N)\\xrightarrow{1\\otimes t^{-1}}D(Q)\\otimes R\\cong D(Q)$. Both composites are identities by the inverse equations of $t$ and $\\Gamma_a$; call this inverse $T_a$. If $S$ is another inverse, $S=SFT_a=T_a$, giving uniqueness.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), defining commutative triangle and unique normalized inverse."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-abstract-derived-category",
+  "lem-trf-projective-determinant-exact-sequence",
+  "lem-pc-finite-projective-module-tensor-hom",
+  "lem-sf-finite-projective-dual",
+  "def-weil-pbc-module-tensor-product",
+  "def-trf-projective-determinant-module",
+  "lem-trf-line-module-duality",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-trf-projective-determinant-chart-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJI (section-determinants-complexes), degreewise-surjective quasi-isomorphism construction before Tag 0FJJ, with explicit two-term kernel chase; Tag 0FJB (lemma-det-ses)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kernel of a degreewise surjective quasi-isomorphism of two term finite projective complexes has invertible differential and its determinant trivializes the kernel determinant line",
+   "results": "8 hits; top=['Rep.standardComplex.instQuasiIsoNatεToSingle₀', 'Rep.standardComplex.quasiIso_forget₂_εToSingle₀', \"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\", 'Rep.FiniteCyclicGroup.resolution_quasiIso', 'CategoryTheory.ProjectiveResolution.quasiIso', \"CategoryTheory.ProjectiveResolution.instIsIsoFromLeftDerivedZero'Self\", 'CochainComplex.isKProjective_iff_of_iso', 'CochainComplex.isKProjective_of_iso']; note=; digest=390cee0d1cc5bb74. The results concern projective resolutions, K-projectivity, scalar determinants and kernels, not determinant-line normalization for two-term maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite projective two term complex surjective quasi isomorphism canonical determinant line isomorphism defined by its contractible kernel",
+   "results": "8 hits; top=[\"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\", 'CategoryTheory.ProjectiveResolution.quasiIso', 'CochainComplex.isKProjective_iff_of_iso', 'CochainComplex.isKProjective_of_iso', \"CategoryTheory.ProjectiveResolution.instIsIsoFromLeftDerivedZero'Self\", 'Rep.standardComplex.instQuasiIsoNatεToSingle₀', 'CategoryTheory.ProjectiveResolution.isoExt', 'Rep.standardComplex.quasiIso_forget₂_εToSingle₀']; note=; digest=bc9388948ae21969. The results concern projective resolutions, K-projectivity, scalar determinants and kernels, not determinant-line normalization for two-term maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective quasi isomorphism of complexes in degrees minus one and zero has finite projective kernel terms and the kernel differential gives a generator of its determinant line",
+   "results": "0 hits; top=[]; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c. The results concern projective resolutions, K-projectivity, scalar determinants and kernels, not determinant-line normalization for two-term maps.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"det\", \"ker\"",
+   "results": "12 hits; top=['Lean.Kernel.Exception.deterministicTimeout', 'Lean.Server.FileWorker.SignatureHelp.determineSignatureHelp', 'Matrix.det_kronecker', 'Matrix.det_kroneckerTMul', 'Matrix.det_kroneckerMapBilinear', 'Matrix.SpecialLinearGroup.range_toGL_eq_ker_det', 'LinearMap.det_eq_zero_iff_ker_ne_bot', 'LinearMap.bot_lt_ker_of_det_eq_zero']; note=; digest=47436e1810038626. The results concern projective resolutions, K-projectivity, scalar determinants and kernels, not determinant-line normalization for two-term maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "determinantLine|kernelNormalized|determinantExactSequence|det.*acyclic",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. The results concern projective resolutions, K-projectivity, scalar determinants and kernels, not determinant-line normalization for two-term maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "determinantLine|kernelNormalized|determinantExactSequence|det.*acyclic",
+   "results": "{\"t\": \"2026-10-23T09:55:35Z\", \"tool\": \"grep\", \"query\": \"determinantLine|kernelNormalized|determinantExactSequence|det.*acyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete determinant normalization: hits concern projective resolutions, acyclic complexes, scalar determinants, and kernels, not determinant lines of finite projective two-term complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A two term acyclic complex of finite projective modules has a determinant trivialization inducing a determinant isomorphism for surjective quasi isomorphisms",
+   "results": "{\"t\": \"2026-10-23T09:55:36Z\", \"tool\": \"leansearch\", \"query\": \"A two term acyclic complex of finite projective modules has a determinant trivialization inducing a determinant isomorphism for surjective quasi isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.Acyclic\", \"CategoryTheory.ShortComplex.QuasiIso.casesOn\", \"CategoryTheory.ProjectiveResolution.mk.injEq\", \"CategoryTheory.ShortComplex.QuasiIso.isIso\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"CategoryTheory.ProjectiveResolution.self\", \"quasiIso_of_isIso\", \"CategoryTheory.ProjectiveResolution.instIsIsoFromLeftDerivedZero'Self\"], \"digest\": \"c71c3c25cf411dfe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete determinant normalization: hits concern projective resolutions, acyclic complexes, scalar determinants, and kernels, not determinant lines of finite projective two-term complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"det\", \"ker\"",
+   "results": "{\"t\": \"2026-10-23T09:55:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"det\\\", \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Kernel.Exception.deterministicTimeout\", \"Lean.Server.FileWorker.SignatureHelp.determineSignatureHelp\", \"Matrix.det_kronecker\", \"Matrix.det_kroneckerTMul\", \"Matrix.det_kroneckerMapBilinear\", \"Matrix.SpecialLinearGroup.range_toGL_eq_ker_det\", \"LinearMap.det_eq_zero_iff_ker_ne_bot\", \"LinearMap.bot_lt_ker_of_det_eq_zero\"], \"digest\": \"47436e1810038626\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete determinant normalization: hits concern projective resolutions, acyclic complexes, scalar determinants, and kernels, not determinant lines of finite projective two-term complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Determinant line of a contractible complex of finite projective modules is canonically trivial",
+   "results": "{\"t\": \"2026-10-23T09:55:46Z\", \"tool\": \"leanfinder\", \"query\": \"Determinant line of a contractible complex of finite projective modules is canonically trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.det_eq_one_of_subsingleton\", \"LinearMap.det_eq_one_of_finrank_eq_zero\", \"LinearMap.det_eq_one_of_not_module_finite\", \"Module.Free.of_det_ne_one\", \"LinearMap.free_of_det_ne_one\", \"ModuleCat.exteriorPower.iso₀\", \"CommRing.Pic.instFreeOfSubsingleton\", \"CommRing.Pic.subsingleton_iff\"], \"digest\": \"886af3a548c51bac\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete determinant normalization: hits concern projective resolutions, acyclic complexes, scalar determinants, and kernels, not determinant lines of finite projective two-term complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjective quasi isomorphism between two term finite projective complexes gives a canonical determinant line isomorphism using its acyclic kernel",
+   "results": "{\"t\": \"2026-10-23T09:55:46Z\", \"tool\": \"leanfinder\", \"query\": \"Surjective quasi isomorphism between two term finite projective complexes gives a canonical determinant line isomorphism using its acyclic kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"CategoryTheory.ProjectiveResolution.quasiIso\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"CochainComplex.isKProjective_iff_of_iso\", \"CochainComplex.isKProjective_of_iso\", \"Rep.FiniteCyclicGroup.resolution_quasiIso\", \"CategoryTheory.ProjectiveResolution.instIsIsoFromLeftDerivedZero'Self\"], \"digest\": \"a4314bf958c4e82b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete determinant normalization: hits concern projective resolutions, acyclic complexes, scalar determinants, and kernels, not determinant lines of finite projective two-term complexes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-surjective-two-term-determinant-calculus",
+  "date": "2026-10-22",
+  "group": "Q30"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Lower-level input: the homotopy and composition calculus for kernel-normalized determinant maps of surjective two-term complex maps, before passage to derived objects. Repair subargument: Construction of the kernel-normalized determinant isomorphism.",
+   "via": [
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-two-term-kernel-normalization",
+  "worker": "stage1",
+  "summary": "Proved splitting and kernel invertibility directly by lifting and a two-term cohomology chase; reused the exact-sequence determinant and Mathlib tensor-Hom/dual nodes. One new statement-only generic rank-one module duality input isolates the local-rank-one/evaluation bridge missing from Mathlib. Constructed the determinant of d_N on the exterior-annihilator model and obtained the generator and explicit unique inverse. No statement correction.",
+  "blueprint": "Auxiliary determinant-normalization construction along the recorded Temkin/marked-dualizing chain from lem-trf-local-term-locality, clauses (1)--(2); current latest proof read, no change to its contracting-correspondence route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-fef509370",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-fef509370 (reviewer sub-agent of L); spot-checked: I read the whole delivery and all the cited sources; no fixes were needed. Source match: the statement is unchanged from base (it is still unsplit in live and side-live). It matches Stacks more-algebra Tag 0FJI l.36890 ff. with K=P and L=Q: T_a is Stacks' det(a), the inverse of x↦(γ^0⊗(γ^{-1})^{-1})(x⊗δ). For complexes in degrees −1 and 0, isomorphisms on H^{-1} and H^0 make a a quasi-isomorphism, so the target is not weakened. Steps 1–3: projective lifting gives the splitting and N finite projective; the two-term chase gives d_N injective and surjective. I checked the argument line by line: the lack of degree −2 and degree 1 terms is used correctly. Step 4: lem-trf-projective-determinant-exact-sequence is cited for what its statement says, including the rank-0 cases. Step 5: tensor-Hom with (U,V,R), currying, and the direction of the inverse dual all check out; Γ_a reorders factors with no signs. Step 6: the exterior map of d_N sends one annihilator model into the other (algebra map plus d_N onto). The composites are the identity by the def's uniqueness clause. Chart descent and the Lean-closed standard-free-cover node identify u with det(d_N) on the glued lines. Then R≅End(L) gives t with 1↦δ_N. The local rank-one hypothesis comes from 'locally free of rank one' by localizing further to primes. Step 7: the inverse and its uniqueness are correct. New node lem-trf-line-module-duality: true statement, matching 0B8I l.36118 (evaluation proof) and 0FJ9 (R=Hom(L,L)). Tested on L=R, the zero ring and nontrivial Pic; R^2 over a field shows the hypothesis is needed. It is statement-only and unsplit, with leansearch/loogle/leanfinder/grep searches recorded. Not in Mathlib: PicardGroup.lean:52-59 TODO leaves the local-rank-one characterization open. No duplicate in the snapshot or live DAG: the scheme versions, categorical cancellation, stably-free and scalar-extension nodes all differ. It is not a clause of the item. The route stays in unit sk-i-curve-zero plus definitions, Mathlib leaves and a Lean-closed tool, so no tool_uses are needed. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.SecTraceFormula.TwoTermKernelNormalization",
+  "declaration": "Module.two_term_kernel_normalization",
+  "declarations": [
+   "Module.IsKernelNormalizedAssembly",
+   "Module.two_term_kernel_normalization"
+  ],
+  "file": "lean/Sheaf/SecTraceFormula/TwoTermKernelNormalization.lean",
+  "statement": "theorem two_term_kernel_normalization {R : Type u} [CommRing R] {P Q : Arrow (ModuleCat.{v} R)} (a : P ⟶ Q) [Module.Finite R P.left] [Module.Projective R P.left] [Module.Finite R P.right] [Module.Projective R P.right] [Module.Finite R Q.left] [Module.Projective R Q.left] [Module.Finite R Q.right] [Module.Projective R Q.right] (ha : TwoTerm.DegreewiseSurjective a) (hqa : TwoTerm.QuasiIso a) : Module.Finite R (LinearMap.ker (ModuleCat.Hom.hom a.left)) ∧ Module.Projective R (LinearMap.ker (ModuleCat.Hom.hom a.left)) ∧ Module.Finite R (LinearMap.ker (ModuleCat.Hom.hom a.right)) ∧ Module.Projective R (LinearMap.ker (ModuleCat.Hom.hom a.right)) ∧ (∃ s : (Q.left : Type v) →ₗ[R] (P.left : Type v), ModuleCat.Hom.hom a.left ∘ₗ s = LinearMap.id) ∧ (∃ s : (Q.right : Type v) →ₗ[R] (P.right : Type v), ModuleCat.Hom.hom a.right ∘ₗ s = LinearMap.id) ∧ Function.Bijective (TwoTerm.kernelDifferential a) ∧ ∃! T : TwoTerm.determinant P ≃ₗ[R] TwoTerm.determinant Q, ∃ (Γ : TwoTerm.determinant Q ⊗[R] TwoTerm.kernelDeterminant a ≃ₗ[R] TwoTerm.determinant P) (δ : TwoTerm.kernelDeterminant a), IsKernelNormalizedAssembly a Γ δ T",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Returned H2/H3 repaired: independent Mathlib Arrow encoding; shared canonical exact-sequence maps, explicit pure-tensor assembly, and exterior-differential contraction characterize Gamma and delta."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7c6820fd",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Re-delivery repairs both faults of the 83f730d2 return. (1) Cycle: new def node def-trf-two-term-determinant-encoding on Mathlib Arrow(ModuleCat R); neither module imports the parent SurjectiveTwoTermDeterminantCalculus. (2) Γ/δ pinned: a shared γneg/γzero pair with IsDeterminantExactSequenceMap for (ker.subtype, a.left/right), each unique by existsUnique_determinantExactSequence; Γ on pure tensors = γzero(n0⊗q0) ⊗ (φn⊗φq)∘γneg⁻¹ (inverse dual, no sign); δ by contraction = ⋀d_N on socles, which pins det(d_N) since ⋀d_N maps socle onto socle and M⊗L^∨→Hom(L,M) is injective for finite projective L; so ∃! T is genuine. All clauses (QuasiIso as H^-1 kernel bijection plus H^0 mod-range inj/surj, splitting, finite projective kernels, d_N bijective, span{δ}=⊤, inverse triangle) match the node and Stacks 0FJI. Edge cases: rank 0 gives δ=1, zero ring, char 2, independent universes u,v. The five existing stmt_dep records are identical to side-live; the item changes only lean plus the added stmt_dep; lean.statement fields verbatim. Advisory: the parent's parallel TwoTermComplex encoding remains (moving it would affect 4 importers, importing it would recreate the cycle; bridge via Arrow.mk at stage 3); redundant inner uniqueness clause; proof-plan plain imports (H9). No compile run (no fix)."
+ }
+}

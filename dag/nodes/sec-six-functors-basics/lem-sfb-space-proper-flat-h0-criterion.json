@@ -1,0 +1,308 @@
+{
+ "id": "lem-sfb-space-proper-flat-h0-criterion",
+ "kind": "statement",
+ "title": "Field-fibre criterion for universal degree-zero structure-sheaf pushforward",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Assume $f$ is proper, flat and of finite presentation [def-sfb-space-morphism-properties]. Here proper means separated, of finite type and universally closed; flatness and local finite presentation are tested on etale scheme charts, and finite presentation also requires quasi-compactness and quasi-separatedness. For every field $k$ [def-weil-field] and every morphism $u:\\operatorname{Spec}k\\to Y$ [def-weil-affine-spectrum], put $X_u=X\\times_Y\\operatorname{Spec}k$ (the sheaf fibre product), and assume that the canonical structure map $k\\to\\Gamma(X_u,\\mathcal O_{X_u})$ is an isomorphism. Then the canonical map $f^\\sharp:\\mathcal O_Y\\to f_*\\mathcal O_X$ [def-sfb-space-module-structure-map] is an isomorphism, and for every algebraic space $T\\to Y$ the canonical map $f_T^\\sharp:\\mathcal O_T\\to(f_T)_*\\mathcal O_{X\\times_YT}$ is an isomorphism, where $f_T:X\\times_YT\\to T$ is the projection. Structure sheaves and direct images are on the small etale ringed sites with the canonical module functors [def-trf-space-etale-module-functors]; $\\Gamma$ denotes global sections of the structure sheaf.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0E6B, lemma-proper-flat-h0, hypothesis (2) for every field-valued morphism and conclusion (a)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-etale-module-functors",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-module-structure-map"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary algebraic space $T\\to Y$; the choice $T=Y$ includes the first assertion. For every etale scheme chart $v:U\\to T$, put $Z=X\\times_YU$ and $p:Z\\to U$. By [lem-sfb-space-flat-proper-fp-locality], $p$ is proper, flat and finitely presented. For every field-valued $w:\\operatorname{Spec}k\\to U$, associativity of the sheaf fibre product identifies $Z_w$ with $X_{vw}$, including the projections to $\\operatorname{Spec}k$, so its scalar map is the assumed isomorphism. By [lem-trf-space-etale-module-pushforward-restriction], restriction of $(f_T)_*\\mathcal O_{X\\times_YT}$ to $U$ is $p_*\\mathcal O_Z$. This identifies the restricted structure map with $p^\\sharp$: their projections to every etale chart $(W,a)$ are both $s\\mapsto a^\\sharp(s)$ by [def-sfb-space-module-structure-map]. It remains to prove $p^\\sharp$ invertible for each such scheme $U$.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "def-sfb-space-module-structure-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E6B, first sentence and last sentence of proof (a); Tags 03MO, 03XR, 04WP and 03LX"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-proper-flat-space-derived-base-change] to $p$ and $\\mathcal F=\\mathcal O_Z$. This coefficient is quasi-coherent and finitely presented, with its identity rank-one presentation, and is flat over $U$ precisely by flatness of $p$. Write $A=Rp_{\\mathrm{et},*}\\mathcal O_Z$, $K=R\\epsilon_{U,*}A$, and $a:\\mathcal O_U[0]\\to K$ for the derived scalar unit. The cited statement gives that $K$ is perfect, an isomorphism $\\epsilon_U^*K\\to A$ given by the canonical counit, and arbitrary scheme base change for $K$ preserving $a$. A perfect complex has quasi-coherent cohomology, so $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_U)$.",
+   "uses": [
+    "lem-sfb-proper-flat-space-derived-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E6B, perfectness and arbitrary base change from Tag 0CTM; Tag 0E62, first paragraph"
+   }
+  },
+  {
+   "text": "Record the degree-zero normalization, also for every base change of $p$ to a scheme $V$. The small ringed sites have enough injectives and K-injective resolutions by [prop-pur-kinjective-resolutions-exist]: its monomorphism from $M[0]$ into a degreewise injective complex gives an embedding of each module $M$ into its degree-zero injective term. The direct image $p_{V,*}$ is additive and left exact, being the right adjoint of tensor pullback in [def-trf-space-etale-module-functors]. By [lem-sbc-right-derived-single-zero-unit], the canonical augmentation $(p_{V,*}\\mathcal O)[0]\\to Rp_{V,*}\\mathcal O$ induces the standard isomorphism $p_{V,*}\\mathcal O\\simeq H^0(Rp_{V,*}\\mathcal O)$. The derived scalar unit is the single complex of $p_V^\\sharp$ followed by this augmentation. The canonical counit $\\epsilon_V^*K_V\\to Rp_{V,*}\\mathcal O$ takes $\\epsilon_V^*a_V$ to that unit: this is the counit triangle identity for the composite scalar adjunction. Exactness of $\\epsilon_V^*$ in [lem-sfb-derived-etale-zariski-equivalence] therefore identifies $\\epsilon_V^*H^0(a_V)$ with the actual map $p_V^\\sharp$, not merely with some isomorphism between its source and target.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-trf-space-etale-module-functors",
+    "lem-sbc-right-derived-single-zero-unit",
+    "lem-sfb-derived-etale-zariski-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E6B, canonical structure map; Tags 0156, 070K, 08H8 and 071Q; degree-zero augmentation normalization"
+   }
+  },
+  {
+   "text": "For a point $u\\in U$ let $i_u:\\operatorname{Spec}\\kappa(u)\\to U$. By [lem-sfb-proper-flat-space-derived-base-change], $Li_u^*(K,a)$ is $(K_{p_u}(\\mathcal O),a_{p_u})$. Choose a nonnegative injective resolution $\\mathcal O_{Z_u}\\to I^\\bullet$ using [lem-weil-pbc-left-exact-injective-resolution-degree-zero]. By [lem-sp-kinjective-computes], it is K-injective and computes the unbounded direct image as $p_{u,*}I^\\bullet$. This complex has zero terms below zero, hence zero negative cohomology. The counit identifies it with $\\epsilon_{\\kappa(u)}^*Li_u^*K$. Since this pullback is exact and faithful by [lem-sfb-derived-etale-zariski-equivalence], $H^j(Li_u^*K)=0$ for $j<0$. The small ringed-site hypotheses and enough injectives are those established in Step 3.",
+   "uses": [
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-sp-kinjective-computes",
+    "lem-sfb-derived-etale-zariski-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E62, first paragraph (nonnegative derived fibres); derived.tex Tags 013K, 05TD and 05TH"
+   }
+  },
+  {
+   "text": "By Step 3 on $\\operatorname{Spec}\\kappa(u)$, the etale pullback of $H^0(Li_u^*a)$ identifies with $p_u^\\sharp$. Both sides are quasi-coherent: the target is $H^0$ of the exact etale pullback of the perfect object $Li_u^*K$. Apply [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. Its inverse is restriction to Zariski opens, with comparisons the identity on open sections. Thus $H^0(Li_u^*a)$, evaluated on the unique nonempty Zariski open of $\\operatorname{Spec}\\kappa(u)$, is exactly $\\kappa(u)\\to\\Gamma(Z_u,\\mathcal O_{Z_u})$. The definition [def-trf-space-etale-module-functors] computes the right side as compatible functions on etale charts, and [def-sfb-space-module-structure-map] computes the arrow by scalar pullback. It is an isomorphism by Step 1. A map of modules on this one-point Zariski space is an isomorphism when its value there is bijective; hence $H^0(Li_u^*a)$ is an isomorphism.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-trf-space-etale-module-functors",
+    "def-sfb-space-module-structure-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E62, residue-field scalar isomorphism; descent.tex Tags 03DX and 03FH, normalized restriction inverse"
+   }
+  },
+  {
+   "text": "The scheme $U$, the perfect object $K$ and the morphism $a$ now satisfy [lem-sc-perfect-degree-zero-fibre-criterion]: Step 4 gives all negative-fibre vanishings and Step 5 gives the scalar isomorphism at every residue field. That statement yields $H^0(a):\\mathcal O_U\\to H^0(K)$ invertible. Exact etale pullback preserves its inverse. By the normalized comparison of Step 3, this is precisely invertibility of $p^\\sharp:\\mathcal O_{U,\\mathrm{et}}\\to p_*\\mathcal O_Z$.",
+   "uses": [
+    "lem-sc-perfect-degree-zero-fibre-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E62, perfect-complex fibre criterion applied after Tag 0CTM"
+   }
+  },
+  {
+   "text": "By Step 1, $f_T^\\sharp$ is an isomorphism on every etale scheme chart of $T$. These charts cover its small etale site. The local inverses agree on overlaps, since two inverses to the same map agree; the sheaf gluing axiom therefore glues them to an inverse to $f_T^\\sharp$. This works for the arbitrary $T\\to Y$ fixed in Step 1, including $T=Y$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E6B, etale-locality reduction and conclusion (a)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "def-sfb-space-module-structure-map",
+  "lem-sfb-proper-flat-space-derived-base-change",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-trf-space-etale-module-functors",
+  "lem-sbc-right-derived-single-zero-unit",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-sp-kinjective-computes",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-perfect-degree-zero-fibre-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0E6B (lemma-proper-flat-h0), etale reduction and cohomology/base change; the existing perfect-complex criterion of Tag 0E62 (perfect.tex, lemma-proper-flat-h0) supplies the scheme-base linear-algebra step instead of reintroducing its rank-locus machinery."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper flat finitely presented morphism of algebraic spaces whose every field fibre has global functions equal to the field has universally trivial structure sheaf pushforward",
+   "results": "8 hits; top: AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.Flat, AlgebraicGeometry.finite_appTop_of_universallyClosed",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme or ring results, not the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomological flatness in degree zero: all field fibres have H0 equal to their base field, so O_Y is isomorphic to f_* O_X universally for proper flat finitely presented algebraic spaces",
+   "results": "8 hits; top: AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.mk, RingHom.Flat",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme or ring results, not the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"Flat\", \"IsIso\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme or ring results, not the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*flat.*(global|sections)|structureSheaf.*(baseChange|[Ii]so)|[Hh]0.*(criterion|flat)",
+   "results": "6 hits; top: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Scheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme or ring results, not the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibrewise criterion for universal degree zero cohomology and base change of the structure sheaf for proper flat algebraic spaces",
+   "results": "8 hits; top: AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.flat_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme or ring results, not the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*flat.*(global|sections)|structureSheaf.*(baseChange|[Ii]so)|[Hh]0.*(criterion|flat)",
+   "results": "6 hits; top: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/Scheme.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness or ordinary structure-sheaf constructions, not this universal theorem for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect derived direct image and a residue field degree zero unit criterion imply universal equality O_Y = f_* O_X for proper flat algebraic spaces",
+   "results": "8 hits; top: AlgebraicGeometry.RingedSpace.isUnit_of_isUnit_germ, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.flat_iff, AlgebraicGeometry.FormallyUnramified.casesOn, AlgebraicGeometry.Flat.of_stalkMap, Algebra.FormallyUnramified.iff_map_maximalIdeal_eq",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness or ordinary structure-sheaf constructions, not this universal theorem for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"Flat\", \"IsIso\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness or ordinary structure-sheaf constructions, not this universal theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological flatness in degree zero and base change for global regular functions on algebraic spaces",
+   "results": "8 hits; top: AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.of_stalkMap",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness or ordinary structure-sheaf constructions, not this universal theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper flat finitely presented algebraic space morphism with field fibres having only scalar global functions has universally isomorphic structure sheaf direct image",
+   "results": "8 hits; top: AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.finite_appTop_of_universallyClosed",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness or ordinary structure-sheaf constructions, not this universal theorem for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-geometric-h0",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Rigidified Picard representability for proper geometrically integral algebraic-space families. Supporting input: Universal functions on the proper geometrically integral family, before normalizing line modules. Supporting input for Tag 0E0S: the preceding universal H0 criterion, Tag 0E6B, applied after verifying its field-valued hypotheses.",
+   "via": [
+    "lem-sfb-space-geometric-h0",
+    "lem-sfb-rigidified-space-picard",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-proper-flat-h0-criterion",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reuse perfect coherent derived base change for space sources over scheme bases, the generic perfect degree-zero fibre criterion, normalized right-derived augmentation and etale/Zariski comparisons. Arbitrary algebraic-space base changes are handled first on their etale scheme charts. No new nodes: all non-elementary inputs already have DAG statements.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Rigidified Picard representability for proper geometrically integral algebraic-space families. Supporting input: Universal functions on the proper geometrically integral family, before normalizing line modules. Supporting input for Tag 0E0S: the preceding universal H0 criterion, Tag 0E6B, applied after verifying its field-valued hypotheses. Steps 1--7 supply the universal degree-zero structure-map prerequisite through Tag 0CTM and the already split scheme-base perfect-complex criterion of Tag 0E62; this is below the fixed unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic Etale localization commutes with direct image of arbitrary space modules used with the same coefficient modules and hypotheses; it supplies a ringed-site or perfect-complex foundation, not another route for the unit's constructibility theorem."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Existence of K-injective resolutions of sheaves of modules used with the same coefficient modules and hypotheses; it supplies a ringed-site or perfect-complex foundation, not another route for the unit's constructibility theorem."
+   },
+   {
+    "node": "lem-sbc-right-derived-single-zero-unit",
+    "why": "Generic Degree-zero normalization of the unbounded right-derived single unit used with the same coefficient modules and hypotheses; it supplies a ringed-site or perfect-complex foundation, not another route for the unit's constructibility theorem."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "why": "Generic Injective resolutions exist, and a left exact functor is recovered in degree zero used with the same coefficient modules and hypotheses; it supplies a ringed-site or perfect-complex foundation, not another route for the unit's constructibility theorem."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Generic K-injective resolutions compute derived functors used with the same coefficient modules and hypotheses; it supplies a ringed-site or perfect-complex foundation, not another route for the unit's constructibility theorem."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic Zariski and small etale quasi-coherent modules agree functorially used with the same coefficient modules and hypotheses; it supplies a ringed-site or perfect-complex foundation, not another route for the unit's constructibility theorem."
+   },
+   {
+    "node": "lem-sc-perfect-degree-zero-fibre-criterion",
+    "why": "Generic Perfect complex with residue-field degree-zero fibres used with the same coefficient modules and hypotheses; it supplies a ringed-site or perfect-complex foundation, not another route for the unit's constructibility theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sbc-right-derived-single-zero-unit",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-sp-kinjective-computes",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-perfect-degree-zero-fibre-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-7a5536120",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-7a5536120 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, no new nodes, statement and its 7 stmt_deps unchanged, 7 steps, proof_deps equal to the union of the steps' uses. Source check: the item matches Stacks 0E6B (spaces-perfect.tex l.6610). The hypothesis is read as every field point k of Y, the map is the canonical k→Γ(X_k,O), and the conclusion is (a) after any base change; clause (b) was never part of the item. The delivery keeps 0E6B's étale reduction and 0CTM, then uses the 0E62 linear-algebra argument (perfect.tex l.8066-8095) in place of the rank-locus/diagonal argument. That argument is valid for a space source over a scheme chart, and the report says so. Step checks: (1) lem-sfb-space-flat-proper-fp-locality gives base-change permanence. 03LX restriction plus the projections of def-sfb-space-module-structure-map identify f_T^♯|_U with p^♯. (2) The 0CTM node applies to a space source with F=O_Z; perfect implies D_QCoh in two lines from def-pc-perfect-complex. (3) The augmentation normalization (lem-sbc-right-derived-single-zero-unit) and the counit triangle check out, so ε^*H^0(a) is p^♯ itself. Enough injectives follows because M→I^0 is mono. (4) A nonnegative injective resolution is K-injective (lem-sp-kinjective-computes (2)), and exact faithful ε^* reflects the negative vanishing. (5) On Spec κ(u), Zariski restriction with identity comparisons gives H^0(Li_u^*a)=κ(u)→Γ(Z_u,O). (6) lem-sc-perfect-degree-zero-fibre-criterion applies, with every hypothesis met. (7) Elementary gluing. Edge cases (empty base, empty fibre, d copies, nonzero H^1, dual numbers) behave correctly. No duplicates: the 0E62 and 0E0S nodes are scheme-source or citer nodes. I accept the declared tool_uses as generic. Batch 5: all six listed citations are general foundations (03LX, 03DX, 0CTM, 08H8/071Q, 0E62, permanence) that neither assumption gives; the flagged closures reach only definitions. Maintainer note: lem-sfb-proper-flat-space-derived-base-change's pre-existing closure reaches lem-trf-frobenius-open-square and prop-constructible-truncations via lem-sp-ringed-site-tor-flat-model → def-wf-tensor-product. That is a definition stmt_dep chain in the existing DAG, not a use by this delivery. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProperFlatH0Criterion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isIso_moduleStructureMap_of_proper_flat_field_fibres",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProperFlatH0Criterion.lean",
+  "statement": "theorem isIso_moduleStructureMap_of_proper_flat_field_fibres {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hproper : MapIsProper f) (hflat : MapIsFlat f) (hfp : MapIsLocallyOfFinitePresentation f ∧ MapIsQuasiCompact f.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (hfibre : ∀ (k : Type u) [Field k] (a : Spec (CommRingCat.of k) ⟶ S) (b : schemeSpace (Over.mk a) ⟶ Y), Function.Bijective (SheafOfModules.sectionsMap (moduleStructureMap (enlargedFibreProductFst b f)))) : IsIso (moduleStructureMap f) ∧ ∀ (T : AlgebraicSpace S) (g : T ⟶ Y), IsIso (moduleStructureMap (enlargedFibreProductFst g f))",
+  "branch": "sheaf-dag",
+  "by": "Q157",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-282029b2e",
+  "group": "Q157",
+  "result": "pass",
+  "note": "Q157 lem-sfb-space-proper-flat-h0-criterion 282029b2: first S2; node unchanged except lean, stmt_deps = stage-1 7, lean.statement verbatim. Matches 0E6B(a) (spaces-perfect.tex lemma-proper-flat-h0; (b) not in node). Clauses: MapIsProper/MapIsFlat; fp = MapIsLocallyOfFinitePresentation ∧ qc ∧ qc diagonal (sibling flat_proper_fp_locality pattern); hfibre ∀ k:Type u Field, a:Spec k⟶S, b:schemeSpace⟶Y, Bijective sectionsMap(moduleStructureMap(enlargedFibreProductFst b f)) = canonical k→Γ(X_u,O) (global compatible sections, same encoding as landed geometric-H0 theorem); conclusion IsIso(moduleStructureMap f) ∧ ∀ T g IsIso(moduleStructureMap(enlargedFibreProductFst g f)). No extra hypotheses; edge cases (empty Y, empty fibre excluded by hyp, T=Y, universe u residue fields) OK. Docstrings with source, blueprint id, 7 proof steps; sorry only; no defs; no >100-char lines; no H4 duplicate (scheme-only ProperFlatGlobalSectionsCriterion). Advisory only: owners of schemeSpace (def-trf-scheme-algebraic-space), enlargedFibreProductFst (def-sfb-space-sheaf-fibre-product), MapIsQuasiCompact (def-sfb-proper-curve-moduli) not in unchanged stmt_deps; maintainer may add. No compile (no change; worker scompile clean)."
+ }
+}

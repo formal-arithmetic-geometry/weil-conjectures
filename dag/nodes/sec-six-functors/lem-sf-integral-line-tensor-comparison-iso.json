@@ -55,19 +55,47 @@
  ],
  "proof": [
   {
-   "text": "Choose a flat-term K-flat representative of C. Tensor the normalized completion augmentation with T. Local triviality of the rank-one finite locally free module identifies tensoring with the identity, and preservation of products and the strict cone identifies this map with the canonical completion unit. The completion unit is invertible on the given derived-complete object, so the tensor comparison is invertible.",
+   "text": "Choose a good K-flat representative P of C using the resolving localization. The existing line representative theorem supplies K-flatness of T[0] and goodness of its total tensor with P. Collapse the total tensor with this single complex to termwise tensor by T, and transport goodness across this complex isomorphism. The coefficient tensor model gives the isomorphism from this representative to the ordinary derived tensor.",
    "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-pur-acyclic-kflat-tensor-arbitrary",
-    "lem-pur-integral-operations-well-defined"
+    "def-pur-integral-derived-operations",
+    "lem-sf-integral-line-tensor-comparison-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A rank-one trivializing cover, restricted to each slice, supplies the hypotheses of the sheaf-line evaluation inverse-pair theorem. Its two cancellation isomorphisms and triangle identity exhibit termwise tensor by T as an additive exact equivalence.",
+   "uses": [
+    "lem-pur-sheaf-line-evaluation-inverse-pair"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the existing principal coefficient datum. The Roos-intrinsic completeness equivalence identifies completeness of C with invertibility of Q of the principal-cone unit of P. Cancel the representative isomorphism. On sheafified pure tensors, tensoring the actual uniformizer endomorphism multiplies the first factor by the uniformizer; balancing identifies this with multiplication by the same section on the tensor. Thus the image endomorphism is exactly the canonical uniformizer endomorphism of the termwise tensor.",
+   "uses": [
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "lem-pur-sheaf-line-evaluation-inverse-pair"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply principalCompletionMap to the exact line-tensor equivalence. It identifies the image of the principal-cone completion and its specified unit with the completion and unit of the image endomorphism. Exactness preserves the quasi-isomorphism underlying the original invertible unit. Localize this equation and use the equality of uniformizer endomorphisms to obtain invertibility of the canonical principal-cone unit on the tensor representative. The Roos-intrinsic equivalence converts this to invertibility of the actual completionUnit. Naturality transports that assertion along the collapse and representative isomorphisms to precisely integralLineComparison at (C,T).",
+   "uses": [
+    "lem-pur-principal-cone-exact-equivalence",
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "def-sf-integral-line-tensor-comparison-constructors"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-pur-acyclic-kflat-tensor-arbitrary",
-  "lem-pur-integral-operations-well-defined"
+  "def-pur-integral-derived-operations",
+  "lem-sf-integral-line-tensor-comparison-representative",
+  "lem-pur-sheaf-line-evaluation-inverse-pair",
+  "lem-a1-principal-koszul-strict-replacement",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-pur-principal-cone-exact-equivalence",
+  "def-sf-integral-line-tensor-comparison-constructors"
  ],
  "lean": {
   "existing": false,
@@ -81,8 +109,10 @@
  },
  "proof_origin": {
   "by": "worker",
+  "group": "W2",
+  "date": "2026-10-24",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Definition 3.4.10, Proposition 3.5.1 and Definition 3.5.2"
+  "place": "Proposition 3.5.1 and Definition 3.5.2; Stacks Tags 0A0E and 0941, via the normalized principal-cone unit"
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -95,14 +125,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "C-69bed",
-  "group": "H2",
-  "result": "fix",
-  "landing": "20261021T001119-L-1372542",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261024T191535-L-422499",
   "kind": "interface",
-  "note": "independent cc review: item theorem statement vs live clone (identical), ten moved defs vs change-record Old block (verbatim), new sorry statements vs nodes and BS 3.5.1/Stacks 06YY, node stmt_deps vs Lean usage"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

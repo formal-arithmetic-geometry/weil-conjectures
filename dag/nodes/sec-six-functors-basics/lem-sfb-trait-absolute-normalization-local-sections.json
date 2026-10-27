@@ -1,0 +1,384 @@
+{
+ "id": "lem-sfb-trait-absolute-normalization-local-sections",
+ "kind": "statement",
+ "title": "Absolute normalization of a trait and local lifting of scheme points",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], $K$ its fraction field, $\\overline K$ an algebraic closure [def-weil-algebraic-closure], and $\\pi$ a uniformizer of $R$. Let $B\\subseteq\\overline K$ be the integral closure of $R$ [def-weil-pbc-integral-closure], $S=\\operatorname{Spec}R$ and $T=\\operatorname{Spec}B$ [def-weil-affine-spectrum]. Then $T\\to S$ is flat, surjective and quasi-compact, hence fpqc [def-weil-flat-morphism, def-weil-pbc-fpqc-covering]. The generic inverse image is the open $D(\\pi)=\\operatorname{Spec}\\overline K$; every other point $t\\in T$ lies over the closed point of $S$, is closed in $T$, and has algebraically closed residue field $\\kappa(t)$ [def-weil-residue-field]. If $Y\\to S$ is any flat locally finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], set $Y_T=Y\\times_ST$ [def-pc-fibre-product]. For every point $t\\in T$ over the closed point of $S$ and every $\\kappa(t)$-morphism $y:\\operatorname{Spec}\\kappa(t)\\to Y_T$ over $T$, there exist a Zariski open neighborhood $W\\subseteq T$ of $t$ and a $T$-morphism $\\sigma:W\\to Y_T$ whose restriction at $t$ is $y$. The ring $B$ need not be Noetherian, and $Y$ need not be quasi-compact.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05GU, lemma-quasi-finite-quasi-section-meeting-nearby-open-X, the quasi-section input; absolute-normalization local-section consequence used in Anantharaman, 3.4.1, printed p.52, proof first paragraph (primary scan https://www.numdam.org/article/MSMF_1973__33__5_0.pdf; local archive WANTED). Algebraically closed residue fields and strict henselian localizations: more-algebra.tex Tags 0DCQ (lemma-normal-domain-absolutely-integrally-closed) and 0DCS (lemma-absolutely-integrally-closed-strictly-henselian)."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-integral-closure",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-residue-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-integral-closure-algebraic-extension-normal] to $R\\subset K\\subset\\overline K$. It gives that $B$ is a domain integral over $R$, normal, with fraction field $\\overline K$. Since $B\\subset\\overline K$ and $R\\hookrightarrow\\overline K$, multiplication by every nonzero element of $R$ on $B$ is injective. The DVR is a PID by [def-sc-discrete-valuation-ring], so [lem-weil-pbc-pid-torsion-free-module-flat] makes $B$ flat over $R$. By [lem-weil-pbc-flat-ring-map-iff-flat-affine], $T\\to S$ is flat. Lying over [pqf-lem-lying-over] makes it surjective. The integral affine-map dictionary [lem-weil-pbc-spec-integral-ring-map-integral] and [def-weil-finite-integral-morphism] make the map affine; [lem-weil-pbc-affine-morphism-permanence] makes it quasi-compact. Thus it is fpqc: for any affine open $V\\subset S$, its inverse image is affine and surjects onto $V$, which supplies the single affine open required in [def-weil-pbc-fpqc-covering].",
+   "uses": [
+    "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "pqf-lem-lying-over",
+    "lem-weil-pbc-spec-integral-ring-map-integral",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GO, 0308, 034L, 00GU; More on Algebra 0AUW; Morphisms 01U5, 01S7; Topologies 022B. Normalization and flatness argument."
+   }
+  },
+  {
+   "text": "The DVR is Noetherian since every ideal is principal. By [lem-weil-pbc-dvr-unit-times-uniformizer-power], every nonzero $r\\in R$ is $u\\pi^n$, so $R[1/\\pi]=K$. Every nonzero prime of $R$ contains such an $r$, hence contains $\\pi$ and equals the maximal ideal. For $\\alpha\\in\\overline K$, choose a monic relation $\\alpha^d+c_1\\alpha^{d-1}+\\cdots+c_d=0$ over $K$. Choose $N$ with $\\pi^{Ni}c_i\\in R$ for every $i$. Then $\\pi^N\\alpha$ satisfies the monic equation with coefficients $\\pi^{Ni}c_i$, so belongs to $B$. Hence $B[1/\\pi]=\\overline K$. The principal-open scheme description [lem-weil-pbc-principal-localization-open-immersion] now identifies $D(\\pi)$ with $\\operatorname{Spec}\\overline K$, the full generic inverse image. Every other prime contracts to the maximal ideal of $R$ and is maximal by [lem-weil-pbc-integral-prime-over-maximal-maximal]; thus its point is closed in $T$.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), Tag 00E3 (lemma-spec-localization), integral primes over maximal ideals; explicit denominator scaling of algebraic elements."
+   }
+  },
+  {
+   "text": "Let $t$ be one of these closed points, with maximal ideal $\\mathfrak m\\subset B$. Every monic positive-degree polynomial over $B$ has a root in $\\overline K$; that root is integral over $B$ and belongs to $B$ because $B$ is integrally closed in $\\overline K$. A monic polynomial over $B/\\mathfrak m$ lifts coefficient by coefficient to a monic polynomial over $B$, so also has a root. Since $\\kappa(t)=B/\\mathfrak m$ is a field, this proves that it is algebraically closed, without any perfectness assumption. Put $A=B_{\\mathfrak m}$. By [lem-weil-pbc-localization-normal-domain], $A$ is normal with fraction field $\\overline K$. The statement [lem-weil-pbc-gabber-quotient-localizations], with ring $B$ and ideal $0$, makes $A$ strictly henselian, in particular henselian. Its residue field is canonically $\\kappa(t)$.",
+   "uses": [
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-gabber-quotient-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0DCQ, 0DCN, 0DCS (monic-polynomial argument); etale-cohomology.tex Tags 09Z9 and 09ZC for strict henselian localizations; Algebra 00GY."
+   }
+  },
+  {
+   "text": "Fix the prescribed $y$ and let $x\\in Y$ be its image. Choose an affine open $U=\\operatorname{Spec}C\\subset Y$ containing $x$. By [lem-weil-pbc-lft-affine-pairs], $C$ is of finite type over $R$, and by [lem-weil-pbc-flat-morphism-affine-criterion] it is flat. Since $R$ is Noetherian, [lem-weil-pbc-finite-type-noetherian-finite-presentation] gives a finite presentation $C=R[X_1,\\ldots,X_n]/(F_1,\\ldots,F_r)$. The morphism $y$ supplies an $R$-algebra map $h:C\\to\\kappa(t)$. Write $k=R/(\\pi)$. By [lem-a1-integral-residue-extension-algebraic], $\\kappa(t)/k$ is algebraic. The image of $C/(\\pi)$ under $h$ is generated by finitely many algebraic elements over $k$, hence is a finite-dimensional $k$-algebra which is a domain. It is a field: multiplication by a nonzero element is injective on a finite-dimensional vector space and therefore surjective. Thus $C/\\ker h$ is a finite field extension of $k$, equals $\\kappa(x)$, and [lem-trf-finite-residue-point-closed-in-fibre] says that $x$ is closed in $U_s$.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-a1-integral-residue-extension-algebraic",
+    "lem-trf-finite-residue-point-closed-in-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FP (lemma-Noetherian-finite-type-is-finite-presentation); Morphisms 01T2, 01U5, 01TE; algebraic residue extension and the finite-dimensional image argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-flat-going-down] to the flat map $R\\to C$, the primes $(0)\\subset(\\pi)$ and $\\ker h$. We obtain a prime of $C$ contained in $\\ker h$ and contracting to $(0)$. Its point $x'$ belongs to $U_\\eta$ and specializes to $x$. Apply [lem-sfb-quasi-section-nearby-open] to $U\\to S$, $x$ and the open $U_\\eta$. Its hypotheses hold: $S$ is locally Noetherian, the morphism is locally finite type, $x$ is closed in $U_s$, and $x'$ is the required nearby point over a different base point. Obtain an integral closed subscheme $Z\\subset U$ through $x$, dominant over $S$, and quasi-finite at $x$. No quasi-section theorem has been applied over $B$ or $A$.",
+   "uses": [
+    "lem-sc-flat-going-down",
+    "lem-sfb-quasi-section-nearby-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05GU (lemma-quasi-finite-quasi-section-meeting-nearby-open-X), with Algebra Tag 00HS (lemma-flat-going-down) supplying its nearby generic point."
+   }
+  },
+  {
+   "text": "By [pqf-def-quasifinite], choose an affine neighbourhood $V=\\operatorname{Spec}D$ of $x$ in $Z$ such that $R\\to D$ is finite type and quasi-finite at the prime $\\mathfrak q$ of $x$. We may use $S$ as target affine chart, since it is local and its only open containing $s$ is $S$. The nonempty open $V$ of the integral scheme $Z$ is integral and contains its generic point; hence $D$ is a domain and $R\\to D$ is injective by dominance. Consequently $D$ is torsion-free over the PID $R$, and [lem-weil-pbc-pid-torsion-free-module-flat] makes it flat. The morphism $\\operatorname{Spec}\\kappa(t)\\to U$ factors through $Z$ because its kernel is the prime of $x$ and the ideal of $Z$ lies in that prime; it then factors through $V$ because its only point maps to $x\\in V$. Denote the resulting map by $h_D:D\\to\\kappa(t)$; its kernel is $\\mathfrak q$.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-pid-torsion-free-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05GU, integral quasi-section construction; Morphisms Tag 01TD, affine definition of quasi-finiteness at a point; More on Algebra 0AUW."
+   }
+  },
+  {
+   "text": "Form $P=A\\otimes_R D$. The homomorphism $P\\to\\kappa(t)$ given by $a\\otimes d\\mapsto\\bar a\\,h_D(d)$ is surjective, since $A\\to\\kappa(t)$ is. Let $\\mathfrak n$ be its kernel. Its contractions to $A$ and $D$ are $\\mathfrak m_A$ and $\\mathfrak q$, and its contraction to $R$ is $(\\pi)$. The map $R=R_{(\\pi)}\\to A$ is local. Apply [lem-trf-quasi-finite-henselian-tensor-factor] with base ring $R$, finite-type algebra $D$, henselian ring $A$, and prime $\\mathfrak n$. It gives that $E=P_{\\mathfrak n}$ is a finite local $A$-algebra. It is nonzero because it is localization at a proper prime. The map $P\\to\\kappa(t)$ extends to $E$ and induces an isomorphism $E/\\mathfrak m_E\\cong\\kappa(t)$.",
+   "uses": [
+    "lem-trf-quasi-finite-henselian-tensor-factor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GH (lemma-finite-over-henselian), part (3); Tag 05WP (lemma-quasi-finite-henselization), proof: the quasi-finite henselian tensor factor. The canonical residue map specifies the prime."
+   }
+  },
+  {
+   "text": "The localized base-change flatness statement [lem-weil-pbc-flat-localized-module-base-change], with the pushout $P=A\\otimes_R D$, module $N=D$ and $M=P$, implies that $E=P_{\\mathfrak n}$ is flat over $A$, since $D_{\\mathfrak q}$ is a domain containing $R$, hence torsion-free and flat over the PID $R$ by [lem-weil-pbc-pid-torsion-free-module-flat]. By [lem-trf-flat-module-torsionfree-domain], $E$ is torsion-free over the domain $A$. Therefore its localization $E_{\\overline K}=\\overline K\\otimes_AE$ is nonzero: if $1$ vanished, some nonzero $a\\in A$ would annihilate $1_E$, contradicting torsion-freeness and $E\\ne0$. This generic algebra is finite-dimensional over $\\overline K$, because finitely many $A$-module generators of $E$ still generate after base change. Choose a maximal ideal in this nonzero algebra. By [lem-wf-affine-nullstellensatz-vanishing] (1), its residue field is $\\overline K$. The quotient gives a generic section of $\\operatorname{Spec}E\\to\\operatorname{Spec}A$.",
+   "uses": [
+    "lem-weil-pbc-flat-localized-module-base-change",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "lem-weil-pbc-pid-torsion-free-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FV (theorem-nullstellensatz) and the finite algebra generic fibre; flat localized scalar extension and More on Algebra Tag 0539 (flat implies torsion-free)."
+   }
+  },
+  {
+   "text": "The scheme $\\operatorname{Spec}A$ is integral with function field $\\overline K$ by [lem-weil-pbc-spec-domain-stalks-function-field]. Its local rings are normal by [lem-weil-pbc-localization-normal-domain]. Since $E$ is a finitely generated $A$-module (step 7), $\\operatorname{Spec}E\\to\\operatorname{Spec}A$ is finite [def-weil-finite-integral-morphism] by [lem-weil-pbc-spec-finite-ring-map-finite]. Apply [lem-sfb-finite-normal-generic-section-extension] to the generic section just constructed. Obtain an $A$-algebra retraction $\\rho:E\\to A$. Its reduction $E\\to A\\to\\kappa(t)$ is surjective and has maximal kernel. Since $E$ is local, this kernel is $\\mathfrak m_E$. Both this map and the map from step 7 induce $\\kappa(t)$-algebra maps $E/\\mathfrak m_E\\to\\kappa(t)$; the structural map $\\kappa(t)\\to E/\\mathfrak m_E$ is an isomorphism by step 7, so these two maps coincide. Composing $C\\to D\\to P\\to E\\xrightarrow{\\rho}A$ therefore gives an $R$-algebra homomorphism $g:C\\to B_{\\mathfrak m}$ whose residue is exactly $h$, including the specified residue-field morphism, not just its image point.",
+   "uses": [
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-localization-normal-domain",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-spec-finite-ring-map-finite",
+    "lem-sfb-finite-normal-generic-section-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AB1 (lemma-finite-birational-over-normal), normal-base generic-section extension; algebraic local-ring residue comparison written explicitly."
+   }
+  },
+  {
+   "text": "For each of the finitely many generators $X_i$, write $g(X_i)=b_i/s_i$ with $s_i\\notin\\mathfrak m$. Set $f=\\prod_i s_i$, with the empty product $1$. Then all generator images lie in $B[1/f]\\subset B_{\\mathfrak m}\\subset\\overline K$. Every relation $F_j(b_i/s_i)$ is zero there because it is zero in $B_{\\mathfrak m}$ and $B[1/f]\\hookrightarrow B_{\\mathfrak m}$ is injective (both are subrings of the fraction field of the domain $B$). Thus the finite presentation in step 4 defines an $R$-algebra map $C\\to B[1/f]$ inducing $g$. Contravariantly it gives a morphism $W=D(f)\\to U\\subset Y$ over $S$. Pair it with $W\\hookrightarrow T$ to obtain $\\sigma:W\\to Y_T$ by the fibre-product universal property [def-pc-fibre-product]. Since $f\\notin\\mathfrak m$, $W$ contains $t$; the residue equality in step 9 says $\\sigma|_{\\operatorname{Spec}\\kappa(t)}=y$. Only one affine neighbourhood of $x$ was used, so no quasi-compactness of $Y$ was required, and no finiteness or Noetherian property of $B$ was used.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Finite generators and relations and localization universal properties; the explicit denominator spreading of the local section. Agent assembly of the quasi-section/normal-base argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "pqf-lem-lying-over",
+  "lem-weil-pbc-spec-integral-ring-map-integral",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-gabber-quotient-localizations",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-a1-integral-residue-extension-algebraic",
+  "lem-trf-finite-residue-point-closed-in-fibre",
+  "lem-sc-flat-going-down",
+  "lem-sfb-quasi-section-nearby-open",
+  "pqf-def-quasifinite",
+  "lem-trf-quasi-finite-henselian-tensor-factor",
+  "lem-weil-pbc-flat-localized-module-base-change",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-spec-finite-ring-map-finite",
+  "lem-sfb-finite-normal-generic-section-extension",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05GU plus Algebra 04GH and normal-base section extension 0AB1; explicit normalization, residue, and denominator arguments. Anantharaman 3.4.1 is WANTED, not treated as a source read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasi.?section|absoluteIntegralClosure|integralClosure.*[Ss]ection|[Ss]ection.*integralClosure",
+   "results": "{\"t\": \"2026-10-24T11:47:25Z\", \"tool\": \"grep\", \"query\": \"quasi.?section|absoluteIntegralClosure|integralClosure.*[Ss]ection|[Ss]ection.*integralClosure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: going-down and normalization constructions do not provide the local sections through prescribed residue-field points; no exact result or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat finitely presented scheme has local sections over the absolute integral closure of a trait through every closed fibre point",
+   "results": "{\"t\": \"2026-10-24T11:47:26Z\", \"tool\": \"leansearch\", \"query\": \"A flat finitely presented scheme has local sections over the absolute integral closure of a trait through every closed fibre point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.flat_iff\"], \"digest\": \"6083b6755bd51a52\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: going-down and normalization constructions do not provide the local sections through prescribed residue-field points; no exact result or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"FaithfullyFlat\"",
+   "results": "{\"t\": \"2026-10-24T11:47:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"FaithfullyFlat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: going-down and normalization constructions do not provide the local sections through prescribed residue-field points; no exact result or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure of a discrete valuation ring in an algebraic closure is faithfully flat and flat finite type schemes have local sections through closed fibre points after this base change",
+   "results": "{\"t\": \"2026-10-24T11:47:28Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure of a discrete valuation ring in an algebraic closure is faithfully flat and flat finite type schemes have local sections through closed fibre points after this base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"Algebra.HasGoingDown.of_flat\", \"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"Algebra.ZariskisMainProperty.of_isIntegral\", \"AlgebraicGeometry.ValuativeCommSq.algebra\", \"Algebra.ZariskisMainProperty\", \"TensorProduct.toIntegralClosure_injective_of_flat\"], \"digest\": \"e6e7a51a1b28ad2a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: going-down and normalization constructions do not provide the local sections through prescribed residue-field points; no exact result or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat schemes over a discrete valuation ring acquire Zariski local sections over its normalization in an algebraically closed fraction field",
+   "results": "{\"t\": \"2026-10-24T11:47:29Z\", \"tool\": \"leanfinder\", \"query\": \"Flat schemes over a discrete valuation ring acquire Zariski local sections over its normalization in an algebraically closed fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.ValuativeCommSq.isFractionRing\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\"], \"digest\": \"a3851e2d01678610\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: going-down and normalization constructions do not provide the local sections through prescribed residue-field points; no exact result or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure of a discrete valuation ring in its algebraic closure gives Zariski local sections of flat finite type schemes through every closed fibre point",
+   "results": "{\"t\": \"2026-10-24T12:16:44Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure of a discrete valuation ring in its algebraic closure gives Zariski local sections of flat finite type schemes through every closed fibre point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.ZariskisMainProperty\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"Algebra.ZariskisMainProperty.of_isIntegral\", \"AlgebraicGeometry.ValuativeCommSq.algebra\", \"AlgebraicGeometry.ValuativeCommSq.isFractionRing\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.ValuativeCommSq.domain\", \"AlgebraicGeometry.ValuativeCommSq.valuationRing\"], \"digest\": \"7ecab19562ea643c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern normalization constructions, affine flatness, or integral closure tensor injections; none supplies quasi-sections or prescribed-point local sections"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-24T12:17:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure_injective_of_flat\"], \"digest\": \"39f82884cbd64413\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern normalization constructions, affine flatness, or integral closure tensor injections; none supplies quasi-sections or prescribed-point local sections"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?section|absoluteIntegralClosure|integralClosure.*[Ss]ection|[Ss]ection.*integralClosure",
+   "results": "{\"t\": \"2026-10-24T12:17:00Z\", \"tool\": \"grep\", \"query\": \"quasi.?section|absoluteIntegralClosure|integralClosure.*[Ss]ection|[Ss]ection.*integralClosure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern normalization constructions, affine flatness, or integral closure tensor injections; none supplies quasi-sections or prescribed-point local sections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat locally finite type scheme admits local sections over the integral closure of a discrete valuation ring in an algebraic closure",
+   "results": "{\"t\": \"2026-10-24T12:17:22Z\", \"tool\": \"leansearch\", \"query\": \"A flat locally finite type scheme admits local sections over the integral closure of a discrete valuation ring in an algebraic closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\"], \"digest\": \"2d6a58dba49af330\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern normalization constructions, affine flatness, or integral closure tensor injections; none supplies quasi-sections or prescribed-point local sections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finite type scheme over a trait has local sections through prescribed rational closed fibre points over the absolute normalization",
+   "results": "{\"t\": \"2026-10-24T12:17:24Z\", \"tool\": \"leanfinder\", \"query\": \"A flat locally finite type scheme over a trait has local sections through prescribed rational closed fibre points over the absolute normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\"], \"digest\": \"c0d48849aee425b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern normalization constructions, affine flatness, or integral closure tensor injections; none supplies quasi-sections or prescribed-point local sections"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-group-space-fpqc-scheme-cover",
+  "date": "2026-10-24",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited trait-group schematicity input; Anantharaman 3.4.1 proof, first paragraph: flat quasi-sections through chart points become locally trivial over the normalization in an algebraic closure",
+   "via": [
+    "lem-sfb-flat-group-space-fpqc-scheme-cover",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-trait-absolute-normalization-local-sections",
+  "worker": "stage1",
+  "summary": "Q02 checked the absolute-normalization and prescribed-residue-point section claims. Ten explicit steps reuse existing DAG tools: integral closure, PID flatness, quasi-section over the original Noetherian trait, henselian finite tensor factor, normal-base extension, and finite-presentation spreading. No new nodes; no statement change.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), inherited trait group-schematicity input through lem-sfb-flat-group-space-fpqc-scheme-cover. This is a generic geometric tool below that inherited chain; no chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-gabber-quotient-localizations",
+    "why": "Generic algebra/affine-scheme tool: Prime localizations of a quotient of a normal domain with separably closed fraction field are strictly henselian. Used with exactly its stated hypotheses in the normalization/quasi-section argument; no step of the parent unit is replaced."
+   },
+   {
+    "node": "lem-trf-finite-residue-point-closed-in-fibre",
+    "why": "Generic algebra/affine-scheme tool: Finite residue field points are closed in finite-type fibres. Used with exactly its stated hypotheses in the normalization/quasi-section argument; no step of the parent unit is replaced."
+   },
+   {
+    "node": "lem-trf-quasi-finite-henselian-tensor-factor",
+    "why": "Generic algebra/affine-scheme tool: Finite henselian factor of a quasi-finite tensor base change. Used with exactly its stated hypotheses in the normalization/quasi-section argument; no step of the parent unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-flat-localized-module-base-change",
+    "why": "Generic algebra/affine-scheme tool: Base change preserves flatness at a module point. Used with exactly its stated hypotheses in the normalization/quasi-section argument; no step of the parent unit is replaced."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic algebra/affine-scheme tool: Residue fields of closed points and the vanishing principle. Used with exactly its stated hypotheses in the normalization/quasi-section argument; no step of the parent unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-gabber-quotient-localizations",
+  "lem-trf-finite-residue-point-closed-in-fibre",
+  "lem-trf-quasi-finite-henselian-tensor-factor",
+  "lem-weil-pbc-flat-localized-module-base-change",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-78434fc9e",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-78434fc9e (reviewer sub-agent of L); spot-checked: I read the item and all 10 steps in full, along with the statements of all 29 cited nodes, the parent steps that use the item, and Stacks 05GU (more-morphisms.tex l.14994) and 0DCS (more-algebra.tex l.3605). The delivery has one commit, makes no statement change and adds no new nodes. Anantharaman is marked WANTED and the proof is marked agent-written. The statement is true; I tested it on Z_(p), on a ramified Y = R[x]/(x^2-p), on a Y with empty closed fibre and on a nonreduced Y. Every hypothesis checks out. Step 1: B is torsion-free inside K̄, so it is flat over the PID R, and lying-over applies because R→B is injective. Step 2: the scaling (π^N α) is written out, so B[1/π] = K̄. Step 3: residue fields are algebraically closed via roots of monic lifts, and B_m is strictly henselian by gabber-quotient-localizations with I=0. Step 4: κ(x) is finite over k, so x is closed in U_s. Step 5: flat going-down gives the generalization x', and all hypotheses of 05GU hold over the Noetherian S. Step 6: R→D is injective because Z is dominant over S. Step 7: the 05WP tensor-factor node fits with (A,B,R)↦(R,D,B_m), since R→B_m is local and n contracts correctly. Step 8: the localized flat base change makes E flat, hence torsion-free, so E⊗K̄ is nonzero and Nullstellensatz (1) gives a K̄-point. Step 9: the residue of g agrees with h because A→E/m_E is surjective. Step 10 is elementary. One fault, fixed: step 9 cited only def-weil-finite-integral-morphism for Spec E→Spec A being finite. I added lem-weil-pbc-spec-finite-ring-map-finite to the step's text, uses and proof_deps. Batch-5 citations: lem-trf-finite-residue-point-closed-in-fibre (Stacks 01TE), lem-trf-quasi-finite-henselian-tensor-factor (05WP) and lem-trf-flat-module-torsionfree-domain (a Mathlib leaf) are generic algebra. lem-sfb-quasi-section-nearby-open reaches the trace-formula chapter only through lem-trf-spectrum-constructible-generalization-open (Stacks 00I0, generic). None of these is part of the trace formula or Poincaré duality or of their proofs, and their closures contain no node from either chapter. I accept the 5 declared tool_uses as generic black-box tools.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitAbsoluteNormalizationLocalSections",
+  "declaration": "AlgebraicGeometry.trait_absolute_normalization_local_sections",
+  "declarations": [
+   "AlgebraicGeometry.traitAbsoluteNormalizationMap",
+   "AlgebraicGeometry.trait_absolute_normalization_local_sections"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitAbsoluteNormalizationLocalSections.lean",
+  "statement": "theorem trait_absolute_normalization_local_sections (R K Ω : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field K] [Algebra R K] [IsFractionRing R K] [Field Ω] [Algebra K Ω] [IsAlgClosure K Ω] [Algebra R Ω] [IsScalarTower R K Ω] (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) : Flat (traitAbsoluteNormalizationMap R Ω) ∧ Surjective (traitAbsoluteNormalizationMap R Ω) ∧ QuasiCompact (traitAbsoluteNormalizationMap R Ω) ∧ Presieve.singleton (traitAbsoluteNormalizationMap R Ω) ∈ Scheme.fpqcPrecoverage (Spec (CommRingCat.of R)) ∧ (∃ e : Spec (CommRingCat.of Ω) ≅ (Scheme.Opens.toScheme (X := Spec (CommRingCat.of (integralClosure R Ω))) (PrimeSpectrum.basicOpen (algebraMap R (integralClosure R Ω) π))), e.hom ≫ (Scheme.Opens.ι (X := Spec (CommRingCat.of (integralClosure R Ω))) (PrimeSpectrum.basicOpen (algebraMap R (integralClosure R Ω) π))) = Spec.map (CommRingCat.ofHom (integralClosure R Ω).val.toRingHom)) ∧ (∀ t : Spec (CommRingCat.of (integralClosure R Ω)), (t ∈ PrimeSpectrum.basicOpen (algebraMap R (integralClosure R Ω) π) ↔ ((traitAbsoluteNormalizationMap R Ω) t).asIdeal = ⊥)) ∧ (∀ t : Spec (CommRingCat.of (integralClosure R Ω)), t ∉ PrimeSpectrum.basicOpen (algebraMap R (integralClosure R Ω) π) → ((traitAbsoluteNormalizationMap R Ω) t).asIdeal = IsLocalRing.maximalIdeal R ∧ IsClosed ({t} : Set (Spec (CommRingCat.of (integralClosure R Ω)))) ∧ IsAlgClosed ((Spec (CommRingCat.of (integralClosure R Ω))).residueField t)) ∧ (∀ (Y : Scheme.{u}) (f : Y ⟶ Spec (CommRingCat.of R)), Flat f → LocallyOfFiniteType f → ∀ t : Spec (CommRingCat.of (integralClosure R Ω)), ((traitAbsoluteNormalizationMap R Ω) t).asIdeal = IsLocalRing.maximalIdeal R → ∀ y : Spec ((Spec (CommRingCat.of (integralClosure R Ω))).residueField t) ⟶ pullback f (traitAbsoluteNormalizationMap R Ω), y ≫ pullback.snd f (traitAbsoluteNormalizationMap R Ω) = (Spec (CommRingCat.of (integralClosure R Ω))).fromSpecResidueField t → ∃ W : (Spec (CommRingCat.of (integralClosure R Ω))).Opens, t ∈ W ∧ ∃ (σ : W.toScheme ⟶ pullback f (traitAbsoluteNormalizationMap R Ω)) (τ : Spec ((Spec (CommRingCat.of (integralClosure R Ω))).residueField t) ⟶ W.toScheme), σ ≫ pullback.snd f (traitAbsoluteNormalizationMap R Ω) = W.ι ∧ τ ≫ W.ι = (Spec (CommRingCat.of (integralClosure R Ω))).fromSpecResidueField t ∧ τ ≫ σ = y)",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper constructs the actual structural Spec map of the recorded integralClosure. The theorem states all geometry and local-section clauses together, including equality with the prescribed residue-field morphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a159db3f",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Read the node, its 10 stmt_dep records, the module and the report. Every clause matches the node: flat/surjective/quasi-compact/fpqc (Scheme.fpqcPrecoverage), the generic open D(π) ≅ Spec Ω compatible with the inclusion B ⊆ Ω, the generic inverse image as image = ⊥, the closed points with maximal contraction, closedness and IsAlgClosed residue field, and the local section with σ ≫ snd = W.ι and τ ≫ σ = y. Hypotheses are exact: IsDiscreteValuationRing, IsFractionRing, IsAlgClosure, uniformizer by the maximalIdeal equality, Flat + LocallyOfFiniteType, no Noetherian or quasi-compactness assumption, one universe u. The helper is a real Spec.map; only sorry; source and blueprint docstrings carry the 10 proof steps; lean.statement is verbatim equal to the signature (checked by script). Edge cases (empty Y, Y=S, ramified, nonreduced) hold; the proof route is sound. No findings; no compile, since no file was changed."
+ }
+}

@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-finite-graph-cycle-character-quotient",
+ "kind": "statement",
+ "title": "Edge-label quotient as characters of integral graph cycles",
+ "statement": "Let $V,E$ be finite sets with functions $s,t:E\\to V$ such that $s(e)\\ne t(e)$ for every $e$. Parallel edges are allowed, and neither nonemptiness nor connectedness is assumed. Write $\\mathbf Z^S$ for the free $\\mathbf Z$-module [def-weil-pbc-free-module] of functions $S\\to\\mathbf Z$ for a finite set $S$. Let $\\partial:\\mathbf Z^E\\to\\mathbf Z^V$ send the standard basis vector $e$ to $t(e)-s(e)$, and put $H=\\ker\\partial$. Let $A$ be any commutative group, written multiplicatively. Define $\\delta:A^V\\to A^E$ by $\\delta(a)_e=a_{t(e)}a_{s(e)}^{-1}$ and let $A^E/\\operatorname{im}\\delta$ denote the quotient group by its image. Evaluation induces a group isomorphism\n$$\\Phi:A^E/\\operatorname{im}\\delta\\xrightarrow{\\sim}\\operatorname{Hom}_{\\mathbf Z}(H,A),\\qquad \\Phi([z])(h)=\\prod_{e\\in E}z_e^{h_e}.$$\nHere the Hom group consists of maps from the additive group $H$ to $A$ taking sums to products, with pointwise multiplication. For permutations $\\sigma_V,\\sigma_E$ preserving the unordered endpoint pairs, let $\\epsilon_e=1$ when $s(\\sigma_Ee)=\\sigma_Vs(e)$ and $\\epsilon_e=-1$ otherwise. The signed edge map $\\sigma_*$ sends $e$ to $\\epsilon_e\\sigma_Ee$ and preserves $H$. For $(\\sigma^*z)_e=z_{\\sigma_Ee}^{\\epsilon_e}$ one has\n$$\\Phi([\\sigma^*z])=\\Phi([z])\\circ\\sigma_*.$$\nThese formulas also identify different choices of orientation by inversion of exactly the reversed edge coordinates.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Agent lattice formulation of the gluing-parameter quotient in Tag 0C1M, lemma-glue-points, units-sequence proof. Deligne–Mumford Lemma 1.17 proof, printed p.86, uses its specialization to A=k^*. The abstract graph isomorphism is an auxiliary agent argument, not a verbatim assertion of either source."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-finite-graph-incidence-inner-inverse] to choose $r$ with $\\partial r\\partial=\\partial$. Put $p=1-r\\partial$. Then $\\partial p=0$, and $p(h)=h$ for $h\\in H$; thus $p:\\mathbf Z^E\\to H$ is a linear retraction. No condition on $A$ is used here.",
+   "uses": [
+    "lem-sfb-finite-graph-incidence-inner-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent-written integral-lattice auxiliary for Tag 0C1M, lemma-glue-points, units-sequence proof. The source motivates the edge/vertex quotient but does not assert this graph incidence splitting lemma."
+   }
+  },
+  {
+   "text": "For $z\\in A^E$ put $L_z(x)=\\prod_e z_e^{x_e}$. Integer exponent laws and commutativity give $L_z(x+y)=L_z(x)L_z(y)$ and $L_{zz\\prime}=L_zL_{z\\prime}$. Moreover $L_{\\delta(a)}(h)=\\prod_v a_v^{(\\partial h)_v}=1$ for $h\\in H$. Consequently restriction $L_z|_H$ is constant on cosets of $\\operatorname{im}\\delta$ and defines the stated homomorphism $\\Phi$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent-written integral-lattice auxiliary for Tag 0C1M, lemma-glue-points, units-sequence proof. The source motivates the edge/vertex quotient but does not assert this graph incidence splitting lemma."
+   }
+  },
+  {
+   "text": "Given a character $\\chi:H\\to A$, use the retraction obtained from [lem-sfb-finite-graph-incidence-inner-inverse] and set $z_e=\\chi(p(b_e))$. Expanding $x=\\sum_e x_e b_e$ gives $L_z(x)=\\chi(p(x))$. For $h\\in H$, $p(h)=h$, so $\\Phi([z])=\\chi$. This proves surjectivity without assuming that $A$ is divisible.",
+   "uses": [
+    "lem-sfb-finite-graph-incidence-inner-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent-written integral-lattice auxiliary for Tag 0C1M, lemma-glue-points, units-sequence proof. The source motivates the edge/vertex quotient but does not assert this graph incidence splitting lemma."
+   }
+  },
+  {
+   "text": "If $L_z|_H=1$, then $x=p(x)+r\\partial x$ gives $L_z(x)=L_z(r\\partial x)$. Define $a_v=L_z(r(b_v))$, using [lem-sfb-finite-graph-incidence-inner-inverse]. For each edge, $\\delta(a)_e=L_z(r(b_{t(e)}-b_{s(e)}))=L_z(b_e)=z_e$. Hence the kernel consists exactly of vertex coboundaries. If two cosets have equal characters, apply this calculation to their coordinatewise ratio to see that the cosets agree. Together with the previous step this proves that $\\Phi$ is a group isomorphism.",
+   "uses": [
+    "lem-sfb-finite-graph-incidence-inner-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent-written integral-lattice auxiliary for Tag 0C1M, lemma-glue-points, units-sequence proof. The source motivates the edge/vertex quotient but does not assert this graph incidence splitting lemma."
+   }
+  },
+  {
+   "text": "Let $S_V(b_v)=b_{\\sigma_Vv}$ and $S_E(b_e)=\\epsilon_e b_{\\sigma_Ee}$. Endpoint preservation gives $\\partial S_E(b_e)=\\epsilon_e(b_{t(\\sigma_Ee)}-b_{s(\\sigma_Ee)})=S_V\\partial(b_e)$ in both sign cases. Thus $S_E$ preserves $H$. Also $\\sigma^*\\delta(a)=\\delta(a\\circ\\sigma_V)$ coordinatewise, so $\\sigma^*$ descends to the quotient. For $h\\in H$, $L_{\\sigma^*z}(h)=\\prod_e z_{\\sigma_Ee}^{\\epsilon_e h_e}=L_z(S_Eh)$, proving the required equivariance.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent-written integral-lattice auxiliary for Tag 0C1M, lemma-glue-points, units-sequence proof. The source motivates the edge/vertex quotient but does not assert this graph incidence splitting lemma."
+   }
+  },
+  {
+   "text": "For another orientation put $\\eta_e=-1$ on reversed edges and $1$ on the others. The map $J$ from its edge lattice to the old one, $J(b_e)=\\eta_e b_e$, satisfies $\\partial_{\\rm old}J=\\partial_{\\rm new}$. The coordinate map $z\\mapsto(z_e^{\\eta_e})_e$ takes old coboundaries to new ones and has inverse itself. Evaluation satisfies $L_{(z_e^{\\eta_e})}(h)=L_z(Jh)$, which gives exactly the asserted orientation identification.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent-written integral-lattice auxiliary for Tag 0C1M, lemma-glue-points, units-sequence proof. The source motivates the edge/vertex quotient but does not assert this graph incidence splitting lemma."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-graph-incidence-inner-inverse"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Agent-written integral-lattice auxiliary for Tag 0C1M, lemma-glue-points, units-sequence proof. The source motivates the edge/vertex quotient but does not assert this graph incidence splitting lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite oriented multigraph and any abelian group A edge labels modulo vertex coboundaries are naturally Hom from the kernel of the integral incidence map to A",
+   "results": "{\"t\": \"2026-10-23T11:39:50Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite oriented multigraph and any abelian group A edge labels modulo vertex coboundaries are naturally Hom from the kernel of the integral incidence map to A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupHomology.IsBoundary₁\", \"groupHomology.IsCycle₁\", \"groupHomology.IsBoundary₀\", \"groupHomology.boundaries₁\", \"groupHomology.isBoundary₁_iff\", \"groupHomology.IsCycle₂\", \"groupHomology.cycles₁\", \"groupHomology.IsBoundary₂\"], \"digest\": \"78e2dd221a93da1b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group (co)homology uses a group resolution; Hom-complex coboundaries do not identify this incidence quotient. SimpleGraph.incMatrix is unoriented, has no parallel edges, and its file explicitly leaves oriented incidence matrices as a TODO. The quiver cycle hits assert existence of directed walks, not this character isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "First cohomology of a finite graph with abelian coefficients is Hom from integral cycle group",
+   "results": "{\"t\": \"2026-10-23T11:39:48Z\", \"tool\": \"leansearch\", \"query\": \"First cohomology of a finite graph with abelian coefficients is Hom from integral cycle group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.H1\", \"groupHomology.H1\", \"groupCohomology.coboundaries₁\", \"groupCohomology.H1IsoOfIsTrivial\", \"groupCohomology.H1π_eq_zero_iff\", \"groupHomology.H1_induction_on\", \"groupCohomology.H1π_eq_iff\", \"groupHomology.cycles₁\"], \"digest\": \"49c0d1879fc6d1ec\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group (co)homology uses a group resolution; Hom-complex coboundaries do not identify this incidence quotient. SimpleGraph.incMatrix is unoriented, has no parallel edges, and its file explicitly leaves oriented incidence matrices as a TODO. The quiver cycle hits assert existence of directed walks, not this character isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"incidence\", \"ker\"",
+   "results": "{\"t\": \"2026-10-23T11:39:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"incidence\\\", \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group (co)homology uses a group resolution; Hom-complex coboundaries do not identify this incidence quotient. SimpleGraph.incMatrix is unoriented, has no parallel edges, and its file explicitly leaves oriented incidence matrices as a TODO. The quiver cycle hits assert existence of directed walks, not this character isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "(cycle|incidence|coboundary).*(character|cokernel|Hom)|spanning.*tree.*(basis|cycle)",
+   "results": "{\"t\": \"2026-10-23T11:39:47Z\", \"tool\": \"grep\", \"query\": \"(cycle|incidence|coboundary).*(character|cokernel|Hom)|spanning.*tree.*(basis|cycle)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomologyZero.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomologyZero.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean\"], \"digest\": \"3dcb3cee3fccb846\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group (co)homology uses a group resolution; Hom-complex coboundaries do not identify this incidence quotient. SimpleGraph.incMatrix is unoriented, has no parallel edges, and its file explicitly leaves oriented incidence matrices as a TODO. The quiver cycle hits assert existence of directed walks, not this character isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite multigraph incidence matrix cokernel dual quotient edge cochains vertex coboundaries",
+   "results": "{\"t\": \"2026-10-23T11:44:47Z\", \"tool\": \"leanfinder\", \"query\": \"Finite multigraph incidence matrix cokernel dual quotient edge cochains vertex coboundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimpleGraph.lapMatrix\", \"SimpleGraph.incMatrix_transpose_mul_diag\", \"SimpleGraph.incMatrix_mul_transpose_apply_of_adj\", \"SimpleGraph.incMatrix_mul_transpose\", \"SimpleGraph.incMatrix\", \"SimpleGraph.incMatrix_apply_mul_incMatrix_apply\", \"SimpleGraph.incMatrix_apply\", \"SimpleGraph.incMatrix_apply'\"], \"digest\": \"82045645244045d8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group (co)homology uses a group resolution; Hom-complex coboundaries do not identify this incidence quotient. SimpleGraph.incMatrix is unoriented, has no parallel edges, and its file explicitly leaves oriented incidence matrices as a TODO. The quiver cycle hits assert existence of directed walks, not this character isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "incidence|cycle|coboundary",
+   "results": "{\"t\": \"2026-10-23T11:49:41Z\", \"tool\": \"grep\", \"query\": \"incidence|cycle|coboundary\", \"sub\": \"Combinatorics/Quiver\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/Quiver/ConnectedComponent.lean\", \"Mathlib/Combinatorics/Quiver/ConnectedComponent.lean\"], \"digest\": \"dd31236e9909291d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group (co)homology uses a group resolution; Hom-complex coboundaries do not identify this incidence quotient. SimpleGraph.incMatrix is unoriented, has no parallel edges, and its file explicitly leaves oriented incidence matrices as a TODO. The quiver cycle hits assert existence of directed walks, not this character isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coboundaries\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-23T11:49:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"coboundaries\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.coboundaries\", \"CochainComplex.HomComplex.mem_coboundaries_iff\", \"CochainComplex.HomComplex.Cocycle.fromSingleMk_mem_coboundaries_iff\", \"CochainComplex.HomComplex.Cocycle.toSingleMk_mem_coboundaries_iff\", \"groupCohomology.coboundaries₁\", \"groupCohomology.coboundaries₂\", \"groupCohomology.coboundaries₁_eq_bot_of_isTrivial\", \"groupCohomology.instFunLikeSubtypeForallVMemSubmoduleCoboundaries₁\"], \"digest\": \"6c6a807fa54b2ff4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group (co)homology uses a group resolution; Hom-complex coboundaries do not identify this incidence quotient. SimpleGraph.incMatrix is unoriented, has no parallel edges, and its file explicitly leaves oriented incidence matrices as a TODO. The quiver cycle hits assert existence of directed walks, not this character isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "incidence|coboundary|fundamentalCycle",
+   "results": "{\"t\": \"2026-10-23T11:44:45Z\", \"tool\": \"grep\", \"query\": \"incidence|coboundary|fundamentalCycle\", \"sub\": \"Combinatorics\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/Hypergraph/Basic.lean\", \"Mathlib/Combinatorics/SimpleGraph/Operations.lean\", \"Mathlib/Combinatorics/SimpleGraph/Operations.lean\", \"Mathlib/Combinatorics/SimpleGraph/Operations.lean\", \"Mathlib/Combinatorics/SimpleGraph/Operations.lean\", \"Mathlib/Combinatorics/SimpleGraph/Operations.lean\", \"Mathlib/Combinatorics/SimpleGraph/Trails.lean\", \"Mathlib/Combinatorics/SimpleGraph/Trails.lean\"], \"digest\": \"867f0247efe7c892\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: edge-labeling definitions and unoriented incidence-matrix identities do not identify the multigraph cochain quotient with cycle characters. Read Mathlib/Combinatorics/SimpleGraph/IncMatrix.lean:15-58, where oriented incidence is explicitly a TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTree\", \"basis\"",
+   "results": "{\"t\": \"2026-10-23T11:44:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsTree\\\", \\\"basis\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: edge-labeling definitions and unoriented incidence-matrix identities do not identify the multigraph cochain quotient with cycle characters. Read Mathlib/Combinatorics/SimpleGraph/IncMatrix.lean:15-58, where oriented incidence is explicitly a TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Edge labels on a finite graph modulo ratios of vertex labels are canonically the multiplicative characters of its integer cycle lattice",
+   "results": "{\"t\": \"2026-10-23T11:44:46Z\", \"tool\": \"leanfinder\", \"query\": \"Edge labels on a finite graph modulo ratios of vertex labels are canonically the multiplicative characters of its integer cycle lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimpleGraph.instFiniteEdgeLabelingOfElemSym2EdgeSet\", \"SimpleGraph.TopEdgeLabeling\", \"SimpleGraph.toTopEdgeLabeling\", \"SimpleGraph.EdgeLabeling\", \"SimpleGraph.instFintypeEdgeLabelingOfDecidableEqOfElemSym2EdgeSet\", \"SimpleGraph.card_topEdgeLabeling\", \"SimpleGraph.toTopEdgeLabeling_labelGraph\", \"SimpleGraph.TopEdgeLabeling.labelGraph_toTopEdgeLabeling\"], \"digest\": \"619ade95ebecc977\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: edge-labeling definitions and unoriented incidence-matrix identities do not identify the multigraph cochain quotient with cycle characters. Read Mathlib/Combinatorics/SimpleGraph/IncMatrix.lean:15-58, where oriented incidence is explicitly a TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "def incMatrix|TODO|oriented",
+   "results": "{\"t\": \"2026-10-23T12:40:26Z\", \"tool\": \"grep\", \"query\": \"def incMatrix|TODO|oriented\", \"sub\": \"Combinatorics/SimpleGraph/IncMatrix.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"15\", \"39\", \"41\", \"42\", \"58\"], \"digest\": \"fe3e56dd4e423f91\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: edge-labeling definitions and unoriented incidence-matrix identities do not identify the multigraph cochain quotient with cycle characters. Read Mathlib/Combinatorics/SimpleGraph/IncMatrix.lean:15-58, where oriented incidence is explicitly a TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite oriented multigraph edge labels in an abelian group modulo vertex coboundaries are characters of the integral cycle group",
+   "results": "{\"t\": \"2026-10-23T13:25:04Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite oriented multigraph edge labels in an abelian group modulo vertex coboundaries are characters of the integral cycle group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupHomology.IsCycle₁\", \"groupHomology.IsCycle₂\", \"groupHomology.cycles₁\", \"groupHomology.isCycle₁_of_mem_cycles₁\", \"groupHomology.cyclesOfIsCycle₁\", \"groupHomology.cyclesOfIsCycle₁_coe\", \"groupHomology.isCycle₂_of_mem_cycles₂\", \"groupHomology.iCycles_mk\"], \"digest\": \"5809ec12356db2ad\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group homology and unoriented SimpleGraph incidence/Laplacian identities do not give an integral inner inverse for a loopless multigraph. Read IncMatrix.lean:15–58: oriented incidence remains a TODO; Graph.Basic supplies incidence data only."
+  },
+  {
+   "tool": "grep",
+   "query": "(cycle|incidence|coboundary).*(character|cokernel|Hom)|spanning.*tree.*(basis|cycle)",
+   "results": "{\"t\": \"2026-10-23T13:25:26Z\", \"tool\": \"grep\", \"query\": \"(cycle|incidence|coboundary).*(character|cokernel|Hom)|spanning.*tree.*(basis|cycle)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Perm/Centralizer.lean\", \"Mathlib/GroupTheory/Perm/Centralizer.lean\", \"Mathlib/GroupTheory/Perm/Centralizer.lean\", \"Mathlib/GroupTheory/Perm/Centralizer.lean\", \"Mathlib/GroupTheory/Perm/Centralizer.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomologyZero.lean\"], \"digest\": \"90d0b7c7138b688e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group homology and unoriented SimpleGraph incidence/Laplacian identities do not give an integral inner inverse for a loopless multigraph. Read IncMatrix.lean:15–58: oriented incidence remains a TODO; Graph.Basic supplies incidence data only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "First cohomology of a finite graph with abelian coefficients is Hom from its integral cycle group",
+   "results": "{\"t\": \"2026-10-23T13:25:26Z\", \"tool\": \"leansearch\", \"query\": \"First cohomology of a finite graph with abelian coefficients is Hom from its integral cycle group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.H1\", \"groupHomology.H1\", \"groupCohomology.H1IsoOfIsTrivial\", \"groupCohomology.H1π_eq_zero_iff\", \"groupHomology.H1_induction_on\", \"groupCohomology.coboundaries₁\", \"groupCohomology.H1π_eq_iff\", \"groupCohomology.shortComplexH1\"], \"digest\": \"86744ec01519812a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group homology and unoriented SimpleGraph incidence/Laplacian identities do not give an integral inner inverse for a loopless multigraph. Read IncMatrix.lean:15–58: oriented incidence remains a TODO; Graph.Basic supplies incidence data only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"incidence\", \"ker\"",
+   "results": "{\"t\": \"2026-10-23T13:25:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"incidence\\\", \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group homology and unoriented SimpleGraph incidence/Laplacian identities do not give an integral inner inverse for a loopless multigraph. Read IncMatrix.lean:15–58: oriented incidence remains a TODO; Graph.Basic supplies incidence data only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite multigraph incidence matrix cokernel dual quotient edge cochains vertex coboundaries",
+   "results": "{\"t\": \"2026-10-23T13:26:13Z\", \"tool\": \"leanfinder\", \"query\": \"Finite multigraph incidence matrix cokernel dual quotient edge cochains vertex coboundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimpleGraph.lapMatrix\", \"SimpleGraph.incMatrix_transpose_mul_diag\", \"SimpleGraph.incMatrix_mul_transpose_apply_of_adj\", \"SimpleGraph.incMatrix_mul_transpose\", \"SimpleGraph.incMatrix\", \"SimpleGraph.incMatrix_apply_mul_incMatrix_apply\", \"SimpleGraph.incMatrix_apply\", \"SimpleGraph.incMatrix_apply'\"], \"digest\": \"82045645244045d8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group homology and unoriented SimpleGraph incidence/Laplacian identities do not give an integral inner inverse for a loopless multigraph. Read IncMatrix.lean:15–58: oriented incidence remains a TODO; Graph.Basic supplies incidence data only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-component-picard-gluing",
+  "date": "2026-10-23",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: last sentence, invoking Deligne–Mumford Theorem 1.13 after identity on all of Pic^0 has been established; this lemma assumes identity on all line bundles, not merely level torsion. Auxiliary: Lemma 1.17 and its proof, printed p.86; component rather than full normalization. Stacks curves.tex Tag 0C1M, lemma-glue-points (units sequence and surjectivity); pic.tex Tag 0BA0, lemma-picard-pieces (normalization Jacobian); genus-zero classification curves.tex Tag 0C6N, lemma-genus-zero. Local Deligne–Mumford PDF WANTED; primary PDF read online. Supporting algebra for the gluing-scalar kernel: evaluation on integral graph cycles, with signed graph-automorphism compatibility.",
+   "via": [
+    "lem-sfb-nodal-component-picard-gluing",
+    "lem-sfb-stable-picard-action-faithful",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-graph-cycle-character-quotient",
+  "worker": "stage1",
+  "summary": "Statement retained. Separated the integral incidence inner-inverse lemma; gave explicit character extension, kernel calculation, signed automorphism and orientation calculations. No finished Lean attachment or Mathlib match was found. All new-node searches were run with msearch.py.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: last sentence, invoking Deligne–Mumford Theorem 1.13 after identity on all of Pic^0 has been established; this lemma assumes identity on all line bundles, not merely level torsion. Auxiliary: Lemma 1.17 and its proof, printed p.86; component rather than full normalization. Stacks curves.tex Tag 0C1M, lemma-glue-points (units sequence and surjectivity); pic.tex Tag 0BA0, lemma-picard-pieces (normalization Jacobian); genus-zero classification curves.tex Tag 0C6N, lemma-genus-zero. Local Deligne–Mumford PDF WANTED; primary PDF read online. Supporting algebra for the gluing-scalar kernel: evaluation on integral graph cycles, with signed graph-automorphism compatibility. This split supplies the graph-character input to the nodal gluing argument; the integral inner inverse is a strictly smaller coefficient-independent input, not the character quotient itself."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-562dfb81d",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-562dfb81d (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-finite-graph-incidence-inner-inverse, the cited def-weil-pbc-free-module (Mathlib leaf Module.Free), the citing parent lem-sfb-nodal-component-picard-gluing (steps 4-5, used with A=k^*, exactly as the item states it) and Stacks curves.tex Tag 0C1M lemma-glue-points (lines 3106-3153). That source only motivates the result, and both proofs are honestly marked agent-written; no SGA is cited. The item statement is true for any commutative A with no connectedness assumption. Brute force over A=Z/2,Z/3,Z/4 on empty, isolated-vertex, single-edge, parallel (both orientations), triangle, disconnected and chorded-4-cycle graphs confirms: the labels vanishing on all cycles are exactly the coboundaries, and |A^E/im delta| = |A|^(E-V+c). Step checks: (1) p=1-r d is a retraction onto H; (2) L_{delta(a)}(x)=prod_v a_v^{(dx)_v}, so Phi is well defined; (3) z_e=chi(p b_e) gives surjectivity; (4) a_v=L_z(r b_v) gives the kernel; (5) both sign cases hold with s!=t, sigma^* delta(a)=delta(a o sigma_V), and the precomposition direction is right; (6) J and z^eta are correct. The new node is true by the root-path construction, statement-only, smaller than the item and not a clause of it. It does not follow in a few lines from lem-weil-subgroup-finite-free-abelian-group-free, since a direct summand is needed. rg -L over the DAG found no duplicate (graph-homology-rigidity and euler-trace differ). It has 8 logged searches across three kinds, and its blueprint, created and unit fields are consistent. The proof stays inside the unit with no tool uses, and this is not a re-split item. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Combinatorics.FiniteGraphCycleCharacterQuotient",
+  "declaration": "FiniteGraphCycleCharacter.quotientEquiv",
+  "declarations": [
+   "FiniteGraphCycleCharacter.boundary",
+   "FiniteGraphCycleCharacter.coboundary",
+   "FiniteGraphCycleCharacter.signedEdges",
+   "FiniteGraphCycleCharacter.quotientEquiv"
+  ],
+  "file": "lean/Sheaf/Combinatorics/FiniteGraphCycleCharacterQuotient.lean",
+  "statement": "theorem quotientEquiv (V : Type u) (E : Type v) [Finite V] [Fintype E] [DecidableEq V] (s t : E → V) (_hne : ∀ e : E, s e ≠ t e) (A : Type w) [CommGroup A] : ∃ Φ : ((E → A) ⧸ (coboundary s t A).range) ≃* (Multiplicative (LinearMap.ker (boundary s t)) →* A), (∀ (z : E → A) (h : LinearMap.ker (boundary s t)), Φ (QuotientGroup.mk' (coboundary s t A).range z) (Multiplicative.ofAdd h) = ∏ e : E, z e ^ (h.val e)) ∧ (∀ (σV : Equiv.Perm V) (σE : Equiv.Perm E), (∀ e : E, (s (σE e) = σV (s e) ∧ t (σE e) = σV (t e)) ∨ (s (σE e) = σV (t e) ∧ t (σE e) = σV (s e))) → ∃ S : LinearMap.ker (boundary s t) →ₗ[ℤ] LinearMap.ker (boundary s t), (∀ h, (S h).val = signedEdges σE (fun e ↦ if s (σE e) = σV (s e) then 1 else -1) h.val) ∧ (∀ (z : E → A) (h : LinearMap.ker (boundary s t)), Φ (QuotientGroup.mk' (coboundary s t A).range (fun e ↦ z (σE e) ^ (if s (σE e) = σV (s e) then (1 : ℤ) else -1))) (Multiplicative.ofAdd h) = Φ (QuotientGroup.mk' (coboundary s t A).range z) (Multiplicative.ofAdd (S h)))) ∧ (∀ (s' t' : E → V), (∀ e : E, (s' e = s e ∧ t' e = t e) ∨ (s' e = t e ∧ t' e = s e)) → ∃ J : LinearMap.ker (boundary s' t') ≃ₗ[ℤ] LinearMap.ker (boundary s t), ∃ Ψ : ((E → A) ⧸ (coboundary s' t' A).range) ≃* ((E → A) ⧸ (coboundary s t A).range), (∀ h, (J h).val = signedEdges (fun e : E ↦ e) (fun e ↦ if s' e = s e then 1 else -1) h.val) ∧ (∀ z : E → A, Ψ (QuotientGroup.mk' (coboundary s' t' A).range (fun e ↦ z e ^ (if s' e = s e then (1 : ℤ) else -1))) = QuotientGroup.mk' (coboundary s t A).range z) ∧ (∀ (z : E → A) (h : LinearMap.ker (boundary s' t')), Φ (Ψ (QuotientGroup.mk' (coboundary s' t' A).range z)) (Multiplicative.ofAdd (J h)) = ∏ e : E, z e ^ (h.val e)))",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The three helpers construct the incidence, vertex coboundary and signed edge maps of this node using Mathlib basis extension and pointwise homomorphisms; the only postponed theorem is the complete character quotient statement, including permutation and reorientation formulas."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a5dab5a5b",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Clauses read against node: boundary/coboundary/signedEdges are real constructions; Φ ≃* (Multiplicative H →* A), fixed by the evaluation formula; signed-permutation clause (ε, S pinned, Φ([σ*z]) = Φ([z])∘S, preservation of H uses s≠t) and reorientation clause (J diagonal η, Ψ([z^η]')=[z], evaluation compatibility) verified by hand. Edge cases (empty, disconnected, parallel edges, non-divisible A, independent universes u,v,w) OK. Recorded statement is verbatim in the file, stmt_deps unchanged, docstrings carry source, blueprint and 6 proof steps, report has both sections. No competing definition in side-live (FiniteGraphHomologyRigidity writes its boundary inline). Item not yet landed live. Worker compile not reproduced per instructions; no files changed. Advisory only: [DecidableEq V] is harmless."
+ }
+}

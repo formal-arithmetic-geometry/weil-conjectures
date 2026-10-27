@@ -1,0 +1,236 @@
+{
+ "id": "lem-sfb-smooth-generic-trivial-line-descent",
+ "kind": "statement",
+ "title": "A generically fibre-trivial line on a smooth integral-fibre family comes from the base",
+ "statement": "Let $k$ be a field [def-weil-field] and let $S$ and $Y$ be regular integral separated schemes of finite type over $k$ [def-pc-scheme, def-weil-regular-scheme, def-pc-integral-scheme, def-weil-finite-type-morphism]. Separated means that the diagonal is a closed immersion. Let $f:Y\\to S$ be a smooth surjective morphism [def-sbc-smooth-morphisms] with nonempty geometrically integral fibres, meaning that $Y\\times_S\\operatorname{Spec}L$ is integral for every point $s\\in S$ and every field extension $L/\\kappa(s)$. Write $\\eta=\\operatorname{Spec}k(S)$ for the generic point of $S$, where $k(S)$ is the fraction field of any nonempty affine coordinate ring, and put $Y_\\eta=Y\\times_S\\eta$ [def-pc-fibre-product]. Let $M$ be an invertible $\\mathcal O_Y$-module [def-sc-invertible-module]. If $M|_{Y_\\eta}\\simeq\\mathcal O_{Y_\\eta}$, there exist an invertible $\\mathcal O_S$-module $N$ and an isomorphism $f^*N\\simeq M$. The pullback is ordinary tensor pullback of sheaves of modules [def-pc-module-pullback].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00ON (lemma-dimension-base-fibre-equals-total), applied to a vertical prime divisor of a smooth morphism; divisors.tex Tag 0AGA (lemma-weil-divisor-is-cartier-UFD) and more-algebra.tex Tag 0AG0 (lemma-regular-local-UFD). Agent-formulated general vertical-divisor consequence spelling out the Pic(Y) step omitted in Milne Theorem 18.32, printed pp.395--396; the argument is given in the delivery report."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-regular-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "By the definition of regular scheme [def-weil-regular-scheme], both $S$ and $Y$ are locally Noetherian. Apply clause (1) of [rem-pc-regular-normal] to the regular scheme $S$: every local ring of $S$ is an integrally closed domain. Thus $S$ is normal, and it is integral by hypothesis. These are hypotheses (1) and (2) of Stacks Tag 0BD7.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, lemma-in-image-pullback, hypotheses (1)--(2); properties.tex Tag 0569, lemma-regular-normal"
+   }
+  },
+  {
+   "text": "By [lem-pc-smooth-flat], $f$ is flat and locally of finite presentation. In the affine presentation of [def-sbc-locally-finite-presentation], each point $y\\in Y$ has affine opens $U=\\operatorname{Spec}A\\ni y$ and $V=\\operatorname{Spec}R\\supseteq f(U)$ with $A\\cong R[x_1,\\ldots,x_n]/(g_1,\\ldots,g_m)$, so $A$ is generated over $R$ by the images of the $x_i$ and $R\\to A$ is of finite type. This is the pointwise condition of [lem-weil-pbc-lft-pointwise-criterion], which therefore shows that $f$ is locally of finite type in the sense of [def-weil-finite-type-morphism]. For each $s\\in S$, use the given geometric-integrality condition with the identity extension $L=\\kappa(s)$: the residue-field fibre $Y_s$ is integral and nonempty. This verifies hypotheses (3) and the locally-of-finite-type alternative in (4) of Tag 0BD7.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-lft-pointwise-criterion",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, lemma-in-image-pullback, hypotheses (3)--(4); morphisms.tex Tags 01VE and 01VF, lemma-smooth-locally-finite-presentation and lemma-smooth-flat; morphisms.tex Tag 01T2, lemma-locally-finite-type-characterize"
+   }
+  },
+  {
+   "text": "By [lem-sc-integral-function-field-affine-fraction], the generic stalk $\\mathcal O_{S,\\eta}$ is the fraction field of the coordinate ring of every nonempty affine open of $S$. Thus the generic fibre in [lem-sfb-normal-noetherian-generic-line-pullback] is the $Y_\\eta$ in the statement. Its required tensor-pullback triviality is exactly the assumed $M|_{Y_\\eta}\\simeq\\mathcal O_{Y_\\eta}$. Apply that lemma with $T=S$, $Y=Y$, $f=f$, and $M=M$, using the hypotheses verified in steps 1--2. It gives an invertible $\\mathcal O_S$-module $N$ and $f^*N\\cong M$, with ordinary tensor pullback, as required.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-sfb-normal-noetherian-generic-line-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, lemma-in-image-pullback, hypothesis (5) and conclusion; schemes.tex Tag 01HV, lemma-spec-sheaves, at the zero prime"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "rem-pc-regular-normal",
+  "lem-pc-smooth-flat",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-lft-pointwise-criterion",
+  "def-weil-finite-type-morphism",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sfb-normal-noetherian-generic-line-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD7, lemma-in-image-pullback, specialized to a regular base and smooth morphism with geometrically integral fibres; existing DAG node reused."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth morphism of regular integral Noetherian schemes with geometrically integral fibres and trivial generic fibre Picard group has surjective pullback on Picard groups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Function.Surjective (CategoryTheory.Limits.pullbackComparison AlgebraicGeometry.Scheme.forget f g)\", \"doc\": \"For any morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ in the category of schemes, the comparison morphism induced by the forgetful functor from schemes to types is surjective. This means that every compat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Function.Surjective (CategoryTheory.Limits.pullbackComparison AlgebraicGeometry.Scheme.forget f g)\", \"doc\": \"The function obtained by applying the forgetful functor from the category of schemes to the category of sets to the pullback comparison morphism is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate on morphism properties in the category of schemes, asserting that the property is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Surjective\", \"doc\": \"The property of being a surjective morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a surjective morphism of schemes and $ g: Z \\to Y $ is any morphism of schemes, then the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P\", \"doc\": \"In the category of schemes, a morphism property is preserved under jointly surjective families of morphisms. This means that if a property holds for each morphism in a jointly surjective family, then \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving AlgebraicGeometry.IsOpenImmersion\", \"doc\": \"In the category of schemes, the property of being an open immersion is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: pullback carriers, topological vector-bundle trivializations and Picard groups of local rings do not state descent of a generically fibre-trivial invertible sheaf along a smooth morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Line bundle trivial on generic fibre of smooth morphism with integral fibres comes from a line bundle on base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"hom_trivializationAt_baseSet\", \"module\": \"Mathlib/Topology/VectorBundle/Hom\", \"type\": \"∀ {𝕜₁ : Type u_1} [inst : NontriviallyNormedField 𝕜₁] {𝕜₂ : Type u_2} [inst_1 : NontriviallyNormedField 𝕜₂]\\n  (σ : 𝕜₁ →+* 𝕜₂) {B : Type u_3} {F₁ : Type u_4} [inst_2 : NormedAddCommGroup F₁] [inst_3 : NormedSpace 𝕜₁ F₁]\\n  {E₁ : B → Type u_5} [inst_4 : (x : B) → AddCommGroup (E₁ x)] [inst_5 : (x : B) \", \"doc\": \"For vector bundles $E_1$ and $E_2$ over a topological space $B$ with normed fibers, the base set of the trivialization of the hom-bundle $E_1 \\\\toSL[\\\\sigma] E_2$ at a point $x_0 \\\\in B$ is equal to the \"}\n  {\"name\": \"hom_trivializationAt\", \"module\": \"Mathlib/Topology/VectorBundle/Hom\", \"type\": \"∀ {𝕜₁ : Type u_1} [inst : NontriviallyNormedField 𝕜₁] {𝕜₂ : Type u_2} [inst_1 : NontriviallyNormedField 𝕜₂]\\n  (σ : 𝕜₁ →+* 𝕜₂) {B : Type u_3} {F₁ : Type u_4} [inst_2 : NormedAddCommGroup F₁] [inst_3 : NormedSpace 𝕜₁ F₁]\\n  {E₁ : B → Type u_5} [inst_4 : (x : B) → AddCommGroup (E₁ x)] [inst_5 : (x : B) \", \"doc\": \"For a point $x_0$ in the base space $B$, the trivialization of the fiber bundle of continuous linear maps between two vector bundles $E_1$ and $E_2$ at $x_0$ is constructed by composing the trivializa\"}\n  {\"name\": \"hom_trivializationAt_target\", \"module\": \"Mathlib/Topology/VectorBundle/Hom\", \"type\": \"∀ {𝕜₁ : Type u_1} [inst : NontriviallyNormedField 𝕜₁] {𝕜₂ : Type u_2} [inst_1 : NontriviallyNormedField 𝕜₂]\\n  (σ : 𝕜₁ →+* 𝕜₂) {B : Type u_3} {F₁ : Type u_4} [inst_2 : NormedAddCommGroup F₁] [inst_3 : NormedSpace 𝕜₁ F₁]\\n  {E₁ : B → Type u_5} [inst_4 : (x : B) → AddCommGroup (E₁ x)] [inst_5 : (x : B) \", \"doc\": \"The target of the trivialization at $x_0$ for the hom-bundle of continuous linear maps between two vector bundles is the Cartesian product of the intersection of the base sets of the trivializations o\"}\n  {\"name\": \"hom_trivializationAt_apply\", \"module\": \"Mathlib/Topology/VectorBundle/Hom\", \"type\": \"∀ {𝕜₁ : Type u_1} [inst : NontriviallyNormedField 𝕜₁] {𝕜₂ : Type u_2} [inst_1 : NontriviallyNormedField 𝕜₂]\\n  (σ : 𝕜₁ →+* 𝕜₂) {B : Type u_3} {F₁ : Type u_4} [inst_2 : NormedAddCommGroup F₁] [inst_3 : NormedSpace 𝕜₁ F₁]\\n  {E₁ : B → Type u_5} [inst_4 : (x : B) → AddCommGroup (E₁ x)] [inst_5 : (x : B) \", \"doc\": \"For a base point $x_0$ in the base space $B$ and an element $x$ in the total space of the vector bundle of continuous linear maps between fibers $E_1$ and $E_2$, the trivialization at $x_0$ maps $x$ t\"}\n  {\"name\": \"VectorBundle.trivialization_linear'\", \"module\": \"Mathlib/Topology/VectorBundle/Basic\", \"type\": \"∀ {R : Type u_1} {B : Type u_2} {F : Type u_3} {E : B → Type u_4} {inst : NontriviallyNormedField R}\\n  {inst_1 : (x : B) → AddCommMonoid (E x)} {inst_2 : (x : B) → Module R (E x)} {inst_3 : NormedAddCommGroup F}\\n  {inst_4 : NormedSpace R F} {inst_5 : TopologicalSpace B} {inst_6 : TopologicalSpace (B\", \"doc\": \"Every trivialization in the atlas of a vector bundle is linear, meaning the local trivialization maps are linear isomorphisms between the fiber and the product of the base space with the fiber, preser\"}\n  {\"name\": \"trivialization_linear\", \"module\": \"Mathlib/Topology/VectorBundle/Basic\", \"type\": \"∀ (R : Type u_1) {B : Type u_2} {F : Type u_3} {E : B → Type u_4} [inst : NontriviallyNormedField R]\\n  [inst_1 : (x : B) → AddCommMonoid (E x)] [inst_2 : (x : B) → Module R (E x)] [inst_3 : NormedAddCommGroup F]\\n  [inst_4 : NormedSpace R F] [inst_5 : TopologicalSpace B] [inst_6 : TopologicalSpace (B\", \"doc\": \"For a vector bundle over a topological space with fibers modeled on a normed vector space over a nontrivially normed field, every trivialization in the bundle's atlas is a linear isomorphism with resp\"}\n  {\"name\": \"Trivialization.pullback_linear\", \"module\": \"Mathlib/Topology/VectorBundle/Constructions\", \"type\": \"∀ (𝕜 : Type u_2) {B : Type u_3} {F : Type u_4} {E : B → Type u_5} {B' : Type u_6} [inst : TopologicalSpace B']\\n  [inst_1 : TopologicalSpace (Bundle.TotalSpace F E)] [inst_2 : NontriviallyNormedField 𝕜]\\n  [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] [inst_5 : TopologicalSpace B]\\n  [inst\", \"doc\": \"Given a linear trivialization $ e $ of a vector bundle $ E $ over $ B $ and a continuous map $ f : B' \\to B $, the pullback trivialization of $ e $ along $ f $ is also linear with respect to the module\"}\n  {\"name\": \"Bundle.Trivial.trivialization.isLinear\", \"module\": \"Mathlib/Topology/VectorBundle/Constructions\", \"type\": \"∀ (𝕜 : Type u_1) (B : Type u_2) (F : Type u_3) [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup F]\\n  [inst_2 : NormedSpace 𝕜 F] [inst_3 : TopologicalSpace B],\\n  Trivialization.IsLinear 𝕜 (Bundle.Trivial.trivialization B F)\", \"doc\": \"The canonical trivialization of a trivial bundle over a base space $ B $ with fiber $ F $ is linear with respect to the vector space structure on the fibers. This means that the local trivialization m\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: pullback carriers, topological vector-bundle trivializations and Picard groups of local rings do not state descent of a generically fibre-trivial invertible sheaf along a smooth morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"Surjective\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"HomotopicalAlgebra.LeftHomotopyClass.mk_surjective\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.LeftHomotopy\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : C} [HomotopicalAlgebra.CategoryWithWeakEquivalences C] : Function.Surjective HomotopicalAlgebra.LeftHomotopyClass.mk\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.RightHomotopyClass.mk_surjective\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.RightHomotopy\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : C} [HomotopicalAlgebra.CategoryWithWeakEquivalences C] : Function.Surjective HomotopicalAlgebra.RightHomotopyClass.mk\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.mk_surjective\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [HomotopicalAlgebra.CategoryWithCofibrations C] [CategoryTheory.Limits.HasInitial C] (X : HomotopicalAlgebra.CofibrantObject C) : ∃ Y, ∃ (x : HomotopicalAlgebra.IsCofibrant Y), X = HomotopicalAlgebra.CofibrantObject.mk Y\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.mk_surjective\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [HomotopicalAlgebra.CategoryWithFibrations C] [CategoryTheory.Limits.HasTerminal C] (X : HomotopicalAlgebra.FibrantObject C) : ∃ Y, ∃ (x : HomotopicalAlgebra.IsFibrant Y), X = HomotopicalAlgebra.FibrantObject.mk Y\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.BifibrantObject.mk_surjective\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [HomotopicalAlgebra.CategoryWithCofibrations C] [CategoryTheory.Limits.HasInitial C] [HomotopicalAlgebra.CategoryWithFibrations C] [CategoryTheory.Limits.HasTerminal C] (X : HomotopicalAlgebra.BifibrantObject C) : ∃ Y, ∃ (x : HomotopicalAlgebra.IsCofi\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.homMk_surjective\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [HomotopicalAlgebra.CategoryWithCofibrations C] [CategoryTheory.Limits.HasInitial C] {X Y : C} [HomotopicalAlgebra.IsCofibrant X] [HomotopicalAlgebra.IsCofibrant Y] (f : HomotopicalAlgebra.CofibrantObject.mk X ⟶ HomotopicalAlgebra.CofibrantObject.mk Y\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.homMk_surjective\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [HomotopicalAlgebra.CategoryWithFibrations C] [CategoryTheory.Limits.HasTerminal C] {X Y : C} [HomotopicalAlgebra.IsFibrant X] [HomotopicalAlgebra.IsFibrant Y] (f : HomotopicalAlgebra.FibrantObject.mk X ⟶ HomotopicalAlgebra.FibrantObject.mk Y) : ∃ g, \", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.BifibrantObject.homMk_surjective\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [HomotopicalAlgebra.CategoryWithCofibrations C] [CategoryTheory.Limits.HasInitial C] [HomotopicalAlgebra.CategoryWithFibrations C] [CategoryTheory.Limits.HasTerminal C] {X Y : C} [HomotopicalAlgebra.IsCofibrant X] [HomotopicalAlgebra.IsCofibrant Y] [H\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantObject.toHoCat_obj_surjective\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.FibrantObjectHomotopy\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [HomotopicalAlgebra.ModelCategory C] : Function.Surjective HomotopicalAlgebra.FibrantObject.toHoCat.obj\", \"doc\": \"\"}\n  {\"name\": \"MaxTropical.surjective_trop\", \"module\": \"Mathlib.Algebra.Tropical.Basic\", \"type\": \" {R : Type u} : Function.Surjective MaxTropical.trop\", \"doc\": \"\"}\n  {\"name\": \"MaxTropical.surjective_untrop\", \"module\": \"Mathlib.Algebra.Tropical.Basic\", \"type\": \" {R : Type u} : Function.Surjective MaxTropical.untrop\", \"doc\": \"\"}\n  {\"name\": \"MinTropical.surjective_trop\", \"module\": \"Mathlib.Algebra.Tropical.Basic\", \"type\": \" {R : Type u} : Function.Surjective MinTropical.trop\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: pullback carriers, topological vector-bundle trivializations and Picard groups of local rings do not state descent of a generically fibre-trivial invertible sheaf along a smooth morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|Pic\\.",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"24\", \"text\": \"the special case where `S` is the spectrum of some commutative ring `R` whose Picard group is zero\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"50\", \"text\": \"elliptic curves over the spectrum `Spec(R)` of `R` in the case that `R` has trivial Picard group\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"361\", \"text\": \"accurate for certain rings whose Picard group has trivial 12-torsion, such as a field or a PID. -/\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: pullback carriers, topological vector-bundle trivializations and Picard groups of local rings do not state descent of a generically fibre-trivial invertible sheaf along a smooth morphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic fibre trivial Picard group smooth integral fibres Picard pullback surjective",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Surjective\", \"doc\": \"The property of being a surjective morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a surjective morphism of schemes and $ g: Z \\to Y $ is any morphism of schemes, then the\"}\n  {\"name\": \"CommRing.Pic.subsingleton_iff\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"{R : Type u} [CommRing R] :\\n  Subsingleton (Pic R) ↔ ∀ (M : Type u) [AddCommGroup M] [Module R M], Module.Invertible R M → Free R M\", \"doc\": \"For a commutative ring $ R $, the Picard group $ \\\\operatorname{Pic}(R) $ is trivial (a subsingleton) if and only if every invertible $ R $-module is free.\"}\n  {\"name\": \"CommRing.Pic.subsingleton_iffₛ\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Subsingleton (Pic R) ↔ ∀ (M : Type u) [AddCommMonoid M] [Module R M], Module.Invertible R M → Free R M\", \"doc\": \"For a commutative semiring $ R $, the Picard group $ \\\\mathrm{Pic}(R) $ is a subsingleton (i.e., trivial) if and only if every invertible $ R $-module is free. This equivalence characterizes the trivia\"}\n  {\"name\": \"CommRing.Pic.instFreeAsModuleOfNat\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Free R (1 : Pic R)\", \"doc\": \"The trivial element $1$ in the Picard group $\\\\mathrm{Pic}(R)$ of a commutative semiring $R$ is a free $R$-module.\"}\n  {\"name\": \"CommRing.Pic.instSubsingletonOfIsLocalRing\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(R) [CommRing R] [IsLocalRing R] : Subsingleton (Pic R)\", \"doc\": \"For any commutative local ring $ R $, the Picard group $ \\\\mathrm{Pic}(R) $ is trivial, containing only one element. This follows because every invertible $ R $-module is isomorphic to $ R $ itself, as\"}\n  {\"name\": \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(R) [CommRing R] [Finite (MaximalSpectrum R)] : Subsingleton (Pic R)\", \"doc\": \"If the maximal spectrum of a commutative ring is finite, then its Picard group is trivial (i.e., contains only the identity element).\"}\n  {\"name\": \"CommRing.Pic.instFreeOfSubsingleton\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"[Subsingleton (Pic R)] : Free R M\", \"doc\": \"If the Picard group of a commutative semiring $ R $ is trivial (i.e., has at most one element), then every invertible $ R $-module is a free module. This means that when the group of isomorphism class\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.comap_bot\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Functorial\", \"type\": \": comap ⊥ f = ⊥\", \"doc\": \"For any morphism $ f: X \\\\to Y $, the pullback of the trivial ideal sheaf $ \\\\bot $ on $ Y $ is the trivial ideal sheaf $ \\\\bot $ on $ X $, i.e., $ \\\\operatorname{comap}(\\\\bot, f) = \\\\bot $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: pullback carriers, topological vector-bundle trivializations and Picard groups of local rings do not state descent of a generically fibre-trivial invertible sheaf along a smooth morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Line bundle trivial on generic fibre of smooth morphism with geometrically integral fibres is a pullback from the regular integral base",
+   "results": "OK 8 hit(s): AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback, AlgebraicGeometry.IsIntegralHom.instFstScheme, AlgebraicGeometry.IsIntegralHom.instSndScheme, Trivialization.pullback_linear, AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.AffineSpace.isPullback_map",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-level relative Picard sequences concern modules over one algebra; pullback-carrier and normalization results do not descend line bundles on a scheme family."
+  },
+  {
+   "tool": "grep",
+   "query": "in_image_pullback|invertible.*generic|generic.*invertible|Picard.*smooth",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-level relative Picard sequences concern modules over one algebra; pullback-carrier and normalization results do not descend line bundles on a scheme family."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of restriction of Picard group to generic fibre of flat morphism with integral fibres is the image of pullback from a normal noetherian base",
+   "results": "OK 8 hit(s): CommRing.relPic, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, Submodule.ker_unitsToPic, AlgebraicGeometry.Scheme.Hom.ker, AddMonoidHom.ker_rangeRestrict, AlgebraicGeometry.Scheme.Hom.ker_toNormalization, RingHom.ker_rangeSRestrict, Submodule.range_unitsToPic",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-level relative Picard sequences concern modules over one algebra; pullback-carrier and normalization results do not descend line bundles on a scheme family."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"Invertible\"",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-level relative Picard sequences concern modules over one algebra; pullback-carrier and normalization results do not descend line bundles on a scheme family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exactness Picard group base total space generic fibre for flat family integral fibres normal locally noetherian base",
+   "results": "OK 8 hit(s): Submodule.mulExact_unitsToPic_mapAlgebra, Algebra.H1Cotangent.exact_δ_mapBaseChange, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.H1Cotangent.exact_map_δ, Algebra.Generators.CotangentSpace.exact, KaehlerDifferential.exact_mapBaseChange_map, Algebra.Generators.Cotangent.exact, Submodule.mulExact_unitsMap_spanSingleton_unitsToPic",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-level relative Picard sequences concern modules over one algebra; pullback-carrier and normalization results do not descend line bundles on a scheme family."
+  },
+  {
+   "tool": "grep",
+   "query": "def relPic|theorem range_unitsToPic|theorem ker_unitsToPic",
+   "results": "OK 2 hit(s): 618, 742",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-level relative Picard sequences concern modules over one algebra; pullback-carrier and normalization results do not descend line bundles on a scheme family."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-borel-characteristic-picard-sequence",
+  "date": "2026-10-23",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Characteristic sequence of a Borel quotient. Supporting input: A generically fibre-trivial line on a smooth integral-fibre family comes from the base.",
+   "via": [
+    "lem-sfb-borel-characteristic-picard-sequence",
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-generic-trivial-line-descent",
+  "worker": "stage1",
+  "summary": "Reused the existing more general 0BD7 node after checking all five hypotheses. Three steps establish local Noetherianity and normality, flatness and local finite type with integral residue fibres, and the generic-field identification before applying 0BD7. Statement unchanged; no new nodes; no exact project attachment or Mathlib match found.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain recorded in blueprint.from.place, through the Borel characteristic Picard sequence: supplies its generic-fibre-trivial Pic(Y) pullback step. The item is a created supporting node, not the unit key statement. Current latest unit and direct-images proof read; no change to unit route.",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Uses only clause (1), regular schemes are normal, as a generic geometry tool needed to specialize 0BD7; the unit has no replacement for this implication."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-e68127076",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-e68127076 (reviewer sub-agent of L); spot-checked: No new nodes. The item's statement is unchanged, and its 3-step proof specializes the existing lem-sfb-normal-noetherian-generic-line-pullback (Stacks 0BD7). I checked divisors.tex l.6968: its hypotheses (1)-(5) and conclusion match the node, and the node's closure does not contain the item. Step 1 (regular ⇒ locally Noetherian via def-weil-regular-scheme, normal via rem-pc-regular-normal (1), Stacks 0569) is correct; I accept this tool_use as generic geometry. Step 3 (generic stalk = fraction field via lem-sc-integral-function-field-affine-fraction, then applying 0BD7 with tensor pullback) is correct. FIX in step 2 (C1-type gap): local finite type was derived from the pointwise lfp presentation, but def-weil-finite-type-morphism quantifies over every affine V. I added the citation to the Mathlib leaf lem-weil-pbc-lft-pointwise-criterion (Stacks 01T2, morphisms.tex l.2673) plus def-weil-finite-type-morphism to the step's uses and to proof_deps. Edge cases are consistent: S=Spec k, f=id, P^1 with O(1), and t↦t² (excluded). No SGA source is cited. Batch-5 flag: lem-trf-flat-module-torsionfree-domain (flat ⇒ torsion-free over a domain), together with trf normal-domain principal-divisor-kernel and affine-Weil-divisor-class-group in the same closure, is generic commutative algebra and no part of the trace formula or Poincaré duality, so I accept the flag.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothGenericTrivialLineDescent",
+  "declaration": "AlgebraicGeometry.smoothGenericTrivialLineDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothGenericTrivialLineDescent.lean",
+  "statement": "theorem smoothGenericTrivialLineDescent (k : Type u) [Field k] (S Y : Scheme.{u}) [S.Over (Spec (CommRingCat.of k))] [Y.Over (Spec (CommRingCat.of k))] (hS : IsRegularScheme S) (hY : IsRegularScheme Y) [IsIntegral S] [IsIntegral Y] [IsSeparated (S ↘ Spec (CommRingCat.of k))] [IsSeparated (Y ↘ Spec (CommRingCat.of k))] [LocallyOfFiniteType (S ↘ Spec (CommRingCat.of k))] [QuasiCompact (S ↘ Spec (CommRingCat.of k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of k))] (f : Y ⟶ S) [Smooth f] [Surjective f] [GeometricallyIntegral f] (M : Y.Modules) [M.IsInvertible] (hM : Nonempty ((Scheme.Modules.tensorPullback (pullback.fst f (S.fromSpecStalk (genericPoint S)))).obj M ≅ SheafOfModules.unit (pullback f (S.fromSpecStalk (genericPoint S))).ringCatSheaf)) : ∃ N : S.Modules, N.IsInvertible ∧ Nonempty ((Scheme.Modules.tensorPullback f).obj N ≅ M)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-61f142521",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Read item node, 9 stmt_dep lean records, module and report. Clause match: regular=IsLocallyNoetherian∧IsRegular (recorded), IsIntegral (incl. nonempty), separated and LocallyOfFiniteType∧QuasiCompact over Spec k, Smooth+Surjective (Surjective redundant via GI instance but node states it), Mathlib GeometricallyIntegral = integral base change along every Spec K→S, i.e. the node's (s, L/κ(s)) condition; generic fibre via fromSpecStalk(genericPoint S) and pullback; M.IsInvertible (recorded upstream class); generic triviality and conclusion via the recorded real tensorPullback; ∃ N invertible, f*N≅M in the right direction. Node diff vs live = lean only; statement verbatim; one sorry; docstrings carry source, blueprint tag and 3 proof steps; report sections present. Edge cases (empty excluded, dim 0, all characteristics, k-structures unconstrained, single universe u) OK. No duplicate notion or existing statement. No changes, no compile."
+ }
+}

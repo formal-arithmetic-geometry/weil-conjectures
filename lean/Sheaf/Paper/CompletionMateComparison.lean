@@ -15,44 +15,36 @@ public import Mathlib.CategoryTheory.Sites.Limits
 public import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
 public import Sheaf.Paper.RingedExchangeTensorCoherence
 public import Sheaf.Paper.ProEtaleCanonicalTensorPullback
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
-import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
-import Sheaf.CategoryTheory.RingedToposMorphism
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Paper.ProjectionFormulaArrows
-import Sheaf.Paper.ProjectionFormulaTotalization
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
-import Mathlib.Algebra.Homology.Functor
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Sheaf.Paper.ConstantCompletionEquivalence
+import all Sheaf.Paper.ConstantCompletionEquivalence
+import all Sheaf.Paper.ConstantCompletionCore
+import all Sheaf.Paper.ConstantCompletionInverseImage
 public import Sheaf.Paper.QuotientTowerEvaluationComplex
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.CategoryTheory.LocallyDerivedRingedIdealComplete
 public import Sheaf.Paper.CompletedPullbackAdjunction
+import all Sheaf.Paper.CompletedPullbackAdjunction
 import Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import Mathlib.CategoryTheory.Adjunction.Whiskering
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.CategoryTheory.Adjunction.Mates
-import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.Ring.Limits
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
-import Sheaf.Paper.LocalHomTowerCriterion
-import Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal
-import Sheaf.CategoryTheory.RingedKoszulCompletionReflector
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import all Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.Paper.ConstantDirectImagePreservesComplete
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
+import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import all Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
+import Sheaf.Paper.ProjectionMateExact
+import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-!
 # Strict quotient towers and the completed-adjunction mate
@@ -81,6 +73,13 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory.AdicSites
+attribute [local irreducible] HasDerivedCategory.standard constantSheaf
+  SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
+  CochainComplex.IsAcyclicTensorKFlat CochainComplex.IsKFlatIndependentCoefficients
+
+attribute [local irreducible] ConstantCompletion.quotientPresentation
+  ConstantCompletion.strictLimit ConstantCompletion.derivedExtension ConstantCompletion.derivedPull
+  ConstantCompletion.pull
 
 /-- A small site, with its given topology.
 Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
@@ -185,7 +184,15 @@ theorem Morphism.modulePull_properties {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] :
     PreservesFiniteLimits (f.modulePull A) ∧ PreservesFiniteColimits (f.modulePull A) ∧
       (f.modulePull A).IsLeftAdjoint := by
-  sorry
+  obtain ⟨G, _, adj, _⟩ := ConstantCompletion.module_adjunction_exists
+    f.direct f.adjunction f.algebra (ConstantCompletion.constantMap f.algebra A)
+  have : IsIso (ConstantCompletion.constantMap f.algebra A) := by
+    dsimp only [ConstantCompletion.constantMap]
+    infer_instance
+  have hlim := ConstantCompletion.pull_finiteLimits_of_isIso f.algebra
+    (ConstantCompletion.constantMap f.algebra A)
+  have := adj.leftAdjoint_preservesColimits
+  exact ⟨hlim, inferInstance, adj.isLeftAdjoint⟩
 
 /-- Finite limits for the exact module inverse image.
 Source: Stacks 099N (blueprint: lem-sp-completion-mate-comparison). -/
@@ -240,7 +247,9 @@ functorial K-injective resolutions. -/
 @[instance]
 theorem Site.hasKInjectives (T : Site.{u}) (A : Type u) [CommRing A] :
     Abelian.HasKInjectiveResolutions (T.modules A) := by
-  sorry
+  let : IsGrothendieckAbelian.{u} (T.modules A) :=
+    SheafOfModules.isGrothendieckAbelian (siteModuleRings (T.ring A))
+  infer_instance
 
 /-- K-injective resolutions in strict towers, by their small diagram-site realization.
 Source: Stacks 079P, 0941 (blueprint: lem-sp-completion-mate-comparison).
@@ -249,7 +258,13 @@ apply the K-injective resolution theorem to this abelian category. -/
 @[instance]
 theorem Site.towersHasKInjectives (T : Site.{u}) (A : Type u) [CommRing A] :
     Abelian.HasKInjectiveResolutions (T.towers A) := by
-  sorry
+  let : IsGrothendieckAbelian.{u} (T.towers A) :=
+    by
+      have := smallModuleDiagrams_isGrothendieckAbelian T.topology
+        (siteModuleRings (T.ring A)) (ULiftHom.{u} (ULift.{u} ℕᵒᵖ))
+      exact IsGrothendieckAbelian.of_equivalence
+        (ULiftHomULiftCategory.equiv.{u, u} ℕᵒᵖ).congrLeft.symm
+  infer_instance
 
 /-- Exact inverse image on unbounded derived categories.
 Source: Stacks 099N (blueprint: lem-sp-completion-mate-comparison). -/
@@ -280,7 +295,11 @@ theorem Site.completion_properties (T : Site.{u}) (A : Type u) [CommRing A]
         Function.Bijective (fun a : (T.completion A I).obj M ⟶ L ↦
           (T.unit A I).app M ≫ a)) ∧
       (∀ M : T.derived A, IsIso ((T.unit A I).app M) ↔ T.IsComplete A I M) := by
-  sorry
+  obtain ⟨r, a, ha⟩ := Submodule.fg_iff_exists_fin_generating_family.mp
+    (IsNoetherian.noetherian I)
+  obtain ⟨_, _, h₁, h₂, h₃⟩ :=
+    ConstantCompletion.koszul_quotient_reflector T.topology A I false r a ha
+  exact ⟨h₁, h₂, h₃⟩
 
 /-- Completion as a functor to the actual full complete subcategory.
 Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
@@ -298,6 +317,8 @@ def Site.reflectorAdjunction_normalized (T : Site.{u}) (A : Type u)
   ∀ (M : T.derived A) (L : T.Complete A I) (a : (T.reflector A I).obj M ⟶ L),
     adj.homEquiv M L a = (T.unit A I).app M ≫ a.hom
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The completion adjunction is uniquely fixed by precomposition with its quotient unit.
 Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison).
 Proof: the preceding bijection is natural in both arguments by naturality of the
@@ -307,7 +328,17 @@ theorem Site.reflectorAdjunction_existsUnique (T : Site.{u}) (A : Type u)
     [CommRing A] [IsNoetherianRing A] (I : Ideal A) :
     ∃! adj : T.reflector A I ⊣ ObjectProperty.ι (T.IsComplete A I),
       Site.reflectorAdjunction_normalized T A I adj := by
-  sorry
+  obtain ⟨adj, hadj⟩ := ConstantCompletion.reflector_of_bijective
+    (T.IsComplete A I) (T.completion A I) (T.unit A I)
+    (T.completion_properties A I).1 (T.completion_properties A I).2.1
+  have hn : T.reflectorAdjunction_normalized A I adj := hadj
+  refine ⟨adj, hn, ?_⟩
+  intro adj' hadj'
+  apply Adjunction.ext
+  apply NatTrans.ext
+  funext M
+  rw [← Adjunction.homEquiv_id, ← Adjunction.homEquiv_id,
+    hadj' M _ (𝟙 _), hn M _ (𝟙 _)]
 
 /-- The unit-normalized completion adjunction.
 Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
@@ -316,6 +347,8 @@ def Site.reflectorAdjunction (T : Site.{u}) (A : Type u) [CommRing A]
     T.reflector A I ⊣ ObjectProperty.ι (T.IsComplete A I) :=
   (T.reflectorAdjunction_existsUnique A I).exists.choose
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived direct image preserves local derived completeness.
 Source: Stacks 099N(1) (blueprint: lem-sp-completion-mate-comparison).
 Proof: apply ConstantCompletion.completedPullbackAdjunction to the given geometric
@@ -329,7 +362,27 @@ theorem Morphism.push_complete {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (L : U.derived A) (hL : U.IsComplete A I L) :
     V.IsComplete A I ((f.push A).obj L) := by
-  sorry
+  let G := f.modulePush A
+  let η : G.mapHomologicalComplex (.up ℤ) ⋙ ConstantCompletion.Q (V.ring A) ⟶
+      ConstantCompletion.Q (U.ring A) ⋙ f.push A :=
+    { app := fun P ↦ G.rightDerivedFunctorUnit.app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
+      naturality := fun P Q a ↦ G.rightDerivedFunctorUnit.naturality
+        ((HomotopyCategory.quotient _ (.up ℤ)).map a) }
+  have hi (P : CochainComplex (U.modules A) ℤ) (hP : P.IsKInjective) :
+      IsIso (η.app P) := by
+    have := hP
+    change IsIso (G.rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
+    infer_instance
+  have hu : (f.push A).IsRightDerivedFunctor η
+      (HomologicalComplex.quasiIso (U.modules A) (.up ℤ)) := by
+    apply (derives G).isRightDerivedFunctor_of_isIso η
+    intro P
+    exact hi P.obj P.property
+  exact ConstantCompletion.constantDirectImage_preservesComplete V.topology U.topology
+    A I f.direct f.adjunction f.algebra (AdditiveFunctor.of G) (f.moduleAdjunction A)
+    (f.push A) η hu hi L hL
 
 /-- Direct image restricted to the full complete subcategories.
 Source: Stacks 099N(1) (blueprint: lem-sp-completion-mate-comparison). -/
@@ -358,6 +411,8 @@ def Morphism.completeAdjunction_normalized {V U : Site.{u}} (f : Morphism V U)
     (adj.homEquiv M L a).hom = (f.adj A).homEquiv M.obj L.obj
       ((U.unit A I).app ((f.pull A).obj M.obj) ≫ a.hom)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Completed adjunction, with exactly the composite ordinary and completion hom bijections.
 Source: Stacks 099N(2) (blueprint: lem-sp-completion-mate-comparison).
 Proof: transpose a map from C_U f^*M to L first under the completion adjunction,
@@ -368,7 +423,20 @@ theorem Morphism.completeAdjunction_existsUnique {V U : Site.{u}} (f : Morphism 
     (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) :
     ∃! adj : f.completePull A I ⊣ f.completePush A I,
       Morphism.completeAdjunction_normalized f A I adj := by
-  sorry
+  obtain ⟨adj, hadj⟩ := ConstantCompletion.complete_adjunction
+    (V.IsComplete A I) (U.IsComplete A I) (f.pull A) (f.push A) (f.adj A)
+    (U.completion A I) (U.unit A I) (U.completion_properties A I).1
+    (f.push_complete A I) (U.reflectorAdjunction A I)
+    (U.reflectorAdjunction_existsUnique A I).exists.choose_spec
+  have hn : f.completeAdjunction_normalized A I adj := fun M L a ↦ hadj M L a.hom
+  refine ⟨adj, hn, ?_⟩
+  intro adj' hadj'
+  apply Adjunction.ext
+  apply NatTrans.ext
+  funext M
+  apply ObjectProperty.hom_ext
+  rw [← Adjunction.homEquiv_id, ← Adjunction.homEquiv_id]
+  exact (hadj' M _ (𝟙 _)).trans (hn M _ (𝟙 _)).symm
 
 /-- The completed adjunction with the prescribed hom-set normalization.
 Source: Stacks 099N(2) (blueprint: lem-sp-completion-mate-comparison). -/
@@ -401,7 +469,9 @@ theorem Morphism.towerModulePull_exact {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] :
     PreservesFiniteLimits (f.towerModulePull A) ∧
       PreservesFiniteColimits (f.towerModulePull A) := by
-  sorry
+  constructor
+  · exact ⟨fun _ _ _ ↦ inferInstance⟩
+  · exact ⟨fun _ _ _ ↦ inferInstance⟩
 
 /-- Finite limits of the termwise inverse image.
 Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
@@ -494,7 +564,13 @@ def towerModuleSquare {f : Morphism Y X} {g : Morphism Y Y'}
     (sq : Square f g h k) (A : Type u) [CommRing A] :
     g.towerModulePull A ⋙ k.towerModulePull A ≅
       f.towerModulePull A ⋙ h.towerModulePull A :=
-  (Functor.whiskeringRight ℕᵒᵖ _ _).mapIso (moduleSquare sq A)
+  NatIso.ofComponents
+    (fun M ↦ NatIso.ofComponents (fun n ↦ (moduleSquare sq A).app (M.obj n))
+      (fun i ↦ (moduleSquare sq A).hom.naturality (M.map i)))
+    (fun a ↦ by
+      apply NatTrans.ext
+      funext n
+      exact (moduleSquare sq A).hom.naturality (a.app n))
 
 /-- The canonical square on derived strict towers.
 Source: Stacks 0941, 0E48 (blueprint: lem-sp-completion-mate-comparison). -/
@@ -590,6 +666,49 @@ def Site.deltaAdjunction_normalized (T : Site.{u}) (A : Type u) [CommRing A]
         (((ConstantCompletion.constantTower T.topology (T.ring A)).mapHomologicalComplex
           (.up ℤ)).obj P)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem exact_left_derived_adjunction
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions D]
+    (L : C ⥤ D) (R : D ⥤ C) [L.Additive] [R.Additive]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    (a : L ⊣ R) (RF : DerivedCategory D ⥤ DerivedCategory C)
+    (β : R.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF)
+    [RF.IsRightDerivedFunctor β (HomologicalComplex.quasiIso D (.up ℤ))]
+    (hβ : ∀ (X : CochainComplex D ℤ), X.IsKInjective → IsIso (β.app X)) :
+    ∃! ad : L.mapDerivedCategory ⊣ RF, ∀ X : CochainComplex C ℤ,
+      ad.unit.app (DerivedCategory.Q.obj X) ≫
+          RF.map (L.mapDerivedCategoryFactors.hom.app X) =
+        DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app X) ≫
+          β.app ((L.mapHomologicalComplex (.up ℤ)).obj X) := by
+  let W := HomologicalComplex.quasiIso C (.up ℤ)
+  let W' := HomologicalComplex.quasiIso D (.up ℤ)
+  let α := L.mapDerivedCategoryFactors.hom
+  have : L.mapDerivedCategory.IsLeftDerivedFunctor α W :=
+    Functor.isLeftDerivedFunctor_of_inverts W _ L.mapDerivedCategoryFactors
+  have : (L.mapDerivedCategory ⋙ RF).IsLeftDerivedFunctor
+      ((Functor.associator _ _ _).inv ≫ Functor.whiskerRight α RF) W :=
+    Functor.isLeftDerivedFunctor_of_inverts W _
+      ((Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight L.mapDerivedCategoryFactors RF)
+  have : (RF ⋙ L.mapDerivedCategory).IsRightDerivedFunctor
+      (Functor.whiskerRight β L.mapDerivedCategory ≫ (Functor.associator _ _ _).hom) W' :=
+    (CochainComplex.KInjectives.localizerMorphism D
+      ).isRightDerivedFunctor_comp_of_isRightDerivabilityStructure β
+      (fun X ↦ hβ X.obj X.property) L.mapDerivedCategory
+  let ad := (a.mapHomologicalComplex (.up ℤ)).derived W W' α β
+  have hn := (a.mapHomologicalComplex (.up ℤ)).derivedη_fac_app W α β
+  refine ⟨ad, hn, ?_⟩
+  intro ad' hn'
+  apply Adjunction.ext
+  apply Localization.natTrans_ext DerivedCategory.Q W
+  intro X
+  apply (cancel_mono (RF.map (L.mapDerivedCategoryFactors.hom.app X))).1
+  exact (hn' X).trans (hn X).symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The constant/derived-limit adjunction has the unit computed by the actual
 ordinary limit unit and the specified right-derived comparison on every complex.
 Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison).
@@ -600,7 +719,22 @@ derived-adjunction fraction formula and fixes its hom equivalence uniquely. -/
 theorem Site.deltaAdjunction_existsUnique (T : Site.{u}) (A : Type u) [CommRing A] :
     ∃! adj : T.delta A ⊣ T.rlim A,
       Site.deltaAdjunction_normalized T A adj := by
-  sorry
+  let : Abelian (T.modules A) :=
+    { (inferInstance : Abelian (T.modules A)) with
+      toPreadditive := (inferInstance : Preadditive (T.modules A)) }
+  let : Abelian (T.towers A) :=
+    { (inferInstance : Abelian (T.towers A)) with
+      toPreadditive := (inferInstance : Preadditive (T.towers A)) }
+  have := T.towersHasKInjectives A
+  let L := ConstantCompletion.constantTower T.topology (T.ring A)
+  let R := (lim : T.towers A ⥤ T.modules A)
+  have : R.Additive := Functor.additive_of_preserves_binary_products R
+  have : (T.rlim A).IsRightDerivedFunctor (ConstantCompletion.limitComparison (T.ring A))
+      (HomologicalComplex.quasiIso (T.towers A) (.up ℤ)) :=
+    (ConstantCompletion.strictLimit (T.ring A)).universal
+  exact exact_left_derived_adjunction L R constLimAdj (T.rlim A)
+    (ConstantCompletion.limitComparison (T.ring A))
+    (ConstantCompletion.strictLimit (T.ring A)).computation
 
 /-- The fixed constant-tower/derived-limit adjunction.
 Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
@@ -702,6 +836,146 @@ def Morphism.moduleReductionPullComplexIso {V U : Site.{u}} (f : Morphism V U)
     (f.modulePull A) (ConstantCompletion.reductionTower U.topology A I false)
     (f.moduleReductionPullIso A I)
 
+attribute [local irreducible] Morphism.moduleReductionPullComplexIso
+  ConstantCompletion.reductionTower
+
+/-- A representative square with abstract endpoints. Keeping the equation abstract
+prevents normalization from unfolding the concrete tensor and strict-tower functors.
+Source: Stacks 099M, 06YY
+(blueprint: def-pur-adic-site-strict-quotient-interface). -/
+def comparisonSquareFormula
+    {C H₁ H₂ H₃ D₀ D₁ D₂ D₃ : Type*}
+    [Category C] [Category H₁] [Category H₂] [Category H₃]
+    [Category D₀] [Category D₁] [Category D₂] [Category D₃]
+    {q₀ : C ⥤ D₀} {q₁ : H₁ ⥤ D₁} {q₂ : H₂ ⥤ D₂} {q₃ : H₃ ⥤ D₃}
+    {r : C ⥤ H₁} {b : C ⥤ H₂} {p : H₁ ⥤ H₃} {s : H₂ ⥤ H₃}
+    {dr : D₀ ⥤ D₁} {db : D₀ ⥤ D₂} {dp : D₁ ⥤ D₃} {ds : D₂ ⥤ D₃}
+    (α : q₀ ⋙ dr ⟶ r ⋙ q₁) (β : q₁ ⋙ dp ⟶ p ⋙ q₃)
+    (γ : r ⋙ p ≅ b ⋙ s) (δ : q₀ ⋙ db ⟶ b ⋙ q₂)
+    (ε : q₂ ⋙ ds ⟶ s ⋙ q₃) (e : dr ⋙ dp ≅ db ⋙ ds) (X : C) : Prop :=
+  e.hom.app (q₀.obj X) ≫ ds.map (δ.app X) ≫ ε.app (b.obj X) =
+    dp.map (α.app X) ≫ β.app (r.obj X) ≫ q₃.map (γ.hom.app X)
+
+private theorem resolving_comparisonSquare
+    {M H₁ H₂ H₃ D₁ D₂ D₃ : Type*}
+    [Category M] [Abelian M] [HasDerivedCategory M]
+    [Category H₁] [Category H₂] [Category H₃]
+    [Category D₁] [Category D₂] [Category D₃]
+    (q₁ : H₁ ⥤ D₁) (q₂ : H₂ ⥤ D₂) (q₃ : H₃ ⥤ D₃)
+    (r : CochainComplex M ℤ ⥤ H₁) (b : CochainComplex M ℤ ⥤ H₂)
+    (p : H₁ ⥤ H₃) (s : H₂ ⥤ H₃)
+    (dr : DerivedCategory M ⥤ D₁) (db : DerivedCategory M ⥤ D₂)
+    (dp : D₁ ⥤ D₃) (ds : D₂ ⥤ D₃)
+    (α : DerivedCategory.Q ⋙ dr ⟶ r ⋙ q₁)
+    (β : q₁ ⋙ dp ⟶ p ⋙ q₃) (γ : r ⋙ p ≅ b ⋙ s)
+    (δ : DerivedCategory.Q ⋙ db ⟶ b ⋙ q₂) (ε : q₂ ⋙ ds ⟶ s ⋙ q₃)
+    (P : CochainComplex M ℤ → Prop)
+    (hres : ∀ X : CochainComplex M ℤ,
+      ∃ (K : CochainComplex M ℤ) (f : K ⟶ X), P K ∧ QuasiIso f)
+    (hα : ∀ X, P X → IsIso (α.app X))
+    (hβ : ∀ X, P X → IsIso (β.app (r.obj X)))
+    (hδ : ∀ X, P X → IsIso (δ.app X))
+    (hε : ∀ X, P X → IsIso (ε.app (b.obj X))) :
+    ∃! e : dr ⋙ dp ≅ db ⋙ ds, ∀ X, P X → comparisonSquareFormula α β γ δ ε e X := by
+  obtain ⟨e, he, hu⟩ := ConstantCompletion.resolving_square_iso
+    q₁ q₂ q₃ r b p s dr db dp ds α β γ δ ε P hres hα hβ hδ hε
+  exact ⟨e, fun X hX ↦ (he X hX).symm,
+    fun e' he' ↦ hu e' (fun X hX ↦ (he' X hX).symm)⟩
+
+/-- The forward form of the abstract representative square, retaining the finite
+pullback equation's original direction.
+Source: Stacks 07A4, 099N
+(blueprint: def-pur-adic-site-strict-quotient-interface). -/
+def pullSquareFormula
+    {C H₁ H₂ H₃ D₀ D₁ D₂ D₃ : Type*}
+    [Category C] [Category H₁] [Category H₂] [Category H₃]
+    [Category D₀] [Category D₁] [Category D₂] [Category D₃]
+    {q₀ : C ⥤ D₀} {q₁ : H₁ ⥤ D₁} {q₂ : H₂ ⥤ D₂} {q₃ : H₃ ⥤ D₃}
+    {r : C ⥤ H₁} {b : C ⥤ H₂} {p : H₁ ⥤ H₃} {s : H₂ ⥤ H₃}
+    {dr : D₀ ⥤ D₁} {db : D₀ ⥤ D₂} {dp : D₁ ⥤ D₃} {ds : D₂ ⥤ D₃}
+    (α : q₀ ⋙ dr ⟶ r ⋙ q₁) (β : q₁ ⋙ dp ⟶ p ⋙ q₃)
+    (γ : r ⋙ p ≅ b ⋙ s) (δ : q₀ ⋙ db ⟶ b ⋙ q₂)
+    (ε : q₂ ⋙ ds ⟶ s ⋙ q₃) (e : dr ⋙ dp ≅ db ⋙ ds) (X : C) : Prop :=
+  dp.map (α.app X) ≫ β.app (r.obj X) ≫ q₃.map (γ.hom.app X) =
+    e.hom.app (q₀.obj X) ≫ ds.map (δ.app X) ≫ ε.app (b.obj X)
+
+
+private theorem resolving_pullSquare
+    {M H₁ H₂ H₃ D₁ D₂ D₃ : Type*}
+    [Category M] [Abelian M] [HasDerivedCategory M]
+    [Category H₁] [Category H₂] [Category H₃]
+    [Category D₁] [Category D₂] [Category D₃]
+    (q₁ : H₁ ⥤ D₁) (q₂ : H₂ ⥤ D₂) (q₃ : H₃ ⥤ D₃)
+    (r : CochainComplex M ℤ ⥤ H₁) (b : CochainComplex M ℤ ⥤ H₂)
+    (p : H₁ ⥤ H₃) (s : H₂ ⥤ H₃)
+    (dr : DerivedCategory M ⥤ D₁) (db : DerivedCategory M ⥤ D₂)
+    (dp : D₁ ⥤ D₃) (ds : D₂ ⥤ D₃)
+    (α : DerivedCategory.Q ⋙ dr ⟶ r ⋙ q₁)
+    (β : q₁ ⋙ dp ⟶ p ⋙ q₃) (γ : r ⋙ p ≅ b ⋙ s)
+    (δ : DerivedCategory.Q ⋙ db ⟶ b ⋙ q₂) (ε : q₂ ⋙ ds ⟶ s ⋙ q₃)
+    (P : CochainComplex M ℤ → Prop)
+    (hres : ∀ X : CochainComplex M ℤ,
+      ∃ (K : CochainComplex M ℤ) (f : K ⟶ X), P K ∧ QuasiIso f)
+    (hα : ∀ X, P X → IsIso (α.app X))
+    (hβ : ∀ X, P X → IsIso (β.app (r.obj X)))
+    (hδ : ∀ X, P X → IsIso (δ.app X))
+    (hε : ∀ X, P X → IsIso (ε.app (b.obj X))) :
+    ∃! e : dr ⋙ dp ≅ db ⋙ ds, ∀ X, P X → pullSquareFormula α β γ δ ε e X := by
+  obtain ⟨e, he, hu⟩ := ConstantCompletion.resolving_square_iso
+    q₁ q₂ q₃ r b p s dr db dp ds α β γ δ ε P hres hα hβ hδ hε
+  exact ⟨e, fun X hX ↦ he X hX,
+    fun e' he' ↦ hu e' (fun X hX ↦ he' X hX)⟩
+
+/-- An evaluated representative square, followed by an exact restriction factor.
+The abstract expression retains the original evaluation normalization verbatim.
+Source: Stacks 0941, 099M
+(blueprint: def-pur-adic-site-strict-quotient-interface). -/
+def evaluationSquareFormula
+    {C H₁ H₂ H₃ D₀ D₁ D₂ D₃ : Type*}
+    [Category C] [Category H₁] [Category H₂] [Category H₃]
+    [Category D₀] [Category D₁] [Category D₂] [Category D₃]
+    {q₀ : C ⥤ D₀} {q₁ : H₁ ⥤ D₁} {q₂ : H₂ ⥤ D₂} {q₃ : H₃ ⥤ D₃}
+    {r : C ⥤ H₁} {b : C ⥤ H₂} {p : H₁ ⥤ H₃} {s : H₂ ⥤ H₃}
+    {dr : D₀ ⥤ D₁} {db : D₀ ⥤ D₂} {dp : D₁ ⥤ D₃} {ds : D₂ ⥤ D₃}
+    (α : q₀ ⋙ dr ⟶ r ⋙ q₁) (β : q₁ ⋙ dp ⟶ p ⋙ q₃)
+    (γ : r ⋙ p ≅ b ⋙ s) (δ : q₀ ⋙ db ⟶ b ⋙ q₂)
+    (ε : s ⋙ q₃ ≅ q₂ ⋙ ds) (e : dr ⋙ dp ≅ db ⋙ ds) (X : C) : Prop :=
+  e.hom.app (q₀.obj X) ≫ ds.map (δ.app X) =
+    dp.map (α.app X) ≫ (β.app (r.obj X) ≫ q₃.map (γ.hom.app X)) ≫
+      ε.hom.app (b.obj X)
+
+private theorem resolving_evaluationSquare
+    {M H₁ H₂ H₃ D₁ D₂ D₃ : Type*}
+    [Category M] [Abelian M] [HasDerivedCategory M]
+    [Category H₁] [Category H₂] [Category H₃]
+    [Category D₁] [Category D₂] [Category D₃]
+    (q₁ : H₁ ⥤ D₁) (q₂ : H₂ ⥤ D₂) (q₃ : H₃ ⥤ D₃)
+    (r : CochainComplex M ℤ ⥤ H₁) (b : CochainComplex M ℤ ⥤ H₂)
+    (p : H₁ ⥤ H₃) (s : H₂ ⥤ H₃)
+    (dr : DerivedCategory M ⥤ D₁) (db : DerivedCategory M ⥤ D₂)
+    (dp : D₁ ⥤ D₃) (ds : D₂ ⥤ D₃)
+    (α : DerivedCategory.Q ⋙ dr ⟶ r ⋙ q₁)
+    (β : q₁ ⋙ dp ⟶ p ⋙ q₃) (γ : r ⋙ p ≅ b ⋙ s)
+    (δ : DerivedCategory.Q ⋙ db ⟶ b ⋙ q₂) (ε : s ⋙ q₃ ≅ q₂ ⋙ ds)
+    (P : CochainComplex M ℤ → Prop)
+    (hres : ∀ X : CochainComplex M ℤ,
+      ∃ (K : CochainComplex M ℤ) (f : K ⟶ X), P K ∧ QuasiIso f)
+    (hα : ∀ X, P X → IsIso (α.app X))
+    (hβ : ∀ X, P X → IsIso (β.app (r.obj X)))
+    (hδ : ∀ X, P X → IsIso (δ.app X)) :
+    ∃! e : dr ⋙ dp ≅ db ⋙ ds, ∀ X, P X → evaluationSquareFormula α β γ δ ε e X := by
+  obtain ⟨e, he, hu⟩ := resolving_comparisonSquare
+    q₁ q₂ q₃ r b p s dr db dp ds α β γ δ ε.inv P hres hα hβ hδ
+    (fun X _ ↦ by infer_instance)
+  have hf (e' : dr ⋙ dp ≅ db ⋙ ds) (X : CochainComplex M ℤ) :
+      comparisonSquareFormula α β γ δ ε.inv e' X ↔
+        evaluationSquareFormula α β γ δ ε e' X := by
+    dsimp only [comparisonSquareFormula, evaluationSquareFormula]
+    simp only [← Category.assoc]
+    exact Iso.comp_inv_eq (ε.app (b.obj X))
+  exact ⟨e, fun X hX ↦ (hf e X).1 (he X hX),
+    fun e' he' ↦ hu e' (fun X hX ↦ (hf e' X).2 (he' X hX))⟩
+
 /-- The specified representative or unit normalization for this comparison.
 Source: Stacks 099M, 099N, 0941 and 0E48
 (blueprint: lem-sp-completion-mate-comparison). -/
@@ -710,17 +984,15 @@ def Morphism.reductionPullIso_normalized {V U : Site.{u}} (f : Morphism V U)
     (e : V.reduction A I ⋙ f.towerPull A ≅ f.pull A ⋙ U.reduction A I) : Prop :=
   ∀ P : CochainComplex (V.modules A) ℤ, P.IsAcyclicTensorKFlat →
     (∀ q : ℤ, (P.X q).IsFlat) →
-    e.hom.app ((ConstantCompletion.Q (V.ring A)).obj P) ≫
-      (U.reduction A I).map ((f.modulePull A).mapDerivedCategoryFactors.hom.app P) ≫
-      (ConstantCompletion.quotientPresentation U.topology A I false).comparison.app
-        (((f.modulePull A).mapHomologicalComplex (.up ℤ)).obj P) =
-    (f.towerPull A).map
-        ((ConstantCompletion.quotientPresentation V.topology A I false).comparison.app P) ≫
-      (f.towerModulePull A).mapDerivedCategoryFactors.hom.app
-        (ConstantCompletion.reductionComplex V.topology A I false P) ≫
-      (ConstantCompletion.TQ (U.ring A)).map
-        ((f.moduleReductionPullComplexIso A I).hom.app P)
+    comparisonSquareFormula
+      (ConstantCompletion.quotientPresentation V.topology A I false).comparison
+      (f.towerModulePull A).mapDerivedCategoryFactors.hom
+      (f.moduleReductionPullComplexIso A I)
+      (f.modulePull A).mapDerivedCategoryFactors.hom
+      (ConstantCompletion.quotientPresentation U.topology A I false).comparison e P
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The strict derived comparison is uniquely characterized on a single flat-term
 K-flat representative, with the entire strict ordinary comparison applied termwise.
 Source: Stacks 07A4, 099N(5) (blueprint: lem-sp-completion-mate-comparison).
@@ -733,7 +1005,33 @@ theorem Morphism.reductionPullIso_existsUnique {V U : Site.{u}} (f : Morphism V 
     (A : Type u) [CommRing A] (I : Ideal A) :
     ∃! e : V.reduction A I ⋙ f.towerPull A ≅ f.pull A ⋙ U.reduction A I,
       Morphism.reductionPullIso_normalized f A I e := by
-  sorry
+  let P (K : CochainComplex (V.modules A) ℤ) :=
+    K.IsAcyclicTensorKFlat ∧ ∀ q : ℤ, (K.X q).IsFlat
+  obtain ⟨e, he, hu⟩ := resolving_comparisonSquare (M := V.modules A)
+    (ConstantCompletion.TQ (V.ring A)) (ConstantCompletion.Q (U.ring A))
+    (ConstantCompletion.TQ (U.ring A))
+    ((ConstantCompletion.reductionTower V.topology A I false).mapHomologicalComplex (.up ℤ))
+    ((f.modulePull A).mapHomologicalComplex (.up ℤ))
+    ((f.towerModulePull A).mapHomologicalComplex (.up ℤ))
+    ((ConstantCompletion.reductionTower U.topology A I false).mapHomologicalComplex (.up ℤ))
+    (V.reduction A I) (f.pull A) (f.towerPull A) (U.reduction A I)
+    (ConstantCompletion.quotientPresentation V.topology A I false).comparison
+    (f.towerModulePull A).mapDerivedCategoryFactors.hom
+    (f.moduleReductionPullComplexIso A I)
+    (f.modulePull A).mapDerivedCategoryFactors.hom
+    (ConstantCompletion.quotientPresentation U.topology A I false).comparison
+    P (ConstantCompletion.module_flat_kFlat_resolution (J := V.topology))
+    (fun K hK ↦ (ConstantCompletion.quotientPresentation V.topology A I false
+      ).laws.2.1 K hK.1 hK.2)
+    (fun K _ ↦ by infer_instance)
+    (fun K _ ↦ by infer_instance)
+    (fun K hK ↦ by
+      have h := ConstantCompletion.pull_flat_kFlat f.algebra f.direct f.adjunction
+        (ConstantCompletion.constantMap f.algebra A) K hK.1 hK.2
+      exact (ConstantCompletion.quotientPresentation U.topology A I false
+        ).laws.2.1 _ h.1 h.2)
+  exact ⟨e, fun K hk hf ↦ he K ⟨hk, hf⟩,
+    fun e' he' ↦ hu e' (fun K hK ↦ he' K hK.1 hK.2)⟩
 
 /-- The uniquely normalized derived reduction/pullback comparison.
 Source: Stacks 07A4, 099N(5) (blueprint: lem-sp-completion-mate-comparison). -/
@@ -831,6 +1129,69 @@ def Morphism.evaluatePushIso_normalized {V U : Site.{u}} (f : Morphism V U)
         (((f.towerModulePush A).mapHomologicalComplex (.up ℤ)).obj P) ≫
       f.pushUnit A (((U.evaluateModule A n).mapHomologicalComplex (.up ℤ)).obj P)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private def rightCochainUnit
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions C]
+    (F : C ⥤ D) [F.Additive] :
+    F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
+      DerivedCategory.Q ⋙ F.rightDerivedFunctor where
+  app X := F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj X)
+  naturality _X _Y f := F.rightDerivedFunctorUnit.naturality
+    ((HomotopyCategory.quotient _ (.up ℤ)).map f)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem rightCochainUnit_isIso
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions C]
+    (F : C ⥤ D) [F.Additive] (X : CochainComplex C ℤ) (hX : X.IsKInjective) :
+    IsIso ((rightCochainUnit F).app X) := by
+  have := hX
+  change IsIso (F.rightDerivedFunctorUnit.app
+    ((HomotopyCategory.quotient _ (.up ℤ)).obj X))
+  infer_instance
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem right_normalized_unique
+    {C D H : Type*} [Category C] [Category D] [Category H]
+    (q : C ⥤ D) (W : MorphismProperty C) [q.IsLocalization W]
+    (F G : D ⥤ H) (T : C ⥤ H) (α : T ⟶ q ⋙ F) (β : T ⟶ q ⋙ G)
+    [F.IsRightDerivedFunctor α W] [G.IsRightDerivedFunctor β W] :
+    ∃! e : F ≅ G, ∀ X, α.app X ≫ e.hom.app (q.obj X) = β.app X := by
+  let e := Functor.rightDerivedUnique F G α β W
+  have he (X : C) : α.app X ≫ e.hom.app (q.obj X) = β.app X := by
+    simpa only [e, Functor.rightDerivedUnique, Functor.rightDerivedNatIso_hom,
+      Iso.refl_hom, NatTrans.id_app, Category.id_comp] using
+      Functor.rightDerivedNatTrans_app F G α β W (𝟙 T) X
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply Functor.rightDerived_ext F α W
+  apply NatTrans.ext
+  funext X
+  exact (he' X).trans (he X).symm
+
+
+private theorem normalized_square_iff
+    {C : Type*} [Category C] {X X' Y Y' Z : C}
+    (a : X' ≅ X) (b : Y' ≅ Y) (u : X' ⟶ Z) (v : X ⟶ Y) (w : Z ⟶ Y') :
+    ((a.inv ≫ u) ≫ w = v ≫ b.inv) ↔ (u ≫ w ≫ b.hom = a.hom ≫ v) := by
+  constructor
+  · intro h
+    apply (cancel_epi a.inv).1
+    simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id,
+      Iso.inv_hom_id_assoc] using congrArg (fun t ↦ t ≫ b.hom) h
+  · intro h
+    apply (cancel_mono b.hom).1
+    simp only [Category.assoc, h, Iso.inv_hom_id_assoc,
+      Iso.inv_hom_id, Category.comp_id]
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Evaluation/direct-image comparison with its universal-unit normalization on all
 strict tower complexes, and therefore its prescribed K-injective computation.
 Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison).
@@ -842,7 +1203,64 @@ theorem Morphism.evaluatePushIso_existsUnique {V U : Site.{u}} (f : Morphism V U
     (A : Type u) [CommRing A] (n : ℕ) :
     ∃! e : f.towerPush A ⋙ V.evaluate A n ≅ U.evaluate A n ⋙ f.push A,
       Morphism.evaluatePushIso_normalized f A n e := by
-  sorry
+  let : Abelian (U.modules A) :=
+    { (inferInstance : Abelian (U.modules A)) with
+      toPreadditive := (inferInstance : Preadditive (U.modules A)) }
+  let : Abelian (V.modules A) :=
+    { (inferInstance : Abelian (V.modules A)) with
+      toPreadditive := (inferInstance : Preadditive (V.modules A)) }
+  let : Abelian (U.towers A) :=
+    { (inferInstance : Abelian (U.towers A)) with
+      toPreadditive := (inferInstance : Preadditive (U.towers A)) }
+  let : Abelian (V.towers A) :=
+    { (inferInstance : Abelian (V.towers A)) with
+      toPreadditive := (inferInstance : Preadditive (V.towers A)) }
+  let := HasDerivedCategory.standard (U.modules A)
+  let := HasDerivedCategory.standard (V.modules A)
+  let := HasDerivedCategory.standard (U.towers A)
+  let := HasDerivedCategory.standard (V.towers A)
+  have := U.hasKInjectives A
+  have := U.towersHasKInjectives A
+  let E := U.evaluateModule A n
+  let E' := V.evaluateModule A n
+  let G := f.modulePush A
+  let Gt := f.towerModulePush A
+  obtain ⟨α, hα, hαapp⟩ := towerComparison_existsComposite Gt E'
+    (f.towerPush A) (V.evaluate A n) (rightCochainUnit Gt)
+    E'.mapDerivedCategoryFactors.inv (rightCochainUnit_isIso Gt)
+    (fun _ _ ↦ inferInstance)
+  obtain ⟨β, hβ, hβapp⟩ := towerComparison_existsComposite E G
+    (U.evaluate A n) (f.push A) E.mapDerivedCategoryFactors.inv
+    (rightCochainUnit G) (fun _ _ ↦ inferInstance)
+    (fun X hX ↦ by
+      have := hX
+      exact rightCochainUnit_isIso G _ (tower_evaluation_isKInjective (U.modules A) X (op n)))
+  have := hα
+  have := hβ
+  obtain ⟨e, he, hu⟩ := right_normalized_unique
+    (ConstantCompletion.TQ (U.ring A))
+    (HomologicalComplex.quasiIso (U.towers A) (.up ℤ))
+    (f.towerPush A ⋙ V.evaluate A n) (U.evaluate A n ⋙ f.push A)
+    _ α β
+  have norm (e' : f.towerPush A ⋙ V.evaluate A n ≅ U.evaluate A n ⋙ f.push A) :
+      (∀ X, α.app X ≫ e'.hom.app ((ConstantCompletion.TQ (U.ring A)).obj X) = β.app X) ↔
+        f.evaluatePushIso_normalized A n e' := by
+    have hn (X : CochainComplex (U.towers A) ℤ) :=
+      normalized_square_iff
+        (E'.mapDerivedCategoryFactors.app ((Gt.mapHomologicalComplex (.up ℤ)).obj X))
+        ((f.push A).mapIso (E.mapDerivedCategoryFactors.app X))
+        ((V.evaluate A n).map (f.towerPushUnit A X))
+        (f.pushUnit A ((E.mapHomologicalComplex (.up ℤ)).obj X))
+    constructor
+    · intro h X
+      exact (hn X (e'.hom.app _)).1 (by
+        have hx := h X
+        rw [hαapp, hβapp] at hx
+        exact hx)
+    · intro h X
+      rw [hαapp, hβapp]
+      exact (hn X (e'.hom.app _)).2 (h X)
+  exact ⟨e, (norm e).1 he, fun e' he' ↦ hu e' ((norm e').2 he')⟩
 
 /-- The specified derived evaluation/direct-image isomorphism.
 Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
@@ -882,6 +1300,8 @@ def Site.finiteModuleAdjunction_normalized (T : Site.{u}) (A : Type u)
       ConstantCompletion.insertion (ConstantCompletion.quotient T.topology A I n) M ≫
         (ConstantCompletion.underlying (T.ring (quotientRing A I n))).map a
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The normalized ordinary scalar-extension adjunction, fixed by insertion of 1.
 Source: Stacks 03CU (blueprint: lem-sp-completion-mate-comparison).
 Proof: the tensor/sheafification universal property sends a linear map out of a
@@ -893,7 +1313,27 @@ theorem Site.finiteModuleAdjunction_existsUnique (T : Site.{u}) (A : Type u)
     ∃! adj : ConstantCompletion.change (ConstantCompletion.quotient T.topology A I n) ⊣
         ConstantCompletion.res (ConstantCompletion.quotient T.topology A I n),
       Site.finiteModuleAdjunction_normalized T A I n adj := by
-  sorry
+  let c := ConstantCompletion.quotient T.topology A I n
+  let adj : ConstantCompletion.change c ⊣ ConstantCompletion.res c :=
+    SheafOfModules.tensorAdjunction c
+  have hunit (M : T.modules A) : ConstantCompletion.insertion c M =
+      SheafOfModules.tensorUnit c M := by
+    ext U m
+    exact ((ConstantCompletion.insertion_existsUnique c M).exists.choose_spec U m).trans
+      (SheafOfModules.tensorUnit_apply c M U m).symm
+  have hn : T.finiteModuleAdjunction_normalized A I n adj := by
+    intro M N a
+    change (ConstantCompletion.underlying (T.ring A)).map
+      ((SheafOfModules.tensorAdjunction c).homEquiv M N a) = _
+    rw [SheafOfModules.tensorAdjunction_underlying, hunit]
+  refine ⟨adj, hn, ?_⟩
+  intro adj' hn'
+  apply Adjunction.ext
+  apply NatTrans.ext
+  funext M
+  apply (ConstantCompletion.underlying (T.ring A)).map_injective
+  rw [← Adjunction.homEquiv_id, ← Adjunction.homEquiv_id,
+    hn' M _ (𝟙 _), hn M _ (𝟙 _)]
 
 /-- The tensor-unit normalized module extension/restriction adjunction.
 Source: Stacks 03CU (blueprint: lem-sp-completion-mate-comparison). -/
@@ -918,6 +1358,50 @@ def Site.finiteAdjunction_normalized (T : Site.{u}) (A : Type u)
         (((ConstantCompletion.change (ConstantCompletion.quotient T.topology A I n)
           ).mapHomologicalComplex (.up ℤ)).obj P)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem resolving_left_universal
+    {M H : Type*} [Category M] [Abelian M] [HasDerivedCategory M] [Category H]
+    (G : DerivedCategory M ⥤ H) (T : CochainComplex M ℤ ⥤ H)
+    (P : CochainComplex M ℤ → Prop)
+    (hres : ∀ X : CochainComplex M ℤ,
+      ∃ (K : CochainComplex M ℤ) (f : K ⟶ X), P K ∧ QuasiIso f)
+    (α : DerivedCategory.Q ⋙ G ⟶ T)
+    (hα : ∀ X, P X → IsIso (α.app X)) :
+    G.IsLeftDerivedFunctor α (HomologicalComplex.quasiIso M (.up ℤ)) := by
+  classical
+  have lifts (s : Functor.RightExtension (DerivedCategory.Q (C := M)) T) :
+      ∃! e : s.left ⟶ G, Functor.whiskerLeft DerivedCategory.Q e ≫ α = s.hom := by
+    obtain ⟨e, he, hu⟩ := ConstantCompletion.resolving_comparison s.left G T P hres
+      s.hom α hα
+    refine ⟨e, ?_, ?_⟩
+    · apply NatTrans.ext
+      funext X
+      obtain ⟨K, f, hK, hf⟩ := hres X
+      have : QuasiIso f := hf
+      have : IsIso (s.left.map (DerivedCategory.Q.map f)) := inferInstance
+      apply (cancel_epi (s.left.map (DerivedCategory.Q.map f))).1
+      change s.left.map (DerivedCategory.Q.map f) ≫
+        (e.app (DerivedCategory.Q.obj X) ≫ α.app X) =
+        s.left.map (DerivedCategory.Q.map f) ≫ s.hom.app X
+      have hn : G.map (DerivedCategory.Q.map f) ≫ α.app X = α.app K ≫ T.map f :=
+        α.naturality f
+      rw [← Category.assoc, e.naturality, Category.assoc, hn,
+        ← Category.assoc, he K hK]
+      exact (s.hom.naturality f).symm
+    · intro e' he'
+      apply hu e'
+      intro X hX
+      exact congrArg (fun a ↦ a.app X) he'
+  choose lift fac uniq using lifts
+  refine ⟨⟨⟨IsTerminal.ofUniqueHom
+    (fun s ↦ CostructuredArrow.homMk (lift s) (fac s)) ?_⟩⟩⟩
+  intro s m
+  apply CostructuredArrow.hom_ext
+  exact uniq s m.left (CostructuredArrow.w m)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived extension/restriction adjunction with its unit fixed on K-flat representatives.
 Source: Stacks 06YY (blueprint: lem-sp-completion-mate-comparison).
 Proof: derive the tensor-unit normalized ordinary adjunction. Exact restriction and
@@ -928,7 +1412,57 @@ theorem Site.finiteAdjunction_existsUnique (T : Site.{u}) (A : Type u)
     [CommRing A] (I : Ideal A) (n : ℕ) :
     ∃! adj : T.finiteReduction A I n ⊣ T.finiteRestriction A I n,
       Site.finiteAdjunction_normalized T A I n adj := by
-  sorry
+  let : Abelian (T.modules A) :=
+    { (inferInstance : Abelian (T.modules A)) with
+      toPreadditive := (inferInstance : Preadditive (T.modules A)) }
+  let : Abelian (T.modules (quotientRing A I n)) :=
+    { (inferInstance : Abelian (T.modules (quotientRing A I n))) with
+      toPreadditive := (inferInstance : Preadditive (T.modules (quotientRing A I n))) }
+  let := HasDerivedCategory.standard (T.modules A)
+  let := HasDerivedCategory.standard (T.modules (quotientRing A I n))
+  let c := ConstantCompletion.quotient T.topology A I n
+  let W := HomologicalComplex.quasiIso (T.modules A) (.up ℤ)
+  let W' := HomologicalComplex.quasiIso (T.modules (quotientRing A I n)) (.up ℤ)
+  let L := ConstantCompletion.change c
+  let R := ConstantCompletion.res c
+  let α := ConstantCompletion.extendComparison c
+  let β := (ConstantCompletion.resFactors c).hom
+  let P (X : CochainComplex (T.modules A) ℤ) :=
+    X.IsAcyclicTensorKFlat ∧ ∀ q : ℤ, (X.X q).IsFlat
+  have : (T.finiteReduction A I n).IsLeftDerivedFunctor α W :=
+    (ConstantCompletion.derivedExtension c).universal
+  have : (T.finiteRestriction A I n).IsRightDerivedFunctor β W' :=
+    Functor.isRightDerivedFunctor_of_inverts W' _ (ConstantCompletion.resFactors c).symm
+  have : (T.finiteReduction A I n ⋙ T.finiteRestriction A I n).IsLeftDerivedFunctor
+      ((Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight α (T.finiteRestriction A I n)) W := by
+    apply resolving_left_universal _ _ P
+      (ConstantCompletion.module_flat_kFlat_resolution (J := T.topology))
+    intro X hX
+    have : IsIso (α.app X) := (ConstantCompletion.derivedExtension c).computation X hX.1
+    dsimp only [NatTrans.comp_app, Functor.associator_inv_app,
+      Functor.whiskerRight_app]
+    infer_instance
+  have : (T.finiteRestriction A I n ⋙ T.finiteReduction A I n).IsRightDerivedFunctor
+      (Functor.whiskerRight β (T.finiteReduction A I n) ≫
+        (Functor.associator _ _ _).hom) W' :=
+    Functor.isRightDerivedFunctor_of_inverts W' _
+      ((Functor.isoWhiskerRight (ConstantCompletion.resFactors c)
+        (T.finiteReduction A I n)) ≪≫ Functor.associator _ _ _).symm
+  let adj := (T.finiteModuleAdjunction A I n).mapHomologicalComplex (.up ℤ)
+  let ad := adj.derived W W' α β
+  have hn : T.finiteAdjunction_normalized A I n ad := by
+    intro X _
+    exact adj.derivedη_fac_app W α β X
+  refine ⟨ad, hn, ?_⟩
+  intro ad' hn'
+  apply Adjunction.ext
+  apply ConstantCompletion.resolving_nat_ext P
+    (ConstantCompletion.module_flat_kFlat_resolution (J := T.topology))
+  intro X hX
+  have : IsIso (α.app X) := (ConstantCompletion.derivedExtension c).computation X hX.1
+  apply (cancel_mono ((T.finiteRestriction A I n).map (α.app X))).1
+  exact (hn' X hX.1).trans (hn X hX.1).symm
 
 /-- The specified derived finite scalar-extension adjunction.
 Source: Stacks 06YY (blueprint: lem-sp-completion-mate-comparison). -/
@@ -945,20 +1479,15 @@ def Site.finiteEvaluationIso_normalized (T : Site.{u}) (A : Type u)
         T.finiteReduction A I n ⋙ T.finiteRestriction A I n) : Prop :=
   ∀ P : CochainComplex (T.modules A) ℤ, P.IsAcyclicTensorKFlat →
     (∀ q : ℤ, (P.X q).IsFlat) →
-    e.hom.app ((ConstantCompletion.Q (T.ring A)).obj P) ≫
-      (T.finiteRestriction A I n).map
-        ((ConstantCompletion.extendComparison
-          (ConstantCompletion.quotient T.topology A I n)).app P) =
-    (T.evaluate A n).map
-        ((ConstantCompletion.quotientPresentation T.topology A I false).comparison.app P) ≫
-      ((T.evaluateModule A n).mapDerivedCategoryFactors.hom.app
-          (ConstantCompletion.reductionComplex T.topology A I false P) ≫
-        (ConstantCompletion.Q (T.ring A)).map
-          ((ConstantCompletion.quotientEvaluationComplexIso T.topology A I n).hom.app P)) ≫
-      (ConstantCompletion.resFactors (ConstantCompletion.quotient T.topology A I n)).hom.app
-        (((ConstantCompletion.change (ConstantCompletion.quotient T.topology A I n)
-          ).mapHomologicalComplex (.up ℤ)).obj P)
+    evaluationSquareFormula
+      (ConstantCompletion.quotientPresentation T.topology A I false).comparison
+      (T.evaluateModule A n).mapDerivedCategoryFactors.hom
+      (ConstantCompletion.quotientEvaluationComplexIso T.topology A I n)
+      (ConstantCompletion.extendComparison (ConstantCompletion.quotient T.topology A I n))
+      (ConstantCompletion.resFactors (ConstantCompletion.quotient T.topology A I n)) e P
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The evaluated strict quotient object is the restricted finite scalar extension,
 with its comparison fixed by the two universal reduction counits.
 Source: Stacks 0941, 099M (blueprint: lem-sp-completion-mate-comparison).
@@ -970,7 +1499,30 @@ theorem Site.finiteEvaluationIso_existsUnique (T : Site.{u}) (A : Type u)
     ∃! e : T.reduction A I ⋙ T.evaluate A n ≅
         T.finiteReduction A I n ⋙ T.finiteRestriction A I n,
       Site.finiteEvaluationIso_normalized T A I n e := by
-  sorry
+  let c := ConstantCompletion.quotient T.topology A I n
+  let P (K : CochainComplex (T.modules A) ℤ) :=
+    K.IsAcyclicTensorKFlat ∧ ∀ q : ℤ, (K.X q).IsFlat
+  obtain ⟨e, he, hu⟩ := resolving_evaluationSquare (M := T.modules A)
+    (ConstantCompletion.TQ (T.ring A))
+    (ConstantCompletion.Q (T.ring (quotientRing A I n)))
+    (ConstantCompletion.Q (T.ring A))
+    ((ConstantCompletion.reductionTower T.topology A I false).mapHomologicalComplex (.up ℤ))
+    ((ConstantCompletion.change c).mapHomologicalComplex (.up ℤ))
+    ((T.evaluateModule A n).mapHomologicalComplex (.up ℤ))
+    ((ConstantCompletion.res c).mapHomologicalComplex (.up ℤ))
+    (T.reduction A I) (T.finiteReduction A I n)
+    (T.evaluate A n) (T.finiteRestriction A I n)
+    (ConstantCompletion.quotientPresentation T.topology A I false).comparison
+    (T.evaluateModule A n).mapDerivedCategoryFactors.hom
+    (ConstantCompletion.quotientEvaluationComplexIso T.topology A I n)
+    (ConstantCompletion.extendComparison c) (ConstantCompletion.resFactors c)
+    P (ConstantCompletion.module_flat_kFlat_resolution (J := T.topology))
+    (fun K hK ↦ (ConstantCompletion.quotientPresentation T.topology A I false
+      ).laws.2.1 K hK.1 hK.2)
+    (fun K _ ↦ by infer_instance)
+    (fun K hK ↦ (ConstantCompletion.derivedExtension c).computation K hK.1)
+  exact ⟨e, fun K hk hf ↦ he K ⟨hk, hf⟩,
+    fun e' he' ↦ hu e' (fun K hK ↦ he' K hK.1 hK.2)⟩
 
 /-- The canonical evaluation/finite-restriction comparison.
 Source: Stacks 0941, 099M (blueprint: lem-sp-completion-mate-comparison). -/
@@ -987,24 +1539,19 @@ def Morphism.finitePullIso_normalized {V U : Site.{u}} (f : Morphism V U)
         V.finiteReduction A I n ⋙ f.pull (quotientRing A I n)) : Prop :=
   ∀ P : CochainComplex (V.modules A) ℤ, P.IsAcyclicTensorKFlat →
     (∀ q : ℤ, (P.X q).IsFlat) →
-    (U.finiteReduction A I n).map ((f.modulePull A).mapDerivedCategoryFactors.hom.app P) ≫
-      (ConstantCompletion.extendComparison (ConstantCompletion.quotient U.topology A I n)).app
-        (((f.modulePull A).mapHomologicalComplex (.up ℤ)).obj P) ≫
-      (ConstantCompletion.Q (U.ring (quotientRing A I n))).map
-        ((ConstantCompletion.mapComplexSquare (f.modulePull A)
-          (ConstantCompletion.change (ConstantCompletion.quotient U.topology A I n))
-          (ConstantCompletion.change (ConstantCompletion.quotient V.topology A I n))
-          (f.modulePull (quotientRing A I n))
-          (ConstantCompletion.ordinaryFinitePull f.algebra f.direct f.adjunction A I n)
-          ).hom.app P) =
-    e.hom.app ((ConstantCompletion.Q (V.ring A)).obj P) ≫
-      (f.pull (quotientRing A I n)).map
-        ((ConstantCompletion.extendComparison
-          (ConstantCompletion.quotient V.topology A I n)).app P) ≫
-      (f.modulePull (quotientRing A I n)).mapDerivedCategoryFactors.hom.app
-        (((ConstantCompletion.change (ConstantCompletion.quotient V.topology A I n)
-          ).mapHomologicalComplex (.up ℤ)).obj P)
+    pullSquareFormula
+      (f.modulePull A).mapDerivedCategoryFactors.hom
+      (ConstantCompletion.extendComparison (ConstantCompletion.quotient U.topology A I n))
+      (ConstantCompletion.mapComplexSquare (f.modulePull A)
+        (ConstantCompletion.change (ConstantCompletion.quotient U.topology A I n))
+        (ConstantCompletion.change (ConstantCompletion.quotient V.topology A I n))
+        (f.modulePull (quotientRing A I n))
+        (ConstantCompletion.ordinaryFinitePull f.algebra f.direct f.adjunction A I n))
+      (ConstantCompletion.extendComparison (ConstantCompletion.quotient V.topology A I n))
+      (f.modulePull (quotientRing A I n)).mapDerivedCategoryFactors.hom e P
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The finite coefficient tensor/pullback comparison, fixed by ordinary tensor
 reassociation on flat-term K-flat representatives.
 Source: Stacks 07A4, 099N (blueprint: lem-sp-completion-mate-comparison).
@@ -1017,7 +1564,37 @@ theorem Morphism.finitePullIso_existsUnique {V U : Site.{u}} (f : Morphism V U)
     ∃! e : f.pull A ⋙ U.finiteReduction A I n ≅
         V.finiteReduction A I n ⋙ f.pull (quotientRing A I n),
       Morphism.finitePullIso_normalized f A I n e := by
-  sorry
+  let c := ConstantCompletion.quotient V.topology A I n
+  let c' := ConstantCompletion.quotient U.topology A I n
+  let P (K : CochainComplex (V.modules A) ℤ) :=
+    K.IsAcyclicTensorKFlat ∧ ∀ q : ℤ, (K.X q).IsFlat
+  obtain ⟨e, he, hu⟩ := resolving_pullSquare (M := V.modules A)
+    (ConstantCompletion.Q (U.ring A))
+    (ConstantCompletion.Q (V.ring (quotientRing A I n)))
+    (ConstantCompletion.Q (U.ring (quotientRing A I n)))
+    ((f.modulePull A).mapHomologicalComplex (.up ℤ))
+    ((ConstantCompletion.change c).mapHomologicalComplex (.up ℤ))
+    ((ConstantCompletion.change c').mapHomologicalComplex (.up ℤ))
+    ((f.modulePull (quotientRing A I n)).mapHomologicalComplex (.up ℤ))
+    (f.pull A) (V.finiteReduction A I n) (U.finiteReduction A I n)
+    (f.pull (quotientRing A I n))
+    (f.modulePull A).mapDerivedCategoryFactors.hom
+    (ConstantCompletion.extendComparison c')
+    (ConstantCompletion.mapComplexSquare (f.modulePull A)
+      (ConstantCompletion.change c') (ConstantCompletion.change c)
+      (f.modulePull (quotientRing A I n))
+      (ConstantCompletion.ordinaryFinitePull f.algebra f.direct f.adjunction A I n))
+    (ConstantCompletion.extendComparison c)
+    (f.modulePull (quotientRing A I n)).mapDerivedCategoryFactors.hom
+    P (ConstantCompletion.module_flat_kFlat_resolution (J := V.topology))
+    (fun K _ ↦ by infer_instance)
+    (fun K hK ↦ (ConstantCompletion.derivedExtension c').computation _
+      (ConstantCompletion.pull_flat_kFlat f.algebra f.direct f.adjunction
+        (ConstantCompletion.constantMap f.algebra A) K hK.1 hK.2).1)
+    (fun K hK ↦ (ConstantCompletion.derivedExtension c).computation K hK.1)
+    (fun K _ ↦ by infer_instance)
+  exact ⟨e, fun K hk hf ↦ he K ⟨hk, hf⟩,
+    fun e' he' ↦ hu e' (fun K hK ↦ he' K hK.1 hK.2)⟩
 
 /-- The canonical derived finite tensor/pullback comparison.
 Source: Stacks 07A4, 099N (blueprint: lem-sp-completion-mate-comparison). -/
@@ -1144,6 +1721,8 @@ def finiteProjectionComparison {f : Morphism Y X} {g : Morphism Y Y'}
   (g.finitePullIso A I n).hom.app ((f.push A).obj K) ≫
     (g.pull (quotientRing A I n)).map (f.finiteProjection A I n K)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Naturality needed to form s as an actual natural transformation.
 Source: Stacks 0B56, 099M (blueprint: lem-sp-completion-mate-comparison).
 Proof: reductionPullIso is natural, the derived counit is natural, and transposition
@@ -1158,7 +1737,21 @@ theorem comparisonS_naturality {f : Morphism Y X} {g : Morphism Y Y'}
       (Y'.rlim A).map (projectionComparison (f := f) (g := g) A I K.obj) ≫
         (ObjectProperty.ι (X.IsComplete A I) ⋙ X.reduction A I ⋙
           f.towerPush A ⋙ g.towerPull A ⋙ Y'.rlim A).map a := by
-  sorry
+  let p := (mateEquiv (f.adj A) (f.towerAdjunction A)
+    (TwoSquare.mk _ _ _ _ (f.reductionPullIso A I).hom)).natTrans
+  have hp (M : X.derived A) : p.app M = f.towerProjection A I M := by
+    simp [p, Morphism.towerProjection, Adjunction.homEquiv_unit,
+      Functor.map_comp]
+  let H := Functor.whiskerLeft (f.push A) (g.reductionPullIso A I).inv ≫
+    Functor.whiskerRight p (g.towerPull A)
+  have hH (M : X.derived A) :
+      H.app M = projectionComparison (f := f) (g := g) A I M := by
+    simp only [H, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app, hp, projectionComparison]
+  change (Y'.rlim A).map ((Y'.reduction A I).map
+      ((g.pull A).map ((f.push A).map a.hom))) ≫ _ = _
+  simpa only [Functor.whiskerRight_app, hH, Functor.comp_map, ObjectProperty.ι_map] using
+    (Functor.whiskerRight H (Y'.rlim A)).naturality a.hom
 
 /-- The specified map s, namely total derived inverse limit of H.
 Source: Stacks 099M, 0E48 (blueprint: lem-sp-completion-mate-comparison). -/
@@ -1195,7 +1788,9 @@ theorem comparisonT_naturality {h : Morphism X X'} {k : Morphism Y' X'}
       (comparisonTComponent (h := h) (k := k) A I K).hom ≫
         (ObjectProperty.ι (X.IsComplete A I) ⋙ X.reduction A I ⋙
           h.towerPull A ⋙ k.towerPush A ⋙ Y'.rlim A).map a := by
-  sorry
+  exact ((Functor.whiskerLeft (h.pull A ⋙ X'.reduction A I)
+    (k.directLimitIso A).hom) ≫ Functor.whiskerRight (h.reductionPullIso A I).inv
+      (k.towerPush A ⋙ Y'.rlim A)).naturality a.hom
 
 /-- The specified natural direct-image/limit comparison t.
 Source: Stacks 0941, 0A07 (blueprint: lem-sp-completion-mate-comparison). -/

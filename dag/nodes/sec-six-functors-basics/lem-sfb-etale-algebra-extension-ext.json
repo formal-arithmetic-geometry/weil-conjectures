@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-etale-algebra-extension-ext",
+ "kind": "statement",
+ "title": "Sheaf-algebra extensions and the first two cotangent Ext groups",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $f:X\\to B$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], and let $\\mathcal G$ be any $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category], with no quasi-coherence assumption. On $X_{\\mathrm{et}}$ let $\\mathscr E_f(\\mathcal G)$ be the groupoid of extensions $0\\to\\mathcal G\\xrightarrow{i}\\mathcal A\\xrightarrow{p}\\mathcal O_X\\to0$ of sheaves of commutative $f^{-1}\\mathcal O_B$-algebras, with kernel an ideal of square zero inducing the given $\\mathcal O_X$-action on $\\mathcal G$; morphisms induce the identity on the kernel and quotient. For $\\mathrm{NL}$ and derived Ext as in [def-sfb-space-naive-cotangent-complex], there is a canonical bijection $\\pi_0\\mathscr E_f(\\mathcal G)\\cong\\operatorname{Ext}^1_{\\mathcal O_X}(\\mathrm{NL}_{X/B},\\mathcal G)$ taking $\\mathcal O_X\\oplus\\mathcal G$ to zero. It is natural under every $\\mathcal O_X$-linear coefficient map $u:\\mathcal G\\to\\mathcal H$: pushout of an extension induces $u_*$ on Ext. The Baer sum, formed by the fibre product of two extensions over $\\mathcal O_X$ followed by pushout of $\\mathcal G\\oplus\\mathcal G$ along addition, corresponds to addition in Ext. For each such extension its automorphisms inducing the identity on kernel and quotient are canonically the additive group $\\operatorname{Ext}^0_{\\mathcal O_X}(\\mathrm{NL}_{X/B},\\mathcal G)=\\operatorname{Hom}_{\\mathcal O_X}(\\Omega_{X/B},\\mathcal G)$. Here $\\Omega_{X/B}=H^0(\\mathrm{NL}_{X/B})$; the isomorphism sends $d:\\mathcal O_X\\to\\mathcal G$, an $f^{-1}\\mathcal O_B$-derivation, to $a\\mapsto a+i(d(p(a)))$. Composition corresponds to addition of derivations, and this automorphism identification is natural under coefficient pushout.",
+ "source": {
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tags 0GQ5 (lemma-extensions-of-relative-ringed-topoi), 0GQ6 (remark-extensions-of-relative-ringed-topoi), 0GQ7 (lemma-extensions-of-relative-ringed-topoi-functorial), 0GQ8 (remark-extensions-of-relative-ringed-topoi-functorial), and 08UG (lemma-huge-diagram-ringed-topoi), clause (2), with identity underlying topos. The Baer-sum clause is not stated in Stacks: it follows from the explicit description of the class in 0GQ6 (choose one sheaf of sets E mapping to both extensions; the class of the fibre-product-then-sum extension is the sum of the two induced maps J/J^2 -> G), together with the torsor of 08UK (lemma-choices-ringed-topoi)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-space-naive-cotangent-complex",
+  "def-sfb-space-square-zero-extension-data",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-sheaf-differentials",
+  "def-sfb-sheaf-polynomial-cotangent-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=f^{-1}\\mathcal O_B$ and $O=\\mathcal O_X$. The definition identifies $\\mathrm{NL}_{X/B}$ with $\\mathrm{NL}_{O/A}$ on $X_{\\mathrm{et}}$. For any sheaf polynomial presentation $P=A[E]\\twoheadrightarrow O$ use $J,M=J/J^2,F,K=[M\\to F]$ and $\\lambda_E$ from the comparison node. The two-term boundary node gives $\\partial_E:\\operatorname{Hom}_O(M,\\mathcal G)\\to\\operatorname{Ext}^1_O(K,\\mathcal G)$, with kernel the maps $\\theta d_E$. The cokernel comparison and that node give $\\operatorname{Ext}^0_O(\\mathrm{NL}_{O/A},\\mathcal G)=\\operatorname{Hom}_O(\\Omega_{O/A},\\mathcal G)=\\operatorname{Der}_A(O,\\mathcal G)$. All results apply to arbitrary module sheaves, so no quasi-coherence or finiteness hypothesis is introduced.",
+   "uses": [
+    "def-sfb-space-naive-cotangent-complex",
+    "lem-sfb-sheaf-polynomial-cotangent-comparison",
+    "lem-sfb-two-term-derived-hom-boundary",
+    "lem-trf-sheafified-module-differentials-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tags 0GQ6 and 08UG(2); sites-modules.tex Tags 08TY and 08TS"
+   }
+  },
+  {
+   "text": "Given an extension $\\mathcal T\\twoheadrightarrow O$, take $E$ to be its underlying sheaf of sets, mapped to $O$. The polynomial universal property on each $A(U)[E(U)]$, followed by the universal property of the sheafification $P=A[E]$ (as $\\mathcal T$ is a sheaf of $A$-algebras), gives the $A$-algebra map $a:P\\to\\mathcal T$ with $[e]\\mapsto e$. Its restriction to $J$ has values in $\\mathcal G$ and annihilates $J^2$, because the kernel is square zero. Thus it defines an $O$-linear map $\\delta_a:M\\to\\mathcal G$. Define $c(\\mathcal T)=\\partial_E(\\delta_a)\\lambda_E^{-1}$. More generally one can use any such $E$ with a lift $E\\to\\mathcal T$. Two choices have a common presentation using $E\\amalg E'$, whose lift is their combined lift. Under the canonical presentation comparisons, the two restrictions of its conormal map give the same derived class, by naturality of the boundary. Hence $c$ is independent of the choices. An isomorphism of extensions preserves its conormal map after composing the lift, so $c$ is defined on isomorphism classes.",
+   "uses": [
+    "lem-sfb-sheaf-polynomial-cotangent-comparison",
+    "lem-sfb-two-term-derived-hom-boundary",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GQ6 (remark-extensions-of-relative-ringed-topoi), explicit class"
+   }
+  },
+  {
+   "text": "For injectivity, take two extensions $\\mathcal T_1,\\mathcal T_2$ with equal classes and use $E=\\mathcal T_1\\times_O\\mathcal T_2$. Both projections are surjective as sheaf maps; write $a:P\\to\\mathcal T_1$, $b:P\\to\\mathcal T_2$ and $\\delta_1,\\delta_2:M\\to\\mathcal G$. Equality of classes and boundary exactness give $\\delta_2-\\delta_1=\\theta d_E$ for some $\\theta:F\\to\\mathcal G$. Set $D=\\theta\\circ(\\mathrm d\\otimes1):P\\to\\mathcal G$ and $b'=b-i_2D$. Leibniz and the square-zero kernel show $b'(xy)=b'(x)b'(y)$; $b'$ is additive and fixes $A$. For $j\\in J$, $b'(j)=i_2\\delta_1(\\bar j)$. Thus $b'$ annihilates $\\ker a$, while $a$ is locally surjective because $E\\to\\mathcal T_1$ is. It descends uniquely to $h:\\mathcal T_1\\to\\mathcal T_2$, inducing identity on $O$ and $\\mathcal G$. Locally, $h(t)=0$ forces $p_1(t)=0$ and then $t=i_1g$ with $g=0$; given $t_2$, lift its quotient locally to $t_1$ and correct $t_2-h(t_1)$ in the kernel. Hence $h$ is an isomorphism of sheaves and of extensions.",
+   "uses": [
+    "lem-sfb-two-term-derived-hom-boundary",
+    "lem-sfb-sheaf-polynomial-cotangent-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 08UG proof Steps 1-3, specialized to identity underlying topos and unchanged base"
+   }
+  },
+  {
+   "text": "For surjectivity take $\\xi$ and its representative $\\delta:J/J^2\\to\\mathcal G$ supplied by the representative node. Form the square-zero semidirect ring sheaf $Q\\ltimes\\mathcal G$, where $Q=P/J^2$ acts on $\\mathcal G$ through $O$ and $(q,g)(q',g')=(qq',\\bar qg'+\\bar q'g)$. Quotient by the image of $J/J^2\\to Q\\ltimes\\mathcal G$, $m\\mapsto(m,-\\delta(m))$. This image is an ideal: multiplication by $(q,g)$ gives $(qm,-\\bar q\\delta(m))=(qm,-\\delta(qm))$. Call the quotient $\\mathcal T_\\delta$. The map $g\\mapsto[(0,g)]$ is injective because an element $(0,g)$ in that graph has $m=0$ and hence $g=0$. The quotient map to $O$ is locally surjective, and any local kernel class $[(m,g)]$ equals $[(0,g+\\delta(m))]$. These statements remain true after taking sheaf quotients, by local representatives. Thus $\\mathcal T_\\delta$ is an extension with square-zero kernel $\\mathcal G$. Its lift $P\\to\\mathcal T_\\delta$, $p\\mapsto[(p,0)]$, sends $j$ to $i(\\delta(\\bar j))$. Its class is therefore exactly $\\xi$. This proves the canonical bijection, not just an abstract torsor assertion.",
+   "uses": [
+    "lem-sfb-sheaf-cotangent-ext-representative",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tags 08UJ and 08UK, pushout construction; direct verification of the omitted quotient calculation"
+   }
+  },
+  {
+   "text": "For the split extension $O\\oplus\\mathcal G$, use $E=O$ and the lift $x\\mapsto(x,0)$. Its polynomial map kills $J$, so its conormal map is zero and its class is zero. This also fixes the origin of the canonical bijection.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-sfb-two-term-derived-hom-boundary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GQ5 proof, split origin, and Tag 0GQ6"
+   }
+  },
+  {
+   "text": "For $u:\\mathcal G\\to\\mathcal H$, the coefficient pushout of $\\mathcal T$ is $(\\mathcal T\\ltimes\\mathcal H)/\\{(i(g),-u(g))\\}$, where $\\mathcal T$ acts through $O$. The graph is an ideal by $O$-linearity of $u$; the same local kernel calculation as in Step 4 gives an extension by $\\mathcal H$. A lift $P\\to\\mathcal T$ followed by the canonical map to this quotient has conormal map $u\\delta$. By postcomposition naturality of $\\partial_E$, its class is $u_*c(\\mathcal T)$. This proves naturality even when $u$ is neither injective nor surjective; no flatness of $u$ is used.",
+   "uses": [
+    "lem-sfb-two-term-derived-hom-boundary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GQ8 (remark-extensions-of-relative-ringed-topoi-functorial), coefficient pushout"
+   }
+  },
+  {
+   "text": "For $\\mathcal T_1,\\mathcal T_2$ choose the common generator sheaf $E=\\mathcal T_1\\times_O\\mathcal T_2$. The map $P\\to\\mathcal T_1\\times_O\\mathcal T_2$ restricts on $J/J^2$ to $(\\delta_1,\\delta_2)$ with values in $\\mathcal G\\oplus\\mathcal G$. Pushing out by addition gives conormal map $\\delta_1+\\delta_2$. Since $\\partial_E$ is additive, its class is $\\partial_E(\\delta_1+\\delta_2)\\lambda_E^{-1}=c(\\mathcal T_1)+c(\\mathcal T_2)$. This is precisely the stipulated fibre-product-then-addition Baer sum.",
+   "uses": [
+    "lem-sfb-two-term-derived-hom-boundary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GQ6 explicit representative, applied to the Baer construction; addition calculation by Q55"
+   }
+  },
+  {
+   "text": "For an $A$-derivation $d:O\\to\\mathcal G$ set $T_d(t)=t+i(d(p(t)))$. It fixes kernel and quotient. Expanding a product, the extra cross terms are $i(p(t)d(p(t'))+p(t')d(p(t)))=i(d(p(tt')))$ and the product of two kernel terms is zero. Hence $T_d$ is an $A$-algebra map, with inverse $T_{-d}$. Conversely, for an automorphism $T$ fixing the ends, $T-\\mathrm{id}$ has values in $i(\\mathcal G)$ and vanishes on the kernel. Local lifts through $p$ therefore define a unique additive sheaf map $d:O\\to\\mathcal G$, independent of lifts; multiplicativity of $T$ gives the displayed Leibniz rule, and fixing $A$ makes $d$ vanish on $A$. Thus every such $T$ is uniquely $T_d$. One has $T_dT_e=T_{d+e}$ since $pT_e=p$. With Step 1 this gives the stated additive automorphism identification with $\\operatorname{Ext}^0$ and $\\operatorname{Hom}(\\Omega_{X/B},\\mathcal G)$.",
+   "uses": [
+    "lem-sfb-sheaf-polynomial-cotangent-comparison",
+    "lem-sfb-two-term-derived-hom-boundary",
+    "lem-trf-sheafified-module-differentials-cokernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 08UG(2), specialized to an extension and itself; explicit derivation formula"
+   }
+  },
+  {
+   "text": "Let $q:\\mathcal T\\to u_*\\mathcal T$ be coefficient pushout. Its kernel inclusion $i_{\\mathcal H}$ satisfies $qi_{\\mathcal G}=i_{\\mathcal H}u$. Consequently $qT_d(t)=q(t)+i_{\\mathcal H}(u(d(p(t))))=T_{ud}q(t)$. The induced automorphism fixes the added $\\mathcal H$ summand in the explicit quotient of Step 6, so this equality identifies it on all local representatives. The universal-derivation identification and the degree-zero derived Hom isomorphism are natural in coefficients by the cited nodes. Thus automorphism pushout is exactly postcomposition by $u$ on both Hom and Ext, as required.",
+   "uses": [
+    "lem-sfb-sheaf-polynomial-cotangent-comparison",
+    "lem-sfb-two-term-derived-hom-boundary",
+    "lem-trf-sheafified-module-differentials-cokernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 08UG(2); coefficient compatibility verified from the explicit pushout"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-naive-cotangent-complex",
+  "lem-sfb-sheaf-polynomial-cotangent-comparison",
+  "lem-sfb-two-term-derived-hom-boundary",
+  "lem-trf-sheafified-module-differentials-cokernel",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-sfb-sheaf-cotangent-ext-representative",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tags 0GQ5-0GQ8, 08UG, 08UJ, 08UK; direct polynomial-presentation proof, with quotient, sign, Baer-addition and automorphism-pushout calculations supplied explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Square zero extensions of sheaves of algebras on a ringed topos are classified by Ext one of the naive cotangent complex with automorphisms Ext zero",
+   "results": "[leanfinder] OK 8 hit(s)\nLogged top results: Algebra.Extension.H1Cotangent, Algebra.Extension.h1Cotangentι_ext_iff, Algebra.Extension.cotangentComplex, Algebra.formallySmooth_iff, Algebra.H1Cotangent, Algebra.Extension.h1Cotangentι_ext, Algebra.Extension.formallySmooth_iff_split_injection, Algebra.Extension.homInfinitesimal",
+   "date": "2026-10-22",
+   "verdict": "No match: Algebra.Extension.H1Cotangent is cotangent homology of a ring presentation, not global derived Ext classifying sheaf-algebra extensions. Kan extension hits are unrelated."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*[Ee]xt|[Ee]xt.*cotangent|[Ss]quare[Zz]ero.*[Ss]heaf|[Ss]heaf.*[Ee]xtension",
+   "results": "[grep] OK 25 hit(s)\nLogged top results: Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Topology/Sheaves/Alexandrov.lean, Mathlib/Topology/Sheaves/Alexandrov.lean, Mathlib/Topology/Sheaves/Alexandrov.lean, Mathlib/Topology/Sheaves/Alexandrov.lean, Mathlib/Topology/Sheaves/Alexandrov.lean",
+   "date": "2026-10-22",
+   "verdict": "No match: Algebra.Extension.H1Cotangent is cotangent homology of a ring presentation, not global derived Ext classifying sheaf-algebra extensions. Kan extension hits are unrelated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Square zero algebra extensions of sheaves on ringed topoi and cotangent Ext classification",
+   "results": "[leansearch] OK 8 hit(s)\nLogged top results: TrivSqZeroExt.lift, TrivSqZeroExt.liftEquiv_apply, TrivSqZeroExt.algebra'.congr_simp, Algebra.Extension.infinitesimal, liftOfDerivationToSquareZero, TrivSqZeroExt.algebra', derivationToSquareZeroEquivLift, Algebra.Extension.ker_infinitesimal",
+   "date": "2026-10-22",
+   "verdict": "No match: Algebra.Extension.H1Cotangent is cotangent homology of a ring presentation, not global derived Ext classifying sheaf-algebra extensions. Kan extension hits are unrelated."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Ext\"",
+   "results": "[loogle] OK 12 hit(s)\nLogged top results: CategoryTheory.OverPresheafAux.OverArrows.ext, CategoryTheory.OverPresheafAux.OverArrows.ext_iff, CategoryTheory.OverPresheafAux.YonedaCollection.ext, CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeUliftYonedaUliftYonedaMap, CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap, CategoryTheory.Presheaf.preservesColimitsOfSize_leftKanExtension, CategoryTheory.Presheaf.isExtensionAlongULiftYoneda, CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension",
+   "date": "2026-10-22",
+   "verdict": "No match: Algebra.Extension.H1Cotangent is cotangent homology of a ring presentation, not global derived Ext classifying sheaf-algebra extensions. Kan extension hits are unrelated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphism classes of extensions of commutative ring sheaves by a module form the first cotangent cohomology group with Baer sum and pushout functoriality",
+   "results": "[leanfinder] OK 8 hit(s)\nLogged top results: Algebra.Extension.H1Cotangent, Algebra.H1Cotangent, Algebra.Extension.H1Cotangent.map, Algebra.Extension.instModuleH1CotangentOfIsScalarTowerCotangent, Algebra.Extension.h1Cotangentι, Algebra.Extension.instAddCommGroupH1Cotangent, Algebra.Extension.cotangentComplex, Algebra.Extension.h1Cotangentι_apply",
+   "date": "2026-10-22",
+   "verdict": "No match: Algebra.Extension.H1Cotangent is cotangent homology of a ring presentation, not global derived Ext classifying sheaf-algebra extensions. Kan extension hits are unrelated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Square zero extensions of sheaves of algebras on a ringed topos are classified by cotangent Ext one",
+   "results": "8 hits; top results: Algebra.Extension.H1Cotangent, Algebra.Extension.h1Cotangentι_ext_iff, Algebra.Extension.h1Cotangentι_apply, Algebra.Extension.h1Cotangentι_ext, Algebra.Extension.H1Cotangent.map, Algebra.H1Cotangent, Algebra.Extension.h1Cotangentι, Algebra.Extension.cotangentComplex",
+   "date": "2026-10-23",
+   "verdict": "No match for the item: Algebra.Extension cotangent modules are ring-level homology and TrivSqZeroExt concerns individual algebras, not the global sheaf extension groupoid and derived Ext classification. The alternate presentation phrasing also finds no such sheaf theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangentComplex\", \"Ext\"",
+   "results": "11 hits; top results: Algebra.Extension.cotangentComplex, Algebra.Extension.exact_hCotangentι_cotangentComplex, Algebra.Extension.exact_cotangentComplex_toKaehler, Algebra.Extension.cotangentComplex_mk, Algebra.Extension.Cotangent.mk_C_mem_ker_cotangentComplex, Algebra.Extension.CotangentSpace.map_cotangentComplex, Algebra.Extension.CotangentSpace.map_comp_cotangentComplex, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex",
+   "date": "2026-10-23",
+   "verdict": "No match for the item: Algebra.Extension cotangent modules are ring-level homology and TrivSqZeroExt concerns individual algebras, not the global sheaf extension groupoid and derived Ext classification. The alternate presentation phrasing also finds no such sheaf theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*[Ee]xt|[Ee]xt.*cotangent|[Ss]quare[Zz]ero.*[Ss]heaf|[Ss]heaf.*[Ee]xtension",
+   "results": "25 hits; top results: Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean, Mathlib/AlgebraicTopology/SingularSet.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean",
+   "date": "2026-10-23",
+   "verdict": "No match for the item: Algebra.Extension cotangent modules are ring-level homology and TrivSqZeroExt concerns individual algebras, not the global sheaf extension groupoid and derived Ext classification. The alternate presentation phrasing also finds no such sheaf theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classification of square zero sheaf algebra extensions by the naive cotangent complex",
+   "results": "8 hits; top results: Algebra.Extension.infinitesimal, TrivSqZeroExt.algebra'.congr_simp, TrivSqZeroExt.algebra', Algebra.Extension.H1Cotangent, TrivSqZeroExt.lift, derivationToSquareZeroEquivLift, liftOfDerivationToSquareZero, Algebra.Extension.Cotangent",
+   "date": "2026-10-23",
+   "verdict": "No match for the item: Algebra.Extension cotangent modules are ring-level homology and TrivSqZeroExt concerns individual algebras, not the global sheaf extension groupoid and derived Ext classification. The alternate presentation phrasing also finds no such sheaf theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing a surjective polynomial presentation of sheaves of commutative algebras gives a canonical quasi isomorphism of naive cotangent complexes",
+   "results": "8 hits; top results: Algebra.SubmersivePresentation.cotangentEquiv_apply, Algebra.SubmersivePresentation.cotangentComplexAux_surjective, Algebra.Extension.Cotangent.mk_surjective, Algebra.Generators.CotangentSpace.map_ofComp_surjective, Algebra.Generators.Cotangent.surjective_map_ofComp, Algebra.SubmersivePresentation.cotangentEquiv, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.Generators.cotangentCompLocalizationAwayEquiv",
+   "date": "2026-10-23",
+   "verdict": "No match for the item: Algebra.Extension cotangent modules are ring-level homology and TrivSqZeroExt concerns individual algebras, not the global sheaf extension groupoid and derived Ext classification. The alternate presentation phrasing also finds no such sheaf theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-space-split-deformation-ext",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 0GQ5 (lemma-extensions-of-relative-ringed-topoi), 0GQ6 (remark-extensions-of-relative-ringed-topoi), 0GQ7 (lemma-extensions-of-relative-ringed-topoi-functorial), 0GQ8 (remark-extensions-of-relative-ringed-topoi-functorial), and 08UG (lemma-huge-diagram-ringed-topoi), clause (2), with identity underlying topos.",
+   "via": [
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-algebra-extension-ext",
+  "worker": "stage1",
+  "summary": "No finished upstream declaration found. Split through sheaf polynomial-presentation invariance, conormal representatives of Ext classes after changing generators, and two-term derived Hom boundary exactness. Constructed extension classes, proved choice independence and bijectivity by explicit ring-sheaf quotients, and verified the split origin, coefficient pushout, Baer sum and additive natural automorphism formulas without quasi-coherence hypotheses. Three new unsplit supporting facts, no Mathlib leaves.",
+  "blueprint": "Realizes the inherited tangent-finiteness prerequisite of the direct-image alteration input through the small-etale sheaf-algebra classification. The newest blueprint direct-image proof (3) still passes through direct-image preservation; this is a lower supporting lemma, not a change to the unit route. The ancestor command returns None; retained the inherited from.node and via, and found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-sheafified-module-differentials-cokernel",
+    "why": "The generic differential sheaf represents sheaf derivations for any ringed site, exactly what identifies Hom(Omega,G) with derivations; this does not replace any geometric or six-functor step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-sheafified-module-differentials-cokernel"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-882afac6f",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-882afac6f (reviewer sub-agent of L); spot-checked: I read the item, all nine steps and the three new nodes in full against the Stacks sources. In defos.tex: 08UG(2), 08UJ with its proof via E' = E×_Ω H, 08UK (its omitted calculation is supplied here), 0GQ5 and 0GQ6. In sites-modules.tex: 08TS and 08TY with its E1⊔E2 / H^{-1} proof. The statement is byte-identical to live, the item is still unsplit on live and side-live, and the new ids are not taken. Coefficient category: D(Mod O_X) on X_et with NL from def-sfb-space-naive-cotangent-complex, which is exactly K_B of the comparison node.\n\nSteps:\n- Step 2: choices are made independent of E through E⊔E' and the square-naturality of the boundary.\n- Step 3: b' = b − i₂θd is multiplicative and fixes A, b'(j) = i₂δ₁, it descends, is the identity on O and G, and is bijective locally.\n- Step 4: the graph {(m,−δm)} is an ideal because m̄ = 0, G injects, and the lift has conormal map δ, so the class is ξ.\n- Steps 5–7: origin, pushout ideal with conormal map uδ, and the Baer sum (δ₁,δ₂) ↦ δ₁+δ₂ all check out.\n- Steps 8–9: T_d is multiplicative, T_dT_e = T_{d+e}, and qT_d = T_{ud}q.\n\nNew nodes:\n- The comparison node (08TY+08TS) is true, with λ_E := K(α).\n- The representative node is exactly 08UJ and is not a clause of the item.\n- The two-term boundary node is true; tested with d = 0, d = id, G = 0 and A = B.\n- None is a duplicate. Checked against def-sfb-space-naive-cotangent-complex, the ring-level trf presentation nodes, lem-sfb-standard-sheaf-cotangent-augmentation, lem-weil-pbc-hom-out-of-triangle-exact and lem-sf-two-term-self-extension-hom.\n\nBatch 5: lem-trf-sheafified-module-differentials-cokernel is a generic fact on a site (sheaf Ω is the sheafified Ω and represents derivations). Neither assumption gives it and it is not part of their proofs, so it is accepted as a generic tool; another sfb node already cites it.\n\nFIX (C4): Step 2 built a: A[E] → T from the polynomial universal property alone, but A[E] is a sheafification. I added def-weil-pbc-sheafification to the Step 2 uses and to proof_deps, and spelled out the construction; the fix is under fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleAlgebraExtensionExt",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_algebra_extension_ext",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.EtaleExtensionHom",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleExtensionIso",
+   "AlgebraicGeometry.AlgebraicSpace.etaleExtensionClasses",
+   "AlgebraicGeometry.AlgebraicSpace.etaleExtensionClass",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleExtensionIsSplit",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleExtensionBaer",
+   "AlgebraicGeometry.AlgebraicSpace.etaleCotangentExt",
+   "AlgebraicGeometry.AlgebraicSpace.etaleCotangentExtMap",
+   "AlgebraicGeometry.AlgebraicSpace.cotangentInverseChartSection",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleExtensionCoordinates",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleExtensionCoordinates.Represents",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleAlgebraExtensionClassification",
+   "AlgebraicGeometry.AlgebraicSpace.etale_algebra_extension_ext"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAlgebraExtensionExt.lean",
+  "statement": "theorem etale_algebra_extension_ext (f : X ⟶ B) [HasDerivedCategory.{w} X.SmallModules] : Nonempty (EtaleAlgebraExtensionClassification f)",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses existing SpaceSquareZeroExtension objects on the full etale site and restricts the given coefficient module through smallModuleRestriction for Ext. The classification includes conormal-boundary and universal-derivation normalizations, arbitrary coefficient pushout, the actual fibre-product Baer diagram, split origin, and additive natural automorphism formulas. Added only already-landed definition dependencies; no new nodes or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6832ed985",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read the item, all 8 stmt_dep records and the live Lean of SpaceSquareZeroExtension/ChartRingMap, SheafPolynomialCotangent Presentation/Model/GeneratorMap, SpaceNaiveCotangentComplex, SpaceCotangentRingMap and smallModuleRestriction. Statement verbatim; dep records identical to live; the 4 added stmt_deps are landed definition nodes. Classification structure not hollow: classes pinned by class_normalization (positive conormal boundary through the canonical GeneratorMap comparison and the unique K→M[1] projection, matching the two-term boundary node); homZero pinned via augmentation_formula, omegaIso_hom and homZero_normalization; automorphisms pinned by a↦a+i(d(p a)) on affine charts, with add/natural clauses. Split origin, arbitrary-v pushout naturality, fibre-product Baer sum, arbitrary G and universes u,w: all match the node. No H4 duplicate (Zariski and Mathlib ring-level analogues differ). Docstrings, 9-step proof docstring, sorry only in the theorem, both report sections present. Advisory: statement uses cotangentRingMap and related declarations owned by the statement node lem-trf-space-enlarged-etale-ringed-site-model, reached only through def-sfb-space-naive-cotangent-complex; second reading is a self-review. No file changed, no compile."
+ }
+}

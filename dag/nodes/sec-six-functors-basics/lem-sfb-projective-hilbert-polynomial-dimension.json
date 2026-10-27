@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-projective-hilbert-polynomial-dimension",
+ "kind": "statement",
+ "title": "Dimension is the degree of a projective Hilbert polynomial",
+ "statement": "Let $K$ be a field [def-weil-field], let $N\\geq0$, and let $X\\hookrightarrow\\mathbf P^N_K$ be a nonempty closed subscheme [def-weil-closed-immersion, def-kun-projective]. Let $P_X\\in\\mathbf Q[t]$ be its Hilbert polynomial: for all sufficiently large integers $m$, $P_X(m)$ is the dimension of the degree-$m$ part of the homogeneous coordinate ring. Then $P_X(m)=\\chi(X,\\mathcal O_X(m))$ for every integer $m$, $P_X$ is nonzero, its leading coefficient is positive, and $\\deg P_X=\\dim X$ [def-kun-topological-krull-dimension]. In particular, if $P_X(m)=dm+e$ with $d>0$, then $X$ has dimension one. The polynomial and this dimension conclusion are unchanged by extension of $K$. No reducedness, equidimensionality or irreducibility is assumed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0BEM (lemma-numerical-polynomial-from-euler) and 0BEV (lemma-ample-positive): the coefficient of degree dim X is the positive top self-intersection divided by (dim X)!. Equality with the eventual coordinate-ring polynomial also uses the Hilbert polynomial discussion of coherent.tex; see lem-sfb-flat-projective-hilbert-polynomial-locality."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-closed-immersion",
+  "def-kun-projective",
+  "def-kun-topological-krull-dimension",
+  "def-pc-euler-characteristic",
+  "def-sfb-projective-coordinate-hilbert-polynomial",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "def-pc-field-extension",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "The specified embedding makes $X$ projective by [def-kun-projective], hence proper by [lem-pc-projective-proper]. Properness includes finite type by [def-weil-proper-morphism]. Thus [lem-kun-dimension-finite-type] makes $g=\\dim X$ finite; since $X$ is nonempty, $g$ is a nonnegative integer. A field is Noetherian, since its only ideals are zero and itself, so [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. In particular its structure sheaf is coherent by [pqf-lem-coherent-ft-locnoeth]: locally it is the free rank-one module.",
+   "uses": [
+    "def-kun-projective",
+    "lem-pc-projective-proper",
+    "def-weil-proper-morphism",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WC (lemma-locally-projective-proper), Tag 01T6 (lemma-finite-type-noetherian); coherent.tex Tag 01XZ (lemma-coherent-Noetherian); finite dimension as in lem-kun-dimension-finite-type"
+   }
+  },
+  {
+   "text": "Put $\\mathcal L=i^*\\mathcal O_{\\mathbf P^N_K}(1)$. It is ample by [lem-pc-very-ample-ample]. The bases and transition rules of [def-pc-projective-space-twist], pulled back using [def-pc-module-pullback], give $\\mathcal O_X(m)$ transition functions $i^*(x_a/x_b)^m$. Multiplying these functions identifies $\\mathcal O_X(m)$ with $\\mathcal L^{\\otimes m}$ for every $m\\in\\mathbf Z$; for negative $m$ use the dual bases. These local free rank-one descriptions also make all twists quasi-coherent of finite type, hence coherent by [pqf-lem-coherent-ft-locnoeth].",
+   "uses": [
+    "lem-pc-very-ample-ample",
+    "def-pc-projective-space-twist",
+    "def-pc-module-pullback",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Twisting sheaves on projective space; properties.tex Tag 01Q3 (ample criterion); coherent.tex Tag 01XZ (lemma-coherent-Noetherian)"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-snapper-numerical-polynomial] with $r=1$, $\\mathcal F=\\mathcal O_X$ and $\\mathcal L_1=\\mathcal L$. Its support is all of $X$: at every scheme point the structure-sheaf stalk is a nonzero local ring. Thus it supplies $Q\\in\\mathbf Q[t]$ of degree at most $g$ with $Q(m)=\\chi(X,\\mathcal O_X(m))$ for every integer $m$. In [def-sfb-projective-coordinate-hilbert-polynomial], the degree-$m$ vanishing polynomials form a vector subspace: restriction of a linear combination is the same linear combination of the restrictions. Thus taking their linear span does not change this subspace. Its $I_m(i)$ is exactly the degree-$m$ ideal piece of [lem-sfb-projective-closed-subscheme-homogeneous-ideal], so its coordinate piece is $(K[x_0,\\ldots,x_N]/J)_m$. By that identification, write the given closed subscheme as $\\operatorname{Proj}(K[x_0,\\ldots,x_N]/J)$. The eventual coordinate/Euler equality of [lem-sfb-projective-coordinate-ring-euler-polynomial] shows that $Q(m)$ and the prescribed $P_X(m)$ agree for all sufficiently large natural $m$. Their difference has infinitely many rational roots, hence is zero. Consequently $P_X=Q$, proving equality with Euler characteristics at every integer and the bound $\\deg P_X\\leq g$.",
+   "uses": [
+    "lem-sc-snapper-numerical-polynomial",
+    "def-sfb-projective-coordinate-hilbert-polynomial",
+    "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+    "lem-sfb-projective-coordinate-ring-euler-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEM (lemma-numerical-polynomial-from-euler); constructions.tex Tag 03GL (lemma-closed-in-projective-space); coherent.tex Tag 0AG7 (lemma-recover-tail-graded-module), with varieties.tex Tag 08AE (lemma-hilbert-polynomial-H0)"
+   }
+  },
+  {
+   "text": "Use the current Hilbert-degree definition of [sk-def-av-ample-degree]: if $a_g$ is the coefficient of $t^g$ in $P_X$, then $D=\\deg_{\\mathcal L}(X)=g!a_g$. This is the finite-difference definition, also recorded in the main-20261015 update of [def-sc-hilbert-degree]. The hypotheses of [lem-sc-positive-ample-hilbert-degree] hold by steps 1 and 2: $X$ is nonempty and proper, and $\\mathcal L$ is ample invertible. Hence $D>0$. Since $g!>0$, we have $a_g>0$. Therefore $P_X\\ne0$ and $\\deg P_X\\geq g$; step 3 gives the opposite inequality. Thus $\\deg P_X=g$, and its leading coefficient is $a_g>0$. This includes $g=0$, since $0!=1$.",
+   "uses": [
+    "sk-def-av-ample-degree",
+    "def-sc-hilbert-degree",
+    "lem-sc-positive-ample-hilbert-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEV (lemma-ample-positive), with Tag 0BEP (definition-intersection-number); the coefficient interpretation is the current blueprint sk-def-av-ample-degree"
+   }
+  },
+  {
+   "text": "If $P_X(t)=dt+e$ with $d>0$, its coefficient of $t$ is nonzero and every coefficient above $t$ is zero. Thus its degree is exactly one. The equality proved in step 4 gives $\\dim X=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Immediate polynomial consequence of Tag 0BEV and the preceding steps"
+   }
+  },
+  {
+   "text": "Let $L/K$ be any field extension. By [lem-weil-pbc-closed-immersion-base-change], $X_L$ is a closed subscheme of $\\mathbf P^N_L$, and [lem-pc-proper-base-change] makes it proper. The pulled-back transition functions in step 2 are $(x_a/x_b)^m$ over $L$, so the pullback of $\\mathcal O_X(m)$ is exactly $\\mathcal O_{X_L}(m)$ for every integer $m$; this follows directly from [def-pc-projective-space-twist] and [def-pc-module-pullback]. The map $K\\to L$ is flat: short exact sequences of $K$-vector spaces split by choosing bases, and tensoring their direct-sum decompositions with $L$ preserves exactness. Apply the general clause of [lem-sc-flat-base-change-coherent] to $\\mathcal O_X(m)$. For every $q\\geq0$ it gives\n$$H^q(X_L,\\mathcal O_{X_L}(m))\\cong H^q(X,\\mathcal O_X(m))\\otimes_KL.$$\nThese groups on $X$ are finite dimensional and vanish outside a finite set of $q$ by [lem-pc-euler-characteristic-well-defined]. The tensor flip $v\\otimes\\lambda\\mapsto\\lambda\\otimes v$, with the same formula as inverse, identifies these with $L\\otimes_K H^q(X,\\mathcal O_X(m))$. Thus [lem-pc-finrank-field-base-change] applies in its stated tensor order and preserves their dimensions. Taking the finite alternating sums of [def-pc-euler-characteristic] gives $\\chi(X_L,\\mathcal O_{X_L}(m))=\\chi(X,\\mathcal O_X(m))=P_X(m)$ for every $m\\in\\mathbf Z$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-pc-proper-base-change",
+    "def-pc-projective-space-twist",
+    "def-pc-module-pullback",
+    "lem-sc-flat-base-change-coherent",
+    "lem-pc-euler-characteristic-well-defined",
+    "lem-pc-finrank-field-base-change",
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AB (lemma-euler-characteristic-extend-base-field); coherent.tex Tag 02KH (lemma-flat-base-change-cohomology)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-projective-coordinate-ring-euler-polynomial] to the closed subscheme $X_L\\subset\\mathbf P^N_L$, presenting it by the homogeneous ideal supplied by [lem-sfb-projective-closed-subscheme-homogeneous-ideal]. Together with step 6 this says that $P_X$ is also its eventual coordinate polynomial; uniqueness follows again from infinitely many values. The last clause of [lem-sfb-flat-projective-hilbert-polynomial-locality] says that a projective scheme over any field has zero Hilbert polynomial exactly when it is empty. Since $P_X\\ne0$, $X_L$ is nonempty. The argument of steps 1--4, already established for an arbitrary field and closed embedding, therefore applies over $L$ and gives $\\dim X_L=\\deg P_X=\\dim X$. The linear-polynomial conclusion of step 5 holds over $L$ as well. None of these steps used reducedness, irreducibility, or equidimensionality.",
+   "uses": [
+    "lem-sfb-projective-coordinate-ring-euler-polynomial",
+    "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+    "lem-sfb-flat-projective-hilbert-polynomial-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 08AB (lemma-euler-characteristic-extend-base-field), 0BEM (lemma-numerical-polynomial-from-euler), 0BEV (lemma-ample-positive); coherent.tex Tag 0AG7 (lemma-recover-tail-graded-module)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "lem-pc-projective-proper",
+  "def-weil-proper-morphism",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-very-ample-ample",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "lem-sc-snapper-numerical-polynomial",
+  "def-sfb-projective-coordinate-hilbert-polynomial",
+  "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+  "lem-sfb-projective-coordinate-ring-euler-polynomial",
+  "sk-def-av-ample-degree",
+  "def-sc-hilbert-degree",
+  "lem-sc-positive-ample-hilbert-degree",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-pc-proper-base-change",
+  "lem-sc-flat-base-change-coherent",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-pc-finrank-field-base-change",
+  "def-pc-euler-characteristic",
+  "lem-sfb-flat-projective-hilbert-polynomial-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0BEM (lemma-numerical-polynomial-from-euler), 0BEV (lemma-ample-positive), 08AB (lemma-euler-characteristic-extend-base-field); coherent.tex Tag 0AG7 (lemma-recover-tail-graded-module)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a nonempty projective scheme over a field the degree of its Hilbert polynomial equals its Krull dimension",
+   "results": "Retained msearch log: ok=True, n_hits=8; returned top entries: ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial, Polynomial.ringKrullDim_le, MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial, ringKrullDim_succ_le_ringKrullDim_polynomial, Polynomial.ringKrullDim_of_isNoetherianRing, AlgebraicGeometry.Proj, Projectivization.card_of_finrank; digest=5cd066a99a7598c6. The log retains names rather than full response bodies.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern formal rational-series polynomials, ring dimension, or projectivization, and do not state the scheme-theoretic coordinate/Euler/degree assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Hilbert polynomial of a homogeneous coordinate ring has degree the dimension of Proj",
+   "results": "Retained msearch log: ok=True, n_hits=8; returned top entries: Polynomial.natDegree_preHilbertPoly, Polynomial.natDegree_hilbertPoly_of_ne_zero, HomogeneousLocalization.deg, HomogeneousLocalization.NumDenSameDeg.deg_one, HomogeneousLocalization.NumDenSameDeg.deg, ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial, Polynomial.hilbertPoly_X_pow_succ, MvPolynomial.IsHomogeneous.funext_of_le_card; digest=1fc1f3f674638972. The log retains names rather than full response bodies.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern formal rational-series polynomials, ring dimension, or projectivization, and do not state the scheme-theoretic coordinate/Euler/degree assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HilbertPoly\", \"natDegree\"",
+   "results": "Retained msearch log: ok=True, n_hits=3; returned top entries: Polynomial.natDegree_preHilbertPoly, Polynomial.natDegree_hilbertPoly_of_ne_zero, Polynomial.natDegree_hilbertPoly_of_ne_zero_of_rootMultiplicity_lt; digest=e0435146a7e2cb5b. The log retains names rather than full response bodies.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern formal rational-series polynomials, ring dimension, or projectivization, and do not state the scheme-theoretic coordinate/Euler/degree assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "hilbertPoly|hilbertPolynomial|HilbertPolynomial",
+   "results": "Retained msearch log: ok=True, n_hits=5; returned top entries: Mathlib/RingTheory/Polynomial/HilbertPoly.lean, Mathlib/RingTheory/Polynomial/HilbertPoly.lean, Mathlib/RingTheory/Polynomial/HilbertPoly.lean, Mathlib/RingTheory/Polynomial/HilbertPoly.lean, Mathlib/RingTheory/Polynomial/HilbertPoly.lean; digest=c48536c26f73abaf. The log retains names rather than full response bodies.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern formal rational-series polynomials, ring dimension, or projectivization, and do not state the scheme-theoretic coordinate/Euler/degree assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a nonempty projective scheme over a field the degree of its Hilbert polynomial equals its Krull dimension",
+   "results": "Retained msearch log: ok=True, n_hits=8; returned top entries: Polynomial.hilbertPoly, Polynomial.natDegree_hilbertPoly_of_ne_zero, ringKrullDim_eq_zero_of_isField, ringKrullDim_eq_zero_of_field, Polynomial.ringKrullDim_of_isNoetherianRing, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, Polynomial.hilbertPoly_succ, Ideal.sup_height_eq_ringKrullDim; digest=99fb3c2aac1bd5bf. The log retains names rather than full response bodies.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern formal rational-series polynomials, ring dimension, or projectivization, and do not state the scheme-theoretic coordinate/Euler/degree assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ten-canonical-hilbert-parameter",
+  "date": "2026-10-22",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Dimension is the degree of a projective Hilbert polynomial.",
+   "via": [
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-hilbert-polynomial-dimension",
+  "worker": "stage1",
+  "summary": "Seven proof steps reuse existing nodes, with no new nodes. The coordinate polynomial equals the integer-valued Euler polynomial by eventual comparison and polynomial uniqueness. Positive Hilbert degree, interpreted by the current finite-difference definition, forces the top coefficient to be positive. Flat cohomological base change then preserves the polynomial and dimension. The statement is unchanged. Repair of the 06:59 UTC promotion return: reread all current dependencies, explicitly identify the current coordinate-predicate quotient with the homogeneous-ideal quotient in step 3, and cite the current Hilbert-degree definition in step 4. Recorded search-result summaries now follow the retained actual log exactly. Latest promotion-return repair (returned head 4968c33e861): current item remains unsplit; every current cited statement and all 28 quotes reread and checked. Step 6 now explicitly supplies the tensor flip needed to apply the finite-rank node in its stated tensor order. The report identifies this latest return separately from the retained earlier repair. Current promotion-return repair (returned head dd8527c9c8d, 2026-10-22 16:25 UTC): rechecked all 23 current proof-dependency statements and their blueprint updates, verified all 28 verbatim citations, and made the structure-sheaf support equality in step 3 explicit stalkwise. The initial current-base dry run passed at d8bd1c22947 and the separate server DAG check passed; a final dry run and push follow the updated report.",
+  "blueprint": "The inherited from.place serves the dimension-one check in step 1 of lem-sfb-ten-canonical-hilbert-parameter, under the direct-image alteration/moduli prerequisite chain. Steps 1--4 realize its dimension/degree input, step 5 the linear case, steps 6--7 extension invariance. The ancestry tool returns None; the inherited null from.node and its complete via/place are preserved. Whole-blueprint searches found no node stating this combined assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-snapper-numerical-polynomial",
+    "why": "Generic Euler characteristics of twists by several invertible modules form a numerical polynomial used with its stated hypotheses as an input to the coordinate/Euler or field-extension argument. This supports the Hilbert parameter dimension check below the moduli prerequisite; the current unit has no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-snapper-numerical-polynomial"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-c60430e78",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-c60430e78 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full. There are no new nodes, and I re-read the snapshot statements of all 23 proof_deps. This is the 4th delivery: 22df8ab02 got a FIX (C4, def-sc-hilbert-degree cited in step 4), and 4968c33e8 and dd8527c9c both got a PASS. Each landing was refused as 'side completion never promoted'. On clones/live and clones/side-live the item is still unsplit with an empty proof, and there is no repair note. Compared with dd8527 only proof and split_report changed; statement, source, deps, unit and blueprint are byte-identical. The only mathematical change is one new sentence in step 3: Supp(O_X)=X, because every stalk is a nonzero local ring. That is correct and is what Snapper's bound dim Supp needs. No cited statement or blueprint_update changed, and there is no SGA. Steps: (1) projective, so proper and finite type, so g finite; X is Noetherian and O_X coherent. (2) L=i*O(1) is ample and O_X(m)=L^m for all m in Z. (3) Snapper on Z (0BEM, varieties.tex l.10195) gives Q with deg<=g. The coordinate I_d equals the homogeneous-ideal I_d, the coordinate/Euler node gives eventual equality, and uniqueness gives P_X=Q. (4) By sk-def-av-ample-degree and the main-20261015 update of def-sc-hilbert-degree, the degree is g!a_g; positivity gives a_g>0, so deg=g (0BEV l.10580). (5) Elementary. (6) The general flat clause of base change plus the finrank leaf preserves chi (08AB l.6260). (7) The locality node's last clause gives X_L nonempty, then steps 1-4 run over L. Edge cases checked: N=0, nonreduced finite schemes, double line 2m+1, line plus point m+2, negative twists of P^N, finite and transcendental fields. Batch-5 flags: Snapper, the def-sc-hilbert-degree definition, lem-sc-positive-ample-hilbert-degree, lem-pc-euler-characteristic-well-defined (coherent finiteness) and the locality node's emptiness clause are all coherent-cohomology facts outside the trace formula and Poincare duality. Their paths reach sec-trace-formula only through def-trf-schematically-dense-open (a plain definition) and lem-trf-free-projective-bundle-base-change-space (the generic Proj Sym comparison), which are general foundations, so all 5 are accepted. The Snapper tool use is accepted. Advisory: from.node is null (inherited from Q39), and the Snapper node's source says 0BEL where it should say 0BEM. Maintainer note: this is a promotion loop, so promote this head instead of returning it again."
+ }
+}

@@ -134,11 +134,15 @@ instance towerExtension_colimits : PreservesFiniteColimits (towerExtension.{c, v
 Source: Stacks 03EK (blueprint: def-sf-localized-strict-tensor-comparison-data). -/
 def reductionFamily : AlgebraTowers.{c, v, r} R ⥤
     Modules.{c, v, r} R ⥤ (ℕᵒᵖ ⥤ Modules.{c, v, r} R) :=
-  (Functor.whiskeringRight ℕᵒᵖ _ _).obj (algebraModules.{c, v, r} R) ⋙
+  let F := (Functor.whiskeringRight ℕᵒᵖ _ _).obj (algebraModules.{c, v, r} R) ⋙
     (curriedTensor (ℕᵒᵖ ⥤ Modules.{c, v, r} R)).flip ⋙
       (Functor.whiskeringLeft (Modules.{c, v, r} R)
         (ℕᵒᵖ ⥤ Modules.{c, v, r} R) (ℕᵒᵖ ⥤ Modules.{c, v, r} R)).obj
           (Functor.const ℕᵒᵖ)
+  { obj S := reduction.{c, v, r} R S
+    map := F.map
+    map_id := F.map_id
+    map_comp := F.map_comp }
 
 /-- Additivity of the same family presentation of reduction.
 Source: Stacks 03EK (blueprint: def-sf-localized-strict-tensor-comparison-data). -/
@@ -250,6 +254,49 @@ def comparisonOnComplexes
   letI := towerExtension_additive.{c, v, r} R V
   NatIso.mapHomologicalComplex η (.up ℤ)
 
+/-- Representative equation for descent across two exact functors.
+Source: Stacks 015F and 06YU
+(blueprint: def-sf-localized-strict-tensor-comparison-data). -/
+def ExactDescentEquation
+    {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (L : A ⥤ B) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    (N : C ⥤ D) [N.Additive] [PreservesFiniteLimits N] [PreservesFiniteColimits N]
+    (E : B ⥤ D) [E.Additive] (F : A ⥤ C) [F.Additive]
+    (T : DerivedCategory B ⥤ DerivedCategory D)
+    (U : DerivedCategory A ⥤ DerivedCategory C)
+    (ε : DerivedCategory.Q ⋙ T ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+    (δ : DerivedCategory.Q ⋙ U ⟶ F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+    (η : L ⋙ E ≅ F ⋙ N)
+    (ρ : L.mapDerivedCategory ⋙ T ≅ U ⋙ N.mapDerivedCategory)
+    (P : CochainComplex A ℤ) : Prop :=
+  T.map (L.mapDerivedCategoryFactors.hom.app P) ≫
+    ε.app ((L.mapHomologicalComplex (.up ℤ)).obj P) ≫
+    DerivedCategory.Q.map ((NatIso.mapHomologicalComplex η (.up ℤ)).hom.app P) =
+  ρ.hom.app (DerivedCategory.Q.obj P) ≫ N.mapDerivedCategory.map (δ.app P) ≫
+    N.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P)
+
+/-- Representative equation for descent across two exact functors.
+Source: Stacks 015F and 06YU
+(blueprint: def-sf-localized-strict-tensor-comparison-data). -/
+def NormalizedExactDescent
+    {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (L : A ⥤ B) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    (N : C ⥤ D) [N.Additive] [PreservesFiniteLimits N] [PreservesFiniteColimits N]
+    (E : B ⥤ D) [E.Additive] (F : A ⥤ C) [F.Additive]
+    (T : DerivedCategory B ⥤ DerivedCategory D)
+    (U : DerivedCategory A ⥤ DerivedCategory C)
+    (ε : DerivedCategory.Q ⋙ T ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+    (δ : DerivedCategory.Q ⋙ U ⟶ F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+    (good : CochainComplex A ℤ → Prop) (η : L ⋙ E ≅ F ⋙ N)
+    (ρ : L.mapDerivedCategory ⋙ T ≅ U ⋙ N.mapDerivedCategory) : Prop :=
+  ∀ P, good P → ExactDescentEquation L N E F T U ε δ η ρ P
+
 /-- Representative normalization uses exactly the two universal computation counits
 and the exact functors' localization comparisons. It quantifies over every
 flat-term K-flat representative, hence retains representative independence.
@@ -265,19 +312,17 @@ def DerivedNormalized
     (ρ : (localizedSystemExtension.{c, v, r} R V).mapDerivedCategory ⋙ m.F.obj S ≅
       mV.F.obj (S ⋙ sliceAlgebras.{c, v, r} R V) ⋙
         (towerExtension.{c, v, r} R V).mapDerivedCategory) : Prop :=
-  ∀ (P : CochainComplex (Modules.{max c v, v, r} (R.over V)) ℤ),
-    Resolving.{max c v, v, r} (R.over V) P →
-      (m.F.obj S).map
-        ((localizedSystemExtension.{c, v, r} R V).mapDerivedCategoryFactors.hom.app P) ≫
-      (m.ε S).app
-        (((localizedSystemExtension.{c, v, r} R V).mapHomologicalComplex (.up ℤ)).obj P) ≫
-      DerivedCategory.Q.map ((comparisonOnComplexes.{c, v, r} R V S η).hom.app P) =
-      ρ.hom.app (DerivedCategory.Q.obj P) ≫
-      (towerExtension.{c, v, r} R V).mapDerivedCategory.map
-        ((mV.ε (S ⋙ sliceAlgebras.{c, v, r} R V)).app P) ≫
-      (towerExtension.{c, v, r} R V).mapDerivedCategoryFactors.hom.app
-        (((reduction.{max c v, v, r} (R.over V)
-          (S ⋙ sliceAlgebras.{c, v, r} R V)).mapHomologicalComplex (.up ℤ)).obj P)
+  letI := reduction_additive.{c, v, r} R S
+  letI := reduction_additive.{max c v, v, r} (R.over V)
+    (S ⋙ sliceAlgebras.{c, v, r} R V)
+  letI := localizedSystemExtensionAdditive.{c, v, r} R V
+  letI := localizedSystemExtensionLimits.{c, v, r} R V
+  letI := localizedSystemExtensionColimits.{c, v, r} R V
+  NormalizedExactDescent (localizedSystemExtension.{c, v, r} R V)
+    (towerExtension.{c, v, r} R V) (reduction.{c, v, r} R S)
+    (reduction.{max c v, v, r} (R.over V) (S ⋙ sliceAlgebras.{c, v, r} R V))
+    (m.F.obj S) (mV.F.obj (S ⋙ sliceAlgebras.{c, v, r} R V))
+    (m.ε S) (mV.ε _) (Resolving.{max c v, v, r} (R.over V)) η ρ
 
 /-- Existing scalar restriction, with the coefficient size fixed explicitly.
 Source: Stacks 03DA (blueprint: def-sf-localized-strict-tensor-comparison-data). -/
@@ -333,6 +378,31 @@ def EvaluationOrdinaryNormalized (S : AlgebraTowers.{c, v, r} R) (n : ℕᵒᵖ)
     (τ.hom.app M).val.app W (pure.{c, v, r} R _ _ W p s) =
       scalarPure.{c, v, r} R (S.obj n) e M W s p
 
+/-- Representative equation for evaluation of a left-derived comparison across two
+exact functors. Source: Stacks 015F and 06YU
+(blueprint: def-sf-localized-strict-tensor-comparison-data). -/
+def EvaluatedDescentEquation
+    {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (E : A ⥤ B) [E.Additive] (F : A ⥤ C) [F.Additive]
+    (H : B ⥤ D) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    (N : C ⥤ D) [N.Additive] [PreservesFiniteLimits N] [PreservesFiniteColimits N]
+    (T : DerivedCategory A ⥤ DerivedCategory B)
+    (U : DerivedCategory A ⥤ DerivedCategory C)
+    (ε : DerivedCategory.Q ⋙ T ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+    (δ : DerivedCategory.Q ⋙ U ⟶ F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+    (η : E ⋙ H ≅ F ⋙ N)
+    (ρ : T ⋙ H.mapDerivedCategory ≅ U ⋙ N.mapDerivedCategory)
+    (P : CochainComplex A ℤ) : Prop :=
+  H.mapDerivedCategory.map (ε.app P) ≫
+    H.mapDerivedCategoryFactors.hom.app ((E.mapHomologicalComplex (.up ℤ)).obj P) ≫
+    DerivedCategory.Q.map ((NatIso.mapHomologicalComplex η (.up ℤ)).hom.app P) =
+  ρ.hom.app (DerivedCategory.Q.obj P) ≫ N.mapDerivedCategory.map (δ.app P) ≫
+    N.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P)
+
+
 /-- Canonical comparison from evaluated derived tensor to scalar extension followed
 by scalar restriction, including its counit equation on every flat-term K-flat model.
 Source: Stacks 06YU (blueprint: def-sf-localized-strict-tensor-comparison-data). -/
@@ -351,15 +421,61 @@ structure EvaluationModel (m : ReductionModel.{c, v, r} R)
   /-- The identification uses the universal computation counits, not a chosen resolution. -/
   normalized : ∀ (P : CochainComplex (Modules.{c, v, r} R) ℤ),
     Resolving.{c, v, r} R P →
-    (evaluation.{c, v, r} R n).mapDerivedCategory.map ((m.ε S).app P) ≫
-      (evaluation.{c, v, r} R n).mapDerivedCategoryFactors.hom.app
-        (((reduction.{c, v, r} R S).mapHomologicalComplex (.up ℤ)).obj P) ≫
-      DerivedCategory.Q.map
-        ((NatIso.mapHomologicalComplex ordinary (.up ℤ)).hom.app P) =
-    derived.hom.app (DerivedCategory.Q.obj P) ≫
-      (scalars.{c, v, r} R (S.obj n)).mapDerivedCategory.map (scalar.ε.app P) ≫
-      (scalars.{c, v, r} R (S.obj n)).mapDerivedCategoryFactors.hom.app
-        ((scalar.E.mapHomologicalComplex (.up ℤ)).obj P)
+    EvaluatedDescentEquation (reduction.{c, v, r} R S) scalar.E
+      (evaluation.{c, v, r} R n) (scalars.{c, v, r} R (S.obj n))
+      (m.F.obj S) scalar.T (m.ε S) scalar.ε ordinary derived P
+
+/-- Localize an exact square of additive functors using the canonical composition
+comparisons. Source: Stacks 015F
+(blueprint: def-sf-localized-strict-tensor-comparison-data). -/
+def exactDerivedSquare
+    {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (G : B ⥤ D) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (H : A ⥤ C) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    (I : C ⥤ D) [I.Additive] [PreservesFiniteLimits I] [PreservesFiniteColimits I]
+    (η : F ⋙ G ≅ H ⋙ I) :
+    F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅
+      H.mapDerivedCategory ⋙ I.mapDerivedCategory :=
+  (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+    Functor.mapDerivedCategoryNatIso η ≪≫ Functor.mapDerivedCategoryCompIso H I
+
+/-- The derived evaluation square, expressed with the four exact functors and their
+canonical composition comparisons. Source: Stacks 015F and 06YU
+(blueprint: def-sf-localized-strict-tensor-comparison-data). -/
+def DerivedEvaluationSquare
+    {A B C D E F : Type*}
+    [Category* A] [Category* B] [Category* C] [Category* D] [Category* E] [Category* F]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D] [Abelian E] [Abelian F]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [HasDerivedCategory E] [HasDerivedCategory F]
+    (L : A ⥤ B) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    (N : C ⥤ D) [N.Additive] [PreservesFiniteLimits N] [PreservesFiniteColimits N]
+    (H : D ⥤ B) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    (H' : C ⥤ A) [H'.Additive] [PreservesFiniteLimits H'] [PreservesFiniteColimits H']
+    (M : E ⥤ F) [M.Additive] [PreservesFiniteLimits M] [PreservesFiniteColimits M]
+    (U : F ⥤ B) [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]
+    (U' : E ⥤ A) [U'.Additive] [PreservesFiniteLimits U'] [PreservesFiniteColimits U']
+    (T : DerivedCategory B ⥤ DerivedCategory D)
+    (T' : DerivedCategory A ⥤ DerivedCategory C)
+    (W : DerivedCategory B ⥤ DerivedCategory F)
+    (W' : DerivedCategory A ⥤ DerivedCategory E)
+    (κ : N ⋙ H ≅ H' ⋙ L) (θ : U' ⋙ L ≅ M ⋙ U)
+    (ρ : L.mapDerivedCategory ⋙ T ≅ T' ⋙ N.mapDerivedCategory)
+    (pd : T ⋙ H.mapDerivedCategory ≅ W ⋙ U.mapDerivedCategory)
+    (qd : T' ⋙ H'.mapDerivedCategory ≅ W' ⋙ U'.mapDerivedCategory)
+    (β : L.mapDerivedCategory ⋙ W ≅ W' ⋙ M.mapDerivedCategory) : Prop :=
+  ∀ K : DerivedCategory A,
+    H.mapDerivedCategory.map (ρ.hom.app K) ≫
+      (exactDerivedSquare N H H' L κ).hom.app (T'.obj K) ≫
+      L.mapDerivedCategory.map (qd.hom.app K) ≫
+      (exactDerivedSquare U' L M U θ).hom.app (W'.obj K) =
+    pd.hom.app (L.mapDerivedCategory.obj K) ≫
+      U.mapDerivedCategory.map (β.hom.app K)
 
 /-- Exact evaluation commutes with termwise extension, with its canonical localization
 comparison. Source: Stacks 015F
@@ -372,15 +488,9 @@ def evaluationExtensionDerived (n : ℕᵒᵖ) :
   letI := localizedSystemExtensionAdditive.{c, v, r} R V
   letI := localizedSystemExtensionLimits.{c, v, r} R V
   letI := localizedSystemExtensionColimits.{c, v, r} R V
-  (Functor.mapDerivedCategoryCompIso (towerExtension.{c, v, r} R V)
-    (evaluation.{c, v, r} R n)).symm ≪≫
-      Functor.mapDerivedCategoryNatIso
-        (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl) :
-          towerExtension.{c, v, r} R V ⋙ evaluation.{c, v, r} R n ≅
-            evaluation.{max c v, v, r} (R.over V) n ⋙
-              localizedSystemExtension.{c, v, r} R V) ≪≫
-        Functor.mapDerivedCategoryCompIso (evaluation.{max c v, v, r} (R.over V) n)
-          (localizedSystemExtension.{c, v, r} R V)
+  exactDerivedSquare (towerExtension.{c, v, r} R V) (evaluation.{c, v, r} R n)
+    (evaluation.{max c v, v, r} (R.over V) n) (localizedSystemExtension.{c, v, r} R V)
+    (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl))
 
 /-- Normalization of scalar restriction through localized extension: the same summand
 and section are preserved. Source: Stacks 03DI, 03CY
@@ -412,12 +522,10 @@ def scalarExtensionDerived (A : Under R)
   letI := localizedSystemExtensionAdditive.{c, v, r} A.right V
   letI := localizedSystemExtensionLimits.{c, v, r} A.right V
   letI := localizedSystemExtensionColimits.{c, v, r} A.right V
-  (Functor.mapDerivedCategoryCompIso
+  exactDerivedSquare
     (scalars.{max c v, v, r} (R.over V) ((sliceAlgebras.{c, v, r} R V).obj A))
-    (localizedSystemExtension.{c, v, r} R V)).symm ≪≫
-      Functor.mapDerivedCategoryNatIso θ ≪≫
-        Functor.mapDerivedCategoryCompIso (localizedSystemExtension.{c, v, r} A.right V)
-          (scalars.{c, v, r} R A)
+    (localizedSystemExtension.{c, v, r} R V)
+    (localizedSystemExtension.{c, v, r} A.right V) (scalars.{c, v, r} R A) θ
 
 /-- Degreewise scalar-linear comparison with explicit exact-extension additivity.
 Source: Stacks 0E8I (blueprint: def-sf-localized-strict-tensor-comparison-data). -/
@@ -432,5 +540,7 @@ def scalarComparisonOnComplexes (A : Under R)
   letI := e.additive
   letI := eV.additive
   NatIso.mapHomologicalComplex σ (.up ℤ)
+
+attribute [irreducible] exactDerivedSquare
 
 end SheafOfModules.LocalizedStrictTensor

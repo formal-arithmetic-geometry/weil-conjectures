@@ -29,32 +29,29 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-sfb-section-ring-lax-pushforward-coherence] to each small pro-étale site and $R_T=\\Lambda_T$. It gives additive exact $E_T$ and inverse, so both preserve and reflect exact sequences. The universe and tensor hypotheses are precisely those fixed in the statement.",
-   "uses": [
-    "lem-sfb-section-ring-lax-pushforward-coherence"
-   ],
-   "elementary": false,
+   "text": "The concrete section-module equivalence preserves sums on underlying sections. Its inverse is additive by equivalence. Mathlib gives preservation of finite limits and colimits and reflection of exact short complexes by faithful exact functors.",
+   "uses": [],
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
-    "place": "Steps 1–2, internal/sectionwise operation transport; assembly step 1 from the two extracted coherence statements."
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Steps 1–2: internal/sectionwise exact operations and the normalized open-extension base-change mate."
    }
   },
   {
-   "text": "For $f:T\\prime\\to T$, use its continuous site pullback and $\\psi=\\eta_f=f_*\\alpha_f\\circ\\eta_f^{\\rm Ab}$, a ring-object map by [sk-def-sfb-coefficient-morphisms]. By [lem-sfb-pushforward-comp-monoidal] its prescribed lax structure has the sheafification-unit normalization. The pushforward definition is $\\operatorname{Res}_{\\eta_f}\\operatorname{mapMod}(f_*^{\\rm Ab})$. The reconstruction lemma gives the required ring adjunct on sections and the identity-on-sheaves comparison $r_f:E_Tf_{*,\\rm int}\\cong f_{*,\\rm sec}E_{T\\prime}$.",
+   "text": "Use the concrete coefficient reconstruction and identity-on-sections lowerComparison already proved in this module. The section action is the scalar restriction along the coefficient map; its multiplication formula follows from the sheaf tensorator generator equation.",
    "uses": [
-    "lem-sfb-section-ring-lax-pushforward-coherence",
     "sk-def-sfb-coefficient-morphisms",
     "def-sfb-module-lower-star",
     "lem-sfb-pushforward-comp-monoidal"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
-    "place": "Steps 1–2, internal/sectionwise operation transport; assembly step 2 from the two extracted coherence statements."
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Steps 1–2: internal/sectionwise exact operations and the normalized open-extension base-change mate."
    }
   },
   {
-   "text": "The two specified pullback/direct-image adjunctions exist by [def-sfb-module-upper-lower-adjunction] and [lem-weil-pbc-ringed-topoi-module-adjunction]. Apply clause (1) of [lem-sfb-equivalence-square-inverse-mate-coherence] to $r_f$: its normalized comparison $c_f$ identifies the full Hom bijections, unit and counit. Apply that clause again to $j_{!,\\rm int}\\dashv j^*_{\\rm int}$ from [sk-def-sfb-module-lower-shriek], the sectionwise open adjunction and right comparison $c_j$, obtaining $o_j:E_Tj_{!,\\rm int}\\cong j_{!,\\rm sec}E_U$ with the same normalization.",
+   "text": "Apply clause (1) of the equivalence-square inverse-mate coherence theorem to the fixed lowerComparison. Uniqueness identifies its left comparison with upperComparison. Its unit and counit equations, followed by cancellation of the inverse comparisons, give the displayed equations. Repeat with the open adjunction and openComparison.",
    "uses": [
     "lem-sfb-equivalence-square-inverse-mate-coherence",
     "def-sfb-module-upper-lower-adjunction",
@@ -63,39 +60,39 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
-    "place": "Steps 1–2, internal/sectionwise operation transport; assembly step 3 from the two extracted coherence statements."
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Steps 1–2: internal/sectionwise exact operations and the normalized open-extension base-change mate."
    }
   },
   {
-   "text": "For composable $f:T''\\to T'$, $g:T'\\to T$, the base-change site functor of $g\\circ f$ is isomorphic to the composite of those of $g$ and $f$ by the rebracketing $V\\times_TT''\\cong(V\\times_TT')\\times_{T'}T''$, which induces $c_{f,g}$. Hence [lem-sfb-eta-comp] gives exactly the composite coefficient map $\\chi$ of the reconstruction lemma with this $\\kappa$. Its composition clause identifies the direct-image comparison square with the specified underlying-sheaf compositor of [def-sfb-module-lower-star-comp]. Clause (2) of the normalized-comparison lemma then identifies the pullback compositors of [def-sfb-module-upper-star-comp], which are their adjoint conjugates.",
+   "text": "Evaluate condensedPushforwardHom_comp on sections. Mathlib pushforwardComp and pushforwardCongr₂ give the unique direct-image compositor with the required underlying map. The lowerComparison compatibility is equality on sections. Apply compositor compatibility of normalized mates to obtain upperComp compatibility. Store the two actual square composites and their compatibility using [lem-sfb-compatible-square-components], preserving the original compositor/equality/compositor formulas.",
    "uses": [
-    "lem-sfb-section-ring-lax-pushforward-coherence",
     "lem-sfb-equivalence-square-inverse-mate-coherence",
     "lem-sfb-eta-comp",
     "def-sfb-module-lower-star-comp",
+    "def-sfb-module-upper-star-comp",
+    "lem-sfb-compatible-square-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Steps 1–2: internal/sectionwise exact operations and the normalized open-extension base-change mate."
+   }
+  },
+  {
+   "text": "Apply clause (2) of the normalized-comparison theorem to the preceding direct-image composition square. Both pullback compositors are defined by conjugateIsoEquiv, so their conjugate equations are its inverse identities. Pasting with the equality of composite scheme maps gives the square compatibility. Clause (3) identifies the actual inverse mates and reflects their invertibility. Finally preservation and reflection of finite limits and colimits along equivalences gives each operation iff.",
+   "uses": [
+    "lem-sfb-equivalence-square-inverse-mate-coherence",
     "def-sfb-module-upper-star-comp"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
-    "place": "Steps 1–2, internal/sectionwise operation transport; assembly step 4 from the two extracted coherence statements."
-   }
-  },
-  {
-   "text": "In the open square, Step 4 identifies $b:g\\prime{}^*j^*\\cong j\\prime{}^*g^*$. Apply clause (3) of the normalized-comparison lemma with $J=j_!$, $U=j^*$, $J\\prime=j\\prime_!$, $U\\prime=j\\prime{}^*$, $P=g\\prime{}^*$ and $Q=g^*$. Its displayed equality identifies the actual inverse mates, hence the stated open-extension base-change maps. Its invertibility equivalence gives the required implication. Finally Step 1 and the functor isomorphisms transport exactness of each operation by applying these exact equivalences and their inverses.",
-   "uses": [
-    "lem-sfb-equivalence-square-inverse-mate-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
-    "place": "Steps 1–2, internal/sectionwise operation transport; assembly step 5 from the two extracted coherence statements."
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
+    "place": "Steps 1–2: internal/sectionwise exact operations and the normalized open-extension base-change mate."
    }
   }
  ],
  "proof_deps": [
-  "lem-sfb-section-ring-lax-pushforward-coherence",
   "sk-def-sfb-coefficient-morphisms",
   "def-sfb-module-lower-star",
   "lem-sfb-pushforward-comp-monoidal",
@@ -105,12 +102,13 @@
   "sk-def-sfb-module-lower-shriek",
   "lem-sfb-eta-comp",
   "def-sfb-module-lower-star-comp",
-  "def-sfb-module-upper-star-comp"
+  "def-sfb-module-upper-star-comp",
+  "lem-sfb-compatible-square-components"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
-  "place": "Steps 1–2; assembly of the section-ring/right-image coherence and the normalized adjunction/mate coherence statements."
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D6 and 03D7, with Categories 0B65; concrete sectionwise compositor and normalized mate assembly by D4."
  },
  "mathlib_searches": [
   {
@@ -296,7 +294,9 @@
    "AlgebraicGeometry.ProEtale.InternalModuleOperations.sectionBaseChange",
    "AlgebraicGeometry.ProEtale.InternalModuleOperations.baseChangeSourceComparison",
    "AlgebraicGeometry.ProEtale.InternalModuleOperations.baseChangeTargetComparison",
-   "AlgebraicGeometry.ProEtale.InternalModuleOperations.internal_module_operations_transport"
+   "AlgebraicGeometry.ProEtale.InternalModuleOperations.internal_module_operations_transport",
+   "AlgebraicGeometry.ProEtale.InternalModuleOperations.upperComp_compatible",
+   "AlgebraicGeometry.ProEtale.InternalModuleOperations.squareData"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/InternalModuleOperationsTransport.lean",
   "statement": "theorem internal_module_operations_transport : (∀ (T : Scheme.{u}), (equivalence Λ T).functor.Additive ∧ (equivalence Λ T).inverse.Additive ∧ PreservesFiniteLimits (equivalence Λ T).functor ∧ PreservesFiniteColimits (equivalence Λ T).functor ∧ PreservesFiniteLimits (equivalence Λ T).inverse ∧ PreservesFiniteColimits (equivalence Λ T).inverse ∧ (∀ (S : ShortComplex (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))), (S.map (equivalence Λ T).functor).Exact ↔ S.Exact) ∧ (∀ (S : ShortComplex (SheafOfModules.{u + 1} (ring Λ T))), (S.map (equivalence Λ T).inverse).Exact ↔ S.Exact)) ∧ (∀ {X Y : Scheme.{u}} (f : X ⟶ Y), (mateEquiv (CondensedRing.upperStarLowerStarAdjunction Λ f) (adjunction Λ f) (.mk _ _ _ _ (upperComparison Λ f).inv)).natTrans = (lowerComparison Λ f).hom ∧ (∀ M, (equivalence Λ Y).functor.map ((CondensedRing.upperStarLowerStarAdjunction Λ f).unit.app M) ≫ (lowerComparison Λ f).hom.app ((CondensedRing.upperStar Λ f).obj M) ≫ (lowerStar Λ f).map ((upperComparison Λ f).hom.app M) = (adjunction Λ f).unit.app ((equivalence Λ Y).functor.obj M)) ∧ (∀ N, (upperStar Λ f).map ((lowerComparison Λ f).inv.app N) ≫ (upperComparison Λ f).inv.app ((CondensedRing.lowerStar Λ f).obj N) ≫ (equivalence Λ X).functor.map ((CondensedRing.upperStarLowerStarAdjunction Λ f).counit.app N) = (adjunction Λ f).counit.app ((equivalence Λ X).functor.obj N))) ∧ (∀ {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j], (mateEquiv (CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ j) (openAdjunction Λ j) (.mk _ _ _ _ (openComparison Λ j).inv)).natTrans = (upperComparison Λ j).hom ∧ (∀ M, (equivalence Λ U).functor.map ((CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ j).unit.app M) ≫ (upperComparison Λ j).hom.app ((CondensedRing.openImmersionLowerShriek Λ j).obj M) ≫ (upperStar Λ j).map ((openComparison Λ j).hom.app M) = (openAdjunction Λ j).unit.app ((equivalence Λ U).functor.obj M)) ∧ (∀ N, (extension Λ j).map ((upperComparison Λ j).inv.app N) ≫ (openComparison Λ j).inv.app ((CondensedRing.upperStar Λ j).obj N) ≫ (equivalence Λ T).functor.map ((CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ j).counit.app N) = (openAdjunction Λ j).counit.app ((equivalence Λ T).functor.obj N))) ∧ (∀ {X Y : Scheme.{u}} (f : X ⟶ Y), (PreservesFiniteLimits (CondensedRing.upperStar Λ f) ↔ PreservesFiniteLimits (upperStar Λ f)) ∧ (PreservesFiniteColimits (CondensedRing.upperStar Λ f) ↔ PreservesFiniteColimits (upperStar Λ f)) ∧ (PreservesFiniteLimits (CondensedRing.lowerStar Λ f) ↔ PreservesFiniteLimits (lowerStar Λ f)) ∧ (PreservesFiniteColimits (CondensedRing.lowerStar Λ f) ↔ PreservesFiniteColimits (lowerStar Λ f))) ∧ (∀ {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j], (PreservesFiniteLimits (CondensedRing.openImmersionLowerShriek Λ j) ↔ PreservesFiniteLimits (extension Λ j)) ∧ (PreservesFiniteColimits (CondensedRing.openImmersionLowerShriek Λ j) ↔ PreservesFiniteColimits (extension Λ j))) ∧ (∀ {U' U T' T : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ T'} {j : U ⟶ T} {g : T' ⟶ T} [IsOpenImmersion j] [IsOpenImmersion j'] (sq : ChosenCartesianSquare g' j' j g), Functor.whiskerRight (internalBaseChange Λ sq) (equivalence Λ T').functor ≫ (baseChangeTargetComparison Λ j g).hom = (baseChangeSourceComparison Λ g' j').hom ≫ Functor.whiskerLeft (equivalence Λ U).functor (sectionBaseChange Λ sq) ∧ (IsIso (sectionBaseChange Λ sq) → IsIso (internalBaseChange Λ sq)))",
@@ -304,31 +304,28 @@
   "by": "Q100",
   "date": "2026-10-18",
   "existing": false,
-  "note": "The helper declarations implement the actual reconstructed section-ring map, tensor-formula sectionwise adjunction, unit-normalized comparisons and canonical open-extension mates of this node. Choices of maps/isomorphisms are fixed by unique sectionwise or mate characterizations; adjoints use their universal properties. All theorem proofs are postponed."
+  "note": "All theorem proofs are complete. The section operations have explicit types; the actual square composites are stored with their compatibility in squareData. Choices remain uniquely characterized; no data are chosen from mere existence."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S6",
-  "result": "pass",
-  "landing": "20261019T005423-L-2767522",
+  "reviewer": "C-00058",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261025T100919-L-3638556",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.InternalModuleOperations.coefficientMap_existsUnique",
-   "AlgebraicGeometry.ProEtale.InternalModuleOperations.internal_module_operations_transport",
-   "AlgebraicGeometry.ProEtale.InternalModuleOperations.lowerComp_existsUnique",
-   "AlgebraicGeometry.ProEtale.InternalModuleOperations.lowerComparison_existsUnique",
-   "AlgebraicGeometry.ProEtale.InternalModuleOperations.openComparison_existsUnique",
-   "AlgebraicGeometry.ProEtale.InternalModuleOperations.presheafLowerStar_isRightAdjoint",
-   "AlgebraicGeometry.ProEtale.InternalModuleOperations.upperComparison_existsUnique",
-   "AlgebraicGeometry.ProEtale.InternalModuleOperations.upperStar_isRightAdjoint"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.InternalModuleOperations.internal_module_operations_transport",
-   "AlgebraicGeometry.ProEtale.InternalModuleOperations.lowerComp_existsUnique"
-  ]
+  "note": "independent cc review: item Lean + new CompatibleSquareComponents module against node lem-sfb-internal-module-operations-transport, def-sfb-section-module-operations record and the change record; all 50 direct importers compiled against delivered and fixed modules, failing ones against the published baseline"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

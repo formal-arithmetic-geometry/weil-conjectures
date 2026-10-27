@@ -155,30 +155,64 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "lean": {
-  "module": "Sheaf.CategoryTheory.DerivedCategory.LeftDerivedTotalTensorExact",
-  "declaration": "CategoryTheory.Functor.leftDerivedFunctorFromTotalTensorIsoMapDerivedCategory",
+  "module": "Sheaf.CategoryTheory.DerivedCategory.LeftDerivedExactComparison",
+  "declaration": "CategoryTheory.Functor.leftDerivedExactComparison",
   "declarations": [
-   "CategoryTheory.Functor.leftDerivedFunctorFromTotalTensorIsoMapDerivedCategory",
-   "CategoryTheory.Functor.leftDerivedFunctorFromTotalTensorIsoMapDerivedCategory_hom_fac"
+   "CategoryTheory.Functor.leftDerivedExactComparison"
   ],
-  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/LeftDerivedTotalTensorExact.lean",
-  "statement": "def leftDerivedFunctorFromTotalTensorIsoMapDerivedCategory : F.leftDerivedFunctorFromTotalTensor (hF := F.preservesTotalTensorKFlatQuasiIso_of_exact) ≅ F.mapDerivedCategory",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/LeftDerivedExactComparison.lean",
+  "statement": "def leftDerivedExactComparison (LF : DerivedCategory C ⥤ DerivedCategory D) (ε : DerivedCategory.Qh ⋙ LF ⟶ F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) [LF.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))] : LF ≅ F.mapDerivedCategory",
   "branch": "newtargets-dag",
-  "by": "NU",
-  "date": "2026-10-16",
+  "by": "N6",
+  "date": "2026-10-22",
   "existing": false,
-  "note": "Uses the recorded leftDerivedFunctorFromTotalTensor interface under exactly the blueprint assumptions. The old upstream attachment used a different K-flat interface and three additional graded-tensor assumption families. Exactness supplies the recorded preservation property, and the real definition is Mathlib leftDerivedUnique for the two canonical counits."
+  "note": "Section 1(B): the old record names a comparison whose source is leftDerivedFunctorFromTotalTensor. The specified module functors use the published leftDerivedFunctor, with a different K-flat implementation; these are not definitionally the same source. The new universal-counit interface accepts any specified total left derived functor and compares it with exact termwise descent by Mathlib leftDerivedUnique. It imposes no extra monoidal or graded-tensor assumptions. Public imports retain the complete previous total-tensor interface and the published K-flat interface, without changing either construction. The consuming module applies this new comparison directly to the existing module pullback and its actual universal counit."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Functor.leftDerivedFunctorIsoMapDerivedCategory",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory",
+     "lines": [
+      77,
+      86
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Functor.leftDerivedFunctorIsoMapDerivedCategory",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory",
+     "lines": [
+      122,
+      131
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-derived-categories",
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-df246220d",
-  "group": "NU",
+  "reviewer": "NT-stage2-cc-2576d7953",
+  "group": "N6",
   "result": "pass",
-  "note": "Node, source, dependency interfaces, hypotheses, universes, edge cases, canonical definition, docstrings, report sections, and scompile side-overlay compilation all verified."
+  "note": "Read item, 9 stmt_dep records, both modules, report, and the upstream declarations used (moduleObjectDerivedPullback/Pushforward, leftDerivedUpperStarComp, upperStarComp, leftDerivedFunctorIsoMapDerivedCategory, mapDerivedCategoryNatIso/CompIso, rightDerivedFunctor K-injective CommShift). All clauses rendered: IsTriangulated for P_u with shift transported along canonical c_u and for G_u with K-injective shift; CommShift of c_u and the complex comparison; K-flat resolution normalization with shift; compositor = c-conjugated localized termwise b then mapDerivedCategoryCompIso; degree r+n representative; CommShift of compositor hom and inv; arbitrary commutative-square shift equation with correct orientation (a=g, b=g') and no cartesian hypothesis. No extra hypotheses, universes as framework, 6 sorry-only theorems, real defs, docstrings OK, statements verbatim. §1(B) def-sfb-left-derived-exact repair accepted: old record bound a different LF implementation; new generic leftDerivedUnique interface is broader, publicly re-exports old module, old names used by no landed module, old module has no sorry. Maintainer notes: LeftDerivedTotalTensorExact becomes unowned; landed parent DerivedExchangeExactNormalization has defeq duplicate CommShift instances to drop in stage 3; second reading is a self-audit. No recompile (no FIX)."
  },
  "reviewed_proof": {
   "date": "2026-10-18",

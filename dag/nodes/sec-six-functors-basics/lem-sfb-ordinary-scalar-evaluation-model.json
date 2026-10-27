@@ -1,0 +1,124 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 08J9; ordinary scalar chain calculation in the flat scalar evaluation refinement. For coefficient-square pure formulas, sites-modules.tex Tags 03CY, 03CZ and sites-cohomology.tex 0A8X."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 08J9; ordinary scalar chain calculation in the flat scalar evaluation refinement. For coefficient-square pure formulas, sites-modules.tex Tags 03CY, 03CZ and sites-cohomology.tex 0A8X."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FlatScalarEvaluationModel",
+  "date": "2026-10-24",
+  "group": "R2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-hom-flat-scalar-evaluation-model",
+   "place": "Step 2 and the ordinary chain part of steps 3--4.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "id": "lem-sfb-ordinary-scalar-evaluation-model",
+ "title": "Ordinary scalar evaluation and its unit tensor map",
+ "statement": "For a site with sheafified modules, let E_a be actual additive scalar extensions along all maps of commutative ring sheaves, with their ordinary scalar adjunctions, specified object/map equations and scalar-unit normalization [def-sfb-scalar-hom-comparison-data]. Suppose strong chain tensor comparisons send each unit of x tensor p to the tensor of the units of x and p. There are normalized maps nu_a:S tensor_R D -> UE_aD, chain evaluations ev_b:D tensor_R P -> I, scalar evaluations h_b:(S tensor_R D) tensor_R P -> UE_aI and unit tensor maps UE_aD tensor_R P -> U(E_aD tensor_S E_aP), with formulas nu(s tensor x)=s tensor x, ev_b(x tensor p)=b(x)(p), h_b((s tensor x) tensor p)=s tensor b(x)(p), and y tensor p -> y tensor (1 tensor p). All inputs are arbitrary complexes. The ordinary extensions have a strict chain presentation and compatible strict squares for each commuting coefficient square [lem-sfb-hom-scalar-chain-identification] [def-coef-hom-representative-evaluation]. Neither derived-category choices nor flatness hypotheses occur.",
+ "stmt_deps": [
+  "def-sfb-scalar-hom-comparison-data",
+  "lem-sfb-hom-scalar-chain-identification",
+  "def-coef-hom-representative-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Compare ordinary extensions by the specified object and map equations. Map the comparison to complexes. The ordinary unit equation proves its generator normalization. Compose the canonical strict nu with this comparison to obtain nu and the strict presentation.",
+   "uses": [
+    "lem-sfb-hom-scalar-chain-identification",
+    "def-sfb-scalar-hom-comparison-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use ordinary chain tensor-Hom transposition to construct evaluation. Compose the ordinary scalar adjunction unit, chain tensor comparison and counit to construct the unit tensor map. The triangle identity proves its generator formula.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "def-coef-hom-representative-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose nu, the unit tensor map, inverse tensor comparison and extended evaluation to construct scalar evaluation. The inverse tensor comparison sends (s tensor x) tensor (1 tensor p) to s tensor (x tensor p), by linearity and its normalized unit equation. The previous formulas give s tensor b(x)(p). The canonical strict coefficient squares and their proved compatibility supply all coefficient-square data.",
+   "uses": [
+    "lem-sfb-hom-scalar-chain-identification",
+    "def-sfb-scalar-hom-comparison-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-hom-scalar-chain-identification",
+  "def-sfb-scalar-hom-comparison-data",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "def-coef-hom-representative-evaluation"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ordinary scalar extension tensor Hom evaluation complexes compatible coefficient square",
+   "results": "8 hits: HomologicalComplex.tensorHom, scalar extension composition, and universal tensor constructions; no chain evaluation coefficient-square theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.right_triangle_components",
+   "results": "Unknown identifier in search index; 0 matching declarations.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "chainEquiv_symm_pure|coefficientCompatibility_generic",
+   "results": "0 search-index hits. Repository search finds the proved private chain-equivalence and generic strict coefficient compatibility used by the proof.",
+   "date": "2026-10-24",
+   "verdict": "library proof helpers"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ScalarOrdinaryEvaluationModel",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarOrdinaryEvaluationModel.lean",
+  "declaration": "CategoryTheory.ScalarOrdinaryEvaluation.construction_exists",
+  "statement": "theorem construction_exists\n    (μ : ∀ {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S), Tensor.{c, v, r} (J := J) O a) :\n      Nonempty (Construction.{c, v, r} (J := J) O)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-f7762",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261024T190759-L-70230",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-f7762",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261024T190759-L-70230",
+  "kind": "interface",
+  "note": "independent cc review: ChainSquare/model_exists and lean.statement vs clones/live (annotation-only); node proof fields vs imports; new node lean records vs new modules; importer FlatInternalHomEvaluationRoof compiled against delivered modules (exit 0); #print axioms model_exists clean"
+ }
+}

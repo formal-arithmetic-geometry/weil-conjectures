@@ -1,0 +1,158 @@
+{
+ "id": "lem-pe-internal-kflat-scalar-tower-realization",
+ "kind": "lemma",
+ "title": "Native internal K-flat scalar tower realization",
+ "statement": "Let C be a closed symmetric monoidal Grothendieck abelian category with additive tensor and functorial flat resolutions. Let R and S_n be commutative monoid objects, q_n:R→S_n and r_n:S_{n+1}→S_n monoid morphisms with q_{n+1}r_n=q_n. Let B_n be R-modules with isomorphisms eB_n:B_n≅Res(q_n)(S_n), unit maps ι_n:R→B_n and transitions τ_n:B_{n+1}→B_n such that ι_n eB_n=q_n and τ_n eB_n=eB_{n+1}r_n on underlying C-morphisms. Use the native extension-restriction adjunctions of [sk-def-sfb-change-of-scalars] and their total derived adjunctions [sk-def-sfb-derived-extension-of-scalars]. For every native K-flat cochain complex P and isomorphism eP:QP≅K, there are isomorphisms e_n:Q(P⊗_R B_n)≅Res(q_n)L Ext(q_n)(K). They identify the termwise maps 1⊗τ_n with the restricted transition formed from the derived r_n-unit and left-adjoint-uniqueness associator, and identify the termwise right-unitor/tensor-ι_n maps with eP followed by the derived q_n-unit. No flatness of q_n or of the terms of P is assumed. All tensor products, K-flatness and derived functors are the native internal-module constructions.",
+ "stmt_deps": [
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-derived-extension-of-scalars"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 064K and 06XY, native internal-module version of the scalar-realization step of sk-def-pe-derived-completion and lem-pe-kflat-scalar-tower-realization"
+ },
+ "proof": [
+  {
+   "text": "The balanced coequalizer defining extension of scalars is the relative tensor with the restricted regular module. The canonical coequalizer comparison is R-linear, as is checked after the epimorphic tensor projection. Compose it with symmetry and eB to identify ordinary extension followed by restriction with tensorRight B_n.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The universal left-derived computation counit is invertible on a native K-flat complex P. Exact restriction commutes with localization. The ordinary comparison therefore gives level isomorphisms on QP. The derived adjunction unit factorization identifies the localized ordinary unit with the actual derived unit; hι makes the ordinary map precisely the right-unitor inverse followed by tensoring ι_n.",
+   "uses": [
+    "sk-def-sfb-derived-extension-of-scalars",
+    "sk-def-sfb-change-of-scalars",
+    "lem-pur-cochain-adjunction-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary scalar-change map has balanced formula s⊗p↦r_n(s)⊗p. The hτ identity identifies this with 1⊗τ_n under the tensor comparisons. Take its adjoint mate and use q_{n+1}r_n=q_n to identify composite restriction. Uniqueness of left adjoints gives exactly the associator used in step; derived-unit compatibility thus gives the transition equation. Transport all level isomorphisms along eP and use naturality to obtain both equations for K. The construction also works for the zero complex and zero ring.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-derived-extension-of-scalars",
+    "lem-pur-exact-restriction-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expose the canonical scalar computation as a natural transformation on complexes, invertible on K-flat complexes. Compare derived right tensor to the same termwise tensor using the lax tensorator of Q and mapBifunctorSingle₂Iso. Its transition equation is naturality in the coefficient; its unit equation is lax right unitality and the degreewise right-unitor formula. Compose the tensor comparison with the inverse scalar computation on K-flat complexes, and descend the resulting isomorphism and equations by fully faithful precomposition with K-flat localization. This proves the added natural_computation and derived_realization interfaces.",
+   "uses": [
+    "lem-sfb-derived-monoidal",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "lem-pur-cochain-adjunction-compatibility",
+  "lem-pur-exact-restriction-composition",
+  "lem-sfb-derived-monoidal",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "D5",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-pe-derived-completion/_section.md",
+  "place": "Existing scalar realization, its natural comparison on complexes, and descent to derived right tensor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension on a K-flat complex agrees with tensor with the restricted regular module and preserves units and scalar-change transitions",
+   "results": "8 hits: the ModuleCat extension/restriction unit and ordinary flat scalar extension. No native internal-module unbounded K-flat realization or coherent transition theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-24"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K-flat complex realizes derived extension of scalars as ordinary tensor with the restricted regular module, preserving adjunction units and successive scalar transitions",
+   "results": "8 hits concerning ordinary flat scalar extension and comonadicExtendScalars. None treats native internal modules or the unbounded coherent derived tower.",
+   "verdict": "no exact match",
+   "date": "2026-10-24"
+  },
+  {
+   "tool": "loogle",
+   "query": "Mod.extendScalars",
+   "results": "0 hits; the Mathlib search service does not know the adopted source declaration. Read the native DerivedExtendScalars implementation instead.",
+   "verdict": "no match",
+   "date": "2026-10-24"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlatScalar|extendForgetTensor|derivedExtendMap",
+   "results": "0 hits in Mathlib. Local rg found the native extendForgetTensorObjIso and generic derived-adjunction factorization. The former is only an underlying-object comparison; its linear lift, units and coherent transitions are the content here.",
+   "verdict": "no exact match",
+   "date": "2026-10-24"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.DerivedCompletion",
+  "date": "2026-10-24",
+  "group": "T5"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-pe-derived-completion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-pe-derived-completion",
+   "place": "First display and the paragraph about the canonical successive derived reductions",
+   "via": [
+    "lem-pe-kflat-scalar-tower-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.InternalKFlatScalarTowerRealization",
+  "file": "lean/Sheaf/Algebra/Homology/InternalKFlatScalarTowerRealization.lean",
+  "declaration": "CategoryTheory.Mod.KFlatScalarTower.realization",
+  "statement": "theorem realization\n    (eB : ∀ n, B n ≅ (Mod.comap (q n)).obj (Mod.regular (S n)))\n    (hι : ∀ n, (ι n).hom ≫ (eB n).hom.hom = q n)\n    (hτ : ∀ n, (τ n).hom ≫ (eB n).hom.hom = (eB (n + 1)).hom.hom ≫ r n)\n    (K : DerivedCategory (Mod C R)) (P : CochainComplex (Mod C R) ℤ)\n    (hP : (HomologicalComplex.quasiIso (Mod C R) (.up ℤ)).kFlat P)\n    (eP : DerivedCategory.Q.obj P ≅ K) :\n    ∃ e : ∀ n, DerivedCategory.Q.obj ((tensorLevel R B n).obj P) ≅\n        (restriction R S q n).obj ((reduction R S q n).obj K),\n      (∀ n, DerivedCategory.Q.map (tensorStep R B τ P n) ≫ (e n).hom =\n        (e (n + 1)).hom ≫ step R S q r h K n) ∧\n      (∀ n, DerivedCategory.Q.map (tensorUnit R B ι P n) ≫ (e n).hom =\n        eP.hom ≫ (Mod.derivedExtendMapDerivedCategoryAdjunction (q n)).unit.app K)",
+  "declarations": [
+   "CategoryTheory.Mod.KFlatScalarTower.reduction",
+   "CategoryTheory.Mod.KFlatScalarTower.restriction",
+   "CategoryTheory.Mod.KFlatScalarTower.restrictionComp",
+   "CategoryTheory.Mod.KFlatScalarTower.association",
+   "CategoryTheory.Mod.KFlatScalarTower.step",
+   "CategoryTheory.Mod.KFlatScalarTower.tensorLevel",
+   "CategoryTheory.Mod.KFlatScalarTower.tensorStep",
+   "CategoryTheory.Mod.KFlatScalarTower.tensorUnit",
+   "CategoryTheory.Mod.KFlatScalarTower.realization",
+   "CategoryTheory.Mod.KFlatScalarTower.natural_computation",
+   "CategoryTheory.Mod.KFlatScalarTower.derived_realization"
+  ],
+  "branch": "sheaf-dag",
+  "by": "T5",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-ec24d",
+  "group": "T5",
+  "result": "fix",
+  "landing": "20261024T020553-L-2620352",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261025T162152-L-338856",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

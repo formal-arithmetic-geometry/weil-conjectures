@@ -1,0 +1,114 @@
+{
+ "id": "def-sfb-module-derived-functor-shifts",
+ "kind": "definition",
+ "title": "Specified shifts on total derived module functors",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring]. For every scheme $T$, put $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] and $D_T=D(\\operatorname{Mod}_{\\Lambda_T})$ [sk-def-sfb-module-objects], [def-weil-abstract-derived-category], using the small-site universes of [def-weil-size-convention]. For every morphism of schemes $u:S\\to T$, let $P_u=Lu^*:D_T\\to D_S$ and $G_u=Ru_*:D_S\\to D_T$ be the specified total derived functors, computed on K-flat and K-injective resolutions respectively [sk-def-sfb-module-derived-pushpull]. Define $c_u:P_u\\xrightarrow{\\sim}D(u^*)$ to be the canonical universal-counit comparison with exact termwise pullback [def-sfb-left-derived-exact]. Give $D(u^*)$ its termwise integer-shift structure. Define the shift structure on $P_u$ by transport along $c_u$: for every integer $n$ and $K\\in D_T$, its comparison $P_u(K[n])\\to P_u(K)[n]$ is $c_{u,K}[n]^{-1}\\circ s^n_{D(u^*),K}\\circ c_{u,K[n]}$. Define the shift structure on $G_u$ to be its published K-injective structure, transported from the inverse equivalence $D_S\\simeq K(\\mathrm{Inj}_S)$ followed by ordinary termwise $u_*$ and localization. These constructions specify the structures, with no choice of a new right-adjoint shift structure.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-left-derived-exact"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014X (lemma-additive-exact-homotopy-category), 015F (lemma-right-derived-exact-functor), 05SE (proposition-derived-functor); exact-comparison transport and the specified K-injective derived-functor construction."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport integer shifts on exact derived module pullback along the canonical comparison and use fixed K-injective shifts on derived module pushforward",
+   "results": "8 hits: CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, DerivedCategory.instAdditiveShiftFunctorInt, CochainComplex.isKInjective_shift_iff, CochainComplex.instIsKInjectiveObjIntShiftFunctor, DerivedCategory.instHasShiftInt, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.instAdditivePullbackShiftShiftFunctorOfCoeAddMonoidHom",
+   "date": "2026-10-22",
+   "verdict": "Generic shift transport is reused. No separate definition node owns the three specified module-functor specializations; move the existing bodies from the compositor theorem module, without duplication."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift.ofIso",
+   "results": "4 hits: CategoryTheory.Functor.CommShift.ofIso, CategoryTheory.Functor.CommShift.ofIso_compatibility, CategoryTheory.Functor.CommShift.ofIso_commShiftIso_hom_app, CategoryTheory.Functor.CommShift.ofIso_commShiftIso_inv_app",
+   "date": "2026-10-22",
+   "verdict": "Generic shift transport is reused. No separate definition node owns the three specified module-functor specializations; move the existing bodies from the compositor theorem module, without duplication."
+  },
+  {
+   "tool": "grep",
+   "query": "modulePullbackExactComparison|modulePullbackDerivedCommShift|modulePushforwardDerivedCommShift",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "Generic shift transport is reused. No separate definition node owns the three specified module-functor specializations; move the existing bodies from the compositor theorem module, without duplication."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"modulePullbackExactComparison|modulePullbackDerivedCommShift|modulePushforwardDerivedCommShift\" dag/nodes lean/Sheaf lean/WeilConjectures",
+   "results": "Only Sheaf.Paper.ModuleDerivedFunctorCompositorShifts and its theorem-node lean.declarations own these names; no upstream occurrence and no definition node. blueprint_refs.py searches shift and transported found no definition node for these specialized structures.",
+   "date": "2026-10-22",
+   "verdict": "Move the three existing definitions into their own definition node, as required by the immutable-head return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ambient-qcqs-exchange-canonical-shifts",
+  "date": "2026-10-22",
+  "group": "Q14"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms, det-sf-comp-coherence-refinement (2): exact-functor and connecting-map compatibility required by localizing determination (returned step 5). Definition of the fixed pullback and pushforward shift comparisons used in the ambient exchange equation.",
+   "via": [
+    "lem-sfb-ambient-qcqs-exchange-canonical-shifts",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "module": "Sheaf.Paper.ModuleDerivedFunctorShifts",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.modulePullbackCanonicalExactComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.modulePullbackCanonicalExactComparison"
+  ],
+  "file": "lean/Sheaf/Paper/ModuleDerivedFunctorShifts.lean",
+  "statement": "abbrev modulePullbackCanonicalExactComparison : (moduleObjectDerivedPullback Λ f) ≅ (upperStar Λ f).mapDerivedCategory",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Owns the canonical exact comparison c_u and the two fixed shift structures. They are the published, unchanged declarations modulePullbackExactComparison (leftDerivedExactComparison with the universal counit), modulePullbackDerivedCommShift (CommShift.ofIso of its inverse, termwise shifts transported along c_u) and modulePushforwardDerivedCommShift (published K-injective structure) of Sheaf.Paper.ModuleDerivedFunctorCompositorShifts, publicly reexported by this module; modulePullbackCanonicalExactComparison is a transparent abbrev of the first. Reviewer fix: no declaration is moved (the landing refuses an intra-delivery move), and existing:true is not used because the #check probe on the compositor module hits the AcyclicKFlatTensor Sheaf/WeilConjectures import clash.",
+  "fixed_by": "NT-stage2-cc-735d3bd09"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-735d3bd09",
+  "group": "Q14",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-735d3bd09",
+  "group": "Q14",
+  "result": "fix",
+  "note": "735d3bd0 is byte-identical to the PASSed 2472d1bb, whose landing was refused by the landing tool's false positive on moves inside one delivery ('ModuleDerivedFunctorShifts declares names also in ModuleDerivedFunctorCompositorShifts'). Substance re-checked: square orientation, Phi=c*Rf_*, Psi=Rf'_*a*, IsTriangulated x2, shift equation for all n and L, shift compatibility of the f/f' units and counits and of the localized square, triangle morphism with the exchange components; Stacks tags 015F/0DVC/05SU/014X/05SE match. existing:true on the compositor module cannot land: the merge tool's non-module #check of it fails on the AcyclicKFlatTensor Sheaf/WeilConjectures clash (reproduced). FIX: ModuleDerivedFunctorCompositorShifts.lean restored to live text (byte-identical, nothing moved); ModuleDerivedFunctorShifts.lean publicly re-exports it and adds an rfl abbrev modulePullbackCanonicalExactComparison as primary declaration; def-sfb-module-derived-functor-shifts.json lean record updated (three re-exported names in declarations, existing:false); report addendum. Item module and record unchanged. nt_compile --json rc 0: def module 2.5 s, item 5.9 s, rfl check 2.2 s. check_lean_text gives [] on both records. Notes: delivered compositor record narrowed and its note stale (land with --revert-nodes if the live record is preferred); compositor stmt_deps lack the def node; both tool issues remain."
+ }
+}

@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-sheaf-dg-free-graded-generators",
+ "kind": "statement",
+ "title": "Universally tensor-flat free dg modules on graded sheaves of sets",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site small in the universes of [def-weil-size-convention], with $\\mathcal O$ commutative, and use sheaves of modules [def-weil-sheaf-of-modules-category] and cohomology of cochain complexes [def-weil-abstract-derived-category]. Let $\\mathcal A$ be a sheaf of associative unital graded $\\mathcal O$-algebras with an $\\mathcal O$-linear differential of degree one, $d^2=0$ and $d(ab)=d(a)b+(-1)^{|a|}a\\,d(b)$. A right dg $\\mathcal A$-module is a graded sheaf with $d^2=0$ and $d(ma)=d(m)a+(-1)^{|m|}m\\,d(a)$; left modules have $d(am)=d(a)m+(-1)^{|a|}a\\,d(m)$. Tensor products mean sheafifications of the balanced graded tensor products, with direct-sum total grading and $d(p\\otimes n)=dp\\otimes n+(-1)^{|p|}p\\otimes dn$. A quasi-isomorphism induces isomorphisms on all underlying cohomology sheaves. Let $\\mathcal S$ be a sheaf of sets with a degree map $\\mathcal S\\to\\underline{\\mathbf Z}$. Write $F_{\\mathcal A}(\\mathcal S)$ for the right graded $\\mathcal A$-module whose degree $n$ is the sheafification [def-weil-presheaf-modules-sheafification] of\n$$U\\longmapsto\\bigoplus_{k\\in\\mathbf Z}\\ \\bigoplus_{s\\in\\mathcal S_k(U)}s\\mathcal A^{n-k}(U),$$\nwhere $\\mathcal S_k$ is the fibre of the degree map over the constant integer $k$, and $|s|=k$ for $s\\in\\mathcal S_k(U)$. The right action is multiplication on the coefficient. Endow it with $d(s)=0$ and $d(sa)=(-1)^{|s|}s\\,d(a)$. Then $F_{\\mathcal A}(\\mathcal S)\\otimes_{\\mathcal A}-$ is exact on graded left modules, and $F_{\\mathcal A}(\\mathcal S)\\otimes_{\\mathcal A}N$ is acyclic whenever the left dg module $N$ is acyclic. For every small ringed site $(\\mathcal C^{\\prime},\\mathcal O^{\\prime})$ with $\\mathcal O^{\\prime}$ commutative, every ringed-topos morphism $f:(\\operatorname{Sh}(\\mathcal C^{\\prime}),\\mathcal O^{\\prime})\\to(\\operatorname{Sh}(\\mathcal C),\\mathcal O)$ [def-weil-pbc-ringed-topos-morphism], every sheaf dg $\\mathcal O^{\\prime}$-algebra $\\mathcal A^{\\prime}$, and every dg algebra map $f^{-1}\\mathcal A\\to\\mathcal A'$ there is a natural isomorphism of dg modules\n$$f^{-1}F_{\\mathcal A}(\\mathcal S)\\otimes_{f^{-1}\\mathcal A}\\mathcal A'\\cong F_{\\mathcal A'}(f^{-1}\\mathcal S),$$\nwhich sends a pulled-back generator to the corresponding generator. In particular the two tensor assertions hold after every such base change. No boundedness, enough-points, or graded-commutativity hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tag 0FSG (lemma-free-graded-module-good), with construction in remark-sheaf-graded-sets, Tag 0FSF. Right-module convention; sheafification is taken over homogeneous local generators."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sfb-sheaf-dg-free-closed-generators",
+  "def-sfb-sheaf-dg-geometric-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Put $T_{\\mathcal S}(M)^n=(U\\mapsto\\bigoplus_k\\bigoplus_{s\\in\\mathcal S_k(U)}M^{n-k}(U))^\\#$ for a graded module sheaf $M$, with restrictions summing coefficients when labels restrict to the same label. We may compute underlying sheafifications in abelian groups. By [lem-pc-sites-sheafification-underlying-sets] and [lem-cbc-set-presheaf-sheafification-local-bijection], applied to the sheafification unit (whose sheafification is an isomorphism by its universal property), every section is locally a finite sum, and equality of two such sums in the associated sheaf holds locally already in the presheaf. Thus one may refine a cover before comparing coefficients. These assertions use covering sieves and transitivity, not points or fibre products in the site.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-cbc-set-presheaf-sheafification-local-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSF, remark-sheaf-graded-sets, construction by sheafification; local interpretation of the sums in Tag 0FSG"
+   }
+  },
+  {
+   "text": "The prescribed differential respects restrictions. For $|s|=k$, $|a|=j$, $d^2(sa)=(-1)^{2k}s\\,d^2a=0$, and $d(sab)=(-1)^ks\\,d(a)b+(-1)^{k+j}sa\\,d(b)$, the required right-module rule. Define $F_{\\mathcal A}(\\mathcal S)\\otimes_{\\mathcal A}M\\to T_{\\mathcal S}(M)$ by $(sa)\\otimes m\\mapsto s(am)$, with inverse $s m\\mapsto s\\otimes m$. Balanced relations identify the two composites with the identity. These formulas extend through the degreewise sheafifications by [lem-pc-sites-module-sheafification-bilinear-extension]; finite sums of total degrees give the graded maps. For a dg $M$ the differential on the right is $D(sm)=(-1)^ks\\,dm$: on $(sa)\\otimes m$ both differential formulas give $(-1)^ks(d(a)m)+(-1)^{k+j}s(a\\,dm)$. The identification is natural and is an isomorphism of underlying complexes.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-bilinear-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSG, lemma-free-graded-module-good, first displayed tensor identification; Tag 0FSF, differential convention"
+   }
+  },
+  {
+   "text": "We prove exactness of $T_{\\mathcal S}$ degreewise. Kernels of sheaf maps are sectionwise by [lem-weil-pbc-sheafification-exact]. For an exact sequence $0\\to M_1\\to M_2\\to M_3\\to0$, take a finite local representative $\\sum s m_s$ of a section of $T_{\\mathcal S}(M_2)$ whose image is zero. Refine until its image is zero as a presheaf sum, and combine equal restricted labels. Each resulting coefficient belongs to the kernel in $M_2$, so comes uniquely from $M_1$. If a representative from $T_{\\mathcal S}(M_1)$ maps to zero, the same refinement and coefficient argument makes it zero, proving injectivity. Finally, each of the finitely many coefficients of a representative in $T_{\\mathcal S}(M_3)$ lifts locally to $M_2$ by [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective]. Repeated pullback of covering sieves and transitivity give one refinement for all coefficients. Hence the map onto $T_{\\mathcal S}(M_3)$ is locally surjective and therefore epic by the same node. This proves the graded tensor exactness through step 2.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSG, first paragraph: exactness of the functor on graded sheaves; expanded coefficient lifting argument"
+   }
+  },
+  {
+   "text": "Suppose $N$ is acyclic and let $z$ be a local cycle of degree $n$ in $T_{\\mathcal S}(N)$. By step 1 it is locally represented by a finite sum $\\sum s n_s$. Refine until $Dz=0$ already in the presheaf and combine equal restricted labels. Then $d n_s=0$ for each surviving label $s$ of degree $k$. Acyclicity says $d:N^{n-k-1}\\to Z^{n-k}(N)$ is epic; by [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] and a common finite refinement choose $b_s$ with $db_s=n_s$. Now $D(\\sum_s(-1)^k s b_s)=\\sum_s s n_s=z$. Thus the map from degree $n-1$ onto degree-$n$ cycles is locally surjective, hence epic by the cited node. Kernels are computed sectionwise by [lem-weil-pbc-sheafification-exact], so all cohomology sheaves vanish. This argument uses finite support in each representative even when generators and complexes have unbounded degrees.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSG, cohomology calculation and acyclic tensor assertion; local cycle-boundary version"
+   }
+  },
+  {
+   "text": "Write $B_k=\\mathcal O[\\mathcal S_k]$. The given construction has underlying graded module $F^n=\\bigoplus_k B_k\\otimes_{\\mathcal O}\\mathcal A^{n-k}$: the mutually inverse maps on local sums are $[s]\\otimes a\\mapsto sa$ and $sa\\mapsto[s]\\otimes a$, extended by the bilinear sheafification node and the universal property of module sheafification [def-weil-presheaf-modules-sheafification]. On module sheaves $f^{-1}$ preserves direct sums: by [lem-weil-pbc-ringed-topoi-module-adjunction] with $S=f^{-1}\\mathcal O$ and $c$ the identity, $M\\mapsto f^{-1}\\mathcal O\\otimes_{f^{-1}\\mathcal O}f^{-1}M\\cong f^{-1}M$ is left adjoint to direct image of $f^{-1}\\mathcal O$-modules, so $\\operatorname{Hom}(f^{-1}\\bigoplus_iM_i,H)$ is the product of the $\\operatorname{Hom}(f^{-1}M_i,H)$. Finite-limit preservation identifies $f^{-1}\\mathcal S_k$ with $(f^{-1}\\mathcal S)_k$; here $f^{-1}\\underline{\\mathbf Z}=\\underline{\\mathbf Z}$ since the constant integer sheaf is the coproduct of terminal sheaves and $f^{-1}$ preserves both. Apply [lem-trf-geometric-inverse-image-free-module] with the commutative ring $\\mathcal O$ and each $\\mathcal S_k$, and [lem-pur-independent-inverse-image-tensor-comparison] to $B_k\\otimes_{\\mathcal O}\\mathcal A^j$. We obtain $f^{-1}F_{\\mathcal A}(\\mathcal S)\\cong F_{f^{-1}\\mathcal A}(f^{-1}\\mathcal S)$, taking pulled-back $sa$ to the corresponding $sa$. It respects the right action because the action is coefficient multiplication, and respects $d(sa)=(-1)^ks\\,da$ because both comparisons preserve the generating pure tensors. No commutativity of $\\mathcal A$ is used: the cited tensor comparison is over $\\mathcal O$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-trf-geometric-inverse-image-free-module",
+    "lem-pur-independent-inverse-image-tensor-comparison",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSG, final paragraph: inverse image of the free module; decomposed into free commutative-coefficient pieces"
+   }
+  },
+  {
+   "text": "Put $\\mathcal B=f^{-1}\\mathcal A$, $E=f^{-1}\\mathcal S$, and let $\\varphi:\\mathcal B\\to\\mathcal A'$ be the supplied map. Scalar extension gives the isomorphism $F_{\\mathcal B}(E)\\otimes_{\\mathcal B}\\mathcal A'\\to F_{\\mathcal A'}(E)$, $(sb)\\otimes a'\\mapsto s\\varphi(b)a'$, with inverse $sa'\\mapsto(s1)\\otimes a'$. The balanced relation gives both inverse identities. The sheafified maps exist by [lem-pc-sites-module-sheafification-bilinear-extension] over the constant ring $\\mathbf Z$ (all formulas are additive in each variable, so no linearity of $\\varphi$ over $f^{-1}\\mathcal O$ is needed), and the inverse by the universal property of sheafification [def-weil-presheaf-modules-sheafification]. For $|s|=k$, $|b|=j$, the differential of either formula is $(-1)^ks\\varphi(db)a'+(-1)^{k+j}s\\varphi(b)da'$. Thus this is a dg isomorphism. Compose with step 5. The formula sends a pulled-back generator to $s1$, and commuting with maps of generators, dg coefficients and modules follows by substituting their images in this same formula. Applying steps 2--4 on the target site to $\\mathcal A'$ and $E$ gives the two tensor assertions after every stated base change.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSG, final displayed base-change equality and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-trf-geometric-inverse-image-free-module",
+  "lem-pur-independent-inverse-image-tensor-comparison",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tag 0FSG, lemma-free-graded-module-good, with Tag 0FSF, remark-sheaf-graded-sets; local exactness and base-change details expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|dgModule|KFlat",
+   "results": "{\"t\": \"2026-10-24T04:37:44Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|dgModule|KFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SheafOfModules.free at Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:39,131 and PresheafOfModules.freeObj at Presheaf/Free.lean:43. These construct ordinary free modules, not universally tensor-acyclic dg modules over a sheaf of associative dg algebras. Ordinary K-projective, flat ring module and condensed module hits do not state this assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every sheaf differential graded module admits a flat K flat resolution stable under base change",
+   "results": "{\"t\": \"2026-10-24T04:37:44Z\", \"tool\": \"leansearch\", \"query\": \"Every sheaf differential graded module admits a flat K flat resolution stable under base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"Module.Flat.isBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"Module.FaithfullyFlat.instTensorProduct\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"Module.Flat.of_flat_tensorProduct\"], \"digest\": \"673465707a7c4d51\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SheafOfModules.free at Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:39,131 and PresheafOfModules.freeObj at Presheaf/Free.lean:43. These construct ordinary free modules, not universally tensor-acyclic dg modules over a sheaf of associative dg algebras. Ordinary K-projective, flat ring module and condensed module hits do not state this assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DifferentialGraded\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-24T04:37:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"DifferentialGraded\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SheafOfModules.free at Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:39,131 and PresheafOfModules.freeObj at Presheaf/Free.lean:43. These construct ordinary free modules, not universally tensor-acyclic dg modules over a sheaf of associative dg algebras. Ordinary K-projective, flat ring module and condensed module hits do not state this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universally graded flat K flat resolutions of sheaves of differential graded modules with arbitrary base change",
+   "results": "{\"t\": \"2026-10-24T04:37:45Z\", \"tool\": \"leanfinder\", \"query\": \"Universally graded flat K flat resolutions of sheaves of differential graded modules with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_flat_tensorProduct\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"Module.Flat.iff_flat_tensorProduct\", \"Module.Flat.of_projective\", \"Module.flat_of_isLocalized_span\", \"Module.FaithfullyFlat.toFlat\", \"Module.flat_iff_of_isLocalization\", \"Algebra.Smooth.flat\"], \"digest\": \"0fbb5d70797640bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SheafOfModules.free at Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:39,131 and PresheafOfModules.freeObj at Presheaf/Free.lean:43. These construct ordinary free modules, not universally tensor-acyclic dg modules over a sheaf of associative dg algebras. Ordinary K-projective, flat ring module and condensed module hits do not state this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "free|flat",
+   "results": "{\"t\": \"2026-10-24T04:38:39Z\", \"tool\": \"grep\", \"query\": \"free|flat\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\"], \"digest\": \"bf5ec655751d2db7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SheafOfModules.free at Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:39,131 and PresheafOfModules.freeObj at Presheaf/Free.lean:43. These construct ordinary free modules, not universally tensor-acyclic dg modules over a sheaf of associative dg algebras. Ordinary K-projective, flat ring module and condensed module hits do not state this assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free module on a sheaf of graded sets tensor an acyclic differential graded module is acyclic",
+   "results": "{\"t\": \"2026-10-24T04:38:40Z\", \"tool\": \"leansearch\", \"query\": \"Free module on a sheaf of graded sets tensor an acyclic differential graded module is acyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.Acyclic\", \"SheafOfModules.free\", \"SheafOfModules.ιFree\", \"ModuleCat.FreeMonoidal.μIso\", \"ModuleCat.free_δ_freeMk\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\", \"HomologicalComplex.acyclic_iff\", \"Module.Flat.rTensor_shortComplex_exact\"], \"digest\": \"ac1ec3f4866db318\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SheafOfModules.free at Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:39,131 and PresheafOfModules.freeObj at Presheaf/Free.lean:43. These construct ordinary free modules, not universally tensor-acyclic dg modules over a sheaf of associative dg algebras. Ordinary K-projective, flat ring module and condensed module hits do not state this assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"free\"",
+   "results": "{\"t\": \"2026-10-24T04:38:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"free\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.freeObj\", \"PresheafOfModules.free\", \"PresheafOfModules.free_obj\", \"PresheafOfModules.freeObj_obj\", \"PresheafOfModules.freeAdjunctionUnit\", \"PresheafOfModules.freeObjDesc\", \"PresheafOfModules.freeHomEquiv\", \"PresheafOfModules.freeAdjunction\"], \"digest\": \"9b41a29953992d7c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SheafOfModules.free at Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:39,131 and PresheafOfModules.freeObj at Presheaf/Free.lean:43. These construct ordinary free modules, not universally tensor-acyclic dg modules over a sheaf of associative dg algebras. Ordinary K-projective, flat ring module and condensed module hits do not state this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free differential graded module on a graded sheaf of sets is universally flat and K flat under pullback",
+   "results": "{\"t\": \"2026-10-24T04:38:41Z\", \"tool\": \"leanfinder\", \"query\": \"Free differential graded module on a graded sheaf of sets is universally flat and K flat under pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.mapFree\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.freeFunctor\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"LightCondensed.free\", \"SheafOfModules.freeFunctor_obj\"], \"digest\": \"2629750cd8ed9572\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SheafOfModules.free at Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:39,131 and PresheafOfModules.freeObj at Presheaf/Free.lean:43. These construct ordinary free modules, not universally tensor-acyclic dg modules over a sheaf of associative dg algebras. Ordinary K-projective, flat ring module and condensed module hits do not state this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "graded|KFlat|acyclic",
+   "results": "{\"t\": \"2026-10-24T04:39:08Z\", \"tool\": \"grep\", \"query\": \"graded|KFlat|acyclic\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SheafOfModules.free at Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:39,131 and PresheafOfModules.freeObj at Presheaf/Free.lean:43. These construct ordinary free modules, not universally tensor-acyclic dg modules over a sheaf of associative dg algebras. Ordinary K-projective, flat ring module and condensed module hits do not state this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free graded sheaf modules with closed generators tensor acyclic dg modules to acyclic complexes after arbitrary geometric inverse image and scalar extension",
+   "results": "{\"t\": \"2026-10-24T04:39:18Z\", \"tool\": \"leanfinder\", \"query\": \"Free graded sheaf modules with closed generators tensor acyclic dg modules to acyclic complexes after arbitrary geometric inverse image and scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.generatorsOfIsCokernelFree_I\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"SheafOfModules.generatorsOfIsCokernelFree_s\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\"], \"digest\": \"99b927e6c5215508\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SheafOfModules.free at Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:39,131 and PresheafOfModules.freeObj at Presheaf/Free.lean:43. These construct ordinary free modules, not universally tensor-acyclic dg modules over a sheaf of associative dg algebras. Ordinary K-projective, flat ring module and condensed module hits do not state this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded sheaf dg module resolutions by universally tensor acyclic graded flat modules and acyclic flat tensor annihilation",
+   "results": "{\"t\": \"2026-10-24T04:39:19Z\", \"tool\": \"leanfinder\", \"query\": \"Unbounded sheaf dg module resolutions by universally tensor acyclic graded flat modules and acyclic flat tensor annihilation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"CochainComplex.isKProjective_of_projective\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt\", \"CategoryTheory.isZero_Tor_succ_of_projective\"], \"digest\": \"991aa1950e845cd5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SheafOfModules.free at Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:39,131 and PresheafOfModules.freeObj at Presheaf/Free.lean:43. These construct ordinary free modules, not universally tensor-acyclic dg modules over a sheaf of associative dg algebras. Ordinary K-projective, flat ring module and condensed module hits do not state this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "def free|def freeFunctor|freeObj|pullbackObjFreeIso",
+   "results": "{\"t\": \"2026-10-24T04:39:44Z\", \"tool\": \"grep\", \"query\": \"def free|def freeFunctor|freeObj|pullbackObjFreeIso\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Topology/Basic.lean\", \"Mathlib/Algebra/Category/ModuleCat/Topology/Basic.lean\"], \"digest\": \"c2602f7c600b87a4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SheafOfModules.free at Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:39,131 and PresheafOfModules.freeObj at Presheaf/Free.lean:43. These construct ordinary free modules, not universally tensor-acyclic dg modules over a sheaf of associative dg algebras. Ordinary K-projective, flat ring module and condensed module hits do not state this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free differential graded module on a graded sheaf of sets is universally tensor flat and preserves acyclic complexes",
+   "results": "{\"t\": \"2026-10-24T05:07:11Z\", \"tool\": \"leanfinder\", \"query\": \"Free differential graded module on a graded sheaf of sets is universally tensor flat and preserves acyclic complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_projective\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"Module.Flat.of_free\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\"], \"digest\": \"2933e07da615e9bb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring-module flatness and free presheaf/sheaf constructions do not give this dg assertion for a sheaf of associative dg algebras and variable sheaf of graded generators. Read Sheaf/Free.lean:39,131, Presheaf/Free.lean:43, and Sheaf/PullbackFree.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"free\"",
+   "results": "{\"t\": \"2026-10-24T05:07:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"free\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.freeObj\", \"PresheafOfModules.free\", \"PresheafOfModules.free_obj\", \"PresheafOfModules.freeObj_obj\", \"PresheafOfModules.freeAdjunctionUnit\", \"PresheafOfModules.freeObjDesc\", \"PresheafOfModules.freeHomEquiv\", \"PresheafOfModules.freeAdjunction\"], \"digest\": \"9b41a29953992d7c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring-module flatness and free presheaf/sheaf constructions do not give this dg assertion for a sheaf of associative dg algebras and variable sheaf of graded generators. Read Sheaf/Free.lean:39,131, Presheaf/Free.lean:43, and Sheaf/PullbackFree.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|dgModule|KFlat|graded",
+   "results": "{\"t\": \"2026-10-24T05:07:29Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|dgModule|KFlat|graded\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring-module flatness and free presheaf/sheaf constructions do not give this dg assertion for a sheaf of associative dg algebras and variable sheaf of graded generators. Read Sheaf/Free.lean:39,131, Presheaf/Free.lean:43, and Sheaf/PullbackFree.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf of modules free on graded local generators tensor acyclic differential graded module is acyclic",
+   "results": "{\"t\": \"2026-10-24T05:07:29Z\", \"tool\": \"leansearch\", \"query\": \"Sheaf of modules free on graded local generators tensor acyclic differential graded module is acyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.LocalGeneratorsData.ctorIdx\", \"SheafOfModules.free\", \"SheafOfModules.ιFree\", \"SheafOfModules.LocalGeneratorsData.generators\", \"SheafOfModules.LocalGeneratorsData.I\", \"SheafOfModules.QuasicoherentData.localGeneratorsData\", \"SheafOfModules.LocalGeneratorsData\", \"SheafOfModules.LocalGeneratorsData.mk\"], \"digest\": \"e7902be872ef20c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring-module flatness and free presheaf/sheaf constructions do not give this dg assertion for a sheaf of associative dg algebras and variable sheaf of graded generators. Read Sheaf/Free.lean:39,131, Presheaf/Free.lean:43, and Sheaf/PullbackFree.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graded sheaf copower with zero differential is flat and K flat and commutes with geometric pullback and scalar extension",
+   "results": "{\"t\": \"2026-10-24T05:07:33Z\", \"tool\": \"leanfinder\", \"query\": \"Graded sheaf copower with zero differential is flat and K flat and commutes with geometric pullback and scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.mapFree\", \"HomologicalComplex.instHasTensorXTensorUnit_1\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.isColimitFreeCofan\", \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"SheafOfModules.pullbackObjFreeIso\"], \"digest\": \"d43fd0aca71a6cd8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring-module flatness and free presheaf/sheaf constructions do not give this dg assertion for a sheaf of associative dg algebras and variable sheaf of graded generators. Read Sheaf/Free.lean:39,131, Presheaf/Free.lean:43, and Sheaf/PullbackFree.lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sheaf-dg-good-resolutions",
+  "date": "2026-10-24",
+  "group": "Q157"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: Derived comparison of dg coefficient realizations with the normalized scheme arrow. Prerequisite: Derived scalar adjunction and exact restriction for sheaf dg algebras. Tags 0FSH (lemma-resolve), 0FSC (lemma-good-admissible-ses), 0FSI (lemma-acyclic-good); definition of good in section-P-resolutions and its base-change condition (3); open localization in section-localization-dg. Independent input in the first proof of Tag 0FSH: free graded sheaves with closed generators, Tag 0FSG.",
+   "via": [
+    "lem-sfb-sheaf-dg-good-resolutions",
+    "lem-sfb-ringed-dg-scalar-adjunction",
+    "lem-sfb-dg-coefficient-realization-comparison",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sheaf-dg-free-graded-generators",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0FSG using finite local sums: explicit balanced tensor inverse, signed cycle lifting, and generator-normalized geometric inverse image and scalar extension. Existing DAG tools suffice; no new nodes or statement changes.",
+  "blueprint": "Current blueprint det-thm-sf-ctf-stability-direct-images clause 3 is the recorded ancestor route; this item supplies the 0FSG free-generator prerequisite inside the inherited dg good-resolution chain. The latest blueprint statement has no direct dg-free-generator counterpart; searched all imported blueprint nodes for free graded, graded sets and free differential. Inherited blueprint.from.node is null as confirmed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Extends the explicit bilinear formulas through sheafification; generic ringed-site tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-free-module",
+    "why": "Carries free modules on arbitrary sheaves of sets through arbitrary geometric inverse image, for the degreewise commutative coefficient pieces."
+   },
+   {
+    "node": "lem-pur-independent-inverse-image-tensor-comparison",
+    "why": "Preserves the ordinary tensor over the commutative inverse-image coefficient ring; needed only for each free graded summand."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Module-level adjunction for the inverse image of a ringed-topos morphism (Stacks 03D7, with S=f^{-1}O, c=identity); used in step 5 only to see that f^{-1} preserves direct sums of module sheaves. Generic tool, closure has no trf/pd node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-trf-geometric-inverse-image-free-module",
+  "lem-pur-independent-inverse-image-tensor-comparison",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-fab041bac",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-fab041bac (reviewer sub-agent of L); spot-checked: Read the source: Stacks sdga 0FSF and 0FSG and the definition of good, plus sites-modules 03EL and 03D7. Statement, stmt_deps and status are verbatim from the base; the item had no proof before; no new nodes. Steps 1-4 are correct: local finite representatives through lem-cbc applied to the sheafification unit; the balanced-tensor identification and its signs (both sides give (-1)^k s(da m)+(-1)^{k+j}s(a dm)); exactness from sectionwise kernels plus local surjectivity; acyclicity via D(sum (-1)^k s b_s)=z. Step 5 applies the trf free-module node only to O and S_k, and the pur tensor comparison only over O; both are correct. FIX (C1/C4): step 5 used 'f^{-1} is a left adjoint so it preserves coproducts' for direct sums of module sheaves, which def-weil-pbc-ringed-topos-morphism does not give. It now cites lem-weil-pbc-ringed-topoi-module-adjunction (03D7, S=f^{-1}O, c=id) and def-weil-presheaf-modules-sheafification; the adjunction node is added to proof_deps and split_report.tool_uses. Step 6 extended its formula over f^{-1}O, which needs phi to be f^{-1}O-linear, and the statement does not require that; it now extends biadditively over the constant ring Z. Batch-5: accepted the citation of lem-trf-geometric-inverse-image-free-module. It is a generic 08TQ fact (free module sheaves under inverse image along a geometric morphism). Its 129-node closure holds only 6 trf nodes, all generic free-module and geometric-morphism nodes, with no PD node and no trace-formula or PD step. The pur and pbc cites add no trf or PD node. No duplicate of 0FSG elsewhere in the DAG (rg 0FSG/0FSF: only the parent good-resolutions and hflat-computation, which cite or use it). No cycle, no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafDgFreeGradedGenerators",
+  "declaration": "CategoryTheory.SheafDg.freeRight_universally_tensorFlat",
+  "declarations": [
+   "CategoryTheory.SheafDg.freeRight_universally_tensorFlat"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SheafDgFreeGradedGenerators.lean",
+  "statement": "theorem freeRight_universally_tensorFlat {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (S : Sheaf J CommRingCat.{u}) (A : Algebra S) (E : GradedObject ℤ (Sheaf J (Type u))) : (∀ Q : ShortComplex (GradedObject ℤ (ringedSiteModules.{u} (rings S))), Q.ShortExact → (Q.map (freeGradedTensor S E)).ShortExact) ∧ (∀ N : LeftModule A, ∃ i : rightTensor A (freeRight A E) N ≅ closedGenerators S E ⊗ N.X, rightTensorπ A (freeRight A E) N ≫ i.hom = (α_ (closedGenerators S E) A.X N.X).hom ≫ (closedGenerators S E ◁ ModObj.smul (M := A.X) (X := N.X))) ∧ (∀ N : LeftModule A, N.X.Acyclic → (rightTensor A (freeRight A E) N).Acyclic) ∧ ∀ {D : Type u} [SmallCategory D] {K : GrothendieckTopology D} (T : Sheaf K CommRingCat.{u}) (f : RingedToposMorphism (rings T) (rings S)) (B : Algebra T) (φ : PulledAlgebraMap f.inverse A B), (∀ Q : ShortComplex (GradedObject ℤ (ringedSiteModules.{u} (rings T))), Q.ShortExact → (Q.map (freeGradedTensor T ((pulledGradedSets f.inverse).obj E))).ShortExact) ∧ (∀ N : LeftModule B, N.X.Acyclic → (rightTensor B (freeRight B ((pulledGradedSets f.inverse).obj E)) N).Acyclic) ∧ ∃ a : ∀ F : GradedObject ℤ (Sheaf J (Type u)), PulledFamily f.inverse ((rightUnderlying A).obj (freeRight A F)) ((rightUnderlying B).obj (freeRight B ((pulledGradedSets f.inverse).obj F))), (∀ F : GradedObject ℤ (Sheaf J (Type u)), IsGeometricScalarExtension φ (freeRight A F) (freeRight B ((pulledGradedSets f.inverse).obj F)) (a F) ∧ IsFreeBaseChangeUnit F (a F)) ∧ (∀ (F G : GradedObject ℤ (Sheaf J (Type u))) (e : F ⟶ G), pulledPost (a F) ((freeRightFunctor B).map ((pulledGradedSets f.inverse).map e)) = pulledPre ((freeRightFunctor A).map e) (a G)) ∧ ∀ (M : RightModule B) (b : PulledFamily f.inverse ((rightUnderlying A).obj (freeRight A E)) ((rightUnderlying B).obj M)), IsGeometricScalarExtension φ (freeRight A E) M b → ∃ i : M ≅ freeRight B ((pulledGradedSets f.inverse).obj E), pulledPost b i.hom = a E",
+  "branch": "sheaf-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-537ed2011",
+  "group": "Q83",
+  "result": "fix",
+  "note": "Read node, both new def nodes, the stmt_deps, sdga.tex 0FSF/0FSG and all three modules. Every clause matches: fibre encoding of graded sets keeps locally varying degrees; freeRight = Mod.free(mop A) on O[E_k] with zero d gives the labelled sheafified sum and d(sa)=(-1)^k s da; rightTensor is a real coequalizer; exactness of N↦N[S] on graded O-modules (source wording) plus normalized iso F⊗_A N ≅ G⊗N; acyclicity; base change as the balanced-tensor universal property with generator normalization, naturality and uniqueness, arbitrary φ as the node says, generalized-element tests sound because f.inverse is left exact. Single universe u from RingedToposMorphism. No hollow defs, theorem sorry only, docstrings and report sections present, no route-pivot deps. FINDING H12/H2: both def modules imported FreeModuleUniversalProperty (module of theorem node lem-trf-free-module-sheaf-universal-property) and used its abbrev SheafFreeModule.underlyingRaw in statements. FIX: inlined its body SheafOfModules.toSheaf (rings R) ⋙ sheafCompose _ (forget AddCommGrpCat.{w}) via a file-local notation, import repointed to FreeModuleSheafConstruction (cited def-trf node); no lean.statement changes, item module unchanged. nt_compile --json on the two fixes + item clean (53.1 s / 14.3 s / 11.2 s; the first is near the 60 s per-file limit)."
+ }
+}

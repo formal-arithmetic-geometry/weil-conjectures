@@ -1,0 +1,222 @@
+{
+ "id": "lem-trf-finite-block-basis-replacement",
+ "kind": "statement",
+ "title": "Replacing a finite block in an arbitrary module basis",
+ "statement": "Let $R$ be a commutative ring and let $F$ be a free $R$-module with basis $\\mathcal B$ [def-weil-pbc-free-module], with no restriction on the cardinality of $\\mathcal B$. Fix an integer $n\\ge0$ and distinct $e_1,\\ldots,e_n\\in\\mathcal B$, and put $T=\\operatorname{span}_R(\\mathcal B\\setminus\\{e_1,\\ldots,e_n\\})$. Suppose $y_1,\\ldots,y_n\\in F$ satisfy $y_i=\\sum_{j=1}^n b_{ij}e_j+t_i$ with $t_i\\in T$, and the matrix $B=(b_{ij})$ [def-weil-matrix] is invertible, meaning that an $n\\times n$ matrix $V$ satisfies $BV=VB=I_n$. Then the $R$-linear endomorphism $U$ of $F$ sending $e_i$ to $y_i$ and fixing the other original basis vectors is an automorphism. The family indexed by the original basis indices, with each $e_i$ replaced by $y_i$ and all other vectors fixed, is a basis of $F$. If $G=\\operatorname{span}_R\\{y_1,\\ldots,y_n\\}$, then $y_1,\\ldots,y_n$ is a basis of $G$ and $F=G\\oplus T$, where the latter equality means that every element of $F$ has a unique expression $g+t$ with $g\\in G$ and $t\\in T$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0592, lemma-projective-freeness-criteria, proof second paragraph (invertible finite-coordinate matrix gives a basis replacement and a free summand of the ambient module)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-matrix"
+ ],
+ "proof": [
+  {
+   "text": "Write $C=\\mathcal B\\setminus\\{e_1,\\ldots,e_n\\}$. By the unique finite-coordinate description of a basis [def-weil-pbc-free-module], every $x\\in F$ has a unique expression $x=\\sum_{i=1}^n a_i e_i+\\sum_{c\\in C}d_c c$ with $(d_c)$ finitely supported. Assign arbitrary images to the original basis vectors and define the resulting map on $x$ by the same finite linear combination of their assigned images. Uniqueness of coordinates and coordinatewise addition and scalar multiplication show directly that this gives a unique linear map. Use this construction for $U(e_i)=y_i$, $U(c)=c$, and for $W(e_i)=\\sum_{j=1}^n v_{ij}(e_j-t_j)$, $W(c)=c$, where $V=(v_{ij})$ is the given inverse of $B$. Both maps fix $T$ pointwise, since each element of $T$ is a finite linear combination of elements of $C$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0592, lemma-projective-freeness-criteria, proof second paragraph: the asserted isomorphism sending the selected basis vectors to their projective components; explicit inverse calculation supplied by Q56"
+   }
+  },
+  {
+   "text": "For each selected basis vector, finite distributivity gives\n$$UW(e_i)=\\sum_j v_{ij}\\bigl(U(e_j)-U(t_j)\\bigr)=\\sum_j v_{ij}(y_j-t_j)=\\sum_{j,k}v_{ij}b_{jk}e_k=\\sum_k(VB)_{ik}e_k=e_i.$$\nFor $c\\in C$ both maps fix $c$, so $UW(c)=c$. Applying linearity to the finite basis expansion of any $x$ proves $UW(x)=x$. Here the order $VB$ is deliberate: the statement writes the coordinates of $y_i$ in row $i$, rather than column $i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0592, lemma-projective-freeness-criteria, proof second paragraph: the asserted isomorphism sending the selected basis vectors to their projective components; explicit inverse calculation supplied by Q56"
+   }
+  },
+  {
+   "text": "The other composite on the selected vectors is\n$$WU(e_i)=W(y_i)=\\sum_j b_{ij}W(e_j)+t_i=\\sum_{j,k}b_{ij}v_{jk}(e_k-t_k)+t_i=\\sum_k(BV)_{ik}(e_k-t_k)+t_i=e_i.$$\nOn every $c\\in C$ it is again the identity. Thus $WU=1_F$ by the same finite expansion. Consequently the linear maps $U,W$ are mutual inverses, proving that $U$ is an automorphism. These formulas also cover $n=0$: the sums are empty and both maps fix the entire original basis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0592, lemma-projective-freeness-criteria, proof second paragraph: the asserted isomorphism sending the selected basis vectors to their projective components; explicit inverse calculation supplied by Q56"
+   }
+  },
+  {
+   "text": "The image family is a basis by the definition [def-weil-pbc-free-module], as follows without any basis-transport theorem. Given $x\\in F$, expand $W(x)$ in the original basis and apply $U$; this gives a finite expression for $x$ in the family $(y_1,\\ldots,y_n,(c)_{c\\in C})$ indexed by the original indices. If two finite coefficient families give the same $x$, apply $W$ to their expressions. Since $W(y_i)=e_i$ and $W(c)=c$, uniqueness of the original basis coordinates makes those coefficient families equal. This proves precisely existence and uniqueness of finite coordinates for the image family.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0592, lemma-projective-freeness-criteria, proof second paragraph: the asserted isomorphism sending the selected basis vectors to their projective components; explicit inverse calculation supplied by Q56"
+   }
+  },
+  {
+   "text": "By definition of $G$, every $g\\in G$ is a finite linear combination of the $y_i$. Any two such expressions extend by zero on $C$ to expressions in the basis from step 4, so their coefficients agree; hence $(y_i)_{i=1}^n$ is a basis of $G$ [def-weil-pbc-free-module]. For arbitrary $x$, split its new basis expression into its selected terms $g$ and its remaining terms $t$; then $x=g+t$ with $g\\in G$, $t\\in T$. If also $x=g'+t'$, express $g,g'$ in the $y_i$ and $t,t'$ in $C$. Uniqueness in the same indexed basis gives equality of the selected coefficients and of the complementary coefficients, so $g=g'$ and $t=t'$. This is the stated meaning of $F=G\\oplus T$, including $G=0$, $T=F$ when $n=0$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0592, lemma-projective-freeness-criteria, proof second paragraph: the asserted isomorphism sending the selected basis vectors to their projective components; explicit inverse calculation supplied by Q56"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0592, lemma-projective-freeness-criteria, proof second paragraph: the asserted isomorphism sending the selected basis vectors to their projective components; explicit inverse calculation supplied by Q56",
+  "note": "Expands the elementary basis-replacement assertion made without calculation in Tag 0592."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Replace finitely many vectors of an arbitrary basis by vectors with invertible matrix of coordinates on those indices and retain a basis",
+   "results": "{\"t\": \"2026-10-22T06:46:32Z\", \"tool\": \"leanfinder\", \"query\": \"Replace finitely many vectors of an arbitrary basis by vectors with invertible matrix of coordinates on those indices and retain a basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.reindexRange\", \"Module.Basis.unitsSMul\", \"Module.Basis.sumExtend\", \"Module.Basis.reindexFinsetRange\", \"Module.Basis.coe_mkFinCons\", \"Module.Basis.isUnitSMul\", \"Module.Basis.mkFinCons\", \"coe_basisOfPiSpaceOfLinearIndependent\"], \"digest\": \"ebf2b00b89097a10\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-basis determinant criteria, scaling and reindexing do not prove the finite-block replacement inside an arbitrary possibly infinite basis with unrestricted complementary tails."
+  },
+  {
+   "tool": "grep",
+   "query": "replace|block|update",
+   "results": "{\"t\": \"2026-10-22T06:47:05Z\", \"tool\": \"grep\", \"query\": \"replace|block|update\", \"sub\": \"LinearAlgebra/Basis\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Basis/Basic.lean\", \"Mathlib/LinearAlgebra/Basis/Exact.lean\", \"Mathlib/LinearAlgebra/Basis/Exact.lean\", \"Mathlib/LinearAlgebra/Basis/Exact.lean\"], \"digest\": \"56913382774f3b90\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-basis determinant criteria, scaling and reindexing do not prove the finite-block replacement inside an arbitrary possibly infinite basis with unrestricted complementary tails."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, Matrix, IsUnit",
+   "results": "{\"t\": \"2026-10-22T06:47:05Z\", \"tool\": \"loogle\", \"query\": \"Module.Basis, Matrix, IsUnit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Matrix.isUnit_toLin_iff\", \"LinearMap.isUnit_toMatrix_iff\", \"Module.Basis.toMatrix_isUnitSMul\", \"Matrix.toLinearEquiv\", \"Matrix.ker_toLin_eq_bot\", \"Matrix.range_toLin_eq_top\", \"Matrix.toLinearEquiv_apply\", \"LinearEquiv.ofIsUnitDet\"], \"digest\": \"d35b998acb625850\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-basis determinant criteria, scaling and reindexing do not prove the finite-block replacement inside an arbitrary possibly infinite basis with unrestricted complementary tails."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Replacing a finite subset of an infinite module basis by vectors is a basis when the finite coordinate matrix is invertible",
+   "results": "{\"t\": \"2026-10-22T06:47:06Z\", \"tool\": \"leansearch\", \"query\": \"Replacing a finite subset of an infinite module basis by vectors is a basis when the finite coordinate matrix is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.invertibleToMatrix\", \"Module.Basis.mk\", \"Module.Basis.is_basis_iff_det\", \"Module.finBasis\", \"Module.Basis.det_inv\", \"AffineBasis.isUnit_toMatrix_iff\", \"Module.Basis.mk.congr_simp\", \"basisOfTopLeSpanOfCardEqFinrank.congr_simp\"], \"digest\": \"4ddd2f215363c7fc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-basis determinant criteria, scaling and reindexing do not prove the finite-block replacement inside an arbitrary possibly infinite basis with unrestricted complementary tails."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism with invertible finite diagonal block and identity infinite complement sends a module basis to a basis",
+   "results": "{\"t\": \"2026-10-22T06:47:41Z\", \"tool\": \"leanfinder\", \"query\": \"An automorphism with invertible finite diagonal block and identity infinite complement sends a module basis to a basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.map_equiv\", \"Submodule.smithNormalFormBotBasis_def\", \"Module.Basis.reindexRange_apply\", \"Module.Basis.reindexRange_self\", \"Module.Basis.reindexFinsetRange_self\", \"Module.Basis.reindex\", \"Module.Basis.reindexFinsetRange_apply\", \"Module.Basis.indexEquiv\"], \"digest\": \"d103f1072e2d6f6a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-basis determinant criteria, scaling and reindexing do not prove the finite-block replacement inside an arbitrary possibly infinite basis with unrestricted complementary tails."
+  },
+  {
+   "tool": "grep",
+   "query": "replace|block|update",
+   "results": "{\"t\": \"2026-10-23T10:47:24Z\", \"tool\": \"grep\", \"query\": \"replace|block|update\", \"sub\": \"LinearAlgebra/Basis\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Basis/Basic.lean\", \"Mathlib/LinearAlgebra/Basis/Exact.lean\", \"Mathlib/LinearAlgebra/Basis/Exact.lean\", \"Mathlib/LinearAlgebra/Basis/Exact.lean\"], \"digest\": \"56913382774f3b90\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-rank matrix criteria do not cover arbitrary ambient rank and complementary tails; basis scaling and extension results do not assert this finite-block replacement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A linear map fixing all but finitely many basis vectors is invertible if its finite coordinate matrix is invertible",
+   "results": "{\"t\": \"2026-10-23T10:47:25Z\", \"tool\": \"leansearch\", \"query\": \"A linear map fixing all but finitely many basis vectors is invertible if its finite coordinate matrix is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.isUnit_toMatrix_iff\", \"LinearMap.isUnit_toMatrix'_iff\", \"LinearMap.isUnit_iff_ker_eq_bot\", \"LinearMap.isUnit_iff_isUnit_det\", \"LinearMap.isUnit_iff_range_eq_top\", \"LinearMap.injective_iff_surjective\", \"Matrix.toLinearEquiv\", \"Matrix.toLinAlgEquiv'_toMatrixAlgEquiv'\"], \"digest\": \"c25bb6306fd9f8f9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-rank matrix criteria do not cover arbitrary ambient rank and complementary tails; basis scaling and extension results do not assert this finite-block replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, Matrix, IsUnit",
+   "results": "{\"t\": \"2026-10-23T10:47:25Z\", \"tool\": \"loogle\", \"query\": \"Module.Basis, Matrix, IsUnit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Matrix.isUnit_toLin_iff\", \"LinearMap.isUnit_toMatrix_iff\", \"Module.Basis.toMatrix_isUnitSMul\", \"Matrix.toLinearEquiv\", \"Matrix.ker_toLin_eq_bot\", \"Matrix.range_toLin_eq_top\", \"Matrix.toLinearEquiv_apply\", \"LinearEquiv.ofIsUnitDet\"], \"digest\": \"d35b998acb625850\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-rank matrix criteria do not cover arbitrary ambient rank and complementary tails; basis scaling and extension results do not assert this finite-block replacement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Replace finitely many vectors of a possibly infinite module basis by vectors with invertible finite coordinate block and arbitrary complementary tails",
+   "results": "{\"t\": \"2026-10-23T10:47:26Z\", \"tool\": \"leanfinder\", \"query\": \"Replace finitely many vectors of a possibly infinite module basis by vectors with invertible finite coordinate block and arbitrary complementary tails\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.unitsSMul\", \"Module.Basis.sumExtend\", \"Submodule.smithNormalFormTopBasis\", \"Module.Basis.sumExtendIndex\", \"Module.Basis.reindexRange\", \"Module.Basis.extend\", \"Module.Basis.mkFinCons\", \"Module.Basis.reindexFinsetRange\"], \"digest\": \"010a792eae76d029\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-rank matrix criteria do not cover arbitrary ambient rank and complementary tails; basis scaling and extension results do not assert this finite-block replacement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct inverse basis change using inverse matrix on finite block and subtract complementary components",
+   "results": "{\"t\": \"2026-10-23T10:47:27Z\", \"tool\": \"leanfinder\", \"query\": \"Construct inverse basis change using inverse matrix on finite block and subtract complementary components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.toLinOfInv\", \"Matrix.toLinOfInv_apply\", \"Matrix.toLinOfInv_symm_apply\", \"CategoryTheory.HomOrthogonal.matrixDecompositionLinearEquiv_symm_apply\", \"Module.Basis.linearMap_repr_symm_apply\", \"Module.Basis.toMatrix_mul_toMatrix_flip\", \"Module.Basis.invertibleToMatrix\", \"Module.Basis.toMatrix_reindex\"], \"digest\": \"ca3b64fa47c86da7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-rank matrix criteria do not cover arbitrary ambient rank and complementary tails; basis scaling and extension results do not assert this finite-block replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "def toLinOfInv|isUnit_toMatrix_iff|def map|def unitsSMul",
+   "results": "{\"t\": \"2026-10-23T10:49:23Z\", \"tool\": \"grep\", \"query\": \"def toLinOfInv|isUnit_toMatrix_iff|def map|def unitsSMul\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/UnitaryGroup.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/Basic.lean\", \"Mathlib/LinearAlgebra/Projectivization/Basic.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\"], \"digest\": \"0d2ce0e58df77078\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-rank matrix criteria do not cover arbitrary ambient rank and complementary tails; basis scaling and extension results do not assert this finite-block replacement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-projective-element-free-summand",
+  "date": "2026-10-22",
+  "group": "Q112"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), 'Hence by Lemmas 05FQ and 05FT the map S^{⊕r}→N_p is R-universally injective' (Tag 05FQ). Within the proof of Tag 05FQ: the first sentence invokes Algebra, Theorem 0593 to make the projective source free. In the proof of Tag 0593, the invocation of Lemma 0592 (lemma-projective-freeness-criteria) for the complementary projective module. Within Tag 0592: Tag 0592, lemma-projective-freeness-criteria, proof second paragraph (invertible finite-coordinate matrix gives a basis replacement and a free summand of the ambient module).",
+   "via": [
+    "lem-trf-projective-element-free-summand",
+    "lem-trf-projective-over-local-free",
+    "lem-trf-local-universal-injective-residue",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-block-basis-replacement",
+  "worker": "stage1",
+  "summary": "Expanded the basis-replacement assertion of Tag 0592 into explicit mutually inverse maps, checked both row-oriented matrix products, and proved all basis and direct-sum clauses from unique finite coordinates. No new nodes are needed. Statement unchanged.",
+  "blueprint": "Serves the inherited chain below lem-trf-local-term-locality, proof (1)--(2), semistable-alteration/flattening input, through 05I3, 05FQ, 0593 and 0592: specifically the second paragraph of the proof of lemma-projective-freeness-criteria. Steps 1--3 supply the asserted inverse, steps 4--5 its basis and direct-sum consequences."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-ba230c089",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-ba230c089 (reviewer sub-agent of L); spot-checked: Read Stacks algebra.tex 20640-20687 (Tag 0592, lemma-projective-freeness-criteria, second paragraph). The item states exactly its assertion: an invertible finite block of coordinates gives an automorphism e_i->y_i, a replaced basis, a basis of G and F=G⊕T. It holds over any commutative ring with a two-sided inverse V; locality enters only through the sibling invertibility node. The statement and stmt_deps are unchanged from live, where the item is unsplit, so no other group has superseded it. There are no new nodes and no repair note. I recomputed step 2, UW(e_i)=Σ_k(VB)_ik e_k=e_i, and step 3, WU(e_i)=Σ_k(BV)_ik(e_k−t_k)+t_i=e_i: the index orientation is correct and both maps fix T. Step 4 gets existence of coordinates from x=U(Wx) and uniqueness by applying W. Step 5 extends by zero and splits the step-4 expansion, giving uniqueness of g+t. Each step is a genuine finite-coordinate calculation from def-weil-pbc-free-module (unique finite coordinates, any index set), and proof_deps equals the union of the step uses. Checked n=0, C empty or infinite, n=1 with v=b⁻¹, non-commuting B and V, and the zero ring. The parent free-summand step 3 uses exactly the G-basis and F=G⊕T clauses. No duplicate turned up in a DAG-wide scan. Toward a Mathlib leaf, 11 searches across all four kinds found nothing (toLinOfInv needs finite bases). There are no off-route citations, no tool_uses, no SGA, and the blueprint fields are fine."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.FiniteBlockBasisReplacement",
+  "declaration": "Module.Basis.finite_block_replacement",
+  "file": "lean/Sheaf/LinearAlgebra/FiniteBlockBasisReplacement.lean",
+  "statement": "theorem finite_block_replacement {R : Type u} {F : Type v} {ι : Type w} [CommRing R] [AddCommGroup F] [Module R F] (b : Module.Basis ι R F) (n : ℕ) (e : Fin n ↪ ι) (y t : Fin n → F) (B V : Matrix (Fin n) (Fin n) R) (ht : ∀ i, t i ∈ Submodule.span R (b '' (Set.range e)ᶜ)) (hy : ∀ i, y i = (∑ j : Fin n, B i j • b (e j)) + t i) (hBV : B * V = 1) (hVB : V * B = 1) : (∃ U : F ≃ₗ[R] F, (∀ i, U (b (e i)) = y i) ∧ ∀ j, j ∉ Set.range e → U (b j) = b j) ∧ (∃ b' : Module.Basis ι R F, (∀ i, b' (e i) = y i) ∧ ∀ j, j ∉ Set.range e → b' j = b j) ∧ (∃ c : Module.Basis (Fin n) R (Submodule.span R (Set.range y)), ∀ i, (c i : F) = y i) ∧ ∀ x : F, ∃! p : (Submodule.span R (Set.range y)) × (Submodule.span R (b '' (Set.range e)ᶜ)), x = (p.1 : F) + (p.2 : F)",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a752c2fb",
+  "group": "N8",
+  "result": "pass",
+  "note": "Read node, both stmt_deps (Module.Free/Module.Basis, Matrix), Stacks algebra.tex 20641-20687 Tag 0592 second paragraph, module, report (Worker report + Second reading by N8 present), and the citer lem-trf-projective-element-free-summand step 3. Clause match: CommRing R, arbitrary ι basis b, e : Fin n ↪ ι, T = span(b '' (range e)ᶜ), row-oriented hy, both BV=1 and VB=1; conclusions: equivalence U fixed on the basis, basis b' on ι with prescribed values, Fin n basis of span(range y) coercing to y, ∃! pair in G×T. Universes u v w independent, no extra assumptions. Edge cases n=0, ι empty/infinite, empty complement, zero ring, n=1 all covered; UW=VB and WU=BV recomputed. lean.statement verbatim in file; node otherwise identical to live, live has no lean record; no name collision; imports public Mathlib only; no defs, proof sorry only, docstrings carry source place, blueprint id and 5 proof steps. No compile reproduced (worker compile clean). No findings."
+ }
+}

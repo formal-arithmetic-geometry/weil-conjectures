@@ -1,0 +1,238 @@
+{
+ "id": "lem-trf-log-tower-contraction-descent",
+ "kind": "statement",
+ "title": "Contraction of log towers and descent of strict etale comparisons",
+ "statement": "Let $f:(Y,N)\\to(X,M)$ be a strict etale morphism between locally Noetherian fs log schemes [def-trf-fs-log-blowup, lem-trf-log-fan-chart-blowup, def-weil-etale-morphism], with no surjectivity hypothesis on $f$. Let $B$ be a finite saturated log blowup tower over $X$ with nonempty coherent ordered centers, and let $D=f^*B$ be its recursive uncontracted pullback. Write $C(D)$ for the tower obtained by deleting exactly its whole-monoid centers [def-trf-strict-etale-log-blowup-procedure]. Let $v:W\\to Y$ be a surjective strict etale cover. At every level the corresponding map from the uncontracted pullback of $D$ to $D$ is a scheme-theoretic base change of $v$; a center of $D$ is whole if and only if its restriction there is whole. There is a canonical ordered center-preserving isomorphism\n$$v^*C(D)\\simeq C(v^*D).$$\nThe retained ordered index set on both sides consists of exactly the same indices of $D$, including when several consecutive indices are deleted. The identifications across deleted levels are the canonical identity log morphisms, and the later centers are carried by these identifications to their original pulled-back ideals; proper principal centers are retained.\n\nIf $A$ is a contracted finite saturated log blowup tower over $Y$ and $C(v^*D)\\simeq v^*A$ is an ordered center-preserving isomorphism over $W$, then there is a unique such isomorphism $C(D)\\simeq A$ inducing it. Equivalently, the local contracted pullback comparison from $B$ to $A$ descends uniquely. Identity and composition equalities for these comparisons can be tested after a surjective strict etale cover of their source, using the induced covers at the intermediate tower levels. This includes their retained index maps and their actual log morphisms, so applies to consecutive strict etale morphisms and to towers of length zero.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 3.3.8--3.3.11 and proof of 3.3.15, pp.108--110: contracted pullbacks and testing equality after descent; non-surjective compatibility expanded."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "lem-trf-log-fan-chart-blowup",
+  "def-weil-etale-morphism",
+  "def-trf-strict-etale-log-blowup-procedure",
+  "def-trf-log-tower-full-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Write $D=(Y_n\\to\\cdots\\to Y_0=Y)$, with center $J_i\\subset N_i$ at stage $i<n$, and $E=v^*D$, with levels $W_i$ and centers $K_i$. Apply the first paragraph of [lem-trf-log-tower-cover-synchronization] to $D$ over $Y$ and $v$. It gives $W_i=W\\times_Y Y_i$, with surjective strict etale projection to $Y_i$, and $K_i=N_{W_i}$ if and only if $J_i=N_i$. Its hypotheses hold because $D$ is the stipulated finite saturated tower, all centers are nonempty coherent, and $v$ is surjective strict etale. This application is entirely over $Y$ and assumes no surjectivity of $f$.",
+   "uses": [
+    "lem-trf-log-tower-cover-synchronization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.8--3.3.11 and proof of 3.3.15, pp.108--110: contracted pullbacks and testing equality after descent; non-surjective compatibility expanded."
+   }
+  },
+  {
+   "text": "Let $S=\\{i<n:J_i\\ne N_i\\}$, in its original order, and $r(i)=\\#\\{j<i:j\\in S\\}$ for $0\\le i\\le n$. By step 1 this same subset and count apply to $E$. Construct the identifications between level $i$ and contracted level $r(i)$ inductively. At $i=0$ use the identity. If $i\\in S$, retain its blowup and its actual center and advance to level $r(i)+1$. If $i\\notin S$, its blowup is canonically the identity by [lem-trf-log-tower-cover-synchronization]; compose the preceding identification with that identity and leave $r(i+1)=r(i)$. In this deletion case, a later ideal is carried along the inverse of this specified log isomorphism, rather than replaced by another ideal with isomorphic blowup. Thus any run of consecutive deletions uses a composite of these canonical identities. This is exactly contraction as defined in [def-trf-strict-etale-log-blowup-procedure]. No test for principality or for an isomorphic blowup is used, so proper principal centers remain.",
+   "uses": [
+    "lem-trf-log-tower-cover-synchronization",
+    "def-trf-strict-etale-log-blowup-procedure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.8--3.3.11 and proof of 3.3.15, pp.108--110: contracted pullbacks and testing equality after descent; non-surjective compatibility expanded."
+   }
+  },
+  {
+   "text": "Repeat this induction after pulling back to $W$. A retained stage in the contracted tower has the same base-changed blowup and pulled-back ideal as the corresponding retained stage of $E$: recursive pullback is defined by blowing up precisely that pulled-back ideal [def-trf-strict-etale-log-blowup-procedure]. Their unique isomorphism over the preceding level is supplied by the universal property of the saturated log blowup [def-trf-fs-log-blowup]: each of the two universal objects factors uniquely through the other, and the composites are identities by uniqueness. At a deleted stage both paths use the identity of step 2. Starting with the identity on $W$, induction therefore gives $v^*C(D)\\simeq C(E)$, preserving every retained center and arrow. Both retained embeddings are the increasing enumeration of $S$; there is no shift ambiguity after successive deletions.",
+   "uses": [
+    "def-trf-strict-etale-log-blowup-procedure",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.8--3.3.11 and proof of 3.3.15, pp.108--110: contracted pullbacks and testing equality after descent; non-surjective compatibility expanded."
+   }
+  },
+  {
+   "text": "Now let $\\alpha:C(E)\\simeq v^*A$ be the given isomorphism. Compose it with step 3 to obtain an ordered center-preserving isomorphism $v^*C(D)\\simeq v^*A$ of full recursive pullbacks. The tower $C(D)$ is contracted by its construction, and $A$ is contracted by hypothesis. The cover-synchronization statement ensures that pulling either tower back along $v$ retains every one of its stages, so these really are uncontracted pullbacks with the same lengths as their respective towers. Apply [lem-trf-log-tower-cover-rigidity], second paragraph, to these two towers over $Y$. It gives a unique ordered center-preserving isomorphism $C(D)\\simeq A$ whose pullback is this composite. After the canonical identification of step 3 its pullback is exactly $\\alpha$, which proves the asserted descent of the comparison.",
+   "uses": [
+    "lem-trf-log-tower-cover-synchronization",
+    "lem-trf-log-tower-cover-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.8--3.3.11 and proof of 3.3.15, pp.108--110: contracted pullbacks and testing equality after descent; non-surjective compatibility expanded."
+   }
+  },
+  {
+   "text": "For testing identity and composition, first keep the uncontracted stage labels. Under two consecutive strict etale pullbacks, the ideal generated by the image of the ideal generated by $J_i$ is simply the ideal generated by the composite image of $J_i$; this follows by writing a generator as the image of an element of $J_i$ times an element of the intermediate monoid. A whole ideal remains whole under every pullback [lem-trf-log-tower-cover-synchronization]. Hence deleting it before the next pullback or afterwards gives the same retained original labels. If a retained ideal becomes whole at the second pullback, it is deleted then on both routes. Each count is the number of the surviving original labels below that position; composing the two count maps counts exactly that subset. After a surjective cover, whole-ideal detection at each original level reflects these subsets and therefore reflects equality of count maps and retained embeddings. This uses the induced level covers from step 1; it never assumes that a non-surjective strict etale map reflects properness.",
+   "uses": [
+    "lem-trf-log-tower-cover-synchronization",
+    "def-trf-strict-etale-log-blowup-procedure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.8--3.3.11 and proof of 3.3.15, pp.108--110: contracted pullbacks and testing equality after descent; non-surjective compatibility expanded."
+   }
+  },
+  {
+   "text": "Finally the log maps, as well as their index maps, obey these tests. Fix a map of bases and a retained-label choice as in step 5. At the initial level the map is specified. Inductively a map from the next source level to a target blowup is a factorization over the preceding target level, and, whenever it exists, is unique by [def-trf-fs-log-blowup]; when the target stage is deleted this is just the prescribed identity factorization. Thus two recursive comparison maps with the same base map and labels agree on their actual log morphisms, including the maps on log sections. Existence of the two routes being compared follows from their given comparisons and pullback universal properties; their equality follows from this uniqueness. For the intervening tower isomorphisms the cover-reflection and cocycle assertion of [lem-trf-log-tower-cover-rigidity] applies, so the local identity or composition equality descends. Step 5 supplies the common labels and the cover tests, and this argument supplies equality of the maps, not just of the levels. For length zero the induction has only its specified base map, the retained subset is empty, and all the same conclusions follow.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-trf-log-tower-cover-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.8--3.3.11 and proof of 3.3.15, pp.108--110: contracted pullbacks and testing equality after descent; non-surjective compatibility expanded."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-log-tower-cover-synchronization",
+  "def-trf-strict-etale-log-blowup-procedure",
+  "def-trf-fs-log-blowup",
+  "lem-trf-log-tower-cover-rigidity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 3.3.8--3.3.11 and the descent reductions in proof of 3.3.15, printed pp.107--110; explicit retained-index induction using existing synchronization and rigidity nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Contraction of a recursively pulled back saturated logarithmic blowup tower commutes with detection and descent on a surjective strict etale cover, including consecutive deleted stages.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.pullbackHom_map\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [inst : P.IsStableUnderBaseChange]\\n  [inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] {X W : AlgebraicGeometry.Scheme}\\n  (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X) (f : W ⟶ X)\\n  [\", \"doc\": \"Given a cover $\\\\mathcal{U}$ of a scheme $X$, a morphism $f : W \\\\to X$, and an index $i$, the composition of the pullback morphism $\\\\mathcal{U}.\\\\text{pullbackHom}(f, i)$ with the original morphism $\\\\ma\"}\n  {\"name\": \"Algebra.IsStandardEtale.of_surjective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ (R : Type u_4) (S : Type u_5) (T : Type u_6) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [Algebra.IsStandardEtale R S] [Algebra.Etale R T] (f : S →ₐ[R] T),\\n  Function.Surjective ⇑f → Algebra.IsStandardEtale R T\", \"doc\": \"If $ S $ is a standard étale $ R $-algebra, $ T $ is an étale $ R $-algebra, and there exists a surjective $ R $-algebra homomorphism $ f : S \\to T $, then $ T $ is also a standard étale $ R $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.exists_lift_trans_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Directed\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X : AlgebraicGeometry.Scheme}\\n  (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X)\\n  [inst : CategoryTheory.Category.{v_1, u_1} 𝒰.I₀] [inst_1 : 𝒰.LocallyDirected] {i j : 𝒰.I₀}\\n  (x : ↥(CategoryTheory.Limit\", \"doc\": \"For a locally directed cover $\\\\mathcal{U}$ of a scheme $X$, given any two indices $i, j$ in the zeroth component $\\\\mathcal{U}_0$ and any element $x$ in the underlying set of the pullback of the struct\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.pullbackHom_map_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [inst : P.IsStableUnderBaseChange]\\n  [inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] {X W : AlgebraicGeometry.Scheme}\\n  (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X) (f : W ⟶ X)\\n  [\", \"doc\": \"Given a morphism property $ P $ on schemes that is stable under base change and preserved by jointly surjective families, for any scheme cover $ \\\\mathcal{U} $ of $ X $, morphism $ f : W \\\\to X $, index\"}\nAssessment: returned ordinary scheme, ring, or abstract descent results do not state this logarithmic tower/fan/monoid-ideal assertion; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compare a log blowup tower with a contracted strict etale pullback by testing the surviving ordered ideal centers on an etale cover; identity and composition comparisons descend uniquely.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.ramificationIdx_tower\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Basic\", \"type\": \"[IsDedekindDomain S] [IsDedekindDomain T] {f : R →+* S} {g : S →+* T} {p : Ideal R} {P : Ideal S} {Q : Ideal T}\\n  [hpm : P.IsPrime] [hqm : Q.IsPrime] (hg0 : map g P ≠ ⊥) (hfg : map (g.comp f) p ≠ ⊥) (hg : map g P ≤ Q) :\\n  ramificationIdx (g.comp f) p Q = ramificationIdx f p P * ramificationIdx g P Q\", \"doc\": \"Given Dedekind domains $R, S, T$ with ring homomorphisms $f : R \\\\to S$ and $g : S \\\\to T$, prime ideals $p \\\\subseteq R$, $P \\\\subseteq S$, and $Q \\\\subseteq T$ satisfying $\\\\text{map}(g, P) \\\\subseteq Q$ a\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(p : Ideal A) (P : Ideal B) [P.LiesOver p] [p.IsPrime] [P.IsPrime] [IsEtaleAt R p] [IsEtaleAt A P] : IsEtaleAt R P\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsEtale @IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"Algebra.Etale.comp\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[Algebra A B] [IsScalarTower R A B] [Etale R A] [Etale A B] : Etale R B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings. If $ R \\to A $ and $ A \\to B $ are étale algebras and the scalar actions satisfy the tower condition $ R \\to A \\to B $, then the composite algebra $ R \\to \"}\n  {\"name\": \"Algebra.FormallyEtale.comp\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] [FormallyEtale A B] : FormallyEtale R B\", \"doc\": \"If $ A $ is a formally étale algebra over a commutative ring $ R $, and $ B $ is a formally étale algebra over $ A $, then $ B $ is a formally étale algebra over $ R $.\"}\n  {\"name\": \"RingHom.Etale.stableUnderComposition\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": StableUnderComposition Etale\", \"doc\": \"The composition of two étale ring homomorphisms is again an étale ring homomorphism.\"}\n  {\"name\": \"Ideal.under_under\", \"module\": \"Mathlib.RingTheory.Ideal.Over\", \"type\": \": (𝔓.under B).under A = 𝔓.under A\", \"doc\": \"For an ideal $\\\\mathfrak{P}$ in a ring $C$, the contraction of $\\\\mathfrak{P}$ to a ring $B$ via an algebra homomorphism $B \\\\to C$, followed by contraction to a ring $A$ via an algebra homomorphism $A \\\\\"}\n  {\"name\": \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings with $ A $ and $ B $ as $ R $-algebras, and $ B $ as an $ A $-algebra satisfying the scalar tower condition $ R \\to A \\to B $. If $ A $ is formally unram\"}\nAssessment: returned ordinary scheme, ring, or abstract descent results do not state this logarithmic tower/fan/monoid-ideal assertion; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Blowup\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)\nAssessment: returned ordinary scheme, ring, or abstract descent results do not state this logarithmic tower/fan/monoid-ideal assertion; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "log.?blow.?up|contract.*tower|log.?ideal",
+   "results": "[grep] OK 0 hit(s)\nAssessment: returned ordinary scheme, ring, or abstract descent results do not state this logarithmic tower/fan/monoid-ideal assertion; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "log.?blow.?up|contract.*tower|log.?ideal",
+   "results": "0 hits; . Read returned signatures: ordinary scheme/ring etale facts and standard etale presentations do not state logarithmic towers or contraction; no one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Deleting whole monoid ideal centers in a log blowup tower commutes with base change by a strict etale covering.",
+   "results": "8 hits; IsLocalization.tensor, Algebra.Etale.baseChange, RingHom.IsStableUnderBaseChange.of_isLocalization, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, IsLocalizedModule.isBaseChange, IsLocalization.Away.tensorEquiv, AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme, Submonoid.center.smulCommClass_right. Read returned signatures: ordinary scheme/ring etale facts and standard etale presentations do not state logarithmic towers or contraction; no one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Blowup\", \"pullback\"",
+   "results": "0 hits; . Read returned signatures: ordinary scheme/ring etale facts and standard etale presentations do not state logarithmic towers or contraction; no one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contraction of finite saturated logarithmic blowup towers commutes with surjective strict etale pullback and center preserving tower comparisons descend uniquely.",
+   "results": "8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.IsStandardEtale.of_surjective, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, StandardEtalePair.HasMap.map, StandardEtalePresentation.mk.inj. Read returned signatures: ordinary scheme/ring etale facts and standard etale presentations do not state logarithmic towers or contraction; no one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered logarithmic blowup sequences delete only unit ideal steps; this reduction is invariant under etale descent and preserves proper principal centers.",
+   "results": "8 hits; StandardEtalePair, StandardEtalePresentation, StandardEtalePair.hasMap_X, StandardEtalePresentation.toPresentation_σ', StandardEtalePresentation.toSubmersivePresentation, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial. Read returned signatures: ordinary scheme/ring etale facts and standard etale presentations do not state logarithmic towers or contraction; no one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogBl|LogBlow|SaturatedBlow|LogScheme",
+   "results": "0 hits; . Read returned signatures: ordinary scheme/ring etale facts and standard etale presentations do not state logarithmic towers or contraction; no one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-functorial-log-blowup-etale-descent",
+  "date": "2026-10-22",
+  "group": "Q107"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, proof of Theorem 3.3.15, pp.109--110, initial descent reduction and final finite-disjoint-union argument; effective gluing input implicit there, using 3.3.8--3.3.10 for log blowups. Re-split of lem-trf-functorial-log-blowup-etale-descent, old proof steps 9: VIII 3.3.8--3.3.11 and proof of 3.3.15, pp.108--110: contracted pullbacks and testing equality after descent; non-surjective compatibility expanded.",
+   "via": [
+    "lem-trf-functorial-log-blowup-etale-descent",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-log-tower-contraction-descent",
+  "worker": "stage1",
+  "summary": "Read ILO VIII printed pp.107--110 and the current blueprint ancestor/unit. Reuse the existing cover-synchronization and cover-rigidity statements; prove contraction compatibility by induction on the original stage labels, treating whole centers as canonical identities and retaining proper principal centers. Apply rigidity only after identifying the full pullbacks, and check comparison laws on count maps and actual universal-factorization log maps. No new nodes, no statement correction, no Lean edits or compilation.",
+  "blueprint": "Historical nearby-duality/alteration branch recorded in blueprint.from of lem-trf-local-term-locality, via functorial log-blowup etale descent: ILO VIII proof 3.3.15 initial descent and final comparison on a finite cover. Latest blueprint main-20261023-1620 no longer contains that old monoidal branch; its current proof uses Varshavsky. This item realizes the retained historical branch only; no chapter/unit route was changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-5e86ba829",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-5e86ba829 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the four cited statements in full: synchronization paragraph 1, rigidity paragraph 2, the procedure definition and def-trf-fs-log-blowup. I also read ILO VIII 3.3.7–3.3.11 and the proof of 3.3.15 (PDF pp.113–116), where contraction removes the blowups along I=M and the contracted pullbacks are compared by descent on a finite cover. The statement, stmt_deps, source and blueprint are identical to the unsplit base node. No new nodes; proof_deps equals the union of the uses; no SGA; the three kinds of search are recorded; live and side-live still have the node unsplit, so the delivery is not superseded. Step 1: synchronization is applied over Y along the surjective v, never along f. Step 2: the induction on S and r(i) has its base and both cases written out; whole center ⇒ identity blowup and whole ⇒ stays whole are both in the synchronization statement; it is elementary. Step 3: retained stages are matched by the universal property of the saturated blowup, and deleted stages use the identities from step 2. Step 4: since C(D) and A are contracted and v is surjective, nothing is deleted on pullback, so rigidity paragraph 2 gives the unique descended C(D)≃A. Steps 5–6: the label sets and count maps agree directly, and uniqueness of factorizations gives equality of the actual log maps. Edge cases checked: length 0, every center whole, runs of consecutive whole centers, a proper principal center, a non-surjective f that makes a center whole, and empty Y or W. No duplicate or restatement found in the DAG. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogTowerContractionDescent",
+  "declaration": "AlgebraicGeometry.log_tower_contraction_descent",
+  "declarations": [
+   "AlgebraicGeometry.log_tower_contraction_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LogTowerContractionDescent.lean",
+  "statement": "theorem log_tower_contraction_descent : (∀ (Y : FineSaturatedLogScheme.{u}) (D : LogBlowupTowerOver Y), ∃ C : LogBlowupTowerOver Y, Nonempty (LogBlowupComparison (EtaleLogHom.id Y) D C)) ∧ (∀ (X Y : FineSaturatedLogScheme.{u}) (f : EtaleLogHom Y X), f.IsStrict → Etale f.base → ∀ (B : LogBlowupTowerOver X) (D : LogBlowupTowerOver Y) (_r : LogBlowupFullPullback f B D) (C : LogBlowupTowerOver Y) (c : LogBlowupComparison (EtaleLogHom.id Y) D C), C.IsContracted ∧ (∀ i, i ∉ Set.range c.retained ↔ D.tower.center i = (fun _ ↦ Set.univ)) ∧ (∀ i, ∃ b : EtaleLogHom (D.tower.level i) (C.tower.level (c.count i)), (c.map i).AreInverses b) ∧ ∀ (W : FineSaturatedLogScheme.{u}) (v : EtaleLogHom W Y), v.IsStrict → Etale v.base → Surjective v.base → ∀ (E : LogBlowupTowerOver W) (p : LogBlowupFullPullback v D E) (F : LogBlowupTowerOver W) (d : LogBlowupComparison (EtaleLogHom.id W) E F) (U : LogBlowupTowerOver W) (q : LogBlowupFullPullback v C U), p.IsCoverSynchronized ∧ F.IsContracted ∧ ∃ e : LogBlowupTowerIso U F, p.IsContractionInterchange c d q e ∧ (∀ e' : LogBlowupTowerIso U F, p.IsContractionInterchange c d q e' → e' = e) ∧ ∀ (A : LogBlowupTowerOver Y), A.IsContracted → ∀ (V : LogBlowupTowerOver W) (a : LogBlowupFullPullback v A V) (α : LogBlowupTowerIso F V), ∃! β : LogBlowupTowerIso C A, LogBlowupTowerIso.InducesContractedLocalIso q a e α β) ∧ (∀ (X Y W : FineSaturatedLogScheme.{u}) (f : EtaleLogHom Y X) (v : EtaleLogHom W Y), f.IsStrict → Etale f.base → v.IsStrict → Etale v.base → Surjective v.base → ∀ (B : LogBlowupTowerOver X) (A : LogBlowupTowerOver Y) (U : LogBlowupTowerOver W) (p : LogBlowupFullPullback v A U), p.IsCoverSynchronized ∧ (∀ c : LogBlowupComparison f B A, ∃! a : LogBlowupComparison (v.comp f) B U, LogBlowupComparison.RestrictsTo p c a) ∧ ∀ (c d : LogBlowupComparison f B A) (a b : LogBlowupComparison (v.comp f) B U), LogBlowupComparison.RestrictsTo p c a → LogBlowupComparison.RestrictsTo p d b → (c = d ↔ a = b)) ∧ (∀ (Y W : FineSaturatedLogScheme.{u}) (v : EtaleLogHom W Y), v.IsStrict → Etale v.base → Surjective v.base → ∀ (A : LogBlowupTowerOver Y) (U : LogBlowupTowerOver W) (p : LogBlowupFullPullback v A U) (c : LogBlowupComparison (EtaleLogHom.id Y) A A) (a : LogBlowupComparison v A U), (∀ i, a.count i = p.index (c.count i)) → (∀ k, a.retained (p.stage k) = c.retained k) → (∀ i, HEq (a.map i) ((p.map (c.count i)).comp (c.map i))) → (c.IsIdentityComparison ↔ LogBlowupComparison.AgreesWithFullPullback p a)) ∧ (∀ (X Y Z W : FineSaturatedLogScheme.{u}) (f : EtaleLogHom Y X) (g : EtaleLogHom Z Y) (h : EtaleLogHom Z X) (v : EtaleLogHom W Z), f.IsStrict → Etale f.base → g.IsStrict → Etale g.base → g.CompEq f h → v.IsStrict → Etale v.base → Surjective v.base → ∀ (B : LogBlowupTowerOver X) (A : LogBlowupTowerOver Y) (C : LogBlowupTowerOver Z) (U : LogBlowupTowerOver W) (p : LogBlowupFullPullback v C U) (a : LogBlowupComparison f B A) (b : LogBlowupComparison g A C) (c : LogBlowupComparison h B C) (b' : LogBlowupComparison (v.comp g) A U) (c' : LogBlowupComparison (v.comp h) B U), LogBlowupComparison.RestrictsTo p b b' → LogBlowupComparison.RestrictsTo p c c' → (a.IsCompositeComparison b c ↔ a.IsCompositeComparison b' c'))",
+  "branch": "sheaf-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c0c41f9a",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Read item node, new def node def-trf-log-tower-full-pullback, both modules, the live dependency declarations (LogBlowupComparison/TowerIso/TowerOver.toBase, EtaleLogHom comp/id/CompEq/Square/IsFSPullback/IsIdentity, pullbackIdeal, IsSaturatedLogBlowup) and ILO VIII 3.3.8-3.3.11 plus proof of 3.3.15 (PDF pp.113-116). Every node clause is rendered: full pullback with fs squares and generated centers; contraction via comparison along id with whole-iff deletion, identity deleted steps and retained proper principal centers; IsCoverSynchronized gives scheme base change and whole-reflection at every level; the interchange e is unique and fully determined by its normalization (count surjective, retained injective, forward via the fs-pullback universal property); unique descent of the given alpha via InducesContractedLocalIso; RestrictsTo exists-unique since step is determined; identity and composition tests correct via propositional unit/associativity laws and epimorphic surjective strict etale level maps; length 0 and no surjectivity on f. Universe single u, no hollow defs, docstrings OK, lean.statement verbatim for both nodes, item node differs from live only in lean and the added stmt_dep. No duplicate full-pullback notion in live (Monoscheme PullbackOver is a different object). No file changed, so no compile; worker reports clean compile. Remark only: second reading done by the delivering worker itself, stated openly."
+ }
+}

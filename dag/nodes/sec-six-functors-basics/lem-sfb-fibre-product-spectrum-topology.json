@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-fibre-product-spectrum-topology",
+ "kind": "statement",
+ "title": "Topological spectrum of a ring fibre product along a surjection",
+ "statement": "Let $A,D,T$ be commutative rings with identity, allowing zero rings, let $\\alpha:A\\to D$ be a surjective unital ring homomorphism and let $\\beta:T\\to D$ be any unital ring homomorphism. Put $P=\\{(a,t)\\in A\\times T:\\alpha(a)=\\beta(t)\\}$ with componentwise ring operations. Use the prime spectra with their Zariski topologies [def-weil-affine-spectrum]. The maps $\\operatorname{Spec}A\\to\\operatorname{Spec}P$ and $\\operatorname{Spec}T\\to\\operatorname{Spec}P$ induced by the projections are jointly surjective on points and make $\\operatorname{Spec}P$ the topological pushout of $\\operatorname{Spec}A\\leftarrow\\operatorname{Spec}D\\to\\operatorname{Spec}T$. Explicitly, for every topological space $H$ and continuous maps $u:\\operatorname{Spec}A\\to H$ and $v:\\operatorname{Spec}T\\to H$ whose composites from $\\operatorname{Spec}D$ agree, there exists exactly one continuous map $h:\\operatorname{Spec}P\\to H$ restricting to $u$ and $v$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0B7J, lemma-points-of-fibre-product, in Situation situation-module-over-fibre-product: topological pushout; joint surjectivity is established in the first paragraph of its proof."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Write $X=\\operatorname{Spec}P$, $Y=\\operatorname{Spec}A$, $Z=\\operatorname{Spec}T$, $E=\\operatorname{Spec}D$, and $i:Y\\to X$, $j:Z\\to X$, $r:E\\to Y$, $s:E\\to Z$ for the induced maps. Put $I=\\ker\\alpha$ and $K=\\ker(P\\to T)=\\{(c,0):c\\in I\\}$. The projection $P\\to T$ is surjective: lift $\\beta(t)$ through $\\alpha$ for each $t\\in T$. The composite ring maps $P\\to D$ agree, so $ir=js$ by functoriality of spectra. For any ring map $f:R\\to S$, inverse images of basic opens satisfy $(\\operatorname{Spec}f)^{-1}D_R(b)=D_S(f(b))$, directly from contraction of prime ideals.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B7J, lemma-points-of-fibre-product, setup and first paragraph; Situation situation-module-over-fibre-product, with A there = D here, A′ there = A here, B there = T here."
+   }
+  },
+  {
+   "text": "For $c\\in I$ put $e=(c,0)\\in P$. The localized projection $P_e\\to A_c$ is an isomorphism. Indeed $a/c^n$ has preimage $(ca,0)/e^{n+1}$, and if $(a,t)/e^n$ maps to zero then $c^k a=0$ for some $k\\geq0$; hence $e^{k+1}(a,t)=(c^{k+1}a,0)=0$, so the original fraction is zero. Surjectivity and this kernel calculation give bijectivity of the canonical ring map. These are fraction computations with the definition of localization, including when $c$ is nilpotent or zero; no general localization-of-pullbacks lemma is being assumed.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 01Z8, lemma-diagram-localize, specialization h=(c,0) with c in ker(alpha); the displayed two fraction calculations prove this specialization directly."
+   }
+  },
+  {
+   "text": "The quotient-spectrum theorem applied to $P\\twoheadrightarrow T$ identifies $j$ with a homeomorphism $Z\\xrightarrow{\\sim}V_X(K)$. Applied to $\\alpha$, it identifies $r$ with a homeomorphism $E\\xrightarrow{\\sim}V_Y(I)$. For every $c\\in I$, the principal-localization theorem and step 2 identify $i:D_Y(c)\\to D_X((c,0))$ as a homeomorphism: the localized projection is an isomorphism, and taking spectra of its inverse gives the inverse map. These identifications commute with contraction to the original spectra. Every $x\\notin V_X(K)$ avoids some $(c,0)\\in K$, and thus lifts to $Y$ by this homeomorphism. Points of $V_X(K)$ lift to $Z$. This proves joint surjectivity.",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B7J, lemma-points-of-fibre-product, first paragraph; localization identification made explicit by step 2."
+   }
+  },
+  {
+   "text": "Contraction gives $i^{-1}V_X(K)=V_Y(I)$. Consequently a point of $X\\setminus V_X(K)$ has exactly one preimage in $Y$: choose $c\\in I$ with $(c,0)$ outside that prime, and all its preimages lie in $D_Y(c)$, where step 3 is bijective. It has no preimage in $Z$. Over $V_X(K)$ the map $j$ is injective. If $i(y)=j(z)$, then $y\\in V_Y(I)$, so the quotient-spectrum theorem gives a unique $d\\in E$ with $r(d)=y$, and $j(s(d))=i(y)=j(z)$ forces $s(d)=z$. Thus all coincidences between the two spectra are precisely the ones imposed by $E$; two points of $Y$ with the same image in $V_X(K)$ come from points $d_1,d_2$ of $E$ with $s(d_1)=s(d_2)$.",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B7J, lemma-points-of-fibre-product, injectivity paragraph; the equivalence relation is written out, without assuming beta surjective or injective."
+   }
+  },
+  {
+   "text": "Given $H,u,v$ as in the statement, define $h(x)$ by choosing a preimage in $Y$ or $Z$ and applying $u$ or $v$, respectively. Joint surjectivity supplies a choice. Step 4 proves independence: off $V_X(K)$ the preimage is unique; on it, every preimage $y=r(d)$ has $u(y)=v(s(d))$, which is the value of $v$ at the unique preimage in $Z$. Hence $hi=u$, $hj=v$, and joint surjectivity also proves that at most one set map has these restrictions. It remains to prove continuity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B7J, lemma-points-of-fibre-product, set-theoretic bijection after the injectivity paragraph."
+   }
+  },
+  {
+   "text": "We prove the needed topology criterion directly. Let $W\\subseteq X$ be any subset for which $U=i^{-1}W\\subseteq Y$ and $V=j^{-1}W\\subseteq Z$ are open. They satisfy $r^{-1}U=s^{-1}V$ since $ir=js$. Fix $z\\in V$. Choose $t\\in T$ with $z\\in D_T(t)\\subseteq V$ using the principal-open basis, and lift $\\beta(t)$ to $a\\in A$. Write $Y\\setminus U=V_Y(J)$ for an ideal $J\\subseteq A$, using the definition of the Zariski topology. Every $y\\in V_Y(I)$ avoiding $a$ is $r(d)$ for some $d\\in E$ whose contraction $s(d)$ avoids $t$, so $s(d)\\in V$ and $y\\in U$. It follows that $V_Y(I)\\cap V_Y(J)\\subseteq V_Y(a)$: there is no prime containing $I$ and $J$ while avoiding $a$.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B7J, lemma-points-of-fibre-product, openness paragraph beginning Let v in V; closed-complement notation and the compatibility on Spec D."
+   }
+  },
+  {
+   "text": "Every prime containing $I+J$ therefore contains $a$. The radical-as-intersection theorem gives $a\\in\\sqrt{I+J}$, so $a^n=c+b$ for some $n\\geq1$, $c\\in I$, $b\\in J$. Thus $\\alpha(b)=\\alpha(a)^n=\\beta(t)^n$ and $p=(ab,t^{n+1})$ belongs to $P$. By step 1 the inverse images of $D_P(p)$ are $D_A(ab)\\subseteq U$ and $D_T(t^{n+1})=D_T(t)\\subseteq V$: a prime avoiding $ab$ avoids $b\\in J$ and cannot lie in $V_Y(J)$. Also $j(z)\\in D_P(p)$. Every point of $D_P(p)$ has a lift in $Y$ or $Z$ by step 3, and its lift belongs to the respective inverse-image basic open, hence lies in $U$ or $V$. Therefore $D_P(p)\\subseteq W$. We have obtained an open neighbourhood inside $W$ of every point of $W\\cap V_X(K)$, since $j$ identifies $Z$ with that closed subset. This uses an explicit ideal identity instead of the source's clearing-denominators sentence.",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B7J, lemma-points-of-fibre-product, openness paragraph, replacing the localized Chinese-remainder calculation with the equivalent power-in-I+J calculation; Tag 00E0, lemma-Zariski-topology (7), for the radical identity."
+   }
+  },
+  {
+   "text": "Now take $x\\in W\\setminus V_X(K)$. Let $y\\in U$ be its unique preimage in $Y$, and choose $c\\in I\\setminus y$. The principal-open basis supplies $a\\in A$ with $y\\in D_A(a)\\subseteq U$. Put $e=(ca,0)\\in P$. Then $x\\in D_P(e)$, since $ca\\notin y$ and $i(y)=x$. The inverse images of $D_P(e)$ in $Y$ and $Z$ are $D_A(ca)\\subseteq U$ and $D_T(0)=\\emptyset\\subseteq V$. Joint surjectivity again gives $D_P(e)\\subseteq W$. Together with step 7, every point of $W$ has an open neighbourhood contained in $W$, so $W$ is open. This supplies the easier case omitted at the end of the source's proof.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B7J, lemma-points-of-fibre-product, last sentence: explicit proof for u prime outside V(I)."
+   }
+  },
+  {
+   "text": "For every open $O\\subseteq H$, take $W=h^{-1}O$. Its inverse images under $i,j$ are $u^{-1}O,v^{-1}O$, which are open by continuity of $u,v$. Steps 6 through 8 imply $h^{-1}O$ is open, proving $h$ continuous. Step 5 gives the prescribed restrictions and uniqueness even among set maps, hence among continuous maps. This is precisely the stated topological pushout universal property, together with joint surjectivity proved in step 3. If a spectrum is empty, all choices above are made only at an existing point; for $X=\\emptyset$ the unique empty map satisfies the same argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B7J, lemma-points-of-fibre-product, conclusion of the openness argument and the pushout universal property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0B7J, lemma-points-of-fibre-product, complete proof, with the omitted off-V(I) neighbourhood supplied and the localized separation calculation expressed using Tag 00E0 (7)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pinch|pushout|IsPushout",
+   "results": "{\"t\": \"2026-10-22T05:15:42Z\", \"tool\": \"grep\", \"query\": \"pinch|pushout|IsPushout\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\"], \"digest\": \"c86439a56d82696d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum, \"pushout\"",
+   "results": "{\"t\": \"2026-10-22T05:15:42Z\", \"tool\": \"loogle\", \"query\": \"PrimeSpectrum, \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CommRingCat.finrank_eq_of_isPushout\", \"Algebra.rankAtStalk_eq_of_isPushout\"], \"digest\": \"3ec127173516ec94\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a surjective ring map A to D the topological spectrum of A fiber product over D with T is the pushout of prime spectra",
+   "results": "{\"t\": \"2026-10-22T05:15:43Z\", \"tool\": \"leanfinder\", \"query\": \"For a surjective ring map A to D the topological spectrum of A fiber product over D with T is the pushout of prime spectra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.isPullback_Spec_map_isPushout\", \"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.pullbackSpecIso\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\"], \"digest\": \"01e95f377416ef4d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback|fiberProduct|fibreProduct|IsPushout",
+   "results": "{\"t\": \"2026-10-22T05:15:53Z\", \"tool\": \"grep\", \"query\": \"pullback|fiberProduct|fibreProduct|IsPushout\", \"sub\": \"RingTheory/Spectrum\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\"], \"digest\": \"7b2921e02b43e7d9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prime spectrum of a pullback of commutative rings with one surjective map is a topological pushout or quotient space",
+   "results": "{\"t\": \"2026-10-22T05:16:33Z\", \"tool\": \"leanfinder\", \"query\": \"Prime spectrum of a pullback of commutative rings with one surjective map is a topological pushout or quotient space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.isPullback_Spec_map_isPushout\", \"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.pullbackSpecIso\", \"AlgebraicGeometry.Spec.map_surjective\", \"PrimeSpectrum.comap_isInducing_of_surjective\", \"PrimeSpectrum.isEmbedding_comap_of_surjective\"], \"digest\": \"1ad9da2e493ee0a8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The prime spectrum of a ring fiber product over a surjective homomorphism is a pushout of topological spaces",
+   "results": "{\"t\": \"2026-10-22T05:16:33Z\", \"tool\": \"leansearch\", \"query\": \"The prime spectrum of a ring fiber product over a surjective homomorphism is a pushout of topological spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"PrimeSpectrum.isEmbedding_comap_of_surjective\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_surjective\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\", \"AlgebraicGeometry.Spec.topMap\", \"PrimeSpectrum.specComap_injective_of_surjective\", \"PrimeSpectrum.comap_injective_of_surjective\", \"AlgebraicGeometry.Spec.topObj\"], \"digest\": \"77a7a42ff0296835\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.?product|fibre.?product|pinch",
+   "results": "{\"t\": \"2026-10-22T05:16:50Z\", \"tool\": \"grep\", \"query\": \"fiber.?product|fibre.?product|pinch\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/PullbackCone.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Cospan.lean\", \"Mathlib/Data/Set/Prod.lean\", \"Mathlib/Data/Set/Prod.lean\", \"Mathlib/Data/Set/Prod.lean\", \"Mathlib/Data/Set/Prod.lean\"], \"digest\": \"2bef5b978830c8bb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PrimeSpectrum\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T05:16:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"PrimeSpectrum\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme pullbacks from ring pushouts, embeddings from surjections, or abstract categorical limits; none states the topological pushout of spectra of a ring fibre product."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback|fiberProduct|fibreProduct|pushout",
+   "results": "{\"t\": \"2026-10-22T05:34:55Z\", \"tool\": \"grep\", \"query\": \"pullback|fiberProduct|fibreProduct|pushout\", \"sub\": \"RingTheory/Spectrum\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\"], \"digest\": \"7b2921e02b43e7d9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ring pushouts giving scheme pullbacks, or embeddings/quotient maps under other hypotheses; none states the spectrum pushout for a ring pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Spectrum of a ring fibre product along a surjection is a topological pushout",
+   "results": "{\"t\": \"2026-10-22T05:34:55Z\", \"tool\": \"leansearch\", \"query\": \"Spectrum of a ring fibre product along a surjection is a topological pushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pullbackSpecIso_hom_fst'\", \"PrimeSpectrum.isEmbedding_comap_of_surjective\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\", \"AlgebraicGeometry.pullbackSpecIso_hom_snd\", \"AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc\", \"AlgebraicGeometry.isPullback_Spec_map_isPushout\"], \"digest\": \"49e5a19598412850\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ring pushouts giving scheme pullbacks, or embeddings/quotient maps under other hypotheses; none states the spectrum pushout for a ring pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum, \"pushout\"",
+   "results": "{\"t\": \"2026-10-22T05:34:56Z\", \"tool\": \"loogle\", \"query\": \"PrimeSpectrum, \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CommRingCat.finrank_eq_of_isPushout\", \"Algebra.rankAtStalk_eq_of_isPushout\"], \"digest\": \"3ec127173516ec94\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ring pushouts giving scheme pullbacks, or embeddings/quotient maps under other hypotheses; none states the spectrum pushout for a ring pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The prime spectrum of a pullback of commutative rings with one surjective map is the pushout of the spectra as topological spaces",
+   "results": "{\"t\": \"2026-10-22T05:34:57Z\", \"tool\": \"leanfinder\", \"query\": \"The prime spectrum of a pullback of commutative rings with one surjective map is the pushout of the spectra as topological spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.isPullback_Spec_map_isPushout\", \"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.pullbackSpecIso\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst'\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst'\"], \"digest\": \"2f08e3f76f3ea622\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ring pushouts giving scheme pullbacks, or embeddings/quotient maps under other hypotheses; none states the spectrum pushout for a ring pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "PrimeSpectrum of a ring pullback along a surjective homomorphism is the quotient topological space obtained by gluing spectra along a closed subspace",
+   "results": "{\"t\": \"2026-10-22T05:35:49Z\", \"tool\": \"leanfinder\", \"query\": \"PrimeSpectrum of a ring pullback along a surjective homomorphism is the quotient topological space obtained by gluing spectra along a closed subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.comap_isInducing_of_surjective\", \"PrimeSpectrum.isEmbedding_comap_of_surjective\", \"PrimeSpectrum.isClosedEmbedding_comap_of_surjective\", \"PrimeSpectrum.isClosed_range_comap_of_surjective\", \"AlgebraicGeometry.Spec.map_surjective\", \"PrimeSpectrum.comap_singleton_isClosed_of_surjective\", \"PrimeSpectrum.specComap_injective_of_surjective\", \"PrimeSpectrum.isQuotientMap_of_generalizingMap\"], \"digest\": \"bf1ccbcfb87c2ead\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ring pushouts giving scheme pullbacks, or embeddings/quotient maps under other hypotheses; none states the spectrum pushout for a ring pullback."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-closed-pinching-pushout",
+  "date": "2026-10-22",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. affine conductor-square pushout. Underlying-space identification in the affine conductor-square argument (Stacks 0ET0, first paragraph).",
+   "via": [
+    "lem-sfb-affine-closed-pinching-pushout",
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-fibre-product-spectrum-topology",
+  "worker": "stage1",
+  "summary": "Proved the topological pushout directly following Stacks 0B7J. Reused quotient-spectrum, principal-open/localization, and radical-intersection Mathlib leaves; wrote out the two fraction calculations off the kernel, every point identification, and both open-neighbourhood cases. No new nodes, no additional hypotheses, no statement change.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction through ILO X Lemma 2.2: the affine conductor-square topological pushout prerequisite, via lem-sfb-affine-closed-pinching-pushout. The imported lineage has from.node=null; it is retained, and no blueprint node states this commutative-algebra topology lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-b9e419c98",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-b9e419c98 (reviewer sub-agent of L); spot-checked: I read the full 9-step split of Stacks 0B7J (more-algebra lemma-points-of-fibre-product, Situation situation-module-over-fibre-product). Under the dictionary A'→A, A→D, B→T, B'→P the hypotheses match exactly: α is surjective, β is arbitrary, and zero rings are allowed. The statement is unchanged from live. Stating it as joint surjectivity plus the universal property is equivalent to Stacks' homeomorphism, so the target is not weakened. All 5 cited nodes are Mathlib leaves, and I opened each: affine spectrum, localization away, the quotient closed embedding onto V(ker), the basic-open basis with Spec A_f≅D(f), and √I as the intersection of the primes containing I. The route is clean, tool_uses is empty, and there is no SGA. Step checks: step 2 is checked by explicit fractions ((ca,0)/e^{n+1}, and e^{k+1}(a,t)=0); step 4 handles non-injectivity of i on V(I) through r and s; step 7 replaces the source's 'clear denominators' with a^n=c+b, c∈I, b∈J, giving p=(ab,t^{n+1})∈P with i^{-1}D(p)=D(ab)⊆D(b)⊆U and j^{-1}D(p)=D(t)⊆V; step 8 supplies the case the source omits, via (ca,0) with j^{-1}=D(0)=∅. Edge cases tested: D=0, α an isomorphism, A=0, T=0, Z←Z/p→Z/p, the conjugate primes of C[x] over R[x], and nilpotent c. The item is not on the drop list, has no repair note, and is still unsplit on live. Maintainer note: lem-sfb-ring-fibre-product-spectrum (Q68, landed 05:36, after this item at 05:30) restates the same 0B7J homeomorphism plus a 01Z8 localization clause. When it is split, it should cite this item for the homeomorphism clause or be merged into it; this is not a fault of this delivery. Advisory: the proof is 5555 characters; no 3000-character cap applies because there is no repair note. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FibreProductSpectrumTopology",
+  "declaration": "PrimeSpectrum.pullback_jointly_surjective_and_existsUnique_continuousMap",
+  "file": "lean/Sheaf/RingTheory/FibreProductSpectrumTopology.lean",
+  "statement": "theorem pullback_jointly_surjective_and_existsUnique_continuousMap {A : Type uA} {D : Type uD} {T : Type uT} [CommRing A] [CommRing D] [CommRing T] (α : A →+* D) (β : T →+* D) (hα : Function.Surjective α) : (∀ p : PrimeSpectrum (α.pullback β), (∃ a : PrimeSpectrum A, comap (α.pullbackFst β) a = p) ∨ (∃ t : PrimeSpectrum T, comap (α.pullbackSnd β) t = p)) ∧ ∀ (H : Type uH) [TopologicalSpace H] (u : C(PrimeSpectrum A, H)) (v : C(PrimeSpectrum T, H)), u ∘ comap α = v ∘ comap β → ∃! h : C(PrimeSpectrum (α.pullback β), H), h ∘ comap (α.pullbackFst β) = u ∧ h ∘ comap (α.pullbackSnd β) = v",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ee918fc9",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Read node, Stacks 0B7J source, stmt_dep def-weil-affine-spectrum, delivered module and report. Lean matches each clause: CommRing A D T with no Nontrivial assumption and independent universes; hα surjective only; P = Mathlib RingHom.pullback α β (eqLocus subring of A×T); maps are PrimeSpectrum.comap of pullbackFst/Snd; first conjunct is joint surjectivity; second is ∀ H (universe uH) and continuous u, v with u∘comap α = v∘comap β → ∃! continuous h with both restrictions, i.e. the node's explicit pushout property. lean.statement verbatim (diffed); node otherwise unchanged vs side-live; Worker report and Second reading sections present. No Mathlib/project duplicate; Q68 lem-sfb-ring-fibre-product-spectrum has no lean record. No definitions; sorry only; source and blueprint docstrings and 9-step proof plan present. Edge cases (zero rings, α iso, β arbitrary, empty H) covered. No fixes, no compile needed."
+ }
+}

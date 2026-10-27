@@ -8,6 +8,10 @@ public import Sheaf.Paper.ContinuousLocallyFreePullback
 public import Sheaf.Paper.ContinuousLatticeIntersection
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Sheaf.Paper.ContinuousFiniteEtaleTrace
+import Sheaf.Paper.ContinuousFiniteEtaleTraceImageCharts
+import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
+import all Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
 
 /-! # Locally free integral images under finite etale trace
 
@@ -59,6 +63,15 @@ theorem continuousFiniteEtaleTrace_lattice
       Epi τ ∧ LocallyFree (condensedRingObj (integralCoeff l E) X)
         (image (latticePushedEmbedding (integralScalarMap l E) X P p M e ≫
           (Mod.comap (coefficientMap (integralScalarMap l E) X)).map τ)) := by
-  sorry
+  let : IsUltrametricDist E := IsUltrametricDist.of_normedAlgebra ℚ_[l]
+  obtain ⟨τ, hEpi, hτ⟩ := continuousFiniteEtaleTrace_exists l E X p P
+  obtain ⟨C, hC⟩ := continuousFiniteEtaleTrace_image_charts l E X P hP p M hM e τ hτ
+  refine ⟨τ, hEpi, C, fun s ↦ ?_⟩
+  obtain ⟨r, d, hd, L, hL, ⟨presentation⟩⟩ := hC s
+  let : Nonempty (Fin d) := ⟨⟨0, hd⟩⟩
+  have hfree := continuousLatticeSum_isFree l E (C.X s) r (Fin d) L hL _ presentation
+  apply ProEtale.free_of_comap (inv (condensedPullbackHom (integralCoeff l E) (C.f s)))
+  exact ProEtale.free_of_iso hfree
+    ((Mod.extendScalarsIsoComapInv (condensedPullbackHom (integralCoeff l E) (C.f s))).app _)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

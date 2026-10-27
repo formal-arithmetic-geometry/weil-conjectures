@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-quasifinite-normal-local-birational-algebra",
+ "kind": "statement",
+ "title": "Quasi-finite birational algebras agree locally over a normal point",
+ "statement": "Let $A\\subseteq C$ be commutative integral domains with a common field of fractions $K$, with the inclusion inducing the identity on $K$. Assume that $C$ is a finite-type $A$-algebra [def-weil-pbc-finite-type-algebra]. Let $\\mathfrak q\\subset C$ be a prime ideal, put $\\mathfrak p=\\mathfrak q\\cap A$, and assume that $A\\to C$ is quasi-finite at $\\mathfrak q$ [def-weil-pbc-ring-map-quasi-finite-at-prime]. If $A_{\\mathfrak p}$ is integrally closed in $K$ [def-weil-pbc-normal-ring], then the induced local homomorphism $A_{\\mathfrak p}\\to C_{\\mathfrak q}$ is an isomorphism. Here localizations are at complements of the indicated prime ideals [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Stacks Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof of (4), local algebra paragraph identifying the normal base local ring with the quasi-finite source local ring."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=A_{\\mathfrak p}$. Regard $R$ and $C_{\\mathfrak q}$ as subrings of the given common field $K$: fractions map to their quotients in $K$, and equality there is equality after cross-multiplication, since the rings are domains. By [def-weil-pbc-localization-at-prime], $a\\notin\\mathfrak p$ implies $a\\notin\\mathfrak q$, so this realizes the induced map $R\\to C_{\\mathfrak q}$ as an inclusion.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof of (4), local algebra paragraph; fraction details expanded."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-quasi-finite-at-finite-subalgebra-away] to the given finite-type inclusion $A\\subseteq C$ and its quasi-finite prime $\\mathfrak q$. It supplies an $A$-subalgebra $B\\subseteq C$, finite as an $A$-module, and $g\\in B\\setminus\\mathfrak q$, such that the canonical map $B_g\\to C_g$ is an isomorphism. No quasi-finiteness at other primes is required.",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-at-finite-subalgebra-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00Q9 (theorem-main-theorem), 00QA (lemma-quasi-finite-open), and 00QB (lemma-quasi-finite-open-integral-closure): pointwise finite-subalgebra construction."
+   }
+  },
+  {
+   "text": "For each $b\\in B$, [lem-weil-pbc-finite-algebra-is-integral] gives a monic equation over $A$. The same equation has coefficients in $R$, so $b\\in K=\\operatorname{Frac}(R)$ is integral over $R$. Here $\\operatorname{Frac}(R)=K$ because $A\\subseteq R\\subseteq K$ and every quotient of elements of $A$ is a quotient of elements of $R$. Normality [def-weil-pbc-normal-ring] therefore puts every $b$ in $R$, giving $B\\subseteq R$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof of (4), local algebra paragraph; fraction details expanded."
+   }
+  },
+  {
+   "text": "Write $g=a/s$ in $R$, where $a,s\\in A$ and $s\\notin\\mathfrak p$, using [def-weil-pbc-localization-at-prime]. Then $sg=a$ in $C$, since it holds in $K$. If $a\\in\\mathfrak p\\subseteq\\mathfrak q$, primeness of $\\mathfrak q$ and $s\\notin\\mathfrak q$ would force $g\\in\\mathfrak q$, a contradiction. Thus $a\\notin\\mathfrak p$ and $g^{-1}=s/a\\in R$. Consequently $C\\subseteq C_g=B_g\\subseteq R$ inside $K$, by the canonical isomorphism of Step 2 and the fraction description [def-weil-ring-localization-away].",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof of (4), local algebra paragraph; fraction details expanded."
+   }
+  },
+  {
+   "text": "For $c\\in C\\setminus\\mathfrak q$, the inclusion $C\\subseteq R$ writes $c=a/s$ with $s\\notin\\mathfrak p$. Again $sc=a$ in $C$; if $a\\in\\mathfrak p$, primeness forces $c\\in\\mathfrak q$, a contradiction. Thus $c^{-1}=s/a\\in R$. Every fraction $d/c$ defining $C_{\\mathfrak q}$ therefore lies in $R$ [def-weil-pbc-localization-at-prime]. Along with Step 1 this proves equality of the two subrings of $K$. The inverse sends each $d/c$ to the same quotient in $R$, so it is inverse to the induced local homomorphism in the statement.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof of (4), local algebra paragraph; fraction details expanded."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-quasi-finite-at-finite-subalgebra-away",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "def-weil-pbc-normal-ring",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BFP, proof of (4), local algebra paragraph; finite-subalgebra form of the cited Zariski main theorem via Algebra Tags 00Q9, 00QA, 00QB; all denominator and normality calculations expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An injective finite type map of domains with the same fraction field, quasi finite at a prime over a normal local ring, induces an isomorphism on the local rings",
+   "results": "{\"t\": \"2026-10-22T06:27:58Z\", \"tool\": \"leanfinder\", \"query\": \"An injective finite type map of domains with the same fraction field, quasi finite at a prime over a normal local ring, induces an isomorphism on the local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.ZariskisMainProperty\", \"Algebra.QuasiFiniteAt.comap_algEquiv\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"injective_of_isLocalization_isMaximal\", \"RingHom.IsIntegral.isLocalHom\", \"RingHom.QuasiFinite.of_isIntegral_of_finiteType\", \"Algebra.QuasiFiniteAt\", \"bijective_of_isLocalization_isMaximal\"], \"digest\": \"475035bb8b5bdd81\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Zariski main property supplies a finite intermediate algebra after inverting an element; normality and subsequent prime localization are still needed to identify these two local rings. The integrally-closed locality lemmas and quasi-finiteness permanence do not assert this conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiFiniteAt.*[Ii]ntegrallyClosed|[Ii]ntegrallyClosed.*QuasiFinite|[Bb]irational",
+   "results": "{\"t\": \"2026-10-22T06:28:40Z\", \"tool\": \"grep\", \"query\": \"QuasiFiniteAt.*[Ii]ntegrallyClosed|[Ii]ntegrallyClosed.*QuasiFinite|[Bb]irational\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\"], \"digest\": \"65160d297207f713\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Zariski main property supplies a finite intermediate algebra after inverting an element; normality and subsequent prime localization are still needed to identify these two local rings. The integrally-closed locality lemmas and quasi-finiteness permanence do not assert this conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type birational map of integral domains quasi finite at q induces an isomorphism A_p to B_q when A_p is integrally closed",
+   "results": "{\"t\": \"2026-10-22T06:28:40Z\", \"tool\": \"leansearch\", \"query\": \"A finite type birational map of integral domains quasi finite at q induces an isomorphism A_p to B_q when A_p is integrally closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.QuasiFinite.of_finite\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"Algebra.QuasiFiniteAt.of_surjectiveOnStalks\", \"RingHom.quasiFinite_algebraMap\", \"Algebra.ZariskisMainProperty\", \"RingHom.QuasiFinite.holdsForLocalizationAway\", \"Algebra.QuasiFiniteAt.baseChange\"], \"digest\": \"892218d895680cf5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Zariski main property supplies a finite intermediate algebra after inverting an element; normality and subsequent prime localization are still needed to identify these two local rings. The integrally-closed locality lemmas and quasi-finiteness permanence do not assert this conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra.QuasiFiniteAt\", \"IsIntegrallyClosed\"",
+   "results": "{\"t\": \"2026-10-22T06:28:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Algebra.QuasiFiniteAt\\\", \\\"IsIntegrallyClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Zariski main property supplies a finite intermediate algebra after inverting an element; normality and subsequent prime localization are still needed to identify these two local rings. The integrally-closed locality lemmas and quasi-finiteness permanence do not assert this conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi finite birational algebra over an integrally closed local domain has identical local rings at primes above the maximal ideal",
+   "results": "{\"t\": \"2026-10-22T06:28:50Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi finite birational algebra over an integrally closed local domain has identical local rings at primes above the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.ZariskisMainProperty\", \"IsIntegrallyClosed.of_isLocalization_maximal\", \"IsLocalization.AtPrime.mem_primesOver_of_isPrime\", \"IsIntegrallyClosed.of_localization_maximal\", \"isIntegrallyClosed_ofLocalizationMaximal\", \"Localization.AtPrime.instAlgebraOfLiesOver\", \"AlgHom.IsArithFrobAt.isArithFrobAt_localize\", \"Algebra.ZariskisMainProperty.of_isIntegral\"], \"digest\": \"01bd8e3850ab388d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Zariski main property supplies a finite intermediate algebra after inverting an element; normality and subsequent prime localization are still needed to identify these two local rings. The integrally-closed locality lemmas and quasi-finiteness permanence do not assert this conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "ZariskisMainProperty|quasiFiniteAt.*[Bb]ijective|[Nn]ormal.*[Ll]ocalization",
+   "results": "{\"t\": \"2026-10-22T06:28:59Z\", \"tool\": \"grep\", \"query\": \"ZariskisMainProperty|quasiFiniteAt.*[Bb]ijective|[Nn]ormal.*[Ll]ocalization\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\"], \"digest\": \"60c8b8db93911c82\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Zariski main property supplies a finite intermediate algebra after inverting an element; normality and subsequent prime localization are still needed to identify these two local rings. The integrally-closed locality lemmas and quasi-finiteness permanence do not assert this conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective finite type map of domains with equal fraction fields quasi finite at q is an isomorphism on local rings if the base local ring is integrally closed",
+   "results": "{\"t\": \"2026-10-23T09:37:13Z\", \"tool\": \"leanfinder\", \"query\": \"An injective finite type map of domains with equal fraction fields quasi finite at q is an isomorphism on local rings if the base local ring is integrally closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.finiteType_isLocal\", \"RingHom.QuasiFinite.propertyIsLocal\", \"Algebra.QuasiFinite.of_isIntegral_of_finiteType\", \"RingHom.QuasiFinite.holdsForLocalizationAway\", \"RingHom.QuasiFinite.of_isIntegral_of_finiteType\", \"RingHom.QuasiFinite.ofLocalizationSpanTarget\", \"injective_of_isLocalization_isMaximal\", \"Algebra.QuasiFiniteAt\"], \"digest\": \"66da194381b98e72\"}; Read the returned signatures and ZariskisMainTheorem.lean:75-100, 316-340, 660-708; QuasiFinite/Basic.lean:312-344. No whole-item match.",
+   "date": "2026-10-23",
+   "verdict": "no match: permanence and the Zariski main property do not identify the two local rings; finite-subalgebra extraction, normality, and the denominator unit calculations are still needed. The private integrally-closed grep hit concerns strongly transcendental elements, not this conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiFiniteAt.*[Ii]ntegrallyClosed|[Ii]ntegrallyClosed.*QuasiFinite|[Bb]irational",
+   "results": "{\"t\": \"2026-10-23T09:41:06Z\", \"tool\": \"grep\", \"query\": \"QuasiFiniteAt.*[Ii]ntegrallyClosed|[Ii]ntegrallyClosed.*QuasiFinite|[Bb]irational\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\"], \"digest\": \"65160d297207f713\"}; Read the returned signatures and ZariskisMainTheorem.lean:75-100, 316-340, 660-708; QuasiFinite/Basic.lean:312-344. No whole-item match.",
+   "date": "2026-10-23",
+   "verdict": "no match: permanence and the Zariski main property do not identify the two local rings; finite-subalgebra extraction, normality, and the denominator unit calculations are still needed. The private integrally-closed grep hit concerns strongly transcendental elements, not this conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi finite birational finite type extension of integral domains induces an isomorphism of local rings over an integrally closed base local ring",
+   "results": "{\"t\": \"2026-10-23T09:41:06Z\", \"tool\": \"leansearch\", \"query\": \"A quasi finite birational finite type extension of integral domains induces an isomorphism of local rings over an integrally closed base local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.QuasiFinite\", \"Algebra.QuasiFinite.recOn\", \"Algebra.QuasiFinite.of_isIntegral_of_finiteType\", \"Algebra.QuasiFinite.casesOn\", \"Algebra.QuasiFinite.baseChange\", \"Algebra.QuasiFiniteAt.baseChange\", \"RingHom.QuasiFinite.of_finite\", \"Algebra.QuasiFiniteAt.of_le\"], \"digest\": \"e3dbb8ed73394d33\"}; Read the returned signatures and ZariskisMainTheorem.lean:75-100, 316-340, 660-708; QuasiFinite/Basic.lean:312-344. No whole-item match.",
+   "date": "2026-10-23",
+   "verdict": "no match: permanence and the Zariski main property do not identify the two local rings; finite-subalgebra extraction, normality, and the denominator unit calculations are still needed. The private integrally-closed grep hit concerns strongly transcendental elements, not this conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.QuasiFiniteAt, IsIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-23T09:41:06Z\", \"tool\": \"loogle\", \"query\": \"Algebra.QuasiFiniteAt, IsIntegrallyClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures and ZariskisMainTheorem.lean:75-100, 316-340, 660-708; QuasiFinite/Basic.lean:312-344. No whole-item match.",
+   "date": "2026-10-23",
+   "verdict": "no match: permanence and the Zariski main property do not identify the two local rings; finite-subalgebra extraction, normality, and the denominator unit calculations are still needed. The private integrally-closed grep hit concerns strongly transcendental elements, not this conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal local domain has no nontrivial birational quasi finite local extension obtained from a finite type algebra",
+   "results": "{\"t\": \"2026-10-23T09:41:07Z\", \"tool\": \"leanfinder\", \"query\": \"A normal local domain has no nontrivial birational quasi finite local extension obtained from a finite type algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.ZariskisMainProperty\", \"Algebra.QuasiFinite.of_isIntegral_of_finiteType\", \"Algebra.QuasiFinite.instOfIsFractionRing\", \"Algebra.QuasiFiniteAt\", \"Polynomial.not_quasiFiniteAt\", \"RingHom.QuasiFinite.of_isIntegral_of_finiteType\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"Algebra.quasiFinite_iff\"], \"digest\": \"1bfce544f4c19d6b\"}; Read the returned signatures and ZariskisMainTheorem.lean:75-100, 316-340, 660-708; QuasiFinite/Basic.lean:312-344. No whole-item match.",
+   "date": "2026-10-23",
+   "verdict": "no match: permanence and the Zariski main property do not identify the two local rings; finite-subalgebra extraction, normality, and the denominator unit calculations are still needed. The private integrally-closed grep hit concerns strongly transcendental elements, not this conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-modification-codimension-one",
+  "date": "2026-10-22",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 5: isomorphism near every codimension-zero and codimension-one point of the regular resolution before applying point-blowup domination.; local commutative algebra in the proof of clause (4): equality of local rings from normality and quasi-finiteness.",
+   "via": [
+    "lem-sfb-normal-modification-codimension-one",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-quasifinite-normal-local-birational-algebra",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Split the local algebra argument of Stacks 0BFP(4) using the existing pointwise finite-subalgebra Zariski main node and finite-implies-integral leaf. Wrote explicitly the common-fraction-field embeddings, normality argument, the unit test for g, and the unit test for every element outside q. No new nodes and no attachment for the item. Four search tools and two semantic phrasings were checked; no whole-item Mathlib match.",
+  "blueprint": "Realizes the inherited from.place: det-thm-sf-ctf-stability-direct-images (3), alteration-reduction prerequisites, through lem-sfb-normal-modification-codimension-one, local commutative algebra in clause (4). The latest blueprint direct-image proof was read; this generic algebra input changes no unit route. Existing from.node=null and via chain are preserved as reported by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-finite-subalgebra-away",
+    "why": "Generic pointwise algebraic Zariski main theorem, finite-subalgebra form; supplies B and g to the local normality calculation. No node in this unit supplies this algebra tool; it replaces no six-functor or alteration step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-finite-at-finite-subalgebra-away"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-d816e43a3",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-d816e43a3 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is unchanged and correct. Dropping normality fails for the cusp k[t^2,t^3] in k[t]; dropping quasi-finiteness fails for the blow-up chart; with C=A[1/f] only the local rings agree, which is all the item claims. The delivery has 5 steps and no new nodes; there is no repair note for this item. Source check: Stacks 0BFP proof of (4). The delivery replaces the essentially-finite-type lemma used there with the finite-subalgebra form of 00Q9 (00QA/00QB) through lem-weil-pbc-quasi-finite-at-finite-subalgebra-away. That node gives finite S' and g not in q with S'_g = S_g, and its hypotheses hold without Noetherianity. Step 3 uses finite-implies-integral and normality of A_p to get B inside A_p. Steps 1, 4 and 5 are correct elementary fraction and primeness arguments: g is a unit in A_p, so C is contained in C_g = B_g inside A_p; and every c outside q is a unit in A_p. proof_deps equals the union of uses. The only citer, step 3 of the parent lem-sfb-normal-modification-codimension-one, satisfies the item's hypotheses. Duplicate search: integral-closure-zariski-main-away, monogenic-integral-closure and the per- copy are related but do not state this result. I accept the tool use of lem-weil-pbc-quasi-finite-at-finite-subalgebra-away (unit sk-thm-p1) as generic algebraic Zariski main. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QuasiFiniteNormalLocalBirationalAlgebra",
+  "declaration": "Localization.bijective_localRingHom_of_isQuasiFiniteAtPrime_of_isIntegrallyClosed",
+  "file": "lean/Sheaf/RingTheory/QuasiFiniteNormalLocalBirationalAlgebra.lean",
+  "statement": "theorem bijective_localRingHom_of_isQuasiFiniteAtPrime_of_isIntegrallyClosed (A : Type u) (C : Type v) (K : Type w) [CommRing A] [IsDomain A] [CommRing C] [IsDomain C] [Field K] [Algebra A C] [Algebra A K] [Algebra C K] [IsScalarTower A C K] [IsFractionRing A K] [IsFractionRing C K] [Algebra.FiniteType A C] (q : PrimeSpectrum C) (hq : Algebra.IsQuasiFiniteAtPrime A C q) [IsIntegrallyClosed (Localization.AtPrime (q.comap (algebraMap A C)).asIdeal)] : Function.Bijective (Localization.localRingHom (q.comap (algebraMap A C)).asIdeal q.asIdeal (algebraMap A C) rfl)",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d0243d79",
+  "group": "NR",
+  "result": "pass",
+  "note": "Clause-by-clause match: domains+IsFractionRing A/C K+IsScalarTower (inclusion inducing id on K, injectivity derived); Algebra.FiniteType = recorded RingHom.FiniteType of algebraMap; q : PrimeSpectrum C, p = canonical comap; hq = recorded Algebra.IsQuasiFiniteAtPrime (pointwise); IsIntegrallyClosed (Localization.AtPrime p) equivalent to integrally closed in K since Frac(A_p)=K; conclusion Bijective of canonical Localization.localRingHom p q (algebraMap A C) rfl. No Noetherian/extra hypotheses, universes u v w independent, statement verbatim, docstrings with source place/blueprint and 5 proof steps, theorem by sorry, no duplicate in Mathlib (ZMT/QuasiFinite) or side-live RingTheory, worker+second-reading sections present. No findings."
+ }
+}

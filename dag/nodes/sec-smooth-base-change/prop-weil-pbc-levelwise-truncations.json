@@ -108,7 +108,8 @@
     "def-weil-pbc-adic-coefficient-datum",
     "lem-pur-derived-change-of-rings",
     "lem-weil-pbc-scalar-extension-unit-triangles",
-    "lem-sf-exact-functor-derived-triangulated"
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-sf-derived-homology-long-exact"
    ],
    "elementary": false,
    "source": {
@@ -117,13 +118,14 @@
    }
   },
   {
-   "text": "For the sufficient condition, the finite free $A$-resolution $[A\\xrightarrow{\\varpi^a}A]\\to P_a$, after the completed constant-sheaf base change, gives $[B\\xrightarrow{\\varpi^a}B]\\to R_a$ for every $a\\ge1$. In particular $\\varpi^a$ is injective on $B$ and $R_a=B/\\varpi^aB$. Tensoring gives the multiplication triangle $K\\xrightarrow{\\varpi^a}K\\to K_a\\to K[1]$. Its long exact cohomology sequence yields $0\\to\\mathcal H^q(K)/\\varpi^a\\to\\mathcal H^q(K_a)\\to\\mathcal H^{q+1}(K)[\\varpi^a]\\to0$. Under the sufficient condition the last term is zero for $q\\ge m+1$, so $\\mathcal H^q(K_{n+1})=M/\\varpi^{n+1}M$, where $M=\\mathcal H^q(K)$ has injective $\\varpi$ action. The free resolution of $R_n$ over $R_{n+1}$ has differentials, starting just before its degree-zero term, $\\varpi^n,\\varpi,\\varpi^n,\\varpi,\\ldots$. It is exact because $\\ker(\\varpi^n:R_{n+1}\\to R_{n+1})=\\varpi R_{n+1}$ and $\\ker(\\varpi)=\\varpi^nR_{n+1}$. It is K-flat by the bounded-above flat-complex lemma. Tensoring it with $M/\\varpi^{n+1}M$ is exact in all negative degrees: injectivity of $\\varpi$ on $M$ gives respectively $\\ker\\varpi^n=\\varpi M/\\varpi^{n+1}M$ and $\\ker\\varpi=\\varpi^nM/\\varpi^{n+1}M$. These sheaf equalities can be checked after local lifts along the quotient epimorphism. This computes every higher Tor as zero and proves (TC), without a spectral-sequence convergence assertion or a claim that $B$ is itself a discrete valuation ring.",
+   "text": "G1 implementation of the sufficient condition: apply principalReductionCohomology_isIso to K in degree q, using injectivity in degree q+1. For H=H^q(K), principalReduction_single_isConcentrated shows that all completed reductions of H[0] are concentrated in degree zero. Its degree-zero comparison and the previous comparison identify the reduced single object with H^q(K_(n+1))[0]. Apply adjacent scalar extension to this isomorphism and use the existing canonical reduction normalization for H[0]. The result is its lower completed reduction, whose negative cohomology vanishes. This proves every higher Tor vanishing without the planned periodic resolution. The canonical completed comparison is equated with the normalized constant comparison by limit projections and their values on constant sections.",
    "uses": [
+    "lem-weil-pbc-uniformizer-reduction-cohomology",
+    "lem-weil-pbc-regular-single-reduction",
+    "lem-sf-derived-concentrated-single",
+    "def-weil-pbc-bounded-constructible-tower",
     "lem-weil-pbc-standard-quotients-perfect",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-pur-derived-change-of-rings",
-    "lem-sf-derived-homology-long-exact",
-    "lem-pc-bounded-above-flat-kflat-site"
+    "lem-weil-pbc-completed-constant-sheaf-reduction"
    ],
    "elementary": false,
    "source": {
@@ -132,35 +134,28 @@
    }
   },
   {
-   "text": "Assume $T$ is nonempty and take $K=k_T[-(m+1)]$. The same two-term $B$-resolution of $R_n$ gives $K_n$ as $[k_T\\xrightarrow{0}k_T][-(m+1)]$ after restricting scalars to $B$. Thus its two nonzero cohomology sheaves are $k_T$ in degrees $m,m+1$. The lower truncation has just one nonzero cohomology sheaf and is therefore $k_T[-m]$ in $D(R_n)$. Compute its next reduction using the periodic free $R_{n+1}$-resolution of $R_n$ from step 4: after tensoring with $k_T$ every differential is zero. Thus $\\mathcal H^{m-p}=k_T$ for every $p\\ge0$. Here $k_T$ is nonzero: the constant coefficient sections $0$ and $1$ on $T$ remain distinct after every pro-etale covering, since a covering of a nonempty scheme has a nonempty member. Thus the negative-degree cohomology just computed cannot equal that of $k_T[-m]$. On the empty scheme all these sheaves are zero, so this example does not obstruct normalization. The computation does not split the original two-degree object in $D(R_n)$; the two-term $B$-resolution was used only to compute its cohomology. This proves the counterexample and, independently, shows why freeness of terms alone cannot justify (TC).",
+   "text": "G1 implementation of the residue counterexample: regularQuotient_single_cohomology computes the completed reduction of the residue single module in degrees -1 and 0. The canonical restriction-composition and shift isomorphisms place these two cohomology sheaves in degrees m and m+1. The concentrated-single theorem identifies the lower truncation with the residue single shifted by -m. principalAdjacentQuotient_tor computes every nonpositive cohomology after adjacent quotient reduction. Commuting reduction with the shift gives residue cohomology in every degree m-p. The actual residue is nonzero on a nonempty scheme: the integral residue quotient is nontrivial, constant sheafification is locally injective, and the bottom sieve cannot cover the identity object. At degree m-1 the reduced next truncation is nonzero whereas the lower truncation is zero; an isomorphism would contradict this. No R_n-linear splitting of the original two-degree derived object is used.",
    "uses": [
-    "lem-weil-pbc-standard-quotients-perfect",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-weil-pbc-regular-quotient-self-cohomology",
+    "lem-weil-pbc-principal-adjacent-quotient-tor",
+    "lem-weil-pbc-integral-local-reduction-lower-bound",
     "lem-sf-derived-concentrated-single",
     "def-kun-truncations",
-    "def-weil-pbc-adic-coefficient-datum"
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-l-adic-extension-integers-dvr"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/prop-weil-pbc-levelwise-truncations.md",
-    "place": "Statement (1), torsion counterexample; corrected to assert cohomology rather than an R_n-linear splitting; nonemptiness is necessary for the nonzero coefficient-sheaf counterexample"
-   }
+   "elementary": false
   },
   {
-   "text": "Assume the hypotheses of (2). On a local model domain $U\\to T$, let $B_U$ denote the inverse image of $B$, without identifying it with the completed coefficient sheaf formed anew on $U$. The exact pro-etale inverse image, with coefficient ring its own inverse image, pulls the resolution $[B\\xrightarrow{\\varpi^n}B]\\to R_n$ back to $[B_U\\xrightarrow{\\varpi^n}B_U]\\to R_n|_U$. This is a bounded free, hence K-flat, resolution. Tensoring a model $L$ with zero terms outside $[d_0,d_1]$ therefore represents its derived reduction by a complex with zero terms outside $[d_0-1,d_1]$. The same is true of $K_n|_U$ by the model isomorphisms. Restriction to strata and their coverings is exact. Each original level cohomology sheaf is intrinsically constructible: this follows directly from its finite lisse local restrictions on the given finite stratification. By finite-ring constructible-sheaf comparison it is the pullback of an etale constructible sheaf. Local vanishing implies vanishing on its stratum by the sheaf condition for the covering. The pro-etale inverse-image stalk comparison identifies the stalk on a stratum with the original stalk at the image geometric point. Every geometric point of T factors through its unique stratum. The etale/pro-etale comparison-stalk isomorphism therefore makes every geometric stalk of the etale origin zero. Conservativity of the etale geometric points implies that this origin, and hence the original cohomology sheaf, is zero. Thus the original levels, and hence both truncated levels, have a common finite cohomological interval. The sharper intervals displayed in (2) follow by intersecting $[d_0-1,d_1]$ with the surviving truncation range.",
+   "text": "G1 implementation of the local-to-global bounds in (2): choose the terminal covering families from the supplied sieves and retain the actual local models. The inverse-image completed coefficient ring is used throughout. The new integralLocalReduction_isGE theorem gives the lower reduction bound d0−1; the published right t-exact tensor bound gives the upper bound d1. Exact inverse image commutes with cohomology. The noetherian stratum-cover zero-detection theorem makes these local vanishing results global, and faithful forgetting reflects zero to coefficient modules. The same local finite-lisse cohomology data imply intrinsic constructibility using the scalar-restriction and inverse-image comparisons. Truncation cohomology is either this original cohomology or zero. Serre closure supplies constructibility of zero. Intersecting the original common bounds with each truncation range gives exactly the stated sharp windows, including empty windows.",
    "uses": [
     "def-weil-pbc-bounded-constructible-tower",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-standard-quotients-perfect",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "def-kun-truncations",
-    "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
-    "lem-pur-proetale-inverse-image-stalk",
-    "lem-cbc-proetale-comparison-stalk",
-    "lemma-openclosed-point-ulift"
+    "lem-weil-pbc-integral-local-reduction-lower-bound",
+    "lem-weil-pbc-ringed-tensor-cohomological-bounds",
+    "lem-weil-pbc-noetherian-stratum-detection",
+    "lem-weil-constructible-coefficient-serre",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-kun-truncations"
    ],
    "elementary": false,
    "source": {
@@ -196,60 +191,60 @@
    }
   },
   {
-   "text": "Under (TC), the etale upper cohomology sheaves are also $P_n$-acyclic for reduction from $P_{n+1}$. Indeed the derived tensor comparison for the ringed comparison morphism identifies the pullback of each of their higher Tor sheaves with $\\operatorname{Tor}^{R_{n+1}}_p(\\mathcal H^q(K_{n+1}),R_n)$, using step 8's cohomology comparison and $\\alpha_{n+1}$. This is zero by (TC). The sheaf comparison unit is an isomorphism, so $\\nu_T^*F=0$ implies $F=\\nu_{T,*}\\nu_T^*F=0$; hence the etale Tor sheaves vanish. Apply steps 2-3 in the etale module categories to $\\beta_n$ to obtain normalization isomorphisms of the truncated etale levels and their cocycles. Pulling the resulting comparison of truncation triangles to the pro-etale site and composing with the truncated $\\alpha_n$ gives a comparison whose middle map is $\\alpha_n\\nu_T^*\\beta_n=\\rho_n(\\alpha_{n+1}\\otimes^LR_n)$ by the original compatibility assumption. Step 3's uniqueness therefore gives precisely the two truncated normalization-compatibility equations, not just levelwise origin isomorphisms. The tensor comparisons used here come from the natural balancing map on K-flat representatives: $(x\\otimes b)\\otimes a\\mapsto x\\otimes q(b)a$. For three quotients either composition sends a pure tensor to the same product, so the same identifications respect quotient composition. This completes (3).",
+   "text": "G1 implementation of compatible retained origins: the supplied normalized truncation data already imply that the reduced lower and upper function-coefficient origins lie in the required truncation ranges. Reflect these bounds through exact faithful coefficient realization and the exact faithful etale-to-pro-etale comparison. The canonical tensor comparison transports the reduced etale truncation triangle to the normalized function-coefficient triangle. Orthogonality and triangle-extension uniqueness give the etale triangle isomorphism with middle map beta. Naturality of the realization comparisons and the lower counit/upper unit characterize its endpoint maps; the long exact Hom sequence and orthogonality give the upper endpoint uniqueness. Build witnesses from the actual truncated origin objects, with alpha obtained by the fully faithful coefficient realization and theta formed from beta and the canonical comparison. The normalization formulas and unique retained triangle comparison follow from these endpoint identities. The fixed N and its normalization suffice for this argument; the theorem retains the stated (TC) hypothesis.",
    "uses": [
+    "def-weil-pbc-etale-origin-witness",
+    "def-weil-pbc-witness-compatibility",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "lem-sf-comparison-pullback-exact",
     "prop-weil-pbc-site-comparison-finite-level",
-    "lem-weil-pbc-ringed-tensor-cohomological-bounds",
-    "lem-pur-derived-change-of-rings",
     "lem-sf-derived-truncation-triangle",
     "lem-pc-derived-tstructure-orthogonality",
     "lem-weil-pbc-triangle-morphism-extension",
-    "def-weil-pbc-adic-coefficient-datum"
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-sf-derived-homology-long-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product); proetale.tex comparison unit (finite-level comparison); blueprint Proof Step 3, normalized witness compatibility made explicit"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-kun-truncations",
   "def-weil-pbc-adic-coefficient-datum",
   "def-weil-pbc-bounded-constructible-tower",
-  "def-weil-pbc-etale-origin-witness",
-  "def-weil-pbc-proetale-operations",
-  "def-weil-pbc-witness-compatibility",
-  "def-weil-sheaf-of-modules-category",
-  "lem-cbc-proetale-comparison-stalk",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pc-derived-tstructure-orthogonality",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-proetale-inverse-image-stalk",
-  "lem-sf-comparison-pullback-exact",
-  "lem-sf-derived-concentrated-single",
-  "lem-sf-derived-homology-long-exact",
-  "lem-sf-derived-truncation-triangle",
-  "lem-sf-exact-functor-derived-triangulated",
   "lem-weil-pbc-actual-completed-reduction-reconstruction",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
-  "lem-weil-pbc-normalized-constructible-local-effectivity",
-  "lem-weil-pbc-ringed-tensor-cohomological-bounds",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-scalar-extension-unit-triangles",
-  "lem-weil-pbc-standard-quotients-perfect",
-  "lem-weil-pbc-triangle-morphism-extension",
   "lem-weil-tower-category-levelwise-abelian",
-  "lemma-openclosed-point-ulift",
+  "def-kun-truncations",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-derived-truncation-triangle",
+  "lem-weil-pbc-ringed-tensor-cohomological-bounds",
+  "lem-pc-derived-tstructure-orthogonality",
+  "lem-weil-pbc-triangle-morphism-extension",
+  "lem-weil-pbc-scalar-extension-unit-triangles",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-uniformizer-reduction-cohomology",
+  "lem-weil-pbc-regular-single-reduction",
+  "lem-sf-derived-concentrated-single",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-regular-quotient-self-cohomology",
+  "lem-weil-pbc-principal-adjacent-quotient-tor",
+  "lem-weil-pbc-integral-local-reduction-lower-bound",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-weil-constructible-coefficient-serre",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-normalized-constructible-local-effectivity",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-sf-comparison-pullback-exact",
+  "def-weil-pbc-witness-compatibility",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "prop-weil-pbc-site-comparison-finite-level"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/prop-weil-pbc-levelwise-truncations.md",
-  "place": "Proof, Steps 1-3; repairs to Tor hypothesis, counterexample, common local models and normalized witnesses documented in report.md; S9 stage-3 proof implementation: direct canonical truncation/cohomology APIs, exact evaluation, adjunct naturality and t-structure triangle-map uniqueness for the five closed clauses; K2: completed the unconditional retained-origin clause using explicit truncation witnesses, fully faithful preimages, the unit law for the canonical mate, and truncation universal properties; K2 resumed proof: canonical adic truncations, including actual tower data, all-pair cocycles and adjunct strict-transition equations, implemented from tensor bounds and t-structure triangle uniqueness. K4: canonical reduction-tower laws, all-pair ordinary balancing transition by induction, derived restriction associativity and adjunction cocycle, K-flat evaluation compatibility."
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-sbc-karoubian/prop-weil-pbc-levelwise-truncations.md",
+  "place": "Order 1429: G1 proves the uniformizer criterion by normalized principal reduction and regular single reduction, the counterexample by regular self-cohomology and an actual alternating unit resolution, constructibility by descent and local effectivity, and compatible origins by faithful comparison and uniqueness of the supplied normalized truncation triangle. All seven new mathematical helper modules are fully proved; no new postponed proof is introduced. E1 restores this proved packet after the global-build rollback, preserving the original pbcAdicCompletion presentation and using only local transparency adjustments."
  },
  "mathlib_searches": [
   {
@@ -319,7 +314,18 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-base-change",
  "unit": "sk-rem-rest",
  "split_report": {
@@ -496,12 +502,12 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K4",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261021T233732-L-855780",
+  "landing": "20261022T040155-L-2822089",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

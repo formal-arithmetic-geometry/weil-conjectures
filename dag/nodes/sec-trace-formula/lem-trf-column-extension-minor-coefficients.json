@@ -1,0 +1,210 @@
+{
+ "id": "lem-trf-column-extension-minor-coefficients",
+ "kind": "statement",
+ "title": "Recursive polynomial coefficients for minors after adjoining columns",
+ "statement": "Fix integers $p,n,r,d\\ge0$ and commuting symbols $X_{ij}$ for $1\\le i\\le p$, $1\\le j\\le n+d$. An integer polynomial in these symbols means a finite integer linear combination of monomials. For each pair of increasing index lists $I,J$ of length $q=r+d$ in $[p]=\\{1,\\ldots,p\\}$ and $[n+d]$, and each pair $U,V$ of increasing lists of length $r$ in $[p]$ and $[n]$, define integer polynomials $L_d(I,J;U,V)$ by the following finite recursion, with $p,n,r$ fixed. For $d=0$ set $L_0(I,J;U,V)=1$ if $(I,J)=(U,V)$, and $0$ otherwise. For $d>0$, writing $I=(i_1,\\ldots,i_q)$ and $J=(j_1,\\ldots,j_q)$, set\n$$L_d(I,J;U,V)=\\sum_{a=1}^{q}(-1)^{a+q}X_{i_a j_q}L_{d-1}(I\\setminus i_a,J\\setminus j_q;U,V),$$\nwhere deletion preserves order and polynomials on the right use only the first $n+d-1$ columns. Every remaining column index is at most $n+d-1$; for $q=1$ the remaining list is empty. Let $R$ be any commutative ring and $B$ any $p\\times(n+d)$ matrix over $R$ [def-weil-matrix], and let $A$ be its first $n$ columns. Evaluating $X_{ij}$ at $B_{ij}$ gives\n$$\\det(B_{I,J})=\\sum_{\\substack{U\\subseteq[p],\\ V\\subseteq[n]\\\\|U|=|V|=r}}L_d(I,J;U,V)(B)\\det(A_{U,V}).$$\nHere every submatrix uses increasing order [def-weil-submatrix] and its determinant is [def-weil-pbc-matrix-determinant]. The identity holds for every such selection, including $r=0$ and $d=0$; if there are no row or column selections the corresponding assertion is vacuous. The polynomials are the displayed recursive data, not coefficients selected from an existential ideal-membership assertion.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07Z7 (lemma-ideals-generated-by-minors), proof hint: expansion along a column or row; iterated column-expansion calculation underlying part (2), transposed to appended columns (agent-supplied recursive certificate)."
+ },
+ "stmt_deps": [
+  "def-weil-matrix",
+  "def-weil-submatrix",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof": [
+  {
+   "text": "Fix $p,n,r$. At each stage $d>0$, put $q=r+d>0$. If $J=(j_1<\\cdots<j_q)$ lies in $[n+d]$, then $j_{q-1}<j_q\\le n+d$ when $q>1$, so deleting $j_q$ gives a list in $[n+d-1]$; when $q=1$ it gives the empty list. Deleting any row gives a list of length $q-1=r+(d-1)$. Thus every recursive call has the required indices. Starting with $0$ and $1$, finite sums and products by signed symbols remain finite integer linear combinations of monomials. Regarding a polynomial in fewer symbols as the same expression in the larger alphabet makes the recursion well-defined.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07Z7 (lemma-ideals-generated-by-minors), proof hint, iterated column expansion (agent-supplied details)."
+   }
+  },
+  {
+   "text": "Prove the displayed determinant identity by induction on $d$, simultaneously for every commutative ring $R$, every $p\\times(n+d)$ matrix $B$, and every allowed $I,J$. For $d=0$, $B=A$ and exactly the summand $(U,V)=(I,J)$ has coefficient $1$; all others have coefficient $0$. The sum is therefore $\\det(A_{I,J})$. This includes $r=0$, since there is exactly one pair of empty lists and its determinant is $1$.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07Z7 (lemma-ideals-generated-by-minors), proof hint, iterated column expansion (agent-supplied details)."
+   }
+  },
+  {
+   "text": "For $d>0$, assume that induction hypothesis for $d-1$ and let $Q=B_{I,J}$, a $q\\times q$ matrix. Apply [lem-trf-minor-laplace-coefficient-formula] with $s=1$ and the position-column set $T=\\{q\\}$. Its row sets are the singletons $\\{a\\}$ and its signs are $(-1)^{a+q}$. The $1\\times1$ determinant is $B_{i_a j_q}$ by the Leibniz definition. The complementary submatrix is exactly $B_{I\\setminus i_a,J\\setminus j_q}$, with its inherited order. Consequently\n$$\\det(B_{I,J})=\\sum_{a=1}^q(-1)^{a+q}B_{i_a j_q}\\det(B_{I\\setminus i_a,J\\setminus j_q}).$$",
+   "uses": [
+    "lem-trf-minor-laplace-coefficient-formula",
+    "def-weil-pbc-matrix-determinant",
+    "def-weil-submatrix"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07Z7 (lemma-ideals-generated-by-minors), proof hint, iterated column expansion (agent-supplied details)."
+   }
+  },
+  {
+   "text": "Let $B^-$ be the first $n+d-1$ columns of $B$; its first $n$ columns are still $A$. Step 1 puts every complementary minor in the induction hypothesis for $B^-$. Substitute those identities into step 3 and distribute the finite sums. The coefficient of $\\det(A_{U,V})$ becomes\n$$\\sum_{a=1}^q(-1)^{a+q}B_{i_a j_q}L_{d-1}(I\\setminus i_a,J\\setminus j_q;U,V)(B^-)=L_d(I,J;U,V)(B).$$\nThe equality is precisely the defining recursion after substituting entries for symbols: substitution in a finite integer polynomial preserves its sums and products. This proves the induction step. No inverses or nonzero elements were used. If $r=0$, the same argument terminates in the empty determinant $1$; if a size-$q$ row or column selection does not exist, there is no identity to check.",
+   "uses": [
+    "def-weil-submatrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07Z7 (lemma-ideals-generated-by-minors), proof hint, iterated column expansion (agent-supplied details)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-matrix-determinant",
+  "lem-trf-minor-laplace-coefficient-formula",
+  "def-weil-submatrix"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07Z7 (lemma-ideals-generated-by-minors), proof hint, iterated column expansion (agent-supplied details)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a matrix formed by adjoining d columns to A each minor of size r plus d has an explicit recursively defined expression as a linear combination of r minors of A by deleting the last column",
+   "results": "Returned Matrix.det_succ_column, Matrix.submatrix_succAbove_det_eq_negOnePow_submatrix_succAbove_det', Matrix.det_succ_column_zero, Matrix.det_eq_sum_column_mul_submatrix_succAbove_succAbove_det, Matrix.submatrix_succAbove_det_eq_negOnePow_submatrix_succAbove_det, Matrix.det_succ_row, Matrix.det_succ_row_zero, Matrix.det_eq_of_forall_col_eq_smul_add_pred.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give single-column expansion or square-matrix primitives, not the stated multi-index identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated cofactor expansion deleting appended columns gives coefficient witnesses expressing determinants through minors of the original matrix",
+   "results": "Returned Matrix.det_succ_column, Matrix.det_eq_sum_column_mul_submatrix_succAbove_succAbove_det, Matrix.det_eq_sum_row_mul_submatrix_succAbove_succAbove_det, Matrix.det_succ_row, Matrix.det_succ_column_zero, Matrix.submatrix_succAbove_det_eq_negOnePow_submatrix_succAbove_det, Matrix.submatrix_succAbove_det_eq_negOnePow_submatrix_succAbove_det', Matrix.det_succ_row_zero.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give single-column expansion or square-matrix primitives, not the stated multi-index identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.det, Ideal.span",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give single-column expansion or square-matrix primitives, not the stated multi-index identity"
+  },
+  {
+   "tool": "grep",
+   "query": "minorIdeal|determinantal|minor.*(append|adjoin)|cofactor.*recurs",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give single-column expansion or square-matrix primitives, not the stated multi-index identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A minor of a matrix after adjoining d columns is a linear combination of smaller minors of the original matrix using repeated cofactor expansion",
+   "results": "Returned Matrix.det_eq_sum_mul_adjugate_col, Matrix.det_succ_row, Matrix.adjugate, Matrix.det_eq_sum_mul_adjugate_row, Matrix.det_succ_column, Matrix.adjp, Matrix.det_succ_column_zero, Matrix.adjugate_def.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give single-column expansion or square-matrix primitives, not the stated multi-index identity"
+  },
+  {
+   "tool": "grep",
+   "query": "minor.*(append|adjoin)|cofactor.*recurs|det_succ_column",
+   "results": "Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean, Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean, Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean, Mathlib/LinearAlgebra/Matrix/Determinant/Bird/Correctness.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits supply single-column expansion or generic polynomial evaluation, not this recursively specified multi-stage minor identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Repeated cofactor expansion expresses a determinant as a linear combination of smaller minors with recursive polynomial coefficients",
+   "results": "Matrix.det_eq_sum_mul_adjugate_col, Matrix.det_eq_sum_mul_adjugate_row, Matrix.det_succ_row_zero, Matrix.det_succ_row, Matrix.det_succ_column, Matrix.det_succ_column_zero, Matrix.det, Matrix.det_apply'",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits supply single-column expansion or generic polynomial evaluation, not this recursively specified multi-stage minor identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.det, MvPolynomial",
+   "results": "Matrix.det_mvPolynomialX_ne_zero, Matrix.eval_det_mvPolynomialX, Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs, Algebra.SubmersivePresentation.jacobianRelations_spec, Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits supply single-column expansion or generic polynomial evaluation, not this recursively specified multi-stage minor identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minors after adjoining columns are polynomial linear combinations of minors of the original matrix with coefficients computed by cofactor recursion",
+   "results": "Matrix.det_succ_column, Matrix.submatrix_succAbove_det_eq_negOnePow_submatrix_succAbove_det', Matrix.cramerMap, Matrix.det_succ_column_zero, Matrix.submatrix_succAbove_det_eq_negOnePow_submatrix_succAbove_det, Matrix.det_eq_sum_column_mul_submatrix_succAbove_succAbove_det, Matrix.adjugate_apply, Matrix.det_succ_row",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits supply single-column expansion or generic polynomial evaluation, not this recursively specified multi-stage minor identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated last column determinant expansion gives recursively defined integer polynomial coefficients expressing larger minors as linear combinations of smaller minors",
+   "results": "Matrix.det_succ_column, Matrix.det_succ_column_zero, Matrix.det_succ_row_zero, Matrix.det_succ_row, Matrix.det_eq_sum_column_mul_submatrix_succAbove_succAbove_det, Matrix.det_eq_sum_row_mul_submatrix_succAbove_succAbove_det, Matrix.det_one_add_X_smul, Matrix.submatrix_succAbove_det_eq_negOnePow_submatrix_succAbove_det",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits supply single-column expansion or generic polynomial evaluation, not this recursively specified multi-stage minor identity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fitting-ideal-minor-inclusions",
+  "date": "2026-10-22",
+  "group": "Q81"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "General determinant-ideal calculation used in the first-Fitting well-definedness dependency of the nodal-family geometry route; the nearest blueprint ancestor has no separate Fitting clause. Stacks 07Z8 invokes 07Z7 for stabilization and change of free coordinates. Re-split of lem-trf-fitting-ideal-minor-inclusions: induction on appended columns in former step 3, made precise by recursive determinant coefficients.",
+   "via": [
+    "lem-trf-fitting-ideal-minor-inclusions",
+    "lem-trf-fitting-ideal-independence-base-change",
+    "def-trf-first-fitting-singular-subscheme",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-column-extension-minor-coefficients",
+  "worker": "stage1",
+  "summary": "Kept the statement and recursive coefficient data unchanged. Proved well-definedness and the evaluated identity by induction on d, using the existing selected-column Laplace formula only with a singleton column set. Checked the empty cases, ordered deletions and finite polynomial evaluation; no new nodes or attachments. Repeated logged Mathlib searches find single-column expansion primitives but no one-line match for this recursive multi-stage statement.",
+  "blueprint": "The nearest blueprint ancestor lem-trf-local-term-locality has no Fitting clause; this realizes the existing recorded auxiliary Fitting dependency: former step 3 of lem-trf-fitting-ideal-minor-inclusions, iterated column expansion for adjoining columns."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-ed0144e19",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-ed0144e19 (reviewer sub-agent of L); spot-checked: I read the item in full, the statements of all four cited nodes, and Stacks more-algebra.tex Tag 07Z7 (lemma-ideals-generated-by-minors, part 2 about appended rows; the item is the transposed column version with an agent-supplied recursive certificate). Delivery shape: one commit, only the item and the report, 0 new nodes, statement and stmt_deps unchanged, proof_deps equal to the union of the step uses, and no re-split repair note for this item. Step 1: j_q is the maximum of J, so J minus j_q lies in [n+d-1] with length r+(d-1); the recursion is well defined, including q=1 and the case j_q<=n. Step 2: base case d=0 by the Kronecker delta, with r=0 covered because the cited determinant definition gives det(empty)=1. Step 3: the Laplace node with s=1 and T={q} gives the sign (-1)^{a+q}, the 1x1 determinant is B_{i_a j_q}, and the complement in increasing order is B_{I minus i_a, J minus j_q}; only the node's displayed statement is used. Step 4: the induction hypothesis applies to B^- (its first n columns are A), L_{d-1} uses only columns up to n+d-1 so evaluating at B^- equals evaluating at B, and the sum interchange gives exactly the defining recursion. I checked small cases: the 2x2 case r=d=n=1 gives the usual determinant, r=0,d=1 gives B_ij, cases with r>n or q>p are vacuous, and nothing depends on the characteristic or on zero divisors. Duplicate search with rg -L for cofactor, column expansion and Laplace found no node stating this identity. No cycle: the Laplace node has empty proof_deps. No SGA. Advisory only: Mathlib det_succ_column would also give step 3. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.Matrix.ColumnExtensionMinorCoefficients",
+  "declaration": "Matrix.det_submatrix_eq_sum_columnExtensionMinorCoefficient",
+  "declarations": [
+   "Matrix.columnExtensionMinorPolynomial",
+   "Matrix.columnExtensionMinorCoefficient",
+   "Matrix.det_submatrix_eq_sum_columnExtensionMinorCoefficient"
+  ],
+  "file": "lean/Sheaf/LinearAlgebra/Matrix/ColumnExtensionMinorCoefficients.lean",
+  "statement": "theorem det_submatrix_eq_sum_columnExtensionMinorCoefficient {R : Type u} [CommRing R] (p n r d : ℕ) (B : Matrix (Fin p) (Fin (n + d)) R) (I : Fin (r + d) → Fin p) (J : Fin (r + d) → Fin (n + d)) (hI : StrictMono I) (hJ : StrictMono J) : (B.submatrix I J).det = ∑ U ∈ (Finset.univ : Finset (Fin r → Fin p)).filter StrictMono, ∑ V ∈ (Finset.univ : Finset (Fin r → Fin n)).filter StrictMono, MvPolynomial.eval₂ (Int.castRingHom R) (fun ij ↦ B ij.1 ij.2) (columnExtensionMinorCoefficient p n r d I J U V) * ((B.submatrix id (Fin.castAdd d)).submatrix U V).det",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two definitions supply the literal recursive polynomial data introduced in this node. A fixed ambient alphabet avoids casts between polynomial rings: each recursive call uses only the symbols in its ordered lists, hence only the first n+d-1 columns at the first reduction on valid selections. StrictMono maps Fin k to Fin m encode increasing index lists; the two finite filtered sums enumerate each increasing pair once."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ccdee39ee",
+  "group": "NU",
+  "result": "pass",
+  "note": "Checked node (unchanged vs live S1-landed Q66 node apart from lean), 3 Mathlib stmt_dep records, module, report (both sections present). Clause-by-clause: StrictMono Fin-maps for increasing lists, filtered sums over U,V, Kronecker delta on (I,J)=(U,castAdd V), sign (-1)^(a.val+1+J.length)=(-1)^{a+q}, eraseIdx/dropLast order-preserving, last column via getLast?, A=B.submatrix id (Fin.castAdd d), eval₂ Int.castRingHom; any CommRing, single universe u. Defs are a genuine recursion (unreachable empty-J branch returns 0). Python check of the literal recursion vs Leibniz determinants: 268 identities hold for p,n<=3,d,r<=2, incl. d=0,r=0,q=1,p=0,n=0 and vacuous cases. Statement verbatim in file; docstrings carry source/blueprint/proof plan; proof sorry only. No fixes."
+ }
+}

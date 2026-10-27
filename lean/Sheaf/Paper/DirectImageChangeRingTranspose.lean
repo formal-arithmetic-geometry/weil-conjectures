@@ -279,7 +279,7 @@ theorem directImageChangeRingTranspose
         (proEtaleRingDerivedDirectImage f.left (proEtaleConstantRing Y.left A)
           (proEtaleConstantRing X.left A) (proEtaleConstantRingComparison f.left A)).map
             ((scalarExtensionFunctor φ X.left ⋙ scalarRestriction φ X.left).map v) := by
-  have hn := (proEtaleScalarTensorNormalization ℓ _hA _hB φ f.left
+  have hn := (proEtaleScalarTensorNormalization φ f.left
     (transposeTensorModel Y.left (proEtaleConstantRing Y.left A))
     (transposeTensorModel X.left (proEtaleConstantRing X.left A))).2
   refine ⟨?_, ?_, ?_⟩

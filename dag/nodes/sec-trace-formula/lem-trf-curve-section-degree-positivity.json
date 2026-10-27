@@ -18,72 +18,80 @@
  ],
  "proof": [
   {
-   "text": "Put $D=Z(s)$, the zero scheme of $s$ from [def-pc-zero-scheme]. The local description in [lem-pc-zero-scheme-properties] identifies the complement of the nonvanishing locus with the underlying support of $D$. Since $C$ is integral and $s$ is nonzero, [lem-pc-nonzero-section-integral-cartier] shows that $D$ is an effective Cartier divisor. By the definition of the nonvanishing locus in [def-weil-pbc-ample-invertible-module], the hypothesis that $s$ vanishes at a point is exactly that $D$ is nonempty (equivalently $C_s\\ne C$).",
+   "text": "Let J be the zero ideal of homOfGlobalSection L s. nonzero_section_integral_cartier shows J.IsInvertible. Hom.nonempty_iso_dual_toModules_tensorObj followed by the right unitor identifies L with J.toModules dual. Transport the degree by Modules.degree_congr.",
    "uses": [
     "def-pc-zero-scheme",
     "lem-pc-nonzero-section-integral-cartier",
-    "def-weil-pbc-ample-invertible-module",
-    "lem-pc-zero-scheme-properties"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B40, lemma-check-invertible-sheaf-trivial, proof before clauses (1) and (2), using the regular-section/effective-Cartier-divisor characterization"
-   }
-  },
-  {
-   "text": "The zero-scheme/divisor identification [lem-pc-zero-scheme-divisor-iso], applied to the section $s:\\mathcal O_C\\to\\mathcal L$, gives an isomorphism $\\mathcal L\\cong\\mathcal O_C(D)$. Isomorphic invertible modules have the same Euler characteristic and hence the same degree by [def-pc-degree-line-bundle], so $\\deg_k(\\mathcal L)=\\deg_k(\\mathcal O_C(D))$.",
-   "uses": [
     "lem-pc-zero-scheme-divisor-iso",
     "def-pc-degree-line-bundle"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B40, proof of lemma-check-invertible-sheaf-trivial: the section identifies the line bundle with the divisor bundle"
+    "place": "Tags 0B40 and 0AYY, proofs of lemma-check-invertible-sheaf-trivial and lemma-degree-effective-Cartier-divisor; Tag 0AYT for the finite-scheme dimension calculation."
    }
   },
   {
-   "text": "The hypotheses of [lem-pc-degree-base-change] apply to $C$ and the effective Cartier divisor $D$: the given topological Krull dimension is one, and [lem-pc-scheme-dimension-local-rings] identifies this with the local-ring dimension used by [def-pc-dimension]. Its effective-divisor clause therefore gives $\\deg_k(\\mathcal O_C(D))=\\dim_k\\Gamma(D,\\mathcal O_D)$, with the right-hand side finite-dimensional over $k$.",
+   "text": "Scheme.dim_eq_topologicalKrullDim converts the dimension-one assumption to C.dim <= 1. effectiveCartierDivisor_finite_over_field makes D = J.subscheme affine and finite over k, and supplies finite dimensionality of its coordinate ring.",
    "uses": [
-    "lem-pc-degree-base-change",
     "lem-pc-scheme-dimension-local-rings",
-    "def-pc-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYY, lemma-degree-effective-Cartier-divisor, degree formula for an effective Cartier divisor"
-   }
-  },
-  {
-   "text": "A finite-dimensional vector space has nonnegative dimension, so the preceding equality proves $\\deg_k(\\mathcal L)\\ge0$. If $D$ is nonempty, [lem-pc-cartier-divisor-finite-over-field] makes $D$ affine and finite over $k$; hence $\\Gamma(D,\\mathcal O_D)$ is a nonzero finite-dimensional $k$-algebra (an affine nonempty scheme is $\\operatorname{Spec}A$ with $A\\ne0$), and its dimension is positive. Thus $\\deg_k(\\mathcal L)>0$ whenever $s$ vanishes at a point.",
-   "uses": [
+    "def-pc-dimension",
     "lem-pc-cartier-divisor-finite-over-field"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYY, proof of lemma-degree-effective-Cartier-divisor, first sentences and the finite-over-the-field conclusion"
+    "place": "Tags 0B40 and 0AYY, proofs of lemma-check-invertible-sheaf-trivial and lemma-degree-effective-Cartier-divisor; Tag 0AYT for the finite-scheme dimension calculation."
+   }
+  },
+  {
+   "text": "Use the general closed-subscheme Euler additivity formula Modules.eulerChar_tensorObj_eq_add from Modules.HilbertPolynomial with N = J.toModules dual. Evaluation J tensor J-dual is O_C. On the finite affine scheme D, affine vanishing kills all positive cohomology of the restricted invertible module N. The existing source finite-scheme lemma Modules.finrankH_zero_eq_finrankΓ_of_isFinite (Curve.RiemannRoch, section FiniteScheme; no smoothness hypothesis) computes h^0(N) as finrankΓ(D). Reduce the Euler finsum to degree zero and subtract chi(O_C) to get degree(L) = finrankΓ(D). This proves the effective-divisor degree calculation directly; it does not apply the smooth-curve-only degree_dual_toModules.",
+   "uses": [
+    "lem-pc-euler-additive",
+    "lem-pc-affine-vanishing",
+    "lem-pc-finite-scheme-cohomology-tensor",
+    "def-pc-euler-characteristic",
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0B40 and 0AYY, proofs of lemma-check-invertible-sheaf-trivial and lemma-degree-effective-Cartier-divisor; Tag 0AYT for the finite-scheme dimension calculation."
+   }
+  },
+  {
+   "text": "The natural-number rank is nonnegative. If the nonvanishing locus is proper, nonvanishingLocus_eq_compl_support_zeroLocus and IdealSheafData.range_subschemeι imply Nonempty D (otherwise support J is empty and its complement is the whole curve). Choose a point x of D. The germ ring homomorphism Gamma(D,O_D) -> O_D,x has a nontrivial codomain, so RingHom.domain_nontrivial gives a nontrivial coordinate ring. Its finite-dimensional k-vector-space rank is positive by Module.finrank_pos. Cast this inequality to the integers.",
+   "uses": [
+    "lem-weil-pbc-section-nonvanishing-zero-locus",
+    "lem-pc-cartier-divisor-finite-over-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0B40 and 0AYY, proofs of lemma-check-invertible-sheaf-trivial and lemma-degree-effective-Cartier-divisor; Tag 0AYT for the finite-scheme dimension calculation."
    }
   }
  ],
  "proof_deps": [
   "def-pc-degree-line-bundle",
   "def-pc-dimension",
+  "def-pc-euler-characteristic",
   "def-pc-zero-scheme",
-  "def-weil-pbc-ample-invertible-module",
+  "lem-pc-affine-vanishing",
   "lem-pc-cartier-divisor-finite-over-field",
-  "lem-pc-degree-base-change",
+  "lem-pc-euler-additive",
+  "lem-pc-finite-scheme-cohomology-tensor",
   "lem-pc-nonzero-section-integral-cartier",
   "lem-pc-scheme-dimension-local-rings",
   "lem-pc-zero-scheme-divisor-iso",
-  "lem-pc-zero-scheme-properties"
+  "lem-weil-pbc-section-nonvanishing-zero-locus"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "P4",
+  "date": "2026-10-23",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0B40, lemma-check-invertible-sheaf-trivial, clauses (1) and (2), with Tag 0AYY for the effective-Cartier degree formula"
+  "place": "Tags 0B40 and 0AYY, proofs of lemma-check-invertible-sheaf-trivial and lemma-degree-effective-Cartier-divisor; Tag 0AYT for the finite-scheme dimension calculation."
  },
  "mathlib_searches": [
   {
@@ -206,7 +214,6 @@
  "tool_uses": [
   "lem-pc-nonzero-section-integral-cartier",
   "lem-pc-zero-scheme-divisor-iso",
-  "lem-pc-degree-base-change",
   "lem-pc-scheme-dimension-local-rings",
   "lem-pc-cartier-divisor-finite-over-field"
  ],
@@ -236,5 +243,26 @@
   "result": "pass",
   "note": "Lean statement matches node and Stacks 0B40 (1)-(2) clause by clause: field k, integral C proper over k, topologicalKrullDim C = 1, invertible L, s : Γ(L,⊤) with s ≠ 0; conclusion 0 ≤ L.degree k ∧ (nonvanishingLocus L s ≠ univ → 0 < L.degree k) uses the recorded degree (χ(L)-χ(O)) and nonvanishingLocus (X_s of def-weil-pbc-ample-invertible-module). No stronger assumptions; the shared universe is forced by the degree/Spec interfaces. Γ(L,⊤) is rfl-equal to the presheaf type nonvanishingLocus takes. lean.statement verbatim in file; node and report match packet; proof-dep imports match the recorded modules exactly; source and blueprint docstrings and the 4-step proof docstring present; sorry-only; lines ≤ 100. nt_compile.py --json: clean in 3.0 s; axioms propext/sorryAx/Classical.choice/Quot.sound. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261023T123930-L-1297347",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -29,92 +29,47 @@
  ],
  "proof": [
   {
-   "text": "Put $H=F_{f\\circ h}$ and write $f_n^*,h_n^*$ for the finite exact module inverse images. Apply [lem-pur-proetale-module-pullback-composition] to $\\Lambda=\\mathcal O_E/\\varpi^n$. Its comparison is precisely the left-adjoint comparison to the specified direct-image composition, with the canonical constant-section coefficient maps. Exactness from [prop-weil-pbc-proetale-constant-exact] means that applying these functors and this natural isomorphism termwise to any complex computes the unbounded derived functors and their comparison $a_n$. The scalar presentation of the canonical compositor in [lem-pur-cochain-pullback-tensor-coherence] identifies its inverse $b_n$ with $t\\otimes(s\\otimes x)\\mapsto t\\,h_n^\\sharp(s)\\otimes x$, after the canonical underlying inverse-image composition identification; $a_n$ sends $t\\otimes x$ to $t\\otimes(1\\otimes x)$. Balancing identifies $t h_n^\\sharp(s)\\otimes(1\\otimes x)$ with $t\\otimes(s\\otimes x)$, so these are inverse maps. The maps have degree zero and commute with the differential termwise. The unit of each scalar-extension adjunction inserts $1$; the displayed $a_n$ carries the composite insertion to the insertion for the composite pullback, which pins the required adjunction normalization.",
+   "text": "Apply ordinaryCompositionEvaluation (lem-pur-ordinary-pullback-composition-evaluation) to the ordinary canonical compositor and its unit-normalized finite evaluations. Apply the existing exact-functor derived-square pasting theorem to its inverse evaluation comparisons. Cancel their inverses to obtain SystemLaws.finite, with the recorded finiteComposition and evaluation. No K-flat choice is needed, because all inverse-image functors here are exact.",
    "uses": [
-    "lem-pur-proetale-module-pullback-composition",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-pur-cochain-pullback-tensor-coherence"
+    "lem-pur-ordinary-pullback-composition-evaluation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D8, lemma-push-pull-composition-modules; sites-cohomology.tex Tag 0D6D, lemma-derived-pullback-composition; scalar formulas spelled out here"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix $m\\ge n$. Write $\\delta_f:q_X^*f_m^*\\xrightarrow{\\sim}f_n^*q_Y^*$ for $\\kappa_f^{-1}$ and similarly $\\delta_h,\\delta_{fh}$; these are the coefficient-association maps in [lem-pur-normalized-operation-system-models], with the chain formulas of [lem-pur-cochain-pullback-tensor-coherence]. They satisfy the natural-transformation equation\n$$h_n^*(\\delta_f)\\,\\delta_h(f_m^*(-))\\,q_Z^*(a_m)=a_n(q_Y^*(-))\\,\\delta_{fh}.$$\nHere both sides start at $q_Z^*H_m$ and end at $h_n^*f_n^*q_Y^*$. To verify it, invert the compositors and collapse the nested scalar factors as in step 1. Starting with $(t\\otimes(s\\otimes x))\\otimes r$, both routes give $r\\bar t\\,\\overline{h_m^\\sharp(s)}\\otimes(x\\otimes1)$ in $H_n(q_Y^*(-))$, where bars denote the coefficient quotient. Equality follows from $\\overline{t h_m^\\sharp(s)}=\\bar t h_n^\\sharp(\\bar s)$, since the constant-section maps commute with the quotient ring homomorphism. Balancing and the inverse-image composition identifications are the ones already specified by these cited scalar-association constructions. The inverse square follows by composing with $a_m^{-1}$ and $a_n^{-1}$. Thus this is an equality of chain constructions on the flat-term K-flat models allowed by the system-model lemma, and hence of their derived transformations; no quotient map is assumed flat.",
+   "text": "Naturality of coefficientSequenceDerivedTransition at the hom and inverse of integralComparisonSystemComposition gives the two restriction transition equations. Apply homEquiv_naturality_right_square for the actual finite-quotient adjunction to each equation; the definition of coefficientSequenceTransitionAdjoint gives the two extension-form equations, including m=n.",
    "uses": [
-    "lem-pur-normalized-operation-system-models",
-    "lem-pur-cochain-pullback-tensor-coherence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D, lemma-derived-pullback-composition, with Tag 07A4 scalar-association construction; explicit coefficient-square calculation"
-   }
-  },
-  {
-   "text": "Now use the actual adjoint $\\alpha=\\alpha^C_{m,n}$, not a replacement transition. By [lem-pur-normalized-operation-system-models] the output adjoints are\n$$\\alpha^P_{m,n}=H_n(\\alpha)\\delta_{fh},\\qquad\n\\alpha^Q_{m,n}=h_n^*f_n^*(\\alpha)\\,h_n^*(\\delta_f)\\,\\delta_h(f_m^*C_m).$$\nThe equation of step 2 followed by naturality of $a_n$ at $\\alpha:q_Y^*C_m\\to C_n$ gives\n$$\\alpha^Q_{m,n}\\,q_Z^*(a_m)=a_n\\,\\alpha^P_{m,n}.$$\nUnder the extension/restriction adjunction of [def-coef-normalized-dvr-tower] this is exactly compatibility with $\\tau^C_{m,n}=\\operatorname{Res}(\\alpha)\\eta_{C_m}$, and thus with the induced actual transitions of $P,Q$. For the inverse, multiply this equation by $q_Z^*(a_m^{-1})$ and $a_n^{-1}$. Construct the transformation on whole systems by the inverse-image adjunction and module scalar-association transformations of [lem-coef-semilinear-derived-sections]; that node supplies the system transformations with precisely these finite evaluations. Equivalently the same formulas act termwise on a complex of strict semilinear systems, where the transition square is the preceding scalar calculation followed by naturality for its actual transition chain map. Exactness lets this construction descend to the ordinary derived system category. The two composites with its inverse are identities already in this construction. This constructs $a:P\\xrightarrow{\\sim}Q$ before evaluation, rather than inferring equality of system morphisms from evaluated equalities. The same calculation works for every $m\\ge n$; the input cocycle and associative scalar multiplication retain all quotient cocycles.",
-   "uses": [
-    "lem-pur-normalized-operation-system-models",
     "def-coef-normalized-dvr-tower",
-    "lem-coef-semilinear-derived-sections"
+    "lem-coef-derived-system-evaluation-calculus"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D8 with the whole-system constructions of lem-coef-semilinear-derived-sections; arbitrary-transition calculation using the coefficient square of step 2"
-   }
+   "elementary": true
   },
   {
-   "text": "Set $D=F_f(C)$. The recursive definitions in the statement specialize to $\\beta_P=\\beta_{f\\circ h}(C)$ and $\\beta_Q=\\beta_h(D)\\widehat F_h(\\beta_f(C))$. By [lem-pur-completed-primitive-counit-comparison], each primitive comparison is the specified quotient realization $r_F$ followed by $\\mathcal L F(e)$, and these are natural functor comparisons, including on the actual quotient transitions. Consequently, expressing the nested target in quotient models and applying the inner comparison gives the coherent system arrow $\\mathcal R_X(\\beta_f(C))$; the outer comparison then applies $F_h(e_D)$. Their composite on the reduced inner argument is $F_h(e_D\\mathcal R_X(\\beta_f(C)))=F_h(\\gamma_{F_f(C)})$. This is exactly the recursive counit identification, with no independently chosen finite identifications. After the source and target have been identified by $\\beta_P,\\beta_Q$, apply the whole-system compositor of step 3 and then $\\mathcal L_Z$. Undoing the target identification constructs the completed compositor as\n$$\\widehat a=\\beta_Q^{-1}\\mathcal L_Z(a)\\beta_P.$$\nAll three factors are isomorphisms by the stated hypotheses and step 3. Its inverse is $\\beta_P^{-1}\\mathcal L_Z(a^{-1})\\beta_Q$; direct cancellation verifies both inverse equations. This construction uses the defining quotient-model comparisons for the actual completed functors, so its finite representative maps are the specified scalar-association compositor, transported through the displayed counits.",
-   "uses": [
-    "lem-pur-completed-primitive-counit-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, used through the primitive quotient/Roos realization comparison; explicit recursive conjugation"
-   }
-  },
-  {
-   "text": "The representative assertion in step 4 retains the actual limit model as well. On restricted strict towers representing $P,Q$, write $t^P_n,t^Q_n$ for their actual transitions. Step 3 gives $a_n t^P_n=t^Q_n a_{n+1}$. Thus the degreewise product map $A=\\prod_n a_n$ obeys $A(1-s_P)=(1-s_Q)A$, component by component. It induces the chain map on $\\operatorname{Cone}(1-s)[-1]$ by applying $A$ to both cone coordinates; $\\prod_n a_n^{-1}$ gives its inverse. On a system resolution the same equations hold after applying that resolution, so this map is carried to $\\mathcal L_Z(a)$ by the natural projection-compatible Roos comparison specified in [lem-pur-completed-primitive-counit-comparison]. The independence and localization compatibility of the actual quotient/Roos models are supplied by [lem-pur-integral-operations-well-defined]. Therefore the conjugation in step 4 identifies their representatives, inverses and all actual transitions, even when $C$ was not initially a chosen reduction tower. No commutation of a geometric inverse image with an arbitrary product or inverse limit is used.",
+   "text": "Use mapDerivedCategoryNatIso_fac and mapDerivedCategoryCompIso_hom_app_factors to identify the system compositor on Q(P) with the strict termwise compositor under the two mapDerivedCategoryFactors comparisons. Apply the exact scalar-restriction functor and its factorization naturality. This gives an equality of isomorphisms between the conjugated restricted derived compositor and Q.mapIso(strictComposition). Taking hom and inv and applying naturality of the supplied RoosRealization.comparison proves both RepresentativeLaws equations.",
    "uses": [
     "lem-pur-completed-primitive-counit-comparison",
-    "lem-pur-integral-operations-well-defined"
+    "def-trf-integral-comparison-sequence-systems"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok; functorial cone calculation on actual strict-system maps and the existing quotient-model localization comparison"
-   }
+   "elementary": true
   },
   {
-   "text": "Finally use counit naturality in the system category, as stated in [lem-pur-completed-primitive-counit-comparison], at the already constructed $a:P\\to Q$. Functoriality and $\\beta_Q\\widehat a=\\mathcal L_Z(a)\\beta_P$ give\n$$\\begin{aligned}\n\\gamma_Q\\mathcal R_Z(\\widehat a)\n &=e_Q\\mathcal R_Z(\\beta_Q\\widehat a)\n =e_Q\\mathcal R_Z\\mathcal L_Z(a)\\mathcal R_Z(\\beta_P)\\\\\n &=a e_P\\mathcal R_Z(\\beta_P)=a\\gamma_P.\n\\end{aligned}$$\nFor the inverse the same calculation gives $\\gamma_P\\mathcal R_Z(\\widehat a^{-1})=a^{-1}\\gamma_Q$. The finite compositor is natural in $C$ by step 1, its whole-system construction is natural by step 3, and the primitive comparisons and their inverses are natural by the cited node; composing them makes $\\widehat a$ and this reduction equation natural in $C$. All these equations are obtained in the whole-system category before taking finite evaluations, so include the actual quotient transitions.",
+   "text": "The definition completed is the conjugation by betaSource and betaTarget. Functoriality of coherent reduction cancels the mapped betaTarget inverse against betaTarget; naturality of the single adjunction counit then gives reduction. The same calculation for the inverse gives inverse_reduction. Primitive pullBeta is a composite of the realization natural isomorphism and the image of the counit, hence is natural. Combine the naturality equations for the inner and outer beta, and use naturality of integralComparisonSystemComposition; cancellation against betaTarget proves naturality of completed.",
    "uses": [
     "lem-pur-completed-primitive-counit-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 via the existing natural counit comparison; explicit functorial cancellation in the derived system category"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-coef-normalized-dvr-tower",
-  "lem-coef-semilinear-derived-sections",
-  "lem-pur-cochain-pullback-tensor-coherence",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-coef-derived-system-evaluation-calculus",
   "lem-pur-completed-primitive-counit-comparison",
-  "lem-pur-integral-operations-well-defined",
-  "lem-pur-normalized-operation-system-models",
-  "lem-pur-proetale-module-pullback-composition",
-  "prop-weil-pbc-proetale-constant-exact"
+  "lem-pur-ordinary-pullback-composition-evaluation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03D8 and sites-cohomology.tex Tags 0D6D and 0941; explicit coefficient-transition and coherent-counit refinement using existing DAG tools, not a verbatim Stacks theorem"
+  "place": "Tags 03D8, 0D6D and 0941; U4 stage-3 ordinary evaluation reduction and explicit exact-localization, Roos naturality and counit cancellation proof"
  },
  "mathlib_searches": [
   {
@@ -236,10 +191,7 @@
   ]
  },
  "tool_uses": [
-  "lem-coef-semilinear-derived-sections",
-  "prop-weil-pbc-proetale-constant-exact",
-  "lem-pur-proetale-module-pullback-composition",
-  "lem-pur-integral-operations-well-defined"
+  "lem-pur-proetale-module-pullback-composition"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -259,6 +211,8 @@
    "WeilConjectures.PullbackCompositionTransport.strictComposition",
    "WeilConjectures.PullbackCompositionTransport.restrictionFactor",
    "WeilConjectures.PullbackCompositionTransport.iteratedRestrictionFactor",
+   "WeilConjectures.PullbackCompositionTransport.RepresentativeForward",
+   "WeilConjectures.PullbackCompositionTransport.RepresentativeBackward",
    "WeilConjectures.PullbackCompositionTransport.RepresentativeLaws",
    "WeilConjectures.PullbackCompositionTransport.betaSource",
    "WeilConjectures.PullbackCompositionTransport.betaTarget",
@@ -266,7 +220,17 @@
    "WeilConjectures.PullbackCompositionTransport.gammaTarget",
    "WeilConjectures.PullbackCompositionTransport.completed",
    "WeilConjectures.PullbackCompositionTransport.TransportLaws",
-   "WeilConjectures.PullbackCompositionTransport.normalizedPullbackCompositionTransport"
+   "WeilConjectures.PullbackCompositionTransport.normalizedPullbackCompositionTransport",
+   "WeilConjectures.PullbackCompositionTransport.TransportReduction",
+   "WeilConjectures.PullbackCompositionTransport.TransportInverseReduction",
+   "WeilConjectures.PullbackCompositionTransport.TransportNaturality",
+   "WeilConjectures.PullbackCompositionTransport.RepresentativeLaws.forward",
+   "WeilConjectures.PullbackCompositionTransport.RepresentativeLaws.backward",
+   "WeilConjectures.PullbackCompositionTransport.TransportLaws.reduction",
+   "WeilConjectures.PullbackCompositionTransport.TransportLaws.inverse_reduction",
+   "WeilConjectures.PullbackCompositionTransport.TransportLaws.naturality",
+   "WeilConjectures.PullbackCompositionTransport.canonicalBeta",
+   "WeilConjectures.PullbackCompositionTransport.canonicalBetaTransformation"
   ],
   "file": "lean/Sheaf/Paper/NormalizedPullbackCompositionTransport.lean",
   "statement": "theorem normalizedPullbackCompositionTransport (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (_hZ : ∀ z : Z, IsUnit (l : Z.presheaf.stalk z)) (ρX : PrimitiveCounit.RoosRealization l E X) (ρZ : PrimitiveCounit.RoosRealization l E Z) (_hf : PrimitiveCounit.PullModel l E f SY ρX rf) (_hh : PrimitiveCounit.PullModel l E h SX ρZ rh) (_hhf : PrimitiveCounit.PullModel l E (h ≫ f) SY ρZ rhf) (C : coefficientSequenceDerived l E Y) (_hC : IsNormalizedCoefficientSequence l E Y C) [IsIso (betaSource l E h f SY rhf C)] [IsIso (betaTarget l E h f SY SX rf rh C)] [IsIso (gammaSource l E h f SY SZ rhf C)] [IsIso (gammaTarget l E h f SY SX SZ rf rh C)] : SystemLaws l E h f SZ ∧ RepresentativeLaws l E h f ρZ ∧ TransportLaws l E h f SY SX SZ rf rh rhf C",
@@ -282,5 +246,27 @@
   "group": "NB",
   "result": "pass",
   "note": "Item clauses checked against node: SystemLaws.finite pins the evaluation of the canonical integralComparisonSystemComposition to the unique-mate finite compositor via unit-normalized inverseEvaluation; transition/adjoint squares hold for all q:n≤m (formal naturality, as the node intends). betaSource/betaTarget follow the node's recursion, gamma = counit after R(beta), completed = beta_P then L(a) then beta_Q inverse. RepresentativeLaws gives Roos/product-cone representatives; TransportLaws gives the reduction square, its inverse and naturality. Hypotheses: l invertible on X,Y,Z, four IsIso as in the node, realization parameters pinned by PullModel/RoosRealization; universes t,u independent; edge cases n=0, m=n, identities, empty schemes covered. §1(B) dep module: independent-universe ∃! mate on coefficientProEtaleModulePullback, old proved theorem kept and publicly imported, only lean changed with note, statements verbatim, no competing record or duplicate. Added stmt_dep def-trf-integral-comparison-sequence-systems is landed (allowed). Docstrings, line lengths, sorry-only proofs, reports OK. No compile (no changes). Maintainer note: the dep had reviewed_proof (D5) and its main declaration is now the sorry'd generalized theorem, so stage 3 must re-open it."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5c779",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261025T204936-L-3059420",
+  "kind": "interface",
+  "note": "independent cc review: delivered item module + new OrdinaryPullbackCompositionEvaluation module + 2 node files + change record vs clone sheaf-dag; mapDerivedCategorySquareIso/TriangleIso abbrevs vs old evaluation/finiteComposition bodies; ordinaryCompositionEvaluation vs the ∃!-pinned inverseEvaluation, integralComparisonSequenceComposition and coefficientModulePullbackComposition"
  }
 }

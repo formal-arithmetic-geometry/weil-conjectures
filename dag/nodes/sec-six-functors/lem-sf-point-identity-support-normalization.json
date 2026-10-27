@@ -1,0 +1,136 @@
+{
+ "id": "lem-sf-point-identity-support-normalization",
+ "kind": "statement",
+ "title": "Canonical support coefficient comparison at identity",
+ "statement": "Let $s$ be any scheme, let $A,B$ be finite commutative rings, and let $\\varphi:A\\to B$ be any ring map. For each identity compactification $d=(j,p)$ [def-weil-compactifications-refinements], construct $\\beta_{A,d}:F_{A,d}\\simeq\\operatorname{id}$ by the section-normalized clopen comparison of [lem-sp-clopen-section-component], its K-injective-preservation clause, the canonical derived comparison for an exact functor preserving K-injectives, and derived identity. Here $F_{A,d}$ is the actual ambient support candidate of [def-weil-ambient-exceptional-adjoint]. Write $c_0=(\\operatorname{id},\\operatorname{id})$. For the actual derived coefficient extension $T_\\varphi$ and published support coefficient map $\\alpha_\\varphi$ of [def-weil-exceptional-adjoint-admissibility], every $K\\in D(s_{\\mathrm{proet}},A)$ satisfies $\\alpha_{\\varphi,K}\\,;\\,\\beta_{B,c_0,T_\\varphi K}=T_\\varphi(\\beta_{A,c_0,K})$. This is an equation of the specified canonical maps, including nonflat maps and zero coefficient rings.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+  "place": "identity-adjunction sentence, expanded in parent steps 1--2 (FullCD) and 3--5, 8 (support normalization)"
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-weil-ambient-exceptional-adjoint",
+  "def-weil-exceptional-adjoint-admissibility",
+  "lem-sp-clopen-section-component"
+ ],
+ "proof": [
+  {
+   "text": "The open part of a compactification of id_s has clopen image because id_s is proper. Apply clopenSectionComponent to p,j and pj=id_s. Its section equation determines the underived isomorphism e:p_*j_! ≅ id; it also proves that j_! preserves K-injectives. Define beta by deriving e and inserting the exact-precomposition and derived-identity comparisons. This is the complete Lean construction pointIdentitySupportIso.",
+   "uses": [
+    "lem-sp-clopen-section-component",
+    "def-weil-ambient-exceptional-adjoint",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At c_0 the component restriction in e is the canonical identity restriction. The realization square for scalar restriction is identity on scalar-unit sections; the open restriction square is the unique adjunction-unit comparison; the proper restriction square is characterized on K-injective resolutions. Thus after the beta identifications the published support restriction comparison sends every section to itself. Check on a K-injective representative and a K-injective resolution of its scalar restriction; the comparison equations cancel their quasi-isomorphisms. Naturality and essential surjectivity extend the equality to every derived object.",
+   "uses": [
+    "def-weil-exceptional-adjoint-admissibility",
+    "def-sp-finite-intrinsic-direct-adjunction",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose this identity square through the actual derived tensor/restriction adjunctions used to define exceptionalFiniteSupportExtensionMap. The unit/counit triangle identities give alpha_phi,K followed by beta_B,TK equal to T(beta_A,K). Derive tensor on K-flat representatives, so no flatness of phi is needed. The same computation handles identity maps and zero rings.",
+   "uses": [
+    "def-weil-exceptional-adjoint-admissibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-clopen-section-component",
+  "def-weil-ambient-exceptional-adjoint",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-exceptional-adjoint-admissibility",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+  "place": "identity-adjunction sentence, expanded in parent steps 1--2 (FullCD) and 3--5, 8 (support normalization)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical compact support coefficient comparison along identity becomes the identity under clopen section support identifications",
+   "results": "8 hits: HasCompactSupport, CompactlySupported.term_→C_c_, CompactlySupportedContinuousMap.comp_id, hasCompactSupport_def, CocompactMap.coe_id, TopologicalSpace.Clopens.coe_toOpens, TopologicalSpace.CompactOpens.map_id, HasCompactMulSupport.comp_homeomorph. No theorem of the required intrinsic comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "1 hits: CategoryTheory.mateEquiv_counit. No theorem of the required intrinsic comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "point_identity_support_normalization|sfAmbientCompactSupportCandidate.*𝟙",
+   "results": "0 hits: . No theorem of the required intrinsic comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointIdentityAdmissibility",
+  "date": "2026-10-26",
+  "group": "F1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-global-duality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-point",
+   "place": "proof, identity is its own right adjoint; parent identity admissibility calculation",
+   "via": [
+    "lem-sf-point-identity-admissibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointIdentitySupportNormalization",
+  "file": "lean/Sheaf/Paper/PointIdentitySupportNormalization.lean",
+  "declaration": "WeilConjectures.point_identity_support_normalization",
+  "statement": "theorem point_identity_support_normalization (s : Scheme.{u})\n    (A B : Type u) [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) (K : proEtaleDerivedCategory s A) :\n    (exceptionalFiniteSupportExtensionMap φ (Compactification.ofIsProper (𝟙 s))).app K ≫\n        (pointIdentitySupportIso s B (Compactification.ofIsProper (𝟙 s))).hom.app\n          ((exceptionalCoefficientExtension φ s).obj K) =\n      (exceptionalCoefficientExtension φ s).map\n        ((pointIdentitySupportIso s A (Compactification.ofIsProper (𝟙 s))).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.pointIdentityClopenComparison",
+   "WeilConjectures.pointIdentitySupportIso",
+   "WeilConjectures.point_identity_support_normalization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-43b7c",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261025T201824-L-2625200",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-43b7c",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261025T201824-L-2625200",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointIdentityAdmissibility + 2 new modules/nodes vs clone (item node, unit sk-thm-sf-global-duality realized empty, ClopenSectionComponent/ExceptionalAdjointAdmissibility/SfCompactSupportRestrictionOfScalars defs); axioms probe compiled in /tmp sandbox"
+ }
+}

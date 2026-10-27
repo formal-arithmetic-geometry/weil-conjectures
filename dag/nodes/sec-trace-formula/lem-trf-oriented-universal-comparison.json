@@ -1,0 +1,154 @@
+{
+ "id": "lem-trf-oriented-universal-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof of (1) and (2), normal-cone specialization: the external-product comparison used by lem-trf-trace-specialization; existence and universal property of the oriented product on which the vanishing topos of def-trf-oriented-nearby-cycles is built; ILO XI Theorem 1.4 and Definition 1.7",
+   "via": [
+    "lem-trf-oriented-product-universal",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Comparison equivalence of universal oriented cones",
+ "statement": "In the common universe u let X,Y,S,P,Q be categories of the stated size and let P,Q be Grothendieck topoi [def-weil-pbc-topos]. Let f:X→S, g:Y→S, p1:P→X,p2:P→Y,q1:Q→X,q2:Q→Y be geometric morphisms [def-trf-geometric-morphism], with orientations tau:(gp2)_*→(fp1)_* and sigma:(gq2)_*→(fq1)_*. Suppose both cones satisfy the universal property: every oriented cone from a test topos has a compatible lift, unique up to a unique isomorphism respecting its two projection comparisons. Then there exists a compatible comparison h:Q→P with h.direct an equivalence. For this comparison every other compatible h2 has a unique isomorphism of direct images respecting both projection comparisons.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO XI Theorem 1.4 and Definition 1.7; Lean: lean/Sheaf/CategoryTheory/Sites/OrientedProductUniversalComparison.lean"
+ },
+ "stmt_deps": [
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-topos"
+ ],
+ "proof": [
+  {
+   "text": "Apply the two universal properties to the opposite cones to get h:Q→P and k:P→Q, with compatible projection isomorphisms. The pasted orientation for either composite is the iterated paste; expand the definition and use naturality and associativity to verify this componentwise. The identities are compatible cones as well.",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO XI Theorem 1.4 and Definition 1.7"
+   }
+  },
+  {
+   "text": "Apply universal uniqueness to the composites and identities. Composing their two isomorphisms to a common chosen lift gives k.direct⋙h.direct≅id_P and id_Q≅h.direct⋙k.direct. Functor.IsEquivalence.mk' constructs the equivalence of h.direct. The unique projection-compatible isomorphism to another h2 is the uniqueness clause of the original universal property.",
+   "uses": [
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO XI Definition 1.7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-topos"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO XI Theorem 1.4 and Definition 1.7: the comparison maps in both directions have composites uniquely isomorphic to identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two universal cones of geometric morphisms are equivalent",
+   "results": "CategoryTheory.WithTerminal.coneEquiv; CategoryTheory.Limits.isLimitMapConeFanMkEquiv; CategoryTheory.Limits.Cone.isLimitEquivIsTerminal; CategoryTheory.Limits.Cones.functorialityEquivalence; CategoryTheory.Limits.IsLimit.ofConeEquiv; CategoryTheory.Limits.Cones.functorialityEquivalence_functor; CategoryTheory.WithTerminal.isLimitEquiv; CategoryTheory.Limits.isLimitEmptyConeEquiv",
+   "date": "2026-10-23",
+   "verdict": "No same statement. Generic Mathlib site, adjunction and equivalence APIs are used where applicable; no oriented triple-site theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two universal oriented cones are equivalent by their comparison geometric morphisms",
+   "results": "CategoryTheory.LiftableCone.mk.inj; CategoryTheory.Limits.DiagramOfCones.mk.inj; CategoryTheory.Limits.Cone.mk.inj; CategoryTheory.Limits.Trident.ext; CategoryTheory.Limits.Cones.ext; CategoryTheory.Limits.Fan.ext; CategoryTheory.Limits.ConeMorphism.mk.inj; CategoryTheory.Limits.Cones.eta",
+   "date": "2026-10-23",
+   "verdict": "No same statement. Generic Mathlib site, adjunction and equivalence APIs are used where applicable; no oriented triple-site theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "oriented.*(product|cone)|compatible.*lift",
+   "results": "Mathlib/MeasureTheory/Measure/Haar/InnerProductSpace.lean; Mathlib/RingTheory/WittVector/Truncated.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean; Mathlib/Geometry/Euclidean/Angle/Oriented/Rotation.lean",
+   "date": "2026-10-23",
+   "verdict": "No same statement. Generic Mathlib site, adjunction and equivalence APIs are used where applicable; no oriented triple-site theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEquivalence.mk\\u0027\"",
+   "results": "CategoryTheory.Functor.IsEquivalence.mk'",
+   "date": "2026-10-23",
+   "verdict": "No same statement. Generic Mathlib site, adjunction and equivalence APIs are used where applicable; no oriented triple-site theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"largeCompatibleLift|largeOrientationExists|largeSiteMorphism|largeAssociatedComparison|universalComparison|LargeOrientationFormula\" in Mathlib/CategoryTheory, lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search oriented product, compatible lift, universal cone",
+   "results": "No existing declaration with the new names or the corresponding oriented triple-site statements; no matching blueprint node. Existing original node contains the complete construction, not these separate results.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate. The definitions are moved from the assigned item rather than independently restated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.OrientedProductLargeSites",
+  "date": "2026-10-24",
+  "group": "P8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.OrientedProductUniversalComparison",
+  "file": "lean/Sheaf/CategoryTheory/Sites/OrientedProductUniversalComparison.lean",
+  "declaration": "CategoryTheory.OrientedProduct.universalComparison",
+  "statement": "theorem universalComparison\n    (hP : IsGrothendieckTopos.{u} P) (hQ : IsGrothendieckTopos.{u} Q)\n    (hp : IsUniversal.{u, u + 1, u} f g p₁ p₂ τ)\n    (hq : IsUniversal.{u, u + 1, u} f g q₁ q₂ σ) :\n    ∃ (h : GeometricMorphism Q P)\n      (α : (h.comp p₁).direct ≅ q₁.direct) (β : (h.comp p₂).direct ≅ q₂.direct),\n      paste f g p₁ p₂ τ h q₁ q₂ α β = σ ∧ h.direct.IsEquivalence ∧\n      ∀ (h' : GeometricMorphism Q P)\n        (α' : (h'.comp p₁).direct ≅ q₁.direct) (β' : (h'.comp p₂).direct ≅ q₂.direct),\n        paste f g p₁ p₂ τ h' q₁ q₂ α' β' = σ →\n        ∃! γ : h.direct ≅ h'.direct,\n          Functor.isoWhiskerRight γ p₁.direct ≪≫ α' = α ∧\n          Functor.isoWhiskerRight γ p₂.direct ≪≫ β' = β",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-24"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-oriented-universal-comparison",
+  "worker": "stage3",
+  "summary": "Comparison equivalence of universal oriented cones. This is a separate part of the original ten-step argument, with the precise Lean statement attached. No replacement of the unit normal-cone route.",
+  "blueprint": "ILO XI Theorem 1.4 and Definition 1.7 of the oriented-product input to the normal-cone specialization in the ancestor proof."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-15aea",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261024T015523-L-2412674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-15aea",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261024T015523-L-2412674",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to live; 12 moved defs vs live item block (docstring tags only); 2 sorry lift lemmas vs ILO XI 1.5/1.6; 25 direct importers compiled against the delivered modules"
+ }
+}

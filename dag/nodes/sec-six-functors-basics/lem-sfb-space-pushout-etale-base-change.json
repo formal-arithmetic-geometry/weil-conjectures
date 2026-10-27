@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-space-pushout-etale-base-change",
+ "kind": "statement",
+ "title": "Etale base change of an algebraic-space infinitesimal pushout",
+ "statement": "Let $B$ be a scheme and work with algebraic spaces over $B$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A thickening means a representable closed immersion inducing a homeomorphism on underlying spaces; closed immersions are tested after every scheme base change [def-weil-closed-immersion], and underlying spaces have the quotient topology from a surjective etale scheme atlas. Let $i:A\\hookrightarrow A^+$ be a thickening, let $a:A\\to C$ be affine (representable with affine scheme base changes), and suppose $Q=C\\amalg_A A^+$ is a pushout in algebraic spaces over $B$: maps from $Q$ to any algebraic space are exactly compatible maps from $C$ and $A^+$. For a scheme $E$ with a representable etale map $e:E\\to Q$, set $C_E=E\\times_Q C$, $A_E=E\\times_Q A$ and $A_E^+=E\\times_Q A^+$. The induced square is a pushout in algebraic spaces over $B$. Explicitly, for every algebraic space $H/B$, restriction induces a bijection $$\\operatorname{Mor}_B(E,H)\\longrightarrow\\operatorname{Mor}_B(C_E,H)\\times_{\\operatorname{Mor}_B(A_E,H)}\\operatorname{Mor}_B(A_E^+,H).$$ The spaces $A,C,A^+$ need not be schemes or flat or locally finitely presented over $B$, and the thickening need not have finite order.",
+ "source": {
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 07W3, lemma-equivalence-categories-spaces-pushout-flat, final assertion G(F(W\\prime)) -> W\\prime for flat W\\prime, specialized to a representable etale scheme over the pushout; the equivalence (5) identifies etale with the appropriate flat case."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product",
+  "def-a1-space-point-topology",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "The pushout existence and recovery lemma identifies the given $Q$ with its constructed pushout, so $C\\to Q$ is a thickening. Its base change $C_E\\to E$ is a thickening, as is $A_E\\to A_E^+$. The map $A_E\\to C_E$ is affine: for a scheme $T\\to C_E$, its pullback is $T\\times_C A\\to T$, which is affine by the assumed meaning of affine for $A\\to C$. Associativity of fibre products gives $C_E\\times_C A=A_E=A_E^+\\times_{A^+}A$.",
+   "uses": [
+    "lem-sfb-space-affine-thickening-pushout",
+    "lem-sfb-space-thickening-base-change",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07W3, lemma-equivalence-categories-spaces-pushout-flat, part (5) and final counit assertion, specialized to an etale E; Tag 07W0 gives recovery of the two pieces."
+   }
+  },
+  {
+   "text": "Form $Z=C_E\\amalg_{A_E}A_E^+$. Its projections to $E$ agree on $A_E$, giving a unique $f:Z\\to E$ with $e f:Z\\to Q$ the projection-induced map. The recovery assertion, applied to the base pushout and this triple, gives $Z\\times_Q C\\cong C_E$ and $Z\\times_Q A^+\\cong A_E^+$, with the isomorphisms induced by the two coprojections. Since $C_E\\to C$ and $A_E^+\\to A^+$ are base changes of $e$, both are chartwise etale. The etale-morphism criterion for pushout triples therefore makes $e f$ chartwise etale.",
+   "uses": [
+    "lem-sfb-space-affine-thickening-pushout",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-pushout-etale-morphism-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07W3, lemma-equivalence-categories-spaces-pushout-flat, part (5) and final counit assertion, specialized to an etale E; Tag 07W0 gives recovery of the two pieces."
+   }
+  },
+  {
+   "text": "Both $Z\\to Q$ and $E\\to Q$ are chartwise etale, so the permanence lemma for morphisms between etale objects makes $f$ chartwise etale. Moreover $Z\\times_E C_E=Z\\times_E(E\\times_Q C)\\cong Z\\times_Q C\\cong C_E$. The projection in this identification is $f$ restricted over $C_E$, because the recovery isomorphism is induced by the original coprojection $C_E\\to Z$. Thus the base change of $f$ to the thickening $C_E\\hookrightarrow E$ is an isomorphism. The etale thickening detection lemma shows that $f$ is an isomorphism.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-etale-thickening-detects-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07W3, lemma-equivalence-categories-spaces-pushout-flat, part (5) and final counit assertion, specialized to an etale E; Tag 07W0 gives recovery of the two pieces."
+   }
+  },
+  {
+   "text": "For a compatible pair $u:C_E\\to H$, $v:A_E^+\\to H$, the pushout property of $Z$ gives a unique $h:Z\\to H$. Set $g=h f^{-1}:E\\to H$. Since $f$ restricts to the original projections, $g$ restricts to $u,v$. If $g_1,g_2$ restrict to the same pair, then $g_1 f,g_2 f$ have the same restrictions to the two pieces of $Z$, hence are equal; composing with $f^{-1}$ gives $g_1=g_2$. This proves the claimed bijection for every algebraic space $H/B$. No step imposes a finite-order condition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07W3, lemma-equivalence-categories-spaces-pushout-flat, part (5) and final counit assertion, specialized to an etale E; Tag 07W0 gives recovery of the two pieces."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-affine-thickening-pushout",
+  "lem-sfb-space-thickening-base-change",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-space-pushout-etale-morphism-criterion",
+  "lem-sfb-space-etale-thickening-detects-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 07W3, lemma-equivalence-categories-spaces-pushout-flat, part (5) and final counit assertion, specialized to an etale E; Tag 07W0 gives recovery of the two pieces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change of an algebraic space pushout along a thickening and an affine morphism is a pushout",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.isPullback_Spec_map_pushout, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.isPullback_SpecMap_pushout, AlgebraicGeometry.isPullback_Spec_map_isPushout, AlgebraicGeometry.isPullback_SpecMap_of_isPushout, AlgebraicGeometry.Flat.instDescScheme, AlgebraicGeometry.Flat.instFstScheme, AlgebraicGeometry.Flat.instSndScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: Spec of a ring pushout is a scheme pullback, and stability of etale morphisms under base change does not assert preservation of an algebraic-space pushout"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale base change preserves a pushout of algebraic spaces along an infinitesimal thickening and an affine map",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instHasPullbacksEtale, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.isPullback_Spec_map_pushout",
+   "date": "2026-10-23",
+   "verdict": "no match: Spec of a ring pushout is a scheme pullback, and stability of etale morphisms under base change does not assert preservation of an algebraic-space pushout"
+  },
+  {
+   "tool": "grep",
+   "query": "pushout.*etale|etale.*pushout|thickening.*pushout",
+   "results": "Actual search: 0 hits; . Subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: Spec of a ring pushout is a scheme pullback, and stability of etale morphisms under base change does not assert preservation of an algebraic-space pushout"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale base change of an affine thickening pushout of algebraic spaces is a pushout",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, Algebra.Etale.baseChange, Algebra.IsPushout.cancelBaseChangeAux.congr_simp, CategoryTheory.MorphismProperty.instIsStableUnderCobaseChangePushouts, Algebra.isPushout_iff, Algebra.IsPushout.out",
+   "date": "2026-10-23",
+   "verdict": "no match: Spec of a ring pushout is a scheme pullback, and stability of etale morphisms under base change does not assert preservation of an algebraic-space pushout"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushout\", \"Etale\"",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: Spec of a ring pushout is a scheme pullback, and stability of etale morphisms under base change does not assert preservation of an algebraic-space pushout"
+  },
+  {
+   "tool": "grep",
+   "query": "pushout.*etale|etale.*pushout|thickening.*pushout",
+   "results": "Actual search: 0 hits; . Subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale permanence and Spec of a ring pushout do not give etaleness of the induced map between infinitesimal pushouts of algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale morphisms of algebraic spaces glue across an infinitesimal pushout",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, Algebra.FormallyEtale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.LocallyRingedSpace.GlueData.casesOn, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale permanence and Spec of a ring pushout do not give etaleness of the induced map between infinitesimal pushouts of algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushout\", \"Etale\"",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale permanence and Spec of a ring pushout do not give etaleness of the induced map between infinitesimal pushouts of algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The morphism from a pushout of algebraic spaces along a thickening is etale when both component morphisms are etale",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale permanence and Spec of a ring pushout do not give etaleness of the induced map between infinitesimal pushouts of algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsEtale|lemma of_comp|theorem of_comp|isPullback_Spec.*pushout",
+   "results": "Actual search: 16 hits; Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean. Subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale permanence and Spec of a ring pushout do not give etaleness of the induced map between infinitesimal pushouts of algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etaleness is preserved when gluing a pair of etale algebraic spaces along a nilpotent closed immersion and an affine morphism",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.instHasPullbacksEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale permanence and Spec of a ring pushout do not give etaleness of the induced map between infinitesimal pushouts of algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale base change preserves a pushout of algebraic spaces along an infinitesimal thickening and an affine map",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instHasPullbacksEtale, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.isPullback_Spec_map_pushout",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale permanence and Spec of a ring pushout do not give etaleness of the induced map between infinitesimal pushouts of algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsEtale|lemma of_comp|isPullback_Spec_map_pushout|IsStableUnderBaseChange",
+   "results": "3 hits in Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, lines 74, 75 and 130. Read Etale definition at line 42, base-change instance at 74 and of_comp at 130: these are permanence results for scheme morphisms, not algebraic-space infinitesimal pushout gluing.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale permanence does not state the algebraic-space pushout assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-pushout-compatible-etale-charts",
+  "date": "2026-10-23",
+  "group": "Q143"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Etale scheme charts in Tag 07W3, proof of (1)-(5) and flat counit, via equation-cube-over (07W2). Input for the lifted etale object E -> Z: Stacks 07W3 final flat counit assertion, specialized to etale base change of the pushout U, X, Y, Z.",
+   "via": [
+    "lem-sfb-space-pushout-compatible-etale-charts",
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-pushout-etale-base-change",
+  "worker": "stage1",
+  "summary": "Proved the etale counit by constructing the pushout of the restricted triple, applying the independent etaleness criterion 07W3(5), and detecting its isomorphism on the thickening C_E. Reused existing pushout recovery and etale permanence/detection nodes. Added one statement-only node for the etaleness criterion, rather than duplicating the counit in a stronger flat-base-change node. Corrected imported doubled TeX escapes only.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Etale scheme charts in Tag 07W3, proof of (1)-(5) and flat counit, via equation-cube-over (07W2). Input for the lifted etale object E -> Z: Stacks 07W3 final flat counit assertion, specialized to etale base change of the pushout U, X, Y, Z. Steps 1-4 supply the etale counit needed in the compatible-chart input without citing that dependent chart node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products and their associativity for the pullback triple; no trace-formula argument is used."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic composition, base change, and morphisms between etale objects; no same-unit node states this permanence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-737a4b994",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-737a4b994 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and the Stacks sources. Item statement is identical to live, where it is still unsplit; no repair note exists, so no supersession and no re-split rule applies. Sources: 07W3 (lemma-equivalence-categories-spaces-pushout-flat) item (5) and the flat counit, 07VX, 07W0, 05ZH (theorem-topological-invariance), 09ZX. Stacks proves the counit by: G(F(W)) to W is étale and an iso on the reduced part, hence an iso; the item follows this route. Step 1: Q is identified with the constructed pushout, C to Q is a thickening, its base change C_E to E is a thickening, A_E to C_E is affine by base change, and fibre products associate. Step 2: Z exists with the recovery isomorphisms from the statement of affine-thickening-pushout; C_E to C and A_E+ to A+ are base changes of the chartwise étale e; the new criterion makes e f chartwise étale. Step 3: f is chartwise étale by permanence (a map over Q between étale objects); the projection Z x_E C_E to C_E is a left inverse of the recovery iso, hence an iso; detects-iso then gives f an iso. Step 4 is elementary and correct. New node: true, the 'if' direction of 07W3(5) for algebraic-space bases; statement-only and self-contained; checked on identity thickening, empty pieces, dual numbers and disjoint unions. It is not a restatement of the item (it gives etaleness of an arbitrary triple, not the counit). It duplicates none of the 14 nodes citing 07W3/07RX/07RV: those are schemes only or have a scheme base. compatible-etale-charts cites the item but neither the item nor the new node cites it, so there is no cycle; the criterion can later be proved non-circularly via the 07VX charts and 07RX(5). Accepted the two tool_uses (fibre products 02X2, chartwise étale permanence 03FT/03FU/03FV); both are generic. Batch-5: every listed trf citation is a general definition or a generic tool lemma, outside the assumed trace formula and Poincaré duality statements and not a step of their proofs. No SGA source. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePushoutEtaleBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.affineThickeningPushout_etaleBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.pushoutEtaleBaseChangeMap",
+   "AlgebraicGeometry.AlgebraicSpace.affineThickeningPushout_etaleBaseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePushoutEtaleBaseChange.lean",
+  "statement": "theorem affineThickeningPushout_etaleBaseChange {B : Scheme.{u}} (A A' C Q : AlgebraicSpace B) (i : A ⟶ A') (a : A ⟶ C) (j : C ⟶ Q) (b : A' ⟶ Q) (hi : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom) (hiTop : IsHomeomorph (mapPoint i.hom.hom)) (ha : IsRepresentableWith (fun _ _ p ↦ IsAffineHom p.left) a.hom.hom) (hp : IsPushout a i j b) (E : Over B) (e : schemeSpace E ⟶ Q) (he : IsEtale e.hom.hom) : IsPushout (pushoutEtaleBaseChangeMap e (a ≫ j) j a rfl) (pushoutEtaleBaseChangeMap e (a ≫ j) b i hp.w.symm) (enlargedFibreProductFst e j) (enlargedFibreProductFst e b)",
+  "branch": "sheaf-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The theorem states IsPushout for the actual sheaf fibre products after a representable etale scheme base change. The helper defines the canonical maps between these fibre products using pullback.map, with actual data and no postponed proof. The four added, already-landed definition owners supply schemeSpace, enlargedFibreProduct and its first projection, point topology, and mapPoint; no notion is duplicated. The mathematical statement and proof plan are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-532ebf33c",
+  "group": "N5",
+  "result": "pass",
+  "note": "Read the item, all 8 stmt_dep records (all identical to live; the item gains only lean and 4 landed owner stmt_deps: def-trf-scheme-algebraic-space, def-sfb-space-sheaf-fibre-product, def-a1-space-point-topology, def-sfb-proper-curve-moduli, whose live records list schemeSpace, enlargedFibreProduct/Fst, pointTopologicalSpace and mapPoint), Stacks 07W3, the module and report. Hypotheses hi/hiTop/ha are worded exactly as in the landed SpaceAffineThickeningPushout theorems (one thickening notion, no finite order); hp is IsPushout in AlgebraicSpace B with correct orientation; e : schemeSpace E ⟶ Q with representable IsEtale; C_E, A_E, A_E+ are the actual sheaf pullbacks; the overlap maps are pullback.map with identities (real data, no choice). The IsPushout conclusion is equivalent to the node's bijection for all H. Statement field verbatim; universes all u; no extra assumptions; proof is sorry; docstrings carry source, blueprint and proof steps. No compile, since nothing was changed."
+ }
+}

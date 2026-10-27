@@ -1,0 +1,436 @@
+{
+ "id": "lem-sfb-ordered-join-functorial-expansion",
+ "kind": "statement",
+ "title": "Naturality and subset expansion of ordered join insertion-remainder summands",
+ "statement": "Let $r\\geq1$, let $I=\\{0,\\ldots,r-1\\}$, and let $X_i$ be sets with specified $v_i\\in X_i$ for $i\\in I$. For each integer $q$, let $J_q$ be the free abelian group with specified $\\mathbf Z$-basis in the sense of [def-weil-pbc-free-module] consisting of symbols $[(i_0,x_0),\\ldots,(i_q,x_q)]$ with $i_0<\\cdots<i_q$ in $I$ and $x_a\\in X_{i_a}$ when $0\\leq q<r$. Let $J_{-1}=\\mathbf Z[\\varnothing]$ with its empty-symbol basis, and let $J_q=0$ in all other degrees. Define degree-one homomorphisms $c_i$ by zero on symbols containing $i$ and by inserting $(i,v_i)$ with sign $(-1)^k$ on symbols missing $i$, where $k$ counts colors less than $i$. Define degree-zero $R_i$ by zero on symbols missing $i$ and by $R_i\\sigma=\\sigma-T_i\\sigma$ otherwise, where $T_i$ replaces the color-$i$ vertex by $(i,v_i)$. All formulas are extended by integer linearity, and all components involving zero source or target groups are zero. For $0\\leq i\\leq r$ put $P_i=R_0\\circ\\cdots\\circ R_{i-1}$, with $P_0=1$ and rightmost maps applied first. For any family of maps $u_i:X_i\\to Y_i$, give $Y_i$ the chosen point $w_i=u_i(v_i)$ and define $J_q(u)$ by applying $u_i$ to each vertex and fixing the empty symbol. Then, in every integer degree,\n$$J_{q+1}(u)c_{i,q}^{v}=c_{i,q}^{w}J_q(u),\\qquad J_q(u)R_{i,q}^{v}=R_{i,q}^{w}J_q(u).$$\nNo $u_i$ is required to be injective. For a basis symbol $\\sigma$ let $C\\subseteq I$ be its color set and $k_i=\\#\\{j\\in C:j<i\\}$. The individual summand $P_ic_i\\sigma$ is zero if $i\\in C$ or if some $j<i$ is absent from $C$. Otherwise, for $A\\subseteq\\{0,\\ldots,i-1\\}$ let $\\sigma_{i,A}$ be obtained from $\\sigma$ by inserting $(i,v_i)$ in increasing-color order and replacing the vertices of precisely the colors in $A$ by their chosen vertices. Then\n$$P_ic_i\\sigma=\\sum_{A\\subseteq\\{0,\\ldots,i-1\\}}(-1)^{k_i+|A|}\\sigma_{i,A}.$$\nThe right side is the specified unreduced list of $2^i$ terms indexed by subsets $A$; equal output symbols may occur and remain uncollected. The list of coefficients, insertion colors and replacement subsets depends only on $r$ and $C$, and uses no equality tests between original and chosen vertices. The formula includes the empty symbol and top-degree symbols.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), Agent ordered-join expansion, original calculations 7-8: arbitrary-map naturality and the unreduced subset-indexed expansion of each summand. Not asserted in the blueprint itself."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-free-module], every chain has a unique finite integer expansion in the specified symbols. A finite expression assigned to each basis symbol therefore extends to a homomorphism by taking the same integer linear combinations, and equality of homomorphisms can be checked on symbols. The formulas for $c_i$, $R_i$ and $J(u)$ have respectively at most one, two and one terms, so this applies to all of them, even when different input symbols have the same image under $J(u)$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-sfb-ordered-join-chains"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent ordered-join calculation below the continuous-cocycle descent route; explicit proof from the operators defined in this item, not a claim made in the blueprint. Calculation 1."
+   }
+  },
+  {
+   "text": "Fix a symbol $\\sigma$ with color set $C$. Applying $u$ changes no color or position. If $i\\in C$, both sides of the insertion identity vanish. Otherwise both sides insert $(i,u_i(v_i))=(i,w_i)$ at position $k_i$, retain all other vertices as $(j,u_j(x_j))$, and have coefficient $(-1)^{k_i}$. This proves $J(u)c_i^v=c_i^wJ(u)$ on symbols and hence on chains by step 1; it uses no injectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent ordered-join calculation below the continuous-cocycle descent route; explicit proof from the operators defined in this item, not a claim made in the blueprint. Calculation 2."
+   }
+  },
+  {
+   "text": "If $i\\notin C$, both sides of the remainder identity are zero. If $i\\in C$, applying $u$ to $T_i^v\\sigma$ replaces the $i$-vertex by $u_i(v_i)=w_i$ and sends every other vertex to its $u$-image, which is exactly $T_i^wJ(u)\\sigma$. Thus both sides equal $J(u)\\sigma-T_i^wJ(u)\\sigma$. Linearity gives $J(u)R_i^v=R_i^wJ(u)$, including when the two displayed terms coincide and cancel.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent ordered-join calculation below the continuous-cocycle descent route; explicit proof from the operators defined in this item, not a claim made in the blueprint. Calculation 3."
+   }
+  },
+  {
+   "text": "If $i\\in C$ then $c_i\\sigma=0$, so $P_ic_i\\sigma=0$. Suppose $i\\notin C$ and some $j<i$ is absent from $C$. The inserted symbol has color set $C\\cup\\{i\\}$, still missing $j$. In the composite $R_0\\circ\\cdots\\circ R_{i-1}$, factors with index greater than $j$ act first. Each sends any symbol to zero or to a difference of symbols with the same color set. Consequently all terms still miss $j$ when $R_j$ is applied; that factor kills them, and every remaining factor sends zero to zero. This proves the other asserted vanishing without interchanging any factors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent ordered-join calculation below the continuous-cocycle descent route; explicit proof from the operators defined in this item, not a claim made in the blueprint. Calculation 4."
+   }
+  },
+  {
+   "text": "Assume every color less than n occurs in a face tau. Prove by induction on n that P_n[tau] is the sum over A subset {j : j<n} of (-1)^|A| [replace_A(tau)], in every degree (symbolTerm is zero for wrong cardinality). For n=0 the sole subset is empty and replacement is the identity. For n+1, the actual rightmost-first definition gives P_(n+1)=P_n composed with R_n. Since n occurs, this sends [tau] to P_n[tau]-P_n[replace_{n}(tau)]. Apply the induction hypothesis to both terms: replacement preserves colors. Composing replacements replaces their union. Partition subsets of {j : j<n+1} according as they contain n, using the powerset-insert sum formula; n is absent from every old subset, so adding it raises cardinality by one and negates the coefficient. This proves the induction. Apply it with n=i and tau=insert_i(sigma), then multiply by (-1)^k_i. The identity (-1)^(k_i+|A|)=(-1)^k_i*(-1)^|A| gives the exact signed list sum.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent ordered-join calculation below the continuous-cocycle descent route; explicit proof from the operators defined in this item, not a claim made in the blueprint. Calculation 5."
+   }
+  },
+  {
+   "text": "The induction retains one formal term for each subset, even when chosen vertices already equal the original vertices. Its branching tests only membership of a color in a subset, never equality of vertices. The subset choices, insertion color and coefficient $(-1)^{k_i+|A|}$ depend only on $r,C,i$, and there are $2^i$ choices. For the empty symbol $C=\\varnothing$, the $i=0$ summand is $[(0,v_0)]$ and every $i>0$ summand vanishes by step 4. For a top-degree symbol $C=I$, every insertion is zero. All identities involving other degrees hold as equalities of zero homomorphisms: if the source is zero this is automatic, and the only nonzero source with zero insertion target is the top degree just checked. Thus the conclusions include all stipulated degrees.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent ordered-join calculation below the continuous-cocycle descent route; explicit proof from the operators defined in this item, not a claim made in the blueprint. Calculation 6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-sfb-ordered-join-chains"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent ordered-join calculation below the continuous-cocycle descent route; explicit proof from the operators defined in this item, not a claim made in the blueprint. G7 stage 3 implements the subset induction by ascending prefix length, using P_(n+1)=P_n composed with R_n, rather than descending the lower endpoint; the operators and statement are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Signed insertion and basepoint vertex replacement on colored join chains are natural for arbitrary maps and their ordered product has a subset indexed finite signed expansion",
+   "results": {
+    "t": "2026-10-22T06:11:05Z",
+    "tool": "leanfinder",
+    "query": "Signed insertion and basepoint vertex replacement on colored join chains are natural for arbitrary maps and their ordered product has a subset indexed finite signed expansion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Combinatorics.Line.horizontal",
+     "SimplexCategoryGenRel.simplicialInsert_isAdmissible",
+     "Combinatorics.Line.vertical",
+     "SimplexCategoryGenRel.simplicialInsert",
+     "Profinite.NobelingProof.Products.evalCons",
+     "le_collapse_of_insert_mem",
+     "SimplexCategoryGenRel.IsAdmissible.cons_cons",
+     "Profinite.NobelingProof.GoodProducts.chain'_cons_of_lt"
+    ],
+    "digest": "71d7e79d4da98c20"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: simplicial splittings and normal forms do not give these vertex maps; Finset.prod_sub assumes a commutative ring and does not supply the ordered replacement action, support vanishing or arbitrary-map naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Expand products of identity minus vertex replacement on free simplicial chains as sums over subsets, with coefficients independent of vertices and functorial under maps of pointed sets",
+   "results": {
+    "t": "2026-10-22T06:11:06Z",
+    "tool": "leanfinder",
+    "query": "Expand products of identity minus vertex replacement on free simplicial chains as sums over subsets, with coefficients independent of vertices and functorial under maps of pointed sets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplicialObject.Splitting.summand",
+     "AlgebraicTopology.DoldKan.Γ₀.Obj.summand",
+     "AlgebraicTopology.DoldKan.decomposition_Q",
+     "SSet.prodStdSimplex.orderHomOfSimplex_coe",
+     "SSet.prodStdSimplex.objEquiv_δ_apply",
+     "AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id",
+     "AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand",
+     "AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀"
+    ],
+    "digest": "a6289ae01f1be3a7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: simplicial splittings and normal forms do not give these vertex maps; Finset.prod_sub assumes a commutative ring and does not supply the ordered replacement action, support vanishing or arbitrary-map naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Finset\", \"prod_sub\"",
+   "results": {
+    "t": "2026-10-22T06:10:51Z",
+    "tool": "loogle",
+    "query": "\"Finset\", \"prod_sub\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Finset.prod_subtype_eq_prod_filter",
+     "Finset.prod_subtype_of_mem",
+     "Finset.prod_subtype",
+     "Finset.prod_subset",
+     "Finset.prod_subset_one_on_sdiff",
+     "Finset.prod_subtype_map_embedding",
+     "Finset.support_prod_subset",
+     "Finset.prod_sub"
+    ],
+    "digest": "b5e6c7d9e50a3ac6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: simplicial splittings and normal forms do not give these vertex maps; Finset.prod_sub assumes a commutative ring and does not supply the ordered replacement action, support vanishing or arbitrary-map naturality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordered product of identity minus vertex replacements has a natural signed powerset expansion on free abelian chains",
+   "results": {
+    "t": "2026-10-22T06:10:51Z",
+    "tool": "leansearch",
+    "query": "The ordered product of identity minus vertex replacements has a natural signed powerset expansion on free abelian chains",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "grep",
+   "query": "(replacement|colored|coloured|join).*(powerset|naturality|natural)|(powerset|naturality).*(replacement|colored|coloured)",
+   "results": {
+    "t": "2026-10-22T06:10:51Z",
+    "tool": "grep",
+    "query": "(replacement|colored|coloured|join).*(powerset|naturality|natural)|(powerset|naturality).*(replacement|colored|coloured)",
+    "sub": "AlgebraicTopology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: simplicial splittings and normal forms do not give these vertex maps; Finset.prod_sub assumes a commutative ring and does not supply the ordered replacement action, support vanishing or arbitrary-map naturality."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem prod_sub|lemma prod_sub",
+   "results": {
+    "t": "2026-10-22T06:12:12Z",
+    "tool": "grep",
+    "query": "theorem prod_sub|lemma prod_sub",
+    "sub": "Algebra/BigOperators/Ring/Finset.lean",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "259",
+     "264"
+    ],
+    "digest": "47aa0ab7b5ebc80a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: simplicial splittings and normal forms do not give these vertex maps; Finset.prod_sub assumes a commutative ring and does not supply the ordered replacement action, support vanishing or arbitrary-map naturality."
+  },
+  {
+   "tool": "grep",
+   "query": "(replacement|colored|coloured|join).*(powerset|naturality|natural)|(powerset|naturality).*(replacement|colored|coloured)",
+   "results": {
+    "t": "2026-10-23T09:39:55Z",
+    "tool": "grep",
+    "query": "(replacement|colored|coloured|join).*(powerset|naturality|natural)|(powerset|naturality).*(replacement|colored|coloured)",
+    "sub": "AlgebraicTopology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned scalar commutative-ring products, ordered-list insertion or other combinatorics, not the specified colored-chain operators, arbitrary-map naturality and unreduced vertex recipe. Finset.prod_sub at Mathlib/Algebra/BigOperators/Ring/Finset.lean:259 was read; it requires a commutative ring and does not state these operator identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordered product of identity minus vertex replacements on free abelian colored chains expands over subsets and is natural for arbitrary pointed maps",
+   "results": {
+    "t": "2026-10-23T09:39:55Z",
+    "tool": "leansearch",
+    "query": "The ordered product of identity minus vertex replacements on free abelian colored chains expands over subsets and is natural for arbitrary pointed maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Finset.prod_one_sub_ordered",
+     "Finset.prod_sub_ordered",
+     "Finset.prod_add_ordered",
+     "Finset.prod_one_add_ordered",
+     "AlgebraicTopology.DoldKan.Q",
+     "Topology.reorderRestrictProd_restrict_compl",
+     "ExteriorAlgebra.ιMulti_family",
+     "MvPolynomial.expand_mul_eq_comp"
+    ],
+    "digest": "81191c14e7a1b61b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned scalar commutative-ring products, ordered-list insertion or other combinatorics, not the specified colored-chain operators, arbitrary-map naturality and unreduced vertex recipe. Finset.prod_sub at Mathlib/Algebra/BigOperators/Ring/Finset.lean:259 was read; it requires a commutative ring and does not state these operator identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Finset\", \"prod_sub\"",
+   "results": {
+    "t": "2026-10-23T09:39:55Z",
+    "tool": "loogle",
+    "query": "\"Finset\", \"prod_sub\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Finset.prod_subtype_eq_prod_filter",
+     "Finset.prod_subtype_of_mem",
+     "Finset.prod_subtype",
+     "Finset.prod_subset",
+     "Finset.prod_subset_one_on_sdiff",
+     "Finset.prod_subtype_map_embedding",
+     "Finset.support_prod_subset",
+     "Finset.prod_sub"
+    ],
+    "digest": "b5e6c7d9e50a3ac6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned scalar commutative-ring products, ordered-list insertion or other combinatorics, not the specified colored-chain operators, arbitrary-map naturality and unreduced vertex recipe. Finset.prod_sub at Mathlib/Algebra/BigOperators/Ring/Finset.lean:259 was read; it requires a commutative ring and does not state these operator identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed basepoint insertion and vertex replacement on ordered colored join chains commute with maps of pointed sets and expand as a signed sum indexed by subsets",
+   "results": {
+    "t": "2026-10-23T09:40:04Z",
+    "tool": "leanfinder",
+    "query": "Signed basepoint insertion and vertex replacement on ordered colored join chains commute with maps of pointed sets and expand as a signed sum indexed by subsets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.Products.evalCons",
+     "Combinatorics.Line.horizontal_apply",
+     "collapse_of_mem",
+     "Combinatorics.Line.vertical_apply",
+     "SimplexCategoryGenRel.simplicialInsert",
+     "collapse_eq",
+     "OrderedFinpartition.extendMiddle",
+     "SimplexCategoryGenRel.standardσ_simplicialInsert"
+    ],
+    "digest": "eb585d4c15e7a5a1"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned scalar commutative-ring products, ordered-list insertion or other combinatorics, not the specified colored-chain operators, arbitrary-map naturality and unreduced vertex recipe. Finset.prod_sub at Mathlib/Algebra/BigOperators/Ring/Finset.lean:259 was read; it requires a commutative ring and does not state these operator identities."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem prod_sub|lemma prod_sub",
+   "results": {
+    "t": "2026-10-23T09:41:50Z",
+    "tool": "grep",
+    "query": "theorem prod_sub|lemma prod_sub",
+    "sub": "Algebra/BigOperators/Ring/Finset.lean",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "259",
+     "264"
+    ],
+    "digest": "47aa0ab7b5ebc80a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned scalar commutative-ring products, ordered-list insertion or other combinatorics, not the specified colored-chain operators, arbitrary-map naturality and unreduced vertex recipe. Finset.prod_sub at Mathlib/Algebra/BigOperators/Ring/Finset.lean:259 was read; it requires a commutative ring and does not state these operator identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Expand a composition of identity minus coordinate replacement maps on a free abelian group into an uncollected list indexed by subsets, preserving colors and commuting with arbitrary maps of vertex sets",
+   "results": {
+    "t": "2026-10-23T09:42:01Z",
+    "tool": "leanfinder",
+    "query": "Expand a composition of identity minus coordinate replacement maps on a free abelian group into an uncollected list indexed by subsets, preserving colors and commuting with arbitrary maps of vertex sets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FreeAddGroup.Red.Step.lift",
+     "Mathlib.Tactic.LinearCombination.Expanded",
+     "FreeAddGroup.Lift.aux",
+     "FormalMultilinearSeries.compChangeOfVariables",
+     "Mathlib.Tactic.LinearCombination'.Expanded",
+     "Mathlib.Tactic.LinearCombination'.Expanded.proof",
+     "Mathlib.Tactic.LinearCombination.expandLinearCombo",
+     "FormalMultilinearSeries.compChangeOfVariables_blocksFun"
+    ],
+    "digest": "3d045bf9fdd9969a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned scalar commutative-ring products, ordered-list insertion or other combinatorics, not the specified colored-chain operators, arbitrary-map naturality and unreduced vertex recipe. Finset.prod_sub at Mathlib/Algebra/BigOperators/Ring/Finset.lean:259 was read; it requires a commutative ring and does not state these operator identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ordered-join-partial-contraction",
+  "date": "2026-10-22",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), below local continuous-cocycle descent; Agent ordered-join expansion, original calculations 7-8: arbitrary-map naturality and the unreduced subset-indexed expansion of each summand. This is an agent expansion, not asserted by the blueprint.",
+   "via": [
+    "lem-sfb-ordered-join-partial-contraction",
+    "lem-sfb-homogeneous-cocycle-rectangle-detection",
+    "lem-sfb-local-norm-algcl-cocycle-descent",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ordered-join-functorial-expansion",
+  "worker": "stage1",
+  "summary": "Q105 writes six explicit elementary calculations from the stated basis and operators: linear extension, insertion naturality, remainder naturality, support vanishing, descending subset induction in the specified composition order, and recipe/degree checks. No statement change and no new nodes. Current blueprint read; this remains honestly labelled an agent expansion. Fresh logged searches supplement the inherited searches.",
+  "blueprint": "Latest direct-images proof paragraph (3), agent expansion below the continuous-cocycle descent route, original calculations 7-8 of the ordered-join partial-contraction split. Ancestor command returns None; inherited null ancestor and via chain retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-704ea296c",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-704ea296c (reviewer sub-agent of L); spot-checked: Ordinary split of an unsplit leaf: there is no repair note for the item. Against the live base, the statement, stmt_deps, source and blueprint are byte-identical; only the proof, proof_origin, status, split_report and the appended searches changed. The six elementary steps carry, in more explicit form, all of parent lem-sfb-ordered-join-partial-contraction's original calculations 7-8 (Q136 report), which is what parent assembly step 4 uses. Step checks: (1) linear extension uses the unique expansion stated by def-weil-pbc-free-module (Mathlib leaf Module.Free); (2) and (3) insertion and remainder naturality hold on symbols because u keeps colors and positions and u_i(v_i)=w_i, including the empty symbol, with no injectivity; (4) vanishing when i is in C or a lower color is missing respects the rightmost-first order and commutes no factors; (5) the descending induction Q_m τ = Σ_{A⊆B_m} (-1)^{|A|} τ_A has its claim, base and step stated, with k_i=i; (6) there are 2^i uncollected terms, the empty symbol gives [(0,v_0)], top-degree insertions are 0, and other degrees are zero groups. My own brute force (r=1..4, X_i={0,1}, every choice of chosen points, every symbol and every i): 5910 cases, all equal to the stated signed subset sum. Source: blueprint paragraph (3) of the direct-images proof (main-20261015 / latest) is the compactification argument; the node correctly labels the lemma an agent expansion (by: agent). No SGA. No new nodes. rg -L found no duplicate: single-color-identities, prefix-telescope, coset-comparison, homogeneous-tuple-prefix-homotopy and the coef join nodes all differ. The 2026-10-23 searches cover all three kinds with logged results, and the earlier unavailable LeanSearch entry is honestly marked. No tool_uses needed. Advisory: proof_origin points to the moving blueprint/latest symlink; lean_audit is absent, as on the base; from.node is null, inherited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.OrderedJoinFunctorialExpansion",
+  "declaration": "AlgebraicTopology.OrderedJoin.functorialExpansion",
+  "declarations": [
+   "AlgebraicTopology.OrderedJoin.summandRecipe",
+   "AlgebraicTopology.OrderedJoin.functorialExpansion"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/OrderedJoinFunctorialExpansion.lean",
+  "statement": "theorem functorialExpansion (r : ℕ) (hr : 1 ≤ r) (X : Fin r → Type u) (v : ∀ i : Fin r, X i) : (∀ (Y : Fin r → Type v) (f : ∀ i : Fin r, X i → Y i) (q : ℤ) (i : Fin r), (chainMap f (q + 1)).comp (insertion v i q (q + 1)) = (insertion (fun j ↦ f j (v j)) i q (q + 1)).comp (chainMap f q) ∧ (chainMap f q).comp (remainder v i q) = (remainder (fun j ↦ f j (v j)) i q).comp (chainMap f q)) ∧ (∀ (q : ℤ) (σ : Symbol X q) (i : Fin r), ((i ∈ σ.val.colors ∨ ∃ j : Fin r, j < i ∧ j ∉ σ.val.colors) → (remainderPrefix v i.val (q + 1)) (insertion v i q (q + 1) (Finsupp.single σ 1)) = 0) ∧ (i ∉ σ.val.colors → (∀ j : Fin r, j < i → j ∈ σ.val.colors) → (remainderPrefix v i.val (q + 1)) (insertion v i q (q + 1) (Finsupp.single σ 1)) = ((summandRecipe r σ.val.colors i).map (fun t ↦ t.1 • symbolTerm X (q + 1) (replaceColors v t.2.2 (insert v t.2.1 σ.val)))).sum)) ∧ (∀ (C : Finset (Fin r)) (i : Fin r), (summandRecipe r C i).length = 2 ^ i.val)",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the existing Face, Symbol, Chain, insertion, remainder, remainderPrefix, chainMap, insert, replaceColors and symbolTerm from OrderedJoinPartialContraction; does not use its downstream theorem partialContraction. The only new data is the individual summand subset recipe already specified in this node. All original statement and proof fields are unchanged. Constructions are now publicly imported from Sheaf.AlgebraicTopology.OrderedJoinChains; this declaration and its complete proof are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a3067a939",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Item functorialExpansion matches the node clause by clause. Insertion sign (-1)^#{j<i in C}; remainder zero off colour i, else sigma - T_i sigma. The prefix foldr over range i gives R_0∘…∘R_{i-1}, rightmost first, identity at 0. chainMap preserves colours, Y is in an independent universe and there is no injectivity. Both naturality identities hold for all q:ℤ and every i. The vanishing and expansion hypotheses are exactly complementary. summandRecipe gives (-1)^(k_i+|A|) over the powerset of {j<i}; it is unreduced, depends only on (r,C,i), has length 2^i, and inserts then replaces. Edge cases checked: empty symbol, top symbol, r=1. The statement is verbatim, the docstrings are complete, the proof is sorry only, and nothing is hollow. The node is unchanged apart from lean. No duplicate: parent expansionRecipe is the aggregate list. M1 maintainer advisory: the defs are owned by parent theorem lem-sfb-ordered-join-partial-contraction, whose proof_deps cite the item, so there is a future import cycle. The report acknowledges the rule-7 exclusion, as in sibling NR single-color-identities. Move Face…chainMap to a def-node module. No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-93fb1",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T071219-L-148254",
+  "kind": "interface",
+  "note": "independent cc review: the clone's item definitions vs the new OrderedJoinChains (byte-identical); partialContraction statement vs the clone (identical); the two prerequisite modules vs the clone (only the line-8 import changed); node proof fields vs the Lean proof; sandbox compile of the 4 delivered modules plus importers CosetComparison and FiniteIndexRectanglePrimitiveOperator (all OK); axioms clean"
+ }
+}

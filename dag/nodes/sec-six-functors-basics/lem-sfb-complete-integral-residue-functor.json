@@ -1,0 +1,312 @@
+{
+ "id": "lem-sfb-complete-integral-residue-functor",
+ "kind": "statement",
+ "title": "Exact residue reduction on the triangulated category of complete integral complexes",
+ "statement": "Let $X$ be any scheme on its fixed small pro-étale site [def-weil-pbc-proetale-site, def-weil-size-convention]. Let $\\ell$ be prime and $E/\\mathbf Q_\\ell$ a finite extension, with valuation ring $\\mathcal O_E$, uniformizer $\\pi_E$ and finite residue field $\\kappa=\\mathcal O_E/\\pi_E$ [def-weil-l-adic-coefficient-extension]. Put $R_X=p_X^*\\underline{\\mathcal O_E}$ and $S_X=p_X^*\\underline\\kappa$ [sk-def-sfb-pulled-back-coefficients], and use ordinary unbounded module derived categories [sk-def-sfb-derived-categories]. Write $C(K)$ for derived $\\pi_E$-completeness, namely invertibility of the specified canonical map $K\\to R\\varprojlim_{n\\geq1}(K\\otimes^L_{R_X}(\\mathcal O_E/\\pi_E^n)_X)$ [sk-def-pe-derived-completion]. Then $C(0)$ holds, $C$ is invariant under isomorphisms, $C(K[r])\\Longleftrightarrow C(K)$ for every integer $r$, and in every ambient distinguished triangle any two complete vertices imply completeness of the third. Let $\\kappa_X^{\\mathrm{cst}}$ be the sheafification of the constant ring presheaf, and let $\\kappa_X^{\\mathrm{cont}}=(U\\mapsto\\operatorname{Cont}(\\pi_0(|U|),\\kappa))^\\#$ with the quotient topology on $\\pi_0(|U|)$ [def-weil-pbc-proetale-modules, def-weil-pbc-sheafification]. The constant-function morphism $\\kappa_X^{\\mathrm{cst}}\\to\\kappa_X^{\\mathrm{cont}}$ is a ring-sheaf isomorphism. Together with the finite discrete coefficient comparison [lem-sf-module-object-ordinary-coefficient-equivalence], it identifies $S_X$ with this same constant coefficient ring, by isomorphisms agreeing on every constant scalar. Under this identification, derived extension of scalars along $R_X\\to S_X$, retaining the $S_X$-module structure [lem-pur-derived-change-of-rings], gives an exact functor $T_1:D(\\operatorname{Mod}(R_X))\\to D(\\operatorname{Mod}(\\kappa_X^{\\mathrm{cont}}))$, whose value is the actual residue reduction $K\\otimes^L_{R_X}S_X$ [sk-def-sfb-derived-tensor-hom]. This functor preserves zero, isomorphisms, all integer shifts and distinguished triangles, and its restriction to the strictly full subcategory of complete objects is triangulated. Neither boundedness of the integral complexes nor any Noetherian, quasi-compactness, dimension, finite-type or invertibility hypothesis on $X$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+  "place": "Paragraph (1), first two sentences, expanded as returned steps 1–3 of lem-sfb-integral-residue-class-triangle-closure; completion source sk-lem-pe-derived-nakayama-first-reduction.proof.md, Cones paragraph. Stacks Tags 014A (derived-lemma-third-isomorphism-triangle), 06YY (sites-cohomology-lemma-derived-base-change), 093I (sites-modules-section-constant)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-categories",
+  "sk-def-pe-derived-completion",
+  "def-weil-pbc-proetale-modules",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-sheafification",
+  "lem-sf-module-object-ordinary-coefficient-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pe-completion-triangle-comparison] in the specified coefficient category: it supplies an additive endofunctor $F$, a natural transformation $c:\\mathrm{id}\\Rightarrow F$, and $C(K)\\Longleftrightarrow c_K$ invertible for the actual canonical completion map. Since $F$ is additive, $F(0)$ is zero (its identity is $F(0)=0$), so $c_0$ is invertible. For an isomorphism $e:K\\to L$, naturality gives $c_L=F(e)c_Ke^{-1}$, proving isomorphism invariance. Its shift equation $\\sigma_{K,r}c_{K[r]}=c_K[r]$, with $\\sigma_{K,r}$ invertible and $[r]$ an equivalence, proves $C(K[r])\\Longleftrightarrow C(K)$.",
+   "uses": [
+    "lem-pe-completion-triangle-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Cones paragraph: canonical completion maps and shifts"
+   }
+  },
+  {
+   "text": "For a distinguished triangle $T=(K\\to L\\to M\\to K[1])$, [lem-pe-completion-triangle-comparison] supplies a distinguished image triangle $F(T)$ and the morphism $(c_K,c_L,c_M)$, including the square with $c_K[1]$. If any two vertices are complete, the corresponding two components are invertible. Apply [lem-sf-triangle-morphism-iso] to obtain invertibility of the third, and hence its completeness. Together with step 1 these are the hypotheses of [def-weil-triangulated-subcategory]; the strictly full complete subcategory therefore has the inherited triangulation and exact inclusion.",
+   "uses": [
+    "lem-pe-completion-triangle-comparison",
+    "lem-sf-triangle-morphism-iso",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Cones paragraph; Stacks Tag 014A, lemma-third-isomorphism-triangle"
+   }
+  },
+  {
+   "text": "For every site object $U$, a continuous map $|U|\\to\\kappa$ is constant on every connected component, because $\\kappa$ is discrete. Its induced function on $\\pi_0(|U|)$ is continuous by the definition of the quotient topology; conversely composition with the quotient is continuous. These mutually inverse operations commute with restriction and pointwise ring operations. Thus the presheaf in [def-weil-pbc-proetale-modules] is the continuous-function ring presheaf on $|U|$. The discrete-target clause of [lem-sfb-continuous-set-descent-components] says this presheaf is already a sheaf and identifies the constant set sheaf with it by constant functions. By [lem-pc-sites-sheafification-underlying-sets], the underlying set maps of the ring sheafifications defining $\\kappa_X^{\\mathrm{cst}}$ and $\\kappa_X^{\\mathrm{cont}}$ are the set sheafifications; so $\\kappa_X^{\\mathrm{cont}}$ is this sheaf and $a$ is that bijection. As $a$ preserves $0,1,+,\\cdot$, it is an isomorphism of ring sheaves. This proves that the specified constant-function map $a:\\kappa_X^{\\mathrm{cst}}\\to\\kappa_X^{\\mathrm{cont}}$ is invertible, without a quasi-compactness assumption.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "lem-sfb-continuous-set-descent-components",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, p.30; elementary discrete quotient-factorization and ring refinement of the cited set-sheaf comparison"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-module-object-ordinary-coefficient-equivalence] to the finite commutative discrete ring $\\kappa$ and the same scheme $X$. Choose its coefficient isomorphism in the normalized form provided by [lem-sf-finite-discrete-normalized-encoding]: $b:\\kappa_X^{\\mathrm{cst}}\\xrightarrow{\\sim}S_X$ sends each constant scalar to that scalar in the pulled-back ring. Set $e=a b^{-1}:S_X\\xrightarrow{\\sim}\\kappa_X^{\\mathrm{cont}}$. For a constant scalar $u$, $e(b(u))=a(u)$ is the constant function $u$. Hence the two identifications agree on every constant scalar. By the universal property in [def-weil-pbc-sheafification], ring maps from the associated constant ring sheaf with these scalar values are equal; the identification is the specified one.",
+   "uses": [
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "lem-sf-finite-discrete-normalized-encoding",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (1), finite residue coefficient identification; normalized encoding in sk-prop-sf-rf-shriek-preservation.proof.md, coefficient-identification steps 1–3"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-derived-change-of-rings] to the actual ring-sheaf map $R_X\\to S_X$. It gives the everywhere-defined exact functor $F_1=-\\otimes^L_{R_X}S_X$ with values in $D(S_X)$, retaining its $S_X$-action. To compare with the relative tensor convention [sk-def-sfb-derived-tensor-hom], take a flat-term K-flat representative $P$ by [lem-pc-kflat-resolution]. The section-action equivalence of [lem-pe-internal-section-tensor-comparison] identifies the relative tensor complex with the ordinary sheaf tensor complex by $p\\otimes s\\mapsto p\\otimes s$, and preserves and reflects K-flatness. Its acyclic-test K-flat representatives also preserve quasi-isomorphisms: tensoring $\\operatorname{Cone}(u)$ gives $\\operatorname{Cone}(P\\otimes u)$, which is acyclic. Thus both derived constructions are computed by $P\\otimes_{R_X}S_X$ and give the actual residue reduction with its $S_X$-module structure, naturally in $K$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "sk-def-sfb-derived-tensor-hom",
+    "lem-pc-kflat-resolution",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, lemma-K-flat-resolution, and 06YY, lemma-derived-base-change; section tensor comparison at Tag 03EK"
+   }
+  },
+  {
+   "text": "Relabel an $S_X$-module by letting $t\\in\\kappa_X^{\\mathrm{cont}}$ act as $e^{-1}(t)$. This is an additive equivalence with inverse relabelling through $e$; it leaves the underlying abelian sheaves and maps unchanged, so kernels and cokernels are unchanged and it is exact. By [lem-sf-exact-functor-derived-triangulated] its termwise derived functor $D(e_*)$ commutes with shifts and preserves distinguished triangles. Set $T_1=D(e_*)F_1$. Both factors are exact; consequently $T_1$ preserves zero, all shifts and distinguished triangles, and, as a functor, preserves isomorphisms. On a K-flat representative its value is precisely $P\\otimes_{R_X}S_X$ with the coefficient relabelling of step 4. Compose with the exact inclusion from step 2 to obtain its triangulated restriction to complete objects. All cited completion and coefficient results apply to arbitrary $X$ and unbounded complexes; no geometric finiteness or invertibility condition has entered.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (1): exact reduction and restriction to the complete subcategory; Stacks Tag 015F, lemma-right-derived-exact-functor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-completion-triangle-comparison",
+  "lem-sf-triangle-morphism-iso",
+  "def-weil-triangulated-subcategory",
+  "def-weil-pbc-proetale-modules",
+  "lem-sfb-continuous-set-descent-components",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "def-weil-pbc-sheafification",
+  "lem-pur-derived-change-of-rings",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-pc-kflat-resolution",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+  "place": "Paragraph (1), first two sentences; assembly using the canonical completion comparison and ring-sheaf scalar extension"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constant.*[Mm]odule.*[Ee]quiv|[Ee]quiv.*constant.*[Mm]odule|pro[Ee]tale",
+   "results": "11 hits: Mathlib/Topology/Category/Profinite/Nobeling/Induction.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic inverse-image triangulation, ordinary adic completion and ambient derived structures do not supply the specified canonical completion locus and normalized actual residue scalar-extension functor on this sheaf category"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|derived.complete.*triang|completion.*[Cc]ommShift",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic inverse-image triangulation, ordinary adic completion and ambient derived structures do not supply the specified canonical completion locus and normalized actual residue scalar-extension functor on this sheaf category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pi complete sheaf complexes are closed under zero shifts and two out of three, with exact derived reduction modulo pi",
+   "results": "8 hits: DerivedCategory.instIsTriangulated, DerivedCategory.instHasZeroObject, DerivedCategory.instHasShiftInt, DerivedCategory.instCommShiftCochainComplexIntQ, CategoryTheory.ShortComplex.Exact.recOn, DerivedCategory.TStructure.t, CategoryTheory.ShortComplex.Exact.casesOn, CategoryTheory.ShortComplex.preservesZeroMorphisms_π₁",
+   "date": "2026-10-22",
+   "verdict": "no match: generic inverse-image triangulation, ordinary adic completion and ambient derived structures do not supply the specified canonical completion locus and normalized actual residue scalar-extension functor on this sheaf category"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ObjectProperty\", \"IsTriangulated\", \"inverseImage\"",
+   "results": "2 hits: CategoryTheory.ObjectProperty.instIsTriangulatedInverseImage, CategoryTheory.ObjectProperty.instIsTriangulatedFullSubcategoryFunctorTrWInverseImageιTriangulatedLocalizerMorphism",
+   "date": "2026-10-22",
+   "verdict": "no match: generic inverse-image triangulation, ordinary adic completion and ambient derived structures do not supply the specified canonical completion locus and normalized actual residue scalar-extension functor on this sheaf category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For integral proetale coefficient sheaves of a finite l-adic extension, derived complete complexes form a triangulated subcategory and residue scalar extension is exact with its finite constant coefficient structure",
+   "results": "8 hits: BDeRhamPlus, BDeRham, Condensed.profiniteSolid, instCommRingBDeRhamPlus, Profinite.NobelingProof.succ_exact, AdicCompletion.map_exact, localCohomology.diagram, CondensedMod.IsSolid",
+   "date": "2026-10-22",
+   "verdict": "no match: generic inverse-image triangulation, ordinary adic completion and ambient derived structures do not supply the specified canonical completion locus and normalized actual residue scalar-extension functor on this sheaf category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The isomorphism locus of the canonical derived adic completion unit is stable under triangles, and reduction to the residue ring preserves distinguished triangles",
+   "results": "8 hits: CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism, CategoryTheory.Triangulated.TStructure.triangle_iso_exists, DerivedCategory.mem_distTriang_iff, DerivedCategory.TStructure.t, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE, CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle",
+   "date": "2026-10-22",
+   "verdict": "no match: generic inverse-image triangulation, ordinary adic completion and ambient derived structures do not supply the specified canonical completion locus and normalized actual residue scalar-extension functor on this sheaf category"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|derived.*complet|complet.*derived",
+   "results": "OK: 0 hits; ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned generic triangulated or ordinary adic-completion declarations do not state the canonical complete locus and actual residue functor over the continuous integral ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete complexes of sheaves form a triangulated subcategory and derived extension of scalars to the residue field is exact",
+   "results": "OK: 8 hits; DerivedCategory.instIsTriangulated, HasDerivedCategory, HasDerivedCategory.standard, DerivedCategory.instCategory, DerivedCategory.instPretriangulated, HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned generic triangulated or ordinary adic-completion declarations do not state the canonical complete locus and actual residue functor over the continuous integral ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTriangulated\", \"ObjectProperty\"",
+   "results": "OK: 12 hits; CategoryTheory.ObjectProperty.IsTriangulated, CategoryTheory.ObjectProperty.IsTriangulatedClosed₁, CategoryTheory.ObjectProperty.IsTriangulatedClosed₂, CategoryTheory.ObjectProperty.IsTriangulatedClosed₃, CategoryTheory.ObjectProperty.IsTriangulated.toContainsZero, CategoryTheory.ObjectProperty.IsTriangulated.toIsStableUnderShift, CategoryTheory.ObjectProperty.instIsClosedUnderBinaryProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms, CategoryTheory.ObjectProperty.instIsClosedUnderFiniteProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned generic triangulated or ordinary adic-completion declarations do not state the canonical complete locus and actual residue functor over the continuous integral ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived completion unit for sheaves of integral adic modules has a triangulated isomorphism locus and derived reduction to the finite residue field is an exact functor",
+   "results": "OK: 8 hits; AdicCompletion.map_exact, localCohomology.diagram, LightCondensed.instIsGrothendieckAbelianLightCondMod, localCohomology, CondensedMod.IsSolid, localCohomology.ofDiagram, localCohomology.isoOfFinal, BDeRhamPlus; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned generic triangulated or ordinary adic-completion declarations do not state the canonical complete locus and actual residue functor over the continuous integral ring"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*(triangle|Triangle)|(triangle|Triangle).*isIso",
+   "results": "OK: 19 hits; Mathlib/CategoryTheory/Triangulated/Basic.lean, Mathlib/CategoryTheory/Triangulated/Basic.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned generic triangulated or ordinary adic-completion declarations do not state the canonical complete locus and actual residue functor over the continuous integral ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from a complex of sheaves to its homotopy limit of derived reductions modulo powers of a uniformizer commutes with shifts and distinguished triangles",
+   "results": "OK: 8 hits; CochainComplex.mappingConeCompTriangleh_comm₁, CochainComplex.cm5b.i_f_comp_assoc, CochainComplex.homologySequenceδ_quotient_mapTriangle_obj_assoc, CochainComplex.liftCycles_shift_homologyπ, CochainComplex.homologySequenceδ_quotient_mapTriangle_obj, CochainComplex.cm5b.i_f_comp, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned generic triangulated or ordinary adic-completion declarations do not state the canonical complete locus and actual residue functor over the continuous integral ring"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-residue-class-triangle-closure",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-integral-heart",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-int-integral-heart-triangulated",
+   "place": "Paragraph (1): derived completeness is stable under shifts and cones; reduction modulo pi_E is exact. The complete-locus argument and finite residue-ring identification of old item steps 1–3.",
+   "via": [
+    "lem-sfb-integral-residue-class-triangle-closure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-complete-integral-residue-functor",
+  "worker": "stage1",
+  "summary": "Reused existing canonical completion/triangle, finite normalized coefficient, continuous discrete sheaf and K-flat change-of-rings nodes. Proved the complete-locus closure, constant-to-continuous residue ring identification, and actual exact residue scalar extension in six steps, with no new nodes. Statement unchanged. No attachment: upstream complete-integral triangulation uses constant integral coefficients, not the pulled-back continuous integral ring of this item.",
+  "blueprint": "det-lem-int-integral-heart-triangulated paragraph (1), first two sentences: steps 1–2 realize canonical completeness closure; steps 3–4 identify the finite residue coefficient ring with its specified normalization; steps 5–6 realize exact actual residue reduction and its triangulated restriction.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-completion-triangle-comparison",
+    "why": "Canonical completion endofunctor, units and triangle/shift coherence for exactly this continuous integral coefficient category; no node in the integral-heart unit supplies this generic completion calculation."
+   },
+   {
+    "node": "lem-sfb-continuous-set-descent-components",
+    "why": "Generic continuous set-sheaf descent and discrete constant-sheaf comparison; used only to identify the finite discrete residue ring, not to replace the integral-heart route."
+   },
+   {
+    "node": "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "why": "Generic finite coefficient internal/ordinary derived comparison, required for the residue category."
+   },
+   {
+    "node": "lem-sf-finite-discrete-normalized-encoding",
+    "why": "Generic scalar-normalized finite coefficient ring isomorphism; ensures the specified constant-scalar normalization."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat unbounded ring-sheaf scalar extension, which supplies exactness and the retained target action."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat representatives of arbitrary unbounded sheaf-module complexes."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic internal/ordinary tensor comparison retaining local pure tensors and K-flatness; needed to match the actual Layer B tensor convention."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-completion-triangle-comparison",
+  "lem-sfb-continuous-set-descent-components",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-pe-internal-section-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-74d0caa59",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-74d0caa59 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement and stmt_deps unchanged from Q36's creation; 6 steps; no new nodes; no repair note), the statements of all 13 cited nodes, unit sk-lem-int-integral-heart step 1, main-20261015 integral-heart-triangulated paragraph (1), the derived-Nakayama first-reduction Cones paragraph, Bhatt–Scholze 4.2.12 (p.30), and FiniteDiscreteOrdinaryEncoding.lean lines 56-143. Steps 1-2: lem-pe-completion-triangle-comparison is for the same R_X with any X and unbounded complexes, and gives additive F, natural c, the shift equation and the morphism of image triangles. Two-of-three comes from lem-sf-triangle-morphism-iso (Mathlib leaf), and the triangulated subcategory from def-weil-triangulated-subcategory. Correct. Step 3: the factorization through pi_0 for discrete kappa and continuity via the quotient topology hold on any space, and only the discrete clause of lem-sfb-continuous-set-descent-components is used. Fault (C1/C4): kappa^cst and kappa^cont are ring-valued sheafifications, and the step identified their underlying sets with set sheafifications without a citation. FIX: cite the Mathlib leaf lem-pc-sites-sheafification-underlying-sets (sheafifyComposeIso; any site, commutative rings), with step 3 text and proof_deps updated. Step 4: Encoding.ringIso and normalization (realizationRing ≅ sectionRing, agreeing with canonicalAbelianMap on constants) give b; e = a b^-1 agrees on constants. Step 5: lem-pur-derived-change-of-rings, lem-pc-kflat-resolution and lem-pe-internal-section-tensor-comparison, plus a correct cone argument, match the Layer B relative tensor and keep the S_X-action without assuming flatness. Step 6: relabelling along e is an exact equivalence, then mapDerivedCategory; T_1 is exact and its restriction to complete objects is triangulated. Edge cases checked: empty X, the zero complex, all shifts, triangles with zero vertices, unbounded complexes; no t-exactness is claimed. No duplicate was found in rg -L searches (the ringed Koszul-complete node and the Z_l residue nodes are different statements). Seven declared tool_uses accepted as generic black boxes. No SGA. Advisory: the inherited stmt_deps include theorem nodes, which stage 2 must give def owners.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompleteIntegralResidueFunctor",
+  "declaration": "AlgebraicGeometry.ProEtale.CompleteIntegralResidue.complete_integral_residue_functor",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CompleteIntegralResidue.Scalar",
+   "AlgebraicGeometry.ProEtale.CompleteIntegralResidue.continuousRing",
+   "AlgebraicGeometry.ProEtale.CompleteIntegralResidue.constantRing",
+   "AlgebraicGeometry.ProEtale.CompleteIntegralResidue.constantToContinuous",
+   "AlgebraicGeometry.ProEtale.CompleteIntegralResidue.sectionRing",
+   "AlgebraicGeometry.ProEtale.CompleteIntegralResidue.pulledBackConstants",
+   "AlgebraicGeometry.ProEtale.CompleteIntegralResidue.relabel",
+   "AlgebraicGeometry.ProEtale.CompleteIntegralResidue.complete_integral_residue_functor"
+  ],
+  "file": "lean/Sheaf/Paper/CompleteIntegralResidueFunctor.lean",
+  "statement": "theorem complete_integral_residue_functor : IsDerivedComplete l E X (0 : DerivedCategory (AdicCompletion.Modules l E X)) ∧ (∀ (K : DerivedCategory (AdicCompletion.Modules l E X)) (r : ℤ), IsDerivedComplete l E X (K⟦r⟧) ↔ IsDerivedComplete l E X K) ∧ ∃ (_hclosed : ObjectProperty.IsClosedUnderIsomorphisms (IsDerivedComplete l E X)) (_htri : ObjectProperty.IsTriangulated (IsDerivedComplete l E X)), IsIso (constantToContinuous l E X) ∧ ∃ (b : constantRing l E X ≅ sectionRing l E X) (e : sectionRing l E X ≅ continuousRing l E X), b.hom ≫ e.hom = constantToContinuous l E X ∧ (∀ (U : X.ProEtᵒᵖ) (a : Scalar l E), b.hom.hom.app U ((toSheafify (Scheme.ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj (RingCat.of (Scalar l E)))).app U a) = (pulledBackConstants l E X).hom.app U ((toSheafify (Scheme.ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj (AddCommGrpCat.of (Scalar l E)))).app U a)) ∧ ∃ (A : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (AdicCompletion.finiteRing l E X 0) ≌ SheafOfModules.{u + 1} (continuousRing l E X)) (_hA : A.functor.Additive), A.functor = relabel l E X e ∧ Nonempty (AdicCompletion.derivedReduction l E X 0 ⋙ AdicCompletion.restrict l E X 0 ≅ (CondensedRing.derivedTensor (DerivedNakayama.integerRing l E) X).flip.obj ((DerivedCategory.singleFunctor _ 0).obj (AdicCompletion.finiteModule l E X 0))) ∧ ∃ (T₁ : DerivedCategory (AdicCompletion.Modules l E X) ⥤ DerivedCategory (SheafOfModules.{u + 1} (continuousRing l E X))) (_sT₁ : T₁.CommShift ℤ), T₁ = AdicCompletion.derivedReduction l E X 0 ⋙ A.functor.mapDerivedCategory ∧ T₁.IsTriangulated ∧ IsZero (T₁.obj 0) ∧ (ObjectProperty.ι (IsDerivedComplete l E X) ⋙ T₁).IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "Q92",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The helper abbreviations specialize the recorded residue quotient, continuous-function coefficient sheaf, constant sheaf and section-action equivalence; no independent notion is redefined. The ring comparison is fixed on every constant scalar and its composite is the specified constant-function morphism. The ordinary relabelling functor is fixed on objects and maps by equality with section-action followed by restriction along the inverse coefficient isomorphism. T1 is the actual recorded derived scalar extension composed with that exact termwise functor, and the natural relative tensor comparison retains the residue action before restriction. Completeness is exactly the recorded canonical-map predicate. ObjectProperty.IsClosedUnderIsomorphisms and IsTriangulated encode the strictly full locus and all three two-out-of-three implications; the inherited full-subcategory restriction is triangulated. No statement correction or additional hypothesis. Reviewer FIX (NT-cc, 2026-10-22): the residue-reduction comparison clause now names the cited Layer B relative derived tensor CondensedRing.derivedTensor with the recorded pulled-back degree-zero residue module AdicCompletion.finiteModule l E X 0 (sk-def-pe-derived-completion), definitionally the former DerivedNakayama.reductionFunctor l E X 1, instead of that plain abbreviation of the theorem node det-pe-derived-nakayama-resolution.",
+  "fixed_by": "NT-stage2-cc-611e833b6"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-611e833b6",
+  "group": "Q92",
+  "result": "fix",
+  "note": "All clauses match the node: C(0); isomorphism closure; shift iff for every r; IsTriangulated plus iso closure gives all three 2-of-3 cases; IsIso of the specified constant-to-continuous map (finiteCoefficientScalarMap adjoint, continuous functions on ConnectedComponents); b fixed on constant scalars via canonicalAbelianMap, e forced by b≫e = constantToContinuous; A.functor = section-action ⋙ restrictScalars e.inv; T₁ = derivedReduction 0 ⋙ A.functor.mapDerivedCategory by equality, triangulated, IsZero T₁(0), restriction to complete objects triangulated; no hypotheses on X; index 0 = O_E/π. Fault fixed (H4/record): the value clause used DerivedNakayama.reductionFunctor, a plain abbrev of the theorem node det-pe-derived-nakayama-resolution (not a stmt_dep). Inlined to CondensedRing.derivedTensor (cited sk-def-sfb-derived-tensor-hom) on AdicCompletion.finiteModule l E X 0 (owned by sk-def-pe-derived-completion); definitionally the same. Fix files: fixes/CompleteIntegralResidueFunctor.lean and <item>.lean-record.json (refit_record clean). Fixed module compiles clean through nt_compile --json in 31.4 s. Advisories: sectionModuleEquivalence/sectionRingSheaf and canonicalAbelianMap come from def nodes outside stmt_deps via re-exports; the Nonempty value comparison is not pinned to the canonical iso, but T₁ itself is pinned."
+ }
+}

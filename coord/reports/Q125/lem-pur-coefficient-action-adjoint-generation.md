@@ -1,0 +1,41 @@
+## Worker report
+
+Files written: dag/nodes/sec-smooth-purity/lem-pur-coefficient-action-adjoint-generation.json (statement, split; no exact Mathlib match), citations.json, and this report. No new nodes and no new Mathlib leaves. The item statement, its statement dependencies, existing source, creation record, and blueprint ancestry are unchanged. Its five proof steps now have explicit elementary judgments and sources.
+
+Attachments: none. Searches of lean/WeilConjectures for the blueprint tag, coefficient-action terminology, projection/mate/generation combinations found no declaration stating this entire abstract result. The existing derived-module free-generation declaration is already attached to its own node, which is reused.
+
+WANTED: none.
+
+The imported item had no proof. Its existing Mathlib searches were preserved; five fresh searches through msearch.py are recorded in searches.jsonl and appended accurately to the item. I read the results: the Adjunction.CommShift hits supply compatible shift infrastructure; the other semantic hits concern zero-th derived functors or derived adjunctions. None proves invertibility for arbitrary coefficient-action bifunctors by ordinary unbounded module generation. The second semantic phrasing also failed to match. No service was unavailable in these searches.
+
+No statement dispute or mathematical source error was found. Zheng Construction 2.26 specifies the map, but does not state this abstract lemma. Accordingly the proof is marked agent-written. Zheng's proof of Proposition 2.29(2) is not used: that proof invokes smooth purity, whereas this item must be independent of it. The argument uses the already assumed coproduct preservation of B_M and does not infer it merely from G being a right adjoint. No SGA source is cited or used.
+
+Nothing remains unfinished within this one-level split. The dependencies retain their existing proof obligations.
+
+## Blueprint and duplicate search
+
+I read the sec-smooth-purity chapter and sk-def-sf-operations unit records, the current blueprint det-sf-determination-localizing statement, and the live parent lem-pur-etale-exceptional-constant-tensor. The nearest imported ancestor, verified by blueprint_refs.py ancestor, is def-weil-exceptional-inverse-image. This split implements the same finite-level coefficient tensor argument in its adic construction; it does not change the unit route.
+
+Whole-DAG title/concept searches for localizing loci, derived-module generation, compact generators, and shift compatibility located the existing lem-pc-derived-module-free-generation and det-sf-determination-localizing. I also opened the potentially overlapping shift-saturated and perfect-localizing locus statements: neither is needed since the latter generic localizing statement already gives all closures required here. blueprint_refs.py searches for coefficient-action and generating class found respectively no imported exact statement and the existing thick-generation result; the item's same_as remains empty. No new node was introduced, so there are no new/existing duplicate pairs.
+
+## Not duplicates
+
+No new nodes; no pairs require justification.
+
+## Review by Q125
+
+I read Zheng Construction 2.26 on printed p. 15 directly from the local PDF: the adjunct is inverse projection followed by tensoring the counit, exactly the q used in step 1. I read Stacks categories.tex Tag 0037 (definition-adjoint and the following unit/counit formulas), derived.tex Tag 014V (definition-exact-functor-triangulated-categories and its compatible-transformation equation), and more-algebra.tex Tag 09PB (remark-P-resolution, especially its final generation criterion). There are no new nodes whose sources need separate review.
+
+Step 1 cites def-weil-pbc-adjunction-mate. I opened its statement: it gives the component formula, its transpose characterization, and naturality, not just a name for mates. Substituting F adjoint G on both sides and the two fixed-V action endofunctors makes P^{-1} the required square. Its displayed counit transpose is exactly q. Naturality in V is additionally established by the written q equation and naturality of the adjunction bijection. The unit formula is the defining adjunction formula in Tag 0037; no general derived adjunction existence theorem is being invoked.
+
+Step 2 cites no extra theorem. I checked the types: F(u_A) P_C = u_B at FGM rearranges to P_C^{-1}=u_B^{-1} F(u_A); naturality of u_B on epsilon_M gives u_B,M q_C=epsilon_M F(u_A,GM). Transposition has codomain GM after applying G(u_B,M), so the claimed normalization follows by the actual Hom bijection, and both remaining u maps are isomorphisms. This does not assert that arbitrary transformations agreeing at C agree elsewhere.
+
+Step 3 also cites no theorem beyond the defining adjunction and the explicit hypotheses. I checked every map's endpoint. Set X=T_A(V,GM) and Y=T_B(V,M). Both morphisms compared by adjunction have source T_A(V[n],GM) and target G(Y[n]). The composite shift of B_M is c_G,n,Y G(b). Inverse projection shift compatibility and naturality of the action shift on epsilon_M give b q_n=q[n] c_F,n,X F(a). The counit compatibility rearranges to epsilon_{Y[n]} F(c_G^{-1})=epsilon_Y[n] c_F,n,GY; naturality of c_F on alpha then gives the same inverse adjunct for the second morphism. This writes out the connecting compatibility instead of treating it as automatic. The step is an elementary substitution into the stated equations, not a separate hidden shift lemma.
+
+Step 4 cites det-sf-determination-localizing. I opened its complete statement and current blueprint source: it requires exact functors, specified shift-compatible natural transformation, and direct-sum preservation; it concludes precisely triangulated, direct-sum and summand closure. All three hypotheses occur in this item, with shift compatibility proved in step 3 and naturality in step 1. The target is A, not B, and the source is the ordinary module category D(C-Mod). Repleteness is also written explicitly by naturality at an isomorphism. This is a generic tool from another unit, declared in split_report.tool_uses; it replaces no geometric route.
+
+Step 5 cites lem-pc-derived-module-free-generation. I opened its statement, read its source at Tag 09PB, and inspected its attached upstream declaration in DerivedModuleFreeGeneration.lean. It concerns ordinary unbounded derived modules over a ring, not a scheme's quasi-coherent or perfect category, and its closure operations are exactly those available from step 4. The generating class consists of all shifts C[n], already present by unit invertibility and shift closure. Set-indexed coproducts are required in the coefficient category and A; the item explicitly assumes these and preservation at fixed M, so no large indexing category is smuggled into a small-colimit theorem. The declaration uses the free rank-one module in the chosen module universe, with the usual lift of C if required.
+
+For delivery-errors B–E, I checked that there are no new elementary, duplicate, or clause-restating nodes; that all non-elementary steps cite actual statements; and that all their quotes in citations.json are verbatim. The three initial elementary steps give explicit equations and use only the adjunction definition and stated compatibilities. The two substantial theorems are cited as nodes. Every step is shorter than 2000 characters. There is no circular dependency through the item: the three cited nodes are existing generic mate, localizing, and ordinary module generation tools. No hypotheses of smoothness, regularity, finite coefficients, perfectness, or boundedness have been added or used. In particular this proves the claimed unbounded result only because preservation of arbitrary coefficient coproducts is an explicit hypothesis.
+
+Small-case checks: for the zero ring D(C-Mod) is the zero category, the unit formula gives the component at its only object and generation remains valid; exact actions send the zero coefficient to zero, so the empty coproduct causes no exception. M=0, the identity adjunction, V=C, n=0 and negative shifts all satisfy the displayed calculations. No inverse of epsilon, F, G, or an arbitrary natural transformation was taken; only the assumed P and unit/shift isomorphisms were inverted.

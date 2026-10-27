@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-two-sided-division-matrix-diagonalization",
+ "kind": "statement",
+ "title": "Diagonal reduction for matrices with division on both sides",
+ "statement": "Let $R$ be an associative ring with identity, not necessarily commutative, and let $\\delta:R\\setminus\\{0\\}\\to\\mathbf N$ be a function. Assume that for all $a,b\\in R$ with $b\\ne0$ there are $q,r,q',r'\\in R$ such that $a=qb+r=bq'+r'$, with $r=0$ or $\\delta(r)<\\delta(b)$ and $r'=0$ or $\\delta(r')<\\delta(b)$. For every $m,n\\geq0$ and every $m\\times n$ matrix $C$ over $R$ [def-weil-matrix], there are invertible matrices $U\\in\\operatorname{Mat}_m(R)$ and $V\\in\\operatorname{Mat}_n(R)$ and elements $d_1,\\ldots,d_{\\min(m,n)}\\in R$ such that $$ (UCV)_{ij}=\\begin{cases}d_i&i=j,\\\\0&i\\ne j.\\end{cases} $$ Invertible means possessing a two-sided multiplicative inverse, and matrix multiplication is $(BC)_{ij}=\\sum_k B_{ik}C_{kj}$. No divisibility relation among the $d_i$ is asserted. Empty matrices are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.51, printed p.297, the omitted matrix-reduction argument in the comparison with the polynomial-ring proof; supporting agent lemma (Berrick and Keating 2000, Theorem 3.3.6, cited there, is not available locally)."
+ },
+ "stmt_deps": [
+  "def-weil-matrix"
+ ],
+ "proof": [
+  {
+   "text": "For distinct indices $i,j$, let $e_{ij}(s)$ have entry $s$ at $(i,j)$ and zero elsewhere. Expanding the finite sums defining multiplication gives $e_{ij}(s)e_{ij}(t)=0$, so $(I+e_{ij}(s))(I-e_{ij}(s))=(I-e_{ij}(s))(I+e_{ij}(s))=I$. Left multiplication by $I+e_{ij}(s)$ replaces row $i$ by row $i+s\\,\\text{row }j$; right multiplication replaces column $j$ by column $j+(\\text{column }i)s$. A row or column interchange is multiplication by its permutation matrix, whose inverse is the inverse permutation matrix. The same finite-sum expansion gives associativity, hence a product of such invertible matrices has inverse the reverse product of their inverses. These are direct calculations with the matrices of [def-weil-matrix], valid over an associative ring without commuting any coefficients.",
+   "uses": [
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.51, printed p.297 (PDF p.309), with the two division algorithms on printed p.296; agent supplies the omitted matrix argument, not the unavailable Berrick–Keating proof."
+   }
+  },
+  {
+   "text": "Use strong induction on $k=\\min(m,n)$, simultaneously for every matrix of each size with that value of $k$. If $k=0$, take $U=I_m,V=I_n$ and the empty list: there are no entries. At any size the zero matrix is already of the required form, with every $d_i=0$. Thus assume $m,n>0$ and $C\\ne0$.",
+   "uses": [
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.51, printed p.297 (PDF p.309), with the two division algorithms on printed p.296; agent supplies the omitted matrix argument, not the unavailable Berrick–Keating proof."
+   }
+  },
+  {
+   "text": "Among the nonzero entries of all matrices $PCQ$, where $P$ and $Q$ have two-sided inverses, choose an entry $d$ with least $\\delta(d)$. This choice uses only a least natural number: a nonzero entry $c$ of $C=I_mCI_n$ gives an upper bound $\\delta(c)$, so scan the finite list $0,\\ldots,\\delta(c)$ for the first value attained by a nonzero entry of an equivalent matrix. Choose a witnessing matrix and interchange rows and columns to obtain $A=PCQ$ with $A_{11}=d$. Minimality still concerns every nonzero entry of every matrix equivalent to $C$, not merely the entries of $A$.",
+   "uses": [
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.51, printed p.297 (PDF p.309), with the two division algorithms on printed p.296; agent supplies the omitted matrix argument, not the unavailable Berrick–Keating proof."
+   }
+  },
+  {
+   "text": "For each $i>1$ use the assumed division $A_{i1}=q_i d+r_i$, where $r_i=0$ or $\\delta(r_i)<\\delta(d)$. Subtracting $q_i$ times row $1$ on the left from row $i$ is invertible by step 1 and puts $r_i$ in position $(i,1)$. A nonzero $r_i$ contradicts the minimum chosen in step 3; therefore $r_i=0$. Perform these operations for all $i>1$. Each leaves row $1$ and all other rows unchanged. Their product $L$ gives $B=LA$ with $B_{11}=d$ and $B_{i1}=0$ for $i>1$. Since $L$ is invertible, the same global minimum applies to every matrix equivalent to $B$.",
+   "uses": [
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.51, printed p.297 (PDF p.309), with the two division algorithms on printed p.296; agent supplies the omitted matrix argument, not the unavailable Berrick–Keating proof."
+   }
+  },
+  {
+   "text": "For each $j>1$ use the other assumed division $B_{1j}=d q'_j+r'_j$, with $r'_j=0$ or $\\delta(r'_j)<\\delta(d)$. Replace column $j$ by column $j-(\\text{column }1)q'_j$, using right multiplication by $I-e_{1j}(q'_j)$. It is invertible and makes its $(1,j)$ entry $r'_j$, so minimality forces $r'_j=0$. These operations leave column $1$ unchanged and, since $B_{i1}=0$ for $i>1$, leave every lower-right entry unchanged. Their product $T$ therefore satisfies $LPCQT=\\begin{pmatrix}d&0\\\\0&H\\end{pmatrix}$, with $H$ of size $(m-1)\\times(n-1)$. No assertion about divisibility of entries of $H$ is needed.",
+   "uses": [
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.51, printed p.297 (PDF p.309), with the two division algorithms on printed p.296; agent supplies the omitted matrix argument, not the unavailable Berrick–Keating proof."
+   }
+  },
+  {
+   "text": "Now $\\min(m-1,n-1)=k-1$. The induction hypothesis gives invertible $U_0,V_0$ with $U_0HV_0$ rectangular diagonal. Put $\\widehat U=\\operatorname{diag}(1,U_0)$ and $\\widehat V=\\operatorname{diag}(1,V_0)$. Their two-sided inverses are $\\operatorname{diag}(1,U_0^{-1})$ and $\\operatorname{diag}(1,V_0^{-1})$, by direct block multiplication. Thus $U=\\widehat ULP$ and $V=QT\\widehat V$ are invertible and $UCV=\\begin{pmatrix}d&0\\\\0&U_0HV_0\\end{pmatrix}$. Its off-diagonal entries vanish and its diagonal list is $d$ followed by the $k-1$ entries supplied by induction. This completes the induction, including the cases $m=1$ or $n=1$, when $H$ has an empty dimension.",
+   "uses": [
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.51, printed p.297 (PDF p.309), with the two division algorithms on printed p.296; agent supplies the omitted matrix argument, not the unavailable Berrick–Keating proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-matrix"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.51, printed p.297 (PDF p.309), with the two division algorithms on printed p.296; agent supplies the omitted matrix argument, not the unavailable Berrick–Keating proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "SmithNormalForm|smithNormalForm|smith_normal_form|diagonal.*Euclidean",
+   "results": "[grep] OK 20 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/PID.lean\", \"line\": \"40\", \"text\": \"  obtain ⟨n, snf⟩ := p.smithNormalForm (Module.Free.chooseBasis R M)\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/Int.lean\", \"line\": \"25\", \"text\": \"namespace Module.Basis.SmithNormalForm\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/Int.lean\", \"line\": \"34\", \"text\": \"    (snf : Basis.SmithNormalForm N ι n) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/Int.lean\", \"line\": \"152\", \"text\": \"    (snf : Basis.SmithNormalForm N ι n) : N.toAddSubgroup.index = (if n = Fintype.card ι then\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/Int.lean\", \"line\": \"164\", \"text\": \"lemma toAddSubgroup_index_ne_zero_iff {N : Submodule ℤ M} (snf : Basis.SmithNormalForm N ι n) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/Int.lean\", \"line\": \"178\", \"text\": \"end Module.Basis.SmithNormalForm\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"line\": \"38\", \"text\": \"- `Submodule.smithNormalForm`: if `R` is a PID, then `M` has a basis\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"line\": \"142\", \"text\": \"/-- The induction hypothesis of `Submodule.basisOfPid` and `Submodule.smithNormalForm`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"line\": \"150\", \"text\": \"for `smith_normal_form` we need the full statement,\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"line\": \"278\", \"text\": \"See also the stronger version `Submodule.smithNormalForm`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"line\": \"298\", \"text\": \"See also the stronger version `Submodule.smithNormalForm`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"line\": \"46\", \"text\": \"  let a := smithNormalFormCoeffs b h\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"line\": \"47\", \"text\": \"  let b' := smithNormalFormTopBasis b h\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"line\": \"48\", \"text\": \"  let ab := smithNormalFormBotBasis b h\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"line\": \"49\", \"text\": \"  have ab_eq := smithNormalFormBotBasis_def b h\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/Finite/Quotient.lean\", \"line\": \"39\", \"text\": \"    (M ⧸ N) ≃ₗ[R] Π i, R ⧸ Ideal.span ({smithNormalFormCoeffs b h i} : Set R) := by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/Finite/Quotient.lean\", \"line\": \"44\", \"text\": \"  let a := smithNormalFormCoeffs b h\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/Finite/Quotient.lean\", \"line\": \"45\", \"text\": \"  let b' := smithNormalFormTopBasis b h\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/Finite/Quotient.lean\", \"line\": \"46\", \"text\": \"  let ab := smithNormalFormBotBasis b h\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/Finite/Quotient.lean\", \"line\": \"47\", \"text\": \"  have ab_eq := smithNormalFormBotBasis_def b h\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Matrix.Pivot transvection reduction assumes Field; the Smith normal form API assumes CommRing and a commutative PID. Neither applies to the present noncommutative ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite rectangular matrix over a noncommutative ring with left and right Euclidean division can be diagonalized by invertible row and column operations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_aux\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Transvection\", \"type\": \"∀ {𝕜 : Type u_3} [inst : Field 𝕜] (n : Type) [inst_1 : Fintype n] [inst_2 : DecidableEq n] (M : Matrix n n 𝕜),\\n  ∃ L L' D,\\n    (List.map Matrix.TransvectionStruct.toMatrix L).prod * M * (List.map Matrix.TransvectionStruct.toMatrix L').prod =\\n      Matrix.diagonal D\", \"doc\": \"For any square matrix $M$ with entries in a field $\\\\mathbb{K}$ and finite dimensions $n \\\\times n$, there exist finite lists of transvection matrices $L$ and $L'$ such that the product $ (\\\\prod_{T \\\\in \"}\n  {\"name\": \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Transvection\", \"type\": \"∀ {n : Type u_1} {𝕜 : Type u_3} [inst : Field 𝕜] [inst_1 : DecidableEq n] [inst_2 : Fintype n] (M : Matrix n n 𝕜),\\n  ∃ L L' D,\\n    (List.map Matrix.TransvectionStruct.toMatrix L).prod * M * (List.map Matrix.TransvectionStruct.toMatrix L').prod =\\n      Matrix.diagonal D\", \"doc\": \"For any square matrix $ M $ of size $ n \\\\times n $ over a field $ \\\\mathbb{K} $, there exist finite lists of transvection matrices $ L $ and $ L' $, and a diagonal matrix $ D $ with entries in $ \\\\mathb\"}\n  {\"name\": \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_induction\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Transvection\", \"type\": \"∀ {𝕜 : Type u_3} [inst : Field 𝕜] {r : ℕ},\\n  (∀ (M : Matrix (Fin r) (Fin r) 𝕜),\\n      ∃ L₀ L₀' D₀,\\n        (List.map Matrix.TransvectionStruct.toMatrix L₀).prod * M *\\n            (List.map Matrix.TransvectionStruct.toMatrix L₀').prod =\\n          Matrix.diagonal D₀) →\\n    ∀ (M : Matrix (Fin r ⊕ Unit)\", \"doc\": \"For any square matrix $ M $ of size $ r + 1 $ over a field $ \\\\mathbb{K} $, there exist finite lists of transvection matrices $ L $ and $ L' $, and a diagonal matrix $ D $, such that the product $ (\\\\pr\"}\n  {\"name\": \"Matrix.Pivot.exists_list_transvec_mul_diagonal_mul_list_transvec\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Transvection\", \"type\": \"∀ {n : Type u_1} {𝕜 : Type u_3} [inst : Field 𝕜] [inst_1 : DecidableEq n] [inst_2 : Fintype n] (M : Matrix n n 𝕜),\\n  ∃ L L' D,\\n    M =\\n      (List.map Matrix.TransvectionStruct.toMatrix L).prod * Matrix.diagonal D *\\n        (List.map Matrix.TransvectionStruct.toMatrix L').prod\", \"doc\": \"For any square matrix $ M $ with entries in a field $ \\\\mathbb{K} $, there exist finite lists of transvection matrices $ L $ and $ L' $, and a diagonal matrix $ D $ with entries in $ \\\\mathbb{K} $, such\"}\n  {\"name\": \"Matrix.Pivot.reindex_exists_list_transvec_mul_mul_list_transvec_eq_diagonal\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Transvection\", \"type\": \"∀ {n : Type u_1} {p : Type u_2} {𝕜 : Type u_3} [inst : Field 𝕜] [inst_1 : DecidableEq n] [inst_2 : DecidableEq p]\\n  [inst_3 : Fintype n] [inst_4 : Fintype p] (M : Matrix p p 𝕜) (e : p ≃ n),\\n  (∃ L L' D,\\n      (List.map Matrix.TransvectionStruct.toMatrix L).prod * (Matrix.reindexAlgEquiv 𝕜 𝕜 e) M *\\n \", \"doc\": \"For any square matrix $ M $ over a field $ \\\\mathbb{K} $ with index type $ p $, if there exists an equivalence $ e : p \\\\simeq n $ such that the reindexed matrix $ \\\\text{reindex}(M, e) $ can be expresse\"}\n  {\"name\": \"Matrix.diagonal_transvection_induction\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Transvection\", \"type\": \"∀ {n : Type u_1} {𝕜 : Type u_3} [inst : Field 𝕜] [inst_1 : DecidableEq n] [inst_2 : Fintype n] (P : Matrix n n 𝕜 → Prop)\\n  (M : Matrix n n 𝕜),\\n  (∀ (D : n → 𝕜), (Matrix.diagonal D).det = M.det → P (Matrix.diagonal D)) →\\n    (∀ (t : Matrix.TransvectionStruct n 𝕜), P t.toMatrix) → (∀ (A B : Matrix n n\", \"doc\": \"If a property $ P $ holds for all diagonal matrices with the same determinant as $ M $, for all transvection matrices, and is closed under matrix multiplication, then $ P $ holds for any square matrix\"}\n  {\"name\": \"Matrix.Pivot.exists_isTwoBlockDiagonal_of_ne_zero\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Transvection\", \"type\": \"∀ {𝕜 : Type u_3} [inst : Field 𝕜] {r : ℕ} (M : Matrix (Fin r ⊕ Unit) (Fin r ⊕ Unit) 𝕜),\\n  M (Sum.inr ()) (Sum.inr ()) ≠ 0 →\\n    ∃ L L',\\n      ((List.map Matrix.TransvectionStruct.toMatrix L).prod * M *\\n          (List.map Matrix.TransvectionStruct.toMatrix L').prod).IsTwoBlockDiagonal\", \"doc\": \"If the bottom-right pivot element of a matrix $ M $ is non-zero, then there exist lists of transvection structures $ L $ and $ L' $ such that the matrix product $ (\\\\prod L) \\\\cdot M \\\\cdot (\\\\prod L') $ \"}\n  {\"name\": \"Matrix.diagonal_transvection_induction_of_det_ne_zero\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Transvection\", \"type\": \"∀ {n : Type u_1} {𝕜 : Type u_3} [inst : Field 𝕜] [inst_1 : DecidableEq n] [inst_2 : Fintype n] (P : Matrix n n 𝕜 → Prop)\\n  (M : Matrix n n 𝕜),\\n  M.det ≠ 0 →\\n    (∀ (D : n → 𝕜), (Matrix.diagonal D).det ≠ 0 → P (Matrix.diagonal D)) →\\n      (∀ (t : Matrix.TransvectionStruct n 𝕜), P t.toMatrix) →\\n      \", \"doc\": \"Let $ \\\\mathbb{K} $ be a field and $ n $ a finite type. If a property $ P $ of $ n \\\\times n $ matrices over $ \\\\mathbb{K} $ satisfies: (1) $ P(D) $ holds for every diagonal matrix $ D $ with nonzero det\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Matrix.Pivot transvection reduction assumes Field; the Smith normal form API assumes CommRing and a commutative PID. Neither applies to the present noncommutative ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Diagonal reduction of rectangular matrices over a noncommutative ring with left and right Euclidean algorithms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"FixedDetMatrices.reduce_reduceStep\", \"module\": \"Mathlib.LinearAlgebra.Matrix.FixedDetMatrices\", \"type\": \"{A : Δ m} (hc : (A.1 1 0) ≠ 0) : reduce (reduceStep A) = reduce A\", \"doc\": \"For any matrix $ A $ in $ \\\\Delta_m $ with a non-zero entry at position $ (1, 0) $, the result of applying the reduction process to $ A $ after one reduction step is equal to the result of applying the\"}\n  {\"name\": \"Matrix.commute_diagonal\", \"module\": \"Mathlib.Data.Matrix.Mul\", \"type\": \"{α : Type*} [NonUnitalNonAssocCommSemiring α] [Fintype n] [DecidableEq n] (d₁ d₂ : n → α) :\\n  Commute (diagonal d₁) (diagonal d₂)\", \"doc\": \"For any finite type $n$ and commutative semiring $\\\\alpha$, two diagonal $n \\\\times n$ matrices with entries in $\\\\alpha$ commute under matrix multiplication, i.e., $\\\\text{diag}(d₁) \\\\cdot \\\\text{diag}(d₂)\"}\n  {\"name\": \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_induction\", \"module\": \"Mathlib.LinearAlgebra.Matrix.Transvection\", \"type\": \"(IH :\\n    ∀ M : Matrix (Fin r) (Fin r) 𝕜,\\n      ∃ (L₀ L₀' : List (TransvectionStruct (Fin r) 𝕜)) (D₀ : Fin r → 𝕜),\\n        (L₀.map toMatrix).prod * M * (L₀'.map toMatrix).prod = diagonal D₀)\\n  (M : Matrix (Fin r ⊕ Unit) (Fin r ⊕ Unit) 𝕜) :\\n  ∃ (L L' : List (TransvectionStruct (Fin r ⊕ Unit) 𝕜)) (D :\", \"doc\": \"For any square matrix $ M $ of size $ r + 1 $ over a field $ \\\\mathbb{K} $, there exist finite lists of transvection matrices $ L $ and $ L' $, and a diagonal matrix $ D $, such that the product $ (\\\\pr\"}\n  {\"name\": \"Matrix.diagonalInvertible\", \"module\": \"Mathlib.LinearAlgebra.Matrix.NonsingularInverse\", \"type\": \"{α} [NonAssocSemiring α] (v : n → α) [Invertible v] : Invertible (diagonal v)\", \"doc\": \"For a finite type $ n $ and a non-associative semiring $ \\\\alpha $, if a function $ v : n \\\\to \\\\alpha $ is invertible (i.e., each $ v(i) $ is invertible in $ \\\\alpha $), then the diagonal matrix formed b\"}\n  {\"name\": \"Matrix.Pivot.exists_isTwoBlockDiagonal_of_ne_zero\", \"module\": \"Mathlib.LinearAlgebra.Matrix.Transvection\", \"type\": \"(hM : M (inr unit) (inr unit) ≠ 0) :\\n  ∃ L L' : List (TransvectionStruct (Fin r ⊕ Unit) 𝕜),\\n    IsTwoBlockDiagonal ((L.map toMatrix).prod * M * (L'.map toMatrix).prod)\", \"doc\": \"If the bottom-right pivot element of a matrix $ M $ is non-zero, then there exist lists of transvection structures $ L $ and $ L' $ such that the matrix product $ (\\\\prod L) \\\\cdot M \\\\cdot (\\\\prod L') $ \"}\n  {\"name\": \"Matrix.inv_diagonal\", \"module\": \"Mathlib.LinearAlgebra.Matrix.NonsingularInverse\", \"type\": \"(v : n → α) : (diagonal v)⁻¹ = diagonal (Ring.inverse v)\", \"doc\": \"The inverse of a diagonal matrix with entries $ v_i $ in a commutative ring is the diagonal matrix whose entries are the multiplicative inverses of $ v_i $, i.e., $ (\\\\text{diag}(v))^{-1} = \\\\text{diag}\"}\n  {\"name\": \"Matrix.Pivot.exists_list_transvec_mul_diagonal_mul_list_transvec\", \"module\": \"Mathlib.LinearAlgebra.Matrix.Transvection\", \"type\": \"(M : Matrix n n 𝕜) :\\n  ∃ (L L' : List (TransvectionStruct n 𝕜)) (D : n → 𝕜), M = (L.map toMatrix).prod * diagonal D * (L'.map toMatrix).prod\", \"doc\": \"For any square matrix $ M $ with entries in a field $ \\\\mathbb{K} $, there exist finite lists of transvection matrices $ L $ and $ L' $, and a diagonal matrix $ D $ with entries in $ \\\\mathbb{K} $, such\"}\n  {\"name\": \"Matrix.isDiag_iff_diagonal_diag\", \"module\": \"Mathlib.LinearAlgebra.Matrix.IsDiag\", \"type\": \"[Zero α] [DecidableEq n] (A : Matrix n n α) : A.IsDiag ↔ diagonal (diag A) = A\", \"doc\": \"For a square matrix $ A $ with entries in a type $ \\\\alpha $ having a zero element and decidable equality on indices, $ A $ is diagonal if and only if the diagonal matrix formed by the diagonal entries\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Matrix.Pivot transvection reduction assumes Field; the Smith normal form API assumes CommRing and a commutative PID. Neither applies to the present noncommutative ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Matrix\", \"smith\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Module.Basis.SmithNormalForm.toMatrix_restrict_eq_toMatrix\", \"module\": \"Mathlib.LinearAlgebra.FreeModule.PID\", \"type\": \" {ι : Type u_1} {R : Type u_2} [CommRing R] {M : Type u_3} [AddCommGroup M] [Module R M] {n : ℕ} {N : Submodule R M} (snf : Module.Basis.SmithNormalForm N ι n) [Fintype ι] [DecidableEq ι] (f : M →ₗ[R] M) (hf : ∀ (x : M), f x ∈ N) (hf' : ∀ x ∈ N, f x ∈ N := ⋯) {i : Fin n} : (LinearMap.toMatrix snf.bN\", \"doc\": \"Given a Smith-normal-form pair of bases for `N ⊆ M`, and a linear endomorphism `f` of `M`\\nthat preserves `N`, the diagonal of the matrix of the restriction `f` to `N` does not depend on\\nwhich of the t\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Matrix.Pivot transvection reduction assumes Field; the Smith normal form API assumes CommRing and a commutative PID. Neither applies to the present noncommutative ring."
+  },
+  {
+   "tool": "grep",
+   "query": "EuclideanDomain|CommRing",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"98\", \"line\": \"variable {ι \", \"text\": \" Type*} {R : Type*} [CommRing R]\"}\n  {\"file\": \"392\", \"line\": \"instance {S \", \"text\": \" Type*} [CommRing S] [Algebra R S] {I : Ideal S} [hI₁ : Module.Finite R I]\"}\n  {\"file\": \"654\", \"line\": \"variable {S \", \"text\": \" Type*} [CommRing S] [IsDomain S] [Algebra R S]\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Matrix.Pivot transvection reduction assumes Field; the Smith normal form API assumes CommRing and a commutative PID. Neither applies to the present noncommutative ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Diagonal form of a rectangular matrix over a left and right Euclidean ring without a divisibility chain",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_induction\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Transvection\", \"type\": \"∀ {𝕜 : Type u_3} [inst : Field 𝕜] {r : ℕ},\\n  (∀ (M : Matrix (Fin r) (Fin r) 𝕜),\\n      ∃ L₀ L₀' D₀,\\n        (List.map Matrix.TransvectionStruct.toMatrix L₀).prod * M *\\n            (List.map Matrix.TransvectionStruct.toMatrix L₀').prod =\\n          Matrix.diagonal D₀) →\\n    ∀ (M : Matrix (Fin r ⊕ Unit)\", \"doc\": \"For any square matrix $ M $ of size $ r + 1 $ over a field $ \\\\mathbb{K} $, there exist finite lists of transvection matrices $ L $ and $ L' $, and a diagonal matrix $ D $, such that the product $ (\\\\pr\"}\n  {\"name\": \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_aux\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Transvection\", \"type\": \"∀ {𝕜 : Type u_3} [inst : Field 𝕜] (n : Type) [inst_1 : Fintype n] [inst_2 : DecidableEq n] (M : Matrix n n 𝕜),\\n  ∃ L L' D,\\n    (List.map Matrix.TransvectionStruct.toMatrix L).prod * M * (List.map Matrix.TransvectionStruct.toMatrix L').prod =\\n      Matrix.diagonal D\", \"doc\": \"For any square matrix $M$ with entries in a field $\\\\mathbb{K}$ and finite dimensions $n \\\\times n$, there exist finite lists of transvection matrices $L$ and $L'$ such that the product $ (\\\\prod_{T \\\\in \"}\n  {\"name\": \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Transvection\", \"type\": \"∀ {n : Type u_1} {𝕜 : Type u_3} [inst : Field 𝕜] [inst_1 : DecidableEq n] [inst_2 : Fintype n] (M : Matrix n n 𝕜),\\n  ∃ L L' D,\\n    (List.map Matrix.TransvectionStruct.toMatrix L).prod * M * (List.map Matrix.TransvectionStruct.toMatrix L').prod =\\n      Matrix.diagonal D\", \"doc\": \"For any square matrix $ M $ of size $ n \\\\times n $ over a field $ \\\\mathbb{K} $, there exist finite lists of transvection matrices $ L $ and $ L' $, and a diagonal matrix $ D $ with entries in $ \\\\mathb\"}\n  {\"name\": \"Matrix.Pivot.exists_list_transvec_mul_diagonal_mul_list_transvec\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Transvection\", \"type\": \"∀ {n : Type u_1} {𝕜 : Type u_3} [inst : Field 𝕜] [inst_1 : DecidableEq n] [inst_2 : Fintype n] (M : Matrix n n 𝕜),\\n  ∃ L L' D,\\n    M =\\n      (List.map Matrix.TransvectionStruct.toMatrix L).prod * Matrix.diagonal D *\\n        (List.map Matrix.TransvectionStruct.toMatrix L').prod\", \"doc\": \"For any square matrix $ M $ with entries in a field $ \\\\mathbb{K} $, there exist finite lists of transvection matrices $ L $ and $ L' $, and a diagonal matrix $ D $ with entries in $ \\\\mathbb{K} $, such\"}\n  {\"name\": \"Matrix.Pivot.reindex_exists_list_transvec_mul_mul_list_transvec_eq_diagonal\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Transvection\", \"type\": \"∀ {n : Type u_1} {p : Type u_2} {𝕜 : Type u_3} [inst : Field 𝕜] [inst_1 : DecidableEq n] [inst_2 : DecidableEq p]\\n  [inst_3 : Fintype n] [inst_4 : Fintype p] (M : Matrix p p 𝕜) (e : p ≃ n),\\n  (∃ L L' D,\\n      (List.map Matrix.TransvectionStruct.toMatrix L).prod * (Matrix.reindexAlgEquiv 𝕜 𝕜 e) M *\\n \", \"doc\": \"For any square matrix $ M $ over a field $ \\\\mathbb{K} $ with index type $ p $, if there exists an equivalence $ e : p \\\\simeq n $ such that the reindexed matrix $ \\\\text{reindex}(M, e) $ can be expresse\"}\n  {\"name\": \"Algebra.Norm.Transitivity.auxMat_toSquareBlock_ne\", \"module\": \"Mathlib/RingTheory/Norm/Transitivity\", \"type\": \"∀ {S : Type u_2} {m : Type u_5} [inst : CommRing S] (M : Matrix m m S) [inst_1 : DecidableEq m] (k : m),\\n  (Algebra.Norm.Transitivity.auxMat M k).toSquareBlock (fun x => x ≠ k) True = M k k • 1\", \"doc\": \"For a given matrix $ M $ and index $ k $, the square submatrix of the auxiliary matrix $ \\\\text{auxMat}(M, k) $ formed by excluding the $ k $-th row and column is equal to the scalar $ M_{k,k} $ multip\"}\n  {\"name\": \"Matrix.Pivot.exists_isTwoBlockDiagonal_of_ne_zero\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Transvection\", \"type\": \"∀ {𝕜 : Type u_3} [inst : Field 𝕜] {r : ℕ} (M : Matrix (Fin r ⊕ Unit) (Fin r ⊕ Unit) 𝕜),\\n  M (Sum.inr ()) (Sum.inr ()) ≠ 0 →\\n    ∃ L L',\\n      ((List.map Matrix.TransvectionStruct.toMatrix L).prod * M *\\n          (List.map Matrix.TransvectionStruct.toMatrix L').prod).IsTwoBlockDiagonal\", \"doc\": \"If the bottom-right pivot element of a matrix $ M $ is non-zero, then there exist lists of transvection structures $ L $ and $ L' $ such that the matrix product $ (\\\\prod L) \\\\cdot M \\\\cdot (\\\\prod L') $ \"}\n  {\"name\": \"Algebra.Norm.Transitivity.auxMat\", \"module\": \"Mathlib/RingTheory/Norm/Transitivity\", \"type\": \"{S : Type u_2} → {m : Type u_5} → [CommRing S] → Matrix m m S → [DecidableEq m] → m → Matrix m m S\", \"doc\": \"The $ m \\times m $ matrix over $ S $ defined by entries $ A_{i,j} $ where: $ A_{i,j} = 1 $ if $ i = j = k $; $ A_{i,j} = 0 $ if $ j = k $ and $ i \\neq k $; $ A_{i,j} = -M_{k,j} $ if $ i = k $ and $ j \\ne\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Matrix.Pivot transvection reduction assumes Field; the Smith normal form API assumes CommRing and a commutative PID. Neither applies to the present noncommutative ring."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_list_transvec_mul_mul_list_transvec_eq_diagonal|variable.*Field|smithNormalForm",
+   "results": "{\"t\": \"2026-10-24T00:13:44Z\", \"tool\": \"grep\", \"query\": \"exists_list_transvec_mul_mul_list_transvec_eq_diagonal|variable.*Field|smithNormalForm\", \"sub\": \"LinearAlgebra/Matrix/Transvection.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"70\", \"594\", \"622\", \"639\", \"641\"], \"digest\": \"01838f619ae4591d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Matrix/Transvection.lean:70,73,594–615 (Field pivot theorem; CommRing transvections), and FreeModule/PID.lean:98 (CommRing); these do not apply to general noncommutative rings. Other hits only define diagonal matrices or concern integer matrices."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A matrix over a noncommutative ring admitting left and right division with smaller remainders is equivalent to a diagonal matrix",
+   "results": "{\"t\": \"2026-10-24T00:13:45Z\", \"tool\": \"leansearch\", \"query\": \"A matrix over a noncommutative ring admitting left and right division with smaller remainders is equivalent to a diagonal matrix\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.invertibleEquivDetInvertible\", \"Matrix.isDiag_iff_diagonal_diag\", \"Matrix.diagonal\", \"Matrix.diagonalRingHom\", \"Matrix.diagonalInvertible\", \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_induction\", \"Matrix.Pivot.exists_list_transvec_mul_diagonal_mul_list_transvec\", \"Matrix.instDivInvMonoid\"], \"digest\": \"4a6f308c75d25cad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Matrix/Transvection.lean:70,73,594–615 (Field pivot theorem; CommRing transvections), and FreeModule/PID.lean:98 (CommRing); these do not apply to general noncommutative rings. Other hits only define diagonal matrices or concern integer matrices."
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix, \"diagonal\"",
+   "results": "{\"t\": \"2026-10-24T00:13:46Z\", \"tool\": \"loogle\", \"query\": \"Matrix, \\\"diagonal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Matrix.diagonal\", \"Matrix.diagonal_injective\", \"Matrix.diagonal_transpose\", \"Matrix.diagonal_eq_diagonal_iff\", \"Matrix.diagonal_intCast\", \"Matrix.diagonal_natCast\", \"Matrix.diagonal_zero\", \"Matrix.diagonal_intCast'\"], \"digest\": \"7a8c35e4ac724b6d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Matrix/Transvection.lean:70,73,594–615 (Field pivot theorem; CommRing transvections), and FreeModule/PID.lean:98 (CommRing); these do not apply to general noncommutative rings. Other hits only define diagonal matrices or concern integer matrices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Diagonal reduction of a rectangular matrix over a noncommutative ring with two-sided Euclidean division",
+   "results": "{\"t\": \"2026-10-24T00:13:46Z\", \"tool\": \"leanfinder\", \"query\": \"Diagonal reduction of a rectangular matrix over a noncommutative ring with two-sided Euclidean division\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_induction\", \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_aux\", \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal\", \"Matrix.Pivot.exists_list_transvec_mul_diagonal_mul_list_transvec\", \"Matrix.Pivot.reindex_exists_list_transvec_mul_mul_list_transvec_eq_diagonal\", \"Algebra.Norm.Transitivity.auxMat_toSquareBlock_ne\", \"Matrix.Pivot.exists_isTwoBlockDiagonal_of_ne_zero\", \"Algebra.Norm.Transitivity.mul_auxMat_corner\"], \"digest\": \"6fe4990a830bf95d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Matrix/Transvection.lean:70,73,594–615 (Field pivot theorem; CommRing transvections), and FreeModule/PID.lean:98 (CommRing); these do not apply to general noncommutative rings. Other hits only define diagonal matrices or concern integer matrices."
+  },
+  {
+   "tool": "grep",
+   "query": "CommRing|smithNormalForm",
+   "results": "{\"t\": \"2026-10-24T00:14:37Z\", \"tool\": \"grep\", \"query\": \"CommRing|smithNormalForm\", \"sub\": \"LinearAlgebra/FreeModule/PID.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"38\", \"98\", \"142\", \"278\", \"298\"], \"digest\": \"bc23a65810628e74\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Matrix/Transvection.lean:70,73,594–615 (Field pivot theorem; CommRing transvections), and FreeModule/PID.lean:98 (CommRing); these do not apply to general noncommutative rings. Other hits only define diagonal matrices or concern integer matrices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smith reduction without invariant factors for matrices over a ring admitting left and right Euclidean remainders",
+   "results": "{\"t\": \"2026-10-24T00:14:38Z\", \"tool\": \"leanfinder\", \"query\": \"Smith reduction without invariant factors for matrices over a ring admitting left and right Euclidean remainders\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.SmithNormalForm\", \"Module.Basis.SmithNormalForm.a\", \"Submodule.smithNormalFormCoeffs\", \"FixedDetMatrices.reduce\", \"Submodule.smithNormalForm\", \"Ideal.smithCoeffs\", \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_aux\", \"FixedDetMatrices.reduce_reduceStep\"], \"digest\": \"8551cca9d21cbde7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Matrix/Transvection.lean:70,73,594–615 (Field pivot theorem; CommRing transvections), and FreeModule/PID.lean:98 (CommRing); these do not apply to general noncommutative rings. Other hits only define diagonal matrices or concern integer matrices."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-skew-polynomial-cyclic-decomposition",
+  "date": "2026-10-24",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting Milne Corollary 14.53, used after the elementary-unipotent reduction in 14.54: the full product classification is Proposition 14.52. Present split: step 2, cyclic decomposition of P(H) in Milne 14.52, using the corrected cyclic-module assertion of 14.51. Supporting input: Proposition 14.51, printed p.297, the omitted matrix-reduction argument in the comparison with the polynomial-ring proof; supporting agent lemma (Berrick and Keating 2000, Theorem 3.3.6, cited there, is not available locally).",
+   "via": [
+    "lem-sfb-perfect-skew-polynomial-cyclic-decomposition",
+    "lem-sfb-additive-subgroup-perfect-decomposition",
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-two-sided-division-matrix-diagonalization",
+  "worker": "stage1",
+  "summary": "Q129 checked Milne pp.296–297, searched project Lean, the whole DAG and blueprint and Mathlib, and supplied the omitted noncommutative matrix argument by a minimum over the equivalence orbit followed by induction on min(m,n). All elementary inverses, sided divisions, preservation of the cleared column and final block products are explicit. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the existing ancestry place: det-thm-sf-ctf-stability-direct-images proof (3), through the Milne 14.51 cyclic-decomposition prerequisite. This item supplies the matrix-reduction input to step 4 of lem-sfb-perfect-skew-polynomial-cyclic-decomposition. The inherited blueprint.from.node=null is retained: blueprint_refs.py ancestor reports None; the inherited via chain and precise place are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-161e47203",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-161e47203 (reviewer sub-agent of L); spot-checked: PASS, no changes. The item statement is byte-identical to the base and matches how step 4 of the parent lem-sfb-perfect-skew-polynomial-cyclic-decomposition uses it (D=UCV, U and V two-sided invertible, rectangular diagonal of length min(m,n)). Source checked: Milne iAG2017 printed p.296 (both divisions) and p.297 (Prop. 14.51); Milne gives no proof, only a pointer to Berrick-Keating, so the agent proof is legitimate. All six steps verified. Step 1: I+e_ij(s) adds s*row j on the left and column i*s on the right, with inverse I-e_ij(s). Step 2: strong induction on min(m,n) with base case and zero-matrix case. Step 3: least delta taken over the whole two-sided orbit. Step 4: left-quotient division A_i1=q_i d+r_i with row operation I-e_i1(q_i); minimality forces r_i=0 and row 1 is fixed. Step 5: right-quotient division B_1j=d q'_j+r'_j with column operation; H is untouched because B_i1=0. Step 6: block assembly U=diag(1,U0)LP, V=QTdiag(1,V0). Edge cases checked: m or n=0, zero ring, m=1, n=1, 1x1 matrices, zero divisors (no cancellation is used), delta(d)=0. proof_deps is the union of the step uses (def-weil-matrix); every step is genuinely elementary. No new nodes. A scan of all DAG statements found no duplicate; the existing normal-form nodes are commutative. No SGA. blueprint.from.node=null is inherited from the base. Minor: the report mentions a citations.json that is not in the delivery."
+ }
+}

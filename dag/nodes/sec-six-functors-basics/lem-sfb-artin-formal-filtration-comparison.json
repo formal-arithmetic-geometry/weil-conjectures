@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-artin-formal-filtration-comparison",
+ "kind": "statement",
+ "title": "Formal objects are independent of a cofinal ideal filtration",
+ "statement": "Let $R$ be a commutative Noetherian ring and $k$ a field of finite type over $R$ [def-weil-pbc-noetherian-ring], [def-weil-field], [def-weil-finite-type-morphism]. Use the category $\\mathcal C_{R,k}$ of Artinian local $R$-algebras with specified residue field $k$ and local maps inducing the identity on $k$ [def-sfb-artin-deformation-test-category]. Let $\\mathcal F$ be any category cofibred in groupoids on $\\mathcal C_{R,k}$ [def-sfb-artin-deformation-test-category]. Let $C$ be a complete Noetherian local $R$-algebra with residue field $k$, and let $I_1\\supseteq I_2\\supseteq\\cdots$ be proper ideals cofinal with the powers of $\\mathfrak m_C$: for every $r$ some $I_n\\subseteq\\mathfrak m_C^r$ and for every $n$ some $\\mathfrak m_C^r\\subseteq I_n$. The groupoid of compatible systems $u_n\\in\\mathcal F(C/I_n)$, with transition isomorphisms and compatible families of arrows, is equivalent to the groupoid of formal objects on $C$. If $u$ corresponds to $\\xi$, then its value at $C\\to C/I_n$ is compatibly isomorphic to $u_n$. More generally, for any local $R$-algebra map $C\\to A$ inducing the identity on the specified residue field $k$ with $A\\in\\mathcal C_{R,k}$ factoring through $C/I_n$, the value $\\xi_A$ is compatibly isomorphic to the transport of $u_n$ to $A$.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06H6 (lemma-formal-objects-different-filtration), including the evaluations supplied by its cofinal reindexing construction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-sfb-artin-deformation-test-category",
+  "def-sfb-artin-cofinal-filtration-system"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathfrak m=\\mathfrak m_C$, $B_n=C/I_n$ and $D_r=C/\\mathfrak m^r$, with all indices positive. Every proper ideal of the local ring $C$ lies in $\\mathfrak m$. For each $n$, cofinality supplies $N\\ge1$ with $\\mathfrak m^N\\subseteq I_n\\subseteq\\mathfrak m$. The quotient lemma therefore makes $B_n$ Artinian local with maximal ideal $\\mathfrak m/I_n$; likewise $D_r$ is Artinian local. The residue identification for both is $C/\\mathfrak m=k$. All quotient maps below are local $R$-maps inducing the identity on $k$, so these rings and maps belong to the test category. Choose nondecreasing functions $p,q:\\mathbf N_{>0}\\to\\mathbf N_{>0}$ with $p(r)\\ge r$, $q(n)\\ge n$, $I_{p(r)}\\subseteq\\mathfrak m^r$ and $\\mathfrak m^{q(n)}\\subseteq I_n$. Recursively take each new index at least its predecessor and its argument, and at least a cofinality witness; decreasing ideals and powers preserve the required containments. Repetitions are allowed.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06H6 (lemma-formal-objects-different-filtration), selection of indices; test-ring verification using algebra.tex Tag 00KH (lemma-Noetherian-dimension-0)."
+   }
+  },
+  {
+   "text": "Use the coherent transport functors of the deformation-test definition. For an ideal inclusion $J\\subseteq K$, denote transport along $C/J\\to C/K$ by $T_{J,K}$. Its specified composition isomorphism identifies $T_{K,L}T_{J,K}$ with $T_{J,L}$; throughout, insert these isomorphisms. If $u$ is an $I$-system, let $\\tau_{a,b}:T_{I_a,I_b}u_a\\xrightarrow{\\sim}u_b$ for $a\\ge b$ be its iterated transition. Its compatibility reads $\\tau_{a,c}=\\tau_{b,c}\\circ T_{I_b,I_c}(\\tau_{a,b})$. Define $(Eu)_r=T_{I_{p(r)},\\mathfrak m^r}u_{p(r)}$. For $s\\ge r$, its transition to level $r$ is $T_{I_{p(r)},\\mathfrak m^r}(\\tau_{p(s),p(r)})$, after identifying its source with $T_{I_{p(s)},\\mathfrak m^r}u_{p(s)}$. The displayed identity for $\\tau$ makes these transitions compose, and pseudofunctor associativity identifies the two ways of inserting transport compositions. An arrow $a:u\\to v$ is sent at level $r$ to $T_{I_{p(r)},\\mathfrak m^r}(a_{p(r)})$; its transition square is the transported square for $a$. Transport preserves identities and composites, so this defines a functor $E$ to formal objects on $C$.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06H6 (lemma-formal-objects-different-filtration), construction of the functor; Tag 06H3 (definition-formal-objects)."
+   }
+  },
+  {
+   "text": "Define a functor $G$ in the opposite direction by $(G\\xi)_n=T_{\\mathfrak m^{q(n)},I_n}\\xi_{q(n)}$. If $n'\\ge n$, transport the transition of $\\xi$ from $q(n')$ to $q(n)$ further to $B_n$ to obtain the transition for $G\\xi$. On arrows use transport of the component at $q(n)$. The transition identity and the arrow squares follow by applying the same transport functor to the corresponding identity and square for $\\xi$; its functor laws give the functor laws for $G$. Now put $t_n=p(q(n))\\ge n$. Composition of transports identifies $(GEu)_n$ with $T_{I_{t_n},I_n}u_{t_n}$, since $I_{t_n}\\subseteq\\mathfrak m^{q(n)}\\subseteq I_n$. The component $\\alpha_{u,n}=\\tau_{t_n,n}$ is an isomorphism to $u_n$. For $n'\\ge n$, both routes in its transition square are the transition $\\tau_{t_{n'},n}$: factor it first through $t_n$, respectively first through $n'$. These are equal by the identity in step 2. For an arrow $a:u\\to v$, naturality of $\\alpha$ is precisely the transition square for $a$ from $t_n$ to $n$. Thus $\\alpha:GE\\xrightarrow{\\sim}\\mathrm{id}$ is a natural isomorphism.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06H6 (lemma-formal-objects-different-filtration), explicit inverse and first comparison filling the omitted equivalence verification."
+   }
+  },
+  {
+   "text": "Put $s_r=q(p(r))\\ge r$. Then $(EG\\xi)_r$ is canonically $T_{\\mathfrak m^{s_r},\\mathfrak m^r}\\xi_{s_r}$, since $\\mathfrak m^{s_r}\\subseteq I_{p(r)}\\subseteq\\mathfrak m^r$. Let $\\beta_{\\xi,r}$ be the transition of $\\xi$ from $s_r$ to $r$. For $r'\\ge r$, the two composites in its transition square are the transition from $s_{r'}$ to $r$, factored through $s_r$, respectively through $r'$. The formal-system transition identity equates them. The componentwise arrow square from $s_r$ to $r$ gives naturality in $\\xi$. Hence $\\beta:EG\\xrightarrow{\\sim}\\mathrm{id}$. The functors $E,G$ with these two natural isomorphisms exhibit an equivalence of groupoids. No descent or lifting property of $\\mathcal F$ is used: only its transport functors, their coherent compositions, and the invertible transitions of the given systems occur.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06H6 (lemma-formal-objects-different-filtration), second comparison filling the omitted equivalence verification."
+   }
+  },
+  {
+   "text": "Let $\\xi=Eu$. Fix $n$ and choose $r\\ge q(n)$. Then $\\mathfrak m^r\\subseteq I_n$ and $p(r)\\ge r\\ge n$. Evaluate $\\xi$ at $B_n$ by transporting its $r$-th component. The composition isomorphism gives\n$$T_{\\mathfrak m^r,I_n}\\xi_r\\cong T_{I_{p(r)},I_n}u_{p(r)}\\xrightarrow{\\tau_{p(r),n}}u_n.$$\nIncreasing $r$ does not change this comparison: the two maps from any larger component both equal its transition to $u_n$, by the identity for $\\tau$. For $n'\\ge n$, choose one $r$ at least $q(n')$ and $q(n)$, and increase it until $p(r)\\ge n'$. The two comparison paths to $u_n$ are $\\tau_{p(r),n}$ and $\\tau_{n',n}\\circ T_{I_{n'},I_n}(\\tau_{p(r),n'})$, which are equal. Arrow naturality is the component square for an arrow of $I$-systems from $p(r)$ to $n$. Thus these evaluation comparisons are compatible in $n$, in the truncation chosen for evaluation, and in $u$.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06H6 (lemma-formal-objects-different-filtration), evaluation of its construction; Tag 06H3 (definition-formal-objects)."
+   }
+  },
+  {
+   "text": "Finally let $a:C\\to A$ be a local $R$-map inducing the identity on $k$, factoring as $C\\to B_n\\xrightarrow{\\bar a}A$. With $r\\ge q(n)$ as in step 5, $a$ kills $\\mathfrak m^r$, so the defining evaluation $\\xi_A$ can use $\\xi_r$. Transporting the isomorphism in step 5 along $\\bar a$ gives $\\xi_A\\cong\\bar a_*u_n$. For a further morphism $A\\to A'$ in the test category, the composition isomorphism identifies this comparison transported to $A'$ with the one for the composite map. If a second index also permits the factorization, take a common larger index and a common $r$; the identity for $\\tau$ used in step 5 equates both comparisons. These observations also prove compatibility with arrows of systems. For a different formal object isomorphic to $Eu$, compose with that isomorphism and its evaluated components.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06H6 (lemma-formal-objects-different-filtration), evaluation consequence of the explicitly constructed equivalence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "def-sfb-artin-deformation-test-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06H6 (lemma-formal-objects-different-filtration): follow its transport construction and supply its omitted inverse-functor, natural-isomorphism and evaluation verifications."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible formal objects over cofinal filtrations of complete local ring equivalent groupoids",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.ext\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {x y : AdicCompletion I M}, (∀ (n : ℕ), ↑x n = ↑y n) → x = y\", \"doc\": \"In the adic completion of an $ R $-module $ M $ with respect to an ideal $ I $, two elements $ x $ and $ y $ are equal if their projections to each quotient module $ M/I^nM $ coincide for all natural \"}\n  {\"name\": \"AdicCompletion.ext_iff\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {x y : AdicCompletion I M}, x = y ↔ ∀ (n : ℕ), ↑x n = ↑y n\", \"doc\": \"Two elements in the adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ are equal if and only if their projections to each quotient module $ M/I^nM $ are equal for all natural numb\"}\n  {\"name\": \"AdicCompletion.ext_evalₐ\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {x y : AdicCompletion I R},\\n  (∀ (n : ℕ), (AdicCompletion.evalₐ I n) x = (AdicCompletion.evalₐ I n) y) → x = y\", \"doc\": \"If two elements $x$ and $y$ in the $I$-adic completion of a commutative ring $R$ satisfy $\\\\text{eval}_\\\\mathfrak{a}(n, x) = \\\\text{eval}_\\\\mathfrak{a}(n, y)$ for all natural numbers $n$, then $x = y$. Th\"}\n  {\"name\": \"IsPrecomplete.prec'\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} {M : Type u_4} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  [self : IsPrecomplete I M] (f : ℕ → M),\\n  (∀ {m n : ℕ}, m ≤ n → f m ≡ f n [SMOD I ^ m • ⊤]) → ∃ L, ∀ (n : ℕ), f n ≡ L [SMOD I ^ n • ⊤]\", \"doc\": \"In a precomplete $ R $-module $ M $ with respect to an ideal $ I $, if a sequence $ (f_n) $ satisfies $ f_m \\\\equiv f_n \\\\mod I^m $ for all $ m \\\\leq n $, then there exists an element $ L \\\\in M $ such th\"}\n  {\"name\": \"isPrecomplete_iff\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  IsPrecomplete I M ↔\\n    ∀ (f : ℕ → M), (∀ {m n : ℕ}, m ≤ n → f m ≡ f n [SMOD I ^ m • ⊤]) → ∃ L, ∀ (n : ℕ), f n ≡ L [SMOD I ^ n • ⊤]\", \"doc\": \"An $ R $-module $ M $ is precomplete with respect to an ideal $ I $ if and only if every sequence $ (f_n) $ in $ M $ satisfying $ f_m \\\\equiv f_n \\\\mod I^m \\\\cdot M $ for all $ m \\\\leq n $ converges to so\"}\n  {\"name\": \"IsPrecomplete.prec\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  IsPrecomplete I M →\\n    ∀ {f : ℕ → M}, (∀ {m n : ℕ}, m ≤ n → f m ≡ f n [SMOD I ^ m • ⊤]) → ∃ L, ∀ (n : ℕ), f n ≡ L [SMOD I ^ n • ⊤]\", \"doc\": \"In a precomplete $ R $-module $ M $ with respect to an ideal $ I $, any sequence $ (f_n) $ satisfying $ f_m \\\\equiv f_n \\\\mod I^m \\\\cdot M $ for all $ m \\\\leq n $ converges to a limit $ L \\\\in M $ such tha\"}\n  {\"name\": \"AdicCompletion.AdicCauchySequence.mk_eq_mk\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {m n : ℕ},\\n  m ≤ n → ∀ (f : AdicCompletion.AdicCauchySequence I M), Submodule.Quotient.mk (↑f n) = Submodule.Quotient.mk (↑f m)\", \"doc\": \"For any natural numbers $m \\\\leq n$ and adic Cauchy sequence $f$ in the $I$-adic topology on an $R$-module $M$, the canonical quotient maps of the $n$-th and $m$-th terms of $f$ into the quotient modul\"}\n  {\"name\": \"Ideal.Filtration.ext\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} {M : Type u_3} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  {x y : I.Filtration M}, x.N = y.N → x = y\", \"doc\": \"Two ideal filtrations on an $ R $-module $ M $ are equal if their sequences of submodules $ I^n M $ for all natural numbers $ n $ are equal.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: adic elements and ind-object presentations do not assert equivalence of compatible groupoid-valued deformation systems with evaluations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Deformation category formal objects independent of cofinal ideal filtration",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.isIndObject_iff\", \"module\": \"Mathlib.CategoryTheory.Limits.Indization.IndObject\", \"type\": \"(A : Cᵒᵖ ⥤ Type v) :\\n  IsIndObject A ↔ (IsFiltered (CostructuredArrow yoneda A) ∧ FinallySmall.{v} (CostructuredArrow yoneda A))\", \"doc\": \"A functor $ A : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Type}\\\\, v $ is an ind-object in $ \\\\mathcal{C} $ if and only if the comma category $ \\\\text{CostructuredArrow}(\\\\text{yoneda}, A) $ is both filtered and \"}\n  {\"name\": \"CategoryTheory.Limits.isIndObject_of_isFiltered_of_finallySmall\", \"module\": \"Mathlib.CategoryTheory.Limits.Indization.IndObject\", \"type\": \"(A : Cᵒᵖ ⥤ Type v) [IsFiltered (CostructuredArrow yoneda A)] [FinallySmall.{v} (CostructuredArrow yoneda A)] :\\n  IsIndObject A\", \"doc\": \"Let $\\\\mathcal{C}$ be a category and $A : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Type}\\\\, v$ a functor. If the comma category $\\\\text{CostructuredArrow}(\\\\text{yoneda}, A)$ is filtered and finally small, then \"}\n  {\"name\": \"CategoryTheory.Limits.IndObjectPresentation.hI\", \"module\": \"Mathlib.CategoryTheory.Limits.Indization.IndObject\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {A : CategoryTheory.Functor Cᵒᵖ (Type v)}\\n  (self : CategoryTheory.Limits.IndObjectPresentation A), CategoryTheory.IsFiltered self.I\", \"doc\": \"For any category $\\\\mathcal{C}$ and contravariant functor $A: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathrm{Type}\\\\,v$, the small category structure on the underlying type $I$ of the ind-object presentation deter\"}\n  {\"name\": \"CategoryTheory.Limits.HasFilteredColimits\", \"module\": \"Mathlib.CategoryTheory.Limits.Filtered\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"An abbreviation for the inductive definition characterizing categories where every finite diagram admits a cocone, ensuring the existence of filtered colimits. This is defined using universe parameter\"}\n  {\"name\": \"CategoryTheory.Limits.FormalCoproduct.I\", \"module\": \"Mathlib.CategoryTheory.Limits.FormalCoproducts\", \"type\": \"{C : Type u} → CategoryTheory.Limits.FormalCoproduct C → Type w\", \"doc\": \"A function assigning to each formal coproduct in a category its corresponding object in the category, parameterized by universe levels $u$ and $w$.\"}\n  {\"name\": \"HomotopicalAlgebra.CategoryWithFibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CategoryWithCofibrations\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max u v)\", \"doc\": \"An inductive definition of a category equipped with a class of cofibrations, where objects are in Type u and morphisms between objects form types in Type (max u (v + 1)).\"}\n  {\"name\": \"HomotopicalAlgebra.cofibrantObjects\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Bifibrant\", \"type\": \": ObjectProperty C\", \"doc\": \"The property of an object in a category with cofibrations, asserting that the unique morphism from the initial object to the given object is a cofibration.\"}\n  {\"name\": \"CategoryTheory.IsFiltered.isSifted\", \"module\": \"Mathlib.CategoryTheory.Filtered.Final\", \"type\": \"[IsFiltered C] : IsSifted C\", \"doc\": \"Every filtered category is a sifted category, meaning that filtered colimits commute with finite limits in the category of sets.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: adic elements and ind-object presentations do not assert equivalence of compatible groupoid-valued deformation systems with evaluations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"filtration\", \"equivalence\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: adic elements and ind-object presentations do not assert equivalence of compatible groupoid-valued deformation systems with evaluations"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]ormal[Oo]bject|[Cc]ofinal.*[Ff]iltration|[Ff]iltration.*[Ee]quivalence",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: adic elements and ind-object presentations do not assert equivalence of compatible groupoid-valued deformation systems with evaluations"
+  },
+  {
+   "tool": "grep",
+   "query": "formalObject|formal_object|cofinal.*filtration|filtration.*equivalence",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: filtration extensionality and ordinary Type-valued sections do not give transport-compatible equivalences of groupoid-valued formal systems"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence of groupoids of compatible sections over cofinal sequences of quotients of a local ring",
+   "results": "OK 8 hits: CategoryTheory.Functor.toEventualRangesSectionsEquiv, CategoryTheory.Limits.Types.limitEquivSections, CategoryTheory.Sheaf.ΓObjEquivSections, ModuleCat.sectionsSubmodule, TopCat.Presheaf.IsCompatible.sectionPairwise, CategoryTheory.PreGaloisCategory.endEquivSectionsFibers, CategoryTheory.PreGaloisCategory.AutGalois, GrpCat.sectionsGroup. ",
+   "date": "2026-10-23",
+   "verdict": "no match: filtration extensionality and ordinary Type-valued sections do not give transport-compatible equivalences of groupoid-valued formal systems"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cofinal\", \"equivalence\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: filtration extensionality and ordinary Type-valued sections do not give transport-compatible equivalences of groupoid-valued formal systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible groupoid valued deformation systems on two cofinal ideal filtrations give equivalent categories of formal objects",
+   "results": "OK 8 hits: Ideal.Filtration.ext, Ideal.Filtration.mk.inj, Ideal.Filtration.ext_iff, Ideal.Filtration.Stable.bounded_difference, Ideal.Filtration, Ideal.Filtration.Stable, Ideal.Filtration.Stable.exists_forall_le, Ideal.Filtration.Stable.exists_pow_smul_eq. ",
+   "date": "2026-10-23",
+   "verdict": "no match: filtration extensionality and ordinary Type-valued sections do not give transport-compatible equivalences of groupoid-valued formal systems"
+  },
+  {
+   "tool": "grep",
+   "query": "isArtinianRing.*[Qq]uotient|quotient.*[Aa]rtinian|isArtinianRing_of_isNilpotent",
+   "results": "OK 11 hits: Mathlib/RingTheory/Length.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/HopkinsLevitzki.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean. ",
+   "date": "2026-10-23",
+   "verdict": "supporting match already represented by the existing Mathlib leaf lem-weil-pbc-noetherian-local-quotient-artinian-local; not a match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A noetherian local ring modulo an ideal containing a power of its maximal ideal is artinian local",
+   "results": "OK 8 hits: IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing, IsLocalRing.finite_quotient_iff, IsLocalRing.exists_maximalIdeal_pow_le_of_isArtinianRing_quotient, isArtinianRing_iff_isNilpotent_maximalIdeal, IsLocalRing.exists_maximalIdeal_pow_le_of_finite_quotient, IsHausdorff.of_isLocalRing, Algebra.QuasiFinite.instIsArtinianRingFiber, Ideal.iInf_pow_eq_bot_of_isLocalRing. ",
+   "date": "2026-10-23",
+   "verdict": "supporting match already represented by the existing Mathlib leaf lem-weil-pbc-noetherian-local-quotient-artinian-local; not a match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse equivalence between compatible systems in groupoids over two mutually cofinal sequences is constructed by reindexing and transport",
+   "results": "OK 8 hits: InverseSystem.globalEquiv_compatibility, InverseSystem.globalEquiv, InverseSystem.pEquivOnGlue, InverseSystem.pEquivOnLim, InverseSystem.globalEquiv_naturality, InverseSystem.PEquivOn.compat, InverseSystem.pEquivOnSucc, InverseSystem.IsNatEquiv. ",
+   "date": "2026-10-23",
+   "verdict": "no match: filtration extensionality and ordinary Type-valued sections do not give transport-compatible equivalences of groupoid-valued formal systems"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-rs-versal-formal-object",
+  "date": "2026-10-23",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: first three sentences of the proof, construction of a versal formal object before effectivity; Tag 06H6 (lemma-formal-objects-different-filtration), including the evaluations supplied by its cofinal reindexing construction.",
+   "via": [
+    "lem-sfb-artin-rs-versal-formal-object",
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-artin-formal-filtration-comparison",
+  "worker": "stage1",
+  "summary": "NJ: verified Tag 06H6 and the definition of formal objects; constructed both reindexing functors and their componentwise natural isomorphisms, including all evaluation compatibilities. Reused the existing Artinian quotient leaf; no new nodes. Corrected the final evaluation clause to require a morphism respecting R and the fixed residue field, so transport is defined.",
+  "blueprint": "The existing provenance traces this input to det-thm-sf-ctf-stability-direct-images, proof (3), through the Artin versal-formal-object construction: its passage from a cofinal ideal filtration to maximal-ideal truncations. Steps 1--6 realize precisely the Tag 06H6 input, without altering the unit route. The ancestor tool returns None for this existing broken provenance chain; retain its maintainer-owned chain and explicit from.place.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-586d8011a",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-586d8011a (reviewer sub-agent of L); spot-checked: Read Stacks formal-defos.tex Tag 06H6 in full, together with the F̂_I(R) definition and 06H3, 06H4 and 06H5. 06H6's proof says 'We omit the verification that this is indeed an equivalence'; steps 3-4 supply that verification: the inverse functor G with GE≅id via τ_{p(q(n)),n} and EG≅id via ξ's transition from q(p(r)) to r. I checked every square against the cocycle τ_{a,c}=τ_{b,c}∘T(τ_{a,b}). Index choices are nondecreasing with p(r)≥r, q(n)≥n, I_{p(r)}⊆m^r and m^{q(n)}⊆I_n. Step 1 correctly applies the Mathlib leaf lem-weil-pbc-noetherian-local-quotient-artinian-local (r≥1 because I_n is proper). Steps 5-6 use only the evaluation clause of def-sfb-artin-deformation-test-category (no RS or versality). The correction from 'any local map' to a local R-map inducing the identity on k is accepted: Frobenius on F_4 over F_2 has no transport, the definition already restricts ξ_A to test-category maps, and parent lem-sfb-artin-rs-versal-formal-object steps 4/5 use only such maps. No new nodes. rg -L found no duplicate of 06H6 in the DAG. No SGA. All four search kinds are recorded. The item is unsplit with no review in live and side-live, so it is not superseded. Maintainer note: from.node=null, a provenance chain inherited from the Q15 creation chain."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinFormalFiltrationComparison",
+  "declaration": "AlgebraicGeometry.ArtinDeformation.formal_filtration_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ArtinDeformation.formal_filtration_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinFormalFiltrationComparison.lean",
+  "statement": "theorem formal_filtration_comparison {R k : Type u} [CommRing R] [IsNoetherianRing R] [Field k] [Algebra R k] [Algebra.FiniteType R k] (F : CofibredGroupoids.{u, v, w} R k) (C : CompleteLocalAlgebra R k) (I : CofinalIdealFiltration C) : ∃ E : FiltrationSystem I F ≌ FormalObject F C, ∃ e : ∀ (s : FiltrationSystem I F) (n : ℕ) (A : TestCategory R k) (f : filtrationTest I n ⟶ A), evaluate (E.functor.obj s) (filtrationLocalMap I n f) ≅ (push F f).obj (s.obj n), (∀ (s t : FiltrationSystem I F) (a : s ⟶ t) (n : ℕ) (A : TestCategory R k) (f : filtrationTest I n ⟶ A), (push F (evaluationMap (filtrationLocalMap I n f))).map ((E.functor.map a).app (nilpotenceIndex A)) ≫ (e t n A f).hom = (e s n A f).hom ≫ (push F f).map (a.app n)) ∧ (∀ (s : FiltrationSystem I F) (n m : ℕ) (h : m ≤ n) (A B : TestCategory R k) (f : filtrationTest I n ⟶ A) (f' : filtrationTest I m ⟶ B) (g : A ⟶ B) (hg : f ≫ g = filtrationMap I h ≫ f'), (push F g).map (e s n A f).hom ≫ (filtrationTransportComparison I s h f f' g hg).hom = (evaluationRestriction (E.functor.obj s) g (filtrationLocalMap I m f') (filtrationLocalMap I n f) (filtrationLocalMap_comp I h f f' g hg)).hom ≫ (e s m B f').hom)",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48a1b8758",
+  "group": "Q144",
+  "result": "fix",
+  "note": "Re-delivery of RETURN cb8c0aa3 (H13): the def-sfb-artin-deformation-test-category record is byte-identical to live/side-live; ArtinFormalObjectGroupoid.lean is removed; the six FormalObject category helpers moved verbatim into ArtinCofinalFiltrationSystem (blueprint tag changed only) and are listed in the new node's lean.declarations. The item statement is unchanged and verbatim. Clause check against Tag 06H6 and the recorded ArtinDeformationTestCategory: binders, CofinalIdealFiltration (r+1 exponent, n means I_{n+1}), FiltrationSystem mirroring FormalObject over literal quotients, ∃ E ≌, evaluation family e with naturality, and the transport equation type-checked against evaluationRestriction's argument order. Edge cases n=0, zero filtration, repetitions, empty fibres and universes are covered. No duplicates found by rg in live/side-live; no hollow definitions; sorry-only proofs. Only fault: H11, the second reading was dispatcher wording only. FIX: fixes/lem-sfb-artin-formal-filtration-comparison.report.md = worker report verbatim + a real clause-by-clause second reading. No Lean file changed, so nothing was compiled."
+ }
+}

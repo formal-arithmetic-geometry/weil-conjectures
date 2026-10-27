@@ -1,0 +1,332 @@
+{
+ "id": "lem-sfb-flat-lfp-lqf-degree-superlevel-open",
+ "kind": "statement",
+ "title": "Fibre-degree superlevel sets for flat locally quasi-finite morphisms",
+ "statement": "Let $f:Y\\to T$ be a morphism of schemes [def-pc-scheme] which is flat [def-weil-flat-morphism], locally of finite presentation [def-sbc-locally-finite-presentation], separated (its diagonal is a closed immersion [def-weil-proper-morphism]), and locally quasi-finite [pqf-def-quasifinite]. Assume that for every point $t\\in T$ the scheme-theoretic fibre $Y_t=Y\\times_T\\operatorname{Spec}\\kappa(t)$ [def-pc-scheme-fibre, def-weil-residue-field] is finite over $\\kappa(t)$ [def-weil-finite-integral-morphism]. Write $Y_t=\\operatorname{Spec}B_t$ and $\\delta(t)=\\dim_{\\kappa(t)}B_t$, its finite fibre degree [def-weil-pbc-fibre-degree-bound]. Then for every integer $d\\ge0$ the subset $T_{\\ge d}=\\{t\\in T:\\delta(t)\\ge d\\}$ is open in $T$. Neither a uniform bound on these degrees nor quasi-compactness of $Y$ or $T$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 086R (lemma-stratify-flat-fp-lqf), restricted to morphisms with finite fibres; degree-superlevel open subschemes U_d."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "pqf-def-quasifinite",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-fibre-degree-bound"
+ ],
+ "proof": [
+  {
+   "text": "Work over an arbitrary affine open $V\\subseteq T$, and set $Y_V=f^{-1}(V)$. By [lem-weil-pbc-open-preimage-fibre-product] this is base change along $V\\hookrightarrow T$. Flatness, local finite presentation, separatedness and local quasi-finiteness persist by [lem-weil-pbc-flat-morphism-base-change], [lem-weil-pbc-qcqs-morphism-permanence] (3), and [lem-weil-pbc-separated-lqf-base-change]. Its fibre at $t\\in V$ is the original $Y_t$, by the fibre-product universal property. Thus its degree is $\\delta(t)$. It suffices to prove openness inside each $V$, since these opens cover $T$.",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-separated-lqf-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 086R (lemma-stratify-flat-fp-lqf), proof; Tag 07RZ (lemma-stratify-flat-fp-qf)"
+   }
+  },
+  {
+   "text": "Let $W\\subseteq Y_V$ be any quasi-compact open, including the empty open, and put $h_W:W\\to V$. The affine scheme $V$ is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], so [lem-weil-pbc-qcqs-morphism-permanence] (1) makes $h_W$ quasi-compact. It is locally quasi-finite by [lem-weil-pbc-lqf-restriction-to-opens], hence quasi-finite by [pqf-lem-qf-locqf-qc]. Flatness restricts because the local rings and their structural maps at a source point are unchanged; local finite presentation restricts by shrinking a presenting affine neighbourhood to a principal open $D(g)$ inside $W$: its algebra is presented by adjoining $z$ with relation $gz-1$ [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. The diagonal of $h_W$ is the base change of the diagonal of $Y_V\\to V$ along $W\\times_V W\\to Y_V\\times_VY_V$. It is a closed immersion by [lem-weil-pbc-closed-immersion-base-change], hence $h_W$ is separated.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-lqf-restriction-to-opens",
+    "pqf-lem-qf-locqf-qc",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 086R (lemma-stratify-flat-fp-lqf), proof; Tag 07RZ (lemma-stratify-flat-fp-qf)"
+   }
+  },
+  {
+   "text": "For $t\\in V$, the fibre $(W)_t$ is the open subscheme of $Y_t$ cut out by $W$, by the open fibre-product identification [lem-weil-pbc-open-preimage-fibre-product]. By [lem-weil-pbc-finite-over-field-affine-finite-dim] write $Y_t=\\operatorname{Spec}B_t$ with $B_t$ finite-dimensional over $k=\\kappa(t)$. Apply [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] with the local ring $R=k$ and maximal ideal zero: $|Y_t|$ is finite discrete. Thus $(W)_t$ and its complement $C_t$ are open, and both are affine by [lem-weil-pbc-finite-discrete-scheme-affine]. Sheaf gluing on the disjoint open cover gives a $k$-algebra isomorphism $B_t\\cong\\Gamma((W)_t,\\mathcal O)\\times\\Gamma(C_t,\\mathcal O)$. In particular each factor is finite-dimensional and its dimension is at most $\\dim_k B_t$ (each embeds linearly by putting zero in the other factor). By [def-weil-finite-integral-morphism], $(W)_t$ is finite over $k$. Write $\\delta_W(t)=\\dim_k\\Gamma((W)_t,\\mathcal O)$; then $0\\le\\delta_W(t)\\le\\delta(t)$.",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "lem-weil-pbc-finite-discrete-scheme-affine",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 086R (lemma-stratify-flat-fp-lqf), proof; Tag 07RZ (lemma-stratify-flat-fp-qf)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-fp-qf-stratification] to $h_W$ to obtain closed $Z_{-1}=\\varnothing\\subseteq Z_0\\subseteq\\cdots$ and strata $S_r=Z_r\\setminus Z_{r-1}$. Its universal property, tested on $\\operatorname{Spec}\\kappa(t)\\to V$, says that $t\\in S_r$ exactly when $\\delta_W(t)=r$. Here a finite $k$-scheme of degree $r$ is finite locally free of degree $r$ [def-pc-finite-locally-free]: choose a basis of its finite-dimensional algebra; it is a free $k$-module, and the relations $x_ix_j=\\sum_k c_{ijk}x_k$ and $1=\\sum_i u_ix_i$ from its multiplication table give a finite algebra presentation: they reduce every polynomial to a linear combination of the $x_i$, whose images are a basis. The zero algebra is presented by $(1)$. Conversely the defining degree condition gives that dimension. Because the strata partition $V$, for $d\\ge1$ the subset $\\{t:\\delta_W(t)\\ge d\\}$ equals $V\\setminus Z_{d-1}$ and is open. For $d=0$ it is $V$.",
+   "uses": [
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 086R (lemma-stratify-flat-fp-lqf), proof; Tag 07RZ (lemma-stratify-flat-fp-qf)"
+   }
+  },
+  {
+   "text": "Every fibre $Y_t$ has finitely many underlying points, as proved in step 3. Choose an affine open neighbourhood in $Y_V$ of each such point and let $W$ be their finite union; this is quasi-compact since affine schemes are quasi-compact [lem-weil-pbc-affine-scheme-qcqs]. For an empty fibre choose $W=\\varnothing$. Then $(W)_t=Y_t$ as open subschemes: an open subscheme containing every point is the whole scheme, with the same restricted structure sheaf. Consequently $\\delta_W(t)=\\delta(t)$. No neighbourhood of the entire source, nor a bound valid for all fibres, was chosen.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 086R (lemma-stratify-flat-fp-lqf), proof; Tag 07RZ (lemma-stratify-flat-fp-qf)"
+   }
+  },
+  {
+   "text": "For each $d\\ge0$, step 3 gives inclusion of every $\\{t\\in V:\\delta_W(t)\\ge d\\}$ into $\\{t\\in V:\\delta(t)\\ge d\\}$, and step 5 gives the reverse inclusion in their union. Hence $$\\{t\\in V:\\delta(t)\\ge d\\}=\\bigcup_{W\\subseteq Y_V\\ \\mathrm{quasi\\text{-}compact\\ open}}\\{t\\in V:\\delta_W(t)\\ge d\\}.$$ Each set on the right is open by step 4, so the union is open. Taking the union over the affine open cover of $T$ proves the assertion. The index is a set of open subsets of the underlying set of $Y_V$. This also treats $d=0$, the empty source and the empty base.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 086R (lemma-stratify-flat-fp-lqf), proof; Tag 07RZ (lemma-stratify-flat-fp-qf)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "pqf-lem-qf-locqf-qc",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-weil-pbc-finite-discrete-scheme-affine",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-flat-fp-qf-stratification",
+  "def-pc-finite-locally-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 086R (lemma-stratify-flat-fp-lqf), proof; Tag 07RZ (lemma-stratify-flat-fp-qf)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lower semicontinuity of fibre cardinality for separated etale scheme maps without quasi compactness",
+   "results": "{\"t\": \"2026-10-23T15:04:33Z\", \"tool\": \"leanfinder\", \"query\": \"Lower semicontinuity of fibre cardinality for separated etale scheme maps without quasi compactness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.IsFinite.of_comp\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"e78a322b02b51112\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: universally open flat maps and openness of the etale locus do not control fibre degree; finite-presentation flat module rank applies to finite module presentations, absent here; no fibre-degree lower-semicontinuity theorem found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat separated locally finitely presented locally quasi finite morphism of schemes the locus where the fibre degree is at least d is open",
+   "results": "{\"t\": \"2026-10-23T15:04:34Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat separated locally finitely presented locally quasi finite morphism of schemes the locus where the fibre degree is at least d is open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"Algebra.isOpen_etaleLocus\", \"Algebra.isOpen_smoothLocus\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.Polynomial.isOpen_imageOfDf\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.LocallyQuasiFinite\"], \"digest\": \"f259257611ed347b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: universally open flat maps and openness of the etale locus do not control fibre degree; finite-presentation flat module rank applies to finite module presentations, absent here; no fibre-degree lower-semicontinuity theorem found"
+  },
+  {
+   "tool": "grep",
+   "query": "LowerSemicontinuous.*(fiber|fibre)|(fiber|fibre).*(lowerSemicontinuous|lower_semicontinuous)|stratify.*(fiber|fibre)",
+   "results": "{\"t\": \"2026-10-23T15:04:51Z\", \"tool\": \"grep\", \"query\": \"LowerSemicontinuous.*(fiber|fibre)|(fiber|fibre).*(lowerSemicontinuous|lower_semicontinuous)|stratify.*(fiber|fibre)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: universally open flat maps and openness of the etale locus do not control fibre degree; finite-presentation flat module rank applies to finite module presentations, absent here; no fibre-degree lower-semicontinuity theorem found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The degree of the fibres of a flat separated locally quasi finite locally finitely presented scheme morphism is lower semicontinuous",
+   "results": "{\"t\": \"2026-10-23T15:04:52Z\", \"tool\": \"leansearch\", \"query\": \"The degree of the fibres of a flat separated locally quasi finite locally finitely presented scheme morphism is lower semicontinuous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.isLocallyConstant_rankAtStalk\", \"LowerSemicontinuousAt\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.Flat.casesOn\", \"lowerSemicontinuousOn_univ_iff\", \"lowerSemicontinuous_restrict_iff\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"lowerSemicontinuous_iff\"], \"digest\": \"20a7388f9b99bd8d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: universally open flat maps and openness of the etale locus do not control fibre degree; finite-presentation flat module rank applies to finite module presentations, absent here; no fibre-degree lower-semicontinuity theorem found"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"IsOpen\"",
+   "results": "{\"t\": \"2026-10-23T15:04:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"IsOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.Etale.instOfIsOpenImmersion\"], \"digest\": \"69c329bdc7dffc36\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: universally open flat maps and openness of the etale locus do not control fibre degree; finite-presentation flat module rank applies to finite module presentations, absent here; no fibre-degree lower-semicontinuity theorem found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat separated locally finitely presented locally quasi finite morphism of schemes the locus where the fibre degree is at least d is open",
+   "results": "{\"t\": \"2026-10-23T18:59:32Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat separated locally finitely presented locally quasi finite morphism of schemes the locus where the fibre degree is at least d is open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"Algebra.isOpen_etaleLocus\", \"Algebra.isOpen_smoothLocus\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.Polynomial.isOpen_imageOfDf\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.LocallyQuasiFinite\"], \"digest\": \"f259257611ed347b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give universal openness, algebra etale loci, or module rank with finite module presentation; none states fibre-degree superlevel openness for the present non-quasi-compact source."
+  },
+  {
+   "tool": "grep",
+   "query": "LowerSemicontinuous.*(fiber|fibre)|(fiber|fibre).*(lowerSemicontinuous|lower_semicontinuous)|stratify.*(fiber|fibre)",
+   "results": "{\"t\": \"2026-10-23T18:59:51Z\", \"tool\": \"grep\", \"query\": \"LowerSemicontinuous.*(fiber|fibre)|(fiber|fibre).*(lowerSemicontinuous|lower_semicontinuous)|stratify.*(fiber|fibre)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give universal openness, algebra etale loci, or module rank with finite module presentation; none states fibre-degree superlevel openness for the present non-quasi-compact source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The degree of fibres of a flat locally finitely presented separated locally quasi finite morphism is lower semicontinuous",
+   "results": "{\"t\": \"2026-10-23T18:59:51Z\", \"tool\": \"leansearch\", \"query\": \"The degree of fibres of a flat locally finitely presented separated locally quasi finite morphism is lower semicontinuous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.isLocallyConstant_rankAtStalk\", \"LowerSemicontinuous\", \"LowerSemicontinuousAt\", \"lowerSemicontinuous_iff\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"lowerSemicontinuousOn_univ_iff\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\"], \"digest\": \"2170b811c6c5320d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give universal openness, algebra etale loci, or module rank with finite module presentation; none states fibre-degree superlevel openness for the present non-quasi-compact source."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, IsOpen",
+   "results": "{\"t\": \"2026-10-23T18:59:51Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyQuasiFinite, IsOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give universal openness, algebra etale loci, or module rank with finite module presentation; none states fibre-degree superlevel openness for the present non-quasi-compact source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree of a quasi finite flat family is the supremum of degrees of quasi compact open subfamilies",
+   "results": "{\"t\": \"2026-10-23T19:02:02Z\", \"tool\": \"leanfinder\", \"query\": \"The degree of a quasi finite flat family is the supremum of degrees of quasi compact open subfamilies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.ConstructibleSetData.degBound\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\"], \"digest\": \"9b417aff234f1d69\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give universal openness, algebra etale loci, or module rank with finite module presentation; none states fibre-degree superlevel openness for the present non-quasi-compact source."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-noetherian-decent-quasiseparated",
+  "date": "2026-10-23",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: A locally separated group algebraic space over a field is a scheme. Supporting argument: descent: Tag 0B8F proof, third input 0B88; descend the scheme using the finite-point affine condition. Auxiliary for the present split: quasi-separatedness needed for the finite-field-extension limit in the final paragraph of Tag 0B88. Supporting input for Tag 0BB6: Fibre-degree superlevel sets for flat locally quasi-finite morphisms.",
+   "via": [
+    "lem-sfb-locally-noetherian-decent-quasiseparated",
+    "lem-sfb-geometric-affine-neighbourhood-scheme-descent",
+    "lem-sfb-locally-separated-group-space-scheme",
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-lfp-lqf-degree-superlevel-open",
+  "worker": "stage1",
+  "summary": "Followed Tag 086R through the existing Tag 07RZ stratification for quasi-compact open source pieces. Wrote out degree monotonicity using the finite discrete fibre and its complementary open, and the finite affine-cover argument capturing each fibre. Reused all auxiliary nodes; no new nodes, no statement change, no Lean writes or builds.",
+  "blueprint": "Auxiliary geometric tool supporting the existing from.place chain under det-thm-sf-ctf-stability-direct-images, proof (3); no change to unit or chapter route. Ancestor tool returns None, as in the inherited blueprint.from.node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-preimage-fibre-product",
+    "why": "Generic scheme-theoretic tool used in the Tag 086R reduction to quasi-compact opens; no replacement of the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic scheme-theoretic tool used in the Tag 086R reduction to quasi-compact opens; no replacement of the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme-theoretic tool used in the Tag 086R reduction to quasi-compact opens; no replacement of the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-separated-lqf-base-change",
+    "why": "Generic scheme-theoretic tool used in the Tag 086R reduction to quasi-compact opens; no replacement of the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme-theoretic tool used in the Tag 086R reduction to quasi-compact opens; no replacement of the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-restriction-to-opens",
+    "why": "Generic scheme-theoretic tool used in the Tag 086R reduction to quasi-compact opens; no replacement of the constructible-direct-image unit route."
+   },
+   {
+    "node": "pqf-lem-qf-locqf-qc",
+    "why": "Generic scheme-theoretic tool used in the Tag 086R reduction to quasi-compact opens; no replacement of the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme-theoretic tool used in the Tag 086R reduction to quasi-compact opens; no replacement of the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "why": "Generic scheme-theoretic tool used in the Tag 086R reduction to quasi-compact opens; no replacement of the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "why": "Generic scheme-theoretic tool used in the Tag 086R reduction to quasi-compact opens; no replacement of the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-scheme-affine",
+    "why": "Generic scheme-theoretic tool used in the Tag 086R reduction to quasi-compact opens; no replacement of the constructible-direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-fp-qf-stratification",
+    "why": "Generic scheme-theoretic tool used in the Tag 086R reduction to quasi-compact opens; no replacement of the constructible-direct-image unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "pqf-lem-qf-locqf-qc",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-weil-pbc-finite-discrete-scheme-affine",
+  "lem-weil-pbc-flat-fp-qf-stratification"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NO-049b0eaf4",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-049b0eaf4 (reviewer sub-agent of L); spot-checked: Read Stacks Tag 086R (more-morphisms.tex ~12892) and Tag 07RZ (~12845) at the cited places. The statement is unchanged: 086R restricted to finite fibres, which is what the citer lem-sfb-locally-noetherian-decent-quasiseparated uses. There are no new nodes. Read all 19 cited statements and checked each step. Step 1: affine-open reduction by open-preimage-fibre-product, with flat/lfp/separated/lqf base change. Step 2: a qc open W gives qf by permanence (1) and pqf-lem-qf-locqf-qc; flat and lfp restrict (D(g) presentation); separated because the diagonal is a base change of a closed immersion. Step 3: the fibre is finite discrete via the zero-dim-local lemma with R=k; product decomposition gives δ_W ≤ δ with multiplicities. Step 4: 07RZ partition plus universal property on Spec κ(t); a finite k-algebra is finite locally free of its dimension (multiplication-table presentation); {δ_W ≥ d} = V \\ Z_{d-1}. Steps 5-6: a finite affine union captures the whole fibre; union identity. Edge cases checked: empty T or fibre, nonreduced fibre, unbounded degrees. Grepping for 086R finds no duplicate, and there is no SGA citation. I accept the generic-geometry tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatLfpLqfDegreeSuperlevelOpen",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isOpen_fiber_degree_ge_of_flat_lfp_lqf",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatLfpLqfDegreeSuperlevelOpen.lean",
+  "statement": "theorem isOpen_fiber_degree_ge_of_flat_lfp_lqf {Y T : Scheme.{u}} (f : Y ⟶ T) [Flat f] [LocallyOfFinitePresentation f] [IsSeparated f] (h_lqf : f.IsLocallyQuasiFinite) (h_finite : ∀ t : T, IsFinite (f.fiberToSpecResidueField t)) (d : ℕ) : IsOpen {t : T | d ≤ (f.fiberToSpecResidueField t).finrankΓ}",
+  "branch": "sheaf-dag",
+  "by": "Q72",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-616aed8c3",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Matched every hypothesis and conclusion clause of the node and Stacks 086R (restricted to finite fibres) against the Lean: [Flat f], [LocallyOfFinitePresentation f], [IsSeparated f], IsLocallyQuasiFinite (Stacks 01TD, implied by lfp+lqf, not stronger), ∀ t IsFinite (fiberToSpecResidueField t), (d:ℕ), IsOpen {t | d ≤ finrankΓ}. finrankΓ uses the canonical ΓSpecIso/appTop κ(t)-algebra, same convention as the BoundsFiberDegrees record; fiberDegree needs IsAffineHom so it does not apply. No degree bound or quasi-compactness assumed. Edge cases d=0, empty base, empty source, nonreduced fibres, unbounded degrees all covered. No duplicate: sibling stratification/maximal-degree theorems need a bound or IsQuasiFinite; name unused. Node differs from base only in lean; statement verbatim; one sorry; docstrings carry source place, blueprint id and the six steps; report has Worker report and Second reading by Q72. No file changed, so no compile; worker's scompile exit 0 and deliver2 dry run OK."
+ }
+}

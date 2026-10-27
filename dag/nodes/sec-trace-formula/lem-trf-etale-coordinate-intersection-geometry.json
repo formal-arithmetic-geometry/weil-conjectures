@@ -1,0 +1,348 @@
+{
+ "id": "lem-trf-etale-coordinate-intersection-geometry",
+ "kind": "statement",
+ "title": "Regular coordinate intersections and their etale transport",
+ "statement": "Let $U$ be a regular locally Noetherian scheme [def-weil-regular-scheme, pqf-def-locnoeth], let $s\\geq1$, and let $t_1,\\ldots,t_s\\in\\Gamma(U,\\mathcal O_U)$. Assume that at each $u\\in U$ the germs with indices $I(u)=\\{j:t_j(u)=0\\text{ in }\\kappa(u)\\}$ are members at distinct positions of a regular system of parameters of $\\mathcal O_{U,u}$ [def-weil-pbc-regular-system-of-parameters]. For every $J\\subseteq\\{1,\\ldots,s\\}$ define the closed subscheme $C_J=V(t_j:j\\in J)$ [def-weil-closed-immersion], with $C_{\\varnothing}=U$. Every $C_J$ is locally Noetherian, regular and reduced [def-pc-reduced-scheme], and may be empty. For $u\\in C_J$ its local ring is $\\mathcal O_{C_J,u}=\\mathcal O_{U,u}/(t_j:j\\in J)$, a regular local integral domain. Let $e:W\\to U$ be any etale morphism [def-weil-etale-morphism], and write $t'_j=e^*t_j$. Then $W$ is regular and locally Noetherian. For each $w\\in W$, $u=e(w)$, the local map $\\mathcal O_{U,u}\\to\\mathcal O_{W,w}$ carries every regular system of parameters to a regular system of parameters, and $t'_j(w)=0$ in $\\kappa(w)$ if and only if $t_j(u)=0$ in $\\kappa(u)$. In particular the vanishing pulled-back germs again occupy distinct positions in a regular system of parameters. Scheme-theoretically $C_J\\times_U W=V(t'_j:j\\in J)$, and all these pulled-back intersections are locally Noetherian, regular and reduced, including the empty cases.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 4.1.8 (printed p.118) and 4.2.4 (printed p.119), coordinate intersections and etale charts. Expanded algebra: algebra.tex Tags 00NQ (lemma-regular-ring-CM), 00NP (lemma-regular-domain), 00U4 (lemma-etale-at-prime); more-algebra.tex Tag 07QP (lemma-dimension-etale-extension); morphisms.tex Tag 01T6 (lemma-finite-type-noetherian)."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For the coordinate closed immersion i, the proved source-library theorem Scheme.Hom.ker_stalkMap computes its stalk kernel on an affine neighborhood. The ofIdealTop_ideal and Ideal.map_span equations, followed by germ_res_apply, identify this kernel with the span of the chosen global coordinate germs. The closed-immersion stalk map is surjective, so RingHom.quotientKerEquivOfSurjective gives the canonical quotient equivalence with the required formula. Local finite type and local Noetherianity of the closed subscheme are existing Mathlib instances. This packages the affine localization and quotient calculation of the original plan without repeating it.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT (proposition-localize-quotient); schemes.tex Tag 01HV (lemma-spec-sheaves), part (6); morphisms.tex Tag 01T6 (lemma-finite-type-noetherian)"
+   }
+  },
+  {
+   "text": "At $u\\in C_J$ every $t_{j,u}$ with $j\\in J$ belongs to the maximal ideal, so $J\\subseteq I(u)$. By hypothesis these germs occupy distinct positions in a full regular parameter system of the regular local ring $A=\\mathcal O_{U,u}$. Permute that system to put the $|J|$ selected positions first; a permutation still has length $\\dim A$ and generates the same maximal ideal. Apply [lem-weil-pbc-regular-local-generators-regular-sequence] with $c=|J|$ to see that the quotient computed in Step 1 is regular local. By [lem-sc-regular-local-domain] it is an integral domain, hence has no nonzero nilpotents: if $b^n=0$, repeated cancellation in a domain gives $b=0$. The locally Noetherian stalk criterion in [def-weil-regular-scheme] now makes $C_J$ regular, and [def-pc-reduced-scheme] makes it reduced. When $J=\\varnothing$ use $c=0$; when $C_J=\\varnothing$ the assertions about its points are vacuous.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-sc-regular-local-domain",
+    "def-weil-regular-scheme",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NQ (lemma-regular-ring-CM) and 00NP (lemma-regular-domain); ILO VIII 4.2.4, printed p.119"
+   }
+  },
+  {
+   "text": "An etale morphism is locally of finite type by the existing Mathlib instances (through smoothness and local finite presentation). Apply LocallyOfFiniteType.isLocallyNoetherian to the locally Noetherian target. The existing Noetherian-stalk instance supplies Noetherianity at every source point; no quasi-compactness is used.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-finite-type-morphism",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian); Definition Tag 02GI and Definition Tag 01TP"
+   }
+  },
+  {
+   "text": "At w choose affine source and target neighborhoods for the etale map. IsAffineOpen.arrowStalkMapIso identifies the stalk map with the localized affine ring map. Apply lem-sc-etale-local-dimension and transport dimensions across the two ring equivalences. The proved source-library FormallyUnramified.map_maximalIdeal_stalkMap identifies the extended maximal ideal with the source maximal ideal. Ideal.map_span and List.mem_map transport the generating equality of any regular parameter list, and List.length_map with dimension equality transports its length condition. Source regularity follows from the proved isRegularLocalRing_stalk_of_etale theorem. This handles empty parameter lists as well.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-map-stalk-localization",
+    "lem-weil-pbc-etale-prime-generates-maximal",
+    "lem-sc-etale-local-dimension",
+    "def-weil-regular-scheme",
+    "def-weil-pbc-regular-system-of-parameters",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QP (lemma-dimension-etale-extension), and the parameter-generator argument in Tag 0AH0 (lemma-regular-etale-extension); algebra.tex Tag 00U4 (lemma-etale-at-prime)"
+   }
+  },
+  {
+   "text": "By [def-weil-residue-field], the stalk map induces a homomorphism of fields $\\kappa(u)\\to\\kappa(w)$, carrying the residue of $t_j$ to that of $t'_j$. Such a homomorphism is injective: if a nonzero element $a$ mapped to zero then $1=aa^{-1}$ would map to zero. Consequently $t'_j(w)=0$ if and only if $t_j(u)=0$, so $I(w)=I(u)$ as indexed subsets. Transport a parameter system containing those marked positions using Step 4. The same positions give the vanishing pulled-back germs; distinct positions remain distinct positions of that list.",
+   "uses": [
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U4 (lemma-etale-at-prime), residue-field clause; elementary injectivity of a homomorphism of fields"
+   }
+  },
+  {
+   "text": "The proved source-library Scheme.IdealSheafData.comap_ofIdealTop theorem identifies the pullback of an ideal generated by global sections with the ideal generated by their images. Ideal.map_span and Set.image_image identify those images with the pulled-back coordinate functions. Compose pullbackSymmetry with IdealSheafData.comapIso and the ideal-equality isomorphism to obtain the required isomorphism over W. Use the parameter transport and residue-field vanishing equivalence from Steps 4-5 to repeat the coordinate quotient/regularity argument of Steps 1-2 on W. No nonemptiness is needed.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-pc-ideal-sheaf-comap-affine-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JU (lemma-fibre-product-immersion), part (1); ILO VIII 4.1.8 and 4.2.4, printed pp.118--119"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-sc-regular-local-domain",
+  "def-weil-regular-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "lem-sc-etale-local-dimension",
+  "def-weil-pbc-regular-system-of-parameters",
+  "pqf-def-locnoeth",
+  "def-weil-residue-field",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-pc-ideal-sheaf-comap-affine-extension"
+ ],
+ "proof_origin": {
+  "by": "D9 stage-3 worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00NQ and 00NP with more-algebra.tex Tag 07QP; same coordinate argument as the original plan, using the proved upstream stalk-kernel, maximal-ideal and global-ideal-pullback APIs. ILO VIII 4.1.8 and 4.2.4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "etale.*regular|regular.*etale|IsRegularSystemOfParameters",
+   "results": "{\"t\": \"2026-10-22T06:02:00Z\", \"tool\": \"grep\", \"query\": \"etale.*regular|regular.*etale|IsRegularSystemOfParameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: etale locality/base-change and reducedness definitions do not give regular coordinate intersections together with transport of parameter systems and vanishing indices.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, IsRegularLocalRing",
+   "results": "{\"t\": \"2026-10-22T06:02:01Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, IsRegularLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: etale locality/base-change and reducedness definitions do not give regular coordinate intersections together with transport of parameter systems and vanishing indices.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale morphism over a regular locally Noetherian scheme carries every regular system of parameters to a regular system of parameters and preserves which regular functions vanish at a point",
+   "results": "{\"t\": \"2026-10-22T06:02:11Z\", \"tool\": \"leanfinder\", \"query\": \"An etale morphism over a regular locally Noetherian scheme carries every regular system of parameters to a regular system of parameters and preserves which regular functions vanish at a point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.IsEtaleAt\", \"Algebra.etaleLocus\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.instEtaleOfIsStandardEtale\", \"RingHom.Etale.ofLocalizationSpan\", \"Algebra.mem_etaleLocus_iff\"], \"digest\": \"ae9ad87cc2638e36\"}; Read the hits: etale locality/base-change and reducedness definitions do not give regular coordinate intersections together with transport of parameter systems and vanishing indices.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Etale|IsRegular|regular",
+   "results": "{\"t\": \"2026-10-22T06:02:40Z\", \"tool\": \"grep\", \"query\": \"Etale|IsRegular|regular\", \"sub\": \"AlgebraicGeometry/Morphisms/Etale.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"23\", \"41\", \"42\", \"44\", \"46\"], \"digest\": \"53aeb292b9add5c3\"}; Read the hits: etale locality/base-change and reducedness definitions do not give regular coordinate intersections together with transport of parameter systems and vanishing indices.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale base change preserves a regular coordinate chart and the subset of coordinates vanishing at each point",
+   "results": "{\"t\": \"2026-10-22T06:02:40Z\", \"tool\": \"leansearch\", \"query\": \"Etale base change preserves a regular coordinate chart and the subset of coordinates vanishing at each point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.baseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\"], \"digest\": \"8f3d66eeaafb5aed\"}; Read the hits: etale locality/base-change and reducedness definitions do not give regular coordinate intersections together with transport of parameter systems and vanishing indices.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For etale local rings the maximal ideal is extended from the base and dimension is unchanged, so images of regular parameters form regular parameters",
+   "results": "{\"t\": \"2026-10-22T06:02:49Z\", \"tool\": \"leanfinder\", \"query\": \"For etale local rings the maximal ideal is extended from the base and dimension is unchanged, so images of regular parameters form regular parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.IsEtaleAt\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.etaleLocus\", \"Algebra.Etale.of_isLocalization_Away\"], \"digest\": \"6247fe6513ae89c2\"}; Read the hits: etale locality/base-change and reducedness definitions do not give regular coordinate intersections together with transport of parameter systems and vanishing indices.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*(intersection|parameter)|parameter.*regular|Etale.*IsReduced",
+   "results": "{\"t\": \"2026-10-22T06:03:44Z\", \"tool\": \"grep\", \"query\": \"regular.*(intersection|parameter)|parameter.*regular|Etale.*IsReduced\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: etale locality/base-change and reducedness definitions do not give regular coordinate intersections together with transport of parameter systems and vanishing indices.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular parameter coordinate intersections are regular reduced schemes and regular coordinate systems are preserved by etale morphisms",
+   "results": "{\"t\": \"2026-10-22T06:03:45Z\", \"tool\": \"leansearch\", \"query\": \"Regular parameter coordinate intersections are regular reduced schemes and regular coordinate systems are preserved by etale morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsReduced.mk\", \"RingHom.FormallyEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\"], \"digest\": \"f083def0f864dc38\"}; Read the hits: etale locality/base-change and reducedness definitions do not give regular coordinate intersections together with transport of parameter systems and vanishing indices.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coordinate intersections in a regular locally Noetherian scheme are regular and reduced, and etale pullback preserves regular systems of parameters and the vanishing coordinate indices",
+   "results": "{\"t\": \"2026-10-22T06:03:56Z\", \"tool\": \"leanfinder\", \"query\": \"Coordinate intersections in a regular locally Noetherian scheme are regular and reduced, and etale pullback preserves regular systems of parameters and the vanishing coordinate indices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.IsEtaleAt\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"StandardEtalePair.instEtaleRing\"], \"digest\": \"dea62e85bb14a395\"}; Read the hits: etale locality/base-change and reducedness definitions do not give regular coordinate intersections together with transport of parameter systems and vanishing indices.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*regular|regular.*etale|IsRegularSystemOfParameters",
+   "results": "{\"t\": \"2026-10-22T09:31:33Z\", \"tool\": \"grep\", \"query\": \"etale.*regular|regular.*etale|IsRegularSystemOfParameters\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: none states the combined coordinate-intersection and parameter-transport theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotients by subsets of regular parameters are regular local domains and etale local maps preserve parameters",
+   "results": "{\"t\": \"2026-10-22T09:31:34Z\", \"tool\": \"leansearch\", \"query\": \"Quotients by subsets of regular parameters are regular local domains and etale local maps preserve parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.Etale.of_isLocalizationAway\", \"Submonoid.LocalizationMap.map_isRegular\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.FormallyEtale.localization_base\", \"Algebra.exists_etale_of_isEtaleAt\", \"RingHom.Etale.ofLocalizationSpan\", \"Algebra.FormallyEtale.localization_map\"], \"digest\": \"8be7db881f7fcfaa\"}; Read hits: none states the combined coordinate-intersection and parameter-transport theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, IsRegularLocalRing",
+   "results": "{\"t\": \"2026-10-22T09:31:34Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, IsRegularLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: none states the combined coordinate-intersection and parameter-transport theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular coordinate intersections in a regular locally Noetherian scheme are regular reduced and etale pullback preserves regular systems of parameters",
+   "results": "{\"t\": \"2026-10-22T09:31:36Z\", \"tool\": \"leanfinder\", \"query\": \"Regular coordinate intersections in a regular locally Noetherian scheme are regular reduced and etale pullback preserves regular systems of parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"Algebra.etaleLocus\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"19a7612780222dd6\"}; Read hits: none states the combined coordinate-intersection and parameter-transport theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularLocalRing|regularLocal",
+   "results": "{\"t\": \"2026-10-22T09:32:01Z\", \"tool\": \"grep\", \"query\": \"IsRegularLocalRing|regularLocal\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: none states the combined coordinate-intersection and parameter-transport theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular reduced coordinate subschemes and preservation of vanishing coordinates under an etale scheme morphism",
+   "results": "{\"t\": \"2026-10-22T09:32:02Z\", \"tool\": \"leansearch\", \"query\": \"Regular reduced coordinate subschemes and preservation of vanishing coordinates under an etale scheme morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isReduced_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"isReduced_localizationPreserves\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsReduced.mk\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsReduced\"], \"digest\": \"a6f67583afc653ba\"}; Read hits: none states the combined coordinate-intersection and parameter-transport theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, Ideal.Quotient",
+   "results": "{\"t\": \"2026-10-22T09:32:02Z\", \"tool\": \"loogle\", \"query\": \"IsRegularLocalRing, Ideal.Quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.Quotient'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The displayed hits concern etale locality, smooth charts, or reducedness, and do not assert this coordinate-intersection statement. The Loogle pattern using Ideal.Quotient was not recognized.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale local ring map preserves dimension and extends the maximal ideal so a full regular parameter list remains a regular parameter list",
+   "results": "{\"t\": \"2026-10-22T09:32:04Z\", \"tool\": \"leanfinder\", \"query\": \"An etale local ring map preserves dimension and extends the maximal ideal so a full regular parameter list remains a regular parameter list\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.IsEtaleAt\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.IsStandardEtale\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.instEtaleOfIsStandardEtale\"], \"digest\": \"618cf42e77929e32\"}; Read hits: none states the combined coordinate-intersection and parameter-transport theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nc-coordinate-max-stratum",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "ILO VIII 4.1.8 and 4.2.4, regular coordinate deepest strata and etale-local computation: coordinate quotient and parameter-transport arguments formerly in Steps 3 and 5 of lem-trf-nc-coordinate-max-stratum, under the ancestor normal-crossings modification.",
+   "via": [
+    "lem-trf-nc-coordinate-max-stratum",
+    "lem-trf-nc-maximal-branch-blowup",
+    "lem-trf-normal-crossings-strictification",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-etale-coordinate-intersection-geometry",
+  "worker": "stage1",
+  "summary": "Q81 checked the coordinate lemma against ILO VIII 4.1.8/4.2.4 and the listed Stacks proofs, found all substantive algebraic and geometric inputs already present, and supplied a six-step proof with explicit affine quotient, parameter-generator, residue-field and ideal-image calculations. No new nodes, statement correction, or Lean attachment. Added residue-field and fibre-product statement dependencies.",
+  "blueprint": "The inherited ancestor is lem-trf-local-term-locality; this item serves ILO VIII 4.1.8/4.2.4 along its existing alteration/normal-crossings specialization branch, specifically the coordinate quotients and etale transport formerly in Steps 3 and 5 of lem-trf-nc-coordinate-max-stratum. Current main-20261015 ancestor proof and unit were read; neither directly states this auxiliary coordinate algebra. No unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic local-algebra theorem for quotients by a permuted initial parameter sublist; no node of sk-i-curve-zero supplies that algebra."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic regular-local-domain theorem supplies reducedness of all coordinate quotient stalks; this is independent of the correspondence route."
+   },
+   {
+    "node": "lem-sc-etale-local-dimension",
+    "why": "Generic dimension equality for etale affine localizations supplies the length of transported parameter systems; not a replacement for a unit step."
+   },
+   {
+    "node": "lem-pc-closed-subscheme-base-change-ideal-image",
+    "why": "Generic ideal-sheaf formula identifies the scheme-theoretic coordinate pullback; no node of this unit supplies that geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-sc-regular-local-domain",
+  "lem-sc-etale-local-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-083c1884c",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-083c1884c (reviewer sub-agent of L); spot-checked: Read in full: the item, all 6 steps and every cited statement, ILO VIII 4.1.8 and 4.2.4 (PDF pp.124-125), the parent lem-trf-nc-coordinate-max-stratum and the unit route. The delivery creates no new nodes, leaves the statement unchanged, uses no SGA source, and adds the stmt_deps residue-field and fibre-product, which the statement uses. Small cases checked: A^2 with coordinates x,y; dimension-0 points; empty U, W and C_J; a coordinate that is a unit at the point; an etale field extension. Pairs like (x,x) or x^2 violate the hypothesis, so they are not counterexamples. Steps 1, 2, 5 and 6 are correct as written: closed-immersion affine quotients, the quotient-localization lemma, the regular parameter-quotient lemma, the regular-local-domain lemma, injectivity of the residue-field map, and the ideal image under base change. Step 4 correctly uses pB_q=qB_q and the etale dimension equality on an actual etale affine chart. Two repaired C1 faults: (1) Step 3 went from the pointwise lfp definition to the every-affine lft definition without the locality lemma 01T1/01T2; I cited the Mathlib leaf lem-weil-pbc-lft-pointwise-criterion and spelled out the f.p. chart. (2) Step 4 said 'D Noetherian by Step 3' without the passage to the stalk; I made it explicit through a Noetherian affine of the pqf-def-locnoeth cover, part (c) of the affine-open stalk lemma, and the fact that a localization of a Noetherian ring is Noetherian (elementary; no dedicated node found); pqf-def-locnoeth is added to the uses. proof_deps is recomputed as the union of the step uses. I accept the 4 tool_uses: they are generic algebra and geometry nodes of other units. Fix file: fixes/dag/nodes/sec-trace-formula/lem-trf-etale-coordinate-intersection-geometry.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCoordinateIntersectionGeometry",
+  "declaration": "AlgebraicGeometry.etale_coordinate_intersection_geometry",
+  "declarations": [
+   "AlgebraicGeometry.coordinateIntersectionIdeal",
+   "AlgebraicGeometry.coordinateIntersectionStalkIdeal",
+   "AlgebraicGeometry.etale_coordinate_intersection_geometry"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoordinateIntersectionGeometry.lean",
+  "statement": "theorem etale_coordinate_intersection_geometry {U : Scheme.{u}} (hU : IsRegularScheme U) {s : ℕ} (hs : 1 ≤ s) (t : Fin s → Γ(U, ⊤)) (hcoord : ∀ x : U, ∃ (hN : IsNoetherianRing (U.presheaf.stalk x)) (p : List (U.presheaf.stalk x)), @IsLocalRing.IsRegularSystemOfParameters _ _ _ hN p ∧ ∃ pos : {j : Fin s // U.Γevaluation x (t j) = 0} ↪ Fin p.length, ∀ j, p.get (pos j) = U.presheaf.germ ⊤ x trivial (t j.1)) : IsIso (coordinateIntersectionIdeal t ∅).subschemeι ∧ (∀ J : Finset (Fin s), IsRegularScheme (coordinateIntersectionIdeal t J).subscheme ∧ IsReduced (coordinateIntersectionIdeal t J).subscheme ∧ ∀ z : (coordinateIntersectionIdeal t J).subscheme, IsRegularLocalRing ((coordinateIntersectionIdeal t J).subscheme.presheaf.stalk z) ∧ IsDomain ((coordinateIntersectionIdeal t J).subscheme.presheaf.stalk z) ∧ ∃ q : (U.presheaf.stalk ((coordinateIntersectionIdeal t J).subschemeι z) ⧸ coordinateIntersectionStalkIdeal t J ((coordinateIntersectionIdeal t J).subschemeι z)) ≃+* (coordinateIntersectionIdeal t J).subscheme.presheaf.stalk z, ∀ a, q (Ideal.Quotient.mk _ a) = ((coordinateIntersectionIdeal t J).subschemeι.stalkMap z) a) ∧ (∀ {W : Scheme.{u}} (e : W ⟶ U) [Etale e], IsRegularScheme W ∧ (∀ w : W, ∃ hNW : IsNoetherianRing (W.presheaf.stalk w), ∀ (hNU : IsNoetherianRing (U.presheaf.stalk (e w))) (p : List (U.presheaf.stalk (e w))), @IsLocalRing.IsRegularSystemOfParameters _ _ _ hNU p → @IsLocalRing.IsRegularSystemOfParameters _ _ _ hNW (p.map (fun a ↦ e.stalkMap w a))) ∧ (∀ (w : W) (j : Fin s), W.Γevaluation w (e.appTop (t j)) = 0 ↔ U.Γevaluation (e w) (t j) = 0) ∧ (∀ w : W, ∃ (hN : IsNoetherianRing (W.presheaf.stalk w)) (p : List (W.presheaf.stalk w)), @IsLocalRing.IsRegularSystemOfParameters _ _ _ hN p ∧ ∃ pos : {j : Fin s // W.Γevaluation w (e.appTop (t j)) = 0} ↪ Fin p.length, ∀ j, p.get (pos j) = W.presheaf.germ ⊤ w trivial (e.appTop (t j.1))) ∧ ∀ J : Finset (Fin s), (∃ i : pullback (coordinateIntersectionIdeal t J).subschemeι e ≅ (coordinateIntersectionIdeal (fun j ↦ e.appTop (t j)) J).subscheme, i.hom ≫ (coordinateIntersectionIdeal (fun j ↦ e.appTop (t j)) J).subschemeι = pullback.snd (coordinateIntersectionIdeal t J).subschemeι e) ∧ IsRegularScheme (coordinateIntersectionIdeal (fun j ↦ e.appTop (t j)) J).subscheme ∧ IsReduced (coordinateIntersectionIdeal (fun j ↦ e.appTop (t j)) J).subscheme)",
+  "branch": "newtargets-dag",
+  "by": "Q146",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-75685f4b1",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsRegularScheme (=IsLocallyNoetherian ∧ IsRegular) for U, C_J, W and pulled-back C'_J; hcoord uses IsRegularSystemOfParameters with an injective position embedding of vanishing indices and germ equality; C_J = ofIdealTop(span t''J), C_∅ via IsIso subschemeι; stalks regular local domains with a ring equiv normalized by subschemeι.stalkMap; for every étale e: every RSOP maps to an RSOP under e.stalkMap, vanishing iff, distinct-position transport on W, pullback ≅ V(t'_j) over W (i.hom ≫ ι' = pullback.snd), regular+reduced. No extra hypotheses; universes bound; edge cases (empty U/W/J/C_J, dim 0, unit coordinates, repeated coordinates) covered. Helpers are real data with docstrings, no duplicate in project/Mathlib; statement field verbatim; only sorry; snapshot node differs from live only in lean. No files changed, no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261025T050725-L-3835244",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

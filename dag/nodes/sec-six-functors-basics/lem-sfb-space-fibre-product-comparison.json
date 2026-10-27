@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-space-fibre-product-comparison",
+ "kind": "statement",
+ "title": "Comparison of fibre products over different algebraic-space bases",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $A,B,Z,T$ be algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Let $A\\to Z$, $B\\to Z$ and $h:Z\\to T$ be morphisms. Form sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and the canonical comparison $i:A\\times_ZB\\to A\\times_TB$ with the two original projections as components. Then $i$ is representable by schemes, a monomorphism (injective on sections over every $S$-scheme), locally of finite type [def-weil-finite-type-morphism], separated, and locally quasi-finite [pqf-def-quasifinite]. For the two local properties, this means that after every scheme base change to its target the resulting scheme morphism has the stated property. Separated means that the relative diagonal is representable by closed immersions [def-weil-closed-immersion]. If $h$ is quasi-separated, meaning that its diagonal is quasi-compact on scheme tests, then $i$ is quasi-compact: after every affine scheme base change its source is quasi-compact (every open covering has a finite subcover).",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03KN (lemma-fibre-product-after-map), clauses (1) and (4)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-type-morphism",
+  "pqf-def-quasifinite",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Write $f:A\\to Z$, $g:B\\to Z$, $P=A\\times_ZB$, $Q=A\\times_TB$ and $W=Z\\times_TZ$. These are algebraic spaces with the indicated sheaf universal properties by [lem-trf-space-fibre-products-etale-covers]. Define $q:Q\\to W$ by $(a,b)\\mapsto(f(a),g(b))$. It lands in $W$ because $hf(a)=hg(b)$ on $Q$. The map $i$ forgets the stronger equality $f(a)=g(b)$ and keeps the same pair. Consequently it is injective on sections over every $S$-scheme. There is a natural isomorphism $P\\cong Q\\times_{W,\\Delta_h}Z$: its forward map sends $(a,b)$ to $((a,b),f(a))$, and its inverse forgets $z$ in a triple $((a,b),z)$ with $f(a)=z=g(b)$. The two formulas are inverse and commute with restrictions, and the projection to $Q$ is $i$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KN (lemma-fibre-product-after-map), displayed cartesian square, expanded on sections."
+   }
+  },
+  {
+   "text": "Let $C$ be any $S$-scheme and $c:h_C\\to Q$ any map. Composing with $q$ gives a scheme test $qc:h_C\\to W$ of $\\Delta_h$. Apply [lem-sfb-space-diagonal-scheme-tests] with its base $B=S$, its morphism $g=h:Z\\to T$, and its test scheme equal to $C$. It gives a scheme $D_C=Z\\times_Wh_C$ whose projection $d_C:D_C\\to C$ is locally of finite type and a monomorphism. The isomorphism of step 1 identifies $P\\times_Qh_C$ with $D_C$ over $C$: a section is a map $u:H\\to C$ together with the forced value $z=f(a(u))=g(b(u))$. Thus every scheme test of $i$ is represented by this scheme and has the asserted local finite type property. This is representability in [def-trf-algebraic-space].",
+   "uses": [
+    "lem-sfb-space-diagonal-scheme-tests",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KN, base change of the relative diagonal; Tag 03HK (lemma-properties-diagonal), scheme-test formulation of (1)--(3)."
+   }
+  },
+  {
+   "text": "For each test in step 2, apply [lem-trf-monomorphism-finite-type-composite-lqf] to the scheme morphism $d_C:D_C\\to C$ followed by $\\mathrm{id}_C$. The composite is $d_C$, which is locally of finite type, and $d_C$ is a monomorphism; both hypotheses were supplied by [lem-sfb-space-diagonal-scheme-tests]. The cited conclusion gives local quasi-finiteness in the affine-neighbourhood sense, and hence in the required scheme-morphism sense, for every such test. No quasi-compactness assumption is used.",
+   "uses": [
+    "lem-trf-monomorphism-finite-type-composite-lqf",
+    "lem-sfb-space-diagonal-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03HK proof, last paragraph, local quasi-finiteness of a locally finite type monomorphism; scheme inputs Tags 02GE and 02V5."
+   }
+  },
+  {
+   "text": "Put $R=P\\times_QP$, with projections $r_1,r_2$. From $ir_1=ir_2$ and the sectionwise injectivity in step 1 we have $r_1=r_2$. The diagonal $\\delta:P\\to R$ satisfies $r_1\\delta=1_P$, and both projections of $\\delta r_1$ equal those of $1_R$; the fibre-product universal property [lem-trf-space-fibre-products-etale-covers] therefore gives $\\delta r_1=1_R$. Thus $\\Delta_i$ is an isomorphism. Every scheme test of it is represented by its test scheme with the identity projection. The identity is a homeomorphism onto the whole closed subset and induces an isomorphism, hence a surjection, on structure sheaves. It is a closed immersion by [def-weil-closed-immersion]. This proves separatedness in exactly the stated sense.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KN, monomorphism and separatedness; Tag 03HK proof, last sentence (scheme diagonal-isomorphism argument expanded for sheaves)."
+   }
+  },
+  {
+   "text": "Finally assume $h$ is quasi-separated as defined in the statement. For an affine scheme $C$ and $c:h_C\\to Q$, the composite $qc:h_C\\to W$ is an affine scheme test of $\\Delta_h$. Its pullback $Z\\times_Wh_C$ is quasi-compact by that hypothesis. By the explicit identification in step 2 it is the same scheme as the pullback $P\\times_Qh_C$ of $i$. Hence the source of every affine scheme test of $i$ is quasi-compact, exactly the required assertion. This uses the hypothesis only in this final step and no finiteness hypothesis on $A$, $B$, $Z$, $T$ or $S$.",
+   "uses": [
+    "lem-sfb-space-diagonal-scheme-tests"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KN (4), using the displayed cartesian square and the definition of quasi-separatedness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-diagonal-scheme-tests",
+  "def-trf-algebraic-space",
+  "lem-trf-monomorphism-finite-type-composite-lqf",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03KN (lemma-fibre-product-after-map), cartesian-diagonal proof; Tag 03HK proof, final paragraph. Sectionwise identifications and the monomorphism diagonal argument are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, CategoryTheory.Limits.pullback.map",
+   "results": "{\"t\": \"2026-10-23T15:52:39Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyQuasiFinite, CategoryTheory.Limits.pullback.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme-only base-change, diagonal and quasi-finite instances; none states the comparison for arbitrary algebraic spaces. The grep found no algebraic-space notion. Read QuasiFinite.lean:35-84 and QuasiSeparated.lean:46-90; their domains are Scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For morphisms of algebraic spaces A to Z and B to Z and Z to T the comparison from A times Z B to A times T B is representable separated locally quasi finite and quasi compact if Z to T is quasi separated",
+   "results": "{\"t\": \"2026-10-23T15:52:39Z\", \"tool\": \"leanfinder\", \"query\": \"For morphisms of algebraic spaces A to Z and B to Z and Z to T the comparison from A times Z B to A times T B is representable separated locally quasi finite and quasi compact if Z to T is quasi separated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiSeparatedFstScheme\", \"AlgebraicGeometry.instQuasiSeparatedSndScheme\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiCompactFstScheme\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.instQuasiCompactSndScheme\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\"], \"digest\": \"12c3ee961147294d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme-only base-change, diagonal and quasi-finite instances; none states the comparison for arbitrary algebraic spaces. The grep found no algebraic-space notion. Read QuasiFinite.lean:35-84 and QuasiSeparated.lean:46-90; their domains are Scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*map|map.*pullback|diagonal",
+   "results": "{\"t\": \"2026-10-23T15:52:39Z\", \"tool\": \"grep\", \"query\": \"pullback.*map|map.*pullback|diagonal\", \"sub\": \"AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"226\", \"238\", \"254\", \"406\", \"413\"], \"digest\": \"108b055f45e576de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme-only base-change, diagonal and quasi-finite instances; none states the comparison for arbitrary algebraic spaces. The grep found no algebraic-space notion. Read QuasiFinite.lean:35-84 and QuasiSeparated.lean:46-90; their domains are Scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The comparison of fibre products over different algebraic spaces is representable separated locally quasi finite and a monomorphism",
+   "results": "{\"t\": \"2026-10-23T15:52:40Z\", \"tool\": \"leansearch\", \"query\": \"The comparison of fibre products over different algebraic spaces is representable separated locally quasi finite and a monomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"AlgebraicGeometry.instQuasiSeparatedOfMonoScheme\", \"AlgebraicGeometry.instLocallyQuasiFiniteFstScheme\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\"], \"digest\": \"1804eb7ac71f22e2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme-only base-change, diagonal and quasi-finite instances; none states the comparison for arbitrary algebraic spaces. The grep found no algebraic-space notion. Read QuasiFinite.lean:35-84 and QuasiSeparated.lean:46-90; their domains are Scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|fibre.product.after.map|fiber.product.after.map",
+   "results": "{\"t\": \"2026-10-23T15:53:15Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|fibre.product.after.map|fiber.product.after.map\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme-only base-change, diagonal and quasi-finite instances; none states the comparison for arbitrary algebraic spaces. The grep found no algebraic-space notion. Read QuasiFinite.lean:35-84 and QuasiSeparated.lean:46-90; their domains are Scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The base change of the diagonal of any algebraic space is representable locally finite type separated locally quasi finite and is quasi compact for a quasi separated morphism",
+   "results": "{\"t\": \"2026-10-23T15:53:15Z\", \"tool\": \"leanfinder\", \"query\": \"The base change of the diagonal of any algebraic space is representable locally finite type separated locally quasi finite and is quasi compact for a quasi separated morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.instQuasiSeparatedFstScheme\"], \"digest\": \"4f76ed1c93c477a7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme-only base-change, diagonal and quasi-finite instances; none states the comparison for arbitrary algebraic spaces. The grep found no algebraic-space notion. Read QuasiFinite.lean:35-84 and QuasiSeparated.lean:46-90; their domains are Scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal|pullback.*map",
+   "results": "{\"t\": \"2026-10-23T19:31:05Z\", \"tool\": \"grep\", \"query\": \"diagonal|pullback.*map\", \"sub\": \"AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"226\", \"238\", \"254\"], \"digest\": \"539b184d10089349\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern morphisms of schemes or algebras; none states the comparison for arbitrary algebraic spaces. Read Mathlib AlgebraicGeometry/Morphisms/QuasiFinite.lean:35-84 and QuasiSeparated.lean:46-90. The AlgebraicGeometry search for AlgebraicSpace found no declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|fibre.product.after.map|fiber.product.after.map",
+   "results": "{\"t\": \"2026-10-23T19:31:05Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|fibre.product.after.map|fiber.product.after.map\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern morphisms of schemes or algebras; none states the comparison for arbitrary algebraic spaces. Read Mathlib AlgebraicGeometry/Morphisms/QuasiFinite.lean:35-84 and QuasiSeparated.lean:46-90. The AlgebraicGeometry search for AlgebraicSpace found no declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The comparison A times Z B to A times T B of algebraic spaces is a representable locally finite type monomorphism and is separated and locally quasi finite",
+   "results": "{\"t\": \"2026-10-23T19:31:05Z\", \"tool\": \"leansearch\", \"query\": \"The comparison A times Z B to A times T B of algebraic spaces is a representable locally finite type monomorphism and is separated and locally quasi finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.baseChange\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\"], \"digest\": \"0621ecc5ac357ece\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern morphisms of schemes or algebras; none states the comparison for arbitrary algebraic spaces. Read Mathlib AlgebraicGeometry/Morphisms/QuasiFinite.lean:35-84 and QuasiSeparated.lean:46-90. The AlgebraicGeometry search for AlgebraicSpace found no declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, CategoryTheory.Limits.pullback.map",
+   "results": "{\"t\": \"2026-10-23T19:31:05Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyQuasiFinite, CategoryTheory.Limits.pullback.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern morphisms of schemes or algebras; none states the comparison for arbitrary algebraic spaces. Read Mathlib AlgebraicGeometry/Morphisms/QuasiFinite.lean:35-84 and QuasiSeparated.lean:46-90. The AlgebraicGeometry search for AlgebraicSpace found no declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every scheme test of the relative diagonal of an algebraic space is a locally finite type monomorphism and hence separated locally quasi finite",
+   "results": "{\"t\": \"2026-10-23T19:31:06Z\", \"tool\": \"leanfinder\", \"query\": \"Every scheme test of the relative diagonal of an algebraic space is a locally finite type monomorphism and hence separated locally quasi finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\"], \"digest\": \"edd1af4e2f3372a1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern morphisms of schemes or algebras; none states the comparison for arbitrary algebraic spaces. Read Mathlib AlgebraicGeometry/Morphisms/QuasiFinite.lean:35-84 and QuasiSeparated.lean:46-90. The AlgebraicGeometry search for AlgebraicSpace found no declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of fibre products of algebraic spaces over different bases is representable locally finite type separated locally quasi finite and quasi compact if the base morphism is quasi separated",
+   "results": "{\"t\": \"2026-10-23T19:31:07Z\", \"tool\": \"leanfinder\", \"query\": \"Comparison of fibre products of algebraic spaces over different bases is representable locally finite type separated locally quasi finite and quasi compact if the base morphism is quasi separated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyQuasiFiniteFstScheme\", \"AlgebraicGeometry.instQuasiSeparatedSndScheme\", \"AlgebraicGeometry.instQuasiSeparatedFstScheme\", \"AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme\", \"AlgebraicGeometry.instLocallyQuasiFiniteSndScheme\", \"AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme\", \"AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme\", \"AlgebraicGeometry.instQuasiCompactFstScheme\"], \"digest\": \"e73a9a18e26d3c3b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern morphisms of schemes or algebras; none states the comparison for arbitrary algebraic spaces. Read Mathlib AlgebraicGeometry/Morphisms/QuasiFinite.lean:35-84 and QuasiSeparated.lean:46-90. The AlgebraicGeometry search for AlgebraicSpace found no declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-atlas-distinct-tuple-geometry",
+  "date": "2026-10-23",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 07SU (proposition-approximate); Noetherian stages by spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian) over Spec Z, and finite type quasi-compactness. New supporting input: Tag 07ST (lemma-filter-quasi-compact-quasi-separated); last stratum is schematic as explained in spaces-limits.tex, proposition-approximate, first proof paragraph Supporting input: Tag 07ST proof: the quasi-compact iterated products and the clopen ordered distinct-tuple schemes W_p, before quotienting by S_p. Generic input: the binary fibre-product comparison of Stacks 03KN used inductively for the absolute comparison of ordered tuples.",
+   "via": [
+    "lem-sfb-etale-atlas-distinct-tuple-geometry",
+    "lem-sfb-qcqs-space-splitting-filtration",
+    "lem-sfb-space-absolute-noetherian-approximation",
+    "lem-sfb-finite-surjective-affine-space-target",
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-fibre-product-comparison",
+  "worker": "stage1",
+  "summary": "Q35: kept the statement unchanged. Expanded the 03KN cartesian square on sections; reused the existing relative-diagonal scheme-test theorem and scheme monomorphism/local-quasi-finiteness theorem, proved separatedness by the explicit diagonal inverse, and checked quasi-compactness directly on affine tests. No new nodes. Searches of project Lean found no attachment; Mathlib hits are scheme-only.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 07SU (proposition-approximate); Noetherian stages by spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian) over Spec Z, and finite type quasi-compactness. New supporting input: Tag 07ST (lemma-filter-quasi-compact-quasi-separated); last stratum is schematic as explained in spaces-limits.tex, proposition-approximate, first proof paragraph Supporting input: Tag 07ST proof: the quasi-compact iterated products and the clopen ordered distinct-tuple schemes W_p, before quotienting by S_p. Generic input: the binary fibre-product comparison of Stacks 03KN used inductively for the absolute comparison of ordered tuples. This realizes the existing 03KN supporting input, with the latest blueprint direct-images proof (3) as its inherited purpose.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-monomorphism-finite-type-composite-lqf",
+    "why": "Generic scheme theorem: with g the identity, a locally finite type monomorphism is locally quasi-finite. It supplies the scheme-test conclusion of 03HK; it is not a trace-formula proof step. The diagonal-scheme-tests node of this unit stops at local finite type and monomorphism."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and universal property of sheaf fibre products of algebraic spaces, used for the cartesian square and diagonal inverse. This is an existing statement dependency, not a change to the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-monomorphism-finite-type-composite-lqf",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-c8da72d84",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-c8da72d84 (reviewer sub-agent of L); spot-checked: I read Stacks spaces-morphisms 03KN (lemma-fibre-product-after-map) and 03HK (lemma-properties-diagonal). The item states exactly 03KN clauses (1) and (4), with their meanings spelled out, so nothing is weakened. It is the first delivery, and the item is still unsplit in live and side-live. There are no new nodes and proof_deps equals the union of the step uses. Step 1 is elementary and correct: on sections P is inside Q, so i is injective, and P is isomorphic to Q x_{W,Delta_h} Z. Step 2 applies the statement of lem-sfb-space-diagonal-scheme-tests (U=Z, V=T, test C via qc): D_C is a scheme and d_C is locally of finite type and a monomorphism. Through step 1, D_C is P x_Q h_C, which gives representability as defined in def-trf-algebraic-space. Step 3 applies lem-trf-monomorphism-finite-type-composite-lqf with g = id; both hypotheses come from step 2, and the conclusion is local quasi-finiteness in the pqf (2) sense. Step 4 is elementary: since i is injective, the diagonal of i is an isomorphism, so every scheme test of it is an identity, which is a closed immersion. Step 5 is elementary: an affine test of i is an affine test of Delta_h, so its source is quasi-compact under either reading of the hypothesis. I checked the edge cases: h = id gives an isomorphism; for the line with doubled origin, i is the diagonal, an immersion that is not closed, which is consistent because clause (3) is not claimed; a non-quasi-compact diagonal gives no conclusion; empty and nonreduced tests cause no problem. Searching the DAG for 03KN found no duplicate, and the cited closures contain no cycle. Batch 5: def-trf-algebraic-space (reached through the diagonal-tests node) is a general definition and lem-trf-monomorphism-finite-type-composite-lqf is a generic scheme lemma (Stacks 01L4, 02GE, 02V5); neither closure reaches a trace-formula or Poincare node, so both are accepted. I accept both declared tool_uses (the mono-lqf lemma and the trf fibre-products node). No SGA source is used. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFibreProductComparison",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.fibreProduct_comparison_properties",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFibreProductComparison.lean",
+  "statement": "theorem fibreProduct_comparison_properties {S : Scheme.{u}} (A B Z T : AlgebraicSpace S) (f : A ⟶ Z) (g : B ⟶ Z) (h : Z ⟶ T) : IsRepresentable (pullback.mapDesc f.hom g.hom h.hom).hom ∧ (∀ C : Over S, Function.Injective ((pullback.mapDesc f.hom g.hom h.hom).hom.app (op C))) ∧ IsRepresentableWith (fun _ _ p ↦ LocallyOfFiniteType p.left) (pullback.mapDesc f.hom g.hom h.hom).hom ∧ IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (pullback.diagonal (pullback.mapDesc f.hom g.hom h.hom).hom) ∧ IsRepresentableWith (fun _ _ p ↦ Scheme.Hom.IsLocallyQuasiFinite p.left) (pullback.mapDesc f.hom g.hom h.hom).hom ∧ (IsRepresentableWith (fun _ _ p ↦ QuasiCompact p.left) (pullback.diagonal h.hom.hom) → IsRepresentableWith (fun _ _ p ↦ QuasiCompact p.left) (pullback.mapDesc f.hom g.hom h.hom).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f34fc1d4d",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Single delivered module; lean.statement verbatim; node identical to live except lean; item has no live Lean record (first S2 delivery). Comparison = Mathlib pullback.mapDesc (pullback.map with identity factor maps), canonical, on fppf-sheaf pullbacks as in lem-trf fibreProduct_isAlgebraicSpace. Six conjuncts match Stacks 03KN (1),(4): IsRepresentable; sectionwise injectivity over all Over S; IsRepresentableWith LocallyOfFiniteType; diagonal of the comparison representable by IsClosedImmersion; Stacks-sense Scheme.Hom.IsLocallyQuasiFinite; qc diagonal of h implies qc comparison on scheme tests, equivalent to affine-test qc given representability. No extra hypotheses or universe restriction. Edge cases ok (empty spaces, h=id, Δ_h of doubled line, non-qs h). No new defs, only sorry, docstrings with source, blueprint tag and 5 proof steps; plain import is the proof_dep module; report sections present. No findings, no compile needed."
+ }
+}

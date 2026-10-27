@@ -1,0 +1,309 @@
+{
+ "id": "lem-trf-continuous-conormal-lift-augmentation",
+ "kind": "statement",
+ "title": "Continuous conormal lift maps preserve differential augmentations",
+ "statement": "Let $k$ be a field, $S$ a finite-type $k$-algebra [def-weil-pbc-finite-type-algebra], $\\mathfrak m$ a maximal ideal with residue field $k$, $A=S_{\\mathfrak m}$ [def-weil-pbc-localization-at-prime], and $R=\\widehat A$ [def-weil-pbc-adic-completion]. Put $M_R=\\Omega^1_{A/k}\\otimes_A R$ [def-weil-pbc-kahler-differentials, def-weil-module-base-change], and let $\\widehat d:R\\to M_R$ be the continuous extension of the universal derivation [def-trf-completed-differential-extension]. Let $A=P/I$ with $P=k[u_1,\\ldots,u_m]_{\\mathfrak q}$ at a $k$-rational maximal ideal, and let $\\pi:T=k[[z_1,\\ldots,z_n]]\\twoheadrightarrow R$ be a continuous local $k$-algebra surjection with kernel $J$ [def-weil-pbc-multivariate-power-series]. Set\n$$C_P=[I/I^2\\xrightarrow{\\mathrm d}\\Omega^1_{P/k}\\otimes_P A],\\qquad C_T=[J/J^2\\xrightarrow{\\widehat{\\mathrm d}}R^n]$$\nin degrees $-1,0$, using termwise formal partial derivatives for the second differential. A local $k$-algebra lift $\\alpha:P\\to T$ of $P\\to A\\to R$ exists. Every such lift gives a well-defined chain map $f_\\alpha:C_P\\otimes_A R\\to C_T$ with\n$$[h]\\otimes1\\mapsto[\\alpha(h)],\\qquad \\mathrm du_i\\otimes1\\mapsto\\widehat{\\mathrm d}\\alpha(u_i).$$\nFor every $h\\in T$ one has the continuous chain rule\n$$\\widehat d(\\pi(h))=\\sum_i\\pi(\\partial h/\\partial z_i)\\,\\widehat d(\\pi(z_i)).$$\nConsequently $q_T f_\\alpha=q_P$, where the augmentations send $\\mathrm du_i$ to $\\mathrm d\\bar u_i\\otimes1$ and $e_i$ to $\\widehat d(\\pi(z_i))$. If $\\pi':T'=k[[w_1,\\ldots,w_{n'}]]\\twoheadrightarrow R$ is another such presentation with kernel $J'$ and $\\beta:T\\to T'$ is a continuous local $k$-algebra map with $\\pi'\\beta=\\pi$, then $[g]\\mapsto[\\beta(g)]$ and $e_i\\mapsto\\widehat{\\mathrm d}\\beta(z_i)$ give a chain map $h_\\beta:C_T\\to C_{T'}$ satisfying $q_{T'}h_\\beta=q_T$. These formulas respect identities and composition of the presentation maps. The corresponding algebraic conormal maps for local maps between polynomial-local presentations of $A$ likewise commute with their augmentations, also after extension to $R$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Agent-formulated coordinate-lift and continuous-derivative argument accompanying Tag 0C52 (lemma-complete-local-ring-structure-as-algebra); algebra.tex Tags 00MA (lemma-completion-tensor), 05GG (lemma-hathat-finitely-generated), via the recorded finite-module completion theorem. Returned parent proof Steps 6--7 and the presentation-map calculation of Step 11."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-module-base-change",
+  "def-trf-completed-differential-extension",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-formal-power-series-partial-derivative"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathfrak a=(z_1,\\ldots,z_n)$ and $a_i=u_i\\bmod\\mathfrak q\\in k$. Choose $v_i\\in T$ with $\\pi(v_i)=\\bar u_i\\in R$. The residue map of the local surjection $\\pi$ identifies $T/\\mathfrak a=k$ with the residue field of $R$, so $v_i(0)=a_i$. Evaluation $u_i\\mapsto v_i$ defines a map $k[u]\\to T$. For $s\\notin\\mathfrak q$ its image has constant coefficient $s(a_1,\\ldots,a_m)\\ne0$, hence is a unit by the power-series local-ring lemma. Thus $p/s\\mapsto p(v)s(v)^{-1}$ is well defined on $P$: equality of fractions is preserved after multiplying by the unit image of a common denominator. It defines $\\alpha:P\\to T$ lifting the given map to $R$. Its inverse image of $\\mathfrak a$ is $\\mathfrak qP$, by the same residue calculation, so it is local. In particular $\\alpha(I)\\subset J$.",
+   "uses": [
+    "lem-weil-pbc-power-series-local-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Localization fractions, Tag 00CO (definition-localization); power-series local-ring lemma, applied over the field k. Agent coordinate-lift construction accompanying Varieties Tag 0C52."
+   }
+  },
+  {
+   "text": "The polynomial differential basis and localization isomorphism identify $\\Omega_{P/k}$ with $\\bigoplus_iP\\,\\mathrm du_i$. Let $D_T:T\\to T^n$ have coordinates the formal partial derivatives; it is a $k$-derivation by their defining Leibniz laws. The universal property of $\\Omega_{P/k}$ applied to $D_T\\alpha$, then reduction modulo $J$, gives an $R$-linear map $f^0_\\alpha:(\\Omega_{P/k}\\otimes_PA)\\otimes_AR\\to R^n$ with $f^0_\\alpha(\\mathrm dp\\otimes1)=D_T\\alpha(p)\\bmod J$ for every $p\\in P$. In particular its values on $\\mathrm du_i$ are precisely the asserted gradients. The assignment $[h]\\mapsto[\\alpha(h)]$ sends $I/I^2$ to $J/J^2$: $\\alpha(I^2)\\subset J^2$, and $[\\alpha(ph)]=\\bar p[\\alpha(h)]$, where $\\bar p$ acts through $A\\to R$. Tensoring this $A$-linear assignment with $R$ gives $f^{-1}_\\alpha$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "def-trf-formal-power-series-partial-derivative",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00RX (lemma-differentials-polynomial-ring), 00RT (lemma-differentials-localize), 00RO (lemma-universal-omega): derivation-induced maps and reduction of ideal classes."
+   }
+  },
+  {
+   "text": "The differentials of the conormal complexes are well defined: for $h,h'\\in I$, $\\mathrm d(hh')=h\\,\\mathrm dh'+h'\\,\\mathrm dh$ vanishes after tensoring with $A$, and for $g,g'\\in J$, $D_T(gg')=gD_Tg'+g'D_Tg$ vanishes modulo $J$. For $h\\in I$ the defining equality from Step 2 reads $f^0_\\alpha(\\mathrm dh\\otimes1)=D_T\\alpha(h)\\bmod J=d_{C_T}f^{-1}_\\alpha([h]\\otimes1)$. The ideal classes and their scalar multiples generate the degree $-1$ term, so this proves the chain-map equation. The universal differential $A\\to\\Omega_{A/k}$ likewise defines $q_P$ on degree zero, with $q_P(\\mathrm dh)=0$ for $h\\in I$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-trf-formal-power-series-partial-derivative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RU (lemma-differential-seq), proof: Leibniz kills squares and relation differentials. Explicit application to the two displayed complexes."
+   }
+  },
+  {
+   "text": "Apply the completion--differential comparison with residue extension $F=k$ and its structural section. The derivation $\\widehat d$ of the statement satisfies both clauses of [def-trf-completed-differential-extension], so by the uniqueness in clause (i) of the comparison it is the continuous extension used there. Its isomorphism $\\eta:M_R\\xrightarrow{\\sim}\\varprojlim_r\\Omega_{(R/\\mathfrak m_R^r)/k}$ sends $\\widehat d(x)$ to $(\\mathrm d(x\\bmod\\mathfrak m_R^r))_r$. Here $\\mathfrak m_R$ is the maximal ideal of $R$. For each $r\\ge1$, locality of $\\pi$ gives $T/\\mathfrak a^r\\to R/\\mathfrak m_R^r$. The universal property of differentials gives a map on their differential modules sending $\\mathrm d\\bar h$ to $\\mathrm d\\overline{\\pi(h)}$. Apply this map to the finite-level gradient identity in the adic-gradient-control lemma. The result is\n$$\\mathrm d(\\pi(h)\\bmod\\mathfrak m_R^r)=\\sum_i(\\pi(\\partial_i h)\\bmod\\mathfrak m_R^r)\\,\\mathrm d(\\pi(z_i)\\bmod\\mathfrak m_R^r).$$\nThis holds for every $r$; equality of compatible sequences and injectivity of $\\eta$ give exactly the asserted chain rule in $M_R$. For $h\\in J$ its left side is zero, hence the map $e_i\\mapsto\\widehat d(\\pi(z_i))$ kills the conormal differential and defines the augmentation $q_T$.",
+   "uses": [
+    "lem-trf-completion-kahler-differential-comparison",
+    "lem-trf-power-series-adic-gradient-control",
+    "def-weil-pbc-kahler-differentials",
+    "def-trf-completed-differential-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D (lemma-nodal), completed Jacobian comparison; Algebra Tag 02HQ (lemma-differential-mod-power-ideal) and Tag 00RX, via the cited finite-level gradient theorem. Agent assembly of these existing auxiliary statements."
+   }
+  },
+  {
+   "text": "For every basis differential of $C_P^0\\otimes_AR$, Step 4 with $h=\\alpha(u_i)$ gives\n$$q_Tf^0_\\alpha(\\mathrm du_i\\otimes1)=\\widehat d(\\pi\\alpha(u_i))=\\mathrm d\\bar u_i\\otimes1=q_P(\\mathrm du_i\\otimes1).$$\nThe middle equality is $\\pi\\alpha(u_i)=\\bar u_i$ and the extension clause (i) of [def-trf-completed-differential-extension].\nThus the augmentations agree on all degree-zero elements by the basis of Step 2. Both have zero degree $-1$ component, so $q_Tf_\\alpha=q_P$ as maps to $M_R[0]$. No smoothness, reducedness, or regular-sequence hypothesis has been used.",
+   "uses": [
+    "def-trf-completed-differential-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00RX and 00RT: evaluation on the basis already established in Step 2; the chain rule established in Step 4."
+   }
+  },
+  {
+   "text": "For a formal presentation map $\\beta:T\\to T'$, $\\beta(J)\\subset J'$ and $\\beta(J^2)\\subset J'^2$, so its ideal-class map is well defined and $R$-linear. For each $j$, $E_j=\\partial'_j\\circ\\beta$ is a $k$-linear $\\beta$-derivation $T\\to T'$. Locality gives $\\beta(\\mathfrak a)\\subset(w_1,\\ldots,w_{n'})$, so the relative-derivation expansion applies and gives\n$$\\partial'_j\\beta(g)=\\sum_i\\beta(\\partial_i g)\\,\\partial'_j\\beta(z_i).$$\nReduce this equality modulo $J'$. Since $\\pi'\\beta=\\pi$, it is exactly $d_{C_{T'}}h^{-1}_\\beta([g])=h^0_\\beta d_{C_T}([g])$, proving the chain condition for the stated degree-zero map. Repeating Step 4 for $\\pi'$ gives\n$$q_{T'}h^0_\\beta(e_i)=\\sum_j\\pi'(\\partial'_j\\beta(z_i))\\widehat d(\\pi'(w_j))=\\widehat d(\\pi'\\beta(z_i))=q_T(e_i).$$\nTherefore $q_{T'}h_\\beta=q_T$.",
+   "uses": [
+    "lem-trf-formal-relative-derivation-expansion",
+    "def-trf-formal-power-series-partial-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), chain-rule paragraph, with the full relative-derivation expansion supplied by the cited node. Augmentation equality uses the already proved Step 4 for the second presentation."
+   }
+  },
+  {
+   "text": "Identities act as identities on ideal classes, while $\\partial_jz_i=\\delta_{ij}$ makes their degree-zero matrices identity matrices. For composable formal presentation maps $\\beta:T\\to T'$ and $\\gamma:T'\\to T''$, the degree $-1$ composite sends $[g]$ to $[\\gamma\\beta(g)]$. On $e_i$ the $l$th coordinate of the degree-zero composite is $\\sum_j\\pi''\\gamma(\\partial'_j\\beta(z_i))\\,\\pi''(\\partial''_l\\gamma(w_j))$. The relative-derivation expansion for $\\gamma$, evaluated at $\\beta(z_i)$, identifies it with $\\pi''(\\partial''_l\\gamma\\beta(z_i))$, the coordinate of $h_{\\gamma\\beta}$. The same calculation at $\\alpha(u_i)$ proves $h_\\beta f_\\alpha=f_{\\beta\\alpha}$; the degree $-1$ equality is again evaluation on ideal classes. Thus the displayed maps respect identities and composition, including the polynomial-to-formal maps.",
+   "uses": [
+    "lem-trf-formal-relative-derivation-expansion",
+    "def-trf-formal-power-series-partial-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined): explicit chain-rule matrix multiplication, using the relative-derivation expansion cited in Step 6."
+   }
+  },
+  {
+   "text": "Finally let $\\rho:P\\to P'$ be a local $k$-algebra map between localized polynomial presentations of $A$, inducing its identity. The universal property gives $\\mathrm dp\\mapsto\\mathrm d\\rho(p)$, and $[h]\\mapsto[\\rho(h)]$ gives the conormal map. The ideal-square and chain equations are the Leibniz calculation of Step 3. Fractions cause no additional assertion: $0=D(ss^{-1})$ gives $D(s^{-1})=-s^{-2}D(s)$, hence $D(p/s)=s^{-1}D(p)-ps^{-2}D(s)$ for each of the derivations involved. On every $\\mathrm dp$, the two augmentation composites equal $\\mathrm d\\bar p$, since $\\rho$ induces the identity of $A$. These symbols generate $\\Omega_{P/k}$ by its definition, so the maps agree. Tensoring the equality with $R$ proves the completed assertion. Identities and composition follow on the same ideal classes and symbols $\\mathrm dp$; a polynomial presentation change followed by a formal lift gives $f_{\\alpha'\\rho}$ because both degree-zero maps take $\\mathrm dp$ to $D_T\\alpha'\\rho(p)\\bmod J$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00RO (lemma-universal-omega), 00RT (lemma-differentials-localize) and 00RU (lemma-differential-seq): explicit derivation and ideal-class calculation, with the quotient rule written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-completed-differential-extension",
+  "def-trf-formal-power-series-partial-derivative",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-localization-at-prime",
+  "lem-trf-completion-kahler-differential-comparison",
+  "lem-trf-formal-relative-derivation-expansion",
+  "lem-trf-power-series-adic-gradient-control",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "lem-weil-pbc-power-series-local-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit coordinate and universal-derivation assembly of the recorded auxiliary statements; Tags 00RO, 00RT, 00RU, 00RX, 02HQ, 00MA, 05GG; Curves Tags 0C4B and 0C4D motivate the continuous comparison, not a verbatim source theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lift a localized polynomial presentation to a power series presentation of a local completion and show its conormal chain map commutes with continuous differential augmentations",
+   "results": "{\"t\": \"2026-10-22T06:45:27Z\", \"tool\": \"leanfinder\", \"query\": \"Lift a localized polynomial presentation to a power series presentation of a local completion and show its conormal chain map commutes with continuous differential augmentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.of_isLocalization\", \"Algebra.Generators.map_comp_cotangentCompAwaySec\", \"Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv\", \"Algebra.Extension.homInfinitesimal\", \"Algebra.FormallySmooth.localization_map\", \"RingHom.FormallySmooth.holdsForLocalizationAway\"], \"digest\": \"e2b9098ad7ab66eb\"} Full signatures in lem-trf-continuous-conormal-lift-augmentation.search-results.txt; related algebraic cotangent, rank, derivative and endomorphism-determinant APIs do not state this auxiliary assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.pderiv",
+   "results": "{\"t\": \"2026-10-22T06:45:27Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.pderiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.pderiv\", \"MvPowerSeries.pderiv_X_self\", \"MvPowerSeries.pderiv_X_of_ne\", \"MvPowerSeries.pderiv_one\", \"MvPowerSeries.pderiv_X\", \"MvPowerSeries.pderiv_C\", \"MvPowerSeries.pderiv_coe\", \"MvPowerSeries.pderiv_pow\"], \"digest\": \"ed4b904cf5ed1d93\"} Full signatures in lem-trf-continuous-conormal-lift-augmentation.search-results.txt; related algebraic cotangent, rank, derivative and endomorphism-determinant APIs do not state this auxiliary assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pderiv.*comp|chain[Rr]ule|chain_rule|continuous.*derivation",
+   "results": "{\"t\": \"2026-10-22T06:45:27Z\", \"tool\": \"grep\", \"query\": \"pderiv.*comp|chain[Rr]ule|chain_rule|continuous.*derivation\", \"sub\": \"RingTheory/\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\"], \"digest\": \"4e186267c4b59225\"} Full signatures in lem-trf-continuous-conormal-lift-augmentation.search-results.txt; related algebraic cotangent, rank, derivative and endomorphism-determinant APIs do not state this auxiliary assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous power series chain rule with values in completed Kahler differentials, naturality for local presentation lifts",
+   "results": "{\"t\": \"2026-10-22T06:45:28Z\", \"tool\": \"leansearch\", \"query\": \"Continuous power series chain rule with values in completed Kahler differentials, naturality for local presentation lifts\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Full signatures in lem-trf-continuous-conormal-lift-augmentation.search-results.txt; related algebraic cotangent, rank, derivative and endomorphism-determinant APIs do not state this auxiliary assertion.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial lifts and continuous maps of power series presentations induce compatible maps of conormal complexes over their common quotient",
+   "results": "{\"t\": \"2026-10-22T06:45:44Z\", \"tool\": \"leanfinder\", \"query\": \"Polynomial lifts and continuous maps of power series presentations induce compatible maps of conormal complexes over their common quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.comp_lift\", \"Algebra.Extension.homInfinitesimal\", \"Algebra.FormallySmooth.mk_lift\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.Generators.CotangentSpace.fst_compEquiv_apply\", \"Algebra.FormallySmooth.lift\"], \"digest\": \"662128246a50c788\"} Full signatures in lem-trf-continuous-conormal-lift-augmentation.search-results.txt; related algebraic cotangent, rank, derivative and endomorphism-determinant APIs do not state this auxiliary assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "conormal.*continuous|continuous.*derivation|pderiv.*comp|chain_rule",
+   "results": "{\"t\": \"2026-10-23T12:30:44Z\", \"tool\": \"grep\", \"query\": \"conormal.*continuous|continuous.*derivation|pderiv.*comp|chain_rule\", \"sub\": \"RingTheory/\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\"], \"digest\": \"4e186267c4b59225\"} Read the returned hits: ordinary algebraic differential/conormal maps or analytic derivatives, not the complete formal-series augmentation assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.pderiv, Algebra.Extension",
+   "results": "{\"t\": \"2026-10-23T12:30:45Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.pderiv, Algebra.Extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned hits: ordinary algebraic differential/conormal maps or analytic derivatives, not the complete formal-series augmentation assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous local map between formal power series presentations gives a chain rule and a morphism of augmented conormal complexes",
+   "results": "{\"t\": \"2026-10-23T12:30:45Z\", \"tool\": \"leansearch\", \"query\": \"A continuous local map between formal power series presentations gives a chain rule and a morphism of augmented conormal complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFPowerSeriesWithinAt.comp\", \"HasFDerivAt.continuousMultilinearMap_apply\", \"HasFPowerSeriesWithinOnBall.compContinuousLinearMap\", \"HasFPowerSeriesAt.compContinuousLinearMap\", \"HasFDerivWithinAt.continuousMultilinearMap_apply\", \"HasFDerivAt.continuousMultilinearMapCompContinuousLinearMap\", \"ContinuousLinearMap.compFormalMultilinearSeries_apply\", \"fderiv_continuousMultilinearMapCompContinuousLinearMap\"], \"digest\": \"e7bdb32dea441bc8\"} Read the returned hits: ordinary algebraic differential/conormal maps or analytic derivatives, not the complete formal-series augmentation assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local polynomial lifts to formal power series induce functorial conormal complex chain maps compatible with completed Kahler differential augmentations",
+   "results": "{\"t\": \"2026-10-23T12:30:49Z\", \"tool\": \"leanfinder\", \"query\": \"Local polynomial lifts to formal power series induce functorial conormal complex chain maps compatible with completed Kahler differential augmentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.map\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"CommRingCat.KaehlerDifferential.map_d\", \"Algebra.Generators.H1Cotangent.δAux_ofComp\", \"Algebra.Presentation.differentials.comm₂₃\", \"Algebra.Generators.map_comp_cotangentCompAwaySec\", \"Algebra.Extension.CotangentSpace.map\", \"Algebra.Extension.CotangentSpace.map_comp_cotangentComplex\"], \"digest\": \"cacce794f1810931\"} Read the returned hits: ordinary algebraic differential/conormal maps or analytic derivatives, not the complete formal-series augmentation assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multivariate formal power series chain rule for a derivation into a completed module and functoriality of maps on the kernel modulo its square",
+   "results": "{\"t\": \"2026-10-23T12:31:49Z\", \"tool\": \"leanfinder\", \"query\": \"Multivariate formal power series chain rule for a derivation into a completed module and functoriality of maps on the kernel modulo its square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Derivation.llcomp\", \"LinearMap.compDer\", \"FormalMultilinearSeries.derivSeries\", \"Derivation.apply_aeval_eq'\", \"PowerSeries.derivative\", \"Derivation.compAlgebraMap\", \"FormalMultilinearSeries.derivSeries_apply_diag\", \"Derivation.llcomp_apply\"], \"digest\": \"96f29c7b3feb5a58\"} Read the returned hits: ordinary algebraic differential/conormal maps or analytic derivatives, not the complete formal-series augmentation assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-completed-conormal-determinant-comparison",
+  "date": "2026-10-22",
+  "group": "Q14"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Local input: The adjunction determinant calculation at a nodal point, before substituting f=xy and counting its branch poles. Missing prerequisite for this local input: compare the completed algebraic conormal determinant with an arbitrary regular formal presentation, preserving the generic differential map, before computing the plane residue. Re-split component: Coordinate lifts, continuous chain rule and augmentation compatibility (old Steps 6--7, 11).",
+   "via": [
+    "lem-trf-completed-conormal-determinant-comparison",
+    "lem-trf-formal-plane-adjunction-lattice",
+    "lem-trf-nodal-normalization-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-continuous-conormal-lift-augmentation",
+  "worker": "stage1",
+  "summary": "Checked all coordinate-lift, chain-rule, augmentation, identity, composition and localized-polynomial clauses. Reused existing completion, finite-level gradient and relative-derivation statements; no new nodes and no changes to the statement. Universal-property and ideal-square calculations are explicit.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Local input: The adjunction determinant calculation at a nodal point, before substituting f=xy and counting its branch poles. Missing prerequisite for this local input: compare the completed algebraic conormal determinant with an arbitrary regular formal presentation, preserving the generic differential map, before computing the plane residue. Re-split component: Coordinate lifts, continuous chain rule and augmentation compatibility (old Steps 6--7, 11). The current latest blueprint local-term-locality proof has only the contracting-correspondence theorem, so this historical completion auxiliary is retained on its existing descent rather than attributed verbatim to that proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-local-ring",
+    "why": "Units and the maximal ideal in a formal power-series ring, needed to extend coordinate evaluation across the denominators of P."
+   },
+   {
+    "node": "lem-weil-pbc-kahler-differentials-localization",
+    "why": "Polynomial differentials remain a basis after localization; no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "why": "The ordinary polynomial differential basis used to describe the conormal map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-22a41fbc8",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-22a41fbc8 (reviewer sub-agent of L); spot-checked: Ordinary first split, with no repair note for this item. The statement and stmt_deps are unchanged and the node is still unsplit in live and side-live. There are no new nodes; 8 steps cite existing nodes: the completion–Kähler comparison, finite-level gradient control, relative-derivation expansion and pbc Mathlib leaves (power-series units, polynomial Ω basis, Ω localization). I read every cited statement and checked every step. Step 1: the lift is built from the residue fields k=k (v_i(0)=a_i, s(v) is a unit), and it is local. Steps 2–3: f_α comes from the universal property of D_Tα mod J, and the squares/Leibniz chain equation holds for every lift. Step 4: the gradient identity pushed along T/a^r→R/m^r plus injective η gives the chain rule, and q_T kills d(J). Step 5: basis check. Steps 6–7: the expansion lemma with E=∂'_j∘β, ψ=β needs only locality, and the composition matrices are checked coordinatewise. Step 8: the algebraic ρ case. Edge cases checked: n=0, I=0 or J=0, nonreduced A, characteristic p, unequal variable counts. No cycle, no SGA, and the Stacks labels 0C4B/0C4D/00RU/00RT/00RX/00RO/02HQ/00CO/0C52 exist; I read the 0C4B chain-rule paragraph. The three tool_uses are generic Mathlib leaves and I accept them. Nothing in the DAG duplicates the item (checked completed-conormal-resolutions, formal-conormal-quotient-data, coordinate-chain-rule, hom-cotangent-linearization, smooth-branch pullback). FIX: Steps 4 and 5 used the defining properties of d̂ from def-trf-completed-differential-extension without citing it. Step 4 identified that d̂ with the comparison lemma's unique continuous extension without saying so, and Step 5 used extension clause (i) with uses=[]. I added the citation and one sentence to each step and updated proof_deps to the union of the uses. The corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-continuous-conormal-lift-augmentation.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ContinuousConormalLiftAugmentation",
+  "declaration": "Algebra.ContinuousConormal.continuous_conormal_lift_augmentation",
+  "declarations": [
+   "Algebra.ContinuousConormal.PolynomialPresentation",
+   "Algebra.ContinuousConormal.PolynomialPresentation.extension",
+   "Algebra.ContinuousConormal.FormalPresentation",
+   "Algebra.ContinuousConormal.FormalPresentation.extension",
+   "Algebra.ContinuousConormal.FormalData",
+   "Algebra.ContinuousConormal.FormalHom",
+   "Algebra.ContinuousConormal.Lift",
+   "Algebra.ContinuousConormal.PolynomialData",
+   "Algebra.ContinuousConormal.FormalMap",
+   "Algebra.ContinuousConormal.LiftMap",
+   "Algebra.ContinuousConormal.PolynomialHom",
+   "Algebra.ContinuousConormal.System",
+   "Algebra.ContinuousConormal.continuous_conormal_lift_augmentation"
+  ],
+  "file": "lean/Sheaf/TraceFormula/ContinuousConormalLiftAugmentation.lean",
+  "statement": "theorem continuous_conormal_lift_augmentation {k : Type u} {S : Type v} [Field k] [CommRing S] [Algebra k S] (hS : (algebraMap k S).FiniteType) (m : Ideal S) [m.IsMaximal] (hm : Nonempty (m.ResidueField ≃ₐ[k] k)) (D : Derivation k (LocalCompletion (Localization.AtPrime m)) (CompletedDifferentials k (Localization.AtPrime m))) (hD : IsCompletedDifferentialExtension k (Localization.AtPrime m) D) : Nonempty (System k (Localization.AtPrime m) D)",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Component description of the two-term chain maps on the actual Extension.Cotangent modules, with uniquely specified differential and augmentation maps; no regular-sequence hypothesis. Helper records only bundle the objects and component equations of this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e0c79042",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Read node, 8 stmt_dep records (all identical to side-live; only item lean added), module and report. Hypotheses match the node exactly: Field k, RingHom.FiniteType, maximal m with Nonempty(m.ResidueField ≃ₐ[k] k), actual Localization.AtPrime, LocalCompletion/CompletedDifferentials via the def-trf-completed-differential-extension signature, IsCompletedDifferentialExtension; no extra assumptions or universe ties. Nonempty(System) is faithful: every data field (polynomial/formal augmentations, liftMap, formalMap) is uniquely pinned by its generator equations (Cotangent.mk surjective, 1⊗1⊗dx generators, Pi.single basis); the fields cover lift existence, f_α class/gradient formulas plus chain square, continuous chain rule, q_T f_α=q_P, h_β with q_T'h_β=q_T, identities/compositions incl. lift∘formal and algebraic∘lift, and algebraic Extension.Hom chain/augmentation, also after ⊗R. Clauses checked true; edge cases n=0, I=J=0, char p, nonreduced covered. Parent CompletedConormal* records are regular-only, so no H4 duplicate; Mathlib Extension API is reused. Docstrings/source/blueprint present; only sorry; lean.statement verbatim. Second reading was by the same agent (as the section states). No fixes."
+ }
+}

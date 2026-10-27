@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-space-module-base-change-flat-proper-support",
+ "kind": "statement",
+ "title": "Tensor base change of relatively flat finitely presented modules with proper support on algebraic spaces",
+ "statement": "Let $S,T,T'$ be schemes [def-pc-scheme], with $T,T'$ over $S$, and let $g:T'\\to T$ be an $S$-morphism. Let $f:X\\to T$ be a locally finite type morphism from an algebraic space over $S$ [def-trf-algebraic-space, def-sfb-space-morphism-properties], in the universes of [def-weil-size-convention]. Put $X'=X\\times_T T'$ with projection $p:X'\\to X$ [lem-trf-space-fibre-products-etale-covers]. Let $M$ be a quasi-coherent $\\mathcal O_X$-module on the small etale site [def-weil-sheaf-of-modules-category, def-trf-space-quasi-coherent-module], of finite presentation: etale locally it has an exact presentation $\\mathcal O^m\\to\\mathcal O^n\\to M\\to0$ with $m,n$ finite. Say $M$ is flat over $T$ when for each etale scheme chart $U\\to X$ and each $u\\in U$ the stalk $M_u=\\operatorname{colim}_{u\\in W}M(W)$, over the Zariski open neighbourhoods $W\\subseteq U$ of $u$, is flat over $\\mathcal O_{T,t}$ for the image $t$ of $u$ in $T$, through $\\mathcal O_{T,t}\\to\\mathcal O_{U,u}$; this is the stalkwise flatness of [def-pc-scheme-module-flat-over] on each chart. Say $M$ has support proper over $T$ when there exist a representable closed immersion $i:Z\\hookrightarrow X$ [def-weil-closed-immersion] with $Z\\to T$ proper [def-sfb-space-morphism-properties] and a finite type quasi-coherent $\\mathcal O_Z$-module $G$ such that $i_*G\\simeq M$; finite type means etale locally finitely generated. If $M$ is flat over $T$ and has support proper over $T$, then the tensor pullback $p^*M$ [def-trf-space-etale-module-functors] is quasi-coherent, of finite presentation, flat over $T'$, and has support proper over $T'$ in these same senses. No flatness, noetherianity or finite-presentation hypothesis is imposed on $g$, and no finite-presentation hypothesis on $f$ is needed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05VW, lemma-base-change-module-flat (1); literature/stacks-project/sites-modules.tex Tag 03DO, lemma-local-pullback (5)-(7); literature/stacks-project/spaces-perfect.tex Tags 0CZI, lemma-module-support-proper-over-base, and 0CZJ, lemma-base-change-module-support-proper-over-base."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties",
+  "def-weil-closed-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over"
+ ],
+ "proof": [
+  {
+   "text": "Write $H=p^*M$. Apply [lem-sfb-space-module-pullback-quasicoherent] to $p$ to obtain that $H$ is quasi-coherent. The separate assertion \"Tensor pullback preserves finite presentation\" in [lem-sfb-space-fp-module-limit-category] applies to the arbitrary morphism $p$ and gives finite presentation of $H$; its inverse-limit clauses are not used. Thus these assertions require neither a flat base change nor a finite-presentation hypothesis on $f$.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-space-fp-module-limit-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DO, lemma-local-pullback (6),(7); spaces-properties.tex Tag 03GA, lemma-pullback-quasi-coherent"
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme chart $u:U\\to X$, which exists by [def-trf-algebraic-space]. Set $U'=U\\times_TT'$ and write $b:U'\\to U$ and $u':U'\\to X'$. The fibre-product property and preservation of etale coverings in [lem-trf-space-fibre-products-etale-covers] make $U'$ a scheme and $u'$ a surjective etale chart. Restrict $M$ to $U_{\\mathrm{et}}$ and let $N$ be its restriction to Zariski opens. By [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], $N$ is quasi-coherent; the definition of relative flatness in the statement says exactly that $N$ is flat over $T$. Apply [lem-pc-relatively-flat-module-pullback] to the cartesian scheme square $U'=U\\times_TT'$ to see that $b^*N$ is flat over $T'$. The tensor-pullback comparison in [lem-trf-space-etale-module-pushforward-restriction], applied to $p:X'\\to X$ and $u:U\\to X$, gives $H|_{U'}\\simeq b_{\\mathrm{et}}^*(M|_U)$. The pullback comparison in [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identifies its Zariski restriction with $b^*N$. Hence the actual restriction of $H$ to the chart $U'$ is flat over $T'$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-pc-relatively-flat-module-pullback",
+    "lem-trf-space-etale-module-pushforward-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05VW, lemma-base-change-module-flat (1), proof by etale scheme charts; with scheme relative flatness base change"
+   }
+  },
+  {
+   "text": "This also gives the required flatness on every chart, not merely the chosen one. Let $w:W\\to X'$ be any etale scheme chart and set $E=W\\times_{X'}U'$. Both projections $a:E\\to W$ and $c:E\\to U'$ are etale scheme maps, and $a$ is surjective, by [lem-trf-space-fibre-products-etale-covers] and the scheme-test meaning of etale in [def-trf-algebraic-space]. The Zariski modules $Q=H|_W$ and $L=H|_{U'}$ are quasi-coherent by [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. Etale restriction is tensor pullback by [lem-trf-space-etale-module-pushforward-restriction]; the same scheme comparison identifies $a^*Q\\simeq c^*L$ with the restriction of $H$ to $E$. Etale maps are flat by [def-weil-etale-morphism]. The pointwise assertion of [lem-trf-relative-flatness-source-cover] for $c$ and step 2 imply that $c^*L$ is flat over $T'$. The surjective-flat-family assertion of that node, applied to the singleton cover $a$, then implies that $Q$ is flat over $T'$. In particular every stalk on $W$ has the stipulated flatness over the corresponding local ring of $T'$. Since $W$ was arbitrary, $H$ is flat over $T'$ in exactly the stated stalkwise sense.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "def-weil-etale-morphism",
+    "lem-trf-relative-flatness-source-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JZ, lemma-flat-permanence, with the etale-chart reduction of spaces-morphisms.tex Tag 05VW"
+   }
+  },
+  {
+   "text": "Choose the carrier in the hypothesis, $i:Z\\hookrightarrow X$, with $Z\\to T$ proper, and a finite type quasi-coherent $G$ with $i_*G\\simeq M$. Put $Z'=Z\\times_TT'$. The universal property of fibre products identifies $Z'$ with $Z\\times_XX'$: a map to either space is a pair of maps to $Z$ and $T'$ with equal composites to $T$. Write $q:Z'\\to Z$ and $i':Z'\\to X'$. This uses [lem-trf-space-fibre-products-etale-covers]. The map $i'$ is a representable closed immersion: for any scheme test $V\\to X'$ its pullback is $Z\\times_X V\\to V$, a closed immersion by the scheme-test definition of $i$. Equivalently, one can apply [lem-weil-pbc-closed-immersion-base-change] after scheme testing. By [lem-sfb-space-proper-base-change] applied to $Z\\to T$ and $g$, the morphism $Z'\\to T'$ is proper. Neither conclusion uses reducedness of $Z'$ or flatness of $g$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-space-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02YW, lemma-base-change-immersions; spaces-morphisms.tex proper base change; carrier formulation of spaces-perfect.tex Tag 0CZI"
+   }
+  },
+  {
+   "text": "Set $G'=q^*G$, which is quasi-coherent by [lem-sfb-space-module-pullback-quasicoherent]. To check finite type, use the local generator presentations of $G$. Tensor pullback is left adjoint to module direct image by [def-trf-space-etale-module-functors], so [lem-weil-pbc-left-adjoint-preserves-colimits] says it preserves cokernels and finite sums. For any such pullback $a$, the tensor formula gives $a^*\\mathcal O\\simeq\\mathcal O$ by $r\\otimes s\\mapsto r\\,a^\\sharp(s)$, inverse $r\\mapsto r\\otimes1$; their two composites are identities by the tensor balancing relation. Thus it sends a finite free module of rank $n$ to one of rank $n$ and a surjection from it to a surjection. On an etale cover of $Z$ presenting generators of $G$, pull the cover back to $Z'$, and refine by scheme charts. These are coverings by [lem-trf-space-fibre-products-etale-covers]. Localization and tensor pullback commute by the tensor-pullback comparison of [lem-trf-space-etale-module-pushforward-restriction]; the enlargement in [lem-trf-space-enlarged-etale-ringed-site-model] permits the intermediate covering objects to be algebraic spaces. On each resulting chart the pulled generator presentation is therefore $\\mathcal O^n\\twoheadrightarrow G'$. This is exactly the stipulated finite-type condition. The argument uses only finite sums and cokernels, not preservation of kernels.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "def-trf-space-etale-module-functors",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DC, lemma-exactness-pushforward-pullback (2); 03DF, lemma-global-pullback (2),(5); 03DO, lemma-local-pullback (5), the finite-generator argument written out"
+   }
+  },
+  {
+   "text": "The closed immersion $i$ is affine in the scheme-test sense: for every affine scheme $V\\to X$, its pullback is a closed immersion into $V$, whose source is affine by [def-weil-closed-immersion]. Apply [lem-sfb-space-affine-module-base-change] to $f=i$, $g=p$, $F=G$ and the cartesian square $Z'=Z\\times_XX'$. Its hypotheses hold because $G$ is quasi-coherent and $i$ is affine; it requires no flatness of $p$. Its canonical isomorphism gives\n$$p^*i_*G\\xrightarrow{\\sim}i'_*q^*G=i'_*G'.$$\nApply the functor $p^*$ to the isomorphism $i_*G\\simeq M$ and compose to obtain $i'_*G'\\simeq H$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sfb-space-affine-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07U8, lemma-affine-base-change; affine closed immersions: spaces-morphisms.tex Tag 07U2, lemma-closed-immersion-affine"
+   }
+  },
+  {
+   "text": "The pair $(i':Z'\\hookrightarrow X',G')$ from steps 4--6 is a carrier with $Z'\\to T'$ proper, $G'$ finite type and quasi-coherent, and $i'_*G'\\simeq p^*M$. It therefore witnesses proper support in precisely the existential sense stated in the hypothesis. Combine this with finite presentation and quasi-coherence from step 1 and relative flatness from steps 2--3. The empty chart and zero module cause no exception: all local assertions are vacuous on empty schemes and tensor pullback preserves zero. No part of the argument added a hypothesis on $g$ or a finite-presentation hypothesis on $f$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CZI, lemma-module-support-proper-over-base, carrier criterion (3); base-change construction behind Tag 0CZJ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-sfb-space-fp-module-limit-category",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-pc-relatively-flat-module-pullback",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "def-weil-etale-morphism",
+  "lem-trf-relative-flatness-source-cover",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-space-proper-base-change",
+  "def-trf-space-etale-module-functors",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-affine-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05VW, lemma-base-change-module-flat (1), chart proof; sites-modules.tex Tag 03DO; carrier proof of proper support from spaces-perfect.tex Tag 0CZI using spaces-cohomology.tex Tag 07U8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace.*(Flat|Support)|pullback.*(ProperSupport|properSupport)|baseChange.*module.*flat",
+   "results": "Actual search: 4 hits; Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ring module base change and scheme morphism permanence do not state the algebraic-space module theorem with relative flatness and proper support"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Arbitrary base change of a quasi coherent finitely presented module flat over a scheme base preserves flatness finite presentation and support proper over the base for algebraic spaces",
+   "results": "Actual search: 8 hits; Module.Flat.isBaseChange, FinitePresentation.of_isBaseChange, RingHom.Flat.isStableUnderBaseChange, RingHom.finitePresentation_isStableUnderBaseChange, Algebra.FinitePresentation.baseChange, Algebra.FormallyUnramified.flat_of_restrictScalars, RingHom.IsStableUnderBaseChange, AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: ring module base change and scheme morphism permanence do not state the algebraic-space module theorem with relative flatness and proper support"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation, SheafOfModules.pullback",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ring module base change and scheme morphism permanence do not state the algebraic-space module theorem with relative flatness and proper support"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a cartesian square of algebraic spaces over schemes tensor pullback of a finitely presented relatively flat quasi coherent module has finite presentation is flat over the new base and has proper support if the original does",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instFstScheme, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: ring module base change and scheme morphism permanence do not state the algebraic-space module theorem with relative flatness and proper support"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ff]initePresentation|[Ff]initePresentation.*pullback",
+   "results": "Actual search: 0 hits; ; subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-23",
+   "verdict": "no match: ring module base change and scheme morphism permanence do not state the algebraic-space module theorem with relative flatness and proper support"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling back a sheaf on an algebraic space after changing its scheme base preserves finite presentation relative flatness and proper support",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: ring module base change and scheme morphism permanence do not state the algebraic-space module theorem with relative flatness and proper support"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|properSupport|ProperSupport|support.*proper",
+   "results": "Actual search: 1 hits; Mathlib/AlgebraicGeometry/Morphisms/Basic.lean; subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar flatness and finite presentation base change, and scheme morphism permanence, do not give the algebraic-space module statement with the specified proper carrier"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of a relatively flat finitely presented quasi coherent module with proper support on an algebraic space",
+   "results": "Actual search: 8 hits; Module.Flat.isBaseChange, Module.FaithfullyFlat.instTensorProduct, RingHom.Flat.isStableUnderBaseChange, RingHom.FaithfullyFlat.isStableUnderBaseChange, FinitePresentation.of_isBaseChange, IsSMulRegular.of_flat_of_isBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar flatness and finite presentation base change, and scheme morphism permanence, do not give the algebraic-space module statement with the specified proper carrier"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation, SheafOfModules.pullback",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar flatness and finite presentation base change, and scheme morphism permanence, do not give the algebraic-space module statement with the specified proper carrier"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor pullback of a finite presentation relatively flat quasi coherent module on an algebraic space preserves finite presentation flatness and support proper over the base under arbitrary scheme base change",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.Flat, AlgebraicGeometry.UniversallyOpen.of_flat, instFinitePresentationTensorProduct, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.instFstScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar flatness and finite presentation base change, and scheme morphism permanence, do not give the algebraic-space module statement with the specified proper carrier"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing the scheme base of an algebraic space preserves a finitely presented flat family of quasi coherent modules carried by a proper closed subspace",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.Flat, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.UniversallyOpen.of_flat",
+   "date": "2026-10-23",
+   "verdict": "no match: scalar flatness and finite presentation base change, and scheme morphism permanence, do not give the algebraic-space module statement with the specified proper carrier"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-space-proper-quot-functor",
+  "date": "2026-10-23",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 09TR, quot-situation-quot; proper-support convention is the equivalent carrier formulation of spaces-perfect.tex Tag 0CZI, lemma-module-support-proper-over-base. Well-defined tensor-pullback transitions: finite presentation, relative flatness and proper support persist under base change.",
+   "via": [
+    "def-sfb-space-proper-quot-functor",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-module-base-change-flat-proper-support",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Checked the actual chartwise relative-flatness convention, including arbitrary charts via flat source descent; used existing general finite-presentation pullback and quasi-coherence nodes. Base-changed the actual proper carrier and used the single new general affine direct-image base-change lemma to identify its pushforward, with finite type proved by pulling local generator presentations. Searched the live DAG, current blueprint and project Lean; no closed attachment or duplicate was found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 09TR, quot-situation-quot; proper-support convention is the equivalent carrier formulation of spaces-perfect.tex Tag 0CZI, lemma-module-support-proper-over-base. Well-defined tensor-pullback transitions: finite presentation, relative flatness and proper support persist under base change. The current latest blueprint direct-images proof (3) has the compactification argument; the inherited deep alteration/moduli prerequisites support its existing DAG route. This item realizes well-defined tensor-pullback transitions for the proper-support Quot presheaf; it changes neither the chapter nor the unit route. tools/blueprint_refs.py ancestor reports a broken imported ancestry (from.node = null); retain the existing provenance chain rather than inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Fibre products and base change of etale coverings form the scheme charts and the proper carrier."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic identification of quasi-coherent modules on scheme charts with Zariski modules, including arbitrary scheme tensor pullback; it realizes the chart reduction and does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-relatively-flat-module-pullback",
+    "why": "Scheme-relative flatness base change is the explicit local input in Stacks 05VW; the unit has no duplicate scheme lemma."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Etale-chart restriction and its tensor-pullback comparison identify the actual modules on the cartesian charts; this is a generic site tool."
+   },
+   {
+    "node": "lem-trf-relative-flatness-source-cover",
+    "why": "Pointwise and surjective-flat-source detection for modules verifies the all-charts flatness convention; a generic scheme-flatness tool."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "The canonical enlarged site lets a pulled etale covering be refined by scheme charts; generic site infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-pc-relatively-flat-module-pullback",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-relative-flatness-source-cover",
+  "lem-trf-space-enlarged-etale-ringed-site-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NP-4ae4b7cdf",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-4ae4b7cdf (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-space-affine-module-base-change, every cited node's statement and the Stacks sources: 05VW (spaces-morphisms 6200), 0CZI(3) and 0CZJ (spaces-perfect 1031/1067), 07U8 (spaces-cohomology 1685) and 03DO. The item's statement and stmt_deps match live, where it is still unsplit; there is no repair note. Step 1 (finite presentation and quasi-coherence) uses the general pullback sentences of two same-unit nodes and makes no cycle. Steps 2 and 3 (flatness on every chart): (p^*M)|_{U'}≅b^*(M|_U) comes from the étale-restriction node with Y=X, Y'=U. Scheme flatness base change has no hypotheses on f or p. For an arbitrary chart W, flatness reaches E through c and comes back to W through a by the pointwise and family clauses of the relative-flatness-source-cover node. Step 4: Z'=Z×_T T'=Z×_X X'; the closed immersion is shown by scheme tests; proper base change holds for arbitrary g. Step 5 shows finite type by pulling generator surjections back with a left adjoint; it is an elementary write-out of 03DO(5). Step 6: i is affine through the Spec(R/I) form of the closed-immersion definition, and the new node gives p^*i_*G≅i'_*q^*G. The new node is exactly 07U8 with the correctly oriented β. I tested it on affines, a non-flat Z/2→Z base change and the zero/empty cases. It is not a duplicate: lem-sfb-space-flat-direct-image-base-change needs flat g, lem-weil-pbc-affine-pushforward-base-change covers schemes only, and the étale-restriction node needs étale g. It has statement only and records all three kinds of search. proof_deps equals the union of uses. The six off-unit tool_uses are generic infrastructure and are accepted. No SGA source is cited. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceModuleBaseChangeFlatProperSupport",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.moduleTensorPullback_flat_properSupport_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceModuleBaseChangeFlatProperSupport.lean",
+  "statement": "theorem moduleTensorPullback_flat_properSupport_baseChange {S : Scheme.{u}} (T T' : Over S) (g : T' ⟶ T) (X X' : AlgebraicSpace S) (f : X ⟶ schemeSpace T) (p : X' ⟶ X) (f' : X' ⟶ schemeSpace T') (sq : IsPullback p.hom f'.hom f.hom (ObjectProperty.homMk ⟨yoneda.map g⟩ : schemeSpace T' ⟶ schemeSpace T).hom) (hf : MapIsLocally (@LocallyOfFiniteType) f) (M : X.Modules) (hqc : M.IsQuasicoherent) (hfp : M.IsFinitePresentation) (hflat : ∀ U : X.EtaleSite, ((schemeRestriction X U).obj M).IsFlatOver (yoneda.preimage (U.obj.hom ≫ f.hom.hom)).left) (hsupp : ∃ (Z : AlgebraicSpace S) (i : Z ⟶ X), IsRepresentableWith (fun _ _ a ↦ IsClosedImmersion a.left) i.hom.hom ∧ MapIsProper (i ≫ f) ∧ ∃ G : Z.Modules, G.IsQuasicoherent ∧ G.IsFiniteType ∧ Nonempty ((moduleDirectImage i).obj G ≅ M)) : ((moduleTensorPullback p).obj M).IsQuasicoherent ∧ ((moduleTensorPullback p).obj M).IsFinitePresentation ∧ (∀ U : X'.EtaleSite, ((schemeRestriction X' U).obj ((moduleTensorPullback p).obj M)).IsFlatOver (yoneda.preimage (U.obj.hom ≫ f'.hom.hom)).left) ∧ (∃ (Z : AlgebraicSpace S) (i : Z ⟶ X'), IsRepresentableWith (fun _ _ a ↦ IsClosedImmersion a.left) i.hom.hom ∧ MapIsProper (i ≫ f') ∧ ∃ G : Z.Modules, G.IsQuasicoherent ∧ G.IsFiniteType ∧ Nonempty ((moduleDirectImage i).obj G ≅ (moduleTensorPullback p).obj M))",
+  "branch": "newtargets-dag",
+  "by": "Q133",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be0f4ead7",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Item node changed only in `lean` (diff vs side-live); the one new module states the statement verbatim, proof sorry, no defs, docstrings with sources/blueprint id and the 7 proof steps. Clause check: S,T,T',g,X,f exact; X' as an arbitrary IsPullback over the Yoneda map of g (iso-invariant conclusion, equivalent); locally finite type via recorded MapIsLocally; IsQuasicoherent/IsFinitePresentation are the recorded predicates; flatness over T tested on every X.EtaleSite chart with recorded IsFlatOver (affine-local = stalk condition for qc modules); proper support = 0CZI(3) carrier (IsRepresentableWith closed immersion, MapIsProper (i≫f), G qc and finite type, Nonempty(i_*G ≅ M)); conclusion has all four properties for moduleTensorPullback p over T'; no hypothesis on g, no finite presentation on f; edge cases and universe u fine. Advisory: schemeSpace (def-trf-scheme-algebraic-space) and schemeRestriction (def-trf-space-module-scheme-restriction) not in stmt_deps. No compile needed (no file changed)."
+ }
+}

@@ -1,0 +1,83 @@
+{
+ "id": "lem-per-minpoly-iterated-frobenius",
+ "kind": "statement",
+ "title": "Minimal polynomials under iterated Frobenius",
+ "statement": "Let $p$ be prime and let $E/F$ be an extension of fields of characteristic $p$ [def-pc-field-extension]. Let $a\\in E$ be separable algebraic over $F$, and let $m_b(T)\\in F[T]$ denote the monic minimal polynomial of an algebraic element $b\\in E$ over $F$ [def-weil-pbc-separable-algebraic-extension]. For every integer $n\\geq0$, one has $m_{a^{p^n}}(T)=\\sum_{i\\geq0}c_i^{p^n}T^i$ whenever $m_a(T)=\\sum_{i\\geq0}c_iT^i$. Thus the polynomial on the right is obtained by applying the $n$-fold Frobenius of $F$ to the coefficients, leaving $T$ unchanged [def-weil-ring-frobenius].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé IV, Lemma 3.2.2, proof, printed p. 56 (PDF p. 62): coefficientwise Frobenius of the minimal polynomial."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-ring-frobenius"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "minpoly.iterateFrobenius_of_isSeparable|theorem minpoly.frobenius_of_isSeparable",
+   "results": "Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean; Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean; Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean. 3 hits; search digest 4638e549731e38b4.",
+   "date": "2026-10-24",
+   "verdict": "match: minpoly.iterateFrobenius_of_isSeparable; source read at Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean:383–400"
+  },
+  {
+   "tool": "leansearch",
+   "query": "minimal polynomial of a separable element under iterated Frobenius equals coefficientwise Frobenius of its minimal polynomial",
+   "results": "minpoly.frobenius_of_isSeparable; minpoly.iterateFrobenius_of_isSeparable; minpoly.map_eq_of_isSeparable_of_isPurelyInseparable; IsSeparable; Polynomial.map_iterateFrobenius_expand; Polynomial.IsSeparableContraction; IsPurelyInseparable.minpoly_eq_X_sub_C_pow; FiniteField.minpoly_frobeniusAlgHom. 8 hits; search digest 7f3dabdf35c6570f.",
+   "date": "2026-10-24",
+   "verdict": "match: minpoly.iterateFrobenius_of_isSeparable; source read at Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean:383–400"
+  },
+  {
+   "tool": "loogle",
+   "query": "minpoly.iterateFrobenius_of_isSeparable",
+   "results": "minpoly.iterateFrobenius_of_isSeparable. 1 hits; search digest db8ffde1c879706a.",
+   "date": "2026-10-24",
+   "verdict": "match: minpoly.iterateFrobenius_of_isSeparable; source read at Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean:383–400"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "minimal polynomial of a separable element raised to p to the n is the minimal polynomial with coefficients raised to p to the n",
+   "results": "minpoly.iterateFrobenius_of_isSeparable; minpoly.frobenius_of_isSeparable; minpoly.map_eq_of_isSeparable_of_isPurelyInseparable; minpoly.natSepDegree_eq_one_iff_eq_expand_X_sub_C; IsPurelyInseparable.minpoly_eq'; minpoly.natSepDegree_eq_one_iff_eq_X_sub_C_pow; IsPurelyInseparable.minpoly_eq_X_sub_C_pow; minpoly.natSepDegree_eq_one_iff_pow_mem. 8 hits; search digest ef8e62e20d4a6d61.",
+   "date": "2026-10-24",
+   "verdict": "match: minpoly.iterateFrobenius_of_isSeparable; source read at Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean:383–400"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "minpoly.iterateFrobenius_of_isSeparable",
+  "file": "Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean",
+  "line": 383,
+  "how": "specializes in one line: apply minpoly.iterateFrobenius_of_isSeparable p n to the given IsSeparable F a (lines 383–400). The field extension and characteristic-p hypotheses supply Algebra F E and ExpChar F p, ExpChar E p. iterateFrobenius is the p^n-th-power map, and Polynomial.map is coefficientwise application, exactly the displayed formula; n=0 is included. Read the declaration and its proof, not just the search snippet."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-separable-closure-perfect-core",
+  "date": "2026-10-24",
+  "group": "O1"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "The finite-extension input in the ancestor route, ILO Exposé IV §3.2.2: the equality between the separable closure of the perfect core and the perfect core inside a separable closure. Supporting identity in the proof of ILO IV Lemma 3.2.2: the minimal polynomial of a p^n-th power of a separable element is the coefficientwise p^n-th power of its minimal polynomial.",
+   "via": [
+    "lem-per-separable-closure-perfect-core",
+    "lem-per-finite-extension-perfect-core",
+    "lem-per-epp-perfect-core-complete-local",
+    "lem-per-mixed-reduced-special-fibre-cover",
+    "lem-per-cohen-gabber-finite-presentations",
+    "lem-per-gabber-partial-algebraization",
+    "lem-per-gabber-local-duality-general",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

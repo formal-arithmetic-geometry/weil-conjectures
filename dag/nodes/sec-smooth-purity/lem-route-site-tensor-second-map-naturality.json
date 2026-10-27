@@ -1,0 +1,202 @@
+{
+ "id": "lem-route-site-tensor-second-map-naturality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-finite-line-tensor-conditions",
+   "via": [],
+   "place": "provisional: the Lean of lem-weil-finite-line-tensor-conditions (its module Sheaf.Paper.FiniteLineTensorConditions imports Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality (1 step)) uses SheafOfModules.siteTensorSecondMap_naturality (route sorry with no node, tools/route_nodes.py 2026-10-25)"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The map on tensor presheaves in the second variable commutes with restrictions.",
+ "statement": "Let $C$ be a category with a Grothendieck topology $J$, and let $A$ be a sheaf of commutative rings on $(C,J)$. The category-object, category-morphism, ring and module universes are independent, denoted $u_C,v_C,r,m$. Retain the ambient hypotheses $J.\\mathrm{HasSheafCompose}(\\mathrm{forget}_2\\,\\mathrm{CommRingCat}\\,\\mathrm{RingCat})$, $J.\\mathrm{WEqualsLocallyBijective}(\\mathrm{AddCommGrpCat}^{m})$, and $\\mathrm{HasWeakSheafify}(J,\\mathrm{AddCommGrpCat}^{m})$ of the attached Lean declaration. Let $M,N,N'$ be presheaves of modules over the underlying ring presheaf of $A$, and let $g:N\\to N'$ be a morphism of module presheaves [def-weil-presheaf-modules-sheafification]. For $Q=N,N'$ write $T_Q=M\\otimes_{p,A}Q$ for the sectionwise tensor presheaf [def-pur-presheaf-tensor-product], so $T_Q(U)=M(U)\\otimes_{A(U)}Q(U)$ [def-weil-pbc-module-tensor-product]. For each $U\\in C^{\\mathrm{op}}$, let $h_U=\\mathrm{id}_{M(U)}\\otimes g_U:T_N(U)\\to T_{N'}(U)$ be the $A(U)$-linear map determined by $h_U(x\\otimes y)=x\\otimes g_U(y)$. For every $f:U\\to V$ in $C^{\\mathrm{op}}$, put $\\rho=A(f):A(U)\\to A(V)$. Then\n$$\\mathrm{Res}_{\\rho}(h_V)\\circ T_N(f)=T_{N'}(f)\\circ h_U$$\nas $A(U)$-linear maps from $T_N(U)$ to $\\mathrm{Res}_{\\rho}T_{N'}(V)$, where $\\mathrm{Res}_{\\rho}$ means restriction of scalars: the underlying abelian group and map are unchanged and $a\\in A(U)$ acts through $\\rho(a)$. Thus the sectionwise maps $\\mathrm{id}\\otimes g$ commute with restrictions.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+  "place": "lem-weil-finite-line-tensor-conditions: the Lean of this node (its module Sheaf.Paper.FiniteLineTensorConditions imports Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality (1 step)) reaches SheafOfModules.siteTensorSecondMap_naturality, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/SiteTensorFunctoriality.lean, declaration SheafOfModules.siteTensorSecondMap_naturality (module Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality, lines 44-59, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-presheaf-tensor-product",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Fix $f:U\\to V$ and put $\\rho=A(f)$. By the tensor universal property in [def-weil-pbc-module-tensor-product], the $A(U)$-bilinear pairing $(x,y)\\mapsto x\\otimes g_U(y)$ defines $h_U$, and similarly for $h_V$. By [def-pur-presheaf-tensor-product], $T_Q(f)$ sends $x\\otimes y$ to $M(f)(x)\\otimes Q(f)(y)$. It is $A(U)$-linear into the target with scalar action restricted along $\\rho$: the two factor restrictions are $\\rho$-semilinear by [def-weil-presheaf-modules-sheafification]. In particular the balanced relation is preserved, since the images of $(ax)\\otimes y$ and $x\\otimes(ay)$ are both $\\rho(a)(M(f)(x)\\otimes Q(f)(y))$. Restriction of scalars changes no underlying function, so both composites in the statement have the indicated common source and target.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-pur-presheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CS (section-presheaves-modules) and 03EK (section-tensor-product), definitions of module-presheaf morphisms and sectionwise tensor; the explicit second-variable calculation is supplied here."
+   }
+  },
+  {
+   "text": "For $x\\in M(U)$ and $y\\in N(U)$ the first composite has value $M(f)(x)\\otimes g_V(N(f)(y))$, while the second has value $M(f)(x)\\otimes N'(f)(g_U(y))$. These formulas follow directly from the tensor pairings of [def-weil-pbc-module-tensor-product] and the restriction formula of [def-pur-presheaf-tensor-product]. The two second factors are equal because $g$ is a morphism of presheaves: $g_V\\circ N(f)=N'(f)\\circ g_U$, by the definition of morphisms in [def-weil-presheaf-modules-sheafification]. Hence the two composites agree on every pure tensor.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-pur-presheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CS (section-presheaves-modules) and 03EK (section-tensor-product), definitions of module-presheaf morphisms and sectionwise tensor; the explicit second-variable calculation is supplied here."
+   }
+  },
+  {
+   "text": "The source $M(U)\\otimes_{A(U)}N(U)$ is generated as an $A(U)$-module by pure tensors, by [def-weil-pbc-module-tensor-product]. Both composites are $A(U)$-linear into the same restricted module. Their agreement on the generators therefore implies agreement on every finite linear combination, hence equality as module morphisms. Since $f$ was arbitrary, this proves the required naturality equation.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), pure-tensor generators and uniqueness; applied over A(U) to the restricted target module."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-pur-presheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CS and 03EK; explicit pure-tensor naturality calculation, as in the attached Lean docstring; uniqueness from Algebra Tag 00CX."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'siteTensorSecondMap_naturality' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-25",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "grep",
+   "query": "siteTensorSecondMap|tensor.*naturality|map_tmul",
+   "results": "8 hits: Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean",
+   "date": "2026-10-25",
+   "verdict": "candidate: same-universe presheaf tensor construction only; not the independent ring/module universe statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.map_tmul",
+   "results": "1 hits: TensorProduct.map_tmul",
+   "date": "2026-10-25",
+   "verdict": "supporting tensor algebra only; no match for the whole presheaf naturality statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of presheaves of modules map in second variable commutes with restrictions",
+   "results": "8 hits: PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Monoidal.tensorObj_map_tmul, PresheafOfModules.Monoidal.tensorObj, TopCat.Presheaf.map_restrict, PresheafOfModules.Monoidal.tensorObj_obj, PresheafOfModules.Monoidal.tensorHom, PresheafOfModules.Hom.naturality_assoc, PresheafOfModules.Monoidal.tensorHom_app",
+   "date": "2026-10-25",
+   "verdict": "supporting tensor algebra only; no match for the whole presheaf naturality statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For module presheaves over a presheaf of commutative rings, tensoring a morphism in the second variable with the identity commutes with restriction maps",
+   "results": "8 hits: PresheafOfModules.Monoidal.tensorObj_map_tmul, PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Monoidal.tensorHom, PresheafOfModules.Monoidal.tensorHom_app, PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.monoidalCategory, PresheafOfModules.monoidalCategoryStruct, PresheafOfModules.Hom.naturality_assoc",
+   "date": "2026-10-25",
+   "verdict": "candidate: same-universe presheaf tensor construction only; not the independent ring/module universe statement"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem ext|lemma ext|map_tmul",
+   "results": "25 hits: Mathlib/LinearAlgebra/TensorProduct/Basic.lean, Mathlib/LinearAlgebra/TensorProduct/Basic.lean, Mathlib/LinearAlgebra/TensorProduct/Basic.lean, Mathlib/LinearAlgebra/TensorProduct/Basic.lean, Mathlib/LinearAlgebra/TensorProduct/Basic.lean, Mathlib/LinearAlgebra/TensorProduct/Submodule.lean, Mathlib/LinearAlgebra/TensorProduct/Submodule.lean, Mathlib/LinearAlgebra/TensorProduct/Submodule.lean",
+   "date": "2026-10-25",
+   "verdict": "supporting tensor algebra only; no match for the whole presheaf naturality statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semilinear maps from a tensor product are equal if they agree on pure tensors, and tensor product maps send x tensor y to f x tensor g y",
+   "results": "8 hits: TensorProduct.ext', TensorProduct.lift.unique, TensorProduct.ext_iff, TensorProduct.AlgebraTensorModule.ext, IsTensorProduct.map_eq, TensorProduct.ext, TensorProduct.AlgebraTensorModule.map_eq, TensorProduct.mapBilinear_apply",
+   "date": "2026-10-25",
+   "verdict": "supporting tensor algebra only; no match for the whole presheaf naturality statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.Monoidal.tensorHom",
+   "results": "0 hits: . loogle: unknown identifier 'PresheafOfModules.Monoidal.tensorHom'",
+   "date": "2026-10-25",
+   "verdict": "candidate: same-universe presheaf tensor construction only; not the independent ring/module universe statement"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorHom|variable \\(M",
+   "results": "5 hits: 41, 90, 96, 108, 109",
+   "date": "2026-10-25",
+   "verdict": "candidate: same-universe presheaf tensor construction only; not the independent ring/module universe statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-weil-finite-line-tensor-conditions",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/SiteTensorFunctoriality.lean",
+  "declaration": "SheafOfModules.siteTensorSecondMap_naturality",
+  "declarations": [
+   "SheafOfModules.siteTensorSecondMap_naturality"
+  ],
+  "statement": "theorem siteTensorSecondMap_naturality\n    (M : PresheafOfModules.{m} (A.obj ⋙ forget₂ CommRingCat RingCat))\n    {N N' : PresheafOfModules.{m} (A.obj ⋙ forget₂ CommRingCat RingCat)} (g : N ⟶ N')\n    {U V : Cᵒᵖ} (f : U ⟶ V) :\n    (siteTensorPresheaf M N).map f ≫\n        (ModuleCat.restrictScalars (A.obj.map f).hom).map\n          (ModuleCat.ofHom (TensorProduct.map (LinearMap.id : M.obj V →ₗ[A.obj.obj V] M.obj V)\n            (g.app V).hom)) =\n      ModuleCat.ofHom (TensorProduct.map (LinearMap.id : M.obj U →ₗ[A.obj.obj U] M.obj U)\n        (g.app U).hom) ≫ (siteTensorPresheaf M N').map f := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-route-site-tensor-second-map-naturality",
+  "worker": "stage1",
+  "summary": "Replaced the machine-generated Lean-signature placeholder by a complete natural-language statement with independent universes and the original ambient hypotheses. The three elementary steps type the maps using restricted scalars, compute both composites on pure tensors, use the original morphism naturality, and extend by the existing tensor-generator statement. All facts are supplied by existing definition nodes; no new node is needed. No exact sorry-free WeilConjectures attachment was found; Mathlib tensorHom only handles coincident ring/module universes.",
+  "blueprint": "Makes explicit the second-variable presheaf tensor naturality needed on the route through lem-weil-finite-line-tensor-conditions to prop-weil-twist-preserves: latest blueprint proof paragraph beginning \"For an invertible locally constant rank-one L\", together with the sectionwise restriction clause of def-pur-sheaf-tensor-product. No unit route is replaced. The provisional source ancestry is retained.",
+  "tool_uses": []
+ },
+ "mathlib_candidate": {
+  "declaration": "PresheafOfModules.Monoidal.tensorHom",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean",
+  "line": 90,
+  "note": "Lines 41 and 90-98 require PresheafOfModules.{u} over CommRingCat.{u}. The attached siteTensorPresheaf uses independent ring universe r and module universe m. Identifying the distinct tensor restrictions would also require a generator check. Hence this is a candidate, not a one-line Mathlib leaf for the exact item."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NL-3002811ec",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-3002811ec (reviewer sub-agent of L); spot-checked: Read in full, no fixes. The statement matches the Lean declaration SheafOfModules.siteTensorSecondMap_naturality (SiteTensorFunctoriality.lean:44-59): the equation Res_ρ(h_V)∘T_N(f)=T_{N'}(f)∘h_U has the same direction and types as the Lean. It keeps the independent universes r and m and the three ambient instance hypotheses, so nothing is weakened. The tensor presheaf siteTensorPresheaf (TensorProductOfUniverses.lean:270) is the sectionwise tensor of def-pur-presheaf-tensor-product, Stacks 03EK (sites-modules.tex:3551). Step 1 builds id⊗g_U from the bilinear universal property of def-weil-pbc-module-tensor-product, and the balanced-relation check makes T_Q(f) A(U)-linear into Res_ρ. Step 2 gives the values on pure tensors, M(f)x⊗g_V(N(f)y) and M(f)x⊗N'(f)(g_U y), which agree by the morphism naturality in def-weil-presheaf-modules-sheafification. Step 3 extends from pure tensors, which generate (00CX, algebra.tex:1716). All three steps are elementary and each cited statement says what the step takes from it. No new nodes, no cycle, no SGA source. Duplicate search: lem-route-site-sheaf-tensor-second-map-naturality is a different statement (an interchange law for sheaves, unsplit); def-pur-sheaf-tensor-product has no functoriality clause; Mathlib PresheafOfModules.Monoidal.tensorHom (Monoidal.lean:41, 90-98) needs equal ring and module universes, so recording it as mathlib_candidate is correct. Edge cases checked: g=0, g=id, f=id, zero ring."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261025T070919-L-4179277",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "SheafOfModules.siteSheafTensorRight_preservesZeroMorphisms",
+   "SheafOfModules.siteSheafTensorSecondMap_naturality",
+   "SheafOfModules.siteTensorSecondMap_naturality"
+  ],
+  "sorry_after": []
+ }
+}

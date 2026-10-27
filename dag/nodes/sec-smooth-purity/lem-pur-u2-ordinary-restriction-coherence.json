@@ -1,0 +1,139 @@
+{
+ "id": "lem-pur-u2-ordinary-restriction-coherence",
+ "kind": "statement",
+ "title": "Monoidal ordinary identity and composition restriction comparisons",
+ "statement": "For arbitrary normalized ordinary tensor transports along ring-sheaf isomorphisms, the canonical identity and composition inverse-restriction comparisons are monoidal. Their unit equations express composition of the inverse ring maps; their tensor equations preserve each pure tensor. Dependencies: [lem-pur-u2-restriction-comparisons], [lem-sfb-scalar-ordinary-tensor-comparison], [lem-sfb-ring-isomorphism-tensor-transport].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03EK; balanced tensor products and normalized coefficient transport"
+ },
+ "stmt_deps": [
+  "lem-pur-u2-restriction-comparisons",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-sfb-ring-isomorphism-tensor-transport"
+ ],
+ "proof": [
+  {
+   "text": "Identify the lax unit map on sections by composing with the normalized inverse unit comparison; cancellation of the ring isomorphism gives its inverse ring map formula.",
+   "uses": [
+    "lem-pur-u2-restriction-comparisons",
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-sfb-ring-isomorphism-tensor-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03EK; balanced tensor products and normalized coefficient transport"
+   }
+  },
+  {
+   "text": "Check the identity and composition unit equations sectionwise. Ring-map inverse and composition identities give the required equalities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03EK; balanced tensor products and normalized coefficient transport"
+   }
+  },
+  {
+   "text": "Use pure-tensor extensionality for the tensor equation. Each normalized inverse tensor comparison fixes pure tensors, and tensor maps act on the two factors, so both composite maps have the same values.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03EK; balanced tensor products and normalized coefficient transport"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-u2-restriction-comparisons",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-sfb-ring-isomorphism-tensor-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03EK; balanced tensor products and normalized coefficient transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Identity and composition of restriction of scalars along ring isomorphisms are monoidal via the pure tensor comparisons",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.restrictScalarsComp'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R₁ : Type u₁} →\\n  {R₂ : Type u₂} →\\n    {R₃ : Type u₃} →\\n      [inst : Ring R₁] →\\n        [inst_1 : Ring R₂] →\\n          [inst_2 : Ring R₃] →\\n            (f : R₁ →+* R₂) →\\n              (g : R₂ →+* R₃) →\\n                (gf : R₁ →+* R₃) →\\n                  gf = g.comp f →\\n                    (Module\", \"doc\": \"Given ring homomorphisms $ f : R_1 \\\\to R_2 $ and $ g : R_2 \\\\to R_3 $, the composition of the restriction of scalars functors $ \\\\mathrm{ModuleCat.restrictScalars}(f) $ and $ \\\\mathrm{ModuleCat.restrictS\"}\n  {\"name\": \"ModuleCat.restrictScalarsComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R₁ : Type u₁} →\\n  {R₂ : Type u₂} →\\n    {R₃ : Type u₃} →\\n      [inst : Ring R₁] →\\n        [inst_1 : Ring R₂] →\\n          [inst_2 : Ring R₃] →\\n            (f : R₁ →+* R₂) →\\n              (g : R₂ →+* R₃) →\\n                ModuleCat.restrictScalars (g.comp f) ≅ (ModuleCat.restrictScalars g).comp (Modul\", \"doc\": \"Given ring homomorphisms $ f : R_1 \\to R_2 $ and $ g : R_2 \\to R_3 $, the composition of the restriction of scalars functors $ \\\\mathrm{ModuleCat.restrictScalars}(f) $ and $ \\\\mathrm{ModuleCat.restrictSca\"}\n  {\"name\": \"ModuleCat.restrictScalarsId\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"(R : Type u₁) → [inst : Ring R] → ModuleCat.restrictScalars (RingHom.id R) ≅ CategoryTheory.Functor.id (ModuleCat R)\", \"doc\": \"For any ring $ R $, the restriction of scalars functor induced by the identity ring homomorphism $ R \\to R $ is naturally isomorphic to the identity functor on the category of left $ R $-modules. This \"}\n  {\"name\": \"ModuleCat.restrictScalars_isEquivalence_of_ringEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : Ring R] [inst_1 : Ring S] (e : R ≃+* S),\\n  (ModuleCat.restrictScalars e.toRingHom).IsEquivalence\", \"doc\": \"Given a ring equivalence $ e : R \\to S $, the restriction of scalars functor induced by $ e $ is an equivalence of categories between the category of left $ S $-modules and the category of left $ R $-m\"}\n  {\"name\": \"ModuleCat.restrictScalarsId'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  [inst : Ring R] →\\n    (f : R →+* R) → f = RingHom.id R → (ModuleCat.restrictScalars f ≅ CategoryTheory.Functor.id (ModuleCat R))\", \"doc\": \"For any ring $ R $ and identity ring homomorphism $ f : R \\to R $, the restriction of scalars functor induced by $ f $ is naturally isomorphic to the identity functor on the category of left $ R $-modu\"}\n  {\"name\": \"ModuleCat.Algebra.restrictScalarsEquivalenceOfRingEquiv_linear\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R₀ : Type u_1} {R : Type u_2} {S : Type u_3} [inst : CommSemiring R₀] [inst_1 : Ring R] [inst_2 : Ring S]\\n  [inst_3 : Algebra R₀ R] [inst_4 : Algebra R₀ S] (e : R ≃ₐ[R₀] S),\\n  CategoryTheory.Functor.Linear R₀ (ModuleCat.restrictScalarsEquivalenceOfRingEquiv e.toRingEquiv).functor\", \"doc\": \"Given commutative semiring $ R₀ $ and rings $ R,S $ equipped with $ R₀ $-algebra structures, if $ e : R ≃+* S $ is a ring equivalence, then the restriction of scalars functor $ \\text{ModuleCat}(S) \\to \\t\"}\n  {\"name\": \"ModuleCat.restrictScalarsComp'App\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R₁ : Type u₁} →\\n  {R₂ : Type u₂} →\\n    {R₃ : Type u₃} →\\n      [inst : Ring R₁] →\\n        [inst_1 : Ring R₂] →\\n          [inst_2 : Ring R₃] →\\n            (f : R₁ →+* R₂) →\\n              (g : R₂ →+* R₃) →\\n                (gf : R₁ →+* R₃) →\\n                  gf = g.comp f →\\n                    (M : Mo\", \"doc\": \"Given ring homomorphisms $ f : R_1 \\\\to R_2 $ and $ g : R_2 \\\\to R_3 $, the composition of the restriction of scalars functors $ \\\\mathrm{ModuleCat.restrictScalars}(f) $ and $ \\\\mathrm{ModuleCat.restrictS\"}\n  {\"name\": \"ModuleCat.restrictScalarsId'App_inv_naturality_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} [inst : Ring R] (f : R →+* R) (hf : f = RingHom.id R) {M N : ModuleCat R} (φ : M ⟶ N) {Z : ModuleCat R}\\n  (h : (ModuleCat.restrictScalars f).obj N ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp φ\\n      (CategoryTheory.CategoryStruct.comp (ModuleCat.restrictScalarsId'App f hf N).inv h) =\\n\", \"doc\": \"Let $R$ be a ring. Let $F$ denote the restriction of scalars functor on the category of $R$-modules, $\\\\mathsf{Mod}_R$, induced by the identity ring homomorphism $\\\\text{id}: R \\\\to R$. There is a canoni\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib restrictScalars and its composition isomorphisms explain the underlying functors. The specified pure-tensor and unit normalization of these sheaf transport monoidal structures is proved here."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"SheafOfModules.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R R' : CategoryTheory.Sheaf J RingCat} (α : R ⟶ R') : CategoryTheory.Functor (SheafOfModules R') (SheafOfModules R)\", \"doc\": \"The restriction of scalars functor `SheafOfModules R' ⥤ SheafOfModules R`\\ninduced by a morphism of sheaves of rings `R ⟶ R'`.\"}\n  {\"name\": \"SheafOfModules.instAdditiveRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R R' : CategoryTheory.Sheaf J RingCat} (α : R ⟶ R') : (SheafOfModules.restrictScalars α).Additive\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.restrictScalars_obj_val\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R R' : CategoryTheory.Sheaf J RingCat} (α : R ⟶ R') (M' : SheafOfModules R') : ((SheafOfModules.restrictScalars α).obj M').val = (PresheafOfModules.restrictScalars α.hom).obj M'.val\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.restrictScalars_map_val\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R R' : CategoryTheory.Sheaf J RingCat} (α : R ⟶ R') {X✝ Y✝ : SheafOfModules R'} (φ : X✝ ⟶ Y✝) : ((SheafOfModules.restrictScalars α).map φ).val = (PresheafOfModules.restrictScalars α.hom).map φ.val\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib restrictScalars and its composition isomorphisms explain the underlying functors. The specified pure-tensor and unit normalization of these sheaf transport monoidal structures is proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Mm]onoidal|[Mm]onoidal.*restrictScalars",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/RepresentationTheory/Basic.lean\", \"line\": \"207\", \"text\": \"  (MonoidAlgebra.lift k _ G).symm (RestrictScalars.lsmul k k[G] M)\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Iso.lean\", \"line\": \"111\", \"text\": \"    ofModuleMonoidAlgebra.obj M = RestrictScalars k k[G] M :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"line\": \"16\", \"text\": \"`restrictScalars f : ModuleCat S ⥤ ModuleCat R` is lax monoidal.\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"line\": \"115\", \"text\": \"noncomputable instance : (restrictScalars f).LaxMonoidal :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"line\": \"116\", \"text\": \"  (extendRestrictScalarsAdj f).rightAdjointLaxMonoidal\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib restrictScalars and its composition isomorphisms explain the underlying functors. The specified pure-tensor and unit normalization of these sheaf transport monoidal structures is proved here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Identity and composition of restriction of scalars along ring isomorphisms are monoidal via the pure tensor comparisons",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingCat.moduleCatRestrictScalarsPseudofunctor\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Pseudofunctor\", \"type\": \": Pseudofunctor (LocallyDiscrete RingCat.{u}ᵒᵖ) Cat\", \"doc\": \"A pseudofunctor from the locally discrete opposite category of rings to the bicategory of categories, which assigns to each ring $ R $ its category of left $ R $-modules and to each ring homomorphism \"}\n  {\"name\": \"CategoryTheory.Mod_.scalarRestriction\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Mod_\", \"type\": \"(M : D) [ModObj B M] : ModObj A M\", \"doc\": \"Given a monoidal category $\\\\mathcal{C}$ acting on a category $\\\\mathcal{D}$, a monoid homomorphism $f: A \\\\to B$ in $\\\\mathcal{C}$, and a $B$-module $M$ in $\\\\mathcal{D}$, this constructs an $A$-module st\"}\n  {\"name\": \"ModuleCat.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} → [inst : Ring R] → [inst_1 : Ring S] → (R →+* S) → CategoryTheory.Functor (ModuleCat S) (ModuleCat R)\", \"doc\": \"Given a ring homomorphism $ f : R \\\\to S $, this functor maps the category of left $ S $-modules to the category of left $ R $-modules by restricting scalar multiplication through $ f $. For an $ S $-m\"}\n  {\"name\": \"ModuleCat.restrictScalarsId'.congr_simp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \"∀ {R : Type u₁} [inst : Ring R] (f : R →+* R) (hf : f = RingHom.id R),\\n  ModuleCat.restrictScalarsId' f hf = ModuleCat.restrictScalarsId' f hf\", \"doc\": \"For any ring $ R $ and identity ring homomorphism $ f : R \\to R $, the restriction of scalars functor induced by $ f $ is naturally isomorphic to the identity functor on the category of left $ R $-modu\"}\n  {\"name\": \"ModuleCat.restrictScalarsId\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"(R : Type u₁) → [inst : Ring R] → ModuleCat.restrictScalars (RingHom.id R) ≅ CategoryTheory.Functor.id (ModuleCat R)\", \"doc\": \"For any ring $ R $, the restriction of scalars functor induced by the identity ring homomorphism $ R \\to R $ is naturally isomorphic to the identity functor on the category of left $ R $-modules. This \"}\n  {\"name\": \"ModuleCat.restrictScalarsId'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  [inst : Ring R] →\\n    (f : R →+* R) → f = RingHom.id R → (ModuleCat.restrictScalars f ≅ CategoryTheory.Functor.id (ModuleCat R))\", \"doc\": \"For any ring $ R $ and identity ring homomorphism $ f : R \\to R $, the restriction of scalars functor induced by $ f $ is naturally isomorphic to the identity functor on the category of left $ R $-modu\"}\n  {\"name\": \"ModuleCat.RestrictScalars.obj'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} → {S : Type u₂} → [inst : Ring R] → [inst_1 : Ring S] → (R →+* S) → ModuleCat S → ModuleCat R\", \"doc\": \"Given a ring homomorphism $ f : R \\\\to S $ and an $ S $-module $ M $, this functor constructs the corresponding $ R $-module structure on $ M $ by composing the scalar multiplication with $ f $, effect\"}\n  {\"name\": \"RestrictScalars.ringEquiv\", \"module\": \"Mathlib.Algebra.Algebra.RestrictScalars\", \"type\": \": RestrictScalars R S A ≃+* A\", \"doc\": \"The identity function establishes a ring equivalence between the restriction of scalars of an $ S $-module $ A $ to an $ R $-module and the original module $ A $, preserving both addition and multipli\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib restrictScalars and its composition isomorphisms explain the underlying functors. The specified pure-tensor and unit normalization of these sheaf transport monoidal structures is proved here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.NormalizedRingIsoDerivedTransport",
+  "date": "2026-10-24",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-ring-iso-derived-transport",
+   "place": "Proof steps for normalized coefficient transport"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingIsoOrdinaryCoherence",
+  "file": "lean/Sheaf/Algebra/Homology/RingIsoOrdinaryCoherence.lean",
+  "declaration": "SheafOfModules.RingIsoTransport.ordinaryComp_monoidal",
+  "declarations": [
+   "SheafOfModules.RingIsoTransport.ordinaryId_monoidal",
+   "SheafOfModules.RingIsoTransport.ordinaryComp_monoidal"
+  ],
+  "statement": "theorem ordinaryComp_monoidal {R S T : Sheaf J CommRingCat.{r}}\n    (a : R ≅ S) (b : S ≅ T)\n    (oa : RingIsoTensorTransport a.symm) (ob : RingIsoTensorTransport b.symm)\n    (oc : RingIsoTensorTransport (a ≪≫ b).symm) :\n    let : (scalarRestriction a.inv).Braided := oa.monoidal\n    let : (scalarRestriction b.inv).Braided := ob.monoidal\n    let : (scalarRestriction (a ≪≫ b).inv).Braided := oc.monoidal\n    NatTrans.IsMonoidal (ordinaryComp a b).hom",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261024T191337-L-312819",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261024T191337-L-312819",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

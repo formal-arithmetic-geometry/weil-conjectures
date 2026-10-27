@@ -14,10 +14,9 @@
  ],
  "proof": [
   {
-   "text": "Because a regular system of parameters of A has length 2 and is a regular sequence, while the depth of every nonzero finite module is at most the dimension of its support, depth(A)=2. Hence I cannot be zero: if I=0 then A/I=A would have depth 2, contrary to the depth-one hypothesis.",
+   "text": "Choose a finite minimal generating set of the maximal ideal and order it as a list of parameters. The regular-local parameter theorem makes this a regular sequence of length 2. The definition of depth therefore gives depth(A) at least 2. If I were zero, transport regular-locality and dimension along A/(0) ≃ A and apply the same argument there, contradicting its depth being 1.",
    "uses": [
     "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "lem-weil-pbc-depth-le-support-dimension",
     "def-weil-pbc-depth"
    ],
    "elementary": false,
@@ -50,12 +49,9 @@
    }
   },
   {
-   "text": "It remains to treat the case sqrt(J)=n. The class z of f in M=A/I is annihilated by every g_i, hence J is contained in Ann_A(z). If z were nonzero, the cyclic submodule P=Az (isomorphic to A/Ann_A(z)) would be finite and its support would have the unique minimal prime n, because the radical of Ann_A(z) is n. The minimal-support associated-prime theorem gives n in Ass_A(P), and the associated-prime inclusion for a submodule P -> M gives n in Ass_A(M). But depth(M)=1 means that n is not associated: otherwise every element of n would be a zerodivisor on M, so no nonempty M-regular sequence in n could exist. Therefore z=0, so f belongs to I; since I=fJ, this yields I=(f).",
+   "text": "Suppose the radical of J=(g_i) is the maximal ideal. Since depth(A/I)=1, the definition of depth supplies a nonempty regular sequence in the quotient maximal ideal: otherwise every admitted length would be zero. Its first element x is a nonzerodivisor. Lift x to y in the maximal ideal of A. The radical equality implies y^n belongs to J for some n. Every generator g_i satisfies f*g_i in I; span induction gives f*J contained in I. Hence x^n times the class of f is zero in A/I. A power of a nonzerodivisor is a nonzerodivisor, so f belongs to I. Together with I contained in (f), this gives I=(f), and hI puts f in the maximal ideal.",
    "uses": [
     "lem-trf-coprime-generators-mprimary-or-unit",
-    "lem-weil-pbc-minimal-support-prime-associated",
-    "lem-weil-pbc-associated-primes-exact-sequence",
-    "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
     "def-weil-pbc-depth"
    ],
    "elementary": false,
@@ -70,16 +66,12 @@
   "def-weil-regular-scheme",
   "lem-trf-coprime-generators-mprimary-or-unit",
   "lem-trf-regular-local-ufd-boundary-factorization",
-  "lem-weil-pbc-associated-primes-exact-sequence",
-  "lem-weil-pbc-depth-le-support-dimension",
-  "lem-weil-pbc-minimal-support-prime-associated",
-  "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
   "lem-weil-pbc-regular-local-generators-regular-sequence"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/curves.tex",
-  "place": "Tag 0C48, lemma-reduced-quotient-regular-ring-dim-2, part (2), with the gcd/height-one paragraph and the associated-prime depth argument written against the cited DAG statements."
+  "place": "Tag 0C48, lemma-reduced-quotient-regular-ring-dim-2, part (2). F2 follows the gcd and residual-ideal dichotomy, replacing the final associated-prime step by direct cancellation by a power of a quotient-regular element obtained from the definition of depth."
  },
  "mathlib_searches": [
   {
@@ -181,5 +173,26 @@
   "existing": false,
   "file": "lean/Sheaf/TraceFormula/RegularSurfaceDepthOnePrincipal.lean"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261023T102707-L-2954960",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

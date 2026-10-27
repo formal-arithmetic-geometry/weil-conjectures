@@ -16,21 +16,12 @@ public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.Algebra.Homology.CochainComplexPlus
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
-import Mathlib.CategoryTheory.Sites.EpiMono
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Sheaf.CategoryTheory.RingedHypercoverInjectiveAugmentationRing
-import Sheaf.Algebra.Homology.BoundedBelowAugmentation
-import Sheaf.Algebra.Homology.BoundedBelowTotalComparison
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Sheaf.AlgebraicGeometry.ProEtaleNormalizedHypercoverDescent
+import Sheaf.AlgebraicGeometry.HypercoverDerivedUnitChainSquares
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.CategoryTheory.KInjectiveDerivedMapComputation
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 
 /-!
 # Augmentation-normalized acyclic hypercover pullback
@@ -115,6 +106,29 @@ def rowResolutionComponent (X : Scheme.{u})
         (((ProEt.hypercoverSectionRows X R W U).mapHomologicalComplex (.up ℤ)).obj I)).ιTotal
           (.up ℤ) n 0 n (by simp))
 
+private theorem rowResolutionComponent_factor (X : Scheme.{u})
+    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (W : X.ProEt)
+    (U : SimplicialObject (Over W)) (M : proEtaleRingModules X R)
+    (I : CochainComplex (proEtaleRingModules X R) ℤ)
+    (i : (HomologicalComplex.single _ (.up ℤ) 0).obj M ⟶ I) (n : ℤ) :
+    rowResolutionComponent X R W U M I i n =
+      rowResolutionComponent X R W U M
+          ((HomologicalComplex.single _ (.up ℤ) 0).obj M) (𝟙 _) n ≫
+        ((total X R W U).map i).f n := by
+  dsimp only [rowResolutionComponent, total, ProEt.hypercoverTotal]
+  simp only [Functor.comp_map, Functor.mapHomologicalComplex_map_f,
+    HomologicalComplex.id_f, Category.comp_id]
+  rw [← Functor.map_comp]
+  apply congrArg (forget₂ (ModuleCat _) AddCommGrpCat).map
+  dsimp only [HomologicalComplex₂.totalFunctor]
+  erw [Category.assoc, HomologicalComplex₂.ιTotal_map]
+  change _ = ((ProEt.hypercoverSectionRows X R W U).map
+    (HomologicalComplex.singleObjXSelf (.up ℤ) 0 M).inv).f n ≫
+      ((ProEt.hypercoverSectionRows X R W U).map (i.f 0)).f n ≫ _
+  rw [← Category.assoc, ← HomologicalComplex.comp_f, ← Functor.map_comp]
+  rfl
+
+
 /-- The resolution map commutes with the total differential.
 Source: Stacks, Tag 09A2
 (blueprint: lem-sfb-acyclic-hypercover-pullback-normalization).
@@ -128,7 +142,13 @@ theorem rowResolutionComponent_comm (X : Scheme.{u})
     (i : (HomologicalComplex.single _ (.up ℤ) 0).obj M ⟶ I) (n m : ℤ) :
     rowResolutionComponent X R W U M I i n ≫ ((total X R W U).obj I).d n m =
       ((rows X R W U).obj M).d n m ≫ rowResolutionComponent X R W U M I i m := by
-  sorry
+  obtain ⟨e, he⟩ := ProEt.NormalizedDescent.single_sheaf X R W U M
+  have hf (n : ℤ) : rowResolutionComponent X R W U M I i n =
+      (e.hom ≫ (total X R W U).map i).f n := by
+    rw [rowResolutionComponent_factor, HomologicalComplex.comp_f, he]
+    simp only [rowResolutionComponent, HomologicalComplex.id_f, Category.comp_id]
+  rw [hf n, hf m]
+  exact (e.hom ≫ (total X R W U).map i).comm n m
 
 /-- The coefficient-resolution map C_U(M) to T_U(I), using the actual section maps.
 Source: Stacks, Tag 09A2
@@ -154,7 +174,16 @@ theorem rowResolution_single_isIso (X : Scheme.{u})
     (U : SimplicialObject (Over W)) (M : proEtaleRingModules X R) :
     IsIso (rowResolution X R W U M
       ((HomologicalComplex.single _ (.up ℤ) 0).obj M) (𝟙 _)) := by
-  sorry
+  obtain ⟨e, he⟩ := ProEt.NormalizedDescent.single_sheaf X R W U M
+  have h : rowResolution X R W U M
+      ((HomologicalComplex.single _ (.up ℤ) 0).obj M) (𝟙 _) = e.hom := by
+    apply HomologicalComplex.Hom.ext
+    funext n
+    rw [he]
+    simp only [rowResolution, rowResolutionComponent, HomologicalComplex.id_f,
+      Category.comp_id]
+  rw [h]
+  infer_instance
 
 /-- The canonical row-to-single-total identification, with its specified total injection.
 Source: Stacks, Tag 09A2
@@ -181,7 +210,9 @@ theorem rowResolution_eq_total_map (X : Scheme.{u})
     (i : (HomologicalComplex.single _ (.up ℤ) 0).obj M ⟶ I) :
     (rowSingleTotalIso X R W U M).hom ≫ (total X R W U).map i =
       rowResolution X R W U M I i := by
-  sorry
+  apply HomologicalComplex.Hom.ext
+  funext n
+  exact (rowResolutionComponent_factor X R W U M I i n).symm
 
 /-- Derived sections of a sheaf placed in degree zero.
 Source: Stacks, Tag 09A2
@@ -309,6 +340,87 @@ def sectionRestriction (M : proEtaleRingModules X R) (U : X.ProEt) (V : Y.ProEt)
       (((proEtaleRingModuleAdjunction h R S c).unit.app M).val.app (op U)) ≫
     ((proEtaleRingModulePullback h R S c).obj M).val.presheaf.map g.op
 
+private def rowXIso (T : Scheme.{u})
+    (A : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (W : T.ProEt)
+    (U : SimplicialObject (Over W)) (M : proEtaleRingModules T A) (n : ℕ) :
+    ((rows T A W U).obj M).X (n : ℤ) ≅ (sections T A (U _⦋n⦌).left).obj M :=
+  (forget₂ (ModuleCat _) AddCommGrpCat).mapIso
+    ((((AlgebraicTopology.alternatingCofaceMapComplex _).obj
+      ((ProEt.hypercoverSections T A W U).obj M)).extendXIso
+        ComplexShape.embeddingUpNat (i := n) rfl))
+
+private theorem rows_map_nat (T : Scheme.{u})
+    (A : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (W : T.ProEt)
+    (U : SimplicialObject (Over W)) {M L : proEtaleRingModules T A}
+    (f : M ⟶ L) (n : ℕ) :
+    ((rows T A W U).map f).f (n : ℤ) =
+      (rowXIso T A W U M n).hom ≫ (sections T A (U _⦋n⦌).left).map f ≫
+        (rowXIso T A W U L n).inv := by
+  change (forget₂ (ModuleCat _) AddCommGrpCat).map
+    ((HomologicalComplex.extendMap
+      ((AlgebraicTopology.alternatingCofaceMapComplex _).map
+        ((ProEt.hypercoverSections T A W U).map f))
+      ComplexShape.embeddingUpNat).f (n : ℤ)) = _
+  erw [HomologicalComplex.extendMap_f _ _ (i := n) rfl]
+  simp only [Functor.map_comp]
+  rfl
+
+private theorem sectionRestriction_naturality (U : X.ProEt) (V : Y.ProEt)
+    (g : V ⟶ (proEtaleBaseChange h).obj U)
+    {M L : proEtaleRingModules X R} (f : M ⟶ L) :
+    (sections X R U).map f ≫ sectionRestriction h R S c L U V g =
+      sectionRestriction h R S c M U V g ≫
+        (sections Y S V).map ((proEtaleRingModulePullback h R S c).map f) := by
+  ext x
+  have hn := congrArg (fun a ↦ a.val.app (op U))
+    ((proEtaleRingModuleAdjunction h R S c).unit.naturality f)
+  have hx := congrArg (fun a ↦ a x) hn
+  change ((proEtaleRingModulePullback h R S c).obj L).val.map g.op
+      (((proEtaleRingModuleAdjunction h R S c).unit.app L).val.app (op U)
+        (f.val.app (op U) x)) =
+    ((proEtaleRingModulePullback h R S c).map f).val.app (op V)
+      (((proEtaleRingModulePullback h R S c).obj M).val.map g.op
+        (((proEtaleRingModuleAdjunction h R S c).unit.app M).val.app (op U) x))
+  change ((proEtaleRingModuleAdjunction h R S c).unit.app L).val.app (op U)
+      (f.val.app (op U) x) =
+    ((proEtaleRingModulePullback h R S c).map f).val.app
+      (op ((proEtaleBaseChange h).obj U))
+      (((proEtaleRingModuleAdjunction h R S c).unit.app M).val.app (op U) x) at hx
+  rw [hx]
+  exact (PresheafOfModules.naturality_apply
+    ((proEtaleRingModulePullback h R S c).map f).val g.op _).symm
+
+
+private theorem sectionRestriction_square {A A' : X.ProEt} {B B' : Y.ProEt}
+    (a : A' ⟶ A) (b : B' ⟶ B) (g : B ⟶ (proEtaleBaseChange h).obj A)
+    (g' : B' ⟶ (proEtaleBaseChange h).obj A')
+    (comm : b ≫ g = g' ≫ (proEtaleBaseChange h).map a)
+    (M : proEtaleRingModules X R) :
+    sectionRestriction h R S c M A B g ≫
+        ((proEtaleRingModulePullback h R S c).obj M).val.presheaf.map b.op =
+      M.val.presheaf.map a.op ≫ sectionRestriction h R S c M A' B' g' := by
+  ext x
+  have hn := PresheafOfModules.naturality_apply
+    ((proEtaleRingModuleAdjunction h R S c).unit.app M).val a.op x
+  change ((proEtaleRingModulePullback h R S c).obj M).val.map b.op
+      (((proEtaleRingModulePullback h R S c).obj M).val.map g.op
+        (((proEtaleRingModuleAdjunction h R S c).unit.app M).val.app (op A) x)) =
+    ((proEtaleRingModulePullback h R S c).obj M).val.map g'.op
+      (((proEtaleRingModuleAdjunction h R S c).unit.app M).val.app (op A')
+        (M.val.map a.op x))
+  erw [hn]
+  change ((proEtaleRingModulePullback h R S c).obj M).val.presheaf.map b.op
+      (((proEtaleRingModulePullback h R S c).obj M).val.presheaf.map g.op
+        (((proEtaleRingModuleAdjunction h R S c).unit.app M).val.app (op A) x)) =
+    ((proEtaleRingModulePullback h R S c).obj M).val.presheaf.map g'.op
+      (((proEtaleRingModulePullback h R S c).obj M).val.presheaf.map
+        ((proEtaleBaseChange h).map a).op
+        (((proEtaleRingModuleAdjunction h R S c).unit.app M).val.app (op A) x))
+  simpa only [op_comp, Functor.map_comp, AddCommGrpCat.comp_apply] using!
+    congrArg (fun t ↦
+      ((proEtaleRingModulePullback h R S c).obj M).val.presheaf.map t.op
+        (((proEtaleRingModuleAdjunction h R S c).unit.app M).val.app (op A) x)) comm
+
 /-- The degreewise section restriction, using the canonical extension-by-zero
 identifications. Source: Stacks, Tag 09A2, functoriality refinement
 (blueprint: lem-sfb-acyclic-hypercover-pullback-normalization). -/
@@ -331,6 +443,36 @@ def restrictionComponent (W : X.ProEt) (Z : Y.ProEt)
               ComplexShape.embeddingUpNat (i := n) rfl).inv)
   | .negSucc _ => 0
 
+private theorem row_d_nat (T : Scheme.{u})
+    (A : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (W : T.ProEt)
+    (U : SimplicialObject (Over W)) (M : proEtaleRingModules T A) (n : ℕ) :
+    ((rows T A W U).obj M).d (n : ℤ) ((n + 1 : ℕ) : ℤ) =
+      (rowXIso T A W U M n).hom ≫
+        (∑ i : Fin (n + 2), (-1 : ℤ) ^ (i : ℕ) •
+          M.val.presheaf.map (U.δ i).left.op) ≫
+        (rowXIso T A W U M (n + 1)).inv := by
+  change (forget₂ (ModuleCat _) AddCommGrpCat).map
+    (((((AlgebraicTopology.alternatingCofaceMapComplex _).obj
+      ((ProEt.hypercoverSections T A W U).obj M)).extend
+        ComplexShape.embeddingUpNat)).d (n : ℤ) ((n + 1 : ℕ) : ℤ)) = _
+  erw [HomologicalComplex.extend_d_eq _ _ (i := n) (j := n + 1) rfl rfl]
+  simp only [Functor.map_comp]
+  dsimp only [AlgebraicTopology.alternatingCofaceMapComplex,
+    AlgebraicTopology.AlternatingCofaceMapComplex.obj]
+  simp only [CochainComplex.of_d, AlgebraicTopology.AlternatingCofaceMapComplex.objD,
+    Functor.map_sum, Functor.map_zsmul]
+  rfl
+
+private theorem row_neg_isZero (T : Scheme.{u})
+    (A : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (W : T.ProEt)
+    (U : SimplicialObject (Over W)) (M : proEtaleRingModules T A) (n : ℕ) :
+    IsZero (((rows T A W U).obj M).X (Int.negSucc n)) := by
+  apply (forget₂ (ModuleCat _) AddCommGrpCat).map_isZero
+  apply HomologicalComplex.isZero_extend_X
+  intro i
+  change (i : ℤ) ≠ Int.negSucc n
+  omega
+
 /-- The actual section restrictions commute with the alternating differential.
 Source: Stacks, Tag 09A2, functoriality refinement
 (blueprint: lem-sfb-acyclic-hypercover-pullback-normalization).
@@ -344,7 +486,40 @@ theorem restrictionComponent_comm (W : X.ProEt) (Z : Y.ProEt)
     restrictionComponent h R S c W Z U V g M i ≫
         ((rows Y S Z V).obj ((proEtaleRingModulePullback h R S c).obj M)).d i j =
       ((rows X R W U).obj M).d i j ≫ restrictionComponent h R S c W Z U V g M j := by
-  sorry
+  by_cases hij : i + 1 = j
+  · subst j
+    cases i with
+    | ofNat n =>
+      change restrictionComponent h R S c W Z U V g M (n : ℤ) ≫
+          ((rows Y S Z V).obj ((proEtaleRingModulePullback h R S c).obj M)).d
+            (n : ℤ) ((n + 1 : ℕ) : ℤ) =
+        ((rows X R W U).obj M).d (n : ℤ) ((n + 1 : ℕ) : ℤ) ≫
+          restrictionComponent h R S c W Z U V g M ((n + 1 : ℕ) : ℤ)
+      erw [row_d_nat, row_d_nat]
+      change ((rowXIso X R W U M n).hom ≫ _ ≫
+          (rowXIso Y S Z V ((proEtaleRingModulePullback h R S c).obj M) n).inv) ≫
+          ((rowXIso Y S Z V ((proEtaleRingModulePullback h R S c).obj M) n).hom ≫
+            _ ≫ _ ) =
+        ((rowXIso X R W U M n).hom ≫ _ ≫
+          (rowXIso X R W U M (n + 1)).inv) ≫
+          ((rowXIso X R W U M (n + 1)).hom ≫ _ ≫ _)
+      simp only [Category.assoc, Iso.inv_hom_id_assoc]
+      congr 1
+      rw [← Category.assoc, ← Category.assoc]
+      congr 1
+      simp only [Preadditive.comp_sum, Preadditive.sum_comp,
+        Preadditive.comp_zsmul, Preadditive.zsmul_comp]
+      apply Finset.sum_congr rfl
+      intro k _
+      congr 1
+      exact sectionRestriction_square h R S c (U.δ k).left (V.δ k).left
+        (g.app (op ⦋n⦌)) (g.app (op ⦋n + 1⦌))
+        (g.naturality (SimplexCategory.δ k).op) M
+    | negSucc n =>
+      exact (row_neg_isZero X R W U M n).eq_of_src _ _
+  · have hh : ¬ (ComplexShape.up ℤ).Rel i j := hij
+    rw [HomologicalComplex.shape _ i j hh, HomologicalComplex.shape _ i j hh,
+      comp_zero, zero_comp]
 
 /-- The actual alternating section cochain map c_g, extended by zero in negative degrees.
 Source: Stacks, Tag 09A2, restriction functoriality refinement
@@ -460,7 +635,67 @@ theorem restriction_naturality (W : X.ProEt) (Z : Y.ProEt)
     (rows X R W U).map f ≫ restriction h R S c W Z U V g L =
       restriction h R S c W Z U V g M ≫
         (rows Y S Z V).map ((proEtaleRingModulePullback h R S c).map f) := by
-  sorry
+  apply HomologicalComplex.Hom.ext
+  funext n
+  cases n with
+  | ofNat n =>
+    simp only [HomologicalComplex.comp_f]
+    erw [rows_map_nat, rows_map_nat]
+    change ((rowXIso X R W U M n).hom ≫ _ ≫ (rowXIso X R W U L n).inv) ≫
+        ((rowXIso X R W U L n).hom ≫ _ ≫
+          (rowXIso Y S Z V ((proEtaleRingModulePullback h R S c).obj L) n).inv) =
+      ((rowXIso X R W U M n).hom ≫ _ ≫
+          (rowXIso Y S Z V ((proEtaleRingModulePullback h R S c).obj M) n).inv) ≫
+        ((rowXIso Y S Z V ((proEtaleRingModulePullback h R S c).obj M) n).hom ≫ _ ≫ _)
+    simp only [Category.assoc, Iso.inv_hom_id_assoc]
+    simpa only [Category.assoc, rowXIso, Functor.mapIso, Functor.comp_obj, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app] using! congrArg
+      (fun t ↦ (rowXIso X R W U M n).hom ≫ t ≫
+        (rowXIso Y S Z V ((proEtaleRingModulePullback h R S c).obj L) n).inv)
+      (sectionRestriction_naturality h R S c
+        (U _⦋n⦌).left (V _⦋n⦌).left (g.app (op ⦋n⦌)) f)
+  | negSucc n =>
+    simp only [HomologicalComplex.comp_f, restriction, restrictionComponent,
+      comp_zero, zero_comp]
+
+private theorem rowResolution_refinement (T : Scheme.{u})
+    (A : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (W : T.ProEt)
+    (U U' : SimplicialObject (Over W)) (r : U' ⟶ U) (M : proEtaleRingModules T A)
+    (I : CochainComplex (proEtaleRingModules T A) ℤ)
+    (i : (HomologicalComplex.single _ (.up ℤ) 0).obj M ⟶ I) :
+    refinement T A W U U' r M ≫ rowResolution T A W U' M I i =
+      rowResolution T A W U M I i ≫
+        (ProEt.NormalizedDescent.refinement T A W U U' r).app I := by
+  apply HomologicalComplex.hom_ext
+  intro n
+  change (forget₂ (ModuleCat _) AddCommGrpCat).map
+      ((ProEt.NormalizedDescent.rowRefinement T A W U U' r M).f n) ≫
+      (forget₂ (ModuleCat _) AddCommGrpCat).map _ =
+    (forget₂ (ModuleCat _) AddCommGrpCat).map _ ≫
+      (forget₂ (ModuleCat _) AddCommGrpCat).map
+        ((HomologicalComplex₂.total.map
+          ((HomologicalComplex₂.flipFunctor _ (.up ℤ) (.up ℤ)).map
+            ((NatTrans.mapHomologicalComplex
+              (ProEt.NormalizedDescent.rowRefinementNat T A W U U' r) (.up ℤ)).app I))
+          (.up ℤ)).f n)
+  simp only [← Functor.map_comp]
+  apply congrArg (forget₂ (ModuleCat _) AddCommGrpCat).map
+  erw [Category.assoc, HomologicalComplex₂.ιTotal_map]
+  change (ProEt.NormalizedDescent.rowRefinement T A W U U' r M).f n ≫
+        ((ProEt.hypercoverSectionRows T A W U').map
+          ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 M).inv ≫ i.f 0)).f n ≫ _ =
+      (((ProEt.hypercoverSectionRows T A W U).map
+        ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 M).inv ≫ i.f 0)).f n ≫
+          (ProEt.NormalizedDescent.rowRefinement T A W U U' r (I.X 0)).f n) ≫ _
+  have hn := (ProEt.NormalizedDescent.rowRefinementNat T A W U U' r).naturality
+    ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 M).inv ≫ i.f 0)
+  have hf := congrArg (fun t ↦ t.f n) hn.symm
+  simp only [HomologicalComplex.comp_f] at hf
+  simpa only [Category.assoc] using! congrArg (fun t ↦ t ≫
+    (HomologicalComplex₂.flip
+      (((ProEt.hypercoverSectionRows T A W U').mapHomologicalComplex (.up ℤ)).obj I)).ιTotal
+        (.up ℤ) n 0 n (by simp)) hf
+
 
 /-- Normalized comparisons commute with refinements on either site.
 Source: Stacks, Tag 09A2, functoriality refinement
@@ -484,7 +719,47 @@ theorem comparison_refinement (T : Scheme.{u})
     (comparison T A U hU wU).hom.app M ≫
         DerivedCategory.Q.map (refinement T A _ U U' r M) =
       (comparison T A U' hU' wU').hom.app M := by
-  sorry
+  have : EnoughInjectives (proEtaleRingModules T A) := by
+    have :=
+      (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{_, _, 0}
+        (ProEt.topology T) A).1
+    infer_instance
+  obtain ⟨I, i, hi, hI, hIN⟩ :=
+    CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective
+      ((HomologicalComplex.single _ (.up ℤ) 0).obj M) 0
+  have := hi
+  have := hI
+  have := hIN
+  have := ((descent T A U' hU' wU').1 M 0 I i).1
+  have hUeq := Classical.choose_spec (descent T A U hU wU).2.exists
+  have hU'eq := Classical.choose_spec (descent T A U' hU' wU').2.exists
+  change IsNormalized T A U (comparison T A U hU wU) at hUeq
+  change IsNormalized T A U' (comparison T A U' hU' wU') at hU'eq
+  apply (cancel_mono (DerivedCategory.Q.map (rowResolution T A _ U' M I i))).mp
+  have hr := congrArg DerivedCategory.Q.map (rowResolution_refinement T A _ U U' r M I i)
+  have ha := congrArg DerivedCategory.Q.map
+    (ProEt.NormalizedDescent.refinement_squares T A _ U U' r
+      ((HomologicalComplex.single _ (.up ℤ) 0).obj M) I i).1
+  simp only [Functor.map_comp] at hr ha
+  change DerivedCategory.Q.map ((augmentation T A _ U).app I) ≫
+      DerivedCategory.Q.map ((ProEt.NormalizedDescent.refinement T A _ U U' r).app I) =
+    DerivedCategory.Q.map ((augmentation T A _ U').app I) at ha
+  rw [Category.assoc, hr, ← Category.assoc, hUeq M 0 I i, Category.assoc,
+    ha, hU'eq M 0 I i]
+
+private theorem refinement_nat_f (T : Scheme.{u})
+    (A : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (W : T.ProEt)
+    (U U' : SimplicialObject (Over W)) (r : U' ⟶ U) (M : proEtaleRingModules T A)
+    (n : ℕ) :
+    (refinement T A W U U' r M).f (n : ℤ) =
+      (rowXIso T A W U M n).hom ≫ M.val.presheaf.map (r.app (op ⦋n⦌)).left.op ≫
+        (rowXIso T A W U' M n).inv := by
+  change (forget₂ (ModuleCat _) AddCommGrpCat).map
+    ((HomologicalComplex.extendMap
+      ((AlgebraicTopology.alternatingCofaceMapComplex _).map _) _).f (n : ℤ)) = _
+  erw [HomologicalComplex.extendMap_f _ _ (i := n) rfl]
+  simp only [Functor.map_comp]
+  rfl
 
 /-- Refinements of both hypercovers commute with the actual coefficient restriction map.
 Source: Stacks, Tag 09A2, functoriality refinement
@@ -506,7 +781,29 @@ theorem restriction_refinement
     restriction h R S c _ _ U V g M ≫
         refinement Y S _ V V' s ((proEtaleRingModulePullback h R S c).obj M) =
       refinement X R _ U U' r M ≫ restriction h R S c _ _ U' V' g' M := by
-  sorry
+  apply HomologicalComplex.Hom.ext
+  funext n
+  cases n with
+  | ofNat n =>
+    simp only [HomologicalComplex.comp_f]
+    erw [refinement_nat_f, refinement_nat_f]
+    change ((rowXIso X R _ U M n).hom ≫ _ ≫
+        (rowXIso Y S _ V ((proEtaleRingModulePullback h R S c).obj M) n).inv) ≫
+        ((rowXIso Y S _ V ((proEtaleRingModulePullback h R S c).obj M) n).hom ≫ _ ≫
+          (rowXIso Y S _ V' ((proEtaleRingModulePullback h R S c).obj M) n).inv) =
+      ((rowXIso X R _ U M n).hom ≫ _ ≫ (rowXIso X R _ U' M n).inv) ≫
+        ((rowXIso X R _ U' M n).hom ≫ _ ≫ _)
+    simp only [Category.assoc, Iso.inv_hom_id_assoc]
+    simpa only [Category.assoc, rowXIso, Functor.mapIso, Functor.comp_obj, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app] using! congrArg
+      (fun t ↦ (rowXIso X R _ U M n).hom ≫ t ≫
+        (rowXIso Y S _ V' ((proEtaleRingModulePullback h R S c).obj M) n).inv)
+      (sectionRestriction_square h R S c
+        (r.app (op ⦋n⦌)).left (s.app (op ⦋n⦌)).left (g.app (op ⦋n⦌))
+        (g'.app (op ⦋n⦌)) (congrArg (fun t ↦ t.app (op ⦋n⦌)) comm) M)
+  | negSucc n =>
+    simp only [HomologicalComplex.comp_f, restriction, restrictionComponent,
+      comp_zero, zero_comp]
 
 /-- Section-complex pullbacks commute with composition, using the canonical coefficient
 identification and the composite augmented simplicial diagram.
@@ -537,7 +834,41 @@ theorem restriction_comp {Z : Scheme.{u}} (k : Z ⟶ Y)
         (rows Z T _ W).map ((compositionIso h R S c k T d).hom.app M) =
       restriction h R S c _ _ U V g M ≫
         restriction k S T d _ _ V W g' ((proEtaleRingModulePullback h R S c).obj M) := by
-  sorry
+  apply HomologicalComplex.Hom.ext
+  funext n
+  cases n with
+  | ofNat n =>
+    simp only [HomologicalComplex.comp_f]
+    erw [rows_map_nat]
+    change ((rowXIso X R _ U M n).hom ≫ _ ≫
+        (rowXIso Z T _ W _ n).inv) ≫
+        ((rowXIso Z T _ W _ n).hom ≫ _ ≫ (rowXIso Z T _ W _ n).inv) =
+      ((rowXIso X R _ U M n).hom ≫ _ ≫
+        (rowXIso Y S _ V ((proEtaleRingModulePullback h R S c).obj M) n).inv) ≫
+        ((rowXIso Y S _ V ((proEtaleRingModulePullback h R S c).obj M) n).hom ≫ _ ≫ _)
+    simp only [Category.assoc, Iso.inv_hom_id_assoc]
+    have hc :
+        sectionRestriction (k ≫ h) R T
+            (proEtaleRingCompositeCoefficients k h R S T c d) M
+            (U _⦋n⦌).left (W _⦋n⦌).left
+            (g'.app (op ⦋n⦌) ≫ (proEtaleBaseChange k).map (g.app (op ⦋n⦌)) ≫
+              (MorphismProperty.Over.pullbackComp k h).inv.app (U _⦋n⦌).left) ≫
+          (sections Z T (W _⦋n⦌).left).map ((compositionIso h R S c k T d).hom.app M) =
+        sectionRestriction h R S c M (U _⦋n⦌).left (V _⦋n⦌).left (g.app (op ⦋n⦌)) ≫
+          sectionRestriction k S T d ((proEtaleRingModulePullback h R S c).obj M)
+            (V _⦋n⦌).left (W _⦋n⦌).left (g'.app (op ⦋n⦌)) := by
+      ext x
+      exact (HypercoverUnit.restriction_comp_section h k R S T c d M
+        (U _⦋n⦌).left (V _⦋n⦌).left (W _⦋n⦌).left
+        (g.app (op ⦋n⦌)) (g'.app (op ⦋n⦌)) x).symm
+    simpa only [Category.assoc, rowXIso, Functor.mapIso, Functor.comp_obj, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app] using! congrArg
+      (fun t ↦ (rowXIso X R _ U M n).hom ≫ t ≫
+        (rowXIso Z T _ W ((proEtaleRingModulePullback k S T d).obj
+          ((proEtaleRingModulePullback h R S c).obj M)) n).inv) hc
+  | negSucc n =>
+    simp only [HomologicalComplex.comp_f, restriction, restrictionComponent,
+      comp_zero, zero_comp]
 
 /-- The actual unit-induced derived-section maps compose under the same coefficient
 identification used by the section complexes.

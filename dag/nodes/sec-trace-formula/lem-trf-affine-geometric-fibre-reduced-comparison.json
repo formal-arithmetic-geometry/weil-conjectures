@@ -1,0 +1,238 @@
+{
+ "id": "lem-trf-affine-geometric-fibre-reduced-comparison",
+ "kind": "statement",
+ "title": "Affine fibre identifications, geometric reducedness comparison and finiteness",
+ "statement": "Let $A\\to B$ be any homomorphism of commutative rings, and let $f:X=\\operatorname{Spec}B\\to T=\\operatorname{Spec}A$ be its affine scheme morphism [def-weil-affine-spectrum]. For $\\mathfrak p\\in T$ put $k=\\kappa(\\mathfrak p)$ [def-weil-residue-field]. Its scheme-theoretic fibre [def-pc-scheme-fibre] is canonically $\\operatorname{Spec}(B\\otimes_A k)$ over $\\operatorname{Spec}k$, with structure map induced by $k\\to B\\otimes_A k$, $c\\mapsto1\\otimes c$. Consequently, for a geometric fibre over any chosen algebraic closure of $k$ [def-weil-geometric-fibre],\n$$X_{\\bar{\\mathfrak p}}\\text{ is reduced}\\quad\\Longleftrightarrow\\quad\\operatorname{Spec}(B\\otimes_A k)\\text{ is geometrically reduced over }k,$$\nwhere reduced is [def-pc-reduced-scheme] and geometrically reduced means reduced after every field extension [def-pc-geometrically-irreducible]. For every ring map $a:A\\to A'$, the base-change projection $X\\times_T\\operatorname{Spec}A'\\to\\operatorname{Spec}A'$ [def-pc-base-change] is identified with $\\operatorname{Spec}(B\\otimes_A A')\\to\\operatorname{Spec}A'$, induced by $c\\mapsto1\\otimes c$; the other projection is induced by $b\\mapsto b\\otimes1$. These identifications require no finiteness assumption. Both $X$ and $T$ are quasi-compact and quasi-separated [def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism], and $f$ is quasi-compact [def-weil-finite-type-morphism]. If $A\\to B$ is finitely presented [def-weil-pbc-finitely-presented-algebra], then $f$ is locally of finite presentation [def-sbc-locally-finite-presentation]. Empty source, empty base and empty fibres are allowed.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01I4 (lemma-fibre-product-affine-schemes); Varieties Tags 035X (lemma-geometrically-reduced), 020I (lemma-perfect-reduced), 0384 (lemma-geometrically-reduced-upstairs); Morphisms Tag 01TP (definition-finite-presentation); Schemes Tag 03GI (lemma-quasi-compact-permanence). Affine comparison and finiteness inputs in More on Morphisms Tag 0579 (lemma-geometrically-reduced-constructible)."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "def-pc-scheme-fibre",
+  "def-weil-geometric-fibre",
+  "def-pc-reduced-scheme",
+  "def-pc-geometrically-irreducible",
+  "def-pc-base-change",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "For any $A\\to A'$, apply [lem-weil-pbc-fibre-product-affine-spectra] to the two $A$-algebras $B$ and $A'$. It identifies $X\\times_T\\operatorname{Spec}A'$ with $\\operatorname{Spec}(B\\otimes_A A')$. Its projection formulas identify the projection to $\\operatorname{Spec}A'$ with $c\\mapsto1\\otimes c$ and the projection to $X$ with $b\\mapsto b\\otimes1$. Thus the identification is over the stated base, not merely an abstract scheme isomorphism. The lemma has no finiteness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4 (lemma-fibre-product-affine-schemes), tensor product formula and its universal-property proof"
+   }
+  },
+  {
+   "text": "For $\\mathfrak p\\in T$, [def-pc-scheme-fibre] defines $X_{\\mathfrak p}=X\\times_T\\operatorname{Spec}k$, where $k=\\kappa(\\mathfrak p)$. Take $A'=k$ in the affine pullback lemma. The resulting isomorphism $X_{\\mathfrak p}\\cong Y:=\\operatorname{Spec}(B\\otimes_A k)$ is over $\\operatorname{Spec}k$ because its second projection is induced by $c\\mapsto1\\otimes c$. This proves the fibre assertion with its precise structure map.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01K0 (definition-fibre); Tag 01I4 (lemma-fibre-product-affine-schemes)"
+   }
+  },
+  {
+   "text": "Fix the chosen algebraic closure $\\bar k/k$. By [def-weil-geometric-fibre], the geometric fibre is equivalently the base change of $X_{\\mathfrak p}$ along $\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}k$. The isomorphism over $k$ in step 2 induces an isomorphism of this base change with $Y_{\\bar k}$: apply the fibre-product universal property to that isomorphism and its inverse; their composites are identities since both projections agree. Isomorphic schemes have isomorphic local rings, so reducedness agrees by [def-pc-reduced-scheme]. Apply [lem-trf-geometric-reducedness-algebraic-closure-test] to the $k$-scheme $Y$. It gives $Y_{\\bar k}$ reduced if and only if $Y$ is reduced after every field extension of $k$, exactly the geometric reducedness asserted in the item. This lemma allows arbitrary $k$, arbitrary chosen algebraic closure, and arbitrary $Y$.",
+   "uses": [
+    "def-weil-geometric-fibre",
+    "def-pc-reduced-scheme",
+    "lem-trf-geometric-reducedness-algebraic-closure-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 035X (lemma-geometrically-reduced), (2) iff (6) in positive characteristic; Tag 020I (lemma-perfect-reduced) and reducedness descent in characteristic zero"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-affine-scheme-qcqs] separately to $X=\\operatorname{Spec}B$ and $T=\\operatorname{Spec}A$. Both are quasi-compact and quasi-separated. Part (1) of [lem-weil-pbc-qcqs-morphism-permanence] then applies to $f$, using quasi-compactness of its source and quasi-separatedness of its target, and gives that $f$ is quasi-compact. Nothing here uses finite generation or finite presentation of $B$ over $A$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KN (lemma-affine-separated), Tag 03GI (lemma-quasi-compact-permanence); Algebra Tag 00E8 (lemma-quasi-compact)"
+   }
+  },
+  {
+   "text": "Now suppose $A\\to B$ is finitely presented. By [def-weil-pbc-finitely-presented-algebra], choose a presentation $B\\cong A[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$. At every $x\\in X$, take the affine neighbourhoods $U=X$ and $V=T$ in [def-sbc-locally-finite-presentation]. The induced ring map is precisely the given finitely presented map $A\\to B$, so $f$ is of finite presentation at $x$ and hence locally of finite presentation. If $X$ is empty this condition is vacuous. The preceding steps require no points of $X$: for $B=0$ all fibre rings are zero and all source schemes empty; for $A=0$ a unital $A$-algebra is zero and there are no primes to test. A zero fibre ring similarly gives an empty reduced geometric fibre. Thus the assertions include empty source, base and fibres.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TP (definition-finite-presentation); Algebra Tag 00F3 (definition-finite-type), finite-presentation clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-scheme-fibre",
+  "def-weil-geometric-fibre",
+  "def-pc-reduced-scheme",
+  "lem-trf-geometric-reducedness-algebraic-closure-test",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01I4 and Tag 03GI, with Varieties Tags 035X and 020I and Morphisms Tag 01TP as cited in the steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fiber.*(Spec|[Gg]eometrically)|([Gg]eometrically|Spec).*fiber",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyReduced, AlgebraicGeometry.Scheme.Spec",
+   "results": "Hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fibre of Spec B to Spec A at a prime p is Spec of B tensor the residue field and reducedness after algebraic closure detects geometric reducedness",
+   "results": "Hits: Algebra.isGeometricallyReduced_iff, Algebra.IsGeometricallyReduced.mk, Algebra.IsGeometricallyReduced.casesOn, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.instCanonicallyOverFiber, PrimeSpectrum.preimageEquivFiber_apply_asIdeal, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Ideal.Fiber. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine spectra of finitely presented algebras are quasi compact locally of finite presentation and their geometric fibre is reduced exactly when the residue field tensor algebra is geometrically reduced",
+   "results": "Hits: Algebra.isGeometricallyReduced_iff, Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Algebra.quasiFinite_iff, Algebra.Smooth.exists_finiteType. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identify the geometric fibres of an affine scheme morphism with spectra of tensor products over residue fields, and compare reducedness with geometrically reduced algebras",
+   "results": "Hits: Algebra.isGeometricallyReduced_iff, Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, AlgebraicGeometry.affine_isReduced_iff, Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.IsGeometricallyReduced.of_injective. ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine scheme fibre is spectrum of tensor residue field, reduced after an algebraic closure exactly when geometrically reduced, affine schemes quasi compact quasi separated",
+   "results": "8 hits: Algebra.isGeometricallyReduced_iff, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Algebra.IsGeometricallyReduced, AlgebraicGeometry.affine_isReduced_iff, Algebra.isReduced_of_isGeometricallyReduced, AlgebraicGeometry.IsReduced, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization.  Read the affine pullback formulas in Mathlib/AlgebraicGeometry/Pullbacks.lean:726--761 and the scheme definition in AlgebraicGeometry/Geometrically/Reduced.lean; the algebra file RingTheory/Nilpotent/GeometricallyReduced.lean explicitly leaves the all-field-extension equivalence as a TODO. No match for the entire item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackSpecIso|isAffine.*[Qq]uasi|[Qq]uasi.*isAffine|Spec.*finitePresentation",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean.  Subdirectory: AlgebraicGeometry. Read the affine pullback formulas in Mathlib/AlgebraicGeometry/Pullbacks.lean:726--761 and the scheme definition in AlgebraicGeometry/Geometrically/Reduced.lean; the algebra file RingTheory/Nilpotent/GeometricallyReduced.lean explicitly leaves the all-field-extension equivalence as a TODO. No match for the entire item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fibre of an affine scheme morphism is the spectrum of the tensor product with the residue field and geometric reducedness is detected by any algebraic closure",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.fiber, Algebra.IsGeometricallyReduced.mk, Algebra.isGeometricallyReduced_iff, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, Algebra.IsGeometricallyReduced.casesOn, AlgebraicGeometry.Scheme.Hom.fiberι, AlgebraicGeometry.instCanonicallyOverFiber, PrimeSpectrum.preimageHomeomorphFiber.  Read the affine pullback formulas in Mathlib/AlgebraicGeometry/Pullbacks.lean:726--761 and the scheme definition in AlgebraicGeometry/Geometrically/Reduced.lean; the algebra file RingTheory/Nilpotent/GeometricallyReduced.lean explicitly leaves the all-field-extension equivalence as a TODO. No match for the entire item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.pullbackSpecIso, AlgebraicGeometry.GeometricallyReduced",
+   "results": "0 hits: . loogle: unknown identifier 'AlgebraicGeometry.Scheme.pullbackSpecIso' Read the affine pullback formulas in Mathlib/AlgebraicGeometry/Pullbacks.lean:726--761 and the scheme definition in AlgebraicGeometry/Geometrically/Reduced.lean; the algebra file RingTheory/Nilpotent/GeometricallyReduced.lean explicitly leaves the all-field-extension equivalence as a TODO. No match for the entire item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraicClosure|AlgebraicClosure|isGeometricallyReduced_field_iff|TODO|def GeometricallyReduced",
+   "results": "2 hits: 29, 123.  Subdirectory: AlgebraicGeometry/Geometrically/Reduced.lean. Read the affine pullback formulas in Mathlib/AlgebraicGeometry/Pullbacks.lean:726--761 and the scheme definition in AlgebraicGeometry/Geometrically/Reduced.lean; the algebra file RingTheory/Nilpotent/GeometricallyReduced.lean explicitly leaves the all-field-extension equivalence as a TODO. No match for the entire item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme over a field, reducedness of the base change to any chosen algebraic closure is equivalent to reducedness after every field extension",
+   "results": "8 hits: Algebra.isGeometricallyReduced_iff, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Algebra.IsGeometricallyReduced.of_injective, Algebra.IsGeometricallyReduced.of_forall_fg, AlgebraicGeometry.IsReduced.  Read the affine pullback formulas in Mathlib/AlgebraicGeometry/Pullbacks.lean:726--761 and the scheme definition in AlgebraicGeometry/Geometrically/Reduced.lean; the algebra file RingTheory/Nilpotent/GeometricallyReduced.lean explicitly leaves the all-field-extension equivalence as a TODO. No match for the entire item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.pullbackSpecIso",
+   "results": "12 hits: AlgebraicGeometry.pullbackSpecIso, AlgebraicGeometry.pullbackSpecIso_inv_fst, AlgebraicGeometry.pullbackSpecIso_hom_fst, AlgebraicGeometry.diagonal_SpecMap, AlgebraicGeometry.pullbackSpecIso_hom_fst', AlgebraicGeometry.pullbackSpecIso_inv_fst', AlgebraicGeometry.pullbackSpecIso_inv_fst_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc.  Read the affine pullback formulas in Mathlib/AlgebraicGeometry/Pullbacks.lean:726--761 and the scheme definition in AlgebraicGeometry/Geometrically/Reduced.lean; the algebra file RingTheory/Nilpotent/GeometricallyReduced.lean explicitly leaves the all-field-extension equivalence as a TODO. No match for the entire item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometrically-reduced-fibre-locus",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), the projectivity of S over R (Tag 05FT) used with Tag 05FQ. In the resulting 05FT Noetherian-approximation input: 05FG, good reduced-fibre locus and its base-change equality. Subargument: Affine fibre identifications, geometric reducedness comparison and finiteness.",
+   "via": [
+    "lem-trf-geometrically-reduced-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-geometric-fibre-reduced-comparison",
+  "worker": "stage1",
+  "summary": "Retained the statement and all its hypotheses. Reused existing affine tensor-product, chosen-algebraic-closure, affine qcqs and morphism-permanence nodes. Wrote the structure-map identifications and the local finite-presentation argument explicitly. No new nodes, no Lean attachment and no statement dispute. Checked empty schemes and imperfect residue fields; semantic Mathlib hits use an older algebra definition and do not close the whole item.",
+  "blueprint": "The existing from.place locates the affine comparison and finiteness inputs to 0579 within the semistable-alteration input of lem-trf-local-term-locality, proof (1)--(2). Steps 1--3 realize that affine geometric-fibre comparison; steps 4--5 realize the qcqs and local-finite-presentation inputs. No unit route was replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-1cd868592",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-1cd868592 (reviewer sub-agent of L); spot-checked: I read the whole delivery and found no faults, so no fixes were written. It changes only the item and the report; there are no new nodes. The item's statement, stmt_deps and source are byte-identical to the live version, and the item is still unsplit live, so no other group has split it first. Step 1: lem-weil-pbc-fibre-product-affine-spectra (Mathlib pullbackSpecIso), applied with base ring A and algebras B, A', gives the isomorphism and both projection formulas (Stacks 01I4, schemes.tex l.985). Step 2: def-pc-scheme-fibre with A'=k gives the fibre, and the isomorphism is over Spec k through c↦1⊗c. One unstated point is elementary: the canonical Spec κ(p)→Spec A is Spec of A→κ(p), which follows from the uniqueness clause of def-weil-affine-spectrum. Step 3: the base-change clause is in the statement of def-weil-geometric-fibre; reducedness is invariant under isomorphism (def-pc-reduced-scheme). The same-unit node lem-trf-geometric-reducedness-algebraic-closure-test, for arbitrary k, an arbitrary k-scheme and a fixed algebraic closure, gives exactly the item's equivalence, matching Stacks 035X (2)⇔(6) and 020I. I tested the imperfect case k[t]/(t^p−a): both sides are false. Step 4: the affine-qcqs leaf plus permanence (1), Stacks 03GI; both hypotheses are supplied. Step 5 (elementary): U=X, V=T in the pointwise definition of locally of finite presentation; it is vacuous when X is empty. The cases B=0, A=0 and empty fibres all hold. proof_deps equals the union of the step uses. There is no cycle (BFS over 93 deps). There is no SGA citation. tool_uses is empty, which is correct because the only cross-unit nodes are Mathlib leaves. The DAG grep found no duplicate node."
+ }
+}

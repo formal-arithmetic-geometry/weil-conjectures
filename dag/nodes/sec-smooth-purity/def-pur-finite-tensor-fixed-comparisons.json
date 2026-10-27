@@ -1,0 +1,116 @@
+{
+ "id": "def-pur-finite-tensor-fixed-comparisons",
+ "kind": "definition",
+ "title": "Canonical fixed-scalar pullback and purity-presentation comparisons",
+ "status": "split",
+ "statement": "Fix the finite-coefficient setting [def-pur-conventions] and scalar quotient functor with target action [def-pur-finite-tensor-reduction-data]. Use the specified intrinsic pullback and source comparison maps [def-pur-finite-reduction-comparisons], the scalar-unit-normalized realization comparison [def-sp-finite-scalar-realization-presentations] [def-sp-coefficient-scalar-representatives], the canonical binary reduction [def-pur-finite-signed-reduction-comparisons], and the actual positive line reduction [def-pur-finite-root-tensor-presentation]. Transport the recorded pullback comparison through the realization equivalences, their units and the specified scalar presentation to obtain Q(f_A^*K) isomorphic to f_B^*(QK). Similarly transport the recorded shifted pullback source comparison. Define the purity target comparison independently as inverse binary tensor reduction followed by the transported pullback comparison tensored with the actual positive line reduction. Supply the published tensor-pullback map [def-pur-composition-comparisons] at the actual finite coefficient ring, providing its finiteness internally. All coordinate changes are these specified unit composites, with no independent arbitrary isomorphism.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-finite-tensor-reduction-data",
+  "def-pur-finite-reduction-comparisons",
+  "def-sp-coefficient-scalar-representatives",
+  "def-sp-finite-scalar-realization-presentations",
+  "def-pur-finite-signed-reduction-comparisons",
+  "def-pur-finite-root-tensor-presentation",
+  "def-pur-composition-comparisons"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Proof Step 2, expanded Steps 7--9: actual pullback mate and source/target presentation comparisons in fixed-scalar realization"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical fixed scalar derived coefficient reduction pullback comparison through a module sheaf equivalence",
+   "results": "8 ordinary module-sheaf pullback/free-module hits: pullback_map_ιFree_comp_pullbackObjFreeIso_hom, pullbackObjFreeIso, its assoc lemma, conjugateEquiv_pullbackComp_inv, pullbackObjUnitToUnit, pullbackObjFreeIso_hom_naturality, freeFunctorCompPullbackIso, and the naturality_assoc lemma. No fixed-scalar derived quotient comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preimageIso\", \"mapDerivedCategory\"",
+   "results": "0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTensorPullbackComparison|finiteTensorPuritySourceComparison",
+   "results": "Mathlib msearch grep: 0 hits. rg lean/WeilConjectures, lean/Sheaf and dag/nodes: no hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical signed Tate coefficient line products finite reduction root charts derived pullback comparison",
+   "results": "8 hits: RootPairing.chainBotCoeff.congr_simp, RootPairing.chainTopCoeff.congr_simp, AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint, RootPairing.chainBotCoeff_mul_chainTopCoeff, RootPairing.one_le_chainBotCoeff_of_root_add_mem, RootPairing.chainTopCoeff_sub_chainBotCoeff, AlgebraicGeometry.Scheme.Pullback.carrierEquiv, RootPairing.restrictScalars_coe_root. These concern root systems or scheme carrier/residue-field pullbacks, not finite signed coefficient products, normalized root charts or derived scalar/pullback comparisons.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-tensor-presentation-reduction",
+  "date": "2026-10-22",
+  "group": "NX"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Step 2, expanded scalar-first tensor, actual integral-reduced signed lines and their normalized adjoint comparisons",
+   "via": [
+    "lem-pur-finite-tensor-presentation-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteTensorFixedComparisons",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteTensorPullbackComparison",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.finiteTensorPullbackModel",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorPullbackComparison",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorPullbackTensor",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorSourceModel",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorPuritySourceComparison",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorPurityTargetComparison"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteTensorFixedComparisons.lean",
+  "statement": "def finiteTensorPullbackComparison (P : PurityFiniteSetting.{u}) (m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ P.level) {X Y : Scheme.{u}} (f : X ⟶ Y) (K : _root_.DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient))) : (P.finiteTensorReduction m hm hmn X).obj ((P.smoothPurityPullback f).obj K) ≅ ((P.finiteReductionSetting m hm).smoothPurityPullback f).obj ((P.finiteTensorReduction m hm hmn Y).obj K)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f286afb2",
+  "group": "NX",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f286afb2",
+  "group": "NX",
+  "result": "pass",
+  "note": "Re-delivery of aa2aa128e2c9 (RETURN H2). Lean byte-identical (9 modules); item statement/proof/lean record unchanged. stmt_deps repaired in item, def-pur-finite-tensor-fixed-comparisons, def-pur-finite-tensor-reduction-data: thm-pur-composition-coherence→def-pur-composition-comparisons (owns compositionFixedPullbackComp/PullbackTensorFixed/TwistShift/ShiftedPullback); lem-sp-supported-etale-tensor-origin→def-sp-coefficient-scalar-representatives + new existing:true def-sp-finite-scalar-realization-presentations on SupportedEtaleTensorOrigin (liftedHom/fixedScalar/fixedRestriction/restrictionPresentation/scalarPresentation; scalarPresentation = leftAdjointUniq conjugate of sectionwise-identity-pinned sfRealizationRestriction; statement verbatim; no competing owner). Mechanical finding lem-amb-finite-tate-site-descent: statement uses finite_tate_site_descent(...).choose (constructed comparison) → PASS on that point. No supersession on live. Advisories: non-stmt_dep owners of sfRealizationRestriction/sfIntrinsicDerivedEquivalence; Second reading is the author's own; degree-one HEq lemma advisory unchanged. No compile (no file changed)."
+ }
+}

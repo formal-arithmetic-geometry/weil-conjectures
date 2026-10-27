@@ -21,7 +21,7 @@
    "elementary": true
   },
   {
-   "text": "Sheaves of B-modules have all small products. Apply lem-weil-pbc-bilinear-hom-complex to the curried coefficient-Hom bifunctor. Its product terms, differentials and induced maps are all morphisms of B-module sheaves by construction. Retain the underived action formula and all the product and differential formulas.",
+   "text": "Sheaves of B-modules have all small products. Apply lem-weil-pbc-bilinear-hom-complex to the curried coefficient-Hom bifunctor. Its product terms, differentials and induced maps are all morphisms of B-module sheaves by construction. Retain the underived action formula and all the product and differential formulas. Unpack the Nonempty structured specification to obtain the same projection family and its three laws.",
    "uses": [
     "lem-weil-pbc-bilinear-hom-complex"
    ],
@@ -42,9 +42,8 @@
   "lem-sc-hom-complex-projections"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tag 099I, construction of E prime = RHom(r(K prime), E), the chain-level coefficient action."
+  "by": "agent",
+  "description": "E6: adapt the equivalent structured product specification and retain the product-projection equation in the existing normalized comparison API. Use the named Hom bifunctor and its component formulas, with the product comparison checked over abstract categories. The public statement is unchanged. The typed complexHomProjection is definitionally the canonical homComplexπ; its typed limit, differential and induced-map API avoids unfolding the underlying sheaf Hom at the comparison interface. A typed left-variable projection formula specializes that API and expresses its final coefficient map by the native homObjMap. The projection has the named complex-bifunctor source and native internal-Hom target. coefficientHomObjComparisonHom is the actual i.hom.app with that same native target, so the comparison equation has matching endpoints without repeatedly converting the concrete sheaf-module structures. The consuming comparison and unit proofs unpack the product specification once and pass ProductHomComplexData directly, so projection laws use the same explicit data without repeated choice. Seven documented public proof APIs permit the unit consumer to use an ordinary proof import instead of importing all private declarations. The actual projection definition requires the public source component import."
  },
  "mathlib_searches": [
   {
@@ -105,7 +104,17 @@
   "statement": "theorem exists_restrictedCoefficientHomComplexFunctor :\n    let MR := SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)\n    let MB := SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)\n    let r := restrictScalars.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)\n    ∃ H : MBᵒᵖ × MR ⥤ MB,\n      ∃ i : H ⋙ r ≅ (r.op.prod (𝟭 _) ⋙ Functor.uncurry.obj (homFunctor.{u, u, u, u} R)),\n        (∀ (M : SheafOfModules.{u}\n            ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))\n          (N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))\n          (U : C)\n          (b : ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B).obj.obj (op U))\n          (h : (H.obj (op M, N)).val.obj (op U)) (W : Over U)\n          (m : M.val.obj (op W.left)),\n          (((i.hom.app (op M, N)).val.app (op U)).hom\n            (@SMul.smul _ _ ((H.obj (op M, N)).val.obj (op U)).isModule.toSMul b h)).app (op W) m =\n            (((i.hom.app (op M, N)).val.app (op U)).hom h).app (op W)\n              (@SMul.smul _ _ (M.val.obj (op W.left)).isModule.toSMul\n                (B.obj.map W.hom.op b) m)) ∧\n        ∃ G : (CochainComplex MB ℤ)ᵒᵖ ⥤ CochainComplex MR ℤ ⥤ CochainComplex MB ℤ,\n          ProductHomComplexSpecification (Functor.curry.obj H) G ∧\n          Nonempty (Functor.uncurry.obj G ⋙ r.mapHomologicalComplex (.up ℤ) ≅\n            (r.mapHomologicalComplex (.up ℤ)).op.prod (𝟭 _) ⋙\n              Functor.uncurry.obj (homComplexFunctor (R := R)))",
   "branch": "sheaf-dag",
   "by": "B4",
-  "date": "2026-10-18"
+  "date": "2026-10-18",
+  "declarations": [
+   "SheafOfModules.exists_restrictedCoefficientHomComplexFunctor",
+   "SheafOfModules.coefficientHomObjComparisonHom",
+   "SheafOfModules.comparisonHomMap",
+   "SheafOfModules.complexHomProjection",
+   "SheafOfModules.complexHomProjection_eq",
+   "SheafOfModules.complexHomProjection_map_left",
+   "SheafOfModules.coefficientHomComplex_comparison",
+   "SheafOfModules.extendProductFromSeparateAdditivity"
+  ]
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -118,14 +127,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B4",
+  "reviewer": "C-fe431",
+  "group": "E6",
   "result": "pass",
-  "landing": "20261018T103529-L-18130",
+  "landing": "20261026T111828-L-1744881",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: re-delivered files against the fcfa9 run (files+fixes): only RingedCompletionUnit/node/change record/report differ and they carry the reviewer's T9-restore fixes; ringedHomUnitEvaluationIso signature delivered vs published (#check identical); UnitPowerCompleteness delivered vs published concurrently; 13 transitive users of the changed names compiled against the delivered set"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

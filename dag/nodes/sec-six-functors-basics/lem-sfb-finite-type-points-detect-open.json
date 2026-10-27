@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-finite-type-points-detect-open",
+ "kind": "statement",
+ "title": "Finite type points meet every nonempty locally closed subset of any scheme",
+ "statement": "Let $V$ be any scheme [def-pc-scheme]. A point $v\\in V$ is called a finite type point if the canonical morphism $\\operatorname{Spec}\\kappa(v)\\to V$ is of finite type [def-weil-residue-field, def-weil-affine-spectrum, def-weil-finite-type-morphism]. Let $Z\\subseteq|V|$ be a nonempty locally closed subset, meaning an intersection of an open subset and a closed subset. Then $Z$ contains a finite type point of $V$. Consequently every open subset $O\\subseteq|V|$ containing every finite type point equals $|V|$. No Jacobson, Noetherian, quasi-compactness, or separatedness hypothesis is imposed on $V$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02J4 (lemma-enough-finite-type-points); finite type point as in Tag 02J1 (definition-finite-type-point)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write $Z=G\\cap C$, where $G\\subseteq V$ is open and $C\\subseteq V$ is closed, and choose $z_0\\in Z$. Apply [lem-weil-pbc-affine-opens-basis] to $z_0\\in G$ to obtain an affine open $W$ of $V$ with $z_0\\in W\\subseteq G$. In the open subscheme $W$, the subset $D=C\\cap W=Z\\cap W$ is closed and nonempty (it contains $z_0$).",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IT (lemma-basis-affine-opens); affine-local version of Tag 02J4, proof"
+   }
+  },
+  {
+   "text": "The affine scheme $W$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. It is Kolmogorov: by [lem-weil-pbc-scheme-sober], every irreducible closed subset has a unique generic point. The closure of a point is irreducible: an open meeting its closure must contain the point, since otherwise its closed complement would contain the closure; hence two such opens meet at the point. If two points had the same closure, both would be generic points of that irreducible closed subset and hence equal; thus distinct points have different closures, equivalently some open set contains exactly one of them. Apply [lem-sc-quasi-compact-kolmogorov-closed-point] to the nonempty closed subset $D$ of $W$. It gives $v\\in D$ with $\\{v\\}$ closed in $W$. In particular $v\\in Z$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-scheme-sober",
+    "lem-sc-quasi-compact-kolmogorov-closed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005E (lemma-quasi-compact-closed-point), applied to a closed subset; Schemes Tag 01IS (lemma-scheme-sober); Algebra Tag 00E8 (lemma-quasi-compact)"
+   }
+  },
+  {
+   "text": "The inclusion $j:W\\to V$ is an open immersion as in [def-weil-open-immersion]. Identify $\\mathcal O_{V,v}$ with $\\mathcal O_{W,v}$ using [def-weil-pbc-module-stalk]: send the germ of $s\\in\\mathcal O_V(A)$ to the germ of $s|_{A\\cap W}$. Conversely, an open neighbourhood of $v$ in $W$ is open in $V$ and has the same sections of the restricted structure sheaf, so send its germ to the same germ in $V$. The stated germ-equality criterion makes these maps well-defined; restriction preserves ring operations, and the two composites fix every germ. This ring isomorphism identifies the unique maximal ideals and hence the residue quotients $\\kappa_V(v)$ and $\\kappa_W(v)$ [def-weil-residue-field]. Composing $i_v:\\operatorname{Spec}\\kappa_W(v)\\to W$ with $j$ gives the canonical residue-field morphism to $V$: its map on each neighbourhood is the germ map followed by the residue quotient, exactly the defining map for $\\operatorname{Spec}\\kappa_V(v)\\to V$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-residue-field",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02J2 (lemma-identify-finite-type-points), identification under open restriction; Schemes Tag 01J9 (lemma-characterize-points)"
+   }
+  },
+  {
+   "text": "Since $\\{v\\}$ is closed in $W$, [lem-trf-closed-point-residue-immersion] makes $i_v$ a closed immersion. Its composite with the open immersion $j$ is an immersion by the factorization definition in [def-weil-closed-immersion]. By clause (2) of [lem-weil-pbc-immersion-base-change-lft], this composite, hence the canonical morphism $\\operatorname{Spec}\\kappa_V(v)\\to V$ from step 3, is locally of finite type.",
+   "uses": [
+    "lem-trf-closed-point-residue-immersion",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-immersion-base-change-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T5 (lemma-immersion-locally-finite-type), second assertion; Tag 02J2 (lemma-identify-finite-type-points), closed-point implication"
+   }
+  },
+  {
+   "text": "The space $\\operatorname{Spec}\\kappa_V(v)$ has a single point [def-weil-affine-spectrum]. For every affine open of $V$, its inverse image under this morphism is either empty or that singleton and is therefore quasi-compact: the empty space has the empty subcover, and an open cover of a singleton has a one-element subcover. Thus the morphism is quasi-compact, and together with step 4 it is of finite type by [def-weil-finite-type-morphism]. This proves that $v\\in Z$ is a finite type point of $V$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TA (lemma-point-finite-type), proof of (1) equivalent to (2); Tag 02J4 (lemma-enough-finite-type-points)"
+   }
+  },
+  {
+   "text": "Let $O\\subseteq|V|$ be open and contain every finite type point. If $O\\ne|V|$, its complement $C=|V|\\setminus O$ is a nonempty closed subset, hence a locally closed subset (intersect it with the open $|V|$). Applying steps 1--5 with $Z=C$ gives a finite type point in $C$, contradicting the hypothesis on $O$. Therefore $O=|V|$. When $V$ is empty the equality holds immediately.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02J4 (lemma-enough-finite-type-points), consequence for complements of opens"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-scheme-sober",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "def-weil-open-immersion",
+  "def-weil-residue-field",
+  "def-weil-pbc-module-stalk",
+  "lem-trf-closed-point-residue-immersion",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02J4 (lemma-enough-finite-type-points), affine-local elaboration using Tags 02J2, 01TA and 01T5; closed point chosen in a closed subset of an affine neighbourhood rather than after constructing a reduced subscheme."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every nonempty locally closed subset of a scheme contains a finite type point meaning the morphism from the spectrum of its residue field to the scheme is of finite type",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [JacobsonSpace ↥X] {x : ↥X},\\n  IsClosed {x} ↔ AlgebraicGeometry.LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"For a Jacobson scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(x)$ is the resid\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"nonempty_inter_closedPoints\", \"module\": \"Mathlib/Topology/JacobsonSpace\", \"type\": \"∀ {X : Type u_1} [inst : TopologicalSpace X] [JacobsonSpace X] {Z : Set X},\\n  Z.Nonempty → IsLocallyClosed Z → (Z ∩ closedPoints X).Nonempty\", \"doc\": \"In a Jacobson space $X$, if $Z$ is a non-empty locally closed subset, then the intersection of $Z$ with the set of closed points of $X$ is non-empty. That is, for any non-empty locally closed set $Z \\\\\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, PrespectralSpace ↥X\", \"doc\": \"Every scheme, when considered as a topological space, is a prespectral space, meaning it satisfies the inductive conditions related to compactness and a basis of compact open sets specified by the pre\"}\n  {\"name\": \"jacobsonSpace_iff_locallyClosed\", \"module\": \"Mathlib/Topology/JacobsonSpace\", \"type\": \"∀ {X : Type u_1} [inst : TopologicalSpace X],\\n  JacobsonSpace X ↔ ∀ (Z : Set X), Z.Nonempty → IsLocallyClosed Z → (Z ∩ closedPoints X).Nonempty\", \"doc\": \"A topological space $X$ is a Jacobson space if and only if for every non-empty locally closed subset $Z \\\\subseteq X$, the intersection of $Z$ with the set of closed points of $X$ is non-empty. In symb\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] [JacobsonSpace ↥Y],\\n  JacobsonSpace ↥X\", \"doc\": \"If $ Y $ is a Jacobson space and $ f: X \\to Y $ is a morphism locally of finite type, then $ X $ is also a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The property of a scheme being locally Artinian, i.e., every point has an open neighborhood whose ring is Artinian.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: nonempty_inter_closedPoints and isClosed_singleton_iff_locallyOfFiniteType require a Jacobson space; the node concerns every scheme and finite type points, which need not be closed"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open subset of a scheme containing every point whose residue field spectrum maps by a finite type morphism is the whole scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X)\\n  {U : X.Opens},\\n  (CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R) ∈ U →\\n    (TopologicalSpace.Opens.map f.base).obj U = ⊤\", \"doc\": \"For any open subset $ U $ of a scheme $ X $, if the closed point of a local ring $ R $ is mapped into $ U $ by a morphism $ f $, then the preimage of $ U $ under $ f $ is the entire space $ X $, i.e.,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpens\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"(X : AlgebraicGeometry.Scheme) → Set X.Opens\", \"doc\": \"For a scheme $ X $, the set of affine open subsets of $ X $, i.e., open subsets $ U $ for which the restricted scheme structure is affine.\"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [JacobsonSpace ↥X] {x : ↥X},\\n  IsClosed {x} ↔ AlgebraicGeometry.LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"For a Jacobson scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(x)$ is the resid\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.Opens → Prop\", \"doc\": \"A predicate indicating that an open subset $ U $ of a scheme $ X $ is affine, meaning the restricted scheme structure on $ U $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.exists_toScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} {P : ↥↑U → Prop}, (∃ x, P x) ↔ ∃ x, ∃ (hx : x ∈ U), P ⟨x, hx⟩\", \"doc\": \"For any open subset $ U $ of a scheme $ X $ and any property $ P $ on the restricted scheme $ U $, there exists an element $ (x, \\\\text{hx}) $ in $ U $ satisfying $ P $ if and only if there exists an e\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.range_fromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X),\\n  Set.range ⇑(CategoryTheory.ConcreteCategory.hom (X.fromSpecResidueField x).base) = {x}\", \"doc\": \"For a scheme $ X $ and a point $ x \\\\in X $, the image of the canonical morphism $ \\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X $ from the spectrum of the residue field $ \\\\kappa(x) $ at $ x $ is the singleton \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: nonempty_inter_closedPoints and isClosed_singleton_iff_locallyOfFiniteType require a Jacobson space; the node concerns every scheme and finite type points, which need not be closed"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"FiniteType\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism of schemes `f : X ⟶ Y` is locally of finite type if for each affine `U ⊆ Y` and\\n`V ⊆ f ⁻¹' U`, The induced map `Γ(Y, U) ⟶ Γ(X, V)` is of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" : AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFiniteType fun {R S} [CommRing R] [CommRing S] => RingHom.FiniteType\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.CategoryStruct.comp f g)] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.LocallyOfFiniteType f] [hg : AlgebraicGeometry.LocallyOfFiniteType g] : AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] [JacobsonSpace ↥Y] : JacobsonSpace ↥X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType g] : AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType f] : AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.LocallyOfFiniteType f] : AlgebraicGeometry.LocallyOfFiniteType (f ∣_ V)\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: nonempty_inter_closedPoints and isClosed_singleton_iff_locallyOfFiniteType require a Jacobson space; the node concerns every scheme and finite type points, which need not be closed"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTypePoint|finite_type_point|[Ff]inite[Tt]ype[Pp]oint|enough_finite_type",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: nonempty_inter_closedPoints and isClosed_singleton_iff_locallyOfFiniteType require a Jacobson space; the node concerns every scheme and finite type points, which need not be closed"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite type points of a scheme meet every nonempty locally closed subset and an open containing all finite type points is the whole scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"jacobsonSpace_iff_locallyClosed\", \"module\": \"Mathlib.Topology.JacobsonSpace\", \"type\": \": JacobsonSpace X ↔ ∀ Z, Z.Nonempty → IsLocallyClosed Z → (Z ∩ closedPoints X).Nonempty\", \"doc\": \"A topological space $X$ is a Jacobson space if and only if for every non-empty locally closed subset $Z \\\\subseteq X$, the intersection of $Z$ with the set of closed points of $X$ is non-empty. In symb\"}\n  {\"name\": \"nonempty_inter_closedPoints\", \"module\": \"Mathlib.Topology.JacobsonSpace\", \"type\": \"[JacobsonSpace X] {Z : Set X} (hZ : Z.Nonempty) (hZ' : IsLocallyClosed Z) : (Z ∩ closedPoints X).Nonempty\", \"doc\": \"In a Jacobson space $X$, if $Z$ is a non-empty locally closed subset, then the intersection of $Z$ with the set of closed points of $X$ is non-empty. That is, for any non-empty locally closed set $Z \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isBasis_affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) : Opens.IsBasis X.affineOpens\", \"doc\": \"For any scheme $X$, the collection of affine open subsets of $X$ forms a basis for the topology on $X$. This means: (1) Every point of $X$ is contained in at least one affine open subset; (2) The inte\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [JacobsonSpace Y] [LocallyOfFiniteType f] : closedPoints X ⊆ f ⁻¹' closedPoints Y\", \"doc\": \"For schemes $X$ and $Y$, if $Y$ is a Jacobson space and the morphism $f: X \\to Y$ is locally of finite type, then the set of closed points of $X$ is contained in the preimage under $f$ of the set of cl\"}\n  {\"name\": \"IsLocallyClosed\", \"module\": \"Mathlib.Topology.Defs.Basic\", \"type\": \"(s : Set X) : Prop\", \"doc\": \"A set $ s $ in a topological space $ X $ is locally closed if there exist an open set $ U $ and a closed set $ Z $ such that $ s = U \\\\cap Z $.\"}\n  {\"name\": \"closedPoints\", \"module\": \"Mathlib.Topology.JacobsonSpace\", \"type\": \": Set X\", \"doc\": \"The set of all points $ x $ in a topological space $ X $ for which the singleton set $ \\\\{x\\\\} $ is closed.\"}\n  {\"name\": \"IsLocalRing.closedPoint_mem_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(U : TopologicalSpace.Opens <| PrimeSpectrum R) : closedPoint R ∈ U ↔ U = ⊤\", \"doc\": \"For a local ring $ R $, the closed point of $ R $ is contained in an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ if and only if $ U $ is the entire space $ \\\\operatorname{Spec}(R\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: nonempty_inter_closedPoints and isClosed_singleton_iff_locallyOfFiniteType require a Jacobson space; the node concerns every scheme and finite type points, which need not be closed"
+  },
+  {
+   "tool": "grep",
+   "query": "fromSpecResidueField|[Ll]ocally[Cc]losed.*singleton|singleton.*[Ll]ocally[Cc]losed",
+   "results": "msearch: 25 hits; Mathlib/AlgebraicGeometry/Fiber.lean; Mathlib/AlgebraicGeometry/Fiber.lean; Mathlib/AlgebraicGeometry/Fiber.lean; Mathlib/AlgebraicGeometry/Fiber.lean; Mathlib/AlgebraicGeometry/Fiber.lean; Mathlib/AlgebraicGeometry/Geometrically/Basic.lean; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: nonempty_inter_closedPoints and isClosed_singleton_iff_locallyOfFiniteType require a Jacobson space; the node concerns every scheme and finite type points, which need not be closed"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any scheme every nonempty locally closed subset has a point x such that Spec residueField x to the scheme is locally of finite type",
+   "results": "msearch: 8 hits; AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType; AlgebraicGeometry.Scheme.instOverSpecResidueField; AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField; AlgebraicGeometry.Scheme.fromSpecResidueField; AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType; AlgebraicGeometry.Scheme.instFieldCarrierResidueField; AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField; AlgebraicGeometry.Scheme.Spec_map_residue_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: nonempty_inter_closedPoints and isClosed_singleton_iff_locallyOfFiniteType require a Jacobson space; the node concerns every scheme and finite type points, which need not be closed"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nonempty locally closed subset of a scheme contains a point whose residue field spectrum morphism is of finite type",
+   "results": "Logged hits: AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.Scheme.instFieldCarrierResidueField, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion, AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField, AlgebraicGeometry.Scheme.Spec_map_residue_apply, AlgebraicGeometry.finite_appTop_of_universallyClosed",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field and affine-cover inputs do not state the conclusion; the closed-point density and finite-type equivalence hits require JacobsonSpace, which is absent here"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTypePoint|finite_type_point|enough_finite_type|finiteType.*[Pp]oint",
+   "results": "Logged hits: Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field and affine-cover inputs do not state the conclusion; the closed-point density and finite-type equivalence hits require JacobsonSpace, which is absent here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every nonempty locally closed subset of an arbitrary scheme contains a finite type point",
+   "results": "Logged hits: jacobsonSpace_iff_locallyClosed, nonempty_inter_closedPoints, closedPoints, IsLocallyClosed, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, genericPoints, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field and affine-cover inputs do not state the conclusion; the closed-point density and finite-type equivalence hits require JacobsonSpace, which is absent here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"fromSpecResidueField\"",
+   "results": "Logged hits: AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.fromSpecResidueField, AlgebraicGeometry.Scheme.residueFieldCongr_fromSpecResidueField, AlgebraicGeometry.Scheme.residueFieldCongr_fromSpecResidueField_assoc, AlgebraicGeometry.Scheme.fromSpecResidueField_apply, AlgebraicGeometry.Scheme.range_fromSpecResidueField, AlgebraicGeometry.Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField, AlgebraicGeometry.Scheme.descResidueField_fromSpecResidueField",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field and affine-cover inputs do not state the conclusion; the closed-point density and finite-type equivalence hits require JacobsonSpace, which is absent here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open of an arbitrary scheme containing all finite type points equals the whole scheme",
+   "results": "Logged hits: AlgebraicGeometry.iSup_affineOpens_eq_top, AlgebraicGeometry.Scheme.instInhabitedOpenCover, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.IsAffineOpen, AlgebraicGeometry.isAffineOpen_top, AlgebraicGeometry.Scheme.affineOpens, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field and affine-cover inputs do not state the conclusion; the closed-point density and finite-type equivalence hits require JacobsonSpace, which is absent here"
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed_singleton_iff_locallyOfFiniteType|isClosed_singleton_iff_isClosedImmersion|nonempty_inter_closedPoints",
+   "results": "Logged hits: Mathlib/Topology/JacobsonSpace.lean, Mathlib/Topology/JacobsonSpace.lean, Mathlib/Topology/JacobsonSpace.lean, Mathlib/Topology/JacobsonSpace.lean, Mathlib/Topology/JacobsonSpace.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: residue-field and affine-cover inputs do not state the conclusion; the closed-point density and finite-type equivalence hits require JacobsonSpace, which is absent here"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-representable-diagonal-criterion",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: last paragraph of the proof of Tag 07Y4: an open image containing every finite type point is the whole test scheme.",
+   "via": [
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-type-points-detect-open",
+  "worker": "stage1",
+  "summary": "Q77 repair of the return naming 18dc374ad96: compared the retained returned split with the current live unsplit item, preserving its statement and all inherited metadata. Re-read every current statement and proof dependency, checked all twelve verbatim step/node quotes, and re-read Stacks Tags 02J1, 02J2, 02J4, 01TA and 01T5 and the exact Mathlib closed-residue-point criterion. Kept the six-step affine-local proof; expanded step 3 into explicit mutually inverse maps on germs so the open-restriction identification is directly checkable. Retained the actual logged searches for the unchanged statement. No new nodes, Mathlib leaves or project attachments. Initial current-base dry run passed at 9a8bf76ec62; final validation is run after this repair.",
+  "blueprint": "Supports the inherited place: final paragraph of Tag 07Y4 used for representability of the diagonal in the alteration/plurinodal prerequisites of det-thm-sf-ctf-stability-direct-images proof (3). The inherited ancestor tool returns None; the existing blueprint.from.node and via chain are preserved. Whole-blueprint finite type point search found no equivalent imported node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-9cf226eb6",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-9cf226eb6 (reviewer sub-agent of L); spot-checked: Fourth delivery of a split with zero new nodes. The three earlier heads (b1b9, 5e51, 18dc) were each PASSed. Each landing was refused with 'not in the live DAG', which is a promotion problem, not a content fault. Compared with 18dc, only step 3 (now written out as explicit mutually inverse germ maps O_{V,v}≅O_{W,v}, well defined by the germ-equality criterion of def-weil-pbc-module-stalk) and the split_report summary changed. Statement, stmt_deps, the 12 proof_deps, source, unit and blueprint are unchanged, and there is no SGA citation. Source check: Stacks morphisms.tex l.2903 (02J1) and l.2963 (02J4) match the statement for an arbitrary scheme. The open-subset clause is 02J4 applied to the closed complement, so the target is not weakened. Steps: (1) the affine-opens basis gives an affine W⊆G, and D=C∩W is closed and nonempty; (2) W is quasi-compact (affine-qcqs) and T0 (sober plus irreducibility of point closures), and the compact-Kolmogorov lemma gives v∈D closed in W; (3) the residue fields of V and W at v agree and j∘i_v is the canonical map; (4) the closed-point residue immersion with X=W, then the immersion definition, then clause (2) of immersion-base-change-lft (01T5), give local finite type; (5) the one-point source gives quasi-compactness, hence finite type (01TA); (6) contradiction on the complement. All cited nodes have status mathlib and none is merged; no tool_uses. Edge cases checked: empty V, Spec of a field, the DVR generic point, non-Jacobson V, non-quasi-separated V. Maintainer note: this item needs promotion to the live DAG, not another re-delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypePointsDetectOpen",
+  "declaration": "AlgebraicGeometry.Scheme.finiteTypePoints_meet_locallyClosed_and_detect_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypePointsDetectOpen.lean",
+  "statement": "theorem finiteTypePoints_meet_locallyClosed_and_detect_open (V : Scheme.{u}) : (∀ (Z : Set V), IsLocallyClosed Z → Z.Nonempty → ∃ v ∈ Z, LocallyOfFiniteType (V.fromSpecResidueField v) ∧ QuasiCompact (V.fromSpecResidueField v)) ∧ (∀ (O : Set V), IsOpen O → (∀ v : V, (LocallyOfFiniteType (V.fromSpecResidueField v) ∧ QuasiCompact (V.fromSpecResidueField v)) → v ∈ O) → O = Set.univ)",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b91a4be8f",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Single theorem finiteTypePoints_meet_locallyClosed_and_detect_open (V : Scheme.{u}), proof sorry. Matches Stacks 02J1/02J4 and the node clause by clause: finite type point = LocallyOfFiniteType ∧ QuasiCompact of the canonical V.fromSpecResidueField v (recorded def-weil-finite-type-morphism interface); IsLocallyClosed Z → Z.Nonempty → ∃ v ∈ Z, ft v; open O containing all ft points → O = Set.univ. No extra hypotheses on V and no universe restriction. Empty scheme and DVR generic point checked. lean.statement matches the file signature exactly. Docstrings carry the source place, blueprint id and all 6 proof steps. Mathlib has only the JacobsonSpace criterion (Finite.lean:222), not this statement; no live declaration or name clash. Report has Worker report and a self-reread Second reading by Q33. Worker scompile clean; nothing recompiled. No findings."
+ }
+}

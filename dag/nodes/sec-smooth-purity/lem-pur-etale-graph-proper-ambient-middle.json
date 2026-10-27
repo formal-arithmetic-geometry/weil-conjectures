@@ -1,0 +1,149 @@
+{
+ "id": "lem-pur-etale-graph-proper-ambient-middle",
+ "kind": "statement",
+ "title": "Intersection word under proper ambient change",
+ "statement": "Fix schemes $X,Y$, $f:X\\to Y$, a compactification $c$, two presentations $s,t$ [def-pur-etale-graph-presentation-maps], and a finite commutative ring $A$. Suppose $pr:P_t\\to P_s$ is proper, $q:U_t\\to U_s$ makes the open square Cartesian, $a_tq=a_s$, and $pr p_s=p_t$. Assume the four graph lifts $s_{1,s},s_{2,s},s_{1,t},s_{2,t}$ are proper, as supplied by [lem-sf-etale-locally-closed-graph-model]. Let $M_i$ denote that model's middle comparison, whiskered by $R_{p_{1,i}p_i}$ with its two associators, and let $D_1,D_2$ be the two transports of [def-pur-etale-graph-proper-ambient-data]. Then $M_sD_2=D_1M_t$ as natural transformations. This is only a comparison of intersection words, with neither first nor second side map.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal); applied to the explicit product-graph formula."
+ },
+ "stmt_deps": [
+  "def-pur-etale-graph-presentation-maps",
+  "def-pur-etale-graph-proper-ambient-data",
+  "lem-sf-etale-locally-closed-graph-model"
+ ],
+ "proof": [
+  {
+   "text": "Construct the proper ambient map on the two graph neighborhoods as in the data node. Construct the map of their intersections by the pullback universal property. Pullback cancellation proves both projection squares Cartesian, and the two graph equations prove compatibility of the common graph lifts.",
+   "uses": [
+    "def-pur-etale-graph-proper-ambient-data",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the exact unbounded pullback/adjoint formalism and its canonical proper and open compositors. Apply horizontal exchange pasting in that formalism to an identity-top graph triangle followed by a Cartesian proper square. Its identity normalization gives the graph-triangle compatibility equation, with the proper compositor on each graph lift.",
+   "uses": [
+    "lem-r9-exact-exchange-pasting",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste each intersection projection with its neighborhood inclusion using vertical exchange pasting in the same formalism. Naturality moves the new graph triangle through the neighborhood exchange, while naturality of the open compositor moves the graph direct-image compositor through the common open. This proves naturality of a single forward intersection leg. Whisker by the exterior proper direct image and use naturality of its compositor to obtain ambientLegOver_natural. All squares used here are Cartesian, so their exchanges are precisely the specified Cartesian mates, without the general non-Cartesian comparison family.",
+   "uses": [
+    "lem-r9-exact-exchange-pasting",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the first-projection composite open as the common intersection support. The pullback equation identifies the second-projection composite with it. Expanding the specified graph middle word gives the inverse first forward leg followed by the second forward leg. Apply the preceding leg equation to both projections with the same intersection transport, and cancel the first invertible leg. This is exactly M_s D2 = D1 M_t with the displayed associators.",
+   "uses": [
+    "lem-sf-etale-locally-closed-graph-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-graph-proper-ambient-data",
+  "def-pc-fibre-product",
+  "lem-r9-exact-exchange-pasting",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sf-etale-locally-closed-graph-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C--0F7D, Cartesian proper-projection grid. D4 formalization via the proved CompactSupportFormalism.exchange_paste_horiz/vert mate laws, exact derived normalization, and cancellation of the common intersection transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cartesian proper open exchange vertical horizontal pasting product graph comparison",
+   "results": "Eight hits, all concerning topology of products or set graphs; no derived exchange pasting theorem.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper ambient change of product graph comparison extension by zero direct image coherence",
+   "results": "Eight hits on set graphs, Function.extend, and graph products, not derived-category comparisons.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyClosedGraph.*|LowerStarComp.*assoc",
+   "results": "msearch found no Mathlib hits. Direct rg in the two project roots found the explicit graph model and related parent theorems; the parent imports this item, so using it would be circular. Existing graph-neighborhood words also import this item transitively.",
+   "date": "2026-10-26",
+   "verdict": "No independent theorem for the three component equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphComparisonProperAmbient",
+  "date": "2026-10-26",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The side and intersection comparisons in the proper ambient change, before shrinking; steps 5--7 of the pairwise product-graph normalization.",
+   "via": [
+    "lem-pur-etale-graph-comparison-proper-ambient",
+    "lem-pur-etale-pairwise-product-graph-normalization",
+    "lem-pur-etale-graph-comparison-interchange",
+    "lem-route-exists-right-derived-lower-shriek-comp-iso",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphProperAmbientMiddle",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphProperAmbientMiddle.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleGraphProperAmbientMiddle",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleGraphProperAmbientMiddle"
+  ],
+  "statement": "theorem etaleGraphProperAmbientMiddle\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (s t : EtaleGraphPresentation f) (pr : t.P ⟶ s.P) [IsProper pr]\n    (q : t.U ⟶ s.U) (sq : IsPullback q t.e s.e pr)\n    (hz : t.a ≫ q = s.a) (hp : pr ≫ s.p = t.p)\n    [IsProper (locallyClosedGraphS₁ s.a s.e s.p c.i c.g\n      ((Category.assoc _ _ _).trans (s.fac.trans c.comm)))]\n    [IsProper (locallyClosedGraphS₂ s.a s.e s.p c.i c.g\n      ((Category.assoc _ _ _).trans (s.fac.trans c.comm)))]\n    [IsProper (locallyClosedGraphS₁ t.a t.e t.p c.i c.g\n      ((Category.assoc _ _ _).trans (t.fac.trans c.comm)))]\n    [IsProper (locallyClosedGraphS₂ t.a t.e t.p c.i c.g\n      ((Category.assoc _ _ _).trans (t.fac.trans c.comm)))] :\n    let M_s := (Functor.associator _ _ _).symm ≪≫\n      Functor.isoWhiskerRight\n        (locallyClosedGraphMiddle s.a s.e s.p c.i c.g\n      ((Category.assoc _ _ _).trans (s.fac.trans c.comm)) A)\n        R((pullback.fst s.p c.g ≫ s.p)_*[ModuleCat.{u + 1} A]) ≪≫\n      Functor.associator _ _ _\n    let M_t := (Functor.associator _ _ _).symm ≪≫\n      Functor.isoWhiskerRight\n        (locallyClosedGraphMiddle t.a t.e t.p c.i c.g\n      ((Category.assoc _ _ _).trans (t.fac.trans c.comm)) A)\n        R((pullback.fst t.p c.g ≫ t.p)_*[ModuleCat.{u + 1} A]) ≪≫\n      Functor.associator _ _ _\n    M_s.hom ≫ (s.properAmbientSecondTransport c t pr q sq hz hp A).hom =\n      (s.properAmbientFirstTransport c t pr q sq hz hp A).hom ≫ M_t.hom",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T023027-L-514396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T065426-L-2951956",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

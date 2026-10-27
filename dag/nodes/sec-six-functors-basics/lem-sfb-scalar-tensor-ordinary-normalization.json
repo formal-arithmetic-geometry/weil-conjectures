@@ -1,0 +1,124 @@
+{
+ "id": "lem-sfb-scalar-tensor-ordinary-normalization",
+ "kind": "statement",
+ "title": "Normalized ordinary scalar tensor comparison",
+ "statement": "For a scheme W and a map of commutative ring sheaves φ : A → B on its small pro-etale site [def-weil-pbc-proetale-site], let E be the specified scalar extension [def-weil-pbc-four-corners] and r the specified restriction [def-pc-sheaf-restrict-scalars]. There is a unique natural isomorphism E ⋙ r ≅ (− tensor_A r(B)) carrying the sheafification of b tensor x to x tensor b. The coefficient object and its degree-zero complex are the literal restriction of the B-module unit and its single complex. The resulting ordinaryComplexIso is the degreewise scalar comparison followed by the degree-zero second-factor tensor identification. All definitions and the uniqueness statement are unchanged from the ordinary part of lem-sfb-derived-scalar-tensor-identification.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, sheaf scalar extension by sheafification of the balanced tensor; sites-cohomology.tex Tag 06YY for the degreewise comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-four-corners",
+  "def-sfb-proetale-tensor-model",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Construct the tensor-to-restricted-extension component by braiding the two factors, using the independently normalized extension/tensor comparison, and transporting along the specified object equality for scalar extension. On sectionwise pure tensors its map is precisely the sheafification of b tensor x. Naturality of the sheafification unit supplies the scalar-extension map formula. The tensor-generator extensionality principle reduces naturality and uniqueness to this pure-tensor formula. Invert the constructed natural isomorphism to obtain the required orientation. Extend it degreewise to cochain complexes and compose with the canonical single-factor tensor isomorphism.",
+   "uses": [
+    "lem-cbc-extension-tensor-comparison-independent",
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, sheaf scalar extension by sheafification of the balanced tensor; sites-cohomology.tex Tag 06YY for the degreewise comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-extension-tensor-comparison-independent",
+  "lem-pur-module-tensor-generator-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, sheaf scalar extension by sheafification of the balanced tensor; sites-cohomology.tex Tag 06YY for the degreewise comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars for sheaves of modules is naturally isomorphic to tensor with the new coefficient ring, normalized on pure tensors",
+   "results": "Eight hits: SheafOfModules.mapFree and map_ιFree_mapFree_hom; ordinary ModuleCat extension/restriction adjunction formulas; PresheafOfModules.Monoidal.tensorObj. None gives the prescribed independent-universe sheafification normalization.",
+   "date": "2026-10-27",
+   "verdict": "Retain the already proved ordinary comparison; extraction changes only its module."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.changeOfRings",
+   "results": "Unknown identifier; zero hits.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project comparison and pure-tensor extensionality."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_extensionTensorComparison|ordinaryTensorIso_existsUnique",
+   "results": "Zero Mathlib hits. Project matches are the extracted theorem and its original independent tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib duplicate of this normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedScalarMateData",
+  "date": "2026-10-27",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-derived-scalar-tensor-identification",
+   "place": "The already proved ordinary comparison in proof step 1.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedScalarTensorOrdinary",
+  "file": "lean/Sheaf/Paper/DerivedScalarTensorOrdinary.lean",
+  "declaration": "AlgebraicGeometry.Scheme.DerivedScalarMate.ordinaryTensorIso_existsUnique",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.restriction",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.coefficient",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.coefficientComplex",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.ordinaryTensor",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.pureSection",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.IsOrdinaryTensor",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.ordinaryTensorIso_existsUnique",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.ordinaryTensorIso",
+   "AlgebraicGeometry.Scheme.DerivedScalarMate.ordinaryComplexIso"
+  ],
+  "statement": "theorem ordinaryTensorIso_existsUnique\n    {W : Scheme.{u}}\n    {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}\n    (φ : A ⟶ B) :\n    ∃! e : Scheme.proEtaleRingExtension φ ⋙\n        restriction φ ≅ ordinaryTensor φ,\n      IsOrdinaryTensor φ e",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cd860",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261027T065848-L-2482355",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cd860",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261027T065848-L-2482355",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules vs clone f87ce49 (verbatim move of 9 ordinary decls, only the sorry replaced) and the 4 new/changed nodes vs the Lean; 4 direct importers compiled OK in sandbox with delivered modules; axioms clean"
+ }
+}

@@ -1,0 +1,235 @@
+{
+ "id": "lem-per-tame-trait-invariant-kummer-presentation",
+ "kind": "statement",
+ "title": "Tame trait invariant ring and Kummer polynomial presentation",
+ "statement": "Let R and B be complete strictly henselian discrete valuation domains [def-sc-discrete-valuation-ring], with characteristic-zero fraction fields and positive residue characteristics. Let R -> B be an injective finite algebra map [def-weil-finite-integral-morphism]. Let a finite group H act on B by R-algebra automorphisms, and suppose |H| is a unit of R. Put A = B^H, the actual fixed subalgebra. Then A is a discrete valuation ring and strictly henselian. There exist n>0 dividing |H|, a uniformizer pi of A and a uniformizer tau of B such that [Frac B:Frac A]=n for the canonical fraction-field inclusion, n is a unit of A, tau^n=pi, and evaluation at tau induces an A-algebra isomorphism A[X]/(X^n-pi) -> B [def-weil-polynomial-ring]. No faithful-action or perfect-residue-field hypothesis is imposed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO XVI 3.7, p.254, tame extension S prime -> T; algebraic steps 1-7 of lem-per-tame-trait-quotient-log-etale; Stacks Tags 09I3, 0325, 09EB, 09ER"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=B^H$, $K=\\operatorname{Frac}R$, and $L=\\operatorname{Frac}B$. The map $R\\to B$ is injective by hypothesis. The invariant subring $A$ is an $R$-submodule of the finite $R$-module $B$, so [lem-weil-pbc-noetherian-submodule-finite] makes $A$ finite over $R$. Any finite set of $R$-module generators of $B$ also generates it over $A$. Thus both ring inclusions are finite. By [lem-weil-pbc-finite-algebra-is-integral] and [lem-weil-pbc-integral-maximal-contracts-maximal], the contraction of $\\mathfrak m_B$ to $R$ is $\\mathfrak m_R$. In particular, a uniformizer of $R$ has strictly positive valuation in $B$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-maximal-contracts-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IK (lemma-Noetherian-basic), 00GK (lemma-finite-is-integral), 00OI (lemma-going-up-maximal-on-top)."
+   }
+  },
+  {
+   "text": "Extend the action to $L$ by $h(b/c)=h(b)/h(c)$, and let $G$ be its image in $\\operatorname{Aut}_K(L)$. Then $G$ is finite, acts faithfully, and has the same fixed elements as $H$. Put $F=L^G$. The invariant-fraction-field assertion [lem-sfb-finite-invariant-fraction-field-lifting], applied to $A\\subset B$, identifies $F$ with $\\operatorname{Frac}A$. More explicitly, for fixed $x=b/c$, the product $d=\\prod_{h\\in H}h(c)$ is a nonzero element of $A$ and $xd\\in B\\cap F=A$. Apply [lem-wf-finite-field-action-fixed-degree] to the faithful group $G$: $L/F$ is finite Galois and $n=[L:F]=|G|$. The fibres of $H\\twoheadrightarrow G$ are the cosets of its kernel, so $n\\mid|H|$. Hence $n$ is prime to the positive residue characteristic $p$ and is a unit in $R,A,B$.",
+   "uses": [
+    "lem-sfb-finite-invariant-fraction-field-lifting",
+    "lem-wf-finite-field-action-fixed-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I3 (lemma-galois-over-fixed-field); invariant denominator calculation supplied independently."
+   }
+  },
+  {
+   "text": "Use the DVR valuation $v:L^\\times\\to\\mathbf Z$ of $B$ [def-sc-discrete-valuation-ring]. We have $A=B\\cap F$. The subgroup $v(F^\\times)$ contains a positive integer by step 1; let $e$ be its least positive integer. Integer division shows this subgroup is $e\\mathbf Z$. Choose $\\pi\\in F$ with $v(\\pi)=e$; the nonnegative-valuation criterion puts $\\pi$ in $A$. In any nonzero ideal of $A$, choose $a$ of least valuation. For every other nonzero $b$ in the ideal, $v(b/a)\\geq0$, so $b/a\\in B\\cap F=A$. Thus every ideal is principal. An element of $A$ is a unit exactly when its valuation is zero, and its nonunits form $(\\pi)$. Therefore $A$ is a DVR. Also $B$ is the integral closure of $A$ in $L$: its elements are integral by step 1; if $x\\in L$ integral over $A$ had negative valuation, its monic equation would have its leading term of uniquely smallest valuation, contradicting the valuation sum rule. Thus $x\\in B$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-sc-dvr-nonnegative-valuation-in-ring",
+    "lem-sc-dvr-valuation-arithmetic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr) and Definition 00IE (definition-value-group); restriction of the valuation and the ideal calculation are written out here."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-over-complete-local-product] to the finite $R$-algebra $A$. It is a domain, so it is a complete Noetherian local ring for its maximal ideal, which step 3 identified as $(\\pi)$. The complete-pair theorem [lem-weil-pbc-complete-pair-henselian] makes $(A,(\\pi))$ henselian. By the equivalence in [lem-weil-pbc-henselian-local-root-lifting], this includes the simple-root lifting formulation used in the item. The fraction field of $A$ has characteristic zero since it lies between $K$ and $L$.",
+   "uses": [
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-weil-pbc-complete-pair-henselian",
+    "lem-weil-pbc-henselian-local-root-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ALJ (lemma-complete-henselian); algebra.tex Tags 0325 (lemma-quotient-complete-local) and 04GG (lemma-characterize-henselian)."
+   }
+  },
+  {
+   "text": "Put $k=R/\\mathfrak m_R$ and $k'=B/\\mathfrak m_B$. The local map of step 1 embeds $k$ into $k'$. A finite set of $R$-generators of $B$ maps to $k$-generators of $k'$, so $k'/k$ is finite. Since $k$ is separably closed, [lem-kun-sep-closed-finite-extension-purely-inseparable] makes this extension purely inseparable. Consequently every $h\\in H$ acts trivially on $k'$: for each $c\\in k'$ some $c^{p^r}$ lies in $k$, and Frobenius is injective in a field. For any lift $b\\in B$ of $c$, the element $|H|^{-1}\\sum_{h\\in H}h(b)$ belongs to $A$ and still reduces to $c$. Thus $A/(A\\cap\\mathfrak m_B)\\to k'$ is surjective and injective. By step 3 its kernel ideal is $\\mathfrak m_A$. Hence $k_A=k'$, which is separably closed by the hypothesis on $B$. Together with step 4 this proves that $A$ is complete and strictly henselian. ",
+   "uses": [
+    "lem-kun-sep-closed-finite-extension-purely-inseparable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-sep-closed-finite-extension-purely-inseparable.md",
+    "place": "Purely inseparable residue extension; Reynolds averaging argument supplied independently."
+   }
+  },
+  {
+   "text": "Apply [lem-exc-dvr-galois-degree-data] to $A\\subset F\\subset L$. Its integral closure is precisely $B$ by step 3, and $B$ is local. Thus the number of maximal ideals of the normalization is one. Step 5 gives residue degree one. The formula $[L:F]=g e f$ therefore reads $n=e$, so $\\pi=u t^n$ for a uniformizer $t$ of $B$ and a unit $u\\in B^\\times$. This also verifies directly that the extension has ramification index prime to $p$, including when the action has a kernel.",
+   "uses": [
+    "lem-exc-dvr-galois-degree-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 09E8 (remark-finite-separable-extension) and 09EB (lemma-galois-conclusion)."
+   }
+  },
+  {
+   "text": "The residue polynomial $X^n-\\bar u$ has a root $\\bar w\\in k'$ because $k'$ is separably closed and $n$ is prime to $p$. Its derivative $n\\bar w^{n-1}$ is nonzero. The given simple-root lifting property of $B$ supplies a unit $w\\in B$ with $w^n=u$. Then $\\tau=wt$ is a uniformizer and $\\tau^n=\\pi$. The hypotheses of [lem-sfb-totally-ramified-uniformizer-presentation] hold: $A$ is complete, $L/F$ is finite separable of degree $n$, $B$ is its local DVR integral closure, the residue fields agree, and $\\mathfrak m_AB=\\mathfrak m_B^n$. It follows that $B=A[\\tau]$ and that the minimal polynomial of $\\tau$ has degree $n$. Since the monic polynomial $X^n-\\pi$ annihilates $\\tau$ and has that degree, it is the minimal polynomial. We obtain the specified $A$-algebra isomorphism $A[X]/(X^n-\\pi)\\simeq B$, $X\\mapsto\\tau$.",
+   "uses": [
+    "lem-sfb-totally-ramified-uniformizer-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ER (lemma-weakly-unramified-goes-up-along-totally-ramified), first paragraph of its proof; simple-root lifting is an explicit hypothesis on B."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "lem-sfb-finite-invariant-fraction-field-lifting",
+  "lem-wf-finite-field-action-fixed-degree",
+  "def-sc-discrete-valuation-ring",
+  "lem-sc-dvr-nonnegative-valuation-in-ring",
+  "lem-sc-dvr-valuation-arithmetic",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-kun-sep-closed-finite-extension-purely-inseparable",
+  "lem-exc-dvr-galois-degree-data",
+  "lem-sfb-totally-ramified-uniformizer-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO XVI 3.7, p.254, tame extension S prime -> T; algebraic steps 1-7 of lem-per-tame-trait-quotient-log-etale; Stacks Tags 09I3, 0325, 09EB, 09ER; explicit expansion of the algebra and rank-one chart calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A tame finite group acting on a complete strictly henselian discrete valuation ring has invariant DVR and uniformizers pi and tau satisfying tau power n equals pi with a Kummer polynomial quotient presentation",
+   "results": "Valuation.exists_pow_Uniformizer; Valuation.IsUniformizer; Valuation.pow_Uniformizer_is_pow_generator; Irreducible.maximalIdeal_pow_eq_setOf_le_v_coe_pow. These describe individual valuations, not invariant DVRs or the tame polynomial presentation.",
+   "date": "2026-10-26",
+   "verdict": "no match for this statement; component results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite group invariants of a discrete valuation ring form a discrete valuation ring and the invariant fraction field extension has degree dividing the group order",
+   "results": "FixedPoints.finrank_le_card and FixedPoints.rank_le_card; ValuationSubring.decompositionSubgroupMulSemiringAction and inertiaSubgroup. No invariant-DVR/Kummer presentation theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match for this statement; component results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "FixedPoints.subalgebra",
+   "results": "FixedPoints.subalgebra; FixedPoints.mem_subalgebra; invariant and GaloisGroup instances. No normal-form theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match for this statement; component results only"
+  },
+  {
+   "tool": "grep",
+   "query": "isDiscreteValuationRing|isLocalRing|finrank|Finite, RingTheory/Invariant",
+   "results": "Algebra.IsInvariant.isIntegral; Algebra.IsInvariant.finite_of_isInvariant; IsFractionRing.isInvariant. Source also searched in both project roots: StrictlyHenselianInvariants proves henselianity under a separate inertia hypothesis, not this complete Kummer presentation.",
+   "date": "2026-10-26",
+   "verdict": "no match for this statement; component results only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TameTraitQuotientLogEtale",
+  "date": "2026-10-26",
+  "group": "F6"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "ILO XVI 3.7, p.254, tame extension S prime -> T; algebraic steps 1-7 of lem-per-tame-trait-quotient-log-etale; Stacks Tags 09I3, 0325, 09EB, 09ER",
+   "via": [
+    "lem-per-tame-trait-quotient-log-etale",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TameTraitInvariantKummerPresentation",
+  "file": "lean/Sheaf/RingTheory/TameTraitInvariantKummerPresentation.lean",
+  "declaration": "AlgebraicGeometry.tame_trait_invariant_kummer_presentation",
+  "statement": "theorem tame_trait_invariant_kummer_presentation\n    (R B : Type u) [CommRing R] [CommRing B] [IsDomain R] [IsDomain B]\n    [IsDiscreteValuationRing R] [IsDiscreteValuationRing B]\n    [IsStrictlyHenselianLocalRing R] [IsStrictlyHenselianLocalRing B]\n    [IsAdicComplete (IsLocalRing.maximalIdeal R) R]\n    [IsAdicComplete (IsLocalRing.maximalIdeal B) B]\n    [CharZero (FractionRing R)] [CharZero (FractionRing B)]\n    (hRchar : ringChar (IsLocalRing.ResidueField R) ≠ 0)\n    (hBchar : ringChar (IsLocalRing.ResidueField B) ≠ 0)\n    [Algebra R B] [Module.Finite R B]\n    (hinj : Function.Injective (algebraMap R B))\n    (H : Type v) [Group H] [Finite H] [MulSemiringAction H B] [SMulCommClass H R B]\n    (horder : IsUnit (Nat.card H : R)) :\n    IsDiscreteValuationRing (FixedPoints.subalgebra R B H) ∧\n    IsStrictlyHenselianLocalRing (FixedPoints.subalgebra R B H) ∧\n    ∃ n : ℕ, 0 < n ∧ n ∣ Nat.card H ∧\n      @Module.finrank (FractionRing (FixedPoints.subalgebra R B H)) (FractionRing B) _ _\n        (FractionRing.liftAlgebra (FixedPoints.subalgebra R B H) (FractionRing B)).toModule\n          = n ∧\n      IsUnit (n : FixedPoints.subalgebra R B H) ∧\n      ∃ (pi : FixedPoints.subalgebra R B H) (tau : B),\n        Irreducible pi ∧ Irreducible tau ∧\n        tau ^ n = algebraMap (FixedPoints.subalgebra R B H) B pi ∧\n        ∃ e : ((FixedPoints.subalgebra R B H)[X] ⧸ Ideal.span {X ^ n - C pi})\n            ≃ₐ[FixedPoints.subalgebra R B H] B,\n          ∀ Q : (FixedPoints.subalgebra R B H)[X],\n            e (Ideal.Quotient.mk _ Q) = aeval tau Q",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "The same generic algebra or log-chart input already used in the accepted parent plan, restricted to this component; no unit route is bypassed."
+   },
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "The same generic algebra or log-chart input already used in the accepted parent plan, restricted to this component; no unit route is bypassed."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "The same generic algebra or log-chart input already used in the accepted parent plan, restricted to this component; no unit route is bypassed."
+   },
+   {
+    "node": "lem-exc-dvr-galois-degree-data",
+    "why": "The same generic algebra or log-chart input already used in the accepted parent plan, restricted to this component; no unit route is bypassed."
+   },
+   {
+    "node": "lem-sfb-totally-ramified-uniformizer-presentation",
+    "why": "The same generic algebra or log-chart input already used in the accepted parent plan, restricted to this component; no unit route is bypassed."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T091522-L-3349634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T091522-L-3349634",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

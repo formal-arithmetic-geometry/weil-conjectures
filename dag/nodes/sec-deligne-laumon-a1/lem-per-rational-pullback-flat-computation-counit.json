@@ -1,0 +1,114 @@
+{
+ "id": "lem-per-rational-pullback-flat-computation-counit",
+ "kind": "statement",
+ "title": "Rational pullback computation counit on flat-term K-flat complexes",
+ "statement": "Let l be prime, E a finite extension of Q_l, and g:S→T any morphism of schemes. Use the rational coefficient sheaves and rationalPullComplexCounit of [lem-per-rational-realization-pullback-comparison]. For any coefficient map c:g⁻¹(E_T)→E_S and any cochain complex P of E_T-module sheaves, assume P is K-flat in the independent-coefficient sense of [def-pc-kflat-complex] and each Pⁿ is flat on the pro-etale site in the sense of [def-pc-flat-sheaf-modules]. Then rationalPullComplexCounit(l,E,g,c,P), from derived pullback of Q(P) to Q of its ordinary termwise pullback, is an isomorphism. No invertibility of c or finiteness hypothesis on S,T is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E (pullback of K-flat complexes) and 06YY (derived tensor computation); Bhatt--Scholze Remark 6.8.15; agent normalization argument"
+ },
+ "stmt_deps": [
+  "lem-per-rational-realization-pullback-comparison",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Choose an algebraic presentation I of pro-etale module inverse image; the underlying inverse-image functor preserves finite limits. Factor the fixed ordinary inverse image as I.modules followed by sheafified identity scalar extension. Its object and map equations are the defining tensor construction. Apply the ringed-topos K-flat pullback theorem to P and its flat terms. Thus the ordinary inverse-image complex is K-flat.",
+   "uses": [
+    "lem-sp-proetale-algebraic-inverse-image",
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On this K-flat complex, pbcExtensionCounit_isIso says that the universal scalar-extension counit is invertible. Expand rationalPullComplexCounit and pbcComplexCounit: their remaining factors are functor images or components of natural isomorphisms. Invertibility is preserved by functors and composition, proving the assertion.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-sp-proetale-algebraic-inverse-image",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E (pullback of K-flat complexes) and 06YY (derived tensor computation); Bhatt--Scholze Remark 6.8.15; agent normalization argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The computation counit of derived pullback of rational coefficient module sheaves is an isomorphism on K-flat complexes with flat terms",
+   "results": "8 hits, including SheafOfModules.freeFunctorCompPullbackIso, pullbackIso and pullbackObjFreeIso; these concern ordinary free modules and do not state this derived K-flat computation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "12 hits: abstract universal derived functors, leftDerivedLift, leftDerivedUnique and leftDerivedNatIso; no assertion about this concrete rational pullback counit on K-flat representatives.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat.*IsIso|isIso.*[Cc]ounit",
+   "results": "25 Mathlib hits, chiefly adjunction/model-category counit instances; no K-flat rational module-pullback computation theorem. Local library search found pbcExtensionCounit_isIso and isKFlat_ringedToposPullback, which are used to prove the result.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalRealizationScalarCoherence",
+  "date": "2026-10-27",
+  "group": "C8"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-rational-realization-scalar-coherence",
+   "place": "Normalized geometric compositor uniqueness on flat-term K-flat representatives; the computation-counit cancellation step."
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalPullbackFlatComputationCounit",
+  "file": "lean/Sheaf/Paper/RationalPullbackFlatComputationCounit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.rationalPullComplexCounit_isIso_of_flatTerms",
+  "statement": "theorem rationalPullComplexCounit_isIso_of_flatTerms {S T : Scheme.{u}} (g : S ⟶ T)\n    (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj\n      (rationalCoefficientSheaf l T E) ⟶ rationalCoefficientSheaf l S E)\n    (P : CochainComplex (pbcModules T (rationalCoefficientSheaf l T E)) ℤ)\n    (hp : P.IsKFlatIndependentCoefficients)\n    (hf : ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := ProEt.topology T)\n      (R := rationalCoefficientSheaf l T E) (P.X n)) :\n    IsIso (rationalPullComplexCounit l E g c P)",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261026T235841-L-1460788",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261026T235841-L-1460788",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,166 @@
+{
+ "id": "lem-trf-complementary-pure-subcurve-boundary-finite",
+ "kind": "statement",
+ "title": "Finiteness and discreteness of a complementary pure-subcurve boundary",
+ "statement": "Let X be a reduced Noetherian Jacobson scheme and i:Y→X a reduced closed subscheme. Suppose every irreducible component of X and Y has topological Krull dimension one [def-pc-reduced-scheme, pqf-def-locnoeth, def-weil-closed-immersion, def-kun-topological-krull-dimension]. Let j be the inclusion of the scheme-theoretic image of the open complement of i. The scheme pullback T=Y×_X image(j) [def-pc-fibre-product] has a finite discrete underlying space, and its image points in X are closed. Empty subcurves and empty intersections are allowed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E38, proof of lemma-closed-subscheme-nodal-curve, split-node specialization."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Use the reduced-image theorem to identify the complementary image with the reduced closure of the open complement. Apply the complementary-component-union theorem to get complementary subsets I,J of the finite irreducible-component set.",
+   "uses": [
+    "lem-trf-reduced-scheme-image",
+    "lem-trf-complementary-pure-subcurve-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38, proof of lemma-closed-subscheme-nodal-curve, split-node specialization."
+   }
+  },
+  {
+   "text": "For different components C,D, C minus D is nonempty and open in the irreducible one-dimensional component C. Its complement is finite. The boundary is contained in the finite union of these finite intersections.",
+   "uses": [
+    "lem-sc-nonempty-open-complement-finite-dim-le-one",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38, proof of lemma-closed-subscheme-nodal-curve, split-node specialization."
+   }
+  },
+  {
+   "text": "The boundary image is closed and finite. In a Jacobson space its points are closed: closed points are dense in every closed subset, and a finite subspace can have no nonclosed point when its closed points are dense in all its closed subsets. The boundary immersion is injective, so its source is finite and T1, hence discrete.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38, proof of lemma-closed-subscheme-nodal-curve, split-node specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-reduced-scheme-image",
+  "lem-trf-complementary-pure-subcurve-components",
+  "lem-sc-nonempty-open-complement-finite-dim-le-one",
+  "lem-weil-pbc-noetherian-finitely-many-components"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E38, proof of lemma-closed-subscheme-nodal-curve, split-node specialization.",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The intersection of complementary unions of irreducible components of a noetherian curve is finite and discrete",
+   "results": "{\"t\": \"2026-10-23T12:44:36Z\", \"tool\": \"leanfinder\", \"query\": \"The intersection of complementary unions of irreducible components of a noetherian curve is finite and discrete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"genericPoints.finite\", \"TopologicalSpace.NoetherianSpace.finite_irreducibleComponents\", \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible\", \"TopologicalSpace.NoetherianSpace.exists_finset_irreducible\", \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible\"], \"digest\": \"7d5cf3f4c7bdf568\"}; None gives this complete scheme-level assertion. Relevant component, residue-field and localization results are used in the proof.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "irreducibleComponents, Set.Finite",
+   "results": "{\"t\": \"2026-10-23T12:44:35Z\", \"tool\": \"loogle\", \"query\": \"irreducibleComponents, Set.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"mem_of_subset_sUnion_irreducibleComponents\", \"closure_sUnion_irreducibleComponents_sdiff_singleton\", \"TopologicalSpace.NoetherianSpace.finite_irreducibleComponents\", \"genericPoints.finite\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\"], \"digest\": \"c47e828d8280b7f7\"}; None gives this complete scheme-level assertion. Relevant component, residue-field and localization results are used in the proof.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The boundary between complementary reduced pure one dimensional subcurves is finite and discrete",
+   "results": "{\"t\": \"2026-10-23T12:56:42Z\", \"tool\": \"leansearch\", \"query\": \"The boundary between complementary reduced pure one dimensional subcurves is finite and discrete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Metric.finite_isBounded_inter_isClosed\", \"instFiniteConnectedComponentsOfLocallyConnectedSpaceOfCompactSpace\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"ComplexShape.Embedding.AreComplementary.Boundary\", \"ComplexShape.Embedding.AreComplementary.Boundary.fst\", \"ComplexShape.Embedding.AreComplementary.Boundary.of_boundaryLE\", \"isDiscrete_of_codiscreteWithin\", \"CompositionAsSet.boundaries\"], \"digest\": \"fc7d16782764e69d\"}; None gives this complete scheme-level assertion. Relevant component, residue-field and localization results are used in the proof.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents.*[Ff]inite|[Ff]inite.*irreducibleComponents",
+   "results": "{\"t\": \"2026-10-23T12:44:35Z\", \"tool\": \"grep\", \"query\": \"irreducibleComponents.*[Ff]inite|[Ff]inite.*irreducibleComponents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\"], \"digest\": \"f87d37b5b2bb7cf9\"}; Component finiteness, formal smoothness, or residue-field results do not give the complete assertion; used the relevant ones in the Lean proof.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StacksNodalClosedSubcurve",
+  "date": "2026-10-23",
+  "group": "U1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 0E38 subcurve input: Finiteness and discreteness of a complementary pure-subcurve boundary",
+   "via": [
+    "lem-trf-stacks-nodal-closed-subcurve",
+    "lem-trf-nodal-subcurve-boundary",
+    "lem-trf-nodal-contraction-euler-defect",
+    "lem-trf-smooth-target-modification-exceptional-tree",
+    "lem-trf-valuation-marking-semistable-separation",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComplementaryPureSubcurveBoundaryFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComplementaryPureSubcurveBoundaryFinite.lean",
+  "declaration": "AlgebraicGeometry.complementary_pure_subcurve_boundary_finite",
+  "statement": "theorem complementary_pure_subcurve_boundary_finite\n    {X Y : Scheme.{u}} [IsReduced X] [IsNoetherian X] [JacobsonSpace X]\n    (hX : ∀ C ∈ irreducibleComponents X, topologicalKrullDim C = 1)\n    (i : Y ⟶ X) [IsClosedImmersion i] [IsReduced Y]\n    (hY : ∀ C ∈ irreducibleComponents Y, topologicalKrullDim C = 1) :\n    let j := (Scheme.openComplementOfIsClosedImmersion i).ι.imageι\n    Finite (pullback (C := Scheme.{u}) i j) ∧ DiscreteTopology (pullback (C := Scheme.{u}) i j) ∧\n      ∀ t : pullback (C := Scheme.{u}) i j, IsClosed ({i (pullback.fst i j t)} : Set X)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261023T135442-L-2899166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261023T135442-L-2899166",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

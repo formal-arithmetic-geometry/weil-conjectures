@@ -1,0 +1,261 @@
+{
+ "id": "lem-trf-positive-monoid-adic-filtration",
+ "kind": "statement",
+ "title": "Positive monoid finiteness and the mixed ideal filtration",
+ "statement": "Let $P\\subseteq G$ be a finitely generated additive submonoid of an abelian group, and let $w:G\\to\\mathbf Z$ be a homomorphism with $w(p)>0$ for $p\\in P\\setminus\\{0\\}$. For $p\\in P$, let $L(p)$ be the set of integers $q\\ge0$ for which $p$ is a sum of $q$ nonzero elements of $P$, with the empty sum equal to $0$. Then $L(p)$ has a largest element $\\nu(p)$, $\\nu(0)=0$, $\\nu(p)\\le w(p)$, and $\\nu(u)+\\nu(v)\\le\\nu(u+v)$. For every integer $M\\ge0$ the set $\\{p\\in P:w(p)\\le M\\}$ is finite. For every $p\\in P$ and integer $k\\ge1$, the set of tuples $(p_1,\\ldots,p_k)\\in P^k$ with $\\sum_i p_i=p$ is finite. For every integer $n\\ge1$, the set $S_n=\\{p\\in P:\\nu(p)<n\\}$ is finite. Let $A$ be any commutative ring and $I\\subseteq A$ any ideal. Write $A[P]$ for the monoid algebra of [def-trf-complete-toric-model] (zero polynomial variables), namely the finite sums $\\sum_p c_pz^p$ with multiplication $z^uz^v=z^{u+v}$, and let $J=(I z^0,z^p:p\\ne0)$ be the generated ideal. For each $n\\ge1$ and each $F=\\sum_p c_pz^p\\in A[P]$, one has\n$$F\\in J^n\\quad\\Longleftrightarrow\\quad c_p\\in I^{\\max(n-\\nu(p),0)}\\text{ for every }p\\in P.$$\nHere $I^j$ is the ideal of finite sums of products of $j$ elements of $I$, and $I^0=A$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VI §1.6(i)--(ii), printed p. 70: agent-supplied coefficient refinement of the formal monoid models; not a verbatim theorem of ILO."
+ },
+ "stmt_deps": [
+  "def-trf-complete-toric-model"
+ ],
+ "proof": [
+  {
+   "text": "Each nonzero element has integral weight at least one. Applying the weight homomorphism to a Fin q decomposition bounds q by w(p), hence by w(p).toNat. The set of lengths is nonempty (empty at zero and singleton away from zero), so Mathlib's BddAbove.exists_isGreatest_of_nonempty supplies an attained maximum ν(p). Choose these maxima; their weight bound implies ν(0)=0. Concatenate attaining tuples with Fin.append and Fin.sum_univ_add to prove ν(a)+ν(b)≤ν(a+b).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI §1.6(i)--(ii), printed p. 70: agent-supplied coefficient refinement of the formal monoid models; not a verbatim theorem of ILO."
+   }
+  },
+  {
+   "text": "Transfer finite generation to the monoid P itself and choose a finite generating set. Erase zero without changing its additive closure. Closure induction expresses every element as the sum of a finite list with entries in this finite set S. Each list yields an attained nonzero-summand decomposition of its sum. If w(p)≤M, its length is ≤w(p)≤M, so p lies in the image under summation of the finite set of S-lists of length ≤M.toNat. If ν(p)<n, the same list has length ≤ν(p)<n, so the finite set of S-lists of length <n surjects onto the length sublevel set. These arguments include S empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI §1.6(i)--(ii), printed p. 70: agent-supplied coefficient refinement of the formal monoid models; not a verbatim theorem of ILO."
+   }
+  },
+  {
+   "text": "For a tuple of sum p, each entry has weight at most w(p), since all the other weights are nonnegative. Thus such tuples form a subset of a finite Cartesian power of the weight sublevel set. This proves the tuple finiteness clause (even in length zero).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI §1.6(i)--(ii), printed p. 70: agent-supplied coefficient refinement of the formal monoid models; not a verbatim theorem of ILO."
+   }
+  },
+  {
+   "text": "For any commutative additive monoid equipped with the attained maximum length ν, zero length at zero, and superadditivity, define K_n to consist of finite coefficient families F with F.coeff(p)∈I^(n-ν(p)). This is an ideal: addition is coefficientwise; for multiplication by an arbitrary polynomial use the finite convolution formula, ν(b)≤ν(a+b), and antitonicity of ideal powers. Likewise K_m K_n⊆K_(m+n): for each convolution term use (m+n)-ν(a+b)≤(m-ν(a))+(n-ν(b)), multiplication of coefficient ideal powers, and closure under finite sums. This is a genuine ideal construction, with all closure properties proved.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI §1.6(i)--(ii), printed p. 70: agent-supplied coefficient refinement of the formal monoid models; not a verbatim theorem of ILO."
+   }
+  },
+  {
+   "text": "The mixed ideal J is contained in K_1. A coefficient generator single(0,a) has coefficient a∈I at zero and zero elsewhere, using ν(0)=0. For a nonzero monomial generator single(p,1), a singleton decomposition gives ν(p)≥1, so its only nonzero coefficient is unrestricted in I^0. Induction on n, using J^(n+1)=J^n J and K_n K_1⊆K_(n+1), proves J^n⊆K_n, including n=0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI §1.6(i)--(ii), printed p. 70: agent-supplied coefficient refinement of the formal monoid models; not a verbatim theorem of ILO."
+   }
+  },
+  {
+   "text": "For the reverse inclusion, the constant ring homomorphism C:a↦single(0,a) maps I into J; Ideal.map_pow and monotonicity of ideal powers give C(I^k)⊆J^k. A decomposition attaining r=ν(p) gives single(p,1)∈J^r by multiplying its r nonzero monomials; the empty product covers r=0. Thus c∈I^(n-r) implies single(p,c)=C(c) single(p,1)∈J^((n-r)+r)⊆J^n, since n≤(n-r)+r. This uniformly treats r<n and r≥n without splitting or grouping tuples into blocks. Finally sum these monomials over the finite support of F. Combine the algebraic equivalence with the three finiteness clauses and the maximal-length properties, preserving the theorem's statement exactly.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI §1.6(i)--(ii), printed p. 70: agent-supplied coefficient refinement of the formal monoid models; not a verbatim theorem of ILO."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VI §1.6(i)–(ii), printed p. 70, motivates the formal monoid model. P3 supplied the finite-generator-list and coefficient-ideal filtration proof; all auxiliary claims are proved in the item module from Mathlib."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra, Ideal.pow",
+   "results": "{\"t\": \"2026-10-22T06:44:09Z\", \"tool\": \"loogle\", \"query\": \"AddMonoidAlgebra, Ideal.pow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.pow'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/Algebra/MonoidAlgebra/Ideal.lean:66--109, RingTheory/ReesAlgebra.lean:36--88 and RingTheory/Polynomial/Basic.lean:520--538. The support criterion for an ideal generated by monomials, the Rees algebra criterion and the univariate product coefficient estimate do not give the mixed ideal-power equivalence for a positive monoid with relations or its finiteness conclusions.",
+   "date": "2026-10-22",
+   "verdict": "invalid query; superseded by the valid AddMonoidAlgebra, Ideal search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated additive monoid embedded in an abelian group with positive integral weight, maximal nonzero decomposition lengths are finite and the nth power of a mixed coefficient and monomial ideal is determined coefficientwise",
+   "results": "{\"t\": \"2026-10-22T06:44:20Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely generated additive monoid embedded in an abelian group with positive integral weight, maximal nonzero decomposition lengths are finite and the nth power of a mixed coefficient and monomial ideal is determined coefficientwise\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.sum_pow_mem_span_pow\", \"Ideal.mem_span_pow_iff_exists_isHomogeneous\", \"MvPolynomial.coeffsIn_pow\", \"MvPolynomial.le_coeffsIn_pow\", \"Polynomial.coeff_prod_mem_ideal_pow_tsub\", \"mem_reesAlgebra_iff_support\", \"Ideal.pow_multiset_sum_mem_span_pow\", \"Ideal.span_pow_eq_map_homogeneousSubmodule\"], \"digest\": \"31fde1f388e68778\"}; Read Mathlib/Algebra/MonoidAlgebra/Ideal.lean:66--109, RingTheory/ReesAlgebra.lean:36--88 and RingTheory/Polynomial/Basic.lean:520--538. The support criterion for an ideal generated by monomials, the Rees algebra criterion and the univariate product coefficient estimate do not give the mixed ideal-power equivalence for a positive monoid with relations or its finiteness conclusions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coeff.*(pow|ideal)|mem.*pow",
+   "results": "{\"t\": \"2026-10-22T06:44:22Z\", \"tool\": \"grep\", \"query\": \"coeff.*(pow|ideal)|mem.*pow\", \"sub\": \"Algebra/MonoidAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/Algebra/MonoidAlgebra/Ideal.lean:66--109, RingTheory/ReesAlgebra.lean:36--88 and RingTheory/Polynomial/Basic.lean:520--538. The support criterion for an ideal generated by monomials, the Rees algebra criterion and the univariate product coefficient estimate do not give the mixed ideal-power equivalence for a positive monoid with relations or its finiteness conclusions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Powers of an ideal in an additive monoid algebra generated by a coefficient ideal and all nonzero monomials are characterized by coefficient ideal orders and maximal decomposition length",
+   "results": "{\"t\": \"2026-10-22T06:44:22Z\", \"tool\": \"leansearch\", \"query\": \"Powers of an ideal in an additive monoid algebra generated by a coefficient ideal and all nonzero monomials are characterized by coefficient ideal orders and maximal decomposition length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"reesAlgebra\", \"adjoin_monomial_eq_reesAlgebra\", \"Ideal.pow_mem_of_pow_mem\", \"Ideal.pow_eq_top_iff\", \"mem_reesAlgebra_iff_support\", \"Submodule.nat_power_gradedMonoid\", \"reesAlgebra.monomial_mem\", \"Polynomial.coeff_mem_pow_of_mem_adjoin_C_mul_X\"], \"digest\": \"8423d8198eb3ba53\"}; Read Mathlib/Algebra/MonoidAlgebra/Ideal.lean:66--109, RingTheory/ReesAlgebra.lean:36--88 and RingTheory/Polynomial/Basic.lean:520--538. The support criterion for an ideal generated by monomials, the Rees algebra criterion and the univariate product coefficient estimate do not give the mixed ideal-power equivalence for a positive monoid with relations or its finiteness conclusions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra, Ideal",
+   "results": "{\"t\": \"2026-10-22T06:44:22Z\", \"tool\": \"loogle\", \"query\": \"AddMonoidAlgebra, Ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.mem_ideal_span_of'_image\"], \"digest\": \"f9e5f2230ea9e2af\"}; Read Mathlib/Algebra/MonoidAlgebra/Ideal.lean:66--109, RingTheory/ReesAlgebra.lean:36--88 and RingTheory/Polynomial/Basic.lean:520--538. The support criterion for an ideal generated by monomials, the Rees algebra criterion and the univariate product coefficient estimate do not give the mixed ideal-power equivalence for a positive monoid with relations or its finiteness conclusions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monomial ideal powers in an affine semigroup algebra are direct sums of coefficient ideal powers indexed by the maximal additive length of each exponent",
+   "results": "{\"t\": \"2026-10-22T06:44:35Z\", \"tool\": \"leanfinder\", \"query\": \"Monomial ideal powers in an affine semigroup algebra are direct sums of coefficient ideal powers indexed by the maximal additive length of each exponent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.homogeneousSubmodule_one_pow\", \"MvPolynomial.coeffsIn_pow\", \"Ideal.span_pow_eq_map_homogeneousSubmodule\", \"MvPolynomial.monomial_mem_homogeneousSubmodule_pow_degree\", \"MvPolynomial.le_coeffsIn_pow\", \"Ideal.mem_span_pow_iff_exists_isHomogeneous\", \"reesAlgebra.monomial_mem\", \"Ideal.sum_pow_mem_span_pow\"], \"digest\": \"3be6eeadb9f85510\"}; Read Mathlib/Algebra/MonoidAlgebra/Ideal.lean:66--109, RingTheory/ReesAlgebra.lean:36--88 and RingTheory/Polynomial/Basic.lean:520--538. The support criterion for an ideal generated by monomials, the Rees algebra criterion and the univariate product coefficient estimate do not give the mixed ideal-power equivalence for a positive monoid with relations or its finiteness conclusions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "span_pow|pow_eq_span|mem_.*span.*image",
+   "results": "{\"t\": \"2026-10-23T09:27:47Z\", \"tool\": \"grep\", \"query\": \"span_pow|pow_eq_span|mem_.*span.*image\", \"sub\": \"RingTheory/Ideal\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Operations.lean\", \"Mathlib/RingTheory/Ideal/Basic.lean\", \"Mathlib/RingTheory/Ideal/Basic.lean\", \"Mathlib/RingTheory/Ideal/Basic.lean\", \"Mathlib/RingTheory/Ideal/Basic.lean\", \"Mathlib/RingTheory/Ideal/Basic.lean\"], \"digest\": \"280a4e5b863c6fe2\"} Read AddMonoidAlgebra.mem_ideal_span_of'_image, Mathlib/Algebra/MonoidAlgebra/Ideal.lean:60–98: only pure monomial ideals. Read Finsupp.finite_of_nat_weight_le, Mathlib/Data/Finsupp/Weight.lean:189–201: finite multiplicity vectors, not the mixed filtration. Read Ideal.span_mul_span, Mathlib/RingTheory/Ideal/Operations.lean:407–409: elementary binary generator expansion, written out by induction in step 4. No declaration supplies the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mixed monomial ideal powers in a positive affine monoid ring and finiteness of bounded decomposition lengths",
+   "results": "{\"t\": \"2026-10-23T09:27:48Z\", \"tool\": \"leansearch\", \"query\": \"Mixed monomial ideal powers in a positive affine monoid ring and finiteness of bounded decomposition lengths\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.monomial_mem_homogeneousSubmodule_pow_degree\", \"AddMonoidAlgebra.exists_finset_adjoin_eq_top\", \"MvPolynomial.mem_ideal_span_monomial_image_iff_dvd\", \"AddMonoidAlgebra.grade.decomposition\", \"Submodule.nat_power_gradedMonoid\", \"MonoidAlgebra.exists_finset_adjoin_eq_top\", \"MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictTotalDegreeOfFinite\", \"FractionalIdeal.instPowNat\"], \"digest\": \"6617c7dee8cf2ebe\"} Read AddMonoidAlgebra.mem_ideal_span_of'_image, Mathlib/Algebra/MonoidAlgebra/Ideal.lean:60–98: only pure monomial ideals. Read Finsupp.finite_of_nat_weight_le, Mathlib/Data/Finsupp/Weight.lean:189–201: finite multiplicity vectors, not the mixed filtration. Read Ideal.span_mul_span, Mathlib/RingTheory/Ideal/Operations.lean:407–409: elementary binary generator expansion, written out by induction in step 4. No declaration supplies the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra, Ideal",
+   "results": "{\"t\": \"2026-10-23T09:27:48Z\", \"tool\": \"loogle\", \"query\": \"AddMonoidAlgebra, Ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.mem_ideal_span_of'_image\"], \"digest\": \"f9e5f2230ea9e2af\"} Read AddMonoidAlgebra.mem_ideal_span_of'_image, Mathlib/Algebra/MonoidAlgebra/Ideal.lean:60–98: only pure monomial ideals. Read Finsupp.finite_of_nat_weight_le, Mathlib/Data/Finsupp/Weight.lean:189–201: finite multiplicity vectors, not the mixed filtration. Read Ideal.span_mul_span, Mathlib/RingTheory/Ideal/Operations.lean:407–409: elementary binary generator expansion, written out by induction in step 4. No declaration supplies the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated additive monoid with a strictly positive integer weight, bounded weights and bounded decomposition lengths are finite, and powers of the coefficient and nonzero monomial ideal are determined coefficientwise",
+   "results": "{\"t\": \"2026-10-23T09:27:50Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely generated additive monoid with a strictly positive integer weight, bounded weights and bounded decomposition lengths are finite, and powers of the coefficient and nonzero monomial ideal are determined coefficientwise\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.NonTorsionWeight\", \"MvPolynomial.weightedDecomposition\", \"Finsupp.finite_of_nat_weight_le\", \"MvPolynomial.nonTorsionWeight_of\", \"MvPolynomial.weightedDecomposition.decompose'_eq\", \"MvPowerSeries.IsWeightedHomogeneous\", \"MvPolynomial.weightedHomogeneousComponent_finsupp\", \"MvPolynomial.weightedHomogeneousSubmodule_eq_finsupp_supported\"], \"digest\": \"e1b15291203b6d6e\"} Read AddMonoidAlgebra.mem_ideal_span_of'_image, Mathlib/Algebra/MonoidAlgebra/Ideal.lean:60–98: only pure monomial ideals. Read Finsupp.finite_of_nat_weight_le, Mathlib/Data/Finsupp/Weight.lean:189–201: finite multiplicity vectors, not the mixed filtration. Read Ideal.span_mul_span, Mathlib/RingTheory/Ideal/Operations.lean:407–409: elementary binary generator expansion, written out by induction in step 4. No declaration supplies the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_of_nat_weight_le|span_mul_span|mul_span|span_mul",
+   "results": "{\"t\": \"2026-10-23T09:28:35Z\", \"tool\": \"grep\", \"query\": \"finite_of_nat_weight_le|span_mul_span|mul_span|span_mul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/AffineSpace/Pointwise.lean\", \"Mathlib/LinearAlgebra/Basis/SMul.lean\", \"Mathlib/LinearAlgebra/Basis/SMul.lean\", \"Mathlib/LinearAlgebra/Basis/SMul.lean\", \"Mathlib/LinearAlgebra/Basis/SMul.lean\", \"Mathlib/LinearAlgebra/Basis/SMul.lean\", \"Mathlib/LinearAlgebra/CliffordAlgebra/Grading.lean\", \"Mathlib/Algebra/Algebra/Operations.lean\"], \"digest\": \"ee7f73b207bcb388\"} Read AddMonoidAlgebra.mem_ideal_span_of'_image, Mathlib/Algebra/MonoidAlgebra/Ideal.lean:60–98: only pure monomial ideals. Read Finsupp.finite_of_nat_weight_le, Mathlib/Data/Finsupp/Weight.lean:189–201: finite multiplicity vectors, not the mixed filtration. Read Ideal.span_mul_span, Mathlib/RingTheory/Ideal/Operations.lean:407–409: elementary binary generator expansion, written out by induction in step 4. No declaration supplies the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an affine semigroup algebra the maximal number of nonzero summands of an exponent gives the coefficient ideal power in the mixed adic filtration",
+   "results": "{\"t\": \"2026-10-23T09:28:39Z\", \"tool\": \"leanfinder\", \"query\": \"In an affine semigroup algebra the maximal number of nonzero summands of an exponent gives the coefficient ideal power in the mixed adic filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.adic_basis\", \"is_ideal_adic_pow\", \"mem_reesAlgebra_iff_support\", \"Ideal.stableFiltration_N\", \"reesAlgebra.monomial_mem\", \"Ideal.Filtration.pow_smul_le_pow_smul\", \"mem_reesAlgebra_iff\", \"Ideal.Filtration.pow_smul_le\"], \"digest\": \"cf6154854774c699\"} Read AddMonoidAlgebra.mem_ideal_span_of'_image, Mathlib/Algebra/MonoidAlgebra/Ideal.lean:60–98: only pure monomial ideals. Read Finsupp.finite_of_nat_weight_le, Mathlib/Data/Finsupp/Weight.lean:189–201: finite multiplicity vectors, not the mixed filtration. Read Ideal.span_mul_span, Mathlib/RingTheory/Ideal/Operations.lean:407–409: elementary binary generator expansion, written out by induction in step 4. No declaration supplies the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem span_mul_span|theorem span_mul_span.",
+   "results": "{\"t\": \"2026-10-23T09:31:26Z\", \"tool\": \"grep\", \"query\": \"theorem span_mul_span|theorem span_mul_span.\", \"sub\": \"RingTheory/Ideal/Operations.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"407\", \"411\"], \"digest\": \"fcbb6723dab26f40\"} Read AddMonoidAlgebra.mem_ideal_span_of'_image, Mathlib/Algebra/MonoidAlgebra/Ideal.lean:60–98: only pure monomial ideals. Read Finsupp.finite_of_nat_weight_le, Mathlib/Data/Finsupp/Weight.lean:189–201: finite multiplicity vectors, not the mixed filtration. Read Ideal.span_mul_span, Mathlib/RingTheory/Ideal/Operations.lean:407–409: elementary binary generator expansion, written out by induction in step 4. No declaration supplies the whole item.",
+   "date": "2026-10-23",
+   "verdict": "match for elementary auxiliary expansion only; no new node created"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The product of two generated ideals equals the ideal generated by the products of their generators",
+   "results": "{\"t\": \"2026-10-23T09:31:26Z\", \"tool\": \"leansearch\", \"query\": \"The product of two generated ideals equals the ideal generated by the products of their generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.span_singleton_mul_span_singleton\", \"Ideal.prod_span\", \"Ideal.span_mul_span'\", \"Ideal.prod_span_singleton\", \"Ideal.multiset_prod_span_singleton\", \"Ideal.span_mul_span\", \"Ideal.FG.mul\", \"Ideal.span_pair_mul_span_pair\"], \"digest\": \"d4619904ef22b680\"} Read AddMonoidAlgebra.mem_ideal_span_of'_image, Mathlib/Algebra/MonoidAlgebra/Ideal.lean:60–98: only pure monomial ideals. Read Finsupp.finite_of_nat_weight_le, Mathlib/Data/Finsupp/Weight.lean:189–201: finite multiplicity vectors, not the mixed filtration. Read Ideal.span_mul_span, Mathlib/RingTheory/Ideal/Operations.lean:407–409: elementary binary generator expansion, written out by induction in step 4. No declaration supplies the whole item.",
+   "date": "2026-10-23",
+   "verdict": "match for elementary auxiliary expansion only; no new node created"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.span_mul_span",
+   "results": "{\"t\": \"2026-10-23T09:31:26Z\", \"tool\": \"loogle\", \"query\": \"Ideal.span_mul_span\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Ideal.span_mul_span\"], \"digest\": \"dba6addd3b0ec0be\"} Read AddMonoidAlgebra.mem_ideal_span_of'_image, Mathlib/Algebra/MonoidAlgebra/Ideal.lean:60–98: only pure monomial ideals. Read Finsupp.finite_of_nat_weight_le, Mathlib/Data/Finsupp/Weight.lean:189–201: finite multiplicity vectors, not the mixed filtration. Read Ideal.span_mul_span, Mathlib/RingTheory/Ideal/Operations.lean:407–409: elementary binary generator expansion, written out by induction in step 4. No declaration supplies the whole item.",
+   "date": "2026-10-23",
+   "verdict": "match for elementary auxiliary expansion only; no new node created"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The product of ideals generated by two subsets of a commutative ring is the ideal generated by all pairwise products of generators",
+   "results": "{\"t\": \"2026-10-23T09:31:36Z\", \"tool\": \"leanfinder\", \"query\": \"The product of ideals generated by two subsets of a commutative ring is the ideal generated by all pairwise products of generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.prod_span\", \"Ideal.span_mul_span\", \"Ideal.span_mul_span'\", \"Ideal.span_pair_mul_span_pair\", \"Ideal.prod_span_singleton\", \"Ideal.span_prod\", \"Ideal.span_prod_le\", \"Ideal.multiset_prod_span_singleton\"], \"digest\": \"c42f085cda1aec7f\"} Read AddMonoidAlgebra.mem_ideal_span_of'_image, Mathlib/Algebra/MonoidAlgebra/Ideal.lean:60–98: only pure monomial ideals. Read Finsupp.finite_of_nat_weight_le, Mathlib/Data/Finsupp/Weight.lean:189–201: finite multiplicity vectors, not the mixed filtration. Read Ideal.span_mul_span, Mathlib/RingTheory/Ideal/Operations.lean:407–409: elementary binary generator expansion, written out by induction in step 4. No declaration supplies the whole item.",
+   "date": "2026-10-23",
+   "verdict": "match for elementary auxiliary expansion only; no new node created"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-monoid-completion-coefficients",
+  "date": "2026-10-22",
+  "group": "Q09"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical formal-chart algebra under lem-trf-local-term-locality proof (1)--(2), via the completed-monoid model: parent proof steps 1--2, positive-weight finiteness and the finite monomial ideal filtration.",
+   "via": [
+    "lem-trf-monoid-completion-coefficients",
+    "lem-trf-formal-monoid-ring-dimension",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-positive-monoid-adic-filtration",
+  "worker": "stage1",
+  "summary": "Proved all clauses directly using positive integer weights, finite generator boxes, and an explicit induction expanding powers of a generated ideal. No new nodes: these are elementary arguments from the stated definitions. Read ILO VI 1.6 and the current blueprint ancestor, checked no project attachment, searched Mathlib and the DAG, retained all historical searches, and checked zero monoid, nonfree monoids, arbitrary coefficient ideals and zero ring. Statement unchanged.",
+  "blueprint": "Historical auxiliary algebra for lem-trf-local-term-locality proof (1)–(2) via lem-trf-monoid-completion-coefficients, parent steps 1–2. The latest ancestor now uses contracting correspondences and does not assert this monoid calculation; no claim is made that ILO or the current ancestor proves it."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-f94e1cda2",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-f94e1cda2 (reviewer sub-agent of L); spot-checked: I read the item in full; there are 0 new nodes. The statement and stmt_deps are unchanged against live, where the item is still unsplit, and there is no re-split note. Step 1: weight ≥1 gives q ≤ w(p), so the maximum ν(p) is attained, ν(0)=0 by positivity, and concatenation gives superadditivity (only ≤ is claimed; ⟨2,3⟩ example checked). Step 2: generator multiplicities a_i ≤ w(p) ≤ M, so the set lies in the image of a finite box. Step 3: tuples have w(p_i) ≤ w(p); a generator expression of a point of S_n has Σa_i ≤ ν(p) < n, which is the correct direction. Step 4: J^n = finite sums H·t_1⋯t_n, by induction from the definitions. Step 5: a monomial b·a_1⋯a_{n-k}z^{t+Σq_i} has ν(p) ≥ k with or without t, so its coefficient is in I^{n-k} ⊆ I^{max(n-ν,0)}. Step 6: the r<n and r≥n branches are both correct, with block sums nonzero by positive weight. def-trf-complete-toric-model gives L[P] for any commutative monoid and ring (n=0, L=A), so C3/C4 hold. ILO VI 1.6, printed p.70, is the motivating chart only, and the node correctly marks the refinement as agent-supplied; no SGA is used. Edge cases checked: P={0}, ℕ, I=0/A, zero ring, n=1, non-free or torsion G. Duplicate search: lem-trf-positive-monoid-convolution-length overlaps the finiteness clauses but needs G free of finite rank, and lem-trf-finite-support-monomial-ideal-power needs a finitely generated ideal; neither is a duplicate (advisory only). No cycle, no fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PositiveMonoidAdicFiltration",
+  "declaration": "AddMonoidAlgebra.positiveMonoid_adic_filtration",
+  "file": "lean/Sheaf/RingTheory/PositiveMonoidAdicFiltration.lean",
+  "statement": "theorem positiveMonoid_adic_filtration (G : Type u) [AddCommGroup G] (P : AddSubmonoid G) (hfg : P.FG) (wgt : G →+ ℤ) (hpos : ∀ p : P, p ≠ 0 → 0 < wgt (p : G)) : ∃ ν : P → ℕ, (∀ p : P, IsGreatest {q : ℕ | ∃ f : Fin q → P, (∀ i : Fin q, f i ≠ 0) ∧ (∑ i, f i) = p} (ν p)) ∧ ν 0 = 0 ∧ (∀ p : P, (ν p : ℤ) ≤ wgt (p : G)) ∧ (∀ a b : P, ν a + ν b ≤ ν (a + b)) ∧ (∀ M : ℤ, 0 ≤ M → Set.Finite {p : P | wgt (p : G) ≤ M}) ∧ (∀ (p : P) (k : ℕ), 1 ≤ k → Set.Finite {f : Fin k → P | (∑ i, f i) = p}) ∧ (∀ n : ℕ, 1 ≤ n → Set.Finite {p : P | ν p < n}) ∧ ∀ (A : Type v) [CommRing A] (I : Ideal A) (n : ℕ), 1 ≤ n → ∀ F : AddMonoidAlgebra A P, F ∈ (Ideal.span ({f : AddMonoidAlgebra A P | ∃ a : A, a ∈ I ∧ f = single 0 a} ∪ {f : AddMonoidAlgebra A P | ∃ p : P, p ≠ 0 ∧ f = single p (1 : A)})) ^ n ↔ ∀ p : P, F.coeff p ∈ I ^ (n - ν p)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b95fad46",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: P.FG submonoid of AddCommGroup G, wgt : G →+ ℤ positive on P∖0, ν with IsGreatest over nonzero Fin q decompositions (attained max, empty sum), ν 0 = 0, ν ≤ wgt, superadditivity, finiteness of weight sublevels (M : ℤ ≥ 0), of k-tuples (k ≥ 1) and of S_n (n ≥ 1), and for any CommRing A (universe v) and ideal I, F ∈ span({single 0 a | a∈I} ∪ {single p 1 | p≠0})^n ↔ ∀ p, coeff p ∈ I^(n − ν p) (ℕ-subtraction = max). AddMonoidAlgebra A P is the monoid ring underlying ToricMonoid.PolynomialRing of def-trf-complete-toric-model with zero variables. Mathematics verified, including edge cases P={0}, I=0 and I=⊤, zero ring, n=1, p=0. Only the lean field changed versus side-live, and lean.statement is verbatim. No duplicate: PositiveMonoidConvolutionLength assumes extra lattice hypotheses. Docstrings carry source place, blueprint tag and proof steps; single sorry, no hollow definitions. Note: the second reading was by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T082637-L-2200749",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

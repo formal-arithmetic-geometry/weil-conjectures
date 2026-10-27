@@ -1,0 +1,135 @@
+{
+ "id": "lem-coef-prescribed-scalar-tensor-comparison",
+ "kind": "statement",
+ "title": "Tensor comparison for a prescribed scalar-derived pair",
+ "statement": "For a ringed site and simultaneous closed tensor models M, every prescribed normalized scalar-derived pair s for a coefficient map a admits a strong tensor comparison. Its ordinary comparison has the scalar-unit pure-tensor formula, and its derived comparison has the all-K-flat counit square, using precisely s.extension, s.derived and s.counit.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6 and 0D6D; specialization of a simultaneous scalar family at one prescribed pair."
+ },
+ "stmt_deps": [
+  "def-sfb-scalar-hom-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Update the simultaneous scalar family M.scalar at the single dependent index consisting of the source ring, target ring and coefficient map a. Keep every closed structure and tensor model unchanged. Function.update at its own index is the prescribed pair s.",
+   "uses": [
+    "def-sfb-scalar-hom-comparison-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply scalarHomTensorComparison_exists to this updated family, and rewrite its scalar pair at a to s. Its K-flat preservation, chain comparison, pure-tensor equation, derived comparison and normalized representative square are exactly the required fields.",
+   "uses": [
+    "lem-sfb-scalar-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary-unit field identifies pairUnit with the transported sheafified insertion of 1 tensor x. Given two chain comparisons with the same pure-unit formula, transpose through the ordinary scalar adjunction and apply total pure-tensor extensionality in each degree; this proves uniqueness of the prescribed chain comparison.",
+   "uses": [
+    "def-sfb-scalar-hom-comparison-data",
+    "lem-sfb-scalar-tensor-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-scalar-hom-comparison-data",
+  "lem-sfb-scalar-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6 and 0D6D; specialization of a simultaneous scalar family at one prescribed pair."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefDerivedSystemEvaluationCalculus",
+  "date": "2026-10-22",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-derived-system-evaluation-calculus",
+   "place": "Tags 07A4, 07A6 and 0D6D; specialization of a simultaneous scalar family at one prescribed pair.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PrescribedScalarTensorComparison",
+  "file": "lean/Sheaf/Paper/PrescribedScalarTensorComparison.lean",
+  "declaration": "CategoryTheory.ScalarHomTensor.pairTensorComparison_from_models",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-22",
+  "statement": "theorem pairTensorComparison_from_models (M : ScalarHomModels.{c, v, r, w} J) : Nonempty (PairTensorComparison.{c, v, r, w} a s (M.closed R) (M.closed S) (M.model R) (M.model S))",
+  "declarations": [
+   "CategoryTheory.ScalarHomTensor.pairUnit",
+   "CategoryTheory.ScalarHomTensor.pairUnit_eq_tensorSection",
+   "CategoryTheory.ScalarHomTensor.pairTensorNormalization",
+   "CategoryTheory.ScalarHomTensor.PairTensorComparison",
+   "CategoryTheory.ScalarHomTensor.pairTensorComparison_from_models",
+   "CategoryTheory.ScalarHomTensor.pairTensorIso_existsUnique",
+   "CategoryTheory.ScalarHomTensor.pairTensorIso_existsUnique_with_ordinary",
+   "CategoryTheory.ScalarHomTensor.pair_preservesKFlat_with_extension"
+  ]
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor comparison for a prescribed derived scalar extension with its ordinary unit and K-flat counit normalization",
+   "results": "8 hits, including ModuleCat.extendScalarsComp_hom_app_one_tmul, ExtendRestrictScalarsAdj.Counit.map_hom_apply, extendRestrictScalarsAdj_unit_app_apply and extendScalarsId_hom_app_one_tmul.",
+   "date": "2026-10-22",
+   "verdict": "The module formulas are ordinary scalar-extension formulas; none supplies the prescribed unbounded derived sheaf comparison or its K-flat counit normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.update_self",
+   "results": "1 hit: Function.update_self.",
+   "date": "2026-10-22",
+   "verdict": "Used to specialize the simultaneous family at the prescribed dependent scalar-pair index."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*tensor.*comparison|tensor.*scalar.*comparison",
+   "results": "No Mathlib matches.",
+   "date": "2026-10-22",
+   "verdict": "No existing prescribed derived scalar comparison found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of sheaves of modules commutes with the tensor product of unbounded cochain complexes and is uniquely determined on pure tensors.",
+   "results": "8 hits, including ModuleCat.ExtendScalars.hom_ext and extendRestrictScalarsAdj. They supply ordinary module formulas but no unbounded sheaf-complex comparison for a prescribed pair.",
+   "date": "2026-10-22",
+   "verdict": "Use the existing project interfaces and the explicit construction in this module."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-73b77",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261022T145606-L-2021248",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-73b77",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261022T145606-L-2021248",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules and 4 node files vs clones/live (diff), change records vs the 3 interface changes, all 44 direct importers compiled against the sandbox-built delivered item (44/44 rc 0), #print axioms of the 9 closed holes and new theorems (sorryAx only through upstream scalarHomTensorComparison_exists and the item's remaining coefficientEvaluationTensorIso_exists)"
+ }
+}

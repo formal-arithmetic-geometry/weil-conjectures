@@ -1,0 +1,126 @@
+{
+ "id": "def-pod-verdier-pairing-domain-data",
+ "kind": "definition",
+ "title": "Supplied rational/common-stage Verdier pairing domains and lifted operations",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the finite-field and coefficient datum of [def-weil-finite-field-fiber], the geometric Frobenius of [def-weil-frobenius-detailed], the rational/common-stage tensor, partial internal Hom and pullback of [def-weil-derived-pullback-tensor-hom], and Weil pairs of [def-weil-weil-sheaf-complex]. For a finite-type model $T_0$ and coefficient choice $E$ or $\\Omega$, a supplied domain is a full subcategory of the recorded constructible category stable under actual geometric-Frobenius pullback; $C$ denotes this full category and $\\Phi$ its restricted pullback. Tensor--Hom data are curried tensor and contravariant/covariant Hom functors with their Frobenius comparison isomorphisms. Their Weil lifts use the existing fixed-pair bifunctor lift, with inverse structure in the contravariant variable. Closed data additionally specify $K\\otimes-\\dashv\\mathcal Hom(K,-)$, evaluation naturality in $K$, and compatibility of evaluation with the tensor and Hom Frobenius comparisons. A lifted adjunction specifies the underlying adjunction, left/right Frobenius comparisons and an adjunction of the resulting Weil lifts whose underlying unit and counit are exactly the original ones. Realization data identify the supplied tensor and Hom with restrictions of the recorded tensor and permitted-pair Hom; geometric pullback is pullback along the actual geometric fibre of the model morphism. For a supplied exceptional lift $F\\dashv G$, ordinary lift $P\\dashv Q$, and Weil object $W$, put $A=\\mathcal Hom(FM,W)$ with the induced Hom structure and $V=M\\otimes P(A)$ with the tensor structure. These are the definitions imageDual and tensorSource, respectively. These are data and constructions only, not assertions of equivariance of evaluation or of the three transposes.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+  "place": "Formal duality exchange sentence and the supplied canonical operation/evaluation/adjunction comparisons."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Frobenius stable domain with tensor Hom and lifted adjunctions for Verdier duality",
+   "results": "8 hits: frobeniusMorphism, frobeniusMorphism_mate, ModuleCat.monoidalClosedHomEquiv, SheafOfModules.PullbackConstruction.adjunction, tensorLeftAdjunction, expComparison_iso_of_frobeniusMorphism_iso, FunctorToTypes.adj, dualTensorHomEquiv. General infrastructure; no exact Mathlib interface.",
+   "date": "2026-10-24",
+   "verdict": "Existing project definitions are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.IsoAlgebra, CategoryTheory.Adjunction",
+   "results": "0 hits; unknown identifier CategoryTheory.Endofunctor.IsoAlgebra (project declaration is not in the Mathlib index).",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match; project declarations read directly."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep VerdierPairing|CoefVerdierWeil|ProjectionLifts CategoryTheory; rg VerdierPairing.Domain|CoefVerdierWeil.Conclusion dag/nodes; rg VerdierPairing|CoefVerdierWeil.Conclusion lean/WeilConjectures lean/Sheaf/Paper Mathlib/CategoryTheory; blueprint_refs.py search Verdier pairing; blueprint_refs.py search Weil duality",
+   "results": "msearch: 0 hits. Blueprint searches: 0 nodes each. DAG exact-name hits only the two theorem nodes, with no definition owner. Project hits give the existing VerdierPairingThreeTransposes definitions; CoefVerdierWeil.Conclusion is in SixFunctors/CoefVerdierWeilEquivariance. No upstream/Mathlib duplicate.",
+   "date": "2026-10-24",
+   "verdict": "Add definition ownership of the existing declarations, as explicitly requested by H2; no source copy."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-formal-verdier-exchange-equivariance",
+  "date": "2026-10-24",
+  "group": "Q93"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Formal duality exchange sentence and the supplied canonical operation/evaluation/adjunction comparisons.",
+   "via": [
+    "lem-pod-formal-verdier-exchange-equivariance"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "module": "Sheaf.Paper.VerdierPairingThreeTransposes",
+  "declaration": "WeilConjectures.VerdierPairing.Domain",
+  "declarations": [
+   "WeilConjectures.VerdierPairing.Domain",
+   "WeilConjectures.VerdierPairing.Domain.C",
+   "WeilConjectures.VerdierPairing.Domain.phi",
+   "WeilConjectures.VerdierPairing.TensorHomData",
+   "WeilConjectures.VerdierPairing.TensorHomData.weilTensor",
+   "WeilConjectures.VerdierPairing.TensorHomData.weilHom",
+   "WeilConjectures.VerdierPairing.ClosedData",
+   "WeilConjectures.VerdierPairing.LiftedAdjunction",
+   "WeilConjectures.VerdierPairing.Realizes",
+   "WeilConjectures.VerdierPairing.geometricPullback",
+   "WeilConjectures.VerdierPairing.imageDual",
+   "WeilConjectures.VerdierPairing.tensorSource"
+  ],
+  "statement": "structure Domain (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    (T₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType T₀.hom] [QuasiCompact T₀.hom]\n    (E : Option (ConstructibleExceptionalCoefficients.FieldStage.{u} l))",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership of unchanged published declarations required by returned head 7ca50a7fa9f8, H2. Only the definitions used by the consumer are listed; the theorem remains a proof dependency, not a statement dependency."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a88edfb5d",
+  "group": "Q93",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a88edfb5d",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Re-delivery of 7ca50a7f fixes both return points. H2: new existing:true definition nodes def-pod-verdier-pairing-domain-data (VerdierPairing Domain/C/phi/TensorHomData/weilTensor/weilHom/ClosedData/LiftedAdjunction/Realizes/geometricPullback/imageDual/tensorSource) and def-pod-verdier-weil-conclusion (CoefVerdierWeil.Conclusion) own the plain defs; the theorem nodes are proof_deps only; the item statement is byte-identical to live; stmt_deps only gain def nodes. H3: Projection has only iso plus an HEq pin to d.projection. ProjectionLifts gives primitive proper-adjunction (adj = d.properAdjunction), tensorBar, tensorPullback, openProjection and supportIdentification Weil lifts, each HEq-pinned. The PF square is derived formally (rightAdjointProjectionMap = homEquiv(mu then T(counit)), then R(openProjection), then conjugation) and is now a conclusion of Assertion. Checked: compositionMate formula against the conjugateIsoEquiv unfolding, the t/r/s transposes, the formalMap Weil square, the mate-substitution identity, and that Normalizes forces s = I.inv with invertibility only under I. CoefVerdierWeil.Conclusion for X0 and Y0 covers the duality paragraph. Edge cases fine; no lattice or ambient exceptional adjoint; one sorry; docstrings ok. Not recompiled (no file changed). Advisory: the domain-data node does not cite def-weil-exceptional-inverse-image."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T123728-L-1894028",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.VerdierPairing.verdier_pairing_three_transposes"
+  ],
+  "sorry_after": []
+ }
+}

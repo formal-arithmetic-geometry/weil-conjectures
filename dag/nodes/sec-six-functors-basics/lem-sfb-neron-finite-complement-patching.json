@@ -1,0 +1,336 @@
+{
+ "id": "lem-sfb-neron-finite-complement-patching",
+ "kind": "statement",
+ "title": "Patch Néron models across a finite complement on a Dedekind base",
+ "statement": "Let $D$ be a Dedekind domain, $E=\\operatorname{Frac}(D)$ and $S=\\operatorname{Spec}D$ [def-weil-affine-spectrum]. Let $V$ be a smooth separated finite-type $E$-scheme [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Suppose $U\\subseteq S$ is a nonempty open with finite complement consisting of closed points $s_1,\\ldots,s_r$. Suppose there is a smooth separated finite-type $U$-scheme $M_U$ with $(M_U)_E\\simeq V$ satisfying the mapping property for every smooth $U$-scheme. For every $i$ put $T_i=\\operatorname{Spec}D_{s_i}$ and suppose there is a smooth separated finite-type $T_i$-scheme $M_i$ with $(M_i)_E\\simeq V$ satisfying the mapping property for every smooth $T_i$-scheme. Then there are a smooth separated finite-type $S$-scheme $M$ and a generic isomorphism $M_E\\simeq V$ satisfying the mapping property for every smooth $S$-scheme. Moreover $M\\times_SU\\simeq M_U$ and $M\\times_ST_i\\simeq M_i$ by isomorphisms respecting the given generic identifications. For a base $W$ equal to $U$, $T_i$ or $S$, the mapping property for a $W$-scheme $M$ equipped with $M_E\\simeq V$ means that restriction followed by this isomorphism is a bijection $\\operatorname{Hom}_W(X,M)\\to\\operatorname{Hom}_E(X_E,V)$ for every smooth $W$-scheme $X$, where $X_E=X\\times_W\\operatorname{Spec}E$ [def-pc-base-change, def-sbc-smooth-morphisms]. Here a Dedekind domain means a Noetherian integrally closed domain of Krull dimension one. A group scheme over a scheme $T$ consists of multiplication, inverse and identity $T$-morphisms satisfying the group diagrams; it is commutative if multiplication is invariant under interchange of the two factors. Separated means that the diagonal is a closed immersion [def-weil-closed-immersion].",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 1.4 Proposition 1, implication (b) to (a), and its proof (printed p.18, PDF p.24), using 1.2 Lemma 5 and Proposition 4; patching input of 1.4 Theorem 3; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; project literature copy WANTED"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\eta=\\operatorname{Spec}E$. We use finite presentation in the sense locally of finite presentation, quasi-compact and quasi-separated. Each given model is finitely presented over its base: smoothness supplies local finite presentation; finite type supplies quasi-compactness; separatedness supplies quasi-separatedness (the implication is explicitly included in [lem-weil-pbc-qcqs-over-affine], locally over affine base opens). The same applies to any affine smooth $S$-scheme $Z$: the map between affines $Z\\to S$ is quasi-compact and separated, and is locally finitely presented by smoothness. Restrictions to affine base neighbourhoods are again finitely presented. For a point $s\\in S$, use the directed system of affine open neighbourhoods of $s$, with reverse inclusion: [lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods] supplies its qcqs bases, affine transition maps, and limit $\\operatorname{Spec}\\mathcal O_{S,s}$. We also use this at $\\eta$, where $\\mathcal O_{S,\\eta}=E$. Thus all applications below of [thm-pd-spreading-out] have precisely its required kind of index system. No assertion that a stalk spectrum is an open subscheme is used.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZM (lemma-descend-finite-presentation) and 0GWT (lemma-morphism-glueing-near-closed-point), affine-neighbourhood limit in its proof"
+   }
+  },
+  {
+   "text": "For each $i$, apply clause (1) of [thm-pd-spreading-out] to $M_i\\to T_i$ and the neighbourhood system of $s_i$. Obtain an affine neighbourhood $W_i$ of $s_i$, a finitely presented $W_i$-scheme $N_i$, and an isomorphism $(N_i)_{T_i}\\simeq M_i$. The stage $N_i$ is qcqs: $N_i\\to W_i$ is of finite presentation, so in particular quasi-compact and quasi-separated, and $W_i$ is affine, so [lem-weil-pbc-qcqs-over-affine] applies. Apply [lem-weil-pbc-descend-smooth-qcqs] to $N_i\\to W_i$; its stage map is locally finitely presented and its limit is the smooth $M_i$. Shrink $W_i$ to an affine neighbourhood where $N_i$ is smooth. Apply [lem-weil-pbc-descend-separated] to the same structural morphism and shrink again to make it separated. In both cases the source and target are qcqs, and shrinking preserves finite presentation. Remove the finitely many other $s_j$ and choose an affine neighbourhood of $s_i$ inside what remains. Now $W_i\\cap(S\\setminus U)=\\{s_i\\}$. Give $(N_i)_E$ its identification with $V$ induced from the specified one on $M_i$.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-descend-smooth-qcqs",
+    "lem-weil-pbc-descend-separated",
+    "lem-sfb-separated-lfp-target-open-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZM (lemma-descend-finite-presentation), 0C0C (lemma-descend-smooth), 01ZQ (lemma-descend-separated-finite-presentation); schemes.tex Tag 01K4 (lemma-quasi-compact-affine) for the qcqs stage"
+   }
+  },
+  {
+   "text": "Fix $i$ and choose an affine open $A_i\\subseteq W_i\\cap U$ containing $\\eta$. Over $E$ there is the specified comparison $e_{i,E}:(N_i)_E\\simeq(M_U)_E$, obtained through $V$. Apply clause (2) of [thm-pd-spreading-out], over the affine-neighbourhood system of $\\eta$ inside $A_i$, to $e_{i,E}$ and its inverse. The restricted models are finitely presented by step 1. After taking a common smaller affine neighbourhood, both maps are defined. Their two composites become identities over $E$; clause (3) applied twice, followed by a common shrinking, makes them identities already on an affine open $G_i\\subseteq A_i$. Thus we have an actual isomorphism $e_i:(N_i)_{G_i}\\simeq(M_U)_{G_i}$ inducing exactly the specified generic comparison, rather than merely an unspecified isomorphism of the two generic fibres.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), clauses (2) and (3), applied to a map, its inverse, and the two inverse identities"
+   }
+  },
+  {
+   "text": "The closed subset $S\\setminus G_i$ of $S$ contains no generic point. Every point in it is closed in $S$: a nonzero prime of the dimension-one domain $D$ is maximal. The scheme $S=\\operatorname{Spec}D$ is Noetherian ($D$ is a Noetherian ring and $S$ is affine, hence quasi-compact), so [lem-sc-noetherian-closed-points-finite] makes $S\\setminus G_i$ finite, and therefore its subset $W_i\\setminus G_i$ is a finite set of closed points of $W_i$; any subset of it is closed in $W_i$. Delete from $W_i$ every point of this set except $s_i$, and call the resulting open $B_i$. Then $s_i\\in B_i$, $B_i\\subseteq W_i$, and $B_i\\cap U=G_i$. Replace $N_i$ by its restriction to $B_i$. The isomorphism $e_i$ is now defined on the entire overlap with $U$. Also $T_i\\to S$ factors through $B_i$: every open containing $s_i$ contains its generalizations, and the primes of $D_{s_i}$ contract to such primes of $D$. Thus the identification $(N_i)_{T_i}\\simeq M_i$ is preserved. For $i\\ne j$, $B_i\\cap B_j\\subseteq U$ because $B_i$ contains no missing point except $s_i$.",
+   "uses": [
+    "lem-sc-noetherian-closed-points-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Noetherian closed-subset finiteness as stated in lem-sc-noetherian-closed-points-finite; elementary prime-chain argument for a dimension-one domain"
+   }
+  },
+  {
+   "text": "On the base cover $S=U\\cup\\bigcup_iB_i$, take the models $M_U$ and $N_i$. Glue $N_i$ to $M_U$ using $e_i$ on $B_i\\cap U$. On $B_i\\cap B_j$ the transition from $N_i$ to $N_j$ is $e_j^{-1}e_i$. Identity and cocycle conditions hold: on a triple intersection the product $(e_k^{-1}e_j)(e_j^{-1}e_i)$ equals $e_k^{-1}e_i$. All these intersections lie in $U$, so all indicated maps are defined on the whole required overlap. Apply [lem-galois-glue] to obtain an $S$-scheme $M$ with $M_U$ and the $N_i$ as these base restrictions. Consequently $M\\times_SU\\simeq M_U$ and $M\\times_ST_i\\simeq M_i$. The generic identifications agree through the $e_i$, giving one specified $M_E\\simeq V$.",
+   "uses": [
+    "lem-galois-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), relative gluing over the open cover of S"
+   }
+  },
+  {
+   "text": "The structural morphism $M\\to S$ is separated by [lem-sfb-separated-lfp-target-open-locality], since its restrictions over $U$ and the $B_i$ are separated. It is smooth because each restriction is smooth: in the affine-local smooth-ring-map description of [def-sbc-smooth-morphisms], every point has its required charts inside one of these base opens. Local finite type in the sense of [def-weil-finite-type-morphism]: let $Y=\\operatorname{Spec}A'$ be an affine open of $S$ and $x\\in M$ over $Y$. Choose $O\\in\\{U,B_1,\\ldots,B_r\\}$ containing the image of $x$. The restriction over $O$ is smooth, hence locally of finite presentation, so [def-sbc-locally-finite-presentation] gives affine opens $P=\\operatorname{Spec}A\\ni x$ of $M$ and $Q=\\operatorname{Spec}R\\subseteq O$ with $P$ mapping into $Q$ and $R\\to A$ of finite presentation, in particular finitely generated. By [lem-sc-affine-inter-principal-both] there are $h\\in R$ and $g\\in A'$ with $D_Q(h)=D_Y(g)$ containing the image of $x$. Then the inverse image of $D_Q(h)$ in $P$ is $\\operatorname{Spec}A_h$, an affine open containing $x$ inside the preimage of $Y$, and $A_h$ is finitely generated over $R_h=\\mathcal O_S(D_Q(h))=A'_g$, hence over $A'$ (adjoin $1/g$). These opens cover the preimage of $Y$. Each restriction is quasi-compact: $M_U\\to U$ is of finite type by hypothesis and $N_i\\to B_i$ is of finite presentation; [lem-pc-quasi-compact-local-on-target] therefore gives quasi-compactness of $M\\to S$. By [def-weil-finite-type-morphism] it is of finite type. This is gluing over an open cover of the BASE; arbitrary gluing of separated schemes along source opens would not establish separatedness.",
+   "uses": [
+    "lem-sfb-separated-lfp-target-open-locality",
+    "def-sbc-smooth-morphisms",
+    "def-weil-finite-type-morphism",
+    "lem-pc-quasi-compact-local-on-target",
+    "def-sbc-locally-finite-presentation",
+    "lem-sc-affine-inter-principal-both"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V8 (lemma-smooth-characterize), smoothness affine-locally; separatedness and quasi-compactness target-open locality as in the cited nodes"
+   }
+  },
+  {
+   "text": "First prove uniqueness for an affine smooth $S$-scheme $Z$. Suppose $a,b:Z\\to M$ induce the same generic morphism to $V$. Over $U$ they coincide by the assumed mapping property of $M_U$, applied to the smooth $U$-scheme $Z_U$; smoothness after base change is [lem-pc-proper-base-change](2). Similarly their pullbacks to $T_i$ coincide by the mapping property of $M_i$, since $Z_{T_i}$ is smooth over $T_i$. Choose an affine neighbourhood $H_i\\subseteq B_i$ of $s_i$. Both $Z_{H_i}$ and $M_{H_i}$ are finitely presented over $H_i$ (step 1). Clause (3) of [thm-pd-spreading-out], with limit $T_i$ as supplied by [lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods], makes $a$ and $b$ equal over some smaller neighbourhood $H'_i$ of $s_i$. The opens $U,H'_1,\\ldots,H'_r$ cover $S$, hence their inverse images cover $Z$. The uniqueness assertion of [lem-weil-pbc-scheme-morphism-gluing] now gives $a=b$. This proves injectivity without any finite-type hypothesis on a general smooth test scheme.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), clause (3); schemes.tex Tags 01JB/01JC, uniqueness for open-cover gluing"
+   }
+  },
+  {
+   "text": "Now let $Z$ be affine smooth over $S$, and let $u_E:Z_E\\to V$. The given mapping properties produce $u_U:Z_U\\to M_U$ and $u_i:Z_{T_i}\\to M_i$. Use the identifications of step 5. For each $i$ choose an affine $H_i\\subseteq B_i$ containing $s_i$. Apply clause (2) of [thm-pd-spreading-out] to the map $u_i$, using the finitely presented $H_i$-schemes $Z_{H_i}$ and $M_{H_i}$ and the neighbourhood limit $T_i$. It yields a map $v_i:Z_{H'_i}\\to M_{H'_i}$ for some affine neighbourhood $H'_i\\subseteq H_i$ of $s_i$, whose restriction to $T_i$ is exactly $u_i$. Its generic restriction is therefore $u_E$. On $H'_i\\cap U$, compare $v_i$ with $u_U$ as maps to $M_U$; their source is smooth over $U$ by [lem-pc-proper-base-change](2) and composition with the open inclusion (smoothness is local on affine charts in [def-sbc-smooth-morphisms]). The mapping property of $M_U$ makes them equal. If $i\\ne j$, $H'_i\\cap H'_j\\subseteq U$, so the same argument makes $v_i$ and $v_j$ equal there. Glue these maps to $Z\\to M$ by [lem-weil-pbc-scheme-morphism-gluing]. Its generic restriction is $u_E$, proving surjectivity for affine smooth $Z$.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "lem-pc-proper-base-change",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), clause (2); schemes.tex Tags 01JB/01JC, open-cover morphism gluing"
+   }
+  },
+  {
+   "text": "For an arbitrary smooth $S$-scheme $X$ and $u_E:X_E\\to V$, cover $X$ by affine opens $Z_a$. Smoothness restricts to these opens by its affine-local description. Step 8 constructs a map $Z_a\\to M$ extending $u_E|_{(Z_a)_E}$. On each affine open of $Z_a\\cap Z_b$, step 7 makes the two maps equal; open-cover uniqueness then makes them equal on all of $Z_a\\cap Z_b$. By [lem-weil-pbc-scheme-morphism-gluing] they glue to $X\\to M$. Conversely, any two such maps agree on every affine open by step 7, so they agree on $X$. Thus restriction is bijective for every smooth test scheme, even one that is not quasi-compact or separated. Together with steps 5 and 6 this proves every assertion. If $r=0$, take $M=M_U$ since $U=S$; the argument uses no missing-point charts. Empty test schemes and an empty $V$ cause no exception: all uses are the given Hom bijections and finite-presentation descent, and empty schemes are allowed there.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB/01JC (lemma-glue and lemma-glue-schemes), morphism gluing and its uniqueness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-descend-smooth-qcqs",
+  "lem-weil-pbc-descend-separated",
+  "lem-sfb-separated-lfp-target-open-locality",
+  "lem-sc-noetherian-closed-points-finite",
+  "lem-galois-glue",
+  "lem-pc-quasi-compact-local-on-target",
+  "lem-sc-affine-inter-principal-both",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "01ZM, 01ZQ and 0C0C with open-cover gluing in schemes.tex 01JB/01JC; detailed finite-complement assembly following BLR 1.4 Proposition 1 (printed p.18), and an explicit proof of its invocation of 1.2 Proposition 4. BLR project PDF WANTED; primary-source scan read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Glue a Neron model on a dense open of a Dedekind scheme with finite type Neron models over the local rings at the missing closed points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern Weierstrass integral/minimal models, Dedekind rings, smoothness, normalization, valuation topology or equality of existing morphisms; none supplies existence of a Neron model or extension of an arbitrary generic morphism to a proper smooth group scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A global Neron model exists if one exists over a dense open and at each point of its finite complement",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegral.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsIntegral X → Sort u} →\\n    (t : AlgebraicGeometry.IsIntegral X) →\\n      ((nonempty : Nonempty ↥X) →\\n          (component_integral : ∀ (U : X.Opens) [Nonempty ↥↑U], IsDomain ↑(X.presheaf.obj (Opposite.op U))) →\\n            motive ⋯) →\\n \", \"doc\": \"Given a type family over integral schemes, if we can construct terms for non-empty schemes where every non-empty open subset has an integral domain of sections, then we can define a term for any integ\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{U : X.Opens} (hU : Dense (X := X) U) : IsDominant U.ι\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, if $U$ is dense in $X$, then the canonical inclusion morphism $\\\\iota: U \\\\to X$ is dominant, meaning its image is dense in $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"(X : Scheme.{u}) [CompactSpace X] (H : ∀ x : X, ∃ r : Γ(X, ⊤), IsAffineOpen (X.basicOpen r) ∧ x ∈ X.basicOpen r) :\\n  IsQuasiAffine X\", \"doc\": \"Let $X$ be a compact scheme. If for every point $x \\\\in X$, there exists a global section $r$ of the structure sheaf of $X$ such that the basic open set $\\\\text{basicOpen}(X, r)$ is affine and contains \"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.mk\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (domain : X.Opens) → Dense ↑domain → (↑domain ⟶ Y) → X.PartialMap Y\", \"doc\": \"Given schemes $X$ and $Y$, an open subset $U$ of $X$ that is dense, and a morphism of schemes from $U$ to $Y$, this constructor produces a partial map from $X$ to $Y$ defined on the dense open subset \"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.FunctionField\", \"type\": \"{X : Scheme} [IsIntegral X] {U : X.Opens} [Nonempty U] : IsIntegral U\", \"doc\": \"Every non-empty open subset $ U $ of an integral scheme $ X $ is itself an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsDominant f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsDominant f) →\\n        ((denseRange : DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)) → motive ⋯) → motive t\", \"doc\": \"For any property $ P $ of a dominant morphism $ f: X \\to Y $, if $ P $ holds under the assumption that the underlying continuous map $ f_{\\\\text{base}} $ has dense image, then $ P $ holds for all domina\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.component_nontrivial\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"(X : Scheme.{u}) (U : X.Opens) [Nonempty U] : Nontrivial Γ(X, U)\", \"doc\": \"For any scheme $X$ and any non-empty open subset $U$ of $X$, the ring of global sections $\\\\Gamma(X, U)$ is non-trivial (i.e., contains at least two distinct elements).\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern Weierstrass integral/minimal models, Dedekind rings, smoothness, normalization, valuation topology or equality of existing morphisms; none supplies existence of a Neron model or extension of an arbitrary generic morphism to a proper smooth group scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"GlueData\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" : Type (u_1 + 1)\", \"doc\": \"A family of gluing data consists of\\n1. An index type `J`\\n2. A scheme `U i` for each `i : J`.\\n3. A scheme `V i j` for each `i j : J`.\\n  (Note that this is `J × J → Scheme` rather than `J → J → Scheme` \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.glued\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) : AlgebraicGeometry.Scheme\", \"doc\": \"The glued scheme of a glued space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) : AlgebraicGeometry.Scheme\", \"doc\": \"(Implementation). The glued scheme of a glue data.\\nThis should not be used outside this file. Use `AlgebraicGeometry.Scheme.GlueData.glued` instead.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.toLocallyRingedSpaceGlueData\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) : AlgebraicGeometry.LocallyRingedSpace.GlueData\", \"doc\": \"The glue data of locally ringed spaces associated to a family of glue data of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) : D.glued.OpenCover\", \"doc\": \"The open cover of the glued space given by the glue data.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.toGlueData\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (self : AlgebraicGeometry.Scheme.GlueData) : CategoryTheory.GlueData AlgebraicGeometry.Scheme\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) : CategoryTheory.Limits.HasMulticoequalizer D.diagram\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.ι\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) (i : D.J) : D.U i ⟶ D.glued\", \"doc\": \"The immersion from `D.U i` into the glued space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.openCover_I₀\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) : D.openCover.I₀ = D.J\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.ι_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) (i : D.J) : AlgebraicGeometry.IsOpenImmersion (D.ι i)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.openCover_X\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) (a✝ : D.J) : D.openCover.X a✝ = D.U a✝\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.vPullbackCone\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \" (D : AlgebraicGeometry.Scheme.GlueData) (i j : D.J) : CategoryTheory.Limits.PullbackCone (D.ι i) (D.ι j)\", \"doc\": \"The pullback cone spanned by `V i j ⟶ U i` and `V i j ⟶ U j`.\\nThis is a pullback diagram (`vPullbackConeIsLimit`).\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.GlueData and its glued scheme require already specified open charts and overlap data; they do not spread local Neron models, preserve separatedness and finite type in this construction, or supply the mapping property."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|[Ll]ocal.*[Mm]odel|[Mm]odel.*[Pp]atch",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local to global construction of a smooth separated finite type scheme with generic fiber universal mapping property on a Dedekind base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern Weierstrass integral/minimal models, Dedekind rings, smoothness, normalization, valuation topology or equality of existing morphisms; none supplies existence of a Neron model or extension of an arbitrary generic morphism to a proper smooth group scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|neron",
+   "results": "{\"t\": \"2026-10-24T06:58:46Z\", \"tool\": \"grep\", \"query\": \"Neron|Néron|neron\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits inspected; generic scheme gluing, smoothness, or Dedekind-ring declarations do not provide the Neron universal mapping property and this local-to-global construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Neron model exists over a Dedekind scheme if it exists over a dense open and over the local rings of its finite complement",
+   "results": "{\"t\": \"2026-10-24T06:58:46Z\", \"tool\": \"leansearch\", \"query\": \"A Neron model exists over a Dedekind scheme if it exists over a dense open and over the local rings of its finite complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mk.noConfusion\", \"IsDedekindRing.casesOn\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsNoetherian.casesOn\"], \"digest\": \"96cad89cb04627fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits inspected; generic scheme gluing, smoothness, or Dedekind-ring declarations do not provide the Neron universal mapping property and this local-to-global construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.GlueData",
+   "results": "{\"t\": \"2026-10-24T06:58:46Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.GlueData\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.GlueData.glued\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.GlueData.toLocallyRingedSpaceGlueData\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.GlueData.openCover\", \"AlgebraicGeometry.Scheme.GlueData.toGlueData\", \"AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram\"], \"digest\": \"e099725e4f528143\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits inspected; generic scheme gluing, smoothness, or Dedekind-ring declarations do not provide the Neron universal mapping property and this local-to-global construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue smooth separated finite type local models over a Dedekind domain with a model on a dense open and prove their generic fibre Neron mapping property",
+   "results": "{\"t\": \"2026-10-24T06:58:49Z\", \"tool\": \"leanfinder\", \"query\": \"Glue smooth separated finite type local models over a Dedekind domain with a model on a dense open and prove their generic fibre Neron mapping property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"80e1751a4b9b87d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits inspected; generic scheme gluing, smoothness, or Dedekind-ring declarations do not provide the Neron universal mapping property and this local-to-global construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme with the Neron universal mapping property can be glued from models over an open subset and finitely many local rings",
+   "results": "{\"t\": \"2026-10-24T06:59:29Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme with the Neron universal mapping property can be glued from models over an open subset and finitely many local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.GlueData.glued\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\"], \"digest\": \"fbddfec6a5c348bb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits inspected; generic scheme gluing, smoothness, or Dedekind-ring declarations do not provide the Neron universal mapping property and this local-to-global construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-neron-model",
+  "date": "2026-10-24",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.4 Proposition 1, implication (b) to (a), and its proof (printed p.18, PDF p.24), using 1.2 Lemma 5 and Proposition 4; patching input of 1.4 Theorem 3",
+   "via": [
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-neron-finite-complement-patching",
+  "worker": "stage1",
+  "summary": "Q74 checked BLR 1.4 Proposition 1 and 1.2 Lemma 5/Proposition 4 against the Stacks limit lemmas. Reused existing finite-presentation object/map/equality descent, smoothness and separatedness descent, finite closed-set and scheme/morphism gluing nodes. Wrote the actual shrinking, cocycle, separatedness and finite-type arguments, and the mapping property first for affine tests and then arbitrary tests. No new nodes or attachment. Statement unchanged.",
+  "blueprint": "The item is a created supporting lemma with blueprint.from.node null in the live ancestry, via lem-sfb-abelian-neron-model: realizes its finite-complement patching input (BLR 1.4 Proposition 1, (b) to (a)). Latest blueprint searched for Néron/Neron and finite complement: no equivalent blueprint node. Latest sk-thm-sf-ctf-stability read; no unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "why": "Generic Spec of a local ring of a scheme is the limit of the affine open neighbourhoods of the point used for finite-presentation limit descent, finite-complement shrinking or open-cover assembly; no statement of the six-functor unit supplies this scheme-theoretic tool."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Generic Descent of finitely presented data at a filtered limit used for finite-presentation limit descent, finite-complement shrinking or open-cover assembly; no statement of the six-functor unit supplies this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-descend-smooth-qcqs",
+    "why": "Generic Smoothness descends along arbitrary qcqs affine-transition limits used for finite-presentation limit descent, finite-complement shrinking or open-cover assembly; no statement of the six-functor unit supplies this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-descend-separated",
+    "why": "Generic Separatedness descends to a finite stage of a limit used for finite-presentation limit descent, finite-complement shrinking or open-cover assembly; no statement of the six-functor unit supplies this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-points-finite",
+    "why": "Generic A Noetherian scheme has only finitely many points in a closed-point closed subset used for finite-presentation limit descent, finite-complement shrinking or open-cover assembly; no statement of the six-functor unit supplies this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-galois-glue",
+    "why": "Generic Glueing of schemes along open immersions used for finite-presentation limit descent, finite-complement shrinking or open-cover assembly; no statement of the six-functor unit supplies this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic Proper and smooth morphisms are stable under base change used for finite-presentation limit descent, finite-complement shrinking or open-cover assembly; no statement of the six-functor unit supplies this scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-descend-smooth-qcqs",
+  "lem-weil-pbc-descend-separated",
+  "lem-sc-noetherian-closed-points-finite",
+  "lem-galois-glue",
+  "lem-pc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-7bd167c20",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-7bd167c20 (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps and every cited statement. There are no new nodes, and the statement is unchanged from the NK creation; it matches BLR 1.4 Prop. 1 (b)⇒(a) and how the parent lem-sfb-abelian-neron-model uses it. BLR itself is not in literature/ (it is on the WANTED list), so I checked against the proposition's known form. I found no duplicate: lem-sfb-neron-connected-model-globalization has different hypotheses. The construction is correct: thm-pd-spreading-out (1)-(3) is applied over the affine-neighbourhood limits (qcqs stages, affine transitions); smoothness and separatedness descend (0C0C/01ZQ, hypotheses checked); $B_i=G_i\\cup\\{s_i\\}$ gives $B_i\\cap B_j\\subseteq U$; lem-galois-glue is applied with transitions $e_j^{-1}e_i$ and the cocycle checked; and the mapping property is proved for affine tests (uniqueness by clause (3), existence by clause (2)) and then glued for arbitrary smooth X. I checked r=0, a trait base, and empty V or test scheme. FIX (item only): step 2 now gets 'N_i qcqs' from lem-weil-pbc-qcqs-over-affine, since a finitely presented map to the affine W_i is qc and qs; this replaces the uncited finite-presentation⇒finite-type⇒Noetherian route, and the two Noetherian lemmas are removed from uses/proof_deps. Step 4 now applies lem-sc-noetherian-closed-points-finite to $S\\setminus G_i$ in the Noetherian $S$ instead of $W_i$, whose Noetherianity had no cited node. Step 6 now proves local finite type in the every-affine-V form of def-weil-finite-type-morphism, using lfp charts and lem-sc-affine-inter-principal-both (01HR); before, it only said 'the same charts give local finite type'. Accepted tool_uses: local-ring-spec-limit, thm-pd-spreading-out, descend-smooth-qcqs, descend-separated, noetherian-closed-points-finite, lem-galois-glue, lem-pc-proper-base-change(2).; 1 file(s) fixed by the reviewer"
+ }
+}

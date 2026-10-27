@@ -1,0 +1,228 @@
+{
+ "id": "lem-pur-topos-open-scalar-unit",
+ "kind": "statement",
+ "title": "Open scalar balancing preserves the actual unit on a Grothendieck topos",
+ "statement": "Let $T$ be a Grothendieck topos with a fixed presentation by a site small in the universe of module sheaves [def-weil-pbc-topos]. Let $u$ be a subterminal object of $T$ (an object with a monomorphism $u\\to1$), put $V=T/u$, and let $j:V\\hookrightarrow T$ be its localization morphism. Let $a:R\\to S$ be a unital map of sheaves of commutative rings on $T$, with restricted rings $R_V=j^{-1}R$ and $S_V=j^{-1}S$. Use ordinary unbounded derived categories $D(R)$ and $D(S)$ of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Write $L_{j,R}$ and $L_{j,S}$ for exact restriction to $V$. Suppose $I_{j,R}\\dashv L_{j,R}$ and $I_{j,S}\\dashv L_{j,S}$ are the exact extension-by-zero adjunctions obtained by sheafifying the extension presheaf, with their actual units $\\eta_{j,R}:1\\xrightarrow{\\sim}L_{j,R}I_{j,R}$ and $\\eta_{j,S}:1\\xrightarrow{\\sim}L_{j,S}I_{j,S}$; the extension functors are fully faithful. On a presentation these extensions have the direct-sum formula over sections of $u$ given in [lem-weil-pbc-ringed-sheaf-slice-adjunction]. Put $E_T=-\\otimes_R^LS$ and $E_V=-\\otimes_{R_V}^LS_V$ [lem-pur-derived-change-of-rings]. Let $\\lambda_j:L_{j,S}E_T\\xrightarrow{\\sim}E_VL_{j,R}$ be canonical tensor/restriction balancing [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The ordinary balancing maps $[m]_f\\otimes s\\mapsto[m\\otimes s|_f]_f$, where $f$ indexes an extension-presheaf summand, induce a natural isomorphism of $S$-linear derived functors $\\beta_j:E_TI_{j,R}\\xrightarrow{\\sim}I_{j,S}E_V$. Its normalization for every $M\\in D(R_V)$ is\n$$\\eta_{j,S,E_VM}^{-1}\\,L_{j,S}(\\beta_{j,M})=E_V(\\eta_{j,R,M}^{-1})\\,\\lambda_{j,I_{j,R}M}.$$\nEquivalently, $\\beta_{j,M}^{-1}$ is the $I_{j,S}\\dashv L_{j,S}$ adjunct of $\\lambda_{j,I_{j,R}M}^{-1}E_V(\\eta_{j,R,M})$. No flatness of $a$, boundedness of $M$, enough-points hypothesis, or scheme presentation is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor: localized-site derived tensor comparison; the B-linear balancing and unit-normalized formulation for a subterminal slice of an arbitrary presented topos is an agent-formulated refinement, not the verbatim assertion of the tag."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-topos",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-pbc-ringed-presentation-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordinary coefficient adjunctions. Restriction of scalars commutes with element-site restriction by the identity map on every section. The composites I_R followed by scalar extension and scalar extension followed by I_S therefore have canonically isomorphic right adjoints. Uniqueness of left adjoints produces tau. The Hom equivalence of this uniqueness map identifies the two composites of units. Evaluating at (U,f,m) gives the formula with scalar 1, and S-linearity gives the formula for every scalar.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct rho using ordinary scalar extension commuting with continuous cocontinuous element-site precomposition and its sheafification-unit formula. Subterminality of A makes its section sets subsingletons; the direct-sum open unit is then its unique summand inclusion. The actual unit is invertible after sheafification and exact localization.",
+   "uses": [
+    "lem-pur-topos-open-scalar-restriction",
+    "lem-pur-topos-open-derived-unit-is-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the derived-from-ordinary result to the proved rho and tau and their section formulas. Insert tau and its formula into the existential conclusion. The last adjunct equation follows from the supplied unit coherence: write the Hom transpose as the actual unit followed by restriction of beta inverse, substitute the unit-coherence equation, combine the two restrictions of beta and beta inverse, and cancel their composite identity.",
+   "uses": [
+    "lem-pur-topos-open-scalar-derived-from-ordinary"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-pur-topos-open-scalar-restriction",
+  "lem-pur-topos-open-derived-unit-is-iso",
+  "lem-pur-topos-open-scalar-derived-from-ordinary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CZ, 04IE and 0E8I; adjoint uniqueness proves ordinary balancing; the derived lift is isolated in lem-pur-topos-open-scalar-derived-from-ordinary."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero on an open subtopos commutes with derived change of coefficient rings and the comparison preserves the open adjunction unit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : Y.Modules)\\n  (U : Y.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).unit.app M) U =\\n    M.presheaf.map (CategoryTheory.homOfLE ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\text{Mod}(Y) \\\\to \\\\text{Mod}(X)$ be the restriction functor and $f_*: \\\\text{Mod}(X) \\\\to \\\\text{Mod}(Y)$ be the pushforward functor on sheaves\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : X.Modules)\\n  (U : X.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit.app M) U =\\n    M.presheaf.map (CategoryTheory.eqToHom ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\mathbf{Mod}(\\\\mathcal{O}_Y) \\\\to \\\\mathbf{Mod}(\\\\mathcal{O}_X)$ and $f_*: \\\\mathbf{Mod}(\\\\mathcal{O}_X) \\\\to \\\\mathbf{O}_Y)$ be the restriction and\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"TopCat.Sheaf.extend_hom_app\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/Sites\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X : TopCat} {ι : Type u_1} {B : ι → TopologicalSpace.Opens ↑X}\\n  (F : TopCat.Presheaf C X) (F' : TopCat.Sheaf C X) (h : TopologicalSpace.Opens.IsBasis (Set.range B))\\n  (α : (CategoryTheory.inducedFunctor B).op.comp F ⟶ (CategoryTheory.induced\", \"doc\": \"Given a basis $\\\\mathcal{B}$ for the topology on a space $X$, there is a natural equivalence between the hom-set of natural transformations $\\\\text{Hom}((\\\\text{inducedFunctor } \\\\mathcal{B})^{\\\\text{op}} \"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app\", \"module\": \"Mathlib/Geometry/RingedSpace/SheafedSpace\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {U : TopCat} (X : AlgebraicGeometry.SheafedSpace C)\\n  {f : U ⟶ ↑X.toPresheafedSpace} (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f))\\n  (V : (TopologicalSpace.Opens ↑↑X.toPresheafedSpace)ᵒᵖ),\\n  (X.ofRestrict h).hom.c.app\", \"doc\": \"For a sheafed space $X$ over a category $\\\\mathcal{C}$, an open subset $U$ of $X$'s underlying space, and an open embedding $f: U \\\\to X$, the presheaf component of the morphism $X|_U \\\\to X$ is given by\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.Scheme) {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)) (V : (TopologicalSpace.Opens ↥X)ᵒᵖ),\\n  (AlgebraicGeometry.Scheme.Hom.toLRSHom (X.ofRestrict h)).c.app V =\\n \", \"doc\": \"For a scheme $X$, open subset $U$, open immersion $h: U \\\\to X$, and open set $V$ in $X$, the sheaf component of the morphism $X|_U \\\\to X$ at $V$ equals the map induced by the counit of the adjunction \"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {U : TopCat} (X : AlgebraicGeometry.PresheafedSpace C)\\n  {f : U ⟶ ↑X} (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f))\\n  (V : (TopologicalSpace.Opens ↑↑X)ᵒᵖ),\\n  (X.ofRestrict h).c.app V = X.presheaf.map (⋯.adjuncti\", \"doc\": \"For a presheafed space $X$ over a category $\\\\mathcal{C}$, an open subset $U \\\\subseteq X$, and an open embedding $f: U \\\\to X$, the presheaf component of the morphism $X|_U \\\\to X$ at an open set $V$ in \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: source inspection finds ordinary restriction adjunctions or generic conjugation, not derived scalar balancing on arbitrary open subtopoi with this unit normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Balanced tensor extension of scalars of module sheaves commutes with open shriek in unbounded derived categories with restriction unit normalization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → (LightCondensed.free R).Monoidal\", \"doc\": \"For any commutative ring $ R $, the free module functor from the category of light condensed sets to the category of light condensed $ R $-modules is a monoidal functor. This means it preserves the te\"}\n  {\"name\": \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"For any object $X$ in the opposite category $\\\\mathcal{C}^\\\\mathrm{op}$ and any element $a$ in the presheaf $S.\\\\text{val}.\\\\text{obj}\\\\, X$, the application of the unit morphism $\\\\text{unitToPushforwardOb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: source inspection finds ordinary restriction adjunctions or generic conjugation, not derived scalar balancing on arbitrary open subtopoi with this unit normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"CategoryTheory.conjugateIsoEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) : (L₂ ≅ L₁) ≃ (R₁ ≅ R₂)\", \"doc\": \"Thus conjugation defines an equivalence between natural isomorphisms.\"}\n  {\"name\": \"CategoryTheory.conjugateIsoEquiv_apply_hom\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : L₂ ≅ L₁) : ((CategoryTheory.conjugateIsoEquiv adj₁ adj₂) α).hom = (CategoryTheory.co\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateIsoEquiv_apply_inv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : L₂ ≅ L₁) : ((CategoryTheory.conjugateIsoEquiv adj₁ adj₂) α).inv = (CategoryTheory.co\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateIsoEquiv_symm_apply_hom\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (β : R₁ ≅ R₂) : ((CategoryTheory.conjugateIsoEquiv adj₁ adj₂).symm β).hom = (CategoryTheo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateIsoEquiv_symm_apply_inv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] {L₁ L₂ : CategoryTheory.Functor C D} {R₁ R₂ : CategoryTheory.Functor D C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (β : R₁ ≅ R₂) : ((CategoryTheory.conjugateIsoEquiv adj₁ adj₂).symm β).inv = (CategoryTheo\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: source inspection finds ordinary restriction adjunctions or generic conjugation, not derived scalar balancing on arbitrary open subtopoi with this unit normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extendByZero|jShriek|[Oo]pen.*[Ss]calar|[Ss]calar.*[Oo]pen",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Algebra/Subalgebra/Tower.lean\", \"line\": \"74\", \"text\": \"open IsScalarTower\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Tower.lean\", \"line\": \"177\", \"text\": \"open IsScalarTower\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Tower.lean\", \"line\": \"385\", \"text\": \"open IsScalarTower\"}\n  {\"file\": \"Mathlib/Algebra/Group/Pi/Lemmas.lean\", \"line\": \"446\", \"text\": \"@[to_additive (attr := simps) Function.ExtendByZero.hom\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Basic.lean\", \"line\": \"32\", \"text\": \"open Polynomial IsScalarTower\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Closure.lean\", \"line\": \"30\", \"text\": \"open IntermediateField IsScalarTower Polynomial\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Defs.lean\", \"line\": \"26\", \"text\": \"open Polynomial IsScalarTower\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"286\", \"text\": \"  have : IsScalarTower Γ(X, U.toOpens) Γ(X, X.basicOpen f) (F.obj (.op (U.basicOpen f))) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"104\", \"text\": \"  have : IsScalarTower Γ(Y, U.1) Γ(X, f ⁻¹ᵁ U.1) Γ(X, f ⁻¹ᵁ Y.basicOpen r) := .of_algebraMap_eq' rfl\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"105\", \"text\": \"  have : IsScalarTower Γ(Y, U.1) Γ(Y, Y.basicOpen r) Γ(X, f ⁻¹ᵁ Y.basicOpen r) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"73\", \"text\": \"    have : IsScalarTower R Γ(Spec R, basicOpen r) Γ(M, basicOpen r) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"76\", \"text\": \"    have : IsScalarTower R Γ(Spec R, basicOpen r) Γ(N, basicOpen r) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"87\", \"text\": \"instance functionField_isScalarTower [IrreducibleSpace X] (U : X.Opens) (x : U)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"259\", \"text\": \"  simp only [← Submodule.restrictScalars_localized' Γ(X, X.basicOpen (r j)),\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Module/Ball/RadialEquiv.lean\", \"line\": \"74\", \"text\": \"then their pointwise scalar product is an open set. -/\"}\n  {\"file\": \"Mathlib/RingTheory/IsTensorProduct.lean\", \"line\": \"612\", \"text\": \"open IsScalarTower (toAlgHom algebraMap_apply)\"}\n  {\"file\": \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"line\": \"189\", \"text\": \"open IsScalarTower in\"}\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"line\": \"529\", \"text\": \"open Polynomial IsScalarTower in\"}\n  {\"file\": \"Mathlib/RingTheory/Invariant/Basic.lean\", \"line\": \"181\", \"text\": \"open FaithfulSMul IsScalarTower Polynomial\"}\n  {\"file\": \"Mathlib/RingTheory/Algebraic/Basic.lean\", \"line\": \"176\", \"text\": \"open IsScalarTower\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"line\": \"700\", \"text\": \"open IsScalarTower (toAlgHom)\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/OpenImmersion.lean\", \"line\": \"78\", \"text\": \"    [IsScalarTower R S S'] [IsPushout R S R' S'] [IsStandardOpenImmersion R S] :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Pi.lean\", \"line\": \"653\", \"text\": \"noncomputable def Function.ExtendByZero.linearMap : (ι → R) →ₗ[R] η → R :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Pi.lean\", \"line\": \"654\", \"text\": \"  { Function.ExtendByZero.hom R s with\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"line\": \"131\", \"text\": \"open IsIntegrallyClosed PowerBasis Nat Polynomial IsScalarTower\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: source inspection finds ordinary restriction adjunctions or generic conjugation, not derived scalar balancing on arbitrary open subtopoi with this unit normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with open extension by zero with the canonical adjunction unit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          CategoryTheory.Functor.id (ModuleCat R) ⟶ (ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)\", \"doc\": \"Given commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\to S $, this natural transformation provides for each $ R $-module $ X $ a canonical $ R $-linear map from $ X $ to the module \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) → {X : ModuleCat R} → X ⟶ ((ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)).obj X\", \"doc\": \"Given commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\to S $, this natural transformation provides for each $ R $-module $ X $ a canonical $ R $-linear map from $ X $ to the module \"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) (M : ModuleCat.{max v u₂} R) (m : M) :\\n  (extendRestrictScalarsAdj f).unit.app M m = (1 : S) ⊗ₜ[R,f] m\", \"doc\": \"For a commutative ring homomorphism $ f : R \\\\to S $, the unit of the adjunction between the extension of scalars functor and the restriction of scalars functor, when applied to an element $ m $ of an \"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.compatibilityUnit_isoZero\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \": CompatibilityUnit adj (Functor.CommShift.isoZero F A) (Functor.CommShift.isoZero G A)\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with shift functors parameterized by an additive monoid $A$, and an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.unit_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) (x : ModuleCat R),\\n  (ModuleCat.ExtendRestrictScalarsAdj.unit f).app x = ModuleCat.ExtendRestrictScalarsAdj.Unit.map f\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\\\to S $, and for any $ R $-module $ X $, applying the unit natural transformation of the extension-restriction adjunction at $ X \"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \": 𝟭 (ModuleCat S) ⟶ restrictScalars f ⋙ coextendScalars f\", \"doc\": \"The natural transformation from the identity functor on the category of $ S $-modules to the composition of the restriction-of-scalars functor $ \\\\text{restrict}_f $ followed by the coextension-of-scal\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) → (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ R $-linear maps from an $ R $-module $ X $ to the restriction of scalars of an $ S \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → (X ⟶ (ModuleCat.restrictScalars f).obj Y) → ((ModuleCat.extendScalars f).obj X ⟶ Y)\", \"doc\": \"Given commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, this function establishes a natural bijection between $ R $-linear maps f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: source inspection finds ordinary restriction adjunctions or generic conjugation, not derived scalar balancing on arbitrary open subtopoi with this unit normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extendByZero|jShriek",
+   "results": "No hits. Directory: Algebra/Category/ModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions, sheaf pullback adjunctions and generic derived units do not state arbitrary-open derived S-linear balancing with this actual unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor coefficient extension commutes with open extension by zero with its actual adjunction unit",
+   "results": "Hits: CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.ihom.coev, CategoryTheory.Adjunction.CommShift.compatibilityUnit_isoZero, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions, sheaf pullback adjunctions and generic derived units do not state arbitrary-open derived S-linear balancing with this actual unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.changeOfRings, CategoryTheory.Adjunction.unit",
+   "results": "No hits. loogle: unknown identifier 'SheafOfModules.changeOfRings'",
+   "date": "2026-10-22",
+   "verdict": "no match: Loogle did not recognize this identifier; semantic and source searches supply the meaningful check."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat complexes extension by zero tensor product sheaves of modules localized site",
+   "results": "Hits: Module.flat_of_isLocalized_span, Module.Flat.lTensor_shortComplex_exact, Module.Flat.of_isLocalizedModule, Module.Flat.localizedModule, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions, sheaf pullback adjunctions and generic derived units do not state arbitrary-open derived S-linear balancing with this actual unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with extension by zero for an open subtopos and preserves the adjunction unit",
+   "results": "Hits: ModuleCat.homEquiv_extendScalarsComp, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.PullbackConstruction.adjunction, ModuleCat.ExtendRestrictScalarsAdj.unit_app, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar adjunctions, sheaf pullback adjunctions and generic derived units do not state arbitrary-open derived S-linear balancing with this actual unit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-topos-scalar-inverse-exchange-mate",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Purity transport Step 1 and Step 3, coefficient compatibility of the open constituent: normalization of scalar balancing by the actual open-adjunction unit, before taking an inverse-exchange adjunct.",
+   "via": [
+    "lem-pur-topos-scalar-inverse-exchange-mate",
+    "lem-pur-finite-free-compact-composition",
+    "lem-pur-finite-universal-smooth-trace",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-topos-open-scalar-unit",
+  "worker": "stage1",
+  "summary": "Reused existing site-presentation, generator-normalized slice tensor and unbounded K-flat tools; constructed the S-linear ordinary balancing and derived comparison, checked the actual unit on tensor generators, and derived the adjunct identity. No new nodes and no statement correction.",
+  "blueprint": "Current sk-thm-purity-transport proof Steps 1 and 3: coefficient compatibility of the open constituent underlying exceptional-adjunction transport; refines the scalar extension passage of thm-pur-rational-and-qbar-purity without changing that route.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-binary-cover-site-presentation",
+    "why": "Generic site presentation tool: apply its binary-cover hypothesis to u and 1 to represent the arbitrary subterminal; no purity assertion is imported."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived tensor and K-flat pullback tool for presentation equivalences and the canonical restriction/scalar comparison."
+   },
+   {
+    "node": "lem-sf-ringed-slice-tensor-generators",
+    "why": "Generic ordinary ringed-slice tensor comparison with its actual unit and generator formulas; used with the second factor S."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "Generic arbitrary-sheaf slice direct-sum construction, used to identify the underlying module of S-extension after scalar restriction."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic unbounded K-flat resolution existence for module sheaves."
+   },
+   {
+    "node": "lem-sf-ringed-open-total-tensor-kflat",
+    "why": "Generic preservation of K-flat resolutions by ringed-site extension, needed to compute scalar extension on the same representative."
+   },
+   {
+    "node": "lem-cbc-ringed-open-flat-resolution",
+    "why": "Generic ringed-slice flat-term preservation, ensuring that the extended K-flat representative also satisfies the flat-term hypothesis of the tensor/restriction representative comparison."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-46839c185",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-46839c185 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement identical to Q42 base; 0 new nodes; no re-split note), all 11 cited statements, Stacks 0GL1 (sites-cohomology.tex:4578, 'Details omitted') and 0E8I/04IE, and unit sk-thm-purity-transport. Checks: the normalization types agree, and the units are isomorphisms because u is subterminal; edge cases u=1, u=0, M=0, a=id and non-flat Z/4->Z/2 hold. Step 2: generator node with O=R, G=N, H=S; same underlying sheaf via the direct-sum formula and module sheafification; S-linearity checked on generators. Step 3: K-flat flat-term P; I_R P is a K-flat resolution (open-total-tensor-kflat) with flat terms (cbc-ringed-open-flat-resolution); derived-change-of-rings computes E_T and E_V; I_S is exact; lambda is the K-flat comparison of the tensor-pullback node. Step 4 follows from the generator node's statement (kappa is the adjunct of (eta tensor 1) followed by the restriction comparison, so L(psi) comp (eta tensor 1) = eta). Step 5: adjunct L(b)eta. Fault fixed, C3: Step 1 transported both R and S through one application of the one-ring lem-sp-binary-cover-site-presentation, which relies on that lemma's proof, not its statement. The fix rewrites the Step 1 text to apply the lemma once to R x S and split modules by the global idempotent (elementary); uses are unchanged. Duplicates: coef-etale-open-tensor, sf-open-tensor-normalization, sp-open-scalar-site-coherence and pur-etale-open-scalar-composition are scheme or finite-ring special cases; none is this arbitrary-topos derived unit-normalized statement. Tool uses: all 7 declared ones accepted as generic. Batch 5: the newly cited lem-sp-binary-cover-site-presentation reaches lem-trf-sieve-sheaves-covering-site, which is generic site theory (sieve site = covering-family site), given by neither the trace-formula nor the Poincare-duality assumption; accepted. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ToposOpenScalarUnit",
+  "declaration": "SheafOfModules.ToposOpenScalar.exists_toposOpenScalarUnit",
+  "declarations": [
+   "SheafOfModules.ToposOpenScalar.exists_toposOpenScalarUnit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ToposOpenScalarUnit.lean",
+  "statement": "theorem exists_toposOpenScalarUnit (hA : IsSubterminal A) (ET : DerivedChangeOfRingsCochainModel.{u, u, u, w, w} a) (EV : DerivedChangeOfRingsCochainModel.{u, u, u, w, w} (sliceMap A a)) : ∃ (rho : ET.E ⋙ restriction S A ≅ restriction R A ⋙ EV.E) (tau : extension R A ⋙ ET.E ≅ EV.E ⋙ extension S A) (lambda : ET.T ⋙ (restriction S A).mapDerivedCategory.{w, w} ≅ (restriction R A).mapDerivedCategory.{w, w} ⋙ EV.T) (beta : (extension R A).mapDerivedCategory.{w, w} ⋙ ET.T ≅ EV.T ⋙ (extension S A).mapDerivedCategory.{w, w}), (∀ (M : ringedSiteModules.{u} (derivedChangeRingIndependentCoefficients J R)) (U : Cᵒᵖ) (f : A.obj.obj U) (m : M.val.obj U) (s : S.obj.obj U), (rho.hom.app M).val.app (elementObj A U f) (tensorSection a ET M U m s) = tensorSection (sliceMap A a) EV ((restriction R A).obj M) (elementObj A U f) m s) ∧ (∀ (M : ringedSiteModules.{u} (derivedChangeRingIndependentCoefficients (elementTopology A) (presentationElementRing R A))) (U : Cᵒᵖ) (f : A.obj.obj U) (m : M.val.obj (elementObj A U f)) (s : S.obj.obj U), (tau.hom.app M).val.app U (tensorSection a ET _ U (extensionSection R A M U f m) s) = extensionSection S A (EV.E.obj M) U f (tensorSection (sliceMap A a) EV M (elementObj A U f) m s)) ∧ (∀ (P : CochainComplex (ringedSiteModules.{u} (derivedChangeRingIndependentCoefficients J R)) ℤ), CochainComplex.IsKFlatIndependentCoefficients (R := R) P → (restriction S A).mapDerivedCategory.{w, w}.map (ET.ε.app P) ≫ (restriction S A).mapDerivedCategoryFactors.{w, w}.hom.app ((ET.E.mapHomologicalComplex (.up ℤ)).obj P) ≫ DerivedCategory.Q.{w}.map ((NatIso.mapHomologicalComplex rho (.up ℤ)).hom.app P) = lambda.hom.app (DerivedCategory.Q.{w}.obj P) ≫ EV.T.map ((restriction R A).mapDerivedCategoryFactors.{w, w}.hom.app P) ≫ EV.ε.app (((restriction R A).mapHomologicalComplex (.up ℤ)).obj P)) ∧ (∀ (P : CochainComplex (ringedSiteModules.{u} (derivedChangeRingIndependentCoefficients (elementTopology A) (presentationElementRing R A))) ℤ), CochainComplex.IsKFlatIndependentCoefficients (R := presentationElementRing R A) P → ET.T.map ((extension R A).mapDerivedCategoryFactors.{w, w}.hom.app P) ≫ ET.ε.app (((extension R A).mapHomologicalComplex (.up ℤ)).obj P) ≫ DerivedCategory.Q.{w}.map ((NatIso.mapHomologicalComplex tau (.up ℤ)).hom.app P) = beta.hom.app (DerivedCategory.Q.{w}.obj P) ≫ (extension S A).mapDerivedCategory.{w, w}.map (EV.ε.app P) ≫ (extension S A).mapDerivedCategoryFactors.{w, w}.hom.app ((EV.E.mapHomologicalComplex (.up ℤ)).obj P)) ∧ IsIso (OpenTensorNormalization.exactDerivedAdjunction.{u + 1, u, w} (normalizedAdjunction R A)).unit ∧ IsIso (OpenTensorNormalization.exactDerivedAdjunction.{u + 1, u, w} (normalizedAdjunction S A)).unit ∧ (∀ M : DerivedCategory (ringedSiteModules.{u} (derivedChangeRingIndependentCoefficients (elementTopology A) (presentationElementRing R A))), EV.T.map ((OpenTensorNormalization.exactDerivedAdjunction.{u + 1, u, w} (normalizedAdjunction R A)).unit.app M) ≫ lambda.inv.app ((extension R A).mapDerivedCategory.{w, w}.obj M) ≫ (restriction S A).mapDerivedCategory.{w, w}.map (beta.hom.app M) = (OpenTensorNormalization.exactDerivedAdjunction.{u + 1, u, w} (normalizedAdjunction S A)).unit.app (EV.T.obj M)) ∧ (∀ M : DerivedCategory (ringedSiteModules.{u} (derivedChangeRingIndependentCoefficients (elementTopology A) (presentationElementRing R A))), (OpenTensorNormalization.exactDerivedAdjunction.{u + 1, u, w} (normalizedAdjunction S A)).homEquiv _ _ (beta.inv.app M) = EV.T.map ((OpenTensorNormalization.exactDerivedAdjunction.{u + 1, u, w} (normalizedAdjunction R A)).unit.app M) ≫ lambda.inv.app ((extension R A).mapDerivedCategory.{w, w}.obj M))",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d41d76535",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Q37 lem-pur-topos-open-scalar-unit d41d7653: all node clauses rendered (subterminal A on the element site; actual Mathlib pullback/pushforward adjunction and exactDerivedAdjunction units with IsIso; E_T/E_V as DerivedChangeOfRingsCochainModel; rho/tau pinned on pure tensors s⊗m and s⊗[m]_f; lambda/beta pinned on K-flat P through actual counits; normalization E_V(η_R)≫λ⁻¹≫L_S(β)=η_S equivalent to the node's; homEquiv adjunct clause). No hollow defs, sorry only in the theorem, docstrings with source/blueprint and 5 steps, statement verbatim, dependency records identical to live, added stmt_deps are landed def nodes. Edge cases u=0, u=1, M=0, a=id, non-flat a, unbounded all fine. Not compiled (no change). Advisories: exactness instance hypotheses (true, proved in the slice-adjunction proof); element-site, cochain-model and K-flat owners not in stmt_deps; older stmt_deps tensor-pullback and IsGrothendieckTopos unused in the Lean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-7b71a",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261024T234251-L-2548466",
+  "kind": "interface",
+  "note": "independent cc review: the residual derived-from-ordinary statement against its node and the DerivedChangeOfRingsCochainModel structure, judged true; the moved section defs against the clone HEAD of ToposOpenScalarUnit, verbatim; the item node proof/proof_deps against the Lean assembly; importers of the item, none"
+ }
+}

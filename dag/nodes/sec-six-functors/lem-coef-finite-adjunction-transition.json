@@ -3,175 +3,36 @@
  "kind": "statement",
  "proof": [
   {
-   "text": "Fix $m\\ge n$, put $A=A_m$, $B=A_n$, and write $T_W=-\\otimes^L_{A_W}B_W$ and $U_W$ for restriction, also on the point module categories. All sites are taken in the module universe. Use the fixed compactification in the statement throughout. Let $d:C_m\\otimes_A^LB\\xrightarrow{\\sim}C_n$ be its coefficient comparison followed by point sections, and let $\\alpha_r:C\\otimes_R^LA_r\\xrightarrow{\\sim}C_r$ be the comparisons assumed in the statement. Their specified successive-reduction normalization gives\n$$d\\circ(\\alpha_m\\otimes_A^LB)=\\alpha_n.$$\nHere and below the canonical scalar tensor reassociations are understood. We use precisely these supplied comparisons, not an independently chosen isomorphism between the endpoints. The finite input $K_r$ is bounded constructible and has finite Tor amplitude by hypothesis; the same properties of $\\omega_r$ are included in the finite dualizing result and the assumed finite Tor amplitude of $\\omega_r$. Thus coefficient comparisons at $K_m$ and $\\omega_m$ are isomorphisms.",
+   "text": "Apply finiteAdjunctionSquare to the actual defined horizontals and substitute the supplied gamma_m and gamma_n equations.",
    "uses": [
-    "lem-coef-integral-compact-support",
-    "lem-pod-point-sections-derived-reduction",
-    "lem-fix-compact-support-coefficient-change",
+    "lem-coef-finite-adjunction-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finiteAdjunctionNaturality to the defined horizontals and substitute the gamma and gamma-prime equations.",
+   "uses": [
+    "lem-coef-finite-adjunction-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The separate finite étale trace conjunct is the third component of the first conjunct of finiteDualizingCoefficientComparisons applied to h.",
+   "uses": [
     "lem-coef-finite-dualizing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Paragraph 2, final sentences: the transition maps are those of the finite adjunctions, since the dualizing comparisons are defined by their counits; explicit agent expansion."
-   }
-  },
-  {
-   "text": "Use the evaluation-normalized scalar-Hom isomorphism of [lem-sfb-dc-hom-scalar-adjunction] for $R_X\\to(A_r)_X$ and, on the one-object module site, for $R\\to A_r$. It is natural in both arguments and commutes with coefficient ring maps; there is no flatness assumption on $A\\to B$. In particular postcomposition by $\\operatorname{Res}_m\\tau_{m,n}$ on $H_m$ is the scalar-adjoint version of\n$$f_m\\longmapsto f_n=u_{m,n}\\circ T_X(f_m).$$\nTo spell out its meaning, take an arbitrary $P\\in D(R)$ and $h:P\\to H_m$. Put $P_r=P\\otimes_R^LA_r$, and let $(P_r)_X$ denote its constant complex on $X$. The global-sections adjunction and tensor-Hom transposition identify $h$ with an evaluation map\n$$f_m:(P_m)_X\\otimes_A^LK_m\\longrightarrow\\omega_m.$$\nThe corresponding map for the left transition applied to $h$ is the displayed $f_n$, with $T_X((P_m)_X\\otimes_A^LK_m)\\cong(P_n)_X\\otimes_B^LK_n$. The formula follows also directly from the scalar-adjunction unit $x\\mapsto x\\otimes1$: the adjunct of $\\tau_{m,n}f_m$ sends $x\\otimes b$ to $b\\tau_{m,n}f_m(x)$, which is $u_{m,n}T_X(f_m)$.",
-   "uses": [
-    "lem-sfb-dc-hom-scalar-adjunction",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Paragraph 2, final sentences: the transition maps are those of the finite adjunctions, since the dualizing comparisons are defined by their counits; explicit agent expansion."
-   }
-  },
-  {
-   "text": "The finite dualizing node states, with its indices renamed $A=A_m$, $B=A_n$,\n$$\\varepsilon_n\\circ F_n(u_{m,n})=(T_s\\varepsilon_m)\\circ c_{m,n,\\omega_m}^{-1}.$$\nIts last clause identifies this counit-defined map with its finite pro-etale realization, so this is the identity for the functors in this item. This already proves the trace assertion, including its specified normalization. Equivalently, without an inverse on the right,\n$$\\varepsilon_n F_n(u_{m,n})c_{m,n,\\omega_m}=T_s\\varepsilon_m.$$\nWe will use this last equality when composing the evaluation pairings. Restriction of compact support along $A\\to B$ is the canonical one for the same compactification, by [lem-sf-compact-support-restriction-of-scalars].",
-   "uses": [
-    "lem-coef-finite-dualizing",
-    "lem-sf-compact-support-restriction-of-scalars"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Paragraph 2, final sentences: the transition maps are those of the finite adjunctions, since the dualizing comparisons are defined by their counits; explicit agent expansion."
-   }
-  },
-  {
-   "text": "The coefficient square for the proper factor is a square of ringed topoi: its two vertical arrows are $p$ at $A$ and $B$, and its horizontal arrows are the identity underlying topos with structural ring map $A_W\\to B_W$. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to this square. Its pullbacks along the horizontal arrows are exactly $T_W$. Its exchange is the canonical proper coefficient map, with this normalization by [lem-sp-direct-image-change-ring-transpose]. Hence the proper projection map commutes with coefficient change for every input and every tensor parameter, without requiring any exchange to be invertible. The same generic ringed-topos statement applies to the sections morphism from $s_{\\mathrm{proet}}$ to the one-object coefficient site. Sections are the derived direct image for this morphism, and are computed termwise here by [lem-weil-point-proetale-sections-exact]. These applications are legitimate for arbitrary $P_m$, not only constructible parameters.",
-   "uses": [
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-sp-direct-image-change-ring-transpose",
-    "lem-weil-point-proetale-sections-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Paragraph 2, final sentences: the transition maps are those of the finite adjunctions, since the dualizing comparisons are defined by their counits; explicit agent expansion."
-   }
-  },
-  {
-   "text": "For the open factor use [lem-cbc-extension-zero-projection-formula]. With coefficient parameter $B_{\\overline X}$ it gives the canonical comparison $T_{\\overline X}j_!M\\cong j_!T_XM$, before forgetting the $B$ action: on total-tensor representatives it is the balanced map $(j_!x)\\otimes b\\mapsto j_!(x\\otimes b)$. To justify these representatives, choose a K-flat flat-term resolution $Q\\to M$. The open tensor formula and exactness of $j_!$ and $j^*$ show $j_!Q$ is K-flat, since tensoring it with an acyclic complex is $j_!$ of $Q$ tensored with an acyclic restriction. For two tensor factors, scalar change of the open projection map and the open projection after scalar change restrict to the identical balanced tensor map on $X$; the $j_!\\dashv j^*$ bijection makes them equal on $\\overline X$. Tensor reassociation respects the $B$ action by $b(x\\otimes y)=(bx)\\otimes y$. Therefore, substituting this open identity and the proper identity of step 4 into the defining composite $\\operatorname{PF}^c=Rp_*(\\gamma_j)\\pi_p$ proves coefficient compatibility of the compact-support projection map. This is just pasting those two identities in the fixed compactification; no compactification-independence theorem or inverse projection map is needed.",
-   "uses": [
-    "lem-cbc-extension-zero-projection-formula",
-    "lem-cbc-proetale-extension-zero",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-exchange-projection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Paragraph 2, final sentences: the transition maps are those of the finite adjunctions, since the dualizing comparisons are defined by their counits; explicit agent expansion."
-   }
-  },
-  {
-   "text": "For $h:P\\to H_m$ as in step 2, define $b_m(f_m):P_m\\otimes_A^LC_m\\to A$ as follows. Apply the point-section projection map, then the compact-support projection for $(K_m,(P_m)_s)$, then $\\Gamma(s,F_m(f_m))$, and finally $\\Gamma(s,\\varepsilon_m)$. Tensor symmetry puts $P_m$ first throughout. Thus its last two arrows are\n$$\\Gamma(s,F_m((P_m)_X\\otimes_A^LK_m))\\xrightarrow{\\Gamma F_m(f_m)}\\Gamma(s,F_m\\omega_m)\\xrightarrow{\\Gamma\\varepsilon_m} A.$$\nApply the current [lem-coef-finite-mapping-adjunction] to $M=K_m$: the item hypotheses make $K_m$ bounded constructible with finite Tor amplitude, so its canonical natural isomorphism and stated evaluation/counit normalization identify the $R$-linear pairing adjoint to $\\widetilde\\gamma_mh:P\\to J_m$ exactly as\n$$P\\otimes_R^LC\\longrightarrow P_m\\otimes_A^L(C\\otimes_R^LA)\\xrightarrow{1\\otimes\\alpha_m}P_m\\otimes_A^LC_m\\xrightarrow{b_m(f_m)}A.$$\nDefine $b_n(f_n)$ by the same composite at $B$. All projection arrows here are ambient morphisms, so the construction makes sense without a constructibility or Tor hypothesis on $P$.",
-   "uses": [
-    "lem-coef-finite-mapping-adjunction",
-    "lem-sfb-dc-hom-scalar-adjunction",
-    "def-exchange-projection",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "def-weil-finite-coefficient-point"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Paragraph 2, final sentences: the transition maps are those of the finite adjunctions, since the dualizing comparisons are defined by their counits; explicit agent expansion."
-   }
-  },
-  {
-   "text": "Apply coefficient change to the composite defining $b_m(f_m)$. Steps 4 and 5 move it through the point-section and compact-support projection arrows. Naturality of the coefficient map moves it through $F_m(f_m)$; at the resulting last arrow use the trace equality of step 3. The resulting explicit equality is\n$$b_n(u_{m,n}T_Xf_m)\\circ(1_{P_n}\\otimes d)=T_{\\mathrm{pt}}(b_m(f_m)),$$\nas maps\n$$P_n\\otimes_B^L(C_m\\otimes_A^LB)\\longrightarrow B.$$\nIndeed the left route, before trace, is $\\Gamma F_n(T_Xf_m)$ followed by $\\Gamma F_n(u_{m,n})$, whereas the coefficient-changed right route is $\\Gamma(T_s\\varepsilon_m)$ after the coefficient comparison at $\\omega_m$. The equation $\\varepsilon_nF_n(u)c_{\\omega_m}=T_s\\varepsilon_m$ identifies exactly these last composites. Naturality applies also to the potentially unbounded source of $f_m$: the coefficient maps there are the ambient mates from steps 4 and 5, not isomorphisms asserted by the finite-Tor theorem. Only $c_{K_m}$, giving $d$, and $c_{\\omega_m}$ are inverted.",
-   "uses": [
-    "lem-coef-finite-dualizing",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "def-exchange-projection",
-    "lem-fix-compact-support-coefficient-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Paragraph 2, final sentences: the transition maps are those of the finite adjunctions, since the dualizing comparisons are defined by their counits; explicit agent expansion."
-   }
-  },
-  {
-   "text": "Let $q:A\\twoheadrightarrow B$. Under scalar adjunction, postcomposing $b_m(f_m)$ with $q$ corresponds to $T_{\\mathrm{pt}}(b_m(f_m))$: the counit identifies $A\\otimes_A^LB$ with $B$. Therefore the equality of step 7, precomposed with $1\\otimes(\\alpha_m\\otimes_A^LB)$, and $d(\\alpha_m\\otimes_A^LB)=\\alpha_n$ from step 1, give equality of pairings on $P\\otimes_R^LC$:\n$$q\\circ b_m(f_m)\\circ(1\\otimes\\alpha_m)=b_n(f_n)\\circ(1\\otimes\\alpha_n).$$\nHere both sides include the scalar-extension units from $P\\otimes_R^LC$ displayed in step 6. Their equality uses the unit for the composite $R\\to A\\to B$; on a K-flat representative it is $x\\mapsto(x\\otimes1)\\otimes1=x\\otimes1$. Thus the transition on the right is exactly postcomposition by the quotient $q$, not an arbitrarily chosen reduction identification.",
-   "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-coef-integral-compact-support",
-    "lem-pod-point-sections-derived-reduction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Paragraph 2, final sentences: the transition maps are those of the finite adjunctions, since the dualizing comparisons are defined by their counits; explicit agent expansion."
-   }
-  },
-  {
-   "text": "Transpose step 8 under tensor-Hom adjunction in $D(R)$. By steps 2 and 6 its two maps $P\\to J_n$ are respectively\n$$J(q)\\,\\widetilde\\gamma_mh\\quad\\text{and}\\quad\\widetilde\\gamma_n H(\\operatorname{Res}_m\\tau_{m,n})h.$$\nSince $P$ and $h:P\\to H_m$ were arbitrary, take $P=H_m$ and $h=1_{H_m}$. This proves the desired commuting square as equality of morphisms in $D(R)$. Tensor-Hom transposition is a bijection, so this tests the full derived morphisms and does not infer equality from their actions on individual cohomology groups.",
-   "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pur-rhom-global-sections"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Paragraph 2, final sentences: the transition maps are those of the finite adjunctions, since the dualizing comparisons are defined by their counits; explicit agent expansion."
-   }
-  },
-  {
-   "text": "For a morphism $z:K\\to K'$ between objects satisfying the hypotheses, the maps on $H_r$ are precomposition by $z$ (or $z_r$ after scalar adjunction), and the maps on $J_r$ are precomposition by $C(z):C\\to C'$. The current [lem-coef-finite-mapping-adjunction] states that $\\gamma_{r,M}$ is a canonical natural isomorphism for every finite constructible finite-Tor $M$, so it applies to both $K_r$ and $K'_r$ and is natural in $z_r$. The scalar-Hom comparison and $\\alpha_r$ are natural as well. Explicitly, the evaluation relation is $f'_r(1\\otimes z_r)$; inserting it in step 6 replaces compact support by $F_r(z_r)$, hence replaces the pairing by precomposition with $1\\otimes C_r(z_r)$. It follows after transposition that $J_r(C(z))\\widetilde\\gamma_{r,K'}=\\widetilde\\gamma_{r,K}H_r(z)$. Precomposition by $z$ commutes with postcomposition by $\\tau_{m,n}$, and precomposition by $C(z)$ commutes with postcomposition by $q$. Thus the proved squares are contravariantly natural in $K$. When $m=n$ the coefficient units and $u_{m,m}=1$ give the identity square; when $K=0$ or $X$ is empty all pairings have zero source. These cases require no additional hypothesis.",
-   "uses": [
-    "lem-coef-finite-mapping-adjunction",
-    "lem-sfb-dc-hom-scalar-adjunction",
-    "lem-coef-integral-compact-support",
-    "lem-pod-point-sections-derived-reduction",
-    "lem-coef-finite-dualizing"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Paragraph 2, final sentences: the transition maps are those of the finite adjunctions, since the dualizing comparisons are defined by their counits; explicit agent expansion."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-exchange-projection",
-  "def-weil-finite-coefficient-point",
-  "lem-cbc-extension-zero-projection-formula",
-  "lem-cbc-proetale-extension-zero",
-  "lem-coef-finite-dualizing",
-  "lem-coef-finite-mapping-adjunction",
-  "lem-coef-integral-compact-support",
-  "lem-fix-compact-support-coefficient-change",
-  "lem-pc-kflat-resolution",
-  "lem-pod-point-sections-derived-reduction",
-  "lem-pur-rhom-global-sections",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-sf-compact-support-restriction-of-scalars",
-  "lem-sfb-dc-hom-scalar-adjunction",
-  "lem-sp-direct-image-change-ring-transpose",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-coef-tower-coaugmentation",
-  "lem-coef-tower-evaluation-pairing",
-  "lem-coef-tower-trace-rectification",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-coef-tower-natural-currying"
+  "lem-coef-finite-adjunction-square",
+  "lem-coef-finite-adjunction-naturality",
+  "lem-coef-finite-dualizing"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-  "place": "Paragraph 2, final two sentences; explicit tensor-Hom, coefficient-mate, and counit calculation. Auxiliary source read: literature/stacks-project/sites-cohomology.tex, Tags 07A6 (lemma-adjoint), 08J9 (lemma-internal-hom), 0B56 (equation-projection-formula-map), 0E48 (remark-compatible-with-diagram)."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Paragraph 2; separate coefficient square, input naturality, and the existing finite trace identity."
  },
  "mathlib_match": null,
  "status": "split",
@@ -434,23 +295,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-cbc-extension-zero-projection-formula",
-  "lem-cbc-proetale-extension-zero",
-  "lem-fix-compact-support-coefficient-change",
-  "lem-pc-kflat-resolution",
-  "lem-pod-point-sections-derived-reduction",
-  "lem-pur-rhom-global-sections",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-sf-compact-support-restriction-of-scalars",
-  "lem-sfb-dc-hom-scalar-adjunction",
-  "lem-sp-direct-image-change-ring-transpose",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-point-proetale-sections-exact"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -463,15 +308,6 @@
   "module": "Sheaf.SixFunctors.FiniteAdjunctionTransition",
   "declaration": "WeilConjectures.FiniteAdjunctionTransition.finiteAdjunctionTransition",
   "declarations": [
-   "WeilConjectures.FiniteAdjunctionTransition.H",
-   "WeilConjectures.FiniteAdjunctionTransition.restrictedTau",
-   "WeilConjectures.FiniteAdjunctionTransition.HTransition",
-   "WeilConjectures.FiniteAdjunctionTransition.C",
-   "WeilConjectures.FiniteAdjunctionTransition.J",
-   "WeilConjectures.FiniteAdjunctionTransition.JTransition",
-   "WeilConjectures.FiniteAdjunctionTransition.alpha",
-   "WeilConjectures.FiniteAdjunctionTransition.scalarHom",
-   "WeilConjectures.FiniteAdjunctionTransition.finiteHorizontal",
    "WeilConjectures.FiniteAdjunctionTransition.finiteAdjunctionTransition"
   ],
   "file": "lean/Sheaf/SixFunctors/FiniteAdjunctionTransition.lean",
@@ -490,5 +326,26 @@
   "result": "pass",
   "note": "F2/R1 closed: _hTensor fixes M.tensorEvaluation n to canonicalTensorEvaluation (new def node def-coef-tower-normalized-tensor-evaluation: unique iso satisfying a real localization-counit equation on all homotopy complexes, chosen from an ∃! lemma with a proof docstring; not hollow; no duplicate in Mathlib or side-live). The level-wise frame/omegaEvaluation/omegaOrigin enter the horizontal only through fβ_r≫ωO_r, which pairingEvaluation (valid on CoefTower.inputs ⊆ finiteTorConstructibleIntegral via _hab) and _hOrigin fix as (fH⊗eB)⁻¹≫δ⁻¹≫ev(beta)≫eTrace. The returned single-level negation is excluded. Remaining freedom is tower-compatible (_hHom, support_finite, _hTrace up to counit-preserving automorphisms), so the square and naturality hold uniformly. R2 closed: finiteMappingAdjunctionAt/_hFiniteMapping and the finiteHorizontalCanonical alias deleted. H, J, C, alpha, tau, quotient, naturality and étale trace conjunct unchanged from accepted heads. Statements verbatim; docstrings with source/blueprint; sorry only in the theorem and the ∃! lemma; not on the dropped-route list. Compile: nt_compile --json timed out at 60 s on the tensor module at load ~290; lcompile run_set at 560 s: both clean (tensor 180-319 s wall/~30 s CPU, item 11.4 s); worker measured 43.7 s, so land at lower load. Advisory: trace-constructions declarations narrowed 25→9; coefTraceInput (and coefPairingHom/Tensor as in earlier heads) are owned only by theorem nodes outside stmt_deps."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-52d21",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261025T123429-L-1870654",
+  "kind": "interface",
+  "note": "independent cc review: relocated construction block vs clone item module (verbatim diff); new statement signatures vs node lean.statement; finiteAdjunctionSquare/Naturality vs the item's first two conjuncts and the IsSpecified clauses of CoefCurryingModels; trace conjunct vs finiteDualizingCoefficientComparisons"
+ }
 }

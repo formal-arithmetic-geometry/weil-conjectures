@@ -1,0 +1,138 @@
+{
+ "id": "lem-cbc-signed-koszul-tensor-coproduct",
+ "kind": "statement",
+ "title": "The pure-tensor cofan for a positive-length negative Koszul tensor is colimiting",
+ "statement": "Let (C,J,O) be a small ringed site with commutative structure sheaf O [def-weil-sheaf-of-modules-category]. Let A be a commutative ring and rho:A -> Gamma(O) a ring homomorphism. For r,m natural numbers, a:Fin(r+1)->A, an arbitrary unbounded complex K, and an integer q, the cofan with point (ringedNegativeKoszulTensor O rho a m).obj K in degree q and legs ringedNegativeKoszulSummand O rho a m K q I, for all subsets I of Fin(r+1), is a coproduct of the objects K^(q+|I|). The tensor and its specified pure-tensor legs are those of [def-cbc-signed-koszul-completion-model] and [def-pc-tensor-complex-sheaves]. This asserts only the graded universal property, with no differential or coordinate matrix assertion.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free negative Koszul tensors; steps 1 and 2 of lem-cbc-signed-koszul-tensor-coordinates."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-cbc-signed-koszul-completion-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply the degreewise basis coproduct presentation to the ordered negative Koszul complex in every integer degree.",
+   "uses": [
+    "lem-cbc-signed-koszul-basis-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, finite free negative Koszul calculation."
+   }
+  },
+  {
+   "text": "Assemble those finite degreewise coproducts through the total tensor with K. Reindex the pairs by subset cardinality and identify the resulting pure tensor legs with ringedNegativeKoszulSummand.",
+   "uses": [
+    "lem-cbc-signed-koszul-tensor-assembly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-signed-koszul-basis-coproduct",
+  "lem-cbc-signed-koszul-tensor-assembly"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, finite free negative Koszul calculation; decomposition into degreewise basis and total-tensor assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inclusions of pure tensors of negative two term Koszul factors give a degreewise coproduct indexed by finite subsets",
+   "results": "UNAVAILABLE: HTTP 502; no absence verdict inferred from this service.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical inclusions of finite subsets into a tensor of two term complexes form a coproduct in each degree",
+   "results": "8 hits: ιTensorObj, ιTotal, ιTotalOrZero, HasGoodTensor and HasTensor infrastructure.",
+   "date": "2026-10-26",
+   "verdict": "No theorem identifies the specified subset family with a colimiting cofan."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctorDesc\"",
+   "results": "3 hits: mapBifunctorDesc, ι_mapBifunctorDesc and its reassociated equation.",
+   "date": "2026-10-26",
+   "verdict": "Generic total-tensor descent only; the recursive finite basis still has to be proved."
+  },
+  {
+   "tool": "grep",
+   "query": "ιMapBifunctor_d|ι_total_d|totalXIso|tensorObjXIso|mapBifunctor.*Iso",
+   "results": "25 server hits for graded-object associators/unitors and total-tensor flip isomorphisms. Local rg of ringedNegativeKoszul and positiveBasis found the definitions and consumers, not a matching proved coproduct theorem.",
+   "date": "2026-10-26",
+   "verdict": "Use the actual tensor universal properties; no existing finite-subset cofan result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SignedKoszulTensorCoordinates",
+  "date": "2026-10-26",
+  "group": "W4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "The finite free tensor calculation of the completed extension-by-zero comparison, isolated below lem-cbc-signed-koszul-tensor-coordinates: The pure-tensor cofan for a positive-length negative Koszul tensor is colimiting.",
+   "via": [
+    "lem-cbc-signed-koszul-tensor-coordinates",
+    "lem-cbc-signed-koszul-finite-coordinates",
+    "lem-cbc-exact-linear-koszul-fiber"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SignedKoszulTensorCoproduct",
+  "file": "lean/Sheaf/CategoryTheory/SignedKoszulTensorCoproduct.lean",
+  "declaration": "CategoryTheory.isColimit_ringedNegativeKoszulSummands_succ",
+  "statement": "theorem isColimit_ringedNegativeKoszulSummands_succ\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u}) {A : Type z} [CommRing A]\n    (ρ : A →+* RingCat.sectionsSubring (O.obj ⋙ forget₂ CommRingCat RingCat))\n    (r : ℕ) (a : Fin (r + 1) → A) (m : ℕ) (K : ringedSiteComplex O) (q : ℤ) :\n    Nonempty (IsColimit (Cofan.mk\n      (((ringedNegativeKoszulTensor O ρ a m).obj K).X q)\n      (ringedNegativeKoszulSummand O ρ a m K q)))",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261026T130720-L-3495738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261026T142231-L-303199",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

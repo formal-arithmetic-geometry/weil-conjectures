@@ -1,0 +1,237 @@
+{
+ "id": "lem-trf-prepared-generic-fibre-nonreduced",
+ "kind": "statement",
+ "title": "Detecting a nonreduced generic fibre after geometric-reduction preparation",
+ "statement": "Let $f:X\\to Y$ be a finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], with $Y$ irreducible [def-weil-irreducible-components] and generic point $\\eta$ [def-sc-generic-point]. Let $U\\subseteq Y$ be a nonempty open subscheme, let $T$ be an integral scheme [def-pc-integral-scheme] with generic point $\\xi$, and let $q:T\\to U$ be a universal homeomorphism [def-weil-universal-homeomorphism]. Give $T$ its $Y$-scheme structure via the composite $T\\xrightarrow{q}U\\hookrightarrow Y$. Set $P=X\\times_YT$, with projection $h:P\\to T$ [def-pc-fibre-product], and $R=P_{\\mathrm{red}}$ [def-weil-pbc-scheme-reduction], regarded as a $T$-scheme. Suppose $X_\\eta$ is not geometrically reduced over $\\kappa(\\eta)$, whereas $R_\\xi$ is geometrically reduced over $\\kappa(\\xi)$ [def-pc-scheme-fibre, def-weil-residue-field, def-pc-geometrically-irreducible]. Then the scheme $P_\\xi$ is not reduced [def-pc-reduced-scheme].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0577 (lemma-not-geometrically-reduced-in-neighbourhood), proof: the generic-fibre comparison from the prepared diagram through the conclusion that the unreduced pullback has nonreduced generic fibre"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-weil-universal-homeomorphism",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-pc-geometrically-irreducible",
+  "def-pc-reduced-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Put $g:T\\to Y$ equal to $q$ followed by the open immersion. By the definition of universal homeomorphism, $q$ is a homeomorphism. Thus $q(\\xi)$ is generic in $U$. Every nonempty open $W\\subseteq Y$ meets $U$: otherwise the two proper closed complements of $W$ and $U$ cover the irreducible space $Y$. Hence $W\\cap U$ contains $q(\\xi)$, so $g(\\xi)$ belongs to every nonempty open of $Y$ and is generic in $Y$. Uniqueness of the generic point of the scheme $Y$ gives $g(\\xi)=\\eta$.",
+   "uses": [
+    "def-weil-universal-homeomorphism",
+    "def-sc-generic-point",
+    "def-weil-irreducible-components",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0577, lemma-not-geometrically-reduced-in-neighbourhood, proof: the prepared generic points; elementary topological identification"
+   }
+  },
+  {
+   "text": "Suppose, for a contradiction, that $P_\\xi$ is reduced. The integral scheme $T$ is irreducible, so its generic point $\\xi$ is the generic point of its sole irreducible component. Apply reduction of generic fibres to $h:P\\to T$: the canonical map $R_\\xi\\to P_\\xi$ identifies $R_\\xi$ with $(P_\\xi)_{\\mathrm{red}}$ over $\\kappa(\\xi)$. A reduced scheme has zero nilradical, so its reduction has the same structure sheaf and is canonically itself. Consequently $R_\\xi\\to P_\\xi$ is an isomorphism over $\\kappa(\\xi)$. The assumed geometric reducedness of $R_\\xi$ therefore makes $P_\\xi$ geometrically reduced over $\\kappa(\\xi)$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-pur-reduction-generic-fibre",
+    "def-weil-pbc-scheme-reduction",
+    "def-pc-reduced-scheme",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0577, lemma-not-geometrically-reduced-in-neighbourhood, proof: the reduction map on generic fibres; Tag 054Z, lemma-reduction-generic-fibre"
+   }
+  },
+  {
+   "text": "Choose algebraic closures of $\\kappa(\\xi)$ and $\\kappa(\\eta)$. The geometric fibre $P_{\\bar\\xi}$ is the base change of $P_\\xi$ to the chosen closure of $\\kappa(\\xi)$, so it is reduced. Apply the geometric-reduced-fibre-locus base-change equality to $f:X\\to Y$ and $g:T\\to Y$, whose pullback is exactly $h:P\\to T$. The equality at $\\xi$, together with $g(\\xi)=\\eta$, says that $X_{\\bar\\eta}$ is reduced. This is the base change of $X_\\eta$ to the chosen algebraic closure of $\\kappa(\\eta)$; the algebraic-closure test implies that $X_\\eta$ is geometrically reduced over $\\kappa(\\eta)$. This contradicts the hypothesis. Therefore $P_\\xi$ is not reduced.",
+   "uses": [
+    "def-weil-geometric-fibre",
+    "lem-trf-geometric-reduced-fibre-locus-base-change",
+    "lem-trf-geometric-reducedness-algebraic-closure-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0577, lemma-not-geometrically-reduced-in-neighbourhood, proof: geometric reducedness cannot descend from an isomorphic reduced generic fibre; Tag 0576, lemma-base-change-fibres-geometrically-reduced, and Varieties Tags 0384, 035X and 020I"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-universal-homeomorphism",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "lem-sc-scheme-sober",
+  "def-pc-integral-scheme",
+  "lem-pur-reduction-generic-fibre",
+  "def-weil-pbc-scheme-reduction",
+  "def-pc-reduced-scheme",
+  "def-pc-geometrically-irreducible",
+  "def-weil-geometric-fibre",
+  "lem-trf-geometric-reduced-fibre-locus-base-change",
+  "lem-trf-geometric-reducedness-algebraic-closure-test"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0577 (lemma-not-geometrically-reduced-in-neighbourhood), proof: the generic-fibre comparison from the prepared diagram through the conclusion that the unreduced pullback has nonreduced generic fibre"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "generic.*reduc|reduc.*generic|reduction.*fiber|fiber.*reduction",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; digest e1779c24af5c99e3. Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:44-110, Fiber.lean:37-75, and RingTheory/Nilpotent/GeometricallyReduced.lean:85. These give reducedness/base-change criteria or definitions, not this prepared generic-fibre detection theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyReduced",
+   "results": "12 hits: AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyReduced, AlgebraicGeometry.GeometricallyReduced, AlgebraicGeometry.GeometricallyReduced.eq_geometrically, AlgebraicGeometry.GeometricallyReduced.geometrically_isReduced, AlgebraicGeometry.GeometricallyReduced.mk, AlgebraicGeometry.geometricallyReduced_iff, AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian, AlgebraicGeometry.instIsReducedFiberOfGeometricallyReduced; digest c99c0961e49ad277. Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:44-110, Fiber.lean:37-75, and RingTheory/Nilpotent/GeometricallyReduced.lean:85. These give reducedness/base-change criteria or definitions, not this prepared generic-fibre detection theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced generic fibre whose reduction is geometrically reduced is geometrically reduced after base change; detecting nonreducedness by a universal homeomorphism",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits: ; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a universal homeomorphism from an integral scheme to an open of an irreducible base, if the original generic fibre is not geometrically reduced but the reduction of the base changed family has geometrically reduced generic fibre, the base changed generic fibre is nonreduced",
+   "results": "8 hits: Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced, Algebra.isGeometricallyReduced_iff, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Algebra.IsGeometricallyReduced.of_injective, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization; digest 5724afe118560a51. Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:44-110, Fiber.lean:37-75, and RingTheory/Nilpotent/GeometricallyReduced.lean:85. These give reducedness/base-change criteria or definitions, not this prepared generic-fibre detection theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic fibre reduction commutes with taking the reduced subscheme; if the reduction is geometrically reduced but the original generic fibre is not, the generic fibre has nonzero nilpotents",
+   "results": "8 hits: AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier, Algebra.isReduced_of_isGeometricallyReduced, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.affine_isReduced_iff, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isIntegral; digest be31adb253974db2. Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:44-110, Fiber.lean:37-75, and RingTheory/Nilpotent/GeometricallyReduced.lean:85. These give reducedness/base-change criteria or definitions, not this prepared generic-fibre detection theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generic fibre of a base changed family is nonreduced if its reduction is geometrically reduced but the original generic fibre is not geometrically reduced",
+   "results": "8 hits; top=['Algebra.IsGeometricallyReduced', 'Algebra.isReduced_of_isGeometricallyReduced', 'Algebra.isGeometricallyReduced_iff', 'AlgebraicGeometry.IsReduced', 'Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced', 'Algebra.IsGeometricallyReduced.of_injective', 'Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct', 'Algebra.IsGeometricallyReduced.of_forall_fg']; digest=9fdaa697117543a4; subdirectory=.; . Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:43-113, AlgebraicGeometry/Fiber.lean:37-75 and RingTheory/Nilpotent/GeometricallyReduced.lean:31-91. The hits define reducedness or geometric reducedness, give base-change stability or ring algebraic-closure criteria; none states the prepared generic-fibre nonreducedness implication. Semantic services use some names from a different Mathlib version; the local files were used for the verdict.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*reduc|reduc.*generic|reduction.*fiber|fiber.*reduction",
+   "results": "6 hits; top=['Mathlib/AlgebraicGeometry/Properties.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean', 'Mathlib/AlgebraicGeometry/FunctionField.lean', 'Mathlib/AlgebraicGeometry/FunctionField.lean']; digest=e32324dd0aa9324f; subdirectory=AlgebraicGeometry; . Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:43-113, AlgebraicGeometry/Fiber.lean:37-75 and RingTheory/Nilpotent/GeometricallyReduced.lean:31-91. The hits define reducedness or geometric reducedness, give base-change stability or ring algebraic-closure criteria; none states the prepared generic-fibre nonreducedness implication. Semantic services use some names from a different Mathlib version; the local files were used for the verdict.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The generic fibre of a scheme is nonreduced when its reduction is geometrically reduced and its preimage generic fibre before a universal homeomorphism is not geometrically reduced",
+   "results": "8 hits; top=['Algebra.IsGeometricallyReduced.casesOn', 'Algebra.isGeometricallyReduced_iff', 'Algebra.isReduced_of_isGeometricallyReduced', 'AlgebraicGeometry.isReduced_of_isReduced_stalk', 'AlgebraicGeometry.IsReduced.mk', 'AlgebraicGeometry.IsReduced', 'Algebra.IsGeometricallyReduced.recOn', 'Algebra.IsGeometricallyReduced.rec']; digest=826d6ae018ef3c80; subdirectory=.; . Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:43-113, AlgebraicGeometry/Fiber.lean:37-75 and RingTheory/Nilpotent/GeometricallyReduced.lean:31-91. The hits define reducedness or geometric reducedness, give base-change stability or ring algebraic-closure criteria; none states the prepared generic-fibre nonreducedness implication. Semantic services use some names from a different Mathlib version; the local files were used for the verdict.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyReduced",
+   "results": "12 hits; top=['AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyReduced', 'AlgebraicGeometry.GeometricallyReduced', 'AlgebraicGeometry.GeometricallyReduced.eq_geometrically', 'AlgebraicGeometry.GeometricallyReduced.geometrically_isReduced', 'AlgebraicGeometry.GeometricallyReduced.mk', 'AlgebraicGeometry.geometricallyReduced_iff', 'AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian', 'AlgebraicGeometry.instIsReducedFiberOfGeometricallyReduced']; digest=c99c0961e49ad277; subdirectory=.; . Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:43-113, AlgebraicGeometry/Fiber.lean:37-75 and RingTheory/Nilpotent/GeometricallyReduced.lean:31-91. The hits define reducedness or geometric reducedness, give base-change stability or ring algebraic-closure criteria; none states the prepared generic-fibre nonreducedness implication. Semantic services use some names from a different Mathlib version; the local files were used for the verdict.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the reduction of a generic fibre is geometrically reduced and a field extension of the original generic fibre is reduced then the original generic fibre is geometrically reduced",
+   "results": "8 hits; top=['Algebra.isReduced_of_isGeometricallyReduced', 'Algebra.IsGeometricallyReduced', 'Algebra.isGeometricallyReduced_iff', 'Algebra.IsGeometricallyReduced.of_forall_fg', 'Algebra.IsGeometricallyReduced.of_injective', 'Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced', 'Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct', 'Algebra.FormallyUnramified.isReduced_of_field']; digest=a7d9b0fbf234c8cc; subdirectory=.; . Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:43-113, AlgebraicGeometry/Fiber.lean:37-75 and RingTheory/Nilpotent/GeometricallyReduced.lean:31-91. The hits define reducedness or geometric reducedness, give base-change stability or ring algebraic-closure criteria; none states the prepared generic-fibre nonreducedness implication. Semantic services use some names from a different Mathlib version; the local files were used for the verdict.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-generic-fibre-not-geometrically-reduced-open",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "In the constructibility input, apply the generic-fibre alternative of Stacks 0579 on an irreducible closed subset; this node is the 0578 or 0577 alternative used there. Stacks 0577 proof: the generic-fibre comparison from the prepared diagram through the conclusion that the unreduced pullback has nonreduced generic fibre",
+   "via": [
+    "lem-trf-generic-fibre-not-geometrically-reduced-open",
+    "lem-trf-generic-constancy-geometric-reducedness",
+    "lem-trf-geometrically-reduced-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-prepared-generic-fibre-nonreduced",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0577 and retained the statement and its hypotheses. The contradiction proof identifies the generic point under q, applies the existing reduction/generic-fibre comparison 054Z, and uses the existing geometric-reduced-fibre-locus base-change equality 0576 plus the algebraic-closure test to descend geometric reducedness. No new node or Mathlib leaf is needed. No project declaration states the item exactly.",
+  "blueprint": "Serves the existing constructibility input in the ancestor lem-trf-local-term-locality route, through the generic-fibre alternative in Stacks 0577. The current latest blueprint proof gives the contracting-correspondence route; this is a lower-level algebraic-geometric tool within the inherited DAG ancestry, and no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-reduction-generic-fibre",
+    "why": "Generic-fibre reduction comparison (Stacks 054Z) is a general scheme tool; the item unit has no separate version of this comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-reduction-generic-fibre"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-e44b0d960",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-e44b0d960 (reviewer sub-agent of L); spot-checked: Read Stacks 0577 (lemma-not-geometrically-reduced-in-neighbourhood): the item is its sentence that the generic fibre of X_{Y'} is nonreduced, with T=Y', P=X_{Y'}, R=X'. The statement is identical to side-live (unsplit, empty proof, no repair note) and no target was weakened. Step 1 (elementary): q is a homeomorphism, every nonempty open of the irreducible Y meets U, so g(xi) is generic in Y; lem-sc-scheme-sober gives g(xi)=eta. Step 2: lem-pur-reduction-generic-fibre (054Z, arbitrary morphism) applies at the generic point of integral T, so R_xi = (P_xi)_red; if P_xi is reduced, R_xi = P_xi over kappa(xi) and P_xi is geometrically reduced. Step 3: P_xibar is reduced, so lem-trf-geometric-reduced-fibre-locus-base-change (arbitrary morphisms, X'=P) gives X_etabar reduced, and the algebraic-closure test gives X_eta geometrically reduced, a contradiction. This is a valid replacement for Stacks' 0384 descent through existing nodes; no scheme-level 0384 node exists. proof_deps equals the union of uses, all cited nodes exist and are unmerged, there is no cycle and no SGA. Tool use lem-pur-reduction-generic-fibre (sk-prop-sf-cbc) is a generic 054Z comparison: accepted. Edge cases (q=id, nonreduced Y via Y_red, empty X vacuous, the imperfect-field case L[e]/(e^p)) are consistent. No new nodes, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PreparedGenericFibreNonreduced",
+  "declaration": "AlgebraicGeometry.prepared_generic_fibre_nonreduced",
+  "file": "lean/Sheaf/AlgebraicGeometry/PreparedGenericFibreNonreduced.lean",
+  "statement": "theorem prepared_generic_fibre_nonreduced {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] [IrreducibleSpace Y] (η : Y) (hη : IsGenericPoint η Set.univ) (U : Y.Opens) (hU : (U : Set Y).Nonempty) (T : Scheme.{u}) [IsIntegral T] (ξ : T) (hξ : IsGenericPoint ξ Set.univ) (q : T ⟶ U.toScheme) (hq : (topologically IsHomeomorph).universally q) (hX : ¬ GeometricallyReduced (f.fiberToSpecResidueField η)) (hR : GeometricallyReduced (((pullback f (q ≫ U.ι)).nilradical.subschemeι ≫ pullback.snd f (q ≫ U.ι)).fiberToSpecResidueField ξ)) : ¬ IsReduced ((pullback.snd f (q ≫ U.ι)).fiber ξ)",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2aaaa551a",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Stacks 0577 proof sentence 'X_{eta'} is nonreduced' rendered faithfully with T=Y', P=X_{Y'}, R=X' (reduction via nilradical.subschemeι ≫ pullback.snd). Clause-by-clause match: finite type = LocallyOfFiniteType+QuasiCompact, IrreducibleSpace Y with IsGenericPoint η univ, nonempty U : Y.Opens, IsIntegral T with generic ξ, q universal homeomorphism in the recorded (topologically IsHomeomorph).universally form, hX/hR via fiberToSpecResidueField with GeometricallyReduced, conclusion ¬IsReduced of the P fibre at ξ. No extra assumptions (Y not assumed reduced). lean.statement verbatim to the file. Node differs from side-live only by its lean record. All 12 stmt_deps are Mathlib records; the private imports are the recorded proof-dep modules. Edge cases: empty X vacuous, q=id, nonreduced Y, inseparable case; single universe u matches the geometrically convention. Docstrings carry Tag 0577, the blueprint tag and all 3 proof steps; only sorry; report has both required sections (the second reading is the worker's own pass, disclosed). No findings; no files changed, nothing compiled."
+ }
+}

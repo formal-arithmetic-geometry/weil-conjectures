@@ -22,9 +22,19 @@
   "def-sfb-modobj-relative-tensor",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Retain the exact existing body, inferred type and reducible elaboration status of equivalence, writing it as a reducible definition instead of an abbreviation. This preserves the section equivalence itself and its normalization, while avoiding the abbreviation kernel unfolding hint when its termwise and derived maps are compared repeatedly.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "G6",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV; the original fixed equivalence is retained exactly."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -74,7 +84,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-poincare-duality",
  "unit": "sk-thm-sf-verdier-exchange",
  "lean": {
@@ -122,5 +143,15 @@
   "group": "NF",
   "result": "pass",
   "note": "Re-delivery after RETURN (e3bb1be5). F1 fixed: derivedAdjunction is now ((adjunction Λ f).derivedAdjunction).ofNatIsoLeft (pullback.leftDerivedFunctorIsoMapDerivedCategory), the canonical derived ringed adjunction (Adjunction.lean:173), so derived_homEquiv has content and projection is the α of lem-weil-pbc-ringed-projection-mate-exact. F2 fixed: new def node def-pd-section-module-operations-data (module SectionModuleOperationsData, 17 transparent abbrevs, 0 sorry, only def stmt_deps) replaces the two theorem nodes in the stmt_deps of the item and def-pd-proetale-section-module-functors; the theorems are now proof_deps. Aliasing rather than moving is accepted (no landed module rewritten, no duplicate construction). F3 fixed: clause-by-clause second reading. §1(C) statement_change only makes the canonical ringed adjunction explicit (Stacks 07A6/0B56); citers lem-pd-condensed-proper-projection-formula and det-thm-sf-pf-adic-projection checked, holds:true correct. All five modules compile clean with nt_compile --json (9.6/22.4/25.0/32.4/22.3 s). lean.statement verbatim for all five nodes; all declarations present; no sorry in definition bodies; docstrings with source and blueprint tags; no extra assumptions or universe restrictions. Minor: conjugatePullIso and conjugatePushIso are now unused."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f206",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261026T182250-L-3543761",
+  "kind": "interface",
+  "note": "independent cc review: delivered SectionResolutionConjugationIdentities + 2 new modules + 4 adapted modules vs clone dce325f: old item predicates re-elaborated in scratch equal the new ones by with_unfolding_all rfl; #print axioms clean (no sorryAx); totalTensor/internalTotalTensor binders identical to published; sandbox chain plus 15 further users compiled OK; PESMF SLOW pre-existing (published 96 s concurrently)"
  }
 }

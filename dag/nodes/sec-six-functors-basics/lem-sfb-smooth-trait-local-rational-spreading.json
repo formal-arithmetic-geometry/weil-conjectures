@@ -1,0 +1,454 @@
+{
+ "id": "lem-sfb-smooth-trait-local-rational-spreading",
+ "kind": "statement",
+ "title": "Spreading rational maps from generic points of smooth special fibres",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], $E=\\operatorname{Frac}(R)$, $k=R/\\mathfrak m_R$, and $T=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Fibres and products mean scheme-theoretic base changes [def-pc-base-change]. An open $U\\subseteq Y$ of a $T$-scheme is $T$-dense if $U_s$ is dense in $Y_s$ for both $s\\in T$. A $T$-rational map is an equivalence class of morphisms on $T$-dense opens, where representatives agree on a $T$-dense open of their common domain. A $T$-birational map is represented by an isomorphism between $T$-dense open subschemes. Let $Z\\to T$ be smooth and of finite type and let $V\\to Z$ and $W\\to Z$ be smooth finite-type morphisms, with $W\\to Z$ separated [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Let $h_E:V_E\\to W_E$ be a morphism over $Z_E$. For every generic point $\\xi$ of $Z_k$, put $A_\\xi=\\mathcal O_{Z,\\xi}$ and $L_\\xi=\\operatorname{Frac}(A_\\xi)$; these local rings are discrete valuation rings. Suppose the base change of $h_E$ to $L_\\xi$ extends to a morphism $D_\\xi\\to W_{A_\\xi}$ over $\\operatorname{Spec}A_\\xi$, where $D_\\xi\\subseteq V_{A_\\xi}$ is open, contains the generic fibre, and is dense in the special fibre. Then there is a $T$-dense open $D\\subseteq V$ containing $V_E$ and a $Z$-morphism $h:D\\to W$ extending $h_E$. If $h_E$ is an isomorphism and each local extension is an isomorphism between $\\operatorname{Spec}A_\\xi$-dense opens, then $h_E$ extends to a $T$-birational map $V\\dashrightarrow W$. In this situation, any two $Z$-morphisms from an open subscheme of $V$ to $W$ agreeing on its generic fibre are equal; consequently the extensions on such opens agree on overlaps. Finally, let $R'$ be a discrete valuation ring and $\\operatorname{Spec}R'\\to T$ a morphism sending the closed point to the closed point and the generic point to the generic point. For any $T$-scheme $X$ and $T$-dense open $U\\subseteq X$, the base change $U\\times_T\\operatorname{Spec}R'$ is $\\operatorname{Spec}R'$-dense in $X\\times_T\\operatorname{Spec}R'$; consequently the base change of a $T$-birational map is $\\operatorname{Spec}R'$-birational.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 2.5 Proposition 5, printed p.58 (PDF p.64), and its local-ring use in 4.3 Proposition 5 and 4.4 Corollary 4, printed pp.108,111 (PDF pp.114,117). Local spreading formulation of those arguments; ordinary generic-fibre uniqueness is included explicitly. Primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sfb-fibrewise-rational-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose a uniformizer $\\pi$ of $R$. Every nonzero element of $R$ is $u\\pi^n$ with $u$ a unit by [lem-weil-pbc-dvr-unit-times-uniformizer-power], so $E=R[1/\\pi]$ by the formula $a/(u\\pi^n)=(au^{-1})/\\pi^n$. The principal-localization and open-base-change results identify $Y_E$ with the open $D(\\pi)$ in every $T$-scheme $Y$. Thus intersections with the generic fibre below are actual open subschemes, and inverting $\\pi$ commutes with every base change.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I3 (lemma-standard-open-affine), 01JY (lemma-base-change-immersion); algebra.tex Tag 00PD (lemma-characterize-dvr)."
+   }
+  },
+  {
+   "text": "The DVR $R$ is Noetherian since every ideal is principal. Finite-type composition and finite-type preservation of Noetherianity show that $Z,V,W$ are Noetherian. Their opens are Noetherian and hence quasi-compact; locally Noetherian schemes are quasi-separated. Smoothness gives local finite presentation, and [lem-weil-pbc-smooth-restrict-open-subschemes] gives the same for restrictions to opens. Consequently $V_N,W_N$, and every open in either, are of finite presentation over any affine open $N\\subset Z$: quasi-compactness and quasi-separatedness of these morphisms follow from the qcqs permanence lemma. The same holds after base change to $A_\\xi$, since stalks are localizations of Noetherian affine coordinate rings and localizations remain Noetherian. The special fibres $Z_k,V_k,W_k$ are Noetherian and have finitely many irreducible components.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T3 (lemma-composition-finite-type), 01T4 (lemma-base-change-finite-type), 01T6 (lemma-finite-type-noetherian), 01TP (definition-finite-presentation); properties.tex Tags 01OY and 0BA8."
+   }
+  },
+  {
+   "text": "For a generic point $\\xi$ of $Z_k$, the local ring $A=A_\\xi$ is Noetherian by Step 2. Smoothness of $Z\\to T$ gives flatness, so multiplication by $\\pi$ on $A$ is injective by the torsion-free consequence of flatness over the domain $R$. The special fibre is reduced by the smooth-fibre reducedness lemma. In an affine open of $Z_k$ the point $\\xi$ is a minimal prime, and its local ring is the localization there by [lem-weil-pbc-affine-open-stalk-localization]; it is a field by the minimal-prime localization lemma. The fibre-stalk quotient lemma identifies that field with $A/\\pi A$. Hence $(\\pi)$ is the maximal ideal of $A$. Apply [lem-sbc-regular-principal-prime-localization-dvr] with $H=B=A$ and $g=\\pi$: localization of a local ring at the complement of its maximal ideal is itself. This proves that $A$ is a DVR. Step 1 applied to $A$ identifies $A[1/\\pi]$ with $L_\\xi$; its residue field is $\\kappa(\\xi)$.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "def-weil-flat-morphism",
+    "lem-trf-flat-module-torsionfree-domain",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-sbc-regular-principal-prime-localization-dvr",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00EU (lemma-minimal-prime-reduced-ring), 00PD (lemma-characterize-dvr); schemes.tex Tag 0HA1 (lemma-local-ring-fibre); morphisms.tex Tag 01VF (lemma-smooth-flat)."
+   }
+  },
+  {
+   "text": "First establish the uniqueness assertion for any open $B\\subset V$. The composite $V\\to Z\\to T$ is smooth, hence flat. At every stalk of $B$, multiplication by $\\pi$ is injective by flatness over $R$. It is therefore injective on the coordinate ring of each affine open in $B$: a section annihilated by $\\pi$ has zero germ everywhere. By [lem-pc-affine-nonzerodivisor-complement-dense] the restriction $\\mathcal O_B\\to j_*\\mathcal O_{B_E}$ for the quasi-compact inclusion $j:B_E=D(\\pi)\\to B$ is injective affine-locally and hence on $B$, so $B_E$ is scheme-theoretically dense in $B$ in the sense of [def-nagata-scheme-theoretically-dense-open]. Two $Z$-morphisms $B\\to W$ agreeing on $B_E$ are equal by [lemma-nagata-ext-scheme-theoretically-dominant-separated], since $W\\to Z$ is separated. In particular every pair of extensions agreeing with $h_E$ agrees on its entire overlap.",
+   "uses": [
+    "lem-trf-smooth-composition",
+    "sbc-lem-smooth-criterion",
+    "def-weil-flat-morphism",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-pc-affine-nonzerodivisor-complement-dense",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "def-nagata-scheme-theoretically-dense-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 07ZU (lemma-effective-Cartier-complement); morphisms.tex Tags 01VA and 01VF; BLR 2.5, schematic density and uniqueness discussion, printed pp.55-57."
+   }
+  },
+  {
+   "text": "Smoothness is preserved by base change. Apply [lem-trf-smooth-reduced-dense-pullback] to $V_k\\to Z_k$ and to $W_k\\to Z_k$, using the reduced locally Noetherian base $Z_k$ from Steps 2-3. Thus each generic point of $V_k$ or $W_k$ maps to a generic point $\\xi$ of $Z_k$. A point generic in $V_k$ lying over $\\xi$ remains generic in the fibre $V_{\\kappa(\\xi)}$: a strict generalization there would give a strict generalization in $V_k$. A dense open in a Noetherian scheme contains every generic point of its finitely many components: remove the other components to obtain a neighborhood belonging only to the selected component, and use density there. Therefore each local domain $D_\\xi$ contains every generic point of $V_k$ over $\\xi$, viewed in this localized closed fibre.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-reduced-dense-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 034E (lemma-reduced-local-smooth); algebra.tex Tag 00HS (lemma-flat-going-down); BLR 4.3 Proposition 5 proof, printed p.108 (PDF p.114)."
+   }
+  },
+  {
+   "text": "Fix $\\xi$ and an affine neighborhood $N_0\\subset Z$ of it. By [lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods], $\\operatorname{Spec}A_\\xi$ is the inverse limit of its affine open neighborhoods $N\\subset N_0$, ordered by reverse inclusion, with affine transitions. Base-changing $V_{N_0}$ gives the inverse system $V_N$ with limit $V_{A_\\xi}$ by [lem-weil-pbc-limit-fibre-products]. All stages are qcqs by Step 2. The open $D_\\xi$ is quasi-compact by Step 2, so [pqf-lem-limit-qc-open-descends] supplies an affine neighborhood $N$ and an open $D_N\\subset V_N$ whose pullback is $D_\\xi$. This node also identifies $D_\\xi$ with the limit of the later opens $D_{N'}=D_N\\times_NN'$.",
+   "uses": [
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "lem-weil-pbc-limit-fibre-products",
+    "pqf-lem-limit-qc-open-descends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 0GWT (lemma-morphism-glueing-near-closed-point), 01YW (lemma-directed-inverse-system-affine-schemes-has-limit), 01Z4 (lemma-descend-opens), 01YX (lemma-directed-inverse-system-has-limit)."
+   }
+  },
+  {
+   "text": "Both $D_N$ and $W_N$ are finitely presented qcqs schemes over $N$ by Step 2. Apply [lem-weil-pbc-finite-presentation-arrows-descent] to the given map $D_\\xi\\to W_{A_\\xi}$ over the affine-neighborhood system. After shrinking $N$ it descends to an $N$-morphism $h_N:D_N\\to W_N$. Its base change to $A_\\xi$ is exactly the supplied local extension, with the specified identification of domains. Regard $D_N$ as an open of $V$ and $h_N$ as a $Z$-morphism to $W$.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-arrows-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), part (2); direct spreading argument underlying BLR 4.3 Proposition 5."
+   }
+  },
+  {
+   "text": "It is necessary to arrange equality with the given map on the generic open, rather than merely at $L_\\xi$. On $(D_N)_E$, compare $(h_N)_E$ with $h_E|_{(D_N)_E}$ as morphisms to $W_E$ over $Z_E$. Their restrictions to $(D_\\xi)_{L_\\xi}=V_{L_\\xi}$ agree by the local-extension hypothesis. The qcqs affine-transition system $(D_{N'})_E$ has this limit, because fibre products commute with the neighborhood limit and $A_\\xi[1/\\pi]=L_\\xi$. Since $W_E\\to Z_E$ is locally of finite type, [lem-weil-pbc-locally-finite-type-limit-map-equality] makes the two maps equal at a later stage. Replace $N$ by that smaller neighborhood. No claim that $D_N$ contains all of $V_E$ is used.",
+   "uses": [
+    "lem-weil-pbc-limit-fibre-products",
+    "lem-weil-pbc-locally-finite-type-limit-map-equality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZC (proposition-characterize-locally-finite-presentation), injectivity part of the finite-type comparison; Tag 01ZM (lemma-descend-finite-presentation), part (3)."
+   }
+  },
+  {
+   "text": "Perform Steps 6-8 for each generic $\\xi$ of $Z_k$. Define $D=V_E\\cup\\bigcup_\\xi D_N$, an open of $V$ containing $V_E$. The morphisms $h_E$ and $h_N$ agree on all overlaps by Step 4 and Step 8, so [lem-weil-pbc-scheme-morphism-gluing] gives a morphism $h:D\\to W$. Each constituent is over $Z$, hence the glued morphism is over $Z$, as can be checked on this cover. The generic fibre of $D$ is all of $V_E$. Every generic point of $V_k$ is contained in some $D_N$ by Step 5 and the identity $(D_N)_{A_\\xi}=D_\\xi$. Thus $D_k$ contains the generic points of all components of $V_k$ and is dense. This proves the first extension assertion.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JA (section-glueing-schemes); BLR 4.3 Proposition 5 and 4.4 Corollary 4, printed pp.108,111; explicit local spreading assembly."
+   }
+  },
+  {
+   "text": "For the birational assertion, write each supplied local isomorphism as $e_\\xi:D_\\xi\\xrightarrow{\\sim}H_\\xi$ with $H_\\xi\\subset W_{A_\\xi}$ open and dense in its special fibre. Since $D_\\xi$ contains $V_{L_\\xi}$ and $e_\\xi$ restricts to the isomorphism $h_{L_\\xi}$, its image contains $W_{L_\\xi}$. Descend both quasi-compact opens by [pqf-lem-limit-qc-open-descends] along the same neighborhood system as in Step 6. After a common shrinking, obtain $D_N\\subset V_N$ and $H_N\\subset W_N$. Apply [lem-weil-pbc-finite-presentation-arrows-descent] to $e_\\xi$ and $e_\\xi^{-1}$ to obtain maps $e_N:D_N\\to H_N$ and $a_N:H_N\\to D_N$ with those exact local pullbacks.",
+   "uses": [
+    "pqf-lem-limit-qc-open-descends",
+    "lem-weil-pbc-finite-presentation-arrows-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01Z4 (lemma-descend-opens) and 01ZM (lemma-descend-finite-presentation), part (2); BLR 4.3 Proposition 5, birational conclusion."
+   }
+  },
+  {
+   "text": "Over $A_\\xi$ the composites $a_Ne_N$ and $e_Na_N$ become the respective identities. Apply [lem-weil-pbc-locally-finite-type-limit-map-equality] to the later systems of $D_N$ and $H_N$, with targets these fixed finitely presented $N$-schemes. After a common shrinking both identities hold. Thus $e_N$ is an isomorphism with inverse $a_N$. Apply the same equality lemma to the generic-open systems to arrange $e_N|_{(D_N)_E}=h_E|_{(D_N)_E}$ and $a_N|_{(H_N)_E}=h_E^{-1}|_{(H_N)_E}$, by the argument of Step 8. Equality descent requires no separatedness of its target, so this is valid for the inverse with target $V_E$.",
+   "uses": [
+    "lem-weil-pbc-locally-finite-type-limit-map-equality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZC (proposition-characterize-locally-finite-presentation), equality assertion, and 01ZM (lemma-descend-finite-presentation), part (3)."
+   }
+  },
+  {
+   "text": "Let $C_1,\\ldots,C_r$ be the irreducible components of $Z_k$, with generic points $\\xi_i$. In each neighborhood $N_i$ from Steps 10-11, remove $\\bigcup_{j\\ne i}C_j$, viewed as a closed subset of $Z$ because $Z_k$ is closed. The result still contains $\\xi_i$ and may be replaced by an affine neighborhood of $\\xi_i$ inside it. Restrict $D_{N_i},H_{N_i},e_{N_i},a_{N_i}$ accordingly. For $i\\ne j$, the intersection $N_i\\cap N_j$ has empty special fibre, so lies in $Z_E$. Indeed, any point in the special fibre belongs to some $C_t$, and membership in $N_i$ forces $t=i$, whereas membership in $N_j$ forces $t=j$. Localized domains and images at $A_{\\xi_i}$ are unchanged.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Explicit finite-component neighborhood choice for the local spreading argument (agent argument); finiteness established in Step 2."
+   }
+  },
+  {
+   "text": "Put $D'=V_E\\cup\\bigcup_iD_{N_i}$ and $H'=W_E\\cup\\bigcup_iH_{N_i}$. All maps $e_{N_i}$, together with $h_E$, take values in $H'$. Their inverses take values in $D'$. For distinct indices every domain overlap is over $Z_E$ by Step 12, so the maps agree there by Step 11; overlaps with the generic piece agree for the same reason. Glue both families using [lem-weil-pbc-scheme-morphism-gluing]. The two composites are identities because they are identities on every member of the respective open covers, again by this node's uniqueness assertion. Hence $D'\\simeq H'$ over $Z$. By Step 5 and the density of the local domains and images, $D'$ and $H'$ contain all generic points of their special fibres; their generic fibres are whole. Thus both are $T$-dense. This represents the claimed $T$-birational map, without assuming $V\\to Z$ separated.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JA (section-glueing-schemes); BLR 4.3 Proposition 5, printed p.108, birational extension; explicit simultaneous gluing of inverse maps."
+   }
+  },
+  {
+   "text": "For the last assertion, let $t'$ be either point of $T'=\\operatorname{Spec}R'$ and let $t$ be its image in $T$. By the two point-image hypotheses these are respectively the generic and closed points. The fibre of $X_{T'}$ at $t'$ is $X_t\\times_{\\kappa(t)}\\kappa(t')$, and likewise for $U$. The projection $p:X_t\\times_{\\kappa(t)}\\kappa(t')\\to X_t$ is open by [lem-sc-scheme-over-field-universally-open]. If $O$ is any nonempty open of its source, then $p(O)$ is nonempty open and meets the dense open $U_t$. A point in this intersection lifts to a point of $O$ by the meaning of image; that point belongs to $p^{-1}(U_t)$. Thus $p^{-1}(U_t)$ is dense. Apply this at both $t'$. This proves the asserted fibrewise density for arbitrary $X$, without a finite-type hypothesis or a flatness assumption on $X$.",
+   "uses": [
+    "lem-sc-scheme-over-field-universally-open",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0383 (lemma-scheme-over-field-universally-open); BLR 2.5, definition of S-dense opens, printed p.55; elementary open-map density argument."
+   }
+  },
+  {
+   "text": "Base-change an isomorphism between $T$-dense open subschemes representing a $T$-birational map. The two base-changed domains are open, the isomorphism and its inverse remain inverse by functoriality of fibre products, and Step 14 makes both opens $T'$-dense. This is a representative of a $T'$-birational map. Equivalence of representatives is preserved too: a $T$-dense common agreement open stays $T'$-dense by Step 14, and the equality of its two maps is preserved by base change.",
+   "uses": [
+    "def-pc-base-change",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JY (lemma-base-change-immersion); fibre-product universal property and the stated definitions of relative rational and birational maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-scheme-theoretically-dense-open",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-flat-morphism",
+  "lem-pc-affine-nonzerodivisor-complement-dense",
+  "lem-pc-proper-base-change",
+  "lem-sbc-regular-principal-prime-localization-dvr",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-sc-scheme-over-field-universally-open",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-trf-smooth-composition",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-finite-presentation-arrows-descent",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-limit-fibre-products",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-locally-finite-type-limit-map-equality",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "pqf-lem-limit-qc-open-descends",
+  "sbc-lem-smooth-criterion",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Explicit local spreading assembly using Tags 01Z4, 01ZM, 01ZC; follows the local-ring argument in BLR 4.3 Proposition 5 and 4.4 Corollary 4, with separatedness-free inverse gluing written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A generic fibre morphism between smooth schemes over a discrete valuation ring extends rationally if it does at local rings of generic points of special fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.ValuativeCriterion.Existence f → SpecializingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes satisfies the valuative criterion for existence, then $ f $ is a specializing map, meaning that specialization relations in the codomain can be lifted to the do\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.existence\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.ValuativeCriterion f → AlgebraicGeometry.ValuativeCriterion.Existence f\", \"doc\": \"If a morphism $ f : X \\\\to Y $ of schemes satisfies the valuative criterion, then it satisfies the valuative criterion for existence, meaning that for every valuative commutative square involving $ f $\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"AlgebraicGeometry.ValuativeCriterion.Existence = (AlgebraicGeometry.topologically @SpecializingMap).universally\", \"doc\": \"The valuative criterion for existence of a scheme morphism is equivalent to the universal property that its underlying continuous map is a specializing map, meaning this property is preserved under al\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (AlgebraicGeometry.topologically @SpecializingMap).universally f → AlgebraicGeometry.ValuativeCriterion.Existence f\", \"doc\": \"If a morphism of schemes is universally specializing (topologically), then it satisfies the valuative criterion for existence. Specifically, for any valuative commutative square involving the morphism\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    (self : AlgebraicGeometry.ValuativeCommSq f) →\\n      AlgebraicGeometry.Spec { carrier := self.K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X\", \"doc\": \"For a valuative commutative square involving schemes $X$ and $Y$ with a morphism $f: X \\to Y$, this is the morphism from the spectrum of the fraction field $K$ (equipped with its field structure) to th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  (sX : X ⟶ S) →\\n    (sY : Y ⟶ S) →\\n      [inst : AlgebraicGeometry.IsIntegral X] →\\n        [AlgebraicGeometry.LocallyOfFiniteType sY] →\\n          (f : AlgebraicGeometry.Spec X.functionField ⟶ Y) →\\n            CategoryTheory.CategoryStruct.comp f sY =\\n           \", \"doc\": \"Given an integral scheme $X$, a scheme $Y$ with a morphism $s_Y:Y\\\\to S$ locally of finite type, and a morphism $f:\\\\operatorname{Spec}(K(X))\\\\to Y$ from the spectrum of $X$'s function field $K(X)$ satis\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.K\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → AlgebraicGeometry.ValuativeCommSq f → Type u\", \"doc\": \"The fraction field component in the valuative criterion commutative square for a morphism of schemes, representing the field of fractions of a valuation ring in the diagram.\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.field\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → (self : AlgebraicGeometry.ValuativeCommSq f) → Field self.K\", \"doc\": \"For a valuative commutative square involving schemes, this function equips the component $ K $ with the structure of a field, which is the fraction field of a valuation ring in the diagram.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RationalMap.mem_domain and toPartialMap describe an existing domain. The local-ring spreading and fibrewise-density conclusion, including birational spreading, is absent; flatness stability alone is insufficient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Domain of definition of a rational map commutes with flat base change and localization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverToRationalMapOfIsOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : X.Over S] [inst_1 : Y.Over S] (f : X.PartialMap Y)\\n  [AlgebraicGeometry.Scheme.PartialMap.IsOver S f], AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap\", \"doc\": \"If a partial map $ f $ between schemes $ X $ and $ Y $ over a base scheme $ S $ is compatible with the structure maps to $ S $, then the corresponding rational map obtained by equivalence of partial m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X.RationalMap Y} {x : ↥X},\\n  x ∈ f.domain ↔ ∃ g, x ∈ g.domain ∧ g.toRationalMap = f\", \"doc\": \"For a rational map $ f $ between schemes $ X $ and $ Y $, an element $ x $ belongs to the domain of $ f $ if and only if there exists a partial map $ g $ from $ X $ to $ Y $ such that $ x $ lies in th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.isOver_iff\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : X.Over S] [inst_1 : Y.Over S] {f : X.RationalMap Y},\\n  AlgebraicGeometry.Scheme.RationalMap.IsOver S f ↔\\n    f.compHom (Y ↘ S) = AlgebraicGeometry.Scheme.Hom.toRationalMap (X ↘ S)\", \"doc\": \"A rational map $ f : X \\\\dashrightarrow Y $ between schemes $ X $ and $ Y $ over a base scheme $ S $ satisfies $ f.\\\\text{IsOver}(S) $ if and only if the composition of $ f $ with the morphism $ Y \\\\to S\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverToPartialMapOfIsSeparatedOfIsOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsReduced X] [inst_1 : Y.IsSeparated] [S.IsSeparated]\\n  [inst_3 : X.Over S] [inst_4 : Y.Over S] (f : X.RationalMap Y) [AlgebraicGeometry.Scheme.RationalMap.IsOver S f],\\n  AlgebraicGeometry.Scheme.PartialMap.IsOver S f.toPartialMap\", \"doc\": \"Given a rational map $ f $ from a reduced scheme $ X $ to a separated scheme $ Y $, both over a separated base scheme $ S $, the partial map representative of $ f $ is also over $ S $. This instance e\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.le_domain_toRationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y), f.domain ≤ f.toRationalMap.domain\", \"doc\": \"For any partial map $f$ between schemes $X$ and $Y$, the domain of $f$ is contained within the domain of the rational map obtained by converting $f$. This follows because the domain of the rational ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.compHom_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) (g : Y ⟶ Z), (f.compHom g).domain = f.domain\", \"doc\": \"For schemes $X$, $Y$, and $Z$, given a partial map $f : X ⇀ Y$ and a morphism $g : Y \\\\to Z$, the domain of the composition $f \\\\circ g$ (as a partial map from $X$ to $Z$) is equal to the domain of $f$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [inst : X.Over S] [inst_1 : Y.Over S]\\n  (f : X.RationalMap Y) [AlgebraicGeometry.Scheme.RationalMap.IsOver S f],\\n  ∃ g, AlgebraicGeometry.Scheme.PartialMap.IsOver S g ∧ g.toRationalMap = f\", \"doc\": \"For any rational map $ f $ from a scheme $ X $ to a scheme $ Y $ over a base scheme $ S $, there exists a partial map $ g $ from $ X $ to $ Y $ over $ S $ such that the equivalence class of $ g $ is $\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RationalMap.mem_domain and toPartialMap describe an existing domain. The local-ring spreading and fibrewise-density conclusion, including birational spreading, is absent; flatness stability alone is insufficient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rationalMap\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" (X Y : AlgebraicGeometry.Scheme) : Type u\", \"doc\": \"A rational map from `X` to `Y` (`X ⤏ Y`) is an equivalence class of partial maps,\\nwhere two partial maps are equivalent if they are equal on a dense open subscheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.id\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" (X : AlgebraicGeometry.Scheme) : X.RationalMap X\", \"doc\": \"The identity rational map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y) : X.Opens\", \"doc\": \"The domain of definition of a rational map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.Hom Y) : X.RationalMap Y\", \"doc\": \"A scheme morphism as a rational map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) : X.RationalMap Y\", \"doc\": \"A partial map as a rational map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y) : X.PartialMap Y\", \"doc\": \"An arbitrarily chosen partial map representing `f`. Use `RationalMap.toPartialMap` instead\\nif `X` is reduced and `Y` is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} : Function.Surjective AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y) : (↑f.domain).OpenCover\", \"doc\": \"The open cover of the domain of `f : X ⤏ Y`,\\nconsisting of all the domains of the partial maps in the equivalence class.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsReduced X] [Y.IsSeparated] (f : X.RationalMap Y) : X.PartialMap Y\", \"doc\": \"If `f : X ⤏ Y` is a rational map from a reduced scheme to a separated scheme,\\nthen `f` can be represented as a partial map on its domain of definition.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [X.Over S] [Y.Over S] (f : X.RationalMap Y) : Prop\", \"doc\": \"A rational map is an `S`-map if some partial map in the equivalence class is an `S`-map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.representative_toRationalMap_equiv\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) : f.toRationalMap.representative.equiv f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.toRationalMap_representative\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y) : f.representative.toRationalMap = f\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RationalMap.mem_domain and toPartialMap describe an existing domain. The local-ring spreading and fibrewise-density conclusion, including birational spreading, is absent; flatness stability alone is insufficient."
+  },
+  {
+   "tool": "grep",
+   "query": "domainOfDefinition|domain.*rational|rational.*baseChange|rational.*base_change",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"line\": \"301\", \"text\": \"Suppose `L` is a domain containing all `pⁱ`-th primitive roots with `p` a (rational) prime.\"}\n  {\"file\": \"Mathlib/Algebra/Order/CompleteField.lean\", \"line\": \"163\", \"text\": \"linear ordered field, defined by taking the Sup in the codomain of all the rationals less than the\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"569\", \"text\": \"/-- The domain of definition of a rational map. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"571\", \"text\": \"  sSup { PartialMap.domain g | (g) (_ : g.toRationalMap = f) }\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"573\", \"text\": \"lemma PartialMap.le_domain_toRationalMap (f : X.PartialMap Y) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"574\", \"text\": \"    f.domain ≤ f.toRationalMap.domain :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"578\", \"text\": \"    x ∈ f.domain ↔ ∃ g : X.PartialMap Y, x ∈ g.domain ∧ g.toRationalMap = f :=\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/AddCircle.lean\", \"line\": \"20\", \"text\": \"* `AddCircle.isAddFundamentalDomain_of_ae_ball`: a ball is a fundamental domain for rational\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RationalMap.mem_domain and toPartialMap describe an existing domain. The local-ring spreading and fibrewise-density conclusion, including birational spreading, is absent; flatness stability alone is insufficient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat base change compatibility of domains of definition of rational maps between smooth schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverToRationalMapOfIsOver\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"[X.Over S] [Y.Over S] (f : X.PartialMap Y) [f.IsOver S] : f.toRationalMap.IsOver S\", \"doc\": \"If a partial map $ f $ between schemes $ X $ and $ Y $ over a base scheme $ S $ is compatible with the structure maps to $ S $, then the corresponding rational map obtained by equivalence of partial m\"}\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"IsSMulRegular.of_flat_of_isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"{f : M →ₗ[R] N} (hf : IsBaseChange S f) {x : R} (reg : IsSMulRegular M x) : IsSMulRegular N (algebraMap R S x)\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is obtained from $ M $ via base change along a ring homomorphism $ R \\\\to S $, and $ x \\\\in R $ has injective scalar multiplication on $ M $, then the image of $ x\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X ⤏ Y) : X.Opens\", \"doc\": \"For a rational map $f$ between schemes $X$ and $Y$, this function returns the supremum (union) of all open subsets of $X$ where partial maps equivalent to $f$ are defined. This constructs the maximal \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"[X.Over S] [Y.Over S] [Z.Over S] (f : X ⤏ Y) (g : Y ⟶ Z) [f.IsOver S] [g.IsOver S] : (f.compHom g).IsOver S\", \"doc\": \"A rational map between schemes $X$ and $Y$ is said to be over a base scheme $S$ if it is compatible with the given morphisms from $X$ and $Y$ to $S$. This means that the diagram formed by the rational\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (S : AlgebraicGeometry.Scheme) → [X.Over S] → [Y.Over S] → X.RationalMap Y → Prop\", \"doc\": \"A rational map between schemes $X$ and $Y$ is over a scheme $S$ if it is compatible with the morphisms from $X$ and $Y$ to $S$.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RationalMap.mem_domain and toPartialMap describe an existing domain. The local-ring spreading and fibrewise-density conclusion, including birational spreading, is absent; flatness stability alone is insufficient."
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*(local|baseChange|base_change)|spread.*morphism",
+   "results": "Search ran: 7 hits; Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary rational-map definitions, valuative criteria, and pointwise spreading do not state the fibrewise-dense trait assertion or its birational and arbitrary-scheme base-change clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of generic fibres over a discrete valuation ring extends on a fibrewise dense open if it extends at local rings of generic points of the special fibre",
+   "results": "Search ran: 8 hits; AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict, AlgebraicGeometry.Proj.valuativeCriterion_existence_aux, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι, AlgebraicGeometry.Scheme.Hom.toPartialMap, AlgebraicGeometry.isDominant_iff, AlgebraicGeometry.dominant_eq_topologically, AlgebraicGeometry.Scheme.Hom.denseRange",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary rational-map definitions, valuative criteria, and pointwise spreading do not state the fibrewise-dense trait assertion or its birational and arbitrary-scheme base-change clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RationalMap\"",
+   "results": "Search ran: 12 hits; AlgebraicGeometry.Scheme.RationalMap, AlgebraicGeometry.Scheme.RationalMap.id, AlgebraicGeometry.Scheme.RationalMap.domain, AlgebraicGeometry.Scheme.Hom.toRationalMap, AlgebraicGeometry.Scheme.PartialMap.toRationalMap, AlgebraicGeometry.Scheme.RationalMap.representative, AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective, AlgebraicGeometry.Scheme.RationalMap.openCoverDomain",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary rational-map definitions, valuative criteria, and pointwise spreading do not state the fibrewise-dense trait assertion or its birational and arbitrary-scheme base-change clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spread a morphism between smooth schemes over a discrete valuation ring from localizations at generic points of the special fibre to fibrewise dense open subsets",
+   "results": "Search ran: 8 hits; AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.ValuativeCriterion, AlgebraicGeometry.ValuativeCommSq.i₂, AlgebraicGeometry.ValuativeCriterion.Existence, AlgebraicGeometry.ValuativeCriterion.existence, AlgebraicGeometry.ValuativeCommSq.K, AlgebraicGeometry.ValuativeCommSq, AlgebraicGeometry.ValuativeCriterion.Existence.eq",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary rational-map definitions, valuative criteria, and pointwise spreading do not state the fibrewise-dense trait assertion or its birational and arbitrary-scheme base-change clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism over the generic fibre spreads to an isomorphism of fibrewise dense opens of smooth schemes over a trait, by descending maps and inverses from local schemes",
+   "results": "Search ran: 8 hits; AlgebraicGeometry.specializingMap_respectsIso, AlgebraicGeometry.IsLocalIso, AlgebraicGeometry.IsDominant.respectsIso, AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, AlgebraicGeometry.Scheme.instOverCoverOfIsIsoOfIsOver, AlgebraicGeometry.instRespectsIsoSchemeTopologicallyGeneralizingMap, AlgebraicGeometry.UniversallyOpen.instRespectsIsoScheme, AlgebraicGeometry.isomorphisms_eq_stalkwise",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary rational-map definitions, valuative criteria, and pointwise spreading do not state the fibrewise-dense trait assertion or its birational and arbitrary-scheme base-change clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bounded-group-local-neron-criterion",
+  "date": "2026-10-24",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 2.5 Proposition 5, printed p.58 (PDF p.64), and its local-ring use in 4.3 Proposition 5 and 4.4 Corollary 4, printed pp.108,111 (PDF pp.114,117). Local spreading formulation of those arguments; ordinary generic-fibre uniqueness is included explicitly.",
+   "via": [
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-trait-local-rational-spreading",
+  "worker": "stage1",
+  "summary": "No new nodes: reuse open descent, arrow descent, eventual equality, smooth generic-point domination, schematic generic density and separated-target uniqueness. Prove the local DVR assertion, compatibility with the entire prescribed generic morphism, simultaneous gluing of local isomorphisms and inverses without separatedness of V, and arbitrary-scheme fibrewise-density base change. Statement unchanged. No project declaration states all clauses.",
+  "blueprint": "Created auxiliary with no imported blueprint ancestor (blueprint_refs ancestor returns None). Realizes the BLR local-ring rational-extension input of lem-sfb-bounded-group-local-neron-criterion; same_as search finds no blueprint statement of the item. Keeps the parent route through local Neron construction; no unit-level replacement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-nonzerodivisor-complement-dense",
+    "why": "Generic algebraic-geometric tool used for First establish the uniqueness assertion for any open $B\\subset V$. The composite $V\\to Z\\to T$ is smooth, hen; the ctf stability unit has no statement of this local scheme/limit fact."
+   },
+   {
+    "node": "lem-sbc-regular-principal-prime-localization-dvr",
+    "why": "Generic algebraic-geometric tool used for For a generic point $\\xi$ of $Z_k$, the local ring $A=A_\\xi$ is Noetherian by Step 2. Smoothness of $Z\\to T$ g; the ctf stability unit has no statement of this local scheme/limit fact."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic algebraic-geometric tool used for For a generic point $\\xi$ of $Z_k$, the local ring $A=A_\\xi$ is Noetherian by Step 2. Smoothness of $Z\\to T$ g; the ctf stability unit has no statement of this local scheme/limit fact."
+   },
+   {
+    "node": "lem-trf-smooth-reduced-dense-pullback",
+    "why": "Generic algebraic-geometric tool used for Smoothness is preserved by base change. Apply [lem-trf-smooth-reduced-dense-pullback] to $V_k\\to Z_k$ and to $; the ctf stability unit has no statement of this local scheme/limit fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-arrows-descent",
+    "why": "Generic algebraic-geometric tool used for Both $D_N$ and $W_N$ are finitely presented qcqs schemes over $N$ by Step 2. Apply [lem-weil-pbc-finite-presen; the ctf stability unit has no statement of this local scheme/limit fact."
+   },
+   {
+    "node": "lem-weil-pbc-limit-fibre-products",
+    "why": "Generic algebraic-geometric tool used for Fix $\\xi$ and an affine neighborhood $N_0\\subset Z$ of it. By [lem-weil-pbc-local-ring-spec-limit-affine-neigh; the ctf stability unit has no statement of this local scheme/limit fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Restriction of smooth structure maps to source and base opens ensures local finite presentation of the descended open models; this is a generic scheme tool, absent from the ctf stability unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-nonzerodivisor-complement-dense",
+  "lem-sbc-regular-principal-prime-localization-dvr",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lem-weil-pbc-finite-presentation-arrows-descent",
+  "lem-weil-pbc-limit-fibre-products",
+  "lem-weil-pbc-smooth-restrict-open-subschemes"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-311406b47",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-311406b47 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item, a split into 15 steps with no new nodes and the statement unchanged. I read every cited statement and Stacks 01Z4, 0383, 01RE and 00PD. BLR is not in literature/; WANTED stands. The proof is agent-origin through Stacks and DAG nodes. All steps hold under their hypotheses. Step 3 gets A_xi as a DVR from flatness, π-torsion-freeness, the reduced fibre stalk being a field equal to A/πA, and the principal-prime node with H=B=A. Step 4 gets uniqueness from 07ZU injectivity plus the separated-target Nagata lemma. Steps 6-8 use 01Z4 open descent, arrow descent and lft eventual equality on the generic open; Step 8's limit uses A_xi[1/π]=L_xi. Step 12 makes the shrunk neighbourhoods meet only over Z_E. Step 13 therefore glues the inverse without V being separated. Step 14 uses universal openness over a field and is valid for arbitrary X. Small cases checked: Z=T with h_E(x)=π^{-1}x; empty special fibre; doubled-origin V. Batch-5 citations are all generic, not trace-formula or duality content: lem-trf-flat-module-torsionfree-domain and lem-trf-smooth-composition are Mathlib leaves. lem-trf-smooth-reduced-dense-pullback is a smooth-morphism density lemma (ILO VIII 2.2.9). None of the three closures contains another trf, Poincaré-duality or assumption node. All three are accepted. tool_uses are accepted as generic scheme and limit facts. FIX in the item: Step 4 now cites def-nagata-scheme-theoretically-dense-open, the notion the Nagata lemma needs, which is injectivity of O->j_*O for qc j, Stacks 01RE. Step 3 now cites lem-weil-pbc-affine-open-stalk-localization for the minimal-prime stalk. proof_deps is updated. The stmt_dep def-weil-closed-immersion is spurious but harmless and was left.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothTraitLocalRationalSpreading",
+  "declaration": "AlgebraicGeometry.smooth_trait_local_rational_spreading",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.AgreesOnPullback",
+   "AlgebraicGeometry.Scheme.Hom.stalkBaseChange",
+   "AlgebraicGeometry.SmoothTraitLocalExtension",
+   "AlgebraicGeometry.smooth_trait_local_rational_spreading"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothTraitLocalRationalSpreading.lean",
+  "statement": "theorem smooth_trait_local_rational_spreading (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] {Z V W : Scheme.{u}} (z : Z ⟶ Spec (.of R)) (v : V ⟶ Z) (w : W ⟶ Z) [Smooth z] [LocallyOfFiniteType z] [QuasiCompact z] [Smooth v] [LocallyOfFiniteType v] [QuasiCompact v] [Smooth w] [LocallyOfFiniteType w] [QuasiCompact w] [IsSeparated w] (h : (v ≫ z).fiber (⊥ : PrimeSpectrum R) ⟶ (w ≫ z).fiber (⊥ : PrimeSpectrum R)) (hh : h ≫ (w ≫ z).fiberι (⊥ : PrimeSpectrum R) ≫ w = (v ≫ z).fiberι (⊥ : PrimeSpectrum R) ≫ v) : (∀ ξ : z.fiber (IsLocalRing.closedPoint R), ξ ∈ genericPoints _ → ∃ hd : IsDomain (Z.presheaf.stalk (z.fiberι (IsLocalRing.closedPoint R) ξ)), @IsDiscreteValuationRing (Z.presheaf.stalk (z.fiberι (IsLocalRing.closedPoint R) ξ)) _ hd) ∧ ((∀ ξ : z.fiber (IsLocalRing.closedPoint R), ξ ∈ genericPoints _ → SmoothTraitLocalExtension z v w h (z.fiberι (IsLocalRing.closedPoint R) ξ) false) → ∃ d : Scheme.FiberwisePartialMap (v ≫ z) (w ≫ z), (Set.range ((v ≫ z).fiberι (⊥ : PrimeSpectrum R)) ⊆ (d.domain : Set V)) ∧ d.hom ≫ w = d.domain.ι ≫ v ∧ Scheme.Hom.AgreesOnPullback d.domain.ι ((v ≫ z).fiberι (⊥ : PrimeSpectrum R)) d.hom (h ≫ (w ≫ z).fiberι (⊥ : PrimeSpectrum R))) ∧ ((IsIso h ∧ ∀ ξ : z.fiber (IsLocalRing.closedPoint R), ξ ∈ genericPoints _ → SmoothTraitLocalExtension z v w h (z.fiberι (IsLocalRing.closedPoint R) ξ) true) → ∃ e : Scheme.FiberwisePartialIso (v ≫ z) (w ≫ z), (Set.range ((v ≫ z).fiberι (⊥ : PrimeSpectrum R)) ⊆ (e.domain : Set V)) ∧ e.iso.hom ≫ e.target.ι ≫ w = e.domain.ι ≫ v ∧ Scheme.Hom.AgreesOnPullback e.domain.ι ((v ≫ z).fiberι (⊥ : PrimeSpectrum R)) (e.iso.hom ≫ e.target.ι) (h ≫ (w ≫ z).fiberι (⊥ : PrimeSpectrum R))) ∧ (∀ (B : V.Opens) (a b : B.toScheme ⟶ W), a ≫ w = B.ι ≫ v → b ≫ w = B.ι ≫ v → (B.ι ≫ v ≫ z).fiberι (⊥ : PrimeSpectrum R) ≫ a = (B.ι ≫ v ≫ z).fiberι (⊥ : PrimeSpectrum R) ≫ b → a = b) ∧ (∀ (R' : Type u) [CommRing R'] [IsDomain R'] [IsDiscreteValuationRing R'] (b : Spec (.of R') ⟶ Spec (.of R)), b (IsLocalRing.closedPoint R') = IsLocalRing.closedPoint R → b (⊥ : PrimeSpectrum R') = (⊥ : PrimeSpectrum R) → (∀ (X : Scheme.{u}) (f : X ⟶ Spec (.of R)) (U : X.Opens), f.IsFiberwiseDense U → (pullback.snd f b).IsFiberwiseDense (pullback.fst f b ⁻¹ᵁ U)) ∧ (∀ (X Y : Scheme.{u}) (f : X ⟶ Spec (.of R)) (g : Y ⟶ Spec (.of R)) (e : Scheme.FiberwisePartialIso f g), ∃ e' : Scheme.FiberwisePartialIso (pullback.snd f b) (pullback.snd g b), e'.domain = pullback.fst f b ⁻¹ᵁ e.domain ∧ e'.target = pullback.fst g b ⁻¹ᵁ e.target ∧ Scheme.Hom.AgreesOnPullback e.domain.ι (e'.domain.ι ≫ pullback.fst f b) (e.iso.hom ≫ e.target.ι) (e'.iso.hom ≫ e'.target.ι ≫ pullback.fst g b)))",
+  "branch": "sheaf-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3068402c6",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Read the item, the new def node def-sfb-fibrewise-rational-map, both modules, the statement deps and Mathlib Scheme.Hom.fiber/fiberι/genericPoints. Item diff vs side-live: only lean and the added stmt_dep, with statement, proof and proof_deps unchanged. Both lean.statement fields are verbatim in their files. Hypotheses match the node: smooth + LocallyOfFiniteType + QuasiCompact on z, v, w and IsSeparated on w only; hh is equivalent to h over Z_E since Z_E→Z is mono. The DVR claim for the stalks is concluded, not assumed, and is true. The local hypothesis is correct: the domain contains the whole generic fibre and is fibrewise dense, and AgreesOnPullback on D×_V V_E = V_L is equivalent to d|V_L = h_L. The extension, birational and uniqueness (any open B) clauses match. The R' base-change clause holds for arbitrary X, and e' is fixed as e×_T T'. The def node matches BLR 2.5 with real data and no sorry. No hollow defs; the only sorry is the main proof; docstrings carry the 15 steps and source places. def-weil-closed-immersion stmt_dep is spurious but harmless. Note for landing: about ten parallel unlanded S2 copies of the fibrewise-density notion (N5, NF, NZ/Q42, Q15, Q04, Q110/Q39, Q114, Q47); the first lander owns it and the rest rebind. No files changed, so no compile."
+ }
+}

@@ -1,0 +1,381 @@
+{
+ "id": "lem-sfb-smooth-integral-fibre-vertical-divisors",
+ "kind": "statement",
+ "title": "Vertical divisors of a smooth morphism with geometrically integral fibres",
+ "statement": "Let $S$ be a regular locally Noetherian scheme [def-pc-scheme, def-weil-regular-scheme, pqf-def-locnoeth], and let $p:X\\to S$ be a separated smooth morphism of finite presentation from an algebraic space [def-trf-algebraic-space, def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], with every geometric fibre nonempty and integral. These properties of a space morphism are tested on etale scheme charts; separated means that its diagonal is a closed immersion. Let $V\\subseteq S$ be dense and open [def-weil-open-immersion]. Then $X$ is regular and locally Noetherian, and $X_V$ is dense in $X$. Over any affine open $B\\subseteq S$, the space $X_B$ is Noetherian and separated over $\\operatorname{Spec}\\mathbf Z$.\n\nWrite $\\operatorname{Div}_{S\\setminus V}(S)$ for the group of locally finite integral sums of integral codimension-one closed subschemes supported in $S\\setminus V$, and define $\\operatorname{Div}_{X\\setminus X_V}(X)$ in the same way using codimension on etale charts. Flat Cartier pullback identifies these groups:\n$$p^*: \\operatorname{Div}_{S\\setminus V}(S)\\xrightarrow{\\sim}\\operatorname{Div}_{X\\setminus X_V}(X).$$\nMore precisely, every prime divisor of $X$ disjoint from $X_V$ is $p^{-1}(Z)$ for a unique prime divisor $Z$ of $S$ disjoint from $V$, with reduced structure; $p^{-1}(Z)$ is integral and has multiplicity one in $p^*Z$. Cartier divisors here mean sections of the sheaf of nonzero rational functions modulo regular units, which agree with the indicated locally finite Weil divisors on a regular space. The assertions are local on $S$. For every etale map $a:S'\\to S$ [def-weil-etale-morphism], $S'$ is regular locally Noetherian, $V'=a^{-1}V$ is dense, and the base-changed $p':X\\times_SS'\\to S'$ again satisfies the hypotheses. The divisor identifications commute with these etale base changes.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00ON (lemma-dimension-base-fibre-equals-total), applied on smooth etale charts to identify vertical codimension-one points; descent.tex Tag 036D (lemma-regular-local-smooth) for regularity. Agent-formulated geometric divisor lemma explaining the irreducible-fibre uniqueness argument of Deligne, Le lemme de Gabber, Section 4.2, printed p.142 (local PDF WANTED)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-regular-scheme",
+  "pqf-def-locnoeth",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-open-immersion",
+  "def-weil-etale-morphism",
+  "def-sfb-smooth-integral-space-map",
+  "def-sfb-locally-finite-space-divisors",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-divisors",
+  "def-sfb-space-divisor-operations",
+  "def-sfb-smooth-integral-group-space",
+  "def-sfb-space-closed-subspace",
+  "def-sfb-reduced-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Work over an affine open $B\\subset S$. By the chartwise calculus, $p$ is flat, and its base changes and its composites with etale scheme charts are smooth. For an affine chart $U\\to X_B$, the map to $B$ corresponds to a smooth ring map by the affine smoothness comparison. The coordinate ring of $B$ is regular (or restrict further to the regular affine neighborhoods in the definition); smooth ascent makes $U$ regular. Thus every chart of $X$ is regular and locally Noetherian. Finite presentation makes $X_B$ quasi-compact, and separatedness over $B$ makes it quasi-separated. Hence $X_B$ is Noetherian in the sense used in the item. The affine scheme $B$ is separated over $\\operatorname{Spec}\\mathbf Z$; composition of separated space morphisms makes $X_B$ separated over $\\operatorname{Spec}\\mathbf Z$. These observations verify all hypotheses of the divisor dictionary on both $B$ and $X_B$.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07NF (lemma-regular-goes-up); descent.tex Tag 036D (lemma-regular-local-smooth); spaces-morphisms.tex Tags 03KL and 03KQ"
+   }
+  },
+  {
+   "text": "The geometric-fibre hypothesis implies surjectivity of $|p|$: a point of a geometric fibre gives a point above its base point. Ordinary fibres are nonempty and irreducible as well: extension from a residue field to its algebraic closure is surjective on points, and the continuous image of the irreducible geometric fibre is irreducible. To verify the surjectivity on charts, tensor with the field extension, use faithful flatness and surjectivity on spectra, and then the point calculus for the atlas. Ordinary fibres are reduced because they are smooth over fields, by smooth reduced ascent. The flat locally finitely presented space map $p$ is universally open. If $O\\subset X$ is a nonempty open, $p(O)$ is nonempty open, so it meets $V$ and consequently $O$ meets $X_V$. This proves the asserted density. The same argument applies to every open restriction on $S$.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-sfb-space-smooth-reduced-locality",
+    "lem-sfb-flat-lfp-space-universally-open",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 042S (lemma-fppf-open); spaces-descent.tex Tag 0GB3 (lemma-reduced-local-smooth); elementary density argument"
+   }
+  },
+  {
+   "text": "Let $Z\\subset B$ be any integral closed subscheme and put $Y=X_B\\times_B Z$. It is reduced by smooth reduced ascent and is quasi-separated. Its map $q:Y\\to Z$ is surjective and open, with nonempty irreducible fibres by Step 2. For nonempty opens $O_1,O_2\\subset Y$, their images are nonempty opens in the irreducible space $Z$, so choose $z\\in q(O_1)\\cap q(O_2)$. The two fibre intersections are nonempty opens in the irreducible fibre $Y_z$ and therefore intersect. Thus $Y$ is irreducible. The field-monomorphism lemma gives a quasi-compact monomorphism from a field representing every point of $Y$: this is the pointwise decency condition (Tag 03JV, condition (4)). Thus $Y$ is decent. Together with reducedness and irreducibility this says $Y$ is integral. Soberness gives its unique generic point $y$. Moreover $q(y)=\\eta_Z$: if $T\\subset Z$ is nonempty open, $q^{-1}T$ is nonempty open and contains $y$. This argument does not require $Z$ regular or the charts of $Y$ irreducible. Closed inverse-image supports have their usual meaning by the reduced-closed-support theorem.",
+   "uses": [
+    "lem-sfb-space-smooth-reduced-locality",
+    "lem-sfb-flat-lfp-space-universally-open",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-quasiseparated-space-sober",
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-qs-space-field-monomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0AD4 (definition-integral-algebraic-space); decent-spaces.tex Tag 03JV (lemma-UR-finite-above-x), condition (4); spaces-properties.tex Tag 03IQ (lemma-reduced-closed-subspace); open-map irreducibility argument"
+   }
+  },
+  {
+   "text": "Let $W$ be a prime divisor of $X_B$ disjoint from $X_V$, with generic point $\\xi$, and put $s=p(\\xi)$. Choose an affine etale chart through $\\xi$ and then an affine open in it. Its point $u$ above $\\xi$ has $\\dim\\mathcal O_{U,u}=1$ by the chart definition of codimension. On a regular affine base neighborhood the flat height formula applies to the Noetherian coordinate rings and gives\n$$1=\\dim\\mathcal O_{S,s}+\\dim\\mathcal O_{U_s,u}.$$\nThe point $s$ is outside $V$. Every generic point of the locally Noetherian base lies in its dense open $V$; hence $\\dim\\mathcal O_{S,s}>0$. Therefore it equals one and the fibre local dimension is zero. Set $Z=\\overline{\\{s\\}}_{\\mathrm{red}}$ in $B$. It is a prime divisor disjoint from $V$ (the complement is closed). The fibre point represented by $\\xi$ is generic in $X_s$: otherwise a strict generization lifts to a strict generization of $u$ on an etale fibre chart, contradicting its zero-dimensional local ring. Here use the sober and etale-specialization statements for the separated fibre. Since $X_s$ is irreducible, this generic point is unique.",
+   "uses": [
+    "lem-weil-pbc-flat-height-formula",
+    "lem-sfb-space-local-dimension-chart-invariance",
+    "lem-sfb-quasiseparated-space-etale-specializations",
+    "lem-sfb-quasiseparated-space-sober",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ON (lemma-dimension-base-fibre-equals-total); decent-spaces.tex Tags 03IL and 03K5; schemes.tex Tag 01J3 (lemma-reduced-closed-subscheme)"
+   }
+  },
+  {
+   "text": "For $Z$ from Step 4, Step 3 makes $Y=p^{-1}(Z)$ integral. Its generic point lies over $s=\\eta_Z$ and is therefore the generic point of $X_s$, namely $\\xi$. Thus $|Y|=\\overline{\\{\\xi\\}}=|W|$. Both are reduced closed subspaces of $X_B$, so the uniqueness clause for reduced closed supports gives $Y=W$ as closed subspaces. Conversely, for any prime divisor $Z\\subset B$ outside $V$, Step 3 gives an integral $Y=p^{-1}(Z)$ whose generic point lies over $\\eta_Z$. On an etale fibre chart at that generic point, there are no strict generizations: a strict generization in the chart would give one in the fibre, or two comparable points with the same image, both excluded by the etale-specialization theorem. Thus the fibre local dimension is zero. The flat height formula now gives $\\delta_{X_B}(\\eta_Y)=1+0=1$, so $Y$ is a prime divisor. Surjectivity of $p$ gives uniqueness of $Z$, since the image of $p^{-1}|Z|$ is exactly $|Z|$.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-quasiseparated-space-etale-specializations",
+    "lem-weil-pbc-flat-height-formula",
+    "lem-sfb-space-local-dimension-chart-invariance",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ON; spaces-properties.tex Tag 03IQ; reduced closed-support uniqueness and generic-point calculation"
+   }
+  },
+  {
+   "text": "Let $Z\\subset B$ be a prime divisor disjoint from $V$, with generic point $s$. The local rings of the regular Noetherian $B$ are domains, so its finitely many irreducible components are disjoint and open; work on the integral component containing $Z$. By the regular prime-divisor lemma, near each point of $Z$, on an open $B_0$, the ideal of $Z$ is generated by one element $t$, prime in every local ring at points of $Z$, and $t$ is a uniformizer of the discrete valuation ring $\\mathcal O_{B,s}$. Off $Z$ it is a unit, and points of $Z$ other than $s$ have local dimension at least two. Hence $\\operatorname{div}(t)=[Z]$ on $B_0$, so by the dictionary $t$ is a local equation of the Cartier divisor of $[Z]$, and $p^*[Z]$ has local equation $p^*t$. Its zero subspace is $X_{B_0}\\times_{B_0}V(t)=p^{-1}(Z)\\cap X_{B_0}$, reduced by Step 3. At codimension-one points of $X_{B_0}$ off $|Y|$, $Y=p^{-1}(Z)$, $p^*t$ is a unit. A point $y'\\neq\\eta_Y$ of $Y$ has codimension at least two: the etale-specialization lemma lifts the strict generization $\\eta_Y\\leadsto y'$ to a strict generization in a chart, of a point with one-dimensional local ring by Step 5. Now let $A$ be the local ring of an etale chart at a point over $\\eta_Y$. It is regular of dimension one by Step 5, and $A/tA$ is the local ring of the induced chart of $Y$, hence reduced; it has dimension zero because $t$ is a nonzero nonunit of the one-dimensional local domain $A$. A reduced zero-dimensional local ring is a field: its unique prime is its maximal ideal, which equals the zero nilradical. So $tA$ is the maximal ideal and the normalized order of $p^*t$ at $\\eta_Y$ is one. Therefore $p^*[Z]=[p^{-1}(Z)]$ with multiplicity one; a nonreduced fibre would not give a field quotient.",
+   "uses": [
+    "lem-sfb-regular-space-divisor-line-dictionary",
+    "lem-per-regular-prime-divisor-local-equations",
+    "lem-sfb-quasiseparated-space-etale-specializations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AGA (lemma-weil-divisor-is-cartier-UFD), via the existing regular prime-divisor local-equation node; algebra.tex Tag 00PD (lemma-characterize-dvr), multiplicity calculation from the local equation"
+   }
+  },
+  {
+   "text": "The prime-divisor bijection and Step 6 identify finite integral sums over $B$. A locally finite family of divisors on $X$ has only finitely many members meeting $X_B$: this open is quasi-compact, so a finite subcover of neighborhoods witnessing local finiteness suffices. Distinct global prime divisors meeting an open have distinct nonempty restrictions, since each is the closure of its restriction. By Step 5, a corresponding base prime meets $B$ exactly when its inverse image meets $X_B$. Thus the inverse family is locally finite on $S$. In the forward direction, a neighborhood in $S$ meeting only finitely many base primes pulls back to a neighborhood meeting only those finitely many inverse-image primes. On overlaps of affine opens the local identifications agree, by the uniqueness in Step 5. Consequently the coefficient bijections glue to the stated isomorphism on locally finite sums. The Cartier descriptions also glue: sections of $\\mathcal K^\\times/\\mathcal O^\\times$ are sheaf sections, and the dictionary on $B$ and $X_B$ identifies their restrictions with these same Weil sums. Pullback is additive because local equations multiply. This proves the isomorphism and its locality on $S$.",
+   "uses": [
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-sfb-regular-space-divisor-line-dictionary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tags 0DMM and 0EPQ, local divisor dictionary; elementary finite-subcover argument for locally finite sums"
+   }
+  },
+  {
+   "text": "Let $a:S'\\to S$ be etale. Etale maps are smooth, so on affine etale charts smooth regular ascent makes $S'$ regular locally Noetherian. They are open and hence $V'=a^{-1}V$ is dense by exactly the nonempty-open argument of Step 2. The chartwise calculus preserves smoothness and local finite presentation of $p'$; its separatedness follows by separated base change and its quasi-compactness by quasi-compact base change. Thus it is of finite presentation. Every geometric fibre of $p'$ is a geometric fibre of $p$ after the canonical fibre-product identification, so is nonempty integral. All previous steps therefore apply to $p'$, without any quasi-compactness or separatedness assumption on $a$. For compatibility, work on affine opens and etale charts where a Cartier divisor has local equation $t$. Both routes in the square of divisor groups pull $t$ back by the same composite ring map, by the fibre-product identity; changing $t$ by a regular unit changes both answers by its pulled-back unit. The dictionary's flat-pullback clause identifies these Cartier computations with the Weil groups. Summing and restricting as in Step 7 gives the commutative square globally, even when an etale pullback of a prime divisor splits into several primes.",
+   "uses": [
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "lem-sfb-flat-lfp-space-universally-open",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-sfb-regular-space-divisor-line-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03ZE (lemma-base-change-smooth), 03KL and 042S; descent.tex Tag 036D; local-equation functoriality of Cartier pullback"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "def-weil-regular-scheme",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-sfb-space-smooth-reduced-locality",
+  "lem-sfb-flat-lfp-space-universally-open",
+  "lem-sfb-quasiseparated-space-sober",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-qs-space-field-monomorphism",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-sfb-space-local-dimension-chart-invariance",
+  "lem-sfb-quasiseparated-space-etale-specializations",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sfb-regular-space-divisor-line-dictionary",
+  "lem-per-regular-prime-divisor-local-equations",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00ON, with the chart, open-map, reduced-support and Cartier/Weil arguments spelled out in the proof; supports the existing Deligne 4.2 prerequisite"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "vertical.*[Dd]ivisor|[Dd]ivisor.*vertical|[Dd]ivisor.*[Ff]iber|[Ff]ibre.*[Dd]ivisor",
+   "results": "0 hits; returned declarations: none",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; smoothness and surjectivity base-change instances, fibre immersions, and affine tests for flatness do not classify vertical prime divisors or their multiplicities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a flat morphism with geometrically integral fibres every codimension one closed subspace over a proper closed subset of a regular base is the pullback of a codimension one subspace of the base",
+   "results": "8 hits; returned declarations: AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; smoothness and surjectivity base-change instances, fibre immersions, and affine tests for flatness do not classify vertical prime divisors or their multiplicities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"divisor\", \"Smooth\"",
+   "results": "0 hits; returned declarations: none",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; smoothness and surjectivity base-change instances, fibre immersions, and affine tests for flatness do not classify vertical prime divisors or their multiplicities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vertical prime divisors of a smooth surjective morphism with geometrically integral fibres over a regular scheme are pullbacks of prime divisors of the base with multiplicity one",
+   "results": "8 hits; returned declarations: AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instIsPreimmersionFiberι, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.IsIntegralHom.instFstScheme, AlgebraicGeometry.IsIntegralHom.instSndScheme, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; smoothness and surjectivity base-change instances, fibre immersions, and affine tests for flatness do not classify vertical prime divisors or their multiplicities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vertical divisors of a smooth morphism with geometrically integral fibres over a regular base are pullbacks with multiplicity one",
+   "results": "8 hits; AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.instIsPreimmersionFiberι, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.FormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned smoothness, flatness, fibre and geometric-integrality declarations; none identifies the supported divisor groups or their prime multiplicities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth surjective morphisms with integral geometric fibres identify vertical Weil divisors over a regular base",
+   "results": "8 hits; AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.IsSmooth, RingHom.Smooth",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned smoothness, flatness, fibre and geometric-integrality declarations; none identifies the supported divisor groups or their prime multiplicities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"divisor\", \"Smooth\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned smoothness, flatness, fibre and geometric-integrality declarations; none identifies the supported divisor groups or their prime multiplicities"
+  },
+  {
+   "tool": "grep",
+   "query": "vertical.*divisor|divisor.*vertical|WeilDivisor",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned smoothness, flatness, fibre and geometric-integrality declarations; none identifies the supported divisor groups or their prime multiplicities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat pullback is an isomorphism on Cartier divisors supported outside a dense open for a smooth family with integral fibres",
+   "results": "8 hits; AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.IsSmoothOfRelativeDimension",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned smoothness, flatness, fibre and geometric-integrality declarations; none identifies the supported divisor groups or their prime multiplicities"
+  },
+  {
+   "tool": "grep",
+   "query": "vertical|geometrically.*integral|divisor",
+   "results": "7 hits; Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Basic.lean, Mathlib/AlgebraicGeometry/Geometrically/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned smoothness, flatness, fibre and geometric-integrality declarations; none identifies the supported divisor groups or their prime multiplicities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-regular-group-rigidified-line-extension",
+  "date": "2026-10-23",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Extension and uniqueness of rigidified lines over a regular base. Supporting input for the rigidified-line split: Vertical divisors of a smooth morphism with geometrically integral fibres.",
+   "via": [
+    "lem-sfb-regular-group-rigidified-line-extension",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-integral-fibre-vertical-divisors",
+  "worker": "stage1",
+  "summary": "Proved the vertical-prime correspondence from the existing flat height formula, open-map irreducibility, reduced smooth pullback and Cartier dictionary; multiplicity one from the reduced local equation, local finiteness by quasi-compactness, and etale compatibility by the same ring-map composite. No new nodes and no statement change.",
+  "blueprint": "Read latest sk-thm-sf-ctf-stability and det-thm-sf-ctf-stability-direct-images proof (3). This is the existing regular-base rigidified-line support input of that alteration/moduli chain. Retain the computed null blueprint ancestor and complete inherited via chain; the present eight steps realize the vertical-divisor prerequisite in blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic affine smoothness comparison to apply regular ascent on scheme charts."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Generic commutative-algebra regularity theorem, used chartwise."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Generic separatedness of affine schemes over Spec Z."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic topology and fibre-product point calculus, used for surjectivity and support images."
+   },
+   {
+    "node": "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "why": "Generic faithful flatness of extension of fields on affine charts."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Generic spectrum surjectivity to descend irreducibility of geometric fibres."
+   },
+   {
+    "node": "lem-weil-pbc-flat-height-formula",
+    "why": "Generic local-ring dimension formula, the codimension input of this divisor argument."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic reduced closed subscheme construction for the closure of a base point."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic etale-implies-smooth fact for regularity and openness of the change of base."
+   },
+   {
+    "node": "lem-per-regular-prime-divisor-local-equations",
+    "why": "Generic regular-scheme fact that a codimension-one integral closed subscheme is cut out locally by one prime element, a uniformizer at its generic point; used in Step 6 for the local equation of a base prime divisor (Stacks 0AGA)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-per-regular-prime-divisor-local-equations"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-e0d8ff0ac",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-e0d8ff0ac (reviewer sub-agent of L); spot-checked: Read the item in full: statement unchanged, 8 steps, no new nodes; live is still unsplit, so not superseded. Read every cited statement and Stacks 00ON (algebra.tex l.27421) and 036D (descent.tex l.5030). Steps 1-5, 7 and 8 are correct. Hypotheses checked: separatedness via an affine B over Spec Z; X_B Noetherian; the flat height formula on Noetherian charts; a dense open contains every generic point; decency of Y via field monomorphisms, since Y x_S Y = Y x_Z Y; ξ generic in X_s via etale specializations; finite presentation of p' (separated implies quasi-separated). Fault C4/C1 in Step 6: the claim 'the zero subspace of t is Y' needs I_Z = (t) locally (0AGA, cited only by tag). The divisor dictionary does not state this, and the argument that Y has no other codimension-one components was missing. FIX: Step 6 is rewritten (1753 characters) to cite the existing reviewed lem-per-regular-prime-divisor-local-equations on the open integral component of B, plus lem-sfb-quasiseparated-space-etale-specializations for codimension at least 2 of the other points of Y; multiplicity one then follows from A/tA being a reduced zero-dimensional local ring, hence a field. proof_deps is updated and the tool use declared. Batch 5: the 12 flagged citations reach only def-trf-algebraic-space and foundational sec-trace-formula units (sk-i-curve-zero, sk-lem-finite, sk-i-additivity, sk-d-weil); the added node reaches only generic UFD trf nodes; no trace-formula, Poincare-duality, trace-transport or assumption node is reached, so all are accepted. No SGA citation, no cycle, no duplicate found by rg -L. The citer lem-sfb-regular-group-rigidified-line-extension's uses are intact. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-smooth-integral-fibre-vertical-divisors.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothIntegralFibreVerticalDivisors",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.smoothIntegralFibreVerticalDivisors",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.VerticalDivisorIdentification",
+   "AlgebraicGeometry.AlgebraicSpace.VerticalDivisorAffineFiniteness",
+   "AlgebraicGeometry.AlgebraicSpace.smoothIntegralFibreVerticalDivisors"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothIntegralFibreVerticalDivisors.lean",
+  "statement": "theorem smoothIntegralFibreVerticalDivisors {X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))} (T : Over (Spec (.of (ULift.{u} ℤ)))) (p : X ⟶ schemeSpace T) (hT : IsRegularScheme T.left) (hp : SmoothIntegralSpaceMap p) (V : T.left.Opens) (hV : Dense (V : Set T.left)) : VerticalDivisorAffineFiniteness p ∧ ∃ e : SupportedLocallyFiniteDivisors (schemeSpace T) (schemeOpenPointSet T V) ≃+ SupportedLocallyFiniteDivisors X (mapPoint p.hom.hom ⁻¹' schemeOpenPointSet T V), VerticalDivisorIdentification p (schemeOpenPointSet T V) e ∧ (∀ U : T.left.Opens, SmoothIntegralSpaceMap (integralSpaceBaseChangeMap p (Over.homMk (U := Over.mk (U.ι ≫ T.hom)) (V := T) U.ι rfl)) ∧ ∃ eU : SupportedLocallyFiniteDivisors (schemeSpace (Over.mk (U.ι ≫ T.hom))) (schemeOpenPointSet (Over.mk (U.ι ≫ T.hom)) (U.ι ⁻¹ᵁ V)) ≃+ SupportedLocallyFiniteDivisors (enlargedFibreProduct p (groupSchemeMap (Over.homMk (U := Over.mk (U.ι ≫ T.hom)) (V := T) U.ι rfl))) (mapPoint (integralSpaceBaseChangeMap p (Over.homMk (U := Over.mk (U.ι ≫ T.hom)) (V := T) U.ι rfl)).hom.hom ⁻¹' schemeOpenPointSet (Over.mk (U.ι ≫ T.hom)) (U.ι ⁻¹ᵁ V)), VerticalDivisorIdentification (integralSpaceBaseChangeMap p (Over.homMk (U := Over.mk (U.ι ≫ T.hom)) (V := T) U.ι rfl)) (schemeOpenPointSet (Over.mk (U.ι ≫ T.hom)) (U.ι ⁻¹ᵁ V)) eU ∧ ∃ (ha : MapIsFlat (groupSchemeMap (Over.homMk (U := Over.mk (U.ι ≫ T.hom)) (V := T) U.ι rfl))) (hb : MapIsFlat (enlargedFibreProductFst p (groupSchemeMap (Over.homMk (U := Over.mk (U.ι ≫ T.hom)) (V := T) U.ι rfl)))), ∀ D D', IsLocallyFiniteDivisorPullback _ ha D.val D'.val → IsLocallyFiniteDivisorPullback _ hb (e D).val (eU D').val) ∧ ∀ (T' : Over (Spec (.of (ULift.{u} ℤ)))) (a : T' ⟶ T), Etale a.left → IsRegularScheme T'.left ∧ Dense (a.left ⁻¹' (V : Set T.left)) ∧ SmoothIntegralSpaceMap (integralSpaceBaseChangeMap p a) ∧ VerticalDivisorAffineFiniteness (integralSpaceBaseChangeMap p a) ∧ ∃ e' : SupportedLocallyFiniteDivisors (schemeSpace T') (schemeOpenPointSet T' (a.left ⁻¹ᵁ V)) ≃+ SupportedLocallyFiniteDivisors (enlargedFibreProduct p (groupSchemeMap a)) (mapPoint (integralSpaceBaseChangeMap p a).hom.hom ⁻¹' schemeOpenPointSet T' (a.left ⁻¹ᵁ V)), VerticalDivisorIdentification (integralSpaceBaseChangeMap p a) (schemeOpenPointSet T' (a.left ⁻¹ᵁ V)) e' ∧ ∃ (ha : MapIsFlat (groupSchemeMap a)) (hb : MapIsFlat (enlargedFibreProductFst p (groupSchemeMap a))), (∀ D : SupportedLocallyFiniteDivisors (schemeSpace T) (schemeOpenPointSet T V), ∃! D' : SupportedLocallyFiniteDivisors (schemeSpace T') (schemeOpenPointSet T' (a.left ⁻¹ᵁ V)), IsLocallyFiniteDivisorPullback _ ha D.val D'.val) ∧ ∀ D D', IsLocallyFiniteDivisorPullback _ ha D.val D'.val → IsLocallyFiniteDivisorPullback _ hb (e D).val (e' D').val",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ccfbe7b74",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Read the item, the 8 proof steps, the delivered and live declarations, and the 3 modules. Hypotheses match exactly: IsRegularScheme = locally Noetherian + regular; SmoothIntegralSpaceMap = smooth, separated, finite presentation (qc + qc diagonal), geometric fibres irreducible and reduced, same convention as the landed GroupSpaceIntegralFibres; V dense open. Every conclusion is rendered: X regular, X_V dense, X_B Noetherian and separated over Z for affine B, locally finite supported divisor groups with e fixed by the Cartier pullback relation, prime bijection r with |r z| = |p|^-1|z|, reduced irreducible inverse images, multiplicity-one singleton formula, unique Cartier for each Weil divisor, all opens, and every etale base change with exists-unique D' and a commuting square that allows prime splitting. Records: only lean and stmt_deps change (two new nodes plus six landed nodes); statement verbatim; new-node fields complete; no name clashes in live; no hollow defs (closure theorems sorried and stated in the node); docstrings complete. Notes: VerticalDivisorAffineFiniteness restates IsRegularNoetherianSeparated with equivalent content; helper-map owners reached only indirectly, accepted by preflight. Not recompiled per instructions."
+ }
+}

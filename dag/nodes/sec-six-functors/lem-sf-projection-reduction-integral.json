@@ -1,0 +1,358 @@
+{
+ "id": "lem-sf-projection-reduction-integral",
+ "kind": "statement",
+ "title": "Projection right tensor action at integral coefficients",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi$, an integer $n\\ge1$, and an algebraic closure $\\overline{\\mathbf Q}_\\ell$ containing $E$. Let $S$ be a six-functor datum at these coefficients [def-sf-datum], with the specified operation and comparison data [def-fix-six-functor-datum].\n\nWork at $\\Lambda=R$ in the bounded constructible derived-complete integral categories $D^b_c(T,R)$ [def-weil-derived-complete-integral-detailed].\n\nLet $f:X\\to Y$ be a separated morphism of finite-type $k$-schemes and supply a compactification $c=(j:X\\hookrightarrow\\overline X,p:\\overline X\\to Y)$ with $j$ open, $p$ proper and $pj=f$. Write $F=Rf_!^c$, $U=Lf^*$, and $P(K,L)=\\operatorname{PF}_{f,K,L}^c:FK\\otimes L\\to F(K\\otimes UL)$ for the datum's actual compactification projection, namely the proper counit projection followed by the open tensor comparison [def-sf-constructible-projection-mates, def-exchange-projection]. Write $a_T(A,B,C):(A\\otimes B)\\otimes C\\xrightarrow{\\sim}A\\otimes(B\\otimes C)$ for the canonical tensor associator conjugated by the datum's tensor normalization, and $\\mu_f(L,N):U(L\\otimes N)\\xrightarrow{\\sim}UL\\otimes UN$ for the canonical normalized tensor-pullback comparison [def-pur-completed-pullback-tensor-comparison]. Then, for every $K\\in D^b_c(X,\\Lambda)$ and $L,N\\in D^b_c(Y,\\Lambda)$, with no additional finite-Tor restriction on these inputs,\n$$\\begin{aligned}\nP(K\\otimes UL,N)\\circ(P(K,L)\\otimes1_N)\n={}&F\\bigl(a_X(K,UL,UN)^{-1}\\bigr)\\circ F(1_K\\otimes\\mu_f(L,N))\\\\\n&\\circ P(K,L\\otimes N)\\circ a_Y(FK,L,N).\n\\end{aligned}$$\nBoth sides are morphisms $(FK\\otimes L)\\otimes N\\to F((K\\otimes UL)\\otimes UN)$. The two final images under $F$ are separate composites. All tensors, associators and pullbacks are the specified completed integral, rationalized, or common-stage operations, according to the coefficient stage. This is an equality of projection maps without an extra invertibility hypothesis. Taking $N$ to be the degree-zero constant quotient $(\\Lambda/J)_Y$ for an ideal $J\\subseteq\\Lambda$ gives reduction inside the original coefficient category; $UN$ is its canonical pulled-back coefficient object. The assertion is for arbitrary $N$, not only constant quotients.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Final finite-reduction clause: tensor-action equation at the integral coefficient stage",
+  "module": "Sheaf.Paper.ProjectionFormulaCoherence",
+  "file": "lean/Sheaf/Paper/ProjectionFormulaCoherence.lean",
+  "line": 1140,
+  "declaration": "WeilConjectures.sixFunctorProjection_reduction_integral",
+  "note": "Construction material for a future worker, not a proof certification: prove the proper counit tensor-action identity by transposing both composites, and the open unit tensor identity on pure tensors; paste those identities for the actual compactification map. At the integral stage keep the equation in the coherent system with its completion units before applying the total derived inverse limit. Localization and common-field inclusion preserve that completed equation with the specified tensor associators. No finite-Tor restriction on N or L is present in these exact source declarations; do not silently add one. Right tensor by a constant quotient is reduction inside the original category, not a functor reducing a rational coefficient object to a finite coefficient ring.\n\nExact source docstring (unproved source):\n/-- Finite-reduction compatibility for the datum's integral projection maps.\nRight tensor by the constant quotient is reduction kept in the original coefficient\ncategory, as in prop-sf-pf-reduction. The displayed identity is stated for all N,\nso it also retains the identity and zero reductions.\nSource: current blueprint prop-sf-pf-coherence, final clause\n(blueprint: prop-sf-pf-coherence).\nProof: the proper counit projection satisfies tensor associativity by transposing\nboth composites. The open unit tensor comparison satisfies the same identity on\npure tensors. Paste them. At the integral stage retain this equation on coherent\nsystems and their completion units before applying Rlim. Localization and a common\nfinite coefficient field preserve it, with the specified tensor associators. -/\n\nVerbatim retained old parent argument, in source order:\nFor coefficients, [prop-sf-pf-reduction] supplies the finite reduction square on the finite-Tor domains. At field stages use the integral representatives, rationalization and common-stage comparisons of [thm-sf-pf-field]. The (A5) comparisons [def-sf-datum] and primitive-map data [def-exchange-projection] satisfy the intertwining and cocycle hypotheses of [lem-sf-pf-coefficient-realization-transport]. It carries the proved equal composites and their unit identifications to the specified coefficient/site maps; its cocycles give coefficient naturality. [thm-sf-pf-proetale] identifies the realized projection with the same proper counit projection followed by the open tensor map. Integral commutativity was proved directly in step 2; fields use chosen integral representatives, never reduction of field objects. For the finite all-ideal clause, [def-sf-constructible-projection-mates] gives the actual component and its recorded source and target realization comparisons. Conjugate by these comparisons and cancel the inverse/hom composites; the fully faithful preimage equation for the realization equivalence identifies the arrow with fixedComponent. Its tensor-coordinate evaluation is the same canonical proper/open projection. Apply the expanded general coefficient-category compactification tensor-action identity [lem-sf-projection-tensor-coordinate-action], proved from the existing generic library calculation in [lem-pur-finite-projection-action-laws] with third input the degree-zero constant quotient A/J. Functorial preservation of composition separates the pullback tensor comparison and the inverse target associator. The quotient is arbitrary; no perfectness or flatness assumption is imposed. The remaining coefficient clauses retain the preceding plan.\n\nExact sorried source theorem header:\ntheorem sixFunctorProjection_reduction_integral (S : SixFunctorDatum D C E n hn)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsSeparated f.hom.left]\n    (c : Compactification f.hom.left) (K : sfIntegralConstructibleCategory C.l E X.obj.left)\n    (L N : sfIntegralConstructibleCategory C.l E Y.obj.left) :\n    sixFunctorProjectionIntegralReductionSquare S f c K L N"
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-fix-six-functor-datum",
+  "def-sf-constructible-projection-mates",
+  "def-exchange-projection",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-weil-derived-complete-integral-detailed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Final coefficient-compatibility clause, expanded by the proper counit/open tensor action argument retained in the item source docstring; proved on coherent systems before total limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For completed integral adic constructible derived sheaves the canonical compact support projection is compatible with right tensoring by an arbitrary coefficient object and associators",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.ofTensorProduct_naturality\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N),\\n  AdicCompletion.map I f ∘ₗ AdicCompletion.ofTensorProduct I M =\\n    AdicCompletion.ofTensorProduct I N \", \"doc\": \"For any $ R $-linear map $ f : M \\to N $, the diagram involving the $ I $-adic completion maps and tensor products commutes, i.e., $\\\\text{map}_I(f) \\\\circ \\\\text{ofTensorProduct}_I(M) = \\\\text{ofTensorPro\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\\n  TensorProduct.Alge\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_tmul\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (r : AdicCompletion I R) (x : M), (AdicCompletion.ofTensorProduct I M) (r ⊗ₜ[R] x) = r • (AdicCompletion.of I M) x\", \"doc\": \"For any element $ r $ in the $ I $-adic completion of a commutative ring $ R $ and any element $ x $ in an $ R $-module $ M $, the canonical linear map from the tensor product $ (\\\\varprojlim R/I^nR) \\\\\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}\n  {\"name\": \"LightCondensed.instMonoidalCategoryLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → CategoryTheory.MonoidalCategory (LightCondMod R)\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"projection\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(tensorAction|[Aa]ssociat|[Rr]eduction)|compactSupportProjection",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Tactic/Simps/Basic.lean\", \"line\": \"773\", \"text\": \"Get the projections used by `simps` associated to a given structure `str`.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/Projections.lean\", \"line\": \"66\", \"text\": \"/-- `Q q` is the complement projection associated to `P q` -/\"}\n  {\"file\": \"Mathlib/Tactic/Simps/NotationClass.lean\", \"line\": \"91\", \"text\": \"/-- Data needed to generate automatic projections. This data is associated to a name of a projection\"}\n  {\"file\": \"Mathlib/Data/Setoid/Partition.lean\", \"line\": \"396\", \"text\": \"/-- The projection onto the quotient associated to an indexed partition. -/\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Idempotent.lean\", \"line\": \"28\", \"text\": \"we show that idempotent elements of `M →L[R] M` are precisely the projections associated to\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor action associativity of a proper adjunction projection followed by open extension tensor comparison at completed integral adic coefficients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.TensorProduct.assoc\", \"module\": \"Mathlib.RingTheory.TensorProduct.Maps\", \"type\": \": A ⊗[S] C ⊗[R] D ≃ₐ[S] A ⊗[S] (C ⊗[R] D)\", \"doc\": \"Let $R$ and $S$ be commutative semirings. Let $S$ be an $R$-algebra, $A$ be an $S$-algebra, and $C$ and $D$ be $R$-algebras. If the scalar actions of $R$ and $S$ on $A$ form a scalar tower, then there\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [inst_\", \"doc\": \"For monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an adjunction $F \\\\dashv G$ where $F$ is oplax monoidal and $G$ is lax monoidal, and objects $X,Y,Z \\\\in \\\\mathcal{D}$, the composition of $F$'s a\"}\n  {\"name\": \"TensorProduct.tensorTensorTensorAssoc\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Associator\", \"type\": \": M ⊗[R] N ⊗[R] (P ⊗[R] Q) ≃ₗ[R] M ⊗[R] (N ⊗[R] P) ⊗[R] Q\", \"doc\": \"The canonical isomorphism between $ (M \\\\otimes_R N) \\\\otimes_R (P \\\\otimes_R Q) $ and $ M \\\\otimes_R (N \\\\otimes_R P) \\\\otimes_R Q $, constructed by composing the inverse of the standard associator with co\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.distribBaseChange\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": A ⊗[R] (M ⊗[R] N) ≃ₗ[A] (A ⊗[R] M) ⊗[A] (A ⊗[R] N)\", \"doc\": \"Let $R$ and $A$ be commutative semirings, let $A$ be an $R$-algebra, and let $M$ and $N$ be $R$-modules. There is a canonical $A$-linear isomorphism between the extension of scalars of the tensor prod\"}\n  {\"name\": \"CategoryTheory.exp.adjunction\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Cartesian\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      (A : C) →\\n        [inst_2 : CategoryTheory.Closed A] → CategoryTheory.MonoidalCategory.tensorLeft A ⊣ CategoryTheory.ihom A\", \"doc\": \"In a closed monoidal category $\\\\mathcal{C}$, for any object $A$, the left tensoring functor $- \\\\otimes A$ is left adjoint to the internal hom functor $[A, -]$. This establishes a natural isomorphism b\"}\n  {\"name\": \"CategoryTheory.ihom.adjunction\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \": tensorLeft A ⊣ ihom A\", \"doc\": \"In a closed monoidal category $\\\\mathcal{C}$, for any object $A$, the left tensoring functor $- \\\\otimes A$ is left adjoint to the internal hom functor $[A, -]$. This establishes a natural isomorphism b\"}\n  {\"name\": \"CategoryTheory.instIsLeftAdjointTensorLeft\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Types\", \"type\": \"(X : Type v₁) : (tensorLeft X).IsLeftAdjoint\", \"doc\": \"For any type $X$, the functor that maps a type $Y$ to the product $X \\\\times Y$ is a left adjoint functor in the Cartesian monoidal category of types.\"}\n  {\"name\": \"Coalgebra.TensorProduct.assoc\", \"module\": \"Mathlib.RingTheory.Coalgebra.TensorProduct\", \"type\": \": (M ⊗[S] N) ⊗[R] P ≃ₗc[S] M ⊗[S] (N ⊗[R] P)\", \"doc\": \"The canonical coalgebra isomorphism between $(M \\\\otimes_S N) \\\\otimes_R P$ and $M \\\\otimes_S (N \\\\otimes_R P)$, establishing associativity of tensor products in the category of coalgebras over a commutat\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor action associativity of a proper adjunction projection followed by open extension tensor comparison at completed integral adic coefficients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\\n  TensorProduct.Alge\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_tmul\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (r : AdicCompletion I R) (x : M), (AdicCompletion.ofTensorProduct I M) (r ⊗ₜ[R] x) = r • (AdicCompletion.of I M) x\", \"doc\": \"For any element $ r $ in the $ I $-adic completion of a commutative ring $ R $ and any element $ x $ in an $ R $-module $ M $, the canonical linear map from the tensor product $ (\\\\varprojlim R/I^nR) \\\\\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_naturality\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N),\\n  AdicCompletion.map I f ∘ₗ AdicCompletion.ofTensorProduct I M =\\n    AdicCompletion.ofTensorProduct I N \", \"doc\": \"For any $ R $-linear map $ f : M \\to N $, the diagram involving the $ I $-adic completion maps and tensor products commutes, i.e., $\\\\text{map}_I(f) \\\\circ \\\\text{ofTensorProduct}_I(M) = \\\\text{ofTensorPro\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : TensorProduct R (AdicCompletion I R) M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) x = (AdicCompletion.o\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\\n  ↑(AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) = AdicCompletion.ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M).symm ((AdicCompletion.of I M) x) = 1 ⊗ₜ[R] x\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, applying the inverse of the linear equivalence between $ \\\\hat{R} \\\\otimes_R M $ and the $ I $-adic \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u_2) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] → TensorProduct R (AdicCompletion I R) M →ₗ[AdicCompletion I R] AdicCompletion I M\", \"doc\": \"A linear map from the tensor product of the $ I $-adic completion of a commutative ring $ R $ with an $ R $-module $ M $ to the $ I $-adic completion of $ M $, defined by scalar multiplication. This m\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}",
+   "date": "2026-10-27",
+   "verdict": "no match: the returned general algebra, adjunction, sheaf pullback and monoidal facts do not state the specified higher-stage compactification equation with these normalized comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "specialization of generic projection tensor action to completed integral constructible coefficients",
+   "results": "Returned 8 hits: AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProduct_tmul, Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, PolynomialLaw.toFun_eq_rTensor_φ_toFun', AdicCompletion.ofTensorProduct, AdicCompletion.tensor_map_id_left_eq_map, PolynomialLaw.exists_lift'.",
+   "date": "2026-10-27",
+   "verdict": "no match: no hit states the completed integral compactification tensor-action identity with its specified normalized maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "genericProjectionAction_compactification",
+   "results": "Returned 0 hits: . loogle: unknown identifier 'genericProjectionAction_compactification'",
+   "date": "2026-10-27",
+   "verdict": "inconclusive: project-specific identifier unknown to Loogle; superseded by the valid adjunction/tensor query"
+  },
+  {
+   "tool": "grep",
+   "query": "genericProjectionAction_compactification|sixFunctorProjectionIntegralReductionSquare",
+   "results": "Returned 0 hits: .",
+   "date": "2026-10-27",
+   "verdict": "inconclusive: requested subdirectory Sheaf is not a Mathlib category directory; superseded by genuine CategoryTheory grep",
+   "subdirectory": "Sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The counit projection of a right adjoint satisfies right tensor action associativity for all objects",
+   "results": "Returned 8 hits: CategoryTheory.MonoidalCategory.MonoidalRightAction.actionAssocNatIso, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, TensorProduct.counit_def, CategoryTheory.Functor.ranCounit_app_app_ranAdjunction_unit_app_app_assoc, CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit_assoc, CategoryTheory.ComonObj.comul_counit_assoc, CategoryTheory.Adjunction.whiskerRight_counit_app_app.",
+   "date": "2026-10-27",
+   "verdict": "no match: no hit states the completed integral compactification tensor-action identity with its specified normalized maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula associativity for compact support formed by proper direct image and extension by zero in derived complete integral coefficient systems",
+   "results": "Returned 8 hits: Profinite.NobelingProof.projRestricts_eq_comp, Profinite.NobelingProof.CC_comp_zero, Profinite.NobelingProof.projRestricts_comp_projRestrict, Profinite.NobelingProof.proj_comp_of_subset, Profinite.NobelingProof.πs'_apply_apply, Profinite.NobelingProof.coe_πs', LightProfinite.proj_comp_transitionMap, Profinite.NobelingProof.CC_exact.",
+   "date": "2026-10-27",
+   "verdict": "no match: no hit states the completed integral compactification tensor-action identity with its specified normalized maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"tensor\"",
+   "results": "Returned 10 hits: CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, AlgCat.tensorAlgebraAdj, CategoryTheory.tensorLeftAdjunction, CategoryTheory.tensorRightAdjunction, CategoryTheory.Types.tensorProductAdjunction.",
+   "date": "2026-10-27",
+   "verdict": "no match: no hit states the completed integral compactification tensor-action identity with its specified normalized maps"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]rojection.*([Aa]ssociat|[Tt]ensorAction)|compProjectionMap",
+   "results": "Returned 0 hits: .",
+   "date": "2026-10-27",
+   "verdict": "no match: no hit states the completed integral compactification tensor-action identity with its specified normalized maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-pf-coherence",
+  "date": "2026-10-27",
+  "group": "NB"
+ },
+ "lean_candidates": [
+  {
+   "declaration": "WeilConjectures.sixFunctorProjection_reduction_integral",
+   "module": "Sheaf.Paper.ProjectionFormulaCoherence",
+   "file": "lean/Sheaf/Paper/ProjectionFormulaCoherence.lean",
+   "line": 1140,
+   "quarantine_file": "quarantine/Sheaf/Paper/ProjectionFormulaCoherence.lean",
+   "quarantine_line": 1140,
+   "statement": "theorem sixFunctorProjection_reduction_integral (S : SixFunctorDatum D C E n hn)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsSeparated f.hom.left]\n    (c : Compactification f.hom.left) (K : sfIntegralConstructibleCategory C.l E X.obj.left)\n    (L N : sfIntegralConstructibleCategory C.l E Y.obj.left) :\n    sixFunctorProjectionIntegralReductionSquare S f c K L N",
+   "proposed_module": "Sheaf.Paper.ProjectionReductionIntegral",
+   "status": "sorried",
+   "note": "Exact source allocation only; not a verified attachment or a separately extracted module. Source proof contains sorry; no compilation performed."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Final finite-reduction clause: tensor-action equation at the integral coefficient stage",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "proof": [
+  {
+   "text": "First check the domain of the completion calculation. By [lem-coef-integral-residue-tor], every integral bounded constructible input has uniformly finite-Tor reductions; this applies to K,L,N, not merely to a chosen finite-Tor subcategory. Apply [lem-pur-integral-operations-preserve-constructible] repeatedly to the pullbacks and binary/triple tensors in the two routes. Apply [lem-fix-compactification-completed-realization] to every source input of F: its hidden j_! intermediate and its proper direct-image output are derived-complete constructible. The system intermediates are the strict towers, not reductions of these outputs, so identify them. For the hidden open intermediate, J_j(RK) has levels j_!K_n, which are the reductions of j_!K by the open tensor isomorphism gamma of [lem-sf-open-tensor-normalization] with N=(A_n)_{\\overline X}. For the proper output, S_pJ_j(RK) has levels Rp_{*,n}j_!K_n; since every K_n has Tor amplitude in one interval [a,b], [lem-coef-compact-support-normalized-realization] for the compactification c=(j,p) says this tower is a normalized DVR tower. By [lem-coef-normalized-dvr-effectivity] its levels are the reductions of its total limit, which is Rp_{*,R}j_!K by the isomorphism d_c above. Applying the residue-Tor result to these complete constructible outputs therefore gives uniform Tor bounds and bounded constructible cohomology for the system intermediates themselves. Thus all finitely many intermediate objects satisfy the uniform bounds of [lem-sf-integral-compactification-system-realization]. The finite inputs have compatible etale origins by the equivalence in [lem-sf-proetale-constructible-origin]: choose its quasi-inverse on the entire reduction diagram, so transition maps and their relations are retained, rather than choosing unrelated origins. Boundedness gives bounded-below origins. These checks require no separated structure morphism for X or Y.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-fix-compactification-completed-realization",
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-proetale-constructible-origin",
+    "lem-coef-compact-support-normalized-realization",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Final finite-reduction clause: legitimate domains for the integral coherent-system calculation"
+   }
+  },
+  {
+   "text": "Work before total inverse limit in the derived categories of strict semilinear coefficient systems supplied by [lem-sf-integral-compactification-system-realization]. Their simultaneous ringed-diagram-site models let us use the ordinary ringed derived calculation. Put P=P_p, Q=P_j, R=S_p, J=J_j and H=RJ. Write A,B,C for the coherent reductions of K,L,N. Tensor and pullback constraints are the canonical total-complex constraints. By [lem-sfb-ringed-derived-monoidal-comparisons], P,Q are strong monoidal, and the comparison P_f -> QP is monoidal. The normalization in [def-sfb-ringed-projection-coherence-data] fixes the associator used in the next step as the total-complex reassociation, rather than an arbitrary associator. Denote by pi the counit-defined projection for P adjoint to R, and by delta the open tensor map for J adjoint to Q. The compactification projection in systems is R(delta_{A,PB}) pi_{JA,B}, followed by the image of the inverse pullback compositor, exactly as in [def-exchange-projection].",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-sfb-ringed-projection-coherence-data",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Proper counit mate and open tensor factors; canonical tensor reassociations"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ringed-projection-tensor-associativity] to the proper ringed-diagram-site morphism p and its canonical tensor models. Its projection is pi, since both are the transpose of (epsilon tensor 1) mu_p. Its normalized TensorConstraints are the constraints fixed in step 2. Precompose its displayed equality by alpha_Y(RM,B,C); the inverse source associator cancels. The result, in right-to-left composition, is\npi_{M tensor PB,C}(pi_{M,B} tensor 1_C)\n=R(alpha^{-1}_{M,PB,PC}) R(1_M tensor mu_p(B,C)) pi_{M,B tensor C} alpha_Y(RM,B,C).\nThis holds for arbitrary system objects, so in particular for M=JA. It is an equality of counit-defined maps and does not use their invertibility.",
+   "uses": [
+    "lem-sfb-ringed-projection-tensor-associativity",
+    "def-sfb-ringed-projection-coherence-data",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Proper factor: transpose the two tensor-action routes through the same adjunction"
+   }
+  },
+  {
+   "text": "For the open factor, [lem-sf-open-tensor-normalization] applies on the ringed diagram site with its actual coefficient transitions. It identifies delta^{-1}_{A,B} with the J adjoint to Q transpose of mu_j^{-1}(v_A tensor 1). Hence it is exactly kappa of [lem-pur-unit-adjunct-tensor-action]. Invert that node's first equation (every kappa here is invertible by the open normalization), obtaining\ndelta_{A tensor QB,C}(delta_{A,B} tensor 1_C)\n=J(alpha^{-1}_{A,QB,QC}) J(1_A tensor mu_j(B,C)) delta_{A,B tensor C} alpha(JA,B,C).\nIndeed inversion reverses the two kappa factors, and the inverse of J((1 tensor mu_j^{-1}) alpha) is J(alpha^{-1}(1 tensor mu_j)). Thus this is the required open action equation with the canonical maps, including their unit normalization.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-pur-unit-adjunct-tensor-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Open factor: unit-normalized tensor comparison and its two-factor action equation"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-composite-relative-tensor-action] with its (R,P,pi) equal to the proper factor and its (J,Q,delta) equal to the open factor. Steps 3 and 4 supply exactly its two hypotheses, on the same system tensor categories. It gives the action law for tau_{A,B}=R(delta_{A,PB}) pi_{JA,B} and pullback QP. Its explicit expansion uses naturality of pi to move R(delta) through the next projection, so no interchange between the two factors is left implicit. Replace QP by P_f via the canonical inverse-image compositor. The monoidality equation of [lem-sfb-ringed-derived-monoidal-comparisons] identifies mu_{QP}=mu_j P_j(mu_p) with mu_f under this compositor; naturality inserts the same compositor in tau and tau at A tensor P_f B. Therefore the resulting equality is the desired compactification action equation in the derived system category, including the canonical pullback-composition factors.",
+   "uses": [
+    "lem-pur-composite-relative-tensor-action",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Paste the proper and open tensor identities for the chosen compactification"
+   }
+  },
+  {
+   "text": "Apply the total-limit functor to step 5's equality as an equality in the derived system category. Use the c_V of [lem-sf-integral-compactification-system-realization] for its source, target, and every intermediate expression. That theorem intertwines each proper/open projection constituent, unit, counit, tensor/pullback comparison and its whiskering by these expressions. For the associators use [lem-pur-completed-operation-tower-substitution], which identifies completed reassociation with the limit of the whole system reassociation, with the actual reduction-limit counits. The comparison mu_f is precisely [def-pur-completed-pullback-tensor-comparison], defined from that strict tensor comparison with its completion units. For each constituent m:V->W the comparison equation is c_W L(m)=m_int c_V. Substitution in each composite cancels each adjacent c_V^{-1}c_V, leaving the same c_source and c_target on the two sides. Cancel these isomorphisms. This proves equality of the completed integral composites themselves; finite evaluation is never used to detect equality of morphisms.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "lem-pur-completed-operation-tower-substitution",
+    "def-pur-completed-pullback-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Integral stage: preserve the system equation and completion units before applying total derived inverse limit"
+   }
+  },
+  {
+   "text": "Read the completed integral operations as the datum's specified operations [def-fix-six-functor-datum, def-exchange-projection]. In particular P(K,L) is the proper counit projection followed by the open tensor comparison, not an independently chosen projection isomorphism. Conjugate the canonical associators by the datum's tensor normalization as in the statement. If h_V is the resulting identification at an expression V, every constituent m is replaced by h_target m h_source^{-1}; consequently the h pairs cancel along both routes, including the source associator and target inverse associator. The normalized pullback comparison is the one of [def-pur-completed-pullback-tensor-comparison], already identified in step 6. This gives the displayed equality for S. Only its specified operation/normalization data are used, not the projection-isomorphism axiom.",
+   "uses": [
+    "def-fix-six-functor-datum",
+    "def-exchange-projection",
+    "def-pur-completed-pullback-tensor-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Specified coefficient/site maps and normalized tensor associators"
+   }
+  },
+  {
+   "text": "Finally functoriality gives F(alpha_X^{-1}(1_K tensor mu_f))=F(alpha_X^{-1}) F(1_K tensor mu_f), so the two final F-images are separate composites in exactly the order printed in the statement. The calculation quantified over all N; substituting the indicated quotient coefficient object gives the reduction clause without any inversion of P. It retains both the coefficient-unit and zero specializations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Final reduction clause: separate functor images and specialize the third tensor factor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-fix-six-functor-datum",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-sfb-ringed-projection-coherence-data",
+  "lem-coef-compact-support-normalized-realization",
+  "lem-coef-integral-residue-tor",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-fix-compactification-completed-realization",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-composite-relative-tensor-action",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-unit-adjunct-tensor-action",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-projection-tensor-associativity"
+ ],
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-projection-reduction-integral",
+  "worker": "stage1",
+  "summary": "Wrote an eight-step integral tensor-action proof using existing generic proper-mate associativity, unit-adjunct open action, composite action, and whole-expression coherent-system realization. Verified domains for arbitrary integral bounded constructible inputs using residue-Tor bounds. No new nodes, no added hypotheses, no reduction-detects-equality argument, and no Lean changes.",
+  "blueprint": "Realizes prop-sf-pf-coherence.proof.md final coefficient-compatibility sentence, with the integral proper-counit/open-unit calculation explicitly recorded in this item source; the chapter and unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "General integral residue-Tor criterion, to supply existing uniform finite-Tor domains for arbitrary integral inputs. No node of the projection-coherence unit supplies this general tool with these hypotheses."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic preservation by integral pullback and tensor, used only to check the realization domain. No node of the projection-coherence unit supplies this general tool with these hypotheses."
+   },
+   {
+    "node": "lem-fix-compactification-completed-realization",
+    "why": "Generic completeness/constructibility of the proper/open intermediates and their actual compact-support identification. No node of the projection-coherence unit supplies this general tool with these hypotheses."
+   },
+   {
+    "node": "lem-sf-integral-compactification-system-realization",
+    "why": "Generic whole-expression realization, carrying the proper/open action equality to the completed maps; no alternative geometric route. No node of the projection-coherence unit supplies this general tool with these hypotheses."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic equivalence supplying compatible etale origins on reduction diagrams. No node of the projection-coherence unit supplies this general tool with these hypotheses."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ringed derived tensor and pullback-compositor coherence for the diagram-site models. No node of the projection-coherence unit supplies this general tool with these hypotheses."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-associativity",
+    "why": "Generic single counit-mate tensor action, applied to the proper factor. No node of the projection-coherence unit supplies this general tool with these hypotheses."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic ringed-diagram-site open tensor map with its actual unit-adjunct normalization. No node of the projection-coherence unit supplies this general tool with these hypotheses."
+   },
+   {
+    "node": "lem-pur-unit-adjunct-tensor-action",
+    "why": "Generic unit-adjunct action law, inverted for the open tensor isomorphism. No node of the projection-coherence unit supplies this general tool with these hypotheses."
+   },
+   {
+    "node": "lem-pur-composite-relative-tensor-action",
+    "why": "Generic pasting of two relative tensor actions for the proper/open factorization. No node of the projection-coherence unit supplies this general tool with these hypotheses."
+   },
+   {
+    "node": "lem-pur-completed-operation-tower-substitution",
+    "why": "Generic completion/substitution compatibility identifying the system and completed associators. No node of the projection-coherence unit supplies this general tool with these hypotheses."
+   },
+   {
+    "node": "lem-coef-compact-support-normalized-realization",
+    "why": "Generic normalization of the integral compact-support strict tower of a uniform-Tor input, used only to place the hidden proper-image system intermediate in the realization domain. No node of the projection-coherence unit supplies it (review FIX)."
+   },
+   {
+    "node": "lem-coef-normalized-dvr-effectivity",
+    "why": "Generic counit isomorphism identifying the levels of a normalized tower with the reductions of its limit, for the same domain check. No node of the projection-coherence unit supplies it (review FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-integral-residue-tor",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-fix-compactification-completed-realization",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-projection-tensor-associativity",
+  "lem-sf-open-tensor-normalization",
+  "lem-pur-unit-adjunct-tensor-action",
+  "lem-pur-composite-relative-tensor-action",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-coef-compact-support-normalized-realization",
+  "lem-coef-normalized-dvr-effectivity"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-b3a297b36",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-b3a297b36 (reviewer sub-agent of L); spot-checked: This is the first proof of the item (live status was unsplit), with 8 steps and no new nodes. The statement and stmt_deps are byte-identical to the live node. I read every cited statement. Step 3: precomposing the ∃-constraint equation of lem-sfb-ringed-projection-tensor-associativity with α_Y gives the step's display; the constraints are pinned by def-sfb-ringed-projection-coherence-data, and the projection is the counit transpose. Step 4: by lem-sf-open-tensor-normalization, γ^{-1} is the κ of lem-pur-unit-adjunct-tensor-action; I inverted its first equation by hand and the display is correct. Step 5: the types of lem-pur-composite-relative-tensor-action match (P=P_p, Q=P_j, J=J_j, R=S_p), and the c_{j,p} monoidality comes from lem-sfb-ringed-derived-monoidal-comparisons. Step 6: the realization c_V and the tower-substitution associators are proved in D(systems) before the limit, with no evaluation faithfulness. Step 7: the integral PF of def-exchange-projection is exactly V_int. One fault (C4/E1, step 1): the realization domain (def-sf-integral-system-expression-domain) requires the system tower S_pJ_j(RK) to be normalized with bounded finite-Tor levels, but the step applied residue-Tor only to the integral output Rp_*j_!K. FIX: step 1 now cites lem-coef-compact-support-normalized-realization, with the uniform-Tor hypothesis from residue-Tor, so the tower is normalized. It also cites lem-coef-normalized-dvr-effectivity, so the levels are the reductions of the limit, which d_c identifies with Rp_*j_!K. Step 1 also adds lem-sf-open-tensor-normalization, whose γ gives the j_! levels. proof_deps and tool_uses are updated, with no cycle and 0 new batch-5 nodes. Small cases: id, K=0, N=0, N=unit and N=R/ϖ^r all check. Batch 5: the item's unchanged stmt_deps already reach 185 trf/pod nodes, including all three flagged targets (generic coefficient-system evaluation coherence, completion-unit models, normalized reconstruction). Of the three flagged citations, lem-fix-compactification-completed-realization and lem-pur-completed-operation-tower-substitution add 0 such nodes. lem-sf-integral-compactification-system-realization adds 6, all generic: K-flat models, stalk tensor, the strict tensor-augmentation nodes, and the constant-unit Leray chain. None is a step of the trace formula or of Poincaré duality, so I accept them.; 1 file(s) fixed by the reviewer"
+ }
+}

@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-component-projection-weight-bounds",
+ "kind": "statement",
+ "title": "Component projection estimates for leading Hilbert weights",
+ "statement": "Let $k$ be algebraically closed, $r\\ge4$, and let $X\\subset\\mathbf P^{r-1}_k$ be a connected closed subscheme with Hilbert polynomial $dm+c$, $d>3$, and $d/r<8/7$. Assume its reduced support $X_{\\mathrm{red}}$ is nondegenerate, meaning that no nonzero linear form vanishes on it. Use the weighted monomial and leading-coefficient convention of [lem-sfb-bounded-hilbert-weight-polynomials]. Let $Y$ be a reduced irreducible component of degree $e$; put $W=\\ker(k^r\\to H^0(Y,\\mathcal O_Y(1)))$. Give $W$ weight zero and its quotient weight one, and put $s=\\dim(k^r/W)$. If the local ring of $X$ at the generic point of $Y$ has length at least two [def-weil-pbc-module-length], then\n$$s\\le e+1,\\qquad a_F\\ge2e+\\tfrac12.$$\nIf $X$ is generically reduced, $e\\le3$, and $Y$ is not a rational normal curve, then\n$$s\\le e,\\qquad a_F\\ge e+\\tfrac12.$$\nThese are statements about the displayed projection flags, without any semistability assumption. A rational normal curve of degree $e$ means a smooth rational curve whose embedding in its own linear span is the complete degree-$e$ embedding of $\\mathbf P^1$. Component degrees below are degrees of the pulled-back hyperplane line on the smooth normalized components [def-sc-normalization, def-pc-degree-line-bundle].",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 3.2 proof of Theorem 8, steps (2)--(3), printed p.14; agent explicit leading-coefficient version of the component-projection estimates. The multiple-component estimate is the coefficient 2e+1/2 in Gieseker, Lectures on Moduli of Curves, Proposition 1.0.3, printed pp.30--36. Local PDFs WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-projective-space-twist",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-degree-line-bundle",
+  "lem-sfb-bounded-hilbert-weight-polynomials",
+  "def-pc-reduced-scheme",
+  "def-weil-connected-scheme",
+  "def-sc-normalization",
+  "def-weil-pbc-module-length",
+  "def-sfb-rational-normal-curve"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-bounded-hilbert-weight-polynomials], $X$ has dimension one and $H^0(X,\\mathcal O_X(m))$ has dimension $P(m)=dm+c$ for all large $m$. As a closed subscheme of projective space, $X$ is finite type over $k$. A field is Noetherian, so [lem-weil-pbc-finite-type-over-noetherian] and [lem-weil-pbc-noetherian-finite-components] give finitely many irreducible components. A zero-dimensional irreducible component would be a closed point, disjoint from every other irreducible component (otherwise it is contained in that component). Finiteness makes it open as well as closed, contrary to connectedness and dimension one. Thus $Y$ is one-dimensional. Apply [lem-sfb-integral-curve-span-degree-rigidity] to $Y$. It gives $e\\ge1$ and $s\\le e+1$; in the non-rational-normal case it gives $s\\le e$. Apply [lem-sfb-component-primary-complement-separation] to $X,Y$, obtaining $\\mu,Q,C,\\delta$ with $\\delta=d-\\mu e\\ge0$ and the ideal-power restriction injection. All these are fixed for this particular $X,Y$; no uniform bound in families is needed here.",
+   "uses": [
+    "lem-sfb-bounded-hilbert-weight-polynomials",
+    "lem-sfb-integral-curve-span-degree-rigidity",
+    "lem-sfb-component-primary-complement-separation",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finite-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/gieseker-lectures-on-moduli-of-curves.pdf",
+    "place": "Proposition 1.0.3, pp.30--33; Morrison Theorem 8 proof steps (2)--(3)"
+   }
+  },
+  {
+   "text": "In the multiple-component case $d\\ge\\mu e\\ge2e$. If $e=1$, then $s\\le2<r$; if $e\\ge2$, then $r>7d/8\\ge7e/4>e+1\\ge s$. In the second case $s\\le e\\le3<r$. Thus $W\\ne0$ in both cases. If $|X|=Y$, every form in $W$ would vanish on $X_{\\mathrm{red}}$, contradicting nondegeneracy. Hence $Y$ is proper. The complementary-subscheme lemma now supplies $P\\in Y\\cap C$ on a one-dimensional component of $C$. In particular $\\delta>0$, since a Hilbert polynomial with a one-dimensional component has positive linear coefficient. In the generically reduced case $\\mathcal O_{X,\\xi}$ is a reduced zero-dimensional local ring, hence a field; its length as a module over itself is one, so $\\mu=1$.",
+   "uses": [
+    "lem-sfb-component-primary-complement-separation",
+    "lem-sfb-projective-hilbert-polynomial-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/gieseker-lectures-on-moduli-of-curves.pdf",
+    "place": "Proposition 1.0.3, p.31 and the boundary choice on p.32; numeric hypotheses of the present item"
+   }
+  },
+  {
+   "text": "Choose a basis compatible with $W\\subset V=k^r$, and for $0\\le j\\le m$ let $E_j(m)$ be the span in $H^0(X,\\mathcal O_X(m))$ of restricted degree-$m$ monomials of weight at most $j$; put $\\beta_j=\\dim E_j(m)$. A monomial of this weight has at least $t=m-j$ factors in $W$, so belongs to $H^0(X,\\mathcal I_Y^t\\otimes\\mathcal O_X(m))$. If $t\\ge Q$, restriction to $C$ is injective on this space. Since every form in $W$ vanishes at $P\\in Y$, its restriction to $C$ lies in the ideal of the reduced point $P$. Products of $t$ such forms consequently lie in $\\mathcal I_{P,C}^t\\otimes\\mathcal O_C(m)$. Apply [lem-sfb-projective-point-power-section-bound] to $C,P$ to obtain, for all sufficiently large $m$ and $0\\le j\\le m-Q$,\n$$\\beta_j\\le\\delta m-(m-j)+K.$$\nFor the remaining $Q-1$ indices below $m$, use simply $\\beta_j\\le P(m)$.",
+   "uses": [
+    "lem-sfb-component-primary-complement-separation",
+    "lem-sfb-projective-point-power-section-bound",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/gieseker-lectures-on-moduli-of-curves.pdf",
+    "place": "Proposition 1.0.3, pp.32--34, the filtration ranks and point-ideal estimates"
+   }
+  },
+  {
+   "text": "A minimum-weight monomial basis has exactly $\\beta_j-\\beta_{j-1}$ vectors of weight $j$, with $\\beta_{-1}=0$: greedily extend a basis of each $E_{j-1}$ by monomials spanning $E_j$. Conversely every monomial basis has at most $\\beta_j$ vectors of weight at most $j$, so its total weight is at least that of this greedy basis. Summation by parts gives\n$$w_F(m)=\\sum_{j=0}^m j(\\beta_j-\\beta_{j-1})=mP(m)-\\sum_{j=0}^{m-1}\\beta_j.$$\nStep 3 bounds the latter sum by\n$$\\sum_{j=0}^{m-Q}(\\delta m-m+j+K)+(Q-1)P(m)=(\\delta-\\tfrac12)m^2+O(m).$$\nHere $Q,K,d,c$ are fixed; the equality is just $\\sum_{j=0}^{m-Q}j=(m-Q)(m-Q+1)/2$. Therefore $w_F(m)\\ge(\\mu e+\\tfrac12)m^2-O(m)$. The asymptotic expansion of [lem-sfb-bounded-hilbert-weight-polynomials] forces $a_F\\ge\\mu e+\\tfrac12$, by dividing by $m^2$ and letting $m$ tend to infinity.",
+   "uses": [
+    "lem-sfb-bounded-hilbert-weight-polynomials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/gieseker-lectures-on-moduli-of-curves.pdf",
+    "place": "Proposition 1.0.3, pp.34--35, summation of filtration ranks; same rank calculation with generic multiplicity one for Morrison step (3)"
+   }
+  },
+  {
+   "text": "When $\\mu\\ge2$, Step 4 gives $a_F\\ge2e+1/2$ and Step 1 gives $s\\le e+1$. When $X$ is generically reduced and $Y$ is not rational normal with $e\\le3$, Steps 2 and 4 give $a_F\\ge e+1/2$, while Step 1 gives $s\\le e$. These are precisely the two asserted estimates for the specified zero/one flag. None of these steps invokes Hilbert semistability.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/gieseker-lectures-on-moduli-of-curves.pdf",
+    "place": "Morrison Section 3.2 Theorem 8 proof steps (2)--(3), geometric estimates before the numerical criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bounded-hilbert-weight-polynomials",
+  "lem-sfb-integral-curve-span-degree-rigidity",
+  "lem-sfb-component-primary-complement-separation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-sfb-projective-hilbert-polynomial-dimension",
+  "lem-sfb-projective-point-power-section-bound",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/gieseker-lectures-on-moduli-of-curves.pdf",
+  "place": "Proposition 1.0.3, pp.30--37, geometric filtration calculation generalized to generic multiplicity one; Morrison Section 3.2 Theorem 8 steps (2)--(3). Local PDFs WANTED; online sources read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projection filtration Hilbert weight lower bound for a multiple irreducible component of a projective curve",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℤ),\\n  (W.preΨ n).natDegree ≤ (n.natAbs ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any integer $ n $, the natural degree of the pre-division polynomial $ \\\\Psi_n $ for a Weierstrass curve satisfies $ \\\\deg(\\\\Psi_n) \\\\leq \\\\frac{|n|^2 - 4}{2} $ if $ n $ is even, and $ \\\\deg(\\\\Psi_n) \\\\le\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℕ),\\n  (W.preΨ' n).natDegree ≤ (n ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any natural number $ n $, the natural degree of the $ n $-th pre-normalized division polynomial $ \\\\Psi'_n $ associated with a Weierstrass curve satisfies $ \\\\deg(\\\\Psi'_n) \\\\leq \\\\frac{n^2 - 4}{2} $ i\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_pos\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) {n : ℕ}, 2 < n → ↑n ≠ 0 → 0 < (W.preΨ' n).natDegree\", \"doc\": \"For a Weierstrass curve $ W $ over a commutative ring $ R $, if $ n $ is a natural number satisfying $ 2 < n $ and $ n \\neq 0 $ in $ R $, then the natural degree of the pre-normalized division polynomi\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ_pos\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) {n : ℤ}, 2 < n.natAbs → ↑n ≠ 0 → 0 < (W.preΨ n).natDegree\", \"doc\": \"For a Weierstrass curve $ W $ over a commutative ring $ R $, if $ n $ is an integer with $ |n| > 2 $ and $ n \\neq 0 $ in $ R $, then the natural degree of the pre-division polynomial $ \\\\Psi_n $ associa\"}\n  {\"name\": \"WeierstrassCurve.natDegree_Φ_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℤ), (W.Φ n).natDegree ≤ n.natAbs ^ 2\", \"doc\": \"For any integer $n$, the natural degree of the Weierstrass Φ-polynomial $\\\\Phi^{(n)}(X)$ associated with a Weierstrass curve $W$ satisfies $\\\\deg(\\\\Phi^{(n)}(X)) \\\\leq |n|^2$.\"}\n  {\"name\": \"WeierstrassCurve.natDegree_ΨSq_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℤ), (W.ΨSq n).natDegree ≤ n.natAbs ^ 2 - 1\", \"doc\": \"The cosine of $\\\\pi$ radians is equal to $-1$, i.e., $\\\\cos(\\\\pi) = -1$.\"}\n  {\"name\": \"WeierstrassCurve.Projective.Y_ne_negY_of_Y_ne'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} [NoZeroDivisors R] {P Q : Fin 3 → R},\\n  W'.Equation P →\\n    W'.Equation Q → P 2 ≠ 0 → Q 2 ≠ 0 → P 0 * Q 2 = Q 0 * P 2 → P 1 * Q 2 ≠ W'.negY Q * P 2 → P 1 ≠ W'.negY P\", \"doc\": \"For points $ P = [X:Y:Z] $ and $ Q = [X':Y':Z'] $ on a projective Weierstrass curve satisfying the curve equation $ Y^2Z + a_1XYZ + a_3YZ^2 - X^3 - a_2X^2Z - a_4XZ^2 - a_6Z^3 = 0 $, if $ Z \\neq 0 $, $ \"}\n  {\"name\": \"WeierstrassCurve.Projective.Y_ne_negY_of_Y_ne\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} [NoZeroDivisors R] {P Q : Fin 3 → R},\\n  W'.Equation P → W'.Equation Q → P 2 ≠ 0 → Q 2 ≠ 0 → P 0 * Q 2 = Q 0 * P 2 → P 1 * Q 2 ≠ Q 1 * P 2 → P 1 ≠ W'.negY P\", \"doc\": \"For points $ P = [X:Y:Z] $ and $ Q = [X':Y':Z'] $ on a projective Weierstrass curve satisfying the curve equation $ Y^2Z + a_1XYZ + a_3YZ^2 - X^3 - a_2X^2Z - a_4XZ^2 - a_6Z^3 = 0 $, if $ Z \\neq 0 $, $ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: polynomial degree bounds, power-series weighted order and ideal filtrations do not give component-projection Hilbert weights."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A component of generic multiplicity at least two and degree e gives leading Hilbert weight at least two e plus one half",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Polynomial.hilbertPoly_eq_zero_of_le_rootMultiplicity_one\", \"module\": \"Mathlib/RingTheory/Polynomial/HilbertPoly\", \"type\": \"∀ {F : Type u_1} [inst : Field F] [CharZero F] {p : Polynomial F} {d : ℕ},\\n  d ≤ Polynomial.rootMultiplicity 1 p → p.hilbertPoly d = 0\", \"doc\": \"For a polynomial $ p $ over a field $ F $ and a natural number $ d $, if $ d \\\\leq \\\\text{rootMultiplicity}_1(p) $, then the Hilbert polynomial $ \\\\text{HilbertPoly}(p, d) $ is zero. This means that when\"}\n  {\"name\": \"Polynomial.natDegree_hilbertPoly_of_ne_zero_of_rootMultiplicity_lt\", \"module\": \"Mathlib/RingTheory/Polynomial/HilbertPoly\", \"type\": \"∀ {F : Type u_1} [inst : Field F] [CharZero F] {p : Polynomial F} {d : ℕ},\\n  p ≠ 0 → Polynomial.rootMultiplicity 1 p < d → (p.hilbertPoly d).natDegree = d - Polynomial.rootMultiplicity 1 p - 1\", \"doc\": \"For a non-zero polynomial $ p $ over a field $ F $, if the multiplicity of the root $ 1 $ in $ p $ is less than a natural number $ d $, then the natural degree of the Hilbert polynomial $ \\\\text{hilber\"}\n  {\"name\": \"Polynomial.natDegree_hilbertPoly_of_ne_zero\", \"module\": \"Mathlib/RingTheory/Polynomial/HilbertPoly\", \"type\": \"∀ {F : Type u_1} [inst : Field F] [CharZero F] {p : Polynomial F} {d : ℕ},\\n  p.hilbertPoly d ≠ 0 → (p.hilbertPoly d).natDegree = d - Polynomial.rootMultiplicity 1 p - 1\", \"doc\": \"For a polynomial $ p $ over a field and a natural number $ d $, if the Hilbert polynomial $ \\\\text{hilbertPoly}(p, d) $ is non-zero, then its natural degree is equal to $ d - \\\\text{rootMultiplicity}(p,\"}\n  {\"name\": \"MvPolynomial.le_weightedTotalDegree\", \"module\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommSemiring R] {σ : Type u_3} [inst_1 : AddCommMonoid M]\\n  [inst_2 : SemilatticeSup M] [inst_3 : OrderBot M] (w : σ → M) {φ : MvPolynomial σ R} {d : σ →₀ ℕ},\\n  d ∈ φ.support → (Finsupp.weight w) d ≤ MvPolynomial.weightedTotalDegree w φ\", \"doc\": \"For any multivariate polynomial $\\\\varphi$ over a commutative semiring $R$ with variables indexed by $\\\\sigma$, any weighting function $w : \\\\sigma \\\\to M$ where $M$ is a sup-semilattice, and any monomial\"}\n  {\"name\": \"MvPowerSeries.weightedOrder_le\", \"module\": \"Mathlib/RingTheory/MvPowerSeries/Order\", \"type\": \"∀ {σ : Type u_1} {R : Type u_2} [inst : Semiring R] (w : σ → ℕ) {f : MvPowerSeries σ R} {d : σ →₀ ℕ},\\n  (MvPowerSeries.coeff d) f ≠ 0 → MvPowerSeries.weightedOrder w f ≤ ↑((Finsupp.weight w) d)\", \"doc\": \"For a multivariate power series $ f $ over a semiring $ R $ with variables indexed by $ \\\\sigma $ and a weight function $ w : \\\\sigma \\\\to \\\\mathbb{N} $, if the coefficient of a monomial $ d $ in $ f $ is\"}\n  {\"name\": \"MvPowerSeries.le_weightedOrder\", \"module\": \"Mathlib/RingTheory/MvPowerSeries/Order\", \"type\": \"∀ {σ : Type u_1} {R : Type u_2} [inst : Semiring R] (w : σ → ℕ) {f : MvPowerSeries σ R} {n : ℕ∞},\\n  (∀ (d : σ →₀ ℕ), ↑((Finsupp.weight w) d) < n → (MvPowerSeries.coeff d) f = 0) → n ≤ MvPowerSeries.weightedOrder w f\", \"doc\": \"For any extended natural number $n$, if every monomial $d$ with $\\\\text{weight}(w, d) < n$ has zero coefficient in the multivariate power series $f$, then $n \\\\leq \\\\text{weightedOrder}(f, w)$, where $\\\\t\"}\n  {\"name\": \"MvPowerSeries.le_weightedOrder_pow\", \"module\": \"Mathlib/RingTheory/MvPowerSeries/Order\", \"type\": \"∀ {σ : Type u_1} {R : Type u_2} [inst : Semiring R] (w : σ → ℕ) {f : MvPowerSeries σ R} (n : ℕ),\\n  n • MvPowerSeries.weightedOrder w f ≤ MvPowerSeries.weightedOrder w (f ^ n)\", \"doc\": \"For any natural number $n$, the weighted order of the $n$-th power of a multivariate power series $f$ with respect to a weight function $w$ is greater than or equal to $n$ times the weighted order of \"}\n  {\"name\": \"MvPowerSeries.nat_le_weightedOrder\", \"module\": \"Mathlib/RingTheory/MvPowerSeries/Order\", \"type\": \"∀ {σ : Type u_1} {R : Type u_2} [inst : Semiring R] (w : σ → ℕ) {f : MvPowerSeries σ R} {n : ℕ},\\n  (∀ (d : σ →₀ ℕ), (Finsupp.weight w) d < n → (MvPowerSeries.coeff d) f = 0) → ↑n ≤ MvPowerSeries.weightedOrder w f\", \"doc\": \"For a multivariate power series $ f $ over a semiring $ R $ with variables indexed by $ \\\\sigma $ and a weight function $ w : \\\\sigma \\\\to \\\\mathbb{N} $, if every monomial $ d $ with weighted sum $ \\\\sum_{\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: polynomial degree bounds, power-series weighted order and ideal filtrations do not give component-projection Hilbert weights."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"multiplicity\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: polynomial degree bounds, power-series weighted order and ideal filtrations do not give component-projection Hilbert weights."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*weight|component.*weight|genericallyReduced|rationalNormalCurve",
+   "results": "[grep] OK 18 hit(s)\n  {\"file\": \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"line\": \"62\", \"text\": \"initialize_simps_projections StdSimplex (as_prefix weights)\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"line\": \"157\", \"text\": \"      have : f.weightedHomogeneousComponent w p * g.weightedHomogeneousComponent w q ≠ 0 := by\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"line\": \"161\", \"text\": \"        · refine weightedHomogeneousComponent_of_weightedOrder ?_ H\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"line\": \"165\", \"text\": \"      rw [← weightedHomogeneousComponent_mul_of_le_weightedOrder\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"line\": \"170\", \"text\": \"      apply weightedHomogeneousComponent_of_lt_weightedOrder_eq_zero H\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Order.lean\", \"line\": \"611\", \"text\": \"theorem weightedHomogeneousComponent_of_lt_weightedOrder_eq_zero\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Order.lean\", \"line\": \"624\", \"text\": \"theorem weightedHomogeneousComponent_of_weightedOrder\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Order.lean\", \"line\": \"658\", \"text\": \"theorem weightedHomogeneousComponent_mul_of_le_weightedOrder {f g : MvPowerSeries σ R} {p q : ℕ}\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Order.lean\", \"line\": \"661\", \"text\": \"      weightedHomogeneousComponent w p f * weightedHomogeneousComponent w q g := by\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Order.lean\", \"line\": \"718\", \"text\": \"  weightedHomogeneousComponent_of_lt_weightedOrder_eq_zero hf\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"line\": \"542\", \"text\": \"  weightedHomogeneousComponent_isWeightedHomogeneous n φ\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"line\": \"46\", \"text\": \"* `sum_weightedHomogeneousComponent`: every polynomial is the sum of its weighted homogeneous\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"line\": \"382\", \"text\": \"/-- `weightedHomogeneousComponent w n φ` is the part of `φ` that is weighted homogeneous of\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"line\": \"408\", \"text\": \"/-- The `n` weighted homogeneous component of a polynomial is weighted homogeneous of\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"line\": \"410\", \"text\": \"theorem weightedHomogeneousComponent_isWeightedHomogeneous :\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"line\": \"411\", \"text\": \"    (weightedHomogeneousComponent w n φ).IsWeightedHomogeneous w n := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Weighted/HasWeightedLimit.lean\", \"line\": \"51\", \"text\": \"/-- The projection `c.pt ⟶ F.obj j` for `c : WeightedCone W F`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Weighted/HasWeightedLimit.lean\", \"line\": \"152\", \"text\": \"/-- The projections from the weighted limit. -/\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: polynomial degree bounds, power-series weighted order and ideal filtrations do not give component-projection Hilbert weights."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gieseker projection filtration estimate for generically nonreduced curves and low degree components",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.Filtration\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_3) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_3\", \"doc\": \"The structure of a filtration on an $ R $-module $ M $ associated with an ideal $ I $ of a commutative ring $ R $, where $ M $ is an additive commutative group equipped with an $ R $-module structure.\"}\n  {\"name\": \"IsFiltration.rec\", \"module\": \"Mathlib.RingTheory.FilteredAlgebra.Basic\", \"type\": \"{ι : Type u_1} →\\n  {A : Type u_2} →\\n    {σ : Type u_3} →\\n      [inst : Preorder ι] →\\n        [inst_1 : SetLike σ A] →\\n          {F F_lt : ι → σ} →\\n            {motive : IsFiltration F F_lt → Sort u} →\\n              ((mono : Monotone F) →\\n                  (is_le : ∀ {i j : ι}, i < j → F i ≤ F_lt j) \", \"doc\": \"For any property or construction depending on a filtration, if we can define it for the monotonicity of $F$, the inclusion $F(i) \\\\subseteq F_{<}(j)$ for $i < j$, and the supremum condition of $F_{<}(j\"}\n  {\"name\": \"Ideal.Filtration.rec\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {I : Ideal R} →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {motive : I.Filtration M → Sort u} →\\n              ((N : ℕ → Submodule R M) →\\n                  (mono : ∀ (i : ℕ), N (i + 1) ≤ N i) →\\n\", \"doc\": \"Given a filtration structure on an $ R $-module $ M $ defined by a decreasing sequence of submodules $ N_i $ satisfying $ N_{i+1} \\\\subseteq N_i $ and $ I \\\\cdot N_i \\\\subseteq N_{i+1} $, this recursor a\"}\n  {\"name\": \"Ideal.Filtration.mono\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_3} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (self : I.Filtration M) (i : ℕ), self.N (i + 1) ≤ self.N i\", \"doc\": \"For any commutative ring $ R $, ideal $ I $ of $ R $, and $ R $-module $ M $, the filtration of $ M $ by powers of $ I $ satisfies $ I^{i+1}M \\\\subseteq I^i M $ for all natural numbers $ i $. This esta\"}\n  {\"name\": \"IsFiltration.F_lt_le_F\", \"module\": \"Mathlib.RingTheory.FilteredAlgebra.Basic\", \"type\": \"(F : ι → σ) (F_lt : outParam <| ι → σ) (i : ι) [IsFiltration F F_lt] : F_lt i ≤ F i\", \"doc\": \"For a filtration $F : \\\\iota \\\\to \\\\sigma$ indexed by a preorder $\\\\iota$ satisfying the filtration condition, the strict part $F_{\\\\lt} i$ at each index $i$ is contained within the non-strict part $F i$, \"}\n  {\"name\": \"IsFiltration.casesOn\", \"module\": \"Mathlib.RingTheory.FilteredAlgebra.Basic\", \"type\": \"{ι : Type u_1} →\\n  {A : Type u_2} →\\n    {σ : Type u_3} →\\n      [inst : Preorder ι] →\\n        [inst_1 : SetLike σ A] →\\n          {F F_lt : ι → σ} →\\n            {motive : IsFiltration F F_lt → Sort u} →\\n              (t : IsFiltration F F_lt) →\\n                ((mono : Monotone F) →\\n                  \", \"doc\": \"Given a filtration $(F, F_<)$ indexed by a preorder $\\\\iota$ over set-like structures $\\\\sigma$ on $A$, this recursor allows defining properties or constructions depending on the filtration by specifyin\"}\n  {\"name\": \"Ideal.Filtration.recOn\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {I : Ideal R} →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {motive : I.Filtration M → Sort u} →\\n              (t : I.Filtration M) →\\n                ((N : ℕ → Submodule R M) →\\n                 \", \"doc\": \"The recursion principle for filtrations by an ideal on a module, which allows defining functions by recursion on the filtration's data: a decreasing sequence of submodules $ N_i $ satisfying $ N_{i+1}\"}\n  {\"name\": \"Ideal.Filtration.noConfusion\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"{P : Sort u} →\\n  {R : Type u_1} →\\n    {inst : CommRing R} →\\n      {I : Ideal R} →\\n        {M : Type u_3} →\\n          {inst_1 : AddCommGroup M} →\\n            {inst_2 : Module R M} →\\n              {t : I.Filtration M} →\\n                {R' : Type u_1} →\\n                  {inst' : CommRing R'} →\\n      \", \"doc\": \"Given a filtration $ t $ on an $ R $-module $ M $ associated with an ideal $ I $, this function allows defining a property or constructing an object by specifying its behavior on the decreasing sequen\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: polynomial degree bounds, power-series weighted order and ideal filtrations do not give component-projection Hilbert weights."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimum weighted monomial basis on a projective curve and component projection Hilbert weight lower bounds",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.weightedOrder_le\", \"MvPolynomial.le_weightedTotalDegree\", \"Finsupp.le_weight_of_ne_zero\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\", \"Finsupp.le_weight\", \"MvPowerSeries.weightedHomogeneousComponent_of_weightedOrder\", \"MvPowerSeries.nat_le_weightedOrder\", \"Finsupp.le_weight_of_ne_zero'\"], \"digest\": \"4e79a4fdd997042e\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: Weighted total degree of polynomials and polynomial Hilbert transforms do not give monomial basis weights on closed projective schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "hilbert.*weight|projection.*filtration|rationalNormalCurve",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: Weighted total degree of polynomials and polynomial Hilbert transforms do not give monomial basis weights on closed projective schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert weight leading coefficient of projection away from a projective curve component",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly\", \"Polynomial.leadingCoeff_preHilbertPoly\", \"Polynomial.coeff_preHilbertPoly_self\", \"WeierstrassCurve.leadingCoeff_Φ\", \"MvPolynomial.weightedHomogeneousComponent_directSum\", \"WeierstrassCurve.leadingCoeff_preΨ₄\", \"Polynomial.hilbertPoly_smul\", \"MvPolynomial.weightedHomogeneousComponent_eq_zero_of_notMem\"], \"digest\": \"b9fd4bcfdde0b001\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: Weighted total degree of polynomials and polynomial Hilbert transforms do not give monomial basis weights on closed projective schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"weight\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: Weighted total degree of polynomials and polynomial Hilbert transforms do not give monomial basis weights on closed projective schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gieseker-potential-stability",
+  "date": "2026-10-22",
+  "group": "Q92"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof of Theorem 8, steps (2)--(3), printed p.14; agent explicit leading-coefficient version of the component-projection estimates. The multiple-component estimate is the coefficient 2e+1/2 in Gieseker, Lectures on Moduli of Curves, Proposition 1.0.3, printed pp.30--36. Local PDFs WANTED.",
+   "via": [
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-component-projection-weight-bounds",
+  "worker": "stage1",
+  "summary": "Replaced the empty proof with the component filtration rank calculation and an explicit greedy-basis summation. Created three geometric statement-only prerequisites (minimal-degree span rigidity, primary-complement separation including embedded components, point-ideal section bounds), after whole-DAG, blueprint and Lean searches. Checked the existence of a complementary curve from the actual numeric hypotheses; no semistability is used. The original statement is retained. Local source PDFs remain WANTED.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof of Theorem 8, steps (2)--(3), printed p.14; agent explicit leading-coefficient version of the component-projection estimates. The multiple-component estimate is the coefficient 2e+1/2 in Gieseker, Lectures on Moduli of Curves, Proposition 1.0.3, printed pp.30--36. Local PDFs WANTED. The split supplies the supporting projection estimates for the potential-stability argument, without changing the ancestor unit route. The ancestor command returns null because an intermediate created.item is a stage-3 module name; inherited null ancestry is preserved and reported.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian finite-type and finite-component facts justify that connected projective X has no zero-dimensional irreducible component; the unit contains no replacement for these topological tools."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finite-components",
+    "why": "Generic Noetherian finite-type and finite-component facts justify that connected projective X has no zero-dimensional irreducible component; the unit contains no replacement for these topological tools."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finite-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NP-d0ee6c35e",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-d0ee6c35e (reviewer sub-agent of L); spot-checked: Read the item, all 5 steps, the 3 new unsplit nodes and every cited statement. Source: fetched Morrison arXiv:0810.2340 §3.2 and read pp.13-15 (Theorem 8 steps (2)-(3); e_F=2a_F convention). Both item estimates contradict semistability exactly when d/r<8/7: (2e+1/2)/(e+1)>=5/4 and 1+1/(2e)>=7/6. Gieseker's online copy was unreachable (HTTP 429), so I proved each new node myself. (a) Span rigidity is the classical minimal-degree theorem, valid in any characteristic; checked on a line, a conic, a twisted cubic and a plane cubic. (b) Primary complement: C=V(J), with J the intersection of the non-Y primary components; I_Y^Q is inside q_Y, so I_Y^Q meets J in 0; multiplicities are preserved off ξ; slope d-μe by degree additivity; P exists by connectedness and because there are no 0-dimensional components; C empty is consistent. (c) Point bound: split along a reduced component Z through P; the kernel has dimension at most P_N(m) and the image at most e_Z m-t+1, giving δm-t+K for all t<=m. Item steps: W≠0 case analysis (e=1, e>=2, e<=3) correct; ideal inclusions correct; greedy-basis summation by parts gives a_F>=μe+1/2. Sharp on xy=0 (3/2) and x^2y=0 (5/2). No duplicates found (checked linear-series bound, subcurve-span, interpolation, Lasker, Riemann-Roch nodes); no node restates a clause of the item. Batch-5 finding: lem-sfb-projective-hilbert-polynomial-dimension reaches lem-trf-standard-graded-hilbert-function, which is Stacks 00K1 generic graded Hilbert polynomial. It is not a statement or proof step of the trace formula or Poincare duality, and Step 2 uses it only for δ>0, so the citation is accepted. Tool uses accepted: two generic Mathlib leaves (finite-type over Noetherian, finitely many components). No SGA. Advisory: the point-bound node does not link def-weil-irreducible-components. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ComponentProjectionWeightBounds",
+  "declaration": "AlgebraicGeometry.BoundedHilbertWeight.component_projection_weight_bounds",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentProjectionWeightBounds.lean",
+  "statement": "theorem component_projection_weight_bounds (k : Type u) [Field k] [IsAlgClosed k] (n d : ℕ) (c : ℤ) (hr : 4 ≤ n + 2) (hd : 3 < d) (hdr : (d : ℚ) / (n + 2 : ℕ) < 8 / 7) (X : Scheme.{u}) (i : X ⟶ ℙ(HilbertPlucker.Coordinates.{u} n; Spec (.of k))) [IsClosedImmersion i] [ConnectedSpace X] (hP : ProjectiveHilbertPolynomial.IsCoordinatePolynomial k (n + 1) i (Polynomial.C (d : ℚ) * Polynomial.X + Polynomial.C (c : ℚ))) (hnd : ProjectiveHilbertPolynomial.equations k (n + 1) (X.nilradical.subschemeι ≫ i) 1 = ⊥) (Y : Scheme.{u}) [IsIntegral Y] (j : Y ⟶ X) [IsClosedImmersion j] (hY : Set.range j ∈ irreducibleComponents X) (e : ℕ) (he : @Scheme.Modules.degree k _ Y.normalization ⟨Y.fromNormalization ≫ j ≫ i ≫ (ℙ(HilbertPlucker.Coordinates n; Spec (.of k)) ↘ Spec (.of k))⟩ ((Scheme.Modules.tensorPullback (Y.fromNormalization ≫ j ≫ i)).obj (ProjectiveSpace.twist (HilbertPlucker.Coordinates n) (Spec (.of k)) 1)) = (e : ℤ)) (ρ : ∀ m : ℕ, ModuleCat.of k (MvPolynomial.homogeneousSubmodule (HilbertPlucker.Coordinates.{u} n) k m) ⟶ sections k n i m) (hρ : IsPolynomialRestriction i ρ) (b : Module.Basis (HilbertPlucker.Coordinates.{u} n) k (LinearForms k n)) (w : HilbertPlucker.Coordinates.{u} n → ℕ) (hw : ∀ l, w l ≤ 1) (hF : flag b w 0 = ProjectiveHilbertPolynomial.equations k (n + 1) (j ≫ i) 1) (a : ℚ) (ha : ∃ A M : ℕ, ∀ m : ℕ, M ≤ m → |(weight (ρ m) b w : ℚ) - a * (m : ℚ)^2| ≤ (A : ℚ) * m) : (2 ≤ Module.length (X.presheaf.stalk (j (genericPoint Y))) (X.presheaf.stalk (j (genericPoint Y))) → ProjectiveHilbertPolynomial.coordinateDimension k (n + 1) (j ≫ i) 1 ≤ e + 1 ∧ (2 * (e : ℚ) + 1 / 2 ≤ a)) ∧ ((∀ x : X, closure {x} ∈ irreducibleComponents X → _root_.IsReduced (X.presheaf.stalk x)) → e ≤ 3 → ¬ IsRationalNormalCurve k (n + 1) (j ≫ i) e → ProjectiveHilbertPolynomial.coordinateDimension k (n + 1) (j ≫ i) 1 ≤ e ∧ ((e : ℚ) + 1 / 2 ≤ a))",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.BoundedHilbertWeight.IsPolynomialRestriction",
+   "AlgebraicGeometry.BoundedHilbertWeight.component_projection_weight_bounds"
+  ],
+  "note": "The equations submodule is exactly the restriction kernel W; coordinateDimension is the quotient dimension s. The canonical restriction family is characterized on every standard chart, and a is any coefficient with the specified O(m) remainder; existence and uniqueness are supplied by the recorded bounded-weight theorem. The reduced support is the canonical nilradical subscheme, and degrees use the canonical normalization. No semistability or reducedness of X is assumed globally. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b3094a4da",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Read item, new def-sfb-rational-normal-curve, both modules, report and all 12 stmt_dep records plus the sections/flag/weight/equations/coordinateDimension/degree/nilradical declarations. Every hypothesis and both conclusions match the node: r=n+2>=4, d>3, d/r<8/7, connected closed subscheme, coordinate Hilbert polynomial, nondegenerate X_red via equations of the nilradical subscheme = bot, integral component, degree on the normalization, flag 0 = W with weights <=1, s = coordinateDimension, length>=2 and generic-reducedness/e<=3/not-RNC clauses; a_F fixed by an O(m) remainder (unique). IsPolynomialRestriction copies the dep's chart clause word for word (not an arbitrary map); RNC def says the complete degree-e embedding exactly and is not a duplicate. lean.statement verbatim; sorry only; no extra assumptions or universe restrictions. Bounded-weight theorem stmt_dep is from stage 1, not added. Advisories: plain defs reach the item through that theorem's imports; second reading by the author."
+ }
+}

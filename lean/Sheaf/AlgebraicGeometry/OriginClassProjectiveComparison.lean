@@ -5,11 +5,7 @@ Authors: SHEAF group Q110
 -/
 module
 public import Sheaf.AlgebraicGeometry.OriginComparisonArrows
-import WeilConjectures.SixFunctors.OpenClosed.Exact
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.DerivedDirectImageComposition
-import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
-import Sheaf.AlgebraicGeometry.GeometricPointCohomology
+import Sheaf.AlgebraicGeometry.OriginProjectiveNormalization
 
 /-!
 # The affine origin and the positive projective Chern class
@@ -68,6 +64,21 @@ structure OriginProjectiveComparison (A : Type (u + 1)) [CommRing A] (N : ℕ)
       (supportedConstantUnit A (ProjectiveLine.infinity S))) chern
     (originConstantSectionsUnit A (ProjectiveLine S)) sourceIso
 
+private theorem originComparisonEquations_of_normalizations
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (F : C ⥤ D) (G : D ⥤ E)
+    {B K : C} {B' K' U : D} {R : E}
+    (b : B ⟶ K) (b' : B' ⟶ K') (e : F.obj B ⟶ B') (epsilon : F.obj K ⟶ K')
+    (unit : U ⟶ B') (chern : U ⟶ K') (eta : R ⟶ G.obj U)
+    (lambda : R ≅ G.obj (F.obj B))
+    (he : IsIso e) (hsq : F.map b ≫ epsilon = e ≫ b')
+    (hn : originNormalizationEquations G b' e unit chern eta lambda) :
+    originComparisonEquations F G b b' e epsilon unit chern eta lambda := by
+  refine ⟨he, hsq, hn.1, hn.2, ?_⟩
+  change lambda.hom ≫ G.map (F.map b) ≫ G.map epsilon = _
+  rw [← G.map_comp, hsq, G.map_comp, ← Category.assoc, hn.2,
+    Category.assoc, ← G.map_comp, hn.1]
+
 /-- The supported affine-origin class has compact image equal to the positive O(1) Chern class.
 Source: main-20261015 sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md,
 Step 2; master sk-prop-an, Step 5(d).
@@ -101,6 +112,26 @@ theorem origin_class_projective_comparison (Ω : Type u) [Field Ω] [IsAlgClosed
     (N : ℕ) (hN : 0 < N) (hΩ : IsUnit (N : Ω))
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) :
     Nonempty (OriginProjectiveComparison A N hA (Spec (.of Ω))) := by
-  sorry
+  obtain ⟨d⟩ := origin_boundary_counit_data Ω N hN hΩ A hA
+  obtain ⟨n⟩ := origin_projective_normalization Ω N hN hΩ A hA d
+  refine ⟨{
+    hX := d.hX
+    hP := d.hP
+    hIX := d.hIX
+    hIP := d.hIP
+    transport := d.transport
+    restriction := d.restriction
+    affineClass := d.affineClass
+    projectiveClass := d.projectiveClass
+    chern := n.chern
+    sourceIso := n.sourceIso
+    restriction_normalization := d.restriction_normalization
+    affine_boundary := d.affine_boundary
+    projective_boundary := d.projective_boundary
+    divisor_iso := n.divisor_iso
+    divisor_transition := n.divisor_transition
+    chern_normalization := n.chern_normalization
+    equations := originComparisonEquations_of_normalizations
+      _ _ _ _ _ _ _ _ _ _ d.counit_iso d.counit_square n.normalizations }⟩
 
 end AlgebraicGeometry.Etale

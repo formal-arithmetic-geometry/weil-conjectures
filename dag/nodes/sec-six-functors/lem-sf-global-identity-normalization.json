@@ -1,0 +1,134 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
+  "place": "Specialization of Verdier exchange, counit normalization at the point, and the constant-unit specialization; expanded imported proof steps 2–6."
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-global-duality",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GlobalVerdierDuality",
+  "date": "2026-10-25",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-global-duality",
+   "place": "Proof steps 2–5: normalize the identity adjunction, its units and coefficient maps."
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The dual of compactly supported etale cohomology is the cohomology of the Verdier dual",
+   "results": "No match. Returned derived cohomology and condensed-category facts do not supply four-stage identity normalization.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"unit\"",
+   "results": "4 hits: CategoryTheory.MonoidalClosed.unitIsoSelf, unitNatIso, CategoryTheory.Pi.monoidalClosed_closed_adj_counit and closed_adj_unit. Read Monoidal/Closed/Basic: these use tensorLeft, while CoefficientClosedStructure records tensorRight. None normalizes a constructible System. The main proof directly proves the corresponding right-unitor map.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientDual|unit.*[Ii]so|rightUnitor",
+   "results": "25 Mathlib grep hits, mostly unrelated number-theory and category-theory unit references; no four-stage System normalization. Separate local rg searches read source GlobalDuality, PointFibreDerivedTensor, PointFibreEquivalence, VerdierExchangeData and ProjectionInternalHom: these provide finite etale duality or generic adjunction/unit facts, not the required all-stage normalization.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right adjoint of tensoring with the unit object is naturally isomorphic to the identity functor",
+   "results": "8 hits, including CategoryTheory.MonoidalCategory.rightUnitorNatIso, CategoryTheory.unitClosed and rightUnitor. Read the right-unitor signature and used rightUnitorNatIso together with Adjunction.rightAdjointUniq in the main proof. None supplies the four-stage identity/counit normalization of a constructible exceptional System.",
+   "date": "2026-10-25",
+   "verdict": "partial match: unit adjunction only"
+  }
+ ],
+ "id": "lem-sf-global-identity-normalization",
+ "title": "Identity normalization of global-duality construction",
+ "statement": "Let D be the fixed finite-field datum [def-weil-finite-field-fiber], l≠D.p, Ω an algebraic closure of Q_l, and X separated of finite type over Spec D.k. Given VerdierExchange.Assertion [def-sf-all-stage-verdier-exchange-package] (the assertion of [sk-thm-sf-verdier-exchange]) for the structure morphism, for every normalized constructible exceptional System A [def-weil-exceptional-inverse-image] and compactification c [def-nagata-compactification] there exists NormalizedData [def-sf-global-normalized-construction] on A with the literal point identity operation. This asserts naturality, signed-shift and coefficient equations for the evaluation transpose, its actual ring/projection realization, and normalized tensor units; it does not assert exchange invertibility or constant-object duality.",
+ "proof": [
+  {
+   "text": "Apply the supplied VerdierExchange.Assertion to A, a constructed identity-point system, and A transported along the right identity. Normalize the point exceptional adjoint by conjugating the actual compact-support identity comparison under its adjunction. At integral coefficients perform this on the complete quotient tower; localize for rational fields and descend through a common finite field.",
+   "uses": [
+    "sk-thm-sf-verdier-exchange",
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the closed targets by the normalized counit and the composition comparison so that omega_X=F.G(unit), omega_s=unit and the dualizing comparison is refl. Naturality of the actual projection gives projection_naturality. Transpose the evaluation squares to identify the transported natural transformation with the new epsilon. Transport its signed shifts. This step does not use invertibility of epsilon.",
+   "uses": [
+    "def-sf-verdier-exchange-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient units have Tor amplitude [0,0]. Lift their ambient unit maps through the fully faithful finite-Tor inclusions. Tensor/evaluation normalization makes the lifted maps satisfy both unitor equations. Transport ring realizations and their signed shifts. Conjugate coefficient comparisons by the preceding normalized maps; uniqueness of the prescribed q and its mate pins exceptional comparison, unit equation and all ScalarConclusion/ScalarShifts squares. Localize and descend the equalities for rational and common stages.",
+   "uses": [
+    "def-sf-verdier-exchange-data",
+    "thm-sf-ctf-stability"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-verdier-exchange-data",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "sk-thm-sf-verdier-exchange",
+  "thm-sf-ctf-stability"
+ ],
+ "stmt_deps": [
+  "def-sf-global-normalized-construction",
+  "def-sf-all-stage-verdier-exchange-package",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-finite-field-fiber",
+  "def-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-global-duality/sk-thm-sf-global-duality.proof.md",
+  "place": "Specialization of Verdier exchange, counit normalization at the point, and the constant-unit specialization; expanded imported proof steps 2–6."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GlobalIdentityNormalization",
+  "file": "lean/Sheaf/Paper/GlobalIdentityNormalization.lean",
+  "declaration": "WeilConjectures.GlobalVerdierDuality.identity_normalization",
+  "statement": "theorem identity_normalization (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    : letI : (Spec (.of D.k)).Over (Spec (.of D.k)) := ⟨𝟙 _⟩\n    VerdierExchange.Assertion l Ω D hl (X ↘ Spec (.of D.k)) →\n    ∀ (A : System.{u, u} l Ω D hl (f := X ↘ Spec (.of D.k)))\n      (c : Compactification (X ↘ Spec (.of D.k))),\n      Nonempty (NormalizedData l Ω D hl (X ↘ Spec (.of D.k)) A c)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.GlobalVerdierDuality.identity_normalization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1661a",
+  "group": "T2",
+  "result": "fix",
+  "landing": "20261025T101443-L-3695530",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1661a",
+  "group": "T2",
+  "result": "fix",
+  "landing": "20261025T101443-L-3695530",
+  "kind": "interface",
+  "note": "independent cc review: relocated Package/Assertion block vs live G5 text (identical); item proof (5-adjunction Yoneda + rightAdjointUniq unit iso) vs StageData.epsilon and unitEvaluation/unitCoevaluation; identity_normalization (NormalizedData) vs old Package and sk-thm-sf-global-duality; node stmt_deps vs owners of the Lean names"
+ }
+}

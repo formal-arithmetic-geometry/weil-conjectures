@@ -22,9 +22,46 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
   "place": "Opening paragraph and Local construction, affine-space adjunction and correction at one; old item Steps 7–9."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For baseSectionClosed, apply closed-immersion stability to isPullback_baseChangeSection, flipped so that the base-changed section is the first projection. For pairIdeal, the affine ideal-map containment reduces the claim to r.ker.comap v <= r'.ker. The ideal comap/map Galois connection, map_ker and r';v=r reduce this to reflexivity.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The affine open T in S is locally Noetherian and compact, hence Noetherian. Finite type of the base-changed smooth map gives a Noetherian base-changed ambient scheme, and its affine open U is Noetherian. Base change preserves smooth relative dimension d, and composing with j preserves it because j has relative dimension zero. The section equation gives r;(j;g_T)=id. Apply SectionReesNoetherianGeometry.geometry to the base-changed section and to r: these give Noetherian A1_T and both deformation spaces, quasi-compactness of the base deformation projection, and compactifications of both deformation projections. Nagata supplies the compactification of U->T.",
+   "uses": [
+    "lem-trf-section-rees-noetherian-geometry",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply SectionReesBaseChange.etale first to j with the base-changed section, and then to e with the affine-space zero section. The centre square for j follows from monicity and its section equation; for e it is the specified centres square. pairMap is definitionally the actual deformationSpaceMap in reesOpen and reesCoordinates. Pullback stability gives separatedness, and the theorem gives etaleness. Compose the second map with the existing isomorphism deformationSpaceToAffineSpace. Etale implies locally finite type; the Noetherian source gives quasi-compactness. The Compatible conclusions give openOver, openSections and coordinatesOver after rewriting overE and affine-space identity maps.",
+   "uses": [
+    "lem-trf-section-rees-base-change-etale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the open change of base, use the existing relative-gluing isPullback_deformationSpaceMap_proj. Every point of V times_S T lies in an affine open, and the image-site open-immersion Rees pushout supplies its required covering pushout, using ker_baseChangeSection. This proves baseSquare for the actual reesBase. The existing augmentation base-change equation proves baseSections. Assemble these properties in Chart.Geometry. All arguments apply also when d=0 or the schemes are empty.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-trf-section-rees-noetherian-geometry",
+  "thm-nagata-compactification",
+  "lem-trf-section-rees-base-change-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction; D3 Lean proof combines the existing section Rees geometry, etale pair functoriality, open-base Rees pushouts and augmentation equations."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -109,10 +146,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-trace-formula",
@@ -154,5 +195,15 @@
   "group": "Q72",
   "result": "pass",
   "note": "Item matches the node clause by clause: A/N/S hypotheses, smooth separated finite-type g with closed section, D_sV/q/sigma Rees data, compactifiable g, q, pi, Noetherian D_sV; both shifted rank-one sheaf clauses; IsIso of atOne (theta) and normalFibreMap (eta on Spec Sym(I/I^2) through the unique-normalized Rees comparison); for every affine centred chart, c and f pinned to localSourceMap/localFamilyMap, lambda = f then inverse Tate pullback then a*(c inverse), h and lambda_norm, i1*lambda_norm = actual restricted theta. The existential affine adjunction is faithful because cor-amb-affine-space-adjunction asserts only existence; rightAdjointUniq and the unique-choice locality iso are canonical, and the normalization removes the dependence at 1. Three new definition nodes: real data, named well-definedness sorries checked true (chartGeometry via SectionReesBaseChangeEtale.etale, deformationSpaceToAffineSpace iso, Nagata). Section 1(B) dependency module SectionComparisonArrows copies verbatim the 7 defs of the quarantined NoetherianEtaleSectionSpecialization; no live users of the old names, nothing route-pivot dropped, no competing repair. All lean.statement fields verbatim. Advisories: missing proof-plan imports SectionReesBaseChangeEtale and SmoothSectionCentredCoordinates; Chart and conormal-theorem overlap with SmoothSectionCentredCoordinates (more general, not H4); def-pur-dnc-section-family declarations used outside the item stmt_deps; docstring proof condensed from 8 to 6 steps. Not recompiled per the human's 2026-10-21 instruction; worker compile evidence clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261023T134954-L-2820167",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

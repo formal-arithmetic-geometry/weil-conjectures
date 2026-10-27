@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-condensed-tensor-induction-adjunction",
+ "kind": "statement",
+ "title": "Tensor presheaf induction and its sheafified Frobenius adjunction",
+ "statement": "Let $A$ be a commutative condensed ring [sk-def-sfb-condensed-ring] on the small coherent site of profinite sets [def-weil-size-convention]. For a profinite group $J$, let $\\mathcal A_J(A)$ denote internal $A$-modules with $A$-linear condensed $J$-action [def-sfb-condensed-action-module]. Let $P$ be a profinite group and $H$ a closed subgroup. For each profinite test set $S$ put $P_S=C(S,P)$ and $H_S=C(S,H)$. The group algebra $A(S)[P_S]$ consists of finite formal sums with multiplication $[p][p']=[pp']$. For $M\\in\\mathcal A_H(A)$ put $B_M(S)=A(S)[P_S]\\otimes_{A(S)[H_S]}M(S)$.\n\nThe formulas $[p]\\otimes m\\mapsto[p\\circ t]\\otimes t^*m$ for $t:T\\to S$ make $B_M$ an $A$-module presheaf, and $g([p]\\otimes m)=[gp]\\otimes m$ gives a natural $P$-action. Module sheafification [def-weil-presheaf-modules-sheafification] induces this action on $L(M)=B_M^\\#$ and makes $L:\\mathcal A_H(A)\\to\\mathcal A_P(A)$ an additive functor whose map on a morphism $u$ is induced by $[p]\\otimes m\\mapsto[p]\\otimes u(m)$.\n\nWrite $\\eta_M:B_M\\to B_M^\\#$ for the sheafification unit, and let $\\operatorname{Res}_H^P$ restrict the action through $H\\hookrightarrow P$. For all $M\\in\\mathcal A_H(A)$ and $N\\in\\mathcal A_P(A)$ there are inverse bijections, natural in both variables,\n$$\\operatorname{Hom}_{\\mathcal A_P(A)}(L(M),N)\\cong\\operatorname{Hom}_{\\mathcal A_H(A)}(M,\\operatorname{Res}_H^P N).$$\nThe forward bijection sends $F$ to $m\\mapsto F(\\eta_M([1]\\otimes m))$. Its inverse sends $f$ to the unique sheafified extension of $[p]\\otimes m\\mapsto p\\cdot f(m)$. No section of a coset projection is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Returned induction proof steps 2--5: balanced tensor presheaf, induced action, additive functor, and the two natural inverse adjunction transposes. Agent-formulated input below paragraph (3); external reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "def-sfb-condensed-action-module",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Take the explicit tensor presheaf B, then sheafification data D. The section maps from the concrete quotient are determined by the pure tensors. Apply injectivity of the ordinary module-sheafification Hom equivalence and cancel the comparison to conclude that maps out of L(M) are determined by every sheafified tensor.",
+   "uses": [
+    "def-sfb-condensed-tensor-induction-data",
+    "lem-sfb-condensed-tensor-presheaf",
+    "lem-sfb-condensed-tensor-sheafification",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Induction steps 2--4 and 7, generator extensionality"
+   }
+  },
+  {
+   "text": "The additive relation in the quotient gives eta([p] tensor (m+n))=eta([p] tensor m)+eta([p] tensor n). Apply the map formula and generator extensionality to prove that L preserves addition of morphisms.",
+   "uses": [
+    "def-sfb-condensed-tensor-induction-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Induction steps 3--4, additivity"
+   }
+  },
+  {
+   "text": "Define Phi(F) by composing identityTensor with Res(F). For each f choose an extension supplied by the existence-only extension lemma. Phi(extension(f))=f since 1 acts identically. Conversely the chosen extension of Phi(F) agrees with F on pure tensors by P-equivariance and the induced-action formula, hence equals F by generator extensionality.",
+   "uses": [
+    "def-sfb-condensed-tensor-induction-data",
+    "lem-sfb-condensed-tensor-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Induction steps 5--7, inverse maps"
+   }
+  },
+  {
+   "text": "For u:Mprime to M, extensions of u followed by f agree on tensors with L(u) followed by the extension of f; generator extensionality gives naturality on the left. Naturality on the right is associativity of composition with identityTensor. Use Adjunction.mkOfHomEquiv. Its Hom equivalence is the constructed equivalence, so the forward formula follows from identityTensor_apply. The inverse characterization follows from the extension formula and generator extensionality.",
+   "uses": [
+    "def-sfb-condensed-tensor-induction-data",
+    "lem-sfb-condensed-tensor-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Induction step 8, naturality and normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-tensor-induction-data",
+  "lem-sfb-condensed-tensor-presheaf",
+  "lem-sfb-condensed-tensor-sheafification",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-condensed-tensor-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Steps 2--8 of the existing induction argument, made into Lean by E2; construction and existence-only extension are separate statements, with generator extensionality and reciprocity assembled explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of sectionwise group algebra tensor induction for condensed module actions is additive and left adjoint to subgroup restriction, with evaluation at the identity as transpose",
+   "results": "8 hits: Condensed.freeForgetAdjunction, LightCondensed.ihomPoints, LightCondensed.freeForgetAdjunction, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalLightCondSetLightCondModFree",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.indResAdjunction (Induced.lean:157) is for abstract groups and one fixed scalar ring; Condensed.freeForgetAdjunction (Module.lean:58) is free/forgetful, not subgroup restriction for internal modules over arbitrary A."
+  },
+  {
+   "tool": "loogle",
+   "query": "Rep.indResAdjunction",
+   "results": "3 hits: Rep.indResAdjunction, Rep.coindResAdjunction_counit_app, Rep.coindResAdjunction_unit_app",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.indResAdjunction (Induced.lean:157) is for abstract groups and one fixed scalar ring; Condensed.freeForgetAdjunction (Module.lean:58) is free/forgetful, not subgroup restriction for internal modules over arbitrary A."
+  },
+  {
+   "tool": "grep",
+   "query": "indResAdjunction|resIndAdjunction|freeForgetAdjunction",
+   "results": "25 hits: Mathlib/Condensed/Module.lean, Mathlib/Condensed/Module.lean, Mathlib/Condensed/Light/Module.lean, Mathlib/Condensed/Light/Module.lean, Mathlib/Condensed/Light/Module.lean, Mathlib/Condensed/Light/Small.lean, Mathlib/Condensed/Light/Epi.lean, Mathlib/Condensed/Light/Epi.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.indResAdjunction (Induced.lean:157) is for abstract groups and one fixed scalar ring; Condensed.freeForgetAdjunction (Module.lean:58) is free/forgetful, not subgroup restriction for internal modules over arbitrary A."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Induction restriction adjunction for sheaves of modules with internal group action over a sheaf of rings",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius reciprocity: balanced group ring tensor presheaf followed by module sheafification is left adjoint to restriction of equivariant module sheaves",
+   "results": "8 hits: Rep.instIsRightAdjointActionModuleCatRes, Rep.indResAdjunction, Rep.instIsLeftAdjointActionModuleCatRes, Rep.resCoindAdjunction, Rep.indResAdjunction_counit_app_hom_hom, Rep.instIsLeftAdjointIndFunctor, Rep.resCoindAdjunction_unit_app_hom_hom, Rep.resIndAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.indResAdjunction (Induced.lean:157) is for abstract groups and one fixed scalar ring; Condensed.freeForgetAdjunction (Module.lean:58) is free/forgetful, not subgroup restriction for internal modules over arbitrary A."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of group ring tensor induction is left adjoint to restriction of internal group actions on sheaves of modules",
+   "results": "{\"t\": \"2026-10-22T08:07:47Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification of group ring tensor induction is left adjoint to restriction of internal group actions on sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafificationAdjunction\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"Rep.instIsLeftAdjointActionModuleCatRes\", \"Rep.indResAdjunction\", \"Rep.instIsRightAdjointActionModuleCatRes\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"Rep.resCoindAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\"], \"digest\": \"77c1ac6639ef2544\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.indResAdjunction (Mathlib/RepresentationTheory/Induced.lean:157) is for abstract groups over one fixed commutative ring, using a coinvariant model. PresheafOfModules.sheafificationAdjunction (Presheaf/Sheafification.lean:125) supplies ordinary module sheafification, not internal profinite-group induction over varying section rings. Neither states the item or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "Rep.indResAdjunction",
+   "results": "{\"t\": \"2026-10-22T08:07:48Z\", \"tool\": \"loogle\", \"query\": \"Rep.indResAdjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Rep.indResAdjunction\", \"Rep.coindResAdjunction_counit_app\", \"Rep.coindResAdjunction_unit_app\"], \"digest\": \"20eb58853a56686a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.indResAdjunction (Mathlib/RepresentationTheory/Induced.lean:157) is for abstract groups over one fixed commutative ring, using a coinvariant model. PresheafOfModules.sheafificationAdjunction (Presheaf/Sheafification.lean:125) supplies ordinary module sheafification, not internal profinite-group induction over varying section rings. Neither states the item or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "indResAdjunction|balanced.*tensor|[Ee]quivariant.*sheafif",
+   "results": "{\"t\": \"2026-10-22T08:07:48Z\", \"tool\": \"grep\", \"query\": \"indResAdjunction|balanced.*tensor|[Ee]quivariant.*sheafif\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/FiniteIndex.lean\", \"Mathlib/RepresentationTheory/FiniteIndex.lean\", \"Mathlib/RepresentationTheory/FiniteIndex.lean\", \"Mathlib/RepresentationTheory/FiniteIndex.lean\"], \"digest\": \"8036e8fc534e2cdb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.indResAdjunction (Mathlib/RepresentationTheory/Induced.lean:157) is for abstract groups over one fixed commutative ring, using a coinvariant model. PresheafOfModules.sheafificationAdjunction (Presheaf/Sheafification.lean:125) supplies ordinary module sheafification, not internal profinite-group induction over varying section rings. Neither states the item or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius reciprocity for sheafified induction of internal modules with profinite group action",
+   "results": "{\"t\": \"2026-10-22T08:07:48Z\", \"tool\": \"leansearch\", \"query\": \"Frobenius reciprocity for sheafified induction of internal modules with profinite group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"Rep.indResAdjunction\", \"Rep.coindToInd.congr_simp\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"SheafOfModules.sheafificationCompPullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"Rep.resIndAdjunction\", \"Rep.resIndAdjunction_homEquiv_symm_apply\"], \"digest\": \"a48fbbb53c376a85\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.indResAdjunction (Mathlib/RepresentationTheory/Induced.lean:157) is for abstract groups over one fixed commutative ring, using a coinvariant model. PresheafOfModules.sheafificationAdjunction (Presheaf/Sheafification.lean:125) supplies ordinary module sheafification, not internal profinite-group induction over varying section rings. Neither states the item or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural Frobenius reciprocity for module presheaves over varying section rings with actions by a group sheaf, followed by equivariant sheafification",
+   "results": "{\"t\": \"2026-10-22T08:13:04Z\", \"tool\": \"leanfinder\", \"query\": \"Natural Frobenius reciprocity for module presheaves over varying section rings with actions by a group sheaf, followed by equivariant sheafification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.sheafifyHomEquiv\", \"PresheafOfModules.sheafificationAdjunction\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.sheafificationHomEquiv\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\"], \"digest\": \"04b0d8b8872dcbfc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.indResAdjunction (Mathlib/RepresentationTheory/Induced.lean:157) is for abstract groups over one fixed commutative ring, using a coinvariant model. PresheafOfModules.sheafificationAdjunction (Presheaf/Sheafification.lean:125) supplies ordinary module sheafification, not internal profinite-group induction over varying section rings. Neither states the item or specializes to it in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-split-coset-induction",
+  "date": "2026-10-22",
+  "group": "Q31"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), formal open-normal-kernel quotient input to the tame-boundary calculation: restriction to the kernel must preserve K-injective resolutions; exact induction supplies its exact left adjoint. Returned induction proof steps 2--5: balanced tensor presheaf, induced action, additive functor, and the two natural inverse adjunction transposes. Agent-formulated input below paragraph (3); external reference WANTED.",
+   "via": [
+    "lem-sfb-condensed-split-coset-induction",
+    "lem-sfb-derived-invariants-normal-subgroup-comparison",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-condensed-tensor-induction-adjunction",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Gave the balanced finite-sum construction, restrictions, natural action, additive functor, both normalized transposes, inverse identities and naturality. Reused the existing equivariant sheafification reflector and compact-Hausdorff quotient-map Mathlib leaf; no new nodes. Full project/blueprint searches found no attachment or duplicate.",
+  "blueprint": "The motivating source is det-thm-sf-ctf-stability-direct-images paragraph (3), through the inherited induction ancestor chain. Step 1 checks the internal group; steps 2--4 realize the tensor-induction construction; steps 5--8 realize its Frobenius adjunction. blueprint_refs.py ancestor reports None for the inherited chain; retained from.node=null and the original precise place and via rather than inventing an ancestor.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-1d40c7743",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-1d40c7743 (reviewer sub-agent of L); spot-checked: S1 split with no new nodes and the statement unchanged (agent-formulated induction input below paragraph (3) of main-20261015 sk-thm-sf-ctf-stability-direct-images, WANTED recorded; no SGA). I read all 8 steps against the cited statements. Step 1: the profinite site has finite limits, and C(S,P) is a sheaf via the compact-Hausdorff quotient leaf, so the reflector's hypotheses hold. Steps 2-3: the balanced presentation over the noncommutative group ring, the restrictions, the A(S)-linear P-action and B_u all respect the relations. Steps 4, 6 and 7 use only the statement clauses of lem-sfb-equivariant-module-sheafification-reflector (the action, the equivariant unit and unique extensions). Steps 5-8 check the transposes, the balancing (ph)f(m)=p f(hm), the inverse identities via uniqueness, and two-variable naturality via L(u)η=ηB_u. Tested H=P (L=id), H=1 (free induction), non-normal <(12)> in S_3, A=0, M=0 and S=∅. No coset section or finite index is used. No duplicate in the DAG; lem-exc-rg-open-stabilizer-adjoint is about discrete modules, and the parent split-coset-induction node is stronger and cites this item. FIX (C1): steps 4 and 6 treated the sheafified module sheaf with action as an object and morphism of 𝒜_P(A), whose objects are internal modules, without citing def-weil-pbc-internal-abelian-sheaf-module-equivalence. That node is already a dependency of def-sfb-condensed-action-module, so there is no new route or cycle. I added the citation to both steps and to proof_deps in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-condensed-tensor-induction-adjunction.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedTensorInductionAdjunction",
+  "declaration": "Profinite.CondensedAction.exists_tensorInductionAdjunction",
+  "declarations": [
+   "Profinite.CondensedAction.exists_tensorInductionAdjunction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CondensedTensorInductionAdjunction.lean",
+  "statement": "theorem exists_tensorInductionAdjunction (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X] (P : ProfiniteGrp.{u}) (H : ClosedSubgroup P) : ∃ B : TensorInductionPresheaf R P H, Nonempty (TensorInductionSheafAdjunction B)",
+  "branch": "sheaf-dag",
+  "by": "Q68",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Original signatures and concrete data preserved by public reexport from CondensedTensorInductionData. The theorem assembles the concrete presheaf, sheafification data and existence-only tensor extension; generator extensionality proves uniqueness, additivity, inverse identities and naturality."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2262e4eda",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Read item, 4 stmt_deps (CondensedRing+IsCommMonObj, size convention, ActionModule/inflate in side-live CondensedActionModule, PresheafOfModules.sheafification), the module and report. Every clause matches: concrete finite-sum quotient presentation of A(S)[P_S]⊗_{A(S)[H_S]}M(S) with [ph]⊗m=[p]⊗hm, restriction/action/map pinned on generators, L additive, comparison to ordinary module sheafification (an existential iso composed with toSheafify is still a sheafification unit, so not hollow), induced action, adjunction to inflate along the ClosedSubgroup inclusion, forward transpose at [1]⊗m, inverse transpose as an iff with uniqueness. No coset section, normality or finite-index hypothesis; edge cases H=P, H=1, non-normal H, A=0, M=0, S=∅ covered. Statement verbatim, one sorry, docstrings ok, no name clash, only lean changed vs live. No compile rerun, no files changed. Maintainer note: parent lem-sfb-condensed-split-coset-induction's pre-split landed module (NM 2026-10-21) defines the same induction notions (TensorPresheaf/Construction/generator/Datum); the parent's Lean should be re-bound to this item's declarations, or a stage-3 bridge is needed. Not returnable to Q68. Advisories: the report's search missed that module; L.map_tensor is redundant; proof-only imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7249c",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261026T081602-L-2013109",
+  "kind": "interface",
+  "note": "independent cc review: moved data block vs clone item (byte-identical), item theorem statement vs clone, item/new node lean records and proof_deps vs Lean, ActionModule definition vs the two sorried statements"
+ }
+}

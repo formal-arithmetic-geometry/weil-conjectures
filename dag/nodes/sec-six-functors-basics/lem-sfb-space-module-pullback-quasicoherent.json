@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-space-module-pullback-quasicoherent",
+ "kind": "statement",
+ "title": "Pullback preserves quasi-coherence on algebraic-space etale sites",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], with universes as in [def-weil-size-convention], and let $M$ be a quasi-coherent $\\mathcal O_Y$-module [def-weil-sheaf-of-modules-category, def-trf-space-quasi-coherent-module]. The tensor pullback $f^*M=\\mathcal O_X\\otimes_{f^{-1}\\mathcal O_Y}f^{-1}M$ of [def-trf-space-etale-module-functors], using the sheaf tensor product [def-pur-sheaf-tensor-product], is quasi-coherent on $X_{\\mathrm{et}}$. No flatness or finite-presentation hypothesis on $f$ is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03GA (lemma-pullback-quasi-coherent)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Take quasicoherent local-presentation data P for M. Its scheme charts V_i cover the final sheaf of Y. By the chart-cover lemma the family of all q.left for q in A(f,V_i) covers the final sheaf of X. Use this family as the covering of the desired quasicoherent data.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-space-module-chart-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DO (lemma-local-pullback), proof, the covering step."
+   }
+  },
+  {
+   "text": "For each pair (i,q), obtain the localized left adjoint F_q, the two left exact slice sheafifications, the structure-module isomorphism, and the natural restriction comparison. Left adjoints preserve all small colimits. Apply Mathlib SheafOfModules.Presentation.map to the given presentation P.presentation i and the structure-module isomorphism. Then apply Presentation.ofIsIso to the comparison at M, giving a presentation of (f^*M)|_(q.left). This transports both arbitrary small generator and relation types, using cokernels and no flatness.",
+   "uses": [
+    "lem-sfb-space-module-chart-pullback",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DF (lemma-global-pullback), proof; Tag 03DO (lemma-local-pullback), proof."
+   }
+  },
+  {
+   "text": "The preceding family, covering proof and actual mapped presentations form SheafOfModules.QuasicoherentData for moduleTensorPullback f applied to M. Its isQuasicoherent theorem yields the required predicate, shrinking the covering index if necessary. The original theorem signature is unchanged.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DL (definition-site-local), clause (6); Tag 03DO (lemma-local-pullback), proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-module-chart-cover",
+  "lem-sfb-space-module-chart-pullback",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DO (lemma-local-pullback), proof, with Tag 03DF (lemma-global-pullback); source specialization spaces-properties.tex Tag 03GA. W3 makes the covering and chart-local tensor comparison explicit as two strict subsidiary lemmas and combines actual local presentations using Mathlib Presentation.map and Presentation.ofIsIso."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a quasi coherent sheaf of modules along any morphism of algebraic spaces is quasi coherent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).Additive\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to that over $ X $'s structure sheaf is additive, meaning it prese\"}\n  {\"name\": \"PresheafOfModules.pullbackObjIsDefined\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {R : CategoryTheory.Functor Dᵒᵖ RingCat} →\\n            {S : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n           \", \"doc\": \"The property that the pullback functor between presheaves of modules has a left adjoint, characterized by the corepresentability condition: for each object $X$ in the category, the composition of the \"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pullback g).comp (AlgebraicGeometry.Scheme.Modules.pullback f) ≅\\n        AlgebraicGeometry.Scheme.Modules.pullback (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).l =\\n    (AlgebraicGeometry.Scheme.Modules.pullback f.as.unop).toCatHom\", \"doc\": \"For any morphism $f: X \\to Y$ between schemes, the left component of the pseudofunctor map applied to $f$ in the bicategory of module adjunctions equals the categorical morphism induced by the pullback\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.sheafedSpace_hasPullback_of_right\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y Z : AlgebraicGeometry.SheafedSpace C} (f : X ⟶ Z)\\n  (g : Y ⟶ Z) [H : AlgebraicGeometry.SheafedSpace.IsOpenImmersion f], CategoryTheory.Limits.HasPullback g f\", \"doc\": \"In the category of sheafed spaces, if one of the morphisms in a cospan diagram is an open immersion, then the pullback of the diagram exists. Specifically, given morphisms $g$ and $f$ sharing a common\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme pullback and general Presentation.map are ingredients, not a one-line specialization proving local-presentation preservation across arbitrary algebraic-space etale ringed topoi; the pushforward quasi-coherence lemma requires an invertible ring map",
+   "sub": ""
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a quasi coherent sheaf of modules along any morphism of algebraic spaces is quasi coherent",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": SheafOfModules.{v} S ⥤ SheafOfModules.{v} R\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullback.{v} φ ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"(I : Type u) : (pullback φ).obj (free I) ≅ free I\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).Additive\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to that over $ X $'s structure sheaf is additive, meaning it prese\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme pullback and general Presentation.map are ingredients, not a one-line specialization proving local-presentation preservation across arbitrary algebraic-space etale ringed topoi; the pushforward quasi-coherence lemma requires an invertible ring map",
+   "sub": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme pullback and general Presentation.map are ingredients, not a one-line specialization proving local-presentation preservation across arbitrary algebraic-space etale ringed topoi; the pushforward quasi-coherence lemma requires an invertible ring map",
+   "sub": ""
+  },
+  {
+   "tool": "grep",
+   "query": "quasicoherent.*pullback|pullback.*quasicoherent",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"line\": \"451\", \"text\": \"    [HasPullbacks C] [HasBinaryProducts C] (M : SheafOfModules.{u} R) (X : C) [IsQuasicoherent M] :\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme pullback and general Presentation.map are ingredients, not a one-line specialization proving local-presentation preservation across arbitrary algebraic-space etale ringed topoi; the pushforward quasi-coherence lemma requires an invertible ring map",
+   "sub": "Algebra/Category/ModuleCat"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image followed by extension of scalars preserves locally presented module sheaves on etale sites",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.Presentation.map_generators_I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories equipped with a natural isomorphi\"}\n  {\"name\": \"SheafOfModules.Presentation.map\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [i\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, this function constructs a prese\"}\n  {\"name\": \"SheafOfModules.Presentation.map_relations_I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a sheaf of modules $ M $ over a ringed space with presentation $ P $, and a colimit-preserving functor $ F $ between sheaf categories equipped with a natural isomorphism $ \\\\eta $, the relations \"}\n  {\"name\": \"SheafOfModules.Presentation.mapGenerators\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [i\", \"doc\": \"Given a presentation $ P $ of a quasicoherent sheaf $ M $ over a ring sheaf $ R $, and a colimit-preserving functor $ F $ between categories of sheaves of modules, this morphism maps the free $ R $-mo\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme pullback and general Presentation.map are ingredients, not a one-line specialization proving local-presentation preservation across arbitrary algebraic-space etale ringed topoi; the pushforward quasi-coherence lemma requires an invertible ring map",
+   "sub": ""
+  },
+  {
+   "tool": "grep",
+   "query": "quasicoherent.*pullback|pullback.*quasicoherent",
+   "sub": "Algebra/Category/ModuleCat",
+   "date": "2026-10-23",
+   "results": "Recorded search: ok=True, n_hits=1; hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "verdict": "no match: scheme pullback covers only schemes; Presentation.map and pullbackObjFreeIso are global-presentation ingredients, not the local quasi-coherence assertion on algebraic-space etale sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a quasi coherent sheaf of modules along any morphism of algebraic spaces is quasi coherent",
+   "sub": "",
+   "date": "2026-10-23",
+   "results": "Recorded search: ok=True, n_hits=8; hits: SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso.congr_simp, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+   "verdict": "no match: scheme pullback covers only schemes; Presentation.map and pullbackObjFreeIso are global-presentation ingredients, not the local quasi-coherence assertion on algebraic-space etale sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"pullback\"",
+   "sub": "",
+   "date": "2026-10-23",
+   "results": "Recorded search: ok=True, n_hits=0; hits: ",
+   "verdict": "no match: scheme pullback covers only schemes; Presentation.map and pullbackObjFreeIso are global-presentation ingredients, not the local quasi-coherence assertion on algebraic-space etale sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a quasi coherent sheaf of modules along any morphism of algebraic spaces is quasi coherent",
+   "sub": "",
+   "date": "2026-10-23",
+   "results": "Recorded search: ok=True, n_hits=8; hits: AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, PresheafOfModules.pullbackObjIsDefined, SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.sheafedSpace_hasPullback_of_right",
+   "verdict": "no match: scheme pullback covers only schemes; Presentation.map and pullbackObjFreeIso are global-presentation ingredients, not the local quasi-coherence assertion on algebraic-space etale sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image followed by extension of scalars preserves locally presented module sheaves on etale sites",
+   "sub": "",
+   "date": "2026-10-23",
+   "results": "Recorded search: ok=True, n_hits=8; hits: SheafOfModules.Presentation.map, SheafOfModules.IsFinitePresentation, Algebra.FormallyEtale.localization_map, SheafOfModules.isFinitePresentation, Algebra.FormallyEtale.localization_base, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.Presentation.map_generators_I, SheafOfModules.QuasicoherentData.IsFinitePresentation",
+   "verdict": "no match: scheme pullback covers only schemes; Presentation.map and pullbackObjFreeIso are global-presentation ingredients, not the local quasi-coherence assertion on algebraic-space etale sites."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-square-zero-extension-transfer",
+  "date": "2026-10-23",
+  "group": "Q156"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3Q (lemma-thickening-over-thickening-space-quasi-coherent), with the preceding setup; its derived-coherator hypothesis is expressed by the equivalent universal derived-Hom test. Supporting input: Tag 0D3Q, last sentence: reflection of equality of induced base-ideal maps, by testing with f-star J.",
+   "via": [
+    "lem-sfb-space-square-zero-extension-transfer",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-module-pullback-quasicoherent",
+  "worker": "stage1",
+  "summary": "Expanded Tag 03GA through the local-presentation proof of Tags 03DO and 03DF, reusing existing enlarged-site, ringed-localization, module-adjunction and colimit nodes. Checked arbitrary small relation/generator sets and nonflat morphisms. No new nodes or statement changes.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain, specifically the f-star J test in Tag 0D3Q used by lem-sfb-space-square-zero-extension-transfer. Uses the current latest blueprint direct-images proof only as ancestry; the mathematical proof follows Stacks 03GA, 03DO and 03DF.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Provides equivalent etale ringed sites and their localizations, so arbitrary base change is a site functor, a generic site model not a replacement of any unit step."
+   },
+   {
+    "node": "lem-trf-space-enlarged-chart-ringed-morphism",
+    "why": "Provides the finite-limit and cover preservation needed for localizing the algebraic-space ringed morphism."
+   },
+   {
+    "node": "lem-trf-space-chart-limit-enlarged-sections",
+    "why": "Identifies the chart-defined direct image in the item with enlarged-site ringed direct image, so uniqueness of left adjoints compares the actual pullbacks."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Supplies the ordinary tensor module adjunction on every ringed slice, independently of coefficient or finite-Tor constructions."
+   },
+   {
+    "node": "lem-pur-ringed-site-pullback-localization-universes",
+    "why": "Supplies the underived restriction/pullback comparison on a covering slice with explicit size and continuity hypotheses."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Supplies composition and base-change stability of etale covering families when refining to scheme charts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-enlarged-chart-ringed-morphism",
+  "lem-trf-space-chart-limit-enlarged-sections",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pur-ringed-site-pullback-localization-universes",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-a5233ee1a",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-a5233ee1a (reviewer sub-agent of L); spot-checked: I read all of it and changed nothing; there is no fixes/ directory. Shape: one commit holding the item and its report. Statement and stmt_deps are byte-identical to live and side-live, which still have the item unsplit, so there is no supersession and no repair note. proof_deps equals the union of the step uses, and the closure does not reach the item (no cycle). There are no new nodes. Source: the proof follows Stacks 03GA, which defers to 03DO(6): localization square, then 03DF(6) (f^* commutes with colimits and f^*O=O), then 03DN. I checked every tag against tags/tags. Step 1: the item's f^* is the adjoint of the chart-limit direct image, and the chart-limit-enlarged-sections iso D_f≅Q_f plus the 03D7 module adjunction identify it with the enlarged tensor pullback P. Step 2: quasi-coherence on the atlas comes from the slice presentations, and the model gives C_{V_a}=C_Y/V_a with the same ring; equivalences preserve coproducts and cokernels. Step 3: I checked every hypothesis of lem-pur-ringed-site-pullback-localization-universes (smallness, finite limits, continuity, cover-sieve preservation giving slice continuity, left adjoints from 03D7). It gives P_a(M~|V_a)≅(PM~)|W_a, and W_a may be a space. Step 4: P_a A≅B already at the presheaf level, and colimits are preserved by 0038; only right exactness is used. Step 5: refining by scheme charts uses chartwise-etale-permanence, and the restriction and scheme-chart equivalences give the 03DL condition on every T in X_et. The composite-covering remark in step 2 is the site axiom; it is elementary and permanence states it. Edge cases checked: Spec F_2→Spec Z with M=Q (an infinite presentation giving 0), X empty, f non-flat; no finiteness is assumed anywhere. Duplicates: the existing pullback lemmas are 01BG for schemes and the ringed-space version, and no 03DO or 03GA analogue exists for spaces. I accept all six tool_uses as generic black boxes. Batch-5 check: the four cited sec-trace-formula nodes (enlarged-etale-ringed-site-model, enlarged-chart-ringed-morphism, chart-limit-enlarged-sections, chartwise-etale-permanence) are sk-i-curve-zero foundations for algebraic-space etale sites. Their closures reach only the units sk-i-curve-zero and sk-d-weil within sec-trace-formula, and no trace-formula, trace-transport or Poincare node, no nt-assume leaf and no target. So they lie outside the two assumptions. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceModulePullbackQuasiCoherent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isQuasicoherent_moduleTensorPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceModulePullbackQuasiCoherent.lean",
+  "statement": "theorem isQuasicoherent_moduleTensorPullback {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (M : Y.Modules) [M.IsQuasicoherent] : ((moduleTensorPullback f).obj M).IsQuasicoherent",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ac42f5fa",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Theorem isQuasicoherent_moduleTensorPullback renders Stacks 03GA and the node clause by clause: S : Scheme.{u}, X Y : AlgebraicSpace S, any f, M : Y.Modules with Mathlib [M.IsQuasicoherent] (the predicate of the def-trf-space-quasi-coherent-module record), conclusion on the recorded moduleTensorPullback f (left adjoint of the chart-limit moduleDirectImage). No extra hypotheses or universe restriction. Node differs from side-live only by the added lean; lean.statement verbatim; no supersession or duplicate. Public imports cover the stmt_deps; plain imports are recorded proof_dep modules. Docstrings carry source and blueprint id and the 5 proof steps; body is sorry; no new defs. Report has Worker report and Second reading by Q31. Edge cases checked: empty spaces, zero M, nonflat f, infinite presentations. No compile run (no file changed). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261026T083410-L-2342444",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -232,7 +232,22 @@
   "lem-fd-kernel-composition"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.fourierKernelConvolutionIso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.fourierKernelConvolutionIso"
+   ]
+  }
+ },
  "chapter": "sec-fourier-transform",
  "unit": "sk-prop-convolution-kernel",
  "split_report": {
@@ -325,5 +340,53 @@
   "group": "Q04",
   "result": "fix",
   "note": "Mathematics and Lean correct: FourierSetting + nontrivial prime-field AddChar; adic common-stage objects from completed pro-etale integral AS sheaves (Etale.fourierKernel of stdPairing, defeq rep); convolution K'*K=Rr13!(r12^*K⊗r23^*K') via tripleProj13 with (Ψ,Ψ⁻¹) and (Ψ,Ψ), unshifted, recorded sfQbarCompactSupportValue; RHS integralCoefficientTwist(-r) pushed along diagonal and (id×neg), shift -2r; edge cases r=0, char 2, p|a, ramified E, universes OK; no hollow defs, 11 true sorry theorems, docstrings/blueprint tags/8-step proof present; new node def-fd-adic-fourier-realization justified (no adic AS/kernel/convolution in Mathlib, slopmaster2 or side); statements verbatim; nt_compile --json both modules rc 0, no warnings. Finding H11: Second reading by Q04 was an admitted self-reading; fixed by fixes/lem-fd-convolution-kernel.report.md (Worker report and New nodes unchanged, independent clause-by-clause second reading; passes check_report). No Lean or node change."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $S$ be a separated finite-type $k_0$-scheme and $V\\to S$ a vector bundle\nof rank $r$, identified with $V^{\\vee\\vee}$, and let $\\Lambda=E$ or\n$\\overline{\\mathbf Q}_\\ell$ ([def-sf-setting]). Let $r_{ij}$ be the\nprojections of $V\\times_SV^\\vee\\times_SV$ and put\n\n$$\nC=Rr_{13!}\\bigl(r_{12}^*\\mathcal K_\\psi\\otimes r_{23}^*\\mathcal K_{\\psi^{-1}}\\bigr)\n\\in\\Dbc(V\\times_SV,\\Lambda),\n$$\n\nthe unshifted convolution kernel $\\mathcal K_{\\psi^{-1}}\\ast\\mathcal K_\\psi$ of\n[lem-fd-kernel-composition]. Then there is a canonical isomorphism\n\n$$\n\\mathcal K_{\\psi^{-1}}\\ast\\mathcal K_\\psi\\cong\n\\Delta_*\\Lambda_V(-r)[-2r],\n\\qquad\\text{and likewise}\\qquad\n\\mathcal K_\\psi\\ast\\mathcal K_\\psi\\cong\n(\\operatorname{id}\\times\\iota')_*\\Delta_*\\Lambda_V(-r)[-2r],\n$$\n\nwhere $\\Delta:V\\to V\\times_SV$ is the diagonal and $\\iota'=[-1]_V$ is the\ninverse of the addition. The isomorphism is the composite of the\nlocalization isomorphism $C\\cong\\Delta_*\\Delta^*C$, the unit\ntrivialization of the character sheaf on the diagonal and the vector-bundle\ntrace of $V^\\vee$.",
+  "proof": [
+   {
+    "text": "*Step 1 (the integrand).* On $V\\times_SV^\\vee\\times_SV$, with points\n$(x,y,z)$, the multiplicativity and the inverse formula of\n[prop-kernel-lisse], [lem-fd-as-lisse] give\n\n$$\nr_{12}^*\\mathcal K_\\psi\\otimes r_{23}^*\\mathcal K_{\\psi^{-1}}\n\\cong\\mathcal L_{\\psi,\\langle x,y\\rangle}\\otimes\\mathcal L_{\\psi,-\\langle z,y\\rangle}\n\\cong\\mathcal L_{\\psi,\\langle x-z,y\\rangle}.\n$$",
+    "uses": [
+     "prop-kernel-lisse",
+     "lem-fd-as-lisse"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 2 (vanishing off the diagonal).* Let $(\\bar x,\\bar z)$ be a geometric\npoint of $V\\times_SV$ over the geometric point $\\bar s$ of $S$, with values in\nan algebraically closed field $\\Omega$. By compact-support base change\n([sk-thm-sfb-shriek-base-change]), as in [lem-fd-stalk-formula], the stalk\n$C_{(\\bar x,\\bar z)}$ is\n$R\\Gamma_c(V^\\vee_{\\bar s},\\lambda^*\\mathcal L_\\psi)$ for the linear form\n$\\lambda=\\langle x-z,\\ \\cdot\\ \\rangle$ on the fibre\n$V^\\vee_{\\bar s}\\cong\\mathbf A^r_\\Omega$. If $x\\ne z$, then $\\lambda\\neq0$\nand this vanishes by [lem-fd-character-integral].",
+    "uses": [
+     "sk-thm-sfb-shriek-base-change",
+     "lem-fd-stalk-formula",
+     "lem-fd-character-integral"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 3 (localization).* Let $j:U\\hookrightarrow V\\times_SV$ be the open\ncomplement of the closed diagonal $\\Delta$. By Step 2 all stalks of\n$j^*C$ vanish, so $j^*C=0$, and the localization triangle\n$j_!j^*C\\to C\\to\\Delta_*\\Delta^*C$ of [sk-prop-sf-open-closed-triangle]\ngives a canonical isomorphism $C\\xrightarrow{\\sim}\\Delta_*\\Delta^*C$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 4 (the restriction to the diagonal).* The base change of $r_{13}$\nalong $\\Delta$ is the projection $q:V\\times_SV^\\vee\\to V$, the pullback to\n$V$ of the vector bundle $V^\\vee$, and by compact-support base change\n$\\Delta^*C\\cong Rq_!(\\mathcal L_{\\psi,\\langle x-x,y\\rangle})=Rq_!(\\mathcal L_{\\psi,0})$.\nThe unit trivialization of [lem-wft-as-unit-trivialization] identifies\n$\\mathcal L_{\\psi,0}$ with $\\Lambda$, compatibly with the identification of\nStep 1, and the vector-bundle trace of [thm-pur-vector-bundle-thom] for the\nrank-$r$ bundle $q$ gives $Rq_!\\Lambda\\cong\\Lambda_V(-r)[-2r]$, with the\ntwist of [def-wf-tate-twist]. Together with Step 3 this is the first\nisomorphism.",
+    "uses": [
+     "lem-wft-as-unit-trivialization",
+     "thm-pur-vector-bundle-thom",
+     "def-wf-tate-twist"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 5 (the same character).* For $\\mathcal K_\\psi\\ast\\mathcal K_\\psi$ the\nintegrand is $\\mathcal L_{\\psi,\\langle x+z,y\\rangle}$, so Steps 2–4 hold with\nthe diagonal replaced by the antidiagonal $\\{x+z=0\\}$, the image of $\\Delta$\nunder $\\operatorname{id}\\times\\iota'$, which gives the second isomorphism.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

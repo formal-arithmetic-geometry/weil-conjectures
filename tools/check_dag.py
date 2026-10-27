@@ -27,6 +27,7 @@ import collections, json, pathlib, sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import dag_queue as dq  # noqa: E402
+import nodefiles  # noqa: E402
 
 
 def sccs(graph: dict[str, list[str]]) -> list[list[str]]:
@@ -84,7 +85,7 @@ def main() -> int:
         if str(i) in seen:
             errors.append(f"ids: {i} occurs in {seen[str(i)]} and {p}")
         seen[str(i)] = p
-    g = dq.Dag(nodes)
+    g = nodefiles.dag(nodes)
 
     for i, d in nodes.items():
         m = dq.field(d, "merged")
@@ -209,4 +210,5 @@ def cached_main() -> int:
 
 
 if __name__ == "__main__":
+    nodefiles.enable()   # 2026-10-24 (cpu): the Dag built here is built again by units.check() on the same nodes
     sys.exit(cached_main())

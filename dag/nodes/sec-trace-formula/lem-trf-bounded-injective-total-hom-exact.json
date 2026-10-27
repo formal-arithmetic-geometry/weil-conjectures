@@ -1,0 +1,224 @@
+{
+ "id": "lem-trf-bounded-injective-total-hom-exact",
+ "kind": "statement",
+ "title": "Total Hom into a bounded injective complex preserves short exact sequences",
+ "statement": "Let $A$ be a commutative ring, and let $0\\to U\\xrightarrow{j}V\\xrightarrow{p}W\\to0$ be a sequence of integer-indexed cochain complexes of $A$-modules [def-weil-abstract-derived-category] which is short exact in every degree. Let $I$ be a cochain complex with injective terms [def-sp-injective-resolutions], and let $a\\leq b$ be integers such that $I^q=0$ for $q<a$ or $q>b$. Use the $A$-module-valued total Hom complex [def-sc-module-total-hom-complex], with degree-$r$ term $\\prod_{s\\in\\mathbf Z}\\operatorname{Hom}_A(M^s,I^{s+r})$ and differential $d_Iz-(-1)^rzd_M$. Componentwise precomposition with $p$ and $j$ defines $A$-linear chain maps $p^*$ and $j^*$, and\n$$0\\to\\operatorname{Hom}_A^\\bullet(W,I)\\xrightarrow{p^*}\\operatorname{Hom}_A^\\bullet(V,I)\\xrightarrow{j^*}\\operatorname{Hom}_A^\\bullet(U,I)\\to0$$\nis short exact in every degree. No support bound on $U,V,W$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0G4H, lemma-finite-ext-into-bounded-injective, proof: bounded injective computation and truncation comparison, expanded at the complex level."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions",
+  "def-sc-module-total-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Write $H^r(M)=\\prod_s\\operatorname{Hom}_A(M^s,I^{s+r})$ using [def-sc-module-total-hom-complex]. For a chain map $f:M\\to N$ put $(f^*z)_s=z_s f^s$. This is $A$-linear. In component $s$, $d(f^*z)_s=d_I^{s+r}z_sf^s-(-1)^rz_{s+1}f^{s+1}d_M^s=(d_I^{s+r}z_s-(-1)^rz_{s+1}d_N^s)f^s=(f^*dz)_s$, since $f$ commutes with differentials [def-weil-abstract-derived-category]. Thus $p^*$ and $j^*$ are chain maps, and $j^*p^*=0$ because $p^sj^s=0$ in every degree.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A8H, section-hom-complexes, defining product and signed differential; elementary expansion for the truncation comparison in dualizing.tex Tag 0G4H."
+   }
+  },
+  {
+   "text": "Fix $r$. If $p^*z=0$, then $z_sp^s=0$ for each $s$. Surjectivity of $p^s$ gives $z_s(w)=0$ for every $w\\in W^s$, by choosing $v\\in V^s$ with $p^s(v)=w$. Hence $z=0$ and $p^*:H^r(W)\\to H^r(V)$ is injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A8H, section-hom-complexes, defining product and signed differential; elementary expansion for the truncation comparison in dualizing.tex Tag 0G4H."
+   }
+  },
+  {
+   "text": "If $z\\in H^r(V)$ satisfies $j^*z=0$, then $z_s$ vanishes on $\\operatorname{im}j^s=\\ker p^s$. Define $y_s(w)=z_s(v)$ for any lift $p^s(v)=w$. Two lifts differ by an element of $\\ker p^s$, so this is well-defined; lifting sums and scalar multiples shows that $y_s$ is $A$-linear. Therefore $y=(y_s)_s\\in H^r(W)$ and $p^*y=z$. Together with Step 1 this proves $\\operatorname{im}p^*=\\ker j^*$ in degree $r$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A8H, section-hom-complexes, defining product and signed differential; elementary expansion for the truncation comparison in dualizing.tex Tag 0G4H."
+   }
+  },
+  {
+   "text": "For $u=(u_s)_s\\in H^r(U)$, injectivity of $I^{s+r}$ in the extension sense stated in [def-sp-injective-resolutions] extends each $u_s:U^s\\to I^{s+r}$ across the monomorphism $j^s$ to $v_s:V^s\\to I^{s+r}$. Only $a-r\\leq s\\leq b-r$ have a possibly nonzero target. Choose extensions for this finite set, and take the zero map elsewhere; then $v=(v_s)_s\\in H^r(V)$ satisfies $j^*v=u$. These are homogeneous cochains, so no compatibility between the chosen extensions and differentials is required. Thus $j^*$ is surjective in degree $r$. Steps 2--4 give the asserted degreewise short exact sequence, and Step 1 supplies its chain maps. No bound on the source complexes was used.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0135, definition-injective: extension across injections, applied to the finitely many nonzero components."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-total-hom-complex",
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0G4H truncation comparison, expanded using Tag 0A8H and the injectivity definition Tag 0135."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Hh]omComplex.*[Ee]xact|[Ee]xact.*[Hh]omComplex|[Hh]om.*[Ii]njective",
+   "results": "25 hits; top=['Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomologicalComplex.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean']; subdirectory=Algebra/Homology; note=; digest=f62744bc09a9d5ac",
+   "date": "2026-10-22",
+   "verdict": "no match: degreewise short-exactness criteria assume exact evaluated rows; they do not assert exactness of the contravariant module-valued total Hom into a bounded injective target."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex, CategoryTheory.ShortComplex.ShortExact",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: degreewise short-exactness criteria assume exact evaluated rows; they do not assert exactness of the contravariant module-valued total Hom into a bounded injective target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A degreewise short exact sequence of cochain complexes gives a short exact sequence of module valued total Hom complexes into a bounded complex of injective modules",
+   "results": "8 hits; top=['CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ', 'CochainComplex.isKInjective_of_injective_aux', 'CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ', 'CategoryTheory.InjectiveResolution.exact₀', 'CategoryTheory.InjectiveResolution.exact_succ', 'CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p', 'HomologicalComplex.shortExact_of_degreewise_shortExact', 'HomologicalComplex.shortExact_iff_degreewise_shortExact']; subdirectory=; note=; digest=9b1cc043822efa9d",
+   "date": "2026-10-22",
+   "verdict": "no match: degreewise short-exactness criteria assume exact evaluated rows; they do not assert exactness of the contravariant module-valued total Hom into a bounded injective target."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]hort[Ee]xact|[Ee]xact|[Ii]njective",
+   "results": "5 hits; top=['426', '651', '652', '721', '814']; subdirectory=Algebra/Homology/HomotopyCategory/HomComplex.lean; note=; digest=f72301e1f4928afc",
+   "date": "2026-10-22",
+   "verdict": "no match: degreewise short-exactness criteria assume exact evaluated rows; they do not assert exactness of the contravariant module-valued total Hom into a bounded injective target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Total Hom into a bounded termwise injective module complex sends a short exact sequence of arbitrary complexes to a short exact sequence of module complexes",
+   "results": "8 hits; top=['HomologicalComplex.shortExact_of_degreewise_shortExact', 'CategoryTheory.ShortComplex.ShortExact.moduleCat_injective_f', 'CategoryTheory.ShortComplex.ShortExact.exact', \"CategoryTheory.ShortComplex.ShortExact.mk'\", 'HomologicalComplex.shortExact_iff_degreewise_shortExact', 'CategoryTheory.ShortComplex.Exact.map_of_preservesLeftHomologyOf', 'CategoryTheory.ShortComplex.ShortExact.ab_injective_f', 'CategoryTheory.ShortComplex.ShortExact.hasInjectiveDimensionLT_X₂']; subdirectory=; note=; digest=fbe08667399f0ef9",
+   "date": "2026-10-22",
+   "verdict": "no match: degreewise short-exactness criteria assume exact evaluated rows; they do not assert exactness of the contravariant module-valued total Hom into a bounded injective target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contravariant total Hom complex into a termwise injective bounded target preserves short exact sequences degree by degree as modules",
+   "results": "8 hits; top=['HomologicalComplex.shortExact_iff_degreewise_shortExact', 'HomologicalComplex.shortExact_of_degreewise_shortExact', 'CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ', 'HomologicalComplex.exact_of_degreewise_exact', 'HomologicalComplex.exact_iff_degreewise_exact', 'CochainComplex.isKInjective_of_injective_aux', 'CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ', 'CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p']; subdirectory=; note=; digest=502b6cfc1b535a5f",
+   "date": "2026-10-22",
+   "verdict": "no match: degreewise short-exactness criteria assume exact evaluated rows; they do not assert exactness of the contravariant module-valued total Hom into a bounded injective target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The module valued total Hom into a bounded complex of injective modules sends degreewise short exact sequences of cochain complexes to degreewise short exact sequences",
+   "results": "8 hits; top=['CochainComplex.isKInjective_of_injective_aux', 'CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p', 'HomologicalComplex.shortExact_of_degreewise_shortExact', 'HomologicalComplex.shortExact_iff_degreewise_shortExact', 'groupCohomology.map_cochainsFunctor_shortExact', 'CochainComplex.IsKInjective', 'CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ', 'CategoryTheory.InjectiveResolution.exact₀']; subdirectory=; note=; digest=2e5cae5a6dff6491",
+   "date": "2026-10-22",
+   "verdict": "no match: degreewise exactness criteria and exactness of Yoneda into one injective do not state the module-valued total Hom chain maps and their degreewise exactness; HomComplex defines cochains and differential only."
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]omComplex.*[Ee]xact|[Ee]xact.*[Hh]omComplex|[Hh]om.*[Ii]njective",
+   "results": "25 hits; top=['Mathlib/Algebra/Homology/HomotopyFiber.lean', 'Mathlib/Algebra/Homology/HomotopyFiber.lean', 'Mathlib/Algebra/Homology/HomotopyFiber.lean', 'Mathlib/Algebra/Homology/HomotopyFiber.lean', 'Mathlib/Algebra/Homology/HomotopyFiber.lean', 'Mathlib/Algebra/Homology/HomologicalComplex.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean']; subdirectory=Algebra/Homology; note=; digest=202d97d14c04da00",
+   "date": "2026-10-22",
+   "verdict": "no match: degreewise exactness criteria and exactness of Yoneda into one injective do not state the module-valued total Hom chain maps and their degreewise exactness; HomComplex defines cochains and differential only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex, CategoryTheory.ShortComplex.ShortExact",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: degreewise exactness criteria and exactness of Yoneda into one injective do not state the module-valued total Hom chain maps and their degreewise exactness; HomComplex defines cochains and differential only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Contravariant Hom into an injective module complex preserves short exact sequences in each degree",
+   "results": "8 hits; top=['HomologicalComplex.ExactAt.unop', 'CategoryTheory.Abelian.Ext.contravariantSequence_exact', 'CategoryTheory.ShortComplex.Exact.op', 'CategoryTheory.preservesHomology_preadditiveYonedaObj_of_injective', 'CategoryTheory.ShortComplex.ShortExact.ab_injective_f', 'CategoryTheory.ShortComplex.ShortExact.unop', 'CategoryTheory.ShortComplex.ShortExact.moduleCat_injective_f', 'CategoryTheory.ShortComplex.Exact.unop']; subdirectory=; note=; digest=c9b79a21d8c6e0e6",
+   "date": "2026-10-22",
+   "verdict": "no match: degreewise exactness criteria and exactness of Yoneda into one injective do not state the module-valued total Hom chain maps and their degreewise exactness; HomComplex defines cochains and differential only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exactness of the product total Hom complex under short exact sequences in its first argument with injective terms in the second argument",
+   "results": "8 hits; top=['HomologicalComplex.exact_of_degreewise_exact', 'HomologicalComplex.shortExact_of_degreewise_shortExact', 'HomologicalComplex.exact_iff_degreewise_exact', 'CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ', 'HomologicalComplex.shortExact_iff_degreewise_shortExact', 'CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ', 'CategoryTheory.InjectiveResolution.exact_succ', 'CategoryTheory.InjectiveResolution.exact₀']; subdirectory=; note=; digest=38ad859557758cb4",
+   "date": "2026-10-22",
+   "verdict": "no match: degreewise exactness criteria and exactness of Yoneda into one injective do not state the module-valued total Hom chain maps and their degreewise exactness; HomComplex defines cochains and differential only."
+  },
+  {
+   "tool": "grep",
+   "query": "shortExact|exact|injective|def complex|def Cochain|δ_hom",
+   "results": "5 hits; top=['68', '426', '432', '452', '455']; subdirectory=Algebra/Homology/HomotopyCategory/HomComplex.lean; note=; digest=3cb7942d41ccf9d9",
+   "date": "2026-10-22",
+   "verdict": "no match: degreewise exactness criteria and exactness of Yoneda into one injective do not state the module-valued total Hom chain maps and their degreewise exactness; HomComplex defines cochains and differential only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-coherent-rhom-finite-injective-dimension",
+  "date": "2026-10-22",
+  "group": "Q160"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: First paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Re-split of this auxiliary input: Old Step 4: extension into each injective term, quotient factorization, finite-diagonal product exactness, and commutation with the signed Hom differential.",
+   "via": [
+    "lem-trf-coherent-rhom-finite-injective-dimension",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-bounded-injective-total-hom-exact",
+  "worker": "stage1",
+  "summary": "Q107 expanded the elementary cochain argument, preserving the statement: explicit signed differential naturality, injection by surjectivity, middle exactness by quotient factorization, and finite component extensions by the definition of injectivity. No new nodes. Read all cited statements and Stacks 0G4H, 0A8H and 0135; searched project, DAG, blueprint and Mathlib.",
+  "blueprint": "Realizes the recorded auxiliary branch of lem-trf-local-term-locality, via coherent RHom finite injective dimension: old Step 4 extension, quotient factorization, finite-diagonal exactness and signed Hom differential. No unit route change.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-50799bf69",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-50799bf69 (reviewer sub-agent of L); spot-checked: The item is correct as delivered. Shape: one commit, the item plus a report with its review; zero new nodes, no repair note, statement unchanged. It matches its use in Step 3 of the parent lem-trf-coherent-rhom-finite-injective-dimension, which applies it to the unbounded truncation sequence 0→τ≤n P→P→C→0. Sources checked: Stacks 0A8H (more-algebra.tex line 17851) has the same product and differential d_M f−(−1)^n f d_L as def-sc-module-total-hom-complex; 0135 (homology.tex line 7076) is the extension property, also stated in def-sp-injective-resolutions; 0G4H (dualizing.tex line 2574) is the parent's truncation argument. Step 1: I recomputed d(f^*z)_s, including the s+1 index and the sign, using the chain-map definition. Steps 2 and 3 are elementary: injectivity from surjectivity of p, and the middle term by factoring through the quotient with well-definedness and A-linearity checked. Step 4 extends each u_s across j^s by injectivity; homogeneous cochains need no compatibility with differentials. Small cases: zero I, U=0, W=0, and A=Z with 0→Z→2Z→Z/2→0 into Q/Z all behave as stated; with I^a=Z surjectivity fails, so the injectivity hypothesis is used exactly at Step 4. Duplicate search: lem-sc-bounded-hom-exact-columns, lem-trf-bounded-injective-rhom-model-support, lem-trf-hom-dual-preserves-homotopies and lem-sc-finite-free-internal-hom-exact-sequence each state something different; there is no Lean declaration for the id. No SGA, no tool_uses, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BoundedInjectiveTotalHomExact",
+  "declaration": "CochainComplex.boundedInjective_totalHom_exact",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedInjectiveTotalHomExact.lean",
+  "statement": "theorem boundedInjective_totalHom_exact {A : Type u} [CommRing A] (U V W I : CochainComplex (ModuleCat.{u} A) ℤ) (j : U ⟶ V) (p : V ⟶ W) (hseq : ∀ s : ℤ, Function.Injective (j.f s) ∧ Function.Exact (j.f s) (p.f s) ∧ Function.Surjective (p.f s)) (hinj : ∀ q : ℤ, Injective (I.X q)) (a b : ℤ) (hab : a ≤ b) (hbound : ∀ q : ℤ, q < a ∨ b < q → IsZero (I.X q)) : ∃ (pstar : moduleHomComplex W I ⟶ moduleHomComplex V I) (jstar : moduleHomComplex V I ⟶ moduleHomComplex U I), (∀ (r : ℤ) (z : HomComplex.Cochain W I r) (s t : ℤ) (hst : s + r = t), ((pstar.f r) z).v s t hst = p.f s ≫ z.v s t hst) ∧ (∀ (r : ℤ) (z : HomComplex.Cochain V I r) (s t : ℤ) (hst : s + r = t), ((jstar.f r) z).v s t hst = j.f s ≫ z.v s t hst) ∧ (∀ r : ℤ, Function.Injective (pstar.f r) ∧ Function.Exact (pstar.f r) (jstar.f r) ∧ Function.Surjective (jstar.f r))",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da1112b53",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Each hypothesis and conclusion clause matches the node: degreewise short exactness via Function.Exact, injective terms of I, I zero outside [a,b], no bound on U,V,W; conclusion is injective / exact / surjective in every degree. The maps p*, j* are existential chain maps on the recorded moduleHomComplex, fixed componentwise as precomposition, hence unique and not vacuous. The same-universe restriction comes from the moduleHomComplex dependency. No new definitions; moduleHomPrecomp belongs to a theorem node, so componentwise pinning is correct. Node differs from live only in lean; lean.statement matches the file verbatim; proof is sorry only; docstrings carry 0G4H/0A8H/0135, the blueprint id and the proof steps. Edge cases I=0, a=b, U=0 or W=0 and the zero ring hold. Advisory: the DerivedCategory.Basic import is unused. Not recompiled, as instructed."
+ }
+}

@@ -82,7 +82,8 @@ theorem identity_compatible (X : SplitFamily.{w, v, u} P j) :
       (X.transition k l a b).hom ≫ 𝟙 (X.obj l (a ≫ b)) =
         (P.map b.toLoc).toFunctor.map (𝟙 (X.obj k a)) ≫
           (X.transition k l a b).hom := by
-  sorry
+  intro k l a b
+  simp only [Functor.map_id, Category.comp_id, Category.id_comp]
 
 /-- Componentwise composites satisfy the family-morphism equation.
 Source: Tag 004A, explicit family model, proof step 1
@@ -94,7 +95,9 @@ theorem composition_compatible {X Y Z : SplitFamily.{w, v, u} P j} (t : Hom X Y)
       (X.transition k l a b).hom ≫ (t.val l (a ≫ b) ≫ s.val l (a ≫ b)) =
         (P.map b.toLoc).toFunctor.map (t.val k a ≫ s.val k a) ≫
           (Z.transition k l a b).hom := by
-  sorry
+  intro k l a b
+  rw [Functor.map_comp, ← Category.assoc, t.property k l a b, Category.assoc,
+    s.property k l a b, ← Category.assoc]
 
 /-- The category of split families, with componentwise identities and composition.
 The category laws are the existing category laws in each fibre, transported through

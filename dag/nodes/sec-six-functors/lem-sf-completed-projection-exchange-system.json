@@ -1,0 +1,147 @@
+{
+ "id": "lem-sf-completed-projection-exchange-system",
+ "kind": "lemma",
+ "title": "Strict-system projection diamond and its open/proper normalizations",
+ "statement": "Fix D, l, E, actual strict-system operations o, canonical realization data rho, and a compactified Cartesian square Q [def-sf-completed-projection-exchange-data]. For arbitrary system objects M on X and N on Y, diamondLeft(M,N)=diamondRight(M,N). In addition OpenLaw(M,P_p N) holds and ProperLaw(J_j M,N) holds: the two open restrictions are openSource, and the two proper transposes are commonTranspose. This is an equality in the derived system category before limit, with no input constructibility or Tor condition.",
+ "stmt_deps": [
+  "def-sf-completed-projection-exchange-data",
+  "def-sf-integral-system-realization-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Projection diamonds sentence, expanded in the parent node steps 2--11; Stacks 0941, 0GL1 and 0E48."
+ },
+ "proof": [
+  {
+   "text": "Record the precise compositor/tensor identities used below. Put $C=AU$, $D=U'H$, and write $\\mu_C=\\mu_A\\,A\\mu_U$, $\\mu_D=\\mu_{U'}\\,U'\\mu_H$, with the tensor factors indicated by evaluation. Monoidality of the canonical open-square compositor is\n$$(\\sigma_B\\otimes\\sigma_P)\\mu_{A;UB,UP}A(\\mu_{U;B,P})=\\mu_{U';HB,HP}U'(\\mu_{H;B,P})\\sigma_{B\\otimes P}.$$\nFor the proper square it is\n$$(\\theta_B\\otimes\\theta_P)\\mu_{F';GB,GP}F'(\\mu_{G;B,P})=\\mu_{H;FB,FP}H(\\mu_{F;B,P})\\theta_{B\\otimes P}.$$\nThese identities are part of the canonical K-flat tensor/composition identifications specified in [lem-sf-integral-compactification-system-realization]. Explicitly, on the simultaneous flat-term K-flat models both routes pull back each factor and balance the same scalar actions; a local pure tensor $m\\otimes n$ is sent to its two pulled-back sections in both orders. The structure-ring homomorphisms agree by the two commutative squares, so their scalar multiples agree as well. Thus these are equal chain maps before localization; derived localization preserves the equalities. They apply to the system site itself.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Explicit monoidality equations for sigma, theta, mu; canonical flat-term system models, not an assumed abstract coherence axiom."
+   }
+  },
+  {
+   "text": "Use [lem-sf-open-tensor-normalization] on the simultaneous ringed diagram sites. Write $\\beta:HJ\\cong J'A$, $\\gamma_{j;B,P}:JB\\otimes P\\cong J(B\\otimes UP)$, and set $c=\\gamma_{j;K_0,FN}$, $b=\\beta_{K_0}$, $c'=\\gamma_{j';AK_0,F'GN}$. Thus $c'$ has target $J'(AK_0\\otimes U'F'GN)$, retaining the essential $U'$. Put\n$$d=(1\\otimes\\theta_N^{-1})\\mu_{H;M,FN},\\quad z=J'((1\\otimes\\sigma_{FN})\\mu_{A;K_0,UFN})\\beta_{K_0\\otimes UFN},\\quad v=J'(1\\otimes U'\\theta_N^{-1})z.$$\nBoth $vH(c)$ and $c'(b\\otimes1)d$ have source $HQ$ and target $J'(AK_0\\otimes U'F'GN)$. Their source lies in the essential image of $J'$ by the isomorphisms $H(c)$ and $\\beta_{K_0\\otimes UFN}$; their target visibly does. Apply $U'$ and the canonical open units. The restrictions of $\\beta,\\gamma$ become the identity under the comparisons in the cited theorem, and the remaining composites coincide by the explicit identities of step 7, with the common final factor $1\\otimes U'\\theta_N^{-1}$. Full faithfulness of $J'$ gives\n$$vH(c)=c'(b\\otimes1)d.$$\nThis proves the equality in the derived system category, without coefficient evaluation.",
+   "uses": [
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; unit-normalized open-square calculation. "
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the proper square on the simultaneous ringed diagram sites of step 6. It applies to arbitrary derived system inputs and needs no geometric separatedness of the schemes. With $e:GS\\to S'H$ the proper exchange and $\\pi,\\pi'$ the counit projections, it gives\n$$S'(d)e_QG(\\pi_{p;M,N})=\\pi_{p';HM,GN}(e_M\\otimes1)\\mu_{G;SM,N}.$$\nFor completeness the common transpose is fixed, not just the equality: [def-exchange-projection] gives $\\varepsilon'_{HB}F'(e_B)=H(\\varepsilon_B)\\theta_{SB}$ and $\\varepsilon_Q F(\\pi_{p;M,N})=(\\varepsilon_M\\otimes1)\\mu_{F;SM,N}$. Thus the transpose of the left side above is $dH(\\varepsilon_Q)\\theta_{SQ}F'G(\\pi_{p;M,N})$. Naturality of $\\theta$ moves $\\pi$ next to $\\varepsilon_Q$; substituting the second formula and naturality of $\\mu_H$ reduces this to\n$$F'G(SM\\otimes N)\\cong HFSM\\otimes F'GN\\xrightarrow{H\\varepsilon_M\\otimes1}HM\\otimes F'GN.$$\nThe initial isomorphism here is precisely $\\theta_{SM\\otimes N}$, then $H\\mu_F$, then $\\mu_H$, then $1\\otimes\\theta_N^{-1}$. Equality from the cited ringed theorem gives this same transpose for the right side. These are system adjunctions before total inverse limit.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram, with the counit-defined projection and exchange of Tags 0B56 and 07A7."
+   }
+  },
+  {
+   "text": "Paste the preceding two equations explicitly. Put $T=J(K_0\\otimes UFN)$, so $c:Q\\to T$. The definitions [def-exchange-projection], interpreted by [lem-sf-integral-compactification-system-realization], are $\\operatorname{PF}^c=S(c)\\pi$ and $\\operatorname{Ex}_!^c=S'(b)e_M$. Naturality of $e$ at $c$, the open equation of step 8 and then step 9 give\n$$\\begin{aligned}\nS'(v)e_TG(S(c)\\pi)&=S'(vH(c))e_QG\\pi\\\\\n&=S'(c')S'(b\\otimes1)\\pi'_{HM,GN}(e_M\\otimes1)\\mu_G\\\\\n&=S'(c')\\pi'_{J'AK_0,GN}(S'(b)e_M\\otimes1)\\mu_G.\n\\end{aligned}$$\nThe last equality is naturality of $\\pi'$ at $b$ and tensor bifunctoriality. The first line is the top route, and the last line the bottom route, with $v$ inserting exactly the target pullback/tensor identification. This proves equality of the two actual derived system arrows. Only substitution, naturality and functorial composition were used to paste the factors; no inverse of a projection or proper exchange was taken.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Projection diamonds sentence: elementary naturality pasting of the open and proper factors."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Projection diamonds sentence, expanded in the parent node steps 2--11; Stacks 0941, 0GL1 and 0E48."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized derived inverse systems uniform constructible Tor bounds compact support finite expressions",
+   "results": "8 hits: InverseSystem.limit, InverseSystem.mk, InverseSystem.invLimEquiv_symm_apply_coe, InverseSystem.isNatEquiv_piEquivLim, InverseSystem.invLimEquiv.congr_simp, DerivedCategory.TStructure.t, Condensed.instAB4StarCondensedMod, InverseSystem.globalEquiv",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem. The matches do not state the strict-system expression/domain and canonical generator-path assertions. Existing project structures are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical integral realization of generator paths projection exchange diamond",
+   "results": "8 hits: GenLoop.toLoop_apply, GenLoop.fromLoop_apply, SSet.Path.interval, GenLoop.toLoop, GenLoop.transAt, SSet.Path.arrow_interval, CategoryTheory.SimplicialThickening.Path.I, SSet.Truncated.Path.interval",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem. The matches do not state the strict-system expression/domain and canonical generator-path assertions. Existing project structures are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "CanonicalPair|IsNormalizedCoefficientSequence|compactificationProjection",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem. The matches do not state the strict-system expression/domain and canonical generator-path assertions. Existing project structures are reused."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CompletedProjectionExchangeRealization",
+  "date": "2026-10-25",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Projection diamonds sentence, expanded in the parent node steps 2--11; Stacks 0941, 0GL1 and 0E48.",
+   "via": [
+    "lem-sf-completed-projection-exchange-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CompletedProjectionExchangeSystem",
+  "file": "lean/Sheaf/SixFunctors/CompletedProjectionExchangeSystem.lean",
+  "declaration": "WeilConjectures.CompletedProjectionExchange.completedProjectionExchangeSystem",
+  "statement": "theorem completedProjectionExchangeSystem\n    (M : System l E Q.X.obj.left) (N : System l E Q.Y.obj.left) :\n    diamondLeft l E o ρ Q M N = diamondRight l E o ρ Q M N ∧\n    OpenLaw l E o ρ Q M ((pull l E Q.p.hom.left).obj N) ∧\n    ProperLaw l E o ρ Q ((Operations.shriek l E o Q.compactification.i).obj M) N",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e559a",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261025T163949-L-919939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e559a",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261025T163949-L-919939",
+  "kind": "interface",
+  "note": "independent cc review: Moved data block diffed byte-identical with the clone's original; item proof checked against ρ.coherence and the Realizations/OpenComparisons/Compositors fields; Domains/System/Paths statements read against Statement's conjuncts, the CanonicalPair/BasicPair constructors and Expression.domain/admissible; node lean records checked against signatures"
+ }
+}

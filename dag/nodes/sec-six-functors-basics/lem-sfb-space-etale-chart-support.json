@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-space-etale-chart-support",
+ "kind": "statement",
+ "title": "Geometric-stalk support agrees with ordinary support on etale scheme charts",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $M$ be a quasi-coherent $\\mathcal O_X$-module on its small etale ringed site [def-trf-space-quasi-coherent-module]. Write $\\operatorname{Supp}_X(M)$ for the set of $x\\in|X|$ at which a geometric stalk $M_{\\bar x}$ is nonzero, with $\\bar x:\\operatorname{Spec}\\Omega\\to X$ over $x$ and $\\Omega$ algebraically closed; the vanishing condition is independent of this choice. Let $e:U\\to X$ be any etale map from a scheme. Under the equivalence [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], regard the restriction $e^*M$ as a quasi-coherent Zariski module $M_U$ on $U$. Define $\\operatorname{Supp}_U(M_U)=\\{u\\in U:(M_U)_u\\ne0\\}$, using ordinary module stalks [def-weil-pbc-module-stalk]. For the induced map $|e|:|U|\\to|X|$ [def-a1-space-point-topology], one has $\\operatorname{Supp}_U(M_U)=|e|^{-1}(\\operatorname{Supp}_X(M))$. No finite type, Noetherian, or surjectivity hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 07TY (lemma-support-covering); geometric-stalk support is spaces-properties.tex section-support."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-weil-pbc-module-stalk",
+  "def-a1-space-point-topology",
+  "def-sfb-space-module-support",
+  "def-trf-space-module-scheme-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Fix $u\\in U$, choose a geometric point $\\bar u:\\operatorname{Spec}\\Omega\\to U$ centered at $u$, and put $\\bar x=e\\bar u$. Write $A=\\mathcal O_{U,u}$, $B=\\mathcal O_{X,\\bar x}$, and $N=(M_U)_u$. By [lem-sfb-space-quasicoherent-geometric-stalk-tensor], $N\\otimes_A B\\cong M_{\\bar x}$. By [lem-sfb-space-strict-local-flatness], the natural map $A\\to B$ identifies with the strict-henselization map of the ordinary local ring, with the residue embedding determined by $\\bar u$. Therefore [lem-sc-strict-henselization-faithfully-flat] applies and makes $A\\to B$ faithfully flat. These statements require only the given etaleness and quasi-coherence, and do not require $e$ to be surjective.",
+   "uses": [
+    "lem-sfb-space-quasicoherent-geometric-stalk-tensor",
+    "lem-sfb-space-strict-local-flatness",
+    "lem-sc-strict-henselization-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 07TY (lemma-support-covering), the stalk tensor formula and faithful-flatness sentences; inputs Tags 05VP, 04KF, 07QM(1)."
+   }
+  },
+  {
+   "text": "For any faithfully flat $A$-algebra $B$ and any $A$-module $N$, apply [def-weil-pbc-faithfully-flat-ring-map] to the zero-arrow complex $0\\to N\\to0$: it is exact precisely when $N=0$, and its tensor by $B$ is exact precisely when $B\\otimes_A N=0$. Thus $N=0$ if and only if $B\\otimes_A N=0$. Swapping pure tensors gives the inverse isomorphisms $B\\otimes_A N\\cong N\\otimes_A B$ by the universal property [def-weil-pbc-module-tensor-product]. Together with step 1 this proves $(M_U)_u=0\\Longleftrightarrow M_{\\bar x}=0$. This argument applies to every choice of $\\bar u$, without finite generation or a Nakayama argument.",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 07TY, final zero-detection sentence, expanded directly from the definition of faithful flatness."
+   }
+  },
+  {
+   "text": "The vanishing condition defining support is independent of the geometric point, including at points outside the image of the particular $e$. Indeed fix any $x\\in|X|$. Choose a surjective etale scheme atlas $a:V\\to X$ by [def-trf-algebraic-space], and fix $v\\in V$ above $x$. Given any geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to X$ over $x$, [lem-sfb-etale-geometric-point-specified-lift] lifts this very $\\bar y$ to $\\bar v:\\operatorname{Spec}\\Omega\\to V$ centered at the fixed $v$. Apply steps 1 and 2 with $a,V,v,\\bar v$ in place of $e,U,u,\\bar u$. They give $M_{\\bar y}=0$ if and only if $(M_V)_v=0$. The latter module is fixed independently of $\\bar y$, proving the claimed independence.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-etale-geometric-point-specified-lift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 07TY, choice of a geometric point over an ordinary point; spaces-properties.tex definition-support (Tag 04KA), independence of the representative; specified lift Tag 05VN."
+   }
+  },
+  {
+   "text": "For each $u\\in U$, steps 1 and 2 and the independence just proved give $u\\in\\operatorname{Supp}_U(M_U)$ if and only if $M_{\\bar x}\\ne0$, if and only if $|e|(u)\\in\\operatorname{Supp}_X(M)$. Here $|e|(u)$ is represented by $e\\bar u$ by [def-a1-space-point-topology]. Equality of the two subsets follows pointwise. If $U$ is empty there are no points to check; if $M=0$ both supports are empty.",
+   "uses": [
+    "def-a1-space-point-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 07TY (lemma-support-covering), final sentence and the displayed set equality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-quasicoherent-geometric-stalk-tensor",
+  "lem-sfb-space-strict-local-flatness",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "def-trf-algebraic-space",
+  "lem-sfb-etale-geometric-point-specified-lift",
+  "def-a1-space-point-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 07TY (lemma-support-covering), proof, with zero detection expanded and support independence made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an etale scheme chart U to an algebraic space X the support of a pulled back quasi coherent module equals the inverse image of its geometric stalk support",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support_comap\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : Y.IdealSheafData) (f : X ⟶ Y), (I.comap f).support = I.support.preimage ⋯\", \"doc\": \"For a scheme $Y$ with ideal sheaf data $\\\\mathcal{I}$ defining a closed subscheme $Z \\\\subset Y$, and a morphism $f: X \\\\to Y$, the support of the inverse image ideal sheaf data $\\\\mathcal{I}.\\\\text{comap}\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support_map\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f],\\n  (I.map f).support = TopologicalSpace.Closeds.closure (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' ↑I.support)\", \"doc\": \"Given an ideal sheaf $\\\\mathcal{I}$ on a scheme $X$ and a quasi-compact morphism $f: X \\\\to Y$, the support of the ideal sheaf $\\\\mathcal{I}.\\\\text{map}(f)$ on $Y$ is equal to the topological closure of t\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  Set.range ⇑(CategoryTheory.ConcreteCategory.hom (CategoryTheory.CategoryStruct.comp (I.glueDataObjι U) (↑U).ι).base) =\\n    ↑I.support ∩ ↑↑U\", \"doc\": \"For a scheme $X$ with an ideal sheaf $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, the image of the composition of the gluing morphism $\\\\mathcal{I}.\\\\text{glueDataObj}\\\\iota(U)$ with the incl\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (ideal : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U)))\\n  (map_ideal_basicOpen :\\n    ∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n      Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (ideal U) =\\n  \", \"doc\": \"For a scheme $X$, given compatible ideals $\\\\mathfrak{a}_U$ on affine open subsets $U \\\\subseteq X$ and a support set defined as the intersection $\\\\bigcap_U V(\\\\mathfrak{a}_U)$ of their zero loci, the su\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.range_subset_ker_support\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base) ⊆ ↑(AlgebraicGeometry.Scheme.Hom.ker f).support\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes, the image of $ f $ (as a subset of $ Y $) is contained within the support of the kernel ideal sheaf associated with $ f $. This means every point in the image \"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.support_ker\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f],\\n  ↑(AlgebraicGeometry.Scheme.Hom.ker f).support = closure (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"For any quasi-compact morphism $ f: X \\\\to Y $ of schemes, the support of the kernel sheaf of $ f $ is equal to the closure of the image of $ f $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits; scheme ideal-sheaf zero loci, ring module support, and generic quasi-coherent predicates do not state this assertion for module geometric stalks on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of a quasi coherent sheaf at a geometric point of an algebraic space is equivalent to vanishing of its ordinary stalk on an etale scheme chart",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero\", \"module\": \"Mathlib/Geometry/RingedSpace/Basic\", \"type\": \"∀ (X : AlgebraicGeometry.RingedSpace) (U : TopologicalSpace.Opens ↑↑X.toPresheafedSpace)\\n  (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↥U),\\n  (CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U ↑x ⋯)) f = 0 →\\n    ∃ V i, ∃ (_ : ↑x ∈ V), (CategoryTheory.ConcreteCategory.hom (X.presheaf.map i.op))\", \"doc\": \"For a ringed space $X$, if the germ of a section $f$ over an open set $U$ at a point $x \\\\in U$ is zero in the stalk $\\\\mathcal{O}_{X,x}$, then there exists an open neighborhood $V \\\\subseteq U$ of $x$ s\"}\n  {\"name\": \"AlgebraicGeometry.stalkMap_injective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine Y] (x : ↥X),\\n  (∀ (g : ↑(Y.presheaf.obj (Opposite.op ⊤))),\\n      (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\\n            ((CategoryTheory.ConcreteCategory.hom (Y.presheaf.Γgerm ((Category\", \"doc\": \"Let $X$ and $Y$ be schemes, and let $f : X \\to Y$ be a morphism of schemes. If $Y$ is affine and for every germ $g$ in the stalk of $Y$'s structure sheaf at $f(x)$, the condition $f_{\\text{stalk}}(x)(g)\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [∀ (x : ↥X), IsReduced ↑(X.presheaf.stalk x)], AlgebraicGeometry.IsReduced X\", \"doc\": \"If for every point $ x $ in a scheme $ X $, the stalk of the structure sheaf at $ x $ is a reduced ring (i.e., contains no nonzero nilpotent elements), then the scheme $ X $ is reduced.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_stalk_of_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsReduced X] (x : ↥X), IsReduced ↑(X.presheaf.stalk x)\", \"doc\": \"For any reduced scheme $ X $, the stalk of its structure sheaf at every point $ x \\\\in X $ is a reduced ring, meaning it contains no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_eq_zero_iff_notMem_basicOpen\", \"module\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace) (x : ↑X.toTopCat) (f : ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  (CategoryTheory.ConcreteCategory.hom (X.Γevaluation x)) f = 0 ↔ x ∉ X.toRingedSpace.basicOpen f\", \"doc\": \"For a locally ringed space $X$, a point $x \\\\in X$, and a global section $f$ of the structure sheaf $\\\\mathcal{O}_X$, the evaluation of $f$ at $x$ in the residue field $\\\\kappa(x)$ equals zero if and onl\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X)\\n  (U : X.Opens) (hU : (CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R) ∈ U),\\n  CategoryTheory.CategoryStruct.comp\\n      (X.presheaf.germ U ((CategoryTheory.ConcreteC\", \"doc\": \"Let $f: \\\\operatorname{Spec}(R) \\\\to X$ be a morphism from the spectrum of a local commutative ring $R$ to a scheme $X$. Let $p \\\\in \\\\operatorname{Spec}(R)$ be the closed point, and let $x = f(p)$ be its\"}\n  {\"name\": \"ModuleCat.Tilde.toStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) → (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) → ModuleCat.of R ↑M ⟶ M.tildeInModuleCat.stalk x\", \"doc\": \"For a point $ x $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, this defines the canonical morphism from the module $ M $ (viewed as an object in the category of $ R $-modules) to the stalk of the\"}\n  {\"name\": \"AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X} (x : ↥U) {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n  ↑x ∈ X.basicOpen s → ∀ {n : ℕ}, s ^ n * f = 0 → (CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U ↑x ⋯)) f = 0\", \"doc\": \"Let $ X $ be a scheme, $ U $ an open subset of $ X $, $ x $ a point in $ U $, and $ f, s $ sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $. If $ x $ lies in the basic open set $ X_{\\\\text{\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits; scheme ideal-sheaf zero loci, ring module support, and generic quasi-coherent predicates do not state this assertion for module geometric stalks on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*pullback|pullback.*support|support.*stalk|stalk.*support",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"290\", \"text\": \"lemma rankAtStalk_eq_zero_iff_notMem_support (p : PrimeSpectrum R) :\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"291\", \"text\": \"    rankAtStalk M p = 0 ↔ p ∉ support R M := by\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"298\", \"text\": \"lemma rankAtStalk_pos_iff_mem_support (p : PrimeSpectrum R) :\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"299\", \"text\": \"    0 < rankAtStalk M p ↔ p ∈ support R M :=\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"300\", \"text\": \"  Nat.pos_iff_ne_zero.trans (rankAtStalk_eq_zero_iff_notMem_support _).not_left\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"line\": \"77\", \"text\": \"  rw [comap, Scheme.Hom.support_ker, Pullback.range_fst, range_subschemeι,\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/Skyscraper.lean\", \"line\": \"17\", \"text\": \"where `*` is a terminal object of `C`. In terms of stalks, `𝓕` is supported at all specializations\"}\n  {\"file\": \"Mathlib/Topology/ContinuousMap/CompactlySupported.lean\", \"line\": \"847\", \"text\": \"noncomputable def pullback_monoidHom (f : CompactlySupportedContinuousMap β γ) (b : β) :\"}\n  {\"file\": \"Mathlib/Topology/ContinuousMap/CompactlySupported.lean\", \"line\": \"858\", \"text\": \"theorem pullback_monoidHom_def (f : CompactlySupportedContinuousMap β γ) (b : β) (a : α) :\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Extension.lean\", \"line\": \"50\", \"text\": \"noncomputable abbrev pullback (f : CompactlySupportedContinuousMap B E) (b : B) :\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Extension.lean\", \"line\": \"55\", \"text\": \"theorem pullback_def (f : CompactlySupportedContinuousMap B E) (b : B) (a : A) :\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Extension.lean\", \"line\": \"63\", \"text\": \"theorem integral_pullback_invFun_apply (f : CompactlySupportedContinuousMap B E) (b : B) :\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Extension.lean\", \"line\": \"121\", \"text\": \"        (H.pullback f b).integrable, ← setLIntegral_eq_of_support_subset]\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Extension.lean\", \"line\": \"230\", \"text\": \"    exact (pullback H ⟨f, hf2⟩ _).continuous.integral_pos_of_hasCompactSupport_nonneg_nonzero\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits; scheme ideal-sheaf zero loci, ring module support, and generic quasi-coherent predicates do not state this assertion for module geometric stalks on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|etale.*[Ss]upport|[Ss]upport.*etale",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"58\", \"text\": \"lemma etaleLocus_eq_compl_support :\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"59\", \"text\": \"    etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (H1Cotangent R A))ᶜ := by\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"72\", \"text\": \"  rw [etaleLocus_eq_compl_support, Set.subset_inter_iff, Set.subset_compl_comm,\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"75\", \"text\": \"    ← LocalizedModule.subsingleton_iff_support_subset, formallyEtale_iff]\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"83\", \"text\": \"  rw [etaleLocus_eq_compl_support, ← Set.compl_union, compl_eq_comm, Set.compl_univ, eq_comm,\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits; scheme ideal-sheaf zero loci, ring module support, and generic quasi-coherent predicates do not state this assertion for module geometric stalks on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale pullback to a scheme chart of an algebraic space preserves the support of a quasi coherent module",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support_comap\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Functorial\", \"type\": \"(I : Y.IdealSheafData) (f : X ⟶ Y) : (I.comap f).support = I.support.preimage f.continuous\", \"doc\": \"For a scheme $Y$ with ideal sheaf data $\\\\mathcal{I}$ defining a closed subscheme $Z \\\\subset Y$, and a morphism $f: X \\\\to Y$, the support of the inverse image ideal sheaf data $\\\\mathcal{I}.\\\\text{comap}\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).Additive\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to that over $ X $'s structure sheaf is additive, meaning it prese\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.of_isPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {UX UY : AlgebraicGeometry.Scheme} {iY : UY ⟶ Y}\\n  [AlgebraicGeometry.IsOpenImmersion iY] {iX : UX ⟶ X} {f' : UX ⟶ UY}, CategoryTheory.IsPullba\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target, then given a pullback square where the right morphism is an open immersion, if the original morphism $ f $ satisfies $ P $, then the pulled\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y S : Scheme} (f : X ⟶ S) (g : Y ⟶ S) [IsAffineHom g] [IsAffine X] : IsAffine (pullback f g)\", \"doc\": \"If $ X $ is an affine scheme and $ g $ is an affine morphism, then the pullback of $ f $ and $ g $ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits; scheme ideal-sheaf zero loci, ring module support, and generic quasi-coherent predicates do not state this assertion for module geometric stalks on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"support\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read hits; scheme ideal-sheaf zero loci, ring module support, and generic quasi-coherent predicates do not state this assertion for module geometric stalks on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*stalk|stalk.*support|support.*pullback|pullback.*support",
+   "results": "OK 14 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/Topology/Sheaves/Skyscraper.lean, Mathlib/Topology/ContinuousMap/CompactlySupported.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary Zariski stalks/localization, scheme ideal zero loci, ring spectra, or the definition of quasi-coherence; none is the algebraic-space geometric module stalk comparison or support assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The nonzero geometric stalk locus of a quasi coherent module agrees with Zariski support on an etale scheme chart",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.IdealSheafData.coe_support_ofIdealTop, AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff, Module.rankAtStalk_eq_zero_iff_notMem_support, AlgebraicGeometry.Scheme.IdealSheafData.supportSet_eq_iInter_zeroLocus, AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff_of_mem, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, Module.support_eq_zeroLocus, AlgebraicGeometry.Scheme.IdealSheafData.supportSet_inter",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary Zariski stalks/localization, scheme ideal zero loci, ring spectra, or the definition of quasi-coherence; none is the algebraic-space geometric module stalk comparison or support assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"support\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary Zariski stalks/localization, scheme ideal zero loci, ring spectra, or the definition of quasi-coherence; none is the algebraic-space geometric module stalk comparison or support assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Support of a quasi coherent module on an algebraic space pulls back to ordinary support on any etale scheme chart",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff, AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter, AlgebraicGeometry.Scheme.IdealSheafData.support_comap, AlgebraicGeometry.Scheme.Hom.support_ker, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary Zariski stalks/localization, scheme ideal zero loci, ring spectra, or the definition of quasi-coherence; none is the algebraic-space geometric module stalk comparison or support assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-noetherian-coherent-support",
+  "date": "2026-10-23",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Coherent subquotients have closed support on a locally Noetherian algebraic space. Proof of closed support, Tag 07TZ(1): identify the inverse image of support on each etale scheme chart using Tag 07TY.",
+   "via": [
+    "lem-sfb-space-noetherian-coherent-support",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-etale-chart-support",
+  "worker": "stage1",
+  "summary": "Followed Stacks 07TY, retained the statement, reused the chart-ring and faithful-flatness nodes, and added only the missing 05VP module-stalk tensor comparison as a statement-only node. Expanded zero detection from the definition and checked representative independence using a fixed atlas point. No Lean writing or compilation.",
+  "blueprint": "Historical imported ancestry is null, as blueprint_refs.py ancestor reports. This realizes the Tag 07TY supporting input under coherent support (07TZ) in the existing alteration/dimension-one chain descending from det-thm-sf-ctf-stability-direct-images proof (3). Read the current latest blueprint; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-space-strict-local-flatness",
+    "why": "Use only its chart etale-local-ring/strict-henselization identification, a generic geometric tool."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Faithful flatness of a strict henselization is the commutative-algebra input to Tag 07TY; the unit supplies no alternative."
+   },
+   {
+    "node": "lem-sfb-etale-geometric-point-specified-lift",
+    "why": "Generic lifting of a fixed geometric point to a specified chart point, used to verify support independence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-space-strict-local-flatness",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sfb-etale-geometric-point-specified-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-4ff125cdd",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-4ff125cdd (reviewer sub-agent of L); spot-checked: I read the item and the new node in full against Stacks 07TY (spaces-morphisms l.2800-2828), 05VP (spaces-properties l.5287-5328), 04KF and 04KA. The item statement is unchanged from live and matches 07TY: any étale e from a scheme, quasi-coherent M, no finiteness or surjectivity. Step 1 uses the statements of three nodes: the new 05VP node (N⊗_A B ≅ M_x̄), strict-local-flatness (O_{X,x̄} ≅ O_{U,u}^sh for the residue embedding given by ū), and 07QM(1) faithful flatness. Step 2 is elementary: applying the faithfully-flat definition to the complex 0→N→0 gives N=0 ⇔ B⊗N=0, and the tensor swap follows from the universal property. Step 3 proves that vanishing does not depend on the geometric point, using a surjective atlas, a fixed v over x and the 05VN specified lift; this also covers points outside the image of e. Step 4 reads |e|(u) off the residue-field representative and concludes pointwise. The new node is exactly 05VP in the same generality, is statement-only (B1-B7 hold), and is strictly smaller than the item rather than a restatement. Duplicate search with rg -L for 05VP, 07TY, sh⊗ and geometric-stalk qcoh found nothing equivalent; space-geometric-stalk-tensor-calculus (0DKG/05VQ) compares geometric stalks only, never an ordinary chart stalk. Batch-5 flags: def-trf-algebraic-space and def-trf-space-quasi-coherent-module are general definitions, the Zariski/étale qcoh equivalence (03DX) is a generic descent lemma, and the two sfb lemmas reach trf only through the algebraic-space definition; none is part of the trace formula or Poincaré duality. The three tool_uses (04KF, 07QM, 05VN) are generic. No SGA citation, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceEtaleChartSupport",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_chart_moduleSupport",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceEtaleChartSupport.lean",
+  "statement": "theorem etale_chart_moduleSupport {S : Scheme.{u}} {X : AlgebraicSpace S} (M : X.QCoh) (T : X.EtaleSite) : {x : X.etaleForget.obj T | ¬ Subsingleton (((X.schemeRestriction T).obj M.obj).presheaf.stalk x)} = schemePointMap T.obj.hom ⁻¹' moduleSupport M.obj",
+  "branch": "newtargets-dag",
+  "by": "Q122",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20aa68a54",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Clause-by-clause match with 07TY. S: Scheme.{u}; X: AlgebraicSpace S; M: X.QCoh (Mathlib IsQuasicoherent, no finiteness); Supp_X = landed moduleSupport (geometric nonzero germ, independent of the chosen point); chart = X.EtaleSite (scheme + representable etale, no surjectivity); M_U = schemeRestriction (restriction to Zariski opens with the canonical ring comparison = inverse of the 03DX equivalence); ordinary stalk via ¬Subsingleton of the Ab stalk, the same carrier as the recorded PresheafOfModules.stalkObj; |e| = schemePointMap; literal set equality in the source direction. Node diff vs side-live: only the lean record plus 2 stmt_deps (def-sfb-space-module-support, def-trf-space-module-scheme-restriction), both landed with lean records, so allowed by brief §5. Edge cases (empty U, M=0, non-surjective chart, identity chart, one universe u) covered. Docstrings give source, blueprint and the 4-step proof; sorry only; no defs; stmt_dep modules public, proof_dep modules plain imports; report has both sections. No duplicate found. Not compiled per instructions (worker compile clean). Advisory: schemePointMap owner def-a1-algebraic-space-point-classes reached transitively via def-a1-space-point-topology."
+ }
+}

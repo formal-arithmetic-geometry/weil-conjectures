@@ -22,6 +22,16 @@ minutes may not be here yet. The options are those of lean/lakefile.toml; `autoI
 is not of the source library (a path with /WeilConjectures/ or /Comparator/, or a file name starting with WeilConjectures_),
 as the server's tools/lean_file.sh does."""
 import json, os, pathlib, re, subprocess, sys, tempfile, time
+def _thp_off():
+    # 2026-10-26 (the human): PR_SET_THP_DISABLE (prctl 41) for the Lean child, inherited across exec. Lean's heap is
+    # madvised for huge pages, and every fault then ran synchronous compaction (92-99% failed), which showed as
+    # memory pressure (PSI ~45%) that kept the slot governors from adding slots. Fail-safe: the compile runs anyway.
+    try:
+        import ctypes
+        ctypes.CDLL(None, use_errno=True).prctl(41, 1, 0, 0, 0)
+    except Exception:   # noqa: BLE001
+        pass
+
 H = pathlib.Path.home(); P = pathlib.Path(os.environ.get("LCOMPILE_LEAN", str(H / "weil-conjectures-sheaf" / "lean"))); BUILD = P / ".lake/build/lib/lean"
 ENV = dict(os.environ, PATH=str(H / ".elan" / "bin") + ":" + os.environ.get("PATH", ""))
 IMPORT = re.compile(r"^\s*(?:public\s+)?(?:meta\s+)?import\s+(?:all\s+)?(\S+)\s*$", re.M)
@@ -87,14 +97,29 @@ def local_artifacts(lb):
     return arts
 
 import contextlib, fcntl, shlex
-SLOTS = int(os.environ.get("NT_LCOMPILE_SLOTS", "24"))   # measured ~1.2 cores each on this 64-core machine
+SLOTS = int(os.environ.get("SHEAF_COMPILE_SLOTS", "18"))   # 2026-10-22 (the human): stage-2 compiles share the worker compile slots
 LOCAL_WAIT = float(os.environ.get("LCOMPILE_LOCAL_WAIT", "3"))   # seconds to wait for a local slot before going remote
+# 2026-10-26 (the human): `timeout` stays the acceptance limit (60 s for a delivered file: a compile that takes longer is
+# NOT accepted, exit 124); Lean is stopped only at RUN_LIMIT (300 s, never below `timeout`), so the slow declaration
+# finishes and its messages reach the worker instead of a bare timeout.
+RUN_LIMIT = int(os.environ.get("SHEAF_FILE_RUN_LIMIT", "120"))
+def over_note(dt, timeout, run_limit):
+    return (f"NOT ACCEPTED: this compile took {dt:.0f} s > {timeout} s, the limit for one file. It was allowed to run up to "
+            f"{run_limit} s only so that the slow declarations finish and report (the messages above); the cause is "
+            "usually a definition that is expensive to unfold: change it, not the limit.")
 SERVER = "ubuntu@the project server"; SSH_KEY = str(pathlib.Path.home() / "weil_formal.pem")
 def take_slot():
     """A free local compile slot (a locked file), or None. At most SLOTS compiles at once on this machine."""
-    d = pathlib.Path.home() / "weil-nt-overlay" / "slots"; d.mkdir(parents=True, exist_ok=True)
-    for i in range(SLOTS):
-        f = open(d / f"{i}", "w")
+    # 2026-10-22 (the human: the global build starved): one slot pool for every single-file compile on this machine,
+    # the one tools/remote_compile_set.py uses (local/compile-slots/<i>.lock); before, stage 2 had its own 24 slots
+    d = pathlib.Path.home() / "weil-conjectures-sheaf" / "local" / "compile-slots"; d.mkdir(parents=True, exist_ok=True)
+    n = SLOTS
+    try:   # 2026-10-24 (the human): the same cap as the worker compiles (~/cc1/slot-governor.py writes it); stage 2 had
+        n = max(1, int((d.parent / "compile-slots.cap").read_text()))   # kept 18 slots while the cap was 8
+    except (OSError, ValueError):
+        pass
+    for i in range(n):
+        f = open(d / f"{i}.lock", "a")
         try:
             fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB); return f
         except OSError:
@@ -122,7 +147,7 @@ def run(f, timeout=60, out=None, probe=""):
     written there too, as a module others can import). `probe`: text appended to a temporary copy (deliver3.py)."""
     f = pathlib.Path(f).resolve(); root = lean_root(f); t = time.time()
     lb = pathlib.Path(out) if out else (root.parent / ".lbuild" if root and (root.parent / ".lbuild").is_dir() else None)
-    cmd = ["lean", *base_opts()] + ([] if upstream(f) else ["-DautoImplicit=false"])
+    cmd = ["lean", "-j1", *base_opts()]   # one core per single-file compile (the human, 2026-10-22) + ([] if upstream(f) else ["-DautoImplicit=false"])
     src = f
     if probe:
         src = f.with_name(f.stem + "__probe.lean"); src.write_text(f.read_text() + probe)
@@ -148,8 +173,11 @@ def run(f, timeout=60, out=None, probe=""):
                     return r[0], r[1]
                 waited = time.time() + 7                       # the server is busy too: try it again in about 10 s
             time.sleep(1); lock = take_slot()
+        run_limit = max(timeout, RUN_LIMIT)
         try:
-            p = subprocess.run(["nice", "-n", "19"] + cmd + [str(src)], cwd=P, env=dict(ENV, LEAN_PATH=lean_path(), LEAN_NUM_THREADS="1"), capture_output=True, text=True, timeout=timeout)
+            t_run = time.time()
+            p = subprocess.run(["nice", "-n", "19", "stdbuf", "-oL", "-eL"] + cmd + [str(src)], preexec_fn=_thp_off, cwd=P, env=dict(ENV, LEAN_PATH=lean_path(), LEAN_NUM_THREADS="1"), capture_output=True, text=True, timeout=run_limit)
+            dt_run = time.time() - t_run
         finally:
             fcntl.flock(lock, fcntl.LOCK_UN); lock.close()
     except subprocess.TimeoutExpired as exc:
@@ -158,11 +186,13 @@ def run(f, timeout=60, out=None, probe=""):
         partial = "".join(value.decode(errors="replace") if isinstance(value, bytes) else value or ""
                           for value in (exc.stdout, exc.stderr))
         return 124, partial + ("\n" if partial and not partial.endswith("\n") else "") + \
-            f"timeout after {timeout} s: the fault is usually a definition that is expensive to unfold, not the limit"
+            f"NOT ACCEPTED: timeout after {max(timeout, RUN_LIMIT)} s, the longest a compile may run (the limit for one file is {timeout} s): the fault is usually a definition that is expensive to unfold, not the limit"
     finally:
         if setup: setup.unlink(missing_ok=True)
         if probe: src.unlink(missing_ok=True)
     note = f"(with the modules compiled into {lb}) " if lb and not out and arts else ""
+    if dt_run > timeout:
+        return p.returncode or 124, (p.stdout + p.stderr) + f"\n{note}[{time.time()-t:.1f} s]\n" + over_note(dt_run, timeout, max(timeout, RUN_LIMIT))
     return p.returncode, (p.stdout + p.stderr) + f"\n{note}[{time.time()-t:.1f} s]"
 def order(files):
     """The files, a module after the siblings it imports."""

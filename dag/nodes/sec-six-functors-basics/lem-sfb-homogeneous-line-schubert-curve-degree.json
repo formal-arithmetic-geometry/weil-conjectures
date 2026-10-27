@@ -1,0 +1,317 @@
+{
+ "id": "lem-sfb-homogeneous-line-schubert-curve-degree",
+ "kind": "statement",
+ "title": "Homogeneous line bundles have coroot degree on simple Schubert curves",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a semisimple simply connected $F$-group scheme [def-sc-group-scheme]: smooth, connected, affine and of finite type, with no nontrivial smooth connected solvable normal subgroup, and such that every surjective homomorphism from a semisimple group with finite central kernel is an isomorphism. Solvable means that successive commutator subgroup schemes become trivial; central means commuting after every scalar extension. Fix a split maximal torus $T\\subseteq B\\subseteq G$, where $B$ is a Borel subgroup. Use the character lattice $X^*(T)$, positive roots in $\\operatorname{Lie}(B)$, simple roots $\\alpha_1,\\ldots,\\alpha_r$, their coroots, and $p:B\\to T$ of [lem-sfb-reductive-borel-pair-structure]. Write $Q=G/B$ and $W=N_G(T)(F)/T(F)$, choose representatives $n_w$, and use $w_0$ and the open cell $C=Un_{w_0}B/B$ of [lem-sfb-bruhat-longest-cell-charts], where $U$ is the unipotent radical of $B$. Set $s_j=s_{\\alpha_j}\\in W$, the reflection of [lem-sfb-reductive-rank-one-reflections] acting by $s_{\\alpha_j}(x)=x-\\langle x,\\alpha_j^\\vee\\rangle\\alpha_j$, and $R_j=\\overline{Bn_{s_j}B/B}_{\\mathrm{red}}\\subseteq Q$. For any character $\\lambda\\in X^*(T)$ put $M_\\lambda=\\mathcal L_{-\\lambda\\circ p}$ [lem-sfb-homogeneous-line-bundle-sections], with quotient action $(g,z)\\cdot b=(gb,\\lambda(p(b))z)$. Let $B_2\\subseteq\\operatorname{SL}_{2,F}$ be the upper triangular subgroup. There is a homomorphism $v_j:\\operatorname{SL}_{2,F}\\to G$ whose restriction to $\\operatorname{diag}(t,t^{-1})$ is $\\alpha_j^\\vee(t)$, with $v_j(B_2)\\subseteq B$, inducing an isomorphism $$\\overline v_j:\\operatorname{SL}_{2,F}/B_2\\xrightarrow{\\sim}R_j.$$ Identify $\\operatorname{SL}_{2,F}/B_2$ with $\\mathbf P^1_F$ by sending $gB_2$ to the line spanned by its first column. For $m=\\langle\\lambda,\\alpha_j^\\vee\\rangle$ one has $$\\overline v_j^*(M_\\lambda|_{R_j})\\simeq\\mathcal O_{\\mathbf P^1_F}(m),\\qquad \\deg(M_\\lambda|_{R_j})=\\langle\\lambda,\\alpha_j^\\vee\\rangle,$$ where the twists are tensor powers of the dual tautological line for $m\\geq0$ and their duals for $m<0$, and degree means [def-pc-degree-line-bundle]. No dominance or characteristic hypothesis is imposed on $\\lambda$. For $r=0$ there are no assertions indexed by $j$.",
+ "source": {
+  "document": "literature/brion-kumar-frobenius-splitting.pdf",
+  "place": "Section 2.1, the minimal parabolics P_i and Schubert curves X_(s_i), printed pp.62--63, equation (7); the degree computation underlying Exercise 2.2.E(3), printed p.71. Rank-one subgroup construction: Milne iAG2017, Theorem 21.11(b),(e), printed pp.429--430, and paragraph 21.24, printed p.432 (using 20.32). The statement records the rank-one restriction computation separately from the Picard basis. Local PDF WANTED; primary author-hosted PDF read online.",
+  "url": "https://www-fourier.univ-grenoble-alpes.fr/~mbrion/fbook.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-bruhat-longest-cell-charts",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-homogeneous-line-bundle-sections",
+  "def-pc-degree-line-bundle"
+ ],
+ "proof": [
+  {
+   "text": "Fix an index $j$, put $\\alpha=\\alpha_j$, and take $I=\\{\\alpha\\}$ in [lem-sfb-standard-parabolic-levi-charts]. Write $H=L_I$, $B_H=B\\cap H$, $P=P_I$ and $R=R_I$. This gives the root system $\\{\\alpha,-\\alpha\\}$ in $H$, positive root $\\alpha$ in $B_H$, and $P=R\\rtimes H$, $B=R\\rtimes B_H$. The rank-one construction [lem-sfb-reductive-rank-one-reflections] gives $v:\\operatorname{SL}_2\\to H\\subseteq G$ with central kernel, image $D=H^{\\mathrm{der}}$, upper root subgroup isomorphic to $U_\\alpha$, and $v(\\operatorname{diag}(a,a^{-1}))=\\alpha^\\vee(a)$. Every upper triangular determinant-one matrix is a product of a diagonal matrix and an upper unitriangular matrix. Both factors map into $B_H$, so $v(B_2)\\subseteq B$.",
+   "uses": [
+    "lem-sfb-standard-parabolic-levi-charts",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.11(b)--(e), pp.429--430; 21.89--21.91, pp.453--454."
+   }
+  },
+  {
+   "text": "The matrix models of [lem-sfb-split-rank-one-classification] identify $(H,T)$ with a torus times $\\operatorname{SL}_2$, $\\operatorname{PGL}_2$ or $\\operatorname{GL}_2$, and identify $D$ with the corresponding special/projective special linear factor. Choose the upper orientation to be $\\alpha$. In these coordinates $B_H$ is the upper triangular subgroup: apply [lem-sfb-regular-cocharacter-borel-description] to $H$; for a regular cocharacter positive on $\\alpha$, the matrix limit condition says precisely that the lower-left entry vanishes. Put $B_D=D\\cap B_H$. The map $D/B_D\\to H/B_H$ is an isomorphism of fppf coset sheaves. Indeed torus factors lie in $B_H$; in the $\\operatorname{GL}_2$ case an invertible matrix $g$ is $[g\\operatorname{diag}(\\det(g)^{-1},1)]\\operatorname{diag}(\\det(g),1)$, with the first factor in $\\operatorname{SL}_2$ and the second upper triangular; equality of two cosets is exactly that their ratio lies in $D\\cap B_H$. These formulas also give the inverse locally in the projective matrix quotient.",
+   "uses": [
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-regular-cocharacter-borel-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "20.33, pp.419; 21.29--21.32, pp.433--435; elementary matrix calculation of the rank-one quotient."
+   }
+  },
+  {
+   "text": "The central kernel $K$ of $v$ is contained in $\\mu_2\\subseteq\\operatorname{SL}_2$: commuting with the universal matrices $I+xE_{12}$ and $I+yE_{21}$ forces a central matrix to be scalar, and determinant one forces its scalar square to be one. This works over every algebra, including characteristic two. Thus $K$ is finite and diagonalizable by [lem-sfb-split-torus-subgroups-diagonalizable]. The image-factorization theorem [lem-sfb-affine-homomorphism-flat-image] makes $v:\\operatorname{SL}_2\\to D$ faithfully flat (its image is $D$ by Step 1). Apply [lem-sfb-central-isogeny-borel-root-compatibility] to this map and the pair in $D$. The preimage $v^{-1}(B_D)$ is a Borel containing $B_2$, hence equals $B_2$. Here $B_2$ is indeed a Borel: the regular cocharacter $a\\mapsto\\operatorname{diag}(a,a^{-1})$ has limit subgroup exactly the upper triangular matrices, by [lem-sfb-regular-cocharacter-borel-description]. The quotient isomorphism of [lem-sfb-multiplicative-isogeny-borel-comparison] now gives $\\operatorname{SL}_2/B_2\\simeq D/B_D\\simeq H/B_H$, induced by the actual $v$.",
+   "uses": [
+    "lem-sfb-split-torus-subgroups-diagonalizable",
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-central-isogeny-borel-root-compatibility",
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-multiplicative-isogeny-borel-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "18.18, p.391; 20.32--20.33, pp.418--419; 21.11(b)--(e), pp.429--430. Scheme-theoretic kernels retained."
+   }
+  },
+  {
+   "text": "The first-column map identifies $\\operatorname{SL}_2/B_2$ with $\\mathbf P^1_F$. On $U_0$ with coordinates $[1:t]$ and $U_1$ with coordinates $[s:1]$ take the determinant-one lifts $$a_0(t)=\\begin{pmatrix}1&0\\\\ t&1\\end{pmatrix},\\qquad a_1(s)=\\begin{pmatrix}s&-1\\\\1&0\\end{pmatrix}.$$ They are regular sections of the first-column map. Two determinant-one matrices with the same first-column line differ on the right by an upper triangular determinant-one matrix, after choosing a local generator of that line. Thus these two sections give mutually inverse maps on the fppf quotient, with overlap $s=t^{-1}$, and identify the quotient as a scheme, not just its field-valued points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 18.17, p.391; explicit standard-chart verification of the first-column quotient."
+   }
+  },
+  {
+   "text": "The semidirect products in [lem-sfb-standard-parabolic-levi-charts] identify $P/B$ with $H/B_H$: send $rhB$ to $hB_H$; multiplying on the right by $r'b$ changes this to $hbB_H$, since $R$ is normal and contained in $B$. Conversely $hB_H\\mapsto hB$ is inverse. Quotients and local lifts are scheme-theoretic by [lem-sfb-homogeneous-orbit-quotient-geometry]. The map $P/B\\to G/B$ is a monomorphism: locally lift two test-scheme points to $P$; their equal images mean that their ratio lies in $B$, which is precisely equality in $P/B$. The source $H/B_H$ is proper by [lem-sfb-reductive-borel-pair-structure], and $G/B$ is separated by the same properness clause. Therefore [lemma-nagata-proper-to-separated-target] makes this map proper, and [lem-pc-proper-monomorphism-closed] makes it a closed immersion. Its source is reduced, since by Steps 3--4 it is $\\mathbf P^1_F$.",
+   "uses": [
+    "lem-sfb-standard-parabolic-levi-charts",
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lemma-nagata-proper-to-separated-target",
+    "lem-pc-proper-monomorphism-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.90--21.91, pp.453--454; quotient construction 18c; closed-image argument using the cited proper-monomorphism criterion."
+   }
+  },
+  {
+   "text": "Under $P/B=H/B_H$, the normal subgroup $R\\subset B$ acts trivially, so the $B$-orbits are the $B_H$-orbits. In the three matrix models of [lem-sfb-split-rank-one-classification], upper triangular matrices on first-column lines have exactly the fixed line $[1:0]$ and its complement $\\{[s:1]\\}$, the latter an affine-line orbit. The image of $w=\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}$ is a representative of $s_\\alpha$: conjugating the diagonal sends $a$ to $a^{-1}$ and in the rank-one models it normalizes the full diagonal torus $T$, giving the unique nonidentity normalizer class of [lem-sfb-reductive-rank-one-reflections]. Hence its $B$-orbit in $G/B$ is exactly $Bn_{s_j}B/B$; any other chosen representative differs by $T\\subset B$. This orbit is dense in the closed reduced image from Step 5, since it is the complement of one point in $\\mathbf P^1$. Its reduced closure is therefore precisely that image. This proves $\\overline v_j:\\operatorname{SL}_2/B_2\\simeq R_j$.",
+   "uses": [
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.11(d), p.429--430; 21.91, pp.453--454. Brion--Kumar §2.1, pp.62--63, gives the same minimal-parabolic/Schubert-curve identification."
+   }
+  },
+  {
+   "text": "Write $m=\\langle\\lambda,\\alpha^\\vee\\rangle$. By [lem-sfb-reductive-borel-pair-structure] the pairing means $\\lambda(\\alpha^\\vee(a))=a^m$. On $B_2$, the character $\\lambda p v$ is therefore $a^m$ on $\\operatorname{diag}(a,a^{-1})$ and is one on the upper unitriangular subgroup, since its image lies in $U_\\alpha\\subseteq R_u(B)$ by [lem-sfb-borel-root-product-coordinates]. Pulling back the quotient bundle of [lem-sfb-homogeneous-line-bundle-sections] along $\\overline v_j$ gives the bundle with quotient relation $(g,z)\\sim(gb,a^m z)$ for $b=\\begin{pmatrix}a&c\\\\0&a^{-1}\\end{pmatrix}$. Explicitly, its map to the pullback sends $[g,z]$ to $(gB_2,[v(g),z])$. On the two sections $a_i$ of Step 4 it is the identity on the fibre coordinate, hence an isomorphism; this verifies pullback compatibility directly from the quotient relation.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-homogeneous-line-bundle-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "18c, pp.389--391; quotient construction and Example 18.17. Explicit pullback of the associated bundle."
+   }
+  },
+  {
+   "text": "On the overlap of the two charts, direct multiplication gives $$a_0(t)^{-1}a_1(t^{-1})=\\begin{pmatrix}t^{-1}&-1\\\\0&t\\end{pmatrix}.$$ Let $e_i=[a_i,1]$ be the local bundle frame. The quotient action in Step 7 gives $[a_1,t^{-m}]=[a_0,1]$, so $e_0=t^{-m}e_1$. This is exactly the transition of $\\mathcal O(m)$ in [def-pc-projective-space-twist]. To check the stated dual-tautological convention, the tautological frames $q_0=(1,t)$ and $q_1=(t^{-1},1)$ satisfy $q_0=tq_1$; their duals satisfy $q_0^*=t^{-1}q_1^*$. Tensor powers and duals give $t^{-m}$ for every integer $m$, proving the required isomorphism with precisely its asserted sign.",
+   "uses": [
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 18.17, p.391; explicit overlap calculation, using the cited definition of twists."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-projective-space-twist-cohomology] with $A=F$, $n=1$ and $d=m$. For $m\\geq0$ the degree-zero dimension is $m+1$ and all higher cohomology vanishes. For $m=-1$ every group is zero. For $m\\leq-2$ the only nonzero group is $H^1$, of dimension $-m-1$ (count the pairs of strictly negative exponents summing to $m$). Thus in all cases $\\chi(\\mathcal O(m))=m+1$ and $\\chi(\\mathcal O)=1$. Definition [def-pc-degree-line-bundle] gives $\\deg\\mathcal O(m)=m$. The isomorphism $\\overline v_j$ identifies the sheaves, their sections on every open, and therefore their cohomology and Euler characteristics, so $\\deg(M_\\lambda|_{R_j})=m$. There was no division by the characteristic or sign restriction on $m$. If $r=0$ there was no index to choose and all indexed assertions are vacuous.",
+   "uses": [
+    "lem-pc-projective-space-twist-cohomology",
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 01XS (section-cohomology-projective-space) and 01XT (lemma-cohomology-projective-space-over-ring); varieties.tex Tag 0AYR (definition-degree-invertible-sheaf)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-standard-parabolic-levi-charts",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-split-rank-one-classification",
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-split-torus-subgroups-diagonalizable",
+  "lem-sfb-affine-homomorphism-flat-image",
+  "lem-sfb-central-isogeny-borel-root-compatibility",
+  "lem-sfb-multiplicative-isogeny-borel-comparison",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lemma-nagata-proper-to-separated-target",
+  "lem-pc-proper-monomorphism-closed",
+  "lem-sfb-borel-root-product-coordinates",
+  "lem-sfb-homogeneous-line-bundle-sections",
+  "def-pc-projective-space-twist",
+  "lem-pc-projective-space-twist-cohomology",
+  "def-pc-degree-line-bundle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Rank-one construction 21.11 and 21.24; standard parabolics 21.89--21.91; associated line bundles 18c and Example 18.17. Expanded chart argument and assembly, with Stacks 01XT and 0AYR for degree. Brion--Kumar local PDF WANTED; online §2.1 checked."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The degree of a homogeneous line bundle on a simple Schubert curve in G mod B is the pairing of its character with the simple coroot",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.Base.height\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Base\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] → {P : RootPairing ι R M N} → P.Base\", \"doc\": \"For each index $i$ in the indexing set $\\\\iota$, the height is defined as the sum of integer coefficients in the linear combination representing the root $\\\\Phi(i)$ in terms of the base roots. Specifica\"}\n  {\"name\": \"RootPairing.chainTopCoeff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Chain\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [Finite ι] →\\n          [inst : CommRing R] →\\n            [CharZero R] →\\n              [IsDomain R] →\\n                [inst_3 : AddCommGroup M] →\\n                  [inst_4 : Module R M] →\\n                    [inst\", \"doc\": \"Given a root pairing $P$ and indices $i,j$, the value $\\\\text{chainTopCoeff}(i,j)$ is defined as follows: if the roots $\\\\alpha_i = P.\\\\text{root}(i)$ and $\\\\alpha_j = P.\\\\text{root}(j)$ are linearly indep\"}\n  {\"name\": \"LieAlgebra.IsKilling.apply_coroot_eq_cast'\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] {H : LieSubalgebra K L}\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L] (α β\", \"doc\": \"For weights $\\\\alpha$ and $\\\\beta$ in the dual of a Cartan subalgebra $H$ of a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form, the evaluation of $\\\\beta$ on the coroot of $\\\\\"}\n  {\"name\": \"LieAlgebra.IsKilling.chainBotCoeff_add_chainTopCoeff\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] {H : LieSubalgebra K L}\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L] (α β\", \"doc\": \"For weights $\\\\alpha$ and $\\\\beta$ in the dual of a Cartan subalgebra of a Lie algebra $\\\\mathfrak{g}$ over a field with non-degenerate Killing form, the sum of the bottom chain coefficient $\\\\text{chainB\"}\n  {\"name\": \"LieAlgebra.IsKilling.apply_coroot_eq_cast\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] {H : LieSubalgebra K L}\\n  [inst_6 : H.IsCartanSubalgebra] [LieModule.IsTriangularizable K (↥H) L] (α β : LieMod\", \"doc\": \"For a weight $\\\\alpha$ in the dual of the Cartan subalgebra $H$ of a Lie algebra with non-degenerate Killing form, and for any weight $\\\\beta$ of a torsion-free, Noetherian Lie module $M$, the applicati\"}\n  {\"name\": \"LieAlgebra.IsKilling.chainBotCoeff_le_chainLength\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] {H : LieSubalgebra K L}\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L] (α β\", \"doc\": \"For any weights $\\\\alpha$ and $\\\\beta$ in the dual of a Cartan subalgebra of a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form, the chain bottom coefficient $\\\\text{chainBotC\"}\n  {\"name\": \"LieAlgebra.IsKilling.chainLength_of_eq_zsmul_add\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] {H : LieSubalgebra K L}\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L] (α β\", \"doc\": \"For weights $\\\\alpha$ and $\\\\beta$ in the dual of a Cartan subalgebra $H$ of a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form, if $\\\\beta'$ is a weight satisfying $\\\\beta' = \"}\n  {\"name\": \"LieAlgebra.IsKilling.chainTopCoeff_add_chainBotCoeff\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] {H : LieSubalgebra K L}\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L] (α β\", \"doc\": \"For two weights $\\\\alpha$ and $\\\\beta$ in the dual of a Cartan subalgebra $H$ of a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form, the sum of the chain top coefficient $\\\\te\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract root-pairing identities and characteristic-zero Lie coroots, not restriction of a homogeneous scheme line bundle to a rank-one flag curve"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restrict an associated character line bundle on a flag variety to SL2 mod B and compute its degree as a coroot pairing",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.IsKilling.rootSystem_pairing_apply\", \"module\": \"Mathlib.Algebra.Lie.Weights.RootSystem\", \"type\": \"(α β) : (rootSystem H).pairing β α = β.1 (coroot α.1)\", \"doc\": \"For any roots $\\\\alpha$ and $\\\\beta$ in the root system associated with a Lie algebra over a field with non-degenerate Killing form, the pairing $\\\\langle \\\\beta, \\\\alpha \\\\rangle$ equals the evaluation of \"}\n  {\"name\": \"RootPairing.pairing_eq_add_of_root_eq_smul_add_smul\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"{i j k l : ι} {x y : R} (h : P.root k = x • P.root i + y • P.root l) :\\n  P.pairing k j = x • P.pairing i j + y • P.pairing l j\", \"doc\": \"For indices $i, j, k, l$ and scalars $x, y$ in a commutative ring $R$, if the root $\\\\alpha_k = x \\\\cdot \\\\alpha_i + y \\\\cdot \\\\alpha_l$, then the pairing $\\\\langle \\\\alpha_k, \\\\alpha_j^{\\\\vee} \\\\rangle = x \\\\cd\"}\n  {\"name\": \"LieAlgebra.IsKilling.coroot\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \"(α : Weight K H L) : H\", \"doc\": \"For a weight $\\\\alpha$ in the dual of the Cartan subalgebra $H$, the coroot is defined as $2 \\\\cdot \\\\left(\\\\alpha(\\\\chi^{-1}(\\\\alpha))\\\\right)^{-1} \\\\cdot \\\\chi^{-1}(\\\\alpha)$, where $\\\\chi: H \\\\to H^*$ is the i\"}\n  {\"name\": \"IsSl2Triple.h_eq_coroot\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \"{α : Weight K H L} (hα : α.IsNonZero) {h e f : L} (ht : IsSl2Triple h e f) (heα : e ∈ rootSpace H α)\\n  (hfα : f ∈ rootSpace H (-α)) : h = coroot α\", \"doc\": \"Given a non-zero weight $\\\\alpha$ in the dual of a Cartan subalgebra $\\\\mathfrak{h}$ of a Lie algebra $\\\\mathfrak{g}$ with non-degenerate Killing form, and elements $h,e,f \\\\in \\\\mathfrak{g}$ forming an $\\\\\"}\n  {\"name\": \"RootPairing.restrictScalars_coe_coroot\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseChange\", \"type\": \"(i : ι) : (P.restrictScalars' K).coroot i = P.coroot i\", \"doc\": \"For each index $ i $, the coroot embedding of the root pairing after restricting scalars from $ L $ to $ K $ at $ i $ is equal to the original coroot embedding at $ i $. This equality demonstrates tha\"}\n  {\"name\": \"RootPairing.root_coroot_two\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (self : RootPairing ι R M N) (i : ι),\\n  (self.toLinearMap (self.root i)) (self.coroot i) = 2\", \"doc\": \"For any root pairing between $ R $-modules $ M $ and $ N $, and for each index $ i $, the evaluation of the linear functional associated with the root $ \\\\alpha_i $ (via the pairing) on the coroot $ \\\\a\"}\n  {\"name\": \"LieAlgebra.IsKilling.apply_coroot_eq_cast'\", \"module\": \"Mathlib.Algebra.Lie.Weights.RootSystem\", \"type\": \": β (coroot α) = ↑(chainLength α β - 2 * chainTopCoeff α β : ℤ)\", \"doc\": \"For weights $\\\\alpha$ and $\\\\beta$ in the dual of a Cartan subalgebra $H$ of a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form, the evaluation of $\\\\beta$ on the coroot of $\\\\\"}\n  {\"name\": \"LieAlgebra.IsKilling.root_apply_coroot\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \"{α : Weight K H L} (hα : α.IsNonZero) : α (coroot α) = 2\", \"doc\": \"For any non-zero weight $\\\\alpha$ in the dual of the Cartan subalgebra $H$, the evaluation of $\\\\alpha$ at its coroot satisfies $\\\\alpha(\\\\text{coroot}(\\\\alpha)) = 2$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract root-pairing identities and characteristic-zero Lie coroots, not restriction of a homogeneous scheme line bundle to a rank-one flag curve"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coroot\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"LieAlgebra.corootSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Cartan\", \"type\": \" {R : Type u_1} {L : Type u_2} [CommRing R] [LieRing L] [LieAlgebra R L] {H : LieSubalgebra R L} [LieRing.IsNilpotent ↥H] [H.IsCartanSubalgebra] [IsNoetherian R L] (α : ↥H → R) : LieIdeal R ↥H\", \"doc\": \"Given a root `α` relative to a Cartan subalgebra `H`, this is the span of all products of\\nan element of the `α` root space and an element of the `-α` root space. Informally it is often\\ndenoted `⁅H(α),\"}\n  {\"name\": \"LieAlgebra.mem_corootSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Cartan\", \"type\": \" {R : Type u_1} {L : Type u_2} [CommRing R] [LieRing L] [LieAlgebra R L] {H : LieSubalgebra R L} [LieRing.IsNilpotent ↥H] [H.IsCartanSubalgebra] [IsNoetherian R L] (α : ↥H → R) {x : ↥H} : x ∈ LieAlgebra.corootSpace α ↔ ↑x ∈ Submodule.span R {x | ∃ y ∈ LieAlgebra.rootSpace H α, ∃ z ∈ LieAlgebra.rootS\", \"doc\": \"\"}\n  {\"name\": \"LieAlgebra.mem_corootSpace'\", \"module\": \"Mathlib.Algebra.Lie.Weights.Cartan\", \"type\": \" {R : Type u_1} {L : Type u_2} [CommRing R] [LieRing L] [LieAlgebra R L] {H : LieSubalgebra R L} [LieRing.IsNilpotent ↥H] [H.IsCartanSubalgebra] [IsNoetherian R L] (α : ↥H → R) {x : ↥H} : x ∈ LieAlgebra.corootSpace α ↔ x ∈ Submodule.span R {x | ∃ y ∈ LieAlgebra.rootSpace H α, ∃ z ∈ LieAlgebra.rootSp\", \"doc\": \"\"}\n  {\"name\": \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"module\": \"Mathlib.Algebra.Lie.Weights.Chain\", \"type\": \" {R : Type u_1} {L : Type u_2} [CommRing R] [LieRing L] [LieAlgebra R L] (M : Type u_3) [AddCommGroup M] [Module R M] [LieRingModule L M] [LieModule R L M] {H : LieSubalgebra R L} (α χ : ↥H → R) [H.IsCartanSubalgebra] [IsNoetherian R L] [IsDomain R] [IsPrincipalIdealRing R] [CharZero R] [Module.IsTo\", \"doc\": \"Given a (potential) root `α` relative to a Cartan subalgebra `H`, if we restrict to the ideal\\n`I = corootSpace α` of `H` (informally, `I = ⁅H(α), H(-α)⁆`), we may find an\\nintegral linear combination b\"}\n  {\"name\": \"LieAlgebra.IsKilling.coroot\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \" {K : Type u_2} {L : Type u_3} [LieRing L] [Field K] [LieAlgebra K L] [FiniteDimensional K L] {H : LieSubalgebra K L} [H.IsCartanSubalgebra] [LieAlgebra.IsKilling K L] (α : LieModule.Weight K (↥H) L) : ↥H\", \"doc\": \"The coroot corresponding to a root.\"}\n  {\"name\": \"LieAlgebra.IsKilling.corootSubmodule\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \" {K : Type u_2} {L : Type u_3} [LieRing L] [Field K] [LieAlgebra K L] [FiniteDimensional K L] {H : LieSubalgebra K L} [H.IsCartanSubalgebra] (α : LieModule.Weight K (↥H) L) : LieSubmodule K (↥H) L\", \"doc\": \"The coroot space of `α` viewed as a submodule of the ambient Lie algebra `L`.\\nThis represents the image of the coroot space under the inclusion `H ↪ L`.\"}\n  {\"name\": \"LieAlgebra.IsKilling.coe_coroot_mem_corootSubmodule\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \" {K : Type u_2} {L : Type u_3} [LieRing L] [Field K] [LieAlgebra K L] [FiniteDimensional K L] {H : LieSubalgebra K L} [H.IsCartanSubalgebra] [LieAlgebra.IsKilling K L] [LieModule.IsTriangularizable K (↥H) L] (α : LieModule.Weight K (↥H) L) : ↑(LieAlgebra.IsKilling.coroot α) ∈ LieAlgebra.IsKilling.co\", \"doc\": \"\"}\n  {\"name\": \"LieAlgebra.IsKilling.coroot_eq_iff\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \" {K : Type u_2} {L : Type u_3} [LieRing L] [Field K] [LieAlgebra K L] [FiniteDimensional K L] {H : LieSubalgebra K L} [H.IsCartanSubalgebra] [LieAlgebra.IsKilling K L] [LieModule.IsTriangularizable K (↥H) L] [CharZero K] (α β : LieModule.Weight K (↥H) L) : LieAlgebra.IsKilling.coroot α = LieAlgebra.\", \"doc\": \"\"}\n  {\"name\": \"LieAlgebra.IsKilling.coroot_eq_zero_iff\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \" {K : Type u_2} {L : Type u_3} [LieRing L] [Field K] [LieAlgebra K L] [FiniteDimensional K L] {H : LieSubalgebra K L} [H.IsCartanSubalgebra] [LieAlgebra.IsKilling K L] [LieModule.IsTriangularizable K (↥H) L] [CharZero K] {α : LieModule.Weight K (↥H) L} : LieAlgebra.IsKilling.coroot α = 0 ↔ α.IsZero\", \"doc\": \"\"}\n  {\"name\": \"LieAlgebra.IsKilling.corootSpace_zero_eq_bot\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \" (K : Type u_2) (L : Type u_3) [LieRing L] [Field K] [LieAlgebra K L] [FiniteDimensional K L] (H : LieSubalgebra K L) [H.IsCartanSubalgebra] [LieAlgebra.IsKilling K L] : LieAlgebra.corootSpace 0 = ⊥\", \"doc\": \"\"}\n  {\"name\": \"LieAlgebra.IsKilling.coroot_neg\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \" {K : Type u_2} {L : Type u_3} [LieRing L] [Field K] [LieAlgebra K L] [FiniteDimensional K L] {H : LieSubalgebra K L} [H.IsCartanSubalgebra] [LieAlgebra.IsKilling K L] [LieModule.IsTriangularizable K (↥H) L] (α : LieModule.Weight K (↥H) L) : LieAlgebra.IsKilling.coroot (-α) = -LieAlgebra.IsKilling.c\", \"doc\": \"\"}\n  {\"name\": \"LieAlgebra.IsKilling.root_apply_coroot\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \" {K : Type u_2} {L : Type u_3} [LieRing L] [Field K] [LieAlgebra K L] [FiniteDimensional K L] {H : LieSubalgebra K L} [H.IsCartanSubalgebra] [LieAlgebra.IsKilling K L] [LieModule.IsTriangularizable K (↥H) L] [CharZero K] {α : LieModule.Weight K (↥H) L} (hα : α.IsNonZero) : α (LieAlgebra.IsKilling.co\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract root-pairing identities and characteristic-zero Lie coroots, not restriction of a homogeneous scheme line bundle to a rank-one flag curve"
+  },
+  {
+   "tool": "grep",
+   "query": "line.bundle.*degree|degree.*coroot|homogeneous.*line.bundle",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract root-pairing identities and characteristic-zero Lie coroots, not restriction of a homogeneous scheme line bundle to a rank-one flag curve"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A weight line bundle restricted to the projective line given by a minimal parabolic is O of the simple coroot pairing",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.Equiv.weightEquiv_one\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N),\\n  ↑(RootPairing.Equiv.weightEquiv P P 1) = LinearMap.id\", \"doc\": \"For a root pairing $ P $ over a commutative ring $ R $, the weight equivalence associated with the identity element of the monoid of equivalences from $ P $ to itself is the identity linear map on the\"}\n  {\"name\": \"RootPairing.GeckConstruction.coe_genWeightSpace_zero_eq_span_range_u\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [inst_8 : P.IsCrystallograp\", \"doc\": \"The generalized weight space associated with the zero weight function in the Geck construction of a root pairing is equal to the span of the images of the basis functions $ u $ constructed in this fra\"}\n  {\"name\": \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  {H : LieSubalgebra R L} (α χ : ↥H → R) [inst_7 : H.IsCartanSubalgebra] [inst_8\", \"doc\": \"Let $ R $ be a commutative ring that is an integral domain, a principal ideal ring, and has characteristic zero. Let $ M $ be a torsion-free, Noetherian $ R $-module. For a non-zero weight $ \\\\alpha : \"}\n  {\"name\": \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L]\\n  [inst_3 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_4 : H.IsCartanSubalgebra]\\n  [inst_5 : LieAlgebra.IsKilling K L] [inst_6 : LieModule.IsTriangularizable K (↥H) L] [inst_7 : CharZero K]\\n  (α\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form and a non-zero weight $\\\\alpha$, the $\\\\mathfrak{sl}_2$-submodule generated by the $\\\\mathfrak{sl}_2$-triple associated \"}\n  {\"name\": \"LieModule.coe_genWeightSpace_of_top\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (χ : L → R),\\n  ↑(LieModule.genWeightSpace M (\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and a weight function $\\\\chi : \\\\mathfrak{g} \\\\to R$, the generalized weight space associated with $\\\\chi\"}\n  {\"name\": \"LieModule.genWeightSpace_chainBotCoeff_sub_one_zsmul_sub\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {M : Type u_3}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsAddTorsionFree R] [inst_9 : IsDom\", \"doc\": \"Let $ R $ be a torsion-free commutative domain, $ L $ a nilpotent Lie algebra over $ R $, and $ M $ a torsion-free Noetherian Lie module over $ L $. For any non-zero linear functional $ \\\\alpha: L \\\\to \"}\n  {\"name\": \"LieAlgebra.IsKilling.chainBotCoeff_zero_right\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_6 : H.IsCartanSubalgebra]\\n  [LieModule.IsTriangularizable K (↥H) L] (α : LieModule.Weight \", \"doc\": \"For a non-trivial Lie algebra $ L $ and a non-zero linear functional $ \\\\alpha: L \\\\to R $, the coefficient $ \\\\text{chainBotCoeff}(\\\\alpha, 0) $ associated with the zero weight in the chain of generalize\"}\n  {\"name\": \"LieModule.genWeightSpace_neg_add_chainBot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {M : Type u_3}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsAddTorsionFree R] [inst_9 : IsDom\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and given a non-zero linear functional $\\\\alpha: L \\\\to R$ and a weight $\\\\beta$ of $M$, the generalized\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract root-pairing identities and characteristic-zero Lie coroots, not restriction of a homogeneous scheme line bundle to a rank-one flag curve"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a homogeneous character line bundle from a flag variety to a simple root SL2 flag curve is O of its coroot pairing",
+   "results": "Hits: RootPairing.prod_rootForm_smul_coroot_mem_range_domRestrict, LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup, LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero, LieAlgebra.IsKilling.apply_coroot_eq_cast', RootPairing.chainTopCoeff_if_one_zero, LieAlgebra.IsKilling.apply_coroot_eq_cast, RootPairing.GeckConstruction.coe_genWeightSpace_zero_eq_span_range_u, LieAlgebra.rootSpace_comap_eq_genWeightSpace",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not state the scheme flag-curve associated-line restriction or degree formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated line bundle of a torus character on SL2 modulo upper triangular matrices is the projective line twisting sheaf",
+   "results": "Hits: ModularForm.instModuleComplexOfHasDetOneFinOfNatNatReal, Subgroup.strictPeriods, ModularGroup.SLOnGLPos, ModularGroup.SL_to_GL_tower, UpperHalfPlane.SLAction, Subgroup.periods, Bundle.Trivial.symmₗ_trivialization, Matrix.SpecialLinearGroup.toLin'",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not state the scheme flag-curve associated-line restriction or degree formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Schubert\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not state the scheme flag-curve associated-line restriction or degree formula"
+  },
+  {
+   "tool": "grep",
+   "query": "Schubert|schubert|homogeneousLine|coroot.*degree|degree.*coroot",
+   "results": "Subdirectory AlgebraicGeometry. No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not state the scheme flag-curve associated-line restriction or degree formula"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fundamental-flag-boundary-sections",
+  "date": "2026-10-24",
+  "group": "Q31"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Geometry used before both characteristic cases: projectivity/smoothness and ampleness of M_(lambda+rho) and M_(lambda+2rho). Fundamental-weight divisor calculation used to construct affine nonvanishing opens. Supporting input: Homogeneous line bundles have coroot degree on simple Schubert curves.",
+   "via": [
+    "lem-sfb-fundamental-flag-boundary-sections",
+    "lem-sfb-strict-dominant-flag-line-ample",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-homogeneous-line-schubert-curve-degree",
+  "worker": "stage1",
+  "summary": "Retained every mathematical hypothesis and conclusion. Corrected literal doubled TeX escapes. Proved rank-one curve identification through existing Levi, rank-one matrix classification and central-isogeny quotient statements; computed the pulled-back character bundle on explicit SL2 sections and the degree from projective-space cohomology. No new nodes. Searched project Lean and whole blueprint; no attachment or duplicate.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) chain recorded in blueprint.from.place, through fundamental-flag-boundary-sections: rank-one restriction and coroot degree. Latest blueprint direct-image proof (3) was read; its high-level compactification route does not restate this algebraic-group calculation. The existing null nearest ancestor and via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-proper-to-separated-target",
+    "why": "Generic scheme/coherent-cohomology tool used with its exact hypotheses in Steps 5 or 9; does not replace the unit route or its rank-one calculation."
+   },
+   {
+    "node": "lem-pc-proper-monomorphism-closed",
+    "why": "Generic scheme/coherent-cohomology tool used with its exact hypotheses in Steps 5 or 9; does not replace the unit route or its rank-one calculation."
+   },
+   {
+    "node": "lem-pc-projective-space-twist-cohomology",
+    "why": "Generic scheme/coherent-cohomology tool used with its exact hypotheses in Steps 5 or 9; does not replace the unit route or its rank-one calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-proper-to-separated-target",
+  "lem-pc-proper-monomorphism-closed",
+  "lem-pc-projective-space-twist-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-61ce40519",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-61ce40519 (reviewer sub-agent of L); spot-checked: I read all 9 steps and every cited statement. No new nodes; first split of an unsplit item (no re-split note); statement change is only the doubled-TeX fix. Sign check: with M_λ=L_{−λp}, the SL2 sections satisfy f(gb)=λ(b)f(g); g11 and g21 span H0 for λ=ϖ, so the bundle is O(1) and m=1, and λ=−1 has no sections. I recomputed a0(t)^{-1}a1(1/t)=[[1/t,−1],[0,t]], which gives e0=t^{−m}e1 and matches def-pc-projective-space-twist e_i=(x_i/x_j)^d e_j. Step 9: χ(O(m))=m+1 in all three cases. Milne Thm 21.11 (b),(d),(e), pp.429–430, read locally: the coroot is v_α(diag), consistent with rank-one-reflections. Step 3 hypotheses hold: K⊆μ2 is finite diagonalizable, v is faithfully flat onto D, and maximality gives v^{-1}(B_D)=B2. Step 5: Nagata triangle and 04XV used with exact hypotheses. Step 6: v(w) represents s_α and its orbit is dense in the closed reduced image. No cycle. minimal-parabolic-line-cohomology (char p, B⁻ only) is not a duplicate; the downstream picard-basis node is rightly avoided. Tool use lem-pc-projective-space-twist-cohomology (generic, unit not on sk-thm-picard-pn) is accepted. Batch-5: the 8 flagged sfb citations reach only generic trf commutative-algebra/descent nodes (fppf covering base change, smooth fpqc descent, fg torsion-free free, flat tensor injection); none is part of the trace formula or Poincaré duality, so all are accepted. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.HomogeneousLineSchubertCurveDegree",
+  "declaration": "AlgebraicGeometry.homogeneousLine_schubertCurve_degree",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/HomogeneousLineSchubertCurveDegree.lean",
+  "statement": "theorem homogeneousLine_schubertCurve_degree {F : Type u} [Field F] [IsAlgClosed F] (G T B : Grp (Over (Spec (.of F)))) (hG : IsSemisimpleGroupScheme G.X) (hsc : ∀ (G' : Over (Spec (.of F))) [GrpObj G'], IsSemisimpleGroupScheme G' → ∀ (f : G' ⟶ G.X) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker f) (g : StandardGroupSchemes.affine F A ⟶ G'), (x ≫ GrpObj.kerι f) * g = g * (x ≫ GrpObj.kerι f)) → IsIso f) (iT : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (iB : B ⟶ G) (hB : IsBorelGroupScheme iB.hom.hom) (j : T ⟶ B) (hj : j ≫ iB = iT) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (aG : ModObj T.X G.X) (aB : ModObj T.X B.X) (haG : aG.smul = (iT.hom.hom ⊗ₘ 𝟙 G.X) ≫ GrpObj.conj G.X) (haB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (D : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) (base : D.Base) (hred : D.IsReduced) (hroot : ∀ α : Φ, D.root α = α.val) (hpair : ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (D.toLinearMap χ ν)) (hΦ : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T G aG χ.toMul ≠ ⊥) (hpos : ∀ α : Φ, base.IsPos α ↔ @TorusCharacterTangent.weightSpace F _ T B aB α.val.toMul ≠ ⊥) (p : B ⟶ T) (hp : j ≫ p = 𝟙 T) (Q : Over (Spec (.of F))) (π : G.X ⟶ Q) (hQ : IsProper Q.hom ∧ LocallyOfFiniteType Q.hom ∧ QuasiCompact Q.hom) (hπflat : Flat π.left) (hπsurj : Surjective π.left) (hπinv : (fst G.X B.X * (snd G.X B.X ≫ iB.hom.hom)) ≫ π = fst G.X B.X ≫ π) (hπtorsor : IsPullback (fst G.X B.X) (fst G.X B.X * (snd G.X B.X ≫ iB.hom.hom)) π π) (act : RankOneRoots.Weyl iT →* Aut T) (hact : ∀ (n : RankOneRoots.normalizer iT) (A : Over (Spec (.of F))) (t : A ⟶ T.X), t ≫ (act (QuotientGroup.mk n)).hom.hom.hom ≫ iT.hom.hom = (toUnit A ≫ n.val) * (t ≫ iT.hom.hom) * (toUnit A ≫ n.val)⁻¹) (s : base.support → RankOneRoots.Weyl iT) (hs : ∀ (α : base.support) (χ : RankOneRoots.Character T), (act (s α)).inv ≫ χ = (D.reflection α.val (Additive.ofMul χ)).toMul) (n : RankOneRoots.Weyl iT → RankOneRoots.normalizer iT) (hn : ∀ w, QuotientGroup.mk (n w) = w) : ∀ α : base.support, ∃ (v : RankOneRoots.SL2Hom G) (R : Over (Spec (.of F))) (iR : R ⟶ Q) (e : (ProjectiveLine (Spec (.of F))).asOver (Spec (.of F)) ≅ R), IsClosedImmersion iR.left ∧ IsReduced R.left ∧ Set.range iR.left = closure (Set.range (((iB.hom.hom * (toUnit B.X ≫ (n (s α)).val)) ≫ π).left)) ∧ (∀ (A : CommAlgCat.{u} F) (z : StandardGroupSchemes.affine F A ⟶ StandardGroupSchemes.multiplicative F) (g : Matrix.SpecialLinearGroup (Fin 2) A), g.val = !![RankOneRoots.multiplicativeValue A z, 0; 0, RankOneRoots.multiplicativeValue A z⁻¹] → v.app A g = z ≫ (D.coroot α.val).toMul.hom.hom ≫ iT.hom.hom) ∧ (∀ (A : CommAlgCat.{u} F) (g : Matrix.SpecialLinearGroup (Fin 2) A), g.val 1 0 = 0 → v.app A g ∈ RankOneRoots.pointImage iB (StandardGroupSchemes.affine F A)) ∧ (∀ (A : CommAlgCat.{u} F) (g : Matrix.SpecialLinearGroup (Fin 2) A), ∃ h : Ideal.span (Set.range (fun k : ULift.{u} (Fin 2) ↦ (Scheme.ΓSpecIso (.of A)).inv (g.val k.down 0))) = ⊤, ProjectiveSpace.homOfSections (StandardGroupSchemes.affine F A).hom (fun k : ULift.{u} (Fin 2) ↦ (Scheme.ΓSpecIso (.of A)).inv (g.val k.down 0)) h ≫ e.hom.left ≫ iR.left = (v.app A g ≫ π).left) ∧ ∀ (lam : RankOneRoots.Character T) (χ : RankOneRoots.Character B), χ.hom.hom = (p ≫ lam).hom.hom⁻¹ → ∀ P : AssociatedCharacterLineBundle.Presentation G B iB Q π χ, Nonempty ((Scheme.Modules.pullback e.hom.left).obj ((Scheme.Modules.pullback iR.left).obj P.L) ≅ ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of F)) (D.toLinearMap (Additive.ofMul lam) (D.coroot α.val))) ∧ @Scheme.Modules.degree F _ R.left ⟨R.hom⟩ ((Scheme.Modules.pullback iR.left).obj P.L) = D.toLinearMap (Additive.ofMul lam) (D.coroot α.val)",
+  "branch": "sheaf-dag",
+  "by": "Q142",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bc224dca",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Clause-by-clause check of homogeneousLine_schubertCurve_degree against the node and its dependencies: the setup (F, G, hsc, T, B, root datum, p, Q, π, Weyl action, s, n) matches reductive_borel_pair_structure, reductive_rankOne_reflections and bruhat_longest_cell_charts. v, R, iR and e are tied down by explicit conditions (diag→coroot, v(B2)⊆B, reduced closed immersion onto the closure of B n_s B/B, first-column homOfSections composite). M_λ = Presentation with χ = (p≫λ)⁻¹, giving action (gb, λ(p(b))z). Twist sign checked in SL2: λ=ϖ gives O(1) with x_i sections, degree +1. Degree is Scheme.Modules.degree with ⟨R.hom⟩. Universes all u; existing declarations reused; statement field verbatim; only the lean record was added; docstrings have the sources and nine proof steps; body is sorry only; report sections present. No findings."
+ }
+}

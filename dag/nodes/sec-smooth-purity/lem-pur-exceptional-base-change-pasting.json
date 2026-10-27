@@ -1,0 +1,297 @@
+{
+ "id": "lem-pur-exceptional-base-change-pasting",
+ "kind": "statement",
+ "title": "Canonical dualizing base-change mate under composition",
+ "statement": "Fix the finite coefficient setting [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\ge1$, and $\\Lambda=\\mathcal O_E/\\varpi_E^n$. All schemes are finite-type $k$-schemes, without absolute separatedness; all arrows are $k$-morphisms. Use $D^b_{ctf}$, the bounded constructible finite-Tor subcategory [def-weil-finite-tor-amplitude], on small pro-etale sites, and the derived pullback and tensor [def-weil-derived-pullback-tensor-hom]. For a separated finite-type arrow $u:T\\to U$, write $F_u=Ru_!$, $G_u=Ru^!$ for compact supports and its transported constructible exceptional right adjoint [def-weil-exceptional-inverse-image], $\\varepsilon_u:F_uG_u\\to1$ for its counit, and $\\omega_u=G_u\\Lambda_U$. Use the specified canonical tensor map $\\theta_{u,P}:Lu^*P\\otimes^L\\omega_u\\to G_uP$ and dualizing base-change map $\\beta_{u,v}$ of [def-pur-co-smoothness]; these maps are defined without assuming cohomological smoothness. All unit, symmetry and reassociation maps are the canonical derived ones.\n\nLet $X\\xrightarrow fY\\xrightarrow gZ$ be separated finite-type morphisms. Let $t:Z'\\to Z$ be arbitrary between finite-type $k$-schemes, put $Y'=Y\\times_ZZ'$ and $X'=X\\times_ZZ'$, and write $h:Y'\\to Y$, $s:X'\\to X$, $g':Y'\\to Z'$, $f':X'\\to Y'$ for the projections. For $u=f,g,gf$ use its compactification and the base-changed compactification, and the specified compact-support exchanges. Let $c:G_{gf}\\xrightarrow{\\sim}G_fG_g$ and $c':G_{g'f'}\\xrightarrow{\\sim}G_{f'}G_{g'}$ be the counit-preserving conjugates of canonical compact-support composition [pur9-def-upper-shriek-composition], as in [lem-pur-constructible-tensor-composition]; only its unconditional compositor construction is used. Define $b_{f,h;P}:Ls^*G_fP\\to G_{f'}Lh^*P$, for $P\\in D^b_{ctf}(Y,\\Lambda)$, as the transpose of $Lh^*\\varepsilon_{f,P}\\circ E_f(G_fP)^{-1}$ under $F_{f'}\\dashv G_{f'}$, that is, the base-change morphism of [pur9-cs-def-bc] computed with the base-changed compactification for $f'$. Then the actual dualizing base-change morphism of the composite satisfies\n$$\\beta_{gf,t}=c_{\\Lambda_{Z'}}'^{-1}\\circ G_{f'}(\\beta_{g,t})\\circ b_{f,h;\\omega_g}\\circ Ls^*(c_{\\Lambda_Z}).$$\nBoth sides are morphisms $Ls^*\\omega_{gf}\\to\\omega_{g'f'}$ in $D^b_{ctf}(X',\\Lambda)$, with the coefficient-unit pullback identifications inserted. This is an equality of the specified counit mates, including the vertical-pasting normalization of compact-support exchange; it holds without cohomological smoothness or invertibility assumptions on the dualizing base-change maps.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-composition.proof.md",
+  "place": "Final base-change sentence: vertical pasting and identification of the canonical composite beta; returned Step 8"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-co-smoothness",
+  "def-cbc-compact-support-square",
+  "def-cbc-exchange-map",
+  "lem-pur-constructible-tensor-composition",
+  "pur9-def-upper-shriek-composition",
+  "pur9-cs-def-bc",
+  "def-pur-finite-exceptional-composition"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=Ls^*$, $B=Lh^*$, $C=Lt^*$ and $H=gf$. Write $\\alpha:F_gF_f\\xrightarrow{\\sim}F_H$ and $\\alpha':F_{g'}F_{f'}\\xrightarrow{\\sim}F_{g'f'}$ for compact-support composition. All expressions below are on the bounded-below etale-origin class: every $G_uK$ in use is bounded constructible by [def-weil-exceptional-inverse-image], hence has an origin witness by [lem-sf-proetale-constructible-origin](ii). Pullbacks retain the witnesses as in [pur9-cs-def-bc], and compact supports retain the class by [thm-sf-comp-composition]. Use the natural Hom bijections of [thm-sf-ambient-adjoint-class], not ambient pro-etale adjunctions. Their compactification dimension bounds exist by [lem-kun-dimension-finite-type]. Thus single and iterated transposes of the displayed maps are defined and injective. The conjugates $c,c'$ use the composite Hom bijections of [pur9-def-upper-shriek-composition]; in particular their counits are the pasted counits.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "lem-sf-proetale-constructible-origin",
+    "pur9-cs-def-bc",
+    "thm-sf-comp-composition",
+    "thm-sf-ambient-adjoint-class",
+    "lem-kun-dimension-finite-type",
+    "pur9-def-upper-shriek-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L, lemma-base-change-shriek: vertical stacking compatibility with Tag 0F7J, lemma-shriek-composition; finite pro-etale transport and counit-mate calculation supplied below"
+   }
+  },
+  {
+   "text": "Choose a compatible compactification tower for $f,g$ by [lem-cbc-compactifiable-compatible-tower], and its pullback along $t$. Let $E_f:BF_f\\xrightarrow{\\sim}F_{f'}A$, $E_g:CF_g\\xrightarrow{\\sim}F_{g'}B$, and $E_H:CF_H\\xrightarrow{\\sim}F_{g'f'}A$ be the specified exchanges. The compact-support vertical interchange is\n$$E_H\\circ C(\\alpha)=(\\alpha'A)\\circ(F_{g'}E_f)\\circ(E_gF_f).\\tag{1}$$\nHere is the precise existing input for this equality. Apply [lem-cbc-complete-proetale-composition-pasting-coherence] with its $h=g$ and base map $g=t$ to constant strict towers over $B_{\\rm coeff}=\\Lambda$, and evaluate at one index. Its displayed vertical interchange is (1). Each evaluation of the constant input has the bounded-below finite-coefficient origin witness from Step 1. [lem-cbc-strict-tower-proper-open-calculus] identifies the evaluated proper/open and refinement maps with the normalized finite proper/open maps; [def-cbc-strict-constant-tower-operations] specifies evaluation comparisons by the termwise inverse image and its direct-image mate. Thus $D,D'$ evaluate to the canonical tower compositors $\\alpha,\\alpha'$, and $e_f,e_g,e_H$ to the proper-mate/open exchanges. By [thm-cbc-finite-level-proetale] these are precisely the transported exchanges used here, independent of the chosen witnesses. The refinement equation in the same coherence node moves (1) from this compatible tower to the prescribed compactifications and their base changes. This only applies a functor to an equality already in the tower category; it does not infer an equality from evaluations.",
+   "uses": [
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-cbc-complete-proetale-composition-pasting-coherence",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-cbc-strict-constant-tower-operations",
+    "thm-cbc-finite-level-proetale",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L, lemma-base-change-shriek: vertical stacking compatibility with Tag 0F7J, lemma-shriek-composition; finite pro-etale transport and counit-mate calculation supplied below"
+   }
+  },
+  {
+   "text": "All three exchanges in (1) are invertible on this class by [thm-cbc-finite-level-proetale]. Multiplying (1) on the left by $E_H^{-1}$ and on the right by $(\\alpha'A)^{-1}$, then cancelling, gives the equality of inverse-exchange squares\n$$C(\\alpha)\\circ(E_g^{-1}F_f)\\circ(F_{g'}E_f^{-1})=E_H^{-1}\\circ(\\alpha'A).\\tag{2}$$\nBoth sides have source $F_{g'}F_{f'}A$ and target $CF_H$. Only compact-support exchanges, not exceptional base-change maps, were inverted.",
+   "uses": [
+    "thm-cbc-finite-level-proetale"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L, lemma-base-change-shriek: vertical stacking compatibility with Tag 0F7J, lemma-shriek-composition; finite pro-etale transport and counit-mate calculation supplied below"
+   }
+  },
+  {
+   "text": "Take mates of (2). Clause (2) of [lem-weil-pbc-mate-pasting] says that the mate of $(E_g^{-1}F_f)\\circ(F_{g'}E_f^{-1})$ under the two composite adjunctions is\n$G_{f'}(b_{g,t})\\circ(b_{f,h}G_g)$.\nClauses (3)(b) and (3)(a), applied respectively to $\\alpha$ and $\\alpha'$, identify the mates of the left and right sides of (2) as\n$$G_{f'}(b_{g,t})\\circ(b_{f,h}G_g)\\circ A(c),\\qquad c'C\\circ b_{H,t}.$$\nIndeed $\\alpha:F_gF_f\\to F_H$ has conjugate $c:G_H\\to G_fG_g$ and likewise for primes, with the prescribed counits [pur9-def-upper-shriek-composition]; [def-weil-pbc-adjunction-conjugate] fixes this direction. The individual mates are exactly the maps $b$ of [pur9-cs-def-bc], since their adjuncts are pulled-back counit after inverse exchange. Consequently for every constructible finite-Tor $K$,\n$$c'_{CK}\\circ b_{H,t;K}=G_{f'}(b_{g,t;K})\\circ b_{f,h;G_gK}\\circ A(c_K).\\tag{3}$$\nThis use of mate calculus is on the relative Hom bijections from Step 1; equivalently compute the same double transpose there. It requires only their naturality and injectivity, which that cited theorem supplies, not a right adjoint on the entire pro-etale derived category.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "pur9-def-upper-shriek-composition",
+    "def-weil-pbc-adjunction-conjugate",
+    "pur9-cs-def-bc",
+    "thm-sf-ambient-adjoint-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E46, remark-compose-base-change; explicit adjunction pasting via lem-weil-pbc-mate-pasting clauses (2), (3)(a),(3)(b), as in Mathlib CategoryTheory/Adjunction/Mates.lean"
+   }
+  },
+  {
+   "text": "Set $K=\\Lambda_Z$ in (3). Write $u:C\\Lambda_Z\\xrightarrow{\\sim}\\Lambda_{Z'}$ for the coefficient-unit identification. By [def-pur-co-smoothness] and [pur9-cs-def-bc],\n$\\beta_{g,t}=G_{g'}(u)\\circ b_{g,t;\\Lambda_Z}$ and $\\beta_{H,t}=G_{g'f'}(u)\\circ b_{H,t;\\Lambda_Z}$.\nNaturality of $c'$ at $u$ gives\n$$c'_{\\Lambda_{Z'}}\\circ G_{g'f'}(u)=G_{f'}G_{g'}(u)\\circ c'_{C\\Lambda_Z}.$$\nPostcompose (3) by $G_{f'}G_{g'}(u)$, substitute these two beta formulas and $G_g\\Lambda_Z=\\omega_g$, and cancel the isomorphism $c'_{\\Lambda_{Z'}}$. This is exactly\n$$\\beta_{gf,t}=c_{\\Lambda_{Z'}}'^{-1}\\circ G_{f'}(\\beta_{g,t})\\circ b_{f,h;\\omega_g}\\circ Ls^*(c_{\\Lambda_Z}).$$\nThe source is $Ls^*\\omega_{gf}$ and the target is $\\omega_{g'f'}$. This final substitution uses neither smoothness nor invertibility of any $b$ or $\\beta$.",
+   "uses": [
+    "def-pur-co-smoothness",
+    "pur9-cs-def-bc",
+    "pur9-def-upper-shriek-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L, lemma-base-change-shriek: vertical stacking compatibility with Tag 0F7J, lemma-shriek-composition; finite pro-etale transport and counit-mate calculation supplied below"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-exceptional-inverse-image",
+  "lem-sf-proetale-constructible-origin",
+  "pur9-cs-def-bc",
+  "thm-sf-comp-composition",
+  "thm-sf-ambient-adjoint-class",
+  "lem-kun-dimension-finite-type",
+  "pur9-def-upper-shriek-composition",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-complete-proetale-composition-pasting-coherence",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "def-cbc-strict-constant-tower-operations",
+  "thm-cbc-finite-level-proetale",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-pur-co-smoothness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7L, lemma-base-change-shriek: vertical stacking compatibility with Tag 0F7J, lemma-shriek-composition; finite pro-etale transport and counit-mate calculation supplied below; existing strict-tower coherence supplies the finite pro-etale transport; mate and coefficient-unit steps written by Q115"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image base change mates paste under composition of separated finite type scheme morphisms on constructible pro etale complexes",
+   "results": "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map; AlgebraicGeometry.Scheme.Cover.gluedCoverT'_snd_fst; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc; AlgebraicGeometry.Scheme.Cover.gluedCoverT'_fst_snd; AlgebraicGeometry.Scheme.Cover.gluedCoverT'_snd_snd; hits concern ordinary modules, general adjunctions or other notions, not this constructible pro-etale canonical morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional base change map of a composite is the composite of the exceptional base change maps under canonical right adjoint composition",
+   "results": "CategoryTheory.ExponentiableMorphism.comp; CategoryTheory.ExponentiableMorphism.comp_pushforward; CategoryTheory.ExponentiableMorphism.pushforwardComp; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom; PresheafOfModules.pullbackComp; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc; hits concern ordinary modules, general adjunctions or other notions, not this constructible pro-etale canonical morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image base change comparison under composition",
+   "results": "IsBaseChange.of_comp; AlgebraicGeometry.Scheme.Hom.comp_preimage; IsBaseChange.comp_iff; AlgebraicGeometry.Scheme.preimage_comp; CategoryTheory.MorphismProperty.Over.pullbackComp_inv_app_left; CategoryTheory.MorphismProperty.instIsStableUnderBaseChangeAlongCompOfHasPullbacksAlong; CategoryTheory.Subfunctor.Subpresheaf.preimage_comp; IsBaseChange.comp; hits concern ordinary modules, general adjunctions or other notions, not this constructible pro-etale canonical morphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedUpperShriekBaseChangeMap\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*past|past.*mate",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv.*comp.*rightAdjoint|[Ee]xceptional.*[Bb]ase[Cc]hange",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean.  General mate-pasting declarations give the formal step only; none states the scheme compact-support normalization and transported constructible pro-etale beta identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_hcomp\"",
+   "results": "CategoryTheory.mateEquiv_hcomp; CategoryTheory.Bicategory.mateEquiv_hcomp.  General mate-pasting declarations give the formal step only; none states the scheme compact-support normalization and transported constructible pro-etale beta identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mate of inverse compact support exchange for a composite equals the composite of the exceptional base change mates",
+   "results": "CategoryTheory.Bicategory.mateEquiv_symm_apply; CategoryTheory.mateEquiv_square; CategoryTheory.mateEquiv_vcomp; CategoryTheory.comp_rightAdjointMate; CategoryTheory.Bicategory.mateEquiv; CategoryTheory.mateEquiv_hcomp; CategoryTheory.comp_leftAdjointMate; CategoryTheory.Bicategory.mateEquiv_hcomp.  General mate-pasting declarations give the formal step only; none states the scheme compact-support normalization and transported constructible pro-etale beta identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image base change maps paste under composition after counit normalized compact support composition",
+   "results": "CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; TopCat.Presheaf.Pushforward.comp_inv_app; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc; CategoryTheory.ExponentiableMorphism.comp_pushforward; CategoryTheory.ExponentiableMorphism.pushforwardComp.  Ordinary pushforward/pullback comparisons are different functors from transported constructible exceptional inverse image.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional base change map of a composite is compatible with the composition isomorphism of right adjoints on constructible pro etale complexes",
+   "results": "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; PresheafOfModules.pullbackComp; SheafOfModules.pullbackComp; PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp; CategoryTheory.sheafComposeNatTrans_fac; CategoryTheory.sheafComposeNatIso.  Ordinary pushforward/pullback comparisons are different functors from transported constructible exceptional inverse image.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-co-smooth-composition",
+  "date": "2026-10-22",
+  "group": "Q118"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-cohsm",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-co-smooth-composition",
+   "place": "Final base-change sentence: vertical pasting and identification of the canonical composite beta; returned Step 8",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-exceptional-base-change-pasting",
+  "worker": "stage1",
+  "summary": "Expanded the final base-change assertion into domain checks, normalized compact-support vertical interchange on a compatible tower, inversion of its square, mate pasting with the specified conjugates, and the explicit coefficient-unit naturality calculation. Reused existing nodes throughout; no new nodes. Statement unchanged.",
+  "blueprint": "lem-pur-co-smooth-composition.proof.md, final sentence “the same calculation after arbitrary base change gives (3)”: the missing canonical beta identification is realized by Steps 2–5. Step 1 makes the bounded-below etale-origin domain explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic compact-support coherence, origin/domain or adjunction-pasting input for the canonical beta computation; no cohomological-smoothness or purity theorem from another unit is substituted for the unit route."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic compact-support coherence, origin/domain or adjunction-pasting input for the canonical beta computation; no cohomological-smoothness or purity theorem from another unit is substituted for the unit route."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Generic compact-support coherence, origin/domain or adjunction-pasting input for the canonical beta computation; no cohomological-smoothness or purity theorem from another unit is substituted for the unit route."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic compact-support coherence, origin/domain or adjunction-pasting input for the canonical beta computation; no cohomological-smoothness or purity theorem from another unit is substituted for the unit route."
+   },
+   {
+    "node": "lem-cbc-compactifiable-compatible-tower",
+    "why": "Generic compact-support coherence, origin/domain or adjunction-pasting input for the canonical beta computation; no cohomological-smoothness or purity theorem from another unit is substituted for the unit route."
+   },
+   {
+    "node": "lem-cbc-complete-proetale-composition-pasting-coherence",
+    "why": "Generic compact-support coherence, origin/domain or adjunction-pasting input for the canonical beta computation; no cohomological-smoothness or purity theorem from another unit is substituted for the unit route."
+   },
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Generic compact-support coherence, origin/domain or adjunction-pasting input for the canonical beta computation; no cohomological-smoothness or purity theorem from another unit is substituted for the unit route."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "Generic compact-support coherence, origin/domain or adjunction-pasting input for the canonical beta computation; no cohomological-smoothness or purity theorem from another unit is substituted for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic compact-support coherence, origin/domain or adjunction-pasting input for the canonical beta computation; no cohomological-smoothness or purity theorem from another unit is substituted for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-comp-composition",
+  "thm-sf-ambient-adjoint-class",
+  "lem-kun-dimension-finite-type",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-complete-proetale-composition-pasting-coherence",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "thm-cbc-finite-level-proetale",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-412b6e962",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-412b6e962 (reviewer sub-agent of L); spot-checked: Q115 lem-pur-exceptional-base-change-pasting @412b6e96: first split of the Q118 node, still unsplit on live and side-live with no repair note. Five steps, no new nodes; statement and stmt_deps byte-identical to live; proof_deps equals the union of uses; no SGA and no TeX corruption. Source: blueprint main-20261015 lem-pur-co-smooth-composition final sentence, and Stacks 0F7L vertical-stacking compatibility with 0F7J. Step 1: def-weil-exceptional-inverse-image asserts finite-Tor preservation, so b_{f,h;ω_g} is in the D^b_ctf domain; the class-restricted Hom bijections come from thm-sf-ambient-adjoint-class. Step 2: (1) is term for term the vertical interchange of lem-cbc-complete-proetale-composition-pasting-coherence (h=g, base=t), evaluated on constant Λ-towers. strict-tower calculus and the constant-tower operations identify the evaluations. The move to the prescribed compactifications rests on the independence clauses of thm-cbc-finite-level-proetale and thm-sf-comp-composition; the refinement sentence adds nothing to them. Identifying evaluated D with α relies on α being the transported proper/open compositor of lem-amb-etale-compact-comparisons, accepted as the unit's standing normalization. Step 3: cancellation rechecked; only exchanges are inverted. Step 4: mate-pasting (2), (3)(b) and (3)(a) checked against the conventions; σ^c=c by def-weil-pbc-adjunction-conjugate and pur9-def-upper-shriek-composition; the mates of E^{-1} are pur9-cs-def-bc b. Step 5: β=G(u)∘b and naturality of c' give the exact formula. Edge cases checked: t=id gives the identity, identity f or g, empty schemes. No duplicate in the DAG: the coefficient-mate nodes concern coefficient change, det-sp concerns scalar extension, the smooth tensor-pasting node is downstream. tool_uses accepted as generic. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExceptionalDualizingBaseChangePasting",
+  "declaration": "AlgebraicGeometry.ProEtale.exceptionalDualizingBaseChangePasting",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.exceptionalDualizingBaseChangePastingEquation",
+   "AlgebraicGeometry.ProEtale.exceptionalDualizingBaseChangePasting"
+  ],
+  "file": "lean/Sheaf/Paper/ExceptionalDualizingBaseChangePasting.lean",
+  "statement": "theorem exceptionalDualizingBaseChangePasting (P : WeilConjectures.PurityFiniteSetting.{u}) {X Y Z X' Y' Z' : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [Z.Over (Spec (.of P.field.k))] [X'.Over (Spec (.of P.field.k))] [Y'.Over (Spec (.of P.field.k))] [Z'.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Z ↘ Spec (.of P.field.k))] [QuasiCompact (Z ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (X' ↘ Spec (.of P.field.k))] [QuasiCompact (X' ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y' ↘ Spec (.of P.field.k))] [QuasiCompact (Y' ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Z' ↘ Spec (.of P.field.k))] [QuasiCompact (Z' ↘ Spec (.of P.field.k))] (f : X ⟶ Y) (g : Y ⟶ Z) (f' : X' ⟶ Y') (g' : Y' ⟶ Z') (s : X' ⟶ X) (h : Y' ⟶ Y) (t : Z' ⟶ Z) [f.IsOver (Spec (.of P.field.k))] [g.IsOver (Spec (.of P.field.k))] [f'.IsOver (Spec (.of P.field.k))] [g'.IsOver (Spec (.of P.field.k))] [s.IsOver (Spec (.of P.field.k))] [h.IsOver (Spec (.of P.field.k))] [t.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (sqf : IsPullback s f' f h) (sqg : IsPullback h g' g t) (cf : Compactification f) (cg : Compactification g) (cfg : Compactification (f ≫ g)) : exceptionalDualizingBaseChangePastingEquation P sqf sqg cf cg cfg",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Equality of the specified pro-etale morphisms in the canonical etale-origin coordinates already used by def-pur-co-smoothness and pur9-cs-def-bc. The existing finiteExceptionalComposition is the counit-normalized conjugate in these coordinates; its landed definition node is added to stmt_deps. Arbitrary original compactifications and their actual base changes are installed inside the equation definition. No smoothness or exceptional base-change invertibility is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ccad7d65",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Only the item's lean field changed, plus the stmt_dep def-pur-finite-exceptional-composition (landed owner of finiteExceptionalComposition). All 11 dependency records are byte-identical to live and side-live; lean.statement is verbatim; the only sorry is the theorem proof; all 21 imports exist. Equation check: the left side is the comparison of dualizingComplexBaseChangeMap on the outer square sqf.paste_vert sqg, i.e. beta of def-pur-co-smoothness with the unit identification. The right side is Ls*(finiteExceptionalComposition f g).hom at the unit, then standingExceptionalBaseChangeCompared P sqf cf (cf.ofIsPullback sqf) at omega_g (pur9-cs-def-bc), then R(f')^! of beta_{g,t}, then (finiteExceptionalComposition f' g').inv at the unit. Types and order match the node. c is conjugateIsoEquiv of the canonical unboundedEtaleLowerShriekCompIso, with the correct direction. Compactifications are arbitrary, with ofIsPullback for the primed arrows as in finiteComparedBaseChangeClause. No smoothness, invertibility, ambient adjoint, absolute separatedness or universe restriction. Edge cases (identity t, f or g; empty schemes; n=1) covered. No duplicate in Mathlib or the project. Source citations and the 5-step proof docstring are present. No compile, since no file was changed."
+ }
+}

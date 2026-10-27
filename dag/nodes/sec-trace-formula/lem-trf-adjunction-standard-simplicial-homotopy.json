@@ -23,73 +23,67 @@
    }
   },
   {
-   "text": "Apply [lem-trf-comonad-simplicial-object] with $\\mathcal C=\\mathcal A$, $T=G$, $e=\\epsilon$, $c=\\delta$, using the equations just checked. Its faces and degeneracies are exactly those of the item, and its augmentation has degree-zero map $\\epsilon_a$. It constructs a simplicial object in endofunctors; evaluation at $a$ therefore gives the desired augmented simplicial object, and evaluation on a morphism $a\\to b$ gives naturality, in the functor and natural-transformation sense of [def-weil-pbc-simplicial-object].",
+   "text": "Apply [lem-trf-comonad-simplicial-object] to $(G,\\epsilon,\\delta)$, whose equations were checked in step 1. It gives the stated powers, operators and augmentation in endofunctors; evaluation at $a$ gives $X_\\bullet(a)$ naturally in $a$. This is the standard-resolution predicate of [def-trf-comonad-standard-resolution], with simplicial-object conventions [def-weil-pbc-simplicial-object].",
    "uses": [
     "lem-trf-comonad-simplicial-object",
+    "def-trf-comonad-standard-resolution",
     "def-weil-pbc-simplicial-object"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08NC, lemma-standard-simplicial; Tag 08ND, lemma-standard-simplicial-homotopy."
+    "place": "Tag 08ND, lemma-standard-simplicial-homotopy, in Situation 08N9 (situation-adjoint-functors); auxiliary extra-degeneracy argument for the standard object of Tag 08NC (lemma-standard-simplicial)."
    }
   },
   {
-   "text": "Put $Z_n=UG^{n+1}a$ and $Z_{-1}=Ua$, and set $h_n=\\eta_{UG^{n+1}a}:Z_n\\to Z_{n+1}$ for $n\\geq-1$ (so $G^0a=a$). The right-adjoint triangle gives $e_0h_{-1}=1$ and $d_0h_n=1$. Every face with index $i+1$ of $Z$ is $UF$ applied to its face with index $i$ one degree lower. Naturality $UF(v)\\eta=\\eta v$, with $v=U\\epsilon_a$, gives $d_1h_0=h_{-1}e_0$; with $v=d_i:Z_{n+1}\\to Z_n$, it gives $d_{i+1}h_{n+1}=h_nd_i$. The same naturality with $v=s_i:Z_n\\to Z_{n+1}$ gives $s_{i+1}h_n=h_{n+1}s_i$. These are all the extra-degeneracy equations, with $0\\leq i\\leq n+1$ in the face relation and $0\\leq i\\leq n$ in the degeneracy relation.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08NC, lemma-standard-simplicial; Tag 08ND, lemma-standard-simplicial-homotopy."
-   }
-  },
-  {
-   "text": "Apply [lem-coef-simplicial-extra-degeneracy-prism] in $\\mathcal S$ to the augmented object $Z$ and the maps of step 3. Every hypothesis is precisely one of the equations established there. It gives a simplicial section $a_n=Z(q_n)\\eta_{Ua}$, $q_n:[n]\\to[0]$, with $ea=1$ and a homotopy $ae\\simeq1_Z$. Thus $UX_\\bullet(a)\\to\\operatorname{const}(Ua)$ is a homotopy equivalence, with the stated degree-zero section and its iterated degeneracies. When $\\mathcal S=\\mathrm{Set}$, [lem-coef-extra-degeneracy-contraction] applies to the same equations and supplies the equivalent cylinder description $Z\\times\\Delta^1\\to Z$.",
+   "text": "Apply [lem-trf-adjunction-right-image-extra-degeneracies] to this supplied resolution. Its unit maps satisfy every hypothesis of [lem-coef-simplicial-extra-degeneracy-prism], which gives a section $a_n=Z(q_n)\\eta_{Ua}$, $ea=1$, and $ae\\simeq1_Z$. Thus $UX_\\bullet(a)\\to\\operatorname{const}(Ua)$ is the first homotopy equivalence with the required section: $q_0=1_{[0]}$ gives $a_0=\\eta_{Ua}$, and each $q_n$ is a composite of codegeneracies. For sets, [lem-coef-extra-degeneracy-contraction] applied to the same equations gives its $\\Delta[1]$ cylinder description.",
    "uses": [
+    "lem-trf-adjunction-right-image-extra-degeneracies",
     "lem-coef-simplicial-extra-degeneracy-prism",
     "lem-coef-extra-degeneracy-contraction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08NC, lemma-standard-simplicial; Tag 08ND, lemma-standard-simplicial-homotopy."
+    "place": "Tag 08ND, lemma-standard-simplicial-homotopy, in Situation 08N9 (situation-adjoint-functors); auxiliary extra-degeneracy argument for the standard object of Tag 08NC (lemma-standard-simplicial)."
    }
   },
   {
-   "text": "For $s\\in\\mathcal S$ put $b=Fs$, $W_n=G^{n+1}b$, $W_{-1}=b$, and $v=F\\eta_s:b\\to Gb$. The left-adjoint triangle gives $\\epsilon_bv=1_b$. Define $t_{-1}=v$ and $t_n=G^{n+1}(v):W_n\\to W_{n+1}$. Then $d_{n+1}t_n=G^{n+1}(\\epsilon_bv)=1$. Naturality of the face transformation $G^{n+1}\\to G^n$ at $v$ gives $d_it_n=t_{n-1}d_i$ for $0\\leq i\\leq n$; in degree zero this reads $d_0t_0=t_{-1}e_0$. Naturality of the degeneracy transformation $G^{n+1}\\to G^{n+2}$ at $v$ gives $s_it_n=t_{n+1}s_i$ for $0\\leq i\\leq n$. Together with $e_0t_{-1}=1$ these are the right-hand versions of the extra-degeneracy equations.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08NC, lemma-standard-simplicial; Tag 08ND, lemma-standard-simplicial-homotopy."
-   }
-  },
-  {
-   "text": "Reverse the ordinal indices: define $r(\\alpha):[m]\\to[n]$ for $\\alpha:[m]\\to[n]$ by $r(\\alpha)(j)=n-\\alpha(m-j)$. It is order preserving, preserves compositions, and $r^2=1$. Precomposing $W$ by $r^{\\mathrm{op}}$ gives $W^r_n=W_n$ with $d_i^r=d_{n-i}$ and $s_i^r=s_{n-i}$ on degree $n$. The maps $t_n$ of step 5 are now left extra degeneracies: $d_0^rt_n=d_{n+1}t_n=1$, $d_1^rt_0=d_0t_0=t_{-1}e_0$, and the face and degeneracy commutation relations follow by substituting $i\\mapsto n+1-i$ and $i\\mapsto n-i$, respectively, in step 5. The augmentation and its degree-zero section are unchanged.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08NC, lemma-standard-simplicial; Tag 08ND, lemma-standard-simplicial-homotopy."
-   }
-  },
-  {
-   "text": "Apply [lem-coef-simplicial-extra-degeneracy-prism] in $\\mathcal A$ to $W^r$. It yields a section with $ea=1$ and a homotopy between $ae$ and $1_{W^r}$. Undo ordinal reversal: the section still has components $W(q_n)v$, since $r(q_n)=q_n$. If $H_j^n$ are the homotopy components, use $\\widetilde H_j^n=H_{n-j}^n$ for $W$. In the prism identities displayed in the cited node, substituting $d_i^r=d_{n-i}$ and $s_i^r=s_{n-i}$ swaps the two endpoint identities, swaps the two strict face cases and the two degeneracy cases, and preserves the middle face identity. Hence these components give a homotopy between $1_W$ and $ae$. This proves the second homotopy equivalence. The unit, counit and their functorial powers are natural, so the constructions in both assertions are natural in their parameters; no limits, products in the categories, or additivity were assumed.",
+   "text": "For $b=Fs$ put $v=F\\eta_s$. The left triangle gives $\\epsilon_bv=1_b$. Apply [lem-trf-comonad-counit-section-right-degeneracies] with $T=G$ to obtain the right extra degeneracies $t_n=G^{n+1}(v)$ of $W=X_\\bullet(Fs)$. By [lem-trf-simplicial-reversal-extra-degeneracies-homotopy] they are left extra degeneracies of $W^r$, with the same augmentation and degree-zero section.",
    "uses": [
-    "lem-coef-simplicial-extra-degeneracy-prism"
+    "lem-trf-comonad-counit-section-right-degeneracies",
+    "lem-trf-simplicial-reversal-extra-degeneracies-homotopy"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08NC, lemma-standard-simplicial; Tag 08ND, lemma-standard-simplicial-homotopy."
+    "place": "Tag 08ND, lemma-standard-simplicial-homotopy, in Situation 08N9 (situation-adjoint-functors); auxiliary extra-degeneracy argument for the standard object of Tag 08NC (lemma-standard-simplicial)."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-simplicial-extra-degeneracy-prism] to $W^r$. Its section has $ea=1$ and its homotopy runs from $ae$ to $1_{W^r}$. By [lem-trf-simplicial-reversal-extra-degeneracies-homotopy], $a_n=W(q_n)v$ and $\\widetilde H_j^n=H_{n-j}^n$ give a homotopy from $1_W$ to $ae$. To obtain parameter naturality, perform the prism applications in $\\operatorname{Fun}(\\mathcal A,\\mathcal S)$ and $\\operatorname{Fun}(\\mathcal S,\\mathcal A)$. The first extra-degeneracy node supplies its identities in the former category. For $f:s\\to t$, naturality of $\\eta$ gives $GF(f)F\\eta_s=F\\eta_t F(f)$, so the split-counit node supplies right extra degeneracies in the latter. Reversal commutes with parameter evaluation. Sections and homotopies obtained in these functor categories therefore evaluate to the required natural families.",
+   "uses": [
+    "lem-coef-simplicial-extra-degeneracy-prism",
+    "lem-trf-simplicial-reversal-extra-degeneracies-homotopy",
+    "lem-trf-adjunction-right-image-extra-degeneracies",
+    "lem-trf-comonad-counit-section-right-degeneracies"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08ND, lemma-standard-simplicial-homotopy, in Situation 08N9 (situation-adjoint-functors); auxiliary extra-degeneracy argument for the standard object of Tag 08NC (lemma-standard-simplicial)."
    }
   }
  ],
  "proof_deps": [
   "lem-trf-comonad-simplicial-object",
+  "def-trf-comonad-standard-resolution",
   "def-weil-pbc-simplicial-object",
+  "lem-trf-adjunction-right-image-extra-degeneracies",
   "lem-coef-simplicial-extra-degeneracy-prism",
-  "lem-coef-extra-degeneracy-contraction"
+  "lem-coef-extra-degeneracy-contraction",
+  "lem-trf-comonad-counit-section-right-degeneracies",
+  "lem-trf-simplicial-reversal-extra-degeneracies-homotopy"
  ],
  "proof_origin": {
   "by": "agent",
@@ -215,20 +209,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "item": "lem-trf-adjunction-standard-simplicial-homotopy",
   "worker": "stage1",
-  "summary": "Kept the statement; checked Stacks 08NC/08ND and wrote explicit left and right contractions. Reused the arbitrary-category Mathlib prism leaf, rather than incorrectly applying its Set-only specialization in an arbitrary category. Added one generic comonad construction node (0G5N). No Lean attachment found.",
-  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Standard simplicial object of an adjunction and its homotopy equivalences. Steps 1–2 supply the standard resolution; steps 3–7 supply the two homotopy equivalences used by the cotangent-resolution auxiliary.",
+  "summary": "Retained the approved three-obligation re-split and unchanged statement; rebased using the delivery tool on current origin/sheaf-dag and re-read every cited statement. Made the parameter-naturality assembly explicit via GF(f) F eta_s = F eta_t F(f) before applying the arbitrary-category prism theorem in both functor categories. No pointwise choice of homotopy or uncited naturality formula is used; existing searches and literal citation quotes are retained.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Standard simplicial object of an adjunction and its homotopy equivalences. Re-split of the standard-resolution auxiliary: old steps 1-2 remain the construction; old step 3 is the right-image extra-degeneracy node, old step 5 the split-counit right-degeneracy node, and old steps 6-7 the reversal transport node; old steps 4 and 7 assemble via the existing prism leaf.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-NR-b967839de",
-  "group": "NR",
+  "reviewer": "NT-cc-Q34-231a57e96",
+  "group": "Q34",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-b967839de (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-comonad-simplicial-object, and the full statements of all three cited nodes (def-weil-pbc-simplicial-object and the two Mathlib leaves lem-coef-simplicial-extra-degeneracy-prism and lem-coef-extra-degeneracy-contraction). I checked them against Stacks simplicial.tex: 0G5M (l.6193), 0G5N (l.6226), 08N9, 08NC (l.6675) and 08ND (l.6729). The item statement is byte-identical to the base and adds no hypotheses (F/U here are U/V in Stacks). Step 1: all three comonad identities follow from the triangle identities and naturality of eta. Step 3: on Z=UX(a) every face and degeneracy with index i+1 is UF of the one with index i, so eta-naturality gives every extra-degeneracy equation of the prism node, using Mathlib's convention. Step 5: on W=X(Fs) with v=F(eta_s), naturality of the face and degeneracy transformations at v and epsilon_{Fs}v=1 give the right-hand version of the equations. Step 6: index reversal (d^r_i=d_{n-i}) turns them into left extra degeneracies, and I checked each substitution. Step 7: H~_j=H_{n-j} gives a homotopy from 1 to ae; I checked the endpoint, middle-face and strict-face cases. The new node matches 0G5N hypothesis by hypothesis and is statement-only. It is the source's own Godement lemma and strictly more general than the item, not a restated clause. Small cases tested: identity comonad, the degree-1 identities and the free/forgetful adjunction. Duplicate search over the whole DAG and blueprint main-20261015 found only unrelated sheaf-Godement, free-category comonad and infinity-bar nodes. There is no cycle: the new node's closure is two simplicial definitions, and the coef tools are Mathlib leaves. Batch-5 flag on lem-trf-comonad-simplicial-object: accepted. Its closure is pure category theory, outside both assumptions and not a step of the proof of the trace formula or of Poincare duality, and the item was already reachable from batch 5 through its existing citers. The report's note that 08ND composes the self-map in the wrong order is right and does not affect the statements. No fixes were written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-231a57e96 (reviewer sub-agent of L); spot-checked: Fourth push of the 2026-10-21 re-split; the release note is stage 1, 2026-10-22, 7 old steps, 4316 chars, at least 2 new nodes. Earlier heads 12c5, 7c1d and 951a each passed and were refused at landing only because the side completion was not promoted. The item is not superseded: live and side-live still hold the 2026-10-18 NR seven-step split, with identical statement and stmt_deps, and none of the three new ids is live. Diff against 951ac9532c33: the three new nodes are byte-identical, and only item step-5 text and split_report changed. I re-checked everything myself. Node A (right-image extra degeneracies): d_0h_n=1 and e_0h_{-1}=1 come from the right triangle. Since d_{i+1}=UF(d_i) and s_{i+1}=UF(s_i), η-naturality gives every hypothesis of lem-coef-simplicial-extra-degeneracy-prism. Node B (counit-section right degeneracies): d_{n+1}t_n=T^{n+1}(e_b v)=1, and d_0t_0=v e_b by naturality of e. The face and degeneracy relations come from naturality of T^i e T^{n+1-i} and T^i c T^{n-i} at v. Coassociativity of v is correctly not assumed, and (b,v)-naturality holds. Node C (reversal): r(δ_i)=δ_{n-i}, r(σ_i)=σ_{n-i} and r(q_n)=q_n. The substitutions k=n+1-i and k=n-i turn the right equations into the left ones on W^r. H~_j=H_{n-j} gives a homotopy from g to f; I checked the endpoints, the middle face, both strict-face cases and both degeneracy cases. Assembly: step 1 gives the comonad laws from the triangle identities and η-naturality. Step 2 cites lem-trf-comonad-simplicial-object; the def is used only as a predicate. Step 3 gives the section a_0=η_{Ua} and its degeneracy extension, and uses the Set leaf only for Set. Step 4 gets ε_{Fs}Fη_s=1 from the left triangle. The new step-5 text is correct and an improvement: the prism leaf works in any category, so it applies in Fun(A,S) and Fun(S,A). F of η-naturality, GF(f)Fη_s=Fη_tF(f), is exactly node B's pair-naturality hypothesis, and functor-category identities hold pointwise. This removes the earlier appeal to prism formulas that the cited statement does not give (C3/C4). Source checked: Stacks simplicial.tex 08ND l.6729, 08N9, 08NC and 0G5N, with Stacks (U,V) = (F,U); no SGA is cited. Re-split mapping: old 3 → node A, old 5 → node B, old 6–7 → node C, and old 1, 2 and 4 are short applications. The nodes are of comparable size, the assembly is 2635 chars, and nothing was dropped. Duplicate sweep (rg -L over the DAG: right-decalage prism, realization extra-degeneracy, section-comma bar, polynomial-augmentation-boundary, Godement/Čech nodes): no duplicate and no cycle. No tool_uses are needed and no fixes were made. Maintainer note: landing still needs L to promote the side completion."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.AdjunctionStandardSimplicialHomotopy",
@@ -255,5 +249,16 @@
   "result": "pass",
   "note": "H2 re-delivery done as required: new def node def-trf-comonad-standard-resolution owns resolutionPower/IsStandardSimplicialResolution in its own module (old module minus the theorem); item module unchanged except the import; stmt_deps = base + new def node; the theorem lem-trf-comonad-simplicial-object is in proof_deps only. Clauses checked against Stacks 0G5M/0G5N/08NC/08ND: faces T^iεT^{n-i} counted from the left, degeneracies T^iδT^{n-i}, augmentation ε, first section pinned to η_{Ua} plus degeneracies, homotopies in the prism node's direction, free-object section; a strict section is equivalent to the node (homotopic maps into const objects are equal); 4 free universes; edge cases OK; lean.statement verbatim for both nodes. nt_compile --json clean (1.3 s/1.4 s, exit 0); a control with the predicate renamed makes the item fail. Advisory: resolutionPower duplicates the live NaturalTransport.power, which only a theorem node owns; NZ's comonad theorem should reuse this def node."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

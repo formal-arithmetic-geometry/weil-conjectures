@@ -22,107 +22,62 @@
  ],
  "proof": [
   {
-   "text": "The field $k$ is Noetherian (its ideals are $0$ and $k$), and [lem-weil-pbc-finite-type-over-noetherian] makes $X,Z$ Noetherian. On ordinary constant-$A$ module sheaves, [lem-trf-oriented-closed-base-localization] gives exact closed direct image $F=i_{\\mathrm{et},*}$. By [lem-sf-exact-functor-derived-triangulated], its total unbounded right derived functor is canonically its termwise descent: an exact functor preserves kernels, images and hence cohomology and quasi-isomorphisms. The localization universal property [lem-weil-pbc-localization-universal-property] identifies this descent with the total right derived functor: its comparison is already invertible before any resolution, and natural transformations out of either functor are the same transformations after localization. For $c=(\\operatorname{id}_Z,i)$, [def-amb-etale-compact-support] gives $Ri_!^c=Ri_{\\mathrm{et},*}D(\\operatorname{id}_!)$. The presheaf formula in [def-weil-pbc-extension-by-zero] at the identity is already the given sheaf, so its sheafification and derived descent are identities. This gives the asserted canonical isomorphisms on the entire unbounded etale category. In the rest of the proof read the compact-support adjunction through this left-functor isomorphism.",
+   "text": "Use the specified compactSupportIso to transport the compact-support adjunction to F = Ri_et,*. The chosen support adjunction is the adjunction from [lem-exc-closed-support-triangle]. Apply [det-sp-unique-right-adjoint], concretely rightAdjointUniq_hom_app_counit, to obtain the first conjunct with exactly rightAdjointIso. The transported counit unfolds to compactSupportIso inverse followed by the compact-support counit.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-trf-oriented-closed-base-localization",
-    "lem-sf-exact-functor-derived-triangulated",
-    "def-amb-etale-compact-support",
-    "def-weil-pbc-extension-by-zero",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor); etale-cohomology.tex Tag 04CA (proposition-closed-immersion-pushforward); sites-modules.tex Tag 08M3 (lemma-i-star-equivalence); identity extension by zero: Tag 03S3"
-   }
-  },
-  {
-   "text": "Write $G=i_c^\\times$, $J=i_{\\mathrm{supp}}^\\times$, and write $\\epsilon^G:FG\\to1$ for the compact-support counit after Step 1. The support adjunction $F\\dashv J$ and its counit $\\epsilon^J$ are those of [lem-exc-closed-support-triangle]. Apply [det-sp-unique-right-adjoint] to these two adjunctions of the same unbounded etale functor $F$. It gives a unique natural isomorphism $\\gamma:G\\xrightarrow{\\sim}J$ characterized, for every $M$, by $\\epsilon^J_M\\circ F(\\gamma_M)=\\epsilon^G_M$. This proves the first right-adjoint and counit assertion without restricting to constructible or bounded objects.",
-   "uses": [
+    "def-sf-closed-finite-counit-transport",
     "lem-exc-closed-support-triangle",
     "det-sp-unique-right-adjoint"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.md",
-    "place": "The two transpose maps and their counit equation; application to the first localization triangle of sk-prop-a1"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
+    "place": "First localization triangle; identity/proper compactification and closed counit (old item Step 1)"
    }
   },
   {
-   "text": "Choose $a$ with $B\\in D^{\\ge a}$. Exactness of $F$ in Step 1 makes $F$ t-exact, since $H^m(FV)=F(H^mV)$ termwise. Put $T=\\tau_{\\le a-1}(JB)$ using the standard truncation of [def-sbc-standard-tstructure-derived-category]. Then $FT\\in D^{\\le a-1}$, so the orthogonality axiom of [def-weil-t-structure] gives $\\operatorname{Hom}(FT,B)=0$. Under $F\\dashv J$, this is $\\operatorname{Hom}(T,JB)=0$. In particular the truncation map $T\\to JB$ is zero. In degrees $m<a$ it induces an isomorphism on cohomology, by the explicit kernel truncation, so $H^m(JB)=0$. Thus $D=JB\\in D^{\\ge a}$; this is a direct truncation argument on the unbounded category, without a cohomological-dimension assumption.",
+   "text": "Closed etale direct image is exact by the existing finite-direct-image instance [lemma-weil-pbc-finite-direct-image-exact]. The existing exact-functor bound API of [lem-weil-pbc-exact-functor-bounded-below] proves both cohomological bounds for its termwise descent. Transfer these across the specified termwiseIso to F. The same API proves lower-bound preservation for both comparison pullbacks [def-sf-comparison-derived-pullback]. The actual comparison unit is invertible on D+ by [thm-weil-pbc-site-comparison]. Restrict the already specified closedComparison of [def-sf-closed-finite-counit-transport] to D+ by whiskering the inclusion.",
    "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "def-weil-t-structure"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), standard truncation; agent application of adjunction and standard t-structure orthogonality"
-   }
-  },
-  {
-   "text": "Let $\\eta_B:B\\to R\\nu_{X,*}\\nu_X^*B$ be the comparison unit. It is a natural isomorphism on $D^+$ by [thm-weil-pbc-site-comparison]; set $r_B=\\eta_B^{-1}$. Define $E=G R\\nu_{X,*}\\nu_X^*B$ and $\\beta_B=\\gamma_B\\circ G(r_B):E\\xrightarrow{\\sim}JB=D$. Step 3 therefore also makes $E$ bounded below. The definition [def-weil-exceptional-inverse-image] is literally $Ri^!K=\\nu_Z^*E$ for $K=\\nu_X^*B$, so $\\alpha_B=\\nu_Z^*(\\beta_B)$ is the required isomorphism $Ri^!K\\xrightarrow{\\sim}\\nu_Z^*D$. Exact termwise pullback [def-sf-comparison-derived-pullback] preserves the lower bounds. All components are natural in $B$.",
-   "uses": [
+    "def-sf-closed-finite-counit-transport",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-sf-comparison-derived-pullback",
     "thm-weil-pbc-site-comparison",
-    "def-weil-exceptional-inverse-image",
-    "def-sf-comparison-derived-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 5.2.6(1)-(2), p. 37; application to the finite transported definition in def-weil-exceptional-inverse-image"
-   }
-  },
-  {
-   "text": "Closed $i$ is quasi-compact and quasi-separated. For every $H\\in D^+(Z_{\\mathrm{et}},A)$, apply [sk-thm-pe-direct-image-comparison] to get the canonical comparison $\\lambda_H:\\nu_X^*FH\\xrightarrow{\\sim}Ri_{\\mathrm{proet},*}\\nu_Z^*H$. By [lem-exc-proetale-closed-exact] pro-etale $i_*$ is exact on module sheaves; here the quasi-compact open complement is exactly the required hypothesis. Hence, by the argument of Step 1 with [lem-sf-exact-functor-derived-triangulated] and [lem-weil-pbc-localization-universal-property], the latter is termwise $i_*\\nu_Z^*H$. At $c=(\\operatorname{id},i)$ this is also the inverse of the compact-support comparison of [lem-sf-class-compact-support-comparison], since the identity extension contributes no map. For a bounded-below etale $H$ and bounded-below pro-etale $L$, the transported adjunction is the chain\n$$\\operatorname{Hom}(i_*\\nu_Z^*H,L)\\cong\\operatorname{Hom}(\\nu_X^*FH,L)\\cong\\operatorname{Hom}(FH,R\\nu_{X,*}L)\\cong\\operatorname{Hom}(H,GR\\nu_{X,*}L)\\cong\\operatorname{Hom}(\\nu_Z^*H,\\nu_Z^*GR\\nu_{X,*}L).$$\nThe last bijection is comparison full faithfulness in [thm-weil-pbc-site-comparison]; the value is bounded below by the finite definition [def-weil-exceptional-inverse-image]. Expanding these adjunction bijections, the inverse image of the identity of $\\nu_Z^*GR\\nu_{X,*}L$ is\n$$\\epsilon^{\\mathrm{tr}}_L=\\epsilon^\\nu_L\\circ\\nu_X^*(\\epsilon^G_{R\\nu_{X,*}L})\\circ\\lambda_{GR\\nu_{X,*}L}^{-1},$$\nwhere $\\epsilon^\\nu$ is the comparison counit. This is precisely the counit of the finite transported exceptional functor, rather than a claim about adjunction on all pro-etale objects.",
-   "uses": [
-    "sk-thm-pe-direct-image-comparison",
-    "lem-exc-proetale-closed-exact",
-    "lem-sf-class-compact-support-comparison",
-    "thm-weil-pbc-site-comparison",
-    "def-weil-exceptional-inverse-image",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-localization-universal-property"
+    "lemma-weil-pbc-finite-direct-image-exact"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A6 (lemma-morphism-comparison) and Tag 09BM (lemma-closed-immersion-complement-retrocompact-exact); expanded transported Hom bijections of def-weil-exceptional-inverse-image"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F; exact closed direct image and the canonical total-derived/termwise comparison"
    }
   },
   {
-   "text": "Now take $L=K=\\nu_X^*B$. The comparison triangle identity gives $\\epsilon^\\nu_K\\circ\\nu_X^*(\\eta_B)=1_K$, hence $\\epsilon^\\nu_K=\\nu_X^*(r_B)$. Counit naturality for $F\\dashv G$, followed by the equation of Step 2, gives\n$$r_B\\circ\\epsilon^G_{R\\nu_{X,*}K}=\\epsilon^G_B\\circ FG(r_B)=\\epsilon^J_B\\circ F(\\gamma_B)\\circ FG(r_B)=\\epsilon^J_B\\circ F(\\beta_B).$$\nSubstitute in Step 5 and use naturality of $\\lambda$ at $\\beta_B:E\\to D$:\n$$\\epsilon^{\\mathrm{tr}}_K=\\nu_X^*(\\epsilon^J_B)\\circ\\nu_X^*F(\\beta_B)\\circ\\lambda_E^{-1}=\\nu_X^*(\\epsilon^J_B)\\circ\\lambda_D^{-1}\\circ i_*(\\alpha_B).$$\nThus after identifying $Ri^!K$ with $\\nu_Z^*D$ by $\\alpha_B$ and identifying $\\nu_X^*i_*D$ with $i_*\\nu_Z^*D$ by $\\lambda_D$, its counit is exactly the image of the etale support counit. The equation uses the actual comparison unit and counit and is natural in $B$; every object to which comparison full faithfulness was applied is bounded below by Steps 3--4.",
-   "uses": [],
-   "elementary": true,
+   "text": "Apply [lem-pur-exact-adjoint-classical-counit-comparison] to F, the compact-support right adjoint G with its transported adjunction, the support right adjoint J, the two exact site-comparison pullbacks, their actual derived adjunction on X, and proTermwise. Its hD is the second conjunct. Its natural alpha has the required source because [def-weil-exceptional-inverse-image] is literally the composite UX then G then SZ. The lemma pins r.inv to the actual unit; applying inversion identifies r.hom with comparisonUnitIso.inv. Substitute this into the lemma beta and alpha component equations to get the prescribed alpha formula. Finally its two equations for t combine directly to the last conjunct: their first right-hand side is definitionally transportedCounit, and their second is precisely the required support-counit expression. No extra Hom-bijection or ambient pro-etale adjunction is needed for this already defined transported counit.",
+   "uses": [
+    "lem-pur-exact-adjoint-classical-counit-comparison",
+    "def-weil-exceptional-inverse-image",
+    "def-sf-closed-finite-counit-transport"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
-    "place": "First localization triangle: agent expansion of its closed counit identification by adjunction triangle identity and counit naturality"
+    "place": "First localization triangle; identity/proper compactification and closed counit (old item Step 1)"
    }
   }
  ],
  "proof_deps": [
-  "def-amb-etale-compact-support",
-  "def-sbc-standard-tstructure-derived-category",
+  "def-sf-closed-finite-counit-transport",
   "def-sf-comparison-derived-pullback",
   "def-weil-exceptional-inverse-image",
-  "def-weil-pbc-extension-by-zero",
-  "def-weil-t-structure",
   "det-sp-unique-right-adjoint",
   "lem-exc-closed-support-triangle",
-  "lem-exc-proetale-closed-exact",
-  "lem-sf-class-compact-support-comparison",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-trf-oriented-closed-base-localization",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-localization-universal-property",
-  "sk-thm-pe-direct-image-comparison",
+  "lem-pur-exact-adjoint-classical-counit-comparison",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lemma-weil-pbc-finite-direct-image-exact",
   "thm-weil-pbc-site-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
-  "place": "First closed-open localization triangle; the ordinary etale compact-support adjoint and its finite comparison counit, expanded using Stacks 015F, 04CA, 08M3, 08J5, 09A6, 09BM and Bhatt-Scholze Proposition 5.2.6."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
+  "place": "First closed-open localization triangle; assembly using the existing exact-adjoint classical counit comparison, the exact-functor bound API and the specified transported-counit definition (J8, 2026-10-25)."
  },
  "mathlib_searches": [
   {
@@ -218,11 +173,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pur-closed-finite-adjoint-counit-transport",
   "worker": "stage1",
-  "summary": "Split into exact unbounded closed compact support, counit-normalized right-adjoint uniqueness, explicit truncation lower bound, comparison unit isomorphism, transported Hom bijections, and the explicit counit equation. Reused existing nodes throughout; unchanged statement, no new nodes, no Lean changes.",
-  "blueprint": "prop-pur-affine-line-orientation-uniqueness proof Steps 1 and 3: sk-prop-a1 first closed-open localization triangle; closed adjoint and first counit before applying the retraction.",
+  "summary": "Repair of batch-5 re-split: three independently assignable statement-only nodes extract unbounded left normalization (returned Step 1), the explicit relative Hom/counit formula (Step 5), and a general exact-derived-adjoint lower-bound/classical-counit comparison (Steps 3,4,6). Returned Step 2 uses the existing unique-right-adjoint node. Short assembly, unchanged statement; every original argument preserved with its assignment in report.md.",
+  "blueprint": "prop-pur-affine-line-orientation-uniqueness proof Steps 1 and 3, sk-prop-a1 first localization triangle: three new nodes realize returned Steps 1; 5; and 3,4,6 respectively. Existing det-sp-unique-right-adjoint realizes returned Step 2.",
   "tool_uses": [
    {
     "node": "def-amb-etale-compact-support",
@@ -273,18 +228,15 @@
   "def-weil-pbc-extension-by-zero",
   "lem-exc-closed-support-triangle",
   "lem-exc-proetale-closed-exact",
-  "lem-sf-class-compact-support-comparison",
-  "lem-trf-oriented-closed-base-localization",
-  "sk-thm-pe-direct-image-comparison",
   "thm-weil-pbc-site-comparison"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q84-0a3c23f88",
-  "group": "Q84",
+  "reviewer": "NT-cc-Q130-a8a32c70a",
+  "group": "Q130",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-0a3c23f88 (reviewer sub-agent of L); spot-checked: Zero-new-node split. The item statement and stmt_deps are unchanged from the side-live base. There is no re-split note, no dropped listing, no SGA citation and no cycle (closures of all 16 cited nodes checked). Steps 1-6 hold: (1) X and Z are Noetherian via 01T6 over k; trf-oriented-closed-base-localization, module paragraph plus scheme paragraph, gives exact étale i_*, so Ri_!^c at c=(id,i) equals termwise i_* (id_! is the identity). (2) det-sp-unique-right-adjoint applies to two adjoints of the same F. (3) The truncation argument correctly gives J(D^{>=a}) in D^{>=a}. (4) Ri^!K = nu_Z^* G Rnu_* K literally by the definition, and beta and alpha type-check. (5) The Hom chain realizes the transport of thm-sf-ambient-adjoint-class(2); the compact-support comparison at (id,i) is lambda^{-1}. (6) I re-derived the equation chain (triangle identity, counit naturality, naturality of lambda) and it is correct. FIX: Step 5 passed from exactness of pro-étale i_* to Ri_{proet,*} = termwise i_* without citing the exact-functor and localization nodes. I added lem-sf-exact-functor-derived-triangulated and lem-weil-pbc-localization-universal-property to its text and uses; both were already in proof_deps. Batch-5 flag lem-trf-oriented-closed-base-localization: this is generic Stacks topos theory (08LY/08M3/04CA). Its 236-node closure reaches only generic trf topos-construction nodes and no trace-formula, Poincaré, sk-thm-trace-transport or batch-4 node. It is not part of either assumption, so it is accepted. All ten tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-a8a32c70a (reviewer sub-agent of L); spot-checked: Re-split under the released 2026-10-21/22 human note. Against the side-live base (split, reviewed by Q84) the item changes only proof, proof_deps and split_report. Statement, stmt_deps, lean and tool_uses are unchanged. The item is not dropped, not superseded live, and cites no SGA. Every old argument now has a home. Old Step 1 is node lem-pur-closed-unbounded-compact-support-normalization (1402 chars). Old Step 5 is node lem-pur-closed-transported-hom-counit-formula (2569). Old Steps 3, 4 and 6 are node lem-pur-exact-adjoint-classical-counit-comparison (1992). Old Step 2 was already a one-node application and is now an assembly citation of the Mathlib leaf det-sp-unique-right-adjoint, which states γ with ε^J F(γ)=ε^G exactly. The assembly is 3 steps and 1864 chars. No node restates the item; C is purely categorical, with geometric inputs from A, B and thm-weil-pbc-site-comparison. Source checks: def-amb-etale-compact-support at c=(id,i) gives Ri_*∘D(id_!); exact étale i_* (trf closed localization, Stacks 08M3/04CA, 015F) gives the unbounded termwise identification and H^m(FV)=F_0H^mV. sk-thm-pe-direct-image-comparison applies to qcqs i on D^+. lem-exc-proetale-closed-exact needs the quasi-compact complement, which the node assumes. The thm-sf-ambient-adjoint-class proof chain ends in full faithfulness, as in B. I re-derived B's inverse image of 1 as e_L∘S_X(ε^G)∘λ^{-1}. I re-derived C: the truncation bound (Hom(Fτ_{≤a-1}JN,N)=0), the isomorphisms β and α, and the equation, via the triangle identity, counit naturality, γ-normalization and naturality of λ at β. I checked every hypothesis of C against the assembly: F bounds from A, S_T lower bounds from def-sf-comparison-derived-pullback, η invertible on D^+, and λ from B. Edge cases: Z empty, i=id, N=0, shifted N, all functors identity. Duplicate candidates (lem-coef-closed-identity-open-hom-normalization, lem-coef-site-closed-counit-transport, lem-pur-bounded-site-adjunction-transpose, lemma-weil-pbc-finite-direct-image-exact, lem-sf-etale-immersion-shriek-normalization) are classical-target-only or bounded-only, or sit in units that sk-prop-a1 does not cite, so none duplicates a new node. Advisory: workers proving node B may use the first or third of these as tools. Blueprint from/via, created, statement-only form and the searches are correct (node B's LeanSearch is recorded as unavailable). Accepted tool_uses: the base's ten, unchanged. No fixes written."
  },
  "lean": {
   "module": "Sheaf.Paper.ClosedFiniteAdjointCounitTransport",
@@ -315,5 +267,27 @@
   "group": "Q20",
   "result": "pass",
   "note": "Node changed only in lean; dep nodes identical to side-live; statement verbatim, one sorry, docstrings with source/blueprint and Steps 1-6. Hypotheses match (separated finite-type k-schemes, closed i over k, qc open j with IsCompl ranges), nothing extra. J = (lowerStar i).rightDerivedFunctor.rightAdjoint with ofIsLeftAdjoint counit, exactly exists_etale_closedSupportTriangle. compactSupportIso (derived id extension by zero + unitor) and termwiseIso are canonical, unbounded. Conjunct 1: counit equation of rightAdjointUniq (node Step 2) for all unbounded B; conjunct 2: J B in t.plus for B in D+; alpha pinned to nu_Z^*(G(eta_B^{-1}) >> gamma_B) with the actual derivedComparisonAdjunction unit; transportedCounit = Step 5 expansion (closedComparison = descended qcqs base-change mate, proTermwise exact via qc complement); final equation = Step 6 in correct order. No duplicate (closed-support-exceptional-comparison is the constructible-value variant). Advisory: transportedCounit/lambda agreement with thm-sf-ambient-adjoint-class Hom chain is left to the proof; conjunct 1 close to Mathlib rightAdjointUniq counit lemma, matching the node. No compile (no file changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261025T143519-L-1037919",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

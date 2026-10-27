@@ -126,7 +126,80 @@
   "def-sp-filtration"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "CategoryTheory.PBCFilteredObject.restriction",
+     "module": "WeilConjectures.CategoryTheory.PBCFiniteFiltrationInduction",
+     "lines": [
+      34,
+      40
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.PBCFilteredObject.exists_gradedMap",
+     "module": "WeilConjectures.CategoryTheory.PBCFiniteFiltrationInduction",
+     "lines": [
+      56,
+      83
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.PBCFilteredObject.gradedMap",
+     "module": "WeilConjectures.CategoryTheory.PBCFiniteFiltrationInduction",
+     "lines": [
+      85,
+      92
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.PBCFilteredObject.finite_filtration_induction",
+     "module": "WeilConjectures.CategoryTheory.PBCFiniteFiltrationInduction",
+     "lines": [
+      117,
+      198
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.FilteredObject.exists_gradedMap",
+     "module": "WeilConjectures.CategoryTheory.FiniteFiltrationInduction",
+     "lines": [
+      35,
+      41
+     ],
+     "kind": "theorem",
+     "sorry": true
+    },
+    {
+     "name": "CategoryTheory.FilteredObject.finite_filtration_induction",
+     "module": "WeilConjectures.CategoryTheory.FiniteFiltrationInduction",
+     "lines": [
+      77,
+      81
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -145,7 +218,7 @@
   "declaration": "CategoryTheory.FilteredObject.finite_filtration_induction_steps",
   "file": "lean/WeilConjectures/CategoryTheory/FiniteFiltrationInductionExtension.lean",
   "statement": "theorem finite_filtration_induction_steps (A B : FilteredObject C) (f : Hom A B) (hA : A.filtration.IsFinite) (hB : B.filtration.IsFinite) (hgraded : ∀ p : ℤ, IsIso (gradedMapSteps f p)) : IsIso f.hom ∧ ∀ p : ℤ, IsIso (restrictionSteps f p)",
-  "branch": "sheaf-dag",
+  "branch": "slopmaster2",
   "by": "M1",
   "date": "2026-10-11",
   "existing": true,
@@ -153,9 +226,11 @@
    "CategoryTheory.FilteredObject.restrictionSteps",
    "CategoryTheory.FilteredObject.exists_gradedMap_steps",
    "CategoryTheory.FilteredObject.gradedMapSteps",
-   "CategoryTheory.FilteredObject.finite_filtration_induction_steps"
+   "CategoryTheory.FilteredObject.finite_filtration_induction_steps",
+   "CategoryTheory.FilteredObject.exists_gradedMap",
+   "CategoryTheory.FilteredObject.finite_filtration_induction"
   ],
-  "note": " 2026-10-20 X3: after retiring Sheaf.CategoryTheory.Filtration, the filtered morphism type is the official FilteredObject.Hom; both fields are exactly the former HomPreservingSteps fields. The mathematical statement and hypotheses are unchanged. 2026-10-21 S3: retire the duplicate Sheaf module in favor of the adopted FiniteFiltrationInductionExtension module, which already proves exactly the same four public declarations with identical signatures and bodies. Preserve the node, its proof dependencies, and all parent and unit routes."
+  "note": " 2026-10-20 X3: after retiring Sheaf.CategoryTheory.Filtration, the filtered morphism type is the official FilteredObject.Hom; both fields are exactly the former HomPreservingSteps fields. The mathematical statement and hypotheses are unchanged. 2026-10-21 S3: retire the duplicate Sheaf module in favor of the adopted FiniteFiltrationInductionExtension module, which already proves exactly the same four public declarations with identical signatures and bodies. Preserve the node, its proof dependencies, and all parent and unit routes. | 2026-10-22 maintainer: the upstream declarations FilteredObject.exists_gradedMap and FilteredObject.finite_filtration_induction (WeilConjectures.CategoryTheory.FiniteFiltrationInduction, docstrings 'Blueprint: lem-sp-finite-filtration-induction') state this node with proof `sorry`; they are the sorry-free *_steps declarations recorded here up to the definitionally equal restriction/restrictionSteps, gradedMap/gradedMapSteps (each `Classical.choose` of the same proof), so they close by the *_steps proofs. Recorded here (branch sheaf-dag -> slopmaster2)"
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -174,5 +249,24 @@
   "landing": "20261020T233220-L-907056",
   "kind": "interface",
   "note": "independent cc review: retired Sheaf.CategoryTheory.FiniteFiltrationInduction vs WeilConjectures.CategoryTheory.FiniteFiltrationInductionExtension (identical declaration section); 12 adapted modules vs live (one import line each); node lean record vs replacement; 14 delivered + 15 direct importers compiled clean; axioms clean; files identical to the PASSed head 487962863523"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(A,F)$ and $(A',F')$ be filtered objects [def-sp-filtration] with finite\nfiltrations, and let $\\varphi:A\\to A'$ be a morphism of filtered objects. If\n$\\operatorname{gr}^p\\varphi$ is an isomorphism for all $p$, then $\\varphi$ is\nan isomorphism, and for every $p$ the restriction\n$F^pA\\to F^pA'$ of $\\varphi$ is an isomorphism.",
+  "proof": [
+   {
+    "text": "Apply the five lemma to the commutative diagram of short exact sequences\n\n$$\n\\begin{array}{ccccccccc}\n0&\\to& F^{p+1}A&\\to& F^{p}A&\\to& \\operatorname{gr}^p A&\\to&0\\\\\n&&\\downarrow&&\\downarrow&&\\downarrow&&\\\\\n0&\\to& F^{p+1}A'&\\to& F^{p}A'&\\to& \\operatorname{gr}^p A'&\\to&0\n\\end{array}\n$$\n\nin which the third vertical arrow is an isomorphism by hypothesis: descending\ninduction on $p$, starting where both filtrations vanish (using the *graded\npieces* of [def-sp-filtration]) shows $F^{p}A\\to F^{p}A'$ is an isomorphism\nfor all $p$; for $p$ small enough both steps are the whole objects, which gives\nthat $\\varphi$ is an isomorphism.",
+    "uses": [
+     "def-sp-filtration"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

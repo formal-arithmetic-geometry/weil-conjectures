@@ -1,0 +1,247 @@
+{
+ "id": "lem-sf-coefficient-evaluation-naturality",
+ "kind": "statement",
+ "title": "Naturality and evaluation equation for the coefficient Hom comparison",
+ "statement": "Fix distinct primes $p,\\ell$, integers $a,n\\ge1$, $q=p^a$, $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, and a finite extension $E/\\mathbf Q_\\ell$ inside $\\overline{\\mathbf Q}_\\ell$, with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$. Put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and choose $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Fix a six-functor datum [def-sf-datum], let $X$ be a finite-type $k$-scheme in its domain, and use the actual coefficient categories, tensor and internal Hom of [sk-def-sf-operations](i). Write $\\mathbf1=\\Lambda_X$, $H(P,M)=R\\mathcal Hom_X(P,M)$ and $P^\\vee=H(P,\\mathbf1)$. The integral unit and tensor are completed; the field categories are the specified rationalization and common finite-stage categories, respectively. All tensor constraints and symmetries below are those of these categories, including their cohomological signs.\n\nFor $P,M$ in these categories, let $c_{P,M}:P^\\vee\\otimes M\\to H(P,M)$ be the tensor--Hom transpose of\n$$P^\\vee\\otimes M\\otimes P\\xrightarrow{1\\otimes\\sigma_{M,P}}P^\\vee\\otimes P\\otimes M\\xrightarrow{e_P\\otimes1}\\mathbf1\\otimes M\\cong M,$$\nwhere $e_P:P^\\vee\\otimes P\\to\\mathbf1$ is coefficient evaluation. For morphisms $u:P\\to P'$ and $v:M\\to M'$, these specified maps satisfy\n$$H(u,v)\\circ c_{P',M}=c_{P,M'}\\circ(u^\\vee\\otimes v).$$\nLet $L,W$ be objects and $\\gamma:L\\xrightarrow{\\sim}W$ an isomorphism. On any full subcategory on which every $c_{P,L}$ is invertible, put $D_WP=H(P,W)$ and $\\theta_P=c_{P,L}^{-1}\\circ H(P,\\gamma^{-1})$. Then $\\theta$ is natural contravariantly in $P$, and the actual evaluation $\\mathrm{ev}_{P,W}:D_WP\\otimes P\\to W$ satisfies\n$$\\mathrm{ev}_{P,W}\\circ(\\theta_P^{-1}\\otimes1_P)=\\gamma\\circ(e_P\\otimes1_L)\\circ(1_{P^\\vee}\\otimes\\sigma_{L,P}).$$\nAssociators and unitors are inserted in the displayed composites. The statement concerns these evaluation-defined arrows, without an assumption on an exceptional inverse-image functor or an orientation. For perfect $P$ and $L=\\Lambda_X(m)[s]$, $m,s\\in\\mathbf Z$, the comparison $c_{P,L}$ is invertible and its inverse is precisely the canonical isomorphism $H(P,\\Lambda_X(m)[s])\\xrightarrow{\\sim}P^\\vee(m)[s]$ of [sk-lem-sf-twist-interchange], using the twists of [def-coefficient-twists-detailed].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+  "place": "proof, sentences 1–3: both arrows are natural; evaluation-transpose expansion of returned Step 2"
+ },
+ "stmt_deps": [
+  "sk-def-sf-operations",
+  "def-sf-datum",
+  "sk-def-perfect",
+  "sk-lem-sf-twist-interchange",
+  "def-coefficient-twists-detailed",
+  "def-dl-a1-locally-constructible-adic-heart",
+  "def-sf-coefficient-evaluation-transpose",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Unfold ringedSiteDualEvaluationLeft and transpose. Adjunction naturality in the tensor source moves the braiding inside the transpose. The braiding hexagon, its naturality for evaluation and the braiding-unitor equation give the displayed evaluation formula with all associators and signed symmetry. For contravariant source naturality use ringedSiteDualEvaluation_source_naturality and braiding naturality.",
+   "uses": [
+    "sk-def-sf-operations",
+    "lem-pod-closed-uncurry-laws",
+    "lem-sfb-ringed-site-duality-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "sentences 1–3, naturality of the two arrows; explicit tensor–Hom transpose calculation"
+   }
+  },
+  {
+   "text": "Factor H(u,v) into H(u,1) followed by H(1,v). Apply the source naturality from Step 1 and ringedSiteDualEvaluationLeft_naturality, then tensor bifunctoriality. This proves the two-variable naturality without importing any coefficient-specific hypotheses.",
+   "uses": [
+    "sk-def-sf-operations",
+    "lem-sfb-ringed-site-duality-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "sentences 1–3, naturality of the two arrows; explicit tensor–Hom transpose calculation"
+   }
+  },
+  {
+   "text": "On the stated full subcategory set $a_P=c_{P,L}$ and $h_P=H(P,\\gamma^{-1})$. Both are invertible, the first by hypothesis and the second because $H(P,-)$ is a functor. Step 2 gives $H(u,1_L)a_{P'}=a_P(u^\\vee\\otimes1_L)$. Bifunctoriality gives $h_PH(u,1_W)=H(u,1_L)h_{P'}$. Multiplying these identities by $a_P^{-1}$ and $a_{P'}^{-1}$ proves\n$$\\theta_PH(u,1_W)=(u^\\vee\\otimes1_L)\\theta_{P'}.$$\nAlso $\\theta_P^{-1}=H(P,\\gamma)a_P$. The covariant evaluation identity from Step 1 followed by its defining equation for $c$ now gives\n$$\\mathrm{ev}_{P,W}(\\theta_P^{-1}\\otimes1_P)\n=\\gamma\\,\\mathrm{ev}_{P,L}(c_{P,L}\\otimes1_P)\n=\\gamma\\,(e_P\\otimes1_L)(1\\otimes\\sigma_{L,P}).$$\nThis is the displayed equation for the actual evaluation, for arbitrary $L,W$ and $\\gamma$ subject only to the hypotheses in the statement.",
+   "uses": [
+    "sk-def-sf-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+    "place": "sentences 1–3, naturality of the two arrows; explicit tensor–Hom transpose calculation"
+   }
+  },
+  {
+   "text": "Apply lem-sf-shifted-coefficient-lines-invertible to obtain membership and tensor invertibility for each of the four literal signed shifted Tate objects. The evaluation formula of Step 1 and naturality of the adjunction in its target identify c_{P,L} with sfTwistTensorHomMap(P,1,L) followed by H(P,leftUnitor). By sk-lem-sf-twist-interchange this is invertible for dualizable P. Equality of inverse isomorphisms follows from this equality of their forward maps. Instantiate this generic argument for the four recorded closed domains, using precisely the membership witnesses of the shifted-line lemma.",
+   "uses": [
+    "sk-lem-sf-twist-interchange",
+    "lem-sf-shifted-coefficient-lines-invertible",
+    "sk-def-sf-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-twist-interchange/sk-lem-sf-twist-interchange.proof.md",
+    "place": "first paragraph, definition of c by evaluation transpose and its inverse as the canonical map; final paragraph, M equal to the coefficient unit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sf-operations",
+  "lem-pod-closed-uncurry-laws",
+  "lem-sfb-ringed-site-duality-maps",
+  "sk-lem-sf-twist-interchange",
+  "lem-sf-shifted-coefficient-lines-invertible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/sk-thm-sf-dual-perfect.proof.md",
+  "place": "proof first sentence: naturality; twist-interchange proof final paragraph for shifted line specialization; abstract identities proved from the recorded adjunction and existing naturality theorems"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ihomTensorToIhom|isIso_toIhomIhomUnit|toIhomIhom_naturality",
+   "results": "{\"t\": \"2026-10-22T06:47:43Z\", \"tool\": \"grep\", \"query\": \"ihomTensorToIhom|isIso_toIhomIhomUnit|toIhomIhom_naturality\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In completed integral rationalized and common finite stage sheaf derived categories dualizable complexes have canonical coefficient evaluation and biduality",
+   "results": "{\"t\": \"2026-10-22T06:47:43Z\", \"tool\": \"leansearch\", \"query\": \"In completed integral rationalized and common finite stage sheaf derived categories dualizable complexes have canonical coefficient evaluation and biduality\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.toIhomIhomUnit, CategoryTheory.IsDualizable",
+   "results": "{\"t\": \"2026-10-22T06:47:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalClosed.toIhomIhomUnit, CategoryTheory.IsDualizable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.MonoidalClosed.toIhomIhomUnit'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "invalid query: unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes on pro etale coefficient categories have coefficient dual internal Hom tensor comparison natural in both variables and canonical double dual evaluation isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:47:53Z\", \"tool\": \"leanfinder\", \"query\": \"Perfect complexes on pro etale coefficient categories have coefficient dual internal Hom tensor comparison natural in both variables and canonical double dual evaluation isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.ihomPoints_symm_apply\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.ihomPoints\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\"], \"digest\": \"67ed2e9294aeb100\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "ihom\\.ev|ev_naturality|uncurry_natural",
+   "results": "{\"t\": \"2026-10-22T06:48:29Z\", \"tool\": \"grep\", \"query\": \"ihom\\\\.ev|ev_naturality|uncurry_natural\", \"sub\": \"CategoryTheory/Monoidal/Closed\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\"], \"digest\": \"60ae99fb32fd853a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.ihom",
+   "results": "{\"t\": \"2026-10-22T06:48:30Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalClosed, CategoryTheory.ihom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.internalHom_obj\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj\", \"CategoryTheory.MonoidalClosed.internalHom_map\", \"CategoryTheory.MonoidalClosed.ofEquiv_curry_def\", \"CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def\", \"CategoryTheory.ObjectProperty.prop_ihom\", \"CategoryTheory.ObjectProperty.IsMonoidalClosed.prop_ihom\", \"CategoryTheory.ObjectProperty.IsMonoidalClosed.mk\"], \"digest\": \"1bae8d5d0992486b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the tensor internal Hom evaluation comparison in a dualizable first variable and compatibility with an isomorphism in the second variable",
+   "results": "{\"t\": \"2026-10-22T06:48:41Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of the tensor internal Hom evaluation comparison in a dualizable first variable and compatibility with an isomorphism in the second variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.tensorRightHomEquiv_naturality\", \"CategoryTheory.ihom.coev_naturality_assoc\", \"CategoryTheory.tensorLeftHomEquiv_naturality\", \"CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation\", \"CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation\", \"CategoryTheory.ihom.coev_naturality\"], \"digest\": \"70f8bb132f3d4091\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates do not state the specified evaluation and stage-specific derived coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry_natural|ev_naturality|uncurry_curry",
+   "results": "{\"t\": \"2026-10-22T07:52:53Z\", \"tool\": \"grep\", \"query\": \"uncurry_natural|ev_naturality|uncurry_curry\", \"sub\": \"CategoryTheory/Monoidal/Closed\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\"], \"digest\": \"78c0d62771e31488\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: basic closed-adjunction/evaluation laws are relevant ingredients but none of these declarations states all clauses, including the coefficient twist isomorphism, for the specified four coefficient categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of internal Hom evaluation and the canonical map from dual tensor to internal Hom",
+   "results": "{\"t\": \"2026-10-22T07:52:53Z\", \"tool\": \"leansearch\", \"query\": \"Naturality of internal Hom evaluation and the canonical map from dual tensor to internal Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ihom.ev_naturality_assoc\", \"CategoryTheory.ihom.ev_naturality\", \"FGModuleCat.FGModuleCatEvaluation\", \"CategoryTheory.ihom.ev\", \"CategoryTheory.exp.ev\", \"Module.Dual.eval_naturality\", \"CategoryTheory.ihom.ihom_adjunction_counit\", \"CategoryTheory.ihom.coev_naturality_assoc\"], \"digest\": \"ee7059d40d16b69d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: basic closed-adjunction/evaluation laws are relevant ingredients but none of these declarations states all clauses, including the coefficient twist isomorphism, for the specified four coefficient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.uncurry",
+   "results": "{\"t\": \"2026-10-22T07:52:54Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalClosed.uncurry\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.uncurry\", \"CategoryTheory.MonoidalClosed.uncurry_injective\", \"CategoryTheory.MonoidalClosed.uncurry_curry\", \"CategoryTheory.MonoidalClosed.curry_uncurry\", \"CategoryTheory.MonoidalClosed.curry_eq_iff\", \"CategoryTheory.MonoidalClosed.eq_curry_iff\", \"CategoryTheory.MonoidalClosed.uncurry_id_eq_ev\", \"CategoryTheory.MonoidalClosed.uncurry_natural_left\"], \"digest\": \"0dc56385534a1bb2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: basic closed-adjunction/evaluation laws are relevant ingredients but none of these declarations states all clauses, including the coefficient twist isomorphism, for the specified four coefficient categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor internal Hom comparison from dual tensor M to internal Hom P M is natural in P and M and its transpose is evaluation",
+   "results": "{\"t\": \"2026-10-22T07:53:04Z\", \"tool\": \"leanfinder\", \"query\": \"The tensor internal Hom comparison from dual tensor M to internal Hom P M is natural in P and M and its transpose is evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.ihom.coev_naturality\", \"CategoryTheory.ihom.coev_naturality_assoc\", \"CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation\", \"CategoryTheory.tensorRightHomEquiv_naturality\", \"CategoryTheory.tensorLeftHomEquiv_naturality\", \"CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation\"], \"digest\": \"7ca4f37132faeae9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: basic closed-adjunction/evaluation laws are relevant ingredients but none of these declarations states all clauses, including the coefficient twist isomorphism, for the specified four coefficient categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal closed category the canonical map internal Hom P unit tensor M to internal Hom P M is natural and transports evaluation along an isomorphism L to W",
+   "results": "{\"t\": \"2026-10-22T07:57:38Z\", \"tool\": \"leanfinder\", \"query\": \"In a symmetric monoidal closed category the canonical map internal Hom P unit tensor M to internal Hom P M is natural and transports evaluation along an isomorphism L to W\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ihom.coev_naturality\", \"CategoryTheory.ihom.coev_naturality_assoc\", \"CategoryTheory.ihom.ev_naturality_assoc\", \"CategoryTheory.ihom.ev_naturality\", \"CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev\", \"CategoryTheory.MonoidalClosed.coev_app_comp_pre_app\", \"CategoryTheory.MonoidalClosed.compTranspose\", \"CategoryTheory.coev_app_comp_pre_app\"], \"digest\": \"b18864f4ba091121\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: basic closed-adjunction/evaluation laws are relevant ingredients but none of these declarations states all clauses, including the coefficient twist isomorphism, for the specified four coefficient categories"
+  },
+  {
+   "tool": "grep",
+   "query": "id_tensor_pre_app_comp_ev|uncurry_pre_app|ihomTensorToIhom|dual.*tensor.*hom",
+   "results": "{\"t\": \"2026-10-22T08:01:12Z\", \"tool\": \"grep\", \"query\": \"id_tensor_pre_app_comp_ev|uncurry_pre_app|ihomTensorToIhom|dual.*tensor.*hom\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean\"], \"digest\": \"cea979f6407e80b1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: basic closed-adjunction/evaluation laws are relevant ingredients but none of these declarations states all clauses, including the coefficient twist isomorphism, for the specified four coefficient categories"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "sk-thm-sf-dual-perfect",
+  "date": "2026-10-22",
+  "group": "Q120"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-dual-perfect",
+ "blueprint": {
+  "from": {
+   "node": "sk-thm-sf-dual-perfect",
+   "place": "proof, sentences 1–3: both arrows are natural; evaluation-transpose expansion of returned Step 2",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-coefficient-evaluation-naturality",
+  "worker": "stage1",
+  "summary": "Expanded inverse transpose, evaluation dinaturality, two-variable naturality of the coefficient comparison, contravariant naturality of theta, and the exact evaluation equation. Reused the existing uncurrying Mathlib leaf and twist-interchange node. Retained the statement and all four actual coefficient categories; no new nodes.",
+  "blueprint": "sk-thm-sf-dual-perfect.proof.md, sentences 1–3 (both arrows natural); the canonical second arrow is the evaluation-defined twist comparison.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-7e06ddc7a",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-7e06ddc7a (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. The statement and stmt_deps are byte-identical to the Q120 version that created this node; only the proof fields changed. Step 1: from the parametrized adjunction of sk-def-sf-operations(i), naturality in (A,P,B) gives ev(H(u,v)⊗1)=v ev(1⊗u) and the dinaturality e_P(u^∨⊗1)=e_{P'}(1⊗u). The Mathlib uncurry laws give ev(c⊗1)=b. Step 2: I recomputed both transposes of P'^∨⊗M→H(P,M'). Using only the naturality of σ, both reduce to (e(…)⊗v)(1⊗σ_{M,P}), and they are equal by Step 1. Step 3: cancelling c_{P,L} and c_{P',L} proves θ_P H(u,1)=(u^∨⊗1)θ_{P'}. θ^{-1}=H(P,γ)c gives the evaluation equation γ b_{P,L}. The step uses only the stated invertibility of c_{P,L}. Step 4: the particular clause of sk-lem-sf-twist-interchange (any invertible T, dualizable K) applies. Its 'canonical map' is, by its source proof paragraph 1 and by the realized lem-sf-twist-interchange, the inverse of the ev⊗1 transpose; that transpose is c_{P,L} after the unitor. P^∨(m)[s]=P^∨⊗Λ(m) shifted, by def-coefficient-twists-detailed. I tested P=0, M=0, P=1, identity maps, γ=1, m<0 and odd s. Route: the twist node is in the unit's uses; the others are definitions or a Mathlib leaf; no tool_uses are needed. Batch-5 citation lem-pod-closed-uncurry-laws: accepted. It is a status-mathlib leaf of general monoidal-closed identities (uncurry_curry, uncurry_natural_left, uncurry_eq) with no DAG closure. Neither assumption gives it, and it is not part of their geometric proofs. Advisory: lem-sf-invertible-factor-hom-cancellation overlaps only the invertibility claim; it gives neither the naturality in M nor the θ clause. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientEvaluationNaturality",
+  "declaration": "WeilConjectures.sfCoefficientEvaluationNaturality",
+  "declarations": [
+   "WeilConjectures.sfCoefficientTheta",
+   "WeilConjectures.SfCoefficientEvaluationLaws",
+   "WeilConjectures.SfCoefficientTwistEvaluation",
+   "WeilConjectures.sfEvaluationIntegralLine",
+   "WeilConjectures.sfCoefficientEvaluationNaturality"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientEvaluationNaturality.lean",
+  "statement": "theorem sfCoefficientEvaluationNaturality {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum} {E : Type u} [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] {n : ℕ} (S : SixFunctorDatum D C E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))) (X : SixFunctorSpace D) : SfCoefficientEvaluationLaws (S.finiteClosed X).closed (S.finiteClosed X).symmetric ∧ SfCoefficientEvaluationLaws (S.integralClosed X).closed (S.integralClosed X).symmetric ∧ SfCoefficientEvaluationLaws (S.rationalClosed X).closed (S.rationalClosed X).symmetric ∧ SfCoefficientEvaluationLaws (S.commonClosed X).closed (S.commonClosed X).symmetric ∧ (∀ m t : ℤ, SfCoefficientTwistEvaluation (S.finiteClosed X) ((sixFunctorIntegralReduction D C E n X).obj (sfEvaluationIntegralLine D C E X m t))) ∧ (∀ m t : ℤ, SfCoefficientTwistEvaluation (S.integralClosed X) (sfEvaluationIntegralLine D C E X m t)) ∧ (∀ m t : ℤ, SfCoefficientTwistEvaluation (S.rationalClosed X) ((@sfRationalTwistingCoefficient C.l _ E _ _ _ X.obj.left (dlAdicGeometricResidueInvertible D C X.obj.left) m)⟦t⟧)) ∧ (∀ m t : ℤ, SfCoefficientTwistEvaluation (S.commonClosed X) ((@sfQbarTwistingCoefficient C.l _ X.obj.left (dlAdicGeometricResidueInvertible D C X.obj.left) C.Qbar _ _ _ m)⟦t⟧))",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the four recorded closed domains of the supplied six-functor datum, whose categories are D^b_ctf by def-sf-datum. Coefficient evaluation and the comparison are the existing ringedSiteDualEvaluationLeft, with the defining signed transpose equation asserted explicitly. Theta uses Hom(gamma inverse) followed by that specific comparison inverse; its naturality ranges over every full subcategory on which the comparisons are invertible. All integer twists and shifts are the recorded completed line, its finite reduction, the recorded rational line and its literal common-stage image. All helper definitions contain real data; only the named main theorem is postponed. The existing evaluation maps are owned by def-sf-coefficient-evaluation-transpose; no theorem node is used merely to name these definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dc745ba27",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Re-delivery of d51f2efaf68a; H2 fix verified: theorem stmt_dep lem-sfb-ringed-site-duality-maps replaced by new existing:true def node def-sf-coefficient-evaluation-transpose owning ringedSiteDualEvaluation/ringedSiteDualEvaluationLeft (statement matches live RingedSiteDualityMaps.lean:66,:170 term for term; verbatim signature = lines 170-171; no other owner, id not live). sk-lem-sf-twist-interchange record now a superset of the live ND record (5+4 decls), live unchanged since base. Rational line now named sfRationalTwistingCoefficient m ⟦t⟧. CoefficientTwistInterchange.lean byte-identical to previously reviewed; all clauses/edge cases re-confirmed. No compile (no file changed). Advisory: θ⁻¹ = sfPerfectThetaInverse linked only in report; plain Monoidal.Closed.Basic import likely redundant."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T122455-L-1775254",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

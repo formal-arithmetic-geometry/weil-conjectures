@@ -1,0 +1,248 @@
+{
+ "id": "lem-route-intrinsic-integral-coefficient-twist-mem",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-coefficient-twists-detailed",
+   "via": [],
+   "place": "Integral-line paragraph defining the completed root line; signed-power display and degree-zero integral interpretation. This item proves intrinsic membership of that construction."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The existing signed completed root line is intrinsically constructible and complete.",
+ "statement": "Fix a finite-field datum $D$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and chosen uniformizer $\\varpi_E$ [def-weil-l-adic-coefficient-extension], and any scheme $W$ on which $\\ell$ is invertible in every residue field. Write $A_n=\\mathcal O_E/\\varpi_E^n$ for $n\\ge1$, and $R=\\widehat{\\mathcal O}_{E,W}=\\varprojlim_n(A_n)_W$ for the completed coefficient sheaf on the small pro-etale site [def-weil-completed-integral-coefficients]. Let $L=\\mathcal O_E(1)_W$ be the concrete completed integral root module of [def-pur-twist-sheaves]. Using sheaf tensor and sheaf Hom [def-pur-sheaf-tensor-product, def-pur-sheaf-hom], put\n$$\nL_m=\\begin{cases}R,&m=0,\\\\ L^{\\otimes_R m},&m>0,\\\\ \\mathcal Hom_R(L^{\\otimes_R(-m)},R),&m<0.\\end{cases}\n$$\nFor every $m\\in\\mathbf Z$, the degree-zero derived object $K_m=L_m[0]$ belongs to the intrinsic bounded constructible derived-complete integral category [def-weil-derived-complete-integral-detailed]. In other words, its canonical derived reduction tower is derived complete [def-weil-derived-complete], and there exist $a\\le b$ such that every derived reduction $K_m\\otimes_R^L(A_n)_W$ is finite-torsion constructible [def-weil-finite-torsion-constructibility] with cohomological support [def-weil-cohomological-support] contained in $[a,b]$, independently of $n$. Here one can take $a=b=0$. This is precisely $\\operatorname{sfIntegralConstructible}(\\ell,E,W)(K_m)$ for the published object $\\operatorname{integralCoefficientTwist}(D,\\ell,E,W,m)$; $D$ supplies the auxiliary parameter of that construction and imposes no structure morphism on $W$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-coefficient-twists-detailed.md",
+  "place": "def-coefficient-twists-detailed: the Lean of this node (its declaration uses) reaches WeilConjectures.intrinsicIntegralCoefficientTwist_mem, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/Paper/IntrinsicCoefficientTwists.lean, declaration WeilConjectures.intrinsicIntegralCoefficientTwist_mem (module Sheaf.Paper.IntrinsicCoefficientTwists, lines 31-41, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-twist-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-complete",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-cohomological-support"
+ ],
+ "proof": [
+  {
+   "text": "Apply integralCoefficientTwist_constructible to the identical signed completed line. It supplies legacy derived completeness and integers a <= b with constructibility and cohomological support bounds for every positive reduction.",
+   "uses": [
+    "lem-pur-signed-integral-coefficient-twist-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert the completeness clause with the reverse implication of sfDerivedComplete_iff_legacy. The integralDerivedReduction functor is definitionally scalarReductionDerivedExtension, and Set.Icc membership is the pair of lower and upper inequalities. Reuse the same bounds and each finite constructibility and support proof. These data give both conjuncts of sfIntegralConstructible.",
+   "uses": [
+    "lem-sf-derived-complete-legacy-comparison",
+    "def-weil-integral-derived-reduction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-signed-integral-coefficient-twist-constructible",
+  "lem-sf-derived-complete-legacy-comparison",
+  "def-weil-integral-derived-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E1",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
+  "place": "Reuse the existing signed-line membership theorem, then the proved intrinsic/legacy completeness comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'intrinsicIntegralCoefficientTwist_mem' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-26",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The signed integral Tate twist is a derived complete constructible complex on the pro etale site",
+   "results": "{\"t\": \"2026-10-25T18:20:52Z\", \"tool\": \"leanfinder\", \"query\": \"The signed integral Tate twist is a derived complete constructible complex on the pro etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"Condensed.profiniteSolid\", \"Condensed.lanSheafProfinite\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"b1f6995743e368e8\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: generic sheaf finite type, ordinary adic completion, condensed monoidal structures and single-functor families do not assert intrinsic Tate-line constructibility or canonical quotient-tower completeness"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFiniteLocallyFreeOfRank",
+   "results": "{\"t\": \"2026-10-25T18:20:52Z\", \"tool\": \"loogle\", \"query\": \"IsFiniteLocallyFreeOfRank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsFiniteLocallyFreeOfRank'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: generic sheaf finite type, ordinary adic completion, condensed monoidal structures and single-functor families do not assert intrinsic Tate-line constructibility or canonical quotient-tower completeness"
+  },
+  {
+   "tool": "grep",
+   "query": "tateTwist|DerivedComplete|IsFiniteLocallyFreeOfRank",
+   "results": "{\"t\": \"2026-10-25T18:20:52Z\", \"tool\": \"grep\", \"query\": \"tateTwist|DerivedComplete|IsFiniteLocallyFreeOfRank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: generic sheaf finite type, ordinary adic completion, condensed monoidal structures and single-functor families do not assert intrinsic Tate-line constructibility or canonical quotient-tower completeness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite locally free rank one sheaf over completed integral coefficients is derived complete and its finite reductions are constructible",
+   "results": "{\"t\": \"2026-10-25T18:22:29Z\", \"tool\": \"leansearch\", \"query\": \"A finite locally free rank one sheaf over completed integral coefficients is derived complete and its finite reductions are constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFiniteType.mk\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.mk\"], \"digest\": \"37e46b29ceb0bd87\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: generic sheaf finite type, ordinary adic completion, condensed monoidal structures and single-functor families do not assert intrinsic Tate-line constructibility or canonical quotient-tower completeness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally free integral l adic sheaf in degree zero has constructible derived reductions and is the derived inverse limit of its quotients",
+   "results": "{\"t\": \"2026-10-25T18:22:30Z\", \"tool\": \"leanfinder\", \"query\": \"A locally free integral l adic sheaf in degree zero has constructible derived reductions and is the derived inverse limit of its quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"Condensed.profiniteFree\", \"IsAdicComplete\", \"CondensedMod\", \"localCohomology.ofSelfLERadical\", \"AdicCompletion\", \"CondensedMod.ofSheafProfinite\"], \"digest\": \"2d112d7eb958e168\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: generic sheaf finite type, ordinary adic completion, condensed monoidal structures and single-functor families do not assert intrinsic Tate-line constructibility or canonical quotient-tower completeness"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicComplete|def AdicCompletion",
+   "results": "{\"t\": \"2026-10-25T18:34:14Z\", \"tool\": \"grep\", \"query\": \"IsAdicComplete|def AdicCompletion\", \"sub\": \"RingTheory/AdicCompletion\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Noetherian.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\"], \"digest\": \"494089e1a5809230\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: generic sheaf finite type, ordinary adic completion, condensed monoidal structures and single-functor families do not assert intrinsic Tate-line constructibility or canonical quotient-tower completeness"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctor\"",
+   "results": "{\"t\": \"2026-10-25T18:34:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"singleFunctor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SingleFunctors\", \"CategoryTheory.SingleFunctors.instCategory\", \"CategoryTheory.SingleFunctors.functor\", \"CategoryTheory.SingleFunctors.Hom\", \"CategoryTheory.SingleFunctors.Hom.id\", \"CategoryTheory.SingleFunctors.evaluation\", \"CategoryTheory.SingleFunctors.postcomp\", \"CategoryTheory.SingleFunctors.Hom.comp\"], \"digest\": \"0c7f4fd5a1f938e0\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: generic sheaf finite type, ordinary adic completion, condensed monoidal structures and single-functor families do not assert intrinsic Tate-line constructibility or canonical quotient-tower completeness"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "def-coefficient-twists-detailed",
+  "date": "2026-10-26",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.IntrinsicCoefficientTwists",
+  "file": "lean/Sheaf/Paper/IntrinsicCoefficientTwists.lean",
+  "declaration": "WeilConjectures.intrinsicIntegralCoefficientTwist_mem",
+  "declarations": [
+   "WeilConjectures.intrinsicIntegralCoefficientTwist_mem"
+  ],
+  "statement": "theorem intrinsicIntegralCoefficientTwist_mem (m : ℤ) :\n    sfIntegralConstructible l E W (integralCoefficientTwist D l hl E W m) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-26",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-route-intrinsic-integral-coefficient-twist-mem",
+  "worker": "stage1",
+  "summary": "Replaced provisional signature by a self-contained statement with unchanged hypotheses. Seven steps prove signed rank-one local models, canonical K-flat reductions, finite constructibility, ordinary limit recovery, augmented Roos completeness and uniform [0,0] support. Reused existing lower-level nodes; no new nodes. Avoided cyclic high-level twist lemmas.",
+  "blueprint": "Current def-coefficient-twists-detailed integral-line paragraph and signed-power display; steps 1-2 realize local freeness, 3-5 the quotient models, 6 completeness, 7 intrinsic membership.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-twist-root-local-models",
+    "why": "Lower-level tool for Finite and compatible completed local bases of the root tower; the historical admissibility unit has no proof steps or local coefficient calculation. This expands the coefficient-line construction without changing the unit route."
+   },
+   {
+    "node": "lem-pur-twist-integral-local-models",
+    "why": "Lower-level tool for Scalar-extension local models of the integral root line; the historical admissibility unit has no proof steps or local coefficient calculation. This expands the coefficient-line construction without changing the unit route."
+   },
+   {
+    "node": "lem-pur-line-unbounded-derived-tensor",
+    "why": "Lower-level tool for Derived tensor by a locally free line is the exact termwise equivalence; the historical admissibility unit has no proof steps or local coefficient calculation. This expands the coefficient-line construction without changing the unit route."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Lower-level tool for Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions; the historical admissibility unit has no proof steps or local coefficient calculation. This expands the coefficient-line construction without changing the unit route."
+   },
+   {
+    "node": "lem-weil-integral-reduction-tower-well-defined",
+    "why": "Lower-level tool for The reduction tower of an integral complex does not depend on the K-flat resolution; the historical admissibility unit has no proof steps or local coefficient calculation. This expands the coefficient-line construction without changing the unit route."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-absolute-value",
+    "why": "Lower-level tool for The absolute value of $\\mathbf Q_\\ell$ extends uniquely to a finite extension; the historical admissibility unit has no proof steps or local coefficient calculation. This expands the coefficient-line construction without changing the unit route."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Lower-level tool for The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field; the historical admissibility unit has no proof steps or local coefficient calculation. This expands the coefficient-line construction without changing the unit route."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Lower-level tool for Finite quotients of a discrete valuation ring with finite residue field; the historical admissibility unit has no proof steps or local coefficient calculation. This expands the coefficient-line construction without changing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-finite-model-stalks",
+    "why": "Lower-level tool for Finite geometric stalks from finite constant models; the historical admissibility unit has no proof steps or local coefficient calculation. This expands the coefficient-line construction without changing the unit route."
+   },
+   {
+    "node": "lem-sfb-sheaf-cover-local-isomorphism",
+    "why": "Lower-level tool for Isomorphisms of category-valued sheaves are detected on a covering family of objects; the historical admissibility unit has no proof steps or local coefficient calculation. This expands the coefficient-line construction without changing the unit route."
+   },
+   {
+    "node": "lem-weil-proetale-surjective-tower-derived-limit",
+    "why": "Lower-level tool for Derived limit of a surjective tower of pro-etale sheaves; the historical admissibility unit has no proof steps or local coefficient calculation. This expands the coefficient-line construction without changing the unit route."
+   },
+   {
+    "node": "lem-sf-derived-complete-legacy-comparison",
+    "why": "Lower-level tool for Intrinsic and K-flat augmented-tower derived completeness agree; the historical admissibility unit has no proof steps or local coefficient calculation. This expands the coefficient-line construction without changing the unit route."
+   },
+   {
+    "node": "lem-pur-constructible-single-support",
+    "why": "Lower-level tool for Constructible singles have finite cohomological support in degree zero; the historical admissibility unit has no proof steps or local coefficient calculation. This expands the coefficient-line construction without changing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-constant-module-encoding",
+    "why": "Equivalence between constant-ring sheaves and fixed-module sheaves before the finite-model geometric-stalk theorem; the historical admissibility unit gives no such encoding tool."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic site fact: restriction of a sheaf tensor product to a localized site is the tensor product of the restrictions, compatibly with local pure tensors; used in step 2 to see that tensor powers of the trivialized line are trivial on each slice. No node of the admissibility unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-twist-root-local-models",
+  "lem-pur-twist-integral-local-models",
+  "lem-pur-line-unbounded-derived-tensor",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-pbc-proetale-finite-model-stalks",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-weil-proetale-surjective-tower-derived-limit",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-pur-constructible-single-support",
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "lem-sfb-localized-site-tensor-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NF-76f5cc613",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-76f5cc613 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement matches the Lean intrinsicIntegralCoefficientTwist_mem: integralCoefficientTwist, the coefficientTwistLine cases m=0, m>0 and negSucc (sheaf Hom into the unit), and both halves of the sfIntegralConstructible conjunction. It adds no hypotheses and drops none. Small cases hold: m=0, ±1 and -2, n=1, an empty W and a non-quasi-compact W (W is open and retrocompact in itself, so the one-stratum split is constructible), and a ramified E. Each step's cited statement supplies what the step takes. Step 1: root local models give the pro-etale rank-one witness hL that the integral local models need, over the same ring R. Step 3: the line is K-flat, the derived change of rings is computed on q=id, and the well-definedness lemma matches the units and transitions with the canonical tower. Step 4: the absolute-value, DVR and finite-quotient lemmas, the constant-module encoding, finite-model stalks and a single stratum give constructibility. Step 5: limits are taken sectionwise, the cover-local isomorphism lemma applies, and the transition maps are epimorphisms locally. Step 6: the surjective-tower lemma (clauses 1-2) gives the triangle with first map c, and the legacy comparison turns it into IsSfDerivedComplete. Step 7: the single-support lemma gives constructibility and support in {0}, so a=b=0. No cited node reaches the item. The unit has uses [] and no steps, so the declared tool_uses are acceptable generic tools. Searching the DAG for this membership statement found no duplicate. FIX (C1): step 2 identified slice restrictions of sheaf tensor powers 'by definition'. That needs the existing lemma lem-sfb-localized-site-tensor-restriction, (F⊗G)|_U ≅ F|_U⊗G|_U. I now cite it in step 2, set the step to non-elementary, updated proof_deps and added a tool_uses entry for it. That node is in the snapshot DAG and does not reach the item. The corrected file is fixes/dag/nodes/sec-smooth-purity/lem-route-intrinsic-integral-coefficient-twist-mem.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261025T201658-L-2601603",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

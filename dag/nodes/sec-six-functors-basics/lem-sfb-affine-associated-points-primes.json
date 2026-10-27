@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-affine-associated-points-primes",
+ "kind": "statement",
+ "title": "Associated points on an affine open and associated primes of sections",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $F$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], and let $W=\\operatorname{Spec}R\\subseteq X$ be an affine open [def-weil-affine-spectrum, def-weil-open-immersion]. Put $M=\\Gamma(W,F)$. For $x\\in W$, let $\\mathfrak p\\subset R$ be its corresponding prime ideal. Associated primes mean element-annihilator primes [def-weil-pbc-annihilator-associated-primes], and associated points mean [def-trf-relative-assassin]. If $\\mathfrak p\\in\\operatorname{Ass}_R(M)$, then $x\\in\\operatorname{Ass}_X(F)$. Conversely, if $x\\in\\operatorname{Ass}_X(F)$ and the ideal $\\mathfrak p$ is finitely generated, then $\\mathfrak p\\in\\operatorname{Ass}_R(M)$. In particular, when $R$ is Noetherian [def-weil-pbc-noetherian-ring], $x\\in\\operatorname{Ass}_X(F)$ if and only if $\\mathfrak p\\in\\operatorname{Ass}_R(M)$. No finite-generation hypothesis on $M$ is required.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02OK (lemma-associated-affine-open), both implications and their Noetherian consequence."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-weil-pbc-annihilator-associated-primes",
+  "def-trf-relative-assassin",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-weil-pbc-affine-open-stalk-localization] and [lem-sbc-affine-module-germ-localization] to identify the ring and module germ maps with $R\\to R_{\\mathfrak p}$ and $M\\to M_{\\mathfrak p}$. The module identification respects the localized ring action: a scalar $a/s$ acts as $a$ followed by the inverse of multiplication by $s$. By [def-weil-pbc-localization-at-prime] the maximal ideal is $\\mathfrak pR_{\\mathfrak p}$. Thus [def-trf-relative-assassin] identifies association of $x$ with this ideal being the annihilator of an element of $M_{\\mathfrak p}$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sbc-affine-module-germ-localization",
+    "def-weil-pbc-localization-at-prime",
+    "def-trf-relative-assassin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OK (lemma-associated-affine-open), proof; Algebra Tag 0310 (lemma-associated-primes-localize), finite-generator proof."
+   }
+  },
+  {
+   "text": "If $\\mathfrak p\\in\\operatorname{Ass}_R(M)$, [lem-weil-pbc-associated-prime-localize-at-prime] gives $\\mathfrak pR_{\\mathfrak p}\\in\\operatorname{Ass}_{R_{\\mathfrak p}}(M_{\\mathfrak p})$ in the element-annihilator sense, without a Noetherian assumption. Step 1 gives $x\\in\\operatorname{Ass}_X(F)$.",
+   "uses": [
+    "lem-weil-pbc-associated-prime-localize-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OK (lemma-associated-affine-open), proof; Algebra Tag 0310 (lemma-associated-primes-localize), finite-generator proof."
+   }
+  },
+  {
+   "text": "Conversely let $x$ be associated and write an annihilator witness from step 1 as $w=m/f$ with $f\\notin\\mathfrak p$. Since $f/1$ is a unit, $m/1$ has the same annihilator as $w$. Choose generators $a_1,\\ldots,a_n$ of $\\mathfrak p$. Each $(a_i m)/1=0$, so [def-weil-pbc-module-localization] gives $s_i\\notin\\mathfrak p$ with $s_i a_i m=0$. Put $s=\\prod_i s_i$ and $z=sm$. Primality gives $s\\notin\\mathfrak p$, and every generator kills $z$, hence $\\mathfrak p z=0$. For $n=0$ use the empty product $s=1$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OK (lemma-associated-affine-open), proof; Algebra Tag 0310 (lemma-associated-primes-localize), finite-generator proof."
+   }
+  },
+  {
+   "text": "If $az=0$, localization gives $(a/1)(s/1)(m/1)=0$. Cancel the unit $s/1$ to obtain $a/1\\in\\mathfrak pR_{\\mathfrak p}$. This forces $a\\in\\mathfrak p$: membership means $a/1=b/t$ with $b\\in\\mathfrak p$, $t\\notin\\mathfrak p$; the fraction equality yields $u(ta-b)=0$ with $u\\notin\\mathfrak p$, so $uta\\in\\mathfrak p$ and primality implies $a\\in\\mathfrak p$. Together with step 3 this proves $\\operatorname{Ann}_R(z)=\\mathfrak p$, the required witness by [def-weil-pbc-annihilator-associated-primes].",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-annihilator-associated-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OK (lemma-associated-affine-open), proof; Algebra Tag 0310 (lemma-associated-primes-localize), finite-generator proof."
+   }
+  },
+  {
+   "text": "If $R$ is Noetherian, [def-weil-pbc-noetherian-ring] says every ideal, in particular $\\mathfrak p$, is finitely generated. Apply the two implications. At no point was finite generation of $M$ used.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OK (lemma-associated-affine-open), proof; Algebra Tag 0310 (lemma-associated-primes-localize), finite-generator proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sbc-affine-module-germ-localization",
+  "def-weil-pbc-localization-at-prime",
+  "def-trf-relative-assassin",
+  "lem-weil-pbc-associated-prime-localize-at-prime",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-annihilator-associated-primes",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02OK (lemma-associated-affine-open), direct proof, with the explicit generator argument of Algebra Tag 0310."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "associatedPoints|assassin|associated.*[Ss]talk|[Ss]talk.*associated",
+   "results": "{\"t\": \"2026-10-23T23:02:33Z\", \"tool\": \"grep\", \"query\": \"associatedPoints|assassin|associated.*[Ss]talk|[Ss]talk.*associated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\"], \"digest\": \"1191fa2d9c4f1bfc\"} Read hits: The localization associated-prime lemmas in RingTheory/Ideal/AssociatedPrime/Localization.lean, lines 76-141, provide the algebraic ingredients only. They do not state the comparison with scheme points and sheaf stalks. The grep hits in RingHomProperties.lean concern general ring-hom properties, not associated points. No exact scheme-level match or one-line specialization was found.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated primes of the sections of a quasi coherent sheaf on a Noetherian affine scheme coincide with associated points",
+   "results": "{\"t\": \"2026-10-23T23:02:34Z\", \"tool\": \"leansearch\", \"query\": \"Associated primes of the sections of a quasi coherent sheaf on a Noetherian affine scheme coincide with associated points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"associatedPrimes\", \"IsAssociatedPrime\", \"Module.associatedPrimes.mem_associatedPrimes_atPrime_of_mem_associatedPrimes\", \"LinearEquiv.AssociatedPrimes.eq\", \"Module.associatedPrimes.mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule\", \"AssociatePrimes.mem_iff\", \"Module.associatedPrimes.mem_associatePrimes_of_comap_mem_associatePrimes_isLocalizedModule\", \"Module.associatedPrimes.preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule\"], \"digest\": \"aa45eca2a115f905\"} Read hits: The localization associated-prime lemmas in RingTheory/Ideal/AssociatedPrime/Localization.lean, lines 76-141, provide the algebraic ingredients only. They do not state the comparison with scheme points and sheaf stalks. The grep hits in RingHomProperties.lean concern general ring-hom properties, not associated points. No exact scheme-level match or one-line specialization was found.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedPrimes\", \"stalk\"",
+   "results": "{\"t\": \"2026-10-23T23:02:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"associatedPrimes\\\", \\\"stalk\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read hits: The localization associated-prime lemmas in RingTheory/Ideal/AssociatedPrime/Localization.lean, lines 76-141, provide the algebraic ingredients only. They do not state the comparison with scheme points and sheaf stalks. The grep hits in RingHomProperties.lean concern general ring-hom properties, not associated points. No exact scheme-level match or one-line specialization was found.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated prime ideal localization detects whether it is the annihilator of an element of a module",
+   "results": "{\"t\": \"2026-10-23T23:02:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely generated prime ideal localization detects whether it is the annihilator of an element of a module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.mem_support_iff_of_finite\", \"IsAssociatedPrime\", \"Module.support\", \"Module.mem_support_iff_exists_annihilator\", \"associatedPrimes\", \"Module.support_eq_zeroLocus\", \"Module.associatedPrimes.comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg\", \"LocalizedModule.exists_subsingleton_away\"], \"digest\": \"2d509d9785e16c1c\"} Read hits: The localization associated-prime lemmas in RingTheory/Ideal/AssociatedPrime/Localization.lean, lines 76-141, provide the algebraic ingredients only. They do not state the comparison with scheme points and sheaf stalks. The grep hits in RingHomProperties.lean concern general ring-hom properties, not associated points. No exact scheme-level match or one-line specialization was found.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a locally Noetherian scheme the associated points of a quasi coherent sheaf on an affine open are exactly the associated primes of its module of sections",
+   "results": "{\"t\": \"2026-10-23T23:02:37Z\", \"tool\": \"leanfinder\", \"query\": \"On a locally Noetherian scheme the associated points of a quasi coherent sheaf on an affine open are exactly the associated primes of its module of sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint\", \"AlgebraicGeometry.IsAffineOpen.primeIdealOf\", \"AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff_of_mem\", \"AlgebraicGeometry.Scheme.IdealSheafData.mem_supportSet_iff_of_mem\", \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff\", \"AlgebraicGeometry.Scheme.IdealSheafData.mem_supportSet_iff\", \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff\"], \"digest\": \"cad651605ff7457d\"} Read hits: The localization associated-prime lemmas in RingTheory/Ideal/AssociatedPrime/Localization.lean, lines 76-141, provide the algebraic ingredients only. They do not state the comparison with scheme points and sheaf stalks. The grep hits in RingHomProperties.lean concern general ring-hom properties, not associated points. No exact scheme-level match or one-line specialization was found.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedPoints|assassin|associated.*[Ss]talk|[Ss]talk.*associated",
+   "results": "{\"t\": \"2026-10-23T23:42:25Z\", \"tool\": \"grep\", \"query\": \"associatedPoints|assassin|associated.*[Ss]talk|[Ss]talk.*associated\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\"], \"digest\": \"1191fa2d9c4f1bfc\"} Read hits: ideal-sheaf support and tilde/stalk localization are ingredients, not the asserted associated-point comparison. RingHomProperties.lean:682 is about ring-map properties. AssociatedPrime/Basic.lean:33-40 uses radical annihilators without Noetherianity, so its localization results cannot replace the element-annihilator argument here. No full scheme comparison was found.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated points of a quasi coherent module on an affine scheme equal annihilator associated primes of the module of global sections",
+   "results": "{\"t\": \"2026-10-23T23:42:25Z\", \"tool\": \"leansearch\", \"query\": \"Associated points of a quasi coherent module on an affine scheme equal annihilator associated primes of the module of global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"associatedPrimes\", \"IsAssociatedPrime\", \"Module.associatedPrimes.mem_associatedPrimes_atPrime_of_mem_associatedPrimes\", \"Module.associatedPrimes.preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule\", \"Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes\", \"IsAssociatedPrime.annihilator_le\", \"Module.associatedPrimes.mem_associatePrimes_localizedModule_atPrime_of_mem_associated_primes\", \"associatedPrimes.finite\"], \"digest\": \"156f85b812568c13\"} Read hits: ideal-sheaf support and tilde/stalk localization are ingredients, not the asserted associated-point comparison. RingHomProperties.lean:682 is about ring-map properties. AssociatedPrime/Basic.lean:33-40 uses radical annihilators without Noetherianity, so its localization results cannot replace the element-annihilator argument here. No full scheme comparison was found.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedPrimes\", \"stalk\"",
+   "results": "{\"t\": \"2026-10-23T23:42:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"associatedPrimes\\\", \\\"stalk\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read hits: ideal-sheaf support and tilde/stalk localization are ingredients, not the asserted associated-point comparison. RingHomProperties.lean:682 is about ring-map properties. AssociatedPrime/Basic.lean:33-40 uses radical annihilators without Noetherianity, so its localization results cannot replace the element-annihilator argument here. No full scheme comparison was found.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated points of a quasi coherent sheaf on an affine open correspond to annihilator associated primes of its sections, with converse for finitely generated primes",
+   "results": "{\"t\": \"2026-10-23T23:42:26Z\", \"tool\": \"leanfinder\", \"query\": \"Associated points of a quasi coherent sheaf on an affine open correspond to annihilator associated primes of its sections, with converse for finitely generated primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"AlgebraicGeometry.Scheme.IdealSheafData.supportSet_subset_zeroLocus\", \"AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff_of_mem\", \"AlgebraicGeometry.Scheme.IdealSheafData.mem_supportSet_iff_of_mem\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff\", \"Module.support_eq_zeroLocus\", \"Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes\"], \"digest\": \"5dbf11e21929976e\"} Read hits: ideal-sheaf support and tilde/stalk localization are ingredients, not the asserted associated-point comparison. RingHomProperties.lean:682 is about ring-map properties. AssociatedPrime/Basic.lean:33-40 uses radical annihilators without Noetherianity, so its localization results cannot replace the element-annihilator argument here. No full scheme comparison was found.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi coherent module sheaf the stalk at a prime of an affine open is localization of its sections and associated points are maximal annihilator primes",
+   "results": "{\"t\": \"2026-10-23T23:43:24Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi coherent module sheaf the stalk at a prime of an affine open is localization of its sections and associated points are maximal annihilator primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.isLocalization_stalk'\", \"AlgebraicGeometry.IsAffineOpen.isLocalization_stalk\", \"ModuleCat.Tilde.stalkIso\", \"ModuleCat.Tilde.localizationToStalk\", \"ModuleCat.Tilde.localizationToStalk_mk\", \"ModuleCat.Tilde.toStalk\", \"ModuleCat.Tilde.stalkToFiberLinearMap_toStalk\", \"ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk\"], \"digest\": \"7d3639feeae2646b\"} Read hits: ideal-sheaf support and tilde/stalk localization are ingredients, not the asserted associated-point comparison. RingHomProperties.lean:682 is about ring-map properties. AssociatedPrime/Basic.lean:33-40 uses radical annihilators without Noetherianity, so its localization results cannot replace the element-annihilator argument here. No full scheme comparison was found.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-generic-fibre-assassin-containment-spreads",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CVV (spaces-divisors-lemma-relative-assassin-constructible) and Tag 05LW (morphisms-lemma-constructible-containing-open). Subinput of 0CVV: its final sentence reducing to the scheme theorem 05KR. Subinput of 05KR: final paragraph, application of lemma-good-case on the irreducible closed subscheme when its generic point satisfies containment. Subinput of 05KP: translate fibre associated points into algebraic associated primes on Noetherian affine fibre charts (Divisors Tag 02OK).",
+   "via": [
+    "lem-sfb-generic-fibre-assassin-containment-spreads",
+    "lem-sfb-scheme-assassin-open-constructible",
+    "lem-sfb-space-assassin-containment-constructible",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-associated-points-primes",
+  "worker": "stage1",
+  "summary": "Checked Tag 02OK against the full non-Noetherian statement; reused the closed affine germ localization and existing ring-stalk and associated-prime localization inputs. Wrote out the finite-generator denominator product and the reverse annihilator inclusion; no new nodes or finiteness hypothesis on the section module. Repaired null blueprint ancestor using the recorded final via node lem-sfb-admissible-direct-image.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof paragraph (3): compactification/direct-image preservation, inherited alteration/stable-moduli prerequisite chain recorded in blueprint.from.place; this item supplies its affine associated-point translation input (Tag 02OK).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-associated-prime-localize-at-prime",
+    "why": "Generic algebraic localization of annihilator-associated primes; used without replacing any unit step, and no same-unit node provides this general algebraic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-associated-prime-localize-at-prime"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-70203b348",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-70203b348 (reviewer sub-agent of L); spot-checked: I read the item, all five steps and every cited statement in full, against Stacks divisors.tex Tag 02OK (lines 67-116) and algebra.tex Tag 0310. The statement is unchanged from live and matches 02OK hypothesis by hypothesis: any scheme, quasi-coherent F, element-annihilator Ass, unconditional forward direction, converse when p is finitely generated. Its 'R Noetherian' corollary is no weaker than the source's 'X locally Noetherian'. Step 1: ring germ = localization (lem-weil-pbc-affine-open-stalk-localization (c)) and module germ = R-linear localization (lem-sbc-affine-module-germ-localization, Lean-closed). The R_p-actions agree because s acts invertibly, so association of x means pR_p is the annihilator of an element of M_p. Step 2: the forward direction is the 0310 node, a generic tool recorded in tool_uses, accepted. Steps 3-4: the converse is written out on generators. The kernel criterion of def-weil-pbc-module-localization gives s=prod s_i outside p with p z=0, and a fraction argument with primality gives Ann(z)=p. Both are correct and elementary, including n=0. Step 5: Noetherian implies p finitely generated; finite generation of M is never used. Edge cases checked: M=0, a field with p=0, infinite-rank M, empty X. The parent (generic-fibre-assassin-containment-spreads, steps 2/4/9) uses the item on Noetherian affine fibres, which matches the statement. Not a Mathlib leaf (Mathlib's IsAssociatedPrime uses a radical annihilator). Blueprint from.node det-thm-sf-ctf-stability-direct-images exists. No SGA is cited. Advisory: the existing node lem-sc-associated-localization-fg (unit sk-def-av-ample-degree) already states the algebraic converse that steps 3-4 prove inline. The report wrongly says no such node exists. No change made: the inline argument is a few elementary lines, and 02OK itself argues directly. The maintainer may repoint steps 3-4 to that node so only one Lean proof is written. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineAssociatedPointsPrimes",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_associated_points_primes",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAssociatedPointsPrimes.lean",
+  "statement": "theorem affine_associated_points_primes {X : Scheme.{u}} (F : X.Modules) (hqc : F.IsQuasicoherent) (W : X.Opens) (hW : IsAffineOpen W) (x : W) : ((hW.primeIdealOf x).asIdeal ∈ RingTheory.annihilatorAssociatedPrimes (X.presheaf.obj (op W)) (F.val.obj (op W)) → (x : X) ∈ associatedPoints F) ∧ ((x : X) ∈ associatedPoints F → (hW.primeIdealOf x).asIdeal.FG → (hW.primeIdealOf x).asIdeal ∈ RingTheory.annihilatorAssociatedPrimes (X.presheaf.obj (op W)) (F.val.obj (op W))) ∧ (IsNoetherianRing (X.presheaf.obj (op W)) → ((x : X) ∈ associatedPoints F ↔ (hW.primeIdealOf x).asIdeal ∈ RingTheory.annihilatorAssociatedPrimes (X.presheaf.obj (op W)) (F.val.obj (op W))))",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d23b777b",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 02OK clause by clause: arbitrary Scheme.{u}; F : X.Modules with IsQuasicoherent only; W affine open, R = Γ(X,W), M = F.val.obj (op W); p = (hW.primeIdealOf x).asIdeal; forward implication unconditional, converse with FG on p only, iff under IsNoetherianRing R; no finiteness on M. Ass = RingTheory.annihilatorAssociatedPrimes (00LA element annihilator, not Mathlib radical version); associatedPoints = def-trf-relative-assassin record (02OJ). Edge cases (empty W, F=0, p=0, infinite-rank, non-Noetherian) covered. Node differs from live only in lean; lean.statement verbatim; single sorry; docstrings carry source, blueprint tag and 5 proof steps; plain imports are proof_dep modules; no duplicate theorem in side-live lean or Mathlib; report has both sections. No file changed, no compile run. Advisory only: lem-sc-associated-localization-fg could serve steps 3-4."
+ }
+}

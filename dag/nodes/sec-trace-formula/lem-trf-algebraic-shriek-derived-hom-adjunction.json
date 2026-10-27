@@ -15,121 +15,52 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-injective $P$-complex $I$ representing $Y$ and a complex $E$ of $A$-modules representing $X$, using [def-pur-derived-internal-hom] on the one-object site with only the identity covering. Put $J=\\operatorname{Hom}_P^\\bullet(A[0],I)$, with $(a h)(b)=h(ba)$. By the derived internal-Hom construction, $J$ represents $R\\operatorname{Hom}_P(A,Y)$ after restriction and, with this displayed $A$-action, is the coinduced complex representing $C(Y)$. The counit candidate is evaluation $h\\mapsto h(1)$; no condition on the map $P\\to A$ is needed. The K-injectivity of $J$ is proved in Step 3 before the derived $A$-Hom is formed.",
+   "text": "Choose a K-injective $P$-complex $I$ representing $Y$ and an $A$-complex $E$ representing $X$ by [def-pur-derived-internal-hom], on the one-object identity-cover site. Apply [lem-trf-coinduction-total-hom-model]: $J=\\operatorname{Hom}_P^\\bullet(A[0],I)$ is K-injective over $A$, represents $C(Y)$, and evaluation at $1$ gives the chain isomorphism $T$ with the stated inverse. Thus the two complexes compute the two derived Homs by [def-pur-derived-internal-hom]. Localizing $T$ gives $\\Theta_{X,Y}$.",
    "uses": [
-    "def-pur-derived-internal-hom"
+    "def-pur-derived-internal-hom",
+    "lem-trf-coinduction-total-hom-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext), K-injective coinduction model"
+    "place": "Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext): K-injective coinduction model; explicit total-Hom transposition and null-homotopy argument expanded from these, with derived.tex Tag 070H (definition-K-injective)."
    }
   },
   {
-   "text": "For any $A$-complex $E$ and $P$-complex $I$, use the product total Hom differential of [def-pur-hom-complex]. Define $P$-linear maps in every degree $r$ by\n$$T(f)(x)=f(x)(1),\\qquad S(g)(x)(a)=g(ax).$$\nThe second formula is $A$-linear in $x$, since $S(g)(bx)(a)=g(abx)=(bS(g)(x))(a)$, and is $P$-linear in $a$. The inverse identities are $T S(g)(x)=g(x)$ and $S T(f)(x)(a)=f(ax)(1)=(af(x))(1)=f(x)(a)$. For a homogeneous $f$ of degree $r$,\n$$T(df)(x)=d_I(f(x)(1))-(-1)^r f(d_Ex)(1)=d(Tf)(x).$$\nThus $T$ is an isomorphism of complexes\n$$U\\operatorname{Hom}_A^\\bullet(E,J)\\cong\\operatorname{Hom}_P^\\bullet(UE,I),$$\nwith inverse $S$. The formula also applies to cochains of degree $-1$, hence carries chain homotopies to chain homotopies. Every product factor is treated separately, so unboundedness causes no interchange of sums and products.",
+   "text": "This is independent of representatives and natural in both derived variables. The model lemma gives precomposition and postcomposition naturality, including homotopies. By [lem-pur-rhom-well-defined], source quasi-isomorphisms and quasi-isomorphisms between K-injective targets induce quasi-isomorphisms of Hom complexes. By [lem-weil-pbc-kinjective-hom-derived], derived maps between K-injective representatives are chain maps uniquely up to homotopy. Coinduction carries these homotopies to homotopies by the model lemma. These naturality identities therefore descend through localization, whose universal property is [def-weil-abstract-derived-category], and through the canonical resolution comparisons. This gives the asserted natural isomorphism, with its prescribed formulas.",
    "uses": [
-    "def-pur-hom-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0A70, ordinary restriction/coextension adjunction applied degreewise, with the Hom differential of sites-cohomology.tex Section 0A8X."
-   }
-  },
-  {
-   "text": "The complex $J$ in Step 1 is K-injective over $A$. Indeed, for an acyclic $A$-complex $N$ and a chain map $v:N\\to J$, the restricted complex $UN$ is acyclic because restriction leaves the kernel/image quotient in every degree unchanged. By [def-pur-kinjective-complex], the chain map $T(v):UN\\to I$ has a null homotopy $s$, so $T(v)=d(s)$. Step 2 gives $v=S(d(s))=d(S(s))$. This is an $A$-linear null homotopy, exactly the defining condition of the cited node. This three-line transposition argument uses exact restriction, not preservation of K-injectivity by restriction in the opposite direction.",
-   "uses": [
-    "def-pur-kinjective-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0A70, K-injective coinduction model; derived.tex Definition 070H (definition-K-injective)."
-   }
-  },
-  {
-   "text": "By Step 3 and [def-pur-derived-internal-hom], $\\operatorname{Hom}_A^\\bullet(E,J)$ computes $R\\operatorname{Hom}_A(X,C(Y))$. The same definition says that $\\operatorname{Hom}_P^\\bullet(UE,I)$ computes $R\\operatorname{Hom}_P(UX,Y)$. Localize the actual chain isomorphism $T$ of Step 2 to obtain $\\Theta_{X,Y}$ in $D(P)$. To check that this is natural for derived morphisms and independent of representatives, first observe that $T$ commutes with precomposition in $E$ and postcomposition in $I$: both assertions are the equality of the two evaluations at $1$. Source quasi-isomorphisms and quasi-isomorphisms between K-injective targets give quasi-isomorphisms of these Hom complexes by [lem-pur-rhom-well-defined]. Moreover, [lem-weil-pbc-kinjective-hom-derived] represents every derived map between K-injective targets by a chain map uniquely up to homotopy. Coinduction and both sides of $T$ preserve such homotopies by the degree $-1$ formula of Step 2. Thus these naturality equalities pass to the localized categories and their canonical resolution comparisons, proving the asserted natural isomorphism with precisely the displayed inverse formula.",
-   "uses": [
-    "def-pur-derived-internal-hom",
+    "lem-trf-coinduction-total-hom-model",
     "lem-pur-rhom-well-defined",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A94 (lemma-RHom-into-K-injective) and 0A95 (lemma-RHom-well-defined); dualizing.tex Tags 0A70 and 0A71."
+    "place": "Tags 0A94 (lemma-RHom-into-K-injective) and 0A95 (lemma-RHom-well-defined)."
    }
   },
   {
-   "text": "Now choose $I$ representing $P[0]$ and write $V=\\operatorname{Hom}_P^\\bullet(A[0],I)$, so $Q_AV=D$. For a complex $M$, take $(M[n])^i=M^{i+n}$ and $d_{M[n]}=(-1)^n d_M$, as in [def-weil-abstract-derived-category]. Since $A[0]$ is in degree zero, $\\operatorname{Hom}_P(A,I[n])=V[n]$ with the same differential and action. Thus this is the model of $C(P[n])=D[n]$. For complexes $L,M$, the simultaneous-shift comparison\n$$\\operatorname{Hom}^\\bullet(L[n],M[n])\\longrightarrow\\operatorname{Hom}^\\bullet(L,M)$$\nsends a degree-$r$ cochain $f$ to the degree-$r$ cochain with component $(-1)^{nr}f^{i-n}$ on $L^i$. The shifted Hom differential is $(-1)^n$ times the unshifted one, and $(-1)^{n(r+1)}(-1)^n=(-1)^{nr}$, so this is a chain isomorphism. Its degree-zero part is the ordinary shift of chain maps. The shift preserves K-injectivity: a map from an acyclic complex into $I[n]$ corresponds to a map from its inverse shift into $I$, and a null homotopy shifts with the same signs; apply [def-pur-kinjective-complex]. These comparisons commute with $T$, since evaluation at $1$ commutes with the factor $(-1)^{nr}$.",
+   "text": "Now take $I$ representing $P[0]$ and $V=\\operatorname{Hom}_P^\\bullet(A[0],I)$. By [lem-trf-coinduction-shift-scalar-model], $C(P[n])$ is represented by $V[n]$, the simultaneous-shift comparison commutes with $T$, and it takes scalar multiplication on $V[n]$ exactly to $\\delta_I(a)(h)=h(a)$. Its degree-zero sign is one, so this is an equality of chain maps for every integer $n$. Apply [lem-trf-degree-zero-derived-bidual-model] with $M=UA$: the localization of this same $\\delta_I$ is the canonical coefficient-bidual morphism, with precisely the K-injective Hom identifications used above. Therefore the scalar-action morphism becomes canonical double-dual evaluation under $\\Theta_{D[n],P[n]}$ and shift cancellation, as required.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "def-pur-kinjective-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0BZW (lemma-relative-dualizing-algebraic), simultaneous shift cancellation in the displayed double-Hom calculation; signs expanded from the shift definition."
-   }
-  },
-  {
-   "text": "The scalar-action map is represented by\n$$m:A[0]\\longrightarrow U\\operatorname{Hom}_A^\\bullet(V[n],V[n]),\\qquad m(a)(h)=a h.$$\nIt is a chain map: multiplication by $a$ commutes with the differential, so $d(m(a))=0$ in the Hom differential of [def-pur-hom-complex]. Step 2, followed by Step 5's simultaneous-shift comparison, sends it to\n$$\\delta:A[0]\\longrightarrow\\operatorname{Hom}_P^\\bullet(UV,I),\\qquad \\delta(a)(h)=(ah)(1)=h(a).$$\nThere is no shift sign, since $m(a)$ has cochain degree zero. This equality is an equality of actual chain maps. The target computes $R\\operatorname{Hom}_P(R\\operatorname{Hom}_P(A,P),P)$ by [def-pur-derived-internal-hom], since $I$ is K-injective and $UV$ represents $R\\operatorname{Hom}_P(A,P)$.",
-   "uses": [
-    "def-pur-hom-complex",
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0BZW (lemma-relative-dualizing-algebraic), proof of (1)(c); Tags 0A70 and 0A71 for the evaluation-at-1 normalization."
-   }
-  },
-  {
-   "text": "We verify that $Q\\delta$ is the canonical bidual map, rather than merely a map with the correct target. By [lem-sfb-ringed-site-duality-maps] it is enough to identify the transpose of coefficient evaluation after the Koszul exchange. Choose K-flat flat-term resolutions $r:F\\to A[0]$ and $t:T\\to UV$ by [lem-pc-kflat-resolution]. The tensor of these resolutions computes the derived tensor by [lem-weil-pbc-site-derived-tensor-descent]. Put $W=\\operatorname{Hom}_P^\\bullet(F,I)$. By [lem-pur-rhom-well-defined], $r^*:UV\\to W$ is a quasi-isomorphism. By [lem-pur-hom-kflat-into-kinjective], $W$ is K-injective. The model $W$ represents $R\\operatorname{Hom}_P(A,P)$ by [def-pur-derived-internal-hom]. The chain tensor-Hom isomorphism of [lem-sc-derived-hom-tensor-total] is currying $f\\mapsto(x\\otimes y\\mapsto f(x)(y))$; substituting the Hom differential verifies this sign-free formula. The evaluation pairing on $T\\otimes F$ is therefore\n$$z\\otimes x\\longmapsto (r^*t(z))(x)=t(z)(r(x))\\in I.$$\nIt is the evaluation counit: it is the uncurrying of the model comparison $r^*t:T\\to W$, hence of the identity of $R\\operatorname{Hom}_P(A,P)$. The K-injective-target interpretation is justified by [lem-weil-pbc-kinjective-hom-derived]. This uses no projectivity of $A$ and no flatness of $V$.",
-   "uses": [
-    "lem-sfb-ringed-site-duality-maps",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pur-rhom-well-defined",
-    "def-pur-derived-internal-hom",
-    "lem-sc-derived-hom-tensor-total",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-pur-hom-kflat-into-kinjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A90 (lemma-compose), 0A95 (lemma-RHom-well-defined), 0A97 (lemma-internal-hom-evaluate), and 06YS (lemma-K-flat-resolution); more-algebra.tex Tags 0A5Y and 0GWQ for currying."
-   }
-  },
-  {
-   "text": "Precompose $\\delta$ with $r:F\\to A[0]$, and precompose its Hom variable with $t:T\\to UV$. By the currying formula of Step 7, its transpose on $F\\otimes T$ is\n$$x\\otimes z\\longmapsto t(z)(r(x)).$$\nOn the other hand, exchange the factors in Step 7's evaluation pairing using the Koszul symmetry in [lem-sfb-ringed-site-duality-maps]. This gives $(-1)^{|x||z|}t(z)(r(x))$. These are the same map: if $|x|\\ne0$ then $r(x)=0$, while if $|x|=0$ the sign is $1$. The targets $\\operatorname{Hom}_P(F,I)$ and $\\operatorname{Hom}_P(T,I)$ are K-injective by [lem-pur-hom-kflat-into-kinjective]. The tensor-Hom transpose is a bijection on the K-flat/K-injective models by [lem-sc-derived-hom-tensor-total] and [lem-weil-pbc-kinjective-hom-derived]; the tensor models and comparison maps are those of [lem-weil-pbc-site-derived-tensor-descent]. Thus $Q\\delta$ is exactly the transpose of braided coefficient evaluation, which is the canonical bidual map in [lem-sfb-ringed-site-duality-maps]. Combined with Step 6, this proves the scalar-action compatibility for every integer $n$. The zero complexes and the zero ring satisfy the same formulas, and no step used boundedness, Noetherianity or perfectness.",
-   "uses": [
-    "lem-sfb-ringed-site-duality-maps",
-    "lem-sc-derived-hom-tensor-total",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pur-hom-kflat-into-kinjective"
+    "lem-trf-coinduction-shift-scalar-model",
+    "lem-trf-degree-zero-derived-bidual-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0BZW, proof of (1)(c), with evaluation normalization from sites-cohomology.tex Tag 0A97 (lemma-internal-hom-evaluate) and the explicit Koszul exchange."
+    "place": "Tag 0BZW (lemma-relative-dualizing-algebraic), proof of (1)(c), simultaneous-shift cancellation; evaluation-at-one normalization from Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext)."
    }
   }
  ],
  "proof_deps": [
   "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "def-pur-kinjective-complex",
   "def-weil-abstract-derived-category",
-  "lem-pc-kflat-resolution",
-  "lem-pur-hom-kflat-into-kinjective",
   "lem-pur-rhom-well-defined",
-  "lem-sc-derived-hom-tensor-total",
-  "lem-sfb-ringed-site-duality-maps",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-trf-coinduction-shift-scalar-model",
+  "lem-trf-coinduction-total-hom-model",
+  "lem-trf-degree-zero-derived-bidual-model",
+  "lem-weil-pbc-kinjective-hom-derived"
  ],
  "proof_origin": {
   "by": "agent",
@@ -268,12 +199,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-algebraic-shriek-derived-hom-adjunction",
   "worker": "stage1",
-  "group": "Q25",
-  "summary": "Statement unchanged. Eight steps give the inverse P-linear Hom-complex maps, prove coinduced K-injectivity by transposing null homotopies, descend naturally to unbounded derived categories, track simultaneous-shift signs, compute the transported scalar action, and identify it with canonical biduality on K-flat tensor models. Reused existing coinduction, Hom, resolution and evaluation nodes; zero new nodes and zero new Mathlib leaves.",
-  "blueprint": "The inherited ancestry reaches lem-trf-local-term-locality, clauses (1)-(2), the normal-cone specialization argument and its relative-duality input. This split realizes the A/P internal-Hom and scalar-evaluation calculation used by lem-trf-algebraic-shriek-relative-perfect step 4, ultimately supporting that same specialization route.",
+  "group": "Q41",
+  "summary": "Repair of the 7546-character returned proof: extracted three statement-only unsplit nodes, distributing old steps 1-3, 5-6, and 7-8. The unchanged item now assembles the coinduced chain model, derived naturality, shift/scalar identity and canonical bidual model in 2016 characters. All old arguments are preserved verbatim in report.md with the extraction map. Rebased after the landing refusal onto the current live DAG: re-read every assembly citation and the extracted statements, verified all eight citation quotes against current statements, and retained the live statement and all eight original arguments verbatim in the report. No dependency substitution or mathematical change was required.",
+  "blueprint": "The inherited ancestry reaches lem-trf-local-term-locality, clauses (1)-(2), the normal-cone specialization argument and its relative-duality input. This split realizes the A/P internal-Hom and scalar-evaluation calculation used by lem-trf-algebraic-shriek-relative-perfect step 4, ultimately supporting that same specialization route. New nodes refine the three indicated model arguments on this same route.",
   "tool_uses": [
    {
     "node": "def-pur-derived-internal-hom",
@@ -335,12 +266,12 @@
   "lem-pur-hom-kflat-into-kinjective"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q25-33028ae3f",
-  "group": "Q25",
+  "reviewer": "NT-cc-Q41-16fdac061",
+  "group": "Q41",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-33028ae3f (reviewer sub-agent of L); spot-checked: Full source, DAG, route, hypothesis, citation, edge-case, duplicate, and eight-step proof audit completed. The repaired split removes the coinduction cycle, uses the ordinary derived route, preserves the coefficient category, and correctly identifies the scalar-to-bidual map without claiming invertibility. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-16fdac061 (reviewer sub-agent of L); spot-checked: The re-delivery 16fdac06 is identical to e39399dd, which was reviewed FIX. The three new nodes are byte-identical, and in the item only split_report.summary changed. e39399dd's landing was refused with 'completed in this project's DAG but not in live', a promotion mismatch for this Lean-landed item. The released stage-1 re-split note keeps the item S1-open, so I judged it on its merits. The earlier B3 fix was lost and I re-applied it. Re-split: old steps 1-3 go to lem-trf-coinduction-total-hom-model, 5-6 to lem-trf-coinduction-shift-scalar-model and 7-8 to lem-trf-degree-zero-derived-bidual-model. Old step 4, the descent of naturality through localization using lem-pur-rhom-well-defined and lem-weil-pbc-kinjective-hom-derived, stays as parent step 2. The parent proof has 3 steps and 2016 characters. The new nodes are of comparable size (1.3k/1.5k/1.9k) and none restates the item. Checks done by hand: T(df)=d(Tf); S is A-linear and inverse to T; J(I) is K-injective by transposing a null homotopy back; sigma(f)^i=(-1)^{nr}f^{i-n} is a chain isomorphism since (-1)^{n(r+1)}(-1)^n=(-1)^{nr}; J(I[n])=V[n] including differentials; sigma∘T∘m_n=delta_I with no sign; delta_I is a cocycle; the pairing t(z)(r(x)) is a chain map and is the uncurrying of r^*t; the Koszul sign is trivial wherever r(x) is nonzero; the conventions match lem-sfb-ringed-site-duality-maps. Tested P=A, the zero ring, n=0,±1, and M=0, P and a non-flat P/x. Duplicate checks: right-adjoint-preserves-kinjective (advisory, K-injectivity clause only), module-level coextension adjunctions, downstream derived-coinduction-adjunction and derived-bimodule-tensor-hom (which cite this item), and the sfb bidual normalizations (which need hypotheses that fail for non-flat M). None is a duplicate. Sources read: dualizing.tex 0A70 and 0A71 (l.2211-2250), 0BZW (1)(c) (l.4857-4868), and sites-cohomology 0A97 (l.8965). No SGA. FIX (B3) in lem-trf-degree-zero-derived-bidual-model: a sentence fixing the one-object identity-cover site; citations def-pc-kflat-complex and def-pc-flat-sheaf-modules for 'K-flat with flat terms', which were cited only through lem-pc-kflat-resolution; def-pc-tensor-complex-sheaves for the total tensor; stmt_deps updated. Maintainer note: please land this head with the fix, since an unchanged re-push loses it again.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.AlgebraicShriekDerivedHomAdjunction",
@@ -370,5 +301,16 @@
   "result": "pass",
   "note": "nt_compile --json clean (20.5 s, rc 0; injected-error control fails at 183:63). All node clauses match: arbitrary comm ring map, ordinary D(Mod), U = mapDerivedCategory, C = derivedCoinduction with K-injective model and hJ; θ is a bifunctor iso pinned on every (QE, QI) via eA/eP (hom = transposed signed evaluation), Q(T), with T's eval-at-1 and inverse a↦z(ax) formulas in all degrees; κ = θ at A[0] composed with the unit-Hom iso; for all n, scalar action on D[n], transported by the commShift mate C(P[n])≅D[n], equals curry(braiding≫ev) biduality into P[n] (shift-cancelled form of the node), with no invertibility claimed. Mechanical finding: lem-pod-projective-hom-evaluation-model is used only via .choose of its ev, uniquely fixed by the pure-tensor formula → constructed object, PASS on that point. Helpers have real data, sorry only on the theorem, docstrings and 8 steps present, lines ≤100, statement verbatim, report sections present. Advisory: DerivedInternalHomOfUniverses imported but unused (native ihom pinned to the Hom-complex model, as in Q131). Maintainer note: the item public-imports DerivedCoinductionAdjunction (owner lem-trf-derived-coinduction-adjunction, whose proof_deps cite this item), which makes a stage-3 Lean import cycle; the group cannot repair this under stage-2 rules. Split coinductionComplexFunctor/Evaluation, derivedCoinduction, derivedCoinductionModel/Adjunction (and derivedCoinductionUnderlying*) into a def-node module imported by both, and add that node to the item's stmt_deps."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

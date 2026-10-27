@@ -14,44 +14,50 @@
  ],
  "proof": [
   {
-   "text": "construct the root comparison by the ell^(r-m) power map. Its inclusion in\nG_m and its values on scalar/root generators fix the sheaf comparison; derive the\nactual scalar counit and iterate its normalized tensor and shift comparisons. Do this for every positive quotient and apply finiteSmoothQuotientCoherence to obtain the compact-support cocycle needed by exceptional_coefficient_comparison.\nThe projective-line Kummer and diagonal classes reduce to their counterparts, and\nthe splitting has free rank-one summands. Thus the ordered affine-line counits and\nbundle integration commute with reduction. For the diagonal deformation, transport\ndiagonalOrientationCompatibility from its single lifted coefficient presentation to\nthe double lift here. The actual scalar comparison on the family has the specified\none-fibre transpose. Uniqueness of normalized specialization identifies its zero\nfibre. Paste with the diagonal smooth-base-change mate and inverse bundle comparison.\nSubstitute both supplied OrientationNormalized equations and cancel the invertible\nfactors. This proves the unit-orientation coefficient equation for a.alpha and b.alpha.\nTensor compatibility of exceptional_coefficient_comparison, composed with this unit\nequation, gives ordinary_purity. Its other three edges are invertible, so the actual\nexceptional mate is invertible. Its defining adjunction gives the counit equation.\nFor reduction_ctf on arbitrary T use scalarExtensionFunctor_preserves_constructible_tor,\nwhich has no invertibility hypothesis on T. Canonical realization and uniqueness of\nscalar left adjoints identify its extension with proScalar; finite homology support\nand bounded intervals are equivalent. On X and Y the stronger ordinary-origin result\nof finiteReduction_constructibility also applies. Canonical tensor/pullback comparisons\ncommute reduction with inverse image. Transport the compact, exceptional and purity\nmaps through exact site comparison and scalar comparison. The actual ordinary-origin\ncounits are invertible on this domain. Adjoint transposition identifies transported\ncounits and naturality, and cancellation of origin counits gives the pro equations.\nAll maps retain their original formulas; equal positive levels and zero inputs are\nincluded. This is the source's two-level coefficient argument.",
+   "text": "Use quotientRootLineComparison and quotientInverseOrientation. The proved ordinaryGammaCoefficient tensor calculation gives ordinary_purity. Ordinary scalar extension preserves the input constructible finite-Tor domain. The supplied ordinary purity isomorphisms at a,b and the pullback/twist isomorphism make the actual exceptional mate invertible. Its defining adjunction gives ordinary_counit; compactSupportMap_isIso gives ordinary_compact.",
    "uses": [
+    "lem-pur-quotient-root-line-comparison",
+    "lem-pur-quotient-inverse-orientation",
+    "det-sp-reduction-compatibilities",
+    "lem-sp-finite-compact-support-domains",
+    "lem-pur-exceptional-coefficient-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply quotientIntrinsicCtf on every scheme for reduction_ctf. On X,Y use the comparison-counit and ordinary-origin lemmas. The adjunction unit makes originReductionMap invertible; all factors of the actual proCompactCoefficientMap and proPullbackMap are consequently invertible on their domains. Their formulas are unchanged. Ordinary mate naturality and comparison counit naturality prove pro_natural.",
+   "uses": [
+    "lem-pur-quotient-intrinsic-ctf",
+    "lem-pur-finite-smooth-level-of-orientation",
     "lem-pur-exceptional-coefficient-comparison",
-    "lem-pur-finite-reduction-constructibility",
-    "det-sp-scalar-extension-functor",
-    "lem-pur-diagonal-orientation-compatibility",
-    "lem-asd-ordinary-finite-p1-adjunction",
-    "lem-amb-affine-space-top-trace",
-    "def-amb-vector-integration",
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-pur-finite-smooth-quotient-coherence"
+    "det-sp-reduction-compatibilities"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the ordinary exceptional-domain hypotheses at the two levels from ordinaryExceptionalCtf, using prime invertibility on Y. Apply finiteProCoefficientCounitTransport for pro_counit. The existing proGammaCoefficient calculation transports the ordinary square to pro_purity. The supplied proGamma isomorphisms and the pro coefficient map make proLambda invertible by cancellation. Assemble the ten fields of ReductionData. No triple-level quotient coherence is used.",
+   "uses": [
+    "lem-pur-finite-pro-coefficient-counit-transport",
+    "lem-pur-finite-smooth-level-of-orientation",
+    "det-sp-reduction-compatibilities"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pur-quotient-root-line-comparison",
+  "lem-pur-quotient-inverse-orientation",
+  "det-sp-reduction-compatibilities",
+  "lem-sp-finite-compact-support-domains",
   "lem-pur-exceptional-coefficient-comparison",
-  "lem-pur-finite-reduction-constructibility",
-  "det-sp-scalar-extension-functor",
-  "lem-pur-diagonal-orientation-compatibility",
-  "lem-asd-ordinary-finite-p1-adjunction",
-  "lem-amb-affine-space-top-trace",
-  "def-amb-vector-integration",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-pur-finite-smooth-quotient-coherence"
+  "lem-pur-quotient-intrinsic-ctf",
+  "lem-pur-finite-smooth-level-of-orientation",
+  "lem-pur-finite-pro-coefficient-counit-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
-  "place": "The source two-level reduction lemma: root normalization, coefficient compatibility of the actual diagonal/deformation/bundle orientation, then tensor/counit and exact-site transport. The human route pivot forbids the NoetherianPrimePowerSmoothDuality shortcut."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "K2: coefficient-unit orientation, existing ordinary tensor calculation, intrinsic scalar realization, actual site transport and isomorphism cancellation. Triple-level coherence is unnecessary for two-level assembly."
  },
  "mathlib_searches": [
   {
@@ -96,7 +102,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
  "lean": {
@@ -120,12 +137,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261020T051002-L-1519603",
+  "landing": "20261027T094432-L-225776",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

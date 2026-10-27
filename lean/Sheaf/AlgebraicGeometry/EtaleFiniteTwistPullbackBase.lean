@@ -12,7 +12,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 import Sheaf.AlgebraicGeometry.FiniteEtaleTateLinePullback
 import Sheaf.AlgebraicGeometry.FiniteEtaleTateTensorFamily
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.MonoidalComp
-import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionReduction
+import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

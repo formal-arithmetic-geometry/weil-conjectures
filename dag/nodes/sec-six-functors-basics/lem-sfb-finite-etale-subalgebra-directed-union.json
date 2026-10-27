@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-finite-etale-subalgebra-directed-union",
+ "kind": "statement",
+ "title": "Directed union of finite etale subalgebras of an arbitrary field algebra",
+ "statement": "Let $k$ be a field [def-weil-field] and $A$ a commutative unital $k$-algebra, allowing the zero algebra. Let $\\mathcal E_k(A)$ be the set of unital $k$-subalgebras $D\\subseteq A$ for which $\\operatorname{Spec}D\\to\\operatorname{Spec}k$ is finite and etale [def-weil-affine-spectrum, def-weil-finite-integral-morphism, def-weil-etale-morphism]. This set is nonempty and directed under inclusion. Its set-theoretic union $B_k(A)=\\bigcup_{D\\in\\mathcal E_k(A)}D$ is a $k$-subalgebra of $A$, and every finite subset of $B_k(A)$ is contained in some $D\\in\\mathcal E_k(A)$. Every idempotent $e\\in A$, meaning $e^2=e$, belongs to $B_k(A)$. For every finite etale $k$-algebra $C$ and every unital $k$-algebra map $h:C\\to A$, the image $h(C)$ belongs to $\\mathcal E_k(A)$; in particular $h$ factors uniquely through the inclusion $B_k(A)\\subseteq A$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0CKR (lemma-class-weakly-etale-over-field), 0CKS (lemma-max-weakly-etale-subalgebra), and 0CKT (lemma-properties-of-max-weakly-etale-subalgebra): the finite-subalgebra union description; see also Milne Proposition 1.29, preliminary paragraph."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "First prove the image assertion, for any finite etale $k$-algebra $C$ and map $h:C\\to A$. By [lem-weil-pbc-etale-algebra-over-field-product], write $C=\\prod_{i=1}^nL_i$ with each $L_i/k$ finite separable. Let $I=\\ker h$ and let $e_i$ be the coordinate idempotents. If $x\\in I$ has $x_i\\ne0$, multiply $x$ by the tuple supported at $i$ with value $x_i^{-1}$; this gives $e_i\\in I$. Thus, for $J=\\{i:e_i\\notin I\\}$, $I$ consists exactly of tuples vanishing on $J$: the reverse inclusion follows by expressing such a tuple as the finite sum of its coordinates times the $e_i\\in I$. Consequently $h(c)\\mapsto(c_i)_{i\\in J}$ is a well-defined algebra isomorphism $h(C)\\simeq\\prod_{i\\in J}L_i$: injectivity follows from the description of $I$, and surjectivity by extending a tuple by zeros. Each factor is etale by [lem-weil-pbc-finite-separable-extension-etale], and the product is etale by [lem-weil-pbc-etale-algebra-finite-product]. It is a finite $k$-module: combine finite spanning families of its factors. The affine definition [def-weil-finite-integral-morphism] therefore makes its spectrum finite over $k$. This proves $h(C)\\in\\mathcal E_k(A)$, including $J=\\varnothing$, whose product is the zero algebra.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-etale-algebra-finite-product",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CKR, lemma-class-weakly-etale-over-field, proof of (5), the finite-product quotient argument; algebra.tex Tag 00U3, lemma-etale-over-field"
+   }
+  },
+  {
+   "text": "The identity extension $k/k$ is finite separable (every element has the linear minimal polynomial $T-a$), hence etale by [lem-weil-pbc-finite-separable-extension-etale] and finite by [def-weil-finite-integral-morphism]. Apply step 1 to the structure map $k\\to A$. Its image is in $\\mathcal E_k(A)$, proving nonemptiness even when $A=0$.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U3, lemma-etale-over-field, the one-factor case"
+   }
+  },
+  {
+   "text": "For $D,E\\in\\mathcal E_k(A)$ form $T=D\\otimes_kE$. By [lem-weil-pbc-etale-ring-base-change], $\\operatorname{Spec}T\\to\\operatorname{Spec}D$ is etale, and by clause (2) of [lem-weil-pbc-etale-composition-cancellation] its composite to $\\operatorname{Spec}k$ is etale. If $(d_i)$ and $(e_j)$ are finite spanning families for $D,E$, the tensors $d_i\\otimes e_j$ span $T$: expand each pure tensor bilinearly, and every tensor is a finite sum of pure tensors. Thus $T$ is finite over $k$ by [def-weil-finite-integral-morphism]. Multiplication in $A$ defines the algebra map $\\mu:T\\to A$, $d\\otimes e\\mapsto de$; the formula is balanced and multiplicative because $A$ is commutative. Step 1 gives $F=\\mu(T)\\in\\mathcal E_k(A)$. Since $\\mu(d\\otimes1)=d$ and $\\mu(1\\otimes e)=e$, $F$ contains both $D$ and $E$, proving directedness.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CKS, lemma-max-weakly-etale-subalgebra, first two sentences of proof; finite-stage version"
+   }
+  },
+  {
+   "text": "Put $B=\\bigcup_{D\\in\\mathcal E_k(A)}D$. Nonemptiness gives a member containing $0$, $1$, and every scalar. If $x,y\\in B$, choose members containing them and a common upper bound from step 3; it contains $x+y$, $xy$, and $-x$. Hence $B$ is a unital $k$-subalgebra of $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CKS, lemma-max-weakly-etale-subalgebra, directed-colimit construction"
+   }
+  },
+  {
+   "text": "For a finite subset $S\\subseteq B$, induct on its cardinality. For $S=\\varnothing$ use the member of step 2. Given a member containing $S$ and $x\\in B$, choose a member containing $x$ and then a common upper bound by step 3. It contains $S\\cup\\{x\\}$. This proves the finite-subset assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CKS, lemma-max-weakly-etale-subalgebra, finite subsets of the directed union"
+   }
+  },
+  {
+   "text": "For an idempotent $e\\in A$, the algebra $k\\times k$ is finite etale: apply [lem-weil-pbc-finite-separable-extension-etale] to $k/k$, [lem-weil-pbc-etale-algebra-finite-product] to its two copies, and [def-weil-finite-integral-morphism] to the spanning family $(1,0),(0,1)$. The formula $h_e(a,b)=ae+b(1-e)$ gives a unital $k$-algebra map since $e(1-e)=0$ and $e+(1-e)=1$. Step 1 puts its image in $\\mathcal E_k(A)$, and $h_e(1,0)=e$, so $e\\in B$. Finally, for any $h:C\\to A$ as in step 1, its image lies in $B$. Sending $c$ to the same value $h(c)$ regarded in $B$ is the required factorization; all algebra identities are inherited from $A$. Two factorizations agree pointwise because $B\\hookrightarrow A$ is injective.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-etale-algebra-finite-product",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0CKR and 0CKS, finite etale images and maximal subalgebra; explicit idempotent map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-etale-algebra-finite-product",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0CKR (lemma-class-weakly-etale-over-field), proof of (5), and 0CKS (lemma-max-weakly-etale-subalgebra), proof; explicit finite-stage construction, with algebra.tex 00U3 and 00U2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For any algebra A over a field k the union of finite etale k subalgebras is an ind etale subalgebra containing every idempotent and every finite subset of this union lies in a finite etale subalgebra",
+   "results": "{\"t\": \"2026-10-24T00:26:50Z\", \"tool\": \"leanfinder\", \"query\": \"For any algebra A over a field k the union of finite etale k subalgebras is an ind etale subalgebra containing every idempotent and every finite subset of this union lies in a finite etale subalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.FormallyEtale.instForallOfFinite\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.Etale.finitePresentation\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"b2443dbe5ce8eda6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; etale descent to a finitely generated coefficient subalgebra, classification of a given etale algebra, and base change of a given etale algebra do not construct this union or identify it after arbitrary field extension. No maximal subalgebra theorem occurs in the inspected Weakly.lean or NoetherianDescent.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of a finite etale algebra over a field in any commutative algebra is finite etale and composites of finite etale subalgebras are finite etale",
+   "results": "{\"t\": \"2026-10-24T00:28:17Z\", \"tool\": \"leansearch\", \"query\": \"The image of a finite etale algebra over a field in any commutative algebra is finite etale and composites of finite etale subalgebras are finite etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale\", \"Algebra.FormallyEtale.comp\", \"Algebra.Etale.formallyEtale\", \"Algebra.Etale.baseChange\", \"Algebra.Etale.comp\", \"RingHom.Etale\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"RingHom.Etale.stableUnderComposition\"], \"digest\": \"c2fe339e8736ad30\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; etale descent to a finitely generated coefficient subalgebra, classification of a given etale algebra, and base change of a given etale algebra do not construct this union or identify it after arbitrary field extension. No maximal subalgebra theorem occurs in the inspected Weakly.lean or NoetherianDescent.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"Subalgebra\"",
+   "results": "{\"t\": \"2026-10-24T00:28:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"Subalgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\"], \"digest\": \"8b99654ad077c351\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; etale descent to a finitely generated coefficient subalgebra, classification of a given etale algebra, and base change of a given etale algebra do not construct this union or identify it after arbitrary field extension. No maximal subalgebra theorem occurs in the inspected Weakly.lean or NoetherianDescent.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "max.*[Ee]tale|[Ee]tale.*[Ss]ubalgebra|ind[Ee]tale|weakly[Ee]tale",
+   "results": "{\"t\": \"2026-10-24T00:28:16Z\", \"tool\": \"grep\", \"query\": \"max.*[Ee]tale|[Ee]tale.*[Ss]ubalgebra|ind[Ee]tale|weakly[Ee]tale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Weakly.lean\", \"Mathlib/RingTheory/Etale/Weakly.lean\", \"Mathlib/RingTheory/Etale/Weakly.lean\", \"Mathlib/RingTheory/Etale/Weakly.lean\", \"Mathlib/RingTheory/Etale/Weakly.lean\", \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\"], \"digest\": \"12d33176c71ad1c7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; etale descent to a finitely generated coefficient subalgebra, classification of a given etale algebra, and base change of a given etale algebra do not construct this union or identify it after arbitrary field extension. No maximal subalgebra theorem occurs in the inspected Weakly.lean or NoetherianDescent.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary algebra over a field the finite etale subalgebras are directed and their union contains every idempotent and the image of every finite etale algebra",
+   "results": "{\"t\": \"2026-10-24T01:07:16Z\", \"tool\": \"leanfinder\", \"query\": \"For an arbitrary algebra over a field the finite etale subalgebras are directed and their union contains every idempotent and the image of every finite etale algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Etale\", \"Algebra.FormallyEtale.instForallOfFinite\", \"Algebra.Etale.finitePresentation\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"20e04463619deadb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: returned classification, base-change/composition, descent or directed-union infrastructure; these do not give every clause under the hypotheses on arbitrary A. Existing DAG nodes supply the algebraic inputs."
+  },
+  {
+   "tool": "grep",
+   "query": "of_surjective|quotient|baseChange|tensorProduct",
+   "results": "{\"t\": \"2026-10-24T01:08:21Z\", \"tool\": \"grep\", \"query\": \"of_surjective|quotient|baseChange|tensorProduct\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\"], \"digest\": \"54feaaf4a8d77626\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: returned classification, base-change/composition, descent or directed-union infrastructure; these do not give every clause under the hypotheses on arbitrary A. Existing DAG nodes supply the algebraic inputs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"surjective\"",
+   "results": "{\"t\": \"2026-10-24T01:08:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.iff_of_surjective\", \"Algebra.IsStandardEtale.of_surjective\", \"AlgebraicGeometry.instDescendsAlongSchemeEtaleMinMorphismPropertySurjectiveFlatQuasiCompact\", \"AlgebraicGeometry.Scheme.pointSmallEtaleFiberObjToPreimage_surjective\"], \"digest\": \"985fc0907f4d5f76\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: returned classification, base-change/composition, descent or directed-union infrastructure; these do not give every clause under the hypotheses on arbitrary A. Existing DAG nodes supply the algebraic inputs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The maximal separable subalgebra of an algebra over a field is the directed union of its finite etale subalgebras",
+   "results": "{\"t\": \"2026-10-24T01:09:27Z\", \"tool\": \"leansearch\", \"query\": \"The maximal separable subalgebra of an algebra over a field is the directed union of its finite etale subalgebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Subalgebra.coe_iSup_of_directed\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.IsSeparable.isAlgebraic\", \"Algebra.FormallyEtale.iff_isSeparable\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.isSeparable_def\"], \"digest\": \"9cc5eb87810d8c41\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: returned classification, base-change/composition, descent or directed-union infrastructure; these do not give every clause under the hypotheses on arbitrary A. Existing DAG nodes supply the algebraic inputs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, TensorProduct",
+   "results": "{\"t\": \"2026-10-24T01:11:24Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq_aux\", \"Algebra.Etale.of_etale_tensorProduct_of_faithfullyFlat\", \"Algebra.IsFiniteSplit.exists_tensorProduct_of_etale\"], \"digest\": \"403926fcafd7e53e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: returned classification, base-change/composition, descent or directed-union infrastructure; these do not give every clause under the hypotheses on arbitrary A. Existing DAG nodes supply the algebraic inputs."
+  },
+  {
+   "tool": "grep",
+   "query": "^theorem comp|^instance baseChange",
+   "results": "{\"t\": \"2026-10-24T01:13:29Z\", \"tool\": \"grep\", \"query\": \"^theorem comp|^instance baseChange\", \"sub\": \"RingTheory/Etale/Basic.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"114\", \"237\", \"242\"], \"digest\": \"fc44ec4d5fe437f1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: returned classification, base-change/composition, descent or directed-union infrastructure; these do not give every clause under the hypotheses on arbitrary A. Existing DAG nodes supply the algebraic inputs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale algebras are stable under extension of scalars and transitivity",
+   "results": "{\"t\": \"2026-10-24T01:13:29Z\", \"tool\": \"leansearch\", \"query\": \"Etale algebras are stable under extension of scalars and transitivity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"Algebra.Etale\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.IsEtaleAt.comp\", \"Algebra.Etale.comp\", \"Algebra.FormallyEtale.instTensorProduct\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\"], \"digest\": \"94588e110b0bb636\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: returned classification, base-change/composition, descent or directed-union infrastructure; these do not give every clause under the hypotheses on arbitrary A. Existing DAG nodes supply the algebraic inputs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale.comp",
+   "results": "{\"t\": \"2026-10-24T01:13:29Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.Etale.comp\"], \"digest\": \"5553636748b3716e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: returned classification, base-change/composition, descent or directed-union infrastructure; these do not give every clause under the hypotheses on arbitrary A. Existing DAG nodes supply the algebraic inputs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale ring maps are stable under arbitrary base change and under composition",
+   "results": "{\"t\": \"2026-10-24T01:13:31Z\", \"tool\": \"leanfinder\", \"query\": \"Etale ring maps are stable under arbitrary base change and under composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.isStableUnderBaseChange\", \"RingHom.Etale.stableUnderComposition\", \"Algebra.Etale.comp\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"Algebra.IsEtaleAt.comp\"], \"digest\": \"fb56332ac9e195e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: returned classification, base-change/composition, descent or directed-union infrastructure; these do not give every clause under the hypotheses on arbitrary A. Existing DAG nodes supply the algebraic inputs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-scheme-etale-components",
+  "date": "2026-10-24",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting Milne Corollary 14.53, used after the elementary-unipotent reduction in 14.54: the full product classification is Proposition 14.52. Present split: step 5, splitting the finite cyclic factors into their identity components and finite etale reduced subgroups over the given perfect field. Supporting general scheme-theoretic input: the universal finite etale scheme of connected components, before transporting the group operations. Supporting algebra for Milne Proposition 1.29 and the field-extension argument of Proposition 1.30(a): Directed union of finite etale subalgebras of an arbitrary field algebra.",
+   "via": [
+    "lem-sfb-algebraic-scheme-etale-components",
+    "lem-sfb-perfect-finite-commutative-reduced-splitting",
+    "lem-sfb-additive-subgroup-perfect-decomposition",
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-etale-subalgebra-directed-union",
+  "worker": "stage1",
+  "summary": "Q05 checked all clauses including the zero algebra against Stacks 0CKR/0CKS, proved images by the coordinate-idempotent kernel calculation, formed common upper bounds via tensor multiplication, and wrote the union, finite-subset induction, idempotent map and unique factorization. All inputs already have DAG nodes; no new nodes or Lean changes.",
+  "blueprint": "Supports the inherited Milne Proposition 1.29 component-algebra prerequisite of det-thm-sf-ctf-stability-direct-images (3). The current latest blueprint has no node stating this finite-etale-subalgebra union theorem; its full inherited provenance is retained. The six steps provide the finite-subalgebra construction used by the parent lem-sfb-algebraic-scheme-etale-components.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-a7469a9b3",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-a7469a9b3 (reviewer sub-agent of L); spot-checked: PASS. Item-only S1 split: 6 steps, no new nodes. Statement, stmt_deps, blueprint and source are identical to side-live. The item is not superseded (unsplit in clones/live), not in a dropped list and has no repair note. Source checked: Stacks more-algebra 0CKR (3) and the (5) quotient argument (image of a product of fields = ∏_{i∈J} L_i), and 0CKS (common upper bound = image of B1⊗B2), at lines 30845–30980; tags verified in tags/tags. Steps: (1) the kernel of h on ∏L_i is cut out by coordinate idempotents, so h(C) ≅ ∏_J L_i, étale by the finite-separable and finite-product leaves and finite by def-weil-finite-integral-morphism, with J=∅ handled. (2) Nonempty via the image of k→A, which is correct for A=0. (3) D⊗_kE is étale over k by ring base change (R=k, A=E, S=D) and composition clause (2), and finite via the tensors d_i⊗e_j; its image under multiplication is a common upper bound and no injectivity is claimed. (4)–(5) Subalgebra and finite-subset induction, both properly set up. (6) k×k → A, (a,b) ↦ ae+b(1−e), is a unital algebra map, so idempotents lie in B; h corestricts to B uniquely by injectivity. Every cited statement says what its step uses. All inputs are Mathlib leaves, so tool_uses=[] is right. Edge cases checked: A=0, e∈{0,1}, k[ε]/ε² (B=k), k×k, imperfect k(t^{1/p}). No duplicate found by rg over dag/nodes for 0CKR/0CKS/0CKT, Milne 1.29 or maximal-étale terms; only the citers lem-sfb-algebraic-scheme-etale-components and lem-sfb-maximal-ind-etale-field-base-change matched, and both still get every clause they use. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteEtaleSubalgebraUnion",
+  "declaration": "Algebra.finiteEtaleSubalgebra_directed_union",
+  "declarations": [
+   "Algebra.finiteEtaleSubalgebras",
+   "Algebra.finiteEtaleSubalgebraUnion",
+   "Algebra.finiteEtaleSubalgebra_directed_union"
+  ],
+  "file": "lean/Sheaf/RingTheory/FiniteEtaleSubalgebraUnion.lean",
+  "statement": "theorem finiteEtaleSubalgebra_directed_union (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A] : (finiteEtaleSubalgebras k A).Nonempty ∧ DirectedOn (· ≤ ·) (finiteEtaleSubalgebras k A) ∧ (finiteEtaleSubalgebraUnion k A : Set A) = (⋃ D ∈ finiteEtaleSubalgebras k A, (D : Set A)) ∧ (∀ s : Set A, s.Finite → s ⊆ (finiteEtaleSubalgebraUnion k A : Set A) → ∃ D ∈ finiteEtaleSubalgebras k A, s ⊆ (D : Set A)) ∧ (∀ e : A, e ^ 2 = e → e ∈ finiteEtaleSubalgebraUnion k A) ∧ (∀ (C : Type w) [CommRing C] [Algebra k C], Module.Finite k C → Etale k C → ∀ h : C →ₐ[k] A, h.range ∈ finiteEtaleSubalgebras k A ∧ ∃! g : C →ₐ[k] finiteEtaleSubalgebraUnion k A, (finiteEtaleSubalgebraUnion k A).val.comp g = h)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bac5cf8b9",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Clause-by-clause match of Algebra.finiteEtaleSubalgebra_directed_union to the node and Stacks 0CKR/0CKS/0CKT: Nonempty, DirectedOn, sSup carrier = literal ⋃, finite-subset clause, e^2=e ∈ B, h.range ∈ E with ∃! factorization through B.val; C has its own universe w. Module.Finite ∧ Algebra.Etale matches Spec finite étale via IsFinite.SpecMap_iff, HasRingHomProperty.Spec_iff and RingHom.etale_algebraMap. No hollow definitions (real predicate set and sSup). Edge cases A=0, empty subset, e=0/1, nilpotents, inseparable k, C=0 covered. No duplicate in Mathlib or the project Lean; citers have no lean yet. Node record identical to side-live apart from lean; statement verbatim once in the file; docstrings carry source and blueprint id and all six steps; sorry only; report has both sections. No changes, so no compile run."
+ }
+}

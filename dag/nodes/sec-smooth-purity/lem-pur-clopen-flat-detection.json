@@ -1,0 +1,111 @@
+{
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-clopen-total-tensor-kflat-detection",
+   "place": "Finite-clopen tensor construction and tests in the parent node."
+  },
+  "same_as": [],
+  "is": null
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleClopenTotalTensorKFlatDetection",
+  "date": "2026-10-27",
+  "group": "S7"
+ },
+ "mathlib_match": null,
+ "proof_origin": {
+  "kind": "stage3",
+  "by": "S7",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Finite-clopen tensor construction and tests in the parent node; this statement isolates one component."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "clopen flatness detection",
+   "results": "No existing declaration states this finite-clopen pro-etale result.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness detection under finite clopen restriction finite clopen pro-etale",
+   "results": "No matching declaration in the source library or Mathlib.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Flatness detection under finite clopen restriction sheaf tensor",
+   "results": "No matching declaration in the source library or Mathlib.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  }
+ ],
+ "id": "lem-pur-clopen-flat-detection",
+ "kind": "statement",
+ "title": "Flatness detection under finite clopen restriction",
+ "statement": "Flatness detection under finite clopen restriction.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03ER (3), with the clopen exactness and zero-insertion argument."
+ },
+ "stmt_deps": [
+  "def-pc-flat-sheaf-modules",
+  "lem-pur-clopen-ringed-module-gluing",
+  "def-pur-clopen-total-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "Restrict an exact tensor test and use the componentwise exactness of clopen gluing. For the converse, insert an arbitrary exact component sequence by zero insertion, tensor globally, and restrict back; the tensor comparison identifies the result with the component tensor test. The empty-component and zero-ring cases are included by the same zero-category argument.",
+   "uses": [
+    "def-pur-clopen-total-tensor-data",
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ER (3), with the clopen exactness and zero-insertion argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-clopen-total-tensor-data",
+  "lem-pur-clopen-ringed-module-gluing"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenFlatDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenFlatDetection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.clopen_flat_detection",
+  "statement": "theorem clopen_flat_detection\n    (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})\n    (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]\n    (hdisjoint : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k))))\n    (hcover : ∀ x : X, ∃ i, x ∈ Set.range (j i))\n    (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :\n    ∀ F : ClopenData.clopenTensorModules.{t, u} R,\n      SheafOfModules.IsFlatOnSite (J := topology X) (R := R) F ↔\n        ∀ i, SheafOfModules.IsFlatOnSite (J := topology (Y i))\n          (R := (ClopenData.clopenTensorRings.{t, u} (j i)).obj R)\n          ((ClopenData.clopenTensorRestriction.{t, u} (j i) R).obj F)",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T012938-L-2350552",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T012938-L-2350552",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

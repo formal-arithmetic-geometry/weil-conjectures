@@ -1,0 +1,127 @@
+{
+ "id": "def-sf-normalized-strict-tower-augmentation",
+ "kind": "definition",
+ "title": "Normalized total derived limit comparison and strict augmentation unit",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a site with object universe $c$ and morphism universe $v$, and let $R$ be a sheaf of commutative rings of size $\\max(c,v,r)$, with $\\mathcal A=\\operatorname{Mod}(R)$ [def-weil-sheaf-of-modules-category]. Assume abelian sheafification and the locally bijective criterion in this coefficient size. Use ordinary unbounded derived categories of $\\mathcal A$ and of the strict tower category $\\operatorname{Tow}(\\mathcal A)=\\operatorname{Fun}(\\mathbf N^{op},\\mathcal A)$ [def-weil-abstract-derived-category] [def-weil-inverse-system], with localization functors $Q$ in a common localization universe $w$. Let $L=\\operatorname{koszulRlim}_R$ be the specified total right derived inverse limit [def-sf-koszul-total-derived-limit]. Define $\\operatorname{limitComparison}$ to be the right-derived comparison $\\gamma:Q\\lim\\to LQ$ selected in the same right-derived pair as this specified functor. For a cochain complex $P$ [def-pc-cochain-complex-modules], write $\\Delta P$ for the constant strict tower and $X$ for the degreewise transposition of towers of complexes and their maps [def-pur-principal-koszul-quotient-towers]. Define the representative constant-tower unit by $\\operatorname{constantUnit}(P)=\\gamma_{X(\\Delta P)}\\circ Q(u_P)$, where $u_P:P\\to\\lim X(\\Delta P)$ is the ordinary constant/limit adjunction unit on complexes. For any strict tower $V$ of such complexes and strict augmentation $\\alpha:\\Delta P\\to V$, define $\\operatorname{augmentedUnit}(P,V,\\alpha)=L(Q(X(\\alpha)))\\circ\\operatorname{constantUnit}(P):Q(P)\\to L(Q(X(V)))$. These are the specified representative formulas, without any regularity, K-flatness, boundedness or exact-countable-product hypothesis.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "def-sf-koszul-total-derived-limit",
+  "def-pc-cochain-complex-modules",
+  "def-pur-principal-koszul-quotient-towers"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok; Tags 09T5 and 0FND, derived constant/limit adjunction and exact-constant factorization. Representative formulas used in Tags 099B and 0A0E of algebraization.tex."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalized total derived inverse limit comparison and the constant tower unit followed by the derived image of a strict augmentation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.totalRightDerivedUnit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \": F ⟶ L ⋙ F.totalRightDerived L W\", \"doc\": \"The natural transformation from $ F $ to the composition of $ L $ with the total right derived functor of $ F $, defined as the unit of the left Kan extension. This transformation satisfies the univer\"}\n  {\"name\": \"CategoryTheory.Limits.constLimAdj\", \"module\": \"Mathlib.CategoryTheory.Limits.HasLimits\", \"type\": \": (const J : C ⥤ J ⥤ C) ⊣ lim\", \"doc\": \"For categories $\\\\mathcal{J}$ and $\\\\mathcal{C}$ where $\\\\mathcal{C}$ has all $\\\\mathcal{J}$-shaped limits, the constant functor $\\\\Delta : \\\\mathcal{C} \\\\to [\\\\mathcal{J}, \\\\mathcal{C}]$ is left adjoint to th\"}\n  {\"name\": \"CategoryTheory.Limits.limit.isoLimitCone_inv_π_assoc\", \"module\": \"Mathlib.CategoryTheory.Limits.HasLimits\", \"type\": \"∀ {J : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} J] {C : Type u} [inst_1 : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Functor J C} [inst_2 : CategoryTheory.Limits.HasLimit F] (t : CategoryTheory.Limits.LimitCone F)\\n  (j : J) {Z : C} (h : F.obj j ⟶ Z),\\n  CategoryTheory.CategorySt\", \"doc\": \"For categories $\\\\mathcal{J}$ and $\\\\mathcal{C}$, a functor $F: \\\\mathcal{J} \\\\to \\\\mathcal{C}$ with a limit, a limit cone $t$ over $F$, an object $j \\\\in \\\\mathcal{J}$, and a morphism $h: F(j) \\\\to Z$ in $\\\\m\"}\n  {\"name\": \"CategoryTheory.Limits.limitConstTerminal_inv_π\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Terminal\", \"type\": \"{J : Type*} [Category* J] {C : Type*} [Category* C] [HasTerminal C] {j : J} :\\n  limitConstTerminal.inv ≫ limit.π ((CategoryTheory.Functor.const J).obj (⊤_ C)) j = terminal.from _\", \"doc\": \"In a category $\\\\mathcal{C}$ with a terminal object $\\\\top_\\\\mathcal{C}$, the composition of the inverse of the isomorphism $\\\\text{limitConstTerminal} : \\\\top_\\\\mathcal{C} \\\\cong \\\\text{limit}(\\\\text{const}_\\\\\"}\n  {\"name\": \"CategoryTheory.Limits.limit.isoLimitCone_inv_π\", \"module\": \"Mathlib.CategoryTheory.Limits.HasLimits\", \"type\": \"{F : J ⥤ C} [HasLimit F] (t : LimitCone F) (j : J) : (limit.isoLimitCone t).inv ≫ limit.π F j = t.cone.π.app j\", \"doc\": \"For a functor $ F : \\\\mathcal{J} \\\\to \\\\mathcal{C} $ with a limit and a limit cone $ t $ over $ F $, the inverse of the isomorphism $ \\\\lim F \\\\cong t.\\\\text{pt} $ composed with the projection $ \\\\lim F \\\\to \"}\n  {\"name\": \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \": L ⋙ F.totalLeftDerived L W ⟶ F\", \"doc\": \"The natural transformation from the composition of the localization functor $ L $ with the total left derived functor of $ F $ to $ F $ itself, defined as the counit of the right Kan extension constru\"}\n  {\"name\": \"InverseSystem.invLimEquiv\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \": limit f i ≃ limit (piLTProj (X := X)) i\", \"doc\": \"Given an inverse system indexed by a linearly ordered set $\\\\iota$ with objects $F_j$ and transition maps $f_{jk}$, and a family of equivalences $F_j \\\\simeq \\\\prod_{l < j} X_l$ satisfying the naturality\"}\n  {\"name\": \"CategoryTheory.Abelian.DoldKan.comparisonN_hom_app_f\", \"module\": \"Mathlib.AlgebraicTopology.DoldKan.Equivalence\", \"type\": \"∀ {A : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} A] [inst_1 : CategoryTheory.Abelian A]\\n  (X : CategoryTheory.SimplicialObject A) (i : ℕ),\\n  (CategoryTheory.Abelian.DoldKan.comparisonN.hom.app X).f i =\\n    CategoryTheory.CategoryStruct.comp\\n      (((CategoryTheory.Idempotents.toKaroubiEqu\", \"doc\": \"For any abelian category $\\\\mathcal{A}$ and simplicial object $X$ in $\\\\mathcal{A}$, the hom-component of the natural isomorphism $\\\\text{comparisonN}$ at index $i \\\\in \\\\mathbb{N}$ is given by the composi\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the unchanged project definitions in Sheaf.SixFunctors.RegularRoosKoszulUnit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized total derived inverse limit comparison and the constant tower unit followed by the derived image of a strict augmentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the inverse of the isomorphism $ R^0F \\\\cong F $ satisfies the associativity condition: co\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, composing the natural transformation $ F \\\\to R^0F $ with the inverse isomorphism $ R^0F \\\\\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] [inst_2 : CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄}\\n  {D₂ : Type u₅} [inst_3 : CategoryTheory.Category.{v₄, u₄} D₁] [inst_4 : CategoryTheory.Category.{\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$, a localizer morphism $\\\\Phi: \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$ preserving a morphism property $W_1$, and localization funct\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additi\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories, there exists a natural isomorphism between the 0th left-derived functor $ L_0F $ and $ F $. This isomorphism ari\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] [inst_2 : CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄}\\n  {D₂ : Type u₅} [inst_3 : CategoryTheory.Category.{v₄, u₄} D₁] [inst_4 : CategoryTheory.Category.{\", \"doc\": \"For any object $X$ in category $\\\\mathcal{C}_1$, the composition of the natural transformation $\\\\alpha_1$ at $X$ with the component of the right derived functor comparison morphism at $L_1(X)$ equals t\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additi\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough projectives, the composition of the inverse isomorphism $ (L_0F \\\\Rightarrow F)^{-1} $ and the natural\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additi\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough projectives, the 0th left-derived functor $ L_0F $ is naturally isomorphic to $ F $. This isomorphism\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the unchanged project definitions in Sheaf.SixFunctors.RegularRoosKoszulUnit."
+  },
+  {
+   "tool": "grep",
+   "query": "limitComparison|constantUnit|augmentedUnit",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the unchanged project definitions in Sheaf.SixFunctors.RegularRoosKoszulUnit."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n limitComparison|constantUnit|augmentedUnit lean/WeilConjectures lean/Sheaf; rg -l -F CategoryTheory.RegularRoosKoszul.augmentedUnit dag/nodes; python3 tools/blueprint_refs.py search augmentedUnit",
+   "results": "No exact declarations in WeilConjectures. Sheaf/SixFunctors/RegularRoosKoszulUnit.lean defines limitComparison at line 65, constantUnit at line 77 and augmentedUnit at line 89. Other hits use these or are unrelated constant/scalar comparisons. The exact qualified-name DAG search returns only dag/nodes/sec-six-functors/lem-sf-regular-roos-koszul-unit.json, a theorem owner. Blueprint search: 0 blueprint nodes match augmentedUnit. def-sf-derived-constant-tower-comparisons was inspected and defines constant/evaluation and exact-functor interchange, not the constant/derived-limit augmentation.",
+   "date": "2026-10-24",
+   "verdict": "Existing definitions have no definition-node owner. Add existing:true ownership; no duplicate Lean code."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-quotient-completion-actual-reflector",
+  "date": "2026-10-24",
+  "group": "Q144"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Integral open factor, actual quotient-completion reflector: the normalized total derived inverse limit of the strict quotient augmentation (repair H2).",
+   "via": [
+    "lem-sf-quotient-completion-actual-reflector",
+    "lem-sf-open-roos-unit-adjunction",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "module": "Sheaf.SixFunctors.RegularRoosKoszulData",
+  "declaration": "CategoryTheory.RegularRoosKoszul.augmentedUnit",
+  "declarations": [
+   "CategoryTheory.RegularRoosKoszul.limitComparison",
+   "CategoryTheory.RegularRoosKoszul.constantUnit",
+   "CategoryTheory.RegularRoosKoszul.augmentedUnit",
+   "CategoryTheory.RegularRoosKoszul.augmentedUnit_previous_formula",
+   "CategoryTheory.RegularRoosKoszul.towerLimit"
+  ],
+  "statement": "def augmentedUnit (Q : CochainComplex (Modules.{c, v, r} R) ℤ)\n    (T : ℕᵒᵖ ⥤ CochainComplex (Modules.{c, v, r} R) ℤ)\n    (α : (Functor.const ℕᵒᵖ).obj Q ⟶ T) :\n    DerivedCategory.Q.{w}.obj Q ⟶ towerLimit.{c, v, r, w} R T",
+  "branch": "sheaf-dag",
+  "by": "Q144",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing definitions relocated to RegularRoosKoszulData and publicly re-exported by RegularRoosKoszulUnit. augmentedUnit now uses the propositionally equal normalized formula Q(unit ≫ lim(Xα)) ≫ comparison; augmentedUnit_previous_formula proves equality to constantUnit ≫ Rlim(Q(Xα)). towerLimit merely names its unchanged codomain. See coord/changes/q4-regular-roos-data-relocation.md. This node also owns towerLimit, the real construction naming the total-limit codomain used by these definitions.",
+  "file": "lean/Sheaf/SixFunctors/RegularRoosKoszulData.lean"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-baebaf3b8",
+  "group": "Q144",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-baebaf3b8",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Re-delivery of returned 0160dc5f78b1. F1 fixed: theorem stmt_deps lem-pur-integral-principal-cone-local-criterion / lem-pur-roos-intrinsic-completeness-equivalence removed; def-sf-integral-local-completion-test cited; local completeness written inline in all 3 places, identical to locallyComplete's body and to clause (ii) of roosIntrinsicCompletenessEquivalence; integralCompletionLocalTest body = localTest. F2 fixed: new def node def-sf-normalized-strict-tower-augmentation existing:true on RegularRoosKoszulUnit (limitComparison = 2nd choose of the same pair as koszulRlim, constantUnit = Q(constLim unit) ≫ γ, augmentedUnit = constantUnit ≫ L(Q(Xα))); statement matches the Lean, no extra hypotheses, 6 def stmt_deps exist live, lean.statement verbatim, no prior owner. Advisories A1 (def-weil-pbc-bounded-constructible-tower cited/imported) and A3 (local instances) done. Lean diff vs returned head limited to imports, local attribute and the inline predicate; item statement verbatim; all added stmt_deps are definition nodes; live item has no lean record (not superseded). Clause table and edge cases of the earlier review re-confirmed. No file changed, no recompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b73f0",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T005406-L-3477167",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clone (only forced universe annotations), relocated/normalized defs vs change record (augmentedUnit_previous_formula proves the old formula), new reflector statement vs Stacks 099B/0A0E and existing reflectors, nodes vs Lean; sandbox compile of Data, Reflector, item and importer QuotientCompletionActualReflector exit 0"
+ }
+}

@@ -1,0 +1,154 @@
+{
+ "id": "lem-zl-component-point-monoidal-factorization",
+ "kind": "statement",
+ "title": "Monoidal factorization of component inverse image",
+ "statement": "Let T be an affine scheme and use the fixed component tests and inverse image of [def-zl-condensed-lisse-evaluation-model]. Assume test continuity, braidedness and preservation of finite limits and colimits. Restriction of abelian condensed sheaves to the profinite slice over pi_0(T), followed by component inverse image, is naturally isomorphic to the fixed point inverse image. The isomorphism is monoidal for the specified structures.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+ },
+ "stmt_deps": [
+  "def-zl-condensed-lisse-evaluation-model"
+ ],
+ "proof": [
+  {
+   "text": "Extract the chosen relative test functor and its natural projection and universal mapping property from component_relative_profinite_site. Continuity implies preservation of finite coproducts; finite limits identify the terminal test. Thus its composite with Over.star agrees with the absolute test functor on finite profinite spaces, by the finite coproduct comparison.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "def-zl-condensed-lisse-evaluation-model",
+    "lem-weil-pbc-profinite-test-object-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The relative universal mapping property gives preservation of the canonical finite-quotient limits after Over.star. The absolute test functor preserves these limits by profinite_test_object_functor. Extend the finite comparison using Profinite.functor_iso_of_finite, and cancel the fully faithful inclusion of the pro-etale site into schemes over the base.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "lem-weil-pbc-profinite-test-object-functor",
+    "new-lem-zl-profinite-functor-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the slice adjunction Over.forgetAdjStar on abelian sheaves and the sheafified Kan-extension adjunction of the fixed component inverse image. The natural test comparison identifies their composite right adjoint with the right adjoint of upperStarFromPoint. The adjunction conjugate is the required natural isomorphism.",
+   "uses": [
+    "def-zl-condensed-lisse-evaluation-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On underlying presheaves, a natural transformation of continuous test functors induces monoidal restriction maps: the unit and tensor equations are naturality of the inclusion comparison maps. This makes the slice adjunction counit monoidal. The component pullback counit and point pullback unit are monoidal by the existing site tensor structures. Express the conjugate as the composite of these unit, restriction and counit maps, with functor associators and unitors. Every factor is monoidal, hence so is the comparison. Empty finite coproducts and all canonical finite-quotient limits are included.",
+   "uses": [
+    "def-zl-condensed-lisse-evaluation-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Correct an arbitrary supplied braided structure by scalar multiplication with the ratio of its unit comparison and the canonical unit comparison. Naturality of unitors proves the unit equation; the unit-normalized tensor identity supplies the tensor equation. Whisker by slice restriction and compose with the canonical monoidal factorization.",
+   "uses": [
+    "lem-zl-component-unit-normalized-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-component-relative-profinite-site",
+  "def-zl-condensed-lisse-evaluation-model",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "new-lem-zl-profinite-functor-extension",
+  "lem-zl-component-unit-normalized-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1), Proposition 4.3(3), Remark 3.2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse image along the relative connected component profinite site factors pullback from the condensed point as monoidal functors",
+   "results": "Condensed.ofSheafProfinite, profiniteToCondensed, and monoidal localization APIs; no relative component inverse-image factorization.",
+   "date": "2026-10-25",
+   "verdict": "No direct match for the fixed functors; reuse the stated library comparison interfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along a ring isomorphism preserves perfect complexes and induces an equivalence of their derived full subcategories",
+   "results": "ModuleCat.restrictScalars_isEquivalence_of_ringEquiv and restriction-of-scalars definitions; no perfect-derived-subcategory theorem.",
+   "date": "2026-10-25",
+   "verdict": "Use module equivalence termwise, then restrict using finite-projective representatives."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact braided monoidal functors preserve the derived Koszul braiding on unbounded complexes",
+   "results": "Functor.mapDerivedCategory, its shift instance, and Functor.map_braiding; no automatic braided derived functor.",
+   "date": "2026-10-25",
+   "verdict": "Use the exact derived functor API and construct or invoke normalized tensor comparisons separately."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMonNatIso|mapMonCompIso|mapModNatIso",
+   "results": "Mathlib CategoryTheory/Monoidal/Mon.lean contains mapMonNatIso and mapMonCompIso.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the monoid lifting API in the coefficient-isomorphism assembly."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedComponentPullbackCompatibility",
+  "date": "2026-10-25",
+  "group": "D8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Construction (4.1), Proposition 4.3(3), Remark 3.2; substep: Monoidal factorization of component inverse image",
+   "via": [
+    "lem-zl-condensed-component-pullback-compatibility",
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComponentPointMonoidalFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentPointMonoidalFactorization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.component_point_monoidal_factorization",
+  "statement": "theorem component_point_monoidal_factorization :\n    ∃ β : (coherentTopology Profinite.{u}).overPullback Ab.{u + 1}\n        (affineComponentSpace T) ⋙ componentInverse T ≅ upperStarFromPoint T,\n      NatTrans.IsMonoidal β.hom",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261025T095038-L-3286008",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261025T144248-L-1219610",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

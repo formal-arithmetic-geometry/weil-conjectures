@@ -1,0 +1,139 @@
+{
+ "id": "lem-pur-scalar-limit-tensor-restriction",
+ "kind": "statement",
+ "title": "Arithmetic cofinality commutes with normalized finite-free tensor/limit comparison",
+ "statement": "Fix a prime l, finite extensions E,F of Q_l and an algebra embedding i:E→F. For any scheme W and integer e≥1 let S_H,e be exact arithmetic restriction of constant integral H-module towers to levels e(n+1)-1, and r_H,e:R_H→S_H,e⋙R_H the canonical scalarLimitRestriction derived from ordinary limit.pre [lem-pur-compact-support-scalar-limit-reduction]. Let B_i be exact constant scalar extension, T_i its exact derived pointwise tower functor, tau_i the specified scalarLimitTensor, and sigma:S_E,e⋙T_i≅T_i⋙S_F,e the exact localization of the ordinary identity square. For every unbounded derived E-tower K, D(B_i)(r_E,e(K)) followed by tau_i(S_E,e K) followed by R_F(sigma(K)) equals tau_i(K) followed by r_F,e(T_i K). No compact-support or finite-Tor assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), canonical derived-limit units; agent auxiliary Step 7 of lem-pur-compact-support-strict-scalar-composition."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "lem-pur-compact-support-scalar-limit-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Prove the ordinary limit.pre_post square by its cone projections, using preservesLimitIso_hom_π and limit.pre_π: scalar extension of limit.pre followed by the preserved-limit comparison equals the preserved-limit comparison followed by limit.pre of the scalar-extended tower. The ordinary subsequence/tensor square is the identity.",
+   "uses": [
+    "lem-pur-compact-support-scalar-limit-reduction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Normalize the three factors of scalarLimitTensor by their universal right-derived units, using rightDerivedFunctorCompMapDerivedCategoryIso_hom_fac, rightDerivedNatTrans_app and mapDerivedCategoryCompRightDerivedFunctorIso_hom_fac_app. Normalize scalarLimitRestriction by rightDerivedPullback_fac_app. Naturality moves the localization factors through these maps, and mapDerivedCategorySquareIso_hom_app_Qh_obj identifies the remaining exact square with localization of the ordinary identity square. The resulting equality is the homotopy-category image of the ordinary square in Step 1.",
+   "uses": [
+    "lem-pur-compact-support-scalar-limit-reduction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict to K-injective tower complexes, where the source derived unit is invertible. Cancel its scalar extension. Localization.natTrans_ext for HomotopyCategory.KInjectives.Qh then proves equality of the two natural transformations on the entire derived category. Evaluate at K. The proof needs no cofinality, Roos model, compact-support, or finite-Tor hypothesis.",
+   "uses": [
+    "lem-pur-compact-support-scalar-limit-reduction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-scalar-limit-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, canonical derived-limit units; direct derivation of Mathlib limit.pre_post, written by J7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived inverse limit tensor comparison compatibility with tensor composition and arithmetic restriction",
+   "results": "TensorProduct.AlgebraTensorModule.map_comp, directLimitLeft, directLimitRight and Cartesian monoidal tensor comparisons. No normalized unbounded derived inverse-limit coherence statement.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical tensor inverse limit comparison commutes with composition of exact functors and restriction to arithmetic subsequences",
+   "results": "No exact Mathlib match. Returned limit/product comparisons and local-cohomology diagram composition; these do not give the normalized unbounded derived tower square.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedPullback_comp",
+   "results": "Search service does not index this adopted source declaration. Local source inspection finds its complete proof in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback; it supplies cofinal composition, but not tensor/limit coherence.",
+   "date": "2026-10-26",
+   "verdict": "use source for arithmetic composition; no exact match for this step"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarLimitTensor_composition|scalarLimitTensor_restriction|scalarLimitTensor|roosComparison_horizontal_coherence|compactSupportRoosFiniteFree in lean/Sheaf and lean/WeilConjectures",
+   "results": "No existing normalized tensor/limit composition or restriction equation. CompactSupportScalarLimitReduction defines scalarLimitTensor and records scalarRoosTensorNormalization. RoosComparisonHorizontalCoherence states the cochain horizontal equation. CompactSupportRoosCofinality records compatibility of the finite-free Roos comparison with the arithmetic map.",
+   "date": "2026-10-26",
+   "verdict": "combine declared cochain results with existing normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportStrictScalarComposition",
+  "date": "2026-10-26",
+  "group": "G9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; strict-scalar auxiliary Step 7, compatibility of actual tensor/limit maps.",
+   "via": [
+    "lem-pur-compact-support-strict-scalar-composition",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarLimitTensorRestriction",
+  "file": "lean/Sheaf/Paper/ScalarLimitTensorRestriction.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.scalarLimitTensor_restriction",
+  "statement": "theorem scalarLimitTensor_restriction (W : Scheme.{u}) (e : ℕ) (he : 1 ≤ e)\n    (K : Derived (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) :\n    (baseTensor l E F i W).map ((scalarLimitRestriction l E W e).app K) ≫\n        (scalarLimitTensor l E F i W).hom.app ((subsequence l E W e).obj K) ≫\n        (scalarLimit l F W).map\n          ((letI := (tensor_exact l E F i W).1\n            letI := (tensor_exact l E F i W).2\n            Functor.mapDerivedCategorySquareIso\n              (show ordinarySubsequence l E W e ⋙ tensor l E F i W ≅\n                tensor l E F i W ⋙ ordinarySubsequence l F W e from Iso.refl _)).hom.app K) =\n      (scalarLimitTensor l E F i W).hom.app K ≫\n        (scalarLimitRestriction l F W e).app ((T l E F i W).obj K)",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261026T065838-L-3263295",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261026T182922-L-3593396",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

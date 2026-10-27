@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-compositor-equivalence-conjugation",
+ "kind": "statement",
+ "title": "Conjugation formulas for triple compositor and both unit pastings across equivalences",
+ "statement": "Let $\\mathcal I$ be a category. For every object $i$ let $\\mathcal A_i,\\mathcal B_i$ be categories and $E_i:\\mathcal A_i\\simeq\\mathcal B_i$ an equivalence, in particular fully faithful in the Hom-set sense of [def-sf-induced-category]. For every arrow $a:i\\to j$, specify functors $F_a:\\mathcal A_i\\to\\mathcal A_j$, $G_a:\\mathcal B_i\\to\\mathcal B_j$ and a natural isomorphism $a_a:E_jF_a\\cong G_aE_i$. For composable $a:i\\to j$, $b:j\\to k$, specify natural isomorphisms $\\kappa_{b,a}:F_{ba}\\cong F_bF_a$ and $\\bar\\kappa_{b,a}:G_{ba}\\cong G_bG_a$. Specify also $\\epsilon_i:F_{1_i}\\cong1_{\\mathcal A_i}$ and $\\bar\\epsilon_i:G_{1_i}\\cong1_{\\mathcal B_i}$. Composition notation is functional, so $ba=b\\circ a$. Neither associativity nor unit coherence of these data is assumed. All expressions below include the canonical functor associators and unitors and the transports along associativity and identity equalities in $\\mathcal I$.\n\nPut $b_{b,a}=(G_ba_a)\\circ(a_bF_a)$, and assume the pair and identity comparison squares\n$$b_{b,a}\\circ(E_k\\kappa_{b,a})=(\\bar\\kappa_{b,a}E_i)\\circ a_{ba},\\qquad E_i\\epsilon_i=(\\bar\\epsilon_iE_i)\\circ a_{1_i}.$$\nFor every triple $i\\xrightarrow a j\\xrightarrow b k\\xrightarrow c l$, put\n$$L=(F_c\\kappa_{b,a})\\circ\\kappa_{c,ba},\\quad P=(\\kappa_{c,b}F_a)\\circ\\kappa_{cb,a},$$\nand define $\\bar L,\\bar P$ by replacing $F,\\kappa$ with $G,\\bar\\kappa$. Let\n$$B_{c,b,a}=(G_cG_ba_a)\\circ(G_ca_bF_a)\\circ(a_cF_bF_a):E_lF_cF_bF_a\\cong G_cG_bG_aE_i.$$\nThen the two explicit pasting identities are\n$$E_lL=B_{c,b,a}^{-1}\\circ(\\bar L E_i)\\circ a_{cba},\\qquad E_lP=B_{c,b,a}^{-1}\\circ(\\bar P E_i)\\circ a_{cba}.$$\nFor an arrow $a:i\\to j$, put $U_a=(\\epsilon_jF_a)\\circ\\kappa_{1_j,a}$ and $V_a=(F_a\\epsilon_i)\\circ\\kappa_{a,1_i}$, interpreted as endomorphisms of $F_a$ using the specified equality transports; define $\\bar U_a,\\bar V_a$ analogously. Both unit pasting identities are\n$$E_jU_a=a_a^{-1}\\circ(\\bar U_aE_i)\\circ a_a,\\qquad E_jV_a=a_a^{-1}\\circ(\\bar V_aE_i)\\circ a_a.$$\nConsequently if $\\bar L=\\bar P$, $\\bar U_a=1_{G_a}$ and $\\bar V_a=1_{G_a}$, then $L=P$, $U_a=1_{F_a}$ and $V_a=1_{F_a}$. The formulas apply without making any $E_i$ or $a_a$ an identity.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+  "place": "Refinement isomorphisms: formal conjugation calculation underlying the canonical derived identifications; extracted from returned lem-sfb-module-derived-compositor-coherence proof steps 4 and 5 (agent argument)."
+ },
+ "stmt_deps": [
+  "def-sf-induced-category"
+ ],
+ "proof": [
+  {
+   "text": "Work componentwise, writing $\\alpha_d(x)=(a_d)_x$, and write juxtaposition of morphisms for functional composition (rightmost first). Thus $E_lL_x$ means $E_l(L_x)$. A natural transformation $t:H\\Rightarrow K$ satisfies $K(f)t_x=t_yH(f)$; this is its defining naturality equation. The canonical associators and unitors for composition of ordinary functors have identity components. Expand them before taking components. Likewise, for the stated transports along equalities of arrows in $\\mathcal I$, substitute the equal arrows in the indexed data; both paths then have the same indices. The calculations below therefore prove the formulas with their specified associators, unitors and equality transports, without any coherence assumption on $\\kappa$ or $\\epsilon$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms and cocycle paragraph; agent-written component calculation, step 1 (formal equivalence transport underlying the returned parent steps 4–5)."
+   }
+  },
+  {
+   "text": "For the left triple pasting fix $x\\in\\mathcal A_i$. Naturality of $a_c:E_lF_c\\cong G_cE_k$ at $\\kappa_{b,a}(x):F_{ba}x\\to F_bF_ax$ says\n$$\\alpha_c(F_bF_ax)E_l(F_c(\\kappa_{b,a}(x)))=G_c(E_k(\\kappa_{b,a}(x)))\\alpha_c(F_{ba}x).$$\nExpand $B_xE_l(L_x)$ and substitute this equality. Functoriality of $G_c$ gives\n$$B_xE_l(L_x)=G_c\\!\\left(G_b(\\alpha_a(x))\\alpha_b(F_ax)E_k(\\kappa_{b,a}(x))\\right)\\alpha_c(F_{ba}x)E_l(\\kappa_{c,ba}(x)).$$\nThis is only the defining naturality equation followed by reassociation of morphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms and cocycle paragraph; agent-written component calculation, step 2 (formal equivalence transport underlying the returned parent steps 4–5)."
+   }
+  },
+  {
+   "text": "Apply the assumed pair square for $(b,a)$ at $x$ to the parenthesized expression in step 2: it is $\\bar\\kappa_{b,a}(E_ix)\\alpha_{ba}(x)$. Consequently\n$$B_xE_l(L_x)=G_c(\\bar\\kappa_{b,a}(E_ix))G_c(\\alpha_{ba}(x))\\alpha_c(F_{ba}x)E_l(\\kappa_{c,ba}(x)).$$\nThe last three factors are the pair square for $(c,ba)$ at $x$, so this equals\n$$G_c(\\bar\\kappa_{b,a}(E_ix))\\bar\\kappa_{c,ba}(E_ix)\\alpha_{cba}(x)=\\bar L_{E_ix}\\alpha_{cba}(x).$$\nHere $(c,ba)$ is composable, so both squares used are among the hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms and cocycle paragraph; agent-written component calculation, step 3 (formal equivalence transport underlying the returned parent steps 4–5)."
+   }
+  },
+  {
+   "text": "For the right triple pasting, expand its components as\n$$B_xE_l(P_x)=G_cG_b(\\alpha_a(x))G_c(\\alpha_b(F_ax))\\alpha_c(F_bF_ax)E_l(\\kappa_{c,b}(F_ax))E_l(\\kappa_{cb,a}(x)).$$\nThe pair square for $(c,b)$, evaluated at the object $F_ax\\in\\mathcal A_j$, replaces the middle three factors by $\\bar\\kappa_{c,b}(E_jF_ax)\\alpha_{cb}(F_ax)$. Hence\n$$B_xE_l(P_x)=G_cG_b(\\alpha_a(x))\\bar\\kappa_{c,b}(E_jF_ax)\\alpha_{cb}(F_ax)E_l(\\kappa_{cb,a}(x)).$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms and cocycle paragraph; agent-written component calculation, step 4 (formal equivalence transport underlying the returned parent steps 4–5)."
+   }
+  },
+  {
+   "text": "Naturality of $\\bar\\kappa_{c,b}:G_{cb}\\cong G_cG_b$ at $\\alpha_a(x):E_jF_ax\\to G_aE_ix$ gives\n$$G_cG_b(\\alpha_a(x))\\bar\\kappa_{c,b}(E_jF_ax)=\\bar\\kappa_{c,b}(G_aE_ix)G_{cb}(\\alpha_a(x)).$$\nUse this in step 4 and then the assumed pair square for $(cb,a)$ at $x$. The result is\n$$B_xE_l(P_x)=\\bar\\kappa_{c,b}(G_aE_ix)\\bar\\kappa_{cb,a}(E_ix)\\alpha_{cba}(x)=\\bar P_{E_ix}\\alpha_{cba}(x).$$\nThe naturality input is a morphism in $\\mathcal B_j$, exactly the source category of $\\bar\\kappa_{c,b}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms and cocycle paragraph; agent-written component calculation, step 5 (formal equivalence transport underlying the returned parent steps 4–5)."
+   }
+  },
+  {
+   "text": "Each $B_x$ is invertible, being a composite of components of natural isomorphisms and their functor images. Multiply the equalities in steps 3 and 5 on the left by $B_x^{-1}$. This gives\n$$E_l(L_x)=B_x^{-1}\\bar L_{E_ix}\\alpha_{cba}(x),\\qquad E_l(P_x)=B_x^{-1}\\bar P_{E_ix}\\alpha_{cba}(x).$$\nEquality of natural transformations is componentwise equality; equality of natural isomorphisms follows from equality of their forward maps, since inverses are unique. These are the two asserted triple formulas.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms and cocycle paragraph; agent-written component calculation, step 6 (formal equivalence transport underlying the returned parent steps 4–5)."
+   }
+  },
+  {
+   "text": "For the left unit, the identity square at the object $F_ax$ gives $E_j(\\epsilon_j(F_ax))=\\bar\\epsilon_j(E_jF_ax)\\alpha_{1_j}(F_ax)$. Naturality of $\\bar\\epsilon_j:G_{1_j}\\cong1_{\\mathcal B_j}$ at $\\alpha_a(x)$ gives $\\alpha_a(x)\\bar\\epsilon_j(E_jF_ax)=\\bar\\epsilon_j(G_aE_ix)G_{1_j}(\\alpha_a(x))$. Substituting these two equations yields\n$$\\alpha_a(x)E_j(U_{a,x})=\\bar\\epsilon_j(G_aE_ix)G_{1_j}(\\alpha_a(x))\\alpha_{1_j}(F_ax)E_j(\\kappa_{1_j,a}(x)).$$\nUse the pair square for $(1_j,a)$ in the last three factors and substitute $1_ja=a$. The expression becomes $\\bar\\epsilon_j(G_aE_ix)\\bar\\kappa_{1_j,a}(E_ix)\\alpha_a(x)=\\bar U_{a,E_ix}\\alpha_a(x)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms and cocycle paragraph; agent-written component calculation, step 7 (formal equivalence transport underlying the returned parent steps 4–5)."
+   }
+  },
+  {
+   "text": "For the right unit, naturality of $a_a$ at $\\epsilon_i(x):F_{1_i}x\\to x$ gives $\\alpha_a(x)E_j(F_a(\\epsilon_i(x)))=G_a(E_i(\\epsilon_i(x)))\\alpha_a(F_{1_i}x)$. Substitute this and then the identity square $E_i(\\epsilon_i(x))=\\bar\\epsilon_i(E_ix)\\alpha_{1_i}(x)$ to obtain\n$$\\alpha_a(x)E_j(V_{a,x})=G_a(\\bar\\epsilon_i(E_ix))G_a(\\alpha_{1_i}(x))\\alpha_a(F_{1_i}x)E_j(\\kappa_{a,1_i}(x)).$$\nThe pair square for $(a,1_i)$ replaces the last three factors by $\\bar\\kappa_{a,1_i}(E_ix)\\alpha_a(x)$ after the substitution $a1_i=a$. The result is $G_a(\\bar\\epsilon_i(E_ix))\\bar\\kappa_{a,1_i}(E_ix)\\alpha_a(x)=\\bar V_{a,E_ix}\\alpha_a(x)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms and cocycle paragraph; agent-written component calculation, step 8 (formal equivalence transport underlying the returned parent steps 4–5)."
+   }
+  },
+  {
+   "text": "Multiply the identities in steps 7 and 8 on the left by $\\alpha_a(x)^{-1}$. Componentwise equality now gives\n$$E_jU_a=a_a^{-1}(\\bar U_aE_i)a_a,\\qquad E_jV_a=a_a^{-1}(\\bar V_aE_i)a_a.$$\nThis proves both unit formulas for the specified, possibly nonidentity $a_a$; no replacement of $E_i$ or $a_a$ by identity data has occurred.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms and cocycle paragraph; agent-written component calculation, step 9 (formal equivalence transport underlying the returned parent steps 4–5)."
+   }
+  },
+  {
+   "text": "If $\\bar L=\\bar P$, the triple formulas imply $E_l(L_x)=E_l(P_x)$ for every $x$. Full faithfulness in [def-sf-induced-category] means precisely that the map on each Hom set is bijective, hence injective, so $L_x=P_x$. Thus $L=P$. If $\\bar U_a=1$ and $\\bar V_a=1$, the two unit formulas and inverse cancellation give $E_j(U_{a,x})=1_{E_jF_ax}=E_j(1_{F_ax})$ and $E_j(V_{a,x})=E_j(1_{F_ax})$. Injectivity on these Hom sets gives $U_{a,x}=1_{F_ax}=V_{a,x}$; componentwise equality proves both remaining conclusions. Only the injective part of the stated full faithfulness is used.",
+   "uses": [
+    "def-sf-induced-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+    "place": "Refinement isomorphisms and cocycle paragraph; agent-written component calculation, step 10 (formal equivalence transport underlying the returned parent steps 4–5)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-induced-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-cocycle.proof.md",
+  "place": "Refinement isomorphisms and cocycle: agent-written formal conjugation calculation requested by the extracted node; the blueprint does not itself spell out these general formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating functor composition comparisons by a family of equivalences gives the associativity and unit pasting formulas",
+   "results": "CategoryTheory.conjugateEquiv_comp_assoc, CategoryTheory.conjugateEquiv_comp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, AlgebraicTopology.DoldKan.Compatibility.υ, AlgebraicTopology.DoldKan.Compatibility.τ₁, CategoryTheory.Equivalence.changeFunctor_trans, AlgebraicTopology.DoldKan.Compatibility.υ_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: adjunction-mate conjugation and transport of monoidal functors are different constructions; pseudofunctor naturality assumes both coherence laws already, whereas these raw compositor data have no such hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, CategoryTheory.Functor.associator",
+   "results": "No hits; loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-22",
+   "verdict": "no match: adjunction-mate conjugation and transport of monoidal functors are different constructions; pseudofunctor naturality assumes both coherence laws already, whereas these raw compositor data have no such hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "(conjugat|transport).*(compositor|pseudofunctor)|(associativity|unit).*(equivalence|pseudonat)",
+   "results": "Mathlib/CategoryTheory/Simple.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: adjunction-mate conjugation and transport of monoidal functors are different constructions; pseudofunctor naturality assumes both coherence laws already, whereas these raw compositor data have no such hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalences transport compositor associativity and left and right unit equations by conjugation with natural isomorphisms",
+   "results": "CategoryTheory.Equivalence.comp_asNatTrans_assoc, CategoryTheory.Functor.Monoidal.transport_η_assoc, CategoryTheory.Functor.Monoidal.coreMonoidalTransport, CategoryTheory.conjugateEquiv_associator_hom, CategoryTheory.SingleFunctors.hom_inv_id_hom_app_assoc, CategoryTheory.Equivalence.trans, CategoryTheory.Monoidal.transportStruct, CategoryTheory.conjugateEquiv_comp_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: adjunction-mate conjugation and transport of monoidal functors are different constructions; pseudofunctor naturality assumes both coherence laws already, whereas these raw compositor data have no such hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pasting formulas for a pseudonatural equivalence between functor valued diagrams with arbitrary nonidentity comparison isomorphisms",
+   "results": "CategoryTheory.Pseudofunctor.isoMapOfCommSq, CategoryTheory.Pseudofunctor.mapComp'_naturality_2, CategoryTheory.Pseudofunctor.CoGrothendieck.mapCompIso, CategoryTheory.Join.pseudofunctorLeft_mapComp_inv_toNatTrans_app, CategoryTheory.Pseudofunctor.mapComp'_naturality_1, CategoryTheory.Pseudofunctor.presheafHomObjHomEquiv_apply, CategoryTheory.Pseudofunctor.Grothendieck.mapCompIso, CategoryTheory.Pseudofunctor.isoMapOfCommSq_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: adjunction-mate conjugation and transport of monoidal functors are different constructions; pseudofunctor naturality assumes both coherence laws already, whereas these raw compositor data have no such hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "naturality.*(associator|unitor)|mapComp.*(naturality|associativity)|PseudonatTrans",
+   "results": "Mathlib/CategoryTheory/Bicategory/Grothendieck.lean, Mathlib/CategoryTheory/Bicategory/Grothendieck.lean, Mathlib/CategoryTheory/Bicategory/NaturalTransformation/Oplax.lean, Mathlib/CategoryTheory/Bicategory/NaturalTransformation/Oplax.lean, Mathlib/CategoryTheory/Bicategory/NaturalTransformation/Oplax.lean, Mathlib/CategoryTheory/Bicategory/NaturalTransformation/Lax.lean, Mathlib/CategoryTheory/Bicategory/NaturalTransformation/Lax.lean, Mathlib/CategoryTheory/Bicategory/NaturalTransformation/Lax.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: adjunction-mate conjugation and transport of monoidal functors are different constructions; pseudofunctor naturality assumes both coherence laws already, whereas these raw compositor data have no such hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugat.*(compositor|pseudofunctor)|mapComp.*(naturality|associativity)",
+   "results": "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean; Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean; Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean; Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean; Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean; Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean; Mathlib/CategoryTheory/Sites/Descent/DescentDataPrime.lean; Mathlib/CategoryTheory/Bicategory/Grothendieck.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved facts concern adjunction mates, inversion or interchange of two-squares, and pseudonatural transformations between already coherent pseudofunctors, not all four formulas for the raw functor-family data here. Naturality and functoriality are used directly as defining equations in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Functor.Faithful",
+   "results": "CategoryTheory.Abelian.LeftResolution.chainComplexMap_f_1",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved facts concern adjunction mates, inversion or interchange of two-squares, and pseudonatural transformations between already coherent pseudofunctors, not all four formulas for the raw functor-family data here. Naturality and functoriality are used directly as defining equations in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of an isomorphism between functors transports arbitrary composition and identity comparison pastings without assuming pseudofunctor coherence",
+   "results": "CategoryTheory.Pseudofunctor.mapComp'_naturality_2_assoc; CategoryTheory.Pseudofunctor.mapComp'_naturality_1_assoc; CategoryTheory.Pseudofunctor.mapComp'_naturality_1; CategoryTheory.Pseudofunctor.mapComp'_naturality_2; CategoryTheory.NatIso.naturality_2_assoc; CategoryTheory.Pseudofunctor.StrongTrans.naturality_comp_iso; CategoryTheory.NatTrans.naturality_2; CategoryTheory.Pseudofunctor.StrongTrans.naturality_naturality_iso",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved facts concern adjunction mates, inversion or interchange of two-squares, and pseudonatural transformations between already coherent pseudofunctors, not all four formulas for the raw functor-family data here. Naturality and functoriality are used directly as defining equations in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raw functor compositor comparison squares imply conjugation formulas for associativity and both unit pastings under equivalences",
+   "results": "CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_square; CategoryTheory.mateEquiv_vcomp; CategoryTheory.mateEquiv_hcomp; CategoryTheory.CatCommSq.vInv; CategoryTheory.TwoSquare.hCompVCompHComp; CategoryTheory.CatCommSq.vInvEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved facts concern adjunction mates, inversion or interchange of two-squares, and pseudonatural transformations between already coherent pseudofunctors, not all four formulas for the raw functor-family data here. Naturality and functoriality are used directly as defining equations in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison isomorphisms between arbitrary functor families conjugate triple composition pastings and left and right unit pastings componentwise",
+   "results": "CategoryTheory.Join.mapPairComp; CategoryTheory.Functor.triangleIso_assoc; CategoryTheory.Iso.hom_inv_id_app_app_app_assoc; CategoryTheory.Functor.triangleIso; CategoryTheory.Iso.inv_hom_id_app_app_app_assoc; CategoryTheory.conjugateEquiv_associator_hom; CategoryTheory.Iso.hom_inv_id_app_app_assoc; CategoryTheory.Iso.inv_hom_id_app_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved facts concern adjunction mates, inversion or interchange of two-squares, and pseudonatural transformations between already coherent pseudofunctors, not all four formulas for the raw functor-family data here. Naturality and functoriality are used directly as defining equations in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "hCompVCompHComp|theorem comp_asNatTrans_assoc|theorem naturality_comp_iso|def vInvEquiv",
+   "results": "Mathlib/CategoryTheory/Functor/TwoSquare.lean; Mathlib/CategoryTheory/CatCommSq.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved facts concern adjunction mates, inversion or interchange of two-squares, and pseudonatural transformations between already coherent pseudofunctors, not all four formulas for the raw functor-family data here. Naturality and functoriality are used directly as defining equations in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-module-derived-compositor-coherence",
+  "by": "worker",
+  "date": "2026-10-22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms, rho_id = id and rho_hk = rho_k rho_h: explicit conjugation of triple and unit pastings; returned item step 4 and second half of step 5.",
+   "via": [
+    "lem-sfb-module-derived-compositor-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-compositor-equivalence-conjugation",
+  "worker": "stage1",
+  "summary": "Checked the current blueprint, the source library, whole-DAG and blueprint searches, and recorded Mathlib searches. Kept the full statement and its definition dependency unchanged. Proved both triple pasting formulas and both unit formulas by explicit componentwise naturality and the assumed comparison squares, then reflected equations using the Hom-set definition of full faithfulness. Every step is a direct defining-equation calculation; no new nodes are needed.",
+  "blueprint": "Refinement isomorphisms (identity and transitivity) and Cocycle of det-sf-comp-coherence-cocycle, via lem-sfb-module-derived-compositor-coherence steps 4–5: supplies the formal conjugation calculation underlying transport to equivalent categories."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-2401a902c",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-2401a902c (reviewer sub-agent of L); spot-checked: PASS: a split with no new nodes. I read all 10 steps in full and checked each one. The statement, stmt_deps and blueprint fields are unchanged from the base version that Q138 created (diffed against the Q138 snapshot), so the target was not weakened. There is no re-split note for this item. Steps 2-5 (triple pastings): naturality of a_c at kappa_{b,a}(x), then the pair squares (b,a) and (c,ba), giving Lbar alpha_{cba}. The pair square (c,b) at F_a x, naturality of kappabar_{c,b} at alpha_a(x) in B_j, and the pair square (cb,a), giving Pbar alpha_{cba}. Steps 7-8 (unit pastings): the identity square at F_a x, naturality of epsbar_j, and the pair square (1_j,a). Naturality of a_a at eps_i(x), the identity square at x, and the pair square (a,1_i). All orientations and types are correct. Steps 6 and 9 cancel invertible components. Step 10 uses only injectivity from the Hom-set full faithfulness in def-sf-induced-category; I read its statement. Every step is a few-line defining-equation calculation and is fairly marked elementary; proof_deps equals the union of the uses. The source is det-sf-comp-coherence-cocycle.proof.md (main-20261015): the Refinement isomorphisms and Cocycle paragraphs exist, and the proof is honestly labelled proof_origin agent. No SGA is cited. Edge cases: identity arrows and non-identity a_a or E are never specialised, and no unit or associativity coherence is assumed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CompositorEquivalenceConjugation",
+  "declaration": "CategoryTheory.CompositorEquivalenceConjugation.pasting_conjugation",
+  "declarations": [
+   "CategoryTheory.CompositorEquivalenceConjugation.leftTriple",
+   "CategoryTheory.CompositorEquivalenceConjugation.rightTriple",
+   "CategoryTheory.CompositorEquivalenceConjugation.leftUnit",
+   "CategoryTheory.CompositorEquivalenceConjugation.rightUnit",
+   "CategoryTheory.CompositorEquivalenceConjugation.pairComparison",
+   "CategoryTheory.CompositorEquivalenceConjugation.tripleComparison",
+   "CategoryTheory.CompositorEquivalenceConjugation.pasting_conjugation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CompositorEquivalenceConjugation.lean",
+  "statement": "theorem pasting_conjugation (E : ∀ i : I, A i ≌ B i) (F : ∀ {i j : I}, (i ⟶ j) → (A i ⥤ A j)) (G : ∀ {i j : I}, (i ⟶ j) → (B i ⥤ B j)) (α : ∀ {i j : I} (a : i ⟶ j), F a ⋙ (E j).functor ≅ (E i).functor ⋙ G a) (κ : ∀ {i j k : I} (a : i ⟶ j) (b : j ⟶ k), F (a ≫ b) ≅ F a ⋙ F b) (κbar : ∀ {i j k : I} (a : i ⟶ j) (b : j ⟶ k), G (a ≫ b) ≅ G a ⋙ G b) (ε : ∀ i : I, F (𝟙 i) ≅ 𝟭 (A i)) (εbar : ∀ i : I, G (𝟙 i) ≅ 𝟭 (B i)) (hpair : ∀ {i j k : I} (a : i ⟶ j) (b : j ⟶ k), isoWhiskerRight (κ a b) (E k).functor ≪≫ pairComparison E F G α a b = α (a ≫ b) ≪≫ isoWhiskerLeft (E i).functor (κbar a b)) (hid : ∀ i : I, isoWhiskerRight (ε i) (E i).functor ≪≫ leftUnitor (E i).functor = α (𝟙 i) ≪≫ isoWhiskerLeft (E i).functor (εbar i) ≪≫ rightUnitor (E i).functor) : (∀ {i j k l : I} (a : i ⟶ j) (b : j ⟶ k) (c : k ⟶ l), isoWhiskerRight (leftTriple F κ a b c) (E l).functor = α ((a ≫ b) ≫ c) ≪≫ isoWhiskerLeft (E i).functor (leftTriple G κbar a b c) ≪≫ (tripleComparison E F G α a b c).symm ∧ isoWhiskerRight (rightTriple F κ a b c) (E l).functor = α ((a ≫ b) ≫ c) ≪≫ isoWhiskerLeft (E i).functor (rightTriple G κbar a b c) ≪≫ (tripleComparison E F G α a b c).symm ∧ (leftTriple G κbar a b c = rightTriple G κbar a b c → leftTriple F κ a b c = rightTriple F κ a b c)) ∧ (∀ {i j : I} (a : i ⟶ j), isoWhiskerRight (leftUnit F κ ε a) (E j).functor = α a ≪≫ isoWhiskerLeft (E i).functor (leftUnit G κbar εbar a) ≪≫ (α a).symm ∧ isoWhiskerRight (rightUnit F κ ε a) (E j).functor = α a ≪≫ isoWhiskerLeft (E i).functor (rightUnit G κbar εbar a) ≪≫ (α a).symm ∧ (leftUnit G κbar εbar a = Iso.refl (G a) → rightUnit G κbar εbar a = Iso.refl (G a) → leftUnit F κ ε a = Iso.refl (F a) ∧ rightUnit F κ ε a = Iso.refl (F a)))",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ee6633f9",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Statement matches node clause by clause (diagrammatic order): E ≌, α a : F a ⋙ E_j ≅ E_i ⋙ G a, κ a b : F(a≫b) ≅ F a ⋙ F b, ε, hpair/hid with explicit associators/unitors; leftTriple/rightTriple (eqToIso assoc transport), leftUnit/rightUnit (comp_id/id_comp transports), pair/triple comparisons are explicit Mathlib iso composites; both triple and both unit conjugation formulas and the reflection consequences (per triple/per arrow, true by faithfulness) stated as Iso equalities; proof steps 2-10 re-derived in Lean conventions. Snapshot node differs from live only in lean; statement verbatim in file; stmt_dep def-sf-induced-category Mathlib leaf satisfied by ≌. No hollow defs, docstrings with source/blueprint and 10-step proof, sorry only, independent universes, no duplicate (SiteCoherenceDescent.tripleComparison is another node). Advisory: unused InducedCategory import. Not recompiled (no change); worker compile clean 3 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261023T090654-L-681667",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.CompositorEquivalenceConjugation.pasting_conjugation"
+  ],
+  "sorry_after": []
+ }
+}

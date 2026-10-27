@@ -1,0 +1,179 @@
+{
+ "id": "lem-per-ample-admissible-finite-group-quotient",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Gabber purity for a regular Noetherian closed pair. More precisely: Expose XVI, section 3.7 second paragraph through its last paragraph, printed pp.254--255: semistable G-alteration, ell-Sylow H, tame equivariant modification, quotient over T=S prime/H, and log resolution. Geometric construction only, before applying Theorem 3.6.2 and Proposition 3.5.7; preliminary finite extension to normalize constants in the first paragraph. Specifically: XVI 3.7: scheme quotient X double-prime/H, projectivity over X, and the prime-to-ell generic cover.; Original lem-per-projective-finite-group-quotient Steps 8--9; Rydh arXiv:0708.3333v2 Proposition 4.7, norm argument (read online; WANTED locally); Stacks Properties 09NV, 01PV, 01PS.",
+   "via": [
+    "lem-per-projective-finite-group-quotient",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ampleness of an already constructed admissible finite group quotient",
+ "statement": "Let V be a Noetherian scheme [pqf-def-locnoeth], H a finite group acting by scheme automorphisms a on V, and q:V→Q a morphism of schemes satisfying IsAdmissibleFiniteSchemeQuotient a q [def-per-admissible-finite-scheme-quotient]. Given an absolutely ample invertible module L on V [def-sc-invertible-module, def-weil-pbc-ample-invertible-module], there exists an absolutely ample invertible module M on the given scheme Q. No quotient is constructed, no relative immersion is asserted, and no properness, normality, free action or characteristic hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Original lem-per-projective-finite-group-quotient Steps 8--9; Rydh arXiv:0708.3333v2 Proposition 4.7, norm argument (read online; WANTED locally); Stacks Properties 09NV, 01PV, 01PS."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "pqf-def-locnoeth",
+  "def-per-admissible-finite-scheme-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Form N=the tensor product over h∈H of a_h^*L with permutation linearization. Apply orbit_tensor_line_descent to the invariant-section formula in hq. Its formulas expressed on equal inverse-image opens are equivalent to the overlap equations in hq: restrict the equation on the whole invariant open to any common subopen, and conversely take that whole open. This supplies an invertible M on Q, the isomorphism q^*M≅N and fixed sections for every tensor power. The fixed-section inclusion specifies M uniquely as a subsheaf.",
+   "uses": [
+    "lem-per-orbit-tensor-line-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-existence-properties-geometric-quotients-0708.3333.pdf",
+    "place": "Rydh Theorem 4.4 and Proposition 4.7; original quotient steps 8--9"
+   }
+  },
+  {
+   "text": "For y∈Q its inverse image E is a finite orbit, by finiteness, surjectivity and the orbit-fibre clause of hq. Choose a positive-power section s of L with affine nonvanishing locus containing E, using the ample finite-set lemma. Tensor all a_h^*s. The tensor comparison identifies it as a section σ of N^d, fixed by the permutation linearization, so descent gives t in Γ(Q,M^d).",
+   "uses": [
+    "lem-sc-ample-finite-principal-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-existence-properties-geometric-quotients-0708.3333.pdf",
+    "place": "Rydh Theorem 4.4 and Proposition 4.7; original quotient steps 8--9"
+   }
+  },
+  {
+   "text": "The pullback and tensor fibre formulas identify V_σ with the intersection of the finitely many inverse images of V_s. It contains E. Begin with the identity factor V_s and successively apply affine_cap_section_open to the other section factors. Thus this invariant intersection is affine.",
+   "uses": [
+    "lem-sc-affine-cap-section-open",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-existence-properties-geometric-quotients-0708.3333.pdf",
+    "place": "Rydh Theorem 4.4 and Proposition 4.7; original quotient steps 8--9"
+   }
+  },
+  {
+   "text": "The fibre formula and q^*M≅N give q^-1(Q_t)=V_σ. An invariant affine open Spec A in an admissible quotient has affine image Spec A^H: the orbit topology identifies their spaces, and the sectionwise invariant formula identifies their sheaves by C_f=(A_f)^H, proved by a common annihilating power for the finitely many differences h(a)-a. This works with zero divisors. Therefore Q_t is affine and contains y.",
+   "uses": [
+    "lem-a1-affine-groupoid-orbit-fibres",
+    "lem-weil-pbc-integral-spec-closed-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-existence-properties-geometric-quotients-0708.3333.pdf",
+    "place": "Rydh Theorem 4.4 and Proposition 4.7; original quotient steps 8--9"
+   }
+  },
+  {
+   "text": "Q is quasi-compact, as the continuous surjective image of V, which is quasi-compact by ampleness. The sections t through each point are exactly the remaining clause of the absolute ample criterion, proving M ample.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-existence-properties-geometric-quotients-0708.3333.pdf",
+    "place": "Rydh Theorem 4.4 and Proposition 4.7; original quotient steps 8--9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-orbit-tensor-line-descent",
+  "lem-sc-ample-finite-principal-affine",
+  "lem-sc-affine-cap-section-open",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-a1-affine-groupoid-orbit-fibres",
+  "lem-weil-pbc-integral-spec-closed-map",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Original lem-per-projective-finite-group-quotient Steps 8--9; Rydh arXiv:0708.3333v2 Proposition 4.7, norm argument (read online; WANTED locally); Stacks Properties 09NV, 01PV, 01PS.; H1 formalization of the indicated steps, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An ample invertible sheaf descends along the finite geometric quotient by a finite group",
+   "results": "8 hits: AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, MulAction.finite_quotient_of_finite_quotient_of_finite_quotient, AlgebraicGeometry.instIsProperOfIsFinite, instInvertibleReprₛ, Module.Invertible.instFinite",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample invertible sheaf descends to the quotient of a scheme by a finite group",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.Hom.finite_app",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Oo]rbit.*[Tt]ensor|[Aa]mple.*[Dd]escent",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveFiniteGroupQuotient",
+  "date": "2026-10-26",
+  "group": "H1"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AmpleAdmissibleFiniteGroupQuotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleAdmissibleFiniteGroupQuotient.lean",
+  "declaration": "AlgebraicGeometry.exists_ample_on_admissible_finiteGroup_quotient",
+  "statement": "theorem exists_ample_on_admissible_finiteGroup_quotient\n    {V Q : Scheme.{u}} [IsNoetherian V]\n    (H : Type v) [Group H] [Finite H] (a : H →* Aut V) (q : V ⟶ Q)\n    (hq : IsAdmissibleFiniteSchemeQuotient a q)\n    (L : V.Modules) [L.IsInvertible] (hL : Scheme.Modules.IsAmple V L) :\n    ∃ (M : Q.Modules) (hM : M.IsInvertible), @Scheme.Modules.IsAmple Q M hM",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-per-ample-admissible-finite-group-quotient",
+  "worker": "stage3",
+  "summary": "Ampleness of an already constructed admissible finite group quotient",
+  "blueprint": "Original lem-per-projective-finite-group-quotient Steps 8--9; Rydh arXiv:0708.3333v2 Proposition 4.7, norm argument (read online; WANTED locally); Stacks Properties 09NV, 01PV, 01PS.; blueprint_refs searches for quasi-projective ample, finite group quotient and quotient ample found no matching blueprint nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T091653-L-3362064",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T091653-L-3362064",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

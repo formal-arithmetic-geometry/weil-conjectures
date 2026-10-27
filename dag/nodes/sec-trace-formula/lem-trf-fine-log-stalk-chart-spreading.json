@@ -16,115 +16,60 @@
  ],
  "proof": [
   {
-   "text": "Use a small skeleton of affine pointed etale neighbourhoods: affine etale objects form an essentially small category, and the possible lifts of the fixed geometric point to each object form a set. Affine neighbourhoods are cofinal for stalks, and pointed neighbourhoods are cofiltered; affine refinements of their common sources and equalizers show that the opposite of this skeleton is filtered. For any finite family of sheaves, stalks are their section colimits. Commutation with finite products and equalizers implies the following finite-data rule: finitely many germs have representatives on one common pointed neighbourhood, and finitely many equations between these representatives which hold as germs hold after a further pointed refinement. All later refinements use this rule, allowing the several sheaves to be $M$, $\\mathcal O$ or an associated log sheaf. Every such neighbourhood is locally Noetherian: an etale morphism is locally of finite presentation, whose affine polynomial quotient presentations show it is locally of finite type, and the locally-Noetherian finite-type lemma applies to its map to $X$. Neighbourhoods factoring through a fixed pointed etale neighbourhood compute the same stalk: a common refinement with any other neighbourhood exists by cofilteredness, and parallel arrows can be equalized there. Thus subsequent stalk identifications preserve the specified germs.",
+   "text": "Apply the finite-monoid stalk-data lemma to $F=M$, $P$ and the specified $h$. It gives an affine pointed neighbourhood with a homomorphism $\\widetilde h:P\\to M(U)$ of germ exactly $h$. By fineness choose a chart cover there by finitely generated integral monoids; lift the same geometric point to one member of that cover. Apply the affine-refinement clause of the same lemma on this pointed member. We obtain a locally Noetherian affine $U$ carrying both $\\widetilde h$ and a chart $q:Q\\to M(U)$. All specified germs are preserved.",
    "uses": [
-    "lem-weil-pbc-affine-etale-essentially-small-cover",
-    "lemma-weil-pbc-affine-neighbourhood-cofinal",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-etale-morphism",
-    "def-sbc-locally-finite-presentation",
-    "pqf-lem-locnoeth-lft"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03PQ, lemma-cofinal-etale, and geometric stalks; finite-data consequence using Tag 002W, categories-lemma-directed-commutes; Tag 01T6, morphisms-lemma-finite-type-noetherian for neighbourhoods being locally Noetherian."
-   }
-  },
-  {
-   "text": "Choose a finite generating tuple $p_1,\\ldots,p_n$ of $P$. The finite-presentation lemma supplies finitely many defining relations for this tuple. Represent each $h(p_i)$ by a section of $M$ on a common pointed neighbourhood. Each defining relation holds at the specified stalk because $h$ is a homomorphism; impose the finitely many relations by step 1. The presentation's universal property now gives a homomorphism $\\widetilde h:P\\to M(U)$ with precisely the germ $h$. By fineness of $M$, refine once more to a pointed etale neighbourhood admitting a chart $q:Q\\to M(U)$ with $Q$ finitely generated and integral. Such a refinement exists because an etale chart covering has a member through the geometric point, and that member is itself pointed by a lift of the geometric point. No saturation or freeness is assumed for either $P$ or $Q$.",
-   "uses": [
-    "lem-trf-fg-commutative-monoid-finite-presentation",
+    "lem-trf-finite-monoid-stalk-data-spreading",
     "def-trf-fs-log-blowup",
-    "lem-weil-pbc-etale-cover-geometric-point-lift"
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-trf-associated-log-universal-stalks"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI, 1.1 and 3.7(a), printed pp. 69 and 75: agent expansion of the omitted chart-extension argument."
+    "place": "Expose VI, 1.1 and 3.7(a), printed pp. 69 and 75: the final sentence extending the restriction of a splitting to a chart near the geometric point. This node isolates the fine-log chart-spreading input to that sentence, in the sharp-chart step of the monoidal-resolution ancestry of lem-trf-local-term-locality, proof (1)--(2)."
    }
   },
   {
-   "text": "Put $\\beta=\\alpha\\widetilde h$ and let $N=L_U(P,\\beta)$, with canonical generator map $\\iota:P\\to N(U)$. The associated-log universal property extends $\\widetilde h$ uniquely to a homomorphism $f:N\\to M|_U$ over the identity of $U$. By its stalk formula, $N_{\\bar u}=P\\oplus_E A^\\times$, and $f_{\\bar u}$ is exactly $[p,u]\\mapsto h(p)u$. The hypothesis of the item says this map is an isomorphism. In particular its inverse fixes $A^\\times$ and is compatible with the structure maps to $A$. This proves a stalk assertion only; an inverse on a neighbourhood will be constructed in the next steps.",
+   "text": "Put $\\beta=\\alpha\\widetilde h$ and $N=L_U(P,\\beta)$. The associated-log universal property gives $f:N\\to M|_U$. Its stalk formula identifies $f_{\\bar u}$ with $P\\oplus_E A^\\times\\to M_{\\bar x}$, $[p,u]\\mapsto h(p)u$, which is the hypothesis isomorphism. This inverse fixes units and respects the structure maps because $f$ does.",
    "uses": [
     "lem-trf-associated-log-universal-stalks"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI, 1.1 and 3.7(a), printed pp. 69 and 75: agent expansion of the omitted chart-extension argument."
+    "place": "Expose VI, 1.1 and 3.7(a), printed pp. 69 and 75: the final sentence extending the restriction of a splitting to a chart near the geometric point. This node isolates the fine-log chart-spreading input to that sentence, in the sharp-chart step of the monoidal-resolution ancestry of lem-trf-local-term-locality, proof (1)--(2)."
    }
   },
   {
-   "text": "Choose a finite generating tuple $q_1,\\ldots,q_s$ of $Q$ and finitely many defining relations using the finite-presentation lemma. For each $q_j$ take $n_j=f_{\\bar u}^{-1}(q(q_j)_{\\bar u})\\in N_{\\bar u}$, and represent these by sections $t_j$ of $N$ on a common pointed refinement. At the stalk, these sections satisfy every defining relation of $Q$, as well as the finitely many equations $\\alpha_N(t_j)=\\alpha_M(q(q_j))$ in $\\mathcal O$ and $f(t_j)=q(q_j)$ in $M$. The relations hold because $f_{\\bar u}^{-1}$ is a monoid homomorphism compatible with the structural maps. Impose all these equations simultaneously by the finite-data rule of step 1. The resulting tuple defines a homomorphism $k:Q\\to N(V)$ with $\\alpha_N k=\\alpha_M q$ and $fk=q$. The identities on the finite generators imply the displayed identities on all of $Q$.",
+   "text": "Apply the charted-log-map right-inverse lemma to $f$, $q$ and $\\bar u$. After an affine pointed refinement $V$, it supplies $k:Q\\to N(V)$ respecting structure maps and satisfying $fk=q$, together with $g:M|_V\\to N|_V$ extending $k$, $fg=\\mathrm{id}$ and $g_{\\bar v}=f_{\\bar u}^{-1}$. No finite generation of units or fine chart on $N$ is needed.",
    "uses": [
-    "lem-trf-fg-commutative-monoid-finite-presentation",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-    "def-weil-pbc-geometric-stalks"
+    "lem-trf-charted-log-map-local-right-inverse"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI, 1.1 and 3.7(a), printed pp. 69 and 75: agent expansion of the omitted chart-extension argument."
+    "place": "Expose VI, 1.1 and 3.7(a), printed pp. 69 and 75: the final sentence extending the restriction of a splitting to a chart near the geometric point. This node isolates the fine-log chart-spreading input to that sentence, in the sharp-chart step of the monoidal-resolution ancestry of lem-trf-local-term-locality, proof (1)--(2)."
    }
   },
   {
-   "text": "Since $q:Q\\to M|_V$ is a chart, the chart form of the associated-log universal property extends $k$ uniquely to a log homomorphism $g:M|_V\\to N|_V$. Both $fg$ and the identity of $M|_V$ restrict to $q$ on $Q$, since $fk=q$. Uniqueness in that same universal property gives $fg=\\mathrm{id}_{M|_V}$. This equality is on the whole neighbourhood, including its unit sheaf; no finite generation of the unit groups is asserted.",
+   "text": "Let $\\iota:P\\to N(V)$ be the canonical generator map. The two monoid homomorphisms $gf\\iota$ and $\\iota$ have the same marked germ, since $g_{\\bar v}=f_{\\bar v}^{-1}$. The equality clause of the finite-monoid stalk-data lemma makes them equal on an affine pointed refinement $W$. Restriction compatibility identifies $N|_W$ with $L_W(P,\\beta|_W)$. The associated-log universal property now gives $gf=\\mathrm{id}_{N|_W}$, while $fg=\\mathrm{id}$ persists under restriction. Thus $f$ is an isomorphism, so $\\widetilde h|_W$ is a chart. The same restriction compatibility and canonical stalk identifications preserve its germ $h$ on all of $P$. This is the required affine pointed chart.",
    "uses": [
-    "lem-trf-associated-log-universal-stalks",
-    "def-trf-fs-log-blowup"
+    "lem-trf-finite-monoid-stalk-data-spreading",
+    "lem-trf-associated-log-universal-stalks"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI, 1.1 and 3.7(a), printed pp. 69 and 75: agent expansion of the omitted chart-extension argument."
-   }
-  },
-  {
-   "text": "At the marked stalk, $f_{\\bar v}$ is the isomorphism of step 3. Taking stalks in $fg=\\mathrm{id}$ therefore gives $g_{\\bar v}=f_{\\bar v}^{-1}$ and $(gf)_{\\bar v}=\\mathrm{id}$. Consequently, for each of the finitely many $p_i$ from step 2, the two sections $gf(\\iota(p_i))$ and $\\iota(p_i)$ of $N$ have equal germs. Refine once more so that all these equalities hold as sections, using step 1. They then hold for every $p\\in P$ by generation. Uniqueness in the universal property of $N=L(P,\\beta)$ shows $gf=\\mathrm{id}_N$. Thus $f$ and $g$ are inverse isomorphisms on this neighbourhood. The map $P\\to M$ is a chart because its induced associated-log homomorphism $f$ is an isomorphism, and its germ is still the originally specified $h$.",
-   "uses": [
-    "lem-trf-associated-log-universal-stalks",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-    "def-weil-pbc-geometric-stalks"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI, 1.1 and 3.7(a), printed pp. 69 and 75: agent expansion of the omitted chart-extension argument."
-   }
-  },
-  {
-   "text": "Finally take an affine pointed etale refinement $(W,\\bar w)$ using cofinality of affine neighbourhoods. The restriction compatibility of associated log structures restricts the two inverse maps, so $P\\to M|_W$ remains a chart. Step 1 identifies its marked stalk canonically with $M_{\\bar x}$, and every generator has the original germ $h(p_i)$; hence the whole monoid homomorphism has germ $h$. This gives the affine pointed neighbourhood and the specified chart required in the statement.",
-   "uses": [
-    "lemma-weil-pbc-affine-neighbourhood-cofinal",
-    "lem-trf-associated-log-universal-stalks",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "def-weil-pbc-geometric-stalks"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI, 1.1 and 3.7(a), printed pp. 69 and 75: agent expansion of the omitted chart-extension argument."
+    "place": "Expose VI, 1.1 and 3.7(a), printed pp. 69 and 75: the final sentence extending the restriction of a splitting to a chart near the geometric point. This node isolates the fine-log chart-spreading input to that sentence, in the sharp-chart step of the monoidal-resolution ancestry of lem-trf-local-term-locality, proof (1)--(2)."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-etale-essentially-small-cover",
-  "lemma-weil-pbc-affine-neighbourhood-cofinal",
-  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-  "def-weil-pbc-geometric-stalks",
-  "def-weil-etale-morphism",
-  "def-sbc-locally-finite-presentation",
-  "pqf-lem-locnoeth-lft",
-  "lem-trf-fg-commutative-monoid-finite-presentation",
+  "lem-trf-finite-monoid-stalk-data-spreading",
   "def-trf-fs-log-blowup",
   "lem-weil-pbc-etale-cover-geometric-point-lift",
-  "lem-trf-associated-log-universal-stalks"
+  "lem-trf-associated-log-universal-stalks",
+  "lem-trf-charted-log-map-local-right-inverse"
  ],
  "proof_origin": {
   "by": "agent",
@@ -225,19 +170,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-fine-log-stalk-chart-spreading",
   "worker": "stage1",
-  "summary": "Preserved the precise input homomorphism and all hypotheses. Expanded chart spreading into finite presentation, finite stalk data and a constructed two-sided inverse using an existing fine chart. Added only finite presentations of commutative monoids and the foundational associated-log construction as statement-only children. Reused existing cofiltered-neighbourhood, finite-limit/filtered-colimit and affine-cofinality nodes.",
+  "summary": "Repair of the 2026-10-22 batch5 re-split: statement unchanged. Distributed the 5321-character argument into two independent statement-only lemmas of comparable proof workload: finite monoid data at etale stalks and local right inverses for maps to charted log structures. The item now only assembles them with the existing associated-log theorem. The report preserves every old proof step and assigns it to a new lemma or the assembly.",
   "blueprint": "Fine-log chart-spreading input, through lem-trf-log-regular-sharp-chart, to the monoidal-resolution ancestry of lem-trf-local-term-locality, proof (1)--(2); Travaux de Gabber VI, 3.7(a), printed p. 75, final sentence extending the restriction of a splitting to a chart.",
   "tool_uses": [
    {
-    "node": "lemma-weil-pbc-affine-neighbourhood-cofinal",
-    "why": "Generic affine-cofinality tool for geometric stalk neighbourhoods, needed for the final affine refinement and the small index category; this log-chart subargument has no same-unit version."
-   },
-   {
     "node": "lem-weil-pbc-etale-cover-geometric-point-lift",
-    "why": "Generic geometric-point lift to an etale covering, used only to choose an existing fine chart through the marked point; not a replacement of the unit route."
+    "why": "Geometric lift through the existing fine chart cover; same generic tool as in the returned proof, not a new route."
    }
   ]
  },
@@ -246,12 +187,12 @@
   "lem-weil-pbc-etale-cover-geometric-point-lift"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q23-725b6ac08",
-  "group": "Q23",
+  "reviewer": "NT-cc-NZ-145dac553",
+  "group": "NZ",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-725b6ac08 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, plus the statement of every cited node. Sources: Travaux de Gabber VI 1.1 (printed p.69; log structures are étale, fine/fs means étale-local charts) and VI 3.7(a) (printed p.75; 'la restriction de s à Q est, au voisinage de x, une carte'). The source gives no argument, so proof_origin agent with Kato WANTED is right. Stacks 00FN, 03PQ, 002W and 01T6 match their uses. The item statement is unchanged and not weakened; the full germ h is kept, which the parent lem-trf-log-regular-sharp-chart needs. Steps: 1 sets up the finite-data rule correctly from the cofiltered, essentially-small, affine-cofinal and filtered-colimit nodes, and gets local Noetherianity from étale => lfp => lft => 01T6. 2 spreads h using the monoid presentation, then gets a fine chart through x̄ from the étale-cover lift. 3 uses the associated-log stalk formula to show f at x̄ is the hypothesis isomorphism. 4 lifts the Q-generators with the Q-relations and f(t_j)=q(q_j); the α equation is redundant but harmless. 5 builds g from the chart form of the universal property, and uniqueness gives fg=id. 6 gets gf=id from generator germs and uniqueness for N, which is a real two-sided inverse; the chart condition then holds stalkwise. 7 makes the neighbourhood affine. New node lem-trf-fg-commutative-monoid-finite-presentation is Rédei's theorem: true, and the 00FN binomial-kernel route is sound; tested on n=0, Z/2, the idempotent monoid 2p=p and repeated generators. New node lem-trf-associated-log-universal-stalks is Kato's associated log structure: the construction, log axiom, universal property, stalk formula, restriction and chart clauses are all correct; tested on R=N with beta(1)=t at t=0 and t≠0, and on R a group. Both are statement only and self-contained. Duplicate search (rg over the DAG; the log nodes of sec-trace-formula; blueprint main-20261015) found nothing, so same_as=[] is right. Neither restates an item clause and there is no cycle. I accept both tool_uses: the affine-cofinal lemma is Lean-closed and the étale-cover lift is a Mathlib leaf. No route departure. No changes made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-145dac553 (reviewer sub-agent of L); spot-checked: This delivery answers the 2026-10-22 human re-split note (5321 chars, at least 2 nodes). The item's statement and stmt_deps are byte-identical to live, so the Lean record is unaffected. The proof is a 4-step assembly of 1888 chars. All 7 old steps are in the report verbatim and each is allocated. New node A, lem-trf-finite-monoid-stalk-data-spreading, carries old steps 1, 2 and the finite-equation parts of 6–7. It is true by: cofinality of pointed affine refinements (Stacks 03PQ); equalizers of étale U-maps being open and closed; Hom out of a finitely presented monoid commuting with filtered colimits (Rédei node, 002W); and 01T6 for local Noetherianity. New node B, lem-trf-charted-log-map-local-right-inverse, carries old steps 4–5. It is true by lifting f^-1 q(q_j) and imposing the Q-relations and f t_j = q q_j (the α equation then follows), then applying the chart form of lem-trf-associated-log-universal-stalks, whose uniqueness gives fg=id. I tested Q=0, Q a group, rank 1 with a non-unit generator, and an idempotent P. Old steps 3/6/7 now cite the existing associated-log node, which states exactly the universal property, stalk formula and restriction clause they used. The two children are of comparable size, neither restates the item, and no duplicates turned up (checked against etale-descent, geometric-stalk-topos-point, finite-stalk-local-presentation, the integral chart logification node and the sharp-chart parent). Sources: ILO VI 3.7(a), printed p.75, read; Stacks 03PQ, definition-stalk, 002W and 01T6 read; no SGA used. The two batch-5 flags are generic: both new nodes have only definitions as stmt_deps and no proof_deps, so neither is a step of the trace formula or Poincaré duality proofs. Accepted tool_use: geometric-point lift, a Mathlib leaf. Maintainer note: the item's node-level tool_uses still lists lemma-weil-pbc-affine-neighbourhood-cofinal, which the item no longer cites (stale, advisory only)."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -272,5 +213,16 @@
   "existing": false,
   "fixed_by": "NT-stage2-cc-354d4248d"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

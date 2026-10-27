@@ -1,0 +1,371 @@
+{
+ "id": "lem-sfb-scheme-relative-perfect-base-change",
+ "kind": "statement",
+ "title": "Relative perfection of scheme complexes under arbitrary base change",
+ "statement": "Let $f:X\\to S$ be a flat locally finitely presented morphism of schemes [def-pc-scheme, def-weil-flat-morphism, def-sbc-locally-finite-presentation], let $g:S'\\to S$ be arbitrary, and let $b:X'=X\\times_SS'\\to X$ and $f':X'\\to S'$ be the projections [def-pc-fibre-product]. Work with Zariski structure sheaves and unbounded derived categories of module sheaves [def-pc-derived-category]. Suppose $E\\in D(\\mathcal O_X)$ is pseudo-coherent [def-pur-pseudo-coherent-complex] and locally has finite Tor dimension over $S$: each point has an open neighbourhood on which its restriction, as a complex over $f^{-1}\\mathcal O_S$, has finite Tor amplitude [def-pc-finite-tor-dimension-over]. Then $Lb^*E$ [def-pc-derived-pullback] is pseudo-coherent and locally has finite Tor dimension over $S'$ with respect to $f'$. No flatness of $g$, Noetherianity, properness or global uniform Tor interval is required.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DI5, lemma-base-change-relatively-perfect, with relative perfection defined by Tag 0DI0, definition-relatively-perfect."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-finite-tor-dimension-over",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x'\\in X'$ with images $x\\in X$, $s'\\in S'$ and $s\\in S$. Choose affine neighbourhoods $V=\\operatorname{Spec}R$ of $s$, $U=\\operatorname{Spec}A$ of $x$ inside $f^{-1}V$, and $V'=\\operatorname{Spec}R'$ of $s'$ inside $g^{-1}V$, using [lem-weil-pbc-affine-opens-basis]. Then $U'=U\\times_VV'$ is an open neighbourhood of $x'$ in $X'$ by [lem-weil-pbc-open-fibre-product], and is $\\operatorname{Spec}A'$ for $A'=A\\otimes_RR'$ by [lem-weil-pbc-fibre-product-affine-spectra]. Restrictions of $E$ to $U$ remain pseudo-coherent by its local-model definition. Its locally finite relative Tor dimension remains so over $V$: at a point of $U$, the stalk of the inverse-image base ring is still $\\mathcal O_{S,f(x)}$. The stalk criterion [lem-trf-ringed-tor-amplitude-stalk-test] therefore preserves each local interval on restriction.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pur-pseudo-coherent-complex",
+    "lem-trf-ringed-tor-amplitude-stalk-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DI5, lemma-base-change-relatively-perfect, first proof; affine localization in Tag 0DI2, lemma-affine-locally-rel-perfect."
+   }
+  },
+  {
+   "text": "The ring map $R\\to A$ is flat. Under the open immersions of $U$ and $V$, the restriction $U\\to V$ of $f$ is $\\operatorname{Spec}$ of the section map $R\\to A$, by the affine adjunction [lem-a1-locally-ringed-space-affine-adjunction]. Hence, for every prime $\\mathfrak q\\subset A$ over $\\mathfrak p\\subset R$, the compatible stalk identifications of [lem-weil-pbc-affine-open-stalk-localization] and [lem-weil-pbc-spec-map-stalk-localization] identify $R_{\\mathfrak p}\\to A_{\\mathfrak q}$ with the stalk map of $f$. It is flat by [def-weil-flat-morphism]. Apply [lem-pc-affine-sections-flat-over-base] to $M=A$ to conclude. Pseudo-coherence gives quasi-coherent cohomology by [lem-sc-pseudo-coherent-qcoh]. Use [lem-pc-affine-qcoh-derived-equivalence] and [lem-pc-affine-pseudo-coherent-criterion] to represent $E|_U$ by $\\widetilde Q$, where $Q$ is a bounded-above complex of finite free $A$-modules. By [lem-trf-affine-relative-tor-amplitude-criterion], $Q$ restricted to $R$ has Tor amplitude in some interval $[a,b]$. This interval is chosen on $U$, not on all of $X$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-map-stalk-localization",
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "def-weil-flat-morphism",
+    "lem-pc-affine-sections-flat-over-base",
+    "lem-sc-pseudo-coherent-qcoh",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-pseudo-coherent-criterion",
+    "lem-trf-affine-relative-tor-amplitude-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DI2, lemma-affine-locally-rel-perfect; Tag 0DHY, lemma-tor-dimension-rel-affine; Tag 08E7, lemma-pseudo-coherent-affine; algebra.tex Tag 00HT, lemma-flat-localization (6)."
+   }
+  },
+  {
+   "text": "Each term of $Q$ is flat over $A$, and flat over $R$: it is a finite direct sum of copies of the flat $R$-module $A$, and its tensor functor is the corresponding finite direct sum of exact functors. Thus [lem-pc-module-bounded-flat-kflat] applies over both rings. By [lem-pc-affine-kflat-pullback-chart-comparison], the affine pullback of $E|_U$ to $U'$ is represented by $\\widetilde{Q'}$ with $Q'=A'\\otimes_AQ$. In every degree $A'\\otimes_A A^{r_i}=(A')^{r_i}$, with differential the same matrix after applying $A\\to A'$. Hence $Q'$ is bounded above and finite free. The reverse implication of [lem-pc-affine-pseudo-coherent-criterion] shows that this pullback is pseudo-coherent.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-affine-kflat-pullback-chart-comparison",
+    "lem-pc-affine-pseudo-coherent-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DI5 first proof and Tag 08DW, lemma-quasi-coherence-pullback; more-algebra.tex Tag 064K, lemma-derived-tor-quasi-isomorphism, and Tag 0650, lemma-pull-pseudo-coherent."
+   }
+  },
+  {
+   "text": "As an $R'$-complex, $Q'$ is isomorphic to $R'\\otimes_R Q$ by [lem-pc-base-tensor-ordinary-iso], whose degreewise map sends $r'\\otimes q$ to $(1\\otimes r')\\otimes q$. Since $Q$ is K-flat over $R$, this represents $Q\\otimes_R^{\\mathbf L}R'$. Choose a bounded flat $R$-complex $F$ supported in $[a,b]$ representing the restricted $Q$, using [lem-pc-module-tor-amplitude-flat-model]. Both models are K-flat by [lem-pc-module-bounded-flat-kflat]. Apply the functor $-\\otimes_R^{\\mathbf L}R'$ of [lem-pc-derived-tensor-second-factor-functor] to their isomorphism in $D(R)$; its computation clause identifies the resulting isomorphism in $D(R')$ with\n$$\\operatorname{Res}_{R'}Q'\\simeq R'\\otimes_R F.$$\nEvery term of the latter is flat over $R'$ by [lem-weil-pbc-flat-module-base-change], and it is zero outside $[a,b]$. The reverse implication of [lem-pc-module-tor-amplitude-flat-model] now gives the same Tor interval over $R'$ for $Q'$. This uses no flatness of $R\\to R'$.",
+   "uses": [
+    "lem-pc-base-tensor-ordinary-iso",
+    "lem-pc-module-tor-amplitude-flat-model",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-weil-pbc-flat-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DHW, lemma-base-change-relatively-perfect; Tag 0661, lemma-base-change-comparison; Tag 066L, lemma-pull-tor-amplitude; Tag 0654, lemma-tor-amplitude; Tag 06Y6, lemma-derived-base-change. The comparison is written in D(R-prime)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-affine-relative-tor-amplitude-criterion] to $R'\\to A'$ and $Q'$. Its interval equivalence shows that $\\widetilde{Q'}$ has Tor amplitude $[a,b]$ over the inverse-image structure ring from $V'$. The composite maps $U'\\to X'\\to X$ and $U'\\to U\\to X$ agree. The composition isomorphism of [lem-pc-ringed-spaces-derived-pullback-composition] therefore identifies the computed affine pullback with $(Lb^*E)|_{U'}$; for an open immersion the termwise restriction is exact and the tensor formula for [def-pc-derived-pullback] is ordinary restriction. Also $\\mathcal O_{V',s'}=\\mathcal O_{S',s'}$, so the stalk criterion [lem-trf-ringed-tor-amplitude-stalk-test] identifies this relative interval with the one over $(f')^{-1}\\mathcal O_{S'}$ on $U'$. Since the chosen neighbourhoods cover $X'$, the local-model definition proves pseudo-coherence of $Lb^*E$, and these intervals prove locally finite relative Tor dimension. The intervals may vary with $U'$. Empty schemes give a vacuous cover, and the zero complex allows $[0,0]$.",
+   "uses": [
+    "lem-trf-affine-relative-tor-amplitude-criterion",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-pullback",
+    "lem-trf-ringed-tor-amplitude-stalk-test",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DI5, lemma-base-change-relatively-perfect, first proof; Tag 0DHY, lemma-tor-dimension-rel-affine; cohomology.tex Tag 0D5S, lemma-derived-pullback-composition, and Tag 09U9, lemma-tor-amplitude-stalk."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pur-pseudo-coherent-complex",
+  "lem-trf-ringed-tor-amplitude-stalk-test",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "def-weil-flat-morphism",
+  "lem-pc-affine-sections-flat-over-base",
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-trf-affine-relative-tor-amplitude-criterion",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-affine-kflat-pullback-chart-comparison",
+  "lem-pc-base-tensor-ordinary-iso",
+  "lem-pc-module-tor-amplitude-flat-model",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DI5, lemma-base-change-relatively-perfect, first proof, with the algebra proof of more-algebra.tex lemma-base-change-relatively-perfect expanded using bounded flat models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback preserves relative perfect complexes under arbitrary base change of flat finitely presented schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → Prop\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': Z\"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop),\\n  (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n      ∀ {X Y S : AlgebraicGeometry.Scheme} [AlgebraicGeometry.I\", \"doc\": \"If a property $ P $ of ring homomorphisms is stable under base change and respects isomorphisms, then for affine schemes $ X, Y, S $ with morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $, the property $ P \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.RespectsIso] [P'.IsStableUnderComposition]\\n  [P.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {S X : AlgebraicGeometry.Scheme} (f : AlgebraicGeometry.Spec R ⟶ S) (g : X ⟶ S),\\n      P' f → P (CategoryTheory.Limits.pullback.fst\", \"doc\": \"Let $ P' $ be a morphism property stable under composition and respecting isomorphisms, and let $ P $ be a property stable under base change. Suppose $ T $ is an affine scheme, and consider morphisms \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ is affine, then any base change (pullback) of $ f $ is also an affine morphism.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherent complexes of finite relative Tor amplitude stable under nonflat base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/FaithfullyFlat\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\\\to S $ is faithfully flat, then the base change homomorphism $ R' \\\\\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"module\": \"Mathlib/Algebra/Category/Ring/Under/Limits\", \"type\": \"∀ {R S : CommRingCat} [inst : Algebra ↑R ↑S] [Module.Flat ↑R ↑S],\\n  CategoryTheory.Limits.PreservesFiniteLimits (R.tensorProd S)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the tensor product functor from the under category of $ R $ to the under category of $ S $ preserves finite limits.\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat → CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f)\", \"doc\": \"Given a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the scalar extension functor $ \\\\text{Mod}_R \\\\to \\\\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod\"}\n  {\"name\": \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every short exact sequence in the category of $ R $-modules, the sequence obtained by tensoring with $ M $ remains exact. In oth\"}\n  {\"name\": \"Module.FaithfullyFlat.iff_exact_iff_rTensor_exact\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Module.FaithfullyFlat R M ↔\\n    ∀ {N1 : Type (max u v)} [inst_3 : AddCommGroup N1] [inst_4 : Module R N1] {N2 : Type (max u v)}\\n      [inst_5 : AddCommGroup N2] [inst_6 : Module R N2] {N3 : Type (max u\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is faithfully flat if and only if for every sequence of $ R $-modules $ N_1 \\\\xrightarrow{f} N_2 \\\\xrightarrow{g} N_3 $, the sequence is exact if and only if\"}\n  {\"name\": \"Module.Flat.iff_rTensor_exact'\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Small.{v', u} R],\\n  Module.Flat R M ↔\\n    ∀ ⦃N N' N'' : Type v'⦄ [inst_4 : AddCommGroup N] [inst_5 : AddCommGroup N'] [inst_6 : AddCommGroup N'']\\n      [inst_7 : Module R N] [inst_8 : Module R N'] [inst_\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if, for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\x\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "relativelyPerfect|relativePerfect|pseudoCoherent|PseudoCoherent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relatively perfect complex scheme arbitrary base change flat locally finite presentation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @LocallyOfFiniteType\", \"doc\": \"The property of a morphism of schemes being locally of finite type is stable under base change. That is, if a morphism $ f: X \\to Y $ is locally of finite type, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flatness, finite presentation or module duals, not the stated derived relative-perfection or diagonal-Hom assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudoCoherent|PseudoCoherent|relativePerfect|relativelyPerfect",
+   "results": "{\"t\": \"2026-10-23T14:09:06Z\", \"tool\": \"grep\", \"query\": \"pseudoCoherent|PseudoCoherent|relativePerfect|relativelyPerfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme flatness, module scalar extension, exact functors, or cohomological truncation; no relative-perfection assertion for complexes of structure-module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative perfect complexes on schemes are preserved by arbitrary base change of a flat morphism",
+   "results": "{\"t\": \"2026-10-23T14:09:07Z\", \"tool\": \"leansearch\", \"query\": \"Relative perfect complexes on schemes are preserved by arbitrary base change of a flat morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"Module.Flat.isBaseChange\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\"], \"digest\": \"2538955901a96761\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme flatness, module scalar extension, exact functors, or cohomological truncation; no relative-perfection assertion for complexes of structure-module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-23T14:09:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"TorAmplitude\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme flatness, module scalar extension, exact functors, or cohomological truncation; no relative-perfection assertion for complexes of structure-module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of a pseudo coherent complex with finite relative Tor dimension under base change of flat morphism",
+   "results": "{\"t\": \"2026-10-23T14:09:08Z\", \"tool\": \"leanfinder\", \"query\": \"Derived pullback of a pseudo coherent complex with finite relative Tor dimension under base change of flat morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Flat.instSndScheme\"], \"digest\": \"0caa364eec3cc625\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme flatness, module scalar extension, exact functors, or cohomological truncation; no relative-perfection assertion for complexes of structure-module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars preserves pseudo coherent complexes and relative Tor amplitude",
+   "results": "{\"t\": \"2026-10-23T14:09:09Z\", \"tool\": \"leanfinder\", \"query\": \"Extension of scalars preserves pseudo coherent complexes and relative Tor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapExactFunctor_smul\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.IsGE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\"], \"digest\": \"a7ccc5e6c0d11208\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme flatness, module scalar extension, exact functors, or cohomological truncation; no relative-perfection assertion for complexes of structure-module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem isBaseChange|preservesFiniteLimits_extendScalars_of_flat|isStableUnderBaseChange|isGE_Q_obj_iff",
+   "results": "{\"t\": \"2026-10-23T14:25:28Z\", \"tool\": \"grep\", \"query\": \"theorem isBaseChange|preservesFiniteLimits_extendScalars_of_flat|isStableUnderBaseChange|isGE_Q_obj_iff\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Stability.lean\"], \"digest\": \"d8a705f8cf979a4e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme flatness, module scalar extension, exact functors, or cohomological truncation; no relative-perfection assertion for complexes of structure-module sheaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-dualizing-pair-base-change",
+  "date": "2026-10-23",
+  "group": "Q110"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Arbitrary base change of supplied coherent relative dualizing pairs. Specific prerequisite: Finiteness condition for the base-changed supplied complex in the coherent relative-duality input.",
+   "via": [
+    "lem-sfb-relative-dualizing-pair-base-change",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-relative-perfect-base-change",
+  "worker": "stage1",
+  "group": "NF",
+  "summary": "Expanded the affine proof of Stacks 0DI5 with existing DAG inputs only: affine pseudo-coherent model, flat algebra, K-flat base tensor identification, bounded flat model after scalar extension, and affine relative-Tor transfer. No new nodes and no statement change.",
+  "blueprint": "The existing from.place records the supporting input for supplied coherent relative-dualizing-pair base change below the direct-image stability route. All five steps realize that finiteness prerequisite. The latest direct-images proof (3) has no explicit coherent-duality discussion; this is an inherited supporting branch, not a replacement of its route. The ancestor command returns None, retained in from.node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Affine neighbourhoods localize the scheme problem. Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-open-fibre-product",
+    "why": "Open affine base-change charts are neighbourhoods of the given point. Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Compute the chart ring as A tensor_R R-prime. Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-trf-ringed-tor-amplitude-stalk-test",
+    "why": "Restrict relative Tor intervals while identifying the unchanged base stalk rings. Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Identify scheme stalk rings with localizations of affine section rings. Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-map-stalk-localization",
+    "why": "Identify the localized section map with the given scheme stalk map. Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-pc-affine-sections-flat-over-base",
+    "why": "Pass from the flat stalk maps of f to the flat algebra R to A. Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-sc-pseudo-coherent-qcoh",
+    "why": "Enter the affine derived quasi-coherent equivalence. Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Replace the affine object by a module complex. Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-pc-affine-pseudo-coherent-criterion",
+    "why": "Choose a bounded-above finite-free model and recognize its scalar extension. Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-trf-affine-relative-tor-amplitude-criterion",
+    "why": "Translate relative Tor amplitude between affine scheme sheaves and modules. Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Compute derived scalar extension using bounded-above flat models. Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-pc-affine-kflat-pullback-chart-comparison",
+    "why": "Compute geometric affine derived pullback on the chosen model. Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-pc-base-tensor-ordinary-iso",
+    "why": "Identify the restricted ordinary tensor model with base-ring scalar extension. Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-pc-module-tor-amplitude-flat-model",
+    "why": "Choose and recognize a bounded flat model in a fixed Tor interval. Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Transport an isomorphism of K-flat R-models to D(R-prime). Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-base-change",
+    "why": "Keep the terms of a bounded flat model flat after arbitrary ring extension. Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-pullback-composition",
+    "why": "Identify the affine calculation with restriction of the global derived pullback. Generic structure-sheaf/commutative-algebra tool, not a substitute for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-ringed-tor-amplitude-stalk-test",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-pc-affine-sections-flat-over-base",
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-trf-affine-relative-tor-amplitude-criterion",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-affine-kflat-pullback-chart-comparison",
+  "lem-pc-base-tensor-ordinary-iso",
+  "lem-pc-module-tor-amplitude-flat-model",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NF-7863067ff",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-7863067ff (reviewer sub-agent of L); spot-checked: I read the item, all 21 cited statements and the sources: perfect.tex 0DI0/0DI2/0DI5/0DHY, more-algebra 0DHW/0654/064K/06Y6, algebra 00HI/00HT; tags checked against tags/tags. No new nodes; statement and stmt_deps unchanged; not a re-split. The five steps follow 0DI5's first proof (affine reduction through 0DI2, then 0DHW), with each algebra lemma expanded. Step 1: affine charts U'=U×_V V'=Spec(A⊗_R R') from 01IT/01JR/01I4; no affine-intersection assumption; local Tor intervals restrict via the 09U9 stalk test. Step 2: R→A flat via 00HT(6) on the stalk maps; 06Z0 and 08E7 give a bounded-above finite-free Q; 0DHY gives an interval on U only. Step 3: Q is K-flat over A and R by 064K; 08DW(2) gives Q'=A'⊗Q, finite free, so the pullback is pseudo-coherent. Step 4: R'⊗_R Q≅Res Q'; a flat model F in [a,b] (0654), the derived functor iso, then 00HI and 0654 converse give [a,b] over R' with no flatness of g. Step 5: 0D5S composition and open restriction identify (Lb*E)|_U' with Q'~; 0DHY and the stalk test finish. Edge cases tested: E=0, empty X or X', identity g, non-flat Z→Z/2 with A=Z[t], an infinite disjoint union with varying intervals. Not a duplicate of lem-sfb-space-relative-perfect-base-change, which uses étale sites on spaces. Batch-5: lem-trf-ringed-tor-amplitude-stalk-test (09U9) and lem-trf-affine-relative-tor-amplitude-criterion (0DHY) are generic ringed-space/affine Tor-amplitude algebra, neither the trace formula nor Poincaré duality nor a step of them, so I accept them as generic tools. I accept the 18 declared generic tool_uses. FIX (C1): step 2 identified R_p→A_q with the stalk map of f without citing that f|_U=Spec(f^♯: R→A), which is the Γ–Spec adjunction (01I1). I added the Mathlib leaf lem-a1-locally-ringed-space-affine-adjunction to step-2 text, uses and proof_deps; the corrected item is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-scheme-relative-perfect-base-change.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeRelativePerfectBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.relativePerfect_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeRelativePerfectBaseChange.lean",
+  "statement": "theorem relativePerfect_baseChange [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))] {X S S' : Scheme.{u}} (f : X ⟶ S) [Flat f] [LocallyOfFinitePresentation f] (g : S' ⟶ S) (E : schemeDerivedCategory X) (hE : IsPseudoCoherent X E) (hTor : ∀ x : X, ∃ U : X.Opens, x ∈ U ∧ HasFiniteTorDimensionOver (U.ι ≫ f) ((derivedPullback U.ι).obj E)) : IsPseudoCoherent (pullback f g) ((derivedPullback (pullback.fst f g)).obj E) ∧ ∀ x' : (pullback f g : Scheme.{u}), ∃ U' : (pullback f g : Scheme.{u}).Opens, x' ∈ U' ∧ HasFiniteTorDimensionOver (U'.ι ≫ pullback.snd f g) ((derivedPullback U'.ι).obj ((derivedPullback (pullback.fst f g)).obj E))",
+  "branch": "sheaf-dag",
+  "by": "Q133",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d970de25",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Read item, 0DI0/0DI5, all 8 stmt_dep records (byte-identical to side-live; item differs only by added lean), live HasFiniteTorDimensionOver/IsPseudoCoherent/derivedPullback. Clauses match: Flat+LFP f, arbitrary g, pullback f g with fst/snd, E pseudo-coherent, ∀x ∃U HasFiniteTorDimensionOver (U.ι≫f) (Lι^*E) (same idiom as landed IsCoherentRelativeDualizingPair), conclusion both conjuncts with same local form over pullback.snd; no extra assumptions; HasDerivedCategory families are infrastructure; u,w bound. Edge cases: empty X/X', E=0, non-flat g, nonuniform intervals OK. Single sorry theorem, docstrings with source/blueprint and 5 proof steps, statement verbatim, all proof imports exist. No duplicate (algebraic-space analogue differs; live item has no lean). Not compiled (no change)."
+ }
+}

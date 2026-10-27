@@ -1,0 +1,163 @@
+{
+ "id": "lem-sfb-active-root-specified-splitting-descent",
+ "kind": "statement",
+ "title": "A specified splitting of the punctured active-root colimit descends",
+ "statement": "Let $B,A$ be commutative rings with $A$ a $B$-algebra, $r,s\\geq0$, $t:\\operatorname{Fin}(r)\\to B$, $\\alpha:\\operatorname{Fin}(s)\\to\\operatorname{Fin}(r)$, and $p\\in\\mathbf N$. Put $f=\\prod_i t_i$, $T_m=A[z_j]/(z_j^m-t_{\\alpha(j)})$, $Q_m=T_m[1/f]$, and $Q_\\infty=\\varinjlim_{(m,p)=1}Q_m$ with the canonical root power transitions [def-sfb-active-root-normalization-pushout-data]. Let $D$ be a finitely presented $B[1/f]$-algebra [def-weil-pbc-finitely-presented-algebra]. For $d\\geq0$, let $\\theta:D\\otimes_{B[1/f]}Q_\\infty\\simeq Q_\\infty^d$ be a specified $Q_\\infty$-algebra isomorphism. There exist $m>0$ coprime to $p$ and a $Q_m$-algebra isomorphism $\\theta_m:D\\otimes_{B[1/f]}Q_m\\simeq Q_m^d$ such that for every $x\\in D$ and $j\\in\\operatorname{Fin}(d)$, the image in $Q_\\infty$ of $\\theta_m(x\\otimes1)_j$ equals $\\theta(x\\otimes1)_j$. No characteristic, normality or geometric-point assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05N9, lemma-colimit-category-fp-algebras (2),(3), and affine Tag 01ZM, lemma-descend-finite-presentation; parent steps 1--3."
+ },
+ "stmt_deps": [
+  "def-sfb-active-root-normalization-pushout-data",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [
+  {
+   "text": "The prime-to-$p$ positive integers ordered by divisibility form a directed set with initial element $1$: $ab$ is a common upper bound of $a,b$. At level $1$, $Q_1=A[1/f]$. Put $H_m=D\\otimes_{B[1/f]}Q_m$. The assumed finite presentation of D gives one for its base change. Substituting the coefficient map into its finitely many defining polynomials gives a finite presentation of $H_1$ over $Q_1$, and of $H_m=H_1\\otimes_{Q_1}Q_m$. Also $Q_1^d$ is finitely presented: use generators $e_1,\\ldots,e_d$, relations $e_i^2=e_i$, $e_ie_j=0$ for $i\\ne j$, and $\\sum e_i=1$. This presentation is a product because every polynomial reduces uniquely to $\\sum a_ie_i$, with $a_i$ its value at the $i$-th coordinate vector. For $d=0$ the sole relation is $1=0$.",
+   "uses": [
+    "def-sfb-active-root-normalization-pushout-data",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 01ZM, 05N9, 034M and 0CBF; parent proof steps 1--8"
+   }
+  },
+  {
+   "text": "Apply the morphism clause (2) of the cited algebra-colimit theorem over the directed system $Q_m$, first to $\\theta_\\infty:H_\\infty\\to Q_\\infty^d$, and then to its inverse. Both source and target are the base changes of the finitely presented $Q_1$-algebras in Step 1. Identify scalar extension of a finite product by the mutually inverse formulas $(a_i)\\otimes q\\mapsto(a_iq)_i$ and $(q_i)_i\\mapsto\\sum e_i\\otimes q_i$. This includes the empty product. Take a common upper bound of the two resulting indices and denote the descended maps there by $u:H_a\\to Q_a^d$ and $w:Q_a^d\\to H_a$. Their scalar extensions are the given maps, rather than merely some splitting and its inverse.",
+   "uses": [
+    "lem-weil-pbc-colimit-category-fp-algebras"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 01ZM, 05N9, 034M and 0CBF; parent proof steps 1--8"
+   }
+  },
+  {
+   "text": "The composites $wu$ and $uw$ extend to the identities over $Q_\\infty$. Apply equality clause (3) of the same theorem to each composite and its identity, and take a common upper bound $m$ of the two indices. The maps at level $m$ are inverse. Thus $\\theta_m=u_m$ is an isomorphism with scalar extension exactly $\\theta_\\infty$. No injection of $Q_a\\to Q_\\infty$ is used: eventual equality is precisely the supplied clause (3).",
+   "uses": [
+    "lem-weil-pbc-colimit-category-fp-algebras"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 01ZM, 05N9, 034M and 0CBF; parent proof steps 1--8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-active-root-normalization-pushout-data",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-colimit-category-fp-algebras"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/limits.tex",
+  "place": "Tag 05N9, lemma-colimit-category-fp-algebras (2),(3), and affine Tag 01ZM, lemma-descend-finite-presentation; parent steps 1--3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictHenselization.*(unit|Unit)|integralClosure.*prod|exists.*[Ii]so.*[Cc]olimit",
+   "results": "{\"t\": \"2026-10-26T06:36:35Z\", \"tool\": \"grep\", \"query\": \"strictHenselization.*(unit|Unit)|integralClosure.*prod|exists.*[Ii]so.*[Cc]olimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"2c2c8f21ff1c3075\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Reuse the existing filtered-colimit and integral-closure APIs; the root-specific structural-map comparisons are not supplied by a single declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"TensorProduct\"",
+   "results": "{\"t\": \"2026-10-26T06:36:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"TensorProduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure\", \"TensorProduct.toIntegralClosure_bijective_of_smooth\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"TensorProduct.toIntegralClosure_bijective_of_tower\"], \"digest\": \"a935f45cd469c5d8\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Reuse the existing filtered-colimit and integral-closure APIs; the root-specific structural-map comparisons are not supplied by a single declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A specified isomorphism between finitely presented algebras over a filtered colimit descends to a finite stage",
+   "results": "{\"t\": \"2026-10-26T06:36:41Z\", \"tool\": \"leanfinder\", \"query\": \"A specified isomorphism between finitely presented algebras over a filtered colimit descends to a finite stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit\", \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom\", \"CategoryTheory.Limits.ColimitPresentation.bind_diag_obj\", \"CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable\", \"isFinitelyPresentable\", \"CommRingCat.preservesColimit_coyoneda_of_finitePresentation\"], \"digest\": \"a81e3ccd0d3f2ecd\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Reuse the existing filtered-colimit and integral-closure APIs; the root-specific structural-map comparisons are not supplied by a single declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "([Ii]nd[Ee]tale|[Nn]ormal|[Pp]ushout).*(integralClosure|simultaneousRoot)|integralClosure.*([Pp]roduct|[Pp]i|[Ii]nd[Ee]tale)",
+   "results": "{\"t\": \"2026-10-26T06:45:22Z\", \"tool\": \"grep\", \"query\": \"([Ii]nd[Ee]tale|[Nn]ormal|[Pp]ushout).*(integralClosure|simultaneousRoot)|integralClosure.*([Pp]roduct|[Pp]i|[Ii]nd[Ee]tale)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Normal/Closure.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/RingTheory/NormalClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\"], \"digest\": \"00cab19e711f8559\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Reuse the existing filtered-colimit and integral-closure APIs; the root-specific structural-map comparisons are not supplied by a single declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A specified splitting of a finitely presented algebra over a directed root colimit descends and restricts to integral closure after ind etale base change",
+   "results": "{\"t\": \"2026-10-26T06:45:22Z\", \"tool\": \"leansearch\", \"query\": \"A specified splitting of a finitely presented algebra over a directed root colimit descends and restricts to integral closure after ind etale base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"integralClosure\", \"completeIntegralClosure\", \"Ring.NormalClosure\", \"algebraMap_galRestrict'_apply\", \"galRestrict'\", \"galRestrict'_id\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Etale.finitePresentation\"], \"digest\": \"d1fbdd958a5b1e1c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Reuse the existing filtered-colimit and integral-closure APIs; the root-specific structural-map comparisons are not supplied by a single declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closedness in a localization after ind etale base change and restriction of a finite product splitting to integral closures",
+   "results": "{\"t\": \"2026-10-26T06:45:23Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closedness in a localization after ind etale base change and restriction of a finite product splitting to integral closures\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away.integralClosure\", \"IsLocalization.integralClosure\", \"IsIntegralClosure.of_isIntegralClosure_of_isIntegrallyClosedIn\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"IsIntegralClosure.isLocalization_of_isSeparable\", \"RingHom.isIntegral_isStableUnderBaseChange\", \"RingHom.Etale.ofLocalizationSpanTarget\"], \"digest\": \"d78ed96211f31a46\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Reuse the existing filtered-colimit and integral-closure APIs; the root-specific structural-map comparisons are not supplied by a single declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ActiveRootTowerNormalizationSplitting",
+  "date": "2026-10-26",
+  "group": "C1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Current blueprint det-thm-sf-ctf-stability-direct-images clause (3), inherited active-root normalization argument: Tag 05N9, lemma-colimit-category-fp-algebras (2),(3), and affine Tag 01ZM, lemma-descend-finite-presentation; parent steps 1--3.",
+   "via": [
+    "lem-sfb-active-root-tower-normalization-splitting",
+    "lem-sfb-snc-tame-root-etale-extension",
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ActiveRootSpecifiedSplittingDescent",
+  "file": "lean/Sheaf/RingTheory/ActiveRootSpecifiedSplittingDescent.lean",
+  "declaration": "Algebra.ActiveRootNormalization.activeRootTower_specified_splitting_descends",
+  "statement": "theorem activeRootTower_specified_splitting_descends {B A : Type u} [CommRing B] [CommRing A] [Algebra B A] {r s : ℕ} (t : Fin r → B) (active : Fin s → Fin r) (p : ℕ) (D : Under (CommRingCat.of (Localization.Away (∏ i, t i)))) (hD : D.hom.hom.FinitePresentation) (d : ℕ) (theta : extend D (activeColimit (A := A) t active p) ≅ diagonal (activeColimit (A := A) t active p).right d) : ∃ m : RootTowerIndex {n : ℕ+ | Nat.Coprime (n : ℕ) p}, ∃ theta_m : extend D ((activeDiagram (A := A) t active p).obj m) ≅ diagonal ((activeDiagram (A := A) t active p).obj m).right d, ∀ (x : D.right) (j : Fin d), (colimit.ι (activeDiagram (A := A) t active p) m).right (theta_m.hom.right (extendInclusion D _ x) j) = theta.hom.right (extendInclusion D _ x) j",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-878fc",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261026T081159-L-1853738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-878fc",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261026T081159-L-1853738",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs clone (identical); 22 relocated defs vs original (verbatim); 3 new sorry statements vs their nodes and Stacks 05N9/034M/0CBF; item node proof_deps vs Lean proof"
+ }
+}

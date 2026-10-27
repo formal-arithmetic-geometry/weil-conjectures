@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-projective-bundle-base-change",
+ "kind": "statement",
+ "title": "Projective-bundle morphisms are preserved by arbitrary base change",
+ "statement": "Let $f:X\\to S$ and $a:S^{\\prime}\\to S$ be morphisms of schemes [def-pc-scheme]. Suppose $f$ is projective in the projective-bundle convention [def-trf-projective-bundle-morphism]: for some finite-type quasi-coherent $\\mathcal O_S$-module $\\mathcal E$ [pqf-def-coherent], $X$ admits a closed immersion over $S$ into $\\mathbf P_S(\\mathcal E)=\\operatorname{Proj}_S(\\operatorname{Sym}_{\\mathcal O_S}\\mathcal E)$ [def-weil-closed-immersion]. Then $X\\times_SS^{\\prime}\\to S^{\\prime}$ [def-pc-fibre-product] is projective in the same convention. No Noetherianity, flatness, local freeness of $\\mathcal E$, or ampleness assumption on either base is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02V6, lemma-base-change-projective, projective case (not merely H-projective)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-projective-bundle-morphism",
+  "pqf-def-coherent",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose the finite-type quasi-coherent module $\\mathcal E$ and an $S$-closed immersion $i:X\\hookrightarrow P=\\mathbf P_S(\\mathcal E)$ supplied by the projective-bundle definition. Put $\\mathcal E^{\\prime}=a^*\\mathcal E$. Pullback preserves quasi-coherence and finite type by the two cited pullback statements, applied to the arbitrary scheme morphism $a$. Thus $P^{\\prime}=\\mathbf P_{S^{\\prime}}(\\mathcal E^{\\prime})$ is an allowed projective bundle for that definition.",
+   "uses": [
+    "def-trf-projective-bundle-morphism",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V6, lemma-base-change-projective, proof; details via Constructions Tag 01OA, section-projective-bundle, quotient-functor discussion following Definition 01OB."
+   }
+  },
+  {
+   "text": "We identify $P^{\\prime}$ with $Q=P\\times_S S^{\\prime}$ explicitly using the quotient classification, which is stated for every quasi-coherent module. Write $p:P\\to S$, $p^{\\prime}:P^{\\prime}\\to S^{\\prime}$ and $u:Q\\to P$, $v:Q\\to S^{\\prime}$. Pull back the universal quotient of $P$ along $u$. Via $(pu)^*\\mathcal E=(av)^*\\mathcal E\\cong v^*a^*\\mathcal E$, the resulting line quotient determines $b:Q\\to P^{\\prime}$ over $S^{\\prime}$. Conversely the universal quotient of $P^{\\prime}$, regarded through $(ap^{\\prime})^*\\mathcal E\\cong(p^{\\prime})^*a^*\\mathcal E$, determines an $S$-map $c:P^{\\prime}\\to P$. Its pair with $p^{\\prime}$ determines $t:P^{\\prime}\\to Q$. These quotients and their classification under arbitrary pullback are precisely those of the cited quotient-geometry statement; the composite-pullback identifications are those of module pullback.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "def-pc-module-pullback",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V6, lemma-base-change-projective, proof; details via Constructions Tag 01OA, section-projective-bundle, quotient-functor discussion following Definition 01OB."
+   }
+  },
+  {
+   "text": "The quotient classified by $bt:P^{\\prime}\\to P^{\\prime}$ is the original universal quotient on $P^{\\prime}$: first the definition of $b$ pulls back the quotient on $P$, and then the definition of $c$ identifies its pullback with that on $P^{\\prime}$. The natural bijection of the quotient classification therefore gives $bt=\\mathrm{id}_{P^{\\prime}}$. Likewise $cb:Q\\to P$ classifies the pullback by $u$ of the quotient on $P$, so $cb=u$. Also $p^{\\prime}b=v$. Hence the two projections of $tb$ are $u$ and $v$, and uniqueness in the fibre-product universal property gives $tb=\\mathrm{id}_Q$. Consequently $b$ is an isomorphism over $S^{\\prime}$.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V6, lemma-base-change-projective, proof; details via Constructions Tag 01OA, section-projective-bundle, quotient-functor discussion following Definition 01OB."
+   }
+  },
+  {
+   "text": "The square with horizontal arrows $X\\times_S S^{\\prime}\\to X$ and $Q\\to P$ and vertical arrows induced by $i$ is cartesian: a map into its pullback is exactly a pair of maps to $X$ and $S^{\\prime}$ with equal composites to $S$. Thus the map $j:X\\times_S S^{\\prime}\\to Q$ is a base change of $i$, and is a closed immersion by the cited closed-immersion base-change lemma. Composing with $b$ gives a closed immersion into $P^{\\prime}$: postcomposing with a scheme isomorphism preserves the closed-subspace condition and the surjectivity of the structure-sheaf map in the definition of closed immersion.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V6, lemma-base-change-projective, proof; details via Constructions Tag 01OA, section-projective-bundle, quotient-functor discussion following Definition 01OB."
+   }
+  },
+  {
+   "text": "The map $bj$ is over $S^{\\prime}$, and its target is $\\mathbf P_{S^{\\prime}}(a^*\\mathcal E)$ with $a^*\\mathcal E$ finite type and quasi-coherent by step 1. These are exactly the witness and closed embedding required for $X\\times_S S^{\\prime}\\to S^{\\prime}$ to be projective in the projective-bundle convention.",
+   "uses": [
+    "def-trf-projective-bundle-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V6, lemma-base-change-projective, proof; details via Constructions Tag 01OA, section-projective-bundle, quotient-functor discussion following Definition 01OB."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-closed-immersion",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-weil-pbc-module-pullback-quasi-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02V6, lemma-base-change-projective, proof; details via Constructions Tag 01OA, section-projective-bundle, quotient-functor discussion following Definition 01OB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a projective morphism defined by a closed immersion into the projective bundle of a finite type quasi coherent module is projective",
+   "results": "8 hits; AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange; AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.IsImmersion.isStableUnderBaseChange; AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: proper and closed-immersion stability, absolute Proj chart comparisons, and Weierstrass projective equations do not state arbitrary finite-type quasi-coherent projective-bundle projectivity after base change."
+  },
+  {
+   "tool": "grep",
+   "query": "IsProjective|projective.*base.change|projectiveBundle.*pullback|ProjectiveBundle.*baseChange",
+   "results": "25 hits; Mathlib/Probability/Process/FiniteDimensionalLaws.lean; Mathlib/Probability/Process/FiniteDimensionalLaws.lean; Mathlib/Probability/Process/FiniteDimensionalLaws.lean; Mathlib/Probability/Process/FiniteDimensionalLaws.lean; Mathlib/Probability/Process/FiniteDimensionalLaws.lean; Mathlib/Probability/ProductMeasure.lean; Mathlib/Probability/ProductMeasure.lean; Mathlib/Probability/ProductMeasure.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: proper and closed-immersion stability, absolute Proj chart comparisons, and Weierstrass projective equations do not state arbitrary finite-type quasi-coherent projective-bundle projectivity after base change."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective morphisms defined using projective bundles are preserved by arbitrary base change",
+   "results": "8 hits; AlgebraicGeometry.isAffineHom_isStableUnderBaseChange; CategoryTheory.MorphismProperty.instIsStableUnderBaseChangePullbacks; RingHom.IsStableUnderBaseChange; AlgebraicGeometry.IsSeparated.isStableUnderBaseChange; AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.universallyClosed_isStableUnderBaseChange; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: proper and closed-immersion stability, absolute Proj chart comparisons, and Weierstrass projective equations do not state arbitrary finite-type quasi-coherent projective-bundle projectivity after base change."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\", \"baseChange\"",
+   "results": "12 hits; WeierstrassCurve.Projective.baseChange; WeierstrassCurve.Projective.Equation.baseChange; WeierstrassCurve.Projective.baseChange_equation; WeierstrassCurve.Projective.baseChange_nonsingular; WeierstrassCurve.Projective.map_baseChange; WeierstrassCurve.Projective.baseChange_polynomial; WeierstrassCurve.Projective.baseChange_polynomialX; WeierstrassCurve.Projective.baseChange_polynomialY",
+   "date": "2026-10-23",
+   "verdict": "no match: proper and closed-immersion stability, absolute Proj chart comparisons, and Weierstrass projective equations do not state arbitrary finite-type quasi-coherent projective-bundle projectivity after base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative projective bundles of finite type quasi coherent sheaves commute with arbitrary change of the base scheme",
+   "results": "8 hits; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity",
+   "date": "2026-10-23",
+   "verdict": "no match: proper and closed-immersion stability, absolute Proj chart comparisons, and Weierstrass projective equations do not state arbitrary finite-type quasi-coherent projective-bundle projectivity after base change."
+  },
+  {
+   "tool": "grep",
+   "query": "IsProjective|projective.*base.change|projectiveBundle.*pullback|ProjectiveBundle.*baseChange",
+   "results": "1 hits; Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: proper and closed-immersion stability, absolute Proj chart comparisons, and Weierstrass projective equations do not state arbitrary finite-type quasi-coherent projective-bundle projectivity after base change."
+  },
+  {
+   "tool": "grep",
+   "query": "IsProjective|projectiveBundle|ProjectiveBundle|projective.*base.change",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern other morphism properties, absolute Proj, module presentations or Weierstrass equations; none states projective-bundle projectivity under arbitrary base change."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of a projective morphism of schemes is projective using finite type quasi coherent projective bundles",
+   "results": "8 hits: AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern other morphism properties, absolute Proj, module presentations or Weierstrass equations; none states projective-bundle projectivity under arbitrary base change."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\", \"baseChange\"",
+   "results": "12 hits: WeierstrassCurve.Projective.baseChange, WeierstrassCurve.Projective.Equation.baseChange, WeierstrassCurve.Projective.baseChange_equation, WeierstrassCurve.Projective.baseChange_nonsingular, WeierstrassCurve.Projective.map_baseChange, WeierstrassCurve.Projective.baseChange_polynomial, WeierstrassCurve.Projective.baseChange_polynomialX, WeierstrassCurve.Projective.baseChange_polynomialY",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern other morphism properties, absolute Proj, module presentations or Weierstrass equations; none states projective-bundle projectivity under arbitrary base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Arbitrary base change of a projective morphism admitting a closed immersion into the projective bundle of a finite type quasi coherent module remains projective",
+   "results": "8 hits: AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern other morphism properties, absolute Proj, module presentations or Weierstrass equations; none states projective-bundle projectivity under arbitrary base change."
+  },
+  {
+   "tool": "grep",
+   "query": "projective|Projective",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern other morphism properties, absolute Proj, module presentations or Weierstrass equations; none states projective-bundle projectivity under arbitrary base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projectivization of an arbitrary quasi coherent sheaf represents invertible quotient sheaves and commutes with change of base",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.presentation, AlgebraicGeometry.Proj.toSheafedSpace, AlgebraicGeometry.Proj.ext, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, SheafOfModules.QuasicoherentData.I, AlgebraicGeometry.Proj.ext_iff, SheafOfModules.Presentation.mapGenerators, Module.Grassmannian.projective_quotient",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern other morphism properties, absolute Proj, module presentations or Weierstrass equations; none states projective-bundle projectivity under arbitrary base change."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-birational-base-change-geometry",
+  "date": "2026-10-23",
+  "group": "Q139"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed p.149: base modification of each marked nodal curve in the successive projective modifications. The projective-bundle embedding must survive base change, not only an embedding into a fixed projective space.",
+   "via": [
+    "lem-sfb-nodal-birational-base-change-geometry",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-bundle-base-change",
+  "worker": "stage1",
+  "summary": "Expanded the omitted projective-bundle base-change identification in Stacks 02V6 by constructing inverse maps from the existing natural line-quotient classification (01OA). Reused both module-pullback permanence nodes and the existing closed-immersion base-change lemma; no new nodes. Preserved all mathematical hypotheses and the projective-bundle convention. Corrected literal doubled TeX escapes and recovered the imported blueprint ancestor from the existing created.item chain.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images: historical proof (3), alteration reduction through ILO X 2.2; projectivity of the base modification of each marked nodal curve, the exact prerequisite identified by the parent nodal-birational-base-change-geometry split. Current latest proof (3) compresses the direct-image route through the existing direct-image theorems.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic Zariski module-pullback permanence used only to show the new projective-bundle witness is quasi-coherent; the six-functor unit has no replacement for this geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-finite-type",
+    "why": "Generic finite-type module-pullback permanence for the bundle witness; this is a geometric prerequisite of the nodal base modification."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Generic quotient-functor description of relative symmetric Proj for arbitrary quasi-coherent modules, used to exhibit the bundle base-change isomorphism; no six-functor result is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic closed-immersion base-change stability to retain the closed embedding after base modification."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-7a9b4d0d2",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-7a9b4d0d2 (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery creates no new nodes. The statement matches Stacks morphisms.tex Def 01W8(1) (l.10487) and Lemma 02V6 (l.10670) for arbitrary a:S'->S in the projective-bundle convention of def-trf-projective-bundle-morphism, with no hypothesis added or dropped. Step 1: the module-pullback quasi-coherent (01BG) and finite-type (01B6) nodes hold for any scheme morphism, so a^*E is an allowed witness. Step 2: b:Q->P', c:P'->P and t=(c,p') are built from lem-trf-projective-bundle-quotient-geometry, which classifies invertible quotients for any quasi-coherent E and is natural under arbitrary pullback; the (av)^* ≅ v^*a^* comparisons come from def-pc-module-pullback. Step 3: bt=id and cb=u follow from injectivity of the classification, and tb=id from fibre-product uniqueness; the step is correctly marked elementary. Step 4: pasting gives X×_S S' as the base change of i along u, then closed-immersion base change (Mathlib leaf) and composition with the isomorphism b. Step 5 is the definition instance. Edge cases checked: E=0, S' empty, E=~(Z/2) base-changed to F_2 and to Q (non-flat, torsion), and invertible E. Duplicate search with rg -L found no node stating the item: the H-projective permanence node, the flat-only relative-Proj functoriality node and the locally free frame coherence node all differ. The parent step in nodal-birational-base-change-geometry uses the item exactly as stated. The blueprint from-chain to det-thm-sf-ctf-stability-direct-images is valid. The four declared tool_uses are generic scheme geometry and are accepted. Batch 5: the newly cited lem-trf-projective-bundle-quotient-geometry is Constructions 01OA/01OB Proj quotient geometry. Its full 283-node closure contains only generic Proj and algebraic-space chart nodes, with no assumption leaf and no trace-formula or Poincaré-duality theorem. It is therefore outside the assumed statements and accepted. No SGA anywhere. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleBaseChange",
+  "declaration": "AlgebraicGeometry.isProjectiveBundle_pullback_snd",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundleBaseChange.lean",
+  "statement": "theorem isProjectiveBundle_pullback_snd {X S S' : Scheme.{u}} (f : X ⟶ S) (a : S' ⟶ S) (hf : IsProjectiveBundle f) : IsProjectiveBundle (pullback.snd f a)",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab2b5eebc",
+  "group": "Q52",
+  "result": "pass",
+  "note": "isProjectiveBundle_pullback_snd {X S S' : Scheme.{u}} (f) (a) (hf : IsProjectiveBundle f) : IsProjectiveBundle (pullback.snd f a) matches Stacks Def 01W8(1) and Lemma 02V6 clause by clause. The predicate opened live is: exists E quasi-coherent of finite type, a closed immersion into relProj of Sym E, and i ≫ relProjHom = f. No extra hypotheses; the single universe is forced by pullback and the predicate; HasPullbacks comes from the Pullbacks import. lean.statement is verbatim; all stmt_dep and proof_dep modules exist live; the node differs from live only by the lean record. Edge cases (empty schemes, E=0, non-flat base change, identity) are covered. No duplicate in Sheaf/WeilConjectures/Mathlib, and the live item has no lean record. sorry-only proof, docstrings carry the source place, blueprint id and the 5 proof steps, report sections are present. No changes made, so no compile."
+ }
+}

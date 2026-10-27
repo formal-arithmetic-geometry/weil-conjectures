@@ -1,0 +1,371 @@
+{
+ "id": "lem-sfb-invariant-normalized-blowup-domination",
+ "kind": "statement",
+ "title": "Invariant normalized blowup dominating an orbit of blowups",
+ "statement": "Let $k$ be a field and $S_0$ a normal integral projective finite-type $k$-scheme. Let a finite group $H$ act compatibly on $S_0$ and $k$. Let $I\\subset\\mathcal O_{S_0}$ be a finite-type quasi-coherent ideal equal to $\\mathcal O_{S_0}$ on a dense open $U_0$. Put $U=\\bigcap_{h\\in H}h(U_0)$, $J=\\prod_{h\\in H}h(I)$, $V=\\operatorname{Bl}_I(S_0)$, $B=\\operatorname{Bl}_J(S_0)$, and let $\\nu:S=B^\\nu\\to B$ be normalization in the function field. Here $h(I)$ is the ideal transported by the automorphism $h$. The scheme $B$ is integral, its map to $S_0$ is projective in the projective-bundle sense, and it canonically dominates every $\\operatorname{Bl}_{h(I)}(S_0)$. The map $\\nu$ is finite and birational. The scheme $S$ is normal integral projective of finite type over $k$; $S\\to S_0$ is H-projective and birational, identifies $k(S)=k(S_0)$, and is an isomorphism over $U$. There are compatible $H$-actions on $B$ and $S$ for which $S\\to B\\to S_0$ is equivariant. In particular $S$ has an $S_0$-morphism to $V$. The open $U$ is invariant and dense. Birational means an isomorphism between dense open subschemes.\n\nAll group actions are by automorphisms, may be nonfaithful, and commute with the displayed maps; they may act on the ground field. H-projective means admitting a closed immersion into a finite-dimensional projective space over the target, independently of the name of the acting group. Normal means that all local rings are integrally closed domains. Schematic closure is the closed subscheme defined by the kernel of restriction of functions to the specified subscheme.\n\nNotions used: [def-weil-field], [def-pc-integral-scheme], [def-kun-projective], [def-weil-finite-type-morphism], [pqf-def-coherent], [def-nagata-global-blowup], [def-sc-normalization], [def-sc-function-field], [def-weil-finite-integral-morphism], [def-trf-projective-bundle-morphism], [def-weil-closed-immersion]. Ideal sheaves and their products use [def-sbc-closed-immersion-ideal-sheaf]. Ideal sheaves and their products use [def-sbc-ideal-sheaf-powers].",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 02ND (lemma-blow-up-integral-scheme), 02NS (lemma-blowing-up-projective); morphisms.tex Tags 035S (lemma-nagata-normalization), 087S (lemma-projective-over-quasi-projective-is-H-projective). Combine product-ideal common domination with the invariant Rees algebra and functorial normalization, as in de Jong (1997) §2.10."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-kun-projective",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-nagata-global-blowup",
+  "def-sc-normalization",
+  "def-sc-function-field",
+  "def-weil-finite-integral-morphism",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers"
+ ],
+ "proof": [
+  {
+   "text": "Every translate $h(U_0)$ is a dense open of the integral scheme $S_0$. Their finite intersection $U$ contains the generic point and is dense; $g(U)=\\bigcap_h(gh)(U_0)=U$. By the affine-local definition of ideal products, $J$ is quasi-coherent: locally its generators are the finitely many products of generators of the finitely many factors. Thus it is of finite type. On $U$ every factor is the unit ideal, so $J|_U=\\mathcal O_U$ and $J$ is nonzero. Transport preserves ideal multiplication, and reindexing $h\\mapsto gh$ gives $g(J)=J$. No faithfulness or $k$-linearity is used.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-sbc-ideal-sheaf-powers",
+    "pqf-def-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 02ND, 02NS: verification of the nonzero, quasi-coherent, finite-type ideal hypotheses"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-integral-blowup-projective-geometry] to the nonzero finite-type quasi-coherent ideal $J$ on the integral scheme $S_0$. It gives that $B$ is integral and $b:B\\to S_0$ is projective in the projective-bundle sense. By [lem-trf-projective-bundle-proper], $b$ is proper, hence of finite type by [def-weil-proper-morphism]. Since $S_0\\to\\operatorname{Spec}k$ is of finite type, [lem-sfb-finite-type-composition-base-change](1) shows that $B$ is of finite type over $k$.",
+   "uses": [
+    "lem-sfb-integral-blowup-projective-geometry",
+    "lem-trf-projective-bundle-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 02ND (lemma-blow-up-integral-scheme), 02NS (lemma-blowing-up-projective); Morphisms Tag 01T3 (lemma-composition-finite-type)"
+   }
+  },
+  {
+   "text": "Because $J|_U=\\mathcal O_U$, the open $U$ lies in $S_0\\setminus V(J)$. Restrict [thm-nagata-global-blowup-complement] further to $U$ to identify $b^{-1}(U)\\to U$ with the identity. This is a nonempty open in the integral scheme $B$, hence dense. Thus $b$ is birational in the stated dense-open sense. Computing rational functions on this common dense open, using [def-sc-function-field], identifies $k(B)=k(S_0)$ canonically; call this field $K$.",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "def-pc-integral-scheme",
+    "def-sc-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0804 (lemma-blowing-up-affine), complement assertion preceding Tag 0806"
+   }
+  },
+  {
+   "text": "Fix $h\\in H$ and put $J_h=\\prod_{g\\ne h}g(I)$, taking the empty product to be the unit ideal. Then $J=h(I)J_h$. Extension of ideals along $b$ preserves this identity: locally both sides are generated by the same products of images of sections. By [thm-nagata-blowup-principalizes-center], $J\\mathcal O_B$ is an effective Cartier ideal. Apply [lemma-nagata-invertible-product-factor] on $B$ to $(h(I)\\mathcal O_B)(J_h\\mathcal O_B)$: each factor is effective Cartier and hence invertible. The universal property [thm-nagata-blowup-universal-property] now gives the unique $S_0$-morphism $d_h:B\\to\\operatorname{Bl}_{h(I)}S_0$, using the canonical quotient $b^*h(I)\\twoheadrightarrow h(I)\\mathcal O_B$. This quotient is the image inside $\\mathcal O_B$, so there is no choice of a line quotient. In particular $d_1$ maps to $V$.",
+   "uses": [
+    "thm-nagata-blowup-principalizes-center",
+    "lemma-nagata-invertible-product-factor",
+    "thm-nagata-blowup-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0806 (lemma-universal-property-blowing-up), applied to each factor after principalization; current blueprint lemma-nagata-invertible-product-factor"
+   }
+  },
+  {
+   "text": "For $h\\in H$, regard $B$ as an $S_0$-scheme by $h\\circ b$. Since $h(J)=J$, the extended ideal of $J$ for this map is again $J\\mathcal O_B$, invertible by [thm-nagata-blowup-principalizes-center]. Apply [thm-nagata-blowup-universal-property] with the canonical image quotient to obtain a unique map $\\beta_h:B\\to B$ satisfying $b\\beta_h=hb$. The composites $\\beta_g\\beta_h$ and $\\beta_{gh}$ are maps over the same map $ghb$ and induce the same canonical quotient onto $J\\mathcal O_B$; uniqueness gives $\\beta_g\\beta_h=\\beta_{gh}$. Likewise $\\beta_1=1$, so $\\beta_{h^{-1}}$ is the inverse of $\\beta_h$. These maps form the required action on $B$. Their compatibility with the original action on $k$ follows by composing $b\\beta_h=hb$ with the structure map of $S_0$.",
+   "uses": [
+    "thm-nagata-blowup-principalizes-center",
+    "thm-nagata-blowup-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0806 (lemma-universal-property-blowing-up): uniqueness applied to automorphisms preserving the centre"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-normalization-model-functoriality] with $V=B$, $H=k(B)=K$ (the letter $H$ in that node denotes a field), and the degree-one finite extension $M=K$. Its normalization is exactly $S=B^\\nu$ of [def-sc-normalization]. It is normal integral of finite type over $k$, and $\\nu$ is finite with $k(S)=K$. The theorem [lem-sc-normalization-exists] applied to the integral finite-type $k$-scheme $B$ gives birationality of $\\nu$. The open $b^{-1}(U)$ is normal because it is isomorphic to the open $U$ of the normal scheme $S_0$. Consequently [lem-sc-normalization-over-normal-locus] gives that $\\nu$ is an isomorphism over $b^{-1}(U)$. Thus $S\\to S_0$ is an isomorphism over $U$, and both inverse images are nonempty dense opens of integral schemes. This proves the claimed birationality and identifies $k(S)=k(S_0)$.",
+   "uses": [
+    "lem-sfb-finite-normalization-model-functoriality",
+    "def-sc-normalization",
+    "lem-sc-normalization-exists",
+    "lem-sc-normalization-over-normal-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035S (lemma-nagata-normalization), 035Q (lemma-normalization-normal), 035P (lemma-description-normalization)"
+   }
+  },
+  {
+   "text": "Use the isomorphism-functoriality clause of [lem-sfb-finite-normalization-model-functoriality] for the action $\\beta_h$ on $B$ and the compatible left field action $A_h=(\\beta_{h^{-1}})^*$ on $K=k(B)$. It supplies a unique semilinear lift to $S$, preserving identities and composition. Hence these lifts form an $H$-action and $\\nu$ is equivariant. The preceding action on $B$ makes $b$ equivariant, so the composite is equivariant as well. Compatibility with the action on $k$ is included in that clause; no assumption that $h$ fixes $k$ or acts faithfully is needed. Finally $d_1\\circ\\nu:S\\to V$ is an $S_0$-morphism because both $d_1$ and $\nu$ are maps over $S_0$.",
+   "uses": [
+    "lem-sfb-finite-normalization-model-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035Q (lemma-normalization-normal); Algebra Tags 034L (lemma-integral-closure-in-normal), 0307 (lemma-integral-closure-localize): semilinear functoriality"
+   }
+  },
+  {
+   "text": "The given projective embedding $S_0\\hookrightarrow\\mathbf P^n_k$ supplies an ample invertible sheaf by [lem-weil-pbc-projective-ample-invertible]. Apply [lem-trf-projective-bundle-to-h-projective] to $b$, which is projective in the projective-bundle sense by Step 2: thus $b$ is H-projective. Compose with the given H-projective structure map of $S_0$ using [lem-trf-h-projective-composition]; $B/k$ is H-projective. Applying [lem-weil-pbc-projective-ample-invertible] again, now to this embedding of $B$, gives an ample invertible sheaf on $B$. Since $\\nu$ is finite, [lem-trf-finite-projective-bundle] makes it projective in the projective-bundle sense, and [lem-trf-projective-bundle-to-h-projective] makes it H-projective. Two further applications of [lem-trf-h-projective-composition] give that $S\\to S_0$ and $S\\to\\operatorname{Spec}k$ are H-projective. Together with Steps 1--7, this proves every assertion, with H-projective understood as the finite-projective-space convention, not an equivariant embedding condition.",
+   "uses": [
+    "lem-weil-pbc-projective-ample-invertible",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-trf-h-projective-composition",
+    "lem-trf-finite-projective-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 087S (lemma-projective-over-quasi-projective-is-H-projective), 01WE (lemma-H-projective-composition), 0B3I (lemma-finite-projective)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-sbc-ideal-sheaf-powers",
+  "pqf-def-coherent",
+  "lem-sfb-integral-blowup-projective-geometry",
+  "lem-trf-projective-bundle-proper",
+  "def-weil-proper-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "thm-nagata-global-blowup-complement",
+  "def-sc-function-field",
+  "thm-nagata-blowup-principalizes-center",
+  "lemma-nagata-invertible-product-factor",
+  "thm-nagata-blowup-universal-property",
+  "lem-sfb-finite-normalization-model-functoriality",
+  "def-sc-normalization",
+  "lem-sc-normalization-exists",
+  "lem-sc-normalization-over-normal-locus",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-h-projective-composition",
+  "lem-trf-finite-projective-bundle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Synthesis of Tags 02ND, 02NS, 0806 with Morphisms 035S, 035Q, 087S, 01WE and existing DAG lemmas; orbit-product and uniqueness assembly written by NV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Bb]low[Uu]p|[Bb]lowup|[Rr]ees[Aa]lgebra",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant common domination by normalized blowup of product of translated ideals",
+   "results": "8 hits: normalizedFactorsEquivOfQuotEquiv, normalizedFactorsEquivOfQuotEquiv_symm, idealFactorsEquivOfQuotEquiv_mem_normalizedFactors_of_mem_normalizedFactors, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, Finsupp.prod_equivMapDomain, normalizedFactorsEquivOfQuotEquiv_emultiplicity_eq_emultiplicity, Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow, IsDedekindDomain.quotientEquivPiOfProdEq",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization",
+   "results": "12 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary blowup of a normal projective variety can be dominated by a normal equivariant projective modification using the orbit product of its ideal.",
+   "results": "8 hits: AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Scheme.Hom.normalizationDesc",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a finite semilinear group action on a normal projective scheme and an ideal, normalization of the blowup in the product of its translates is an equivariant projective birational common domination.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup",
+   "results": "6 hits: Mathlib/Algebra/HierarchyDesign.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean, Mathlib/Tactic/ITauto.lean, Mathlib/Tactic/Linarith/Frontend.lean, Mathlib/Tactic/GRewrite/Core.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not supply this geometric construction with its equivariance and generic identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|ReesAlgebra",
+   "results": "15 hits: Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean, Mathlib/Tactic/ITauto.lean, Mathlib/Algebra/HierarchyDesign.lean, Mathlib/Tactic/GRewrite/Core.lean, Mathlib/Tactic/Linarith/Frontend.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: relative normalization, invariant-ring and Rees-algebra hits do not state the orbit-product blowup construction or all its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*blowup|blowup.*normaliz|invariant.*blowup",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: relative normalization, invariant-ring and Rees-algebra hits do not state the orbit-product blowup construction or all its clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowup of a product of orbit ideals gives a normal equivariant projective birational modification.",
+   "results": "8 hits: Ideal.idealProdEquiv, Ideal.idealProdEquiv_symm_apply, ProjectiveSpectrum.zeroLocus_mul_ideal, ProjectiveSpectrum.zeroLocus_mul_homogeneousIdeal, Ideal.piQuotEquiv, AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso, Algebra.IsInvariant.orbit_eq_primesOver, AlgebraicGeometry.Proj.pullbackAwayιIso",
+   "date": "2026-10-23",
+   "verdict": "no match: relative normalization, invariant-ring and Rees-algebra hits do not state the orbit-product blowup construction or all its clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization",
+   "results": "12 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization",
+   "date": "2026-10-23",
+   "verdict": "no match: relative normalization, invariant-ring and Rees-algebra hits do not state the orbit-product blowup construction or all its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an invariant ideal the group action lifts to its blowup, then functorially to normalization.",
+   "results": "8 hits: Ideal.relNorm_smul, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, Ideal.Quotient.normal, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc",
+   "date": "2026-10-23",
+   "verdict": "no match: relative normalization, invariant-ring and Rees-algebra hits do not state the orbit-product blowup construction or all its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group action on a projective integral scheme lifts to the normalization of the blowup of the product of translated ideals.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalization",
+   "date": "2026-10-23",
+   "verdict": "no match: relative normalization, invariant-ring and Rees-algebra hits do not state the orbit-product blowup construction or all its clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-flat-curve-preparation",
+  "date": "2026-10-22",
+  "group": "Q123"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong, Families of curves and alterations (1997), §§2.7--2.10, printed pp.603--605: invariant purely inseparable generic normalization, equivariant Chow preparation and simultaneous flattening. The marking flattening is also ILO X Theorem 3.4 Step 2, p.160. Retained flat-curve preparation Step 9: product of translated ideals, Rees action, integral blowup charts, finite normalization and global projectivity.",
+   "via": [
+    "lem-sfb-equivariant-flat-curve-preparation",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-invariant-normalized-blowup-domination",
+  "worker": "stage1",
+  "summary": "NV: retained the statement and split it into orbit-ideal preparation, integral finite-type blowup, dense-open comparison, factorwise universal domination, group-law lifts, finite normalization, semilinear functoriality, and separate conversion to H-projectivity. Reused existing DAG lemmas; no new nodes. Checked source tags, all cited statements, and boundary cases. No Lean writing or compilation.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong, Families of curves and alterations (1997), §§2.7--2.10, printed pp.603--605: invariant purely inseparable generic normalization, equivariant Chow preparation and simultaneous flattening. The marking flattening is also ILO X Theorem 3.4 Step 2, p.160. Retained flat-curve preparation Step 9: product of translated ideals, Rees action, integral blowup charts, finite normalization and global projectivity.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Generic scheme/blowup/normalization/projectivity tool used with its stated hypotheses; the item retains the orbit-product normalized-blowup route and no node of its unit supplies this general assertion."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme/blowup/normalization/projectivity tool used with its stated hypotheses; the item retains the orbit-product normalized-blowup route and no node of its unit supplies this general assertion."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic scheme/blowup/normalization/projectivity tool used with its stated hypotheses; the item retains the orbit-product normalized-blowup route and no node of its unit supplies this general assertion."
+   },
+   {
+    "node": "thm-nagata-blowup-principalizes-center",
+    "why": "Generic scheme/blowup/normalization/projectivity tool used with its stated hypotheses; the item retains the orbit-product normalized-blowup route and no node of its unit supplies this general assertion."
+   },
+   {
+    "node": "lemma-nagata-invertible-product-factor",
+    "why": "Generic scheme/blowup/normalization/projectivity tool used with its stated hypotheses; the item retains the orbit-product normalized-blowup route and no node of its unit supplies this general assertion."
+   },
+   {
+    "node": "thm-nagata-blowup-universal-property",
+    "why": "Generic scheme/blowup/normalization/projectivity tool used with its stated hypotheses; the item retains the orbit-product normalized-blowup route and no node of its unit supplies this general assertion."
+   },
+   {
+    "node": "lem-sc-normalization-exists",
+    "why": "Generic scheme/blowup/normalization/projectivity tool used with its stated hypotheses; the item retains the orbit-product normalized-blowup route and no node of its unit supplies this general assertion."
+   },
+   {
+    "node": "lem-sc-normalization-over-normal-locus",
+    "why": "Generic scheme/blowup/normalization/projectivity tool used with its stated hypotheses; the item retains the orbit-product normalized-blowup route and no node of its unit supplies this general assertion."
+   },
+   {
+    "node": "lem-weil-pbc-projective-ample-invertible",
+    "why": "Generic scheme/blowup/normalization/projectivity tool used with its stated hypotheses; the item retains the orbit-product normalized-blowup route and no node of its unit supplies this general assertion."
+   },
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Generic scheme/blowup/normalization/projectivity tool used with its stated hypotheses; the item retains the orbit-product normalized-blowup route and no node of its unit supplies this general assertion."
+   },
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Generic scheme/blowup/normalization/projectivity tool used with its stated hypotheses; the item retains the orbit-product normalized-blowup route and no node of its unit supplies this general assertion."
+   },
+   {
+    "node": "lem-trf-finite-projective-bundle",
+    "why": "Generic scheme/blowup/normalization/projectivity tool used with its stated hypotheses; the item retains the orbit-product normalized-blowup route and no node of its unit supplies this general assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-proper",
+  "lem-sfb-finite-type-composition-base-change",
+  "thm-nagata-global-blowup-complement",
+  "thm-nagata-blowup-principalizes-center",
+  "lemma-nagata-invertible-product-factor",
+  "thm-nagata-blowup-universal-property",
+  "lem-sc-normalization-exists",
+  "lem-sc-normalization-over-normal-locus",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-h-projective-composition",
+  "lem-trf-finite-projective-bundle"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-a613e6e3c",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-a613e6e3c (reviewer sub-agent of L); spot-checked: Read the item in full (statement unchanged, 8-step proof, no new nodes) together with the statement and blueprint_update of every cited node. Step 1 (U invariant and dense; J quasi-coherent, finite type, invariant and nonzero) is elementary, as marked. Step 2: integral-blowup-projective-geometry is applied to a nonzero finite-type ideal on integral S_0, then projective ⇒ proper ⇒ finite type, then composition over k. Step 3: the blowup complement (taken from its blueprint_update) gives an isomorphism over U; def-sc-function-field covers any integral scheme. Step 4: principalization, then the product-factor lemma, then the universal property (blueprint_update text = Stacks 0806, divisors.tex l.8434) give d_h, with d_1:B→V. Step 5: J is invariant, so the extension of J along h∘b is J·O_B; uniqueness then gives β_gβ_h=β_{gh} and β_1=1. Step 6: finite-normalization-model with M=H=K, identified with def-sc-normalization by def-fin-normalization-extension; normalization-exists gives birationality; normalization over the normal locus applies because b^{-1}(U)≅U is normal. Step 7: the semilinear functoriality clause (no faithfulness or trivial-k assumption) gives the action on S. Step 8: ample sheaf on S_0, then 087S for b, 01WE for B/k, ample sheaf on B, 0B3I plus 087S for ν, then compositions; hypotheses checked. Edge cases checked: trivial H, I=O, I invertible, nonfaithful or semilinear action, dim 0, imperfect k. No duplicate: lem-per-excellent-quasiprojective-normalized-blowup covers only the non-equivariant geometry, and no new nodes are made. Batch-5 flags: integral-blowup-projective-geometry reaches only the definition def-trf-projective-bundle-morphism; trf projective-bundle-proper (01WC), to-h-projective (087S), h-projective-composition (01WE) and finite-projective-bundle (0B3I) are general EGA II / Stacks facts, not steps of the trace formula or Poincaré duality, so accepted. All 12 declared tool uses accepted as generic black boxes. No SGA cited. Maintainer note: base nodes thm-nagata-blowup-universal-property (self-referential stored statement) and thm-nagata-global-blowup-complement (missing setting) should adopt their blueprint_update statements."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvariantNormalizedBlowupDomination",
+  "declaration": "AlgebraicGeometry.exists_invariant_normalized_blowup_domination",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvariantNormalizedBlowupDomination.lean",
+  "statement": "theorem exists_invariant_normalized_blowup_domination (k : Type u) [Field k] (S₀ : Scheme.{u}) (p : S₀ ⟶ Spec (.of k)) [IsIntegral S₀] [IsHProjective p] [LocallyOfFiniteType p] [QuasiCompact p] (hnormal : ∀ x : S₀, IsDomain (S₀.presheaf.stalk x) ∧ IsIntegrallyClosed (S₀.presheaf.stalk x)) (H : Type v) [Group H] [Fintype H] (σk : H →* (k ≃+* k)) (σ₀ : H →* Aut S₀) (hsemilinear : ∀ h : H, (σ₀ h).hom ≫ p = p ≫ Spec.map (CommRingCat.ofHom (σk h⁻¹).toRingHom)) (I : S₀.IdealSheafData) (hfinite : ∀ W : S₀.affineOpens, (I.ideal W).FG) (U₀ : S₀.Opens) (hdense : Dense (U₀ : Set S₀)) (hunit : I.comap U₀.ι = ⊤) : ∃ (U : S₀.Opens) (J : S₀.IdealSheafData), U = (⨅ h : H, (σ₀ h).inv ⁻¹ᵁ U₀) ∧ J = (∏ h : H, I.comap (σ₀ h).inv) ∧ Dense (U : Set S₀) ∧ (∀ h : H, (σ₀ h).hom '' (U : Set S₀) = (U : Set S₀)) ∧ IsProjectiveBundle J.blowupMap ∧ (∀ h : H, ∃! d : J.blowup ⟶ (I.comap (σ₀ h).inv).blowup, d ≫ (I.comap (σ₀ h).inv).blowupMap = J.blowupMap) ∧ ∃ (hB : IsIntegral J.blowup) (S : Scheme.{u}) (_ : IsIntegral S) (ν : S ⟶ J.blowup) (e : S ≅ @Scheme.normalization J.blowup hB), e.hom ≫ @Scheme.fromNormalization J.blowup hB = ν ∧ IsFinite ν ∧ (∃ W : J.blowup.Opens, Dense (W : Set J.blowup) ∧ Dense ((ν ⁻¹ᵁ W : S.Opens) : Set S) ∧ IsIso (ν ∣_ W)) ∧ (∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) ∧ IsHProjective (ν ≫ J.blowupMap ≫ p) ∧ LocallyOfFiniteType (ν ≫ J.blowupMap ≫ p) ∧ QuasiCompact (ν ≫ J.blowupMap ≫ p) ∧ IsHProjective (ν ≫ J.blowupMap) ∧ IsIso ((ν ≫ J.blowupMap) ∣_ U) ∧ Dense (((ν ≫ J.blowupMap) ⁻¹ᵁ U : S.Opens) : Set S) ∧ (∃ hη : (ν ≫ J.blowupMap) (genericPoint S) = genericPoint S₀, Function.Bijective (S₀.presheaf.stalkSpecializes (specializes_of_eq hη) ≫ (ν ≫ J.blowupMap).stalkMap (genericPoint S) : S₀.functionField ⟶ S.functionField)) ∧ (∃ (σB : H →* Aut J.blowup) (σS : H →* Aut S), (∀ h : H, (σB h).hom ≫ J.blowupMap = J.blowupMap ≫ (σ₀ h).hom) ∧ (∀ h : H, (σS h).hom ≫ ν = ν ≫ (σB h).hom)) ∧ ∃ d : S ⟶ I.blowup, d ≫ I.blowupMap = ν ≫ J.blowupMap",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b39f7bf4e",
+  "group": "NG",
+  "result": "pass",
+  "note": "Read the item node, all 13 def stmt_deps and their recorded declarations (blowup/blowupMap Gluing:255-260, Scheme.normalization Normalization:179-190, Mathlib IdealSheafData comap/ideal_mul/ideal_top, IsProjectiveBundle, IsHProjective), report and module. lean.statement verbatim; node diff vs live = lean field only; single new file. Every hypothesis/conclusion matched: semilinear σk h⁻¹ convention consistent (= landed EquivariantFlatCurvePreparation); h(I)=I.comap (σ₀ h).inv and U=⨅ preimages under h⁻¹ consistent; unit ideal ⊤ correct; ∃! domination true (B reduced, target separated); normalization pinned to def-sc-normalization via e.hom ≫ fromNormalization = ν; finite+dense-open birational ν; normal integral H-projective finite type S/k; iso over U, dense preimage; canonical function-field stalk map bijective; equivariant σB, σS; S→V over S₀; U dense and invariant. Edge cases (trivial/nonfaithful H, I=O, invertible I, dim 0, universes u/v independent) fine. No hollow defs, docstrings with source and blueprint and 8 proof steps, sorry only, no new nodes. No compile (no change). No findings."
+ }
+}

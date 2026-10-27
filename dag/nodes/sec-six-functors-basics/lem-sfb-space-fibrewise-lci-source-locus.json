@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-space-fibrewise-lci-source-locus",
+ "kind": "statement",
+ "title": "Fibrewise local-complete-intersection source locus for a flat lfp algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $f:X\\to S$ be a flat locally finitely presented morphism of algebraic spaces [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Flatness and local finite presentation are tested on etale scheme charts using [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Fibre products are those of [lem-trf-space-fibre-products-etale-covers]. Open subspaces and underlying point topologies are [def-a1-space-open-subspace, def-a1-space-point-topology]. Over a field $k$, a scheme is a local complete intersection if it has an affine open cover by spectra of finitely generated local-complete-intersection $k$-algebras [def-weil-pbc-complete-intersection-over-field]; for an algebraic space this is tested on etale scheme charts. There is a largest open subspace $U_f\\subseteq X$ such that every fibre of $U_f\\to S$ is a local complete intersection over its residue base field. For each representable etale scheme chart $a:V\\to X$, the inverse image of $U_f$ in $V$ is the fibrewise complete-intersection locus $V_{f\\circ a}$ of [lem-trf-syntomic-locus-base-change]. For every scheme morphism $g:T\\to S$, the base change $f_T:X_T=X\\times_ST\\to T$ is flat and locally of finite presentation, and $U_{f_T}=U_f\\times_ST$ as open subspaces of $X_T$. In particular, $U_f=X$ if and only if every fibre of $f$ is a local complete intersection. Neither closedness nor properness of $f$ is assumed; the empty source and empty fibres are allowed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 06CA (lemma-base-change-lci-fibres), specialized to the structure morphism f with Y=Z=S; Tag 06C9 (lemma-flat-lci), identifying flat lci with syntomic. The fibre interpretation on scheme charts is morphisms.tex Tag 01UF (lemma-syntomic-flat-fibres), with lemma-syntomic-characterize and lemma-syntomic-locally-standard-syntomic. Etale chart locality is spaces-morphisms.tex lemma-syntomic-local."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-open-subspace",
+  "def-a1-space-point-topology",
+  "def-weil-pbc-complete-intersection-over-field",
+  "lem-trf-syntomic-locus-base-change",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale scheme atlas $p:P\\to X$ using [def-trf-algebraic-space]. Since flatness and local finite presentation are tested on etale charts, $h=f p:P\\to S$ is flat and locally of finite presentation; this is the $V=S$ case of [lem-sfb-space-local-properties-chart-test]. Apply [lem-trf-syntomic-locus-base-change] to $h$ and write $L=V_h\\subseteq P$ for its open fibrewise complete-intersection locus. Its points are exactly those $u$ at which the local ring of $P_{h(u)}$ is a complete intersection. No finite-presentation hypothesis on the whole atlas is needed.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-trf-syntomic-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 06CA (lemma-base-change-lci-fibres), chart reduction; morphisms.tex Tag 02V3."
+   }
+  },
+  {
+   "text": "Put $R=P\\times_XP$ and let $s,t:R\\to P$ be its projections. These are etale scheme maps by representability and base change [def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers]. For $r\\in R$ let $b=f p s(r)=f p t(r)$. Base changing to $\\kappa(b)$ gives etale maps $R_b\\to P_b$. Apply [lem-sfb-lci-etale-pointwise-invariance] to these maps at $r$: the complete-intersection condition at $s(r)$ is equivalent to that at $r$, and to that at $t(r)$. The pointwise description in [lem-trf-syntomic-locus-base-change] therefore gives $s^{-1}(L)=t^{-1}(L)$ as open subschemes of $R$. Equality here is equality of open subsets equipped with their restricted structure sheaves.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-trf-syntomic-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 06CA, chartwise description of the Koszul locus; descent.tex Tag 036S."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-etale-open-chart-morphism-descent] with atlas $p$, invariant open $L$, target $S$ and $q=h|_L$. The required equality on the restricted relation follows from $p s=p t$. It gives an open subspace $U_f\\subseteq X$ with $P\\times_XU_f=L$. Now take any representable etale chart $a:V\\to X$. The scheme $W=V\\times_XP$ has etale projections to $V$ and $P$, with $W\\to V$ surjective [lem-trf-space-fibre-products-etale-covers]. Apply [lem-sfb-lci-etale-pointwise-invariance] on each residue-base fibre of these two projections. The pointwise descriptions of [lem-trf-syntomic-locus-base-change] show that the pullbacks to $W$ of $V_{f a}$ and $L$ agree. The scheme-test uniqueness clause of [lem-trf-etale-open-chart-morphism-descent] now identifies $V\\times_XU_f$ with $V_{f a}$.",
+   "uses": [
+    "lem-trf-etale-open-chart-morphism-descent",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-trf-syntomic-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 06CA and spaces-properties.tex Tag 03BZ (lemma-open-subspaces), invariant atlas open; spaces.tex Tag 02WU."
+   }
+  },
+  {
+   "text": "For every $b\\in S$ and every etale chart $V\\to X$, the points of $(V\\times_XU_f)_b$ have complete-intersection local rings by the preceding chart formula and [lem-trf-syntomic-locus-base-change]. By [lem-trf-lci-pointwise-criterion], this fibre has an affine cover by spectra of finitely generated local-complete-intersection $\\kappa(b)$-algebras. These base-changed charts cover $(U_f)_b$ [lem-trf-space-fibre-products-etale-covers], so the chartwise definition in the statement says precisely that $(U_f)_b$ is a local complete intersection. Conversely, let $A\\subseteq X$ be any source open whose fibres are local complete intersections. Its pullback to $P$ has fibrewise complete-intersection local rings by the same criterion, and hence its point image is contained in $L$. Thus $|A|\\subseteq|U_f|$, since $P\\to X$ is surjective. The inclusion criterion of [lem-a1-space-point-open-calculus] gives $A\\subseteq U_f$. This proves maximality. The chartwise condition does not depend on the charts: if $E\\to Y$ is a surjective family of etale scheme charts of an algebraic space $Y$ over $\\kappa(b)$, such as $(U_f)_b$ or $A_b$, and $E'\\to Y$ is any etale scheme chart, then $E\\times_YE'$ is a scheme with etale projections, the one to $E'$ surjective [lem-trf-space-fibre-products-etale-covers], so [lem-sfb-lci-etale-pointwise-invariance] transfers complete-intersection local rings from $E$ to every point of $E'$; with [lem-trf-lci-pointwise-criterion] it holds on one surjective family iff on every chart.",
+   "uses": [
+    "lem-trf-syntomic-locus-base-change",
+    "lem-trf-lci-pointwise-criterion",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-lci-etale-pointwise-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 06C9 (lemma-flat-lci); morphisms.tex Tags 01UF and 01UG; spaces-properties.tex Tag 03BZ."
+   }
+  },
+  {
+   "text": "Let $g:T\\to S$ be arbitrary. The pullback $P_T=P\\times_ST\\to X_T$ is a surjective etale scheme atlas [lem-trf-space-fibre-products-etale-covers]. The scheme map $h_T:P_T\\to T$ is flat by [lem-weil-pbc-flat-morphism-base-change] and locally of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence], clause (3). The atlas criterion [lem-sfb-space-local-properties-chart-test] gives these properties for $f_T$. By [lem-trf-syntomic-locus-base-change], $V_{h_T}=L\\times_ST$. Applying the construction above to $f_T$ therefore gives an open $U_{f_T}$ whose pullback to $P_T$ is $L\\times_ST$. The open $U_f\\times_ST$ has exactly the same pullback, by associativity of the sheaf fibre product. The uniqueness clause of [lem-trf-etale-open-chart-morphism-descent] identifies these two open subspaces of $X_T$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-trf-syntomic-locus-base-change",
+    "lem-trf-etale-open-chart-morphism-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 06CA, final base-change argument via pulled-back atlases; morphisms.tex Tag 02V3."
+   }
+  },
+  {
+   "text": "If $U_f=X$, its fibre property already proved is the required property for every fibre of $f$. Conversely, if every fibre of $f$ is a local complete intersection, $X$ itself is one of the source opens to which maximality applies, so $X\\subseteq U_f$. Thus $U_f=X$. When $X$ is empty the atlas and the locus are empty, and every step gives the unique empty open; empty fibres impose no conditions. None of the construction, comparison or maximality steps uses closedness or properness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 06CA, specialization to the structural morphism and maximality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-lci-etale-pointwise-invariance",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-trf-etale-open-chart-morphism-descent",
+  "lem-trf-lci-pointwise-criterion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-syntomic-locus-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 06CA (lemma-base-change-lci-fibres), specialization Y=Z=S, with the chartwise fibre interpretation from Tags 06C9, 01UE and 02V3; invariant-open descent from Tag 03BZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented morphism of algebraic spaces the source locus with local complete intersection fibres is open and commutes with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned flatness, universal openness, smooth-locus and etale-locus facts concern schemes or rings and do not state a fibrewise complete-intersection source locus for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The syntomic locus of a flat family of algebraic spaces is an open subspace detected by etale charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned flatness, universal openness, smooth-locus and etale-locus facts concern schemes or rings and do not state a fibrewise complete-intersection source locus for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fibrewise local complete intersection locus of a flat locally finitely presented algebraic space is open and invariant under base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsClosedImmersion\", \"doc\": \"The property of being a closed immersion of schemes is stable under base change. That is, if $ f: X \\to Y $ is a closed immersion of schemes, then for any base change $ Y' \\to Y $, the induced morphism \"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : MorphismProperty Scheme) [P.IsStableUnderBaseChange] : P.HasOfPostcompProperty @IsOpenImmersion\", \"doc\": \"If a morphism property of schemes is stable under base change, then composing a morphism with an open immersion preserves the property. Specifically, whenever a morphism $ f $ has the property and an \"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": IsStableUnderBaseChange @IsIntegralHom\", \"doc\": \"The property of being an integral morphism of schemes is stable under base change; that is, if a morphism $ f: X \\to Y $ of schemes is integral, then any base change (pullback) of $ f $ is also an inte\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @LocallyOfFiniteType\", \"doc\": \"The property of a morphism of schemes being locally of finite type is stable under base change. That is, if a morphism $ f: X \\to Y $ is locally of finite type, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsOpenImmersion\", \"doc\": \"The property of being an open immersion of schemes is stable under base change. That is, if $ f: X \\to Y $ is an open immersion and $ g: Z \\to Y $ is any morphism of schemes, then the base change $ f \\ti\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned flatness, universal openness, smooth-locus and etale-locus facts concern schemes or rings and do not state a fibrewise complete-intersection source locus for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Syntomic\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned flatness, universal openness, smooth-locus and etale-locus facts concern schemes or rings and do not state a fibrewise complete-intersection source locus for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "syntomic|lciLocus|completeIntersectionLocus",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned flatness, universal openness, smooth-locus and etale-locus facts concern schemes or rings and do not state a fibrewise complete-intersection source locus for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented morphism of algebraic spaces the fibrewise complete intersection source locus is open and commutes with arbitrary base change",
+   "results": "8 hits: AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, Algebra.isOpen_smoothLocus, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness/base-change and smooth-locus facts do not state the algebraic-space complete-intersection locus"
+  },
+  {
+   "tool": "grep",
+   "query": "syntomic|lciLocus|completeIntersectionLocus",
+   "results": "0 hits: none",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness/base-change and smooth-locus facts do not state the algebraic-space complete-intersection locus"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a flat finitely presented family of algebraic spaces the syntomic source locus commutes with every base change",
+   "results": "8 hits: AlgebraicGeometry.isSmooth_isStableUnderBaseChange, IsSMulRegular.of_flat_of_isBaseChange, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, RingHom.FormallySmooth.isStableUnderBaseChange, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.Flat.isStableUnderBaseChange, Module.Flat.isBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness/base-change and smooth-locus facts do not state the algebraic-space complete-intersection locus"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Syntomic\"",
+   "results": "0 hits: none",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness/base-change and smooth-locus facts do not state the algebraic-space complete-intersection locus"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-lci-base-open",
+  "date": "2026-10-22",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tag 06CE source-open input in the isolated-lci curve-stack intersection construction: the fibrewise lci source locus U(f) of Tag 06CA, before taking the complement of its closed image in the base. det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Universal base open with local-complete-intersection fibres for a flat closed family.",
+   "via": [
+    "lem-sfb-space-lci-base-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-fibrewise-lci-source-locus",
+  "worker": "stage1",
+  "summary": "Constructed the source open by descending the scheme fibrewise lci locus on an etale atlas; verified overlap invariance, the formula on every chart, fibrewise lci and maximality, arbitrary base change, and empty cases. One strictly smaller new pointwise etale-invariance lemma; existing scheme-locus and open-descent nodes reused. Statement unchanged.",
+  "blueprint": "Tag 06CE source-open input in the isolated-lci curve-stack intersection construction: the fibrewise lci source locus U(f) of Tag 06CA, before taking the complement of its closed image in the base. det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Universal base open with local-complete-intersection fibres for a flat closed family.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-syntomic-locus-base-change",
+    "why": "The general scheme source-locus theorem is the input on etale atlases; no new alteration route is used."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Fibre products and etale-atlas pullbacks are generic algebraic-space infrastructure."
+   },
+   {
+    "node": "lem-trf-etale-open-chart-morphism-descent",
+    "why": "Descent of an invariant source open and equality on scheme tests; generic algebraic-space infrastructure."
+   },
+   {
+    "node": "lem-trf-lci-pointwise-criterion",
+    "why": "Converts local-ring fibre conditions to the affine-cover definition in the item."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Reflects inclusion of open subspaces from point-image inclusion in maximality."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Scheme flatness after arbitrary base change is applied only to the atlas."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Only clause (3), preservation of local finite presentation by arbitrary scheme base change, is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-syntomic-locus-base-change",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-etale-open-chart-morphism-descent",
+  "lem-trf-lci-pointwise-criterion",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-214b19ac5",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-214b19ac5 (reviewer sub-agent of L); spot-checked: I read the whole item and the new node. The item statement is byte-identical to the unsplit statement on live and side-live, so it is unchanged and no parallel group has superseded it. Sources checked: spaces-more-morphisms 06CA (atlas proof of the Koszul locus and its base change; the item takes Y=Z=S), morphisms 01UE/02V3, descent 036S. No SGA is used. Step-by-step: step 1 (atlas P; h=fp is flat and lfp by the chart test with V=S; L=V_h is open and pointwise) is correct. Step 2 (s,t: R→P are étale; on the κ(b)-fibres the new node gives s^{-1}L=t^{-1}L) is correct. Step 3 (open-chart descent with Z=S, q=h|_L; for a chart V, W=V×_XP→V is surjective and V_{fa} has the same inverse image on W as L, so uniqueness gives V×_XU_f=V_{fa}) is correct. Step 5 (P_T atlas; flat-base-change leaf + qcqs-permanence (3) + chart test; V_{h_T}=L×_ST; uniqueness of the descended open) is correct. Step 6 is elementary. Fault in step 4 (C1/E5): the item defines lci for a space as 'tested on étale charts', and the step needs that this does not depend on which charts are used, but it did not cite the étale-invariance node. Fixed: step 4 now cites lem-sfb-lci-etale-pointwise-invariance and argues through E×_YE' (étale projections, the one to E' surjective) that one surjective chart family is equivalent to every chart. proof_deps are unchanged and still equal the union of the uses. New node lem-sfb-lci-etale-pointwise-invariance: true (via 01UE syntomic at a point over a field; precomposition with étale preserves it, 036S descends it along the open image). Tested on an open immersion, finite separable field extensions, a non-CI point under an étale cover, and the empty scheme. It is statement-only and self-contained, strictly smaller than the item, and restates no item clause. Duplicate search (grep for 036S/09Q7/syntomic/CI+étale; blueprint search, 0 hits) found nothing; nearest are lem-trf-lci-field-change-local and lem-trf-syntomic-pointwise-local-model, which are different statements. Its six searches are plausible. All tool uses accepted as generic. Batch-5 flags: lem-trf-lci-pointwise-criterion (equivalence of lci definitions over a field), lem-trf-etale-open-chart-morphism-descent (descent along an étale atlas), and lem-a1-space-point-open-calculus (reaches trf only through the definition def-trf-algebraic-space) are generic infrastructure, not steps of the trace formula or Poincaré duality, so they are accepted. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-fibrewise-lci-source-locus.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFibrewiseLciSourceLocus",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_fibrewiseLci_open_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.HasCompleteIntersectionFibresToScheme",
+   "AlgebraicGeometry.AlgebraicSpace.exists_fibrewiseLci_open_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFibrewiseLciSourceLocus.lean",
+  "statement": "theorem exists_fibrewiseLci_open_baseChange {B : Scheme.{u}} (X : AlgebraicSpace B) (T : Over B) (f : X.obj.obj ⟶ yoneda.obj T) (hflat : MapToSchemeIsLocally (@Flat) X T f) (hfp : MapToSchemeIsLocally (@LocallyOfFinitePresentation) X T f) : ∃ A : OpenSubspace X, HasCompleteIntersectionFibresToScheme T (A.val.ι ≫ f) ∧ (∀ C : OpenSubspace X, HasCompleteIntersectionFibresToScheme T (C.val.ι ≫ f) → C ≤ A) ∧ (∀ (V : Over B) (a : yoneda.obj V ⟶ X.obj.obj), IsEtale a → schemePointMap a ⁻¹' pointImage A.val.ι = (yoneda.preimage (a ≫ f)).left.fiberCompleteIntersectionLocus) ∧ (∀ (T' : Over B) (g : T' ⟶ T), (∀ (V : Over B) (a : yoneda.obj V ⟶ Limits.pullback f (yoneda.map g)), IsEtale a → Flat (yoneda.preimage (a ≫ Limits.pullback.snd f (yoneda.map g))).left ∧ LocallyOfFinitePresentation (yoneda.preimage (a ≫ Limits.pullback.snd f (yoneda.map g))).left) ∧ IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) (A.val.preimage (Limits.pullback.fst f (yoneda.map g))).ι ∧ HasCompleteIntersectionFibresToScheme T' ((A.val.preimage (Limits.pullback.fst f (yoneda.map g))).ι ≫ Limits.pullback.snd f (yoneda.map g)) ∧ (∀ C : Subfunctor (Limits.pullback f (yoneda.map g)), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) C.ι → HasCompleteIntersectionFibresToScheme T' (C.ι ≫ Limits.pullback.snd f (yoneda.map g)) → C ≤ A.val.preimage (Limits.pullback.fst f (yoneda.map g)))) ∧ (A.val = ⊤ ↔ HasCompleteIntersectionFibresToScheme T f)",
+  "branch": "sheaf-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The sole helper extends the recorded scheme fibre condition to etale charts of the given space, open subfunctor, or literal presheaf pullback. The base scheme called S in the node is T.left; B is the ambient sheaf-presentation base. Base-change equality is stated by saying that the literal preimage open is itself greatest for the same fibre condition, which uniquely determines the locus. Added the already landed def-sfb-proper-curve-moduli solely to reuse MapToSchemeIsLocally; its properness and curve predicates are not used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-27eb65990",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Clause-by-clause match against node and Stacks 06CA/06C9/02V3: chartwise flat/lfp hypotheses via MapToSchemeIsLocally; open A with lci fibres tested on all étale charts (scheme local-ring CI condition, equivalent to the affine-cover form for lft maps by lem-trf-lci-pointwise-criterion); largestness over all OpenSubspace; chart point-set equality with fiberCompleteIntersectionLocus; arbitrary g:T'→T gives flat/lfp on all charts of the literal presheaf pullback, and the literal preimage open is open-representable, has the fibre property and is largest (= U_{f_T}); A=⊤ iff all fibres lci. No closedness/properness; empty source and fibres vacuous; single universe u. Helper is a real Prop def, no space duplicate in live. Node diff: only lean + added stmt_dep def-sfb-proper-curve-moduli (landed def owner of MapToSchemeIsLocally, acyclic). Statement verbatim; report sections present; proof sorry. Notes: scheme CI-locus defs owned by base theorem stmt_dep lem-trf-syntomic-locus-base-change (existing, not added) — an existing:true def owner would be cleaner; docstring says 'seven steps' vs six node steps (cosmetic). No compile run (no change)."
+ }
+}

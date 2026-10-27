@@ -1,0 +1,227 @@
+{
+ "id": "lem-sfb-koszul-inverse-equation-elimination",
+ "kind": "statement",
+ "title": "Eliminating an inverse equation from local Koszul generators",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal, $\\mathfrak q\\subset A$ a prime ideal containing $I$, and $h\\in A\\setminus\\mathfrak q$. In the one-variable polynomial ring $B=A[z]$ [def-weil-pbc-mv-polynomial-ring], put $J=IB+(hz-1)$ and $\\mathfrak q' = \\mathfrak q B+(hz-1)$, the prime ideal with quotient $(A/\\mathfrak q)[1/\\overline h]$. Suppose there are $v\\in B\\setminus\\mathfrak q'$, $e\\geq0$, and $b_1,\\ldots,b_e\\in B_v$ such that $JB_v=(b_1,\\ldots,b_e)$ and $H_i(K_\\bullet(B_v;b_1,\\ldots,b_e))=0$ for all $i>0$. Then there are $d\\in A\\setminus\\mathfrak q$, $r\\geq0$, and $f_1,\\ldots,f_r\\in A_d$ such that $IA_d=(f_1,\\ldots,f_r)$ and $H_i(K_\\bullet(A_d;f_1,\\ldots,f_r))=0$ for all $i>0$. All localizations are at powers of the displayed element [def-weil-ring-localization-away]; the displayed homology vanishing is Koszul regularity [def-weil-pbc-koszul-regular-sequence]. No finite-generation hypothesis on $I$, no Noetherian hypothesis on $A$, and no flatness hypothesis are imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07D1 (lemma-lci-local), local subargument from the prime (q, x_{n+1}h_j-1) to the final principal neighbourhood h-prime: selecting conormal generators, replacing equal-length generators, and removing the inverse equation. The ring called R[x_1,...,x_n] there is here an arbitrary commutative ring A; the argument uses no further property of that ring."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-koszul-regular-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Put $t=hz-1$, $R=B_v$, $L=JR$ and $K=tR\\subseteq L$. Multiplication by $t$ is injective on $B$: if $(hz-1)\\sum a_i z^i=0$, its coefficients give $a_0=0$ and $a_i=ha_{i-1}=0$ successively. It is also injective on $R$: $t(p/v^m)=0$ implies $tv^np=0$ in $B$ for some $n$, hence $v^np=0$ and $p/v^m=0$. The one-element Koszul complex is $[R\\xrightarrow{t}R]$ in degrees $1,0$, so $(t)$ is Koszul-regular. The given tuple $(b_1,\\ldots,b_e)$ generates $L$ and is Koszul-regular. Thus both ideals satisfy the local-generation hypothesis of the cancellation lemma, at every prime over $L$, by taking the localization element $1$. Also $K$ is finitely generated, and $R/L\\xrightarrow{\\sim}K/KL$, $\\bar a\\mapsto\\overline{ta}$, is an isomorphism by the injectivity of multiplication by $t$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-koszul-complex",
+    "def-weil-pbc-koszul-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07D1 (lemma-lci-local), removal of the inverse equation; polynomial and localization calculations written out."
+   }
+  },
+  {
+   "text": "The conormal sequence for $K\\subseteq L$ is split exact by an explicit calculation. In the ring $R[\\epsilon]/(\\epsilon^2)$, substitution $z\\mapsto z(1+\\epsilon)$ and fixing $A$ sends $v$ to $v+\\epsilon z v^{\\prime}$, with inverse $v^{-1}-\\epsilon z v^{\\prime}v^{-2}$; it therefore defines a map $R\\to R[\\epsilon]/(\\epsilon^2)$. Write this map as $x\\mapsto x+\\epsilon\\delta(x)$. Multiplicativity gives $\\delta(xy)=x\\delta(y)+y\\delta(x)$, and $\\delta(t)=hz\\equiv1\\pmod L$. Thus $[x]\\mapsto\\overline{t\\delta(x)}$ defines an $R/L$-linear map $\\rho:L/L^2\\to K/KL$: the product rule kills $L^2$ modulo $L$, and also gives linearity modulo $L$. For $x=ta$ it gives $\\rho([ta])=\\overline{ta}$ since $t\\in L$ and $\\delta(t)\\equiv1\\pmod L$. Consequently $\\rho\\alpha=1$, where $\\alpha:K/KL\\to L/L^2$ is inclusion. The remaining exactness is the identity $\\ker(L/L^2\\to L/(K+L^2))=(K+L^2)/L^2=\\operatorname{im}\\alpha$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08JZ (lemma-principal-localization-NL), conormal splitting for a principal localization; explicit square-zero substitution and fractions as in Tag 00CO (definition-localization)."
+   }
+  },
+  {
+   "text": "The ideal $\\mathfrak p=\\mathfrak q^{\\prime}R$ is prime and contains $L$: indeed $R/\\mathfrak p=((A/\\mathfrak q)_{\\bar h})_{\\bar v}$ is a nonzero domain since $v\\notin\\mathfrak q^{\\prime}$. Apply [lem-sfb-koszul-split-conormal-cancellation] with the ideals $K\\subseteq L$ in $R$ and the prime $\\mathfrak p/K$ of $C=R/K$. Steps 1 and 2 verify every hypothesis, including finite generation of $K$ and the split exact sequence. It supplies $u\\in C\\setminus(\\mathfrak p/K)$ and a finite Koszul-regular tuple generating $(L/K)C_u$.",
+   "uses": [
+    "lem-sfb-koszul-split-conormal-cancellation",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 068Z (lemma-permanence-regular-immersion), assertion (3), affine ideal form."
+   }
+  },
+  {
+   "text": "Evaluation $z\\mapsto h^{-1}$ identifies $B/(t)$ with $A_h$: its inverse sends $h^{-1}$ to $z$, and the two composites fix $A,z,h^{-1}$. Hence $C=(A_h)_{w}$ with $w=v(h^{-1})$. Write $w=c/h^N$ with $c\\in A$; $c\\notin\\mathfrak q$ since $v\\notin\\mathfrak q^{\\prime}$. Thus $C\\cong A_{hc}$, with $\\mathfrak p/K$ the prime extending $\\mathfrak q$, and $L/K=IC$. Write $u=a/(hc)^M$ with $a\\in A$; $u\\notin\\mathfrak p/K$ implies $a\\notin\\mathfrak q$. Set $d=hca\\notin\\mathfrak q$. Inverting $u$ in $C$ is exactly inverting $a$, so $C_u\\cong A_d$ as $A$-algebras. Carry the tuple of step 3 across this isomorphism to $(f_1,\\ldots,f_r)$. Its generated ideal is $IA_d$, and the coefficientwise isomorphism of its Koszul complexes carries kernels and images bijectively, preserving the positive homology vanishing. This proves both required clauses, allowing $r=0$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07D1 (lemma-lci-local), removal of the inverse equation; polynomial and localization calculations written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "lem-sfb-koszul-split-conormal-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07D1 (lemma-lci-local), inverse-equation elimination, assembled using the existing affine cancellation form of divisors.tex Tag 068Z(3); explicit square-zero splitting and final principal denominator."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an ideal I of A and h outside a prime q containing I, local Koszul regularity of the ideal (I,hz-1) in A[z] at (q,hz-1) implies local Koszul regularity of I near q",
+   "results": "OK 8 hit(s): RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, RingTheory.Sequence.IsWeaklyRegular.of_isLocalizedModule, RingTheory.Sequence.IsWeaklyRegular.of_isLocalization, RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev, Algebra.Smooth.exists_span_eq_top_isStandardSmooth",
+   "date": "2026-10-24",
+   "verdict": "no match: the regular-sequence and localization hits do not remove an equation from a locally Koszul-regular ideal over an arbitrary ring; the Language.IsRegular hits concern formal languages."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul|regular.*(quotient|localization)|(quotient|localization).*regular",
+   "results": "OK 25 hit(s): Mathlib/RingTheory/Flat/Localization.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean, Mathlib/RingTheory/Localization/Defs.lean, Mathlib/RingTheory/Localization/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean (subdirectory RingTheory)",
+   "date": "2026-10-24",
+   "verdict": "no match: the regular-sequence and localization hits do not remove an equation from a locally Koszul-regular ideal over an arbitrary ring; the Language.IsRegular hits concern formal languages."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If an ideal generated by I and h times z minus one is locally generated by a Koszul regular sequence then I is Koszul regular after inverting h",
+   "results": "OK 8 hit(s): RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem, RingTheory.Sequence.IsRegular.cons', RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, RingTheory.Sequence.IsRegular.cons, IsLocalization.isRegular_mk', RingTheory.Sequence.isRegular_cons_iff, RingTheory.Sequence.IsWeaklyRegular.of_isLocalization, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal",
+   "date": "2026-10-24",
+   "verdict": "no match: the regular-sequence and localization hits do not remove an equation from a locally Koszul-regular ideal over an arbitrary ring; the Language.IsRegular hits concern formal languages."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\", \"quotient\"",
+   "results": "OK 3 hit(s): Language.IsRegular.finite_range_leftQuotient, Language.IsRegular.of_finite_range_leftQuotient, Language.isRegular_iff_finite_range_leftQuotient",
+   "date": "2026-10-24",
+   "verdict": "no match: the regular-sequence and localization hits do not remove an equation from a locally Koszul-regular ideal over an arbitrary ring; the Language.IsRegular hits concern formal languages."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cancellation of a regular equation from a locally complete intersection ideal: if (I,z) is Koszul regular in A[z], then I is locally Koszul regular in A",
+   "results": "OK 8 hit(s): RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, RingTheory.Sequence.IsWeaklyRegular.of_isLocalization, Algebra.IsSmoothAt, RingTheory.Sequence.IsWeaklyRegular.of_isLocalizedModule, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth",
+   "date": "2026-10-24",
+   "verdict": "no match: the regular-sequence and localization hits do not remove an equation from a locally Koszul-regular ideal over an arbitrary ring; the Language.IsRegular hits concern formal languages."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul.regular|regular.*quotient",
+   "results": "{\"t\": \"2026-10-23T22:25:53Z\", \"tool\": \"grep\", \"query\": \"Koszul|koszul.regular|regular.*quotient\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\"], \"digest\": \"77d2b0a847f0ef94\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary weakly regular sequences, smoothness or polynomial ideal operations, not Koszul regularity over arbitrary rings; RegularSequence.lean line 21 lists Koszul regular sequences as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "{\"t\": \"2026-10-23T22:25:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"Koszul\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary weakly regular sequences, smoothness or polynomial ideal operations, not Koszul regularity over arbitrary rings; RegularSequence.lean line 21 lists Koszul regular sequences as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Removing a polynomial inverse equation from an ideal generated by a Koszul regular sequence over an arbitrary commutative ring",
+   "results": "{\"t\": \"2026-10-23T22:25:54Z\", \"tool\": \"leansearch\", \"query\": \"Removing a polynomial inverse equation from an ideal generated by a Koszul regular sequence over an arbitrary commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_aeval_invOf_eq_zero_of_idealMap_adjoin_sup_span_eq_top\", \"RingTheory.Sequence.IsRegular\", \"RingTheory.Sequence.IsRegular.recOn\", \"RingTheory.Sequence.isWeaklyRegular_iff\", \"RingTheory.Sequence.IsRegular.casesOn\", \"RingTheory.Sequence.IsRegular.ndrecIterModByRegular\", \"RingTheory.Sequence.IsRegular.recIterModByRegular\", \"Polynomial.idealSpan_range_update_divByMonic\"], \"digest\": \"146e27056d72027b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary weakly regular sequences, smoothness or polynomial ideal operations, not Koszul regularity over arbitrary rings; RegularSequence.lean line 21 lists Koszul regular sequences as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ideal (I,h*z-1) locally generated by a Koszul regular sequence in A[z] implies I is locally Koszul regular near a prime not containing h",
+   "results": "{\"t\": \"2026-10-23T22:25:55Z\", \"tool\": \"leanfinder\", \"query\": \"An ideal (I,h*z-1) locally generated by a Koszul regular sequence in A[z] implies I is locally Koszul regular near a prime not containing h\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"Algebra.IsEtaleAt\", \"Algebra.IsSmoothAt\", \"Algebra.smoothLocus\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\"], \"digest\": \"7272f8849d6fe3cd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary weakly regular sequences, smoothness or polynomial ideal operations, not Koszul regularity over arbitrary rings; RegularSequence.lean line 21 lists Koszul regular sequences as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cancellation of a principal nonzerodivisor from a locally Koszul regular ideal with a split conormal sequence",
+   "results": "{\"t\": \"2026-10-23T22:26:31Z\", \"tool\": \"leanfinder\", \"query\": \"Cancellation of a principal nonzerodivisor from a locally Koszul regular ideal with a split conormal sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"RingTheory.Sequence.isRegular_cons_iff'\", \"RingTheory.Sequence.isWeaklyRegular_cons_iff'\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"RingTheory.Sequence.IsRegular.top_ne_smul\", \"RingTheory.Sequence.IsRegular.cons'\", \"RingTheory.Sequence.isRegular_cons_iff\"], \"digest\": \"41e38536eb6445c9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary weakly regular sequences, smoothness or polynomial ideal operations, not Koszul regularity over arbitrary rings; RegularSequence.lean line 21 lists Koszul regular sequences as TODO."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-koszul-polynomial-presentation-principal-gluing",
+  "date": "2026-10-24",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting alteration chain recorded in the item: coherent naive cotangent cohomology via the scheme-to-space comparison, Stacks Tag 0D0X; the final local algebra input in the proof of Tag 0D0X. Supporting local algebra: Tag 0D08 proof, second half, the zero on the left of Jacobi-Zariski for A to B to its strict henselization. Component for the ind-etale left-injectivity argument: Syntomic polynomial presentation kernels are locally Koszul-regular. The target-principal-cover gluing input in the forward proof of Tag 07D3, with Definition 07D0 expanded. Local algebra subargument of Tag 07D1: after choosing a prime above the target prime, remove the inverse equation and obtain a principal neighbourhood in the original polynomial ring.",
+   "via": [
+    "lem-sfb-koszul-polynomial-presentation-principal-gluing",
+    "lem-sfb-syntomic-polynomial-kernel-koszul-regular",
+    "lem-sfb-ind-etale-jacobi-zariski-left-injective",
+    "lem-sfb-strict-henselization-naive-cotangent",
+    "lem-sfb-scheme-naive-cotangent-etale-comparison",
+    "lem-sfb-affine-etale-naive-cotangent-presentation",
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-koszul-inverse-equation-elimination",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses unchanged. Reused the existing general split-conormal Koszul cancellation lemma. Wrote out injectivity of hz-1, the one-element Koszul calculation, the conormal retraction using square-zero substitution, every cancellation hypothesis, and the final denominator d=hca. No new nodes and no finiteness assumption on I. Rechecked the item against the live project source and Mathlib with logged searches.",
+  "blueprint": "Supports the existing chain recorded in blueprint.from.place, namely det-thm-sf-ctf-stability-direct-images proof (3), via Tag 07D1 final inverse-equation removal. The latest blueprint direct-images proof (3) was read; no unit or chapter route is changed. The cancellation tool is in the same unit."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-02b2dcb95",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-02b2dcb95 (reviewer sub-agent of L); spot-checked: PASS: I read the item in full; there are no fixes and no new nodes. The item is not superseded: it is still unsplit with no proof in live and side-live, and there is no repair note. The statement and stmt_deps are unchanged, and no finite-generation, Noetherian or flatness hypothesis was added. Sources read: Stacks 07D1 more-algebra (the local subargument after q_j) and 068Z(3) divisors with its proof; the cancellation node matches 068Z(3) in affine form. Step 1: hz-1 is a nonzerodivisor on A[z] (coefficient recursion) and on B_v (fraction zero criterion), so the one-term Koszul complex is regular; local generation holds with h=1. Step 2: I checked the derivation from z↦z(1+ε) line by line. δ(t)=hz≡1 mod L; ρ[x]=tδ(x) kills L² because tL=KL; ρ[ta]≡ta mod KL. This gives a split exact sequence, written out explicitly instead of citing 08JZ. Step 3: q'R is prime and contains L; all hypotheses of lem-sfb-koszul-split-conormal-cancellation hold (same unit, no cycle), and its conclusion is used exactly as stated. Step 4: B/(t)≅A_h and C=A_{hc} with c∉q; u=a/(hc)^M gives d=hca∉q and C_u=A_d, and the Koszul complex is carried across the isomorphism. The citer principal-gluing step 3 matches. Edge cases checked: I=0 (empty tuple), e=0 (inconsistent), h a zero divisor. Duplicate search: 08JZ node (abstract isomorphism only), trf ci nodes (over fields); no duplicate found. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.KoszulInverseEquationElimination",
+  "declaration": "Ideal.koszulRegular_of_inverse_equation",
+  "file": "lean/Sheaf/RingTheory/KoszulInverseEquationElimination.lean",
+  "statement": "theorem koszulRegular_of_inverse_equation {A : Type u} [CommRing A] (I q : Ideal A) (hq : q.IsPrime) (hIq : I ≤ q) (h : A) (hh : h ∉ q) (v : MvPolynomial (Fin 1) A) (hv : v ∉ q.map MvPolynomial.C ⊔ Ideal.span {MvPolynomial.C h * MvPolynomial.X 0 - 1}) (e : ℕ) (b : Fin e → Localization.Away v) (hgen : Ideal.span (Set.range b) = (I.map MvPolynomial.C ⊔ Ideal.span {MvPolynomial.C h * MvPolynomial.X 0 - 1}).map (algebraMap (MvPolynomial (Fin 1) A) (Localization.Away v))) (hreg : RingTheory.Sequence.IsKoszulRegular b) : ∃ d : A, d ∉ q ∧ ∃ (r : ℕ) (f : Fin r → Localization.Away d), Ideal.span (Set.range f) = I.map (algebraMap A (Localization.Away d)) ∧ RingTheory.Sequence.IsKoszulRegular f",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-082164407",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Ideal.koszulRegular_of_inverse_equation matches the node clause by clause. A is an arbitrary CommRing in one universe u; I ≤ q prime; h ∉ q; B = MvPolynomial (Fin 1) A; J and q' are written out exactly, and q' primality is not assumed. b : Fin e → Away v spans J·B_v; IsKoszulRegular (∀ i ≠ 0 homology zero) equals the node's i > 0. Conclusion ∃ d ∉ q, r, f with span = I·A_d and Koszul-regular, same quantifier order. No FG, Noetherian or flatness hypothesis. lean.statement is verbatim in the file; node JSON differs from side-live only in lean. Proof steps 1-4 are consistent with the cancellation lemma koszulRegular_quotient_of_split_conormal (side-live) and with citer principal-gluing step (A=P, h=h_j). Edge cases I=0, e=0, h a zero divisor, universes are fine. No duplicate found in side-live Sheaf/WeilConjectures or Mathlib. Docstrings carry source and blueprint tags; proof is sorry; report sections are present (the second reading is the author's own reread, noted only). No fixes, no compile needed."
+ }
+}

@@ -8,23 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.HilbertToPicardMorphism
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.CartierDivisorFinite
-import Sheaf.AlgebraicGeometry.NonzeroSectionIntegralCartier
-import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
-import Sheaf.Paper.EulerCharacteristicWellDefined
-import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
-import WeilConjectures.AlgebraicGeometry.DensePoints
-import WeilConjectures.AlgebraicGeometry.EffectiveCartier
-import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
-import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-import WeilConjectures.AlgebraicGeometry.Picard.Defs
-import WeilConjectures.AlgebraicGeometry.Picard.Degree
-import WeilConjectures.AlgebraicGeometry.Picard.RationalPoint
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import WeilConjectures.AlgebraicGeometry.Cohomology.EulerCharProper
+import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 
 /-!
 # Surjectivity of the Hilbert-to-Picard morphism
@@ -41,6 +25,68 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped AlgebraicGeometry.Scheme.Modules
 
 namespace AlgebraicGeometry
+
+/-- The effectiveness argument in Stacks Tag 0BA0 (5), following
+`exists_abelClass_eq` with the numerical inequality `genus ≤ d`.
+(blueprint: lem-sc-hilb-to-pic-surjective) -/
+private theorem exists_abelClass_eq_of_genus_le {k : Type u} [Field k]
+    {X : Scheme.{u}} [X.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
+    [IsProper (X ↘ Spec (.of k))] [GeometricallyIntegral (X ↘ Spec (.of k))]
+    (d : ℕ) (hd : Scheme.arithmeticGenus k X ≤ d) (K : Type u) [Field K] [Algebra k K]
+    (L : (picardSubfunctorDegree (X ↘ Spec (.of k)) d).toFunctor.obj
+      (.op (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))))) :
+    ∃ D : (hilbertPresheaf (X ↘ Spec (.of k)) d).obj
+      (.op (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))))),
+      abelClass (X ↘ Spec (.of k)) D = L.1 := by
+  let T := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K)))
+  let XK := pullback (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))
+  let π : XK ⟶ Spec (.of K) :=
+    pullback.snd (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))
+  let : XK.Over (Spec (.of K)) := ⟨π⟩
+  obtain ⟨h₁, h₂, h₃, h₄⟩ :=
+    smoothOfRelativeDimension_and_isProper_and_geometricallyIntegral_pullback_snd
+      (X ↘ Spec (.of k)) K
+  have : SmoothOfRelativeDimension 1 (XK ↘ Spec (.of K)) := h₁
+  have : IsProper (XK ↘ Spec (.of K)) := h₂
+  have : GeometricallyIntegral (XK ↘ Spec (.of K)) := h₃
+  have : IsIntegral XK := h₄
+  have : Scheme.GlobalSectionsBijective K XK := .of_geometricallyIntegral
+  let ℒ : XK.Modules := (fromSkeleton _).obj (Scheme.Pic.val (Y := XK) L.1)
+  have : SheafOfModules.IsInvertible.{u, u, u} ℒ := Scheme.Pic.isInvertible (Y := XK) L.1
+  have : Scheme.Modules.IsInvertible ℒ := Scheme.Modules.IsInvertible.of_sheafOfModules _
+  have hdeg : ℒ.degree K = (d : ℤ) := by
+    have h := L.2 K (𝟙 T)
+    rwa [picardFibreDegree, baseChangeMap_id, Scheme.Pic.map_id] at h
+  have hχ := Scheme.Modules.eulerChar_eq_degree_add (k := K) ℒ
+  have hg : Scheme.arithmeticGenus K XK = Scheme.arithmeticGenus k X :=
+    Scheme.arithmeticGenus_pullback (k := k) K
+  rw [hdeg, hg] at hχ
+  have h01 := Scheme.Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one (k := K) ℒ
+  have hpos : 0 < ℒ.finrankH K 0 := by omega
+  have : Nontrivial (ℒ.H 0) := Module.nontrivial_of_finrank_pos (R := K) hpos
+  obtain ⟨s, hs⟩ := Scheme.Modules.exists_ne_zero_of_nontrivial_H_zero ℒ
+  -- the zero scheme `D` of `s`
+  have := Scheme.Modules.IsInvertible.sheafOfModules_isInvertible
+    (CategoryTheory.MonoidalCategory.tensorUnit XK.Modules)
+  let D := Scheme.Modules.Hom.zeroLocus s
+  have hD : D.IsInvertible := (Scheme.Modules.Hom.isLocallyPrincipal_zeroLocus s).isInvertible
+    fun h ↦ hs ((Scheme.Modules.Hom.zeroLocus_eq_bot_iff s).1 h)
+  have := hD.isInvertible_dual_toModules
+  obtain ⟨e⟩ := Scheme.Modules.Hom.nonempty_iso_dual_toModules_tensorObj s hD
+  have hfin : IsFinite (D.subschemeι ≫ π) := hD.isFinite_subschemeι_comp (k := K)
+  have hrank : (D.subschemeι ≫ π).finrankΓ = d := by
+    have h := hD.degree_dual_toModules (k := K)
+    rw [← Scheme.Modules.degree_congr K
+      (e ≪≫ CategoryTheory.MonoidalCategory.rightUnitor _), hdeg] at h
+    exact_mod_cast h.symm
+  have hflat : Flat (D.subschemeι ≫ π) := inferInstance
+  have hlfp : LocallyOfFinitePresentation (D.subschemeι ≫ π) := inferInstance
+  refine ⟨⟨D, hfin, hflat, hlfp, fun t ↦ ?_⟩, ?_⟩
+  · exact (Scheme.Hom.finrank_eq_fiberDegree (D.subschemeι ≫ π) t).trans
+      ((fiberDegree_eq_finrankΓ _ t).trans hrank)
+  · refine Scheme.Pic.eq_iff_nonempty_iso.2 ⟨abelClassIso (X ↘ Spec (.of k)) _ ≪≫ ?_⟩
+    exact (e ≪≫ CategoryTheory.MonoidalCategory.rightUnitor _).symm
 
 /-- For a smooth projective geometrically integral curve over a separably closed field,
 the morphism from the Hilbert scheme of degree `d` divisors to the degree-`d` Picard
@@ -87,6 +133,54 @@ theorem surjective_hilbertToPicardMorphism {k : Type u} [Field k] [IsSepClosed k
       (toSheafify (Scheme.fppfTopology.over (Spec (.of k)))
         (picardSubfunctorDegree f d).toFunctor).app (op H) ⟨L, hL⟩) :
     Surjective γ.left := by
-  sorry
+  let : C.Over (Spec (.of k)) := ⟨f⟩
+  have : IsSmoothProjectiveCurve (C ↘ Spec (.of k)) := ‹IsSmoothProjectiveCurve f›
+  have : GeometricallyIntegral (C ↘ Spec (.of k)) := ‹GeometricallyIntegral f›
+  let J := Scheme.fppfTopology.over (Spec (.of k))
+  let S := picardSubfunctorDegree f d
+  let Φ := abelMapPresheaf f d
+  have hclass : L = abelClass f (eH.homEquiv (𝟙 H)) := by
+    obtain ⟨e⟩ := hD
+    exact Scheme.Pic.eq_iff_nonempty_iso.2 ⟨e ≪≫ (abelClassIso f _).symm⟩
+  have hγ' : eP.homEquiv γ =
+      (toSheafify J S.toFunctor).app _ (Φ.app _ (ULift.up (eH.homEquiv (𝟙 H)))) :=
+    hγ.trans (congrArg _ (Subtype.ext hclass))
+  have hab {T : Over (Spec (.of k))} (h : T ⟶ H) :
+      eP.homEquiv (h ≫ γ) =
+        (toSheafify J S.toFunctor).app _ (Φ.app _ (ULift.up (eH.homEquiv h))) := by
+    rw [eP.homEquiv_comp, hγ']
+    have h₃ : eH.homEquiv h = (hilbertPresheaf f d).map h.op (eH.homEquiv (𝟙 H)) := by
+      simpa using eH.homEquiv_comp h (𝟙 H)
+    rw [h₃]
+    refine (NatTrans.naturality_apply (toSheafify J S.toFunctor) h.op _).symm.trans ?_
+    exact congrArg _ (NatTrans.naturality_apply Φ h.op _).symm
+  refine ⟨fun p ↦ ?_⟩
+  let κ := P.left.residueField p
+  let φ : CommRingCat.of k ⟶ κ := Spec.preimage (P.left.fromSpecResidueField p ≫ P.hom)
+  let K := AlgebraicClosure κ
+  let : Algebra k K := ((algebraMap κ K).comp φ.hom).toAlgebra
+  have hK : Spec.map (CommRingCat.ofHom (algebraMap k K)) =
+      Spec.map (CommRingCat.ofHom (algebraMap κ K)) ≫ P.left.fromSpecResidueField p ≫ P.hom := by
+    rw [← Spec.map_preimage (P.left.fromSpecResidueField p ≫ P.hom), ← Spec.map_comp]
+    rfl
+  let x : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ P :=
+    Over.homMk (Spec.map (CommRingCat.ofHom (algebraMap κ K)) ≫ P.left.fromSpecResidueField p)
+      (by rw [Category.assoc]; exact hK.symm)
+  obtain ⟨LK, hLK⟩ := exists_toSheafify_app_eq_of_isAlgClosed S.toFunctor (eP.homEquiv x)
+  obtain ⟨D, hD⟩ := exists_abelClass_eq_of_genus_le d hd K LK
+  let h : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ H :=
+    eH.homEquiv.symm D
+  have hx : h ≫ γ = x := by
+    refine eP.homEquiv.injective ?_
+    rw [hab, ← hLK]
+    refine congrArg _ (Subtype.ext ?_)
+    rw [abelMapPresheaf_app_val]
+    change abelClass f D = LK.1 at hD
+    simpa only [h, Equiv.apply_symm_apply] using hD
+  obtain ⟨pt⟩ : Nonempty (Spec (.of K)) := inferInstance
+  refine ⟨h.left pt, ?_⟩
+  rw [← Scheme.Hom.comp_apply, ← Over.comp_left, hx]
+  change (P.left.fromSpecResidueField p) _ = p
+  exact Scheme.fromSpecResidueField_apply _ _
 
 end AlgebraicGeometry

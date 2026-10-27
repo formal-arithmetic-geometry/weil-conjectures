@@ -1,0 +1,113 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Finite realization steps of lemma-naive-completion (099M)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-reconstruction-models",
+  "lem-weil-pbc-completed-constant-sheaf-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Put R = ULift A and J = comap ULift.down I. The quotient ring equivalences R/J^(n+1) ≃ ULift (A/I^(n+1)) carry each residue of a to its lifted residue. Compose their constant-sheaf isomorphisms with the constants-to-functions and RingCat-presentation comparisons from completed constant sheaf reduction. Naturality of sheafification, checked on quotient representatives, gives compatibility with every consecutive quotient transition. This constructs quotientSystemIso between the forgotten constant quotient diagram and the concrete finite-function diagram.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The functor forgetting commutativity preserves these limits: after the sheaf-to-presheaf functor this is sectionwise limit preservation. Apply it to the preceding diagram isomorphism and lift the limit isomorphism through the fully faithful forgetful functor to obtain completionComparisonIso. Its projection equation follows from limMap_π and preservesLimitIso_hom_π. The defining residue equation of completedAdicScalar, together with the finite comparison unit formula, proves that this isomorphism respects the prescribed scalar map. These equations hold on constant sections and hence on their sheafification.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Noetherianity transports from A to R. Apply completed_constant_algebra_flat_quotients to J, the concrete completed coefficient ring, completionComparisonIso, and its proved scalar projection equations. The exactFunctor criterion supplies finite-limit and finite-colimit preservation of completedAdicScalarExtension. Its existing additive instance supplies additivity. Compose with the exact commutative constant module functor, definitionally the recorded koszulConstantFunctor. Functorial preservation of finite limits and finite colimits, and additivity of composites, prove the conjunction.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+    "def-sfb-site-derived-constant-module-functor",
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "def-sfb-site-derived-constant-module-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J and 093M (lemma-constant-exact and lemma-completion-flat); E4, 2026-10-27: proved comparison with the concrete ULift finite-function quotient tower and its prescribed scalar map, then applied the existing completed_constant_algebra_flat_quotients theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completedAdic scalar extension finite quotient comparison",
+   "results": "No direct Mathlib theorem; uses project declarations.",
+   "verdict": "No direct match.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulFiniteQuotientRealization",
+  "date": "2026-10-27",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-completed-koszul-finite-quotient-realization",
+   "place": "Finite realization steps"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "new-s3-completed-koszul-finite-quotient-exactness",
+ "title": "Exactness of the completed Koszul coefficient functor",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedKoszulFiniteQuotientExactness",
+  "file": "lean/Sheaf/Paper/CompletedKoszulFiniteQuotientExactness.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulFiniteQuotientExactness",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedKoszulFiniteQuotientExactness"
+  ],
+  "statement": "theorem completedKoszulFiniteQuotientExactness (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) : let E := koszulConstantFunctor T A ⋙ completedAdicScalarExtension T d E.Additive ∧ PreservesFiniteLimits E ∧ PreservesFiniteColimits E",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-27"
+ },
+ "statement": "theorem completedKoszulFiniteQuotientExactness (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) : let E := koszulConstantFunctor T A ⋙ completedAdicScalarExtension T d E.Additive ∧ PreservesFiniteLimits E ∧ PreservesFiniteColimits E",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261027T050643-L-249600",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T054558-L-965383",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

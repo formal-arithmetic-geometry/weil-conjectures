@@ -1,0 +1,69 @@
+# Worker report: lem-sfb-coarse-moduli-open-restriction
+
+Group Q63; stage 1; 2026-10-22. Direct delivery with the author's self-review below.
+
+## Files written
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-coarse-moduli-open-restriction.json: statement, split into five steps; its statement is unchanged; no Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-keel-mori-uniform-topological-moduli.json: new statement-only node, unsplit; finite-diagonal Deligne--Mumford version of Keel--Mori, giving a uniform categorical algebraic space and a universal homeomorphism; no Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-stack-topology-open-substacks.json: new statement-only node, unsplit; field-point topology and the natural classification of open substacks; no Mathlib match.
+- citations.json: one verbatim statement excerpt for every citation of every item step.
+- searches.jsonl and search-results.json: actual search log and the full output read for each search, respectively. write_split.py is a sandbox-only JSON-writing helper.
+
+## Attachments
+
+None. Searches of lean/WeilConjectures by the exact blueprint id and by coarse moduli, Keel--Mori, and stack/open terminology found no declaration stating the item or either new lemma. Broader occurrences of coarse refer to unrelated curve trace/filtration results. The Sheaf definition IsCoarseModuliScheme is vocabulary; the unpointed-stable-coarse module is a specific existence theorem, not this open-restriction result.
+
+## WANTED
+
+None for this split. Every source used is present in literature/stacks-project/. The surrounding Pikaart--de Jong reference is not used to prove this item.
+
+## Corrections and route
+
+The original statement is retained in full, including uniqueness, the 2-base-change equality, initiality for algebraic spaces, and the geometric-point bijection. The inherited node had no proof. Its source mentions 0DUV, and I read that lemma and its proof, but the uniform categorical assertion of 0DUT/0DUG gives the restriction directly once the open is constructed. There is no need for an additional etale morphism of coarse spaces or a proof that such a morphism is an open immersion.
+
+The inherited blueprint.from.node was null although its place names det-thm-sf-ctf-stability-direct-images. The ancestor command returns None: the creation chain eventually ends at the Lean module Sheaf.SixFunctors.CtfStabilityDirectImages, which is not a DAG id. I read the main-20261015 direct-image proof and repaired the item's anchor to det-thm-sf-ctf-stability-direct-images, paragraph (3), preserving its inherited via chain. This is the same explicit-anchor repair already accepted for def-sfb-stable-pointed-moduli-groupoids. The delivery preflight requires a new node's from.node to equal the creation-chain computation, so both new nodes retain null there, with the intended blueprint passage written explicitly in from.place and the item placed first in their inherited via list. The first dry run identified precisely this difference between an explicitly supplied anchor and the mechanically computed null; it was repaired without changing any creation record or another node. It records the coarse-open prerequisite in the alteration/moduli input below Rj_* preservation. The chapter and unit records are unchanged; this item is not their key node.
+
+The two new inputs are general stack results, not the desired restriction assertion or either of its coarse-restriction clauses. The argument constructing V, identifying its pullback, proving uniqueness, comparing the given coarse map with the categorical one, and restricting its geometric-point bijection is in the item's proof. No finite-cover or inertia-free theorem is invoked. There is no SGA citation and no departure from the unit route.
+
+## Not duplicates
+
+lem-sfb-keel-mori-uniform-topological-moduli vs lem-sfb-coarse-moduli-open-restriction: the new lemma constructs a uniform categorical algebraic space and gives its universal topological property for an arbitrary finite-diagonal Deligne--Mumford stack, with no open and no given coarse scheme. The item constructs a unique open in an already given coarse scheme and proves the restricted coarse properties by the five written steps.
+
+lem-sfb-keel-mori-uniform-topological-moduli vs lem-sfb-inertia-free-finite-cover-coarse: the existing lemma assumes a given coarse scheme and a representable finite cover with trivial geometric automorphisms, and concludes that the cover is a finite scheme. It supplies neither uniform categorical base change nor the Keel--Mori algebraic-space existence/topology assertion. The new lemma has no cover or trivial-inertia hypothesis.
+
+lem-sfb-keel-mori-uniform-topological-moduli vs lem-sfb-abelian-level-coarse-moduli: the existing result concerns smooth genus-g curves with full abelian level and a coarse scheme. Its conclusion does not assert a generic uniform categorical or universal-homeomorphism theorem. The new node has no curve, genus, prime or level structure.
+
+lem-sfb-keel-mori-uniform-topological-moduli vs lem-sfb-stable-abelian-level-normalization: the existing result constructs the integral-closure normalization of a particular stable-curve stack in a full-level cover and proves its finiteness and smooth-open square. It does not give the generic Keel--Mori categorical/topological properties.
+
+lem-sfb-keel-mori-uniform-topological-moduli vs lem-sfb-dm-coarse-proper-locally-quasifinite: the existing result starts with a given finite-type coarse scheme and proves properness and local quasi-finiteness of its map. Its statement gives neither a universal homeomorphism nor preservation of categorical initiality by flat base change, which are exactly the two inputs used here. The new node does not assume a coarse scheme or finite type.
+
+For lem-sfb-stack-topology-open-substacks, searches by 06FJ, 04XL, 04XG, 04XH, the open-substack classification and the topological-space concept found no existing statement. The DM-open-locus and DM permanence nodes concern existence of a largest DM locus or smooth/finite-etale permanence, not classification of all opens by the point topology. The new topology node does not construct an open in a coarse scheme or assert any coarse universal property.
+
+## Review by Q63
+
+I read coord/brief-stage1.md, delivery-errors B--E (including the duplicated inherited sections), stages/1-dag.md, GOAL.md, the three-level rule in SETUP.md, the chapter record and the unit record. The isolated-run reference coord/dag-sync.md is absent in this read clone; the current explicit brief and the live-library paths were followed. I used only the named sandbox for writes, no repository git command, no Lean edit and no build or compiler.
+
+For the item, I read stacks-more-morphisms.tex 0DUT (theorem-keel-mori), 0DUG (definition-categorical-quotient), and 0DUV (lemma-etale-separated-over-keel-mori), including the proof's categorical and cartesian conclusions. For the new Keel--Mori node I checked that 0DUT assumes only finite inertia and concludes uniform categorical moduli and universal homeomorphism: finite relative diagonal suffices since the inertia projection is its base change along the diagonal. This is a genuine base change with both maps to X times_k X, not an identification of a fibre with a quotient ring. The theorem applies to our algebraic stack because a Deligne--Mumford stack is an algebraic stack. Its space inherits a k-structure by factoring the structure map, and the universal property for k-maps follows by uniqueness. I also read stacks-morphisms.tex 0CI7: universal homeomorphism is a homeomorphism on point spaces after base change by stacks. No claim that arbitrary base change preserves categorical initiality is made; 0DUG requires flatness.
+
+For the new topology node I read stacks-properties.tex 04XG (field-point classes), 04XL (atlas-independent topology and its proof), 06FJ (the bijection and its proof through invariant opens in a presentation), and 04XH (surjectivity to the fibre product of point sets). The compatibility with inverse images follows because membership in an open substack is tested after field extension; equivalently, apply the point-fibre-product surjection to the open pullback. The new node is restricted to DM stacks so that all its instances here have the same supplied stack vocabulary. It includes its point/topology convention and introduces every object. Schemes and algebraic spaces are DM stacks with trivial automorphisms in these statements.
+
+I opened and read the statements of every cited existing node: def-sfb-stable-pointed-moduli-groupoids gives the categorical and geometric coarse conditions and the objects/arrows of 2-fibre products; def-pc-scheme gives the open-subscheme convention; def-weil-open-immersion gives the structure-sheaf restriction; def-weil-flat-morphism gives local-ring flatness. I also read the five potentially competing coarse/normalization statements listed above. None states either new generic input. Whole-DAG tag/concept searches and blueprint_refs.py searches for coarse moduli, Keel, open substacks, 0DUT and 06FJ found no matching blueprint node. The null ancestor is a broken provenance chain, not a missing search.
+
+Step 1 cites the new Keel--Mori statement for exactly existence, uniformity, and homeomorphism. Its finite-diagonal and DM hypotheses are present in the item. It does not use smoothness, linear reductivity, or an atlas theorem hidden in the proof of another node.
+
+Step 2 cites that same statement for categorical uniqueness of c and the moduli-groupoid definition for categorical uniqueness of q. I wrote both maps and both composites, so the isomorphism Q = M is obtained by the two universal properties. This is a short elementary argument. Uniformity and topology transfer across that isomorphism. In particular one does not need to prove a geometric-point condition for the newly chosen c to compare it to q.
+
+Step 3 cites the topology statement for openness of |U|, injectivity of open-substack classification, and its inverse-image compatibility, and the scheme definition for turning the image open into V. It uses the homeomorphism already established in step 2. On every scheme T mapping to X the pullback of V is an inverse-image open; thus it really is an open substack. Classification gives equality over X rather than a bare equivalence of abstract stacks. The last two sentences explicitly prove uniqueness using bijectivity of |q|. This is a non-elementary step through the topology theorem, not a new node restating the item's first clause.
+
+Step 4 cites the two morphism definitions for the isomorphic local rings of an open inclusion and the local-ring test for flatness, and cites the uniform categorical lemma for the property transferred in step 2. The identity local-ring map is flat because its tensor functor is the identity; no separate two-line lemma is introduced. I then apply uniformity to V -> Q and all algebraic-space targets, obtaining exactly categorical initiality for the restricted map. No scheme-only target restriction or hidden finite-type assumption is used.
+
+Step 5 uses the 2-fibre-product and coarse definitions from the moduli-groupoid statement, together with the open-immersion definition. On Omega-valued objects the lift to V is unique when it exists, and the original bijection for q restricts to precisely those isomorphism classes. This is a restriction of a given bijection, so it does not infer a fixed-algebraically-closed-field bijection merely from a homeomorphism of extension classes. It verifies the geometric-point clause separately from categorical initiality. The quote in citations.json includes both the 2-fibre-product definition and the coarse condition for this reason.
+
+For small cases I tested U empty (V empty, the empty groupoid and empty scheme have both coarse properties), U = X (V = Q), and X a scheme (the construction is ordinary open restriction). I tested BG for a finite constant group with order divisible by the characteristic: its only geometric opens are empty and the whole stack, and no exactness of invariants or tameness is needed. I tested disconnected stacks, with an open union of components, to check that uniqueness does not silently require irreducibility or connectedness. For the new topology statement an atlas point and an extension-equivalent point have the same open membership; schemes recover their usual opens. None of the statements assumes a uniform bound on stabilizer orders.
+
+Each new node is statement-only with empty proof and proof_deps; every non-elementary step of the item names the statement it uses. All five proof steps are shorter than 2000 characters. The categorical comparison, local-ring flatness calculation and restriction of a set bijection are written out, so they do not conceal new general lemmas. citations.json contains verbatim contiguous excerpts for all citations. Search commands were actually run through msearch.py for each new node and for the item, using LeanFinder twice with different phrasing, LeanSearch, Loogle and source grep. I read every hit and retained the original item searches as well. The hits concern ordinary schemes, modules, topology or categorical limits; neither new stack result is a one-line specialization of them. All services answered; no unavailable query was recorded as a negative result.
+
+## Unfinished work
+
+The item's split is complete. The two newly introduced generic theorem nodes intentionally remain unsplit, as required for a one-level split. No attachment or Mathlib leaf is claimed. The initial server review_split check passed. The first delivery dry run rejected only the new nodes' non-null blueprint ancestors; these now exactly match the computed null, as explained above. The final delivery dry run and push are performed after this correction.

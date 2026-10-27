@@ -139,7 +139,18 @@
   "lem-exc-residue-tor-test"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
@@ -198,20 +209,26 @@
   "note": "All statement, dependency, source, edge-case, docstring, and compilation checks passed; no fixes required."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $K\\in D^b_c(X,R)$ in the actual sense of\n[def-weil-derived-complete-integral-detailed]. If $K_1$ has\ncohomology in $[a,b]$, then every $K_n$ has Tor amplitude\nin $[a,b]$. Consequently\n\n$$\nD^b_c(X,R)=D^b_{ctf}(X,R)\n$$\n\nfor this DVR coefficient category. This does not equate\nconstructibility with site-perfectness on the whole scheme.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $R=\\mathcal O_E$, regarded as a condensed ring, and let\n$K\\in D^b_c(X,R)$ be an object of the condensed bounded constructible\ncategory ([det-def-sfb-bounded-constructible]), with reductions\n$K_n=K\\otimes^L_{\\mathcal O_{E,X}}(A_{E,n})_X$. If $K_1$ has\ncohomology in $[a,b]$, then every $K_n$ has Tor amplitude\nin $[a,b]$. Consequently\n\n$$\nD^b_c(X,R)=D^b_{ctf}(X,R)\n$$\n\nfor this DVR coefficient category, as recorded in [sk-thm-existence]. This does not equate\nconstructibility with site-perfectness on the whole scheme.",
   "proof": [
    {
-    "text": "Associativity of coefficient tensor product gives\n$K_n\\otimes^L_{A_n}\\kappa=K_1$.\nEach $K_n$ is bounded constructible by\n[def-weil-derived-complete-integral-detailed]. The residue Tor test\n[lem-exc-residue-tor-test], applied to the local Artinian\nring $A_n$, therefore gives the same Tor interval $[a,b]$\nat every $n$. This is precisely the integral condition in\n[def-weil-finite-tor-amplitude]. The reverse inclusion is\npart of that definition.",
+    "text": "Associativity of coefficient tensor product gives\n$K_n\\otimes^L_{A_n}\\kappa=K_1$.\nEach $K_n$ is bounded constructible by\n[det-prop-integral-criterion-reductions]. The residue Tor test\n[lem-exc-residue-tor-test], applied to the local Artinian\nring $A_n$, therefore gives the same Tor interval $[a,b]$\nat every $n$. This is the integral finite-Tor condition of\n[def-weil-finite-tor-amplitude], uniform Tor amplitude of all reductions;\nthe reverse inclusion is part of that definition. For the Tor amplitude over\n$\\mathcal O_{E,X}$ itself ([sk-def-sfb-constructible]), the equality\n$D^b_c(X,R)=D^b_{ctf}(X,R)$ is recorded in [sk-thm-existence].",
     "uses": [
-     "def-weil-derived-complete-integral-detailed",
+     "det-prop-integral-criterion-reductions",
      "lem-exc-residue-tor-test",
-     "def-weil-finite-tor-amplitude"
+     "def-weil-finite-tor-amplitude",
+     "sk-def-sfb-constructible",
+     "sk-thm-existence"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
   "date": "2026-10-19",

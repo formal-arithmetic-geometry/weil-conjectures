@@ -1,0 +1,216 @@
+{
+ "id": "lem-sfb-ringed-site-higher-image-colimit-criterion",
+ "kind": "statement",
+ "title": "Local cohomology criterion for colimits of higher module direct images",
+ "statement": "Work in compatible universes [def-weil-size-convention]. Let $\\mathcal C,\\mathcal D$ be small sites and let $f:\\mathcal C\\to\\mathcal D$ be a morphism of sites presented by a continuous functor $u:\\mathcal D\\to\\mathcal C$ [def-weil-pbc-sites-and-cohomology]. Let $A,B$ be sheaves of commutative rings on $\\mathcal C,\\mathcal D$ respectively and let $\\rho:B\\to f_*A$ be a morphism of ring sheaves. For module sheaves [def-weil-sheaf-of-modules-category] use the direct image $(f_*N)(V)=N(u(V))$ with $B(V)$-action through $\\rho_V:B(V)\\to A(u(V))$. Assume module sheafification exists [def-weil-presheaf-modules-sheafification] and both module categories have enough injectives [def-sp-enough-injectives]. Let $J$ be any small category, let $(N_j)_{j\\in J}$ be a diagram of $A$-module sheaves, and let $(N,(c_j))$ be its colimit in module sheaves [def-weil-pbc-category-colimit]. Fix an integer $p\\geq0$. Write $H^p(U,N)=R^p\\Gamma_{\\mathrm{Mod}}(U,-)(N)$ for right derived additive evaluation in $A$-module sheaves, and $R^pf_*$ for module right derived direct image, both computed by injective resolutions [def-sp-left-exact-additive, def-sp-injective-resolutions]. Suppose there is a collection $\\mathcal B\\subseteq\\operatorname{Ob}(\\mathcal D)$ such that every object of $\\mathcal D$ has a covering with all members in $\\mathcal B$, and for every $V\\in\\mathcal B$ the canonical map of abelian groups\n$$\\varinjlim_{j\\in J}H^p(u(V),N_j)\\longrightarrow H^p(u(V),N)$$\ninduced by the $c_j$ is an isomorphism. Then the map\n$$\\varinjlim_{j\\in J}R^pf_*N_j\\longrightarrow R^pf_*N$$\ninduced by the same $c_j$ is an isomorphism of $B$-module sheaves. No filteredness of $J$, flatness of $\\rho$, or closure of $\\mathcal B$ under fibre products is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0H7B, lemma-higher-direct-image-colimit; module version of its sheafification argument using lemma-higher-direct-images (which is explicitly stated for ringed sites and modules)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sp-enough-injectives",
+  "def-weil-pbc-category-colimit",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-ringed-site-higher-image-cohomology-sheafification] with $q=p$. Write $P_j=P^p_{N_j}$ and $Q=P^p_N$. These are presheaves of $B$-modules, and the maps $c_j$ induce a cocone $P^p(c_j):P_j\\to Q$. We have natural isomorphisms $\\sigma_j:P_j^\\#\\cong R^pf_*N_j$ and $\\sigma:Q^\\#\\cong R^pf_*N$. In particular the comparison concerns module cohomology throughout; no passage from injective module resolutions to injective abelian-sheaf resolutions is made.",
+   "uses": [
+    "lem-sfb-ringed-site-higher-image-cohomology-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0H7B, lemma-higher-direct-image-colimit, proof; module version using Tag 072W."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-presheaf-modules-colimits-sectionwise], form $P=\\operatorname{colim}_j P_j$ in presheaves of $B$-modules, with coprojections $\\iota_j$. Its underlying abelian presheaf has $P(V)=\\operatorname{colim}_jH^p(u(V),N_j)$, also for an empty or nonfiltered indexing category. The cocone in step 1 induces $\\alpha:P\\to Q$, uniquely characterized by $\\alpha\\iota_j=P^p(c_j)$ [def-weil-pbc-category-colimit]. Its component at $V$ is exactly the abelian-group comparison in the hypothesis, since both maps have components $H^p(u(V),c_j)$ on the colimit coprojections. Thus $\\alpha_V$ is bijective whenever $V\\in\\mathcal B$.",
+   "uses": [
+    "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0H7B, lemma-higher-direct-image-colimit, proof; module version using Tag 072W."
+   }
+  },
+  {
+   "text": "For an arbitrary object $V$, choose a covering $\\{V_a\\to V\\}$ by objects in $\\mathcal B$. Every $t\\in Q(V)$ has a preimage in $P(V_a)$ after restriction, since $\\alpha_{V_a}$ is surjective. If $s,s'\\in P(V)$ have the same image, their restrictions to every $V_a$ agree by injectivity of $\\alpha_{V_a}$. These are precisely local surjectivity and local injectivity, so [lem-weil-pbc-site-sheafification-iso-locally-bijective] makes the abelian sheafification of $\\alpha$ invertible. By [lem-pc-sites-module-sheafification-interface], with the ring presheaf already the sheaf $B$, this is the underlying abelian map of the module map $\\alpha^\\#:P^\\#\\to Q^\\#$. Its inverse is $B$-linear: for a section $b$ and a section $y$ of $Q^\\#$, injectivity of $\\alpha^\\#$ and its linearity give $(\\alpha^\\#)^{-1}(by)=b(\\alpha^\\#)^{-1}(y)$. The inverse is already a natural abelian-sheaf morphism. Hence $\\alpha^\\#$ is an isomorphism of $B$-module sheaves.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0H7B, lemma-higher-direct-image-colimit, proof; module version using Tag 072W."
+   }
+  },
+  {
+   "text": "The universal factorization in [lem-pc-sites-module-sheafification-interface] and the colimit property [def-weil-pbc-category-colimit] show directly that $(P^\\#,(\\iota_j^\\#))$ is a colimit of $(P_j^\\#)$: maps from $P^\\#$ to a module sheaf $T$ correspond to presheaf-module maps $P\\to T$, hence to compatible maps $P_j\\to T$, hence uniquely to compatible module-sheaf maps $P_j^\\#\\to T$. Transport this cocone along the natural $\\sigma_j$ of [lem-sfb-ringed-site-higher-image-cohomology-sheafification]. If $L=\\operatorname{colim}_jR^pf_*N_j$ with legs $\\lambda_j$, the resulting isomorphism $\\theta:L\\xrightarrow{\\sim}P^\\#$ satisfies $\\theta\\lambda_j=\\iota_j^\\#\\sigma_j^{-1}$. Now\n$$\\sigma\\alpha^\\#\\theta\\lambda_j=\\sigma(P^p(c_j))^\\#\\sigma_j^{-1}=R^pf_*(c_j),$$\nwhere the last equality is precisely the helper's naturality equation. The colimit uniqueness therefore identifies $\\sigma\\alpha^\\#\\theta$ with the map in the conclusion. Every factor is invertible, so that canonical map is invertible. The argument only used coverings by $\\mathcal B$, not closure of $\\mathcal B$ under fibre products, filteredness of $J$, or flatness of $\\rho$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-pbc-category-colimit",
+    "lem-sfb-ringed-site-higher-image-cohomology-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0H7B, lemma-higher-direct-image-colimit, proof; module version using Tag 072W."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-site-higher-image-cohomology-sheafification",
+  "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "lem-pc-sites-module-sheafification-interface"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0H7B, lemma-higher-direct-image-colimit, proof; module version using Tag 072W."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images preserve a sheaf colimit if cohomology over pullbacks of covering objects preserves that colimit",
+   "results": "[\"CategoryTheory.GrothendieckTopology.instPreservesSheafificationForgetOfPreservesLimitsOfHasColimitsOfShapeOfPreservesColimitsOfShapeOppositeCoverOfHasLimitsOfShapeWalkingMulticospanOfReflectsIsomorphisms\", \"CategoryTheory.Sheaf.createsColimitOfIsSheaf\", \"CategoryTheory.Sheaf.isColimitSheafifyCocone\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall\", \"CategoryTheory.isSheaf_pointwiseColimit\", \"CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification\", \"CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf\", \"CategoryTheory.Sheaf.instHasColimitsOfShape\"]",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern colimit existence, underived pushforward, sheafification, or pointwise Kan extensions; none gives the local cohomology criterion for derived module direct image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of sites preserves colimits in cohomological degree p if sections cohomology comparison is an isomorphism on a covering collection",
+   "results": "[\"CategoryTheory.CompatiblePreserving\", \"CategoryTheory.Functor.IsCocontinuous\", \"CategoryTheory.GrothendieckTopology.instPreservesSheafificationForgetOfPreservesLimitsOfHasColimitsOfShapeOfPreservesColimitsOfShapeOppositeCoverOfHasLimitsOfShapeWalkingMulticospanOfReflectsIsomorphisms\", \"CategoryTheory.GrothendieckTopology.preserveFiniteLimits_plusFunctor\", \"CategoryTheory.Presheaf.isLocallyInjective_of_whisker\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfShapeOppositeElementsFiberForget\", \"CategoryTheory.Functor.IsContinuous\"]",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern colimit existence, underived pushforward, sheafification, or pointwise Kan extensions; none gives the local cohomology criterion for derived module direct image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On ringed sites higher direct images commute with a module sheaf colimit if objectwise module cohomology commutes on a covering collection",
+   "results": "[\"SheafOfModules.Presentation.isColimit\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"SheafOfModules.Presentation.map\", \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"SheafOfModules.mapFree\", \"CategoryTheory.toSheafify_plusPlusIsoSheafify_hom_assoc\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\"]",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern colimit existence, underived pushforward, sheafification, or pointwise Kan extensions; none gives the local cohomology criterion for derived module direct image"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"colimit\"",
+   "results": "[\"CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit\", \"CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit'\"]",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern colimit existence, underived pushforward, sheafification, or pointwise Kan extensions; none gives the local cohomology criterion for derived module direct image"
+  },
+  {
+   "tool": "grep",
+   "query": "higher.*[Dd]irect.*[Ii]mage.*[Cc]olimit|[Cc]olimit.*[Cc]ohomology.*[Ss]heaf",
+   "results": "[]",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern colimit existence, underived pushforward, sheafification, or pointwise Kan extensions; none gives the local cohomology criterion for derived module direct image"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local cohomology colimit criterion for higher direct images of sheaves of modules over sheaves of rings",
+   "results": "[\"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"PresheafOfModules.colimitPresheafOfModules\", \"PresheafOfModules.hasColimit\", \"SheafOfModules.Presentation.isColimit\", \"localCohomology.ofDiagram\", \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"localCohomology.hasColimitDiagram\"]",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern colimit existence, underived pushforward, sheafification, or pointwise Kan extensions; none gives the local cohomology criterion for derived module direct image"
+  },
+  {
+   "tool": "grep",
+   "query": "higher.*[Dd]irect.*[Ii]mage.*[Cc]olimit|[Cc]olimit.*[Cc]ohomology.*[Ss]heaf",
+   "results": "[]",
+   "date": "2026-10-24",
+   "verdict": "no match: localCohomology is ideal-support cohomology; other hits are underived sheaf colimits or Kan-extension existence, not the covering-object criterion for higher module direct images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct image commutes with colimits using a local cohomology isomorphism on a site",
+   "results": "[\"localCohomology.ofDiagram\", \"localCohomology.isoOfFinal\", \"localCohomology.hasColimitDiagram\", \"localCohomology\", \"localCohomology.isoSelfLERadical\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Sheaf.isColimitSheafifyCocone\", \"AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.descCApp\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: localCohomology is ideal-support cohomology; other hits are underived sheaf colimits or Kan-extension existence, not the covering-object criterion for higher module direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"colimit\"",
+   "results": "[\"CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit\", \"CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit'\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: localCohomology is ideal-support cohomology; other hits are underived sheaf colimits or Kan-extension existence, not the covering-object criterion for higher module direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher derived module direct image preserves an arbitrary small colimit if cohomology comparison is an isomorphism on objects of a covering collection",
+   "results": "[\"PresheafOfModules.toPresheaf_preservesColimit\", \"instHasColimitsCondensedMod\", \"Condensed.hasExactColimitsOfShape\", \"Condensed.instAB5CondensedMod\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"localCohomology.ofDiagram\", \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"CategoryTheory.Functor.HasPointwiseRightDerivedFunctorAt.hasColimit'\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: localCohomology is ideal-support cohomology; other hits are underived sheaf colimits or Kan-extension existence, not the covering-object criterion for higher module direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from the colimit of higher direct images to the higher direct image of a colimit is an isomorphism when object cohomology comparisons are invertible locally",
+   "results": "[\"CategoryTheory.GrothendieckTopology.plusCompIso\", \"CategoryTheory.GrothendieckTopology.ι_plusCompIso_hom\", \"CategoryTheory.GrothendieckTopology.toPlus_comp_plusCompIso_inv\", \"CategoryTheory.GrothendieckTopology.plusCompIso_inv_eq_plusLift\", \"CategoryTheory.GrothendieckTopology.ι_plusCompIso_hom_assoc\", \"localCohomology.isoOfFinal\", \"CategoryTheory.sheafComposeIso_inv_fac\", \"CategoryTheory.sheafComposeIso_inv_fac_assoc\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: localCohomology is ideal-support cohomology; other hits are underived sheaf colimits or Kan-extension existence, not the covering-object criterion for higher module direct images"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-higher-module-image-filtered-colimits",
+  "date": "2026-10-23",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Right adjoint of quasi-coherent pushforward for qcqs algebraic spaces. Supporting input: 0E55 Brown hypotheses: qcqs derived direct image and direct-sum comparison 08FA/08FB. Auxiliary input: Higher module direct images on spaces preserve filtered colimits. Local assembly input: the covering-object cohomology criterion for higher module direct images (Stacks lemma-higher-direct-image-colimit).",
+   "via": [
+    "lem-sfb-space-higher-module-image-filtered-colimits",
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "lem-sfb-qcqs-space-pushforward-right-adjoint",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-site-higher-image-colimit-criterion",
+  "worker": "stage1",
+  "group": "Q01",
+  "summary": "Proved the arbitrary-small-colimit criterion through the module cohomology presheaf, sectionwise presheaf colimits, local bijectivity, and the module-sheafification universal property. Created only the natural ringed-module form of 072W; the existing 072W site node states only the abelian case. Identified the resulting isomorphism with the canonical cocone comparison. Statement unchanged.",
+  "blueprint": "Realizes the auxiliary higher-module-image continuity input on the inherited direct-image route, by Stacks 0H7B/072W. The current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), is read as route context; this generic supporting lemma has no direct blueprint duplicate. The ancestor tool returns None, as in the inherited blueprint.from.node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-bc1f8cfdb",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-bc1f8cfdb (reviewer sub-agent of L); spot-checked: Read Stacks 0H7B (sites-cohomology.tex l.2822, abelian statement and proof) and 072W (l.746-785, ringed sites and modules). Item statement and stmt_deps are unchanged against live; live and side-live have the item unsplit with no repair note, so this delivery is not superseded and the re-split rule does not apply. Step 1 uses the new node's presheaf P^p_M, its functoriality in M (which gives the cocone) and the isomorphisms sigma natural in M, all in Mod(A) with no passage to abelian injectives. Step 2: the sectionwise presheaf-of-modules colimit leaf holds for any small J, and its component at V equals the hypothesis map on every coprojection. Step 3: bijectivity on the members of one B-covering gives local injectivity and local surjectivity, so the locally-bijective sheafification leaf applies and no fibre-product closure of B is needed; the module-sheafification interface node (O = B already a sheaf) makes alpha^# a B-linear isomorphism. Step 4 (elementary, with uses): sheafification preserves colimits by its universal property, and sigma alpha^# theta lambda_j = R^pf_*(c_j) follows from the new node's naturality equation, so the isomorphism is the canonical map. Small cases checked: J empty, p=0, trivial site, zero ring. New node lem-sfb-ringed-site-higher-image-cohomology-sheafification is 072W in module form with naturality in M, correct at q=0. It is self-contained, statement-only, with all three kinds of search recorded. It is not a duplicate: the existing site-level node is abelian only (Ab(C)/Ab(D)), and the other candidates are only for schemes on topological spaces, pro-etale or etale sites. It is strictly smaller than the item and restates none of its clauses. All off-unit citations are Mathlib leaves or definitions; no tool_uses needed. No fixes."
+ }
+}

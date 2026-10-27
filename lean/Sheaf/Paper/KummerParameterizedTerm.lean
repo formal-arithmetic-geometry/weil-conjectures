@@ -36,7 +36,8 @@ theorem kummerParameterSquare {T U S : Scheme.{u}}
     (q : T ⟶ U) (i : S ⟶ T) (s : S ⟶ U) (h : i ≫ q = s) (P : Profinite.{u}) :
     coefficientParameterMap i P ≫ kummerFullParameterMap q P =
       coefficientParameterProjection S P ≫ s := by
-  sorry
+  change coefficientParameterMap i P ≫ (coefficientParameterProjection T P ≫ q) = _
+  rw [← Category.assoc, coefficientParameterProjectionCommutes, Category.assoc, h]
 
 /-- A normalized geometric term is compared with the actual universal-evaluation
 map for derived internal Hom. This retains the actual full-to-punctured unit and

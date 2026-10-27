@@ -129,18 +129,28 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineGlobalHomBaseChangeMap",
   "declaration": "AlgebraicGeometry.affineGlobalHomBaseChangeMap",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineGlobalHomBaseChangeMap.lean",
-  "statement": "def affineGlobalHomBaseChangeMap {R B : CommRingCat.{u}} {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R) [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (M K : schemeDerivedCategory X) (hM : Scheme.IsPerfect X M) (hK : schemeDerivedQCohProperty X K) : (affineDerivedExtension g).obj ((schemeGlobalDerivedHomOver f).obj (op M, K)) ⟶ (schemeGlobalDerivedHomOver (pullback.snd f g)).obj (op ((derivedPullback (pullback.fst f g)).obj M), (derivedPullback (pullback.fst f g)).obj K)",
+  "statement": "def affineGlobalHomBaseChangeMap\n    {R B : CommRingCat.{u}} {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R)\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (M K : schemeDerivedCategory X) :\n    (affineDerivedExtension g).obj ((schemeGlobalDerivedHomOver f).obj (op M, K)) ⟶\n      (schemeGlobalDerivedHomOver (pullback.snd f g)).obj\n        (op ((derivedPullback (pullback.fst f g)).obj M),\n          (derivedPullback (pullback.fst f g)).obj K)",
   "branch": "sheaf-dag",
-  "by": "C1",
-  "date": "2026-10-11",
-  "existing": false,
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": true,
   "declarations": [
    "AlgebraicGeometry.affineBaseRingMap",
    "AlgebraicGeometry.affineGlobalSectionsRestriction",
@@ -164,7 +174,7 @@
    "AlgebraicGeometry.canonicalPullbackAdjunction_homEquiv_original",
    "AlgebraicGeometry.canonicalPullbackAdjunction_homEquiv_symm_original"
   ],
-  "note": "Q1 partial class-2 repair: scalar extension and its adjunction are constructed from the specified underived adjunction and fixed left-derived counit/right-derived unit. Existing signatures and instance parameters are preserved. The pullback adjunction still uses the composition-family counit; its coordinated repair remains open. F2 proves the precise original-counit adjunction transport and its unit, counit and transpose equations, and uses the transport in exists_globalHomPullbackComparison. The remaining shared-counit repair marker is retained."
+  "note": "Q1 partial class-2 repair: scalar extension and its adjunction are constructed from the specified underived adjunction and fixed left-derived counit/right-derived unit. Existing signatures and instance parameters are preserved. The pullback adjunction still uses the composition-family counit; its coordinated repair remains open. F2 proves the precise original-counit adjunction transport and its unit, counit and transpose equations, and uses the transport in exists_globalHomPullbackComparison. The remaining shared-counit repair marker is retained. NR H2 repair: the old record pointed to the Sheaf compatibility-import module, which defines no declarations. Point to the actual adopted WeilConjectures module owning affineGlobalHomBaseChangeMap and canonicalPullbackAdjunction (already listed in declarations). Its current signature constructs the map for all M,K, hence specializes to the perfect/quasi-coherent objects of this node. No mathematical statement change."
  },
  "reviewed": {
   "date": "2026-10-11",
@@ -175,12 +185,12 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-11",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "X-62603",
-  "group": "C1",
+  "reviewer": "NT-stage2-cc-97ab15cdf",
+  "group": "NR",
   "result": "pass",
-  "note": "independent Codex review: Matched qcqs schemes, affine bases, pullback projections, stalkwise Tor independence, perfect M, unbounded QCoh K, and the canonical comparison in D(B); all earlier normalization repairs are present, and both modules compile together cleanly in 25.6 s."
+  "note": "Re-delivery of the 737909f H2 return. Lean differs only in imports; the definitions and theorem signature are byte-identical and lean.statement is verbatim in the file. The item node changes only in lean and stmt_deps, with the statement text unchanged. Four existing:true def nodes were added: def-sfb-relative-dualizing-adjunction (NodalRelativeDualizingAdjunction/.complex, 0A9E), def-sfb-derived-pullback-unit-identification (zariskiTracePullbackUnitIso = εIso of the canonical monoidal realization, 079U), def-sfb-sheaf-dual-evaluation (dual/dualEvaluation) and def-sfb-global-section-module-map (homOfGlobalSection). Each statement matches its construction, and no other def node owns these declarations in live. The §1(B) lean-only repair of def-pc-affine-global-hom-base-change-map points the record to the WeilConjectures module, which really holds affineGlobalHomBaseChangeMap (general M K) and canonicalPullbackAdjunction; the Sheaf module only re-imports it. Mechanical theorem-stmt_dep finding judged PASS: pull uses choose(exists_tensorPullbackAdjunction), whose module contains only that theorem and whose adjunction is pinned by the unit formula (the earlier review asked for this dep); tensorComparison = choose(module_pullback_tensor), pinned by naturality and the pure-tensor formula. Both are genuine theorem conclusions. Mathematics re-read clause by clause against Stacks 0FVV/0FVY/0FW0/0B6J/0AAB: counit-normalized trace, perfectness with both transposes, canonical base change for all k-algebras, t_A = 1⊗t, invariance under automorphisms with dual(η⁻¹), composition laws, and edge cases (d=0, empty Y, rank 0, A=0, non-Noetherian A, char 2, single universe u). nt_incremental2.check on live plus the snapshot nodes gives []. Gates: no hollow defs, docstrings carry source and blueprint, the only sorry is the main theorem. Advisory: dual is also listed under def-pc-divisor-line-bundle; the new unit-identification node does not cite lem-sc-mixed-hom-tensor-pullback-iso; def-trf-polynomial-duality-presentation-data is an unused stmt_dep/import; the ProperFlatSpaceDerivedDuality import clash is a stage-3 matter. No compile run, since no file was changed."
  },
  "reviewed_proof": {
   "date": "2026-10-14",

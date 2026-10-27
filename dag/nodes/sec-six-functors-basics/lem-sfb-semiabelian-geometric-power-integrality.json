@@ -1,0 +1,296 @@
+{
+ "id": "lem-sfb-semiabelian-geometric-power-integrality",
+ "kind": "statement",
+ "title": "Integral finite powers of a geometric semiabelian group",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G/F$ be a smooth separated commutative group scheme of finite type [def-pc-scheme, def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Separated means that its diagonal is a closed immersion. Suppose there is an exact sequence of fppf sheaves $$1\\longrightarrow (\\mathbf G_{m,F})^r\\longrightarrow G\\longrightarrow B\\longrightarrow1$$ [def-pc-fppf-site], where $r\\geq0$, $\\mathbf G_{m,F}=\\operatorname{Spec}F[t,t^{-1}]$ with multiplication, and $B/F$ is a proper smooth geometrically connected commutative group scheme. Geometrically connected means that every field extension gives a nonempty connected scheme [def-pc-geometrically-irreducible]; proper is [def-weil-proper-morphism]. Exactness means that the left map identifies its source with the kernel and sections of $B$ lift fppf locally to $G$. For every integer $n\\geq0$, the scheme $G^n=G\\times_F\\cdots\\times_FG$, with $G^0=\\operatorname{Spec}F$, is integral [def-pc-integral-scheme, def-pc-fibre-product]: it is nonempty, reduced and irreducible.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tags 0499 (lemma-characterize-trivial-pseudo-torsors), 049B (lemma-torsor), and 0B7Q (lemma-connected-group-scheme-over-field-irreducible); topology.tex Tag 0377 (lemma-connected-fibres-quotient-topology-connected-components); varieties.tex Tag 056T (lemma-smooth-geometrically-normal). Agent-extracted consequence for smooth torus extensions and their finite powers, not a verbatim statement of one tag."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-fppf-site",
+  "def-pc-geometrically-irreducible",
+  "def-weil-proper-morphism",
+  "def-pc-integral-scheme",
+  "def-pc-fibre-product",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "For every field $L$, put $T_L=(\\mathbf G_{m,L})^r$. Apply [lem-sfb-diagonalizable-group-geometric-criteria] to the free abelian group $\\mathbf Z^r$: it has no nonzero torsion, so the stated characteristic-zero and positive-characteristic criteria both make $T_L$ smooth and geometrically connected, including $r=0$. It is affine by the group-algebra presentation in that statement. Over an affine $U=\\operatorname{Spec}A\\subseteq B$, the base change $T_B=T_F\\times_F B$ has coordinate presentation $A[x_1,y_1,\\ldots,x_r,y_r]/(x_i y_i-1)_{i=1}^r$; thus it is locally of finite presentation by [def-sbc-locally-finite-presentation]. By [lem-weil-pbc-affine-morphism-permanence](1),(3) it is affine, quasi-compact and quasi-separated, hence of finite presentation by that same definition. Its smoothness follows by [lem-pc-proper-base-change](2), whose smooth clause requires no properness.",
+   "uses": [
+    "lem-sfb-diagonalizable-group-geometric-criteria",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Examples 12.1--12.2, Proposition 12.3 and Remark 12.5, printed pp.231--232; explicit relative finite presentation; Stacks morphisms.tex Tags 01SD, 01S7 and 01VB"
+   }
+  },
+  {
+   "text": "Write $i:T_F\\to G$ and $q:G\\to B$ for the given homomorphisms. Regard the sheaf $h_G$ as a sheaf on $B$-schemes, with $T_B$ acting by $t\\cdot g=i(t)g$. For any $B$-scheme $U$ and $g_1,g_2\\in G(U)$ over the same section of $B$, $g_1g_2^{-1}$ lies in the kernel; exactness gives a unique $t\\in T_F(U)$ with $i(t)=g_1g_2^{-1}$. This construction commutes with restriction. Local lifts of $\\mathrm{id}_B$ exist on an fppf cover by the assumed epimorphism of sheaves. On a member with lift $s$, the maps $t\\mapsto i(t)s$ and $g\\mapsto i^{-1}(gs^{-1})$ give inverse equivariant sheaf isomorphisms with $h_{T_B}$. Consequently [lem-sfb-smooth-affine-group-torsor-representability], applied using Step 1, represents this sheaf by an affine smooth surjective universally open scheme over $B$. It is already represented by $G\\to B$; [lem-galois-yoneda-fully-faithful] identifies the two representatives and their actions. Hence $q$ has those properties, and $(t,g)\\mapsto(i(t)g,g)$ is an isomorphism $T_F\\times_F G\\simeq G\\times_B G$.",
+   "uses": [
+    "lem-sfb-smooth-affine-group-torsor-representability",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 0499 (lemma-characterize-trivial-pseudo-torsors), 049B (lemma-torsor), 049C (remark-fun-with-torsors), affine torsors; the kernel and inverse formulas are written out"
+   }
+  },
+  {
+   "text": "Fix $b\\in B$, set $E=\\kappa(b)$ and $X=G\\times_B\\operatorname{Spec}E$. The surjectivity of $q$ and [lem-weil-pbc-surjective-base-change] make $X$ nonempty. Apply [lem-sfb-scheme-large-algclosed-jacobson] to $X/E$ to obtain an algebraically closed extension $\\Omega/E$ for which closed points of $X_\\Omega$ are dense and all have residue field $\\Omega$. The same base-change-surjectivity lemma makes $X_\\Omega$ nonempty. Its dense set of closed points is therefore nonempty; choose one. Its residue-field isomorphism gives a section $s:\\operatorname{Spec}\\Omega\\to X_\\Omega$. Pulling the torsor isomorphism of Step 2 back to this fibre and fixing its second coordinate to $s$ gives inverse scheme maps $T_\\Omega\\to X_\\Omega$, $t\\mapsto i(t)s$, and $x\\mapsto i^{-1}(xs^{-1})$. Thus $X_\\Omega$ is connected by Step 1. By [lem-weil-geometrically-connected-algebraic-closure], which permits any algebraically closed extension and not only an algebraic one, $X/E$ is geometrically connected. No section over $E$ itself has been assumed.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "lem-sfb-scheme-large-algclosed-jacobson",
+    "lem-weil-geometrically-connected-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0479 (lemma-make-Jacobson), Tag 0387 (lemma-characterize-geometrically-connected) with Tag 054N (lemma-geometrically-connected-check-after-extension); groupoids.tex Tag 0499, explicit translation trivialization"
+   }
+  },
+  {
+   "text": "By [def-pc-scheme-fibre], applied to $q:G\\to B$ and $b$, the first projection is a homeomorphism from the scheme fibre $X=G\\times_B\\operatorname{Spec}\\kappa(b)$ of Step 3 onto the subspace $q^{-1}(b)$ of $G$. Hence every topological fibre of $q$ is nonempty and connected. The map $q$ is open and surjective by Step 2, so it gives the quotient topology: if $q^{-1}(C)$ is closed, then $B\\setminus C=q(G\\setminus q^{-1}(C))$ is open, while the converse follows from continuity. Apply [lem-weil-pbc-connected-fibres-quotient-preimage-connected] with the closed connected subset $B$ itself. The assumed geometric connectedness of $B$ gives its nonempty connectedness, so $G$ is connected. Now [lem-weil-geometrically-connected-algebraic-closure], with the identity extension $F/F$ (allowed because $F$ is algebraically closed), makes $G$ geometrically connected over $F$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-connected-fibres-quotient-preimage-connected",
+    "lem-weil-geometrically-connected-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0377 (lemma-connected-fibres-quotient-topology-connected-components), proof; schemes.tex lemma-fibre-topological and decent-spaces.tex Tag 0AC8 (lemma-topology-fibre); varieties.tex Tags 0387 and 054N"
+   }
+  },
+  {
+   "text": "Induct on $n$ to prove that $G^n\\to\\operatorname{Spec}F$ is smooth. For $n=0$ the map is the identity of $\\operatorname{Spec}F$: its finite presentation uses no variables or relations and every required infinitesimal lift is the given structure map, by [def-sbc-smooth-morphisms]. If $G^n$ is smooth, the projection $G^{n+1}=G\\times_FG^n\\to G^n$ is the base change of the assumed smooth structure morphism of $G$, so is smooth by [lem-pc-proper-base-change](2). Its composite with $G^n\\to\\operatorname{Spec}F$ is smooth by [lem-trf-smooth-composition]. This is the required structure morphism of $G^{n+1}$.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VA (lemma-composition-smooth), 01VB (lemma-base-change-smooth); identity case from the definition"
+   }
+  },
+  {
+   "text": "For every field extension $K/F$ we prove, by induction on $n$, that $(G^n)_K$ is nonempty and connected. The base is $\\operatorname{Spec}K$, a one-point space. Step 4 implies that $G_K$ is geometrically connected over $K$: every further extension $L/K$ is a field extension of $F$, and $(G_K)_L=G_L$. If $(G^n)_K$ is connected, [lem-weil-pbc-geometrically-connected-product-components], with $X=G_K$ and $Y=(G^n)_K$, gives a bijection on connected components from $G_K\\times_K(G^n)_K$ to $(G^n)_K$. There is therefore exactly one component in the product, making it nonempty and connected. Associativity of fibre products identifies this product with $(G^{n+1})_K$: both represent tuples of $n+1$ points of $G$ over the same $K$-scheme. This proves geometric connectedness of $G^n$ for every $n$, including $0$.",
+   "uses": [
+    "lem-weil-pbc-geometrically-connected-product-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0385 (lemma-bijection-connected-components); finite-product induction and fibre-product universal property written out"
+   }
+  },
+  {
+   "text": "Fix $n\\geq0$ and apply [lem-trf-smooth-connected-fibre-normal-integrality] to $v:G^n\\to\\operatorname{Spec}F$. Smoothness is Step 5. There is just one base point, with residue field $F$; its scheme fibre is $G^n$ by the fibre-product universal property and is geometrically connected by Step 6. Taking $K=F$ in the cited conclusion shows that $G^n$ is integral. By [def-pc-integral-scheme] this says precisely that it is nonempty, reduced and irreducible. For $n=0$ it also follows directly because the only nonempty affine open of $\\operatorname{Spec}F$ has coordinate ring the field $F$.",
+   "uses": [
+    "lem-trf-smooth-connected-fibre-normal-integrality",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T (lemma-smooth-geometrically-normal); more-morphisms.tex Tag 057J (lemma-normal-morphism-irreducible), final geometric-fibre argument; properties.tex Tags 033M (lemma-normal-Noetherian) and 01ON (lemma-characterize-integral)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonalizable-group-geometric-criteria",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-pc-proper-base-change",
+  "lem-sfb-smooth-affine-group-torsor-representability",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sfb-scheme-large-algclosed-jacobson",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-connected-fibres-quotient-preimage-connected",
+  "def-sbc-smooth-morphisms",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "def-pc-integral-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Torus-extension consequence of Tags 0499, 049B and 049C, combined with topology.tex 0377, varieties.tex 0479, 0387, 054N, 0385, 056T and the smooth connected-fibre integrality tool; split torus geometry from Milne Algebraic Groups, Examples 12.1--12.2 and Remark 12.5. This assembly is agent-written, not a verbatim proof in one source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact sequence of smooth algebraic groups with geometrically connected kernel and quotient has geometrically integral middle group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.map R S T T) ⇑(Algebra.H1Cotangent.δ R S T)\", \"doc\": \"The sequence involving the induced map on first cotangent cohomology and the connecting homomorphism δ in the Jacobi-Zariski exact sequence is exact, meaning the image of the map $ H^1(S \\\\to T) \\\\to T \"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsIntegralHom (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ g \\\\circ f $ is an integral morphism and $ g $ is a separated morphism, then $ f $ is an integral morphism.\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"Given algebra extensions $ P $ and $ Q $ with compatible generators, the sequence involving the cotangent spaces $ P.\\text{CotangentSpace} $, $ Q.\\text{CotangentSpace} $, and their composition is exact.\"}\n  {\"name\": \"Algebra.Generators.Cotangent.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the cotangent modules of algebra extensions induced by composition of generators is exact, meaning the image of the first cotangent map equals the kernel of the second cotangent\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} {τ : Type w₅} (Q : Algebra.Generators S T ι) (P : Algebra.Ge\", \"doc\": \"For an algebra extension homomorphism $ f $, the induced map on the first cotangent cohomology modules is exact at the image of $ f $, meaning the image of $ f $ is equal to the kernel of the connecti\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ and the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is exact, establishing a fundamenta\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the first cotangent cohomology modules is exact at $ H^1(Q) $ with the connecting homomorphism $ \\\\delta $, as established by the Snake Lemma applied to the cotangent complexes o\"}\n  {\"name\": \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.δ R S T) ⇑(KaehlerDifferential.mapBaseChange R S T\", \"doc\": \"The image of the connecting homomorphism $\\\\delta: H^1(S \\\\to T) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence equals the kernel of the base change map $\\\\Omega_{S/R} \\\\otimes_S B \\\\to\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: geometric connectedness composition in Mathlib presupposes a geometrically connected morphism; it does not identify fibres of an fppf group extension or prove geometric integrality of its smooth middle group"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric connectedness is preserved by extensions of smooth group schemes in the fppf topology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \"[P.IsStableUnderBaseChange] : (sourceLocalClosure W P).IsStableUnderBaseChange\", \"doc\": \"If a morphism property $ P $ on schemes is stable under base change, then its source-local closure (the property of being locally $ P $ with respect to coverings of the source scheme) is also stable u\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \"(P : MorphismProperty Scheme.{u}) : IsJointlySurjectivePreserving P\", \"doc\": \"In the category of schemes, a morphism property is preserved under jointly surjective families of morphisms. This means that if a property holds for each morphism in a jointly surjective family, then \"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: geometric connectedness composition in Mathlib presupposes a geometrically connected morphism; it does not identify fibres of an fppf group extension or prove geometric integrality of its smooth middle group"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsGeometricallyIntegral",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.IsGeometricallyIntegral'",
+   "date": "2026-10-24",
+   "verdict": "no match: geometric connectedness composition in Mathlib presupposes a geometrically connected morphism; it does not identify fibres of an fppf group extension or prove geometric integrality of its smooth middle group"
+  },
+  {
+   "tool": "grep",
+   "query": "geometricallyConnected|GeometricallyConnected|IsGeometricallyIntegral",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"22\", \"text\": \"- `AlgebraicGeometry.GeometricallyConnected`: A morphism `f : X ⟶ Y` is geometrically connected if\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"24\", \"text\": \"- `GeometricallyConnected.iff_geometricallyConnected_fiber`: A scheme is geometrically connected\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"40\", \"text\": \"class GeometricallyConnected (f : X ⟶ Y) : Prop where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"43\", \"text\": \"lemma GeometricallyConnected.eq_geometrically :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"44\", \"text\": \"    @GeometricallyConnected = geometrically (ConnectedSpace ·) := by\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: geometric connectedness composition in Mathlib presupposes a geometrically connected morphism; it does not identify fibres of an fppf group extension or prove geometric integrality of its smooth middle group"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected algebraic group over an algebraically closed field is integral and an extension of connected groups is connected",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral.nonempty\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsIntegral X], Nonempty ↥X\", \"doc\": \"Every integral scheme has a non-empty underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], IrreducibleSpace ↥X\", \"doc\": \"Every integral scheme has an irreducible underlying topological space.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsGalois.toIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/GaloisObjects\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {inst_1 : CategoryTheory.GaloisCategory C} {X : C}\\n  [self : CategoryTheory.PreGaloisCategory.IsGalois X], CategoryTheory.PreGaloisCategory.IsConnected X\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, every Galois object $X$ is connected, i.e., if $X$ satisfies the Galois object conditions in $\\\\mathcal{C}$, then $X$ is a connected object in $\\\\mathcal{C}$.\"}\n  {\"name\": \"instTotallySeparatedSpaceAlgEquivOfIsIntegral\", \"module\": \"Mathlib/FieldTheory/KrullTopology\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [Algebra.IsIntegral K L],\\n  TotallySeparatedSpace Gal(L/K)\", \"doc\": \"If $ L $ is an integral algebra over a field $ K $, then the Galois group $ \\\\text{Gal}(L/K) $ equipped with the Krull topology is a totally separated space. This means that for any two distinct automo\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X], ∃ A x, CategoryTheory.PreGaloisCategory.IsG\", \"doc\": \"For any connected object $ X $ in a pre-Galois category $ \\\\mathcal{C} $, there exists a Galois object $ A $ in $ \\\\mathcal{C} $ and a morphism $ A \\\\to X $.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S) ↔ IsEmpty ↥S ∨ IsEmpty n\", \"doc\": \"The structure morphism of the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ is an integral morphism if and only if the base scheme $S$ is empty or the type $n$ is empty.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: geometric connectedness composition in Mathlib presupposes a geometrically connected morphism; it does not identify fibres of an fppf group extension or prove geometric integrality of its smooth middle group"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite powers of a smooth semiabelian group scheme over an algebraically closed field are integral",
+   "results": "IsIntegral and facts about integral schemes/morphisms; no group-extension or finite-power theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match: the item includes the passage from fppf extension data to connectedness of G and integrality of every finite power; the returned general integrality facts alone do not state it"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyIntegral",
+   "results": "Definition, base-change instances, reduction/irreducibility combination and isIntegral_of_isLocallyNoetherian; none identifies geometric connectedness of an fppf group extension.",
+   "date": "2026-10-24",
+   "verdict": "no match: the item includes the passage from fppf extension data to connectedness of G and integrality of every finite power; the returned general integrality facts alone do not state it"
+  },
+  {
+   "tool": "grep",
+   "query": "semiabelian|semi.abelian|connected.*group.*integral",
+   "results": "0 hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-24",
+   "verdict": "no match: the item includes the passage from fppf extension data to connectedness of G and integrality of every finite power; the returned general integrality facts alone do not state it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected smooth group scheme over an algebraically closed field and all its finite powers are integral",
+   "results": "IsIntegral, isIntegral_of_irreducibleSpace_of_isReduced, isIntegral_iff_irreducibleSpace_and_isReduced and integral-morphism facts; no complete match.",
+   "date": "2026-10-24",
+   "verdict": "no match: the item includes the passage from fppf extension data to connectedness of G and integrality of every finite power; the returned general integrality facts alone do not state it"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-picard-multiplicative-torsor",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Algebraically trivial lines on a semiabelian variety: inversion and ampleness. Structural input before inversion: realize a geometrically algebraically trivial line as a multiplicative frame torsor. Supporting input: Integral finite powers of a geometric semiabelian group.",
+   "via": [
+    "lem-sfb-semiabelian-picard-multiplicative-torsor",
+    "lem-sfb-semiabelian-algebraic-equivalence-norm",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semiabelian-geometric-power-integrality",
+  "worker": "stage1",
+  "summary": "Q40: statement unchanged; seven-step split reuses existing torus, represented-torsor, fibre-topology, connectedness and smooth-integrality results. Kernel exactness gives explicit local torsor trivializations; a large algebraically closed extension supplies a point for each fibre; quotient topology proves connectedness, and two explicit inductions prove smoothness and geometric connectedness of all powers. No new nodes or Mathlib leaves.",
+  "blueprint": "Read latest ef6f9619 blueprint, sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3). This is the inherited supporting semiabelian input to its direct-image chain, below the unit; no unit step is replaced. The ancestor tool reports from.node=null and that inherited field is retained. Full-blueprint searches for semiabelian, torus, connected group and geometrically connected found no exact duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-geometrically-connected-algebraic-closure",
+    "why": "General field-extension test for geometric connectedness, used for torsor fibres and for a connected F-scheme with F algebraically closed; no node in this unit supplies this criterion."
+   },
+   {
+    "node": "lem-trf-smooth-connected-fibre-normal-integrality",
+    "why": "General smooth geometrically connected fibre integrality theorem, applied over Spec F after proving both hypotheses for every power; this is a scheme-geometric tool, independent of trace formula constructions."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "General affine-base-change and quasi-compact/quasi-separated properties used only to verify finite presentation of the explicit relative split torus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-weil-pbc-affine-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-80f9a31bb",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-80f9a31bb (reviewer sub-agent of L); spot-checked: I read the whole item and its seven steps, and opened each of the 16 cited statements. There are no new nodes. Compared with live, the statement, stmt_deps and blueprint fields are unchanged. The live item is still unsplit with no review, and there is no repair note. The statement is true (it is Stacks 0B7Q plus smoothness). Edge cases checked: r=0; B=Spec F; n=0; alpha_p and mu_p are excluded by smoothness. Step 1: the diagonalizable criteria with M=Z^r give smooth and geometrically connected in every characteristic; finite presentation of T_B follows from the explicit presentation together with affine permanence (1),(3). Step 2: the kernel difference and the fppf-local lifts of id_B match the hypotheses of the torsor-representability node exactly; Yoneda then gives q affine, smooth, surjective and universally open, plus the action isomorphism. Step 3: surjective base change, then the large-algclosed-Jacobson node (closed points dense, so a closed point exists, with residue field Omega) gives X_Omega ≅ T_Omega; the algebraic-closure criterion allows any algebraically closed Omega (checked against Stacks 0387/054N). Step 4: open surjective q gives the quotient topology, and the 0377 node then makes G connected, hence geometrically connected since F is algebraically closed. Steps 5 and 6 are inductions with stated base cases. Step 7 applies smooth connected-fibre integrality over Spec F with K=F. Batch 5: the torsor-representability closure reaches only sk-i-curve-zero definitions and generic fppf-descent lemmas, smooth composition is a Mathlib leaf, and smooth-fibre integrality is generic scheme geometry (Stacks 056T); none of these is part of the trace formula or Poincare duality, so all are accepted. The fibre-topology citation is removed by the fix. Accepted tool uses: algebraic-closure connectedness test, smooth-fibre integrality, affine permanence. FIX (C4): Step 4 cited the algebraic-space node lem-sfb-space-scheme-fibre-topology 'specialized to the scheme G', but that statement does not identify a scheme's atlas point topology with its own topology. I replaced it with def-pc-scheme-fibre (Mathlib leaf Scheme.Hom.fiberHomeo, on live, not merged), which states the needed homeomorphism of X_b onto q^{-1}(b), and recomputed proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemiabelianGeometricPowerIntegrality",
+  "declaration": "AlgebraicGeometry.semiabelian_geometric_power_integrality",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemiabelianGeometricPowerIntegrality.lean",
+  "statement": "theorem semiabelian_geometric_power_integrality {F : Type u} [Field F] [IsAlgClosed F] (G : Grp (Over (Spec (.of F)))) [IsCommMonObj G.X] [Smooth G.X.hom] [IsSeparated G.X.hom] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] (r : ℕ) (B : Grp (Over (Spec (.of F)))) [IsCommMonObj B.X] [IsProper B.X.hom] [Smooth B.X.hom] [GeometricallyConnected B.X.hom] (i : MultiplicativeType.splitTorus F r ⟶ G) (q : G ⟶ B) (hker : IsPullback i.hom.hom (toUnit (MultiplicativeType.splitTorus F r).X) q.hom.hom η[B.X]) (hepi : Presheaf.IsLocallySurjective (Scheme.fppfTopology.over (Spec (.of F))) (yoneda.map q.hom.hom)) : ∀ n : ℕ, IsIntegral (∏ᶜ fun _ : Fin n ↦ G.X).left",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-acfe33539",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Read item, all 12 stmt_dep records, splitTorus (landed N8 def-sfb-tori-multiplicative-type, added as stmt_dep), module and report. Every clause matches: IsAlgClosed F; Grp(Over Spec F) with IsCommMonObj, Smooth, IsSeparated, LocallyOfFiniteType+QuasiCompact; B IsProper/Smooth/GeometricallyConnected/comm; kernel = full IsPullback square with η[B.X]; fppf IsLocallySurjective of yoneda.map q on Scheme.fppfTopology.over; conclusion ∀ n, IsIntegral (∏ᶜ Fin n ↦ G.X).left. Edge cases r=0, n=0, B=Spec F, all characteristics OK; no extra hypotheses. lean.statement verbatim; only lean+stmt_deps changed vs live; sorry-only, docstrings with source/blueprint/7 steps; report sections present. No compile needed (no change)."
+ }
+}

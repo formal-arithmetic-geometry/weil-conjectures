@@ -1,0 +1,270 @@
+{
+ "id": "lem-trf-generic-closed-pieces-simultaneous-spread",
+ "kind": "statement",
+ "title": "Simultaneous spreading of a closed generic cover and dense complements",
+ "statement": "Let $f:X\\to Y$ be a finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], where $Y$ is irreducible [def-weil-irreducible-components] with generic point $\\eta$ [def-sc-generic-point]. Let $I$ be a finite index set, and for each $i\\in I$ let $j_i:Z_i\\hookrightarrow X$ be a closed immersion of schemes [def-weil-closed-immersion] such that $h_i=f\\circ j_i$ is of finite type. Write $D_i=j_i(Z_i)$ and $D_{i,t}=p_t^{-1}(D_i)\\subseteq X_t$, where $X_t$ is the ordinary scheme-theoretic fibre [def-pc-scheme-fibre] and $p_t:X_t\\to X$ is its canonical projection. Suppose the closed subsets $C_i=D_{i,\\eta}$ are nonempty and irreducible, cover $X_\\eta$, and satisfy $C_i\\not\\subseteq C_j$ whenever $i\\ne j$. Then there is an open subset $V\\subseteq Y$ containing $\\eta$ such that, for every $t\\in V$, the closed subsets $D_{i,t}$ are all nonempty, satisfy $X_t=\\bigcup_{i\\in I}D_{i,t}$, and for every $i\\ne j$ the relatively open subset $D_{i,t}\\setminus D_{j,t}$ is dense in $D_{i,t}$. Here dense means that its closure in the subspace $D_{i,t}$ is all of $D_{i,t}$. No irreducibility of a specialized piece $D_{i,t}$ is asserted. Empty $I$ is allowed; the covering hypothesis then means $X_\\eta=\\varnothing$. No Noetherianity, separatedness, flatness, or reducedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0554 (lemma-irreducible-components-in-neighbourhood), proof: from the pairwise intersections $Z_{i,j}$ through the successive shrinkings and the open neighbourhood contained in every $f(X_i)$; returned Steps 4--6 and the base-open intersection in Step 7"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-weil-closed-immersion",
+  "def-pc-scheme-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Write $q_{i,t}:(Z_i)_t\\to Z_i$ for the fibre projection of $h_i$. By [def-weil-closed-immersion], $j_i$ is a homeomorphism onto the closed subset $D_i$. By [def-pc-scheme-fibre], $q_{i,t}$ and $p_t$ are homeomorphisms onto $h_i^{-1}(\\{t\\})$ and $f^{-1}(\\{t\\})$, respectively. The restriction of $j_i$ maps $h_i^{-1}(\\{t\\})$ homeomorphically onto $D_i\\cap f^{-1}(\\{t\\})$: indeed $h_i(z)=f(j_i(z))$, and every point of $D_i$ has a unique preimage under $j_i$. Composing these restrictions gives a homeomorphism $a_{i,t}:|(Z_i)_t|\\longrightarrow D_{i,t}$ characterized by $p_t(a_{i,t}(u))=j_i(q_{i,t}(u))$. The set $D_{i,t}=p_t^{-1}(D_i)$ is closed in $X_t$, since $D_i$ is closed and $p_t$ is continuous. In particular $a_{i,\\eta}$ identifies $|(Z_i)_\\eta|$ with $C_i$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0554, proof: viewing the closed pieces and their intersections inside each fibre; fibre-topology discussion immediately before Tag 054Y"
+   }
+  },
+  {
+   "text": "For $i\\ne j$, put $W_{ij}=Z_i\\setminus j_i^{-1}(D_j)$, an open subset of $Z_i$. Step 1 identifies $q_{i,t}^{-1}(W_{ij})$ with $D_{i,t}\\setminus D_{j,t}$: for $u\\in|(Z_i)_t|$, the defining equality for $a_{i,t}$ shows that $j_i(q_{i,t}(u))\\notin D_j$ exactly when $a_{i,t}(u)\\notin p_t^{-1}(D_j)$. At $t=\\eta$ this is the open subset $C_i\\setminus C_j$ of $C_i$, nonempty by incomparability. It is dense in $C_i$. To check this directly from [def-weil-irreducible-components], if its closure $F$ in $C_i$ were proper, then the two proper closed subsets $F$ and $C_i\\cap C_j$ would cover the irreducible space $C_i$, a contradiction. Thus $q_{i,\\eta}^{-1}(W_{ij})$ is dense in $|(Z_i)_\\eta|$.",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0554, proof: the generic intersections are nowhere dense in each generic component"
+   }
+  },
+  {
+   "text": "For each ordered pair $i\\ne j$, apply [lem-sbc-generic-open-fibre-density] to the given finite type morphism $h_i:Z_i\\to Y$, the open $W_{ij}$ and the generic point $\\eta$. Step 2 verifies its generic density hypothesis. Obtain an open $U_{ij}\\subseteq Y$ containing $\\eta$ such that $q_{i,t}^{-1}(W_{ij})$ is dense in $|(Z_i)_t|$ for every $t\\in U_{ij}$. Under $a_{i,t}$ its image is $D_{i,t}\\setminus D_{j,t}$ by Step 2. This image is dense in the subspace $D_{i,t}$, because a homeomorphism identifies closed subsets and therefore identifies their closures. This step uses only ordinary fibres and does not assert their irreducibility.",
+   "uses": [
+    "lem-sbc-generic-open-fibre-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 054X (lemma-nowhere-dense-generic-fibre), as invoked for every pair in Tag 0554"
+   }
+  },
+  {
+   "text": "Set $C=\\bigcup_{i\\in I}D_i\\subseteq X$. This is closed since $I$ is finite; it is empty if $I$ is empty. The generic covering assumption and the surjectivity of $p_\\eta$ onto $f^{-1}(\\{\\eta\\})$ from Step 1 give $f^{-1}(\\{\\eta\\})\\subseteq C$. Apply [lem-sbc-generic-fibre-closed-cover-spread] with $g=f$, $y=\\eta$ and the two closed subsets $C$ and $\\varnothing$. It gives an ambient open $U_{\\rm cov}$ containing $\\eta$ with $f^{-1}(U_{\\rm cov}\\cap\\overline{\\{\\eta\\}})\\subseteq C$. By [def-sc-generic-point], $\\overline{\\{\\eta\\}}=Y$. If $t\\in U_{\\rm cov}$ and $u\\in X_t$, then $p_t(u)\\in f^{-1}(\\{t\\})\\subseteq C$, so $u\\in D_{i,t}$ for some $i$. Thus $X_t=\\bigcup_iD_{i,t}$. For empty $I$, the same inclusion forces $X_t=\\varnothing$.",
+   "uses": [
+    "lem-sbc-generic-fibre-closed-cover-spread",
+    "def-sc-generic-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 054Y (lemma-cover-generic-fibre-neighbourhood), as invoked in Tag 0554; combine the supplied finite closed family into one closed subset"
+   }
+  },
+  {
+   "text": "For each $i\\in I$, nonemptiness of $C_i=p_\\eta^{-1}(D_i)$ gives a point in $D_i\\cap f^{-1}(\\{\\eta\\})$ by applying $p_\\eta$. Apply [lem-sbc-generic-closed-subset-fibre-nonempty] to the finite type morphism $f:X\\to Y$, its generic point $\\eta$ and the closed subset $D_i$. Obtain an open $U_i$ containing $\\eta$ such that $D_i\\cap f^{-1}(\\{t\\})$ is nonempty for every $t\\in U_i$. For such a point $x$, surjectivity of $p_t:X_t\\to f^{-1}(\\{t\\})$ from Step 1 gives $u\\in X_t$ with $p_t(u)=x\\in D_i$, hence $u\\in D_{i,t}$. Thus each required specialized piece is nonempty on $U_i$.",
+   "uses": [
+    "lem-sbc-generic-closed-subset-fibre-nonempty"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0554, proof: the open neighbourhood contained in every component image; the same generic-flatness/open-image argument appears in Tag 055G (lemma-geometrically-connected-generic-fibre)"
+   }
+  },
+  {
+   "text": "Take $V=U_{\\rm cov}\\cap\\bigcap_{i\\in I}U_i\\cap\\bigcap_{(i,j)\\in I^2,\\ i\\ne j}U_{ij}$. There are finitely many factors, each open and containing $\\eta$, so $V$ is open and contains $\\eta$. For $t\\in V$, Step 4 gives the covering, Step 5 gives nonemptiness of every $D_{i,t}$, and Step 3 gives density of every pairwise relative complement. Closedness was proved in Step 1. Intersections indexed by an empty set are $Y$: in particular when $I=\\varnothing$, $V=U_{\\rm cov}$ and Step 4 makes all its fibres empty; when $I$ has one member there are no pairwise density conditions. These are exactly all the requested clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0554, proof: the finite simultaneous shrinkings and final choice of base neighbourhood"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-sc-generic-point",
+  "def-weil-closed-immersion",
+  "def-weil-irreducible-components",
+  "lem-sbc-generic-closed-subset-fibre-nonempty",
+  "lem-sbc-generic-fibre-closed-cover-spread",
+  "lem-sbc-generic-open-fibre-density"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0554 (lemma-irreducible-components-in-neighbourhood), pairwise nowhere-density, covering and nonempty-image shrinkings; Tags 054X, 054Y and the generic-flatness/open-image argument in 055G"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite closed cover of the generic fibre by pairwise incomparable irreducible subsets spreads so that every closed piece is nonempty, they cover each fibre, and pairwise complements are dense after shrinking",
+   "results": "{\"t\": \"2026-10-22T06:45:58Z\", \"tool\": \"leanfinder\", \"query\": \"A finite closed cover of the generic fibre by pairwise incomparable irreducible subsets spreads so that every closed piece is nonempty, they cover each fibre, and pairwise complements are dense after shrinking\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_f\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_X\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover\", \"genericPoints.finite\", \"TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible\", \"ShrinkingLemma.PartialRefinement.exists_gt\", \"TopologicalSpace.NoetherianSpace.exists_finset_irreducible\"], \"digest\": \"3536259806a02267\"}; The hits give finite open subcovers, irreducibility under open maps with dense irreducible fibres, and density checked on an open cover. None spreads this supplied closed family from one generic fibre. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "3536259806a02267"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fiber\", \"Dense\"",
+   "results": "{\"t\": \"2026-10-22T06:45:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"fiber\\\", \\\"Dense\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsPreirreducible.preimage_of_dense_isPreirreducible_fiber\"], \"digest\": \"430bfd858f9ce2ef\"}; The hits give finite open subcovers, irreducibility under open maps with dense irreducible fibres, and density checked on an open cover. None spreads this supplied closed family from one generic fibre. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "430bfd858f9ce2ef"
+  },
+  {
+   "tool": "grep",
+   "query": "(generic|fiber|fibre).*(dense|nowhere|cover)|(dense|nowhere|cover).*(generic|fiber|fibre)",
+   "results": "{\"t\": \"2026-10-22T06:45:54Z\", \"tool\": \"grep\", \"query\": \"(generic|fiber|fibre).*(dense|nowhere|cover)|(dense|nowhere|cover).*(generic|fiber|fibre)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\"], \"digest\": \"d549d1786f1688de\"}; The hits give finite open subcovers, irreducibility under open maps with dense irreducible fibres, and density checked on an open cover. None spreads this supplied closed family from one generic fibre. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "d549d1786f1688de"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For finitely many closed subschemes of a finite type family whose generic fibres are distinct irreducible components, shrink the base to make their fibres nonempty covering with dense pairwise complements",
+   "results": "{\"t\": \"2026-10-22T06:45:54Z\", \"tool\": \"leansearch\", \"query\": \"For finitely many closed subschemes of a finite type family whose generic fibres are distinct irreducible components, shrink the base to make their fibres nonempty covering with dense pairwise complements\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneously spread a finite family of generic nonempty closed covering subsets and the density of their pairwise open complements to every ordinary fibre over a neighbourhood of the generic point",
+   "results": "{\"t\": \"2026-10-22T06:46:05Z\", \"tool\": \"leanfinder\", \"query\": \"Simultaneously spread a finite family of generic nonempty closed covering subsets and the density of their pairwise open complements to every ordinary fibre over a neighbourhood of the generic point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopologicalSpace.IsOpenCover.denseRange_iff_restrictPreimage\", \"isClosed_property3\", \"TopologicalSpace.IsOpenCover.generalizingMap_iff_restrictPreimage\", \"isClosed_property2\", \"DenseRange.induction_on₂\", \"DenseRange.induction_on₃\", \"TopologicalSpace.IsOpenCover.generalizingMap_iff_comp\", \"isClosed_property\"], \"digest\": \"c2786ee48f5a3850\"}; The hits give finite open subcovers, irreducibility under open maps with dense irreducible fibres, and density checked on an open cover. None spreads this supplied closed family from one generic fibre. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "c2786ee48f5a3850"
+  },
+  {
+   "tool": "grep",
+   "query": "(generic|fiber|fibre).*(dense|nowhere|cover)|(dense|nowhere|cover).*(generic|fiber|fibre)",
+   "results": "{\"t\": \"2026-10-23T23:40:15Z\", \"tool\": \"grep\", \"query\": \"(generic|fiber|fibre).*(dense|nowhere|cover)|(dense|nowhere|cover).*(generic|fiber|fibre)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\"], \"digest\": \"0269372220cbc318\"}; Read the returned signatures: open covers and limit existence, dominant maps, open-map irreducibility and topological covering maps do not assert simultaneous spreading of the supplied closed pieces. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "0269372220cbc318"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Spread a finite closed generic fibre cover to nonempty covering fibres with dense pairwise differences on an open neighbourhood",
+   "results": "{\"t\": \"2026-10-23T23:40:15Z\", \"tool\": \"leansearch\", \"query\": \"Spread a finite closed generic fibre cover to nonempty covering fibres with dense pairwise differences on an open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsClosedMap.isCoveringMapOn_of_openPartialHomeomorph\", \"CategoryTheory.regularTopology.instIsCoverDense\", \"IsClosedMap.isEvenlyCovered_of_openPartialHomeomorph\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"TopologicalSpace.IsOpenCover.denseRange_iff_restrictPreimage\", \"CategoryTheory.Functor.IsCoverDense.is_cover\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsCoverDenseOpensToOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat\", \"IsCoveringMap.mk'\"], \"digest\": \"99667626154d6b5d\"}; Read the returned signatures: open covers and limit existence, dominant maps, open-map irreducibility and topological covering maps do not assert simultaneous spreading of the supplied closed pieces. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "99667626154d6b5d"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fiber\", \"Dense\"",
+   "results": "{\"t\": \"2026-10-23T23:40:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"fiber\\\", \\\"Dense\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsPreirreducible.preimage_of_dense_isPreirreducible_fiber\"], \"digest\": \"430bfd858f9ce2ef\"}; Read the returned signatures: open covers and limit existence, dominant maps, open-map irreducibility and topological covering maps do not assert simultaneous spreading of the supplied closed pieces. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "430bfd858f9ce2ef"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of closed subschemes whose generic fibres are incomparable irreducible covering subsets has nonempty covering fibres and dense pairwise complements after shrinking the base",
+   "results": "{\"t\": \"2026-10-23T23:40:16Z\", \"tool\": \"leanfinder\", \"query\": \"A finite family of closed subschemes whose generic fibres are incomparable irreducible covering subsets has nonempty covering fibres and dense pairwise complements after shrinking the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompactCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"AlgebraicGeometry.Scheme.zariskiPrecoverage\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\", \"AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f\", \"AlgebraicGeometry.Scheme.Cover.sigma\"], \"digest\": \"8fe8e905a59df7db\"}; Read the returned signatures: open covers and limit existence, dominant maps, open-map irreducibility and topological covering maps do not assert simultaneous spreading of the supplied closed pieces. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "8fe8e905a59df7db"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type scheme family over an irreducible base, generic density of pairwise differences between closed pieces, their covering property and nonemptiness persist on a common open neighbourhood",
+   "results": "{\"t\": \"2026-10-23T23:40:45Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type scheme family over an irreducible base, generic density of pairwise differences between closed pieces, their covering property and nonemptiness persist on a common open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.dominant_eq_topologically\"], \"digest\": \"31340f819bfd632f\"}; Read the returned signatures: open covers and limit existence, dominant maps, open-map irreducibility and topological covering maps do not assert simultaneous spreading of the supplied closed pieces. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "digest": "31340f819bfd632f"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-generic-fibre-component-lower-bound",
+  "date": "2026-10-22",
+  "group": "Q55"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "055A proof final paragraph: the invocation that each fibre has at least n ordinary irreducible components; In the Stacks 055A generic-constancy input to the 055B irreducible-fibre locus used by 05FH in the Noetherian-approximation branch of the blueprint proof; specifically Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), the projectivity of S over R (Tag 05FT) used with Tag 05FQ. In the resulting 05FT Noetherian-approximation input: 05FH, good irreducible-fibre locus. This input supports the constructibility proof in 055B for the irreducible-fibre locus. Subargument extracted from the returned 0554 proof: from the pairwise intersections $Z_{i,j}$ through the successive shrinkings and the open neighbourhood contained in every $f(X_i)$; returned Steps 4--6 and the base-open intersection in Step 7",
+   "via": [
+    "lem-trf-generic-fibre-component-lower-bound",
+    "lem-trf-geometric-component-count-generic-constancy",
+    "lem-trf-geometrically-irreducible-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-generic-closed-pieces-simultaneous-spread",
+  "worker": "stage1",
+  "summary": "Proved the simultaneous shrink by applying the existing ordinary-fibre density, closed-cover spreading and closed-subset nonemptiness nodes. Constructed the support homeomorphisms explicitly from fibre topology and the supplied closed immersions; proved generic density directly from irreducibility. Read Stacks 0554, 054X, 054Y and the image argument in 055G, all cited node statements and the current blueprint. No new nodes or statement changes; all degenerate cases retained.",
+  "blueprint": "Realizes the inherited Tag 0554 subargument (pairwise intersections through density, covering, nonempty component images and finite intersection of base opens) of the recorded 055A/055B/05FH ancestry. The latest lem-trf-local-term-locality proof has been rewritten around contracting correspondences and no longer displays this inherited branch; provenance is retained and no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-generic-open-fibre-density",
+    "why": "Generic scheme-theoretic shrinking tool, Tag 054X, explicitly used by the inherited 0554 route; no same-unit replacement states this density theorem."
+   },
+   {
+    "node": "lem-sbc-generic-fibre-closed-cover-spread",
+    "why": "Generic finite-type closed-cover spreading tool, Tag 054Y, explicitly used by 0554; no same-unit node supplies the general closed-cover theorem."
+   },
+   {
+    "node": "lem-sbc-generic-closed-subset-fibre-nonempty",
+    "why": "Generic closed-subset image tool packaging the generic-flatness/open-image argument used in 0554; no same-unit replacement gives this general nonemptiness theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-generic-open-fibre-density",
+  "lem-sbc-generic-fibre-closed-cover-spread",
+  "lem-sbc-generic-closed-subset-fibre-nonempty"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-74d96c183",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-74d96c183 (reviewer sub-agent of L); spot-checked: I read the item and every cited node in full; the delivery creates no new nodes. Sources read: Stacks 0554 (lemma-irreducible-components-in-neighbourhood, whole proof), 054X, 054Y (including the generic-flatness proof) and the open-image argument near 055G. The six steps follow the middle of 0554's proof in order: nowhere-density, then cover, then nonempty images, then a finite intersection of base opens. Step 1 builds the support homeomorphism a_{i,t} from the fibre and closed-immersion definitions, using j_i^{-1}(f^{-1}t)=h_i^{-1}t. Step 2 shows generic density from irreducibility and incomparability. Steps 3-5 apply lem-sbc-generic-open-fibre-density, -fibre-closed-cover-spread (with C=∪D_i, D=∅, closure{η}=Y) and -closed-subset-fibre-nonempty. Every hypothesis holds and each step takes only what the cited statement says. Step 6's finite intersection covers I=∅ and a single piece. I tested two crossing sections x=0 and x=t over A^1, where density fails at t=0 and the open V excludes it, so the statement holds as stated. No duplicate: the only citer is the parent lower-bound step 3, which matches the statement, and nearby trf, sbc and sfb nodes differ. I accept the three sbc tool_uses: 0554 uses exactly these generic tools and other trf nodes have the same ones accepted. No SGA citation, proof_deps equals the union of the steps' uses, no repair note applies, and the statement and stmt_deps are unchanged. The inherited blueprint-ancestry drift is a base-node matter. I did not consult the live DAG, which the rules forbid touching. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericClosedPiecesSimultaneousSpread",
+  "declaration": "AlgebraicGeometry.exists_open_fibre_closed_pieces_dense_complements",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericClosedPiecesSimultaneousSpread.lean",
+  "statement": "theorem exists_open_fibre_closed_pieces_dense_complements {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] (hY : IsIrreducible (Set.univ : Set Y)) (η : Y) (hη : IsGenericPoint η (Set.univ : Set Y)) (I : Type v) [Finite I] (Z : I → Scheme.{u}) (j : ∀ i : I, Z i ⟶ X) [∀ i : I, IsClosedImmersion (j i)] [∀ i : I, LocallyOfFiniteType (j i ≫ f)] [∀ i : I, QuasiCompact (j i ≫ f)] (hpieces : ∀ i : I, IsIrreducible ((f.fiberι η) ⁻¹' Set.range (j i))) (hcover : (⋃ i : I, (f.fiberι η) ⁻¹' Set.range (j i)) = Set.univ) (hincomparable : ∀ i k : I, i ≠ k → ¬ (f.fiberι η) ⁻¹' Set.range (j i) ⊆ (f.fiberι η) ⁻¹' Set.range (j k)) : ∃ V : Y.Opens, η ∈ V ∧ ∀ t : Y, t ∈ V → (∀ i : I, IsClosed ((f.fiberι t) ⁻¹' Set.range (j i)) ∧ ((f.fiberι t) ⁻¹' Set.range (j i)).Nonempty) ∧ (⋃ i : I, (f.fiberι t) ⁻¹' Set.range (j i)) = Set.univ ∧ ∀ i k : I, i ≠ k → Dense {x : (f.fiberι t) ⁻¹' Set.range (j i) | (x : f.fiber t) ∉ (f.fiberι t) ⁻¹' Set.range (j k)}",
+  "branch": "sheaf-dag",
+  "by": "Q72",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f846a1d7",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Read node, 6 stmt_dep records, Mathlib Fiber.lean (fiberι, range_fiberι), Stacks 0554 place, delivered module and report. Clause check: finite type = LocallyOfFiniteType+QuasiCompact; Y irreducible + IsGenericPoint η univ; I : Type v Finite with no nonempty assumption; IsClosedImmersion j i; h_i = j i ≫ f of finite type; D_{i,t} = (f.fiberι t)⁻¹' range (j i); hpieces IsIrreducible includes nonempty; hcover = univ; hincomparable over ordered distinct pairs; conclusion ∃ V : Y.Opens with η ∈ V and ∀ t ∈ V: closed+nonempty, union = univ, density in the subtype D_{i,t} (relative, as the node requires). Edge cases: empty I forces empty fibres; singleton I has no density clauses; no extra hypotheses or universe restriction. lean.statement verbatim in file; single sorried theorem, no definitions; docstrings carry the source place, 6 proof steps and the blueprint tag; no new nodes, stmt_deps unchanged; report has Worker report + Second reading by Q72; proof-import modules exist in live. No findings."
+ }
+}

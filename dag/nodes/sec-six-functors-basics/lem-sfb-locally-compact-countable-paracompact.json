@@ -1,0 +1,97 @@
+{
+ "id": "lem-sfb-locally-compact-countable-paracompact",
+ "kind": "statement",
+ "title": "Countable locally compact Hausdorff spaces are paracompact and normal",
+ "statement": "Let $X$ be a locally compact Hausdorff topological space with a countable base. Then $X$ is $\\sigma$-compact (a countable union of compact subsets), paracompact (every open cover admits a locally finite open refinement), and normal (any two disjoint closed subsets have disjoint open neighborhoods). Compact subsets are understood with their subspace topology [def-kun-subspace-topology].",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf. IV §4.B, printed p.203, topological background before Definition (4.5); precise formal inputs are the Mathlib instances named in mathlib_match."
+ },
+ "stmt_deps": [
+  "def-kun-subspace-topology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sigmaCompactSpace_of_locallyCompact_secondCountable|paracompact_of_locallyCompact_sigmaCompact|NormalSpace.of_paracompactSpace_r1Space",
+   "results": "OK 7 hits: Mathlib/Topology/MetricSpace/ProperSpace.lean, Mathlib/Topology/Compactness/Paracompact.lean, Mathlib/Topology/Compactness/Paracompact.lean, Mathlib/Topology/Compactness/Paracompact.lean, Mathlib/Topology/Compactness/Paracompact.lean, Mathlib/Topology/Compactness/Paracompact.lean, Mathlib/Topology/Compactness/SigmaCompact.lean.  Source directory Mathlib/Topology",
+   "date": "2026-10-24",
+   "verdict": "match: the sigma-compactness, paracompactness and normality instances give the three clauses, one per clause"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally compact second countable Hausdorff space is sigma compact paracompact and normal",
+   "results": "OK 8 hits: IsSigmaCompact, paracompact_of_locallyCompact_sigmaCompact, ParacompactSpace.mk, paracompact_of_compact, instLindelofSpaceOfSigmaCompactSpace, SigmaCompactSpace, SigmaCompactSpace_iff_exists_compact_covering, SigmaCompactSpace.mk. ",
+   "date": "2026-10-24",
+   "verdict": "match: the sigma-compactness, paracompactness and normality instances give the three clauses, one per clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "paracompact_of_locallyCompact_sigmaCompact",
+   "results": "OK 1 hits: paracompact_of_locallyCompact_sigmaCompact. ",
+   "date": "2026-10-24",
+   "verdict": "match: the sigma-compactness, paracompactness and normality instances give the three clauses, one per clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular locally compact space with a countable base is sigma compact and every open cover has a locally finite refinement",
+   "results": "OK 8 hits: refinement_of_locallyCompact_sigmaCompact_of_nhds_basis, sigmaCompactSpace_of_locallyCompact_secondCountable, paracompact_of_locallyCompact_sigmaCompact, refinement_of_locallyCompact_sigmaCompact_of_nhds_basis_set, paracompact_of_compact, ParacompactSpace.locallyFinite_refinement, countable_cover_nhds_of_sigmaCompact, CompactExhaustion.instInhabitedOfSigmaCompactSpaceOfWeaklyLocallyCompactSpace. ",
+   "date": "2026-10-24",
+   "verdict": "match: the sigma-compactness, paracompactness and normality instances give the three clauses, one per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "sigmaCompactSpace_of_locallyCompact_secondCountable, paracompact_of_locallyCompact_sigmaCompact, NormalSpace.of_paracompactSpace_r1Space",
+  "file": "Mathlib/Topology/Compactness/Paracompact.lean",
+  "how": "One declaration per clause: sigmaCompactSpace_of_locallyCompact_secondCountable, Mathlib/Topology/Compactness/SigmaCompact.lean:187; paracompact_of_locallyCompact_sigmaCompact, Mathlib/Topology/Compactness/Paracompact.lean:286; NormalSpace.of_paracompactSpace_r1Space, same file:299. LocallyCompactSpace supplies WeaklyLocallyCompactSpace and T2Space supplies R1Space by instance inference. No extra hypothesis.",
+  "line": 286
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-function-modules-acyclic",
+  "date": "2026-10-24",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Dolbeault complexes are acyclic resolutions. Supporting input: IV §4, discussion following Definition (4.4), printed p.203 (locally compact spaces with countable base are paracompact); Example (4.12), Theorem (4.15), Lemma (4.18), Corollary (4.19), printed pp.204--205. The soft-ring argument applies to the sheaf of complex-valued smooth functions and does not use a uniform dimension bound. Supporting input for smooth-module acyclicity: IV §4.B, printed p.203, topological background before Definition (4.5); precise formal inputs are the Mathlib instances named in mathlib_match.",
+   "via": [
+    "lem-sfb-smooth-function-modules-acyclic",
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

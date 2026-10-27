@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-space-easy-torsion-algebraization",
+ "kind": "statement",
+ "title": "Unique algebraization of a coherent map with adic torsion error",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ a Noetherian algebraic space over $S$ [def-trf-algebraic-space, def-sfb-space-coherent-adic-system], in the universes of [def-weil-size-convention]. Use quasi-coherent modules on the small etale ringed site [def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors]; coherent means coherent on etale scheme charts [pqf-def-coherent]. Let $L\\subseteq\\mathcal O_X$ be a quasi-coherent ideal, let $H$ be coherent and let $P\\in\\mathrm{Coh}(X,L)$ [def-sfb-space-coherent-adic-system]. Suppose $u:P\\to\\widehat H_L$ is a morphism and there is $t\\geq1$ such that $L^t$ kills the ordinary sheaf kernel and cokernel of every $u_n$. Then there exist a coherent module $E$, a module map $b:E\\to H$ whose ordinary kernel and cokernel are killed by some positive power of $L$, and an isomorphism $\\gamma:P\\xrightarrow{\\sim}\\widehat E_L$ such that $u=\\widehat b_L\\gamma$. The triple $(E,b,\\gamma)$ is unique up to unique isomorphism: for any two such triples there is exactly one module isomorphism $v:E\\xrightarrow{\\sim}E^{\\prime}$ with $b^{\\prime}v=b$ and $\\widehat v_L\\gamma=\\gamma^{\\prime}$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 08BB (lemma-existence-easy), existence and uniqueness of the torsion-controlled triple."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-coherent-adic-system",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Choose an etale scheme atlas $V\\to X$ and cover $V$ by affine opens. Each affine is Noetherian, by the locally Noetherian chart condition. Their images in $|X|$ are open: the atlas-test lemma makes their inverse images in $V$ open, and the final-topology definition then applies. They cover $|X|$, so quasi-compactness gives finitely many, with scheme coproduct $U$. Its components are open and closed by the scheme-coproduct theorem; the induced map is etale since it is etale on these open components. Thus $p:U\\to X$ is a surjective etale atlas with $U$ a Noetherian scheme. A finite disjoint union of Noetherian affine schemes is Noetherian since its components are open and closed. The empty space is handled by the empty atlas. This uses no separation or field hypothesis.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-sfb-space-coherent-adic-system",
+    "def-a1-space-point-topology",
+    "lem-a1-space-atlas-test-open-subsets",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX (lemma-topology-points), openness of affine-chart images and finite subcover"
+   }
+  },
+  {
+   "text": "Etale pullback here is restriction on localized sites. Hence it preserves the ordinary sheaf kernels and cokernels and the ideal-action maps. In particular $p^*u$ has its component kernels and cokernels killed by $(p^*L)^t$. The scheme Zariski/etale equivalence is exact, preserves finite presentation and commutes naturally with tensor pullback. Products $L^nM$ are images of the multiplication maps $L^{\\otimes n}\\otimes M\\to M$; exactness and the tensor comparison therefore identify these products and their quotients on both sites. Consequently the equivalence identifies completion diagrams, their transition maps, and the component annihilation hypothesis, not merely the individual underlying modules. On the Noetherian scheme $U$, coherence is the finite-presentation condition tested on affine charts. Apply the scheme torsion-triple theorem to the resulting Zariski data. Return to the etale site to obtain $(E_U,b_U,\\gamma_U)$ and $s\\ge1$ killing the actual kernel and cokernel of $b_U$. This theorem also gives uniqueness among triples having that actual torsion condition.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-sfb-space-coherent-adic-system",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-weil-pbc-easy-algebraization-torsion-triple"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BB (lemma-existence-easy), reduction to scheme Tag 0889(1); descent.tex Tags 03DX, 03LC, 06VE, 05VG"
+   }
+  },
+  {
+   "text": "Put $R=U\\times_XU$, with projections $r_1,r_2$. It is a scheme, etale over $U$, by the representable diagonal and etale scheme-test lemma. It is locally Noetherian by the chart convention; we do not assume $R$ affine or globally Noetherian. On each affine open $W\\subset R$, the restrictions of $r_1^*(E_U,b_U,\\gamma_U)$ and $r_2^*(E_U,b_U,\\gamma_U)$ are two torsion-controlled triples for the same restricted $u$. The site comparisons from step 2 preserve these data. The scheme theorem gives the unique isomorphism $a_W:r_1^*E_U|_W\\to r_2^*E_U|_W$ preserving $b$ and $\\gamma$. On an intersection of two such opens, pass to any affine open inside the intersection; scheme uniqueness makes the two maps equal there. Glue the Zariski maps, and their inverses, by the gluing-morphisms theorem; the site equivalence gives $a$ on $R$. The resulting map is an isomorphism since its composites with the glued inverse are identities on the affine cover. All the required equations hold there and therefore globally.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-sfb-space-coherent-adic-system",
+    "lem-weil-pbc-easy-algebraization-torsion-triple",
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BB (lemma-existence-easy), uniqueness and etale descent; scheme uniqueness Tag 0889(1), map gluing Tag 04TN"
+   }
+  },
+  {
+   "text": "On the triple fibre product the two arrows $a_{23}a_{12}$ and $a_{13}$ preserve $b$ and $\\gamma$: for the formal comparisons their composites are respectively $\\gamma_3\\gamma_2^{-1}\\gamma_2\\gamma_1^{-1}$ and $\\gamma_3\\gamma_1^{-1}$. On every affine open, scheme uniqueness identifies the arrows. The gluing-morphisms theorem identifies them globally. On the diagonal the same uniqueness identifies $a$ with the identity. Thus $(E_U,a)$ is a groupoid-module descent datum. The quasi-coherent groupoid equivalence descends it to a coherent $E$ on $X$, since $E_U$ is coherent, and descends $b_U$ to $b:E\\to H$. For each $n$, the chart calculus identifies the pullback of $E/L^nE$ with $E_U/(p^*L)^nE_U$. The component $\\gamma_{U,n}$ commutes with the descent data because $a$ preserves $\\gamma_U$; full faithfulness descends it and its inverse to $\\gamma_n:P_n\\simeq E/L^nE$. Transition compatibility is an equality of module maps checked on $U$ by faithfulness. The same argument descends $u_n=\\widehat b_n\\gamma_n$. Hence the $\\gamma_n$ form the required system isomorphism $\\gamma$.",
+   "uses": [
+    "lem-weil-pbc-easy-algebraization-torsion-triple",
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "lem-sfb-space-qcoh-groupoid-equivalence",
+    "lem-sfb-space-qcoh-affine-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BB (lemma-existence-easy), effective descent; spaces-properties.tex Tag 03M3; spaces-cohomology.tex Tag 07UB"
+   }
+  },
+  {
+   "text": "The kernel and cokernel of $b$ are quasi-coherent and their restrictions to $U$ are the actual kernel and cokernel of $b_U$, by the affine-chart calculus. Their multiplication maps by $L^s$ restrict to zero, since step 2 supplied the single exponent $s$ on the whole Noetherian scheme $U$. The faithful groupoid restriction functor therefore makes these multiplication maps zero on $X$. This proves the required global bound on the ordinary sheaf kernel and cokernel of $b$; no assertion that completion is faithful has been used.",
+   "uses": [
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-sfb-space-qcoh-groupoid-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BB (lemma-existence-easy), descent of the bounded torsion condition"
+   }
+  },
+  {
+   "text": "Given any two triples on $X$, their restrictions to $U$ satisfy the scheme theorem, including the actual torsion condition on each algebraic map. It gives a unique $v_U:E_U\\simeq E'_U$ with $b'_Uv_U=b_U$ and $\\widehat v_U\\gamma_U=\\gamma'_U$. On $R$, the two descent comparisons of $v_U$ are isomorphisms between the same triples. On every affine open of $R$ they agree by scheme uniqueness; gluing-morphisms uniqueness makes them equal on $R$. Thus $v_U$ respects the groupoid data and descends to an isomorphism $v$. Its two equations can be checked after restriction to $U$, componentwise for the completion equation, and hold by full faithfulness. Any other such $v$ restricts to $v_U$ by scheme uniqueness and equals $v$ by faithfulness. This proves the stated uniqueness for any two triples.",
+   "uses": [
+    "lem-weil-pbc-easy-algebraization-torsion-triple",
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "lem-sfb-space-qcoh-groupoid-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BB (lemma-existence-easy), uniqueness via scheme Tag 0889(1) and faithful etale descent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-sfb-space-coherent-adic-system",
+  "def-a1-space-point-topology",
+  "lem-a1-space-atlas-test-open-subsets",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-weil-pbc-easy-algebraization-torsion-triple",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-sfb-space-qcoh-groupoid-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 08BB (lemma-existence-easy), with the etale descent and uniqueness argument expanded using scheme Tag 0889(1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent adic systems on a Noetherian algebraic space algebraize uniquely relative to a coherent sheaf when component kernel and cokernel are killed by the completion ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.algHom_ext\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} {A : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (I : Ideal S) [IsAdicComplete I S] [inst_4 : CommRing A] [inst_5 : Algebra R A] {f g : A →ₐ[R] S},\\n  (∀ (n : ℕ), (Ideal.Quotient.mkₐ R (I ^ n)).comp f = (Ideal.Quotient.mkₐ R (I ^ n)).co\", \"doc\": \"Let $ R $ be a commutative semiring, $ A $ an $ R $-algebra, $ I $ an ideal of $ R $, and $ S $ an $ R $-algebra that is adic complete with respect to $ I $. If two algebra homomorphisms $ f, g : A \\\\t\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"AdicCompletion.ext_evalₐ\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {x y : AdicCompletion I R},\\n  (∀ (n : ℕ), (AdicCompletion.evalₐ I n) x = (AdicCompletion.evalₐ I n) y) → x = y\", \"doc\": \"If two elements $x$ and $y$ in the $I$-adic completion of a commutative ring $R$ satisfy $\\\\text{eval}_\\\\mathfrak{a}(n, x) = \\\\text{eval}_\\\\mathfrak{a}(n, y)$ for all natural numbers $n$, then $x = y$. Th\"}\n  {\"name\": \"AdicCompletion.ext\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {x y : AdicCompletion I M}, (∀ (n : ℕ), ↑x n = ↑y n) → x = y\", \"doc\": \"In the adic completion of an $ R $-module $ M $ with respect to an ideal $ I $, two elements $ x $ and $ y $ are equal if their projections to each quotient module $ M/I^nM $ coincide for all natural \"}\n  {\"name\": \"AdicCompletion.map_injective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N},\\n  Function.Injective ⇑f → Function.Injective ⇑(AdicCompletion.map I f\", \"doc\": \"If $ f : M \\\\to N $ is an injective $ R $-linear map between $ R $-modules, then the induced map between the $ I $-adic completions of $ M $ and $ N $ is also injective, where $ R $ is a commutative ri\"}\n  {\"name\": \"AdicCompletion.of_inj\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsHausdorff I M] {a b : M}, (AdicCompletion.of I M) a = (AdicCompletion.of I M) b ↔ a = b\", \"doc\": \"If the Hausdorff condition holds for the ideal $ I $ and module $ M $, then the canonical $ R $-linear map from $ M $ to its $ I $-adic completion is injective, i.e., $ \\\\mathrm{of}(a) = \\\\mathrm{of}(b)\"}\n  {\"name\": \"AdicCompletion.instAlgebra\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → (I : Ideal R) → [Algebra S R] → Algebra S (AdicCompletion I R)\", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ R $, and an $ S $-algebra structure on $ R $, the $ I $-adic completion of $ R $ inherits a canonical $ S $-algebra structure. This structu\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned module-completion, formal smoothness, ideal-filter and quotient-map results do not state the algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique algebraization of a formal coherent module map with bounded adic torsion kernel and cokernel",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.map_ext'\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"{f g : AdicCompletion I M →ₗ[AdicCompletion I R] T}\\n  (h : ∀ (a : AdicCauchySequence I M), f (AdicCompletion.mk I M a) = g (AdicCompletion.mk I M a)) : f = g\", \"doc\": \"For any two linear maps from the $ I $-adic completion of an $ R $-module $ M $ (as a module over the $ I $-adic completion of $ R $) to a module $ T $, if the maps agree on all elements that are imag\"}\n  {\"name\": \"IsAdicComplete.algHom_ext\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"{f g : A →ₐ[R] S} (H : ∀ n, (Ideal.Quotient.mkₐ R (I ^ n)).comp f = (Ideal.Quotient.mkₐ R (I ^ n)).comp g) : f = g\", \"doc\": \"Let $ R $ be a commutative semiring, $ A $ an $ R $-algebra, $ I $ an ideal of $ R $, and $ S $ an $ R $-algebra that is adic complete with respect to $ I $. If two algebra homomorphisms $ f, g : A \\\\t\"}\n  {\"name\": \"AdicCompletion.map_ext''_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f g : AdicCompletion I M →ₗ[R] N},\\n  f = g ↔ f ∘ₗ AdicCompletion.mk I M = g ∘ₗ AdicCompletion.mk I M\", \"doc\": \"Two $ R $-linear maps from the $ I $-adic completion of $ M $ to $ N $ are equal if and only if their compositions with the canonical $ R $-linear map from $ I $-adic Cauchy sequences to the completio\"}\n  {\"name\": \"AdicCompletion.map_ext\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"{N} {f g : AdicCompletion I M → N}\\n  (h : ∀ (a : AdicCauchySequence I M), f (AdicCompletion.mk I M a) = g (AdicCompletion.mk I M a)) : f = g\", \"doc\": \"If two $ R $-module homomorphisms from the $ I $-adic completion of $ M $ to another module $ N $ agree on the image of the canonical map from $ I $-adic Cauchy sequences, then the homomorphisms are e\"}\n  {\"name\": \"AdicCompletion.map_ext''\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"{f g : AdicCompletion I M →ₗ[R] N} (h : f.comp (AdicCompletion.mk I M) = g.comp (AdicCompletion.mk I M)) : f = g\", \"doc\": \"If two linear maps $ f, g : \\\\varprojlim M/I^nM \\\\to N $ satisfy $ f \\\\circ \\\\text{mk} = g \\\\circ \\\\text{mk} $, where $ \\\\text{mk} $ is the canonical linear embedding of $ I $-adic Cauchy sequences into the \"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique'\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[FormallyUnramified R A] {C : Type*} [Ring C] [Algebra R C] (f : B →ₐ[R] C)\\n  (hf : IsNilpotent <| RingHom.ker (f : B →+* C)) (g₁ g₂ : A →ₐ[R] B) (h : f.comp g₁ = f.comp g₂) : g₁ = g₂\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ a formally unramified $ R $-algebra. Suppose $ B $ and $ C $ are rings equipped with $ R $-algebra structures, and $ f : B \\\\to C $ is an $ R $-algebra homomor\"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique_of_ringHom\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[FormallyUnramified R A] {C : Type*} [Ring C] (f : B →+* C) (hf : IsNilpotent <| RingHom.ker f) (g₁ g₂ : A →ₐ[R] B)\\n  (h : f.comp ↑g₁ = f.comp (g₂ : A →+* B)) : g₁ = g₂\", \"doc\": \"Given a formally unramified $ R $-algebra $ A $, if $ f : B \\\\to C $ is a ring homomorphism with nilpotent kernel, then any two $ A $-algebra homomorphisms $ g_1, g_2 : A \\\\to B $ satisfying $ f \\\\circ g\"}\n  {\"name\": \"AdicCompletion.of_bijective\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \": Function.Bijective (of I M)\", \"doc\": \"The canonical $ R $-linear map from an $ R $-module $ M $ to its $ I $-adic completion is bijective.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned module-completion, formal smoothness, ideal-filter and quotient-map results do not state the algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"SheafOfModules\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned module-completion, formal smoothness, ideal-filter and quotient-map results do not state the algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "existence.easy|torsion.*algebraization|algebraization.*torsion",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned module-completion, formal smoothness, ideal-filter and quotient-map results do not state the algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recover a finite module from its completion and a map with kernel and cokernel annihilated by a power of the ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the proposition that $ M $ is adic complete with respect to $ I $.\"}\n  {\"name\": \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f : M →ₗ[R] N},\\n  Function.Surjective ⇑((I • ⊤).mkQ ∘ₗ f) →\\n    ∀ {x : M} {n : ℕ} {y : N ⧸ I ^ n • ⊤} {y' : N ⧸ I ^ (n +\", \"doc\": \"Given a surjective composition of the canonical quotient map $ N \\\\to N/(I^n \\\\bullet \\\\top) $ with an $ R $-linear map $ f: M \\\\to N $, for any $ x \\\\in M $, $ n \\\\in \\\\mathbb{N} $, and compatible elements \"}\n  {\"name\": \"IsPrecomplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"The property of an $ R $-module $ M $ being precomplete with respect to an ideal $ I $, meaning that the natural map from $ M $ to its completion with respect to the $ I $-adic topology is an isomorph\"}\n  {\"name\": \"AdicCompletion.of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) → (M : Type u_4) → [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → M →ₗ[R] AdicCompletion I M\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}\n  {\"name\": \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f : M →ₗ[R] N},\\n  Function.Surjective ⇑((I • ⊤).mkQ ∘ₗ f) →\\n    ∀ {x : M} {y : N} {n : ℕ},\\n      f x ≡ y [SMOD I ^ n • ⊤\", \"doc\": \"Given a surjective linear map $ f : M \\\\to N $ composed with the quotient map to $ N/(I^n \\\\cdot N) $, for any $ x \\\\in M $, $ y \\\\in N $, and natural number $ n $, if $ f(x) \\\\equiv y \\\\mod I^n \\\\cdot N $, \"}\n  {\"name\": \"AdicCompletion.ofLinearEquiv\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u_4) →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → [IsAdicComplete I M] → M ≃ₗ[R] AdicCompletion I M\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $ with additive commutative group structure, and the condition that $ M $ is $ I $-adically complete, this constructs an $ R $-linea\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"AdicCompletion.module\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Module (AdicCompletion I R) (AdicCompletion I M)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, the $ I $-adic completion of $ M $ admits a scalar multiplication by the $ I $-adic completion of $ R $, making it a module ove\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned module-completion, formal smoothness, ideal-filter and quotient-map results do not state the algebraic-space coherent-adic assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-adic-torsion-devissage",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting proper-support existence subargument (Stacks 08BC) in the compactification/direct-image prerequisite chain of det-thm-sf-ctf-stability-direct-images.",
+   "via": [
+    "lem-sfb-space-adic-torsion-devissage",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-easy-torsion-algebraization",
+  "worker": "stage1",
+  "summary": "Expanded the etale-local scheme reduction of Stacks 08BB into a finite atlas, exact site comparison, unique overlap isomorphisms, cocycle and effective module descent, a global actual torsion bound, and uniqueness. Reused all necessary existing nodes; no new nodes or statement changes.",
+  "blueprint": "Supporting existence argument (Stacks 08BB inside 08BC) in the proper-support effectivity prerequisite chain of det-thm-sf-ctf-stability-direct-images, proof (3), compactification prerequisite. The inherited created.item chain has no blueprint-kind ancestor, as blueprint_refs.py ancestor reports; its existing null from.node and via list are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-atlas-test-open-subsets",
+    "why": "Generic chart-image openness calculation needed to choose a finite atlas; no statement of this unit supplies that point-topology calculation."
+   },
+   {
+    "node": "lem-weil-pbc-easy-algebraization-torsion-triple",
+    "why": "The scheme version, Stacks 0889(1), is precisely the local input required by Stacks 08BB; this is a generic algebraization tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Generic uniqueness and gluing of module morphisms on affine open covers of overlaps; no unit statement supplies this topological sheaf tool."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic exact-site input (together with the separate exactness node) for applying the Zariski scheme theorem to small-etale modules."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic representability and etale permanence for the atlas relation and its projections; no unit-specific statement replaces this scheme-test tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic scheme coproduct with open-and-closed components, used to combine the finite affine atlas into one Noetherian scheme; no unit-specific statement supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-atlas-test-open-subsets",
+  "lem-weil-pbc-easy-algebraization-torsion-triple",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-96b7d892c",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-96b7d892c (reviewer sub-agent of L); spot-checked: Read the item, all 12 cited node statements, the report, Stacks 08BB (spaces-more-morphisms lemma-existence-easy, l.9801, and 08BA) and coherent 0889. The statement is verbatim against the live base and matches 08BB hypothesis by hypothesis, keeping the actual torsion condition on competing triples. There are no new nodes, no repair note and no live split; proof_deps equal the union of step uses. Steps: (1) the image of an affine chart is open: the atlas-test lemma's last clause with t=v, B=W gives openness in V, its first clause gives the final topology; then a finite Noetherian coproduct atlas U. (2) Zariski/etale equivalence, exactness and the chart calculus identify L^nM (image of multiplication), Coh(U,L) and the hypothesis; 0889 applies on Noetherian U and gives s. (3) R=U×_XU is a locally Noetherian scheme; scheme uniqueness is used only on affine opens and glued by 04TN, with no E1 affine-overlap gap. (4) Cocycle on the triple product and identity on the diagonal; groupoid descent (03M3/07UB) gives a coherent E, then b and γ_n by full faithfulness. (5) L^s kills ker and coker b by faithfulness. (6) Uniqueness via v_U, descent compatibility and faithfulness. Edge cases L=O_X, L=0 and X empty hold; the report's L=0 remark is wrong (the hypothesis is vacuous there), but the statement is true. No algebraic-space duplicate in the DAG. I accept the split_report tool_uses (generic a1/pbc/trf tools). Batch-5: def-trf-algebraic-space, def-a1-space-point-topology, lem-a1-space-atlas-test-open-subsets, lem-trf-scheme-zariski-etale-quasi-coherent-equivalence (03DX), lem-sfb-scheme-etale-module-exact-finiteness-comparison, lem-sfb-space-qcoh-affine-chart-calculus, lem-trf-space-representable-etale-scheme-tests (03EC) and lem-sfb-space-qcoh-groupoid-equivalence are general definitions or foundational descent lemmas; the item's closure contains no nt-assume leaf, target, or trace-formula/Poincare theorem, so OK. Advisory: lem-trf-space-qc-finite-affine-atlas-refinement exists under the qc-atlas convention; step 1's own route is valid. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEasyTorsionAlgebraization",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_unique_torsionControlled_algebraization",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceEasyTorsionAlgebraization.lean",
+  "statement": "theorem exists_unique_torsionControlled_algebraization {S : Scheme.{u}} (X : AlgebraicSpace S) (hln : ∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) (hqc : CompactSpace (Point X.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated X) (L : QuasiCoherentIdeal X) (H : ObjectProperty.FullSubcategory (C := X.Modules) (fun M ↦ M.IsQuasicoherent ∧ ∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj M))) (P : CoherentAdicSystem X L hln hqc hqs) (u : P ⟶ (coherentAdicCompletion L hln hqc hqs).obj H) (htorsion : CoherentAdicKernelCokernelKilled L u.hom) : ∃ (E : ObjectProperty.FullSubcategory (C := X.Modules) (fun M ↦ M.IsQuasicoherent ∧ ∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj M))) (b : E ⟶ H) (γ : P ≅ (coherentAdicCompletion L hln hqc hqs).obj E), u = γ.hom ≫ (coherentAdicCompletion L hln hqc hqs).map b ∧ (∃ s : ℕ, 1 ≤ s ∧ (∀ k : KernelFork b.hom, IsLimit k → AdicPowerKills L s k.pt) ∧ (∀ c : CokernelCofork b.hom, IsColimit c → AdicPowerKills L s c.pt)) ∧ ∀ (E' : ObjectProperty.FullSubcategory (C := X.Modules) (fun M ↦ M.IsQuasicoherent ∧ ∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj M))) (b' : E' ⟶ H) (γ' : P ≅ (coherentAdicCompletion L hln hqc hqs).obj E'), u = γ'.hom ≫ (coherentAdicCompletion L hln hqc hqs).map b' → (∃ s : ℕ, 1 ≤ s ∧ (∀ k : KernelFork b'.hom, IsLimit k → AdicPowerKills L s k.pt) ∧ (∀ c : CokernelCofork b'.hom, IsColimit c → AdicPowerKills L s c.pt)) → ∃! v : E ≅ E', v.hom ≫ b' = b ∧ γ.hom ≫ (coherentAdicCompletion L hln hqc hqs).map v.hom = γ'.hom",
+  "branch": "sheaf-dag",
+  "by": "Q102",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-add20b5ad",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Stmt matches Stacks 08BB/node clause by clause: S, X Noetherian via the dep's hln/hqc/hqs; L QuasiCoherentIdeal; H coherent in the same subtype as coherentAdicCompletion; P : CoherentAdicSystem; u into completion; htorsion = CoherentAdicKernelCokernelKilled (one t>=1, ordinary ker/coker of every u_n). Conclusion: coherent E, b, γ with u = γ.hom ≫ map b; ∃ s>=1 killing ordinary ker/coker of b; uniqueness ∃! v : E ≅ E' with v.hom≫b'=b and γ.hom≫map v.hom=γ'.hom, competitor keeps its own torsion bound; chosen-vs-any form equivalent to any-two. Edge cases empty X, L=0, L=O_X, nilpotent L, t=s=1 OK. No algebraic-space duplicate (existing torsion-triple decls are scheme-only). Node differs from live only in lean; statement field verbatim; single sorry, no defs; source/blueprint docstrings and 6-step proof docstring present; report has both sections. Advisory: QuasiCoherentIdeal/IsAbsolutelyQuasiSeparated/schemeRestriction owners reached only through def-sfb-space-coherent-adic-system (inherited base deps). No fixes; no compile needed."
+ }
+}

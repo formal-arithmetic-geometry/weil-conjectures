@@ -1,0 +1,225 @@
+{
+ "id": "lem-trf-finite-stage-span-pointed-etale-refinement",
+ "kind": "statement",
+ "title": "A supplied finite-stage span eventually becomes pointed elementary etale",
+ "statement": "Let $I$ be a nonempty directed set and $(S_i)_{i\\in I}$ an inverse system of affine schemes [def-pc-scheme, pqf-def-affine-morphism], with limit $B$ and projections $p_i$ [def-weil-pbc-category-colimit]. Fix $r\\in I$, a point $b\\in B$, and suppose the canonical maps $\\kappa(p_i(b))\\to\\kappa(b)$ are isomorphisms for every $i\\ge r$ [def-weil-residue-field]. Let $V_r,P_r,Q_r$ be affine schemes of finite presentation over $S_r$ [def-sbc-locally-finite-presentation, def-weil-pbc-scheme-conventions], equipped with arbitrary $S_r$-morphisms $\\alpha_r:V_r\\to P_r$ and $\\beta_r:V_r\\to Q_r$. For $i\\ge r$ and $T_r\\in\\{V_r,P_r,Q_r\\}$ write $T_i=T_r\\times_{S_r}S_i$, $T_B=T_r\\times_{S_r}B$, and $\\pi_{T,i}:T_B\\to T_i$ for the canonical projection; write $\\alpha_i,\\beta_i,\\alpha_B,\\beta_B$ for the actual pullback arrows [def-pc-fibre-product]. Suppose $z\\in V_B$ lies over $b$, both $\\alpha_B,\\beta_B$ are etale [def-weil-etale-morphism], and their induced maps $\\kappa(\\alpha_B(z))\\to\\kappa(z)$ and $\\kappa(\\beta_B(z))\\to\\kappa(z)$ are isomorphisms. Then there is $k\\ge r$ such that for every $j\\ge k$ the schemes $V_j,P_j,Q_j$ are affine of finite presentation over $S_j$, both arrows $\\alpha_j,\\beta_j$ are etale, and, putting $z_j=\\pi_{V,j}(z)$, $x_j=\\pi_{P,j}(\\alpha_B(z))$, $y_j=\\pi_{Q,j}(\\beta_B(z))$, one has $\\alpha_j(z_j)=x_j$, $\\beta_j(z_j)=y_j$. The canonical maps $\\kappa(z_j)\\to\\kappa(z)$, $\\kappa(x_j)\\to\\kappa(\\alpha_B(z))$, $\\kappa(y_j)\\to\\kappa(\\beta_B(z))$ are isomorphisms, as are $\\kappa(x_j)\\to\\kappa(z_j)$ and $\\kappa(y_j)\\to\\kappa(z_j)$ induced by $\\alpha_j,\\beta_j$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GDX, lemma-relative-map-approximation-pre, finite-stage span paragraph and residue-field chain; Limits Tag 07RP, lemma-descend-etale; Algebra Tag 0H9M, remark-local-ring-fibre. Affine finite-presentation check and canonical fibre comparison are the refinements explained in the report."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For each $T_r\\in\\{V_r,P_r,Q_r\\}$, the affine fibre-product formula shows that $T_j$ is affine. Base-change permanence gives finite presentation of $T_j\\to S_j$. Since a finite-presentation algebra is finitely generated (use its same polynomial generators), $P_r,Q_r$ are locally of finite type over $S_r$. Apply the map-over-base finite-presentation lemma to $V_r\\to S_r$ and each of $P_r,Q_r\\to S_r$: the supplied arrows $\\alpha_r,\\beta_r$ are locally of finite presentation. This does not assume these arrows are etale at stage $r$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-a1-map-over-base-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, lemma-relative-map-approximation-pre, finite-stage span paragraph; Morphisms Tags 01TS, lemma-base-change-finite-presentation, and 02FV(1), lemma-finite-presentation-permanence."
+   }
+  },
+  {
+   "text": "The transition maps are affine by affine target-locality, using the one-member cover of each affine target and the affine source. Apply affine-chart etale descent to $\\alpha_r$ with the whole affine schemes $S_r,P_r,V_r$ as $W,V,U$, respectively. Its limit hypothesis is precisely etaleness of $\\alpha_B$; step 1 supplies local finite presentation. Thus $\\alpha_j$ is etale for all $j\\ge k_\\alpha\\ge r$. Apply it again to $\\beta_r$ with whole charts $S_r,Q_r,V_r$. Choose a common upper bound $k$ of $k_\\alpha,k_\\beta$. All $j\\ge k$ satisfy both conclusions.",
+   "uses": [
+    "lem-weil-pbc-etale-affine-chart-descent",
+    "pqf-lem-affine-local-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, lemma-relative-map-approximation-pre, sentence applying Limits Tag 07RP, lemma-descend-etale; all-later-stage affine-chart form."
+   }
+  },
+  {
+   "text": "Fix $j\\ge k$ and $T_r\\in\\{V_r,P_r,Q_r\\}$. Pullback associativity identifies $T_B=T_j\\times_{S_j}B$, with first projection $\\pi_{T,j}$: both descriptions represent pairs with equal composites to $S_r$, by the fibre-product universal property. For $t\\in T_B$ over $b$, put $t_j=\\pi_{T,j}(t)$ and $b_j=p_j(b)$. Set $K=\\kappa(b_j)$, $L=\\kappa(b)$, $E=\\kappa(t_j)$, and let $\\lambda:K\\to L$ be the assumed canonical isomorphism. The tensor product $E\\otimes_K L$ is canonically $E$: the map $a\\otimes c\\mapsto a\\,\\lambda^{-1}(c)$ has inverse $a\\mapsto a\\otimes1$, since the balancing relation gives $a\\otimes c=a\\lambda^{-1}(c)\\otimes1$. This is a field, so the kernel of its map to $\\kappa(t)$ is zero. The fibre-product point residue-field lemma therefore says that this tensor-to-$\\kappa(t)$ map is an isomorphism. Its restriction along $a\\mapsto a\\otimes1$ is exactly $\\pi_{T,j}^{\\sharp}:\\kappa(t_j)\\to\\kappa(t)$, by that lemma's compatibility clause. Consequently this canonical residue map is an isomorphism. Apply this to $t=z,\\alpha_B(z),\\beta_B(z)$ for $T=V,P,Q$, respectively.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-point-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, lemma-relative-map-approximation-pre, residue-field chain; Schemes Tag 01JT, lemma-points-fibre-product, residue-field sentence and its canonical tensor map."
+   }
+  },
+  {
+   "text": "The actual pullback arrows satisfy $\\alpha_j\\pi_{V,j}=\\pi_{P,j}\\alpha_B$ and $\\beta_j\\pi_{V,j}=\\pi_{Q,j}\\beta_B$ by the defining projection identities. Evaluating at $z$ gives the asserted point equalities. Write $c_V,c_P,c_Q$ for the three canonical residue isomorphisms from step 3, and $a_B,b_B$ for the two assumed limit residue isomorphisms. Composition of the local ring maps and passage to residue fields give $c_V\\alpha_j^{\\sharp}=a_Bc_P$ and $c_V\\beta_j^{\\sharp}=b_Bc_Q$. Hence $\\alpha_j^{\\sharp}=c_V^{-1}a_Bc_P$ and $\\beta_j^{\\sharp}=c_V^{-1}b_Bc_Q$ are isomorphisms, for every $j\\ge k$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, lemma-relative-map-approximation-pre, two elementary-etale-neighbourhood conclusions following the residue-field chain; canonical-map verification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-weil-pbc-etale-affine-chart-descent",
+  "pqf-lem-affine-local-target",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GDX, lemma-relative-map-approximation-pre, finite-stage span and residue-field chain, expanded using Morphisms 02FV and Schemes 01JT to verify the canonical residue maps for arbitrary supplied affine models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "descend.*[Ee]tale|[Ee]tale.*descend|residueFieldMap.*[Ii]so|[Ii]so.*residueFieldMap",
+   "results": "msearch OK, 4 hits; Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean; Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean; Mathlib/AlgebraicGeometry/ResidueField.lean; Mathlib/AlgebraicGeometry/ResidueField.lean Directory: AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "No match: composition, base change, etale algebra presentations and fpqc descent do not give eventual etaleness and all canonical pointed residue comparisons for a supplied finite-stage span along an arbitrary affine inverse system."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A span already defined at a finite stage becomes etale with residue field isomorphisms at the projected point when its limit span is elementary etale",
+   "results": "msearch UNAVAILABLE, 0 hits; . service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"residueFieldMap\", \"IsIso\"",
+   "results": "msearch OK, 1 hits; AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion",
+   "date": "2026-10-22",
+   "verdict": "No match: composition, base change, etale algebra presentations and fpqc descent do not give eventual etaleness and all canonical pointed residue comparisons for a supplied finite-stage span along an arbitrary affine inverse system."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a span of affine finitely presented schemes over an affine inverse system, if both arrows at the limit are etale and elementary at a point and base point residue fields are unchanged then the stage span is eventually elementary etale",
+   "results": "msearch OK, 8 hits; AlgebraicGeometry.IsEtale.of_comp; Algebra.IsEtaleAt.comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; Algebra.Etale.exists_subalgebra_fg; Algebra.Etale.comp; Algebra.FormallyEtale.instForallOfFinite; RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+   "date": "2026-10-22",
+   "verdict": "No match: composition, base change, etale algebra presentations and fpqc descent do not give eventual etaleness and all canonical pointed residue comparisons for a supplied finite-stage span along an arbitrary affine inverse system."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eventual etaleness of two affine finite presentation morphisms with preservation of residue fields over a base point with trivial residue field extension",
+   "results": "msearch OK, 8 hits; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; RingHom.Etale.propertyIsLocal; RingHom.Etale.toAlgebra; Algebra.IsEtaleAt.comp; Algebra.mem_etaleLocus_iff; RingHom.etale_algebraMap; AlgebraicGeometry.IsEtale",
+   "date": "2026-10-22",
+   "verdict": "No match: composition, base change, etale algebra presentations and fpqc descent do not give eventual etaleness and all canonical pointed residue comparisons for a supplied finite-stage span along an arbitrary affine inverse system."
+  },
+  {
+   "tool": "grep",
+   "query": "descend.*[Ee]tale|[Ee]tale.*descend|residueFieldMap.*[Ii]so|[Ii]so.*residueFieldMap",
+   "results": "msearch OK, 4 hits: Mathlib/AlgebraicGeometry/ResidueField.lean; Mathlib/AlgebraicGeometry/ResidueField.lean; Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean; Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean Directory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "No match: hits describe affine limits, fpqc descent, etale localizations, open-immersion residue maps or tensor-point constructions; none states the supplied-span conclusion. The general residue-point theorem is already a closed project DAG node, cited in step 3."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Eventual pointed etale refinement of a finite stage span over an inverse limit of affine schemes",
+   "results": "msearch OK, 8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.isAffine_of_isLimit; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.Scheme.OpenCover.affineRefinement; AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit; RingHom.Etale.ofLocalizationSpan; AlgebraicGeometry.AffineScheme.hasLimits",
+   "date": "2026-10-23",
+   "verdict": "No match: hits describe affine limits, fpqc descent, etale localizations, open-immersion residue maps or tensor-point constructions; none states the supplied-span conclusion. The general residue-point theorem is already a closed project DAG node, cited in step 3."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"residueFieldMap\", \"IsIso\"",
+   "results": "msearch OK, 1 hits: AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion",
+   "date": "2026-10-23",
+   "verdict": "No match: hits describe affine limits, fpqc descent, etale localizations, open-immersion residue maps or tensor-point constructions; none states the supplied-span conclusion. The general residue-point theorem is already a closed project DAG node, cited in step 3."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Residue field maps on a cartesian square are isomorphisms when the field map at the base point is an isomorphism",
+   "results": "msearch OK, 8 hits: AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint; AlgebraicGeometry.Scheme.instIsOverMapHomCommRingCatResidueFieldCongr; Ideal.fiberIsoOfBijectiveResidueField; AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass; AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor; AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion; AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff; AlgebraicGeometry.Scheme.Pullback.ofPointTensor",
+   "date": "2026-10-23",
+   "verdict": "No match: hits describe affine limits, fpqc descent, etale localizations, open-immersion residue maps or tensor-point constructions; none states the supplied-span conclusion. The general residue-point theorem is already a closed project DAG node, cited in step 3."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A supplied span between affine finitely presented schemes becomes etale at a finite stage of an affine inverse limit and projected point residue fields are unchanged",
+   "results": "msearch OK, 8 hits: Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; RingHom.Etale.ofLocalizationSpanTarget; Algebra.Etale.finitePresentation; Algebra.mem_etaleLocus_iff; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; Algebra.exists_etale_of_isEtaleAt; Algebra.etaleLocus_eq_univ_iff_etale",
+   "date": "2026-10-23",
+   "verdict": "No match: hits describe affine limits, fpqc descent, etale localizations, open-immersion residue maps or tensor-point constructions; none states the supplied-span conclusion. The general residue-point theorem is already a closed project DAG node, cited in step 3."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fixed-family-etale-span-descent",
+  "date": "2026-10-22",
+  "group": "Q82"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical relative-map approximation input to the nodal local-equation argument: the finite-stage descent paragraph of Tag 0GDX, keeping X_i=X×_S S_i and Y_i=Y×_T S_i fixed and descending only the pointed common etale neighbourhood. Re-split of lem-trf-fixed-family-etale-span-descent, former proof steps 5–9.",
+   "via": [
+    "lem-trf-fixed-family-etale-span-descent",
+    "lem-trf-relative-completion-etale-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-stage-span-pointed-etale-refinement",
+  "worker": "stage1",
+  "summary": "Four-step proof using existing nodes only: finite presentation of supplied arrows, persistent etale descent on whole affine charts, canonical residue-field comparison via 01JT and an explicit inverse tensor map, then the commuting residue squares. Statement unchanged; no new nodes.",
+  "blueprint": "Preserves the historical 0GDX finite-stage span input recorded in blueprint.from: former steps 5–9 of lem-trf-fixed-family-etale-span-descent. The current latest lem-trf-local-term-locality follows the contracting-correspondence route and no longer mentions this historical approximation input; no current chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-6f30d0682",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-6f30d0682 (reviewer sub-agent of L); spot-checked: Read the item's four steps and every cited statement in full. No new nodes; statement and stmt_deps unchanged; proof_deps equals the union of uses; no SGA cited. Source: Stacks 0GDX (more-morphisms.tex:11144), the finite-stage span paragraph with its Limits 07RP step and the residue-field chain. The item abstracts it to an arbitrary affine directed system with a tail residue hypothesis. Step 1: affine-spectra lemma and clause (3) of qcqs permanence give T_j affine and of finite presentation; map-over-base FP (p: V_r->S_r LFP, q: P_r->S_r LFT) gives alpha_r and beta_r LFP. LFP=>LFT is the Mathlib instance at Morphisms/FinitePresentation.lean:108. Advisory: def-weil-finite-type-morphism is not in step 1's uses, but the cited lemma's statement carries it. Step 2: 01S8 gives affine transitions; affine-chart descent applies with whole charts W=S_r, V=P_r, U=V_r (so U_S=V_B) and gives etaleness at every j>=k; directedness gives a common bound. Step 3: T_B ~ T_j x_{S_j} B by pasting. For the 01JT residue lemma with x=t_j, y=b, s=b_j: E tensor_K L ~ E is a field, so its kernel p is 0, and the in-particular clause plus compatibility with kappa(x) gives pi^# an iso. Step 4: elementary; directions checked (c_V alpha_j^# = a_B c_P). Small cases checked: singleton I, identity spans, transcendental residue extensions, empty V_B. Duplicate search over 07RP/descend-etale hits (descend-etale, etale-finite-data-descent, fpqc descend, sc-generic-pointed-etale): none states this pointed span refinement. The three off-unit cited nodes are closed in slopmaster2, so they are tools, not route. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteStageSpanPointedEtaleRefinement",
+  "declaration": "AlgebraicGeometry.exists_finiteStage_span_pointed_etale_refinement",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteStageSpanProjection",
+   "AlgebraicGeometry.exists_finiteStage_span_pointed_etale_refinement"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteStageSpanPointedEtaleRefinement.lean",
+  "statement": "theorem exists_finiteStage_span_pointed_etale_refinement {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, IsAffine (D.obj i)] (c : Cone D) (hc : IsLimit c) (r : I) (b : c.pt) (hres : ∀ (i : I), r ≤ i → IsIso ((c.π.app (op i)).residueFieldMap b)) (V P Q : Over (D.obj (op r))) (hmodels : ∀ T ∈ [V, P, Q], IsAffine T.left ∧ LocallyOfFinitePresentation T.hom ∧ QuasiCompact T.hom ∧ QuasiSeparated T.hom) (α : V ⟶ P) (β : V ⟶ Q) (z : ((Over.pullback (c.π.app (op r))).obj V).left) (hz : pullback.snd V.hom (c.π.app (op r)) z = b) (hα : Etale ((Over.pullback (c.π.app (op r))).map α).left) (hβ : Etale ((Over.pullback (c.π.app (op r))).map β).left) (hαres : IsIso (((Over.pullback (c.π.app (op r))).map α).left.residueFieldMap z)) (hβres : IsIso (((Over.pullback (c.π.app (op r))).map β).left.residueFieldMap z)) : ∃ (k : I) (_ : r ≤ k), ∀ (j : I) (_ : k ≤ j) (hj : r ≤ j), (∀ T ∈ [V, P, Q], IsAffine ((Over.pullback (D.map (homOfLE hj).op)).obj T).left ∧ LocallyOfFinitePresentation ((Over.pullback (D.map (homOfLE hj).op)).obj T).hom ∧ QuasiCompact ((Over.pullback (D.map (homOfLE hj).op)).obj T).hom ∧ QuasiSeparated ((Over.pullback (D.map (homOfLE hj).op)).obj T).hom) ∧ Etale ((Over.pullback (D.map (homOfLE hj).op)).map α).left ∧ Etale ((Over.pullback (D.map (homOfLE hj).op)).map β).left ∧ ((Over.pullback (D.map (homOfLE hj).op)).map α).left (Scheme.finiteStageSpanProjection D c r j hj V z) = Scheme.finiteStageSpanProjection D c r j hj P (((Over.pullback (c.π.app (op r))).map α).left z) ∧ ((Over.pullback (D.map (homOfLE hj).op)).map β).left (Scheme.finiteStageSpanProjection D c r j hj V z) = Scheme.finiteStageSpanProjection D c r j hj Q (((Over.pullback (c.π.app (op r))).map β).left z) ∧ IsIso ((Scheme.finiteStageSpanProjection D c r j hj V).residueFieldMap z) ∧ IsIso ((Scheme.finiteStageSpanProjection D c r j hj P).residueFieldMap (((Over.pullback (c.π.app (op r))).map α).left z)) ∧ IsIso ((Scheme.finiteStageSpanProjection D c r j hj Q).residueFieldMap (((Over.pullback (c.π.app (op r))).map β).left z)) ∧ IsIso (((Over.pullback (D.map (homOfLE hj).op)).map α).left.residueFieldMap (Scheme.finiteStageSpanProjection D c r j hj V z)) ∧ IsIso (((Over.pullback (D.map (homOfLE hj).op)).map β).left.residueFieldMap (Scheme.finiteStageSpanProjection D c r j hj V z))",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e4f31e97",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Node diff vs side-live: only the lean record was added; lean.statement matches the file signature word for word. Clause-by-clause match: directed I : Type u, affine D : Iᵒᵖ ⥤ Scheme.{u}, the actual limit cone, hres as canonical residueFieldMap isos for i ≥ r, V/P/Q in Over with IsAffine+LFP+QC+QS (finite presentation by convention; QC/QS automatic for affine, so nothing stronger), arbitrary α/β, the actual Over.pullback stage and limit arrows, the real helper finiteStageSpanProjection = pullback.map(𝟙, c.π j). Conclusion ∃k≥r ∀j≥k: models stay affine and f.p., α_j/β_j Etale, both point equalities, three projection residue isos and two stage-arrow residue isos in the canonical directions. True by 07RP chart descent plus the 01JT tensor-field argument. Edge cases (singleton I, identity spans, V=P=Q, transcendental κ(z)/κ(b)) and universes are fine. Gates: sorry only, proof docstring with node ids, source and blueprint docstrings, proof-only imports present in side-live, Mathlib Etale is the current name, no name collision, report sections present. No fixes; no compile since no file changed."
+ }
+}

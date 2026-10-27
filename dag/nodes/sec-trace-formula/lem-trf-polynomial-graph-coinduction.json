@@ -1,0 +1,305 @@
+{
+ "id": "lem-trf-polynomial-graph-coinduction",
+ "kind": "statement",
+ "title": "Polynomial graph coinduction and its oriented Koszul dual",
+ "statement": "Let $A$ be a commutative ring, $n\\geq0$, and $a_1,\\ldots,a_n\\in A$. Put $S=A[x_1,\\ldots,x_n]$ [def-weil-pbc-mv-polynomial-ring], let $i:A\\to S$ be the coefficient inclusion, and let $e:S\\to A$ be evaluation $x_j\\mapsto a_j$, so $ei=1_A$. Set $f_j=x_j-a_j$. In ordinary module derived categories [def-weil-abstract-derived-category], use derived tensor [lem-pc-derived-tensor-second-factor-functor], internal Hom [def-pur-derived-internal-hom], and derived coinduction $C_e:D(S)\\to D(A)$ with precomposition action [def-trf-derived-coinduction]. The augmentation of the ordered Koszul complex $K_S(f_1,\\ldots,f_n)$ [def-weil-pbc-koszul-complex], placed in cohomological degrees $-n,\\ldots,0$, is a bounded finite-free resolution of the evaluation module $A$. With the orientation fixed by the ordered variables, there is an isomorphism\n$$C_e(S[0])\\cong A[-n]\\quad\\text{in }D(A),$$\nwhere the action on the right is the original $A$-module action. For every $T\\in D(A)$ there is an isomorphism, natural in $T$,\n$$C_e(S\\otimes_{A,i}^{\\mathbf L}T)\\cong T[-n]\\quad\\text{in }D(A).$$\nThe tensor comparison here uses the $A$-action on $C_e(S)$ and $ei=1_A$. No Noetherianity, nonzero-ring assumption, boundedness or Tor hypothesis on $T$ is required; when $n=0$ these are the identity comparisons.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Agent polynomial graph specialization of Tag 0BZE (lemma-RHom-is-tensor-special), using duality.tex Tag 0BQZ (lemma-regular-immersion-ext), with explicit Koszul orientation and A-action. Former steps 8--10 of lem-trf-polynomial-diagonal-rhom-reduction; retained argument in report.md."
+ },
+ "stmt_deps": [
+  "def-pur-derived-internal-hom",
+  "def-trf-derived-coinduction",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof": [
+  {
+   "text": "For $0\\leq j\\leq n$, evaluation of the first $j$ variables induces $S/(f_1,\\ldots,f_j)\\cong A[x_{j+1},\\ldots,x_n]$. Indeed evaluation kills these generators, and the inverse sends coefficients and the remaining variables to their quotient classes; the two composites agree on all variables and coefficients, hence are identities by the polynomial universal property. In this quotient multiplication by $f_{j+1}=x_{j+1}-a_{j+1}$ is injective: writing a polynomial as $\\sum_{k=0}^m b_k x_{j+1}^k$ over the other-variable ring, the coefficient of $x_{j+1}^{m+1}$ in its product is $b_m$; descending comparison forces every $b_k=0$. Thus the injectivity holds without any nonzero-ring assumption. For $j=n$ the quotient map is exactly $e$ and its coefficient section is $i$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Polynomial evaluation calculation; auxiliary argument for duality.tex Tag 0BQZ, lemma-regular-immersion-ext."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-regular-sequence-koszul-regular] with $R=M=S$ and the ordered list $(f_1,\\ldots,f_n)$: Step 1 verifies precisely its successive-multiplication injectivity hypothesis (no proper-ideal hypothesis is required). It gives zero positive homology of $K$. By [def-weil-pbc-koszul-complex], $K_0=S$ and the image of $d_1$ is $(f_1,\\ldots,f_n)$; hence the augmentation identifies $H_0(K)$ with $A$ by Step 1. The same definition gives finite free terms indexed by subsets of $\\{1,\\ldots,n\\}$ and zero terms above $n$. Reindexing $K_q$ in cohomological degree $-q$ gives the asserted bounded finite-free resolution of $A[0]$.",
+   "uses": [
+    "lem-weil-pbc-regular-sequence-koszul-regular",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 062F (lemma-regular-koszul-regular); Tag 0622, Koszul complex and its degree-zero augmentation."
+   }
+  },
+  {
+   "text": "Let $L^\\bullet=\\operatorname{Hom}_S^\\bullet(K,S[0])$, with the signed differential of [def-sc-koszul-dual-complex]. The complementary equivalences [lem-sc-koszul-complementary-equivalences] identify its cohomology in degree $j$ with $H_{n-j}(K)$ for $0\\leq j\\leq n$. Step 2 therefore gives $H^j(L)=0$ for $j\\ne n$, including the zero terms outside this interval. Normalize the top isomorphism explicitly: a top cochain $\\lambda$ maps to $e(\\lambda(e_1\\wedge\\cdots\\wedge e_n))$. The differential formula gives image $(f_1,\\ldots,f_n)$ in $L^n=S$: each coordinate of a cochain in $L^{n-1}$ contributes $\\pm f_j$, so the image contains and is contained in that ideal. Hence this map induces $H^n(L)\\cong A$, sending the ordered top dual basis to $1$. It is $S$-linear with the target action through $e$. For $n=0$ it is the identity of $S=A$.",
+   "uses": [
+    "def-sc-koszul-dual-complex",
+    "lem-sc-koszul-complementary-equivalences",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BQZ (lemma-regular-immersion-ext), local complementary Koszul dual calculation with the top generator specified."
+   }
+  },
+  {
+   "text": "Put $E=C_e(S[0])$. By [lem-trf-derived-coinduction-adjunction], its scalar restriction is $R\\operatorname{Hom}_S(A,S)$. The projective resolution of Step 2 and [lem-pod-projective-hom-evaluation-model] compute this by $L^\\bullet$. The comparison is natural under scalar postcomposition, so the cohomology isomorphisms are $S$-linear. Check the original $A$-action rather than lifting an isomorphism from $D(S)$: on the K-injective model $\\operatorname{Hom}_S(A,J)$, for $b\\in A$ and $c\\in A$, one has $(b h)(c)=h(cb)=h(i(b)c)=i(b)h(c)$. Thus the coinduction action of $b$ equals the scalar action of $i(b)$. The $S$-linear top identification of Step 3 is therefore $A$-linear because $e(i(b))=b$. It follows that $H^j(E)=0$ for $j\\ne n$ and $H^n(E)\\cong A$ with its original action. Apply [lem-sf-derived-concentrated-single] in the abelian category of $A$-modules and use this oriented top identification: $E\\cong A[-n]$ in $D(A)$.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-pod-projective-hom-evaluation-model",
+    "lem-sf-derived-concentrated-single"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 (lemma-right-adjoint), 0A71 (lemma-RHom-ext); more-algebra.tex Tag 0A66 (lemma-RHom-out-of-projective); derived.tex Tag 08J5 (remark-truncation-distinguished-triangle)."
+   }
+  },
+  {
+   "text": "Step 2 makes $A[0]$ perfect over $S$: its exhibited resolution is bounded finite free, hence bounded finite projective, as required by [lem-trf-perfect-algebra-coinduction-tensor]. Apply that theorem to $e:S\\to A$ and $N=S\\otimes_{A,i}^{\\mathbf L}T\\in D(S)$. It yields a natural isomorphism in $D(A)$\n$$C_e(N)\\cong N\\otimes_S^{\\mathbf L}E.$$\nThe theorem retains the precomposition $A$-action on $E$ and imposes no boundedness on $N$. Substitution of Step 4 gives $(S\\otimes_{A,i}^{\\mathbf L}T)\\otimes_S^{\\mathbf L}A[-n]$. The remaining cancellation must use the coefficient inclusion $i$ and the evaluation $e$, not an unspecified $A$-action.",
+   "uses": [
+    "lem-trf-perfect-algebra-coinduction-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZE (lemma-RHom-is-tensor-special), specialized to the perfect evaluation quotient."
+   }
+  },
+  {
+   "text": "Choose a flat-term K-flat representative $P$ of $T$ by [lem-pc-kflat-resolution]. By [lem-pur-kflat-change-of-rings], $S\\otimes_A P$ is K-flat over $S$. The two derived tensors of Step 5 are thus computed by these representatives using [lem-pc-derived-tensor-second-factor-functor]. In the final tensor, the degree-$p$ element $(s\\otimes v)\\otimes b$ (with $v\\in P^p$, $b\\in A[-n]^n=A$) maps to $(-1)^{np}e(s)bv\\in P[-n]^{p+n}$. Its inverse sends $v\\in P[-n]^{p+n}$ to $(-1)^{np}(1\\otimes v)\\otimes1$. The tensor balancing identities use $e(i(a))=a$; they show these are inverse $A$-linear maps. They commute with differentials since the target differential is $(-1)^n d_P$, and the sign changes by $(-1)^n$ when $p$ increases by one. These formulas commute with all chain maps in $P$; canonical K-flat comparisons and functoriality in the cited tensor theorem therefore give a natural isomorphism with $T[-n]$ in $D(A)$. No boundedness or Tor condition has entered. When $n=0$, $e=i=1_A$, $K=S[0]$, and the top dual and tensor maps are the identity comparisons. If $A=0$ all the complexes above are zero and the same calculations apply.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZE (lemma-RHom-is-tensor-special), followed by explicit tensor cancellation along ei=1; sites-cohomology.tex Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat); more-algebra.tex Tag 06Y6 (lemma-derived-base-change)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-koszul-dual-complex",
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-resolution",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-pur-kflat-change-of-rings",
+  "lem-sc-koszul-complementary-equivalences",
+  "lem-sf-derived-concentrated-single",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-trf-perfect-algebra-coinduction-tensor",
+  "lem-weil-pbc-regular-sequence-koszul-regular"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0BZE, 0A70, 0A71, with the ordered Koszul calculation of duality.tex Tag 0BQZ and more-algebra.tex Tag 062F; explicit polynomial specialization and action/sign checks by Q150."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Kk]oszul|coinduction|coinduct",
+   "results": "1 hits; top=['Mathlib/RingTheory/Regular/RegularSequence.lean']; note=; digest=e93f847680f4c3f4; directory=Mathlib/RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial evaluation and Kahler differentials have no graph coinduction or derived Koszul shift"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom along polynomial evaluation at a tuple is tensor with the Koszul dual and equals shift by minus the number of variables",
+   "results": "0 hits; top=[]; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "KoszulComplex",
+   "results": "0 hits; top=[]; note=loogle: unknown identifier 'KoszulComplex'; digest=4f53cda18c2baa0c; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial evaluation and Kahler differentials have no graph coinduction or derived Koszul shift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial evaluation graph coinduction RHom over A[x1,...,xn] of A with polynomial extension of T is T shifted by minus n from the graph Koszul resolution",
+   "results": "8 hits; top=['Algebra.PreSubmersivePresentation.cotangentComplexAux', 'Rep.standardComplex.forget₂ToModuleCat', 'KaehlerDifferential.polynomialEquiv', 'PolynomialModule.comp', 'KaehlerDifferential.mvPolynomialEquiv', 'PolynomialLaw.lifts', 'PolynomialModule.comp_apply', 'Algebra.PreSubmersivePresentation.cotangentComplexAux_apply']; note=; digest=7a4b61f8abeb9a22; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial evaluation and Kahler differentials have no graph coinduction or derived Koszul shift"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.eval₂Hom",
+   "results": "12 hits; top=['MvPolynomial.eval₂Hom', \"MvPolynomial.eval₂Hom_X'\", \"MvPolynomial.eval₂Hom_zero'\", 'MvPolynomial.coe_eval₂Hom', 'MvPolynomial.eval₂Hom_zero', 'MvPolynomial.map_eq_eval₂Hom_C_comp', 'MvPolynomial.comp_eval₂Hom', 'MvPolynomial.eval₂Hom_C']; note=; digest=2530b21d8c5566b5; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial evaluation and Kahler differentials have no graph coinduction or derived Koszul shift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sequence of polynomial variables minus constants has Koszul dual equal to the quotient shifted by the number of variables",
+   "results": "8 hits; top=['KaehlerDifferential.mvPolynomialEquiv', 'KaehlerDifferential.polynomialEquiv', 'KaehlerDifferential.polynomialEquiv_symm', 'Algebra.PreSubmersivePresentation.cotangentComplexAux_apply', 'Algebra.PreSubmersivePresentation.cotangentComplexAux', 'instFreeMvPolynomialKaehlerDifferential', 'Algebra.Generators.H1Cotangent.δAux_X', 'KaehlerDifferential.quotKerTotalEquiv']; note=; digest=66f7397f3784ae50; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial evaluation and Kahler differentials have no graph coinduction or derived Koszul shift"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|coinduct|coinduction",
+   "results": "{\"t\": \"2026-10-23T13:31:33Z\", \"tool\": \"grep\", \"query\": \"Koszul|coinduct|coinduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Continuous/TopRep.lean\", \"Mathlib/RepresentationTheory/Continuous/Basic.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\"], \"digest\": \"8e84ec4645aa1f23\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary polynomial evaluation, weak regular sequences, shifts, group representations, or unrelated coinduction; no derived polynomial graph duality theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived Hom of a polynomial evaluation quotient with the polynomial ring is the quotient shifted by minus the number of variables",
+   "results": "{\"t\": \"2026-10-23T13:31:33Z\", \"tool\": \"leansearch\", \"query\": \"The derived Hom of a polynomial evaluation quotient with the polynomial ring is the quotient shifted by minus the number of variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.quotientEquivQuotientMvPolynomial\", \"Ideal.polynomialQuotientEquivQuotientPolynomial\", \"MvPolynomial.map\", \"MvPolynomial.eval\", \"Polynomial.mapAlgHom_eq_eval₂AlgHom'_CAlgHom\", \"AdjoinRoot.evalEval\", \"MvPolynomial.coe_eval₂Hom\", \"Polynomial.eval₂RingHom\"], \"digest\": \"ce9d18f9285bd244\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary polynomial evaluation, weak regular sequences, shifts, group representations, or unrelated coinduction; no derived polynomial graph duality theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.eval₂Hom, DerivedCategory",
+   "results": "{\"t\": \"2026-10-23T13:31:34Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial.eval₂Hom, DerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary polynomial evaluation, weak regular sequences, shifts, group representations, or unrelated coinduction; no derived polynomial graph duality theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial evaluation derived coinduction is a shift computed by the Koszul resolution",
+   "results": "{\"t\": \"2026-10-23T13:31:35Z\", \"tool\": \"leanfinder\", \"query\": \"Polynomial evaluation derived coinduction is a shift computed by the Koszul resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.shiftEval\", \"CochainComplex.shiftEval_hom_app\", \"DerivedCategory.instLinearShiftFunctorInt\", \"inhomogeneousCochains.d_eq\", \"HomologicalComplex.dgoEquivHomologicalComplex_counitIso\", \"Rep.standardComplex.forget₂ToModuleCat\", \"Rep.standardComplex.εToSingle₀_comp_eq\", \"DerivedCategory.instLinearSingleFunctor\"], \"digest\": \"94a76f6c0f0d8e55\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary polynomial evaluation, weak regular sequences, shifts, group representations, or unrelated coinduction; no derived polynomial graph duality theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul dual of a regular sequence is the quotient concentrated in top cohomology",
+   "results": "{\"t\": \"2026-10-23T13:31:36Z\", \"tool\": \"leanfinder\", \"query\": \"Koszul dual of a regular sequence is the quotient concentrated in top cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.ndrecIterModByRegular\", \"RingTheory.Sequence.IsRegular.ndrecIterModByRegular\", \"RingTheory.Sequence.isRegular_cons_iff\", \"RingTheory.Sequence.IsRegular.cons\", \"RingTheory.Sequence.IsRegular.ndrecIterModByRegularWithRing\", \"RingTheory.Sequence.IsRegular.cons'\", \"RingTheory.Sequence.isRegular_cons_iff'\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\"], \"digest\": \"dd10ade9c7a300cd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary polynomial evaluation, weak regular sequences, shifts, group representations, or unrelated coinduction; no derived polynomial graph duality theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-polynomial-diagonal-rhom-reduction",
+  "date": "2026-10-22",
+  "group": "Q28"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Polynomial reduction of diagonal derived Hom. Re-split component: Polynomial graph coinduction and its oriented Koszul dual (former steps 8--10).",
+   "via": [
+    "lem-trf-polynomial-diagonal-rhom-reduction",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-polynomial-graph-coinduction",
+  "worker": "stage1",
+  "summary": "Q150 supplies six proof steps with no new nodes: polynomial quotient and monic injectivity, Koszul resolution, complementary dual cohomology and ordered top generator, coinduction action and D(A) reconstruction, perfect coinduction-tensor comparison, and explicit signed K-flat cancellation. Statement unchanged; all cited statements reread and citation quotes recorded.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Polynomial reduction of diagonal derived Hom. Re-split component: Polynomial graph coinduction and its oriented Koszul dual (former steps 8--10). This split supplies the polynomial graph Koszul/coinduction auxiliary, retaining the inherited semistable relative-duality route; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
+    "why": "Generic successive-injectivity criterion for Koszul exactness, applicable also to the zero ring. No trace-formula unit step is replaced; the unit has no substitute for this algebraic tool."
+   },
+   {
+    "node": "lem-sc-koszul-complementary-equivalences",
+    "why": "Generic signed dual Koszul equivalences for an arbitrary commutative ring and list. No trace-formula unit step is replaced; the unit has no substitute for this algebraic tool."
+   },
+   {
+    "node": "lem-pod-projective-hom-evaluation-model",
+    "why": "Generic module-valued derived Hom computation, natural for scalar postcomposition. No trace-formula unit step is replaced; the unit has no substitute for this algebraic tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic unbounded flat-term K-flat representatives on the one-object ringed site. No trace-formula unit step is replaced; the unit has no substitute for this algebraic tool."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic stability of K-flat representatives under coefficient scalar extension. No trace-formula unit step is replaced; the unit has no substitute for this algebraic tool."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic D(A)-valued tensor computation and naturality on K-flat representatives. No trace-formula unit step is replaced; the unit has no substitute for this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-sc-koszul-complementary-equivalences",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-cc770c5fc",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-cc770c5fc (reviewer sub-agent of L); spot-checked: I read the whole item and the full statement of every cited node; there are no new nodes. The statement and stmt_deps are identical to live and side-live, where the item is still unsplit, and there is no repair note, so the re-split rule does not apply. The statement is true: x_j-a_j is a regular sequence because each is monic, so RHom_S(A,S)=A[-n]; Stacks 0BZE then gives C_e(N)=N⊗^L_S E, and ei=1 cancels the tensor. I checked n=0, n=1, A=0 and A=Z/4 with a=2. Step 1 (top-coefficient injectivity) is right. In Step 2 the hypotheses of the 062F node match exactly. In Step 3 I verified the endpoint cases of the complementary equivalences and that the top image is (f). In Step 4 the lem-pod and def-sc dual differentials agree in sign, and the action identity (bh)(c)=h(i(b)c)=i(b)h(c) holds. In Step 5 the hypotheses of the perfect coinduction-tensor node hold with R=S, B=A. In Step 6 I re-derived the balancing, both inverse composites and the differential sign (-1)^{n(p+1)}. Tags 0BZE, 0BQZ, 062F, 0A70, 0A71, 0A66, 06YS, 0G7E, 06Y6 and 08J5 check against tags/tags; there is no SGA citation. Batch-5 check: lem-pod-projective-hom-evaluation-model, lem-trf-derived-coinduction-adjunction and lem-trf-perfect-algebra-coinduction-tensor are generic ring homological algebra (0A66, 0A70/0A71, 0BZE). Their closures contain no assume or target node and no trace-formula or Poincaré-duality theorem, so I accept them. lem-trf-flat-epimorphism-polynomial-dual is a special case of the first clause, not a duplicate; maintainer note: that sibling could cite this item. The tool_uses are generic algebra and accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PolynomialGraphCoinduction",
+  "declaration": "ModuleCat.polynomial_graph_coinduction",
+  "declarations": [
+   "ModuleCat.polynomialGraphKoszul",
+   "ModuleCat.polynomialGraphWedge",
+   "ModuleCat.polynomialGraphUnit",
+   "ModuleCat.polynomialGraphExtension",
+   "ModuleCat.polynomialGraphExtensionAdjunction",
+   "ModuleCat.polynomialGraphCoefficient",
+   "ModuleCat.polynomialGraphSectionIso",
+   "ModuleCat.polynomialGraphQuotient",
+   "ModuleCat.polynomialGraphShiftedAugmentation",
+   "ModuleCat.polynomial_graph_coinduction"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/PolynomialGraphCoinduction.lean",
+  "statement": "theorem polynomial_graph_coinduction (A : Type u) [CommRing A] (n : ℕ) (a : Fin n → A) : (∀ j : ℤ, Module.Free (MvPolynomial (Fin n) A) ((polynomialGraphKoszul A n a).X j) ∧ Module.Finite (MvPolynomial (Fin n) A) ((polynomialGraphKoszul A n a).X j)) ∧ (∀ j : ℤ, j < -(n : ℤ) ∨ 0 < j → IsZero ((polynomialGraphKoszul A n a).X j)) ∧ ∃ ε : polynomialGraphKoszul A n a ⟶ ((restrictScalars (MvPolynomial.eval₂Hom (RingHom.id A) a)).mapHomologicalComplex (.up ℤ)).obj ((CochainComplex.singleFunctor _ 0).obj (ModuleCat.of A A)), QuasiIso ε ∧ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (ModuleCat.of A A)).hom (ε.f 0 (polynomialGraphWedge A n a 0 (fun j ↦ Fin.elim0 j))) = 1 ∧ ∃ χ : (derivedCoinduction (MvPolynomial.eval₂Hom (RingHom.id A) a)).obj (polynomialGraphUnit (MvPolynomial (Fin n) A)) ≅ (polynomialGraphUnit A)⟦-(n : ℤ)⟧, ∃ z : (polynomialGraphKoszul A n a)⟦-(n : ℤ)⟧ ⟶ (CochainComplex.singleFunctor _ 0).obj (ModuleCat.of (MvPolynomial (Fin n) A) (MvPolynomial (Fin n) A)), (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (ModuleCat.of (MvPolynomial (Fin n) A) (MvPolynomial (Fin n) A))).hom (z.f 0 (((polynomialGraphKoszul A n a).shiftFunctorObjXIso (-(n : ℤ)) 0 (-(n : ℤ)) (Int.zero_add _).symm).inv (polynomialGraphWedge A n a n (fun j ↦ Finsupp.single j 1)))) = 1 ∧ polynomialGraphShiftedAugmentation A n a ε ≫ (restrictScalars (MvPolynomial.eval₂Hom (RingHom.id A) a)).mapDerivedCategory.map χ.inv ≫ (derivedCoinductionAdjunction (MvPolynomial.eval₂Hom (RingHom.id A) a)).counit.app (polynomialGraphUnit (MvPolynomial (Fin n) A)) = DerivedCategory.Q.map z ∧ ∃ α : polynomialGraphExtension A n ⋙ derivedCoinduction (MvPolynomial.eval₂Hom (RingHom.id A) a) ≅ shiftFunctor (DerivedCategory (ModuleCat.{u} A)) (-(n : ℤ)), ∃ β : (polynomialGraphExtension A n).obj (polynomialGraphUnit A) ≅ polynomialGraphUnit (MvPolynomial (Fin n) A), (polynomialGraphExtensionAdjunction A n).homEquiv _ _ β.hom = polynomialGraphCoefficient A n ∧ α.hom.app (polynomialGraphUnit A) = (derivedCoinduction (MvPolynomial.eval₂Hom (RingHom.id A) a)).map β.hom ≫ χ.hom ∧ ∀ (h : n = 0) (T : DerivedCategory (ModuleCat.{u} A)), polynomialGraphQuotient A n a T ≫ (restrictScalars (MvPolynomial.eval₂Hom (RingHom.id A) a)).mapDerivedCategory.map ((shiftFunctorZero (DerivedCategory (ModuleCat.{u} A)) ℤ).inv.app T ≫ eqToHom (congrArg (fun k : ℕ ↦ T⟦-(k : ℤ)⟧) h.symm) ≫ α.inv.app T) ≫ (derivedCoinductionAdjunction (MvPolynomial.eval₂Hom (RingHom.id A) a)).counit.app ((polynomialGraphExtension A n).obj T) = 𝟙 ((polynomialGraphExtension A n).obj T)",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The entire arbitrary-ring statement, including the finite-free augmented Koszul resolution, ordered top-functional normalization through the actual coinduction counit, natural unbounded tensor comparison, compatibility on the unit, and identity normalization for n=0. Helpers only abbreviate the shared Koszul and K-flat derived constructions or form canonical maps from existing adjunctions; all data are explicit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46585aaa0",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Item record differs from live only in lean; lean.statement is verbatim in the file; dependency records unchanged. Every clause rendered: finite-free Koszul terms and IsZero outside [-n,0]; augmentation ε (QuasiIso, pinned to evaluation by the empty-wedge equation); χ: C_e(S[0]) ≅ A[-n] with A's own action, oriented by the unique top-wedge map z through the coinduction counit (true: [z] generates Ext^n_S(A,S)=A); natural iso α of functors on unbounded D(A), with the unit component C_e(β)≫χ and β's adjunct the canonical coefficient map; n=0 identity normalization via the canonical graph quotient. Clauses checked jointly satisfiable at n=0. Edge cases n=0, n=1, A=0, Z/4 with a=2, unbounded T. No extra hypotheses; one universe u. The S⊗^L_A− functor names the upstream K-flat extendScalars.leftDerivedFunctor already used elsewhere (the other copy is theorem-owned), so no new notion. Helpers have real data, only the theorem is sorry, docstrings carry source and blueprint. Not compiled (no change); relies on the worker's clean compile. Advisory: proof-plan-only imports and synthInstance.maxSize option."
+ }
+}

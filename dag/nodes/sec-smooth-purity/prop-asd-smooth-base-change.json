@@ -25,11 +25,12 @@
  ],
  "proof": [
   {
-   "text": "Identify smoothExceptionalBaseChangeMap with the component of the existing upstream rightDerivedUpperShriekBaseChangeMap. The elementary mate_app_eq follows by injectivity of the adjunction hom equivalence and mateEquiv_counit. Build HasInvertibleExponent from the given stalkwise units and pull it back along f. Apply the already stated isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension (WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality), which realizes the isomorphism clause of this same blueprint node. This is a reuse of an existing declaration, with no new assumption or hole. The dualizing comparison is its component at the coefficient unit followed by the inverse-image unit isomorphism. For the compatibility bridge isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension_general, apply lem-asd-exceptional-base-change-affine-locality. On each affine base chart, smoothness of relative dimension d is inherited by pullback and the invertible coefficient exponent pulls back along a. The affine base is quasi-separated, so apply the existing source-library theorem from SmoothDuality.SmoothBaseChange to that local square. This proves the general-base bridge from the separate open-restriction coherence theorem, without assuming quasi-separatedness of the original base. The original canonical-map identification and tensor steps remain as above.",
+   "text": "Identify smoothExceptionalBaseChangeMap with the component of the existing upstream rightDerivedUpperShriekBaseChangeMap. The elementary mate_app_eq follows by injectivity of the adjunction hom equivalence and mateEquiv_counit. Build HasInvertibleExponent from the given stalkwise units and pull it back along f. Apply the already stated isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension (WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality), which realizes the isomorphism clause of this same blueprint node. This is a reuse of an existing declaration, with no new assumption or hole. The dualizing comparison is its component at the coefficient unit followed by the inverse-image unit isomorphism. For the compatibility bridge isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension_general, apply lem-asd-exceptional-base-change-affine-locality. On each affine base chart, smoothness of relative dimension d is inherited by pullback and the invertible coefficient exponent pulls back along a. The affine base is quasi-separated, so apply the existing source-library theorem from SmoothDuality.SmoothBaseChange to that local square. This proves the general-base bridge from the separate open-restriction coherence theorem, without assuming quasi-separatedness of the original base. The original canonical-map identification and tensor steps remain as above. The source-library affine-space conjunction is now realized by [lem-asd-upstream-affine-space-base-change]: the adjunction reuses its existing source declaration, and the base-change clause restricts the projective-line model to the affine chart and iterates the resulting maps. This preserves the projective-line and affine-space route.",
    "uses": [
     "thm-amb-etale-exceptional-adjoint",
     "lem-weil-pbc-mate-pasting",
-    "lem-asd-exceptional-base-change-affine-locality"
+    "lem-asd-exceptional-base-change-affine-locality",
+    "lem-asd-upstream-affine-space-base-change"
    ],
    "elementary": false
   },
@@ -55,6 +56,7 @@
  "proof_deps": [
   "lem-asd-compact-projection-exchange",
   "lem-asd-exceptional-base-change-affine-locality",
+  "lem-asd-upstream-affine-space-base-change",
   "lem-kun-inverse-image-monoidal",
   "lem-kun-tensor-sym",
   "lem-weil-pbc-mate-pasting",
@@ -64,7 +66,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
-  "place": "Canonical mate and final tensor square; existing upstream SmoothDuality supplies the isomorphism clause; projection exchange and monoidal unit/braiding coherence supply the tensor clause. The general-base compatibility bridge is reduced by P2 to affine-base smooth base change and the separate open-restriction coherence lemma."
+  "place": "Canonical mate and final tensor square; existing upstream SmoothDuality supplies the isomorphism clause; projection exchange and monoidal unit/braiding coherence supply the tensor clause. The general-base compatibility bridge is reduced by P2 to affine-base smooth base change and the separate open-restriction coherence lemma. K4 records the explicit adopted affine-space reduction through the projective-line model, with all dimensions combined by proved private helpers."
  },
  "mathlib_searches": [
   {
@@ -187,7 +189,18 @@
   "def-weil-pbc-derived-categories"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "split_report": {
@@ -342,12 +355,12 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261020T122116-L-478185",
+  "landing": "20261025T143613-L-1060958",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

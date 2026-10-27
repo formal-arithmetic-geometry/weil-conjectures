@@ -1,0 +1,324 @@
+{
+ "id": "lem-sfb-zero-dimensional-stabilizer-finite-orbit",
+ "kind": "statement",
+ "title": "Zero dimensional scheme theoretic stabilizers give finite orbit torsors",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], let $G$ be a smooth connected affine group scheme of finite type over $k$ [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism], and let it act on a separated finite-type $k$-scheme $X$ [def-pc-scheme, def-weil-proper-morphism]. For $x\\in X(k)$ let $H$ be the scheme-theoretic stabilizer, representing $R\\mapsto\\{g\\in G(R):gx_R=x_R\\}$, and let $O_x\\subset X$ be the locally closed orbit with its reduced subscheme structure [lem-sfb-smooth-group-orbit-geometry]. The following are equivalent: $\\dim H=0$; $H\\to\\operatorname{Spec}k$ is finite; and the set $H(k)$ is finite [def-weil-finite-integral-morphism]. When they hold, the orbit map $\\beta_x:G\\to O_x$ is finite locally free and surjective [def-pc-finite-locally-free]. More precisely $(g,h)\\mapsto(g,gh)$ is an isomorphism $G\\times_kH\\simeq G\\times_{O_x}G$, so $\\beta_x$ is an $H$-torsor for faithfully flat finitely presented coverings. Dimension is Krull dimension [def-kun-topological-krull-dimension]; no reducedness or smoothness of $H$, and no reducedness of $X$, is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 2.14, printed p.44 (finite algebraic group schemes), Propositions 7.4, 7.11--7.12 and 7.15, printed pp.139--143 (orbit as quotient and finite flat quotient map). Zero-dimensional finite-type schemes: Stacks varieties.tex Tag 06LH, lemma-algebraic-scheme-dim-0; finite locally free descent: descent.tex Tag 02VO, lemma-descending-property-finite-locally-free. Finite k-points imply dimension zero by the Jacobson/Nullstellensatz property over algebraically closed k."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "def-weil-finite-integral-morphism",
+  "def-pc-finite-locally-free",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-smooth-group-orbit-geometry], $H$ is a closed subgroup scheme of $G$, $O_x$ is smooth and locally closed, and $\\beta_x:G\\to O_x$ is faithfully flat. Write $G=\\operatorname{Spec}A$. By [def-weil-closed-immersion], $H=\\operatorname{Spec}B$ with $B=A/I$. Since $A$ is a finitely generated $k$-algebra, so is $B$: the images of any algebra generators generate the quotient. The identity of $G$ fixes $x$, so $H$ is nonempty and $\\dim H\\geq0$.",
+   "uses": [
+    "lem-sfb-smooth-group-orbit-geometry",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.4(b) and the paragraph defining the isotropy group on printed p.140"
+   }
+  },
+  {
+   "text": "If $\\dim H=0$ (topological Krull dimension), then by [lem-pc-scheme-dimension-local-rings] every local ring of $H$ has Krull dimension at most $0$, so $\\dim H\\le0$ in the sense of [def-pc-dimension]; apply [lem-pc-algebraic-dim-zero-affine-finite] to the finite-type scheme $H$ to obtain that $H\\to\\operatorname{Spec}k$ is finite. Conversely, if that morphism is finite, [def-weil-finite-integral-morphism] gives $\\dim_k B<\\infty$. By [lem-weil-pbc-finite-dim-algebra-artinian] and [lem-sfb-artinian-spectrum-finite], $\\operatorname{Spec}B$ is finite. Apply [pqf-lem-finite-type-algebra-finite-spectrum] to $B$: every prime is maximal and the spectrum is discrete, hence $\\dim H=0$ since $H$ is nonempty.",
+   "uses": [
+    "lem-pc-scheme-dimension-local-rings",
+    "def-pc-dimension",
+    "lem-pc-algebraic-dim-zero-affine-finite",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-sfb-artinian-spectrum-finite",
+    "pqf-lem-finite-type-algebra-finite-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH, lemma-algebraic-scheme-dim-0; algebra.tex Tags 00J6, 00J7, 00KH and 0ALW"
+   }
+  },
+  {
+   "text": "Closed points of $H$ are exactly its $k$-points: [lem-weil-pbc-closed-point-residue-field-base] makes their residue fields equal to $k$ via the structure map, with a unique inverse, and the kernel of any $k$-algebra map $B\\to k$ is maximal. Thus finite $H$ has finite $H(k)$ by step 2. Conversely, if $H(k)$ is finite, there are finitely many closed points. A nonclosed point would have infinitely many closed specializations by [lem-sc-finite-type-nonclosed-closure-closed-points], a contradiction. All points are therefore closed and the spectrum is finite; [pqf-lem-finite-type-algebra-finite-spectrum] again gives dimension zero. This proves all three equivalences, without discarding nilpotents.",
+   "uses": [
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sc-finite-type-nonclosed-closure-closed-points",
+    "pqf-lem-finite-type-algebra-finite-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0478, lemma-locally-finite-type-Jacobson; algebra.tex Tag 00FV, theorem-nullstellensatz, and Tag 0ALW"
+   }
+  },
+  {
+   "text": "The group operations give a morphism $\\Phi:G\\times_kH\\to G\\times_{O_x}G$, $(g,h)\\mapsto(g,gh)$: $ghx=gx$ because $h$ fixes $x$. Define its inverse by $(g,g\\prime)\\mapsto(g,g^{-1}g\\prime)$. The equality $gx=g\\prime x$ implies $(g^{-1}g\\prime)x=x$, so the second component factors through the representing stabilizer $H$. These are morphisms, obtained from multiplication, inversion and the universal properties of $H$ and the fibre product [def-pc-fibre-product], rather than a calculation only on $k$-points. Their composites are the identity because $g(g^{-1}g\\prime)=g\\prime$ and $g^{-1}(gh)=h$. Thus $\\Phi$ is the claimed isomorphism over the first copy of $G$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 7.11 and 7.15: the cartesian square, explicitly for the stabilizer"
+   }
+  },
+  {
+   "text": "We check the covering hypotheses independently of finiteness of $H$. The immersion $O_x\\hookrightarrow X$ is separated by [lem-weil-pbc-separated-cancellation], and its composite with the separated structure map of $X$ is separated by [lem-weil-pbc-proper-fp-permanence](e). Since $G$ is finite type over $k$, [lemma-nagata-finite-type-to-separated-target](b) gives that $\\beta_x$ is finite type, in particular quasi-compact. Also $O_x$ is smooth over $k$ by step 1, hence locally Noetherian by [lem-weil-pbc-smooth-scheme-over-field-regular]. Choose a covering of $O_x$ by affine spectra of Noetherian rings as in [pqf-def-locnoeth]. Locally finite type for $\\beta_x$ means that on affine charts over this covering its rings are finitely generated algebras. By [lem-weil-pbc-finite-type-noetherian-finite-presentation] they are finitely presented. This is local finite presentation by [def-sbc-locally-finite-presentation]. Thus $\\beta_x$ is flat, surjective, quasi-compact and locally of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lemma-nagata-finite-type-to-separated-target",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T8 (lemma-permanence-finite-type), 01TX (lemma-noetherian-finite-type-finite-presentation); varieties.tex Tag 056S; algebra.tex Tag 00FP"
+   }
+  },
+  {
+   "text": "Assume the equivalent stabilizer conditions and put $n=\\dim_k B$. The projection $G\\times_kH\\to G$ is finite: [lem-sbc-finite-affine-tensor-base-change], with one summand and base ring $k$, identifies it with $\\operatorname{Spec}(A\\otimes_kB)\\to\\operatorname{Spec}A$ (interchange the tensor factors if necessary). A $k$-basis $b_1,\\ldots,b_n$ of $B$ makes $1\\otimes b_1,\\ldots,1\\otimes b_n$ an $A$-basis, so this is finite by [def-weil-finite-integral-morphism]. Step 4 identifies it with the base change of $\\beta_x$ along itself, using the first projection. Step 5 verifies flatness, surjectivity and quasi-compactness of that covering map. Apply [lem-sbc-finite-morphism-fpqc-descent] to conclude that $\\beta_x$ is finite. Its flatness and local finite presentation have already been proved, so [def-pc-finite-locally-free] makes it finite locally free; surjectivity is step 1.",
+   "uses": [
+    "lem-sbc-finite-affine-tensor-base-change",
+    "def-weil-finite-integral-morphism",
+    "lem-sbc-finite-morphism-fpqc-descent",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02LA, lemma-descending-property-finite; Tag 02VO, lemma-descending-property-finite-locally-free; Milne Proposition 7.15"
+   }
+  },
+  {
+   "text": "Right multiplication defines the $H$-action on $G$ over $O_x$. Pulling back by the covering $\\beta_x:G\\to O_x$, step 4 gives the equivariant trivialization $G\\times_{O_x}G\\simeq G\\times_kH$. Under it, the section is $(g,1)$, and right multiplication in the second factor is the given action. The cover is faithfully flat and finitely presented: local finite presentation is step 5, quasi-compactness follows there (also from finiteness), and a finite morphism is affine, hence quasi-separated since on affine charts the diagonal is the closed immersion given by the surjection $C\\otimes_R C\\to C$. This verifies precisely the asserted torsor condition and the stipulated type of covering. At no point was $H$ replaced by its reduction.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-integral-morphism",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.15 cartesian square and Proposition 7.11 quotient criterion; explicit trivialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-group-orbit-geometry",
+  "def-weil-closed-immersion",
+  "lem-pc-scheme-dimension-local-rings",
+  "def-pc-dimension",
+  "lem-pc-algebraic-dim-zero-affine-finite",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-sfb-artinian-spectrum-finite",
+  "pqf-lem-finite-type-algebra-finite-spectrum",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-finite-type-nonclosed-closure-closed-points",
+  "def-sc-group-scheme",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "lem-sbc-finite-affine-tensor-base-change",
+  "lem-sbc-finite-morphism-fpqc-descent",
+  "def-pc-finite-locally-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Explicit assembly of Propositions 7.4, 7.11 and 7.15, with Stacks 06LH, 0478, 00FV, 00J6, 00J7, 0ALW, 00FP, 056S and 02LA; no quotient existence theorem is needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Orbit morphism of a smooth algebraic group with zero dimensional scheme theoretic stabilizer is finite locally free onto its locally closed orbit",
+   "results": "{\"t\": \"2026-10-23T13:41:10Z\", \"tool\": \"leanfinder\", \"query\": \"Orbit morphism of a smooth algebraic group with zero dimensional scheme theoretic stabilizer is finite locally free onto its locally closed orbit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"ProperlyDiscontinuousSMul.finite_stabilizer'\", \"Finite.finite_mulAction_orbit\"], \"digest\": \"efee5f040f93f607\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract orbit-stabilizer bijections, topological properly discontinuous actions, or general finite scheme morphisms; none proves finiteness and flatness of this algebraic orbit torsor or the finite-stabilizer criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"orbit\", \"AlgebraicGeometry\"",
+   "results": "{\"t\": \"2026-10-23T13:41:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"orbit\\\", \\\"AlgebraicGeometry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract orbit-stabilizer bijections, topological properly discontinuous actions, or general finite scheme morphisms; none proves finiteness and flatness of this algebraic orbit torsor or the finite-stabilizer criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "orbit.*(IsFinite|locally.free|stabilizer)|(IsFinite|locally.free).*orbit",
+   "results": "{\"t\": \"2026-10-23T13:41:05Z\", \"tool\": \"grep\", \"query\": \"orbit.*(IsFinite|locally.free|stabilizer)|(IsFinite|locally.free).*orbit\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract orbit-stabilizer bijections, topological properly discontinuous actions, or general finite scheme morphisms; none proves finiteness and flatness of this algebraic orbit torsor or the finite-stabilizer criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An orbit map is a finite flat torsor under its finite stabilizer group scheme",
+   "results": "{\"t\": \"2026-10-23T13:41:05Z\", \"tool\": \"leansearch\", \"query\": \"An orbit map is a finite flat torsor under its finite stabilizer group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.card_orbit_mul_card_stabilizer_eq_card_group\", \"MulAction.index_stabilizer\", \"AddAction.orbitRel.Quotient.orbit_injective\", \"MulAction.orbitEquivQuotientStabilizer\", \"MulAction.orbitEquivQuotientStabilizer_symm_apply\", \"AddAction.orbitEquivQuotientStabilizer\", \"MulAction.IsFixedBlock.orbit\", \"Topology.IsQuotientMap.isCoveringMapOn_of_properlyDiscontinuousSMul\"], \"digest\": \"db82ce61fd7982ef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract orbit-stabilizer bijections, topological properly discontinuous actions, or general finite scheme morphisms; none proves finiteness and flatness of this algebraic orbit torsor or the finite-stabilizer criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homogeneous space G modulo a finite nonreduced subgroup has finite faithfully flat quotient map",
+   "results": "{\"t\": \"2026-10-23T13:41:11Z\", \"tool\": \"leanfinder\", \"query\": \"Homogeneous space G modulo a finite nonreduced subgroup has finite faithfully flat quotient map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"MulAction.finite_quotient_of_finite_quotient_of_finite_quotient\", \"MulAction.finite_quotient_of_pretransitive_of_finite_quotient\", \"Subgroup.finite_quotient_of_finite_quotient_of_index_ne_zero\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"Subgroup.finite_quotient_of_pretransitive_of_index_ne_zero\", \"AddSubgroup.finite_quotient_of_finite_quotient_of_index_ne_zero\", \"AddSubgroup.finite_quotient_of_pretransitive_of_index_ne_zero\"], \"digest\": \"ddf6c8410aa13a75\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract orbit-stabilizer bijections, topological properly discontinuous actions, or general finite scheme morphisms; none proves finiteness and flatness of this algebraic orbit torsor or the finite-stabilizer criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type affine stabilizer over an algebraically closed field is zero dimensional if and only if it has finitely many rational points",
+   "results": "{\"t\": \"2026-10-23T13:44:24Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type affine stabilizer over an algebraically closed field is zero dimensional if and only if it has finitely many rational points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.InfinitePlace.nat_card_stabilizer_eq_one_or_two\", \"FixedPoints.finrank_eq_card\", \"NumberField.InfinitePlace.isUnramified_iff_card_stabilizer_eq_one\", \"FixedPoints.rank_le_card\", \"NumberField.InfinitePlace.card_stabilizer\", \"FixedPoints.finrank_le_card\", \"NumberField.InfinitePlace.IsUnramified.stabilizer_eq_bot\", \"FixedPoints.instFiniteDimensionalSubtypeMemSubfieldSubfield\"], \"digest\": \"ba214f18d2afc471\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: number-field stabilizers and fixed fields do not concern scheme-theoretic algebraic stabilizers."
+  },
+  {
+   "tool": "grep",
+   "query": "orbit.*(stabilizer|torsor)|(stabilizer|torsor).*orbit",
+   "results": "{\"t\": \"2026-10-23T15:11:39Z\", \"tool\": \"grep\", \"query\": \"orbit.*(stabilizer|torsor)|(stabilizer|torsor).*orbit\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: reviewed hits concern abstract group actions, general finite morphisms or Artinian schemes; no algebraic orbit torsor theorem. Existing DAG nodes cover the supporting facts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"orbit\", \"AlgebraicGeometry\"",
+   "results": "{\"t\": \"2026-10-23T15:11:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"orbit\\\", \\\"AlgebraicGeometry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: reviewed hits concern abstract group actions, general finite morphisms or Artinian schemes; no algebraic orbit torsor theorem. Existing DAG nodes cover the supporting facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Orbit morphism of an algebraic group with finite scheme theoretic stabilizer is finite faithfully flat and is a torsor",
+   "results": "{\"t\": \"2026-10-23T15:11:40Z\", \"tool\": \"leanfinder\", \"query\": \"Orbit morphism of an algebraic group with finite scheme theoretic stabilizer is finite faithfully flat and is a torsor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected\", \"CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat\", \"Finite.of_finite_mulAction_orbitRel_quotient\", \"CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat\", \"MulAction.finite_quotient_of_pretransitive_of_finite_quotient\", \"CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget\", \"CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer\", \"CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget₂\"], \"digest\": \"e9c2c8c69a5927f9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: reviewed hits concern abstract group actions, general finite morphisms or Artinian schemes; no algebraic orbit torsor theorem. Existing DAG nodes cover the supporting facts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth algebraic group orbit is a torsor under its scheme theoretic stabilizer, and finite stabilizers give finite locally free orbit maps",
+   "results": "{\"t\": \"2026-10-23T15:12:02Z\", \"tool\": \"leansearch\", \"query\": \"A smooth algebraic group orbit is a torsor under its scheme theoretic stabilizer, and finite stabilizers give finite locally free orbit maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProperlyDiscontinuousVAdd.finite_stabilizer\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AddAction.ofQuotientStabilizer_mem_orbit\", \"AddAction.orbitEquivQuotientStabilizer\", \"ProperlyDiscontinuousSMul.finite_stabilizer\", \"MulAction.stabilizer\", \"MulAction.ofQuotientStabilizer_mem_orbit\", \"MulAction.index_stabilizer\"], \"digest\": \"72b02e710f28ed5a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: reviewed hits concern abstract group actions, general finite morphisms or Artinian schemes; no algebraic orbit torsor theorem. Existing DAG nodes cover the supporting facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type affine scheme over an algebraically closed field with finitely many rational points has dimension zero and is finite over the field",
+   "results": "{\"t\": \"2026-10-23T15:12:03Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type affine scheme over an algebraically closed field with finitely many rational points has dimension zero and is finite over the field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.IsArtinianScheme.finite\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"spectrum.nonempty_of_isAlgClosed_of_finiteDimensional\", \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"AlgebraicGeometry.instIsAffineTerminalScheme\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\"], \"digest\": \"2fd75646d678ba3b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: reviewed hits concern abstract group actions, general finite morphisms or Artinian schemes; no algebraic orbit torsor theorem. Existing DAG nodes cover the supporting facts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-projective-stability-affine-orbit-proper",
+  "by": "worker",
+  "date": "2026-10-23",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Sections 2.2--2.3, Proposition 1, Lemma 2(3), equation (5), and Lemma 4(3), printed pp.6--10; normalized weights and arithmetic uniformity are explicit agent expansions. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting input: Morrison Section 2.2, Proposition 1(1)--(2) and its proof, printed pp.6--7. Arbitrary-characteristic formulation of the Hilbert--Mumford criterion for SL and the determinant linearization; nonconstant weights explicitly exclude the trivial one-parameter subgroup. The elementary determinant-coordinate calculation is the one in Proposition 1; the underlying Hilbert--Mumford theorem is Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Theorem 2.1 (local book WANTED). Supporting input: Morrison Proposition 1, first sentence of the proof, citing GIT Theorem 2.1: the general numerical criterion, before its specialization to Pluecker monomial coordinates. Supporting input: Projective stability and properness of the affine vector orbit map. Supporting input: Zero dimensional scheme theoretic stabilizers give finite orbit torsors.",
+   "via": [
+    "lem-sfb-projective-stability-affine-orbit-proper",
+    "lem-sfb-hilbert-mumford-projective-representation",
+    "lem-sfb-hilbert-monomial-numerical-criterion",
+    "lem-sfb-uniform-gieseker-codegree-criterion",
+    "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-zero-dimensional-stabilizer-finite-orbit",
+  "worker": "stage1",
+  "summary": "Proved the three stabilizer criteria using existing zero-dimensional and Artinian/Jacobson nodes; wrote the two inverse torsor morphisms, checked finite presentation, and descended finiteness along the orbit map. No new nodes or changed statement. Checked infinitesimal stabilizers and nonreduced X.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Sections 2.2--2.3, Proposition 1, Lemma 2(3), equation (5), and Lemma 4(3), printed pp.6--10; normalized weights and arithmetic uniformity are explicit agent expansions. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting input: Morrison Section 2.2, Proposition 1(1)--(2) and its proof, printed pp.6--7. Arbitrary-characteristic formulation of the Hilbert--Mumford criterion for SL and the determinant linearization; nonconstant weights explicitly exclude the trivial one-parameter subgroup. The elementary determinant-coordinate calculation is the one in Proposition 1; the underlying Hilbert--Mumford theorem is Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Theorem 2.1 (local book WANTED). Supporting input: Morrison Proposition 1, first sentence of the proof, citing GIT Theorem 2.1: the general numerical criterion, before its specialization to Pluecker monomial coordinates. Supporting input: Projective stability and properness of the affine vector orbit map. Supporting input: Zero dimensional scheme theoretic stabilizers give finite orbit torsors. Explicit finite-stabilizer prerequisite for the affine-cone argument. The ancestor command returns None; the inherited null root and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic identification of the topological Krull dimension of a scheme with the supremum of the dimensions of its local rings, needed to apply lem-pc-algebraic-dim-zero-affine-finite (stated with def-pc-dimension) to the stabilizer; no node of the unit gives it."
+   },
+   {
+    "node": "lem-pc-algebraic-dim-zero-affine-finite",
+    "why": "Generic scheme, commutative algebra or descent fact used only in the explicit finite-stabilizer argument; no replacement of the inherited alteration/moduli route."
+   },
+   {
+    "node": "pqf-lem-finite-type-algebra-finite-spectrum",
+    "why": "Generic scheme, commutative algebra or descent fact used only in the explicit finite-stabilizer argument; no replacement of the inherited alteration/moduli route."
+   },
+   {
+    "node": "lem-sc-finite-type-nonclosed-closure-closed-points",
+    "why": "Generic scheme, commutative algebra or descent fact used only in the explicit finite-stabilizer argument; no replacement of the inherited alteration/moduli route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic scheme, commutative algebra or descent fact used only in the explicit finite-stabilizer argument; no replacement of the inherited alteration/moduli route."
+   },
+   {
+    "node": "lem-sbc-finite-affine-tensor-base-change",
+    "why": "Generic scheme, commutative algebra or descent fact used only in the explicit finite-stabilizer argument; no replacement of the inherited alteration/moduli route."
+   },
+   {
+    "node": "lem-sbc-finite-morphism-fpqc-descent",
+    "why": "Generic scheme, commutative algebra or descent fact used only in the explicit finite-stabilizer argument; no replacement of the inherited alteration/moduli route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-pc-algebraic-dim-zero-affine-finite",
+  "pqf-lem-finite-type-algebra-finite-spectrum",
+  "lem-sc-finite-type-nonclosed-closure-closed-points",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sbc-finite-affine-tensor-base-change",
+  "lem-sbc-finite-morphism-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-68b771304",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-68b771304 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement is unchanged from live, which is still unsplit; there are 0 new nodes and 7 new proof steps. I read every cited statement and Milne iAG 2017 pp.139-143 (7.4(b), the isotropy paragraph, 7.11, 7.12 and 7.15 with its cartesian square). The report's source error is genuine: the text of 7.15 reverses the arrow G/H'->G/H, while its diagram does not. The proof does not rely on the reversed sentence because step 4 builds the square G x_k H ~ G x_{O_x} G directly, with an explicit inverse (g,g')->(g,g^-1 g') through the representing stabilizer. Steps 1-3 check: closed subgroup and faithful flatness come from lem-sfb-smooth-group-orbit-geometry; finite gives Artinian, then finite spectrum, then dim 0; closed points equal k-points, and a nonclosed point would have infinitely many closed specializations. Step 5 checks: the separated target gives finite type by Nagata (b), the smooth orbit is locally Noetherian, so the map is locally of finite presentation. Step 6 checks: the one-summand tensor base change is finite, and fpqc finite descent along beta is not circular. Step 7 checks: the fppf torsor follows, with quasi-separatedness from affineness. Edge cases tested: G_m acting on G_m by g^p x (mu_p stabilizer, beta of degree p), the trivial action, and nonreduced X. No duplicate: lem-sfb-algebraic-group-homogeneous-quotient states only existence of G/L. No SGA is cited. FIX (C1/C4): step 2 applied lem-pc-algebraic-dim-zero-affine-finite, which is stated with def-pc-dimension (sup of the local-ring dimensions), to the topological Krull dimension without justification. The corrected item now cites lem-pc-scheme-dimension-local-rings and def-pc-dimension in step 2 and proof_deps, and adds a tool_uses entry for it. The other 6 declared generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ }
+}

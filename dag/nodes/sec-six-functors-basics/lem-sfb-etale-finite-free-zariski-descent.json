@@ -1,0 +1,267 @@
+{
+ "id": "lem-sfb-etale-finite-free-zariski-descent",
+ "kind": "statement",
+ "title": "Finite local freeness under the Zariski-etale quasi-coherent equivalence",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], and let $F$ be a quasi-coherent module on $(T_{\\mathrm{et}},\\mathcal O_T)$ [def-trf-space-quasi-coherent-module, def-weil-sheaf-of-modules-category]. Let $F_{\\mathrm{Zar}}$ be its restriction to open subschemes, the inverse under [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. Suppose that there is a jointly surjective etale scheme family $e_a:T_a\\to T$ [def-weil-etale-morphism] such that each tensor pullback $e_a^*F$ [def-trf-space-etale-module-functors] is locally a finite direct sum of copies of $\\mathcal O_{T_a}$ on its small etale site. Then $F_{\\mathrm{Zar}}$ is finite locally free on the Zariski topology: every point has an open neighbourhood $U$ with $F_{\\mathrm{Zar}}|_U\\cong\\mathcal O_U^{\\oplus n}$ for some finite $n$, allowed to depend on $U$. Conversely a Zariski finite locally free module has an etale finite locally free associated module. No constant-rank or Noetherian hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 05VG (lemma-equivalence-quasi-coherent-properties), finite locally free clause, and Tag 05B2 (lemma-finite-locally-free-descends); the equivalence is Tag 03DX (proposition-equivalence-quasi-coherent), part (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-weil-etale-morphism",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Put $G=F_{\\mathrm{Zar}}$ and write $L_U$ for extension from Zariski to small-etale modules on a scheme $U$. By [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], $G$ is quasi-coherent, $L_TG\\simeq F$, and $(e_a^*G)_{\\mathrm{et}}\\simeq e_a^*F$. Here $e_a^*G$ is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent], so the extension is defined on the stated quasi-coherent subcategory. Thus $L_{T_a}(e_a^*G)$ has the local finite free frames assumed for $e_a^*F$.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05VG (lemma-equivalence-quasi-coherent-properties), proof of the finite locally free case, using Tag 03DX (proposition-equivalence-quasi-coherent), part (2), and Tag 05B2 (lemma-finite-locally-free-descends)."
+   }
+  },
+  {
+   "text": "Choose a covering $\\{g_{ab}:V_{ab}\\to T_a\\}_b$ on which those frames are defined. The restriction comparison of [lem-trf-etale-extension-free-presentations-hom] identifies the framed restriction with $L_{V_{ab}}(g_{ab}^*e_a^*G)$. Restrict its isomorphism with $\\mathcal O_{V_{ab},\\mathrm{et}}^{\\oplus n_{ab}}$ to Zariski opens. The same node says that restriction of $L_{V_{ab}}H$ recovers $H$, with identity unit on open sections. Restriction of a finite direct sum of structure modules is the corresponding finite direct sum of Zariski structure modules: on an open $W$ both are $\\Gamma(W,\\mathcal O_W)^{n_{ab}}$, and the restriction maps agree coordinatewise. Hence $g_{ab}^*e_a^*G\\simeq\\mathcal O_{V_{ab}}^{\\oplus n_{ab}}$. Quasi-coherence for this application follows again from [lem-weil-pbc-module-pullback-quasi-coherent]. With $f_{ab}=e_a\\circ g_{ab}$, the composition comparison in [def-pc-module-pullback] gives $f_{ab}^*G\\simeq\\mathcal O_{V_{ab}}^{\\oplus n_{ab}}$.",
+   "uses": [
+    "lem-trf-etale-extension-free-presentations-hom",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05VG (lemma-equivalence-quasi-coherent-properties), proof of the finite locally free case, using Tag 03DX (proposition-equivalence-quasi-coherent), part (2), and Tag 05B2 (lemma-finite-locally-free-descends)."
+   }
+  },
+  {
+   "text": "Each $g_{ab}$ is etale, and its family is jointly surjective, by [def-weil-pbc-etale-site]. The composites $f_{ab}$ are etale by [lem-weil-pbc-etale-composition-cancellation]. They are jointly surjective: lift a point of $T$ first to some $T_a$ and then to some $V_{ab}$. Consequently they form a covering of the final object of $T_{\\mathrm{et}}$. By [lem-weil-pbc-fpqc-finer-than-etale], this family is an fpqc covering of $T$.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-fpqc-finer-than-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05VG (lemma-equivalence-quasi-coherent-properties), proof of the finite locally free case, using Tag 03DX (proposition-equivalence-quasi-coherent), part (2), and Tag 05B2 (lemma-finite-locally-free-descends)."
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-pc-fpqc-descent] to the quasi-coherent ordinary module $G$ and the fpqc covering $\\{f_{ab}\\}$. Every $f_{ab}^*G$ is finite free by Step 2, hence finite locally free. Reflection of finite local freeness gives that $G$ is finite locally free, meaning it is $\\mathcal O_U^{\\oplus n}$ on a Zariski neighbourhood of each point. We use finite local freeness itself, without prescribing a common rank $r$ in the additional fixed-rank version of that clause; the integers $n_{ab}$ may vary. This is precisely the unrestricted-rank descent assertion of Tag 05B2.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05VG (lemma-equivalence-quasi-coherent-properties), proof of the finite locally free case, using Tag 03DX (proposition-equivalence-quasi-coherent), part (2), and Tag 05B2 (lemma-finite-locally-free-descends)."
+   }
+  },
+  {
+   "text": "Conversely, let $G$ be Zariski finite locally free and choose open frames $G|_{U_c}\\simeq\\mathcal O_{U_c}^{\\oplus n_c}$. Each $\\mathcal O_{U_c}^{\\oplus n_c}$ is $\\widetilde{A^{n_c}}$ on every affine open $\\operatorname{Spec}A\\subseteq U_c$, so $G$ is quasi-coherent [pqf-def-coherent] and the clauses below for quasi-coherent modules apply. Open immersions are etale by [lem-weil-pbc-etale-composition-cancellation], so the inclusions $u_c:U_c\\to T$ form an etale covering as well. By [lem-trf-etale-extension-free-presentations-hom], $(L_TG)|_{(U_c)_{\\mathrm{et}}}\\simeq L_{U_c}(u_c^*G)$; by [lem-weil-pbc-open-immersion-module-pullback-restriction], $u_c^*G\\simeq G|_{U_c}$, hence $\\simeq\\mathcal O_{U_c}^{\\oplus n_c}$. The same node says that $L_{U_c}$ preserves finite coproducts and sends the structure module to the etale structure module. It therefore sends each displayed frame to $(L_TG)|_{(U_c)_{\\mathrm{et}}}\\simeq\\mathcal O_{U_c,\\mathrm{et}}^{\\oplus n_c}$. This proves the converse. If $T$ is empty the local conclusions are vacuous; if a frame has rank zero the same argument uses the empty finite direct sum. No bound on ranks, Noetherianity, or quasi-compactness of $T$ has been used.",
+   "uses": [
+    "pqf-def-coherent",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-trf-etale-extension-free-presentations-hom",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05VG (lemma-equivalence-quasi-coherent-properties), proof of the finite locally free case, using Tag 03DX (proposition-equivalence-quasi-coherent), part (2), and Tag 05B2 (lemma-finite-locally-free-descends)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-trf-etale-extension-free-presentations-hom",
+  "def-pc-module-pullback",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-pc-fpqc-descent",
+  "pqf-def-coherent",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 05VG (lemma-equivalence-quasi-coherent-properties), proof of the finite locally free case, using Tag 03DX (proposition-equivalence-quasi-coherent), part (2), and Tag 05B2 (lemma-finite-locally-free-descends)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent module on a scheme which becomes finite locally free on an etale cover is Zariski finite locally free",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this proposition asserts that the \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a site $(\\\\mathcal{C}, J)$ has finite presentation, then its local generators data satisfies the finite type condition under th\"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Site-local finite presentations and scheme morphism descent do not compare finite locally free modules in the etale and Zariski topologies."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free modules descend along an fpqc covering of schemes with ranks allowed to vary",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this proposition asserts that the \"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [inst_2 : ∀ (X : C), (J.over X).WEqualsLoca\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules of finite type, this function const\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {M : SheafOfModules R}\\n  {inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat}\\n  {inst_2 : ∀ (X : C), (J.over X).WEqualsLocallyBiject\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules equipped with local generators data\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Site-local finite presentations and scheme morphism descent do not compare finite locally free modules in the etale and Zariski topologies."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, FaithfullyFlat",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'FaithfullyFlat'",
+   "date": "2026-10-24",
+   "verdict": "no match: Site-local finite presentations and scheme morphism descent do not compare finite locally free modules in the etale and Zariski topologies."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]ocally[Ff]ree.*[Dd]escen|[Dd]escen.*[Ll]ocally[Ff]ree|projective_of.*[Ff]aithfully",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Site-local finite presentations and scheme morphism descent do not compare finite locally free modules in the etale and Zariski topologies."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally free quasi coherent sheaf descends under a surjective etale cover",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Etale A B] :\\n  ∃ (A₀ : Subalgebra R A) (B₀ : Type u) (_ : CommRing B₀) (_ : Algebra A₀ B₀),\\n    A₀.FG ∧ Etale A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  {inst : CategoryTheory.Category.{v', u'} C} →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)} →\\n          {inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this definition constructs the data required to define a quasicoherent sheaf over $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @Surjective (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Site-local finite presentations and scheme morphism descent do not compare finite locally free modules in the etale and Zariski topologies."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteLocallyFree.*[Dd]escen|[Dd]escen.*finiteLocallyFree|[Ee]tale.*[Ll]ocally[Ff]ree",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern site finite presentations, ring-module local freeness, or descent of scheme morphisms, not the Zariski/small-etale finite locally free comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally free modules descend along an fpqc covering of schemes with varying local rank",
+   "results": "8 hits; Module.FinitePresentation.exists_free_localizedModule_powers; Module.free_of_flat_of_finrank_eq; IsBaseChange.finrank_eq; Module.free_of_flat_of_isLocalRing; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget; Module.rankAtStalk_baseChange; Module.isLocallyConstant_rankAtStalk; Module.isLocallyConstant_rankAtStalk_freeLocus",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern site finite presentations, ring-module local freeness, or descent of scheme morphisms, not the Zariski/small-etale finite locally free comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsLocallyFree, AlgebraicGeometry.Scheme",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern site finite presentations, ring-module local freeness, or descent of scheme morphisms, not the Zariski/small-etale finite locally free comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent module on a scheme which becomes finite locally free on an etale cover is Zariski finite locally free",
+   "results": "8 hits; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation; SheafOfModules.IsFiniteType; SheafOfModules.IsFinitePresentation; SheafOfModules.isFinitePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern site finite presentations, ring-module local freeness, or descent of scheme morphisms, not the Zariski/small-etale finite locally free comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-lci-conormal-splitting",
+  "date": "2026-10-24",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06D9 (lemma-lci-formally-smooth), using the unramified lci deformation of Tag 06D8 (lemma-lci-unobstructed). Supporting input in criteria.tex lemma-lci-unobstructed, first paragraph: short exact conormal transitivity and its affine splitting. Supporting input: Descent of etale conormal bases to Zariski finite local freeness, before applying affine projectivity.",
+   "via": [
+    "lem-sfb-affine-lci-conormal-splitting",
+    "lem-sfb-relative-finite-hilbert-lci-lift",
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-etale-finite-free-zariski-descent",
+  "worker": "stage1",
+  "summary": "Split the finite locally free comparison using the existing quasi-coherent equivalence, its normalized etale restriction and open-section recovery, etale-to-fpqc covering comparison, and ordinary fpqc module descent. The finite free frames are recovered explicitly on every Zariski open before applying descent. No new node or fixed-rank hypothesis is introduced. Statement and historical ancestry are unchanged.",
+  "blueprint": "Historical created-item chain in blueprint.from retained. Its place is the affine lci conormal splitting prerequisite for the alteration input formerly used in det-thm-sf-ctf-stability-direct-images (3). Read the current latest blueprint unit and direct-image proof: they do not state this finite locally free comparison; no current blueprint duplicate was found and no unit or chapter is edited.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic scheme/module or etale-covering tool for the Stacks 05VG comparison; this unit has no replacement for its stated interface and no unit proof step is rerouted."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic scheme/module or etale-covering tool for the Stacks 05VG comparison; this unit has no replacement for its stated interface and no unit proof step is rerouted."
+   },
+   {
+    "node": "lem-trf-etale-extension-free-presentations-hom",
+    "why": "Generic scheme/module or etale-covering tool for the Stacks 05VG comparison; this unit has no replacement for its stated interface and no unit proof step is rerouted."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Generic scheme/module or etale-covering tool for the Stacks 05VG comparison; this unit has no replacement for its stated interface and no unit proof step is rerouted."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic scheme/module or etale-covering tool for the Stacks 05VG comparison; this unit has no replacement for its stated interface and no unit proof step is rerouted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-trf-etale-extension-free-presentations-hom",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-pc-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-746585987",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-746585987 (reviewer sub-agent of L); spot-checked: Read the item and all eight cited statements in full, together with Stacks descent.tex 05VG (l.2613) and 05B2 (l.2005), which is rank-free and assumes nothing Noetherian. The statement is unchanged from live (still unsplit there, no repair note), and the delivery adds no new nodes. Steps 1-4 are correct. Step 1: the 03DX equivalence plus the a^* comparison and quasi-coherence of pullbacks. Step 2: étale restriction, identity unit on opens, finite biproducts, then the composition iso. Step 3: the étale covering is fpqc by the finer-than-étale node. Step 4: lem-pc-fpqc-descent (2), reading the rank as unprescribed, which matches §35.7/05B2; ranks may vary. Fault (C1/E1) in step 5: it applied the extension node's restriction clause, which needs quasi-coherence, to a finite locally free G without noting that G is quasi-coherent, and it identified u_c^*G with G|_{U_c} without citing lem-weil-pbc-open-immersion-module-pullback-restriction. FIX: step 5 now derives quasi-coherence from the O^n frames [pqf-def-coherent] and cites the open-immersion leaf; proof_deps updated. Edge cases (empty T, rank 0, varying ranks, infinite cover, non-Noetherian base) are fine. The DAG has no duplicate: the hits are the rank-one trf line nodes and the fppf-descent node for finite locally free morphisms. Accepted the five generic tool_uses. Batch 5: lem-trf-etale-extension-free-presentations-hom is the general Zariski/étale quasi-coherent comparison (sk-i-curve-zero), already in the item's base closure through the equivalence node. Neither its closure nor the item's reaches a trace-formula theorem, Poincaré duality or nt- node, so it lies outside the assumptions and does not warrant a RETURN.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleFiniteFreeZariskiDescent",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etale_finite_free_zariski_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFiniteFreeZariskiDescent.lean",
+  "statement": "theorem etale_finite_free_zariski_descent (T : Scheme.{u}) : ∃ (c : ZariskiEtaleModuleContext T) (hp : ∀ (U : Scheme.{u}) (e : U ⟶ T), (smallEtaleModulePushforward e).IsRightAdjoint), (∀ (F : SmallEtaleModules T) [F.IsQuasicoherent] (ι : Type v) (U : ι → Scheme.{u}) (e : ∀ a, U a ⟶ T) [∀ a, Etale (e a)], (∀ x : T, ∃ (a : ι) (y : U a), e a y = x) → (∀ a, SheafOfModules.IsFiniteLocallyFree ((smallEtaleModulePullback (e a) (hp (U a) (e a))).obj F)) → (c.restriction.obj F).IsFiniteLocallyFree) ∧ (∀ (H : T.Modules), H.IsFiniteLocallyFree → (c.extension.obj H).IsFiniteLocallyFree)",
+  "branch": "newtargets-dag",
+  "by": "Q117",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76b9fda40",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Item matches node and Stacks 05VG/05B2/03DX(2) clause by clause: F : SmallEtaleModules T [IsQuasicoherent]; F_Zar = canonical c.restriction; arbitrary étale family ι : Type v with pointwise joint surjectivity; hypothesis IsFiniteLocallyFree of the canonical smallEtaleModulePullback (ranks vary per member); conclusion IsFiniteLocallyFree on T.Modules; converse ∀ H finite locally free ⇒ c.extension.obj H finite locally free. ∃ c hp are proof-only (ZariskiEtaleModuleContext has two Prop fields, so it is a subsingleton; hp is IsRightAdjoint proofs) and supplied by scheme_zariski_etale_quasiCoherent_equivalence; IsFiniteLocallyFree.of_iso makes the choice of left adjoint irrelevant. Edge cases (empty T or ι, rank 0, varying ranks, non-Noetherian, universes) fine. lean.statement verbatim; only the item's lean record changed; docstrings carry source, blueprint and 5 proof steps; sorry only; no duplicate found. Not recompiled (no change made); worker reports a clean scompile in 2.6 s. Advisories: SmallEtaleModules/ZariskiEtaleModuleContext are owned by def-sfb-scheme-zariski-etale-module-constructions, which is not cited; smallEtaleModulePushforward/Pullback are owned only by the original theorem stmt_dep (Q83/Q143 precedent); the def-trf-space-etale-module-functors stmt_dep is unused because the scheme-site pullback is correct here; the second reading is the worker's own read-back but goes clause by clause."
+ }
+}

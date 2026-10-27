@@ -1,0 +1,414 @@
+{
+ "id": "lem-sfb-groupoid-quasifinite-locus-descent",
+ "kind": "statement",
+ "title": "Quasi-finite saturation locus descends to the slice",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention], and let $(U,R,s,t,e,i,c)$ be a groupoid scheme over $S$ [def-a1-groupoid-scheme], all structure morphisms being over $S$. Let $g:B\\to U$ be a morphism of schemes. Assume $s,t,g$ are locally of finite type [def-weil-finite-type-morphism]. Put $H=B\\times_{g,U,t}R$, $p=\\operatorname{pr}_B:H\\to B$ and $h=s\\circ\\operatorname{pr}_R:H\\to U$ [def-pc-fibre-product]. There is an open subscheme $W\\subseteq B$ [def-weil-open-immersion] such that $p^{-1}(W)$ equals the locus of points at which $h$ is quasi-finite [pqf-def-quasifinite], as open subschemes of $H$. In particular, $h|_{p^{-1}(W)}$ is locally quasi-finite, and if $h$ is quasi-finite at $(b,e(g(b)))$, then $b\\in W$.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04LH (lemma-local-source), specialized by Tag 047W (remark-local-source-apply), item (2): P = locally quasi-finite, Q = R = locally of finite type."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-a1-groupoid-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-lft-base-change], the projection $H\\to R$ is locally of finite type, being the base change of $g$ along $t$. Since $s$ is locally of finite type, clause (e) of [lem-weil-pbc-proper-fp-permanence] shows that $h$ is locally of finite type. By [lem-sc-quasi-finite-points-open], its pointwise quasi-finite locus is an open subscheme $D\\subseteq H$, and $h|_D$ is locally quasi-finite.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sc-quasi-finite-points-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LH (lemma-local-source), proof, construction of W(P,h); Tag 047W (remark-local-source-apply), (2)."
+   }
+  },
+  {
+   "text": "Put $C=H\\times_B H$, with projections $a,b:C\\to H$ [def-pc-fibre-product]. Write its universal components as $(\\beta,r_1,r_2)$, with $g\\beta=tr_1=tr_2$, and put $d=c(i(r_1),r_2):C\\to R$ [def-a1-groupoid-scheme]. Then $td=ha$ and $sd=hb$. The map $(a,d):C\\to H\\times_{h,U,t}R$ has inverse $((\\beta,r),v)\\mapsto(\\beta,r,c(r,v))$; the map $(b,d):C\\to H\\times_{h,U,s}R$ has inverse $((\\beta,r),v)\\mapsto(\\beta,c(r,i(v)),r)$. These are scheme morphisms by the fibre-product universal property: $t(c(r,v))=tr$ and $t(c(r,i(v)))=tr$ give their defining constraints. Each inverse composite is the identity by associativity and the inverse and identity laws, for example $c(i(r),c(r,v))=v$ and $c(r,c(i(r),r_2))=r_2$. Thus the square with upper map $d$, lower map $h$, left map $a$ and right map $t$, and the square with upper map $d$, lower map $h$, left map $b$ and right map $s$, are cartesian.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C6 (lemma-diagram-pull), explicit inverse formulas, pulled back along g; more-groupoids.tex Tag 04LH, second displayed diagram."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-scheme-quasifinite-at-base-change] to $h$ in each cartesian square of step 2. At every $z\\in C$, $d$ is quasi-finite at $z$ if and only if $h$ is quasi-finite at $a(z)$, and also if and only if $h$ is quasi-finite at $b(z)$. Its hypothesis that $h$ be locally of finite type was proved in step 1; the base maps are respectively $t$ and $s$ and need no additional hypotheses. Consequently $a^{-1}(D)=b^{-1}(D)$ as subsets, hence as open subschemes [def-weil-open-immersion].",
+   "uses": [
+    "lem-sfb-scheme-quasifinite-at-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LH (lemma-local-source), equality of the two inverse-image loci; morphisms.tex Tag 01TM (lemma-base-change-quasi-finite), (1)."
+   }
+  },
+  {
+   "text": "The identity law gives a section $\\sigma:B\\to H$, $\\beta\\mapsto(\\beta,e(g\\beta))$, of $p$ [def-a1-groupoid-scheme]. Define $W=\\sigma^{-1}(D)$, an open in $B$. The pair $(\\mathrm{id}_H,\\sigma p)$ defines $j:H\\to C$ by [def-pc-fibre-product], since $p\\sigma p=p$. Pulling the equality of step 3 back along $j$ gives $D=j^{-1}a^{-1}D=j^{-1}b^{-1}D=(\\sigma p)^{-1}D=p^{-1}W$. Equality of these opens is equality of their open subschemes by [def-weil-open-immersion].",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LH (lemma-local-source), final paragraph: the identity section and W = sigma^{-1}(W(P,h))."
+   }
+  },
+  {
+   "text": "Since $p^{-1}W=D$, [lem-sc-quasi-finite-points-open] identifies $h|_{p^{-1}W}$ with the locally quasi-finite restriction $h|_D$ from step 1. Finally, if $h$ is quasi-finite at $(\\beta,e(g\\beta))=\\sigma(\\beta)$, then $\\sigma(\\beta)\\in D$, so $\\beta\\in\\sigma^{-1}D=W$ by its definition.",
+   "uses": [
+    "lem-sc-quasi-finite-points-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LH (lemma-local-source), final sentence, specialized by Tag 047W (2); morphisms.tex Tag 01TI (lemma-quasi-finite-points-open)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sc-quasi-finite-points-open",
+  "def-pc-fibre-product",
+  "def-a1-groupoid-scheme",
+  "lem-sfb-scheme-quasifinite-at-base-change",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04LH (lemma-local-source), proof, specialized by Tag 047W (remark-local-source-apply), item (2). The two cartesian comparisons are written explicitly using Tag 03C6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasi.?finite.*locus|groupoid|quasiFiniteLocus",
+   "results": {
+    "t": "2026-10-23T13:12:46Z",
+    "tool": "grep",
+    "query": "quasi.?finite.*locus|groupoid|quasiFiniteLocus",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean"
+    ],
+    "digest": "05ea595ff03e5a11"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern individual scheme morphisms or manifold structure groupoids; none supplies this scheme-groupoid assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The locus where the saturation map of a scheme groupoid is locally quasi finite descends to an open subset of the slice",
+   "results": {
+    "t": "2026-10-23T13:12:47Z",
+    "tool": "leansearch",
+    "query": "The locus where the saturation map of a scheme groupoid is locally quasi finite descends to an open subset of the slice",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.LocallyQuasiFinite.recOn",
+     "AlgebraicGeometry.LocallyQuasiFinite.mk",
+     "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+     "AlgebraicGeometry.LocallyQuasiFinite.casesOn",
+     "AlgebraicGeometry.LocallyQuasiFinite",
+     "AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict",
+     "AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite",
+     "AlgebraicGeometry.LocallyQuasiFinite.rec"
+    ],
+    "digest": "36ec90314bf85a04"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern individual scheme morphisms or manifold structure groupoids; none supplies this scheme-groupoid assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiFinite\", \"Groupoid\"",
+   "results": {
+    "t": "2026-10-23T13:12:47Z",
+    "tool": "loogle",
+    "query": "\"QuasiFinite\", \"Groupoid\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern individual scheme morphisms or manifold structure groupoids; none supplies this scheme-groupoid assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme groupoid the quasi finite locus of the saturation of a locally finite type morphism is the inverse image of an open subset of its source",
+   "results": {
+    "t": "2026-10-23T13:12:54Z",
+    "tool": "leanfinder",
+    "query": "For a scheme groupoid the quasi finite locus of the saturation of a locally finite type morphism is the inverse image of an open subset of its source",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.LocallyQuasiFinite",
+     "AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE",
+     "AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict",
+     "AlgebraicGeometry.instLocallyQuasiFiniteResLE",
+     "AlgebraicGeometry.LocallyOfFiniteType",
+     "AlgebraicGeometry.locallyQuasiFinite_iff",
+     "AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict",
+     "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite"
+    ],
+    "digest": "920bb8f02aa89b3b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern individual scheme morphisms or manifold structure groupoids; none supplies this scheme-groupoid assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a locally finite type scheme groupoid the open quasi finite locus of a saturation map is constant along the relation arrows over its first factor",
+   "results": {
+    "t": "2026-10-23T13:17:32Z",
+    "tool": "leanfinder",
+    "query": "In a locally finite type scheme groupoid the open quasi finite locus of a saturation map is constant along the relation arrows over its first factor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE",
+     "AlgebraicGeometry.instLocallyQuasiFiniteResLE",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux",
+     "AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict",
+     "AlgebraicGeometry.locallyQuasiFinite_iff",
+     "AlgebraicGeometry.instLocallyOfFiniteTypeResLE",
+     "AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict",
+     "AlgebraicGeometry.exists_lift_of_germInjective_aux"
+    ],
+    "digest": "741130bbdbfce693"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern individual scheme morphisms or manifold structure groupoids; none supplies this scheme-groupoid assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?finite.*locus|groupoid|quasiFiniteLocus",
+   "results": {
+    "t": "2026-10-23T14:32:13Z",
+    "tool": "grep",
+    "query": "quasi.?finite.*locus|groupoid|quasiFiniteLocus",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean"
+    ],
+    "digest": "05ea595ff03e5a11"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: individual scheme quasi-finite predicates, restrictions and stability do not state descent of the saturation locus through a scheme groupoid; read ZariskisMainTheorem.lean:292-322 and Morphisms/QuasiFinite.lean:339-358."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a groupoid of schemes the locus where the saturation of a locally finite type morphism is quasi finite is pulled back from an open subset of its source",
+   "results": {
+    "t": "2026-10-23T14:32:13Z",
+    "tool": "leansearch",
+    "query": "For a groupoid of schemes the locus where the saturation of a locally finite type morphism is quasi finite is pulled back from an open subset of its source",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.LocallyQuasiFinite.mk",
+     "AlgebraicGeometry.LocallyQuasiFinite",
+     "AlgebraicGeometry.LocallyQuasiFinite.recOn",
+     "AlgebraicGeometry.LocallyQuasiFinite.casesOn",
+     "AlgebraicGeometry.LocallyQuasiFinite.of_comp",
+     "AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE",
+     "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+     "AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict"
+    ],
+    "digest": "07dea8c9d2bccfb2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: individual scheme quasi-finite predicates, restrictions and stability do not state descent of the saturation locus through a scheme groupoid; read ZariskisMainTheorem.lean:292-322 and Morphisms/QuasiFinite.lean:339-358."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiFinite\", \"Groupoid\"",
+   "results": {
+    "t": "2026-10-23T14:32:13Z",
+    "tool": "loogle",
+    "query": "\"QuasiFinite\", \"Groupoid\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: individual scheme quasi-finite predicates, restrictions and stability do not state descent of the saturation locus through a scheme groupoid; read ZariskisMainTheorem.lean:292-322 and Morphisms/QuasiFinite.lean:339-358."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quasi finite locus of the saturation morphism B times U R to U for a scheme groupoid descends to an open subset of B",
+   "results": {
+    "t": "2026-10-23T14:32:14Z",
+    "tool": "leanfinder",
+    "query": "The quasi finite locus of the saturation morphism B times U R to U for a scheme groupoid descends to an open subset of B",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE",
+     "AlgebraicGeometry.LocallyQuasiFinite",
+     "AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict",
+     "AlgebraicGeometry.locallyQuasiFinite_iff",
+     "AlgebraicGeometry.instLocallyQuasiFiniteResLE",
+     "AlgebraicGeometry.IsAffineOpen.isQuasiSeparated",
+     "AlgebraicGeometry.isLocalization_basicOpen_of_qcqs",
+     "AlgebraicGeometry.Scheme.Hom.normalizationOpenCover"
+    ],
+    "digest": "7cac3899a10c00f4"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: individual scheme quasi-finite predicates, restrictions and stability do not state descent of the saturation locus through a scheme groupoid; read ZariskisMainTheorem.lean:292-322 and Morphisms/QuasiFinite.lean:339-358."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The open quasi finite locus of a groupoid saturation map is invariant along both projections of its self fibre product over the slice",
+   "results": {
+    "t": "2026-10-23T14:34:27Z",
+    "tool": "leanfinder",
+    "query": "The open quasi finite locus of a groupoid saturation map is invariant along both projections of its self fibre product over the slice",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instLocallyQuasiFiniteFstScheme",
+     "AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite",
+     "AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact",
+     "AlgebraicGeometry.topologically_isZariskiLocalAtSource'",
+     "AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact",
+     "CategoryTheory.Coverage.Saturate.pullback",
+     "AlgebraicGeometry.instLocallyQuasiFiniteResLE",
+     "AlgebraicGeometry.LocallyQuasiFinite.of_comp"
+    ],
+    "digest": "262438c2bd6a5e8e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: individual scheme quasi-finite predicates, restrictions and stability do not state descent of the saturation locus through a scheme groupoid; read ZariskisMainTheorem.lean:292-322 and Morphisms/QuasiFinite.lean:339-358."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cm-relation-point-slice",
+  "date": "2026-10-23",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: slicing the schematic kernel equivalence relation (Tag 0489). Supporting input in Tag 0489: Tag 04N0 (lemma-max-slice-quasi-finite), clauses (1)--(4), with Situation 04MY (situation-slice), specialized to an equivalence relation, whose stabilizer is the identity V. Only the local slice and its saturation map are asserted. Supporting input in the proof of Tag 04N0: descent of the quasi-finite locus from B x_U R to an open in B (04LH/047W(2)).",
+   "via": [
+    "lem-sfb-cm-relation-point-slice",
+    "lem-sfb-fppf-space-relation-slicing",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-groupoid-quasifinite-locus-descent",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Expanded the Stacks locus descent argument using the existing scheme quasi-finite openness and arbitrary pointwise base-change nodes. Gave both inverse formulas for the cartesian groupoid comparisons and descended the open along the identity section by an explicit morphism, without flatness or point-lifting assumptions. No new nodes: all non-elementary inputs already exist.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, direct-image clause (3), along the inherited alteration/curve-stack/bootstrap/slicing prerequisite chain; specifically 04N0 invokes 04LH/047W(2) for this locus descent. The latest blueprint direct-images proof still places this under proper direct-image preservation. Repaired the inherited null ancestor to the extant imported ancestor named throughout from.place and the creator chain.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-quasi-finite-points-open",
+    "why": "Generic scheme quasi-finite locus openness and the locally quasi-finite restriction; the unit has no separate scheme-level openness statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-quasi-finite-points-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-28322f13c",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-28322f13c (reviewer sub-agent of L); spot-checked: Read the item in full, every cited statement, and the source: Stacks more-groupoids 04LH (lemma-local-source) with its proof and 047W(2) (P = locally quasi-finite, Q = R = locally of finite type, no flatness). The statement is unchanged from base and matches the source hypothesis by hypothesis; its conclusion p^{-1}W equal to the pointwise quasi-finite locus is W(P,h) by 01TI. There are no new nodes, no repair note and no SGA. Step 1: pr_R is the base change of g along t (lft-base-change), h = s∘pr_R is lft by clause (e) of the permanence node, and D is open with h|_D locally quasi-finite by lem-sc-quasi-finite-points-open. Step 2: I re-derived both inverse formulas with the groupoid laws of def-a1-groupoid-scheme (s∘c = s∘pr_1, t∘c = t∘pr_0). d = c(i r1, r2) is defined, t∘d = h∘a, s∘d = h∘b, and all four composites are the identity, so both squares are cartesian; this step is elementary. Step 3: lem-sfb-scheme-quasifinite-at-base-change applied to h (lft) along t and along s gives a^{-1}D = b^{-1}D. Step 4: sigma = (id, e∘g) and j = (id, sigma∘p) give D = p^{-1}(sigma^{-1}D), a clean replacement for Stacks' set-theoretic sentence. Step 5 is immediate. Edge cases checked: B empty, the identity groupoid (W is the quasi-finite locus of g), a trivial G_a action (W empty), a finite constant group (W = B), nonflat groupoids. No cycle. No duplicate: lem-sfb-relation-open-locus-descent needs flat lfp equivalence relations and g = id, lem-a1-groupoid-source-pullback-translation is a different isomorphism, and lem-sfb-space-quasifinite-locus-open is the algebraic-space version. The only citer, lem-sfb-cm-relation-point-slice, uses the item exactly as stated. I accept the declared tool use of lem-sc-quasi-finite-points-open (generic 01TI openness). The blueprint from.node det-thm-sf-ctf-stability-direct-images replaces the inherited null and is acceptable."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupoidQuasiFiniteLocusDescent",
+  "declaration": "AlgebraicGeometry.groupoid_quasiFiniteLocus_descends",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupoidQuasiFiniteLocusDescent.lean",
+  "statement": "theorem groupoid_quasiFiniteLocus_descends {S U R B : Scheme.{u}} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (uS : U ⟶ S) (rS : R ⟶ S) (_hs : s ≫ uS = rS) (_ht : t ≫ uS = rS) (_he : e ≫ rS = uS) (_hi : i ≫ rS = rS) (_hc : c ≫ rS = pullback.fst s t ≫ rS) (hG : IsGroupoidScheme s t e i c) (g : B ⟶ U) [LocallyOfFiniteType s] [LocallyOfFiniteType t] [LocallyOfFiniteType g] : ∃ W : B.Opens, (∀ z : ↥(pullback g t : Scheme.{u}), z ∈ (pullback.fst g t ⁻¹ᵁ W) ↔ Scheme.Hom.IsQuasiFiniteAtPoint (pullback.snd g t ≫ s) z) ∧ Scheme.Hom.IsLocallyQuasiFinite ((pullback.fst g t ⁻¹ᵁ W).ι ≫ (pullback.snd g t ≫ s)) ∧ ∀ b : B, Scheme.Hom.IsQuasiFiniteAtPoint (pullback.snd g t ≫ s) ((pullback.lift (𝟙 B) (g ≫ e) (by simp only [Category.id_comp, Category.assoc, hG.identity_target, Category.comp_id])) b) → b ∈ W",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2368b1b6b",
+  "group": "Q157",
+  "result": "pass",
+  "note": "Read node, Stacks 04LH and 047W(2), IsGroupoidScheme, and IsQuasiFiniteAtPoint/IsLocallyQuasiFinite. Every clause matches: groupoid data with c on pullback s t; over-S equations add nothing (_he/_hi/_hc follow from _hs/_ht and the groupoid laws); LocallyOfFiniteType on s, t, g only; H/p/h written as explicit pullback maps; the open W is matched to the quasi-finite locus of h point by point; the restriction uses the Stacks locally-quasi-finite predicate; identity-section point is the canonical pullback.lift (𝟙 B) (g≫e) via hG.identity_target. One universe u, no extra hypotheses. lean.statement verbatim in file; node diff only adds lean; no competing landed record; docstrings carry source and blueprint id and the 5-step proof; proof is sorry only; report sections present. No compile run (no file changed). No findings."
+ }
+}

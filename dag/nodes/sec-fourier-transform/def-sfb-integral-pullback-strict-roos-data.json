@@ -1,0 +1,200 @@
+{
+ "id": "def-sfb-integral-pullback-strict-roos-data",
+ "kind": "definition",
+ "title": "Strict Roos data for integral pullback",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $A=\\mathcal O_E$ and its chosen uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. For a scheme $W$ use its small pro-etale site, retaining object universe $u+1$ and morphism universe $u$ for $W:\\mathrm{Scheme}_u$ [def-weil-pbc-proetale-site]. Let $d$ be the uniformizer-adic coefficient datum, $A_{n,W}=(A/\\pi^{n+1})_W$, and $R_W=\\varprojlim_{n\\in\\mathbf N}A_{n,W}$ [def-weil-pbc-adic-coefficient-datum]. The site-size instance and the notations $d,R_W$ mean these existing constructions, not extra choices.\n\nUse the cochain complexes of module sheaves [def-pc-cochain-complex-modules]. For any ring sheaf $B$ on this site, set $\\operatorname{TowCx}(W,B)=\\operatorname{CoCh}(\\operatorname{Fun}(\\mathbf N^{\\mathrm{op}},\\operatorname{Mod}(B)))$. Write $H_B$ for the strict Roos functor, $P(I)=\\prod_n I_n$ for its degreewise product and $\\chi_{I,p}:H_B(I)^{p+1}\\cong P(I)^p\\oplus P(I)^{p+1}$ for its specified cone coordinates [def-weil-strict-roos-model]. Let $L_B$ be ordinary tower limit and $\\mathbf RL_B$ its total right derived functor, with the canonical localization comparison $\\eta_I:Q(L_B I)\\to\\mathbf RL_B(QI)$ [def-pur-completed-rlim-functor]. Define the comparison type to be the natural isomorphisms $\\kappa:QH_B\\cong\\mathbf RL_B Q$ and the inclusion type to be the natural transformations $j:L_B\\to H_B$ on tower complexes. Define $\\operatorname{limitProduct}_{I,q}:\\varprojlim_n I_n^q\\to P(I)^q$ by the limit projections followed by the inverse canonical evaluation/product comparison. Define $\\operatorname{IsUnitNormalized}(W,B,\\kappa,j)$ to mean both\n$$\\chi_{I,p}\\circ j_I^{p+1}=(0,\\operatorname{limitProduct}_{I,p+1})\\quad( I\\in\\operatorname{TowCx}(W,B),\\ p\\in\\mathbf Z),\\qquad \\kappa_I\\circ Q(j_I)=\\eta_I\\quad(I\\in\\operatorname{TowCx}(W,B)).$$\n\nFor a scheme morphism $g:X\\to Y$, let $g_R^*$ be the actual module inverse image along the canonical completed-coefficient structure map and let $\\operatorname{red}_Y(M)=(M\\otimes_{R_Y}A_{n,Y})_n$ with its actual quotient transitions [def-weil-pbc-completed-pullback]. Define $\\operatorname{towerPull}_g$ by applying $g_R^*$ levelwise, $T_g=\\operatorname{towerPull}_g\\circ\\operatorname{red}_Y$, and $\\operatorname{cxT}_g$ by applying $T_g$ degreewise. For each cochain complex $P$ of $R_Y$-modules define the canonical counit\n$$\\operatorname{towerCounit}_{g,P}=\\epsilon^{\\operatorname{towerPull}}_{g,\\operatorname{red}^{\\rm cx}_Y P}\\circ L\\operatorname{towerPull}_g(\\epsilon^{\\operatorname{red}}_{Y,P}):L\\operatorname{towerPull}_g(\\operatorname{red}^{D}_Y(QP))\\longrightarrow Q(\\operatorname{cxT}_g P),$$\nwhere the two $\\epsilon$ are the existing representative counits for derived reduction and derived levelwise pullback. These are definitions on arbitrary schemes and arbitrary complexes; no completeness, constructibility, K-flatness or finite-type hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-pc-cochain-complex-modules",
+  "def-weil-strict-roos-model",
+  "def-pur-completed-rlim-functor"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "First paragraph and Comparison with the Stacks Project: strict pulled quotient towers and the normalized derived-limit comparison; existing IntegralPullbackStrictRoosNormalization module, definition-only interface."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Strict quotient pullback tower Roos cone ordinary limit inclusion unit normalization",
+   "results": "8 hits: AlgebraicGeometry.PresheafedSpace.GlueData.vPullbackConeIsLimit, CommRingCat.pullbackConeIsLimit, AlgebraicGeometry.SheafedSpace.GlueData.vPullbackConeIsLimit, CategoryTheory.Limits.PullbackCone.isLimitOfFactors, CategoryTheory.CommSq.cocone, CategoryTheory.Limits.PullbackCone.isLimitAux, CompHausLike.pullback.isLimit, CategoryTheory.Limits.PullbackCone.isLimitAux'",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions, without copying them."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.roosF, CategoryTheory.completedRlim",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.roosF'",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions, without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "IsUnitNormalized|IntegralPullbackStrictRoos|completedReductionModuleTowerFunctor",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions, without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsUnitNormalized|IntegralPullbackStrictRoos|completedReductionModuleTowerFunctor lean/WeilConjectures lean/Sheaf/Paper/IntegralPullbackStrictRoosNormalization.lean",
+   "results": "No upstream WeilConjectures hits; existing project module IntegralPullbackStrictRoosNormalization defines the data and normalization predicate.",
+   "date": "2026-10-23",
+   "verdict": "existing declarations: bind this new definition node to the unchanged project module"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l IntegralPullbackStrictRoos\\.(IsUnitNormalized|towerComplexes|kappaType)|strict-roos-data dag/nodes; python3 tools/blueprint_refs.py search \"strict Roos\"",
+   "results": "Only lem-sfb-integral-pullback-strict-roos-normalization.json lists these names; no definition node owns the data. Blueprint search: 0 blueprint nodes.",
+   "date": "2026-10-23",
+   "verdict": "No existing definition node; the listed owner is a theorem node, as the maintainer return explains."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-pbc-completed-compositor-normalization",
+  "date": "2026-10-23",
+  "group": "Q93"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final sentence assigning the local Frobenius operator to the PBC Qbar coefficient category; old proof steps 7–8: identity on entire quotient towers and normalized integral coherence; returned whole-tower proof steps 6, 7; strict tower and normalized Roos data used to state the extracted completed-compositor normalization.",
+   "via": [
+    "lem-fd-pbc-completed-compositor-normalization",
+    "lem-fd-whole-tower-integral-pullback-comparison",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralPullbackStrictRoosData",
+  "declaration": "WeilConjectures.IntegralPullbackStrictRoos.IsUnitNormalized",
+  "declarations": [
+   "WeilConjectures.IntegralPullbackStrictRoos.siteSmall",
+   "WeilConjectures.IntegralPullbackStrictRoos.datum",
+   "WeilConjectures.IntegralPullbackStrictRoos.R",
+   "WeilConjectures.IntegralPullbackStrictRoos.C",
+   "WeilConjectures.IntegralPullbackStrictRoos.ModR",
+   "WeilConjectures.IntegralPullbackStrictRoos.ModC",
+   "WeilConjectures.IntegralPullbackStrictRoos.res",
+   "WeilConjectures.IntegralPullbackStrictRoos.redR",
+   "WeilConjectures.IntegralPullbackStrictRoos.redC",
+   "WeilConjectures.IntegralPullbackStrictRoos.pullR",
+   "WeilConjectures.IntegralPullbackStrictRoos.pullC",
+   "WeilConjectures.IntegralPullbackStrictRoos.towerPullR",
+   "WeilConjectures.IntegralPullbackStrictRoos.towerPullC",
+   "WeilConjectures.IntegralPullbackStrictRoos.towerRes",
+   "WeilConjectures.IntegralPullbackStrictRoos.T",
+   "WeilConjectures.IntegralPullbackStrictRoos.U",
+   "WeilConjectures.IntegralPullbackStrictRoos.V",
+   "WeilConjectures.IntegralPullbackStrictRoos.complexesR",
+   "WeilConjectures.IntegralPullbackStrictRoos.complexesC",
+   "WeilConjectures.IntegralPullbackStrictRoos.pullR_additive",
+   "WeilConjectures.IntegralPullbackStrictRoos.redR_additive",
+   "WeilConjectures.IntegralPullbackStrictRoos.redR_zero",
+   "WeilConjectures.IntegralPullbackStrictRoos.U_additive",
+   "WeilConjectures.IntegralPullbackStrictRoos.U_zero",
+   "WeilConjectures.IntegralPullbackStrictRoos.cxT",
+   "WeilConjectures.IntegralPullbackStrictRoos.cxU",
+   "WeilConjectures.IntegralPullbackStrictRoos.cxV",
+   "WeilConjectures.IntegralPullbackStrictRoos.cxPullR",
+   "WeilConjectures.IntegralPullbackStrictRoos.cxPullC",
+   "WeilConjectures.IntegralPullbackStrictRoos.cxRes",
+   "WeilConjectures.IntegralPullbackStrictRoos.GoodR",
+   "WeilConjectures.IntegralPullbackStrictRoos.GoodC",
+   "WeilConjectures.IntegralPullbackStrictRoos.dComplex",
+   "WeilConjectures.IntegralPullbackStrictRoos.levelMap",
+   "WeilConjectures.IntegralPullbackStrictRoos.productMap",
+   "WeilConjectures.IntegralPullbackStrictRoos.bT",
+   "WeilConjectures.IntegralPullbackStrictRoos.bU",
+   "WeilConjectures.IntegralPullbackStrictRoos.bV",
+   "WeilConjectures.IntegralPullbackStrictRoos.lamComplex",
+   "WeilConjectures.IntegralPullbackStrictRoos.Lmap",
+   "WeilConjectures.IntegralPullbackStrictRoos.towerComplexes",
+   "WeilConjectures.IntegralPullbackStrictRoos.kappaType",
+   "WeilConjectures.IntegralPullbackStrictRoos.inclusionType",
+   "WeilConjectures.IntegralPullbackStrictRoos.limitProduct",
+   "WeilConjectures.IntegralPullbackStrictRoos.IsUnitNormalized",
+   "WeilConjectures.IntegralPullbackStrictRoos.unitR",
+   "WeilConjectures.IntegralPullbackStrictRoos.constantTowerIso",
+   "WeilConjectures.IntegralPullbackStrictRoos.towerCounit",
+   "WeilConjectures.IntegralPullbackStrictRoos.IsLambdaNormalized",
+   "WeilConjectures.IntegralPullbackStrictRoos.alphaTType",
+   "WeilConjectures.IntegralPullbackStrictRoos.alphaUType",
+   "WeilConjectures.IntegralPullbackStrictRoos.alphaVType",
+   "WeilConjectures.IntegralPullbackStrictRoos.EType",
+   "WeilConjectures.IntegralPullbackStrictRoos.IsAugmentationNormalized",
+   "WeilConjectures.IntegralPullbackStrictRoos.IsENormalized",
+   "WeilConjectures.IntegralPullbackStrictRoos.IsLocalized",
+   "WeilConjectures.IntegralPullbackStrictRoos.IsConstantUnitNormalized",
+   "WeilConjectures.IntegralPullbackStrictRoos.IsComparison",
+   "WeilConjectures.IntegralPullbackStrictRoos.T_zero",
+   "WeilConjectures.IntegralPullbackStrictRoos.pullRes_zero",
+   "WeilConjectures.IntegralPullbackStrictRoos.towerRes_zero",
+   "WeilConjectures.IntegralPullbackStrictRoos.roosProduct_augmentation",
+   "WeilConjectures.IntegralPullbackStrictRoos.biprod_augmentation",
+   "WeilConjectures.IntegralPullbackStrictRoos.roosMap_augmentation",
+   "WeilConjectures.IntegralPullbackStrictRoos.IsAugmentationNormalized.t",
+   "WeilConjectures.IntegralPullbackStrictRoos.IsAugmentationNormalized.u",
+   "WeilConjectures.IntegralPullbackStrictRoos.bT_f",
+   "WeilConjectures.IntegralPullbackStrictRoos.bU_f",
+   "WeilConjectures.IntegralPullbackStrictRoos.lamComplex_hom_component",
+   "WeilConjectures.IntegralPullbackStrictRoos.Lmap_hom"
+  ],
+  "statement": "def IsUnitNormalized (W : Scheme.{u})\n    (B : Sheaf (ProEt.topology W) CommRingCat.{u + 1})\n    (κ : kappaType W B) (j : inclusionType W B) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Unchanged definitions relocated before the normalization theorem to avoid its proof import cycle; all names and bodies retained and reexported. The concrete normalization helpers move to this earlier data module with unchanged mathematical types; productMap has an explicit type and an irreducible boundary to prevent expensive unfolding. lamComplex and Lmap have explicit isomorphism types; unitR and towerCounit have explicit morphism types and irreducible boundaries, with unchanged constructions. The concrete augmentations and cone comparisons have irreducible boundaries with proved component equations bT_f, bU_f, lamComplex_hom_component and Lmap_hom.",
+  "file": "lean/Sheaf/Paper/IntegralPullbackStrictRoosData.lean"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0045e9b73",
+  "group": "Q93",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0045e9b73",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 75788871c907 (H2). Item Lean byte-identical (sha256 acab5fbc…); item node changes only stmt_deps: theorem lem-sfb-integral-pullback-strict-roos-normalization replaced by new definition node def-sfb-integral-pullback-strict-roos-data (existing:true on unchanged Sheaf.Paper.IntegralPullbackStrictRoosNormalization). All 14 listed declarations exist live as plain abbrev/def/instance, none a .choose of the theorem; lean.statement verbatim = IsUnitNormalized signature l.397-399; node statement matches bodies (biprod.lift 0 limitProduct, κ∘Q(j)=limitComplexUnit, towerCounit composite, n means n+1, u+1/u site); its 7 stmt_deps are live definition nodes; no live definition node already owns these names. Mechanical finding: lem-trf-integral-inverse-image-comparison-composition PASS, since integralInverseImageDerivedComposition is built from the .choose of integralInverseImageComposition_existsUnique (l.203-210). Substance from the earlier full review still applies (no Lean or statement change). Advisory: limitComplexUnit is owned by theorem node lem-weil-pbc-ordered-exchange-coefficient-comparison (base-era); module docstrings name the theorem's blueprint id. No compile, no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fcf13",
+  "group": "Q5",
+  "result": "fix",
+  "landing": "20261026T070624-L-3631191",
+  "kind": "interface",
+  "note": "independent cc review: fcf1 vs 22e7 delivery (only change: public import FiniteFreeCompletedScalarComparison) and clone; 7 delivered + 4 downstream importers compiled in sandbox; gate source tools/import_prune_check.py + leanindex.closure"
+ }
+}

@@ -1,0 +1,111 @@
+{
+ "id": "lem-sfb-etale-localization-normal-ascent",
+ "kind": "statement",
+ "title": "Normal domain ascent at a prime of an etale algebra",
+ "statement": "Let R and S be commutative rings with S an etale R-algebra [def-weil-etale-morphism], and let q be a prime ideal of S. If the localization of R at q contracted to R is an integrally closed domain [def-weil-pbc-normal-ring], then S localized at q is an integrally closed domain. No Noetherian assumption or domain assumption on the unlocalized rings is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 033C, lemma-normal-goes-up, etale case after base change to R_p and localization at q. The existing upstream proof performs this tensor base change and prime-localization comparison."
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If R to S is etale and the localization of R at the contraction of a prime q is an integrally closed domain, then S localized at q is an integrally closed domain",
+   "results": "Successful search; top results: isIntegrallyClosed_of_isLocalization, IsLocalization.integralClosure, isIntegrallyClosed_ofLocalizationMaximal, IsIntegrallyClosed.of_localization_maximal, IsIntegrallyClosed.of_isLocalization_maximal, IsLocalization.Away.integralClosure, IsIntegrallyClosed.of_equiv, RingHom.Etale.propertyIsLocal",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match. Existing upstream declaration found by local source search and its full proof read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"Etale\"",
+   "results": "Successful search; top results: ",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match. Existing upstream declaration found by local source search and its full proof read."
+  },
+  {
+   "tool": "grep",
+   "query": "stalkMap_of_respectsIso|localization_of_etale_of_comap|isDomain_and_isIntegrallyClosed_localization_of_comap",
+   "results": "Successful search; top results: Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean, Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match. Existing upstream declaration found by local source search and its full proof read."
+  },
+  {
+   "tool": "grep",
+   "query": "Algebra.Etale.isDomain_and_isIntegrallyClosed_localization_of_comap in lean/WeilConjectures, lean/Sheaf and dag/nodes",
+   "results": "WeilConjectures.RingTheory.Etale.IntegrallyClosedLocalization: exact statement and complete proof; no existing DAG attachment of this declaration. Full DAG title and declaration searches found no identical pointwise ascent node.",
+   "date": "2026-10-26",
+   "verdict": "Exact proved source-library match; reuse without a new Lean statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleStalkInvariants",
+  "date": "2026-10-26",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; de Jong Lemma 3.13: explicit local equation and one singular-point blowup, before global resolution or domination; inherited step 14: comparison of the stalks on each leg of a common pointed etale neighbourhood; localized etale ascent used in the scheme-stalk invariant assembly",
+   "via": [
+    "lem-sfb-etale-stalk-invariants",
+    "lem-sfb-dvr-nodal-chart-blowup-calculus",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.RingTheory.Etale.IntegrallyClosedLocalization",
+  "file": "lean/WeilConjectures/RingTheory/Etale/IntegrallyClosedLocalization.lean",
+  "declaration": "Algebra.Etale.isDomain_and_isIntegrallyClosed_localization_of_comap",
+  "statement": "theorem Algebra.Etale.isDomain_and_isIntegrallyClosed_localization_of_comap {R A : Type u}\n    [CommRing R] [CommRing A] [Algebra R A] [Algebra.Etale R A] (P : Ideal A) [P.IsPrime]\n    (hP : IsDomain (Localization.AtPrime (P.comap (algebraMap R A))) ∧\n      IsIntegrallyClosed (Localization.AtPrime (P.comap (algebraMap R A)))) :\n    IsDomain (Localization.AtPrime P) ∧ IsIntegrallyClosed (Localization.AtPrime P)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-26",
+  "note": "Already proved in the adopted source library; no Lean file is added or changed for this attachment."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261026T083223-L-2299141",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261026T083223-L-2299141",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

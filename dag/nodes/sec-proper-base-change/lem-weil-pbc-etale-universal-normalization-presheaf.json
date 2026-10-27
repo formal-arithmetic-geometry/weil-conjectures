@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-etale-universal-normalization-presheaf",
+ "kind": "statement",
+ "title": "Universal source arrows induce normalized maps of Isom presheaves",
+ "statement": "Let Y be a scheme and q:R→S a homomorphism of commutative coefficient rings. Given C,K over R and Cprime,Kprime over S, and specified arrows dC:C→Res Cprime, dK:K→Res Kprime, assume [def-weil-pbc-etale-universal-normalization] for each. There exists a natural map p between the actual etale source-site Isom presheaves [def-weil-pbc-derived-local-isomorphism-sheaf] satisfying e.hom followed by the pulled dK equals the pulled dC followed by Res(p(e).hom), on every etale object and for every local isomorphism e. No coefficient finiteness, boundedness, stalk or covering assumption is needed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, finite quotient levels and the normalized algebraic diagram; Tags 06YY and 09BV."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-universal-normalization",
+  "def-weil-pbc-derived-local-isomorphism-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "At U construct normalizationUniversalIso privately: its forward and inverse maps are the unique factors through the two universal arrows. Their composites are identities by hom_ext. The private normalizationUniversalIso_fac is exactly fac, and gives its normalization equation. These elementary comma-category proofs require no downstream transport module.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For f:U→V apply the privately proved normalizationSquareTransport to the etale coefficient mate and the two restriction-coherence equations. Its proof is cancellation of the comparison isomorphisms followed by functoriality and naturality of the mate. It shows that restricting the transported isomorphism solves the normalization square on U. Universality on U and hom_ext identify it with transport of the restricted isomorphism, proving presheaf naturality.",
+   "uses": [
+    "def-weil-pbc-etale-universal-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use these pointwise transports as the components of a natural transformation. Their factorization equations are exactly the required generator normalization equations.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-universal-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, finite quotient levels and the normalized algebraic diagram; Tags 06YY and 09BV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal arrows restriction of scalars induce a natural map on presheaves of local isomorphisms",
+   "results": "Eight hits: ModuleCat.restrictScalars, PresheafOfModules.restrictScalars, SheafOfModules.restrictScalars and ordinary restriction pseudofunctors; no derived local Isom normalization theorem.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing scalar restriction and universal-arrow APIs; no direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of finite perfect complexes from pro-etale to etale with compatible coefficient reduction normalization",
+   "results": "Eight hits about standard etale algebras, smoothness, and ring-theoretic descent; no derived finite quotient normalization presentation.",
+   "date": "2026-10-27",
+   "verdict": "No replacement for the project-specific finite coefficient interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StructuredArrow.IsUniversal\", \"IsIso\"",
+   "results": "No hits.",
+   "date": "2026-10-27",
+   "verdict": "Use desc, fac and hom_ext from StructuredArrow.IsUniversal."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Uu]niversal|finitePerfectAdic.*[Dd]escent; localIsomorphismPresheaf; IsPerfect.finite_homology",
+   "results": "Mathlib has StructuredArrow.IsUniversal and coefficient restriction. The project has NormalizedDerivedIsomorphismTransport universalIso and normalized_square_transport, finite-ring descent, exact constant cohomology comparison, and IsPerfect boundedness and finite_homology. No canonical constant normalization diagram or actual quotient package matching these statements exists. Blueprint search for universal normalization returned zero matches.",
+   "date": "2026-10-27",
+   "verdict": "Use the proved generic tools and state only the remaining finite quotient steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicIsomorphismPresentation",
+  "date": "2026-10-27",
+  "group": "S7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Tag 09C6, finite quotient levels and the normalized algebraic diagram; Tags 06YY and 09BV.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-presentation",
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-sections",
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleUniversalNormalization",
+  "file": "lean/Sheaf/Paper/EtaleUniversalNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleUniversalNormalization_presheaf",
+  "statement": "theorem etaleUniversalNormalization_presheaf (Y : Scheme.{t})\n    {R S : Type (t + 1)} [CommRing R] [CommRing S] (q : R →+* S)\n    (C K : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{t + 1} R)))\n    (C' K' : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{t + 1} S)))\n    (dC : C ⟶ (normalizationRestrict Y.smallEtaleTopology q).obj C')\n    (dK : K ⟶ (normalizationRestrict Y.smallEtaleTopology q).obj K')\n    (hC : EtaleUniversalNormalization Y q dC) (hK : EtaleUniversalNormalization Y q dK) :\n    ∃ p : derivedLocalIsomorphismPresheaf C K ⟶ derivedLocalIsomorphismPresheaf C' K',\n      ∀ (U : Y.Etale) (e : (localIsomorphismRestriction Y R U).obj C ≅\n          (localIsomorphismRestriction Y R U).obj K),\n        e.hom ≫ etaleIsomorphismNormalizationArrow Y q dK U =\n          etaleIsomorphismNormalizationArrow Y q dC U ≫\n            (normalizationRestrict U.left.smallEtaleTopology q).map\n              (p.app (op U) e).hom",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T112432-L-1583335",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T112432-L-1583335",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,211 @@
+{
+ "id": "lem-a1-scheme-lqf-composition",
+ "kind": "statement",
+ "title": "Composition of locally quasi-finite scheme morphisms",
+ "statement": "Let $X,Y,S$ be schemes [def-pc-scheme], and let $f:X\\to Y$ and $h:Y\\to S$ be morphisms. If both $f$ and $h$ are locally quasi-finite in the scheme sense [pqf-def-quasifinite], then $h\\circ f:X\\to S$ is locally quasi-finite in that same sense. Here local quasi-finiteness includes the finite-type affine neighbourhood condition of [pqf-def-quasifinite]. No quasi-compactness, separatedness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01TL (lemma-composition-quasi-finite), locally quasi-finite assertion; affine proof via Tag 01TK and Algebra Tag 00PO."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "Fix a point x of X, and write y=f(x), s=h(y). By [lem-weil-pbc-affine-opens-basis], choose an affine open W of S containing s, then an affine open V of Y containing y inside the open h^{-1}(W), then an affine open U of X containing x inside f^{-1}(V). Thus f(U) is contained in V and h(V) is contained in W. Only inverse images of opens and the affine basis are used; no intersection of affine opens is asserted to be affine.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TL (lemma-composition-quasi-finite), locally quasi-finite assertion, expanding the affine-neighbourhood argument via Tag 01TK."
+   }
+  },
+  {
+   "text": "Apply implication (1) => (2) of [lem-a1-scheme-lqf-affine-criterion] to h with the affine pair V,W and to f with the affine pair U,V. It gives ring maps O_S(W) -> O_Y(V) and O_Y(V) -> O_X(U), each of finite type and quasi-finite at every prime of its target. These conclusions follow from the given scheme-sense local quasi-finiteness, so the finite-type condition has not been dropped.",
+   "uses": [
+    "lem-a1-scheme-lqf-affine-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TL (lemma-composition-quasi-finite), locally quasi-finite assertion, expanding the affine-neighbourhood argument via Tag 01TK."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-quasi-finite-composition] with A=O_S(W), B=O_Y(V), C=O_X(U). Both of its finite-type and every-prime hypotheses were obtained in step 2. Hence the composite A -> C is of finite type and quasi-finite at every prime of C. By the definition of composition of scheme morphisms, the map on these sections for h o f is exactly this composite: for a in O_S(W), (h o f)^#(a)=f^#(h^#(a)).",
+   "uses": [
+    "lem-trf-quasi-finite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TL (lemma-composition-quasi-finite), locally quasi-finite assertion, expanding the affine-neighbourhood argument via Tag 01TK."
+   }
+  },
+  {
+   "text": "In particular the composite ring map is quasi-finite at the prime of O_X(U) corresponding to x. The affine neighbourhoods U,W satisfy (h o f)(U) contained in W and the required finite-type condition. They therefore witness quasi-finiteness of h o f at x by [pqf-def-quasifinite]. As x was arbitrary, the composite is locally quasi-finite. If X is empty the same universal assertion is vacuous.",
+   "uses": [
+    "pqf-def-quasifinite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TL (lemma-composition-quasi-finite), locally quasi-finite assertion, expanding the affine-neighbourhood argument via Tag 01TK."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-scheme-lqf-affine-criterion",
+  "lem-trf-quasi-finite-composition",
+  "lem-weil-pbc-affine-opens-basis",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01TL (lemma-composition-quasi-finite), locally quasi-finite assertion, expanding the affine-neighbourhood argument via Tag 01TK."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The composite of two locally quasi finite scheme morphisms, locally of finite type and isolated fibre points, is locally quasi finite",
+   "results": "{\"t\": \"2026-10-22T07:53:47Z\", \"tool\": \"leanfinder\", \"query\": \"The composite of two locally quasi finite scheme morphisms, locally of finite type and isolated fibre points, is locally quasi finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.comp_iff\"], \"digest\": \"294777c3f9c5c2fe\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match: QuasiFinite.lean:82-87 proves composition for Mathlib LocallyQuasiFinite, which explicitly omits local finite type (lines 19-24,55-60). FiniteType.lean:68 supplies finite-type composition separately, but passage from the affine-neighbourhood predicate to the conjunction needs the non-Mathlib comparison theorem in WeilConjectures/AlgebraicGeometry/QuasiFiniteMorphismComparison.lean:62. This is not a one-line specialization of a Mathlib theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"comp\"",
+   "results": "{\"t\": \"2026-10-22T07:53:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyQuasiFinite\\\", \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instIsArtinianSchemeFiberOfLocallyQuasiFiniteOfQuasiCompact\", \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"AlgebraicGeometry.LocallyQuasiFinite.comp_iff\", \"AlgebraicGeometry.instIsFiniteFiberToSpecResidueFieldOfLocallyQuasiFiniteOfQuasiCompact\", \"AlgebraicGeometry.instLocallyQuasiFiniteCompSchemeιQuasiFiniteLocus\"], \"digest\": \"81e5ff7aed067a80\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match: QuasiFinite.lean:82-87 proves composition for Mathlib LocallyQuasiFinite, which explicitly omits local finite type (lines 19-24,55-60). FiniteType.lean:68 supplies finite-type composition separately, but passage from the affine-neighbourhood predicate to the conjunction needs the non-Mathlib comparison theorem in WeilConjectures/AlgebraicGeometry/QuasiFiniteMorphismComparison.lean:62. This is not a one-line specialization of a Mathlib theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyQuasiFinite.*[Cc]omp|[Cc]omp.*LocallyQuasiFinite|LocallyOfFiniteType.*[Cc]omp",
+   "results": "{\"t\": \"2026-10-22T07:57:42Z\", \"tool\": \"grep\", \"query\": \"LocallyQuasiFinite.*[Cc]omp|[Cc]omp.*LocallyQuasiFinite|LocallyOfFiniteType.*[Cc]omp\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\"], \"digest\": \"68cebe0a9c4a754e\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match: QuasiFinite.lean:82-87 proves composition for Mathlib LocallyQuasiFinite, which explicitly omits local finite type (lines 19-24,55-60). FiniteType.lean:68 supplies finite-type composition separately, but passage from the affine-neighbourhood predicate to the conjunction needs the non-Mathlib comparison theorem in WeilConjectures/AlgebraicGeometry/QuasiFiniteMorphismComparison.lean:62. This is not a one-line specialization of a Mathlib theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of morphisms of schemes locally of finite type with isolated fibre points is locally quasi finite",
+   "results": "{\"t\": \"2026-10-22T07:53:37Z\", \"tool\": \"leansearch\", \"query\": \"Composition of morphisms of schemes locally of finite type with isolated fibre points is locally quasi finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"AlgebraicGeometry.IsFinite.comp_iff\"], \"digest\": \"cc838c9218a0f80c\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match: QuasiFinite.lean:82-87 proves composition for Mathlib LocallyQuasiFinite, which explicitly omits local finite type (lines 19-24,55-60). FiniteType.lean:68 supplies finite-type composition separately, but passage from the affine-neighbourhood predicate to the conjunction needs the non-Mathlib comparison theorem in WeilConjectures/AlgebraicGeometry/QuasiFiniteMorphismComparison.lean:62. This is not a one-line specialization of a Mathlib theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally quasi finite morphisms in the Stacks sense, including local finite type, are stable under composition",
+   "results": "{\"t\": \"2026-10-22T07:57:53Z\", \"tool\": \"leanfinder\", \"query\": \"Locally quasi finite morphisms in the Stacks sense, including local finite type, are stable under composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\"], \"digest\": \"5a32f9097fe83cb2\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match: QuasiFinite.lean:82-87 proves composition for Mathlib LocallyQuasiFinite, which explicitly omits local finite type (lines 19-24,55-60). FiniteType.lean:68 supplies finite-type composition separately, but passage from the affine-neighbourhood predicate to the conjunction needs the non-Mathlib comparison theorem in WeilConjectures/AlgebraicGeometry/QuasiFiniteMorphismComparison.lean:62. This is not a one-line specialization of a Mathlib theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyQuasiFinite.*[Cc]omp|[Cc]omp.*LocallyQuasiFinite|LocallyOfFiniteType.*[Cc]omp",
+   "results": "{\"t\": \"2026-10-24T00:39:38Z\", \"tool\": \"grep\", \"query\": \"LocallyQuasiFinite.*[Cc]omp|[Cc]omp.*LocallyQuasiFinite|LocallyOfFiniteType.*[Cc]omp\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\"], \"digest\": \"f34beee9cee3a538\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match: Mathlib LocallyQuasiFinite omits finite type; the conjunction with LocallyOfFiniteType requires the project comparison theorem Scheme.Hom.isLocallyQuasiFinite_iff (QuasiFiniteMorphismComparison.lean:62-73), not a one-line Mathlib specialization. Read Mathlib AlgebraicGeometry/Morphisms/QuasiFinite.lean:19-24,55-87 and FiniteType.lean:68-70."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of morphisms of schemes locally of finite type with isolated fibre points is locally quasi finite",
+   "results": "{\"t\": \"2026-10-24T00:39:38Z\", \"tool\": \"leansearch\", \"query\": \"Composition of morphisms of schemes locally of finite type with isolated fibre points is locally quasi finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"AlgebraicGeometry.IsFinite.comp_iff\"], \"digest\": \"cc838c9218a0f80c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match: Mathlib LocallyQuasiFinite omits finite type; the conjunction with LocallyOfFiniteType requires the project comparison theorem Scheme.Hom.isLocallyQuasiFinite_iff (QuasiFiniteMorphismComparison.lean:62-73), not a one-line Mathlib specialization. Read Mathlib AlgebraicGeometry/Morphisms/QuasiFinite.lean:19-24,55-87 and FiniteType.lean:68-70."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"comp\"",
+   "results": "{\"t\": \"2026-10-24T00:39:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyQuasiFinite\\\", \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instIsArtinianSchemeFiberOfLocallyQuasiFiniteOfQuasiCompact\", \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"AlgebraicGeometry.LocallyQuasiFinite.comp_iff\", \"AlgebraicGeometry.instIsFiniteFiberToSpecResidueFieldOfLocallyQuasiFiniteOfQuasiCompact\", \"AlgebraicGeometry.instLocallyQuasiFiniteCompSchemeιQuasiFiniteLocus\"], \"digest\": \"81e5ff7aed067a80\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match: Mathlib LocallyQuasiFinite omits finite type; the conjunction with LocallyOfFiniteType requires the project comparison theorem Scheme.Hom.isLocallyQuasiFinite_iff (QuasiFiniteMorphismComparison.lean:62-73), not a one-line Mathlib specialization. Read Mathlib AlgebraicGeometry/Morphisms/QuasiFinite.lean:19-24,55-87 and FiniteType.lean:68-70."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally quasi finite morphisms in the Stacks sense, including local finite type, are stable under composition",
+   "results": "{\"t\": \"2026-10-24T00:39:39Z\", \"tool\": \"leanfinder\", \"query\": \"Locally quasi finite morphisms in the Stacks sense, including local finite type, are stable under composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\"], \"digest\": \"637af10cc82ce3e9\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match: Mathlib LocallyQuasiFinite omits finite type; the conjunction with LocallyOfFiniteType requires the project comparison theorem Scheme.Hom.isLocallyQuasiFinite_iff (QuasiFiniteMorphismComparison.lean:62-73), not a one-line Mathlib specialization. Read Mathlib AlgebraicGeometry/Morphisms/QuasiFinite.lean:19-24,55-87 and FiniteType.lean:68-70."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composite of two locally quasi finite scheme morphisms, locally of finite type and isolated fibre points, is locally quasi finite",
+   "results": "{\"t\": \"2026-10-24T00:39:40Z\", \"tool\": \"leanfinder\", \"query\": \"The composite of two locally quasi finite scheme morphisms, locally of finite type and isolated fibre points, is locally quasi finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\"], \"digest\": \"ae3c82e2deb191bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match: Mathlib LocallyQuasiFinite omits finite type; the conjunction with LocallyOfFiniteType requires the project comparison theorem Scheme.Hom.isLocallyQuasiFinite_iff (QuasiFiniteMorphismComparison.lean:62-73), not a one-line Mathlib specialization. Read Mathlib AlgebraicGeometry/Morphisms/QuasiFinite.lean:19-24,55-87 and FiniteType.lean:68-70."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-scheme-lqf-etale-source-locality",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Auxiliary representability branch beneath lem-a1-affine-hc0, through lem-a1-separated-etale-space-scheme and the proof of Stacks 03XX/03XW: the base-change and saturated-open hypotheses. This node supplies the scheme-source locality used to compare the pulled-back atlas with an arbitrary etale chart; see spaces-morphisms.tex, lemma-base-change-quasi-finite-locus, proof, chart diagram. Extraction from lem-a1-scheme-lqf-etale-source-locality: Composition of locally quasi-finite scheme morphisms.",
+   "via": [
+    "lem-a1-scheme-lqf-etale-source-locality",
+    "lem-a1-space-separated-lqf-permanence",
+    "lem-a1-etale-quasi-affine-image-scheme",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-scheme-lqf-composition",
+  "worker": "stage1",
+  "group": "Q25",
+  "summary": "Expanded Stacks 01TL into compatible affine neighbourhoods, the existing 01TK affine criterion, existing 00PO ring-map composition, and the pointwise definition. No new nodes; retained finite type and all original hypotheses. Normalized doubled TeX escapes without changing the statement.",
+  "blueprint": "Auxiliary scheme-composition fact in the inherited representability branch under lem-a1-affine-hc0 (finite-level compact-support discussion); realizes Stacks 01TL using 01TK and 00PO, without changing the chapter or unit route. Current ancestor text read in literature/blueprint/latest/blueprint/sec-purity-real-sheaves/sk-lem-wrp-hc2/lem-a1-affine-hc0.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-quasi-finite-composition",
+    "why": "Generic composition theorem for finite-type quasi-finite ring maps (Stacks 00PO), used on the compatible affine charts as required by Stacks 01TL; no node of this unit gives ring-map composition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-quasi-finite-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-69ed9925e",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-69ed9925e (reviewer sub-agent of L); spot-checked: The split has no new nodes and is a faithful 4-step expansion of the locally quasi-finite half of Stacks 01TL (morphisms.tex l.3895), which works through 01TK and Algebra 00PO (algebra.tex l.30342). Step 1 uses 01IT (lem-weil-pbc-affine-opens-basis) to choose nested affines W ∋ s, V ⊆ h^-1(W) and U ⊆ f^-1(V). Step 2 applies lem-a1-scheme-lqf-affine-criterion (1)⇒(2) to the pairs (V,W) and (U,V). Step 3 applies 00PO to the composite of the maps on sections. Step 4 is definition 01TD at x. The statement is unchanged apart from a TeX unescape, keeps the finite-type condition and adds no hypotheses. proof_deps equal the union of the step uses. The cited closure (74 nodes) does not contain the item, so there is no cycle. No existing node states scheme-sense LQF composition (lem-sfb-scheme-lqf-cancellation is the converse). Small cases (empty X, identities, k→k[x]→k[x,1/x], where h fails) show the hypotheses are needed and correctly used. Batch-5 flag lem-trf-quasi-finite-composition: it is the generic ring lemma 00PO, and its closure (finite-type and quasi-finite-at-prime definitions, fibre-primes bijection) reaches neither the trace formula nor Poincaré duality. Neither assumption gives it, so I accept it as the tool_use declared in split_report. Advisory: the node could be moved out of sec-trace-formula. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteComposition",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isLocallyQuasiFinite_comp",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsLocallyQuasiFiniteComposition.lean",
+  "statement": "theorem isLocallyQuasiFinite_comp {X Y S : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ S) (hf : f.IsLocallyQuasiFinite) (hh : h.IsLocallyQuasiFinite) : (f ≫ h).IsLocallyQuasiFinite",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-306a6b481",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 01TL: arbitrary X Y S : Scheme.{u}, f, h, hypotheses f/h.IsLocallyQuasiFinite (project predicate from pqf-def-quasifinite, includes Algebra.FiniteType on appLE; not Mathlib LocallyQuasiFinite), conclusion (f ≫ h).IsLocallyQuasiFinite; no extra instances or hypotheses; lean.statement verbatim; node diff vs live is only the lean block; no duplicate in Mathlib or project (EtaleSource covers only étale precomposition, representable_lqf_comp is for stacks), no name clash; stmt_deps imported publicly, proof_deps modules exist live and are imported plainly; docstrings carry the source place, the blueprint tag and the 4 proof steps; sorry only; report sections present. No recompile per instruction; no fixes."
+ }
+}

@@ -1,0 +1,139 @@
+{
+ "id": "lem-sfb-continuous-finite-etale-trace",
+ "kind": "statement",
+ "title": "Epic internal continuous trace with its exact sheet normalization",
+ "statement": "Fix a prime $\\ell$ and a finite normed extension $E/\\mathbf Q_\\ell$, with its continuous coefficient ring [def-weil-pbc-continuous-integral-coefficients]. For any scheme $X$, finite etale surjection $p:U\\to X$ and arbitrary internal $E_X$-module $P$ [sk-def-sfb-module-objects], there exists an epimorphism $\\tau:p_*p^*P\\to P$ satisfying the exact sheet-sum predicate of [def-sfb-internal-finite-etale-trace-formula]. There is no local-freeness or integral-lattice hypothesis.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-internal-finite-etale-trace-formula"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, first paragraph: construct trace as the sheet sum and insert a section in one sheet"
+ },
+ "proof": [
+  {
+   "text": "For every weakly etale finite splitting chart define the local map as the sum of the exact counit/composition projections. Apply overlap compatibility to this explicitly constructed family, then morphism descent, with Q=p_*p^*P, to obtain a global trace with the required sheet formula.",
+   "uses": [
+    "lem-sfb-finite-etale-sheet-sum-compatible",
+    "lem-sfb-finite-etale-split-hom-descent",
+    "def-sfb-internal-finite-etale-trace-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a chart with at least one sheet, use the canonical product comparison p_*p^*P→∏_j t_j^*p^*P. Insert g^*P into one chosen factor using the composition isomorphism and put zero in every other factor. Compose with the inverse product comparison. Composition with the sheet sum is the identity, by Pi.lift_π, the inverse identities, and the finite sum of the Kronecker-delta components.",
+   "uses": [
+    "lem-weil-pbc-split-proetale-module-product-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If the chart has no sheets, its coproduct fibre product is empty. Surjectivity of the base-changed p implies that the chart base is empty. The empty covering implies that every abelian sheaf and internal module on it is zero, so the local map is epic. Apply the epimorphy clause of morphism descent to the local maps, all now shown epic.",
+   "uses": [
+    "lem-sfb-finite-etale-split-hom-descent"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-etale-sheet-sum-compatible",
+  "lem-sfb-finite-etale-split-hom-descent",
+  "def-sfb-internal-finite-etale-trace-formula",
+  "lem-weil-pbc-split-proetale-module-product-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M9",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, first paragraph: finite etale splitting, sheet sums, and descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The epimorphic finite etale trace on continuous coefficient sheaf modules is the sum of the sheet projections",
+   "results": "8 hits, including trace_eq_sum_embeddings, LinearMap.trace_eq_sum_trace_restrict', LinearMap.trace, SheafOfModules.GeneratingSections.ofEpi_s, SheafOfModules.GeneratingSections.ofEpi, PresheafOfModules.epi_of_surjective; none states the internal trace formula.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale surjective trace map on a locally free sheaf has locally free integral lattice image",
+   "results": "8 hits: IsIntegralClosure.module_free, Algebra.intTrace, Algebra.intTraceAux, Algebra.intTrace_eq_trace, ClassGroup.fintypeOfAdmissibleOfFinite, Algebra.trace_localization, Algebra.normalizedTrace_surjective, trace_quotient_eq_trace_localization_quotient. These concern algebraic traces, not this sheaf trace.",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteEtaleTraceFormula|ContinuousFunctionPresentation|trace.*[Ii]mage.*[Cc]hart|continuous.*[Ll]attice.*[Ff]ree",
+   "results": "0 hits",
+   "verdict": "no match",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFiniteEtaleTraceLattice",
+  "date": "2026-10-26",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-stratified-lattice",
+   "place": "Local computation, first paragraph: construct trace as the sheet sum and insert a section in one sheet",
+   "via": [
+    "lem-sfb-continuous-finite-etale-trace-lattice"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousFiniteEtaleTrace",
+  "file": "lean/Sheaf/Paper/ContinuousFiniteEtaleTrace.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousFiniteEtaleTrace_exists",
+  "statement": "theorem continuousFiniteEtaleTrace_exists\n    (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : Scheme.{u}) {U : Scheme.{u}} (p : U ⟶ X)\n    [IsFinite p] [Etale p] [Surjective p]\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X)) :\n    ∃ τ : (lowerStar (Profinite.continuousMapRingObj E) p).obj\n        ((upperStar (Profinite.continuousMapRingObj E) p).obj P) ⟶ P,\n      Epi τ ∧ FiniteEtaleTraceFormula (Profinite.continuousMapRingObj E) p P τ",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T022850-L-489971",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e7396",
+  "group": "M9",
+  "result": "fix",
+  "landing": "20261026T070326-L-3543209",
+  "kind": "interface",
+  "note": "independent cc review: continuousFiniteEtaleTrace_exists (lem-sfb-continuous-finite-etale-trace) and adapted FiniteEtaleTraceFormula (def-sfb-internal-finite-etale-trace-formula, equivalent chart-bundled body, change record) against their nodes; new sorry nodes lem-sfb-finite-etale-split-hom-descent / lem-sfb-finite-etale-sheet-sum-compatible against their statements; importers ImageCharts and Lattice compiled against the delivery"
+ }
+}

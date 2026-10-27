@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-noetherian-space-chevalley-image",
+ "kind": "statement",
+ "title": "Constructible images for separated finite-type maps to Noetherian algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $f:Y\\to Z$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Give their point sets the atlas topology [def-a1-space-point-topology]. Assume $Z$ is Noetherian: it is quasi-compact, its diagonal is quasi-compact, and every etale scheme chart is locally Noetherian [pqf-def-locnoeth]. Assume $f$ is separated and of finite type. Here separated means that its relative diagonal is representable by closed immersions [def-weil-closed-immersion]; finite type means quasi-compact and locally of finite type on compatible etale scheme charts, with the scheme convention [def-weil-finite-type-morphism]. Quasi-compactness of a morphism means that its base change by every affine scheme has quasi-compact point space. For every constructible subset $A\\subseteq|Y|$ [def-weil-constructible-subset], the point image $|f|(A)$ is constructible in $|Z|$. In particular $|f|(|Y|)$ is constructible. No properness or smoothness assumption on $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0ECX (theorem-chevalley), combined with Tag 06G4 (lemma-noetherian-finite-type-finite-presentation) for separated finite-type maps to a locally Noetherian target; topological versus etale-local constructibility: decent-spaces.tex Tag 0ECZ (lemma-locally-constructible)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-constructible-subset",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=|f|(A)$. Fix an arbitrary representable etale map $v:V\\to Z$ from an affine scheme. Form $W=Y\\times_ZV$, an algebraic space by [lem-trf-space-fibre-products-etale-covers], with projections $a:W\\to Y$ and $b:W\\to V$. The definition of quasi-compactness of $f$ in the statement gives quasi-compactness of $|W|$. The map $a$ is representable etale: on every scheme test its pullback is a base change of the etale scheme projection defining $v$, as in [def-trf-algebraic-space].",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0ECX (theorem-chevalley), proof: base change to an affine etale target chart"
+   }
+  },
+  {
+   "text": "Choose a scheme atlas of $W$ using [def-trf-algebraic-space] and refine its source by its affine open covering, taking the disjoint union of these affine opens. This is again representable etale: after every scheme test, open immersions are etale and composites of etale scheme maps are etale by [lem-weil-pbc-etale-composition-cancellation]. The affine opens cover the old atlas, so the refinement is surjective. Apply [lem-a1-space-finite-affine-subatlas] to obtain finitely many affine schemes $U_i$ whose maps $p_i:U_i\\to W$ are jointly surjective etale. Write $h_i=bp_i:U_i\\to V$ and $q_i=ap_i:U_i\\to Y$. Scheme testing and the same etale composition lemma show that $q_i$ is etale. Thus the compatible chart condition in the finite-type hypothesis on $f$ says that each $h_i$ is locally of finite type. The finite family may be empty if $W$ is empty.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-a1-space-finite-affine-subatlas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H6 (lemma-quasi-compact-affine-cover), finite affine chart selection; Tag 03FX (lemma-cover-by-union-affines)"
+   }
+  },
+  {
+   "text": "The target chart $V$ is locally Noetherian by the hypothesis on $Z$. By [pqf-lem-locnoeth-lft], every $U_i$ is locally Noetherian. In fact every etale scheme chart $T\\to U_i$ is locally Noetherian: its composite to $Y$ is etale by scheme testing and [lem-weil-pbc-etale-composition-cancellation], hence the compatible map $T\\to V$ is locally of finite type by the hypothesis on $f$, and [pqf-lem-locnoeth-lft] applies again. Each affine $U_i$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so [lem-sfb-noetherian-space-topology], applied to $h_{U_i}$, gives Noetherianity of its atlas point space. This is the Zariski space of $U_i$: by [lem-weil-pbc-morphism-from-spec-field] every field-valued point $\\operatorname{Spec}K\\to U_i$ factors uniquely through $\\operatorname{Spec}\\kappa(x)\\to U_i$ for its image point $x$, so the map $|\\mathrm{id}|:|U_i|\\to|h_{U_i}|$ of [def-a1-algebraic-space-point-classes] is bijective; a subset open for the atlas topology [def-a1-space-point-topology] is Zariski open by testing it on the identity chart, and a Zariski open has open inverse image under every etale scheme chart $T\\to U_i$ since scheme morphisms are continuous. Hence the Zariski space $|U_i|$ is Noetherian. The map $|q_i|$ is continuous by [lem-a1-space-point-open-calculus]. Write $A$ as a finite union of locally closed subsets using [def-weil-constructible-subset]. Their inverse images under $|q_i|$ are locally closed, because inverse images preserve opens and closed sets. In a Noetherian space this finite union is constructible by the converse clause of [def-weil-constructible-subset]. Thus $A_i=|q_i|^{-1}(A)$ is constructible in $|U_i|$.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-noetherian-space-topology",
+    "lem-a1-space-point-open-calculus",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-a1-algebraic-space-point-classes",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0ECX (theorem-chevalley), inverse image on the source atlas; scheme Noetherianity: morphisms.tex Tag 01T6 (lemma-finite-type-noetherian); space topology: spaces-properties.tex Tag 04ZF (lemma-Noetherian-topology)"
+   }
+  },
+  {
+   "text": "Apply [pqf-lem-lft-fp-locnoeth] to $h_i:U_i\\to V$ to obtain local finite presentation. Each $h_i$ is quasi-compact: a morphism between affine schemes is induced by a ring map $R\\to C$, and the inverse image of a principal open $D(r)$ is the affine $\\operatorname{Spec}C_r$; a quasi-compact open of $\\operatorname{Spec}R$ is a finite union of principal opens. The target $V$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Therefore scheme Chevalley [lem-weil-pbc-chevalley-constructible-image] applies to the constructible subset $A_i$, and shows that $|h_i|(A_i)$ is constructible in $|V|$.",
+   "uses": [
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-chevalley-constructible-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06G4 (lemma-noetherian-finite-type-finite-presentation), chartwise argument; Tag 0ECX (theorem-chevalley), final application of morphisms.tex Tag 054J (lemma-chevalley)"
+   }
+  },
+  {
+   "text": "The point lifting assertion of [lem-a1-space-point-open-calculus] gives a surjection $|W|\\to|Y|\\times_{|Z|}|V|$. Consequently $$|v|^{-1}(B)=\\bigcup_i |h_i|(A_i).$$ Indeed the right side maps into $B$ by commutativity. Conversely if $t\\in|V|$ maps to $f(y)$ for $y\\in A$, lift the pair $(y,t)$ to $w\\in|W|$, then lift $w$ to some $u\\in|U_i|$ by joint surjectivity. This $u$ belongs to $A_i$ and maps to $t$. The union is finite and hence constructible by [def-weil-constructible-subset].",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0ECX (theorem-chevalley), point-image identity using spaces-properties.tex Tag 03H4 (lemma-points-cartesian)"
+   }
+  },
+  {
+   "text": "We have proved that $|v|^{-1}(B)$ is constructible for every affine etale chart $v:V\\to Z$. The target $Z$ is quasi-compact and quasi-separated by its stated Noetherian hypothesis. Apply [lem-sfb-space-constructible-affine-etale-test] to obtain constructibility of $B$ in $|Z|$. Finally $|Y|$ is constructible: it is open and retrocompact in itself, so [def-weil-constructible-subset] applies with $U=|Y|$ and $V=\\varnothing$. Taking $A=|Y|$ proves the last assertion.",
+   "uses": [
+    "lem-sfb-space-constructible-affine-etale-test",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0ECZ (lemma-locally-constructible), quasi-compact case; affine tests: spaces-properties.tex Tag 0ECT (lemma-locally-constructible)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-a1-space-finite-affine-subatlas",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-noetherian-space-topology",
+  "lem-a1-space-point-open-calculus",
+  "def-weil-constructible-subset",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-sfb-space-constructible-affine-etale-test",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "def-a1-algebraic-space-point-classes",
+  "def-a1-space-point-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0ECX (theorem-chevalley), proof by affine etale target charts and a finite affine source atlas, with scheme local finite presentation from 06G4 and topological comparison from decent-spaces.tex 0ECZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley theorem constructible image of a finitely presented morphism of algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T15:00:15Z\", \"tool\": \"leanfinder\", \"query\": \"Chevalley theorem constructible image of a finitely presented morphism of algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"PrimeSpectrum.isConstructible_range_comap\", \"PrimeSpectrum.isConstructible_comap_image\", \"chevalley_mvPolynomial_mvPolynomial\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"ChevalleyThm.chevalley_polynomialC\"], \"digest\": \"f77dc84bf2784d7f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give Scheme.Hom.isConstructible_image (Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:165) and scheme/spectrum variants only. Its source was read; it quantifies over schemes, not algebraic spaces. The etale-chart descent to the atlas topology is a theorem, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|isConstructible_image|isLocallyConstructible_image",
+   "results": "{\"t\": \"2026-10-23T16:19:29Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|isConstructible_image|isLocallyConstructible_image\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\"], \"digest\": \"dad399fa220ae966\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give Scheme.Hom.isConstructible_image (Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:165) and scheme/spectrum variants only. Its source was read; it quantifies over schemes, not algebraic spaces. The etale-chart descent to the atlas topology is a theorem, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type morphism to a Noetherian algebraic space has constructible image",
+   "results": "{\"t\": \"2026-10-23T16:19:30Z\", \"tool\": \"leansearch\", \"query\": \"A finite type morphism to a Noetherian algebraic space has constructible image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"PrimeSpectrum.isConstructible_range_comap\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"Topology.IsConstructible.image_of_isOpenEmbedding\", \"PrimeSpectrum.isConstructible_comap_image\", \"Topology.IsConstructible.image_of_isClosedEmbedding\", \"AlgebraicGeometry.IsFinite.recOn\"], \"digest\": \"12e49312af3bc262\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give Scheme.Hom.isConstructible_image (Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:165) and scheme/spectrum variants only. Its source was read; it quantifies over schemes, not algebraic spaces. The etale-chart descent to the atlas topology is a theorem, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isConstructible_image\"",
+   "results": "{\"t\": \"2026-10-23T16:19:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"isConstructible_image\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\"], \"digest\": \"1c52da958befa5f2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give Scheme.Hom.isConstructible_image (Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:165) and scheme/spectrum variants only. Its source was read; it quantifies over schemes, not algebraic spaces. The etale-chart descent to the atlas topology is a theorem, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley constructible image finite type morphism of Noetherian algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T18:10:02Z\", \"tool\": \"leanfinder\", \"query\": \"Chevalley constructible image finite type morphism of Noetherian algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"PrimeSpectrum.isConstructible_range_comap\", \"PrimeSpectrum.isConstructible_comap_image\"], \"digest\": \"30d39354ba763873\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, spectra, or abstract topological constructibility. None provides the comparison between affine etale tests and the atlas point topology of algebraic spaces; the scheme and topological sources were read."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|isConstructible_image|isLocallyConstructible_image",
+   "results": "{\"t\": \"2026-10-23T18:10:47Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|isConstructible_image|isLocallyConstructible_image\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\"], \"digest\": \"dad399fa220ae966\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, spectra, or abstract topological constructibility. None provides the comparison between affine etale tests and the atlas point topology of algebraic spaces; the scheme and topological sources were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible images descend through an etale atlas of an algebraic space",
+   "results": "{\"t\": \"2026-10-23T18:10:48Z\", \"tool\": \"leansearch\", \"query\": \"Constructible images descend through an etale atlas of an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"Topology.IsConstructible.image_of_isOpenEmbedding\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"Topology.IsConstructible.preimage_of_isOpenEmbedding\", \"PrimeSpectrum.ConstructibleSetData.map\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"f6036e771ee76d11\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, spectra, or abstract topological constructibility. None provides the comparison between affine etale tests and the atlas point topology of algebraic spaces; the scheme and topological sources were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isConstructible_image\"",
+   "results": "{\"t\": \"2026-10-23T18:10:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"isConstructible_image\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\"], \"digest\": \"1c52da958befa5f2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, spectra, or abstract topological constructibility. None provides the comparison between affine etale tests and the atlas point topology of algebraic spaces; the scheme and topological sources were read."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|locallyConstructible|IsLocallyConstructible|isConstructible_iff",
+   "results": "{\"t\": \"2026-10-23T18:13:29Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|locallyConstructible|IsLocallyConstructible|isConstructible_iff\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Topology/Constructible.lean\", \"Mathlib/Topology/Constructible.lean\", \"Mathlib/Topology/Constructible.lean\", \"Mathlib/Topology/Constructible.lean\", \"Mathlib/Topology/Constructible.lean\"], \"digest\": \"93d306823a38a1d6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, spectra, or abstract topological constructibility. None provides the comparison between affine etale tests and the atlas point topology of algebraic spaces; the scheme and topological sources were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subset of a quasi compact quasi separated algebraic space is constructible if and only if its inverse image on every affine etale chart is constructible",
+   "results": "{\"t\": \"2026-10-23T18:13:30Z\", \"tool\": \"leanfinder\", \"query\": \"A subset of a quasi compact quasi separated algebraic space is constructible if and only if its inverse image on every affine etale chart is constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"Topology.IsLocallyConstructible.isConstructible\", \"PrimeSpectrum.ConstructibleSetData.isConstructible_toSet\", \"Topology.IsLocallyConstructible.isConstructible_of_subset_of_isCompact\", \"Topology.isConstructible_preimage_iff_of_isOpenEmbedding\", \"Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover\"], \"digest\": \"7a1709f2df256ca6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, spectra, or abstract topological constructibility. None provides the comparison between affine etale tests and the atlas point topology of algebraic spaces; the scheme and topological sources were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructible\"",
+   "results": "{\"t\": \"2026-10-23T18:15:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsConstructible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Topology.IsConstructible\", \"Topology.IsConstructible.univ\", \"Topology.IsConstructible.empty\", \"Topology.IsConstructible.isLocallyConstructible\", \"IsRetrocompact.isConstructible\", \"Topology.IsConstructible.compl\", \"Topology.IsConstructible.of_compl\", \"Topology.isConstructible_compl\"], \"digest\": \"e83da9b672840c1a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, spectra, or abstract topological constructibility. None provides the comparison between affine etale tests and the atlas point topology of algebraic spaces; the scheme and topological sources were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructibility can be tested on affine etale charts of a quasi compact quasi separated algebraic space",
+   "results": "{\"t\": \"2026-10-23T18:15:24Z\", \"tool\": \"leansearch\", \"query\": \"Constructibility can be tested on affine etale charts of a quasi compact quasi separated algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"Topology.IsLocallyConstructible.isConstructible\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_affine\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.IsAffine.casesOn\"], \"digest\": \"4374ea83e6030bc2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, spectra, or abstract topological constructibility. None provides the comparison between affine etale tests and the atlas point topology of algebraic spaces; the scheme and topological sources were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale locally constructible subsets of quasi separated algebraic spaces equal locally constructible subsets in their point topology",
+   "results": "{\"t\": \"2026-10-23T18:16:09Z\", \"tool\": \"leanfinder\", \"query\": \"Etale locally constructible subsets of quasi separated algebraic spaces equal locally constructible subsets in their point topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Topology.IsConstructible.isLocallyConstructible\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"Topology.IsLocallyConstructible.isConstructible\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover\", \"Topology.IsLocallyConstructible\", \"Topology.IsLocallyConstructible.isConstructible_of_subset_of_isCompact\", \"IsCompact.isConstructible\"], \"digest\": \"edf8498769ad02e1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes, spectra, or abstract topological constructibility. None provides the comparison between affine etale tests and the atlas point topology of algebraic spaces; the scheme and topological sources were read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-translate-bad-tuple-dimension",
+  "date": "2026-10-24",
+  "group": "Q128"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space. Auxiliary input: Finite translates of a fibrewise nonempty open in a smooth group space. In Deligne 4.6: Constructibility and dimension bound for bad translate tuples. Supporting general tool: Chevalley constructibility of the image of the closed incidence space, before the fibrewise dimension estimate.",
+   "via": [
+    "lem-sfb-translate-bad-tuple-dimension",
+    "lem-sfb-group-finite-translate-cover",
+    "lem-sfb-nodal-picard-etale-schematic",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-noetherian-space-chevalley-image",
+  "worker": "stage1",
+  "summary": "Proved the image assertion by affine etale target tests, a finite affine atlas of the quasi-compact pullback, constructible inverse images on its Noetherian scheme charts, scheme Chevalley, and explicit point lifting. One new statement-only lemma provides the qcqs algebraic-space constructibility test; all other non-elementary inputs reuse existing nodes. The statement is unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space. Auxiliary input: Finite translates of a fibrewise nonempty open in a smooth group space. In Deligne 4.6: Constructibility and dimension bound for bad translate tuples. Supporting general tool: Chevalley constructibility of the image of the closed incidence space, before the fibrewise dimension estimate. The split supplies precisely Chevalley constructibility in this auxiliary incidence-space branch. The newest direct-images blueprint proof (3) is the ancestor route; no change is made to it.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic Fibre products of algebraic spaces and pullback of etale coverings used in the affine-atlas Chevalley reduction; the assigned unit has no replacement for this geometric/topological tool."
+   },
+   {
+    "node": "lem-a1-space-finite-affine-subatlas",
+    "why": "Generic Finite affine component subatlases of quasi-compact point spaces used in the affine-atlas Chevalley reduction; the assigned unit has no replacement for this geometric/topological tool."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic Point images, continuity, and open embeddings for algebraic spaces used in the affine-atlas Chevalley reduction; the assigned unit has no replacement for this geometric/topological tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-2e222a517",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-2e222a517 (reviewer sub-agent of L); spot-checked: FIX for one repairable fault (C4/E4, step 3), now repaired. Step 3 proved Noetherianity of the atlas point space of h_{U_i} via lem-sfb-noetherian-space-topology, but step 4's scheme Chevalley needs A_i constructible in the Zariski space of U_i, and the step never identified the two spaces. I added the identification: lem-weil-pbc-morphism-from-spec-field (Mathlib leaf 01J5) makes |id|:|U_i|→|h_{U_i}| of def-a1-algebraic-space-point-classes bijective. An atlas-open set is Zariski open by testing on the identity chart of def-a1-space-point-topology; a Zariski open set is atlas-open because scheme morphisms are continuous. The three ids are added to uses and proof_deps. The corrected item is in fixes/dag/nodes/sec-six-functors-basics/. Other checks: the item is still unsplit with an empty proof on both live and side-live, so it is not superseded; its statement is byte-identical to side-live. I read the proof of 0ECX (spaces-morphisms), both directions of the proof of 0ECZ (decent-spaces), and 0ECT(2)/0ECU (spaces-properties). Steps 1–6 follow 0ECX, with 06G4 supplying local finite presentation. Hypotheses checked: |W| quasi-compact from f quasi-compact; finite-subatlas hypotheses; the compatible-chart finite-type hypothesis gives h_i and T→V locally of finite type; 01T6 makes the charts locally Noetherian; affine-to-affine maps are quasi-compact; V is qcqs; points-cartesian surjectivity gives the lift; Z is qcqs for the new node. The new node lem-sfb-space-constructible-affine-etale-test holds as stated by 0ECZ, whose converse proves global constructibility for qcqs X. I tested it on X empty, Spec k, a closed point and the generic point of A^1. It is statement-only, self-contained and not a restatement of the item. rg -L for 0ECZ/0ECT/0ECU/06G4 found no duplicate, and its six Mathlib searches are recorded. I accept the generic trf/a1 tool_uses. Batch-5 check: every listed citation reaches the trace-formula chapter only through the general definition def-trf-algebraic-space. None is a step of the trace formula or Poincaré duality, so all are accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceNoetherianChevalleyImage",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isConstructible_image_of_noetherian",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceNoetherianChevalleyImage.lean",
+  "statement": "theorem isConstructible_image_of_noetherian {S : Scheme.{u}} (Y Z : AlgebraicSpace S) (f : Y ⟶ Z) (hqc : CompactSpace (Point Z.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated Z) (hnoeth : ∀ (U : Over S) (a : yoneda.obj U ⟶ Z.obj.obj), IsEtale a → IsLocallyNoetherian U.left) (hsep : MapIsSeparated f) (hft : MapIsFiniteType f) : (∀ A : Set (Point Y.obj.obj), Topology.IsConstructible A → Topology.IsConstructible (mapPoint f.hom.hom '' A)) ∧ Topology.IsConstructible (Set.range (mapPoint f.hom.hom))",
+  "branch": "sheaf-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15f573d1e",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Read the item, all 11 stmt_dep records and the delivered module against Stacks 0ECX/06G4/0ECZ and spaces-properties definition-separated/definition-noetherian. Every clause matches. hqc = CompactSpace on points. hqs = IsAbsolutelyQuasiSeparated: Stacks quasi-separatedness is absolute, so it is not stronger. hnoeth covers all étale charts. MapIsSeparated = diagonal representable by closed immersions. MapIsFiniteType = MapIsQuasiCompact (affine base changes) ∧ chart-wise LocallyOfFiniteType. The conclusion is Topology.IsConstructible (the mathlib_match of def-weil-constructible-subset) of mapPoint '' A, with the range as second conjunct; pointImage = range mapPoint, so no duplicate notion. Only lean+stmt_deps differ from side-live. The three added stmt_deps are landed def nodes owning the used declarations. lean.statement is verbatim, one sorry, source/blueprint docstrings and proof steps present. The step-6 dependency has the same hypotheses. Edge cases checked: empty A/Y/Z, non-qs base, single universe u. Searches found no duplicate. No change, so no compile."
+ }
+}

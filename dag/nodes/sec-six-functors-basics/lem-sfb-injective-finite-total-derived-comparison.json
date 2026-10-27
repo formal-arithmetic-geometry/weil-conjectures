@@ -1,0 +1,334 @@
+{
+ "id": "lem-sfb-injective-finite-total-derived-comparison",
+ "kind": "statement",
+ "title": "Normalized derived comparison for finite totals of injective diagrams",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be Grothendieck abelian categories [def-sp-grothendieck-abelian], let $F:\\mathcal A\\to\\mathcal B$ be left exact and additive [def-sp-left-exact-additive], and use ordinary derived categories, localization $Q$, and the K-injective right derived functor $RF$ [sk-def-sfb-derived-categories]. Let $\\Delta$ have the finite nonempty ordered sets $[n]$ and order-preserving maps as its objects and arrows. For a strict functor $C:\\Delta\\to\\operatorname{Ch}^{\\ge0}(\\mathcal A)$, put $T(C)^r=\\bigoplus_{n+q=r}C_n^q$ and $d_T=\\delta+(-1)^n d_C$, where $\\delta=\\sum_i(-1)^i C(d^i)$ [def-sp-double-complex-total]. For every such $J$ there is a natural chain isomorphism $\\beta_J:F(T(J))\\xrightarrow{\\sim}T(FJ)$, characterized in degree $r$ by $\\beta_JF(\\iota_{n,q})=\\iota'_{n,q}$ for $n+q=r$, where $\\iota,\\iota'$ are the finite-biproduct inclusions. In particular $T(Fg)\\beta_J=\\beta_{J'}F(T(g))$ for every strict map $g:J\\to J'$. Suppose now that $J_n^q$ is injective for all $n,q$, and that $u:K\\to J$ is any strict map of nonnegative cosimplicial complexes whose columns are quasi-isomorphisms. Then $T(u)$ is a quasi-isomorphism, all terms of $T(J)$ are injective, and $T(J)$ and every $J_n$ are K-injective. Write $\\rho_E:RF(QE)\\xrightarrow{\\sim}QF(E)$ for the inverse derived unit on a bounded-below injective complex $E$. There is an isomorphism of entire derived objects\n$$\\chi_u=Q(\\beta_J)\\rho_{T(J)}RF(QT(u)):RF(QT(K))\\xrightarrow{\\sim}QT(FJ).$$\nThe column isomorphisms $c_{u_n}=\\rho_{J_n}RF(Qu_n):RF(QK_n)\\xrightarrow{\\sim}QF(J_n)$ commute with every cosimplicial operator. The normalization above uniquely specifies $\\chi_u$. If $J_n$ is itself a first-quadrant total with indices $(q,s)$ and commuting original and resolution differentials, with every cosimplicial operator preserving both degrees and commuting with both differentials, the canonical reassociation of totals has only finitely many summands $n+q+s=r$ in degree $r$ and differential $\\delta+(-1)^n d_q+(-1)^{n+q}d_s$; the comparison $\\beta$ respects this reassociation.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015J (lemma-two-ss-complex-functor, proof remark (3) and Tot(F(I)) = F(Tot(I))), 070J (lemma-bounded-below-injectives-K-injective), and 05TH (lemma-injective-acyclic); normalized finite-total and three-index reassociation extension."
+ },
+ "stmt_deps": [
+  "def-sp-double-complex-total",
+  "def-sp-grothendieck-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof": [
+  {
+   "text": "For any strict diagram $C$, set $D^{n,q}=C_n^q$. The cosimplicial identity $d^j d^i=d^i d^{j-1}$ for $i<j$ pairs the terms of $\\delta^2$ with opposite signs, so $\\delta^2=0$. Every coface is a chain map, hence $\\delta d_C=d_C\\delta$. Thus $D$ is a first-quadrant commuting double complex and its total is exactly $T(C)$ by [def-sp-double-complex-total]. In degree $r\\geq0$ its summands have $0\\leq n\\leq r$ and $q=r-n$; in negative degrees it is zero. A strict map induces the summandwise total map, since it commutes with both differentials.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012X, section double complexes, and Tag 0133 (lemma-double-complex-gives-resolution), finite-diagonal convention; explicit cosimplicial specialization."
+   }
+  },
+  {
+   "text": "By [def-sp-left-exact-additive], $F$ preserves finite biproducts. For fixed $r$ put $S_r=\\{(n,q)\\in\\mathbf N^2:n+q=r\\}$. The maps $F(\\iota_{n,q})$ exhibit $F(T(J)^r)$ as the biproduct of the objects $F(J_n^q)$. Its universal property gives a unique isomorphism $\\beta_J^r$ to $T(FJ)^r$ with $\\beta_J^rF(\\iota_{n,q})=\\iota_{n,q}'$. Explicitly its inverse is $\\gamma^r=\\sum_{S_r}F(\\iota_{n,q})\\pi_{n,q}'$: the relations $\\pi_a\\iota_b=\\delta_{ab}$ and $\\sum_a\\iota_a\\pi_a=1$, preserved by $F$, give $\\beta_J^r\\gamma^r=1$ and $\\gamma^r\\beta_J^r=1$. For $r<0$ use the unique map between zero objects.",
+   "uses": [
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015J (lemma-two-ss-complex-functor), proof equality Tot(F(I)) = F(Tot(I)); finite-biproduct universal-property expansion."
+   }
+  },
+  {
+   "text": "Test the chain-map equation on $F(\\iota_{n,q})$. Both $d_{T(FJ)}\\beta_JF(\\iota_{n,q})$ and $\\beta_JF(d_{T(J)})F(\\iota_{n,q})$ equal $\\sum_i(-1)^i\\iota_{n+1,q}'F(d^i)+(-1)^n\\iota_{n,q+1}'F(d_J)$, because an additive functor preserves sums and negatives. Equality on the finite-biproduct inclusions proves that $\\beta_J$ is a chain isomorphism. For a strict map $g:J\\to J'$, both $T(Fg)\\beta_J$ and $\\beta_{J'}F(T(g))$ send $F(\\iota_{n,q})$ to the target inclusion composed with $F(g_n^q)$. They therefore agree, proving the asserted naturality. Neither calculation uses injectivity or left exactness.",
+   "uses": [
+    "def-sp-left-exact-additive",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015J (lemma-two-ss-complex-functor), finite-total equality, with the differential and naturality checked on each summand."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-first-quadrant-total-column-comparison] to the bicomplex map induced by $u$. To match its convention that the resolution columns are $(D.\\mathrm{flip}).X(n)$, take $D_C^{q,n}=C_n^q$. Each such column map is $u_n$, a quasi-isomorphism by hypothesis. The total in the swapped convention has differential $d_C+(-1)^q\\delta$. It is naturally chain-isomorphic to $T(C)$: on $C_n^q$ multiply by $(-1)^{nq}$ and interchange the labels. For $\\delta$ the target multiplier is $(-1)^{(n+1)q}=(-1)^q(-1)^{nq}$, and for $d_C$ it satisfies $(-1)^n(-1)^{n(q+1)}=(-1)^{nq}$. This isomorphism commutes with $u$, so the quasi-isomorphism of swapped totals given by the cited node is exactly $T(u)$ up to these chain isomorphisms.",
+   "uses": [
+    "lem-sc-first-quadrant-total-column-comparison",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), finite-diagonal column-comparison form carried by the cited node; explicit index transposition and signs."
+   }
+  },
+  {
+   "text": "Every term of $T(J)$ is a finite biproduct of injectives, and its injectivity follows directly from [def-sp-injective-resolutions]. Indeed, given a mono $m:M\\hookrightarrow N$ and $x:M\\to T(J)^r$, extend each component $\\pi_{n,q}x$ along $m$ using injectivity of $J_n^q$, obtaining $y_{n,q}:N\\to J_n^q$. Then $y=\\sum_{S_r}\\iota_{n,q}y_{n,q}$ satisfies $ym=x$. The zero object in negative degrees has the same extension property with the unique zero map. This proves termwise injectivity without assuming that $F$ preserves injectives.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015J (lemma-two-ss-complex-functor), proof remark (3); finite sums of injectives proved directly by the defining extension property."
+   }
+  },
+  {
+   "text": "The total and every column are natural-indexed complexes with injective terms. Extension by zero preserves termwise injectivity. Apply the existing Mathlib instance for the extension of a natural-indexed injective complex, which is CochainComplex.isKInjective_of_injective at bound zero, clause (2) of [lem-weil-pbc-dplus-injective-representative]. This is precisely the bounded-below K-injective assertion formerly taken from the larger lem-sp-kinjective-computes package.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070J (lemma-bounded-below-injectives-K-injective); also the cited node clause (2)."
+   }
+  },
+  {
+   "text": "Use the existing Grothendieck K-injective resolution functor to supply h. The theorem rightDerivedFunctorOfQuasiIsoResolutionsUnit_isIso in [def-sfb-right-derived-functor] makes its unit invertible on every K-injective complex. Transport this unit through quotientCompQhIso and mapExtendIso to obtain the recorded nonnegative unit. The total quasi-isomorphism from step 4 becomes invertible after extension and localization. Compose its derived image with the inverse total unit and localized beta to obtain chi. This uses no plus-derived functor comparison.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K (lemma-enough-K-injectives-implies), 070Y (lemma-K-injective-defined), and 05TH (lemma-injective-acyclic); unbounded derived-unit normalization."
+   }
+  },
+  {
+   "text": "For any cosimplicial operator $\\theta:[n]\\to[m]$, naturality of the unit [def-sfb-right-derived-functor] reads $RF(QJ(\\theta))\\eta_{J_n}=\\eta_{J_m}QF(J(\\theta))$. Inverting its two unit components gives $QF(J(\\theta))\\rho_{J_n}=\\rho_{J_m}RF(QJ(\\theta))$. Strictness of $u$ gives $J(\\theta)u_n=u_mK(\\theta)$. Combining these equations with functoriality yields $QF(J(\\theta))c_{u_n}=\\rho_{J_m}RF(Q(J(\\theta)u_n))=c_{u_m}RF(QK(\\theta))$. This treats every coface and codegeneracy, not just the alternating differential.",
+   "uses": [
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K and 070Y, naturality of the right-derived unit and inversion on K-injective complexes; explicit strict-diagram equation."
+   }
+  },
+  {
+   "text": "The normalization is the equation $\\chi_u\\,RF(QT(u))^{-1}\\eta_{T(J)}=Q(\\beta_J)$. The displayed formula for $\\chi_u$ satisfies it by cancellation. Conversely, since the two factors on the left after $\\chi_u$ are invertible, that equation forces $\\chi_u=Q(\\beta_J)\\eta_{T(J)}^{-1}RF(QT(u))$. Together with the uniqueness of $\\beta_J$ on summand inclusions in step 2, this proves the required uniqueness with no arbitrary choice of a derived isomorphism.",
+   "uses": [
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K and 070Y, unit-normalized value comparison; uniqueness by cancellation of the specified isomorphisms."
+   }
+  },
+  {
+   "text": "Finally write $J_n^t=\\bigoplus_{q+s=t}J_n^{q,s}$, with inner differential $d_q+(-1)^qd_s$. For degree $r$ the nested sum $\\bigoplus_{n+t=r}\\bigoplus_{q+s=t}J_n^{q,s}$ has the same finite indexing set $\\{(n,q,s)\\in\\mathbf N^3:n+q+s=r\\}$ as the other grouping. Match each summand by its identity map; the reverse matching is the inverse. On that summand the differential expands to $\\delta+(-1)^nd_q+(-1)^n(-1)^qd_s=\\delta+(-1)^nd_q+(-1)^{n+q}d_s$, so the matching is a chain isomorphism by [def-sp-double-complex-total]. The degree-preservation and commutation assumptions ensure that $\\delta$ preserves $q,s$. In either grouping, the composite comparison for $F$ sends $F$ of each original triple-summand inclusion to that same triple-summand inclusion after applying $F$. Finite-biproduct uniqueness, using [def-sp-left-exact-additive], makes the two comparison composites equal. This proves reassociation compatibility, including $r=0$ and the empty sums for $r<0$.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015J (lemma-two-ss-complex-functor), finite-total equality; explicit three-index finite reassociation and sign expansion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "def-sp-left-exact-additive",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-sfb-right-derived-functor",
+  "sk-def-sfb-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015J, 05TH, 070J, 070K and 070Y; finite-summand normalization, full cosimplicial naturality and three-index reassociation are written out, with column comparison from homology.tex Tag 0133. B5: explicit canonical coproduct comparison, signed total transposition, direct Mathlib bounded-below injective instance, direct arbitrary-resolution derived unit, and normalized finite triple-summand reassociation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nonnegative cosimplicial complex of injectives has K-injective finite diagonal total and its mapped total computes the right derived image by the inverse derived unit",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-biproduct preservation, total.mapIso, and object right-derived computations are ingredients, but no declaration gives the normalized whole-derived-object finite-total comparison and its reassociation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"total\", \"rightDerivedFunctor\"",
+   "results": "2 hits: CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, CategoryTheory.Functor.IsRightDerivedFunctor.instCommShiftTotalRightDerived",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-biproduct preservation, total.mapIso, and object right-derived computations are ingredients, but no declaration gives the normalized whole-derived-object finite-total comparison and its reassociation."
+  },
+  {
+   "tool": "grep",
+   "query": "mapTotal|map_total|total.*[Kk][Ii]njective|[Ii]njective.*total",
+   "results": "8 hits: Mathlib/Logic/Function/Basic.lean, Mathlib/CategoryTheory/Presentable/ColimitPresentation.lean, Mathlib/Topology/Connected/TotallyDisconnected.lean, Mathlib/SetTheory/Cardinal/SchroederBernstein.lean, Mathlib/Testing/Plausible/Functions.lean, Mathlib/MeasureTheory/Function/AbsolutelyContinuous.lean, Mathlib/MeasureTheory/Function/AbsolutelyContinuous.lean, Mathlib/Data/Bundle.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-biproduct preservation, total.mapIso, and object right-derived computations are ingredients, but no declaration gives the normalized whole-derived-object finite-total comparison and its reassociation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Additive functors preserve finite diagonal total complexes with a natural isomorphism normalized on summand inclusions",
+   "results": "8 hits: CategoryTheory.Functor.preservesFiniteBiproductsOfAdditive, CategoryTheory.additiveFunctor, CategoryTheory.Functor.map_sum, CategoryTheory.Functor.instAdditiveOfIsHomological, CategoryTheory.additiveFunctor_iff, CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive, CategoryTheory.Functor.IsTriangulated.instAdditive, CategoryTheory.Functor.additive_of_iso",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-biproduct preservation, total.mapIso, and object right-derived computations are ingredients, but no declaration gives the normalized whole-derived-object finite-total comparison and its reassociation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural chain isomorphism F of total bicomplex to total F of bicomplex for finite diagonals with derived unit normalization",
+   "results": "8 hits: HomologicalComplex₂.XXIsoOfEq_hom_ιTotal, HomologicalComplex₂.total.mapIso, HomologicalComplex.ι_mapBifunctorFlipIso_hom, HomologicalComplex₂.XXIsoOfEq_inv_ιTotal, HomologicalComplex₂.total.mapIso_hom, HomologicalComplex.ιMapBifunctorOrZero_eq, HomologicalComplex₂.XXIsoOfEq_hom_ιTotal_assoc, HomologicalComplex₂.XXIsoOfEq_inv_ιTotal_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-biproduct preservation, total.mapIso, and object right-derived computations are ingredients, but no declaration gives the normalized whole-derived-object finite-total comparison and its reassociation."
+  },
+  {
+   "tool": "grep",
+   "query": "mapTotalIso|mapTotal|map_total|total.*[Kk]Injective|[Kk]Injective.*total",
+   "results": "0 hits:  | Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-biproduct preservation, total.mapIso, and object right-derived computations are ingredients, but no declaration gives the normalized whole-derived-object finite-total comparison and its reassociation."
+  },
+  {
+   "tool": "grep",
+   "query": "mapTotal|map_total|total.*[Kk]Injective|[Kk]Injective.*total",
+   "results": "0 hits: ; Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary derived-functor, exact-functor or Dold-Kan/total APIs, not the normalized whole-derived-object cosimplicial finite-total comparison and reassociation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A left exact additive functor of Grothendieck abelian categories computes its right derived image on the finite diagonal total of a first quadrant diagram of injectives with a natural summand preserving chain isomorphism",
+   "results": "8 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.leftExactFunctor_le_additiveFunctor, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.LeftExactFunctor, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary derived-functor, exact-functor or Dold-Kan/total APIs, not the normalized whole-derived-object cosimplicial finite-total comparison and reassociation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive left exact functor commutes with a nonnegative cosimplicial finite diagonal total of injective complexes via the inverse right derived unit, naturally and compatibly with triple totalization",
+   "results": "8 hits: AlgebraicTopology.DoldKan.identity_N₂, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, AlgebraicTopology.DoldKan.N₂Γ₂_compatible_with_N₁Γ₀, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand_assoc, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀'_assoc, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand'_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary derived-functor, exact-functor or Dold-Kan/total APIs, not the normalized whole-derived-object cosimplicial finite-total comparison and reassociation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical finite biproduct isomorphism between F applied to a bicomplex total and the total of F is compatible with the natural right derived functor comparison on bounded below complexes of injectives",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary derived-functor, exact-functor or Dold-Kan/total APIs, not the normalized whole-derived-object cosimplicial finite-total comparison and reassociation."
+  },
+  {
+   "tool": "grep",
+   "query": "(rightDerived|RightDerived).*(total|Total)|(total|Total).*(rightDerived|RightDerived)",
+   "results": "3 hits: Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary derived-functor, exact-functor or Dold-Kan/total APIs, not the normalized whole-derived-object cosimplicial finite-total comparison and reassociation."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFiniteBiproductsOfAdditive|rightDerivedFunctorUnit.*[Ii]so|[Ii]so.*rightDerivedFunctorUnit|totalFunctor|mapIso",
+   "results": "25 hits: Mathlib/Algebra/Homology/ExactSequence.lean, Mathlib/Algebra/Homology/ExactSequence.lean, Mathlib/Algebra/Homology/ExactSequence.lean, Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/HomotopyCofiber.lean; Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give ordinary derived-functor, exact-functor or Dold-Kan/total APIs, not the normalized whole-derived-object cosimplicial finite-total comparison and reassociation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nonnegative-derived-totalization",
+  "date": "2026-10-22",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the formal bounded-below Cech descent used before the root-tower boundary-unit calculation; the compatible derived-image totalization comparison. The inherited ancestor is None. Re-split of nonnegative-derived-totalization: former steps 3,4,5.",
+   "via": [
+    "lem-sfb-nonnegative-derived-totalization",
+    "lem-sfb-cech-localization-unit-totalization",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-injective-finite-total-derived-comparison",
+  "worker": "stage1",
+  "group": "Q112",
+  "summary": "Unchanged statement, explicit ten-step proof using existing column-comparison, K-injectivity and unbounded derived-unit nodes. Finite-biproduct comparison, its naturality, injective lifting and the triple signs are proved directly; no new nodes or Mathlib leaves. Added the definition of the right-derived unit as a statement dependency.",
+  "blueprint": "Current main-20261015 sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), bounded-below totalization underlying open direct image, as specified by the inherited ancestor chain. The nearest imported ancestor remains null (blueprint_refs.py ancestor prints None). This item expands former steps 3-5 of lem-sfb-nonnegative-derived-totalization.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-first-quadrant-total-column-comparison",
+    "why": "Generic first-quadrant bicomplex column comparison; applies to the strict diagram after the explicitly computed signed index transposition."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Only clause (2), that a bounded-below complex of injectives is K-injective; a generic homological-algebra tool, without replacing the unit route."
+   },
+   {
+    "node": "lem-sfb-additive-derived-plus-unit-normalization",
+    "why": "Only its initial unbounded-derived assertion that the unit at a K-injective complex is invertible. Its bounded-plus comparison is not used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-first-quadrant-total-column-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-24fcc6861",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-24fcc6861 (reviewer sub-agent of L); spot-checked: I read the item, all 10 steps, the full statement of every cited node, Stacks derived.tex 015J (proof remark (3), Tot(F(I))=F(Tot(I))), 070J and 05TH, blueprint main-20261015 ctf-stability direct-images paragraph (3), and how parent lem-sfb-nonnegative-derived-totalization step 2 uses the item. The statement is byte-identical to the Q52 base. The only field change is adding def-sfb-right-derived-functor to stmt_deps, which the statement needs for rho. There are no new nodes, proof_deps equals the union of uses, there is no cycle and no SGA citation. I checked these myself: (1) chi_u and c_{u_n} have the right sources and targets and every factor is invertible; (2) the (-1)^{nq} transposition in step 4, which matches the flip-column convention of lem-sc-first-quadrant-total-column-comparison; (3) a finite biproduct of injectives is injective; (4) a bounded-below complex of injectives is K-injective via clause (2) of lem-sp-kinjective-computes; (5) the direction of unit naturality in step 8, for all cofaces and codegeneracies; (6) the normalization equation in step 9 forces chi; (7) the reassociation signs delta+(-1)^n d_q+(-1)^{n+q} d_s in step 10. Small cases J=0, F=id, u=1, r<0, r=0, r=1, r=2 all hold. The proof never assumes that F is exact, preserves injectives or sends u to a quasi-isomorphism. I accept the three declared generic tool uses. Advisory only: (a) step 4 re-proves a clause already stated by the unsplit sibling lem-sfb-cosimplicial-injective-total-replacement (T(v) is a quasi-isomorphism for columnwise quasi-isomorphisms, plus the (-1)^{nq} signs); the proof is correct, so no FIX. (b) The step 7 citation of lem-sfb-additive-derived-plus-unit-normalization is redundant with def-sfb-right-derived-functor's own clause that eta_I is invertible for K-injective I. (c) The inherited from.place says open direct image, but paragraph (3) is proper direct image; this was inherited, not changed here."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InjectiveFiniteTotalDerivedComparison",
+  "declaration": "CategoryTheory.injective_finite_total_derived_comparison",
+  "declarations": [
+   "CategoryTheory.finiteTripleTotalRight",
+   "CategoryTheory.finiteTripleTotalLeft",
+   "CategoryTheory.finiteTripleInclusionRight",
+   "CategoryTheory.finiteTripleInclusionLeft",
+   "CategoryTheory.injectiveFiniteTotalUnit",
+   "CategoryTheory.InjectiveFiniteTotalDerivedComparison",
+   "CategoryTheory.injective_finite_total_derived_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InjectiveFiniteTotalDerivedComparison.lean",
+  "statement": "theorem injective_finite_total_derived_comparison [IsGrothendieckAbelian.{v} C] [IsGrothendieckAbelian.{v'} D] [PreservesFiniteLimits F] : Nonempty (InjectiveFiniteTotalDerivedComparison F (fun K ↦ ⟨(CochainComplex.kInjectiveResolutionFunctor.{v} C).obj K, (CochainComplex.toKInjectiveResolution.{v} C).app K, inferInstance, (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{v} C K).2⟩))",
+  "branch": "sheaf-dag",
+  "by": "Q130",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All clauses are packaged by InjectiveFiniteTotalDerivedComparison, including canonical summand-normalized chain isomorphisms, total and column K-injectivity, inverse-unit-normalized entire derived isomorphisms with uniqueness, and triple reassociation compatibility. The theorem supplies the arbitrary-quasi-isomorphism resolution-existence datum using the existing Grothendieck K-injective resolution functor; it imposes no extra hypothesis. Natural-indexed totals are extended by zero before unbounded localization. Reviewer FIX: the module no longer imports Sheaf.CategoryTheory.NonnegativeDerivedTotalization (module of the parent lem-sfb-nonnegative-derived-totalization, whose proof_deps cite this item; the import would close a stage-3 import cycle). The finite total (alternatingCofaceMapComplex then HomologicalComplex₂.totalFunctor) and the localization (embeddingUpNat.extendFunctor then DerivedCategory.Q) are written out by local notation, term-for-term the parent's nonnegativeCosimplicialTotal/nonnegativeComplexLocalization, so the parent can import this module and bridge by rfl.",
+  "fixed_by": "NT-stage2-cc-e5613e44c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e5613e44c",
+  "group": "Q130",
+  "result": "fix",
+  "note": "Mathematics correct: every clause matches the node (beta fixed on summands, unique and natural; T(u) quasi-isomorphism, terms of T(J) injective in all integer degrees, T(J) and each column K-injective; recorded unit transported canonically and invertible on injective-term complexes; chi_u an iso fixed by the unit normalisation, with uniqueness; column natural iso fixed at every degree, natural for all simplex arrows; triple reassociation with signs d+(-1)^n d_q+(-1)^(n+q) d_s, aC/aD/b/bL fixed on summands, beta square). No extra hypotheses, independent universes, no hollow definitions, docstrings and searches present. Fault: the module publicly imported Sheaf.CategoryTheory.NonnegativeDerivedTotalization, module of the parent lem-sfb-nonnegative-derived-totalization whose proof_deps cite this item, which closes a stage-3 import cycle (plain defs of a theorem node, not citable). FIX: drop that import, import DoubleComplexTotal/TotalComplex/ExtendMap/AlternatingFaceMapComplex, and write the two composites as local notation identical to the parent's terms (no new declaration, no stmt_deps change, signature byte-identical). lean-record.json keeps the statement verbatim and replaces the outdated note (refit_record clean). nt_compile --json clean in 4.5 s; a broken control copy fails as expected. Maintainer note: the parent uses Mathlib rightDerivedFunctor while the item uses the recorded rightDerivedFunctorOfQuasiIsoResolutions, so the parent's stage-3 proof needs that comparison."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261025T100819-L-3626722",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

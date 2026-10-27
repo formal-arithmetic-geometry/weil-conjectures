@@ -1,0 +1,312 @@
+{
+ "id": "lem-sfb-scheme-coherent-derived-internal-hom",
+ "kind": "statement",
+ "title": "Coherent derived internal Hom on a locally Noetherian scheme",
+ "statement": "Let $X$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth]. Use Zariski sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] and their unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. Let $K,L\\in D(\\mathcal O_X)$ have coherent cohomology sheaves [pqf-def-coherent]. Assume that $H^j(K)=0$ for all sufficiently large $j$ and $H^j(L)=0$ for all sufficiently negative $j$. Then $R\\mathcal Hom_{\\mathcal O_X}(K,L)$ [def-pur-derived-internal-hom] has coherent cohomology sheaves, and its cohomology vanishes in all sufficiently negative degrees.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0D0C (lemma-coherent-internal-hom), on the Zariski site of a locally Noetherian scheme."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "pqf-def-coherent",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "Choose integers $u,v$ with $H^j(K)=0$ for $j>u$ and $H^j(L)=0$ for $j<v$. Cover $X$ by $U_i=\\operatorname{Spec}(A_i)$ with $A_i$ Noetherian, as in pqf-def-locnoeth. Exact open restriction commutes with kernels and cokernels, hence with cohomology, so the same bounds hold on every $U_i$. Coherence restricts to these opens. The derived restriction theorem identifies $R\\mathcal Hom_X(K,L)|_{U_i}$ with $R\\mathcal Hom_{U_i}(K|_{U_i},L|_{U_i})$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-weil-pbc-coherent-module-local-on-open-cover",
+    "lem-sc-derived-internal-hom-restrict-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0D0C (lemma-coherent-internal-hom), first sentence of proof; cohomology.tex Tags 08DL and 08BS"
+   }
+  },
+  {
+   "text": "Fix one chart $U=\\operatorname{Spec}(A)$. Coherent sheaves on $U$ are quasi-coherent of finite type by pqf-lem-coherent-ft-locnoeth. Use the affine derived equivalence to choose $M,N\\in D(A)$ with $\\widetilde M\\cong K|_U$ and $\\widetilde N\\cong L|_U$. Its cohomology comparison gives $\\widetilde{H^j(M)}\\cong H^j(K|_U)$ and $\\widetilde{H^j(N)}\\cong H^j(L|_U)$. The affine tilde/Gamma unit and the finite-type affine criterion show that all $H^j(M),H^j(N)$ are finite $A$-modules. The same unit reflects zero modules, so $H^j(M)=0$ for $j>u$ and $H^j(N)=0$ for $j<v$.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "new-affine-derived-tilde-homology-comparison",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0D0C, affine reduction; Tags 06Z0 (lemma-affine-compare-bounded), 01XZ and 01PB"
+   }
+  },
+  {
+   "text": "By the Noetherian pseudo-coherence cohomology criterion, $M$ is pseudo-coherent: its cohomology is finite and it is bounded above. In particular it has a bounded-above finite free, hence finite projective, representative. Since $N$ is bounded below, the affine pseudo-coherent RHom comparison applies and gives an isomorphism in $D(\\mathcal O_U)$: $R\\mathcal Hom_U(K|_U,L|_U)\\cong\\widetilde{R\\operatorname{Hom}_A(M,N)}$. The required finiteness is therefore a module calculation, rather than an assertion about ordinary sheaf Hom.",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "lem-sc-affine-pseudo-coherent-rhom-qcoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0D0C, use of Tags 08E8 and 0A6H; more-algebra.tex Tag 066E (lemma-Noetherian-pseudo-coherent)"
+   }
+  },
+  {
+   "text": "Apply lem-trf-bounded-above-coherent-rhom to $A,M,N,u,v$. All its hypotheses were checked in step 2. It gives finite $H^r(R\\operatorname{Hom}_A(M,N))$ for every $r$ and vanishing for $r<v-u$. The affine cohomology comparison identifies the cohomology sheaves of its associated derived sheaf with the associated sheaves of these modules. By the affine finite-type criterion and the tilde/Gamma unit these sheaves are of finite type, and they are quasi-coherent by the tilde construction; by pqf-lem-coherent-ft-locnoeth they are coherent. They vanish for $r<v-u$.",
+   "uses": [
+    "lem-trf-bounded-above-coherent-rhom",
+    "new-affine-derived-tilde-homology-comparison",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0D0C, algebra problem and its two displayed Ext spectral sequences; Tags 06Z0, 01PB and 01XZ"
+   }
+  },
+  {
+   "text": "For each $r$, the restriction of $H^r(R\\mathcal Hom_X(K,L))$ to every chart is coherent by steps 1 and 4. Locality of coherence therefore makes it coherent on $X$. If $r<v-u$, all these restrictions are zero: any section is locally zero on this open cover, hence zero by the sheaf axiom. Thus the cohomology sheaf is zero on $X$. The same integer $v-u$ works on every chart, so this proves the stated global lower bound without assuming that $X$ is quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-coherent-module-local-on-open-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0D0C, local-to-global conclusion; modules.tex Definitions 01BV and 01B5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-weil-pbc-coherent-module-local-on-open-cover",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "new-affine-derived-tilde-homology-comparison",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+  "lem-trf-bounded-above-coherent-rhom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0D0C (lemma-coherent-internal-hom), on the Zariski site of a locally Noetherian scheme."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived sheaf Hom from a bounded above coherent complex to a bounded below coherent complex on a locally noetherian scheme has bounded below coherent cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give derived t-structure bounds, sheaf cohomology, or module-sheaf abelian structures; none asserts coherence of derived sheaf Hom"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Hom\", \"coherent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give derived t-structure bounds, sheaf cohomology, or module-sheaf abelian structures; none asserts coherence of derived sheaf Hom"
+  },
+  {
+   "tool": "grep",
+   "query": "(coher.*(rhom|internal.hom))|((rhom|internal.hom).*coher)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give derived t-structure bounds, sheaf cohomology, or module-sheaf abelian structures; none asserts coherence of derived sheaf Hom"
+  },
+  {
+   "tool": "leansearch",
+   "query": "RHom of coherent complexes on locally noetherian schemes is coherent and bounded below",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure\", \"type\": \"[HasExt.{w} C] (K L : CochainComplex C ℤ) [K.IsGE 0] [K.IsLE 0] [L.IsGE 0] [L.IsLE 0] :\\n  HasSmallLocalizedShiftedHom.{w} (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L\", \"doc\": \"For cochain complexes $ K $ and $ L $ concentrated at degree 0 (satisfying both $ K $ is bounded below at 0 and $ K $ is bounded above at 0, and similarly for $ L $), the localized hom-sets between $ \"}\n  {\"name\": \"CategoryTheory.ShortComplex.rightHomology\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.RightHomology\", \"type\": \": C\", \"doc\": \"The right homology of a short complex $ S $ is defined as its right homology object $ H(S) $, which is the cokernel of the first differential in the complex. This object captures the quotient structur\"}\n  {\"name\": \"CategoryTheory.ShortComplex.rightHomologyFunctor\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.RightHomology\", \"type\": \": ShortComplex C ⥤ C\", \"doc\": \"The right homology functor maps each short complex $ S $ in a category $ \\\\mathcal{C} $ with zero morphisms, kernels, and cokernels to its right homology object $ H(S) $, defined as the cokernel of the\"}\n  {\"name\": \"CategoryTheory.ShortComplex.rightHomologyIsKernel\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.RightHomology\", \"type\": \": IsLimit (KernelFork.ofι S.rightHomologyι S.rightHomologyι_comp_fromOpcycles)\", \"doc\": \"For a short complex $ S $ in a category with zero morphisms, the right homology object $ H(S) $ equipped with the canonical morphism $ \\\\iota: H(S) \\\\to Q $ (where $ Q $ is the cokernel of the first dif\"}\n  {\"name\": \"CategoryTheory.ShortComplex.opcyclesFunctor_linear\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Linear\", \"type\": \"[HasKernels C] [HasCokernels C] : Functor.Linear R (opcyclesFunctor C)\", \"doc\": \"Given a semiring $ R $ and a preadditive category $ \\\\mathcal{C} $ with an $ R $-linear structure, if $ \\\\mathcal{C} $ has kernels and cokernels, then the right homology functor (mapping short complexes\"}\n  {\"name\": \"CategoryTheory.ShortComplex.leftHomologyFunctor_linear\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Linear\", \"type\": \"[HasKernels C] [HasCokernels C] : Functor.Linear R (leftHomologyFunctor C)\", \"doc\": \"If a category $ \\\\mathcal{C} $ has kernels and cokernels, then the left homology functor associated to short complexes in $ \\\\mathcal{C} $ is $ R $-linear. This means that for any two short complexes, t\"}\n  {\"name\": \"CategoryTheory.ShortComplex.rightHomologyFunctor_linear\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Linear\", \"type\": \"[HasKernels C] [HasCokernels C] : Functor.Linear R (rightHomologyFunctor C)\", \"doc\": \"Given a semiring $ R $ and a preadditive category $ \\\\mathcal{C} $ with $ R $-linear structure, kernels, and cokernels, the right homology functor on short complexes in $ \\\\mathcal{C} $ is $ R $-linear.\"}\n  {\"name\": \"CochainComplex.HomComplex.δ_smul\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \"(k : R) (z : Cochain F G n) : δ n m (k • z) = k • δ n m z\", \"doc\": \"For cochain complexes $F$ and $G$ in an $R$-linear category, the differential $\\\\delta$ of the homomorphism complex $\\\\text{Hom}(F,G)$ satisfies $\\\\delta(k \\\\cdot z) = k \\\\cdot \\\\delta(z)$ for all scalars $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give derived t-structure bounds, sheaf cohomology, or module-sheaf abelian structures; none asserts coherence of derived sheaf Hom"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent cohomology sheaves of derived internal Hom on a noetherian ringed scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.isSheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (M : X.Modules), M.presheaf.IsSheaf\", \"doc\": \"For any sheaf of modules $ M $ over the structure sheaf of a scheme $ X $, the underlying presheaf of abelian groups on $ X $ satisfies the sheaf condition with respect to open covers of the topologic\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give derived t-structure bounds, sheaf cohomology, or module-sheaf abelian structures; none asserts coherence of derived sheaf Hom"
+  },
+  {
+   "tool": "grep",
+   "query": "(coher.*(rhom|internal.hom))|((rhom|internal.hom).*coher)",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give general derived-category bounds, Ext existence or module/sheaf structures, not coherence of derived sheaf Hom"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom preserves bounded below coherent cohomology when its source is bounded above on a locally noetherian scheme",
+   "results": "8 hits: CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.ShortComplex.RightHomologyData.isPreservedBy_of_preservesHomology, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.hasExt_of_hasDerivedCategory, CategoryTheory.ShortComplex.LeftHomologyData.isPreservedBy_of_preservesHomology",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give general derived-category bounds, Ext existence or module/sheaf structures, not coherence of derived sheaf Hom"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Hom\", \"coherent\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give general derived-category bounds, Ext existence or module/sheaf structures, not coherence of derived sheaf Hom"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finiteness of Ext sheaves between coherent complexes with opposite cohomological bounds",
+   "results": "8 hits: CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.hasExt_iff, CategoryTheory.Abelian.Ext, DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.hasExt_of_hasDerivedCategory, CategoryTheory.HasExt.standard, CategoryTheory.HasInjectiveDimensionLT.subsingleton",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give general derived-category bounds, Ext existence or module/sheaf structures, not coherence of derived sheaf Hom"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sheaf Hom of a bounded above coherent complex and a bounded below coherent complex on a locally noetherian scheme has coherent cohomology",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, SheafOfModules.isQuasicoherent, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give general derived-category bounds, Ext existence or module/sheaf structures, not coherence of derived sheaf Hom"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-scheme-coherent-ext-finite",
+  "date": "2026-10-23",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Hull and tangent space of the deformation functor of a proper scheme. Supporting input: the coherent Ext finiteness input used in Tag 0DYA, before applying Schlessinger. In Tag 0D0D, proof after the displayed equalities: the use of lemma-coherent-internal-hom (0D0C).",
+   "via": [
+    "lem-sfb-proper-scheme-coherent-ext-finite",
+    "lem-sfb-proper-scheme-deformation-hull",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-coherent-derived-internal-hom",
+  "worker": "stage1",
+  "summary": "Verified Stacks 0D0C and assembled existing affine derived equivalence, cohomology comparison, Noetherian pseudo-coherence, affine RHom comparison and the existing module finiteness theorem. No new nodes. The original global source/target bounds give the uniform output bound v-u on an arbitrary locally Noetherian scheme.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Hull and tangent space of the deformation functor of a proper scheme. Supporting input: the coherent Ext finiteness input used in Tag 0DYA, before applying Schlessinger. In Tag 0D0D, proof after the displayed equalities: the use of lemma-coherent-internal-hom (0D0C). Realizes this supporting coherent-Ext input by the affine and algebra reductions of Stacks 0D0C. The current blueprint has no separate node stating this supporting lemma.",
+  "tool_uses": [
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Generic Zariski/module derived-category tool used in Stacks 0D0C; supplies Locally Noetherian schemes. No step of the six-functors unit is replaced."
+   },
+   {
+    "node": "lem-sc-derived-open-restriction-adjunction-exact",
+    "why": "Generic Zariski/module derived-category tool used in Stacks 0D0C; supplies Exact extension by zero is left adjoint to restriction on a ringed space. No step of the six-functors unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-module-local-on-open-cover",
+    "why": "Generic Zariski/module derived-category tool used in Stacks 0D0C; supplies Coherence of a module is local on an open covering. No step of the six-functors unit is replaced."
+   },
+   {
+    "node": "lem-sc-derived-internal-hom-restrict-open",
+    "why": "Generic Zariski/module derived-category tool used in Stacks 0D0C; supplies Derived internal Hom commutes with restriction to opens. No step of the six-functors unit is replaced."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic Zariski/module derived-category tool used in Stacks 0D0C; supplies Coherence on locally Noetherian schemes. No step of the six-functors unit is replaced."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic Zariski/module derived-category tool used in Stacks 0D0C; supplies Derived quasi-coherent modules on an affine scheme. No step of the six-functors unit is replaced."
+   },
+   {
+    "node": "new-affine-derived-tilde-homology-comparison",
+    "why": "Generic Zariski/module derived-category tool used in Stacks 0D0C; supplies Derived associated sheaf commutes naturally with cohomology. No step of the six-functors unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic Zariski/module derived-category tool used in Stacks 0D0C; supplies On Spec R, M ↦ M~ is left adjoint to global sections, fully faithful, and an equivalence onto quasi-coherent modules; it preserves colimits. No step of the six-functors unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic Zariski/module derived-category tool used in Stacks 0D0C; supplies Modules of finite presentation are quasi-coherent; a quasi-coherent module is of finite type (finite presentation) on an affine open iff its sections there are a finite (finitely presented) module (Stacks 01BO, 01PB, 01PC). No step of the six-functors unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic Zariski/module derived-category tool used in Stacks 0D0C; supplies Noetherian criterion for pseudo-coherence. No step of the six-functors unit is replaced."
+   },
+   {
+    "node": "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+    "why": "Generic Zariski/module derived-category tool used in Stacks 0D0C; supplies Affine RHom of a pseudo-coherent complex is quasi-coherent. No step of the six-functors unit is replaced."
+   },
+   {
+    "node": "lem-trf-bounded-above-coherent-rhom",
+    "why": "Generic Zariski/module derived-category tool used in Stacks 0D0C; supplies Coherent derived Hom for bounded-above and bounded-below algebraic complexes. No step of the six-functors unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-def-locnoeth",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-weil-pbc-coherent-module-local-on-open-cover",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "new-affine-derived-tilde-homology-comparison",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+  "lem-trf-bounded-above-coherent-rhom"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-70ef81cb0",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-70ef81cb0 (reviewer sub-agent of L); spot-checked: Q76 70ef81cb: the item matches Stacks 0D0C (perfect.tex l.2682-2712) exactly, with global bounds u,v, so the target is not weakened. This is a first split with no new nodes and no repair note; the base item had no proof. All 5 steps were checked against the cited statements. Step 1: exact restriction preserves the bounds, coherence restricts to opens, and the RHom open-restriction node needs no boundedness. Step 2: the affine qcoh derived equivalence plus the tilde-homology comparison and the tilde/Gamma unit iso with 01PB(a) give M,N with finite cohomology and the same bounds. Step 3: the Noetherian pseudo-coherence criterion gives a finite free representative, so the affine pseudo-coherent RHom comparison applies (target bounded below), as in 0D0C's use of 08E8/0A6H. Step 4: the module RHom finiteness node gives finiteness and the v-u bound; 01XZ then gives coherence. Step 5: locality of coherence plus the sheaf axiom. Edge cases checked: field case sharp at v-u, empty X, non-quasi-compact X. No duplicate: the étale algebraic-space version, lem-sc-sheaf-ext-coherent and lem-sc-affine-rhom-qcoherent all differ. Batch-5 flag on lem-trf-bounded-above-coherent-rhom accepted as generic: it is pure Noetherian algebra (unit sk-i-curve-zero), its 297-node closure contains only its own sk-i-curve-zero algebra lemmas from trf, no PD node and no trace or transport theorem, and it is not a step of either assumption. The 12 tool_uses are generic 0D0C inputs; accepted. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeCoherentDerivedInternalHom",
+  "declaration": "AlgebraicGeometry.scheme_coherent_derived_internal_hom",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeCoherentDerivedInternalHom.lean",
+  "statement": "theorem scheme_coherent_derived_internal_hom (X : Scheme.{u}) [IsLocallyNoetherian X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (K L : DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))) (hK : ∀ j : ℤ, RingedSpace.IsCoherent X.toRingedSpace ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) j).obj K)) (hL : ∀ j : ℤ, RingedSpace.IsCoherent X.toRingedSpace ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) j).obj L)) (hK_bound : ∃ a : ℤ, ∀ j : ℤ, a < j → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) j).obj K)) (hL_bound : ∃ b : ℤ, ∀ j : ℤ, j < b → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) j).obj L)) : (∀ j : ℤ, RingedSpace.IsCoherent X.toRingedSpace ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) j).obj ((derivedInternalHomOfUniverses.{u, u, u, w} (Opens.grothendieckTopology X) X.sheaf).obj (op K, L)))) ∧ (∃ b : ℤ, ∀ j : ℤ, j < b → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) j).obj ((derivedInternalHomOfUniverses.{u, u, u, w} (Opens.grothendieckTopology X) X.sheaf).obj (op K, L))))",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "H13 repair of returned delivery 019f91fb3786: retain the live primary record of pqf-def-coherent (Sheaf.AlgebraicGeometry.CoherentFiniteType / AlgebraicGeometry.Scheme.Modules.IsQuasiCoherentFiniteType) without rebinding it. This theorem uses AlgebraicGeometry.RingedSpace.IsCoherent from WeilConjectures.AlgebraicGeometry.Coherent, the exact Stacks 01BV clause-3 predicate (finite type and finite-type kernels of all finite-free maps on every open). On the locally Noetherian X assumed here, it agrees with the recorded IsQuasiCoherentFiniteType predicate by AlgebraicGeometry.Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType (Stacks 01XZ). The Lean module is byte-identical to the returned delivery."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b3f333ee",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 019f91fb3786 (H13), with the correction done exactly. The Lean file is byte-identical (sha256 c0257d24…55df). The pqf-def-coherent and the other 5 stmt_dep records in the snapshot are field-for-field equal to side-live, so the live Q25 primary Sheaf.AlgebraicGeometry.CoherentFiniteType/IsQuasiCoherentFiniteType is kept with no rebind. The item differs from live only in lean, and the live item has lean=None, so it is not superseded. The new lean.note is accurate: RingedSpace.IsCoherent (Coherent.lean:44) is the 01BV clause 3, IsQuasiCoherentFiniteType = IsQuasicoherent ∧ IsFiniteType, and Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType (CoherentFiniteTypeLocallyNoetherian.lean:151, proved, already imported) gives the equivalence on locally Noetherian X. Statement re-checked against Stacks 0D0C (perfect.tex l.2682-2712): IsLocallyNoetherian X at arbitrary u; SheafOfModules (moduleRings X.toRingedSpace) with HasDerivedCategory.{w}; all H^j coherent; existential upper bound for K and lower bound for L; conclusion = all H^j of derivedInternalHomOfUniverses.{u,u,u,w} (Opens.grothendieckTopology X) X.sheaf (op K, L) coherent plus an existential lower bound. Edge cases empty X, zero K/L and non-quasi-compact X are covered. lean.statement is verbatim; all 17 imports exist; proof is sorry only; docstrings carry the source place and all 5 steps; the citer ProperSchemeCoherentExtFinite names the item only in a docstring and uses the same predicate. No compile (no file changed). H11 advisory: the second-reading section says no independent reading took place."
+ }
+}

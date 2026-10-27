@@ -1,0 +1,252 @@
+{
+ "id": "lem-pod-hom-chain-pairing-naturality",
+ "kind": "statement",
+ "title": "Target naturality of the counit–evaluation projection pairing",
+ "statement": "Fix the scheme and four coefficient-stage conventions of [def-fix-six-functor-datum]. Let $f:X\\to Y$ be a separated finite-type morphism of finite-type $k$-schemes, with the exceptional adjunction supplied as in [fix-prop-adjunctions]. Let $M\\in D^b_{ctf}(X,\\Lambda)$ and $N\\in D^b_{ctf}(Y,\\Lambda)$. Use the derived operations [def-weil-derived-pullback-tensor-hom], the chosen restricted tensor–Hom adjunction [det-thm-sf-ctf-stability-adjunctions], and the projection isomorphism [fix-prop-projection-formula] with its map specified in [def-exchange-projection]. Put\n$$C=Rf_!M,\\qquad L_N=R\\mathcal Hom_X(M,Rf^!N),\\qquad A_N=Rf_*L_N,\\qquad B_N=R\\mathcal Hom_Y(C,N).$$\nIntegral pullback and tensor are completed; field operations use rationalization and common finite coefficient stages. Write $\\varepsilon_{L_N}:Lf^*A_N\\to L_N$ and $\\mu_N:Rf_!Rf^!N\\to N$ for the ordinary and exceptional counits, and $P_T:C\\otimes^LT\\to Rf_!(M\\otimes^LLf^*T)$ for projection. Define\n$$q_N=\\operatorname{ev}_{M,Rf^!N}\\circ(1_M\\otimes\\varepsilon_{L_N}):M\\otimes^LLf^*A_N\\to Rf^!N,$$\n$$p_N=\\mu_N\\circ Rf_!(q_N)\\circ P_{A_N}:C\\otimes^LA_N\\to N,$$\nwhere evaluation is the counit of the chosen left-factor tensor–Hom adjunction [lem-pod-closed-uncurry-laws]. Let also $N'\\in D^b_{ctf}(Y,\\Lambda)$ and $r:N\\to N'$. Define $L_{N'},A_{N'},q_{N'},p_{N'}$ by the same displayed formulas with $N'$ in place of $N$, and put\n$$h=R\\mathcal Hom_X(M,Rf^!r):L_N\\to L_{N'},\\qquad a=Rf_*h:A_N\\to A_{N'}.$$\nThen the following identities hold for these specified maps:\n$$\\varepsilon_{L_{N'}}\\circ Lf^*a=h\\circ\\varepsilon_{L_N},\\qquad \\mu_{N'}\\circ Rf_!Rf^!r=r\\circ\\mu_N,$$\n$$\\operatorname{ev}_{M,Rf^!N'}\\circ(1_M\\otimes h)=Rf^!r\\circ\\operatorname{ev}_{M,Rf^!N},$$\n$$q_{N'}\\circ(1_M\\otimes Lf^*a)=Rf^!r\\circ q_N,$$\n$$Rf_!(1_M\\otimes Lf^*a)\\circ P_{A_N}=P_{A_{N'}}\\circ(1_C\\otimes a),$$\n$$p_{N'}\\circ(1_C\\otimes a)=r\\circ p_N.$$\nAll identities hold in the actual derived category at the chosen coefficient stage.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1: target naturality of the counit/evaluation representative; creating item former step 6"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "fix-prop-adjunctions",
+  "def-weil-derived-pullback-tensor-hom",
+  "det-thm-sf-ctf-stability-adjunctions",
+  "fix-prop-projection-formula",
+  "def-exchange-projection",
+  "lem-pod-closed-uncurry-laws",
+  "def-pod-ctf-pairing-maps"
+ ],
+ "proof": [
+  {
+   "text": "All objects and arrows already inhabit the full finite-Tor domains by the types of R.pull, R.direct, R.support, R.exceptional and the fixed-input Hom functors in [def-pod-ctf-pairing-maps]. Thus the separate domains_and_bijections theorem is unnecessary for these equations.",
+   "uses": [
+    "def-pod-ctf-pairing-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, naturality of the specified Hom-chain maps"
+   }
+  },
+  {
+   "text": "Apply Mathlib CategoryTheory.Adjunction.counit_naturality directly to R.ordinaryAdjunction at innerMap r and to R.exceptionalAdjunction at r. Since outerMap r is R.direct.map (innerMap r), these are precisely the first two equations. The adjunction data are the constructed restricted adjunctions of [det-thm-sf-ctf-stability-adjunctions]; no construction from a fresh Hom bijection is needed.",
+   "uses": [
+    "det-thm-sf-ctf-stability-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following paragraph: the adjunction maps are natural transformations"
+   }
+  },
+  {
+   "text": "Evaluation is definitionally (R.tensorAdjunctionX M).counit.app. Apply CategoryTheory.Adjunction.counit_naturality for this chosen left-factor tensor-Hom adjunction to R.exceptional.map r. Its right-adjoint image is innerMap r, giving the third equation without uncurry laws.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following paragraph: the adjunction maps are natural transformations"
+   }
+  },
+  {
+   "text": "Expand q. Combine the two successive tensor-functor images using Functor.map_comp backwards, substitute the ordinary counit square, expand Functor.map_comp forwards, and apply the evaluation square. Associativity gives the fourth equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, naturality of the specified Hom-chain maps"
+   }
+  },
+  {
+   "text": "Use the naturality field of [fix-prop-projection-formula] at the identity first-input arrow and an arbitrary second-input arrow b. At finite coefficients lift b to the full finite-Tor category; at the other three stages use its underlying arrow. Functor.map_id and identity composition reduce this law to raw_projection_naturality. The hom of rawProjectionIso is definitionally rawProjection at each of the four stages. Assemble the raw components into a natural transformation, then compose with R.tensorY.hom and the inverse of the R.pull-whiskered R.tensorX comparison after support. Its naturality square lifts through the faithful full inclusion to the required restricted projection square of [def-pod-ctf-pairing-maps]. Specialize b to outerMap r.",
+   "uses": [
+    "fix-prop-projection-formula",
+    "def-pod-ctf-pairing-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, naturality of the specified Hom-chain maps"
+   }
+  },
+  {
+   "text": "Expand p, substitute the restricted projection square, combine the two support images using Functor.map_comp backwards, substitute the q square, then expand Functor.map_comp and apply exceptional counit naturality. Associativity yields the final pairing equation. Collect the six equations into Naturality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1, naturality of the specified Hom-chain maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-ctf-pairing-maps",
+  "det-thm-sf-ctf-stability-adjunctions",
+  "fix-prop-projection-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1 and final naturality sentence; explicit restricted counit and transported projection naturality proof by K4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality in the target of evaluation followed by ordinary counit exceptional direct image exceptional counit and projection formula",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.ev_naturality\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  {X Y : CategoryTheory.Over I} (g : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp\\n      ((CategoryTheory.ChosenPullbacks\", \"doc\": \"For any objects $X, Y$ in the over category $\\\\mathcal{C}/I$ and morphism $g : X \\\\to Y$, the naturality square for the counit $\\\\epsilon$ of the adjunction between the pushforward functor $f_*$ and pull\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.coev_naturality\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  {X Y : CategoryTheory.Over J} (g : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp g ((CategoryTheory.ExponentiableMorphi\", \"doc\": \"Let $f: I \\\\to J$ be an exponentiable morphism in a category $\\\\mathcal{C}$. By definition, the pullback functor $f^*: \\\\mathcal{C}/J \\\\to \\\\mathcal{C}/I$ (denoted `pullback f` in Lean) has a right adjoint\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.coev_ev\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  (Y : CategoryTheory.Over I),\\n  CategoryTheory.CategoryStruct.comp\\n      ((CategoryTheory.ExponentiableMorphism.coev f)\", \"doc\": \"For an exponentiable morphism $ f: I \\to J $ in a category $ \\\\mathcal{C} $, the composition of the coevaluation map $ \\\\text{coev}_f $ applied to the pushforward object $ f_*Y $ and the pushforward of t\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.ev_naturality_assoc\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  {X Y : CategoryTheory.Over I} (g : X ⟶ Y) {Z : CategoryTheory.Over I} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.com\", \"doc\": \"Let $f: I \\\\to J$ be an exponentiable morphism in a category $\\\\mathcal{C}$. Let $f^* \\\\dashv f_*$ be the associated pullback-pushforward adjunction between the slice categories $\\\\mathcal{C}/J$ and $\\\\mat\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.coev_naturality_assoc\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  {X Y : CategoryTheory.Over J} (g : X ⟶ Y) {Z : CategoryTheory.Over J}\\n  (h :\\n    (CategoryTheory.ExponentiableMorphism\", \"doc\": \"For any category $\\\\mathcal{C}$, morphism $f: I \\\\to J$ in $\\\\mathcal{C}$, and objects $X, Y$ in the over-category $\\\\mathcal{C}/J$, the coevaluation map $\\\\text{coev}_f: \\\\text{id}_{\\\\mathcal{C}/I} \\\\Rightar\"}\n  {\"name\": \"CategoryTheory.OverPresheafAux.counitForward_naturality₁\", \"module\": \"Mathlib/CategoryTheory/Comma/Presheaf/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {A : CategoryTheory.Functor Cᵒᵖ (Type v)}\\n  {F G : CategoryTheory.Functor (CategoryTheory.CostructuredArrow CategoryTheory.yoneda A)ᵒᵖ (Type v)} (η : F ⟶ G)\\n  (s : (CategoryTheory.CostructuredArrow CategoryTheory.yoneda A)ᵒᵖ) (x : F.obj s),\\n  \", \"doc\": \"For any category $\\\\mathcal{C}$, presheaf $A : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Type}\\\\, v$, and natural transformation $\\\\eta : F \\\\Rightarrow G$ between functors $F, G : (\\\\text{CostructuredArrow}(\\\\text\"}\n  {\"name\": \"CategoryTheory.OverPresheafAux.counitForward_naturality₂\", \"module\": \"Mathlib/CategoryTheory/Comma/Presheaf/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {A : CategoryTheory.Functor Cᵒᵖ (Type v)}\\n  {F : CategoryTheory.Functor (CategoryTheory.CostructuredArrow CategoryTheory.yoneda A)ᵒᵖ (Type v)}\\n  (s t : (CategoryTheory.CostructuredArrow CategoryTheory.yoneda A)ᵒᵖ) (f : t ⟶ s) (x : F.obj t),\\n  \", \"doc\": \"For any category $\\\\mathcal{C}$, presheaf $A : \\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{Type}$, and morphism $f : t \\\\to s$ in the opposite category of the costructured arrow category of the Yoneda embedding and\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.coev_ev_assoc\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  (Y : CategoryTheory.Over I) {Z : CategoryTheory.Over J}\\n  (h : (CategoryTheory.ExponentiableMorphism.pushforward f).ob\", \"doc\": \"For an exponentiable morphism $ f: I \\to J $ in a category $ \\\\mathcal{C} $, the composition of the coevaluation map (unit of the adjunction) and the pushforward of the counit (evaluation map) yields th\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: individual counit/evaluation naturality laws do not state the combined ordinary/exceptional counit and projection pairing identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit_naturality",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.counit_naturality\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : G ⊣ F) {X Y : C} (f : Y ⟶ X) : CategoryTheory.CategoryStruct.comp (G.map (F.map f)) (adj.counit.app X) = CategoryTheory.Cate\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LiftLeftAdjoint.counitCoequalises\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Lifting.Left\", \"type\": \" {B : Type u₂} {C : Type u₃} [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] {U : CategoryTheory.Functor B C} {F : CategoryTheory.Functor C B} (adj₁ : F ⊣ U) (h : (X : B) → CategoryTheory.RegularEpi (adj₁.counit.app X)) (X : B) : CategoryTheory.Limits.IsColimit (CategoryThe\", \"doc\": \"Deprecated alias for `counitCoequalizes`.\"}\n  {\"name\": \"CategoryTheory.LiftLeftAdjoint.counitCoequalizes\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Lifting.Left\", \"type\": \" {B : Type u₂} {C : Type u₃} [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] {U : CategoryTheory.Functor B C} {F : CategoryTheory.Functor C B} (adj₁ : F ⊣ U) (h : (X : B) → CategoryTheory.RegularEpi (adj₁.counit.app X)) (X : B) : CategoryTheory.Limits.IsColimit (CategoryThe\", \"doc\": \"To show that `ε_X` is a coequalizer for `(FUε_X, ε_FUX)`, it suffices to assume it's always a\\ncoequalizer of something (i.e. a regular epi).\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: individual counit/evaluation naturality laws do not state the combined ordinary/exceptional counit and projection pairing identities"
+  },
+  {
+   "tool": "grep",
+   "query": "counit_naturality|curry_natural_right|uncurry_natural_right",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Equivalence.lean\", \"line\": \"250\", \"text\": \"theorem counit_naturality (e : C ≌ D) {X Y : D} (f : X ⟶ Y) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Equivalence.lean\", \"line\": \"285\", \"text\": \"    rw [e.counit_naturality, e.counitIso.hom_inv_id_app]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"line\": \"370\", \"text\": \"  simp only [comp_id, homEquiv_counit, Functor.map_comp, assoc, counit_naturality,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"line\": \"371\", \"text\": \"    counit_naturality_assoc, left_triangle_components_assoc]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"line\": \"219\", \"text\": \"  refine Eq.trans ?_ (t.adj₁.counit_naturality <| (whiskerRight t.adj₁.unit H).app X)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"line\": \"221\", \"text\": \"      (t.adj₂.counit_naturality (t.adj₁.unit.app X)),\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"line\": \"67\", \"text\": \"  rw [← adj1.counit_naturality, ← Category.assoc, ← F.map_comp]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"line\": \"87\", \"text\": \"  id := by simp [← h.counit_naturality (R.preimage (h.unit.app (R.obj X)))]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"line\": \"277\", \"text\": \"  have := adj2.counit_naturality x\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"107\", \"text\": \"      counit_naturality, counit_naturality_assoc, left_triangle_components_assoc]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"line\": \"83\", \"text\": \"    IsColimit (Cofork.ofπ (adj₁.counit.app X) (adj₁.counit_naturality _)) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"line\": \"88\", \"text\": \"      rw [← adj₁.counit_naturality_assoc (h X).left]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"line\": \"91\", \"text\": \"        F.map_comp_assoc, s.condition, ← adj₁.counit_naturality_assoc (h X).right]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"line\": \"149\", \"text\": \"        otherMap, assoc, adj₂.homEquiv_naturality_left, ← adj₂.counit_naturality,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"line\": \"153\", \"text\": \"      rw [← adj₁.counit_naturality]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean\", \"line\": \"147\", \"text\": \"lemma counit_naturality {X Y : C₂.obj} (f : X ⟶ Y) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean\", \"line\": \"150\", \"text\": \"  (Adjunction.ofCat α.adj).counit_naturality f\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"line\": \"73\", \"text\": \"        homEquiv_unit, counit_naturality, counit_naturality_assoc, left_triangle_components_assoc,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"line\": \"126\", \"text\": \"        counit_naturality, left_triangle_components_assoc, h₁, id_comp]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean\", \"line\": \"210\", \"text\": \"    rw [Category.assoc, ← Adjunction.counit_naturality, ← Category.assoc, ← F.map_comp, hf']\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"line\": \"504\", \"text\": \"    exact a.counit_naturality f.left\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"line\": \"1035\", \"text\": \"    exact (a.counit_naturality f.right)\"}\n  {\"file\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean\", \"line\": \"85\", \"text\": \"    rw [curry_natural_right, Category.assoc, ← Functor.map_comp, w,\"}\n  {\"file\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean\", \"line\": \"86\", \"text\": \"      ← curry_natural_right, toUnit_comp_curryRightUnitorHom]\"}\n  {\"file\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/Sections.lean\", \"line\": \"149\", \"text\": \"    · simp [← curry_natural_right]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: individual counit/evaluation naturality laws do not state the combined ordinary/exceptional counit and projection pairing identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A counit evaluation compact support pairing is natural in the coefficient complex using ordinary and exceptional counit naturality and projection naturality",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CompHausLike.LocallyConstant.counit\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"[HasExplicitFiniteCoproducts.{u} P] :\\n  haveI := CompHausLike.preregular hs\\n  (sheafSections _ _).obj ⟨CompHausLike.of P PUnit.{u + 1}⟩ ⋙ functor.{u, w} P hs ⟶\\n    𝟭 (Sheaf (coherentTopology (CompHausLike.{u} P)) (Type (max u w)))\", \"doc\": \"A natural transformation from the composition of the sheaf sections functor (evaluated at the terminal object PUnit) with a finite-product-preserving functor to the identity functor on sheaves over co\"}\n  {\"name\": \"CompHausLike.LocallyConstant.incl_of_counitAppApp\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"[PreservesFiniteProducts Y] [HasExplicitFiniteCoproducts.{u} P] (a : Fiber f) :\\n  Y.map (sigmaIncl f a).op (counitAppApp S Y f) = counitAppAppImage f a\", \"doc\": \"For a compact Hausdorff-like space $S$, a finite-product-preserving functor $Y$ from the opposite category of compact Hausdorff-like spaces to types, and a locally constant function $f:S\\\\to Y(\\\\text{PU\"}\n  {\"name\": \"CategoryTheory.evaluationAdjunctionLeft_counit_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  [inst_2 : ∀ (a b : C), CategoryTheory.Limits.HasProductsOfShape (a ⟶ b) D] (c : C) (Y : D),\\n  (CategoryTheory.evaluationAdjunctionLeft D c).counit.app Y =\\n    CategoryTheory.Limi\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ where $\\\\mathcal{D}$ has products over hom-sets of $\\\\mathcal{C}$, the counit of the evaluation adjunction at an object $Y \\\\in \\\\mathcal{D}$ is the projecti\"}\n  {\"name\": \"CompHausLike.LocallyConstant.counitApp\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"[HasExplicitFiniteCoproducts.{u} P] (Y : (CompHausLike.{u} P)ᵒᵖ ⥤ Type max u w) [PreservesFiniteProducts Y] :\\n  (functorToPresheaves.obj (Y.obj (op (CompHausLike.of P PUnit.{u + 1})))) ⟶ Y\", \"doc\": \"A natural transformation from the presheaf of locally constant functions on compact Hausdorff-like spaces (evaluated at the terminal object) to a finite-product-preserving functor $ Y $, defined by co\"}\n  {\"name\": \"Pi.counit_coe_dFinsupp\", \"module\": \"Mathlib.RingTheory.Coalgebra.Basic\", \"type\": \"(x : Π₀ i, A i) : counit (R := R) ⇑x = counit x\", \"doc\": \"The counit map of the coalgebra structure on the space of dependent finite support functions $\\\\Pi₀ i, A(i)$ over a commutative semiring $R$ satisfies $\\\\epsilon(\\\\uparrow x) = \\\\epsilon(x)$ for all $x \\\\i\"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \": coextendScalars f ⋙ restrictScalars f ⟶ 𝟭 (ModuleCat R)\", \"doc\": \"The counit of the adjunction between coextension of scalars and restriction of scalars functors, which provides a natural transformation from the composition $\\\\operatorname{Coext}_f \\\\circ \\\\operatornam\"}\n  {\"name\": \"CompHausLike.LocallyConstant.counit_app_val\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"For a sheaf $X$ over compact Hausdorff-like spaces with a coherent Grothendieck topology, the counit of the adjunction between the sheaf of locally constant functions and the presheaf construction eva\"}\n  {\"name\": \"CategoryTheory.coyonedaLemma\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \": coyonedaPairing C ≅ coyonedaEvaluation C\", \"doc\": \"For any category $\\\\mathcal{C}$, the Coyoneda pairing functor $\\\\mathcal{C} \\\\times [\\\\mathcal{C}, \\\\mathrm{Type}\\\\, v_1] \\\\to \\\\mathrm{Type}\\\\, \\\\max(u_1, v_1)$ is naturally isomorphic to the Coyoneda evaluati\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: individual counit/evaluation naturality laws do not state the combined ordinary/exceptional counit and projection pairing identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pairing from shriek M tensor pushforward internal Hom M shriek right adjoint N to N commutes with morphisms N to N prime",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.coev_naturality\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  {X Y : CategoryTheory.Over J} (g : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp g ((CategoryTheory.ExponentiableMorphi\", \"doc\": \"Let $f: I \\\\to J$ be an exponentiable morphism in a category $\\\\mathcal{C}$. By definition, the pullback functor $f^*: \\\\mathcal{C}/J \\\\to \\\\mathcal{C}/I$ (denoted `pullback f` in Lean) has a right adjoint\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.coev_naturality_assoc\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  {X Y : CategoryTheory.Over J} (g : X ⟶ Y) {Z : CategoryTheory.Over J}\\n  (h :\\n    (CategoryTheory.ExponentiableMorphism\", \"doc\": \"For any category $\\\\mathcal{C}$, morphism $f: I \\\\to J$ in $\\\\mathcal{C}$, and objects $X, Y$ in the over-category $\\\\mathcal{C}/J$, the coevaluation map $\\\\text{coev}_f: \\\\text{id}_{\\\\mathcal{C}/I} \\\\Rightar\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.coev_ev\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  (Y : CategoryTheory.Over I),\\n  CategoryTheory.CategoryStruct.comp\\n      ((CategoryTheory.ExponentiableMorphism.coev f)\", \"doc\": \"For an exponentiable morphism $ f: I \\to J $ in a category $ \\\\mathcal{C} $, the composition of the coevaluation map $ \\\\text{coev}_f $ applied to the pushforward object $ f_*Y $ and the pushforward of t\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.coev_ev_assoc\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  (Y : CategoryTheory.Over I) {Z : CategoryTheory.Over J}\\n  (h : (CategoryTheory.ExponentiableMorphism.pushforward f).ob\", \"doc\": \"For an exponentiable morphism $ f: I \\to J $ in a category $ \\\\mathcal{C} $, the composition of the coevaluation map (unit of the adjunction) and the pushforward of the counit (evaluation map) yields th\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.ev_naturality_assoc\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  {X Y : CategoryTheory.Over I} (g : X ⟶ Y) {Z : CategoryTheory.Over I} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.com\", \"doc\": \"Let $f: I \\\\to J$ be an exponentiable morphism in a category $\\\\mathcal{C}$. Let $f^* \\\\dashv f_*$ be the associated pullback-pushforward adjunction between the slice categories $\\\\mathcal{C}/J$ and $\\\\mat\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.ev_naturality\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  {X Y : CategoryTheory.Over I} (g : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp\\n      ((CategoryTheory.ChosenPullbacks\", \"doc\": \"For any objects $X, Y$ in the over category $\\\\mathcal{C}/I$ and morphism $g : X \\\\to Y$, the naturality square for the counit $\\\\epsilon$ of the adjunction between the pushforward functor $f_*$ and pull\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.ev_coev_assoc\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  (X : CategoryTheory.Over J) {Z : CategoryTheory.Over I}\\n  (h : (CategoryTheory.ChosenPullbacksAlong.pullback f).obj X \", \"doc\": \"For an exponentiable morphism $ f: I \\to J $ in a category $ \\\\mathcal{C} $, the composition of the coevaluation map (unit of the adjunction) followed by the evaluation map (counit of the adjunction) be\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.ev_coev\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J : C} (f : I ⟶ J)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ExponentiableMorphism f]\\n  (X : CategoryTheory.Over J),\\n  CategoryTheory.CategoryStruct.comp\\n      ((CategoryTheory.ChosenPullbacksAlong.pullback\", \"doc\": \"For any object $X$ in the over category $\\\\mathcal{C}/J$, the composition of the coevaluation map $\\\\text{coev}_f$ followed by the evaluation map $\\\\text{ev}_f$ equals the identity morphism on the pushfo\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: individual counit/evaluation naturality laws do not state the combined ordinary/exceptional counit and projection pairing identities"
+  },
+  {
+   "tool": "grep",
+   "query": "curry_natural_right|uncurry_natural_right|ev_naturality",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"109\", \"line\": \"theorem ev_naturality {X Y \", \"text\": \" C} (f : X ⟶ Y) :\"}\n  {\"file\": \"117\", \"line\": \"theorem coev_naturality {X Y \", \"text\": \" C} (f : X ⟶ Y) :\"}\n  {\"file\": \"165\", \"line\": \"theorem curry_natural_right (f \", \"text\": \" A ⊗ X ⟶ Y) (g : Y ⟶ Y') :\"}\n  {\"file\": \"170\", \"line\": \"theorem uncurry_natural_right (f \", \"text\": \" X ⟶ A ⟶[C] Y) (g : Y ⟶ Y') :\"}\n  {\"file\": \"227\", \"line\": \"  rw [curry_uncurry, curry_natural_right, ← uncurry_id_eq_ev, curry_uncurry, id_comp]\", \"text\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: individual counit/evaluation naturality laws do not state the combined ordinary/exceptional counit and projection pairing identities"
+  },
+  {
+   "tool": "grep",
+   "query": "counit_naturality|ev_naturality|uncurry_natural_right",
+   "results": "Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean; Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean; Mathlib/CategoryTheory/Monoidal/Closed/Cartesian.lean; Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; grep restricted to CategoryTheory/Monoidal/Closed",
+   "date": "2026-10-22",
+   "verdict": "no match: these give individual adjunction or evaluation laws, not the full specified six-functor pairing and its six identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality in the target of the projection formula counit evaluation pairing for exceptional direct image",
+   "results": "CategoryTheory.Adjunction.counit_naturality; CategoryTheory.ExponentiableMorphism.ev_naturality; CategoryTheory.Equivalence.counit_naturality; CategoryTheory.ExponentiableMorphism.ev_naturality_assoc; CategoryTheory.evaluationAdjunctionLeft_counit_app; CategoryTheory.Equivalence.counit_naturality_assoc; CategoryTheory.OverPresheafAux.counitForward_naturality₁; AlgebraicGeometry.LocallyRingedSpace.evaluation_naturality_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: these give individual adjunction or evaluation laws, not the full specified six-functor pairing and its six identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit_naturality",
+   "results": "CategoryTheory.Adjunction.counit_naturality; CategoryTheory.LiftLeftAdjoint.counitCoequalises; CategoryTheory.LiftLeftAdjoint.counitCoequalizes",
+   "date": "2026-10-22",
+   "verdict": "no match: these give individual adjunction or evaluation laws, not the full specified six-functor pairing and its six identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the pairing formed by projection formula ordinary counit evaluation and exceptional counit in its target object",
+   "results": "CategoryTheory.ihom.coev_naturality_assoc; CategoryTheory.ihom.coev_naturality; CategoryTheory.ExactPairing.coevaluation_evaluation; CategoryTheory.ihom.coev_ev_assoc; CategoryTheory.exp.coev_ev_assoc; CategoryTheory.ExactPairing.coevaluation_evaluation''; CategoryTheory.ExactPairing.coevaluation_evaluation'; CategoryTheory.ExactPairing.evaluation_coevaluation",
+   "date": "2026-10-22",
+   "verdict": "no match: these give individual adjunction or evaluation laws, not the full specified six-functor pairing and its six identities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-hom-chain-counit-formula",
+  "date": "2026-10-22",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pod-identification-of-the-comparison",
+   "place": "Third paragraph: the map t is pulled back, composed with the ordinary counit, evaluated, pushed forward and composed with the exceptional counit. Step 1: target naturality of the counit/evaluation representative; creating item former step 6",
+   "via": [
+    "lem-pod-hom-chain-counit-formula",
+    "lem-pod-global-duality-map-identification"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-hom-chain-pairing-naturality",
+  "worker": "stage1",
+  "summary": "Preserved the statement and supplied a six-step naturality calculation. Reused the existing finite-Tor domain node and the general adjunction Mathlib leaf; no new nodes. Expanded both the inner evaluation composite and the final projection/counit composite explicitly.",
+  "blueprint": "Realizes target naturality in Step 1 of fix-lem-tensor-adjunction and the third paragraph of thm-pod-identification-of-the-comparison, where the map is pulled back, composed with ordinary counit, evaluated, pushed forward and composed with exceptional counit.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-closed-uncurry-laws",
+    "why": "Identifies the chosen left-factor evaluation with its adjunction counit; a generic closed-category convention already used by the item, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-closed-uncurry-laws"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-b666291a9",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-b666291a9 (reviewer sub-agent of L); spot-checked: I read the item in full; the split adds no new nodes. The statement is unchanged (Q02's creation from lem-pod-hom-chain-counit-formula, former step 6). The item is still unsplit on live and side-live, there is no repair note for it, it is not dropped, and the closure of everything it cites does not contain it, so there is no cycle. Every cited unit is in the closure of sk-thm-sf-package: sk-lem-sf-mate, sk-rem-sf-pf-done, sk-thm-sf-identification, sk-def-exchange. lem-pod-closed-uncurry-laws and lem-weil-pbc-adjunction-of-natural-bijection are Mathlib leaves, so the declared tool use is harmless and accepted. Step 1: lem-pod-hom-chain-ctf-domains, applied to N, to N' and to T=A_N, A_{N'}, puts every object the later steps use in the ctf subcategories, and these are full. Step 2: the counit naturality from fix-prop-adjunctions (1) at b=h, with a=Rf_*h, gives the ordinary counit identity; clause (2) at b=r gives the exceptional counit identity. Step 3: for the left-factor adjunction M⊗− ⊣ RHom(M,−) at b=Rf^!r, G(b)=h, so the evaluation square follows with no symmetry or sign. Step 4: I checked the expansion through tensor functoriality line by line. Step 5: fix-prop-projection-formula's naturality in L, with M in D^b_c and A_N, A_{N'} in ctf, gives the projection square in the correct direction. Step 6: I checked the composite p_{N'}∘(1⊗a)=r∘p_N line by line. Source: the main-20261015 blueprint, fix-lem-tensor-adjunction Step 1 and its final naturality sentence; the squares are left implicit there, so proof_origin=agent is correct. Mathlib searches cover all three kinds; ihom.ev_naturality and similar give only single laws. Edge cases r=id, M=0 and f=id with identity data all reduce correctly. There are no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.HomChainPairingNaturality",
+  "declaration": "WeilConjectures.HomChain.pairing_naturality",
+  "declarations": [
+   "WeilConjectures.HomChain.inner",
+   "WeilConjectures.HomChain.outer",
+   "WeilConjectures.HomChain.target",
+   "WeilConjectures.HomChain.innerMap",
+   "WeilConjectures.HomChain.outerMap",
+   "WeilConjectures.HomChain.evaluation",
+   "WeilConjectures.HomChain.q",
+   "WeilConjectures.HomChain.p",
+   "WeilConjectures.HomChain.Naturality",
+   "WeilConjectures.HomChain.pairing_naturality"
+  ],
+  "file": "lean/Sheaf/Paper/HomChainPairingNaturality.lean",
+  "statement": "theorem pairing_naturality (M : (PodCoefficientStage.domain S s X).FullSubcategory) {N N' : (PodCoefficientStage.domain S s Y).FullSubcategory} (r : N ⟶ N') : Naturality S s f c R M r",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Repair of e6758ebc294d H3/H4: uses PodCoefficientStage.domain FullSubcategories and PodCtfAdjunctionData R throughout, including its tensorAdjunctionX counit and shared canonical projection/Hom constructions. All six conjuncts are retained; no independent presentation or replacement categories."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3cb40328",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Repairs e6758ebc H3/H4: item now on R : PodCtfAdjunctionData over PodCoefficientStage.domain FullSubcategories, using R.pull/direct/support/exceptional, ordinary/exceptional counits, ev = (R.tensorAdjunctionX M).counit and closedX/closedY tensorLeft. The six conjuncts match the node in order and direction (projection forward, clause 5 is Rf_!(1⊗f^*a)∘P = P'∘(1⊗a)); statement field verbatim; item stmt_deps = base 7 + new def node only. New def node def-pod-ctf-pairing-maps: §5 fields OK, cites exactly its 5 stmt_deps, source fix-lem-tensor-adjunction Step 1. rawProjection = published stage components; rawProjectionIso = asIso via compactSupportProjectionFormula IsIso; projectionIso = full-inclusion preimageIso of tensorY ≫ raw ≫ support(tensorX⁻¹); homX/homY = sixFunctorDomainHom with the first input fixed. No sorry and nothing hollow in the def module; the item has one sorry theorem; docstrings carry source, blueprint tag and proof steps. Not compiled (no FIX); report gives clean compiles 21-45 s. Advisory: (1) the new defs duplicate PodHomChain.* in the landed PodHomChainCounitFormula; maintainer should re-point the sibling to PodCtfPairing.*; (2) uses def-sf-constructible-projection-mates decls without citing it (it is in fix-prop-projection-formula's stmt_deps; sibling has the same gap); (3) import Etale.Derived.Adjunctions looks unused; (4) second reading is a self-check, accepted."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261025T163821-L-858637",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

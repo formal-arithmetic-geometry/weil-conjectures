@@ -24,46 +24,19 @@
  ],
  "proof": [
   {
-   "text": "Work for one $F\\in\\{E,\\Omega\\}$. By [def-weil-pbc-internal-abelian-sheaf-module-equivalence], internal modules may be treated as modules over the section-ring sheaf, leaving underlying sections and maps unchanged. Coefficient identifications for any map $f:T\\to T'$ here follow from $p_{T'}f=p_T$ and the definition $C_{F,T}=p_T^*C_F$ in [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-pullback-from-point]. The inverse-image theorem [lem-weil-pbc-left-exact-site-inverse-image-tensor] gives exactness and the monoidal composition comparisons for these site inverse images; after the displayed ring identifications, module inverse image is the same exact sheaf inverse image with its transported action. These identifications use the whole ring $S\\mapsto C(S,F)$; in particular they make no identification of $C_\\Omega$ with a finite-subextension-valued coefficient ring.",
+   "text": "Fix $F=E$ or $\\Omega$. Put $Z=\\bigcup_{a\\in A_i}D_a$, $i:Z\\hookrightarrow Y$, $h:Z\\cap V\\hookrightarrow V$, $K=Rb_*L_F[0]$, and $B=Rj_*b_!L_F[0]$. By [lem-sfb-open-square-closed-unit-triangle] there is a triangle $i^*B\\to i^*Rj_*K\\xrightarrow{i^*u_F}i^*Rj_*h_*h^*K\\to$, where $u_F=Rj_*(\\eta_{h,K})$. $\\operatorname{Spec}k$ is locally Noetherian (a field has only the ideals $0,1$), so [pqf-lem-locnoeth-lft] makes $Y$ locally Noetherian; finite type gives quasi-compactness, hence $Y$ is Noetherian.",
    "uses": [
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "sk-def-sfb-pulled-back-coefficients",
-    "sk-def-sfb-pullback-from-point",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+    "lem-sfb-open-square-closed-unit-triangle",
+    "pqf-lem-locnoeth-lft"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
+    "place": "Paragraph (3), agent all-continuous tame-boundary obligation; assembly after the 2026-10-22 re-split"
    }
   },
   {
-   "text": "Let $Z=\\bigcup_{a\\in A_i}D_a$ with reduced structure, $i:Z\\hookrightarrow Y$, $Z_V=Z\\cap V$, and $h:Z_V\\hookrightarrow V$. Its complementary open in $V$ is $b:W\\hookrightarrow V$. Put $K=Rb_*L_F[0]$. The open-slice calculus [lem-sp-subterminal-derived-image-calculus] gives $b^*K\\cong L_F[0]$, using the actual counit. Apply the first localization triangle of [lem-weil-pbc-condensed-open-closed-recollement] on $V$ to obtain\n$$b_!L_F[0]\\longrightarrow K\\xrightarrow{\\eta_h}h_*h^*K\\longrightarrow b_!L_F[0][1].$$\nThe hypotheses hold: the schemes are Noetherian finite type over a field, so the displayed opens are quasi-compact; $L_F[0]$ and $K$ are bounded below, as a nonnegative injective resolution computes the latter. The ring in the recollement statement is any commutative condensed ring, so includes both $C_E$ and $C_\\Omega$.",
-   "uses": [
-    "lem-sp-subterminal-derived-image-calculus",
-    "lem-weil-pbc-condensed-open-closed-recollement"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
-   }
-  },
-  {
-   "text": "Apply $Rj_*$ and then exact $i^*$ to this triangle. Exactness of the ambient derived functors follows from [lem-sfb-derived-exchange-exact-normalization] (take the identity base-change square for $j$); exact inverse image is also part of the recollement statement [lem-weil-pbc-condensed-open-closed-recollement]. Set $B=Rj_*b_!L_F[0]$. The resulting distinguished triangle is\n$$i^*B\\longrightarrow i^*Rj_*K\\xrightarrow{i^*u_F}i^*Rj_*h_*h^*K\\longrightarrow i^*B[1],$$\nwhere $u_F=Rj_*(\\eta_h)$ is precisely the map in [lem-sfb-partial-kummer-boundary-unit-model]. It will suffice to prove $i^*u_F$ invertible.",
-   "uses": [
-    "lem-sfb-derived-exchange-exact-normalization",
-    "lem-weil-pbc-condensed-open-closed-recollement",
-    "lem-sfb-partial-kummer-boundary-unit-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
-   }
-  },
-  {
-   "text": "For any pair of profinite groups $G_o,G_i$, [lem-sfb-condensed-product-action-inflation] supplies three Grothendieck abelian categories $\\mathcal A_1(C_F),\\mathcal A_{G_o}(C_F),\\mathcal A_{G_o\\times G_i}(C_F)$ and their specified exact inflation left adjoints. Apply [lem-sfb-derived-composition-adjunction-normalization] to these functors, with the identity identification between their composite and inflation of a trivial $G_o\\times G_i$-action. Its conjugate is the natural isomorphism\n$$\\theta:R\\Gamma_{G_o\\times G_i}\\xrightarrow{\\sim}R\\Gamma_{G_o}R\\Gamma_{G_i}^{G_o}.$$\nThe theorem's normalization identifies this map on K-injective representatives with the class of the identity $M^{G_o\\times G_i}=(M^{G_i})^{G_o}$, so it is exactly the comparison named $\\theta$ in the new geometric model. In particular no analytic cochain acyclicity, Koszul calculation, completeness, or commuting of scalar extension with invariants is required here.",
+   "text": "For any profinite $G_o,G_i$, use the exact inflation adjunctions of [lem-sfb-condensed-product-action-inflation]. Their composite is product inflation and its conjugate is $M^{G_o\\times G_i}=(M^{G_i})^{G_o}$. Apply [lem-sfb-derived-composition-adjunction-normalization] with this identity comparison. It makes $\\theta:R\\Gamma_{G_o\\times G_i}\\to R\\Gamma_{G_o}R\\Gamma_{G_i}^{G_o}$ invertible, normalized on K-injectives by that same invariants identity.",
    "uses": [
     "lem-sfb-condensed-product-action-inflation",
     "lem-sfb-derived-composition-adjunction-normalization"
@@ -71,11 +44,11 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
+    "place": "Paragraph (3), agent all-continuous tame-boundary obligation; assembly after the 2026-10-22 re-split"
    }
   },
   {
-   "text": "Fix a boundary stratum $S_J$ with $J\\cap A_i\\ne\\varnothing$. Apply [lem-sfb-partial-kummer-boundary-unit-model] to $Y,D,L$ and the given partition. Its hypotheses are exactly the assumed regularity of $Y$, strict normal crossings of $D$, and specified Kummer-triviality of $L$, with the same all-continuous rings. It gives an actual pro-etale cover of the entire $S_J$, on which $u_F|_{S_J}$ is $p_T^*\\theta_{M_F}$. Step 4 makes $\\theta_{M_F}$ invertible, and a functor preserves inverses, so the covered restrictions are isomorphisms. By [lem-zl-condensed-cover-restriction-conservative], $u_F|_{S_J}$ is an isomorphism in the derived module category of $S_J$. This checks sheaves on whole strata rather than only their ordinary geometric stalks.",
+   "text": "For every $S_J$ with $J\\cap A_i\\ne\\varnothing$, [lem-sfb-partial-kummer-boundary-unit-model] identifies $u_F|_{S_J}$ on a pro-etale cover with $p_T^*\\theta_{M_F}$. Regularity, strict normal crossings and the stipulated Kummer triviality are precisely its hypotheses. Step 2 makes the covered maps invertible. By [lem-zl-condensed-cover-restriction-conservative], $u_F|_{S_J}$ is invertible on the entire stratum.",
    "uses": [
     "lem-sfb-partial-kummer-boundary-unit-model",
     "lem-zl-condensed-cover-restriction-conservative"
@@ -83,75 +56,53 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
+    "place": "Paragraph (3), agent all-continuous tame-boundary obligation; assembly after the 2026-10-22 re-split"
    }
   },
   {
-   "text": "The finitely many strata with $J\\cap A_i\\ne\\varnothing$ partition $Z$. To pass from step 5 to $i^*u_F$, use finite closed/open induction, not a geometric-point conservativity assertion. A finite stratification by these normal-crossing strata admits a filtration by closed unions: order the nonempty strata so that every stratum in the closure of a chosen stratum comes earlier (the closure of $S_J$ can only meet $S_{J'}$ with $J\\subseteq J'$). Successively remove an open stratum from the remaining closed union. On each such closed union the open complement is quasi-compact, so [lem-weil-pbc-proetale-ringed-open-closed] and [lem-sfb-exact-open-closed-unbounded-calculus] apply. Their two restriction functors jointly reflect isomorphisms. The restriction to the removed stratum is an isomorphism by step 5, and the restriction to the remaining closed union is an isomorphism by induction, starting with the empty union. Hence $i^*u_F$ is invertible. The triangle in step 3 now has zero first object (equivalently, apply its long exact cohomology sequence), giving $i^*B=0$.",
+   "text": "$Z$ is Noetherian (closed in the Noetherian $Y$; quotients of Noetherian rings are Noetherian). The $S_J$ with $J\\cap A_i\\ne\\varnothing$ are locally closed, disjoint and cover $Z$ ($z$ lies only in $S_{J(z)}$, $J(z)=\\{a:z\\in D_a\\}$), so with reduced structures they stratify $Z$. By [def-weil-pbc-internal-abelian-sheaf-module-equivalence], $D(Z,C_F)$ is the derived category of modules over the section-ring sheaf of $C_{F,Z}$, with the same sheaves. [lem-weil-pbc-noetherian-stratum-detection] with identity covers and step 3 make $i^*u_F$ invertible, and the triangle of [lem-sfb-open-square-closed-unit-triangle] gives $i^*B=0$, including at intersections of inner and outer components.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-sfb-exact-open-closed-unbounded-calculus"
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-noetherian-stratum-detection",
+    "lem-sfb-open-square-closed-unit-triangle"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
+    "place": "Paragraph (3), agent all-continuous tame-boundary obligation; assembly after the 2026-10-22 re-split"
    }
   },
   {
-   "text": "Apply the open-slice calculus [lem-sp-subterminal-derived-image-calculus] to the two open subobjects $V,Y^\\circ$ of $Y$. It identifies $c^*B$ with $Ra_*b^*b_!L_F[0]=Ra_*L_F[0]$; the last identification is the invertible open unit from [lem-weil-pbc-proetale-ringed-open-closed]. Let $\\rho:c^*B\\xrightarrow{\\sim}Ra_*L_F[0]$ be this natural isomorphism. By the adjunction $c_!\\dashv c^*$ in [lem-weil-pbc-condensed-open-closed-recollement], the map in the statement is exactly\n$$e_F=\\varepsilon_{c,B}\\circ c_!(\\rho^{-1}).$$\nThe same recollement lemma gives the triangle $c_!c^*B\\xrightarrow{\\varepsilon_c}B\\to i_*i^*B\\to$. Since step 6 gives $i^*B=0$, the counit $\\varepsilon_{c,B}$ is invertible. Thus $e_F$ is an isomorphism, with precisely the requested normalization.",
+   "text": "Apply [lem-sfb-open-square-support-scalar-counit] to the cartesian open square and $M=L_F[0]$. Its map is the prescribed adjunct $e_F$, so $i^*B=0$ makes $e_F$ invertible. The same lemma gives naturality and, for $R=C_E$, $R'=C_\\Omega$, $\\mu:x\\mapsto1\\otimes x$, the required scalar-restriction square. These are the all-continuous rings throughout; scalar extension is never moved through $Rj_*$.",
    "uses": [
-    "lem-sp-subterminal-derived-image-calculus",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-condensed-open-closed-recollement"
+    "lem-sfb-open-square-support-scalar-counit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
+    "place": "Paragraph (3), agent all-continuous tame-boundary obligation; assembly after the 2026-10-22 re-split"
    }
   },
   {
-   "text": "The slice identification $\\rho$ is natural in its input, and the counit is natural, so the displayed formula for $e_F$ is natural. For the coefficient map $C_E\\to C_\\Omega$, [lem-weil-pbc-ring-sheaf-change-adjunction] gives the ordinary derived direct-image and inverse-image scalar-restriction identifications, with their adjunction compatibility. Extension by zero commutes with restriction of scalars: on the extension presheaf it keeps the same groups, restrictions and scalar action, and sheafification gives the same module; this is the sheafified presheaf description in [lem-weil-pbc-proetale-ringed-open-closed]. Its adjunction bijection sends a map to its same restriction, so the resulting identification also preserves the open unit and counit. The slice comparison is the sectionwise fibre-product identity of [lem-sfb-proetale-open-restriction-counit]; restricting scalars leaves it unchanged. On K-injectives this remains the same derived comparison by [lem-sfb-kinjective-direct-image-open-word-model]. Hence, writing $\\mu:L_E\\to\\operatorname{Res}L_\\Omega$ for $x\\mapsto1\\otimes x$ and inserting these identifications, naturality gives the equality\n$$\\operatorname{Res}(e_\\Omega)\\circ c_!Ra_*(\\mu)=Rj_*b_!(\\mu)\\circ e_E.$$\nNo scalar extension has been moved past a direct image.",
-   "uses": [
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-sfb-proetale-open-restriction-counit",
-    "lem-sfb-kinjective-direct-image-open-word-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
-   }
-  },
-  {
-   "text": "Step 6 is the stated zero restriction on the union of inner components, including its intersections with outer components. If $A_i=\\varnothing$, then $c,b$ are identities and $e_F$ is the identity under the canonical comparisons; if $A_o=\\varnothing$, $j,a$ are identities and the map is again the identity on extension by zero. For $D=\\varnothing$ both checks coincide. For rank zero all objects and maps are zero. These cases also follow from the same proof (there are no boundary strata when $Z=\\varnothing$).",
+   "text": "Step 4 is the stated zero restriction on the union of inner components, including its intersections with outer components. If $A_i=\\varnothing$, then $c,b$ are identities and $e_F$ is the identity under the canonical comparisons; if $A_o=\\varnothing$, $j,a$ are identities and the map is again the identity on extension by zero. For $D=\\varnothing$ both checks coincide. For rank zero all objects and maps are zero. These cases also follow from the same proof (there are no boundary strata when $Z=\\varnothing$).",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
+    "place": "Paragraph (3), agent all-continuous tame-boundary obligation; assembly after the 2026-10-22 re-split"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "sk-def-sfb-pulled-back-coefficients",
-  "sk-def-sfb-pullback-from-point",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-sp-subterminal-derived-image-calculus",
-  "lem-weil-pbc-condensed-open-closed-recollement",
-  "lem-sfb-derived-exchange-exact-normalization",
-  "lem-sfb-partial-kummer-boundary-unit-model",
+  "lem-sfb-open-square-closed-unit-triangle",
+  "pqf-lem-locnoeth-lft",
   "lem-sfb-condensed-product-action-inflation",
   "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-sfb-partial-kummer-boundary-unit-model",
   "lem-zl-condensed-cover-restriction-conservative",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-sfb-exact-open-closed-unbounded-calculus",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-sfb-proetale-open-restriction-counit",
-  "lem-sfb-kinjective-direct-image-open-word-model"
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-sfb-open-square-support-scalar-counit"
  ],
  "proof_origin": {
   "by": "agent",
@@ -255,67 +206,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-transverse-tame-open-shriek-exchange",
   "worker": "stage1",
-  "summary": "Expanded the geometric exchange into a localization triangle, a partial Kummer model of the closed-unit arrow, normalized composition of derived invariants, finite-stratum detection, the actual open counit, and the scalar-restriction naturality square. Two statement-only new inputs, no Mathlib leaves or statement changes. No SGA route or finite-subextension substitution.",
-  "blueprint": "Realizes the additional all-continuous tame-boundary input below paragraph (3) of det-thm-sf-ctf-stability-direct-images. The cited blueprint paragraph itself only invokes open-image finiteness; it contains no tame calculation. The inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor reports.",
+  "summary": "Repair of batch5 re-split: retain the statement verbatim and extract three independent statement-only formal lemmas (closed-unit triangle, finite-stratum detection, scalar-compatible open counit); retain the normalized product-invariants and Kummer-cover assembly in the item. The report preserves all nine original arguments and assigns each to its new task or retained assembly. Maintainer-reader FIX: the new finite-stratum detection node duplicated lem-weil-pbc-noetherian-stratum-detection and was dropped; step 4 cites the existing node.",
+  "blueprint": "Paragraph (3) of det-thm-sf-ctf-stability-direct-images, below the all-continuous tame-boundary obligation. The blueprint itself states open-image finiteness but supplies no tame calculation. The existing nearest-blueprint ancestor is null; new from.via prepends this item to its inherited via list.",
   "tool_uses": [
    {
-    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
-   },
-   {
-    "node": "sk-def-sfb-pulled-back-coefficients",
-    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
-   },
-   {
-    "node": "sk-def-sfb-pullback-from-point",
-    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
-   },
-   {
-    "node": "lem-sp-subterminal-derived-image-calculus",
-    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
-   },
-   {
-    "node": "lem-weil-pbc-condensed-open-closed-recollement",
-    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
-   },
-   {
-    "node": "lem-sfb-derived-exchange-exact-normalization",
-    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
-   },
-   {
     "node": "lem-sfb-derived-composition-adjunction-normalization",
-    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
+    "why": "Generic normalization of composition of right derived adjoints; applied to exact condensed-group inflations, without changing the geometric route."
    },
    {
     "node": "lem-zl-condensed-cover-restriction-conservative",
-    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
+    "why": "Generic conservativity of restriction to an actual pro-etale covering family on each stratum, not ordinary geometric-point detection."
    },
    {
-    "node": "lem-weil-pbc-proetale-ringed-open-closed",
-    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
-   },
-   {
-    "node": "lem-sfb-exact-open-closed-unbounded-calculus",
-    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
-   },
-   {
-    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
-   },
-   {
-    "node": "lem-sfb-proetale-open-restriction-counit",
-    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
-   },
-   {
-    "node": "lem-sfb-kinjective-direct-image-open-word-model",
-    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
-   },
-   {
-    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "why": "Generic exact monoidal inverse-image theorem, used with the site functors defining the coefficient system, including the all-continuous coefficient ring."
+    "node": "lem-weil-pbc-noetherian-stratum-detection",
+    "why": "Generic joint detection of derived module isomorphisms by restriction to the strata of a finite stratification of a Noetherian scheme (identity covers); no node of the unit gives it. Replaces the duplicate new node lem-sfb-finite-frontier-strata-derived-detection."
    }
   ]
  },
@@ -333,15 +240,16 @@
   "lem-weil-pbc-ring-sheaf-change-adjunction",
   "lem-sfb-proetale-open-restriction-counit",
   "lem-sfb-kinjective-direct-image-open-word-model",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-noetherian-stratum-detection"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NV-bed2112ec",
-  "group": "NV",
+  "reviewer": "NT-cc-O2-a5153263c",
+  "group": "O2",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-bed2112ec (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and blueprint paragraph (3) of sk-thm-sf-ctf-stability-direct-images. Paragraph (3) has no tame calculation, and the item's agent route is inherited from the NF split. The statement and stmt_deps are byte-identical to the NF 26a608e0 copy, so no target was weakened. There is no repair note and no SGA citation. Steps 2-3: the recollement triangle on V (any commutative condensed ring; b quasi-compact; D^+) is pushed forward by Rj_* and i^*, using the exactness clause of derived-exchange with the identity square. Step 4: derived-composition-adjunction-normalization applies to the inflation chain 1→G_o→G_o×G_i with λ=id, which gives θ on K-injectives. Step 5: the condensed cover-restriction conservativity applies with X=S_J and Λ=C_F. Step 6: I checked the stratification order (the closure of S_J lies in the union of S_J' with J'⊇J) and the joint reflection from exact-open-closed-unbounded-calculus, which gives i^*B=0. Step 7: e_F=ε_c∘c_!(ρ^{-1}) is exactly the adjunct in the statement, and ε is iso by the triangle. Step 8: the scalar square is an explicit equation from ring-sheaf-change, the sheafified j_! presheaf and the open-restriction counit. Step 9: the edge cases are elementary. New nodes: condensed-product-action-inflation is true (modules over R[P] in a sheaf topos; invariants adjoint; (M^H)^G) and is not a duplicate of the abstract-group inflation nodes. partial-kummer-boundary-unit-model carries the geometric core but is not a restatement of the item: it has no j_! and no invertibility, and the item still needs the triangle, the stratum induction, the counit and the scalar arguments. I tested it on the J_o=∅ case and by Mayer-Vietoris on two-branch and three-branch cases. Its source side overlaps tame-stratum-kummer-descent, but its target side is new. The inherited all-continuous Ω risk sits in this node, as recorded for the parent splits. Batch-5 flags: def-trf-SNC is a definition already in the base stmt_deps; trf-slice-subtopos-site-presentation (via subterminal calculus) is general slice-site theory; pd-section-derived-pushpull-normalization (via derived-exchange) is generic derived-functor normalization. All three are outside the assumed statements, so I accepted them. The 14 tool_uses are already-split generic infrastructure, and I accepted them for the maintainer to record. No changes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-a5153263c (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, every cited statement, blueprint main-20261015 sk-thm-sf-ctf-stability-direct-images paragraph (3), and the preserved nine-step base proof. The item statement is byte-identical to the base: all-continuous C_E and C_Omega, the actual adjunct e_F, the scalar square. No SGA source appears. Re-split mapping: old steps 1-3 go to lem-sfb-open-square-closed-unit-triangle; old steps 7-8 go to lem-sfb-open-square-support-scalar-counit; old steps 4, 5 and 9 stay as item steps 2, 3 and 6; nothing is lost. I accept both open-square nodes. Closed-unit triangle: it is the recollement triangle on V for K = Rb_*M[0], which is in D^{>=0}, with b quasi-compact because Y is Noetherian, then Rj_* and i^* applied, with b^*Rb_* = id by the counit. It holds for b = id and for W empty. Support-scalar node: rho is the slice comparison of the subterminal calculus followed by the inverse open unit; e = eps_c ∘ c_!(rho^-1); the counit triangle gives the support criterion; the scalar square is naturality plus compatibility of Res with the operations. These match item step 5 and the statement exactly. Item steps 1-3 check out against their sources: Y is Noetherian via 01T6; u_F matches the Kummer node letter by letter; theta is invertible by inflation plus derived-composition normalization with lambda = id; cover conservativity applies on the whole stratum S_J. FIX 1 (C5 duplicate): the new node lem-sfb-finite-frontier-strata-derived-detection only restates the existing, reviewed lem-weil-pbc-noetherian-stratum-detection. That node covers any finite stratification of a Noetherian scheme, any ring sheaf, arbitrary pro-etale covers, and unbounded D(Mod(R)). I dropped the new node. Item step 4 now proves inline that the S_J (J meeting A_i) stratify the Noetherian Z, passes to section-ring modules via def-weil-pbc-internal-abelian-sheaf-module-equivalence, and cites the existing node with identity covers. I declared that node as a tool use. FIX 2: item step 6 said 'Step 6 is the stated zero restriction' (copied from old step 9); it now says 'Step 4'. The fixed item proof is 2961 characters; proof_deps were recomputed. Accepted tool uses: derived-composition normalization, cover conservativity, noetherian-stratum-detection, internal-module equivalence.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.TransverseTameOpenShriekExchange",
@@ -384,5 +292,17 @@
   "group": "N7",
   "result": "pass",
   "note": "Read item, all 13 stmt_dep records, the module, the report, and the live SNC/tame/scalar-mate/exchange/adjunction/change-of-coefficients sources. Boundary = the IsStrictNormalCrossingsBoundary witness verbatim plus an arbitrary outer Finset; the witness is forced to be the irreducible components, so no extra hypothesis. Coefficients are all-continuous continuousMapRingObj; tameBoundaryScalarMap is the subtype inclusion; L_Ω is the ordinary extendScalars. Tameness is the landed IsStrictLocalKummerTameModule on (D, b≫j). exchange is the c_!⊣c^* adjunct of inv(c^*≅Lc^* ≫ moduleObjectDerivedExchange ≫ Ra_*(Lb^*≅b^* ≫ inv open unit)): canonical, with true named isIso helpers. ExchangeAt = IsIso ∧ IsZero on c.closedComplement (the whole inner union), for E and Ω. exchange_naturality is stated for all derived maps; exchange_scalar for any μ gives the node's square with scalarUnit; directScalarMap is canonical with a true isIso (K-limp, no flatness). Edge cases n=0, empty parts and rank 0 are covered. lean.statement is verbatim; added stmt_deps are landed defs and used; NL statement unchanged; no hollow defs; 6 named sorry theorems with docstrings. No compile (no file changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

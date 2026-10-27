@@ -1,0 +1,306 @@
+{
+ "id": "lem-sfb-geometric-constant-left-scalar-extension",
+ "kind": "statement",
+ "title": "Geometric inverse image and constant left-module scalar extension",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites, with sheaf values and all indexing categories in the universes of [def-weil-size-convention, def-weil-pbc-sites-and-cohomology]. Let $f:\\operatorname{Sh}(\\mathcal D)\\to\\operatorname{Sh}(\\mathcal C)$ be a geometric morphism, that is, an adjunction $L=f^{-1}\\dashv f_*$ whose left adjoint preserves finite limits. Let $a:R\\to S$ be a unital homomorphism of rings, not necessarily commutative. Use constant ring sheaves [def-weil-pbc-constant-sheaf] and the canonical constant left-module lifts $L_R,L_S$ of [lem-pe-constant-left-module-inverse-image]. Write $E_a^{\\mathcal C},E_a^{\\mathcal D}$ for sheafification of sectionwise left scalar extension, as in [def-pod-ring-scalar-extension]. Then there is a natural isomorphism of left $S$-module sheaves\n$$L_SE_a^{\\mathcal C}M\\xrightarrow{\\sim}E_a^{\\mathcal D}L_RM.$$\nIt sends the inverse image of every sheafified pure tensor $s\\otimes m$ to $s\\otimes L_Rm$, where inverse images of local sections mean their adjunction-unit images and constants are identified by the canonical constant-ring maps. For every left $R$-module $Q$, there is a natural isomorphism\n$$\\underline{S\\otimes_R Q}_{\\mathcal C}\\xrightarrow{\\sim}E_a^{\\mathcal C}\\underline Q_{\\mathcal C},$$\nsending a constant pure tensor $s\\otimes q$ to the sheafification-unit tensor of the constant sections $s,q$. These statements require neither flatness nor finiteness. Module sheaves use [def-weil-sheaf-of-modules-category].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CZ, lemma-adjointness-tensor-restrict, with its sectionwise adjunction and sheafification proof; agent-formulated geometric inverse-image and constant-module consequences for arbitrary left coefficients."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "lem-pe-constant-left-module-inverse-image",
+  "def-pod-ring-scalar-extension",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $U_a$ for scalar restriction. For any presheaf $P$ of left $R$-modules and sheaf $N$ of left $S$-modules, the scalar-extension universal property, object by object, gives\n$$\\operatorname{Hom}_{S,\\mathrm{PSh}}(S\\otimes_R P,N)\\cong\\operatorname{Hom}_{R,\\mathrm{PSh}}(P,U_aN).$$\nExplicitly $v$ goes to $m\\mapsto v(1\\otimes m)$ and $w$ goes to $s\\otimes m\\mapsto s w(m)$. The latter respects $s a(r)\\otimes m=s\\otimes rm$ since $w(rm)=a(r)w(m)$; restriction compatibility on one side is equivalent to restriction compatibility on the other by these formulas. Restricting scalars leaves a sheaf a sheaf, since it changes none of its underlying abelian groups or restriction maps. Sheafification's factorization property therefore gives\n$$\\operatorname{Hom}_S((S\\otimes_RP)^\\#,N)\\cong\\operatorname{Hom}_{R,\\mathrm{PSh}}(P,U_aN).$$\nFor a sheaf $P=M$ this is $E_a\\dashv U_a$; its unit $j_M$ is $m\\mapsto[1\\otimes m]$. Both bijections are natural, as precomposition replaces $m$ by its image and postcomposition replaces $w(m)$ by its image. This argument applies on either site.",
+   "uses": [
+    "def-pod-ring-scalar-extension",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, lemma-adjointness-tensor-restrict, proof via the presheaf adjunction; arbitrary-left-ring variant from def-pod-ring-scalar-extension"
+   }
+  },
+  {
+   "text": "Let $f_{*,R}$ and $f_{*,S}$ be the right adjoints in the normalized constant-module lifts, and $V$ forgetting scalars. The transport statement gives $Vf_{*,\\Lambda}=f_*V$ with forgotten unit the abelian unit $\\eta$, and $L_\\Lambda$ acts on $f^{-1}VM$ by $f^{-1}(\\lambda_r)$. Forgetting the triangle identity gives $f_*(V\\varepsilon_N)\\circ\\eta_{f_*N}=\\mathrm{id}$, so the forgotten module counit $V\\varepsilon_N$ is the abelian counit $\\varepsilon^{\\mathrm{ab}}_N$. Its $\\Lambda$-linearity reads $\\varepsilon^{\\mathrm{ab}}_N\\circ f^{-1}(\\lambda_r^{f_{*,\\Lambda}N})=\\lambda_r^N\\circ\\varepsilon^{\\mathrm{ab}}_N$; taking abelian adjuncts, $\\lambda_r^{f_{*,\\Lambda}N}=f_*(\\lambda_r^N)$ for every $r\\in\\Lambda$. Consequently\n$$U_a^{\\mathcal C} f_{*,S}\\cong f_{*,R}U_a^{\\mathcal D}$$\nby the identity on underlying abelian sheaves: for every $r\\in R$ the scalar endomorphism on both sides is $f_*(\\lambda_{a(r)})$, and addition, zero and negation are identical. The constant-ring maps commute with $a$ because both send a constant $r$ to $a(r)$; their equality follows by the universal property of the sheafification of the constant ring presheaf. Thus the identity is linear over the constant ring sheaf, natural in $N$, and preserves the underlying adjunction-unit identifications.",
+   "uses": [
+    "lem-pe-constant-left-module-transport",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, fixed-ring scalar-endomorphism construction and lifted adjunction"
+   }
+  },
+  {
+   "text": "For every $S$-module sheaf $N$ on $\\mathcal D$, combine step 1, the lifted module adjunctions, and step 2:\n$$\\begin{aligned}\n\\operatorname{Hom}_S(L_SE_a^{\\mathcal C}M,N)&\\cong\\operatorname{Hom}_S(E_a^{\\mathcal C}M,f_{*,S}N)\\\\\n&\\cong\\operatorname{Hom}_R(M,U_a^{\\mathcal C}f_{*,S}N)\\\\\n&\\cong\\operatorname{Hom}_R(M,f_{*,R}U_a^{\\mathcal D}N)\\\\\n&\\cong\\operatorname{Hom}_R(L_RM,U_a^{\\mathcal D}N)\\\\\n&\\cong\\operatorname{Hom}_S(E_a^{\\mathcal D}L_RM,N).\n\\end{aligned}$$\nAll bijections are natural in $M,N$. The cited co-Yoneda statement supplies an isomorphism $E_a^{\\mathcal D}L_RM\\to L_SE_a^{\\mathcal C}M$ representing this bijection. Take its inverse $c_M$ for the direction in the item. Naturality in $M$ follows by the uniqueness clause of the same statement, applied to the two composites for a morphism $M\\to M'$.",
+   "uses": [
+    "lem-pe-constant-left-module-transport",
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001P, lemma-yoneda, applied to the opposite category and the displayed composite adjunction bijection"
+   }
+  },
+  {
+   "text": "The normalized lift also gives the identity-underlying-sheaf comparison $U_a^{\\mathcal D}L_S\\cong L_RU_a^{\\mathcal C}$: both transport the scalar $r$ as $L(\\lambda_{a(r)})$. Following the five bijections of step 3 on the identity map gives the unit equation\n$$U_a^{\\mathcal D}(c_M)\\circ L_R(j_M)=j_{L_RM}.$$\nIndeed each scalar adjunction evaluates at $1\\otimes-$, each geometric adjunction takes the underlying adjunct, and step 2 is the identity there; the triangle identities cancel the intervening geometric unit and counit. Thus the inverse image of $[1\\otimes m]$ maps to $[1\\otimes L_Rm]$. As $c_M$ is $S$-linear and the lift carries the constant scalar $s$ to the same $s$, it maps the inverse image of $[s\\otimes m]=s[1\\otimes m]$ to $[s\\otimes L_Rm]$. This is an equality of the sheafification-unit and adjunction-unit morphisms, so it interprets local sections exactly as in the statement, without assuming a site functor or a pointwise formula for $f^{-1}$.",
+   "uses": [
+    "lem-pe-constant-left-module-transport",
+    "lem-pe-constant-left-module-inverse-image",
+    "def-pod-ring-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, lifted adjunction with underlying unit; scalar adjunction units of Tag 03CZ"
+   }
+  },
+  {
+   "text": "Apply the presheaf version of step 1 to the constant presheaf $P=Q$. For an $S$-module sheaf $N$ on $\\mathcal C$ there are natural bijections\n$$\\begin{aligned}\n\\operatorname{Hom}_S(E_a^{\\mathcal C}\\underline Q,N)&\\cong\\operatorname{Hom}_R(\\underline Q,U_aN)\\\\\n&\\cong\\operatorname{Hom}_{R,\\mathrm{PSh}}(Q_{\\mathrm{const}},U_aN)\\\\\n&\\cong\\operatorname{Hom}_{S,\\mathrm{PSh}}((S\\otimes_R Q)_{\\mathrm{const}},N)\\\\\n&\\cong\\operatorname{Hom}_S(\\underline{S\\otimes_R Q},N).\n\\end{aligned}$$\nThe second and fourth bijections are precisely the sheafification universal property defining the constant sheaves; sectionwise scalar extension of a constant presheaf is the displayed constant presheaf. Co-Yoneda gives an isomorphism $\\underline{S\\otimes_RQ}\\to E_a^{\\mathcal C}\\underline Q$, natural in $Q$ by uniqueness. This does not assume that the site has a terminal object.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "def-pod-ring-scalar-extension",
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, presheaf-to-sheaf adjunction proof; Tag 001P, co-Yoneda"
+   }
+  },
+  {
+   "text": "For the isomorphism of step 5, put $N=E_a^{\\mathcal C}\\underline Q$ and follow its identity through that chain. The result is the sheafified morphism of presheaves $s\\otimes q\\mapsto s\\,j_{\\underline Q}(q)$, where $q$ first enters the constant sheaf by its sheafification unit. This is exactly the required constant pure-tensor formula. All arguments used universal properties and the exact normalized lift, never exactness of scalar extension. In particular $S=0$, $Q=0$, the identity ring map, and nonflat quotients such as $\\mathbf Z\\to\\mathbf Z/2$ obey the same formulas; arbitrary noncommutative rings obey the same left-balancing identity from step 1.",
+   "uses": [
+    "def-pod-ring-scalar-extension",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, unit and balanced-tensor formulas"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-ring-scalar-extension",
+  "def-weil-pbc-sheafification",
+  "lem-pe-constant-left-module-transport",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+  "lem-pe-constant-left-module-inverse-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CZ, lemma-adjointness-tensor-restrict, extended via Stacks sites.tex Tag 00YV and categories.tex Tag 001P to geometric constant-left-module lifts",
+  "agent": "NU",
+  "date": "2026-10-22"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary noncommutative rings inverse image of sheaves of left modules commutes with sheafified extension of scalars and constant modules",
+   "results": "{\"t\": \"2026-10-22T07:38:06Z\", \"tool\": \"leanfinder\", \"query\": \"For arbitrary noncommutative rings inverse image of sheaves of left modules commutes with sheafified extension of scalars and constant modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.Sheafify.map_smul_eq\", \"PresheafOfModules.toPresheaf_map_toSheafify\"], \"digest\": \"129c14f9774d90d6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected sheafification adjunctions, free-module pullback, scalar restriction and commutative module scalar adjunctions; none states this normalized finite-splitting theorem or the full noncommutative geometric scalar comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extendScalars\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T07:38:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"extendScalars\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected sheafification adjunctions, free-module pullback, scalar restriction and commutative module scalar adjunctions; none states this normalized finite-splitting theorem or the full noncommutative geometric scalar comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|extensionOfScalars|changeOfRings",
+   "results": "{\"t\": \"2026-10-22T07:38:06Z\", \"tool\": \"grep\", \"query\": \"extendScalars|extensionOfScalars|changeOfRings\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Localization.lean\"], \"digest\": \"6b7c8013557be436\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected sheafification adjunctions, free-module pullback, scalar restriction and commutative module scalar adjunctions; none states this normalized finite-splitting theorem or the full noncommutative geometric scalar comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of coefficient rings commutes with left exact inverse image between sheaf topoi for left modules over noncommutative rings",
+   "results": "{\"t\": \"2026-10-22T07:39:28Z\", \"tool\": \"leanfinder\", \"query\": \"Change of coefficient rings commutes with left exact inverse image between sheaf topoi for left modules over noncommutative rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.restrictScalars\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\"], \"digest\": \"229e94c7c4e81567\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected sheafification adjunctions, free-module pullback, scalar restriction and commutative module scalar adjunctions; none states this normalized finite-splitting theorem or the full noncommutative geometric scalar comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves of left modules commutes with extension of scalars along arbitrary ring homomorphism",
+   "results": "{\"t\": \"2026-10-22T07:39:29Z\", \"tool\": \"leansearch\", \"query\": \"Inverse image of sheaves of left modules commutes with extension of scalars along arbitrary ring homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.pullback\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply\", \"SheafOfModules.restrictScalars\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullback\", \"ModuleCat.extendRestrictScalarsAdj\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"06d69e4ce1711ab8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected sheafification adjunctions, free-module pullback, scalar restriction and commutative module scalar adjunctions; none states this normalized finite-splitting theorem or the full noncommutative geometric scalar comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(pullback|inverseImage).*(extend|scalar)|(extend|scalar).*(pullback|inverseImage)",
+   "results": "{\"t\": \"2026-10-22T07:39:29Z\", \"tool\": \"grep\", \"query\": \"(pullback|inverseImage).*(extend|scalar)|(extend|scalar).*(pullback|inverseImage)\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected sheafification adjunctions, free-module pullback, scalar restriction and commutative module scalar adjunctions; none states this normalized finite-splitting theorem or the full noncommutative geometric scalar comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|ringExtendScalars|leftAdjointUniq",
+   "results": "{\"t\": \"2026-10-22T12:04:22Z\", \"tool\": \"grep\", \"query\": \"extendScalars|ringExtendScalars|leftAdjointUniq\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/LeftExact.lean\", \"Mathlib/CategoryTheory/Sites/LeftExact.lean\"], \"digest\": \"dc5efe918721a4d8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; they give sheaf pullback, free-module pullback, or commutative scalar extension, not both normalized comparisons for arbitrary rings and an arbitrary geometric morphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with geometric inverse image of sheaves of modules and constant sheaves",
+   "results": "{\"t\": \"2026-10-22T12:04:23Z\", \"tool\": \"leansearch\", \"query\": \"Extension of scalars commutes with geometric inverse image of sheaves of modules and constant sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.obj'\", \"ModuleCat.extendScalars\", \"ModuleCat.instIsLeftAdjointExtendScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply\", \"PresheafOfModules.pullback\", \"AlgHom.extendScalars\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"LinearEquiv.extendScalarsOfSurjective_symm\"], \"digest\": \"ceb8921ca8e62547\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; they give sheaf pullback, free-module pullback, or commutative scalar extension, not both normalized comparisons for arbitrary rings and an arbitrary geometric morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"adjunction\"",
+   "results": "{\"t\": \"2026-10-22T12:04:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Loogle is currently under load, please try again later.\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: Loogle reported that it was under load"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of left modules over arbitrary rings commutes with extension of scalars and constant sheaves",
+   "results": "{\"t\": \"2026-10-22T12:04:32Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse image of sheaves of left modules over arbitrary rings commutes with extension of scalars and constant sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.unitHomEquiv_symm_comp\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.toSheafCompSheafToPresheafIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.ιFree_mapFree_inv\"], \"digest\": \"8904fb2a6f3f8945\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; they give sheaf pullback, free-module pullback, or commutative scalar extension, not both normalized comparisons for arbitrary rings and an arbitrary geometric morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "variable|CommRing|def extendRestrictScalarsAdj|def adjunction",
+   "results": "{\"t\": \"2026-10-22T12:04:59Z\", \"tool\": \"grep\", \"query\": \"variable|CommRing|def extendRestrictScalarsAdj|def adjunction\", \"sub\": \"Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"61\", \"62\", \"141\", \"195\", \"205\"], \"digest\": \"389c5c66b9ddaf74\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; they give sheaf pullback, free-module pullback, or commutative scalar extension, not both normalized comparisons for arbitrary rings and an arbitrary geometric morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf.composeAndSheafify\"",
+   "results": "{\"t\": \"2026-10-22T12:05:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf.composeAndSheafify\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.composeAndSheafify\"], \"digest\": \"97346ab0a3cb9250\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; they give sheaf pullback, free-module pullback, or commutative scalar extension, not both normalized comparisons for arbitrary rings and an arbitrary geometric morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left exact left adjoint between sheaf topoi commutes with change of noncommutative constant coefficient ring by uniqueness of left adjoints",
+   "results": "{\"t\": \"2026-10-22T12:05:10Z\", \"tool\": \"leanfinder\", \"query\": \"A left exact left adjoint between sheaf topoi commutes with change of noncommutative constant coefficient ring by uniqueness of left adjoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.pullbackIso\", \"CondensedMod.LocallyConstant.adjunction\"], \"digest\": \"787a6d0c9ac1eeaa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; they give sheaf pullback, free-module pullback, or commutative scalar extension, not both normalized comparisons for arbitrary rings and an arbitrary geometric morphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normalized-finite-splitting-operations",
+  "date": "2026-10-22",
+  "group": "Q45"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the tame-boundary Kummer calculation, specifically the equivariant lisse extension input. Finite tame sheaves over a universal residual SNC neighborhood; returned finite-fibre proof steps 11, 12: Operations and pointed refinements of normalized finite splittings; scalar-extension calculation before normalizing on the chosen fibre",
+   "via": [
+    "lem-sfb-normalized-finite-splitting-operations",
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-geometric-constant-left-scalar-extension",
+  "worker": "stage1",
+  "summary": "Constructed the two normalized comparisons from sectionwise scalar and sheafification universal properties, scalar-endomorphism transport, and co-Yoneda. Checked arbitrary noncommutative rings, no terminal-object assumption and pure-tensor unit formulas. No new nodes.",
+  "blueprint": "Inherited origin: paragraph (3), tame-boundary calculation, scalar extension before normalization on the chosen fibre. The current ancestor tool returns None; retained the existing from.node and complete via chain. Steps 1--4 justify geometric scalar comparison and steps 5--6 constant-module scalar comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-transport",
+    "why": "Generic fixed-ring module lift and adjunction, needed to compare right adjoints for an arbitrary geometric morphism; the finite-splitting unit supplies no replacement."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic canonical normalized constant-module inverse image and its underlying-unit comparison, already named in the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-constant-left-module-transport",
+  "lem-pe-constant-left-module-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NU-f9f32d76f",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-f9f32d76f (reviewer sub-agent of L); spot-checked: Read the whole item, all six steps and every cited statement. The cited statements include the Lean fields of ConstantLeftModuleInverseImageLift (ConstantLeftModuleTransport.lean l.134-220), and the source Stacks 03CZ (sites-modules.tex l.932-961). The statement is unchanged from live, where the item is still unsplit. There are no new nodes, no SGA citation and no repair note. Step 1: the sectionwise adjunction is correct for noncommutative R->S, and I checked the balancing order. Step 3: I checked the co-Yoneda direction (theta: E L_R M -> L_S E M; c_M is its inverse) and naturality from the uniqueness clause. Step 4: I traced Phi(id) myself and got the unit equation U(c)∘L_R(j_M)=j_{L_R M}, which gives the pure-tensor formula through naturality of eta. Steps 5-6: the constant-sheaf Hom chain is correct, with no terminal object needed. Edge cases checked: S=0, Q=0, a=id, the nonflat map Z->Z/2, and noncommutative rings. Duplicate search: lem-sfb-kflat-scalar-comparison-normalization, lem-sfb-constant-scalar-geometric-adjunctions and lem-weil-pbc-geometric-module-transport are commutative or different comparisons, so none duplicates this item. Fault (C3/C4): step 2 says the transport statement builds the direct-image scalar action as f_*(lambda_r), but neither that statement nor the Lean fields say so. FIX: step 2 now derives it from the transport statement's clauses. The forgotten unit is the abelian unit, the triangle identity then makes the forgotten counit the abelian counit, and Lambda-linearity of the counit gives lambda_r^{f_*N}=f_*(lambda_r^N) by taking adjuncts. I accept both tool uses (the generic constant-left-module transport and inverse-image nodes). Maintainer note: blueprint.from.node is null, inherited from the source item (Q45).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GeometricConstantLeftScalarExtension",
+  "declaration": "CategoryTheory.geometric_constant_left_scalar_extension",
+  "declarations": [
+   "CategoryTheory.ConstantLeftScalarExtension.presheafModules",
+   "CategoryTheory.ConstantLeftScalarExtension.sections",
+   "CategoryTheory.ConstantLeftScalarExtension.sheafification",
+   "CategoryTheory.ConstantLeftScalarExtension.constant",
+   "CategoryTheory.ConstantLeftScalarExtension.tensorPresheaf",
+   "CategoryTheory.ConstantLeftScalarExtension.extension",
+   "CategoryTheory.ConstantLeftScalarExtension.tensorSection",
+   "CategoryTheory.ConstantLeftScalarExtension.constantSection",
+   "CategoryTheory.geometric_constant_left_scalar_extension",
+   "CategoryTheory.constant_left_scalar_extension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/GeometricConstantLeftScalarExtension.lean",
+  "statement": "theorem geometric_constant_left_scalar_extension {C D : Type u} [SmallCategory C] [SmallCategory D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) {R S : Type u} [Ring R] [Ring S] (a : R →+* S) [HasWeakSheafify J RingCat.{u}] [HasWeakSheafify K RingCat.{u}] (L : Sheaf J (Type u) ⥤ Sheaf K (Type u)) (G : Sheaf K (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ G) (hL : PreservesFiniteLimits L) (dR : ConstantLeftModuleInverseImageData.{u, w} J K R L G adj hL) (dS : ConstantLeftModuleInverseImageData.{u, w} J K S L G adj hL) : ∃ c : extension J a ⋙ dS.moduleFunctor ≅ dR.moduleFunctor ⋙ extension K a, ∀ (M : Modules J R) (s : S), ∃ (t : (W J R).obj M ⟶ (W J S).obj ((extension J a).obj M)) (t' : (W K R).obj (dR.moduleFunctor.obj M) ⟶ (W K S).obj ((extension K a).obj (dR.moduleFunctor.obj M))), (∀ (T : Cᵒᵖ) (m : M.val.obj T), t.hom.app T m = tensorSection J a M T s m) ∧ (∀ (T : Dᵒᵖ) (m : (dR.moduleFunctor.obj M).val.obj T), t'.hom.app T m = tensorSection K a (dR.moduleFunctor.obj M) T s m) ∧ L.map t ≫ dS.moduleSetIso.inv.app ((extension J a).obj M) ≫ (W K S).map (c.hom.app M) = dR.moduleSetIso.inv.app M ≫ t'",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ee672b95",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery of returned head d37d67844cf8 applies the return's option (a) exactly. The def-pod-ring-scalar-extension record is byte-identical to live (H13 resolved); the only node change is the item's new lean record. All 8 constant-ring helpers moved into the item module with source and blueprint docstrings and are listed in lean.declarations; no name clash in live. Not an H4 copy: they specialise ModuleCat.ringExtendScalars to Modules J R (SheafOfModules over the sheafified constant ring) required by ConstantLeftModuleInverseImageData. Both theorems are byte-identical to the head already judged correct; I re-checked the moduleSetIso.inv typing of the pure-tensor equation, both directions, noncommutative rings and universes u/w, and found no extra assumptions. Only the two theorem proofs are sorry; lean.statement is verbatim in the file. No compile: no files changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261025T070838-L-4122569",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.constant_left_scalar_extension",
+   "CategoryTheory.geometric_constant_left_scalar_extension"
+  ],
+  "sorry_after": []
+ }
+}

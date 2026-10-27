@@ -1,0 +1,117 @@
+{
+ "id": "lem-trf-rational-scalar-single-step-normalization",
+ "kind": "statement",
+ "title": "One-step rational scalar unit and tower laws",
+ "statement": "Fix l, finite coefficient fields E,M,L with algebra maps E→M→L, a comparison system C satisfying realization coherence, a scheme Y on which l is invertible and an endomorphism g. The actual rational pullback scalar family satisfies RationalPowerNormalization at iteration length one as defined by [def-trf-iterated-return-transport-data]. This is only the one-step identity and tower equations, without any assertion about longer iteration or point transport.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Last sentence, Frobenius transport: returned local normalization proof, Steps 2, 8, 9."
+ },
+ "stmt_deps": [
+  "def-trf-iterated-return-transport-data",
+  "def-sf-integral-comparison-system-data"
+ ],
+ "proof": [
+  {
+   "text": "Start with the integral scalar identity and tower clauses of the realization-coherence hypothesis. Apply the additive rationalization functor. Expand the rational scalar component, which is the rationalized integral component conjugated by the recorded pullback and scalar object-identification isomorphisms. The identity and tower comparisons are defined by the multiplication unit and normalized tensor associator. Their object-identification conjugations cancel in pairs. Functoriality of rationalization reduces the equations to the integral identity and tower clauses. This proves the two clauses at length one. At the zero object these are identity maps; for identity coefficients they give the multiplication unit, and for a repeated coefficient field they reduce to the same unit.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-weil-scalar-extension-composition",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Last sentence, Frobenius transport: returned local normalization proof, Steps 2, 8, 9. Explicit specialization and Lean induction by H3, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Frobenius.*(scalar|transport)|return.*pullback",
+   "results": "{\"hits\": 0, \"top\": []}",
+   "date": "2026-10-25",
+   "verdict": "No match: generic category or scalar lemmas do not state these normalized pro-etale comparisons. Blueprint searches for return scalar, point scalar and rational scalar found no identical imported blueprint node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Point Frobenius transport scalar compatibility and the unit and associator laws for rationalized pullback",
+   "results": "{\"hits\": 8, \"top\": [\"VectorField.mpullback_smul_apply\", \"VectorField.mpullback_smul\", \"LinearMap.frobenius\", \"CategoryTheory.Monad.transport\", \"VectorField.mpullbackWithin_smul\", \"VectorField.mpullbackWithin_smul_apply\", \"CategoryTheory.Functor.map_units_smul\", \"CategoryTheory.Functor.Monoidal.coreMonoidalTransport\"]}",
+   "date": "2026-10-25",
+   "verdict": "No match: generic category or scalar lemmas do not state these normalized pro-etale comparisons. Blueprint searches for return scalar, point scalar and rational scalar found no identical imported blueprint node."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "{\"hits\": 9, \"top\": [\"CategoryTheory.NatTrans.naturality\", \"CategoryTheory.Limits.PullbackCone.isoMk\", \"CategoryTheory.Limits.PushoutCocone.isoMk\", \"CategoryTheory.Limits.PullbackCone.isoMk_hom_hom\", \"CategoryTheory.Limits.PullbackCone.isoMk_inv_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom\", \"CategoryTheory.Grothendieck.map_map\"]}",
+   "date": "2026-10-25",
+   "verdict": "No match: generic category or scalar lemmas do not state these normalized pro-etale comparisons. Blueprint searches for return scalar, point scalar and rational scalar found no identical imported blueprint node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IteratedReturnTransportScalarCalculus",
+  "date": "2026-10-25",
+  "group": "H3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Final sentence, local transport normalization, One-step rational scalar unit and tower laws",
+   "via": [
+    "lem-trf-iterated-return-transport-scalar-calculus",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalScalarSingleStepNormalization",
+  "file": "lean/Sheaf/Paper/RationalScalarSingleStepNormalization.lean",
+  "declaration": "WeilConjectures.rationalScalarSingleStepNormalization",
+  "statement": "theorem rationalScalarSingleStepNormalization\n    (hC : IntegralComparisonRealizationCoherence l E M ι C)\n    (Y : Scheme.{u}) [∀ y : Y, Invertible (l : Y.residueField y)] (g : Y ⟶ Y) :\n    RationalPowerNormalization l E C M ι L j Y g 1",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "Sheaf.Paper.IteratedReturnTransportScalarCalculus",
+  "worker": "H3",
+  "summary": "Strict subargument of the assigned six-step scalar-calculus proof, or ownership of its unchanged definitions.",
+  "blueprint": "Final sentence, local transport normalization, One-step rational scalar unit and tower laws"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-70682",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261025T163644-L-752613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-70682",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261025T163644-L-752613",
+  "kind": "interface",
+  "note": "independent cc review: Moved data module vs old item block (verbatim except finiteComposition ascription, isDefEq true); item theorem proof vs node proof steps; three lower sorry statements vs item clauses (return scalar squares, r=0 point square + PointScalarNormalization, one-step rational unit/tower); importer RationalReturnBlockPower compiled against delivered modules (exit 0); #print axioms item = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

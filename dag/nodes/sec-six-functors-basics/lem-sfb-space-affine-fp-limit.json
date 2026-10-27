@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-space-affine-fp-limit",
+ "kind": "statement",
+ "title": "Affine space morphisms are limits of affine finite-presentation morphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A space is quasi-compact if it admits a surjective etale atlas from a quasi-compact scheme, and quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. A morphism is quasi-compact if its pullback along every affine scheme test has quasi-compact source, and quasi-separated if its relative diagonal is quasi-compact. An affine morphism is representable by schemes and has affine scheme source after every affine scheme test. Local finite type and local finite presentation are tested on compatible etale scheme charts [def-weil-finite-type-morphism, def-sbc-locally-finite-presentation]. Finite presentation means quasi-compact, quasi-separated and locally of finite presentation. Let $p:Z\\to B$ be affine and assume $B$ quasi-compact and quasi-separated. There exist a small nonempty directed set $I$, an inverse system $(Z_i)_{i\\in I}$ over $B$ with affine transition morphisms, and compatible $B$-maps $Z\\to Z_i$, such that each $Z_i\\to B$ is affine and of finite presentation and $Z\\cong\\varprojlim_i Z_i$ as an fppf sheaf over $B$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0870 (lemma-affine-morphism-is-limit)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-quasi-compact-presheaf-map",
+  "def-sfb-space-affine-quasifinite-properties",
+  "def-sfb-stack-qcqs-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=p_*\\mathcal O_Z$. The relative-Spec correspondence gives a quasi-coherent algebra $\\mathcal A$ and $Z\\cong\\operatorname{Spec}_B(\\mathcal A)$ over $B$. Apply [lem-sfb-space-algebra-fp-directed-colimit] using precisely the assumed quasi-compactness and quasi-separatedness of $B$. Obtain a small nonempty directed system $(\\mathcal A_i)$ of finitely presented algebras with colimit $\\mathcal A$.",
+   "uses": [
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-sfb-space-algebra-fp-directed-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0870 (lemma-affine-morphism-is-limit)"
+   }
+  },
+  {
+   "text": "Set $Z_i=\\operatorname{Spec}_B(\\mathcal A_i)$. Contravariance of the correspondence supplies the transition maps and the compatible maps $Z\\to Z_i$, with their identity and composition laws. Its finite-presentation clause makes every $Z_i\\to B$ affine and of finite presentation. The transitions are affine: over an affine etale chart $U\\to B$, each transition is a map between the affine schemes $\\operatorname{Spec}(\\mathcal A_j(U))$ and $\\operatorname{Spec}(\\mathcal A_i(U))$, hence affine by [lem-weil-pbc-morphism-affine-schemes-affine]. Such charts exist by [lem-a1-space-affine-etale-cover]; their pullbacks cover $Z_i$ by [lem-trf-space-fibre-products-etale-covers]. Affineness therefore descends by [lem-sfb-space-affine-locality].",
+   "uses": [
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-a1-space-affine-etale-cover",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-affine-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0870 (lemma-affine-morphism-is-limit)"
+   }
+  },
+  {
+   "text": "On each affine etale chart $U=\\operatorname{Spec}R\\to B$, [lem-sfb-space-qcoh-affine-chart-calculus] identifies the given algebra colimit with $\\mathcal A(U)=\\varinjlim_i\\mathcal A_i(U)$. The relative-Spec chart formulas identify the pulled-back cone with $\\operatorname{Spec}(\\mathcal A(U))\\to\\operatorname{Spec}(\\mathcal A_i(U))$. By the affine case of [lem-weil-pbc-limit-affine-transition] this is a limit of schemes, hence also of their represented fppf sheaves: evaluation on a test scheme is exactly the scheme-limit universal property. Sheaf limits and their base changes are computed on sections, so this identifies the comparison $Z\\to\\varprojlim_i Z_i$ after each chart. These charts cover $B$; after pulling them back to any test scheme, their local inverse maps agree on overlaps by uniqueness and glue by the sheaf axiom. Thus the comparison is an isomorphism over $B$.",
+   "uses": [
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-a1-space-affine-etale-cover",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0870 (lemma-affine-morphism-is-limit)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-relative-spec-correspondence",
+  "lem-sfb-space-algebra-fp-directed-colimit",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0870 (lemma-affine-morphism-is-limit)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine morphism of algebraic spaces over a quasi compact quasi separated base is a directed inverse limit of affine morphisms of finite presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f],\\n  ((((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n                (AlgebraicGeometry.Scheme.Hom.normalizationDiagram f)).rightOp.comp\\n          AlgebraicGe\", \"doc\": \"The composition of the opposite of the affine Zariski site inclusion functor for a scheme $ Y $, the normalization diagram of a morphism $ f $, the right opposite functor, the contravariant Spec funct\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every affine algebraic space over a qcqs target is an inverse limit of finitely presented affine spaces over that target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.hasLimits\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"CategoryTheory.Limits.HasLimits AlgebraicGeometry.AffineScheme\", \"doc\": \"The category of affine schemes has all limits, meaning that for every diagram in this category, the limit exists within it.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineHom\", \"IsLimit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|affine.*limit.*presentation|presentation.*limit.*affine",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine morphisms of algebraic spaces are inverse limits of affine finitely presented morphisms over a qcqs base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).obj U)) →\\n    AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If for every affine open subset $ U $ of $ Y $, the preimage $ f^{-1}(U) $ under $ f $ is affine, then $ f $ is an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate on morphisms of schemes, asserting that a given morphism from scheme $ X $ to scheme $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ is affine, then any base change (pullback) of $ f $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"{I : Type*} [Category* I] {D : I ⥤ Scheme.{u}} (c : Cone D) (hc : IsLimit c) [∀ i, IsAffine (D.obj i)] : IsAffine c.pt\", \"doc\": \"If $\\\\{X_i\\\\}_{i \\\\in I}$ is a diagram of affine schemes indexed by a category $I$, and $c$ is a limit cone over this diagram in the category of schemes, then the apex of the cone $c$ is also an affine s\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (s : Γ(c.pt, ⊤)) [∀ i, CompactSpace (D.obj i)]\\n  [∀ i, QuasiSeparatedSpace (D.obj i)] : ∃ (i : I) (t : Γ(D.obj i, ⊤)), s = (c.π.app i).appTop t\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsAffineHom f ↔\\n    ∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is affine if and only if for every affine open subset $ U \\\\subseteq Y $, the preimage $ f^{-1}(U) $ is an affine open subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ (i : I), CompactSpace (D.obj i)]\\n  [∀ (i : I), QuasiSeparatedSpace (D.obj i)] [IsAffine c.pt] : ∃ i, IsAffine (D.obj i)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|affine.*limit.*presentation|presentation.*limit.*affine",
+   "results": "{\"t\": \"2026-10-23T19:28:26Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|affine.*limit.*presentation|presentation.*limit.*affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern module presentations, scheme limits or general colimits, not approximation of quasi-coherent algebra sheaves on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every affine algebraic space over a quasi compact quasi separated target is an inverse limit of finitely presented affine spaces",
+   "results": "{\"t\": \"2026-10-23T19:28:26Z\", \"tool\": \"leansearch\", \"query\": \"Every affine algebraic space over a quasi compact quasi separated target is an inverse limit of finitely presented affine spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.hasLimits\", \"AlgebraicGeometry.Scheme.isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"AlgebraicGeometry.AffineScheme.hasColimits\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.Scheme.compactSpace_of_isLimit\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\"], \"digest\": \"53cd72a3930786a1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern module presentations, scheme limits or general colimits, not approximation of quasi-coherent algebra sheaves on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineHom\", \"IsLimit\"",
+   "results": "{\"t\": \"2026-10-23T19:28:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAffineHom\\\", \\\"IsLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern module presentations, scheme limits or general colimits, not approximation of quasi-coherent algebra sheaves on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine morphism of algebraic spaces over a qcqs base is a directed inverse limit of affine morphisms of finite presentation",
+   "results": "{\"t\": \"2026-10-23T19:28:30Z\", \"tool\": \"leanfinder\", \"query\": \"An affine morphism of algebraic spaces over a qcqs base is a directed inverse limit of affine morphisms of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.HasAffineProperty\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\"], \"digest\": \"e7c2329faf584555\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern module presentations, scheme limits or general colimits, not approximation of quasi-coherent algebra sheaves on algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-quasiaffine-fp-envelope",
+  "date": "2026-10-23",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0A0X: replace the proper family over an affine open by a proper finite-presentation inverse system. Supporting input to 0A0X: Tag 0A0W (lemma-proper-limit-of-proper-finite-presentation), specialized to a scheme base; 0A0W proof, first sentence: choose a separated finite-presentation closed envelope; 0873 proof, first sentence: the finite-presentation envelope before enforcing separatedness; supporting input: 0872 proof: apply the quasi-affine envelope lemma to the chosen finite-stage map; 0871 proof, second sentence: approximate the affine envelope over the fixed qcqs target",
+   "via": [
+    "lem-sfb-space-quasiaffine-fp-envelope",
+    "lem-sfb-space-finite-type-fp-envelope",
+    "lem-sfb-space-separated-finite-type-fp-envelope",
+    "lem-sfb-proper-space-fixed-base-fp-limit",
+    "lem-sfb-space-proper-noetherian-approximation",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-affine-fp-limit",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0870 through the existing relative-Spec correspondence. Created only the strictly smaller algebra-approximation lemma 082A, and wrote out affine transitions and the fppf sheaf limit identification on affine etale charts. Statement unchanged; no Lean writing or compilation.",
+  "blueprint": "Realizes the inherited 0871 affine-envelope approximation prerequisite of det-thm-sf-ctf-stability-direct-images (3), through Stacks 0870 and 082A.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Scheme chart tool proving that transitions between relative affine spectra are affine."
+   },
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic atlas existence used to test affineness and the sheaf-limit comparison."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic base-change stability of atlas covers, used in chart comparisons."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic scheme affine-limit calculation used on affine etale charts; this does not replace the algebra approximation route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-7dad39945",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-7dad39945 (reviewer sub-agent of L); spot-checked: I read Stacks 0870 and 082A in spaces-limits.tex, statements and full proofs. The item statement matches 0870 (Z→B affine, B qcqs) and is unchanged. Its added clauses (affine transitions, compatible B-maps, limit as an fppf sheaf) are what 0870's directed limit means, and the proof supplies them. Step 1: by its statement, the relative-spec correspondence gives p_*O_Z in QCAlg(B) and Z ≅ Spec_B, and the new 082A node then applies with exactly the qcqs hypotheses on B. Step 2: contravariance of the correspondence gives the maps and their laws, and its fp-iff clause uses the same chart-wise R[T]/(f) definition, so each Z_i→B is affine and of finite presentation. Transitions are affine: pulled back to the disjoint-union atlas they are disjoint unions of affine-scheme maps (01SH), and lem-sfb-space-affine-locality's iff clause then applies. The step is slightly compressed (one chart vs a disjoint union) but the gap is elementary. Step 3: the qcoh chart calculus computes the filtered algebra colimit on charts; the chart formula and 01YW give Spec(colim) as a limit of schemes, hence of representable sheaves; the comparison is an isomorphism on each chart and glues by uniqueness and the sheaf axiom over the pulled-back fppf cover. The new node lem-sfb-space-algebra-fp-directed-colimit is statement-only and self-contained, with source Tag 082A, adequate stmt_deps and four kinds of recorded searches. It is true (Stacks 082A); I tested empty X, an already finitely presented algebra, and a polynomial algebra in infinitely many variables. It is not a duplicate: a 082A grep over the DAG finds only the integral 082C node, which needs integrality and only inlines the same construction, and the module-level and finite-type nodes. It is a genuine lemma, strictly smaller than the item, not a restated clause. The declared tool uses (01SH Mathlib leaf, the a1 affine-atlas cover, trf fibre products, the pbc 01YW/01YX scheme limit) are generic and accepted. Batch-5 check: every flagged citation reaches only def-trf-algebraic-space or def-trf-space-quasi-coherent-module (general definitions), or the foundational 02X2 fibre-product lemma. None is part of the trace formula or Poincaré duality, so no assumption-leaf replacement is needed. No SGA is cited, and no fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffineFinitePresentationLimit",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_affine_finitePresentation_limit",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffineFinitePresentationLimit.lean",
+  "statement": "theorem exists_affine_finitePresentation_limit {S : Scheme.{u}} {Z B : AlgebraicSpace S} (p : Z ⟶ B) (hp : MapIsAffine p) (hqc : IsQuasiCompact B.obj) (hqs : IsAbsolutelyQuasiSeparated B) : ∃ (I : Type u) (_ : Preorder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·)) (D : Iᵒᵖ ⥤ Over B) (π : (Functor.const Iᵒᵖ).obj (Over.mk p) ⟶ D), (∀ i : Iᵒᵖ, MapIsAffine (D.obj i).hom ∧ IsQuasiCompactPresheafMap (D.obj i).hom.hom.hom ∧ IsQuasiCompactPresheafMap (pullback.diagonal (D.obj i).hom.hom.hom) ∧ MapIsLocallyOfFinitePresentation (D.obj i).hom) ∧ (∀ (i j : Iᵒᵖ) (f : i ⟶ j), MapIsAffine (D.map f).left) ∧ Nonempty (IsLimit ((Over.post (ObjectProperty.ι (IsAlgebraicSpace (S := S)))).mapCone (Cone.mk (Over.mk p) π)))",
+  "branch": "sheaf-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0827ab079",
+  "group": "N7",
+  "result": "pass",
+  "note": "Read Stacks 0870, the node, all 11 stmt_dep records, the module and the report, and the side-live owner definitions (MapIsAffine, IsQuasiCompact, IsAbsolutelyQuasiSeparated, IsQuasiCompactPresheafMap, MapIsLocallyOfFinitePresentation). Every hypothesis and conclusion clause matches. Stages: affine + qc + qc diagonal + lfp. Transitions are affine. The limit is IsLimit in fppf sheaves over B via Over.post ι, the canonical form. I : Type u, Nonempty, directed. Node diff vs live: only lean and 5 added definition stmt_deps; the previous H2/H4 return findings are repaired. lean.statement is verbatim in the file. No shared fp predicate exists for space maps, and the sibling envelope theorem uses the same encoding. Edge cases (empty spaces, singleton system, arbitrary S) are fine. Sorry-only proof, docstrings carry the source place and blueprint tag, the report sections are present. No file changed, no compile."
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "id": "lem-pur-identified-ring-pullback-finite-limits",
+ "kind": "statement",
+ "title": "Identified ring pullback finite limits",
+ "statement": "Let U:C→D preserve finite limits and coverings and let a:R→U_*S have invertible adjunct for a ring inverse-image adjunction. The specified module pullback F has unit-compatible presentations identifying S with the set inverse image of R and identifying its underlying abelian and set sheaves with the respective inverse images. Consequently F preserves finite limits. Coefficients lie in any universe containing the site object and morphism universes.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-signed-line-derived-action-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D3, 03EL and 0FNY; for derived localization use derived.tex Tags 06YU, 07A4 and 015F. Specialization of the Powers and duals paragraph of the current blueprint."
+ },
+ "proof": [
+  {
+   "text": "Obtain ring and abelian sheafification in the coefficient universe by equivalence with the small model. The site functor is representably flat because it preserves finite limits; hence the constructed ring, set and abelian inverse images preserve finite limits. Uniqueness of ring left adjoints identifies the ring inverse image with rInv. Its invertible adjunct of a gives the ring unit presentation.",
+   "uses": [
+    "lem-pur-signed-line-sheaf-pullback-forget"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply inverseImage_underlying_of_ring_presentation, then forget to sets and use the comparison with set inverse image. The underlying abelian inverse image preserves finite limits, and module forgetting reflects them, so the specified module pullback preserves finite limits.",
+   "uses": [
+    "lem-pur-signed-line-module-inverse-image-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-signed-line-sheaf-pullback-forget",
+  "lem-pur-signed-line-module-inverse-image-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Powers and duals, including unit, positive tensor recursion, evaluation, and unbounded derived action. The component proof is given below and in the attached Lean module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of pullback invertible module sheaves extends to all signed tensor powers and derived tensor products",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory",
+   "results": "0 hits; loogle: unknown identifier 'Functor.mapDerivedCategory'",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "signed_line_derived_base_change|SignedLinePullbackNormalized",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SignedLineDerivedBaseChange",
+  "date": "2026-10-24",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-signed-line-derived-base-change",
+   "place": "The corresponding strict component of its proof.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SignedLinePullbackFiniteLimits",
+  "file": "lean/Sheaf/Algebra/Homology/SignedLinePullbackFiniteLimits.lean",
+  "declaration": "SheafOfModules.SignedLineDerivedBaseChange.identified_ring_pullback_presentations",
+  "declarations": [
+   "SheafOfModules.SignedLineDerivedBaseChange.identified_ring_pullback_presentations",
+   "SheafOfModules.SignedLineDerivedBaseChange.identified_ring_pullback_finiteLimits"
+  ],
+  "statement": "theorem identified_ring_pullback_presentations\n    [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]\n    (_hcover : CoverPreserving J K U)\n    (rInv : Sheaf J RingCat.{max u v w} ⥤ Sheaf K RingCat.{max u v w})\n    (rAdj : rInv ⊣ U.sheafPushforwardContinuous RingCat J K)\n    (_ha : IsIso ((rAdj.homEquiv _ _).symm a)) :\n    ∃ pr : CategoryTheory.SignedLinePullbackConstruction.SheafPullbackUnitPresentation\n      (F := U) ((sheafCompose J (CategoryTheory.forget CommRingCat)).obj R)\n        ((sheafCompose K (CategoryTheory.forget CommRingCat)).obj S),\n      pr.unit = (sheafCompose J (CategoryTheory.forget RingCat)).map a ∧\n      ∃ e : pull a ⋙ toSheaf ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S) ≅\n        toSheaf ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) ⋙\n          Functor.sheafPullbackConstruction.sheafPullback U AddCommGrpCat.{max u v w} J K,\n        (∀ M : KFlatFixedTensor.Modules R,\n          (toSheaf ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)).map\n            ((@pullbackPushforwardAdjunction _ _ _ _ _ _ _ _ _ _ a\n              (module_pushforward_isRightAdjoint_of_universes a)).unit.app M) ≫\n              (U.sheafPushforwardContinuous AddCommGrpCat.{max u v w} J K).map\n                (e.hom.app M) =\n              (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous U\n                AddCommGrpCat.{max u v w} J K).unit.app\n                  ((toSheaf ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)).obj M)) ∧\n        ∃ em : pull a ⋙ toSheaf _ ⋙ sheafCompose K\n            (CategoryTheory.forget AddCommGrpCat.{max u v w}) ≅\n          (toSheaf _ ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{max u v w})) ⋙\n            Functor.sheafPullbackConstruction.sheafPullback U (Type (max u v w)) J K,\n          ∀ (M : KFlatFixedTensor.Modules R) (V : Cᵒᵖ) (x : M.val.obj V),\n            (em.hom.app M).hom.app (U.op.obj V)\n              (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)\n                M V.unop x) =\n              ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous U\n                (Type (max u v w)) J K).unit.app\n                  ((toSheaf _ ⋙ sheafCompose J\n                    (CategoryTheory.forget AddCommGrpCat.{max u v w})).obj M)).hom.app V x",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published statement (byte-identical); relocated Data definitions vs published bodies (structure/inductive repackaging, same content, change record); 18 delivered modules + 3 direct importers compiled together in a sandbox (no errors; CartesianCoefficientTwists 84 s vs 81 s for the published file, so its slowness was already there); #print axioms only propext/choice/Quot.sound plus sorryAx from cited open library statements"
+ }
+}

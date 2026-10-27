@@ -1,0 +1,186 @@
+{
+ "id": "lem-dl-a1-open-normal-inertia-fixed-field",
+ "kind": "statement",
+ "title": "Open normal subgroups containing inertia have unramified finite fixed fields",
+ "statement": "Let $A$ be an integrally closed domain [def-weil-pbc-normal-ring] with fraction field $K$, and choose a separable closure $\\Omega/K$ [def-pd-separable-closure]. Put $G=\\operatorname{Aut}_K(\\Omega)$ with its Krull topology. Let $C$ be the integral closure of $A$ in $\\Omega$ [def-weil-pbc-integral-closure]. For each prime $\\mathfrak r\\subset C$, put $I_{\\mathfrak r}=\\{g\\in G:g\\mathfrak r=\\mathfrak r,\\ g|_{\\operatorname{Frac}(C/\\mathfrak r)}=1\\}$. Let $U\\subseteq G$ be an open normal subgroup such that $I_{\\mathfrak r}\\subseteq U$ for every prime $\\mathfrak r$ of $C$. Define $L=\\Omega^U=\\{b\\in\\Omega:ub=b\\text{ for every }u\\in U\\}$ and let $B$ be the integral closure of $A$ in $L$. Then $L/K$ is finite Galois, meaning finite-dimensional, separable and normal, and $U=\\operatorname{Aut}_L(\\Omega)$. Every prime $\\mathfrak q\\subset B$ is the contraction of a prime $\\mathfrak r\\subset C$, and its inertia subgroup $\\{h\\in\\operatorname{Aut}_K(L):h\\mathfrak q=\\mathfrak q,\\ h|_{\\operatorname{Frac}(B/\\mathfrak q)}=1\\}$ is trivial. No Noetherian hypothesis or finiteness of either integral closure is assumed.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BTD, lemma-normal-pione-quotient-inertia, second proof paragraph through triviality of the finite-level inertia; Tag 0BSX, more-algebra.tex lemma-one-orbit-geometric-galois-compare."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-pd-separable-closure",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-separable-closure-exists-galois], $\\Omega/K$ is Galois. Apply [lem-exc-etale-open-subgroup-fixed-field-galois] to the open subgroup $U$: its fixed field $L$ is finite-dimensional and separable over $K$, and its pointwise fixing subgroup in $G$ equals $U$. In particular $U=\\operatorname{Aut}_L(\\Omega)$. Since $U$ is normal, [lem-dl-a1-normal-fixing-subgroup-galois] applied to $K\\subseteq L\\subseteq\\Omega$ shows that $L/K$ is Galois, hence normal as well as separable. Together these give precisely the finite Galois assertion.",
+   "uses": [
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-exc-etale-open-subgroup-fixed-field-galois",
+    "lem-dl-a1-normal-fixing-subgroup-galois"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BML, theorem-inifinite-galois-theory, finite/open and normal/Galois clauses; used in Tag 0BTD second proof paragraph."
+   }
+  },
+  {
+   "text": "Use the inclusions $A\\subseteq B\\subseteq C\\subseteq\\Omega$. Indeed an element of $B$ is integral over $A$, and remains so in $\\Omega$, hence lies in $C$. Every $c\\in C$ satisfies a monic polynomial over $A$; the same polynomial, with coefficients viewed in $B$, proves that $c$ is integral over $B$. Thus $B\\hookrightarrow C$ is injective and integral. Apply [lem-weil-pbc-integral-injective-lying-over] to obtain, for each prime $\\mathfrak q\\subset B$, a prime $\\mathfrak r\\subset C$ contracting to $\\mathfrak q$.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-integral-injective-lying-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GQ, lemma-integral-overring-surjective; applied to the integral-closure inclusion in Tag 0BTD second proof paragraph."
+   }
+  },
+  {
+   "text": "Fix such $\\mathfrak q$ and $\\mathfrak r$. In the tower $\\Omega/L/K$, both extensions over $K$ are Galois by step 1, and $A$ is a normal domain by hypothesis. Apply [lem-dl-a1-inertia-restriction-surjective] with $M=\\Omega$ and these integral closures and primes: restriction surjects $I_{\\mathfrak r}\\to I_{\\mathfrak q}$. For $h\\in I_{\\mathfrak q}$ choose a lift $g\\in I_{\\mathfrak r}$. The hypothesis gives $g\\in U$, and the definition of $L=\\Omega^U$ gives $g(b)=b$ for all $b\\in L$. Consequently $h=g|_L=1$. Thus $I_{\\mathfrak q}=\\{1\\}$ for every prime $\\mathfrak q$ of $B$. No step used Noetherianity or finite generation of an integral closure.",
+   "uses": [
+    "lem-dl-a1-inertia-restriction-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, lemma-normal-pione-quotient-inertia, second proof paragraph through triviality of finite-level inertia; inertia surjectivity is Tag 0BSX, more-algebra.tex lemma-one-orbit-geometric-galois-compare."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-exc-etale-open-subgroup-fixed-field-galois",
+  "lem-dl-a1-normal-fixing-subgroup-galois",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-dl-a1-inertia-restriction-surjective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BTD, lemma-normal-pione-quotient-inertia, second proof paragraph, with Tags 0BML, 00GQ and 0BSX supplying the explicitly cited inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "inertia.*(restrict|[Ss]urject)|fixedField.*[Ii]nertia",
+   "results": "1 hits: Mathlib/RingTheory/Polynomial/Morse.lean. Read InfiniteGalois.isOpen_and_normal_iff_finite_and_isGalois, FieldTheory/Galois/Infinite.lean 288-292, and the fixed-field quotient types. They supply only the field-theory clause; none deduces triviality of every integral-closure inertia group from the infinite-level assumption. Reported inertia-degree identities have different conclusions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open normal absolute Galois subgroup containing all integral-closure inertia has finite Galois fixed field with trivial inertia at every integral-closure prime",
+   "results": "8 hits: IsGaloisGroup.subgroup, InfiniteGalois.isOpen_and_normal_iff_finite_and_isGalois, IsGalois.normalAutEquivQuotient, IsGaloisGroup.of_isFractionRing, InfiniteGalois.restrict_fixedField, IsGalois.of_fixedField_normal_subgroup, IsGaloisGroup.intermediateField, InfiniteGalois.normal_iff_isGalois. Read InfiniteGalois.isOpen_and_normal_iff_finite_and_isGalois, FieldTheory/Galois/Infinite.lean 288-292, and the fixed-field quotient types. They supply only the field-theory clause; none deduces triviality of every integral-closure inertia group from the infinite-level assumption. Reported inertia-degree identities have different conclusions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IntermediateField.fixedField, Subgroup.Normal",
+   "results": "5 hits: IsGalois.of_fixedField_normal_subgroup, IsGalois.normalAutEquivQuotient, IsGalois.normalAutEquivQuotient_apply, InfiniteGalois.normalAutEquivQuotient, InfiniteGalois.normalAutEquivQuotient_apply. Read InfiniteGalois.isOpen_and_normal_iff_finite_and_isGalois, FieldTheory/Galois/Infinite.lean 288-292, and the fixed-field quotient types. They supply only the field-theory clause; none deduces triviality of every integral-closure inertia group from the infinite-level assumption. Reported inertia-degree identities have different conclusions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open normal subgroup U of an absolute Galois group containing inertia at all primes of the integral closure of a normal domain, its fixed field is finite Galois and all primes of the finite-level integral closure have trivial inertia",
+   "results": "8 hits: InfiniteGalois.isOpen_and_normal_iff_finite_and_isGalois, Ideal.inertiaDegIn_mul_inertiaDegIn, instIsGaloisGroupIntRingOfIntegersOfRat, Ideal.inertiaDeg_eq_of_isGaloisGroup, Algebra.isInvariant_of_isGalois, Ideal.inertiaDeg_eq_of_isGalois, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, IsGaloisGroup.iff_isFractionRing. Read InfiniteGalois.isOpen_and_normal_iff_finite_and_isGalois, FieldTheory/Galois/Infinite.lean 288-292, and the fixed-field quotient types. They supply only the field-theory clause; none deduces triviality of every integral-closure inertia group from the infinite-level assumption. Reported inertia-degree identities have different conclusions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a normal domain, inertia restriction down a Galois tower shows that fixed fields of open normal subgroups killing all infinite-level inertia have trivial finite-level inertia",
+   "results": "8 hits: Ideal.inertiaDegIn_mul_inertiaDegIn, Ideal.inertiaDegIn_eq_inertiaDeg, Ideal.inertiaDegIn_ne_zero, InfiniteGalois.restrict_fixedField, Ideal.inertiaDeg_eq_of_isGalois, Ideal.inertiaDeg_eq_of_isGaloisGroup, InfiniteGalois.isOpen_and_normal_iff_finite_and_isGalois, InfiniteGalois.normalAutEquivQuotient_apply. Read InfiniteGalois.isOpen_and_normal_iff_finite_and_isGalois, FieldTheory/Galois/Infinite.lean 288-292, and the fixed-field quotient types. They supply only the field-theory clause; none deduces triviality of every integral-closure inertia group from the infinite-level assumption. Reported inertia-degree identities have different conclusions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IntermediateField.fixedField, Subgroup.Normal",
+   "results": "5 hits: IsGalois.of_fixedField_normal_subgroup, IsGalois.normalAutEquivQuotient, IsGalois.normalAutEquivQuotient_apply, InfiniteGalois.normalAutEquivQuotient, InfiniteGalois.normalAutEquivQuotient_apply. The fixed-field results supply only the field-theory clause; inertia-degree formulas concern different conclusions. None states the full arbitrary-prime integral-closure inertia assertion. Read Infinite.lean:261-292 and the fixed-field quotient signatures; reused the earlier recorded second phrasing and its results.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open normal subgroup U of an absolute Galois group containing inertia at all primes of the integral closure of a normal domain, its fixed field is finite Galois and all primes of the finite-level integral closure have trivial inertia",
+   "results": "8 hits: InfiniteGalois.isOpen_and_normal_iff_finite_and_isGalois, Ideal.inertiaDegIn_mul_inertiaDegIn, instIsGaloisGroupIntRingOfIntegersOfRat, Ideal.inertiaDeg_eq_of_isGaloisGroup, Algebra.isInvariant_of_isGalois, Ideal.inertiaDeg_eq_of_isGalois, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, IsGaloisGroup.iff_isFractionRing. The fixed-field results supply only the field-theory clause; inertia-degree formulas concern different conclusions. None states the full arbitrary-prime integral-closure inertia assertion. Read Infinite.lean:261-292 and the fixed-field quotient signatures; reused the earlier recorded second phrasing and its results.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open normal absolute Galois subgroup containing all integral-closure inertia has finite Galois fixed field with trivial inertia at every integral-closure prime",
+   "results": "8 hits: IsGaloisGroup.subgroup, InfiniteGalois.isOpen_and_normal_iff_finite_and_isGalois, IsGalois.normalAutEquivQuotient, IsGaloisGroup.of_isFractionRing, InfiniteGalois.restrict_fixedField, IsGalois.of_fixedField_normal_subgroup, IsGaloisGroup.intermediateField, InfiniteGalois.normal_iff_isGalois. The fixed-field results supply only the field-theory clause; inertia-degree formulas concern different conclusions. None states the full arbitrary-prime integral-closure inertia assertion. Read Infinite.lean:261-292 and the fixed-field quotient signatures; reused the earlier recorded second phrasing and its results.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "inertia.*(restrict|[Ss]urject)|fixedField.*[Ii]nertia",
+   "results": "1 hits: Mathlib/RingTheory/Polynomial/Morse.lean. The fixed-field results supply only the field-theory clause; inertia-degree formulas concern different conclusions. None states the full arbitrary-prime integral-closure inertia assertion. Read Infinite.lean:261-292 and the fixed-field quotient signatures; reused the earlier recorded second phrasing and its results.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+  "date": "2026-10-22",
+  "group": "Q72"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-d-dl-a1-setup",
+ "blueprint": {
+  "from": {
+   "node": "rem-dl-a1-conventions",
+   "place": "Second paragraph: extension to a lisse Weil sheaf on the open U_0 union infinity is equivalent to trivial inertia at infinity; Tag 0BTD, lemma-normal-pione-quotient-inertia, second proof paragraph through triviality of the finite-level inertia; Tag 0BSX, more-algebra.tex lemma-one-orbit-geometric-galois-compare.",
+   "via": [
+    "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+    "lem-dl-a1-weil-kernel-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-dl-a1-open-normal-inertia-fixed-field",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its definition dependencies. Followed Stacks 0BTD through the finite Galois fixed field, lying over, and surjective inertia restriction. Reused existing open-subgroup, separable-closure, lying-over and inertia-comparison nodes; added only the exact Mathlib normality criterion for arbitrary intermediate fields. Checked arbitrary primes and non-Noetherian hypotheses.",
+  "blueprint": "Second paragraph of rem-dl-a1-conventions: extension across infinity is equivalent to trivial inertia; algebraic input to the normal-scheme Galois/inertia presentation, Tag 0BTD second proof paragraph, the Galois extension corresponding to an open normal subgroup."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NO-9b6e1f556",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-9b6e1f556 (reviewer sub-agent of L); spot-checked: Not a re-split: there is no repair note and the base item was unsplit with no proof. Live and side-live still show the item unsplit, so it is not superseded. Statement, stmt_deps, source and blueprint are identical to side-live, so nothing was weakened. Step 1: lem-weil-pbc-separable-closure-exists-galois (2) gives Omega/K Galois. lem-exc-etale-open-subgroup-fixed-field-galois gives L=Omega^U finite and separable with fixing subgroup U, so U=Aut_L(Omega). The new node with E=L and H=U normal gives L/K Galois. Step 2: B is contained in C and C is integral over B by the same monic polynomial (elementary); the inclusion is injective as both are subrings of Omega, and lem-weil-pbc-integral-injective-lying-over then gives lying over. Step 3: lem-dl-a1-inertia-restriction-surjective, which matches Stacks 0BSX with arbitrary primes, Frac(C/r)=kappa(r) and infinite Galois towers, is applied with M=Omega. A lift g of h in I_q lies in I_r, hence in U, so it fixes L and h=1. The steps follow Stacks 0BTD's second proof paragraph up to the triviality of inertia. New node lem-dl-a1-normal-fixing-subgroup-galois is an exact match for InfiniteGalois.normal_iff_isGalois (Infinite.lean:261-286, read in full; also Stacks 0BML, last sentence). It is self-contained, has no proof, and is not a restatement of an item clause. Checked on E=K, on E=M and on Q(cube root of 2) inside the splitting field of X^3-2. rg -L duplicate search covered lem-exc-etale-galois-fixed-field-subgroup, lem-exc-etale-open-subgroup-fixed-field-galois, lem-exc-galois-krull-finite-limit, lem-exc-fixing-subgroup-krull-topology, lem-dl-a1-galois-over-intermediate, the lem-weil-pbc-normal-extension-* nodes and lem-weil-algebraic-closure-fixed-rational; none states the criterion. Off-unit nodes are all Mathlib leaves, so there are no tool_uses. Neither node cites SGA. A walk of the item's 66 dependencies does not reach the item, so there is no cycle. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.OpenNormalInertiaFixedField",
+  "declaration": "Ideal.fixedField_finite_galois_of_isOpen_normal_inertia_le",
+  "file": "lean/Sheaf/FieldTheory/OpenNormalInertiaFixedField.lean",
+  "statement": "theorem fixedField_finite_galois_of_isOpen_normal_inertia_le (A : Type u) [CommRing A] [IsDomain A] [IsIntegrallyClosed A] (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] (Ω : Type w) [Field Ω] [Algebra K Ω] [Algebra A Ω] [IsScalarTower A K Ω] [IsSepClosure K Ω] (U : Subgroup (Ω ≃ₐ[K] Ω)) (hUopen : IsOpen (U : Set (Ω ≃ₐ[K] Ω))) (hUnormal : U.Normal) (hUinertia : ∀ r : Ideal (integralClosure A Ω), r.IsPrime → r.inertia (Ω ≃ₐ[K] Ω) ≤ U) : FiniteDimensional K (IntermediateField.fixedField U) ∧ IsGalois K (IntermediateField.fixedField U) ∧ U = (IntermediateField.fixedField U).fixingSubgroup ∧ (∀ q : Ideal (integralClosure A (IntermediateField.fixedField U)), q.IsPrime → (∃ r : Ideal (integralClosure A Ω), r.IsPrime ∧ r.comap (((IntermediateField.fixedField U).val.restrictScalars A).mapIntegralClosure.toRingHom) = q) ∧ q.inertia ((IntermediateField.fixedField U) ≃ₐ[K] (IntermediateField.fixedField U)) = ⊥)",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-188852a65",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Item JSON differs from side-live only in lean; lean.statement verbatim. Hypotheses match: integrally closed domain A, IsFractionRing, IsSepClosure (def-pd-separable-closure notion), Krull-open normal U, ∀ prime r of integralClosure A Ω, r.inertia ≤ U (Mathlib inertia = trivial on C/r ⇔ node's stabilizer acting trivially on Frac(C/r), arbitrary primes). Conclusions: FiniteDimensional ∧ IsGalois of fixedField U, U = fixingSubgroup (Aut_L(Ω) inside Aut_K(Ω)), lying over along the canonical mapIntegralClosure inclusion (same map as lem-dl-a1-inertia-restriction-surjective), q.inertia (L≃ₐ[K]L) = ⊥ at every prime. No extra Noetherian/finiteness/universe assumptions; edge cases U=⊤, U=⊥, zero and non-maximal primes OK. One sorry theorem, source and blueprint docstrings with the 3-step proof, plain imports are proof-dep modules, report sections present, no existing declaration states the whole result. No compile (no FIX)."
+ }
+}

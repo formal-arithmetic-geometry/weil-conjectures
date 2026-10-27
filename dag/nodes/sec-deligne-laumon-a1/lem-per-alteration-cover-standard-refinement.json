@@ -301,17 +301,7 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-f80625b9f (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes and every cited statement in full, against ILO Exposé II 3.2.1 (pp. 29–30), 3.2.3 and its sketch (pp. 30–31) and Cor. 2.2.4 (p. 27). The item's statement is unchanged from base, which is still unsplit live. Steps 1–4 check out. Step 2: chart-flatification with the single chart id_S, and base change preserves complete decomposition via the rational point κ(v)⊗κ(y_0). Step 3: exchange on the rank-d map, then splitting into normal integral components. Step 4: an elementary composition-series degree selection, also valid for non-reduced generic fibres. Step 5: the dense-open isomorphism holds for p=p_0∘b, and the h_j are composites of S-maps. One fault, C1: Step 5 claimed finite type over S and Noetherianity of S',E_j,W_j with no cited node. Those schemes are only finite type over S_0 by the flatification node. FIX: Step 5 now cites lem-sfb-finite-type-composition-base-change (1), a Mathlib leaf, and lem-weil-pbc-finite-type-over-noetherian, with proof_deps updated. New nodes are true, smaller than the item and not duplicates. proper-normal-form is ILO 3.2.1 plus a finite affine refinement, and is false if made birational (field case [k':k]=3, ℓ=2). finite-flat-cd-etale-exchange follows by henselization, a rank prime to ℓ in some factor, and descent of the idempotent and section. integral-etale-chart-flatification follows from 081R, flatness over étale charts, finite normalization for Nagata rings, then flat plus quasi-finite plus proper, hence finite with rank n_i. DAG greps for alteration, completely decomposed, Raynaud, 081R and 0B49, plus the trf alteration and flattening nodes, give no duplicates. Batch-5 flag: lem-per-quasi-excellent-finite-type-stability reaches lem-trf-g-ring-affine-cover and lem-trf-j2-affine-cover, both pure commutative algebra (G-ring and J-2 are local on affine covers). They are not part of the trace formula or Poincaré duality statements or proofs, so accepted; the full-closure recomputation finds only these and the Mathlib leaf lem-pod-separated-finite-type-base-change. No SGA cited. Declared tool uses accepted.; 1 file(s) fixed by the reviewer"
  },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.AlterationCoverStandardRefinement",
-  "declaration": "AlgebraicGeometry.PrimeToEllAlteration.alteration_cover_standard_refinement",
-  "file": "lean/Sheaf/AlgebraicGeometry/AlterationCoverStandardRefinement.lean",
-  "statement": "theorem alteration_cover_standard_refinement (S : Scheme.{u}) [IsIntegral S] [IsNoetherian S] (hS : ∀ V : S.affineOpens, IsQuasiExcellent Γ(S, V.1)) (ell : ℕ) [Fact ell.Prime] (hinv : ∀ s : S, IsUnit (ell : S.presheaf.stalk s)) {B : Type w} [Finite B] (T : B → Alt S) (hcover : ∃ (base : Alt S) (_ : base.obj = Over.mk (𝟙 S)) (q : ∀ b : B, T b ⟶ base), IsCoveringFamily ell T q) : ∃ (S' : Scheme.{u}) (p : S' ⟶ S) (n : ℕ) (E W : Fin n → Scheme.{u}) (e : ∀ i, E i ⟶ S') (a : ∀ i, W i ⟶ E i) (r : Fin n → ℕ) (b : Fin n → B) (h : ∀ i, W i ⟶ (T (b i)).obj.left), IsIntegral S' ∧ IsNoetherian S' ∧ IsProper p ∧ (∃ U : S.Opens, Dense (U : Set S) ∧ IsIso (p ∣_ U)) ∧ (LocallyOfFiniteType p ∧ QuasiCompact p) ∧ (∀ i, IsIntegral (E i) ∧ IsNoetherian (E i) ∧ IsIntegral (W i) ∧ IsNoetherian (W i)) ∧ (∀ i, IsSeparated (e i) ∧ Etale (e i) ∧ LocallyOfFiniteType (e i) ∧ QuasiCompact (e i)) ∧ (∀ i, (a i).IsFiniteLocallyFreeOfDegree (r i) ∧ Surjective (a i) ∧ 0 < r i ∧ Nat.Coprime (r i) ell) ∧ (∀ i, LocallyOfFiniteType (e i ≫ p) ∧ QuasiCompact (e i ≫ p)) ∧ (∀ i, LocallyOfFiniteType (a i ≫ e i ≫ p) ∧ QuasiCompact (a i ≫ e i ≫ p)) ∧ (∀ s' : S', ∃ (i : Fin n) (z : E i), e i z = s' ∧ IsIso ((e i).residueFieldMap z)) ∧ (∀ i, h i ≫ (T (b i)).obj.hom = a i ≫ e i ≫ p)",
-  "branch": "newtargets-dag",
-  "by": "Q47",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.AlterationCoverStandardRefinement deleted (dead: no target reaches it); this node is not reached either."
- },
+ "lean": null,
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -320,5 +310,23 @@
   "result": "pass",
   "note": "Delivery diff vs parent 5ba560d2: new item module, new report, and only the lean field added to the item node; statement, stmt_deps and proof are byte-equal to base. The PrimeToEllAlterationTopology copy is byte-identical to base and side and is not in the diff. Lean matches the node clause by clause: IsIntegral/IsNoetherian S, IsQuasiExcellent on every affine open, stalkwise ell unit, Finite B with T : B → Alt S covering the identity object (base.obj = Over.mk (𝟙 S)), output IsProper p with IsIso (p ∣_ U) on a dense U, Fin n families, IsSeparated/Etale/finite-type e_i, IsFiniteLocallyFreeOfDegree (fibre dimension, FiberDegree.lean:906) plus Surjective plus 0<r plus Coprime, integral Noetherian E_i/W_i, finite type over S, complete decomposition via IsIso residueFieldMap, h ≫ q = a ≫ e ≫ p. Edge cases empty S/B, n=0, r=0, ell=2 and universes checked. Agrees with ILO II 3.2.3. Docstrings with source, blueprint and 5 proof steps; sorry only; lean.statement verbatim; proof imports are the recorded proof_dep modules; no duplicate. nt_compile --json clean in 2.6 s, broken control copy errors. Advisory: report compile section stale; optional IntegralEtaleChartFlatification proof import absent."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/AlgebraicGeometry/AlterationCoverStandardRefinement.lean",
+  "module": "Sheaf.AlgebraicGeometry.AlterationCoverStandardRefinement",
+  "declaration": "AlgebraicGeometry.PrimeToEllAlteration.alteration_cover_standard_refinement",
+  "reason": "dead module deleted (no target reaches it by imports, node not reached); the declaration survives nowhere in Sheaf or Mathlib, so the node has no Lean statement"
+ }
 }

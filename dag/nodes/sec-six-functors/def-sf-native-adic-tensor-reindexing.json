@@ -1,0 +1,105 @@
+{
+ "id": "def-sf-native-adic-tensor-reindexing",
+ "kind": "definition",
+ "title": "Canonical tensor unit and Hom reindexing of native adic modules",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, schemes $X,Y$ and a scheme isomorphism $g:X\\cong Y$, native realization tensor data of [def-sf-native-adic-realization-data] and coefficient reindexing data and exact module inverse image of [def-sf-native-adic-reindexing-data]. If $\\ell$ is invertible on $X,Y$, a tensor reindexing datum consists of a cochain tensor isomorphism equal to identity on every homogeneous pure tensor, preservation of K-flat complexes, and a derived tensor isomorphism whose K-flat representative square uses that cochain map and the recorded ambient models. Include an isomorphism of the pulled-back coefficient-unit complex with the source coefficient-unit complex, equal in degree zero to the fixed coefficient map on every section. Define its derived unit map using the exact factorization and recorded degree-zero unit models. Define its ambient derived Hom map as the closed transpose of the inverse tensor comparison followed by pulled-back module evaluation. All comparisons use the actual native coefficient sheaves and ordinary module derived categories; none is an arbitrary map, and no k-linearity or existence hypothesis is imposed. These are definitions, not an assertion of existence.",
+ "stmt_deps": [
+  "def-sf-native-adic-realization-data",
+  "def-sf-native-adic-reindexing-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.8 and Remark 6.8.15; HRS Lemma 7.9; normalized comparison data used in lem-sf-adic-qbar-constructible-realization."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Balanced finite integral normalization data for continuous native adic realization tensor functors",
+   "results": "8 hits: FreeMonoidalCategory.normalizeObj, normalize, normalizeIso; finite Noetherian AdicCompletion tensor equivalences and finite measure normalization. No native sheaf comparison data.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"IsKFlat\"",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "([Ff]inite.*[Nn]ormalization|[Rr]eindex.*[Tt]ensor); rg FiniteNormalization|ReindexTensor|finite.*normalization.*data|tensor.*reindexing.*data dag/nodes lean/WeilConjectures lean/Sheaf",
+   "results": "Mathlib 5 hits, all scheme normalization in ZariskisMainTheorem. Project/DAG no existing FiniteNormalization or ReindexTensor; broad matches are unrelated existing coefficient-system, scalar, Galois and projection data. Existing native operations are reused, with the two comparison packages introduced here.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-qbar-constructible-realization",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Explicit canonical comparison data in the native realization obligation. The parent is a maintainer-created native obligation with no blueprint ancestor.",
+   "via": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.NativeAdicTensorReindexing",
+  "declaration": "WeilConjectures.AdicQbarRealization.ReindexTensor",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.reindexTensorRepresentative",
+   "WeilConjectures.AdicQbarRealization.reindexUnitSections",
+   "WeilConjectures.AdicQbarRealization.reindexTensorPure",
+   "WeilConjectures.AdicQbarRealization.ReindexTensor",
+   "WeilConjectures.AdicQbarRealization.pullUnit",
+   "WeilConjectures.AdicQbarRealization.pullHom"
+  ],
+  "file": "lean/Sheaf/Paper/NativeAdicTensorReindexing.lean",
+  "statement": "structure ReindexTensor {Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] {R : LocallyFiniteAdicRealization.Realization l X} {S : LocallyFiniteAdicRealization.Realization l Y} [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (A : At l X R) (C : At l Y S) (B : RingReindex l X g R S)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Definition-only canonical comparison data, split into a small module to remain within the per-file compile limit. All normalization and representative equations are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25a6777c9",
+  "group": "NL",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25a6777c9",
+  "group": "NL",
+  "result": "fix",
+  "note": "Re-delivery of RETURNed 0705. H3 repaired: Family.sourceId_unit (pullbackTensorCommonComposition 𝟙 𝟙 M ≫ sourceId at F M = 𝟙, HEq along id_comp) is the pseudofunctor left-unit law; it fixes sourceId through essential surjectivity and naturality, so identity is no longer vacuous. H2 repaired: theorem stmt_deps replaced by def-zl-ringed-...-data plus four existing:true owners; each statement is verbatim in its unchanged module and all declarations exist; the other five Lean files are byte-identical to 0705. FIX: def-sf-adic-closed-reindexing-maps re-owned PodPartialClosed, .evaluation and podPairPullback, already owned by the on-base def-pod-partial-closed-interfaces (Q69, landed 15:55Z 10-22); fixes/def-sf-adic-closed-reindexing-maps.json removes them, cites the owner and rewrites the TeX. Advisory: def-sf-proetale-sectionwise-module-inverse-image duplicates Q15 def-weil-proetale-iso-sectionwise-inverse-image, landed 05:13Z after base 04:33Z; it cannot be cited by a FIX, so the maintainer should merge the nodes. No Lean changed and no compile was run."
+ }
+}

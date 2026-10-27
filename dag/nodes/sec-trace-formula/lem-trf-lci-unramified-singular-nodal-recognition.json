@@ -1,0 +1,267 @@
+{
+ "id": "lem-trf-lci-unramified-singular-nodal-recognition",
+ "kind": "statement",
+ "title": "Nodal recognition from local complete intersection fibres and an unramified singular subscheme",
+ "statement": "Let $g:T\\to B$ be a flat [def-weil-flat-morphism], locally finitely presented [def-sbc-locally-finite-presentation] morphism of schemes [def-pc-scheme]. For every algebraically closed field $\\Omega$ and geometric point $y:\\operatorname{Spec}\\Omega\\to B$ [def-weil-geometric-point], suppose the geometric fibre $C_y=T\\times_B\\operatorname{Spec}\\Omega$ [def-pc-fibre-product, def-weil-geometric-fibre] is empty or pure of dimension $1$ [def-weil-pure-dimension] and a local complete intersection over $\\Omega$. Here local complete intersection over $\\Omega$ means admitting an affine open cover by spectra of finitely generated $\\Omega$-algebras which are local complete intersections as defined in [def-weil-pbc-complete-intersection-over-field]. Let $Z=\\operatorname{Sing}(g)\\hookrightarrow T$ be the closed subscheme cut out by the first Fitting ideal of relative differentials [def-trf-first-fitting-singular-subscheme]. If $Z\\to B$ is unramified [def-weil-unramified-morphism], then for every such $\\Omega,y$, every point $z\\in C_y$ at which $C_y\\to\\operatorname{Spec}\\Omega$ is not smooth [def-sbc-smooth-morphisms] is closed in $C_y$ [def-weil-closed-points] and its maximal-ideal-adic completed local ring [def-weil-pbc-adic-completion] is isomorphic to $\\Omega[[u,v]]/(uv)$ [def-weil-pbc-multivariate-power-series]. The empty fibres impose no condition.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C59 (lemma-nodal-family), implication (2) => (1), using Tag 0C4E (lemma-nodal-lci); divisors.tex Tags 0C3I (lemma-base-change-and-fitting-ideal-omega) and 0C3K (lemma-d-fitting-ideal-omega-smooth); morphisms.tex Tag 02G7 (lemma-unramified-over-field) for closedness of every singular geometric-fibre point."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-geometric-point",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-pc-fibre-product",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-first-fitting-singular-subscheme",
+  "def-weil-unramified-morphism",
+  "def-weil-closed-points"
+ ],
+ "proof": [
+  {
+   "text": "Fix $\\Omega,y$ and write $C=T\\times_B\\operatorname{Spec}\\Omega$. If $C$ is empty there is nothing to prove. Otherwise $C$ is pure of dimension $1$ and has the stipulated affine lci cover. Each chart algebra is finitely generated over $\\Omega$, so $C$ is locally of finite type. Also $g$ is locally of finite type: its finite-presentation charts have finitely many algebra generators.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C59 (lemma-nodal-family), reduction to a geometric fibre; finite-generation unpacking."
+   }
+  },
+  {
+   "text": "Let $p:C\\to T$. Relative differential base change identifies $p^*\\Omega^1_{T/B}$ with $\\Omega^1_{C/\\Omega}$ and supplies finite-type quasi-coherence. Isomorphic finite-type modules have the same Fitting ideals (transport a generating surjection and its kernel along the isomorphism), and the Fitting pullback theorem says its ideal $\\operatorname{Fit}_1$ is, on affines, the minor ideal used in the definition of the first-Fitting singular subscheme. The Fitting pullback theorem therefore identifies the first-Fitting closed subscheme $W=\\operatorname{Sing}(C/\\Omega)$ with $C\\times_T Z$. The fibre-product universal property identifies this with $Z\\times_B\\operatorname{Spec}\\Omega$: both parameterize maps to $Z$ and $\\operatorname{Spec}\\Omega$ agreeing over $B$. Thus $W\\to\\operatorname{Spec}\\Omega$ is unramified by base change.",
+   "uses": [
+    "lem-trf-relative-differential-sheaf-base-change",
+    "lem-trf-fitting-ideal-sheaf-pullback",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-unramified-base-change-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0C3I (lemma-base-change-and-fitting-ideal-omega); Morphisms Tag 02GA (lemma-base-change-unramified)."
+   }
+  },
+  {
+   "text": "By the field-curve Fitting/smooth preparation, the nonsmooth points of $C/\\Omega$ are exactly $|W|$. Since unramifiedness includes local finite type, the unramified-over-field local criterion applies to $W$ and says every point of $W$ is closed in $W$.",
+   "uses": [
+    "lem-trf-field-curve-fitting-smooth-preparation",
+    "def-weil-unramified-morphism",
+    "lem-trf-unramified-over-field-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4E (lemma-nodal-lci), (2) implies (1); Divisors Tag 0C3K and Morphisms Tag 02G7."
+   }
+  },
+  {
+   "text": "Let $z$ be any nonsmooth point of $C$. Its corresponding singleton is closed in $W$ by step 3. The inclusion $W\\hookrightarrow C$ identifies $W$ homeomorphically with a closed subset of $C$. Hence $\\{z\\}$ is closed in that closed subset, and therefore in $C$. This proves the required closedness for every nonsmooth point, not just for points initially assumed closed.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4E (lemma-nodal-lci), closedness of singular points."
+   }
+  },
+  {
+   "text": "Apply (2) implies (1) of the nodal-curve lci criterion to $C/\\Omega$: local finite type and pure dimension $1$ hold by step 1, the lci cover is a hypothesis, and its first-Fitting subscheme is unramified by step 2. Thus every closed point is smooth or a node. The point $z$ of step 4 is closed and nonsmooth, hence a node. Let $\\iota:\\Omega\\to\\bar\\Omega$ be the algebraic closure used in the node condition. Every element of $\\bar\\Omega$ is algebraic over $\\iota(\\Omega)$, and $\\iota(\\Omega)$ is algebraically closed, so it lies in $\\iota(\\Omega)$: $\\iota$ is an isomorphism of fields (for instance $\\iota=\\operatorname{id}$). Hence $\\operatorname{Spec}\\bar\\Omega\\to\\operatorname{Spec}\\Omega$ is an isomorphism, and by the fibre-product universal property so is the projection $q:C_{\\bar\\Omega}\\to C$; the only point $\\bar z$ over $z$ is $q^{-1}(z)$, and $q$ induces an isomorphism $\\mathcal O_{C,z}\\cong\\mathcal O_{C_{\\bar\\Omega},\\bar z}$ of local rings, hence of their maximal-ideal-adic completions. Composing with $\\bar\\Omega[[u,v]]/(uv)\\cong\\Omega[[u,v]]/(uv)$ induced by $\\iota^{-1}$ on coefficients, the criterion's node condition gives precisely $\\widehat{\\mathcal O}_{C,z}\\simeq\\Omega[[u,v]]/(uv)$. Since $\\Omega,y,z$ were arbitrary this proves the assertion.",
+   "uses": [
+    "lem-trf-nodal-curve-lci-criterion",
+    "def-weil-algebraic-closure",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C59 (lemma-nodal-family), (2) implies (1), using Tag 0C4E (lemma-nodal-lci) and its stated completed-geometric-local-ring node condition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-algebraic-closure",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-unramified-morphism",
+  "lem-trf-field-curve-fitting-smooth-preparation",
+  "lem-trf-fitting-ideal-sheaf-pullback",
+  "lem-trf-nodal-curve-lci-criterion",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "lem-trf-unramified-over-field-local-criterion",
+  "lem-weil-pbc-unramified-base-change-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C59 (lemma-nodal-family), geometric-fibre recognition via Tag 0C4E (lemma-nodal-lci); Divisors 0C3I/0C3K and Morphisms 02GA/02G7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nodal|ordinary.double|Fitting|unramified.*singular",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: related definitions, smooth/etale facts or ordinary descent tools; none states this nodal/Fitting finite-stage assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented morphism with pure one dimensional local complete intersection geometric fibres and unramified first Fitting singular locus has only ordinary nodes on geometric fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Algebra.unramifiedLocus R A ∩ Algebra.smoothLocus R A\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the étale locus of $ A $ over $ R $ coincides with the intersection of the unramified locus and the smooth locus of $ A $ over $ R $. Formally,\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related definitions, smooth/etale facts or ordinary descent tools; none states this nodal/Fitting finite-stage assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic curve is nodal if it is a local complete intersection and its first Fitting singular subscheme is unramified",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals in the prime spectrum of a commutative ring $ A $ where the algebra $ A $ is unramified over the base commutative ring $ R $. Formally, this consists of all prime ideals $ \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \": MorphismProperty.IsMultiplicative @FormallyUnramified\", \"doc\": \"The property of being formally unramified is multiplicative; that is, the composition of two formally unramified morphisms of schemes is again formally unramified.\"}\n  {\"name\": \"WeierstrassCurve.Affine.Nonsingular\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Basic\", \"type\": \"(x y : R) : Prop\", \"doc\": \"A point $(x, y)$ on an affine Weierstrass curve $W$ over a ring $R$ is nonsingular if it satisfies the Weierstrass equation $W.Equation(x, y)$ and at least one of the partial derivative evaluations $W\"}\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingular_iff\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \"(P : Fin 3 → R) :\\n  W'.Nonsingular P ↔\\n    W'.Equation P ∧\\n      (W'.a₁ * P y * P z - (3 * P x ^ 2 + 2 * W'.a₂ * P x * P z + W'.a₄ * P z ^ 2) ≠ 0 ∨\\n        2 * P y * P z + W'.a₁ * P x * P z + W'.a₃ * P z ^ 2 ≠ 0 ∨\\n          P y ^ 2 + W'.a₁ * P x * P y + 2 * W'.a₃ * P y * P z -\\n              (W'.a₂ *\", \"doc\": \"A point $ P = [X:Y:Z] $ on a projective Weierstrass curve over a ring $ R $ is nonsingular if and only if it satisfies the curve's homogeneous cubic equation $ Y^2Z + a_1XYZ + a_3YZ^2 - X^3 - a_2X^2Z \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related definitions, smooth/etale facts or ordinary descent tools; none states this nodal/Fitting finite-stage assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Unramified, AlgebraicGeometry.Smooth",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.Unramified'",
+   "date": "2026-10-22",
+   "verdict": "no match: Loogle rejected the identifier; the separate semantic searches and source grep supply the substantive searches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "All nonsmooth points of a pure dimension one geometric complete intersection curve with unramified singular subscheme are closed points with completion k[[u,v]] modulo uv",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals in the prime spectrum of a commutative ring $ A $ where the algebra $ A $ is unramified over the base commutative ring $ R $. Formally, this consists of all prime ideals $ \\\\mat\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"module\": \"Mathlib/RingTheory/Unramified/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u_2) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A]\\n  [Algebra.FormallyUnramified K A] [Algebra.EssFiniteType K A] [IsAlgClosed K] [IsLocalRing A], IsField A\", \"doc\": \"If $ K $ is an algebraically closed field and $ A $ is a local ring that is formally unramified as a $ K $-algebra, then $ A $ is a field.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Algebra.unramifiedLocus R A ∩ Algebra.smoothLocus R A\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the étale locus of $ A $ over $ R $ coincides with the intersection of the unramified locus and the smooth locus of $ A $ over $ R $. Formally,\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related definitions, smooth/etale facts or ordinary descent tools; none states this nodal/Fitting finite-stage assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Fitting|fittingIdeal|syntomic|localCompleteIntersection|unramified.*colimit",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Artinian/Module.lean\", \"line\": \"314\", \"text\": \"/-- This is the Fitting decomposition of the module `M` with respect to the endomorphism `f`.\"}\n  {\"file\": \"Mathlib/RingTheory/Artinian/Module.lean\", \"line\": \"323\", \"text\": \"/-- This is the Fitting decomposition of the module `M` with respect to the endomorphism `f`.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related definitions, smooth/etale facts or ordinary descent tools; none states this nodal/Fitting finite-stage assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|ordinary.double|fittingIdeal|localCompleteIntersection",
+   "results": "{\"t\": \"2026-10-23T04:18:25Z\", \"tool\": \"grep\", \"query\": \"nodal|ordinary.double|fittingIdeal|localCompleteIntersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\"], \"digest\": \"bdf58c07673b6aea\"}; Only Lagrange interpolation nodal polynomials; no algebraic-geometric nodal or Fitting-ideal recognition.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local complete intersection curve with unramified first Fitting singular subscheme has nodal completed local rings",
+   "results": "{\"t\": \"2026-10-23T04:18:25Z\", \"tool\": \"leansearch\", \"query\": \"A local complete intersection curve with unramified first Fitting singular subscheme has nodal completed local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.unramifiedLocus\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"Algebra.smoothLocus\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.FormallyUnramified.of_isLocalization\", \"Algebra.IsSmoothAt\", \"Algebra.Unramified.of_isLocalization_Away\"], \"digest\": \"a6786ad243daad38\"}; Returned algebra smooth/unramified loci and formal-unramified local criteria, not nodal completion recognition.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsSmooth",
+   "results": "{\"t\": \"2026-10-23T04:18:25Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsSmooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'; no nodal recognition match; independent semantic and source searches also run.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pure one dimensional local complete intersection geometric fibre with unramified first Fitting singular subscheme has only ordinary nodes",
+   "results": "{\"t\": \"2026-10-23T04:18:36Z\", \"tool\": \"leanfinder\", \"query\": \"A pure one dimensional local complete intersection geometric fibre with unramified first Fitting singular subscheme has only ordinary nodes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"Algebra.unramifiedLocus\", \"Algebra.smoothLocus\", \"Algebra.IsSmoothAt\", \"Algebra.IsUnramifiedAt\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.etaleLocus\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"2dbb4a85e46a7451\"}; Returned algebra smooth/unramified loci and formal-unramified local criteria, not nodal completion recognition.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented family of curves is nodal when its singular subscheme is unramified and its geometric fibres are local complete intersections",
+   "results": "{\"t\": \"2026-10-23T04:18:36Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finitely presented family of curves is nodal when its singular subscheme is unramified and its geometric fibres are local complete intersections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmooth\"], \"digest\": \"9ea9ce598579ca29\"}; Returned algebra smooth/unramified loci and formal-unramified local criteria, not nodal completion recognition.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyUnramified, IsLocalRing",
+   "results": "{\"t\": \"2026-10-23T04:21:56Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FormallyUnramified, IsLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing\", \"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.instFormallyUnramifiedResidueField_1\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Algebra.FormallyUnramified.map_maximalIdeal\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\"], \"digest\": \"102f0b1edad01db2\"}; Returned algebra smooth/unramified loci and formal-unramified local criteria, not nodal completion recognition.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-family-noetherian-approximation",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nodal local-equation input under lem-trf-local-term-locality proof (1)--(2), via 0CBY first proof first paragraph: the reverse 0C59 recognition needed to finish 0C5F; returned approximation proof step 7.",
+   "via": [
+    "lem-trf-nodal-family-noetherian-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-lci-unramified-singular-nodal-recognition",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Five-step assembly using existing differential/Fitting base change, unramified base change, field-curve Fitting smooth-locus preparation, the field-local unramified criterion, and the nodal-curve lci equivalence. Proves closedness of all singular points before using the closed-point nodal criterion and explicitly chooses the already algebraically closed coefficient field as its own algebraic closure. No new nodes. No project attachment or Mathlib match.",
+  "blueprint": "Retains the recorded historical nodal local-equation input under lem-trf-local-term-locality proof (1)--(2), via the approximation and nodal-family chain: supplies the reverse 0C59 recognition at the end of the 0C5F approximation argument. No chapter or unit route is changed. Whole-blueprint searches for nodal, 0C59 and complete intersection find no imported counterpart.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-unramified-base-change-open",
+    "why": "Generic stability of unramified morphisms under arbitrary base change, needed for the geometric singular fibre. No same-unit statement supplies this stability without further hypotheses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-unramified-base-change-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-d4a7ea14c",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-d4a7ea14c (reviewer sub-agent of L); spot-checked: I read the item, the Stacks sources (curves.tex 0C59 and 0C4E proof of (2)⇒(1), morphisms.tex 02G7) and the statement of every cited node. The delivery adds no new nodes. The statement is unchanged and correct. I tested it on: an empty fibre, the affine line A¹, the node xy=0, the cusp v²=u³ (its singular subscheme is nonreduced, so the hypothesis excludes it) and a double line (singular subscheme of positive dimension, also excluded). Step 1 (finite type from the charts) holds. In step 2, the differential base change and the Fitting pullback hold for arbitrary maps without flatness, the fibre-product identification holds, and unramifiedness passes to the base change. In step 3, the nonsmooth points are exactly |W| by the field-curve preparation node; W is locally of finite type because it is unramified, so by the 02G7-type criterion every point of W is closed. Step 4: a closed point of a closed subset is closed. Step 5 applies the nodal-curve criterion (2)⇒(1) with k=Ω; its hypotheses and its lci definition match the item's. The dependency closure has no cycle, and no existing node states the item: lem-trf-nodal-family-fitting-singular proves the converse. I accept the tool_use of lem-weil-pbc-unramified-base-change-open (Stacks 02GA, generic base change of unramified morphisms). FIX, text only, in the item at fixes/dag/nodes/sec-trace-formula/<item>.json: (a) step 2 now says that isomorphic modules have the same Fitting ideal and that the pullback node's Fit_1 equals the minor ideals of the Sing definition; (b) step 5 had 'chosen' Ω as the algebraic closure in the criterion's node condition, which a conclusion does not allow. It now argues that any algebraic closure ι:Ω→Ω̄ is an isomorphism, so C_Ω̄≅C, the local ring and its completion are the same, and ι⁻¹ identifies Ω̄[[u,v]]/(uv) with Ω[[u,v]]/(uv). Uses, proof_deps and the statement are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LCIUnramifiedSingularNodalRecognition",
+  "declaration": "AlgebraicGeometry.lci_unramified_singular_nodal_recognition",
+  "file": "lean/Sheaf/AlgebraicGeometry/LCIUnramifiedSingularNodalRecognition.lean",
+  "statement": "theorem lci_unramified_singular_nodal_recognition {T B : Scheme.{u}} (g : T ⟶ B) [Flat g] [LocallyOfFinitePresentation g] (hfibres : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (CommRingCat.of Ω) ⟶ B), IsEmpty (pullback (C := Scheme.{u}) g y) ∨ ((pullback (C := Scheme.{u}) g y).IsPureDimension 1 ∧ ∀ z : pullback (C := Scheme.{u}) g y, ∃ U : (pullback (C := Scheme.{u}) g y).affineOpens, z ∈ U.1 ∧ ∃ (ft : @Algebra.FiniteType Ω Γ(pullback (C := Scheme.{u}) g y, U.1) _ _ (((pullback.snd g y).appLE ⊤ U.1 (by simp)).hom.comp (Scheme.ΓSpecIso (.of Ω)).inv.hom).toAlgebra), @Algebra.IsLocalCompleteIntersection Ω Γ(pullback (C := Scheme.{u}) g y, U.1) _ _ (((pullback.snd g y).appLE ⊤ U.1 (by simp)).hom.comp (Scheme.ΓSpecIso (.of Ω)).inv.hom).toAlgebra ft)) (hSing : IsUnramified (Scheme.firstFittingSingularSubscheme g ≫ g)) : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (CommRingCat.of Ω) ⟶ B) (z : pullback (C := Scheme.{u}) g y), z ∉ (pullback.snd g y).smoothLocus → z ∈ closedPoints (pullback (C := Scheme.{u}) g y) ∧ Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback (C := Scheme.{u}) g y).presheaf.stalk z)) ((pullback (C := Scheme.{u}) g y).presheaf.stalk z) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) Ω)}))",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74138b4f4",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Read the item, all 14 stmt_dep records, the module, the report (Worker report and Second reading by Q38 both present) and the source of IsLocalCompleteIntersection, Scheme.Hom.smoothLocus, IsUnramified, firstFittingSingularSubscheme and nodal_curve_lci_criterion (same lci-cover and AdicCompletion/MvPowerSeries encodings). Every clause matches: flat+LFP; geometric points as Ω:Type u alg. closed with Spec Ω ⟶ B; fibre = pullback g y; IsEmpty ∨ (IsPureDimension 1 ∧ pointwise affine lci charts with the canonical Ω-algebra); hSing on Sing(g)≫g; conclusion over all z ∉ smoothLocus: closedPoints ∧ Nonempty (m-adic completion of stalk ≃+* Ω[[X0,X1]]/(X0X1)). No extra hypotheses, single universe u, no unbound variables. Edge cases checked: empty fibre, A^1, node, cusp, double line. Gates: sorry only, source and blueprint docstrings, 5-step proof plan, public stmt imports and plain proof-dep imports, lean.statement verbatim, lines ≤100, no new nodes. No compile rerun because nothing changed. No findings."
+ }
+}

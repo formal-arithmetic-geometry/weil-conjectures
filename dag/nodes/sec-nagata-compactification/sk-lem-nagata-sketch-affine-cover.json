@@ -65,5 +65,67 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-nagata-compactification",
  "unit": "sk-lem-nagata-sketch-affine-cover",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter_spec",
+    "AlgebraicGeometry.HasCompactification.of_isQuasiAffine"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter_spec",
+     "module": "WeilConjectures.Compactification.Noetherian",
+     "lines": [
+      87,
+      97
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.HasCompactification.of_isQuasiAffine",
+     "module": "WeilConjectures.Compactification.Affine",
+     "lines": [
+      74,
+      82
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "For a quasi-compact scheme $X$ with finitely many irreducible components\n(e.g. $X$ of finite type over a Noetherian scheme $S$) there is a finite\naffine cover $X=\\bigcup_{r=1}^mU_r$ whose total intersection is dense in $X$.\nIf $Y$ is quasi-affine and $Y\\to S$ is locally of finite type and\nquasi-compact, then $Y\\to S$ has a compactification\n([sk-def-nagata-sketch-data]); this applies to each $U_r\\to S$ when $X$ is of\nfinite type over a quasi-separated $S$.",
+  "proof": [
+   {
+    "text": "For any point of $X$, the affine-neighbourhood lemma (Stacks 01ZX, in its\ncase of finitely many irreducible components) supplies an affine open\ncontaining that point and all the generic points of the components.\nQuasi-compactness selects finitely many such opens. Their total intersection\nstill contains all generic points and is therefore dense.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For the second assertion, $Y$ is quasi-affine and locally of finite type\nover $S$, so the relative affine-space immersion lemma (Stacks 04II;\n[lemma-nagata-zmt-open-immersion-affine-factorization], [lemma-nagata-quasi-affine-immersion-affine-space-exists]) embeds it over $S$ as a locally closed\nsubscheme of some $\\mathbf A^{n}_S$. As $Y\\to S$ is quasi-compact, so is the\nresulting immersion $Y\\to\\mathbf P^{n}_S$. Its schematic closure in\n$\\mathbf P^{n}_S$ is proper over $S$, and [sk-lem-nagata-sketch-closure]\nmakes $Y$ an open in that closure. An affine $U_r$ is quasi-affine, its map\nto $S$ is locally of finite type, and it is quasi-compact because $U_r$ is\nquasi-compact and $S$ is quasi-separated.",
+    "uses": [
+     "lemma-nagata-zmt-open-immersion-affine-factorization",
+     "lemma-nagata-quasi-affine-immersion-affine-space-exists",
+     "sk-lem-nagata-sketch-closure"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-presheaf-space-target-bootstrap",
+ "kind": "statement",
+ "title": "An algebraic-space-representable presheaf over an algebraic space is an algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with the universes of [def-weil-size-convention], and work on the big fppf site $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site]. Let $P:(\\mathit{Sch}/S)^{\\mathrm{op}}\\to\\mathit{Sets}$ be a presheaf of sets, let $Z$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $a:P\\to Z$ be a natural transformation. For an $S$-scheme $T$, write $h_T(U)=\\operatorname{Mor}_S(U,T)$. Assume that for every $S$-scheme $T$ and every natural transformation $t:h_T\\to Z$, the presheaf fibre product $h_T\\times_Z P$ is isomorphic to the presheaf of an algebraic space over $S$. Here the presheaf fibre product has value $\\{(u,p)\\in h_T(U)\\times P(U):t_U(u)=a_U(p)\\}$ at $U$, with componentwise restrictions. Then $P$ is an algebraic space over $S$; in particular no sheaf condition on $P$ is assumed in the hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 02YS, lemma-representable-by-spaces-over-space (statement); its hypothesis of representability by algebraic spaces is expanded into scheme tests."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Prove fppf descent by the Yoneda sheaf condition. For a covering sieve C on T and f:C→P, extend f a uniquely in the sheaf Z to t:h_T→Z. The equality C→h_T→Z = C→P→Z gives l:C→h_T×_Z P. The hypothesis identifies this pullback with an algebraic-space sheaf, so l extends uniquely to v:h_T→h_T×_Z P. Then v followed by the P projection extends f. For another extension g:h_T→P, uniqueness in Z gives g a=t, and hence (1,g) is a map to the pullback extending l; uniqueness there gives g=v pr_P. This also treats empty covering sieves. This is the fully proved private isSheaf_of_fibres helper.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 02YS, first paragraph; lemma-representable-by-spaces-transformation-to-sheaf"
+   }
+  },
+  {
+   "text": "Choose a representable surjective etale scheme atlas u:h_U→Z from the algebraic-space definition. By hypothesis there are an algebraic space B and an isomorphism e:h_U×_Z P≅B. Choose a representable surjective etale scheme atlas b:h_W→B. Define p=b e⁻¹ pr_P:h_W→P.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 02YS, second paragraph"
+   }
+  },
+  {
+   "text": "The helper representableWith_iff identifies IsRepresentableWith Q with Mathlib Q.relative yoneda, by uniqueness of representing pullback schemes. Relative morphism properties are stable under arbitrary presheaf base change, contain isomorphisms when Q does, and are closed under composition when Q is. Apply these results to Q=etale and Q=surjective on Over S. The second pullback projection is the base change of u and hence has each property; compose with e⁻¹ and b. Thus p is representable etale and representable surjective. This is precisely the two pasted scheme-test squares and composition of surjective etale projections in the source; it does not assume P algebraic and does not compose maps merely representable by algebraic spaces.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-covering-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 02YS, third and fourth paragraphs"
+   }
+  },
+  {
+   "text": "Apply the scheme-test definition of etaleness of p to p itself to obtain R with IsPullback(h_s,h_t,p,p). Use lem-a1-representable-etale-kernel-relation for the sheaf P established in step 1 to obtain the sectionwise equivalence relation and etaleness of s,t. The pair (s,t):R→W×_S W is monic in Over S: maps with equal pairs give equal maps to h_R by the representing square, and are equal by faithfulness of Yoneda.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-a1-representable-etale-kernel-relation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 02YS, last paragraph; Spaces Tag 0262, first proof paragraph"
+   }
+  },
+  {
+   "text": "Apply lem-a1-representable-etale-fppf-local-lifting to p and the fppf sheaf P. Its locally-surjective conclusion says every section of P lifts on an fppf covering; no global lift is claimed.",
+   "uses": [
+    "lem-a1-representable-etale-fppf-local-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 02YS, last paragraph, W→F is a surjection of sheaves"
+   }
+  },
+  {
+   "text": "Let Q₀ be the presheaf coequalizer of h_s,h_t and η:Q₀→P its induced map, so πη=p. The helper quotient_unit_mono proves η monic: choose sectionwise representatives w₁,w₂ of two quotient sections; equality of their P images gives r∈R(T) with projections w₁,w₂ by the pullback square; the coequalizer condition then identifies their classes. Since πη=p is locally surjective, η is locally surjective. Put K=range(η), so Q₀≅K because η is monic. Its subsheaf closure K# inside P is all P by local surjectivity, and K#→P is therefore an isomorphism. For every fppf sheaf H, maps K→H extend uniquely over K# by Mathlib Subfunctor.sheafifyLift and Subfunctor.to_sheafify_lift_unique. Compose with Q₀≅K and K#≅P to obtain the required bijection Hom(P,H)→Hom(Q₀,H) by precomposition with η. This is the fully proved reflection_of_locally_bijective helper and proves the specified sheafification universal property without assuming HasSheafify for Type u on the big site.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 02YS, last paragraph, identification F=W/R; universal-property argument via subsheaf closure"
+   }
+  },
+  {
+   "text": "The schemes R,W and s,t meet the etale-equivalence-relation hypotheses by step 4. Step 6 supplies exactly the presheaf coequalizer unit η and the sheafification universal property required by lem-trf-etale-relation-quotient. Apply that theorem to the sheaf P from step 1, with this η, to obtain IsAlgebraicSpace P.",
+   "uses": [
+    "lem-trf-etale-relation-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 02YS, last paragraph, application of Spaces Tag 02WW"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-pbc-sheafification",
+  "lem-a1-representable-etale-fppf-local-lifting",
+  "lem-a1-representable-etale-kernel-relation",
+  "lem-trf-etale-relation-quotient",
+  "lem-weil-pbc-etale-covering-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 02YS, lemma-representable-by-spaces-over-space, proof; Lean realization by C1, 2026-10-26, with the quotient universal property proved using subsheaf closure"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "representableBy.*Space|RepresentableBy.*Space|algebraic.space|AlgebraicSpace",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Zariski scheme gluing, ringed topological spaces, or ordinary relative representability; none extends scheme tests with algebraic-space representatives to arbitrary algebraic-space targets"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representable\", \"pullback\"",
+   "results": "12 hits: CategoryTheory.Functor.relativelyRepresentable.pullback, CategoryTheory.Functor.relativelyRepresentable.isPullback, CategoryTheory.Functor.relativelyRepresentable.pullback₃, CategoryTheory.Functor.relativelyRepresentable.pullback₃.p₁, CategoryTheory.Functor.relativelyRepresentable.pullback₃.p₂, CategoryTheory.Functor.relativelyRepresentable.pullback₃.p₃, CategoryTheory.Functor.relativelyRepresentable.pullback₃.π, CategoryTheory.Functor.relativelyRepresentable.isPullback'",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Zariski scheme gluing, ringed topological spaces, or ordinary relative representability; none extends scheme tests with algebraic-space representatives to arbitrary algebraic-space targets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presheaf mapping to an algebraic space with every scheme base change an algebraic space is an algebraic space",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.SheafedSpace, AlgebraicGeometry.PresheafedSpace, AlgebraicGeometry.Scheme, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme, AlgebraicGeometry.SheafedSpace.instCategory",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Zariski scheme gluing, ringed topological spaces, or ordinary relative representability; none extends scheme tests with algebraic-space representatives to arbitrary algebraic-space targets"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic-space-representable natural transformation of set valued presheaves to an algebraic space has algebraic space domain",
+   "results": "8 hits: AlgebraicGeometry.PresheafedSpace.ext, CategoryTheory.NatTrans.onPresheaf, TopCat.Presheaf.toTotalQuotientPresheaf, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom_c, AlgebraicGeometry.Spec.toPresheafedSpace, TopCat.Presheaf.SubmonoidPresheaf.toLocalizationPresheaf, AlgebraicGeometry.PresheafedSpace.Hom.mk.noConfusion, AlgebraicGeometry.PresheafedSpace.categoryOfPresheafedSpaces",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Zariski scheme gluing, ringed topological spaces, or ordinary relative representability; none extends scheme tests with algebraic-space representatives to arbitrary algebraic-space targets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of categories fibred in groupoids representable by algebraic spaces has an algebraic space 2-pullback over an algebraic space",
+   "results": "8 hits: AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.hasPullback_of_left, CategoryTheory.Functor.relativelyRepresentable.isPullback, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.hasPullback_of_right, CategoryTheory.Functor.relativelyRepresentable.pullback, CategoryTheory.Functor.relativelyRepresentable.fst, CategoryTheory.Functor.relativelyRepresentable.isPullback', CategoryTheory.Functor.relativelyRepresentable.snd, HasFibers.mkPullback",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Zariski scheme gluing, ringed topological spaces, or ordinary relative representability; none extends scheme tests with algebraic-space representatives to arbitrary algebraic-space targets"
+  },
+  {
+   "tool": "grep",
+   "query": "relativelyRepresentable|LocalRepresentability.isRepresentable",
+   "results": "5 hits: 29, 35, 53, 67, 74",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Zariski scheme gluing, ringed topological spaces, or ordinary relative representability; none extends scheme tests with algebraic-space representatives to arbitrary algebraic-space targets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a natural transformation of set valued presheaves is representable by algebraic spaces and the target is an algebraic space then its source is an algebraic space",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, CategoryTheory.Functor.RepresentableBy.isRepresentable, CategoryTheory.MorphismProperty.relative.rep, AlgebraicGeometry.Scheme.LocalRepresentability.yonedaIsoSheaf, CategoryTheory.Functor.IsRepresentedBy.of_isRepresentable, CategoryTheory.Functor.IsRepresentedBy.representableBy, CategoryTheory.Functor.IsRepresentable",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Zariski scheme gluing, ringed topological spaces, or ordinary relative representability; none extends scheme tests with algebraic-space representatives to arbitrary algebraic-space targets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presheaf mapping to an algebraic space whose every pullback to a scheme is an algebraic space is an algebraic space",
+   "results": "8 hits: AlgebraicGeometry.PresheafedSpace, AlgebraicGeometry.SheafedSpace, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.SheafedSpace.IsSheaf, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpace, AlgebraicGeometry.PresheafedSpace.categoryOfPresheafedSpaces, AlgebraicGeometry.SheafedSpace.instCategory",
+   "date": "2026-10-23",
+   "verdict": "no match: Zariski open-immersion scheme representability, ringed spaces, or scheme etale objects; none proves the algebraic-space bootstrap"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|representableBy.*Space",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space declaration found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A presheaf representable by algebraic spaces over an algebraic space is an algebraic space",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.PresheafedSpace.mk.injEq, CategoryTheory.Sheaf.isSheaf_of_isRepresentable, AlgebraicGeometry.PresheafedSpace, AlgebraicGeometry.PresheafedSpace.presheaf, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.PresheafedSpace.recOn, AlgebraicGeometry.PresheafedSpace.casesOn",
+   "date": "2026-10-23",
+   "verdict": "no match: Zariski open-immersion scheme representability, ringed spaces, or scheme etale objects; none proves the algebraic-space bootstrap"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"relativelyRepresentable\"",
+   "results": "12 hits: CategoryTheory.Functor.relativelyRepresentable, CategoryTheory.Functor.relativelyRepresentable.isMultiplicative, CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange, CategoryTheory.Functor.relativelyRepresentable.respectsIso, CategoryTheory.Functor.relativelyRepresentable.of_isIso, CategoryTheory.Functor.relativelyRepresentable.pullback, CategoryTheory.Functor.relativelyRepresentable.isomorphisms_le, CategoryTheory.Functor.relativelyRepresentable.snd",
+   "date": "2026-10-23",
+   "verdict": "no match: relative representability tests objects in the image of one functor; this does not supply the algebraic-space bootstrap from tests only on schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A set valued sheaf admitting a scheme valued etale surjective atlas is an algebraic space",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-23",
+   "verdict": "no match: Zariski open-immersion scheme representability, ringed spaces, or scheme etale objects; none proves the algebraic-space bootstrap"
+  },
+  {
+   "tool": "grep",
+   "query": "isRepresentable|representableBy",
+   "results": "5 hits: 23, 195, 196, 210, 211 (subdirectory AlgebraicGeometry/Sites/Representability.lean)",
+   "date": "2026-10-23",
+   "verdict": "no match: Zariski open-immersion scheme representability, ringed spaces, or scheme etale objects; none proves the algebraic-space bootstrap"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-representable-pullback-over-space",
+  "date": "2026-10-23",
+  "group": "Q120"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Chartwise calculus for smooth and etale representable morphisms. Supporting input: representability input for testing a composite on the algebraic space obtained from its second factor; Stacks 0300, before 045B. In the proof of Stacks 0300: the final application of Bootstrap Tag 02YS after passing to a presheaf of isomorphism classes. Split here realizes Bootstrap 02YS: recover the sheaf condition, build the scheme atlas W, compute its scheme tests, and identify P with its etale-relation quotient.",
+   "via": [
+    "lem-sfb-representable-pullback-over-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-presheaf-space-target-bootstrap",
+  "worker": "stage1",
+  "summary": "Checked the statement against Bootstrap 02YS and expanded its source proof into seven steps using existing DAG tools. No new nodes: sheaf gluing, the fibre-product identity and the pointwise quotient universal property are explicit elementary arguments; sheaf effectivity is supplied by the existing epi/kernel-pair coequalizer leaf. Preserved the statement and all imported metadata. Checked every cited statement and its hypotheses, no circular dependency, and recorded fresh logged Mathlib searches.",
+  "blueprint": "Historical helper below det-thm-sf-ctf-stability-direct-images (3), through the inherited alteration/moduli/0300 chain. The current blueprint direct-image proof and ancestor helper were read. Steps 1-7 realize the 02YS bootstrap input in the final step of 0300, without changing the unit route. ancestor prints None because the inherited created.item chain terminates at a module name; preserve this existing null ancestor and its full via list.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic scheme-source representability over an algebraic space, used only for Z and V in the 02YS atlas calculation; the current unit has no separate node for this diagonal consequence."
+   },
+   {
+    "node": "lem-a1-representable-etale-kernel-relation",
+    "why": "Generic kernel-pair calculation for an fppf sheaf with a representable surjective etale scheme map; the statement explicitly does not assume the sheaf algebraic."
+   },
+   {
+    "node": "lem-a1-representable-etale-fppf-local-lifting",
+    "why": "Generic scheme-test local lifting for an fppf sheaf; used to prove the quotient identification before P is known algebraic."
+   },
+   {
+    "node": "lem-trf-etale-relation-quotient",
+    "why": "Stacks 02WW, explicitly invoked at the end of the assigned source 02YS; a general algebraic-space presentation tool, not a trace-formula argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-representable-etale-kernel-relation",
+  "lem-a1-representable-etale-fppf-local-lifting",
+  "lem-trf-etale-relation-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-8beb22bc9",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-8beb22bc9 (reviewer sub-agent of L); spot-checked: The 7-step split of lem-sfb-presheaf-space-target-bootstrap follows Stacks Bootstrap 02YS faithfully and creates no new nodes. The statement is unchanged from the live unsplit node and matches the 02YS meaning of 'representable by algebraic spaces' (P is only a presheaf, Z is algebraic). Step 1 is the transformation-to-sheaf argument (Z sheaf, B sheaf, then h_T sheaf forces first coordinate 1_T; also covers the empty covering). Step 2 takes the atlases U→Z and W→V=h_U×_Z P. Step 3: I checked the isomorphism h_E≅h_W×_P h_X in both directions, and the composite E→D→X is surjective etale via lem-weil-pbc-etale-covering-composition. Neither the composition of space-representable maps nor P's diagonal is used. Steps 4 and 5 rely on the statements of the a1 kernel-relation and fppf-local-lifting lemmas, which assume only an fppf sheaf. Step 6: the epi/kernel-pair coequalizer, plus the correspondence between W/R and maps that equalize s and t, gives the universal property of def-weil-pbc-sheafification. Step 7 applies lem-trf-etale-relation-quotient (Stacks 02WW), as the source does. Edge cases checked: P=Z, empty Z or P, P a scheme, infinite coverings. No cycle: the item is in none of the proof_deps closures. Not a duplicate: lem-sfb-fppf-space-atlas-bootstrap (04S6, needs a sheaf and flat lfp fibres) and lem-sfb-etale-sheaf-space-atlas-bootstrap (0BH4, etale sheaf with chart) state different things, and lem-sfb-representable-pullback-over-space is a citer. Batch-5: all five flagged citations are generic algebraic-space foundations (the scheme-as-space definition, Spaces 0262 kernel relation and local lifting, 02WW presentation, 03EC scheme tests). Their closures contain no trace-formula theorem, Poincaré-duality node, nt-assume leaf or batch-4 target, so they are accepted. The four declared tool_uses are accepted. No repair note, no SGA, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PresheafSpaceTargetBootstrap",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.presheaf_space_target_bootstrap",
+  "file": "lean/Sheaf/AlgebraicGeometry/PresheafSpaceTargetBootstrap.lean",
+  "statement": "theorem presheaf_space_target_bootstrap {S : Scheme.{u}} (P : (Over S)ᵒᵖ ⥤ Type u) (Z : AlgebraicSpace S) (a : P ⟶ Z.obj.obj) (h : ∀ (T : Over S) (t : yoneda.obj T ⟶ Z.obj.obj), ∃ B : AlgebraicSpace S, Nonempty (Limits.pullback t a ≅ B.obj.obj)) : ∃ hP : Presheaf.IsSheaf (Scheme.fppfTopology.over S) P, IsAlgebraicSpace ⟨P, hP⟩",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f5bfae5d",
+  "group": "NO",
+  "result": "pass",
+  "note": "Signature matches node/Stacks 02YS clause by clause: arbitrary presheaf P (no sheaf hyp), Z : AlgebraicSpace S, a : P ⟶ Z.obj.obj, ∀ T : Over S, ∀ t : yoneda.obj T ⟶ Z.obj.obj, presheaf pullback t a ≅ some B.obj.obj (Nonempty iso, no scheme rep demanded); conclusion ∃ IsSheaf fppf P ∧ IsAlgebraicSpace ⟨P,hP⟩ on the same P. Universes = recorded def-trf-algebraic-space interface (Scheme.{u}, Over S, Type u), no extra assumptions. lean.statement verbatim; only lean field changed vs live node; no new nodes/deps. Edge cases: empty P excluded by hypothesis (correct), P=Z, empty S/T. No duplicate in live Sheaf (only citers; EtaleSheafSpaceAtlasBootstrap differs) or Mathlib. Docstrings carry source+blueprint+7 proof steps; sorry only; report has Worker report and Second reading sections. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261026T091232-L-3324594",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

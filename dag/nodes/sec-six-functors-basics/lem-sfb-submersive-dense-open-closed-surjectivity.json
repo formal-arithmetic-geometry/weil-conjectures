@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-submersive-dense-open-closed-surjectivity",
+ "kind": "statement",
+ "title": "Closed horizontal support under a universally submersive map still covers the base",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] of finite type [def-weil-finite-type-morphism]. Suppose $Y$ is integral [def-pc-integral-scheme] and Noetherian, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. Assume $f$ is universally submersive: for every scheme morphism $T\\to Y$, the map of underlying spaces $|X\\times_Y T|\\to |T|$ [def-pc-fibre-product] is surjective and a subset of $|T|$ is open if and only if its inverse image is open. Let $U\\subseteq Y$ be a dense open subscheme, where dense means that its topological closure is all of $|Y|$. For every closed subset $Z\\subseteq |X|$ containing $f^{-1}(|U|)$, one has $f(Z)=|Y|$.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0ETT, lemma-Noetherian-h-covering, proof, last paragraph: the DVR specialization argument after flattening; apply the same argument to a closed subset containing the inverse image of a dense open. The trait through a specified point is supplied there by limits.tex Tag 0CM2, lemma-reach-point-closure-Noetherian."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $j:U\\hookrightarrow Y$ for the given open inclusion. Apply [lem-sfb-noetherian-open-closed-finite-presentation] with $S=Y$, $W=U$ and $i=\\mathrm{id}_U$ (the closed immersion defined by the zero ideal). Its Noetherian hypothesis is exactly the hypothesis on $Y$, and its conclusion makes $j$ quasi-compact. Thus [lem-weil-pbc-qc-open-immersion-finite-type] makes $j$ of finite type. Since $U$ is dense, $\\overline{j(|U|)}=|Y|$.",
+   "uses": [
+    "lem-sfb-noetherian-open-closed-finite-presentation",
+    "lem-weil-pbc-qc-open-immersion-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0ETT, flat-lemma-Noetherian-h-covering, proof, last paragraph: trait through a point and universal-submersivity contradiction; using limits.tex Tag 0CM2 only at a point outside the dense open."
+   }
+  },
+  {
+   "text": "Fix $y\\in|Y|$. If $y\\in U$, surjectivity of $f$ (the identity-base-change case of universal submersivity) gives $x\\in X$ over $y$, and then $x\\in f^{-1}(U)\\subseteq Z$. Otherwise $y\\in\\overline{j(|U|)}\\setminus j(|U|)$. Apply [lem-sfb-noetherian-image-boundary-dvr] to the finite-type map $j:U\\to Y$, with the locally Noetherian target $Y$. It supplies a DVR $A$, its fraction field $K$, and $g:T=\\operatorname{Spec}A\\to Y$ whose closed point $s$ maps to $y$ and whose restriction along $\\operatorname{Spec}K\\to T$ factors through $U$.",
+   "uses": [
+    "lem-sfb-noetherian-image-boundary-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CM2, limits-lemma-reach-point-closure-Noetherian, applied to the open inclusion at a point outside its image; this avoids the trivial-specialization issue in the unrestricted printed statement."
+   }
+  },
+  {
+   "text": "Form $W=X\\times_Y T$ with projections $p:W\\to X$ and $q:W\\to T$ [def-pc-fibre-product]. Thus $f\\circ p=g\\circ q$. Universal submersivity, applied to $g$, says that $q$ is surjective and that a subset of $T$ is open exactly when its inverse image under $q$ is open. Put $C=p^{-1}(Z)$. This is closed, since morphisms of schemes are continuous [def-pc-scheme]. If $\\eta$ denotes the zero prime of $A$, the map $\\operatorname{Spec}K\\to T$ has image $\\eta$: contraction of the zero prime under $A\\hookrightarrow K$ is zero [def-weil-affine-spectrum]. Therefore $g(\\eta)\\in U$, and the commuting square gives $q^{-1}(\\{\\eta\\})\\subseteq C$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0ETT, flat-lemma-Noetherian-h-covering, proof, last paragraph: trait through a point and universal-submersivity contradiction; using limits.tex Tag 0CM2 only at a point outside the dense open."
+   }
+  },
+  {
+   "text": "By [lem-sc-dvr-dimension-one] and the prime-chain definition [def-weil-pbc-krull-dimension-ring], $T$ has just the points $\\eta=(0)$ and $s=\\mathfrak m_A$. Indeed $A$ is a local domain with $\\mathfrak m_A\\ne0$ [def-sc-discrete-valuation-ring]; any third prime would give the length-two strict chain $(0)\\subsetneq\\mathfrak p\\subsetneq\\mathfrak m_A$, contradicting $\\dim A=1$. The singleton $\\{\\eta\\}$ is not closed: in the Zariski topology [def-weil-affine-spectrum], a closed set $V(I)$ containing $(0)$ has $I\\subseteq(0)$, hence $I=(0)$ and $V(I)=T$, which also contains the distinct point $s$.",
+   "uses": [
+    "lem-sc-dvr-dimension-one",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, algebra-lemma-characterize-dvr, (1) implies (3), followed by the definitions of Krull dimension and the Zariski topology."
+   }
+  },
+  {
+   "text": "If $C$ had no point over $s$, the two-point description and $q^{-1}(\\{\\eta\\})\\subseteq C$ would give $C=q^{-1}(\\{\\eta\\})$. Since $C$ is closed, $q^{-1}(\\{s\\})=W\\setminus C$ would be open. The open-set criterion for $q$ would make $\\{s\\}$ open in $T$, so $\\{\\eta\\}$ would be closed, contradicting step 4. Hence there is $w\\in C$ with $q(w)=s$. Then $p(w)\\in Z$ and $f(p(w))=g(q(w))=g(s)=y$. The two cases cover every $y\\in|Y|$, proving $f(Z)=|Y|$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0ETT, flat-lemma-Noetherian-h-covering, proof, last paragraph: trait through a point and universal-submersivity contradiction; using limits.tex Tag 0CM2 only at a point outside the dense open."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-noetherian-open-closed-finite-presentation",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-noetherian-image-boundary-dvr",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-sc-dvr-dimension-one",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-sc-discrete-valuation-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0ETT, flat-lemma-Noetherian-h-covering, proof, last paragraph: trait through a point and universal-submersivity contradiction; using limits.tex Tag 0CM2 only at a point outside the dense open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type universally submersive morphism to a noetherian integral scheme the closure of the preimage of a dense open subset maps surjectively onto the target",
+   "results": "{\"t\": \"2026-10-22T06:30:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type universally submersive morphism to a noetherian integral scheme the closure of the preimage of a dense open subset maps surjectively onto the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.IsDominant.denseRange\", \"AlgebraicGeometry.surjective_isZariskiLocalAtTarget\", \"AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.instIsDominantOfSurjective\"], \"digest\": \"5ec7cf482e5f94c5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern universally closed maps, closed ranges, dominance, or algebraic closures of generators. Universal submersivity is absent; none proves the asserted surjectivity for closed horizontal support."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict transform of a finite type universally submersive morphism under an admissible blowup of a noetherian integral scheme is surjective",
+   "results": "{\"t\": \"2026-10-22T06:28:42Z\", \"tool\": \"leanfinder\", \"query\": \"Strict transform of a finite type universally submersive morphism under an admissible blowup of a noetherian integral scheme is surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.specTargetImageRingHom_surjective\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.Surjective\", \"AlgebraicGeometry.Surjective.of_comp\", \"AlgebraicGeometry.SurjectiveOnStalks.Spec_iff\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.Scheme.Hom.surjective\"], \"digest\": \"58508df3e844ef6e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern universally closed maps, closed ranges, dominance, or algebraic closures of generators. Universal submersivity is absent; none proves the asserted surjectivity for closed horizontal support."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuotientMap\", \"closure\"",
+   "results": "{\"t\": \"2026-10-22T06:25:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuotientMap\\\", \\\"closure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern universally closed maps, closed ranges, dominance, or algebraic closures of generators. Universal submersivity is absent; none proves the asserted surjectivity for closed horizontal support."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Surjective\", \"closure\"",
+   "results": "{\"t\": \"2026-10-22T06:30:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"Surjective\\\", \\\"closure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"FreeAddGroup.lift_surjective_iff_closure_range_eq_top\", \"FreeGroup.lift_surjective_iff_closure_range_eq_top\", \"AddMonoidAlgebra.mvPolynomial_aeval_of_surjective_of_closure\", \"MonoidAlgebra.mvPolynomial_aeval_of_surjective_of_closure\", \"AddMonoidAlgebra.freeAlgebra_lift_of_surjective_of_closure\", \"MonoidAlgebra.freeAlgebra_lift_of_surjective_of_closure\", \"PerfectClosure.mk_surjective\"], \"digest\": \"4a28ffb05609c52a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern universally closed maps, closed ranges, dominance, or algebraic closures of generators. Universal submersivity is absent; none proves the asserted surjectivity for closed horizontal support."
+  },
+  {
+   "tool": "grep",
+   "query": "universally.?submersive|UniversallySubmersive|submersive.*closure",
+   "results": "{\"t\": \"2026-10-22T06:30:54Z\", \"tool\": \"grep\", \"query\": \"universally.?submersive|UniversallySubmersive|submersive.*closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern universally closed maps, closed ranges, dominance, or algebraic closures of generators. Universal submersivity is absent; none proves the asserted surjectivity for closed horizontal support."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a universally submersive morphism to a noetherian integral scheme the closure of the preimage of a dense open subset surjects onto the target",
+   "results": "{\"t\": \"2026-10-22T06:30:55Z\", \"tool\": \"leansearch\", \"query\": \"For a universally submersive morphism to a noetherian integral scheme the closure of the preimage of a dense open subset surjects onto the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\", \"AlgebraicGeometry.IsDominant.mk\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"AlgebraicGeometry.Scheme.Hom.denseRange\"], \"digest\": \"826f6715ff7652e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern universally closed maps, closed ranges, dominance, or algebraic closures of generators. Universal submersivity is absent; none proves the asserted surjectivity for closed horizontal support."
+  },
+  {
+   "tool": "grep",
+   "query": "universally.?submersive|UniversallySubmersive|submersive.*closure",
+   "results": "{\"t\": \"2026-10-23T09:47:39Z\", \"tool\": \"grep\", \"query\": \"universally.?submersive|UniversallySubmersive|submersive.*closure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: universally closed/dominant maps require extra hypotheses; the quotient-map closed-set equivalence supplies only the definitional complement argument, not the scheme/DVR reduction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed subsets containing the inverse image of a dense open under a universally submersive scheme morphism cover the Noetherian base",
+   "results": "{\"t\": \"2026-10-23T09:47:39Z\", \"tool\": \"leansearch\", \"query\": \"Closed subsets containing the inverse image of a dense open under a universally submersive scheme morphism cover the Noetherian base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.UniversallyClosed.mk\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\"], \"digest\": \"455fa85070eacb86\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: universally closed/dominant maps require extra hypotheses; the quotient-map closed-set equivalence supplies only the definitional complement argument, not the scheme/DVR reduction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuotientMap\", \"IsClosed\"",
+   "results": "{\"t\": \"2026-10-23T09:47:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuotientMap\\\", \\\"IsClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"IsClosedMap.isQuotientMap\", \"Topology.isQuotientMap_iff_isClosed\"], \"digest\": \"42d5be4aac981ef4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: universally closed/dominant maps require extra hypotheses; the quotient-map closed-set equivalence supplies only the definitional complement argument, not the scheme/DVR reduction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a universally submersive scheme morphism to a Noetherian integral base, every closed subset containing the preimage of a dense open surjects onto the base",
+   "results": "{\"t\": \"2026-10-23T09:47:43Z\", \"tool\": \"leanfinder\", \"query\": \"For a universally submersive scheme morphism to a Noetherian integral base, every closed subset containing the preimage of a dense open surjects onto the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.instIsDominantOfSurjective\"], \"digest\": \"8f3ad34d6ed356f1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: universally closed/dominant maps require extra hypotheses; the quotient-map closed-set equivalence supplies only the definitional complement argument, not the scheme/DVR reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "eq_bot_or_maximal|eq_bot_or.*maximal|eq_bot_or_isMaximal|isOpen_singleton.*closedPoint",
+   "results": "{\"t\": \"2026-10-23T09:50:27Z\", \"tool\": \"grep\", \"query\": \"eq_bot_or_maximal|eq_bot_or.*maximal|eq_bot_or_isMaximal|isOpen_singleton.*closedPoint\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "supporting fact only: DVR prime uniqueness is in Mathlib (Basic.lean:114), but the whole item is not. Reused existing lem-sc-dvr-dimension-one and the prime-chain definition instead of creating a node."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDiscreteValuationRing\", \"PrimeSpectrum\"",
+   "results": "{\"t\": \"2026-10-23T09:50:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsDiscreteValuationRing\\\", \\\"PrimeSpectrum\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "supporting fact only: DVR prime uniqueness is in Mathlib (Basic.lean:114), but the whole item is not. Reused existing lem-sc-dvr-dimension-one and the prime-chain definition instead of creating a node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The prime ideals of a discrete valuation ring are the zero ideal and the maximal ideal",
+   "results": "{\"t\": \"2026-10-23T09:50:29Z\", \"tool\": \"leansearch\", \"query\": \"The prime ideals of a discrete valuation ring are the zero ideal and the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.iff_pid_with_one_nonzero_prime\", \"IsDiscreteValuationRing.mk\", \"IsDiscreteValuationRing.not_a_field\", \"IsDiscreteValuationRing.toIsLocalRing\", \"IsDiscreteValuationRing.TFAE\", \"Valuation.Integers.maximalIdeal_eq_setOf_le_v_algebraMap\", \"exists_maximalIdeal_pow_eq_of_principal\", \"IsDiscreteValuationRing.toIsPrincipalIdealRing\"], \"digest\": \"8a7550be1bae7bef\"}",
+   "date": "2026-10-23",
+   "verdict": "supporting fact only: DVR prime uniqueness is in Mathlib (Basic.lean:114), but the whole item is not. Reused existing lem-sc-dvr-dimension-one and the prime-chain definition instead of creating a node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The prime spectrum of a discrete valuation ring consists of the zero ideal and the unique maximal ideal, and the closed point is not open",
+   "results": "{\"t\": \"2026-10-23T09:50:32Z\", \"tool\": \"leanfinder\", \"query\": \"The prime spectrum of a discrete valuation ring consists of the zero ideal and the unique maximal ideal, and the closed point is not open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.maximalIdeal\", \"IsDiscreteValuationRing.isOpen_iff\", \"IsDiscreteValuationRing.not_a_field\", \"IsDiscreteValuationRing.not_a_field'\", \"IsDiscreteValuationRing.exists_prime\", \"IsDiscreteValuationRing.toIsLocalRing\", \"IsLocalRing.closedPoint\", \"IsDiscreteValuationRing.instIsHausdorffMaximalIdeal\"], \"digest\": \"f19f50c6e0f91c40\"}",
+   "date": "2026-10-23",
+   "verdict": "supporting fact only: DVR prime uniqueness is in Mathlib (Basic.lean:114), but the whole item is not. Reused existing lem-sc-dvr-dimension-one and the prime-chain definition instead of creating a node."
+  },
+  {
+   "tool": "grep",
+   "query": "iff_pid_with_one_nonzero_prime",
+   "results": "{\"t\": \"2026-10-23T09:52:36Z\", \"tool\": \"grep\", \"query\": \"iff_pid_with_one_nonzero_prime\", \"sub\": \"RingTheory/DiscreteValuationRing\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DiscreteValuationRing/Basic.lean\", \"Mathlib/RingTheory/DiscreteValuationRing/Basic.lean\"], \"digest\": \"240f17b6db9714e2\"}",
+   "date": "2026-10-23",
+   "verdict": "supporting fact only: DVR prime uniqueness is in Mathlib (Basic.lean:114), but the whole item is not. Reused existing lem-sc-dvr-dimension-one and the prime-chain definition instead of creating a node."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"iff_pid_with_one_nonzero_prime\"",
+   "results": "{\"t\": \"2026-10-23T09:52:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"iff_pid_with_one_nonzero_prime\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.iff_pid_with_one_nonzero_prime\"], \"digest\": \"4cdee2e965b0162d\"}",
+   "date": "2026-10-23",
+   "verdict": "supporting fact only: DVR prime uniqueness is in Mathlib (Basic.lean:114), but the whole item is not. Reused existing lem-sc-dvr-dimension-one and the prime-chain definition instead of creating a node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a discrete valuation ring there exists exactly one nonzero prime ideal",
+   "results": "{\"t\": \"2026-10-23T09:52:38Z\", \"tool\": \"leanfinder\", \"query\": \"For a discrete valuation ring there exists exactly one nonzero prime ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.iff_pid_with_one_nonzero_prime\", \"IsDiscreteValuationRing.maximalIdeal\", \"IsDiscreteValuationRing.exists_prime\", \"IsDiscreteValuationRing.toIsLocalRing\", \"IsDiscreteValuationRing.TFAE\", \"Irreducible.maximalIdeal_eq\", \"IsDiscreteValuationRing.not_a_field\", \"IsDiscreteValuationRing.not_a_field'\"], \"digest\": \"86d8523b82c2af20\"}",
+   "date": "2026-10-23",
+   "verdict": "supporting fact only: DVR prime uniqueness is in Mathlib (Basic.lean:114), but the whole item is not. Reused existing lem-sc-dvr-dimension-one and the prime-chain definition instead of creating a node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A universally quotient morphism of schemes forces the closure of the preimage of every dense open subset of an integral Noetherian target to map surjectively onto the target",
+   "results": "{\"t\": \"2026-10-23T09:55:36Z\", \"tool\": \"leanfinder\", \"query\": \"A universally quotient morphism of schemes forces the closure of the preimage of every dense open subset of an integral Noetherian target to map surjectively onto the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.IsDominant.denseRange\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.surjective_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.instIsDominantOfSurjective\"], \"digest\": \"641bfce8edf32af0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: universally closed/dominant maps require extra hypotheses; the quotient-map closed-set equivalence supplies only the definitional complement argument, not the scheme/DVR reduction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-subring-finite-type-submersion",
+  "date": "2026-10-22",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Finite type of a Noetherian subring detected by a universal submersion. Topological input to the flattening argument: closed horizontal support still covers the modified base.",
+   "via": [
+    "lem-sfb-noetherian-subring-finite-type-submersion",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-submersive-dense-open-closed-surjectivity",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies unchanged. Expanded the trait argument of Stacks 0ETT: use the existing boundary-DVR node only outside U; pull Z back to the trait; a missing special fibre would make its closed inverse image equal the generic fibre, contradicting submersivity. Reused existing quasi-compact-open and DVR-dimension Mathlib leaves, so no new nodes were required. Checked all step citations against their statements and recorded verbatim quotes.",
+  "blueprint": "Realizes the recorded supporting topological input to the flattening/subring finite-type argument below det-thm-sf-ctf-stability-direct-images, proof (3). Read the latest blueprint chapter and sk-thm-sf-ctf-stability unit/direct-image proof. No change to a unit step or its route; blueprint_refs ancestor reports None for this existing created-node chain, retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-a37a1e387",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-a37a1e387 (reviewer sub-agent of L); spot-checked: Read the item and every cited node's statement, Stacks flat.tex 0ETT (lemma-Noetherian-h-covering) through its last paragraph, limits.tex 0CM2, and the citer lem-sfb-noetherian-subring-finite-type-submersion. Delivery: one commit, no new nodes. Statement and stmt_deps are unchanged against the live node, which is still unsplit, so no other group superseded it; there is no repair note, so no re-split comparison applies. Step 1: the open/closed finite-presentation leaf with i=id_U makes j quasi-compact, then the qc-open-immersion leaf makes it finite type, and density gives closure(U)=Y. Step 2: y in U is covered by surjectivity through the identity base change; for y outside U the boundary-DVR node (same unit) applies to j, since y is in closure(U) minus U. Step 3: C=p^{-1}(Z) is closed by continuity; Spec K maps to the zero prime, so q^{-1}(eta) lies in C via f∘p=g∘q. Step 4: the DVR-dimension-one leaf gives exactly two points, and {eta} is not closed. Step 5: if no point of C lies over s, then C=q^{-1}(eta), so q^{-1}(s) is open; the quotient clause makes {s} open, so {eta} is closed, a contradiction; p(w) is then the required point of Z over y. This abstracts 0ETT's closed-fibre-open contradiction correctly. Edge cases checked: f=id; field base; the trait itself; the open immersion U→Y as a counterexample when the quotient clause is dropped. Duplicate search over 'universally submersive' and 0ETT nodes found none. The route stays in unit sk-thm-sf-ctf-stability apart from leaves and definitions; no SGA is used; no tool_uses are needed. Minor and accepted: identity as a closed immersion and open-subscheme inclusion as an open immersion are elementary and not cited. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SubmersiveDenseOpenClosedSurjectivity",
+  "declaration": "AlgebraicGeometry.image_closed_eq_univ_of_universally_submersive",
+  "file": "lean/Sheaf/AlgebraicGeometry/SubmersiveDenseOpenClosedSurjectivity.lean",
+  "statement": "theorem image_closed_eq_univ_of_universally_submersive {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] [IsIntegral Y] [IsLocallyNoetherian Y] [CompactSpace Y] (hsub : ∀ (T : Scheme.{u}) (g : T ⟶ Y), Function.Surjective (pullback.snd f g) ∧ ∀ V : Set T, IsOpen V ↔ IsOpen ((pullback.snd f g) ⁻¹' V)) (U : Y.Opens) (hU : closure (U : Set Y) = Set.univ) (Z : Set X) (hZ : IsClosed Z) (hUZ : f ⁻¹' (U : Set Y) ⊆ Z) : f '' Z = Set.univ",
+  "branch": "sheaf-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dff05b773",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim equal to file signature. Clause check: finite type = LocallyOfFiniteType ∧ QuasiCompact per dep record; Noetherian = IsLocallyNoetherian + CompactSpace; IsIntegral Y; universal submersivity inlined literally (pullback.snd surjective ∧ ∀ V, IsOpen V ↔ IsOpen preimage) over all T : Scheme.{u}, no affine restriction; density as closure = univ; arbitrary closed Z ⊇ f⁻¹U; conclusion f '' Z = univ. No extra assumptions; edge cases (empty T, U = Y, DVR base) fine. No defs, sorry-only proof, source/blueprint docstrings with 5-step proof; imported NoetherianImageBoundaryDvr exists live (signature read). No duplicate: only AlgebraicSpace.MapIsUniversallySubmersive (different signature). Report has Worker report and Second reading by Q77. No files changed, no compile."
+ }
+}

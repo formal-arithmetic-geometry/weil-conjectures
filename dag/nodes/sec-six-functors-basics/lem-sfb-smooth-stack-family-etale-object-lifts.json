@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-smooth-stack-family-etale-object-lifts",
+ "kind": "statement",
+ "title": "Etale-local lifts of scheme objects through a smooth stack covering family",
+ "statement": "Work in the universes and small-skeleton convention of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], let $\\mathcal X$ and $(\\mathcal X_j)_{j\\in J}$ be algebraic stacks over $S$ [def-sfb-algebraic-moduli-stack], and let $(p_j:\\mathcal X_j\\to\\mathcal X)_{j\\in J}$ be a set-indexed family of smooth morphisms, not necessarily representable. Smoothness is tested on smooth scheme charts, with scheme smoothness [def-sbc-smooth-morphisms]. Assume the family is jointly surjective: every object of $\\mathcal X$ over a field admits, after some extension of that field, an isomorphism to the image of an object of some $\\mathcal X_j$; use the field-valued and chart conventions of [lem-sfb-stack-chartwise-smooth-etale-calculus]. For every $S$-scheme $U$ and object $x\\in\\mathcal X(U)$, there exist a set-indexed jointly surjective etale family $(e_i:U_i\\to U)_{i\\in I}$ [def-weil-pbc-etale-site, def-weil-etale-morphism], indices $j(i)\\in J$, objects $y_i\\in\\mathcal X_{j(i)}(U_i)$ and isomorphisms $p_{j(i)}(y_i)\\simeq e_i^*x$ in $\\mathcal X(U_i)$. Pullbacks, fibre groupoids and isomorphisms use [def-sfb-stable-pointed-moduli-groupoids]. All the covering schemes and objects lie in the chosen site universe. No quasi-compactness, separation, finite-type or Noetherian hypotheses are imposed, and $U=\\varnothing$ is allowed with the empty covering.",
+ "source": {
+  "document": "literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tags 075Y (lemma-check-lqc-on-etale-covering), proof first paragraph (replace the source stacks by scheme atlases and lift a test object etale locally), and 0764 (lemma-check-flat-comparison-on-etale-covering), proof (3), the same construction. Geometric inputs: stacks-sheaves.tex Tag 06XH (lemma-surjective-flat-locally-finite-presentation), (2), and spaces-topologies.tex Tag 0CFV (lemma-etale-dominates-smooth)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "def-weil-pbc-etale-site",
+  "def-weil-etale-morphism",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-smooth-moduli-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth surjective scheme atlas $a_j:W_j\\to\\mathcal X_j$ for every $j$, and a smooth surjective scheme atlas $b:V\\to\\mathcal X$, using [def-sfb-algebraic-moduli-stack]. Put $q_j=p_ja_j$. The diagonal representability in that definition and [lem-sfb-stack-diagonal-space-source-representability] show that each $q_j$, being a map from a scheme to $\\mathcal X$, is representable by algebraic spaces. In particular $Z_j=W_j\\times_{\\mathcal X}V$ is an algebraic space. These choices use the size convention of [def-weil-size-convention].",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tags 026O (definition-algebraic-stack) and 045G (lemma-representable-diagonal), (3)--(4); stacks-cohomology.tex Tag 075Y, proof first paragraph"
+   }
+  },
+  {
+   "text": "We verify smoothness without assuming $p_j$ representable. The projection $Z_j\\to W_j$ is the base change of $b$, hence representable smooth and surjective by [lem-sfb-fibred-groupoid-representable-smooth-calculus]. Its composite with $a_j$ is representable smooth by the same statement. The map $Z_j\\to\\mathcal X_j\\times_{\\mathcal X}V$ is the base change of $a_j$, hence representable smooth as well. Thus the diagram with top row $Z_j\\to V$, bottom row $p_j$, and vertical maps $Z_j\\to\\mathcal X_j$, $b$, satisfies condition (A) of [lem-sfb-stack-smooth-presentation-criterion]; the assumed smoothness of $p_j$ gives smoothness of $Z_j\\to V$. Now apply condition (B) of that criterion to the diagram with bottom row $q_j$ and vertical maps $Z_j\\to W_j$, $b$. The first vertical map is surjective, so $q_j$ is smooth. Since $q_j$ is representable, the criterion's last clause says that every scheme base change of $q_j$ is a smooth algebraic-space morphism.",
+   "uses": [
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sfb-stack-smooth-presentation-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FM (lemma-local-source-target), (1)--(2) and final representable clause, specialized by Tag 075U (definition-smooth)"
+   }
+  },
+  {
+   "text": "Form $W=\\coprod_jW_j$ with its disjoint open-and-closed covering by [lem-weil-pbc-scheme-coproduct-family]. Stack descent on this covering [def-sfb-stable-pointed-moduli-groupoids] glues the objects $q_j$ to $q:W\\to\\mathcal X$: on distinct components the overlaps are empty, and on a component use its identity descent isomorphism. The map $q$ is representable by [lem-sfb-stack-diagonal-space-source-representability] and smooth by source-open locality in [lem-sfb-stack-chartwise-smooth-etale-calculus], since its restrictions are the smooth $q_j$. For any object $z\\in\\mathcal X(K)$ over a field, joint surjectivity first gives an extension $L/K$, an index $j$, an object $t\\in\\mathcal X_j(L)$, and $p_j(t)\\simeq z|_L$. Surjectivity of $a_j$ gives a further extension $M/L$ and a point of $W_j(M)$ mapping to $t|_M$ up to isomorphism. Its composite to $W$ lifts $z|_M$. Thus $q$ is surjective in the stated field-extension sense, and hence on every scheme base change, by the chartwise calculus statement.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 075Y (lemma-check-lqc-on-etale-covering), proof first paragraph: the disjoint-union smooth surjection; algebraic.tex Tag 045G; stacks-properties.tex Tags 04ZT, 04ZU"
+   }
+  },
+  {
+   "text": "For the given $x\\in\\mathcal X(U)$ form $P=W\\times_{\\mathcal X}U$. Representability of $q$ makes $P$ an algebraic space, and its projection $r:P\\to U$ is smooth and surjective by [lem-sfb-fibred-groupoid-representable-smooth-calculus]. Apply [lem-sfb-smooth-space-cover-etale-sections] to $r$: obtain an etale jointly surjective family $e_k:A_k\\to U$ and maps $v_k:A_k\\to P$ with $rv_k=e_k$. By the explicit definition of the 2-fibre product in [def-sfb-stable-pointed-moduli-groupoids], $v_k$ consists of a map $w_k:A_k\\to W$ and an isomorphism $q(w_k)\\simeq e_k^*x$.",
+   "uses": [
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sfb-smooth-space-cover-etale-sections",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XH (lemma-surjective-flat-locally-finite-presentation), proof (2); spaces-topologies.tex Tag 0CFV (lemma-etale-dominates-smooth)"
+   }
+  },
+  {
+   "text": "Refine each $A_k$ by $A_{k,j}=A_k\\times_WW_j$. Its projection to $A_k$ is an open immersion by [lem-weil-pbc-open-immersion-base-change]; these opens cover $A_k$ because the component images cover $W$ [lem-weil-pbc-scheme-coproduct-family]. Their composites $e_{k,j}:A_{k,j}\\to U$ are etale by clauses (1)--(2) of [lem-weil-pbc-etale-composition-cancellation], and jointly surjective because both successive families cover. Hence they are an etale covering by [def-weil-pbc-etale-site]. The second projection $A_{k,j}\\to W_j$ pulls back the atlas object to $y_{k,j}\\in\\mathcal X_j(A_{k,j})$; restricting the isomorphism from step 4 and using $q|_{W_j}\\simeq p_ja_j$ gives $p_j(y_{k,j})\\simeq e_{k,j}^*x$. This restriction is precisely functorial pullback of objects and isomorphisms in [def-sfb-stable-pointed-moduli-groupoids]. Take $I=\\{(k,j)\\}$ and $j(k,j)=j$. All indices, coproducts, pullbacks and etale covers are taken within the fixed upper site universe, and then represented in its small skeleton [def-weil-size-convention]. If $U$ is empty take $I=\\varnothing$ directly. In particular, if $J$ is empty, joint surjectivity precludes an object over a nonempty $U$ (restrict to a residue field), so this case is also covered.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-etale-site",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tags 075Y and 0764 (lemma-check-flat-comparison-on-etale-covering), proof (3); schemes.tex Tag 01JY (lemma-base-change-immersion); morphisms.tex Tags 02GP (lemma-open-immersion-etale), 02GN (lemma-composition-etale)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-pbc-etale-site",
+  "def-weil-size-convention",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "lem-sfb-smooth-space-cover-etale-sections",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "lem-sfb-stack-smooth-presentation-criterion",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tags 075Y, proof first paragraph, and 0764, proof (3), with 06XH(2) and 0CFV made explicit; general-scheme-base chart argument via 06FM"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A jointly surjective smooth family of algebraic stacks admits lifts of every scheme object after an etale covering",
+   "results": "{\"t\": \"2026-10-23T19:57:53Z\", \"tool\": \"leansearch\", \"query\": \"A jointly surjective smooth family of algebraic stacks admits lifts of every scheme object after an etale covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.covers\", \"AlgebraicGeometry.Scheme.JointlySurjective.exists_eq\", \"AlgebraicGeometry.Scheme.JointlySurjective.mk\", \"AlgebraicGeometry.Scheme.JointlySurjective\", \"AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage\", \"AlgebraicGeometry.Scheme.surjectiveFamiliesPretopology\", \"AlgebraicGeometry.Scheme.Cover.ulift\", \"AlgebraicGeometry.Scheme.ofArrows_mem_precoverage_iff\"], \"digest\": \"12e7c2c9760af636\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme covering and smoothness hits do not give etale-local object lifts for a nonrepresentable smooth family of algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth surjective algebraic stack morphisms have local sections for the etale topology",
+   "results": "{\"t\": \"2026-10-23T19:57:59Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth surjective algebraic stack morphisms have local sections for the etale topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtSource\", \"AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"Algebra.IsStandardEtale.of_surjective\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"0224efd1b3aa626e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme covering and smoothness hits do not give etale-local object lifts for a nonrepresentable smooth family of algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"Cover\"",
+   "results": "{\"t\": \"2026-10-23T19:57:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSmooth\\\", \\\"Cover\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme covering and smoothness hits do not give etale-local object lifts for a nonrepresentable smooth family of algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*(section|cover)|etale.*lift",
+   "results": "{\"t\": \"2026-10-23T19:57:52Z\", \"tool\": \"grep\", \"query\": \"smooth.*(section|cover)|etale.*lift\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\"], \"digest\": \"2d1a415732156139\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme covering and smoothness hits do not give etale-local object lifts for a nonrepresentable smooth family of algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale locally every scheme point in an algebraic stack lifts through a smooth jointly surjective family",
+   "results": "{\"t\": \"2026-10-23T19:59:35Z\", \"tool\": \"leanfinder\", \"query\": \"Etale locally every scheme point in an algebraic stack lifts through a smooth jointly surjective family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"bd37e03dfcc2fa0d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme covering and smoothness hits do not give etale-local object lifts for a nonrepresentable smooth family of algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "local.*section|exists.*section|section.*exists",
+   "results": "{\"t\": \"2026-10-23T19:59:25Z\", \"tool\": \"grep\", \"query\": \"local.*section|exists.*section|section.*exists\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"6789b22e0a7d5994\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme covering and smoothness hits do not give etale-local object lifts for a nonrepresentable smooth family of algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|smooth.*(local.*section|etale.*lift)|etale.*local.*lift",
+   "results": "{\"t\": \"2026-10-23T20:53:12Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|smooth.*(local.*section|etale.*lift)|etale.*local.*lift\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme morphisms or scheme etale sites only; none states lifts through a nonrepresentable smooth algebraic-stack covering family"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth surjective morphisms of algebraic stacks have local sections in the etale topology",
+   "results": "{\"t\": \"2026-10-23T20:53:13Z\", \"tool\": \"leansearch\", \"query\": \"Smooth surjective morphisms of algebraic stacks have local sections in the etale topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"27fc2a8bc976ec30\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme morphisms or scheme etale sites only; none states lifts through a nonrepresentable smooth algebraic-stack covering family"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"Surjective\"",
+   "results": "{\"t\": \"2026-10-23T20:53:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSmooth\\\", \\\"Surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme morphisms or scheme etale sites only; none states lifts through a nonrepresentable smooth algebraic-stack covering family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth jointly surjective family of algebraic stacks admits etale local lifts of every scheme valued object",
+   "results": "{\"t\": \"2026-10-23T20:53:13Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth jointly surjective family of algebraic stacks admits etale local lifts of every scheme valued object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.IsSmooth\"], \"digest\": \"a114605a3db63f08\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme morphisms or scheme etale sites only; none states lifts through a nonrepresentable smooth algebraic-stack covering family"
+  },
+  {
+   "tool": "grep",
+   "query": "local.*section|section.*exists|exists.*section",
+   "results": "{\"t\": \"2026-10-23T20:54:47Z\", \"tool\": \"grep\", \"query\": \"local.*section|section.*exists|exists.*section\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"6789b22e0a7d5994\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme morphisms or scheme etale sites only; none states lifts through a nonrepresentable smooth algebraic-stack covering family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every object of an algebraic stack lifts through a smooth cover after an etale covering of its base scheme",
+   "results": "{\"t\": \"2026-10-23T20:54:48Z\", \"tool\": \"leanfinder\", \"query\": \"Every object of an algebraic stack lifts through a smooth cover after an etale covering of its base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.Scheme.etalePretopology\"], \"digest\": \"7b5238c563ada9bc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme morphisms or scheme etale sites only; none states lifts through a nonrepresentable smooth algebraic-stack covering family"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-lqc-flat-comparison-local-structure",
+  "date": "2026-10-24",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Local structural properties of locally quasi-coherent flat-compatible modules. Smooth-locality prerequisite: the etale covering and lifted objects in Stacks 075Y, proof first paragraph, and 0764, proof (3).",
+   "via": [
+    "lem-sfb-stack-lqc-flat-comparison-local-structure",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-stack-family-etale-object-lifts",
+  "worker": "stage1",
+  "summary": "Preserved the statement and assembled the atlas reduction, representable smooth disjoint union, algebraic-space local sections and component refinement from existing DAG statements. Checked arbitrary scheme base via 06FM rather than the field-only smooth-permanence node. No new nodes or Lean attachments.",
+  "blueprint": "The inherited from.place tracks det-thm-sf-ctf-stability-direct-images (3), the alteration/moduli prerequisite chain ending at the smooth-locality input to Stacks 075Y and 0764. These five steps realize precisely the etale covering and lifted-object construction. blueprint_refs.py ancestor reports None for this inherited chain; the existing from.node and via are retained. Latest blueprint direct-images proof (3) read; no duplicate blueprint statement found.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NC-f1733d973",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-f1733d973 (reviewer sub-agent of L); spot-checked: I read the item and all 12 cited statements in full. Statement: it matches Stacks 075Y (stacks-cohomology.tex l.426-456) with 06XH(2) and 0CFV (spaces-topologies l.230-247). Joint surjectivity is field-point lifting after a field extension, which matches |X|=∪|f_j||X_j|. Nothing is weakened and no hypotheses are added. The parent lem-sfb-stack-lqc-flat-comparison-local-structure uses it exactly as stated. There is no re-split note for this item. Step 1: 045G source representability applies to q_j=p_j a_j because W_j is a scheme and X has representable diagonal. Step 2: Z_j->W_j is the base change of b; Z_j->X_j is a composite; Z_j->X_j×_X V is the base change of a_j. Criterion (A) for p_j gives Z_j->V smooth, then (B) with surjective Z_j->W_j gives q_j smooth. The representable clause gives scheme base change. Treating the scheme W_j as an algebraic stack is elementary. Step 3: gluing on the coproduct, smoothness by source-open locality and surjectivity through two field extensions all check against the chartwise calculus. Step 4: 0CFV node sections and the explicit 2-fibre product. Step 5: open-immersion refinement plus etale composition (1)-(2) and the site covering. Edge cases U=∅ and J=∅ are fine, and the refinement is needed because A_k may meet several W_j. uses ⊆ proof_deps with equal union. No SGA, no new nodes, no duplicates; the 0CFV/06XH hits are lem-sfb-smooth-space-cover-etale-sections, lem-sfb-etale-smooth-atlas-fppf-descent, lem-sfb-fppf-space-atlas-bootstrap and lem-sfb-stack-atlas-versal-completion, and none states lifts through a family of stack maps. Batch-5 flags: the three cited nodes reach sec-trace-formula only through the generic definition def-trf-algebraic-space, which is not a step of the trace formula or Poincaré duality. Accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothStackFamilyEtaleObjectLifts",
+  "declaration": "CategoryTheory.exists_etale_object_lifts_of_smooth_stack_family",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothStackFamilyEtaleObjectLifts.lean",
+  "statement": "theorem exists_etale_object_lifts_of_smooth_stack_family {S : Scheme.{u}} (X : BasedCategory.{v₁, w₁} (Over S)) (J : Type u) (Y : J → BasedCategory.{v₂, w₂} (Over S)) (p : ∀ j : J, BasedFunctor (Y j) X) (hX : IsAlgebraicModuliStack X) (hY : ∀ j : J, IsAlgebraicModuliStack (Y j)) (hp : ∀ j : J, IsSmoothModuliMap (p j)) (hsurj : ∀ (K : Type u) [Field K] (b : Spec (.of K) ⟶ S) (z : BasedFunctor (discreteModuli (yoneda.obj (Over.mk b))) X), ∃ (L : Type u) (_ : Field L) (i : K →+* L) (j : J) (y : BasedFunctor (discreteModuli (yoneda.obj (Over.mk (Spec.map (CommRingCat.ofHom i) ≫ b)))) (Y j)), Nonempty (ModuliTwoIso (y.comp (p j)) ((discreteModuliMap (yoneda.map (Over.homMk (Spec.map (CommRingCat.ofHom i))))).comp z))) (U : Over S) (x : BasedFunctor (discreteModuli (yoneda.obj U)) X) : ∃ (I : Type u) (V : I → Over S) (e : ∀ i : I, V i ⟶ U) (j : I → J) (y : ∀ i : I, BasedFunctor (discreteModuli (yoneda.obj (V i))) (Y (j i))), (∀ i : I, Etale (e i).left) ∧ (∀ z : U.left, ∃ (i : I) (t : (V i).left), (e i).left t = z) ∧ ∀ i : I, Nonempty (ModuliTwoIso ((y i).comp (p (j i))) ((discreteModuliMap (yoneda.map (e i))).comp x))",
+  "branch": "sheaf-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a76f67391",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Re-delivery repairs prior H4 dup: uses landed Q44 IsSmoothModuliMap (def-sfb-smooth-moduli-map, on base) = 06FM(2) chart predicate, no representability. Node diff vs live = lean + that landed stmt_dep only; lean.statement verbatim. hsurj = family form of IsSurjectiveModuliMap; conclusion I:Type u, V,e Etale, pointwise joint surjectivity (smallEtaleTopology covers), j(i), y_i, ModuliTwoIso with e_i^*x. No extra hypotheses; U=∅ and J=∅ ok; universes independent. Only sorry, docstrings/blueprint tags present, report sections present. No compile needed (no change)."
+ }
+}

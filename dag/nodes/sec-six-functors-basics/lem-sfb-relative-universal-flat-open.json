@@ -1,0 +1,223 @@
+{
+ "id": "lem-sfb-relative-universal-flat-open",
+ "kind": "statement",
+ "title": "Universal flatness open for a morphism between relative families",
+ "statement": "Let $S,X,Y$ be schemes [def-pc-scheme], let $p:X\\to S$, $q:Y\\to S$ and $f:X\\to Y$ be morphisms with $q\\circ f=p$. Assume $p$ is flat [def-weil-flat-morphism], locally of finite presentation [def-sbc-locally-finite-presentation], and a closed map on underlying topological spaces, meaning that it sends every closed subset to a closed subset. Assume $q$ is locally of finite type [def-weil-finite-type-morphism]. Put $U=\\{x\\in |X|:f\\text{ is flat at }x\\}$ and $F=|S|\\setminus p(|X|\\setminus U)$. Then $F$ is open and, equipped with the restricted structure sheaf, defines an open subscheme $F\\hookrightarrow S$ [def-weil-open-immersion]. For every scheme $T$ and morphism $h:T\\to S$, the base change $f_T:X\\times_ST\\to Y\\times_ST$ [def-pc-fibre-product] is flat if and only if $h$ factors through $F\\hookrightarrow S$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05XB, spaces-more-morphisms-lemma-where-flat, statement and displayed construction of W in its proof, specialized to schemes; relative source locus input is Tag 05VK (more-morphisms-lemma-base-change-flatness-fibres)."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-relative-flat-locus-base-change] to $p,q,f$. Its hypotheses are precisely that $p$ is flat and locally of finite presentation, $q$ is locally of finite type, and $qf=p$, all assumed here. Thus $U$ is open and for every $h:T\\to S$ the flat locus of $f_T$ is $\\pi_X^{-1}(U)$, where $\\pi_X:X_T\\to X$ is the projection.",
+   "uses": [
+    "lem-sfb-relative-flat-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XB, lemma-where-flat, first sentence of proof; scheme input Tag 05VK, more-morphisms-lemma-base-change-flatness-fibres."
+   }
+  },
+  {
+   "text": "Put $C=|X|\\setminus U$. Since $C$ is closed and $p$ is a closed map, $p(C)$ is closed, so $F=|S|\\setminus p(C)$ is open. Give $F$ the restricted structure sheaf. To check that this is a scheme, take an affine chart $V=\\operatorname{Spec}A\\subset S$ around any $s\\in F$. The principal-open basis gives $s\\in D(a)\\subset V\\cap F$; the principal-localization open immersion identifies this ringed open with $\\operatorname{Spec}A_a$. These affine neighbourhoods cover $F$, so the scheme definition applies. The inclusion with this restricted sheaf is an open immersion by its definition.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XB, lemma-where-flat, displayed construction of W and openness argument; Schemes Tag 01IK, lemma-open-subspace-scheme, elementary affine-neighbourhood proof."
+   }
+  },
+  {
+   "text": "Fix an arbitrary scheme $T$ and $h:T\\to S$, and write $p_T:X_T\\to T$ for the projection. Step 1 shows that the nonflat locus of $f_T$ is $\\pi_X^{-1}(C)$, by taking complements. The subset image identity for the cartesian square defining $X_T$ gives $p_T(\\pi_X^{-1}(C))=h^{-1}(p(C))$. By the definition of flat morphism, $f_T$ is flat exactly when its nonflat locus is empty. A subset is empty exactly when its image under a function is empty. Therefore $f_T$ is flat if and only if $h^{-1}(p(C))=\\varnothing$, equivalently $h(|T|)\\subseteq F$. This uses neither closedness of $p_T$ nor any finiteness assumption on $T$.",
+   "uses": [
+    "lem-sfb-relative-flat-locus-base-change",
+    "lem-weil-pbc-base-change-image",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XB, lemma-where-flat, final sentence expanded using Morphisms Tag 01S1, lemma-base-change-surjective, subset image identity in its proof."
+   }
+  },
+  {
+   "text": "If $h(|T|)\\subseteq F$, [lem-weil-pbc-morphism-factors-through-open-subscheme] applied to the open subscheme of step 2 gives a morphism $T\\to F$ whose composite with $F\\hookrightarrow S$ is $h$. Conversely such a factorization has image contained in $F$, since the inclusion has image $F$. Combining this with step 3 proves the required equivalence for every $T$ and $h$.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05XB, lemma-where-flat, final sentence; Schemes Tag 01HI, lemma-restrict-map-to-opens."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-flat-locus-base-change",
+  "def-pc-scheme",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-base-change-image",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05XB, lemma-where-flat, full proof specialized to schemes, with the last sentence expanded by the subset image identity of Morphisms Tag 01S1 and open factorization Tag 01HI."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "where.flat|flat.*locus|locus.*flat|[Uu]niversal.*[Ff]lat.*[Oo]pen",
+   "results": "{\"t\": \"2026-10-22T06:11:07Z\", \"tool\": \"grep\", \"query\": \"where.flat|flat.*locus|locus.*flat|[Uu]niversal.*[Ff]lat.*[Oo]pen\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Flat morphism definitions, stalkwise/affine flatness, universally open flat morphisms, and flat monomorphisms do not construct the universal flatness open in the parameter base. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism between a flat locally finitely presented closed family and a locally finite type family has a universal flatness open in the parameter base",
+   "results": "{\"t\": \"2026-10-22T06:11:07Z\", \"tool\": \"leansearch\", \"query\": \"A morphism between a flat locally finitely presented closed family and a locally finite type family has a universal flatness open in the parameter base\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"LocallyOfFinitePresentation\", \"IsClosedMap\"",
+   "results": "{\"t\": \"2026-10-22T06:11:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"LocallyOfFinitePresentation\\\", \\\"IsClosedMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Flat morphism definitions, stalkwise/affine flatness, universally open flat morphisms, and flat monomorphisms do not construct the universal flatness open in the parameter base. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let p X to S be flat locally of finite presentation and a closed map, let q Y to S be locally of finite type and f X to Y an S morphism. The maps T to S for which f T is flat are represented by an open subscheme of S",
+   "results": "{\"t\": \"2026-10-22T06:11:28Z\", \"tool\": \"leanfinder\", \"query\": \"Let p X to S be flat locally of finite presentation and a closed map, let q Y to S be locally of finite type and f X to Y an S morphism. The maps T to S for which f T is flat are represented by an open subscheme of S\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"36ad53ab39102de2\"}; Flat morphism definitions, stalkwise/affine flatness, universally open flat morphisms, and flat monomorphisms do not construct the universal flatness open in the parameter base. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The open complement of the closed image of the nonflat locus in the source represents all scheme base changes that make a relative morphism flat",
+   "results": "{\"t\": \"2026-10-22T06:11:29Z\", \"tool\": \"leanfinder\", \"query\": \"The open complement of the closed image of the nonflat locus in the source represents all scheme base changes that make a relative morphism flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\"], \"digest\": \"182da9dddcef10b3\"}; Flat morphism definitions, stalkwise/affine flatness, universally open flat morphisms, and flat monomorphisms do not construct the universal flatness open in the parameter base. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flatLocus|flat_locus|where.flat|universal.*flat.*open",
+   "results": "{\"t\": \"2026-10-23T04:24:09Z\", \"tool\": \"grep\", \"query\": \"flatLocus|flat_locus|where.flat|universal.*flat.*open\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Search hits concern globally flat maps, base-change preservation, affine/stalk flatness criteria, or openness of a flat map, rather than the universal flatness open in the parameter base. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The universal flatness locus of a morphism of relative schemes with flat finitely presented closed source family is open in the base",
+   "results": "{\"t\": \"2026-10-23T04:24:09Z\", \"tool\": \"leansearch\", \"query\": \"The universal flatness locus of a morphism of relative schemes with flat finitely presented closed source family is open in the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.instMorphismRestrict\"], \"digest\": \"245b27a3bbb93974\"}; Search hits concern globally flat maps, base-change preservation, affine/stalk flatness criteria, or openness of a flat map, rather than the universal flatness open in the parameter base. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"LocallyOfFinitePresentation\", \"IsClosedMap\"",
+   "results": "{\"t\": \"2026-10-23T04:24:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"LocallyOfFinitePresentation\\\", \\\"IsClosedMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Search hits concern globally flat maps, base-change preservation, affine/stalk flatness criteria, or openness of a flat map, rather than the universal flatness open in the parameter base. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between a flat locally finitely presented closed family and a locally finite type family is flat after base change exactly over an open subscheme of the parameter base",
+   "results": "{\"t\": \"2026-10-23T04:24:12Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism between a flat locally finitely presented closed family and a locally finite type family is flat after base change exactly over an open subscheme of the parameter base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\"], \"digest\": \"04641fe1d9d6160e\"}; Search hits concern globally flat maps, base-change preservation, affine/stalk flatness criteria, or openness of a flat map, rather than the universal flatness open in the parameter base. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The complement of the image of the nonflat locus is the open subscheme representing base changes for which a map between relative families is everywhere flat",
+   "results": "{\"t\": \"2026-10-23T04:25:01Z\", \"tool\": \"leanfinder\", \"query\": \"The complement of the image of the nonflat locus is the open subscheme representing base changes for which a map between relative families is everywhere flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.instFstScheme\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"7808f800388e0658\"}; Search hits concern globally flat maps, base-change preservation, affine/stalk flatness criteria, or openness of a flat map, rather than the universal flatness open in the parameter base. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-universal-surjective-flat-open",
+  "date": "2026-10-22",
+  "group": "Q132"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation; quot.tex Tag 0D1B, applying spaces-more-morphisms-lemma-where-isomorphism to the first projection of the universal closed family; Stacks Tag 05XD proof: first sentence, applying Tag 05XC to construct W_1; 05XC first sentence invoking 05XB; original item Steps 1--3 (source flat locus, closed-image complement, both universal directions).",
+   "via": [
+    "lem-sfb-universal-surjective-flat-open",
+    "lem-sfb-universal-isomorphism-open",
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-universal-flat-open",
+  "worker": "stage1",
+  "summary": "Q157 checked Stacks 05XB and scheme input 05VK, retained the statement and its six statement dependencies, reused the existing relative source-flat-locus theorem and Mathlib leaves, and expanded the arbitrary-base-change universal property via the subset image identity and open factorization. No new nodes. Repeated the item Mathlib searches with two semantic phrasings; no match.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation; quot.tex Tag 0D1B, applying spaces-more-morphisms-lemma-where-isomorphism to the first projection of the universal closed family; Stacks Tag 05XD proof: first sentence, applying Tag 05XC to construct W_1; 05XC first sentence invoking 05XB; original item Steps 1--3 (source flat locus, closed-image complement, both universal directions). Steps 1–4 realize the flatness-open subargument: source locus, closed-image complement, arbitrary base change and open factorization.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-1e2219dbe",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-1e2219dbe (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes. The statement, stmt_deps and source are identical to live/side-live, where the item is still unsplit, so nothing supersedes this delivery and no target was weakened. The hypotheses match Stacks 05XB (spaces-more-morphisms lemma-where-flat): p is flat, locally of finite presentation and closed, and q is locally of finite type. F is the source's |W|. Step 1 cites lem-sfb-relative-flat-locus-base-change (05VK, same unit), whose statement gives openness of U and Flat(f_T)=π_X^{-1}(U) for any h. Step 2 is genuinely elementary: C is closed, p(C) is closed, and the open-subscheme structure comes from the basic-open and Spec A_a open-immersion leaves. Step 3 applies the image_preimage_eq_of_isPullback leaf with f:=p and g:=h, giving p_T(π_X^{-1}C)=h^{-1}(p(C)); with stalkwise flatness this proves both directions for an arbitrary T. Step 4 uses the open-subscheme factorization leaf. proof_deps equals the union of the uses, tool_uses is empty (the only non-leaf cited node is in the unit), there is no cycle (closure checked), and no SGA is cited. The only nodes citing 05XB are the item, its citer lem-sfb-universal-surjective-flat-open (which uses exactly the stated F and the equivalence) and the 05VK node, so there is no duplicate. Small cases check out: X=∅ gives F=S, and k→k[ε] with ε↦0 gives F=∅."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeUniversalFlatOpen",
+  "declaration": "AlgebraicGeometry.exists_relativeUniversalFlatOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeUniversalFlatOpen.lean",
+  "statement": "theorem exists_relativeUniversalFlatOpen {S X Y : Scheme.{u}} (p : X ⟶ S) (q : Y ⟶ S) (f : X ⟶ Y) (hf : f ≫ q = p) [Flat p] [LocallyOfFinitePresentation p] (hp : IsClosedMap p) [LocallyOfFiniteType q] : ∃ F : S.Opens, (F : Set S) = (p '' {x : X | (f.stalkMap x).hom.Flat}ᶜ)ᶜ ∧ ∀ (T : Scheme.{u}) (h : T ⟶ S), Flat (pullback.map p h q h f (𝟙 T) (𝟙 S) (by simpa only [Category.comp_id] using hf.symm) (by simp)) ↔ ∃ l : T ⟶ F.toScheme, l ≫ F.ι = h",
+  "branch": "sheaf-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-54e7fd539",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Statement matches Stacks 05XB (p flat, lfp, IsClosedMap; q lft; q∘f=p); F is fixed as the set (p '' nonflat-stalk locus)ᶜ; open subscheme is Mathlib's F.toScheme/F.ι; for every T and h, Flat(pullback.map p h q h f 𝟙 𝟙) ↔ h factors through F.ι, both directions. No extra hypotheses; single universe u as in the 05VK node and the 05XC citer. lean.statement verbatim; stmt_deps unchanged, all six Mathlib existing:true records; non-public RelativeFlatLocusBaseChange import used only by the proof. No defs, proof is sorry, source-place and blueprint docstrings present, proof docstring follows the node's 4 steps; report has Worker report and Second reading by Q02. No existing declaration (UniversalSurjectiveFlatOpen is the stronger 05XC citer); live node still split with no lean record. Edge cases X=∅, T=∅, F=∅ checked. Not recompiled (no file changed)."
+ }
+}

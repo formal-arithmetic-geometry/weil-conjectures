@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-scheme-flat-smooth-point-base-change",
+ "kind": "statement",
+ "title": "Smoothness at a point of a flat scheme family under arbitrary base change",
+ "statement": "Let $f:U\\to T$ be a flat locally finitely presented morphism of schemes [def-pc-scheme, def-weil-flat-morphism, def-sbc-locally-finite-presentation], let $h:T^{\\prime}\\to T$ be any morphism of schemes, and let $a:U^{\\prime}=U\\times_TT^{\\prime}\\to U$ and $f^{\\prime}:U^{\\prime}\\to T^{\\prime}$ be the projections [def-pc-fibre-product]. For every point $u^{\\prime}\\in U^{\\prime}$, $f^{\\prime}$ is smooth at $u^{\\prime}$ if and only if $f$ is smooth at $a(u^{\\prime})$. Smooth at a point means that the restriction to some open neighbourhood is smooth [def-sbc-smooth-morphisms]. No flatness assumption is imposed on $h$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02V4 (lemma-set-points-where-fibres-smooth), case (1), equivalently the pointwise equality of the two smooth loci; proof uses Tag 01V9 and smoothness over field extensions."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Fix $u^{\\prime}$ and put $u=a(u^{\\prime})$, $t^{\\prime}=f^{\\prime}(u^{\\prime})$ and $t=h(t^{\\prime})=f(u)$. By [lem-weil-pbc-flat-morphism-base-change] and clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], $f^{\\prime}$ is flat and locally of finite presentation. Flatness of both maps gives flatness of their local ring maps at these points by [def-weil-flat-morphism]. Thus the pointwise fibre criterion will apply to both maps; no flatness of $h$ is needed.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V4, lemma-set-points-where-fibres-smooth, case (1); Tags 01U9 and 01TS"
+   }
+  },
+  {
+   "text": "First suppose $f$ is smooth on an open neighbourhood $V$ of $u$. The pullback $V^{\\prime}=V\\times_TT^{\\prime}$ is an open neighbourhood of $u^{\\prime}$ by [lem-weil-pbc-open-fibre-product]. Its projection to $T^{\\prime}$ is locally of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence]. Check formal smoothness directly from [def-sbc-smooth-morphisms]: for an affine first-order thickening $Z\\subset Z_1$ over $T^{\\prime}$ and a $T^{\\prime}$-map $Z\\to V^{\\prime}$, compose to $V$. Formal smoothness of $V\\to T$ gives a $T$-map $Z_1\\to V$ lifting it. Pair this lift with the given map $Z_1\\to T^{\\prime}$; their maps to $T$ agree, so [def-pc-fibre-product] gives a map $Z_1\\to V^{\\prime}$. Uniqueness in the fibre-product property shows that its restriction is the original map on $Z$. Hence $V^{\\prime}\\to T^{\\prime}$ is formally smooth, and therefore smooth by the same definition. This proves ascent.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sbc-smooth-morphisms",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V4, the inclusion of the inverse image of the smooth locus; Tag 01VB, lemma-base-change-smooth; infinitesimal formulation in Tag 02H0"
+   }
+  },
+  {
+   "text": "For reflection suppose $f^{\\prime}$ is smooth at $u^{\\prime}$. Let $v^{\\prime}$ and $v$ be the points of $U^{\\prime}_{t^{\\prime}}$ and $U_t$ corresponding to $u^{\\prime}$ and $u$, respectively, using the homeomorphism in [def-pc-scheme-fibre]. By [lem-trf-smooth-at-point-fibre-criterion] and step 1, $U^{\\prime}_{t^{\\prime}}\\to\\operatorname{Spec}\\kappa(t^{\\prime})$ is smooth at $v^{\\prime}$. Put $k=\\kappa(t)$ and $K=\\kappa(t^{\\prime})$. The residue-field map gives a field extension $K/k$. By [lem-weil-pbc-fibre-of-base-change] this fibre is $U_t\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$, and its map to $U_t$ sends $v^{\\prime}$ to $v$, since the stated compatibility with the source projections identifies its image with $u$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-trf-smooth-at-point-fibre-criterion",
+    "lem-weil-pbc-fibre-of-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V4, proof, first paragraph and displayed fibre-product identity; Tag 01V9, lemma-smooth-at-point, (1) iff (2)"
+   }
+  },
+  {
+   "text": "The fibre map $U_t\\to\\operatorname{Spec}k$ is locally of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence]. Choose an affine neighbourhood $B=\\operatorname{Spec}A$ of $v$ with $A$ finitely presented over $k$, using [def-sbc-locally-finite-presentation]. In particular $A$ is a finite type $k$-algebra. By [lem-weil-pbc-open-fibre-product] its base change $B_K$ is an open neighbourhood of $v^{\\prime}$ in the fibre of step 3. By [lem-weil-pbc-fibre-product-affine-spectra], interchanging the two factors of the tensor product, $B_K=\\operatorname{Spec}(K\\otimes_k A)$; its projection to $B$ is induced by $j:A\\to K\\otimes_k A$, $a\\mapsto1\\otimes a$. Thus if $\\mathfrak q_K$ represents $v^{\\prime}$, the prime representing $v$ is $\\mathfrak q=j^{-1}(\\mathfrak q_K)$. Restricting the smooth neighbourhood from step 3 to this open proves smoothness at $\\mathfrak q_K$ as a scheme point. Restrictions of smooth maps to opens are smooth: in [def-sbc-smooth-morphisms] local finite presentation restricts, and a lift across a nilpotent thickening still lands in the open because the thickening has the same point set.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V4, affine interpretation of the fibre identity before applying Algebra Tag 02UQ"
+   }
+  },
+  {
+   "text": "Translate the last smoothness assertion into ring smoothness at $\\mathfrak q_K$. Apply [lem-trf-smooth-fibre-affine-ring-at-prime] to $\\operatorname{Spec}(K\\otimes_k A)\\to\\operatorname{Spec}K$, taking both schemes themselves as affine charts. The fibre at the unique base point is canonically the original scheme, with the structural maps identified, by [lem-weil-pbc-field-base-point-fibre-isomorphism]. The affine fibre ring in that lemma is consequently $(K\\otimes_k A)\\otimes_K K\\cong K\\otimes_k A$; multiplication and $c\\mapsto c\\otimes1$ give the inverse maps. Its kernel prime is exactly $\\mathfrak q_K$. Hence $K\\to K\\otimes_k A$ is smooth at $\\mathfrak q_K$. Apply [lem-weil-pbc-smooth-at-prime-field-extension-descent] with the finite type algebra $A$ of step 4 and this prime. It gives that $k\\to A$ is smooth at $\\mathfrak q$.",
+   "uses": [
+    "lem-trf-smooth-fibre-affine-ring-at-prime",
+    "lem-weil-pbc-field-base-point-fibre-isomorphism",
+    "lem-weil-pbc-smooth-at-prime-field-extension-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V4, proof by Algebra Tag 02UQ (algebra-lemma-smooth-field-change-local), descent implication; affine translation as in Tag 01V9"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-affine-smooth-prime-scheme-neighbourhood] to the fibre morphism $U_t\\to\\operatorname{Spec}k$, with source chart $B=\\operatorname{Spec}A$, target chart $\\operatorname{Spec}k$ and the smooth prime $\\mathfrak q$ from step 5. It supplies a principal open neighbourhood of $v$ on which this fibre morphism is smooth. Thus the fibre is smooth at $v$. Finally [lem-trf-smooth-at-point-fibre-criterion], now for $f$ at $u$, gives smoothness of $f$ at $u$: its local finite presentation is a hypothesis, and its local flatness was checked in step 1. This proves reflection, and with step 2 the equivalence. If $U^{\\prime}$ is empty there is no point to check.",
+   "uses": [
+    "lem-trf-affine-smooth-prime-scheme-neighbourhood",
+    "lem-trf-smooth-at-point-fibre-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V4, proof, second paragraph: case (1) by Tag 01V9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-open-fibre-product",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "lem-trf-smooth-at-point-fibre-criterion",
+  "lem-weil-pbc-fibre-of-base-change",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-smooth-fibre-affine-ring-at-prime",
+  "lem-weil-pbc-field-base-point-fibre-isomorphism",
+  "lem-weil-pbc-smooth-at-prime-field-extension-descent",
+  "lem-trf-affine-smooth-prime-scheme-neighbourhood"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02V4, lemma-set-points-where-fibres-smooth, proof of case (1), using Tag 01V9 and Algebra Tag 02UQ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented morphism of schemes its largest smooth open commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T04:40:03Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat locally finitely presented morphism of schemes its largest smooth open commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\"], \"digest\": \"64aebce6f57da921\"}; Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:296-343 and SmoothFiber.lean:32-40. The preimage_smoothLocus_eq declaration at line 338 assumes an open immersion on the source. Stable-under-base-change smoothness gives only one implication, not reflection at every point for a flat family.",
+   "date": "2026-10-23",
+   "verdict": "no match: no arbitrary-base-change equality or pointwise reflection for flat lfp scheme families in these hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness at a point of a flat finitely presented scheme family is equivalent to smoothness at each point above it after any base extension",
+   "results": "{\"t\": \"2026-10-23T04:49:46Z\", \"tool\": \"leanfinder\", \"query\": \"Smoothness at a point of a flat finitely presented scheme family is equivalent to smoothness at each point above it after any base extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"RingHom.Smooth.isStableUnderBaseChange\"], \"digest\": \"96188b6c07ac6f89\"}; Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:296-343 and SmoothFiber.lean:32-40. The preimage_smoothLocus_eq declaration at line 338 assumes an open immersion on the source. Stable-under-base-change smoothness gives only one implication, not reflection at every point for a flat family.",
+   "date": "2026-10-23",
+   "verdict": "no match: no arbitrary-base-change equality or pointwise reflection for flat lfp scheme families in these hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a flat locally finitely presented morphism of schemes its largest smooth open commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T04:47:16Z\", \"tool\": \"leansearch\", \"query\": \"For a flat locally finitely presented morphism of schemes its largest smooth open commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"b71038329d9d4af3\"}; Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:296-343 and SmoothFiber.lean:32-40. The preimage_smoothLocus_eq declaration at line 338 assumes an open immersion on the source. Stable-under-base-change smoothness gives only one implication, not reflection at every point for a flat family.",
+   "date": "2026-10-23",
+   "verdict": "no match: no arbitrary-base-change equality or pointwise reflection for flat lfp scheme families in these hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smoothLocus\"",
+   "results": "{\"t\": \"2026-10-23T04:47:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"smoothLocus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"Algebra.smoothLocus_eq_univ\", \"Algebra.isOpen_smoothLocus\", \"Algebra.smoothLocus_eq_univ_iff\", \"Algebra.smoothLocus_comap_of_isLocalization\", \"Algebra.basicOpen_subset_smoothLocus_iff\", \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"Algebra.smoothLocus_eq_compl_support_inter\"], \"digest\": \"4593cef0b9690d68\"}; Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:296-343 and SmoothFiber.lean:32-40. The preimage_smoothLocus_eq declaration at line 338 assumes an open immersion on the source. Stable-under-base-change smoothness gives only one implication, not reflection at every point for a flat family.",
+   "date": "2026-10-23",
+   "verdict": "no match: no arbitrary-base-change equality or pointwise reflection for flat lfp scheme families in these hits"
+  },
+  {
+   "tool": "grep",
+   "query": "preimage_smoothLocus|smoothLocus.*baseChange|smoothLocus.*pullback",
+   "results": "{\"t\": \"2026-10-23T04:49:44Z\", \"tool\": \"grep\", \"query\": \"preimage_smoothLocus|smoothLocus.*baseChange|smoothLocus.*pullback\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"ceee677ce3932472\"}; Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:296-343 and SmoothFiber.lean:32-40. The preimage_smoothLocus_eq declaration at line 338 assumes an open immersion on the source. Stable-under-base-change smoothness gives only one implication, not reflection at every point for a flat family.",
+   "date": "2026-10-23",
+   "verdict": "no match: no arbitrary-base-change equality or pointwise reflection for flat lfp scheme families in these hits"
+  },
+  {
+   "tool": "grep",
+   "query": "preimage_smoothLocus|smoothLocus.*(baseChange|pullback)|smoothLocus.*field",
+   "results": "{\"t\": \"2026-10-23T09:37:21Z\", \"tool\": \"grep\", \"query\": \"preimage_smoothLocus|smoothLocus.*(baseChange|pullback)|smoothLocus.*field\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"51bd3235198b517c\"}; Read Smooth.lean:295-343: preimage_smoothLocus_eq only assumes an open immersion, not arbitrary base change. The other hits give ascent, not the pointwise reflection in the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smoothLocus\"",
+   "results": "{\"t\": \"2026-10-23T09:37:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"smoothLocus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"Algebra.smoothLocus_eq_univ\", \"Algebra.isOpen_smoothLocus\", \"Algebra.smoothLocus_eq_univ_iff\", \"Algebra.smoothLocus_comap_of_isLocalization\", \"Algebra.basicOpen_subset_smoothLocus_iff\", \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"Algebra.smoothLocus_eq_compl_support_inter\"], \"digest\": \"4593cef0b9690d68\"}; Read Smooth.lean:295-343: preimage_smoothLocus_eq only assumes an open immersion, not arbitrary base change. The other hits give ascent, not the pointwise reflection in the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented scheme morphism the smooth locus commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T09:37:23Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat locally finitely presented scheme morphism the smooth locus commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\"], \"digest\": \"a8b824869f9eba2d\"}; Read Smooth.lean:295-343: preimage_smoothLocus_eq only assumes an open immersion, not arbitrary base change. The other hits give ascent, not the pointwise reflection in the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness at a point for flat morphisms of schemes is invariant under arbitrary base extension",
+   "results": "{\"t\": \"2026-10-23T09:38:16Z\", \"tool\": \"leansearch\", \"query\": \"Smoothness at a point for flat morphisms of schemes is invariant under arbitrary base extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"Algebra.Smooth.baseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\"], \"digest\": \"d2e139bd5a7d2daf\"}; Read Smooth.lean:295-343: preimage_smoothLocus_eq only assumes an open immersion, not arbitrary base change. The other hits give ascent, not the pointwise reflection in the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness at a point after extension of the base field descends at the contracted point",
+   "results": "{\"t\": \"2026-10-23T09:38:17Z\", \"tool\": \"leanfinder\", \"query\": \"Smoothness at a point after extension of the base field descends at the contracted point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Smooth.isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Algebra.Smooth.baseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"Algebra.IsStandardSmooth.baseChange\", \"Algebra.Smooth.comp\", \"RingHom.IsStandardSmooth.smooth\"], \"digest\": \"b9464658b5df7c45\"}; Read Smooth.lean:295-343: preimage_smoothLocus_eq only assumes an open immersion, not arbitrary base change. The other hits give ascent, not the pointwise reflection in the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-space-smooth-locus",
+  "date": "2026-10-23",
+  "group": "Q90"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: Smooth-family open: the source smooth locus and its arbitrary-base-change compatibility for the flat family, before taking the complement of the proper image of the bad locus. Scheme-chart prerequisite: Stacks 02V4(1), pointwise equality of the smooth loci under arbitrary scheme base change.",
+   "via": [
+    "lem-sfb-flat-space-smooth-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-flat-smooth-point-base-change",
+  "worker": "stage1",
+  "summary": "Checked Stacks 02V4(1) and reused the existing 01V9, fibre base-change and 02UQ nodes. Ascent is the explicit infinitesimal lifting argument. Reflection is reduced to residue fibres, an affine finite type chart, field-extension descent at the contracted prime, and the pointwise fibre criterion. No statement change and no new nodes. Repaired the null blueprint endpoint using the already recorded ancestor on the parent.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof clause (3), supporting the alteration/stable-family smooth-open prerequisite through the inherited blueprint.from.via chain; expands its descendant scheme-chart 02V4(1) input. Latest blueprint searched: no imported node states this pointwise equivalence.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-smooth-at-point-fibre-criterion",
+    "why": "Generic pointwise fibre criterion (01V9), applied to the flat lfp family and its base change; no result of this unit replaces this geometry input."
+   },
+   {
+    "node": "lem-trf-smooth-fibre-affine-ring-at-prime",
+    "why": "Generic affine translation of smoothness on a fibre, used over a field to match exactly the algebraic descent hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-field-base-point-fibre-isomorphism",
+    "why": "Generic canonical identification of a field-scheme with its sole residue fibre, needed to apply the affine fibre translation without changing the point or structural map."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-at-prime-field-extension-descent",
+    "why": "Generic field-extension descent (02UQ) used on a finite type affine chart of the fibre, as in 02V4."
+   },
+   {
+    "node": "lem-trf-affine-smooth-prime-scheme-neighbourhood",
+    "why": "Generic conversion of smoothness at an affine prime to an actual smooth scheme neighbourhood; used to finish the fibre argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-smooth-at-point-fibre-criterion",
+  "lem-trf-smooth-fibre-affine-ring-at-prime",
+  "lem-weil-pbc-field-base-point-fibre-isomorphism",
+  "lem-weil-pbc-smooth-at-prime-field-extension-descent",
+  "lem-trf-affine-smooth-prime-scheme-neighbourhood"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-980485f74",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-980485f74 (reviewer sub-agent of L); spot-checked: I read the item and every cited node in full; the delivery adds no new nodes. The statement is Stacks 02V4 case (1) (morphisms.tex line 7354) in pointwise form: f flat and locally of finite presentation, h arbitrary, f' smooth at u' iff f smooth at a(u'). It is not weakened, and the parent lem-sfb-flat-space-smooth-locus uses it exactly in this form. Step 1: f' is flat (01U9) and locally of finite presentation (01TS), and both maps are flat at the points. Step 2: ascent by the lifting argument through the fibre-product universal property; I checked it. Step 3: the 01V9 criterion applies to f', and the base-change fibre node with ι injective on points gives h(v')=v. Step 4: the finitely presented chart over Spec k and 01JR/01I4 give j: a↦1⊗a, matching the 02UQ node's conventions. Step 5: the affine translation lemma with the field-base-point fibre isomorphism gives F≅K⊗_kA with 𝔔 corresponding to q_K, and 02UQ then applies verbatim. Step 6: the 02H6 node gives a smooth D(g)∋v, and 01V9 applies to f at u using flatness at u. Edge cases checked: empty U', the identity, inseparable K/k, the need for flatness of f, and the flat node xy=t. No duplicate exists (the space versions cite the item), there is no circularity, and no SGA source is cited. Batch 5: the three cited lem-trf nodes (01V9 criterion, affine translation of fibre smoothness, 02H6 conversion; unit sk-i-curve-zero) have closures of 434, 126 and 111 nodes that contain no trace-formula, Poincaré-duality or nt-assume node. They are generic smoothness facts outside both assumptions and their proofs, so I accepted them along with the tool_uses entries."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatSmoothPointBaseChange",
+  "declaration": "AlgebraicGeometry.smooth_at_point_pullback_snd_iff_of_flat",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatSmoothPointBaseChange.lean",
+  "statement": "theorem smooth_at_point_pullback_snd_iff_of_flat {U T T' : Scheme.{u}} (f : U ⟶ T) [Flat f] [LocallyOfFinitePresentation f] (h : T' ⟶ T) (x : pullback (C := Scheme.{u}) f h) : (∃ V : (pullback f h).Opens, x ∈ V ∧ Smooth (V.ι ≫ pullback.snd f h)) ↔ ∃ W : U.Opens, pullback.fst f h x ∈ W ∧ Smooth (W.ι ≫ f)",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f7bc243b",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Theorem smooth_at_point_pullback_snd_iff_of_flat matches the node clause by clause: schemes in Scheme.{u}, [Flat f] [LocallyOfFinitePresentation f], arbitrary h : T' ⟶ T, U' = pullback f h with fst/snd, every point x, and 'smooth at a point' written out as ∃ open neighbourhood with Smooth (V.ι ≫ ·), joined by ↔ in node order. This equals Stacks 02V4(1) (morphisms.tex l.7354, W' = g'^{-1}(W), g arbitrary). No extra hypotheses; one universe as the categorical pullback requires. No existing declaration: Mathlib preimage_smoothLocus_eq covers open immersions only. lean.statement verbatim in file; stmt_deps unchanged and publicly imported; plain imports are live proof modules (fibre criterion, field-base-point fibre iso, 02UQ descent). Docstrings carry the source place, blueprint tag and all 6 proof steps; proof is sorry only; no definitions, nothing hollow; no pro-étale substitute. Report has Worker report and the standard no-second-reader notice. Edge cases checked: empty pullback, identity and non-flat h, inseparable extensions, flatness of f needed. Only the lean record was added versus live (diffed). Not recompiled per the 2026-10-21 rule."
+ }
+}

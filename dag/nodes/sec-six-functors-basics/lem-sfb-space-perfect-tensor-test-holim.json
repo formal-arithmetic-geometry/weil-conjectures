@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-space-perfect-tensor-test-holim",
+ "kind": "statement",
+ "title": "Perfect tensor tests preserve quasi-coherent homotopy inverse limits",
+ "statement": "Work in the universes of [def-weil-size-convention], with schemes [def-pc-scheme] and algebraic spaces with small etale structure sheaves [def-trf-algebraic-space]. Let $A$ be a commutative ring and $X\\to\\operatorname{Spec}A$ an algebraic space which is quasi-compact and quasi-separated: its point space is quasi-compact and its diagonal is quasi-compact. The affine spectrum is [def-weil-affine-spectrum]. Use module sheaves [def-weil-sheaf-of-modules-category] and their unbounded derived category [def-weil-abstract-derived-category]; $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ is its full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. A perfect $E\\in D(\\mathcal O_X)$ means etale locally a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Set $T_E(F)=R\\Gamma(X,F\\otimes^{\\mathbf L}_{\\mathcal O_X}E)\\in D(A)$, where tensor uses K-flat resolutions [def-pc-kflat-complex] and derived global sections [def-pur-ringed-site-zeroth-hypercohomology] has its A-action through $X\\to\\operatorname{Spec}A$. This is an exact functor on $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ which preserves products. More precisely, for any countable family $(F_n)$ in this subcategory the product exists there and the comparison $T_E(\\prod^{D_{\\mathrm{QCoh}}}_n F_n)\\to\\prod^{D(A)}_n T_E(F_n)$ induced by the projections is an isomorphism. Consequently, if $(F_n,t_n)$ is a strict tower of complexes representing objects of $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ and $K$ is its homotopy inverse limit there, defined by the triangle $K\\to\\prod^{D_{\\mathrm{QCoh}}}_nF_n\\xrightarrow{1-\\mathrm{shift}}\\prod^{D_{\\mathrm{QCoh}}}_nF_n\\to K[1]$ [def-weil-derived-limit], then $T_E(K)$ is isomorphic in $D(A)$ to $R\\varprojlim_nT_E(F_n)$. The isomorphism can be chosen to identify the arrows to the products in the two defining triangles. Products in the source are taken in $D_{\\mathrm{QCoh}}$, rather than assumed to agree with ambient products.",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX6, lemma-compute-against-perfect, proof: exact global derived Hom preserves products and derived limits, translated to tensor tests with sites-cohomology.tex Tag 08JJ (lemma-dual-perfect-complex)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pc-kflat-complex",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-weil-derived-limit",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-affine-global-sections",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-qcoh-derived-triangulation"
+ ],
+ "proof": [
+  {
+   "text": "Check the hypotheses of the general tensor-test lemma. By [lem-sfb-qc-space-affine-etale-atlas], the quasi-compact point space of $X$ supplies a surjective affine etale atlas. By [lem-sfb-etale-affine-pairs-test-quasiseparated], its quasi-compact absolute diagonal gives the affine-chart-pair condition for the derived coherator. The affine base is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], so [lem-sfb-space-qcqs-permanence] makes $f:X\\to\\operatorname{Spec}A$ quasi-compact and quasi-separated. Finally [lem-sfb-space-perfect-uniform-tor] puts the given perfect $E$ in $D_{\\mathrm{QCoh}}(\\mathcal O_X)$. Thus both the coherator and the general perfect-tensor global-sections lemma apply without a finite-type, properness or Noetherian assumption.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-sfb-etale-affine-pairs-test-quasiseparated",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-perfect-uniform-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CR4, lemma-better-coherator; spaces-morphisms.tex Tag 073B, lemma-quasi-compact-quasi-separated-permanence; spaces-perfect.tex Tag 08JL, lemma-pseudo-coherent."
+   }
+  },
+  {
+   "text": "Use the equivalent small ringed model [def-sfb-space-small-ringed-model]. For any set-indexed family $F_j$, choose K-injective representatives $J_j$ by [prop-pur-kinjective-resolutions-exist]. The termwise product $J=\\prod_jJ_j$ exists: module-sheaf products are objectwise products, with differential the coordinate differentials. A map from an acyclic complex to $J$ has coordinate null-homotopies; their product is a null-homotopy, so $J$ is K-injective. Chain maps into $J$, and homotopies between them, are coordinate families. Consequently [lem-weil-pbc-kinjective-hom-derived] identifies $\\operatorname{Hom}_{D}(N,J)$ with $\\prod_j\\operatorname{Hom}_{D}(N,J_j)$, naturally in $N$. This constructs an ambient derived product $P_{\\mathrm{amb}}$ without asserting it is quasi-coherent.",
+   "uses": [
+    "def-sfb-space-small-ringed-model",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 07D9, lemma-derived-products, product construction; derived.tex Tag 0BK6, lemma-product-K-injective, coordinate homotopy argument written out."
+   }
+  },
+  {
+   "text": "Write $I:D_{\\mathrm{QCoh}}\\hookrightarrow D(\\mathcal O_X)$ and use its right adjoint $DQ_X$ from [lem-sfb-space-derived-coherator-adjunction]. For $F_j\\in D_{\\mathrm{QCoh}}$, set $P=DQ_X(P_{\\mathrm{amb}})$, using the ambient product of Step 2. For every $G\\in D_{\\mathrm{QCoh}}$ the adjunction and fullness give $\\operatorname{Hom}(G,P)=\\operatorname{Hom}(IG,P_{\\mathrm{amb}})=\\prod_j\\operatorname{Hom}(IG,IF_j)=\\prod_j\\operatorname{Hom}(G,F_j)$. The projections are the counit followed by the ambient projections. This is precisely the product universal property, so the required source products exist in $D_{\\mathrm{QCoh}}$.",
+   "uses": [
+    "lem-sfb-space-derived-coherator-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CR4, lemma-better-coherator; elementary application of its adjunction to ambient products."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-perfect-tensor-global-limits] with $f$, $E$ and the products of Step 3. Its functor $F_E$ is exactly the stated $T_E$, with the same structure-induced $A$-action, K-flat tensor and derived global sections. It is exact and its product comparison is an isomorphism for every family in the indexing universe. Its components are $T_E(\\operatorname{pr}_j)$, so this is the comparison required in the item, including the countable case. This is a use of an existing more general node, not a newly introduced reformulation of the item.",
+   "uses": [
+    "lem-sfb-space-perfect-tensor-global-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6, lemma-compute-against-perfect, global derived Hom paragraph and final translation by sites-cohomology.tex Tag 08JJ."
+   }
+  },
+  {
+   "text": "For the given tower write $P=\\prod_n^{D_{\\mathrm{QCoh}}}F_n$, $p:K\\to P$, $q_n=\\operatorname{pr}_np$, and let $c:T_E(P)\\xrightarrow{\\sim}\\prod_nT_E(F_n)$ be Step 4. The product-triangle clause of [lem-sfb-space-perfect-tensor-global-limits] makes the triangle with first arrow $cT_E(p)$ and middle arrow $1-s^{\\prime}$ distinguished, where $\\operatorname{pr}_ns^{\\prime}=T_E(t_n)\\operatorname{pr}_{n+1}$. Explicitly, composing $cT_E(s)$ and $s^{\\prime}c$ with $\\operatorname{pr}_n$ gives in both cases $T_E(t_n\\operatorname{pr}_{n+1})$; additivity therefore carries $1-s$ to $1-s^{\\prime}$. By [def-weil-derived-limit] this triangle exhibits $T_E(K)$ as a derived limit. Now let $(R,p^{\\prime},\\delta^{\\prime})$ be any derived limit of $(T_E(F_n),T_E(t_n))$, which is what $R\\varprojlim_nT_E(F_n)$ denotes. The final clause of the same node gives an isomorphism $\\varphi:T_E(K)\\xrightarrow{\\sim}R$ with $\\operatorname{pr}_np^{\\prime}\\varphi=T_E(q_n)=\\operatorname{pr}_ncT_E(p)$ for every $n$. By the universal property of the product, $p^{\\prime}\\varphi=cT_E(p)$: under $c$, $\\varphi$ identifies the arrows to the products of the two defining triangles. No functorial or unique choice of the isomorphism is claimed.",
+   "uses": [
+    "lem-sfb-space-perfect-tensor-global-limits",
+    "def-weil-derived-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX6, lemma-compute-against-perfect, exact product-preserving functor paragraph; derived.tex Tag 08TC, definition-derived-limit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-etale-affine-pairs-test-quasiseparated",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-perfect-uniform-tor",
+  "def-sfb-space-small-ringed-model",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sfb-space-derived-coherator-adjunction",
+  "lem-sfb-space-perfect-tensor-global-limits",
+  "def-weil-derived-limit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX6, lemma-compute-against-perfect; reuse existing general tensor-global-limits node, with product existence from 0CR4 and 07D9 made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a quasi compact quasi separated algebraic space global sections after tensoring a perfect complex preserves products and homotopy inverse limits in the quasi coherent derived category",
+   "results": "8 hits: AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-24",
+   "verdict": "no match: affine scheme limits and ordinary sheaf/complex limits, flat tensor finite equalizers and condensed monoidal structures do not state this derived quasi-coherent tensor-test assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect|Perfect|homotopyLimit|homotopy.*limit",
+   "results": "2 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean (Mathlib/Algebra/Homology)",
+   "date": "2026-10-24",
+   "verdict": "no match: affine scheme limits and ordinary sheaf/complex limits, flat tensor finite equalizers and condensed monoidal structures do not state this derived quasi-coherent tensor-test assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections tensor perfect complex commutes with homotopy inverse limits in derived category of quasi coherent sheaves",
+   "results": "8 hits: AlgebraicGeometry.preservesLimit_rightOp_Γ, CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape, CategoryTheory.Sheaf.ΓNatIsoLim, HasDerivedCategory.standard, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality_assoc, HomologicalComplex.instHasLimit, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic",
+   "date": "2026-10-24",
+   "verdict": "no match: affine scheme limits and ordinary sheaf/complex limits, flat tensor finite equalizers and condensed monoidal structures do not state this derived quasi-coherent tensor-test assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesLimits\", \"tensor\"",
+   "results": "1 hits: CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier",
+   "date": "2026-10-24",
+   "verdict": "no match: affine scheme limits and ordinary sheaf/complex limits, flat tensor finite equalizers and condensed monoidal structures do not state this derived quasi-coherent tensor-test assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes are dualizable so tensoring by a perfect complex and derived global sections commute with homotopy limits of quasi coherent complexes",
+   "results": "8 hits: CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, LightCondensed.internallyProjective_iff_tensor_condition, CategoryTheory.Tor'_obj_obj, LightCondensed.internallyProjective_iff_tensor_condition', CategoryTheory.Tor'_map_app, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.NatTrans.leftDerivedToHomotopyCategory_comp_assoc, CategoryTheory.Tor_obj",
+   "date": "2026-10-24",
+   "verdict": "no match: affine scheme limits and ordinary sheaf/complex limits, flat tensor finite equalizers and condensed monoidal structures do not state this derived quasi-coherent tensor-test assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect|Perfect|homotopyLimit|homotopy.*limit",
+   "results": "2 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean (Mathlib/Algebra/Homology)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary flat tensor finite limits, affine scheme limits, or light condensed monoidal categories, not derived quasi-coherent perfect tensor tests."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesLimits\", \"tensor\"",
+   "results": "1 hits: CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary flat tensor finite limits, affine scheme limits, or light condensed monoidal categories, not derived quasi-coherent perfect tensor tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a quasi compact quasi separated algebraic space derived global sections after tensoring with a perfect complex preserves products and homotopy inverse limits in the quasi coherent derived category",
+   "results": "8 hits: AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary flat tensor finite limits, affine scheme limits, or light condensed monoidal categories, not derived quasi-coherent perfect tensor tests."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections tensor perfect complex preserves products and homotopy inverse limits of quasi coherent complexes",
+   "results": "8 hits: ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, CategoryTheory.hoFunctor.preservesBinaryProduct, CategoryTheory.Functor.instPreservesLimitsOfShapeDiscreteWalkingPairOfIsHomological, CommRingCat.Under.instPreservesFiniteProductsUnderTensorProd, CommRingCat.Under.instPreservesLimitUnderDiscreteFunctorTensorProdOfFinite, AlgebraicGeometry.preservesLimit_rightOp_Γ, CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary flat tensor finite limits, affine scheme limits, or light condensed monoidal categories, not derived quasi-coherent perfect tensor tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes are dualizable so tensoring a perfect complex and derived global sections preserve products in the derived category of quasi coherent sheaves",
+   "results": "8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', instMonoidalClosedLightCondSet",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary flat tensor finite limits, affine scheme limits, or light condensed monoidal categories, not derived quasi-coherent perfect tensor tests."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-inverse-module-perfect-tests",
+  "date": "2026-10-24",
+  "group": "Q109"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family effectivity prerequisite: spaces-flat.tex Tag 0CX7, proof invoking Tag 0CX6 (lemma-compute-against-perfect), tensor-test clause (1). Specifically Tag 0CX6, lemma-compute-against-perfect, proof: exact global derived Hom preserves products and derived limits, translated to tensor tests with sites-cohomology.tex Tag 08JJ (lemma-dual-perfect-complex).",
+   "via": [
+    "lem-sfb-space-inverse-module-perfect-tests",
+    "lem-sfb-space-inverse-module-polynomial-model",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-perfect-tensor-test-holim",
+  "worker": "stage1",
+  "summary": "Reused the existing strictly more general perfect-tensor-global-limits node rather than creating a duplicate. Checked qcqs and perfect-QCoh hypotheses, constructed ambient products by coordinate K-injective homotopies, and obtained D_QCoh products with the derived coherator. Applied the general exact/product comparison and spelled out the transition and Roos-triangle compatibility. Statement unchanged; no new nodes.",
+  "blueprint": "Inherited proof (3) of det-thm-sf-ctf-stability-direct-images, coherent-family effectivity prerequisite, Stacks 0CX6 tensor-test argument. Current latest sk-thm-sf-ctf-stability proof, direct-image preservation paragraph, is its surviving unit context. The ancestry command returns blueprint.from.node = None; retained the live null ancestor and explicit inherited place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic fact that the affine base is quasi-separated, needed for the qcqs morphism permanence lemma; not a replacement of the unit route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of K-injective representatives on the small ringed site, to construct ambient products; the unit has no replacement for this resolution theorem."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic Hom computation into K-injective complexes, used to verify the ambient product universal property; not a different geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-8194f007a",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-8194f007a (reviewer sub-agent of L); spot-checked: Read in full: the item (no new nodes), every cited statement, Stacks 0CX6 lemma-compute-against-perfect (proof of (2): exact RHom on D_QCoh preserves products, hence derived limits; (1) via 08JJ) and 0CR4 lemma-better-coherator. The statement is unchanged and matches the source. Step 1 discharges the coherator and global-limits hypotheses: affine atlas, the affine-pairs test for absolute qs, Spec A qs, qcqs permanence for f, and perfect E in D_QCoh by perfect-uniform-tor. Steps 2-3 correctly build D_QCoh products: a termwise product of K-injectives on the small model is K-injective, Hom into it is the product of the K-Hom by the kinjective-hom bijection, then DQ_X right adjoint plus fullness. Step 4 correctly cites the existing, more general same-day node lem-sfb-space-perfect-tensor-global-limits (Q101, unsplit), the duplicate reuse the brief requires. Maintainer note: the two nodes overlap heavily, and the item adds only the existence of D_QCoh products. FIX in step 5: it only exhibited T_E(K) as one self-chosen derived limit. But under def-weil-derived-limit Rlim means any derived limit, and the citer lem-sfb-space-inverse-module-perfect-tests needs the comparison to an arbitrary one. The step now uses the final clause of global-limits: for every (R,p',δ') there is φ with pr_n p'φ = T_E(q_n), hence p'φ = cT_E(p). Text only; uses unchanged. Batch 5: all six flagged citations reach sec-trace-formula only through the general definition def-trf-algebraic-space; none is a step of the trace-formula or Poincaré-duality proof, so all are accepted. Tool uses are generic and accepted: affine-scheme-qcqs (Mathlib), K-injective existence, Hom into a K-injective (Mathlib). No SGA. No cycle (global-limits has no proof_deps).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePerfectTensorTestHolim",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.perfectTensorTest_preserves_products_holim",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.perfectTensorTest",
+   "AlgebraicGeometry.AlgebraicSpace.perfectTensorTestProductComparison",
+   "AlgebraicGeometry.AlgebraicSpace.perfectTensorTest_preserves_products_holim"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePerfectTensorTestHolim.lean",
+  "statement": "theorem perfectTensorTest_preserves_products_holim {S : Scheme.{u}} (A : Type u) [CommRing A] (Y : Over S) (e : Y.left ≅ Spec (.of A)) (X : AlgebraicSpace S) (f : X ⟶ schemeSpace Y) [HasDerivedCategory.{w} X.SmallModules] (hqc : CompactSpace (Point X.obj.obj)) (hqs : X.IsAbsolutelyQuasiSeparated) (E : X.DerivedModules) (hE : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf E) : (perfectTensorTest A Y e X f E).Additive ∧ (∃ σ : shiftFunctor X.DerivedQCoh (1 : ℤ) ⋙ perfectTensorTest A Y e X f E ≅ perfectTensorTest A Y e X f E ⋙ shiftFunctor (DerivedCategory (ModuleCat.{u} A)) (1 : ℤ), ∀ Δ : Triangle X.DerivedQCoh, Δ ∈ distTriang X.DerivedQCoh → Triangle.mk ((perfectTensorTest A Y e X f E).map Δ.mor₁) ((perfectTensorTest A Y e X f E).map Δ.mor₂) ((perfectTensorTest A Y e X f E).map Δ.mor₃ ≫ σ.hom.app Δ.obj₁) ∈ distTriang (DerivedCategory (ModuleCat.{u} A))) ∧ (∀ (I : Type u) (F : I → X.DerivedQCoh), HasProduct F ∧ HasProduct (fun i ↦ (perfectTensorTest A Y e X f E).obj (F i)) ∧ ∀ (P : Fan F) (_hP : IsLimit P) (Q : Fan (fun i ↦ (perfectTensorTest A Y e X f E).obj (F i))) (hQ : IsLimit Q), IsIso (perfectTensorTestProductComparison (perfectTensorTest A Y e X f E) F P Q hQ)) ∧ (∀ (F : ℕ → X.DerivedQCoh) (t : ∀ n, F (n + 1) ⟶ F n) (P : Fan F) (_hP : IsLimit P) (s : P.pt ⟶ P.pt) (_hs : ∀ n, s ≫ P.proj n = P.proj n - (P.proj (n + 1) ≫ t n)) (K : X.DerivedQCoh) (p : K ⟶ P.pt) (δ : P.pt ⟶ K⟦(1 : ℤ)⟧) (_hK : Triangle.mk p s δ ∈ distTriang X.DerivedQCoh) (Q : Fan (fun n ↦ (perfectTensorTest A Y e X f E).obj (F n))) (hQ : IsLimit Q) (s' : Q.pt ⟶ Q.pt) (_hs' : ∀ n, s' ≫ Q.proj n = Q.proj n - (Q.proj (n + 1) ≫ (perfectTensorTest A Y e X f E).map (t n))) (R : DerivedCategory (ModuleCat.{u} A)) (p' : R ⟶ Q.pt) (δ' : Q.pt ⟶ R⟦(1 : ℤ)⟧) (_hR : Triangle.mk p' s' δ' ∈ distTriang (DerivedCategory (ModuleCat.{u} A))), ∃ φ : (perfectTensorTest A Y e X f E).obj K ≅ R, φ.hom ≫ p' = (perfectTensorTest A Y e X f E).map p ≫ perfectTensorTestProductComparison (perfectTensorTest A Y e X f E) F P Q hQ)",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e820faf1b",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Item statement byte-identical to live; stmt_deps extended only by used definition nodes (derived-module-calculus, affine-global-sections, absolute-quasi-separated, new qcoh-derived-triangulation). Lean T_E = D_QCoh inclusion, then tensor with E (K-flat-pinned derivedDualityModel), then affineDerivedSections (K-injective RGamma, A-action via affineGlobalScalar); no arbitrary data. Clauses: Additive plus a shift iso preserving distinguished triangles (exactness); every u-small family has a D_QCoh product and the T(pr_i)-lift comparison is an iso for every limit fan (countable via ULift N); tower clause uses arbitrary fans with s∘pr_n = pr_n - pr_{n+1}∘t_n, identical to towerTransitionEndomorphism_eq_iff (inline because IsDerivedLimitTriangle needs a global HasProduct that D_QCoh lacks); conclusion: for any target derived limit (R,p',δ') there is φ: T(K)≅R with φ≫p' = T(p)≫comparison, as the Q129 stage-1 FIX required. Hypotheses: hqc point-space compact, hqs absolute qs, hE IsPerfectOnRingedSiteOfUniverses.{u,u,u,w}; nothing stronger, base S arbitrary. New def node: genuinely absent (calculus has no triangulation; SpacePerfectLocalizingGeneration only closure under qcqs); Mathlib induced pretriangulation plus a sorried IsTriangulated instance theorem with proof docstring. Both lean.statement fields verbatim in their files; only sorry; source/blueprint docstrings; no dependency record or landed module touched; imports exist. Edge cases (empty I, X empty, E=0, A=0, u=0) fine. Advisories: fan-level piComparison helper; possibly redundant Preserves.Shapes.Products import; global-limits should reuse perfectTensorTest when stated. No compile run (no file changed)."
+ }
+}

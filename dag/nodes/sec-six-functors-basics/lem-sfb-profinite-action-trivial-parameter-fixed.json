@@ -1,0 +1,480 @@
+{
+ "id": "lem-sfb-profinite-action-trivial-parameter-fixed",
+ "kind": "statement",
+ "title": "Trivial parameters, direct image and fully fixed section formulas",
+ "statement": "Work in compatible universes and small skeletons [def-weil-size-convention]. Let $J$ be a compact Hausdorff totally disconnected topological group, let $P$ be the profinite site with finite jointly surjective covers [sk-def-sfb-condensed-ring], and let $P_J$ have profinite continuous left $J$-spaces, continuous equivariant maps and finite jointly surjective covers [def-weil-pbc-sites-and-cohomology]. Write $H(S)=J\\times S$ with left translation on $J$, and $tS=S$ with trivial action [def-sfb-profinite-action-parameters]. Put $\\mathscr E=\\operatorname{Sh}(P)$ and let $\\mathscr E^{\\underline J}$ be the category of internal actions: a sheaf $X$ with a natural unital associative action $C(S,J)\\times X(S)\\to X(S)$ [lem-sfb-action-topos-geometric-restriction]. Write $h_T(S)=C(S,T)$, with the induced action when $T\\in P_J$. Let $p_J:\\mathscr E^{\\underline J}\\to\\mathscr E$ be the geometric morphism whose inverse image is trivial inflation [lem-sfb-action-topos-geometric-restriction], and use $\\Phi$ from [lem-sfb-profinite-action-yoneda-free-evaluation]. Restriction $\\operatorname{res}_t(F)(S)=F(tS)$ is a sheaf on $P$, natural in $F\\in\\operatorname{Sh}(P_J)$, and there is a canonical natural isomorphism\n$$p_{J,*}X\\simeq\\operatorname{res}_t\\Phi(X).$$\nIts section description identifies $\\Phi(X)(tS)$ with\n$$X(S)^{\\mathrm{all}\\ J}=\\{x\\in X(S):\\ \\forall f:V\\to S,\\ \\forall g\\in C(V,J),\\ g\\cdot f^*x=f^*x\\}.$$\nFor a commutative condensed ring $R$ with trivial action and $\\mathcal R_J=\\Phi(R)$, one has $\\mathcal R_J(tS)\\simeq R(S)$ canonically. For an internal $R$-module $N$ with action [def-sfb-condensed-action-module], this gives an $R(S)$-linear identification $\\Phi(N)(tS)\\simeq N(S)^{\\mathrm{all}\\ J}$; for any normalized invariants datum $\\Gamma_{R,J}$ with its specified inclusion, the latter submodule is identified with $\\Gamma_{R,J}(N)(S)$ through that inclusion. The free evaluation $\\Phi(N)(H(S))\\simeq N(S)$ is linear over $\\mathcal R_J(H(S))\\simeq R(S)$. For every equivariant linear $v:N\\to N'$, the trivial-parameter map is $v_S$ restricted to fully fixed sections and the free-parameter map is the original $v_S$. All these identifications commute with every continuous map of profinite parameters.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated profinite-action infrastructure; extracted from the returned presentation proof steps 14,15. Exact external non-SGA source WANTED; this is an agent-formulated auxiliary lemma, not a theorem asserted by the blueprint paragraph."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-profinite-action-parameters",
+  "lem-sfb-action-topos-geometric-restriction",
+  "lem-sfb-profinite-action-yoneda-free-evaluation",
+  "def-sfb-condensed-action-module"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-profinite-action-finite-cover-site], $t$ preserves finite limits and covering families. For a finite cover $\\{S_i\\to S\\}$, apply the sheaf equalizer criterion of [def-weil-pbc-sites-and-cohomology] to $F$ and the cover $\\{tS_i\\to tS\\}$. Since $t(S_i\\times_S S_j)=tS_i\\times_{tS}tS_j$, this is exactly the equalizer criterion for $S\\mapsto F(tS)$. Thus restriction is a sheaf, including on the empty cover of the empty parameter. A sheaf map $F\\to F\\prime$ restricts componentwise at $tS$, and its naturality gives a sheaf map on $P$; identities and compositions are unchanged.",
+   "uses": [
+    "lem-sfb-profinite-action-finite-cover-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written auxiliary argument for returned presentation steps 14,15; no assertion of an external theorem here."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-profinite-action-yoneda-free-evaluation] to $T=tS$. The action map $\\alpha_{tS}$ is the projection $\\pi:J\\times S\\to S$, so identity evaluation identifies $\\Phi(X)(tS)$ with the subset of $x\\in X(S)$ satisfying $\\pi^*x=\\gamma\\cdot\\pi^*x$. Pull this equality back along $(g,f):V\\to J\\times S$ to obtain $f^*x=g\\cdot f^*x$. Conversely the fully fixed condition applied to $V=J\\times S$, $f=\\pi$, $g=\\gamma$ gives that equality. These two implications identify exactly the fully fixed sections, with no test only on ordinary points.",
+   "uses": [
+    "lem-sfb-profinite-action-yoneda-free-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written auxiliary argument for returned presentation steps 14,15; no assertion of an external theorem here."
+   }
+  },
+  {
+   "text": "Let $A_X=\\operatorname{res}_t\\Phi(X)$. By step 2 and the restriction and map formulas of [lem-sfb-profinite-action-yoneda-free-evaluation], identity evaluation gives a natural sectionwise injective sheaf map $A_X\\to X$ whose image consists exactly of fully fixed sections. Its image is stable under restriction: for $x$ fully fixed over $S$, $f:V\\to S$, $h:W\\to V$ and $g\\in C(W,J)$, one has $g\\cdot h^*f^*x=(fh)^*x=h^*f^*x$. Give $A_X$ trivial action; the inclusion $i_X:\\operatorname{triv}A_X\\to X$ is equivariant by the fully fixed condition at the identity parameter map. For a sheaf $Y$ with trivial action, equivariance of $u:Y\\to X$ means $g\\cdot u_V(z)=u_V(z)$ for every $V,z,g$ [lem-sfb-action-topos-geometric-restriction]. Naturality then gives $g\\cdot f^*u_S(y)=g\\cdot u_V(f^*y)=u_V(f^*y)$, so $u$ factors uniquely through $i_X$. Conversely a factorization through $i_X$ is equivariant. Corestriction and composition with $i_X$ are inverse hom-set maps; both commute with precomposition in $Y$ and postcomposition in $X$. This constructs the adjunction from trivial inflation to $A$.",
+   "uses": [
+    "lem-sfb-profinite-action-yoneda-free-evaluation",
+    "lem-sfb-action-topos-geometric-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written auxiliary argument for returned presentation steps 14,15; no assertion of an external theorem here."
+   }
+  },
+  {
+   "text": "The adjunction for $p_J$ in [lem-sfb-action-topos-geometric-restriction] has the same left adjoint. Here is the canonical comparison explicitly. Its counit $c_X:\\operatorname{triv}(p_{J,*}X)\\to X$ factors uniquely as the inclusion $i_X:\\operatorname{triv}A_X\\to X$ after $\\operatorname{triv}(a_X)$, defining $a_X:p_{J,*}X\\to A_X$. Transpose $i_X$ under the $p_J$ adjunction to define $b_X:A_X\\to p_{J,*}X$, so $c_X\\operatorname{triv}(b_X)=i_X$. Then $i_X\\operatorname{triv}(a_Xb_X)=i_X$ implies $a_Xb_X=1$ by sectionwise injectivity; and $c_X\\operatorname{triv}(b_Xa_X)=c_X$ implies $b_Xa_X=1$ by injectivity of the adjunction bijection. Uniqueness of factorization and transposition makes $a$ natural, giving $p_{J,*}\\simeq\\operatorname{res}_t\\Phi$. Explicitly, for an equivariant $v:X\\to X\\prime$, both $A(v)a_X$ and $a_{X\\prime}p_{J,*}(v)$ factor the same map $v c_X$ through $i_{X\\prime}$, by naturality of $i$ and $c$. Sectionwise injectivity of $i_{X\\prime}$ makes them equal.",
+   "uses": [
+    "lem-sfb-action-topos-geometric-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written auxiliary argument for returned presentation steps 14,15; no assertion of an external theorem here."
+   }
+  },
+  {
+   "text": "Give $R$ its trivial action. Step 2 then imposes no condition on $R(S)$, so identity evaluation identifies $\\mathcal R_J(tS)$ with $R(S)$, preserving $0,1,+,\\cdot$. For $N$ as in [def-sfb-condensed-action-module], fully fixed sections form an $R(S)$-submodule: after any $f:V\\to S$, $g\\cdot(f^*r\\,f^*x+f^*y)=f^*r\\,(g\\cdot f^*x)+g\\cdot f^*y=f^*r\\,f^*x+f^*y$, and the same calculation applies to negatives and zero. Pointwise operations on equivariant maps $h_{tS}\\to N$ evaluate to these operations on $N(S)$, giving the claimed linear identification. By the definition of a normalized invariants datum in that node, its specified inclusion is injective with precisely this image; corestricting that inclusion therefore gives the asserted linear isomorphism with $\\Gamma_{R,J}(N)(S)$.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "lem-sfb-profinite-action-yoneda-free-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written auxiliary argument for returned presentation steps 14,15; no assertion of an external theorem here."
+   }
+  },
+  {
+   "text": "For free evaluation use $e_{N,S}$ and its inverse from [lem-sfb-profinite-action-yoneda-free-evaluation]. At a parameter $V$ the inverse of $x\\in N(S)$ sends $(a,b)$ to $a\\cdot b^*x$, and the inverse for $r\\in R(S)$ sends $(a,b)$ to $b^*r$, since $R$ has trivial action. Their pointwise product is $(b^*r)(a\\cdot b^*x)=a\\cdot b^*(rx)$ by the linear action of [def-sfb-condensed-action-module]. Hence inverse evaluation preserves scalar multiplication; the same formula with sums and negatives proves additivity. For $R$ it preserves multiplication and unit as well. Thus $\\mathcal R_J(H(S))\\simeq R(S)$ is a ring isomorphism and $\\Phi(N)(H(S))\\simeq N(S)$ is linear over it.",
+   "uses": [
+    "lem-sfb-profinite-action-yoneda-free-evaluation",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written auxiliary argument for returned presentation steps 14,15; no assertion of an external theorem here."
+   }
+  },
+  {
+   "text": "The map formula of [lem-sfb-profinite-action-yoneda-free-evaluation] gives $v_S$ restricted to the subset of step 2 on trivial parameters, and $e_{N',S}\\Phi(v)_{H(S)}e_{N,S}^{-1}=v_S$ on free parameters. For every continuous $f:V\\to S$, trivial evaluation commutes with $f^*$ by the restriction formula in that node. On free parameters, $e_{N,V}\\Phi(N)(H(f))=f^*e_{N,S}$ by its parameter naturality (also directly by substituting $(a,f\\circ b)$ in step 6). The ring comparisons obey the identical formula with $N=R$. The normalized-invariants comparison commutes with restrictions and module maps because its inclusion is a natural module map and is sectionwise injective [def-sfb-condensed-action-module]. This proves all parameter and morphism compatibilities.",
+   "uses": [
+    "lem-sfb-profinite-action-yoneda-free-evaluation",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written auxiliary argument for returned presentation steps 14,15; no assertion of an external theorem here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-profinite-action-finite-cover-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-profinite-action-yoneda-free-evaluation",
+  "lem-sfb-action-topos-geometric-restriction",
+  "def-sfb-condensed-action-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-written auxiliary argument for returned presentation steps 14,15; no assertion of an external theorem here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Action, invariants",
+   "results": {
+    "t": "2026-10-22T06:03:35Z",
+    "tool": "loogle",
+    "query": "Action, invariants",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'invariants'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "invalid pattern: loogle: unknown identifier 'invariants'"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]rivial.*[Aa]ction|[Aa]ction.*[Ii]nvariant|[Ii]nvariant.*[Aa]ction",
+   "results": {
+    "t": "2026-10-22T06:03:35Z",
+    "tool": "grep",
+    "query": "[Tt]rivial.*[Aa]ction|[Aa]ction.*[Ii]nvariant|[Ii]nvariant.*[Aa]ction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/ModularForms/SlashInvariantForms.lean",
+     "Mathlib/NumberTheory/ModularForms/SlashInvariantForms.lean",
+     "Mathlib/NumberTheory/ModularForms/SlashInvariantForms.lean",
+     "Mathlib/NumberTheory/ModularForms/SlashInvariantForms.lean",
+     "Mathlib/NumberTheory/ModularForms/SlashInvariantForms.lean",
+     "Mathlib/LinearAlgebra/Matrix/ToLinearEquiv.lean",
+     "Mathlib/LinearAlgebra/AffineSpace/Independent.lean",
+     "Mathlib/LinearAlgebra/AffineSpace/Independent.lean"
+    ],
+    "digest": "b562b35b0d023c8a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: invariantsAdjunction is for ordinary representations over a fixed ring, not an internal condensed group and every profinite base change or trivial-parameter restriction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fixed sections of a condensed profinite group module are equivariant maps from trivial representables with natural scalar and morphism formulas",
+   "results": {
+    "t": "2026-10-22T06:03:35Z",
+    "tool": "leansearch",
+    "query": "The fixed sections of a condensed profinite group module are equivariant maps from trivial representables with natural scalar and morphism formulas",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.invariantsAdjunction",
+     "Rep.invariantsAdjunction_homEquiv_apply_hom",
+     "Representation.coindV",
+     "MulActionHom.instAddCommGroup",
+     "SubAddAction.ofFixingAddSubgroup_equivariantMap",
+     "MulActionHom.instModuleOfSMulCommClass",
+     "MulActionHom.instAddGroup",
+     "ContinuousCohomology.invariants"
+    ],
+    "digest": "d0fb0beae36d72fb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: invariantsAdjunction is for ordinary representations over a fixed ring, not an internal condensed group and every profinite base change or trivial-parameter restriction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to trivial action profinite parameters is right adjoint to trivial inflation and its module sections are fixed after every profinite base change naturally on maps",
+   "results": {
+    "t": "2026-10-22T06:03:36Z",
+    "tool": "leansearch",
+    "query": "Restriction to trivial action profinite parameters is right adjoint to trivial inflation and its module sections are fixed after every profinite base change naturally on maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.instIsRightAdjointActionModuleCatRes",
+     "Rep.invariantsAdjunction",
+     "Rep.instIsLeftAdjointActionModuleCatRes",
+     "Rep.invariantsAdjunction_homEquiv_apply_hom",
+     "Rep.coinvariantsAdjunction",
+     "Rep.instIsRightAdjointModuleCatInvariantsFunctor",
+     "Rep.resCoindAdjunction",
+     "Rep.resIndAdjunction"
+    ],
+    "digest": "72fe887e12b9c710"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: invariantsAdjunction is for ordinary representations over a fixed ring, not an internal condensed group and every profinite base change or trivial-parameter restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to trivial action profinite parameters is right adjoint to trivial inflation and its module sections are fixed after every profinite base change naturally on maps",
+   "results": {
+    "t": "2026-10-22T06:03:45Z",
+    "tool": "leanfinder",
+    "query": "Restriction to trivial action profinite parameters is right adjoint to trivial inflation and its module sections are fixed after every profinite base change naturally on maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.instIsRightAdjointActionModuleCatRes",
+     "CondensedMod.LocallyConstant.adjunction",
+     "Rep.instIsRightAdjointModuleCatInvariantsFunctor",
+     "LightCondMod.LocallyConstant.adjunction",
+     "Condensed.profiniteFree",
+     "Rep.invariantsAdjunction",
+     "Rep.indResAdjunction",
+     "Rep.instIsLeftAdjointActionModuleCatRes"
+    ],
+    "digest": "0c77d12ada30b20b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: invariantsAdjunction is for ordinary representations over a fixed ring, not an internal condensed group and every profinite base change or trivial-parameter restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]ction|invariant",
+   "results": {
+    "t": "2026-10-22T06:04:53Z",
+    "tool": "grep",
+    "query": "[Aa]ction|invariant",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/Light/Sequence.lean"
+    ],
+    "digest": "6ced45b36b6544c7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: invariantsAdjunction is for ordinary representations over a fixed ring, not an internal condensed group and every profinite base change or trivial-parameter restriction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"invariant\"",
+   "results": {
+    "t": "2026-10-22T06:04:53Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"invariant\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: invariantsAdjunction is for ordinary representations over a fixed ring, not an internal condensed group and every profinite base change or trivial-parameter restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "invariantsAdjunction|fully.fixed|trivial.*action",
+   "results": {
+    "t": "2026-10-22T14:15:49Z",
+    "tool": "grep",
+    "query": "invariantsAdjunction|fully.fixed|trivial.*action",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary representations, constant sheaves and condensed forgetful comparisons do not assert fully fixed internal-action sections on all profinite base changes or the specified trivial/free parameter formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections fixed by every section of a sheaf of groups after every base change form the right adjoint to the trivial action functor",
+   "results": {
+    "t": "2026-10-22T14:15:50Z",
+    "tool": "leansearch",
+    "query": "Sections fixed by every section of a sheaf of groups after every base change form the right adjoint to the trivial action functor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.constantSheafΓAdj",
+     "Rep.invariantsAdjunction",
+     "CompHausLike.LocallyConstant.adjunction",
+     "CategoryTheory.constantSheafAdj",
+     "CategoryTheory.Sheaf.Γ",
+     "CategoryTheory.instIsRightAdjointSheafΓ",
+     "CategoryTheory.sheafificationAdjunction",
+     "CategoryTheory.Sheaf.isConstant_iff_mem_essImage"
+    ],
+    "digest": "b1087290eb859eff"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary representations, constant sheaves and condensed forgetful comparisons do not assert fully fixed internal-action sections on all profinite base changes or the specified trivial/free parameter formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"invariant\"",
+   "results": {
+    "t": "2026-10-22T14:15:50Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"invariant\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary representations, constant sheaves and condensed forgetful comparisons do not assert fully fixed internal-action sections on all profinite base changes or the specified trivial/free parameter formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf with an internal profinite group action restriction to trivially acted on profinite spaces gives the fully fixed section sheaf and right adjoint to trivial inflation",
+   "results": {
+    "t": "2026-10-22T14:15:51Z",
+    "tool": "leanfinder",
+    "query": "For a sheaf with an internal profinite group action restriction to trivially acted on profinite spaces gives the fully fixed section sheaf and right adjoint to trivial inflation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.ofSheafForgetProfinite",
+     "Condensed.lanSheafProfinite",
+     "LightCondensed.discreteUnderlyingAdj",
+     "CompHausLike.LocallyConstant.adjunction",
+     "LightCondSet.topCatAdjunctionUnit_val_app_apply",
+     "CondensedMod.LocallyConstant.adjunction",
+     "CompHausLike.LocallyConstant.counit_app_val",
+     "CondensedSet.LocallyConstant.adjunction"
+    ],
+    "digest": "315c40050b79bb18"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary representations, constant sheaves and condensed forgetful comparisons do not assert fully fixed internal-action sections on all profinite base changes or the specified trivial/free parameter formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "invariantsAdjunction|trivialFunctor",
+   "results": {
+    "t": "2026-10-22T14:24:13Z",
+    "tool": "grep",
+    "query": "invariantsAdjunction|trivialFunctor",
+    "sub": "RepresentationTheory/Invariants.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "276",
+     "277",
+     "281",
+     "282",
+     "283"
+    ],
+    "digest": "70c541d213f07368"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary representations, constant sheaves and condensed forgetful comparisons do not assert fully fixed internal-action sections on all profinite base changes or the specified trivial/free parameter formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "Rep.invariantsAdjunction",
+   "results": {
+    "t": "2026-10-22T14:24:14Z",
+    "tool": "loogle",
+    "query": "Rep.invariantsAdjunction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Rep.invariantsAdjunction",
+     "Rep.invariantsAdjunction_counit_app",
+     "Rep.invariantsAdjunction_homEquiv_apply_hom",
+     "Rep.invariantsAdjunction_homEquiv_symm_apply_hom",
+     "Rep.invariantsAdjunction_unit_app"
+    ],
+    "digest": "e57f62043c8d3b54"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary representations, constant sheaves and condensed forgetful comparisons do not assert fully fixed internal-action sections on all profinite base changes or the specified trivial/free parameter formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal group actions in condensed sets: invariants as equivariant maps from the trivially acted on representable sheaf, including module scalar compatibility",
+   "results": {
+    "t": "2026-10-22T14:24:15Z",
+    "tool": "leanfinder",
+    "query": "Internal group actions in condensed sets: invariants as equivariant maps from the trivially acted on representable sheaf, including module scalar compatibility",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.invariants",
+     "ContinuousCohomology.instLinearActionTopModuleCatInvariants",
+     "CondensedMod.LocallyConstant.functorToPresheaves",
+     "Condensed.freeAb",
+     "CondensedMod.LocallyConstant.functor",
+     "CondensedMod.ofSheafCompHaus",
+     "CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf",
+     "CompHausLike.LocallyConstantModule.functor"
+    ],
+    "digest": "5bcbf9ad047949cd"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary representations, constant sheaves and condensed forgetful comparisons do not assert fully fixed internal-action sections on all profinite base changes or the specified trivial/free parameter formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-action-coherent-presentation",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), quasi-compact open direct image: coherent action-space presentation needed for filtered passage in the internal derived-invariant input. Re-split of the auxiliary presentation: returned proof steps 14,15.",
+   "via": [
+    "lem-sfb-profinite-action-coherent-presentation",
+    "lem-sfb-profinite-invariants-filtered-continuity",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-profinite-action-trivial-parameter-fixed",
+  "worker": "stage1",
+  "group": "Q111",
+  "summary": "Repair of the returned b51cdf5f02b delivery, rebased onto the current live unsplit item. All four retained proof-dependency statements match their saved quotations verbatim and were reread. Seven retained proof steps now explicitly cite the sheaf criterion, verify the fixed-section subsheaf and adjunction hom-set naturality, and give the naturality equation for the counit comparison. No statement change or new nodes.",
+  "blueprint": "Paragraph (3) of the current direct-images blueprint proof, auxiliary profinite-action presentation steps 14,15; the blueprint itself does not assert this infrastructure theorem. Inherited nearest-ancestor result is null and is preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-831876cff",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-831876cff (reviewer sub-agent of L); spot-checked: This is the second push. The first, b51cdf5f, passed review and was returned for a side-completion promotion failure, not for its mathematics. The live item is still unsplit, and its statement and stmt_deps are byte-equal to the delivery's. There is no repair note and there are no new nodes. The only citer is the parent coherent-presentation, so there is no cycle. There is no SGA use: the only hit is the inherited 'non-SGA source WANTED'. The JSON diff against b51cdf5f has four parts. (1) Step 1 now cites def-weil-pbc-sites-and-cohomology (1) for the sheaf equalizer criterion; it is already a stmt_dep, and functoriality of res_t is now spelled out. (2) Step 3 now shows that fully fixed sections are stable under restriction, that i_X is equivariant, that equivariance from a trivial Y means g·u_V(z)=u_V(z) (as in the K-object definition of action-topos-geometric-restriction), and that the hom bijection is natural. (3) Step 4 now checks naturality explicitly: A(v)a_X and a_X' p_*(v) both factor v c_X through the injective i_X'. (4) Step 7 changes \\prime to ' only. proof_deps equal the union of the step uses. The five cited statements (finite-cover-site, yoneda-free-evaluation, action-topos-geometric-restriction, condensed-action-module, profinite-action-parameters) are unchanged since b51cdf5f; I re-read them in full. Step checks: in step 2, α_{tS}=π; pull back along (g,f), and conversely test at (γ,π), using that J×S is profinite. Step 4 gets a_X b_X=1 from injectivity of i_X and b_X a_X=1 from the counit. Step 5 checks submodule closure and the image of the normalized datum. Step 6 checks (b^*r)(a·b^*x)=a·b^*(rx). Step 7 uses verbatim naturality clauses of the yoneda node. Edge cases agree with the statement: J=1, S=∅, R=0, and Z/2 acting on Z/3 by negation (trivial evaluation gives 0, free evaluation gives Z/3). Not a duplicate of condensed-action-injective-infrastructure. The source paragraph (3) of sk-thm-sf-ctf-stability-direct-images motivates the item without stating it, and the external reference is honestly marked WANTED; from.node=null is inherited."
+ }
+}

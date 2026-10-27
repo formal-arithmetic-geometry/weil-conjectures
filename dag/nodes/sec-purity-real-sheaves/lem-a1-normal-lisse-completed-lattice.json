@@ -1,0 +1,121 @@
+{
+ "id": "lem-a1-normal-lisse-completed-lattice",
+ "kind": "statement",
+ "title": "Normal-base integral lattices in a prescribed completed comparison",
+ "statement": "Let l be prime and P be a completed-lisse base [def-per-lisse-completed-system-data], so X is Noetherian separated, E/Q_l finite, and l invertible in every residue field. Suppose X is connected and its local rings are integrally closed domains [def-weil-pbc-normal-ring]. Fix any normalized completed-system comparison C. For every locally finite free module L over the continuous rational coefficient sheaf [def-sfb-monodromy-realization-data], there exists a locally finite free completed integral module M whose scalar extension along C.coefficientIso.inv followed by the continuous integral-to-field map is isomorphic to L. No representation, monodromy equivalence, integral embedding or descent datum on a chosen cover is asserted. Rank zero is included.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), Lemma 6.8.13 first paragraph, Lemma 7.4.10, pp. 59–61, 71; completion normalization by Lemma 6.8.2(1),(2)."
+ },
+ "stmt_deps": [
+  "def-per-lisse-completed-system-data",
+  "def-sfb-monodromy-realization-data",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose a small model of the finite extension, carrying its valuation ring, continuous-function coefficient sheaves, and finite free charts along the coefficient-field isomorphism. Apply [lem-a1-normal-lattice-finite-cover-presentation] on the connected normal Noetherian separated base; residue-field invertibility gives stalk invertibility by the local-ring unit criterion. Transport its actual finite-cover integral lattice and rationalization back to continuous coefficients in the given universe. This is coefficient transport, not a use of rational monodromy essential surjectivity.",
+   "uses": [
+    "lem-a1-normal-lattice-finite-cover-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-pbc-lisse-lattice-finite-etale-descent] after the equivalence with internal abelian-sheaf modules and continuous-coefficient realization. Its image-and-pullback construction descends existence of an integral lattice without requiring a descent datum. Transport back to sheaf modules. The output is locally finite free and rationalizes to L.",
+   "uses": [
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the continuous integral lattice along the coefficient isomorphism of the prescribed comparison C of [def-per-lisse-completed-system-data]. Extension and restriction along an isomorphism are inverse, preserve local finite free charts, and associativity of tensor extension identifies rationalization through C.coefficientIso.inv followed by the integral-to-field inclusion with L. This is true for any C; no choice of monodromy functor occurs. Rank zero gives the zero model.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-normal-lattice-finite-cover-presentation",
+  "lem-weil-pbc-lisse-lattice-finite-etale-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), Lemma 6.8.13 first paragraph, Lemma 7.4.10, pp. 59–61, 71; completion normalization by Lemma 6.8.2(1),(2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A lisse sheaf of rational l-adic modules on a connected normal Noetherian scheme has an integral lattice obtained by finite etale descent",
+   "results": "Scheme.Modules.instAbelian, Scheme.Modules.instHasLimits, ModuleCat.tildeInModuleCat, ZLattice.module_free, Submodule.IsLattice.inf, Submodule.IsLattice.finite.",
+   "date": "2026-10-26",
+   "verdict": "No match. The scheme module results are for structure sheaves; lattice results are algebraic and do not give pro-etale integral lattices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every lisse rational module on a normal scheme admits a locally finite free integral lattice with isomorphic scalar extension",
+   "results": "IsIntegralClosure.module_free, FiniteDimensional.exists_is_basis_integral, ZLattice.module_free, exists_integral_multiples, Module.FinitePresentation.exists_free_localizedModule_powers.",
+   "date": "2026-10-26",
+   "verdict": "No match: these are algebraic or normed lattice results, with no pro-etale sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "lisse.*lattice|lattice.*lisse|normal.*monodromy in Mathlib; integral lattice in the full blueprint; normal_completed_integral in Sheaf and WeilConjectures",
+   "results": "No Mathlib match. Blueprint search has seven hits, none for this statement. Existing NormalCompletedIntegralModel overlaps mathematically but depends on the parent monodromy theorem; importing it here is circular. Finite-cover presentation and finite-etale descent exist with different coefficient and module universes.",
+   "date": "2026-10-26",
+   "verdict": "No acyclic existing declaration with the normalized completed-lattice conclusion. This node isolates exactly the coefficient transport and descent of parent steps 1 and 3; it does not restate the parent monodromy theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalProEtaleMonodromy",
+  "date": "2026-10-26",
+  "group": "V9"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Normal pro-etale monodromy proof, steps 1 and 3: obtain a finite-cover lattice and descend existence before integral-fibre reconstruction.",
+   "via": [
+    "lem-a1-normal-proetale-monodromy",
+    "lem-a1-smooth-lisse-integral-lattice",
+    "lem-a1-degree-zero-compact-support-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalLisseCompletedLattice",
+  "file": "lean/Sheaf/Paper/NormalLisseCompletedLattice.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CompletedLisse.normal_lisse_completed_lattice",
+  "statement": "theorem normal_lisse_completed_lattice (l : ℕ) [Fact l.Prime]\n    (P : Base.{u} l) [ConnectedSpace P.X]\n    (hnormal : ∀ x : P.X,\n      IsDomain (P.X.presheaf.stalk x) ∧ IsIntegrallyClosed (P.X.presheaf.stalk x))\n    (C : Comparison l P) (L : SfRationalModules l P.E P.X)\n    (hL : L.IsFiniteLocallyFree) :\n    ∃ M : Integral l P,\n      Nonempty ((completedAdicChange P.X\n        (C.coefficientIso.inv ≫ lisseIntegerToFieldSized l P.E P.X)).obj M.obj ≅ L)",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-0bc82",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261026T100444-L-34218",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-0bc82",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261026T100444-L-34218",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs lem-a1-normal-proetale-monodromy node (proof/proof_deps/proof_origin, tool_uses deletions per brief-stage3 §109); new lemma normal_lisse_completed_lattice vs its node and BS 7.4.10/6.8.4(6)/6.8.13; scratch compile of item+lemma with #print axioms (propext, sorryAx, Classical.choice, Quot.sound); unit sk-p-real-rankin realized empty"
+ }
+}

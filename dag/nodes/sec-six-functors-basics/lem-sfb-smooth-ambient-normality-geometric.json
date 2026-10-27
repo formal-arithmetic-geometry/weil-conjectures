@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-smooth-ambient-normality-geometric",
+ "kind": "statement",
+ "title": "Normality from geometric conjugations in a smooth ambient group",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups below are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$; subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms] and [def-weil-connected-scheme]. Let $J$ be smooth, let $N\\subseteq J$ be a closed subgroup, and let $\\bar k$ be an algebraic closure [def-weil-algebraic-closure] of $k$. If every $g\\in J(\\bar k)$ satisfies $\\operatorname{Int}(g)(N_{\\bar k})=N_{\\bar k}$ as closed subgroup schemes of $J_{\\bar k}$, then $N$ is normal in $J$. Here $\\operatorname{Int}(g)$ is the group-scheme automorphism $x\\mapsto gxg^{-1}$, and normality means $jN(A)j^{-1}=N(A)$ for every commutative $k$-algebra $A$ and $j\\in J(A)$. Neither $N$ nor $J$ is required to be connected; no smoothness of $N$ is required. The hypothesis concerns equality of subgroup schemes, rather than just equality of their sets of geometric points.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 1.85 and its normalizer proof, printed p.32, applied over an algebraic closure; Proposition 1.90, printed p.33, applies it to weakly characteristic subgroups. Smoothness of the ambient group is essential in the normalizer proof."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "Write $J=\\operatorname{Spec}R$. By [lem-weil-pbc-closed-immersion-affine-cover-criterion], $N=\\operatorname{Spec}(R/I)$ for an ideal $I$. Both are separated over $k$: for any affine $\\operatorname{Spec}B$, its relative diagonal corresponds to the surjection $B\\otimes_kB\\to B$, $b\\otimes c\\mapsto bc$, hence is closed by the same criterion and [lem-weil-pbc-fibre-product-affine-spectra]. They are finite type by hypothesis. By [lem-weil-pbc-lft-affine-pairs], $R$ is a finitely generated $k$-algebra. Thus all the separatedness and finite-type hypotheses needed for the factorization-locus theorem hold.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.85, printed p.32; Proposition 1.83 and its transporter construction, pp.30–32. The closed one-sided transporter is supplied by the existing constant-source factorization-locus theorem (Theorem 1.105, pp.37–38)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-constant-source-closed-factorization-locus] with $Y=N$, $X=S=J$, $W=N$, and $f:N\\times_kJ\\to J$ given by $(n,j)\\mapsto jnj^{-1}$. This is a morphism by the group-scheme operations [def-sc-group-scheme]. Obtain a closed subscheme $L\\hookrightarrow J$ such that, for every $k$-scheme $T$, a map $j:T\\to J$ factors through $L$ exactly when the whole morphism $N\\times_kT\\to J$ given by conjugation by $j$ factors through $N$. This tests subgroup schemes, including their nilpotents. The theorem also identifies the locus after scalar extension with $L_{\\bar k}$. We need only this one-sided transporter; equality will follow by applying it to inverses.",
+   "uses": [
+    "lem-sfb-constant-source-closed-factorization-locus",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.85, printed p.32; Proposition 1.83 and its transporter construction, pp.30–32. The closed one-sided transporter is supplied by the existing constant-source factorization-locus theorem (Theorem 1.105, pp.37–38)."
+   }
+  },
+  {
+   "text": "For every $g\\in J(\\bar k)$, the assumed equality $\\operatorname{Int}(g)(N_{\\bar k})=N_{\\bar k}$ implies the factorization tested in step 2. Therefore $L_{\\bar k}(\\bar k)=J_{\\bar k}(\\bar k)$. By [sbc-lem-smooth-geometrically-reduced], smoothness of $J/k$ makes $J_{\\bar k}$ reduced. By [lem-weil-pbc-fibre-product-affine-spectra] it has coordinate algebra $R\\otimes_k\\bar k$, generated over $\\bar k$ by the images of the finite set of generators of $R$. The immersion $L_{\\bar k}\\hookrightarrow J_{\\bar k}$ is closed by [lem-weil-pbc-closed-immersion-base-change]; by [lem-weil-pbc-closed-immersion-affine-cover-criterion] it is cut out by an ideal $K$ of $R\\otimes_k\\bar k$. Each $a\\in K$ evaluates to zero at every $\\bar k$-point, so clause 2 of [lem-wf-affine-nullstellensatz-vanishing] gives $a=0$. Hence $K=0$ and $L_{\\bar k}=J_{\\bar k}$ as schemes. Reducedness is used only for the ambient group.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.85, printed p.32; Proposition 1.83 and its transporter construction, pp.30–32. The closed one-sided transporter is supplied by the existing constant-source factorization-locus theorem (Theorem 1.105, pp.37–38)."
+   }
+  },
+  {
+   "text": "Again by [lem-weil-pbc-closed-immersion-affine-cover-criterion], write $L=\\operatorname{Spec}(R/H)$ over $J$. Its quotient map kills every $h\\in H$. After tensoring with $\\bar k$ the map is an isomorphism by step 3 and [lem-weil-pbc-fibre-product-affine-spectra], so $h\\otimes1=0$ in $R\\otimes_k\\bar k$. To see this forces $h=0$, take a $k$-basis of $\\bar k$ using [lem-weil-pbc-vector-space-free]. The finite expansion of $1$ in this basis has a nonzero coefficient $c$; the associated coordinate functional divided by $c$ is a $k$-linear map $\\lambda:\\bar k\\to k$ with $\\lambda(1)=1$. The map $r\\otimes a\\mapsto r\\lambda(a)$ is well-defined by bilinearity and sends $h\\otimes1$ to $h$. Thus $H=0$ and $L=J$. This is the explicit linear-algebra descent, requiring no perfection assumption on $k$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-vector-space-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.85, printed p.32; Proposition 1.83 and its transporter construction, pp.30–32. The closed one-sided transporter is supplied by the existing constant-source factorization-locus theorem (Theorem 1.105, pp.37–38)."
+   }
+  },
+  {
+   "text": "Let $A$ be any commutative $k$-algebra and $j\\in J(A)$. Since $L=J$, the criterion of step 2 applied to $T=\\operatorname{Spec}A$ shows that conjugation by $j$ carries $N_A$ into itself. Evaluating on $A$-points gives $jN(A)j^{-1}\\subseteq N(A)$. Apply the same criterion to $j^{-1}$ to obtain $j^{-1}N(A)j\\subseteq N(A)$, and conjugate this inclusion by $j$ to get the reverse inclusion $N(A)\\subseteq jN(A)j^{-1}$. Equality holds for every $A,j$, which is normality by [def-sc-group-scheme-subgroup]. Arbitrary $A$, including nonreduced algebras, was allowed by the cited locus criterion; neither connectedness nor smoothness of $N$ entered.",
+   "uses": [
+    "lem-sfb-constant-source-closed-factorization-locus",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.85, printed p.32; Proposition 1.83 and its transporter construction, pp.30–32. The closed one-sided transporter is supplied by the existing constant-source factorization-locus theorem (Theorem 1.105, pp.37–38)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-sfb-constant-source-closed-factorization-locus",
+  "def-sc-group-scheme",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-weil-pbc-vector-space-free",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 1.85, printed p.32; Proposition 1.83 and its transporter construction, pp.30–32. The closed one-sided transporter is supplied by the existing constant-source factorization-locus theorem (Theorem 1.105, pp.37–38)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A closed subgroup scheme of a smooth algebraic group is normal if every geometric point of the ambient group conjugates the subgroup scheme to itself",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Subgroup.Normal.of_conjugate_fixed\", \"module\": \"Mathlib/Algebra/Group/Subgroup/Pointwise\", \"type\": \"∀ {G : Type u_2} [inst : Group G] {H : Subgroup G}, (∀ (g : G), MulAut.conj g • H = H) → H.Normal\", \"doc\": \"If for every element $ g \\\\in G $, the conjugation of the subgroup $ H $ by $ g $ leaves $ H $ invariant (i.e., $ gHg^{-1} = H $), then $ H $ is a normal subgroup of $ G $.\"}\n  {\"name\": \"Subgroup.Normal\", \"module\": \"Mathlib/Algebra/Group/Subgroup/Defs\", \"type\": \"{G : Type u_1} → [inst : Group G] → Subgroup G → Prop\", \"doc\": \"A subgroup $ H $ of a group $ G $ is normal if for every $ g \\\\in G $ and $ h \\\\in H $, the element $ g h g^{-1} $ is in $ H $.\"}\n  {\"name\": \"Subgroup.normalCore_isClosed\", \"module\": \"Mathlib/Topology/Algebra/Group/ClosedSubgroup\", \"type\": \"∀ {G : Type u} [inst : Group G] [inst_1 : TopologicalSpace G] [ContinuousMul G] (H : Subgroup G),\\n  IsClosed ↑H → IsClosed ↑H.normalCore\", \"doc\": \"If $ H $ is a closed subgroup of a topological group $ G $, then the normal core of $ H $ is also closed in $ G $.\"}\n  {\"name\": \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"∀ (K : Type u_1) [inst : Field K], (commutator (Field.absoluteGaloisGroup K)).topologicalClosure.Normal\", \"doc\": \"The topological closure of the commutator subgroup of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is a normal subgroup under the Krull topology. This means that for any field $K$, the closu\"}\n  {\"name\": \"Subgroup.normalClosure_normal\", \"module\": \"Mathlib/Algebra/Group/Subgroup/Basic\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {s : Set G}, (Subgroup.normalClosure s).Normal\", \"doc\": \"For any subset $ s $ of a group $ G $, the normal closure of $ s $ is a normal subgroup of $ G $. This follows from the definition of the normal closure as the smallest normal subgroup containing $ s \"}\n  {\"name\": \"Subgroup.normal_of_characteristic\", \"module\": \"Mathlib/Algebra/Group/Subgroup/Basic\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (H : Subgroup G) [h : H.Characteristic], H.Normal\", \"doc\": \"Every characteristic subgroup of a group is a normal subgroup. That is, if $ H $ is a subgroup of $ G $ that is invariant under all automorphisms of $ G $, then $ H $ is necessarily invariant under co\"}\n  {\"name\": \"instNormalCommutatorClosure\", \"module\": \"Mathlib/Topology/Algebra/Group/TopologicalAbelianization\", \"type\": \"∀ (G : Type u_1) [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalGroup G],\\n  (commutator G).topologicalClosure.Normal\", \"doc\": \"In a topological group $ G $, the topological closure of the commutator subgroup $[G, G]$ is a normal subgroup of $ G $. This follows because the commutator subgroup is algebraically normal, and its c\"}\n  {\"name\": \"Subgroup.normalCore_normal\", \"module\": \"Mathlib/Algebra/Group/Subgroup/Basic\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (H : Subgroup G), H.normalCore.Normal\", \"doc\": \"The normal core of any subgroup $ H $ of a group $ G $ is a normal subgroup of $ G $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Subgroup.Normal.of_conjugate_fixed tests all elements of one abstract group. It does not extend a conjugation test on geometric points to scheme normality, including points over nonreduced algebras."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normality of algebraic subgroup schemes can be tested by conjugation by points over a separably closed field when the ambient group is smooth",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subgroup.Normal.of_conjugate_fixed\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Pointwise\", \"type\": \"{H : Subgroup G} (h : ∀ g : G, (MulAut.conj g) • H = H) : H.Normal\", \"doc\": \"If for every element $ g \\\\in G $, the conjugation of the subgroup $ H $ by $ g $ leaves $ H $ invariant (i.e., $ gHg^{-1} = H $), then $ H $ is a normal subgroup of $ G $.\"}\n  {\"name\": \"Subgroup.Normal.conj_mem\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {H : Subgroup G}, H.Normal → ∀ (n : G), n ∈ H → ∀ (g : G), g * n * g⁻¹ ∈ H\", \"doc\": \"If $ H $ is a normal subgroup of a group $ G $, then for every element $ n \\\\in H $ and every element $ g \\\\in G $, the conjugate $ g n g^{-1} $ is also in $ H $.\"}\n  {\"name\": \"Subgroup.Normal.conj_smul_eq_self\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Pointwise\", \"type\": \"(g : G) (H : Subgroup G) [h : Normal H] : MulAut.conj g • H = H\", \"doc\": \"For any element $g$ in a group $G$ and any normal subgroup $H$ of $G$, the conjugation automorphism $\\\\phi_g$ defined by $\\\\phi_g(h) = g h g^{-1}$ satisfies $\\\\phi_g(H) = H$. This means the image of $H$ \"}\n  {\"name\": \"MulAut.conjNormal.congr_simp\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"∀ {G : Type u_3} [inst : Group G] {H : Subgroup G} [inst_1 : H.Normal], MulAut.conjNormal = MulAut.conjNormal\", \"doc\": \"For any group $G$ and normal subgroup $H \\trianglelefteq G$, the conjugation automorphism $\\\\text{conj}_H : G \\\\to \\\\text{Aut}(H)$ defined by $g \\\\mapsto (h \\\\mapsto g h g^{-1})$ satisfies congruence proper\"}\n  {\"name\": \"Subgroup.conjAct_pointwise_smul_eq_self\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Pointwise\", \"type\": \"{H : Subgroup G} {g : G} (hg : g ∈ normalizer H) : ConjAct.toConjAct g • H = H\", \"doc\": \"For a subgroup $H$ of a group $G$ and an element $g$ in the normalizer of $H$, the conjugation action of $g$ on $H$ satisfies $g H g^{-1} = H$.\"}\n  {\"name\": \"Subgroup.Normal.casesOn\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"{G : Type u_1} →\\n  [inst : Group G] →\\n    {H : Subgroup G} →\\n      {motive : H.Normal → Sort u} →\\n        (t : H.Normal) → ((conj_mem : ∀ (n : G), n ∈ H → ∀ (g : G), g * n * g⁻¹ ∈ H) → motive ⋯) → motive t\", \"doc\": \"Given a property of normal subgroups, this function allows proving the property by assuming the defining conjugation condition: for all $ g \\\\in G $ and $ h \\\\in H $, the conjugate $ g h g^{-1} $ is in \"}\n  {\"name\": \"ConjAct.Subgroup.conjAction\", \"module\": \"Mathlib.GroupTheory.GroupAction.ConjAct\", \"type\": \"{H : Subgroup G} [hH : H.Normal] : SMul (ConjAct G) H\", \"doc\": \"For any normal subgroup $ H $ of a group $ G $, the conjugation action of $ G $ on $ H $ is well-defined. This means that for every $ g \\\\in G $ and $ h \\\\in H $, the conjugate $ g h g^{-1} $ remains in\"}\n  {\"name\": \"Subgroup.conjAct_pointwise_smul_iff\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Pointwise\", \"type\": \"{H : Subgroup G} {g : G} : ConjAct.toConjAct g • H = H ↔ g ∈ normalizer H\", \"doc\": \"For a subgroup $ H $ of a group $ G $ and an element $ g \\\\in G $, the conjugation by $ g $ leaves $ H $ invariant (i.e., $ gHg^{-1} = H $) if and only if $ g $ belongs to the normalizer of $ H $ in $ \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Subgroup.Normal.of_conjugate_fixed tests all elements of one abstract group. It does not extend a conjugation test on geometric points to scheme normality, including points over nonreduced algebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalizer\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: Subgroup.Normal.of_conjugate_fixed tests all elements of one abstract group. It does not extend a conjugation test on geometric points to scheme normality, including points over nonreduced algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizer.*[Ss]mooth|[Ss]mooth.*normalizer|[Nn]ormal.*[Gg]eometric[Pp]oint",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: Subgroup.Normal.of_conjugate_fixed tests all elements of one abstract group. It does not extend a conjugation test on geometric points to scheme normality, including points over nonreduced algebras."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic subgroup of a smooth group scheme is normal when all algebraically closed field points preserve it under conjugation",
+   "results": "8 hits: Subgroup.Normal.of_conjugate_fixed, Subgroup.Normal.conj_mem, Subgroup.Normal.mk, CategoryTheory.Subgroupoid.IsNormal.mk, Subgroup.Normal.conj_smul_eq_self, Subgroup.Normal.casesOn, Subgroup.normal_of_characteristic, Subgroup.conjAct_pointwise_smul_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract subgroup normalizers do not test subgroup-scheme normality from geometric conjugations, nor allow nonreduced subgroup schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subgroup scheme of a smooth algebraic group is normal if every geometric point conjugates the subgroup scheme to itself",
+   "results": "8 hits: Subgroup.Normal.of_conjugate_fixed, Subgroup.Normal, Field.absoluteGaloisGroup.commutator_closure_isNormal, Subgroup.normalCore_isClosed, Subgroup.normalClosure_normal, Subgroup.normal_of_characteristic, Subgroup.Normal.pathComponentOne, Subgroup.normalCore_normal",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract subgroup normalizers do not test subgroup-scheme normality from geometric conjugations, nor allow nonreduced subgroup schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The closed normalizer of a subgroup scheme contains all geometric points of a smooth affine algebraic group and therefore equals the group",
+   "results": "8 hits: Subgroup.normalizer_eq_top, Subgroup.normalCore_isClosed, Subgroup.normalizer_eq_top_iff, Subgroup.le_normalizer, Subgroup.normalClosure_eq_self, Subgroup.normal_in_normalizer, Subgroup.is_normal_topologicalClosure, Subgroup.normalClosure_normal",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract subgroup normalizers do not test subgroup-scheme normality from geometric conjugations, nor allow nonreduced subgroup schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "of_conjugate_fixed|normalizer_eq_top_iff",
+   "results": "9 hits: Mathlib/Algebra/Group/Subgroup/Pointwise.lean, Mathlib/Algebra/Group/Subgroup/Pointwise.lean, Mathlib/Algebra/Group/Subgroup/Order.lean, Mathlib/Algebra/Group/Subgroup/Basic.lean, Mathlib/Algebra/Group/Subgroup/Basic.lean, Mathlib/Algebra/Group/Subgroup/Basic.lean, Mathlib/Algebra/Group/Subgroup/Basic.lean, Mathlib/Algebra/Group/Subgroup/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract subgroup normalizers do not test subgroup-scheme normality from geometric conjugations, nor allow nonreduced subgroup schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-solvable-unipotent-torus",
+  "date": "2026-10-23",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field. Supporting input in the present split: Milne Proposition 1.90, the extra ambient-normality clause following the Theorem 16.33 input; present proof step 6.",
+   "via": [
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-ambient-normality-geometric",
+  "worker": "stage1",
+  "group": "Q81",
+  "summary": "Five-step proof of the geometric normality criterion following Milne Corollary 1.85. Reused the existing closed factorization locus to construct the one-sided conjugation transporter, applied geometric reducedness and the affine vanishing principle, descended via an explicit linear retraction, and used inverse conjugation on all algebra tests. No new nodes; statement unchanged.",
+  "blueprint": "Supporting normality input of Milne Proposition 1.90 in the inherited solvable-group prerequisite, ultimately serving direct-image clause (3) of det-thm-sf-ctf-stability-direct-images. Read the current latest blueprint (main-20261023-1620), its sk-thm-sf-ctf-stability unit and direct-images proof. The auxiliary is below the unit route; ancestor reports null, retained as inherited. Whole-blueprint searches normalizer, normality, geometric conjugations and closed subgroup give no equivalent item.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-1446788c4",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-1446788c4 (reviewer sub-agent of L); spot-checked: I read all five steps and every cited statement in full and found no faults, so I made no changes. Source: Milne iAG2017 Cor 1.85 (p.32, with Prop 1.83/1.84). The item is the case k' = k̄ and matches it hypothesis by hypothesis: J smooth, N closed with no smoothness assumed, stability as schemes, normality on all A-points. The statement and stmt_deps are unchanged, there are no new nodes, and no re-split note exists for this item. Step 1: the 01QO criterion and fibre-product-affine-spectra give N = Spec(R/I) and separatedness through the surjective diagonal; lft-affine-pairs gives R finitely generated, so the locus theorem's hypotheses hold. Step 2: the statement of lem-sfb-constant-source-closed-factorization-locus with Y=W=N, X=S=J and f=(n,j)↦jnj⁻¹ gives the closed one-sided transporter L (Milne's T_G(H,H)). Step 3: T = Spec k̄ shows every k̄-point lies in L. J_k̄ is reduced by sbc-lem-smooth-geometrically-reduced, the defining ideal K comes from closed-immersion base change, and clause 2 of the Nullstellensatz node (not clause 3) gives K = 0. Step 4: an explicit k-linear retraction λ with λ(1)=1 from a basis of k̄ gives H = 0 with no perfectness needed; elementary is justified. Step 5: L = J at T = Spec A gives jN(A)j⁻¹ ⊆ N(A), and applying it to j⁻¹ gives equality, which is normality as in def-sc-group-scheme-subgroup. Route: the two nodes from other units (smooth geometric reducedness, Nullstellensatz) are both Lean-closed in slopmaster2, so they count as tools and no tool_uses entry is needed; there is no cycle. Duplicates: lem-sfb-galois-descent-affine-subgroups needs a Galois extension, and no node states Milne 1.85. Edge cases: N=J, N=e, disconnected finite J, α_p⊂G_a, and the non-smooth α_p⋊G_m counterexample showing smoothness is needed. Minor: the report mentions a citations.json the commit does not contain; no rule requires it."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothAmbientNormalityGeometric",
+  "declaration": "AlgebraicGeometry.isNormalSubgroupScheme_of_geometric_conjugations",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothAmbientNormalityGeometric.lean",
+  "statement": "theorem isNormalSubgroupScheme_of_geometric_conjugations {k : Type u} [Field k] (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosure k Ω] (J N : Over (Spec (.of k))) [GrpObj J] [GrpObj N] [IsAffine J.left] [IsAffine N.left] [LocallyOfFiniteType J.hom] [QuasiCompact J.hom] [LocallyOfFiniteType N.hom] [QuasiCompact N.hom] [Smooth J.hom] (i : N ⟶ J) [IsClosedSubgroupScheme i] (hconj : ∀ (g : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k Ω))) ⟶ J) (T : Over (Spec (.of Ω))), Set.image (fun x : (Over.map (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))).obj T ⟶ J ↦ (Over.homMk T.hom ≫ g) * x * (Over.homMk T.hom ≫ g)⁻¹) (Set.range (fun n : (Over.map (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))).obj T ⟶ N ↦ n ≫ i)) = Set.range (fun n : (Over.map (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))).obj T ⟶ N ↦ n ≫ i)) : IsNormalSubgroupScheme i",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-05e674e8f",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Statement matches the node and Milne iAG Cor 1.85 clause by clause: field k, IsAlgClosure Ω, affine finite-type (LocallyOfFiniteType+QuasiCompact) GrpObj J,N over Spec k, Smooth J.hom only, IsClosedSubgroupScheme i; hconj tests Int(g)(N_Ω)(T)=N_Ω(T) for every T over Ω (equivalent to subgroup-scheme equality since both are closed immersions; keeps nilpotents); conclusion is the recorded IsNormalSubgroupScheme. No connectedness, smoothness of N or perfectness; universes all u. lean.statement verbatim; docstrings have source, blueprint id and 5 proof steps; sorry only; no definitions; lines <=100; imports per brief §3. Non-lean node fields equal side-live; no existing declaration or parallel landing. Advisory: the Second reading section is a self-check (direct-delivery policy), not a return reason. No changes made, so no compile."
+ }
+}

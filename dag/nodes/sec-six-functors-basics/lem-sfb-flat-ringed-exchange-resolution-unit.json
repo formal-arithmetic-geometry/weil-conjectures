@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-flat-ringed-exchange-resolution-unit",
+ "kind": "statement",
+ "title": "Resolution-unit normalization of flat ringed derived exchange",
+ "statement": "Let four sites be small in the universe of [def-weil-size-convention], each carrying a sheaf of commutative rings and its category of module sheaves [def-weil-sheaf-of-modules-category]. Fix a commutative square of ringed-topos morphisms [def-weil-pbc-ringed-topos-morphism] with vertical edges $f:\\mathcal X\\to\\mathcal Y$, $f':\\mathcal X'\\to\\mathcal Y'$ and horizontal edges $g:\\mathcal Y'\\to\\mathcal Y$, $g':\\mathcal X'\\to\\mathcal X$, including its ring-compatible commutation isomorphism. Suppose the tensor pullbacks $g^*,(g')^*$ are exact. Use the module adjunctions [lem-weil-pbc-ringed-topoi-module-adjunction], ordinary derived categories with localization $Q$ [def-weil-abstract-derived-category], and canonical total right derived pairs $(Rf_*,\\eta^f),(Rf'_*,\\eta^{f'})$ [def-sfb-right-derived-functor]. Thus $\\eta^f_P:Q(f_*P)\\to Rf_*(QP)$ is the resolution transformation. Let $e:g^*f_*\\to f'_*(g')^*$ be the underived adjunction mate of the square, and let $\\beta:Lg^*Rf_*\\to Rf'_*L(g')^*$ be its canonical derived adjunction mate [def-trf-topos-derived-base-change-map]. For every bounded below module complex $P$ on $\\mathcal X$, without injectivity or acyclicity hypotheses on its terms, the following equality holds under the exact termwise identifications $Lg^*Q=Qg^*$ and $L(g')^*Q=Q(g')^*$:\n$$\\beta_{QP}\\circ g^*(\\eta^f_P)=\\eta^{f'}_{(g')^*P}\\circ Q(e_P).$$\nHere $e_P$ is termwise application of the underived mate. This asserts equality for the specified transformations and does not assert that $\\beta$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0736 (lemma-base-change-map-flat-case), proof on injective resolutions, and remark-base-change (Tag 07A7), identification with the derived adjunction mate. Resolution-unit equality for arbitrary bounded below representatives is the naturality of this construction."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "def-trf-topos-derived-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Write $A=g^*$, $B=(g')^*$, $a=g_*$, $b=(g')_*$, $R=f_*$ and $S=f'_*$. A bar denotes the specified total right derived functor, and $\\eta^T:QT\\to\\bar TQ$ its resolution transformation. By exactness, the derived horizontal left adjoints are termwise $A,B$. Use the normalized ringed lifts for these adjunctions. Let $u:1\\to bB$ and $c:Aa\\to1$ be the ordinary horizontal unit and counit, and $u^D:1\\to\\bar bB$, $c^D:A\\bar a\\to1$ their derived versions. The canonical Hom normalization, applied to $1_{BP}$ and to $c_T:AaT\\to T$, gives, for every complex $P$ on $\\mathcal X$ and $T$ on $\\mathcal Y'$,\n$$u^D_{QP}=\\eta^b_{BP}\\,Q(u_P),\\qquad c^D_{QT}\\,A(\\eta^a_T)=Q(c_T).$$\nIndeed the ordinary transposes of these two chain maps are respectively $u_P$ and $1_{aT}$; the latter equality says that the inverse derived transpose of $\\eta^a_T$ is $Q(c_T)$. These formulas are given by [lem-sfb-resolving-derived-adjunction-normalization] (every complex is resolving, as $A,B$ are exact) for some adjunction $d$ between the lift's left derived pair and $\\bar b$ (resp. $\\bar a$); $d$ is the lift's adjunction $d_0$. Indeed $d$ and $d_0$ have the same functors, so $d$'s Hom bijection is $\\psi\\circ$ that of $d_0$ for a natural automorphism $\\psi$ of the right adjoint. Every object is $QI$ with $I$ K-injective [prop-pur-kinjective-resolutions-exist]. Choose a quasi-isomorphism $s:P'\\to bI$ from a flat-term K-flat complex $P'$ [lem-pc-kflat-resolution]. The isomorphism $y=\\eta^b_I\\,Q(s)$ has the same inverse transpose under $d_0$ (the lift's canonical formula) and under $d$ (the resolving-class formula), namely the left comparison followed by $Q$ of the ordinary transpose of $s$. Hence $\\psi_{QI}y=y$, so $\\psi=1$; likewise for $a$. The exact localization comparisons are suppressed throughout, as in the statement.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-sfb-ringed-derived-adjoint-lift",
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0736 (lemma-base-change-map-flat-case), 07A7 (remark-base-change), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility). Formal normalization calculation by NW."
+   }
+  },
+  {
+   "text": "Let $t:Rb\\xrightarrow{\\sim}aS$ be the ordinary right-adjoint commutation isomorphism determined by the specified ring-compatible square. Let $\\tau:\\bar R\\bar b\\xrightarrow{\\sim}\\bar a\\bar S$ be the conjugate of its canonical derived pullback square. For the two paths from $\\mathcal X'$ to $\\mathcal Y$, apply the normalized composition comparisons, and insert the specified 2-isomorphism between their composite morphisms. Their right-derived-unit formulas, composed with one another, give for every complex $T$ on $\\mathcal X'$:\n$$\\tau_{QT}\\,\\bar R(\\eta^b_T)\\,\\eta^R_{bT}\n=\\bar a(\\eta^S_T)\\,\\eta^a_{ST}\\,Q(t_T).\\tag{*}$$\nExplicitly each path comparison identifies its common-composite resolution transformation with $\\bar R(\\eta^b_T)\\eta^R_{bT}$ or $\\bar a(\\eta^S_T)\\eta^a_{ST}$, after its ordinary path isomorphism. The 2-isomorphism comparison identifies the two common-composite units with the ordinary right path isomorphism inserted. Cancelling the invertible path comparisons gives (*). These theorems assert their unit formulas on every complex, so no injectivity condition on $T$, $bT$ or $ST$ enters.",
+   "uses": [
+    "lem-sfb-ringed-derived-composition-comparison",
+    "lem-sfb-ringed-derived-two-iso-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0736 (lemma-base-change-map-flat-case), 07A7 (remark-base-change), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility). Formal normalization calculation by NW."
+   }
+  },
+  {
+   "text": "Rotate the square using the two horizontal adjunctions. The mate-pasting identities applied to the vertical-mate definition of $\\beta$ give its horizontal unit-square-counit expression\n$$\\beta_K=c^D_{\\bar S BK}\\,A(\\tau_{BK})\\,A\\bar R(u^D_K).\\tag{**}$$\nHere $\\tau$ is precisely the full right conjugate of the same specified pullback square: composition comparisons and the square 2-isomorphism were taken with their canonical adjunction compatibility in step 2. Thus (**) concerns the specified $\\beta$, rather than a newly defined comparison. At the ordinary level the identical rotation gives\n$$e_P=c_{SBP}\\,A(t_{BP})\\,AR(u_P).\\tag{***}$$\nBoth rotations are instances of pasting mates along the adjunctions and their unit/counit squares; after expansion, the internal adjacent unit-counit pairs cancel by the triangle identities.",
+   "uses": [
+    "def-trf-topos-derived-base-change-map",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0736 (lemma-base-change-map-flat-case), 07A7 (remark-base-change), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility). Formal normalization calculation by NW."
+   }
+  },
+  {
+   "text": "Put $W=BP$ and $X=QP$. Substitute the first normalization from step 1 into (**), then use naturality of $\\eta^R$ for the chain map $u_P:P\\to bW$. This yields\n$$\\begin{aligned}\n\\beta_X A(\\eta^R_P)\n&=c^D_{\\bar S QW}\\,A\\bigl(\\tau_{QW}\\,\\bar R(\\eta^b_W)\\,\\eta^R_{bW}\\,Q(Ru_P)\\bigr)\\\\\n&=c^D_{\\bar S QW}\\,A\\bigl(\\bar a(\\eta^S_W)\\,\\eta^a_{SW}\\,Q(t_W)\\,Q(Ru_P)\\bigr),\n\\end{aligned}$$\nwhere the second equality is (*) at $T=W$. All products in these formulas mean composition with the rightmost map applied first. Every map is typed in the ordinary unbounded derived category: in particular $\\eta^S_W:Q(SW)\\to\\bar S(QW)$ need not be invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0736 (lemma-base-change-map-flat-case), 07A7 (remark-base-change), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility). Formal normalization calculation by NW."
+   }
+  },
+  {
+   "text": "Naturality of the derived horizontal counit for $\\eta^S_W$ replaces\n$c^D_{\\bar S QW}\\,A\\bar a(\\eta^S_W)$ by $\\eta^S_W\\,c^D_{Q(SW)}$. The second normalization of step 1 at the complex $SW$ then gives\n$$\\begin{aligned}\n\\beta_X A(\\eta^R_P)\n&=\\eta^S_W\\,Q(c_{SW})\\,Q(A(t_W))\\,Q(AR(u_P))\\\\\n&=\\eta^S_W\\,Q\\bigl(c_{SW}\\,A(t_W)\\,AR(u_P)\\bigr)\n=\\eta^S_{BP}\\,Q(e_P),\n\\end{aligned}$$\nusing (***) in the last equality. With $A=g^*$, $B=(g')^*$, $R=f_*$ and $S=f'_*$, this is the required equality. Only horizontal pullbacks were assumed exact. Neither $\\eta^R_P$ nor $\\eta^S_{BP}$ was cancelled; hence the calculation applies to arbitrary bounded below $P$ with no acyclicity assumptions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0736 (lemma-base-change-map-flat-case), 07A7 (remark-base-change), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility). Formal normalization calculation by NW."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sfb-ringed-derived-adjoint-lift",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-sfb-ringed-derived-composition-comparison",
+  "lem-sfb-ringed-derived-two-iso-comparison",
+  "def-trf-topos-derived-base-change-map",
+  "lem-weil-pbc-mate-pasting",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0736 and 07A7; explicit horizontal-adjunction calculation using the normalized composition and adjunction lemmas (Tags 0D6D, 0D6E, 0FPI)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Bb]aseChange|[Bb]aseChange.*rightDerived|baseChange.*_fac",
+   "results": "{\"t\": \"2026-10-23T21:25:01Z\", \"tool\": \"grep\", \"query\": \"rightDerived.*[Bb]aseChange|[Bb]aseChange.*rightDerived|baseChange.*_fac\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: totalRightDerivedUnit and LocalizerMorphism.rightDerivedFunctorComparison_fac normalize abstract Kan-extension comparisons, but do not identify the geometric derived adjunction mate with the underived ringed exchange on arbitrary complexes. Adjunction.derivedη_fac_app and derivedε_fac_app (Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:102,126) normalize one adjunction, and require a further mate-square compatibility argument here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived base change for a flat square of ringed topoi is compatible with right derived units on every complex and termwise underived exchange",
+   "results": "{\"t\": \"2026-10-23T21:25:02Z\", \"tool\": \"leansearch\", \"query\": \"Canonical derived base change for a flat square of ringed topoi is compatible with right derived units on every complex and termwise underived exchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedη.congr_simp\", \"CategoryTheory.Functor.totalRightDerivedUnit\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη\", \"HomologicalComplex.rightUnitor\", \"CategoryTheory.Adjunction.derivedε\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"Module.Flat.isBaseChange\"], \"digest\": \"a44194f424b45e3e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: totalRightDerivedUnit and LocalizerMorphism.rightDerivedFunctorComparison_fac normalize abstract Kan-extension comparisons, but do not identify the geometric derived adjunction mate with the underived ringed exchange on arbitrary complexes. Adjunction.derivedη_fac_app and derivedε_fac_app (Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:102,126) normalize one adjunction, and require a further mate-square compatibility argument here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-23T21:25:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: totalRightDerivedUnit and LocalizerMorphism.rightDerivedFunctorComparison_fac normalize abstract Kan-extension comparisons, but do not identify the geometric derived adjunction mate with the underived ringed exchange on arbitrary complexes. Adjunction.derivedη_fac_app and derivedε_fac_app (Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:102,126) normalize one adjunction, and require a further mate-square compatibility argument here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived base change for a flat square of ringed topoi is compatible with right derived units on every complex and termwise underived exchange",
+   "results": "{\"t\": \"2026-10-23T21:25:03Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical derived base change for a flat square of ringed topoi is compatible with right derived units on every complex and termwise underived exchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\"], \"digest\": \"d02c80f237f5311d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: totalRightDerivedUnit and LocalizerMorphism.rightDerivedFunctorComparison_fac normalize abstract Kan-extension comparisons, but do not identify the geometric derived adjunction mate with the underived ringed exchange on arbitrary complexes. Adjunction.derivedη_fac_app and derivedε_fac_app (Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:102,126) normalize one adjunction, and require a further mate-square compatibility argument here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction mate for derived module pullback pushforward base change, when horizontal pullbacks are exact, extends the underived base change transformation through the resolution units",
+   "results": "{\"t\": \"2026-10-23T21:25:04Z\", \"tool\": \"leanfinder\", \"query\": \"The adjunction mate for derived module pullback pushforward base change, when horizontal pullbacks are exact, extends the underived base change transformation through the resolution units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModules.pullbackComp\", \"SheafOfModules.pullbackObjUnitToUnit\"], \"digest\": \"7d077ebb7955f5f8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: totalRightDerivedUnit and LocalizerMorphism.rightDerivedFunctorComparison_fac normalize abstract Kan-extension comparisons, but do not identify the geometric derived adjunction mate with the underived ringed exchange on arbitrary complexes. Adjunction.derivedη_fac_app and derivedε_fac_app (Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:102,126) normalize one adjunction, and require a further mate-square compatibility argument here."
+  },
+  {
+   "tool": "grep",
+   "query": "derived_mate|baseChange.*(unit|fac)|derivedη_fac_app|derivedε_fac_app",
+   "results": "{\"t\": \"2026-10-23T21:55:16Z\", \"tool\": \"grep\", \"query\": \"derived_mate|baseChange.*(unit|fac)|derivedη_fac_app|derivedε_fac_app\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\"], \"digest\": \"7339e7e42107eac4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected derivedη_fac_app and derivedε_fac_app in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:103,125; they normalize a single adjunction but do not state the ringed-square exchange equality. LocalizerMorphism.rightDerivedFunctorComparison_fac normalizes a chosen Kan comparison, without identifying it with the specified geometric mate. Other hits concern module pullback units or ordinary pullbacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedη_fac_app\", \"derivedε_fac_app\"",
+   "results": "{\"t\": \"2026-10-23T21:55:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"derivedη_fac_app\\\", \\\"derivedε_fac_app\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected derivedη_fac_app and derivedε_fac_app in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:103,125; they normalize a single adjunction but do not state the ringed-square exchange equality. LocalizerMorphism.rightDerivedFunctorComparison_fac normalizes a chosen Kan comparison, without identifying it with the specified geometric mate. Other hits concern module pullback units or ordinary pullbacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change compatibility with right derived functor comparison maps for exact horizontal pullbacks",
+   "results": "{\"t\": \"2026-10-23T21:55:17Z\", \"tool\": \"leansearch\", \"query\": \"Derived base change compatibility with right derived functor comparison maps for exact horizontal pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.Limits.pullbackComparison\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"IsBaseChange.linearMapRight\", \"CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc\", \"CategoryTheory.Limits.instIsIsoPullbackComparison\", \"CategoryTheory.Functor.rightDerivedDesc.congr_simp\"], \"digest\": \"62a82da81e2b2984\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected derivedη_fac_app and derivedε_fac_app in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:103,125; they normalize a single adjunction but do not state the ringed-square exchange equality. LocalizerMorphism.rightDerivedFunctorComparison_fac normalizes a chosen Kan comparison, without identifying it with the specified geometric mate. Other hits concern module pullback units or ordinary pullbacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of mates with derived comparison units and counits after localization of a commuting square of functors",
+   "results": "{\"t\": \"2026-10-23T21:55:22Z\", \"tool\": \"leanfinder\", \"query\": \"Compatibility of mates with derived comparison units and counits after localization of a commuting square of functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.Localization.ε_app\", \"CategoryTheory.Adjunction.Localization.η_app\", \"CategoryTheory.Adjunction.localization_unit_app\", \"CategoryTheory.mateEquiv_apply\"], \"digest\": \"4186781c4be9f037\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected derivedη_fac_app and derivedε_fac_app in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:103,125; they normalize a single adjunction but do not state the ringed-square exchange equality. LocalizerMorphism.rightDerivedFunctorComparison_fac normalizes a chosen Kan comparison, without identifying it with the specified geometric mate. Other hits concern module pullback units or ordinary pullbacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For flat horizontal pullbacks in a square of ringed topoi the derived base change mate composed with the right derived resolution unit equals the underived exchange followed by the other resolution unit",
+   "results": "{\"t\": \"2026-10-23T21:55:23Z\", \"tool\": \"leanfinder\", \"query\": \"For flat horizontal pullbacks in a square of ringed topoi the derived base change mate composed with the right derived resolution unit equals the underived exchange followed by the other resolution unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullbackComp\", \"PresheafOfModules.pullbackComp\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derived'_unit\"], \"digest\": \"ff7d8673cb2e214e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected derivedη_fac_app and derivedε_fac_app in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:103,125; they normalize a single adjunction but do not state the ringed-square exchange equality. LocalizerMorphism.rightDerivedFunctorComparison_fac normalizes a chosen Kan comparison, without identifying it with the specified geometric mate. Other hits concern module pullback units or ordinary pullbacks."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-representable-derived-restriction",
+  "date": "2026-10-24",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Derived restriction of representable stack direct image to a scheme test. Supporting input: Resolution-unit normalization of flat ringed derived exchange.",
+   "via": [
+    "lem-sfb-stack-representable-derived-restriction",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-ringed-exchange-resolution-unit",
+  "worker": "stage1",
+  "summary": "NW keeps the statement and assembles its proof from existing normalized ringed composition, two-isomorphism and adjunction lemmas. Rotating to the horizontal adjunctions avoids assuming exact vertical tensor pullbacks; the calculation keeps both resolution units noninvertible. No new nodes are needed.",
+  "blueprint": "Supporting normalization for the direct-image clause (3) of det-thm-sf-ctf-stability-direct-images, through the inherited stack-restriction prerequisite chain. Read the current latest blueprint direct-images proof. The inherited blueprint ancestor is null, as confirmed by blueprint_refs.py ancestor; its supplied from.place and via are preserved. No whole-blueprint equivalent was found.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Identifies the two exact horizontal pullbacks with their derived functors on all complexes; generic localization tool, not a replacement for a unit route."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-adjoint-lift",
+    "why": "Supplies normalized adjunctions for the geometric horizontal ringed morphisms, with their supplied module pushforwards."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Its Hom transpose formula on arbitrary chain maps yields the two horizontal unit/counit identities, without injectivity of the input."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-composition-comparison",
+    "why": "Its every-complex right-derived-unit formula supplies the two path normalizations used in (*)."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-two-iso-comparison",
+    "why": "Retains the specified ring-compatible square 2-isomorphism and its every-complex right-derived-unit equation."
+   },
+   {
+    "node": "def-trf-topos-derived-base-change-map",
+    "why": "Fixes exactly which vertical derived mate is being computed; it is already a statement dependency."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Formal mate rotation computes both the specified derived exchange and the ordinary exchange using horizontal adjunctions."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Every module complex on a small ringed site is Q of a K-injective complex; used (maintainer FIX) to identify the resolving-class adjunction with the lift's derived adjunction."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Flat-term K-flat resolution of b(I), so that the lift's canonical Hom formula applies at an isomorphism; used (maintainer FIX) in the same identification."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sfb-ringed-derived-adjoint-lift",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-sfb-ringed-derived-composition-comparison",
+  "lem-sfb-ringed-derived-two-iso-comparison",
+  "def-trf-topos-derived-base-change-map",
+  "lem-weil-pbc-mate-pasting",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NW-bce39cbd0",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-bce39cbd0 (reviewer sub-agent of L); spot-checked: Read in full the item (statement unchanged; still unsplit on side-live, so no supersession; no re-split note), the 5 steps, every cited statement, the recorded Lean fields (Composition.kappa_model, TwoIso.pushforward_model and ordinary_mate/homEquiv, Lift.canonical_adjunction, derivedBaseChangeMap = mateEquiv of firstComposition^-1 . squareComparison . secondComposition), and Stacks 0736 and 07A7. No SGA, no cycle, no new nodes. Small cases checked: identity horizontal maps, zero complex, a non-acyclic degree-0 P. Steps 2-5 are correct: (*) follows from the two kappa_model equations, the pushforward_model equation and t = the ordinary conjugate; (**) and (***) are the double-mate identity from mate-pasting clauses 2-4; steps 4 and 5 are correct uses of naturality and the step-1 formulas; only g and g' are exact and no unit is inverted. Fault fixed (C3/C4) in step 1: lem-sfb-resolving-derived-adjunction-normalization gives the every-complex Hom formula for SOME adjunction d, while beta uses the lift's derivedAdjunction, whose canonical formula covers only flat-term K-flat P and K-injective I. The step identified the two without argument. FIX adds the argument: d = psi . d0; every object is QI with I K-injective [prop-pur-kinjective-resolutions-exist]; a flat-term K-flat quasi-isomorphism s: P' -> bI [lem-pc-kflat-resolution] gives an isomorphism y = eta^b_I Q(s) with the same inverse transpose under both formulas, so psi = 1. Both nodes added to step-1 uses, proof_deps and tool_uses (generic tools, both on base). Step 1 is now 1810 characters. Accepted tool_uses: exact-functor-derived-functor, ringed-derived-adjoint-lift, resolving-derived-adjunction-normalization, ringed-derived-composition/two-iso comparisons, def-trf-topos-derived-base-change-map, weil-pbc-mate-pasting (Mathlib leaf). Not duplicates: lem-pur-exact-derived-mate (needs exact vertical adjoints), the termwise/strict-local exchange nodes (constant coefficients or stalk sections).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FlatRingedExchangeResolutionUnit",
+  "declaration": "CategoryTheory.RingedDerivedComparisons.flat_ringed_exchange_resolution_unit",
+  "declarations": [
+   "CategoryTheory.RingedDerivedComparisons.ordinaryBaseChangeMap",
+   "CategoryTheory.RingedDerivedComparisons.flat_ringed_exchange_resolution_unit"
+  ],
+  "file": "lean/Sheaf/SixFunctors/FlatRingedExchangeResolutionUnit.lean",
+  "statement": "theorem flat_ringed_exchange_resolution_unit {E E' F F' : Site.{u, w}} (S : DerivedBaseChangeSquare E E' F F') (_hg : exactFunctor F.modules F'.modules S.lg.edge.pullback) (_hg' : exactFunctor E.modules E'.modules S.lg'.edge.pullback) (P : CochainComplex E.modules ℤ) (n : ℤ) (_hP : P.IsStrictlyGE n) : S.lg.edge.left.map (S.lf.eta.app P) ≫ derivedBaseChangeMap S (DerivedCategory.Q.obj P) ≫ S.lf'.edge.right.map (S.lg'.alpha P) = S.lg.alpha ((S.lf.edge.pushforward.mapHomologicalComplex (.up ℤ)).obj P) ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (ordinaryBaseChangeMap S) (.up ℤ)).app P) ≫ S.lf'.eta.app ((S.lg'.edge.pullback.mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The ordinary mate is constructed from exactly the square's normalized ordinary comparisons. The theorem retains the two canonical Lift.alpha maps explicitly, giving the stated equality under exact termwise identifications, without inverting either right-derived resolution unit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e656f3a2",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Read item node, DerivedBaseChangeSquare/derivedBaseChangeMap, Lift/Composition/TwoIso/Lift.alpha (RingedDerivedComparisonData), RingedTensorEdge, derivedPullbackComplexComparison. Edges g',f',f,g match node; only g*,g'* exact (Mathlib exactFunctor); P with IsStrictlyGE n, no other hypotheses. ordinaryBaseChangeMap = mateEquiv of the moduleAdjunctions on firstComposition.ordinary.symm ≪≫ squareComparison.ordinary ≪≫ secondComposition.ordinary (insertion-pinned), typed f_*⋙g* ⟶ g'*⋙f'_*: the ordinary counterpart of β, real data. Equation keeps the canonical alpha comparisons (invertible under exactness) on both sides and is equivalent to the node's equality without choosing inverses; eta and β are not inverted. Node diff vs side-live: lean only; dep nodes identical; lean.statement verbatim; imports exist; docstrings have source, blueprint tag and 5 proof steps; proof is sorry. H4: no existing ordinary mate on this interface; def-weil-pbc-underived-exchange (abelian étale) and ambient-ringed-exchange (pro-étale) are different notions. No compile (no file changed); worker reports a clean scompile. Cosmetic: docstring calls f'_* T instead of S."
+ }
+}

@@ -13,67 +13,59 @@
  ],
  "proof": [
   {
-   "text": "Put $B=S^{-1}R$. For every $R$-module $M$, the maps $B\\otimes_R M\\to S^{-1}M$, $(r/s)\\otimes m\\mapsto rm/s$, and $m/s\\mapsto(1/s)\\otimes m$ are inverse: tensor balancing proves the first composite is the identity, and the fraction equality in [lem-weil-pbc-localization-module-exact] proves well-definedness of the second. Indeed, $u(s\\prime m-sm\\prime)=0$ implies equality after multiplying the proposed images by the invertible element $uss\\prime$. In particular, $S^{-1}B\\cong B$ by $b/s\\mapsto(s/1)^{-1}b$, with inverse $b\\mapsto b/1$. These formulas need only that images of elements of $S$ are units; they also hold when $0\\in S$, in which case $B=0$.",
-   "uses": [
-    "lem-weil-pbc-localization-module-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08QZ, localization case: the elementary fraction identifications needed before applying bottom localization."
-   }
-  },
-  {
-   "text": "Choose the standard augmented polynomial resolution $P_\\bullet\\to B$ over $R$ supplied by [lem-trf-cotangent-resolution-coherence]. Set $Q_n=P_n\\otimes_R B=S^{-1}P_n$, with augmentation $p\\otimes b\\mapsto\\epsilon(p)b$. If $P_n=R[E_n]$, coefficientwise localization identifies $Q_n$ with $B[E_n]$: a polynomial has finitely many coefficients, so one common denominator gives the inverse to this identification. The augmentation is surjective since $1\\otimes b\\mapsto b$. The augmented alternating-face complex $s(P_\\bullet)\\to B[0]$ is exact in its augmented form. Applying [lem-weil-pbc-localization-module-exact] to its exact pairs in every degree preserves that exactness; Step 1 identifies the localized complex with $s(Q_\\bullet)\\to B[0]$, including the augmentation. Thus $Q_\\bullet\\to B$ is a polynomial resolution of $B$ over $B$ in precisely the sense of the comparison theorem. No finite number of variables or denominators is needed.",
+   "text": "Put $B=S^{-1}R$. Choose the standard polynomial resolution $P_\\bullet\\to B$ of [lem-trf-cotangent-resolution-coherence]. Apply [lem-trf-localized-polynomial-resolution-model] with $T=B$: its fraction and coefficient identifications make $Q_\\bullet=P_\\bullet\\otimes_R B$, augmented by $p\\otimes b\\mapsto\\epsilon(p)b$, a polynomial resolution of $B$ over $B$. This applies without finiteness assumptions and includes $0\\in S$.",
    "uses": [
     "lem-trf-cotangent-resolution-coherence",
-    "lem-weil-pbc-localization-module-exact"
+    "lem-trf-localized-polynomial-resolution-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tags 08QI (remark-resolution), 08QP (lemma-flat-base-change), proof; exact localization is Algebra, Tag 00CS."
+    "place": "Tag 08QP (lemma-flat-base-change), localized-resolution computation, with Tag 08QI (remark-resolution); exact localization: algebra.tex, Tag 00CS (proposition-localization-exact)."
    }
   },
   {
-   "text": "For each $n$, the universal derivation of [def-weil-pbc-kahler-differentials] gives mutually inverse $B$-linear maps $\\Omega^1_{P_n/R}\\otimes_{P_n}B\\rightleftarrows\\Omega^1_{Q_n/B}\\otimes_{Q_n}B$. The forward map sends $\\mathrm dp\\otimes c$ to $\\mathrm d(p\\otimes1)\\otimes c$. For its inverse, the rule $p\\otimes b\\mapsto\\mathrm dp\\otimes b$ is a $B$-derivation into the left module, where $Q_n$ acts via $p\\otimes b\\mapsto\\epsilon(p)b$: it is balanced over $R$, kills $1\\otimes b$, and satisfies Leibniz. It therefore induces the inverse, sending $\\mathrm d(p\\otimes b)\\otimes c$ to $\\mathrm dp\\otimes bc$. The composites fix $\\mathrm dp\\otimes c$ and $\\mathrm d(p\\otimes b)\\otimes c$, respectively, since $\\mathrm d(p\\otimes b)=b\\,\\mathrm d(p\\otimes1)$ for differentials over $B$. For each face or degeneracy $f:P_n\\to P_m$, both routes send $\\mathrm dp\\otimes c$ to $\\mathrm d(f(p)\\otimes1)\\otimes c$. Hence these maps commute with the alternating differentials and give an isomorphism of the two differential complexes.",
+   "text": "Apply [lem-trf-simplicial-differential-base-change] with $R'=T=B$ to this $P_\\bullet$. It gives an isomorphism in $D(B)$ between $K=s(\\Omega^1_{P_\\bullet/R}\\otimes_{P_\\bullet}B)$ and $K'=s(\\Omega^1_{Q_\\bullet/B}\\otimes_{Q_\\bullet}B)$, induced by the specified inverse chain maps, commuting with all faces and degeneracies. By [lem-trf-cotangent-resolution-coherence], $K$ represents $L_{B/R}$ and, since Step 1 makes $Q$ a polynomial resolution, $K'$ represents $L_{B/B}$. Compose these comparisons to obtain $L_{B/R}\\simeq L_{B/B}$.",
    "uses": [
-    "def-weil-pbc-kahler-differentials"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08QZ (lemma-localize-at-bottom), displayed differential base-change identification, written out by the universal property."
-   }
-  },
-  {
-   "text": "Compute $L_{B/B}$ using the constant augmented simplicial $B$-algebra $B\\to B$. Each term is polynomial over $B$ on the empty set and surjects onto $B$. Its alternating-face differential from simplicial degree $n>0$ is the identity for even $n$ and zero for odd $n$, so the augmentation induces $H^0=B$ and all other cohomology groups vanish. It is a polynomial resolution as defined in [lem-trf-cotangent-resolution-coherence]. Every $B$-derivation from $B$ is zero, since it kills every element of the base. The universal property [def-weil-pbc-kahler-differentials] therefore identifies $\\Omega^1_{B/B}$ with the zero module. The differential complex of this constant resolution is termwise zero, and the comparison theorem gives $L_{B/B}\\simeq0$.",
-   "uses": [
-    "lem-trf-cotangent-resolution-coherence",
-    "def-weil-pbc-kahler-differentials"
+    "lem-trf-simplicial-differential-base-change",
+    "lem-trf-cotangent-resolution-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tags 08QH (lemma-cotangent-complex-polynomial-algebra), empty-variable case, and 08QI (remark-resolution)."
+    "place": "Tag 08QZ (lemma-localize-at-bottom), displayed differential comparison; algebra.tex, Tag 00RV (lemma-differentials-base-change), with its universal-derivation formula."
    }
   },
   {
-   "text": "The left differential complex in Step 3 represents $L_{B/R}$ by its standard construction. By Step 2 and the resolution-comparison isomorphism of [lem-trf-cotangent-resolution-coherence], the right differential complex represents $L_{B/B}$. The chain isomorphism of Step 3 and Step 4 yield $L_{B/R}\\simeq L_{B/B}\\simeq0$. In the derived category of [def-weil-abstract-derived-category], cohomology of an object represented by a complex is its kernel modulo image. The displayed isomorphism therefore gives $H^i(L_{B/R})=0$ for every integer $i$. Conversely, a complex with all cohomology zero has a quasi-isomorphism to the zero complex, which becomes invertible in that localization. This also proves the stated equivalence of the two formulations.",
+   "text": "Use [lem-trf-constant-polynomial-resolution-retraction] with $A=B$ and $E=\\varnothing$: the constant simplicial $B$-algebra $B$ is a polynomial resolution of $B$ over $B$, and its differential model is the alternating constant complex on $\\Omega^1_{B/B}$. By [def-weil-pbc-kahler-differentials], every $B$-derivation of $B$ kills every element, so the universal derivation is zero. Uniqueness in its universal property makes the identity and zero endomorphisms of $\\Omega^1_{B/B}$ equal; hence this module is zero. This model is therefore termwise zero. Resolution comparison [lem-trf-cotangent-resolution-coherence] gives $L_{B/B}\\simeq0$, and Step 2 gives $L_{B/R}\\simeq0$.",
    "uses": [
-    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-constant-polynomial-resolution-retraction",
+    "def-weil-pbc-kahler-differentials",
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QH (lemma-cotangent-complex-polynomial-algebra), constant polynomial algebra model, and Tag 08QI (remark-resolution), augmented-complex criterion; empty-variable identity case."
+   }
+  },
+  {
+   "text": "The cohomology functors of [def-weil-abstract-derived-category] take the displayed isomorphism to $H^i(L_{B/R})\\cong H^i(0)=0$ for every integer $i$. Conversely, if all these cohomology groups vanish, the map from its representing complex $K$ to the zero complex induces isomorphisms on every cohomology group, so is a quasi-isomorphism by that definition. Its image in the derived category is invertible, hence $L_{B/R}\\simeq0$.",
+   "uses": [
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tags 08QZ and 08R0 (lemma-derived-diagonal), specialized to localization, proving Tag 08R2 (lemma-when-zero), case (3)."
+    "place": "Tag 08R2 (lemma-when-zero), case (3); interpretation in derived.tex, Tag 05RU (definition-derived-category)."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-localization-module-exact",
   "lem-trf-cotangent-resolution-coherence",
+  "lem-trf-localized-polynomial-resolution-model",
+  "lem-trf-simplicial-differential-base-change",
+  "lem-trf-constant-polynomial-resolution-retraction",
   "def-weil-pbc-kahler-differentials",
   "def-weil-abstract-derived-category"
  ],
@@ -187,20 +179,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-localization-cotangent-vanishing",
   "worker": "stage1",
-  "summary": "Preserved the full statement including arbitrary multiplicative subsets and the zero-ring case. Expanded bottom localization through a localized standard polynomial resolution, explicit inverse maps on differential complexes, and the constant resolution for the identity ring map. Reused existing resolution coherence, exact module localization, differentials and derived-category nodes; created no nodes. Read all cited statements and the Stacks proofs and recorded fresh whole-item Mathlib searches.",
+  "summary": "Repair of the live-DAG promotion return: rebuilt the retained split on the current read-only DAG, preserving every field except proof, proof_deps and split_report. Re-read all current cited statements and Stacks sources. Kept two independent statement-only new tasks and reused existing lem-trf-constant-polynomial-resolution-retraction. Made the universal-property argument for the zero differential module explicit in Step 3, and updated its verbatim citation to include the universal property. The prior arguments, report history and actual search records are retained; the statements and search questions are unchanged.",
   "blueprint": "Preserves the historical ancestry through lem-trf-affine-cotangent-comparison, whose ring-localization input this item supplies. Realizes the supporting ring/sheaf input in blueprint.from.place under lem-trf-local-term-locality, Proof (1)--(2); this is not the unit key node, and the unit and chapter records are unchanged.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q41-2cd2b750a",
-  "group": "Q41",
+  "reviewer": "NT-cc-Q49-80079d280",
+  "group": "Q49",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-2cd2b750a (reviewer sub-agent of L); spot-checked: Read the item, report, unit/chapter route, all four cited nodes, and Stacks Tags 08QI, 08QH, 08QZ, 08QP, 08R0, and 08R2(3). Verified all five proof steps, coefficient category, base-change maps, arbitrary multiplicative sets, zero-ring and other edge cases, duplicate/cycle risks, route-pivot compliance, and Mathlib searches. Wrote review.md; no repairs or accepted tool uses."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-80079d280 (reviewer sub-agent of L); spot-checked: Fourth head of this re-split; c323a977, e988958d and df7fb12d were all PASSed. Diff against df7fb12d: only the item's Step 3 wording and split_report changed. Step 3 now derives Omega_{B/B}=0 from the universal property: every B-derivation of B is zero, so the identity and zero endomorphisms of Omega_{B/B} correspond to the same derivation and are equal. That argument is correct. Both new nodes and every cited statement are identical to the last PASSed head. I re-read everything in full. The statement is Stacks 08R2(3); the route is 08QZ with A'=B (cotangent.tex, read) together with algebra 00RV and 00CS. Step 1: the standard P from coherence is a polynomial resolution, and the localized model with T=B makes Q=P⊗_R B, augmented by ε(p)b, a polynomial resolution of B over B. Step 2: the differential base-change node with R'=T=B has the same augmentation, so K is L_{B/R} and K' is L_{B/B}. Step 3: the existing retraction node with A=B and E empty, together with Omega_{B/B}=0, gives L_{B/B}=0. Step 4 is elementary from the derived-category definition. Both new nodes are true and self-contained (1214 and 1212 characters). Cases checked: S={1}, 0 in S (so B=0), infinite S and infinite E, and a nonflat R'. Every old step became a node or an existing node, and the item proof is a short assembly. Duplicate re-scan of nodes created on 2026-10-22/23: lem-sfb-simplicial-flat-base-change-quasi-iso (new since the last review), lem-trf-polynomial-square-bar-naturality and lem-sfb-standard-sheaf-cotangent-flat-functorial-model are not duplicates. lem-trf-tor-independent-cotangent-base-change and lem-trf-cotangent-flat-base-change need a derived-Tor hypothesis, so they are not duplicates either (advisory only). A BFS over the dependencies finds no cycle. No SGA is used. No fixes and no tool_uses."
  },
  "lean": {
   "module": "Sheaf.RingTheory.LocalizationCotangentVanishing",
@@ -220,5 +212,16 @@
   "result": "pass",
   "note": "Read item, both stmt_deps (CotangentResolutionCoherence Coherence/cotangentComplex/DifferentialModel; Mathlib DerivedCategory/homologyFunctor), Stacks cotangent.tex 08R2(3) l.1616-1632, module and report. R:CommRingCat.{u}, S:Submonoid R (0∈S, infinite S allowed), actual Localization S with algebraMap, dependency cotangentComplex C, both IsZero and ∀ i:ℤ homology vanishing; C and HasDerivedCategory.{u+1} family = dependency interface, holds for all C; no extra hypotheses or universe restriction. Docstrings: source place, blueprint, 5 proof steps. lean.statement verbatim. No duplicate in live Sheaf. nt_compile --json 2.1 s exit 0 clean. Advisory: two proof-only imports unused (compiles without them); second reading is author self-check."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

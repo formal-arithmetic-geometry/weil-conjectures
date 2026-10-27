@@ -1,0 +1,208 @@
+{
+ "id": "lem-trf-homogeneous-coordinate-lifting-criterion",
+ "kind": "statement",
+ "title": "Telescoping criterion for a homogeneous submodule",
+ "statement": "Let $A$ be a commutative ring, $n\\in\\mathbf N$, and $\\ell>0$. In $A[Y_1,\\ldots,Y_n]$ [def-weil-pbc-mv-polynomial-ring], let $V_\\ell$ be the $A$-submodule of polynomials all of whose nonzero monomials have total degree $\\ell$, and let $S\\subseteq V_\\ell$ be an $A$-submodule. For $0\\le r\\le n$ let $\\rho_r$ set the first $r$ variables equal to zero. Suppose that for every $0\\le r<n$ and every $P\\in V_\\ell\\cap A[Y_{r+1},\\ldots,Y_n]$ divisible by $Y_{r+1}$ there is $Q\\in S$ such that $\\rho_r(Q)=P$. Then each such $P$ belongs to $S$, and $S=V_\\ell$. More precisely, for every $T\\in V_\\ell$ the polynomials $T_j=\\rho_{j-1}(T)-\\rho_j(T)$, $1\\le j\\le n$, belong to $S\\cap A[Y_j,\\ldots,Y_n]$, are divisible by $Y_j$, and satisfy $T=\\sum_{j=1}^nT_j$. The hypotheses and conclusions include $n=0$ and the zero ring.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11--2.3.13 for the inherited route; Bierstone--Milman, Invent. Math. 128 (1997), Proof of Theorem 8.1 after Lemma 8.5, printed p.275: triangular induction and telescoping coordinate restrictions, isolated for an arbitrary homogeneous submodule. Journal PDF read online at https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf. No Stacks tag states this specialized result; BM paper absent from repository literature."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "By the coefficient description in [def-weil-pbc-mv-polynomial-ring], write $U=\\sum_{|\\alpha|=\\ell}c_\\alpha Y^\\alpha$ with finite support. Evaluation gives $\\rho_r(U)=\\sum_{|\\alpha|=\\ell,\\ \\alpha_1=\\cdots=\\alpha_r=0}c_\\alpha Y^\\alpha$. Thus $D_j(U):=\\rho_{j-1}(U)-\\rho_j(U)$ is exactly the sum over $\\alpha_1=\\cdots=\\alpha_{j-1}=0$ and $\\alpha_j>0$. It lies in $V_\\ell\\cap A[Y_j,\\ldots,Y_n]$ and equals $Y_j\\sum c_\\alpha Y^{\\alpha-e_j}$ over those indices, proving divisibility without cancellation or division of coefficients.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf",
+    "place": "Bierstone--Milman, Canonical desingularization in characteristic zero, Invent. Math. 128 (1997), p.275, proof of Theorem 8.1 after Lemma 8.5; agent-written arbitrary-submodule specialization."
+   }
+  },
+  {
+   "text": "For $0\\le r<n$, let $H(r)$ assert that every $P\\in V_\\ell\\cap A[Y_{r+1},\\ldots,Y_n]$ divisible by $Y_{r+1}$ belongs to $S$. Prove $H(r)$ by strong induction on $r$. For $r=0$ the assumed lift $Q\\in S$ satisfies $Q=\\rho_0(Q)=P$, so $P\\in S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf",
+    "place": "Bierstone--Milman, Canonical desingularization in characteristic zero, Invent. Math. 128 (1997), p.275, proof of Theorem 8.1 after Lemma 8.5; agent-written arbitrary-submodule specialization."
+   }
+  },
+  {
+   "text": "Let $0<r<n$ and assume $H(s)$ for all $s<r$. For a $P$ as in $H(r)$ choose the stipulated $Q\\in S$ with $\\rho_r(Q)=P$. Since $S\\subseteq V_\\ell$, Step 1 applies to $Q$. For $1\\le j\\le r$, its $D_j(Q)$ has precisely the hypotheses of $H(j-1)$, so $D_j(Q)\\in S$. The finite sum cancels consecutive restrictions: $\\sum_{j=1}^rD_j(Q)=Q-\\rho_r(Q)=Q-P$. Consequently $P=Q-\\sum_{j=1}^rD_j(Q)\\in S$, using closure of the submodule under addition and negation. This proves the induction step and all $H(r)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf",
+    "place": "Bierstone--Milman, Canonical desingularization in characteristic zero, Invent. Math. 128 (1997), p.275, proof of Theorem 8.1 after Lemma 8.5; agent-written arbitrary-submodule specialization."
+   }
+  },
+  {
+   "text": "For $T\\in V_\\ell$ and $1\\le j\\le n$, Step 1 and $H(j-1)$ give $T_j=D_j(T)\\in S\\cap A[Y_j,\\ldots,Y_n]$ and $Y_j\\mid T_j$. Adding gives $\\sum_{j=1}^nT_j=T-\\rho_n(T)$. After setting all variables to zero only the constant coefficient survives; it is zero since $\\ell>0$. Hence $T=\\sum_jT_j\\in S$, so $V_\\ell\\subseteq S$, and the reverse inclusion is assumed. If $n=0$, there is no monomial of positive degree, so $V_\\ell=S=0$ and the sum is empty. In the zero ring every coefficient is zero, and the same arguments apply.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf",
+    "place": "Bierstone--Milman, Canonical desingularization in characteristic zero, Invent. Math. 128 (1997), p.275, proof of Theorem 8.1 after Lemma 8.5; agent-written arbitrary-submodule specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf",
+  "place": "Bierstone--Milman, Canonical desingularization in characteristic zero, Invent. Math. 128 (1997), p.275, proof of Theorem 8.1 after Lemma 8.5; agent-written arbitrary-submodule specialization. The paper is absent from local literature; see WANTED in report.md. The proof uses only finite polynomial coefficients, the lifting hypothesis and submodule operations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-homogeneous-coordinate-lifting-criterion: a submodule of positive degree homogeneous polynomials is the whole space if every polynomial divisible by the first variable on each coordinate face lifts from the submodule",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {ι : Type u_1} {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A]\\n  [inst_2 : AddSubgroupClass σ A] [inst_3 : AddCommMonoid ι] [inst_4 : DecidableEq ι] {𝒜 : ι → σ}\\n  [inst_5 : GradedRing 𝒜] {f : A} {d : ι} (hf : f ∈ 𝒜 d) {ι' : Type u_4} [inst_6 : Fintype ι'] (v : ι' → A),\\n  A\", \"doc\": \"Let $\\\\mathcal{A}$ be a graded algebra over an additive monoid $\\\\iota$, and let $f \\\\in \\\\mathcal{A}_d$ for some degree $d \\\\in \\\\iota$. Suppose $\\\\{v_i\\\\}_{i \\\\in \\\\iota'}$ is a finite family of elements in $\"}\n  {\"name\": \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] {𝒜 : ℕ → σ}\\n  [inst_3 : GradedRing 𝒜] {f : A} {d : ℕ} (hf : f ∈ 𝒜 d) (ι' : Type u_4) [inst_4 : Fintype ι'] (v : ι' → A),\\n  Algebra.adjoin (↥(𝒜 0)) (Set.range v) = ⊤ →\\n    ∀ (dv : ι' → ℕ) (hxd :\", \"doc\": \"Let $\\\\mathcal{A}$ be a graded algebra over an additive monoid $\\\\iota$, and let $f \\\\in \\\\mathcal{A}_d$ for some degree $d \\\\in \\\\iota$. Suppose $\\\\{v_i\\\\}_{i \\\\in \\\\iota'}$ is a finite set of homogeneous elem\"}\n  {\"name\": \"Ideal.mem_span_iff_exists_isHomogeneous\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Homogeneous\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} [inst : CommSemiring R] (x : ι → R) (y : R),\\n  y ∈ Ideal.span (Set.range x) ↔ ∃ p, p.IsHomogeneous 1 ∧ (MvPolynomial.eval x) p = y\", \"doc\": \"For any commutative semiring $ R $, type $ \\\\iota $, function $ x : \\\\iota \\\\to R $, and element $ y \\\\in R $, the element $ y $ lies in the ideal generated by the image of $ x $ if and only if there exis\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] {𝒜 : ℕ → σ}\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m)\\n  (q :\\n    ↑↑(AlgebraicGeometry.Spec.locallyRingedSpaceObj\\n            { carrier := HomogeneousLocalization.\", \"doc\": \"The homogeneous ideal of elements with zero zeroth component (the irrelevant ideal) is not contained within the homogeneous ideal defined by the condition that all homogeneous fractions $\\\\frac{(\\\\text{\"}\n  {\"name\": \"HomogeneousIdeal.mem_irrelevant_of_mem\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal\", \"type\": \"∀ {ι : Type u_1} {σ : Type u_2} {A : Type u_3} [inst : Semiring A] [inst_1 : DecidableEq ι] [inst_2 : AddCommMonoid ι]\\n  [inst_3 : PartialOrder ι] [inst_4 : CanonicallyOrderedAdd ι] [inst_5 : SetLike σ A] [inst_6 : AddSubmonoidClass σ A]\\n  (𝒜 : ι → σ) [inst_7 : GradedRing 𝒜] {x : A} {i : ι}, 0 < i →\", \"doc\": \"If an element $x$ belongs to the graded component $A_i$ of a graded ring $A$ for some $i > 0$, then $x$ is contained in the irrelevant ideal $A_+$. This follows from the definition of the irrelevant i\"}\n  {\"name\": \"Ideal.mem_span_pow_iff_exists_isHomogeneous\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Homogeneous\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} [inst : CommSemiring R] {n : ℕ} (x : ι → R) (y : R),\\n  y ∈ Ideal.span (Set.range x) ^ n ↔ ∃ p, p.IsHomogeneous n ∧ (MvPolynomial.eval x) p = y\", \"doc\": \"For a commutative semiring $ R $, type $ \\\\iota $, and natural number $ n $, an element $ y \\\\in R $ belongs to the $ n $th power of the ideal generated by $ \\\\{x(\\\\iota)\\\\} $ if and only if there exists a\"}\n  {\"name\": \"HomogeneousIdeal.mem_irrelevant_iff\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal\", \"type\": \"∀ {ι : Type u_1} {σ : Type u_2} {A : Type u_3} [inst : Semiring A] [inst_1 : DecidableEq ι] [inst_2 : AddCommMonoid ι]\\n  [inst_3 : PartialOrder ι] [inst_4 : CanonicallyOrderedAdd ι] [inst_5 : SetLike σ A] [inst_6 : AddSubmonoidClass σ A]\\n  (𝒜 : ι → σ) [inst_7 : GradedRing 𝒜] (a : A), a ∈ Homogeneous\", \"doc\": \"For any element $ a $ in the graded ring $ A $, $ a $ belongs to the irrelevant ideal $ \\\\mathcal{A}_+ $ if and only if the zeroth homogeneous component of $ a $ is zero, i.e., $ a \\\\in \\\\mathcal{A}_+ \\\\i\"}\n  {\"name\": \"HomogeneousLocalization.Away.mk_surjective\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {ι : Type u_1} {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A]\\n  [inst_2 : AddSubgroupClass σ A] [inst_3 : AddCommMonoid ι] [inst_4 : DecidableEq ι] (𝒜 : ι → σ)\\n  [inst_5 : GradedRing 𝒜] {f : A} {d : ι} (hf : f ∈ 𝒜 d) (x : HomogeneousLocalization.Away 𝒜 f),\\n  ∃ n a, ∃ (ha \", \"doc\": \"For any element $x$ in the homogeneous localization $\\\\mathcal{A}_{(f)}$ of a graded algebra $\\\\mathcal{A}$ at an element $f$ of degree $d$, there exists a natural number $n$ and a homogeneous element $\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation homomorphisms and homogeneous localizations do not state this triangular submodule lifting criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.eval₂Hom",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"MvPolynomial.eval₂Hom\", \"module\": \"Mathlib.Algebra.MvPolynomial.Eval\", \"type\": \" {R : Type u} {S₁ : Type v} {σ : Type u_1} [CommSemiring R] [CommSemiring S₁] (f : R →+* S₁) (g : σ → S₁) : MvPolynomial σ R →+* S₁\", \"doc\": \"`MvPolynomial.eval₂` as a `RingHom`.\"}\n  {\"name\": \"MvPolynomial.eval₂Hom_X'\", \"module\": \"Mathlib.Algebra.MvPolynomial.Eval\", \"type\": \" {R : Type u} {S₁ : Type v} {σ : Type u_1} [CommSemiring R] [CommSemiring S₁] (f : R →+* S₁) (g : σ → S₁) (i : σ) : (MvPolynomial.eval₂Hom f g) (MvPolynomial.X i) = g i\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.eval₂Hom_zero'\", \"module\": \"Mathlib.Algebra.MvPolynomial.Eval\", \"type\": \" {R : Type u} {S₂ : Type w} {σ : Type u_1} [CommSemiring R] [CommSemiring S₂] (f : R →+* S₂) : (MvPolynomial.eval₂Hom f fun x => 0) = f.comp MvPolynomial.constantCoeff\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.coe_eval₂Hom\", \"module\": \"Mathlib.Algebra.MvPolynomial.Eval\", \"type\": \" {R : Type u} {S₁ : Type v} {σ : Type u_1} [CommSemiring R] [CommSemiring S₁] (f : R →+* S₁) (g : σ → S₁) : ⇑(MvPolynomial.eval₂Hom f g) = MvPolynomial.eval₂ f g\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.eval₂Hom_zero\", \"module\": \"Mathlib.Algebra.MvPolynomial.Eval\", \"type\": \" {R : Type u} {S₂ : Type w} {σ : Type u_1} [CommSemiring R] [CommSemiring S₂] (f : R →+* S₂) : MvPolynomial.eval₂Hom f 0 = f.comp MvPolynomial.constantCoeff\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.map_eq_eval₂Hom_C_comp\", \"module\": \"Mathlib.Algebra.MvPolynomial.Eval\", \"type\": \" {R : Type u} {S₁ : Type v} {σ : Type u_1} [CommSemiring R] [CommSemiring S₁] (f : R →+* S₁) : MvPolynomial.map f = MvPolynomial.eval₂Hom (MvPolynomial.C.comp f) MvPolynomial.X\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.comp_eval₂Hom\", \"module\": \"Mathlib.Algebra.MvPolynomial.Eval\", \"type\": \" {R : Type u} {S₁ : Type v} {S₂ : Type w} {σ : Type u_1} [CommSemiring R] [CommSemiring S₁] [CommSemiring S₂] (f : R →+* S₁) (g : σ → S₁) (φ : S₁ →+* S₂) : φ.comp (MvPolynomial.eval₂Hom f g) = MvPolynomial.eval₂Hom (φ.comp f) fun i => φ (g i)\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.eval₂Hom_C\", \"module\": \"Mathlib.Algebra.MvPolynomial.Eval\", \"type\": \" {R : Type u} {S₁ : Type v} {σ : Type u_1} [CommSemiring R] [CommSemiring S₁] (f : R →+* S₁) (g : σ → S₁) (r : R) : (MvPolynomial.eval₂Hom f g) (MvPolynomial.C r) = f r\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.eval₂Hom_zero'_apply\", \"module\": \"Mathlib.Algebra.MvPolynomial.Eval\", \"type\": \" {R : Type u} {S₂ : Type w} {σ : Type u_1} [CommSemiring R] [CommSemiring S₂] (f : R →+* S₂) (p : MvPolynomial σ R) : (MvPolynomial.eval₂Hom f fun x => 0) p = f (MvPolynomial.constantCoeff p)\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.aeval_eq_eval₂Hom\", \"module\": \"Mathlib.Algebra.MvPolynomial.Eval\", \"type\": \" {R : Type u} {S₁ : Type v} {σ : Type u_1} [CommSemiring R] [CommSemiring S₁] [Algebra R S₁] (f : σ → S₁) (p : MvPolynomial σ R) : (MvPolynomial.aeval f) p = (MvPolynomial.eval₂Hom (algebraMap R S₁) f) p\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.eval₂AlgHom_apply\", \"module\": \"Mathlib.Algebra.MvPolynomial.Eval\", \"type\": \" {R : Type u} {S₁ : Type v} {σ : Type u_1} [CommSemiring R] [CommSemiring S₁] [Algebra R S₁] (g : σ → S₁) (P : MvPolynomial σ R) : (MvPolynomial.eval₂AlgHom R g) P = (MvPolynomial.eval₂Hom (algebraMap R S₁) g) P\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.eval₂Hom_zero_apply\", \"module\": \"Mathlib.Algebra.MvPolynomial.Eval\", \"type\": \" {R : Type u} {S₂ : Type w} {σ : Type u_1} [CommSemiring R] [CommSemiring S₂] (f : R →+* S₂) (p : MvPolynomial σ R) : (MvPolynomial.eval₂Hom f 0) p = f (MvPolynomial.constantCoeff p)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation homomorphisms and homogeneous localizations do not state this triangular submodule lifting criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "telescop|coordinate.?restrict|coordinate.?lift",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation homomorphisms and homogeneous localizations do not state this triangular submodule lifting criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-homogeneous-coordinate-lifting-criterion: triangular induction using setting variables to zero and telescoping differences proves a homogeneous polynomial submodule equals the whole homogeneous component",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.homogeneousComponent_of_mem\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \"{m n : ℕ} {p : MvPolynomial σ R} (h : p ∈ homogeneousSubmodule σ R n) :\\n  homogeneousComponent m p = if m = n then p else 0\", \"doc\": \"For a multivariate polynomial $ p $ in $ R[\\\\sigma] $, if $ p $ belongs to the homogeneous submodule of degree $ n $, then the homogeneous component of $ p $ of degree $ m $ is equal to $ p $ when $ m \"}\n  {\"name\": \"MvPolynomial.homogeneousSubmodule\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \"(n : ℕ) : Submodule R (MvPolynomial σ R)\", \"doc\": \"For a commutative semiring $ R $ and a type $ \\\\sigma $, the homogeneous submodule of degree $ n $ is the submodule of the multivariate polynomial ring $ R[\\\\sigma] $ consisting of all homogeneous polyn\"}\n  {\"name\": \"MvPolynomial.homogeneousComponent\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \"[CommSemiring R] (n : ℕ) : MvPolynomial σ R →ₗ[R] MvPolynomial σ R\", \"doc\": \"For a multivariate polynomial ring $ R[\\\\sigma] $, this is the $ R $-linear map that sends each polynomial to its homogeneous component of degree $ n $, consisting of all terms with total degree $ n $.\"}\n  {\"name\": \"Polynomial.homogenize\", \"module\": \"Mathlib.Algebra.Polynomial.Homogenize\", \"type\": \"(p : R[X]) (n : ℕ) : MvPolynomial (Fin 2) R\", \"doc\": \"The homogenization of a polynomial $ p $ of degree at most $ n $, defined as the sum over all $ k + l = n $ of the coefficient of $ X^k $ in $ p $ multiplied by the monomial $ X^k Y^l $. This produces\"}\n  {\"name\": \"MvPowerSeries.homogeneousComponent\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"(p : ℕ) : MvPowerSeries σ R →ₗ[R] MvPowerSeries σ R\", \"doc\": \"The linear map that sends a multivariate power series to its homogeneous component of degree $ p $, which is the sum of all terms where the total degree (sum of exponents) equals $ p $. For a monomial\"}\n  {\"name\": \"HomogeneousSubmodule.mk.injEq\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.Homogeneous.Submodule\", \"type\": \"∀ {ιA : Type u_1} {ιM : Type u_2} {σA : Type u_3} {σM : Type u_4} {A : Type u_5} {M : Type u_6} [inst : Semiring A]\\n  [inst_1 : AddCommMonoid M] [inst_2 : Module A M] {𝒜 : ιA → σA} {ℳ : ιM → σM} [inst_3 : DecidableEq ιA]\\n  [inst_4 : AddMonoid ιA] [inst_5 : SetLike σA A] [inst_6 : AddSubmonoidClass σ\", \"doc\": \"Two homogeneous submodules with respect to a graded ring and direct sum decomposition are equal if and only if their underlying submodules are equal, provided both satisfy the homogeneous condition wi\"}\n  {\"name\": \"Submodule.IsHomogeneous\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.Homogeneous.Submodule\", \"type\": \"(p : Submodule A M) (ℳ : ιM → σM) [DecidableEq ιM] [SetLike σM M] [AddSubmonoidClass σM M] [Decomposition ℳ] : Prop\", \"doc\": \"A submodule $ p $ of $ M $ over $ A $ is homogeneous with respect to the direct sum decomposition $ \\\\mathcal{M} $ if, for every element $ m \\\\in p $ and every index $ i $, the $ i $-th component of $ m\"}\n  {\"name\": \"HomogeneousSubmodule.is_homogeneous'\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.Homogeneous.Submodule\", \"type\": \"∀ {ιA : Type u_1} {ιM : Type u_2} {σA : Type u_3} {σM : Type u_4} {A : Type u_5} {M : Type u_6} [inst : Semiring A]\\n  [inst_1 : AddCommMonoid M] [inst_2 : Module A M] {𝒜 : ιA → σA} {ℳ : ιM → σM} [inst_3 : DecidableEq ιA]\\n  [inst_4 : AddMonoid ιA] [inst_5 : SetLike σA A] [inst_6 : AddSubmonoidClass σ\", \"doc\": \"A homogeneous submodule $ p $ of a module $ M $ over a graded ring $ A $ satisfies the condition that for every element $ m \\\\in p $ and every index $ i $, the $ i $-th component of $ m $ in the direct\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation homomorphisms and homogeneous localizations do not state this triangular submodule lifting criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-homogeneous-coordinate-lifting-criterion: polynomial submodule equality criterion from surjectivity on successive coordinate faces in positive degree",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.IsHomogeneous.funext_of_le_card\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Homogeneous\", \"type\": \"∀ {R : Type u_5} {σ : Type u_6} [inst : CommRing R] [IsDomain R] {F G : MvPolynomial σ R} {n : ℕ},\\n  F.IsHomogeneous n →\\n    G.IsHomogeneous n → (∀ (r : σ → R), (MvPolynomial.eval r) F = (MvPolynomial.eval r) G) → ↑n ≤ Cardinal.mk R → F = G\", \"doc\": \"For any commutative semiring $ R $, index type $ \\\\sigma $, and natural number $ n $, if two homogeneous polynomials $ F $ and $ G $ of degree $ n $ in $ R[\\\\sigma] $ satisfy $ \\\\text{eval}_r(F) = \\\\text{\"}\n  {\"name\": \"HomogeneousLocalization.Away.mk_surjective\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {ι : Type u_1} {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A]\\n  [inst_2 : AddSubgroupClass σ A] [inst_3 : AddCommMonoid ι] [inst_4 : DecidableEq ι] (𝒜 : ι → σ)\\n  [inst_5 : GradedRing 𝒜] {f : A} {d : ι} (hf : f ∈ 𝒜 d) (x : HomogeneousLocalization.Away 𝒜 f),\\n  ∃ n a, ∃ (ha \", \"doc\": \"For any element $x$ in the homogeneous localization $\\\\mathcal{A}_{(f)}$ of a graded algebra $\\\\mathcal{A}$ at an element $f$ of degree $d$, there exists a natural number $n$ and a homogeneous element $\"}\n  {\"name\": \"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {d e : ℕ} {f : A} (hf : f ∈ 𝒜 d) {g : A} (hg : g ∈ 𝒜 e) {x : A} (hx : x = f * g),\\n  0 < d →\\n    Function.Surjective\\n      ⇑(Algebra.TensorProduct.lift (Hom\", \"doc\": \"Given a graded algebra $\\\\mathcal{A}$ over a commutative semiring, for homogeneous elements $f \\\\in \\\\mathcal{A}_d$ and $g \\\\in \\\\mathcal{A}_e$ with $d > 0$, the canonical algebra homomorphism from the ten\"}\n  {\"name\": \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {ι : Type u_1} {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A]\\n  [inst_2 : AddSubgroupClass σ A] [inst_3 : AddCommMonoid ι] [inst_4 : DecidableEq ι] {𝒜 : ι → σ}\\n  [inst_5 : GradedRing 𝒜] {f : A} {d : ι} (hf : f ∈ 𝒜 d) {ι' : Type u_4} [inst_6 : Fintype ι'] (v : ι' → A),\\n  A\", \"doc\": \"Let $\\\\mathcal{A}$ be a graded algebra over an additive monoid $\\\\iota$, and let $f \\\\in \\\\mathcal{A}_d$ for some degree $d \\\\in \\\\iota$. Suppose $\\\\{v_i\\\\}_{i \\\\in \\\\iota'}$ is a finite family of elements in $\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ},\\n  f ∈ 𝒜 m →\\n    0 < m →\\n      Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec \", \"doc\": \"For a homogeneous element $ f $ of positive degree $ m $ in a graded ring $ A $, the continuous map from the projective spectrum $ \\\\operatorname{Proj}(A) $ to the prime spectrum $ \\\\operatorname{Spec}(\"}\n  {\"name\": \"Ideal.span_pow_eq_map_homogeneousSubmodule\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Homogeneous\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} [inst : CommSemiring R] (x : ι → R) (n : ℕ),\\n  Ideal.span (Set.range x) ^ n =\\n    Submodule.map (MvPolynomial.aeval x).toLinearMap (MvPolynomial.homogeneousSubmodule ι R n)\", \"doc\": \"For a commutative semiring $ R $, a type $ \\\\iota $, and a function $ x : \\\\iota \\\\to R $, the $ n $-th power of the ideal generated by the image of $ x $ is equal to the image of the homogeneous submodu\"}\n  {\"name\": \"Ideal.span_eq_map_homogeneousSubmodule\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Homogeneous\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} [inst : CommSemiring R] (x : ι → R),\\n  Ideal.span (Set.range x) = Submodule.map (MvPolynomial.aeval x).toLinearMap (MvPolynomial.homogeneousSubmodule ι R 1)\", \"doc\": \"For a commutative semiring $ R $ and a type $ \\\\iota $, the ideal generated by the set $ \\\\{x_i \\\\mid i : \\\\iota\\\\} $ in $ R $ is equal to the image of the homogeneous submodule of degree 1 in the multivar\"}\n  {\"name\": \"MvPolynomial.map_restrict_dom_evalₗ\", \"module\": \"Mathlib/FieldTheory/Finite/Polynomial\", \"type\": \"∀ (K : Type u_1) (σ : Type u_2) [inst : Field K] [inst_1 : Fintype K] [Finite σ],\\n  Submodule.map (MvPolynomial.evalₗ K σ) (MvPolynomial.restrictDegree σ K (Fintype.card K - 1)) = ⊤\", \"doc\": \"The image of the evaluation map on the submodule of multivariate polynomials over a finite field $ K $ with each variable's exponents bounded by $ \\\\#K - 1 $ is the entire space of functions from $ \\\\si\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation homomorphisms and homogeneous localizations do not state this triangular submodule lifting criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A submodule of positive degree homogeneous polynomials equals the whole homogeneous component if every polynomial divisible by the next variable on each successive coordinate face lifts from the submodule",
+   "results": "{\"t\": \"2026-10-23T14:39:13Z\", \"tool\": \"leanfinder\", \"query\": \"A submodule of positive degree homogeneous polynomials equals the whole homogeneous component if every polynomial divisible by the next variable on each successive coordinate face lifts from the submodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.homogeneousSubmodule\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"MvPolynomial.homogeneousSubmodule_eq_finsupp_supported\", \"MvPolynomial.homogeneousComponent_of_mem\", \"MvPolynomial.homogeneousSubmodule_one_eq_span_X\", \"HomogeneousIdeal.mem_irrelevant_of_mem\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"MvPolynomial.monomial_mem_homogeneousSubmodule_pow_degree\"], \"digest\": \"247d7ca78a87b34c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; homogeneous-component definitions, evaluation maps, localization spanning, finite-field evaluation and Rees filtrations do not give the successive coordinate-face lifting criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "telescop|coordinate.?restrict|coordinate.?lift",
+   "results": "{\"t\": \"2026-10-23T14:40:23Z\", \"tool\": \"grep\", \"query\": \"telescop|coordinate.?restrict|coordinate.?lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Lean/Expr/Basic.lean\", \"Mathlib/Lean/Expr/Basic.lean\", \"Mathlib/Lean/Meta/RefinedDiscrTree/Encode.lean\", \"Mathlib/Lean/Meta/RefinedDiscrTree/Encode.lean\", \"Mathlib/Lean/Meta/RefinedDiscrTree/Encode.lean\", \"Mathlib/Lean/Meta/RefinedDiscrTree/Encode.lean\", \"Mathlib/Lean/Meta/DiscrTree.lean\", \"Mathlib/Lean/Meta/DiscrTree.lean\"], \"digest\": \"8e48f417617db0f4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; homogeneous-component definitions, evaluation maps, localization spanning, finite-field evaluation and Rees filtrations do not give the successive coordinate-face lifting criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A submodule of homogeneous polynomials is the full degree component if it surjects onto the polynomials divisible by the next variable on each successive coordinate face",
+   "results": "{\"t\": \"2026-10-23T14:40:23Z\", \"tool\": \"leansearch\", \"query\": \"A submodule of homogeneous polynomials is the full degree component if it surjects onto the polynomials divisible by the next variable on each successive coordinate face\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.homogeneousSubmodule\", \"Submodule.IsHomogeneous\", \"MvPolynomial.homogeneousComponent_of_mem\", \"Polynomial.degreeLT\", \"MvPolynomial.homogeneousComponent\", \"instAddSubmonoidClassHomogeneousSubmodule\", \"HomogeneousSubmodule.mem_toSubmodule_iff\", \"HomogeneousSubmodule\"], \"digest\": \"4ba0d7f9de8f56cd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; homogeneous-component definitions, evaluation maps, localization spanning, finite-field evaluation and Rees filtrations do not give the successive coordinate-face lifting criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.eval₂Hom",
+   "results": "{\"t\": \"2026-10-23T14:40:23Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial.eval₂Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPolynomial.eval₂Hom\", \"MvPolynomial.eval₂Hom_X'\", \"MvPolynomial.eval₂Hom_zero'\", \"MvPolynomial.coe_eval₂Hom\", \"MvPolynomial.eval₂Hom_zero\", \"MvPolynomial.map_eq_eval₂Hom_C_comp\", \"MvPolynomial.comp_eval₂Hom\", \"MvPolynomial.eval₂Hom_C\"], \"digest\": \"2530b21d8c5566b5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; homogeneous-component definitions, evaluation maps, localization spanning, finite-field evaluation and Rees filtrations do not give the successive coordinate-face lifting criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneousSubmodule|eval₂Hom_zero|sum_range_sub",
+   "results": "{\"t\": \"2026-10-23T14:41:09Z\", \"tool\": \"grep\", \"query\": \"homogeneousSubmodule|eval₂Hom_zero|sum_range_sub\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/MeasureTheory/Function/AbsolutelyContinuous.lean\", \"Mathlib/MeasureTheory/Function/LpSpace/Complete.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/EulerIdentity.lean\"], \"digest\": \"b58cbc11659adb51\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; homogeneous-component definitions, evaluation maps, localization spanning, finite-field evaluation and Rees filtrations do not give the successive coordinate-face lifting criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial submodule surjective images under successive coordinate projections implies equality using a finite filtration and telescoping evaluation differences",
+   "results": "{\"t\": \"2026-10-23T14:41:11Z\", \"tool\": \"leanfinder\", \"query\": \"Polynomial submodule surjective images under successive coordinate projections implies equality using a finite filtration and telescoping evaluation differences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.map_restrict_dom_evalₗ\", \"Ideal.Filtration.mem_submodule\", \"Ideal.Filtration.submodule_span_single\", \"Ideal.Filtration.submodule_eq_span_le_iff_stable_ge\", \"Ideal.Filtration.submodule\", \"ChevalleyThm.chevalley_polynomialC\", \"Ideal.Filtration.submodule_closure_single\", \"ChevalleyThm.chevalley_mvPolynomialC\"], \"digest\": \"7984bb910d195568\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; homogeneous-component definitions, evaluation maps, localization spanning, finite-field evaluation and Rees filtrations do not give the successive coordinate-face lifting criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-initial-diagram-stabilization",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical local-invariant branch of lem-trf-local-term-locality via ILO VIII 2.3.11--2.3.13 and the regular Hilbert--Samuel coefficient construction. Exact lower input: BM 1997 section 8, Theorem 8.1 and Lemma 8.5, printed pp.274--275, used in the finite testing paragraph concluding Theorem 9.6, p.282. Subargument: Proof of Theorem 8.1 after Lemma 8.5, printed p.275: triangular induction and telescoping coordinate restrictions, isolated for an arbitrary homogeneous submodule.",
+   "via": [
+    "lem-trf-initial-diagram-stabilization",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-homogeneous-coordinate-lifting-criterion",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Wrote the coordinate restrictions and their divisibility coefficientwise, the strong induction from the assumed lifts, telescoping and positive-degree endpoint, including no-variable and zero-ring cases. No new nodes; retained existing searches and recorded six actual N6 searches. No exact project Lean attachment or Mathlib leaf.",
+  "blueprint": "Realizes the historical local-invariant subargument recorded in blueprint.from.place and the parent initial-diagram-stabilization proof Step 1: BM Theorem 8.1, p.275, paragraph after Lemma 8.5. The latest blueprint ancestor and unit now follow contracting correspondences; this lower inherited algebra lemma neither changes nor replaces that route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-c40dbf821",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-c40dbf821 (reviewer sub-agent of L); spot-checked: I read the item in full: an unchanged statement and 4 new steps, with no new nodes. I also read its only dependency, def-weil-pbc-mv-polynomial-ring (finite monomial expansions and the evaluation formula), its citers lem-trf-initial-diagram-stabilization Step 1 and lem-trf-supported-coordinate-face-lifting, and the delivery-errors A–F checklist. The supported-coordinate-face-lifting node's final clause gives exactly the item's lifting hypothesis. Live and side-live still have the item unsplit with an empty proof. There is no repair note, so it is not superseded and not a re-split. Steps 1–4 are all correct. Step 1: setting Y_1..Y_r to zero keeps exactly the monomials with α_1=…=α_r=0. So D_j(U) is homogeneous, lies in A[Y_j..Y_n] and equals Y_j·Σc_αY^{α−e_j}, with no division of coefficients; this is elementary from the definition node. Step 2: H(r) is stated explicitly, and the base case r=0 holds because ρ_0 is the identity. Step 3: the strong induction applies H(j−1) for j≤r, which is fine since j−1<r. The telescoping sum Σ_{j≤r} D_j(Q) equals Q−P, so P is in S by submodule closure alone; no restriction-stability of S is assumed. Step 4: the telescoping endpoint ρ_n(T) is the constant coefficient, which is 0 because ℓ>0. The n=0 and zero-ring cases are covered. I tested n=1; n=2 with ℓ=1 and ℓ=2; A=ℤ/4 and 𝔽_p; and the ℓ=0 counterexample S=0, which shows ℓ>0 is needed. proof_deps equals the union of the step uses, and no SGA is cited. Bierstone–Milman 1997 p.275 is missing from local literature. The worker reports it as WANTED and marks proof_origin agent, and the argument is checked on its own without the paper. A search of the snapshot DAG (grep -R) for telescop, coordinate face and the item id found no duplicate. The searches recorded on the item cover leanfinder, leansearch, loogle and grep. No route issue: the step uses only a definition node. Minor: the report lists citations.json and report.md as written files, but they are worker-side files and not in the delivery. No fixes were needed; review.md has the step-by-step checks."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HomogeneousCoordinateLiftingCriterion",
+  "declaration": "MvPolynomial.homogeneous_coordinate_lifting_criterion",
+  "file": "lean/Sheaf/RingTheory/HomogeneousCoordinateLiftingCriterion.lean",
+  "statement": "theorem homogeneous_coordinate_lifting_criterion {A : Type u} [CommRing A] (n ℓ : ℕ) (hℓ : 0 < ℓ) (S : Submodule A (MvPolynomial (Fin n) A)) (hS : S ≤ homogeneousSubmodule (Fin n) A ℓ) (hLift : ∀ (r : Fin n) (P : MvPolynomial (Fin n) A), P ∈ homogeneousSubmodule (Fin n) A ℓ → P ∈ supported A {i : Fin n | r.val ≤ i.val} → X r ∣ P → ∃ Q ∈ S, aeval (fun i : Fin n ↦ if i.val < r.val then 0 else X i) Q = P) : (∀ (r : Fin n) (P : MvPolynomial (Fin n) A), P ∈ homogeneousSubmodule (Fin n) A ℓ → P ∈ supported A {i : Fin n | r.val ≤ i.val} → X r ∣ P → P ∈ S) ∧ S = homogeneousSubmodule (Fin n) A ℓ ∧ ∀ (T : MvPolynomial (Fin n) A), T ∈ homogeneousSubmodule (Fin n) A ℓ → (∀ j : Fin n, (aeval (fun i : Fin n ↦ if i.val < j.val then 0 else X i) T - aeval (fun i : Fin n ↦ if i.val < j.val + 1 then 0 else X i) T) ∈ S ∧ (aeval (fun i : Fin n ↦ if i.val < j.val then 0 else X i) T - aeval (fun i : Fin n ↦ if i.val < j.val + 1 then 0 else X i) T) ∈ supported A {i : Fin n | j.val ≤ i.val} ∧ (X j : MvPolynomial (Fin n) A) ∣ (aeval (fun i : Fin n ↦ if i.val < j.val then 0 else X i) T - aeval (fun i : Fin n ↦ if i.val < j.val + 1 then 0 else X i) T)) ∧ T = ∑ j : Fin n, (aeval (fun i : Fin n ↦ if i.val < j.val then 0 else X i) T - aeval (fun i : Fin n ↦ if i.val < j.val + 1 then 0 else X i) T)",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-525e59bfa",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Statement matches node clause by clause with 0-indexed Fin n offset (j ↔ Y_{j+1}): V_ℓ = Mathlib homogeneousSubmodule, tail rings = supported A {i | r ≤ i}, ρ_r = aeval (if i<r then 0 else X i); hypothesis over r<n with homogeneous/tail/X r ∣ P → ∃ Q∈S, ρ_r Q = P; conclusions P∈S, S=V_ℓ, T_j∈S∩tail, X j ∣ T_j, T=∑T_j all present. No extra assumptions (zero ring, n=0 covered; ℓ>0 as node). Only change vs side-live is the item lean record + new module; lean.statement verbatim; docstrings with source/blueprint and 4 proof steps; sorry only; universe u bound; no duplicate found in Mathlib/project. No compile rerun (no file changed)."
+ }
+}

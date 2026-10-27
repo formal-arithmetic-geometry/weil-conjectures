@@ -80,7 +80,44 @@
   "def-pc-subfunctor"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+    "AlgebraicGeometry.isRepresentable_of_isSheaf_of_zariskiCovers"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.isRepresentable_of_isSheaf_of_zariskiCovers",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Representability",
+     "lines": [
+      682,
+      726
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+     "module": "Mathlib.AlgebraicGeometry.Sites.Representability",
+     "lines": [
+      0,
+      0
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "library": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-prop-picard-schemes-criterion",
  "lean": {
@@ -96,8 +133,12 @@
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let\n$F:(\\mathit{Sch})^{\\mathrm{op}}\\to\\textit{Sets}$ be a functor on the category of schemes and suppose:\n\n1. **(1)** $F$ satisfies the sheaf property for the Zariski topology;\n1. **(2)(a)** there exists a family $(F_i)_{i\\in I}$, indexed by a set $I$, of subfunctors of\n$F$ each of which is representable;\n1. **(2)(b)** each inclusion $F_i\\subseteq F$ is\nrepresentable by open immersions;\n1. **(2)(c)** the family $(F_i)_{i\\in I}$ covers $F$.\n\nThen $F$ is representable by a scheme.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $S$ be a scheme and let\n$F:(\\mathit{Sch}/S)^{\\mathrm{op}}\\to\\textit{Sets}$ be a functor on the category of\n$S$-schemes whose values $F(T)$ are small, i.e. lie in the same universe as\nthe $S$-schemes $T$, and suppose:\n\n1. **(1)** $F$ satisfies the sheaf property for the Zariski topology;\n1. **(2)(a)** there exists a family $(F_i)_{i\\in I}$, indexed by a set $I$, of subfunctors of\n$F$ each of which is representable;\n1. **(2)(b)** each inclusion $F_i\\subseteq F$ is\nrepresentable by open immersions;\n1. **(2)(c)** the family $(F_i)_{i\\in I}$ covers $F$.\n\nThen $F$ is representable by a scheme over $S$.",
   "proof": [
    {
     "text": "For $i\\in I$ choose a scheme $X_i$ representing $F_i$ and the\nuniversal element $\\xi_i\\in F_i(X_i)\\subseteq F(X_i)$, and let\n$U_{ij}\\subseteq X_i$ be the open subscheme given by (2)(b) for the\ninclusion $F_j\\subseteq F$: a morphism $T\\to X_i$ factors through\n$U_{ij}$ if and only if the pullback of $\\xi_i$ to $T$ lies in\n$F_j(T)$. In particular $\\xi_i|_{U_{ij}}\\in F_j(U_{ij})$, so by the\nrepresentability of $F_j$ the element $\\xi_i|_{U_{ij}}$ comes from a\nunique morphism\n\n$$\n\\varphi_{ij}:U_{ij}\\longrightarrow X_j\n$$\n\nwith $\\varphi_{ij}^*\\xi_j=\\xi_i|_{U_{ij}}$. The element\n$\\varphi_{ij}^*\\xi_j=\\xi_i|_{U_{ij}}$ of $F(U_{ij})$ lies in\n$F_i(U_{ij})$, so by (2)(b) for the inclusion $F_i\\subseteq F$ the\nmorphism $\\varphi_{ij}$ factors through the largest open\n$U_{ji}\\subseteq X_j$ with $\\xi_j|_{U_{ji}}\\in F_i(U_{ji})$: we get\n$\\varphi_{ij}(U_{ij})\\subseteq U_{ji}$, i.e. $\\varphi_{ij}$ factors\nas $U_{ij}\\to U_{ji}\\hookrightarrow X_j$. The\ncomposite\n\n$$\n\\varphi_{ji}\\circ\\varphi_{ij}:U_{ij}\\longrightarrow U_{ji}\\subseteq X_i\n$$\n\npulls $\\xi_i$ back to\n$\\varphi_{ij}^*\\varphi_{ji}^*\\xi_j=\\varphi_{ij}^*\\xi_j=\\xi_i|_{U_{ij}}$\n(here we used (2)(b) twice, i.e. that the two open embeddings\n$U_{ji}\\hookrightarrow X_j$ and $U_{ij}\\hookrightarrow X_i$ respect\nthe elements), so by the uniqueness of the morphism representing\n$\\xi_i$ over $X_i$: $\\varphi_{ji}\\circ\\varphi_{ij} =\\mathrm{id}_{U_{ij}}$; similarly\n$\\varphi_{ij}\\circ\\varphi_{ji}=\\mathrm{id}_{U_{ji}}$. Hence the\n$\\varphi_{ij}:U_{ij}\\to U_{ji}$ are mutually inverse isomorphisms.",
@@ -115,6 +156,6 @@
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

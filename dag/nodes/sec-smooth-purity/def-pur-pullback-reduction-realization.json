@@ -1,0 +1,110 @@
+{
+ "id": "def-pur-pullback-reduction-realization",
+ "kind": "definition",
+ "title": "Canonical reduction and fixed-coefficient realization of derived pullback",
+ "status": "split",
+ "statement": "For a prime and finite coefficient extension [def-weil-l-adic-coefficient-extension], schemes and a morphism f:X→Y [def-weil-scheme-morphism-properties], use the actual finite and integral pullbacks [def-weil-derived-pullback-tensor-hom] and the coherent reduction/limit calculus [def-pur-completed-pullback-tensor-comparison]. Define the canonical finite reduction arrow from the reduction of integral pullback to finite pullback of reduction: first apply the specified integral-pullback model comparison, the inverse reduction evaluation, the reduction/limit counit on the actual pulled-back coherent system, its finite evaluation, and finite pullback of the source reduction evaluation. Also define the fixed-coefficient presentation of finite pullback by the two canonical exact-localization composition isomorphisms. These are actual composites; no existence, purity or invertibility is asserted.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Retained finite-clopen steps 8-9: positive reduction of actual integral pullback; source-normalized coherent reduction/limit counit and fixed finite-coefficient realization."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical finite reduction of completed integral pullback as reduction limit counit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"AdicCompletion.map_val_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N) {n : ℕ} (x : AdicCompletion I M),\\n  ↑((AdicCompletion.map I f) x) n = (LinearMap.reduceModIdeal (I ^ n) f\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $, and an $ R $-linear map $ f : M \\to N $, the induced linear map between the $ I $-adic completions of $ M $ and $ N $ satisf\"}\n  {\"name\": \"AdicCompletion.factor_evalₐ_eq_eval\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {n : ℕ} (x : AdicCompletion I R) (h : I ^ n ≤ I ^ n • ⊤),\\n  (Ideal.Quotient.factor h) ((AdicCompletion.evalₐ I n) x) = (AdicCompletion.eval I R n) x\", \"doc\": \"For any natural number $ n $, an element $ x $ in the $ I $-adic completion of a commutative ring $ R $, and the hypothesis $ I^n \\\\subseteq I^n \\\\cdot \\\\top $, the quotient factor map applied to the alg\"}\n  {\"name\": \"IsAdicComplete.of_liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S)\\n  [inst_2 : IsAdicComplete I S] (f : (n : ℕ) → R →+* S ⧸ I ^ n)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m) (x : R),\\n  (AdicCompletion.of I S) ((IsAdicComplete.li\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to S $ by composing the inverse of the canonical\"}\n  {\"name\": \"AdicCompletion.factorₐ_evalₐ_one\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (x : AdicCompletion I R),\\n  (Ideal.Quotient.factor ⋯) ((AdicCompletion.evalₐ I 1) x) = (AdicCompletion.evalOneₐ I) x\", \"doc\": \"For any element $ x $ in the $ I $-adic completion of a commutative ring $ R $, the evaluation of $ x $ at the first power $ I^1 $ (which coincides with $ I $) is equal to the direct evaluation of $ x\"}\n  {\"name\": \"AdicCompletion.pi_apply_coe\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {ι : Type u_6} (M : ι → Type u_7)\\n  [inst_1 : (i : ι) → AddCommGroup (M i)] [inst_2 : (i : ι) → Module R (M i)] (c : AdicCompletion I ((j : ι) → M j))\\n  (i : ι) (n : ℕ), ↑((AdicCompletion.pi I M) c i) n = (LinearMap.reduceModIdeal (I ^ n) (LinearMap\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, an index type $ \\\\iota $, and a family of $ R $-modules $ \\\\{M_i\\\\}_{i \\\\in \\\\iota} $, the linear map from the $ I $-adic completion of the product module $ \\\\p\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AdicCompletion.factor_eval_eq_evalₐ\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {n : ℕ} (x : AdicCompletion I R) (h : I ^ n • ⊤ ≤ I ^ n),\\n  (Submodule.factor h) ((AdicCompletion.eval I R n) x) = (AdicCompletion.evalₐ I n) x\", \"doc\": \"For any natural number $n$, element $x$ in the $I$-adic completion of a commutative ring $R$, and hypothesis $h : I^n \\\\cdot \\\\top \\\\subseteq I^n$, the factor-adjusted evaluation of $x$ at level $n$ equa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical finite coefficient realization of derived pullback and reduction of completed pullback",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.instFinitePullback\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.FiniteProd\", \"type\": \"[X₂.Finite] [X₃.Finite] (r : X₂ ⟶ X₄) (b : X₃ ⟶ X₄) : (pullback r b).Finite\", \"doc\": \"The pullback of two finite simplicial sets along morphisms to a common target simplicial set is itself a finite simplicial set. Specifically, given finite simplicial sets $X_2$ and $X_3$ with morphism\"}\n  {\"name\": \"CategoryTheory.Abelian.PullbackToBiproductIsKernel.isLimitPullbackToBiproduct\", \"module\": \"Mathlib.CategoryTheory.Abelian.Basic\", \"type\": \": IsLimit (pullbackToBiproductFork f g)\", \"doc\": \"In an abelian category $\\\\mathcal{C}$, given morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, the pullback object $P = X \\\\times_Z Y$ equipped with its canonical morphism to the biproduct $X \\\\oplus Y$ satisfies\"}\n  {\"name\": \"CategoryTheory.Precoherent.pullback\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.Basic\", \"type\": \"∀ {C : Type u_1} {inst : CategoryTheory.Category.{v_1, u_1} C} [self : CategoryTheory.Precoherent C] {B₁ B₂ : C}\\n  (f : B₂ ⟶ B₁) (α : Type) [Finite α] (X₁ : α → C) (π₁ : (a : α) → X₁ a ⟶ B₁),\\n  CategoryTheory.EffectiveEpiFamily X₁ π₁ →\\n    ∃ β,\\n      ∃ (_ : Finite β),\\n        ∃ X₂ π₂,\\n          Cate\", \"doc\": \"In a precoherent category $\\\\mathcal{C}$, given a morphism $f: B_2 \\\\to B_1$ and an effective epimorphic family $\\\\{X_1(a) \\\\to B_1\\\\}_{a \\\\in \\\\alpha}$ (with $\\\\alpha$ finite), there exists a finite effectiv\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \": PreservesFiniteLimits (sheafPullback G A J K)\", \"doc\": \"The sheaf pullback functor, constructed by converting a sheaf to its underlying presheaf, applying the left Kan extension along the opposite functor, and sheafifying the result, preserves finite limit\"}\n  {\"name\": \"AdicCompletion.piEquivOfFintype\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {ι : Type u_6} →\\n        (M : ι → Type u_7) →\\n          [inst_1 : (i : ι) → AddCommGroup (M i)] →\\n            [inst_2 : (i : ι) → Module R (M i)] →\\n              [DecidableEq ι] →\\n                [Fintype ι] → AdicCompletion I ((j : \", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, a finite index type $ \\\\iota $, and a family of $ R $-modules $ \\\\{M_i\\\\} $, this constructs a linear equivalence between the $ I $-adic completion of the \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instFstScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [IsFinite g] : IsFinite (Limits.pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a finite morphism of schemes, then the first projection morphism from the pullback of $ f : X \\to Z $ and $ g $ is also finite.\"}\n  {\"name\": \"CategoryTheory.Limits.FormalCoproduct.isLimitPullbackCone\", \"module\": \"Mathlib.CategoryTheory.Limits.FormalCoproducts\", \"type\": \": IsLimit (pullbackCone f g pb)\", \"doc\": \"For morphisms $ f: X \\to Z $ and $ g: Y \\to Z $ in the category of formal coproducts over a category $\\\\mathcal{C}$, the pullback cone constructed from $ f $, $ g $, and a given pullback $ pb $ satisfies\"}\n  {\"name\": \"AdicCompletion.pi_apply_coe\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {ι : Type u_6} (M : ι → Type u_7)\\n  [inst_1 : (i : ι) → AddCommGroup (M i)] [inst_2 : (i : ι) → Module R (M i)] (c : AdicCompletion I ((j : ι) → M j))\\n  (i : ι) (n : ℕ), ↑((AdicCompletion.pi I M) c i) n = (LinearMap.reduceModIdeal (I ^ n) (LinearMap\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, an index type $ \\\\iota $, and a family of $ R $-modules $ \\\\{M_i\\\\}_{i \\\\in \\\\iota} $, the linear map from the $ I $-adic completion of the product module $ \\\\p\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purAdicPullbackReduction|purAdicFinitePullbackPresentation|pullbackTensorIntegralPullbackModel (Mathlib CategoryTheory)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "rg",
+   "query": "purAdicPullbackReduction|purAdicFinitePullbackPresentation in dag/nodes, lean/Sheaf, lean/WeilConjectures",
+   "results": "Exactly two general definitions in Sheaf.Paper.AdicPurityObjects, recorded only among helper declarations of downstream def-pur-adic-purity-objects. No definition node owns this general reduction/realization notion. Reuse these exact definitions with existing:true; citing the downstream purity-object node would create a cycle.",
+   "date": "2026-10-23",
+   "verdict": "existing definitions, no general definition-node owner"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-clopen-system-integral-realization",
+  "date": "2026-10-23",
+  "group": "NK"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Finite-clopen expansion, retained step 5.",
+   "via": [
+    "lem-pur-clopen-system-integral-realization",
+    "lem-pur-finite-clopen-exceptional-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "module": "Sheaf.Paper.AdicPurityObjects",
+  "declaration": "WeilConjectures.purAdicPullbackReduction",
+  "declarations": [
+   "WeilConjectures.purAdicPullbackReduction",
+   "WeilConjectures.purAdicFinitePullbackPresentation"
+  ],
+  "statement": "def purAdicPullbackReduction\n    (K : DerivedCategory (scalarReductionSource l E Y)) (n : ℕ) :\n    (scalarReductionDerivedExtension l E X n).obj ((integralDerivedPullback l E f).obj K) ⟶\n      (finiteDerivedPullback l E n f).obj\n        ((scalarReductionDerivedExtension l E Y n).obj K)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "General pullback reduction/realization maps defined before the finite-field purity section, with no finite-type, smoothness or separatedness assumptions. Definition-only ownership avoids the downstream adic-purity-object node and its dependency cycle. The published maps are reused, never copied."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cf4ac880",
+  "group": "NK",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cf4ac880",
+  "group": "NK",
+  "result": "fix",
+  "note": "Re-delivery after 86cf RETURN; all 4 points repaired. (1) DU commutation: ordinaryScalarRestriction is fixed on sections via the recorded evaluations, lift.moduleUnderlying and the graph-coprojection setRestriction.sheafIso (HEq section types are propositionally equal via coefficientSequenceRestriction_evaluation, so the clause is not vacuous); scalarRestriction_normalized fixes it on every CX.sequence.derived.functor.obj (Q.obj H); reductionRestriction_normalized = red(kappa) ≫ purAdicPullbackReduction. (2) finiteEvaluation/finiteEvaluationI/restriction.evaluation are each equal to the explicit composites clopenCanonicalFiniteEvaluation/clopenCanonicalRestrictionEvaluation; restrictionDerived is fixed by IsClopenRestrictionDerivedNormalized and its ordinary part by sections. (3) The theorem stmt_dep is replaced by existing:true def-pur-open-completed-restriction-data. (4) strict-system-support is dropped and its record untouched. Hypotheses, edge cases (I empty, empty components, n=0 gives exponent 1, Y not separated), universes, verbatim statement, docstrings and single sorry are OK. FIX: new node def-pur-clopen-system-realization-data cited theorem lem-sfb-proetale-object-inverse-image-restriction only for the structure ProEtaleObjectRestrictionComparison; swapped to its def owner def-pe-proetale-object-restriction-comparison-data (on base, no cycle) in stmt_deps and the inline citation; fixes/def-pur-clopen-system-realization-data.json. No Lean change, no compile. Advisory: purAdicPullbackReduction/FinitePullbackPresentation are double-listed with def-pur-adic-purity-objects (avoids a genuine cycle); some declarations used come from owner nodes outside stmt_deps; the second reading is a self-check."
+ }
+}

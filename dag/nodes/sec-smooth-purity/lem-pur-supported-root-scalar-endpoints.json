@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-supported-root-scalar-endpoints",
+ "kind": "statement",
+ "title": "Normalized derived scalar endpoints of the residue root line",
+ "statement": "For the finite purity setting and any k-scheme T, the residue root tensor line has its generator-normalized coefficient insertion into the A root line. Its degree-zero and shifted adjunction transposes are isomorphisms. The two adjuncts are the actual degree-zero scalar unit and its canonical shift comparison.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "lem-asd-finite-etale-twist-line",
+  "def-weil-pbc-derived-categories",
+  "lem-amb-closed-support-hom",
+  "lem-pur-divisor-relative-cone",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-geo-cartier-coeff-extension",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-pur-supported-hom-pullback",
+  "def-pur-frame-class",
+  "lem-pur-supported-hom",
+  "def-geo-exact-degree-zero-interface",
+  "def-pc-sheaf-restrict-scalars",
+  "def-asd-finite-etale-tate-twist",
+  "def-pur-supported-hom-cocycle-data",
+  "def-asd-ordinary-finite-p1-kummer-class"
+ ],
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 9, Example 9.5 and the Ext proof of Theorem 9.4, pp. 66–67; Stacks Tags 03FD, 093X, 06YY, 07A6 and 099R"
+ },
+ "proof": [
+  {
+   "text": "Apply the existing finite Kummer scalar endpoint existence theorem to the lifted residue ring, the coefficient ring and their canonical map. The diagonal exponent is positive and invertible on T. Its normalized line insertion supplies theta and its line isomorphism supplies c.",
+   "uses": [
+    "lem-sp-p1-kummer-scalar-endpoint-existence",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold the derived insertion to identify its adjunct with the degree-zero scalar unit. Compose the canonical left-adjoint shift comparison with the shifted c to construct c2. Naturality of the right-adjoint shift comparison and its unit compatibility compute the adjunct of c2 as the prescribed shifted unit.",
+   "uses": [
+    "def-sp-exact-degree-zero-adjoint-interface"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-p1-kummer-scalar-endpoint-existence",
+  "def-coefficient-twists-detailed",
+  "def-sp-exact-degree-zero-adjoint-interface"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 9, Example 9.5 and the Ext proof of Theorem 9.4, pp. 66–67; Stacks Tags 03FD, 093X, 06YY, 07A6 and 099R"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived supported cohomology under restriction of coefficient scalars is precomposition by the supported constant coefficient unit",
+   "results": "Group cohomology restriction and ModuleCat restriction compositor results; no supported sheaf result.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorPlusBaseChange\"",
+   "results": "No results.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "supported.*coefficient|coefficient.*supported",
+   "results": "Unrelated Hecke, convex space, and ordinal entries.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedRootScalarSiteComparison",
+  "date": "2026-10-25",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-supported-root-scalar-site-comparison",
+   "place": "Coefficient naturality and scalar endpoint steps of the supported root comparison"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportedRootScalarSiteComparison",
+  "file": "lean/Sheaf/Paper/SupportedRootScalarSiteComparison.lean",
+  "declaration": "AlgebraicGeometry.SupportedRootScalar.rootScalarEndpointData",
+  "statement": "theorem rootScalarEndpointData\n    (P : WeilConjectures.PurityFiniteSetting.{u}) (T : Scheme.{u})\n    [T.Over (Spec (.of P.field.k))] :\n    ∃ theta : rootModule P T ⟶ (Sheaf.restrictScalars T.smallEtaleTopology (scalar P)).obj\n        (P.frameTwistEtale T 1),\n    ∃ c : (Etale.scalarExtension (scalar P) T).obj\n        (SheafExactDegreeZero.obj _ (rootModule P T)) ≅\n          SheafExactDegreeZero.obj _ (P.frameTwistEtale T 1),\n    ∃ c2 : (Etale.scalarExtension (scalar P) T).obj\n        ((SheafExactDegreeZero.obj _ (rootModule P T))⟦(2 : ℤ)⟧) ≅\n          (SheafExactDegreeZero.obj _ (P.frameTwistEtale T 1))⟦(2 : ℤ)⟧,\n      (∀ (U : T.Etaleᵒᵖ) (r : Residue P)\n          (z : (T.rootsOfUnitySheaf P.diagonalExponent).obj.obj U),\n        theta.hom.app U (Scheme.finiteEtaleTateOneGenerator (Residue P)\n          P.diagonalExponent T (congrArg ULift.up (ZMod.natCast_self P.diagonalExponent))\n            U r z) =\n          Scheme.finiteEtaleTateOneGenerator P.Coefficient P.diagonalExponent T\n            P.diagonalExponent_annihilates U (scalar P r) z) ∧\n      ((Adjunction.ofIsRightAdjoint\n        (Sheaf.derivedRestrictScalars T.smallEtaleTopology (scalar P))).homEquiv _ _)\n          c.hom = SheafExactDegreeZero.scalarUnit T.smallEtaleTopology (scalar P)\n            (rootModule P T) (P.frameTwistEtale T 1) theta ∧\n      ((Adjunction.ofIsRightAdjoint\n        (Sheaf.derivedRestrictScalars T.smallEtaleTopology (scalar P))).homEquiv _ _)\n          c2.hom = shiftedRootUnit P T theta",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e7e4c",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T163537-L-692667",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e7e4c",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T163537-L-692667",
+  "kind": "interface",
+  "note": "independent cc review: item stmt byte-identical to live; new sorry supportedCoefficientHomNaturality read vs node and judged true (normalized χ, Stacks 03FD/093X comparisons, evaluation-at-one iff), not a restatement; moved defs re-exported via public import, 0 importers; node lean records match; #print axioms clean (sorryAx only via new lemma + upstream p1KummerScalarEndpointExistence); adapted P1 module + importer P1KummerDerivedScalar + new module compile"
+ }
+}

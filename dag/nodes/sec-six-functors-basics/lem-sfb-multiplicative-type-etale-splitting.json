@@ -1,0 +1,381 @@
+{
+ "id": "lem-sfb-multiplicative-type-etale-splitting",
+ "kind": "statement",
+ "title": "Multiplicative-type groups split on an etale covering",
+ "statement": "Let $U$ be a scheme [def-pc-scheme] and $H$ a group object in schemes over $U$, with multiplication, identity and inverse satisfying the group diagrams. Suppose there is an fppf covering $\\{V_\\alpha\\to U\\}$ [def-pc-fppf-site], finitely generated additive abelian groups $M_\\alpha$, and isomorphisms of $V_\\alpha$-group schemes $H\\times_UV_\\alpha\\simeq D_{V_\\alpha}(M_\\alpha)$ [def-pc-base-change]. Here $D_W(M)$ is obtained by gluing $D_A(M)=\\operatorname{Spec}A[M]$ on affine opens $\\operatorname{Spec}A\\subset W$, with the Hopf operations of [def-sfb-ring-diagonalizable-group]. Then there is a jointly surjective family of etale morphisms $U_j\\to U$ [def-weil-etale-morphism], with each $U_j$ affine, finitely generated additive abelian groups $N_j$, and isomorphisms of $U_j$-group schemes $H\\times_UU_j\\simeq D_{U_j}(N_j)$. No Noetherian, reducedness, smoothness, connectedness or torsion-order restriction is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Proposition B.3.4, printed pp.291–292: étale-local splitting of fppf forms of diagonalizable groups of finite type. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this group-scheme theorem."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-pc-base-change",
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-etale-morphism",
+  "def-sfb-relative-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "For a finitely generated abelian group $M$, write $P_M=D_U(M)$. Its formation commutes with arbitrary base change: on affine charts the maps $B\\otimes_A A[M]\\rightleftarrows B[M]$, $b\\otimes ae_m\\mapsto ba e_m$ and $be_m\\mapsto b\\otimes e_m$, are inverse algebra maps and respect the three Hopf operations on every basis element. The affine fibre-product formula and affine adjunction give the corresponding group-scheme isomorphisms. Their formulas agree on restrictions, so scheme-morphism gluing gives the assertion for arbitrary test schemes. Fix the given fppf covering $\\{V_\\alpha\\to U\\}$ and splittings $P_{M_\\alpha}|_{V_\\alpha}\\simeq H|_{V_\\alpha}$. All families below are sets in the size convention.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1 (lemma-morphism-into-affine); explicit group-algebra base-change calculation."
+   }
+  },
+  {
+   "text": "For each covering index $\\beta$, define $F_\\beta(Z)=\\operatorname{Isom}_{Z\\text{-gp}}(P_{M_\\beta}|_Z,H|_Z)$ on $U$-schemes. This is an fppf sheaf. Indeed, for a compatible family of group isomorphisms on a covering $\\{Z_a\\to Z\\}$, its base changes to $P_{M_\\beta}|_Z$ and $H|_Z$ are fppf coverings and hence fpqc coverings. Representable descent glues the maps and their inverses uniquely. Applying its uniqueness clause after base change to the relevant products proves that the two composites are identities and that the glued maps preserve multiplication, identity and inverse. Thus the glued map belongs to $F_\\beta(Z)$, uniquely.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03O3 (lemma-representable-sheaf-fpqc); topologies.tex Tags 021O (lemma-fppf), 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc)."
+   }
+  },
+  {
+   "text": "Put $E_{\\beta\\alpha}=\\operatorname{Isom}_{\\mathbf Z}(M_\\alpha,M_\\beta)$ and $L_{\\beta\\alpha}=\\coprod_{e\\in E_{\\beta\\alpha}}V_\\alpha$. The chosen splitting identifies $F_\\beta|_{V_\\alpha}$ with $h_{L_{\\beta\\alpha}}$. To check this on any $V_\\alpha$-scheme $Z$, cover $Z$ by affine opens. Character duality on each nonempty affine says that a homomorphism between these split diagonalizable groups is uniquely locally $D(u)$, for $u:M_\\alpha\\to M_\\beta$. Applying the same assertion to an inverse shows that isomorphisms correspond precisely to locally constant maps to $E_{\\beta\\alpha}$. The labels agree on overlaps by uniqueness. Conversely such labels define $D(u)$ and $D(u^{-1})$ on their open-and-closed fibres; scheme gluing gives inverse group morphisms on $Z$. The coproduct statement identifies morphisms $Z\\to L_{\\beta\\alpha}$ with exactly these labelled open-and-closed decompositions. The correspondence commutes with restriction. Empty opens contribute no condition, and an empty label set gives the empty scheme.",
+   "uses": [
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "lem-pc-fppf-affine-open-cover",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Appendix B.1, printed pp.280-281, character description; explicit agent deduction of the split-isomorphism functor."
+   }
+  },
+  {
+   "text": "Form $A_\\beta=\\coprod_\\alpha L_{\\beta\\alpha}$ with the map $q_\\beta:h_{A_\\beta}\\to F_\\beta$ given by step 3. For a $U$-scheme $Z$ and $a\\in F_\\beta(Z)$, the sheaf $h_Z\\times_{F_\\beta}h_{A_\\beta}$ is represented by $\\coprod_\\alpha(Z\\times_UV_\\alpha)$. In fact, on the $\\alpha$ component, once a map to $Z\\times_UV_\\alpha$ is specified, the required lift into $L_{\\beta\\alpha}$ is the unique point corresponding to the restriction of $a$ under step 3. This describes the inverse natural transformations, including tests meeting multiple coproduct components. The projection to $Z$ is surjective because the base-changed covering is jointly surjective. It is flat and locally of finite presentation: the coproduct components are open immersions, hence etale, and on each component it is a member of that fppf covering; source locality applies to both properties.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-trf-fppf-covering-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), verification of condition (4); descent.tex Tags 04R1,04R3 (lemma-local-source-target-characterize, remark-list-local-source-target)."
+   }
+  },
+  {
+   "text": "A scheme represents an algebraic space: its functor is an fppf sheaf by representable descent; for scheme tests its diagonal pullbacks are scheme fibre products; the identity is a representable surjective etale atlas. Consequently $A_\\beta$ and all the scheme tests in step 4 are algebraic spaces. Apply the fppf atlas bootstrap to the sheaf $F_\\beta$ and $q_\\beta$: step 4 supplies, for EVERY scheme test and section, a surjective flat locally finitely presented scheme projection. Thus $F_\\beta$ is an algebraic space. Choose its representable surjective etale scheme atlas $W_\\beta\\to F_\\beta$. No representability of $F_\\beta\\to U$ as a scheme has been asserted or needed.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-trf-fppf-covering-is-fpqc",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-trf-algebraic-space",
+    "lem-sfb-fppf-space-atlas-bootstrap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), condition (4); spaces.tex Tag 025Y (definition-algebraic-space), following lemma-scheme-is-space."
+   }
+  },
+  {
+   "text": "Each $L_{\\beta\\alpha}\\to V_\\alpha$ is etale: it restricts to the identity on each disjoint open component, and etaleness is local on the source (also for the empty scheme). The atlas base change $W_\\beta\\times_UV_\\alpha\\to L_{\\beta\\alpha}$ is etale by the definition of a representable etale map of sheaves. Its composite to $V_\\alpha$ is therefore etale. Since the original fppf covering is fpqc, descent of etaleness for scheme morphisms proves that $W_\\beta\\to U$ is etale. Here the morphism to which descent applies is the SCHEME morphism $W_\\beta\\to U$, with base changes $W_\\beta\\times_UV_\\alpha\\to V_\\alpha$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "def-trf-algebraic-space",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-galois-fpqc-descend-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02VN (lemma-descending-property-etale); Tags 04R1,04R3; morphisms.tex Tag 02GN (lemma-composition-etale); spaces.tex Tag 025Y."
+   }
+  },
+  {
+   "text": "The family $\\{W_\\beta\\to U\\}_\\beta$ is jointly surjective. For $u\\in U$, choose $\\alpha$ and $v\\in V_\\alpha$ over $u$. The chosen splitting determines a section of $F_\\alpha$ over $V_\\alpha$, hence a field-valued point of $F_\\alpha$ above $u$. Pulling back its surjective atlas gives a nonempty scheme over that field; any point of this scheme, with its residue field, gives a point of $W_\\alpha$ above $u$. Evaluating the atlas map $h_{W_\\beta}\\to F_\\beta$ at the identity yields $P_{M_\\beta}|_{W_\\beta}\\simeq H|_{W_\\beta}$ by the definition of $F_\\beta$.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 025Y (definition-algebraic-space): surjective representable atlas; elementary evaluation and point lifting."
+   }
+  },
+  {
+   "text": "Choose an affine open covering $\\{U_{\\beta t}\\to W_\\beta\\}_t$ for every $\\beta$. An open immersion is etale, so its composite $U_{\\beta t}\\to U$ is etale. These composites are jointly surjective by step 7 and the covering property. Restrict and invert the isomorphism of step 7 to obtain $H\\times_U U_{\\beta t}\\simeq D_{U_{\\beta t}}(M_\\beta)$; step 1 identifies the right-hand base change. Set $N_{\\beta t}=M_\\beta$, which is finitely generated by hypothesis. This gives the claimed affine covering. For empty $U$, take the empty family. The zero character group and torsion character groups were included throughout; none of the cited duality, bootstrap or descent statements imposes smoothness, reducedness or a residue-characteristic restriction.",
+   "uses": [
+    "lem-pc-fppf-affine-open-cover",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Affine open covering; morphisms.tex Tag 02GN (lemma-composition-etale)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ring-diagonalizable-group",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-size-convention",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "lem-pc-fppf-affine-open-cover",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "lem-sfb-fppf-space-atlas-bootstrap",
+  "lem-galois-fpqc-descend-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Proposition B.3.4, printed pp.290-292 (statement and proof read online); alternative isomorphism-sheaf proof using Appendix B.1 character duality and Stacks 04S6, 02VN. No completion or infinitesimal lifting input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every group scheme of multiplicative type is split diagonalizable on an etale covering of its base",
+   "results": "{\"t\": \"2026-10-24T12:03:09Z\", \"tool\": \"leanfinder\", \"query\": \"Every group scheme of multiplicative type is split diagonalizable on an etale covering of its base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\"], \"digest\": \"55c072a4b4139516\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are general affine-morphism and étale-algebra properties, square-zero algebra lifts or ring extensions; none states diagonalizable group deformation or étale splitting of multiplicative-type forms. Read the saved search output."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An fppf form of a finite type diagonalizable group scheme is etale locally diagonalizable",
+   "results": "{\"t\": \"2026-10-24T12:03:05Z\", \"tool\": \"leansearch\", \"query\": \"An fppf form of a finite type diagonalizable group scheme is etale locally diagonalizable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale\", \"Algebra.FormallyEtale.iff_isSeparable\", \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"41b9440abb321b7b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are general affine-morphism and étale-algebra properties, square-zero algebra lifts or ring extensions; none states diagonalizable group deformation or étale splitting of multiplicative-type forms. Read the saved search output."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-24T12:03:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are general affine-morphism and étale-algebra properties, square-zero algebra lifts or ring extensions; none states diagonalizable group deformation or étale splitting of multiplicative-type forms. Read the saved search output."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.type|diagonali[sz]able|quasi.isotrivial",
+   "results": "{\"t\": \"2026-10-24T12:03:05Z\", \"tool\": \"grep\", \"query\": \"multiplicative.type|diagonali[sz]able|quasi.isotrivial\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are general affine-morphism and étale-algebra properties, square-zero algebra lifts or ring extensions; none states diagonalizable group deformation or étale splitting of multiplicative-type forms. Read the saved search output."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplicative type groups split etale locally even with torsion characters in residue characteristic",
+   "results": "{\"t\": \"2026-10-24T12:03:11Z\", \"tool\": \"leanfinder\", \"query\": \"Multiplicative type groups split etale locally even with torsion characters in residue characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.Etale\", \"RingHom.Etale.ofLocalizationSpan\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.Etale.of_isLocalization_Away\", \"Algebra.IsEtaleAt\"], \"digest\": \"2736eb2d9fdcd090\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are general affine-morphism and étale-algebra properties, square-zero algebra lifts or ring extensions; none states diagonalizable group deformation or étale splitting of multiplicative-type forms. Read the saved search output."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf locally diagonalizable finite type group scheme splits on an etale covering",
+   "results": "{\"t\": \"2026-10-24T12:29:43Z\", \"tool\": \"leanfinder\", \"query\": \"An fppf locally diagonalizable finite type group scheme splits on an etale covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.Scheme.Pullback.diagonalCover\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\"], \"digest\": \"1e2098edcf45ff08\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern general etale morphisms, diagonals or locally constant condensed modules, not group-scheme diagonalization or its isomorphism functor"
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.type|diagonali[sz]able|quasi.isotrivial",
+   "results": "{\"t\": \"2026-10-24T12:29:58Z\", \"tool\": \"grep\", \"query\": \"multiplicative.type|diagonali[sz]able|quasi.isotrivial\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits in the specified AlgebraicGeometry directory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An fppf form of a diagonalizable group scheme admits etale local trivializations",
+   "results": "{\"t\": \"2026-10-24T12:29:59Z\", \"tool\": \"leansearch\", \"query\": \"An fppf form of a diagonalizable group scheme admits etale local trivializations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.FormallyUnramified.recOn\"], \"digest\": \"b5a1e8cf8af19e09\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern general etale morphisms, diagonals or locally constant condensed modules, not group-scheme diagonalization or its isomorphism functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-24T12:29:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern general etale morphisms, diagonals or locally constant condensed modules, not group-scheme diagonalization or its isomorphism functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The isomorphism sheaf of two diagonalizable group schemes is represented by a locally constant etale scheme",
+   "results": "{\"t\": \"2026-10-24T12:30:00Z\", \"tool\": \"leanfinder\", \"query\": \"The isomorphism sheaf of two diagonalizable group schemes is represented by a locally constant etale scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"LightCondMod.LocallyConstant.functorIsoDiscreteAux₂\", \"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf\", \"CondensedMod.LocallyConstant.functorIsoDiscrete\", \"LightCondMod.LocallyConstant.functorIsoDiscrete\", \"CompHausLike.LocallyConstant.functorToPresheavesIso\"], \"digest\": \"510cef87c23cbe6b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern general etale morphisms, diagonals or locally constant condensed modules, not group-scheme diagonalization or its isomorphism functor"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nilpotent-flat-multiplicative-deformation",
+  "date": "2026-10-24",
+  "group": "Q109"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the saturated root-kernel torus and its semisimple quotient, before either centre case. General structural input: Relative quotient by a central subgroup of multiplicative type. Supporting prerequisite: Central multiplicative preimages in smooth connected group extensions. Lemma 3.3.1(2) and proof, printed pp.96--97. Applied to an arbitrary smooth connected affine group, without reductivity. Supporting generic input after the commutator has been killed: Conrad Corollary B.4.2(2), commutative extensions over arbitrary schemes. Supporting input: Theorem B.3.2(2), printed pp.288-290, split source, including both the Hom bijection and the open-and-closed-immersion assertion. Supporting input: Theorem B.3.2(2), proof, printed p.289, the square-zero deformation assertion for a flat affine group reducing to a diagonalizable group, and its fppf-local form. This is the infinitesimal structural prerequisite, not the complete-local Hom bijection. Supporting locality input: Conrad Proposition B.3.4, étale-local diagonalization of the multiplicative-type reduction, before lifting an étale cover across the nilpotent immersion.",
+   "via": [
+    "lem-sfb-nilpotent-flat-multiplicative-deformation",
+    "lem-sfb-complete-local-diagonalizable-fibre-hom-lift",
+    "lem-sfb-relative-commutative-multiplicative-extension",
+    "lem-sfb-relative-central-multiplicative-preimage",
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-multiplicative-type-etale-splitting",
+  "worker": "stage1",
+  "summary": "Eight-step isomorphism-sheaf descent proof, reusing the existing relative character-duality and fppf-space bootstrap inputs. Verified arbitrary base, torsion and affine refinement. No new nodes, no Lean writing or compilation. Statement unchanged.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain at Conrad B.3.4: etale splitting before lifting the reduction cover. The latest blueprint unit and direct-images proof were read; no chapter or unit route is changed. The ancestor utility returns None for this pre-existing imported prerequisite chain, retained verbatim.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic scheme, covering, or algebraic-space foundation used exactly as stated in the proof; the constructible-functor unit has no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic scheme, covering, or algebraic-space foundation used exactly as stated in the proof; the constructible-functor unit has no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-a1-locally-ringed-space-affine-adjunction",
+    "why": "Generic scheme, covering, or algebraic-space foundation used exactly as stated in the proof; the constructible-functor unit has no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic scheme, covering, or algebraic-space foundation used exactly as stated in the proof; the constructible-functor unit has no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-trf-fppf-covering-base-change",
+    "why": "Generic scheme, covering, or algebraic-space foundation used exactly as stated in the proof; the constructible-functor unit has no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Generic scheme, covering, or algebraic-space foundation used exactly as stated in the proof; the constructible-functor unit has no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic scheme, covering, or algebraic-space foundation used exactly as stated in the proof; the constructible-functor unit has no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-pc-fppf-affine-open-cover",
+    "why": "Generic scheme, covering, or algebraic-space foundation used exactly as stated in the proof; the constructible-functor unit has no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic scheme, covering, or algebraic-space foundation used exactly as stated in the proof; the constructible-functor unit has no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic scheme, covering, or algebraic-space foundation used exactly as stated in the proof; the constructible-functor unit has no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Generic scheme, covering, or algebraic-space foundation used exactly as stated in the proof; the constructible-functor unit has no replacement for this foundational tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-pc-fppf-affine-open-cover",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-galois-fpqc-descend-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-bd9c77bb4",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-bd9c77bb4 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the full statement of every cited node (18 proof_deps and 5 stmt_deps), the citer nilpotent-flat-multiplicative-deformation and the sibling torus-etale-trivialization. The statement is unchanged and matches Conrad B.3.4. The proof is an agent proof, honestly marked: the isomorphism sheaf F_β is shown to be an fppf sheaf by fpqc representable descent (S2). Through the splitting, F_β|V_α is represented by ∐ over Isom(M_α,M_β) of V_α, using character duality on nonempty affines (A nonzero, M and N finitely generated; variance and inverse checked; S3). The pullback along the atlas is ∐_α Z×_U V_α, which is fppf over Z (S4), so the fppf-space bootstrap gives an algebraic space with no diagonal hypothesis (S5). W_β→U is étale by fpqc descent of étaleness for the scheme map W_β→U, after identifying W_β×_U V_α with h_W×_F h_L (S6). Joint surjectivity comes from field points and the surjective atlas (S7), and an affine refinement finishes (S8). Edge cases tested: empty U, M=0, nonreduced A, μ_p in characteristic p, non-isomorphic M_α and M_β, infinite Aut(M). There is no cycle (closure computed), no new node, and proof_deps equals the union of the step uses. The torus node is the torsion-free special case, not a duplicate. The off-unit generic tools declared in tool_uses are accepted, including lem-galois-fpqc-descend-etale. Batch 5: the two lem-trf fppf leaves (base change, fppf is fpqc) are general site facts. def-trf-algebraic-space is a definition. Character duality, the scheme-étale source/target node and the fppf-space bootstrap reach trf only through those leaves, the definition or the generic lem-trf-smooth-composition. None is part of the trace formula or Poincaré duality, so all are accepted. coord/dag-sync.md is absent from the snapshot and was not read. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MultiplicativeTypeEtaleSplitting",
+  "declaration": "AlgebraicGeometry.multiplicativeType_etale_splitting",
+  "file": "lean/Sheaf/AlgebraicGeometry/MultiplicativeTypeEtaleSplitting.lean",
+  "statement": "theorem multiplicativeType_etale_splitting (U : Scheme.{u}) (H : Grp (Over U)) (V : U.Cover.{u} Scheme.fppfPrecoverage) (M : V.I₀ → AddCommGrpCat.{u}) (hM : ∀ i : V.I₀, AddGroup.FG (M i)) (hsplit : ∀ i : V.I₀, Nonempty ((Over.pullback (V.f i)).mapGrp.obj H ≅ relativeDiagonalizableGroup (V.X i) (M i))) : ∃ W : U.Cover.{u} Scheme.etalePrecoverage, (∀ j : W.I₀, IsAffine (W.X j)) ∧ ∃ N : W.I₀ → AddCommGrpCat.{u}, ∀ j : W.I₀, AddGroup.FG (N j) ∧ Nonempty ((Over.pullback (W.f j)).mapGrp.obj H ≅ relativeDiagonalizableGroup (W.X j) (N j))",
+  "branch": "sheaf-dag",
+  "by": "Q143",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-015f22508",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Item statement unchanged; only lean + stmt_deps (+def-sfb-relative-diagonalizable-group) differ from live. All clauses match: H : Grp (Over U); V : U.Cover.{u} fppfPrecoverage (jointly surjective flat+lfp); M FG per index; hsplit Nonempty iso in Grp (Over V_i) via Over.pullback.mapGrp; conclusion ∃ etalePrecoverage cover with affine members, FG N_j, group isos. No extra hypotheses; single universe u. Edge cases checked: empty U, M=0, p-torsion in char p, varying M, nonreduced/non-Noetherian. New def relativeDiagonalizableGroup = pullback along specULiftZIsTerminal.from S of ringDiagonalizableGroup (ULift ℤ) M; real data, correct direction, matches Conrad B.1; no duplicate in live (only field diagonalizableGroup, affine ringDiagonalizableGroup, relativeSplitTorus ℤ^r) and no parallel node. lean.statement fields verbatim in files; docstrings with source/blueprint and 8 proof steps; sorry only; imports exist. No compile run (no file changed)."
+ }
+}

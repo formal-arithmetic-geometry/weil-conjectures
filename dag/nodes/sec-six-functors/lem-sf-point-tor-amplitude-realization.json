@@ -1,0 +1,315 @@
+{
+ "id": "lem-sf-point-tor-amplitude-realization",
+ "kind": "statement",
+ "title": "Finite free point models and quantitative dual Tor bounds",
+ "statement": "Fix the finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$, uniformizer $\\varpi_E$, and $n\\geq1$ [def-weil-l-adic-coefficient-extension]. Put $A=R/\\varpi_E^n$ and $s=\\operatorname{Spec}k$. Let $u\\leq v$ be integers and let $N\\in D^b_c(s_{\\mathrm{proet}},A)$ be intrinsically bounded constructible [def-weil-finite-torsion-constructibility] with Tor amplitude in $[u,v]$ [def-weil-finite-tor-amplitude]. Write $C=\\operatorname{Fib}_sN=\\Gamma(s,N)$ for its ordinary module complex [def-weil-finite-coefficient-point]. Then $C$ has finite cohomology modules and ordinary-module Tor amplitude in $[u,v]$: $H^i(C\\otimes_A^LM)=0$ for every $A$-module $M$ in degree zero and every $i\\notin[u,v]$. In the derived category $D(A)$ [def-weil-abstract-derived-category], $C$ is isomorphic to a complex $P^\\bullet$ of finite free $A$-modules with $P^i=0$ outside $[u,v]$. Its derived dual $C^\\vee=R\\operatorname{Hom}_A(C,A)$, with derived Hom specialized to the one-point ringed site [def-pur-derived-internal-hom], is represented by the signed Hom complex with degree $i$ term $\\operatorname{Hom}_A(P^{-i},A)$. Thus $C$ and $C^\\vee$ are perfect [def-pc-perfect-ring-complex], and $C^\\vee$ has finite cohomology and Tor amplitude in $[-v,-u]$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+  "place": "Proof Step 1: the geometric-point passage and bounded finite free models with reversed-degree duals; returned Steps 2 and 6"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-pur-derived-internal-hom",
+  "def-weil-abstract-derived-category",
+  "def-weil-finite-coefficient-point",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sc-module-total-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "The finite coefficient ring is finite by [def-weil-l-adic-coefficient-extension]. Use [lem-weil-l-adic-extension-integers-dvr] to identify the uniformizer ideal with the maximal ideal. Its positive power is proper, so the quotient is nontrivial and local; transport along ULift. A finite ring is Noetherian. The finite cohomology assertion for C is already part of the codomain property of the recorded pointFiniteFibre [def-weil-finite-coefficient-point].",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 1: geometric-point passage, finite free models, and reversed-degree duals"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-point-sections-tor-amplitude] to the intrinsic Tor hypothesis. The sections object is definitionally the underlying object of pointFiniteFibre, so transport along the supplied equality with C. This proves the ordinary Tor interval [a,b], including tests by arbitrary coefficient modules.",
+   "uses": [
+    "lem-sf-point-sections-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 1: geometric-point passage, finite free models, and reversed-degree duals"
+   }
+  },
+  {
+   "text": "The Tor interval gives cohomology concentrated in [a,b]. Finite underlying cohomology modules are finitely generated. Apply [lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion] to obtain pseudo-coherence, then [lem-pc-ring-pseudo-coherent-finite-tor-perfect] to obtain a bounded finite-term projective model Q. Apply [lem-weil-bounded-finite-tor-perfect] to Q, with the original Tor interval, to obtain a finite free model P supported precisely in [a,b]. Compose its derived isomorphism with Q to obtain C isomorphic to Q(P).",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+    "lem-weil-bounded-finite-tor-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 1: geometric-point passage, finite free models, and reversed-degree duals"
+   }
+  },
+  {
+   "text": "Finite free terms are projective. Apply [lem-pod-projective-hom-evaluation-model] to P and A[0], and contravariantly transport internal Hom along C isomorphic to Q(P). The degree-i Hom cochain is determined by its only possibly nonzero component P^(-i) to A[0]^0; evaluation at that component and the single cochain construction are mutually inverse. The existing Hom-complex differential formula gives (-1)^(i+1) times precomposition with d_P. Thus the dual model D is supported in [-b,-a]. Its terms identify with ordinary module duals of the finite free terms of P, hence are finite free.",
+   "uses": [
+    "lem-pod-projective-hom-evaluation-model",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 1: geometric-point passage, finite free models, and reversed-degree duals"
+   }
+  },
+  {
+   "text": "The two bounded finite free models exhibit perfectness [def-pc-perfect-ring-complex]. Apply the bounded flat-complex theorem [lem-trf-source-bounded-flat-tor-amplitude] to D and transfer along the dual-model isomorphism. Each finite-generated D term over a finite ring is a finite set. Its cycles embed in that finite set, and its homology is a quotient of cycles, so homology is finite. Vanishing outside [-b,-a] supplies finite cohomological support.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-trf-source-bounded-flat-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 1: geometric-point passage, finite free models, and reversed-degree duals"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-finite-coefficient-point",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-projective-module",
+  "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-sf-point-sections-tor-amplitude",
+  "lem-trf-source-bounded-flat-tor-amplitude",
+  "lem-weil-bounded-finite-tor-perfect",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+  "place": "Step 1: geometric-point passage, finite free models, and reversed-degree duals; D7 implements the planned finite-free/dual argument, using bounded flat models to transfer point Tor amplitude and the generic pseudo-coherence criterion at the recorded module universe."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible complex on the pro etale site of an algebraically closed point with Tor amplitude u v has ordinary module sections with finite cohomology and the same Tor amplitude",
+   "results": "8 hits: DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, Algebra.etaleLocus_eq_compl_support, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff. Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Etale, \"stalk\"",
+   "results": "0 hits: . loogle: unknown identifier 'Scheme.Etale'. Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*tor|torAmplitude.*(stalk|section)|stalk.*tensor",
+   "results": "13 hits: Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Flat/Rank.lean, Mathlib/RingTheory/Flat/Rank.lean, Mathlib/RingTheory/Flat/Rank.lean. Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded constructible complex on the pro etale site of an algebraically closed point with Tor amplitude u v has ordinary module sections with finite cohomology and the same Tor amplitude",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensCarrierAbPresheaf, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, SheafOfModules.GeneratingSections.IsFiniteType.mk, HomologicalComplex.instHasFiniteLimits, AlgebraicGeometry.Scheme.Modules.instHasLimits, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.GeneratingSections.IsFiniteType. Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The etale stalk equivalence at a separably closed field transfers derived tensor vanishing to modules of global sections",
+   "results": "8 hits: Algebra.FormallyEtale.of_isLocalization, Algebra.FormallyEtale.localization_base, Algebra.FormallyEtale.localization_map, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.Etale.formallyEtale, Algebra.mem_etaleLocus_iff, Algebra.etaleLocus, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale. Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible complex with Tor amplitude u v on the pro etale point has a finite free section model in degrees u to v and dual in degrees minus v to minus u",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, Algebra.etaleLocus_eq_compl_support, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, Algebra.FormallyEtale.instForallOfFinite, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.formallyEtale, Algebra.smoothLocus_eq_compl_support_inter. Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_iso_Q_obj_of_isGE_of_isLE|isPerfect|torAmplitude",
+   "results": "2 hits: Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean. Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"projective\"",
+   "results": "4 hits: DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.IsKProjective.Qh_map_bijective, CategoryTheory.ProjectiveResolution.extMk_hom, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom. Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|finiteTorAmplitude|finite.*free.*complex",
+   "results": "0 hits: . Read TStructure.lean:180 and LocalRing/Module.lean:304: the first gives arbitrary bounded terms, the second freeness of a single finite flat module; neither gives this point realization and dual model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex over a local ring with Tor amplitude in an interval has a finite free representative supported in that interval",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, Module.free_of_maximalIdeal_rTensor_injective, Module.free_of_flat_of_isLocalRing, HomologicalComplex.IsSupported.mk, HomologicalComplex.instIsSupportedOfIsStrictlySupported, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, Module.finrank_of_isPerfPair, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE. Read TStructure.lean:180 and LocalRing/Module.lean:304: the first gives arbitrary bounded terms, the second freeness of a single finite flat module; neither gives this point realization and dual model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible complex on an algebraically closed pro etale point with Tor amplitude u v is represented by finite free modules in degrees u v and its derived dual has amplitude minus v minus u",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE. Read TStructure.lean:180 and LocalRing/Module.lean:304: the first gives arbitrary bounded terms, the second freeness of a single finite flat module; neither gives this point realization and dual model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"projective\"",
+   "results": "4 hits: DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.IsKProjective.Qh_map_bijective, CategoryTheory.ProjectiveResolution.extMk_hom, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom. Read TStructure.lean:180 and LocalRing/Module.lean:304: the first gives arbitrary bounded terms, the second freeness of a single finite flat module; neither gives this point realization and dual model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_iso_Q_obj_of_isGE_of_isLE|free_of_flat_of_isLocalRing",
+   "results": "13 hits: Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Regular/ProjectiveDimension.lean, Mathlib/RingTheory/Flat/LocallyFree.lean, Mathlib/RingTheory/Flat/Rank.lean, Mathlib/RingTheory/LocalRing/Module.lean. Read TStructure.lean:180 and LocalRing/Module.lean:304: the first gives arbitrary bounded terms, the second freeness of a single finite flat module; neither gives this point realization and dual model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex over a local ring with Tor amplitude in a b has a bounded finite free representative in the same degrees and Hom dual reverses degrees",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, CochainComplex.IsKProjective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.isKProjective_iff_leftOrthogonal, CochainComplex.IsKProjective.leftOrthogonal. Read TStructure.lean:180 and LocalRing/Module.lean:304: the first gives arbitrary bounded terms, the second freeness of a single finite flat module; neither gives this point realization and dual model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pod-point-perfectness",
+  "date": "2026-10-22",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pod-point-perfectness",
+   "place": "Proof Step 1: the geometric-point passage and bounded finite free models with reversed-degree duals; returned Steps 2 and 6",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-point-tor-amplitude-realization",
+  "worker": "stage1",
+  "summary": "Reused existing exact point tensor comparison, coefficient-ring tools, perfectness and quantitative finite-free model lemmas, and derived Hom computation; no new nodes. Explicitly tested arbitrary constant modules and retained both endpoints. The source identification of all pro-etale sheaves with modules is not used.",
+  "blueprint": "thm-pod-point-perfectness.proof.md Step 1: first paragraph (point passage), paragraph beginning By lem-trf-finite-tor-amplitude-perfect (finite free model and reversed dual).",
+  "tool_uses": [
+   {
+    "node": "lem-pod-projective-hom-evaluation-model",
+    "why": "Computes ordinary-module derived Hom out of the bounded projective model."
+   },
+   {
+    "node": "lem-sf-point-ringed-evaluation-model",
+    "why": "Identifies exact final-object sections with the point pullback and compares tensor on arbitrary ambient derived objects."
+   },
+   {
+    "node": "lem-trf-finite-tor-amplitude-perfect",
+    "why": "Provides a bounded finite free representative from finite cohomology and finite Tor amplitude, without prescribed interval."
+   },
+   {
+    "node": "lem-trf-source-bounded-flat-tor-amplitude",
+    "why": "Tor interval of the finite flat dual complex; the unit itself has no ordinary-module quantitative flat-model statement."
+   },
+   {
+    "node": "lem-weil-bounded-finite-tor-perfect",
+    "why": "Quantitative [u,v] finite free replacement of the bounded finite-term representative over the local Noetherian ring."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Valuation-ring structure and finite residue field for E; a coefficient-ring tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Exactness and the cohomology identity for sections on the algebraically closed point."
+   },
+   {
+    "node": "lem-weil-point-sections-finiteness",
+    "why": "Bounded finite cohomology of exact sections of an intrinsic constructible point object."
+   },
+   {
+    "node": "lem-weil-proetale-constant-sheaf-stalk",
+    "why": "The stalk of the constant sheaf of an arbitrary module, including infinite test modules."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Finite local quotient ring at n>=1; no statement of this unit supplies the elementary coefficient-ring infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-trf-source-bounded-flat-tor-amplitude",
+  "lem-weil-bounded-finite-tor-perfect",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-0aa2f5b73",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-0aa2f5b73 (reviewer sub-agent of L); spot-checked: This is a 0-node, 5-step split; the item statement is unchanged and there is no re-split note. It follows Step 1 of the main-20261015 thm-pod-point-perfectness proof and repairs two shortcuts there. First, the blueprint's 'point sheaves = A-modules' is replaced by an exact-sections tensor argument (stalk of a constant sheaf of arbitrary M, plus the ringed-evaluation-model comparison, which via lem-weil-pbc-ringed-topoi-derived-tensor-pullback holds for all derived objects, plus H^iΓ=ΓH^i). Second, lem-trf-finite-tor-amplitude-perfect gives no interval, so the split adds lem-weil-bounded-finite-tor-perfect on the finite-free Q (A is Noetherian local) to get P in [u,v]. In Step 4 I checked the sign of the dual from pod-projective-hom-evaluation-model (Stacks 0A66; RHom as in 0A5W, the same as def-pur-derived-internal-hom): (-1)^{i+1} f∘d_P, with D^i=Hom(P^{-i},A) in [-v,-u]. Step 5 gives perfectness, flat Tor amplitude [-v,-u] via lem-trf-source-bounded-flat-tor-amplitude, and finite cohomology. Small cases checked: N=0, u=v, n=1, and the excluded non-ctf residue module. Batch-5 flags: pod-projective-hom-evaluation-model is generic Stacks 0A66 module algebra, neither assumption nor a step of either proof, so accepted. ringed-evaluation-model reaches trf only through the general definition def-trf-geometric-morphism, so accepted. The tool_uses are generic and accepted. Advisories: Step 3 leaves the canonical truncation to a bounded complex implicit (elementary), and Step 1 uses the nonarchimedean clause of def-weil-l-adic-coefficient-extension, which is a stmt_dep only."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointTorAmplitudeRealization",
+  "declaration": "WeilConjectures.point_tor_amplitude_realization",
+  "file": "lean/Sheaf/Paper/PointTorAmplitudeRealization.lean",
+  "statement": "theorem point_tor_amplitude_realization (F : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ F.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) (hn : 1 ≤ n) (a b : ℤ) (_hab : a ≤ b) (N : (intrinsicFiniteTorsionConstructible l E n hn (Spec (.of F.k))).FullSubcategory) (_hTor : HasProEtaleTorAmplitude (Spec (.of F.k)) (Padic.coefficientExtensionRing l E n) N.obj a b) : ∀ C : DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))), C = ((pointFiniteFibre F l hl E n hn).obj N).obj → DerivedCategory.pointFiniteCohomology (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) C ∧ DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) a b C ∧ ∃ P : CochainComplex (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) ℤ, (∀ i : ℤ, i < a ∨ b < i → IsZero (P.X i)) ∧ (∀ i : ℤ, Module.Free (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) (P.X i) ∧ Module.Finite (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) (P.X i)) ∧ Nonempty (C ≅ DerivedCategory.Q.obj P) ∧ ∀ A₀ : CochainComplex (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) ℤ, A₀ = (CochainComplex.singleFunctor _ 0).obj (ModuleCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) → Nonempty ((ihom C).obj (DerivedCategory.Q.obj A₀) ≅ DerivedCategory.Q.obj (CochainComplex.moduleHomComplex P A₀)) ∧ (∃ α : ∀ i : ℤ, (CochainComplex.moduleHomComplex P A₀).X i ≃ₗ[ ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)] (P.X (-i) →ₗ[ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)] A₀.X 0), (∀ (i : ℤ) (f : (CochainComplex.moduleHomComplex P A₀).X i), α i f = (f.v (-i) 0 (neg_add_cancel i)).hom) ∧ (∀ (i : ℤ) (f : (CochainComplex.moduleHomComplex P A₀).X i), α (i + 1) ((CochainComplex.moduleHomComplex P A₀).d i (i + 1) f) = (i + 1).negOnePow • (α i f).comp (P.d (-(i + 1)) (-i)).hom)) ∧ DerivedCategory.IsPerfectRingComplex C ∧ DerivedCategory.IsPerfectRingComplex ((ihom C).obj (DerivedCategory.Q.obj A₀)) ∧ DerivedCategory.pointFiniteCohomology (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) ((ihom C).obj (DerivedCategory.Q.obj A₀)) ∧ DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) (-b) (-a) ((ihom C).obj (DerivedCategory.Q.obj A₀))",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the recorded pointFiniteFibre target with its canonical ULift coefficient ring, the ordinary derived closed internal Hom, and the existing signed moduleHomComplex. C and A₀ are universally quantified equality-bound names for the fibre and A[0], not additional restrictions on N. The extra landed statement dependency supplies the actual module-valued Hom complex."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fd0b9dd40",
+  "group": "N8",
+  "result": "pass",
+  "note": "Single theorem module, proof sorry, no defs; the node changes only in lean plus a landed def-sc-module-total-hom-complex stmt_dep; dependency records identical to live; statement verbatim. Clauses checked: torAmplitudeIn is cohomological (IsGE a ∧ IsLE b) over all ModuleCat.{u+1} test modules; P finite free in [a,b] with Nonempty C ≅ Q P; dual (ihom C).obj (Q A[0]) ≅ Q moduleHomComplex P A₀; α pinned to the coordinate f.v (-i) 0 and bijective because the other coordinates map into zero objects; sign (i+1).negOnePow matches Mathlib δ and Stacks; both perfectness clauses, dual finite cohomology and Tor in [-b,-a]. Edge cases N=0, a=b, n=1, rank 0 ok; no stronger hypotheses (_hab is redundant with the a≤b inside HasProEtaleTorAmplitude); universes ok. Advisories: ihom is used instead of the recorded abbrev ordinaryModuleDerivedInternalHom (same functor; report wording out of date); HasProEtaleTorAmplitude is the inner predicate of the recorded finiteTorConstructible. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261025T180606-L-4008002",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

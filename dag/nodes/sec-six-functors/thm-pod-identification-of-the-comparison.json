@@ -21,123 +21,54 @@
  ],
  "proof": [
   {
-   "text": "Work in [def-pod-conventions] at the fixed coefficient stage. Thus $a=a_X:X\\to s$ is separated finite type and admissible, $X$ is smooth of pure dimension $d$, and $K$ is bounded constructible finite-Tor and site-perfect [def-pod-perfect-complex-on-x]. Put\n$$C=Ra_!K,\\quad \\omega=Ra^!\\Lambda_s,\\quad L=R\\mathcal Hom_X(K,\\omega),\\quad D=Ra_*L,\\quad H=R\\mathcal Hom_s(C,\\Lambda_s).$$\nThese objects belong to their bounded constructible finite-Tor categories. At finite coefficients apply exceptional preservation, internal-Hom preservation, and both direct-image assertions of [thm-sf-ctf-stability]. Integrally use its clause (vii) for internal Hom, exceptional preservation and $D^b_c=D^b_{ctf}$, and [lem-sf-integral-direct-image-constructible] and [lem-sf-integral-compact-support-constructible] for $D$ and $C$. The same clause and the coefficient-passage constructions give the field stages. In particular the projection formula may be applied with second input $D$, and the exceptional counit is defined at $\\Lambda_s$.",
+   "text": "Apply [lem-pod-comparison-test-adjunctions] to the given $a=a_X,K$: the objects $C=Ra_!K$, $\\omega=Ra^!\\Lambda_s$, $L=R\\mathcal Hom_X(K,\\omega)$, $D=Ra_*L$, $H=R\\mathcal Hom_s(C,\\Lambda_s)$ lie in the stated finite-Tor categories, and $La^*T$, $K\\otimes^LLa^*T$ do for every $T\\in D^b_{ctf}(s,\\Lambda)$, in particular for $T=D,H$. With the counits $\\varepsilon_L,\\mu$ and projection maps $P_T$, put $e=\\operatorname{ev}_{K,\\omega}(1_K\\otimes\\varepsilon_L)$, $p_s=\\mu Ra_!eP_D$ and $b_s=\\operatorname{curry}(p_s):D\\to H$. By [lem-pod-smooth-pairing-point-transport], for $F=\\operatorname{Fib}_s$, $c=FC$ and $Q=R\\Gamma(X,K^\\vee(d))[2d]$, there are the specified isomorphisms $\\kappa:FH\\xrightarrow{\\sim}c^\\vee$ and $\\theta:FD\\xrightarrow{\\sim}Q$, with $b_K^\\sharp=\\kappa Fb_s\\theta^{-1}$.",
    "uses": [
+    "lem-pod-comparison-test-adjunctions",
+    "lem-pod-smooth-pairing-point-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
+    "place": "first and second paragraphs: domains, Hom chain and actual pairing"
+   }
+  },
+  {
+   "text": "Apply [lem-pod-hom-chain-counit-formula] with $(f,M,N)=(a,K,\\Lambda_s)$; its hypotheses $K\\in D^b_{ctf}(X,\\Lambda)$, $\\Lambda_s\\in D^b_{ctf}(s,\\Lambda)$ and the exceptional adjunction of $a$ hold by [def-pod-conventions]. Its objects are $L_N=L$, $A_N=D$, $B_N=H$, and its $p_N$ is $p_s$, so for every $T\\in D^b_{ctf}(s,\\Lambda)$ the composite of the five adjunction/projection bijections $\\Phi_T:\\operatorname{Hom}_s(T,D)\\simeq\\operatorname{Hom}_s(T,H)$ satisfies $\\Phi_T(t)=b_st$. By Step 1, $T=H$ and $T=D$ are allowed. Take $v=\\Phi_H^{-1}(1_H)$, so $b_sv=1_H$. Injectivity of $\\Phi_D$ gives $vb_s=1_D$, because $\\Phi_D(vb_s)=b_svb_s=b_s=\\Phi_D(1_D)$. Thus $b_s$ and consequently $b_K^\\sharp=\\kappa Fb_s\\theta^{-1}$ are isomorphisms of actual derived objects.",
+   "uses": [
+    "lem-pod-hom-chain-counit-formula",
     "def-pod-conventions",
-    "def-pod-perfect-complex-on-x",
-    "thm-sf-ctf-stability",
-    "lem-sf-integral-direct-image-constructible",
-    "lem-sf-integral-compact-support-constructible"
+    "lem-pod-comparison-test-adjunctions"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
-    "place": "first paragraph: geometry and domains"
+    "place": "third paragraph: naturality and actual morphism identification; two-sided inverse tests replace cohomological detection"
    }
   },
   {
-   "text": "Write $F=\\operatorname{Fib}_s$ [def-weil-finite-coefficient-point], $c=FC$, and $h=R\\operatorname{Hom}_\\Lambda(c,\\Lambda)$. Use the tensor/unit comparison $\\tau_{M,N}:F(M\\otimes N)\\xrightarrow{\\sim}FM\\otimes FN$ of [lem-sf-point-fibre-derived-tensor]. The evaluation-defined comparison\n$$\\kappa:FH\\longrightarrow h$$\nis precisely the specified map in [lem-pod-global-duality-map-identification]. That statement gives $j=\\kappa F\\rho$, where $j:F(D_sC)\\to h$ is the isomorphism of [lem-pod-point-dualizing-complex] and $\\rho=R\\mathcal Hom_s(C,u)$ for the identity-adjunction isomorphism $u:\\omega_s\\to\\Lambda_s$. Hence $\\rho$ is invertible, with inverse $R\\mathcal Hom_s(C,u^{-1})$, and $\\kappa=j(F\\rho)^{-1}$ is invertible. By its definition as the transpose of transported evaluation,\n$$\\operatorname{ev}^{\\mathrm{coeff}}(1_c\\otimes\\kappa)=F(\\operatorname{ev}_{C,\\Lambda_s})\\tau_{C,H}^{-1}.$$\nConsequently, for any $v:V\\to H$, the coefficient transpose of $F(\\operatorname{ev}_{C,\\Lambda_s}(1_C\\otimes v))\\tau_{C,V}^{-1}$ is $\\kappa Fv$: substitute the displayed identity and naturality of $\\tau$, then apply the inverse transpose laws [lem-pod-closed-uncurry-laws]. This uses the existing normalization lemma for the point internal-Hom comparison, rather than reproving that comparison on shifted-unit tests.",
-   "uses": [
-    "def-weil-finite-coefficient-point",
-    "lem-sf-point-fibre-derived-tensor",
-    "lem-pod-global-duality-map-identification",
-    "lem-pod-point-dualizing-complex",
-    "lem-pod-closed-uncurry-laws"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
-    "place": "first paragraph: evaluated internal-Hom comparison"
-   }
-  },
-  {
-   "text": "Let $\\varepsilon_L:La^*D\\to L$ and $\\mu:Ra_!\\omega\\to\\Lambda_s$ be the counits [fix-prop-adjunctions], and write $P_T=\\operatorname{PF}_{a,K,T}$ [fix-prop-projection-formula]. Define the sheaf pairing and its coefficient version by\n$$e=\\operatorname{ev}_{K,\\omega}(1_K\\otimes\\varepsilon_L),\\qquad p_s=\\mu\\,Ra_!e\\,P_D,\\qquad p=Fp_s\\,\\tau_{C,D}^{-1}.$$\nThis is exactly the mixed-support cup product followed by evaluation and the exceptional counit: [def-pod-mixed-support-cup-product] specifies the projection input $Ra_*L=D$ and then the ordinary counit, evaluated by $F$ with this tensor comparison. The evaluation-compatible smooth comparison of [thm-sf-dual-perfect] gives\n$$\\theta:FD\\xrightarrow{\\sim}Q=R\\Gamma(X,K^\\vee(d))[2d].$$\nThe coefficient evaluation [def-pod-coefficient-dual-on-x] and the all-stage trace normalization in [def-pod-derived-poincare-pairing] give\n$$\\beta_K=p(1_c\\otimes\\theta^{-1}).$$\nIndeed the latter trace is the exceptional counit through the same orientation used by $\\theta$; evaluation compatibility and naturality of the cup construction identify every preceding arrow. Put $b_s=\\operatorname{curry}(p_s):D\\to H$. Step 2 and [lem-pod-closed-uncurry-laws] now give\n$$b_K^\\sharp=\\kappa Fb_s\\,\\theta^{-1}.$$\nNo higher-coefficient trace assertion is taken from a finite-only trace node.",
-   "uses": [
-    "fix-prop-adjunctions",
-    "fix-prop-projection-formula",
-    "def-pod-mixed-support-cup-product",
-    "thm-sf-dual-perfect",
-    "def-pod-coefficient-dual-on-x",
-    "def-pod-derived-poincare-pairing",
-    "lem-pod-closed-uncurry-laws"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
-    "place": "first paragraph: actual pairing and smooth comparison"
-   }
-  },
-  {
-   "text": "Take an arbitrary $T\\in D^b_{ctf}(s,\\Lambda)$, not just a shift of the unit. By [thm-sf-ctf-stability], $La^*T$ and $K\\otimes^L_{\\Lambda_X}La^*T$ lie in $D^b_{ctf}(X,\\Lambda)$, so the projection formula applies to $(K,T)$ and the exceptional adjunction applies to its tensor product and $\\Lambda$. The ordinary and exceptional adjunctions at all four coefficient stages are [fix-prop-adjunctions] (1), (2), with the exceptional functor of [def-weil-exceptional-inverse-image]. The restricted tensor–internal-Hom adjunction is [det-thm-sf-ctf-stability-adjunctions] (2), with the symmetry interchanging the tensor factors when needed. The operations are those of [def-weil-derived-pullback-tensor-hom]. Thus the adjunctions and the projection isomorphism [def-exchange-projection], [fix-prop-projection-formula] give a natural bijection $\\Phi_T$:\n$$\n\\begin{aligned}\n\\operatorname{Hom}_s(T,D)\n&\\cong\\operatorname{Hom}_X(La^*T,L)\\\\\n&\\cong\\operatorname{Hom}_X(K\\otimes^L_{\\Lambda_X}La^*T,Ra^!\\Lambda)\\\\\n&\\cong\\operatorname{Hom}_s(Ra_!(K\\otimes^L_{\\Lambda_X}La^*T),\\Lambda)\\\\\n&\\cong\\operatorname{Hom}_s(C\\otimes^L_\\Lambda T,\\Lambda)\\\\\n&\\cong\\operatorname{Hom}_s(T,H).\n\\end{aligned}\n$$\nThe first bijection sends $t$ to $\\varepsilon_L\\circ La^*t$, where $\\varepsilon$ is the ordinary counit. The next sends it to evaluation against $K$, the third sends $e$ to $\\mu\\circ Ra_!e$, and the fourth precomposes with $P_T=\\operatorname{PF}_{a,K,T}:C\\otimes T\\xrightarrow{\\sim}Ra_!(K\\otimes La^*T)$. The fifth curries, with evaluation and transpose laws [lem-pod-closed-uncurry-laws]. These are natural bijections on every test object in the stated category; no adjunction for ordinary uncompleted integral operations has been substituted for the completed one.",
-   "uses": [
-    "thm-sf-ctf-stability",
-    "fix-prop-adjunctions",
-    "def-weil-exceptional-inverse-image",
-    "det-thm-sf-ctf-stability-adjunctions",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-exchange-projection",
-    "fix-prop-projection-formula",
-    "lem-pod-closed-uncurry-laws"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
-    "place": "second paragraph and displayed Hom chain"
-   }
-  },
-  {
-   "text": "In the Hom bijection $\\Phi_T$ just constructed, let $t:T\\to D$ and put $e_t=e(1_K\\otimes La^*t)$. Naturality of [fix-prop-projection-formula] gives\n$$P_D(1_C\\otimes t)=Ra_!(1_K\\otimes La^*t)P_T.$$\nThus the uncurried value of the Hom chain is\n$$\\mu Ra_!e_t P_T=\\mu Ra_!e P_D(1_C\\otimes t)=p_s(1_C\\otimes t).$$\nThe transpose laws [lem-pod-closed-uncurry-laws] give $\\Phi_T(t)=b_s t$. This explicitly identifies the morphism represented by the adjunction chain with the specified pairing, rather than only identifying its source and target. Take $T=H$ and $v=\\Phi_H^{-1}(1_H)$. Then $b_s v=1_H$. At $T=D$, injectivity of $\\Phi_D$ gives $v b_s=1_D$, since\n$$\\Phi_D(vb_s)=b_svb_s=b_s=\\Phi_D(1_D).$$\nBoth tests are allowed by Step 1. Hence $b_s$ is an isomorphism, and so is $b_K^\\sharp=\\kappa Fb_s\\theta^{-1}$. This is a two-sided inverse argument on actual morphisms; equality of cohomology maps is not used to identify derived maps.",
-   "uses": [
-    "fix-prop-projection-formula",
-    "lem-pod-closed-uncurry-laws"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
-    "place": "third paragraph: projection naturality and inverse identities"
-   }
-  },
-  {
-   "text": "Apply [lem-pod-global-duality-map-identification] with these $a,K,C,\\omega,L,D,H$ and the comparison $\\kappa$ fixed in Step 2. Its formula\n$$\\alpha_s=\\operatorname{curry}\\bigl(\\mu Ra_!(\\operatorname{ev}_{K,\\omega}(1_K\\otimes\\varepsilon_L))P_D\\bigr)$$\nis exactly $b_s$, by the definition in Step 3. The lemma states, for the actual canonical global Verdier-duality map $g:c^\\vee\\to FD$, that\n$$g=(\\kappa F\\alpha_s)^{-1}=(\\kappa Fb_s)^{-1}.$$\nThe global map here is the one of [thm-pod-global-verdier-duality], not an independently chosen isomorphism. Therefore\n$$(\\theta g)b_K^\\sharp=\\theta g\\kappa Fb_s\\theta^{-1}=1_Q,\\qquad b_K^\\sharp(\\theta g)=\\kappa Fb_sg=1_{c^\\vee}.$$\nIts inverse is global Verdier duality followed by the smooth comparison $\\theta$ of [thm-sf-dual-perfect], as claimed. The normalization and point-comparison argument formerly hidden in the long final step is now an explicit citation of the existing lemma's statement. Properness is used nowhere.",
+   "text": "The specified map $\\alpha_s$ of [lem-pod-global-duality-map-identification] is literally $b_s=\\operatorname{curry}(\\mu Ra_!eP_D)$. That lemma identifies the canonical global Verdier map $g:c^\\vee\\to FD$ as $g=(\\kappa Fb_s)^{-1}$, using exactly the evaluation-defined $\\kappa$ in [lem-pod-smooth-pairing-point-transport]. Hence $(\\theta g)b_K^\\sharp=\\theta g\\kappa Fb_s\\theta^{-1}=1_Q$ and $b_K^\\sharp(\\theta g)=\\kappa Fb_sg=1_{c^\\vee}$. The inverse is therefore the actual global Verdier-duality isomorphism followed by the smooth-purity comparison $\\theta$, as claimed.",
    "uses": [
     "lem-pod-global-duality-map-identification",
-    "thm-pod-global-verdier-duality",
-    "thm-sf-dual-perfect"
+    "lem-pod-smooth-pairing-point-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
-    "place": "third and fourth paragraphs: specified inverse identification"
+    "place": "final paragraph: inverse is the canonical global duality map through the smooth orientation"
    }
   }
  ],
  "proof_deps": [
-  "def-exchange-projection",
-  "def-pod-coefficient-dual-on-x",
+  "lem-pod-comparison-test-adjunctions",
+  "lem-pod-smooth-pairing-point-transport",
+  "lem-pod-hom-chain-counit-formula",
   "def-pod-conventions",
-  "def-pod-derived-poincare-pairing",
-  "def-pod-mixed-support-cup-product",
-  "def-pod-perfect-complex-on-x",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-exceptional-inverse-image",
-  "def-weil-finite-coefficient-point",
-  "det-thm-sf-ctf-stability-adjunctions",
-  "fix-prop-adjunctions",
-  "fix-prop-projection-formula",
-  "lem-pod-closed-uncurry-laws",
-  "lem-pod-global-duality-map-identification",
-  "lem-pod-point-dualizing-complex",
-  "lem-sf-integral-compact-support-constructible",
-  "lem-sf-integral-direct-image-constructible",
-  "lem-sf-point-fibre-derived-tensor",
-  "thm-pod-global-verdier-duality",
-  "thm-sf-ctf-stability",
-  "thm-sf-dual-perfect"
+  "lem-pod-global-duality-map-identification"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-identification-of-the-comparison.proof.md",
-  "place": "complete proof"
+  "place": "complete proof, with extracted test-adjunction and point-transport arguments"
  },
  "mathlib_searches": [
   {
@@ -217,22 +148,81 @@
   "def-pod-perfect-derived-pairing"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-package",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "thm-pod-identification-of-the-comparison",
   "worker": "stage1",
-  "summary": "Second reading repaired the all-stage ordinary-adjunction citation, explicitly supplied finite-Tor preservation and the restricted tensor-Hom adjunction, expanded the projection-naturality calculation identifying the actual pairing, and used arbitrary finite-Tor point test objects to construct and verify the inverse. The inverse comparison is identified as a derived morphism, not merely through its cohomology. No new nodes. Repair 2026-10-17: revalidated the current mixed-support definition; made its point-fibre/tensor transport explicit in Steps 1 and 3 and replaced the type-only quotations by the full defining projection/counit composite. Existing point-fibre equivalence and tensor-comparison nodes supply this transport; no new nodes. Fresh second reading: refreshed stale conventions quotations; supplied explicit integral ordinary/compact-support constructibility; replaced unsupported essential-surjectivity transport by the evaluation-defined internal-Hom comparison, proved invertible on shifted units while retaining map-level evaluation compatibility. Repair 2026-10-17: added a focused map-identification lemma showing that the global Verdier exchange, after the point dualizing comparison, is the inverse of the same tensor–Hom adjunction map; Step 3 now cites that lemma, [lem-pod-point-dualizing-complex], [fix-lem-tensor-adjunction], and [fix-cor-verdier-exchange]. Final repair audit: made the new normalization lemma specify the actual counit/projection transpose, both tensor–Hom comparisons, the exchange and the evaluation-defined point identification; put its complete source-based proof in report.md while retaining the required statement-only unsplit node. Removed Step 3 appeals to facts appearing only in proofs of older nodes. Q16 re-split repair: retained the original adjunction-chain step and its route; separated domain checks, point comparison, pairing identification, projection calculation and inverse identification. The existing lem-pod-global-duality-map-identification now supplies the hidden point internal-Hom and global-map normalization arguments by its statement. No new node; every proof step is below 2000 characters; statement and Lean records unchanged.",
-  "blueprint": "First paragraph: Steps 1–3 (domains, evaluated internal Hom, smooth evaluation and pairing); second paragraph: Step 4, original five Hom bijections retained verbatim; third paragraph: Step 5 (projection/counit calculation); final inverse identification: Step 6. The hidden point comparison and canonical inverse normalization are cited from existing lem-pod-global-duality-map-identification, not proved inline."
+  "summary": "Re-split repair: extracted two comparable, independent statement-only tasks: finite-Tor domains and the specified five adjunction bijections; and point evaluation transport together with the smooth trace-cup factorization. Preserved the full extracted arguments verbatim in report.md. The parent retains the projection-naturality/two-sided-inverse calculation and the canonical global-map identification. Statement, blueprint fields, import flags and Lean audit retained. Maintainer reader (2026-10-22): the five-bijection chain and its formula Phi_T(t)=curry(p)t are the existing reviewed lem-pod-hom-chain-counit-formula at (f,M,N)=(a,K,Lambda_s), which now carries old steps 4-5 in parent step 2; lem-pod-comparison-test-adjunctions was restated to its non-duplicate content, the finite-Tor domains of old step 1 (including the tests T=D,H).",
+  "blueprint": "First paragraph (objects and domains) is realized by lem-pod-comparison-test-adjunctions; the smooth identification and the pairing as cup/evaluation/counit by lem-pod-smooth-pairing-point-transport; the second paragraph's Hom chain and the third paragraph's 'induced by b_K^sharp' by the existing lem-pod-hom-chain-counit-formula in parent step 2, with a two-sided-inverse argument replacing the H^r detection; the final inverse identification by parent step 3 through the existing lem-pod-global-duality-map-identification."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q16-cdd54b653",
-  "group": "Q16",
+  "reviewer": "NT-cc-NG-3c40c3a82",
+  "group": "NG",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-cdd54b653 (reviewer sub-agent of L); spot-checked: I read the item, all 24 cited statements, the main-20261015 statement and proof (statement identical to master), the unit route and the Q16 return. The statement is verbatim and unchanged: four coefficient stages, nonproper X, admissible a_X, site-perfect K in D^b_ctf. The return asked for the hidden arguments in old steps 1 and 3 to become cited nodes. They are now citations of the statement of the existing, reviewed node lem-pod-global-duality-map-identification; its proof_deps do not reach the item, so there is no cycle, and it is strictly smaller (no orientation, no pairing). All six steps are under 2000 characters and proof_deps equals the union of step uses. Checks: Step 1 domains come from thm-sf-ctf-stability (ii)-(v) and (vii) and the two integral constructibility lemmas. Step 2: kappa = j(F rho)^{-1} is invertible, and I recomputed the transpose identity from naturality of tau and the uncurry laws. Step 3: beta_K = p(1 tensor theta^{-1}) follows from the cup definition, the trace as counit through eta_X and the evaluation compatibility in thm-sf-dual-perfect; hence b^# = kappa F b_s theta^{-1}. Step 4: all five bijections match fix-prop-adjunctions (1),(2), det-thm-sf-ctf-stability-adjunctions (2) and PF. Step 5: I recomputed Phi_T(t) = b_s t from PF naturality; the tests at T=H and T=D give a two-sided inverse of actual maps. Step 6: alpha_s = b_s literally, and the lemma gives g = (kappa F alpha_s)^{-1}, so theta g is the inverse. All cited units are on the transitive route of sk-thm-sf-package; there are no tool_uses and no SGA. Edge cases: K=0, X=s with d=0 (through u), n=1, nonproper A^1. One FIX (B9): the item's blueprint.same_as was empty although the blueprint node thm-sf-identification states the same identification for an abstract six-functor datum. I set same_as to [thm-sf-identification]; the whole corrected file is in fixes/dag/nodes/sec-six-functors/. No other change.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-3c40c3a82 (reviewer sub-agent of L); spot-checked: I read all of the delivery against the 2026-10-22 re-split note (at least 2 nodes, parent at most 3000 chars), the Q16-reviewed 6-step base (7296 chars), the main-20261015 statement and proof, and every cited statement. The item statement is unchanged. Each old argument has a carrier. Old step 1 (finite-Tor domains) is new node A. Old steps 2-3 (kappa, j=kappa F rho, theta, beta_K=p(1 x theta^-1), b#=kappa F b_s theta^-1) are new node B. Old step 4 (the Hom chain) is the existing lem-pod-hom-chain-counit-formula. Old step 5 (two-sided inverse) is parent step 2 and old step 6 (g=(kappa F b_s)^-1) is parent step 3. Two faults repaired. (1) C5/D1: lem-pod-comparison-test-adjunctions restated the existing reviewed Q19 node lem-pod-hom-chain-counit-formula, the same unit's five-bijection chain with Phi_T(t)=curry(p_N)t at (f,M,N)=(a,K,Lambda_s), and the report did not mention it. I kept the id and restated the node to its only non-duplicate content: C, D, H, omega, L and La^*T, K tensor La^*T lie in D^b_ctf at all four stages, including the test objects T=D and T=H. The sources are thm-sf-ctf-stability (i)-(v), (vii) and the two integral constructibility lemmas. Parent step 2 now cites the chain node at (a,K,Lambda_s). (2) B3: lem-pod-smooth-pairing-point-transport used curry and evaluation without citing det-thm-sf-ctf-stability-adjunctions (2) or lem-pod-closed-uncurry-laws; both are added. I re-derived node B: beta_K follows from naturality of PF and of the counit in the second input, plus the evaluation compatibility of thm-sf-dual-perfect with the same eta_X used in the trace. The transpose clause follows from naturality of tau and the defining identity of kappa. Small cases checked: K=0, X=s with d=0, A^1 (Ra_! is never confused with Ra_*), and the Q-bar unit u_0. After the fix the parent is 2119 chars in 3 steps, proof_deps equals the union of step uses, there is no cycle, and the item's closure equals the delivered closure. Batch-5 flags: lem-pod-point-dualizing-complex (reaching the point-sections derived reduction) and thm-sf-dual-perfect (reaching the Mathlib-leaf uncurry laws) are generic point and closed-monoidal facts. Old steps 2 and 3 already cited both, so the batch-5 closure is unchanged and both are accepted. No SGA source is cited and no tool_uses are declared. Advisory: lean_audit is absent on both new nodes.; 3 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Fix $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$, the smooth\ngeometrically connected $k$-scheme $X=X_0\\times_{k_0}k$ of dimension $d$\n(not necessarily proper), and its\nstructure morphism $a_X:X\\to s=\\operatorname{Spec}k$ as in\nthe Poincare duality conventions.\nLet $K\\in D^b_{ctf}(X,\\Lambda)$ be\nperfect over $\\Lambda_X$, with\ncoefficient dual $K^\\vee$.\nThe tensor–internal-Hom adjoint of the\nderived Poincare pairing is\nthe canonical isomorphism\n\n$$\nb_K^\\sharp:R\\Gamma(X,K^\\vee(d))[2d]\n\\xrightarrow{\\ \\sim\\ }R\\operatorname{Hom}_\\Lambda(R\\Gamma_c(X,K),\\Lambda).\n$$\n\nIts inverse is the global Verdier-duality isomorphism followed by the\nsmooth-purity identification of the Verdier dual.",
+  "proof": [
+   {
+    "text": "Work for the chosen coefficient ring. The adjunctions, tensor–Hom\noperations and projection transformation below are those at that stage\nin [fix-prop-projection-formula] and the adjunction definitions cited below.\nThey are taken for the chosen coefficient ring.\nPut $C=Ra_{X!}K$, $\\omega=Ra_X^!\\Lambda$, and\n$D=Ra_{X*}R\\mathcal Hom_X(K,\\omega)$. The identification\n[thm-sf-dual-perfect] identifies $D$ with the first\nobject of the displayed map. By\n[def-pod-derived-poincare-pairing], [def-pod-coefficient-dual-on-x], [def-pur-smooth-trace],\nthe pairing, before this identification, is cup product followed by\nevaluation into $\\omega$ and the counit $Ra_{X!}\\omega\\to\\Lambda$.",
+    "uses": [
+     "fix-prop-projection-formula",
+     "thm-sf-dual-perfect",
+     "def-pod-derived-poincare-pairing",
+     "def-pod-coefficient-dual-on-x",
+     "def-pur-smooth-trace"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Let $T=\\Lambda[-r]$ for any integer $r$. This is a perfect point\ncomplex, so its pullback and its tensor product with $K$ are in the\nstated finite-Tor domains. The adjunctions and projection\nformula give natural bijections\n\n$$\n\\begin{aligned}\n\\operatorname{Hom}_s(T,D)\n&\\cong\\operatorname{Hom}_X(La_X^*T,R\\mathcal Hom_X(K,\\omega))\\\\\n&\\cong\\operatorname{Hom}_X(K\\otimes_\\Lambda^LLa_X^*T,Ra_X^!\\Lambda)\\\\\n&\\cong\\operatorname{Hom}_s(Ra_{X!}(K\\otimes_\\Lambda^LLa_X^*T),\\Lambda)\\\\\n&\\cong\\operatorname{Hom}_s(C\\otimes_\\Lambda^LT,\\Lambda)\\\\\n&\\cong\\operatorname{Hom}_s(T,R\\operatorname{Hom}_\\Lambda(C,\\Lambda)).\n\\end{aligned}\n$$\n\nHere the first bijection is $La_X^*\\dashv Ra_{X*}$ from\n[def-weil-derived-direct-image]; the second and fifth are\ntensor–internal-Hom adjunction from\n[def-weil-derived-pullback-tensor-hom]; the third is\n$Ra_{X!}\\dashv Ra_X^!$ from\n[def-weil-exceptional-inverse-image]; and the fourth is the\nprojection formula of [def-exchange-projection], [fix-prop-projection-formula].",
+    "uses": [
+     "def-weil-derived-direct-image",
+     "def-weil-derived-pullback-tensor-hom",
+     "def-weil-exceptional-inverse-image",
+     "def-exchange-projection",
+     "fix-prop-projection-formula"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "These bijections are induced by $b_K^\\sharp$, not merely abstract\nbijections of groups. Indeed, a map $t:T\\to D$ is first pulled back\nand composed with the counit $La_X^*Ra_{X*}\\to\\mathrm{id}$, then\nevaluated against $K$, then pushed forward and composed with\n$Ra_{X!}Ra_X^!\\Lambda\\to\\Lambda$. By\n[def-pod-mixed-support-cup-product], this is precisely the map\n$C\\otimes T\\xrightarrow{1\\otimes t}C\\otimes D\\to\\Lambda$\nobtained from the specified pairing. Its tensor–Hom transpose is\n$b_K^\\sharp\\circ t$. Thus $b_K^\\sharp$ induces an isomorphism on\nevery $H^r=\\operatorname{Hom}_s(\\Lambda[-r],-)$, under the point-category\nequivalences for all four kinds of admissible coefficients in\n[def-weil-finite-coefficient-point]; its cone has zero\ncohomology and is zero by [def-weil-derived-cohomology-sheaves].\nThis proves that the actual adjoint is an isomorphism. The same\nadjunction and evaluation characterize the canonical global-duality\ncomparison of [thm-pod-global-verdier-duality]; consequently the\ncomparison written there in the reverse direction is its inverse. At every\nstep the two inputs used are separated: the adjunction, projection and\ntensor–internal-Hom calculus is [lem-sf-tensor-hom], [thm-sf-verdier-exchange],\nwhose abstract outcome is [thm-sf-identification], and the identification\nof the Verdier dual of a smooth $X$ with $K^\\vee (d)[2d]$ is the\nsmooth-purity orientation [thm-pur-finite-coefficient-smooth-purity]\nconsumed through [thm-sf-dual-perfect].\nProperness of $X$ is used nowhere in this argument: the adjunctions,\nthe projection formula and the smooth-purity orientation hold for any\nsmooth separated finite-type $X$ with admissible $a_X$.",
+    "uses": [
+     "def-pod-mixed-support-cup-product",
+     "def-weil-finite-coefficient-point",
+     "def-weil-derived-cohomology-sheaves",
+     "thm-pod-global-verdier-duality",
+     "lem-sf-tensor-hom",
+     "thm-sf-verdier-exchange",
+     "thm-sf-identification",
+     "thm-pur-finite-coefficient-smooth-purity",
+     "thm-sf-dual-perfect"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

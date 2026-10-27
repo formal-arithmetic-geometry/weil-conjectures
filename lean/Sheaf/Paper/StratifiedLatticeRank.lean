@@ -15,6 +15,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import Sheaf.Paper.ContinuousCoefficientFreeRank
 import Sheaf.AlgebraicGeometry.FpqcLabelledClopenDescent
 import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
+public import Mathlib.Order.CompletePartialOrder
 
 /-!
 # The clopen rank decomposition of a lisse coefficient module

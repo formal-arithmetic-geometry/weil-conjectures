@@ -1,0 +1,121 @@
+{
+ "id": "lem-pur-native-sequence-restriction-properties",
+ "kind": "statement",
+ "title": "Native sequence restriction is right adjoint and inverse-limit acyclic",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a scheme $W$. Let $V_W$ be coefficientSequenceRestriction, the actual scalar restriction of native quotient-ring sequence modules to towers over the completed integral coefficient sheaf [def-coef-ringed-sequence-site]. Then $V_W$ is right adjoint. If $I$ is any K-injective native sequence complex and $j:V_W I\\to T$ is any quasi-isomorphism to a K-injective tower complex, then $\\lim j$ is a quasi-isomorphism. Complexes are unbounded and no flatness or K-injectivity of $V_W I$ is assumed.",
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-kinjective-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940 and 0941; extracted retained ordinary-limit argument from def-pur-native-constant-support-model, Steps 1 and 2."
+ },
+ "proof": [
+  {
+   "text": "The actual completed coefficient projections form a morphism from the constant completed ring sheaf to the quotient-ring sequence: the inverse-limit cone equations prove adjacent compatibility. Under the strict-system/sequence equivalence the generic restriction functor equals coefficientSequenceRestriction, by its sectionwise uniqueness: level actions, horizontal maps and morphisms have the specified formulas. Compose the generic extension/restriction adjunction with the equivalence to obtain right adjointness.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-pur-system-ringed-sequence-site",
+    "lem-coef-restricted-tower-resolution-acyclicity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The additive sequence-to-strict-system equivalence preserves K-injective complexes. Apply limit_restricted_quasiIso to the resulting K-injective strict system and the given resolution of its restricted tower. Transport along the functor equality to obtain the required inverse-limit quasi-isomorphism.",
+   "uses": [
+    "lem-pur-system-evaluation-topos",
+    "def-sfb-preserves-kinjective-complexes",
+    "lem-coef-restricted-tower-resolution-acyclicity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-sfb-preserves-kinjective-complexes",
+  "lem-coef-restricted-tower-resolution-acyclicity",
+  "lem-pur-system-evaluation-topos",
+  "lem-pur-system-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940 and 0941; existing complete private proof of sequenceRestriction_properties extracted without mathematical change."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from varying ring module sequences to constant completed coefficient towers is right adjoint and inverse-limit acyclic on K-injective systems",
+   "results": "8 hits, including ModuleCat.instIsRightAdjointRestrictScalars and condensed adjunctions; no native sequence/limit statement.",
+   "date": "2026-10-27",
+   "verdict": "No specialized replacement; reuse the existing project proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.PreservesKInjectiveComplexes",
+   "results": "0 hits; unknown identifier in Mathlib search.",
+   "date": "2026-10-27",
+   "verdict": "Project equivalence preservation is available in adopted source."
+  },
+  {
+   "tool": "grep",
+   "query": "limit_restricted_quasiIso|sequenceToStrictSystemAdditive",
+   "results": "0 Mathlib hits; local project search finds the generic restricted-tower acyclicity and sequence-equivalence additivity used in the proof.",
+   "date": "2026-10-27",
+   "verdict": "Use existing project generic declarations."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeConstantSupportModel",
+  "date": "2026-10-27",
+  "group": "H8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-native-constant-support-model",
+   "place": "Retained proof Steps 1 and 2; extracted to compile the ordinary-limit argument independently after optimizing slow definitions.",
+   "via": [
+    "def-pur-native-constant-support-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeSequenceRestrictionProperties",
+  "file": "lean/Sheaf/Paper/NativeSequenceRestrictionProperties.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.nativeSequenceRestriction_properties",
+  "statement": "theorem nativeSequenceRestriction_properties\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{u}) :\n    (coefficientSequenceRestriction.{u, u} l E W).IsRightAdjoint ∧\n      ∀ (I : CochainComplex (coefficientSequenceModules.{u, u} l E W) ℤ)\n        [I.IsKInjective] (T : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)\n        [T.IsKInjective]\n        (j : ((coefficientSequenceRestriction.{u, u} l E W).mapHomologicalComplex\n          (.up ℤ)).obj I ⟶ T) [QuasiIso j],\n        QuasiIso (((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ _).mapHomologicalComplex\n          (.up ℤ)).map j)",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261026T195403-L-2941333",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261026T195403-L-2941333",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -11,8 +11,9 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Sites.Sheafification
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
+import Sheaf.AlgebraicGeometry.EtalePullbackRelationPresheaf
+import Sheaf.AlgebraicGeometry.FppfUniversalUnitLocallyInjective
+import Mathlib.CategoryTheory.Sites.LocallyBijective
 
 /-!
 # Restriction of an étale equivalence relation
@@ -28,6 +29,49 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.AlgebraicSpace
+
+-- The image-subsheaf argument only needs the specified universal property;
+-- it does not assume sheafification for all small-valued presheaves on the big site.
+private theorem universal_locally_surjective
+    {C : Type*} [Category* C] (J : GrothendieckTopology C)
+    {P : Cᵒᵖ ⥤ Type u} (F : Sheaf J (Type u)) (η : P ⟶ F.obj)
+    (hη : ∀ G : Sheaf J (Type u),
+      Function.Bijective (fun k : F.obj ⟶ G.obj ↦ η ≫ k)) :
+    Presheaf.IsLocallySurjective J η := by
+  let R := (Subfunctor.range η).sheafify J
+  have hR : Presheaf.IsSheaf J R.toFunctor :=
+    (isSheaf_iff_isSheaf_of_type J _).mpr
+      ((Subfunctor.range η).sheafify_isSheaf
+        ((isSheaf_iff_isSheaf_of_type J _).mp F.property))
+  obtain ⟨l, hl⟩ := (hη ⟨R.toFunctor, hR⟩).surjective (Subfunctor.toRangeSheafify J η)
+  have he : l ≫ R.ι = 𝟙 F.obj := by
+    apply (hη F).injective
+    change η ≫ l ≫ R.ι = η ≫ 𝟙 F.obj
+    dsimp only at hl
+    rw [← Category.assoc, hl]
+    simp [Subfunctor.toRangeSheafify, R]
+  rw [Presheaf.isLocallySurjective_iff_range_sheafify_eq_top']
+  apply le_antisymm le_top
+  intro T z _
+  have hz : (l.app T z).val = z := by
+    simpa using ConcreteCategory.congr_hom (NatTrans.congr_app he T) z
+  exact hz ▸ (l.app T z).property
+
+private theorem etale_cover_locally_surjective
+    {S : Scheme.{u}} {U U' : Over S} (g : U' ⟶ U)
+    [Etale g.left] [Surjective g.left] :
+    Presheaf.IsLocallySurjective (Scheme.fppfTopology.over S) (yoneda.map g) := by
+  have hg : Sieve.generate (Presieve.singleton g) ∈ (Scheme.fppfTopology.over S) U := by
+    rw [GrothendieckTopology.mem_over_iff]
+    change (Sieve.generate (Presieve.singleton g)).functorPushforward (Over.forget S) ∈ _
+    rw [← Sieve.generate_map_eq_functorPushforward, Presieve.map_singleton]
+    exact Precoverage.generate_mem_toGrothendieck g.left.singleton_mem_fppfPrecoverage
+  constructor
+  intro T a
+  apply (Scheme.fppfTopology.over S).superset_covering ?_
+    ((Scheme.fppfTopology.over S).pullback_stable a hg)
+  rintro Z b ⟨V, c, _, ⟨⟩, hc⟩
+  exact ⟨c, hc⟩
 
 /-- The iterated pullback relation obtained by restricting an étale relation along `g`.
 Source: Stacks, Spaces, Tag 02WT (blueprint: lem-trf-etale-relation-restriction-quotient). -/
@@ -116,6 +160,51 @@ theorem etale_relation_restriction_quotient {S : Scheme.{u}} {R U U' : Over S}
           (yoneda.map (restrictedEtaleRelationTarget s t g)) ≫ η') ≫ α =
         yoneda.map g ≫ (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η) ∧
       Mono α ∧ (Surjective g.left → IsIso α) := by
-  sorry
+  obtain ⟨s', t', r', rfl, rfl, _, _, _, hm, _, hrel', hs', ht',
+    hq, _, _, _, v, _, hv, hcompat⟩ := etale_pullback_relation_presheaf s t hrel g
+  refine ⟨hm, hrel', hs', ht', ?_⟩
+  obtain ⟨α, hα⟩ := (hη' F).surjective (v ≫ η)
+  change η' ≫ α = v ≫ η at hα
+  change coequalizer.π (yoneda.map (restrictedEtaleRelationSource s t g))
+    (yoneda.map (restrictedEtaleRelationTarget s t g)) ≫ v =
+      yoneda.map g ≫ coequalizer.π (yoneda.map s) (yoneda.map t) at hcompat
+  have hcanonical :
+      (coequalizer.π (yoneda.map (restrictedEtaleRelationSource s t g))
+        (yoneda.map (restrictedEtaleRelationTarget s t g)) ≫ η') ≫ α =
+      yoneda.map g ≫ (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η) := by
+    rw [Category.assoc, hα, ← Category.assoc, hcompat, Category.assoc]
+  let J := Scheme.fppfTopology.over S
+  have : Presheaf.IsLocallySurjective J η' := universal_locally_surjective J F' η' hη'
+  have : Presheaf.IsLocallySurjective J η := universal_locally_surjective J F η hη
+  have : Presheaf.IsLocallyInjective J η :=
+    Scheme.fppf_universal_unit_locally_injective _ F η hη
+  have : Presheaf.IsLocallyInjective J v :=
+    Presheaf.isLocallyInjective_of_injective J v (fun T ↦ hv T.unop)
+  have : Presheaf.IsLocallyInjective J (v ≫ η) := inferInstance
+  have : Presheaf.IsLocallyInjective J α :=
+    Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac J
+      (v ≫ η) hα
+  let αs : F' ⟶ F := ⟨α⟩
+  have hmono : Mono α := by
+    apply (NatTrans.mono_iff_mono_app α).mpr
+    intro T
+    apply (mono_iff_injective _).mpr
+    exact (Sheaf.isLocallyInjective_iff_injective αs).mp inferInstance T
+  refine ⟨α, hcanonical, hmono, ?_⟩
+  intro hg
+  have : Surjective g.left := hg
+  have : Presheaf.IsLocallySurjective J (yoneda.map g) :=
+    etale_cover_locally_surjective g
+  have : Presheaf.IsLocallySurjective J
+      (coequalizer.π (yoneda.map s) (yoneda.map t)) :=
+    Presheaf.isLocallySurjective_of_surjective J _ (fun T ↦ hq T.unop)
+  have : Presheaf.IsLocallySurjective J
+      (yoneda.map g ≫ (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η)) :=
+    inferInstance
+  have : Presheaf.IsLocallySurjective J α :=
+    Presheaf.isLocallySurjective_of_isLocallySurjective_fac J hcanonical
+  have : IsIso αs := (Sheaf.isLocallyBijective_iff_isIso αs).mp
+    ⟨inferInstance, inferInstance⟩
+  exact (sheafToPresheaf J (Type u)).map_isIso αs
 
 end AlgebraicGeometry.AlgebraicSpace

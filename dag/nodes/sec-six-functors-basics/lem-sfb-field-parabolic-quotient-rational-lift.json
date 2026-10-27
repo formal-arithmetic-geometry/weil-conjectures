@@ -1,0 +1,303 @@
+{
+ "id": "lem-sfb-field-parabolic-quotient-rational-lift",
+ "kind": "statement",
+ "title": "Parabolic quotient torsor and rational lifting over any field",
+ "statement": "Let $k$ be any field [def-weil-field] and let $G$ be a reductive $k$-group [def-sc-group-scheme, def-sfb-reductive-torus-centralizer-terminology]: smooth, affine of finite type and geometrically connected, with no nontrivial smooth connected normal unipotent subgroup after extension to an algebraic closure. Unipotent means admitting a faithful finite-dimensional matrix representation in which all geometric points are unipotent matrices. A parabolic $k$-subgroup $P\\subseteq G$ means a smooth geometrically connected closed subgroup [def-weil-closed-immersion] whose fppf right-coset sheaf $G/P$ is represented by a proper finite-type $k$-scheme [def-weil-proper-morphism, def-weil-finite-type-morphism]. Here the coset sheaf is the sheafification of $A\\mapsto G(A)/P(A)$ for faithfully flat finitely presented coverings of commutative $k$-algebras, and $G(A)=\\operatorname{Hom}_k(\\operatorname{Spec}A,G)$. Let $P$ be such a parabolic and write $q:G\\to G/P$ for the canonical quotient map. Left multiplication defines an action of $G$ on $G/P$, with $q(ag)=a\\cdot q(g)$. The map $q$ is a right $P$-torsor: it is faithfully flat and finitely presented and $(g,p)\\mapsto(g,gp)$ is an isomorphism $G\\times_kP\\xrightarrow{\\sim}G\\times_{G/P}G$. Consequently for every commutative $k$-algebra $A$ one has $q_A^{-1}(q_A(1))=P(A)$. The map $q_k:G(k)\\to(G/P)(k)$ is surjective. These assertions require neither infinitude nor perfectness of $k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 25.9(b), printed p.546; its proof handles finite k by Theorem 17.98 (Lang) and infinite k by local sections. Quotient/torsor construction: Theorem 5.28, Sections 5(g) and 8(a); the proof of 25.9(b) explicitly identifies fibres as P-torsors."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Regard schemes as their representable algebraic spaces [def-trf-scheme-algebraic-space]. The gluing theorem [lem-a1-algebraic-space-fpqc-sheaf], applied to coverings converted by [lem-trf-fppf-covering-is-fpqc], makes their functors of points fppf sheaves. Put $Q=G/P$. Left multiplication preserves right-coset equivalence: $(ag)p=a(gp)$. Thus $(a,[g])\\mapsto[ag]$ defines a presheaf action, and defines a sheaf action by locally choosing representatives and gluing; a replacement $g\\mapsto gp$ leaves its image unchanged. The same identities prove the unit, associativity and $q(ag)=a\\cdot q(g)$ on every test scheme. Apply [lem-sfb-algebraic-group-homogeneous-quotient] with $L=P$. Its hypotheses hold: $G$ is affine and finite type; affineness gives separatedness since the diagonal is induced by the surjection $k[G]\\otimes_k k[G]\\to k[G]$. Obtain $p:G\\to X$ flat, surjective and finitely presented, with $p(a)=p(b)$ exactly when $a^{-1}b\\in P$. The inverse formulas $(g,h)\\mapsto(g,g^{-1}h)$ and $(g,p)\\mapsto(g,gp)$ give its kernel-pair isomorphism. Since $p$ is an fppf covering, all its pullbacks are coverings by [lem-trf-fppf-covering-base-change]. Every test section of $X$ therefore lifts fppf locally. Two lifts differ exactly by $P$, so the sheaf axiom identifies $X$ with the fppf coset sheaf: locally lift to $G$, take its coset, and glue; the inverse sends local cosets to their common image under $p$. The maps are inverse after the covering, hence globally. This identifies $p$ with the specified $q$ and proves the asserted faithful flatness, finite presentation and torsor isomorphism.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-trf-fppf-covering-base-change",
+    "def-trf-scheme-algebraic-space",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-a1-algebraic-space-fpqc-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 5.24, Proposition 5.25, Corollary 5.27 and Theorem 5.28, pp.104--105; Stacks topologies.tex Tag 021O (lemma-fppf), part (3)."
+   }
+  },
+  {
+   "text": "For any commutative $k$-algebra $A$, apply the torsor isomorphism to the pair $(1,g)$. It lies in $G\\times_QG$ exactly when $q_A(g)=q_A(1)$, and its unique preimage has the form $(1,p)$ with $p\\in P(A)$. Therefore $g=p$. Conversely $q_A(p)=q_A(1)$ for every $p\\in P(A)$ by right-coset invariance. This proves the kernel assertion on all algebras, including nonreduced ones.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 5.24, p.104; evaluation of its isomorphism at (1,g)."
+   }
+  },
+  {
+   "text": "Choose a closed split torus $S\\subseteq P$ of greatest rank. Here is the elementary existence check, so no conjugacy theorem is being assumed. By [lem-sfb-affine-group-dual-number-calculus], $T_1P$ is finite dimensional and a closed subgroup induces an injection on tangent spaces. For $\\mathbf G_m^r$ the tangent vectors are the tuples $(1+\\epsilon a_i)$, so their dimension is $r$; ranks of split tori in $P$ are therefore bounded by $\\dim_kT_1P$, and rank zero occurs. A greatest-rank torus is maximal under inclusion: by [lem-sfb-split-torus-hom-matrices] an inclusion of equal-rank split tori is given by a square integer matrix. Since it is a closed immersion [def-weil-closed-immersion], its Laurent-coordinate map is surjective; linear independence of Laurent monomials forces its exponent lattice map to be surjective. A surjective square integer matrix is invertible over $\\mathbf Z$, so the inclusion is an isomorphism. Now [lem-sfb-parabolic-prescribed-split-cocharacter], applied to this $P,S$, gives a $k$-cocharacter $\\lambda:\\mathbf G_m\\to S\\subseteq G$ with $P=P_\\lambda$ on every test algebra.",
+   "uses": [
+    "lem-sfb-affine-group-dual-number-calculus",
+    "lem-sfb-split-torus-hom-matrices",
+    "def-weil-closed-immersion",
+    "lem-sfb-parabolic-prescribed-split-cocharacter"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 25.1, converse, p.544; preparatory cocharacter choice in Theorem 25.6(b), p.546. The bounded-rank choice is expanded using tangent injections (10.14, p.190) and integer torus maps (12.9(a), pp.233--234)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-relative-dynamic-subgroups] over $R=k$ to $a(t,g)=\\lambda(t)g\\lambda(t)^{-1}$. The finite-presentation hypothesis on $G$ holds because smoothness is locally of finite presentation [def-sbc-smooth-morphisms], while an affine morphism is quasi-compact and quasi-separated. Its subgroup $P_a$ is exactly $P$. Write $N=U_{-a}$. The cited statement gives an open immersion $m:N\\times_kP\\to G$, $(u,p)\\mapsto up$. In particular its restriction with $p=1$ is the inclusion $N\\to G$, and $1\\in N(k)$. All constructions are over the original field.",
+   "uses": [
+    "lem-sfb-relative-dynamic-subgroups",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 25.1, p.544; Theorem 13.33(d), pp.265--266, as used in Theorem 25.9(a), p.546. The existing relative dynamic-subgroup statement supplies the same open multiplication over k."
+   }
+  },
+  {
+   "text": "The map $q|_N:N\\to Q$ is a monomorphism: if $q(u)=q(v)$, the torsor formula gives a unique $p$ with $v=up$, and injectivity of the open immersion $m$ gives $(u,p)=(v,1)$. Moreover $N\\times_QG\\simeq N\\times P$ by $(u,p)\\mapsto(u,up)$, so its projection into $G$ is exactly the open immersion $m$. Apply [lem-trf-fppf-local-open-subfunctor-descent] to $h_N\\to h_Q$ with local presentation $h_G\\to h_Q$ supplied by step 1 and open $m(N\\times P)\\subseteq G$. The monomorphism and pullback hypotheses have just been verified on all tests. It follows that $q|_N$ identifies $N$ with an open subscheme $U\\subseteq Q$. Its inverse, followed by $N\\to G$, is a section $s:U\\to G$ of $q$. Also $q(1)\\in U(k)$.",
+   "uses": [
+    "lem-trf-fppf-local-open-subfunctor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), descent of the cell open; explicit monomorphism and pullback calculations from Milne 13.33(d), followed by the local-section construction in 25.9(a), p.546."
+   }
+  },
+  {
+   "text": "Suppose $k$ is infinite and fix $x\\in Q(k)$. Let $V$ be the inverse image of $U$ under the $k$-morphism $G\\to Q$, $g\\mapsto g^{-1}\\cdot x$. This is open and nonempty: a local lift $h$ of $x$ exists by step 1, and $h^{-1}\\cdot x=q(1)\\in U$, so $V$ has a point after an fppf covering of $\\operatorname{Spec}k$. Apply [lem-sfb-infinite-field-reductive-rational-density] to this nonempty open to choose $a\\in V(k)$. Then $y=a^{-1}\\cdot x\\in U(k)$ and $g=a\\,s(y)\\in G(k)$ satisfy $q(g)=a\\cdot q(s(y))=a\\cdot y=x$. Density applies to the reductive $G$, without assuming the field perfect.",
+   "uses": [
+    "lem-sfb-infinite-field-reductive-rational-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 25.9(a),(b), p.546, using Theorem 17.93(b), p.382. The rational-translate argument is written for each rational point, which suffices for (b)."
+   }
+  },
+  {
+   "text": "Suppose $k$ is finite and fix $x\\in Q(k)$. Pull the fppf covering $q$ back along $x$. By [lem-trf-fppf-covering-base-change], the fibre $Y=\\operatorname{Spec}k\\times_{x,Q}G$ is flat, surjective and locally of finite presentation over $k$. Right multiplication by $P$ preserves this fibre, and the base-changed isomorphism of step 1 is exactly $(y,p)\\mapsto(y,yp):Y\\times_kP\\simeq Y\\times_kY$. Thus all hypotheses of [lem-sfb-finite-field-connected-group-torsor-point] hold with $H=P$, since the given parabolic is smooth, geometrically connected, affine and finite type (it is a closed subgroup of the affine finite-type $G$). Choose $y\\in Y(k)$. Its projection is a $g\\in G(k)$ with $q(g)=x$. The finite and infinite cases exhaust all fields, proving the final surjectivity assertion.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-sfb-finite-field-connected-group-torsor-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 25.9(b), p.546; Corollary 17.98, p.383; Proposition 3.50, p.80. Stacks topologies.tex Tag 021O (lemma-fppf), part (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "lem-trf-fppf-covering-base-change",
+  "def-trf-scheme-algebraic-space",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "lem-sfb-affine-group-dual-number-calculus",
+  "lem-sfb-split-torus-hom-matrices",
+  "def-weil-closed-immersion",
+  "lem-sfb-parabolic-prescribed-split-cocharacter",
+  "lem-sfb-relative-dynamic-subgroups",
+  "def-sbc-smooth-morphisms",
+  "lem-trf-fppf-local-open-subfunctor-descent",
+  "lem-sfb-infinite-field-reductive-rational-density",
+  "lem-sfb-finite-field-connected-group-torsor-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 25.9(b), proof on p.546; quotient proof pp.104--105, cocharacter presentation p.544, opposite multiplication pp.265--266, rational density p.382, and Lang torsors pp.80,383. The local-section descent is expanded using Stacks Tag 02WU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Pp]arabolic.*[Ss]urject|[Ss]urject.*[Pp]arabolic",
+   "results": "{\"t\": \"2026-10-24T04:43:39Z\", \"tool\": \"grep\", \"query\": \"[Pp]arabolic.*[Ss]urject|[Ss]urject.*[Pp]arabolic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern projective modules, elliptic curve projective coordinates, modular cusps, partial rational maps or abstract group actions; none states parabolic algebraic-group quotient rational lifting."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every rational point of the projective homogeneous variety G/P lifts to a rational point of G for parabolic P",
+   "results": "{\"t\": \"2026-10-24T04:43:40Z\", \"tool\": \"leansearch\", \"query\": \"Every rational point of the projective homogeneous variety G/P lifts to a rational point of G for parabolic P\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.projective_lifting_property\", \"WeierstrassCurve.Projective.Point.toAffineLift_of_Z_ne_zero\", \"WeierstrassCurve.Projective.Point.toAffineLift_some\", \"WeierstrassCurve.Projective.Point.toAffineLift\", \"WeierstrassCurve.Projective.smul_eq\", \"Module.Projective.of_lifting_property\", \"WeierstrassCurve.Projective.Point.toAffineLift_of_Z_eq_zero\", \"WeierstrassCurve.Projective.Point.toAffineLift_zero\"], \"digest\": \"eb91adbf063bfeb3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern projective modules, elliptic curve projective coordinates, modular cusps, partial rational maps or abstract group actions; none states parabolic algebraic-group quotient rational lifting."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"parabolic\", \"surjective\"",
+   "results": "{\"t\": \"2026-10-24T04:43:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"parabolic\\\", \\\"surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern projective modules, elliptic curve projective coordinates, modular cusps, partial rational maps or abstract group actions; none states parabolic algebraic-group quotient rational lifting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a reductive group over any field and a parabolic subgroup P the map from G rational points to G over P rational points is surjective",
+   "results": "{\"t\": \"2026-10-24T04:43:43Z\", \"tool\": \"leanfinder\", \"query\": \"For a reductive group over any field and a parabolic subgroup P the map from G rational points to G over P rational points is surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"surjective_cosetToCuspOrbit\", \"IsFractionRing.stabilizerHom_surjective\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"FixedPoints.toAlgAut_surjective\", \"NumberField.mixedEmbedding.fundamentalCone.integerSetToAssociates_surjective\", \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\", \"SubMulAction.of_fixingSubgroupEmpty_mapScalars_surjective\", \"NumberField.InfinitePlace.comap_surjective\"], \"digest\": \"528308fbfd9ebbfb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern projective modules, elliptic curve projective coordinates, modular cusps, partial rational maps or abstract group actions; none states parabolic algebraic-group quotient rational lifting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational cosets for parabolic subgroups have rational representatives including over finite fields",
+   "results": "{\"t\": \"2026-10-24T04:43:44Z\", \"tool\": \"leanfinder\", \"query\": \"Rational cosets for parabolic subgroups have rational representatives including over finite fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.IsRegularAtInfty\", \"Subgroup.IsArithmetic\", \"cosetToCuspOrbit\", \"cosetToCuspOrbit_apply_mk\", \"ModularGroup.exists_smul_mem_fd\", \"Subgroup.periods\", \"Subgroup.instIsArithmeticMapSpecialLinearGroupFinOfNatNatIntGeneralLinearGroupRealMapGLOfFiniteIndex\", \"CongruenceSubgroup.finiteIndex_conjGL\"], \"digest\": \"80069db6df9858f9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern projective modules, elliptic curve projective coordinates, modular cusps, partial rational maps or abstract group actions; none states parabolic algebraic-group quotient rational lifting."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational cosets of parabolic algebraic subgroups have representatives over the base field",
+   "results": "{\"t\": \"2026-10-24T07:08:58Z\", \"tool\": \"leansearch\", \"query\": \"Rational cosets of parabolic algebraic subgroups have representatives over the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.mk_out_eq_mul\", \"QuotientAddGroup.mk_out_eq_mul\", \"QuotientGroup.out_eq'\", \"QuotientAddGroup.out_eq'\", \"DoubleCoset.instInhabitedQuotientCoeSubgroup\", \"DoubleCoset.quotToDoubleCoset\", \"cosetToCuspOrbit\", \"QuotientGroup.instHasQuotientSubgroup\"], \"digest\": \"7e6d5167eca7f38f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group cosets, vector projectivization and modular cusp orbits do not identify the rational points of a scheme-theoretic parabolic quotient. No project declaration or Mathlib specialization states the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"parabolic\", \"surjective\"",
+   "results": "{\"t\": \"2026-10-24T07:08:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"parabolic\\\", \\\"surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group cosets, vector projectivization and modular cusp orbits do not identify the rational points of a scheme-theoretic parabolic quotient. No project declaration or Mathlib specialization states the item."
+  },
+  {
+   "tool": "grep",
+   "query": "parabolic.*surject|surject.*parabolic",
+   "results": "{\"t\": \"2026-10-24T07:08:59Z\", \"tool\": \"grep\", \"query\": \"parabolic.*surject|surject.*parabolic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group cosets, vector projectivization and modular cusp orbits do not identify the rational points of a scheme-theoretic parabolic quotient. No project declaration or Mathlib specialization states the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient map of a reductive algebraic group by a parabolic subgroup is a torsor and surjective on rational points over every field",
+   "results": "{\"t\": \"2026-10-24T07:09:07Z\", \"tool\": \"leanfinder\", \"query\": \"The quotient map of a reductive algebraic group by a parabolic subgroup is a torsor and surjective on rational points over every field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"surjective_cosetToCuspOrbit\", \"OnePoint.exists_mem_SL2\", \"cosetToCuspOrbit_apply_mk\", \"Representation.Coinvariants.mk_surjective\", \"cosetToCuspOrbit\", \"MulAction.isPretransitive_quotient\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\"], \"digest\": \"32ce0c9f272cd6eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group cosets, vector projectivization and modular cusp orbits do not identify the rational points of a scheme-theoretic parabolic quotient. No project declaration or Mathlib specialization states the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational points on projective homogeneous spaces G modulo P lift to G for parabolic P",
+   "results": "{\"t\": \"2026-10-24T07:09:10Z\", \"tool\": \"leanfinder\", \"query\": \"Rational points on projective homogeneous spaces G modulo P lift to G for parabolic P\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.nonZeroEquivProjectivizationProdUnits\", \"OnePoint.exists_mem_SL2\", \"Projectivization.mk_rep\", \"Projectivization.map\", \"Projectivization.exists_smul_eq_mk_rep\", \"Projectivization.lift_mk\", \"Projectivization.mk'_eq_mk\", \"WeierstrassCurve.Projective.Point.point\"], \"digest\": \"5c01f66e540efd99\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group cosets, vector projectivization and modular cusp orbits do not identify the rational points of a scheme-theoretic parabolic quotient. No project declaration or Mathlib specialization states the item."
+  },
+  {
+   "tool": "grep",
+   "query": "GroupScheme|Reductive|IsReductive|Cocharacter|Parabolic",
+   "results": "{\"t\": \"2026-10-24T07:14:51Z\", \"tool\": \"grep\", \"query\": \"GroupScheme|Reductive|IsReductive|Cocharacter|Parabolic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group cosets, vector projectivization and modular cusp orbits do not identify the rational points of a scheme-theoretic parabolic quotient. No project declaration or Mathlib specialization states the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-maximal-split-tori-conjugacy",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, passage from a rational fixed coset to an element of G(k), using 25.9(b).",
+   "via": [
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-field-parabolic-quotient-rational-lift",
+  "worker": "stage1",
+  "summary": "Q108 repaired the returned delivery against the current DAG: removed the duplicate cocharacter-presentation input, reused the stronger prescribed-split-cocharacter node, and supplied its maximal-split-torus hypothesis by bounded tangent rank and integer torus maps. Retained the quotient, opposite-cell descent, infinite-field density, and finite-field Lang arguments. Seven steps; two new statement-only inputs, no new Mathlib leaves.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), supporting alteration/moduli prerequisite recorded in the inherited ancestry: rational lifting used in Milne 25.10. The item realizes Milne 25.9(b), with the 25.9(a) cell calculation expanded. blueprint_refs ancestor returns None for this inherited broken ancestry; retain its null node and full recorded place/via.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fppf-local-open-subfunctor-descent",
+    "why": "Generic descent of an open subfunctor along the fppf quotient cover; the unit has no other node supplying this descent. It realizes the opposite-cell local-section step of Milne 25.9(a)."
+   },
+   {
+    "node": "lem-a1-algebraic-space-fpqc-sheaf",
+    "why": "Generic sheaf gluing for scheme representables, regarded as algebraic spaces, is used to identify the quotient and to discharge the sheaf premises of open-subfunctor descent; no unit node states this general gluing theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fppf-local-open-subfunctor-descent",
+  "lem-a1-algebraic-space-fpqc-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-492ee58ea",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-492ee58ea (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement. I checked them against Milne iAG: 25.9 (proof p.546), 17.93(b) (p.382) and 17.98 (p.383). The statement and stmt_deps are unchanged. Step 1 (homogeneous quotient, fppf local lifts and fpqc sheaf gluing) identifies X with the coset sheaf and gives the torsor isomorphism. Step 2 is elementary. Step 3 is the new maximal-torus argument and it holds: closed subgroups inject on tangent spaces, the rank of G_m^r equals its tangent dimension, a closed immersion between equal-rank tori is a unimodular integer matrix (surjective Laurent map), so the inclusion is an isomorphism. That is exactly the 'maximal under inclusion' hypothesis of the existing lem-sfb-parabolic-prescribed-split-cocharacter, which replaces the duplicate dropped at 5081. Step 4 applies relative-dynamic-subgroups with R=k: P_a=P and U_{-a}×P→G is an open immersion. Step 5 checks the monomorphism and pullback hypotheses of open-subfunctor descent. Step 6 uses density with g=a·s(a^{-1}x). Step 7 uses Lang on the fibre torsor. The new nodes are true, correctly hypothesised and not duplicates: the density node is 17.93(b) with no perfectness, versus lem-pc-rational-points-dense which needs a separably closed field; the Lang-torsor node keeps connectedness, versus lem-sfb-lang-finite-field-group-surjectivity which only gives the k̄-point Lang map. I found no cycle and no SGA source. Batch-5: every listed trf/a1/sfb citation is general fppf/fpqc foundations, a definition, or algebraic-group structure theory; none is a step of the trace formula or Poincaré duality, so all are accepted. Both tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.FieldParabolicQuotientRationalLift",
+  "declaration": "AlgebraicGeometry.field_parabolic_quotient_rational_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/FieldParabolicQuotientRationalLift.lean",
+  "statement": "theorem field_parabolic_quotient_rational_lift {k : Type u} [Field k] (G P : Grp (Over (Spec (.of k)))) (hG : ReductiveTorusCentralizer.IsReductive G) (i : P ⟶ G) [IsClosedSubgroupScheme i.hom.hom] [Smooth P.X.hom] (hP : ConnectedSpace ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj P).X.left) (Q : Over (Spec (.of k))) [IsProper Q.hom] (q : G.X ⟶ Q) (ηq : coequalizer (yoneda.map (fst G.X P.X)) (yoneda.map (fst G.X P.X * (snd G.X P.X ≫ i.hom.hom))) ⟶ yoneda.obj Q) (hηq : coequalizer.π _ _ ≫ ηq = yoneda.map q) (hquot : ∀ Z : Sheaf (Scheme.fppfTopology.over (Spec (.of k))) (Type u), Function.Bijective (fun f : yoneda.obj Q ⟶ Z.obj ↦ ηq ≫ f)) : (∃ a : ModObj G.X Q, μ[G.X] ≫ q = (𝟙 G.X ⊗ₘ q) ≫ a.smul) ∧ Flat q.left ∧ Surjective q.left ∧ LocallyOfFinitePresentation q.left ∧ QuasiCompact q.left ∧ QuasiSeparated q.left ∧ (∃ e : G.X ⊗ P.X ≅ pullback q q, e.hom ≫ pullback.fst q q = fst G.X P.X ∧ e.hom ≫ pullback.snd q q = fst G.X P.X * (snd G.X P.X ≫ i.hom.hom)) ∧ (∀ (A : Type u) [CommRing A] [Algebra k A] (g : StandardGroupSchemes.affine k A ⟶ G.X), g ≫ q = (1 : StandardGroupSchemes.affine k A ⟶ G.X) ≫ q ↔ g ∈ Set.range (fun p : StandardGroupSchemes.affine k A ⟶ P.X ↦ p ≫ i.hom.hom)) ∧ Function.Surjective (fun g : 𝟙_ (Over (Spec (.of k))) ⟶ G.X ↦ g ≫ q)",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d51970e61",
+  "group": "ND",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: IsReductive G; closed subgroup i with IsClosedSubgroupScheme, Smooth P and geometric connectedness via the same k̄ base change as IsReductive; right-coset presheaf coequalizer with ηq pinned by hηq and the fppf sheafification universal property (hquot); proper Q; ModObj action normalized μ≫q=(𝟙⊗q)≫smul; Flat∧Surjective∧LFP∧QC∧QS; torsor iso with both projections specified; fibre over q(1) = P(A) for all A on Spec A; surjectivity on 𝟙_ = Spec k. No extra assumptions on k; single universe u. No parabolic or fppf-coset definition exists in the project or Mathlib (H4 ok). Item JSON differs from live only in lean; statement verbatim; stmt_deps unchanged; public/plain imports correct; docstrings carry the source place, blueprint tag and 7 steps; sorry only; no new definitions. Edge cases P=G, non-normal P, finite/imperfect k, zero and nonreduced A checked. Note: StandardGroupSchemes.affine (def-sc-gm-ga) is used through the IsReductive module, same encoding as the dependency. No compile (no file changed)."
+ }
+}

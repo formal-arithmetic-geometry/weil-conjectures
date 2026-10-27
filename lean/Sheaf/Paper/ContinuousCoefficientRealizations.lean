@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C3
 -/
 module
-public import Sheaf.Paper.ContinuousIntegralCoefficients
+public import Sheaf.Paper.ContinuousIntegralCoefficientData
 public import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
 public import Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization
 import all Sheaf.Paper.IntegralScalarContractive

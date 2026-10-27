@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-groupoid-diagonal-two-pullback-identities",
+ "kind": "statement",
+ "title": "Diagonal identities for 2-fibre products of fibred groupoids",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes [def-weil-size-convention]. Work with categories fibred in groupoids over $S$-schemes, functors over the base, natural isomorphisms over the base, and the object-and-isomorphism $2$-fibre products of [def-sfb-stable-pointed-moduli-groupoids]. The relative diagonal of $a:\\mathcal X\\to\\mathcal Y$ sends $x$ to $(x,x,\\mathrm{id}_{a(x)})$. The following squares are $2$-cartesian (the comparison from the upper-left category to the $2$-fibre product of the other three is an equivalence over the base). (1) If $\\mathcal X'=\\mathcal X\\times_{\\mathcal Y}\\mathcal Y'$ and $a':\\mathcal X'\\to\\mathcal Y'$ is the projection, the square with horizontal arrows $\\Delta_{a'}:\\mathcal X'\\to\\mathcal X'\\times_{\\mathcal Y'}\\mathcal X'$ and $\\Delta_a:\\mathcal X\\to\\mathcal X\\times_{\\mathcal Y}\\mathcal X$, and vertical arrows the projections induced by $\\mathcal X'\\to\\mathcal X$, is $2$-cartesian. (2) For functors $u:\\mathcal A\\to\\mathcal C$, $v:\\mathcal B\\to\\mathcal C$, $h:\\mathcal C\\to\\mathcal D$, the square with upper row $i:\\mathcal A\\times_{\\mathcal C}\\mathcal B\\to\\mathcal A\\times_{\\mathcal D}\\mathcal B$, lower row $\\Delta_h:\\mathcal C\\to\\mathcal C\\times_{\\mathcal D}\\mathcal C$, left map induced by $u$ on the first projection and right map induced by $(u,v)$, is $2$-cartesian; $i$ applies $h$ to the structural isomorphism. No stack, atlas, representability or finiteness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 04YR (lemma-base-change-diagonal) and 04Z1 (lemma-fibre-product-after-map), fibrewise for fibred groupoids."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-moduli-chart-normalization",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "Use the fibrewise triple model of [def-sfb-stable-pointed-moduli-groupoids], with composition written right-to-left. For a base scheme $T$, all structural isomorphisms below lie over $1_T$. Write $b:\\mathcal Y'\\to\\mathcal Y$ and $z=(x,y,\\phi)$ in $\\mathcal X'$, where $\\phi:a(x)\\xrightarrow{\\sim}b(y)$. The right vertical functor in (1) sends $(z_1,z_2,\\theta:y_1\\xrightarrow{\\sim}y_2)$ to $(x_1,x_2,\\lambda)$, with $\\lambda=\\phi_2^{-1}b(\\theta)\\phi_1$. It respects arrows because their defining commuting squares imply the commuting square for $\\lambda$; identities and composites are componentwise. It sends the relative diagonal to the relative diagonal strictly. In (2), the square is equipped with the natural isomorphism from $\\Delta_hu$ to $(u,v)i$ whose components are $(1_{u(a)},\\phi)$ at $(a,b,\\phi)$. Its compatibility equation is $h(\\phi)=h(\\phi)h(1)$, and its naturality is exactly the defining arrow equation of $\\mathcal A\\times_{\\mathcal C}\\mathcal B$. Thus both canonical comparison functors are defined over the base.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0040, 04YR and 04Z1; explicit comparison functors."
+   }
+  },
+  {
+   "text": "For (1), the fibre of the proposed pullback has objects $(x,z_1,z_2,\\theta,r_1,r_2)$, where $r_j:x\\xrightarrow{\\sim}x_j$ and $a(r_2)=\\lambda a(r_1)$. Its comparison $K_1$ sends $z=(x,y,\\phi)$ to $(x,z,z,1_y,1_x,1_x)$. Given an arbitrary such object, put $z=(x,y_1,\\phi_1a(r_1))$. The arrows $q_1=(r_1,1_{y_1}):z\\to z_1$ and $q_2=(r_2,\\theta):z\\to z_2$ exist: the second arrow equation is $b(\\theta)\\phi_1a(r_1)=\\phi_2a(r_2)$, which is the displayed relation after multiplying by $\\phi_2$. The pair $(q_1,q_2)$ is an arrow from the diagonal of $z$ to $(z_1,z_2,\\theta)$ since its two $\\mathcal Y'$ components are $1$ and $\\theta$. Together with $1_x$ it gives an isomorphism from $K_1(z)$ to the given pullback object, since its two projected components are $r_1,r_2$. This proves essential surjectivity in every fibre.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04YR, lemma-base-change-diagonal; objectwise expansion of the equivalences in its proof."
+   }
+  },
+  {
+   "text": "For (1), a morphism $K_1(z)\\to K_1(w)$ has an $\\mathcal X$ component $s$ and two $\\mathcal X'$ components $(p_1,t_1),(p_2,t_2)$. The diagonal compatibility in $\\mathcal Y'$ forces $t_1=t_2=t$, and compatibility with the two identity comparison arrows in $\\mathcal X$ forces $p_1=p_2=s$. The remaining equation is precisely $b(t)\\phi_z=\\phi_w a(s)$, so these data correspond bijectively to arrows $(s,t):z\\to w$. Conversely each such arrow gives those components and satisfies every equation. Thus $K_1$ is fully faithful in every fibre, including all automorphisms.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04YR; arrow equations for the explicit comparison."
+   }
+  },
+  {
+   "text": "For (2), put $Q=\\mathcal A\\times_{\\mathcal D}\\mathcal B$. An object of $P=\\mathcal C\\times_{\\mathcal C\\times_{\\mathcal D}\\mathcal C}Q$ is $(c,a,b,\\eta,\\alpha,\\beta)$ with $\\eta:hu(a)\\xrightarrow{\\sim}hv(b)$, $\\alpha:c\\xrightarrow{\\sim}u(a)$, $\\beta:c\\xrightarrow{\\sim}v(b)$, and $\\eta h(\\alpha)=h(\\beta)$. The comparison $K_2$ sends $(a,b,\\phi)$ to $(u(a),a,b,h(\\phi),1,\\phi)$. Given an object of $P$, set $\\phi=\\beta\\alpha^{-1}$; its defining equation gives $h(\\phi)=\\eta$. The components $\\alpha^{-1}:u(a)\\to c$ and the identity of $(a,b,\\eta)$ in $Q$ define an isomorphism from $K_2(a,b,\\phi)$ to the given object: its comparison equations are $\\alpha\\alpha^{-1}=1$ and $\\beta\\alpha^{-1}=\\phi$. This proves essential surjectivity without any faithfulness assumption on $h$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04Z1, lemma-fibre-product-after-map; supplies the omitted objectwise argument."
+   }
+  },
+  {
+   "text": "For (2), a morphism between the canonical images of $(a,b,\\phi)$ and $(a',b',\\phi')$ consists of $t:u(a)\\to u(a')$ and $(r:a\\to a',s:b\\to b')$ in $Q$. Compatibility with the first comparison component forces $t=u(r)$; the second says $v(s)\\phi=\\phi'u(r)$. This last equation is exactly the arrow condition over $\\mathcal C$. It also implies the arrow condition over $\\mathcal D$ after applying $h$, so imposes all the required conditions and no extra one. Conversely such $(r,s)$ supplies the unique $t$. Hence $K_2$ is fully faithful in every fibre.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04Z1; supplies the omitted arrowwise argument."
+   }
+  },
+  {
+   "text": "The comparison functors are over $\\mathit{Sch}/S$. Every arrow in a category fibred in groupoids is cartesian by the unique-factorization condition in [def-sfb-stable-pointed-moduli-groupoids]; hence these functors preserve cartesian arrows. The triple models are fibred in groupoids: lift each component over a base arrow and use the unique factorization property to lift the structural isomorphism; its inverse lifts likewise and the two composites are identities by uniqueness. The same componentwise uniqueness proves the cartesian property of the lifted pair. Work in the larger universe of [def-weil-size-convention] on the chosen small base and fibre categories. Apply [lem-sfb-fibred-groupoid-equivalence-criterion] to $K_1$ using steps 2--3, and to $K_2$ using steps 4--5. It gives quasi-inverses over the base and natural isomorphisms over base identities. These are exactly the two required $2$-cartesian assertions.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-size-convention",
+    "lem-sfb-fibred-groupoid-equivalence-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 003Z, lemma-equivalence-fibred-categories; Tags 0040 and 02XI for the componentwise model."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-size-convention",
+  "lem-sfb-fibred-groupoid-equivalence-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 04YR and 04Z1; explicit object-and-arrow verification in the over-base model of Tag 0040, with Tag 003Z for fibrewise equivalences."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a 2 category of groupoids with 2 fibre products, the diagonal commutes with base change and the map from a fibre product over C to a fibre product over D is a pullback of the relative diagonal of C over D",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsFibered.pullbackPullbackIso\", \"module\": \"Mathlib/CategoryTheory/FiberedCategory/Fibered\", \"type\": \"{𝒮 : Type u₁} →\\n  {𝒳 : Type u₂} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳] →\\n        {p : CategoryTheory.Functor 𝒳 𝒮} →\\n          [inst_2 : p.IsFibered] →\\n            {R S T : 𝒮} →\\n              {a : 𝒳} →\\n                (ha : p.obj a = S)\", \"doc\": \"For a fibered functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, given composable morphisms $ f : R \\\\to S $ and $ g : T \\\\to R $ in $ \\\\mathcal{S} $, and an object $ a \\\\in \\\\mathcal{X} $ with $ p(a) = S $, the\"}\n  {\"name\": \"CategoryTheory.Limits.pullbackDiagonalMapIso\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {X Y : C} →\\n      [inst_1 : CategoryTheory.Limits.HasPullbacks C] →\\n        {U V₁ V₂ : C} →\\n          (f : X ⟶ Y) →\\n            (i : U ⟶ Y) →\\n              (i₁ : V₁ ⟶ CategoryTheory.Limits.pullback f i) →\\n                (i₂ : V₂\", \"doc\": \"In a category with pullbacks, given morphisms $ f : X \\to Y $, $ i : U \\to Y $, and morphisms $ i_1 : V_1 \\to X \\times_Y U $, $ i_2 : V_2 \\to X \\times_Y U $, there exists an isomorphism between the pullback\"}\n  {\"name\": \"CategoryTheory.Limits.pullback_map_diagonal_isPullback\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {X Y : C} [CategoryTheory.Limits.HasPullbacks C]\\n  {S T : C} (f : X ⟶ T) (g : Y ⟶ T) (i : T ⟶ S) [inst_2 : CategoryTheory.Limits.HasPullback i i]\\n  [inst_3 : CategoryTheory.Limits.HasPullback f g]\\n  [inst_4 :\\n    CategoryTheory.Limits.Ha\", \"doc\": \"Given morphisms $f: W \\to S$ and $g: X \\to S$ with pullback $P = W \\times_S X$, and compatible morphisms $i_1: W \\to Y$, $i_2: X \\to Z$, $i_3: S \\to T$ satisfying the necessary commutativity conditions, the\"}\n  {\"name\": \"CategoryTheory.Limits.pullbackDiagonalMapIso.hom\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {X Y : C} →\\n      [inst_1 : CategoryTheory.Limits.HasPullbacks C] →\\n        {U V₁ V₂ : C} →\\n          (f : X ⟶ Y) →\\n            (i : U ⟶ Y) →\\n              (i₁ : V₁ ⟶ CategoryTheory.Limits.pullback f i) →\\n                (i₂ : V₂\", \"doc\": \"The morphism constructed by lifting the composition of the second projection with the first projection in the pullback diagram, ensuring commutativity via the universal property of pullbacks for the d\"}\n  {\"name\": \"CategoryTheory.Limits.pullbackDiagonalMapIdIso_inv_snd_fst_assoc\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {X Y : C} [inst_1 : CategoryTheory.Limits.HasPullbacks C]\\n  {S T : C} (f : X ⟶ T) (g : Y ⟶ T) (i : T ⟶ S) [inst_2 : CategoryTheory.Limits.HasPullback i i]\\n  [inst_3 : CategoryTheory.Limits.HasPullback f g]\\n  [inst_4 :\\n    CategoryTheory.\", \"doc\": \"In a category with pullbacks, for morphisms $f: X \\to T$, $g: Y \\to T$, and $i: T \\to S$, the composition of the inverse isomorphism between the diagonal pullback and identity pullback, followed by the s\"}\n  {\"name\": \"CategoryTheory.Limits.pullbackDiagonalMapIdIso_inv_snd_snd_assoc\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {X Y : C} [inst_1 : CategoryTheory.Limits.HasPullbacks C]\\n  {S T : C} (f : X ⟶ T) (g : Y ⟶ T) (i : T ⟶ S) [inst_2 : CategoryTheory.Limits.HasPullback i i]\\n  [inst_3 : CategoryTheory.Limits.HasPullback f g]\\n  [inst_4 :\\n    CategoryTheory.\", \"doc\": \"In a category with pullbacks, given morphisms $f : X \\to T$, $g : Y \\to T$, and $i : T \\to S$, the composition of the inverse isomorphism between the diagonal pullback and the identity pullback with the \"}\n  {\"name\": \"CategoryTheory.Limits.pullbackDiagonalMapIdIso_hom_fst_assoc\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {X Y : C} [inst_1 : CategoryTheory.Limits.HasPullbacks C]\\n  {S T : C} (f : X ⟶ T) (g : Y ⟶ T) (i : T ⟶ S) [inst_2 : CategoryTheory.Limits.HasPullback i i]\\n  [inst_3 : CategoryTheory.Limits.HasPullback f g]\\n  [inst_4 :\\n    CategoryTheory.\", \"doc\": \"In a category with pullbacks, for a morphism $ i : T \\to S $, the pullback of the diagonal morphism $ \\\\text{diagonal}(i) $ and the identity morphism on $ S $ is isomorphic to the original pullback of m\"}\n  {\"name\": \"CategoryTheory.Limits.pullbackDiagonalMapIdIso\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {X Y : C} →\\n      [CategoryTheory.Limits.HasPullbacks C] →\\n        {S T : C} →\\n          (f : X ⟶ T) →\\n            (g : Y ⟶ T) →\\n              (i : T ⟶ S) →\\n                [inst_2 : CategoryTheory.Limits.HasPullback i i] →\\n     \", \"doc\": \"In a category with pullbacks, for a morphism $i : T \\to S$, the pullback of the diagonal morphism $\\\\text{diagonal}(i)$ and the identity morphism on $S$ is isomorphic to the original pullback of morphis\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary categorical pullbacks; none states this assertion for algebraic spaces or 2-fibre products of groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy pullback groupoids diagonal base change and relative diagonal factorization for a composite of functors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsFibered.pullbackPullbackIso\", \"module\": \"Mathlib/CategoryTheory/FiberedCategory/Fibered\", \"type\": \"{𝒮 : Type u₁} →\\n  {𝒳 : Type u₂} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳] →\\n        {p : CategoryTheory.Functor 𝒳 𝒮} →\\n          [inst_2 : p.IsFibered] →\\n            {R S T : 𝒮} →\\n              {a : 𝒳} →\\n                (ha : p.obj a = S)\", \"doc\": \"For a fibered functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, given composable morphisms $ f : R \\\\to S $ and $ g : T \\\\to R $ in $ \\\\mathcal{S} $, and an object $ a \\\\in \\\\mathcal{X} $ with $ p(a) = S $, the\"}\n  {\"name\": \"HomotopicalAlgebra.PathObject.trans_P\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {A : C}\\n  [inst_2 : HomotopicalAlgebra.IsFibrant A] (P P' : HomotopicalAlgebra.PathObject A) [inst_3 : P'.IsGood],\\n  (P.trans P').P = CategoryTheory.Limits.pullback P.p₁ P'.p₀\", \"doc\": \"In a model category, for a fibrant object $A$ and path objects $P$ and $P'$ (with $P'$ satisfying the 'good' condition), the underlying object of the transposed path object $P \\\\times_A P'$ is the pull\"}\n  {\"name\": \"HomotopicalAlgebra.PrepathObject.trans_P\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {A : C} (P P' : HomotopicalAlgebra.PrepathObject A)\\n  [inst_1 : CategoryTheory.Limits.HasPullback P.p₁ P'.p₀], (P.trans P').P = CategoryTheory.Limits.pullback P.p₁ P'.p₀\", \"doc\": \"For any category $ \\\\mathcal{C} $ and object $ A $ in $ \\\\mathcal{C} $, given two prepath objects $ P $ and $ P' $ for $ A $, if the pullback of the morphisms $ P.p₁: P(A) \\\\to A $ and $ P'.p₀: P'(A) \\\\to\"}\n  {\"name\": \"HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {Y : C} {P : HomotopicalAlgebra.PrepathObject Y} {X : C}\\n  {f₀ f₁ f₂ : X ⟶ Y} (h : P.RightHomotopy f₀ f₁) {P' : HomotopicalAlgebra.PrepathObject Y} (h' : P'.RightHomotopy f₁ f₂)\\n  [inst_1 : CategoryTheory.Limits.HasPullback P.p₁ P'.p₀],\\n  (h.t\", \"doc\": \"Given a category $\\\\mathcal{C}$, an object $Y$ with path objects $P(Y)$ and $P'(Y)$, and morphisms $f₀, f₁, f₂: X \\\\to Y$, if $h$ is a right homotopy from $f₀$ to $f₁$ and $h'$ is a right homotopy from \"}\n  {\"name\": \"CategoryTheory.Functor.PullbackObjObj.isPullback\", \"module\": \"Mathlib/CategoryTheory/LiftingProperties/ParametrizedAdjunction\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} {C₃ : Type u₃} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] [inst_2 : CategoryTheory.Category.{v₃, u₃} C₃]\\n  {G : CategoryTheory.Functor C₁ᵒᵖ (CategoryTheory.Functor C₃ C₂)} {X₁ Y₁ : C₁} {f₁ : X₁ ⟶ Y₁} {X₃ Y₃ : C₃}\\n  {f\", \"doc\": \"For categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{C}_3$ and a bifunctor $G: \\\\mathcal{C}_1^{\\\\text{op}} \\\\times \\\\mathcal{C}_3 \\\\to \\\\mathcal{C}_2$, given morphisms $f_1: X_1 \\\\to Y_1$ in $\\\\mathcal{C}_1\"}\n  {\"name\": \"HomotopicalAlgebra.PathObject.trans_ι\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {A : C}\\n  [inst_2 : HomotopicalAlgebra.IsFibrant A] (P P' : HomotopicalAlgebra.PathObject A) [inst_3 : P'.IsGood],\\n  (P.trans P').ι = CategoryTheory.Limits.pullback.lift P.ι P'.ι ⋯\", \"doc\": \"In a model category, for a fibrant object $A$ and path objects $P$ and $P'$ (with $P'$ satisfying the 'good' condition), the inclusion morphism $\\\\iota$ of the transposed path object $P \\\\times_A P'$ is\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.pullbackComp\", \"module\": \"Mathlib/CategoryTheory/Sites/Grothendieck\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      {X Y Z : C} →\\n        (f : X ⟶ Y) →\\n          (g : Y ⟶ Z) → J.pullback (CategoryTheory.CategoryStruct.comp f g) ≅ (J.pullback g).comp (J.pullback f)\", \"doc\": \"Given a Grothendieck topology $ J $ on a category $ \\\\mathcal{C} $, morphisms $ f: Y \\\\to X $ and $ g: Z \\\\to Y $, and a covering sieve $ S $ on $ X $, the pullback of $ S $ along the composition $ f \\\\ci\"}\n  {\"name\": \"CategoryTheory.Limits.CategoricalPullback.mkNatIso\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic\", \"type\": \"{A : Type u₁} →\\n  {B : Type u₂} →\\n    {C : Type u₃} →\\n      [inst : CategoryTheory.Category.{v₁, u₁} A] →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} B] →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} C] →\\n            {F : CategoryTheory.Functor A B} →\\n              {G : CategoryTheory\", \"doc\": \"Given categories $\\\\mathcal{A}, \\\\mathcal{B}, \\\\mathcal{C}$ with functors $F: \\\\mathcal{A} \\\\to \\\\mathcal{B}$ and $G: \\\\mathcal{C} \\\\to \\\\mathcal{B}$, and functors $J, K: \\\\mathcal{X} \\\\to \\\\text{Pullback}(F, G)$\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary categorical pullbacks; none states this assertion for algebraic spaces or 2-fibre products of groupoids."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative diagonal in a 2 category commutes with 2 pullback and a change of fibre product base is a pullback of a diagonal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.pullback_map_diagonal_isPullback\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Diagonal\", \"type\": \":\\n  IsPullback (pullback.fst _ _ ≫ f)\\n    (pullback.map f g (f ≫ i) (g ≫ i) _ _ i (Category.id_comp _).symm (Category.id_comp _).symm) (diagonal i)\\n    (pullback.map (f ≫ i) (g ≫ i) i i f g (𝟙 _) (Category.comp_id _) (Category.comp_id _))\", \"doc\": \"Given morphisms $f: W \\to S$ and $g: X \\to S$ with pullback $P = W \\times_S X$, and compatible morphisms $i_1: W \\to Y$, $i_2: X \\to Z$, $i_3: S \\to T$ satisfying the necessary commutativity conditions, the\"}\n  {\"name\": \"CategoryTheory.Limits.pullback_lift_diagonal_isPullback\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Diagonal\", \"type\": \"(g : Y ⟶ X) (f : X ⟶ S) :\\n  IsPullback g (pullback.lift (𝟙 Y) g (by simp)) (diagonal f)\\n    (pullback.map (g ≫ f) f f f g (𝟙 X) (𝟙 S) (by simp) (by simp))\", \"doc\": \"Given morphisms $g: Y \\to X$ and $f: X \\to S$ in a category, the square formed by the diagonal morphism $\\\\Delta_f: X \\to \\text{diagonalObj}(f)$ and the lifted morphism from $Y$ to the pullback of $f$ with\"}\n  {\"name\": \"CategoryTheory.Limits.pullback_diagonal_map_snd_fst_fst\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Diagonal\", \"type\": \":\\n  (pullback.snd (diagonal f)\\n        (map (i₁ ≫ snd f i) (i₂ ≫ snd f i) f f (i₁ ≫ fst f i) (i₂ ≫ fst f i) i (by simp [condition])\\n          (by simp [condition]))) ≫\\n      fst _ _ ≫ i₁ ≫ fst _ _ =\\n    pullback.fst _ _\", \"doc\": \"In a category with pullbacks, the composition of the second projection from the diagonal pullback object with compatible morphisms followed by the first projection equals the first projection of the o\"}\n  {\"name\": \"CategoryTheory.Limits.pullback_diagonal_map_snd_snd_fst\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Diagonal\", \"type\": \":\\n  (pullback.snd (diagonal f)\\n        (map (i₁ ≫ snd f i) (i₂ ≫ snd f i) f f (i₁ ≫ fst f i) (i₂ ≫ fst f i) i (by simp [condition])\\n          (by simp [condition]))) ≫\\n      snd _ _ ≫ i₂ ≫ fst _ _ =\\n    pullback.fst _ _\", \"doc\": \"In a category with pullbacks, for a morphism $f : X \\to Z$, the composition of the second projection from the diagonal pullback object $X \\times_Z X$, followed by a morphism induced by compatible pullba\"}\n  {\"name\": \"CategoryTheory.Limits.pullbackDiagonalMapIso\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Diagonal\", \"type\": \":\\n  pullback (diagonal f)\\n      (map (i₁ ≫ snd _ _) (i₂ ≫ snd _ _) f f (i₁ ≫ fst _ _) (i₂ ≫ fst _ _) i (by simp only [Category.assoc, condition])\\n        (by simp only [Category.assoc, condition])) ≅\\n    pullback i₁ i₂\", \"doc\": \"In a category with pullbacks, given morphisms $ f : X \\to Y $, $ i : U \\to Y $, and morphisms $ i_1 : V_1 \\to X \\times_Y U $, $ i_2 : V_2 \\to X \\times_Y U $, there exists an isomorphism between the pullback\"}\n  {\"name\": \"CategoryTheory.Limits.pullback.diagonal\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Diagonal\", \"type\": \": X ⟶ diagonalObj f\", \"doc\": \"The morphism from $ X $ to the pullback object $ \\\\text{diagonalObj} f $, constructed by lifting the identity morphism on $ X $ against itself, ensuring the universal property of the pullback is satisf\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange.diagonal\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Limits\", \"type\": \"[IsStableUnderBaseChange P] [P.RespectsIso] : P.diagonal.IsStableUnderBaseChange\", \"doc\": \"If a morphism property $P$ in a category with pullbacks is stable under base change and respects isomorphisms, then the diagonal morphism property derived from $P$ is also stable under base change. Sp\"}\n  {\"name\": \"CategoryTheory.Limits.pullbackDiagonalMapIso.inv\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Diagonal\", \"type\": \":\\n  pullback i₁ i₂ ⟶\\n    pullback (diagonal f)\\n      (map (i₁ ≫ snd _ _) (i₂ ≫ snd _ _) f f (i₁ ≫ fst _ _) (i₂ ≫ fst _ _) i (by simp only [Category.assoc, condition])\\n        (by simp only [Category.assoc, condition]))\", \"doc\": \"The morphism from the pullback of $i_1$ and $i_2$ to the pullback of the diagonal morphism of $f$ and the map between pullbacks, constructed by lifting compositions of the first projection and identit\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary categorical pullbacks; none states this assertion for algebraic spaces or 2-fibre products of groupoids."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bicategory\", \"Pullback\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary categorical pullbacks; none states this assertion for algebraic spaces or 2-fibre products of groupoids."
+  },
+  {
+   "tool": "grep",
+   "query": "twoPullback|TwoPullback|bilimit.*[Pp]ullback|[Pp]ullback.*[Gg]roupoid",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes or ordinary categorical pullbacks; none states this assertion for algebraic spaces or 2-fibre products of groupoids."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal|Diagonal",
+   "results": "{\"t\": \"2026-10-23T13:32:17Z\", \"tool\": \"grep\", \"query\": \"diagonal|Diagonal\", \"sub\": \"CategoryTheory/Limits/Shapes/Pullback/Categorical\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected candidates are ordinary categorical pullback diagonal lemmas or comma/Grothendieck equivalences; none gives these relative 2-pullback identities over the base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal of a functor of groupoids is preserved under two fibre product base change",
+   "results": "{\"t\": \"2026-10-23T13:32:17Z\", \"tool\": \"leansearch\", \"query\": \"The diagonal of a functor of groupoids is preserved under two fibre product base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.relativelyRepresentable.diag_of_map_from_obj\", \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange.diagonal\", \"CategoryTheory.Functor.diag\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"CategoryTheory.Functor.relativelyRepresentable.diag_iff\", \"FundamentalGroupoidFunctor.preservesProduct\", \"CategoryTheory.MorphismProperty.instDescendsAlongDiagonalOfRespectsIsoOfIsStableUnderBaseChange\"], \"digest\": \"1a39ad295007f2ac\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected candidates are ordinary categorical pullback diagonal lemmas or comma/Grothendieck equivalences; none gives these relative 2-pullback identities over the base."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.CategoricalPullback, CategoryTheory.Groupoid",
+   "results": "{\"t\": \"2026-10-23T13:32:17Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.CategoricalPullback, CategoryTheory.Groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected candidates are ordinary categorical pullback diagonal lemmas or comma/Grothendieck equivalences; none gives these relative 2-pullback identities over the base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Diagonal of a functor between groupoids commutes with homotopy pullback and change of base is a pullback of the relative diagonal",
+   "results": "{\"t\": \"2026-10-23T13:32:18Z\", \"tool\": \"leanfinder\", \"query\": \"Diagonal of a functor between groupoids commutes with homotopy pullback and change of base is a pullback of the relative diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullback_map_diagonal_isPullback\", \"CategoryTheory.Functor.relativelyRepresentable.diag_of_map_from_obj\", \"CategoryTheory.Functor.relativelyRepresentable.diag_iff\", \"CategoryTheory.Limits.pullback_lift_diagonal_isPullback\", \"CategoryTheory.Limits.pullbackDiagonalMapIso\", \"CategoryTheory.Limits.pullback.diagonal_comp\", \"CategoryTheory.Limits.diagonalObjPullbackFstIso\", \"CategoryTheory.Limits.pullbackDiagonalMapIdIso\"], \"digest\": \"737375fcba8e8339\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected candidates are ordinary categorical pullback diagonal lemmas or comma/Grothendieck equivalences; none gives these relative 2-pullback identities over the base."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback_map_diagonal_isPullback|pullbackDiagonalMapIso|diagonalObjPullbackFstIso",
+   "results": "{\"t\": \"2026-10-23T13:34:33Z\", \"tool\": \"grep\", \"query\": \"pullback_map_diagonal_isPullback|pullbackDiagonalMapIso|diagonalObjPullbackFstIso\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Descent.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\"], \"digest\": \"8302c7437ac7f868\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected candidates are ordinary categorical pullback diagonal lemmas or comma/Grothendieck equivalences; none gives these relative 2-pullback identities over the base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence between the iso comma category of a relative diagonal and the base changed groupoid",
+   "results": "{\"t\": \"2026-10-23T13:34:34Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalence between the iso comma category of a relative diagonal and the base changed groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.ofDiagEquivalence\", \"CategoryTheory.CostructuredArrow.ofDiagEquivalence'\", \"CategoryTheory.CostructuredArrow.grothendieckPrecompFunctorEquivalence\", \"CategoryTheory.groupoidOfElements\", \"CategoryTheory.Grothendieck.grothendieckTypeToCat\", \"CategoryTheory.CostructuredArrow.grothendieckPrecompFunctorEquivalence_functor\", \"CategoryTheory.Groupoid.vertexGroupIsomOfMap\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsEquivalenceαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor\"], \"digest\": \"3fb21816c4202827\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected candidates are ordinary categorical pullback diagonal lemmas or comma/Grothendieck equivalences; none gives these relative 2-pullback identities over the base."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-separation-compactness-permanence",
+  "date": "2026-10-23",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Descent of each overlap of the chosen affine groupoid charts, with cartesian squares and their uniform categorical properties. Supporting input to Tag 0DUS: Tags 050F (lemma-base-change-separated), 050K (lemma-composition-separated), 04YS (lemma-representable-separated-diagonal-closed). Supporting input: Diagonal identities for 2-fibre products of fibred groupoids.",
+   "via": [
+    "lem-sfb-stack-separation-compactness-permanence",
+    "lem-sfb-etale-stabilizer-preserving-affine-moduli",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-groupoid-diagonal-two-pullback-identities",
+  "worker": "stage1",
+  "summary": "Expanded both diagonal identities into explicit comparisons, fibrewise essential-surjectivity witnesses and bijections on arrows. Reused the existing fibred-groupoid equivalence criterion; no new nodes. Corrected the inherited null blueprint ancestor and doubled TeX escapes. No mathematical statement change, no atlas or representability hypotheses, and no use of ordinary categorical pullbacks as 2-pullbacks.",
+  "blueprint": "Supports the separation-permanence prerequisite in the inherited alteration/moduli chain below paragraph (3) of det-thm-sf-ctf-stability-direct-images, Rj_* preservation. The latest blueprint proof and unit were read. Repaired the null ancestor to that genuine blueprint node, as already done for the definition node; created.item tracing terminates at a Lean module rather than a DAG id. The chapter, unit and intermediate via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-eee5eb886",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-eee5eb886 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the three cited statements in full: def-sfb-stable-pointed-moduli-groupoids (the triple 2-fibre product and the fibred-in-groupoids definition), lem-sfb-fibred-groupoid-equivalence-criterion (Tag 003Z) and def-weil-size-convention. The statement matches clones/live verbatim and matches Stacks categories.tex 04YR lemma-base-change-diagonal and 04Z1 lemma-fibre-product-after-map, whose proof there is omitted; the split supplies it. I redid each calculation myself. Step 1: lambda = phi2^-1 b(theta) phi1 is the right variance, the diagonal maps to the diagonal strictly, and the (1,phi) 2-cell in (2) is natural by the A x_C B arrow equation. Step 2: the witness z=(x,y1,phi1 a(r1)) with q1=(r1,1) and q2=(r2,theta) satisfies both arrow equations. Step 3: the components are forced to t1=t2 and p1=p2=s, giving a bijection. Step 4: phi=beta alpha^-1 gives h(phi)=eta, and the arrow (alpha^-1, id) satisfies the compatibility. Step 5: t=u(r), and the remaining equation is the C-level arrow condition, which implies the D-level one. Step 6: the definition's unique-factorization clause is the criterion's cartesian condition, the triple models are fibred in groupoids, and size comes from the convention. Small cases tested: empty fibres, discrete groupoids (where both clauses become the set identities), BG -> pt, and a non-faithful h. There is no SGA citation and no cycle. The blueprint ancestor det-thm-sf-ctf-stability-direct-images exists and is the same as on the definition node. The duplicate search found only lem-sfb-stack-fibre-product-separated-comparison (050H), which is a DM-stack special case of clause (2) with D=S, not a duplicate. Every cited node is in the item's unit or is a definition, so no tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GroupoidDiagonalTwoPullbackIdentities",
+  "declaration": "CategoryTheory.moduli_diagonal_baseChange_twoCartesian",
+  "declarations": [
+   "CategoryTheory.moduliTwoFiberStructuralIso",
+   "CategoryTheory.moduliWhiskerLeftIso",
+   "CategoryTheory.moduliWhiskerRightIso",
+   "CategoryTheory.moduliDiagonalBaseChangeRight",
+   "CategoryTheory.moduliDiagonalBaseChangeIso",
+   "CategoryTheory.moduliDiagonalBaseChangeComparison",
+   "CategoryTheory.moduliTwoFiberPostcompose",
+   "CategoryTheory.moduliTwoFiberAfterMapRight",
+   "CategoryTheory.moduliTwoFiberAfterMapIso",
+   "CategoryTheory.moduliTwoFiberAfterMapComparison",
+   "CategoryTheory.moduli_diagonal_baseChange_twoCartesian",
+   "CategoryTheory.moduli_fibreProduct_afterMap_twoCartesian"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/GroupoidDiagonalTwoPullbackIdentities.lean",
+  "statement": "theorem moduli_diagonal_baseChange_twoCartesian {S : Scheme.{u}} (X : BasedCategory.{v₁, w₁} (Over S)) (Y : BasedCategory.{v₂, w₂} (Over S)) (Y' : BasedCategory.{v₃, w₃} (Over S)) (hX : IsFibredInGroupoids X) (hY : IsFibredInGroupoids Y) (hY' : IsFibredInGroupoids Y') (a : BasedFunctor X Y) (b : BasedFunctor Y' Y) : ∃ inverse : BasedFunctor (moduliTwoFiberProduct (moduliRelativeDiagonal a) (moduliDiagonalBaseChangeRight a b)) (moduliTwoFiberProduct a b), Nonempty (ModuliTwoIso ((moduliDiagonalBaseChangeComparison a b).comp inverse) (BasedFunctor.id (moduliTwoFiberProduct a b))) ∧ Nonempty (ModuliTwoIso (inverse.comp (moduliDiagonalBaseChangeComparison a b)) (BasedFunctor.id (moduliTwoFiberProduct (moduliRelativeDiagonal a) (moduliDiagonalBaseChangeRight a b))))",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Both clauses are separate theorems with the actual canonical comparison functors, a based quasi-inverse, and unit/counit ModuliTwoIso over identities. Canonical structural and comparison maps are defined with real data in this module. Added statement dependencies own the landed relative diagonal, comparison lift, and second projection; no statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6b76395fd",
+  "group": "NK",
+  "result": "pass",
+  "note": "Read item node (only lean+stmt_deps changed vs live), Stacks 04YR/04Z1, criterion 003Z node, module and report (Worker report + Second reading by NK present), and the live declarations moduliTwoFiberProduct/Fst/Snd, ModuliTwoIso, IsFibredInGroupoids, moduliRelativeDiagonal, moduliTwoFiberLift. Clause (1): X'=moduliTwoFiberProduct a b, a'=Snd, right vertical map = lift with cell phi1>>b(theta)>>phi2^-1 (node's lambda), identity-component cell, comparison=lift(Fst,Delta_a'). Clause (2): i=whiskerRight h, (u,v)=lift(fst.f,snd.g), (id,phi) cell, comparison=lift(fst.f,i,cell). Conclusions: exists BasedFunctor inverse of the fixed comparison with both ModuliTwoIso to id = equivalence over base; no extra hypotheses; independent universes; lean.statement verbatim. Added stmt_deps are landed def nodes owning the used declarations, acyclic. No name collisions, no hollow defs, only the two theorem sorries, docstrings carry source/blueprint and the proof steps. Edge cases checked: empty, discrete, BG, non-faithful h, non-identity base arrows. No compile (no change). Minor: iso whisker helpers could reuse Mathlib BasedNatTrans.whiskerLeft/Right; cosmetic."
+ }
+}

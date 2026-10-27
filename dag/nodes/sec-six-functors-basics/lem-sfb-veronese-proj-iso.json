@@ -1,0 +1,121 @@
+{
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "kind": "statement",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteGradedProjProjective",
+  "date": "2026-10-23",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-finite-graded-proj-projective",
+   "place": "Proof steps 1–5, separated as proved algebra and geometric lemmas."
+  }
+ },
+ "id": "lem-sfb-veronese-proj-iso",
+ "title": "Canonical isomorphism with Veronese Proj",
+ "statement": "Let k and R be commutative rings, R a k-algebra graded by k-submodules R_n for n >= 0, and d a positive integer. Form the Veronese subring S and grading S_m=R_(md) [def-sfb-veronese-graded-ring]. There exists an isomorphism Proj R = Proj S [def-pc-proj] such that for every homogeneous s in S_m, m>0, the chart map on homogeneous localizations [def-nagata-homogeneous-localization-degree-zero] is the ring homomorphism S_(s) to R_(s) sending a/s^q to a/s^q. Composing this ring map on spectra with the S chart immersion equals the R chart immersion followed by the isomorphism.",
+ "stmt_deps": [
+  "def-sfb-veronese-graded-ring",
+  "def-pc-proj",
+  "def-nagata-homogeneous-localization-degree-zero"
+ ],
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 0B5J, lemma-d-uple"
+ },
+ "proof": [
+  {
+   "text": "For s homogeneous in S, send equal-degree numerator-denominator pairs over S to their underlying pairs over R, multiplying their degree by d. Localization.map along the subring inclusion proves the quotient relation is respected. The induced ring homomorphism is injective since localization of an injective ring map at its image is injective. Every a/s^q of degree zero over R has numerator in R_(qmd), hence in S, proving surjectivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "These ring maps commute with awayMap at another homogeneous element: using Away.mk_surjective, both maps on a/s^q are the identical fraction at the product. The inverse ring equivalences commute as well, by injectivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The S charts cover Proj S. They also cover Proj R: if f has positive degree, f^d is in S, and its basic open equals that of f. Use Mathlib Proj.pullbackAwayιIso to check compatibility on chart overlaps, then Scheme.Cover.glueMorphisms to glue each direction. The two composites are identities by the cover hom_ext theorem. The gluing equation gives the specified chart formula.",
+   "uses": [
+    "prop-nagata-proj-standard-open",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-nagata-proj-standard-open",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 0B5J, lemma-d-uple"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proj is canonically isomorphic to the Proj of every positive Veronese subring, on homogeneous localization charts",
+   "results": "Eight chart isomorphism hits including Proj.basicOpenIsoSpec, Proj.awayι and projIsoSpec; no Veronese isomorphism.",
+   "date": "2026-10-23",
+   "verdict": "Use chart isomorphisms; construct and glue the Veronese maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomogeneousLocalization.Away",
+   "results": "Away.mk_surjective, awayMap, Away.map and localization instances. Away.map preserves the grading index and cannot directly express multiplication of degrees by d.",
+   "date": "2026-10-23",
+   "verdict": "Use fraction constructors and awayMap to construct the regrading map."
+  },
+  {
+   "tool": "grep",
+   "query": "veronese|Veronese",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "No existing Mathlib Veronese theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proj is isomorphic to Proj of a positive Veronese subring by the identical fraction maps on homogeneous localizations",
+   "results": "Eight hits: projIsoSpec, Proj.basicOpenIsoSpec, Proj.basicOpenIsoAway, stalk comparison maps and isIso_toSpec. No Veronese Proj isomorphism.",
+   "date": "2026-10-23",
+   "verdict": "Use existing standard-chart isomorphisms; construct the Veronese fraction maps and glue them."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VeroneseProjIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/VeroneseProjIso.lean",
+  "declaration": "AlgebraicGeometry.exists_veronese_proj_iso",
+  "statement": "theorem exists_veronese_proj_iso :\n    ∃ e : Proj 𝒜 ≅ Proj (GradedAlgebra.veroneseGrade 𝒜 d),\n      ∀ (m : ℕ) (s : GradedAlgebra.veroneseSubring 𝒜 d)\n        (hs : s ∈ GradedAlgebra.veroneseGrade 𝒜 d m) (hm : 0 < m),\n        ∃ α : Away (GradedAlgebra.veroneseGrade 𝒜 d) s →+* Away 𝒜 (s : R),\n          (∀ (q : ℕ) (a : GradedAlgebra.veroneseSubring 𝒜 d)\n              (ha : a ∈ GradedAlgebra.veroneseGrade 𝒜 d (q • m)),\n            (α (Away.mk _ hs q a ha)).val =\n              (Localization.mk (a : R) ⟨(s : R) ^ q, ⟨q, rfl⟩⟩ :\n                Localization.Away (s : R))) ∧\n          Proj.awayι 𝒜 (s : R) hs (Nat.mul_pos hm d.pos) ≫ e.hom =\n            Spec.map (CommRingCat.ofHom α) ≫\n              Proj.awayι (GradedAlgebra.veroneseGrade 𝒜 d) s hs hm",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-23",
+  "note": "Section variables are the commutative rings k,R, Algebra k R, grading 𝒜 and GradedRing 𝒜; VeroneseProjIso also has d : ℕ+."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261023T123506-L-1198139",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261023T123506-L-1198139",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-space-affine-target-global-functions",
+ "kind": "statement",
+ "title": "Morphisms of algebraic spaces to affine schemes are determined by global functions",
+ "statement": "Let $X$ be an algebraic space over $\\operatorname{Spec}\\mathbf Z$ [def-trf-algebraic-space, def-pc-scheme], and let $T$ be an affine scheme, that is, a scheme isomorphic to a spectrum of a commutative ring [def-weil-affine-spectrum]. The map $$\\operatorname{Hom}_{\\mathbf Z}(X,T)\\longrightarrow\\operatorname{Hom}_{\\mathrm{Ring}}(\\Gamma(T,\\mathcal O_T),\\Gamma(X,\\mathcal O_X)),\\qquad f\\longmapsto f^\\sharp$$ is bijective. Morphisms on the left are natural transformations of the representing fppf sheaves; homomorphisms on the right preserve the unit. Global functions on $X$ are global sections of its small etale structure sheaf. No quasi-compactness, separation or cohomological hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 05Z1 (lemma-morphism-to-affine-scheme)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale atlas $p:h_U\\to X$ using [def-trf-algebraic-space]. By [lem-a1-etale-atlas-presentation], the scheme $R=U\\times_XU$ with projections $s,t$ represents the relation of sections of $U$ having the same image in $X$, and the sheafified quotient $Q=U/R$ is canonically $X$, compatibly with $p$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-a1-etale-atlas-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05Z1 (lemma-morphism-to-affine-scheme), choose a presentation; spaces.tex Tag 0262 (lemma-space-presentation)."
+   }
+  },
+  {
+   "text": "Write $A=\\Gamma(T,\\mathcal O_T)$ and $B=\\Gamma(X,\\mathcal O_X)$. Let $\\varphi:A\\to B$ preserve the unit. Since $T$ is affine, choose $T\\simeq\\operatorname{Spec}A$ (transport any spectrum presentation along its isomorphism on global sections). The scheme affine-target lemma gives a unique $g:U\\to T$ with $g^\\sharp=p^\\sharp\\circ\\varphi$. Both $U$ and the relation scheme $R$ may be non-affine.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05Z1, construction of g from the composite on global sections; schemes.tex Tag 01I1 (lemma-morphism-into-affine)."
+   }
+  },
+  {
+   "text": "Because $p\\circ s=p\\circ t$, functoriality of pullback gives $s^\\sharp\\circ p^\\sharp=t^\\sharp\\circ p^\\sharp$. Thus $(g\\circ s)^\\sharp=(g\\circ t)^\\sharp$. The uniqueness part of the scheme affine-target lemma on $R$ gives $g\\circ s=g\\circ t$. The representable functors $h_R,h_U,h_T$ are fppf sheaves: an fppf covering is an fpqc covering [lem-trf-fppf-covering-is-fpqc], and scheme morphisms agreeing on overlaps glue uniquely along fpqc coverings [lem-weil-pbc-fpqc-representable-descent]. Apply the sheafified-relation coequalizer lemma with $h_R\\rightrightarrows h_U$, the quotient $Q$ supplied in step 1, and target the fppf sheaf $h_T$. It gives a unique $f:X\\simeq Q\\to T$ with $f\\circ p=g$.",
+   "uses": [
+    "lem-a1-etale-atlas-presentation",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-a1-specified-sheafified-relation-coequalizer",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05Z1, equality on R and descent to X=U/R; groupoids.tex definition-quotient-sheaf and the following coequalizer paragraph. Representables are fppf sheaves: descent.tex Tag 023Q (lemma-fpqc-universal-effective-epimorphisms) with topologies.tex Tag 022C."
+   }
+  },
+  {
+   "text": "The restriction $p^\\sharp:B\\to\\Gamma(U,\\mathcal O_U)$ is injective: a global section is a compatible family on the small etale site. If two such families agree on $U$, then on any etale scheme chart $W\\to X$ they agree after restriction to the etale covering $W\\times_XU\\to W$. The sheaf separatedness axiom makes their components on $W$ equal. This proves injectivity on families. Consequently $p^\\sharp\\circ f^\\sharp=g^\\sharp=p^\\sharp\\circ\\varphi$ implies $f^\\sharp=\\varphi$.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05Z1, final sheaf argument; Tag 03G7 (definition-structure-sheaf)."
+   }
+  },
+  {
+   "text": "If $f_1,f_2:X\\to T$ induce the same homomorphism on global functions, then $f_1\\circ p,f_2\\circ p:U\\to T$ have the same pullback and are equal by the scheme affine-target lemma. Uniqueness of factorization through the coequalizer $h_U\\to Q\\simeq X$ gives $f_1=f_2$. This proves both injectivity and surjectivity of the stated map, without any compactness, separation, or cohomological assumption.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-a1-specified-sheafified-relation-coequalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05Z1, last sentence (uniqueness of f from uniqueness of g)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "lem-a1-etale-atlas-presentation",
+  "lem-a1-specified-sheafified-relation-coequalizer",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-morphism-into-affine-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 05Z1 (lemma-morphism-to-affine-scheme), full proof; spaces.tex Tag 0262 supplies the presentation, and the sheafified quotient universal property is groupoids.tex definition-quotient-sheaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from an algebraic space over integers to an affine scheme correspond bijectively to homomorphisms on global functions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  {X : AlgebraicGeometry.Scheme} →\\n    (X ⟶\\n        AlgebraicGeometry.Spec\\n          { carrier := MvPolynomial n (ULift.{u, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial }) ≃\\n      (n → ↑(X.presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"There is a natural equivalence between the set of morphisms from a scheme $ X $ to the affine space $ \\\\mathbb{A}^n_\\\\mathbb{Z} $ (realized as $ \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\dots, x_n]) $) and t\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    {X : AlgebraicGeometry.Scheme} →\\n      [inst : X.Over S] → { f // AlgebraicGeometry.Scheme.Hom.IsOver f S } ≃ (n → ↑(X.presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"For any scheme $ S $ and any scheme $ X $ over $ S $, there is a natural equivalence between morphisms from $ X $ to the affine space $ \\\\mathbb{A}^n_S $ over $ S $ and $ n $-tuples of global sections \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) {X : AlgebraicGeometry.Scheme}\\n  (f :\\n    X ⟶\\n      AlgebraicGeometry.Spec\\n        { carrier := MvPolynomial n (ULift.{u, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial })\\n  (i : n),\\n  (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv n) f i =\\n    (CategoryTheory.ConcreteC\", \"doc\": \"For any scheme $X$ and index set $n$, there is a natural bijection between the set of morphisms from $X$ to the affine space $\\\\mathbb{A}^n_\\\\mathbb{Z}$ (realized as $\\\\operatorname{Spec}(\\\\mathbb{Z}[x_1,\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) {X : AlgebraicGeometry.Scheme} (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv n).symm v =\\n    CategoryTheory.CategoryStruct.comp X.toSpecΓ\\n      (AlgebraicGeometry.Spec.map\\n        (CommRingCat.ofHom\\n          (MvPolynomial.eval₂Hom \", \"doc\": \"The inverse of the natural equivalence between morphisms from a scheme $ X $ to the affine space $ \\\\mathbb{A}^n_\\\\mathbb{Z} $ (realized as $ \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\dots, x_n]) $) and $ n \"}\n  {\"name\": \"AlgebraicGeometry.Spec.homEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"{R S : CommRingCat} → (AlgebraicGeometry.Spec S ⟶ AlgebraicGeometry.Spec R) ≃ (R ⟶ S)\", \"doc\": \"For commutative rings $R$ and $S$, there is a natural bijection between morphisms of schemes $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and ring homomorphisms $R \\\\to S$. This equivalence is e\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.Spec_full\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.AffineScheme.Spec.Full\", \"doc\": \"The contravariant Spec functor from the opposite category of commutative rings to affine schemes is fully faithful. This means that for any commutative rings $R$ and $S$, the induced map between hom-s\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S],\\n  (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).hom =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace n S).toSpecΓ\\n      (AlgebraicGeometry.Spec.map\\n        (CommRingCat.ofHom\\n          (Mv\", \"doc\": \"For an affine scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is isomorphic to the spectrum of the polynomial ring $ \\\\Gamma(S)[x_1,\\\\dots,x_n] $ over the global sections of $ S $. Th\"}\n  {\"name\": \"AlgebraicGeometry.arrowIsoΓSpecOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{A B : CommRingCat} →\\n  (f : A ⟶ B) →\\n    CategoryTheory.Arrow.mk f ≅\\n      CategoryTheory.Arrow.mk (AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.Spec.map f))\", \"doc\": \"For any ring homomorphism $ f : A → B $, there is an isomorphism in the arrow category between the morphism $ f $ and the morphism induced by the scheme map $ \\\\operatorname{Spec}(f) $, constructed usi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ΓSpec.adjunction (GammaSpecAdjunction.lean:399) is for schemes; locallyRingedSpaceAdjunction (:333) is for locally ringed spaces. Neither gives maps of fppf algebraic-space sheaves to affine schemes by a one-line specialization. Spec.homEquiv only treats affine schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spectrum is right adjoint to global sections on algebraic spaces not only schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ΓSpec.adjunction\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"AlgebraicGeometry.Scheme.Γ.rightOp ⊣ AlgebraicGeometry.Scheme.Spec\", \"doc\": \"The global sections functor $\\\\Gamma$ (contravariant from the category of schemes to commutative rings) is left adjoint to the spectrum functor $\\\\operatorname{Spec}$ (from commutative rings to schemes)\"}\n  {\"name\": \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"AlgebraicGeometry.Scheme.Γ.IsRightAdjoint\", \"doc\": \"The contravariant global sections functor from the category of schemes to the category of commutative rings is a right adjoint functor. This establishes an adjunction between the opposite category of \"}\n  {\"name\": \"AlgebraicGeometry.Spec.reflective\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"CategoryTheory.Reflective AlgebraicGeometry.Scheme.Spec\", \"doc\": \"The contravariant Spec functor from the opposite category of commutative rings to schemes is reflective, meaning it has a left adjoint given by the right opposite of the global sections functor $\\\\Gamm\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.adjunction_unit_app\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, AlgebraicGeometry.ΓSpec.adjunction.unit.app X = X.toSpecΓ\", \"doc\": \"For any scheme $X$, the unit of the Γ-Spec adjunction at $X$ is equal to the canonical morphism from $X$ to the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(X))$, which establishes the natural correspond\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"AlgebraicGeometry.LocallyRingedSpace.Γ.rightOp ⊣ AlgebraicGeometry.Spec.toLocallyRingedSpace\", \"doc\": \"The global sections functor $\\\\Gamma$ from the category of locally ringed spaces to the opposite category of commutative rings is left adjoint to the spectrum functor $\\\\operatorname{Spec}$, forming an \"}\n  {\"name\": \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"AlgebraicGeometry.LocallyRingedSpace.Γ.IsRightAdjoint\", \"doc\": \"The global sections functor $\\\\Gamma$ from the category of locally ringed spaces to the opposite category of commutative rings is a right adjoint functor. This establishes an adjunction between the con\"}\n  {\"name\": \"AlgebraicGeometry.Spec.full\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"AlgebraicGeometry.Scheme.Spec.Full\", \"doc\": \"The contravariant Spec functor from the opposite category of commutative rings to schemes is left adjoint to the global sections (Gamma) functor from schemes to commutative rings. This establishes a n\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.toSpecΓ\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"(X : AlgebraicGeometry.Scheme) → X ⟶ AlgebraicGeometry.Spec (X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"The morphism from a scheme $X$ to the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(X))$ constructed as the unit of the adjunction between the global sections functor $\\\\Gamma$ (contravariant from schemes \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ΓSpec.adjunction (GammaSpecAdjunction.lean:399) is for schemes; locallyRingedSpaceAdjunction (:333) is for locally ringed spaces. Neither gives maps of fppf algebraic-space sheaves to affine schemes by a one-line specialization. Spec.homEquiv only treats affine schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Spec\", \"adjunction\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.ΓSpec.adjunction\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" : AlgebraicGeometry.Scheme.Γ.rightOp ⊣ AlgebraicGeometry.Scheme.Spec\", \"doc\": \"The adjunction `Γ ⊣ Spec` from `CommRingᵒᵖ` to `Scheme`.\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" : AlgebraicGeometry.LocallyRingedSpace.Γ.rightOp ⊣ AlgebraicGeometry.Spec.toLocallyRingedSpace\", \"doc\": \"The adjunction `Γ ⊣ Spec` from `CommRingᵒᵖ` to `LocallyRingedSpace`.\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_unit\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" : AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction.unit = AlgebraicGeometry.identityToΓSpec\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.isIso_adjunction_counit\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" : CategoryTheory.IsIso AlgebraicGeometry.ΓSpec.adjunction.counit\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" : CategoryTheory.IsIso AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction.counit\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.adjunction_unit_app\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" {X : AlgebraicGeometry.Scheme} : AlgebraicGeometry.ΓSpec.adjunction.unit.app X = X.toSpecΓ\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.adjunction_counit_app'\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" {R : CommRingCatᵒᵖ} : AlgebraicGeometry.ΓSpec.adjunction.counit.app R = AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction.counit.app R\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" : AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction.counit = (CategoryTheory.NatIso.op AlgebraicGeometry.LocallyRingedSpace.SpecΓIdentity).inv\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_homEquiv_apply\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" {X : AlgebraicGeometry.LocallyRingedSpace} {R : CommRingCatᵒᵖ} (f : AlgebraicGeometry.LocallyRingedSpace.Γ.rightOp.obj X ⟶ R) : (AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction.homEquiv X R) f = CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.identityToΓSpec.app X) (AlgebraicGeometry.Spe\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_homEquiv_apply'\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" {X : AlgebraicGeometry.LocallyRingedSpace} {R : Type u} [CommRing R] (f : ↧R ⟶ AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X)) : (AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction.homEquiv X (Opposite.op ↧R)) (Opposite.op f) = CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.ide\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.adjunction_homEquiv_apply\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" {X : AlgebraicGeometry.Scheme} {R : CommRingCatᵒᵖ} (f : Opposite.op (AlgebraicGeometry.Scheme.Γ.obj (Opposite.op X)) ⟶ R) : (AlgebraicGeometry.ΓSpec.adjunction.homEquiv X R) f = { toLRSHom' := (AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction.homEquiv X.toLocallyRingedSpace R) f }\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.adjunction_homEquiv_symm_apply\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" {X : AlgebraicGeometry.Scheme} {R : CommRingCatᵒᵖ} (f : X ⟶ AlgebraicGeometry.Scheme.Spec.obj R) : (AlgebraicGeometry.ΓSpec.adjunction.homEquiv X R).symm f = (AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction.homEquiv X.toLocallyRingedSpace R).symm (AlgebraicGeometry.Scheme.Hom.toLRSHom f)\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ΓSpec.adjunction (GammaSpecAdjunction.lean:399) is for schemes; locallyRingedSpaceAdjunction (:333) is for locally ringed spaces. Neither gives maps of fppf algebraic-space sheaves to affine schemes by a one-line specialization. Spec.homEquiv only treats affine schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|morphism.*affine.*scheme|toSpecΓ|ΓSpecIso",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"line\": \"711\", \"text\": \"    (Scheme.ΓSpecIso _).inv ≫ (Spec A⁰_ f).presheaf.map (homOfLE le_top).op ≫\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"line\": \"719\", \"text\": \"    (Scheme.ΓSpecIso _).inv ≫ (Spec A⁰_ f).presheaf.germ _ _ (by simp) ≫\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"141\", \"text\": \"  (basicOpen 𝒜 f).toSpecΓ ≫ Spec.map (awayToSection 𝒜 f)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"145\", \"text\": \"    (basicOpenToSpec 𝒜 f).app ⊤ = (Scheme.ΓSpecIso _).hom ≫ awayToSection 𝒜 f ≫\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"147\", \"text\": \"  simp [basicOpenToSpec, Scheme.Opens.toSpecΓ_appTop]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"166\", \"text\": \"    dsimp [basicOpenToSpec, Scheme.Opens.toSpecΓ]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"214\", \"text\": \"  rw [reassoc_of% this, ← Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_assoc, basicOpenToSpec,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"165\", \"text\": \"    change (Scheme.ΓSpecIso (.of R)).inv ≫ (Spec <| .of R).presheaf.germ _ _ _ ≫ _ = _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"line\": \"310\", \"text\": \"      (Scheme.ΓSpecIso R).inv ≫ (Spec R).presheaf.germ ⊤ x trivial ≫ (Spec R).residue x := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1052\", \"text\": \"    (isLimitOfPreserves (Scheme.Γ.rightOp ⋙ Scheme.Spec) hc) (D.obj i).toSpecΓ.opensRange\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1053\", \"text\": \"    ((preimage_opensRange_toSpecΓ (X := c.pt) (c.π.app i)).trans\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1057\", \"text\": \"    ((preimage_opensRange_toSpecΓ (D.map fij)).symm.trans hj)⟩⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"121\", \"text\": \"  mp _ := (AlgebraicGeometry.Scheme.ΓSpecIso R).commRingCatIsoToRingEquiv.isArtinianRing\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"194\", \"text\": \"    fun _ ↦ isNoetherianRing_of_ringEquiv R (Scheme.ΓSpecIso R).symm.commRingCatIsoToRingEquiv\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"201\", \"text\": \"    isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso R).commRingCatIsoToRingEquiv\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"95\", \"text\": \"    fun _ ↦ (Scheme.Opens.toSpecΓ_SpecMap_presheaf_map ..).symm\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"142\", \"text\": \"      (f ⁻¹ᵁ U.1).toSpecΓ ≫ Spec.map (CommRingCat.ofHom <| integralClosure Γ(Y, U.1) Γ(X, f ⁻¹ᵁ U.1)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"150\", \"text\": \"  rw [← Iso.inv_comp_eq, reassoc_of% this, ← Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_assoc,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"163\", \"text\": \"    (f ⁻¹ᵁ U.1).ι ≫ f.toNormalization = (f ⁻¹ᵁ U.1).toSpecΓ ≫\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"196\", \"text\": \"  change (f ⁻¹ᵁ U.1).toSpecΓ ≫ Spec.map (f.app _) ≫ U.2.fromSpec = (f ⁻¹ᵁ U.1).ι ≫ _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"226\", \"text\": \"  (f.normalizationOpenCover.f ⟨U, hU⟩).appIso ⊤ ≪≫ Scheme.ΓSpecIso _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"80\", \"text\": \"  toFun f i := f.appTop ((Scheme.ΓSpecIso ℤ[n]).inv (.X i))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"81\", \"text\": \"  invFun v := X.toSpecΓ ≫ Spec.map\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"88\", \"text\": \"    simp only [Scheme.toSpecΓ_appTop, Scheme.ΓSpecIso_naturality, Iso.inv_hom_id_assoc]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"172\", \"text\": \"      hom := 𝔸(n; S).toSpecΓ ≫ Spec.map (CommRingCat.ofHom\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ΓSpec.adjunction (GammaSpecAdjunction.lean:399) is for schemes; locallyRingedSpaceAdjunction (:333) is for locally ringed spaces. Neither gives maps of fppf algebraic-space sheaves to affine schemes by a one-line specialization. Spec.homEquiv only treats affine schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom from algebraic space X to affine scheme Spec A equals ring homomorphisms A to global sections X",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Spec.homEquiv_apply\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \"∀ {R S : CommRingCat} (f : AlgebraicGeometry.Spec S ⟶ AlgebraicGeometry.Spec R),\\n  AlgebraicGeometry.Spec.homEquiv f = AlgebraicGeometry.Spec.preimage f\", \"doc\": \"For commutative rings $R$ and $S$, there is a natural bijection between morphisms of schemes $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and ring homomorphisms $R \\\\to S$. This establishes an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.toSpecΓ\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \"(X : Scheme.{u}) : X ⟶ Spec Γ(X, ⊤)\", \"doc\": \"The morphism from a scheme $X$ to the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(X))$ constructed as the unit of the adjunction between the global sections functor $\\\\Gamma$ (contravariant from schemes \"}\n  {\"name\": \"AlgebraicGeometry.Spec.full\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \": Scheme.Spec.Full\", \"doc\": \"The contravariant Spec functor from the opposite category of commutative rings to schemes is left adjoint to the global sections (Gamma) functor from schemes to commutative rings. This establishes a n\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOverEquiv_apply\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) {X : AlgebraicGeometry.Scheme} [inst : X.Over S]\\n  (f : { f // AlgebraicGeometry.Scheme.Hom.IsOver f S }) (i : n),\\n  (AlgebraicGeometry.AffineSpace.homOverEquiv S) f i =\\n    (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop ↑f))\\n \", \"doc\": \"For any scheme $ S $ and any scheme $ X $ over $ S $, there is a natural bijection between morphisms from $ X $ to the affine space $ \\\\mathbb{A}^n_S $ over $ S $ and $ n $-tuples of global sections of\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.globalSectionsIso\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \": CommRingCat.of R ≅ (structureSheaf R).1.obj (op ⊤)\", \"doc\": \"For a commutative ring $ R $, the canonical ring homomorphism from $ R $ to the global sections $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(\\\\operatorname{Spec}(R)) $ of its structure sheaf is an isomorphis\"}\n  {\"name\": \"AlgebraicGeometry.Spec.preimage\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \": R ⟶ S\", \"doc\": \"The function constructs the preimage of a morphism from a scheme $X$ to $\\\\operatorname{Spec}(S)$ under the contravariant Spec functor, corresponding to a ring homomorphism $S \\\\to \\\\Gamma(X, \\\\mathcal{O}\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.affine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsAffine X], CategoryTheory.IsIso X.toSpecΓ\", \"doc\": \"For any affine scheme $X$, the canonical morphism from $X$ to $\\\\operatorname{Spec}(\\\\Gamma(X))$ is an isomorphism, establishing a natural correspondence between affine schemes and the spectra of their \"}\n  {\"name\": \"AlgebraicGeometry.toSpecΓ\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \"(R : CommRingCat.{u}) : R ⟶ Γ.obj (op (Spec.toLocallyRingedSpace.obj (op R)))\", \"doc\": \"The canonical ring homomorphism from a commutative ring $ R $ to the global sections $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(\\\\operatorname{Spec}(R)) $ of its prime spectrum, induced by the structure sh\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ΓSpec.adjunction (GammaSpecAdjunction.lean:399) is for schemes; locallyRingedSpaceAdjunction (:333) is for locally ringed spaces. Neither gives maps of fppf algebraic-space sheaves to affine schemes by a one-line specialization. Spec.homEquiv only treats affine schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|def adjunction",
+   "results": "Logged 1 hit(s): Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean. Grep subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, locally ringed spaces or abstract sheaves; none states algebraic-space affine-target descent. Read GammaSpecAdjunction.lean:333,399-425; AffineScheme.ext_of_isAffine also assumes a scheme source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The spectrum functor is right adjoint to global sections for algebraic spaces",
+   "results": "Logged 8 hit(s): AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ, CategoryTheory.instIsRightAdjointSheafΓ, CategoryTheory.Sheaf.Γ, AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ, AlgebraicGeometry.Spec.faithful, AlgebraicGeometry.ΓSpecIso_inv_ΓSpec_adjunction_homEquiv, AlgebraicGeometry.Spec.full, AlgebraicGeometry.Spec.homEquiv_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, locally ringed spaces or abstract sheaves; none states algebraic-space affine-target descent. Read GammaSpecAdjunction.lean:333,399-425; AffineScheme.ext_of_isAffine also assumes a scheme source."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Spec\"",
+   "results": "Logged 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, locally ringed spaces or abstract sheaves; none states algebraic-space affine-target descent. Read GammaSpecAdjunction.lean:333,399-425; AffineScheme.ext_of_isAffine also assumes a scheme source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from algebraic spaces to affine schemes are determined by global functions",
+   "results": "Logged 8 hit(s): AlgebraicGeometry.ext_of_isAffine, AlgebraicGeometry.AffineSpace.hom_ext, AlgebraicGeometry.AffineSpace.hom_ext_iff, AlgebraicGeometry.AffineTargetMorphismProperty.ext, AlgebraicGeometry.AffineTargetMorphismProperty.ext_iff, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv, AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.LocallyRingedSpace.comp_ring_hom_ext",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, locally ringed spaces or abstract sheaves; none states algebraic-space affine-target descent. Read GammaSpecAdjunction.lean:333,399-425; AffineScheme.ext_of_isAffine also assumes a scheme source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spectrum is right adjoint to global sections on algebraic spaces not only schemes",
+   "results": "Logged 8 hit(s): AlgebraicGeometry.ΓSpec.adjunction, AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ, AlgebraicGeometry.Spec.reflective, AlgebraicGeometry.ΓSpec.adjunction_unit_app, AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction, AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ, AlgebraicGeometry.Spec.full, AlgebraicGeometry.Scheme.toSpecΓ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, locally ringed spaces or abstract sheaves; none states algebraic-space affine-target descent. Read GammaSpecAdjunction.lean:333,399-425; AffineScheme.ext_of_isAffine also assumes a scheme source."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-acyclic-affinization-geometry",
+  "date": "2026-10-23",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Serre affineness criterion for algebraic spaces. Geometric prerequisites to Tag 07V6: separatedness and universal injectivity of the absolute canonical map, before the affine presentation argument. Canonical-map construction preceding the two geometric arguments: the full affine-target universal property of Tag 05Z1.",
+   "via": [
+    "lem-sfb-space-acyclic-affinization-geometry",
+    "lem-sfb-space-serre-affineness",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-affine-target-global-functions",
+  "worker": "stage1",
+  "summary": "Expanded the entire proof of Stacks Tag 05Z1 into atlas construction, scheme affine-target correspondence, compatibility on the represented relation and quotient descent, sheaf separatedness, and uniqueness. Existing DAG nodes supply every non-elementary input. No new nodes or statement changes; the lack of compactness, separation and vanishing hypotheses is preserved. Mathlib searches find the scheme correspondence only.",
+  "blueprint": "The historical supporting chain in blueprint.from.place ends with the canonical-map construction before the two geometric arguments: full affine-target universal property of Tag 05Z1. Steps 1-5 realize exactly that prerequisite below the direct-image constructibility proof (3), without changing its alteration route. The ancestor search prints None for this imported historical chain; its from.node and via are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-etale-atlas-presentation",
+    "why": "Generic Tag 0262 atlas presentation used in the source proof of Tag 05Z1; no node of this unit states it."
+   },
+   {
+    "node": "lem-a1-specified-sheafified-relation-coequalizer",
+    "why": "Generic sheafified-relation quotient universal property required to descend g; this is the categorical meaning of U/R in Tag 05Z1."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-etale-atlas-presentation",
+  "lem-a1-specified-sheafified-relation-coequalizer"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-75babc360",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-75babc360 (reviewer sub-agent of L); spot-checked: Read Stacks Tag 05Z1 (spaces-properties.tex, lemma-morphism-to-affine-scheme) in full, statement and proof. The item statement is unchanged and matches it. There are no new nodes and no duplicates in the DAG (grep 05Z1 finds only a citer, acyclic-affinization step 1, whose use of T=Spec A and 1_A fits the statement). Steps 1-5 follow the source in order. Step 1: atlas from def-trf plus lem-a1-etale-atlas-presentation (Tag 0262), whose statement gives R as a scheme, the pairs description and Q isomorphic to X. Step 2: g from the Mathlib leaf lem-weil-pbc-morphism-into-affine-scheme (Tag 01I1), which allows any scheme source; moving T to Spec A is elementary transport. Step 3: g∘s = g∘t by injectivity on R; every hypothesis of the coequalizer lemma checked (injective (s,t), equivalence relation, Q a sheafification of this P). Step 4: injectivity of p^♯ is the sheaf separatedness axiom on the covering W×_X U → W, correctly marked elementary. Step 5: uniqueness from the scheme lemma plus the coequalizer. Edge cases checked: X empty; T empty (A=0 forces B=0, which happens only for X empty); non-quasi-compact or non-separated X uses no finite cover and no affine intersection. FIX (C1): step 3 used that h_R, h_U, h_T are fppf sheaves (Tags 023Q and 022C) with no citation. I added lem-trf-fppf-covering-is-fpqc and lem-weil-pbc-fpqc-representable-descent (both Mathlib leaves) to step 3's text and uses and to proof_deps. Batch-5: lem-a1-etale-atlas-presentation reaches sec-trace-formula only through the general definition def-trf-algebraic-space, already a stmt_dep. The added trf leaf is generic Tag 022C. Neither is a statement of the trace formula or of Poincaré duality or a step of their proofs, so both are accepted. tool_uses for the two generic a1 nodes accepted. No SGA source.; 1 file(s) fixed by the reviewer"
+ }
+}

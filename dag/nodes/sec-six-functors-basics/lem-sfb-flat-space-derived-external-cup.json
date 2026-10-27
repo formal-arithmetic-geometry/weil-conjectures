@@ -1,0 +1,363 @@
+{
+ "id": "lem-sfb-flat-space-derived-external-cup",
+ "kind": "statement",
+ "title": "Derived external cup products for flat algebraic spaces",
+ "statement": "Let $R$ be a commutative ring, $T=\\operatorname{Spec}R$ a scheme [def-pc-scheme], and $X,Y$ algebraic spaces flat, quasi-compact and quasi-separated over $T$ [def-trf-algebraic-space]. Flatness is tested on etale scheme charts; quasi-compactness means inverse images of quasi-compact spaces are quasi-compact, and quasi-separatedness means the relative diagonal is quasi-compact. Use structure-module sheaves on small etale sites [def-weil-sheaf-of-modules-category] and the scalar-valued derived global sections of [def-sfb-space-affine-global-sections]. In $D(R)$ [def-weil-abstract-derived-category] put $K_Z=R\\Gamma(Z,\\mathcal O_Z)$, for $Z=X,Y,X\\times_TY$. The canonical external cup product, defined by pulling back along both projections and applying [def-sfb-ringed-site-module-cup-product], is an isomorphism in the derived category\n$$\\kappa_{X,Y}:K_X\\otimes_R^{\\mathbf L}K_Y\\xrightarrow{\\sim}K_{X\\times_TY}.$$\nEach $K_Z$ is a commutative algebra object: its relative cup product is associative, unital and compatible with derived tensor symmetry. The map $\\kappa_{X,Y}$ is an isomorphism of these commutative algebra objects, where its source carries the signed tensor-product multiplication. Pullback by every $T$-morphism between spaces satisfying these hypotheses preserves these products and units. The isomorphisms $\\kappa$ are natural for these pullbacks and compatible with associativity, permutations and the unit factor $T$, for which $K_T=R[0]$. Thus pullback by the first projection corresponds to $x\\mapsto x\\otimes1$, and by the second to $y\\mapsto1\\otimes y$. For every ring map $R\\to B$, the canonical comparison $B\\otimes_R^{\\mathbf L}K_Z\\to R\\Gamma(Z_B,\\mathcal O_{Z_B})$ is an isomorphism and respects the products, units, pullbacks and external cup isomorphisms, and their identity and composition comparisons. If $Z$ is a scheme, the canonical etale--Zariski quasi-coherent derived equivalence identifies this product with the ordinary Zariski structure-module cup product. No projectivity of the cohomology modules, properness, Noetherianity or flatness of $B$ over $R$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Derived external-cup construction from Tags 08IN (lemma-cohomology-base-change) and 08IR (lemma-compare-base-change); scheme etale--Zariski comparison Tag 071Q (lemma-derived-quasi-coherent-small-etale-site). Product coherence and base-change compatibility: sites-cohomology.tex Tags 0FPL (lemma-cup-product-associative), 0FPM (lemma-cup-product-commutative), 0H9A (lemma-base-change-cup-product). The combined normalized derived external-cup statement is agent-stated."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-space-affine-global-sections",
+  "def-weil-abstract-derived-category",
+  "def-sfb-ringed-site-module-cup-product",
+  "def-sfb-space-affine-hom-comparison",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-affine-sections-compositors",
+  "def-zl-ring-derived-scalar-extension",
+  "def-sfb-flat-space-derived-external-cup-maps"
+ ],
+ "proof": [
+  {
+   "text": "Write $f:X\\to T$, $g:Y\\to T$, $W=X\\times_TY$ and $p:W\\to X$, $q:W\\to Y$. The fibre product is an algebraic space. Its projections are base changes, so are flat and quasi-compact. The diagonal of a base change is the base change of the diagonal; applying quasi-compact base-change stability also to the diagonals proves quasi-separatedness. Composition preserves quasi-compactness directly from its inverse-image definition. The diagonal of a composite factors through the pullback of each of the two diagonals, proving the corresponding assertion for quasi-separatedness. The diagonal of any morphism of algebraic spaces is a monomorphism, so its own diagonal is an isomorphism; hence each relative diagonal here is also quasi-separated, which is the form of quasi-separatedness required by the projection-formula node used in step 5. On scheme charts, composite flatness says that the composite of two exact tensor functors is exact. Thus $W\\to T$, and after any affine scalar extension all three structure maps, satisfy the required hypotheses. Structure modules are quasi-coherent (on an affine chart they are the associated module of its ring), and the cited derived pullback/tensor result supplies quasi-coherent coefficients for the formulas below.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-derived-qcoh-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 08IN, 08IR: geometric hypotheses and quasi-coherent inputs"
+   }
+  },
+  {
+   "text": "Use the affine equivalence $a_R:D(R)\\simeq D_{\\mathrm{QCoh}}(\\mathcal O_T)$, with inverse $G_T$. Its unit sends $r$ to the actual structural section $r\\cdot1$. For $h:Z\\to T$, the specified compositor identifies $G_Z$ with $G_T Rh_*$. These identifications also identify tensor and scalar insertion: the pullback tensor comparison on flat-term K-flat representatives is the signed total of $(b\\otimes u)\\otimes(c\\otimes v)\\mapsto bc\\otimes(u\\otimes v)$; for $R\\to B$ the same formula identifies $La^*a_R(M)$ with $a_B(B\\otimes_R^{\\mathbf L}M)$. Both are the canonical comparisons, since the scalar-section and compositor definitions fix these formulas and their universal derived units. Thus calculations on $T$ below give calculations in $D(R)$, and $G_T(\\mathcal O_T)=R[0]$ with its actual scalar unit.",
+   "uses": [
+    "lem-sfb-affine-etale-derived-module-realization",
+    "def-sfb-space-affine-global-sections",
+    "def-sfb-space-affine-sections-compositors",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 071Q and scalar representative normalization; derived tensor pullback"
+   }
+  },
+  {
+   "text": "For every ringed-topos morphism $h$ used here put $P_h=Lh^*$, $R_h=Rh_*$, and let $c_h$ be the cup map in the statement. It is exactly the lax map transferred from the strong monoidal $P_h$: its transpose is $(\\varepsilon_h\\otimes\\varepsilon_h)t_h$. The adjunction-mates theorem gives associativity and both unit diagrams, with unit the adjunct of $P_h\\mathbf1\\simeq\\mathbf1$. Symmetry follows by taking transposes: both sides are $(\\varepsilon_L\\otimes\\varepsilon_K)\\,\\psi\\,t_h$, using naturality of the symmetry and the symmetric tensor comparison. Applied to $\\mathcal O_Z\\otimes^{\\mathbf L}\\mathcal O_Z\\simeq\\mathcal O_Z$, these identities give the commutative algebra structure on $K_Z$; its unit is the structural scalar insertion. This proves the identities as derived morphisms, before taking any cohomology.",
+   "uses": [
+    "def-sfb-ringed-site-module-cup-product",
+    "lem-sfb-monoidal-adjunction-mates",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPL (lemma-cup-product-associative), 0FPM (lemma-cup-product-commutative); the unit is the adjunction mate"
+   }
+  },
+  {
+   "text": "For a $T$-map $u:Z'\\to Z$, pullback $\\rho_u:K_Z\\to K_{Z'}$ is the map whose transpose on $Z'$ is $Lu^*(\\varepsilon_{Z,\\mathcal O_Z})$ followed by $Lu^*\\mathcal O_Z\\simeq\\mathcal O_{Z'}$. Here the scalar pullback on $Z'$ is identified with $Lu^*P_Z$. The unit and counit of a monoidal adjunction are monoidal, so this transpose, and therefore $\\rho_u$, preserves multiplication and unit. Explicitly the two product transposes are $Lu^*(\\varepsilon\\otimes\\varepsilon)t_Z$, followed by the structure-module multiplication; the unit transposes are the structure-module identity. For $v:Z''\\to Z'$ the composite-counit formula identifies the transpose of $\\rho_v\\rho_u$ with $L(uv)^*\\varepsilon_Z$. Thus $\\rho_v\\rho_u=\\rho_{uv}$; the identity case uses the identity adjunction. These are the canonical pullbacks, not an arbitrarily chosen system of algebra maps.",
+   "uses": [
+    "lem-sfb-monoidal-adjunction-unit-counit",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPN (lemma-compose-cup-product), composite-counit calculation"
+   }
+  },
+  {
+   "text": "Put $A=Rf_*\\mathcal O_X$ and $C=Rg_*\\mathcal O_Y$ on $T$. They are quasi-coherent derived objects by flat derived base change's preservation clause. The composite\n$$A\\otimes^{\\mathbf L}C\\xrightarrow{\\pi_g}Rg_*(Lg^*A)\\xrightarrow{Rg_*\\beta}Rg_*Rq_*\\mathcal O_W\\simeq R(W\\to T)_*\\mathcal O_W$$\nis an isomorphism: the first arrow is the qcqs projection formula for $g$, with coefficient $\\mathcal O_Y$ (using symmetry to order the factors); the second is flat base change for $f$ along $g$, with coefficient $\\mathcal O_X$. To identify the map, transpose under $L(W\\to T)^*\\dashv R(W\\to T)_*$. The projection arrow applies the $g$-counit to the $C$ factor. The base-change mate applies $Lp^*$ to the $f$-counit on the $A$ factor. The composite-counit identity therefore gives exactly\n$$Lp^*Lf^*A\\otimes^{\\mathbf L}Lq^*Lg^*C\\xrightarrow{Lp^*\\varepsilon_f\\otimes Lq^*\\varepsilon_g}\\mathcal O_W\\otimes^{\\mathbf L}\\mathcal O_W\\simeq\\mathcal O_W.$$\nBy the defining cup transpose this is external cup. Step 2 converts it to the specified $\\kappa_{X,Y}$ in $D(R)$, proving its invertibility without any assertion about projectivity of $H^i(K_Z)$.",
+   "uses": [
+    "lem-sfb-space-qcqs-derived-projection-formula",
+    "lem-sfb-flat-space-derived-pushforward-base-change",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-sfb-space-affine-sections-compositors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 08IN (lemma-cohomology-base-change), 08IR (lemma-compare-base-change), with the explicit two-counit transpose"
+   }
+  },
+  {
+   "text": "External cup is $m_W(\\rho_p\\otimes\\rho_q)$. For four inputs its composite with multiplication on $K_W$ is, by associativity and symmetry of step 3,\n$$m_W\\bigl(m_W(\\rho_p\\otimes\\rho_p)\\otimes m_W(\\rho_q\\otimes\\rho_q)\\bigr)(1\\otimes\\psi\\otimes1).$$\nStep 4 replaces the two inner expressions by $\\rho_p m_X$ and $\\rho_q m_Y$. This is exactly $\\kappa$ following the tensor-product multiplication $(m_X\\otimes m_Y)(1\\otimes\\psi\\otimes1)$. The unit equation follows from $\\rho_p(1)=\\rho_q(1)=1$. The symmetry on homogeneous representative tensors of degrees $b,c$ contributes $(-1)^{bc}$, yielding the stated signed multiplication. Consequently $\\kappa$ is an algebra morphism, and since its underlying map is invertible it is an algebra isomorphism: compose its multiplicativity and unit equations with its inverse to obtain the same equations for that inverse.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPL, 0FPM: four-factor cup calculation"
+   }
+  },
+  {
+   "text": "For $u:X'\\to X$, $v:Y'\\to Y$, use $p(u\\times v)=up'$ and $q(u\\times v)=vq'$. Functoriality and multiplicativity of pullback from step 4 give\n$$\\rho_{u\\times v}\\kappa_{X,Y}=m_{W'}(\\rho_{p'}\\rho_u\\otimes\\rho_{q'}\\rho_v)=\\kappa_{X',Y'}(\\rho_u\\otimes\\rho_v).$$\nBoth triple-product composites are $m^{(3)}(\\rho_{p_1}\\otimes\\rho_{p_2}\\otimes\\rho_{p_3})$ by associativity. Interchanging adjacent factors gives the tensor symmetry by commutativity; adjacent interchanges generate permutations, and the symmetry coherence of step 3 identifies their relations. With a factor $T$, the formula is multiplication by its structural unit, hence the appropriate unitor by step 2. Setting the second input to the unit in $\\kappa$ gives $\\rho_p$, and setting the first to the unit gives $\\rho_q$. After $\\kappa^{-1}$ these are precisely the two unit-insertion maps stated in the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPL, 0FPM, 0FPN: assembly from the established algebra and pullback identities"
+   }
+  },
+  {
+   "text": "For $a:\\operatorname{Spec}B\\to T$, apply flat derived base change to each structure map $h:Z\\to T$ and $E=\\mathcal O_Z$. The result is the canonical exchange isomorphism $La^*Rh_*\\mathcal O_Z\\simeq Rh_{B,*}\\mathcal O_{Z_B}$, since derived pullback carries the tensor unit to the tensor unit. Step 2 identifies its scalar realization with the canonical comparison $B\\otimes_R^{\\mathbf L}K_Z\\to K_{Z_B}$. The exchange is the counit mate in the cited theorem, so its identity and successive-base-change formulas give the identity and composition comparisons here. Its hypotheses require flatness of $h$, already checked in step 1, and impose no flatness on $a$ or $B$.",
+   "uses": [
+    "lem-sfb-flat-space-derived-pushforward-base-change",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IR (lemma-compare-base-change), arbitrary affine base change"
+   }
+  },
+  {
+   "text": "Check compatibility for these specified exchange maps $\\beta$, rather than just their invertibility. The defining mate equation is\n$$\\varepsilon_{h_B}\\,Lh_B^*(\\beta_E)=L(a')^*(\\varepsilon_{h,E})\\,\\theta,$$\nwhere $\\theta:Lh_B^*La^*\\simeq L(a')^*Lh^*$. It is the identity obtained by transposing $\\beta$. For the cup square, transpose under $Lh_B^*\\dashv Rh_{B,*}$ and substitute this equation for $E$ and $F$: either route becomes $(L(a')^*\\varepsilon_E\\otimes L(a')^*\\varepsilon_F)$ after $\\theta$ and the tensor comparison. Monoidality of $\\theta$ gives equality. For the unit both routes transpose to the tensor-unit identity. Hence exchange respects products and units. For a map $u$ between the spaces, pasting the exchange square with the square defining $\\rho_u$ gives the same mate as doing them in reverse order, by mate pasting. Thus it respects pullbacks. Apply the exchange/projection tensor-coherence identity to the projection arrow in step 5 and mate pasting to its base-change arrow; their composite is the external-cup square. This proves compatibility with $\\kappa$. Identity and iterated scalar extension remain these same diagrams by the identity and pasting assertions, with no extra choices.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0H9A (lemma-base-change-cup-product); explicit tensor of counit-mate equations"
+   }
+  },
+  {
+   "text": "If $Z$ is a scheme, use $\\epsilon_Z^*\\dashv R\\epsilon_{Z,*}$ and the canonical quasi-coherent equivalence. It identifies derived sections and the structure modules. Its pullback is symmetric strong monoidal by the ringed derived comparison theorem. The equivalence's unit and counit are the canonical adjunction maps, and its compatibility with the structure map is the specified derived pullback/direct-image comparison. The composite-counit formula consequently takes the transpose $(\\varepsilon\\otimes\\varepsilon)t$ defining the Zariski cup map to that defining the etale cup map. Adjunction injectivity proves equality of the products, and the same unit transpose identifies the units. This also applies to both projections, so the external product comparison is the ordinary Zariski one. All uses of projection formula and base change were for unbounded quasi-coherent derived objects; none used properness, Noetherianity, projective cohomology, or a flat scalar extension.",
+   "uses": [
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-scheme-derived-etale-qcoh-comparison",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 071Q (lemma-derived-quasi-coherent-small-etale-site), product normalization by adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-derived-qcoh-pullback-tensor",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "def-sfb-space-affine-global-sections",
+  "def-sfb-space-affine-sections-compositors",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-sfb-ringed-site-module-cup-product",
+  "lem-sfb-monoidal-adjunction-mates",
+  "lem-sfb-monoidal-adjunction-unit-counit",
+  "lem-sfb-space-qcqs-derived-projection-formula",
+  "lem-sfb-flat-space-derived-pushforward-base-change",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-scheme-derived-etale-qcoh-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Assembly of Tags 08IN, 08IR, 071Q with sites-cohomology.tex Tags 0FPL, 0FPM, 0FPN, 0H9A; scalar representative normalization and explicit counit transposes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived external cup product R Gamma X O tensor derived R Gamma Y O is R Gamma of fibre product for flat quasi compact quasi separated algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap T.SpecTensorTo p))\\n      (\", \"doc\": \"For a pullback triplet $T$ in the category of schemes and a point $p$ in the spectrum of $T.tensor$, the composition of the morphisms $\\\\mathrm{Spec.map}(\\\\mathrm{Hom.residueFieldMap}(T.\\\\mathrm{SpecTens\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.Spec.map T.tensorInl) (AlgebraicGeometry.Spec.map T.tensorInr)\\n    (AlgebraicGeometry.Spec.map\\n      (CategoryTheory.CategoryStruct.comp (A\", \"doc\": \"For any pullback triplet in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, the square formed by the Spec maps of the left/right inclusions into the pushout of residue fields $T.te\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (t : ↥(CategoryTheory.Limits.pullback f g))\\n  {Z : AlgebraicGeometry.Scheme} (h : CategoryTheory.Limits.pullback f g ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.ofPointTensor t)\", \"doc\": \"For morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ of schemes, and a point $t$ in the fiber product $X \\\\times_S Y$, the composition of the canonical morphism from the spectrum of the tensor product of resi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.Spec.map T.tensorInl) (AlgebraicGeometry.Spec.map T.tensorInr)\\n    (AlgebraicGeometry.Spec.map\\n      (CategoryTheory.CategoryStruct.comp (A\", \"doc\": \"Given a pullback triplet $T$ in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, the square formed by the morphisms $\\\\operatorname{Spec}(\\\\kappa(T.x)) \\to \\\\operatorname{Spec}(T.tensor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (t : ↥(CategoryTheory.Limits.pullback f g)),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.ofPointTensor t))\\n      (AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint t).SpecTensorTo =\\n \", \"doc\": \"For any morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ of schemes and any point $t$ in the fiber product $X \\\\times_S Y$, the composition of the morphism $\\\\operatorname{Spec}$ induced by the tensor product \"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T] {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Spec { carrier := T, commRing := inst_2 } ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackS\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$, induced by $R$-algebra structures on $S$ and $T$, is isomorph\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T] {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Spec { carrier := R, commRing := inst } ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackSpe\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$, induced by $R$-algebra structures on $S$ and $T$, is isomorph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.CategoryStruct.comp T.SpecTensorTo (CategoryTheory.Limits.pullback.fst f g) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map T.tensorInl) (X.fromSpec\", \"doc\": \"The composition of the morphism from the spectrum of the tensor product ring $\\\\operatorname{Spec}(T.tensor)$ to the pullback scheme and the first projection morphism $\\\\operatorname{pullback.fst}(f,g)$\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme fibre-product coordinate maps, flat ring-map base change and Kahler differential tensor isomorphisms do not state a derived global-sections Kunneth theorem for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensorProduct\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme fibre-product coordinate maps, flat ring-map base change and Kahler differential tensor isomorphisms do not state a derived global-sections Kunneth theorem for algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]unneth|externalCup|external_cup|derived.*[Bb]ialgebra",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme fibre-product coordinate maps, flat ring-map base change and Kahler differential tensor isomorphisms do not state a derived global-sections Kunneth theorem for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coherent Kunneth isomorphism for flat algebraic spaces over an affine base natural for pullbacks and arbitrary scalar extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"KaehlerDifferential.mapBaseChange.congr_simp\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (A : Type u_2) (B : Type u_3) [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [inst_6 : IsScalarTower R A B],\\n  KaehlerDifferential.mapBaseChange R A B = KaehlerDifferential.mapBaseChange R A B\", \"doc\": \"Given commutative rings $R$, $A$, and $B$ with $A$ an $R$-algebra, $B$ an $A$-algebra, and $B$ an $R$-algebra via the scalar tower $R \\\\to A \\\\to B$, there exists a $B$-linear isomorphism $\\\\Omega_{A/R} \"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv\", \"module\": \"Mathlib.RingTheory.Kaehler.TensorProduct\", \"type\": \"[h : Algebra.IsPushout R S A B] : B ⊗[A] Ω[A⁄R] ≃ₗ[B] Ω[B⁄S]\", \"doc\": \"Let $R, S, A, B$ be commutative rings. Let $R \\\\to S$ and $R \\\\to A$ be ring homomorphisms giving $S$ and $A$ the structure of $R$-algebras. If $B$ is the pushout of $S$ and $A$ over $R$ (i.e., $B$ is i\"}\n  {\"name\": \"Algebra.IsPushout.cancelBaseChangeAux\", \"module\": \"Mathlib.RingTheory.IsTensorProduct\", \"type\": \": B ⊗[A] M ≃ₗ[R] S ⊗[R] M\", \"doc\": \"Let $R, A, S, B$ be commutative semirings. Let $A$ and $S$ be $R$-algebras, and let $B$ be an algebra over both $A$ and $S$ that is the pushout of $A$ and $S$ over $R$. For any $A$-module $M$, there i\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T],\\n  KaehlerDifferential.tensorKaehlerEquivOfForma\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"LinearMap.tensorKerEquiv\", \"module\": \"Mathlib.RingTheory.Flat.Equalizer\", \"type\": \"[Module.Flat R M] : M ⊗[R] LinearMap.ker f ≃ₗ[S] LinearMap.ker (AlgebraTensorModule.lTensor S M f)\", \"doc\": \"Given a flat $ R $-module $ M $ with an $ S $-module structure compatible with the scalar tower $ R \\\\to S \\\\to M $, and an $ R $-linear map $ f: N \\\\to P $, the tensor product $ M \\\\otimes_R \\\\ker(f) $ is\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"[Algebra.FormallyEtale S T] : T ⊗[S] Ω[S⁄R] ≃ₗ[T] Ω[T⁄R]\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme fibre-product coordinate maps, flat ring-map base change and Kahler differential tensor isomorphisms do not state a derived global-sections Kunneth theorem for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of derived global sections of flat structure sheaves computes derived global sections on the product of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap T.SpecTensorTo p))\\n      (\", \"doc\": \"For a pullback triplet $T$ in the category of schemes and a point $p$ in the spectrum of $T.tensor$, the composition of the morphisms $\\\\mathrm{Spec.map}(\\\\mathrm{Hom.residueFieldMap}(T.\\\\mathrm{SpecTens\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x : AlgebraicGeometry.Scheme.Pullback.Triplet f g},\\n  AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯ = CategoryTheory.Iso.refl x.tensor\", \"doc\": \"For any pullback triplet $T$ in the category of schemes, applying the tensor congruence construction to the reflexive equality $T = T$ yields the identity isomorphism on the associated tensor pushout \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.Spec.map T.tensorInl) (AlgebraicGeometry.Spec.map T.tensorInr)\\n    (AlgebraicGeometry.Spec.map\\n      (CategoryTheory.CategoryStruct.comp (A\", \"doc\": \"Given a pullback triplet $T$ in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, the square formed by the morphisms $\\\\operatorname{Spec}(\\\\kappa(T.x)) \\to \\\\operatorname{Spec}(T.tensor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {T T' : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (h : T = T'),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr h).hom) T.SpecTensorTo =\\n    T'.SpecTensor\", \"doc\": \"Given two pullback triplets $ T $ and $ T' $ for morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $ in the category of schemes, if $ T = T' $, then the composition of the morphism $ \\\\operatorname{Spec}(T.ten\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.Spec.map T.tensorInl) (AlgebraicGeometry.Spec.map T.tensorInr)\\n    (AlgebraicGeometry.Spec.map\\n      (CategoryTheory.CategoryStruct.comp (A\", \"doc\": \"For any pullback triplet in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, the square formed by the Spec maps of the left/right inclusions into the pushout of residue fields $T.te\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (t : ↥(CategoryTheory.Limits.pullback f g))\\n  {Z : AlgebraicGeometry.Scheme} (h : CategoryTheory.Limits.pullback f g ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.ofPointTensor t)\", \"doc\": \"For morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ of schemes, and a point $t$ in the fiber product $X \\\\times_S Y$, the composition of the canonical morphism from the spectrum of the tensor product of resi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} →\\n    {g : Y ⟶ S} →\\n      (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g) →\\n        AlgebraicGeometry.Spec T.tensor ⟶ CategoryTheory.Limits.pullback f g\", \"doc\": \"The morphism from the spectrum of the pushout ring $ T.tensor $ to the pullback scheme of morphisms $ f: X \\to S $ and $ g: Y \\to S $, constructed by lifting the compositions of $ \\\\operatorname{Spec}(T.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {T T' : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (h : T = T') {Z : AlgebraicGeometry.Scheme} (h_1 : CategoryTheory.Limits.pullback f g ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.\", \"doc\": \"For schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, and equal pullback triplets $T=T'$, the composition of the morphism induced by the tensor congruence isomorphism $\\\\operatorname{Spec}(T.te\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme fibre-product coordinate maps, flat ring-map base change and Kahler differential tensor isomorphisms do not state a derived global-sections Kunneth theorem for algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]unneth|externalCup|external_cup",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat module, scheme coordinate and underived tensor declarations do not state derived coherent external cup for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor of global sections of flat structure sheaves equals global sections on the fibre product, compatible with cup products",
+   "results": "8 hits: Module.Flat.instTensorProduct, CategoryTheory.Sheaf.tensorProd_isSheaf, CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.tensorSubmoduleAlgebraEquivMul, LinearMap.tensorKerEquiv, PresheafOfModules.Monoidal.tensorObjMap, AlgebraicGeometry.StructureSheaf.globalSectionsIso",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat module, scheme coordinate and underived tensor declarations do not state derived coherent external cup for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"cup\"",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat module, scheme coordinate and underived tensor declarations do not state derived coherent external cup for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived external cup product of structure sheaf cohomology for flat quasi compact quasi separated algebraic spaces over an affine base",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Spec_Γ_naturality_assoc, AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat module, scheme coordinate and underived tensor declarations do not state derived coherent external cup for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kunneth formula for derived quasicoherent cohomology and tensor product of flat algebraic spaces",
+   "results": "8 hits: Algebra.Extension.tensorH1Cotangent, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, Rep.torIso, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.tensorProd_isSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flat module, scheme coordinate and underived tensor declarations do not state derived coherent external cup for algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-coherent-exterior-base-change",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: the relative exterior coherent-cohomology theorem, before the reduced-coproduct calculation; not a Picard infinitesimal-lifting assertion. Auxiliary: Derived coherent Kunneth before local freeness is known; gives the bialgebra object from the group law without assuming the conclusion.",
+   "via": [
+    "lem-sfb-abelian-coherent-exterior-base-change",
+    "lem-sfb-abelian-h2-reduced-coproduct-injective",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-space-derived-external-cup",
+  "worker": "stage1",
+  "summary": "Proved canonical derived external cup by qcqs projection formula and flat base change; derived algebra, pullback, scalar extension and site-comparison compatibilities by explicit tensor-of-counits calculations. Reused existing nodes throughout; zero new nodes; statement unchanged.",
+  "blueprint": "Current latest sk-thm-sf-ctf-stability direct-images proof (3), supporting alteration/Picard branch recorded in blueprint.from.place. Ancestor command returns None because the existing created.item chain terminates without blueprint_kind; preserved that computed from.node and inherited via rather than inventing ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic ringed derived adjunction/tensor or fibre-product tool for the explicit cup construction; this supporting unit has no replacement for its statement."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ringed derived adjunction/tensor or fibre-product tool for the explicit cup construction; this supporting unit has no replacement for its statement."
+   },
+   {
+    "node": "lem-sfb-monoidal-adjunction-mates",
+    "why": "Generic ringed derived adjunction/tensor or fibre-product tool for the explicit cup construction; this supporting unit has no replacement for its statement."
+   },
+   {
+    "node": "lem-sfb-monoidal-adjunction-unit-counit",
+    "why": "Generic ringed derived adjunction/tensor or fibre-product tool for the explicit cup construction; this supporting unit has no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic ringed derived adjunction/tensor or fibre-product tool for the explicit cup construction; this supporting unit has no replacement for its statement."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic ringed derived adjunction/tensor or fibre-product tool for the explicit cup construction; this supporting unit has no replacement for its statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-monoidal-adjunction-mates",
+  "lem-sfb-monoidal-adjunction-unit-counit",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-8765bd215",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-8765bd215 (reviewer sub-agent of L); spot-checked: Read the item and every step in full. There are no new nodes and the statement is unchanged. I checked the sources: 08IN and 08IR in spaces-perfect.tex (l.4666, 4863); 0FPM, 0FPN and 0H9A in sites-cohomology.tex (l.8460, 8529; the 0H9A square is malformed in the source, and step 9 proves the intended square); 071Q. Step 5's Künneth argument holds: projection formula for g with L=Rf_*O_X, then flat base change for f along g. I recomputed the transpose (Lp^*ε_f⊗Lq^*ε_g)t, and it is the external cup. Step 3 symmetry and steps 4, 6 and 7 are elementary and correct; the sign is (-1)^{bc}. Step 8 is correct: only flatness of h is used, so a non-flat B such as Z→F_2 is covered. Step 9 is correct via exchange-tensor coherence plus mate pasting. Step 10 is correct via the two etale–Zariski nodes. One fault (E1, hypothesis check): lem-sfb-space-qcqs-derived-projection-formula requires the diagonal to be qc AND qs, but the item only gives a qc diagonal. FIX: I added one elementary sentence to step 1: the diagonal of a morphism of algebraic spaces is a monomorphism, so its own diagonal is an isomorphism and the diagonal is qs. proof_deps equals the union of the step uses, and there is no cycle. The other Künneth nodes (projective-cohomology-coefficient-kunneth, abelian-coherent-exterior-base-change) are narrower and cite this item; trf projection-kunneth is about finite coefficients. None is a duplicate. Batch-5 check: lem-trf-space-fibre-products-etale-covers (02X2) is a generic fibre-product foundation. The other nine flagged nodes reach sec-trace-formula only through the general definitions def-trf-algebraic-space, def-trf-scheme-algebraic-space and def-trf-space-quasi-coherent-module, as coherent-cohomology foundations (08IN, 08IR, 071Q, 08F4/08F5). They are neither the trace formula nor Poincaré duality, nor a step of either proof, so I accept them. I accept the six generic tool_uses (ringed monoidal comparisons, mates, unit-counit, exchange-tensor coherence, mate pasting, fibre products). No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatSpaceDerivedExternalCup",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.FlatExternalCup.flat_space_derived_external_cup",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.FlatExternalCup.AlgebraLaws",
+   "AlgebraicGeometry.AlgebraicSpace.FlatExternalCup.ExternalCoherence",
+   "AlgebraicGeometry.AlgebraicSpace.FlatExternalCup.BaseChangeLaws",
+   "AlgebraicGeometry.AlgebraicSpace.FlatExternalCup.BaseChangeNaturality",
+   "AlgebraicGeometry.AlgebraicSpace.FlatExternalCup.BaseChangeComposition",
+   "AlgebraicGeometry.AlgebraicSpace.FlatExternalCup.ZariskiLaws",
+   "AlgebraicGeometry.AlgebraicSpace.FlatExternalCup.flat_space_derived_external_cup"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatSpaceDerivedExternalCup.lean",
+  "statement": "theorem flat_space_derived_external_cup : ∃ c : Comparisons (S := S), (∀ (A : Type u) [CommRing A] (Y : Over S) (e : Y.left ≅ Spec (.of A)), Nonempty (AlgebraLaws c A Y e) ∧ Nonempty (ExternalCoherence c A Y e)) ∧ (∀ {A B : Type u} [CommRing A] [CommRing B] {Y Y' : Over S} (e : Y.left ≅ Spec (.of A)) (e' : Y'.left ≅ Spec (.of B)) (g : Y' ⟶ Y), ∃ t : ScalarTensor (spaceAffineRingMap e e' g), Nonempty (BaseChangeLaws c e e' g t) ∧ Nonempty (BaseChangeNaturality c e e' g t)) ∧ Nonempty (BaseChangeComposition c) ∧ (∀ (A : Type u) [CommRing A] (Y Z : Over S) (e : Y.left ≅ Spec (.of A)) (g : Z ⟶ Y), admissible (schemeMap g) → ∃ d : ZariskiComparison A Y Z e g, ZariskiLaws d)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All canonical-map definitions live in the new maps node. The theorem asserts exactly the algebra, external-cup, arbitrary scalar-change and Zariski-comparison laws; only this theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8fc62bb73",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 68cd0e32ff83 (H2). Lean modules and item node byte-identical to 68cd (mathematics reviewed sound there; re-read theorem module clause by clause, agree). All three H2 repairs verified against the commit (read-only git show; snapshot omits the two new existing:true nodes): (1) maps node now cites def-zl-ringed-site-duality-model (owner of RingedSiteDualityModel/ringedSiteDualityUnit) instead of theorem lem-sfb-ringed-site-duality-maps; (2) new existing:true def-sfb-module-derived-scalar-comparisons on moduleDerivedAdjunction/moduleRepresentative/moduleDerivedRestrictionComposition: text matches code (ofIsRightAdjoint; transpose of localized unit then mapDerivedCategoryFactors.inv; mapDerivedCategoryCompIso+restrictScalarsComp'), verbatim signature, general universes, no other owner; (3) new existing:true def-sfb-space-small-structure-derived-comparison on relativeClosedKernelSmallStructureMap/DirectImageComparison: text matches code step by step, no extra hypotheses, landed def stmt_deps. Item stmt_deps gain only landed definition nodes (Q72, Q104, Q74, NU) plus the new maps node, allowed by brief-stage2 §5; statement text and proof_deps unchanged; lean.statement verbatim; nothing landed yet, no race, no cycle. Note, not a condition: HasDerivedCategory.{u} small-site presentation universe, disclosed; generalising to w later is recommended. No compile (no file changed)."
+ }
+}

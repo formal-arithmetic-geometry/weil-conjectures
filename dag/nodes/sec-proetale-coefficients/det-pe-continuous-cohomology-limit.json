@@ -129,7 +129,18 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-pe-continuous-cohomology",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-18",
   "item": "det-pe-continuous-cohomology-limit",
@@ -193,5 +204,29 @@
    "AlgebraicGeometry.ProEtale.continuousCohomology_limit"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $X$ be a scheme and $(F_n)_{n\\geq1}$ an inverse system of abelian sheaves on\n$X_{\\Proet}$ with epimorphic transition maps, and $F=\\varprojlim_nF_n$. Then the\ncanonical map $F\\to R\\varprojlim_nF_n$ is an isomorphism in $D(X_{\\Proet})$, and\nfor every object $W$ of $X_{\\Proet}$\n\n$$\nR\\Gamma(W,F)\\simeq R\\varprojlim_nR\\Gamma(W,F_n)\n$$\n\nin $D(\\mathbf Z)$; here $R\\varprojlim$ of a sequence $(K_n)$ is the fibre of\n$1-\\text{shift}\\colon\\prod_nK_n\\to\\prod_nK_n$.",
+  "proof": [
+   {
+    "text": "The topos $X_{\\Proet}$ is replete ([det-pe-replete-epimorphism]). In a replete\ntopos, for an inverse system of abelian sheaves with surjective transition maps,\n$R^1\\varprojlim F_n=0$ and the higher derived limits vanish, i.e.\n$R\\varprojlim_nF_n\\simeq\\varprojlim_nF_n$ ([det-pe-milnor-epimorphic];\nBhatt–Scholze, Proposition 3.1.10);\nequivalently the map $1-\\text{shift}\\colon\\prod_nF_n\\to\\prod_nF_n$ is an\nepimorphism with kernel $F$, and countable products of sheaves are exact on a\nreplete topos so that $\\prod_nF_n$ computes the derived product.",
+    "uses": [
+     "det-pe-replete-epimorphism",
+     "det-pe-milnor-epimorphic"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The functor $R\\Gamma(W,-)\\colon D(X_{\\Proet})\\to D(\\mathbf Z)$ is triangulated and,\nas a right adjoint, preserves products. Applying it to the triangle\n$R\\varprojlim_nF_n\\to\\prod_nF_n\\xrightarrow{1-\\text{shift}}\\prod_nF_n\\to$ gives the\ntriangle defining $R\\varprojlim_nR\\Gamma(W,F_n)$, whence the isomorphism.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

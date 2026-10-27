@@ -1,0 +1,137 @@
+{
+ "id": "lem-zl-immersive-system-local-cotangent-pair",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Original proof steps 5 and 7: pointwise first-jet selection, without the global component construction",
+   "via": [
+    "lem-zl-bertini-finite-cover-transverse-component"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Independent first jets from an immersive linear system",
+ "statement": "Let $k$ be algebraically closed, $X$ a scheme locally of finite type over $k$, $\\pi:T\\to X$ etale, and $t\\in T$ a closed point with $\\dim_{\\kappa(t)}(\\mathfrak m_t/\\mathfrak m_t^2)\\ge2$. Let $U_0\\subset X$ be an open containing $\\pi(t)$, $L$ an invertible module, $V$ a $k$-vector space with finite basis $b$, and $\\psi:V\\to\\Gamma(X,L)$ a $k$-linear map. Assume the basis sections generate $L$ on $U_0$ and the associated projective morphism is an immersion. Then there are $v_1,v_2,v_3\\in V$, an affine neighbourhood $U$ of $t$, a free generator $e$ of $\\pi^*L$ on $U$, and coefficients $f_0,f_1\\in\\Gamma(U,\\mathcal O_T)$ of the restrictions of $\\pi^*\\psi(v_2),\\pi^*\\psi(v_3)$ relative to $e$, such that $\\pi^*\\psi(v_1)$ is nonvanishing at $t$, the germs of both coefficients belong to $\\mathfrak m_t$, and their classes in $\\mathfrak m_t/\\mathfrak m_t^2$ are linearly independent over $\\kappa(t)$. Scheme conventions are [def-weil-pbc-scheme-conventions], invertibility is [def-sc-invertible-module], generation is [def-weil-pbc-generating-sections], the associated projective morphism is [def-weil-pbc-morphism-to-projective-space-by-sections], tensor pullback is [def-pc-module-pullback], and the etale condition is [def-weil-etale-morphism]. No regularity, smoothness, connectedness, finite-cover assumption, global component, or codimension conclusion is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-lem-wgen-bertini-cover/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Paragraph 3, independent differentials and the codimension-two component"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sc-invertible-module",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-pc-module-pullback",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The image x=pi(t) is closed since X is Jacobson and pi is locally of finite type. The residue maps from k at x and t are bijective by the closed-point field theorem. The rational unramified cotangent criterion, applied to the etale map, makes m_x/m_x^2 -> m_t/m_t^2 surjective.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "lem-sc-rational-unramified-cotangent-criterion",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an affine neighbourhood U of x with a free generator e of L. The source first-jet theorem realizes every a in O_{X,x} modulo m_x^2 as a coefficient of psi(v) in e. Pull e back by the tensor adjunction unit. It is a free generator: compare this adjunction to the native pullback adjunction, whose unit preserves generators. Choose an affine neighbourhood W of t inside pi^{-1}(U) and restrict this generator. Naturality and semilinearity of the unit show that the coefficients of pi*psi(v) are the pullbacks of the coefficients on U.",
+   "uses": [
+    "lem-zl-immersive-system-source-first-jets",
+    "def-sc-invertible-module",
+    "def-sc-local-free-generator",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For q in m_t/m_t^2 lift it through the surjective cotangent map and then through m_x -> m_x/m_x^2. Approximate that element modulo m_x^2 by a source coefficient. The local ring map carries m_x^2 into m_t^2, so its pulled-back coefficient is in m_t and represents q. Approximate 1 in the same way; its pulled-back coefficient differs from 1 by an element of m_t and is a unit. It therefore gives a section nonvanishing at t. Finally choose two independent vectors in the target cotangent space from its finrank bound, lift each by the proved coefficient realization, and use the same W and frame for both sections.",
+   "uses": [
+    "def-sc-local-free-generator",
+    "lem-sc-nonvanishing-iff-generates-at"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-sc-local-free-generator",
+  "def-weil-etale-morphism",
+  "lem-kun-closed-point-field",
+  "lem-sc-nonvanishing-iff-generates-at",
+  "lem-sc-rational-unramified-cotangent-criterion",
+  "lem-zl-immersive-system-source-first-jets"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-lem-wgen-bertini-cover/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Paragraph 3: source first jets, etale cotangent transport, and selection of an independent pair"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An immersion into projective space defined by sections spans the cotangent space at a rational point",
+   "results": "CotangentSpace.span_image_eq_top_iff and general cotangent APIs, but no scheme-level first-jet choice from an immersive linear system.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two sections of an immersive linear system have independent cotangent classes at a closed point after etale pullback",
+   "results": "General smooth cotangent and presentation APIs only; no theorem choosing vectors in the original linear system.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularLocalRing|cotangent.*surjective",
+   "results": "Read projectiveSpace_standardCharts and rational_unramified_iff_cotangent_surjective. These provide the two separate geometric inputs, not their composition with the section coefficients.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniFiniteCoverTransverseComponent",
+  "date": "2026-10-26",
+  "group": "R2"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ImmersiveSystemLocalCotangentPair",
+  "file": "lean/Sheaf/AlgebraicGeometry/ImmersiveSystemLocalCotangentPair.lean",
+  "declaration": "AlgebraicGeometry.immersiveSystem_local_cotangent_pair",
+  "statement": "theorem immersiveSystem_local_cotangent_pair\n    (k : Type u) [Field k] [IsAlgClosed k]\n    (X : Scheme.{u}) [X.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    (T : Scheme.{u}) (π : T ⟶ X) [Etale π]\n    (t : T) (ht : IsClosed ({t} : Set T))\n    (htdim : 2 ≤ Module.finrank (IsLocalRing.ResidueField (T.presheaf.stalk t))\n      (IsLocalRing.CotangentSpace (T.presheaf.stalk t)))\n    (U₀ : X.Opens) (htU₀ : π t ∈ U₀)\n    (L : X.Modules) [L.IsInvertible]\n    (V : Type v) [AddCommGroup V] [Module k V]\n    (r : ℕ) (b : Module.Basis (Fin r) k V) (ψ : V →+ Γ(L, ⊤))\n    (hlinear : ∀ (c : k) (v : V),\n      ψ (c • v) = (X ↘ Spec (.of k)).appTop ((Scheme.ΓSpecIso (.of k)).inv c) • ψ v)\n    (hgen : Epi (((Scheme.Modules.tensorPullback U₀.ι).obj L).freeHomEquiv.symm\n      (fun i : ULift.{u} (Fin r) ↦ SheafOfModules.unitHomEquiv _\n        (Scheme.Modules.homOfGlobalSection _\n          (Scheme.Modules.tensorSectionsUnit U₀.ι L (ψ (b i.down)))))))\n    [IsImmersion (@ProjectiveSpace.homOfGeneratingSections\n      (ULift.{u} (Fin r)) inferInstance U₀.toScheme (Spec (.of k))\n      (U₀.ι ≫ (X ↘ Spec (.of k))) ((Scheme.Modules.tensorPullback U₀.ι).obj L)\n      (Scheme.Modules.IsInvertible.of_iso\n        (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction U₀.ι)).leftAdjointUniq\n          (Scheme.Modules.pullbackPushforwardAdjunction U₀.ι)).app L).symm)\n      (fun i : ULift.{u} (Fin r) ↦ SheafOfModules.unitHomEquiv _\n        (Scheme.Modules.homOfGlobalSection _\n          (Scheme.Modules.tensorSectionsUnit U₀.ι L (ψ (b i.down))))) hgen)] :\n    letI : ((Scheme.Modules.tensorPullback π).obj L).IsInvertible :=\n      Scheme.Modules.IsInvertible.of_iso\n        (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction π)).leftAdjointUniq\n          (Scheme.Modules.pullbackPushforwardAdjunction π)).app L).symm\n    ∃ (v₁ v₂ v₃ : V),\n      t ∈ Scheme.Modules.nonvanishingLocus ((Scheme.Modules.tensorPullback π).obj L)\n        (Scheme.Modules.tensorSectionsUnit π L (ψ v₁)) ∧\n      ∃ (U : T.affineOpens) (htU : t ∈ U.1)\n        (e : Γ((Scheme.Modules.tensorPullback π).obj L, U.1)),\n        Scheme.Modules.IsFreeGenerator e ∧\n        ∃ f : Fin 2 → Γ(T, U.1),\n          ((Scheme.Modules.tensorPullback π).obj L).presheaf.map\n              (homOfLE (le_top : U.1 ≤ ⊤)).op\n              (Scheme.Modules.tensorSectionsUnit π L (ψ v₂)) = f 0 • e ∧\n          ((Scheme.Modules.tensorPullback π).obj L).presheaf.map\n              (homOfLE (le_top : U.1 ≤ ⊤)).op\n              (Scheme.Modules.tensorSectionsUnit π L (ψ v₃)) = f 1 • e ∧\n          ∃ hf : ∀ i, T.presheaf.germ U.1 t htU (f i) ∈\n              IsLocalRing.maximalIdeal (T.presheaf.stalk t),\n            LinearIndependent (IsLocalRing.ResidueField (T.presheaf.stalk t))\n              (fun i ↦ (IsLocalRing.maximalIdeal (T.presheaf.stalk t)).toCotangent\n                ⟨T.presheaf.germ U.1 t htU (f i), hf i⟩)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T205549-L-3292063",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T000905-L-4146013",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

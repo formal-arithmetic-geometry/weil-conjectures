@@ -1,0 +1,138 @@
+{
+ "id": "lem-pur-finite-reduction-tensor-purity",
+ "kind": "statement",
+ "title": "Finite reduction of the tensor form before reassociation",
+ "statement": "In the finite setting P let 1 <= m <= P.level and Q be the smaller setting. Let f:X -> Y be smooth separated of relative dimension d between separated finite-type base schemes. For intrinsic finite-Tor constructible K on Y, let t_P(K)=smoothPurityTensorMap f d K, the realized (1 tensor Pi inverse) followed by theta, before applying tau [def-pur-smooth-purity-map]. With the independent tensor-source comparison c_tensor [def-pur-finite-reduction-tensor-source] and the counit-normalized exceptional comparison c_exc [def-pur-finite-reduction-comparisons], red_X(t_P(K)) followed by c_exc(K) equals c_tensor(K) followed by t_Q(red_Y K). No reassociation tau or full smoothPurityMap occurs in this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Steps 2-3: reduction of inverse diagonal orientation and tensor adjoint mate"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-smooth-purity-map",
+  "def-pur-finite-reduction-tensor-source",
+  "def-pur-finite-reduction-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Extract etale presentations of K and its reduction from compositionInput_bounded and plusEtaleOrigin. The defining characterization of smoothPurityTensorMap and functoriality write both purity maps as the realized inverse-orientation factor followed by the realized theta factor.",
+   "uses": [
+    "def-pur-smooth-purity-map",
+    "thm-pur-composition-coherence",
+    "def-pur-finite-reduction-tensor-factors"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the last equality of diagonalOrientationReduction. Identify its proTwistMap with finiteTensorPositiveReduction using the positive-line comparison. Invert the resulting orientation square. The naturality field of finiteTensorCore moves inverse orientation through its inverse tensorator. Tensor interchange with the input/pullback comparison gives the fixed-coordinate inverse-orientation square. Naturality of scalarPresentation and functoriality of realization give the intrinsic inverse-orientation square.",
+   "uses": [
+    "lem-pur-finite-diagonal-orientation-reduction",
+    "lem-pur-finite-reduction-positive-line-comparison",
+    "def-pur-finite-reduction-tensor-factors",
+    "def-pur-finite-reduction-tensor-source",
+    "def-pur-finite-tensor-fixed-comparisons",
+    "def-sp-finite-scalar-realization-presentations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand reduction of the two-factor composite by Functor.map_comp. Substitute the theta factor square. Reassociate, substitute the inverse-orientation square, and reassociate once more. The intermediate omega comparison cancels by pasting, proving the stated square.",
+   "uses": [
+    "lem-pur-finite-reduction-theta-factor",
+    "def-pur-finite-reduction-tensor-factors"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-reduction-tensor-factors",
+  "def-pur-finite-reduction-tensor-source",
+  "def-pur-finite-tensor-fixed-comparisons",
+  "def-pur-smooth-purity-map",
+  "def-sp-finite-scalar-realization-presentations",
+  "lem-pur-finite-diagonal-orientation-reduction",
+  "lem-pur-finite-reduction-positive-line-comparison",
+  "lem-pur-finite-reduction-theta-factor",
+  "thm-pur-composition-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Steps 2–3, constituent coefficient comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient extension preserves the tensor form of smooth purity before twist reassociation",
+   "results": "8 hits: Algebra.Smooth.baseChange, TensorProduct.ext_fourfold, Algebra.FormallySmooth.instTensorProduct, MvPolynomial.coeff_rTensorAlgHom_tmul, Algebra.IsStandardSmoothOfRelativeDimension.baseChange, TensorProduct.ext_fourfold'', Algebra.IsStandardSmooth.baseChange, Derivation.tensorProductTo_mul. No smooth-purity coefficient-reduction square or intrinsic tensor-source realization comparison.",
+   "verdict": "no match",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intrinsic realization transports the coefficient extension tensor shift reassociation square",
+   "results": "8 hits: Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, ModuleCat.MonoidalCategory.tensorμ_apply, ModuleCat.extendScalarsComp_hom_app_one_tmul, TensorPower.cast_trans, TensorPower.cast_cast, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul, TensorAlgebra.mk_reindex_cast, CategoryTheory.TwistShiftData.assoc. No smooth-purity coefficient-reduction square or intrinsic tensor-source realization comparison.",
+   "verdict": "no match",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurityTensorMap|smoothPurityReassociation|scalarPresentation",
+   "results": "0 hits: . No smooth-purity coefficient-reduction square or intrinsic tensor-source realization comparison.",
+   "verdict": "no match",
+   "date": "2026-10-25"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteReductionOfPurity",
+  "date": "2026-10-25",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Steps 2-3: reduction of inverse diagonal orientation and tensor adjoint mate",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteReductionTensorPurity",
+  "file": "lean/Sheaf/Paper/FiniteReductionTensorPurity.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteReduction_tensorPurity",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.finiteReduction_tensorPurity"
+  ],
+  "statement": "theorem finiteReduction_tensorPurity (d : ℕ) [SmoothOfRelativeDimension d f] (K : Scheme.proEtaleDerivedCategory Y P.Ring) (hK : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y K) : (P.finiteReduction m hm hmn X).map (P.smoothPurityTensorMap f d K hK) ≫ P.finiteReductionExceptionalComparison m hm hmn f d K hK = (P.finiteReductionTensorSourceComparison m hm hmn f d K).hom ≫ (P.finiteReductionSetting m hm).smoothPurityTensorMap f d ((P.finiteReduction m hm hmn Y).obj K) (P.finiteReduction_preserves_ctf m hm hmn Y K hK)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261025T143735-L-1080362",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261025T201222-L-2337616",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

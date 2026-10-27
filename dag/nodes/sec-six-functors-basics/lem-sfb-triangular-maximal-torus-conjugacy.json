@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-triangular-maximal-torus-conjugacy",
+ "kind": "statement",
+ "title": "Triangular maximal tori in PGL2 are locally diagonal",
+ "statement": "Let $A$ be a nonzero commutative Noetherian ring [def-weil-pbc-noetherian-ring], and put $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Let $G=\\operatorname{PGL}_{2,S}$ be the fppf sheaf quotient of the group of invertible $2\\times2$ matrices by scalar invertible matrices; fppf coverings are faithfully flat finitely presented coverings. Write $B_\\infty\\subseteq G$ for the image of the upper triangular invertible matrices and $D\\subseteq B_\\infty$ for the image of the diagonal invertible matrices. Let $T\\hookrightarrow B_\\infty$ be a closed subgroup scheme [def-weil-closed-immersion] which is a maximal torus of $G$: it is fppf locally a finite product of copies of $\\mathbf G_m=\\operatorname{Spec}A[z,z^{-1}]$ and every geometric fibre is maximal among tori. All groups are schemes with multiplication, identity and inverse satisfying the group diagrams [def-sc-group-scheme]. Define $Y$ as the sheaf whose sections on an $S$-scheme $V$ are the elements $b\\in B_\\infty(V)$ for which $bT_Vb^{-1}=D_V$ as subgroup functors on $V$-schemes. Then $Y$ is represented by a smooth surjective $S$-scheme and left multiplication by $D\\simeq\\mathbf G_{m,S}$ makes it a $D$-torsor: $(d,y)\\mapsto(dy,y)$ identifies $D\\times_SY$ with $Y\\times_SY$, and sections exist etale locally on $S$. Moreover $Y$ has sections Zariski locally on $S$. In particular, there is a Zariski open cover $(S_i)$ and $b_i\\in B_\\infty(S_i)$ with $b_iT_{S_i}b_i^{-1}=D_{S_i}$, with the same identity after any base change.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Proposition 4.2.7, final paragraph of proof, printed p.124: the smooth transporter is a torsor under D, and multiplicative-group torsors are Zariski locally trivial. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this assertion in this form."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-sfb-pgl-two-triangular-presentation",
+  "def-sfb-relative-torus",
+  "def-sfb-relative-split-torus",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Use the matrix quotient of [lem-sfb-projective-frames-pgl]. An upper triangular invertible matrix has invertible diagonal entries. Dividing by its bottom-right entry gives a unique representative\n$$b(a,x)=\\begin{pmatrix}a&x\\\\0&1\\end{pmatrix},\\qquad a\\in R^\\times,\\ x\\in R.$$\nScalar-invariance and uniqueness make these coordinates glue from local matrix representatives. Thus $B_\\infty=\\operatorname{Spec}A[a,a^{-1},x]$, with product $(a,x)(c,z)=(ac,az+x)$, and $D$ is $x=0$, isomorphic to $\\mathbf G_m$. This is an affine finite-type group; it is the principal open $a\\ne0$ in $\\mathbf A^2_S$, hence smooth by [sbc-lem-affine-space-smooth] and [lem-weil-pbc-smooth-restrict-open-subschemes]. For every commutative $S$-algebra $R$, conjugation of the universal diagonal element gives\n$$b(a,x)\\begin{pmatrix}t&0\\\\0&1\\end{pmatrix}b(a,x)^{-1}=\\begin{pmatrix}t&x(1-t)\\\\0&1\\end{pmatrix}\\quad\\text{over }R[t,t^{-1}].$$\nIf $b(a,x)$ normalizes $D$ as a subgroup functor, the coefficient of $t$ in $x(1-t)$ is zero, so $x=0$. Conversely $x=0$ centralizes $D$. This proves $N_{B_\\infty}(D)=D$ on all test algebras and hence all test schemes, including nonreduced ones.",
+   "uses": [
+    "lem-sfb-projective-frames-pgl",
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition 4.2.7, final paragraph of proof, printed p.124; matrix normalizer calculation and inclusion/equality clarification written out by Q29."
+   }
+  },
+  {
+   "text": "Fix any geometric point $\\bar s$ with algebraically closed residue field $F$. The chart in step 1 shows that $(B_\\infty)_F$ is smooth, affine and of finite type. It is connected: $F[a,a^{-1},x]$ is a domain, so its zero prime is a point whose closure is the entire spectrum; every nonempty open contains that point, precluding a decomposition into two nonempty disjoint opens. The torus $D_F$ is maximal in this group: any torus containing it is commutative, hence lies in its centralizer, which step 1 identifies with $D_F$. The torus $T_F$ is maximal in this group because a strictly larger torus there would also be a strictly larger torus in $G_F$, contrary to the hypothesis. Apply [lem-sfb-borel-maximal-torus-conjugacy] to the smooth connected group $(B_\\infty)_F$ and these two maximal tori. It supplies $b_{\\bar s}\\in B_\\infty(F)$ with $b_{\\bar s}T_Fb_{\\bar s}^{-1}=D_F$ as subgroup schemes.",
+   "uses": [
+    "lem-sfb-borel-maximal-torus-conjugacy",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition 4.2.7, final paragraph of proof, printed p.124; matrix normalizer calculation and inclusion/equality clarification written out by Q29."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-multiplicative-type-transporter-smooth] to the smooth affine finite-type group $B_\\infty$ of step 1 and its closed multiplicative-type subgroups $T,D$. They satisfy the multiplicative-type hypothesis since a product of multiplicative groups is $D_R(\\mathbf Z^r)$, and $T$ has precisely such fppf local presentations by assumption. This gives a smooth closed scheme $Z\\subseteq B_\\infty$ representing the containment condition $bT_Vb^{-1}\\subseteq D_V$. In fact this condition is equality. On any affine piece of an fppf cover splitting $T_V$, the resulting homomorphism $T_V\\to D_V$ is, Zariski locally, induced by an integer character map $u:\\mathbf Z\\to\\mathbf Z^r$, by [lem-sfb-relative-diagonalizable-character-duality]. On every geometric fibre it is an isomorphism: its source is a maximal torus in $G$ and is contained in the torus $D$, so it cannot be proper. The locally constant integer map $u$ must therefore be an isomorphism wherever the base is nonempty. Indeed after a geometric specialization it is the character map of an isomorphism, so $r=1$ and $u=1$ or $-1$. Thus the homomorphism is already an isomorphism before specialization on each such piece. The local inverse identifies the two subgroup functors, and equality of their sections descends along the splitting cover because both are fppf sheaves. Consequently $Z=Y$ as functors. This proves representability and smoothness for the equality transporter of the statement, without inferring an isomorphism of arbitrary schemes merely from their fibres.",
+   "uses": [
+    "lem-sfb-multiplicative-type-transporter-smooth",
+    "lem-sfb-relative-diagonalizable-character-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition 4.2.7, final paragraph of proof, printed p.124; matrix normalizer calculation and inclusion/equality clarification written out by Q29."
+   }
+  },
+  {
+   "text": "Every geometric fibre of $Y\\to S$ has the point $b_{\\bar s}$ from step 2. Its image in $S$ is the underlying point $s$, so $Y\\to S$ is surjective. Apply [lem-sfb-smooth-space-cover-etale-sections] to this smooth surjection (a scheme is in particular an algebraic space). We obtain an etale covering $(S_i'\\to S)$ and sections $y_i\\in Y(S_i')$.",
+   "uses": [
+    "lem-sfb-smooth-space-cover-etale-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition 4.2.7, final paragraph of proof, printed p.124; matrix normalizer calculation and inclusion/equality clarification written out by Q29."
+   }
+  },
+  {
+   "text": "Left multiplication by $d\\in D(V)$ preserves $Y(V)$, since $(dy)T_V(dy)^{-1}=dD_Vd^{-1}=D_V$. Given $y_1,y_2\\in Y(V)$, put $n=y_1y_2^{-1}$. Then $nD_Vn^{-1}=D_V$, so step 1 gives $n\\in D(V)$. Hence\n$$(y_1,y_2)\\longmapsto(y_1y_2^{-1},y_2)$$\nis an inverse, natural in every test scheme $V$, to $(d,y)\\mapsto(dy,y)$. Both maps are induced by the group operations and the indicated subgroup factorizations; composing them gives the identity. Thus $D\\times_SY\\simeq Y\\times_SY$. Together with the etale sections from step 4, this is exactly the asserted left $D$-torsor structure.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition 4.2.7, final paragraph of proof, printed p.124; matrix normalizer calculation and inclusion/equality clarification written out by Q29."
+   }
+  },
+  {
+   "text": "Restrict the represented sheaf $Y$ to the small etale site of $S$ and identify $D$ with the units sheaf using step 1. Step 5 and the local sections of step 4 make it a $\\mathbf G_m$-torsor there. By [lem-sc-line-bundle-torsor] there is an invertible $\\mathcal O_S$-module $\\mathcal L$ whose sheaf of frames is equivariantly isomorphic to this restriction of $Y$. An invertible module is locally isomorphic to $\\mathcal O_S$ by [def-sc-invertible-module]. Choose a Zariski cover $(S_i)$ and frames $e_i:\\mathcal O_{S_i}\\simeq\\mathcal L|_{S_i}$. Their inverse images under the sheaf isomorphism are sections of $Y$ over the open schemes $S_i$, hence are actual $b_i\\in B_\\infty(S_i)$ satisfying $b_iT_{S_i}b_i^{-1}=D_{S_i}$. No claim that every line bundle over an affine scheme is globally trivial is used.",
+   "uses": [
+    "lem-sc-line-bundle-torsor",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition 4.2.7, final paragraph of proof, printed p.124; matrix normalizer calculation and inclusion/equality clarification written out by Q29."
+   }
+  },
+  {
+   "text": "For any base change $W\\to S_i$ and any $W$-scheme $V$, the group laws and the equality of subgroup functors defining $b_i$ restrict to\n$$(b_i|_V)T_V(b_i|_V)^{-1}=D_V.$$\nThus the same conjugacy identity holds after every base change, including nonreduced and empty ones. This gives the final assertion of the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition 4.2.7, final paragraph of proof, printed p.124; matrix normalizer calculation and inclusion/equality clarification written out by Q29."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-frames-pgl",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "def-weil-affine-spectrum",
+  "lem-sfb-multiplicative-type-transporter-smooth",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "lem-sfb-smooth-space-cover-etale-sections",
+  "lem-sc-line-bundle-torsor",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Proposition 4.2.7, final paragraph of proof, printed p.124; matrix normalizer calculation and inclusion/equality clarification written out by Q29. Read online; the PDF is not archived locally. The assembly follows the source, with explicit matrix and character arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every maximal torus of PGL2 contained in the upper triangular subgroup is Zariski locally conjugate to the diagonal torus by that subgroup",
+   "results": "{\"t\": \"2026-10-24T07:54:16Z\", \"tool\": \"leanfinder\", \"query\": \"Every maximal torus of PGL2 contained in the upper triangular subgroup is Zariski locally conjugate to the diagonal torus by that subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"Matrix.GeneralLinearGroup.isParabolic_conj_iff\", \"Matrix.GeneralLinearGroup.isParabolic_conj_iff'\", \"CongruenceSubgroup.conjGL\", \"CongruenceSubgroup.isArithmetic_conj_SL2Z\", \"Subgroup.mem_strictPeriods_iff\", \"Subgroup.IsArithmetic.conj\", \"CongruenceSubgroup.exists_Gamma_le_conj'\"], \"digest\": \"01791caac1aa059a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are abstract matrix groups, topological torsors, root systems or general scheme infrastructure; none states this relative scheme theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"conj\"",
+   "results": "{\"t\": \"2026-10-24T07:54:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"conj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are abstract matrix groups, topological torsors, root systems or general scheme infrastructure; none states this relative scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "maximalTorus|torus|transporter",
+   "results": "{\"t\": \"2026-10-24T07:54:10Z\", \"tool\": \"grep\", \"query\": \"maximalTorus|torus|transporter\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are abstract matrix groups, topological torsors, root systems or general scheme infrastructure; none states this relative scheme theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The transporter of a triangular maximal torus to the diagonal torus in PGL2 is a Gm torsor locally trivial in the Zariski topology",
+   "results": "{\"t\": \"2026-10-24T07:54:11Z\", \"tool\": \"leansearch\", \"query\": \"The transporter of a triangular maximal torus to the diagonal torus in PGL2 is a Gm torsor locally trivial in the Zariski topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddTorsor.noConfusion\", \"AddTorsor.noConfusionType\", \"Equiv.vaddConst\", \"Subgroup.strictPeriods\", \"AddTorsor.mk\", \"Subgroup.periods\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceDiagonalSchemeOfHasOfPostcompPropertyOfRespectsRightIsOpenImmersion\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\"], \"digest\": \"2c2f8828ff852785\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are abstract matrix groups, topological torsors, root systems or general scheme infrastructure; none states this relative scheme theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The transporter of a triangular maximal torus to the diagonal torus in PGL2 is a Gm torsor locally trivial in the Zariski topology",
+   "results": "{\"t\": \"2026-10-24T07:54:21Z\", \"tool\": \"leanfinder\", \"query\": \"The transporter of a triangular maximal torus to the diagonal torus in PGL2 is a Gm torsor locally trivial in the Zariski topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OnePoint.exists_mem_SL2\", \"OnePoint.instGLAction\", \"OnePoint.smul_some_eq_ite\", \"ModularGroup.exists_smul_mem_fd\", \"OnePoint.map_smul\", \"UpperHalfPlane.exists_SL2_smul_eq_of_apply_zero_one_eq_zero\", \"UpperHalfPlane.exists_SL2_smul_eq_of_apply_zero_one_ne_zero\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois\"], \"digest\": \"10f401fe4b218016\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are abstract matrix groups, topological torsors, root systems or general scheme infrastructure; none states this relative scheme theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A maximal torus of the upper triangular projective linear group of degree two is Zariski locally conjugate to the diagonal torus",
+   "results": "{\"t\": \"2026-10-24T08:45:21Z\", \"tool\": \"leansearch\", \"query\": \"A maximal torus of the upper triangular projective linear group of degree two is Zariski locally conjugate to the diagonal torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.universallyInjective_isZariskiLocalAtTarget\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"Matrix.GeneralLinearGroup.isParabolic_iff_of_upperTriangular_of_det\", \"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"Matrix.isParabolic_iff_of_upperTriangular\", \"Matrix.GeneralLinearGroup.isParabolic_iff_of_upperTriangular\", \"MaximalSpectrum.zariskiTopology\", \"Matrix.SpecialLinearGroup.isClosedEmbedding_toGL\"], \"digest\": \"1d9ebcfc511ee382\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned statements concern ordinary matrix conjugation or parabolic elements, topological or abstract torsors, and general scheme locality; none gives the relative PGL2 torus transporter theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-rank-one-semisimple-models",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the semisimple local models of the quotient, not the reductive central-torus reconstruction. Specific supporting place: Proposition 4.2.7, final transporter paragraph, after constructing the group isomorphism and before concluding torus compatibility.",
+   "via": [
+    "lem-sfb-relative-rank-one-semisimple-models",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-triangular-maximal-torus-conjugacy",
+  "worker": "stage1",
+  "summary": "Kept the statement. Added one genuine general containment-transporter input, and reused the existing geometric conjugacy, relative character-duality, smooth etale-sections and line-bundle torsor nodes. Wrote out coordinates, the scheme-theoretic normalizer over arbitrary rings, containment-to-equality for tori, and the torsor inverse. No Lean written or compiler run.",
+  "blueprint": "The current latest sk-thm-sf-ctf-stability and its direct-images proof (3) were read. This item supports the inherited relative rank-one prerequisite chain and precisely the final transporter paragraph of Conrad Proposition 4.2.7, printed p.124. blueprint_refs.py ancestor returns None; the inherited null ancestor and full via/place chain are retained. Searches transporter, torus, multiplicative type, normalizer and smooth closed found no blueprint statement duplicating the item or new input."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-c4793f07a",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-c4793f07a (reviewer sub-agent of L); spot-checked: The item statement is byte-identical to the base. The two added stmt_deps (def-sbc-smooth-morphisms, def-weil-etale-morphism) match notions the statement uses. All 7 steps are correct, and each cited statement says what the step takes from it. Step 1: the B_inf chart is b(a,x) with product (ac, az+x); I recomputed the conjugation and got [[t, x(1-t)],[0,1]] over R[t,t^-1], which forces x=0 over any ring, so N_B(D)=D. Smoothness comes from A^2 plus the open-restriction leaf. Step 2: the hypotheses of borel-maximal-torus-conjugacy hold. B_F is connected because F[a,a^-1,x] is a domain. D_F is maximal because of the centralizer argument; T_F is maximal because it is maximal in G_F. The node gives equality as subgroup schemes. Step 3: the new node's hypotheses hold. Containment becomes equality through character-duality: u from Z to Z^r is an isomorphism on geometric fibres, so r=1, u=±1, and equality descends along the fppf cover. Step 4: Y is smooth and surjective because b_s is in Y(F). Step 5: the torsor inverse is elementary and I checked it. Step 6: line-bundle-torsor (etale) plus Zariski local freeness gives Zariski sections, with no Pic=0 claim. Step 7: base change is elementary. New node lem-sfb-multiplicative-type-transporter-smooth: it satisfies B1-B4. I checked it is true myself: closed representability holds because H is essentially free, and smoothness follows from the infinitesimal criterion (Hom between multiplicative-type groups is etale, and lifts are conjugate since H^1 vanishes). I tested it on H=H'=1, on Gm into 1 (empty transporter), and on mu_p in char p (Z=D). The snapshot has no other transporter node. The relative torus centralizer-normalizer node only covers one split torus. The new node does not restate any clause of the item. Source: Conrad's Reductive group schemes is not archived locally; it is cited online with WANTED, the same practice as the existing relative torus centralizer-normalizer node. I checked the mathematics independently because I could not read the source here. All four batch-5 flags are generic infrastructure, not trace-formula or Poincare-duality steps: projective-bundle quotient geometry, fpqc descent of smoothness, the fppf-covers-are-fpqc comparison, and the algebraic-space definition. Accepted tool_uses: sbc-lem-affine-space-smooth and lem-sc-line-bundle-torsor."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.TriangularMaximalTorusConjugacy",
+  "declaration": "AlgebraicGeometry.PGLTwoTriangular.triangular_maximal_torus_conjugacy",
+  "declarations": [
+   "AlgebraicGeometry.PGLTwoTriangular.Conjugates",
+   "AlgebraicGeometry.PGLTwoTriangular.triangular_maximal_torus_conjugacy"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/TriangularMaximalTorusConjugacy.lean",
+  "statement": "theorem triangular_maximal_torus_conjugacy (A : Type u) [CommRing A] [Nontrivial A] [IsNoetherianRing A] (G B D T : Grp (Over (Spec (.of A)))) (iB : B ⟶ G) (iD : D ⟶ B) (P : Presentation G B D iB iD) (iT : T ⟶ B) [IsClosedImmersion iT.hom.hom.left] (hT : IsRelativeTorus T.X) (hmax : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (f : A →+* Ω), ReductiveTorusCentralizer.IsMaximalTorus ((Over.pullback (Spec.map (CommRingCat.ofHom f))).mapGrp.map (iT ≫ iB))) : Nonempty (D ≅ relativeSplitTorus (Spec (.of A)) 1) ∧ ∃ (Y : Over (Spec (.of A))) (j : Y ⟶ B.X) (act : D.X ⊗ Y ⟶ Y), Mono j ∧ (∀ (V : Over (Spec (.of A))) (b : V ⟶ B.X), (∃ y : V ⟶ Y, y ≫ j = b) ↔ Conjugates iD iT V b) ∧ Smooth Y.hom ∧ Surjective Y.hom ∧ (∀ (V : Over (Spec (.of A))) (d : V ⟶ D.X) (y : V ⟶ Y), lift d y ≫ act ≫ j = (d ≫ iD.hom.hom) * (y ≫ j)) ∧ IsIso (lift act (snd D.X Y)) ∧ (∃ (I : Type u) (U : I → Over (Spec (.of A))), Presieve.ofArrows (fun i ↦ (U i).left) (fun i ↦ (U i).hom) ∈ Scheme.etalePrecoverage (Spec (.of A)) ∧ ∀ i : I, Nonempty (U i ⟶ Y)) ∧ ∃ (I : Type u) (U : I → Over (Spec (.of A))) (b : ∀ i : I, U i ⟶ B.X), Presieve.ofArrows (fun i ↦ (U i).left) (fun i ↦ (U i).hom) ∈ Scheme.zariskiPrecoverage (Spec (.of A)) ∧ (∀ i : I, Conjugates iD iT (U i) (b i)) ∧ ∀ (i : I) (V : Over (Spec (.of A))) (h : V ⟶ U i), Conjugates iD iT V (h ≫ b i)",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cdf96aeba",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Item Lean matches the node clause by clause: nonzero Noetherian A; PGL2/B∞/D via the new Presentation (injective natural PGL2(Γ)→*G(V), fppf-locally surjective by sieve, upper_image m10=0, diagonal_image m10=m01=0, closed immersions); T closed with IsRelativeTorus, hmax IsMaximalTorus on every geometric fibre (Ω:Type u only weakens it); Conjugates is subfunctor equality over all W→V; conclusion D≅relativeSplitTorus 1, Mono j + iff representability, Smooth ∧ Surjective, act = left multiplication, IsIso(lift act snd), etale and Zariski local sections with persistence. New def node def-sfb-pgl-two-triangular-presentation is needed (only field-only PGL in Sheaf/WeilConjectures), real, and matches its statement. Item diff vs side-live: lean + 4 stmt_deps; statement and proof unchanged; lean.statement verbatim in both files; docstrings with source/blueprint and 7 steps; sorry only; private imports are recorded proof deps. Edge cases checked: nonreduced, empty, char 2, rank 0, nontrivial Pic, single universe. No change, no compile. Advisory: last Zariski clause is implied by Conjugates."
+ }
+}

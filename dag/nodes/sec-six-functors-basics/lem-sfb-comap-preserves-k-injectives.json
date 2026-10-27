@@ -179,7 +179,32 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q39-d57d319cb (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, blueprint route, Stacks 03CN/0034/08BJ, and master coefficient/base-change sources. All three steps check correctly, including additivity, exactness, and unbounded K-injective preservation. No new nodes, cycles, target weakening, or repairs. Accepted both declared generic tool uses. Concrete checks recorded in review.md."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.preservesKInjectiveComplexes_comap_coefficientMap"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.preservesKInjectiveComplexes_comap_coefficientMap",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients",
+     "lines": [
+      209,
+      216
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "branch": "master",
   "existing": true,
@@ -189,5 +214,24 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.preservesKInjectiveComplexes_comap_coefficientMap"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:07 UTC (L, propagation 2026-10-18), live declaration proved in WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients: the blueprint item lem-sfb-comap-preserves-k-injectives's upstream Lean declarations, proved in live (sweep of the propagation)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $a\\colon\\Lambda\\to\\Lambda'$ be a morphism of commutative condensed rings such that for every\nscheme $X$ the extension of scalars $\\operatorname{Ext}_{a_X}$ preserves finite limits\n([sk-def-sfb-coefficient-change]). Then for every scheme $X$ the restriction of scalars\n$\\operatorname{Res}_{a_X}\\colon\\Mod_{\\Lambda'_X}\\to\\Mod_{\\Lambda_X}$ sends K-injective complexes\n([det-def-sfb-derived-categories]) to K-injective complexes.",
+  "proof": [
+   {
+    "text": "Let $I$ be a K-injective complex of $\\Lambda'_X$-modules and $C$ an acyclic complex of\n$\\Lambda_X$-modules. By the adjunction $\\operatorname{Ext}_{a_X}\\dashv\\operatorname{Res}_{a_X}$\n([det-def-sfb-change-of-scalars]), applied termwise and passed to the homotopy category,\n$\\Hom_K(C,\\operatorname{Res}_{a_X}I)\\cong\\Hom_K(\\operatorname{Ext}_{a_X}C,I)$. The functor\n$\\operatorname{Ext}_{a_X}$ is exact (right exact as a left adjoint, left exact by assumption),\nso $\\operatorname{Ext}_{a_X}C$ is acyclic and the right side vanishes since $I$ is K-injective.",
+    "uses": [
+     "det-def-sfb-change-of-scalars"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

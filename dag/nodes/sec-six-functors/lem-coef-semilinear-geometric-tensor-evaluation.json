@@ -1,0 +1,158 @@
+{
+ "id": "lem-coef-semilinear-geometric-tensor-evaluation",
+ "kind": "statement",
+ "title": "Ordinary evaluation compatibility descends for normalized tensor models",
+ "statement": "variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n  [EssentiallySmall.{max c v r} C]\n  (B : ℕ → Sheaf J CommRingCat.{max c v r})\n  (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)\n  {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']\n  (J' : GrothendieckTopology C')\n  (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))\n  (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))\n  (adjSet : uInv ⊣ uPush)\n\nvariable (A : Data.{c, v, r} J B τ)\n  (O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet)\n  (target : Data.{c, v, r} J' O.coefficients O.coefficientTransition)\n\n\ntheorem geometricTensorEvaluation [PreservesFiniteLimits uInv]\n    (tensorPullback : A.closed.tensor ⋙ O.pull.mapDerivedCategory ≅\n    (O.pull.mapDerivedCategory.prod O.pull.mapDerivedCategory) ⋙ target.closed.tensor)\n    (levelTensorPullback : ∀ n : ℕ,\n    (A.levelClosed n).tensor ⋙\n        derivedExact.{c, v, max c v r, c, v} J J' (B n)\n          (O.coefficients n) (O.inverseImage n).modules ≅\n      ((derivedExact.{c, v, max c v r, c, v} J J' (B n)\n          (O.coefficients n) (O.inverseImage n).modules).prod\n        (derivedExact.{c, v, max c v r, c, v} J J' (B n)\n          (O.coefficients n) (O.inverseImage n).modules)) ⋙ (target.levelClosed n).tensor)\n    (levelTensorModel : ∀ n : ℕ,\n    TensorComparisonModel.{c, v, r} J J' (B n) (O.coefficients n) (O.inverseImage n).modules\n      (A.levelClosed n) (target.levelClosed n) (A.levelTensorModels n)\n        (target.levelTensorModels n) (levelTensorPullback n))\n    (tensorModel : TensorComparisonModel.{c, v, r} (coefficientSequenceTopology J)\n    (coefficientSequenceTopology J') (systemRing.{c, v, max c v r} J B τ)\n      (systemRing.{c, v, max c v r} J' O.coefficients O.coefficientTransition) O.pull A.closed\n        target.closed\n        A.tensorModels target.tensorModels tensorPullback)\n    (tensor_ordinary_evaluation : ∀ (n : ℕ) (M N : Systems.{c, v, max c v r} J B τ),\n    (evaluation.{c, v, max c v r} J' O.coefficients O.coefficientTransition n).map\n      (tensorModel.ordinary M N).hom ≫\n      (ordinaryEvaluationTensor.{c, v, r} J' O.coefficients O.coefficientTransition n (O.pull.obj M)\n        (O.pull.obj N)).hom ≫\n      ordinaryTensorHom.{c, v, r} J' (O.coefficients n)\n        ((O.ordinaryPullEvaluation n).hom.app M) ((O.ordinaryPullEvaluation n).hom.app N) =\n      (O.ordinaryPullEvaluation n).hom.app\n        (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, max c v r} J\n          B τ) M N) ≫\n      (O.inverseImage n).modules.map (ordinaryEvaluationTensor.{c, v, r} J B τ n M N).hom ≫\n      ((levelTensorModel n).ordinary ((evaluation.{c, v, max c v r} J B τ n).obj M)\n        ((evaluation.{c, v, max c v r} J B τ n).obj N)).hom)\n    : ∀ (n : ℕ) (M P : DS.{c, v, max c v r} J B τ),\n    (e.{c, v, max c v r} J' O.coefficients O.coefficientTransition n).map\n        (tensorPullback.hom.app (M, P)) ≫\n        (target.tensorEvaluation n).hom.app\n          (O.pull.mapDerivedCategory.obj M, O.pull.mapDerivedCategory.obj P) ≫\n        (target.levelClosed n).tensor.map\n          (Prod.mkHom (((geometryPullEvaluation J B τ J' uInv uPush adjSet O) n).hom.app M)\n            (((geometryPullEvaluation J B τ J' uInv uPush adjSet O) n).hom.app P)) =\n      ((geometryPullEvaluation J B τ J' uInv uPush adjSet O) n).hom.app (A.closed.tensor.obj (M, P))\n        ≫\n        (derivedExact.{c, v, max c v r, c, v} J J' (B n)\n          (O.coefficients n) (O.inverseImage n).modules).map\n            ((A.tensorEvaluation n).hom.app (M, P)) ≫\n        (levelTensorPullback n).hom.app\n          ((e.{c, v, max c v r} J B τ n).obj M, (e.{c, v, max c v r} J B τ n).obj P)",
+ "stmt_deps": [
+  "lem-coef-semilinear-ordinary-geometric-realization",
+  "def-coef-semilinear-system-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, final signed-total comparison, together with Tag 06YY, lemma-derived-base-change. Apply naturality of localization to the ordinary evaluation square in Zheng Construction 4.1."
+ },
+ "proof_origin": {
+  "by": "G4",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, final signed-total comparison, together with Tag 06YY, lemma-derived-base-change. Apply naturality of localization to the ordinary evaluation square in Zheng Construction 4.1. Proof of the four-model square from its representative equations, using existing cochain tensor naturality helpers."
+ },
+ "proof": [
+  {
+   "text": "Work first for four arbitrary exact additive module functors F,G,H,I and an ordinary square isomorphism θ : F⋙G ≅ H⋙I. A TensorComparisonModel preserves flat modules: put a flat module in degree zero, apply the bounded-above flat K-flat criterion and model.kflat, and use the converse K-flat single-complex criterion. Thus F and H send flat-term K-flat representatives to flat-term K-flat representatives, allowing the second model G or I to be applied.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-coef-semilinear-tensor-model-preserves-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, final signed-total comparison, together with Tag 06YY, lemma-derived-base-change. Apply naturality of localization to the ordinary evaluation square in Zheng Construction 4.1."
+   }
+  },
+  {
+   "text": "On every (p,q) summand of the source total tensor, substitute the four model.summand formulas and naturality of θ. Invert the assumed ordinary tensor square by composing with the inverses of its four tensor comparisons. The resulting equation, followed by the summand inclusion, proves equality of the two composite cochain comparisons by mapBifunctor.hom_ext and HomologicalComplex.hom_ext. The tensorSummand_map helper identifies the tensor of the θ components.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-coef-semilinear-tensor-comparison-cochain-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, final signed-total comparison, together with Tag 06YY, lemma-derived-base-change. Apply naturality of localization to the ordinary evaluation square in Zheng Construction 4.1."
+   }
+  },
+  {
+   "text": "Invert each model.derived equation and compose the equations for F and G, respectively H and I. Naturality of the second tensor comparison and of mapDerivedCategoryFactors gives the two composite normalization formulas. The factorization equation for mapDerivedCategoryNatIso and the composition-factorization equation identify the localized θ with mapDerivedCategoryCompIso.symm followed by mapDerivedCategoryNatIso θ and mapDerivedCategoryCompIso. Tensor-model naturality then transports the cochain square to the inverse derived square on localized flat-term K-flat representatives, cancelling invertible model and factorization comparisons.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-coef-semilinear-ordinary-geometric-realization",
+    "lem-pur-system-tensor-reduction-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, final signed-total comparison, together with Tag 06YY, lemma-derived-base-change. Apply naturality of localization to the ordinary evaluation square in Zheng Construction 4.1."
+   }
+  },
+  {
+   "text": "Package the two inverse-square routes as natural transformations on the product of the source derived category. Cochain tensor model rigidity makes restriction to flat-term K-flat representatives injective, so the previous equality holds everywhere. Cancel the inverse tensor comparisons to obtain the forward square. Specialize F to geometric pullback, G to target evaluation, H to source evaluation and I to coefficient-level inverse image; the ordinary parts of the two evaluation models are the recorded ordinaryEvaluationTensor maps, so the assumed ordinary evaluation square gives exactly the required hypothesis.",
+   "uses": [
+    "lem-sf-cochain-tensor-model-rigidity",
+    "def-coef-semilinear-system-models",
+    "lem-coef-semilinear-ordinary-geometric-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, final signed-total comparison, together with Tag 06YY, lemma-derived-base-change. Apply naturality of localization to the ordinary evaluation square in Zheng Construction 4.1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-coef-semilinear-tensor-model-preserves-flat",
+  "lem-coef-semilinear-tensor-comparison-cochain-square",
+  "lem-coef-semilinear-ordinary-geometric-realization",
+  "lem-pur-system-tensor-reduction-formula",
+  "lem-sf-cochain-tensor-model-rigidity"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GeometricTensorLocalization",
+  "date": "2026-10-26",
+  "group": "A6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite coefficient-level derived adjunctions before R lim; geometric inverse image and direct image on the normalized ordinary semilinear system calculus. Normalized tensor localization for fixed ordinary geometric operations. Substep: Ordinary evaluation compatibility descends for normalized tensor models.",
+   "via": [
+    "lem-coef-semilinear-geometric-tensor-localization",
+    "lem-coef-semilinear-geometric-operations-base-existence",
+    "lem-coef-semilinear-geometric-operations",
+    "lem-coef-semilinear-operations-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of tensor comparison with a natural isomorphism between compositions of exact functors after deriving",
+   "results": "Functor.Monoidal.μNatIso, Functor.mapDerivedCategorySingleFunctor, Functor.mapDerivedCategoryFactorsh and leftDerivedNatIso/rightDerivedNatIso.",
+   "date": "2026-10-26",
+   "verdict": "These do not compare four independently specified TensorComparisonModels or prove their evaluation equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryNatIso\"",
+   "results": "0 matching declarations.",
+   "date": "2026-10-26",
+   "verdict": "No exact model-normalized tensor-square theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorComparisonModel|tensor.*[Ee]valuation|[Ee]valuation.*tensor in Mathlib/CategoryTheory and Mathlib/Algebra/Homology",
+   "results": "Cartesian monoidal functor evaluation and rigid tensor evaluation/coevaluation lemmas; no TensorComparisonModel. Local project ExactDerivedTensorSquare uses canonical monoidal structures, not arbitrary model-normalized comparisons.",
+   "date": "2026-10-26",
+   "verdict": "No applicable exact match. The required compatibility follows by the representative equations and cochain tensor rigidity."
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GeometricTensorEvaluation",
+  "file": "lean/Sheaf/Paper/GeometricTensorEvaluation.lean",
+  "declaration": "WeilConjectures.SemilinearSections.geometricTensorEvaluation",
+  "statement": "theorem geometricTensorEvaluation [PreservesFiniteLimits uInv]\n    (tensorPullback : A.closed.tensor ⋙ O.pull.mapDerivedCategory ≅\n    (O.pull.mapDerivedCategory.prod O.pull.mapDerivedCategory) ⋙ target.closed.tensor)\n    (levelTensorPullback : ∀ n : ℕ,\n    (A.levelClosed n).tensor ⋙\n        derivedExact.{c, v, max c v r, c, v} J J' (B n)\n          (O.coefficients n) (O.inverseImage n).modules ≅\n      ((derivedExact.{c, v, max c v r, c, v} J J' (B n)\n          (O.coefficients n) (O.inverseImage n).modules).prod\n        (derivedExact.{c, v, max c v r, c, v} J J' (B n)\n          (O.coefficients n) (O.inverseImage n).modules)) ⋙ (target.levelClosed n).tensor)\n    (levelTensorModel : ∀ n : ℕ,\n    TensorComparisonModel.{c, v, r} J J' (B n) (O.coefficients n) (O.inverseImage n).modules\n      (A.levelClosed n) (target.levelClosed n) (A.levelTensorModels n)\n        (target.levelTensorModels n) (levelTensorPullback n))\n    (tensorModel : TensorComparisonModel.{c, v, r} (coefficientSequenceTopology J)\n    (coefficientSequenceTopology J') (systemRing.{c, v, max c v r} J B τ)\n      (systemRing.{c, v, max c v r} J' O.coefficients O.coefficientTransition) O.pull A.closed\n        target.closed\n        A.tensorModels target.tensorModels tensorPullback)\n    (tensor_ordinary_evaluation : ∀ (n : ℕ) (M N : Systems.{c, v, max c v r} J B τ),\n    (evaluation.{c, v, max c v r} J' O.coefficients O.coefficientTransition n).map\n      (tensorModel.ordinary M N).hom ≫\n      (ordinaryEvaluationTensor.{c, v, r} J' O.coefficients O.coefficientTransition n (O.pull.obj M)\n        (O.pull.obj N)).hom ≫\n      ordinaryTensorHom.{c, v, r} J' (O.coefficients n)\n        ((O.ordinaryPullEvaluation n).hom.app M) ((O.ordinaryPullEvaluation n).hom.app N) =\n      (O.ordinaryPullEvaluation n).hom.app\n        (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, max c v r} J\n          B τ) M N) ≫\n      (O.inverseImage n).modules.map (ordinaryEvaluationTensor.{c, v, r} J B τ n M N).hom ≫\n      ((levelTensorModel n).ordinary ((evaluation.{c, v, max c v r} J B τ n).obj M)\n        ((evaluation.{c, v, max c v r} J B τ n).obj N)).hom)\n    : ∀ (n : ℕ) (M P : DS.{c, v, max c v r} J B τ),\n    (e.{c, v, max c v r} J' O.coefficients O.coefficientTransition n).map\n        (tensorPullback.hom.app (M, P)) ≫\n        (target.tensorEvaluation n).hom.app\n          (O.pull.mapDerivedCategory.obj M, O.pull.mapDerivedCategory.obj P) ≫\n        (target.levelClosed n).tensor.map\n          (Prod.mkHom (((geometryPullEvaluation J B τ J' uInv uPush adjSet O) n).hom.app M)\n            (((geometryPullEvaluation J B τ J' uInv uPush adjSet O) n).hom.app P)) =\n      ((geometryPullEvaluation J B τ J' uInv uPush adjSet O) n).hom.app (A.closed.tensor.obj (M, P))\n        ≫\n        (derivedExact.{c, v, max c v r, c, v} J J' (B n)\n          (O.coefficients n) (O.inverseImage n).modules).map\n            ((A.tensorEvaluation n).hom.app (M, P)) ≫\n        (levelTensorPullback n).hom.app\n          ((e.{c, v, max c v r} J B τ n).obj M, (e.{c, v, max c v r} J B τ n).obj P)",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T091103-L-3304892",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T111846-L-1755297",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

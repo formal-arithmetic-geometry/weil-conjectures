@@ -1,13 +1,16 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group E6
+Authors: SHEAF groups E6 and R2
 -/
 module
 
 public import Sheaf.Paper.CoefficientExtensionReductionData
-import all Sheaf.CategoryTheory.SequenceProjectionDerivedAdjunction
-import all Sheaf.Paper.IntegralScalarExtensionWellDefined
+import Sheaf.Paper.CoefficientExtensionOrdinaryStrictTensor
+import Sheaf.Paper.CoefficientExtensionStrictDerivedComparison
+import Sheaf.Paper.CoefficientExtensionStrictTensorNormalized
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 
 /-! # Strict representatives for finite coefficient extension
 
@@ -17,130 +20,66 @@ Source: the integral-operations tensor associator; Stacks 03EK and 03D7.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace WeilConjectures
-private theorem extensionIso_naturality
-    {C : Type*} [Category C] {J : GrothendieckTopology C}
-    [EssentiallySmall.{u} C]
-    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J AddCommGrpCat.{u}]
-    (R : Sheaf J CommRingCat.{u}) (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{u})
-    (α : (Functor.const ℕᵒᵖ).obj R ⟶ B)
-    {M N : SheafOfModules.SequenceProjection.Modules R} (f : M ⟶ N) (n : ℕ) :
-    ((SheafOfModules.SequenceProjection.extension R B α).map f).app n ≫
-        (SheafOfModules.SequenceProjection.extensionIso R B α N n).hom =
-      (SheafOfModules.SequenceProjection.extensionIso R B α M n).hom ≫
-        SheafOfModules.changeOfRingsHom (α.app (op n)) M f := by
-  change (SheafOfModules.SequenceProjection.scalar R B α n).model.E.map f ≫
-    eqToHom ((SheafOfModules.SequenceProjection.scalar R B α n).model.obj_eq N) = _
-  rw [(SheafOfModules.SequenceProjection.scalar R B α n).model.map_eq]
-  simp [SheafOfModules.SequenceProjection.extensionIso]
-
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L) (W : Scheme.{t})
 
+private theorem coefficientSequenceNormalized_of_iso
+    {X Y : coefficientSequenceDerived l E W} (e : X ≅ Y)
+    (hX : IsNormalizedCoefficientSequence l E W X) :
+    IsNormalizedCoefficientSequence l E W Y := by
+  intro m n h P
+  let en := (coefficientSequenceDerivedEvaluation l E W n).mapIso e
+  let em := (coefficientSequenceDerivedEvaluation l E W m).mapIso e
+  let G := normalizedDVRRes l E W h
+  have hn := (coefficientSequenceDerivedTransition l E W h).naturality e.hom
+  change em.hom ≫ (coefficientSequenceDerivedTransition l E W h).app Y =
+    (coefficientSequenceDerivedTransition l E W h).app X ≫ G.map en.hom at hn
+  constructor
+  · intro x y hxy
+    apply (cancel_epi en.hom).1
+    apply (hX h P).injective
+    change (coefficientSequenceDerivedTransition l E W h).app X ≫ G.map (en.hom ≫ x) =
+      (coefficientSequenceDerivedTransition l E W h).app X ≫ G.map (en.hom ≫ y)
+    change (coefficientSequenceDerivedTransition l E W h).app Y ≫ G.map x =
+      (coefficientSequenceDerivedTransition l E W h).app Y ≫ G.map y at hxy
+    simp only [G.map_comp, ← Category.assoc, ← hn]
+    simpa only [Category.assoc] using congrArg (fun k ↦ em.hom ≫ k) hxy
+  · intro t
+    obtain ⟨s, hs⟩ := (hX h P).surjective (em.hom ≫ t)
+    refine ⟨en.inv ≫ s, ?_⟩
+    apply (cancel_epi em.hom).1
+    change em.hom ≫ (coefficientSequenceDerivedTransition l E W h).app Y ≫
+      G.map (en.inv ≫ s) = em.hom ≫ t
+    rw [G.map_comp, ← Category.assoc, hn]
+    simp only [Category.assoc, ← G.map_comp, Iso.hom_inv_id_assoc]
+    exact hs
+
+private theorem coefficientExtensionGoodRepresentative
+    (K : DerivedCategory (scalarReductionSource l E W)) :
+    ∃ P : (integralOperationsGoodComplex l E W).FullSubcategory,
+      Nonempty (DerivedCategory.Q.obj P.obj ≅ K) := by
+  classical
+  obtain ⟨P, q, hP, hf, hq, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+      (R := completedIntegralCommRingSheafUnrestricted l E W)
+      (DerivedCategory.Q.objPreimage K)
+  have hgood : (integralOperationsGoodComplex l E W) P := by
+    refine ⟨hP, fun i ↦ ?_⟩
+    exact (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso
+        (completedIntegralCommRingSheafUnrestricted l E W) (P.X i)).symm (hf i)
+  have : IsIso (DerivedCategory.Q.map q) :=
+    Localization.inverts DerivedCategory.Q (HomologicalComplex.quasiIso _ _) q hq
+  exact ⟨⟨P, hgood⟩, ⟨asIso (DerivedCategory.Q.map q) ≪≫
+    DerivedCategory.Q.objObjPreimageIso K⟩⟩
+
 variable (A : CoefficientExtensionSystems l E L ι W)
-
-private def scalarCoefficientCone :
-    (Functor.const ℕᵒᵖ).obj (completedIntegralCommRingSheafUnrestricted l E W) ⟶
-      coefficientSequenceCommRingSystem l L W :=
-  NatTrans.ofOpSequence (fun n ↦ integralScalarRho l E L ι W n) (fun n ↦ by
-    simp only [Functor.const_obj_map,
-      coefficientSequenceCommRingSystem, Functor.ofOpSequence_map_homOfLE_succ]
-    unfold integralScalarRho
-    rw [Category.assoc, coefficientExtensionQuotient_naturality]
-    erw [Category.id_comp]
-    rw [← Category.assoc]
-    apply congrArg (fun f ↦ f ≫ integralScalarQuotientSheafMap l E L ι W n)
-    apply Sheaf.hom_ext
-    apply NatTrans.ext
-    funext U
-    apply (forget₂ CommRingCat RingCat).map_injective
-    change (limit.π (integralCoefficientSheafSystem l E W) (op n)).hom.app U =
-      (limit.π (integralCoefficientSheafSystem l E W) (op (n + 1))).hom.app U ≫
-        (integralCoefficientSheafTransition l E W n).hom.app U
-    have h := congrArg (fun k ↦ k.hom.app U)
-      (limit.w (integralCoefficientSheafSystem l E W) (homOfLE (Nat.le_succ n)).op)
-    simpa only [integralCoefficientSheafSystem, Functor.ofOpSequence_map_homOfLE_succ,
-      ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app] using h.symm)
-
-private def scalarCoefficientExtension : scalarReductionSource l E W ⥤
-    coefficientSequenceModules l L W :=
-  SheafOfModules.SequenceProjection.extension
-    (completedIntegralCommRingSheafUnrestricted l E W)
-    (coefficientSequenceCommRingSystem l L W) (scalarCoefficientCone l E L ι W) ⋙
-      SheafOfModules.strictSystemToSequenceFunctor (coefficientSequenceCommRingSystem l L W)
-
-private instance scalarCoefficientExtension_additive :
-    (scalarCoefficientExtension l E L ι W).Additive := by
-  unfold scalarCoefficientExtension
-  let F := SheafOfModules.SequenceProjection.extension
-    (completedIntegralCommRingSheafUnrestricted l E W)
-    (coefficientSequenceCommRingSystem l L W) (scalarCoefficientCone l E L ι W)
-  let G := SheafOfModules.strictSystemToSequenceFunctor (coefficientSequenceCommRingSystem l L W)
-  let : G.Additive := ⟨by
-    intro M N f g
-    ext U x
-    change (((f + g).app U.unop.1).val.app (op U.unop.2)) x = _
-    have h := (SheafOfModules.systemEvaluation
-      (coefficientSequenceCommRingSystem l L W) U.unop.1).map_add (f := f) (g := g)
-    have hx := congrArg (fun f ↦ (f.val.app (op U.unop.2)) x) h
-    exact hx⟩
-  infer_instance
-
-private theorem coefficientEvaluation_eq_system (n : ℕ) :
-    coefficientSequenceEvaluation l L W n =
-      SheafOfModules.systemSequenceEvaluation (coefficientSequenceCommRingSystem l L W) n := by
-  unfold coefficientSequenceEvaluation SheafOfModules.systemSequenceEvaluation
-  congr 1
-  apply Sheaf.hom_ext
-  apply NatTrans.ext
-  funext U
-  simp only [ObjectProperty.eqToHom_hom, eqToHom_app]
-  rfl
-
-private def scalarCoefficientEvaluation (n : ℕ) :
-    scalarCoefficientExtension l E L ι W ⋙ coefficientSequenceEvaluation l L W n ≅
-      integralScalarReduction l E L ι W n := by
-  let F := SheafOfModules.SequenceProjection.extension
-    (completedIntegralCommRingSheafUnrestricted l E W)
-    (coefficientSequenceCommRingSystem l L W) (scalarCoefficientCone l E L ι W)
-  let G := SheafOfModules.strictSystemToSequenceFunctor (coefficientSequenceCommRingSystem l L W)
-  let B := coefficientSequenceCommRingSystem l L W
-  let a : F ⋙ G ⋙ coefficientSequenceEvaluation l L W n ≅
-      F ⋙ G ⋙ SheafOfModules.systemSequenceEvaluation B n :=
-    Functor.isoWhiskerLeft (F ⋙ G) (eqToIso (coefficientEvaluation_eq_system l L W n))
-  let b : F ⋙ G ⋙ SheafOfModules.systemSequenceEvaluation B n ≅
-      F ⋙ SheafOfModules.systemEvaluation B n :=
-    NatIso.ofComponents (fun M ↦ (SheafOfModules.strictSystemSequenceUnitLevel B
-      (F.obj M) n).symm) (by intros; ext U x; rfl)
-  let c : F ⋙ SheafOfModules.systemEvaluation B n ≅
-      integralScalarReduction l E L ι W n :=
-    NatIso.ofComponents (fun M ↦
-      SheafOfModules.SequenceProjection.extensionIso
-        (completedIntegralCommRingSheafUnrestricted l E W) B
-          (scalarCoefficientCone l E L ι W) M n ≪≫
-      eqToIso (by
-        change SheafOfModules.changeOfRings (integralScalarRho l E L ι W n) M = _
-        exact (integralScalarReduction_obj l E L ι W n M).symm))
-      (by
-        intro M N f
-        dsimp only [Functor.comp_map, Iso.trans_hom, eqToIso.hom]
-        rw [integralScalarReduction_map l E L ι W n f]
-        have he := extensionIso_naturality
-          (completedIntegralCommRingSheafUnrestricted l E W) B
-          (scalarCoefficientCone l E L ι W) f n
-        erw [← Category.assoc, he]
-        dsimp only [SheafOfModules.SequenceProjection.extensionIso, eqToIso.hom]
-        simp only [← Category.assoc, eqToHom_trans]
-        rfl)
-  exact a ≪≫ b ≪≫ c
 
 /-- Simultaneous strict finite quotient representatives of derived coefficient extension.
 Source: integral operations, Stacks 06YY, 07A6 and 0941
@@ -178,6 +117,24 @@ theorem coefficientExtensionStrictRepresentative_exists
       ∀ K : DerivedCategory (scalarReductionSource l E W),
         IsNormalizedCoefficientSequence l L W
           ((coefficientExtensionSystem l E L ι W SE A).obj K) := by
-  sorry
+  classical
+  obtain ⟨direct, directEvaluation, htransition⟩ :=
+    coefficientExtensionOrdinaryStrictTensor_exists l E L ι W
+  obtain ⟨model, hmodel⟩ := coefficientExtensionStrictDerivedComparison
+    l E L ι W A SE association hassociation direct directEvaluation htransition
+  refine ⟨direct, directEvaluation, model, htransition, hmodel, ?_⟩
+  intro K
+  obtain ⟨P, ⟨e⟩⟩ := coefficientExtensionGoodRepresentative l E W K
+  have hP : IsNormalizedCoefficientSequence l L W
+      (DerivedCategory.Q.obj (direct.obj P)) :=
+    coefficientExtensionStrictTensor_normalized
+      l E L ι W direct directEvaluation htransition P
+  have hC : IsNormalizedCoefficientSequence l L W
+      ((coefficientExtensionSystem l E L ι W SE A).obj
+        ((integralOperationsGoodLocalization l E W).obj P)) :=
+    coefficientSequenceNormalized_of_iso l L W (model.app P).symm hP
+  intro m n h Z
+  exact coefficientSequenceNormalized_of_iso l L W
+    ((coefficientExtensionSystem l E L ι W SE A).mapIso e) hC h Z
 
 end WeilConjectures

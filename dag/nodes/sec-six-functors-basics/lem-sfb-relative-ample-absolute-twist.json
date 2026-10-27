@@ -1,0 +1,450 @@
+{
+ "id": "lem-sfb-relative-ample-absolute-twist",
+ "kind": "statement",
+ "title": "Absolute ampleness after twisting a relatively ample invertible module",
+ "statement": "Let $f:Z\\to T$ be a morphism of schemes [def-pc-scheme]. Let $N$ be an invertible $\\mathcal O_Z$-module and $M$ an invertible $\\mathcal O_T$-module [def-sc-invertible-module]. Assume that $f$ is quasi-compact (the inverse image of each affine open is quasi-compact [def-weil-pbc-quasi-compact-scheme]), that $N|_{f^{-1}(V)}$ is ample for every affine open $V\\subseteq T$, and that $M$ is ample on $T$ [def-weil-pbc-ample-invertible-module]. Then there is an integer $a_0\\geq0$ such that for every integer $a\\geq a_0$, the invertible module $N\\otimes_{\\mathcal O_Z} f^*(M^{\\otimes a})$ is ample on $Z$. Here $f^*$ is module pullback [def-pc-module-pullback] and the tensor products and tensor powers use the sheaf tensor product [def-pur-sheaf-tensor-product].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0892 (lemma-pullback-ample-tensor-relatively-ample), assertion (1); 'a >> 0' means every a beyond a bound."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing generic theorem AlgebraicGeometry.bertiniTensorPullback_invertible from BertiniIncidenceNaturality for invertibility of tensor pullbacks; no incidence construction or incidence theorem is used. Identify tensor pullback with the usual pullback by uniqueness of left adjoints for the tensor-power and product comparisons. Quasi-compactness of T comes from ampleness and that of Z from quasi-compactness of f. For every affine V in T, relative ampleness and ample-implies-separated give separatedness of its preimage. Mathlib IsZariskiLocalAtTarget.iff_of_iSup_eq_top applied to IsSeparated now proves f separated. Since T is separated, so is Z; in particular Z is quasi-separated. This replaces the former affine-intersection argument. Empty Z requires no separate branch.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-sc-pullback-tensor-power-iso",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-ample-scheme-separated",
+    "lem-pc-separated-quasi-separated",
+    "lem-zl-bertini-incidence-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0892 (lemma-pullback-ample-tensor-relatively-ample), proof of assertion (1)."
+   }
+  },
+  {
+   "text": "At x choose m>0 and t in Gamma(T,M^m) with affine nonvanishing open V containing f(x). Pull the section back to q of B^m, B=f^*M, with locus U=f^-1(V). Relative ampleness gives n>0 and an affine section locus W on U containing x. Transfer the section through the pullback-power and restriction comparisons to s in Gamma(U,N^n). The restriction stalk isomorphism identifies nonvanishing of this ambient section at y in U with y in W.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
+    "lem-sc-pullback-tensor-power-iso",
+    "lem-sc-ample-iso",
+    "lem-sc-nonvanishing-locus-restrict"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0892 (lemma-pullback-ample-tensor-relatively-ample), proof of assertion (1)."
+   }
+  },
+  {
+   "text": "Apply qcqs denominator clearing to L=B^m and F=N^n, obtaining e and a section tprime of F tensor L^e restricting to s tensor q^e. Multiply by q^b for b>0 and associate tensor powers. Its nonvanishing locus is W: the tensor locus formula gives the intersection of the locus of tprime with that of q. On U, q generates L locally by the nonvanishing/local-generation criterion, hence q^e generates L^e even for e=0. The residue-fibre tensor formula and restriction equation show that tprime is nonzero exactly where s is nonzero. Outside U the positive q^b factor vanishes. Use the proved pure-tensor and positive-power nonvanishing helpers from TensorSectionAffineOpen and NonvanishingCommonDegree.",
+   "uses": [
+    "lem-sc-p1-section-clearing-denominators-qcqs",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-sc-nonvanishing-iff-generates-at",
+    "lem-sc-tensor-section-affine-open",
+    "lem-weil-pbc-nonvanishing-common-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0892 (lemma-pullback-ample-tensor-relatively-ample), proof of assertion (1)."
+   }
+  },
+  {
+   "text": "For m dividing a and a>=m(e+1), set k=a/m and b=nk-e. Since n>0, b>0 and m(e+b)=an. Pullback-power and tensor-power isomorphisms carry the section just constructed to a section of (N tensor f^*(M^a))^n, still with locus W. Choose these W through all points; compactness gives a finite subcover indexed by a finite set S. Put D=product over S of m_i, E=sum over S of m_i(e_i+1), A=D(E+1). Then D>0, every m_i divides A, and every bound is <=E<A. The sections with fixed affine loci W_i prove P_A ample. The same formula works for empty S: D=1, E=0, and the pointwise assertion is vacuous.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-sc-pullback-tensor-power-iso",
+    "lem-sc-ample-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0892 (lemma-pullback-ample-tensor-relatively-ample), proof of assertion (1)."
+   }
+  },
+  {
+   "text": "The structure module is quasi-coherent and finite type: use the single generator of the free rank-one module, its isomorphism to the unit, and the local-generators data obtained by restricting this finite generating family. Eventual ample-twist global generation applied to O_T gives d; take K=d.toNat. For c>=K, transport the generating family along the left unitor to M^c. The nonvanishing-cover theorem gives a section nonzero at f(x), and the direct tensor-pullback fibre criterion gives a section of f^*(M^c) nonzero at x.",
+   "uses": [
+    "lem-weil-pbc-coherent-twist-global-generation",
+    "lem-sc-global-generation-nonvanishing-cover",
+    "lem-sc-nonvanishing-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0892 (lemma-pullback-ample-tensor-relatively-ample), proof of assertion (1)."
+   }
+  },
+  {
+   "text": "Prove that an ample invertible L tensored with an invertible P having nonvanishing sections through every point is ample: choose an affine section locus of L^n through x, and a section w of P nonvanishing at x. Tensor with w^n, then transport through tensorPowTensorObjIso. Its locus is the intersection of the affine open with the locus of w, affine by affine_cap_section_open, and contains x. Apply with L=P_A and P=f^*(M^c), c=a.toNat-A. The pullback tensor comparison identifies the result with P_(A+c)=P_a. The integer bound A+K is nonnegative, forces a>=0, and gives c>=K. Transport ampleness along this isomorphism.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-nonvanishing-common-degree",
+    "lem-sc-tensor-section-affine-open",
+    "lem-sc-affine-cap-section-open",
+    "lem-sc-pullback-tensor-power-iso",
+    "lem-sc-ample-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0892 (lemma-pullback-ample-tensor-relatively-ample), proof of assertion (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sc-pullback-tensor-power-iso",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
+  "lem-sc-ample-iso",
+  "lem-sc-nonvanishing-locus-restrict",
+  "lem-sc-p1-section-clearing-denominators-qcqs",
+  "lem-sc-nonvanishing-iff-generates-at",
+  "lem-sc-tensor-section-affine-open",
+  "lem-weil-pbc-nonvanishing-common-degree",
+  "lem-weil-pbc-coherent-twist-global-generation",
+  "lem-sc-global-generation-nonvanishing-cover",
+  "lem-sc-nonvanishing-tensor-pullback",
+  "lem-sc-affine-cap-section-open",
+  "lem-zl-bertini-incidence-naturality"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0892 (lemma-pullback-ample-tensor-relatively-ample), proof of assertion (1).",
+  "by": "document",
+  "note": "X2: complete Lean proof, 2026-10-23. Uses target-local separatedness instead of the original affine-intersection detour; uses existing proved section comparison helpers. Returned-head 37a2a2c09 repair: remove the duplicate private tensorPullback_invertible and use the existing generic bertiniTensorPullback_invertible at every call site."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If a line bundle is relatively ample for a quasi compact morphism and M is ample on the base then tensoring with the pullback of a sufficiently high power of M is ample",
+   "results": "8 hits; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations do not state relative or absolute ampleness of invertible sheaves on schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relatively ample invertible sheaf tensored with a high power of the pullback of an ample invertible sheaf is ample",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackIso, CategoryTheory.Sheaf.tensorProd_isSheaf, Module.Invertible.instTensorProduct_2, TensorPower.mulEquiv, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullbackComp, AlgebraicGeometry.pullbackSpecIso",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations do not state relative or absolute ampleness of invertible sheaves on schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "0 hits; ",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations do not state relative or absolute ampleness of invertible sheaves on schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "relatively.?ample|pullback.*ample.*tensor|ample.*tensor.*pullback",
+   "results": "0 hits; ; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations do not state relative or absolute ampleness of invertible sheaves on schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute ampleness from relative ampleness by twisting with a positive power of an ample line bundle on the base",
+   "results": "8 hits; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AmpleSet.preimage, AmpleSet.preimage_iff, AlgebraicGeometry.of_targetAffineLocally_of_isPullback, AmpleSet.image_iff, AmpleSet.image, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations do not state relative or absolute ampleness of invertible sheaves on schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "relatively.?ample|IsAmple|ample.*pullback|pullback.*ample",
+   "results": "0 hits; ; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: no relative-to-absolute ampleness statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative ampleness and ampleness on the base imply absolute ampleness after twisting by all sufficiently large pullback powers",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, CategoryTheory.MorphismProperty.relative, RingHom.IsStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk, AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange; note=; digest=f43e3fbf42c5cfe6",
+   "date": "2026-10-19",
+   "verdict": "no match: no relative-to-absolute ampleness statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relatively ample invertible sheaf tensored with a sufficiently large power of the pullback of an ample invertible sheaf is ample",
+   "results": "8 hits; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, AlgebraicGeometry.Proj.pow_apply; note=; digest=35bbba1a4e055ea9",
+   "date": "2026-10-19",
+   "verdict": "no match: no relative-to-absolute ampleness statement"
+  },
+  {
+   "tool": "grep",
+   "query": "relatively.?ample|IsAmple|ample.*pullback|pullback.*ample",
+   "results": {
+    "t": "2026-10-22T05:19:26Z",
+    "tool": "grep",
+    "query": "relatively.?ample|IsAmple|ample.*pullback|pullback.*ample",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: signatures concern scheme base-change permanence, functions on basic opens, or convex ample sets, not relative-to-absolute ampleness of invertible modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative ampleness and ampleness on the base imply absolute ampleness after twisting by all sufficiently large pullback powers",
+   "results": {
+    "t": "2026-10-22T05:19:26Z",
+    "tool": "leansearch",
+    "query": "Relative ampleness and ampleness on the base imply absolute ampleness after twisting by all sufficiently large pullback powers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.instAdditivePullback",
+     "AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange",
+     "AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange",
+     "CategoryTheory.MorphismProperty.relative",
+     "RingHom.IsStableUnderBaseChange",
+     "AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk",
+     "AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange",
+     "AlgebraicGeometry.Flat.isStableUnderBaseChange"
+    ],
+    "digest": "f43e3fbf42c5cfe6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: signatures concern scheme base-change permanence, functions on basic opens, or convex ample sets, not relative-to-absolute ampleness of invertible modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": {
+    "t": "2026-10-22T05:19:26Z",
+    "tool": "loogle",
+    "query": "\"IsAmple\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: signatures concern scheme base-change permanence, functions on basic opens, or convex ample sets, not relative-to-absolute ampleness of invertible modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relatively ample invertible sheaf tensored with a sufficiently large power of the pullback of an ample invertible sheaf is ample",
+   "results": {
+    "t": "2026-10-22T05:19:28Z",
+    "tool": "leanfinder",
+    "query": "A relatively ample invertible sheaf tensored with a sufficiently large power of the pullback of an ample invertible sheaf is ample",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux",
+     "AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor",
+     "AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen",
+     "AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine",
+     "AlgebraicGeometry.Proj.pow_apply"
+    ],
+    "digest": "35bbba1a4e055ea9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: signatures concern scheme base-change permanence, functions on basic opens, or convex ample sets, not relative-to-absolute ampleness of invertible modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute ampleness from relative ampleness by twisting with a positive power of an ample line bundle on the base",
+   "results": {
+    "t": "2026-10-22T05:19:41Z",
+    "tool": "leanfinder",
+    "query": "Absolute ampleness from relative ampleness by twisting with a positive power of an ample line bundle on the base",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange",
+     "AmpleSet.preimage",
+     "AmpleSet.preimage_iff",
+     "AlgebraicGeometry.of_targetAffineLocally_of_isPullback",
+     "AmpleSet.image_iff",
+     "AmpleSet.image",
+     "AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine",
+     "AlgebraicGeometry.isAffineHom_isStableUnderBaseChange"
+    ],
+    "digest": "89a9c93b4005e293"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: signatures concern scheme base-change permanence, functions on basic opens, or convex ample sets, not relative-to-absolute ampleness of invertible modules"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-quasiprojective-qc-composition",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; composition of the normalized-blowup and strictification towers in steps 8, 13 and 15. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Stacks 0C4P, second sentence: quasi-projectivity of the composite, by 0C4M; supplies a relatively ample module on the composite modification tower. Step 3 of lem-sfb-quasiprojective-qc-composition: Stacks 0C4K uses 0892(1) on each member of a finite affine cover of the base. Live replacement of the per-chapter 0892(1) node dropped on 2026-10-19; the Stacks Stacks proof uses only live pbc/sc/pc tools (qcqs permanence, ample-scheme-separated, clearing denominators 01PW, coherent twist global generation).",
+   "via": [
+    "lem-sfb-quasiprojective-qc-composition",
+    "lem-sfb-projective-bundle-composition",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-relative-ample-absolute-twist",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0892(1) in eight steps using only existing live nodes. Established qcqs before denominator clearing, synchronized the finite affine-section cover to one exponent, and proved the entire sufficiently-large tail using global generation. No statement change and no new nodes. The identical per-chapter node is route-pivot-dropped; its argument was rechecked against the source and reused, not cited.",
+  "blueprint": "Auxiliary absolute-ampleness input to Step 3 of lem-sfb-quasiprojective-qc-composition (Stacks 0C4K), in the modification-tower chain recorded in blueprint.from.place. It serves det-thm-sf-ctf-stability-direct-images (3) via the existing alteration reduction. Whole-blueprint searches for 0892 and relative ample absolute found no matching blueprint statement; the existing null ancestor and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic monoidal pullback and fibre-value identities for invertible modules; the unit has no separate module-tensor comparison."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic composition/permanence of quasi-compact and quasi-separated morphisms supplies the hypotheses of denominator clearing."
+   },
+   {
+    "node": "lem-weil-pbc-ample-scheme-separated",
+    "why": "Generic absolute ampleness implies separatedness, applied to the base T; no separate result of this unit states it."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic separated-implies-quasi-separated implication, needed for the clearing-denominators hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "why": "Generic equivalence of scheme quasi-separatedness with quasi-compact affine intersections."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
+    "why": "Generic inverse-image formula for the nonvanishing locus of a pulled-back section."
+   },
+   {
+    "node": "lem-sc-p1-section-clearing-denominators-qcqs",
+    "why": "Generic denominator-clearing theorem 01PW on an arbitrary qcqs scheme, applied to N^n and a pulled-back section."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-twist-global-generation",
+    "why": "Generic eventual global generation 01Q3(7) for an ample module, applied only to the structure sheaf of T."
+   },
+   {
+    "node": "lem-sc-global-generation-nonvanishing-cover",
+    "why": "Generic rank-one global-generation criterion provides nonvanishing sections at every point."
+   },
+   {
+    "node": "lem-sc-affine-cap-section-open",
+    "why": "Generic affineness theorem 01PV for the intersection of an affine open with an invertible-section nonvanishing locus."
+   },
+   {
+    "node": "lem-sc-ample-iso",
+    "why": "Generic invariance of absolute ampleness under invertible-module isomorphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
+  "lem-sc-p1-section-clearing-denominators-qcqs",
+  "lem-weil-pbc-coherent-twist-global-generation",
+  "lem-sc-global-generation-nonvanishing-cover",
+  "lem-sc-affine-cap-section-open",
+  "lem-sc-ample-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-d47b04f92",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-d47b04f92 (reviewer sub-agent of L); spot-checked: I read Stacks Tag 0892(1) and its proof (morphisms.tex 8829-8888). The item's statement matches it exactly: 'f-ample' means quasi-compact f plus ampleness over every affine open, and 'a>>0' becomes an a0 with all a>=a0. The delivery changes only proof, proof_deps, proof_origin, split_report and status; statement, stmt_deps and blueprint are unchanged and there are no new nodes. The item is live, unsplit and not dropped; no cited node is dropped or merged; there is no repair note. The dropped lem-per-relative-ample-absolute-twist has the same statement and is correctly not cited. I checked all 8 steps against the cited statements. Step 1: invertible-pullback-tensor (1),(2) give the power identities, Z is quasi-compact by permanence (2), and empty Z is handled. Steps 2-3: T and each Z_V are separated, and Z is quasi-separated through V''=V∩V' affine, quasi-compactness of U->V by permanence (1), and the affine-cover criterion (1),(2); no unproved hypothesis is used. Steps 4-5: the pullback nonvanishing locus Z_q=f^-1(T_t), then clearing denominators (01PW) on qcqs Z with F=N^n; the locus of s'q^b equals W by the fibre formula (3). Step 6: b=na/m-e>=1 and (e+b)m=na are verified, and A is a common multiple of the m_i with A>=1, so P_A is ample. Steps 7-8: global generation of M^c for c>=K (applied to O_T), a nonvanishing cover, u⊗w^r with affine locus via 01PV, and the iso to P_{A+c} via ample-iso, giving a0=A+K. Edge cases checked: empty Z or T, f=id, N=O with T not quasi-affine (A>=1), c=0, different m_i. rg -L finds no live duplicate: pbc-pullback-ample-invertible is 0892(2), the trf nodes are 01VJ and 0893. The declared off-unit tool_uses (generic scheme-theory lemmas, several of them Mathlib leaves or definitions) are accepted. No SGA source is used. No fixes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeAmpleAbsoluteTwist",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isAmple_tensorPullback_tensorPow_of_relative",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeAmpleAbsoluteTwist.lean",
+  "statement": "theorem isAmple_tensorPullback_tensorPow_of_relative {Z T : Scheme.{u}} (f : Z ⟶ T) [QuasiCompact f] (N : Z.Modules) (M : T.Modules) [N.IsInvertible] [M.IsInvertible] (hN : ∀ V : T.Opens, IsAffineOpen V → ∃ h : ((tensorPullback (f ⁻¹ᵁ V).ι).obj N).IsInvertible, @IsAmple (f ⁻¹ᵁ V).toScheme ((tensorPullback (f ⁻¹ᵁ V).ι).obj N) h) (hM : IsAmple T M) : ∃ a₀ : ℤ, 0 ≤ a₀ ∧ ∀ a : ℤ, a₀ ≤ a → ∃ h : (tensorObj N ((tensorPullback f).obj (M.tensorPow a.toNat))).IsInvertible, @IsAmple Z (tensorObj N ((tensorPullback f).obj (M.tensorPow a.toNat))) h",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a120d5649",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Lean statement isAmple_tensorPullback_tensorPow_of_relative matches the node and Stacks 0892(1) clause by clause: Mathlib QuasiCompact f is equivalent to the affine-preimage condition; relative ampleness is IsAmple of the recorded tensorPullback along (f⁻¹ᵁV).ι for every affine V, the same form as the landed citer QuasiprojectiveQCComposition; IsAmple T M; ∃ a₀:ℤ, 0≤a₀ and ∀ a≥a₀, IsAmple of tensorObj N (tensorPullback f (M.tensorPow a.toNat)); toNat is exact because a≥0; IsInvertible is a Prop that IsAmple's body does not use, so the ∃ h witnesses carry no data. No extra assumptions or universe restriction. Tensor/pullback/IsAmple are the recorded definitions with the same monoidal instance as IsAmple. Only the lean field differs from live; the statement is verbatim. Docstrings have the source place, the blueprint tag and all 8 proof steps; sorry only; all imports exist; report sections present. Edge cases: empty Z or T, empty affine V, a=0, negative a. No findings; no compile, since nothing was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261023T152128-L-452864",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

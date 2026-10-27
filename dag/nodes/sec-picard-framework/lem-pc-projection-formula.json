@@ -95,7 +95,42 @@
   "def-sc-invertible-module"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_tensorObj_pullback_iso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_tensorObj_pullback_iso",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
+     "lines": [
+      552,
+      570
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.higherDirectImageTensorObjPullbackIso",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.ProjectionFormula",
+     "lines": [
+      87,
+      106
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-f-representable",
  "split_report": {
@@ -140,5 +175,29 @@
    "AlgebraicGeometry.Scheme.Modules.higherDirectImage_isQuasicoherent_on_affines"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:X\\to Y$ be a morphism of schemes, let $\\mathcal{F}$ be an\n$\\mathcal{O}_X$-module and let $\\mathcal{N}$ be an invertible\n$\\mathcal{O}_Y$-module. Then for every $q\\ge0$ there is an isomorphism of\n$\\mathcal{O}_Y$-modules\n\n$$\nR^qf_*\\bigl(\\mathcal{F}\\otimes_{\\mathcal{O}_X}f^*\\mathcal{N}\\bigr)\\;\\cong\\;\nR^qf_*(\\mathcal{F})\\otimes_{\\mathcal{O}_Y}\\mathcal{N}.\n$$",
+  "proof": [
+   {
+    "text": "*The case $q=0$.* There is a canonical map\n$f_*\\mathcal{G}\\otimes\\mathcal{N}\\to f_*(\\mathcal{G}\\otimes f^*\\mathcal{N})$ for every\n$\\mathcal{O}_X$-module $\\mathcal{G}$, natural in $\\mathcal{G}$ (adjoint to\n$f^*(f_*\\mathcal{G}\\otimes\\mathcal{N})=f^*f_*\\mathcal{G}\\otimes f^*\\mathcal{N}\\to\\mathcal{G}\\otimes f^*\\mathcal{N}$).\nWhether it is an isomorphism is local on $Y$, and on an open $V\\subseteq Y$\nwhere $\\mathcal{N}|_V\\cong\\mathcal{O}_V$ both sides become $f_*\\mathcal{G}|_V$ and the\nmap the identity. So $f_*\\circ(-\\otimes f^*\\mathcal{N})\\cong(-\\otimes\\mathcal{N})\\circ f_*$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*The general case.* Since $\\mathcal{N}$ is invertible, so is $f^*\\mathcal{N}$, and\ntensoring with an invertible module is an autoequivalence of the category of\nmodules (with inverse the tensor product with the dual). Hence\n$-\\otimes f^*\\mathcal{N}$ is exact and sends injective $\\mathcal{O}_X$-modules to\ninjective ones, so the right derived functors of\n$f_*\\circ(-\\otimes f^*\\mathcal{N})$ are $R^qf_*\\circ(-\\otimes f^*\\mathcal{N})$\n([def-pc-derived-direct-image]); and $-\\otimes\\mathcal{N}$ is exact, so the right\nderived functors of $(-\\otimes\\mathcal{N})\\circ f_*$ are\n$(-\\otimes\\mathcal{N})\\circ R^qf_*$. The isomorphism of functors of the case\n$q=0$ therefore induces isomorphisms of their right derived functors, which\nevaluated at $\\mathcal{F}$ give the claim.",
+    "uses": [
+     "def-pc-derived-direct-image"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

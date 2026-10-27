@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-perfect-sheaf-dg-finite-stage-descent",
+ "kind": "statement",
+ "title": "Finite coefficient descent of a perfect sheaf dg object",
+ "statement": "Let $D$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $D\\to A$ be a homomorphism of commutative rings, and let $Y\\to\\operatorname{Spec}D$ be separated and of finite type [def-pc-scheme, def-pc-morphism-conventions]. Let $W\\subseteq Y$ be a quasi-compact open subscheme [def-weil-open-immersion, def-weil-pbc-quasi-compact-scheme]. For every commutative $D$-algebra $E$ use the functorial resolutions $R_E$ and the sheaf dg localization and locally perfect objects of [def-sfb-dg-coefficient-realization], applied to $D\\to E$ on $W$; set $\\mathcal C_E=\\mathcal O_W\\otimes_D R_E$. For a $D$-algebra map $E\\to A$, extension along $\\mathcal C_E\\to\\mathcal C_A$ means the derived left-module extension of [def-sfb-sheaf-dg-module-localization].\n\nFor every perfect $H\\in D_{\\mathrm{QCoh}}(\\mathcal C_A)$ there exist a commutative finite type $D$-algebra $E$ [def-weil-pbc-finite-type-algebra], a factorization $D\\to E\\to A$, a perfect $H_E\\in D_{\\mathrm{QCoh}}(\\mathcal C_E)$, and an isomorphism in the sheaf dg derived category\n$$\\mathcal C_A\\otimes_{\\mathcal C_E}^{\\mathbf L}H_E\\simeq H.$$\nThis is descent of the sheaf dg object, including its gluing and retract data. No ordinary target, arrow into a target, cohomological cutoff, flatness, or injectivity of the coefficient maps is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent sheaf-dg coefficient analogue of Tag 09RF (lemma-descend-perfect), whose proof is read for finite-cover descent and overlap morphism descent. The tag states ordinary perfect descent on inverse limits of schemes, not this derived coefficient algebra statement. The sheaf-dg analogue is a new obligation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-weil-open-immersion",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sfb-dg-coefficient-realization",
+  "def-sfb-sheaf-dg-module-localization",
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Write $T_{B,E}=\\mathcal C_B\\otimes_{\\mathcal C_E}^{\\mathbf L}-$ and $\\operatorname{Res}_{B,E}$ for restriction. By [lem-sfb-ringed-dg-scalar-adjunction], $T_{B,E}$ exists, is exact and commutes with open restriction. The regular module is graded-flat and homotopically flat, since tensoring with it is the identity. Thus [lem-sfb-sheaf-dg-hflat-computation] computes its derived extension as the new regular module. Exactness, finite additivity and preservation of retract equations now show that extension preserves local perfection. Its values on perfect objects have quasi-coherent underlying cohomology: check on affine opens, whose coordinate algebras are finite type over $D$ by [lem-weil-pbc-lft-affine-pairs], using [lem-sfb-affine-dg-coefficient-module-comparison], where they are retracts of finite dg cells. For $E\\to B\\to C$, the two successive adjunction bijections identify $T_{C,B}T_{B,E}$ with $T_{C,E}$, since their right adjoint is literally the composite restriction. Use these canonical comparisons, which respect units and counits. If $A$ is finite type, take $E=A$ and $H_E=H$. Otherwise all subsequent coefficient indices are finite type subalgebras strictly larger than the image of $D$. They form a directed set with union $A$: adjoin any element outside that image and any finitely many specified elements. Any finite type algebra mapping to $A$ maps into such a stage. This excludes the exceptional constant-resolution case at $D$ in the continuity argument.",
+   "uses": [
+    "lem-sfb-ringed-dg-scalar-adjunction",
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "def-sfb-dg-coefficient-realization",
+    "lem-sfb-sheaf-dg-hflat-computation",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RF (lemma-descend-perfect), finite-cover induction; agent adaptation to the sheaf dg coefficient system"
+   }
+  },
+  {
+   "text": "Use [lem-pqf-finite-affine-cover-qc-open] to choose a finite affine cover of $W$. We prove descent on every open of $W$ admitting a cover by at most $r$ affine opens, by induction on $r$. The empty open has only the zero object, which descends from any finite stage. For one affine $Z=\\operatorname{Spec}S$, [lem-weil-pbc-lft-affine-pairs] makes $S$ finite type over $D$. The equivalence of [lem-sfb-affine-dg-coefficient-module-comparison] carries $H|_Z$ to a retract of a finite-cell $S\\otimes_D R_A$-module. Apply [lem-sfb-affine-perfect-dg-finite-stage-descent] and transport its descended object and isomorphism back through that equivalence. Step 1 lets us enlarge the resulting coefficient algebra into the chosen subalgebra index set without changing its realization.",
+   "uses": [
+    "lem-pqf-finite-affine-cover-qc-open",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sfb-affine-perfect-dg-finite-stage-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RF (lemma-descend-perfect), finite-cover induction; agent adaptation to the sheaf dg coefficient system"
+   }
+  },
+  {
+   "text": "For the induction step write $Z=O\\cup V$, with $O$ covered by $r-1$ affine opens and $V$ affine. By [lem-weil-pbc-separated-affine-open-intersection], $T=O\\cap V$ is a union of at most $r-1$ affine opens, hence quasi-compact. Descend $H|_O$ and $H|_V$ by the induction hypothesis and the affine case. Enlarge their coefficient algebras to one common subalgebra $E\\subseteq A$ as in step 1. Denote the resulting perfect objects by $L_E,M_E$ and their realizations by $\\alpha:T_{A,E}L_E\\xrightarrow{\\sim}H|_O$ and $\\beta:T_{A,E}M_E\\xrightarrow{\\sim}H|_V$.",
+   "uses": [
+    "lem-weil-pbc-separated-affine-open-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RF (lemma-descend-perfect), finite-cover induction; agent adaptation to the sheaf dg coefficient system"
+   }
+  },
+  {
+   "text": "On $T$ the isomorphism $c_A=(\\beta|_T)^{-1}(\\alpha|_T)$ and its inverse are morphisms between the realizations of the two perfect $E$-objects. Surjectivity in [lem-sfb-perfect-sheaf-dg-hom-continuity], applied in both directions, lifts them to maps $c_B,d_B$ at a common later stage. Their composites realize the identities. Injectivity of the same bijections for the two endomorphism sets makes $d_Bc_B=1$ and $c_Bd_B=1$ at a common further stage. Rename this stage $E$. Thus $c_E$ is an actual derived isomorphism, with $\\beta|_T\\circ T_{A,E}(c_E)=\\alpha|_T$. This uses no strict representative for an idempotent or for a derived isomorphism.",
+   "uses": [
+    "lem-sfb-perfect-sheaf-dg-hom-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RF (lemma-descend-perfect), finite-cover induction; agent adaptation to the sheaf dg coefficient system"
+   }
+  },
+  {
+   "text": "In $D_Z(\\mathcal C_E)$ take the fixed target $N=\\operatorname{Res}_{A,E}(H|_Z)$. Transpose $\\alpha,\\beta$ using [lem-sfb-ringed-dg-scalar-adjunction] to maps $a:L_E\\to N|_O$, $b:M_E\\to N|_V$. Naturality and open compatibility of that adjunction transpose the last equation of step 4 into $a|_T=b|_T\\circ c_E$. Apply [lem-sfb-sheaf-dg-binary-gluing] to obtain $F_E$, its local identifications $f,g$, and $d:F_E\\to N$ restricting to $af,bg$. Its local identifications show that $F_E$ is perfect and has quasi-coherent underlying cohomology. The adjunct $\\delta:T_{A,E}F_E\\to H|_Z$ restricts to $\\alpha\\circ T_{A,E}f$ and $\\beta\\circ T_{A,E}g$, hence to isomorphisms. Its underlying cohomology maps are isomorphisms on the covering pair, so globally, since cohomology sheaves are local. By [lem-sfb-sheaf-dg-homotopy-system], applied to the opposite algebra of $\\mathcal C_A|_Z$ (left modules are right modules over it), quasi-isomorphisms form a saturated multiplicative system with calculus of fractions; write $\\delta=s^{-1}w$ with $s$ a quasi-isomorphism and $w$ a homotopy class of dg maps. Then $w$ induces isomorphisms on all underlying cohomology sheaves, so $w$ is a quasi-isomorphism and $\\delta$ is invertible in the localization. This completes the induction. On $Z=W$ take $H_E=F_E$ and $\\delta$ as the required isomorphism. The affine descent input already carries the local retract data; the inverse equations and compatible-target-map construction above carry the gluing data.",
+   "uses": [
+    "lem-sfb-ringed-dg-scalar-adjunction",
+    "lem-sfb-sheaf-dg-binary-gluing",
+    "def-sfb-sheaf-dg-module-localization",
+    "def-sfb-dg-coefficient-realization",
+    "lem-sfb-sheaf-dg-homotopy-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09RF (lemma-descend-perfect), finite-cover induction; agent adaptation to the sheaf dg coefficient system"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-dg-scalar-adjunction",
+  "lem-sfb-affine-dg-coefficient-module-comparison",
+  "def-sfb-dg-coefficient-realization",
+  "lem-sfb-sheaf-dg-hflat-computation",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-pqf-finite-affine-cover-qc-open",
+  "lem-sfb-affine-perfect-dg-finite-stage-descent",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-sfb-perfect-sheaf-dg-hom-continuity",
+  "lem-sfb-sheaf-dg-binary-gluing",
+  "def-sfb-sheaf-dg-module-localization",
+  "lem-sfb-sheaf-dg-homotopy-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RF (lemma-descend-perfect), finite-cover induction; agent adaptation to the sheaf dg coefficient system"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Perfect sheaves of differential graded modules on a quasi compact separated scheme descend along a filtered union of coefficient subalgebras",
+   "results": "{\"t\": \"2026-10-24T06:53:53Z\", \"tool\": \"leanfinder\", \"query\": \"Perfect sheaves of differential graded modules on a quasi compact separated scheme descend along a filtered union of coefficient subalgebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"BDeRhamPlus\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"localCohomology.ofDiagram\"], \"digest\": \"804197f19bd4e40e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned sheaf finite-generator statements, affine-limit section continuity, smooth algebra descent and differential-module finiteness. None descends a perfect sheaf dg object over the specified non-flat derived coefficient algebra. Loogle and source grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type coefficient descent for locally perfect sheaf dg modules on a quasi compact open of a separated Noetherian scheme",
+   "results": "{\"t\": \"2026-10-24T06:58:10Z\", \"tool\": \"leanfinder\", \"query\": \"Finite type coefficient descent for locally perfect sheaf dg modules on a quasi compact open of a separated Noetherian scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"SheafOfModules.IsFiniteType\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\"], \"digest\": \"a7c25f278cd7f8be\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned sheaf finite-generator statements, affine-limit section continuity, smooth algebra descent and differential-module finiteness. None descends a perfect sheaf dg object over the specified non-flat derived coefficient algebra. Loogle and source grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Perfect\"",
+   "results": "{\"t\": \"2026-10-24T06:54:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"Perfect\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned sheaf finite-generator statements, affine-limit section continuity, smooth algebra descent and differential-module finiteness. None descends a perfect sheaf dg object over the specified non-flat derived coefficient algebra. Loogle and source grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*descen|dg.*coefficient|coefficient.*factoriz",
+   "results": "{\"t\": \"2026-10-24T06:54:31Z\", \"tool\": \"grep\", \"query\": \"perfect.*descen|dg.*coefficient|coefficient.*factoriz\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned sheaf finite-generator statements, affine-limit section continuity, smooth algebra descent and differential-module finiteness. None descends a perfect sheaf dg object over the specified non-flat derived coefficient algebra. Loogle and source grep returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of perfect differential graded modules on schemes to a finitely generated coefficient subalgebra",
+   "results": "{\"t\": \"2026-10-24T06:54:32Z\", \"tool\": \"leansearch\", \"query\": \"Descent of perfect differential graded modules on schemes to a finitely generated coefficient subalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_subalgebra_fg\", \"KaehlerDifferential.ideal_fg\", \"KaehlerDifferential.finite\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"Algebra.SubmersivePresentation.free_kaehlerDifferential\", \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"Algebra.Extension.Cotangent.finite\"], \"digest\": \"aefd3927a27a8de1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned sheaf finite-generator statements, affine-limit section continuity, smooth algebra descent and differential-module finiteness. None descends a perfect sheaf dg object over the specified non-flat derived coefficient algebra. Loogle and source grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect sheaf differential graded modules descend to finitely generated coefficient algebras on a quasi compact separated scheme",
+   "results": "{\"t\": \"2026-10-24T07:31:26Z\", \"tool\": \"leanfinder\", \"query\": \"Perfect sheaf differential graded modules descend to finitely generated coefficient algebras on a quasi compact separated scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"KaehlerDifferential.finite\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\"], \"digest\": \"7b464e8384bb3c55\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ordinary sheaf generators/colimits, ringed-space gluing, differentials, or commutation of categorical limits; none states derived sheaf dg perfect coefficient descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient models for locally perfect complexes over sheaves of differential graded algebras",
+   "results": "{\"t\": \"2026-10-24T07:31:28Z\", \"tool\": \"leanfinder\", \"query\": \"Finite coefficient models for locally perfect complexes over sheaves of differential graded algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.IsFiniteType\"], \"digest\": \"74fc8afdca45369a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ordinary sheaf generators/colimits, ringed-space gluing, differentials, or commutation of categorical limits; none states derived sheaf dg perfect coefficient descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Perfect\"",
+   "results": "{\"t\": \"2026-10-24T07:31:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"Perfect\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no source or Loogle hits"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*descen|descen.*perfect|sheaf.*dg",
+   "results": "{\"t\": \"2026-10-24T07:31:23Z\", \"tool\": \"grep\", \"query\": \"perfect.*descen|descen.*perfect|sheaf.*dg\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no source or Loogle hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect sheaf dg modules descend along filtered colimits of coefficient rings",
+   "results": "{\"t\": \"2026-10-24T07:31:24Z\", \"tool\": \"leansearch\", \"query\": \"Perfect sheaf dg modules descend along filtered colimits of coefficient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"ModuleCat.FilteredColimits.M\", \"ModuleCat.FilteredColimits.colimit\", \"ModuleCat.FilteredColimits.M.mk\", \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"SheafOfModules.Presentation.isColimit\", \"ModuleCat.FilteredColimits.colimitCoconeIsColimit\"], \"digest\": \"cadebb79bb798e8c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ordinary sheaf generators/colimits, ringed-space gluing, differentials, or commutation of categorical limits; none states derived sheaf dg perfect coefficient descent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-arrow-coherent-factorization-locality",
+  "date": "2026-10-24",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Uniform Mayer--Vietoris locality step: the predicate on each open covers all perfect sources, ordinary targets, integer cutoffs and arrows surjective on cohomology above the cutoff; conditional on this full predicate on both opens and their intersection. Independent prerequisite: finite coefficient descent of the perfect sheaf dg source, before transposing the arrow to an ordinary coherent object.",
+   "via": [
+    "lem-sfb-perfect-arrow-coherent-factorization-locality",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-perfect-sheaf-dg-finite-stage-descent",
+  "worker": "stage1",
+  "summary": "Reused existing affine dg object descent and affine module comparison. Added two statement-only inputs for perfect sheaf dg Hom continuity and binary dg gluing with a compatible global target map. Wrote finite affine-cover induction, inverse-equation descent, and adjunction-normalized global comparison. Kept the statement and all hypotheses unchanged.",
+  "blueprint": "Realizes det-thm-sf-ctf-stability-direct-images proof (3), the inherited Kiehl finite-coefficient prerequisite, by the affine/Mayer--Vietoris route of Stacks 09RF. The ancestry tool reports null because the inherited created.item chain is broken; its full via chain and the precise inherited place are retained. Latest blueprint direct-images proof (3) was read.",
+  "tool_uses": [
+   {
+    "node": "lem-pqf-finite-affine-cover-qc-open",
+    "why": "Generic finite affine cover of a quasi-compact scheme open; no coefficient-specific route replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Generic affine characterization of locally finite type maps makes each affine chart a finite type D-algebra."
+   },
+   {
+    "node": "lem-weil-pbc-separated-affine-open-intersection",
+    "why": "Generic separated-scheme intersection fact bounds the number of affine opens on the overlap."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pqf-finite-affine-cover-qc-open",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-separated-affine-open-intersection"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-2b73024d3",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-2b73024d3 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, and Stacks 09RF/09RE (perfect.tex lemma-descend-perfect) and 08DG (cohomology.tex lemma-glue). The statement equals the base statement plus the finite-type stmt_dep; nothing was weakened, and this is not a re-split. Steps 1-4 follow 09RF: identity extension when A is of finite type; otherwise the directed set of finite-type subalgebras strictly above the image of D, which avoids the R_D=D convention. Affine case via lem-sfb-affine-dg-coefficient-module-comparison (it identifies extension) and the existing affine descent lemma; induction on the number of affines (base cases r=0 and r=1); separatedness makes the overlaps affine; Hom continuity lifts c and its inverse, and injectivity gives the inverse equations. Step 5 glues the adjuncts with lem-sfb-sheaf-dg-binary-gluing, and the adjunct delta restricts to alpha∘T(f) and beta∘T(g). C1/C4 fault fixed: 'localization makes delta invertible' needs saturation and calculus of fractions, so step 5 now cites lem-sfb-sheaf-dg-homotopy-system (opposite algebra, delta=s^{-1}w with w a quasi-isomorphism). That node is in the same unit and already in the closure; proof_deps updated. New nodes: hom-continuity is true (compactness of finite cells, C_A=colim C_B, then Mayer-Vietoris and the five lemma); binary-gluing is true (cone of j_{T!} into j_{U!}+j_{V!}; the restricted triangle splits). Both are smaller than the item, not clauses of it, and not duplicates (the pc/sc/sp nodes are for ordinary modules). Tool_uses accepted: three generic Mathlib leaves. Batch 5: lem-trf-triangulated-subcategory-cone-system is a generic triangulated-localization fact and def-trf-cotangent-resolution-data is the standard-resolution definition; neither is trace-formula or Poincaré content, so accepted. blueprint.from.node is null because of the inherited base chain, not a delivery fault.; 1 file(s) fixed by the reviewer"
+ }
+}

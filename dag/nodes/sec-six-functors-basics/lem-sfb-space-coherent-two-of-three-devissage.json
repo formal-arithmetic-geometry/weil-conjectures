@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-space-coherent-two-of-three-devissage",
+ "kind": "statement",
+ "title": "Two-out-of-three coherent devissage on a Noetherian algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and use algebraic spaces over $S$ [def-trf-algebraic-space]. Modules and quasi-coherence are on the small etale ringed sites [def-trf-space-quasi-coherent-module], with module direct image and tensor pullback [def-trf-space-etale-module-functors]. Locally Noetherian means locally Noetherian on etale scheme charts [pqf-def-locnoeth]; Noetherian means additionally quasi-compact and quasi-separated (quasi-compact diagonal). Coherent means quasi-coherent with coherent pullbacks on all etale scheme charts [pqf-def-coherent]. Let $X$ be Noetherian and let $\\mathcal P$ be an isomorphism-invariant property of coherent $\\mathcal O_X$-modules. Suppose (0) $\\mathcal P(0)$; (1) in every short exact sequence of coherent modules, if two terms have $\\mathcal P$, so does the third; (2) for coherent $F$ and every integer $r\\geq1$, $\\mathcal P(F^{\\oplus r})$ implies $\\mathcal P(F)$; (3) for every reduced closed subspace $i:Z\\hookrightarrow X$ with nonempty irreducible point space, there is a coherent $\\mathcal O_X$-module $M$ such that $\\mathcal P(M)$ and $\\operatorname{Ann}_{\\mathcal O_X}(M)=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$. Here a closed immersion is representable by closed immersions of schemes [def-weil-closed-immersion], reduced means reduced on etale charts, irreducible means not a union of two proper closed subsets, and the point topology is [def-a1-space-point-topology]. The annihilator consists of the local sections of the structure sheaf killing every local section of the module; its equality with this kernel says that the scheme theoretic support of $M$ is exactly $Z$. Then $\\mathcal P(F)$ holds for every coherent $\\mathcal O_X$-module $F$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 08AN (lemma-property-higher-rank-cohomological-variant), with the zero-object hypothesis explicit so the empty algebraic space is included."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-closed-immersion",
+  "def-a1-space-point-topology",
+  "def-sfb-space-closed-ideal-filtration",
+  "def-trf-space-module-scheme-restriction"
+ ],
+ "proof": [
+  {
+   "text": "We use coherent modules throughout. By [lem-sfb-space-coherent-abelian], kernels, cokernels, finite direct sums and extensions of coherent modules are coherent. By [lem-sfb-space-noetherian-coherent-support], the structure module, quasi-coherent ideals, their quotients and quasi-coherent submodules of coherent modules are coherent and have closed support. For a closed immersion $i:Z\\hookrightarrow X$, [lem-sfb-space-closed-coherent-modules] makes $Z$ Noetherian, preserves coherence under $i_*$ and identifies supports under the closed inclusion. Moreover [lem-sfb-space-closed-immersion-quasi-coherent-modules] makes $i_*$ exact on quasi-coherent modules. Thus every exact sequence below is a short exact sequence of coherent modules on $X$ after pushforward.",
+   "uses": [
+    "lem-sfb-space-coherent-abelian",
+    "lem-sfb-space-noetherian-coherent-support",
+    "lem-sfb-space-closed-coherent-modules",
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tags 07UC (lemma-coherent-abelian-Noetherian), 07UD (lemma-coherent-Noetherian-quasi-coherent-sub-quotient), 07UH (lemma-finite-pushforward-coherent); preparation for Tag 08AN."
+   }
+  },
+  {
+   "text": "Check the support hypothesis needed for the witness. Let $i:Z\\hookrightarrow X$ be reduced closed, $J=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$, and let $M$ be coherent with $\\operatorname{Ann}(M)=J$. Since $JM=0$, [lem-sfb-space-coherent-support-ideal-power] gives $\\operatorname{Supp}(M)\\subseteq|Z|$. Conversely put $T=\\operatorname{Supp}(M)$, closed by [lem-sfb-space-noetherian-coherent-support], and give $T$ its reduced closed subspace structure $W$ by [lem-sfb-space-reduced-closed-support]. Its defining ideal $L$ is quasi-coherent by [lem-sfb-space-closed-immersion-quasi-coherent-modules]. The same ideal-power lemma gives $L^nM=0$ for some $n\\geq1$ (increase the exponent if necessary), so $L^n\\subseteq\\operatorname{Ann}(M)=J$. On any affine scheme chart this inclusion implies $V(J)\\subseteq V(L^n)=V(L)$: a prime containing $J$ contains each $n$th power from $L$ and hence $L$. Therefore $|Z|\\subseteq T$. This proves $\\operatorname{Supp}(M)=|Z|$ without replacing scheme-theoretic support by set-theoretic support as a hypothesis.",
+   "uses": [
+    "lem-sfb-space-coherent-support-ideal-power",
+    "lem-sfb-space-noetherian-coherent-support",
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AN, witness in the third proof paragraph; Tag 07UK (lemma-power-ideal-kills-sheaf), applied in both directions; reduced closed support from Tag 03IQ."
+   }
+  },
+  {
+   "text": "We will also use the following elementary consequence of [lem-sfb-space-power-ideal-kills] on a nonempty reduced Noetherian closed subspace $Z$. If a nonzero quasi-coherent ideal $A\\subseteq\\mathcal O_Z$ had $Z(A)=|Z|$, that lemma applied to the coherent structure module would give $A^n=0$. The case $n=0$ forces $\\mathcal O_Z=0$, contradicting nonemptiness; for $n>0$ every local section $a$ of $A$ has $a^n=0$, so reducedness forces $A=0$, again a contradiction. Hence $Z(A)$ is proper closed. If a coherent module $B$ is killed by $A$, the same lemma with exponent $1$ gives $\\operatorname{Supp}(B)\\subseteq Z(A)$. Coherence of the structure module needed here is [lem-sfb-space-noetherian-coherent-support].",
+   "uses": [
+    "lem-sfb-space-power-ideal-kills",
+    "lem-sfb-space-noetherian-coherent-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AN, final proof paragraph, proper support of ideal quotients; Tag 07UK (lemma-power-ideal-kills-sheaf), with the reducedness calculation written out."
+   }
+  },
+  {
+   "text": "Suppose some ideal pushforward $i_*A$ fails $\\mathcal P$, with $i:Z\\hookrightarrow X$ reduced closed and $|Z|$ nonempty irreducible, and $A\\subseteq\\mathcal O_Z$ quasi-coherent. Let $\\mathcal T$ be the family of the corresponding closed subsets $|Z|$. By [lem-sfb-noetherian-space-topology] it has a minimal member $T=|Z|$. The uniqueness clause of [lem-sfb-space-reduced-closed-support] ensures that a given closed subset determines its reduced subspace, so minimality says: on every nonempty irreducible reduced closed subspace $Z'$ with $|Z'|\\subsetneq T$, every quasi-coherent ideal pushforward has $\\mathcal P$. In particular the zero ideal cannot witness failure, since $\\mathcal P(0)$ and pushforward of zero is zero.",
+   "uses": [
+    "lem-sfb-noetherian-space-topology",
+    "lem-sfb-space-reduced-closed-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AN (lemma-property-higher-rank-cohomological-variant), first two proof paragraphs: the minimal bad reduced irreducible closed subspace."
+   }
+  },
+  {
+   "text": "Every coherent $H$ on $X$ with $\\operatorname{Supp}(H)\\subsetneq T$ now has $\\mathcal P$. Indeed apply the support-controlled filtration of [lem-sfb-space-coherent-ideal-filtration]. Each nonzero factor is $(i_j)_*A_j$ on a nonempty irreducible reduced closed subspace whose underlying subset lies in $\\operatorname{Supp}(H)\\subsetneq T$. Minimality from step 4 gives $\\mathcal P$ for every factor. Starting with $\\mathcal P(0)$, apply hypothesis (1) to $0\\to H_{j-1}\\to H_j\\to H_j/H_{j-1}\\to0$ successively. When $H$ has empty support the cited filtration has length zero and gives $H=0$.",
+   "uses": [
+    "lem-sfb-space-coherent-ideal-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AN, third proof paragraph, applying Tag 07UR (lemma-coherent-filter) to coherent modules with proper support."
+   }
+  },
+  {
+   "text": "Choose the witness $M$ of hypothesis (3) for this minimal $i:Z\\hookrightarrow X$. It has $\\mathcal P(M)$, is killed by $J=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$, and has support $T$ by step 2. Apply [lem-sfb-space-reduced-support-generic-ideal-inclusion] to obtain $r\\geq1$, a nonzero coherent ideal $K\\subseteq\\mathcal O_Z$, and an injection $\\alpha:i_*(K^{\\oplus r})\\hookrightarrow M$ with coherent cokernel $Q$ of support strictly contained in $T$. By [lem-sfb-space-closed-coherent-modules], $i_*K$ is coherent. Also $i_*(K^{\\oplus r})\\cong(i_*K)^{\\oplus r}$: finite direct sums of module sheaves are finite products, and taking a finite tuple of sections commutes with the defining direct-image limit. This uses only the direct-image universal property of [def-trf-space-etale-module-functors].",
+   "uses": [
+    "lem-sfb-space-reduced-support-generic-ideal-inclusion",
+    "lem-sfb-space-closed-coherent-modules",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AN, third proof paragraph, applying Tag 07UQ (lemma-prepare-filter-irreducible) to the chosen witness."
+   }
+  },
+  {
+   "text": "Step 5 gives $\\mathcal P(Q)$, and the witness has $\\mathcal P(M)$. Apply hypothesis (1) to $0\\to i_*(K^{\\oplus r})\\xrightarrow{\\alpha}M\\to Q\\to0$ to obtain $\\mathcal P(i_*(K^{\\oplus r}))$. Under the finite-sum identification of step 6, hypothesis (2), with $r\\geq1$ and the coherent module $i_*K$, gives $\\mathcal P(i_*K)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AN, third proof paragraph, two-out-of-three followed by reflection from a positive finite direct sum."
+   }
+  },
+  {
+   "text": "Let $A\\subseteq\\mathcal O_Z$ be any other quasi-coherent ideal. If $A=0$, its pushforward has $\\mathcal P$ by hypothesis (0), so suppose $A\\ne0$. Set $C=K\\cap A$. By [lem-sfb-space-noetherian-coherent-support], $K$ and $A$ are coherent. The intersection is the kernel of $K\\to\\mathcal O_Z/A$, so [lem-sfb-space-coherent-abelian] makes $C$, $K/C$ and $A/C$ coherent. Products give $A(K/C)=0$ and $K(A/C)=0$, since $AK\\subseteq K\\cap A=C$. Step 3 therefore puts their supports in the proper closed subsets $Z(A)$ and $Z(K)$ of $|Z|$, respectively. By [lem-sfb-space-closed-coherent-modules], the coherent modules $i_*(K/C)$ and $i_*(A/C)$ have support strictly contained in $T$. Step 5 gives $\\mathcal P$ for both of them.",
+   "uses": [
+    "lem-sfb-space-noetherian-coherent-support",
+    "lem-sfb-space-coherent-abelian",
+    "lem-sfb-space-closed-coherent-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AN, final proof paragraph: intersection of the two ideals and proper support of both quotients, with the annihilating products explicit."
+   }
+  },
+  {
+   "text": "By exactness of closed pushforward [lem-sfb-space-closed-immersion-quasi-coherent-modules], the two intersection sequences give $0\\to i_*C\\to i_*K\\to i_*(K/C)\\to0$ and $0\\to i_*C\\to i_*A\\to i_*(A/C)\\to0$. All terms are coherent by steps 1 and 8. The first sequence, step 7 and step 8 give $\\mathcal P(i_*C)$ by hypothesis (1). The second sequence then gives $\\mathcal P(i_*A)$. This holds for every quasi-coherent ideal $A$ on $Z$, contradicting the choice of $T$. Consequently the family $\\mathcal T$ of step 4 is empty.",
+   "uses": [
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AN, final proof paragraph, the two exact intersection sequences and the contradiction to minimality."
+   }
+  },
+  {
+   "text": "Finally take any coherent $F$ on $X$ and its filtration from [lem-sfb-space-coherent-ideal-filtration]. Since $\\mathcal T$ is empty, every ideal-pushforward factor has $\\mathcal P$. Induction along this finite filtration using hypothesis (1), starting with hypothesis (0), gives $\\mathcal P(F)$. The length-zero filtration covers $F=0$ and the empty space. This is the finite-filtration argument behind Tag 07US, rather than a new node restating the conclusion.",
+   "uses": [
+    "lem-sfb-space-coherent-ideal-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AN, first proof sentence reducing to Tag 07US (lemma-property-initial), expanded using Tag 07UR (lemma-coherent-filter)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-coherent-abelian",
+  "lem-sfb-space-noetherian-coherent-support",
+  "lem-sfb-space-closed-coherent-modules",
+  "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+  "lem-sfb-space-coherent-support-ideal-power",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-power-ideal-kills",
+  "lem-sfb-noetherian-space-topology",
+  "lem-sfb-space-coherent-ideal-filtration",
+  "lem-sfb-space-reduced-support-generic-ideal-inclusion",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 08AN (lemma-property-higher-rank-cohomological-variant), complete proof; the two uses of Tag 07US are expanded using the existing support-controlled Tag 07UR filtration."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A property of coherent modules on a Noetherian algebraic space follows from two out of three, finite sum reflection, and one faithful coherent module on each integral closed subspace",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} [Finite ι] {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$ and a finite family of affine open subsets $\\\\{S_i\\\\}$ whose union is $X$, $X$ is Noetherian if and only if the ring of sections $\\\\Gamma(X, S_i)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f]\\n  [AlgebraicGeometry.IsLocallyNoetherian Y], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.isLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [h : AlgebraicGeometry.IsLocallyArtinian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"Every locally Artinian scheme is a locally Noetherian scheme. That is, if every point of a scheme has an open neighborhood whose coordinate ring is Artinian, then the scheme admits an open cover by No\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a Noetherian ring, then the scheme $ \\\\operatorname{Spec}(R) $ is locally Noetherian. This means the prime spectrum of $ R $, equipped with the Zariski topology and structure sheaf, admits \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Noetherian scheme instances and definitions of quasi-coherent or finite-type sheaves do not give coherent devissage on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCoherent\", \"Noetherian\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Noetherian scheme instances and definitions of quasi-coherent or finite-type sheaves do not give coherent devissage on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|d[eé]vissage|coherent.*property|property.*coherent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Noetherian scheme instances and definitions of quasi-coherent or finite-type sheaves do not give coherent devissage on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomological devissage for coherent sheaves on a Noetherian algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsNoetherian X] : NoetherianSpace X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  {inst : CategoryTheory.Category.{v', u'} C} →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)} →\\n          {inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this definition constructs the data required to define a quasicoherent sheaf over $\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.casesOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A case analysis principle for quasicoherence of a sheaf of modules over a ring sheaf, enabling definitions or proofs by recursion on the quasicoherence structure established via sheaf composition, wea\"}\n  {\"name\": \"SheafOfModules.Presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [J.HasSheafCompo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Noetherian scheme instances and definitions of quasi-coherent or finite-type sheaves do not give coherent devissage on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian induction on supports reduces a Serre property of coherent sheaves to one full support module on every reduced irreducible closed subspace",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this proposition asserts that the \"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X], QuasiSeparatedSpace ↥X\", \"doc\": \"Every locally Noetherian scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Noetherian scheme instances and definitions of quasi-coherent or finite-type sheaves do not give coherent devissage on algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-proper-coherent-higher-images",
+  "date": "2026-10-23",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. Supporting input of Tag 0D0T: Tag 0D0R applied with Y=Spec(A) supplies coherent cohomology after proper direct image. Input of Tag 0D0R through the proof of Tag 08GK: coherence of the entries R^p f_* H^q(E), using the proper case Tag 08AR. Supporting input: Tag 08AN (lemma-property-higher-rank-cohomological-variant), with the zero-object hypothesis explicit so the empty algebraic space is included.",
+   "via": [
+    "lem-sfb-space-proper-coherent-higher-images",
+    "lem-sfb-proper-space-coherent-derived-image",
+    "lem-sfb-proper-space-coherent-ext-finite",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-coherent-two-of-three-devissage",
+  "worker": "stage1",
+  "summary": "Split Tag 08AN in ten steps using only existing DAG nodes: coherent exactness, annihilator/full-support verification by ideal powers, reduced ideal zero loci, minimal bad irreducible support, filtration for smaller supports, generic ideal inclusion into the witness, positive-sum reflection, ideal intersection and two exact sequences, and the final filtration. No statement changes, no new nodes and no attachments. The zero-object hypothesis is retained and zero ideals are handled explicitly.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. Supporting input of Tag 0D0T: Tag 0D0R applied with Y=Spec(A) supplies coherent cohomology after proper direct image. Input of Tag 0D0R through the proof of Tag 08GK: coherence of the entries R^p f_* H^q(E), using the proper case Tag 08AR. Supporting input: Tag 08AN (lemma-property-higher-rank-cohomological-variant), with the zero-object hypothesis explicit so the empty algebraic space is included. This split supplies exactly the coherent two-out-of-three devissage input of the proper coherent higher-image branch; it changes no unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-80a381c62",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-80a381c62 (reviewer sub-agent of L); spot-checked: I read the item in full: 10 steps, no new nodes, statement, stmt_deps, source and blueprint byte-equal to clones/live, item still unsplit live. I read Stacks spaces-cohomology Tag 08AN (lemma-property-higher-rank-cohomological-variant), statement and proof; the hypotheses match it, with P(0) and isomorphism invariance kept from the base. Each step agrees with the full statement of every node it cites. Step 2 derives Supp M=|Z| from Ann M=J: one direction uses n=1 in the 07UK ideal-power node; the other uses the 03IQ reduced structure W, its ideal L, then L^n ⊆ J, so V(J) ⊆ V(L). Step 3 shows a nonzero ideal on a reduced nonempty Z has proper zero locus: n=0 forces O_Z=0, n>0 is excluded by reducedness. Step 4 takes the minimal bad T from 04ZF. Step 5 relies on the support control actually stated in the 07UR filtration node. Steps 6-7 apply the 07UQ node, whose hypotheses step 2 and (3) supply, then (1) and (2) with r≥1 and i_* commuting with finite sums. Steps 8-9 do the intersection argument; A=0 is handled by (0), K≠0 comes from 07UQ, step 3 plus the support clause of the closed-coherent node give proper supports, and 04CJ exactness gives the two sequences. Step 10 is the final filtration. This correctly fills the silent I,J≠0 gap in the source's last paragraph. Edge cases checked: empty X, F=0, Z a point, A=0, A=K, ideals (x),(x^2) on a line, non-reduced X, r=1. Not a duplicate: lem-sfb-space-coherent-devissage (07UT) has a different hypothesis (3). Batch-5 check: all 8 flagged citations are generic coherent-module or Noetherian-topology facts on algebraic spaces, whose closure reaches sec-trace-formula only through the definition def-trf-algebraic-space; none is part of the trace formula or Poincare duality, so they are accepted. All cited nodes are in the item's unit sk-thm-sf-ctf-stability, so no tool_uses. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceCoherentTwoOfThreeDevissage",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.coherent_two_of_three_devissage",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceCoherentTwoOfThreeDevissage.lean",
+  "statement": "theorem coherent_two_of_three_devissage {S : Scheme.{u}} (X : AlgebraicSpace S) (hln : ∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) (hqc : CompactSpace (Point X.obj.obj)) (hqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) (P : X.Modules → Prop) (hP_iso : ∀ (F G : X.Modules) (_e : F ≅ G), F.IsQuasicoherent → (∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj F)) → G.IsQuasicoherent → (∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj G)) → P F → P G) (hP_zero : P (⊤_ X.Modules)) (hP_seq : ∀ c : ShortComplex X.Modules, c.ShortExact → c.X₁.IsQuasicoherent → (∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj c.X₁)) → c.X₂.IsQuasicoherent → (∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj c.X₂)) → c.X₃.IsQuasicoherent → (∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj c.X₃)) → ((P c.X₁ ∧ P c.X₂) ∨ (P c.X₁ ∧ P c.X₃) ∨ (P c.X₂ ∧ P c.X₃)) → P c.X₁ ∧ P c.X₂ ∧ P c.X₃) (hP_sum : ∀ F : X.Modules, F.IsQuasicoherent → (∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj F)) → ∀ r : ℕ, 1 ≤ r → ∀ b : Bicone (fun _ : Fin r ↦ F), b.IsBilimit → P b.pt → P F) (hP_witness : ∀ (Z : AlgebraicSpace S) (i : Z ⟶ X), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom → (∀ T : Z.EtaleSite, IsReduced (Z.etaleForget.obj T)) → IrreducibleSpace (Point Z.obj.obj) → ∃ M : X.Modules, M.IsQuasicoherent ∧ (∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj M)) ∧ P M ∧ ∀ (T : X.EtaleSite) (a : X.structureSheaf.obj.obj (op T)), (∀ (V : X.EtaleSite) (f : V ⟶ T) (m : M.val.obj (op V)), X.structureSheaf.obj.map f.op a • m = 0) ↔ a ∈ closedIdealSections i T) : ∀ F : X.Modules, F.IsQuasicoherent → (∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj F)) → P F",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Coherence is the node's explicit site quasi-coherence and chartwise RingedSpace.IsCoherent. Annihilator equality is tested on every chart and every further restriction, against the existing closedIdealSections kernel of the canonical module direct image. Finite direct sums are bilimit bicones, and the terminal module is the zero module. stmt_deps gains the two already landed definition nodes for the closed ideal and chart restriction used in the signature."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-758d83c13",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Read node, Stacks 08AN (spaces-cohomology.tex 2561-2576), all 10 stmt_dep records (snapshot copies byte-equal to side-live) and the Lean module. Noetherian hyps hln/hqc/hqs match the landed coherent_support_ideal_power interface; coherence = IsQuasicoherent + chartwise RingedSpace.IsCoherent (01BV) on every module; hP_iso restricted to coherent pairs; P(0) via terminal (zero) module; hP_seq any pair -> all three over ShortExact coherent complexes; hP_sum r>=1 over bilimit bicones (equivalent by iso-invariance); hP_witness for closed immersions with chartwise IsReduced and IrreducibleSpace (nonempty), annihilator sections over all restrictions <-> closedIdealSections i T = ker(O_X -> i_*O_Z), i.e. scheme-theoretic support. Edge cases: empty X, F=0, r=1/r=0, empty/non-reduced Z all correct. Node diff vs live only lean + stmt_deps; added stmt_deps are landed def nodes whose decls are used in the signature. lean.statement verbatim; single sorry, no new defs; docstrings carry source, blueprint and the 10 steps; all imports exist; no duplicate. No fixes, no compile needed. No findings."
+ }
+}

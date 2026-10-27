@@ -1,0 +1,132 @@
+{
+ "id": "lem-sfb-coefficient-etale-stalk-scalar-extension",
+ "kind": "statement",
+ "title": "Derived scalar extension at an explicit geometric stalk",
+ "statement": "For any scheme X, commutative coefficient rings B and R in max(v,u+1), a ring map f:B to R, a geometric point x, and any standard-derived constant-B module complex K on its small etale model, moduleDerivedExtension f applied to the explicit derived stalk of K is isomorphic to the explicit derived stalk of adicFiniteExtension f applied to K. The explicit stalk is [def-sfb-coefficient-etale-derived-stalk], and the scalar functors are those of [lem-sfb-adic-constructible-finite-reductions] and [def-sfb-module-derived-scalar-comparisons]. No boundedness or flatness assumptions are imposed.",
+ "stmt_deps": [
+  "def-sfb-coefficient-etale-derived-stalk",
+  "lem-sfb-adic-constructible-finite-reductions",
+  "def-sfb-module-derived-scalar-comparisons"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Modules on Sites Tag 03EL; Cohomology on Sites Tags 07A4 and 0G7E"
+ },
+ "proof": [
+  {
+   "text": "Combine the already proved fixed-scalar equivalence with the AsSmall sheaf equivalence. The ordinary coefficientEtaleModuleStalk is left adjoint to the product-valued skyscraper sheaf functor followed by the inverse presentation. Module products preserve finite colimits (Mathlib AB4Star), hence this right adjoint is exact, as in Stacks sites-modules.tex lemmas skyscraper-exact and skyscraper-modules-exact (05V7, 05V8). Localize this exact adjunction with mapExactDerivedCategory.",
+   "uses": [
+    "def-sfb-coefficient-etale-derived-stalk",
+    "lem-pe-coefficient-comparison-fixed-pullback",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the constant coefficient unit gives an identity-on-sections isomorphism between intrinsic scalar restriction followed by the fixed-scalar presentation and the fixed-scalar presentation followed by ordinary module restriction. This commutes with the AsSmall direct image. Transport through the inverse equivalences. Restriction of modules preserves products, so the skyscraper product comparison identifies the two composite right adjoints. Localize this exact square via mapDerivedCategorySquareIso.",
+   "uses": [
+    "lem-pe-coefficient-comparison-fixed-pullback",
+    "def-sfb-coefficient-etale-derived-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the adjunction of the specified ConstantCompletion.extend to ConstantCompletion.dres from the ordinary tensor adjunction: use K-flat resolutions, the proved preservation of K-flat quasi-isomorphisms by scalar extension, and exists_leftDerived_adjunction; uniqueness of universal left derived functors identifies its left member with extend. Compose it and the existing moduleDerivedAdjunction with the localized stalk adjunctions. Transport along the right-adjoint square, apply leftAdjointUniq, and evaluate at K.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-resolving-class-derived-adjunction",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-sfb-module-derived-scalar-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-coefficient-etale-derived-stalk",
+  "lem-pe-coefficient-comparison-fixed-pullback",
+  "def-weil-exact-derived-adjunction",
+  "lem-pc-kflat-resolution",
+  "lem-pur-resolving-class-derived-adjunction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-sfb-module-derived-scalar-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "V2, 2026-10-26: exact skyscraper adjunction (Tags 05V7, 05V8), scalar restriction preserves products; derived localization and scalar adjunction from derived.tex Tag 015F and sites-cohomology.tex Tag 07A6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalks of sheaves of modules are exact and commute with derived extension of constant coefficient rings",
+   "results": "8 hits, all quasi-coherent tilde stalks; no constant-coefficient derived comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib declaration; use the project interfaces and the stated source argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "GrothendieckTopology.Point.sheafFiber",
+   "results": "0 hits: identifier not indexed by loogle.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib declaration; use the project interfaces and the stated source argument."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber.*[Ss]calar|[Ss]calar.*sheafFiber",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib declaration; use the project interfaces and the stated source argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicEtaleStalkLevels",
+  "date": "2026-10-26",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-adic-etale-stalk-levels",
+   "place": "Tags 03EL, 07A4 and 0G7E; exact tensor-compatible geometric stalks",
+   "via": [
+    "lem-sfb-adic-etale-stalk-levels"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientEtaleStalkScalarExtension",
+  "file": "lean/Sheaf/Paper/CoefficientEtaleStalkScalarExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.coefficientEtale_stalk_scalarExtension",
+  "statement": "theorem coefficientEtale_stalk_scalarExtension\n    (X : Scheme.{u}) {B R : Type (max v (u + 1))} [CommRing B] [CommRing R]\n    (f : B →+* R) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (x : Spec (.of Ω) ⟶ X)\n    (K : ConstantCompletion.D\n      (ConstantCompletion.constant (smallModelComparisonEtaleTopology.{u, v} X) B)) :\n    Nonempty\n      ((ConstantScalarRealization.moduleDerivedExtension f).obj\n          ((coefficientEtaleDerivedStalk X B x).obj K) ≅\n        (coefficientEtaleDerivedStalk X R x).obj\n          ((adicFiniteExtension (smallModelComparisonEtaleTopology.{u, v} X) f).obj K))",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261026T071501-L-3939999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T100433-L-27512",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

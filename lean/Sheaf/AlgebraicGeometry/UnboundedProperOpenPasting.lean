@@ -52,7 +52,11 @@ private theorem exact_identity_fac
   simp only [Iso.trans_hom, NatTrans.comp_app]
   rw [Functor.mapDerivedCategoryIdIso_hom_app_Qh_obj, Functor.mapDerivedCategoryNatIso_fach]
 
-private theorem open_compare_mono
+/-- For an open immersion, extension by zero embeds into direct image.
+Source: Stacks Project, More on Etale Cohomology, Tags 0F4X and 0F50:
+the proper-support inclusion is sectionwise injective and identifies with this comparison
+(blueprint: lem-amb-unbounded-proper-open-pasting). -/
+theorem mono_openImmersionLowerShriekToLowerStar_app
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
     (k : X ⟶ Y) [IsOpenImmersion k]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -90,7 +94,7 @@ private theorem ordinary_identity_vertical
         ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).obj F) =
       (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).map
         ((lowerStarId (ModuleCat.{u + 1} Λ) A).hom.app F) := by
-  have := open_compare_mono Λ k F
+  have := mono_openImmersionLowerShriekToLowerStar_app Λ k F
   apply (cancel_mono
     ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} Λ) k).app F)).1
   have hnaux (f : A ⟶ B) (hf : f = k ≫ 𝟙 B) :
